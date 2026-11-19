@@ -46,3 +46,58 @@ Today (L7) every bag / shop / wear / gift act is local on her phone: tap → her
 Built (all behind TH.on(8); CAP 7 → 8): F3 block in jcoopthinf.js (reg8 over the step-0 engines); wrapper gaps proven by the test: snap "soft" + okHint (solo wrapR card rule), noRes (a registered UI function's own result card opened on the HOST's screen), chooseM title + no half card on her phone; ONE item matcher itemFind (F1 runAct item too); FOUND + FIXED (law 6c, whole family): (1) jcoopthin pApply resolved an item path by eid, not unique for two pieces of one kind → the host's flag (tested / worn) landed on the WRONG piece on her phone (B4b: guest p1/p2 vs host); position first now; 'r' and jcoopworld invHer / invRun compared items with key-order-sensitive JSON (duplicate on her stored chest / "no longer in the chest") → key-order-free; (2) gifts between the players bypassed the ASK act (every gift picker called giveTo onto the other player's entry): the host's gift stayed in her ENTRY's bag on the host (lost to her) → at L8 one path = runAct "gift" (invite card, then Quà tặng); (3) jil ilUid in her context on the host used her seq WITHOUT her 1e7 prefix → ledger ids collided with the host's. Solo refactors (identical behaviour): jinv kitShopBuy, j8 plantHereGo, jts tsGiftBacGo / tsGiftPieceGo, j55 tdGiftGo.
 Results so far (live Worker): coop-thin-f3 L8 36/37 → 37/38 (X1 timing under 2 lanes, wait raised) · swap 36/36 · f2 at L8 19/19 · one-core ×4 PASS · TRIP before (L7) F3 entry writes 551 → after (L8) 0 · latency no throttle median 558–583 ms (iPad guest), swap 326 ms; her tap itself 126–190 ms.
 Left: gates (f1 L6/L8, a, b, c, d, e, e-net, cyc THIN=8, e2e + swap, night THIN=8, timer, p2, b1, one-world 1–10, quickcheck), 4G latency (LAG=85 CPU=4), LOOK Fold 755x1000 + iPad 1180x820, build_site.sh generated files, '## Done', CLAIMS, push, send Foreman B.
+
+## Done — SẴN SÀNG KIỂM f659cf7b (review/coop-thin-f3, pushed; = F3 + merge origin/review/coop-thin-f2-r1 3db28bd8, which carries origin/main f43a2ba6)
+Touched vs F2-r1: dev/build/jcoopthinf.js (F3 block + wrapper gaps), jcoopthin.js (CAP 8, pApply item path by position, 'r' key-order-free), jcoopworld.js (CW.isF, invHer / invRun key-order-free), jil.js (ilUid prefix in her context), jinv.js (kitShopBuy + kitShop data mode), j8.js (plantHereGo), jts.js (tsGiftBacGo / tsGiftPieceGo), j55.js (tdGiftGo); dev/test/coop-thin-f3.js (new), coop-thin-trip.js (F3 entries); index.html / sw.js / assets.json (build_site.sh).
+
+### Moved paths (level 8; below 8 + solo unchanged)
+| family | engines registered (her tap → `do f`, the host runs it in context b) | before (L7) | L8 |
+|---|---|---|---|
+| bag | useItem, sellItem (= econSell), econSellUI, itemTest, taintItem, invAct(inspect), wkSell, wkShow | ran on her phone | intent; F3 table B1–B6 green (B6 skipped: no taint without a need item) |
+| wear | wear, wdWear, wdTakeOff, wdWearUI, wdOffUI, wdAutoUI, wdSellUI, wdPawnUI, wdRedeemUI, vlWearUI, vlOffUI | her phone | intent; W1–W7 green, self-only acts = a solo twin (same deltas: bạc, bag, worn, slots, veil, Sức/Sắc/Danh, khắc, log line) |
+| shop | kitShopBuy (nvp: buy, sell tab, rare item, buy-back tiles), vlBuyNvp, vlBuyOut, vlAsk | tile onBuy closures on her phone | intent; S1 buy ×2 (bạc −price×2, +2), S2 sell (bạc + shown price, the piece in the ledger 'mkt') |
+| gifts | giveTo, wkGive, wkPoison, plantHereGo, tsGiftBacGo, tsGiftPieceGo, courtGive, tdGiftGo | her phone | intent; G1–G7 green; G1 the piece in ONE place (the consort's bag, host + her lens) |
+| gifts between the two | giveTo / wkGive onto the other player's entry = the ASK act "gift" (F1 path) | her gift: bridge only; HIS gift stayed in her entry's bag (lost to her) | X1 her → host (his invite → Nhận, Quà tặng → Nhận, his bag) / X2 host → her (her invite → Nhận, Quà tặng → Nhận, her bag), one place each |
+Deleted-for-good when L8 is the default (part H): the local runs of all rows above on her phone (unreachable at L8).
+
+### Law 6c / whole-family fixes found by the test (before → after)
+| fault | before | after |
+|---|---|---|
+| a host patch on one of two same-kind pieces (eid "kyensao#" not unique) | flag landed on the WRONG piece on her phone (guest p2, host p1/none) | same piece both phones (B4b) |
+| item matched by key-order-sensitive JSON (F1 runAct item, ixD, pApply 'r', invHer, invRun) | intent "gone" 4–6 rows/run, possible duplicate in her stored chest | 0 |
+| gifts between the players bypassing the ASK act | host's gift lost in her entry (X2 red), her gift without the invite | ONE path both ways (X1/X2 green) |
+| ledger ids made in her context on the host (ilUid) | her seq without the 1e7 prefix → collided with the host's ids (two pieces one iu) | her prefix |
+| L7 old road (TRIP run): G1 duplicate (her + consort), S2 sold piece still in her host copy, X1/X2 lost | red | L8 green |
+
+### Tripwire (guest writes outside fromCanon during the F3 act table, TRIP=1)
+| | L7 (before) | L8 (after) |
+|---|---|---|
+| F3 entry (the engines above) | **551** (log 306, S.inv 66+53+13+11, mkSync …) | **0** |
+| "?" render writers (F6) / F1 bucket (directActs render) / D cards (her decision cards) / D·patch (designed) | 1760 / 831 / 997 / 55 | 1027–1333 / 686–740 / 741–779 / 1770–1899 |
+
+### Latency (tap → answer on her phone, live Worker, n = 24 acts)
+| profile | median | min–max |
+|---|---|---|
+| L7 before: the tap itself (local render) | 150 ms | 93–249 |
+| L8 no throttle, guest iPad / swap guest Fold | 558–667 / 326–374 ms | 405–1228 / 267–824 |
+| L8 4G (LAG 85 ms each way both phones + host CPU ×4) | **986 ms** | 800–3395 |
+Pending shows at once (#next locked, buttons off; D1: a 2nd tap ignored, one intent). Same network-bound picture as F1/F2 (FOR MAIN latency line of F1 stands).
+
+### Tests (live Worker)
+| test | result |
+|---|---|
+| coop-thin-f3 L8 / swap / 4G (final build) | 37/37 / 36/36 / 36/36 (earlier: 36/37, 37/38 = X1 wait under 2 lanes, raised) |
+| coop-thin-f3 L7 (before) | rows local; 5 law-6c reds = the old road (table above) |
+| coop-thin-f2 L8 | 19/19 |
+| coop-thin-f1 L6 / L8 | 22/22 / 22/22 (one earlier L8 run 22/24 'spy' her copy vs phone under 2 parallel suites; 3 reruns alone green; L7 green) |
+| coop-thin-a L1 / b L4 / c L4 / d L4 / e L5 / e-net L8 | 24/24 / 136/136 / 16/16 / 46/52 (= main: 6 kit sameDom) / 33/33 / green |
+| coop-cyc THIN=8 | 73/73 |
+| coop-e2e / COOP_SWAP=1 | 63/63 / 63/63 |
+| coop-night THIN=8 / coop-timer / coop-p2 | 105/105 / 43/43 / 46/46 |
+| coop-b1 (level 0, F3 off) | 42/43, 36/41, 31/41, 19/41 — main fd6118cd same run pair 29/41: the known pairing / laydo flake (F1 review) |
+| coop-one-world seeds 1–10 | 10 × PASS |
+| one-core guard / text / text-rule / bind | PASS ×4 |
+| quickcheck f659cf7b | PASS (old save ok; render 170/229, tab 381/381, buổi 1134/1120 ms new/live; core gates PASS) |
+LOOK (scratch only, deleted, nothing uploaded): host Fold 755x1000@2 + guest iPad 1180x820@2 at the wear card / shop: kit frames clean, no overflow, 0 page errors; the setup's rank edict ("Thánh chỉ … Tần", from the test's staging) sat on top of the result card → reviewer: LOOK at her wear card / shop panel directly.
+Laws: 1 gifts both directions (one path) · 4 no new number (one-core PASS) · 6c pieces traced, never lost / doubled (fixes above) · 7/9–12 no new word, no UI part changed.
+FOR B: (1) her own changes made on her phone outside intents (life-start items etc.) reach the host only with her next intent / ready diff (E/F1 design; the F3 table saw her bag 37–83 on her phone vs 1 in the host copy at setup); (2) the pet shop (kitShop key 'pet') = F4: add the key to KSH in jcoopthinf.
