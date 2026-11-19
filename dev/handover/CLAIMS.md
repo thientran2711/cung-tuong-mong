@@ -265,3 +265,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin F5 (opus; mini-game score ends as intents; stacked on F4) | review/coop-thin-f5 | B | session_01N1tNP3xrJgrfek8aioQFv2 | RUNNING | 19/11 07:48Z |
 | MAIN ROOT-67 (opus; child of ROOT-66, depth 5) | handover HANDOVER_SESSION9 | ROOT-66 | session_01Rc5AsM5xHa2zs9qd5o5eTU | RUNNING | 19/11 08:46Z | START_CTX ~8 %
 | kit-head-say (sonnet kit keeper; K-HEAD-SAY for E palace-chatter) | review/kit-head-say; briefs/kit-head-say.md | MAIN ROOT-67 | session_01Rc5AsKFj6ZBZuHqopPwMU3 | RUNNING | 19/11 08:42Z |
+| review-ev-pic-followups (small reviewer for C-AG #22) | reports/review-ev-pic-followups.md | C-AG #22 | session_01Rc5AsNSd2h1ghrUbB8TXzd | DONE FAIL 59fb29c04 (iPad picture-fit regression, fix list in report) | 19/11 |
