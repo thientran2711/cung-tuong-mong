@@ -1438,3 +1438,4 @@ ROOT-51 Lượt 583 (owner, 19/11 ~19:05Z): (1) Phi bedroom: is preview placemen
 ROOT-51 Lượt 585: owner: item lists per rank ALREADY exist → only extend + split by age in place, no new list (E11 amended; IT1 told).
 ROOT-51 Lượt 586: owner: colours dịu = light/gentle, not heavy (B18 amended). NF1 dark hexes (c19 plum, c23/c25 muted crimson/cherry, c26 burgundy, c29 ink blue, deep teals) to lighten; BW3 tone sentence to say light/gentle.
 ROOT-51 Lượt 587: LV1 kc swap LIVE (f864419) sheet sent. FOR MAIN: dev/site/manifest-floor.json lower FIGURES-kc to {consort|kc 0, consort|ngheo 32, maid|kc 52, maid|ngheo 52, n 136} else main live-check FAILs. Owner asked which OLD live sets to replace next (LV1 list A–O).
+ROOT-51 Lượt 587b: owner: rooms = 2 approved layouts: 3-wall (HQP bedroom) OR 2-wall (HQP reception); not all 3-wall (L14 amended, PR8 told).
