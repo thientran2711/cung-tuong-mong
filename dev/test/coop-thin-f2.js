@@ -161,6 +161,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const got=r.id?await until(G,id=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.id===id,r.id,15000):false;await sleep(400);
   const g=await G.p.evaluate(()=>({place:S.place,tab,Q:Q.length}));const ht=await H.p.evaluate(()=>tab);
   ok(!!k&&r.sent===1&&r.pend&&r.Q===0&&r.tab==='go'&&got&&g.place===k&&g.tab==='act'&&ht==='go','P6 a real map tap: intent, no card while pending, she arrives and her phone turns to the act tab; the host\'s tab stays his',{k,r,got,g,hostTab:ht});
+ /* LOOK (SHOTS=<dir outside git>): both phones right at this travel result (she has just arrived by a real map tap) */
+ if(process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});await sleep(1200);for(const o of [H,G]){await tapText(o,/^Bỏ qua$/,1500)/* the Luân hồi intro overlay (never closed by this scripted run) */;await sleep(600);for(let i=0;i<4;i++){await clear(o);await sleep(300)}/* setup cards (Nhập cung, the rank-3 decree) */await sleep(600);const vp=o.p.viewportSize();await o.p.screenshot({path:path.join(process.env.SHOTS,`f2-travel-L${LVL}-${o.name}-${vp.width}x${vp.height}.jpg`),type:'jpeg',quality:70})}}
   await H.p.evaluate(()=>{tab='act';render()})}
  /* P7: walk spill (a walk longer than the khắc left: pay now, the buổi turns, the rest is paid in the new buổi on arrival): the khắc are
     BAL.walk (travel), the arrival is an intent with her __walkSpill (the rest) in ctx */
