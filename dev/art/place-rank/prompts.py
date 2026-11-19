@@ -812,3 +812,134 @@ p = out11i['canh-phuc-cung-quyphi-ngu-A-r4']['prompt']; assert p.count(FLOOR11I)
 out11j['canh-phuc-cung-quyphi-ngu-A-r5'] = dict(prompt=p.replace(FLOOR11I, FLOOR11G_CLOSE), refs=out11i['canh-phuc-cung-quyphi-ngu-A-r4']['refs'])
 json.dump(out11j, open(os.path.join(D, 'prompts_v11j.json'), 'w'), ensure_ascii=False, indent=1)
 print('v11j', list(out11j))
+# ---- v12 (owner Lượt 692 via ROOT-55; worker PR12). (1) GÓC XÉO = the owner-praised model prompt VERBATIM: Phi bedroom v3 SyhTG51Ub8
+#      (creations_get metadata.prompt, seed 97820, refs ONLY gOmYI7iSXO + EbYJzsMuuO, NO image 3/4); only the room-specific parts are swapped
+#      (palace name, wood, garden, partition, main piece, furniture list, signature style, level, rank colours, phoenix line; receptions: the
+#      bed words of the two generic layout sentences → their seat). (2) BED12 = the bed as big as the HQP reception middle section between its
+#      two pillars (O6EoWbJynm, measured PR12: pillar centres 27.7 % and 71.9 % W → 44 % W apart, inner opening 29.2–70.2 % = 41 % W; pillars
+#      run from the top edge down to their bases at ~77 % H). Frontals: HQP bedroom BIG11L → BED12; Quý phi bedroom + BED12; HH bedroom
+#      frontal kept (bed already ~39 % W, between two pillars).
+SYH = "A brand-new painting of a natural, lived-in, richly furnished room, painted exactly like image 1 (the bedroom): same hand, same brushwork, same soft painterly finish, same natural warm colours, saturation and contrast, same depth with furniture, curtains and objects arranged through the whole room from the foreground to the back. Wide panoramic, eye-level view, summer morning. ROOM: Cảnh Phúc cung chính điện bedroom, the private bedchamber of the imperial consort who heads this palace in ancient China, a real room in daily use: dark rosewood pillars and beams, carved lattice windows at the back opening onto a sunny courtyard garden with a tree and a lotus pond, a carved wooden partition with a round moon-gate opening; at the centre of the room, the large clear main subject, one larger canopy bed of carved rosewood with soft purple gauze curtains tied back with tassels and purple silk brocade bedding embroidered with crabapple blossoms, more carving and jade-green inlay on the bed frame; around it a carved dressing table with a large bronze mirror, a lacquered jewellery cabinet and jade ornaments, a carved screen painted with crabapple blossoms, round stools with purple cushions, hanging palace lanterns with purple tassels, a clothes stand with a purple silk robe, porcelain vases of crabapple branches, a tea table with a fine tea set, a shelf with jade and porcelain treasures, a small incense burner, slippers on the floor. Cảnh Phúc cung signature style, the same in every room of this palace: crabapple blossoms (hải đường) are its flower, painted on the screens, embroidered on the silks and in the vases; motifs of bats among auspicious clouds carved in the beams and furniture; dark rosewood with jade-green inlay and jade ornaments; round-backed rosewood furniture; a round moon-gate opening in a carved partition. PHI level, clearly richer than a Tần: deeper carving, rich jade-green inlay, gilt edging on the furniture, silk brocade, many jade and porcelain treasures. The soft purple accent colour is woven through the bedding, curtains and cushions. No phoenix anywhere (no phoenix carving, embroidery, figure or pendant), no imperial yellow, no golden-yellow fabrics. The bottom-right corner nearest the viewer stays almost clear, holding at most one small object; tea tables and stools stand further back in the room. The dressing table and its stools stand far back against the back wall; the bed stands in the middle of the width, its curtains well away from the left edge; the floor near the viewer is open polished floor. FLOOR: warm polished wooden floorboards visible between the furniture, no large rug or carpet covering the floor (at most a small mat under the bed step); the canopy bed sits in the central half of the width. LIGHT: soft warm morning daylight from the right, like the light on the girl in image 2, so a person standing in the room looks lit by it. Do not leave the room empty like a stage; it should feel natural and furnished, people will simply be placed in it later. LEFT SIDE (owner Lượt 406): the left part of the room near the viewer stays open like in image 1 — only small, low objects there at most, never a large piece of furniture or a big object close up at the left edge, because people will stand on the left. Empty of people, no text."
+SYH_SEED = 97820
+BED12 = (" BED SIZE (owner Lượt 692, measured on the approved Trường Xuân reception hall): the canopy bed is as big as the middle section of that hall "
+    "between its two pillars: the bed with its canopy posts and curtains fills about two fifths of the picture width (about 41 to 44 % of the width, "
+    "the space between two pillars), and from its canopy crown near the top edge down to its step it is about three quarters of the picture height "
+    "tall; never smaller, never squeezed.")
+def seg(p, a, b):
+    i = p.index(a); j = p.index(b, i); return p[i:j]
+def SUB(src, pairs):
+    p = src
+    for a, b in pairs:
+        assert p.count(a) == 1, (a[:60], p.count(a)); p = p.replace(a, b)
+    return p
+S_ID = "Cảnh Phúc cung chính điện bedroom, the private bedchamber of the imperial consort who heads this palace in ancient China, a real room in daily use:"
+S_WOOD = "dark rosewood pillars and beams, carved lattice windows at the back opening onto a sunny courtyard garden with a tree and a lotus pond, a carved wooden partition with a round moon-gate opening;"
+S_BED = "one larger canopy bed of carved rosewood with soft purple gauze curtains tied back with tassels and purple silk brocade bedding embroidered with crabapple blossoms, more carving and jade-green inlay on the bed frame;"
+S_LIST = seg(SYH, "around it a carved dressing table", " Cảnh Phúc cung signature")
+S_SIG = seg(SYH, " Cảnh Phúc cung signature", " PHI level")
+S_LVL = seg(SYH, " PHI level", " The soft purple")
+S_ACC = " The soft purple accent colour is woven through the bedding, curtains and cushions."
+S_PHX = " No phoenix anywhere (no phoenix carving, embroidery, figure or pendant), no imperial yellow, no golden-yellow fabrics."
+S_DT = "The dressing table and its stools stand far back against the back wall; the bed stands in the middle of the width, its curtains well away from the left edge;"
+S_FL = "(at most a small mat under the bed step); the canopy bed sits in the central half of the width."
+S_END = " FLOOR: warm polished wooden floorboards visible"
+HQPB = json.load(open(os.path.join(D, 'prompts_v11g.json')))['truong-xuan-cung-hqp-ngu-F3-r2']['prompt']
+HQPR = out10['truong-xuan-cung-hqp-3w']['prompt']
+HHB = out9['khon-ninh-cung-ngu-B3']['prompt']
+HHR = out10b['khon-ninh-cung-3w']['prompt']
+QPB = json.load(open(os.path.join(D, 'prompts_v11g.json')))['canh-phuc-cung-quyphi-ngu-F2-r2']['prompt']
+TX_SIG = ' ' + seg(HQPB, "Trường Xuân cung signature", " HOÀNG QUÝ PHI level")
+TX_COL = ' ' + seg(HQPB, "RANK COLOURS (Hoàng quý phi", " ROOM SHAPE")
+TX_PHX = " Phoenixes allowed: a pair of phoenixes carved or embroidered among magnolias on the bed, the screen and the cushions."
+TX_WOOD = "dark zitan pillars and beams with gold lacquer, carved lattice windows at the back opening onto a sunny courtyard garden with a magnolia tree, a tall carved openwork partition with a vase-shaped doorway giving a glimpse of a small study with books;"
+assert TX_PHX in HQPB and TX_PHX in HQPR
+out12 = {}
+# HQP bedroom góc xéo
+p = SUB(SYH, [(S_ID, "Trường Xuân cung chính điện bedroom, the private bedchamber of the Imperial Noble Consort (Hoàng quý phi), the highest consort below the Empress, in ancient China, a real room in daily use:"),
+    (S_WOOD, TX_WOOD),
+    (S_BED, seg(HQPB, "a grand canopy bed of carved zitan", "; in the middle of the back wall") + ';'),
+    (S_LIST, "around it " + seg(HQPB, "a gold-lacquer dressing table", " Trường Xuân cung signature").replace("chair; a zitan curio", "chair; a tall folding screen with kingfisher-blue feather inlay and magnolias, a zitan curio")),
+    (S_SIG, TX_SIG), (S_LVL, ' ' + seg(HQPB, "HOÀNG QUÝ PHI level", " Phoenixes allowed")), (S_ACC, TX_COL), (S_PHX, TX_PHX),
+    ("The dressing table and its stools stand", "The dressing table and its chair stand"), (S_END, BED12 + S_END)])
+out12['truong-xuan-cung-hqp-ngu-G12'] = dict(prompt=p, refs=list(G9), seed=SYH_SEED)
+# Quý phi bedroom góc xéo (same palace: ID, wood, garden, signature unchanged)
+p = SUB(SYH, [("a carved wooden partition with a round moon-gate opening;", "carved rosewood partitions with a round moon-gate opening on each side of the bed;"),
+    (S_BED, seg(QPB, "one grand canopy bed of deeply carved rosewood", "; around the room") + ';'),
+    (S_LIST, "around it " + seg(QPB, "a large carved dressing table", " Cảnh Phúc cung signature")),
+    (S_LVL, ' ' + seg(QPB, "QUÝ PHI level", " RANK COLOUR (Quý phi")), (S_ACC, ' ' + seg(QPB, "RANK COLOUR (Quý phi", " No phoenix anywhere")),
+    (S_PHX, ' ' + seg(QPB, "No phoenix anywhere", " ROOM SHAPE")), (S_END, BED12 + S_END)])
+out12['canh-phuc-cung-quyphi-ngu-G12'] = dict(prompt=p, refs=list(G9), seed=SYH_SEED)
+# HH bedroom góc xéo
+p = SUB(SYH, [(S_ID, "Khôn Ninh cung bedroom, the private bedchamber of the Empress in an ancient Chinese imperial palace, a real room in daily use:"),
+    (S_WOOD, "red lacquer pillars with gilded phoenix carving, golden lattice windows at the back opening onto a sunny summer garden;"),
+    (S_BED, seg(HHB, "one magnificent canopy bed of gilded carved wood", "; along the walls") + ';'),
+    (S_LIST, "around it " + seg(HHB, "a grand dressing table with a tall gilt mirror", " The most splendid")),
+    (S_SIG, ' ' + seg(HHB, "The most splendid bedroom", " RANK COLOURS")), (S_LVL, ''), (S_ACC, ' ' + seg(HHB, "RANK COLOURS (Hoàng hậu", " ROOM SHAPE")), (S_PHX, ''),
+    (S_END, BED12 + S_END)])
+out12['khon-ninh-cung-ngu-G12'] = dict(prompt=p, refs=list(G9), seed=SYH_SEED)
+# HQP reception góc xéo
+p = SUB(SYH, [(S_ID, "Trường Xuân cung chính điện reception room, the hall where the Imperial Noble Consort (Hoàng quý phi), the highest consort below the Empress, in ancient China receives her guests, a real room in daily use, no bed anywhere:"),
+    (S_WOOD, TX_WOOD.replace(" giving a glimpse of a small study with books", "")),
+    (S_BED, "the host seat on a low one-step platform under a tall carved openwork arch frame (a luozhao): " + seg(HQPR, "a wide square-backed zitan luohan daybed", "; on each side of the platform") + ';'),
+    (S_LIST, "around it a tall cloisonné flower stand with magnolias on each side of the platform, ONE straight row of square-backed zitan armchairs with soft honey-orange cushions and small tea tables between them along the side wall, a horizontal gilt plaque carved with magnolias (no writing, no characters) high on the back wall, " + seg(HQPR, "soft honey-orange sheer curtains", " Trường Xuân cung signature")),
+    (S_SIG, TX_SIG), (S_LVL, ' ' + seg(HQPR, "HOÀNG QUÝ PHI level", " Phoenixes allowed")), (S_ACC, TX_COL), (S_PHX, TX_PHX + " No Western sofa, no upholstered couch."),
+    (S_DT, "The chair row and its tea tables stand far back along the side wall; the daybed platform stands in the middle of the width, its arch frame well away from the left edge;"),
+    (S_FL, "(at most a small mat under the platform step); the daybed platform sits in the central half of the width.")])
+out12['truong-xuan-cung-hqp-G12'] = dict(prompt=p, refs=list(G9), seed=SYH_SEED)
+# HH reception góc xéo
+p = SUB(SYH, [(S_ID, "Khôn Ninh cung main reception hall, where the Empress of an ancient Chinese imperial palace receives the consorts, a real room in daily use, no bed anywhere:"),
+    (S_WOOD, "red lacquer columns wrapped with gilded phoenix carving, golden lattice windows at the back opening onto a sunny summer garden;"),
+    (S_BED, "the Empress's throne on a wide platform of three steps with a gilded balustrade, under a tall carved gilded openwork arch frame (a luozhao) carved with phoenixes among peonies: " + seg(HHR, "a wide gilded carved throne seat", "; on each side of the throne") + ';'),
+    (S_LIST, "around it a tall ceremonial fan of royal yellow silk with a phoenix on a long gilded pole and a golden phoenix figure on a tall stand on each side of the throne, a gold crane-shaped incense burner on each side at the foot of the platform, straight rows of carved gilded square-backed armchairs with brick-crimson cushions and small tea tables between them along the side walls, a large horizontal gilt plaque carved with phoenixes and clouds (no writing, no characters) on the back wall, royal yellow silk curtains tied back with brick-crimson tassels, ornate gilded palace lanterns with yellow tassels hanging in pairs, cloisonné vases of peonies, gilded curio shelves of jade and gold treasures."),
+    (S_SIG, ' ' + seg(HHR, "The most splendid room", " RANK COLOURS")), (S_LVL, ''), (S_ACC, ' ' + seg(HHR, "RANK COLOURS (Hoàng hậu", " No Western sofa") + " No Western sofa, no upholstered couch."), (S_PHX, ''),
+    (S_DT, "The chair rows and their tea tables stand far back along the side walls; the throne platform stands in the middle of the width, its arch frame well away from the left edge;"),
+    (S_FL, "(at most a small mat under the platform step); the throne platform sits in the central half of the width.")])
+out12['khon-ninh-cung-G12'] = dict(prompt=p, refs=list(G9), seed=SYH_SEED)
+# frontals (A17: only the bed size sentence)
+assert HQPB.count(BIG11L) == 1
+out12['truong-xuan-cung-hqp-ngu-F12'] = dict(prompt=HQPB.replace(BIG11L, BED12), refs=['gOmYI7iSXO', 'EbYJzsMuuO', 'Xm9gqieBfo'])
+assert QPB.count(' CAMERA AND SCALE:') == 1
+out12['canh-phuc-cung-quyphi-ngu-F12'] = dict(prompt=QPB.replace(' CAMERA AND SCALE:', BED12 + ' CAMERA AND SCALE:'), refs=['gOmYI7iSXO', 'EbYJzsMuuO', 'gOmViD0SXO'])
+for k, v in out12.items():
+    for w in ('Cảnh Phúc', 'purple', 'crabapple') if not k.startswith('canh-phuc') else ('purple',):
+        assert w not in v['prompt'], (k, w)
+    assert '  ' not in v['prompt'] and ';;' not in v['prompt'] and '..' not in v['prompt'], k
+json.dump(out12, open(os.path.join(D, 'prompts_v12.json'), 'w'), ensure_ascii=False, indent=1)
+print('v12', {k: len(v['prompt']) for k, v in out12.items()})
+# ---- v12b (A21 redo after the eye check + bed measure, PR12):
+#  góc xéo HH reception 1ldWWJfr4r = nearly straight-on; HH bedroom SyheePgUb8 + HQP reception w4aXXie7EI = a large table at the bottom-left
+#  corner under person 1 (against the model's LEFT SIDE sentence) → SAME prompt, other seed = the Tần model's seed 60161 (prompt unchanged).
+#  frontals HQP ov6wwWf829 (bed frame 34 % W) + Quý phi Xm9SSYMBfo (31 % W) = the bed did not grow (image 3 anchors it) → BED12 + the bed
+#  position numbers (owner Lượt 692 'giường quá nhỏ' — only the bed size part changes).
+TAN_SEED = 60161
+BED12F_HQP = BED12 + (" The bed is clearly bigger and wider than the bed in image 3: its front canopy posts stand at about 47 % and 90 % of the picture width.")
+BED12F_QP = BED12 + (" The bed is clearly bigger and wider than the bed in image 3: its front canopy posts stand at about 29 % and 71 % of the picture width.")
+out12b = {}
+for k in ('khon-ninh-cung-G12', 'khon-ninh-cung-ngu-G12', 'truong-xuan-cung-hqp-G12'):
+    out12b[k + '-r1'] = dict(prompt=out12[k]['prompt'], refs=out12[k]['refs'], seed=TAN_SEED)
+for k, B in (('truong-xuan-cung-hqp-ngu-F12', BED12F_HQP), ('canh-phuc-cung-quyphi-ngu-F12', BED12F_QP)):
+    p = out12[k]['prompt']; assert p.count(BED12) == 1
+    out12b[k + '-r1'] = dict(prompt=p.replace(BED12, B), refs=out12[k]['refs'])
+json.dump(out12b, open(os.path.join(D, 'prompts_v12b.json'), 'w'), ensure_ascii=False, indent=1)
+print('v12b', list(out12b))
+# ---- v12c (A21, PR12): frontal beds still small in FRAME width (HQP UPvdosowny 36 % W, Quý phi iG5fuN83uK 31 % W; the 41–44 % was filled
+#      by the curtains because BED12 counted them) → only the bed-size words: 'the bed with its canopy posts and curtains fills' → the frame itself.
+OLD12 = "the bed with its canopy posts and curtains fills about two fifths of the picture width"
+NEW12 = "the bed frame itself (its carved base and its canopy posts, not counting the curtains) fills about two fifths of the picture width"
+out12c = {}
+for k in ('truong-xuan-cung-hqp-ngu-F12-r1', 'canh-phuc-cung-quyphi-ngu-F12-r1'):
+    p = out12b[k]['prompt']; assert p.count(OLD12) == 1
+    out12c[k[:-3] + '-r2'] = dict(prompt=p.replace(OLD12, NEW12), refs=out12b[k]['refs'])
+json.dump(out12c, open(os.path.join(D, 'prompts_v12c.json'), 'w'), ensure_ascii=False, indent=1)
+print('v12c', list(out12c))
+# ---- v12d (ROOT-55 relay 21:43Z, A21): Quý phi frontal: drop image 3 gOmViD0SXO (it held the bed at 31 % W in 3 tries). Only the image-3 words go:
+#      the 'Image 3 is this same room…' sentence, 'than the bed in image 3', and the camera clause 'the same … as image 3 (this same room as drawn before)'.
+p = out12c['canh-phuc-cung-quyphi-ngu-F12-r2']['prompt']
+for a, b in ((" Image 3 is this same room as drawn before (there with three walls and rose red silks): keep its furniture and its arrangement around the centred bed with the two moon gates, but now with two walls and the rank colour written here.", ""),
+             (" The bed is clearly bigger and wider than the bed in image 3: its front", " Its front"),
+             ("eye level of a standing woman, the same camera distance, eye level and natural people scale as image 3 (this same room as drawn before);", "eye level of a standing woman, natural people scale;")):
+    assert p.count(a) == 1, a[:50]; p = p.replace(a, b)
+assert 'image 3' not in p
+out12d = {'canh-phuc-cung-quyphi-ngu-F12-r3': dict(prompt=p, refs=['gOmYI7iSXO', 'EbYJzsMuuO'])}
+json.dump(out12d, open(os.path.join(D, 'prompts_v12d.json'), 'w'), ensure_ascii=False, indent=1)
+print('v12d', len(p))

@@ -14,7 +14,7 @@ def groups():
     import json
     G={}
     for k,v in json.load(open(os.path.join(B.ART,"face-common","OWNER_GROUPS_L686.json"),encoding="utf-8")).items():
-        if k in B.PEOPLE: G.setdefault(v,[]).append(k)
+        if k in B.PEOPLE and v!="Kho": G.setdefault(v,[]).append(k)
     return {k:sorted(v) for k,v in G.items()}
 def _angle_class_old(s):
     side=re.search(r"\b(RIGHT|LEFT)\b",s); side=side.group(1).lower() if side else ""
