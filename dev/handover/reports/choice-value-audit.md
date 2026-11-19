@@ -149,7 +149,7 @@ Sure declines in jts showed their certain loss under «BẠI» (a fail block on 
 | paired bot run (runbal2 sens, CAP 25 min each, together; branch 55e5f652 vs live e16e1d66) | branch 6 lives (HH 3, 7.2 yrs) vs live 7 (HH 2, 5.1 yrs); mean Sức 34 vs 48, Đức 32 vs 36, Bạc 46 vs 47, Sủng 50 vs 69 → no runaway Sức / Đức / Bạc (small sample, bot noise) |
 | Fold 755x1000@2 + iPad 1180x820@2 shots (summons, ksp, trip, cmTt, amNight, Cứu giá) | looked at: rows fit, gains under Được, no overflow — scratch only, not in git |
 Hand-check list of every cost + word-only-gain option: reports/choice-value-wordgains.md (seed 7, 104 distinct options, all read as real gains).
-### SẴN SÀNG KIỂM 7f339bad (review/choice-value-audit)
+### SẴN SÀNG KIỂM 37a7342f (review/choice-value-audit; = 7f339bad + LIVE bb8e8ec9 merged: one-core ×4 PASS, odds-cap PASS, scan seed 7 PASS 364 modals, --plant 3/3)
 Touched by #3: dev/build/{jbal,j8,jagmaid,jts,jworld,jcmaid,jstip,j7,j71,j24}.js, dev/tools/choice-value-scan.js, index.html, sw.js (+ #1/#2 lists above).
 Lander notes: BAL.cv.loanBack vs balance-final BAL.rk.loanBack (same chance, keep one); receiver-choice reads BAL.cv.decl.suc (guarded) for the NPC «Cáo bệnh».
 #3 context at finish ≈ 22 % of 1M (estimate; START_CTX 5 %).
