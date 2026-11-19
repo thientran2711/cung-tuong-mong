@@ -1506,3 +1506,4 @@ ROOT-54 ~21:30Z Lượt 677: face tick page published https://claude.ai/artifact
 ROOT-54 Lượt 680 OWNER: merge Trong trẻo INTO Dịu dàng (one group, name Dịu dàng); tick page v2 updated (8 groups); LOOK_GROUPS.md noted.
 ROOT-54 Lượt 682 OWNER: undo merge — Dịu dàng and Trong trẻo separate again; tick page v3 (9 groups); LOOK_GROUPS.md reverted. Lượt 681 Nữ đế m05 sheet sent (f9bcae8).
 ROOT-54 Lượt 683 OWNER: Nữ đế sleeves not to floor + fabric not HH → cause: nude-B mk.py lacks HH rank-law SLEEVE LENGTH + ONE SINGLE SLEEVE LAYER sentences (TH1 had them); NDX3: diff vs HH t8, copy verbatim, redraw m05 5 ages, old/new sheet.
+ROOT-54 ~21:40Z: NDX3 rolled (57 %) before starting sleeve job → NDX4 session_01PEhRby49hQkTSKRQJgLD7o (brief = nude-B-NDX3.md HANDOVER 94d76b2).
