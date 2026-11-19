@@ -65,7 +65,27 @@ import subprocess
 def store(t):
     a=['c06','v0']+(['--low',str(t)] if t<=6 else ['--t7'] if t==7 else [])
     return subprocess.run(['python3','build.py']+a,cwd=os.path.join(H,'../../t8-prompt-B'),capture_output=True,text=True,check=True).stdout.rstrip('\n')
+# ROUND 17 (owner Lượt 397 item 2, FIGURE_GATE LAW #1; ROOT-47 GO): triều phục t1-t5 = the store TẦN (t4) outfit with the shoulder piece REMOVED,
+# each rank keeps its own rank words, item/pose and its triều phục colours; fabric = the store t1-t3 fabric sentence; cầu vai stiff for all, no thường phục feature.
+CAPE_A=", and as her ONE signature piece"; CAPE_B="no cloud collar, no vest, no stiff shoulder pieces;"
+FAB_T4="The silk has real weight: the wide sleeves and robe hang and fold naturally under their own weight, with natural creases, never stiff, flat or board-like."
+def r17_base(t):
+    b=store(4); own=store(t)
+    a=b.index(CAPE_A); e=b.index(CAPE_B)+len(CAPE_B); b=b[:a]+";"+b[e:]          # remove capelet + pearl net + "no stiff shoulder pieces"
+    rk4=re.search(r"Outfit \([^:]*\):",b).group(0); rkt=re.search(r"Outfit \([^:]*\):",own).group(0); b=b.replace(rk4,rkt,1)   # own rank words
+    lt=re.search(r"Light, soft, thin flowing silk:[^.]*\.",store(1)).group(0); assert b.count(FAB_T4)==1; b=b.replace(FAB_T4,lt)  # t1-t3 fabric
+    pa=b.index(" Pose: calm standing pose;"); pe=b.index(" Every hairpin is inserted"); qa=own.index(" Pose: calm standing pose;"); qe=own.index(" Every hairpin is inserted")
+    return b[:pa]+own[qa:qe]+b[pe:]                                              # own item/pose
+R17_CV="a STIFF, structured jewelled shoulder piece (cầu vai) over each shoulder"
+R17_ADD=(" The shoulders carry ONLY the stiff cầu vai: no capelet, no round cape, no pearl net or beaded yoke, no shawl and no sheer stole over the shoulders or arms."
+         " Image 3 gives ONLY the court red colour; the cloth itself follows the fabric sentence above (light, soft, thin flowing silk), never velvet.")
 for t in range(1,9):
+    if '--r17' in sys.argv and t>5: continue
+    if '--r17' in sys.argv:
+        o=r17_base(t)
+        a=o.index(" Pose: calm standing pose;"); bl=block(t).replace("a jewelled shoulder piece (cầu vai) over each shoulder",R17_CV)
+        bl=bl.replace(NQ,"")+R17_ADD; n=o[:a]+bl+o[a:]
+        n=laws(t,n); open(os.path.join(H,f't{t}_c06.txt'),'w').write(n+"\n"); print(t,len(n)); continue
     o=store(t) if (t<=6 and '--store' in sys.argv) else open(os.path.join(H,'orig',f't{t}_v0_c06.txt')).read().rstrip('\n')
     a=o.index(" Pose: calm standing pose;"); n=o[:a]+block(t)+o[a:]
     n=laws(t,n)
