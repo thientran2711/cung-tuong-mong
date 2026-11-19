@@ -542,3 +542,30 @@ LOOK (full size + crops):
   - (1) Sleeves: see the measurements above.
   - (2) The t3 gen came back on a black background (the cut is clean).
   - (3) t6's yellow inner panel and under-skirt are clearly visible.
+
+## §30 — r21 t1–t6 (TP1 → TP2, art workers of Foreman C ROOT-48; owner Lượt 468/470/471, FIGURE_GATE 8d) — 19/11 — 8 gens + 6 cuts
+PRIORITY #1 CHECK: topic lives in this report §29 + dev/art/owner-copy/trieu/r21/ (TP1 b0331bc) + FIGURE_GATE 8d; no other hits.
+BUILD: `python3 r21/build_r21.py` (TP1). Base = r20 prompts. SHARED add: cuff bands in the hà bí colour, embroidered with the hà bí pattern; OWN slot SLEEVE BODY: t1–t3 none, t4–t6 scattered like the robe body (Lượt 471); r20 EMB5/EMB6 removed; t6 yellow kept (Lượt 470).
+TP2 ADD (words only, nothing removed): CUFF_X "These cuff bands are a clearly visible wide border, about a hand wide, sewn all around the bottom opening edge of EACH wide hanging sleeve, in that hà bí colour, so the sleeve hems are NOT plain red: the red sleeve ends in a band of the hà bí colour." — used on t1 and t3 only (STRONG = {1, 3}), after their first gens failed; t2/t4–t6 passed without it. Fault: the shared block therefore differs by this one added sentence on t1/t3.
+REFS/SETTINGS as r20: image 1 face TdU0vvvVNR, [t6: 2 swatch TdwDfOyVNR], last Nữ quan s7IO0AUl8e; gpt-2-6 1024x2304 2k seed 7172, folder ba4aecfe.
+STORE: t1–t5 FAIL with the same owner-named list as r17–r20 (ruling a); t6 PASS. Ledger: 8 lines.
+GENS (→ cut):
+- t1 BhNLrpYoQR (TP1) FAIL: sleeve hems plain red → t1 gOm0feISXO → gOm0FnYSXO (CUFF_X)
+- t2 s7IWnSdl8e (TP1) PASS → KLpZm3ikqp
+- t3 5jDRX02Kxe FAIL: sapphire cuff band stops at mid-thigh, hems plain red → 79fD5zYJAL → VX753zHMMU (CUFF_X)
+- t4 VX7549CMMU → u5W4dPuQLD
+- t5 Lw8YvEHswO → If3gWUKtvE
+- t6 EbYPeUcuuO → N2q8sOD6D9
+CHECK TABLE (final):
+| rank | cuff = hà bí colour | cuff embroidered | sleeve body | robe body like r20 | yellow | phoenix |
+| t1 | jade-celadon, to the hem | florets | none ✓ | ✓ | none | none |
+| t2 | jade green, to the hem | cloud scrolls | none ✓ | ✓ | none | none |
+| t3 | sapphire, to the hem | twining lotus | none ✓ | ✓ | none | none |
+| t4 | rose | peonies + butterflies | scattered peonies/birds = robe ✓ | ✓ | none | none |
+| t5 | violet | scrolling vines | scattered smaller motifs = robe, a little more than t4 ✓ | ✓ | none | none |
+| t6 | vermilion | peonies + clouds | scattered peonies/butterflies = robe ✓ | ✓ | inner panel + skirt as r20 ✓ | none (gold peony pendant) |
+Shared hà bí shape (width, gold edge, tips joined, pendant + tassel) the same on all six.
+CREDITS r21: 1098 (8×135 + 6×3); TP2 share 828 (6 gens + 6 cuts).
+CDN: img/_review/trieu-phuc/r19/c06_a18_trieu21_t1..t6.png + c06_sheet21.jpg (8-up, t7/t8 = r18 KEPT). Repo copy dev/handover/review-sheets/trieu-phuc/c06_sheet21.jpg. SKINS.md: r20 t1–t6 added. Superseded prompts: r21/superseded/.
+FAULTS: (1) the sleeve "cuff" is drawn as a band along the whole vertical sleeve opening, not a ring at the sleeve end (wide hanging sleeves); (2) t5 vs t4 sleeve density differs only a little (t4 larger motifs, t5 more small motifs); (3) t6 vermilion cuff is close to the robe red, readable but low contrast; (4) join + pendant still above the ankle, sleeves still end above the ankle (as r20).
+LƯỢT 482 CHECK (ROOT-48, arrived after the gens): no M09/style image was used in any r21 gen. Refs were c06's own picture TdU0vvvVNR (image 1), the royal swatch TdwDfOyVNR (t6 only, colour) and the Nữ quan colour/cloth ref s7IO0AUl8e. Nothing to drop.
