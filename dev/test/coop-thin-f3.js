@@ -72,7 +72,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await H.p.evaluate(HELP);await G.p.evaluate(HELP);
  /* stage her person in the HOST's store (her context) → the patch reaches her phone (never written on her phone) */
  const stage=async src=>{const r=await H.p.evaluate(src=>{try{return COOPW.thin.withSeat('b',()=>{const o=(0,eval)('(function(){'+src+'})')();/* every staged piece gets its ledger id now (the game gives it lazily): the same piece is traced by it after giveTo hands over a new entry */for(const e of S.inv||[])if(e&&e.tg3&&e.iu==null&&typeof ilUid==='function')ilUid(e);return o})}catch(e){return 'EXC '+e.message}},src);await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sync();await sleep(300);return r};
- await stage("S.rank=Math.max(S.rank||0,4);S.bac=Math.max(S.bac||0,3000);S.suc=60;S.confined=0;S.out=0;if(S.maid){S.maid.loyal=80;delete S.maid.spyFor}");
+ await stage("S.bac=Math.max(S.bac||0,3000);S.suc=60;S.confined=0;S.out=0;if(S.maid){S.maid.loyal=80;delete S.maid.spyFor}");
  {const a=await G.p.evaluate(()=>__her()),b=await H.p.evaluate(()=>__her());console.log('setup (info): her bag on her phone',a.inv.length,'· the host\'s copy',b.inv.length,'(her own changes reach the host in her next intent / ready diff: E / F1)')}
  const table=[];let tw0=null;const BV=await G.p.evaluate(()=>({it:BAL.bacFee.itTest,court:BAL.bacFee.court,ts:BAL.tsGift.bac,tk:BAL.tsGift.khac}));
  const trip=()=>TRIPSRC?G.p.evaluate(()=>window.__trip&&__trip()).catch(()=>null):null;
@@ -94,6 +94,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   if(o.after)await G.p.evaluate(src=>(0,eval)('(function(){'+src+'})')(),o.after);
   const got=r.id?await until(G,id=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.id===id,r.id,20000):false;
   await sleep(500);await sync();
+  if(o.shot&&process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});for(const p of [H,G]){for(let i=0;i<3;i++)await tapText(p,/^Đã hiểu$/,800)/* setup edicts (the test's rank) */;await tapText(p,/^Bỏ qua$/,1500)/* the Luân hồi intro overlay (never closed by this scripted run) */;await p.p.evaluate(()=>{for(const el of document.querySelectorAll('.nl-intro,#nlIntro,[data-nlintro]'))el.remove()}).catch(()=>{})}await sleep(900);for(const p of [H,G]){const vp=p.p.viewportSize();await p.p.screenshot({path:path.join(process.env.SHOTS,`f3-${o.shot}-L${LVL}-${p.name}-${vp.width}x${vp.height}.jpg`),type:'jpeg',quality:72})}}
   const g1=await G.p.evaluate(()=>__her()),h1=await H.p.evaluate(()=>__her());const run1=await H.p.evaluate(()=>COOPW.thin.F.stat.run);const ans=await G.p.evaluate(()=>COOPW.thin.F.lastAns);
   const hc1=await H.p.evaluate(()=>{const t=document.getElementById('rtoast');return t?t.innerHTML:''});const c1=await G.p.evaluate(()=>COOPW.thin.F.stat.card|0);
   const same=JSON.stringify(Object.assign({},g1,{log:0,nlog:0,used:0}))===JSON.stringify(Object.assign({},h1,{log:0,nlog:0,used:0}))/* her khắc clock lives on her phone (E / F1); checked per row */;
@@ -133,7 +134,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const fab=await pick(`return Object.keys(IT).find(k=>IT[k].dr&&typeof wdFabOf==='function'&&wdFabOf(k))`);
  await stage(`S.inv.push(${JSON.stringify([jw&&{k:jw,tg3:'w1'},wdT&&{k:wdT,tg3:'w2'},wdY&&{k:wdY,tg3:'w3'},fab&&{k:fab,tg3:'w4'},wdY&&{k:wdY,tg3:'w5'}].filter(Boolean)).slice(1,-1)})`);
  if(jw){await act('W1 Đeo (itemAct wear): same as solo',`itemAct('wear',${ixOf('w1')})`,{twin:true});await act('W1b Tháo (wear again)',`itemAct('wear',${ixOf('w1')})`,{twin:true})}
- if(wdT){await act('W2 Cài trâm (wdWearUI): same as solo, result card on her phone only',`wdWearUI(${ixOf('w2')})`,{twin:true,card:1});
+ if(wdT){await act('W2 Cài trâm (wdWearUI): same as solo, result card on her phone only',`wdWearUI(${ixOf('w2')})`,{twin:true,card:1,shot:'wear-card'});
   await act('W3 Tháo trâm (wdOffUI)',`wdOffUI('tram')`,{twin:true})}
  if(wdY)await act('W4 Mặc y phục from Điểm trang (toilAct → wdWear)',`wdWear(S,${ixOf('w3')})`,{twin:true});
  if(fab)await act('W5 May áo (useItem on a fabric, jwdinv)',`itemAct('use',${ixOf('w4')})`,{twin:true});
@@ -142,7 +143,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* ---- S: the shop (Nhờ thái giám mua đồ, kit shop nvp) ---- */
  {await reset();const it=await pick(`S.shop=S.shop&&S.shop.length?S.shop:['yensao','tuithom'];kitShopNvp();const o=KSHOP.reg.nvp;const x=o.items.find(y=>y&&IT[y.k]&&y.price>0&&y.price<=S.bac&&!y.mark);closeModal();return x?{k:x.k,pr:x.price}:null`);
   if(it){const q=2;await act(`S1 Mua ×${q} in the kit shop (kitShopBuy nvp): bạc −price×${q}, +${q} items, the open panel refreshes`,
-     `kitShopNvp();const o=KSHOP.reg.nvp;o.q[${JSON.stringify(it.k)}]=${q};kitShopBuy('nvp',${JSON.stringify(it.k)},${q},'buy')`,{after:'',chk:x=>x.g0.bac-x.g1.bac===it.pr*q&&x.g1.inv.filter(k=>k===it.k).length===x.g0.inv.filter(k=>k===it.k).length+q});
+     `kitShopNvp();const o=KSHOP.reg.nvp;o.q[${JSON.stringify(it.k)}]=${q};kitShopBuy('nvp',${JSON.stringify(it.k)},${q},'buy')`,{after:'',shot:'shop',chk:x=>x.g0.bac-x.g1.bac===it.pr*q&&x.g1.inv.filter(k=>k===it.k).length===x.g0.inv.filter(k=>k===it.k).length+q});
    await G.p.evaluate(()=>{try{closeModal()}catch(e){}})}
   else ok(false,'S1 no item to buy in the kit shop');
   await stage(`S.inv.push({k:'tuithom',tg3:'s2'})`);
