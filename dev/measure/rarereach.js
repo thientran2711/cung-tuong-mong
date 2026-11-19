@@ -11,7 +11,7 @@ const s0=start;start=function(){window.__origO=ORIG[(window.__rrOi++)%ORIG.lengt
 const isRoad=a=>(window.RD97L||[]).some(d=>d.a===a);
 const g0=r97Gate;r97Gate=function(A){let pre=null;try{if(A&&!A.r97&&A.nb&&R97[A.a]&&r97IsX(A,A.nb)){const d=R97[A.a],q=A.q97||{p:0,b:0};let x=1;try{x=d.x?(d.x[0](A)?1:0):1}catch(e){x=0}
   let nd=1;if(d.need==="kid"&&!r97son())nd=0;if(d.need==="hh"&&!qOn())nd=0;if(d.need==="th"&&S.thDead)nd=0;
-  pre={a:A.a,src:isRoad(A.a)?"road":"arc",p:q.p||0,np:d.np||2,b:q.b?1:0,sc:A.sc||0,scN:d.sc||0,x,nd,B:(d.p||.1)*(R97CFG.p||1),P:typeof r97Roll==="function"?r97Roll((d.p||.1)*(R97CFG.p||1),isRoad(A.a)?"road":"arc"):(d.p||.1)*(R97CFG.p||1),turn:S.turn}}}catch(e){}
+  pre={a:A.a,src:isRoad(A.a)?"road":"arc",p:q.p||0,np:d.np||2,b:q.b?1:0,sc:Math.max(A.sc||0,(q.sc)||0),sc0:A.sc||0,scN:d.sc||0,x,nd,B:(d.p||.1)*(R97CFG.p||1),P:typeof r97Roll==="function"?r97Roll((d.p||.1)*(R97CFG.p||1),isRoad(A.a)?"road":"arc"):(d.p||.1)*(R97CFG.p||1),turn:S.turn}}}catch(e){}
  const r=g0.apply(this,arguments);try{if(pre&&A.r97){pre.c=A.r97.c;pre.ok=A.r97.ok;L.gates.push(pre)}}catch(e){}return r};
 try{const f=rare96;rare96=function(){const v=f.apply(this,arguments);try{if(v&&!L.tm.elig){L.tm.elig=1;L.tm.thuoc=(typeof A96has==="function"&&A96has("thuoc"))?1:0}}catch(e){}return v}}catch(e){}
 try{const f=kcRare;kcRare=function(id,p){const had=S.kc&&S.kc.r97&&S.kc.r97[id]!=null;const v=f.apply(this,arguments);if(!had)L.kc.push({id,p,ok:v?1:0});return v}}catch(e){}

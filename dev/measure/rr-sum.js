@@ -10,7 +10,8 @@ const pc=(a,b)=>b?(100*a/b).toFixed(1)+'%':'-';const med=q=>{if(q<=0)return'∞'
 function sum(L,lab){const G=L.flatMap(l=>l.rr.gates.map(g=>Object.assign({o:l.rr.origin},g)));const row={lab,lives:L.length};
  for(const src of ["arc","road","all"]){const g=G.filter(x=>src==="all"||x.src===src);const c=g.filter(x=>x.c),ok=g.filter(x=>x.ok);
   const why={bad:g.filter(x=>x.b).length,path:g.filter(x=>!x.b&&x.p<x.np).length,sc:g.filter(x=>x.sc<x.scN).length,x:g.filter(x=>!x.x||!x.nd).length};
-  row[src]={n:g.length,perLife:(g.length/Math.max(1,L.length)).toFixed(2),elig:pc(c.length,g.length),e:c.length/Math.max(1,g.length),hit:ok.length,hitOfElig:pc(ok.length,c.length),expHit:c.reduce((a,x)=>a+x.P,0).toFixed(2),
+  const ok1=g.filter(x=>!x.b&&x.p>=x.np&&x.x&&x.nd&&x.sc>=x.scN-1).length,ok0=g.filter(x=>!x.b&&x.p>=x.np&&x.x&&x.nd).length,okP=g.filter(x=>!x.b&&x.p>=x.np-1&&x.x&&x.nd&&x.sc>=x.scN-1).length;
+  row[src]={n:g.length,eSc1:pc(ok1,g.length),eSc0:pc(ok0,g.length),eSc1P1:pc(okP,g.length),perLife:(g.length/Math.max(1,L.length)).toFixed(2),elig:pc(c.length,g.length),e:c.length/Math.max(1,g.length),hit:ok.length,hitOfElig:pc(ok.length,c.length),expHit:c.reduce((a,x)=>a+x.P,0).toFixed(2),
    whyNot:{bad:pc(why.bad,g.length),pathShort:pc(why.path,g.length),loiThe:pc(why.sc,g.length),extra:pc(why.x,g.length)}}}
  const r1=L.filter(l=>(l.rr.rare||[]).length).length;row.lifeRare=pc(r1,L.length);row.q=r1/Math.max(1,L.length);row.medFirst=med(row.q);
  /* empirical: lives played (in file order) until the first rare, per shard order */
@@ -22,7 +23,7 @@ function sum(L,lab){const G=L.flatMap(l=>l.rr.gates.map(g=>Object.assign({o:l.rr
  return row}
 const all=[];const out=[];for(const st of Object.keys(lives).sort()){out.push(sum(lives[st],st));all.push(...lives[st])}out.push(sum(all,"ALL"));
 for(const r of out){console.log(`\n## ${r.lab}: ${r.lives} lives · ≥1 rare ${r.lifeRare} · median lives to first rare ${r.medFirst}`+(r.proj?` · PROJECTED ≥1 rare ${r.proj.lifeRare}, median ${r.proj.medFirst}`:""));
- for(const s of ["arc","road","all"]){const x=r[s];console.log(`  ${s}: climaxes ${x.n} (${x.perLife}/life) · eligible ${x.elig} · roll hits ${x.hit} of eligible (${x.hitOfElig}; expected ${x.expHit}) · not eligible because: broke ${x.whyNot.bad}, path short ${x.whyNot.pathShort}, Lợi thế ${x.whyNot.loiThe}, stat/relation ${x.whyNot.extra}`)}
+ for(const s of ["arc","road","all"]){const x=r[s];console.log(`  ${s}: climaxes ${x.n} (${x.perLife}/life) · eligible ${x.elig} · roll hits ${x.hit} of eligible (${x.hitOfElig}; expected ${x.expHit}) · not eligible because: broke ${x.whyNot.bad}, path short ${x.whyNot.pathShort}, Lợi thế ${x.whyNot.loiThe}, stat/relation ${x.whyNot.extra} · IF Lợi thế floor −1: ${x.eSc1} · no Lợi thế floor: ${x.eSc0} · floor −1 and path −1: ${x.eSc1P1}`)}
  console.log(`  j96: ${r.tm96} · jkc: ${r.kc} · j99succ: ${r.succ}`)}
 /* per origin (all styles) */
 const byO={};for(const l of all){const o=l.rr.origin;byO[o]=byO[o]||{L:0,n:0,c:0,r:0};byO[o].L++;byO[o].n+=l.rr.gates.length;byO[o].c+=l.rr.gates.filter(g=>g.c).length;if(l.rr.rare.length)byO[o].r++}

@@ -248,7 +248,7 @@ R97L.forEach(d=>{R97[arcRare(d).a]=d});
 regEach(R97,id=>{const a=ARC67[id],d=R97[id];if(!a||!a.E||a.E.r97)return;
  a.E.r97={k:BAL.arc.tier.win,tag:"✦ "+d.tag,w:d.w,t:d.t,fx:d.fx,go:A=>r97After(A,d)}},"R97 ending");
 /* ---------- condition, roll, offer ---------- */
-function r97Cond(A,d){const q=A.q97||{p:0,b:0};if(q.b)return false;if((q.p||0)<(d.np||2))return false;if((A.sc||0)<(d.sc||0))return false;
+function r97Cond(A,d){const q=A.q97||{p:0,b:0};if(q.b)return false;if((q.p||0)<(d.np||2))return false;if(Math.max(A.sc||0,(A.q97&&A.q97.sc)||0)<(d.sc||0))return false;/* road finales: the road's best Lợi thế (jroad rdSc97) */
  if(d.need==="kid"&&!r97son())return false;if(d.need==="hh"&&!qOn())return false;if(d.need==="th"&&S.thDead)return false;
  try{if(d.x&&!d.x[0](A))return false}catch(e){return false}return true}
 function r97Hit(s,list){s=String(s||"");return (list||[]).some(x=>s.includes(x))}
