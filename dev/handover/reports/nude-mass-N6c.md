@@ -19,3 +19,9 @@ Items now differ per age (builder 3f): a18 folding fan, a26 hand mirror, a36 ruy
 - gens: a18 O6Eiasoynm · a26 s7IJowtl8e · a36 jUowXR7LD0 (→ cut dt4mPQVXSL, raw had parchment haze) · a51 s7IJoDUl8e · a65 xSBUdtijfW (all 1st try). --verify PASS.
 - Items: a18 sceptre, a26 edict scroll, a36 ruyi, a51 hand censer, a65 walking staff. Frontal, calm, cloth still, lips closed, forehead clean, no crown flowers; a51 silver temples, a65 mostly silver.
 - Honest faults: a18 sceptre head rises to about collar/chin level at her right shoulder (clear of the face); a51 bead tassels end in small red beads just above the brows (on the fringe, not on skin) — same as c17 a51.
+
+## c20 DONE (option C: five bead tassels, high standing collar; crimson second colour) — sheet img/_review/nude-mass/sheet_c20.jpg (CDN), copy out/n6c_c20_sheet.jpg
+- gens kept: a18 yiu3unMPW9 · a26 hu2QGF6vqL (redo) · a36 jUowoXzLD0 · a51 vQAFApDa47 · a65 KLpsdgqkqp (redo, + dedot.py on the red tassel bead at mid-forehead, local edit of the file; strand now ends in a pearl).
+- FAILED, not used: a26 Lw878WlswO (centre tassel ended in a red drop between the brows = forehead dot), a65 6AbG5ZtiJO (red tassel beads on the forehead skin). Both logged in the ledger (verify PASS, prompt unchanged). 7 gens.
+- Items: a18 tú cầu, a26 small gold vase with flower sprig, a36 jade court tablet, a51 jade seal, a65 longevity peach. All frontal, calm, item below the chin, cloth still, lips closed, no crown flowers; a51 silver temples, a65 mostly silver.
+- Honest faults / note for foreman: option C (only five tassels, longer middle ones) tends to drop the centre tassel's red bead onto the forehead skin — expect 1 redo or a dedot per C person. a65 a65 peach is gold (item close to robe gold).
