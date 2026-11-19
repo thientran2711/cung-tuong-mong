@@ -36,7 +36,7 @@ function kitRevealHTML(I,o){o=o||{};const R=(typeof BAL==="object"&&BAL.reveal)|
 window.kitItemInfo=kitItemInfo;window.kitGradeChip=kitGradeChip;window.kitRevealHTML=kitRevealHTML;
 
 /* ---------- §54.2 kitLose ---------- */
-function krOn(){return typeof S!=="undefined"&&S&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
+function krOn(){return typeof S!=="undefined"&&S&&!screenOff()}
 function krStill(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
 function krVis(el){if(!el)return null;const r=el.getBoundingClientRect();return r.width&&r.height&&r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth?r:null}
 function krBagPt(){const tb=[...document.querySelectorAll('#tabs [data-tab="inv"],[data-tab="inv"]')].map(krVis).find(Boolean);
