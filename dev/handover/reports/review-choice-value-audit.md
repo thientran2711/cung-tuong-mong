@@ -189,3 +189,26 @@ Merge: + LIVE 2bda29a1 (seal-lean-3: jemoseal / jfigseal / jmark only) → **1a7
 | Fold 755x1000@2 + iPad 1180x820@2 «Bạc lạ», looked at 3× | e7562420 | three roads, each Tốn + Được, none dominates; no overflow, 0 page errors; scratch only |
 ### VERDICT: LAND READY review/choice-value-audit 1a7ab77c (FF of 2bda29a1)
 LANDER: delete `jbal.js` BAL.rk guard when balance-final lands.
+
+## REVIEW coopBribe (opus, session_01964izCPpSAJJUvfrvJDgFp, for Foreman D #7) — PASS after 1 reviewer fix → LAND READY 02e151e3
+PRIORITY #1 CHECK ('coopBribe'): OD 1 | ledger 0 | claims 1 (= choice-value-audit) | main 0 | review/* review/choice-value-audit 1a7ab77c | archive 0
+START_CTX ≈ 4 % of 1M (get_session reads 0; estimate) · depth 8 · finished ≈ 20 %. Delta reviewed: a7828dcd..1a7ab77c (e7562420 + 2bda29a1 merge). Laws checked: 1, 2, 3, 4, 7, 11.
+### Findings
+1. **FIXED (reviewer, 02e151e3) — law 2/3 in co-op:** `jcoopworld briberRes` applied the grudge as `affAdd(S, fSrvE(), ∓grudge)`. The co-op servant entity is `{sid:fp(), coop:true}` (buildFriendSrv) with **no `id`**, so `affAdd` wrote `S.rl["undefined"]` (probe: `affAdd(S,{sid:902,coop:true},-5)` → `S.rl.undefined = -5`, friend row 902 untouched). In co-op the shown «thiện cảm ±5» changed nothing → «im lặng» back to no gain, «bẩm chủ» cost not real (the j42 solo path was correct). Fix: one helper `brbAff(n)` writes the briber's regard row for the friend `S.rl[fp()]` (the same row `resApply` writes and the friend's consort entry `{id:fp()}` reads). In-page probe through `COOP.emit("act",{mode:"briber"})`: quiet → S.rl[902] +5, told → back to 0 (−5), no "undefined" key, 0 page errors.
+2. Law 2/3 solo (j42 `cnvBribeOpts`): three roads, each with a real gain; take = +pay bạc / spy risk; tell = Chủ tin +tin, mistress gets evidence on the briber / briber's regard −grudge; quiet = briber's regard +grudge, no cost (gain-only allowed). Probe on the real card: v.rel tell −5, quiet +7 (shown +5; the game-wide affAdd wrappers — mood / feel / trust — scale positive regard, the same for every «thiện cảm +N» preview; not new).
+3. Law 1: NPC servants who receive HER bribe (jagstf2 `stf2Bribe`, jrcv `rcvMaidBribe`) run the same `cnvBribeOpts` list, same weights; their tell / quiet change no regard row because staff (`{sid}`) and consort maids (`{name,loyal}`) have no `id` (the documented guard). Accepted: she is the player, her own regard toward a servant drives no NPC behaviour; adding regard rows for staff would be a new feature (freeze, law 18). Not a fault of this delta.
+4. Law 4: every number reads `BAL.coopBribe.{pay,tin,grudge}` / `BAL.eff.jcoopworld.*`; text prints `balSg(BAL…)`; one-core ×4 PASS.
+5. Law 11: group = j42 cnvBribeOpts (+ its NPC users stf2Bribe / rcvMaidBribe / jecon), jcoopworld P2H.bribe, PEND.thBribe, briberRes. grep 'Bribe': the only other bribe paths (j29 loop-off fallback, j13 / jbal npcBribe physician, jagacts2 → bribeServ → stf2Bribe) are not «Bạc lạ» choice cards.
+6. Nit (not blocking): on the event card «Từ chối, bẩm chủ» Tốn line starts with a stray «·» (the hint reader keeps the « · kèm:» joiner after moving the first part to Được). Cosmetic, kit hint reader.
+### Gates (one at a time unless noted)
+| gate | sha | result |
+|---|---|---|
+| one-core-guard / -text / -bind / -text-rule | 02e151e3 | PASS ×4 |
+| odds-cap | 02e151e3 | PASS |
+| choice-value-scan 100 turns seeds 7 / 11 / 23 / 31 | 7 on 1a7ab77c build, 11/23/31 on 02e151e3 build (fix is co-op only, not reached by the solo scan) | **PASS** 363 / 335 / 350 / 315 · COST-ONLY 0 · HINT-NO-GAIN 0 · DOMINATED 0 · 0 page errors |
+| receiver-choice.test | 1a7ab77c, 02e151e3 | ALL PASS |
+| quickcheck --runs 3 | 02e151e3 vs live 2bda29a1 | PASS · old save ok · core gates PASS · render 252/244 ms, tab 557/539, buổi 3129/5202 (ran beside the scans) |
+| coop-e2e vs live Worker | 02e151e3 | 68/68, 0 page errors |
+| Fold 755x1000@2 + iPad 1180x820@2 «Bạc lạ» (servant life, card built from PEND.cnvBribe: mkP is rightly blocked by j95b while the mistress is away), looked at 3× | 02e151e3 | three roads, each Tốn + Được (quiet: Tốn «không», Được «trả lại bạc, giữ hòa khí…, được lòng người»); no overflow, 0 page errors; iPad option pictures «Đang thỉnh tranh» (CDN load). Scratch only, nothing uploaded |
+### VERDICT: LAND READY review/choice-value-audit 02e151e3 (FF of LIVE 2bda29a1; coopBribe delta reviewed)
+LANDER: delete `jbal.js` BAL.rk guard when balance-final lands; balance-final 40775131 conflicts with this branch (D #7 note 16:28Z) — whichever lands second re-merges.
