@@ -980,3 +980,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (19/11 ~01:27Z real) LANDED stage-here r4rev → main 73790cb7 (BIG rv PASS LAND READY, FF). ROLLBACK bb8e8ec9. CDN stage-here wiped; rv Liu1sZg8 archived (worker already archived). D order jptime→kitNotice now unblocked. Errand successor + rv told.
 - (19/11 ~01:40Z real) LANDED opt-card-short → main 96188526 (rv N8cog61d PASS, FF). ROLLBACK 73790cb7. CDN wiped; rv + worker MxWaub8y archived. Shots sent to owner. Open: iPad 5-option event scrolls (rv note, owner may judge).
 - (19/11 ~01:48Z real) Owner: retire «an toàn/có rủi ro» chip, restore segmented odds meter on all option cards (OD (19/11 ~01:48Z real)) → worker odds-meter-back via C-AG #18.
+- (19/11 ~01:49Z real) odds-meter-back worker = session_01Rc5AsJj8qdidmEiDujymyR (opus, child of C-AG #18), reports to ROOT-61.
