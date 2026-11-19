@@ -351,22 +351,53 @@ def ang_class(s):
     if "THREE-QUARTER" in s: return "3/4 "+side
     if "FRONTAL" in s and "SLIGHT" not in s: return "frontal"
     return "slight "+side
+_CYCLE={}
+def _ang_cycle(cls):
+    """cyclic order of the 14 ANG14 indices that spreads the visual classes (seeded search, deterministic) + per window length r the max class count."""
+    key=tuple(cls)
+    if key in _CYCLE: return _CYCLE[key]
+    import collections
+    m=len(cls); sz=collections.Counter(cls); R=_random.Random("E12-angle-cycle"); best=None
+    def win(Pp):
+        W={}
+        for r in range(m+1):
+            W[r]=max(collections.Counter(cls[Pp[(a+b)%m]] for b in range(r)).get(k,0) for a in range(m) for k in sz) if r else 0
+        return W
+    for _ in range(2000):
+        Pp=list(range(m)); R.shuffle(Pp); W=win(Pp); sc=sum(W.values())
+        if best is None or sc<best[0]: best=(sc,Pp,W)
+    _CYCLE[key]=(best[1],best[2]); return _CYCLE[key]
 def e12_caps(n,cls):
-    """E12 caps inside a group of n at one rank + age: (item/grace, angle sentence, angle class) = the pigeonhole minimum; class cap 2 while n <= 10
-    (cls = visual class of every ANG14 sentence; bigger groups: the smallest cap the class sizes allow)."""
+    """E12 caps inside a group of n at one rank + age: (item/grace, angle sentence, angle class).
+    item/grace = ceil(n/8); angle sentence = ceil(n/14); class: n <= 14 -> 2 up to 10 people, then the smallest cap with one spare slot;
+    n > 14 -> the bound of the cyclic construction (full laps x class size + the most of one class in a window of n mod 14)."""
     import math,collections
-    ca=math.ceil(n/len(cls)); sz=collections.Counter(cls).values(); cc=2
-    while sum(min(k*ca,cc) for k in sz)<n: cc+=1
+    ca=math.ceil(n/len(cls)); sz=collections.Counter(cls)
+    if n<=len(cls):
+        cc=2
+        while sum(min(k*ca,cc) for k in sz.values())<n+(n>10) and cc<max(sz.values())*ca: cc+=1
+    else:
+        q,r=divmod(n,len(cls)); W=_ang_cycle(cls)[1]; cc=max(sz.values())*q+W[r]
     return math.ceil(n/8),ca,cc
 def group_angles(name,mem,age,cls):
-    """E12: people x ranks grid of ANG14 indices; each rank: all different (<= ceil(n/14)), <= 2 per visual class (more only if the group has > 10); each person: 8 different (E1). Deterministic seeded backtracking."""
-    cells=[(c,t) for t in range(1,9) for c in mem]; A={}; _,ca,cc=e12_caps(len(mem),cls)
+    """E12: people x ranks grid of ANG14 indices. Each rank: each sentence <= ceil(n/14) (all different up to 14 people), each class <= e12_caps (2 up to 10 people);
+    each person: 8 different (E1). n <= 14: deterministic seeded backtracking. n > 14: members in a seeded order, person i at rank t = CYCLE[(i + t + shift) % 14]
+    (8 consecutive cycle positions -> 8 different per person; every sentence ceil or floor of n/14 per rank)."""
+    A={}
+    if len(mem)>len(cls):
+        Pp=_ang_cycle(cls)[0]; R=_random.Random(f"E12-angle-{name}-{age}"); order=list(mem); R.shuffle(order); sh=R.randrange(len(cls))
+        for i,c in enumerate(order):
+            for t in range(1,9): A[(c,t)]=Pp[(i+t-1+sh)%len(cls)]
+        return A
+    cells=[(c,t) for t in range(1,9) for c in mem]; _,ca,cc=e12_caps(len(mem),cls); nodes=[0]
     def ok(c,t,v):
         if any(A.get((c,u))==v for u in range(1,9)): return False
         col=[A[(d,t)] for d in mem if (d,t) in A]
         return col.count(v)<ca and sum(cls[x]==cls[v] for x in col)<cc
     def go(i):
         if i==len(cells): return True
+        nodes[0]+=1
+        if nodes[0]>200000: return False
         c,t=cells[i]; vals=list(range(len(cls))); _random.Random(f"E12-angle-{name}-{age}-{c}-{t}").shuffle(vals)
         for v in vals:
             if ok(c,t,v):
@@ -374,7 +405,7 @@ def group_angles(name,mem,age,cls):
                 if go(i+1): return True
                 del A[(c,t)]
         return False
-    assert go(0),("E12 angle plan impossible",name,age)
+    assert go(0),("E12 angle plan not found",name,age,len(mem))
     return A
 def group_grace(name,mem,age,K=8):
     """E12: Latin square over members (sorted) x 8 ranks: every person 8 different lines; member i uses row i % 8 -> every rank each line at most ceil(n/8) times."""
