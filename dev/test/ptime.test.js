@@ -115,7 +115,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   {toB0();S.place="home";const t=liveRivals(true).find(v=>v!==m&&v!==S&&v.alive&&!v.out&&palaceOf(v)===mk);if(t){const oq=give("spy",t);if(oq){const H=ptRecvN(mk,"spy",1);const c=click(oq,1);o.half0={H,used:c&&c.used,left:S.ordQ.length}}}}
   /* item 4: ONE NOTICE SYSTEM — every jptime notice goes through window.kitNotice({id,line,text,go,goLabel}) when jnotice is in the build (no kitLine) */
   {const got=[];let kl=0;const kn0=window.kitNotice,kl0=window.kitLine;window.kitNotice=sp=>{got.push(sp);return sp};const klW=kitLine;kitLine=function(){kl++;return null};
-   try{toB0();const a=ptSend({who:"pt:test",nm:"Cung nữ thử",kind:"spy",lbl:"đi nghe ngóng"});if(a)spend(a.due-ptNow());const t=far[0];if(t)give("spy",t);
+   try{toB0();const a=ptSend({who:"pt:test",nm:"Cung nữ thử",kind:"spy",lbl:"đi nghe ngóng"});if(a)spend(a.due-ptNow());/* first rival who can take an order (review #4 de-flake, same as test 11: mkP may refuse far[0] → no order notice) */for(const t of far){if(give("spy",t))break}
     o.note={n:got.length,go:got.some(x=>/đã đi/.test(x.line)),back:got.find(x=>/đã về: có tin báo/.test(x.line)),ord:got.find(x=>/có lệnh/.test(x.line)),kl};
     o.note.back=o.note.back&&{id:o.note.back.id,go:typeof o.note.back.go,gl:o.note.back.goLabel,text:!!o.note.back.text};o.note.ord=o.note.ord&&{id:o.note.ord.id,go:typeof o.note.ord.go,gl:o.note.ord.goLabel}}
    finally{window.kitNotice=kn0;kitLine=klW;S.ordQ=[]}}
