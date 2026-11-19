@@ -85,3 +85,26 @@ Scan: `grep -rnoE "SRK\.maid\[[0-9]\]|srv\.rk\s*[<>=]=?\s*[0-9]|srk\([a-z]+\)\s*
 ## Open for main / reviewer
 - FOR MAIN: leaderboard server (rank/worker/src/score.js) still has 5 servant steps; the client sends the tier (tam + nhị both shown «Cung nữ» on the board). A 6-step board needs a worker deploy — not done here.
 - Bow order (jgreet) and Emperor's-eye table: tam/nhị đẳng share the «Cung nữ» bow rank (tier); eye has its own value .4 for nhị đẳng.
+
+## REVIEW r1 (independent opus reviewer, 11/19/2026) — PASS after 3 reviewer fixes
+PRIORITY #1 CHECK ('tam đẳng','srvLad6','prSeen','srvMax'): OD 1 (19/11 ~01:26Z) | main 1cf5e8bb (no 6-rung ladder) | review/* only review/maid-ladder-6 | claims worker session_01N1tNP6uwmf4WjfcYZ2eBKe. Branch review/maid-ladder-6-r1 = cb5a7cb3 + r1 fix; descends current origin/main 1cf5e8bb (final merge: already up to date).
+
+Laws touched: 1 (NPC maids same ladder, same gates, NPC exam/ma ma choice read BAL.srvRk) PASS · 4 (every rung number in BAL.srvRk / srvBar / srvCd / srvWage / dbCost / mline.eye / promo.srv) PASS after fix 2 · 5 (bar 18/19/20/22/24/24, wait 1/1/1/1/2/2/3, merit need (rk+1)×srvMp: every step ≥ the one below) PASS · 6c (no item from nowhere) FAILED before fix 1 · 7 (wording: «Bậc n», «N bạc mỗi tháng», «Tức Đại cung nữ», no %) PASS · 9 (ladder = kitTiers in .kpsec/h4.kpst, KIT.md §kitTiers; «Ma ma» = 7th kit tier) PASS · 11 (my own scan, below) PASS after fix 2 · 12 (Fold 755x1000@2 + iPad 1180x820@2, looked 3×) PASS.
+
+### Found and fixed on review/maid-ladder-6-r1 (small, reviewer-made)
+1. OLD SAVE DUPLICATE REWARD (law 6c, migration): `srvLad6` moved her rung but not the promo-chest tracker `S.prSeen.s` (jpromo). Every old maid save at Đại cung nữ or above got its rung chest AGAIN on first load (old 2→3: áo lụa mộc + trâm đồng again; Nữ quan; old ma ma 5→6: y_mama again). Probe on cb5a7cb3: chests 1/1/1; after fix 0/0/0. Fix: j14 srvLad6 also does `S.prSeen.s = up(S.prSeen.s)`. Test maid-ladder-6.js migration step now checks prSeen moved + 0 chest (it FAILS on cb5a7cb3, PASSES on r1).
+2. Two typed rungs missed by the worker's scan (law 4/11): j42 `srvMax()` no-master fallback `2` and j67 `e67srvUp` fallback `2` (old 2 = Đại cung nữ, now = nhị đẳng) → `BAL.srvRk.dai`.
+
+### Reviewer scan (law 11): every SRK.maid / srv.rk / rk0 / srk( / srkName / srkMax / srvMax / prSeen / staff.posts / jrank / jexam / frame / colour use in dev/build (all.js excluded)
+Typed maid-rung numbers left: 0 (after fix 2). Kept on purpose: rk>=1 «not thô sử», rk 0/1 starts, eunuch srk>=3 (j8, eunuch ladder unchanged), j9 sentPen srk×3 (scale, not a gate). Stored rung indices in a save: S.srv.rk/rk0/ex.to, S.rk.sr + "s" trail, every role-maid object (staff, S.maid, posts), S.prSeen.s (fix 1) — all migrated.
+
+### Gates (on r1 3febc230)
+- `dev/tools/quickcheck.sh` → QUICKCHECK PASS · old save ok · core gates PASS (one-core-guard, rules-one-source, kit-conform, coop-one-world) · perf new/live render 163/173 ms.
+- `node dev/test/maid-ladder-6.js` (new vs LIVE 1cf5e8bb, 755x1000@2 + 1180x820@2) → PASS 13/13.
+- `node dev/test/coop-e2e.js` → 63/63; `COOP_SWAP=1` → 63/63.
+- Reviewer co-op OLD ROOM probe (scratch, live Worker): room made on LIVE 1cf5e8bb (host consort, guest maid at old Đại cung nữ, host NPC maids spread 0..4) → both seats reopened on the new build → host and guest see every NPC maid at the same migrated rung (12/12), guest maid 2→3 nhất đẳng, lad6 on both; after one played week and after a second reload of both: still 12/12, no second shift.
+- LOOK: Fold 755x1000@2 + iPad 1180x820@2, Thân phận tab at nhị đẳng and Chưởng sự cô cô: 6 rungs + «Ở lại · Ma ma», «đang ở» on hers, capped rung reads «Cung chủ phẩm này chưa cho lên tới bậc này», no clipping / overflow. Shots in scratch only (not in git, not on CDN).
+- Note (not this job): the worker's own Fold ladder shot is covered by a promotion chest the test itself queues (step 6 jumps her rung) — test artefact, not a game fault.
+
+FOR C and FOR MAIN lines: present above (unchanged).
+VERDICT: READY FF 3febc230 → final sha below (descends origin/main 1cf5e8bb).
