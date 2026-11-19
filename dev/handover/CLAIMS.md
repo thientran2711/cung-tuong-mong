@@ -126,7 +126,7 @@ parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | RUN
 | review entry-blank-r3 (opus BIG REVIEWER, OWNER BUG, CDN env) | review/entry-blank-r3 faf2b893 | MAIN ROOT-55 | session_01Rc5AsMhWSwNH8bFZFtfMQB | RUNNING | 18/11 20:20Z |
 | review map-labels (sonnet SMALL REVIEWER) | review/map-labels-missing 718c249b | MAIN ROOT-55 | session_01Rc5AsMauKQhsTB6uLuFcE6 | RUNNING | 18/11 20:25Z |
 | review stage-rightcol (sonnet SMALL REVIEWER) | review/stage-rightcol 25747b2 | MAIN ROOT-55 | session_01Rc5AsLif7zx2DCwH8vK7Sp | RUNNING | 18/11 20:36Z |
-receiver-choice (ORDER ~21:16Z audit) | review/receiver-choice | RUNNING fix of BIG FAIL 6 @88de83c5f (reports/review-receiver-choice.md) — worker #3 session_01964izGEZSk3xNzS4zDqJdA (opus, brief briefs/D4-receiver-choice-fix.md, from 1465d150d); same reviewer session_01964izDgKu5f95bvTV3Ea7C re-checks | Foreman D #4 | 18/11 23:20Z
+receiver-choice (ORDER ~21:16Z audit) | review/receiver-choice | SSK 28ebffad8 (fix of FAIL 6) → BIG reviewer #2 session_01964izDhYprGzHx3vd2qwk7 (worker #3 session_01964izGEZSk3xNzS4zDqJdA + reviewer #1 archived) | Foreman D #4 | 18/11 23:20Z
 | MAIN ROOT-56 (opus; child of ROOT-55) | handover HANDOVER_SESSION9 | ROOT-55 | session_01Rc5AsMXM16MfHRicSPRHEC | RUNNING | 18/11 22:15Z |
 | ge-writers-w1 remerge #2 main fa411d6f (sonnet E11w1m2) | review/ge-writers-w1 | E ROOT #7 | session_01DgYSWpCmGwUZc92fd7aPTE | DONE a7e6199c | 18/11 21:27Z |
 | questline-q2 BIG REVIEW (opus E13r) | review/questline-q2 a8cd0551 | Foreman E ROOT #6 | session_01DgYSWmBrrumpeuqy7XfMzM | DONE: FAIL (law 2 help>betray + carrier tests) · K-Q2-1 confirmed | 18/11 20:49Z |
