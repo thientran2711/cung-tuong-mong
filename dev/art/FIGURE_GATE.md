@@ -859,3 +859,6 @@ ROOT-44 Lượt 306 actions: m19 secondary = B soft teal blue #6E9CA8 (all 8 ran
 ### OWNER LƯỢT 348 (19/11, VERBATIM, ROOT-45 chat) — SLEEVE LENGTH LAW
 "Tức là độ dài tay áo của tất cả các phi tần của tất cả các bậc đều phải tới mắt cá chân."
 → SLEEVE LENGTH LAW: every consort at EVERY rank t1–t8: the wide sleeves hang down to her ANKLES. Builders updated (mk_ranks_v3 SLEEVES t1–t3 + a sleeve sentence for t4–t6, mk_v7 / mk_hqp_hh templates t7–t8). Gens started before this (Lượt 343, 345 runs) still say "to the knees".
+### OWNER LƯỢT 351 (19/11, VERBATIM, ROOT-45 chat) — SLEEVE LENGTH by rank (replaces Lượt 348)
+"Tay áo tới gối cũng được, tức là bậc 1, 2, 3 tay áo tới gối. Rồi 4, 5, 6 là nó tới mắt cá chân chẳng hạn, và bậc hoàng hậu là phải tới dài qua mắt cá chân, tức là chạm đất chẳng hạn. Đúng không? Hiện tại bậc hoàng hậu của mình là đang tới đâu? Cái bậc mà tao khen ok."
+→ SLEEVE LENGTH LAW v2: t1–t3 to the KNEES; t4–t6 to the ANKLES; t8 Hoàng hậu PAST the ankles, touching the floor; t7 HQP (not named) = proposed between: to the ankles, almost touching the floor (confirm). Current HH she praised (Ba Tư / Phù Tang HH vàng, Lượt 341b): sleeves hang to the lower shin / about the ankle, not touching the floor.

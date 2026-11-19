@@ -120,7 +120,7 @@ def build(k,t,hh_orig=False):
     else:
         tc=f"TWO-COLOUR RULE: exactly two colours: the ROYAL YELLOW of image 3 dominant and her own {d['main']} second; gold only as thin accents. Every layer has full-length long sleeves: NO short-sleeved or half-sleeved layer over the long sleeves. "
     if 4<=t<=6: tc="SLEEVES: the wide sleeves of the outer robe are very long and hang all the way down to her ANKLES, one single sleeve layer, flowing softly, never stiff. "+tc
-    if t<=3: tc="SLEEVES: very long, wide, flowing sleeves of thin light silk that fall well past her hands and hang all the way down to her ANKLES, swaying gracefully and trailing elegantly (thướt tha); never short, narrow, cuffed or tight working sleeves like a maid's or palace servant's. "+tc
+    if t<=3: tc="SLEEVES: very long, wide, flowing sleeves of thin light silk that fall well past her hands and hang down to her KNEES, swaying gracefully and trailing elegantly (thướt tha); never short, narrow, cuffed or tight working sleeves like a maid's or palace servant's. "+tc
     i=s.find('Hair:'); i=i if i>=0 else s.index('All flowers'); s=s[:i]+tc+s[i:]
     if pr: assert 'caramel' not in s and 'apricot silk' not in s,(k,t)
     return s
