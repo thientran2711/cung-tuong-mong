@@ -55,28 +55,21 @@ PRS={
        2:"ONE clear touch of her Japanese (Heian) homeland, clearly visible at game size: at the collar and sleeve openings the edges of three thin layered inner robes show in graded shades of wisteria purple with a soft crimson innermost edge, and her very long straight black hair hangs loose down her back.",
        3:"ONE clear touch of her Japanese (Heian) homeland, clearly visible at game size: at the collar and sleeve openings the edges of five thin layered inner robes show in graded shades of wisteria purple with a soft crimson innermost edge, and her very long straight black hair hangs loose down her back."}),
 }
-# Lượt 434 item 2: 8 DIFFERENT items per person, one per rank t1..t8, rising in luxury (item_age MAT per tier = richer materials per rank) and ROTATING per person/age.
-# Before: item_age.pick_kind gave the same KIND at every rank (m07 held a butterfly hair ornament at all 8). Now the kinds are chosen greedily across ranks t1..t8 so no kind repeats within one person at one age.
+# Lượt 434/438 item 2 (owner: "mỗi bậc cầm một món riêng, đã có cái bảng đó rồi" = FIGURE_GATE rule 3f FIXED ITEM LIST PER RANK, 10 items per rank, t1..t8): rank tN takes ONE item VERBATIM from the 3f list of rank tN
+# (build.py L3F[1..6], ITEMS7 = t7, ITEMS = t8; identical to the FIGURE_GATE 3f lists). Nothing invented. The lists are different per rank, so 8 ranks = 8 different items; an item listed at one rank is never used at another.
+# Rotation: index = (person number - 1) + 3 * (age step) mod 10 -> neighbours differ, every age of one person its own item (3f EVERY AGE ITS OWN ITEM). Nữ đế / other states keep their own H lists (age_item untouched for them).
 LADDER_TIERS=["t%d"%i for i in range(1,9)]
 def _install_ladder(g):
-    IA=g["_IA"]; orig=g["age_item"]; cache={}
-    def kinds(c,age):
-        k=(c,age)
-        if k in cache: return cache[k]
-        n=int(re.sub(r"\D","",c) or 0) or sum(map(ord,c)); base=(n-1)+5*IA.AGES.index(age) if age in IA.AGES else n-1
-        used=set(); out={}
-        for j,t in enumerate(LADDER_TIERS):
-            L=IA.cell_kinds(age,t); i=(base+3*j)%len(L)
-            for d in range(len(L)):
-                x=L[(i+d)%len(L)]
-                if x not in used: break
-            used.add(x); out[t]=x
-        cache[k]=out; return out
+    IA=g["_IA"]; orig=g["age_item"]
+    def pick(c,tier,age):
+        n=int(re.sub(r"\D","",c) or 0) or sum(map(ord,c)); ai=IA.AGES.index(age); idx=(n-1+3*ai)%10; N=int(tier[1:])
+        if N<=6: it,kind=g["L3F"][N][idx]; return it,"L:"+kind
+        return (g["ITEMS7"][idx] if N==7 else g["ITEMS"][idx])
     def age_item(c,tier,item,hk):
         if tier not in LADDER_TIERS: return orig(c,tier,item,hk)
         age=g["AGE"]; ages=IA.TIER_AGES[tier]; a=age if age in ages else min(ages,key=lambda x:abs(int(x[1:])-int(age[1:])))
-        x=kinds(c,a)[tier]; return g["_art"](IA.fill(x,tier)),"L:"+g["_HK"].get(x,"two")
-    g["age_item"]=age_item; g["LADDER_KINDS"]=kinds
+        return pick(c,tier,a)
+    g["age_item"]=age_item; g["LADDER_PICK"]=pick
 def _inject(g):
     _install_ladder(g)
     """princess rows live in the store itself (build.py PRINCESS_ROWS, data rows like the maids); here only assert they match this file's slot rows."""
