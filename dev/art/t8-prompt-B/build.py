@@ -782,32 +782,21 @@ def build_low(c,t,v="v0"):
     s+=f" Pose: calm standing pose; she holds {item} in a contrasting colour, not the robe colour, the item held below the chin, the hand really gripping it, the whole face fully visible. Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down. Her hands and body: {low_hand(hk,right)}."
     s+=" Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side. Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe with slippers visible, no train, no cup, nothing covering the face."
     return s+END
-# N3b (owner 19/11 ~00:05Z via ROOT-34, verbatim: "lấy cái prompt của bên Quý Phi y chang như vậy, chỉ đơn giản là thêm một vài chi tiết cần có của ... cái người Bắc Địch này thôi, không có vẻ là một cái prompt mới."): --bdq 1|2 = the APPROVED Quý phi t6 text (build_low c06 t6 v0, prompt B) copied verbatim; ONLY these pieces are swapped: identity/face sentence, the coral colour words -> trầm BD_OPT colour, fur trim band + collar, turquoise/coral strands, belt plaque, no-side-braid. Off by default.
+# F2 (owner 19/11 ~03:05Z, FIGURE_GATE last block item (3), canon overwrite of the N3b build_low-based --bdq): --bdq 1|2 = the OLD APPROVED Quý phi t6 prompt (c06 a18 t6 v0, Magnific VXw4SmmMMU, stored prompt QP_OLD below, copied verbatim from creations_get) with ONLY the Bắc Địch swaps: robe colour (BD_OPT jade/sapphire), a modest fur trim, and her face from her BD identity image. Image numbering = A0 order (1 style, 2 own face, 3 royal swatch) + image 4 = the approved Quý phi picture VXw4SmmMMU (the costume source that the old prompt's "image 1" was). No added emphasis sentences. --bditem is no longer used by --bdq.
+QP_OLD="Copy EXACTLY everything from image 1: hair, headdress, face, costume, pose, proportions, fabric material and stitching. Do NOT change any colour: the robe stays the same coral-terracotta as image 1, same colours everywhere. Replace the embroidered phoenix with peonies and butterflies stitched in the same places (no phoenix). Skin, drawing style and fabric rendering like the style reference. Clean bare forehead, no mark. Exactly ONE held item, no cup. Soft closed-lip faint smile. Full body figure, transparent background."
+BDQ_COL={"1":"jade-green like #4E9C86","2":"sapphire-blue like #4F78B4"}
 BDITEM="10"
 BD_ITEMS={"1":("a turquoise-and-coral bead string","bead"),"2":("a small fur-trimmed leather pouch","pouch"),"3":("a silver-mounted horn-handled whisk-fan of horsehair","fan"),"4":("a carved bone hand mirror with a turquoise rim","mirror"),"5":("a small felt-bound book","book"),"6":("a painted leather folding fan","fan"),"7":("a branch of dried steppe flowers tied with red cord","branch"),"8":("an embroidered silk bag with coral beads","pouch"),"9":("a small ornamented silver whistle-flute on a cord","flute"),"10":("a white-jade ruyi with a turquoise bead","ruyi")}
 HAND_BD={"bead":"the bead string draped over the fingers of one hand at chest height below the chin, the other hand resting lightly on her sash","pouch":"the pouch held in one hand at waist height, the other hand resting lightly on its cord","fan":"the fan held up in one hand at chest height below the chin, the other hand resting lightly on her sash","mirror":"the hand mirror held in one hand at chest height with its back turned outward, the other hand touching a hairpin","book":"the book held open in both hands at waist height","branch":"the branch held up in one hand at chest height below the chin, the other hand touching a blossom","flute":"the flute held in both hands at chest height below the chin","ruyi":"the ruyi held upright in one hand at chest height below the chin, the other hand resting lightly on her sash"}
 def build_bdq(o="1"):
-    global OLDITEM; _oi=OLDITEM; OLDITEM=True; t=build_low("c06",6,"v0"); OLDITEM=_oi   # N3b output kept: its own --bditem list (FIGURE_GATE H BD), not the age table
-    c,th,cape,rend,sig=BD_OPT[o]
-    pal,face=DATA["c06"]; bpal,bface=PDATA["bd"]
+    t=QP_OLD
     def sw(a,b):
         nonlocal t
         assert t.count(a)==1,a; t=t.replace(a,b)
-    sw("An imperial consort. Her face: "+face,"A foreign princess who became an imperial consort ("+PTALL["bd"]+"). Her face: "+bface)
-    sw("hairstyle colour and signature colour family;","hairstyle colour;")
-    sw("SATURATED coral red silk",c)
-    sw("in coral red and gold thread along the borders","in "+th+" with a few stitches of ivory and gold along the borders")
-    sw("an embroidered coral red pearl-edged cape/stole over the shoulders",cape+" over the shoulders, with "+BD_FURSLEEVE)
-    sw("many gold tassels;","many gold tassels and a few soft turquoise and pale coral bead strands in the hair, and a small metal plaque on the belt as the only marks of her homeland;")
-    i=t.index(" COLOUR RULE: robe, skirt, sleeves"); j=t.index(" COLOUR RULE: all colours"); k=t.index(" Hair: ")
-    t=t[:i]+f" COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed; {sig} is the main colour of the robe, sleeves, sleeve linings and cape, rendered as {rend}; the fur is ivory-white; gold as thin accents on the borders."+t[k:]
-    sw(" Hair: her own hairstyle decorated"," Hair: her own hairstyle, NO braids and NO side braid, decorated")
-    # owner 19/11 ~00:45-00:50Z (FIGURE_GATE 3d2 + 3f): FRONTAL ONLY; item from the BD princess list (H), never a t6 consort item. --bditem N picks the list entry (default 10).
-    item,hk=BD_ITEMS[BDITEM]
-    sw("she holds a round fan with a carved jade-and-gold handle and pearls in a contrasting colour","she holds "+item+" in a contrasting colour")
-    sw("the round fan held up in one hand at chest height, gently turned to show its painting, the other hand lightly touching its tassel, body and face frontal, standing squarely facing the viewer, no turn",HAND_BD[hk]+", body facing the viewer squarely (frontal), shoulders level, not turned")
-    sw("body and face frontal, standing squarely facing the viewer, no turn","frontal view")
-    return t
+    sw("Copy EXACTLY everything from image 1: hair, headdress, face, costume,","Copy EXACTLY everything from image 4: hair, headdress, costume,")
+    sw("fabric material and stitching.","fabric material and stitching; her face from image 2 (face only).")
+    sw("Do NOT change any colour: the robe stays the same coral-terracotta as image 1, same colours everywhere.","Change ONLY the robe colour: the coral-terracotta of image 4 becomes "+BDQ_COL[o]+", same other colours everywhere. Add a modest soft ivory fur trim, only a narrow edge on the collar and the sleeve openings.")
+    return t+END
 # ---------- STATES (SAMPLES ONLY, owner 18/11 ~21:00Z real; brief dev/handover/briefs/states-sample.md): --state nude|thaihau|kc|ngheo|nc1|nc6|bd1|bd6 ----------
 # Same sentence structure as the 8 ranks (PRE, identity sentence, AGE_TXT, outfit, COLOUR RULE, embroidery+drape, item pose, closing hairpin rule, END). Existing outputs untouched: all code below is only reached with --state.
 # PDATA (separate from DATA on purpose: tests iterate DATA) = the two approved foreign-princess sample faces (img/_review/princess-sample/{namchieu,bacdich}_a18_s1.png): (signature colour words, face words)
@@ -1176,6 +1165,8 @@ import os
 LEDGER=os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","gen_ledger.jsonl")
 REF_STYLE={"name":"style2_portraits_c01_c12 (owner-approved square portraits c01 pink + c12 green, redrawn in m09 style; FIGURE_GATE 19/11 ~02:55Z) = STYLE only","magnific_id":"6AbGv6EiJO","url":"https://ctm-img.victoria-tntt.workers.dev/img/_review/style-refs/style2_portraits_c01_c12.png"}
 REF_SWATCH={"name":"royal-yellow swatch = colour only","magnific_id":"TdwDfOyVNR (OLD account: re-upload the CDN file on the current one)","url":"https://ctm-img.victoria-tntt.workers.dev/img/_review/swatch/royal_yellow_C2.png"}
+REF_BDID={"name":"Bắc Địch princess identity (img/_review/princess-sample/bacdich_a18_s1.png) = FACE only","magnific_id":"BhNIDfhoQR"}
+REF_QP={"name":"approved old Quý phi c06 a18 t6 v0 (states-r11/c06_a18_t6_v0_approved.png) = costume, hair, headdress, pose source","magnific_id":"VXw4SmmMMU"}
 def _reorder_refs(o):
     o=o.replace("The second reference image is style only","The FIRST_REF_TMP reference image is style only")
     o=o.replace("image 1 (her first reference)","image 2 (her second reference)")
@@ -1186,7 +1177,9 @@ def gen_refs(argv,prompt):
     a=[x for x in argv if not x.startswith("--")]; age=argv[argv.index("--age")+1] if "--age" in argv else "a18"
     own={"name":"own live t1 of %s at %s (a65 = her a65 t1 / live picture) = FACE only; re-make states: her live tier+age picture"%(a[0] if a else "?",age)}
     r=[{"image":1,**own}] if "--nostyle" in argv else [{"image":1,**REF_STYLE},{"image":2,**own}]   # ROOT-38: owner order 1 style, 2 own, 3 swatch
+    if "--bdq" in argv: r[1]={"image":2,**REF_BDID}   # F2: BD princess identity = face only
     if "Image 3 is only a colour reference" in prompt: r.append({"image":3,**REF_SWATCH})
+    if "--bdq" in argv: r.append({"image":4,**REF_QP})   # F2: costume source = the approved old Quý phi picture
     return r
 def _run_cmd(argv):
     import subprocess
@@ -1268,7 +1261,7 @@ if __name__=="__main__":
     # N2 r10b (ROOT-33): bd6 keeps swatch as image 3 but its robe is teal with no royal-yellow part (FIGURE_GATE C8 has no yellow rule for Bắc Địch Quý phi) -> no image-3 sentence for bd6
     # W107 (ROOT-36, FIGURE_GATE A0 REFERENCES: ROYAL ranks Quý phi t6 and up = 3 images, image 3 = royal-yellow swatch): t6 (--low 6), t7 (--t7), t8 (default) get the SAME image-3 sentence, copied verbatim (elder variant at a51/a65 as for Nữ đế); --bdq (Bắc Địch, no royal yellow) excluded
     _ROYRANK=(not STATE and TRIEUN is None and not BDQ and (LOWN==6 if "--low" in sys.argv else True))
-    if (TRIEUN is not None and TRIEUN>=6) or STATE=="nude" or _ROYRANK:
+    if (TRIEUN is not None and TRIEUN>=6) or STATE=="nude" or _ROYRANK or BDQ:   # F2: --bdq = Quý phi t6 = royal -> same A0 image-3 sentence, verbatim
         _r=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; the royal yellow in the robe is exactly that colour."
         assert _o.count(END)==1 and _o.endswith(END),"END not at end"
         if (STATE=="nude" or _ROYRANK) and AGE in ("a51","a65"): _r=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; her yellow is that royal yellow in its deeper, subdued antique-gold elder shade as the colour rule says."   # N4 1c
