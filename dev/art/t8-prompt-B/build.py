@@ -227,7 +227,7 @@ def look_groups():
     if _LG is None:
         import json as _js; _LG={}
         for k,v in _js.load(open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)),"..","face-common","OWNER_GROUPS_L686.json"),encoding="utf-8")).items():
-            _LG.setdefault(v,[]).append(k)
+            if v!="Kho": _LG.setdefault(v,[]).append(k)   # "Kho" (owner Lượt 697, KHO_L697.md) = people stored away, not a face group
         _LG={k:sorted(v) for k,v in _LG.items()}
     return _LG
 def group_slot(c):
