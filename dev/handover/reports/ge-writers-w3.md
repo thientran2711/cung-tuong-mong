@@ -46,5 +46,12 @@ Before → after (self-scan while writing): 7 facts dropped because they hold in
 - ge-guard **6/6** (25 live branches: pilots + W1 + W3, incl. the no-name-twice line).
 - Measure / ge-engine / one-core / build_site / quickcheck: see below (filled as runs finish).
 
-## Measure
-(running: `MODES=kind,cruel node dev/measure/ge-measure.js - 6 3 <out> <11 roads> sens`, ~10 min per life, 3 in parallel → split into runs of ≤2 h)
+## Measure (MODES=kind,cruel, 6 kind + 6 cruel lives per road, `sens` play; data 20059020 for ch_ho/ch_bi/thd/cnv, aca2c46b = same data for ch_co/ch_benh — the rebalance did not touch them)
+Rebalance round (family fix, commit 20059020): run 1 showed cruel lives aimed at ch_ho_1 / ch_bi_1 (Chuỗi +20 thiện / −5 ác) ending thiện (ch_ho cruel .83, ch_bi .75). Rule applied to all 44: thiện names in a Chuỗi ≤ 2 × ác names, fitting ác names added — 14 endings changed (ch_ho_1 +20/−4 → +12/−6, ch_bi_1 +20/−5 → +14/−7, thd_tho_3, thd_sach_3, thd_tro_1, thd_hoc_1/3/4, cnv_chu_2/4, cnv_ban_1, cnv_ma_1/3/4). After it: ch_ho cruel 1.00, ch_bi .83.
+| road | kind | cruel | open .8 | open .11 [1,2.6] | kind→thiện ≥.70 | cruel→ác ≥.70 | won |
+|---|---|---|---|---|---|---|---|
+| ch_co | 6 | 6 | 3.92 | 2.50 IN | 1.00 IN | 1.00 IN | 9/12 |
+| ch_benh | 6 | 6 | 2.92 | 2.00 IN | 1.00 IN | 1.00 IN | 5/12 |
+| ch_ho | 6 | 6 | 2.50 | 1.92 IN | 1.00 IN | 1.00 IN | 7/12 |
+| ch_bi | 6 | 6 | 3.67 | 2.33 IN | 1.00 IN | 0.83 IN | 8/12 |
+(table grows as runs finish; ~4 min per life, 2–3 pages; the container ran out of memory once — chromium pages grow to ~6 GB over a few lives)
