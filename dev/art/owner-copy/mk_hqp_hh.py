@@ -6,7 +6,7 @@ B='/home/user/cung-tuong-mong/dev/art/owner-copy/'
 M19=dict(MAIN='caramel apricot',HEX1='#DFBBA1',SEC='soft teal blue',HEX2='#6E9CA8',AGE='about 22')
 ITEM19={7:'a closed parasol of gold silk inlaid with kingfisher feathers, handle of gold filigree set with gems, with gem tassels',
         8:'a closed parasol of imperial silk embroidered with phoenixes, handle of gold carved with phoenixes and set with pearls, with pearl phoenix tassels'}
-FL2='FABRIC: the robe stays a rich, heavy gold-embroidered BROCADE (never turned into plain silk); its grace comes from the cut and the drape: long soft vertical folds, the very wide sleeves and the hem swaying and pooling softly, supple and elegant, never stiff, boxy or armour-like; NO sheer gauze, voile or transparent outer layer over the robe, nothing wrapped around it. '
+FL2='FABRIC: thick gold-embroidered brocade with a graceful, flowing drape. '  # owner Lượt 364: prompt B
 def templ(t,src):
     s=open(B+src).read()
     fa=s.index('Her face: '); fe=s.index('From the identity reference')
