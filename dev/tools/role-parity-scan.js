@@ -76,7 +76,18 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
       the drawn life had met (hh / up cx3:facFound were N-ONLY by draw only after 98f9f0f1 shifted the dice) */
    if(a===S)try{const K=typeof k61S==="function"&&k61S();if(K){const K0=Object.assign({},K);UNDO.push(()=>{for(const z in K)delete K[z];Object.assign(K,K0)});
     for(const t of others(a)){const kk=t&&t!==S&&kOf61(t);if(kk&&(+K[kk]||0)<3)K[kk]=3}}}catch(e){}}],
-  ["proof",a=>{for(const t of others(a)){try{if(typeof evA==="function")evA(a,t,3,"scan");else t.ev=3}catch(e){}}}],
+  /* npc-purpose G1 #14: the doer is WELL REGARDED (everyone else's thiện cảm toward her = 60): the acts that need another's goodwill — «Xin Hoàng hậu
+     giáng» (aff(Hoàng hậu, doer) ≥ BAL.m30.xinhhAff), «Nhờ ơn người quen rút thẻ bài» (jecon econFavor: someone with rel ≥ BAL.favorRel) — are judged by
+     their rule, not by how the seeded world's regard fell (npc-purpose moves regard by real causes: rumours, remarks). Same for both doers; undone after. */
+  ["liked",a=>{/* the raw j9 fields (not affAdd: its gameplay wrappers — trust trait, mood, feel — scale a gain differently when the doer is S) */
+    const setA=(t,v)=>{if(t===S){S.rl[a.id]=v}else if(a===S){t.rel=v}else{t.rl=t.rl||{};t.rl[a.id]=v}};
+    for(const t of others(a)){try{const b=t===S?S.rl[a.id]:a===S?t.rel:(t.rl||{})[a.id];UNDO.push(()=>setA(t,b));setA(t,60)}catch(e){}}}],
+  /* G1 #14 (same family as role-parity-drift-2's social-world acquaintance): the proof is held on people she KNOWS (a stranger's card shows no
+     Chứng cứ / Xử tội). Who she knows at the start follows the seeded house draw, so the one target with real deeds (deedCap) could be a stranger and
+     her Chứng cứ / Xử tội rows fell out by probe only (hh:judge N-ONLY): in the proof world she knows every target too (k61S «Quen biết» 3), undone after */
+  ["proof",a=>{if(a===S)try{const K=typeof k61S==="function"&&k61S();if(K){const K0=Object.assign({},K);UNDO.push(()=>{for(const z in K)delete K[z];Object.assign(K,K0)});
+    for(const t of others(a)){const kk=t&&t!==S&&kOf61(t);if(kk&&(+K[kk]||0)<3)K[kk]=3}}}catch(e){}
+   for(const t of others(a)){try{if(typeof evA==="function")evA(a,t,3,"scan");else t.ev=3}catch(e){}}}],
   ["body",a=>{a.preg=2;a.hidden=true;a.fake=0;a.pregWk=wk();try{const k={name:"Tiểu Bảo",sex:"m",age:5,hp:30,tal:20,fond:20,alive:true};a.kids=(a.kids||[]).concat([k])}catch(e){}}],
   ["chest",a=>{a.inv=a.inv||[];try{for(const k of Object.keys(IT).slice(0,6))a.inv.push({k})}catch(e){}}],
   ["rival-down",a=>{for(const t of others(a))if(t!==S){t.confined=2}}],
@@ -117,6 +128,7 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
  const MST=a=>a===S?srvM():ownerOf(a);const AF=a=>a===S?(S.srv.af=S.srv.af||{}):(a.af=a.af||{});
  const ME=(a,x)=>{if(a===S&&!S.srv.met.includes(x.sid))S.srv.met.push(x.sid)};
  const SV=a=>a===S?S.srv:a;
+ const mHome=a=>{const m=MST(a);if(!m)return;const h=palaceOf(m);S.where=S.where||{};S.where[m.id]=h;const e=S.roster&&S.roster.P&&S.roster.P["v"+m.id];if(e)for(const x of e)if(Array.isArray(x))x[0]=h};
  const MVAR=[
   ["m-peers",a=>{const m=MST(a);if(!m)return;const all=allServ().filter(x=>x!==a&&!x.out);const F=AF(a);
     const fr=all.find(x=>ownerOf(x)&&ownerOf(x)!==m);if(fr){F[fr.sid]=SRVA.ask.af+10;ME(a,fr)}
@@ -124,10 +136,15 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
     const t=liveRivals(true).find(v=>v!==m&&!v.out&&(v.staff||[]).some(x=>x&&x.role==="maid"&&x!==a&&x!==fr));
     if(t){oanAdd(m,t,60);oanAdd(t,m,60);const z=t.staff.find(x=>x&&x.role==="maid"&&x!==a&&x!==fr);F[z.sid]=-40;ME(a,z)}}],
   ["m-away",a=>{const m=MST(a);if(!m)return;S.where=S.where||{};S.where[m.id]="vuon";const e=S.roster&&S.roster.P&&S.roster.P["v"+m.id];if(e)for(const x of e)if(Array.isArray(x))x[0]="vuon"}],
+  /* npc-purpose G1 #14: the master AT HOME (the twin of m-away). NPCs now walk by purpose (jagwhy), so in the seeded start world every probed
+     NPC master may be out — the srvTalk "mis" acts (Dâng trà, Đấm lưng, Xin ban thưởng, Bẩm tin, Xin tiến cử: jagstaff asOpts home = asMisHome)
+     were then P-ONLY by probe only. Same mutation for her master (srvM) and an NPC maid's master. */
+  ["m-home",a=>mHome(a)],
   ["m-senior",a=>{SV(a).rk=SRVA.books.rk}],
   ["m-worn",a=>{a.suc=30;a.bac=200}],
   ["m-plain",a=>{a.sac=10;a.tai=10;a.duc=10}],
-  ["m-secret",a=>{const m=MST(a);if(!m)return;const v=liveRivals(true).find(x=>x!==m&&!x.out&&!x.queen);const X=SV(a);X.sec=Math.max(2,SRVA.accuse.sec||0);X.intel=v?[v.id]:[];if(v){oanAdd(v,m,60)}}],
+  ["m-secret",a=>{const m=MST(a);if(!m)return;const v=liveRivals(true).find(x=>x!==m&&!x.out&&!x.queen);const X=SV(a);X.sec=Math.max(2,SRVA.accuse.sec||0);X.intel=v?[v.id]:[];if(v){oanAdd(v,m,60)}
+    /* G1 #14: «Bẩm tin dò được» is told to the master face to face (jagstaff asOpts home): the news world has her at home, for both doers */mHome(a)}],
   ["m-emp",a=>{S.where=S.where||{};S.where.emp="vuon";const e=S.roster&&S.roster.P&&S.roster.P.emp;if(e)for(const x of e)if(Array.isArray(x))x[0]="vuon"}],
   ["m-lonely",a=>{if(a===S)S.srv.af={};else a.af={}}],
   /* role-parity-drift-2: a sour servant (her lòng with her master under BAL.eit.pil.loyal: S.tin for the player maid, loyal for an NPC maid) — the state

@@ -218,12 +218,18 @@ function wkNpcMake(v,a){const ks=wkKindsOf(a);if(!ks.length)return;const k=pick(
    no maker given (an old caller) = the matching-level board. Off (agOn false) = the old flat R(11). */
 function wkNpcRaw(v,k){if(!(typeof mg2On==="function"&&mg2On()))return R(11);const g=(typeof WKGAME!=="undefined"&&WKGAME[k])||k||"banh";
  return mgNpcRaw(g,v,v?{occ:"hoc"}:{occ:"hoc",d:0})}
-function wkNpcUse(v){if(!roll(40))return;const i=v.inv.findIndex(e=>e.wk&&!e.h);if(i<0)return;const w=v.inv[i].wk;
- if(w.kind==="mon"&&v.malice>70&&roll(15)&&v.inv.some(e=>e.k==="hacdinh"&&!e.h)){const t=pick(others(v).filter(t=>t.alive&&!t.out&&(t===S?v.ghen>=50:hostility(v,t)>=50)));if(t){const r=wkPoison(v,t,i);if(t===S&&r)log(r);return}}
- let r=null;if(v.sung<70&&wkEval(v,w,"emp").ok&&roll(60))r="emp";else if(!S.thDead&&roll(50)&&wkEval(v,w,"th").ok)r="th";
- if(!r){const fr=others(v).filter(t=>t!==v&&(t===S?v.rel>5:rel(v,t)>0)&&wkEval(v,w,t).ok);if(fr.length)r=pick(fr)}
- if(!r&&w.ti<=1&&!WK[w.kind].per&&roll(30)){wkSell(v,i);return}
- if(r){const t=wkGive(v,r,i);if(r===S&&t)log(t)}}
+function wkNpcUse(v){const i=v.inv.findIndex(e=>e.wk&&!e.h);if(i<0)return;const w=v.inv[i].wk;if(!npcWhy("wkUse",{p:v,w}))return;/* npc-purpose G2c: she uses her work for her own aim (favour, a friend, need of bạc, a grudge) */
+ const o=npwPick(wkUseOpts(v,w),x=>x.s);if(!o)return;
+ if(o.k==="poison"){if(roll(BAL.ag.why.g2wk.poisonP)){const r=wkPoison(v,o.t,i);if(o.t===S&&r)log(r)}return}
+ if(o.k==="sell"){wkSell(v,i);return}
+ const r=o.t;if(r){const t=wkGive(v,r,i);if(r===S&&t)log(t)}}
+function wkGrudge(v,t){return t===S?Math.max(v.ghen||0,hostility(v,S)):hostility(v,t)}
+function wkUseOpts(v,w){const B=BAL.ag.why.g2wk,L=[];
+ if(w.kind==="mon"&&v.malice>B.malice&&v.inv.some(e=>e.k==="hacdinh"&&!e.h)){const t=npwPick(others(v).filter(t=>t.alive&&!t.out),t=>wkGrudge(v,t)-B.host);if(t)L.push({k:"poison",t,s:wkGrudge(v,t)})}
+ if(v.sung<B.sungHi&&wkEval(v,w,"emp").ok)L.push({k:"emp",t:"emp",s:B.emp+(B.sungHi-v.sung)});
+ if(!S.thDead&&(v.th||0)<B.thWant&&wkEval(v,w,"th").ok)L.push({k:"th",t:"th",s:B.th+(B.thWant-(v.th||0))/2});
+ const f=npwPick(others(v).filter(t=>t!==v&&(t===S?v.rel>B.relMe:rel(v,t)>0)&&wkEval(v,w,t).ok),t=>1+(t===S?v.rel:rel(v,t)));if(f)L.push({k:"gift",t:f,s:B.gift+(f===S?v.rel:rel(v,f))});
+ if(w.ti<=1&&!WK[w.kind].per&&(v.bac||0)<B.poor)L.push({k:"sell",s:B.sell+B.poor-(v.bac||0)});return L}
 (function(){const m0=npcMonthly;npcMonthly=function(v){const b=v&&v.arts?Object.assign({},v.arts):null,bp=v&&v.artp?Object.assign({},v.artp):null;const ev=m0.apply(this,arguments);
  try{if(v&&v.alive&&!v.out){if(!v.inv)v.inv=[];if(b&&bp)for(const a in v.arts)if(v.arts[a]!==b[a]||(v.artp||{})[a]!==bp[a]){if(v.inv.filter(e=>e.wk).length<4)wkNpcMake(v,a);break}wkNpcUse(v)}}catch(x){}return ev}})();
 /* ---- poison in a dish: a scheme with the same odds, evidence trail and Đức loss as Hạ độc (ACT.poison); needs Hạc đỉnh hồng in the chest ---- */

@@ -72,7 +72,7 @@ EV6("flowerBloom","sea",{a:[],pp:()=>({}),w:C=>(C.sea==="Xuân"||C.sea==="Thu")?
  o:X=>[c6("Mời Hoàng thượng thưởng hoa",{p:od(BAL.odb.j68e.odP_12+S.sung/2+mm()),w:{sung:4},l:{danh:-1},lt:[R6("ngài bận, cả cung biết ngươi bị từ chối")]}),
   c6("Ngắt hoa dâng Thái hậu",{c:{suc:-2},w:{th:4},k:[R6("vườn trơ trụi, cung nhân tiếc")]}),
   c6("Mời các phi tần ngắm hoa",{c:{bac:-15},w:{danh:2},k:[R6(`người ghen thêm: phi tần ghen +${ghenN(BAL.ghen.flowerParty)}`)],ok:()=>{ghenAll(BAL.ghen.flowerParty,"ngươi mở tiệc thưởng hoa");return "Buổi thưởng hoa vui vẻ, ai cũng khen cung ngươi."}})]});
-EV6("servGamble","serv",{a:["sv"],pp:()=>{const a=sv6(s=>netIs(s,"greed")||R(3)===0);return a==null?null:{a0:a}},w:C=>1,
+EV6("servGamble","serv",{a:["sv"],pp:()=>{const g=npwPick((S.staff||[]).filter(s=>s&&s.sid!=null),s=>(netIs(s,"greed")?BAL.ag.why.e68.greed:0)+Math.max(0,BAL.loy.bad-(s.loyal||50)));return g?{a0:g.sid}:null},w:C=>1,
  v:["{A} bị bắt quả tang đánh bạc với đám thái giám gác cổng, thua sạch tiền tháng.","Người ta đồn {A} mang đồ cũ của cung ngươi ra ngoài bán lấy tiền tiêu.","{A} nợ tiền một thái giám bên Ngự thiện phòng, hắn đến tận cửa đòi.","{A} lén nhận bạc của người lạ để chuyển thư ra ngoài cung."],
  o:X=>[c6("Trả nợ, răn đe",{c:{bac:-15},r:[[X.A,10]],k:[R6("dễ quen thói")]}),
   c6("Phạt theo phép cung",{w:{danh:1},r:[[X.A,-12]]}),
