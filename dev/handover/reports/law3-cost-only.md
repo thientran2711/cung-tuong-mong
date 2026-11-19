@@ -54,3 +54,6 @@ Shot ksp (Fold 755x1000, clean): «Tắm gội chờ giá» = Nắm chắc meter
 
 ## REVIEW r1 re-merge 2 (live main 7fb7c104, E ge-writers-w2) — READY FF 6abe9a6f68aa54689b83dc7dcbb4afeb732dd138
 review/law3-cost-only-r1 = prior + merge origin/main 7fb7c104 (only index.html/sw.js conflicted, rebuilt). Diff vs main unchanged (j8.js:303 + opt-card-scan.js:25 + index/sw). one-core PASS · coop-e2e 68/68 · quickcheck PASS (buoi 1118/1067 ms). No shot rerun (j8/kit output unchanged by the merge).
+
+## REVIEW r1 re-merge 3 (live main 2c5dd554) — READY FF 0da8d4164fe514930cf98cc0e466f100014a8d80
+review/law3-cost-only-r1 = prior + merge origin/main 2c5dd554 (only index.html/sw.js conflicted, rebuilt). Diff vs main unchanged (j8.js:303 + opt-card-scan.js:25 + index/sw). one-core PASS · coop-e2e 68/68 · quickcheck PASS.
