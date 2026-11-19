@@ -26,3 +26,12 @@ Chưa có người. Câu mặt: TYPES_v4.md / make_nf3.py TYPES_B["Kiêu kỳ"] 
 
 ## Lạnh lùng (MỚI — owner Lượt 643, giữ) — 0 người
 Chưa có người. Câu mặt: TYPES_v4.md / make_nf3.py TYPES["Lạnh lùng"] (mẫu s02).
+
+## Quyến rũ (MỚI — owner Lượt 647/657, dùng) — 0 người
+Chưa có người. Câu mặt: TYPES_v4.md / make_nf3.py TYPES_C["Quyến rũ"] (mẫu s03 v4c: bỏ ửng hồng mí, môi "soft rose tint", Lượt 648).
+
+## Trạng thái kiểu mặt (owner Lượt 657)
+- DÙNG (nhóm mới): Kiêu kỳ, Lạnh lùng, Quyến rũ.
+- KHÔNG DÙNG: Anh khí (s04), Thư hương (s05), Yêu kiều (s06 — Thư hương và Yêu kiều quá giống nhau). Câu mặt + ảnh mẫu giữ làm lịch sử (TYPES_v4.md, make_nf3.py), không vẽ thêm.
+- CHƯA QUYẾT: nhóm cũ Tươi tắn, Dịu dàng, Trong trẻo, Đoan trang (không đánh "BỎ").
+- GIỮ: Sắc sảo, Tinh nghịch.
