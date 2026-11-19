@@ -16,10 +16,10 @@ P={
        7:"one hand gathering her wide sleeve, a tall slim gold-and-enamel rosewater flask in the other hand at chest height, with stately grace",
        8:"a jewelled gold seal box held in both hands before her waist"}),
 'cl':dict(country='Cao Ly (a Korean-style foreign kingdom)',main='deep rose',hex1='#C9708A',sec='jade green',hex2='#79A98F',
- touch="ONE clear touch of her Korean homeland, clearly visible at game size: a long ornate norigae tassel ornament (a jade and coral knot with a long silk tassel) hanging from her sash.",
+ touch="ONE clear touch of her Korean homeland, clearly visible at game size: a long ornate norigae tassel ornament (a jade knot with a long deep-rose silk tassel) hanging from her sash.",
  nat={1:"a short jade-green silk jacket with long deep-rose ribbons tied at the chest, a full high-waisted floor-length skirt of soft deep-rose silk billowing like a bell, gold-stamped flower borders, a small norigae tassel ornament hanging from the ribbon",
-      2:"a short jade-green silk jacket with long deep-rose ribbons tied at the chest and gold-stamped flower patterns, cuffs striped in several colours, a very full high-waisted floor-length skirt of soft deep-rose silk billowing like a bell with wide gold-stamped borders, a long ornate norigae tassel ornament hanging from the ribbon",
-      3:"a ceremonial jade-green silk outer robe with wide sleeves striped at the cuffs in several colours, worn over a very full high-waisted deep-rose silk skirt billowing like a bell, both covered with rich gold-stamped flower and cloud patterns, a gold-embroidered round badge on the chest, a triple norigae tassel ornament of jade, coral and gold hanging from the ribbon"},
+      2:"a short jade-green silk jacket with long deep-rose ribbons tied at the chest and gold-stamped flower patterns, deep-rose cuffs, a very full high-waisted floor-length skirt of soft deep-rose silk billowing like a bell with wide gold-stamped borders, a long ornate norigae tassel ornament hanging from the ribbon",
+      3:"a ceremonial jade-green silk outer robe with wide sleeves with deep-rose cuffs, worn over a very full high-waisted deep-rose silk skirt billowing like a bell, both covered with rich gold-stamped flower and cloud patterns, a gold-embroidered round badge on the chest, a triple norigae tassel ornament of jade and deep-rose silk hanging from the ribbon"},
  hair={1:"her glossy pure BLACK hair (never brown) parted in the middle and smoothed into a low braided bun at the nape, a long gold binyeo hairpin lying HORIZONTALLY through the bun",2:"her glossy pure BLACK hair (never brown) parted in the middle and smoothed into a low braided bun at the nape, a long gold binyeo hairpin lying HORIZONTALLY through the bun, a small jewelled ornament beside it",3:"her glossy pure BLACK hair (never brown) parted in the middle and smoothed into a fuller low bun at the nape, a long ornate gold binyeo with jewelled ends lying HORIZONTALLY through the bun, small gold flower pins around it"},
  pose={1:"a branch of white plum blossoms held in front of her with both hands",
        2:"a round silk fan embroidered with two cranes held in one hand at her waist",
@@ -29,11 +29,11 @@ P={
        6:"one hand touching her norigae tassel, a white crane-feather fan held in the other hand",
        7:"a carved white jade pendant on a red silk cord held up at chest height in one hand, the wide sleeves falling in soft folds, with stately grace",
        8:"an imperial round fan embroidered with a phoenix, on a carved gold-and-jade handle with pearl tassels, held in one hand at chest height below the chin, the other hand resting lightly on her sash, with majestic grace"}),
-'pt':dict(country='Phù Tang (a Japanese-style foreign kingdom)',main='wisteria purple',hex1='#9C88BC',sec='pale lavender',hex2='#D3C8E2',
- touch="ONE clear touch of her Japanese (Heian) homeland, clearly visible at game size: at the collar and sleeve openings the edges of several thin layered inner robes show in graded shades of lilac, pale lavender and white.",
- nat={1:"several thin silk robes layered one over another, their edges showing at the collar, the sleeve openings and the hem in graded shades of wisteria lilac, pale lavender and white, the outer robe of soft wisteria-purple silk woven with small white wisteria patterns, wide long open sleeves, long pleated pale-crimson trousers-skirt reaching the floor",
-      2:"more silk robes layered one over another, their edges showing at the collar, the sleeve openings and the hem in graded shades of wisteria lilac, pale lavender and white, the outer robe of wisteria-purple silk woven with white wisteria and paulownia patterns, very wide long open sleeves, a short trailing pleated over-apron of white silk at the back, long pleated pale-crimson trousers-skirt reaching the floor",
-      3:"a full formal court ensemble of many silk robes layered one over another, their edges showing at the collar, the sleeve openings and the hem in graded shades of wisteria lilac, pale lavender and white, the outer robe of rich wisteria-purple silk brocade woven with gold and white wisteria and paulownia patterns, a short jacket-robe of deep purple brocade over it, very wide long open sleeves, a long pleated white train-apron with painted flowers falling behind, long pleated crimson trousers-skirt reaching the floor"},
+'pt':dict(country='Phù Tang (a Japanese-style foreign kingdom)',main='wisteria purple',hex1='#9C88BC',sec='soft crimson',hex2='#B8556A',
+ touch="ONE clear touch of her Japanese (Heian) homeland, clearly visible at game size: at the collar and sleeve openings the edges of several thin layered inner robes show in graded shades of wisteria purple with a soft crimson innermost edge.",
+ nat={1:"several thin silk robes layered one over another, their edges showing at the collar, the sleeve openings and the hem in graded shades of wisteria purple, the innermost edge soft crimson, the outer robe of soft wisteria-purple silk woven with small white wisteria patterns, wide long open sleeves, long pleated soft crimson trousers-skirt reaching the floor",
+      2:"more silk robes layered one over another, their edges showing at the collar, the sleeve openings and the hem in graded shades of wisteria purple, the innermost edge soft crimson, the outer robe of wisteria-purple silk woven with white wisteria and paulownia patterns, very wide long open sleeves, a short trailing pleated over-apron of soft crimson silk at the back, long pleated soft crimson trousers-skirt reaching the floor",
+      3:"a full formal court ensemble of many silk robes layered one over another, their edges showing at the collar, the sleeve openings and the hem in graded shades of wisteria purple, the innermost edge soft crimson, the outer robe of rich wisteria-purple silk brocade woven with gold and white wisteria and paulownia patterns, very wide long open sleeves, a long pleated train-apron of soft crimson silk with painted white flowers falling behind, long pleated soft crimson trousers-skirt reaching the floor"},
  hair={1:"her glossy pure BLACK hair (never brown), very long and straight, falling loose down her back to the knees, tied loosely low with a thin white paper ribbon, a small gold hair ornament at the crown",2:"her glossy pure BLACK hair (never brown), very long and straight, falling loose down her back to the knees, tied loosely low with a red-and-white silk cord, a gold comb ornament at the crown",3:"her glossy pure BLACK hair (never brown), very long and straight, falling loose down her back to the knees, tied low with a red silk cord, a gold crown-like hair ornament with small dangles at the crown"},
  pose={1:"a long drooping branch of purple wisteria held in one hand",
        2:"a folding fan of thin painted wooden slats with long coloured silk cords, held half-open in both hands at her chest",
@@ -44,6 +44,7 @@ P={
        7:"a small gilded birdcage with a white bird held in one hand at chest height, the wide sleeves falling in soft folds, with stately grace",
        8:"a gold-and-jade ruyi sceptre held in both hands before her waist"}),
 }
+LEGS={1:'standing with her feet close together, one foot a little forward, toes peeking from under the hem',2:'weight on her back foot, the front foot turned slightly the same way as her shoulders, toes peeking under the hem',3:'her feet pointing the same way as her hips, one knee softly bent so the skirt swings',4:'one foot stepping forward under the swinging hem, the back heel lifting, a natural easy walking stride',5:'her feet pointing the same way as her hips, one foot slightly in front, toes peeking under the hem',6:'weight on one foot, the other foot resting slightly to the side, toes peeking under the hem',7:'one foot slightly forward as if about to step, the hem barely lifted',8:'feet together, toes peeking under the hem, perfectly balanced and still'}
 RANK={1:'Đáp ứng',2:'Thường tại',3:'Quý nhân'}
 EYE="Eyes soft, warm and round-almond, never slanted or upturned, never teary."
 for k,d in P.items():
@@ -73,6 +74,20 @@ for k,d in P.items():
     s=s.replace('#DFBBA1',d['hex1']).replace('caramel apricot',d['main'])
     if k!='bt': pass
     if d['main']=='deep rose' or True: s=s.replace('NOT green',f'NOT {"green" if k!="cl" else "orange"}')
+    GL="Her legs and feet follow the pose naturally: weight resting on one leg, the other knee softly bent, feet natural under the skirt hem, never both feet splayed outward, never stiff straight legs; the lower body matches the movement of the upper body."
+    assert GL in s; s=s.replace(GL,"Her LEGS and FEET for this pose: "+LEGS[t]+"; never both feet splayed outward, never stiff straight legs.")
+    if t>=6:
+      s=s.replace(f'{d["sec"]} like {d["hex2"]} in the inner robe and linings',"royal yellow in the inner robe panel, sash and linings").replace(f'{d["sec"]} like {d["hex2"]} in the linings',"royal yellow only in the linings and borders").replace(f'{d["sec"]} like {d["hex2"]}',"royal yellow")
+      s=s.replace(f'(her signature colour family {d["main"]} and {d["sec"]})',f'(her signature colour {d["main"]} with royal yellow)').replace(f'and {d["sec"]} thread',"and royal yellow thread")
+      sec2='the ROYAL YELLOW of image 3' ; main2=d['main']
+      if t==8: main2,sec2='the ROYAL YELLOW of image 3',d['main']
+      anc={6:'No phoenix',7:'All flowers',8:'Hair:'}[t]; assert anc in s
+      s=s.replace(anc, "Image 3 is only a colour reference (a flat swatch of the exact royal yellow): use exactly that yellow for every yellow part, never copy anything but its colour. "+anc,1)
+    else:
+      main2,sec2=d['main'],d['sec']
+    if k=='bt': s=s.replace('NOT ivory, ','')
+    tc=f"TWO-COLOUR RULE: the whole outfit uses EXACTLY TWO colours that clearly interact: the MAIN colour {main2} and the SECONDARY colour {sec2}, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, never a third colour. Every layer has full-length long sleeves: NO short-sleeved or half-sleeved layer over the long sleeves. "
+    i=s.find('Hair:'); i=i if i>=0 else s.index('All flowers'); s=s[:i]+tc+s[i:]
     assert 'caramel' not in s and 'apricot' not in s, (k,t)
-    open(B+f'pr_{k}_t{t}_V1.txt','w').write(s)
+    open(B+f'pr_{k}_t{t}_V2.txt','w').write(s)
 print('ok')
