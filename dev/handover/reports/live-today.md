@@ -71,3 +71,19 @@ Each name has fig (900 tall) + hd/ (1800, where the ref has hd) + por- (bust sea
 |---|---|---|---|---|---|
 | TH Thái hậu 32 × a36/a51/a65 | thaihau/cNN_aXX_thaihau(_v0).png | 96 | 282 (hd 90) | 4 sheets, all ok | cdn_sync --check same 282; md5 3/3 |
 | A65 t7/t8 a65 v0/v1/v2, 21 people (c01–c05 c09–c13 c17–c19 c25–c32; c05/c13 v0 only) | t8-reprompt/cNN_a65_t{7,8}_v{0,1,2}.png | 118 | 348 (hd 112) | 5 sheets, all ok | --check same 348; md5 3/3 |
+
+### 4b. FLOOR-SHADOW FIX (ROOT-35/36 order, owner: "a fault is a fault"), 19/11 ~01:30Z
+Scan (tools/shadow.py: soft halo = alpha<200 pixels in the bottom 14 % of the figure, >3 px from the solid figure, scored by count × alpha) over ALL 258 live figures from today (G1–G6) + all 591 new-name figures (TH, a65, v1/v2 local) = 849. Every candidate was looked at (feet crops, dark bg, removal in red): hem edges of sheer skirts (c09 kc, c16 kc, small 1-px edge specks on t7/t8) are fabric, not stains → not touched.
+HITS (7 figures, 11 files):
+| figure | files | method | stain |
+|---|---|---|---|
+| c13 kc a18 | fig (no hd) | fix2 (MediaPipe selfie-multiclass segmenter, feet band, alpha × person-prob) | big ground glow under hem + feet |
+| c12 ngheo a18 | fig + hd | fix3 (colour flood from the halo through smooth stain-coloured pixels) | brown floor shadow both sides of feet |
+| c13 ngheo a18 | fig | fix3 | shadow under/behind the walking foot |
+| c16 ngheo a18 | fig | fix3 | faint ring (alpha 1–10) right of the shoe |
+| c30 ngheo a18 | fig + hd | fix2 | ground glow around feet |
+| c31 ngheo a18 | fig + hd | fix3 | shadow under the left foot |
+| c04 th a36 (LIVE-2 new) | fig + hd | fix3 | grey haze round the hem |
+Fix = alpha only (colour pixels unchanged), feet band only; por busts untouched (no feet). First try (alpha-only halo removal) left the opaque core with a hard edge → rejected after looking; fix2/fix3 chosen per figure by looking.
+BACKUP: img/_backup/1119-shadow/<same path> (11 files; NOT 1118-live, which keeps the pre-today originals). --check same 11 before and after. Live md5 = local (spot c13 kc fig, c30 hd, c12 fig, c04-th hd).
+SHEET: https://ctm-img.victoria-tntt.workers.dev/img/_review/live-fix/shadow_before_after.jpg (each row: BEFORE dark|light bg → AFTER dark|light bg; hd where it exists).
