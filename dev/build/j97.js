@@ -13,7 +13,7 @@
 const R97CFG={get p(){return BAL.arc.r97.k}};
 /* the roll once every hidden condition holds: min(1, base / measured eligibility of its source), base = the chance at full eligibility
    (j97/jroad: p × k) — the chance a road ends rare is then what base would be if she were always eligible (BAL.arc.r97.elig); src arc | road | kc | succ */
-function r97Roll(base,src){const e=(BAL.arc.r97.elig||{})[src]||1;return Math.min(1,base/e)}
+function r97Roll(base,src,id){let e=(BAL.arc.r97.elig||{})[src];if(e&&typeof e==="object")e=e[id]||e.d;/* review: kc is set per door (one pooled mean let a common door roll sure) */e=e||1;return Math.min(1,base/e)}
 function r97Src(a){return (window.RD97L||[]).some(d=>d.a===a)?"road":"arc"}
 const R97={};                  /* arc id → định nghĩa kết hiếm */
 const R97X={};                 /* kết hiếm của mô-đun khác (j96…): id → {t,tag} */

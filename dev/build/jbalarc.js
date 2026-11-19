@@ -65,15 +65,18 @@ Object.assign(BAL,{arc:{
     holds (dev/measure/rarereach.js + rr-sum.js, report dev/handover/reports/rare-reach.md), per source: arc = the j97 arcs, road = the jroad .11
     finales, kc = the jkc outside-palace rares, succ = the j99 succession rares. Set 19/11 from the rare-reach measures (before 63 + after 60
     lives, 3 styles, all 9 origins, stop at chapter 12): arc 11.6 % (13 of 112 climaxes, both arms: the arc chains did not change); road 17.2 %
-    (5 of 29 finales, after-arm only: the road's Lợi thế is now carried from chapters .4–.10, rdSc97); kc: mean of the 6 doors over the jkc
-    home-road probe (rr-kc.js); succ: few bot lives reach the succession's second chapter (2, both eligible), so it takes the arc value). The roll once eligible = min(1, p × k / elig[src]) (r97Roll, j97),
+    (5 of 29 finales, after-arm only: the road's Lợi thế is now carried from chapters .4–.10, rdSc97); kc: per door, from the jkc home-road probe (rr-kc.js, below); succ: few bot lives reach the succession's second chapter (2, both eligible), so it takes the arc value). The roll once eligible = min(1, p × k / elig[src]) (r97Roll, j97),
     so the chance a road ends rare ≈ p × k, as if she were always eligible; never above sure. stay = the gain of choosing to stay in the palace
     after a rare ending that lets her leave. */
- r97:{stay:{sung:5},k:.9,elig:{arc:.12,road:.17,kc:.04,succ:.12},
+ r97:{stay:{sung:5},k:.9,elig:{arc:.12,road:.17,succ:.12,
+  /* kc per door (review 19/11): one pooled mean .04 let the common festival/temple door kcR3 (eligible in ~21 % of home lives: 18 of 86 over the
+     worker's 63-life probe + the review's 23) roll sure, so the emperor-in-disguise came ~5× its chance at full eligibility. kcR2 4/86; kcR1 1/86,
+     kcR4–kcR6 0 (few lives of their origins) → d = the pooled floor; those still roll sure once eligible (base ÷ elig ≥ 1). */
+  kc:{kcR3:.2,kcR2:.05,d:.04}},
   /* jkc outside-palace rares: base chance at full eligibility = p × kcF × k (kcR3: pFest at the festival door, kcR2: pTrave on the late door);
      the rest are each rare's condition floors (tm96 heart h, maid loyalty loy, gossip kld below, father af, Sức suc, outings oc at most,
      Tâm cơ tamco, Đức duc, Sắc sac). Was typed in jkc.js; values unchanged. */
-  kcF:.12,kc:{kcR1:{p:.6,h:80,loy:60,kld:55},kcR2:{p:.8,af:60,h:75,pTrave:.6,hTrave:80},kcR3:{p:.5,pFest:.4,sac:80},kcR4:{p:.6,suc:90,oc:1},kcR5:{p:.6,duc:70},kcR6:{p:.8,tamco:60}}},
+  kcF:.12,kc:{kcR1:{p:.6,h:80,loy:60,kld:55},kcR2:{p:.8,af:60,h:75,pTrave:.6,hTrave:80},kcR3:{p:.5,pFest:.4,sac:80,chua:{yr:2,sac:70,p:.04}},kcR4:{p:.6,suc:90,oc:1},kcR5:{p:.6,duc:70},kcR6:{p:.8,tamco:60}}},
  /* the Ngự tứ hairpins a rare ending can grant (j97; the wardrobe j92 may rename them): the wear gain */
  ntItem:{nt_nhuy:{sac:5,danh:3},nt_haiduong:{sac:6,danh:4},nt_dongchau:{sac:7,danh:5}},
  rare:{
