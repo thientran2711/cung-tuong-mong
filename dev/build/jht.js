@@ -90,10 +90,10 @@ function pkMark(p){if(p===S)S.pkc=S.turn;else p.pkc=S.turn}
 function htMonth(){let ev="";if(!S||S.dead)return ev;qnPoolUp();if(S.month===1)qnPool().forEach(q=>q.age++);
  for(const [k,p] of pkSons()){
   if(k.pB&&k.age>=BAL.age.wed&&pkHome(k)){const t=pkWed(k,p);if(t){if(p===S)ev+=`<span class="g">${t}</span> `;else log(t)}}
-  if(p!==S&&h54Live(p)&&pkHome(k)&&!k.pB&&k.age>=BAL.age.betroth&&pkCd(p)&&roll(20)){pkMark(p);const C=pkCands(p,k).filter(q=>(p.bac||0)>=HT.dow[q.tier]);
-   if(C.length){const q=C[0];ap(p,{bac:-HT.dow[q.tier]});if(roll(odA(p,pkO(p,k,q))))log(pkBetroth(k,p,q));else ap(p,HT.fail)}}
-  if(pkHome(k)&&!k.pB&&(k.age>=19||k.age>=BAL.age.wed&&!h54Live(p))&&roll(8)){const C=pkCands(p,k);if(C.length){const by=!S.thDead&&roll(40)?"Thái hậu":"Hoàng thượng";const t=pkBetroth(k,p,C[0],by);if(p===S)ev+=t+" ";else log(t)}}
-  if(k.pW&&k.heir&&k.pW.trac.length<1&&k.age>=20&&roll(HT.trac)){const t=pkTrac(k,p);if(t){if(p===S)ev+=t+" ";else log(t)}}}
+  if(p!==S&&h54Live(p)&&pkHome(k)&&!k.pB&&k.age>=BAL.age.betroth&&pkCd(p)&&npcWhy("h54Ban",{p,k},()=>roll(20))){/* npc-purpose G2: her own wish for her son's match */pkMark(p);const C=pkCands(p,k).filter(q=>(p.bac||0)>=HT.dow[q.tier]);
+   if(C.length){const q=npwPick(C,q=>g2bAmb(p)?1+qnQ(q):1+(C.length-C.indexOf(q)))||C[0];ap(p,{bac:-HT.dow[q.tier]});/* npc-purpose G2: an ambitious mother reaches for the grandest house, others for the surest fit */if(roll(odA(p,pkO(p,k,q))))log(pkBetroth(k,p,q));else ap(p,HT.fail)}}
+  if(pkHome(k)&&!k.pB&&(k.age>=19||k.age>=BAL.age.wed&&!h54Live(p))){const ow=npcWhy("hEmpWed",{p,k,son:1},()=>roll(8));const C=ow?pkCands(p,k):[];if(C.length){const by=ow.who===S.emp?"Hoàng thượng":"Thái hậu";/* npc-purpose G2: whoever of the two cares most (Thái hậu for the heir) */const t=pkBetroth(k,p,C[0],by);if(p===S)ev+=t+" ";else log(t)}}
+  if(k.pW&&k.heir&&k.pW.trac.length<1&&k.age>=20&&npcWhy("pkTrac",{k,p},()=>roll(HT.trac))){const t=pkTrac(k,p);if(t){if(p===S)ev+=t+" ";else log(t)}}}
  allKids().forEach(([k,v])=>{if(!k.alive&&k.pB&&!k.pBx){k.pBx=1;const p=v||S;p.hon=Math.max(0,(p.hon||0)-(k.pB.b||0));const q=qnById(k.pB.q);if(q)q.taken=null}});
  S.kids.forEach(k=>{if(pkHome(k)&&k.age>=BAL.age.betroth&&!k.p16){k.p16=1;ev+=`${k.name} tròn ${BAL.age.betroth} tuổi: từ nay bàn được hôn sự (Hoàng tự › Hôn sự; cưới khi tròn ${BAL.age.wed}). `}});
  return ev}
