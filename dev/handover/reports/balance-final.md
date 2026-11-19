@@ -116,3 +116,8 @@ Successor steps:
 3. Re-run the gates (table above) on the final sha, then write SẴN SÀNG KIỂM <sha> + `git diff --stat origin/main...HEAD -- dev/build` (57 files, +967/−220 at 0281bbf7), the FOREMAN_D_STATUS line, and send_message to Foreman D.
 OWNER FLAGS for the final report: kids/y ≈ 1.45× live (0.108 vs 0.074; her births 1.5×, so birth deaths 8 vs 4); seat vacancy blocks promotions (BAL.seat unchanged per brief); QP −7 pooled; NPC Sủng lower on the branch (m12 38 vs 46).
 Worktrees on this box (lost on a new session): /home/user/wt/mg2 = 0281bbf7, /home/user/wt/live2 = 1cf5e8bb, arms data in /home/user/wt/arms (rL/rB final, cL/cB confirmation).
+
+## BALANCE-FINAL #3 (session_01964izCNP7knjuDvDqSjZMv, opus, from 19/11 ~03:45Z)
+START_CTX ≈ 4 % of 1M (get_session reads 0, so this is an estimate) → rollover at 29 %, ceiling 60 %. Depth 6.
+PRIORITY #1 CHECK ('balance final'): OD 0 | ledger 0 | claims 0 (this job) | main 0 | review/balance-final 0281bbf7 = this branch.
+- 03:50Z: worktree /home/user/wt/bf3 = 0281bbf7. Step 1: night-final / night-multi flakes.
