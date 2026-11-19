@@ -114,6 +114,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const HELP4=()=>{const s0=window.__sum;window.__sum=s=>Object.assign(s0(s),{pets:(s.pets||[]).map(P=>P.t+':'+Math.round(P.full||0)+'/'+Math.round(P.clean||0)+'/'+Math.round(P.joy||0)+'/'+Math.round(P.aff||0)+'/'+(P.maidW||0)).join(','),petOn:s.petOn==null?null:s.petOn,
    shelf:Object.entries((s.shelf&&s.shelf.g)||{}).filter(([g,e])=>e&&e.pc!=null).map(([g,e])=>g+':'+e.pc).sort().join(','),rcpK:JSON.stringify(s.rcpK||{}),rcpL:JSON.stringify(s.rcpL||{}),ml:s.maid?s.maid.loyal:null,vir:JSON.stringify(s.vir||{})})};
  await H.p.evaluate(HELP4);await G.p.evaluate(HELP4);
+ /* F2 r2 (quiet off for her taps): a task card «Xong việc: …» (jtq14 doneCard) her F4 act earns (pet shop note "buy") reaches HER phone, once, never the host's (as F3 'W') */
+ const DONEW=()=>{window.__done4=[];const seen=()=>{const m=document.getElementById('modal');if(!m||m.hidden)return;const t=(m.textContent||'').match(/Xong việc: ([^\n]{2,60}?)(Chương|$)/);if(t&&window.__done4[window.__done4.length-1]!==t[1].trim())window.__done4.push(t[1].trim())};
+  new MutationObserver(seen).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden']})};
+ await H.p.evaluate(DONEW);await G.p.evaluate(DONEW);const xl0=await G.p.evaluate(()=>(S.logs||[]).filter(x=>/Xong việc «/.test(String(x))).length);
  const herDo=async src=>{await stage(src)};
  /* ---- P: pets ---- */
  const PK=await pick(`return Object.keys(PET).filter(k=>PET[k].pr&&PET[k].tr===0).slice(0,3)`);
@@ -127,12 +131,12 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   else ok(false,'P3 nothing to buy in the pet shop')}
  await stage(`if(!S.maid)S.maid={name:'Tiểu Thúy',loyal:90};S.maid.loyal=90;(S.pets[0]||{}).maidW=0`);
  await act('P4 Giao kẻ hầu chăm (petcMaid): same as solo',`PETC.i=0;petcMaid(0)`,{twin:true,chk:x=>/\/[1-9]\d*$/.test(x.g1.pets.split(',')[0])});
- {const r=await act('P5 Để trời định in the care game (petcQuick): her care screen redrawn on HER phone, nothing on the host',`petcQuick('feed')`,{pre:`petcOpen(0);PETC.game=null`,shot:'care'});
+ {const r=await act('P5 Để trời định in the care game (petcQuick): her care screen redrawn on HER phone, nothing on the host',`petcQuick('feed')`,{pre:`petcOpen(0);PETC.game=null`,chk:x=>{const f=y=>+((y.pets||'').split(',')[0]||'').split(':')[1]?.split('/')[0];/* review r1: the roll ran on HER pet 0 */return f(x.g1)>f(x.g0)||/chưa thành/.test(x.g1.log+x.h1.log)||f(x.g0)>=100},shot:'care'});
   const ui=await both(()=>{const b=document.getElementById('kpcare');return b?/Vừa rồi|Để trời định/.test(b.textContent):false});if(!r.skip)ok(ON?(ui[1]&&!ui[0]):true,'P5 her care screen REDRAWN with the result on her phone after the answer (replayed petcDraw), none on the host',ui);await G.p.evaluate(()=>{try{petcClose()}catch(e){}})}
  /* ---- G: her shelf plant ---- */
  {const pk=await pick(`return Object.keys(BAL.shelf.it).find(k=>BAL.shelf.it[k].care)||null`);
   if(pk){await stage(`shelfOf(S).g.f4p={k:${JSON.stringify(pk)},pc:40}`);
-   const r=await act('G1 Để trời định on her shelf plant (shelfPlantQuick)',`shelfPlantQuick()`,{pre:`shelfPlantOpen('f4p')`,chk:x=>true,shot:'plant'});
+   const r=await act('G1 Để trời định on her shelf plant (shelfPlantQuick)',`shelfPlantQuick()`,{pre:`shelfPlantOpen('f4p')`,chk:x=>{const a=/f4p:(\d+)/.exec(x.g0.shelf||''),b=/f4p:(\d+)/.exec(x.g1.shelf||'');/* review r1: the roll really ran on HER plant: won = pc up, lost = the 'chưa thành' log line */return !!a&&!!b&&(+b[1]>+a[1]||/chưa thành/.test(x.g1.log+x.h1.log))},shot:'plant'});
    const ui=await both(()=>!!document.getElementById('kshp'));if(!r.skip)ok(ON?(ui[1]&&!ui[0]):true,'G1 her plant screen on her phone only',ui);await G.p.evaluate(()=>{try{closeModal()}catch(e){}})}
   else ok(false,'G1 no shelf plant kind in BAL.shelf.it')}
  /* ---- K: taste questions ---- */
@@ -147,7 +151,9 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* ---- T: Tứ đức practice at bậc 5 (no game) ---- */
  {const k='cong',kind=await pick(`return TDS_KIND.cong`);const rid=await pick(`return (WKR[TDS_KIND.cong]||[])[0]?WKR[TDS_KIND.cong][0].id:null`);
   await stage(`S.vir=S.vir||{};S.vir.cong=5;S.suc=80;S.mg=null`);
-  await act('T1 Tứ đức Tự học at bậc 5 (tdsRun prac): the work made, in ONE place (her bag, both phones)',`tdsRun('cong','prac',{kind:${JSON.stringify(kind)},mat:0,r:${JSON.stringify(rid)},subj:''})`,{chk:x=>x.g1.inv.length===x.g0.inv.length+1&&x.h1.inv.length===x.g0.inv.length+1})}
+  await act('T1 Tứ đức Tự học at bậc 5 (tdsRun prac): the work made, in ONE place (her bag, both phones)',`tdsRun('cong','prac',{kind:${JSON.stringify(kind)},mat:0,r:${JSON.stringify(rid)},subj:''})`,{shot:'cook',chk:x=>x.g1.inv.length===x.g0.inv.length+1&&x.h1.inv.length===x.g0.inv.length+1})}
+ {const xl=await G.p.evaluate(()=>(S.logs||[]).filter(x=>/Xong việc «/.test(String(x))).length)-xl0;const gs=await G.p.evaluate(()=>window.__done4),hs=await H.p.evaluate(()=>window.__done4);
+  if(ON)ok(xl<=0||(gs.length===xl&&hs.length===0),'C1 task cards: every «Xong việc» line her F4 acts earned shows its card on HER phone once, none on the host',{lines:xl,guest:gs,host:hs})}
  /* double tap */
  if(ON){await reset();const r=await G.p.evaluate(()=>{const F=COOPW.thin.F,b0=F.stat.busy,s0=F.stat.sent;petcMaid(0);petcMaid(0);return {busy:F.stat.busy-b0,sent:F.stat.sent-s0,id:F.pend&&F.pend.id}});
   await until(G,id=>!COOPW.thin.F.pend,r.id,20000);ok(r.sent===1&&r.busy===1,'D1 double tap: one intent, the second tap ignored',r)}

@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"71d6fb0a","t":"2026-11-19T08:21Z","c":"coop-thin F5: her mini-game score ends as intents (level 10)","b":"4dd9eedf4928","h":[{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"}]};
+window.CTM_BI={"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt","b":"b4bf92bdeae6","h":[{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"},{"s":"360c0edd+","t":"2026-11-19T03:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2234,7 +2234,7 @@ function nightScene(){S.tonight="me";pushFront(mkP("prep"),"Chuẩn bị thị t
 function pushFront(d,title){if(!d)return;Q.unshift({t:title||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls})}
 function night(p=S){if(p.preg)return;if(roll(conceiveCh(p))){p.preg=1;p.pregWk=wk();if(p===S){S.hidden=true;log(`<span class="g">Thái y bắt mạch: ngươi đã có thai.</span> Ngươi được giấu thai đến hết tháng thứ 3, hoặc báo tin để được sủng ái.`)}else{p.hidden=p.tamco>=40;if(!p.hidden)ap(p,{sung:6,th:5})}}}
 function giuBlocked(p){return rkOf(p)<=1&&(p.th<0||(has("hieuthao")&&p.th<10))&&roll(30)}
-PEND.ksp=()=>({who:pEmp(),t:"<p>Tối nay Hoàng thượng lật thẻ bài của ngươi.</p>",o:[{n:"Tắm gội chờ giá",fx:{},x:"chuẩn bị thị tẩm",go:nightScene},
+PEND.ksp=()=>({who:pEmp(),t:"<p>Tối nay Hoàng thượng lật thẻ bài của ngươi.</p>",o:[{n:"Tắm gội chờ giá",fx:{},x:"thành: được thị tẩm, gần Hoàng thượng đêm nay",go:nightScene},
  {n:`Tiến cử ${S.maid.name} hầu thay`,fx:{},x:`${roomFor("consort")?`nàng được phong ${RANKS[0].n}: ${chanceW(30)}, rồi ${S.maid.loyal>=BAL.loy.close?"vẫn là người của ngươi":"trở mặt với ngươi"}`:"không còn ghế để phong: nàng hầu một đêm rồi ra cung"} · kèm: mất ${S.maid.name}, cung nữ mới lòng 45`,go:()=>{log(sendMaid(S))}},
  {n:"Cáo bệnh",fx:{sung:-2},x:"nhường đêm; Ân tình -2",go:()=>{S.an=cl(S.an-2,0,100);S.tonight=null}}]});
 PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();return{who:pMe(),t:"<p>Kính sự phòng đã báo tin. Còn hai canh giờ trước khi kiệu đến.</p>",o:[
@@ -4760,10 +4760,8 @@ function lessonMode(k,mode){const l=S.arts[k],cost=tchFee(k);if(!S||S.dead||Q.le
  else if(mode==="th"){if(!can(2)||S.th<40||(S.buoi||0)!==0||S.thDead)return;apply({suc:-10,th:3})}
  else{if(!can(2)||S.bac<cost)return;apply({suc:-10,bac:-cost});tchPaid(k)}
  spend(2);S.mg={k,l,mode};save();render();resumeMG()}
-/* the lesson's gain (one function: the game's callback ends here; co-op thin F5 runs it on the host with her score) */
-function artLessonGain(m,g){S.mg=null;const a=ARTS.find(x=>x.k===m.k);const gs=Math.max(1,Math.round(g*.6)),gg=m.mode==="self"?gs:m.mode==="teacher"?Math.max(g,gs+((typeof BAL!=="undefined"&&BAL.tchMin)||1)):g;log(`${m.mode==="self"?"Tự học":m.mode==="th"?"Học với Thái hậu":"Học với thầy"} ${a.n}. Tiến bộ +${gg}.`);addArt(m.k,gg);
-  if(m.mode==="teacher"&&roll(30)){if(roll(50)&&discover())log("Thầy dạy kể một sở thích của Hoàng thượng.");else{const t=evGuilty(S,liveRivals(true));if(t&&evA(S,t,BAL.eff.j23.evTop))log(`Thầy dạy buột miệng chuyện của ${t.name}: chứng cứ ${balSg(BAL.eff.j23.evTop)}.`);else log("Thầy dạy kể chuyện trong cung, toàn chuyện vô hại.")}}render()}
-(function(){const r0=resumeMG;resumeMG=function(){const m=S.mg;if(!m)return;openMG(m.k,m.l,g=>artLessonGain(m,g))}})();
+(function(){const r0=resumeMG;resumeMG=function(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;const gs=Math.max(1,Math.round(g*.6)),gg=m.mode==="self"?gs:m.mode==="teacher"?Math.max(g,gs+((typeof BAL!=="undefined"&&BAL.tchMin)||1)):g;log(`${m.mode==="self"?"Tự học":m.mode==="th"?"Học với Thái hậu":"Học với thầy"} ${a.n}. Tiến bộ +${gg}.`);addArt(m.k,gg);
+  if(m.mode==="teacher"&&roll(30)){if(roll(50)&&discover())log("Thầy dạy kể một sở thích của Hoàng thượng.");else{const t=evGuilty(S,liveRivals(true));if(t&&evA(S,t,BAL.eff.j23.evTop))log(`Thầy dạy buột miệng chuyện của ${t.name}: chứng cứ ${balSg(BAL.eff.j23.evTop)}.`);else log("Thầy dạy kể chuyện trong cung, toàn chuyện vô hại.")}}render()})}})();
 function artTabHTML(){const nx=ARTS.map(a=>S.arts[a.k]);let h=`<div class="ph"><span>Mỗi buổi học tốn 2 khắc. Ba cách học, giá trị ngang nhau, tốn thứ khác nhau.</span>${S.master?`<span class="g">Danh sư còn dạy ${S.master} tháng</span>`:""}</div><div class="arts">`;
  h+=ARTS.map(a=>{const l=S.arts[a.k],need=l+2,cost=5+l*5,ms=ARTMS[a.k]||[];const t2=whyTime(2);
   const B=l>=5?[`<span class="ef g">Đã tinh thông</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: Sức -15 · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
@@ -6116,8 +6114,8 @@ Object.assign(BAL,{
  ngocboiSung:15,           /* the Ngọc bội ngự ban keeps its owner's Sủng from falling below this (j8; item text, jinv) */
  sinhThanSung:50,          /* her birthday is bestowed only when Sủng is at least this (j20; ban thưởng list) */
  m30:{tocaoEv:1,exposeEv:2,xinhhAff:40},     /* j30: chứng cứ for «Tố tội thật» / «Bóc chuyện tư tình»; Hoàng hậu thiện cảm for «Xin Hoàng hậu giáng» */
- srvx:{tinOut:10,keepTin:60,secNeed:2,friendAf:30}, /* cung nữ road (j42): Chủ tin below tinOut = sent to Tân Giả khố; from keepTin the chủ keeps her past
-                           the age; secNeed = secrets of the chủ she must know to betray; friendAf = quý from which a colleague counts as a friend */
+ srvx:{tinOut:10,keepTin:60,secNeed:2,friendAf:30,colN:10}, /* cung nữ road (j42): Chủ tin below tinOut = sent to Tân Giả khố; from keepTin the chủ keeps her past
+                           the age; secNeed = secrets of the chủ she must know to betray; friendAf = quý from which a colleague counts as a friend  colN = rows in her Đồng liêu list (j42 srvColleagues: her palace first, then friends, ill-wishers, the rest). */
  virx:{hanhCap:80,camSung:40},               /* j85: Hạnh bậc 3 monthly Đức +1 stops at hanhCap; Cầm bậc 5 cheers the Emperor when Sủng is at least camSung */
  tsx:{empSung:30,denSung:20},                /* jts: at a birth the Emperor bestows when Sủng is at least empSung; he sees the lake lantern from denSung */
  sucNeed:{self:25,wk:15,rcp:10,kid:5,yKid:15}, /* Sức an act needs (the lock, its «Sức dưới N» word and the act's own check read the same key): self = «Tự học»
@@ -6870,7 +6868,14 @@ const SRVA={
 function srvCa(k,a,m){const c=SRVA[k].c;return typeof c==="function"?c(a,m):(c||{})}
 function srvWa(k,a,m){const w=SRVA[k].w;return typeof w==="function"?w(a,m):(w||{})}
 function srvAf(s,n){S.srv.af[s.sid]=cl((S.srv.af[s.sid]||0)+n,-100,100)}
-function srvColleagues(){const m=srvM();const L=(m&&m.staff||[]).slice();for(const sid of S.srv.met||[]){const s=servById(sid);if(s&&!L.includes(s))L.push(s)}return L.slice(0,10)}
+/* role-parity-drift (19/11, law 1): the list shows 10 people; with live servants she meets many more at places (S.srv.met grows), and a friend met
+   late fell past the 10th row — «Nhờ dò tin» / «Trò chuyện» / «Biếu quà» with her were gone for the player while an NPC maid asks any friend.
+   Same 10 rows, ordered: her own palace first, then the people she knows by liking (friends before strangers), so a friend is never pushed off. */
+function srvColleagues(){const m=srvM();const L=(m&&m.staff||[]).slice();const af=(S.srv&&S.srv.af)||{};const M=[];
+ for(const sid of S.srv.met||[]){const s=servById(sid);if(s&&!L.includes(s)&&!M.includes(s))M.push(s)}
+ /* review r1 (law 6a): a plain liking sort put every ill-wisher (af<0) last, so past 10 rows srvFramedEvent («Bị vu oan», picks from af<0 here) never fired.
+    Groups: friends (from BAL.srvx.friendAf) → ill-wishers → the rest; inside a group the stronger tie first; ties keep meeting order (stable sort). */
+ const gr=s=>{const v=af[s.sid]||0;return v>=BAL.srvx.friendAf?0:v<0?1:2};M.sort((a,b)=>gr(a)-gr(b)||Math.abs(af[b.sid]||0)-Math.abs(af[a.sid]||0));return L.concat(M).slice(0,BAL.srvx.colN)}
 function srvFriendList(){return srvColleagues().filter(s=>(S.srv.af[s.sid]||0)>=BAL.srvx.friendAf)}
 function srvMax(){const m=srvM();return m?srkMax(m,{role:"maid"}):BAL.srvRk.dai}/* no master: the lowest cap (nhất đẳng), maid-ladder-6 r1 */
 function srvToast(msg){if(window.__bot)return;let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}t.onclick=()=>t.classList.remove("on");
@@ -29620,22 +29625,15 @@ function wkFinLeft(){const m=S&&S.wkFin;return Math.max(0,(BAL.wkFinCap|0)-(m&&m
 function wkFinTxt(K){return !K||!K.fin?"":wkFinLeft()>0?`${plain(fmt(K.fin))}, mỗi tháng một lần`:"tháng này Đức đã tăng rồi"}
 /* lesson progress points of one play (0..3 by BAL.mgTier.lessonPts): ONE rule for her lesson (openMG below) and an NPC's (j85 npcStudyDo, mg2) */
 function wkLessonPts(raw){const P=BAL.mgTier.lessonPts;return raw>=P[2]?3:raw>=P[1]?2:raw>=P[0]?1:0}
-/* the end of every lesson / practice game (one function: the game's onDone ends here; co-op thin F5 runs it on the host with her score).
-   m = the lesson (S.mg: k, mode, wk = the work picked, pa = a practice / Học lối mới / resumed practice: how / qx = its own words);
-   cb = the lesson-progress callback of openMG (absent: the lesson's gain itself, artLessonGain) */
-function wkLessonEnd(k,m,raw,o,cb){const sk2=!!(o&&o.skipped);
- if(m.pa){S.mg=null;if(sk2)log(m.qx||"Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,m.wk||{kind:WDEF[k],mat:0},cl(Math.round(raw),0,10),m.how||"tự học");render();return}
- const pick=m.wk||{kind:WDEF[k],mat:0},ms=S.master?2:1;raw=cl(Math.round(raw||0),0,10);const pts=sk2?(o.ok!=null?(o.ok?1:0):(kitQuickRoll()?1:0)):wkLessonPts(raw)/* ONE tier rule (ag) */;
- if(m.mode==="prac"){S.mg=null;if(sk2)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự học");render();return}
- (cb||(g=>artLessonGain(m,g)))(pts*ms);if(sk2)return;try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học với Thái hậu":"học");render()}catch(x){}}
 function wkFinishLesson(k,pick,raw,how){const kind=WK[pick.kind]&&WK[pick.kind].a===k?pick.kind:WDEF[k];const mat=pick.mat||0;const e=wkMake(S,kind,mat,raw,pick.subj);S.inv.push(e);const K=WK[kind];
  let fin="";if(K.fin){if(wkFinLeft()>0){apply(K.fin);S.wkFin=S.wkFin&&S.wkFin.t===S.turn?S.wkFin:{t:S.turn,n:0};S.wkFin.n++;fin=" "+fmt(K.fin)}else fin=" Tháng này Đức đã tăng rồi, món này không thêm Đức."}
  S.wkN=(S.wkN||0)+1;log(`<span class="g">Buổi ${how} làm ra ${e.wk.n}: phẩm ${WTIER[e.wk.ti]}</span> (${wkParts(S,kind,mat,raw)}). Cất vào rương${K.per?"; phải dâng trong tuần này":""}.${fin}`)}
-(function(){const o0=openMG;openMG=function(k,lv,cb){const m=S&&S.mg;if(!m||m.k!==k)return o0.apply(this,arguments);if(m.pa&&typeof playArt==="function"){S.mg=null;playArt({art:k,title:"Tự học",quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},mgEnd:1,onDone:(raw,o)=>wkLessonEnd(k,m,raw,o)});return}
+(function(){const o0=openMG;openMG=function(k,lv,cb){const m=S&&S.mg;if(!m||m.k!==k)return o0.apply(this,arguments);if(m.pa&&typeof playArt==="function"){S.mg=null;playArt({art:k,title:"Tự học",quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},onDone:(raw,o)=>{if(!(o&&o.skipped))wkFinishLesson(k,m.wk||{kind:WDEF[k],mat:0},cl(Math.round(raw),0,10),"tự học");else log("Tự học nhanh: không ra thành phẩm.");render()}});return}
  if(!m.wk)m.wk=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const pick=m.wk;let skip=false;const ms=S.master?2:1;
  const cb2=g=>{const raw=wkRawOfPts(Math.round(g/ms));if(m.mode==="prac"){S.mg=null;if(skip)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự học");render();return}if(skip)return cb(g);
   const r=cb(g);try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học với Thái hậu":"học");render()}catch(x){}return r};
- if(typeof playArt==="function"){try{const an=ARTS.find(x=>x.k===k).n;playArt({art:k,title:`${m.mode==="prac"?"Tự học":"Học"} ${an}`,quick:m.mode==="prac"?{n:"Học nhanh",sure:1,win:"không ra thành phẩm"}:{n:"Học nhanh",roll:1,win:"tiến bộ một phần, không ra thành phẩm",lose:"không tiến bộ"},mgEnd:1,onDone:(raw,o)=>wkLessonEnd(k,m,raw,o,cb)});return}catch(x){}}
+ if(typeof playArt==="function"){try{const an=ARTS.find(x=>x.k===k).n;playArt({art:k,title:`${m.mode==="prac"?"Tự học":"Học"} ${an}`,quick:m.mode==="prac"?{n:"Học nhanh",sure:1,win:"không ra thành phẩm"}:{n:"Học nhanh",roll:1,win:"tiến bộ một phần, không ra thành phẩm",lose:"không tiến bộ"},onDone:(raw,o)=>{const sk2=!!(o&&o.skipped);raw=cl(Math.round(raw||0),0,10);const pts=sk2?(o.ok!=null?(o.ok?1:0):(kitQuickRoll()?1:0)):wkLessonPts(raw)/* ONE tier rule (ag) */;
+   if(m.mode==="prac"){S.mg=null;if(sk2)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự học");render();return}cb(pts*ms);if(sk2)return;try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học với Thái hậu":"học");render()}catch(x){}}});return}catch(x){}}
  const r=o0.call(this,k,lv,cb2);
  try{const sk=$("mgskip"),os=sk.onclick;const kind=WK[pick.kind]?pick.kind:WDEF[k];sk.innerHTML=`Học nhanh<small>${kitParse(kitQuickSub(m.mode==="prac"?{sure:1,win:"không ra thành phẩm"}:{win:"tiến bộ một phần, không ra thành phẩm",lose:"không tiến bộ"}))}</small>`;
   sk.onclick=()=>{skip=true;os()};const h=$("mgh");if(h)h.textContent+=` Tự tay làm (chơi): ra thành phẩm, ${WK[kind].w.toLowerCase()}: phẩm = phần chơi (từ 0 đến 10) + ${ARTS.find(x=>x.k===k).n} bậc ${wkLv(S,k)}: +${wkLv(S,k)}${WMAT[pick.mat||0]?` + vật liệu: +${WMAT[pick.mat||0]}`:""}.`}catch(x){}
@@ -29650,8 +29648,8 @@ function wkAsk(k,mode,run){const a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode===
 (function(){const l0=lessonMode;lessonMode=function(k,mode){if(wkPend||!wkLessonOK(k,mode))return l0.apply(this,arguments);wkAsk(k,mode,()=>l0.call(this,k,mode))}})();
 /* practice once mastered: j82's playArt gives the raw score directly when present; otherwise the art's lesson game */
 function wkPractice(k){if(!wkLessonOK(k,"prac"))return;wkAsk(k,"prac",()=>{if(!wkLessonOK(k,"prac"))return;apply({suc:-10});spend(2);
- if(typeof playArt==="function"){const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;const m=S.mg={k,l:5,mode:"prac",wk:pick,pa:1};
-  try{playArt({art:k,title:`Tự học ${an}`,quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},mgEnd:1,onDone:(raw,o)=>wkLessonEnd(k,m,raw,o)});return}catch(x){S.mg=null}}
+ if(typeof playArt==="function"){const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;S.mg={k,l:5,mode:"prac",wk:pick,pa:1};
+  try{playArt({art:k,title:`Tự học ${an}`,quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},onDone:(raw,o)=>{S.mg=null;if(o&&o.skipped)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,cl(Math.round(raw),0,10),"tự học");render()}});return}catch(x){S.mg=null}}
  S.mg={k,l:5,mode:"prac"};save();render();resumeMG()})}
 /* perishable works spoil at the end of the week */
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead){const n0=S.inv.length;S.inv=S.inv.filter(e=>!(e.wk&&e.wk.p!=null&&e.wk.p<wk()));if(S.inv.length<n0)log("Món nấu, bình hoa để quá tuần đã hỏng, phải bỏ.");for(const v of rivals)if(v.inv)v.inv=v.inv.filter(e=>!(e.wk&&e.wk.p!=null&&e.wk.p<wk()))}}catch(x){}return r}})();
@@ -32178,9 +32176,6 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
    Outcome table (a quick result never beats a good own play): lessons won = tiến bộ một phần, lost = 0 · works / crafts = never a product ·
    makeup won = the middle tier (Đoan trang, BAL.toil.tier[0]), lost = Vụng về · care won = BAL.skip.care of the gain, lost = 0. */
 Object.assign(BAL,{skip:{od:40,raw:5,care:.5}});
-/* MINI-GAME SCORE RANGES (co-op thin F5, review/coop-thin-f5): the score a game end can report. unit = the care games (pet care, watering:
-   0..1 of the gain), raw = the kg82 / playArt / Tứ đức / tsGame play (0..10). A score outside its range is refused (the host never applies it). */
-Object.assign(BAL,{mgSc:{unit:[0,1],raw:[0,10]}});
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
@@ -46237,15 +46232,11 @@ function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>
  let fin=null;
  const showLast=(title,before,ok,q0)=>{let n=0;const t=setInterval(()=>{if(++n>2400||(!ovOpen()&&!(S&&S.mg))){clearInterval(t);fin=null;
    try{if(S&&!S.dead&&Q.length<=q0)window.__aaR0(title,before,ok)}catch(e){console.error(e)}}},250)};
- window.aaPayMG=function(score){try{const m=S&&S.mg;const c=(m&&m.cost)||window.__aaPend;if(m)m.cost=null;window.__aaPend=null;if(!c||(fin&&!window.aaCardTo))return;
+ window.aaPayMG=function(score){try{const m=S&&S.mg;const c=(m&&m.cost)||window.__aaPend;if(m)m.cost=null;window.__aaPend=null;if(!c||fin)return;
   const before=rsnap(),q0=Q.length;apply({suc:c.suc||0,bac:c.bac||0,th:c.th||0});if(c.khac)spend(c.khac);
   const sc=score||{};const ok=sc.skip?null:sc.raw!=null?sc.raw>=5:sc.g!=null?sc.g>=2:true;
   const ttl=(window.__aaTitle||sc.title||"Trò tài nghệ")+(sc.skip?" · để trời định":sc.raw!=null?` · phần chơi ${sc.raw}/10`:"");window.__aaTitle=null;
-  /* co-op thin F5: the player whose game this is plays on another screen: her result card goes there (aaCardTo), never here */
-  if(typeof window.aaCardTo==="function"){window.aaCardTo(ttl,before,ok);return}
   fin=1;showLast(ttl,before,ok,q0)}catch(e){console.error(e)}};
- /* the same one result card, shown here for a game paid on another screen (co-op thin F5: her phone after the host's answer) */
- window.aaShowLast=function(ttl,before,ok){if(fin)return;fin=1;showLast(ttl,before,ok,Q.length)};
  if(typeof playArt==="function"){const p0=playArt;playArt=function(o){window.__aaL=1;if(o&&typeof o.onDone==="function"){const d0=o.onDone,ttl=o.title;
   o=Object.assign({},o,{onDone:function(raw,x){const sk=!!(x&&x.skipped);const r1=cl(Math.round(raw||0),0,10);window.aaPayMG({title:ttl,skip:sk,ok:r1>=5,raw:sk?null:r1});return d0.apply(this,arguments)}})}return p0.call(this,o)}}
  if(typeof openMG==="function"){const o0=openMG;openMG=function(k,lv,cb){window.__aaL=1;let ttl="";try{const m=S.mg,a=ARTS.find(x=>x.k===k);ttl=`${m&&m.mode==="prac"?"Tự học":m&&m.mode==="self"?"Tự học":m&&m.mode==="th"?"Học với Thái hậu":"Học"} ${a?a.n:""}`}catch(e){}
@@ -54998,9 +54989,7 @@ function tsEngSteer(box,env){const C=kg82Canvas(box,1.05,470),{g,W,H}=C;const lv
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf)}}
 Object.assign(KG82_ENG,{tspluck:tsEngPluck,tssteer:tsEngSteer});
 /* tsGame({kind, art, title, odds (cơ may thường 0–100), risk, ctx, intro:[rows], onDone(res)}): res {raw 0–10, skipped, guard} */
-/* ONE rule for "Bỏ qua" of a tsGame (the play is not played: the odds decide; co-op thin F5 rolls it on the host) */
-function tsSkipRes(odds,risk){const ok=roll(odds);return{raw:ok?7:3,skipped:true,ok,guard:risk?(roll(odds)?1:0):null}}
-function tsGame(o){const odds=oddsCl(Math.round(o.odds||50));const skipRes=()=>tsSkipRes(odds,o.risk);
+function tsGame(o){const odds=oddsCl(Math.round(o.odds||50));const skipRes=()=>{const ok=roll(odds);return{raw:ok?7:3,skipped:true,ok,guard:o.risk?(roll(odds)?1:0):null}};
  if(tsBot()||typeof kg82Open!=="function"){const r=skipRes();setTimeout(()=>o.onDone(r),0);return}
  const K=KG82_KIND[o.kind];KG82.ctx=o.ctx||"hoc";KG82.tsRisk=o.risk||null;KG82.tsGuard=null;try{mgSet(o.kind,{occ:o.occ||"trieu"})}catch(e){KG82.lv=0}kg82Preload(o.kind);
  const d=kg82Open({art:o.art||K.n,title:o.title||K.t,how:K.how,pic:typeof kg82Pic==="function"?kg82Pic(o.kind):""});if(!d){o.onDone(skipRes());return}const box=kg82Box();
@@ -55189,17 +55178,15 @@ function tsSummonGo(p){const k=tsSummonKind(p);
  if(p!==S){const raw=typeof kg82NpcRaw==="function"?(typeof mg2On==="function"&&mg2On()?kg82NpcRaw(p,k,{occ:"trieu"}):kg82NpcRaw(p,k==="duho"?"dan":k)):5;/* mg2: her own game kind on the summons board (occ trieu, as tsGame) */const g=tsSummonGain(raw);ap(p,{sung:g.sung});p.an=cl((p.an||0)+g.an,0,100);
   if(k==="duho"&&tsRebel()&&roll(40)){if(roll(tsSummonOdds(p,k)))ap(p,{sung:4,danh:3})}if(knows(p)||eyes(S)>=2)log(`${p.name} được Hoàng thượng triệu ${k==="dan"?"đánh đàn":k==="co"?"đánh cờ":"du hồ"}.`);return}
  tsSummonMe(k)}
-/* the end of her summons game (one function: tsGame's onDone ends here; co-op thin F5 runs it on the host with her play) */
-function tsSummonEnd(k,res,b){const nm={dan:"đánh đàn",co:"đánh cờ",duho:"du hồ"}[k];const g=tsSummonGain(res.raw);const L=[];apply({sung:g.sung});S.an=cl((S.an||0)+g.an,0,100);
- L.push(res.raw>=5?`Hoàng thượng vui lòng (${nm}).`:`Hoàng thượng lơ đãng, ngồi được một lúc thì về (${nm}).`);
- if(res.guard!=null){if(res.guard){apply({sung:BAL.eff.jts.sungOnDone,danh:BAL.eff.jts.danhOnDone});S.an=cl((S.an||0)+3,0,100);L.push(`Lau sậy động, ngươi kêu hộ giá kịp lúc; cấm quân bắt được kẻ lạ. Ngài nhớ ơn ngươi (Sủng ${balSg(BAL.eff.jts.sungOnDone)}, Danh ${balSg(BAL.eff.jts.danhOnDone)}, Ân tình +3).`)}else{apply({suc:-8});L.push("Lau sậy động, cấm quân xông tới trước; kẻ lạ bị bắt. Ngươi kinh hãi.")}}
- log(L.join(" "));tsRes(`Hoàng thượng triệu ${nm}`,b,res.raw>=5||res.guard===1);render()}
 function tsSummonMe(k){const E=S.emp;/* a private summons: she is face to face with him (never a grey "Người lạ" emperor) */try{if(typeof k61Meet==="function"&&E&&!tsNamed(E))k61Meet(E,"Ngài triệu riêng, ngươi được diện kiến.")}catch(e){}const odds=tsSummonOdds(S,k);const nm={dan:"đánh đàn",co:"đánh cờ",duho:"du hồ"}[k];const reb=k==="duho"?tsRebel():0;
  const likes=k==="dan"&&E.known&&E.known.music?` Ngài thích khúc ${E.likes.music}.`:"";
  const kem=reb?[`biên cương bất ổn (${reb}), cấm quân đang lùng loạn đảng quanh kinh thành`]:[];
  const go=()=>{const b=tsPre();tsGame({kind:k,art:k==="dan"?"Cầm":k==="co"?"Kỳ":"Du hồ",title:k==="dan"?"Đàn cho Hoàng thượng nghe":k==="co"?"Đánh cờ cùng Hoàng thượng":"Du hồ cùng Hoàng thượng",odds,risk:reb&&roll(40)?1:0,
   intro:[["Hoàng thượng",k==="dan"?"nghe đàn trong thư phòng":k==="co"?"bày cờ trong thư phòng":"ngồi thuyền giữa hồ sen","n"]].concat(reb?[["Điềm báo","cấm quân canh hai bờ, có tin loạn đảng trà trộn","r"]]:[]),
-  onDone:res=>tsSummonEnd(k,res,b)})};
+  onDone:res=>{const g=tsSummonGain(res.raw);const L=[];apply({sung:g.sung});S.an=cl((S.an||0)+g.an,0,100);
+   L.push(res.raw>=5?`Hoàng thượng vui lòng (${nm}).`:`Hoàng thượng lơ đãng, ngồi được một lúc thì về (${nm}).`);
+   if(res.guard!=null){if(res.guard){apply({sung:BAL.eff.jts.sungOnDone,danh:BAL.eff.jts.danhOnDone});S.an=cl((S.an||0)+3,0,100);L.push(`Lau sậy động, ngươi kêu hộ giá kịp lúc; cấm quân bắt được kẻ lạ. Ngài nhớ ơn ngươi (Sủng ${balSg(BAL.eff.jts.sungOnDone)}, Danh ${balSg(BAL.eff.jts.danhOnDone)}, Ân tình +3).`)}else{apply({suc:-8});L.push("Lau sậy động, cấm quân xông tới trước; kẻ lạ bị bắt. Ngươi kinh hãi.")}}
+   log(L.join(" "));tsRes(`Hoàng thượng triệu ${nm}`,b,res.raw>=5||res.guard===1);render()}})};
  const g7=tsSummonGain(8),g3=tsSummonGain(3);
  tsPanel({t:`Hoàng thượng triệu ${nm}`,who:pEmp(),art:k==="duho"?"https://ctm-img.victoria-tntt.workers.dev/img/ev-le-ha.webp":k==="co"?"https://ctm-img.victoria-tntt.workers.dev/img/ev-hoang-de-vui-2.webp":"https://ctm-img.victoria-tntt.workers.dev/img/ev-tai-nghe.webp",
   h:`<p>Thái giám Càn Thanh cung đến truyền: “Hoàng thượng rảnh việc triều chính, cho mời ${tsGoi()} sang ${nm}.”${likes}</p>`,
@@ -55217,24 +55204,16 @@ function tsDenSeen(){const E=S.emp;return (E.mood||0)<=1&&(S.sung||0)>=BAL.tsx.d
 /* ONE rule for every lantern (hers and the NPCs', mg2): the odds of being seen / heard without a far lantern, and "far" from the play (raw ≥ 6) */
 function tsDenOdds(p){return agOdd(45+(p.tai||0)/4+(p.arts&&p.arts.hoa||0)*4)}/* one cap BAL.odds (review ag-all-2 r2 C4) */
 function tsDenFar(raw){return raw>=6}
-/* what her lantern can bring (one function: the card and the end read the same) */
-function tsDenCtx(){const s=tsS();return{s,pdLeft:Math.max(0,6-(s.denPD||0)),hos:liveRivals(true).filter(v=>bandOf(danger(v,S))>=1&&!(S.dKnown&&S.dKnown[v.id])&&!knows(v)),odds:tsDenOdds(S),seen:tsDenSeen()}}
-const TS_DENW=["tin tức","bình an","thánh ân"];
-/* the end of her lantern game (one function: tsGame's onDone ends here; co-op thin F5 runs it on the host with her play). i = the wish */
-function tsDenEnd(i,res,b){const f=tsDenFest();if(!f)return;const {s,pdLeft,hos,odds,seen}=tsDenCtx();const far=tsDenFar(res.raw);
- if(i===0){if(hos.length&&(far||roll(odds))){const v=hos.sort((a,b)=>danger(b,S)-danger(a,S))[0];kn();S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();noteAdd(v.id,`nghe được bên hồ đêm ${f.name}: nàng có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]})`);log(`Đêm ${f.name}, người hầu nghe được bên hồ: ${v.name} có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]}).`)}
-  else if(!hos.length&&s.thuY!==S.year){s.thuY=S.year;S.inv.push({k:"thunha",from:"home"});log("Người nhà gửi thư vào cung nhân đêm hoa đăng. Được Thư nhà.")}else log("Đèn trôi chưa xa, chưa nghe được tin gì.")}
- else if(i===1){apply({duc:BAL.eff.jts.ducGo});if(pdLeft&&typeof pdAdd==="function"){s.denPD=(s.denPD||0)+2;pdAdd(2,`thả đèn cầu bình an đêm ${f.name}`)}else log("Ngươi thả đèn cầu bình an.")}
- else if(i===2){if(seen&&(far||roll(odds))){apply({sung:3});S.an=cl((S.an||0)+2,0,100);log(`Đêm ${f.name}, Hoàng thượng dạo bên hồ, trông thấy đèn của ngươi trôi xa, dừng lại hỏi han.`)}else{apply({duc:1});log("Ngươi thả đèn, lặng lẽ cầu thánh ân.")}}
- tsRes("Thả đèn hoa đăng",b,true);render()}
-function tsDenWish(f){const {pdLeft,hos,odds,seen}=tsDenCtx();
- const play=i=>{const b=tsPre();tsGame({kind:"den",art:"Hoa đăng",title:`Thả đèn đêm ${f.name}`,odds,intro:[["Điều cầu",TS_DENW[i],"t"],["Ghi chú","đèn trôi xa và sáng thì người bên hồ trông thấy","n"]],onDone:res=>tsDenEnd(i,res,b)})};
+function tsDenWish(f){const s=tsS();const pdLeft=Math.max(0,6-(s.denPD||0));const hos=liveRivals(true).filter(v=>bandOf(danger(v,S))>=1&&!(S.dKnown&&S.dKnown[v.id])&&!knows(v));
+ const odds=tsDenOdds(S);const seen=tsDenSeen();
+ const play=(kind,after)=>{const b=tsPre();tsGame({kind:"den",art:"Hoa đăng",title:`Thả đèn đêm ${f.name}`,odds,intro:[["Điều cầu",kind,"t"],["Ghi chú","đèn trôi xa và sáng thì người bên hồ trông thấy","n"]],onDone:res=>{const far=tsDenFar(res.raw);after(far);tsRes("Thả đèn hoa đăng",b,true);render()}})};
  tsPanel({t:`Đêm ${f.name}: thả đèn`,art:f.k==="nguyentieu"?"https://ctm-img.victoria-tntt.workers.dev/img/ev-le-xuan-2.webp":"https://ctm-img.victoria-tntt.workers.dev/img/ev-le-thu-2.webp",who:pMaid(),h:`<p>${S.maid.name} đã dán sẵn chiếc đèn hoa sen. Ngươi cầm bút, nghĩ xem nên cầu điều gì.</p>`,opts:[
   tsOpt({n:"Cầu tin tức người nhà",odds:hos.length?oddsCl(odds):null,duoc:hos.length?["người hầu ngoài bờ nghe được chuyện: biết lòng một người đang muốn hại ngươi"]:["người nhà cũng thả đèn, nhờ người gửi thư vào: Thư nhà"],note:"đèn trôi xa thì nghe rõ hơn",later:1,
-   go:()=>play(0)}),
-  tsOpt({n:"Cầu bình an",duoc:pdLeft?[`Phúc duyên +2 (kiếp này còn được ${pdLeft})`,`Đức ${balSg(BAL.eff.jts.ducGo)}`]:[`Đức ${balSg(BAL.eff.jts.ducGo)}`],note:"Phúc duyên từ đèn có giới hạn: 6 mỗi kiếp",later:1,go:()=>play(1)}),
+   go:()=>play("tin tức",far=>{if(hos.length&&(far||roll(odds))){const v=hos.sort((a,b)=>danger(b,S)-danger(a,S))[0];kn();S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();noteAdd(v.id,`nghe được bên hồ đêm ${f.name}: nàng có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]})`);log(`Đêm ${f.name}, người hầu nghe được bên hồ: ${v.name} có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]}).`)}
+    else if(!hos.length&&s.thuY!==S.year){s.thuY=S.year;S.inv.push({k:"thunha",from:"home"});log("Người nhà gửi thư vào cung nhân đêm hoa đăng. Được Thư nhà.")}else log("Đèn trôi chưa xa, chưa nghe được tin gì.")})}),
+  tsOpt({n:"Cầu bình an",duoc:pdLeft?[`Phúc duyên +2 (kiếp này còn được ${pdLeft})`,`Đức ${balSg(BAL.eff.jts.ducGo)}`]:[`Đức ${balSg(BAL.eff.jts.ducGo)}`],note:"Phúc duyên từ đèn có giới hạn: 6 mỗi kiếp",later:1,go:()=>play("bình an",far=>{apply({duc:BAL.eff.jts.ducGo});if(pdLeft&&typeof pdAdd==="function"){s.denPD=(s.denPD||0)+2;pdAdd(2,`thả đèn cầu bình an đêm ${f.name}`)}else log("Ngươi thả đèn cầu bình an.")})}),
   tsOpt({n:"Cầu thánh ân",odds:seen?oddsCl(odds):null,duoc:seen?["Hoàng thượng dạo bên hồ, trông thấy đèn: Sủng +3, Ân tình +2"]:["Đức +1"],kem:seen?[]:[`đêm nay Hoàng thượng không ra hồ (ngài đang phiền, hoặc Sủng của ngươi dưới ${BAL.tsx.denSung})`],later:1,
-   go:()=>play(2)}),
+   go:()=>play("thánh ân",far=>{if(seen&&(far||roll(odds))){apply({sung:3});S.an=cl((S.an||0)+2,0,100);log(`Đêm ${f.name}, Hoàng thượng dạo bên hồ, trông thấy đèn của ngươi trôi xa, dừng lại hỏi han.`)}else{apply({duc:1});log("Ngươi thả đèn, lặng lẽ cầu thánh ân.")}})}),
   tsOpt({n:"Thôi, không thả nữa",duoc:["không mất thêm gì"]})]})}
 /* NPCs float lanterns too, by the same rule (seen by the Emperor when he walks there and they are in favour) */
 function tsDenNpc(){const f=tsDenFest();if(!f)return;const s=tsS();const key=`${S.year}-${f.k}`;if(s.denN===key)return;s.denN=key;const E=S.emp;
@@ -59341,8 +59320,8 @@ function rcpTchAsk(k,then){const a=ARTS.find(x=>x.k===k),fee=rcpFeeNq(),O=[];con
 function rcpNewSt(k){return wkKindsOf(k).filter(x=>RCP_ST[x]).some(x=>RCP_ST[x].some(s=>!rcpKnows(S,x,s[0])))}
 function rcpMaster(k){if(!S||S.dead||Q.length||S.mg||(S.arts[k]||0)<5||!can(2)||S.suc<BAL.sucNeed.rcp)return;
  rcpTchAsk(k,()=>{wkAsk(k,"teacher",()=>{if(!can(2)||S.suc<BAL.sucNeed.rcp)return;const fee=tchFee(k);if(S.bac<fee)return;apply({suc:-10,bac:-fee});tchPaid(k);spend(2);
-  const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;const m=S.mg={k,l:5,mode:"prac",wk:pick,pa:1,how:"học với thầy",qx:"Học nhanh: không ra thành phẩm."};
-  try{playArt({art:k,title:`Học ${an} với thầy`,quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},mgEnd:1,onDone:(raw,o)=>wkLessonEnd(k,m,raw,o)})}catch(x){S.mg=null}})})}
+  const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;S.mg={k,l:5,mode:"prac",wk:pick,pa:1};
+  try{playArt({art:k,title:`Học ${an} với thầy`,quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},onDone:(raw,o)=>{S.mg=null;if(o&&o.skipped)log("Học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,cl(Math.round(raw),0,10),"học với thầy");render()}})}catch(x){S.mg=null}})})}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-rcpmt],[data-rcpls],[data-rcpq]");if(!b||b.disabled)return;ev.stopPropagation();
  if(b.dataset.rcpmt)rcpMaster(b.dataset.rcpmt);else if(b.dataset.rcpls)rcpListOpen(b.dataset.rcpls);else rcpAskQ(b.dataset.rcpq)},true);
 /* Tài nghệ cards: the teacher button with its real cost, the new-sub-style teacher at bậc 5, the learnt sub-styles */
@@ -68763,7 +68742,7 @@ window.kitPicSubj=kitPicSubj;
 /* S event picture = ONE standard kit size (owner 16/11 19:54Z: no stretched ratio): KIT_SIZE.pic[V.picS] (PM 120x160, 3:4), centred in the body */
 .ksz3 .k3main.k3mpic{flex:none;width:${Z.pic[V.picS].w}px;height:${Z.pic[V.picS].h}px;min-height:0;align-self:center}
 .ksz3[data-pres="fig"] .k3body>.k3main.k3mpic.k3fill{align-self:stretch;height:auto;min-height:${Z.pic[V.picS].h}px}/* KIT 84c: person-less main picture fills its column */
-.ksz3[data-evfit="x"] .k3ev{display:none}.ksz3 .k3ev{flex:1 1 auto;min-height:${V.evMin.fig}px}.ksz3[data-pres="one"] .k3ev{min-height:${V.evMin.one}px}
+.ksz3 .k3ev{flex:1 1 auto;min-height:${V.evMin.fig}px}.ksz3[data-pres="one"] .k3ev{min-height:${V.evMin.one}px}
 .ksz3 .k3mpic>.ksart,.ksz3 .k3ev>.ksart{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;margin:0;border:0;box-shadow:none;border-radius:0}
 .ksz3 .k3mpic>.ksart img,.ksz3 .k3ev>.ksart img{width:100%;height:100%;object-fit:cover;display:block}
 .ksz3 .k3btns{display:grid;grid-template-columns:repeat(var(--k3c,1),minmax(0,1fr));gap:${V.btn.gap}px;flex:none}
@@ -68802,7 +68781,7 @@ function kszFrame3(sp,K){const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[s
 /* crop every event picture around its subject; strips never shorter than the subject (returns nothing; sets min-height + object-position) */
 const KSZ_NAT={};/* natural sizes of event pictures seen, so a frame built later (picker) knows its subject's height before the picture decodes */
 function kszEvMin3(c){const im=c.querySelector("img"),src=im&&im.getAttribute("src")||"";if(im&&im.naturalWidth)KSZ_NAT[src]=[im.naturalWidth,im.naturalHeight];const n=KSZ_NAT[src];
- const base=KIT_SIZE.v3.evMin[(c.closest(".ksz3")||{dataset:{}}).dataset.pres]||56;if((c.closest(".ksz3")||{dataset:{}}).dataset.evfit==="s")return base;/* LAW 10: options do not fit -> the picture is the short strip */const sj=c.dataset.subj?c.dataset.subj.split(",").map(Number):null;if(!sj||!n||!c.classList.contains("k3ev"))return base;
+ const base=KIT_SIZE.v3.evMin[(c.closest(".ksz3")||{dataset:{}}).dataset.pres]||56;if((c.closest(".ksz3")||{dataset:{}}).dataset.evfit==="s"&&c.classList.contains("k3ev"))return kszEvStrip3(c);/* LAW 10: options do not fit -> the picture is the standard strip (never dropped, KIT 56.6) */const sj=c.dataset.subj?c.dataset.subj.split(",").map(Number):null;if(!sj||!n||!c.classList.contains("k3ev"))return base;
  const w=c.clientWidth;const NM=KIT_SIZE.pic.NM;return Math.max(base,Math.min(Math.ceil(w*NM.h/NM.w),Math.ceil((sj[3]-sj[1])*n[1]*(w/n[0])*1.06)))/* the strip's floor is at most the standard NARROW strip ratio (NM 300x84): a taller subject is shown whole by kitPicFocus (zoom-out), never by a taller frame */}
 function kszPicFit3(root){root.querySelectorAll(".k3ev,.k3mpic").forEach(c=>{const im=c.querySelector("img");if(c.classList.contains("k3ev"))c.style.minHeight=c.dataset.pstep?"0px":kszEvMin3(c)+"px";if(!im||!im.naturalWidth)return;kitPicFocus(c,im)})}
 
@@ -68810,8 +68789,8 @@ function kszPicFit3(root){root.querySelectorAll(".k3ev,.k3mpic").forEach(c=>{con
 function kszOver3(dlg){const mb=document.getElementById("mb"),R=dlg.querySelector(".k3right"),B=dlg.querySelector(".k3body");let o=0;[R,B,mb].forEach(e=>{if(e&&e.getClientRects().length)o=Math.max(o,e.scrollHeight-e.clientHeight)});return o>1?o:0}
 function kszPicH3(k){const p=KIT_SIZE.pic[k];return typeof p.h==="number"?p.h:p.h[kitSzMode()]}
 function kszPicStep3(dlg,again){try{const ev=dlg.querySelector(".k3right>.k3ev");dlg.dataset.picc="";if(!ev)return"";if(!again){clearTimeout(dlg.__pstT);dlg.__pstT=setTimeout(()=>{if(dlg.isConnected)kszPicStep3(dlg,1)},180)}/* the layout settles after the first pass (figure feet-fit, fonts): the step is decided again from scratch, so a picture is never smaller than the scroll needs */const foc=()=>{const im=ev.querySelector("img");if(im&&im.naturalWidth)kitPicFocus(ev,im)};const set=h=>{ev.dataset.pstep="1";ev.style.flex="none";ev.style.minHeight="0px";ev.style.height=h+"px";foc()};const reset=()=>{delete ev.dataset.pstep;ev.style.flex="";ev.style.height="";ev.style.minHeight=kszEvMin3(ev)+"px";foc()};reset();const base=kszOver3(dlg);if(!base)return"";const h0=ev.offsetHeight;let best="",bo=base;
- for(const k of KIT_SIZE.v3.picLadder){const h=kszPicH3(k);if(h>=h0)continue;set(h);const o=kszOver3(dlg);if(o<bo){bo=o;best=k}if(!o)break}
- if(!best){reset();return""}
+ const strip=kszEvStrip3(ev);for(const k of KIT_SIZE.v3.picLadder){const h=kszPicH3(k);if(h>=h0)continue;set(h);const o=kszOver3(dlg);if(o<bo&&(!o||h>=strip)){bo=o;best=k}if(!o)break}/* KIT 56.6 (owner 19/11 ~04:15Z): a class below THE STRIP is used only when it removes the scroll; a scroll no class removes keeps the strip at least */
+ if(!best){if(bo&&strip<h0){set(strip);dlg.dataset.picc="strip";return"strip"}reset();return""}
  set(kszPicH3(best));dlg.dataset.picc=best;return best}catch(e){console.error("kszPicStep3",e);return""}}
 /* kitPicFocus(box, img) — THE focal crop (owner 16/11 19:54Z "cái lá thư chưa có đúng vị trí"; owner 21:1xZ: the picture ALWAYS FILLS its frame, never letterboxed / blur-padded):
    `cover` at every size, positioned so the centre of the subject box (KIT_PIC_SUBJ) sits at the centre of the visible window (clamped to the picture). When the subject is
@@ -68985,7 +68964,22 @@ function kszFeetFit(dlg){try{const B=dlg.querySelector(".k3body"),L=B&&B.querySe
  for(let i=0;i<4;i++){const mbx=document.getElementById("mb");let fixed=2;[...dlg.children].forEach(c=>{if(c!==mbx&&c.getClientRects().length&&getComputedStyle(c).position!=="absolute")fixed+=c.offsetHeight});if(mbx)[...mbx.children].forEach(c=>{if(c!==B&&c.getClientRects().length)fixed+=c.offsetHeight});const room=cap-fixed-26;/* the room = the cap minus the frame's own parts (header, buttons, body padding): the same for every person, never read from the current figure */
   const fs=L.querySelector(".kszfs"),h=fs?fs.offsetHeight:0;if(h<=60)break;const body0=KIT_SIZE.fig[lay.fig].h*(dlg.__kszKid||1),tg=L.querySelector(":scope>.kt3"),part=L.offsetHeight-h+(tg&&!tg.querySelector(".kdh,.kdh-cap")?kszPlateH():0),allow=(room-part)/(1+cRef),cur=body0*dlg.__kszShrink;
   if(allow>=cur-.5)break;dlg.__kszShrink=Math.max(.3,allow/body0);kszFigFit(dlg)}
+ if(dlg.__kszFill)kszFigFill3(dlg,cap,lay,cRef)
 }catch(e){console.error("kszFeetFit",e)}}
+/* KIT 56.17 FIGURE FILLS THE FRAME (owner 19/11 ~04:15Z "tại sao ông hoàng thượng á, đứng trên cao vậy mà không có giãn cái tỷ lệ ra cho đúng mấy cái khung?"; OD 18/11 ~21:20Z (1)
+   "the figure FILLS the left column height of the frame ... never a short figure floating in a tall frame"). After the size is picked (kszLivePick3 sets dlg.__kszFill), when the
+   frame body is taller than the class figure column (the info / option column is taller: XL, more text scrolls inside it), the ONE body of the frame grows so the column
+   (name tag + the tallest Hoàng hậu crown room + skull -> feet) reaches the body floor: target = min(the room the frame cap leaves, the info column's own height).
+   Same factor for every person of the frame (read from the frame, never from the figure shown); true proportions (height and width scale together); feet on the floor.
+   Never runs inside the size picker (a grown figure would make every size "fit"). */
+function kszFigFill3(dlg,cap,lay,cRef){const B=dlg.querySelector(".k3body"),L=B&&B.querySelector(":scope>.kszfig"),R=B&&B.querySelector(":scope>.k3right"),fs=L&&L.querySelector(".kszfs");if(!L||!R||!fs)return;
+ const mbx=document.getElementById("mb");let fixed=2;[...dlg.children].forEach(c=>{if(c!==mbx&&c.getClientRects().length&&getComputedStyle(c).position!=="absolute")fixed+=c.offsetHeight});if(mbx)[...mbx.children].forEach(c=>{if(c!==B&&c.getClientRects().length)fixed+=c.offsetHeight});
+ const pad=(parseFloat(getComputedStyle(B).paddingTop)||0)+(parseFloat(getComputedStyle(B).paddingBottom)||0);const M=document.getElementById("modal");if(!(cap>0))cap=M?M.clientHeight-24:0;if(!(cap>0))return;const room=cap-fixed-pad-4;
+ const mh=R.style.minHeight,mx=R.style.maxHeight,ov=R.style.overflow;R.style.minHeight="";R.style.maxHeight="";R.style.overflow="visible";const want=Math.ceil(R.scrollHeight);R.style.minHeight=mh;R.style.maxHeight=mx;R.style.overflow=ov;
+ const lh=L.offsetHeight,target=Math.min(room,want);if(target<=lh+2)return;
+ const tg=L.querySelector(":scope>.kt3"),part=lh-fs.offsetHeight+(tg&&!tg.querySelector(".kdh,.kdh-cap")?kszPlateH():0),body0=KIT_SIZE.fig[lay.fig].h*(dlg.__kszKid||1),allow=(target-part)/(1+cRef);
+ if(allow>body0*dlg.__kszShrink+.5){dlg.__kszShrink=allow/body0;kszFigFit(dlg)}}
+window.kszFigFill3=kszFigFill3;
 
 window.kszFeetFit=kszFeetFit;
 /* KIT 56.4: the height a worn-title plate adds to the name tag (measured once); the room of every frame is reckoned WITH the plate, so a person with a title and one without get the same body */
@@ -68995,9 +68989,14 @@ function kitFrameApplyLive3(dlg){try{kszFeetFit(dlg)}catch(e){}const g=dlg.query
  if(R){R.style.maxHeight="";R.style.overflow="";R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");if(dlg.dataset.ksz==="XL"&&L){/* XL (approved #3): the body stays the figure's height; more content scrolls inside the info column */
   {const kb=dlg.querySelector(".k3body");R.style.maxHeight=Math.max(L.offsetHeight,kb?kb.clientHeight:0)+"px"}/* tall phone frame (kit §6.2c): the info column may use the whole grown body, not only the figure height */R.style.overflow="auto"}}
  kszPicFit3(dlg);kszPicFit3(dlg);kszPicStep3(dlg);kszEvLaw10(dlg);clearTimeout(dlg.__evT);dlg.__evT=setTimeout(()=>{if(dlg.isConnected){try{kszEvLaw10(dlg)}catch(e){}}},350);return dlg.dataset.ksz}
-/* LAW 10 (START_CORE, owner 18/11 ~16:05Z): a big scene picture only when the content fits without scrolling. When the option list scrolls: 1) the picture shrinks to the short strip (evMin), 2) still scrolling: the picture is dropped. Whole group (every live option frame, every tier, Fold + iPad). */
+/* LAW 10 (START_CORE, owner 18/11 ~16:05Z) + KIT 56.6 (owner 19/11 ~04:15Z "Hình minh họa của cái sự kiện này đâu?"): a BIG scene picture only when the content fits without scrolling;
+   when the option list still scrolls the picture becomes THE STRIP (kszEvStrip3: the standard narrow strip NM 300x84 at the column width, at most NL) and stays there.
+   The picture is NEVER dropped: every event frame shows its own scene picture (whole group, every live option frame, every tier, Fold + iPad). */
+function kszEvStrip3(c){const w=c.clientWidth||KIT_SIZE.pic.NM.w,NM=KIT_SIZE.pic.NM;return Math.max(KIT_SIZE.v3.evMin.fig,Math.min(kszPicH3("NL"),Math.ceil(w*NM.h/NM.w)))}
 function kszEvLaw10(dlg){const R=dlg.querySelector(".k3right"),ev=R&&R.querySelector(":scope>.k3ev");if(!ev)return;const o=R.querySelector(":scope>.opts"),sc=()=>o&&o.scrollHeight>o.clientHeight+1;
- delete dlg.dataset.evfit;if(!sc())return;dlg.dataset.evfit="s";kszPicFit3(dlg);if(!sc())return;dlg.dataset.evfit="x";kszPicFit3(dlg)}
+ delete dlg.dataset.evfit;if(!sc())return;const h=kszEvStrip3(ev);if(ev.dataset.pstep&&ev.offsetHeight<=h+1)return;/* the 56.6 step already made it the strip or smaller */
+ dlg.dataset.evfit="s";ev.dataset.pstep="1";ev.style.flex="none";ev.style.minHeight="0px";ev.style.height=h+"px";dlg.dataset.picc="strip";const im=ev.querySelector("img");if(im&&im.naturalWidth)kitPicFocus(ev,im)}
+window.kszEvStrip3=kszEvStrip3;
 function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!strict)return true;if(/^N/.test(K)){const mb=document.getElementById("mb");return !mb||mb.scrollHeight<=mb.clientHeight+1}/* narrow: only the screen limits the stack: nothing may scroll inside the frame body */const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor"),ev=R&&R.querySelector(":scope>.k3ev");if(!R)return true;
  const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";const ef=ev&&ev.style.flex,eh=ev&&ev.style.height,em=ev&&ev.style.minHeight;if(ev){ev.style.flex="none";ev.style.minHeight="";ev.style.height=kszEvMin3(ev)+"px"}
  const need=R.offsetHeight;if(ev){ev.style.flex=ef;ev.style.height=eh;ev.style.minHeight=em}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
@@ -69020,8 +69019,9 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,
    the option cards BELOW it full width, 1 column (kszBtnGridLive3), cards = ONE size per dialog (kitOptFill, tall 3:4 for person dialogs). The figure ladder
    NL > NM > NS (NS = the small-portrait "one" presentation) takes the biggest that keeps the frame inside the screen. Wider frames: untouched. */
 function kszNarrow3(dlg){const V=KIT_SIZE.v3,M=document.getElementById("modal"),a=M?M.clientWidth-16:0;/* a = the width the screen leaves a frame; the M frame (the smallest figure + right column layout) needs 24 + 12 + its figure column + minRight */return a>0&&a-24-12-KIT_SIZE.fig3.M.cw<V.narrow.minRight}
-function kszLivePick3(dlg){if(kszNarrow3(dlg)){for(const K of["NL","NM","NS"]){kszLiveLay3(dlg,K);if(K==="NS"||kitFrameFitsLive3(dlg))return K}}
- for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg))return K}return"XL"}
+function kszLivePick3(dlg){dlg.__kszFill=0;if(kszNarrow3(dlg)){for(const K of["NL","NM","NS"]){kszLiveLay3(dlg,K);if(K==="NS"||kitFrameFitsLive3(dlg))return K}}
+ let P="XL";for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg)){P=K;break}}
+ /* KIT 56.17: the size is picked; now the figure fills the frame body (every later re-apply keeps it) */dlg.__kszFill=1;kitFrameApplyLive3(dlg);return P}
 let kszRepT=0;function kszLiveRepick3(dlg){clearTimeout(kszRepT);kszRepT=setTimeout(()=>{try{if(dlg.isConnected&&dlg.__ksz3)kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}},30)}
 function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=document.getElementById("mb");if(!M||M.hidden||!mb)return false;const dlg=M.querySelector(".dlg.kpanel");
  if(!dlg||dlg.classList.contains("kp-person")||dlg.__ksz3||dlg.contains(document.getElementById("kload")))return false;
@@ -75254,11 +75254,11 @@ img.kemo.kfseal.kemo-an{opacity:.85}
        Cảnh động on, no prefers-reduced-motion and not Gọn (OPT.fxon === false). Idle = `rotate`, lean = `transform`/`filter`: separate properties, never fight. Cheap on Fold (no layout, no per-frame JS).
    (2) FRAME LOOP source (optional, painted by Foreman C): img/kit/emo-anim/<set><k>.webp (animated webp / apng). Probed once per file; when it exists the seal swaps its still for the loop
        DURING THE LEAN-IN only and back to the still when the lean ends or the seal leaves the screen; no file = the still + the CSS motion. Same asset-set rule as the still: <set> = "" women, "m-" young men, "mo-" mature men.
-   (3) EFFECT-SPRITE layer (optional, painted): img/kit/emo-fx/<k>.webp (smoke puffs, tears, sweat, glint …): ONE sibling img.kemofx per leaning seal, centred on the seal at KIT_EMOSEAL.fxScale x its size,
+   (3) EFFECT-SPRITE layer (optional, painted): img/kit/emo-fx/<k>.webp (smoke puffs, tears, sweat, glint …): ONE small fixed img.kemofx per leaning seal placed on the big seal by KIT_EMOSEAL.fxSpec (cheek tear / head smoke),
        pointer-events none, removed when the lean ends or the seal leaves the screen. No file = no layer. Nothing is drawn in code (no code-drawn tears / smoke).
    KEYS: the seal map holds khoc + hon too (names "Khóc", "Hờn"); the mood logic (jemo EMO) decides when a person is in one — until then they never appear. ===== */
-window.KIT_EMOSEAL=window.KIT_EMOSEAL||{keys:{vui:{m:"sway",d:1.5},binh:{m:"nod",d:1.1},buon:{m:"droop",d:1.6},gian:{m:"shake",d:1.0},so:{m:"tremble",d:1.1},ghen:{m:"flicker",d:1.4},lo:{m:"bob",d:1.3},dau:{m:"wince",d:1.2},muu:{m:"glint",d:1.4},an:{m:"nod",d:1.1},khoc:{m:"droop",d:1.6,name:"Khóc"},hon:{m:"flicker",d:1.4,name:"Hờn"},chanh:{m:"flicker",d:1.4},phanno:{m:"shake",d:1.0},runso:{m:"tremble",d:1.1},matngu:{m:"droop",d:1.6},tutin:{m:"nod",d:1.1},hanghai:{m:"bob",d:1.3},tinhtu:{m:"sway",d:1.5},chuyentam:{m:"nod",d:1.1},hungkhoi:{m:"glint",d:1.4},tinhnghich:{m:"bob",d:1.3},hothen:{m:"droop",d:1.6},chan:{m:"droop",d:1.6},khochiu:{m:"flicker",d:1.4},choang:{m:"wince",d:1.2}},
- defaultMotion:"nod",defaultDur:1.2,idle:{deg:1.2,per:[6,8]},lean:{scale:[1.12,1.18],min:4,max:8,gap:1.2},anim:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-anim/",fx:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-fx/",fxScale:1.7};
+window.KIT_EMOSEAL=window.KIT_EMOSEAL||{keys:{vui:{m:"sway",d:2.8},binh:{m:"nod",d:3.0},buon:{m:"droop",d:3.6},gian:{m:"shake",d:2.0},so:{m:"tremble",d:2.4},ghen:{m:"flicker",d:3.0},lo:{m:"bob",d:2.8},dau:{m:"wince",d:2.8},muu:{m:"glint",d:3.0},an:{m:"nod",d:3.0},khoc:{m:"droop",d:3.6,name:"Khóc"},hon:{m:"flicker",d:3.0,name:"Hờn"},chanh:{m:"flicker",d:3.0},phanno:{m:"shake",d:2.0},runso:{m:"tremble",d:2.4},matngu:{m:"droop",d:3.6},tutin:{m:"nod",d:3.0},hanghai:{m:"bob",d:2.8},tinhtu:{m:"sway",d:2.8},chuyentam:{m:"nod",d:3.0},hungkhoi:{m:"glint",d:3.0},tinhnghich:{m:"bob",d:2.8},hothen:{m:"droop",d:3.6},chan:{m:"droop",d:3.6},khochiu:{m:"flicker",d:3.0},choang:{m:"wince",d:2.8}},
+ defaultMotion:"nod",defaultDur:3.0,idle:{deg:.6,per:[8,11]},lean:{stage:"img.kfseal",panel:"#modal,.krbox,.kmov,.dlg",deny:"header.hud,.hud",scale:[2.2,2.4],minS:1.2,minFrac:.2,maxFrac:.5,margin:.09,marginPx:4,grow:1.6,shrink:1.6,holdMin:5,loops:2,min:4,max:8,gap:1.2,z:9990},animKey:{gian:"gian",phanno:"gian",khoc:"khoc",buon:"khoc"},anim:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-anim/",fx:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-fx/",fxSpec:{khoc:{w:.24,x:.14,y:.52,m:"fall"},gian:{w:.3,x:.7,y:.0,m:"rise"},def:{w:.26,x:.66,y:.5,m:"rise"}}};
 const KES_HAVE={};/* url -> true | false | "wait" (probe result) */
 function kesProbe(url,cb){const h=KES_HAVE[url];if(h===true||h===false){cb(h);return}
  if(h&&h.w){h.w.push(cb);return}const e={w:[cb]};KES_HAVE[url]=e;const im=new Image();const done=ok=>{KES_HAVE[url]=ok;e.w.forEach(f=>{try{f(ok)}catch(x){}})};im.onload=()=>done(true);im.onerror=()=>done(false);im.src=url}
@@ -75267,71 +75267,100 @@ function kesKey(el){const m=/kemo-([a-z0-9_-]+)/.exec(el.className.replace(/kemo
 /* the still name of the seal minus the key: img/kit/emo-<set><k>.webp -> "<set>" */
 function kesSet(el,k){const m=/emo-((?:m-|mo-)?)[a-z-]+\.webp/.exec(el.getAttribute("data-kemos")||el.getAttribute("src")||"");return m?m[1]:""}
 function kesFxOff(el){const f=el.__fx;if(f){f.remove();el.__fx=null}}
-function kesFxSync(el){const f=el.__fx;if(!f||!el.isConnected)return;const w=el.offsetWidth,h=el.offsetHeight,W=w*KIT_EMOSEAL.fxScale,H=h*KIT_EMOSEAL.fxScale;
- f.style.cssText=`left:${(el.offsetLeft+w/2-W/2).toFixed(1)}px;top:${(el.offsetTop+h/2-H/2).toFixed(1)}px;width:${W.toFixed(1)}px;height:${H.toFixed(1)}px`}
 function kesReal(el){/* a key whose own still is not on screen (feelArt / feelFb walked to a nearest painting): the real still replaces it once it exists on the CDN */const k=kesKey(el);if(!k||el.__real)return;const set=kesSet(el,k),real=`https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-${set}${k}.webp`;if((el.getAttribute("src")||"").indexOf(real)>=0)return;el.__real=1;
  kesProbe(real,ok=>{if(!ok)return;if(el.isConnected){el.dataset.kemos=real;if(!/emo-anim/.test(el.getAttribute("src")||""))el.setAttribute("src",real)}})}
 function kesR(a,b){return a+Math.random()*(b-a)}
 function kesSpec(k){return KIT_EMOSEAL.keys[k]||KIT_EMOSEAL.keys[k.replace(/^act-/,"")]}
-let kesLastLean=0;
-function kesLeanEnd(el){if(el.__lt){clearTimeout(el.__lt);el.__lt=0}el.classList.remove("kemo-lean");const still=el.dataset.kemos;if(still&&el.getAttribute("src")!==still)el.setAttribute("src",still);kesFxOff(el)}
+/* LEAN-IN (owner 19/11 ~05:05Z): the seal is still while small. Every few seconds ONE seal (global stagger) is lifted onto a fixed overlay clone `img.kemo-big` (above every UI, never clipped by a frame,
+   clamped inside the screen), GROWS slowly to lean.scale x its size (lean.grow s), HOLDS big while the feeling's motion loops n times (n x keys[k].d s, at least lean.holdMin s AND lean.loops loops),
+   SHRINKS slowly back (lean.shrink s) onto the still seal. Envelope = CSS `scale`/`translate` (keyframes kemoGrow, kemoShrink), feeling motion = `transform` (kemoL-<m>, one loop = keys[k].d). Numbers all in KIT_EMOSEAL. */
+let kesCur=null,kesLastEnd=0;
+function kesLeanEnd(el){if(el.__lt){clearTimeout(el.__lt);el.__lt=0}if(el.__lw){clearInterval(el.__lw);el.__lw=0}el.classList.remove("kemo-lean");const c=el.__big;if(c){c.remove();el.__big=null}
+ const still=el.dataset.kemos;if(still&&el.getAttribute("src")!==still)el.setAttribute("src",still);kesFxOff(el);if(kesCur===el){kesCur=null;kesLastEnd=performance.now()}}
+/* SCOPE (owner 19/11 ~06:25Z): only a seal beside a figure ON THE STAGE (lean.stage = jfigseal head seals: room / Dư đồ / place stages) leans, plus a seal inside a tab / panel she has opened (lean.panel);
+   every avatar / portrait frame (top-bar pcPort, lists, cards) is ALWAYS STILL: no lean, no idle sway. Never inside the top bar (lean.deny). */
+function kesCan(el){const L=KIT_EMOSEAL.lean;try{if(el.closest(L.deny))return false;return el.matches(L.stage)||!!el.closest(L.panel)}catch(e){return false}}
 function kesSchedule(el){if(el.__ln)clearTimeout(el.__ln);const L=KIT_EMOSEAL.lean;el.__ln=setTimeout(()=>kesLean(el),kesR(L.min,L.max)*1000)}
 function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains("kemo-live"))return;
- const L=KIT_EMOSEAL.lean,now=performance.now(),wait=kesLastLean+L.gap*1000-now;
- if(wait>0&&!force){el.__ln=setTimeout(()=>kesLean(el),wait+kesR(100,900));return}/* stagger: never two seals leaning together */
- kesLastLean=now;const k=kesKey(el),spec=kesSpec(k),d=(spec&&spec.d)||KIT_EMOSEAL.defaultDur,still=el.dataset.kemos;
- el.style.setProperty("--kemo-ls",kesR(L.scale[0],L.scale[1]).toFixed(3));el.style.setProperty("--kemo-ld",d+"s");
- el.classList.remove("kemo-lean");void el.offsetWidth;el.classList.add("kemo-lean");
- const set=kesSet(el,k);
- kesProbe(KIT_EMOSEAL.anim+set+k+".webp",ok=>{if(ok&&el.isConnected&&el.classList.contains("kemo-lean")&&el.getAttribute("src")===still)el.setAttribute("src",KIT_EMOSEAL.anim+set+k+".webp")});
- kesProbe(KIT_EMOSEAL.fx+k+".webp",ok=>{if(!ok||!el.isConnected||!el.classList.contains("kemo-lean")||el.__fx||!el.parentNode)return;
-  const f=document.createElement("img");f.className="kemofx kemofx-"+k;f.alt="";f.setAttribute("aria-hidden","true");f.src=KIT_EMOSEAL.fx+k+".webp";f.onerror=()=>f.remove();el.parentNode.appendChild(f);el.__fx=f;kesFxSync(el)});
- el.__lt=setTimeout(()=>{kesLeanEnd(el);kesSchedule(el)},d*1000+150)}
+ const L=KIT_EMOSEAL.lean,now=performance.now();
+ if(!force&&((kesCur&&kesCur!==el&&kesCur.isConnected&&kesCur.classList.contains("kemo-lean"))||kesLastEnd+L.gap*1000>now)){/* stagger: never two seals leaning together, next only after the previous one fully ended + gap */
+  el.__ln=setTimeout(()=>kesLean(el),Math.max(300,kesLastEnd+L.gap*1000-now)+kesR(100,900));return}
+ if(kesCur&&kesCur!==el)kesLeanEnd(kesCur);
+ const r=el.getBoundingClientRect();if(r.width<2||r.bottom<=0||r.top>=innerHeight||r.right<=0||r.left>=innerWidth){kesSchedule(el);return}
+ kesCur=el;const k=kesKey(el),spec=kesSpec(k),d=(spec&&spec.d)||KIT_EMOSEAL.defaultDur,still=el.dataset.kemos;
+ const n=Math.max(L.loops,Math.ceil(L.holdMin/d)),hold=n*d,tot=L.grow+hold+L.shrink;
+ const sc=Math.min(innerWidth,innerHeight)/Math.max(r.width,r.height);let S=Math.max(kesR(L.scale[0],L.scale[1]),L.minFrac*sc);S=Math.max(L.minS,Math.min(S,L.maxFrac*sc));/* big enough to read the face: >= minFrac of the short screen side, never past maxFrac */
+ const bw=r.width*S,bh=r.height*S,m=Math.round(Math.max(bw,bh)*L.margin)+L.marginPx,/* margin = room for the feeling motion (shake / sway amplitude) */ cx=r.left+r.width/2,cy=r.top+r.height/2;
+ const bl=Math.max(m,Math.min(cx-bw/2,innerWidth-bw-m)),bt=Math.max(m,Math.min(cy-bh/2,innerHeight-bh-m));/* clamped inside the screen */
+ const c=document.createElement("img");c.className="kemo-big kemo-m-"+(spec?spec.m:KIT_EMOSEAL.defaultMotion);c.alt="";c.setAttribute("aria-hidden","true");c.src=el.getAttribute("src");
+ c.style.cssText=`position:fixed;z-index:${L.z};left:${bl.toFixed(1)}px;top:${bt.toFixed(1)}px;width:${bw.toFixed(1)}px;height:${bh.toFixed(1)}px;pointer-events:none;object-fit:${getComputedStyle(el).objectFit||"contain"};`+
+  `--kb-dx:${(cx-(bl+bw/2)).toFixed(1)}px;--kb-dy:${(cy-(bt+bh/2)).toFixed(1)}px;--kb-s:${(1/S).toFixed(4)};--kb-ss:${L.shrink}s;--kb-sd:${(L.grow+hold).toFixed(2)}s;--kb-d:${d}s;--kb-n:${n};--kb-gs:${L.grow}s`;
+ document.body.appendChild(c);el.__big=c;el.classList.add("kemo-lean");
+ const set=kesSet(el,k),ak=KIT_EMOSEAL.animKey[k]||k;
+ kesProbe(KIT_EMOSEAL.anim+set+ak+".webp",ok=>{if(ok&&el.isConnected&&el.__big===c){c.src=KIT_EMOSEAL.anim+set+ak+".webp";c.classList.add("kemo-played")}});/* the painted loop (Foreman C) plays on the big seal; no loop file for this feeling = the still + its CSS motion */
+ kesProbe(KIT_EMOSEAL.fx+ak+".webp",ok=>{if(!ok||!el.isConnected||el.__big!==c||el.__fx)return;
+  const f=document.createElement("img");f.className="kemofx kemofx-"+ak;f.alt="";f.setAttribute("aria-hidden","true");f.src=KIT_EMOSEAL.fx+ak+".webp";f.onerror=()=>f.remove();
+  const X=KIT_EMOSEAL.fxSpec[ak]||KIT_EMOSEAL.fxSpec.def,fw=bw*X.w,fl=bl+bw*X.x,ft=bt+bh*X.y;f.classList.add("kemofx-"+X.m);/* small effect sprite on the big seal (cheek / head corner), grows + shrinks with it (own envelope origin) */
+  f.style.cssText=`position:fixed;z-index:${L.z+1};left:${fl.toFixed(1)}px;top:${ft.toFixed(1)}px;width:${fw.toFixed(1)}px;height:auto;--kb-s:${(1/S).toFixed(4)};--kb-dx:${(cx-(fl+fw/2)).toFixed(1)}px;--kb-dy:${(cy-(ft+fw/2)).toFixed(1)}px;`+c.style.cssText.split(";").filter(x=>/^\s*--kb-(ss|sd|gs)/.test(x)).join(";");
+  document.body.appendChild(f);el.__fx=f});/* effect sprite grows / holds / shrinks with the seal (same envelope), centred on it */
+ const ox=r.left,oy=r.top;/* the small seal left the screen / moved (scroll, re-render): end the lean at once */
+ el.__lw=setInterval(()=>{if(!el.isConnected||!el.classList.contains("kemo-live")){kesLeanEnd(el);return}const q=el.getBoundingClientRect();if(Math.abs(q.left-ox)>10||Math.abs(q.top-oy)>10||q.bottom<=0||q.top>=innerHeight){kesLeanEnd(el);kesSchedule(el)}},250);
+ el.__lt=setTimeout(()=>{kesLeanEnd(el);kesSchedule(el)},tot*1000+80)}
 function kesLive(el,on){if(!el.isConnected)return;kesReal(el);
  if(!el.dataset.kemos){el.dataset.kemos=el.getAttribute("src")||""}
- const was=el.classList.contains("kemo-live"),live=on&&kesMotionOK();el.classList.toggle("kemo-live",live);const k=kesKey(el),spec=kesSpec(k);if(!/kemo-m-/.test(el.className))el.classList.add("kemo-m-"+(spec?spec.m:KIT_EMOSEAL.defaultMotion));
+ const was=el.classList.contains("kemo-live"),live=on&&kesMotionOK()&&kesCan(el);el.classList.toggle("kemo-live",live);const k=kesKey(el),spec=kesSpec(k);if(!/kemo-m-/.test(el.className))el.classList.add("kemo-m-"+(spec?spec.m:KIT_EMOSEAL.defaultMotion));
  if(live){if(!was){const I=KIT_EMOSEAL.idle;el.style.setProperty("--kemo-id",I.deg+"deg");el.style.setProperty("--kemo-ip",kesR(I.per[0],I.per[1]).toFixed(2)+"s");el.style.setProperty("--kemo-i0","-"+kesR(0,I.per[1]).toFixed(2)+"s");if(!el.__ln)kesSchedule(el)}}
  else{if(el.__ln){clearTimeout(el.__ln);el.__ln=0}kesLeanEnd(el)}}
 const KES_IO=typeof IntersectionObserver==="function"?new IntersectionObserver(es=>{for(const e of es)kesLive(e.target,e.isIntersecting)},{threshold:.01}):null;
 function kesWatch(el){if(!el||el.__kes)return;el.__kes=1;if(KES_IO)KES_IO.observe(el);else kesLive(el,true)}
 function kesScan(){document.querySelectorAll("img.kemo").forEach(kesWatch)}
-function kesSweep(){/* effect layers whose seal is gone */document.querySelectorAll("img.kemofx").forEach(f=>{const p=f.parentNode;if(!p||![...p.children].some(c=>c.__fx===f))f.remove()})}
+function kesSweep(){/* effect layers + big clones whose seal is gone */const L=[...document.querySelectorAll("img.kemo")];document.querySelectorAll("img.kemofx").forEach(f=>{if(!L.some(c=>c.__fx===f))f.remove()});document.querySelectorAll("img.kemo-big").forEach(f=>{if(!L.some(c=>c.__big===f))f.remove()})}
 let kesQ=0;function kesSched(){if(kesQ)return;kesQ=requestAnimationFrame(()=>{kesQ=0;kesScan();kesSweep()})}
 try{new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches&&n.matches("img.kemo")||n.querySelector&&n.querySelector("img.kemo")))||[...m.removedNodes].some(n=>n.nodeType===1)))kesSched()}).observe(document.body,{childList:true,subtree:true})}catch(e){}
-addEventListener("resize",()=>document.querySelectorAll("img.kemo.kemo-live").forEach(kesFxSync));
+addEventListener("resize",()=>document.querySelectorAll("img.kemo.kemo-lean").forEach(el=>{kesLeanEnd(el);kesSchedule(el)}));
 kesScan();
 /* r2 reviewer fix: Cảnh động / Gọn switched in Settings applies to the seals already on screen at once (saveOpt does not re-render) */
 (function(){if(typeof saveOpt!=="function")return;const o=saveOpt;saveOpt=function(){const r=o.apply(this,arguments);try{document.querySelectorAll("img.kemo").forEach(el=>{if(!el.__kes)return;const b=el.getBoundingClientRect();kesLive(el,b.width>2&&b.bottom>0&&b.top<innerHeight&&b.right>0&&b.left<innerWidth)})}catch(e){}return r}})();
 window.kitEmoSeal={scan:kesScan,live:kesLive,probe:kesProbe,lean:kesLean};/* no pop: owner 17/11 ~18:10Z (Sims model), the seal has ONE source (jemo emoSealKey) */
 (function(){const st=document.createElement("style");st.id="kemoseal-css";st.textContent=`
 img.kemo{transform-origin:50% 60%;will-change:auto}
-img.kemofx{position:absolute!important;pointer-events:none;z-index:8;object-fit:contain;max-width:none;max-height:none;margin:0;border-radius:0}
+img.kemofx{pointer-events:none;object-fit:contain;max-width:none;max-height:none;margin:0;border-radius:0}
+img.kemo.kemo-lean{visibility:hidden}
+img.kemo-big{transform-origin:50% 58%;will-change:transform,scale;filter:drop-shadow(0 4px 10px #000a)}
 @media (prefers-reduced-motion:no-preference){
-img.kemo.kemo-live{animation:kemoIdle var(--kemo-ip,7s) ease-in-out var(--kemo-i0,0s) infinite}
-img.kemo.kemo-live.kemo-lean{animation:kemoIdle var(--kemo-ip,7s) ease-in-out var(--kemo-i0,0s) infinite,var(--kemo-lk,kemoL-nod) var(--kemo-ld,1.2s) ease-out 1 both}
-img.kemo.kemo-live.kemo-lean.kemo-m-nod{--kemo-lk:kemoL-nod}
-img.kemo.kemo-live.kemo-lean.kemo-m-sway{--kemo-lk:kemoL-sway}
-img.kemo.kemo-live.kemo-lean.kemo-m-droop{--kemo-lk:kemoL-droop}
-img.kemo.kemo-live.kemo-lean.kemo-m-shake{--kemo-lk:kemoL-shake}
-img.kemo.kemo-live.kemo-lean.kemo-m-tremble{--kemo-lk:kemoL-tremble}
-img.kemo.kemo-live.kemo-lean.kemo-m-flicker{--kemo-lk:kemoL-flicker}
-img.kemo.kemo-live.kemo-lean.kemo-m-bob{--kemo-lk:kemoL-bob}
-img.kemo.kemo-live.kemo-lean.kemo-m-wince{--kemo-lk:kemoL-wince}
-img.kemo.kemo-live.kemo-lean.kemo-m-glint{--kemo-lk:kemoL-glint}
-img.kemofx{animation:kemoFx 2.4s ease-in-out infinite}
+img.kemo.kemo-live{animation:kemoIdle var(--kemo-ip,9s) ease-in-out var(--kemo-i0,0s) infinite}
+img.kemo-big{animation:kemoGrow var(--kb-gs,1.6s) cubic-bezier(.4,0,.25,1) 0s 1 both,kemoShrink var(--kb-ss,1.6s) cubic-bezier(.4,0,.25,1) var(--kb-sd,8s) 1 forwards,var(--kb-k,kemoL-nod) var(--kb-d,3s) ease-in-out var(--kb-gs,1.6s) var(--kb-n,2) both}
+img.kemo-big.kemo-m-nod{--kb-k:kemoL-nod}
+img.kemo-big.kemo-m-sway{--kb-k:kemoL-sway}
+img.kemo-big.kemo-m-droop{--kb-k:kemoL-droop}
+img.kemo-big.kemo-m-shake{--kb-k:kemoL-shake}
+img.kemo-big.kemo-m-tremble{--kb-k:kemoL-tremble}
+img.kemo-big.kemo-m-flicker{--kb-k:kemoL-flicker}
+img.kemo-big.kemo-m-bob{--kb-k:kemoL-bob}
+img.kemo-big.kemo-m-wince{--kb-k:kemoL-wince}
+img.kemo-big.kemo-m-glint{--kb-k:kemoL-glint}
+img.kemo-big.kemo-played{animation:kemoGrow var(--kb-gs,1.6s) cubic-bezier(.4,0,.25,1) 0s 1 both,kemoShrink var(--kb-ss,1.6s) cubic-bezier(.4,0,.25,1) var(--kb-sd,8s) 1 forwards}/* painted loop plays: its own animation, no extra CSS shake */
+img.kemofx{animation:kemoGrow var(--kb-gs,1.6s) cubic-bezier(.4,0,.25,1) 0s 1 both,kemoShrink var(--kb-ss,1.6s) cubic-bezier(.4,0,.25,1) var(--kb-sd,8s) 1 forwards,kemoFx 2.4s ease-in-out infinite}
+img.kemofx.kemofx-fall{--fxk:kemoFxFall}img.kemofx.kemofx-rise{--fxk:kemoFxRise}
+img.kemofx.kemofx-fall,img.kemofx.kemofx-rise{animation:kemoGrow var(--kb-gs,1.6s) cubic-bezier(.4,0,.25,1) 0s 1 both,kemoShrink var(--kb-ss,1.6s) cubic-bezier(.4,0,.25,1) var(--kb-sd,8s) 1 forwards,var(--fxk) 1.6s ease-in infinite}
 }
-/* IDLE: ONLY the rotate property, extremely slight + slow, never a shake (owner 19/11 ~02:15Z) */
-@keyframes kemoIdle{0%,100%{rotate:calc(var(--kemo-id,1.2deg) * -1)}50%{rotate:var(--kemo-id,1.2deg)}}
-/* LEAN-IN: scale up to --kemo-ls (ease-out, leaning forward), the feeling's own stronger motion while leaned in, settle back. transform/filter only. */
-@keyframes kemoL-nod{0%{transform:scale(1)}18%{transform:scale(var(--kemo-ls))}34%{transform:scale(var(--kemo-ls)) translateY(5%)}50%{transform:scale(var(--kemo-ls))}66%{transform:scale(var(--kemo-ls)) translateY(4%)}82%{transform:scale(var(--kemo-ls))}100%{transform:scale(1)}}
-@keyframes kemoL-sway{0%{transform:scale(1)}18%{transform:scale(var(--kemo-ls)) rotate(0);filter:drop-shadow(0 0 4px #ffe9a0) drop-shadow(0 1px 1.5px #000a)}38%{transform:scale(var(--kemo-ls)) rotate(-6deg)}62%{transform:scale(var(--kemo-ls)) rotate(6deg);filter:drop-shadow(0 0 7px #ffe9a0) drop-shadow(0 1px 1.5px #000a)}82%{transform:scale(var(--kemo-ls)) rotate(-3deg)}100%{transform:scale(1);filter:drop-shadow(0 1px 1.5px #000a)}}
-@keyframes kemoL-droop{0%{transform:scale(1) translateY(0)}20%{transform:scale(var(--kemo-ls)) translateY(0)}45%{transform:scale(var(--kemo-ls)) translateY(9%) rotate(-3deg)}70%{transform:scale(var(--kemo-ls)) translateY(-2%) rotate(1deg)}85%{transform:scale(var(--kemo-ls)) translateY(6%) rotate(-2deg)}100%{transform:scale(1) translateY(0)}}
-@keyframes kemoL-shake{0%{transform:scale(1)}12%{transform:scale(var(--kemo-ls));filter:drop-shadow(0 0 6px #ff7a4a) drop-shadow(0 1px 1.5px #000a)}18%{transform:scale(var(--kemo-ls)) translateX(-5%)}26%{transform:scale(var(--kemo-ls)) translateX(5%)}34%{transform:scale(var(--kemo-ls)) translateX(-5%)}42%{transform:scale(var(--kemo-ls)) translateX(5%)}50%{transform:scale(var(--kemo-ls)) translateX(-4%);filter:drop-shadow(0 0 9px #ff5a2a) drop-shadow(0 1px 1.5px #000a)}58%{transform:scale(var(--kemo-ls)) translateX(4%)}66%{transform:scale(var(--kemo-ls)) translateX(-2%)}76%{transform:scale(var(--kemo-ls)) translateX(0)}100%{transform:scale(1);filter:drop-shadow(0 1px 1.5px #000a)}}
-@keyframes kemoL-tremble{0%{transform:scale(1)}15%{transform:scale(var(--kemo-ls)) translate(.8%,0)}25%{transform:scale(var(--kemo-ls)) translate(-.8%,.6%)}35%{transform:scale(var(--kemo-ls)) translate(.6%,-.6%)}45%{transform:scale(var(--kemo-ls)) translate(-.6%,.8%)}55%{transform:scale(var(--kemo-ls)) translate(.8%,0)}65%{transform:scale(var(--kemo-ls)) translate(-.8%,.6%)}75%{transform:scale(var(--kemo-ls)) translate(.6%,-.6%)}85%{transform:scale(var(--kemo-ls)) translate(-.4%,.4%)}100%{transform:scale(1)}}
-@keyframes kemoL-bob{0%{transform:scale(1)}20%{transform:scale(var(--kemo-ls)) translateY(0)}38%{transform:scale(var(--kemo-ls)) translateY(-7%)}56%{transform:scale(var(--kemo-ls)) translateY(1%)}74%{transform:scale(var(--kemo-ls)) translateY(-6%)}88%{transform:scale(var(--kemo-ls)) translateY(0)}100%{transform:scale(1)}}
-@keyframes kemoL-flicker{0%{transform:scale(1);opacity:1}18%{transform:scale(var(--kemo-ls)) translateX(0)}30%{transform:scale(var(--kemo-ls)) translateX(-5%);opacity:.8}42%{transform:scale(var(--kemo-ls)) translateX(-5%);opacity:1}58%{transform:scale(var(--kemo-ls)) translateX(0)}68%{transform:scale(var(--kemo-ls)) translateX(5%);opacity:.82}80%{transform:scale(var(--kemo-ls)) translateX(5%);opacity:1}100%{transform:scale(1);opacity:1}}
-@keyframes kemoL-glint{0%{transform:scale(1);filter:drop-shadow(0 1px 1.5px #000a)}25%{transform:scale(var(--kemo-ls))}50%{transform:scale(var(--kemo-ls));filter:drop-shadow(0 0 8px #d9c4ff) drop-shadow(0 1px 1.5px #000a)}75%{transform:scale(var(--kemo-ls));filter:drop-shadow(0 0 2px #d9c4ff) drop-shadow(0 1px 1.5px #000a)}100%{transform:scale(1);filter:drop-shadow(0 1px 1.5px #000a)}}
-@keyframes kemoL-wince{0%{transform:scale(1)}16%{transform:scale(var(--kemo-ls))}30%{transform:scale(calc(var(--kemo-ls) * .9)) rotate(-4deg)}42%{transform:scale(var(--kemo-ls)) rotate(2deg)}60%{transform:scale(calc(var(--kemo-ls) * .93)) rotate(-3deg)}78%{transform:scale(var(--kemo-ls))}100%{transform:scale(1)}}
+/* IDLE: ONLY the rotate property, barely visible + very slow (owner 19/11 ~05:05Z: the small seal is still) */
+@keyframes kemoIdle{0%,100%{rotate:calc(var(--kemo-id,.6deg) * -1)}50%{rotate:var(--kemo-id,.6deg)}}
+/* ENVELOPE (CSS scale + translate props, never fights the feeling's transform): small (at the real seal) -> big (kemoGrow) -> hold -> small (kemoShrink, delayed by grow+hold) */
+@keyframes kemoGrow{from{scale:var(--kb-s);translate:var(--kb-dx) var(--kb-dy)}to{scale:1;translate:0 0}}
+@keyframes kemoShrink{from{scale:1;translate:0 0}to{scale:var(--kb-s);translate:var(--kb-dx) var(--kb-dy)}}
+/* FEELING MOTIONS: ONE slow readable loop each (length = keys[k].d), played n times during the hold. transform/filter only, amplitudes as % of the BIG seal. */
+@keyframes kemoL-nod{0%,100%{transform:translateY(0)}30%{transform:translateY(3%)}60%{transform:translateY(0) rotate(-1deg)}80%{transform:translateY(2%)}}
+@keyframes kemoL-sway{0%,100%{transform:rotate(0);filter:drop-shadow(0 0 6px #ffe9a0)}25%{transform:translateY(-3%) rotate(-4deg)}50%{transform:rotate(0);filter:drop-shadow(0 0 12px #ffe9a0)}75%{transform:translateY(-3%) rotate(4deg)}}
+@keyframes kemoL-droop{0%,100%{transform:translateY(0) rotate(0)}40%{transform:translateY(6%) rotate(-3deg)}65%{transform:translateY(5%) rotate(-3deg)}85%{transform:translateY(1%) rotate(0)}}
+@keyframes kemoL-shake{0%,100%{transform:translateX(0);filter:drop-shadow(0 0 8px #ff7a4a)}12%{transform:translateX(-4%) rotate(-1.5deg)}25%{transform:translateX(4%) rotate(1.5deg);filter:drop-shadow(0 0 14px #ff5a2a)}38%{transform:translateX(-4%) rotate(-1.5deg)}50%{transform:translateX(3%) rotate(1deg);filter:drop-shadow(0 0 14px #ff5a2a)}62%{transform:translateX(-2%)}75%{transform:translateX(0)}}
+@keyframes kemoL-tremble{0%,100%{transform:translate(0,0)}15%{transform:translate(1.2%,0)}30%{transform:translate(-1.2%,.8%)}45%{transform:translate(.8%,-.8%)}60%{transform:translate(-1%,1%)}75%{transform:translate(1%,0)}90%{transform:translate(-.6%,.4%)}}
+@keyframes kemoL-bob{0%,100%{transform:translateY(0)}25%{transform:translateY(-5%)}50%{transform:translateY(0)}75%{transform:translateY(-4%)}}
+@keyframes kemoL-flicker{0%,100%{transform:translateX(0);opacity:1}20%{transform:translateX(-4%);opacity:.85}40%{transform:translateX(-4%);opacity:1}60%{transform:translateX(0)}80%{transform:translateX(4%);opacity:.85}}
+@keyframes kemoL-glint{0%,100%{filter:drop-shadow(0 0 2px #d9c4ff)}50%{filter:drop-shadow(0 0 14px #d9c4ff)}}
+@keyframes kemoL-wince{0%,100%{transform:rotate(0) scale(1)}25%{transform:rotate(-3deg) scale(.96)}50%{transform:rotate(2deg) scale(1)}75%{transform:rotate(-2deg) scale(.97)}}
+@keyframes kemoFxFall{0%{transform:translateY(-10%);opacity:0}20%{opacity:1}100%{transform:translateY(130%);opacity:0}}
+@keyframes kemoFxRise{0%{transform:translateY(20%) scale(.8);opacity:0}30%{opacity:.95}100%{transform:translateY(-70%) scale(1.15);opacity:0}}
 @keyframes kemoFx{0%,100%{opacity:.9;transform:translateY(0)}50%{opacity:1;transform:translateY(-3%)}}
 `;document.head.appendChild(st)})();
 /* ================= jemocause: kitMoodCauseRows — the tap list of a mood seal (KIT 38.5; owner 17/11 ~18:25Z (a)) =================
@@ -77646,7 +77675,7 @@ figxLoad();setInterval(figxLoad,300000);
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
 const X=CW.X,J=X.J,LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}}};
-const TH=CW.thin={CAP:10/* F5 her mini-game score ends as intents (jcoopthinf.js), F4 her pets / garden / kitchen / study as intents (jcoopthinf.js), F3 her bag / shop / wear / gifts as intents (jcoopthinf.js), F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
+const TH=CW.thin={CAP:9/* F4 her pets / garden / kitchen / study as intents (jcoopthinf.js), F3 her bag / shop / wear / gifts as intents (jcoopthinf.js), F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
 const host=()=>CW.seat==="a";
 const D={};   /* part D (remote dialogs), filled in section 6 */
 TH.on=n=>!!(CW.on&&!CW.hold&&TH.lvl>=(n||1));
@@ -77817,7 +77846,7 @@ TH.NOOP.push("resultShow");
    gates read screenOff() (j1: true inside COOPW.ctx), so nothing of hers draws on the host's screen; her floaters / numbers / item and coin
    effects called in her run are captured here (UICAP, plain arguments only) and play on HER phone once, with the answer (TH.uiPlay).
    E's buổi step, B's life, C's world frame and D's deferred work stay quiet (turns that are not her tap). */
-const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx"]);
+const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */]);
 for(const n of UICAP)if(!TH.NOOP.includes(n))TH.NOOP.push(n);
 TH.UICAP=UICAP;/* F4: a part adds the screen redraws it captures itself (its own wrappers push them to TH.uiCap); TH.uiPlay plays only names in this set */
 const uiArg=a=>{try{return JSON.parse(JSON.stringify(a,(k,v)=>typeof v==="function"||(typeof Node!=="undefined"&&v instanceof Node)?undefined:v))}catch(e){return null}};
@@ -78860,7 +78889,7 @@ const PRE={};/* name → the function below the wrapper (the host runs it) */
 let snapV=null;
 if(typeof rsnap==="function"){const r0=rsnap;rsnap=function(){const o=r0.apply(this,arguments);if(CW.ctx&&o&&typeof o==="object")try{Object.defineProperty(o,"__ctx",{value:CW.ctx})}catch(e){}snapV=o;Promise.resolve().then(()=>{if(snapV===o)snapV=null});return o}}
 function cardLater(p,dr){const b=p.bf;if(!b||!dr||!dr.r||dr.r.st!=="ok"||typeof resultShow!=="function")return;
- setTimeout(()=>{try{if(!S||S.dead)return;if(p.force||(S.logSeq||0)!==b.seq||RKEYS.some(([k])=>(S[k]||0)!==b[k])){F.stat.card=(F.stat.card|0)+1;const R=F.R[p.n];resultShow(p.ttl||"",b,p.force?true:(R&&R.okHint?R.okHint(dr):null))/* F5: the hint may read the host's answer */}}catch(e){console.error("thin F card",e)}},0)}
+ setTimeout(()=>{try{if(!S||S.dead)return;if(p.force||(S.logSeq||0)!==b.seq||RKEYS.some(([k])=>(S[k]||0)!==b[k])){F.stat.card=(F.stat.card|0)+1;const R=F.R[p.n];resultShow(p.ttl||"",b,p.force?true:(R&&R.okHint?R.okHint():null))}}catch(e){console.error("thin F card",e)}},0)}
 function gOn(lv){return on(lv)&&!host()&&!!CW.seat&&!CW.ctx&&!!S&&!S.dead&&!CW.inLife&&!CW.inFC&&!CW.allow&&!CW.allowN&&!(TH.C&&TH.C.inWorld&&TH.C.inWorld())}
 function line(t){try{if(typeof kitLine==="function")kitLine(t);else log(t)}catch(e){}}
 function sendF(p){COOP.send({t:"do",op:"f",args:p.msg,base:TH.view?TH.view.v:0,id:p.id});E.last=p.id;p.at=Date.now()}
@@ -78931,7 +78960,7 @@ TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();don
   const args=R.dec(a.a);if(!args){out={st:"gone"}}
   else{/* F2 r2 (review r1 item 1, every registration, F1 too): her tap runs as solo (TH.tapRun: quiet off → her cards into her Q = part D
       cards on her phone; her toasts / floaters / coin and item effects captured, played on HER phone with the answer; nothing on the host's screen) */
-   if(R.noRes)NORES++;let T;try{T=TH.tapRun(()=>{if(R.pre)R.pre(args)/* F5: what the host does first in her run (the deferred cost, the host's own rolls) */;return PRE[a.n].apply(null,args)})}finally{if(R.noRes)NORES--}/* F3: a registered UI function's own wrapR card shows on her phone (cardLater), never here */
+   if(R.noRes)NORES++;let T;try{T=TH.tapRun(()=>PRE[a.n].apply(null,args))}finally{if(R.noRes)NORES--}/* F3: a registered UI function's own wrapR card shows on her phone (cardLater), never here */
    const r=T.r,ui=T.ui;F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
    if(typeof r==="boolean")out.rv=r;if(ui&&ui.length)out.ui=ui.slice(0,4);
    if(R.back){const c={};for(const [n,g] of R.ctx||[])if(R.back.includes(n))try{const v=g();c[n]=v===undefined?null:J(v)}catch(e){}out.c=c}
@@ -79103,9 +79132,11 @@ reg8("tdGiftGo",["v"],{mine:()=>true,title:A=>{try{const h=trS().H[A[0]];return 
    in ctx. Mini-game SCORES (petcGain, shelfPlantGain, the art / cooking / Tứ đức games) = F5. */
 const L9=9;
 const OBJ=(n,o)=>[n,()=>{try{return J(o())}catch(e){return null}},v=>{try{const t=o();if(t&&v&&typeof v==="object")Object.assign(t,v)}catch(e){}}];
-/* F5 (found by G1: the F4 entry copied her plant key onto a throw-away object, so the host ran her plant care with HIS SHPC.g = nothing
-   happened; F4's shelfPlantQuick too): her open plant is the key itself */
-const CX9=CX8.concat([OBJ("petc",()=>PETC),["shpc",()=>typeof SHPC==="object"?SHPC.g:null,v=>{if(typeof SHPC==="object")SHPC.g=v==null?null:v}],OBJ("tdv",()=>TDV)]);
+/* review r1: her open care / plant screen keys ride as plain values set on the REAL objects (the old OBJ("shpc",()=>({g:SHPC.g})) assigned
+   onto a fresh copy: the host never saw her SHPC.g → her shelf plant "Để trời định" did nothing, or hit the plant in the HOST's open slot;
+   OBJ("petc",PETC) carried PETC.bath (listener functions, stripped by JSON) back onto the host's own running bath game) */
+const CX9=CX8.concat([["petc",()=>({i:PETC.i,game:PETC.game}),v=>{v=v&&typeof v==="object"?v:{};PETC.i=typeof v.i==="number"?v.i:-1;PETC.game=v.game==null?null:v.game}],
+ ["shpc",()=>SHPC.g==null?null:SHPC.g,v=>{SHPC.g=v==null?null:v}],OBJ("tdv",()=>TDV)]);
 function encA9(K,A){const K2=K.map(k=>k==="el"||k==="pm"?"v":k),A2=[...A].slice(0,K.length);for(let i=0;i<K.length;i++){
   if(K[i]==="el"){const b=A2[i];if(!b||!b.dataset)return null;A2[i]={dataset:Object.assign({},b.dataset)}}
   else if(K[i]==="pm"){const x=A2[i];if(isMe(x))A2[i]={me:1};else if(typeof x==="string")A2[i]={s:x};else{const e=pE(x);if(!e)return null;A2[i]={id:e.id}}}}return encA(K2,A2)}
@@ -79130,76 +79161,6 @@ reg9("shelfPlantQuick",[],{mine:()=>true});
 reg9("rcpRead",["ix"],{mine:()=>true});
 reg9("rcpAskGo",["v","pm"],{mine:()=>true});
 reg9("tdsRun",["v","v","v"],{mine:A=>A[1]==="prac"});
-/* ---------- F5: her mini-game SCORE ends (level 10; report dev/handover/reports/coop-thin-f5.md step 0) ----------
-   The game itself plays on HER phone (same game, same parameters as solo: law 5); only its end (the score + what she chose before) is ONE
-   intent. Ends = named engines: petcGain / shelfPlantGain (care games), wkLessonEnd (Tài nghệ lessons, Tự học làm tác phẩm, Học lối mới),
-   tdFinish (Tứ đức), tsSummonEnd / tsDenEnd (tsGame: the summons, the lantern). The host checks the score (BAL.mgSc ranges, its tables;
-   outside → refused, nothing applied), rolls every "Để trời định" / "Học nhanh" / "Bỏ qua" itself (her phone never rolls), pays the
-   game's deferred cost (jaudit aaPayMG) ONCE before the gain (solo order), then runs the engine in her context. Her result card: the
-   engine's own (cardLater) or jaudit's one card after the game (aaShowLast, captured) — on her phone only. */
-const L10=10;
-const inR=(x,r)=>typeof x==="number"&&isFinite(x)&&!!r&&x>=r[0]&&x<=r[1];
-const MSC=()=>BAL.mgSc;
-/* guest: an F5 game is open (MGC): the kg82 opening it made (KGN) — a later game, closed or not, never takes its place */
-let KGN=0,MGC=null,AA=null,HAA=null,SKH=0;
-/* Tứ đức (tdPlay: called by name from j85 / jtds pickers that keep their own copy) is known by its own busy flag at its opening */
-if(typeof kg82Open==="function"){const k0=kg82Open;kg82Open=function(){KGN++;try{if(!host()&&!(MGC&&MGC.n===-1)&&typeof TDS==="object"&&TDS.busy&&gOn(L10))MGC={k:"td",o:null,n:KGN}}catch(e){}return k0.apply(this,arguments)}}
-const mgOk=()=>!!MGC&&MGC.n===KGN&&!host()&&gOn(L10);
-const mgOpen=(k,o,fn)=>{const M={k,o,n:-1};MGC=M;const r=fn();if(MGC===M)M.n=KGN;return r};
-if(typeof playArt==="function"){const p0=playArt;playArt=function(o){if(host()||!gOn(L10)||!o||!o.mgEnd){if(!host())MGC=null;return p0.apply(this,arguments)}return mgOpen("pa",o,()=>p0.apply(this,arguments))};window.playArt=playArt}
-if(typeof tsGame==="function"){const t0=tsGame;tsGame=function(o){if(host()||!gOn(L10)||!o){if(!host())MGC=null;return t0.apply(this,arguments)}return mgOpen("ts",o,()=>t0.apply(this,arguments))};window.tsGame=tsGame}
-/* guest: the deferred cost is never paid here: jaudit's call is held with its score (the first one of this end), the cost rides in ctx */
-if(typeof window.aaPayMG==="function"){const a0=window.aaPayMG;window.aaPayMG=function(sc){if(mgOk()){if(!AA){const m=S&&S.mg;AA={c:J((m&&m.cost)||window.__aaPend||null),sc:J(sc||{}),t:window.__aaTitle||null}}F.stat.aaHeld=(F.stat.aaHeld|0)+1;return}return a0.apply(this,arguments)};
- F.aaLocal=a0}
-/* guest: the quick button of an F5 game: the game's own quick path runs (its words, its onDone chain: the end intent) with the roll left
-   to the host (null), and its result rows are closed at once — the result comes from the host's answer */
-if(typeof kitQuickRoll==="function"){const q0=kitQuickRoll;kitQuickRoll=function(){if(SKH&&!host())return null;return q0.apply(this,arguments)};window.kitQuickRoll=kitQuickRoll}
-if(typeof tsSkipRes==="function"){const r0=tsSkipRes;tsSkipRes=function(odds,risk){if(SKH&&!host())return {raw:0,skipped:true,ok:null,guard:null,risk:risk?1:0};return r0.apply(this,arguments)};window.tsSkipRes=tsSkipRes}
-for(const n of ["sfx","kitSfx","kitResultSfx"])if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(SKH&&!host())return;return f.apply(this,arguments)}}
-document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("#kg82skip");if(!b||!mgOk()||typeof b.onclick!=="function")return;
- e.stopImmediatePropagation();e.preventDefault();F.stat.skip=(F.stat.skip|0)+1;SKH=1;try{b.onclick.call(b,e)}finally{SKH=0}
- const ok=document.getElementById("kg82ok");if(ok&&typeof ok.onclick==="function")ok.onclick.call(ok)},true);
-/* host: her held score + cost (ctx "aa"); the host's own pending cost / title are kept and put back after her run */
-const CXAA=["aa",()=>host()?{h:1,c:window.__aaPend||null,t:window.__aaTitle||null}:AA,v=>{if(!host())return;window.__aaPend=v&&v.c||null;window.__aaTitle=v&&v.t||null;HAA=v&&!v.h&&v.sc?v:null}];
-const CX10=CX9.concat([CXAA,OBJ("tds",()=>({q:TDS.q}))]);
-function payAA(fix){if(!HAA)return;const sc=Object.assign({},HAA.sc);if(fix)fix(sc);const t0=window.aaCardTo;
- window.aaCardTo=(t,b,ok)=>{F.stat.aaCard=(F.stat.aaCard|0)+1;if(TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push(["aaShowLast",[t,J(b||null),ok]])};
- try{window.aaPayMG(sc);F.stat.aaPaid=(F.stat.aaPaid|0)+1}finally{window.aaCardTo=t0;HAA=null}}
-try{TH.UICAP.add("aaShowLast")}catch(e){}
-function reg10(name,K,o){o=o||{};const R=Object.assign({lv:L10,ctx:CX10,back:BACK8,enc:A=>encA9(K,A),dec:a=>decA9(K,a),done:reDraw,title:()=>""},o);
- R.mine=A=>live()&&(o.mine?o.mine(A):true);const r=F.reg(name,R);if(!r)return r;
- /* guest, after the end is sent: the held cost now travels with it (cleared here); an end that ran here after all (refused before sending)
-    pays its held cost here, never lost */
- const w=window[name];window[name]=function(){const p0=F.pend,a=AA;const r=w.apply(this,arguments);if(!host()){const sent=!!F.pend&&F.pend!==p0;
-  if(a){if(sent){window.__aaPend=null;F.stat.aaSent=(F.stat.aaSent|0)+1}else try{F.aaLocal(a.sc)}catch(e){}AA=null}if(sent||a)MGC=null}return r};return true}
-/* a refused end applies nothing; a lesson's game is over all the same (her S.mg closed, as a game closed unplayed: no cost, no gain) */
-const bad=n=>{F.stat.mgBad=(F.stat.mgBad|0)+1;lg(["mgBad",n]);try{if(n==="wkLessonEnd"&&CW.ctx&&S)S.mg=null}catch(e){}return null};
-/* care games (her open care / plant screen rides in ctx: PETC.i / SHPC.g) */
-reg10("petcGain",["v","v"],{dec:a=>{const x=decA9(["v","v"],a);if(!x)return null;return ["feed","bath","play"].includes(x[0])&&inR(x[1],MSC().unit)?x:bad("petcGain")}});
-reg10("shelfPlantGain",["v"],{dec:a=>{const x=decA9(["v"],a);if(!x)return null;return inR(x[0],MSC().unit)?x:bad("shelfPlantGain")}});
-/* Tài nghệ lessons / practice / Học lối mới: k, the lesson (S.mg as it was), the play, {skipped}; the host rolls a quick lesson (o.ok null) */
-reg10("wkLessonEnd",["v","v","v","v"],{enc:A=>{const m=A[1];if(!m||typeof m!=="object")return null;const c=Object.assign({},m);delete c.cost;return encA9(["v","v","v","v"],[A[0],c,A[2]==null?0:A[2],{skipped:!!(A[3]&&A[3].skipped)}])},
- dec:a=>{const x=decA9(["v","v","v","v"],a);if(!x)return null;const [k,m,raw,o]=x;const sk=!!(o&&o.skipped);
-  if(!ARTS.some(y=>y.k===k)||!m||m.k!==k||!["self","teacher","th","prac"].includes(m.mode)||(m.wk&&(!WK[m.wk.kind]||![0,1,2].includes(m.wk.mat||0))))return bad("wkLessonEnd");
-  if(!sk&&!inR(raw,MSC().raw))return bad("wkLessonEnd");return [k,m,sk?0:raw,{skipped:sk}]},
- pre:A=>payAA(sc=>{const sk=!!A[3].skipped;sc.skip=sk;sc.raw=sk?null:cl(Math.round(A[2]||0),0,10);sc.ok=!sk&&sc.raw>=5})});
-/* Tứ đức: tdFinish pays its own cost; a quick play is rolled here (TDS.q, as the game's own quick button) */
-reg10("tdFinish",["v","v","v","v"],{snap:"soft",noRes:true,title:A=>{try{const V=VIR.find(x=>x.k===A[0]);return `${A[1]==="self"?"Tự học":"Học"} ${V?V.n:""}`}catch(e){return ""}},
- dec:a=>{const x=decA9(["v","v","v","v"],a);if(!x)return null;const [k,mode,raw,sk]=x;if(!VIR.some(y=>y.k===k)||!(mode in TD_MODE))return bad("tdFinish");
-  if(!sk&&!inR(raw,MSC().raw))return bad("tdFinish");return [k,mode,sk?0:raw,!!sk]},
- pre:A=>{if(A[3]){const ok=!!kitQuickRoll();A[2]=ok?BAL.skip.raw:0;TDS.q=ok}else TDS.q=null}});
-/* tsGame ends: res {raw, skipped, guard}; the snapshot of her card (b) stays on her phone (her result card = cardLater); a skipped play
-   is rolled here by the ONE rule (tsSkipRes) with her odds of now; hộ giá only when the road has it (tsRebel) */
-const tsRes0=(res,risk)=>{if(!res||typeof res!=="object")return null;if(res.skipped)return {skipped:true,risk:risk&&res.risk?1:0};
- if(!inR(res.raw,MSC().raw))return null;const g=res.guard==null?null:res.guard;if(g!=null&&(!risk||(g!==0&&g!==1)))return null;return {raw:res.raw,skipped:false,guard:g}};
-const tsEnc=A=>encA9(["v","v"],[A[0],A[1]&&typeof A[1]==="object"?{raw:A[1].raw,skipped:!!A[1].skipped,guard:A[1].guard==null?null:A[1].guard,risk:A[1].risk?1:0}:null]);
-reg10("tsSummonEnd",["v","v"],{snap:"soft",noRes:true,enc:tsEnc,title:A=>`Hoàng thượng triệu ${({dan:"đánh đàn",co:"đánh cờ",duho:"du hồ"})[A[0]]||""}`,okHint:dr=>!!(dr&&dr.r&&dr.r.ok),
- dec:a=>{const x=decA9(["v","v"],a);if(!x)return null;const k=x[0];if(!["dan","co","duho"].includes(k))return bad("tsSummonEnd");let rb=0;try{rb=k==="duho"?tsRebel():0}catch(e){}
-  const r=tsRes0(x[1],!!rb);return r?[k,r,null]:bad("tsSummonEnd")},
- pre:A=>{if(A[1].skipped)A[1]=tsSkipRes(oddsCl(Math.round(tsSummonOdds(S,A[0])||50)),A[1].risk)},host:(A,out)=>{out.ok=A[1].raw>=5||A[1].guard===1}});
-reg10("tsDenEnd",["v","v"],{snap:"soft",noRes:true,enc:tsEnc,title:()=>"Thả đèn hoa đăng",okHint:()=>true,
- dec:a=>{const x=decA9(["v","v"],a);if(!x)return null;if(![0,1,2].includes(x[0]))return bad("tsDenEnd");const r=tsRes0(x[1],false);return r?[x[0],r,null]:bad("tsDenEnd")},
- pre:A=>{if(A[1].skipped)A[1]=tsSkipRes(oddsCl(Math.round(tsDenOdds(S)||50)),0)}});
 }catch(e){console.error("jcoopthinf",e)}})();
 
 try{regSweep();setTimeout(regSweep,0)}catch(e){console.error(e)}
@@ -79231,7 +79192,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4dd9eedf4928";window.CTM_BUILD=BUILD;
+const BUILD="b4bf92bdeae6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

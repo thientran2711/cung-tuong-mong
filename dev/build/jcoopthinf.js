@@ -279,9 +279,11 @@ reg8("tdGiftGo",["v"],{mine:()=>true,title:A=>{try{const h=trS().H[A[0]];return 
    in ctx. Mini-game SCORES (petcGain, shelfPlantGain, the art / cooking / Tứ đức games) = F5. */
 const L9=9;
 const OBJ=(n,o)=>[n,()=>{try{return J(o())}catch(e){return null}},v=>{try{const t=o();if(t&&v&&typeof v==="object")Object.assign(t,v)}catch(e){}}];
-/* F5 (found by G1: the F4 entry copied her plant key onto a throw-away object, so the host ran her plant care with HIS SHPC.g = nothing
-   happened; F4's shelfPlantQuick too): her open plant is the key itself */
-const CX9=CX8.concat([OBJ("petc",()=>PETC),["shpc",()=>typeof SHPC==="object"?SHPC.g:null,v=>{if(typeof SHPC==="object")SHPC.g=v==null?null:v}],OBJ("tdv",()=>TDV)]);
+/* review r1: her open care / plant screen keys ride as plain values set on the REAL objects (the old OBJ("shpc",()=>({g:SHPC.g})) assigned
+   onto a fresh copy: the host never saw her SHPC.g → her shelf plant "Để trời định" did nothing, or hit the plant in the HOST's open slot;
+   OBJ("petc",PETC) carried PETC.bath (listener functions, stripped by JSON) back onto the host's own running bath game) */
+const CX9=CX8.concat([["petc",()=>({i:PETC.i,game:PETC.game}),v=>{v=v&&typeof v==="object"?v:{};PETC.i=typeof v.i==="number"?v.i:-1;PETC.game=v.game==null?null:v.game}],
+ ["shpc",()=>SHPC.g==null?null:SHPC.g,v=>{SHPC.g=v==null?null:v}],OBJ("tdv",()=>TDV)]);
 function encA9(K,A){const K2=K.map(k=>k==="el"||k==="pm"?"v":k),A2=[...A].slice(0,K.length);for(let i=0;i<K.length;i++){
   if(K[i]==="el"){const b=A2[i];if(!b||!b.dataset)return null;A2[i]={dataset:Object.assign({},b.dataset)}}
   else if(K[i]==="pm"){const x=A2[i];if(isMe(x))A2[i]={me:1};else if(typeof x==="string")A2[i]={s:x};else{const e=pE(x);if(!e)return null;A2[i]={id:e.id}}}}return encA(K2,A2)}
