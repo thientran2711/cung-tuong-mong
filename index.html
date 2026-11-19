@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e98842f6+","t":"2026-11-19T10:03Z","c":"rebuild","b":"175f2c413806","h":[{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"}]};
+window.CTM_BI={"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild","b":"063e3751bb29","h":[{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -46977,10 +46977,11 @@ function ksayPlace(rec,placed){const st=rec.st,fig=rec.fig,el=rec.el;if(!st.isCo
  /* sizes, widest/largest first: ≤ 2 lines at W, 1.25 W, 1.5 W per font step down to KIT_HEADMK.sayMinF; then one line (smaller and smaller); the first size that fits the room AND finds a place wins */
  const lines=()=>{const t=el.firstChild,cs=getComputedStyle(t),lh=parseFloat(cs.lineHeight)||parseFloat(cs.fontSize)*1.22,pd=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom);return Math.round((t.getBoundingClientRect().height/sc-pd)/lh)};
  const fits=()=>{const r=el.getBoundingClientRect();return r.height<=avail&&r.width<=sw};
+ const fMin=Math.max(K.sayMinF,K.sayMinPx/T.fs);/* KIT floor: never below the smallest kit text (.64rem = 10.24 design px; sayMinPx 10.5) */
  let P=null;el.classList.remove("k1");
- for(let f=1;f>=K.sayMinF-.001&&!P;f-=.1){el.style.setProperty("--ksay-fs",(T.fs*f).toFixed(2)+"px");
+ for(let f=1;f>=fMin-.001&&!P;f-=.1){el.style.setProperty("--ksay-fs",(T.fs*f).toFixed(2)+"px");
   for(const wf of[1,1.25,1.5,.85,.72]){el.style.setProperty("--ksay-w",Math.min(T.w*wf,sw/sc).toFixed(1)+"px");if(lines()<=2&&fits()){P=tryPlace();if(P)break}}}
- if(!P){el.classList.add("k1");for(let f=1;f>=K.sayMinF-.001&&!P;f-=.1){el.style.setProperty("--ksay-fs",(T.fs*f).toFixed(2)+"px");if(fits())P=tryPlace()}}
+ if(!P){el.classList.add("k1");for(let f=1;f>=fMin-.001&&!P;f-=.1){el.style.setProperty("--ksay-fs",(T.fs*f).toFixed(2)+"px");if(fits())P=tryPlace()}}
  if(!P){window.__kitSayWhy={avail:Math.round(avail),sw:Math.round(sw),placed:placed.map(q=>[Math.round(q.left),Math.round(q.right),Math.round(q.top),Math.round(q.bottom)]),others:others.map(o=>[o.t&&Math.round(o.t),o.x.map(Math.round)]),cx:Math.round(cx),L:[Math.round(L.top),Math.round(L.bottom)],R:[Math.round(R.left),Math.round(R.right)]};return false}
  const left=P.left,bottom=P.bottom,w=P.w,h=P.h;
  const tx=Math.max(14*sc,Math.min(w-14*sc,cx-left))/sc;el.style.setProperty("--ksay-tx",tx.toFixed(1)+"px");
@@ -64881,7 +64882,7 @@ function kitHapMark(k){const h=adHapAt(k);return h?kitHapHtml("Có chuyện bu�
    notice box and the Dư đồ place labels keep the .khap «!». The file is probed once; until it loads (or if it fails) the marker falls back to today's yellow «!» disc (.khead.kfb). */
 window.KIT_HEADMK=window.KIT_HEADMK||{on:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-talk-y.webp",off:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-talk-w.webp",px:24};
 /* "say" state (K-HEAD-SAY): max bubble width + font per device tier (stage width: s < bp[0] = phone / Fold portrait, m < bp[1] = tablet portrait, l = iPad landscape and up), design px */
-Object.assign(KIT_HEADMK,{say:1,sayW:{s:150,m:188,l:230,bp:[480,760]},sayFs:{s:12.5,m:13.5,l:15},sayMinF:.7,sayGap:4,sayIn:200,sayOut:150,sayWait:1800});
+Object.assign(KIT_HEADMK,{say:1,sayW:{s:150,m:188,l:230,bp:[480,760]},sayFs:{s:12.5,m:13.5,l:15},sayMinF:.7,sayMinPx:10.5,sayGap:4,sayIn:200,sayOut:150,sayWait:1800});
 let khmOk=null;(function(){try{const i=new Image();i.onload=()=>{khmOk=true};i.onerror=()=>{khmOk=false};i.src=KIT_HEADMK.on}catch(e){khmOk=false}})();
 function kitHeadMarkHtml(title,role,state,text){const t=String(title||"Có tin báo").replace(/"/g,"&quot;"),off=state==="off",src=off?KIT_HEADMK.off:KIT_HEADMK.on;
  if(state==="say"){const x=String(text==null?"":text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");return `<i class="khead ksay" role="${role||"img"}" aria-label="${t}" title="${t}"><span class="ksay-t">${x}</span><b class="ksay-tail"></b></i>`}
@@ -79267,7 +79268,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="175f2c413806";window.CTM_BUILD=BUILD;
+const BUILD="063e3751bb29";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

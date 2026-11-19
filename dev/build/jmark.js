@@ -146,10 +146,11 @@ function ksayPlace(rec,placed){const st=rec.st,fig=rec.fig,el=rec.el;if(!st.isCo
  /* sizes, widest/largest first: ≤ 2 lines at W, 1.25 W, 1.5 W per font step down to KIT_HEADMK.sayMinF; then one line (smaller and smaller); the first size that fits the room AND finds a place wins */
  const lines=()=>{const t=el.firstChild,cs=getComputedStyle(t),lh=parseFloat(cs.lineHeight)||parseFloat(cs.fontSize)*1.22,pd=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom);return Math.round((t.getBoundingClientRect().height/sc-pd)/lh)};
  const fits=()=>{const r=el.getBoundingClientRect();return r.height<=avail&&r.width<=sw};
+ const fMin=Math.max(K.sayMinF,K.sayMinPx/T.fs);/* KIT floor: never below the smallest kit text (.64rem = 10.24 design px; sayMinPx 10.5) */
  let P=null;el.classList.remove("k1");
- for(let f=1;f>=K.sayMinF-.001&&!P;f-=.1){el.style.setProperty("--ksay-fs",(T.fs*f).toFixed(2)+"px");
+ for(let f=1;f>=fMin-.001&&!P;f-=.1){el.style.setProperty("--ksay-fs",(T.fs*f).toFixed(2)+"px");
   for(const wf of[1,1.25,1.5,.85,.72]){el.style.setProperty("--ksay-w",Math.min(T.w*wf,sw/sc).toFixed(1)+"px");if(lines()<=2&&fits()){P=tryPlace();if(P)break}}}
- if(!P){el.classList.add("k1");for(let f=1;f>=K.sayMinF-.001&&!P;f-=.1){el.style.setProperty("--ksay-fs",(T.fs*f).toFixed(2)+"px");if(fits())P=tryPlace()}}
+ if(!P){el.classList.add("k1");for(let f=1;f>=fMin-.001&&!P;f-=.1){el.style.setProperty("--ksay-fs",(T.fs*f).toFixed(2)+"px");if(fits())P=tryPlace()}}
  if(!P){window.__kitSayWhy={avail:Math.round(avail),sw:Math.round(sw),placed:placed.map(q=>[Math.round(q.left),Math.round(q.right),Math.round(q.top),Math.round(q.bottom)]),others:others.map(o=>[o.t&&Math.round(o.t),o.x.map(Math.round)]),cx:Math.round(cx),L:[Math.round(L.top),Math.round(L.bottom)],R:[Math.round(R.left),Math.round(R.right)]};return false}
  const left=P.left,bottom=P.bottom,w=P.w,h=P.h;
  const tx=Math.max(14*sc,Math.min(w-14*sc,cx-left))/sc;el.style.setProperty("--ksay-tx",tx.toFixed(1)+"px");
