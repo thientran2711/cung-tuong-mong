@@ -153,3 +153,59 @@ Hand-check list of every cost + word-only-gain option: reports/choice-value-word
 Touched by #3: dev/build/{jbal,j8,jagmaid,jts,jworld,jcmaid,jstip,j7,j71,j24}.js, dev/tools/choice-value-scan.js, index.html, sw.js (+ #1/#2 lists above).
 Lander notes: BAL.cv.loanBack vs balance-final BAL.rk.loanBack (same chance, keep one); receiver-choice reads BAL.cv.decl.suc (guarded) for the NPC «Cáo bệnh».
 #3 context at finish ≈ 22 % of 1M (estimate; START_CTX 5 %).
+
+## #4 FIX — re-check #2 FAIL 2 @7f339bad fixed (worker #4 session_01964izD7YBVomNLmNjkbtBD, opus)
+START_CTX ≈ 5 % of 1M (get_session read 0 at start; estimate) · depth 6 · finished ≈ 28 %.
+PRIORITY #1 CHECK ('choice value'): OD 1 | ledger 0 | claims 1 (= this job) | main 0 | review/* review/choice-value-audit (this branch) | archive 0
+Branch review/choice-value-audit: 37a7342f → merged LIVE b1c3631e, 89aa1bd9, c12a5878, f43a2ba6, 7fb7c104, 2c5dd554, f3114755 (each re-built by assemble.py + build_site.sh).
+Real merge conflicts (union kept): jbal.js (BAL.cv rows + maid-ladder srvRk/srvWage), j7 guardrumour (our BAL.cv texts + odds-no-unknown's no-roll go when nobody is behind it),
+jworld2 Đại hàn «Chịu rét» (our «giữ lại N lượng» + main's `chanceW(b.catch)`), dev/test/kit-fit.js deleted as on main.
+
+### FAIL 1 — LAW 4 + 11: every typed number on lines this branch rewrote → BAL.cv (text prints the key)
+Scan (every `+` line of `git diff origin/main -- dev/build`, not jbal*: `stat:<n>` in fx, `<word> ±N` in text, `.rel/.tinh ±= N`, `roll(N)`, `*N`, `/N`): **15 lines before → 0 after**.
+| line | before (typed) | after (BAL key) |
+|---|---|---|
+| j24:30 «Một ánh mắt» | roll(40), «tình ý +10 / -5», m.tinh+=10 / -5 | BAL.cv.glance {chance, warm, cold}; text prints balSg(key) |
+| j3:68 vase | {hh:-5,danh:-3,maid:30} / {maid:-30,duc:-3} | BAL.cv.vase.take / .leave |
+| j3:70 coldletter | duc:5, v.rel+=20, «Làm ngơ» duc:-2 | BAL.cv.coldL {duc, rel, ign}; «Giúp nàng» now prints «thiện cảm +20» it applies |
+| j42:362 confess | {tin:-6,suc:-8} | BAL.cv.confessTha |
+| j7:32 «Tìm kẻ tung tin» | suc:-10, v.rel-=10 | BAL.cv.spy {suc, rel}; text prints the thiện cảm |
+| j7:36/37 ghost | suc:-10 / {danh:-3,maid:-5} | BAL.cv.ghost.watch / .skip |
+| j7:88 tông nữ | {bac:-50,danh:-2} | BAL.cv.tong |
+| j7:92/94 maidhostage | maid:25 / maid:-35 | BAL.cv.hostage.pay / .skip |
+| j7:149 condemnedmaid | duc:-1 | BAL.cv.cmaidSkip |
+| j71:142 + run() 136/139 feast gift | th:-2 / sung:-2, NPC bac≥100 → -60, luck ×25, «Dâng ngọc quý» bac:-60 | BAL.cv.gift7 {miss, jade, npcMin, jit} (one key for her price and the rich rival's spend) |
+| j71:299 «Đóng cửa cung» | maid:-3 | BAL.cv.closeDoor |
+| jstip:142/143 «Tố lên …» | «(Danh -2)», «hỏng: Danh -1», ap(sup,{danh:-2}) | BAL.cv.stipSup; hỏng prints BAL.eff.jstip.danhGo (the value it applies) |
+| jts:367/368 «Mượn áo» | «(aff/25)», ≥25, «thiện cảm -2», tsAff(v,-2) | BAL.cv.tsBorrow {aff, cost} |
+| j25:93 faction ask (rewritten line) | roll(20) | BAL.cv.facAsk |
+| jcmaid:78 (rewritten line) | secLoy*2 | secLoy*BAL.cv.secPayMul |
+one-core baseline shrunk 4212 → 3930 (`one-core-guard --update`, never grown).
+### FAIL 2 — LAW 7: «chắc chắn» → «thoát nạn ngay, khỏi phải đối chất» (j7 poisongift ×2; «30 trượng» → «ba mươi trượng»). grep of the whole branch diff: «chắc chắn» 0.
+### LANDER ruling applied — loanBack
+j24 card `chanceW(…)` + monthly `roll(…)` read **BAL.rk.loanBack**; `loanBack` deleted from BAL.cv. Guard while balance-final is not live: jbal.js `if(!BAL.rk)BAL.rk={loanBack:40};`
+(jbal2's `Object.assign(BAL,{rk:{…}})` replaces it whole) — **LANDER: delete that one line when review/balance-final lands.**
+### New faults the final-merges exposed (whole group)
+LIVE opt-card-short #10 (jopic kitOptFinal, short card: Tốn + Được, the rest folded) and odds-meter-back changed what the card shows; the scan misread it and a few real cards lost their gain:
+- scan: filler rows (`kfill`: «Tốn: không») carry no value; `.kdup` copies are not counted twice; a GỢI Ý wording kitOptFinal moves into Được / Tốn is read; the demo-pair fixture reads `hint:`.
+- scan **--fullsuc** (new gate): every card drawn with Sức at her cap. Found: a decline road whose only gain is Sức +BAL.cv.rest shows NOTHING at full Sức (the +3 clamps to +0) → each now names a word gain the kit reads green (checked with kaSent: «g»):
+  jtsb «Khéo từ chối» «giữ sức, đứng ngoài chuyện riêng của nàng» (was «không dính vào thù oán…», read as a COST by the kit), j72 «Khéo từ chối» «giữ sức, không mắc thêm ân tình», j4 «Mặc kệ» «giữ sức, không dây vào án».
+- j8 ksp «Tắm gội chờ giá»: card read «Được: Không được gì thêm» → «thành: được hầu Hoàng thượng đêm nay · chuẩn bị thị tẩm».
+- jreign «Chỉ lặng lẽ mài mực hầu ngài»: near the Sủng cap its +2 shows +1 → dominated by «Khuyên ngài nhẫn nại» (Sủng +1 · Đức +1); now «giữ được thân mình ngoài chính sự» (green) — not dominated.
+### GATES
+| gate | sha | result |
+|---|---|---|
+| typed-number scan of the branch's + lines (dev/build, not jbal*) | 4e78e63e | **0** (was 15) · «chắc chắn» in diff: 0 |
+| one-core-guard / -text / -bind / -text-rule | 4e78e63e | PASS ×4 (baseline 4212 → 3930) |
+| odds-cap | 4e78e63e | PASS |
+| choice-value-scan seed 7 · --plant | 4e78e63e (= + LIVE 950508fc) | **PASS** 350 modals · **PLANT OK 3/3** |
+| choice-value-scan seeds 7 / 11 / 23 / 31 | 956d74b6 (= + LIVE f3114755) | **PASS** 357 / 345 / 382 / 340 · COST-ONLY 0 · HINT-NO-GAIN 0 · DOMINATED 0 · 0 page errors |
+| choice-value-scan --fullsuc seeds 7 / 11 (new) | 956d74b6 | **PASS** 357 / 353 |
+| quickcheck --runs 6 | 956d74b6 | **PASS** · old save ok · core gates PASS · perf new/live render 240/234 ms, tab 465/488, buổi 1280/1395 |
+| coop-e2e vs live Worker | 956d74b6 | **68/68** passed |
+| paired bot run (runbal2 + inbal2 from review/balance-final, sens, YRSTOP 12, 2 shards × CAP 40/30 min, together) | 88a79d78 + c92d5a81 vs live | **7 vs 7 lives**, 0 page errors · HH 1 vs 1 · mean 6.3 vs 5.5 yrs · reached rank 6: 5 vs 2 lives · **rank-6 Bạc per buổi: branch 16–21 per life (pooled 18, 1341 buổi) vs live 14–19 (pooled 14, 292)** — the ≈ 827 bạc life of re-check #2 did not come back; no runaway · Sức per buổi same band (45–55 vs 47–55) |
+Merges after the full batch: f3114755 → 950508fc touched 4 dev/build files (not option cards) → seed 7 + plant + one-core ×4 + odds-cap re-run on 4e78e63e.
+### SẴN SÀNG KIỂM 4e78e63e (review/choice-value-audit = branch + LIVE 950508fc)
+Touched by #4: dev/build/{jbal,j24,j25,j3,j42,j7,j71,jstip,jts,jcmaid,j8,jtsb,j72,j4,jreign,jworld2}.js, dev/tools/choice-value-scan.js (kfill/kdup/hint reader, --fullsuc), dev/test/one-core-baseline.json (shrunk), index.html, sw.js, assets.json.
+Lander notes: (1) delete jbal.js `if(!BAL.rk)BAL.rk={loanBack:40};` when review/balance-final lands (j24 already reads BAL.rk.loanBack); (2) receiver-choice reads BAL.cv.decl.suc (unchanged).
+Note (not mine, FYI): «Khó lường» odds word on ksp «Tắm gội chờ giá» is outside the VANPHONG ladder (pre-existing, reviewer note re-check #2).
