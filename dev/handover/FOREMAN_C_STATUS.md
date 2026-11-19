@@ -1472,3 +1472,4 @@ ROOT-52 Lượt 615: TH1 Thái hậu sample DONE 594fafe (m05 a36 / m33 a51 / m0
 ROOT-52 Lượt 616: (a) palettes by 4 seasons (B20 rewritten) → CP1; (b) Thái hậu TH1 prompt wrong + must have royal yellow; new B21 royal family must wear royal yellow; old 18/11 Thái hậu sheet (c04/c06) sent asking if that is the liked one.
 ROOT-52 Lượt 617: PR9 v9 5 samples (0759eaa, 675 cr) SENT with faults: HQP orange strong; incense table under tag 1 (HQP/HH-B); HH-B copies HQP bedroom layout (L11); HH-A ~2.5 walls; HH reception floor slightly grey-lilac. NDX3 items wired 0c24e44 (Nữ đế m01, HOLD GO).
 ROOT-52 Lượt 618: owner likes old 18/11 Thái hậu (yellow+own main) but redraw all (faces alike) with HH sleeves/fabric/HH-only parts; 18/11 set → SKINS; TH1 building prompt + confirm note, no gens.
+ROOT-52 Lượt 619: B21 fixed: t6 Quý phi also royal yellow; foreign princesses nc1–nc3 NO yellow.
