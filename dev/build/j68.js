@@ -6,7 +6,7 @@
    Anti-repetition: per-life cooldown per template and per variant; cross-life history in localStorage 'ctm-e68h' (last 6 lives) lowers the weight of what was seen.
    Hook for other storyline modules: e68Busy() is true if j68 fired a big beat this month; j68 honours storyBusy() if defined. */
 const E68=[],E68I={},Q68=[],Q68I={};
-const E68CFG={p:.25,swap:.15,cd:54};
+const E68CFG={cd:54}; /* npc-purpose: the weekly p / visit-swap rolls are gone: BAL.ag.why.e68.gap; a j68 visit only when no stock visitor has a reason */
 const G6=t=>`<span class="g">${t}</span>`,R6=t=>`<span class="r">${t}</span>`;
 function e68(){if(!S)return null;const e=S.e68=S.e68||{};e.cd=e.cd||{};e.vu=e.vu||{};e.fu=e.fu||[];e.q=e.q||[];e.qcd=e.qcd||{};e.ch=e.ch||{};e.n=e.n||0;e.qn=e.qn||0;e.cong=e.cong||0;e.qdone=e.qdone||0;e.qfail=e.qfail||0;e.npcq=e.npcq||[];
  if(!e.lid){e.lid=Date.now().toString(36)+R(1000);try{const H=JSON.parse(localStorage.getItem("ctm-e68h")||"{}");H.L=[[]].concat(H.L||[]).slice(0,6);H.cur=e.lid;localStorage.setItem("ctm-e68h",JSON.stringify(H))}catch(x){}}return e}
@@ -20,8 +20,8 @@ function e68On(){return !!(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSr
 /* ---------- actors ---------- */
 const NM6=p=>p?p.name:"";
 function tr6(v){try{return traitsOf(v)}catch(x){return[v&&v.trait]}}
-function rv6(f,wf){const L=liveRivals(true).filter(v=>!v.confined&&(!f||f(v)));if(!L.length)return null;if(!wf)return pick(L).id;const w=L.map(v=>Math.max(.01,wf(v)));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<L.length-1){r-=w[i];i++}return L[i].id}
-function sv6(f){const L=(S.staff||[]).filter(s=>s&&s.sid!=null&&(!f||f(s)));return L.length?pick(L).sid:null}
+function rv6(f,wf){const L=liveRivals(true).filter(v=>!v.confined&&(!f||f(v)));const v=npwPick(L,v=>wf?Math.max(.01,wf(v)):npwB().min+Math.abs(aff(v,S))+hostility(v,S)/2);return v?v.id:null} /* npc-purpose: the one whose tie / goal fits the template most (never a random consort) */
+function sv6(f,wf){const L=(S.staff||[]).filter(s=>s&&s.sid!=null&&(!f||f(s)));const s=npwPick(L,s=>wf?Math.max(.01,wf(s)):npwB().min+Math.abs((s.loyal||50)-50)+(netIs(s,"greed")?BAL.ag.why.e68.greed:0));return s?s.sid:null}
 function kid6(f){const L=(S.kids||[]).filter(k=>k.alive&&(!f||f(k)));return L.length?pick(L).name:null}
 function man6(rw){const L=(S.men||[]).filter(m=>m.alive!==false&&(!rw||m.rw===rw));return L.length?pick(L).id:null}
 function A6(kind,id){try{
@@ -77,24 +77,24 @@ function e68Cands(fams,big){const e=e68(),C=e68Ctx(),now=wk(),out=[];const story
  for(const s of E68){if(fams&&!fams.includes(s.fam))continue;if(s.fam==="plot"||s.fu)continue;if(big===false&&s.big)continue;if(s.big&&story)continue;
   const last=e.cd[s.id];if(last!=null&&now-last<(s.cd||E68CFG.cd))continue;let w=0;try{w=s.w?s.w(C):1}catch(x){w=0}if(!(w>0))continue;
   w*=Math.pow(.5,e68Past(s.id,true));out.push([s,w])}return out}
-function e68Pick(L){const t=L.reduce((a,x)=>a+x[1],0);let r=Math.random()*t,i=0;while(i<L.length-1&&r>L[i][1]){r-=L[i][1];i++}return L[i]}
+function e68Pick(L){return npwPick(L,x=>x[1],{all:true})} /* npc-purpose: weighted among the situations whose people / state fit (every fitting one may come; top-only made whole families vanish: Tin đồn 28→0) */
 /* params + a variant she has not seen lately (this life first, then the last five lives) */
 function e68Make(s){const e=e68();let p=null;try{p=s.pp?s.pp():{}}catch(x){p=null}if(!p)return null;const V=s.v||[""];
  let all=[...V.keys()];if(s.vf){let ok=null;try{ok=s.vf(p)}catch(x){}if(ok&&ok.length)all=all.filter(i=>ok.includes(i));else if(ok)return null}const used=e.vu[s.id]||[];let pool=all.filter(i=>!used.includes(i));if(!pool.length){pool=all.slice();e.vu[s.id]=(e.vu[s.id]||[]).filter(i=>!all.includes(i))}
  const fresh=pool.filter(i=>!e68Past(s.id+":"+i));p.vi=pick(fresh.length?fresh:pool);
  const d=mkP("e68"+s.id,p);if(!d)return null;e.cd[s.id]=wk();(e.vu[s.id]=e.vu[s.id]||[]).push(p.vi);e.n++;if(s.big)e.bigM=S.turn;e68Mark(s.id+":"+p.vi);return d}
-function e68Fire(fams){const L=e68Cands(fams);for(let t=0;t<4&&L.length;t++){const x=e68Pick(L);L.splice(L.indexOf(x),1);const d=e68Make(x[0]);if(d)return [d,x[0]]}return null}
+function e68Fire(fams,pk){const L=e68Cands(fams);for(let t=0;t<4&&L.length;t++){const x=(pk||e68Pick)(L);if(!x)break;L.splice(L.indexOf(x),1);const d=e68Make(x[0]);if(d)return [d,x[0]]}return null}
 function e68Push(d,s,front){const m={t:s.t||FAM6[s.fam]||"Chuyện trong cung",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp};if(front)Q.unshift(m);else Q.push(m);return m}
 /* follow-ups: a template flagged fu fires on its due tuần (params carried) */
 function fu6(id,dt,p){const e=e68();e.fu.push({id,at:wk()+dt,p:p||{}})}
 function e68FuTick(){const e=e68(),now=wk();for(const f of e.fu.slice()){if(f.at>now)continue;e.fu.splice(e.fu.indexOf(f),1);const s=E68I[f.id];if(!s)continue;const p=Object.assign({},f.p);if(p.vi==null)p.vi=R((s.v||[""]).length);const d=mkP("e68"+s.id,p);if(d){e68Push(d,s);return true}}return false}
-/* the stock visit is sometimes swapped for a j68 event (same number of modals) */
-(function(){const a0=approachOne;approachOne=function(){try{if(e68On()&&!window.__e68off&&roll(E68CFG.swap*100)){const r=e68Fire(["visit","day","serv","rumor","kid","emp"]);if(r){const[d,s]=r;return{t:s.t||FAM6[s.fam],h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}}catch(x){console.error(x)}return a0.apply(this,arguments)}})();
+/* the stock visit slot: a due j68 situation first (same number of modals) */
+(function(){const a0=approachOne;approachOne=function(){try{const e=e68();if(e68On()&&!window.__e68off&&e&&wk()>=(e.vx||0)){const r=e68Fire(["visit","day","serv","rumor","kid","emp"],e68Pick);if(r){e.vx=wk()+BAL.ag.why.e68.visitGap;const[d,s]=r;return{t:s.t||FAM6[s.fam],h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}}catch(x){console.error(x)}return a0.apply(this,arguments)}})();/* G1 #7: a due j68 situation (its own people: a visitor with an errand, a rumour with a teller) takes the slot before the stock visit, as the old swap did; visitGap paces it (fill-in-only made Tin đồn 30→5, j68 visits 79→11) */
 /* the tuần tick */
 function e68Tick(){const e=e68();if(!e)return;e.tick=(e.tick||0)+1;let added=0;
  if(Q.length>2)return;
  try{if(e68FuTick()){evBusyMark();return}}catch(x){console.error(x)}
- if(evBusy()||!roll(E68CFG.p*100))return;const r=e68Fire(null);if(r){e68Push(r[0],r[1]);if(r[1].big)evBusyMark()}}
+ if(evBusy()||wk()<(e.nx||0))return;const r=e68Fire(null,e68Pick);if(r){e.nx=wk()+BAL.ag.why.e68.gap;e68Push(r[0],r[1]);if(r[1].big)evBusyMark()}}
 (function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(e68On()&&!window.__e68off&&w0!=null&&wk()!==w0){e68Tick();if(Q.length&&$("modal").hidden)showModal()}}catch(x){console.error(x)}return r}})();
 /* ---------- debugging / testing helpers (in-page) ---------- */
 window.e68Test=function(id,p){const s=E68I[id];if(!s)return null;const d=e68Make(s);if(d){e68Push(d,s,true).must=1;showModal()}return !!d};
