@@ -1348,3 +1348,4 @@ ROOT-48 Lượt 467: triều phục r20 (7e7097d2, 3,816 cr, 28 gens because ord
 ROOT-48 Lượt 468 (owner, angry): triều phục sleeve embroidery ladder + cuff band = hà bí colour → FIGURE_GATE 8d; r21 worker TP1 opened (t1–t6, one round, STOP after sheet).
 ROOT-48 Lượt 469 (owner): two NEW people × 8 ranks covering the 14 standing angles; every 8-rank prompt must vary angle + held item + pose; phi bạch confirmed for everyone (thường phục; exclusions t7/t8/Nữ đế/triều phục kept unless owner says) → worker TN1 session_01PEhRbvtZveAitkYLwiN6nr (audit builder first, then 16 gens, STOP).
 ROOT-48 Lượt 470 (owner): r20 t6 Quý phi yellow OK, keep → FIGURE_GATE 8d, TP1 told.
+ROOT-48 Lượt 471 (owner): sleeve embroidery from t4 = same density as that rank's robe body (balanced), robe body density r20 OK → FIGURE_GATE 8d, TP1.
