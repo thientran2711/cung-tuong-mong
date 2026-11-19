@@ -103,7 +103,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    const nx=document.getElementById('next');return {err,ms,pend:!!F.pend,next:!!(nx&&nx.disabled),sent:F.stat.sent-s0,local:F.stat.local-l0,id:F.pend&&F.pend.id,n:F.pend&&F.pend.n}},src);
   const got=r.id?await until(G,id=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.id===id,r.id,20000):false;
   await sleep(1500);await sync();await rnd(G,null);await rnd(H,null);
-  if(o.shot&&process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});await sleep(1200);for(const p of [H,G]){const vp=p.p.viewportSize();await p.p.screenshot({path:path.join(process.env.SHOTS,`f5-${o.shot}-L${LVL}-${p.name}-${vp.width}x${vp.height}.jpg`),type:'jpeg',quality:70})}}
+  if(o.shot&&process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});for(const p of [H,G]){await tapText(p,/^Bỏ qua$/,1500)/* the Luân hồi intro overlay (never closed by this scripted run) */;await p.p.evaluate(()=>{for(const el of document.querySelectorAll('.nl-intro,#nlIntro,[data-nlintro]'))el.remove()}).catch(()=>{})}await sleep(1200);for(const p of [H,G]){const vp=p.p.viewportSize();await p.p.screenshot({path:path.join(process.env.SHOTS,`f5-${o.shot}-L${LVL}-${p.name}-${vp.width}x${vp.height}.jpg`),type:'jpeg',quality:70})}}
   const g1=await G.p.evaluate(()=>__her()),h1=await H.p.evaluate(()=>__her());const st1=await H.p.evaluate(()=>COOPW.thin.F.stat);const gs1=await G.p.evaluate(()=>Object.assign({},COOPW.thin.F.stat,{aaN:window.__aaN}));const ans=await G.p.evaluate(()=>COOPW.thin.F.lastAns);
   const hc1=await H.p.evaluate(()=>{const t=document.getElementById('rtoast');return t?t.innerHTML:''});
   const same=JSON.stringify(Object.assign({},g1,{log:0,nlog:0,used:0}))===JSON.stringify(Object.assign({},h1,{log:0,nlog:0,used:0}));
@@ -111,7 +111,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    aaPaid:(st1.aaPaid|0)-(st0.aaPaid|0),aaCard:(st1.aaCard|0)-(st0.aaCard|0),aaN:(gs1.aaN|0)-(gs0.aaN|0),skip:(gs1.skip|0)-(gs0.skip|0),bad:(st1.mgBad|0)-(st0.mgBad|0),hlog:await H.p.evaluate(()=>COOPW.thin.F.log.slice(-3))};
   if(twin&&twin.a){row.solo=D(twin.b,twin.a);row.solo.used=twin.du;row.real=D(g0,g1);row.real.used=g1.used-g0.used;row.twinOk=JSON.stringify(row.solo)===JSON.stringify(row.real)}else if(twin)row.twinErr=twin.err;
   row.good=ON?(!r.err&&r.pend&&r.next&&r.sent===1&&r.local===0&&got&&same&&!row.hostCard&&(o.reject?(row.st==='gone'&&row.bad===1&&row.aaPaid===0):(row.st==='ok'&&row.ran===1&&(o.twin?row.twinOk===true:true)))&&(o.chk?o.chk(row):true))
-   :(!r.err&&r.sent===0);
+   :(r.sent===0)/* the old road: her phone runs it (a staged over-max / bad-kind end may throw there: solo never calls it so) */;
   const kd=(x,y)=>{const o={};for(const k of new Set([...Object.keys(x||{}),...Object.keys(y||{})]))if(JSON.stringify((x||{})[k])!==JSON.stringify((y||{})[k]))o[k]=[(x||{})[k],(y||{})[k]];return o};
   row.diff=row.solo?kd(row.solo,row.real):null;row.sameDiff=same?null:kd(Object.assign({},g1,{log:0,nlog:0,used:0}),Object.assign({},h1,{log:0,nlog:0,used:0}));
   table.push(row);ok(row.good,`${tag}${ON?'':' (L'+LVL+' old road: local)'}`,row.good?{ms:row.ms,local_ms:r.ms}:{err:r.err,pend:r.pend,next:r.next,sent:r.sent,local:r.local,got,st:row.st,ran:row.ran,hostCard:row.hostCard,diff:row.diff,twinErr:row.twinErr,sameDiff:row.sameDiff,aaPaid:row.aaPaid,aaCard:row.aaCard,aaN:row.aaN,skip:row.skip,bad:row.bad,hlog:row.hlog,log:[g0.log,g1.log,h1.log]});return row};

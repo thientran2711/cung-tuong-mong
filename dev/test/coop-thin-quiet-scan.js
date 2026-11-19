@@ -50,6 +50,8 @@ for(const f of files){const src=fs.readFileSync(path.join(DIR,f),'utf8');let ast
 /* roots: the registered engines */
 const thf=fs.readFileSync(path.join(DIR,'jcoopthinf.js'),'utf8');
 const roots=new Set();for(const m of thf.matchAll(/F\.reg\("(\w+)"/g))roots.add(m[1]);for(const m of thf.matchAll(/for\(const n of \[([^\]]+)\]\)F\.reg/g))for(const x of m[1].matchAll(/"(\w+)"/g))roots.add(x[1]);
+/* F5 (whole family): the part helpers reg8 / reg9 / reg10 (F3–F5) register through F.reg too: reg<n>("name", …) and the reg8 UI table */
+for(const m of thf.matchAll(/\breg\d+\("(\w+)"/g))roots.add(m[1]);for(const m of thf.matchAll(/for\(const \[n,K,t\] of \[([\s\S]*?)\]\)\s*reg\d+\(n/g))for(const x of m[1].matchAll(/\["(\w+)",\[/g))roots.add(x[1]);
 roots.add('chooseM');roots.add('nextBuoi');/* part E: her buổi step (TH.tapRun since F2 r2) */
 /* cut: the names that do nothing inside her context on the host (TH.NOOP + the UICAP list in jcoopthin.js; resultShow runs) */
 const thn=fs.readFileSync(path.join(DIR,'jcoopthin.js'),'utf8');const CUT=new Set();
