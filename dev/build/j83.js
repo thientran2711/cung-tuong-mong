@@ -49,6 +49,8 @@ function wkRawOfPts(p){return [0,4,7,10][p]||0}
 const WDEF={cam:"khuc",ky:"the",thi:"tho",hoa:"tranh",vu:"mua",y:"huong",theu:"theu",nau:"mon"};
 function wkKindsOf(a){return Object.keys(WK).filter(k=>WK[k].a===a)}
 function wkSubj(kind){const K=WK[kind],E=S.emp;if(kind==="mon")return E.known.dish?E.likes.dish:pick(LIKES.dish);if(kind==="bhoa")return E.known.flower?E.likes.flower:pick(LIKES.flower);if(kind==="khuc"&&E.known.music)return "theo "+E.likes.music;return pick(K.sub)}
+/* a subject wkSubj or a recipe (jwkr wkrSubj) can give (co-op thin F5 r1: the host checks the subject of her work end against it; a word never comes from the wire) */
+function wkSubjOK(kind,s){const K=WK[kind];if(s==null)return true;if(typeof s!=="string"||!K)return false;const L=typeof LIKES==="object"&&LIKES||{};const R=typeof WKR==="object"&&WKR[kind]||[];/* + a recipe's (jwkr wkrSubj) */return (K.sub||[]).concat(L.dish||[],L.flower||[],(L.music||[]).map(x=>"theo "+x),R.map(r=>r.n),R.filter(r=>r.like).map(r=>r.like),R.filter(r=>r.like).map(r=>"theo "+r.like)).includes(s)}
 function wkName(kind,subj){const K=WK[kind];return kind==="mon"?`Bát ${subj}`:kind==="bhoa"?`Bình ${subj}`:kind==="theu"?`Khăn thêu ${subj}`:kind==="huong"?`Túi hương ${subj}`:`${K.w} «${subj}»`}
 const WMON=["","giêng","hai","ba","tư","năm","sáu","bảy","tám","chín","mười","mười một","chạp"],WYR=["","nhất","hai","ba","tư","năm","sáu","bảy","tám","chín","mười"];
 function wkDate(){return `tháng ${WMON[S.month]||S.month}, năm thứ ${WYR[S.year]||S.year}`}
@@ -129,10 +131,11 @@ function wkFinTxt(K){return !K||!K.fin?"":wkFinLeft()>0?`${plain(fmt(K.fin))}, m
 /* lesson progress points of one play (0..3 by BAL.mgTier.lessonPts): ONE rule for her lesson (openMG below) and an NPC's (j85 npcStudyDo, mg2) */
 function wkLessonPts(raw){const P=BAL.mgTier.lessonPts;return raw>=P[2]?3:raw>=P[1]?2:raw>=P[0]?1:0}
 /* the end of every lesson / practice game (one function: the game's onDone ends here; co-op thin F5 runs it on the host with her score).
-   m = the lesson (S.mg: k, mode, wk = the work picked, pa = a practice / Học lối mới / resumed practice: how / qx = its own words);
+   m = the lesson (S.mg: k, mode, wk = the work picked, pa = a practice / Học lối mới / resumed practice: hw = the key of its own words in WK_HOW);
    cb = the lesson-progress callback of openMG (absent: the lesson's gain itself, artLessonGain) */
-function wkLessonEnd(k,m,raw,o,cb){const sk2=!!(o&&o.skipped);
- if(m.pa){S.mg=null;if(sk2)log(m.qx||"Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,m.wk||{kind:WDEF[k],mat:0},cl(Math.round(raw),0,10),m.how||"tự học");render();return}
+const WK_HOW={rcp:{how:"học với thầy",qx:"Học nhanh: không ra thành phẩm."}};/* m.hw: the practice's own words (Học lối mới) */
+function wkLessonEnd(k,m,raw,o,cb){const sk2=!!(o&&o.skipped);const H=WK_HOW[m.hw]||{};
+ if(m.pa){S.mg=null;if(sk2)log(H.qx||"Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,m.wk||{kind:WDEF[k],mat:0},cl(Math.round(raw),0,10),H.how||"tự học");render();return}
  const pick=m.wk||{kind:WDEF[k],mat:0},ms=S.master?2:1;raw=cl(Math.round(raw||0),0,10);const pts=sk2?(o.ok!=null?(o.ok?1:0):(kitQuickRoll()?1:0)):wkLessonPts(raw)/* ONE tier rule (ag) */;
  if(m.mode==="prac"){S.mg=null;if(sk2)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự học");render();return}
  (cb||(g=>artLessonGain(m,g)))(pts*ms);if(sk2)return;try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học với Thái hậu":"học");render()}catch(x){}}
