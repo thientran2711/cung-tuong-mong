@@ -33,3 +33,4 @@ BW6 TASK 1 done + reported to ROOT-54 (commits 0ee0570, 04df4ae; head e439ed0). 
 ## Owner groups Lượt 686 wired (ROOT-54 21:13Z) — DONE, no gens
 - store look_groups() reads OWNER_GROUPS_L686.json (m + c). build_all: e12_caps per group size; group_angles = backtracking up to 14 people, cyclic construction above 14 (backtracking stalled at 20/30). Audit script reads the JSON too.
 - Numbers: same-rank-audit.md last section. AFTER: 0 cells over cap in all 5 groups; Sắc sảo (6) fully different; Tinh nghịch (14) all angle sentences different, items/grace ≤ 2.
+- UPDATE: the JSON was rewritten upstream (Lượt 695–700: 8 groups of 11 + "Kho"). Builders skip "Kho" and groups with only new s-ids. AFTER: 0 cells over cap; Sắc sảo (8 builder people) fully different; other groups (11): all angle sentences different, items/grace ≤ 2, class ≤ 3.

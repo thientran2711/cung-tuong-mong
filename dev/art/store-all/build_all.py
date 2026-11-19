@@ -340,7 +340,9 @@ def plan(age="a18"):
     # E12 (owner Lượt 650/656, ROOT-54 ruling (b), BW6): inside each LOOK GROUP the angle and grace of THIS age are replaced by the group plan
     # (different angle sentence per person at one rank, <=2 per visual class, different grace line; E1 no repeat inside one person). Poses: untouched.
     for name,mem in g["look_groups"]().items():
-        mem=[c for c in mem if c in PEOPLE]; A=group_angles(name,mem,age,[ang_class(x) for x in g["ANG14"]]); Gr=group_grace(name,mem,age)
+        mem=[c for c in mem if c in PEOPLE]
+        if not mem: continue
+        A=group_angles(name,mem,age,[ang_class(x) for x in g["ANG14"]]); Gr=group_grace(name,mem,age)
         for c in mem:
             for t in range(1,9):
                 a,pz,gr=P[(c,t)]; P[(c,t)]=(A[(c,t)],pz,Gr.get((c,t),gr))
@@ -580,7 +582,9 @@ def _E12_GATE(age):
     import math,collections
     store("c06",1,age); g=LAST_G; P=plan(age); bad=[]
     for name,mem in g["look_groups"]().items():
-        mem=[c for c in mem if c in PEOPLE]; ci,ca,cc=e12_caps(len(mem),[ang_class(x) for x in g["ANG14"]])
+        mem=[c for c in mem if c in PEOPLE]
+        if not mem: continue   # a group of new people only (s-ids, not in the builders yet)
+        ci,ca,cc=e12_caps(len(mem),[ang_class(x) for x in g["ANG14"]])
         for t in range(1,9):
             for f,vals,cap in (("item",[g["_e6_picks"](c,age)["t%d"%t][0] for c in mem],ci),("angle",[P[(c,t)][0] for c in mem],ca),
                                ("angle class",[ang_class(g["ANG14"][P[(c,t)][0]]) for c in mem],cc),("grace",[P[(c,t)][2] for c in mem],ci)):
