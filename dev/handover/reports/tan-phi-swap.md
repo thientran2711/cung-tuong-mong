@@ -76,7 +76,7 @@ JOB 2 recipe (4 gens, no mass):
 W106 stops here (rollover line reached).
 
 ## JOB 2 DONE (painter subagent of Foreman C ROOT-38, 19/11 ~02:35Z)
-4 gens, 0 regens (4 of max 8). Prompts = exact build.py stdout (`c06|c25 v0 --low 4|5 --spec5pose`), refs [style 6AbGv6EiJO, own a18 t1 v0 face rgXsjcmxtc / u5WqFZ2QLD], gpt-2-6 1024x2304 2k, transparentBackground (alpha OK, no remove_background needed), folder ba4aecfe. Logged with `--log --gen-id --mprompt` in dev/art/gen_ledger.jsonl (new file); `--verify --since` = 4 PASS, 0 FAIL (Magnific metadata.prompt == builder stdout).
+4 gens, 0 regens (4 of max 8). Prompts = exact build.py stdout (`c06|c25 v0 --low 4|5 --spec5pose`), refs [style 6AbGv6EiJO, own a18 t1 v0 face rgXsjcmxtc / u5WqFZ2QLD], gpt-2-6 1024x2304 2k, transparentBackground (alpha OK, no remove_background needed), folder ba4aecfe. Logged with `--log --gen-id --mprompt` in dev/art/gen_ledger.jsonl (appended after 2 existing lines); `--verify --since` = 4 PASS, 0 FAIL (Magnific metadata.prompt == builder stdout).
 Note: the t4 builder text now carries the beaded shoulder-yoke wording (open pearl/jade net with pearl fringe, "fewer, more widely spaced pearls"), not the e7522ad "few thin sparse strands" phrase quoted above.
 | Image | Gen id | Matches | Faults (honest) |
 |---|---|---|---|
