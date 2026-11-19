@@ -1302,10 +1302,10 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
    wit   witness rank: eye × eyes(p) + host × hostility toward the one watched
    tell  a witness carries a fact when her grudge against its subject ≥ host, or her liking for the one told ≥ friend */
 BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4},wit:{eye:10,host:1},tell:{host:40,friend:30}};
-/* npc-purpose G1 kinds (jagwhy1; the stray man). affair (Sủng < sung): base + (sung − Sủng) × sungK − (Đức − duc)⁺ × ducK + kin (Kín đáo) − rov when the lover is a roving man who does not already fancy her; affairOut: proof ≥ ev and grudge ≥ host;
+/* npc-purpose G1 kinds (jagwhy1; the stray man; an NPC affair itself begins / is exposed through her day plan + proof: role-parity part 2).
    tryst: base + rove (roving man) − fear (Kín đáo), cd [roving, other] = the old 2 / 3 tuần cadence; letter: w per reason (old order of reasons; jealous = Sủng under jSung and ghen ≥ jGhen), cd 12 = once a season;
    seek: base (his fancy, ≥ ag.why.min) + her looks above sac, his gap = BAL.net menGap; tryst base 35 − fear 12 ≥ min (rates review: a careful pair still meets); menGrudge: s while his grudge lasts, cd 9 tuần = the old once every 3 months (monthly caller) */
-Object.assign(BAL.ag.why,{affair:{sung:30,base:20,sungK:1,duc:60,ducK:.5,kin:8,rov:15,cd:12},affairOut:{ev:2,host:45,cd:4},tryst:{base:35,rove:10,fear:12,cd:[2,3]},
+Object.assign(BAL.ag.why,{tryst:{base:35,rove:10,fear:12,cd:[2,3]},
  letter:{w:{preg:70,confined:60,plan:45,jealous:30},jSung:25,jGhen:50,cd:12},seek:{base:25,sac:60},menGrudge:{s:30,cd:9}});
 /* jmen: men.ty = the thái y's summons — Sức under suc counts as sick; whom first: ill / preg weights + (suc − Sức) + b; men.tell = whose secret a threatened
    man gives up: his own lover (own), the one he fancies (like), anyone else (_) */

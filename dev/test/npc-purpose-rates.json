@@ -244,8 +244,6 @@
  ],
  "rare": {
   "admon": "j75 Empress / Thái hậu admonition: only with the agent layer off (agDOn), the bot plays with it on",
-  "affair": "needs a lonely consort (Sủng < 30) and a man who fancies her or a roving man (jmen); in the bot the men's road rarely fills — base had 1 'tư thông' line in 5×200 tuần",
-  "affairOut": "needs a live NPC affair plus a foe holding proof (evG ≥ 2) — follows affair",
   "bulTell": "jtsb bullying victim tells: needs 2+ bullyings with evidence; rare in 200 tuần",
   "cmBrawl": "close maid from home ('dtq' house) only; one origin of the maid",
   "cmLand": "close maid house 'land' (Cung Chính ti report) only, plus a 5 % letter roll: a few asks per run",

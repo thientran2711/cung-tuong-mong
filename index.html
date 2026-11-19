@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d78ecefd+","t":"2026-11-18T23:59Z","c":"npc-purpose G1 #12: wd.meet.ok 10 → 35 (praise only from one with a reason; ~1 ok month in 4 has one) and fxSrvHarm disloyal score = why.mi…","b":"d53cacee8b1c","h":[{"s":"a837ad32+","t":"2026-11-18T23:30Z","c":"rel-picker r2: site rebuilt"},{"s":"8c23ab31","t":"2026-11-18T23:30Z","c":"role-parity r3 (reviewer): rebuilt root site on 1130a49e"},{"s":"9f00e409+","t":"2026-11-18T22:44Z","c":"stage-rightcol r7: place-tag re-check also every 300 ms while the group list is open (map moves without scroll events)"},{"s":"ca661db3+","t":"2026-11-18T13:38Z","c":"coop-c4-stuck S5a: hold showModal so the room's own armed reshow cannot race the negative check"},{"s":"0dc8f187+","t":"2026-11-18T22:28Z","c":"review coop-thin-f1 r1 #3: site build (index.html / sw.js rebuilt)"},{"s":"6e9277d8+","t":"2026-11-18T21:47Z","c":"entry-blank-r3 r2 (review item 6, whole group): a portrait on its way shows the kit portrait silhouette (§59.1 pf/pm, unknown-f|m); the lin…"},{"s":"3270145f+","t":"2026-11-18T21:25Z","c":"doc-90-women r1: rebuild generated index.html/sw.js (build hash, build line) after comment edits"},{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"}]};
+window.CTM_BI={"s":"b00a3954+","t":"2026-11-19T00:02Z","c":"npc-purpose G1 #12: wd.meet.ok 10 → 35 (praise only from one with a reason; ~1 ok month in 4 has one) and fxSrvHarm disloyal score = why.mi…","b":"3a3ac4843ec3","h":[{"s":"a837ad32+","t":"2026-11-18T23:30Z","c":"rel-picker r2: site rebuilt"},{"s":"8c23ab31","t":"2026-11-18T23:30Z","c":"role-parity r3 (reviewer): rebuilt root site on 1130a49e"},{"s":"9f00e409+","t":"2026-11-18T22:44Z","c":"stage-rightcol r7: place-tag re-check also every 300 ms while the group list is open (map moves without scroll events)"},{"s":"ca661db3+","t":"2026-11-18T13:38Z","c":"coop-c4-stuck S5a: hold showModal so the room's own armed reshow cannot race the negative check"},{"s":"0dc8f187+","t":"2026-11-18T22:28Z","c":"review coop-thin-f1 r1 #3: site build (index.html / sw.js rebuilt)"},{"s":"6e9277d8+","t":"2026-11-18T21:47Z","c":"entry-blank-r3 r2 (review item 6, whole group): a portrait on its way shows the kit portrait silhouette (§59.1 pf/pm, unknown-f|m); the lin…"},{"s":"3270145f+","t":"2026-11-18T21:25Z","c":"doc-90-women r1: rebuild generated index.html/sw.js (build hash, build line) after comment edits"},{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -32126,10 +32126,10 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
    wit   witness rank: eye × eyes(p) + host × hostility toward the one watched
    tell  a witness carries a fact when her grudge against its subject ≥ host, or her liking for the one told ≥ friend */
 BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4},wit:{eye:10,host:1},tell:{host:40,friend:30}};
-/* npc-purpose G1 kinds (jagwhy1; the stray man). affair (Sủng < sung): base + (sung − Sủng) × sungK − (Đức − duc)⁺ × ducK + kin (Kín đáo) − rov when the lover is a roving man who does not already fancy her; affairOut: proof ≥ ev and grudge ≥ host;
+/* npc-purpose G1 kinds (jagwhy1; the stray man; an NPC affair itself begins / is exposed through her day plan + proof: role-parity part 2).
    tryst: base + rove (roving man) − fear (Kín đáo), cd [roving, other] = the old 2 / 3 tuần cadence; letter: w per reason (old order of reasons; jealous = Sủng under jSung and ghen ≥ jGhen), cd 12 = once a season;
    seek: base (his fancy, ≥ ag.why.min) + her looks above sac, his gap = BAL.net menGap; tryst base 35 − fear 12 ≥ min (rates review: a careful pair still meets); menGrudge: s while his grudge lasts, cd 9 tuần = the old once every 3 months (monthly caller) */
-Object.assign(BAL.ag.why,{affair:{sung:30,base:20,sungK:1,duc:60,ducK:.5,kin:8,rov:15,cd:12},affairOut:{ev:2,host:45,cd:4},tryst:{base:35,rove:10,fear:12,cd:[2,3]},
+Object.assign(BAL.ag.why,{tryst:{base:35,rove:10,fear:12,cd:[2,3]},
  letter:{w:{preg:70,confined:60,plan:45,jealous:30},jSung:25,jGhen:50,cd:12},seek:{base:25,sac:60},menGrudge:{s:30,cd:9}});
 /* jmen: men.ty = the thái y's summons — Sức under suc counts as sick; whom first: ill / preg weights + (suc − Sức) + b; men.tell = whose secret a threatened
    man gives up: his own lover (own), the one he fancies (like), anyone else (_) */
@@ -72860,12 +72860,9 @@ npwReg("socDeed",{grp:"G2",who:c=>c.v?[c.v]:[],why:(v)=>{const W=npwB().socDeed;
 npwReg("midBribe",{grp:"G2",who:c=>c.f||[],why:(x,c)=>({s:danger(x,c.p)*mindW(x,"bribe")*npwB().midBribe.k,t:c.p,r:"oán "+npwNm(c.p)+", đút lót bà đỡ"})});
 /* ================= jagwhy1: NPC-PURPOSE G1 kinds — the stray man in the hậu cung (j22 affairs + jmen plans) =================
    Owner OD 18/11 ~04:08Z (no luck: the stray man must come from a real goal: a lover meeting, a secret letter, an admirer…) + OD:L188 (men's
-   intrusions are plan-driven). Uses ONLY the jagwhy helper (npwReg / npcWhy / npwPick); numbers BAL.ag.why.{affair,affairOut,tryst,letter,seek,menGrudge}.
-   affair     j22 affairMonth: a consort takes a lover only when a man already fancies her (jmen likeV = the one he has seen and admires) and she is
-              lonely (Sủng < affair.sung): base + (sung − Sủng) × sungK − Đức above affair.duc × ducK (+ kin for Kín đáo: she believes she can hide it).
-              No admirer → no affair; a lonely, ordinary-virtue consort clears ag.why.min (rates review 18/11).
-   affairOut  j22: an affair is exposed only by a person who holds proof against her (evG ≥ affairOut.ev) and bears her a grudge
-              (hostility ≥ affairOut.host); she is named. Witnesses of a stray in the act are jmen menNpcSee (unchanged).
+   intrusions are plan-driven). Uses ONLY the jagwhy helper (npwReg / npcWhy / npwPick); numbers BAL.ag.why.{tryst,letter,seek,menGrudge}.
+   affairs    an NPC consort's affair begins and is exposed only through her own day-plan steps and proof (role-parity part 2, jagacts4
+              cx4:man* + j22 manCards / trystNpc / trystKnow): the old G1 kinds affair / affairOut were removed with the monthly rolls they replaced.
    tryst      jmen plan 1: the pair meet when their longing is strong enough: tryst.base + rove for a roving man − fear (Kín đáo); the gap between
               meetings is the old cadence, now BAL (tryst.cd = [roving, other] tuần).
    letter     jmen plan 2: the consort with the most urgent reason writes (letter.w per reason); once a season per consort (cd.letter).
@@ -72873,14 +72870,6 @@ npwReg("midBribe",{grp:"G2",who:c=>c.f||[],why:(x,c)=>({s:danger(x,c.p)*mindW(x,
    menGrudge  jmen month: a spurned man spreads his rumour while his grudge lasts; gap = cd.menGrudge.
    ======================================================================================================================================= */
 function npw1B(k){return BAL.ag.why[k]}
-npwReg("affair",{grp:"consort",who:()=>liveRivals(false).filter(v=>v&&v.alive&&!v.out&&!v.queen&&!v.affair&&(v.age||20)>=18),
- why(v){const A=npw1B("affair");if((v.sung||0)>=A.sung)return null;const ok=x=>x.alive&&!(typeof menBanned==="function"&&menBanned(x));
-  /* her lover: the man who fancies her (jmen likeV), else a man of roving nature who takes his chance with a neglected consort (weaker tie: − rov) */
-  let m=(S.men||[]).find(x=>ok(x)&&x.likeV===v.id),rov=0;if(!m){m=npwPick((S.men||[]).filter(x=>ok(x)&&MEN_ROVE.some(t=>hasT(x,t))),x=>1+(x.tinh||0));rov=A.rov}if(!m)return null;
-  const s=A.base+(A.sung-(v.sung||0))*A.sungK-Math.max(0,(v.duc||0)-A.duc)*A.ducK+(hasT(v,"Kín đáo")?A.kin:0)-rov;
-  return {s,t:m,r:rov?`lâu không được Hoàng thượng đoái hoài, ${m.name} lại đa tình, tìm cách gần gũi`:`lâu không được Hoàng thượng đoái hoài, lại có ${m.name} đem lòng để ý`}}});
-npwReg("affairOut",{grp:"consort",who:c=>liveRivals(true).filter(w=>w&&w!==c.v&&w.alive&&!w.out),
- why(w,c){const A=npw1B("affairOut");if(evG(w,c.v)<A.ev)return null;const h=hostility(w,c.v);if(h<A.host)return null;return {s:h,t:c.v,r:"nắm chứng cứ trong tay, vốn mang oán với nàng"}}});
 npwReg("tryst",{grp:"pair",cdOf:m=>{const C=npw1B("tryst").cd;return MEN_ROVE.some(t=>hasT(m,t))?C[0]:C[1]},who:c=>[c.m],
  why(m,c){const A=npw1B("tryst");/* lovers' longing (base) clears ag.why.min even for a careful (Kín đáo) pair: fear slows, never stops them */const s=A.base+(MEN_ROVE.some(t=>hasT(m,t))?A.rove:0)-((hasT(c.v,"Kín đáo")||hasT(m,"Kín đáo"))?A.fear:0);return {s,t:c.v,r:`hẹn hò với ${npwNm(c.v)}`}}});
 npwReg("letter",{grp:"consort",who:c=>c.C,why(v){const W=npw1B("letter").w;const why=v.confined?"confined":v.plan?"plan":(v.preg&&v.hidden)?"preg":((v.sung||0)<npw1B("letter").jSung&&(v.ghen||0)>=npw1B("letter").jGhen)?"jealous":"";
@@ -77575,7 +77564,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d53cacee8b1c";window.CTM_BUILD=BUILD;
+const BUILD="3a3ac4843ec3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
