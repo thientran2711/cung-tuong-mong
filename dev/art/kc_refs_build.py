@@ -38,10 +38,9 @@ for i in range(1, 33):
     OTHERS["c%02d" % i] = "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
 for i in range(1, 4):
     OTHERS["p%02d" % i] = "player: no thiếu nữ picture of any kind"
-# owner Lượt 570: nc1–nc3 OK as refs — KC_REFS.json patched by ROOT-50; BW3 to move them into the OK list
-OTHERS["nc1"] = "princess Ba Tư: picture exists but made with COMMON_v2 princess prompt (cut 6Abnqu9iJO, nc1.v2.FULL.txt), not a v3 thiếu nữ"
-OTHERS["nc2"] = "princess Cao Ly: picture exists but COMMON_v2 princess prompt (cut p8ymOwOehw, nc2.v2.FULL.txt), not a v3 thiếu nữ"
-OTHERS["nc3"] = "princess Phù Tang: picture exists but COMMON_v2 princess prompt (cut ov6CN4g829, nc3.v2.FULL.txt), not a v3 thiếu nữ"
+# owner Lượt 570: nc1–nc3 OK as refs ("foreign princess pictures OK as reference, no redraw"; ROOT-50 patch 14c39c1/307ca97 moved here by BW3).
+# Their pictures = COMMON_v2 princess prompt (file now in _retired/face-common); face words = the "Her face: …" sentence of that {PERSON} line (verbatim).
+NC_OK = {"nc1": "6Abnqu9iJO", "nc2": "p8ymOwOehw", "nc3": "ov6CN4g829"}
 for i in range(1, 4):
     OTHERS["bd%d" % i] = "princess Bắc Địch: COMMON_v2 samples only; Bắc Địch styles DROPPED by owner Lượt 283"
 
@@ -110,11 +109,20 @@ def main():
             "prompt_file": "dev/art/face-common/" + pf, "pick_why": why,
             "face_words": face_words(pl), "person_line": pl,
         }
+    for pid, cut in NC_OK.items():
+        pf = "dev/art/_retired/face-common/%s.v2.FULL.txt" % pid
+        full = open(os.path.join(os.path.dirname(os.path.dirname(ART)), pf), encoding="utf-8").read()
+        fw = re.search(r"(Her face:.*?)(?=\sCostume\b)", full, re.S).group(1).strip()
+        rows[pid] = {
+            "id": pid, "m09_ok": "yes", "ref_id": cut, "note": "owner Lượt 570: foreign princess pictures OK as reference, no redraw",
+            "prompt_file": pf, "set": "foreign princess (M09, COMMON_v2 princess prompt)", "gen_id": None, "refs_used": [M09],
+            "face_words": fw, "magnific_ref_ok": True, "cdn_url": None, "pick_why": "owner Lượt 570",
+        }
     for pid, why in OTHERS.items():
         rows[pid] = {"id": pid, "m09_ok": "NO", "ref_id": None, "note": why}
     data = {
         "rule": "ART_RULES B8 (owner Lượt 543/551): ONE identity ref = ref_id (Magnific remove_bg cut, pass directly as type image). Face words copied VERBATIM from face_words/person_line. m09_ok NO -> NOT drawn. NEVER img/_review/kc2k (REJECTED) or img/fig-*/hd t1.",
-        "m09": M09, "style_new_character_only": "6AbGv6EiJO", "royal_swatch_t6plus": "TdwDfOyVNR",
+        "m09": M09, "royal_swatch_t6plus": "TdwDfOyVNR",
         "rejected_sets": ["img/_review/kc2k/ -> moved to img/_rejected/kc2k/", "img/_review/kc2k-mass/ -> moved to img/_rejected/kc2k-mass/"], "banned_refs": "dev/art/KC_BANNED_REFS.json (check: python3 dev/art/kc_ref.py --check ...; check_store.py --refs)",
         "people": rows,
     }

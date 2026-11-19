@@ -16,7 +16,7 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 
 ### S01 · TWO-COLOUR RULE (hai màu)
 - text: `TWO-COLOUR RULE: the whole outfit uses EXACTLY TWO colours that clearly interact: the MAIN colour {main} and the SECONDARY colour {secondary}, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, never a third colour.`
-- scope: tp1-8 pr1-8 mama
+- scope: tp1-6 pr1-6 mama
 - confirm: nude trieu1-8
 - ages: all
 - store: no
@@ -246,7 +246,7 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - text: `HAIR (rank law): her hair stays LOOSE and flowing like her young-lady picture: at most the top half gathered up, most of her hair hanging loose down her back.`
 - scope: tp1-3 pr1-3
 - confirm: -
-- ages: all
+- ages: a18 a26
 - store: no
 - luot: 337 (F1)
 - source: dev/art/store-all/build_all.py HAIR_LOW

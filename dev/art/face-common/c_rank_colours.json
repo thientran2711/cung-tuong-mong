@@ -1,0 +1,196 @@
+{
+ "_note": "Rank-prompt colours for consorts c01–c32 (B18 Lượt 583): main/secondary name + hex + tone sentence. c01–c06 = rank data only (their drawn thiếu-nữ pictures/files stay as drawn). HOLD: no use until owner GO.",
+ "tone": "all colours at ONE medium tone level, the same as the soft coral-red and brick-red robes of the game: medium saturation, medium lightness, neither too fresh nor too dark, never rực, never glaring, never neon, never pastel-washed, never dusty, grey, muddy or black.",
+ "c01": {
+  "main": "soft rose red",
+  "main_hex": "#CF6E76",
+  "secondary": "jade green",
+  "secondary_hex": "#74B48F"
+ },
+ "c02": {
+  "main": "soft sapphire blue",
+  "main_hex": "#7E8FBE",
+  "secondary": "warm ivory",
+  "secondary_hex": "#EAD7BF"
+ },
+ "c03": {
+  "main": "soft emerald green",
+  "main_hex": "#7FBD96",
+  "secondary": "deep rose",
+  "secondary_hex": "#CA7281"
+ },
+ "c04": {
+  "main": "soft royal purple",
+  "main_hex": "#A87FBD",
+  "secondary": "rose-red",
+  "secondary_hex": "#CF818C"
+ },
+ "c05": {
+  "main": "soft peacock teal",
+  "main_hex": "#7EBFBD",
+  "secondary": "dusty rose",
+  "secondary_hex": "#C5777E"
+ },
+ "c06": {
+  "main": "soft vermilion",
+  "main_hex": "#CF816E",
+  "secondary": "jade green",
+  "secondary_hex": "#6AAF98"
+ },
+ "c07": {
+  "main": "soft lavender",
+  "main_hex": "#B8A0D2",
+  "secondary": "rose-red",
+  "secondary_hex": "#CA7281"
+ },
+ "c08": {
+  "main": "soft cherry-blossom pink",
+  "main_hex": "#DF9FA2",
+  "secondary": "jade green",
+  "secondary_hex": "#74B47E"
+ },
+ "c09": {
+  "main": "soft powder blue",
+  "main_hex": "#97B4D2",
+  "secondary": "deep rose",
+  "secondary_hex": "#C16776"
+ },
+ "c10": {
+  "main": "soft peach",
+  "main_hex": "#DFBB9F",
+  "secondary": "jade teal",
+  "secondary_hex": "#53ACA5"
+ },
+ "c11": {
+  "main": "soft lilac",
+  "main_hex": "#BC9FCE",
+  "secondary": "deep rose",
+  "secondary_hex": "#C76B82"
+ },
+ "c12": {
+  "main": "soft mint green",
+  "main_hex": "#A1CFB2",
+  "secondary": "rose",
+  "secondary_hex": "#C76B82"
+ },
+ "c13": {
+  "main": "soft apricot",
+  "main_hex": "#DEAF9B",
+  "secondary": "jade green",
+  "secondary_hex": "#5DAC85"
+ },
+ "c14": {
+  "main": "soft ivory cream",
+  "main_hex": "#EAD7BF",
+  "secondary": "blue-violet",
+  "secondary_hex": "#6B64B4"
+ },
+ "c15": {
+  "main": "soft coral pink",
+  "main_hex": "#DEA69B",
+  "secondary": "indigo blue",
+  "secondary_hex": "#54629C"
+ },
+ "c16": {
+  "main": "soft sage green",
+  "main_hex": "#B1BD7F",
+  "secondary": "plum rose",
+  "secondary_hex": "#B8618C"
+ },
+ "c17": {
+  "main": "soft blush pink",
+  "main_hex": "#DF9FA8",
+  "secondary": "teal",
+  "secondary_hex": "#50A5A2"
+ },
+ "c18": {
+  "main": "soft mauve rose",
+  "main_hex": "#C67F8A",
+  "secondary": "warm ivory",
+  "secondary_hex": "#EAD7BF"
+ },
+ "c19": {
+  "main": "soft plum",
+  "main_hex": "#BD7FA1",
+  "secondary": "soft jade",
+  "secondary_hex": "#7CB699"
+ },
+ "c20": {
+  "main": "soft lotus pink",
+  "main_hex": "#DFA79F",
+  "secondary": "celadon green",
+  "secondary_hex": "#6AAF81"
+ },
+ "c21": {
+  "main": "soft raspberry rose",
+  "main_hex": "#CF6E8B",
+  "secondary": "jade green",
+  "secondary_hex": "#5DAC8B"
+ },
+ "c22": {
+  "main": "soft orchid purple",
+  "main_hex": "#B27FBD",
+  "secondary": "rose pink",
+  "secondary_hex": "#D28995"
+ },
+ "c23": {
+  "main": "soft crimson red",
+  "main_hex": "#CC7370",
+  "secondary": "jade green",
+  "secondary_hex": "#57A880"
+ },
+ "c24": {
+  "main": "soft persimmon",
+  "main_hex": "#CF916E",
+  "secondary": "indigo blue",
+  "secondary_hex": "#505E95"
+ },
+ "c25": {
+  "main": "soft cherry red",
+  "main_hex": "#CB7178",
+  "secondary": "teal",
+  "secondary_hex": "#539BA2"
+ },
+ "c26": {
+  "main": "soft burgundy rose",
+  "main_hex": "#C37986",
+  "secondary": "celadon green",
+  "secondary_hex": "#76B28F"
+ },
+ "c27": {
+  "main": "soft terracotta",
+  "main_hex": "#CF776E",
+  "secondary": "deep teal",
+  "secondary_hex": "#4D9699"
+ },
+ "c28": {
+  "main": "soft celadon",
+  "main_hex": "#98CAA5",
+  "secondary": "rose-red",
+  "secondary_hex": "#CA727E"
+ },
+ "c29": {
+  "main": "soft ink blue",
+  "main_hex": "#7F95BD",
+  "secondary": "warm ivory",
+  "secondary_hex": "#EAD7BF"
+ },
+ "c30": {
+  "main": "soft moonlight blue",
+  "main_hex": "#A4BCD8",
+  "secondary": "coral rose",
+  "secondary_hex": "#CA7A72"
+ },
+ "c31": {
+  "main": "soft pale jade",
+  "main_hex": "#ABD4BB",
+  "secondary": "rose-red",
+  "secondary_hex": "#CD7A88"
+ },
+ "c32": {
+  "main": "soft ivory",
+  "main_hex": "#EDDCC6",
+  "secondary": "indigo blue",
+  "secondary_hex": "#54629C"
+ }
+}

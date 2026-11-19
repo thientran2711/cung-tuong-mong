@@ -162,7 +162,7 @@ def age_item(c,tier,item,hk):
     if OLDITEM: return item,hk
     k=_IA.pick_kind(c,AGE,tier); return _art(_IA.fill(k,tier)),"L:"+_HK.get(k,"two")
 def _hh(fn,hk,right): return low_hand(hk,right) if hk.startswith("L:") else fn(hk,right)
-AGE_TXT={"a18":"about 22, youthful adult.","a26":"about 30, mature and poised.","a36":"about 36 but looking young for her age (trẻ trước tuổi): still youthful and very beautiful, only a touch more mature and poised than her young self, smooth skin, no visible lines, never an older face.","a65":"about 65, a truly elderly lady who ages beautifully (đẹp lão): clearly older than her 51-year-old self, with gentle visible wrinkles at the eyes, mouth and forehead, softer cheeks and jawline, a calm wise dignified look; her hair is largely silver-grey mixed with some dark strands (much more silver than at 51, but NOT pure white); still graceful, elegant and beautiful, never haggard. Her robe keeps exactly the same colours as described below, but every colour is a DEEPER, DARKER, more subdued shade suited to an elderly lady (dignified, not bright; the royal yellow becomes a deeper antique gold).","a51":"about 51, a graceful beautiful older lady who ages beautifully (đẹp lão): a slightly fuller mature face, soft fine lines at the eyes and gentle smile lines, dignified and elegant, still lovely and refined; clearly VISIBLE silver-grey streaks at the temples and in the front of her warm dark-brown hair (a visible silver patch that is easy to see at game size, hair still mostly dark, never white hair); never a 20-30-year-old face, never haggard or plain. Her robe keeps the same colour families as described below, but every colour is a DEEPER, DARKER, rich mature shade, the dark dignified tones an empress dowager or senior palace matron wears (e.g. pink becomes deep rose-plum, blue becomes deep navy blue, green becomes deep dark jade, purple becomes deep aubergine, red becomes deep burgundy; the royal yellow becomes a deep antique gold); dignified and rich, never bright."}
+AGE_TXT={"a18":"about 22, youthful adult.","a26":"about 30, mature and poised.","a36":"about 36 but looking young for her age (trẻ trước tuổi): still youthful and very beautiful, only a touch more mature and poised than her young self, smooth skin, no visible lines, never an older face.","a65":"about 65, a truly elderly lady who ages beautifully (đẹp lão): clearly older than her 51-year-old self, with gentle visible wrinkles at the eyes, mouth and forehead, softer cheeks and jawline, a calm wise dignified look; her hair is largely silver-grey mixed with some dark strands (much more silver than at 51, but NOT pure white); still graceful, elegant and beautiful, never haggard. Her robe keeps exactly the same colours as described below, but every colour is a DEEPER, DARKER, more subdued shade suited to an elderly lady (dignified, not bright; the royal yellow becomes a deeper antique gold).","a51":"about 51, a graceful beautiful older lady who ages beautifully (đẹp lão): a slightly fuller mature face, soft fine lines at the eyes and gentle smile lines, dignified and elegant, still lovely and refined; clearly VISIBLE silver-grey streaks at the temples and in the front of her warm dark-brown hair (a visible silver patch that is easy to see at game size, hair still mostly dark, never white hair); never a 20-30-year-old face, never haggard or plain. She looks younger than her age but still clearly about fifty at first glance, never like an 18-26-year-old. Her robe keeps the same colour families as described below, but every colour is a DEEPER, DARKER, rich mature shade, the dark dignified tones an empress dowager or senior palace matron wears (e.g. pink becomes deep rose-plum, blue becomes deep navy blue, green becomes deep dark jade, purple becomes deep aubergine, red becomes deep burgundy; the royal yellow becomes a deep antique gold); dignified and rich, never bright."}
 PRE=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, body and face frontal, standing squarely facing the viewer, no turn.")
 END=" Eyes soft, warm and round-almond, never slanted or upturned, never teary. Everyone beautiful at every age. No text, no labels."
 # N5d item 1 (ROOT-36 order, FIGURE_GATE K3): ONE no-background sentence on EVERY figure prompt (all states), default ON. Import it: `from build import K3_BG` (W107b). Text verbatim from the order.
@@ -997,6 +997,10 @@ def build_mama(c):
                       ("COLOUR RULE: take ONLY the cut from image 3; RECOLOUR the whole costume","COLOUR RULE: RECOLOUR the whole costume"),
                       ("; do not copy the brown of image 3.",".")):
             assert s.count(_a)==1,("mama one-ref slot",_a); s=s.replace(_a,_b,1)
+        _h="hair exactly as in the identity reference image (her own bun and hairpins kept)"; assert s.count(_h)==1,"mama hair slot"
+        s=s.replace(_h,"her own hair colour, ALL her hair pinned UP in a neat bun (chignon) with her hairpins",1)   # F11 (owner Lượt 583): ma ma = neat bun; the thiếu-nữ ref has long loose hair + ribbon
+        _mh=" Her hair and hairpins come ONLY from the identity reference and this text; the style reference image must not influence her hair."; assert s.count(_mh)==1,"mama hair sentence"
+        s=s.replace(_mh," HAIR: ALL her hair is pinned UP in a neat bun: NO long loose hair down her back or over her shoulders, NO ribbons in the hair.",1)
         assert "image 3" not in s,"mama one-ref: image 3 left"
         return s+END   # MAMA_IMG3 (the costume-image sentence; its "ONE panel" describes the old image, the text says TWO panels) dropped
     return s+MAMA_IMG3+END
@@ -1394,6 +1398,10 @@ def gen_refs(argv,prompt):
     """A0 reference list (owner order): image 1 = style image, image 2 = her own live picture (face only; re-make states: her live tier+age picture), image 3 = royal swatch (only when the prompt carries the ROYAL3 sentence)."""
     a=[x for x in argv if not x.startswith("--")]; age=argv[argv.index("--age")+1] if "--age" in argv else "a18"
     own={"name":"own live t1 of %s at %s (a65 = her a65 t1 / live picture) = FACE only; re-make states: her live tier+age picture"%(a[0] if a else "?",age)}
+    _id=a[0] if a else ""
+    if kc_drawn(_id):   # B8 (owner Lượt 543/551; ROOT-51 old-ref clean-up): ONE identity ref = her set-B KC_REFS cut; never the style image 6AbGv6EiJO, never img/fig-*/hd t1
+        if "--nostyle" not in argv: raise SystemExit(f"B8: {_id} uses ONE reference (her KC_REFS cut) -> build with --nostyle (the style image 6AbGv6EiJO is retired)")
+        own={"name":f"her ONE identity reference = KC_REFS cut of {_id} (set B, python3 dev/art/kc_ref.py {_id})","magnific_id":KC_PEOPLE[_id]["ref_id"]}
     r=[{"image":1,**own}] if "--nostyle" in argv else [{"image":1,**REF_STYLE},{"image":2,**own}]   # ROOT-38: owner order 1 style, 2 own, 3 swatch
     if "--state" in argv and re.fullmatch(r"ty[1-8]|cold",argv[argv.index("--state")+1]) and "--nostyle" not in argv: r[0]={**r[0],"magnific_type":"style"}; r[1]={**r[1],"magnific_type":"image","name":"her live picture of this state+age (a65: her NEW 2K a51 re-make) = face + hairstyle"}   # TY0 fix2
     if "--bdq" in argv: r[1]={"image":2,**REF_BDID}   # F2: BD princess identity = face only
@@ -1433,6 +1441,18 @@ def log_fill(ts,gen_id,mprompt):
     assert hit,"no unfilled ledger line with ts "+ts
     hit[0]["gen_id"]=gen_id; hit[0]["magnific_prompt"]=mprompt
     open(LEDGER,"w",encoding="utf-8").write("".join(json.dumps(e,ensure_ascii=False)+"\n" for e in L))
+# B8 FACE WORDS (owner Lượt 543/551, ART_RULES B8; BW3): every person in dev/art/KC_REFS.json with m09_ok yes (m01-m52 thiếu nữ v3, nc1-nc3 Lượt 570)
+# gets her KC_REFS face_words VERBATIM as the face line: every builder writes "Her face: {face}." -> face = face_words without "Her face: " and the final ".".
+# People NOT drawn (m09_ok NO: c01-c32, p01-p03, bd1-bd3) are refused by the CLI below (exit 2), so nobody paints them on old refs. --golden (frozen A/B reproduction) exempt.
+import json as _json
+KC_PEOPLE=_json.load(open(_os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))),"KC_REFS.json"),encoding="utf-8"))["people"]
+def kc_drawn(c):
+    p=KC_PEOPLE.get(c); return bool(p and p.get("m09_ok")=="yes" and (p.get("face_words") or "").startswith("Her face: "))
+for _c in list(DATA):
+    if kc_drawn(_c):
+        _fw=KC_PEOPLE[_c]["face_words"]; assert _fw.endswith("."),_c
+        DATA[_c]=(DATA[_c][0],_fw[len("Her face: "):-1])
+KC_ID=re.compile(r"(?:c|m|p)\d\d|nc\d|bd\d")
 if __name__=="__main__":
     if "--verify" in sys.argv:
         i=sys.argv.index("--verify"); _since=sys.argv[sys.argv.index("--since")+1] if "--since" in sys.argv else None
@@ -1458,6 +1478,8 @@ if __name__=="__main__":
     TRIEUN=None
     if "--trieu" in sys.argv: i=sys.argv.index("--trieu"); TRIEUN=int(sys.argv[i+1]); sys.argv[i:i+2]=["--trieu"]
     a=[x for x in sys.argv[1:] if not x.startswith("--")]
+    if __name__=="__main__" and not BDQ and a and KC_ID.fullmatch(a[0]) and not kc_drawn(a[0]) and "--golden" not in sys.argv:   # B8 (BW3): NOT drawn -> refuse (real CLI only; store-all/build_all.py execs this block in-process for frame sentences and refuses on its own)
+        sys.stderr.write(f"REFUSED {a[0]}: NOT drawn (ART_RULES B8: no approved thiếu nữ reference in dev/art/KC_REFS.json; python3 dev/art/kc_ref.py {a[0]})\n"); sys.exit(2)
     _o=build_bdq(BDQ) if BDQ else build_state(a[0],STATE,a[1] if len(a)>1 else "v0") if STATE else (build_trieu8(a[0],a[1] if len(a)>1 else "v0") if TRIEUN==8 else build_trieu(a[0],TRIEUN,a[1] if len(a)>1 else "v0")) if "--trieu" in sys.argv else build_low(a[0],LOWN,a[1] if len(a)>1 else "v0") if "--low" in sys.argv else build_t7(a[0],a[1] if len(a)>1 else "v0") if "--t7" in sys.argv else build(a[0],a[1] if len(a)>1 else "v0","--golden" in sys.argv)
     if "--spec5pose" in sys.argv:
         _t=LOWN if "--low" in sys.argv else 7 if "--t7" in sys.argv else int(STATE[2:]) if STATE and STATE[:2]=="ty" else max(1,int(STATE[2])) if STATE and re.fullmatch(r"tm[0-4]",STATE) else 1 if STATE=="cold" else 8   # N5d item 4: trung y tN poses at rank N, cold at the lowest
@@ -1470,6 +1492,8 @@ if __name__=="__main__":
         if STATE=="mama": _o=re.sub(r"\b([Ii])mage 3\b",r"\1mage 2",_o)   # MMX1 (owner Lượt 479 ONE-REF for ma ma, FIGURE_GATE 11-12): no style image -> image 1 = her own face picture, the costume picture becomes image 2 (same renumber as consorts t2-t8 in store-all/build_all.py)
     # a51 DARK (Foreman C ROOT-30, owner 23:05Z "màu tối giống như là ma hoặc là Thái hậu"): W90 found the shared "fresh, clear and luminous" clause kept c13 a51 bright; a51 only swaps it, every other age byte-identical
     # OWNER 18/11 ~21:06Z real (verbatim): "51 tuổi và 65 tuổi là phải dùng của những cái màu của những người già xài á, không có dùng cái màu tươi rói nha ... mặc dù già nhưng không có nghĩa là màu đen hay màu nâu ... Mà nó là một cái màu nó sang, mà cái kiểu mình nhìn vô mình thấy nó là một cái người đã lớn tuổi, trầm tĩnh lớn tuổi" → a51 AND a65 use the elder clause (a51 text = the approved a51d2 sample)
+    if AGE not in ("a51","a65") and not STATE or STATE=="nude":   # B18 (owner Lượt 583): neutral tone: t7/t8/Nữ đế 'fresh, clear and luminous' -> the SAME medium-tone sentence t1-t6 use (LOW_TONE); a51/a65 keep their elder clause below
+        if AGE not in ("a51","a65") and TRIEUN is None and not BDQ and "--low" not in sys.argv: _o=_o.replace("all colours fresh, clear and luminous, never dusty or greyed; ",LOW_TONE,1)
     if AGE in ("a51","a65"): _o=_o.replace("all colours fresh, clear and luminous, never dusty or greyed; ","all colours in the DEEPER, DARKER mature shades described above (rich and dignified, never bright, never pastel, never dusty or washed-out); the colour names and hex values below are her young colours, darken them as described above; "+("elegant, luxurious elder colours that read as a calm, dignified older lady, never vivid or fresh bright colours, yet never black or brown; " if AGE=="a65" else "")).replace("one fresh accent","one accent").replace("a fresh ","a ")
     # --head (ROOT-31 order, owner 18/11 ~21:36Z "ai cũng có trâm cài y chang nhau"): per-person headdress = the motif/shape of HER OWN live a18 hairpins, scaled up for the rank. Off by default (goldens unchanged).
     if "--head" in sys.argv:
@@ -1501,6 +1525,8 @@ if __name__=="__main__":
     if K3_BG_OLD in _o: assert _o.count(K3_BG_OLD)==1; _o=_o.replace(K3_BG_OLD,"",1)
     assert _o.count("IGNORE")==0 or "--golden" in sys.argv,"K3 already present"
     if "--golden" not in sys.argv: _o=_o[:-len(END)]+_k3+END if _o.endswith(END) else _o+_k3   # --golden
+    if "--golden" not in sys.argv and a and kc_drawn(a[0]):   # B8 (ROOT-51, TN4 m13): her KC face words name her own eyes (e.g. m13 "long PHOENIX eyes clearly upturned") -> the generic END eye clause contradicts them: dropped for KC people only
+        _eye=" Eyes soft, warm and round-almond, never slanted or upturned, never teary."; assert _o.count(_eye)==1,"END eye clause"; _o=_o.replace(_eye,"",1); END=END.replace(_eye,"",1)
     if "--golden" not in sys.argv: assert _o.endswith(END) and D9_FOREHEAD not in _o,"D9"; _o=_o[:-len(END)]+D9_FOREHEAD+END   # D9 (Lượt 529): owner words verbatim, every output, right before END = frozen A/B reproduction (golden/pB_*.txt), never a gen mode
     # ROOT-38 REF ORDER (owner A0 REFERENCES l.16): image 1 = style image, image 2 = her own face/live picture, image 3 = royal swatch.
     # Approved texts keep their old numbering in source; only the ordinal words are renumbered here (style first <-> identity second). --nostyle / --golden: unchanged.
