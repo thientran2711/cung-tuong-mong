@@ -27,7 +27,7 @@ from seasons import SEASONS, classify, target_ok, VN, summer_warm, temp, in_tone
 from gen_palettes3 import contrast_ok, lookalike, COOL_ONLY, WARM_ONLY
 from gen_seasons import season_contrast, COOL_X, SEASON_SIDE
 from xuan_pink import lch2hex, tone_ok
-from check_unique import consort_ids, de2000, _lab, FAIL_DE, WARN_MAIN, WARN_SEC
+from check_unique import consort_ids, de2000, _lab, FAIL_DE, WARN_MAIN, WARN_SEC, pair_verdict
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 FC = os.path.join(ROOT, 'dev', 'art', 'face-common')
@@ -294,7 +294,7 @@ def hue_d(a, b):
 def key(p): return ((p['main'], p['main_hex']), (p['sec'], p['sec_hex']))
 def pd(m, s): return dict(main=m[0], main_hex=m[1], sec=s[0], sec_hex=s[1])
 
-def cmd_solve(seed=1, iters=20000):
+def cmd_solve(seed=1, iters=int(os.environ.get('P86_ITERS', 20000))):
     rnd = random.Random(seed)
     d0 = jload(PS_OLD); cons, groups = consort_ids(); R = current_roots()
     order = [k for k in pid(d0) if k in cons and not k.startswith('s')] + sorted(k for k in cons if k.startswith('s'))
@@ -418,6 +418,28 @@ def cmd_solve(seed=1, iters=20000):
             bad = [b for b in bad if b != (k, se)] + ([(k, se)] if h[t] > 0 else [])
     bad = [v for v in VARS if is_bad(*v)]
     print('final conflicted variables:', len(bad), bad[:20], flush=True)
+    if os.environ.get('P86_DEBUG'):                        # why each remaining variable is conflicted
+        from collections import Counter
+        why = Counter()
+        for k, se in bad:
+            c = dict(cur[k][se], root=(se == RS[k])); i = pos[k]; isroot = c['root']
+            for q in order:
+                if q == k or se not in cur[q]: continue
+                v = pair_verdict(c, cur[q][se])[0]
+                if v == 'FAIL': why['gate ' + ('root-root' if isroot and RS[q] == se else 'root-x' if isroot or RS[q] == se else 'x-x')] += 1
+            nm = (c['main'], c['sec']); u = [x for x in use.get(nm, {}) if x != (k, se)]
+            if u and not (isroot and all(cur[x[0]][x[1]].get('root') for x in u)) and (len(u) >= 2 or any(abs(pos[x[0]] - i) < 10 for x in u)): why['name pair reuse'] += 1
+            for jj in (i - 2, i - 1, i + 1, i + 2):
+                if not 0 <= jj < len(order): continue
+                q = cur[order[jj]].get(se)
+                if not q or (isroot and q.get('root')): continue
+                if abs(jj - i) == 1 and q['main'] == c['main']: why['neighbour same main'] += 1
+                if lookalike((c['main_hex'], c['sec_hex']), (q['main_hex'], q['sec_hex']), abs(jj - i)): why['neighbour lookalike'] += 1
+            for s2, q in cur[k].items():
+                if s2 != se and lookalike((c['main_hex'], c['sec_hex']), (q['main_hex'], q['sec_hex']), 1): why['own-4 lookalike ' + ('root' if isroot or s2 == RS[k] else 'nonroot')] += 1
+        print('DEBUG why:', dict(why), flush=True)
+        print('DEBUG bad:', bad, flush=True)
+        print('DEBUG per season:', Counter(se for k, se in bad), 'roots among bad:', sum(1 for k, se in bad if se == RS[k]), flush=True)
     for rep in range(2):                                  # soft pass: fewer WARNs where free
         for k, se in VARS:
             cands, cost = vc[(k, se)]; h, so = conf(k, se, cands)
