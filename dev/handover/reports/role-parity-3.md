@@ -72,3 +72,10 @@ r1 = 03e9fe6b + merge of newest origin/main bb8e8ec9 (main moved after 9a1d6922:
 | (5) one-core-guard / ag-stf2 | PASS (inline 3988 < 4212, fails 0) / ALL 23 PASS — on 03e9fe6b and on r1. |
 | (6) descends newest origin/main | PASS after reviewer merge: bc79de0a ⊃ origin/main bb8e8ec9. |
 FOLLOW-UP (not this branch; pre-existing on main, Foreman B test owner): role-parity.test riseCore block is UNSEEDED — run 3 on r1 failed «Sủng» once (NPC 29 vs 23) because riseCore reads amSung(m), not the m.sung the test sets; the scan lines were identical. Fix = seed that page or set the input amSung reads. Coordinator: re-run the test once if the riseCore line fails on landing.
+
+## SEED FIX — SẴN SÀNG KIỂM 3195d863 (review/role-parity-seed, off LAND READY bc79de0a)
+PRIORITY #1 CHECK ('riseCore seed'): reviewer finding on role-parity-3-r1, pre-existing on main; no other branch touches dev/test/role-parity.test.js.
+- Cause: the riseCore block of role-parity.test loaded an UNSEEDED page and read the risen NPC's Sủng after amRise — but amRise runs her first night (night(n)) right after riseCore, and that night's chance gain made NPC Sủng 29 vs 23 (1 of 3 runs). riseCore itself (amSung(m) = m.sung, set by the test) was always right.
+- Fix (test only, no game code): the block loads the same deterministic page as the scan (seeded Math.random + crypto, frozen clocks) and records what riseCore itself gives through a wrapper on riseCore, for her (srvRise) and the NPC maid (amRise); the Sủng after the night is still printed (sungAfterNight / sungNow) for information.
+- Gates: role-parity.test ×3 ALL PASS, the three outputs byte-identical (md5 448ba63b…); one-core-guard PASS.
+- Note for C-AG (not a test bug, not changed): an NPC maid raised by amRise gets her first night at once (night(n): conception chance + any night gains); the player's srvRise gives no night — check whether that is the intended two-way rule.
