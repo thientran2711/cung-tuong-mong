@@ -34,7 +34,7 @@ def block(t):
 NQ=(" Image 3 is the Nữ quan reference image: the court red colour and the fabric (sheen, weave, drape) of this court robe exactly like the robe of the Nữ quan reference image (image 3);"
     " copy ONLY its colour and cloth, never its person, face, outfit cut, embroidery, hair, item or pose.")
 _block=block
-def block(t): return _block(t)+NQ
+def block(t): return _block(t)+(NQ.replace('Image 3','Image 4').replace('(image 3)','(image 4)') if (t==6 and '--store' in sys.argv) else NQ)
 # ROUND 15c LAWS (ROOT-46 GO 19/11 ~08:09Z, owner Lượt 364; FIGURE_GATE Lượt 337 hair, 355 sleeves, 364 prompt-B fabric t7/t8).
 # Sentences copied from the current builders: SLEEVES t1-t3 / t4-t6 = mk_ranks_v3.py; SLEEVES + HAIR UP t7/t8 + FL2 = mk_hqp_hh.py templates.
 SLV={1:"SLEEVES: very long, wide, flowing sleeves of thin light silk that fall well past her hands and hang down to her KNEES, swaying gracefully and trailing elegantly (thướt tha); never short, narrow, cuffed or tight working sleeves like a maid's or palace servant's. ",
@@ -47,7 +47,7 @@ LOOSE_SWAP={1:("hair in a neat bun","hair half-up"),2:("neat chignon","hair half
 def laws(t,n):
     a=n.index(" Pose: calm standing pose;")
     if t<=3:
-        o,r=LOOSE_SWAP[t]; assert n.count(o)==1; n=n.replace(o,r)
+        if '--store' not in sys.argv: o,r=LOOSE_SWAP[t]; assert n.count(o)==1; n=n.replace(o,r)
         assert n.count("the hair gathered up beneath it")==1; n=n.replace("the hair gathered up beneath it","sitting on her half-up hair")
         add=SLV[1]+HAIR_LOOSE
     elif t<=6: add=SLV[4]
@@ -61,8 +61,12 @@ def wdiff(a,b):
     for op,i1,i2,j1,j2 in difflib.SequenceMatcher(None,ta,tb,autojunk=False).get_opcodes():
         if op!='equal': out.append(f"- {''.join(ta[i1:i2]).strip()}\n+ {''.join(tb[j1:j2]).strip()}\n")
     return "\n".join(out)
+import subprocess
+def store(t):
+    a=['c06','v0']+(['--low',str(t)] if t<=6 else ['--t7'] if t==7 else [])
+    return subprocess.run(['python3','build.py']+a,cwd=os.path.join(H,'../../t8-prompt-B'),capture_output=True,text=True,check=True).stdout.rstrip('\n')
 for t in range(1,9):
-    o=open(os.path.join(H,'orig',f't{t}_v0_c06.txt')).read().rstrip('\n')
+    o=store(t) if (t<=6 and '--store' in sys.argv) else open(os.path.join(H,'orig',f't{t}_v0_c06.txt')).read().rstrip('\n')
     a=o.index(" Pose: calm standing pose;"); n=o[:a]+block(t)+o[a:]
     n=laws(t,n)
     if '--refnum2' in sys.argv:
