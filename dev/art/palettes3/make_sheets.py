@@ -42,4 +42,9 @@ for n, chunk in enumerate(CHUNKS, 1):
     for i in range(1, 3):
         x = IDW + i * COLW; dr.line([(x, HEAD - 6), (x, H)], fill=(200, 192, 184), width=2)
     dr.text((14, H - 22), 'C = màu chính · P = màu phụ', font=f_hex, fill=SUB)
-    path = os.path.join(OUT, f'palettes3_sheet{n}.png'); im.save(path, optimize=True); print(path, im.size)
+    path = os.path.join(OUT, f'palettes3_sheet{n}.jpg'); q = 82
+    while True:   # CLONE_RULE: review sheets = JPG <= 600 KB
+        im.save(path, quality=q, optimize=True)
+        if os.path.getsize(path) <= 600 * 1024 or q <= 50: break
+        q -= 6
+    print(path, im.size, q, os.path.getsize(path) // 1024, 'KB')

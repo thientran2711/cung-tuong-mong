@@ -20,3 +20,9 @@ m05, m11, m17, m23, m29, m35, m41, m47, c05*, c11*, c17*, c23*, c29*, nc3 Phù T
 
 ## Tinh nghịch (13 người)
 m06, m12, m18, m24, m30, m36, m42, m48, c06*, c12*, c18*, c24*, c30*
+
+## Kiêu kỳ (MỚI — owner Lượt 643, giữ) — 0 người
+Chưa có người. Câu mặt: TYPES_v4.md / make_nf3.py TYPES_B["Kiêu kỳ"] (mẫu s01, cằm ngẩng vừa phải, Lượt 640).
+
+## Lạnh lùng (MỚI — owner Lượt 643, giữ) — 0 người
+Chưa có người. Câu mặt: TYPES_v4.md / make_nf3.py TYPES["Lạnh lùng"] (mẫu s02).
