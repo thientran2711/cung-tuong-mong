@@ -49,3 +49,40 @@ E1 exam played (twin noInv: rank-edict gifts depend on her phone's bag, which di
 4. After F6a is SẴN SÀNG KIỂM: merge review/coop-thin-f6 (F6a's act(i) excludes game-first cards; with it the exam / toil cards start on the host → the capture path (exGame / toilGo) opens them on her phone — test that row), reuse its card finder in place of myCard().
 5. Done section: step 0 table above, moved paths table, quiet-gated emitters, tripwire, latency, tests, sha; CLAIMS row 'SẴN SÀNG KIỂM <sha>'; message Foreman B.
 **Full run at a4d77f3c (L12, local Worker): 27/29.** Red: E1 (end sent once, host ran it, twin diff {} = same as solo; fails only the phone-vs-host `same` check on `inv`: her phone's bag ≠ the host copy in this harness — compare as a delta or stage her bag on the host first) and E2 (refused correctly, but the `exw!=null` check: her phone's diff after E1's rank edict rewrites S.ex on the host — re-stage the window AFTER align, or check w1 on the host copy). Both are row-staging issues to settle first in #2; no page errors; F8 clean; D1 / C1 / C2 / V / R / M / T / A / K green.
+
+## WORK #2 (worker session_01N1tNP3uQwFDZBPxqqP6ZN8, depth 6, START_CTX ≈ 4 %) — branch review/coop-thin-f6b @ 5e49d73d (pushed)
+Commits: e2c7f636 (Hội phối đồ end + rank-set fix + test staging), 63ad2dc2 (trip buckets, mktKnow, quiet-scan reg12 roots), 5e49d73d (H test).
+### E1/E2 reds of #1 = staging, plus ONE real twin-state fault (fixed)
+| red | cause | proof | fix |
+|---|---|---|---|
+| E1 `same` on inv (bag) | (a) staging: her phone's starting bag never reached the host copy in this harness (19 vs 1) | setup row "her bag staged on the host = her phone" | harness: bag copied to the host once, her phone keeps its copy |
+| E1 `same` on inv after a rank-up (+10 items on her phone only) | (b) REAL: jpromo prCheck (render hook) ran on HER phone when the rank patch landed → her rank set given there a 2nd time (law 6c duplicate) | NOTWIN runs still red ⇒ not the twin | jcoopthinf6b: her phone skips prCheck at L12 (stat prSkip); the host runs exS(S) + prCheck in her context right after every reg12 end (stat prPost) → rank + set + exam record in ONE patch. Other roads that raise her rank in her context get the set at her next step there (jpromo nextBuoi wrapper). kitPersonReveal captured to her phone. |
+| E1/E2 S.ex reset on her phone | (b') exS lazy reset (record moved to the next rank) ran on her phone first | E2 ops "-ex.w1 …" from her phone | same host exS call; E checks accept "rank rose" |
+| twin leak (deferred) | the twin's setTimeout steps ran later on her real person | — | harness: twin deferred steps flushed on the clone |
+### Built #2
+- #11 Hội phối đồ: tsDressGame in her context on the host → keeps the contest closure (DH[seat] = {th, m, cb}: entrants rolled at the hold, cost {suc:-5} paid at her pick), mktKnow made there, captures `tsDressGo(th,m)` → her phone plays the board + mirror (mirror end = toilFinish intent, waited for) → ONE intent `tsDressEnd(P, sk)`: dec = every piece in her bag + fits its slot, else refused; sk ⇒ the host rolls `tsMaidPick(th)` (jts: the board's maidPick moved to a named function, same body). tsMkSit in her context on the host never opens the mirror. A contest podium in her context on the host = captured `kitPodiumP` (plain list: "me" / NPC id; cuMeet written on the host), shown on her phone. Caveat: DH is host memory — a host reload between her pick and her end ⇒ her end refused, nothing applied (borrowed pieces stay traceable with her, tsB).
+- trip buckets: F6b = END engines only (asserted 0); her game on her phone = "F6b·game" (reported: jtoil leAttire probe nulls + restores S.toilette, mkSync render writers).
+- quiet scan reads jcoopthinf6b.js (reg12 roots in): 32 reachable = before (no new quiet-gated emitter).
+### Gates #2 (local Worker THINMAX 12)
+| gate | result |
+|---|---|
+| coop-thin-f6b L12 | 33/33 (×2), H rows 15/15 after 5e49d73d |
+| swap | 32/34: H2 = the placement-count test bug fixed in 5e49d73d; E1 swap red once (her phone suc/sung/th vs host after a "Sẵn sàng" hồi sức inside the row: numeric delta vs her unsynced state — NOT yet settled, see LEFT) |
+| 4G LAG 85 CPU 4 | 33/33 · end→answer median 741 ms (max 3963) · local tap→render 79 ms |
+| latency L12 LAG 0 | median 383–649 ms; local 69–87 ms |
+| TRIP L12 | F6b ends = 0 (BEFORE L10: 748) · F6b·game 21 reported |
+| L10 old road | 25/26: one page error kg82ShowRes null on her phone (old road, a game result after the harness closed the frame; BEFORE column only) |
+| coop-thin-c L3 16/16 · d L1 46/52 (= main: 6 kit sameDom) · e L5 33/33 · f1 L6 22/22 · f2 L7 25/25 · f3 L8 37/37 · f4 L9 18/18 · f5 L10 27/27 | green |
+| coop-thin-a L0 3 red (host friend entry null at L0) — rerun at L1 (F5 ran L1) pending; b L4 result not captured (grep) — rerun | pending |
+| one-core ×4 | PASS |
+| quiet scan | 32 reachable, reg12 roots in |
+| e2e / swap, one-world, coop-cyc THIN=12 | running at the rollover (/home/user/wt/f6b-gates4.log) |
+
+## ROLLOVER HANDOVER #2 → #3 (context ≈ START_CTX + 25 %)
+Branch review/coop-thin-f6b @ 5e49d73d (pushed). Worktree /home/user/wt/f6b (sparse; index.html / sw.js built at 63ad2dc2, NOT committed — rebuild at the final sha). Local Worker: `cd coop/worker && npx wrangler dev --port 8787 --ip 127.0.0.1`.
+LEFT for #3:
+1. Read /home/user/wt/f6b-gates4.log (e2e, e2e swap, one-world, cyc THIN=12) or rerun; rerun coop-thin-a L1 and b L4 (`node dev/test/coop-thin-a.js http://127.0.0.1:8787 1`, `… coop-thin-b.js … 4`, read the tail).
+2. Swap E1 red (once): her phone suc/sung/th ≠ host copy after a hồi sức step inside the row — decide staging (a step ran during the row: stage suc after sync / hold the clock: BAL.coopTm.buoiMs is set; check why "Sẵn sàng" fired) vs real; rerun swap ×2.
+3. F6a merge when Foreman B says SẴN SÀNG KIỂM (review/coop-thin-f6, worker session_01N1tNP5ex6HrG5uFmnZYTqA); reuse its card finder instead of myCard(); test exam / toil cards started on the host (capture exGame / toilGo).
+4. Not built (needs staged roads): servant exam applied row, kc applied rows (tiểu thư / kc2 roads).
+5. build_site.sh at the final sha + commit index.html / sw.js; quickcheck (`bash dev/tools/quickcheck.sh`); LOOK Fold 755x1000 + iPad 1180x820 (SHOTS=<scratch outside git>, rows with o.shot; never git); Done section; CLAIMS 'SẴN SÀNG KIỂM <sha>'; message Foreman B.

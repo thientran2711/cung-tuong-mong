@@ -278,7 +278,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin F6b (opus; remaining mini-game ends as score intents, L12; parallel to F6a, stacked on F5) | review/coop-thin-f6b | B | session_01N1tNP4XtuMraUEmXvATwMg | ROLLOVER #1→#2 @ a4d77f3c (27/29; report reports/coop-thin-f6b.md) | 19/11 10:01Z |
 | kit-head-say SMALL REVIEW (sonnet) of 5d9cdd5d | review/kit-head-say; briefs/review-kit-head-say.md | MAIN ROOT-68 | session_01Rc5AsKGEciGWVZG7BD4KHc | DONE PASS 6b1ab390 — LIVE | 19/11 10:14Z |
 | FOREMAN E #11 (opus; child of FOREMAN E ex-standby, depth 1; PICKUP 10:20Z) | handover FOREMAN_E_STATUS | FOREMAN E | session_01DgYSWq1iGwKC5ebN2qhmFU | DONE → E #12 | 19/11 10:14Z |
-| coop-thin F6b #2 (opus; successor of 4XtuMraU at a4d77f3c) | review/coop-thin-f6b | B | session_01N1tNP3uQwFDZBPxqqP6ZN8 | RUNNING | 19/11 10:34Z |
+| coop-thin F6b #2 (opus; successor of 4XtuMraU at a4d77f3c) | review/coop-thin-f6b | B | session_01N1tNP3uQwFDZBPxqqP6ZN8 | ROLLOVER #2→#3 @ 5e49d73d (f6b L12 33/33, 4G 33/33, TRIP F6b 0; report reports/coop-thin-f6b.md) | 19/11 12:05Z |
 | MAIN ROOT-69 (opus; child of ROOT-68, depth 7) | handover HANDOVER_SESSION9 | ROOT-68 | session_01Rc5AsMesCGqrqL1dGjCJXv | DONE → ROOT-70 | 19/11 10:48Z | START_CTX ~4 %
 | palace-chatter successor: apply K-HEAD-SAY jchat-say.patch + end-to-end run (opus E17c) | review/palace-chatter; briefs/E17c-palace-chatter-say.md | FOREMAN E #11 | session_01DgYSWnKfwZsB2F92BggLCq | DONE — SẴN SÀNG KIỂM 115717a8 (KIT REQUEST K-HEAD-SAY × EMO-SEAL LEAN open) | 19/11 11:30Z |
 | kyngo-daily BIG REVIEW (opus E18r) of 8cb39e38 | review/kyngo-daily; briefs/E18r-review-kyngo-daily.md | FOREMAN E #11 | session_01DgYSWnzDSXLeyEPaWuBrQQ | RUNNING | 19/11 11:00Z |
