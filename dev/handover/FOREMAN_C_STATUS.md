@@ -1523,4 +1523,4 @@ ROOT-55 Lượt 694b: owner: copy ma ma a51/a65 style lock to EVERYONE → D15 w
 ROOT-55 Lượt 695–700: groups moved; c06/c14/c19/c31 → Sắc sảo redraw (NF4); KHO 32 (11/group); Lượt 698 4-group sheet; Lượt 699 Nữ đế round 2 sent (NDX4 now adds D15 at a51/a65); Lượt 700 owner approved Kiêu kỳ/Lạnh lùng/Quyến rũ → NF4 20 more. ctx ~26 %. Next free Lượt 701.
 ROOT-55 Lượt 701: s08 redrawn by ROOT-55 (s08.v5b, 'phoenix' removed) → WDgKkfTcXe chosen; NF4 continues 4 groups; Nữ đế crown identical at all ages = fixed detailed crown sentence → NDX4 swaps to HH crown sentence (dragon) + D15, redraw 5. Next free Lượt 702.
 ROOT-55 Lượt 702: Nữ đế a51/a65 keep bright a36 colours (rule B added) → NDX4.
-ROOT-55 ~21:37Z: ROLLOVER at ~29 % (START 6 %) → ROOT-56 (TAKEOVER_FOREMAN_C_ROOT56.md). Owner Lượt 703 (face link + tick) unanswered → ROOT-56.
+ROOT-55 ~21:37Z: ROLLOVER at ~29 % (START 6 %) → ROOT-56 session_01PEhRbxQAS4sqEvJjdStdLX (TAKEOVER_FOREMAN_C_ROOT56.md). Owner Lượt 703 (face link + tick) unanswered → ROOT-56.
