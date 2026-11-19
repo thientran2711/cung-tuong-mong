@@ -5,3 +5,4 @@ Never delete, trash or overwrite these. One line each: who | rank/age | cut id |
 - triều phục c06 | t1–t5 r17 | w4aTeIq7EI DoO5xwgpcl 5jDiAMXKxe CqnJ9WKEEy 3zKIaxVREY | img/_review/trieu-phuc/r17/c06_a18_trieu17_t1..t5.png | r18 (Lượt 411: hair up, no flowers, deeper bands, t2/t3 fabric)
 - triều phục c06 | t6 r16, t7 r15, t8 r15 | see dev/handover/reports/trieu-phuc-sample.md | img/_review/trieu-phuc/r16, r15 | r18 (Lượt 400–411 hà bí, bộ diêu)
 - công chúa Phù Tang | t4 old | mEZbq2FhJQ | img/_review/morning-1119/sheet_congchua.jpg | curved Tần EbYOArVuuO (Lượt 412)
+- triều phục c06 | t1–t6 r18 FINAL | YMlueqsWeC 4RFXAmM9Aa YMluekUWeC UPvTN8Dwny 3zKtWqhREY TdwqoUdVNR | img/_review/trieu-phuc/r18/c06_a18_trieu18_t1..t6.png | r19 (Lượt 437/443/444: sleeve length by rank, brocade gấm on all ranks, own hà bí + bí trụy per rank); t7/t8 r18 KEPT, not skins
