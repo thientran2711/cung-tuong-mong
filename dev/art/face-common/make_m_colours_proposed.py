@@ -89,7 +89,7 @@ SEC_NEW={"m01":"plum","m02":"coral rose","m03":"warm ivory","m04":"indigo blue",
 YELLOW=set()   # owner Lượt 598: renamed (m12 warm sand apricot, m23 soft peach sand, m31 pale sand apricot)   # yellow mains not allowed → apricot-family hex, NAME kept (flag)
 NEUTRAL={"m14","m36","m44","m48"}
 def hue(h): return colorsys.rgb_to_hls(*(int(h[i:i+2],16)/255 for i in (1,3,5)))
-out={"_note":"REVISED Lượt 599 (greens/blues spread, secondaries diversified) after owner Lượt 598 approval (Lượt 594 proposal + fixes: m06 → pale blue, m12/m23/m31 yellow names → sand apricot/peach names, m52 secondary → jade green). BW4 wires it into build.py MAID_ROWS. Hex at foreign-princess level.","status":"REVISED Lượt 599 (pending owner side-by-side)","rows":{}}
+out={"_note":"FINAL — owner Lượt 603 APPROVED the Lượt 599 revision (greens/blues spread, secondaries diversified) (Lượt 594 proposal + fixes: m06 → pale blue, m12/m23/m31 yellow names → sand apricot/peach names, m52 secondary → jade green). BW4 wires it into build.py MAID_ROWS. Hex at foreign-princess level.","status":"FINAL","rows":{}}
 for line in CUR.splitlines():
     m,name,old,sec=line.split('|'); sec=SEC_NEW[m]
     v=MAIN[m]; mh=v if isinstance(v,str) else hx(*v); sh="#EAD7BF" if sec=="warm ivory" else hx(*SEC[sec])

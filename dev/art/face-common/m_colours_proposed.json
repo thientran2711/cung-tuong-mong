@@ -1,6 +1,6 @@
 {
- "_note": "REVISED Lượt 599 (greens/blues spread, secondaries diversified) after owner Lượt 598 approval (Lượt 594 proposal + fixes: m06 → pale blue, m12/m23/m31 yellow names → sand apricot/peach names, m52 secondary → jade green). BW4 wires it into build.py MAID_ROWS. Hex at foreign-princess level.",
- "status": "REVISED Lượt 599 (pending owner side-by-side)",
+ "_note": "FINAL — owner Lượt 603 APPROVED the Lượt 599 revision (greens/blues spread, secondaries diversified) (Lượt 594 proposal + fixes: m06 → pale blue, m12/m23/m31 yellow names → sand apricot/peach names, m52 secondary → jade green). BW4 wires it into build.py MAID_ROWS. Hex at foreign-princess level.",
+ "status": "FINAL",
  "rows": {
   "m01": {
    "main": "sage green",
