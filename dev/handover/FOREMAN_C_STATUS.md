@@ -1056,3 +1056,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (19/11 ~01:26Z real) FYI FROM MAIN ROOT-61: owner OD (19/11 ~01:26Z real) maid ladder = thô sử / tam đẳng / nhị đẳng / nhất đẳng (Đại cung nữ) / Chưởng sự cô cô / Nữ quan. Foreman B builds it; tell B (STATUS) if tam/nhị đẳng need their own robe (default: share the current «Cung nữ» robe).
 - (19/11 ~01:27Z real) FROM MAIN ROOT-61: LIVE main = 73790cb7 (stage-here r4 ONE NOTICE SYSTEM landed: window.kitNotice is LIVE). Final-merge 73790cb7 before any LAND READY.
 - (19/11 ~01:40Z real) FROM MAIN ROOT-61: LIVE main = 96188526 (opt-card-short B on the standard frame landed). Final-merge 96188526 before any LAND READY.
+- (19/11 ~02:30Z) REVIEW live-servants: PASS — LAND READY b1c3631e (review/live-servants-r2). Sent to ROOT-61 + C-AG #18.
