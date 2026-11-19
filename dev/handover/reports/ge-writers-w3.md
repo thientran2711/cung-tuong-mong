@@ -131,3 +131,23 @@ build_site OK · ge-guard **6/6** (36 live branches, ERRORS 0) · ge-engine `- a
 
 ### FOR E
 1. Engine term «{n1} alive son» (thd_hoc_1/2/4 could name the pupil again). 2. Still open from r1: «followed / needed person alive», kid origin, one HH seat rule, inChar vs odds cap, {v} bond gate for ch_ho_1. 3. Shading-balance rule for future waves: thiện and ác names in each Chuỗi within 2 × of each other, both ways (W3 needed both directions).
+
+## §ROUND 3 — E11d (fix order from Foreman E #12 after E11r-w3 FAIL r2, report ac6d03e7)
+PRIORITY #1 CHECK ('thd_sach_4|bản thảo'): review/ge-writers-w3 c13b7748 | reviewer E11r-w3 ROUND 2 (one fix, law 6c) | claims E11d.
+- thd_sach_4 ha: before «mang bản thảo của cha theo người ấy, in bán dưới tên khác» → after «chép lại sách cha, theo người ấy đem in bán dưới tên khác» (same object as its a: her own copy).
+- Rescan of ht / ha / cw / fail (not only t / a / ft) of every ending changed in r2 (ch_bi_1/3/4, ch_benh_2, ch_ho_3, thd_sach_4, cnv_ban_3/4, thd_hoc_1/2/4):
+| ending | ht | ha | cw / fail | verdict |
+|---|---|---|---|---|
+| ch_bi_1 | «đặt trọn chuyện năm xưa…» | «đem chuyện năm xưa ra làm dao…» | ok | ok (story, no letter) |
+| ch_bi_3 | «đưa Hoàng thượng và Thái hậu nhận lại nhau…» | «đứng giữa hai mẹ con…» | cw needs th (gated) | ok |
+| ch_bi_4 | «giữ con xa khỏi chuyện cũ…» | «mượn bí mật năm xưa…» | ok | ok (knowledge) |
+| ch_benh_2 | «nắm hết đường thuốc…» | «nắm bí mật chén thuốc năm ấy…» | fail «Bã thuốc trở về» (ft = a frame; the residue exists) | ok with fo ch7 mid/lose |
+| ch_ho_3 | «nhường hết cho người cháu kia…» | «ra cung đúng lúc sóng đến…» | ok | ok (no seal) |
+| thd_sach_4 | «gánh sách cha dạy chữ khắp nơi» | **fixed** (above) | ok | ok |
+| cnv_ban_3 | «…cùng Xuân Đào thành danh» | «giữ việc thêu lục cung…» | ok | ok (fame, not «in the palace») |
+| cnv_ban_4 | «…mang theo chuyện cũ như một món quà» | «…bỏ lại Xuân Đào không một lời» | ok | ok |
+| thd_hoc_1 | «dạy chữ cho Đông cung…» | «dạy Đông cung thành thiên tử…» | fail «Thầy cũ bị quên» | ok (no {n1}) |
+| thd_hoc_2 | «tâu tên một hoàng tử…» | «đưa một hoàng tử nhỏ lên ngôi…» | fail «Con rối đứt dây» | ok |
+| thd_hoc_4 | «…dạy Thái tử nên người» | «nuôi Thái tử trong tay mình…» | fail «Đông cung đổi người» | ok |
+Whole-file scan of ht / ha / cw / fail for «lá thư / bản thảo / ấn riêng / bã thuốc / tráp / vòng ngọc / học trò nhỏ»: only ch_bi_2 (holds the letter, all burn / return options Khóa) and cnv_ban_2 («vụ vòng ngọc» = the case) — both true.
+- Tests at **73a97efa**: build OK · ge-guard 6/6 (ERRORS 0) · quickcheck PASS (core gates PASS, open 1565 ms, old save ok, render 215/229, tab 443/439, buổi 1211/1161, tasks>200 19/20). No final-merge (reviewer does it). No measure needed (one ha string, no Chuỗi / cond change).
