@@ -13,6 +13,7 @@ def templ(t,src):
     s=s.replace(ITEM19[7 if t==7 else 8],'{ITEM}')
     s=s.replace('All flowers, birds and the phoenix','{TOUCH}All flowers, birds and the phoenix',1)
     s=s.replace('Eyes soft, warm and round-almond, never slanted or upturned, never teary.','Eyes: both eyes symmetrical, both irises looking straight at the viewer, never cross-eyed, never wall-eyed, never teary, eyelids fully open.')
+    s=s.replace('HAIR UP: ALL of her hair is swept UP','HAIR UP: ALL of her glossy pure BLACK hair (never brown) is swept UP')
     for k,v in M19.items(): s=s.replace(v,'{'+k+'}')
     assert 'caramel' not in s and 'parasol' not in s and '{ITEM}' in s
     return s
