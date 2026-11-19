@@ -94,11 +94,11 @@ function succBegin(p,failB){const E=S.succ;const U=succSup();E.p=p;E.st=1;E.ch=0
  const en=succEnemy();E.foe=en?en.id:null;succNext()}
 function succNext(){const E=S.succ;Q=Q.filter(m=>!/^succ/.test(m.pid||""));const d=mkP("succC",{});if(d)Q.unshift({t:d.title,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls});try{save()}catch(e){}}/* chooseM shows and renders after go() */
 function succAge(){const son=succSon();const co=!!(window.COOPW&&COOPW.on);S.age=(S.age||30)+SUCC.yrs;/* co-op: the year is the shared world's date (her epilogue is her own ending; the world goes on) */if(!co)S.year=(S.year||1)+SUCC.yrs;if(son&&(!co||(S.kids||[]).includes(son)))son.age=(son.age||0)+SUCC.yrs}
-function succRareOK(){const E=S.succ;if(E.p==="a")return (S.duc||0)>=60&&E.hoa>=3&&E.an<=1;if(E.p==="b")return E.hoa>=3&&E.tam>=3&&(S.duc||0)>=50&&(S.tamco||0)>=55;return E.tam>=4&&E.an<=2&&(S.danh||0)>=BAL.succN.rareCDanh&&(S.duc||0)>=50}
+function succRareOK(){const E=S.succ,R=BAL.succN.rare;if(E.p==="a")return (S.duc||0)>=R.a.duc&&E.hoa>=R.a.hoa&&E.an<=R.a.an;if(E.p==="b")return E.hoa>=R.b.hoa&&E.tam>=R.b.tam&&(S.duc||0)>=R.b.duc&&(S.tamco||0)>=R.b.tamco;return E.tam>=R.c.tam&&E.an<=R.c.an&&(S.danh||0)>=BAL.succN.rareCDanh&&(S.duc||0)>=R.c.duc}
 function succPick(c){const E=S.succ;if(!E||!c)return;if(c.c)apply(c.c);if(c.s)apply(c.s);for(const k of ["q","an","tam","hoa"])if(c.e&&c.e[k])E[k]=(E[k]||0)+c.e[k];
  if(c.txt)log(c.txt);if(c.do)try{c.do()}catch(e){console.error(e)}
  if(c.end)return succEnd(typeof c.end==="function"?c.end():c.end);
- E.ch++;succAge();if(E.ch===2&&E.r==null)E.r=succRareOK()&&roll(E.p==="a"?12:E.p==="b"?10:8)?1:0;succNext()}
+ E.ch++;succAge();if(E.ch===2&&E.r==null)E.r=succRareOK()&&roll(100*r97Roll(BAL.succN.rare[E.p==='a'||E.p==='b'?E.p:'c'].p,"succ"))?1:0;succNext()}
 function succCH(){const E=S.succ,son=succSon(),sn=succSN(son),foe=E.foe!=null?rivals.find(v=>v.id===E.foe&&v.alive):null,U=succSup();
  const vgN=U.vg?succMN(U.vg):"Thân vương Dụ";const fN=foe?foe.name:"một phi tần cũ";
  const A=[

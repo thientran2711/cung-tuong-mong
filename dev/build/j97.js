@@ -1,6 +1,6 @@
 /* ================= j97 KẾT HIẾM · CƠ DUYÊN HIẾM (owner 11/14) =================
    Mỗi tuyến Mệnh truyện của ARC67 (36 xuất thân + 8 chung + 3 giữa đời) có một KẾT HIẾM. Bọc j67, không sửa j67.
-   Mở thế nào: khi hồi cao trào (ô "x" của tuyến) được ra, nếu đủ ĐIỀU KIỆN ẨN thì gieo MỘT lần xác suất nhỏ (R97CFG.p × def.p, 5–15 %).
+   Mở thế nào: khi hồi cao trào (ô "x" của tuyến) được ra, nếu đủ ĐIỀU KIỆN ẨN thì gieo MỘT lần r97Roll = min(1, def.p × BAL.arc.r97.k / tỉ lệ đủ điều kiện đo được) — để cơ hội mỗi tuyến ra kết hiếm ≈ def.p × k (9–13,5 %) như thể luôn đủ điều kiện (chủ 19/11).
      Điều kiện ẩn = chuỗi lựa chọn trong các hồi trước (path: chọn đúng hướng ít nhất np lần; bad: chọn ngược hướng một lần là mất)
                     + Lợi thế (A.sc) + một điều kiện về số đo / quan hệ / vật phẩm / con cái (x).
      Gieo trúng: hồi cao trào có thêm một lựa chọn "✦ … · Cơ duyên hiếm" viền sáng (kit .ksel); chỉ hiện chi phí, không hiện kết quả.
@@ -9,7 +9,12 @@
    Sổ luân hồi: localStorage "ctm-rare97" ghi các kết hiếm đã gặp qua các kiếp, hiện "x/y kết hiếm đã gặp". Chỉ để nhớ: không mang lợi thế gì sang kiếp sau.
    Móc cho mô-đun khác (j96 tuyến tình): RARE97.add(id,{t:tuyến,tag:kết}) đăng ký thêm một kết hiếm vào sổ; RARE97.meet(id,tag) ghi đã gặp.
    Danh mục đầy đủ (tuyến, điều kiện, xác suất, kết quả): dev/RARE_ENDINGS.md. */
-const R97CFG={p:.9};            /* núm chung nhân vào xác suất của từng kết hiếm (đo bằng bot: dev/PROGRESS_story_rare.md) */
+/* ONE CORE (OD:L1267): the shared knob lives in BAL.arc.r97.k; the roll once eligible is r97Roll (owner 19/11 ~03:25Z, BAL.arc.r97) */
+const R97CFG={get p(){return BAL.arc.r97.k}};
+/* the roll once every hidden condition holds: min(1, base / measured eligibility of its source), base = the chance at full eligibility
+   (j97/jroad: p × k) — the chance a road ends rare is then what base would be if she were always eligible (BAL.arc.r97.elig); src arc | road | kc | succ */
+function r97Roll(base,src){const e=(BAL.arc.r97.elig||{})[src]||1;return Math.min(1,base/e)}
+function r97Src(a){return (window.RD97L||[]).some(d=>d.a===a)?"road":"arc"}
 const R97={};                  /* arc id → định nghĩa kết hiếm */
 const R97X={};                 /* kết hiếm của mô-đun khác (j96…): id → {t,tag} */
 /* phần thưởng Ngự tứ: cùng khóa với kho trang phục j92 (review/wardrobe); ở đây đăng ký nếu chưa có, j92 về sau ghi đè tên/ô mặc */
@@ -251,7 +256,7 @@ function r97Note(A,o){const d=R97[A.a];if(!d||!o)return;const q=A.q97||(A.q97={p
  if(r97Hit(o.n,d.bad))q.b=1;else if(r97Hit(o.n,d.path))q.p++}
 function r97IsX(A,bid){const a=ARC67[A.a];return !!(a&&bid&&(a.p[3]||[]).includes(bid))}
 function r97Gate(A){if(!A||A.r97||!A.nb||!R97[A.a]||!r97IsX(A,A.nb))return;const d=R97[A.a];const c=r97Cond(A,d);
- const p=(d.p||.1)*(R97CFG.p||1);A.r97={c:c?1:0,ok:c&&roll(p*100)?1:0};
+ const p=r97Roll((d.p||.1)*R97CFG.p,r97Src(A.a));A.r97={c:c?1:0,ok:c&&roll(p*100)?1:0};
  try{const st=S.r97s||(S.r97s={c:0,n:0,ok:0});st.n++;if(c)st.c++;if(A.r97.ok)st.ok++}catch(e){}}
 (function(){const f0=fireBeat67;fireBeat67=function(A){try{r97Gate(A)}catch(e){console.error(e)}return f0.apply(this,arguments)}})();
 /* record every choice of the arc against its rare path */
@@ -290,6 +295,6 @@ if(typeof lifeSave==="function")(function(){const l0=lifeSave;lifeSave=function(
 /* Mệnh truyện panel: this life's rare endings and titles */
 (function(){const p0=panel67;panel67=function(){const h=p0.apply(this,arguments);try{const L=(S&&S.r97)||[];if(L.length)return h+`<h3>Cơ duyên hiếm kiếp này</h3>`+rows67(L.map(x=>[`✦ ${ARC67[x.a]?ARC67[x.a].t:x.a}`,x.ti&&x.ti!==x.tag?`${x.tag} · danh hiệu «${x.ti}»`:`danh hiệu «${x.ti||x.tag}»`,"g"]))}catch(e){}return h}})();
 /* hook for other modules (j96 love arc): register / record a rare ending outside ARC67 */
-window.RARE97={defs:R97,cfg:R97CFG,add:(id,o)=>{if(id&&!R97[id])R97X[id]={t:(o&&o.t)||id,tag:(o&&o.tag)||""}},meet:(id,tag)=>r97Meet(id,tag),total:r97Total,book:r97Book,
+window.RARE97={defs:R97,cfg:R97CFG,roll:r97Roll,add:(id,o)=>{if(id&&!R97[id])R97X[id]={t:(o&&o.t)||id,tag:(o&&o.tag)||""}},meet:(id,tag)=>r97Meet(id,tag),total:r97Total,book:r97Book,
  cond:A=>{const d=A&&R97[A.a];return d?r97Cond(A,d):false},
  force:(on)=>{const A=S&&S.st&&S.st.M;if(!A)return null;if(on===false){delete A.r97;return A}A.r97={c:1,ok:1};return A}};

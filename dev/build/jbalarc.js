@@ -57,8 +57,20 @@ Object.assign(BAL,{arc:{
  /* t96 = the tư tình man's month (j96 tm96Month): fade = his heart cools (her heat h < h, his tình > tinh: p in 100 to lose d); amb = an ambitious
     man cools (tình > tinh: p, −d); note = a man deep in love sends a note (tình ≥ tinh, h ≥ h: p); cool = suspicion settles (p, −d);
     wed = she marries him off (c_wed): his tình becomes tinh, the Thái hậu's favour fx */
- t96:{fade:{h:35,tinh:20,p:30,d:1},amb:{tinh:30,p:8,d:2},note:{tinh:72,h:50,p:4},cool:{p:25,d:1},wed:{tinh:15,fx:{th:4}}},
- r97:{stay:{sung:5}},
+ /* t96.rare = the «Giả chết, theo chàng rời cung» rare of the Thanh mai arc (j96 rare96): her heat h, his tình, at most sus suspicion
+    (loyal watcher BAL.loy.trust, not pregnant); its try odds = base + Lợi thế × sc + (tú nữ road) td + Tâm cơ ÷ tam − suspicion ÷ sus2. Was typed in j96; values unchanged. */
+ t96:{rare:{h:80,tinh:80,sus:40,o:{base:20,sc:7,td:15,tam:6,sus2:3}},fade:{h:35,tinh:20,p:30,d:1},amb:{tinh:30,p:8,d:2},note:{tinh:72,h:50,p:4},cool:{p:25,d:1},wed:{tinh:15,fx:{th:4}}},
+ /* r97 = the rare-ending roll (owner 19/11 ~03:25Z: «Ví dụ như họ lúc nào cũng 100% đủ điều kiện thì lúc đó hãy gieo 9 hay 13%»): k = the share of a
+    rare's own p a player gets on a road at full eligibility (p × k = 9–13.5 %); elig = the measured share of climaxes where every hidden condition
+    holds (dev/measure/rarereach.js + rr-sum.js, report dev/handover/reports/rare-reach.md), per source: arc = the j97 arcs, road = the jroad .11
+    finales, kc = the jkc outside-palace rares, succ = the j99 succession rares. The roll once eligible = min(1, p × k / elig[src]) (r97Roll, j97),
+    so the chance a road ends rare ≈ p × k, as if she were always eligible; never above sure. stay = the gain of choosing to stay in the palace
+    after a rare ending that lets her leave. */
+ r97:{stay:{sung:5},k:.9,elig:{arc:.18,road:.18,kc:.18,succ:.18},
+  /* jkc outside-palace rares: base chance at full eligibility = p × kcF × k (kcR3: pFest at the festival door, kcR2: pTrave on the late door);
+     the rest are each rare's condition floors (tm96 heart h, maid loyalty loy, gossip kld below, father af, Sức suc, outings oc at most,
+     Tâm cơ tamco, Đức duc, Sắc sac). Was typed in jkc.js; values unchanged. */
+  kcF:.12,kc:{kcR1:{p:.6,h:80,loy:60,kld:55},kcR2:{p:.8,af:60,h:75,pTrave:.6,hTrave:80},kcR3:{p:.5,pFest:.4,sac:80},kcR4:{p:.6,suc:90,oc:1},kcR5:{p:.6,duc:70},kcR6:{p:.8,tamco:60}}},
  /* the Ngự tứ hairpins a rare ending can grant (j97; the wardrobe j92 may rename them): the wear gain */
  ntItem:{nt_nhuy:{sac:5,danh:3},nt_haiduong:{sac:6,danh:4},nt_dongchau:{sac:7,danh:5}},
  rare:{
