@@ -1315,6 +1315,9 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
    Outcome table (a quick result never beats a good own play): lessons won = tiến bộ một phần, lost = 0 · works / crafts = never a product ·
    makeup won = the middle tier (Đoan trang, BAL.toil.tier[0]), lost = Vụng về · care won = BAL.skip.care of the gain, lost = 0. */
 Object.assign(BAL,{skip:{od:40,raw:5,care:.5}});
+/* MINI-GAME SCORE RANGES (co-op thin F5, review/coop-thin-f5): the score a game end can report. unit = the care games (pet care, watering:
+   0..1 of the gain), raw = the kg82 / playArt / Tứ đức / tsGame play (0..10). A score outside its range is refused (the host never applies it). */
+Object.assign(BAL,{mgSc:{unit:[0,1],raw:[0,10]}});
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
