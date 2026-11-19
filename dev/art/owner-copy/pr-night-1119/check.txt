@@ -9,10 +9,7 @@ STORE CHECK PASS bt-t8.txt [args: c20 v0 --spec5pose]
 STORE CHECK PASS bt-t8o.txt [args: c20 v0 --spec5pose]
 STORE CHECK PASS cl-t4.txt [args: c06 v0 --low 4 --spec5pose]
 STORE CHECK PASS cl-t5.txt [args: c06 v0 --low 5 --spec5pose]
-STORE CHECK FAIL cl-t6.txt — 3 store sentence(s) missing or rewritten:
-  [0.88] COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly coral red silk (her signature colour family coral red and ivory), with large areas of plain co
-  [0.83] ivory only as a small accent;
-  [0.89] NOT cream, NOT beige, NOT ivory, NOT an all-gold robe, NOT green. [args: c06 v0 --low 6 --spec5pose]
+STORE CHECK PASS cl-t6.txt [args: p02 v0 --low 6 --spec5pose] (builder v2)
 STORE CHECK PASS cl-t7.txt [args: c20 v0 --t7 --spec5pose]
 STORE CHECK PASS cl-t8.txt [args: c20 v0 --spec5pose]
 STORE CHECK PASS cl-t8o.txt [args: c20 v0 --spec5pose]
@@ -20,6 +17,4 @@ STORE CHECK PASS pt-t1.txt [args: c20 v0 --low 1 --spec5pose]
 STORE CHECK PASS pt-t2.txt [args: c20 v0 --low 2 --spec5pose] (pose slot changed: t1 had the same pose)
 STORE CHECK PASS pt-t4.txt [args: c06 v0 --low 4 --spec5pose]
 STORE CHECK PASS pt-t5.txt [args: c06 v0 --low 5 --spec5pose]
-STORE CHECK FAIL pt-t6.txt — 2 store sentence(s) missing or rewritten:
-  [0.88] COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly coral red silk (her signature colour family coral red and ivory), with large areas of plain co
-  [0.83] ivory only as a small accent; [args: c06 v0 --low 6 --spec5pose]
+STORE CHECK PASS pt-t6.txt [args: p03 v0 --low 6 --spec5pose] (builder v2)
