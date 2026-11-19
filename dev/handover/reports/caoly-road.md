@@ -27,3 +27,9 @@ Cao Ly princess nc2 costume: short jacket (jeogori-like, no Joseon silhouette) +
 2. «Nữ vương Cao Ly» rare ending (j97 nc_vuong) is drama, not history (Goryeo had no queen regnant) — kept per «keep almost whole».
 3. Name «Thọ Xương cung» invented; [D] renderings checked for cổ trang tone.
 4. Rollover: not needed (context low).
+
+## ROUND 2 (E20, after E20r FAIL 30d7cca8) — branch @ **10c432fa**
+- Merged LIVE main d9b32074 (only index.html/sw.js conflicted → rebuilt).
+- FIX 1: jkc2.js end — `kc2MigNc()` wrapped around `deser` (nc life only, bd untouched): S.kc.fam titles «Hoàng huynh»→«Thế tử huynh», «Hoàng thúc»→«Vương thúc», «Mẫu hậu»→«Vương hậu» (ids/keys unchanged) and every stored string of the princess road's thanh-mai (role «Phó sứ Nam Chiếu» → Cao Ly). Family scan (law 11): dumped a full ser() of an old nc HOME life and an old nc palace life from main, walked every string for Nam Chiếu / Hoàng huynh / Hoàng thúc / chim công / voi trắng / hoa trà / Nhĩ Hải / Sùng Thánh / Quân Ân / man di / lão Kha. Before: S.kc.fam.2.t «Hoàng huynh», .3.t «Hoàng thúc», (me «Mẫu hậu»), S.men[*].role «Phó sứ Nam Chiếu», S.logs line «…vương cung Nam Chiếu…» (past log = history, left as written). After load: all migrated except the log line; palace-phase save had no other stored hits. Court-event Nam Chiếu envoys in S.men are NOT touched (migration matches only the thanh-mai role).
+- caoly-oldsave.js: NIT-4 fixed (check 1 uses old.land) + CASE B (home phase on main → load → titles migrated, ids unchanged, no Nam Chiếu in S.men/panels, 40 buổi, no errors): **14/14 PASS**. one-core-guard PASS, ge-guard 6/6.
+- NITs left to E (not blocking): NIT-1 {kha} by asker origin; NIT-2 jgedata «tấm da» (bd beat); NIT-3 scene art (FOR C).
