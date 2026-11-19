@@ -5,7 +5,7 @@
    pending at once (#next locked, a 2nd tap ignored), the host ran it ONCE in her context, her place / visit / khắc on both phones the same,
    the khắc spent = travel() (BAL.walk, one core), the host's world where of her = her stored place · P2 visits between the two players both
    directions (visitPal) + the host's stage sees her · P3 talk at a place (popMsg / khắc back) · P4 the greeting gate (local card → accEtqGo
-   intent, her result card, none on the host) · P5 decision cards stay local (no intent, nothing written) · P8 no local walk, no page errors. */
+   intent, her result card, none on the host) · P5 decision cards stay local (no intent, nothing written) · P8 no local walk, no page errors · P10 net loss: her walk frame or the host's answer dies on a dead socket → kept pending through the reconnect, sent again, run ONCE (DONE), khắc paid once. */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||7);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
@@ -15,6 +15,12 @@ async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:
   await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
    window.__co=()=>{const c=window.COOP;if(!c)return{};return{code:c.code,seat:c.seat,world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.on)}}},[WURL,want]);
   if(TRIPSRC&&name==='guest')await ctx.addInitScript(TRIPSRC);
+  /* P10 a dead socket on her phone (as coop-thin-e-net): while __mute her `do` frames are dropped, while __deafThin the host's views
+     ("t":"delta" / "snap") never reach her; __wss = her sockets (closed by the test → COOP reconnects, "room") */
+  if(name==='guest')await ctx.addInitScript(()=>{const W0=window.WebSocket,s0=W0.prototype.send;window.__wss=[];window.__drop=[];window.__lostV=0;
+   W0.prototype.send=function(d){if(window.__mute&&typeof d==='string'&&d.indexOf('"t":"do"')>=0){window.__drop.push(d.slice(0,120));return}return s0.apply(this,arguments)};
+   window.WebSocket=function(u,p){const s=p===undefined?new W0(u):new W0(u,p);window.__wss.push(s);s.addEventListener('message',ev=>{if(window.__deafThin&&typeof ev.data==='string'&&/"t":"(delta|snap)"/.test(ev.data)){window.__lostV++;ev.stopImmediatePropagation()}});return s};
+   window.WebSocket.prototype=W0.prototype;Object.assign(window.WebSocket,{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3})});
   /* LAG=<ms>: a 4G profile on this phone: every socket message out and in waits LAG ms (order kept) */
   if(+process.env.LAG)await ctx.addInitScript(L=>{const W=window.WebSocket;const P=function(u,p){const s=p===undefined?new W(u):new W(u,p);const snd=s.send.bind(s);
     s.send=d=>setTimeout(()=>{try{if(s.readyState===1)snd(d)}catch(e){}},L);let h=null;Object.defineProperty(s,'onmessage',{configurable:true,get(){return h},set(f){h=f}});
@@ -73,6 +79,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const PL=await G.p.evaluate(()=>places().map(x=>x.k).filter(k=>typeof k==='string'&&k!=='home'));
  let nP=0,nOk=0,nGate=0;const gates=[];
  for(const k of PL){await reset();
+  /* a gate card left by the row before may have been answered by clear() (e.g. Bái kiến → accEtqGo intent): let that walk land first, or its late answer (her khắc back) overwrites the used=0 below (seen under LAG=85) */
+  await until(G,()=>!COOPW.thin.F.pend,null,20000);await sync();await reset();
   /* start each walk at home with a full buổi (her khắc clock lives on her phone: used = 0 there) */
   if(await G.p.evaluate(()=>S.place!=='home'))await walk('goTo','home','home');
   await reset();await G.p.evaluate(()=>{used=0;render()});await sync();
@@ -172,10 +180,29 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    return {k,gap:(F.stat.gap|0)-g0,sent:F.stat.sent-s0,local:F.stat.local-l0,same:S.place===p0&&used===u0}});
   ok(r.gap===1&&r.sent===0&&r.local===0&&r.same,'P9 reconnect gap: a walk tap takes no road (not run on her phone, not sent), the linking word shows',r)}
  await G.p.evaluate(()=>{if('__etqHH' in window)ACC_ETQ.hostHome=window.__etqHH});
+ /* P10 net loss (no lost tap): (a) her walk frame dies on a dead socket → after the reconnect it is sent again and lands ONCE;
+    (b) the host ran it but its answer died → after the reconnect the resend is answered from the host's DONE (never run twice, khắc paid once) */
+ for(const mode of ['send','answer']){await reset();await until(G,()=>!COOPW.thin.F.pend,null,20000);if(await G.p.evaluate(()=>S.place!=='home'))await walk('goTo','home','home');
+  await reset();await G.p.evaluate(()=>{used=0;render()});await sync();
+  const k=await G.p.evaluate(()=>places().map(x=>x.k).find(k=>{try{return typeof k==='string'&&k!==S.place&&k!=='home'&&accessOf(S,k).ok&&!accEtq(S,k)&&!(typeof tyOn==='function'&&tyOn(S))&&walkOk(travel(S.place,k))}catch(e){return false}}));
+  if(!k){ok(true,'P10 '+mode+': no open place to walk to (skipped)');continue}
+  const run0=await H.p.evaluate(()=>COOPW.thin.F.stat.run),dup0=await H.p.evaluate(()=>COOPW.thin.F.stat.dup);
+  const r=await G.p.evaluate(([k,mode])=>{const F=COOPW.thin.F;if(mode==='send')window.__mute=1;else window.__deafThin=1;const tc=travel(S.place,k);goTo(k);return {tc,id:F.pend&&F.pend.id,rn0:F.stat.reNet|0}},[k,mode]);
+  /* the loss is real: (a) the host never heard it; (b) the host ran it, her phone never heard the answer */
+  await sleep(2500);const run1=await H.p.evaluate(()=>COOPW.thin.F.stat.run);const g1=await G.p.evaluate(()=>({pend:!!COOPW.thin.F.pend,place:S.place,drop:__drop.length,lostV:__lostV}));
+  const lossReal=mode==='send'?run1===run0&&g1.drop>0:run1===run0+1&&g1.lostV>0;
+  /* the socket closes (as a dead 4G socket does), COOP reconnects */
+  await G.p.evaluate(()=>{window.__mute=0;window.__deafThin=0;for(const s of window.__wss)try{if(s.readyState<=1)s.close()}catch(e){}});
+  const got=r.id?await until(G,id=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.id===id,r.id,40000):false;await sleep(500);await sync();
+  const g2=await G.p.evaluate(()=>({place:S.place,used,reNet:COOPW.thin.F.stat.reNet|0,give:COOPW.thin.F.stat.give}));const h2=await herPl();
+  const run2=await H.p.evaluate(()=>COOPW.thin.F.stat.run),dup2=await H.p.evaluate(()=>COOPW.thin.F.stat.dup);
+  ok(lossReal&&g1.pend&&g1.place==='home'&&got&&g2.reNet===r.rn0+1&&run2-run0===1&&g2.place===k&&h2.place===k&&g2.used===r.tc,
+   `P10 net loss (${mode==='send'?'her walk frame lost':'the host\'s answer lost'}): kept pending through the reconnect, sent again, the host ran it ONCE${mode==='answer'?' (resend answered from DONE)':''}, she arrives on both phones, khắc paid once`,
+   {k,mode,r,g1,lossReal,got,g2,h2:{place:h2.place},runs:run2-run0,dup:dup2-dup0})}
  /* latency */
  {const ms=table.filter(x=>x&&typeof x.ms==='number').map(x=>x.ms).sort((a,b)=>a-b);if(ms.length)console.log('LATENCY tap→arrival ms (LAG '+(+process.env.LAG||0)+', host CPU ×'+(+process.env.CPU||1)+'): n='+ms.length+' median='+ms[ms.length>>1]+' min='+ms[0]+' max='+ms[ms.length-1])}
  if(TRIPSRC){const t=await G.p.evaluate(()=>window.__trip&&__trip()).catch(e=>({err:e.message}));
-  console.log('TRIPWIRE place loop (guest writes outside fromCanon): total',t&&t.total,'state',t&&t.state,'· statePart',JSON.stringify(t&&t.statePart),'· top',JSON.stringify(Object.entries((t&&t.entries)||{}).filter(([k])=>/goTo|visit|walk|talk|accEtq|acc(Ask|Sneak)|place|scout|invite/i.test(k)).slice(0,30)))}
+  console.log('TRIPWIRE place loop (guest writes outside fromCanon): total',t&&t.total,'state',t&&t.state,'· statePart',JSON.stringify(t&&t.statePart),'· top',JSON.stringify(Object.entries((t&&t.entries)||{}).filter(([k])=>/goTo|visit|walk|talk|accEtq|acc(Ask|Sneak)|place|scout|invite/i.test(k)).slice(0,30)));console.log('TRIPWIRE all entries (top 12):',JSON.stringify(Object.entries((t&&t.entries)||{}).sort((x,y)=>y[1]-x[1]).slice(0,12)))}
  console.log('PLACE table:');for(const x of table)console.log(' ',JSON.stringify(x).slice(0,360));
  if(process.env.OUT){fs.mkdirSync(process.env.OUT,{recursive:true});fs.writeFileSync(path.join(process.env.OUT,`f2-places-L${LVL}-s${SWAP}.json`),JSON.stringify(table,null,1))}
  {const [ho,go]=await both(()=>COOPW.oldRun||{});const n=o=>Object.values(o).reduce((a,b)=>a+b,0);ok(n(ho)+n(go)===0,'P8 no old guest state guard ran (COOPW.oldRun, both seats)',{host:ho,guest:go})}

@@ -50,7 +50,7 @@ function intent(name,args){const R=F.R[name],t00=performance.now();
  let ops=[],cur=null;try{cur=E.curP();ops=TH.pDiff(E.base(V),cur)}catch(e){console.error("thin F diff",e)}
  const L=E.packs(ops);const last=L.pop()||[];const rid="f"+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
  L.forEach((o,i)=>TH.doSend("erd",{id:rid,i,ops:o}));if(cur)E.sent(cur);
- const p=F.pend={id:"d"+rid,n:name,msg:{n:name,a,c,ops:last},t0:Date.now(),tries:0,pre:Math.round(performance.now()-t00)};p.bf=snapV;try{if(p.bf&&R.title)p.ttl=R.title(args)}catch(e){}p.force=!!R.snap;p.args=args;p.b0=S.buoi||0;p.w0=COOP.state.week||0;try{p.walk=R.walk?R.walk(args):null}catch(e){p.walk=null}sendF(p);F.stat.sent++;lg(["sent",name,p.id,ops.length]);
+ const p=F.pend={id:"d"+rid,n:name,msg:{n:name,a,c,ops:last},t0:Date.now(),tries:0,pre:Math.round(performance.now()-t00)};p.bf=snapV;try{if(p.bf&&R.title)p.ttl=R.title(args)}catch(e){}p.force=!!R.snap;p.args=args;p.b0=S.buoi||0;p.w0=COOP.state.week||0;p.room=COOP.state.room||"";try{p.walk=R.walk?R.walk(args):null}catch(e){p.walk=null}sendF(p);F.stat.sent++;lg(["sent",name,p.id,ops.length]);
  /* the pending state shows at once: #next locked + her act buttons off, in this same tick (no lost tap: the tap is held as the intent) */
  const t1=performance.now();try{CW.lockNext();render()}catch(e){}p.pr=Math.round(performance.now()-t1);return true}
 function answered(dr){const p=F.pend;if(!p||!dr||dr.id!==p.id)return;F.pend=null;F.stat.ans++;const ms=Date.now()-p.t0;F.stat.ms.push(ms);if(F.stat.ms.length>40)F.stat.ms.shift();
@@ -69,7 +69,13 @@ COOP.on("error",m=>{try{const p=F.pend;if(!p||!m||m.id!==p.id||host())return;if(
 setInterval(()=>{const p=F.pend;if(!p||host())return;if(!on()||COOP.frozen)return;if(Date.now()-p.at<8000)return;
  if(p.tries>=3){F.pend=null;F.stat.give++;lg(["give",p.n,p.id]);line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}return}
  p.tries++;F.stat.resend++;lg(["resend",p.n,p.id,p.tries]);sendF(p)},1000);
-COOP.on("room",()=>{F.pend=null});
+/* F2 net loss (the whole intent family, F1 too): her socket can look open while dead (4G, sleep): the intent frame, or the host's answer,
+   is lost, then COOP reconnects ("room"). Dropping the pending intent there lost her tap in silence (a P7 walk-spill red: the host ran the
+   walk, her phone never heard, no resend, no word). Same room + same week: keep it and send it again as soon as the room level is back
+   (the 1 s tick below; the host dedupes by intent id, DONE kept per room, so a walk the host already ran is answered from DONE, never run
+   twice). Another room / another week: the intent is stale, dropped with the "not done" word (her tap is never silently lost). */
+COOP.on("room",()=>{const p=F.pend;if(!p)return;if(p.room!==(COOP.state.room||"")||(COOP.state.week||0)!==p.w0){F.pend=null;lg(["drop",p.n,p.id]);line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}return}
+ p.at=0;F.stat.reNet=(F.stat.reNet|0)+1;lg(["reNet",p.n,p.id])});
 /* pending = busy: #next waits (existing lockNext words through CW.eWait), act buttons off (can) */
 {const w=CW.eWait;CW.eWait=()=>!!(w&&w())||!!(F.pend&&on()&&!host())}
 if(typeof can==="function"){const f=can;can=function(){if(F.pend&&on()&&!host()&&!CW.ctx)return false;return f.apply(this,arguments)}}
