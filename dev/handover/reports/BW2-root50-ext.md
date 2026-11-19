@@ -37,5 +37,13 @@ Gate additions (check_store.py): **S34** D9 sentence, scope `any` (every prompt,
 `dev/handover/reports/bw2-samples/m13_t2_a18.prompt.txt`, `m13_t7_a18.prompt.txt`, `m13_t8_a18.prompt.txt`
 (rebuild: `python3 dev/art/store-all/build_all.py m13 2|7|8`)
 
-## HANDOVER line
-BW2 done (push + report). Nothing left open in this job except the owner/ROOT-50 notes above. Successor not needed.
+
+## Add 1 — ma ma ONE reference (owner Lượt 543; ROOT-50 18:34Z) — DONE
+build.py build_mama: with `--noflower` (MMX3's flag) or `--oneref`, the costume-image pointers are removed: "exactly the cut of image 3" (Outfit header), "take ONLY the cut from image 3; " and "; do not copy the brown of image 3" (COLOUR RULE), and the MAMA_IMG3 sentence is dropped (its "ONE panel" described the old costume image; the outfit text keeps TWO front panels / hai tà, gate S32). The garment description words are unchanged. Assert: no "image 3" left. Without the flags, the output is byte-identical.
+Gate: `build.py mNN v0 --state mama --nostyle --noflower --twocol <sec> --age a36|a51|a65` → STORE CHECK PASS (m05, c07 × 3 ages), 0 image pointers. (With `--spec5pose` ma ma fails S17 hands tail; that was already so, and the mama-specs commands don't use spec5pose.)
+Left in place (not asked): MAMA_HAIR "…the style reference image must not influence her hair." still names a style image that is no longer sent.
+
+## HANDOVER — ROOT-50 adds NOT started (BW2 at rollover budget, start ≈3 % + 25 %)
+The coordinator (ROOT-50) opens the successor. Start: `git pull`, read this file.
+1. **Quý nhân t3 = option B v2 (owner Lượt 559, G15 + G16 no round neckline).** Put the Outfit sentence from dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt into the t3 builder: build.py build_low for t=3 (ITEMS_LOW / LOW outfit table, reached by `build.py cNN --low 3`; build_all rank 3 runs it). Replace ONLY the t3 outfit-design words; per-person main/secondary colour + motif slots instead of lilac / deep teal / wisteria. Keep everything else. Check that no t1–t8 outfit says "round collar/neckline" (G16). Gate: `build_all.py --check` (all ages) PASS; report one built t3 prompt for m07 and m20.
+2. **B8 KC_REFS (owner Lượt 543/551):** when REF1's dev/art/KC_REFS.json + kc_ref.py land (they are on the branch now: kc_ref.py, kc_refs_build.py), wire the builders' FACE/identity words to the KC_REFS face words (copied from the kc prompt that made her thiếu nữ picture), and make the painters' ref list (`build.py --refs` gen_refs, build_all refs) = the KC_REFS cut id. Gate + report as before.

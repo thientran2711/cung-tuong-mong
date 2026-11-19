@@ -18,3 +18,24 @@ So brief (K16: use the 18/11 prompt) and gate (FAIL = do not generate) contradic
   (a) 18/11 prompt as is, gate waived for Nữ đế set B; or
   (b) 18/11 prompt + the later owner sentences S07/S17, stole removed from pose (X05), S04 wording; or
   (c) something else.
+
+## UPDATE — ROOT-50 ruling (b), m01 SAMPLE drawn, then HOLD (owner Lượt 573)
+Exact diff vs the 18/11 approved prompt (`build.py mNN v0 --state nude --spec5pose --nudeopt A --nostyle`), applied in mk.py, nothing else:
+1. face slot (empty for m-people) ← her v3 face words verbatim (KC_REFS.json / m01.v3.FULL.txt)
+2. "Image 3" → "Image 2" (one-ref: no style image; swatch = image 2)
+3. S04: "All flowers, clouds and dragons are fine …" → "All flowers, birds and the dragon are fine …" (approved sentence, motif slot as in store)
+4. S07 added before "The silk has real weight:": "FABRIC: thick gold-embroidered brocade with a graceful, flowing drape."
+5. X05 stole/sash out of the pose: the stole clause → ", the other hand gently touching it" (pose 0: "{item} in one hand, the other hand gently touching it"; pose 4: "her long sheer silk stole over both arms" dropped)
+6. S17 added after "no flying, floating or windblown cloth.": "Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down."
+Gates: check_store --scope nude PASS (5/5 ages), kc_ref.py --check PASS.
+
+| age | item | gen | cut |
+|---|---|---|---|
+| a18 | lantern (3/4 right) | lJtTEpsgv9 | 1ldzhztr4r |
+| a26 | poetry book | Lw8cEw5swO | JNCdk2ZOq4 |
+| a36 | incense box (3/4 right) | eIPjAGOdqL | jUoWumoLD0 |
+| a51 | sutra book | lJtTqydgv9 | xSBYuHpjfW |
+| a65 | almanac | Cqn4BSNEEy | p8yxnovehw |
+gpt-2-6 1024x2304 2k, no seed, refs hu2qEwOvqL + TdwDfOyVNR, 5 × (135 + 3 cut) = 690 credits. Sheet: dev/handover/review-sheets/nu-de-B/nudeB_row_m01.jpg
+NOTES for the owner (LAW #0 — notes only, no change unless she asks): a18 lantern reads more like a pouch; a26/a51/a65 items are all crimson books (different items, same look); forehead clean on all 5; a51 silver streaks visible, a65 mostly silver.
+STATUS: HOLD — no m02+ until owner GO.
