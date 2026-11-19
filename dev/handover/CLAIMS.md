@@ -121,7 +121,7 @@ parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | RUN
 | REVIEW role-parity part 1 (opus reviewer) | review/role-parity d6c2dc17 | C-AG #15 | session_01Rc5AsLNBKMAjqjCWnFi5D1 | DONE (LIVE 40d05b76) | 18/11 20:44Z |
 | ROLE-PARITY #2 (opus; part 2: §4 open families) | review/role-parity-2 | C-AG #15 | session_01Rc5AsMM3ssHnCBtjLf11Qr | DONE (SẴN SÀNG f2b8fb0c; → #3) | 18/11 20:44Z |
 | ROLE-PARITY #3 (opus; part-1 fix finish: per-rank targets, «Chuyện cũ», OPEN cap, merge main) | review/role-parity-2 | C-AG #16 | session_01Rc5AsN67UuWKQGjGP9MeW8 | DONE (72fbb3fb → LIVE 40d05b76) | 18/11 21:51Z |
-| FOREMAN E ROOT #7 (opus; child of E ROOT #6, depth 6) | handover FOREMAN_E_STATUS | E ROOT #6 | session_01DgYSWmtdZ1kLd9QYXs3qmb | RUNNING | 18/11 20:04Z |
+| FOREMAN E ROOT #7 (opus; child of E ROOT #6, depth 6) | handover FOREMAN_E_STATUS | E ROOT #6 | session_01DgYSWmtdZ1kLd9QYXs3qmb | HANDED OVER → #8 | 19/11 01:50Z |
 | ge-writers-w1 remerge main 13bb8c88 (sonnet E11w1m) | review/ge-writers-w1 | E ROOT #7 | session_01DgYSWkZN9pWgeEfv5WDMRV | DONE dca5550f | 18/11 20:22Z |
 | errand-scene r2 (non-blocking walk-off/away/walk-back + «!» chip) | review/errand-scene | MAIN ROOT-55 | session_01Rc5AsLFZhaSRGU7o57KkKy | READY cae6685 | 18/11 |
 | stage-here r2 (opus; successor; gaps a–d + LOOK fixes, on stage-rightcol) | review/stage-here | MAIN ROOT-55 | session_01Rc5AsHiLwk4MGH662uw5L3 | SẴN SÀNG KIỂM 1f33d3c (r2b) | 18/11 22:30Z |
@@ -193,3 +193,5 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | MAIN ROOT-61 (opus; child of ROOT-60; depth 8) | handover HANDOVER_SESSION9 | ROOT-60 | session_01Rc5AsJBmT3vTTFe8sbCbUa | RUNNING | 19/11 00:35Z |
 | hist-mama-ladder (history expert, sonnet E15; MAIN ORDER 00:41Z) | handover report | E ROOT #7 | session_01DgYSWp57dyN9pFwnJw7znu | DONE 97c6164e | 19/11 00:54Z |
 | role-parity-seed (riseCore test seed fix; opus B3) | review/role-parity-seed | B | session_01N1tNP5LzLhxHn4SfWgKpNQ | RUNNING | 19/11 01:17Z |
+| ge-writers-w2 remerge #5 main 96188526 (sonnet E11w2m3) | review/ge-writers-w2 | E ROOT #7 → #8 | session_01DgYSWq43v8g897s6AtupYe | RUNNING | 19/11 01:50Z |
+| FOREMAN E ROOT #8 (opus; child of E ROOT #7, depth 7) | handover FOREMAN_E_STATUS | E ROOT #7 | session_01DgYSWoyrPRWJPqSp4gfECg | RUNNING | 19/11 01:50Z |
