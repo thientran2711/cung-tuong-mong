@@ -519,8 +519,12 @@ RULE: narrow-sleeve ranks (thô sử, tam đẳng) use ONLY the shape wording: "
 
 ### STYLE IMAGE WITHOUT m09 (owner 19/11 ~02:35Z, Foreman C chat)
 OWNER (verbatim): "Lấy hình mẫu màu cam và màu xanh làm mẫu, không lấy ảnh m09 nữa. M09 vải dày hơn"
-→ m09 is REMOVED from the style image (its fabric is too thick). The style image becomes the ORANGE girl (c06 a18 t1 v0) + the BLUE one. BLUE = the live maid tm0 'thô sử' figure (Magnific 3zbvpI0REY, the one she circled in the next message; read by ROOT-38 from that message). New style image = c06 a18 t1 v0 (orange) + live tm0 (blue) in ONE image; m09 out.
+→ m09 is REMOVED from the style image (its fabric is too thick). The style image becomes the ORANGE girl (c06 a18 t1 v0) + the BLUE one. VOID (ROOT-38 misread: put the live tm0 maid into the style image).
 
 ### TAM ĐẲNG = LIVE tm0 'THÔ SỬ' PROMPT AS IS (owner 19/11 ~02:40Z, Foreman C chat, she circled live tm0 on sheet_ladder_test1)
 OWNER (verbatim): "Lấy promp thô sử này làm cung nữ tam đẳng"
 → Cung nữ tam đẳng = the live tm0 prompt (3zbvpI0REY, mjobs.py mout(0)) copied as is, the same look as the circled picture (sheer pale-blue layers, flowers on the skirt). This replaces the 'tam = mout(0) + embroidered hem bands + narrow sleeves' recipe; C's test tam (lantern, short blue jacket) is dropped. Thô sử stays the new plain design.
+
+### STYLE IMAGE = style3_girls MINUS m09, NOTHING ADDED (owner 19/11 ~02:45Z, angry)
+OWNER (verbatim): "Ai nói với mày mấy cái áo của cô công nữ thứ ba làm ảnh vải vậy? Tao nói vẫn giữ cô thứ nhất và cô thứ hai, chỉ là bỏ cái cô M09 thôi. Ai kêu mày nhiều chuyện đi bỏ cái cô thứ ba vô."
+→ Style image = the two remaining girls of style3_girls (c06 a18 t1 v0 + c25 a18 t1 v0), m09 cropped out, NOTHING added (never a maid picture). File img/_review/style-refs/style2_c06_c25.png. Lesson: change only what she names.
