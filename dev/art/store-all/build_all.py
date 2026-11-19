@@ -114,8 +114,8 @@ NOFLOWER="NO flowers in the hair or on the crown at this rank (flowers only at r
 def angle_sentence(person,rank):
     """Lượt 440: one of the 14 standing angles (7 + 7 mirrored, build.py ANG14), rotated per person: ANG[(t-1+(n-1))%14]; the head turns WITH the body; frontal or three-quarter only."""
     return "ANGLE: "+LAST_G["ANG14"][plan("a18")[(ALIAS.get(person,person),rank)][0]]+"; her head turns together with her shoulders and body, never back-turned, never in profile."
-def laws(t):
-    L=[HAIR_LOW if t<=3 else HAIR_HIGH,sleeve(t),ONE_LAYER]
+def laws(t,age="a18"):
+    L=[HAIR_LOW if t<=3 and age in ("a18","a26") else HAIR_HIGH,sleeve(t),ONE_LAYER]   # F11 (owner Lượt 583): a36/a51/a65 = hair UP for everyone (t1-t3 too); loose only a18/a26
     L.append(SZ[t] if t<=6 else NOFLOWER)
     L.append(HEADBODY)
     if t>=7: L.append(FABRIC_B)
@@ -196,10 +196,16 @@ def item_colour(person,rank,F):
     m=re.search(r" Pose: .*?(?:holding|holds|carrying|offering|raising|with) (an? [^,.]+?)(?: in | up | raised| held| forward| beside| at |,|\.)",F)
     main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
     return f"HELD ITEM COLOUR: the held item and any embroidery, painting or tassel on it are in a colour family clearly different from BOTH her robe colour {main} and her secondary colour {sec}."
+def outfit_colours3(person):
+    """B17 (owner Lượt 583): t7/t8 = THREE colours: royal yellow #EFBD69 + her MAIN and SECONDARY colour with exactly the words of her t1-t6 TWO-COLOUR sentence
+    (same data: DATA main + secondary()); the B15 sentence adapted so it never says 'never a third colour'."""
+    main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
+    return (f"THREE-COLOUR RULE (t7/t8): the whole outfit uses EXACTLY THREE colours that clearly interact: the royal golden yellow (honey-gold like #EFBD69), the MAIN colour {main} and the SECONDARY colour {sec}, "
+            "the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, no other colour.")
 def extras(S0,person,rank):
     L=[]
     if isinstance(rank,int):
-        L.append(outfit_colours(person))   # B15 two-colour sentence verbatim: t1-t6 (Lượt 489/499) + t7 HQP / t8 HH (G14, owner Lượt 529: the secondary disappeared at t7/t8)
+        L.append(outfit_colours(person) if rank<=6 else outfit_colours3(person))   # B15 two-colour sentence verbatim: t1-t6 (Lượt 489/499) + t7 HQP / t8 HH (G14, owner Lượt 529: the secondary disappeared at t7/t8)
         L.append(item_colour(person,rank,S0))
         if rank==7: L.append(HQP_LUX)
     if isinstance(rank,int) and rank<=6:
@@ -332,8 +338,13 @@ def _clean_pose(S):
     return S.replace(TQ_RIGHT,"")
 def _sec_slot(person,rank,S):
     """Lượt 483 slot REPLACE (colour slot of the store COLOUR RULE, t1-t6): the secondary is no longer only 'in the inner robe and linings'."""
-    if not (isinstance(rank,int) and rank<=6): return S
+    if not isinstance(rank,int): return S
     sec,_=secondary(person)
+    if rank>=7:   # B17: no stale 'silver #E2C3C5 in the linings' line: the linings clause carries her t1-t6 secondary words
+        S,k=re.subn(r"with [^;]+? in the linings",f"with {sec} in the inner robe and linings",S,count=1); assert k==1,("t7/t8 linings slot",person,rank); return S
+    if rank<=3 and re.search(r"\babout (36|51|65)\b",S):   # F11 (owner Lượt 583): at a36/a51/a65 the t1-t3 hair line says hair UP (the thiếu-nữ ref has loose hair)
+        _h="Hair: her own hairstyle exactly as in her first reference, with"; assert S.count(_h)==1,("t1-3 hair slot",person,rank)
+        S=S.replace(_h,"Hair: her own hair colour, ALL her hair swept UP into a bun / chignon (nothing hanging loose down her back), with",1)
     S=re.sub(r"with [^;]+? in the inner robe and linings",f"with {sec} in the inner robe and linings",S,count=1)   # colour slot swap only (no new wording, Lượt 489)
     return _t3_slot(person,rank,S)
 # G15 (owner Lượt 559): QUÝ NHÂN t3 DESIGN = option B v2 -> dev/art/check_store.py g15_t3 (one copy of the wording, shared with the gate).
@@ -357,7 +368,7 @@ def build(person,rank,age="a18"):
     S=_clean_pose(S)
     S=apply_dedupe(person,rank,age,S); store(person,rank,age); S=_sec_slot(person,rank,S)   # Lượt 469 pose dedupe (slot); re-run store so LAST_G is this rank's
     anchor=" Pose:"; assert S.count(anchor)==1,("pose anchor",person,rank)
-    add=laws(rank)+[angle_sentence(person,rank),grace_sentence(person,rank)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
+    add=(laws(rank,age) if isinstance(rank,int) else laws(rank))+[angle_sentence(person,rank),grace_sentence(person,rank)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
     return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
 
 # ---------------- CHECK ----------------
@@ -366,7 +377,7 @@ def _frame(rank,age):
     r=None
     for p in ("c03","c06","c25"):
         x=set(re.split(r"(?<=[.;]) ",store(p,rank,age))); r=x if r is None else r&x
-    return r
+    return {s for s in r if not s.lstrip().startswith(("Eyes soft, warm and round-almond","Hair:"))}   # + F11: 'Hair:' is a slot (check_store SLOT) swapped at a36+ t1-t3   # B8: KC people drop this END clause (their own face words name the eyes)
 def check(person,rank,age="a18",ref=None):
     S0,F,add=build(person,rank,age); errs=[]
     blk=" "+" ".join(add)
@@ -411,13 +422,15 @@ def check_all(age="a18"):
     n=len(PEOPLE)*8+32; print(f"checked {n-held} prompts ({len(PEOPLE)} people x 8 ranks + 32 Nữ đế, age {age}; {held} HELD = not drawn, B8): {bad} FAIL"); return 1 if bad else 0
 if __name__=="__main__":
     a=sys.argv[1:]; age=a[a.index("--age")+1] if "--age" in a else "a18"
-    if "--style" in a: STYLE_OVERRIDE=True
+    if "--style" in a: print("--style is retired (B8, owner Lượt 543/551/555): every person uses ONE set-B reference; new characters = dev/art/NEW_CHARACTER_TEMPLATE.md",file=sys.stderr); sys.exit(2)
     if "--check" in a: sys.exit(check_all(age))
     if "--samples" in a:
         for p,t in (("m19",1),("m19",3),("c06",7),("p01",2),("p03",8)):
             print(f"\n===== {p} t{t} {age} =====\n"+build(p,t,age)[1])
         sys.exit(0)
     pos=[x for x in a if not x.startswith("--") and x!=age]
+    if len(pos)==3 and "--age" not in a and re.fullmatch(r"a(18|26|36|51|65)",pos[2]): age=pos.pop()   # ROOT-51: positional age (build_all.py m13 3 a26) used to build a18 silently
+    if len(pos)!=2: print("usage: build_all.py <person> <rank 1-8|nude> [aNN | --age aNN]",file=sys.stderr); sys.exit(2)
     if not _kc_drawn(ALIAS.get(pos[0],pos[0])): print(f"REFUSED {pos[0]}: NOT drawn (ART_RULES B8, dev/art/KC_REFS.json)",file=sys.stderr); sys.exit(2)
     out=build(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age)[1]
     ok,msg=gate(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age,out)
