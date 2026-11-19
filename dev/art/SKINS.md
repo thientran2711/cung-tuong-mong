@@ -25,3 +25,110 @@ Never delete, trash or overwrite these. One line each: who | rank/age | cut id |
 - m20 | t7 Hoàng quý phi a18 (Lượt 469 test, TN1) | gen u5W4cGwQLD cut rgXGtJGxtc | img/_review/rank-test/v469/m20_t7.webp | missing outfit secondary colour, Lượt 483 (redraw with builder Lượt 476/483/486, Lượt 487)
 - m20 | t8 Hoàng hậu a18 (Lượt 469 test, TN1) | gen VX75OeOMMU cut JNCpHAzOq4 | img/_review/rank-test/v469/m20_t8.webp | missing outfit secondary colour, Lượt 483 (redraw with builder Lượt 476/483/486, Lượt 487)
 - ma ma c06 | a36 a51 a65 one-colour (one-ref, MMX1) | cuts WDgFRDucXe fHzOIpHCDY s7IWkFul8e | img/_review/mama-mass/cuts/c06-a36..a65.png (CDN, untouched) | two-colour no-flower N2qtWyy6D9/gOmV3MWSXO/O6EXz8Kynm, cuts img/_review/mama-mass/twocol/cuts/ (Lượt 517/520, MMX3)
+
+## Thái hậu 18/11 round (TH1 for ROOT-52, owner Lượt 618: all Thái hậu REDRAWN; these stay as skins, never delete)
+Base https://ctm-img.victoria-tntt.workers.dev/img/_review/ (all files checked 200 on 19/11 ~20:10Z). Per-person sheet = thaihau/cNN_thaihau_sheet.jpg. 'gen id —' = the report did not record it (Magnific folder ba4aecfe…).
+- c01 Thái hậu | a36 | gen — | img/_review/thaihau/c01_a36_thaihau_v0.png (thaihau-mass-T1.md (T1b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c01 Thái hậu | a51 | gen — | img/_review/thaihau/c01_a51_thaihau_v0.png (thaihau-mass-T1.md (T1b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c01 Thái hậu | a65 | gen — | img/_review/thaihau/c01_a65_thaihau_v0.png (thaihau-mass-T1.md (T1b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c02 Thái hậu | a36 | gen — | img/_review/thaihau/c02_a36_thaihau_v0.png (thaihau-mass-T1.md (T1b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c02 Thái hậu | a51 | gen — | img/_review/thaihau/c02_a51_thaihau_v0.png (thaihau-mass-T1.md (T1b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c02 Thái hậu | a65 | gen — | img/_review/thaihau/c02_a65_thaihau_v0.png (thaihau-mass-T1.md (T1b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c03 Thái hậu | a36 | gen — | img/_review/thaihau/c03_a36_thaihau_v0.png (thaihau-mass-T1.md (T1b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c03 Thái hậu | a51 | gen — | img/_review/thaihau/c03_a51_thaihau_v0.png (thaihau-mass-T1.md (T1b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c03 Thái hậu | a65 | gen — | img/_review/thaihau/c03_a65_thaihau_v0.png (thaihau-mass-T1.md (T1b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c04 Thái hậu | a36 | gen — | img/_review/thaihau/c04_a36_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c04 Thái hậu | a51 | gen — | img/_review/thaihau/c04_a51_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c04 Thái hậu | a65 | gen — | img/_review/thaihau/c04_a65_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c05 Thái hậu | a36 | gen — | img/_review/thaihau/c05_a36_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c05 Thái hậu | a51 | gen — | img/_review/thaihau/c05_a51_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c05 Thái hậu | a65 | gen — | img/_review/thaihau/c05_a65_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c06 Thái hậu | a36 | gen — | img/_review/thaihau/c06_a36_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c06 Thái hậu | a51 | gen — | img/_review/thaihau/c06_a51_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c06 Thái hậu | a65 | gen — | img/_review/thaihau/c06_a65_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c07 Thái hậu | a36 | gen — | img/_review/thaihau/c07_a36_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c07 Thái hậu | a51 | gen — | img/_review/thaihau/c07_a51_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c07 Thái hậu | a65 | gen — | img/_review/thaihau/c07_a65_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c08 Thái hậu | a36 | gen — | img/_review/thaihau/c08_a36_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c08 Thái hậu | a51 | gen — | img/_review/thaihau/c08_a51_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c08 Thái hậu | a65 | gen — | img/_review/thaihau/c08_a65_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c09 Thái hậu | a36 | gen — | img/_review/thaihau/c09_a36_thaihau_v0.png (thaihau-mass-P3.md (P3/P3b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c09 Thái hậu | a51 | gen — | img/_review/thaihau/c09_a51_thaihau_v0.png (thaihau-mass-P3.md (P3/P3b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c09 Thái hậu | a65 | gen — | img/_review/thaihau/c09_a65_thaihau_v0.png (thaihau-mass-P3.md (P3/P3b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c10 Thái hậu | a36 | gen — | img/_review/thaihau/c10_a36_thaihau_v0.png (thaihau-mass-P3.md (P3/P3b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c10 Thái hậu | a51 | gen — | img/_review/thaihau/c10_a51_thaihau_v0.png (thaihau-mass-P3.md (P3/P3b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c10 Thái hậu | a65 | gen — | img/_review/thaihau/c10_a65_thaihau_v0.png (thaihau-mass-P3.md (P3/P3b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c11 Thái hậu | a36 | gen — | img/_review/thaihau/c11_a36_thaihau_v0.png (thaihau-mass-P3.md (P3/P3b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c11 Thái hậu | a51 | gen — | img/_review/thaihau/c11_a51_thaihau_v0.png (thaihau-mass-P3.md (P3/P3b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c11 Thái hậu | a65 | gen — | img/_review/thaihau/c11_a65_thaihau_v0.png (thaihau-mass-P3.md (P3/P3b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c12 Thái hậu | a36 | gen — | img/_review/thaihau/c12_a36_thaihau_v0.png (thaihau-mass-P3.md (P3/P3b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c12 Thái hậu | a51 | gen — | img/_review/thaihau/c12_a51_thaihau_v0.png (thaihau-mass-P3.md (P3/P3b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c12 Thái hậu | a65 | gen — | img/_review/thaihau/c12_a65_thaihau_v0.png (thaihau-mass-P3.md (P3/P3b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c13 Thái hậu | a36 | gen — | img/_review/thaihau/c13_a36_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c13 Thái hậu | a51 | gen — | img/_review/thaihau/c13_a51_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c13 Thái hậu | a65 | gen — | img/_review/thaihau/c13_a65_thaihau.png (thaihau-rest-TH2.md (3 refs m09 + own t1 + swatch TdwDfOyVNR)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c14 Thái hậu | a36 | gen 6Ab2CUpiJO→cut 4RF3fnM9Aa | img/_review/thaihau/c14_a36_thaihau.png (thaihau-rest-TH2.md TH2b (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c14 Thái hậu | a51 | gen p8yoSwyehw→cut p8yoUfuehw | img/_review/thaihau/c14_a51_thaihau.png (thaihau-rest-TH2.md TH2b (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c14 Thái hậu | a65 | gen CqnHRGTEEy→cut jUoSp9gLD0 | img/_review/thaihau/c14_a65_thaihau.png (thaihau-rest-TH2.md TH2b (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c15 Thái hậu | a36 | gen mEZCN2AhJQ→cut 6Ab2QrGiJO | img/_review/thaihau/c15_a36_thaihau.png (thaihau-rest-TH2.md TH2b (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c15 Thái hậu | a51 | gen eIP8wNKdqL→cut YMlVxJdWeC | img/_review/thaihau/c15_a51_thaihau.png (thaihau-rest-TH2.md TH2b (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c15 Thái hậu | a65 | gen lJt7Xf3gv9→cut VX7dgNBMMU | img/_review/thaihau/c15_a65_thaihau.png (thaihau-rest-TH2.md TH2b (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c16 Thái hậu | a36 | gen CqnHAkjEEy→cut kseLMQW16B | img/_review/thaihau/c16_a36_thaihau.png (thaihau-rest-TH2.md TH2b (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c16 Thái hậu | a51 | gen lJt7o9vgv9→cut nVsTxRQYQD | img/_review/thaihau/c16_a51_thaihau.png (thaihau-rest-TH2.md TH2b (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c16 Thái hậu | a65 | gen s7IwBN4l8e→cut WDgMLAXcXe | img/_review/thaihau/c16_a65_thaihau.png (thaihau-rest-TH2.md TH2b (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c17 Thái hậu | a36 | gen SyhJkKjUb8 | img/_review/thaihau/c17_a36_thaihau_v0.png (thaihau-mass-T2.md (1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c17 Thái hậu | a51 | gen UPvOrJxwny | img/_review/thaihau/c17_a51_thaihau_v0.png (thaihau-mass-T2.md (1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c17 Thái hậu | a65 | gen Lw8SbUIswO | img/_review/thaihau/c17_a65_thaihau_v0.png (thaihau-mass-T2.md (1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c18 Thái hậu | a36 | gen If3vp9XtvE | img/_review/thaihau/c18_a36_thaihau_v0.png (thaihau-mass-T2.md (1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c18 Thái hậu | a51 | gen P3Q6Su642C | img/_review/thaihau/c18_a51_thaihau_v0.png (thaihau-mass-T2.md (1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c18 Thái hậu | a65 | gen s7IUKIbl8e | img/_review/thaihau/c18_a65_thaihau_v0.png (thaihau-mass-T2.md (1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c19 Thái hậu | a36 | gen w4ayLkz7EI | img/_review/thaihau/c19_a36_thaihau_v0.png (thaihau-mass-T2.md (1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c19 Thái hậu | a51 | gen cpSMGX80eP | img/_review/thaihau/c19_a51_thaihau_v0.png (thaihau-mass-T2.md (1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c19 Thái hậu | a65 | gen EbYHhrFuuO | img/_review/thaihau/c19_a65_thaihau_v0.png (thaihau-mass-T2.md (1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c20 Thái hậu | a36 | gen 1ldLb6Sr4r | img/_review/thaihau/c20_a36_thaihau_v0.png (thaihau-mass-T2.md (1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c20 Thái hậu | a51 | gen vQAEIAxa47 | img/_review/thaihau/c20_a51_thaihau_v0.png (thaihau-mass-T2.md (1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c20 Thái hậu | a65 | gen w4aylCP7EI | img/_review/thaihau/c20_a65_thaihau_v0.png (thaihau-mass-T2.md (1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c21 Thái hậu | a36 | gen — | img/_review/thaihau/c21_a36_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c21 Thái hậu | a51 | gen — | img/_review/thaihau/c21_a51_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c21 Thái hậu | a65 | gen — | img/_review/thaihau/c21_a65_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c22 Thái hậu | a36 | gen — | img/_review/thaihau/c22_a36_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c22 Thái hậu | a51 | gen — | img/_review/thaihau/c22_a51_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c22 Thái hậu | a65 | gen — | img/_review/thaihau/c22_a65_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c23 Thái hậu | a36 | gen — | img/_review/thaihau/c23_a36_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c23 Thái hậu | a51 | gen — | img/_review/thaihau/c23_a51_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c23 Thái hậu | a65 | gen — | img/_review/thaihau/c23_a65_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c24 Thái hậu | a36 | gen — | img/_review/thaihau/c24_a36_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c24 Thái hậu | a51 | gen — | img/_review/thaihau/c24_a51_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c24 Thái hậu | a65 | gen — | img/_review/thaihau/c24_a65_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c25 Thái hậu | a36 | gen — | img/_review/thaihau/c25_a36_thaihau_v0.png (thaihau-mass-P2.md (P2/P2b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c25 Thái hậu | a51 | gen — | img/_review/thaihau/c25_a51_thaihau_v0.png (thaihau-mass-P2.md (P2/P2b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c25 Thái hậu | a65 | gen — | img/_review/thaihau/c25_a65_thaihau_v0.png (thaihau-mass-P2.md (P2/P2b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c26 Thái hậu | a36 | gen — | img/_review/thaihau/c26_a36_thaihau_v0.png (thaihau-mass-P2.md (P2/P2b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c26 Thái hậu | a51 | gen — | img/_review/thaihau/c26_a51_thaihau_v0.png (thaihau-mass-P2.md (P2/P2b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c26 Thái hậu | a65 | gen — | img/_review/thaihau/c26_a65_thaihau_v0.png (thaihau-mass-P2.md (P2/P2b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c27 Thái hậu | a36 | gen — | img/_review/thaihau/c27_a36_thaihau_v0.png (thaihau-mass-P2.md (P2/P2b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c27 Thái hậu | a51 | gen — | img/_review/thaihau/c27_a51_thaihau_v0.png (thaihau-mass-P2.md (P2/P2b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c27 Thái hậu | a65 | gen — | img/_review/thaihau/c27_a65_thaihau_v0.png (thaihau-mass-P2.md (P2/P2b, 1 ref own t1, --nostyle)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c28 Thái hậu | a36 | gen — | img/_review/thaihau/c28_a36_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c28 Thái hậu | a51 | gen — | img/_review/thaihau/c28_a51_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c28 Thái hậu | a65 | gen — | img/_review/thaihau/c28_a65_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c29 Thái hậu | a36 | gen — | img/_review/thaihau/c29_a36_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c29 Thái hậu | a51 | gen — | img/_review/thaihau/c29_a51_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c29 Thái hậu | a65 | gen — | img/_review/thaihau/c29_a65_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c30 Thái hậu | a36 | gen — | img/_review/thaihau/c30_a36_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c30 Thái hậu | a51 | gen — | img/_review/thaihau/c30_a51_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c30 Thái hậu | a65 | gen — | img/_review/thaihau/c30_a65_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c31 Thái hậu | a36 | gen — | img/_review/thaihau/c31_a36_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c31 Thái hậu | a51 | gen — | img/_review/thaihau/c31_a51_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c31 Thái hậu | a65 | gen — | img/_review/thaihau/c31_a65_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c32 Thái hậu | a36 | gen — | img/_review/thaihau/c32_a36_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c32 Thái hậu | a51 | gen — | img/_review/thaihau/c32_a51_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c32 Thái hậu | a65 | gen — | img/_review/thaihau/c32_a65_thaihau.png (thaihau-rest-TH3.md (3 refs m09 + own t1 + swatch)) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c04 Thái hậu 2-ref test | a36 | gen CqnHqn1EEy | img/_review/thaihau-2ref/c04_a36.png (+ c04_sheet.jpg; thaihau-mass-T1.md T1c) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c04 Thái hậu 2-ref test | a51 | gen bxMrxpT5Y2 | img/_review/thaihau-2ref/c04_a51.png (+ c04_sheet.jpg; thaihau-mass-T1.md T1c) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c04 Thái hậu 2-ref test | a65 | gen cpSDpJs0eP | img/_review/thaihau-2ref/c04_a65.png (+ c04_sheet.jpg; thaihau-mass-T1.md T1c) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c21 Thái hậu 2-ref test | a36 | gen gOmJOIsSXO→cut UPvy4zjwny | img/_review/thaihau-2ref/c21_a36.png (+ c21_sheet.jpg; thaihau-mass-T2.md T2b) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c21 Thái hậu 2-ref test | a51 | gen YMlVMl1WeC→cut aFGQHlefSh | img/_review/thaihau-2ref/c21_a51.png (+ c21_sheet.jpg; thaihau-mass-T2.md T2b) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c21 Thái hậu 2-ref test | a65 | gen 4RF3RqW9Aa→cut SyhOPY6Ub8 | img/_review/thaihau-2ref/c21_a65.png (+ c21_sheet.jpg; thaihau-mass-T2.md T2b) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c13 Thái hậu states-sample (sheet3 = the approved collar, K5) | a51 | gen xSBs5fpjfW | img/_review/states-sample/c13_a51_thaihau_v0.png (+ _v1.png, sheet3.jpg; states-sample.md) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+- c05 Thái hậu states-sample | a51 | gen dt4oDycXSL | img/_review/states-sample/c05_a51_thaihau_v0.png (+ _v1.png; states-sample.md) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
