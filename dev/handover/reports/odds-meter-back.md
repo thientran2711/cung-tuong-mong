@@ -33,3 +33,27 @@ img/_review/odds-meter-back/: montage-fold.jpg, montage-ipad.jpg (td1 · night1 
 ## Seen, NOT fixed (outside this brief — for MAIN)
 1. Event cards show «Tốn: không» and «Được: không» filler rows (opt-card-short `kfill`), against owner 13:25Z «never Tốn: không» (KIT §42.6). Visible in every shot.
 (The «undefined truy sát» in the td1 shot is a test artifact: td1 was opened directly, S.foeDad unset; not a game bug.)
+
+## r2 — law-3 display add-on (MAIN ROOT-61 ~02:03Z, ROOT-62 ~02:21Z): a worded loss / gain never hides behind «!» as «Tốn: không» / «Được: không»
+sha **42bda6a9** (r2 code f4392cbc + final merge of LIVE main 1cf5e8bb + test). Earlier ready sha 3216fd90 is superseded.
+PRIORITY #1 CHECK: OD 13:25Z «never Tốn: không», law 3 | main jopic.js kitOptFinal (opt-card-short), j65 dedupeBtns, j10 plantServ | review/* none | claims own row.
+Causes found and fixed (kit parts, every dialog):
+1. j65 `dedupeBtns` (the same note never twice in a button) deleted the FOLDED original of kitOptFinal's `.kdup` Tốn copy; the next kitOptFinal pass removed the copy → Tốn empty. Now it skips `.kdup` chips / `.kdup0` rows (intended copies).
+2. jopic `kitOptFinal`: a card with NO roll of its own (no odds; the kitOptOdds «Nắm chắc» meter is `data-ksure`) has its «mất: …» parsed as a Bại row beside Thành → it is a CERTAIN loss → stands in Tốn (a rolled card's Bại stays folded: it is a failure outcome). Stray leading «·» in Tốn removed.
+3. jopic `kitOptFinal` read ANY hint starting with «không» as empty (`^(không|chưa rõ)\b`) → «không dính vào thù oán của nàng ta; nhưng …» lost both its gain and its loss. Now only the exact empty hints.
+4. jk2b `kitHideOut` re-runs kitOptFinal after hiding (order-safe; it could run first from kpOptArt).
+5. Law 4 found by the scan: PEND.plantsv rolled inside plantServ with NO odds word on its card (looked certain, «hỏng» read as a sure loss). ONE `plantOdds(a,s)` (j10) for the roll and the card word.
+KIT.md §6.2 rows line overwritten in place (certain loss in Tốn, `.kdup` + dedupeBtns).
+
+Scan `node dev/test/opt-loss-ton.js <url>` (new): every PEND dialog as the game shows it + approachOne visits + worded test lines (the j95s «Đi một mình» form). Counts cards whose certain loss shows «Tốn: không» and whose worded gain shows «Được: không».
+
+| device | build | option cards | certain loss | «Tốn: không» with a loss | worded gain | «Được: không» with a gain | result |
+|---|---|---|---|---|---|---|---|
+| Fold 755x1000 | main 1cf5e8bb (before) | 331 | 113 | 12 | 296 | 1 | FAIL |
+| Fold 755x1000 | 42bda6a9 (after) | 313 | 105 | 0 | 279 | 0 | PASS |
+| iPad 1180x820 | main (before) | 339 | 118 | 12 | 298 | 2 | FAIL |
+| iPad 1180x820 | after | 338 | 115 | 0 | 303 | 0 | PASS |
+(first version of the scan, that also forced full mode on events, gave before 21 / after 0 losses on both devices; on r2 code the loss check passed 6 runs of 6 over random lives.)
+The odds meter scan after r2 + merge: Fold 148/148, iPad 148/148 meter, krisk 0, step≠odds 0 → PASS.
+quickcheck: f4392cbc PASS (core gates, old save ok; one buổi smoke median 2793/1405 ms = the rare slow sample the live-servants reviewer also saw on live; tasks>200 22/19). 42bda6a9: QUICKCHECK PASS (open 1532 ms, old save ok, core gates; render 244/206, tab 483/461, buổi 1188/1065 ms, tasks>200 18/20).
+HANDOVER (context near the worker ceiling): nothing open on this job. Worktree removed after push.
