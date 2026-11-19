@@ -83,6 +83,10 @@ function inPage(arg){const {TRIES}=arg;const out={rows:{},err:[],pend:[]};
     S.rank=7;row.P=null;{const a=V[1],t=V.find(x=>x!==a&&rkOf(x)>=1&&rkOf(x)<7)||V[2];prep(a,t,S);const x=run(fam,k,a,t);if(x.touched||x.pc.length)row.P=x}S.rank=rk0;
     const q=queenP();if(q&&q!==S){const t=V.find(x=>x!==q);prep(S,t,q);const x=run(fam,k,S,t);if(x.touched)row.N=x;const a=V.find(x=>x!==q&&x!==t),t2=V.find(x=>x!==q&&x!==t&&x!==a);if(a&&t2){prep(a,t2,q);const y=run(fam,k,a,t2);if(y.touched)row.NN=y}}
     S.rank=rk0}catch(e){E("judge:"+k,e)}}
+  /* SELF-PICKED counterpart (Mượn son phấn: the deed picks its own lender, p4Lender, not the probe's target) → N→P = she is the ONLY lender */
+  if(fam==="ag"&&k==="cx4:rougeBorrow"){try{const V=L();const v=V[0];rich(v);row.P=null;v.inv=(v.inv||[]).filter(e=>!lxOf(e.k));const M=lxMiss(v);
+    for(const x of V)if(x!==v)x.inv=(x.inv||[]).filter(e=>!lxOf(e.k));if(M.length){S.inv=(S.inv||[]).filter(e=>!lxOf(e.k));S.inv.push({k:lxKey(M[0],3),d:S.turn,u:BAL.ration.borrow.spare*2});try{lxFix(S)}catch(e){}
+     window.__bot=0;let x;try{x=run(fam,k,v,S)}finally{window.__bot=1}if(x.touched||x.pc.length)row.P=x}}catch(e){E("lender:"+k,e)}}
   if(fam==="act"&&k==="blockf"){try{const V=L();const v=V[0],t=V[1];for(const x of [S,v,t])rich(x);t.block=0;const a0=aff(S,v);affAdd(S,v,300);const x=run(fam,k,v,t);affAdd(S,v,a0-aff(S,v));if(x.touched||x.pc.length)row.P=x}catch(e){E("third:"+k,e)}}
   out.rows[fam+":"+k]=row}
  /* OWN-SERVANT receiver (review FAIL 6 #4): every dirty act is carried by a servant the doer ORDERS (j29 runAct: DIRTY, DIRTY_SENT → jagstf2 stf2Ord

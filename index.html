@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"175dd709+","t":"2026-11-18T23:48Z","c":"receiver-choice r3: site build line","b":"91a4ce2b54d1","h":[{"s":"a837ad32+","t":"2026-11-18T23:30Z","c":"rel-picker r2: site rebuilt"},{"s":"8c23ab31","t":"2026-11-18T23:30Z","c":"role-parity r3 (reviewer): rebuilt root site on 1130a49e"},{"s":"9f00e409+","t":"2026-11-18T22:44Z","c":"stage-rightcol r7: place-tag re-check also every 300 ms while the group list is open (map moves without scroll events)"},{"s":"ca661db3+","t":"2026-11-18T13:38Z","c":"coop-c4-stuck S5a: hold showModal so the room's own armed reshow cannot race the negative check"},{"s":"0dc8f187+","t":"2026-11-18T22:28Z","c":"review coop-thin-f1 r1 #3: site build (index.html / sw.js rebuilt)"},{"s":"6e9277d8+","t":"2026-11-18T21:47Z","c":"entry-blank-r3 r2 (review item 6, whole group): a portrait on its way shows the kit portrait silhouette (§59.1 pf/pm, unknown-f|m); the lin…"},{"s":"3270145f+","t":"2026-11-18T21:25Z","c":"doc-90-women r1: rebuild generated index.html/sw.js (build hash, build line) after comment edits"},{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"}]};
+window.CTM_BI={"s":"b7327fb8+","t":"2026-11-18T23:58Z","c":"receiver-choice r3: test seeds a lender for the rougeBorrow check (was empty in some worlds)","b":"9898656208e2","h":[{"s":"a837ad32+","t":"2026-11-18T23:30Z","c":"rel-picker r2: site rebuilt"},{"s":"8c23ab31","t":"2026-11-18T23:30Z","c":"role-parity r3 (reviewer): rebuilt root site on 1130a49e"},{"s":"9f00e409+","t":"2026-11-18T22:44Z","c":"stage-rightcol r7: place-tag re-check also every 300 ms while the group list is open (map moves without scroll events)"},{"s":"ca661db3+","t":"2026-11-18T13:38Z","c":"coop-c4-stuck S5a: hold showModal so the room's own armed reshow cannot race the negative check"},{"s":"0dc8f187+","t":"2026-11-18T22:28Z","c":"review coop-thin-f1 r1 #3: site build (index.html / sw.js rebuilt)"},{"s":"6e9277d8+","t":"2026-11-18T21:47Z","c":"entry-blank-r3 r2 (review item 6, whole group): a portrait on its way shows the kit portrait silhouette (§59.1 pf/pm, unknown-f|m); the lin…"},{"s":"3270145f+","t":"2026-11-18T21:25Z","c":"doc-90-women r1: rebuild generated index.html/sw.js (build hash, build line) after comment edits"},{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -72291,7 +72291,7 @@ function rcvHelpOpts(p,t){const X=BAL.ag.cx2.help,R=BAL.rcv.help,H=BAL.road.hp,q
    go:()=>{affAdd(p,t,R.af[0]);if(pay(X.bac))return{ok:1,r:p===S?`${t.name} cho ngươi mượn ${X.bac} lượng.`:me?`Ngươi cho ${p.name} mượn ${X.bac} lượng.`:`${t.name} cho ${p.name} mượn ${X.bac} lượng`};
     const x=evGuilty(p,others(p).filter(y=>y&&y!==p&&y!==t&&(y===S||y.alive)));if(x&&evA(p,x,BAL.ag.ev.one))return{ok:1,r:p===S?`${t.name} kể cho ngươi một chuyện về ${x.name}: ${evSg(BAL.ag.ev.one)}.`:`${rcvNm(t)} kể cho ${p.name} một chuyện về ${agcNm(x)}`};
     return{ok:1,r:p===S?`${t.name} tiếp ngươi ân cần.`:`${me?"Ngươi":t.name} tiếp ${p.name} ân cần`}}},
-  {i:1,id:"half",n:rcvKw(1),fx:{},x:`mất: ${half} lượng bạc · được: quý ${balSg(R.af[1])} · ${rcvSeenX(p,t)}`,
+  {i:1,id:"half",n:rcvKw(1),risk:"có rủi ro",fx:{},x:`mất: ${half} lượng bạc · được: quý ${balSg(R.af[1])} · ${rcvSeenX(p,t)}`,
    go:()=>{if(!rcvSeen(p,t))affAdd(p,t,R.af[1]);if(pay(half))return{ok:1,r:p===S?`${t.name} miễn cưỡng đưa ngươi ${half} lượng.`:`${me?"Ngươi":t.name} đưa ${p.name} ${half} lượng cho có`};return{ok:1,r:p===S?`${t.name} tiếp ngươi qua loa.`:`${me?"Ngươi":t.name} tiếp ${p.name} qua loa`}}},
   rcvNoO(p,t,{g:"giữ bạc",r:p===S?`${t.name} khéo từ chối. Nàng quý ngươi -${X.fail}.`:me?`Ngươi khéo từ chối ${p.name}.`:`${t.name} khéo từ chối lời nhờ của ${p.name}`}),
   rcvSabO(p,t,{g:"giữ bạc",r:tq=>p===S?`${t.name} nhận lời rồi đem chuyện ngươi nhờ đi kể${tq?" với "+rcvQn(tq):""}. Danh ${balSg(-R.danh)}.`:me?`Ngươi đem chuyện ${p.name} nhờ đi kể${tq?" với "+rcvQn(tq):""}.`:`${t.name} đem chuyện ${p.name} nhờ đi kể khắp nơi`})]}
@@ -72303,7 +72303,7 @@ function helpAsk(p,t){if(t===S){rcvCard("rcvHelp",{a:p.id},"Lời nhờ",p);retu
  const c=rcvPick(t,p,rcvHelpOpts(p,t),"help");return c.go()}
 PEND.rcvHelp=pp=>{const p=RV(pp.a);if(!p||!p.alive||p.out)return null;
  return{who:pv(p),t:`<p>${p.name} sai người sang: “Nương nương nhà ta gặp chuyện khó, mong được giúp một tay.”</p><p class="past">Ngươi có thể giúp hết lòng, làm qua loa, từ chối, hoặc đem chuyện đi mách.</p>`,
-  o:rcvHelpOpts(p,S).map(o=>({n:o.n,fx:o.fx,x:o.x,go:()=>{const r=o.go();if(r&&r.r)log(r.r)}}))}};
+  o:rcvHelpOpts(p,S).map(o=>({n:o.n,fx:o.fx,x:o.x,risk:o.risk,go:()=>{const r=o.go();if(r&&r.r)log(r.r)}}))}};
 /* ---- a gift to an NPC (j8 giveTo): «take» / «check» (nothing found) keep it — giveTo stores it; «back» / «found» are done here. She answers with HER giftin answers (Nhận / Trả lại quà / Đem đến Thái y viện xét nghiệm), the same numbers ---- */
 function rcvGiftIn(f,t,e){if(!t||t===S||t.coop||!e)return null;const it=itm(e.k),hi=rkOf(f)>rkOf(t);const tg=!!e.t;
  const O=[{i:[0,1],id:"take",go:()=>"take"},
@@ -72320,7 +72320,7 @@ const rcvQ=(p,t)=>{const q=typeof queenP==="function"?queenP():null;return q&&q!
 const rcvQn=q=>q.queen?"Hoàng hậu":q.name;
 const rcvAp=(x,fx)=>{if(x===S)apply(fx);else ap(x,fx)};
 function rcvYesO(p,t,i,o){const R=BAL.rcv,me=t===S,af=R.help.af[i],suc=i?Math.round(R.prop.suc*R.help.half):R.prop.suc,pn=p===S?"ngươi":p.name;
- return{i,id:i?"half":"full",n:o.n||rcvKw(i),fx:Object.assign(suc?{suc:-suc}:{},o.fx||{}),lk:()=>!me&&suc&&(t.suc||0)<suc,
+ return{i,id:i?"half":"full",n:o.n||rcvKw(i),risk:i||o.risk?"có rủi ro":undefined,fx:Object.assign(suc?{suc:-suc}:{},o.fx||{}),lk:()=>!me&&suc&&(t.suc||0)<suc,
   x:`được: ${o.g?o.g+", ":""}${pn} quý ${me?"ngươi":t.name} ${balSg(af)}${suc||o.c?" · mất: "+[suc?`Sức ${balSg(-suc)}`:"",o.c||""].filter(Boolean).join(", "):""}${i?" · "+rcvSeenX(p,t):""}`,
   go:()=>{if(!me)rcvAp(t,Object.assign(suc?{suc:-suc}:{},o.fx||{}));const seen=i?rcvSeen(p,t):false;if(!seen)affAdd(p,t,af);let r=o.go?o.go():"";
    if(seen)r=(r?String(r).replace(/[.\s]*$/,"")+"; ":"")+`${pn==="ngươi"?"ngươi":pn} nhìn thấu là chỉ làm cho có`;return{ok:1,r}}}}
@@ -72338,7 +72338,7 @@ function rcvAsk(k,p,t,x){const D=RCVK[k];if(!D||!p||!t||p===t)return"";if(D.ok&&
  if(t===S){rcvCard("rcvAsk",{k,a:key(p),x:x||null},D.t,p);return `${p.name} sai người sang ${D.act} ngươi. `}
  const c=rcvPick(t,p,D.opts(p,t,x),D.kind||"help");if(!c)return"";const r=c.go();const s=r&&typeof r==="object"?r.r:r;return s?String(s).replace(/([^.!?])$/,"$1. "):""}
 PEND.rcvAsk=pp=>{const D=RCVK[pp.k],p=byKey(pp.a);if(!D||!p||p===S||!p.alive||p.out||(D.ok&&!D.ok(p,S,pp.x)))return null;
- return{who:pv(p),t:D.line(p,pp.x),o:D.opts(p,S,pp.x).map(o=>({n:o.n,fx:o.fx,x:o.x,go:()=>{const r=o.go();const s=r&&typeof r==="object"?r.r:r;if(s)log(s)}}))}};
+ return{who:pv(p),t:D.line(p,pp.x),o:D.opts(p,S,pp.x).map(o=>({n:o.n,fx:o.fx,x:o.x,risk:o.risk,go:()=>{const r=o.go();const s=r&&typeof r==="object"?r.r:r;if(s)log(s)}}))}};
 const rcvSg=(p,me,a,b)=>p===S?a:me?b:null;
 /* Kết giao (j8 ACT.ally, NPC cx:ally): the asker sends BAL.actBac.ally bạc as the gift (paid when sent); yes / mách keep it, «từ chối» sends it back */
 RCVK.ally={t:"Lời kết giao",act:"xin kết giao với",kind:"help",
@@ -72395,7 +72395,7 @@ RCVK.mediate={t:"Lời hòa giải",act:"đứng ra hòa giải với",kind:"hel
 RCVK.blockf={t:"Lời nhờ trả ơn",act:"nhờ trả ơn",kind:"help",ok:(p,v,x)=>{const t=byKey(x);return !!t&&!t.block&&t!==v},
  line:(p,x)=>{const t=byKey(x);return `<p>${p.name} sai người sang: “Ngày trước nương nương nhà ta từng giúp người. Nay xin người nói giúp một lời với Kính sự phòng, rút thẻ bài của ${t?NM(t):"một người"} vài hôm.”</p>`},
  opts:(p,v,x)=>{const t=byKey(x),me=v===S,tn=t?NM(t):"";return[
-  rcvYesO(p,v,0,{g:`trả xong ơn cũ (${p===S?"ngươi":p.name} bớt quý ${balSg(-BAL.favorCost)})`,c:`có thể bị lộ cùng ${p===S?"ngươi":p.name}`,go:()=>rcvBlockGo(p,v,t,0)}),
+  rcvYesO(p,v,0,{risk:1,g:`trả xong ơn cũ (${p===S?"ngươi":p.name} bớt quý ${balSg(-BAL.favorCost)})`,c:`có thể bị lộ cùng ${p===S?"ngươi":p.name}`,go:()=>rcvBlockGo(p,v,t,0)}),
   rcvYesO(p,v,1,{g:"trả ơn cho có",c:"Kính sự phòng khó nghe hơn",go:()=>rcvBlockGo(p,v,t,BAL.road.hp.half)}),
   rcvNoO(p,v,{g:"không dính vào chuyện thẻ bài",r:`${me?"Ngươi":v.name} khéo từ chối, không nhúng tay vào thẻ bài của ${tn}`}),
   rcvSabO(p,v,{g:"không dính vào chuyện thẻ bài",r:tq=>`${me?"Ngươi":v.name} đem chuyện ${NM(p)} nhờ rút thẻ bài của ${tn} đi kể${tq?" với "+rcvQn(tq):""}`})]}};
@@ -72424,7 +72424,7 @@ function rcvJudge(k,a,t,o0){const D=RCVJ[k],q=typeof queenP==="function"?queenP(
    shown odds o (the shown-odds one path; o0 = the odds read before the act spent anything — trinhhh hands over its chứng cứ first), the SAME option list as her card */
 function rcvOddsPick(q,O,o,k){const c=roll(o)?O[0]:O[1];(window.__rcvN=window.__rcvN||{})["judge_"+k+"_"+c.id]=((window.__rcvN||{})["judge_"+k+"_"+c.id]||0)+1;return c}
 PEND.rcvJudge=pp=>{const D=RCVJ[pp.k],a=byKey(pp.a),t=byKey(pp.t);if(!D||!a||!t||a===S||t===S||!a.alive||a.out||t.out||t.alive===false||queenP()!==S||(D.ok&&!D.ok(a,t)))return null;
- return{who:pv(a),t:D.line(a,t),o:D.opts(a,t,S).map(o=>({n:o.n,fx:o.fx,x:o.x,go:()=>{const r=o.go();if(r)log(r)}}))}};
+ return{who:pv(a),t:D.line(a,t),o:D.opts(a,t,S).map(o=>({n:o.n,fx:o.fx,x:o.x,risk:o.risk,go:()=>{const r=o.go();if(r)log(r)}}))}};
 RCVJ.xinhh={t:"Lời xin giáng",say:(a,t)=>`${NMc(a)} sai người dâng lễ, xin ngươi tâu giáng ${NM(t)}. `,
  line:(a,t)=>`<p>${a.name} sai người dâng ${rcvXinPr(a,t)} lượng bạc làm lễ: “Xin nương nương tâu với Hoàng thượng giáng ${t.name} một phẩm.”</p>`,
  opts:(a,t,q)=>{const me=q===S,J=BAL.rcv.judge,P=BAL.rcv.prop,pr=rcvXinPr(a,t),qn=me?"Ngươi":"Hoàng hậu";return[
@@ -77009,7 +77009,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="91a4ce2b54d1";window.CTM_BUILD=BUILD;
+const BUILD="9898656208e2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
