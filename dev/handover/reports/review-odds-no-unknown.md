@@ -1,4 +1,4 @@
-# review-odds-no-unknown — BIG REVIEWER verdict: **PASS LAND READY 6b041ea**
+# review-odds-no-unknown — BIG REVIEWER verdict: **PASS LAND READY 4217568** (re-merge r2 of LIVE 2c5dd55; supersedes 6b041ea)
 PRIORITY #1 CHECK ('Khó lường', 'oddsLead', odds `p`): OD 0 | ledger 0 | claims 1 (worker's own row) | main 14 before → 0 in dev/build after | review/* 0 | archive 0 (KIT.md:899 said it was retired; this branch takes it out of the build).
 Reviewer: BIG REVIEWER (opus), child of FOREMAN C-AG #20. Brief: briefs/root63-cag20-jobs.md JOB 1. Worker report: reports/odds-no-unknown.md. START_CTX ~6 %.
 
@@ -37,3 +37,7 @@ fold-vuoan, fold-toil, ipad-pgin: kit meter at the real word, vu oan hint no lon
 1. Law 4: punishDemoP() 100/25/50 and literal roll(30)/roll(40)/roll(15) (j4/j24/j76/jkc), newsAdd roll(30) are typed numbers, not BAL → one small BAL job.
 2. Side rolls with no wording on `o` cards (j2 «Tâng bốc», «Xin ân điển», j42 «Lén báo tin», jroute «Trao tín vật»/«Dặn cung nữ», jeitem «Phạt nặng» spy confession says «có thể» without chanceW) → same family one level wider.
 3. Kit shows the lv0 `hint` text under ĐƯỢC even when it names a loss (jpoison «Nhận ngay», vu oan «hỏng thì ta mang tội») — kit-wide, pre-existing.
+
+## Re-merge r2 (ROOT-64 order, LIVE 2c5dd55 = hall-names + errand-scene)
+Merged origin/main 2c5dd55 into 6b041ea → **4217568** (only index.html/sw.js conflicted, rebuilt by build_site.sh; FF over 2c5dd55, rechecked before push).
+Gates on 4217568: scan 0 left / 19 exempt / 0 «Khó lường» (new jerr.js included) · odds-no-unknown Fold 69 dialogs/207 opts PASS, iPad 59/179 PASS · odds-meter-back Fold 131/131, iPad 151/151 PASS · quickcheck --cpu 4 PASS (render 214/248, tab 463/442, buổi 1207/1315 ms, old save ok) · ge-guard 6/6.
