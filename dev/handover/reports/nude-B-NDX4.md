@@ -62,3 +62,24 @@ Refs a51/a65: KLpSlnEkqp + TdwDfOyVNR + gOmpVvOSXO (her round-2 Nữ đế a36 c
 Credits round 3: 276. NDX4 total 1656.
 Sheet: dev/handover/review-sheets/nu-de-B/nudeB_m05_r2_vs_r3_stylelock.jpg (round-2 row above; new row = a18–a36 "same (r2)" + new a51/a65; 575 KB).
 FINAL m05 Nữ đế set: a18 eIPlrOzdqL · a26 EbYi4eAuuO · a36 gOmpVvOSXO · a51 fHzNi9jCDY · a65 jUoTDPcLD0.
+
+## ROUND 4 — owner Lượt 701 (crown) + 702 (Nữ đế keeps the a36 colours at a51/a65), coordinators ROOT-55 → ROOT-56
+Prompt (mk.py ea60aa80d + hand-warmer word commit):
+- CROWN (all ages): the old fixed blueprint (gold dragon with a pearl in its claws + 2 phoenixes with raised wings + gold hairpins + in-crown no-flower clause) → the HH t8 crown sentence, read from the HH build, with only 3 swaps (nine-phoenix crown → dragon crown; central gold phoenix holding a pearl string in its beak → central gold dragon holding a pearl; than a noble consort's crown → than the Empress's crown) + the lưu clause kept (owner F7, Lượt 397). The separate NO-flowers sentence stays.
+- a51/a65 COLOURS (B23): the elder "Her robe keeps … DEEPER, DARKER …" sentence is removed; the COLOUR RULE = the a36 one verbatim (identical at all 5 ages); the swatch line = the a36 line (the elder "deeper, subdued antique-gold elder shade" is gone). The face age text, silver hair and D15 STYLE LOCK are kept.
+- a65 item: "a hand warmer of gold carved with dragons" → "a hand warmer of green jade carved with dragons" (ROOT-56 allowed this; it came out gold in r3).
+- Gates: crown = HH crown + 3 swaps + lưu, no blueprint words; COLOUR RULE = a36 at a36/a51/a65; no DEEPER/DARKER/darken/elder shade/antique gold (upper-case elder words only, because the approved a36 COLOUR RULE contains "a little deeper or a soft ivory"); no "hand warmer of gold". check_store PASS 5/5 after BW6's S33→S35/X17 change for nude (583902d8).
+- NOTE: BW6 re-planned the HH angles between my a36 and a51 gens, so the a18–a36 pictures carry the OLD HH-t8 angle and a51/a65 the NEW one. The current builder now gives a18 slight RIGHT, a26 3/4 RIGHT, a36 FRONTAL (mirrored). a18–a36 were NOT redrawn for that; ROOT-56 decides.
+| age | gen | cut | result |
+|---|---|---|---|
+| a18 | jUoTeEJLD0 | Lw8VXB8swO | PASS: new crown shape (central dragon, wide jewelled wings) |
+| a26 | fHzN2cOCDY | cpSkl1a0eP | PASS: crown differs (broad jewelled band), jade-teal parasol |
+| a36 | vQA4ZiIa47 | xSB0XPJjfW | PASS: own crown variant (teal wings); = style ref (image 3) for a51/a65 |
+| a51 | iG5fxdu3uK | — | FAIL: no visible silver, face ~30 |
+| a51 | If3JzkbtvE | s7IMfxEl8e | PASS gen 2: silver streaks, painterly mature face, bright colours |
+| a65 | xSB0vitjfW | Xm9S2dYBfo | PASS: silver hair, soft painted lines, bright colours, GREEN JADE hand warmer, frontal |
+Crowns: a18 and a26 clearly different; a36/a51/a65 look alike (teal wings), because a36 is the a51/a65 style reference (D15).
+Credits round 4: 6 gens = 135×6 + 3×5 = 825. NDX4 total 2481.
+Sheet: dev/handover/review-sheets/nu-de-B/nudeB_m05_r3_vs_r4_crown_colour.jpg (r3 row above r4 row, 3-line tags, 576 KB).
+FINAL m05 Nữ đế set (r4): a18 Lw8VXB8swO · a26 cpSkl1a0eP · a36 xSB0XPJjfW · a51 s7IMfxEl8e · a65 Xm9S2dYBfo.
+HANDOVER (if more Nữ đế work): mk.py is the only prompt maker (python3 dev/art/nude-B/mk.py mNN); log with NDX_WORKER/NDX_REF3 env (log.py); sheet with sheet_oldnew.py. m01 prompts must be rebuilt with mk.py before any m01 gen (its old a51/a65 files fail S35/X17).
