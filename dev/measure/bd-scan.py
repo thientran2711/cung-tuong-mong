@@ -58,3 +58,13 @@ nb=[g for g in gives if g[4]=='NO BOOK']
 print(f'6c give/buy/receive options: {len(gives)} · in bdO/BDP {sum(g[4]=="bdO" for g in gives)} · used up {sum(g[4]=="used up" for g in gives)} · NO BOOK {len(nb)}')
 for g in gives:
   if g[4]!='used up' or '-v' in sys.argv:print(f'  {g[4]:8} {g[0].split("/")[-1]}:{g[1]} {g[2][0]}.{g[2][1]} «{g[3]}»')
+# origin-level rows on the per-life switch (Foreman E 19/11 06:50Z): every bdTxt / bdTxtProp call outside the road files
+import glob
+hits=[]
+for f in sorted(glob.glob('dev/build/j*.js')):
+  if f.endswith(('all.js','jrd_bd.js','jrd_bd2.js')):continue
+  for i,l in enumerate(open(f,encoding='utf-8'),1):
+    for m in re.finditer(r'bdTxt(?:Prop)?\(',l):hits.append((f.split('/')[-1],i,re.sub(r'\s+',' ',l.strip())[:80]))
+print(f'origin-level rows on the per-life switch (bdTxt/bdTxtProp outside the road files): {len(hits)}')
+for h in hits:print(f'  {h[0]}:{h[1]} {h[2]}')
+
