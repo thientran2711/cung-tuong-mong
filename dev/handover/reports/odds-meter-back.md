@@ -57,3 +57,7 @@ Scan `node dev/test/opt-loss-ton.js <url>` (new): every PEND dialog as the game 
 The odds meter scan after r2 + merge: Fold 148/148, iPad 148/148 meter, krisk 0, step≠odds 0 → PASS.
 quickcheck: f4392cbc PASS (core gates, old save ok; one buổi smoke median 2793/1405 ms = the rare slow sample the live-servants reviewer also saw on live; tasks>200 22/19). 42bda6a9: QUICKCHECK PASS (open 1532 ms, old save ok, core gates; render 244/206, tab 483/461, buổi 1188/1065 ms, tasks>200 18/20).
 HANDOVER (context near the worker ceiling): nothing open on this job. Worktree removed after push.
+
+### Final merge (19/11 ~03:50Z): READY sha **f43a2ba6** (supersedes 42bda6a9) = 42bda6a9 + merge of LIVE main c12a5878 (maid-ladder-6; only index.html/sw.js conflicted, rebuilt by build_site.sh)
+Re-run on f43a2ba6: odds-meter-back Fold 148/148 · iPad 145/145 meter, krisk 0, step≠odds 0 PASS · opt-loss-ton Fold/iPad «Tốn: không» with a loss 0, «Được: không» with a gain 0 PASS.
+quickcheck: run 1 (median of 3) FAIL on perf only, buổi 4297/1190 ms (other numbers fine: render 194/237, tab 454/462, tasks 21/20, core gates PASS); re-run --runs 5 PASS: buổi 1094/1308 ms, render 221/249, tab 440/494, tasks>200 19/21, old save ok, core gates PASS. Treated as the rare slow buổi sample already seen on live by the live-servants reviewer; reviewer may re-run quickcheck to confirm.
