@@ -6,8 +6,9 @@ Part 1 STORE: a prompt may only ADD sentences to the store text, never drop or r
   or (for a slot sentence) if >=90 % of its words are present in one prompt sentence.
 Part 2 APPROVED: the owner-approved sentences of the prompt's scope (table APPROVED below) must be present VERBATIM (only {slot} words differ)
   and the BANNED phrases absent. LAW #0 (Lượt 505): only what the OWNER approved/raised is in these tables.
+Part 3 BANNED REFS (owner Lượt 554/555): the prompt text or --refs id,id,... must not name an old khuê các set-A key/id (dev/art/KC_BANNED_REFS.json).
 Usage
-  python3 dev/art/check_store.py <prompt_file> <store_args...>                     # both parts (scope from the args / prompt)
+  python3 dev/art/check_store.py <prompt_file> <store_args...> [--refs id,id]                     # both parts (scope from the args / prompt)
   python3 dev/art/check_store.py <prompt_file> --scope tpN|prN|trieuN|mama|nude [--age aNN]   # approved part only (no store args)
   python3 dev/art/check_store.py --self | --audit | --registry-md
 Exit 1 = FAIL -> do NOT generate. Ledger lines carry "store_check":"PASS" and "approved_check":"PASS"."""
@@ -805,6 +806,13 @@ def main():
     if a[0]=="--registry-md":
         open(os.path.join(ART,"APPROVED_SENTENCES.md"),"w",encoding="utf-8").write(registry_md()); print("wrote dev/art/APPROVED_SENTENCES.md"); return 0
     pf=a[0]; prompt=open(pf,encoding="utf-8").read()
+    # BANNED REFS (owner Lượt 554/555): old khuê các set A (kc2k / kc2k-mass keys or their Magnific ids) may never be used again.
+    refs=a[a.index("--refs")+1] if "--refs" in a else ""
+    if "--refs" in a: i=a.index("--refs"); a=a[:i]+a[i+2:]
+    sys.path.insert(0,ART); import kc_ref
+    hits=kc_ref.banned_hits(prompt+" "+refs)
+    if hits:
+        print('STORE CHECK FAIL',pf,'— BANNED REF (old khuê các set A, KC_BANNED_REFS.json):',', '.join(sorted(set(hits)))); return 1
     if "--scope" in a:   # prompt without store args (triều phục, ma ma spec files, …): approved part only
         scope=a[a.index("--scope")+1]; age=a[a.index("--age")+1] if "--age" in a else None
         f,w,_=check_text(prompt,scope,age=age); report(pf,scope,f,w)
