@@ -92,3 +92,8 @@ KIT FIRST: the worker draws nothing. Data is ready in jshelf.js `shelfView(p)` �
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
 | 18/11 | stage-here | **K-ICO-ALERT** `img/kit/ico-alert.webp` painted square rail icon "Sắp đóng cửa" (same family as ico-cal / ico-goal; e.g. a small closing palace gate or a hanging bell), read by the existing rail `busy` motion + seal dot | kitStageRail item `closing` (jstagehere.js) | Foreman C | rail text glyph "!" (KIT §77.1 glyph mode) + `kbusy` + `kbadge` in use; swap = add `icon:"img/kit/ico-alert.webp"` and drop `glyph` in jstagehere.js |
+
+## 19/11 kyngo-daily r2 (E18b) — option-line sentiment: class before meaning
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 19/11 | E18b kyngo-daily | **kaSent class precedence** (j63.js:18): today a value's MEANING (kcls: KRED words) wins over its explicit kit class `<span class="g">`; an item NAME holding a bad-sounding word (e.g. «Son phần giáng», key lxson2) under «thành:» is shown under TỐN / MẤT. Ask: an explicit class g/r set by the writer wins over kcls (or kcls ignores text inside `<b>` item names). Family: every option line that prints an item name (shops, gifts, lost pieces, Nội vụ phủ). | jky.js specW worked around (names no piece on the option line) | MAIN kit keeper | OPEN |
