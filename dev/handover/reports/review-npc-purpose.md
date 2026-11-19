@@ -139,3 +139,21 @@ NEXT: G1 #8 fixes 1-3 and sends a new SẴN SÀNG KIỂM; the reviewer re-runs r
 - quickcheck --runs 5 vs 45c6dbea: PASS. render 236/224 ms (+5 %), tab 360/355, **buổi 1272/1119 ms (+14 %)**, tasks>200 15/15, old save ok, core gates PASS. Buổi swings a lot from run to run (RE-CHECK 3: 987/1483 = −33 % on almost the same code), so PHASE B re-measures perf ×2 against live before the verdict.
 - NOTE (clean-up, not blocking): the gate prints stale json `why` entries no row needs any more (l:cung ngươi thăm hỏi (muốn, l:sang tặng ngươi, l:ngươi, l:thư về nhà kể khổ, l:soát, …). Drop them so a reason can't later cover a new shift.
 NEXT: PHASE B on G1 #10's merged head (add7b105 = 0a6e877a + live fa411d6f) once it posts SẴN SÀNG KIỂM.
+
+## PHASE B on fe88277c (G1 #14 SẴN SÀNG; contains live edb2e724; reviewer session_01964izEUgw5hZTBxuEguL4K, 19/11 ~14:30Z) — NOT LAND READY: 1 rate family open + final-merge of live 1a4df595 pending
+PRIORITY #1 CHECK: report + FOREMAN_D_STATUS + reports/npc-purpose.md §G1 #14 read; reused the repo's own suites; no other branch on this subject.
+| check (reviewer ran itself, fe88277c vs live edb2e724) | result |
+|---|---|
+| npc-purpose-scan --strict | PASS 419 |
+| npc-why 11 · logic 16 · g1 11 · g1b 9 · g1c 8 · g1d 11 · g1e 11 · g1f 11 · g1g 11 | PASS |
+| ag-soft 20 · ag-know 25 · ag-sell 19 · AG-ALL 21 · ag-soft-probe 6 · agmaid 23 · minister-agents 11 · monthly-allotment 42 | PASS |
+| odds-no-unknown (Fold + iPad) · odds-meter-back · opt-loss-ton · men-forbidden 288 bad [] | PASS |
+| quickcheck --runs 5 ×2 (CORE GATES one-core/rules-one-source/kit-conform/hooks, time-spill, old save) | PASS ×2; perf new/live: render 224/223 + 215/229 ms, tab 392/393 + 405/458, buổi 1216/1079 (+13 %) then 1085/1109 (−2 %) = noise; tasks>200 20/17, 18/20 |
+| coop-e2e ×3 under 2 busy loops | 68/68 ×3 |
+| role-parity probe change (G1 #14) | read: honest + two-way (worlds added symmetric, undone; proof-knows-target matches the real NPC asymmetry; k61 exemption by exact labels) — scan head vs live to be re-run on the merged head (live drift-2 changed the same file) |
+| npc-purpose-rates ×2 (12×200, base live ×3 runs) | run 1 **FAIL**, run 2 PASS, head identical (0 diff keys) → gate flips again |
+OPEN (blocking):
+1. **NPC calm-down family ('… cho nguôi lòng', jemoact eaNpcWeek act path) 1.8x**: base (2 solo live runs) 680/691 → head 1247. Đàn hát tự thưởng 98-101 → 298 (3.0x, the flipping row), Đập đồ 66 → 142, Mắng cung nữ 70-74 → 146, Khóc thầm 135 → 242, Viết thư nhà 145 → 208, mẹ ôm 140 → 170, Thắp hương 26 → 38. Outburst EVENTS stay in band (tracked rows), so the extra lines come from the calm-down ACT path: the near-best → `{all:true}` way pick, and/or more NPCs passing actV. Law 11: fix or explain as a family (old vs new rate per way and total), and add a track row for the family total so a flip on one way can't hide it.
+2. **Gate stability**: "out against every base run" still flips on a 3.0x edge row (base runs 98/101 move the mean across the line). Judging the family (item 1) as one track row solves this case. Show 2 reruns with the same verdict.
+3. **Final-merge live 1a4df595** (parallel-time + role-parity-drift-2; MAIN ROOT-70): conflicts in assemble.py and dev/tools/role-parity-scan.js. Keep live's drift-2 and G1 #14's symmetric worlds; then head gaps = live gaps with the same scan.
+Delta re-gate on the merged head: static + npc-why/g1 suites + role-parity head/live + rates ×2 + quickcheck + coop ×1.
