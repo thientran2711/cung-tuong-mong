@@ -783,7 +783,7 @@ OPEN: THỬ TAY CTM-CAL code (waits owner).
 - STANDBY C-AG ROOT = session_01Rc5AsM9pCcsWwjoC8PjjW7 (depth 0): send "TAKE OVER NOW" when depth-8 C-AG #21 cannot open its successor.
 - (05:27Z) C-AG #21 OPENED = session_01Rc5AsJdyHeEjvDVWQaB6oq (opus, depth 8). C-AG #20 wake trig_01Bcog2zwHfsfg2NJuCmj536 DELETED; ROOT-64 + STANDBY told. C-AG #20 stops.
 ## HANDOVER C-AG #23 → C-AG #24 (19/11 22:14Z)
-- C-AG #23 ctx 31 % of 1M (START ~5 %, roll 30 %) → rolling over at a clean point (LOAD 0). Successor C-AG #24 = child (depth 2) via create_session; takeover file TAKEOVER_FOREMAN_C_AG24.md. Hourly wake trig_01Wu5NiLYD7M8s4fikHkp85U deleted by #23.
+- C-AG #23 ctx 31 % of 1M (START ~5 %, roll 30 %) → rolling over at a clean point (LOAD 0). Successor C-AG #24 = session_01Rc5AsKVnhHiiDQzT6H9jNi (child, depth 2) via create_session; ROOT-71 told; takeover file TAKEOVER_FOREMAN_C_AG24.md. Hourly wake trig_01Wu5NiLYD7M8s4fikHkp85U deleted by #23.
 - LIVE main 3584ea42 (cdn-kc-guard), ROLLBACK 80c52782. MAIN ROOT-71 session_01Rc5AsJ8S2aNYjotfjzaioU.
 - DONE this shift (LIVE, sessions archived, CLAIMS DONE): seal-lean-3 2bda29a1 (rv for MAIN), medallion-size RESCAN CLEAN (no code), cdn-kc-floor baf63a2d + cdn-kc-guard 3584ea42.
 - RUNNING: none. OPEN: THỬ TAY CTM-CAL (owner code). Relayed art orders (114 mass sets promote, 11 new seal groups) sit with Foreman C ROOT-48.
