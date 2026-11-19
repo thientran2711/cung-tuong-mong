@@ -147,7 +147,7 @@ function dhLose(p,e){if(typeof loLose!=="function"||!p||!e)return null;let c=nul
   if(p===S){if(Q.length>q0&&Q[Q.length-1]&&Q[Q.length-1].t==="Đồ thất lạc")Q.pop();pushDil(mkP("dhlost",{id:c.id}),"Ấn tín thất lạc")}}return c}
 window.dhLose=dhLose;
 PEND.dhlost=pp=>{const c=typeof loGet==="function"?loGet(pp.id):null;if(!c||c.st==="done"||c.own!=="me")return null;const nm=IT[c.k]?itm(c.k).n:"món đồ";const L=LO.cost;
- const O=[];const add=(kind,n,x)=>{const C0=L[kind]||{};if((C0.k&&typeof can==="function"&&!can(C0.k))||(C0.bac&&S.bac<C0.bac))return;O.push({n,fx:{},j67:`${typeof loCostTxt==="function"?loCostTxt(kind):""} · ${x}`,
+ const O=[];const add=(kind,n,x)=>{const C0=L[kind]||{};if((C0.k&&typeof can==="function"&&!can(C0.k))||(C0.bac&&S.bac<C0.bac))return;O.push({n,fx:{},p:kind!=="soat"&&typeof loOdds==="function"?loOdds(kind,S):undefined/* law 4: loDo rolls loOdds */,j67:`${typeof loCostTxt==="function"?loCostTxt(kind):""} · ${x}`,
   go:()=>{try{if(typeof spend==="function"&&C0.k)spend(C0.k);const r=loDo(kind,S,c);if(r){log(r);Q.push({t:"Tra xét",who:typeof pMe==="function"?pMe():null,h:`<p>${r}</p>`,btn:"Đã hiểu"})}}catch(e){console.error(e)}}})};
  add("cct","Báo Cung Chính ti tra xét","chứng cứ thật mới thành án; báo lên thì ai cũng biết");add("ask","Lặng lẽ hỏi cung nhân","kín đáo, có khi dò ra dấu vết");
  O.push({n:"Để sau",fx:{},j67:`kèm: tra xét sau ở Tư trang › Việc › Đồ thất lạc; không tìm lại được thì Danh -${I().lostDanh}`,go:()=>{}});
