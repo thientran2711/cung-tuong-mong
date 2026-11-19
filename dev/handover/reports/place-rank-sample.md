@@ -203,3 +203,5 @@ Notes (ours, NOT prompt changes — LAW #0): Tần reception left armchair pair 
 | Khôn Ninh reception | rgXnGrDxtc | ~15 % → ~4 % |
 Sheet: dev/handover/review-sheets/place-rank/place-rank-B-phoi-khon-ninh.jpg · CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/place-rank-B-phoi-khon-ninh.jpg
 Notes (ours, not changed): Khôn Ninh reception — the front low table + stools now reach the bottom edge, so on the people sheet figures 3–4 stand among/over the stools (feet not on clear floor).
+### Owner Lượt 548 (sheet A): all distances OK EXCEPT Phi bedroom v6 "gần quá" → v6b redraw (A20), only the camera distance
+Phi bedroom v6b aFGyN6afSh (prompts_v6b.json: FLOOR SHARE sentence says "same distance as image 3, NOT closer, whole bed fits, nothing cropped, camera only a little lower"; image 3 = own v3 SyhTG51Ub8). Open centre floor ~14 %. v6 If3UHfPtvE kept in img/_review/place-rank/v6/. Sheet A rebuilt.

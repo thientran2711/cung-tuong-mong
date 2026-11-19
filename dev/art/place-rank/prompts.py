@@ -189,3 +189,66 @@ for k, p in out.items():
     out6[k] = q
 json.dump(out6, open(os.path.join(D, 'prompts_v6.json'), 'w'), ensure_ascii=False, indent=1)
 print('v6', len(out6))
+
+# ---- HQP (t7) SAMPLE pair (owner Lượt 520 "add HQP bedroom + reception to compare with Hoàng hậu"; ROOT-50 answer: no HQP palace in game data ->
+# PR7 picked TRƯỜNG XUÂN CUNG (in the game's Đông lục cung list, no rooms drawn yet). A1: ONE sample pair, then STOP. L11 own layout, L5 rectilinear,
+# I1 yellow/phoenix gradient (HQP = clearly less yellow than HH, phoenix allowed), L12 floor share (v6 numbers). Image 3 = closeness guide only (v6 Phi bedroom).
+CARD_TX = ("Trường Xuân cung signature style, the same in every room of this palace: white magnolias (ngọc lan) are its flower, painted on the screens, "
+           "embroidered on the silks and in the vases; borders of the endless swastika fret and round longevity medallions carved in the beams and furniture; "
+           "dark zitan sandalwood with gold lacquer and mother-of-pearl inlay; square-backed zitan furniture (never round-backed); a tall vase-shaped doorway "
+           "(never a round moon gate) in a carved openwork partition; screens with kingfisher-blue feather inlay. ")
+LUX7 = ("HOÀNG QUÝ PHI level: clearly richer than a Quý phi and only one step below the Empress: gold lacquer and gilt carving, mother-of-pearl, "
+        "pearls, jade, coral, cloisonné and kingfisher-blue inlay, many treasures, yet less gold and less yellow than an Empress's room. ")
+COL7 = (" COLOURS (owner rank rule): golden apricot yellow, a warmer and softer gold-yellow than the Empress's bright imperial yellow, only in the bedding "
+        "and seat brocades and cushions; deep ruby red for the curtains, lanterns and tassels; the walls, pillars and wood stay dark zitan and red lacquer, "
+        "so the room reads clearly less yellow than an Empress's room. Phoenixes allowed but few and small: a pair of small phoenixes embroidered or "
+        "carved among magnolias, never golden phoenix statues, never phoenixes everywhere.")
+FLOOR7 = (" LAYOUT NUMBERS (owner Lượt 477, 491, 520): seen as close and as low as in image 3 (image 3 is only a guide for how close and how full the room is, "
+          "NOT for its arrangement, colours or furniture: this room has its own different arrangement as written above), the furniture fills about five "
+          "sixths of the room, the main piece large with its base reaching down to about seven eighths of the picture height; the open floor in front is "
+          "only a strip of about one tenth of the picture height at the centre, and nothing stands on that strip, because people will stand there. "
+          "The right corner is furnished, never empty or bare: a table group stands there inside the outer fifth of the width, set back from the bottom "
+          "edge, between one half and seven eighths of the picture height, so a person standing in front of it covers it naturally.")
+HQP = {
+ 'truong-xuan-cung-hqp-ngu': dict(room="Trường Xuân cung chính điện bedroom, the private bedchamber of the Imperial Noble Consort (Hoàng quý phi), the highest consort below the Empress, "
+    "in ancient China, a real room in daily use, seen straight on with the back wall straight across the picture and the right side wall running towards the viewer "
+    "in clear perspective, meeting at a square corner; dark zitan pillars and beams with gold lacquer; the main subject is a grand walk-in canopy bed (a babu bed: a "
+    "bed built like a small carved room with its own front porch and a carved openwork front gate) standing against the back wall, centred, square to it and seen "
+    "straight on, the large clear main subject, its carved front gate open, ruby red silk curtains tied back inside, golden apricot brocade bedding embroidered "
+    "with white magnolias and a pair of small phoenixes, pearl strings on the gate; to the left of the bed, flat against the back wall, a tall folding screen with "
+    "kingfisher-blue feather inlay and magnolias; to the right of the bed a carved openwork partition with a tall vase-shaped doorway giving a glimpse of a "
+    "dressing room; tall carved lattice windows in the right side wall onto a sunny courtyard garden with a magnolia tree; along the walls a gold-lacquer dressing "
+    "table with a tall bronze mirror and a jewellery cabinet open with pearls and jade, a zitan curio shelf of jade, coral and cloisonné treasures, ornate hanging "
+    "palace lanterns with ruby red tassels, a clothes stand with a ruby red robe, cloisonné vases of magnolia branches, a gold incense burner, slippers on the "
+    "bed porch step. " + CARD_TX + LUX7 + COL7 + RECT + FLOOR7,
+    floor='warm polished wooden floorboards', mat='the bed porch step', key='the walk-in canopy bed'),
+ 'truong-xuan-cung-hqp': dict(room="Trường Xuân cung chính điện reception room, the hall where the Imperial Noble Consort (Hoàng quý phi), the highest consort below the Empress, "
+    "in ancient China receives her guests, a real room in daily use, no bed anywhere, seen straight on with the back wall straight across the picture and the right "
+    "side wall running towards the viewer in clear perspective, meeting at a square corner; dark zitan pillars and beams with gold lacquer, a horizontal gilt "
+    "plaque with carved characters high on the back wall; a carved openwork floor-to-ceiling arch frame (a luozhao) spans the room from wall to wall, square to the "
+    "back wall, framing an inner raised area; inside it, on a low one-step platform against the back wall, exactly centred and seen straight on, the host seat: a "
+    "wide square-backed zitan luohan daybed with gold lacquer and mother-of-pearl inlay, golden apricot brocade cushions embroidered with magnolias, a small low "
+    "kang table with a gold-trimmed tea set in its middle, behind it a large folding screen with kingfisher-blue feather inlay and white magnolias with a pair of "
+    "small phoenixes; on each side of the platform a tall cloisonné flower stand with magnolias; in front of the arch frame ONE straight row of square-backed zitan "
+    "armchairs with golden apricot cushions and small tea tables between them stands flat along the right side wall, square to it (seen in perspective, never "
+    "curved), and a carved vase-shaped doorway opens in the left part of the back wall; deep ruby red sheer curtains tied back with tassels, ornate hanging palace "
+    "lanterns with ruby red tassels, curio shelves of jade, coral and cloisonné treasures, a gold incense burner, a guqin on a stand, potted plants. "
+    + CARD_TX + LUX7 + COL7 + NOSOFA + RECT + FLOOR7,
+    floor='warm polished wooden floorboards', mat='the platform', key='the luohan daybed on its platform'),
+}
+HQPREF = 'If3UHfPtvE'  # image 3 = closeness guide only (v6 Phi bedroom)
+outh = {k: T.replace('{SEASON_TIME}', 'summer morning').replace('{TIME_LIGHT}', 'morning daylight').replace('{ROOM_LINE}', r['room'])
+           .replace('{FLOOR}', r['floor']).replace('{MAT_UNDER}', r['mat']).replace('{KEY_PIECE}', r['key']) for k, r in HQP.items()}
+assert all('{' not in v and 'moon-gate' not in v for v in outh.values())
+json.dump(outh, open(os.path.join(D, 'prompts_hqp.json'), 'w'), ensure_ascii=False, indent=1)
+print('hqp', len(outh), max(len(v) for v in outh.values()))
+
+# ---- v6b (owner Lượt 548 via ROOT-50, A20): Phi bedroom v6 If3UHfPtvE "đang bị sát, gần quá" -> ONLY the camera distance changes:
+# a little farther back, distance like the Quý phi bedroom v6 (gOmViD0SXO, OK), not cropped; floor numbers of v6 stay. image 3 = v3 SyhTG51Ub8 (own layout).
+FLOOR6B = FLOOR6.replace("seen a little closer and lower so less floor shows:",
+    "seen from about the same distance as image 3, NOT closer (owner Lượt 548: not too close), so the whole canopy bed with its top and its curtains fits "
+    "inside the picture with some space around it, nothing cropped; the camera is only a little lower so less floor shows:")
+assert FLOOR6B != FLOOR6
+outb = {'canh-phuc-cung-phi-ngu': out6['canh-phuc-cung-phi-ngu'].replace(FLOOR6, FLOOR6B)}
+assert outb['canh-phuc-cung-phi-ngu'] != out6['canh-phuc-cung-phi-ngu']
+json.dump(outb, open(os.path.join(D, 'prompts_v6b.json'), 'w'), ensure_ascii=False, indent=1)
