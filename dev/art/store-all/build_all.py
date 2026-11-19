@@ -76,12 +76,13 @@ def _inject(g):
     for pid,k in PR.items():
         d=PRS[k]; assert g["PRINCESS_ROWS"][pid]==(d["main"],d["sec"],d["hex1"],d["hex2"],d["motif"],d["flower"]),("store row differs",pid)
 
-STYLE_OVERRIDE=None   # None = default; True (CLI --style) = force the old 2/3-image refs with the style image
+STYLE_OVERRIDE=None   # None = default (own picture only, Lượt 482); True (CLI --style) = force the old 2/3-image refs with the style image, ONLY for a brand-new character
 def NOSTYLE_FOR(rank):
-    """Lượt 414/416 RULE: the style image (6AbGv6EiJO, the owner's "M09") is used ONLY for the t1 thiếu nữ itself; ranks t2..t8 (and t8o) use her OWN t1 picture as image 1 and drop the style sentences
-    (store --nostyle; swatch of the royal ranks = image 2). Nữ đế ('nude') keeps the style image (not named by the owner yet)."""
+    """Owner Lượt 482 (widens Lượt 414/416/479): the style image (6AbGv6EiJO, the owner's "M09") is ONLY for creating a brand-new character. All 90 characters exist,
+    so EVERY rank t1..t8 and Nữ đế ('nude') uses the person's OWN picture as image 1 and drops the style sentences (store --nostyle; swatch of the royal ranks = image 2).
+    CLI --style (STYLE_OVERRIDE) forces the old style-image refs, ONLY for a NEW character."""
     if STYLE_OVERRIDE: return False
-    return rank not in (1,"nude")
+    return True
 def store(person,rank,age="a18"):
     """EXACT stdout of the store CLI for this person/rank (princess rows injected into the store's own tables)."""
     if rank=="nude": argv=["build.py",person,"v0","--nude3"]+(["--age",age] if age!="a18" else [])   # Nữ đế = the store HH t8 + added Nữ đế sentences (build.py nude3); crown varies per person (NUDE_CROWNS)
@@ -113,7 +114,7 @@ FABRIC_B="FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.
 NOFLOWER="NO flowers in the hair or on the crown at this rank (flowers only at ranks 1 to 6)."
 def angle_sentence(person,rank):
     """Lượt 440: one of the 14 standing angles (7 + 7 mirrored, build.py ANG14), rotated per person: ANG[(t-1+(n-1))%14]; the head turns WITH the body; frontal or three-quarter only."""
-    return "ANGLE: "+LAST_G["ang_for"](person,rank)+"; her head turns together with her shoulders and body, never back-turned, never in profile."
+    return "ANGLE: "+LAST_G["ANG14"][plan("a18")[(ALIAS.get(person,person),rank)][0]]+"; her head turns together with her shoulders and body, never back-turned, never in profile."
 def laws(t):
     L=[HAIR_LOW if t<=3 else HAIR_HIGH,sleeve(t),ONE_LAYER]
     L.append(SZ[t] if t<=6 else NOFLOWER)
@@ -136,17 +137,40 @@ def family(word):
     for fam,ws in FAMILY_WORDS:
         if any(x in w for x in ws): return fam
     return "other"
-FAMILY_CONTRAST={"green":["deep rose","crimson"],"pink":["jade green","deep teal"],"purple":["crimson","antique gold"],"neutral":["deep rose","deep teal"],
- "yellow":["blue-violet","deep sapphire blue"],"red":["jade green","deep teal"],"blue":["warm coral rose","soft apricot-gold"],"other":["deep rose","deep teal"]}
+FAMILY_CONTRAST={"green":["deep rose","crimson"],"pink":["jade green","deep teal"],"purple":["crimson","deep teal"],"neutral":["deep rose","deep teal"],
+ "yellow":["blue-violet","deep sapphire blue"],"red":["jade green","deep teal"],"blue":["warm coral rose","deep rose"],"other":["deep rose","deep teal"]}
+# Lượt 483 (owner, angry: "the outfits all look ONE colour - you deleted the outfit's SECONDARY colour"): root cause = f2c2835 (W72, 18/11 18:30, first --low builder): the
+# store COLOUR RULE puts the secondary only "in the inner robe and linings" (copied from the t8 ORIG1 sentence where yellow dominates). Fix = slot REPLACE of that clause + one ADDED
+# OUTFIT COLOURS sentence (t1-t6). Secondary = (1) her listed secondary if it is a real colour of another family (not neutral/metal/yellow); (2) else the second colour MEASURED
+# from her live original (ORIG1 second entry, consorts W74-W77) if it is chromatic, another family and not yellow; (3) else a contrasting colour (FAMILY_CONTRAST, no gold/yellow).
+import colorsys as _cs
+def _hexhs(h):
+    r,g,b=(int(h[i:i+2],16)/255 for i in (1,3,5)); hh,ss,vv=_cs.rgb_to_hsv(r,g,b); return hh*360,ss
+def secondary(person):
+    """(colour words, source) of her outfit SECONDARY colour."""
+    g=LAST_G; pal=g["DATA"][person][0]; main=pal.split(" and ")[0]; sec=pal.split(" and ")[-1] if " and " in pal else ""
+    fm=family(main); fs=family(sec) if sec else "neutral"
+    if sec and fs not in ("neutral",fm,"other","yellow"): return sec,"listed secondary"
+    o=g["ORIG1"].get(person)
+    if o:
+        m=re.search(r"(.+?) like (#[0-9A-Fa-f]{6})",o[1]); m1=re.search(r"#[0-9A-Fa-f]{6}",o[0])
+        if m and m1:
+            h2,s2=_hexhs(m.group(2)); h1,_=_hexhs(m1.group(0)); d=abs(h2-h1); d=min(d,360-d)
+            w=re.sub(r"^(a|an) ","",m.group(1).strip())
+            if s2>=0.15 and d>=40 and not (40<=h2<=70) and family(w) not in ("neutral","yellow",fm): return w+" like "+m.group(2).upper(),"live original (ORIG1 measured)"
+    c=FAMILY_CONTRAST[fm]; return c[_pn(person)%len(c)],"contrast (listed %s is neutral/metal/same family)"%(sec or "none")
+def outfit_colours(person):
+    """Lượt 489: the owner-APPROVED two-colour sentence (Cao Ly princess V2, Lượt 301-303, dev/art/owner-copy/pr_cl_t2_V2.txt) copied VERBATIM; only the two colour slots swapped.
+    It lived only in the owner-copy generators (mk_ranks_v3.py / mk_princess_ranks.py), never in the store t8-prompt-B/build.py that build_all copies, so the store path never had it."""
+    main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
+    return f"TWO-COLOUR RULE: the whole outfit uses EXACTLY TWO colours that clearly interact: the MAIN colour {main} and the SECONDARY colour {sec}, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, never a third colour."
 def phibach_colour(person,pal=None):
     """(main, own secondary, family main, phi bạch colour, note)"""
     pal=pal or LAST_G["DATA"][person][0]; main=pal.split(" and ")[0]; sec=pal.split(" and ")[-1] if " and " in pal else ""
     fm=family(main); fs=family(sec) if sec else "neutral"
     # the main may itself be a neutral robe (ivory...) -> contrast comes from the neutral row
-    if sec and fs not in ("neutral",fm,"other"):
-        return main,sec,fm,sec,"own secondary (other hue family)"
-    c=FAMILY_CONTRAST[fm]; col=c[_pn(person)%len(c)]
-    return main,sec,fm,col,"contrast (secondary %s is neutral/same family)"%(sec or "none")
+    col,why=secondary(person)   # Lượt 483: phi bạch = her outfit SECONDARY colour (never gold/yellow below t6)
+    return main,sec,fm,col,why
 def phi_bach(person,has_shawl=True):
     main,sec,fm,col,why=phibach_colour(person)
     intro="the sheer shawl draped behind her back and over her arms" if has_shawl else "over her outfit she wears a sheer silk shawl (phi bạch) draped behind her back and over her arms; the shawl"
@@ -168,8 +192,17 @@ def capelet_cut(person):
 def collar_cut(person):
     return ("COLLAR CUT (flowing): the collar's lower edge follows soft CURVES, never flat horizontal edges: "+CURVE_SHAPES[_pn(person)%len(CURVE_SHAPES)]+"; "
      "the front is NOT closed or buttoned from top to bottom: it opens gradually from the collar downward in a long soft V, flowing and graceful (uyển chuyển), never cramped or boxy.")
+HQP_LUX="HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), a layered pearl-and-gold necklace, pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress."
+def item_colour(person,rank,F):
+    m=re.search(r" Pose: .*?(?:holding|holds|carrying|offering|raising|with) (an? [^,.]+?)(?: in | up | raised| held| forward| beside| at |,|\.)",F)
+    main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
+    return f"HELD ITEM COLOUR: the held item and any embroidery, painting or tassel on it are in a colour family clearly different from BOTH her robe colour {main} and her secondary colour {sec}."
 def extras(S0,person,rank):
     L=[]
+    if isinstance(rank,int):
+        if rank<=6: L.append(outfit_colours(person))
+        L.append(item_colour(person,rank,S0))
+        if rank==7: L.append(HQP_LUX)
     if isinstance(rank,int) and rank<=6:
         L.append(phi_bach(person,"shawl" in S0))   # owner Lượt 397 via ROOT-47: phi bạch on EVERY thường phục rank t1-t6 (consorts and princesses), also where the store text has no shawl; never t7/t8/Nữ đế/triều phục
         if "capelet" in S0 and rank==4: L.append(capelet_cut(person))   # Lượt 434: the curved/open-V cut is ONLY for the Tần t4 capelet; t5 (and every other rank) keeps the approved store collar (closed high collar covering the neck)
@@ -194,7 +227,7 @@ GRACE=["her head tilted very slightly to one side, a soft graceful line from her
  "her elbows held softly away from her body, her arms forming soft rounded lines",
  "her head tilted very slightly against the turn of her body, a lively graceful counter-line"]
 def grace_sentence(person,rank):
-    return "GRACE (pose variety, every rank its own): "+GRACE[(rank-1+3*(_pn(person)-1))%8]+"."
+    return "GRACE (pose variety, every rank its own): "+GRACE[plan("a18")[(ALIAS.get(person,person),rank)][2]]+"."
 _POSE_MEMO={}
 def _pose_tpl(g,tr,j,adapt=True):
     """spec5 entry verbatim; adapt=True -> SPEC5_ADAPT whenever the entry is listed there (also the lantern+item entry, which carries {prop}: one held item only, FIGURE_GATE D3)."""
@@ -206,7 +239,8 @@ def _banned(t,age,prop=""):
     'reading {prop}' only when the item is a book or scroll."""
     b=[r"look(?:ing)? back"]+([r"twirl",r"skipping",r"dance",r"swirl",r"light turn"] if (t>=6 or age in ("a51","a65")) else [])
     if t>=6 or age in ("a51","a65"): b+=[r"butterfly",r"songbird",r"stair"]
-    if t>=7: b+=[r"walking",r"mid-step"]
+    if t>=6: b+=[r"walking",r"mid-step",r"skipping",r"stepping"]   # Lượt 486: from Quý phi up calm, little movement (t1-t5 draw from the full lively pool)
+    if t>=7: b+=[r"stole",r"ribbon",r"sash"]   # Lượt 486: no shawl-like drape on t7/t8 (owner saw "cái dây" on m13 t8 = pose 'a breeze lifts her long stole')
     if not re.search(r"book|scroll",prop): b+=[r"reading"]
     if not re.search(r"fan|book|scroll",prop): b+=[r" open "]
     b+=[r"looking down"]   # FIGURE_GATE D3d / store pose tail: never looking down
@@ -228,25 +262,46 @@ def _store_pose(g,S):
             if mm: return (tr,j),(mm.group(1) if mm.groups() else None),body
     raise AssertionError(("store pose not in spec5 table",body))
 def dedupe_pick(person,rank,age):
-    """(template,prop,store template,store body) for this rank: the store pick unless a lower rank (same person, same age) used it."""
+    """(planned template, prop, store template, store body): Lượt 476 the pose is the seeded-random plan pick (not the store's rank-tied spec5 slot)."""
     key=(person,rank,age)
     if key in _POSE_MEMO: return _POSE_MEMO[key]
-    used=[dedupe_pick(person,t,age)[0] for t in range(1,rank)]
     S=_clean_pose(store(person,rank,age)); g=LAST_G
-    sp,prop,body=_store_pose(g,S); tr,mi=g["SPEC5_IDS"][person]; i=mi-1
-    ukeys=set().union(*[_keys(_pose_tpl(g,*u)) for u in used]) if used else set()
-    bad=lambda c:any(re.search(q,_pose_tpl(g,*c)) for q in _banned(rank,age,prop)) or bool(_keys(_pose_tpl(g,*c))&ukeys)
-    if sp not in used and not (_keys(_pose_tpl(g,*sp))&ukeys): pick=sp
-    else:
-        # fallback order: her own list from (i+t-1), then the other five lists starting at a per-person offset (n mod 5) and a per-person slot (n+t) -> same-rank neighbours differ
-        n=_pn(person); O=g["_SP5_ORDER"]; k0=O.index(tr); rest=O[k0+1:]+O[:k0]; rest=rest[n%5:]+rest[:n%5]
-        cand=[(tr,(i+rank-1+k)%6) for k in range(6)]+[(L,(n+rank+k)%6) for L in rest for k in range(6)]
-        bad0=lambda c:any(re.search(q,_pose_tpl(g,*c)) for q in _banned(rank,age,prop))
-        pick=next((c for c in cand if c not in used and not bad(c)),None) or next(c for c in cand if c not in used and not bad0(c))   # relax the gesture-key rule only if nothing else is left
-    _POSE_MEMO[key]=(pick,prop,sp,body); return _POSE_MEMO[key]
+    sp,prop,body=_store_pose(g,S)
+    _POSE_MEMO[key]=(plan(age)[(person,rank)][1],prop,sp,body); return _POSE_MEMO[key]
+# ---------------- Lượt 476 PLAN: angle / pose / grace NOT tied to the rank ----------------
+# Owner Lượt 476 (via ROOT-48): "standing ANGLE (and pose/gesture) must NOT be tied to the rank" -> per (person, rank) a SEEDED RANDOM draw (seed = person id + rank,
+# reproducible), no repeat inside one person's 8 ranks, spread across people so a rank never shares one angle for everyone. Method (one global pass over PEOPLE in fixed order):
+# for each person, ranks are visited in a seeded order; each rank takes, among the options still unused by that person (and, for poses, allowed at that rank/age/item and not
+# sharing a gesture key with her other ranks), the option used LEAST so far at that rank over all people; ties broken by random.Random(person+rank). -> 8 distinct per person,
+# per-rank counts balanced (angles 87/14 ≈ 6.2 per cell). Same for the 36 spec5 poses (verbatim entries + ADAPT/FRONTAL) and the 8 GRACE lines. Replaces ANG[(t-1+(n-1))%14] here.
+import random as _random
+_PLAN={}
+def plan(age="a18"):
+    if age in _PLAN: return _PLAN[age]
+    store("c06",1,age); g=LAST_G
+    allp=[(L,j) for L in g["_SP5_ORDER"] for j in range(6)]
+    def item(c,t):
+        it=g["age_item"](c,"t%d"%t,None,None); return it[0] if isinstance(it,tuple) else it
+    ca={t:{k:0 for k in range(14)} for t in range(1,9)}; cp={t:{k:0 for k in allp} for t in range(1,9)}; cg={t:{k:0 for k in range(8)} for t in range(1,9)}
+    P={}
+    for c in PEOPLE:
+        rr=list(range(1,6)); _random.Random(c+"-order").shuffle(rr); rr=[8,7,6]+rr; ua=set(); up=[]; ug=set()   # Lượt 486: the calm ranks choose first from the small calm pool; ua=set(); up=[]; ug=set()
+        for t in rr:
+            R=_random.Random(f"{c}-{t}")
+            def best(opts,cnt):
+                opts=list(opts); R.shuffle(opts); return min(opts,key=lambda o:cnt[t][o])
+            a=best([k for k in range(14) if k not in ua],ca); ua.add(a); ca[t][a]+=1
+            prop=item(c,t); keys=set().union(*[_keys(_pose_tpl(g,*u)) for u in up]) if up else set()
+            ok0=[o for o in allp if o not in up and not any(re.search(q,_pose_tpl(g,*o)) for q in _banned(t,age,prop))]
+            ok=[o for o in ok0 if not (_keys(_pose_tpl(g,*o))&keys)] or ok0
+            pz=best(ok,cp); up.append(pz); cp[t][pz]+=1
+            gr=best([k for k in range(8) if k not in ug],cg); ug.add(gr); cg[t][gr]+=1
+            P[(c,t)]=(a,pz,gr)
+    _PLAN[age]=P; return P
 def apply_dedupe(person,rank,age,S):
     pick,prop,sp,body=dedupe_pick(person,rank,age)
     if pick==sp and _pose_tpl(LAST_G,*pick)==_pose_tpl(LAST_G,*pick,adapt=False): return S
+    store(person,rank,age)   # LAST_G back to this rank
     g=LAST_G; new=_frontal(g,_pose_tpl(g,*pick)).format(prop=prop)
     a=" Pose: "+body; assert S.count(a)==1,("pose slot",person,rank)
     return S.replace(a," Pose: "+new,1)
@@ -254,13 +309,18 @@ TQ_RIGHT=", body turned slightly three-quarters to the right"
 def _clean_pose(S):
     """Lượt 440: the store's pose pass appends 'body turned slightly three-quarters to the right' at every odd pose slot (why almost everybody faced right); the ANGLE sentence (14 standing angles, left AND right) replaces it."""
     return S.replace(TQ_RIGHT,"")
+def _sec_slot(person,rank,S):
+    """Lượt 483 slot REPLACE (colour slot of the store COLOUR RULE, t1-t6): the secondary is no longer only 'in the inner robe and linings'."""
+    if not (isinstance(rank,int) and rank<=6): return S
+    sec,_=secondary(person)
+    return re.sub(r"with [^;]+? in the inner robe and linings",f"with {sec} in the inner robe and linings",S,count=1)   # colour slot swap only (no new wording, Lượt 489)
 def build(person,rank,age="a18"):
     person=ALIAS.get(person,person); S0=store(person,rank,age); S=S0
     if rank=="nude": return S0,S0,[]
     if "Her face: . " in S:
         face=FACE_M.get(person,FACE_REF); S=S.replace("Her face: . ","Her face: "+face+(". " if not face.endswith(".") else " "),1)
     S=_clean_pose(S)
-    S=apply_dedupe(person,rank,age,S); store(person,rank,age)   # Lượt 469 pose dedupe (slot); re-run store so LAST_G is this rank's
+    S=apply_dedupe(person,rank,age,S); store(person,rank,age); S=_sec_slot(person,rank,S)   # Lượt 469 pose dedupe (slot); re-run store so LAST_G is this rank's
     anchor=" Pose:"; assert S.count(anchor)==1,("pose anchor",person,rank)
     add=laws(rank)+[angle_sentence(person,rank),grace_sentence(person,rank)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
     return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
@@ -280,7 +340,7 @@ def check(person,rank,age="a18",ref=None):
     S=S0
     if "Her face: . " in S:
         face=FACE_M.get(ALIAS.get(person,person),FACE_REF); S=S.replace("Her face: . ","Her face: "+face+(". " if not face.endswith(".") else " "),1)
-    S=_clean_pose(S); S=apply_dedupe(ALIAS.get(person,person),rank,age,S); store(ALIAS.get(person,person),rank,age)   # Lượt 469: the pose slot may be re-picked (spec5 verbatim)
+    S=_clean_pose(S); S=apply_dedupe(ALIAS.get(person,person),rank,age,S); store(ALIAS.get(person,person),rank,age); S=_sec_slot(ALIAS.get(person,person),rank,S)   # Lượt 469: the pose slot may be re-picked (spec5 verbatim); Lượt 483 secondary slot
     if stripped!=S: errs.append("F minus added sentences != store output (pose slot dedupe applied)")
     for x in add:
         if x not in F: errs.append("law sentence missing: "+x[:50])

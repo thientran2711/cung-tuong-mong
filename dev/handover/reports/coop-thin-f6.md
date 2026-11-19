@@ -117,3 +117,37 @@ Commits on top of f080a27a:
 | quickcheck (old save) | PASS (core gates PASS, old save ok; perf new/live render 235/259 ms, buổi 1225/1229 ms) — needs dev/art in the worktree (mk-layer-scan) |
 | LOOK Fold 755x1000@2 host + iPad 1180x820@2 guest (after a deck card + a quest step; scratch, not uploaded) | kit frames only (Nhập cung intro, Tuyển chọn exam card on the host; Rương đồ / Rương Nội vụ phủ allotment boxes on her phone, once each); no overflow, no cut text |
 | coop-thin-d L4 | 6 kit reds (IMG data-kfsp) also on baseline 7f74ce44 = pre-existing, not F6a (FOR B: owner of kfsp) |
+
+## REVIEW r1 — PASS review/coop-thin-f6-r1 be2a8fcc (descends from origin/main 2bda29a1, re-fetched right before push)
+PRIORITY #1 CHECK ('review-coop-thin-f6'): OD 0 | ledger 0 | claims: this reviewer only | main 2bda29a1 (no F5/F6) | review/*: coop-thin-f6 d8d8447f (reviewed), coop-thin-f5-r1 9b46e1ad (inside), coop-thin-f6b fedde6ef (merges this sha), coop-thin-hostnull e4e06059 (not landed, not merged) | archive 0.
+Reviewer session_01N1tNP5ayE9b7ZYtFitWYfo (opus), depth 7, START_CTX ≈ 3 % of 1M (used_tokens reads 0; estimate) → rollover ≈ 28 %; finished below it.
+Branch = d8d8447f + merge main c02748c2 (6f3eb405) + reviewer fix e132fdb0 + FAST PATH merge main 2bda29a1 (be2a8fcc; jmark seal = display, no clash with RDIFF kmmCheck). Only index.html / sw.js conflicted, rebuilt by build_site.sh.
+
+### Fixed here
+| # | finding | before | after |
+|---|---|---|---|
+| R1 | **LIVE main bug, not F6a (solo too):** j29.js runAct wrapper declared `const sv` inside the DIRTY if-block; the «qua loa» line (oc==="half") read `sv` outside it → ReferenceError, the dirty order act failed (coop-thin-f1 takeaway / vp / laydo / laydol rows + "no page errors"; same reds on main c02748c2). Family scan (LUẬT SỬA CẢ NHÓM): eslint no-undef per module with every module's top-level names as globals, main vs fixed — `sv` was the only new real hit; the rest are typeof-guarded / window-exported names. One latent same-class item left (FOR B): jcloth.js:309 `h0.apply(this,arguments)` in a top-level arrow (ReferenceError only if a cloth face-fx entry has no stain kind; same on main). | f1 L11 swap 18/26 | `let sv=null` hoisted; f1 L11 swap 20/22, L10 20/22 (the 2 left = main receiver-choice gift rows, below) |
+
+### Checks (brief items 1–8)
+1. One hand: host deals in her context (E step / ctxOut when HKEY turn:buổi changes); her phone takes o.hd (plain cards) and never deals except to feed __g cards; no reshuffle on resend / reconnect (key unchanged). H1/H2 + every A row "both phones same" green (L11, swap, 4G). Host reload deals a new hand = solo (the deck is not saved).
+2. Costs from BAL on the host: act(i) = solo `act` (cardCost / canPay / done / Q guards) in her context; `back` returns the host's `used`. `used` drift (law 4): the KEEP fix in seatOf/seatDrop is right (same life + week + buổi only); the 38/39 4G row did not come back in 4 4G runs (L11 38/38, swap 39/39, final 40/40 ×1 + the TRIP run). one-core ×4 PASS.
+3. Forged input: act dec by index+name, else first not-done card of that name, else refused (A-bad green); __g kinds refused. q72Do/Drop/Ask/Call, servAct, elderAct, empAct run the solo engines, whose own guards return before any spend on an unknown id / index / key (read: j72:186-206, j10:91, jstaff elderAct, j8:498); empAct by person id (never her own S); sgOver/sgServ steps limited to sgStep values (O3 green). No item lost / duplicated: stand-in RDIFF restore (siFix) correct; prCheck's prSeen marker rides her person, so a rank-up gift set is given once whichever side runs it.
+4. Cards / floaters once on her phone: hostCard false on every row; LOOK: host Fold 755x1000@2 shows only his own Nhập cung scene; guest iPad 1180x820@2 her own result card (quest step «THÀNH … Cho vay 30 bạc», kit result card) and her hand under the test's staged Tần edict. Shots in scratch only, deleted; nothing uploaded.
+5. Level gate: F6a code behind on(11) except the KEEP fix (all levels, intended) and solo-identical refactors. Tripwire L11: F1/act 0, F1/cardH 0, F1/directActs 108 (leAttire net-zero probe), "?" 352–371. The "?" rest, probed by level + flags: all at L11 with the view on; RDIFF / emoSee / mkSync writes (lxInit/lxFix/alInit/alFix/kmmOwned/emoSee) happen with CW.inLife = her life-pick throwaway world (part B, replaced by the host's person at accept); kitHereMsg / stageCapFix / figPick / khInit / netOf S.visit, lsSync S.logs, wxkSync S.wxkG (her own khắc weather view, by design) = UI-only; refreshHere / onPos = H; evdSync = H; stClose = net-zero; faceFor / figPick S.staff / fid / maid = G (lazy face identity); queueCard / e68 = D/G; exS (exam window record) = F6b. No orphan.
+6. F6b hook: TH.gKinds / TH.gLift fit F6b #4 fedde6ef (exam / toil / steal lifted at 12; aaMG listed for H by F6b).
+7. Latency (local wrangler, alone): L11 median 398–526 ms, swap 384 ms; 4G (LAG 85, CPU ×4) median 894 ms (one run beside another browser: 1115 ms) — confirms the worker's 822–873 within noise.
+8. Laws: 3 ✓ (no cost-only path; refused = nothing) · 4 ✓ · 6c ✓ · 1 ✓ (both seats, swap) · 7 no new player word · 9–12 no UI part changed · others not touched.
+
+### Gates (local wrangler THINMAX 11 unless "live")
+| gate | result |
+|---|---|
+| coop-thin-f6 L11 / swap / 4G / 4G swap | 39/39, final 40/40 · 38/38, final 39/39 · 38/38, final 40/40 · 39/39 |
+| coop-thin-f5 L10 / swap | 30/30 / 30/30 |
+| coop-cyc THIN=11 / swap · THIN=10 | 73/73 / 73/73 · final 73/73 (earlier 68/73 ×2 'som/giau host drew her' = load flake: F6a d8d8447f with the KEEP fix OFF gave 70, 73, 73; the F5-r1 base gave 73, 68, 73, 74 — same class, not F6a) |
+| coop-thin-f1..f4 at L11 + swap | f1 20/22 (swap; L10 20/22) · f2 24/25 (L10 25/26) · f3 32/37 (L10 34/37) · f4 17/18 (L10 18/18) — reds: (a) **main receiver-choice** (same reds on main c02748c2: f1 F2 gift ×2, f2 P5 invite, f3 X1/X1/X2; f3 G1/G5 «trả lại …» = the receiver refused by roll, piece stays in her bag); (b) **test twin at L11**: f3 B1 / f4 P1 rows also carry a rank-up whose gift set the HOST rolls (F6a RDIFF prCheck) while the twin rolls it on her phone (same count, both phones identical; the setup writes S.rank on her phone, which reaches the host only in her next intent) — FOR B: the f3/f4/f5 twin needs a host-side rank stage + an intent before the rows (a plain stage was tried and does not cure it) |
+| coop-thin a L1 · b L4 · c L4 · e L5 · e-net L6 (live) · d L4 | 24/24 · 136/136 · 16/16 · 33/33 · 20/20 · crashes at «Quà tặng» giftin — **same crash on main c02748c2** (receiver-choice) + the known 6 IMG data-kfsp kit reds |
+| coop-e2e / swap · night · timer · p2 (live) | 68/68 / 68/68 · 105/105 · 43/43 · 45/45 |
+| coop-b1 (live) | 33/41 (main's run crashed at setup on the live Worker; known flake class) |
+| one-world seeds 1–10 · one-core ×4 · Worker npm test · quiet scan | 10 × PASS · PASS ×4 (final head too) · thin ALL OK · 41 reads / 32 reachable, no new |
+| quickcheck | PASS (old save ok; render 176/191, tab 382/392, buổi 1113/1104 ms new/live; core gates PASS) |
+FOR MAIN: deploy the Worker with THINMAX 11 at landing (all L11 tests ran on a local wrangler dev); R1 (j29 sv) also fixes a LIVE solo crash. FOR B: main's receiver-choice broke coop-thin-d (giftin crash) + f1/f2/f3 gift / invite rows (tests stale vs the new 4-answer gift); jcloth.js:309 latent `arguments`; the f3/f4/f5 twin rank-up staging at L11.

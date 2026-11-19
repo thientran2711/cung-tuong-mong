@@ -1,0 +1,175 @@
+# ART RULES — current rules only (one line per rule, newest wins)
+USE 1/3: `python3 dev/art/rule.py find <words…>` FIRST — VN or EN, accents optional (e.g. `find tay áo`, `find góc đứng`).
+USE 2/3: rule exists → `python3 dev/art/rule.py set <ID> "<new text>" --luot N` replaces it IN PLACE (old line → ART_RULES_HISTORY.md); never a second line for one rule.
+USE 3/3: no rule → `python3 dev/art/rule.py add <A-N> "<text>" --luot N` (refused if similar exists); after any change `python3 dev/art/rule.py check`.
+Line format: `ID | rule | source (Lượt / time) | FG = line in dev/art/FIGURE_GATE.md (full history + owner verbatim) | over: older rules this replaces`. Open contradictions: dev/art/ART_RULES_CONFLICTS.md.
+Ranks: t1 Đáp ứng · t2 Thường tại · t3 Quý nhân · t4 Tần · t5 Phi · t6 Quý phi · t7 Hoàng quý phi (HQP) · t8 Hoàng hậu (HH). Ages: a18 a26 a36 a51 a65.
+
+## A. Process / approval
+A1 | ANY new drawing (new design, new rule applied, new room, new rank) = ONE sample set first → owner verdict → only then more; a worker never redraws on its own after a sample is sent; foremen give ONE explicit GO per round. | Lượt 463, 464 | FG 30 | over: Lượt 229b, 234
+A2 | No mass production of a group until the owner gives an explicit GO for that group; samples may continue one gen at a time, each looked at before the next. | Lượt 234, 339 | FG 603, 879 | over: Lượt 229b hard stop
+A3 | A new DESIGN sample shows 3–4 clearly different options side by side; she picks one. Do NOT send colour-option rounds (credit cost) — pick colours by rule. | 18/11 22:25Z; Lượt 306 | FG 245, 818
+A4 | Approval images = the actual 2K transparent PNG files (1024x2304 RGBA), one figure per file, caption names person/rank and OLD or NEW; old file then new file; a sheet is only an extra overview. Look at every file yourself first. | Lượt 256 | FG 648 | over: 18/11 one-sheet-per-person (FG 206), Lượt ~220 sheet size (FG 583b)
+A5 | Every message/file/caption to the owner starts with "Lượt N". | 18/11 22:00Z; 19/11 03:15Z | FG 225, 583
+A6 | Send every finished picture right away; never hold a finished picture to ask first. | Lượt 279b, 280 | FG 747
+A7 | Only the word "duyệt" approves; "ok" about one part approves that part only. | 19/11 00:05Z | FG 257
+A8 | A visible fault in an approved picture is still fixed; approval covers the design, not the defect; scan the whole family (LUẬT SỬA CẢ NHÓM). | 19/11 00:30Z | FG 101
+A9 | A figure failing the gate is regenerated automatically (no asking); report gens per figure; stop after 6 fails and report the best. | 18/11 03:56Z | FG 212-215
+A10 | Praised pictures are BENCHMARKS for checking, never extra reference images. | 18/11 22:05Z | FG 249
+A11 | Check every eye/face at full size before sending (symmetry, gaze, teeth). | Lượt 310 | FG 837
+A12 | A person who fails repeatedly is NOT redrawn again from her picture → write a COMPLETELY NEW person (COMMON_v3 + new person line). | Lượt 316, 317 | FG 851
+A13 | "Vẽ lại" a POSE = a different pose AND a different angle; "vẽ lại" a design = re-run the same approved prompt (see conflicts). | Lượt 302; 18/11 22:02Z | FG 808, 224
+A14 | A rank-pipeline test uses an already-approved thiếu nữ face with no rank set yet; never draw a new thiếu nữ for a rank test. | Lượt 381 | FG 933 | over: Lượt 377
+A15 | Naming to the owner: thiếu nữ faces are "thiếu nữ khuê các / nhà nghèo (mNN)", never "cung nữ"; say "nhị đẳng", never "đại cung nữ". | 19/11 00:20Z, 01:55Z | FG 102, 536
+A16 | Every brief to a painter points to this file + FIGURE_GATE; reviewers FAIL any gen whose prompt differs from the store form except slots. | 18/11 22:20Z | FG 44
+
+## B. Prompt build (store, shared vs own, method)
+B1 | LAW #1: the 19/11 store prompts (dev/art/store-all/build_all.py f73a457 / dev/art/t8-prompt-B/build.py) are APPROVED; never rewrite or "improve" their fabric/brushwork sentences. | Lượt 397, 395 | FG 6-7
+B2 | Every rank prompt for every person (princesses too) = STORE text copied word for word (build.py --low 1..6, --t7, build t8). Only SLOT words change: face line, main/secondary colour + hex, motif, held item + its colour, hair-flower words, pose/angle; later owner laws are ADDED as sentences, never by deleting a store sentence. | Lượt 371, 373, 359 | FG 921, 924, 906 | over: Lượt 333 m19 templates
+B3 | STORE GATE: before every consort/princess rank gen run `python3 dev/art/check_store.py <prompt> <args>` → must print STORE CHECK PASS; FAIL = no gen; ledger line carries "store_check":"PASS". | Lượt 371, 373, 375 | FG 33-34
+B4 | SHARED vs OWN: what is common to ranks is ONE copied sentence (identical text); each rank/person only adds its own slot part. | Lượt 459 | FG 22
+B5 | An approved prompt is never rewritten: a change cuts ONLY the part that changes and inserts the new part, everything else word for word. | Lượt 295 | FG 790
+B6 | A painter never types a prompt by hand: every prompt = exact stdout of the builder; every gen logged in dev/art/gen_ledger.jsonl {gen_id, cmd, prompt, refs}; `build.py --verify` before any sheet; a missing wording → Foreman C adds it to the builder by copying approved text. | 19/11 01:15Z | FG 139
+B7 | A group/age with no builder path cannot be painted; dev/art/BUILDER_COVERAGE.md must show it green first. | 19/11 01:15Z | FG 139g
+B8 | REFERENCES: style image 6AbGv6EiJO RETIRED — only for creating a brand-new character. EVERY gen of the existing 90 (all ranks incl. t1 redraws, thường phục, triều phục, Nữ đế, ma ma, skins) uses the person's OWN picture as the single reference (see conflicts on the royal swatch). | Lượt 482 (19/11) | FG 19 | over: Lượt 434, 414, 416, 359; style3_girls, style2 portraits, "STYLE IMAGE ALWAYS" (FG 533, 548, 566)
+B9 | GEN METHOD: Magnific gpt-2-6, 2K pixel sizes (single 1024x2304, lineup 2048x1024; never 1k sizes), WITHOUT transparentBackground, plain light parchment bg, then images_remove_background. | Lượt 222, 242-244, 274 | FG 586, 620, 711
+B10 | No image-edit method: one-shot prompts only. | Lượt 242-244, 273 | FG 617, 701 | over: Lượt 241 edit-in-place
+B11 | Faces from words: COMMON_v3 + one person line, seed 7172; a redraw of an approved face uses a FACE-ONLY CROP of her approved picture as image 1, same seed. | Lượt 283, 291, 306 | FG 756, 778, 818
+B12 | FABRIC words: the store fabric sentences stand; HQP/HH = prompt B "FABRIC: thick gold-embroidered brocade …"; brocade stays brocade — grace only from cut and drape, NO gauze/sheer/voile outer layer unless the costume really has one. | Lượt 364, 353, 283 | FG 909, 897, 755 | over: 18/11 "no soft/flowing words" (FG 107-109), Lượt 279 gauze sentence
+B13 | Every rank flows like t1–t3 (silk flows as silk, brocade as brocade), never stiff or tube-straight. | Lượt 326, 339 | FG 864, 879
+B14 | COLOUR TONE: "tươi kiểu trầm" = the sheet5 tone level (medium saturation/lightness); never vivid/saturated/neon/rực, never dusty/greyed at young ages, never faded or silvery; neutral white daylight (no warm cast). | 19/11 00:10Z; Lượt 344, 272 | FG 103, 885, 695
+B15 | Every thường phục = the APPROVED two-colour sentence copied VERBATIM from dev/art/owner-copy/pr_cl_t2_V2.txt (princess Cao Ly V2 deep rose + jade green, cuts xSByOSyjfW/yiuGA83PW9/cpS8oJg0eP): "TWO-COLOUR RULE: the whole outfit uses EXACTLY TWO colours that clearly interact: the MAIN colour <main> and the SECONDARY colour <secondary>, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, never a third colour." Only the two colour names are slot words; never write a new colour sentence. | Lượt 489 (19/11) | FG - | over: Lượt 483 (19/11); Lượt 303; Lượt 301 "2–3 colours"
+B16 | The held item AND its decoration are in a colour family different from BOTH outfit colours; the item colour is written explicitly in every prompt. | Lượt 486 (19/11) | FG 26, 818, 143 | over: Lượt 306; 18/11 08:00Z
+
+## C. Proportions / row
+C1 | Women: keep the old live figure's own body, height and head size (variety wanted); no proportion reference image, no m09 overlay; fix only a figure clearly too short/odd. | 18/11 07:05Z, 07:08Z | FG 74, 81
+C2 | A figure with no live original (Nữ đế, Thái hậu) takes body proportion from the same person's t8. | 18/11 07:05Z | FG 74
+C3 | Owner row (display only): skull top on the upper red line, feet on the lower red line (headtop.py method); crowns stick out above. | 18/11 03:35Z | FG 82
+C4 | Crowns/buns are extra height; never shrink head or body for them. | 18/11 | FG 83
+C5 | Men (eunuchs, officials, Emperor, vương gia, princes): prompt only, no proportion gate; taller than women (game scale 1.07); body balanced with head by eye. | 18/11 03:45Z | FG 75
+C6 | Children: draw normally, no gate. | 18/11 03:45Z | FG 76
+C7 | Princesses: never reed-thin (no "eight heads tall / long legs" wording), head not too big. | Lượt 273; OD:L1238 | FG 704, 127
+C8 | Every woman of every group has a18, a26, a36, a51 AND a65 pictures; every rank she can hold × every age. | 19/11 00:40Z; OD:L567 | FG 199, 208
+
+## D. Face / expression
+D1 | Face = the person's OWN face, never M09's; faces of different people clearly different. | Lượt 282, 283 | FG 133, 751, 756
+D2 | M09 gives drawing style + skin colour only; never its face, never its fabric. | Lượt 279, 283 | FG 740, 756 | over: Lượt 286 (M09 hair colour)
+D3 | HAIR COLOUR: keep the v3 hair wording that is in the prompts now; no more hair-colour changes. | Lượt 293 | FG 786 | over: Lượt 286, 288, 291
+D4 | Mouth CLOSED, lips together, NO teeth ever; a visible natural smile (small to bright closed-lip); never a stretched grin, never stern. | Lượt 289, 285; 18/11 16:37Z | FG 773, 760, 155
+D5 | Eyes fully open and bright; never hooded, half-lidded, sleepy, narrow or slanted (mắt xếch); never sad/teary. | Lượt 285; 11/14 | FG 760, 152
+D6 | EYE LAW: both eyes symmetrical, both irises look the same way. HEAD LAW: head held up, chin level or slightly raised. | Lượt 310 | FG 837
+D7 | HEAD-BODY LAW: the head turns WITH the body (no frontal head on a 3/4 body). | Lượt 326 | FG 864
+D8 | Faces never show personality; every face belongs to ONE LOOK GROUP LOOKS[(n-1)%6]: Tươi tắn, Dịu dàng, Trong trẻo, Đoan trang, Sắc sảo, Tinh nghịch (catalogue dev/art/face-common/LOOK_GROUPS.md). | Lượt 292, 293, 299 | FG 782, 786, 799 | over: Lượt 289 expression = personality
+D9 | Clean bare forehead: no hoa điền on any figure (item only); no moles. | 18/11 23:25Z; OD:L10 | FG 134, 165
+D10 | Nothing ever covers any part of the face (held item below the chin). | 18/11 16:25Z | FG 137
+D11 | STYLE: semi-realistic painterly guofeng, near-3D, soft light, fair un-rosied skin (choice B); everyone beautiful at every age; never tanned, sly, glare, smirk, pout, hand at mouth, caricature. | 11/14; OD:L1305 | FG 145-152, 173
+D12 | a36 = young for her age (no lines); a51 = visibly older but beautiful, soft fine lines, clear silver-grey streaks at temples, never white hair, never haggard. | 18/11 16:30Z, 21:35Z, 22:58Z | FG 201, 217, 236
+
+## E. Standing angles, poses, held items
+E1 | ANGLE: 14 angles (7 + 7 mirrored); angle AND pose are a SEEDED RANDOM draw per (person, rank): 8 distinct values inside one person; across people the same rank must not share one angle (roughly even counts); never "rank X = angle Y for everyone". | Lượt 469, 476 | FG 28 | over: Lượt 229, 289, 295, 308, 321, 3d2 frontal-only (FG 138)
+E2 | Never more turned than three-quarter (≥3/4 of the body visible); no profile/near-profile, no look-back over the shoulder, no back-turned body. | Lượt 297; 18/11 21:55Z | FG 794, 136
+E3 | POSE = the spec5 POSES table (dev/figwork/spec5.py) wording; the legs/feet are written INSIDE each pose, matched to it (no generic leg sentence); never one stiff identical stance, never "feet together/standing straight" forced. | Lượt 258, 259, 302 | FG 656, 662, 808, 144
+E4 | CALM WITH RANK AND AGE: the random angle/pose draw (E1) comes from a LIVELY pool for t1–t5 and a CALM, dignified pool for t6–t8; Thái hậu, Nữ đế, a51/a65 also calm (small restrained gestures, never wide arms/legs, dancing, twirling); maids may be lively. | Lượt 486 (19/11) | FG 26, 40, 200 | over: 18/11 22:20Z, 23:25Z
+E5 | HELD ITEM: exactly ONE item, the hand really grips/uses it, below the chin, contrasting colour (B16), never a cup/teacup/teapot/bowl, real object. | 18/11; W102c | FG 135, 261
+E6 | The 8 ranks of a person = 8 DIFFERENT items rising in luxury; no pose or item kind repeated within one person. | Lượt 434, 266 | FG 20, 670
+E7 | Item comes from the rank list (3f, 10 per rank t1–t8) × age cell; each age of a person holds a different item; items of t6/t7/t8 are reserved to that rank. | 18/11 16:50Z, 17:15Z; 19/11 00:45Z | FG 140-142
+E8 | Non-consort statuses use their own 10-item lists (nhà nghèo, khuê các, Thái hậu, Nữ đế, princesses); never an item above her status. | 18/11 22:05Z | FG 260-268
+E9 | Men need their own pose table + item table (age × rank), owner approval before use. | Lượt 170 | FG 529
+
+## F. Hair, hairpins, crowns per rank
+F1 | HAIR LAW: thiếu nữ + princesses before the palace = loose or half-up; t1–t3 = loose/flowing (half-up with most hair down OK); t4 Tần–t8 HH = hair UP in a bun/chignon, nothing loose down the back; cung nữ = always a bun. | Lượt 337, 331, 273 | FG 876, 870, 702 | over: 18/11 "hair same at every rank" (FG 248), Lượt 268
+F2 | HAIR FLOWERS t1–t6 only (none at t7 HQP, t8 HH, triều phục, Nữ đế): species FLOWERS[t][(n-1)%5] — t1 jasmine/peach/osmanthus/pear/climbing rose; t2 apricot/gardenia/red plum/begonia/lilac; t3 crabapple/camellia/magnolia bud/hydrangea/azalea; t4 orchid/michelia/pink lotus/lily/red camellia; t5 herbaceous peony/full lotus/China rose/narcissus/double camellia; t6 tree peony/cotton-rose hibiscus/epiphyllum/large chrysanthemum/double magnolia. | Lượt 307, 314, 306 | FG 822-828, 845
+F3 | Flower COLOUR per person suits her outfit, never her main robe colour. | Lượt 314 | FG 845 | over: Lượt 307 t6 colours
+F4 | FLOWER SIZE: minimum a full palm-size bloom at t1–t3; t4 bigger; t5 two–three big blooms; t6 the largest lush cluster. | Lượt 323 | FG 861
+F5 | HAIRPINS: full pins from t1 (flowers + several trâm with dangles), using the store/old ladder words; every rank at least as rich as the rank below; no fixed symmetric formula (dangles any length/side). | 18/11 05:15Z, 22:45Z | FG 87, 92, 94
+F6 | t6 Quý phi, t7 HQP, t8 HH headdresses clearly different from each other; t7/t8 = phoenix crown from the store HEAD table (per person); HH few dangles, never cluttered. | 18/11 | FG 90, 56, 189
+F7 | Nữ đế crown = phoenix-and-dragon crown, design differs per person; front bead tassels (lưu) reach the forehead only, never the eyes; no flowers on crown or pins. | Lượt 397; 18/11 04:00Z, 23:33Z | FG 9, 193-194, 255
+F8 | Maids: each maid keeps her own hairstyle at every rank; rank variety comes from the hairpins (each maid rank its own set, all with flower pins). | 19/11 01:55Z, 02:05Z | FG 536, 541
+F9 | Cao Ly: the binyeo goes HORIZONTALLY through the low bun. | Lượt 277 | FG 733
+
+## G. Thường phục (everyday rank robes)
+G1 | Rank DESIGNS (after the shifts): t4 Tần = the approved short round shoulder CAPELET with CURVED cut (Phù Tang test EbYOArVuuO), front opens gradually, curve shape varies per person; t5 Phi = the old Quý phi design; t6 Quý phi = the "thêu nhiều" design with cloud collar + TWO layered shoulder capes (Phi has one); t7 HQP = the old/store prompt with jewelled cloud-collar cape; t8 = store. | Lượt 412, 397, 253, 254, 306, 321, 329, 344 | FG 17, 13, 636, 640, 818, 855, 867, 885 | over: Lượt 257, 259 Tần collar A, 19/11 01:20Z Tần⇄Phi swap
+G2 | t5 Phi collar = the approved CLOSED collar covering the neck; the curved/open-V cut is ONLY for the t4 Tần capelet. | Lượt 434 | FG 20
+G3 | Quý phi collar: no pearls/fringe/tassels, must not look like HQP/HH; collar shape varies per person. | Lượt 259 | FG 662
+G4 | PHI BẠCH (sheer shawl) on EVERY thường phục t1–t6 of everyone, colour = the outfit's SECONDARY colour (clearly different from the main robe; never gold/yellow below t6); NO shawl/stole/sash drape on t7 HQP, t8 HH, Nữ đế, triều phục; shape = one vertical curved piece hugging behind the back then down the front. | Lượt 486 (19/11) | FG 26, 27, 28, 20, 17, 12, 703 | over: Lượt 469, 434, 412, 397, 273; Lượt 255 (t1–t7, matching colour), 274
+G5 | SLEEVE LENGTH (thường phục): t1–t3 to the KNEES; t4–t6 to the ANKLES; t7 HQP and t8 HH past the ankles touching the floor (same sentence). Review check: t1–t3 ≥ knees, t4–t6 ≥ past the knees, t7–t8 ≥ ankles. | Lượt 355, 351, 458 | FG 900, 894, 21 | over: Lượt 348, 331 (see conflicts on 351 vs 355)
+G6 | ONE sleeve layer: very long wide flowing sleeves past the hands; never a shorter outer sleeve over a long one, never narrow/cuffed maid sleeves; Cao Ly V3 t1–t3 sleeve = the model sleeve. | Lượt 301, 321, 326, 331 | FG 804, 855, 864, 870
+G7 | LENGTH LOCK: the outer layer reaches the ankles, never a hip-short jacket (maid look); no "short jacket" wording anywhere. | Lượt 344, 271, 280 | FG 885, 687, 747
+G8 | EMBROIDERY per rank = store standard: t1 small motif sprays on the upper garment + wide motif hem band; t2 delicate motif at collar/sleeves/hem; t3 wide motif bands at collar/sleeves/hem (+ store shawl); t4–t6 store text; each rank richer than the one below. | Lượt 368, 353, 342 | FG 915, 897, 882 | over: Lượt 250, 252, 266 densities
+G9 | Embroidery = real silk thread stitched INTO the cloth (flat, follows folds), never appliqué/sticker/raised/glossy AI decal. | 18/11 07:45Z | FG 98
+G10 | Rank richness: high rank = rich and luxurious (layers, borders, stitched embroidery), never a bare column robe, never bulky/puffed. | 18/11 04:00Z, 04:27Z | FG 106, 194
+G11 | No round chest badge/second "fan" stuck on the chest. | Lượt 306 | FG 818
+G12 | HQP/HH: all hair up, prompt-B brocade fabric, sleeves per G5; HQP t7 = more jewels/pearls/jade/gold than t6, still below HH; two HH colour sets: yellow set (t8) + original-colour set (t8o: her own main colour dominant, royal-yellow touches). | Lượt 486 (19/11) | FG 26, 870, 909, 636, 804 | over: Lượt 331, 364, 253, 301
+G13 | Colours across a person's ranks: her own MAIN + SECONDARY pair (rule B15) — see conflicts for "each rank its own colour". | Lượt 293, 306 | FG 786, 818
+
+## H. Triều phục (court robes)
+H1 | t7 HQP and t8 HH triều phục = approved r18, unchanged; t6 Quý phi yellow as in r20 approved (do not reduce). | Lượt 459, 467, 470 | FG 22-23
+H2 | Base recipe t1–t6: the Tần outfit WITHOUT the shoulder piece; no thường phục features; same BROCADE (gấm) sentence in ALL 8 ranks. | Lượt 397, 444 | FG 10, 16
+H3 | t1–t6 SHARED sentence (identical): hà bí = two bands of same width/shape/edge over the shoulders down the front, tips joined at ANKLE height with ONE bí trụy pendant ending in a small soft silk tassel; cầu vai lies ON TOP of the hà bí; sleeves to the ANKLES. | Lượt 459, 452, 455, 400, 401, 403, 410 | FG 22, 21, 10, 16 | over: Lượt 456 over-unified; Lượt 443 (triều phục sleeves per v2 Lượt 351)
+H4 | OWN per rank: hà bí colour + embroidery; cầu vai (r19 text); BÍ TRỤY t1 silver-filigree teardrop · t2 carved-ivory heart · t3 carved-jade gourd · t4 green-jade lotus in gold · t5 gold ruyi + gemstone · t6 gold peony + pearls + a little yellow topaz (no phoenix) · t7 gold phoenix + pearls · t8 large gold phoenix + white jade, rubies, pearls. | Lượt 459 | FG 22
+H5 | t1 hà bí band WIDER (like t2/t3); rank-colour bands deep/saturated, not pastel. | Lượt 452, 411 | FG 21, 16
+H6 | SLEEVE EMBROIDERY: shared — CUFF BANDS in the rank's hà bí colour embroidered with its hà bí pattern; own — sleeve body: t1–t3 plain brocade; t4 a few sparse small motifs; t5 a little more; t6 a little more + embroidered cuff (must); spread in harmony with that rank's robe-body embroidery (r20 density correct). | Lượt 468, 471 | FG 23 | over: Lượt 452 "Phi/Quý phi whole sleeve"
+H7 | Every rank holds the court tablet HỐT upright in both hands (never flute/fan), no wood: t1 silver-edged ivory → t2 finely carved ivory → t3 gold-edged carved ivory → t4 pale green jade with gold edge → t5 deeper green jade, wider gold border, carved → t6 white jade, wide engraved gold border, clouds + pearl → t7 white jade framed in ornate gold + gems → t8 imperial jade, gold frame, phoenix jewels. | Lượt 415, 417, 418, 419, 420, 421, 422 | FG 16
+H8 | All ranks: hair FULLY UP, NO flowers (solemn); t7/t8 two long bộ diêu clearly visible and grander. | Lượt 411 | FG 16
+H9 | Triều phục t2/t3 fabric = the t4/t5 r17 fabric; soft draping, never stiff/tube. | Lượt 411, 229 | FG 16, 577
+H10 | Thường phục rules (sleeve law, phi bạch) are NEVER changed by triều phục rules. | Lượt 458 | FG 21
+
+## I. Yellow / phoenix gradient (robes AND rooms)
+I1 | HH = almost all imperial yellow + phoenix, the most dazzling; HQP = clearly less yellow, phoenix allowed; Quý phi = a LITTLE yellow accent, NO phoenix; t1–t5 = NO yellow, NO phoenix; nobody's yellow or phoenix ever outshines the HH. | Lượt 446, 450 | FG 24 | over: 18/11 23:30Z t6 note
+I2 | THE royal yellow = C2 (swatch TdwDfOyVNR, ~#F2BB5D), image 3 at t6–t8 and Nữ đế; same yellow for the Emperor. | 18/11 23:36Z; Lượt 301, 359 | FG 112, 196, 906
+I3 | t7/t8 robes carry a clear stitched embroidered phoenix (main motif, flowers allowed with it); t1–t6 never a phoenix (replace with flowers/birds/butterflies). | 18/11 | FG 113
+I4 | Thái hậu = yellow mixed with trầm (lower saturation) colours at every age. | 18/11 04:05Z | FG 190
+
+## J. Ages and colours (18 / 26 / 36 / 51 / 65)
+J1 | a18/a26/a36: colours "tươi kiểu trầm" (B14); never "dusty/muted/greyed" in a young prompt. | 18/11 23:20Z; 19/11 00:10Z | FG 103
+J2 | a51 and a65 (everyone, every rank, maids too): elegant calm elder colours = the person's OWN base colour made deeper/lower-saturation (trầm = less saturation, not dark); a65 more muted; never fresh/vivid, never black or brown. | Lượt 397; 18/11 21:06Z, 22:50Z | FG 11, 238, 234
+J3 | a51/a65 dress reads dignified through the costume; pose calm but still interacting with the item. | 18/11 04:05Z, 15:55Z | FG 178, 200
+J4 | Trung y / lãnh cung a51/a65: deeper clause but hue stays inside that rank's pale trung-y colour family. | 19/11 01:30Z | FG 138
+J5 | a65 Emperor = consort a65 age text adapted: silver hair + silver beard, still majestic; young Emperor (a18/a26) clean-shaven. | Lượt 170; 18/11 23:15Z | FG 529, 240
+
+## K. Ma ma, cung nữ, Thái hậu, Nữ đế, princesses, men, thiếu nữ
+K1 | MA MA: outfit = the Ma ma NPC (brown live a36/a51) outfit, approved; front short tà = TWO tà; hair flowers vary per person (kind + colour); colours = her own base colour (m01 sage green) deeper at a51/a65 (brown versions = skins). | Lượt 229, 397 | FG 592, 11 | over: 19/11 01:40Z NPC brown colours (FG 526)
+K2 | CUNG NỮ RANKS: thô sử (new plain design: coarse cotton/hemp, one faded colour, short crossed-collar jacket + ankle skirt, no jewels, one wooden pin) · tam đẳng = live tm0 'thô sử' prompt as is · nhị đẳng = live tm2 pink · nhất đẳng = new, richer, NO outer coat/cloak (one added layer at most, e.g. vest) · chưởng sự cô cô = live design, lighter purple · nữ quan = live, always RED. | 19/11 01:35Z-02:40Z | FG 529, 531, 537, 543, 556, 520-525
+K3 | Narrow-sleeve maid ranks (thô sử, tam đẳng) use only shape wording "narrow straight sleeves close to the arm"; maids/servants otherwise ≈2 hand-spans; nhất đẳng ≈3 spans. | 19/11 02:10Z; 18/11 23:25Z | FG 548, 42, 536
+K4 | Maid ladder work first REPRODUCES live tm0 + tm1 exactly from their original prompts/refs before new designs; tam/nhị/nhất = one fabric family. | 19/11 02:08Z, 03:15Z | FG 543, 583f
+K5 | THÁI HẬU: the stiff collar of the approved states-sample sheet3 is every Thái hậu's collar; phoenix crown of HH rank; ages a36/a51/a65. | 18/11 22:05Z | FG 250, 190, 59
+K6 | NỮ ĐẾ: c17/c06 approved; outfits A–D spread one per person; a WOMAN's dress (never a man's dragon robe); soft prompt-B drape like HH, never a stiff tube; sleeves exactly like HH (long, wide, one layer, to the floor); stiff short shoulder piece; yellow like HH with dragon (+phoenix) embroidery; no phi bạch; her robe differs from her own t8. | Lượt 397, 369, 364; 18/11 | FG 9, 62, 193-198, 578, 918
+K7 | PRINCESSES: 3 costume countries Ba Tư, Cao Ly, Phù Tang (game group names stay); each a distinct face; t1–t3 = store outfit sentence + ONE national-touch sentence; t4+ = live rank outfit + national colours/look kept strongly. | Lượt 283, 297, 306, 371 | FG 755, 794, 818, 921 | over: Lượt 275b, 276, 277, 277b country lists
+K8 | Ba Tư head veil: t1 to shoulders, t2 to waist, t3 to knees, t4+ current length; at t7/t8 sheer ROYAL-YELLOW gauze. | Lượt 329, 346, 306 | FG 867, 888, 818
+K9 | Princess pictures: Phù Tang t4+ no loose hair; Cao Ly/Phù Tang ranks clearly different from each other at t1–t3. | Lượt 337, 306 | FG 876, 818
+K10 | EMPEROR: always yellow-dominant (C2; black only as accent), live robe design kept for live emperors; each new emperor his OWN robe design; wide sleeves; stiff short shoulder piece; drawn in the same style. | 18/11 20:08Z, 23:15Z | FG 196-198, 240
+K11 | MEN never wear pink or purple; colours deep blue, navy, teal, green, black, white, grey, brown, crimson, gold (Emperor), earth tones. | 11/14 | FG 154
+K12 | THIẾU NỮ = two states only: khuê các (noble) and nhà nghèo (poor: neat, pretty, never ragged, some embroidery); existing liked images re-made as 2K transparent, new drawings only for people missing. | 18/11 21:00Z, 22:05Z | FG 191, 251
+K13 | TRUNG Y: 8 tiers in pale rank colours (Đáp ứng ivory … HH pale yellow); trung y / lãnh cung figures hold an item and use spec5 poses. | OD:L392; 19/11 01:10Z | FG 122, 138
+K14 | Everyone in the palace is richly dressed (maids in embroidered silk with hairpins); nobody looks poor. | 11/14 | FG 153
+
+## L. Places / rooms
+L1 | Rooms follow the occupant's rank (bed + room); accent colour = rank colour; luxury rises with rank, never reaching Khôn Ninh; low ranks pretty/carved, never poor; each consort quarters = reception room + bedroom. | Lượt 446, 437, 442 | FG 24
+L2 | Low ranks share a phối: ONE reception + ONE bedroom per place at Quý nhân prettiness; Tần and up live alone → each palace chính điện in 3 versions Tần < Phi < Quý phi; HH = one Khôn Ninh set, most dazzling. | Lượt 447 | FG 25
+L3 | Natural furnished rooms like tam-cung-dem-ha-sang, natural colours, no forced grade; never an empty stage. | Lượt 396, 397 | FG 15
+L4 | Every room sample sent shows PEOPLE placed in it (4 figures spread). | Lượt 473 | FG 29
+L5 | LAYOUT: rooms read RECTILINEAR with square corners: show 2 walls (like the bedrooms and Tần reception) OR, if 3 faces, a correct 3D perspective box like the phối/Quý nhân reception; NEVER a curved hall / chairs in an ARC (very AI). Furniture in clear straight lines along the walls, square to the walls, orderly, never scattered/skewed; seating follows the room structure. Beds stand in a real bed place, never in the middle of the walkway. Template for share = Cảnh Phúc PHI BEDROOM v3 (furniture ~5/6 of the room; no room shows more floor); centre floor clear for people; corner groups within the measured corner numbers; a table set only in the right corner. Corners are never left EMPTY/bare: furniture set BACK from the bottom edge (within the max share from the bottom) like the Hoàng hậu bedroom table, so a figure in front covers it naturally. Every room is re-checked against these rules. | Lượt 491 (19/11) | FG - | over: Lượt 473, 477
+L6 | RECEPTION seating historically Chinese: la hán sàng (luohan daybed + kang table) + paired armchairs with tea tables; NO Western sofa; no furniture group spilling to the bottom-right edge. | Lượt 461 | FG 31 | over: Lượt 406
+L7 | PHỐI: bedroom has TWO beds; colours by the pair of occupants ranks (Đáp ứng ivory, Thường tại pale green, Quý nhân pale blue; pairs ĐĐ ĐT ĐQ TT TQ QQ) — ONE pair sample first; the pair is split by OBJECT TYPE: ALL curtains one colour (e.g. all blue) and ALL furniture fabrics the other (e.g. green), never one bed blue + the other green; not too much empty floor; luxury = sample v1 Quý nhân bedroom level. | Lượt 491 (19/11) | FG - | over: Lượt 461, 465, 457, 473
+L8 | Tần < Phi < Quý phi each clearly richer than v2, below Khôn Ninh; Khôn Ninh reception no empty floor in front; Khôn Ninh bedroom yellow + RED mixed, never all-yellow. | Lượt 465, 466 | FG 31
+L9 | Dư đồ / palace map / courtyards come from Phượng Lệnh (grade nhất); missing states painted in the same style; we paint only rooms / the final place view. | OD:L1415, L1270 | FG 351-352
+L10 | New scenes start as edits of approved game scenes (no glossy floors, no AI look); every full backdrop exists in portrait AND landscape; 4 seasons × buổi. | OD:L86, L50, L137 | FG 325, 316, 328
+L11 | EVERY rank step has a DIFFERENT room layout, even inside the same palace (Tần ≠ Phi ≠ Quý phi bedrooms and receptions), so each is fresh, never a copy. | Lượt 491 (19/11) | FG -
+
+## M. Skins
+M1 | Every picture the owner PRAISED but then asked to redraw is KEPT as a SKIN (never deleted/overwritten), logged in dev/art/SKINS.md (person, rank/age, cut id, path, why). | Lượt 413 | FG 18
+M2 | Skins pool per LOOK GROUP: choosing a character of group X makes every outfit of group X a skin for her (game, FOR MAIN). | Lượt 299 | FG 799
+M3 | Rejected colour options of a person go to the CORE SKIN pool of her look group. | Lượt 306 | FG 833
+M4 | Trung y "strong" set (17) = skins; light-embroidery ones stay trung y. | 18/11 21:45Z | FG 219
+
+## N. Other art (events, effects, frames, items, pets, icons)
+N1 | Event/act/option pictures: no visible face of any character; people far, silhouette or back view. | OD:L544; EVENT_ART | FG 283, 505
+N2 | LIGHT pictures for normal acts, DARK (deep, rich, gloomy mood — not just night, not black) for scheming/sinister ones. | OD:L638; 17/11 12:25Z | FG 284-286
+N3 | Pictures per MEANING GROUP, groups split as finely as possible; never an unrelated picture; 4 generic fallbacks (event/act × light/dark) mark missing art. | OD:L987, L279, L548 | FG 287, 294, 303
+N4 | Every BÁO/TIN/KẾT QUẢ pop-up and every minigame frame has a picture (left picture, right info). | OD:L1025, L999 | FG 279, 278
+N5 | Effects and animations are PAINTED (Magnific sprites/videos), never code-drawn; every animation scene ends with ONE fitting button. | OD:L722, L1261 | FG 384, 418
+N6 | Frames: rectangular 3:4 rank/role frames from the kit, unique top ornament per rank/role; tassels only on people portraits. | OD:L42, L70 | FG 428, 430
+N7 | Items: every item painted (gpt-2-6), 4 grade tiers drawn differently, centre display = item alone on transparent bg, ≥1024 px source. | OD:L47, L686 | FG 453, 470
+N8 | Pets: game painting style, 4 stages (Linh thú = adult + painted aura), cute chubby young stage. | OD:L398, L688 | FG 462, 471
+N9 | Emotion icons = painted human faces (approved palace-lady set); look decals = transparent painted marks placed by code. | OD:L156, L393; LOOK_DECALS | FG 487, 491, 498
+N10 | New Magnific account: only builder output; re-upload the same ref files, run 2 golden figures before mass. | MOVE_HOUSE | FG 509-516
