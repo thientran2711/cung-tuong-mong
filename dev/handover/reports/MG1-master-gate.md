@@ -115,6 +115,7 @@ Main ones (read by hand):
 | C7 | store t7/t8/Nữ đế; outfit slots | 'FABRIC: thick gold-embroidered brocade…', 'silk satin', 'silk crepe' | M06 thin light flowing silk and gauze |
 | C8 | store / triều / ma ma / emperor | 'body and face frontal…', 'calm standing pose', 'standing calmly' | M09 weight on one leg, knee softly bent |
 | C9 | emperor-B, build_npc men | men's text | M04/M08/M09/M10 women's wording (G3) |
+| C10 | face makers, Quyến rũ group (s16–s18, s33–s38) | 'ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye … the only mark on her face' (owner-approved faces) | M11 'Bare clean forehead, no forehead mark, no moles.' — BOTH sentences are already verbatim in every approved Quyến rũ prompt (that is where M11 was copied from); all 16 files (v4c/v5/v5b/v5r2) PASS face_gate.final + --scope face unchanged, so the group keeps its mark with no gate exception. Owner may want 'no moles' reworded for this group only (A18 note). |
 
 Full keyword scan (`python3 dev/art/mg1_conflicts.py`; one current output per builder; keyword match, so some lines are only near-topic — read each):
 
