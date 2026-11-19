@@ -1162,3 +1162,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - E: kyngo «BUILD» given (4 notes); E CDN fallback = shots on handover branch, main uploads finals; E standby + C-AG/C standbys: register ids when they report.
 - STANDBYS: MAIN session_01Rc5AsJ8S2aNYjotfjzaioU; B session_01N1tNP5jYfeoWoXsWr5eqKN; C session_01PEhRbvZwkVxhwPJEGU1KAh; D session_01964izFLpgp8aeBD8Y13gek; E/C-AG pending.
 - ROOT-67 wake trig_014zhh4hV3VtoJw1ueSxzoFS DELETED at handover; ROOT-68 creates its own at minute 32. ROOT-67's local owner-shots (seal-lean-3 08bd4868 videos) are on the ROOT-67 machine only; re-download from CDN img/_review/seal-lean-3/ if needed.
+- (19/11 09:58Z) ROOT-68 opened = session_01Rc5AsHe8w1z2UgZJUycHEJ (opus, depth 6). ROOT-67 wake trig_014zhh4hV3VtoJw1ueSxzoFS DELETED. ROOT-67 stops (relays any late message to ROOT-68).

@@ -264,7 +264,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | caoly-road BIG review (sonnet E20r; 30d7cca8) | review/caoly-road; briefs/E20r-review-caoly-road.md | FOREMAN E | session_01DgYSWq4WTWY2p7LTCaMp3M | RUNNING | 19/11 07:45Z |
 | REVIEW coop-thin-f4 r1 (opus BIG) of ac66808f | review/coop-thin-f4-r1 | B | session_01N1tNP32iT6Kmupog2YrxpC | PASS review/coop-thin-f4-r1 d9b32074 (on F3 final 8dc849c2 + main 62055a31; was d913db71; fix R1 shelf-plant ctx; report reports/coop-thin-f4.md "## REVIEW r1") | 19/11 08:50Z |
 | coop-thin F5 (opus; mini-game score ends as intents; stacked on F4) | review/coop-thin-f5 | B | session_01N1tNP3xrJgrfek8aioQFv2 | SẴN SÀNG KIỂM e6ad9a29 (merged f4-r1 d9b32074; report reports/coop-thin-f5.md; Worker THINMAX 10 needs a deploy) | 19/11 07:48Z |
-| MAIN ROOT-67 (opus; child of ROOT-66, depth 5) | handover HANDOVER_SESSION9 | ROOT-66 | session_01Rc5AsM5xHa2zs9qd5o5eTU | RUNNING | 19/11 08:46Z | START_CTX ~8 %
+| MAIN ROOT-67 (opus; child of ROOT-66, depth 5) | handover HANDOVER_SESSION9 | ROOT-66 | session_01Rc5AsM5xHa2zs9qd5o5eTU | DONE → ROOT-68 | 19/11 08:46Z | START_CTX ~8 %
 | kit-head-say (sonnet kit keeper; K-HEAD-SAY for E palace-chatter) | review/kit-head-say; briefs/kit-head-say.md | MAIN ROOT-67 | session_01Rc5AsKFj6ZBZuHqopPwMU3 | RUNNING | 19/11 08:42Z |
 | review-ev-pic-followups (small reviewer for C-AG #22) | reports/review-ev-pic-followups.md | C-AG #22 | session_01Rc5AsNSd2h1ghrUbB8TXzd | DONE FAIL 59fb29c04 (iPad picture-fit regression, fix list in report) | 19/11 |
 | ev-pic-followups FIX r2 (opus; successor of MN9rc6gf after SMALL rv FAIL 59fb29c0: kszOver3 .opts, empnight, deterministic scan) | review/ev-pic-followups | C-AG #22 for ROOT-67 | session_01Rc5AsJJWkjfCMMzTar86tr | RUNNING | 19/11 08:46Z |
@@ -273,3 +273,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin hostnull fix #2 (opus; successor of 4i9JQenz at 20a1f54f) | review/coop-thin-hostnull | B | session_01N1tNP2tXKt5N4VcwMfYH8B | RUNNING | 19/11 09:44Z |
 | REVIEW coop-thin-f5 r1 (opus BIG) of e6ad9a29 | review/coop-thin-f5-r1 | B | session_01N1tNP45gZxR8HqWwB9auYE | RUNNING | 19/11 09:50Z |
 | coop-thin F6 (opus; deck act(i), j72 quests, remaining game ends, tripwire → 0; stacked on F5) | review/coop-thin-f6 | B | session_01N1tNP5ex6HrG5uFmnZYTqA | RUNNING | 19/11 09:51Z |
+| MAIN ROOT-68 (opus; child of ROOT-67, depth 6) | handover HANDOVER_SESSION9 | ROOT-67 | session_01Rc5AsHe8w1z2UgZJUycHEJ | RUNNING | 19/11 09:57Z |
