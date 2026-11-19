@@ -21,3 +21,29 @@ PRIORITY #1 CHECK ('ma ma'): OD 26 | ledger 0 | claims 8 | main 15 | review/* 0 
 (b) approve me writing the MAMA wording from the picture above (that is invented wording = RULE 0 says no; needs owner OK), or
 (c) owner picks another reference sheet.
 No credits spent. build.py MAMA_PENDING unchanged.
+
+
+---
+# UPDATE 19/11 ~03:30Z: STEP 1 + STEP 2 DONE after owner GO (via ROOT-39, 03:15Z)
+PRIORITY #1 CHECK ('ma ma'): OD 26 | ledger 0 | claims 8 | main 15 | review/* 0 | archive 48
+
+## STEP 1: MAMA wording = **worded from live a36/a51 picture, owner GO 03:15Z** (not copied: no earlier prompt exists)
+build.py `build_mama()` / `--state mama` (commit 541fd38). Cut/layers read off the live brown picture: sleeveless embroidered over-vest with stand collar + knot button, crossed inner robe, wide layered sleeves with cuff band, long front panel, pleated skirt with flower hem band, olive-gold bow sash, jade pendant with tassel, cream-blush peony/plum embroidery. Colour: a51/a65 = the NPC brown (a65 deeper); a36 = her palette colour (FIGURE_GATE l.496, "younger ages = normal colours"). Image 3 = live fig-mama-k01-a36 (costume only). `--refs` order: 1 style 6AbGv6EiJO, 2 her own live maid picture (face), 3 live k01 a36. Pink a18 ignored (a maid outfit).
+
+## STEP 2: 3 gens (gpt-2-6 1024x2304 2k transparent, 405 credits), m01, builder stdout, ledger lines 12-14, --verify 3 lines 0 FAIL
+(Caveat: the prompt I sent was copied from builder stdout; `--log-fill` used the builder text, I did NOT re-read the stored prompt back from Magnific.)
+| age | gen | face ref (image 2) | item |
+|---|---|---|---|
+| a36 | DoO8cQlpcl | live m01 a36 | feather duster |
+| a51 | p8yI0gCehw | live m01 a51 | abacus |
+| a65 | yiu3UhDPW9 | live m01 **a51** (m01 has no a65 picture on the CDN, 404) | walking cane |
+
+SHEET (one row, full size): live k01 a36 | live k01 a51 | new a36 | new a51 | new a65 -> https://ctm-img.victoria-tntt.workers.dev/img/_review/mama/sheet1.jpg  (also img/_review/mama/live.jpg earlier)
+
+## Honest faults (I looked at each + a face close-up vs the live m01)
+1. **a36 face/hair drift**: new a36 is younger-looking with double-loop buns + a pink peony and tassel pins; live m01 a36 has ONE dark bun and a single gold pin. Identity NOT matched at a36 (looks like her a18). a51 and a65 keep her face/hair family well (grey bun, same pins), a65 plausible.
+2. a36 green is the normal-colour reading of the rule; if the owner wants a36 brown like the live NPC a36 that is a one-line change (elder -> all ages).
+3. a51/a65 brown reads a touch redder/smoother than the live (live is a muted, slightly mottled mauve-brown). Cut, vest, sash, tassel, hem band all match.
+4. Hands: five fingers, held items gripped, lively enough; a65 hands rest on the cane head (more static). Feet/hem inside canvas.
+5. FIGURE_GATE OD:L12 says mamas wear a thin pink silk veil; the live NPC and these have none (builder has no veil sentence for ma ma) - owner decision needed.
+6. Not tried: a18/a26 ma ma (owner: 18 is a maid, not a ma ma); no regen spent (max 6, used 3).
