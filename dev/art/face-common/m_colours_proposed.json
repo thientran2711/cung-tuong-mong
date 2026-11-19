@@ -1,5 +1,6 @@
 {
- "_note": "PROPOSED (not in the builder; BW4 owns build.py MAID_ROWS). Owner Lượt 594. Names identical; hex at foreign-princess level.",
+ "_note": "FINAL — owner Lượt 598 APPROVED (Lượt 594 proposal + fixes: m06 → pale blue, m12/m23/m31 yellow names → sand apricot/peach names, m52 secondary → jade green). BW4 wires it into build.py MAID_ROWS. Hex at foreign-princess level.",
+ "status": "FINAL",
  "rows": {
   "m01": {
    "main": "sage green",
@@ -47,15 +48,13 @@
    "flags": []
   },
   "m06": {
-   "main": "pale blue-grey",
+   "main": "pale blue",
    "old_hex": "#DDCFC8",
    "main_hex": "#A5BDD4",
    "secondary": "warm coral rose",
    "secondary_hex": "#CD817A",
    "contrast": "OK",
-   "flags": [
-    "name says grey; hex proposed as a clear soft blue"
-   ]
+   "flags": []
   },
   "m07": {
    "main": "pale jade green",
@@ -103,15 +102,13 @@
    "flags": []
   },
   "m12": {
-   "main": "pale golden yellow",
+   "main": "warm sand apricot",
    "old_hex": "#EBCDAC",
    "main_hex": "#DEBF9C",
    "secondary": "blue-violet",
    "secondary_hex": "#7164B4",
    "contrast": "OK",
-   "flags": [
-    "yellow name → apricot-family hex proposed; owner to rename?"
-   ]
+   "flags": []
   },
   "m13": {
    "main": "lilac",
@@ -204,15 +201,13 @@
    "flags": []
   },
   "m23": {
-   "main": "butter yellow",
+   "main": "soft peach sand",
    "old_hex": "#DDC1A0",
    "main_hex": "#D9BF9B",
    "secondary": "deep sapphire blue",
    "secondary_hex": "#4A66A5",
    "contrast": "OK",
-   "flags": [
-    "yellow name → apricot-family hex proposed; owner to rename?"
-   ]
+   "flags": []
   },
   "m24": {
    "main": "jade green",
@@ -278,15 +273,13 @@
    "flags": []
   },
   "m31": {
-   "main": "pale buttercup yellow",
+   "main": "pale sand apricot",
    "old_hex": "#DEBF9D",
    "main_hex": "#DDBA98",
    "secondary": "deep sapphire blue",
    "secondary_hex": "#4A66A5",
    "contrast": "OK",
-   "flags": [
-    "yellow name → apricot-family hex proposed; owner to rename?"
-   ]
+   "flags": []
   },
   "m32": {
    "main": "pale mint green",
@@ -472,12 +465,10 @@
    "main": "pink lilac",
    "old_hex": "#CEA6A9",
    "main_hex": "#CEA1BF",
-   "secondary": "crimson",
-   "secondary_hex": "#C05966",
-   "contrast": "WEAK (32°)",
-   "flags": [
-    "same hue family as secondary"
-   ]
+   "secondary": "jade green",
+   "secondary_hex": "#5DAC85",
+   "contrast": "OK",
+   "flags": []
   }
  }
 }
