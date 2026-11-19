@@ -100,7 +100,7 @@ function ievPlace(R){const mb=document.getElementById("mb");if(!mb)return null;m
  const col=mb.querySelector(".kpmain")||mb.querySelector(".spkt")||mb.querySelector(".kpb")||mb;col.insertAdjacentHTML("afterbegin",h);const t=col.firstElementChild;t.classList.add("kiev-txt");return t}
 /* ---------- §64.2 kitItemFx: the animations ---------- */
 function ievStill(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
-function ievOn(){return !window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
+function ievOn(){return !screenOff()}
 function ievBag(){const t=[...document.querySelectorAll('#tabs [data-tab="inv"],[data-tab="inv"]')].find(x=>{const r=x.getBoundingClientRect();return r.width&&r.bottom>0&&r.top<innerHeight});return t||null}
 function ievClone(I,r){const w=document.createElement("div");w.className="kievfx";w.style.cssText=`left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px`;
  w.innerHTML=I.src?`<img src="${I.src}" alt="">`:"";document.body.appendChild(w);return w}
