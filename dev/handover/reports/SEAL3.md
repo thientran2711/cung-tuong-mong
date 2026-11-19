@@ -1,0 +1,34 @@
+START_CTX ≈ 5 % of 1M (get_session used_tokens read 0 → own estimate) · depth 1 · roll line ≈ 30 %, ceiling 60 %
+# SEAL3 — ONE «giận» SAMPLE each for (j) bg- bé gái, (k) bt- bé trai, (e) mm- ma ma (owner Lượt 783, via ROOT-57)
+Worker of Foreman C ROOT-57 (session_01PEhRbuFkLEFvsv8jdPo9vC). Recipe = dev/art/emo-anim/groups/th-gian.md copied; ONLY who the person is
+(look words + colours + he/she) changes. Prompts: `python3 dev/art/emo-anim/groups/grp_gian_prompts.py bg|bt|mm` (A/B/out/loop/back).
+A ref = women giận still YMl5gLCWeC (emo-gian-women-640, already in the folder — the same upload th-gian used). B ref = the group's own A.
+
+## Colours (picks — NOTE for owner A18, she may name others)
+- bg = little PRINCESS of our court (~7 y): royal yellow #EFBD69 robe (B21) + soft peach-pink #F2A7A0 collar/cuffs; two small hair buns, tiny gold hairpin, one small pink flower, no crown.
+- bt = little PRINCE (~7 y): royal yellow #EFBD69 robe (B21) + deep blue #3F6E9A collar/cuffs, small gold dragon on the chest; one small topknot with a small gold crown ring.
+- mm = ma ma (~55): the approved ma ma pair from the frozen D16 recipe (m05 r54/r55): coral red #D4897D vest + teal #499597 collar/inner robe/sleeves; neat silver-streaked bun, two plain silver hairpins, no flowers.
+- Disc = the «giận» red, as th-gian.
+
+## SAMPLE (20/11 ~00:05Z) — gens all 1 try, no redo
+| seal | A (= still, group ref) | B | OUT (start) | LOOP | BACK | frames out/loop/back |
+|---|---|---|---|---|---|---|
+| bg-gian | gOmeqmUSXO | JNC8rznOq4 | If3OVl5tvE (2.00 s) | lJtpbWbgv9 | hu24p7fvqL | 31/60/58 |
+| bt-gian | hu24MALvqL | BhNwWxToQR | 0eUrR5nTfW (2.00 s) | gOme5MbSXO | yiutL8kPW9 | 31/60/58 |
+| mm-gian | w4aBKCf7EI | UPvXKUYwny (= If3OTgktvE flattened on green) | Lw8MHVDswO (1.00 s) | MBJLALkDCm | rgX0uTAxtc | 46/60/58 |
+CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/emo-anim-groups/ : <k>-gian-out.webp, <k>-gian.webp (LOOP, loop 0), <k>-gian-back.webp
+(loop 1, bg 00000000), still/<k>-gian.webp (160 px), <k>-gian-frames.jpg, <k>-gian-preview.mp4 (OUT + LOOP×2 + BACK + 1 s hold, light bg), k = bg bt mm.
+Credits: 6 keyframes × 135 + 9 clips × 940 = 9 270 (balance 522 032 → ≈512 762). Ledger: 15 lines (SEAL3).
+
+## LOOKED at every frame (sheets) + edge check by script
+- Both children read clearly as small children (chubby baby faces, ~7 y), not the adult sets. Ma ma reads as an older maid (bun, hairpins, no crown).
+- All A and the bg/bt B came back opaque green; mm B came back RGBA transparent → flattened onto #00FF00, uploaded (UPvXKUYwny).
+- OUT: each clip's first 1–2 s is almost still → cut from 2.00 s (bg, bt) and 1.00 s (mm), like th-gian OUT 1.07 s. mm OUT: arms swing wide once
+  (sleeves near the sides, inside the frame) before the fist goes up.
+- Steam: as fading puffs get thin, th_cut's un-mix makes them grey → nearly black for 2–4 frames (bg OUT 26–28, bt OUT 27–29, bt LOOP 6–10);
+  on light backgrounds that reads as a little dark smoke. A cut-only fix (no credits) is possible if wanted, e.g. lighten semi-transparent pixels — not done (th_cut is the approved cutter).
+- mm: steam drifts off the TOP edge of the 288 px frame (OUT 37–45, BACK 2–13), so the top puff is cut flat for ~1 s. No body part touches any edge.
+- mm LOOP: steam also puffs out from her cheeks to the sides and leaves tiny white dots while it fades.
+- BACK (all three): the last frames brighten the disc to keyframe A's colour (= the still), as in th-gian.
+
+## STATUS: STOPPED. Sent to ROOT-57; no other seals until the owner OKs each group.

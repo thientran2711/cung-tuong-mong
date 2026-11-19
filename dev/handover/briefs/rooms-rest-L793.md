@@ -1,0 +1,13 @@
+# PR13 — DRAW THE MISSING ROOMS (owner Lượt 793: "đã vẽ đủ phòng của tất cả các nơi còn lại đâu, tại sao không vẽ tiếp đi?") — Foreman C ROOT-57
+PRIORITY #1 CHECK: room method + history = dev/handover/reports/place-rank-sample.md (PR9–PR12; approved frontal: HQP bedroom/reception, HH bedroom B cpS5YIl0eP / reception, Quý phi bedroom eIPlheldqL, Phi bedroom v3 SyhTG51Ub8 / 3w UPve2vXwny, Tần bedroom v5 EbY494KuuO, phối rooms, Khôn Ninh); prompts dev/art/place-rank/prompts*.py/json; measure_floor.py; sheets.py (people + 3-line tags).
+READ: dev/rules START_CORE + START_WORKER + START_ART; ART_RULES section L (L1 L3 L4 L5 L11–L20, esp. L14 frontal only, alternate 3-wall / 2-wall, L19 variety, L13 people + tags, L15 iPad 1180x820, L16 soft painted style), A1 A17 A20 A21 A22 A23 (ask before ANY redraw, Lượt 777), B9 (no transparentBackground), B24 rank colours.
+
+## Step 1 — INVENTORY (no gens), send to the foreman first
+List EVERY place the game needs a room picture for: every palace × every rank quarters (bedroom + reception per L1), shared phối rooms, Khôn Ninh / Thái hậu's palace / emperor's places / other locations the game opens from the dư đồ (read the game data: dev/build j*.js place tables + the live dư đồ list, and img/ room files on the CDN). For each: approved picture id (or "none"). Table → dev/handover/reports/PR13-rooms.md + send_message ROOT-57 "PR13 INVENTORY <hash>: N missing".
+## Step 2 — DRAW the missing ones (after the inventory is sent; no need to wait for an answer)
+- Frontal only, alternating 3-wall / 2-wall, own layout per rank (L19), B24 rank colour in the prompt, the approved common room block verbatim (prompts.py), same refs/settings method as PR12 (gpt-2-6 2k 2688x1386, refs gOmYI7iSXO + EbYJzsMuuO (+ image 3 only as the approved method says)), B9.
+- ONE try per room. MEASURE (A22) + look full size. If a picture has a fault: DO NOT re-gen — report it with the measure (owner Lượt 777: ask before any redraw).
+- One room at a time in order of game importance (lowest missing ranks first unless the inventory shows the game opens others more often). Send the foreman each finished room as a sheet WITH people + 3-line name tags (L13) as soon as it is ready: "PR13 ROOM READY <name> <sheet>"; then continue with the next.
+- Log every gen + credits (≈135 per room).
+Commit to claude/cung-tuong-mong-handover-hj0h8w (fetch --depth=30 + rebase + push, retry 4×). If a gen is refused by the permission check, send the foreman the exact call.
+ROLLOVER at START_CTX + 25 % (ceiling 60 %): handover in your report, tell the foreman; the foreman opens your successor.

@@ -5,7 +5,8 @@ ONLY the FACE line, the OUTFIT slot and the ITEM/hand slot differ between the si
 """
 import sys,os
 # PRE / END / FAB / YEL_NEW copied byte-for-byte from the consort builder (dev/art/t8-prompt-B/build.py)
-PRE=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, body and face frontal, standing squarely facing the viewer, no turn.")
+# C1 (owner Lượt 779, MG2): old store style clause removed, as in the consort builder (style = master M01/M02 only)
+PRE=("Full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, body and face frontal, standing squarely facing the viewer, no turn.")
 END=" Eyes soft, warm and round-almond, never slanted or upturned, never teary. Everyone beautiful at every age. No text, no labels."
 # D9 (owner Lượt 529, ART_RULES D9): owner words verbatim, same constant as t8-prompt-B/build.py D9_FOREHEAD, right before END; the existing "bare clean forehead" words stay.
 D9_FOREHEAD=" NOTHING on the forehead (no hoa điền, no dot, no mark, nothing)."

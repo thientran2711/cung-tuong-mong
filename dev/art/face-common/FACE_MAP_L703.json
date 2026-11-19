@@ -1282,12 +1282,12 @@
  "s51": {
   "group": "Kiêu kỳ",
   "hidden": false,
-  "ts": "2026-11-19T23:30:00Z",
-  "cut": "dt4SA3PXSL",
-  "gen": "UPvXH68wny",
-  "ver": "v5",
-  "prompt_file": "dev/art/face-common/s51.v5.FULL.txt",
-  "kind": "NEWFACE-761"
+  "ts": "2026-11-19T23:40:00Z",
+  "cut": "YMlKiMSWeC",
+  "gen": "p8ylzjyehw",
+  "ver": "v5b",
+  "prompt_file": "dev/art/face-common/s51.v5b.FULL.txt",
+  "kind": "NEWFACE-786-EYES"
  },
  "s52": {
   "group": "Kiêu kỳ",
@@ -1312,12 +1312,12 @@
  "s54": {
   "group": "Kiêu kỳ",
   "hidden": false,
-  "ts": "2026-11-19T23:30:00Z",
-  "cut": "s7IDuCpl8e",
-  "gen": "6AbfLL8iJO",
-  "ver": "v5",
-  "prompt_file": "dev/art/face-common/s54.v5.FULL.txt",
-  "kind": "NEWFACE-761"
+  "ts": "2026-11-19T23:40:00Z",
+  "cut": "tCRyDEwmZJ",
+  "gen": "w4aB1Xp7EI",
+  "ver": "v5b",
+  "prompt_file": "dev/art/face-common/s54.v5b.FULL.txt",
+  "kind": "NEWFACE-786-EYES"
  },
  "s55": {
   "group": "Kiêu kỳ",
