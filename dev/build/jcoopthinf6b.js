@@ -23,7 +23,7 @@ const hctx=()=>host()&&!!CW.ctx&&on();/* the host runs her tap in her context */
 const g12=()=>gOn(L12);/* her phone, level 12, her own tap (not in a world step) */
 const cl0=(x,a,b)=>Math.max(a,Math.min(b,x));
 /* ---------- the opener capture (host, her context): the game opens on HER phone ---------- */
-function cap(n,a){F.stat.gcap=(F.stat.gcap|0)+1;lg(["gcap",n]);if(!TH.uiCap){lg(["gcapLost",n]);return true}if(TH.uiCap.length<12)TH.uiCap.unshift([n,J(a)])/* first: the 4 an F answer carries */;return true}
+function cap(n,a){F.stat.gcap=(F.stat.gcap|0)+1;lg(["gcap",n]);if(!TH.uiCap){lg(["gcapLost",n]);return true}TH.uiCap.unshift([n,J(a)]);if(TH.uiCap.length>12)TH.uiCap.length=12/* first (always): the 4 an F answer carries */;return true}
 function capFn(n){const f=window[n];if(typeof f!=="function")return;TH.UICAP.add(n);window[n]=function(){if(hctx())return cap(n,[...arguments]);return f.apply(this,arguments)}}
 /* ---------- registration (level 12): F5's reg10 at lv 12 + ctx: the mirror's state, her Tự học card ---------- */
 let CARD=null,HCARD=null;
@@ -44,6 +44,11 @@ const raw0=(raw,sk)=>sk||inR(raw,MSC().raw);
 /* her own card in her host deck (the same rule F6a uses: index + name; else the first not-done card with that name) */
 function myCard(c){if(!c||!Array.isArray(deck))return -1;const i=c.i|0;if(deck[i]&&deck[i].n===c.n)return i;return deck.findIndex(a=>a&&a.n===c.n&&!a.done)}
 
+/* her phone: a game opened by the answer of a card run on the host (F6a's act(i): the exam, the mirror, a steal card) is the card's own
+   screen — the half result card that answer brings (cardLater → resultShow, next tick) is not shown over it (solo shows none before the
+   game: the card's go opens the game at once; a steal card's result comes with the steal end, after the game) */
+let NOCARD=0;const noCard=()=>{if(!host())NOCARD=Date.now()};
+if(typeof window.resultShow==="function"){const r0=window.resultShow;window.resultShow=function(){if(NOCARD&&Date.now()-NOCARD<2000&&on()&&!host()){NOCARD=0;F.stat.noCard=(F.stat.noCard|0)+1;return}return r0.apply(this,arguments)};try{resultShow=window.resultShow}catch(e){}}
 /* the game START as an intent (F5 reviewer: the forged start / cost / score-in-range family): once a game-first deck kind is lifted
    (TH.gLift[kind] = 12: F6a's act(i) runs her card on the host, its cost paid there once), the host keeps that start per seat and the
    end is accepted only after it, once. A kind not lifted keeps its old start road (no check). */
@@ -61,7 +66,7 @@ if(typeof exRun==="function"){const x0=exRun;
   if(hctx()){stSet("exam",kind);return cap("exGame",[kind])}
   if(g12()){const t={};let sk=null;const r=x0.call(this,P,t,res=>exEnd(kind,res&&res.raws||[],sk||[]));sk=t.pend&&t.pend.sk;F.stat.exLocal=(F.stat.exLocal|0)+1;return r}
   return x0.apply(this,arguments)}}
-window.exGame=function(kind){const P=kind==="srv"?exSrvPlan(exSrvS().to):exPlanFull();return exRun(P,{},null)};
+window.exGame=function(kind){noCard();const P=kind==="srv"?exSrvPlan(exSrvS().to):exPlanFull();return exRun(P,{},null)};
 TH.UICAP.add("exGame");
 reg12("exEnd",["v","v","v"],{title:A=>A[0]==="srv"?"Khảo hạch Nội vụ phủ":"Khảo hạch",
  dec:a=>{const x=X5.decA9(["v","v","v"],a);if(!x)return null;const [kind,raws,sk0]=x;if(kind!=="me"&&kind!=="srv")return bad("exEnd");
@@ -103,7 +108,7 @@ reg12("wdGroomEnd",["v"],{title:()=>"Chải chuốt",dec:a=>{const x=X5.decA9(["
 
 /* ===== 9. the mirror (Điểm trang; also the face of Hội phối đồ): the end = toilFinish (TOIL.st rides in ctx "toil"), its rows = toilFinShow ===== */
 capFn("toilFinShow");capFn("toilGo");
-{const t0=window.toilGo;if(typeof t0==="function")window.toilGo=function(){if(hctx())stSet("toil");return t0.apply(this,arguments)};toilGo=window.toilGo}
+{const t0=window.toilGo;if(typeof t0==="function")window.toilGo=function(){if(hctx())stSet("toil");else if(on()&&!host())noCard();return t0.apply(this,arguments)};toilGo=window.toilGo}
 const unit=x=>x==null||inR(x,MSC().unit);
 reg12("toilFinish",["v"],{title:()=>"Điểm trang",
  dec:a=>{const x=X5.decA9(["v"],a);if(!x)return null;const made=x[0];const st=typeof TOIL==="object"?TOIL.st:null;
@@ -121,18 +126,23 @@ window.__smgEnd=function(mode,raw,sk){if(!SRC||!g12())return false;const s=SRC;S
 window.__smgOpen=function(mode,o){if(!host()){if(SRC)OPN=true;return false}if(!hctx()||!HSRC)return false;cap("stealGame",[mode,HSRC]);return true};
 /* her phone: SRC lives while her game is open; a card / act that opened no game (top rung, no art) took the old road: SRC dropped */
 const withSrc=(src,fn)=>{if(host()){HSRC=src;try{return fn()}finally{HSRC=null}}SRC=src;OPN=false;try{return fn()}finally{if(!OPN&&SRC===src)SRC=null}};
-window.stealGame=function(mode,src){if(!src||typeof window.stealMgPlay!=="function")return;let o=null;
+window.stealGame=function(mode,src){noCard();if(!src||typeof window.stealMgPlay!=="function")return;let o=null;
  if(src.c){const i=myCard(src);o=i>=0?deck[i].o:null}else o=window.stealO0(S,mode);if(o==null)return;withSrc(src,()=>window.stealMgPlay(mode,o,()=>{SRC=null}))};
 TH.UICAP.add("stealGame");
 window.stealEnd=function(src,raw,sk){const f0=window.__smgFake;window.__smgFake=()=>({raw:sk?0:raw,skipped:!!sk,sync:1});
  try{if(src.c){const i=myCard(src);if(i>=0)act(i)}else{const i=rivals.findIndex(v=>v&&v.id===src.v);if(i>=0)doAct(i,src.k)}}finally{window.__smgFake=f0}};
 /* the outermost act / doAct: the card / person the game is for (her phone: her end names it; the host: a captured game names it) */
-if(typeof act==="function"){const a0=act;act=function(i){const a=Array.isArray(deck)?deck[i]:null;
+/* the same wrapper on her phone (outermost window.act / doAct) and on the host's run of a registered act (F.PRE: F6a's act(i) intent runs
+   PRE.act on the host, below every window wrapper — without this the host ran her steal card with no capture: the game opened nowhere) */
+const wAct=a0=>function(i){const a=Array.isArray(deck)?deck[i]:null;
   if(a&&typeof window.stealIsCard==="function"&&window.stealIsCard(a)&&(g12()||hctx())&&!window.__smgFake){const self=this,args=arguments;return withSrc({c:1,i,n:a.n},()=>a0.apply(self,args))}
   if(a&&a.aaMG&&g12())CARD={i,n:a.n};/* her Tự học card: marked used on the host with her lesson's end */
-  return a0.apply(this,arguments)};window.act=act}
-if(typeof doAct==="function"){const d0=doAct;doAct=function(i,k){if((k==="steal"||k==="road")&&(g12()||hctx())&&!window.__smgFake){const v=rivals[i];
-   if(v&&v.id!=null){const self=this,args=arguments;return withSrc({v:v.id,k},()=>d0.apply(self,args))}}return d0.apply(this,arguments)};window.doAct=doAct}
+  return a0.apply(this,arguments)};
+const wDo=d0=>function(i,k){if((k==="steal"||k==="road")&&(g12()||hctx())&&!window.__smgFake){const v=rivals[i];
+   if(v&&v.id!=null){const self=this,args=arguments;return withSrc({v:v.id,k},()=>d0.apply(self,args))}}return d0.apply(this,arguments)};
+if(typeof act==="function"){act=wAct(act);window.act=act}
+if(typeof doAct==="function"){doAct=wDo(doAct);window.doAct=doAct}
+if(F.PRE){if(typeof F.PRE.act==="function")F.PRE.act=wAct(F.PRE.act);if(typeof F.PRE.doAct==="function")F.PRE.doAct=wDo(F.PRE.doAct)}
 reg12("stealEnd",["v","v","v"],{snap:"soft",noRes:true,title:A=>A[0]&&A[0].k==="road"||(A[0]&&A[0].n==="Chặn ngự giá")?"Chặn ngự giá":"Tranh sủng",
  dec:a=>{const x=X5.decA9(["v","v","v"],a);if(!x)return null;const [src,raw,sk]=x;if(!src||typeof src!=="object"||!raw0(raw,sk))return bad("stealEnd");
   if(src.c){const i=myCard(src);if(i<0||!window.stealIsCard(deck[i])||deck[i].done)return bad("stealEnd");return [{c:1,i,n:src.n},sk?0:raw,!!sk]}

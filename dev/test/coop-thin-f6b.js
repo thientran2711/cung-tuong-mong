@@ -94,7 +94,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    shelf:Object.entries((s.shelf&&s.shelf.g)||{}).filter(([g,e])=>e&&e.pc!=null).map(([g,e])=>g+':'+e.pc).sort().join(','),arts:JSON.stringify(s.arts||{}),artp:JSON.stringify(s.artp||{}),vir:JSON.stringify(s.vir||{}),
    sung:s.sung,an:s.an||0,th:s.th,mg:s.mg?s.mg.k+':'+s.mg.mode+(s.mg.cost?':c':''):null,nwk:(s.inv||[]).filter(e=>e&&e.wk).length})};
  await H.p.evaluate(HELP5);await G.p.evaluate(HELP5);
- const reset=async()=>{for(let i=0;i<3;i++){await clear(H);await clear(G)}await G.p.evaluate(()=>{Q.length=0;used=0;window.__aaPend=null;try{kg82Close()}catch(e){}try{closeModal()}catch(e){}render()});await H.p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}})};
+ const reset=async()=>{for(let i=0;i<3;i++){await clear(H);await clear(G)}await G.p.evaluate(()=>{Q.length=0;used=0;window.__aaPend=null;try{kg82Close()}catch(e){}try{closeModal()}catch(e){}render()});await H.p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}const T=COOPW.thin.F.f6bStart;if(T)for(const k in T)delete T[k]})};
  /* her phone: the game's play forced to a raw score (the real end chain runs from there); Math.random fixed on a phone (rolls) */
  await G.p.evaluate(()=>{window.__kp0=kg82Play;kg82Play=function(kind,onEnd){if(window.__raw==null)return window.__kp0.apply(this,arguments);const r=window.__raw;setTimeout(()=>onEnd(r),0)};
   window.__aaN=0;const a=window.aaShowLast;window.aaShowLast=function(){window.__aaN++;return a.apply(this,arguments)}});
@@ -106,6 +106,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   await G.p.evaluate(r=>{window.__raw=r},o.raw==null?null:o.raw);
   if(process.env.DBG)console.log('DBGEX',tag,JSON.stringify([await G.p.evaluate(()=>[S.ex,(()=>{try{return COOPW.thin.E.base(COOPW.thin.view).ex}catch(e){return 'nb '+e.message}})()]),await H.p.evaluate(()=>COOPW.thin.withSeat('b',()=>S.ex))]));
   if(o.pre){const e=await pick('Q.length=0;try{closeModal()}catch(e){}'+o.pre);if(e)console.log(tag,'pre:',JSON.stringify(e).slice(0,300))}await sleep(o.wait||400);
+  if(o.pre2){await until(G,()=>!COOPW.thin.F.pend,null,20000);await sleep(600);const e=await pick(o.pre2);if(e)console.log(tag,'pre2:',JSON.stringify(e).slice(-700));await sleep(o.wait2||900)}
   const r0=o.r==null?0.5:o.r;await rnd(G,o.hr!=null?o.hr:r0)/* the twin rolls as the host will */;
   const twin=o.twin&&ON&&!process.env.NOTWIN?await G.p.evaluate(src=>{const TH=COOPW.thin;const S0=S,u0=used,lv=TH.lvl,lw=COOPW.lvWas,ap=window.__aaPend,q0=Q.slice(),fx=window.aaCardTo,tq=TDS.q;const C=JSON.parse(JSON.stringify(S0));let out=null,err=null;
     S=C;TH.lvl=7;COOPW.lvWas=7;window.aaCardTo=()=>{};/* the twin's deferred steps (setTimeout: the rank edict's gifts, the next exam target) run on the CLONE before it is dropped, never later on her real person */const st0=window.setTimeout,DQ=[];window.setTimeout=(f,ms,...x)=>{if(typeof f==='function'&&(ms|0)<=2000){DQ.push(()=>f(...x));return 0}return st0(f,ms,...x)};try{const b=__sum(S);(0,eval)('(function(){'+src+'})')();for(let k=0;k<200&&DQ.length;k++){try{DQ.shift()()}catch(e){}}out={b,a:__sum(S),du:used-u0}}catch(e){err=e.message}finally{window.setTimeout=st0;S=S0;used=u0;TH.lvl=lv;COOPW.lvWas=lw;window.__aaPend=ap;window.aaCardTo=fx;TDS.q=tq;Q.length=0;Q.push(...q0)}return out||{err}},o.twin):null;
@@ -123,7 +124,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const hc1=await H.p.evaluate(()=>{const t=document.getElementById('rtoast');return t?t.innerHTML:''});
   const same=JSON.stringify(Object.assign({},g1,{log:0,nlog:0,used:0}))===JSON.stringify(Object.assign({},h1,{log:0,nlog:0,used:0}));
   const row={tag,r,got,st:ans&&ans.id===r.id&&ans.r0?ans.r0.st:null,ran:(st1.run||0)-(st0.run||0),ms:ans&&ans.id===r.id?ans.ms:null,g0,g1,h1,same,hostCard:hc1!==hc0,
-   aaPaid:(st1.aaPaid|0)-(st0.aaPaid|0),aaCard:(st1.aaCard|0)-(st0.aaCard|0),aaN:(gs1.aaN|0)-(gs0.aaN|0),skip:(gs1.skip|0)-(gs0.skip|0),bad:(st1.mgBad|0)-(st0.mgBad|0),hlog:await H.p.evaluate(()=>COOPW.thin.F.log.slice(-3))};
+   aaPaid:(st1.aaPaid|0)-(st0.aaPaid|0),aaCard:(st1.aaCard|0)-(st0.aaCard|0),aaN:(gs1.aaN|0)-(gs0.aaN|0),skip:(gs1.skip|0)-(gs0.skip|0),bad:(st1.mgBad|0)-(st0.mgBad|0),hlog:await H.p.evaluate(()=>[COOPW.thin.F.log.slice(-4),window.__tr&&window.__tr.slice(-4)])};
   if(twin&&twin.a){row.solo=D(twin.b,twin.a);row.solo.used=twin.du;row.real=D(g0,g1);row.real.used=g1.used-g0.used;if(o.noInv){delete row.solo.inv;delete row.real.inv}row.twinOk=JSON.stringify(row.solo)===JSON.stringify(row.real)}else if(twin)row.twinErr=twin.err;
   row.good=ON?(!r.err&&r.pend&&r.next&&r.sent===1&&r.local===0&&got&&same&&!row.hostCard&&(o.reject?(row.st==='gone'&&row.bad===1&&row.aaPaid===0):(row.st==='ok'&&row.ran===1&&(o.twin?row.twinOk===true:true)))&&(o.chk?o.chk(row):true))
    :(o.f5&&LVL>=10?r.sent===1&&row.st==='ok':r.sent===0)/* A1: the lesson end is already F5's intent at level 10; the old road: her phone runs it (a staged over-max / bad-kind end may throw there: solo never calls it so) */;
@@ -143,13 +144,21 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  
  const est=`const e=exS(S);e.grace=e.to;e.w0=wk();e.w1=wk()+3;e.pend=null;e.cd=0;S.suc=80;`;
  const RW=r=>JSON.stringify(Array(NR).fill(r));
+ const LIFT=await H.p.evaluate(()=>!!(COOPW.thin.gLift&&COOPW.thin.gLift.exam===12&&COOPW.thin.on(12)));
+ /* a lifted kind's end is taken only after its start ran on the host: rows that open the game on her phone directly stage that start */
+ const TOK=(k,v)=>`;{const T=COOPW.thin.F.f6bStart;if(T)(T[COOPW.ctx]=T[COOPW.ctx]||{}).${k}=${JSON.stringify(v==null?1:v)}}`;
  {const hr=await H.p.evaluate(()=>COOPW.thin.withSeat('b',()=>S.rank));await G.p.evaluate(r=>{S.rank=r;render()},hr)}/* her phone's rank = the host's copy (a staged rank travels as a delta) */
  const NR=await pick(`try{return exPlanFull().rounds.length}catch(e){return 0}`);
  if(process.env.DBG)console.log('E dbg NR',NR,await pick(`return {elig:exElig(S),e:exS(S),rank:S.rank}`));
  const align=async()=>{const hr=await H.p.evaluate(()=>COOPW.thin.withSeat('b',()=>S.rank));await G.p.evaluate(r=>{S.rank=r;render()},hr)};
- if(NR){await act('E1 exam played on her phone (every môn 9): same as solo',KOK,{stage:est,pre:`exStart();if(!document.getElementById('kg82go'))return 'no game';__clk()`,raw:9,wait:7000,twin:`exEnd('me',${RW(9)},[])`,noInv:1,chk:x=>(x.g1.ex!==x.g0.ex||x.g1.rank>x.g0.rank)/* passed with a free seat: the record moves to the next rank (exS) */&&x.g1.exw==null});
+ if(NR){await act('E1 exam played on her phone (every môn 9): same as solo',KOK,{stage:est+TOK('exam','me'),pre:`exStart();if(!document.getElementById('kg82go'))return 'no game';__clk()`,raw:9,wait:7000,twin:`exEnd('me',${RW(9)},[])`,noInv:1,chk:x=>(x.g1.ex!==x.g0.ex||x.g1.rank>x.g0.rank)/* passed with a free seat: the record moves to the next rank (exS) */&&x.g1.exw==null});
   await align();await act('E2 over-max (exEnd raw 11): refused, the window stays open',`exEnd('me',${RW(11)},[])`,{stage:est,reject:1,chk:x=>x.g1.ex===x.g0.ex&&x.g1.exw!=null});
-  await align();await act('E3 every môn «Để tài nghệ quyết định» (exSkipRaw on the host): same as solo',`exEnd('me',${RW(0)},${JSON.stringify(Array(NR).fill(true))})`,{stage:est,twin:`exEnd('me',${RW(0)},${JSON.stringify(Array(NR).fill(true))})`,noInv:1,chk:x=>x.g1.ex!==x.g0.ex||x.g1.rank>x.g0.rank});
+  await align();await act('E3 every môn «Để tài nghệ quyết định» (exSkipRaw on the host): same as solo',`exEnd('me',${RW(0)},${JSON.stringify(Array(NR).fill(true))})`,{stage:est+TOK('exam','me'),twin:`exEnd('me',${RW(0)},${JSON.stringify(Array(NR).fill(true))})`,noInv:1,chk:x=>x.g1.ex!==x.g0.ex||x.g1.rank>x.g0.rank});
+  if(LIFT){await align();await act('L2 forged exam end (no start ran on the host, the card lifted): refused',`exEnd('me',${RW(9)},[])`,{stage:est,reject:1,chk:x=>x.g1.ex===x.g0.ex});
+   await align();const exK=await pick('return BAL.ex.suc');
+   await act('L1 her exam deck card (lifted): act(i) on the host pays the start once, the game opens on HER phone, ONE end',KOK,{stage:est+`const c=exCard();if(c.lock)return 'locked';deck=deck.filter(x=>x&&!x.exam);deck.unshift(c);`,
+    pre:`const i=deck.findIndex(a=>a&&a.exam);if(i<0)return 'no card: '+deck.map(a=>a&&a.n).join();act(i)`,pre2:`if(!document.getElementById('kg82go'))return 'no game '+JSON.stringify({uiN:COOPW.thin.uiN,la:COOPW.thin.F.lastAns&&{n:COOPW.thin.F.lastAns.n,ui:COOPW.thin.F.lastAns.ui,r0:COOPW.thin.F.lastAns.r0},kg:!!document.getElementById('kg82'),ov:(document.getElementById('ov')||{}).hidden,st:[COOPW.thin.F.stat.noCard,COOPW.thin.F.stat.exLocal],gerr:window.__gerr,modal:!!document.querySelector('#modal:not([hidden])'),Q:Q.map(q=>q.t)}).slice(-700);__clk()`,wait:600,wait2:7000,raw:9,
+    chk:x=>x.g0.suc===80-exK&&(x.g1.ex!==x.g0.ex||x.g1.rank>x.g0.rank)})}
   await align();await act('E4 no open window (a second end): refused',`exEnd('me',${RW(5)},[])`,{stage:`const e=exS(S);e.w0=e.w1=null;e.pend=null;`,reject:1})}
  else ok(true,'E no exam plan here (skipped)');
  await act('E5 servant exam without a window: refused',`exEnd('srv',[5],[])`,{reject:1});
@@ -172,15 +181,18 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await G.p.evaluate(()=>{try{kg82Close()}catch(e){}});
  /* ---- M: the mirror ---- */
  const mst=`S.toilette=null;S.suc=80;`;const mpre=p=>`toilOpen();if(!TOIL.st)return 'no mirror';TOIL.st.parts=${JSON.stringify(p)};`;
- await act('M1 Điểm trang, played (brow .9 powder .8 son .7): same as solo',`toilFinish(true)`,{stage:mst,pre:mpre({brow:.9,powder:.8,son:.7}),twin:`toilFinish(true)`,chk:x=>x.g1.toil&&x.g1.toil!==x.g0.toil,shot:'mirror'});
- await act('M2 Điểm trang nhanh: the HOST rolls (host win, her phone forced to lose)',`toilFinish('quick')`,{stage:mst,pre:mpre({}),hr:0,gr:0.999,twin:`Math.random=()=>0;toilFinish('quick')`});
+ await act('M1 Điểm trang, played (brow .9 powder .8 son .7): same as solo',`toilFinish(true)`,{stage:mst+TOK('toil'),pre:mpre({brow:.9,powder:.8,son:.7}),twin:`toilFinish(true)`,chk:x=>x.g1.toil&&x.g1.toil!==x.g0.toil,shot:'mirror'});
+ await act('M2 Điểm trang nhanh: the HOST rolls (host win, her phone forced to lose)',`toilFinish('quick')`,{stage:mst+TOK('toil'),pre:mpre({}),hr:0,gr:0.999,twin:`Math.random=()=>0;toilFinish('quick')`});
+ if(LIFT)await act('M4 forged mirror end (no start ran on the host, lifted): refused',`toilFinish(true)`,{stage:mst,pre:mpre({brow:.9,powder:.8,son:.7}),reject:1});
  await act('M3 a part over 1 (brow 1.5): refused',`toilFinish(true)`,{stage:mst,pre:mpre({brow:1.5,powder:.5,son:.5}),reject:1});
  await G.p.evaluate(()=>{try{TOIL.st=null;kg82Close()}catch(e){}});
  /* ---- T: the steal game before her Tranh sủng card ---- */
+ if(process.env.DBG)await G.p.evaluate(()=>{window.__gerr=[];window.addEventListener('error',e=>window.__gerr.push(String(e.message).slice(0,120)));const ce=console.error;console.error=function(){window.__gerr.push([...arguments].map(String).join(' ').slice(0,160));return ce.apply(this,arguments)}});
+ if(process.env.DBG)await H.p.evaluate(()=>{const TH=COOPW.thin,t0=TH.tapRun;window.__tr=[];TH.tapRun=function(fn){const r=t0.call(this,fn);window.__tr.push(JSON.stringify(r.ui||null).slice(0,200));return r};const c0=TH.F.R.act;window.__actR=!!c0});
  const tcard=`const v=liveRivals(true).find(x=>x&&!x.coop);if(!v)return 'no rival';const a={n:'Tranh sủng',t:'t',c:stealCost('feign'),o:oSteal(S),w:{},l:{sung:-BAL.steal.failSung},x:'',__steal:1,go:()=>{log(stealWin(S,v,'feign'))}};deck=deck.filter(x=>x&&x.n!=='Tranh sủng');deck.unshift(a);return a.o;`;
  {const ho=await H.p.evaluate(src=>COOPW.thin.withSeat('b',()=>(0,eval)('(function(){'+src+'})')()),tcard);const go=await pick(tcard);const smOn=await pick(`return !!(BAL.steal&&BAL.steal.mg&&BAL.steal.mg.on)`);
   if(typeof ho==='number'&&typeof go==='number'&&smOn){
-   await act('T1 Tranh sủng: the game on her phone (raw 9), the card run on the host once',KOK,{pre:`act(0);if(!document.getElementById('kg82go'))return 'no game';`+KGO,raw:9,wait:900,
+   await act('T1 Tranh sủng: the game on her phone (raw 9), the card run on the host once',KOK,{pre:`act(0)`,pre2:`if(!document.getElementById('kg82go'))return 'no game: '+JSON.stringify({d:deck.slice(0,2).map(a=>a&&[a.n,a.__g]),uiN:COOPW.thin.uiN,la:COOPW.thin.F.lastAns&&{n:COOPW.thin.F.lastAns.n,r0:COOPW.thin.F.lastAns.r0},flog:COOPW.thin.F.log.slice(-5),Q:Q.map(q=>q.t),modal:!!document.querySelector('#modal:not([hidden])')}).slice(0,900);`+KGO,raw:9,wait:900,
     chk:x=>x.ran===1});
    const hd=await H.p.evaluate(()=>__hdeck(d=>d[0]&&{n:d[0].n,done:d[0].done}));if(!table.length||!table[table.length-1].tag.startsWith('T1'))ok(true,'T1b (row skipped)');else ok(ON?!!(hd&&hd.done):true,'T1b her host-deck card used once',hd);
    await act('T2 over-max (stealEnd raw 11): refused',`stealEnd({c:1,i:0,n:'Tranh sủng'},11,false)`,{reject:1})}

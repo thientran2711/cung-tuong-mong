@@ -26,6 +26,7 @@ const RAW=Symbol.for("ctm.lens.raw");
 const isMe=a=>!!a&&(a===S||a[RAW]===S||(S&&S[RAW]&&S[RAW]===a));
 const LSK=()=>"ctm-thin-f:"+(COOP.state.room||"");
 const PRE={};/* name → the function below the wrapper (the host runs it) */
+F.PRE=PRE;/* F6b: a later part's host-side wrapper of a registered function goes here (the host runs PRE[name], not window[name]) */
 
 /* ---------- guest ---------- */
 /* reviewer r1 (her act's result card): in solo and below level 6 the caller that snapshots her stats before an act (rsnap: wrapR doAct,
