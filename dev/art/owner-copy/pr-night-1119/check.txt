@@ -1,20 +1,33 @@
-bt-t1: store sentences 45, missing 0 []; refs image identity + style M09
-bt-t2: store sentences 44, missing 0 []; refs image identity + style M09
-bt-t3: store sentences 44, missing 0 []; refs image identity + style M09
-bt-t4: store sentences 47, missing 0 []; refs image identity + style M09
-bt-t5: store sentences 44, missing 0 []; refs image identity + style M09
-bt-t6: store sentences 53, missing 0 []; refs image identity + style M09 + image swatch
-bt-t7: store sentences 39, missing 0 []; refs image identity + style M09
-bt-t8: store sentences 44, missing 0 []; refs image identity + style M09
-bt-t8o: store sentences 44, missing 0 []; refs image identity + style M09
-cl-t4: store sentences 47, missing 0 []; refs image identity + style M09
-cl-t5: store sentences 44, missing 0 []; refs image identity + style M09
-cl-t6: store sentences 53, missing 0 []; refs image identity + style M09 + image swatch
-cl-t7: store sentences 39, missing 0 []; refs image identity + style M09
-cl-t8: store sentences 44, missing 0 []; refs image identity + style M09
-cl-t8o: store sentences 44, missing 0 []; refs image identity + style M09
-pt-t1: store sentences 45, missing 0 []; refs image identity + style M09
-pt-t2: store sentences 44, missing 0 []; refs image identity + style M09
-pt-t4: store sentences 47, missing 0 []; refs image identity + style M09
-pt-t5: store sentences 44, missing 0 []; refs image identity + style M09
-pt-t6: store sentences 53, missing 0 []; refs image identity + style M09 + image swatch
+STORE CHECK PASS bt-t1.txt
+STORE CHECK PASS bt-t2.txt
+STORE CHECK PASS bt-t3.txt
+STORE CHECK FAIL bt-t4.txt — 1 store sentence(s) missing or rewritten:
+  [0.79] celadon only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe.
+STORE CHECK FAIL bt-t5.txt — 1 store sentence(s) missing or rewritten:
+  [0.79] celadon only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe.
+STORE CHECK FAIL bt-t6.txt — 2 store sentence(s) missing or rewritten:
+  [0.84] COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly soft rose pink silk (her signature colour family soft rose pink and celadon), with large areas
+  [0.83] celadon only as a small accent;
+STORE CHECK PASS bt-t7.txt
+STORE CHECK PASS bt-t8.txt
+STORE CHECK PASS bt-t8o.txt
+STORE CHECK FAIL cl-t4.txt — 1 store sentence(s) missing or rewritten:
+  [0.79] celadon only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe.
+STORE CHECK FAIL cl-t5.txt — 1 store sentence(s) missing or rewritten:
+  [0.79] celadon only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe.
+STORE CHECK FAIL cl-t6.txt — 3 store sentence(s) missing or rewritten:
+  [0.88] COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly soft rose pink silk (her signature colour family soft rose pink and celadon), with large areas
+  [0.83] celadon only as a small accent;
+  [0.8] NOT cream, NOT beige, NOT ivory, NOT an all-gold robe, NOT a green robe.
+STORE CHECK PASS cl-t7.txt
+STORE CHECK PASS cl-t8.txt
+STORE CHECK PASS cl-t8o.txt
+STORE CHECK PASS pt-t1.txt
+STORE CHECK PASS pt-t2.txt
+STORE CHECK FAIL pt-t4.txt — 1 store sentence(s) missing or rewritten:
+  [0.79] celadon only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe.
+STORE CHECK FAIL pt-t5.txt — 1 store sentence(s) missing or rewritten:
+  [0.79] celadon only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe.
+STORE CHECK FAIL pt-t6.txt — 2 store sentence(s) missing or rewritten:
+  [0.88] COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly soft rose pink silk (her signature colour family soft rose pink and celadon), with large areas
+  [0.83] celadon only as a small accent;
