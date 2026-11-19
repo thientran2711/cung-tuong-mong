@@ -221,3 +221,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | CTM hall-names (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/hall-names; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsJqjDM27hysYd7E48b | RUNNING | 19/11 04:09Z |
 | CTM monthly-allotment (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/monthly-allotment; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsNLFYkPdJUDpjgwsaU | RUNNING | 19/11 04:09Z |
 | CTM minister-agents (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/minister-agents; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsHjti1YnXbSGeocwni | RUNNING | 19/11 04:09Z |
+| coop-thin F3 (opus; bag/shop/wear/gifts; stacked on F2) | review/coop-thin-f3 | B | session_01N1tNP4NVrwK67H3DPhD9Ld | RUNNING | 19/11 04:18Z |
