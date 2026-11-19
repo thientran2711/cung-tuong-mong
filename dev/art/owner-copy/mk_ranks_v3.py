@@ -1,4 +1,4 @@
-# Lượt 306-308 builder: princesses V3 + m19 V5, base = m19_tN_V4.txt (approved prompt), only parts swapped.
+# Lượt 306-308/321 builder (t1-t3 add SLEEVES sentence): princesses V3 + m19 V5, base = m19_tN_V4.txt (approved prompt), only parts swapped.
 import re
 B='/home/user/cung-tuong-mong/dev/art/owner-copy/'
 FL={1:['jasmine sprigs','peach blossoms','osmanthus clusters','pear blossoms','small climbing roses'],
@@ -15,6 +15,10 @@ ANG=[("FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, n
  ("a clear THREE-QUARTER view toward the LEFT, NOT frontal: her whole body, hips and face turned about 45 degrees to the left, her right shoulder nearer the viewer, face fully visible (never side view)","{item}, poised","her feet pointing the same way as her hips, one foot slightly in front, toes peeking under the hem"),
  ("a SLIGHT shoulder turn to the RIGHT (about 15 degrees), body almost frontal, face toward the viewer","{item}, chin slightly lifted","weight on one foot, the other foot resting slightly to the side, toes peeking under the hem"),
  ("a SLIGHT turn to the LEFT (about 15 degrees), body almost frontal, face toward the viewer","{item}, the wide sleeves falling in soft folds, with stately grace","one foot slightly forward as if about to step, the hem barely lifted")]
+def _mir(x):
+    return x.replace('LEFT','@@').replace('RIGHT','LEFT').replace('@@','RIGHT').replace('left shoulder','@@').replace('right shoulder','left shoulder').replace('@@','right shoulder').replace('to the left','@@').replace('to the right','to the left').replace('@@','to the right')
+MIRROR=[(_mir(a)+('' if ('LEFT' in a or 'RIGHT' in a) else ', mirrored: her weight and the item on her LEFT side'),_mir(b),_mir(c)) for a,b,c in ANG]
+ANG=ANG+MIRROR  # Lượt 321: 7 angles + 7 mirrored = 14, rotated per person
 T8=("FULLY FRONTAL, body, shoulders and face squarely facing the viewer, a calm, stately standing pose","{item}, with majestic grace","feet together, toes peeking under the hem, perfectly balanced and still")
 P={
 'm19':dict(n=19,main='caramel apricot',hex1='#DFBBA1',sec='soft teal blue',hex2='#6E9CA8',
@@ -62,7 +66,7 @@ def build(k,t,hh_orig=False):
         s=rep(s,'about 22, youthful adult.','about 20, youthful adult.')
         s=rep(s,EYE,"Her eyes exactly as in image 1, open and bright, never teary.")
     # pose (rotation, t8 fixed)
-    a,act,legs=(T8 if t==8 else ANG[(t-1+(d['n']-1))%7])
+    a,act,legs=(T8 if t==8 else ANG[(t-1+(d['n']-1))%14])
     pa=s.index('Pose:'); pe=s.index('The item',pa)
     s=s[:pa]+f'Pose: ANGLE: {a}; '+act.format(item=d['item'][t])+'. '+s[pe:]
     s=rep(s,GL,f"Her LEGS and FEET for this pose: {legs}; never both feet splayed outward, never stiff straight legs.")
@@ -111,6 +115,7 @@ def build(k,t,hh_orig=False):
         tc=f"TWO-COLOUR RULE: the whole outfit uses EXACTLY TWO colours that clearly interact: the MAIN colour {m} and the SECONDARY colour {sc}, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, never a third colour.{extra} Every layer has full-length long sleeves: NO short-sleeved or half-sleeved layer over the long sleeves. "
     else:
         tc=f"TWO-COLOUR RULE: exactly two colours: the ROYAL YELLOW of image 3 dominant and her own {d['main']} second; gold only as thin accents. Every layer has full-length long sleeves: NO short-sleeved or half-sleeved layer over the long sleeves. "
+    if t<=3: tc="SLEEVES: very long, wide, flowing sleeves of thin light silk that fall well past her hands and drape softly toward her knees, swaying gracefully and trailing elegantly (thướt tha); never short, narrow, cuffed or tight working sleeves like a maid's or palace servant's. "+tc
     i=s.find('Hair:'); i=i if i>=0 else s.index('All flowers'); s=s[:i]+tc+s[i:]
     if pr: assert 'caramel' not in s and 'apricot silk' not in s,(k,t)
     return s
