@@ -78,7 +78,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
    k:has(def,"Giữ chân Hoàng thượng",`khó thêm ${BAL.steal.keep.rung} bậc`)&&has(def,"Giữ chân Hoàng thượng",`Sủng +${BAL.steal.keep.gain}`)}});
  ok("6 choice cards print BAL numbers",r.f&&r.r&&r.k,r);
  /* 7. ledger night (not played): stealPass(holder,{live:false}) returns lines, no night record */
- r=await p.evaluate(()=>{const L=T.setup();const [A,B]=L;window.stealWant=(v,t)=>v===B?{u:1,p:1,mode:"feign"}:{u:0,p:0,mode:null};const n0=T.recs(L);const o=window.stealPass(A,{live:false});const e=T.recs(L);T.fin();
+ r=await p.evaluate(()=>{const L=T.setup();const [A]=L;/* review balance-final: the day before (T.toEvening) can leave the drawn B unable to serve (with child, ill, on the cycle tray): ready the others and take one that npcAttackers can pick, else tries 0 (seen 1/3) */const C=L.filter(v=>v!==A);C.forEach(v=>{v.confined=0;v.block=0;v.out=0;v.ill=null;v.preg=0});const B=C.find(v=>stealEligible(v,A)&&!(typeof cyTray==="function"&&cyTray(v)))||C[0];window.stealWant=(v,t)=>v===B?{u:1,p:1,mode:"feign"}:{u:0,p:0,mode:null};const n0=T.recs(L);const o=window.stealPass(A,{live:false});const e=T.recs(L);T.fin();
   return{lines:Array.isArray(o.lines)&&o.lines.length>=1,tries:o.tries,rec:e.r0-n0.r0+e.r1-n0.r1+e.me-n0.me}});
  ok("7 ledger pass (live:false): lines only, no record",r.lines&&r.rec===0,r);
  const pass=Object.values(R).every(x=>x.pass);
