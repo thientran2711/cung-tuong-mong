@@ -136,3 +136,28 @@ PRIORITY #1 CHECK ('balance final'): OD 0 | ledger 0 | claims 0 (this job) | mai
 Tried and dropped: AG day loop off for all cases (the flip then often picks nobody — as #2 found).
 Result on 4c2f9683, idle box: **night-final 8/8, night-multi 8/8** (+ harness: 46 nf cases, 20 nm sequences clean).
 - 05:20Z: merged origin/main fd6118c (maid-ladder-6, art-wiring-1119) → **242f7f3e** (pushed): assemble list = main's + jbalcore/jledger/jnf (357 modules); j2 S init = ours (origSet BAL.start) + main's lad6; index/sw rebuilt. Static guards PASS (one-core-guard / bind / text / text-rule, time-spill). Browser gates running.
+- 05:45Z: balance-core FAILED once on 242f7f3e: the growth-curve check compared ONE stochastic-rounded run per side (±5 band, misses ~1 in 20; pre-existing, passes 5/5 on both shas on rerun). → d76e8e2: mean of 40 runs from 85 with the peak reset each run (below the peak a regain grows at grow.back, which is why a plain average read ≈14), band ±1.5: 6/6 ≈4 vs ≈4.
+- 06:00Z: night-final case 3 failed once → 1e144dc: cases 3/4 ready the attacker B right before the flip (T.ready). **review/balance-final = 1e144dc (pushed).**
+
+### Gates on 1e144dc (242f7f3e + test-only commits), run one at a time on an idle box
+| gate | result |
+|---|---|
+| one-core-guard / bind / text / text-rule, time-spill | PASS |
+| quickcheck --runs 6 (old save, core gates) | PASS · render 168/166 ms, tab 290/284, buổi 920/1048, tasks > 200 ms 17/18 (new/live) |
+| balance-core | PASS 42/42 (after d76e8e2) |
+| ledger | ALL PASS |
+| night-steal-unit | PASS |
+| night-coop-park | ALL OK 6/6 |
+| coop-night | 105/105 |
+| coop-e2e | 68/68 (main added 5 cases) |
+| night-multi | 3/3 on 1e144dc (+ 3/3 on 242f7f3e; 8/8 + 20 sequences on 4c2f9683) |
+| **night-final** | **6/8 on 1e144dc** (2/3 on 242f7f3e); 8/8 + 46 clean harness cases on the PRE-merge 4c2f9683. Failures after the main merge: case 3 ×2 (NPC B's forced attack at A's flip loses: A 1 / B 0, even with B readied), case 8 ×1 (no choice opens: ord ["visit:wait"] only, nothing queued) |
+| Fold / iPad shots | NOT taken yet |
+
+### HANDOVER (#3 worker rollover at ≈ START_CTX + 25 %; the coordinator opens the successor)
+State: review/balance-final = **1e144dc** (pushed; LIVE fd6118c merged). NOT YET SẴN SÀNG KIỂM: night-final 6/8 after the main merge; everything else PASS; shots not taken.
+Successor steps:
+1. night-final on 1e144dc: case 3 (A flipped, B attacks with oSteal 95 + seq .001×4, she says Thôi → expected B 1) and case 8. New since the merge of fd6118c (maid-ladder-6 / art-wiring-1119) — compare with 4c2f9683 (8/8). Use the repeat harness: `python3 dev/handover/reports/balance-final-tools/nf_repeat_gen.py dev/test/night-final.js dev/test/nfrep-tmp.js && CASES=3,3,3,3,3,3,3,3,8,8,8,8 node dev/test/nfrep-tmp.js file://<abs>/index.html` (prints only failing cases with their info; case 8 also records who pushed empnight + the flip's nightWhy; delete the tmp file before committing). For case 3 add debug of S.nfX (npc list: is B in x.npc? x.nk? the defence) and the drain order. Suspects: the seq .001×4 is drawn by something else first (more draws now in resolve or a new dialog answered inside the seq window → move T.seq to right before the nfch answer like case 2/4 via T.toChoice + T.drain(1)), or B missing from npcAttackers (canAtt/nightCh). Then night-final ×8 + night-multi ×8 on an idle box.
+2. Final-merge current origin/main again (usually only index.html/sw.js + assemble list + j2 S-init line conflict: take main's list + jbalcore/jledger/jnf; j2 = ours origSet + main's additions), rebuild (assemble.py + build_site.sh), re-run the gates table, Fold 755x1000@2 + iPad 1180x820@2 shots (scratch only).
+3. SẴN SÀNG KIỂM <sha> in STATUS + this report + send_message D #5, with the arms table (§ FINAL ARMS above, unchanged: this round touched no numbers) and the OWNER FLAGS: QP −7 pooled (87 vs 80 %); ended before HH/cap 19 vs 25 %; kids/y 1.45× live; seat vacancy blocks promotions; NPC Sủng lower (m12 38 vs 46).
+Game-code changes this round (for the reviewer): jnf (news card never holds the choice; nfch to the queue front; pullKsp), jflip (kmOnReset → CFN 0). Laws: no number, choice, cost or trial changed (laws 2/3/4/5 untouched); the flip choice can no longer be skipped by a news card or a summons answered first (two-way: same for her and the co-op friend).
