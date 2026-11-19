@@ -96,3 +96,27 @@ LOOKED (every frame, 3×)
 - FAULT (kit vs kit, not jchat code) → KIT REQUEST "K-HEAD-SAY × EMO-SEAL LEAN" filed in dev/kit/KIT_REQUESTS.md (review/palace-chatter): the §38.4 lean-in seal clone (img.kemo-big, "above every UI", grows ~2.3×, holds ~6–7 s) is drawn OVER the say bubble and hides its first words (Fold t≈8–14 s, iPad t≈8–14 s, the maid's line "Sáng sớm sương lạnh…"; probe = img.kemo.kfseal.kemo-live.kemo-m-nod). Shot: say-fold-seal-over-bubble-t13.jpg (scratch, see above). Law 9: I did not touch either kit part. Ask: no lean-in for a seal whose person has an open bubble, and no new bubble under a leaning clone.
 - Note: on Fold the video's gift happening pair talked idle topics, not the gift line first (iPad did say the gift lines); the unit happening check passes on both devices (pair together + talks first). Reviewer may look at it; not changed this round.
 OPEN: the KIT REQUEST above (MAIN = kit keeper). Everything else is ready for the BIG review (UI + core hooks).
+
+## ROUND 2 (E17c, 19/11 ~13:40Z) — review/palace-chatter @ 03841087 (fixes E17r FAIL 115717a8; base review/palace-chatter-rv 612a1b43 + merge origin/main 801b86b7)
+depth 2. Context ~22 % (START_CTX ~4 %, rollover ~29 %).
+★ THE 18 LAWS: read the block at the very top of dev/rules/START_CORE.md FIRST (all 18; laws 1–6 top priority); put this line in every brief/takeover prompt; reviewers FAIL any break.
+PRIORITY #1 CHECK ('palace-chatter|jchat|eavLines|watcher'): OD 0 new | main: watcher(p) j22.js:20, its override jtin.js:8, v.staff (j10 mkServ role maid/eunuch), v.maid | review/* palace-chatter-rv 612a1b43 | claims E17c / E17r | reused watcher, nothing new.
+F1 LAW 6b REAL PEOPLE — DONE
+- eavLines (jchat.js): the overheard partner = watcher(v), HER REAL servant (most loyal close + trusted servant of v.staff, else her own maid), by name; eunuch → sp srv "m" / kind eun, maid → "f" / srv. No such servant → no partner → no quoted exchange (CH.stat.eavNoSrv; the j78 fact is unchanged). Dead `mate` code removed.
+- ROOT CAUSE found on the way (core, whole family): jtin.js:8 overrode watcher() WITHOUT its argument → watcher(p) always returned HER (S) watcher. So j22 lộRisk(k,p) and the NPC manTryst step (j22:34) read the player's servant for NPC consorts too, and watcher(v) could never name the consort's own servant. Fix: the jtin override takes p (p = p || S; same tín rule) — for her nothing changes; for NPCs it now reads their own household. Callers with an argument: j22:19, j22:34, jchat eav (scan: grep 'watcher(' dev/build/*.js, all.js excluded).
+- {it} slot in eavSlots: no real item name → the line is skipped (was "" = a blank name).
+- Family scan, invented persons in jchat.js + jchatl.js:
+  | pattern | before (612a1b43) | after |
+  |---|---|---|
+  | "cung nữ thân cận của …" (made-up partner) | 1 | 0 |
+  | literal p:{name:"…"} person | 0 | 0 |
+  | literal sp name "cung nữ" | 1 | 0 |
+  | {it} filled with "" | possible | never (skip) |
+  Other third people: NEED (sungtop/preg/ill/queen/any/cold/kid/emp/th/fest) read live S / rivals; strangers = "vị <rank>" mask of a real person (k61) — unchanged, all real.
+- Sample (both devices): « Ngươi nghe rõ từng lời — Kiều Vân Thường: “Nhỏ tiếng thôi, ngoài kia có người.” — Tuyết Mai: “Dạ, nô tỳ sẽ nói khẽ.” » (Tuyết Mai ∈ her v.staff; watcher(S) = none → proves it is not the player's).
+F2 HAPPENING TALKS FIRST — DONE: BAL.chat.w.hap .8 → 1 (+ code fallback 1); happening exchanges logged with tag "hap". Unit asserts the first exchange tag = hap; the video script exits 1 unless the first exchange at the place is "hap" — both devices PASS (Fold: "Món quà nhỏ này, mong muội muội vui lòng nhận lấy." → "Đa tạ Tạ phi nương nương, thật là quý hóa.").
+NIT (old save): the always-true check is replaced by a real one: S.pcx deleted → a tick plays with no error (lazy memory). N1/N2 not taken.
+B1 (K-HEAD-SAY × EMO-SEAL LEAN): MAIN's kit item, untouched; still visible in the r2 video (seal lean over the bubble) as expected.
+TESTS (03841087): palace-chatter.js Fold 28/28 · iPad 28/28 PASS (new: partner ∈ v.staff/maid, watcher(v) is hers, no servant → no quote, first exchange tag hap, real old-save) · palace-chatter-host.js Fold 9/9 · iPad 9/9 · chatl-bank PASS (853) · one-core-guard PASS · QUICKCHECK PASS 230 s (old save ok, core gates PASS, perf new/live render 279/255, tab 565/589, buổi 1378/1231 ms, tasks>200 22/21) · videos both devices 0 page errors, VIDEO happening first PASS ×2.
+LOOKED 3× (r2 sheets, 1 frame / 2 s): text inside the bubble, above the head with a gap, tail on the speaker, inside the stage, pair side by side, one bubble per turn; only fault = B1. A drifting stage petal (fx) sometimes crosses a bubble for one frame — transient, not a cover.
+SHOTS: not in git (OD 16/11 18:50Z); CDN R2 401. FOR MAIN: scratch on the E17c container /home/user/wt/pc/img/_review/palace-chatter/ (r2-video-755x1000.mp4, r2-video-1180x820.mp4, r2-sheet-*.jpg + round-1 files).
