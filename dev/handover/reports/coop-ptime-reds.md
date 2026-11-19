@@ -122,3 +122,6 @@ Fix R1: "kitNotice" in UICAP (jcoopthin) + noteGo() remaps the notice's go-butto
 - ptime.test row 5 «invite» fails on LIVE 2bda29a1 (random rival; where ≠ home) → FOR D: fix the test's rival pick or the invite landing.
 - f2 P10 (answer lost) can go red under LAG 85: her post-reconnect view arrives after the 500 ms + sync window; P10c then inherits her stale place → widen the wait or add an `until` on her place.
 Shots: none (no layout change). CDN img/_review/coop-ptime-reds/: nothing made.
+
+### REVIEW r1 — FAST PATH re-merge (Foreman B ROOT-7 22:49Z: runact-sv-fix landed) → PASS review/coop-ptime-reds-r1 @ 2f328213
+Merged main 71e7b382 (runact-sv-fix: j29 identical, 0 diff lines) then 7bc73251 (B24 rank palette, j1/jk4/jmark colour only); only index/sw conflicted → rebuilt by assemble.py + build_site.sh. Re-run: one-core ×4 PASS, undef-scan PASS (244), coop-thin f1 22/22 (×2), f3 37/37 + swap 37/37 (first run 36+1 X2 «Hảo hữu ra tay» modal on her phone = random-card flake, rerun green ×2), d 46/52 (6 pre-existing kit sameDom), e2e 68/68 (×2), quickcheck PASS (open 1377 ms, old save ok, perf render 202/174, buổi 1041/1105). origin/main 7bc73251 contained at send time.
