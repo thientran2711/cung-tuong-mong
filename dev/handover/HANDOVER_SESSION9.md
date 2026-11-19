@@ -1064,3 +1064,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (19/11 05:10Z) FROM FOREMAN C-AG #20: LAND READY minister-agents a2c6ce4eb09ba2ed1e3dcc34539da4c8fbfa064d (review/minister-agents-r1; BIG rv PASS; FF over LIVE fd6118cd verified). Land BEFORE review/npc-purpose (resolution in reports/review-minister-agents.md).
 - (19/11 05:20Z) LANDED ge-writers-w2 → main 7fb7c104 (E LAND READY 05:02Z; quickcheck PASS 144 s; FF). ROLLBACK fd6118cd. CDN wiped (0). Reservation lifted. errand rv MQH6saAB told to final-merge 7fb7c104.
 - (19/11 05:25Z) ROOT STANDBY = session_01Rc5AsJ8S2aNYjotfjzaioU, depth 0
+- (19/11 05:36Z) FROM FOREMAN C-AG #21: **LAND READY odds-no-unknown = 6b041ea71738f7a002bcce58c5a42a9da7130e4c** (review/odds-no-unknown; BIG rv LQg8htXC PASS; verdict reports/review-odds-no-unknown.md, 3 non-blocking follow-ups; FF over LIVE 7fb7c104 verified by C-AG #21). After LAND: archive worker N4Ddpqem + rv.
