@@ -1,7 +1,7 @@
 # maid-ladder-6 — six-rung maid ladder + «Ma ma» stay-on chip (worker report)
 
 PRIORITY #1 CHECK ('tam đẳng','nhất đẳng','SRK.maid','srvBar'): OD 1 (OD 19/11 ~01:26Z, L1939) + L1935 (ma ma question) | ledger 0 | claims 0 | main j14.js:34 SRK.maid (5 rungs), jbal2.js:17 srvBar/srvCd, jexam exSrv*, j42 cnv road | review/* 0 | reused: reports/hist-mama-ladder.md (expert, law 8), kit part kitTiers (j79:78) for the ladder display.
-START_CTX ~10 %. Branch review/maid-ladder-6 from origin/main b1c3631e.
+START_CTX ~10 %. Branch review/maid-ladder-6 from origin/main b1c3631e, final-merged LIVE 1cf5e8bb.
 
 ## Owner words (verbatim, OD 19/11 ~01:26Z)
 "Cung nữ chia là thô sử, tam đẳng, nhị đẳng, nhất đẳng, nhất đẳng là đại cung nữ như giờ"
@@ -60,3 +60,28 @@ Run once on load when the save lacks `S.lad6` (new games are born with `S.lad6=1
 
 ## FOR C (Foreman B relays)
 FOR C: maid-ladder-6 splits the old «Cung nữ» rung into «Cung nữ tam đẳng» + «Cung nữ nhị đẳng» (and Đại cung nữ is now «Cung nữ nhất đẳng»). Default shipped: tam + nhị đẳng share the present «Cung nữ» robe / frame-maid-1 / colour (BAL.srvRk.tier). Do tam đẳng and nhị đẳng need their own robe (or only a colour step)? If yes, list the pictures and B wires them by changing BAL.srvRk.tier only.
+
+## Done (all 29 touch points above changed as listed)
+Extra, found while working: j42 HUD help line «Bậc cung nữ: Cung nữ → Đại cung nữ → Chưởng sự cô cô» (HX.srk) now prints the whole SRK ladder + the ma ma rule; j79 KIT_RP_TITLES paints «Cung nữ tam/nhị/nhất đẳng» as one title; wage on the ladder written «N bạc mỗi tháng» (the date painter turned «Lương tháng 1 bạc» into «tháng giêng»).
+Load order: BAL.srvRk + BAL.srvWage live in jbal.js (loads before j42, which reads them at top level).
+
+## Scan (law 11) — before / after
+Scan: `grep -rnoE "SRK\.maid\[[0-9]\]|srv\.rk\s*[<>=]=?\s*[0-9]|srk\([a-z]+\)\s*[<>=]=?\s*[0-9]|\.rk\|\|0\)\s*[<>=]=?\s*[0-9]|\"sv[0-9]\"" dev/build` (maid context).
+| | before | after |
+|---|---|---|
+| typed maid-rung numbers in gates (rk>=2 / >=3 / min(4) / sv2 / mama 5) | 27 | 0 (left: rk>=1 «not thô sử», rk 0/1 starts, eunuch srk>=3 in j8 — eunuch ladder unchanged) |
+| rung tables in BAL with one entry per rung | 5 entries (srvBar/srvCd 6 incl. ma ma) | 6 (+ ma ma = 7): srvBar, srvCd, srvWage, mline.eye, dbCost, promo.srv |
+| private fallback arrays (jexam NPC `B.srvBar||[...]`) | 2 | 0 |
+
+## Gates
+- `node dev/test/maid-ladder-6.js <new> <live> <out> 755x1000@2 1180x820@2` → **PASS 13/13** (6 rungs, lad6 on new life, every rung table sized, month promotion tam → nhị đẳng, ma ma choice only from Chưởng sự/Nữ quan, household cap 3..5, art tier, NPC exam on srvBar[5], migration 0→0 1→1 2→3 3→4 4→5 once + eunuch kept, LIVE-build maid save loads (Đại cung nữ → nhất đẳng, staff mapped, a month plays), Thân phận ladder 6 + Ma ma, hers marked, no overflow on both devices).
+- `bash dev/tools/quickcheck.sh` (on 8aae6b15) → **QUICKCHECK PASS** · old save ok · core gates PASS (one-core-guard PASS, inline 3987 < baseline 4212) · perf new/live render 206/193 ms.
+- `node dev/test/coop-e2e.js` → **63/63 passed** (incl. seat swap). Co-op: the ladder is code + BAL (same on both seats) and the rung lives in the host S (migrated on the host load, guests receive lad6 = 1), so both seats read the same host value.
+- `promote-servants.js` (updated: rk 2 → BAL.srvRk.dai, names nhất đẳng, cost read via the rung) → 1 FAIL «NPC: a proud servant … leaves» = **same FAIL on live main** (pre-existing, not this job).
+- `promo-rules.js` → 1 FAIL «844x390@3 reveal» = same on live main. `promo-exam.js` → «old save loads: exam state» FAIL = same on live main (consort exam).
+- `player-dress.js` (updated: 6 rungs, dress by tier) → BAD 56/146 vs live BAD 52/138: the SAME missing dress pictures (faces lacking tm4 / tm2 sets), renumbered by the new rungs; no new art fault.
+- Shots (CDN, review only): img/_review/maid-ladder-6/fold-755x1000.png, ipad-1180x820.png — looked at: ladder Bậc 1..6 + «Ở lại · Ma ma», hers «đang ở», wage words correct, no clipping.
+
+## Open for main / reviewer
+- FOR MAIN: leaderboard server (rank/worker/src/score.js) still has 5 servant steps; the client sends the tier (tam + nhị both shown «Cung nữ» on the board). A 6-step board needs a worker deploy — not done here.
+- Bow order (jgreet) and Emperor's-eye table: tam/nhị đẳng share the «Cung nữ» bow rank (tier); eye has its own value .4 for nhị đẳng.
