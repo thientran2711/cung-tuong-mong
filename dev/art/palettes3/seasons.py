@@ -10,6 +10,10 @@ CLASSIFY (root palettes):
 TARGET (generated palettes: same rule plus margins so each reads clearly as its season):
   XUÂN: w >= +0.30, Lmin >= 0.68, no olive, max chroma >= 0.07 (clear), secondary not a strong cool (warmth >= -0.45)
   HẠ  : w <= -0.15, Lmin >= 0.62, both chroma <= 0.10, dE <= 0.24 (soft), secondary not peach/coral (warmth <= 0.50)
+        or (owner Lượt 752, "Hạ a little yellow") SUMMER-WARM: a light fresh yellow / orange main (hue 40–110°,
+        L >= 0.76, so lighter and fresher than Thu) with a clearly cool secondary (warmth <= -0.45: blue / aqua /
+        teal / violet, so it never passes the Xuân target, whose secondary must be >= -0.45), Lmin >= 0.65 (Thu
+        needs <= 0.64), both chroma <= 0.10, dE <= 0.26. Root classification (classify) is unchanged.
   THU : w >= +0.30, Lmin <= 0.64 (a deep/rich colour), main lightness <= 0.80, secondary no colder than teal (warmth >= -0.62)
   ĐÔNG: w <= -0.15, Lmin <= 0.58 or a white/ivory with dE >= 0.30; dE >= 0.25 (clear, strong)
 """
@@ -34,8 +38,16 @@ def classify(m, s):
         return 'xuan' if x['Lmin'] >= 0.66 and not (_olive(m) or _olive(s)) else 'thu'
     return 'dong' if (x['Lmin'] <= 0.58 or x['dE'] >= 0.30) else 'ha'
 
+def summer_warm(m, s):
+    """Hạ with a light yellow / orange main and a cool secondary (owner Lượt 752)"""
+    if is_white(m) or is_white(s) or temp(m) <= 0: return False
+    x = metrics(m, s); H = oklch(m)[2]
+    return (40 <= H <= 110 and x['Lmain'] >= 0.76 and x['Lmin'] >= 0.65 and x['Cmax'] <= 0.10 and x['dE'] <= 0.26
+            and temp(s) <= -0.45)
+
 def target_ok(season, m, s):
     x = metrics(m, s)
+    if season == 'ha' and summer_warm(m, s): return True
     if classify(m, s) != season: return False
     if season == 'xuan':
         return x['w'] >= 0.30 and x['Lmin'] >= 0.68 and x['Cmax'] >= 0.07 and temp(s) >= -0.45

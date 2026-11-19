@@ -1,5 +1,6 @@
 """Before / after review sheets for owner Lượt 741 (Xuân -> mostly pink) and Lượt 742/744 (one tone level).
   python3 make_season_old_new.py xuan  <before.json>   -> season_xuan_old_new.jpg (old vs new Xuân, every person)
+  python3 make_season_old_new.py ha    <before.json>   -> season_ha_old_new.jpg (old vs new Hạ, owner Lượt 752)
   python3 make_season_old_new.py tone  <before.json>   -> season_tone_old_new.jpg (4 seasons before/after tone change,
                                                           C/L numbers per season, ★ roots: gốc cũ | gốc chỉnh tông)
 After = the current dev/art/face-common/palettes_season.json. Before = an older copy of it (git show <rev>:...).
@@ -41,16 +42,16 @@ def stats(d, se):
         out[r] = (st.mean(oklch(h)[1] for h in hs), st.mean(oklch(h)[0] for h in hs))
     return out
 
-def sheet_xuan(old, new):
+def sheet_xuan(old, new, se='xuan', title='Mùa Xuân — cũ (cam/đào) → mới (chủ yếu hồng)', out='season_xuan_old_new.jpg'):
     ids = ids_of(new); COLS, CW, CH, PAD, HEAD = 6, 300, 150, 10, 110
     rows = (len(ids) + COLS - 1) // COLS; W = PAD * 2 + COLS * CW; H = HEAD + rows * CH + 30
     im = Image.new('RGB', (W, H), BG); dr = ImageDraw.Draw(im)
-    dr.text((PAD + 4, 14), 'Mùa Xuân — cũ (cam/đào) → mới (chủ yếu hồng)', font=fnt(38, True), fill=INK)
+    dr.text((PAD + 4, 14), title, font=fnt(38, True), fill=INK)
     dr.text((PAD + 4, 66), 'Mỗi ô: hàng trên = cũ, hàng dưới = mới · trái = màu chính, phải = màu phụ · ★ gốc giữ nguyên',
             font=fnt(20), fill=SUB)
     for i, k in enumerate(ids):
         r, c = divmod(i, COLS); x, y = PAD + c * CW, HEAD + r * CH
-        o, n = old[k]['xuan'], new[k]['xuan']; root = bool(n.get('root')); same = (o['main_hex'], o['sec_hex']) == (n['main_hex'], n['sec_hex'])
+        o, n = old[k][se], new[k][se]; root = bool(n.get('root')); same = (o['main_hex'], o['sec_hex']) == (n['main_hex'], n['sec_hex'])
         dr.rectangle([x + 3, y + 3, x + CW - 3, y + CH - 3], fill=(255, 246, 222) if root else (255, 253, 249),
                      outline=STAR if root else (214, 208, 200), width=3 if root else 1)
         dr.text((x + 10, y + 7), k + ('  ★ gốc' if root else ('  (giữ)' if same else '')), font=fnt(19, True), fill=STAR if root else INK)
@@ -60,7 +61,10 @@ def sheet_xuan(old, new):
             pair(dr, x + 48, yy, 110, 46, p['main_hex'], p['sec_hex'])
             dr.text((x + 164, yy + 2), fit(dr, p['main'], fnt(15), CW - 172), font=fnt(15), fill=INK)
             dr.text((x + 164, yy + 24), fit(dr, '+ ' + p['sec'], fnt(15), CW - 172), font=fnt(15), fill=SUB)
-    save(im, 'season_xuan_old_new.jpg')
+    save(im, out)
+
+def sheet_ha(old, new):
+    sheet_xuan(old, new, 'ha', 'Mùa Hạ — cũ (toàn xanh/tím) → mới (thêm vàng / cam mùa hè)', 'season_ha_old_new.jpg')
 
 def sheet_tone(old, new):
     ids = ids_of(new)
@@ -109,4 +113,4 @@ def sheet_tone(old, new):
 if __name__ == '__main__':
     new = json.load(open(os.path.join(ROOT, 'dev/art/face-common/palettes_season.json')))
     old = json.load(open(sys.argv[2]))
-    (sheet_xuan if sys.argv[1] == 'xuan' else sheet_tone)(old, new)
+    dict(xuan=sheet_xuan, ha=sheet_ha, tone=sheet_tone)[sys.argv[1]](old, new)

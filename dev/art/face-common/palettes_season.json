@@ -28,10 +28,10 @@
    "sec_hex": "#E29DA2"
   },
   "ha": {
-   "main": "cool celadon",
-   "main_hex": "#9ACDC3",
-   "sec": "orchid pink",
-   "sec_hex": "#D49CC6"
+   "main": "sunflower yellow",
+   "main_hex": "#E5DA90",
+   "sec": "hydrangea blue",
+   "sec_hex": "#9DAADC"
   },
   "dong": {
    "main": "cornflower blue",
@@ -122,10 +122,10 @@
    "sec_hex": "#A9BEDB"
   },
   "ha": {
-   "main": "cool lilac",
-   "main_hex": "#BFA3D8",
-   "sec": "teal",
-   "sec_hex": "#499597"
+   "main": "lemon yellow",
+   "main_hex": "#E5E29C",
+   "sec": "lake blue",
+   "sec_hex": "#7FAFD3"
   },
   "dong": {
    "main": "hydrangea blue",
@@ -211,10 +211,10 @@
    "sec_hex": "#B3A1D9"
   },
   "ha": {
-   "main": "turquoise",
-   "main_hex": "#7EC4C4",
-   "sec": "cool rose pink",
-   "sec_hex": "#D893B0"
+   "main": "marigold",
+   "main_hex": "#DFB17B",
+   "sec": "soft teal",
+   "sec_hex": "#6FAFB0"
   },
   "dong": {
    "main": "cool celadon",
@@ -233,10 +233,10 @@
    "root": true
   },
   "ha": {
-   "main": "bluebell violet",
-   "main_hex": "#9B94D4",
-   "sec": "cool jade",
-   "sec_hex": "#5DAC97"
+   "main": "canary yellow",
+   "main_hex": "#DBD48E",
+   "sec": "sky blue",
+   "sec_hex": "#8DBCDA"
   },
   "thu": {
    "main": "terracotta",
@@ -295,8 +295,8 @@
    "sec_hex": "#EFE0C4"
   },
   "ha": {
-   "main": "cool celadon",
-   "main_hex": "#9ACDC3",
+   "main": "mango",
+   "main_hex": "#E1AF7F",
    "sec": "soft blue-violet",
    "sec_hex": "#8E88C8"
   },
@@ -450,10 +450,10 @@
    "sec_hex": "#A9BEDB"
   },
   "ha": {
-   "main": "periwinkle",
-   "main_hex": "#949BD8",
-   "sec": "mint green",
-   "sec_hex": "#9FD4BF"
+   "main": "apricot orange",
+   "main_hex": "#E0AB81",
+   "sec": "cornflower blue",
+   "sec_hex": "#8A9FD6"
   },
   "dong": {
    "main": "hydrangea blue",
@@ -506,10 +506,10 @@
    "sec_hex": "#A3CB88"
   },
   "ha": {
-   "main": "aqua blue",
-   "main_hex": "#87C3D4",
-   "sec": "soft rose pink",
-   "sec_hex": "#D9A3B6"
+   "main": "cantaloupe",
+   "main_hex": "#E7B08A",
+   "sec": "turquoise",
+   "sec_hex": "#7EC4C4"
   },
   "dong": {
    "main": "aqua blue",
@@ -562,8 +562,8 @@
    "sec_hex": "#8BC6BE"
   },
   "ha": {
-   "main": "cool lilac",
-   "main_hex": "#BFA3D8",
+   "main": "sunflower yellow",
+   "main_hex": "#E5DA90",
    "sec": "soft teal",
    "sec_hex": "#6FAFB0"
   },
@@ -645,10 +645,10 @@
    "root": true
   },
   "ha": {
-   "main": "bluebell violet",
-   "main_hex": "#9B94D4",
-   "sec": "deep jade",
-   "sec_hex": "#4E9E80"
+   "main": "summer peach",
+   "main_hex": "#EBB297",
+   "sec": "periwinkle",
+   "sec_hex": "#949BD8"
   },
   "thu": {
    "main": "peach coral",
@@ -684,10 +684,10 @@
    "sec_hex": "#7DC2A8"
   },
   "ha": {
-   "main": "cool celadon",
-   "main_hex": "#9ACDC3",
-   "sec": "soft blue-violet",
-   "sec_hex": "#8E88C8"
+   "main": "lemon yellow",
+   "main_hex": "#E5E29C",
+   "sec": "aqua blue",
+   "sec_hex": "#87C3D4"
   },
   "dong": {
    "main": "cool aquamarine",
@@ -778,10 +778,10 @@
    "sec_hex": "#9FD4BF"
   },
   "ha": {
-   "main": "periwinkle",
-   "main_hex": "#949BD8",
-   "sec": "deep jade",
-   "sec_hex": "#4E9E80"
+   "main": "canary yellow",
+   "main_hex": "#DBD48E",
+   "sec": "bluebell violet",
+   "sec_hex": "#9B94D4"
   },
   "dong": {
    "main": "cool lilac",
@@ -872,10 +872,10 @@
    "sec_hex": "#82A664"
   },
   "ha": {
-   "main": "turquoise",
-   "main_hex": "#7EC4C4",
-   "sec": "soft mauve pink",
-   "sec_hex": "#C98DAA"
+   "main": "marigold",
+   "main_hex": "#DFB17B",
+   "sec": "blue hyacinth",
+   "sec_hex": "#8C93CC"
   },
   "dong": {
    "main": "aqua blue",
@@ -933,10 +933,10 @@
    "sec_hex": "#B3A1D9"
   },
   "ha": {
-   "main": "jade green",
-   "main_hex": "#75C7A9",
-   "sec": "pale orchid",
-   "sec_hex": "#D3AED6"
+   "main": "mango",
+   "main_hex": "#E1AF7F",
+   "sec": "clear ice blue",
+   "sec_hex": "#A6C9E4"
   },
   "dong": {
    "main": "turquoise",
@@ -1022,10 +1022,10 @@
    "sec_hex": "#86CDB9"
   },
   "ha": {
-   "main": "blue hyacinth",
-   "main_hex": "#8C93CC",
-   "sec": "deep jade",
-   "sec_hex": "#4E9E80"
+   "main": "apricot orange",
+   "main_hex": "#E0AB81",
+   "sec": "hydrangea blue",
+   "sec_hex": "#9DAADC"
   },
   "dong": {
    "main": "pale orchid",
@@ -1083,10 +1083,10 @@
    "sec_hex": "#8BAD69"
   },
   "ha": {
-   "main": "sea green",
-   "main_hex": "#7DC2A8",
-   "sec": "wisteria lilac",
-   "sec_hex": "#CCA7C8"
+   "main": "cantaloupe",
+   "main_hex": "#E7B08A",
+   "sec": "turquoise",
+   "sec_hex": "#7EC4C4"
   },
   "thu": {
    "main": "pale persimmon",
@@ -1200,8 +1200,8 @@
    "sec_hex": "#8BC6BE"
   },
   "ha": {
-   "main": "cool lilac",
-   "main_hex": "#BFA3D8",
+   "main": "summer peach",
+   "main_hex": "#EBB297",
    "sec": "soft teal",
    "sec_hex": "#6FAFB0"
   },
@@ -1250,10 +1250,10 @@
    "root": true
   },
   "ha": {
-   "main": "blue hyacinth",
-   "main_hex": "#8C93CC",
-   "sec": "soft jade",
-   "sec_hex": "#7DBA9E"
+   "main": "sunflower yellow",
+   "main_hex": "#E5DA90",
+   "sec": "lake blue",
+   "sec_hex": "#7FAFD3"
   },
   "thu": {
    "main": "light terracotta",
@@ -1312,10 +1312,10 @@
    "sec_hex": "#F0DCC8"
   },
   "ha": {
-   "main": "cool aquamarine",
-   "main_hex": "#86CDB9",
-   "sec": "pale orchid",
-   "sec_hex": "#D3AED6"
+   "main": "marigold",
+   "main_hex": "#DFB17B",
+   "sec": "sky blue",
+   "sec_hex": "#8DBCDA"
   },
   "dong": {
    "main": "sea green",
@@ -1495,8 +1495,8 @@
    "sec_hex": "#8BC6BE"
   },
   "ha": {
-   "main": "clear ice blue",
-   "main_hex": "#A6C9E4",
+   "main": "mango",
+   "main_hex": "#E1AF7F",
    "sec": "soft blue-violet",
    "sec_hex": "#8E88C8"
   },
@@ -1528,10 +1528,10 @@
    "sec_hex": "#D88C8C"
   },
   "ha": {
-   "main": "aqua blue",
-   "main_hex": "#87C3D4",
-   "sec": "soft mauve pink",
-   "sec_hex": "#C98DAA"
+   "main": "lemon yellow",
+   "main_hex": "#E5E29C",
+   "sec": "cornflower blue",
+   "sec_hex": "#8A9FD6"
   },
   "dong": {
    "main": "aqua celadon",
@@ -1550,10 +1550,10 @@
    "root": true
   },
   "ha": {
-   "main": "bluebell violet",
-   "main_hex": "#9B94D4",
-   "sec": "deep jade",
-   "sec_hex": "#4E9E80"
+   "main": "canary yellow",
+   "main_hex": "#DBD48E",
+   "sec": "aqua blue",
+   "sec_hex": "#87C3D4"
   },
   "thu": {
    "main": "coral red",
@@ -1650,10 +1650,10 @@
    "sec_hex": "#A3CB88"
   },
   "ha": {
-   "main": "cool celadon",
-   "main_hex": "#9ACDC3",
-   "sec": "orchid pink",
-   "sec_hex": "#D49CC6"
+   "main": "apricot orange",
+   "main_hex": "#E0AB81",
+   "sec": "periwinkle",
+   "sec_hex": "#949BD8"
   },
   "dong": {
    "main": "turquoise",
@@ -1738,10 +1738,10 @@
    }
   },
   "ha": {
-   "main": "cool lilac",
-   "main_hex": "#BFA3D8",
-   "sec": "cool jade",
-   "sec_hex": "#5DAC97"
+   "main": "cantaloupe",
+   "main_hex": "#E7B08A",
+   "sec": "bluebell violet",
+   "sec_hex": "#9B94D4"
   },
   "thu": {
    "main": "terracotta",
@@ -1794,10 +1794,10 @@
    "root": true
   },
   "ha": {
-   "main": "sky blue",
-   "main_hex": "#8DBCDA",
-   "sec": "cool rose pink",
-   "sec_hex": "#D893B0"
+   "main": "canary yellow",
+   "main_hex": "#DBD48E",
+   "sec": "blue hyacinth",
+   "sec_hex": "#8C93CC"
   },
   "thu": {
    "main": "peach",
@@ -1855,10 +1855,10 @@
    "root": true
   },
   "ha": {
-   "main": "mint green",
-   "main_hex": "#9FD4BF",
-   "sec": "wisteria lilac",
-   "sec_hex": "#CCA7C8"
+   "main": "summer peach",
+   "main_hex": "#EBB297",
+   "sec": "clear ice blue",
+   "sec_hex": "#A6C9E4"
   },
   "thu": {
    "main": "melon orange",
@@ -1949,10 +1949,10 @@
    "root": true
   },
   "ha": {
-   "main": "periwinkle",
-   "main_hex": "#949BD8",
-   "sec": "sea green",
-   "sec_hex": "#7DC2A8"
+   "main": "sunflower yellow",
+   "main_hex": "#E5DA90",
+   "sec": "hydrangea blue",
+   "sec_hex": "#9DAADC"
   },
   "thu": {
    "main": "persimmon",
@@ -1988,10 +1988,10 @@
    "sec_hex": "#A1C986"
   },
   "ha": {
-   "main": "cool aquamarine",
-   "main_hex": "#86CDB9",
-   "sec": "soft blue-violet",
-   "sec_hex": "#8E88C8"
+   "main": "marigold",
+   "main_hex": "#DFB17B",
+   "sec": "lake blue",
+   "sec_hex": "#7FAFD3"
   },
   "thu": {
    "main": "pale persimmon",
@@ -2054,8 +2054,8 @@
    "sec_hex": "#EAD7BF"
   },
   "ha": {
-   "main": "clear ice blue",
-   "main_hex": "#A6C9E4",
+   "main": "apricot orange",
+   "main_hex": "#E0AB81",
    "sec": "soft blue-violet",
    "sec_hex": "#8E88C8"
   },
@@ -2170,10 +2170,10 @@
    "root": true
   },
   "ha": {
-   "main": "cool lilac",
-   "main_hex": "#BFA3D8",
-   "sec": "cool jade",
-   "sec_hex": "#5DAC97"
+   "main": "lemon yellow",
+   "main_hex": "#E5E29C",
+   "sec": "sky blue",
+   "sec_hex": "#8DBCDA"
   },
   "thu": {
    "main": "light terracotta",
@@ -2275,10 +2275,10 @@
    "sec_hex": "#75C7A9"
   },
   "ha": {
-   "main": "periwinkle",
-   "main_hex": "#949BD8",
-   "sec": "soft jade",
-   "sec_hex": "#7DBA9E"
+   "main": "mango",
+   "main_hex": "#E1AF7F",
+   "sec": "cornflower blue",
+   "sec_hex": "#8A9FD6"
   },
   "dong": {
    "main": "mint green",
@@ -2341,10 +2341,10 @@
    "sec_hex": "#82A664"
   },
   "ha": {
-   "main": "blue hyacinth",
-   "main_hex": "#8C93CC",
-   "sec": "mint green",
-   "sec_hex": "#9FD4BF"
+   "main": "summer peach",
+   "main_hex": "#EBB297",
+   "sec": "turquoise",
+   "sec_hex": "#7EC4C4"
   },
   "dong": {
    "main": "clear ice blue",
@@ -2430,10 +2430,10 @@
    "sec_hex": "#EAD7BF"
   },
   "ha": {
-   "main": "aqua celadon",
-   "main_hex": "#8BC6BE",
-   "sec": "orchid pink",
-   "sec_hex": "#D49CC6"
+   "main": "cantaloupe",
+   "main_hex": "#E7B08A",
+   "sec": "periwinkle",
+   "sec_hex": "#949BD8"
   },
   "dong": {
    "main": "turquoise",
@@ -2513,10 +2513,10 @@
    "root": true
   },
   "ha": {
-   "main": "jade green",
-   "main_hex": "#75C7A9",
-   "sec": "ice pink",
-   "sec_hex": "#E2B6CB"
+   "main": "sunflower yellow",
+   "main_hex": "#E5DA90",
+   "sec": "aqua blue",
+   "sec_hex": "#87C3D4"
   },
   "thu": {
    "main": "spring leaf green",
@@ -2552,8 +2552,8 @@
    "sec_hex": "#7DC2A8"
   },
   "ha": {
-   "main": "cool aquamarine",
-   "main_hex": "#86CDB9",
+   "main": "marigold",
+   "main_hex": "#DFB17B",
    "sec": "soft blue-violet",
    "sec_hex": "#8E88C8"
   },
@@ -2654,5 +2654,6 @@
   }
  },
  "_note_xuan": "Owner Lượt 741: Xuân main colours re-picked to mostly pink by dev/art/palettes3/xuan_pink.py (★ roots and a few greens / peach kept).",
- "_note_tone": "Owner Lượt 742/744: generated colours of all 4 seasons brought to the Xuân+Hạ tone level by dev/art/palettes3/tone_unify.py (hue + name kept). ★ roots unchanged; root_tone_adjusted = advisory value."
+ "_note_tone": "Owner Lượt 742/744: generated colours of all 4 seasons brought to the Xuân+Hạ tone level by dev/art/palettes3/tone_unify.py (hue + name kept). ★ roots unchanged; root_tone_adjusted = advisory value.",
+ "_note_ha": "Owner Lượt 752: about 39 % of Hạ mains re-picked to light summer yellow / orange by dev/art/palettes3/ha_warm.py, with a cool secondary (rule seasons.summer_warm). ★ roots unchanged."
 }
