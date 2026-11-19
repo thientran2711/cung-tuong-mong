@@ -25,7 +25,7 @@ Approved earlier (not rewritten): m09, m10, m11, m12, m19. Look = LOOKS[(n-1)%6]
 | m24 | Tinh nghịch | long soft-square | large almond, straight lower lids | balanced medium full | sparkling playful small smile | walking slowly, gazing at ruyi | three-quarter right | jade ruyi |
 | m25 | Tươi tắn | softly rounded heart, two dimples | upturned round-almond | small full, lifted cupid's bow | bright cheerful light smile | lifting skirt hem, fan in hand | straight toward viewer | round silk fan |
 | m26 | Dịu dàng | soft diamond, rounded chin | large round doe | rosebud, fuller lower lip | soft warm tender smile | skipping, letter at chest | slight left (15°) | folded letter |
-| m27 | Trong trẻo | round-oval, soft cheeks | very large round | small, upturned corners | clear innocent sweet smile | little twirl, branch at chest | fully frontal | willow branch |
+| m27 | Trong trẻo | round-oval, rosy cheeks | very large round | small rosy, upturned corners | clear innocent sweet smile | little twirl, branch at chest | fully frontal | willow branch |
 | m28 | Đoan trang | small heart, button chin | large round, crisp corners | small thin | calm composed refined smile | walking, pinwheel held at side | three-quarter left | paper pinwheel |
 | m29 | Sắc sảo | long symmetrical oval | wide-set long almond, straight lids | full, defined cupid's bow | striking gaze, poised smile | adjusting hairpin, xiao in other hand | slight right (15°) | xiao flute |
 | m30 | Tinh nghịch | slim egg-shaped | large almond, softly downturned | small thin, soft bow | sparkling playful small smile | turning mid-step, kerchief raised | near profile, head to viewer | silk handkerchief |
@@ -36,11 +36,11 @@ Approved earlier (not rewritten): m09, m10, m11, m12, m19. Look = LOOKS[(n-1)%6]
 | m35 | Sắc sảo | soft-angular oval, defined jaw | large almond, crisp corners | wide but soft | striking gaze, poised smile | adjusting hairpin, sachet dangling | three-quarter left | embroidered sachet |
 | m36 | Tinh nghịch | diamond, gentle cheekbones | large round-almond | thin soft | sparkling playful small smile | turning lightly, fan in both hands | slight right (15°) | sandalwood folding fan |
 | m37 | Tươi tắn | long heart, pointed chin | large clear almond | thin, firm line | bright cheerful light smile | walking, pod raised by cheek | near profile, head to viewer | lotus seed pod |
-| m38 | Dịu dàng | round-oval, soft cheeks | large doe, softly downturned | small full rosebud | soft warm tender smile | offering peony with both hands | three-quarter right | peony bloom |
+| m38 | Dịu dàng | round-oval, rosy cheeks | large doe, softly downturned | small full rosebud | soft warm tender smile | offering peony with both hands | three-quarter right | peony bloom |
 | m39 | Trong trẻo | slim long oval | large gentle round | small thin-lipped soft | clear innocent sweet smile | walking, fond glance at bundle | straight toward viewer | bamboo-slip book bundle |
 | m40 | Đoan trang | heart, plump cheeks | close-set almond, slightly downturned | full | calm composed refined smile | camellia by cheek, glancing over | slight left (15°) | camellia branch |
 | m41 | Sắc sảo | round, firm little chin | wide-set large almond | small full, defined edges | striking gaze, poised smile | walking mid-step, lantern in hand | fully frontal | round paper lantern |
-| m42 | Tinh nghịch | oval, soft cheeks | large round, lifted corners | wide but soft | sparkling playful small smile | stepping forward, sprig raised | three-quarter left | sprig of apricot blossom |
+| m42 | Tinh nghịch | oval, flushed cheeks | large round, lifted corners | wide but soft | sparkling playful small smile | stepping forward, sprig raised | three-quarter left | sprig of apricot blossom |
 | m43 | Tươi tắn | slender long oval | long phoenix | small full | bright cheerful light smile | walking, sleeves flowing, scroll at side | slight right (15°) | embroidery pattern scroll |
 | m44 | Dịu dàng | round-oval | wide-set large almond | small thin prim | soft warm tender smile | mid-step, vase in hand, lifting sleeve | near profile, head to viewer | porcelain vase with sprig |
 | m45 | Trong trẻo | gently rounded diamond | large bright round | full soft, cupid's bow | clear innocent sweet smile | walking, lantern carried | three-quarter right | hexagonal palace lantern |
