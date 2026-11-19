@@ -421,7 +421,12 @@ TH.ctxOut.push((seat,B)=>{if(!on(L11)||!host()||seat===CW.seat||!S||TH.held(seat
  /* her feeling machine's derived cache (S.mood.log `left` = khắc left at the last sync; solo: every render) is brought up to date as her render would */
  try{if(typeof mkSync==="function")mkSync(S)}catch(e){console.error("thin F6 mkSync",e)}
  /* the render-diff engines of her person (render is a no-op in her context; ONE list RDIFF, below): run here, once, as her render would */
- {const q0=quiet,t0=performance.now();quiet=false/* as her own render: its card shows (her Q → her phone) */;try{for(const f of RDIFF)try{if(typeof window[f]==="function")window[f]()}catch(e){console.error("thin F6 "+f,e)}}finally{quiet=q0;const ms=performance.now()-t0;F.stat.rdN=(F.stat.rdN|0)+1;F.stat.rdMs=Math.round(((F.stat.rdMs||0)*9+ms)/10*10)/10}}
+ {const q0=quiet,t0=performance.now();quiet=false/* as her own render: its card shows (her Q → her phone) */;const SI=(rivals||[]).filter(e=>e&&e.__b).map(e=>[e,(e.inv||[]).slice(),X.STAT.map(k=>e[k])]);
+  try{for(const f of RDIFF)try{if(typeof window[f]==="function")window[f]()}catch(e){console.error("thin F6 "+f,e)}}finally{quiet=q0;
+   /* F6a #3: the "…All" engines (alInitAll / lxInitAll) also give the HOST's stand-in entry its boxes; the stand-in is the host's own person
+      (his render gives him his own), and the bridge turned each such piece into "her gift" → a stack of «Quà tặng» cards on the host that
+      held the week (coop-cyc L11). The stand-in leaves this step exactly as it came in (law 6c: no piece made out of nothing) */
+   for(const [e,inv,st] of SI){if(Array.isArray(e.inv)){const n=e.inv.filter(x=>!inv.includes(x));if(n.length){F.stat.siFix=(F.stat.siFix|0)+n.length;e.inv=inv}}X.STAT.forEach((k,i)=>{if(e[k]!==st[i])e[k]=st[i]})}const ms=performance.now()-t0;F.stat.rdN=(F.stat.rdN|0)+1;F.stat.rdMs=Math.round(((F.stat.rdMs||0)*9+ms)/10*10)/10}}
  B.hd=S.dead?[]:(Array.isArray(deck)?deck:[]).map(plainCard).filter(Boolean)});
 /* host: the view carries her hand; a hand left from an older buổi / week (her context not entered since) is brought up to date at once */
 let HREF="";
