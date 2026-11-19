@@ -14,7 +14,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   /* the 10-night ledger (jledger) adds the tuần's other nights at the commit: these cases count the PLAYED tối only, so the ledger is off here; its own cases: dev/test/ledger.js */BAL.nt.on=false;
   T.fresh=()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;window.__bot=1;document.getElementById('title').hidden=true;
    for(let i=0;i<60;i++){start();if(!isSrv()&&!(typeof isKc==="function"&&isKc())&&!(window.cycOn&&cycOn(S))&&liveRivals(false).filter(v=>nightCh(v)>0).length>=3/* the cases need an A, a B and a spare on the tray */)break}Q.length=0;S.preg=0;S.pregUnk=0;S.cyc=null;
-   const L=liveRivals(false).filter(v=>nightCh(v)>0);L.forEach(v=>{v.preg=0});return L};
+   const L=liveRivals(false).filter(v=>nightCh(v)>0);/* review balance-final: rivals on their cycle this tuần (jcycle cycOn: off the tray, cannot press a steal) last, so the A / B the cases use can serve (seen: B never attacked, npc [], 1 in ~40) */L.sort((a,b)=>(window.cycOn&&cycOn(a)?1:0)-(window.cycOn&&cycOn(b)?1:0));L.forEach(v=>{v.preg=0});return L};
   /* answer every open dialog with its first option that is not a way out (Cáo bệnh / Tiến cử) */
   T.ch="Thôi";T.opts=null;
   T.drain=(max=80)=>{const seen=[];for(let n=0;n<max&&Q.length;n++){const m=Q[0];seen.push(m.pid||m.t);const o=m.opts||m.o;
@@ -78,7 +78,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
    k:has(def,"Giữ chân Hoàng thượng",`khó thêm ${BAL.steal.keep.rung} bậc`)&&has(def,"Giữ chân Hoàng thượng",`Sủng +${BAL.steal.keep.gain}`)}});
  ok("6 choice cards print BAL numbers",r.f&&r.r&&r.k,r);
  /* 7. ledger night (not played): stealPass(holder,{live:false}) returns lines, no night record */
- r=await p.evaluate(()=>{const L=T.setup();const [A]=L;/* review balance-final: the day before (T.toEvening) can leave the drawn B unable to serve (with child, ill, on the cycle tray): ready the others and take one that npcAttackers can pick, else tries 0 (seen 1/3) */const C=L.filter(v=>v!==A);C.forEach(v=>{v.confined=0;v.block=0;v.out=0;v.ill=null;v.preg=0});const B=C.find(v=>stealEligible(v,A)&&!(typeof cyTray==="function"&&cyTray(v)))||C[0];window.stealWant=(v,t)=>v===B?{u:1,p:1,mode:"feign"}:{u:0,p:0,mode:null};const n0=T.recs(L);const o=window.stealPass(A,{live:false});const e=T.recs(L);T.fin();
+ r=await p.evaluate(()=>{const L=T.setup();const [A]=L;/* review balance-final: the day before (T.toEvening) can leave the drawn B unable to serve (with child, ill, on her cycle: jcycle cycOn): ready the others and take one that npcAttackers can pick, else tries 0 (seen 1/3) */const C=L.filter(v=>v!==A);C.forEach(v=>{v.confined=0;v.block=0;v.out=0;v.ill=null;v.preg=0});const B=C.find(v=>stealEligible(v,A)&&!(window.cycOn&&cycOn(v)))||C[0];window.stealWant=(v,t)=>v===B?{u:1,p:1,mode:"feign"}:{u:0,p:0,mode:null};const n0=T.recs(L);const o=window.stealPass(A,{live:false});const e=T.recs(L);T.fin();
   return{lines:Array.isArray(o.lines)&&o.lines.length>=1,tries:o.tries,rec:e.r0-n0.r0+e.r1-n0.r1+e.me-n0.me}});
  ok("7 ledger pass (live:false): lines only, no record",r.lines&&r.rec===0,r);
  const pass=Object.values(R).every(x=>x.pass);
