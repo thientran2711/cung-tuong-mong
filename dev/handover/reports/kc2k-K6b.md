@@ -27,9 +27,21 @@ Check per image: live | new at ≤600 px (looked at every one) + numeric alpha s
 | m27 | ngheo | scroll → H7 wooden spindle with spun thread | 0eUeF3HTfW | 79f9TqLJAL |
 | m28 | kc | cup → H6 small woven flower basket lined with silk | xSBSAQ4jfW | Lw8wGCbswO |
 | m28 | ngheo | scroll → H1 small woven bamboo basket with wild flowers | O6E6DLuynm | xSBS2fdjfW |
+| m29 | kc | cup → H4 small embroidery hoop with half-finished silk flower | 1ldlA7Mr4r | eIPI1n6dqL |
+| m29 | ngheo | scroll → H6 plain cloth bundle tied with a knot | SyhyTiFUb8 | jUoUzHqLD0 |
+| m30 | kc | cup → H8 small silk lantern on a bamboo stick | O6E6eG7ynm | JNCNDLgOq4 |
+| m30 | ngheo | scroll → H8 branch of plum blossoms | If3fg5EtvE | Xm9mxT3Bfo |
+| m31 | kc | cup → H2 painted paper folding fan | Lw8wW7kswO | 8aialWpIrU |
+| m31 | ngheo | scroll → H4 bunch of fresh herbs tied with straw | p8y8rmbehw | If3fg0AtvE |
+| m32 | kc | cup → H5 sprig of peony blossoms | BhNhsCioQR | SyhyT5DUb8 |
+| m32 | ngheo | scroll → H9 plain bamboo-leaf fan | ksesA7s16B | O6E6ejfynm |
 
 ## Sheet 1 — gương mặt m21–m25 (rows = face; cols = khuê các hiện tại | khuê các mới 2K | nhà nghèo hiện tại | nhà nghèo mới 2K)
 https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k-mass/sheet_K6b_1.jpg ; 2K files img/_review/kc2k-mass/mNN_a18_{kc,ngheo}_2k.png
 All 10 passed at first try (0 regens): same face/hair/outfit cut/pose, khuê các colours lifted from pastel to the medium sheet5 level, nhà nghèo stays faded matte cotton with one wooden pin, items = H list, bare forehead, closed lips, no cup, still sleeves; alpha margins 0.00 %, semi-transparent px 0.5–0.9 %.
 Honest notes: m23 khuê các honey-yellow sits at the upper end of "medium" (still within sheet5 level); m27 nhà nghèo spindle is small in the hands; m28 khuê các keeps the hanging cloth panel of the live outfit in front of the skirt (part of the outfit, not a second item); m22 nhà nghèo keeps a cloth ribbon in the hair (allowed). cutcheck.py not run (figwork not checked out).
+## Sheet 2 — gương mặt m26–m30
+https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k-mass/sheet_K6b_2.jpg
+All 10 passed on the first try. The live m29 khuê các has a forehead mark; the new one is bare (checked by face zoom). m30 khuê các lantern tassel reaches the margin (0.09 % margin alpha = the figure itself, no haze).
+In progress: m31 khuê các REDO (first try 'Lw8wW7kswO' = strong golden/marigold yellow, above sheet5 level and close to royal yellow; the prompt now says "soft warm honey-apricot yellow, toned down a step, never golden-bright or marigold"). m31 nhà nghèo, m32 both: pass.
 STATE: nothing live changed; only CDN review folder img/_review/kc2k-mass/ (K6b files: sheet_K6b_*.jpg + m21–m36 PNGs).
