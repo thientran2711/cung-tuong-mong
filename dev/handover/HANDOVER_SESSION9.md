@@ -1263,3 +1263,4 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - C-AG #24 = session_01Rc5AsKVnhHiiDQzT6H9jNi. ROOT-70 session_01Rc5AsKJHPE6qV9k9Ugyhj7 is retired (owner sometimes still types there; it relays).
 - WAKE: ROOT-71 trig_014XPibhbCsurA3g8q11Noa6 → disable once ROOT-72 has its own wake.
 - Brief template briefs/root71-common.md → copy to root72-common.md (replace ROOT-71 id, LIVE 3584ea42).
+- (19/11 22:36Z) ROOT-71 opened child MAIN ROOT-72 = session_01Rc5AsK1W5sm4JWNWeSDH2k (depth 1). ROOT-71 stops after ROOT-72 confirms; its wake trig_014XPibhbCsurA3g8q11Noa6 is disabled by ROOT-72.
