@@ -647,9 +647,10 @@ PHI_VAR={
 }
 # LOW_TONE (W103c, owner 19/11 ~00:10Z real, FIGURE_GATE rule 3 GAME COLOUR BENCHMARK = SHEET5 TONE LEVEL): the low-rank t1-t6 COLOUR RULE clause for young ages; same words as the triều rule (build_trieu); no trầm/subdued.
 LOW_TONE="all colours at ONE medium tone level, the same as the soft coral-red and brick-red robes of the game: medium saturation, medium lightness, neither too fresh nor too dark, never rực, never glaring, never neon, never pastel-washed, never dusty, grey, muddy or black; "
-# TAN_CAPE_PEARLS (owner 19/11 voice, FIGURE_GATE TAN<->PHI SWAP line @171b437): the new t4 capelet carries a LIGHT, SPARSE overlay of pearls laid over it like Phi G's beaded layer, clearly fewer pearls than the Phi F/E samples.
-# Words copied from PHI_VAR["G"] ("pearls", "lying flat over the robe" -> "over it", "not ... a dense net" from the owner reading) + sparseness qualifiers "a few", "thin", "sparse", "airy". ONE switchable phrase: set to "" to remove.
-TAN_CAPE_PEARLS=", with a light overlay of a few thin, sparse strands of pearls lying flat over it, airy, not a dense pearl net"
+# canon overwrite (ROOT-36 relay of FIGURE_GATE @84343b0, owner: Tần = Phi F capelet + the Phi G BEADED YOKE laid over it, pearls SPARSER): the WHOLE Phi G yoke sentence, sliced VERBATIM from PHI_VAR["G"], + a sparseness qualifier.
+_G_YOKE=PHI_VAR["G"][PHI_VAR["G"].index("a beaded shoulder yoke"):PHI_VAR["G"].index("; no cloud collar")]
+assert _G_YOKE.endswith("lying flat over the robe"),_G_YOKE
+TAN_CAPE_PEARLS=", and laid over the capelet "+_G_YOKE+", with fewer, more widely spaced pearls than usual, airy"
 def build_low(c,t,v="v0"):
     pal,face=DATA[c]; m,m2=ORIG1[c]; item,hk=age_item(c,f"t{t}",*ITEMS_LOW[c][t]); right=(int(c[1:])%2==1)
     main0,orig=LOWNAME[c]
