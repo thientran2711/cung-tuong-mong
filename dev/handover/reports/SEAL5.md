@@ -22,3 +22,18 @@ Faults (777: reported, NOT redone):
   for sideways faces; for muu it was not). Result: side-glance won, fine.
 - lo: clean.
 Credits unit 3: 8 keyframes × 135 + 12 clips × 940 = 12 360. Balance 450 515 (23:52Z, shared pool). Ledger: 20 lines (SEAL5).
+
+## UNIT 4 DONE (20/11 ~00:07Z) — th-tinhtu, th-chuyentam, th-hungkhoi, th-tinhnghich — sent to ROOT-57
+| seal | A (used) | B (used) | OUT | LOOP | BACK | frames out/loop/back |
+|---|---|---|---|---|---|---|
+| tinhtu (rose pink) | iG5CNnz3uK (= If3OB7qtvE flat.) | WDgknFwcXe | s7IDsqYl8e | 9ZHv9SANYZ | s7IDsbHl8e | 57/60/47 |
+| chuyentam (cream-beige) | s7IDjOal8e (= bxMzFGq5Y2 flat.) | If3OoUQtvE | xSBTxqsjfW | yiutyS4PW9 | 3zKE3P3REY | 57/60/53 |
+| hungkhoi (orchid pink) | s7IDxpel8e | jUoVr0RLD0 | Lw8DlOLswO | DoOlem4pcl | BhN78EUoQR | 46/60/57 |
+| tinhnghich (peach) | gOmes4cSXO (= 4RFhOaq9Aa flat.) | gOmegIpSXO (= rgX0kcPxtc flat.) | iG5ER0n3uK | MBJsphcDCm | nVsKWBwYQD | 56/60/43 |
+CDN: same names, th-u4-preview.mp4 (63.7 s). NEW: tinhnghich B also came back RGBA transparent (first B to do so) → flattened too.
+Faults (777: reported, NOT redone):
+- hungkhoi LOOP frames 16–52 (~2.5 s): the glowing star + sparkles above her head grow and are cut by the TOP edge; OUT frames 34–36 same at the top.
+- chuyentam BACK frames 21–35 (~1 s): she lowers the closed book down out through the BOTTOM edge before sliding back.
+- tinhnghich OUT frames 13–27: big lunge forward with both arms flung wide (no edge touch, but a jump in size).
+- tinhtu: clean (BACK short, 47 frames).
+Credits unit 4: 8 × 135 + 12 × 940 = 12 360 (SEAL5 total 24 720). Ledger +20 lines (SEAL5 40).
