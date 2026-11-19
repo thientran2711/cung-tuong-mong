@@ -856,3 +856,6 @@ ROOT-44 Lượt 306 actions: m19 secondary = B soft teal blue #6E9CA8 (all 8 ran
 ### OWNER LƯỢT 346 (19/11, VERBATIM, ROOT-45 chat) — Ba Tư veil at HQP/HH = royal yellow sheer
 "Lên tới bậc hoàng quý phi và bậc hoàng hậu á, là cái lớp voan đằng sau của ba tư có thể làm thành cái màu vàng, tức là nó vẫn trong suốt nhưng mà sẽ thấy cái nó ra được cái màu vàng hoàng gia."
 → BA TƯ t7 + t8 (both colour sets): the head veil = SHEER ROYAL-YELLOW silk gauze (still transparent, clearly royal golden yellow), not ivory. Applied in the next Ba Tư HQP/HH build (pr_bt_t7 V7, pr_bt_t8/t8o V5).
+### OWNER LƯỢT 348 (19/11, VERBATIM, ROOT-45 chat) — SLEEVE LENGTH LAW
+"Tức là độ dài tay áo của tất cả các phi tần của tất cả các bậc đều phải tới mắt cá chân."
+→ SLEEVE LENGTH LAW: every consort at EVERY rank t1–t8: the wide sleeves hang down to her ANKLES. Builders updated (mk_ranks_v3 SLEEVES t1–t3 + a sleeve sentence for t4–t6, mk_v7 / mk_hqp_hh templates t7–t8). Gens started before this (Lượt 343, 345 runs) still say "to the knees".
