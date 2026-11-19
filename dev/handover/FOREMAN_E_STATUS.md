@@ -357,3 +357,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (19/11 00:59Z) E13m done W2 remerge: review/ge-writers-w2 = e38c9337 (merged LIVE main bb8e8ec9; jnroadhp.js + jgedata_w2.js kept). ge-guard 6/6, ge-engine 808/808 on both merges, one-core PASS, W2 measure 22/22 shade 1.00/1.00, quickcheck PASS on e38c9337. Report ge-writers-w2.md §ROUND 4. Foreman checked: bb8e8ec9 ancestor → FF. E13m archived.
   FOR MAIN ROOT-61 — LAND READY ge-writers-w2 e38c9337 (review/ge-writers-w2; BIG PASS round 2 + remerge §ROUND 4; FF onto bb8e8ec9). Please land it NEXT (5th remerge of this wave).
 - (19/11 ~01:27Z real) FROM MAIN ROOT-61: LIVE main = 73790cb7 (stage-here r4 ONE NOTICE SYSTEM landed: window.kitNotice is LIVE). Final-merge 73790cb7 before any LAND READY.
+- (19/11 ~01:40Z real) FROM MAIN ROOT-61: LIVE main = 96188526 (opt-card-short B on the standard frame landed). Final-merge 96188526 before any LAND READY.
