@@ -17,16 +17,30 @@ const [,,URL,NL,RO]=process.argv;const N=+NL||20;const ROADS=(RO||'bd_san,bd_soi
   const S0={};for(const k of ['danh','sung','duc','tamco','suc','mat','sac','tai','rank'])S0[k]=S[k];
   for(const k of ['danh','sung','duc','tamco','suc','sac','tai'])S[k]=30;S.mat=3;
   const tok=/\{([a-z0-9]+)\}/g;const known=new Set(Object.keys(typeof TOK67==='object'?TOK67:{}).concat(['v','maid','emp','me','dad','mom','v2','n1','n2']));
-  for(const r of ROADS){const ids=[r].concat(Object.values(ROAD14[r]||{}));const res={chap:ids.length,opts:0,free:[],spread:[],rank:[],typed:[],tok:new Set(),beats:0};
+  for(const r of ROADS){const ids=[r].concat(Object.values(ROAD14[r]||{}));const res={chap:ids.length,opts:0,free:[],spread:[],rank:[],dom:[],xrow:[],typed:[],tok:new Set(),beats:0};
    for(const id of ids){const a=ARC67[id];if(!a)continue;
     const txt=[a.t,a.g,a.sj].concat(Object.values(a.E||{}).flatMap(e=>[e.t,e.tag]));
-    for(const [bk,bd] of Object.entries(a.B||{})){res.beats++;const O=bd.o||[];txt.push(bd.h,bd.t);const vs=[];
+    for(const [bk,bd] of Object.entries(a.B||{})){res.beats++;const O=bd.o||[];txt.push(bd.h,bd.t);const vs=[],xo=[];
      for(const o of O){res.opts++;txt.push(o.n,o.rt,o.rf,o.wx,o.lx);
       const cost=o.c&&Object.values(o.c).some(v=>v<0),odds=o.o!=null,lossN=o.l&&Object.keys(o.l).length;
       const endLose=o.e&&(Array.isArray(o.e)?o.e.some(k=>a.E[k]&&(a.E[k].k<0||k==='mid')):a.E[o.e]&&a.E[o.e].k<=0);
       if(!cost&&!(odds&&(lossN||o.e))&&!endLose)res.free.push(id+'.'+bk+' «'+o.n+'»');
-      if(!o.e)vs.push([val(o),o.n]);
+      if(!o.e)vs.push([val(o),o.n]);else{/* climax (e:) option, r2: value = p·V(win ending) + (1−p)·V(fail ending) + own w + cost (E[k].fx weighted) */
+       const ek=Array.isArray(o.e)?o.e:[o.e,o.e],V=k=>{const E=a.E[k];return E?Object.entries(E.fx||{}).reduce((t,[q,v])=>t+v*(W[q]==null?1:W[q]),0):0};
+       const pr=o.o==null?1:Math.min(1,Math.max(0,(typeof o.o==='function'?o.o({f:{},sc:0,act:{},q97:{p:0,b:0}}):o.o)/100));
+       const cw=Object.entries(o.c||{}).reduce((t,[q,v])=>t+v*(W[q]==null?1:W[q]),0);
+       vs.push([pr*V(ek[0])+(1-pr)*V(ek[1])+cw+Object.entries(o.w||{}).reduce((t,[q,v])=>t+v*(W[q]==null?1:W[q]),0),o.n]);
+       xo.push({n:o.n,o,c:-cw,wk:(a.E[ek[0]]||{}).k||0,fk:(a.E[ek[1]]||{}).k||0})}
       if(odds){const A={f:{},sc:0,act:{},q97:{p:0,b:0}};S.rank=1;const lo=typeof o.o==='function'?o.o(A):o.o;S.rank=8;const hi=typeof o.o==='function'?o.o(A):o.o;S.rank=3;if(!(hi<lo))res.rank.push(id+'.'+bk+' «'+o.n+'» '+lo+'→'+hi)}}
+     if(xo.length>1){/* dominance (law 2, r2): X beats Y on odds ≥, cost ≤, fail ending k ≥ and win ending k ≥, one strictly — checked with NO flag and with EVERY flag
+       of the beat on (the flag bonus is earned by an earlier choice; equal flag states must never leave a dominated option) */
+      const fs=new Set();/* the beat's flags, read from its BAL odds lists */
+      const BQ=(BAL.road.fx[id]||BAL.arc.fx[id]||{})[bk]||[];for(const q of BQ)for(const t of (q&&q.o)||[])if(Array.isArray(t)&&t[0]==='f')t[1].split('|').forEach(g=>fs.add(g));
+      const allOn={};fs.forEach(g=>allOn[g]=1);
+      for(const [lab,F] of [['no flag',{}],['all flags',allOn]]){const P=x=>x.o.o==null?100:(typeof x.o.o==='function'?x.o.o({f:F,sc:0,act:{},q97:{p:0,b:0}}):x.o.o);
+       for(const X of xo)for(const Y of xo){if(X===Y)continue;const px=P(X),py=P(Y);
+        if(px>=py&&X.c<=Y.c&&X.fk>=Y.fk&&X.wk>=Y.wk&&(px>py||X.c<Y.c||X.fk>Y.fk||X.wk>Y.wk))res.dom.push(id+'.'+bk+' ['+lab+'] «'+X.n+'» p'+px+' cost'+X.c.toFixed(1)+' fail'+X.fk+' beats «'+Y.n+'» p'+py+' cost'+Y.c.toFixed(1)+' fail'+Y.fk)}}
+      res.xrow.push(id+'.'+bk+': '+xo.map(x=>{const P0=x.o.o==null?100:(typeof x.o.o==='function'?x.o.o({f:{},sc:0,act:{},q97:{p:0,b:0}}):x.o.o);return '«'+x.n.slice(0,34)+'» p'+P0+' cost'+x.c.toFixed(1)+' '+x.wk+'/'+x.fk}).join(' | '))}
      if(vs.length>1){const mx=Math.max(...vs.map(x=>x[0])),mn=Math.min(...vs.map(x=>x[0]));if(mx-mn>SPREAD)res.spread.push(id+'.'+bk+' spread '+(mx-mn).toFixed(1)+' '+vs.map(x=>x[1]+'='+x[0].toFixed(1)).join(' | '))}}
     for(const t of txt){if(typeof t!=='string')continue;const s=t.replace(tok,'');if(/[0-9%]/.test(s))res.typed.push(id+': '+t.slice(0,60));let m;tok.lastIndex=0;while((m=tok.exec(t)))if(!known.has(m[1]))res.tok.add(m[1])}}
    res.tok=[...res.tok];out[r]=res}
@@ -34,10 +48,12 @@ const [,,URL,NL,RO]=process.argv;const N=+NL||20;const ROADS=(RO||'bd_san,bd_soi
  for(const r of ROADS){const x=R[r];console.log(`\n== ${r}: chapters ${x.chap}, beats ${x.beats}, options ${x.opts}`);
   console.log(' no-loss options:',x.free.length);x.free.forEach(s=>console.log('   '+s));
   console.log(` beats with value spread > ${SPREAD}:`,x.spread.length);x.spread.forEach(s=>console.log('   '+s));
+  console.log(' climax options dominated (odds + cost + fail):',x.dom.length);x.dom.forEach(s=>console.log('   '+s));
+  if(process.env.XROWS)x.xrow.forEach(s=>console.log('   x '+s));
   console.log(' rolled options NOT harder at higher rank:',x.rank.length);x.rank.slice(0,10).forEach(s=>console.log('   '+s));
   console.log(' digits/% in text:',x.typed.length);x.typed.forEach(s=>console.log('   '+s));console.log(' unknown tokens:',x.tok.join(',')||'none')}
- /* (5) bot lives */
- for(const r of ROADS){if(!R[r]||R[r].chap<8)continue;const tally={},rare={};let ok=0,bad=[];
+ /* (5) bot lives (STATIC=1: skip) */
+ for(const r of ROADS){if(process.env.STATIC)break;if(!R[r]||R[r].chap<8)continue;const tally={},rare={};let ok=0,bad=[];
   for(let i=0;i<N;i++){/* a fresh page per life: one page grows past the renderer's memory over many lives */
    const c2=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const q=await c2.newPage();q.setDefaultTimeout(0);q.on('pageerror',e=>errs.push(e.message.slice(0,200)));
    await q.goto(URL,{timeout:0});await q.waitForFunction(()=>typeof start==='function'&&typeof ROAD14==='object',null,{timeout:0});await q.waitForTimeout(1000);
