@@ -142,7 +142,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const KGO='document.getElementById("kg82go").click()',KOK='document.getElementById("kg82ok").click()',KSK='document.getElementById("kg82skip").click()';
  /* ---- F6b summary: her exam record, veils, the mirror record, her deck flags ---- */
  const HELP6=()=>{const s0=window.__sum;window.__sum=s=>Object.assign(s0(s),{ex:JSON.stringify(s.ex&&s.ex.last||null),exw:s.ex?s.ex.w1:null,rank:s.rank,toil:s.toilette?[s.toilette.score,s.toilette.look,s.toilette.makeup,s.toilette.dv].join('/'):null,
-   wd:s.wd?JSON.stringify({t:s.wd.tram&&s.wd.tram.k,y:s.wd.y&&s.wd.y.k}):null,nveil:(s.inv||[]).filter(e=>e&&/^vl/.test(e.k)).length});
+   wd:s.wd?JSON.stringify({t:s.wd.tram&&s.wd.tram.k,y:s.wd.y&&s.wd.y.k}):null,nveil:(s.inv||[]).filter(e=>e&&/^vl/.test(e.k)).length,co:(s.ex&&s.ex.pend&&s.ex.pend.co)||(s.vlPend&&s.vlPend.co)||null});
   window.__clk=()=>{let n=0;const t=setInterval(()=>{if(++n>80){clearInterval(t);return}const g=document.getElementById('kg82go');if(g&&g.getClientRects().length){g.click();return}
    const k=document.getElementById('kg82ok');if(k&&!/Đã hiểu/.test(k.textContent)){k.click();return}if(k&&/Đã hiểu/.test(k.textContent))clearInterval(t)},150)};
   window.__hdeck=(f)=>COOPW.seat==='a'?COOPW.thin.withSeat('b',()=>f(deck)):f(deck)};
@@ -165,7 +165,12 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    await align();const exK=await pick('return BAL.ex.suc');
    await act('L1 her exam deck card (lifted): act(i) on the host pays the start once, the game opens on HER phone, ONE end',KOK,{stage:est+`const c=exCard();if(c.lock)return 'locked';deck=deck.filter(x=>x&&!x.exam);deck.unshift(c);`,
     pre:`const i=deck.findIndex(a=>a&&a.exam);if(i<0)return 'no card: '+deck.map(a=>a&&a.n).join();act(i)`,pre2:`if(!document.getElementById('kg82go'))return 'no game '+JSON.stringify({uiN:COOPW.thin.uiN,la:COOPW.thin.F.lastAns&&{n:COOPW.thin.F.lastAns.n,ui:COOPW.thin.F.lastAns.ui,r0:COOPW.thin.F.lastAns.r0},kg:!!document.getElementById('kg82'),ov:(document.getElementById('ov')||{}).hidden,st:[COOPW.thin.F.stat.noCard,COOPW.thin.F.stat.exLocal],gerr:window.__gerr,modal:!!document.querySelector('#modal:not([hidden])'),Q:Q.map(q=>q.t)}).slice(-700);__clk()`,wait:600,wait2:7000,raw:9,
-    chk:x=>x.g0.suc===80-exK&&(x.g1.ex!==x.g0.ex||x.g1.rank>x.g0.rank)})}
+    chk:x=>x.g0.suc===80-exK&&(x.g1.ex!==x.g0.ex||x.g1.rank>x.g0.rank)})
+   /* review r1: her page gone mid-exam (reload / app kill) after môn 1: her phone sends the solo end once (the môn played + exSkipRaw for the
+      rest, solo exAbort); the start paid once; the window closed (no second card, no second pay) */
+   await align();await act('L3 her page gone mid-exam (review r1): ONE solo end (môn 1 kept, the rest exSkipRaw), the start paid once, the window closed',`kg82Close();COOPW.thin.F.f6bExDrop();COOPW.thin.F.f6bGone()`,{stage:est+`const c=exCard();if(c.lock)return 'locked';deck=deck.filter(x=>x&&!x.exam);deck.unshift(c);`,
+    pre:`const i=deck.findIndex(a=>a&&a.exam);if(i<0)return 'no card';act(i)`,pre2:`if(!document.getElementById('kg82go'))return 'no game';document.getElementById('kg82go').click()`,wait:600,wait2:1500,raw:9,
+    twin:`exEnd('me',[9],[])`,noInv:1,chk:x=>x.g0.suc===80-exK&&(x.g1.ex!==x.g0.ex||x.g1.rank>x.g0.rank)&&x.g1.exw==null&&(x.h1.co==null)})}
   await align();await act('E4 no open window (a second end): refused',`exEnd('me',${RW(5)},[])`,{stage:`const e=exS(S);e.w0=e.w1=null;e.pend=null;`,reject:1})}
  else ok(true,'E no exam plan here (skipped)');
  await act('E5 servant exam without a window: refused',`exEnd('srv',[5],[])`,{reject:1});
@@ -186,7 +191,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const rst=`S.suc=80;`;
  await act('R1 Chải chuốt «vùng giữa» (wdGroomEnd ok): same as solo',`wdGroomEnd('ok')`,{stage:rst,pre:`wdGroomUI();if(!document.getElementById('kg92go'))return 'no game'`,twin:`wdGroomEnd('ok')`,chk:x=>x.g1.used-x.g0.used===1});
  await act('R2 unknown zone: refused',`wdGroomEnd('far')`,{stage:rst,reject:1});
- await act('R3 no khắc left (review r1): refused, no khắc spent',`wdGroomEnd('ok')`,{stage:rst+'used=BAL.time.khac;',reject:1});if(!ROWS||ROWS.some(x=>'R3'.startsWith(x)))await stage('used=0;');
+ await act('R3 no khắc left (review r1): refused, no khắc spent',`wdGroomEnd('ok')`,{stage:rst,pre:'used=BAL.time.khac;'/* her khắc clock rides in the intent ctx (F6a) */,reject:1});
  await G.p.evaluate(()=>{try{kg82Close()}catch(e){}});
  /* ---- M: the mirror ---- */
  const mst=`S.toilette=null;S.suc=80;`;const mpre=p=>`toilOpen();if(!TOIL.st)return 'no mirror';TOIL.st.parts=${JSON.stringify(p)};`;
@@ -224,7 +229,14 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   if(open){const n0=await G.p.evaluate(()=>S.inv.length),s1=await G.p.evaluate(()=>COOPW.thin.F.stat.sent);await G.p.evaluate(r=>{window.__raw=r},6);await G.p.evaluate(()=>document.getElementById('kg82go').click());await sleep(900);
    await G.p.evaluate(()=>{const k=document.getElementById('kg82ok');if(k)k.click()});await until(G,()=>!COOPW.thin.F.pend,null,20000);await sleep(1500);await sync();
    const r2=await G.p.evaluate(([n0,s1])=>({dn:S.inv.length-n0,sent:COOPW.thin.F.stat.sent-s1,ans:COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.n,st:COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.r0&&COOPW.thin.F.lastAns.r0.st}),[n0,s1]);
-   ok(r2.dn===1&&r2.sent===1&&r2.ans==='vlCraftEnd'&&r2.st==='ok','C2 … and its end (raw 6) is ONE intent: the veil made once, on her',r2)}}
+   ok(r2.dn===1&&r2.sent===1&&r2.ans==='vlCraftEnd'&&r2.st==='ok','C2 … and its end (raw 6) is ONE intent: the veil made once, on her',r2)}
+  /* review r1: a host-started veil (cost paid there) whose game is gone on her phone (reload): ONE «Kết nhanh» end (material back), never a cost with nothing */
+  await reset();await stage(vst+'delete S.vlPend;');const hb=await H.p.evaluate(()=>COOPW.thin.withSeat('b',()=>({bac:S.bac,suc:S.suc})));
+  const r3=await H.p.evaluate(()=>{const TH=COOPW.thin;let o=null;TH.withSeat('b',()=>{const T=TH.tapRun(()=>{try{apply({bac:-VL.mat[1]});vlCraftRun(1)}catch(e){o='EXC '+e.message}});o=o||T.ui});TH.flush();return o});
+  await sync();await G.p.evaluate(ui=>{if(Array.isArray(ui))COOPW.thin.uiPlay(ui)},r3);await sleep(900);const op3=await G.p.evaluate(()=>!!document.getElementById('kg82go'));
+  const s3=await G.p.evaluate(()=>{const F=COOPW.thin.F,s0=F.stat.sent;kg82Close();F.f6bExDrop();F.f6bGone();return F.stat.sent-s0});await until(G,()=>!COOPW.thin.F.pend,null,20000);await sleep(1500);await sync();
+  const ha=await H.p.evaluate(()=>COOPW.thin.withSeat('b',()=>({bac:S.bac,suc:S.suc,vp:S.vlPend||null,nveil:(S.inv||[]).filter(e=>e&&/^vl/.test(e.k)).length})));const la=await G.p.evaluate(()=>COOPW.thin.F.lastAns&&[COOPW.thin.F.lastAns.n,COOPW.thin.F.lastAns.r0&&COOPW.thin.F.lastAns.r0.st]);
+  ok(op3&&s3===1&&la&&la[0]==='vlCraftEnd'&&la[1]==='ok'&&!ha.vp&&ha.bac===hb.bac,'V6 a host-started veil, her page gone mid-game (review r1): ONE «Kết nhanh» end, the material back, the start record cleared',{op3,s3,la,hb,ha})}
  /* ---- H: Hội phối đồ theo đề: the hold runs in her context on the HOST (the world month); her pick «Tự tay phối đồ» opens the board on
     HER phone (captured tsDressGo); the mirror is already sat today (staged), so the board's end is the ONE intent tsDressEnd ---- */
  const hst=`S.suc=80;S.out=0;S.confined=0;const th=Object.keys(TS_THEME)[0];tsS().dress={th,m:S.month,y:S.year};S.toilette={wk:wk(),day:wk()*10,score:40,makeup:false,F:2,occ:['fest'],parts:{}};`;
