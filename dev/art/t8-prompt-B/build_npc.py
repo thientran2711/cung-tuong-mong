@@ -59,9 +59,20 @@ class Held(Exception): pass                  # exit 3: owner decision pending / 
 THC = ["deep golden-brown brocade robe embroidered with phoenixes, ornate gold and jade headdress",
        "dark plum brocade robe with gold phoenix roundels, a stately gold headdress with pearls",
        "dark teal brocade robe with gold phoenix embroidery, a dignified gold and pearl headdress, holding prayer beads"]
+# SL1 (owner Lượt 778 via ROOT-57: every Thái hậu prompt path identical on sleeves): the floor rank-law sentence (build_all.py sleeve(8)) + the
+# sleeve-hold sentence S37 (build_all.py SLEEVE_FLOOR_HOLD), read VERBATIM from the store builder source, inserted right after the Outfit sentence.
+def _th_sleeves():
+    import ast as _a
+    _t = _a.parse(open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "store-all", "build_all.py"), encoding="utf-8").read())
+    hold = next(n.value.value for n in _t.body if isinstance(n, _a.Assign) and getattr(n.targets[0], "id", "") == "SLEEVE_FLOOR_HOLD")
+    fn = next(n for n in _t.body if isinstance(n, _a.FunctionDef) and n.name == "sleeve")
+    floor = fn.body[-1].value.value
+    assert "touch the floor" in floor and hold.startswith("Even while her hands are raised")
+    return " " + floor + " " + hold
+TH_SLEEVES = _th_sleeves()
 def thaihau(n, age):
     return (PRE + " A dignified, gentle Chinese empress dowager." + IDENT_F + " " + W_AGE[age]
-            + f" Outfit: a {THC[n - 1]}. Pose: calm standing pose; hands folded at her waist." + K3["f"] + END)
+            + f" Outfit: a {THC[n - 1]}." + TH_SLEEVES + " Pose: calm standing pose; hands folded at her waist." + K3["f"] + END)
 
 # ---------------------------------------------------------------------------------------------------------------
 # Eunuchs u01..u30 (base robe, no rank) -- dev/figwork/spec3.py:32-39 (N-eunuch-uNN: MF faces, ECOL colours, ET poses)

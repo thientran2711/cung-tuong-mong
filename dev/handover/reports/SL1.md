@@ -108,3 +108,11 @@ check_store: NEW generic rule in check_text (every scope): if a SLEEVE LENGTH / 
 | triều phục t8 | owner-copy/trieu/r26/t8_c06_RAN.txt | a18 | 1 | 0 | 0 | 0 |
 
 Pre-existing, not fixed: check_store --audit crashes on the first undrawn consort (audit_sources → build_all.build c01 nude raises NotDrawn).
+
+## ROUND 4 — NPC Thái hậu (ROOT-57 decision, owner Lượt 778 "Thái hậu … tất cả mọi người đều phải giống nhau"), no gens
+build_npc.py thaihau(): after the Outfit sentence it now adds the floor rank-law sentence (build_all.py sleeve(8)) + S37 (build_all.py SLEEVE_FLOOR_HOLD), both READ VERBATIM from the build_all.py source (ast), so the NPC path can never drift from the consort Thái hậu path.
+| group | path | age | has floor + S37 | check_store |
+|---|---|---|---|---|
+| Thái hậu NPC | build_npc.py thaihau-h1/h2/h3 | a18 a26 a36 a51 a65 | yes 15/15 | PASS 15/15 (master + S37 floor rule) |
+Note for the owner/foreman: the NPC pose is "hands folded at her waist", while S37 begins "Even while her hands are raised to hold her item at chest height" — kept verbatim as ordered (identical sentence everywhere); the sleeves-on-the-floor part still applies.
+Old NPC Thái hậu gens in the ledger will now differ from the builder by these 2 sentences in `build_npc.py --verify`.
