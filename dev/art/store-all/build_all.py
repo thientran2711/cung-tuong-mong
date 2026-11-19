@@ -384,6 +384,69 @@ def build(person,rank,age="a18"):
     add=(laws(rank,age) if isinstance(rank,int) else laws(rank))+[angle_sentence(person,rank),grace_sentence(person,rank)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
     return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
 
+# ---------------- THÁI HẬU (owner Lượt 618 + 624, ROOT-53 order: BASE = the 18/11 Thái hậu prompt the owner liked, VERBATIM) ----------------
+# BASE file dev/art/elder-copy/THAIHAU_1811_c04_a36_BASE.txt = Magnific prompt of gen CqnHqn1EEy (c04 a36, 18/11 22:28Z; a51 bxMrxpT5Y2 / a65 cpSDpJs0eP
+# are the same text with the age+colour block of dev/art/elder-copy/THAIHAU_1811_AGE_COLOUR.md). Changes, each asserted (TH_DIFF lists them for the report):
+#  SLOTS  face line (her KC v3 face words, B8) · colour name (her main) · item + hands (IT1 TH_ITEMS/TH_AGE) · age block (a51/a65 = elder-copy file)
+#  B8     identity sentence -> owner identity law (IDENT_LAW); style-image sentence removed (no style image); KC people: generic eye clause removed
+#  ADDED  (Lượt 618, copied from THIS person's Hoàng hậu t8 prompt = build(person,8)): the t8 law/extra block (HAIR up, SLEEVE to the floor, ONE SLEEVE LAYER,
+#         NO hair flowers, HEAD AND BODY, FABRIC brocade, ANGLE, GRACE, THREE-COLOUR with #EFBD69 + her main/secondary hexes, HELD ITEM COLOUR) before Pose,
+#         the HH pose tail sentence, the 18/11 swatch sentence (build.py TH_SWATCH, Image 3 -> Image 2) and D9 forehead sentence.
+TH_BASE=os.path.join(ART,"elder-copy","THAIHAU_1811_c04_a36_BASE.txt")
+TH_OLD={"face":"Her face: softly round face, large soft eyes, a softly defined cupid's-bow upper lip.",
+        "ident":"From the identity reference keep ONLY her face, facial features and hairstyle colour; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below.",
+        "style":" The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose.",
+        "colour":"royal purple","item":"a gold phoenix-shaped incense ball",
+        "hands":"Her hands and body: the item held in one hand at chest height below the chin, the other hand resting lightly on her sash, body turned slightly three-quarters to the left.",
+        "eyes":" Eyes soft, warm and round-almond, never slanted or upturned, never teary.",
+        "tailpos":" nothing covering the face. Everyone beautiful at every age."}
+def th1811(age):
+    t=open(os.path.join(ART,"elder-copy","THAIHAU_1811_AGE_COLOUR.md"),encoding="utf-8").read()
+    def sec(h):
+        m=re.search(r"^## "+re.escape(h)+r" \(verbatim\)\n(.+?)\n",t,re.M); assert m,("1811 section",h); return m.group(1).strip()
+    return sec(age+" AGE TEXT")+" "+sec(age+" COLOUR TEXT")
+def thaihau(person,age):
+    person=ALIAS.get(person,person)
+    _,Fhh,add=build(person,8,age)            # this person's Hoàng hậu t8 prompt (+ its added law block) -> sentences copied from it
+    g=LAST_G; n=int(re.sub(r"\D","",person) or 1)
+    import json as _j
+    face=_j.load(open(os.path.join(ART,"KC_REFS.json"),encoding="utf-8"))["people"][person]["face_words"].strip()
+    main=g["DATA"][person][0].split(" and ")[0]
+    item,hk=g["TH_ITEMS"][g["TH_AGE"][age][(n-1)%5]]
+    hands=g["low_hand"](hk,n%2==1)
+    for ph in (", body and face frontal, standing squarely facing the viewer, no turn",", body and face frontal, facing the viewer squarely, no turn"): hands=hands.replace(ph,"")
+    tail=re.search(r" The item is in a contrasting colour, not the robe colour, and the hand really grips it;[^.]*\.",Fhh).group(0)
+    swatch=g["TH_SWATCH"].replace("Image 3","Image 2")
+    F=open(TH_BASE,encoding="utf-8").read().strip(); D=[]
+    def sw(old,new,cnt=1,why=""):
+        nonlocal F; assert F.count(old)==cnt,("TH base slot",old[:50],F.count(old)); F=F.replace(old,new); D.append((why,old,new))
+    sw(TH_OLD["face"],face,why="SLOT face (B8: her KC v3 face words)")
+    sw(TH_OLD["ident"],g["IDENT_LAW"],why="B8 identity law (owner words)")
+    sw(TH_OLD["style"],"",why="B8: no style image -> style sentence removed")
+    if age!="a36": sw(g["AGE_TXT"]["a36"],th1811(age),why="AGE+COLOUR a51/a65 = 18/11 verbatim (elder-copy file)")
+    sw(TH_OLD["colour"],main,cnt=2,why="SLOT colour name (her main)")
+    sw(TH_OLD["item"],item,why="SLOT item (IT1 TH_ITEMS[TH_AGE])")
+    sw(TH_OLD["hands"],"Her hands and body: "+hands+"."+tail,why="SLOT hands for her item (+ ADDED HH pose tail)")
+    sw(TH_OLD["eyes"],"",why="B8: KC face words name her own eyes -> generic eye clause removed (same as every KC prompt)")
+    sw(" Pose:"," "+" ".join(add)+" Pose:",why="ADDED (Lượt 618) the Hoàng hậu t8 law block, copied from her HH prompt")
+    sw(TH_OLD["tailpos"]," nothing covering the face."+swatch+g["D9_FOREHEAD"]+" Everyone beautiful at every age.",why="ADDED royal-yellow swatch sentence (18/11 TH_SWATCH, image 2) + D9 forehead")
+    globals()["TH_DIFF"]=D
+    return None,F,add
+TH_EXEMPT={"a18":"S03","a26":"S03","a36":"S03","a51":"S33","a65":"S33"}
+def gate_th(person,age,text):
+    """Thái hậu gate = check_store.py APPROVED part at Hoàng hậu scope (--scope tp8 --age: every owner-approved t8 sentence verbatim + every ban),
+    with ONE named exemption: the HH tone sentence (S03 a18-a36 / S33 a51-a65), because the owner keeps the 18/11 Thái hậu COLOUR RULE words
+    ("all colours MUTED and deep …", Lượt 618/624, ROOT-53 order). Any other FAIL line (missing sentence or ban) = FAIL."""
+    with tempfile.NamedTemporaryFile("w",suffix=".txt",delete=False,encoding="utf-8") as f: f.write(text); fn=f.name
+    try:
+        p=subprocess.run([sys.executable,os.path.join(ART,"check_store.py"),fn,"--scope","tp8","--age",age],capture_output=True,text=True)
+        fails=[l.strip() for l in p.stdout.splitlines() if l.strip().startswith("FAIL ")]
+        other=[l for l in fails if not l.startswith("FAIL "+TH_EXEMPT[age]+" ")]
+        ok=not other and (p.returncode==0 or len(fails)==1)
+        msg=("THAI HAU GATE PASS (scope tp8 %s; exempt %s = 18/11 colour rule kept: %s)"%(age,TH_EXEMPT[age],"yes" if fails else "not needed")) if ok else p.stdout.strip()
+        return ok,msg
+    finally: os.unlink(fn)
+
 # ---------------- CHECK ----------------
 def _frame(rank,age):
     """frame sentences = those identical in the store outputs of c03 (green), c06 (red), c25 (cherry): colour/motif-dependent clauses drop out."""
@@ -443,8 +506,13 @@ if __name__=="__main__":
         sys.exit(0)
     pos=[x for x in a if not x.startswith("--") and x!=age]
     if len(pos)==3 and "--age" not in a and re.fullmatch(r"a(18|26|36|51|65)",pos[2]): age=pos.pop()   # ROOT-51: positional age (build_all.py m13 3 a26) used to build a18 silently
-    if len(pos)!=2: print("usage: build_all.py <person> <rank 1-8|nude> [aNN | --age aNN]",file=sys.stderr); sys.exit(2)
+    if len(pos)!=2: print("usage: build_all.py <person> <rank 1-8|nude|thaihau> [aNN | --age aNN]",file=sys.stderr); sys.exit(2)
     if not _kc_drawn(ALIAS.get(pos[0],pos[0])): print(f"REFUSED {pos[0]}: NOT drawn (ART_RULES B8, dev/art/KC_REFS.json)",file=sys.stderr); sys.exit(2)
+    if pos[1]=="thaihau":   # Lượt 618 I4: Thái hậu = HH t8 + 3 Thái hậu slots (see thaihau())
+        out=thaihau(pos[0],age)[1]; ok,msg=gate_th(pos[0],age,out)
+        if not ok: print(msg,file=sys.stderr); sys.exit(1)
+        print(msg,file=sys.stderr)
+        print(out,end=""); sys.exit(0)
     out=build(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age)[1]
     ok,msg=gate(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age,out)
     if not ok: print(msg,file=sys.stderr); sys.exit(1)

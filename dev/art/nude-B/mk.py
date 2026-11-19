@@ -45,9 +45,15 @@ for age in ("a18","a26","a36","a51","a65"):
     # F11 (owner Lượt 583): Nữ đế hair UP in a bun at EVERY age, stated explicitly
     HAIR=" Hair: ALL of her hair is pinned UP in a neat high imperial bun (chignon) under the crown, at every age; NO loose hair: nothing hanging down her back, over her shoulders or in front of her chest."
     a=" Outfit (the Female Emperor"; assert o.count(a)==1; o=o.replace(a,HAIR+a,1)
-    if age=="a51":   # D13 (owner Lượt 583): younger-looking but clearly ~50, never 18-26
-        D13=" She looks younger than her age but is still clearly about 50: never like an 18-26-year-old, with soft fine lines and clearly visible silver at the temples."
-        o=o.replace(HAIR,D13+HAIR,1)
+    # owner Lượt 624 (ROOT-53): a51/a65 age + colour text = VERBATIM 18/11 Thái hậu text (dev/art/elder-copy/THAIHAU_1811_AGE_COLOUR.md); own D13 sentence removed
+    if age in ("a51","a65"):
+        _md=open(os.path.join(ROOT,"dev/art/elder-copy/THAIHAU_1811_AGE_COLOUR.md"),encoding="utf-8").read()
+        def _blk(h): return _md.split("## "+h+" (verbatim)\n",1)[1].split("\n",1)[0].strip()
+        TA,TC=_blk(age+" AGE TEXT"),_blk(age+" COLOUR TEXT")
+        i=o.index("Her face:"); i=o.index("dress her in the NEW outfit below. ",i)+len("dress her in the NEW outfit below. ")
+        j=o.index(HAIR)
+        o=o[:i]+TA+" "+TC+o[j:]
+        assert o.count(TA)==1 and o.count(TC)==1
     assert not re.search(r"Pose:[^.]*\b(stole|ribbon|sash|shawl)\b",o)
     assert "style reference" not in o.lower() and "Image 3" not in o
     open(os.path.join(R,"prompts",f"{p}_{age}.txt"),"w",encoding="utf-8").write(o)
