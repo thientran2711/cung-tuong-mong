@@ -1513,4 +1513,5 @@ ROOT-54 Lượt 686 OWNER: tick done → OWNER_GROUPS_L686.json + LOOK_GROUPS.md
 ROOT-54: NF4 session_01PEhRbujSy1iCu1hyi6f552 (teeth c06/c14/c19/c31, c27 new Sắc sảo person, TYPES_v5 strong blocks, 3 Sắc sảo samples). BW6 told to wire OWNER_GROUPS_L686.json.
 ROOT-54 Lượt 687: face count sent (Tươi tắn 30, Dịu dàng 17, Đoan trang 17, Sắc sảo 6, Tinh nghịch 14, Kiêu kỳ/Lạnh lùng/Quyến rũ 0 = 84 + nc1–nc3 not ticked). ctx 36 % → ROLLING OVER to ROOT-55.
 
-ROOT-55 ~21:20Z: depth 7, START_CTX ~6 %. Took over from ROOT-54; workers BW6 NF4 PR11 NDX4 MMX4 TH1 CP1 told to report to ROOT-55.
+ROOT-55 ~21:20Z: depth 7, START_CTX ~6 %. Took over from ROOT-54; workers BW6 NF4 PR11 NDX4 MMX4 TH1 CP1 told to report to ROOT-55.ROOT-55 ~21:25Z: Lượt numbering collided (ROOT-54 also used 688/689 in its chat); ROOT-55 used 688 (takeover), 689 (ma ma m05 sheet), 690 (Nữ đế NDX4 sheet). Owner Lượt 689 order (4 groups only) recorded: ART_RULES D8 + LOOK_GROUPS.md. TH1 idle at roll line (handover in thai-hau-TH1.md); NDX4 done. Next free Lượt 691.
+ROOT-55 ~21:25Z: Lượt 691 = PR11 5 room sheets (v11f) sent to owner with measure table + notes (Phi 3w 20.3 %; tool under-reads SyhT/EbY4; reception góc xéo gentle). Next free Lượt 692.
