@@ -40,9 +40,9 @@ const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t
   ck('BAL.chat keys',BAL.chat&&BAL.chat.on===1&&BAL.chat.gap.min===60&&BAL.chat.gap.max===120&&BAL.chat.maxBub>=1,BAL.chat);
   /* (2) greeting: leave home, come back */
   CHAT.log.length=0;const pl=places().find(x=>x.k==='vuon')?'vuon':places()[0].k;go(pl);await Wt(600);clr();render();await Wt(300);
-  go('home');await Wt(200);clr();await waitImgs();for(let w=0;w<24&&!CHAT.log.some(x=>x.tag==='greet');w++)await Wt(500);
+  go('home');await Wt(200);clr();await waitImgs();for(let w=0;w<30&&!CHAT.log.some(x=>x.tag==='greet');w++){await Wt(500);if(w%4===3)clr()}
   const gl=CHAT.log.filter(x=>x.tag==='greet');const maidName=S.maid&&S.maid.name;
-  ck('greet: her own maid greets on arrival',gl.length>=1&&gl[0].who===maidName,{log:gl.slice(0,2),maid:maidName,stat:CHAT.stat});
+  ck('greet: her own maid greets on arrival',gl.length>=1&&gl[0].who===maidName,{log:gl.slice(0,2),maid:maidName,gt:CHAT.gt,place:S.place,pres:CHAT.present().map(x=>x.p.name),prev:CHAT.prev,ppl:curPeople().map(x=>x.kind+':'+x.name),toks:[...document.querySelectorAll('#tokens .tok')].map(e=>e.className+'|'+e.style.visibility+'|'+e.style.display+'|'+(e.querySelector('img')||{}).naturalWidth),away:typeof ERR!=='undefined'&&ERR.awayOf?!!ERR.awayOf('mm:me'):null,tasks:typeof ERR!=='undefined'?ERR.tasks().map(x=>x.who+':'+x.back):null});
   ck('greet: said once',gl.filter(x=>x.who===maidName).length===1,gl.length);
   /* (4) bubble geometry of the greeting */
   const geo=()=>{const st=document.getElementById('stage'),sr=st.getBoundingClientRect();const out=[];for(const e of document.querySelectorAll('.kchat-b')){const r=e.getBoundingClientRect();
@@ -71,6 +71,7 @@ const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t
   let hap={};try{let k=null,two=[];for(const x of places().map(q=>q.k)){if(['lc','tgk','ksp','tyv'].includes(x))continue;await visit(x);const R2=S.visit.people.filter(q=>q.kind==='rival'&&q.ref).map(q=>q.ref);if(R2.length>=2){k=x;two=R2;break}}
    if(!k)throw new Error('no place with 2 consorts');const ag0=window.agPlanned;const a=two[0],t=two[two.length-1];window.agPlanned=agPlanned=()=>[{who:ledgerId(a),k:'cx:gift',t:ledgerId(t),pl:k,kh:0}];
    await visit('home');await visit(k);const P=S.visit.people;const ia=P.findIndex(x=>x.ref===a),it=P.findIndex(x=>x.ref===t);hap.k=k;hap.ia=ia;hap.it=it;hap.names=P.map(x=>x.name);
+   {const st=document.getElementById('stage');const vis=()=>CHAT.present().map(x=>x.p.ref);for(let g=0;g<6&&!(vis().includes(a)&&vis().includes(t));g++){const pg=(st.dataset.j59pg||'').split(',').map(Number);if(!(pg[1]>pg[0]+1))break;st.__j59p=pg[0]+1;render();await waitImgs();await Wt(800)}hap.both=vis().includes(a)&&vis().includes(t);hap.pg=st.dataset.j59pg||''}
    CHAT.run=0;const n0=CHAT.log.length;CHAT.tick();await Wt(5500);hap.log=CHAT.log.slice(n0).map(x=>x.who);hap.stat=CHAT.stat.hap;
    window.agPlanned=agPlanned=ag0;ck('happening: the pair stands together',ia>=0&&it>=0&&Math.abs(ia-it)===1,hap);
    ck('happening: they talk to each other first',hap.log.length>=1&&[a.name,t.name].some(n=>hap.log[0]&&hap.log[0].indexOf(n.split(' ').pop())>=0||hap.log[0]===n),hap)}catch(e){ck('happening: run',false,e.message)}

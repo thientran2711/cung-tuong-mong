@@ -152,19 +152,28 @@ function wPair(a,b){const W=C().w||{};if(a.k==="srv"&&b.k==="srv"||a.k==="srv"&&
 function wpick(L){let s=0;for(const x of L)s+=x[1];let r=Math.random()*s;for(const x of L){r-=x[1];if(r<=0)return x[0]}return L[L.length-1][0]}
 function arm(short){if(CH.t)clearTimeout(CH.t);const c=C();if(!c||!c.on)return;const g=c.gap||{};const s=short?(c.retry||20):R(g.min||60,g.max||120);CH.t=setTimeout(tick,s*1000)}
 /* ---------- (a) greeting on arrival home ---------- */
-function greet(){if(!on())return;const run=(n)=>{const b=busy();if(b==="modal"||b==="queue"){if(n<((C().greet||{}).tries||6))return setTimeout(()=>run(n+1),((C().greet||{}).wait||1500));return}
+function greet(){if(!on())return;CH.gt=[];const run=(n)=>{const b=busy();CH.gt.push(n+":"+(b||"-"));if(b==="modal"||b==="queue"){if(n<((C().greet||{}).tries||6))return setTimeout(()=>run(n+1),((C().greet||{}).wait||1500));return}
   if(b&&b!=="nostage")return;const L=b?[]:present();const M=L.find(x=>x.p.kind==="maid");if(!M){/* her figure picture may still be loading */if(n<((C().greet||{}).tries||6)&&S.place==="home")return setTimeout(()=>run(n+1),((C().greet||{}).wait||1500));return}const pool=(window.CHAT_L&&CHAT_L.greet)||[];const c=ctx(M,null);
   const cand=pool.filter(s=>{const t=tagOf(s);return !t||tagOk(t,c)}).map(s=>[s,1]);const s=choose(cand);if(!s)return;const r=fill("A:"+untag(s),M,null,{c,v:{}});if(!r)return;used(s);
   CH.run=0;clearB();if(play([r],"greet"))CH.stat.greet++};setTimeout(()=>run(0),((C().greet||{}).delay||900))}
 /* ---------- (c) the people of one happening stand together (once per visit) ---------- */
-function group(){try{const V=S.visit;if(!V||!Array.isArray(V.people)||V.__chg)return;V.__chg=1;if(typeof agPlanned!=="function")return;const P=V.people;
- const idOf=p=>lid(ent(p));const pos=new Map(P.map((p,i)=>[p,i]));const pairs=[];
- for(const d of agPlanned()){if(d.pl!==S.place||!d.t)continue;const a=P.find(p=>idOf(p)===d.who),b=P.find(p=>{const id=idOf(p);return id===d.t||id===String(d.t)});if(a&&b&&a!==b)pairs.push([a,b])}
+function hapPeople(P){const idOf=p=>lid(ent(p));const pairs=[];if(typeof agPlanned!=="function")return pairs;
+ for(const d of agPlanned()){if(d.pl!==S.place||!d.t)continue;const a=P.find(p=>idOf(p)===d.who),b=P.find(p=>{const id=idOf(p);return id===d.t||id===String(d.t)});if(a&&b&&a!==b&&!pairs.some(q=>q.includes(a)||q.includes(b)))pairs.push([a,b])}return pairs}
+/* the stage pages (j59: page 0 = her + first tokens, every later page = N tokens): a pair is put on ONE page, so both stand in one frame */
+function align(){try{const V=S.visit,st=stage();if(!V||!st||V.__chg2)return false;V.__chg2=1;const pg=(st.dataset.j59pg||"").split(",").map(Number);if(pg.length<5||pg[0]!==0)return false;
+ const first=pg[3],M=pg[4],N=first+(document.getElementById("mefig")?1:0);const P=V.people;if(P.length!==M)return false;const pairs=hapPeople(P);if(!pairs.length)return false;
+ const slot=new Array(M).fill(null);let k=first;for(const pr of pairs){if(k%N!==first%N)k+=N-((k-first)%N);if(k+1>=M)break;slot[k]=pr[0];slot[k+1]=pr[1];k+=2}
+ const rest=P.filter(p=>!slot.includes(p));for(let i=0;i<M;i++)if(!slot[i])slot[i]=rest.shift();if(slot.every((p,i)=>p===P[i]))return false;P.length=0;slot.forEach(p=>P.push(p));return true}catch(e){err("align",e);return false}}
+function group(){try{const V=S.visit;if(!V||!Array.isArray(V.people)||V.__chg)return;V.__chg=1;const P=V.people;
+ /* at home her maid stands next to her (first, in her frame): she is the one who greets her (owner OD:L1627 (5)) */
+ if(V.k==="home"){const i=P.findIndex(p=>p&&p.kind==="maid");if(i>0){const m=P.splice(i,1)[0];P.unshift(m);try{if(typeof popIdx!=="undefined")popIdx=null}catch(e){}}}
+ const pairs=hapPeople(P);
  if(!pairs.length)return;const out=[];const put=p=>{if(!out.includes(p))out.push(p)};
  for(const p of P){if(out.includes(p))continue;const pr=pairs.find(q=>q[0]===p||q[1]===p);if(pr){put(pr[0]);put(pr[1])}else put(p)}
  if(out.length===P.length&&out.some((p,i)=>p!==P[i])){P.length=0;out.forEach(p=>P.push(p));try{if(typeof popIdx!=="undefined")popIdx=null}catch(e){}}}catch(e){err("group",e)}}
 /* renderStage wrapper: arrival detection + grouping; never changes what it draws */
-if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){try{if(on()&&S.visit&&S.visit!==CH.visit){group()}}catch(e){err("rs0",e)}const r=r0.apply(this,arguments);
+if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){try{if(on()&&S.visit&&S.visit!==CH.visit){group()}}catch(e){err("rs0",e)}let r=r0.apply(this,arguments);
+ try{if(on()&&S.visit&&S.visit!==CH.visit&&align())r=r0.apply(this,arguments)}catch(e){err("al",e)}
  try{if(S&&S.visit!==CH.visit){const pl=S.place||"home";const was=CH.prev;CH.visit=S.visit;CH.prev=pl;CH.run=0;clearB();if(pl==="home"&&was!==undefined&&was!=="home")greet()}if(!CH.t)arm()}catch(e){err("rs1",e)}return r}}
 /* ---------- (d) eavesdrop → the exact lines ---------- */
 /* the exchange the target and her confidant really said, from the TRUE facts j78 just learnt (S.intel newest first) */

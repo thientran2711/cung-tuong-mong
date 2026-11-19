@@ -1342,4 +1342,4 @@ BAL.ag.par4={on:1,kidCare:{g:{"kid":3}},kidGuard:{host:40,g:{"safe":2,"kid":1}},
    mem = remembered keys (ring), greet = arrival greeting (delay ms, wait ms per retry while a dialog is open, tries), w = pick weights (hap = chance a
    happening pair talks first; srv / friend / rival / base pair weights; solo = one person speaking to her). on:0 turns the whole feature off. */
 BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400,ch:55,min:2600,max:6000},noRepeat:60,mem:400,
- greet:{delay:900,wait:1500,tries:6},w:{hap:.8,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
+ greet:{delay:900,wait:1500,tries:20},w:{hap:.8,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
