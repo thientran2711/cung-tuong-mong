@@ -103,7 +103,7 @@ R=[
  "mid-step, holding a deep-blue morning glory sprig lightly in one hand near her chest, the other hand lifting her sleeve","a deep-blue morning glory sprig","morning glory sprig (deep blue)"),
 ("c21",15,"a small HEART-ROUND face with a broad smooth forehead, plump cheeks and a narrow little chin, large clear almond eyes with a slight downward tilt at the outer corners giving an innocent look, fully open, soft faint arched brows, a delicate small straight nose, small full lips with a soft bow","small heart-round, broad forehead","large clear almond, slight down-tilt","small full, soft bow",
  "half-up: the top hair in one small soft loop at the back wrapped with a blush-pink ribbon, the rest loose and straight to the waist",
- "a cross-collar ruqun of ruby-red plain silk with a high-waisted blush-pink floor-length skirt of cotton-silk, small embroidered little chrysanthemums at the hem, a blush-pink silk sash with a small pearl bead, long sleeves","ruby","blush pink","ruby and blush pink",
+ "a cross-collar ruqun of ruby plain silk with a high-waisted blush-pink floor-length skirt of cotton-silk, small embroidered little chrysanthemums at the hem, a blush-pink silk sash with a small pearl bead, long sleeves","ruby","blush pink","ruby and blush pink",
  "walking lightly forward, a sprig of white jasmine held in both hands at her chest, glancing softly at it","a sprig of white jasmine","jasmine sprig (white)"),
 ("c22",18,"a graceful slender DIAMOND-OVAL face with soft high cheekbones and a neat tapered chin, medium almond eyes with calm level lids, fully open and bright, long straight brows with a soft tail, a straight nose with a fine bridge, a small mouth with a softly full lower lip","slender diamond-oval","medium almond, calm level lids","small, soft full lower lip",
  "fully loose and long, a thin pink ribbon tied across the back of the head, one small white jade hairpin at the crown pointing backward",
@@ -127,7 +127,7 @@ R=[
  "mid-step, holding a white lotus bud on a long stem lightly in both hands at her waist, head tilted gently","a white lotus bud on a long stem","lotus bud (white)"),
 ("c27",15,"a fresh small LONG-OVAL face with soft rounded cheeks and a gentle little chin, large bright round eyes with clear double lids, fully open, soft straight short brows, a small straight nose with a soft tip, a small mouth with a full rosy lower lip","small long-oval","large bright round, clear double lids","small, full rosy lower lip",
  "fully loose and long, a small cream ribbon tied to a thin lock at each side of the face",
- "a cross-collar ruqun of cinnabar-red plain silk with a high-waisted cream floor-length skirt of cotton-silk, small embroidered swallows at the hem, a cream silk sash with a small carnelian bead, long sleeves","cinnabar","cream","cinnabar and cream",
+ "a cross-collar ruqun of cinnabar plain silk with a high-waisted cream floor-length skirt of cotton-silk, small embroidered swallows at the hem, a cream silk sash with a small carnelian bead, long sleeves","cinnabar","cream","cinnabar and cream",
  "walking forward lightly, a bunch of sky-blue forget-me-nots held at her chest with both hands, glancing softly at them","a bunch of sky-blue forget-me-nots","forget-me-not bunch (sky blue)"),
 ("c28",18,"a serene softly ROUNDED SQUARE face with a smooth jaw and a short gentle chin, calm large almond eyes with straight upper lids, fully open and bright, long thin level brows, a delicate straight nose, a small mouth with neat thin lips","rounded square, short chin","calm large almond, straight upper lids","small, neat thin",
  "loose and long, the top hair smoothly drawn back under a celadon silk ribbon tied in a flat knot at the back, one small white jade hairpin pointing upward",
@@ -192,7 +192,41 @@ def _light(nh):
     n2="light "+re.sub(r"^(muted |soft |deep |pale )+","",n).replace("deep ","")
     return (n2,"#%02X%02X%02X"%(round(r*255),round(g*255),round(b*255)))
 def LIGHTEN(d): return {k:(_light(v[0]),_light(v[1])) for k,v in d.items()}
-_NEW0=dict(NEW); NEW=LIGHTEN(NEW); ORIGHEX={c for c in ORIGHEX if NEW[c][0][1]==_NEW0[c][0][1]}
+
+# TONE (owner Lượt 590 via ROOT-51; replaces LIGHTEN): target = Quý nhân v2 option-B picture tone (m13 a26, main lilac #CBAAB0).
+# MAIN: same hue, lightness 0.62–0.72, saturation 0.25–0.40, name "soft <hue>". SECONDARY: clearly deeper, lightness 0.38–0.52, saturation 0.20–0.35, plain name.
+# Neutral secondaries (white/ivory/cream/grey) cannot go deeper and keep their name → deeper neutral: warm ones → "soft taupe", grey ones → "slate grey".
+# c01/c06/c21/c24/c27 reds spread by hue (HUE_SET). Names per person:
+TONE_NAMES={"c01":("soft rose red","jade green"),"c02":("soft sapphire blue","slate grey"),"c03":("soft emerald green","soft taupe"),
+"c04":("soft royal purple","deep lavender"),"c05":("soft peacock teal","dusty rose"),"c06":("soft vermilion","soft taupe"),
+"c07":("soft lavender","dusky rose pink"),"c08":("soft cherry-blossom pink","sage green"),"c09":("soft powder blue","slate grey"),
+"c10":("soft peach","soft taupe"),"c11":("soft lilac","slate grey"),"c12":("soft mint green","slate grey"),"c13":("soft apricot","soft taupe"),
+"c14":("soft ivory cream","blue-violet"),"c15":("soft coral pink","soft taupe"),"c16":("soft sage green","soft taupe"),
+"c17":("soft blush pink","teal"),"c18":("soft mauve rose","lilac-plum"),"c19":("soft plum","dusky pink"),"c20":("soft lotus pink","celadon green"),
+"c21":("soft raspberry rose","dusky pink"),"c22":("soft orchid purple","dusky pink"),"c23":("soft crimson red","jade green"),
+"c24":("soft persimmon","soft taupe"),"c25":("soft cherry red","teal"),"c26":("soft burgundy rose","celadon green"),
+"c27":("soft terracotta","soft taupe"),"c28":("soft celadon","slate grey"),"c29":("soft ink blue","slate grey"),
+"c30":("soft moonlight blue","slate grey"),"c31":("soft pale jade","slate grey"),"c32":("soft ivory","grey-blue")}
+HUE_SET={"c01":355,"c06":12,"c21":342,"c24":22,"c27":6,"c15":10,"c17":352}
+NEUTRAL_HUE={"soft taupe":30,"slate grey":215}
+def _hls(h): return colorsys.rgb_to_hls(*(int(h[i:i+2],16)/255 for i in (1,3,5)))
+def _hex(H,L,S): return "#%02X%02X%02X"%tuple(round(x*255) for x in colorsys.hls_to_rgb(H,L,S))
+def _cl(x,a,b): return min(max(x,a),b)
+def TONE(d):
+    out={}
+    for k,((mn,mh),(sn,sh)) in d.items():
+        nm,ns=TONE_NAMES[k]
+        H,L,S=_hls(mh); H=HUE_SET.get(k,H*360)/360
+        i=int(k[1:])
+        Smax=0.25 if "ivory" in nm else 0.40   # ivory/cream mains stay ivory-beige, not peach
+        main=(nm,_hex(H,_cl(L,0.62,0.72),_cl(S,0.25,Smax)))
+        H2,L2,S2=_hls(sh)
+        if ns in NEUTRAL_HUE: H2,S2,L2=(NEUTRAL_HUE[ns]+(i%5-2)*5)/360,0.20,0.42+(i%4)*0.03   # small per-person spread
+        if k=="c10": main=(nm,_hex(28/360,0.70,0.40))   # keep peach apart from ivory mains
+        sec=(ns,_hex(H2,_cl(L2,0.38,0.52),_cl(S2,0.20,0.35)))
+        out[k]=(main,sec)
+    return out
+_NEW0=dict(NEW); NEW=TONE(NEW); ORIGHEX={c for c in ORIGHEX if NEW[c][0][1]==_NEW0[c][0][1]}
 CHANGED={"c01","c02","c05","c11","c14","c17","c23","c25","c26","c31"}
 pre,post=COMMON.split('{PERSON}')
 out=[]
@@ -228,7 +262,7 @@ hdr=("# c01–c32 NEW consort thiếu nữ v3 {PERSON} lines — index (NF1, own
 open(os.path.join(D,'INDEX_c_v3.md'),'w').write(hdr+"\n".join(out)+"\n")
 print("wrote",len(out))
 tab=["| id | old (Lượt 562) | new (B18, Lượt 583) |","|---|---|---|"]+[f"| {c} | {OLDCOL[c][0]} + {OLDCOL[c][1]} | {NEW[c][0][0]} {NEW[c][0][1]}{' (o)' if c in ORIGHEX else ''} + {NEW[c][1][0]} {NEW[c][1][1]} |" for c in NEW]
-open(os.path.join(D,'INDEX_c_v3.md'),'a').write("\n## B18 neutral-tone colours c07–c32 (owner Lượt 583; c01–c06 drawn samples kept as they are)\nEvery colour = name + hex + the store medium-tone sentence (build.py LOW_TONE). (o) = hex measured from her game t1 robe (build.py ORIG1). Owner Lượt 586: colours below lightness 0.62 raised to light tints (LIGHTEN).\n\n"+"\n".join(tab)+"\n")
+open(os.path.join(D,'INDEX_c_v3.md'),'a').write("\n## B18 neutral-tone colours c07–c32 (owner Lượt 583; c01–c06 drawn samples kept as they are)\nEvery colour = name + hex + the store medium-tone sentence (build.py LOW_TONE). (o) = hex measured from her game t1 robe (build.py ORIG1). Owner Lượt 590: TONE = Quý nhân v2 option-B level (mains L 0.62–0.72 S 0.25–0.40; secondaries deeper L 0.38–0.52 S 0.20–0.35).\n\n"+"\n".join(tab)+"\n")
 
 # RANK DATA (ROOT-51 19:09Z, owner Lượt 583 B18): c01–c06 hex + tone ONLY for their rank prompts; their drawn thiếu-nữ files stay as drawn.
 RANK_ONLY={"c01":(("soft rose red","#C77078"),("pale jade green","#A9C7B3")),
@@ -237,7 +271,7 @@ RANK_ONLY={"c01":(("soft rose red","#C77078"),("pale jade green","#A9C7B3")),
 "c04":(("muted royal purple","#7E5E8E"),("soft lavender","#C3B3D6")),
 "c05":(("muted peacock teal","#4F8584"),("dusty rose","#C99A9C")),
 "c06":(("soft vermilion","#D5745E"),("ivory","#F0E8DA"))}
-RANK_ONLY=LIGHTEN(RANK_ONLY)
+RANK_ONLY=TONE(RANK_ONLY)
 import json
 json.dump({"_note":"Rank-prompt colours for consorts c01–c32 (B18 Lượt 583): main/secondary name + hex + tone sentence. c01–c06 = rank data only (their drawn thiếu-nữ pictures/files stay as drawn). HOLD: no use until owner GO.",
  "tone":LOW_TONE,**{c:{"main":v[0][0],"main_hex":v[0][1],"secondary":v[1][0],"secondary_hex":v[1][1]} for c,v in {**RANK_ONLY,**NEW}.items()}},
