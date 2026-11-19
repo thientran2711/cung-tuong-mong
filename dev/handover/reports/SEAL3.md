@@ -32,3 +32,13 @@ Credits: 6 keyframes × 135 + 9 clips × 940 = 9 270 (balance 522 032 → ≈512
 - BACK (all three): the last frames brighten the disc to keyframe A's colour (= the still), as in th-gian.
 
 ## STATUS: STOPPED. Sent to ROOT-57; no other seals until the owner OKs each group.
+
+## CANCELLED order cn-/nt-/nl- (20/11 ~00:10Z)
+ROOT-57 relayed "owner Lượt 796: old 35-seal sets not kept → samples for cn- cung nữ trẻ, nt- nam trẻ, nl- nam lớn", then CANCELLED it
+(misread: Lượt 800 = 35 PLACE pictures; her 19/11 15:35Z words stand). Stopped at once; nothing cut or uploaded; seal-groups-mass.md was never edited.
+Spent before the cancel (cannot be refunded): A+B for all three (6 × 135 = 810) + 6 clips (cn OUT/LOOP/BACK u5WRfHzQLD 9ZHvy3BNYZ iG5C9AA3uK,
+nt OUT/LOOP/BACK 5jDnHxmKxe lJtpjJTgv9 aFGNmH1fSh; 6 × 940 = 5 640) = 6 450 cr. nl clips were refused before starting (0 cr).
+Keyframes: cn A 6AbfyCNiJO / B p8ylTohehw (→ vQA9IGWa47 flattened) · nt A u5WRvAKQLD / B jUoVkUrLD0 · nl A kseWHVR16B / B jUoVkwxLD0.
+Ledger 12 lines marked CANCELLED. Look notes (if ever reused): cn read as a maid (no flower, per K15); nt read too soft/young, not clearly a man of 20; nl good.
+SEAL3 TOTAL = 9 270 + 6 450 = 15 720 cr.
+## Owner OK'd mm, bg, bt samples (via ROOT-57). Full sets wait for ROOT-57 GO. IDLE.
