@@ -33,8 +33,15 @@ def block(t):
 # (image 1 = own t1 face TdU0vvvVNR, image 2 = style m09 eIyOFEidqL) + image 3 = live Nữ quan m37 tm4 (s7IO0AUl8e, md5 = CDN img/hd/fig-maid-m37-tm4-a18.webp).
 NQ=(" Image 3 is the Nữ quan reference image: the court red colour and the fabric (sheen, weave, drape) of this court robe exactly like the robe of the Nữ quan reference image (image 3);"
     " copy ONLY its colour and cloth, never its person, face, outfit cut, embroidery, hair, item or pose.")
+# Lượt 414/416 RULE (ROOT-47): the style image (m09 / 6AbGv6EiJO) is used ONLY for the t1 thiếu nữ itself; every triều phục picture uses her OWN t1 picture as image 1 and NO style image (default; --style restores the old refs).
+# Without the style image: image 1 = own t1 face, [image 2 = royal swatch on t6 --store], then the Nữ quan picture = image 2 (image 3 on t6 --store).
+NS='--style' not in sys.argv
+STYLE_SENT=" The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose."
+def _nq(t):
+    k=('3' if (t==6 and '--store' in sys.argv) else '2') if NS else ('4' if (t==6 and '--store' in sys.argv) else '3')
+    return NQ.replace('Image 3','Image '+k).replace('(image 3)','(image '+k+')')
 _block=block
-def block(t): return _block(t)+(NQ.replace('Image 3','Image 4').replace('(image 3)','(image 4)') if (t==6 and '--store' in sys.argv) else NQ)
+def block(t): return _block(t)+_nq(t)
 # ROUND 15c LAWS (ROOT-46 GO 19/11 ~08:09Z, owner Lượt 364; FIGURE_GATE Lượt 337 hair, 355 sleeves, 364 prompt-B fabric t7/t8).
 # Sentences copied from the current builders: SLEEVES t1-t3 / t4-t6 = mk_ranks_v3.py; SLEEVES + HAIR UP t7/t8 + FL2 = mk_hqp_hh.py templates.
 SLV={1:"SLEEVES: very long, wide, flowing sleeves of thin light silk that fall well past her hands and hang down to her KNEES, swaying gracefully and trailing elegantly (thướt tha); never short, narrow, cuffed or tight working sleeves like a maid's or palace servant's. ",
@@ -63,7 +70,7 @@ def wdiff(a,b):
     return "\n".join(out)
 import subprocess
 def store(t):
-    a=['c06','v0']+(['--low',str(t)] if t<=6 else ['--t7'] if t==7 else [])
+    a=['c06','v0']+(['--nostyle'] if NS else [])+(['--low',str(t)] if t<=6 else ['--t7'] if t==7 else [])
     return subprocess.run(['python3','build.py']+a,cwd=os.path.join(H,'../../t8-prompt-B'),capture_output=True,text=True,check=True).stdout.rstrip('\n')
 # ROUND 17 (owner Lượt 397 item 2, FIGURE_GATE LAW #1; ROOT-47 GO): triều phục t1-t5 = the store TẦN (t4) outfit with the shoulder piece REMOVED,
 # each rank keeps its own rank words, item/pose and its triều phục colours; fabric = the store t1-t3 fabric sentence; cầu vai stiff for all, no thường phục feature.
@@ -78,15 +85,16 @@ def r17_base(t):
     return b[:pa]+own[qa:qe]+b[pe:]                                              # own item/pose
 R17_CV="a STIFF, structured jewelled shoulder piece (cầu vai) over each shoulder"
 R17_ADD=(" The shoulders carry ONLY the stiff cầu vai: no capelet, no round cape, no pearl net or beaded yoke, no shawl and no sheer stole over the shoulders or arms."
-         " Image 3 gives ONLY the court red colour; the cloth itself follows the fabric sentence above (light, soft, thin flowing silk), never velvet.")
+         " Image 2 gives ONLY the court red colour; the cloth itself follows the fabric sentence above (light, soft, thin flowing silk), never velvet.")
 for t in range(1,9):
     if '--r17' in sys.argv and t>5: continue
     if '--r17' in sys.argv:
         o=r17_base(t)
         a=o.index(" Pose: calm standing pose;"); bl=block(t).replace("a jewelled shoulder piece (cầu vai) over each shoulder",R17_CV)
-        bl=bl.replace(NQ,"")+R17_ADD; n=o[:a]+bl+o[a:]
+        bl=bl.replace(_nq(t),"")+(R17_ADD if NS else R17_ADD.replace("Image 2 gives","Image 3 gives")); n=o[:a]+bl+o[a:]
         n=laws(t,n); open(os.path.join(H,f't{t}_c06.txt'),'w').write(n+"\n"); print(t,len(n)); continue
     o=store(t) if (t<=6 and '--store' in sys.argv) else open(os.path.join(H,'orig',f't{t}_v0_c06.txt')).read().rstrip('\n')
+    if NS and STYLE_SENT in o: o=o.replace(STYLE_SENT,"",1)   # golden originals (t7/t8, or t1-t6 without --store): drop the style-reference sentence
     a=o.index(" Pose: calm standing pose;"); n=o[:a]+block(t)+o[a:]
     n=laws(t,n)
     if '--refnum2' in sys.argv:
