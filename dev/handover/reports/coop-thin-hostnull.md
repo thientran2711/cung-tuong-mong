@@ -70,3 +70,43 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+
+## Worker #2 (session_01N1tNP2tXKt5N4VcwMfYH8B, opus) — depth 6, START_CTX ≈ 4 % of 1M (rollover ≈ 29 %, ceiling 60 %); ended ≈ 18 %.
+PRIORITY #1 CHECK: handover #1 above + Foreman B ROOT-6 orders (merge LIVE main, then F5) | main / review/* no other host repaint work | CLAIMS row 'coop-thin hostnull fix #2'.
+
+### (a) repaint cost / loop / modal (extra check ordered by Foreman B)
+- r2 (deferred repaint in rAF) was DROPPED: under the suite it let the page's microtask observers (jreveal krvSoon → krvTick → krvFlip) see HER DOM on the host page → the host flipped her face key (H2 red, stack recorded in the test).
+- r3 (kept): the repaint stays in the SAME task (TH.tapRun → rpAsk → D.after(RPF); D.afterRun renders), observer disconnected first → no loop; the host's own open card is rebuilt (showModal) only when her run wrote #modal or other waiting work exists.
+- H6 (new): host opens his own card with a marker → she talks → marker kept, Q[0] same, modal open, no host sfx; 3 s idle → rpN / paintN unchanged (no loop). PASS L9 + swap.
+- Cost (host CPU ×4, LAG 85, hostnull run): repaint ≈ 300 ms per run that wrote his DOM (5 repaints / 1.3–1.6 s per suite run; 7 / 610 ms at CPU ×1). f2 4G tap→arrival median: before 2207 · (a) 2152 · r2 2094 · r3 2037 ms (n=40) = noise level. Long tasks comparable.
+- Decision: keep the WHOLE family (talk / scout / invite + walk + E step + D pick); a host:null-only repaint would miss the E step and D pick writes (UI scan).
+- Pre-existing, report only: record-based page observers (e.g. jsfx "open" sound on an added .kpanel/.kpop) could see her added nodes even with the sync repaint; H6 checks no host sound plays during her talk (0 seen).
+
+### Merges
+LIVE main 2481c80d (ebb26851) → F5 7f74ce44 (4e95b5ea) → F5 9b46e1ad = LIVE 1a4df595 (801b86b7 parallel-time + drift-2) (b65dfcbb, rebuilt e4e06059). Conflicts only in generated index.html / sw.js (rebuilt by assemble.py + build_site.sh).
+
+### Fixes in #2
+- 717d92f6: kpmPlay kept out of the NOOP wrapper list (defined after it) → coop-thin-b 'UI no-op list wrapped' red fixed (b 136/136).
+- 1fc3b8a0 (test only): H3/H4 staging hooks seeLoc in her scout run; parallel time (jptime) now sends a runner → BAL.ptime.on=0 for the two stagings only (both phones, restored). H2 waits for her scene's people (4G). SHOTS hook after her talk.
+
+## Done — branch review/coop-thin-hostnull @ 1fc3b8a0 (pushed; = F5 9b46e1ad + hostnull)
+### Tests on the final build (live Worker; L9 unless noted)
+| test | result | note |
+|---|---|---|
+| coop-thin-hostnull | 13/13 · swap 13/13 · CPU×4 LAG85 13/13 | H1 talk once 12/13 in ~10 runs (host's own reveal mid-flip "???" vs name in a token; flaky, passes on rerun) |
+| coop-thin-a L1 / b L4 / c L4 | 24/24 · 136/136 · 16/16 | |
+| coop-thin-e L5 (+swap) / e-net L6 | 33/33 · 33/33 · 20/20 | |
+| coop-thin-f4 (+swap) | 18/18 · 18/18 | |
+| coop-thin-f1 / f2 / f3 (+swap) | f1 19/26 · f2 24/25 · f3 34/37 | SAME reds on F5 tip 9b46e1ad (b2 runs: f1 18/25, f2 24/25, f3 34/37): main 1a4df595 parallel time — her gift / invite / poison / bribe / musk now land at due; page error `sv is not defined` in runAct (main). NOT this branch. |
+| coop-thin-d L4 | crash at giftin card | SAME on F5 tip 9b46e1ad (parallel-time gift: NPC gift carried later); kit sameDom reds = main |
+| coop-thin-f5 L10 (+swap) | F0 level stays 9 | live Worker THINMAX = 9 until F5's worker (THINMAX 10) deploys; SAME on F5 tip |
+| coop-cyc THIN=9 (+swap) | 73/73 · 73/73 | swap night-draw rows flaky on F5 tip too (69–71/73 there) |
+| coop-e2e (+swap) / p2 / timer / night | 68/68 · 68/68 · 45/45 · 43/43 · 105/105 | night 102/105 once, 105/105 on rerun (F5 tip 105/105) |
+| coop-one-world seeds 1–10 | 10/10 PASS | |
+| ptime.test / ptime2.test | ALL OK · ALL OK | |
+| quickcheck | PASS (open 1825 ms, old save ok) | |
+| one-core-guard / text / text-rule / bind | PASS ×4 | |
+### Tripwire (guest writes outside fromCanon) — f2 place loop: before (d913db71) state 7362 (F1 1501) → after state 5937 (F1 169); F3 entry writes on her phone = 0.
+### UI scan after (f1–f4 + hostnull, host side): kpmPlay captured in runAct rows; cfShow in D pick rows; krvFlip captured (goTo ×2, accEtqGo, D pick); no `kpmOn<kpmGo` / `want<flip` gate rows; lost-by-cap 0 everywhere; every run that wrote host DOM has its repaint.
+### LOOK (scratch only, not uploaded): host Fold 755x1000@2 + guest iPad 1180x820@2 after her talk, and swapped: the host shows only his own screen (his Nhập cung card); her person card + her result only on her phone.
+### For B (out of scope, report only): main 1a4df595 parallel time breaks the co-op F1/F2/F3/D suites on F5 tip itself (see table); her Tranh ghế rounds not driven in co-op (L6 = L7, pre-existing).
