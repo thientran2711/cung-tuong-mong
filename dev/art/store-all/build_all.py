@@ -111,6 +111,9 @@ ONE_LAYER="ONE SINGLE SLEEVE LAYER: each sleeve begins at the shoulder and falls
 HEADBODY="HEAD AND BODY: her head turns together with her shoulders and body in the same direction with natural anatomy, never a frontal head on a turned body."
 FABRIC_B="FABRIC: thick gold-embroidered brocade with a graceful, flowing drape."
 NOFLOWER="NO flowers in the hair or on the crown at this rank (flowers only at ranks 1 to 6)."
+def angle_sentence(person,rank):
+    """Lượt 440: one of the 14 standing angles (7 + 7 mirrored, build.py ANG14), rotated per person: ANG[(t-1+(n-1))%14]; the head turns WITH the body; frontal or three-quarter only."""
+    return "ANGLE: "+LAST_G["ang_for"](person,rank)+"; her head turns together with her shoulders and body, never back-turned, never in profile."
 def laws(t):
     L=[HAIR_LOW if t<=3 else HAIR_HIGH,sleeve(t),ONE_LAYER]
     L.append(SZ[t] if t<=6 else NOFLOWER)
@@ -177,13 +180,18 @@ def princess_sentences(k,t):
     if k=="bt" and t>=4: L.append(("From rank 4 the veil keeps its length to her knees; " if t<=6 else "At this rank ")+d["veil_hi"]+"." if t>=7 else "From rank 4 the sheer ivory head veil keeps its length down to her knees.")
     return L
 
+TQ_RIGHT=", body turned slightly three-quarters to the right"
+def _clean_pose(S):
+    """Lượt 440: the store's pose pass appends 'body turned slightly three-quarters to the right' at every odd pose slot (why almost everybody faced right); the ANGLE sentence (14 standing angles, left AND right) replaces it."""
+    return S.replace(TQ_RIGHT,"")
 def build(person,rank,age="a18"):
     person=ALIAS.get(person,person); S0=store(person,rank,age); S=S0
     if rank=="nude": return S0,S0,[]
     if "Her face: . " in S:
         face=FACE_M.get(person,FACE_REF); S=S.replace("Her face: . ","Her face: "+face+(". " if not face.endswith(".") else " "),1)
+    S=_clean_pose(S)
     anchor=" Pose:"; assert S.count(anchor)==1,("pose anchor",person,rank)
-    add=laws(rank)+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
+    add=laws(rank)+[angle_sentence(person,rank)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
     return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
 
 # ---------------- CHECK ----------------
@@ -201,6 +209,7 @@ def check(person,rank,age="a18",ref=None):
     S=S0
     if "Her face: . " in S:
         face=FACE_M.get(ALIAS.get(person,person),FACE_REF); S=S.replace("Her face: . ","Her face: "+face+(". " if not face.endswith(".") else " "),1)
+    S=_clean_pose(S)
     if stripped!=S: errs.append("F minus added sentences != store output")
     for x in add:
         if x not in F: errs.append("law sentence missing: "+x[:50])

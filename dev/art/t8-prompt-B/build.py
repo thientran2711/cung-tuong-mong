@@ -942,6 +942,26 @@ MAMA_FLOWERS=[("peony","deep rose"),("plum blossom","white"),("lotus","pale pink
 MAMA_HAIR=" Her hair, hairpins and hair flower come ONLY from the identity reference and this text; the style reference image must not influence her hair."
 MAMA_ANGLE="her body stands with the shoulders slightly turned (between frontal and three-quarter, as in the approved Nu de A picture), the whole face clearly visible and towards the viewer; never a dead-frontal ID-photo stance, never the body sideways."   # owner Luot 229 ANGLE LAW
 MAMA_IMG3=" Image 3 is only a costume reference for the cut, layers, embroidery and accessories of the outfit; never copy its face, hair, pose or background; its front layer has ONE panel, but the text above says TWO front panels (hai tà): follow the text for the front layer."
+# Lượt 440 (owner: she sees almost everybody facing RIGHT, nobody LEFT; Lượt 321 point 4 "ANGLES: 7 + 7 mirrored = 14, rotated per person ANG[(t-1+(n-1))%14]"): the 14 STANDING ANGLES = the 7 angle sentences of dev/art/owner-copy/mk_ranks_v3.py ANG (angle part only) + their 7 mirrored versions (its _mir).
+# Only change vs that file: the two "walking STRAIGHT TOWARD the viewer" angles (3 and 10) are written as a frontal stance with the weight on one foot (the pose text of the rank already carries the action, and ranks t6+/a51+ never walk or swirl).
+# Head turns WITH the body (HEAD-BODY law); every angle is frontal or three-quarter, never back-turned, never profile.
+ANG14=["FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn",
+"a SLIGHT shoulder turn to the LEFT (about 15 degrees), body almost frontal, face toward the viewer",
+"a clear THREE-QUARTER view, NOT frontal: her whole body, shoulders, hips and face turned about 45 degrees toward the viewer's RIGHT, her left shoulder nearer the viewer, face fully visible",
+"FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, her weight resting on her RIGHT foot",
+"a clear THREE-QUARTER view toward the LEFT, NOT frontal: her whole body, hips and face turned about 45 degrees to the left, her right shoulder nearer the viewer, face fully visible (never side view)",
+"a SLIGHT shoulder turn to the RIGHT (about 15 degrees), body almost frontal, face toward the viewer",
+"a SLIGHT turn to the LEFT (about 15 degrees), body almost frontal, face toward the viewer",
+"FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn, mirrored: her weight and the item on her LEFT side",
+"a SLIGHT shoulder turn to the RIGHT (about 15 degrees), body almost frontal, face toward the viewer",
+"a clear THREE-QUARTER view, NOT frontal: her whole body, shoulders, hips and face turned about 45 degrees toward the viewer's LEFT, her right shoulder nearer the viewer, face fully visible",
+"FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, her weight resting on her LEFT foot",
+"a clear THREE-QUARTER view toward the RIGHT, NOT frontal: her whole body, hips and face turned about 45 degrees to the right, her left shoulder nearer the viewer, face fully visible (never side view)",
+"a SLIGHT shoulder turn to the LEFT (about 15 degrees), body almost frontal, face toward the viewer",
+"a SLIGHT turn to the RIGHT (about 15 degrees), body almost frontal, face toward the viewer"]
+def ang_for(c,t):
+    n=int(re.sub(r"\D","",c) or 0); return ANG14[(t-1+(n-1))%14]
+MAMA_DRAWN={"m01"}   # ma ma pictures already drawn/approved: no ANGLE sentence, output byte-identical
 def build_mama(c):
     n=int(re.sub(r"\D","",c) or 0); right=(n%2==1); pal,face=DATA[c]; main=pal.split(" and ")[0]; elder=AGE in ("a51","a65")   # 19/11 Lượt 407 (ROOT-47): ma ma for EVERY person id (c01-c32, m01-m52, p01-p03, bd1-3, nc1-3), not only m*
     fw=(f" Her face: {face}." if face else " Her face and facial features exactly as in the identity reference image.")
@@ -960,6 +980,7 @@ def build_mama(c):
         s+=(f" COLOUR RULE: take ONLY the cut from image 3; RECOLOUR the whole costume to her colour {main}, a medium-saturation, medium-lightness clear tone (fresh, never pale, never dark, never brown), with the embroidery in a lighter tone of the same colour and one soft gold accent; do not copy the brown of image 3.")
     s+=" Any flower or pattern on the fabric is fine silk-thread embroidery stitched directly into the fabric, flat, following the folds, never printed or pasted-on."
     item,hk=age_item(c,"mama","an embroidered handkerchief","one")
+    if c not in MAMA_DRAWN: s+=" ANGLE: "+ang_for(c,8)+"; her head turns together with her shoulders and body, never a frontal head on a turned body."   # Lượt 440
     s+=MAMA_HAIR+_pose(item,hk,right)+CLOSE
     _fr=" body and face frontal, standing squarely facing the viewer, no turn."
     assert s.count(_fr)>=1,"PRE frontal sentence"   # >=1: some item hand clauses (basket, vase...) end with the same phrase   # F4b-4 (ROOT-40): MAMA_ANGLE (invented) dropped -> the final __main__ angle pass gives the copied Nữ đế A / HH B wording, same as every path
