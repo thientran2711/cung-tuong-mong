@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"822f17c4+","t":"2026-11-19T04:35Z","c":"minister-agents: censor in the people registry (unique name, j61), every memorial announces its speaker, named court news","b":"a07ff90638d1","h":[{"s":"cbacdb55+","t":"2026-11-19T03:45Z","c":"art-wiring-1119 r2: fix review r1 FAIL 1+2"},{"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them"},{"s":"cb5a7cb3+","t":"2026-11-19T03:03Z","c":"maid-ladder-6: NPC exam mini-game tier clamps at BAL.srvRk.nq (last typed rung); scan table counted"},{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"},{"s":"cff7cf4d+","t":"2026-11-18T23:07Z","c":"questline-q2 r6 (reviewer): nhTip — a penalty (hb\u003c0) on the told rival's chapter is offset by the tip bonus, not taken as a bonus; rebuild"}]};
+window.CTM_BI={"s":"0d3f2b03+","t":"2026-11-19T04:47Z","c":"minister-agents: censor in the people registry (unique name, j61), every memorial announces its speaker, named court news","b":"3af185e630f5","h":[{"s":"cbacdb55+","t":"2026-11-19T03:45Z","c":"art-wiring-1119 r2: fix review r1 FAIL 1+2"},{"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them"},{"s":"cb5a7cb3+","t":"2026-11-19T03:03Z","c":"maid-ladder-6: NPC exam mini-game tier clamps at BAL.srvRk.nq (last typed rung); scan table counted"},{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"},{"s":"cff7cf4d+","t":"2026-11-18T23:07Z","c":"questline-q2 r6 (reviewer): nhTip — a penalty (hb\u003c0) on the told rival's chapter is offset by the tip bonus, not taken as a bonus; rebuild"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -8068,7 +8068,7 @@ function tdDadT(p){if(p===S){const h=tdHeadOf(S);if(h&&h.dadOf==="me")return !!h
 function tdDadClear(p){if(p===S){const h=tdHeadOf(S);if(h&&h.dadOf==="me")h.corrupt=false;S.dadT=false}else p.dadT=false}
 function deG(a,t){const T=trS();return ((T.de[key(a)]||{})[key(t)])||0}
 function deA(a,t,n){const T=trS();const m=T.de[key(a)]=T.de[key(a)]||{};m[key(t)]=Math.max(0,(m[key(t)]||0)+n)}
-function tdBacks(h,p){return h&&(h.af[key(p)]||0)>=40}
+function tdBacks(h,p){return h&&(h.af[key(p)]||0)>=BAL.tdCourt.backs}
 function tdNews(h){const T=trS();T.news.unshift({w:`T${S.month}/${S.year}`,h});if(T.news.length>8)T.news.length=8}
 /* the head's portrait: a court official from the figure pool, the old official face until it loads */
 function pMin(h){try{faceFor(h,"official",h.age||50)}catch(e){}const fb=fsrc(h.fc,`https://ctm-img.victoria-tntt.workers.dev/img/face-official-${(Math.max(0,CLANS.indexOf(h.c))%4)+1}.webp`);let src=fb;try{src=porOf(h,fb)}catch(e){}return{src,ini:"Quan",col:"#7a6a50",rw:TDOFF[h.c]}}
@@ -8090,7 +8090,7 @@ function probeO(a){return odA(a,35+eyes(a)*6+(a.tamco||0)/5)}
 function leakO(a,t){return odA(a,30+deG(a,t)*15+(tdPow(tdHouse(a))-tdPow(tdHouse(t)))/4+(S.emp.mood>=2?8:0))}
 function traceO(a){return cl(Math.round(35-(a.tamco||0)/4),10,40)}
 function tdGift(a,h){if(!h||a.bac<BAL.bacFee.tdGift)return"";ap(a,{bac:-BAL.bacFee.tdGift});const k=key(a);let r;
- window.__tdOk=false;if(aRoll(giftO(a,h),a)){window.__tdOk=true;h.af[k]=cl((h.af[k]||0)+20,-100,100);r=`${TDOFF[h.c]} ${h.name} nhận lễ vật của ${tdName(a)}: người ấy quý ngươi +20${tdBacks(h,a)?(h.ns?`, nay nể ${a===S?"ngươi":"nàng"}, khó lòng dâng sớ hặc`:`, nay đứng sau ${a===S?"ngươi":"nàng"}`):""}. `}
+ window.__tdOk=false;if(aRoll(giftO(a,h),a)){window.__tdOk=true;h.af[k]=cl((h.af[k]||0)+BAL.tdCourt.giftAf,-100,100);r=`${TDOFF[h.c]} ${h.name} nhận lễ vật của ${tdName(a)}: người ấy quý ngươi +${BAL.tdCourt.giftAf}${tdBacks(h,a)?(h.ns?`, nay nể ${a===S?"ngươi":"nàng"}, khó lòng dâng sớ hặc`:`, nay đứng sau ${a===S?"ngươi":"nàng"}`):""}. `}
  else if(hasT(h,"Cương trực")){h.af[k]=cl((h.af[k]||0)+BAL.eff.j55.tdGiftHead,-100,100);a.cc=(a.cc||0)+1;r=`${TDOFF[h.c]} ${h.name} trả lại lễ vật của ${tdName(a)}, còn nói ra ngoài: người ấy quý ngươi ${balSg(BAL.eff.j55.tdGiftHead)}, can chính thêm nặng. `}
  else r=`${TDOFF[h.c]} ${h.name} nhận quà của ${tdName(a)} nhưng chưa hứa gì (Bạc -40 mất trắng). `;
  return r+ccStep(a)}
@@ -8145,13 +8145,13 @@ function tdSoMonth(force){const T=trS();if(!force&&(S.turn-T.soT<TD.soGap||!roll
  if(T.praise)opts.push(["praise",6]);
  if(tdDichOpen())opts.push(["dich",3]);
  const imp=tdImpPick();if(imp)opts.push(["imp",4]);
- const ty=CLANS.filter(c=>T.H[c].pow>=65);if(ty.length&&T.tyY!==S.year&&liveRivals(true).length+1<BAL.harem.cap-1&&roomFor("consort"))opts.push(["tuyen",2]);
+ const ty=CLANS.filter(c=>T.H[c].pow>=BAL.ag.min.tuyen.pow);if(ty.length&&T.tyY!==S.year&&liveRivals(true).length+1<BAL.harem.cap-1&&roomFor("consort"))opts.push(["tuyen",2]);
  const cc=consorts().filter(p=>(p.cc||0)>=2);if(cc.length)opts.push(["cc",2]);
  const f=force&&opts.find(x=>x[0]===force);let k;if(f)k=f[0];else{if(!opts.length)return"";let r=Math.random()*opts.reduce((s,x)=>s+x[1],0),i=0;while(r>opts[i][1]&&i<opts.length-1){r-=opts[i][1];i++}k=opts[i][0]}
  T.soT=S.turn;let ev="";
  if(k==="praise"){const c=T.praise;T.praise=null;const h=T.H[c];tdPowAdd(c,BAL.eff.j55.tdSoMonth);const M=tdMembers(c);M.forEach(p=>ap(p,{danh:2}));
   ev=`<b>Sớ khen:</b> ${typeof minBy==="function"?minBy("triều thần"):"triều thần"} dâng sớ ca ngợi ${TDOFF[c]} ${h.name}. Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdSoMonth)}; ${M.length?`phi tần nhà ấy được thơm lây (Danh +2): ${M.map(tdName).join(", ")}`:"trong cung chưa có phi tần nhà ấy"}. `;
-  tdNews(`Sớ khen ${TDOFF[c]} ${h.name}; nhà ${c} được thơm lây.`);if(M.includes(S))tdPop("Sớ khen nhà ngươi",h,`<p>${typeof minBy==="function"?minBy("Triều thần"):"Triều thần"} dâng sớ ca ngợi ${TDOFF[c]} ${h.name}. Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdSoMonth)}.</p><p class="g">Ngươi là người nhà ${c}, được thơm lây: Danh +2.</p>`)}
+  tdNews(`${window.MINP&&MINP.h?`${TDOFF[MINP.h.c]} ${MINP.h.name} dâng sớ khen`:"Sớ khen"} ${TDOFF[c]} ${h.name}; nhà ${c} được thơm lây.`);if(M.includes(S))tdPop("Sớ khen nhà ngươi",h,`<p>${typeof minBy==="function"?minBy("Triều thần"):"Triều thần"} dâng sớ ca ngợi ${TDOFF[c]} ${h.name}. Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdSoMonth)}.</p><p class="g">Ngươi là người nhà ${c}, được thơm lây: Danh +2.</p>`)}
  else if(k==="dich"){const q=queenP();const c=q&&q!==S?tdHouse(q):S.rank>=7?tdHouse(S):null;const sp=c||"Lễ bộ";const h=T.H[sp];const d0=KV.deb,g0=S.kvDeb;KV.deb=100;let r="";try{r=kvDebate()}finally{KV.deb=d0}
   if(!r){T.soT=-9;return""}const won=S.heir&&S.heir.k&&kvQueenMom(S.heir.v);tdPowAdd(sp,won?BAL.eff.j55.tdSoMonth_2[0]:BAL.eff.j55.tdSoMonth_2[1]);
   ev=`${TDOFF[sp]} ${h.name}${typeof minWhy==="function"?minWhy(h):""} đứng đầu bá quan. ${r}Nhà ${sp} thế lực ${won?"+4":"-3"}. `;tdNews(`${TDOFF[sp]} ${h.name} dâng sớ xin lập đích; ${won?"Hoàng thượng nghe theo":"Hoàng thượng chưa nghe"}.`)}
@@ -8166,7 +8166,7 @@ function tdSoMonth(force){const T=trS();if(!force&&(S.turn-T.soT<TD.soGap||!roll
   else{p.cc=Math.max(0,(p.cc||0)-1);ev=`<b>Sớ hặc can chính:</b> ${by} tâu ${tdName(p)} nhờ cậy ngoại triều; Hoàng thượng cho là chưa đủ chứng, bỏ qua. `;tdNews(`${byN} hặc ${tdName(p)} can chính; ngài bỏ qua.`)}}
  return ev}
 /* a censor from a house that opposes hers; the most hostile pair first */
-function tdImpPick(){if(window.MINP&&MINP.k==="imp"&&MINP.imp)return MINP.imp;const T=trS();const L=[];for(const t of consorts()){const cT=tdHouse(t);if(!cT)continue;for(const cA of CLANS){if(cA===cT)continue;const h=T.H[cA];const w=(tdRel(cA,cT)<=-25?3:tdRel(cA,cT)<0?1:0)*(nv(h,"feudW"));if(w>0)L.push([cA,t,w])}}
+function tdImpPick(){if(window.MINP&&MINP.k==="imp"&&MINP.imp)return MINP.imp;const T=trS();const L=[];for(const t of consorts()){const cT=tdHouse(t);if(!cT)continue;for(const cA of CLANS){if(cA===cT)continue;const h=T.H[cA];const w=(tdRel(cA,cT)<=-BAL.cut.clanRel?BAL.ag.min.imp.deep:tdRel(cA,cT)<0?1:0)*(nv(h,"feudW"));if(w>0)L.push([cA,t,w])}}
  if(!L.length)return null;let r=Math.random()*L.reduce((s,x)=>s+x[2],0),i=0;while(r>L[i][2]&&i<L.length-1){r-=L[i][2];i++}return [L[i][0],L[i][1]]}
 function tdImpeach(cA,t){const T=trS();const hA=T.H[cA],cT=tdHouse(t),hT=T.H[cT];const evd=Math.max(0,...tdMembers(cA).map(m=>deG(m,t)));
  const o=cl(Math.round(40+evd*15+(hA.pow-hT.pow)/3+(S.emp.mood>=2?10:0)),10,90);const pre=`<b>Sớ hặc tội:</b> ${TDOFF[cA]} ${hA.name}${typeof minWhy==="function"?minWhy(hA):""} hặc cha của ${tdName(t)} (nhà ${cT}) tham ô. `;let ev;
@@ -8220,10 +8220,10 @@ function tdHTML(){const T=trS();const myC=tdHouse(S),myH=tdHead(myC);const busy=
   return `<div class="rival tdh"><div class="top tdtop">${mdH(f,"sm")}<div class="tdn"><b>Nhà ${c}</b><em>${TDOFF[c]} ${hd.name}${hd.dadOf==="me"?" (cha ngươi)":""} · ${hd.age} tuổi · ${netTxt(hd)}</em></div></div>
   <div class="tdq">${sbar("Thế lực",hd.pow,"tdtl")}${hd.dadOf==="me"?"":sbar("Thiện cảm với ngươi",af,"tdaf")}</div>
   <div class="chips">${M.length?M.map(p=>chip(`${mdH(p===S?pMe():pv(p),"xs")}${p===S?"Ngươi":p.name}${p!==S&&trS().clean[key(p)]?" · cha thanh liêm":""}${p!==S&&deG(S,p)?` · chứng cứ tham ô ${deG(S,p)}`:""}`)).join(""):chip("Chưa có phi tần nhà này trong cung")}${typeof minGoalChip==="function"?minGoalChip(hd):""}${rel.map(z=>chip(`${tdRelW(z[1])}: nhà ${z[0]}`,z[1]>0?"ok":"hot")).join("")}${tdBacks(hd,S)&&c!==myC?chip("Đứng sau ngươi","ok"):""}</div>
-  ${hd.dadOf==="me"?"":`<div class="rbtn">${tdActBtn(`data-td="gift" data-tc="${c}"`,`Biếu quà, gửi thư cho ${hd.name}`,`${word(giftO(S,hd))} · tốn: Bạc -40 · thành: người ấy quý ngươi +20; từ 40 ông đứng sau ngươi (tranh ghế +${Math.round(hd.pow/8)}) · hỏng: mất bạc${hasT(hd,"Cương trực")?", ông tố ra ngoài: can chính nặng thêm":""} · kèm: ${ccLine(S)}`,gw)}</div>`}</div>`}).join("");
+  ${hd.dadOf==="me"?"":`<div class="rbtn">${tdActBtn(`data-td="gift" data-tc="${c}"`,`Biếu quà, gửi thư cho ${hd.name}`,`${word(giftO(S,hd))} · tốn: Bạc -${BAL.bacFee.tdGift} · thành: người ấy quý ngươi +${BAL.tdCourt.giftAf}; từ ${BAL.tdCourt.backs} ông đứng sau ngươi (tranh ghế +${Math.round(hd.pow/8)}) · hỏng: mất bạc${hasT(hd,"Cương trực")?", ông tố ra ngoài: can chính nặng thêm":""} · kèm: ${ccLine(S)}`,gw)}</div>`}</div>`}).join("");
  h+=`<h3>Tin triều đình</h3><div class="logs tdnews">${T.news.map(x=>`<div>${tdNewsFace(x.h)}<span class="ld">${x.w}</span>${x.h}</div>`).join("")||"<div>Chưa có tin gì.</div>"}</div>`;
  return h}
-function tdNewsFace(t){try{const T=trS();for(const c of CLANS){const h=T.H[c];if(t.includes(h.name))return mdH(pMin(h),"xs")}const v=rivals.find(r=>r.alive&&t.includes(r.name));if(v)return mdH(pv(v),"xs");if(/ngươi/.test(t))return mdH(pMe(),"xs")}catch(e){}return""}
+function tdNewsFace(t){try{const T=trS();for(const h of (typeof minOn==="function"&&minOn()?minAll():CLANS.map(c=>T.H[c]))){if(h&&t.includes(h.name))return mdH(pMin(h),"xs")}const v=rivals.find(r=>r.alive&&t.includes(r.name));if(v)return mdH(pv(v),"xs");if(/ngươi/.test(t))return mdH(pMe(),"xs")}catch(e){}return""}
 function tdMarryBtn(){try{if(typeof h54Daus!=="function"||typeof h54Name!=="function")return"";const H=typeof H54==="object"?H54:{cd:3,dow:[40,30,20]};
  return h54Daus().filter(([k,p])=>p===S&&k.alive&&!k.hW&&k.age>=BAL.age.matchShow).map(([k])=>pbtn(`data-h54="ban" data-kn="${k.name}"`,`Gả ${h54Name(k)} vào nhà quyền thần`,`tốn: 2 khắc · Bạc -${(H.dow||[40,30,20])[k.hT||0]} đến -${(H.dow||[40,30,20])[k.hT||0]+20} (hồi môn, tùy nhà) · thành: đầu nhà chồng đứng sau ngươi (người ấy quý ngươi +25), nhà chồng chống lưng ngươi khi tranh ghế · kèm: con không ưng thì mẫu tử giảm; phi tần mẹ các công chúa khác ghen`,k.hB?"đã hứa gả":k.age<BAL.age.betroth?"con chưa đủ "+(BAL.age.betroth)+" tuổi":!can(2)?(whyTime(2)||"Sức dưới "+(BAL.time.sucMin)+", cần nghỉ"):(k.hBan!=null&&S.turn-k.hBan<(H.cd||3))?"vừa bàn xong, đợi vài tháng":"")).join("")}catch(e){return""}}
 /* in-law ties (from j54, every mother alike): a daughter wed into one of the five houses wins its head; hòa thân truly calms the border */
@@ -32168,7 +32168,7 @@ BAL.ag.par4={on:1,kidCare:{g:{"kid":3}},kidGuard:{host:40,g:{"safe":2,"kid":1}},
  man:{sungBelow:30,cutRisk:50,g:{hail:{"sung":.5},flirt:{"sung":1.5},token:{"sung":2},tryst:{"sung":3,"rest":1},cut:{"safe":3}}}};
 /* MINISTER AGENTS (jagmin, PARKING LOT #7): every court memorial has a real living official with his own goal.
    gT = nết word → goal (first match in this order; none → dflt, the censor → nsDflt); fit[goal][memorial kind] = how much that kind serves
-   his goal; praise/dich/imp/tuyen/cc = the stake scale of each kind (see jagmin minCands); imp.keep = months an official whose inquiry found a father clean waits before impeaching him again; imp.deep = feud weight of an open enmity (j55 tdImpPick's 3); tuyen.pow = j55's strong-house gate; imp.noEv = an upright (liem) speaker with no
+   his goal; praise/dich/imp/tuyen/cc = the stake scale of each kind (see jagmin minCands); imp.keep = months an official whose inquiry found a father clean waits before impeaching him again; imp.deep = feud weight of an open enmity (read by j55 tdImpPick too); tuyen.pow = the strong-house gate (read by j55 tdSoMonth too); imp.noEv = an upright (liem) speaker with no
    evidence in his house's hands holds back to this share; spk = weight of court standing (pow) when several officials want to speak;
    ns = the censor (Tả đô ngự sử, Đô sát viện; history expert 19/11): age/pow/sk draw [base, spread]; afW = how much his regard for a
    consort lowers the can-chính risk and his will to impeach her (af 100 → × (1 − afW)); npcGift = a worried NPC consort's will to send him
@@ -32178,6 +32178,9 @@ BAL.ag.min={on:1,gT:[["Tham vọng","quyen"],["Vì gia tộc","nha"],["Vì mình
   liem:{praise:.6,dich:.8,imp:1.2,tuyen:.2,cc:1.5},le:{praise:.8,dich:1.5,imp:.5,tuyen:.6,cc:1}},
  praise:50,dich:50,imp:{ev:1,noEv:.3,deep:3,keep:12},tuyen:{pow:65,p0:55,d:10},spk:{base:.5,pow:100},
  ns:{age:[50,15],pow:[45,20],sk:[40,30],afW:.5},npcGift:30,ccMax:45};
+/* TRIỀU ĐÌNH gift deed (j55 tdGift, her and every NPC consort, house heads and the censor alike): giftAf = regard a received gift adds;
+   backs = regard from which an official stands behind / spares that consort (tdBacks). Were typed in j55 (+20, 40) — ONE CORE (review minister-agents r1). */
+BAL.tdCourt={giftAf:20,backs:40};
 /* ================= jbalge: ONE CORE (OD:L1267) rulebook of the GRAND ENDINGS (Đại kết cục, jge.js; design dev/design/GRAND_ENDINGS.md §2.14, r3) =================
    Every number the grand-ending engine uses or a text prints lives here; jge.js / jgedata.js hold words, option names and logic only.
    Loads after jbal2.js (BAL exists), before jgedata.js / jge.js. Set by measurement: dev/measure/ge-measure.js (bands BAL.ge.target).
@@ -67181,16 +67184,20 @@ window.MINP=null;
 function minOn(){try{return !!(typeof agOn==="function"&&agOn()&&BAL.ag.min&&BAL.ag.min.on&&tdOn())}catch(e){return false}}
 /* the censor: one living official, drawn once */
 function minNs(){const T=trS();if(!T)return null;if(T.ns&&T.ns.name)return T.ns;const N=BAL.ag.min.ns;
- /* a name no living person shares (surname, given name, last word): the name mask (j61) reads names word by word */
+ /* a name no person shares in any form the name mask (j61 k61Vars) reads: full name, given name (last two words), first + last word.
+    MALEN holds only 10 given names and every other man of the world draws from it, so the censor's given name joins two MALEN
+    syllables into a name that is NOT in MALEN (review r1: the old filter fell back to MALEN in 28 of 30 lives) */
  let P=[S].concat(rivals||[]).concat(CLANS.map(c=>T.H[c]).filter(Boolean));try{if(typeof k61All==="function")P=P.concat(k61All())}catch(e){}P=P.filter(p=>p&&p.name);
- const us=new Set(P.map(p=>tdSur(p.name))),ug=new Set(P.map(p=>{const n=String(p.name);return n.slice(tdSur(n).length+1)})),ul=new Set(P.map(p=>String(p.name).split(" ").pop()));
- const sur=SURN.filter(x=>!us.has(x)),giv=MALEN.filter(x=>!ug.has(x)&&!ul.has(String(x).split(" ").pop()));
- const h={c:MINC,ns:1,isMin:1,name:pick(sur.length?sur:SURN)+" "+pick(giv.length?giv:MALEN),age:N.age[0]+R(N.age[1]),sex:"m",pow:N.pow[0]+R(N.pow[1]),sk:N.sk[0]+R(N.sk[1]),af:{}};
+ const V=new Set(),us=new Set();for(const p of P){const w=String(p.name).split(" ").filter(Boolean);V.add(w.join(" "));if(w.length>=2){V.add(w.slice(-2).join(" "));V.add(w[0]+" "+w[w.length-1])}us.add(tdSur(p.name))}
+ const A=[...new Set(MALEN.map(x=>x.split(" ")[0]))],B=[...new Set(MALEN.map(x=>x.split(" ").pop()))];
+ const sur=SURN.filter(x=>!us.has(x));const s0=pick(sur.length?sur:SURN);const f0=s0.split(" ")[0];
+ const giv=[];for(const a of A)for(const z of B){const g=a+" "+z;if(a!==z&&!MALEN.includes(g)&&!V.has(g)&&!V.has(f0+" "+z)&&!V.has(s0+" "+g))giv.push(g)}
+ const h={c:MINC,ns:1,isMin:1,name:s0+" "+(giv.length?pick(giv):pick(MALEN)),age:N.age[0]+R(N.age[1]),sex:"m",pow:N.pow[0]+R(N.pow[1]),sk:N.sk[0]+R(N.sk[1]),af:{}};
  T.ns=h;return h}
 /* every official of the court (the five heads + the censor) */
 function minAll(){const T=trS();if(!T)return[];return CLANS.map(c=>T.H[c]).filter(Boolean).concat([minNs()])}
 function minGoal(h){if(!h)return BAL.ag.min.dflt;if(h.goal&&MING[h.goal])return h.goal;const M=BAL.ag.min;let t=[];try{t=traitsOf(h)||[]}catch(e){}
- let g=null;for(const [w,k] of M.gT)if(t.includes(w)){g=k;break}h.goal=g||(h.ns?M.nsDflt:M.dflt);return h.goal}
+ let g=null;for(const [w,k] of M.gT)if(t.includes(w)&&!(h.ns&&k==="nha")){g=k;break}/* the censor has no house in the palace: "Vì gia tộc" gives him no house goal */h.goal=g||(h.ns?M.nsDflt:M.dflt);return h.goal}
 function minAf(h,p){return h&&h.af?cl(h.af[key(p)]||0,-100,100):0}
 function minSpare(h,p){return Math.max(0,1-Math.max(0,minAf(h,p))/100)}
 /* the memorials the court state allows, each with its speaker, target and stake (j55 gates, unchanged) */
@@ -67232,7 +67239,7 @@ window.minForceSo=function(){const T=trS();const g=T.soT,r0=roll;T.soT=-99;let r
 function minNsCard(){const h=minNs();if(!h)return"";const f=pMin(h);const af=minAf(h,S);
  const busy=tdBusy();
  const gw=busy||(S.bac<BAL.bacFee.tdGift?"thiếu bạc (cần "+BAL.bacFee.tdGift+")":"");
- const line=`${word(giftO(S,h))} · tốn: Bạc -${BAL.bacFee.tdGift} · thành: người ấy quý ngươi +20; càng quý, ngươi càng khó bị hặc can chính · hỏng: mất bạc${hasT(h,"Cương trực")?", ông tố ra ngoài: can chính nặng thêm":""} · kèm: ${ccLine(S)}`;
+ const line=`${word(giftO(S,h))} · tốn: Bạc -${BAL.bacFee.tdGift} · thành: người ấy quý ngươi +${BAL.tdCourt.giftAf}; ông càng quý thì ngươi càng khó bị hặc can chính · hỏng: mất bạc${hasT(h,"Cương trực")?", ông tố ra ngoài: can chính nặng thêm":""} · kèm: ${ccLine(S)}`;
  return `<div class="rival tdh"><div class="top tdtop">${mdH(f,"sm")}<div class="tdn"><b>${MINC}</b><em>${TDOFF[MINC]} ${h.name} · ${h.age} tuổi · ${netTxt(h)}</em></div></div>
   <div class="tdq">${sbar("Thiện cảm với ngươi",af,"tdaf")}</div>
   <div class="chips">${minGoalChip(h)}${chip("Dâng sớ hặc can chính, hặc tham ô")}</div>
@@ -77953,7 +77960,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a07ff90638d1";window.CTM_BUILD=BUILD;
+const BUILD="3af185e630f5";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

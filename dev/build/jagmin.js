@@ -26,16 +26,20 @@ window.MINP=null;
 function minOn(){try{return !!(typeof agOn==="function"&&agOn()&&BAL.ag.min&&BAL.ag.min.on&&tdOn())}catch(e){return false}}
 /* the censor: one living official, drawn once */
 function minNs(){const T=trS();if(!T)return null;if(T.ns&&T.ns.name)return T.ns;const N=BAL.ag.min.ns;
- /* a name no living person shares (surname, given name, last word): the name mask (j61) reads names word by word */
+ /* a name no person shares in any form the name mask (j61 k61Vars) reads: full name, given name (last two words), first + last word.
+    MALEN holds only 10 given names and every other man of the world draws from it, so the censor's given name joins two MALEN
+    syllables into a name that is NOT in MALEN (review r1: the old filter fell back to MALEN in 28 of 30 lives) */
  let P=[S].concat(rivals||[]).concat(CLANS.map(c=>T.H[c]).filter(Boolean));try{if(typeof k61All==="function")P=P.concat(k61All())}catch(e){}P=P.filter(p=>p&&p.name);
- const us=new Set(P.map(p=>tdSur(p.name))),ug=new Set(P.map(p=>{const n=String(p.name);return n.slice(tdSur(n).length+1)})),ul=new Set(P.map(p=>String(p.name).split(" ").pop()));
- const sur=SURN.filter(x=>!us.has(x)),giv=MALEN.filter(x=>!ug.has(x)&&!ul.has(String(x).split(" ").pop()));
- const h={c:MINC,ns:1,isMin:1,name:pick(sur.length?sur:SURN)+" "+pick(giv.length?giv:MALEN),age:N.age[0]+R(N.age[1]),sex:"m",pow:N.pow[0]+R(N.pow[1]),sk:N.sk[0]+R(N.sk[1]),af:{}};
+ const V=new Set(),us=new Set();for(const p of P){const w=String(p.name).split(" ").filter(Boolean);V.add(w.join(" "));if(w.length>=2){V.add(w.slice(-2).join(" "));V.add(w[0]+" "+w[w.length-1])}us.add(tdSur(p.name))}
+ const A=[...new Set(MALEN.map(x=>x.split(" ")[0]))],B=[...new Set(MALEN.map(x=>x.split(" ").pop()))];
+ const sur=SURN.filter(x=>!us.has(x));const s0=pick(sur.length?sur:SURN);const f0=s0.split(" ")[0];
+ const giv=[];for(const a of A)for(const z of B){const g=a+" "+z;if(a!==z&&!MALEN.includes(g)&&!V.has(g)&&!V.has(f0+" "+z)&&!V.has(s0+" "+g))giv.push(g)}
+ const h={c:MINC,ns:1,isMin:1,name:s0+" "+(giv.length?pick(giv):pick(MALEN)),age:N.age[0]+R(N.age[1]),sex:"m",pow:N.pow[0]+R(N.pow[1]),sk:N.sk[0]+R(N.sk[1]),af:{}};
  T.ns=h;return h}
 /* every official of the court (the five heads + the censor) */
 function minAll(){const T=trS();if(!T)return[];return CLANS.map(c=>T.H[c]).filter(Boolean).concat([minNs()])}
 function minGoal(h){if(!h)return BAL.ag.min.dflt;if(h.goal&&MING[h.goal])return h.goal;const M=BAL.ag.min;let t=[];try{t=traitsOf(h)||[]}catch(e){}
- let g=null;for(const [w,k] of M.gT)if(t.includes(w)){g=k;break}h.goal=g||(h.ns?M.nsDflt:M.dflt);return h.goal}
+ let g=null;for(const [w,k] of M.gT)if(t.includes(w)&&!(h.ns&&k==="nha")){g=k;break}/* the censor has no house in the palace: "Vì gia tộc" gives him no house goal */h.goal=g||(h.ns?M.nsDflt:M.dflt);return h.goal}
 function minAf(h,p){return h&&h.af?cl(h.af[key(p)]||0,-100,100):0}
 function minSpare(h,p){return Math.max(0,1-Math.max(0,minAf(h,p))/100)}
 /* the memorials the court state allows, each with its speaker, target and stake (j55 gates, unchanged) */
@@ -77,7 +81,7 @@ window.minForceSo=function(){const T=trS();const g=T.soT,r0=roll;T.soT=-99;let r
 function minNsCard(){const h=minNs();if(!h)return"";const f=pMin(h);const af=minAf(h,S);
  const busy=tdBusy();
  const gw=busy||(S.bac<BAL.bacFee.tdGift?"thiếu bạc (cần "+BAL.bacFee.tdGift+")":"");
- const line=`${word(giftO(S,h))} · tốn: Bạc -${BAL.bacFee.tdGift} · thành: người ấy quý ngươi +20; càng quý, ngươi càng khó bị hặc can chính · hỏng: mất bạc${hasT(h,"Cương trực")?", ông tố ra ngoài: can chính nặng thêm":""} · kèm: ${ccLine(S)}`;
+ const line=`${word(giftO(S,h))} · tốn: Bạc -${BAL.bacFee.tdGift} · thành: người ấy quý ngươi +${BAL.tdCourt.giftAf}; ông càng quý thì ngươi càng khó bị hặc can chính · hỏng: mất bạc${hasT(h,"Cương trực")?", ông tố ra ngoài: can chính nặng thêm":""} · kèm: ${ccLine(S)}`;
  return `<div class="rival tdh"><div class="top tdtop">${mdH(f,"sm")}<div class="tdn"><b>${MINC}</b><em>${TDOFF[MINC]} ${h.name} · ${h.age} tuổi · ${netTxt(h)}</em></div></div>
   <div class="tdq">${sbar("Thiện cảm với ngươi",af,"tdaf")}</div>
   <div class="chips">${minGoalChip(h)}${chip("Dâng sớ hặc can chính, hặc tham ô")}</div>

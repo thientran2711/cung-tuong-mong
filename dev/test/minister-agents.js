@@ -18,7 +18,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    const sp=[...names].find(x=>r.includes(x));if(!sp)bad.push(r.slice(0,120));if(Object.values(MING).some(w=>r.includes(w)))why++}
   return{n,kinds,bad:bad.slice(0,3),why,on:minOn()}});
  ok(r1.on&&r1.n>=20,'memorials fired with the agents on',r1);ok(!r1.bad.length,'every memorial names a living official of S.trieu',r1.bad);ok(r1.why===r1.n,'every memorial carries the speaker\'s goal words',{why:r1.why,n:r1.n});
- const r2=await p.evaluate(()=>{const M=BAL.ag.min;const bad=[];for(const h of minAll()){const t=traitsOf(h);const e=(M.gT.find(x=>t.includes(x[0]))||[])[1]||(h.ns?M.nsDflt:M.dflt);if(minGoal(h)!==e)bad.push([h.name,t,minGoal(h),e])}
+ const r2=await p.evaluate(()=>{const M=BAL.ag.min;const bad=[];for(const h of minAll()){const t=traitsOf(h);const e=(M.gT.find(x=>t.includes(x[0])&&!(h.ns&&x[1]==="nha"))||[])[1]||(h.ns?M.nsDflt:M.dflt);if(minGoal(h)!==e)bad.push([h.name,t,minGoal(h),e])}
   const L=minCands();const sp=L.every(o=>minAll().includes(o.h));return{bad,sp,n:L.length,ns:!!minNs().ns}});
  ok(!r2.bad.length&&r2.sp&&r2.ns,'goal = nết table; every candidate speaker is a court official; one censor',r2);
  const r3=await p.evaluate(()=>{const ns=minNs();S.cc=3;delete ns.af.me;const a=ccRisk(S),wa=ccWord(S);ns.af.me=100;const c=ccRisk(S),wc=ccWord(S);delete ns.af.me;return{a,c,wa,wc,exp:Math.round(a*(1-BAL.ag.min.ns.afW))}});
