@@ -39,3 +39,11 @@ Gates: check_store --scope nude PASS (5/5 ages), kc_ref.py --check PASS.
 gpt-2-6 1024x2304 2k, no seed, refs hu2qEwOvqL + TdwDfOyVNR, 5 × (135 + 3 cut) = 690 credits. Sheet: dev/handover/review-sheets/nu-de-B/nudeB_row_m01.jpg
 NOTES for the owner (LAW #0 — notes only, no change unless she asks): a18 lantern reads more like a pouch; a26/a51/a65 items are all crimson books (different items, same look); forehead clean on all 5; a51 silver streaks visible, a65 mostly silver.
 STATUS: HOLD — no m02+ until owner GO.
+
+## UPDATE 2 — owner verdict on m01 (Lượt 583, via ROOT-51): prompts fixed, NO gens (HOLD until owner GO)
+New diff (on top of ruling (b)), mk.py + _build_item.py:
+7. F11 hair — before " Outfit (the Female Emperor": "Hair: ALL of her hair is pinned UP in a neat high imperial bun (chignon) under the crown, at every age; NO loose hair: nothing hanging down her back, over her shoulders or in front of her chest."
+8. E11 interim items (until IT1's 25-item list): approved Nữ đế item list (NUDE_LIST) minus the 2nd fan = 9 items; person n gets 5 consecutive from index n-1, one per age → never two alike in one person. `_build_item.py` runs build.py unchanged except age_item() for tier 'nude'.
+   m01: a18 jade seal · a26 dragon sceptre · a36 edict scroll · a51 ruyi · a65 round fan.
+9. D13 a51 only — before the hair sentence: "She looks younger than her age but is still clearly about 50: never like an 18-26-year-old, with soft fine lines and clearly visible silver at the temples."
+(Builder BW3 now fills the face words itself; mk.py checks they appear once.) check_store --scope nude PASS 5/5.
