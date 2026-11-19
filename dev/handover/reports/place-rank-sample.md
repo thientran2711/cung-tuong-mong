@@ -248,4 +248,4 @@ LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai r
 - (1) HQP pair v7 (prompts.py v7 block: LUX7B/COL7B + colour words in the room lines only; layouts kept, image 3 = own picture): bedroom 9ZHI728NYZ, reception jUoWKaeLD0 — golden curtains/bedding, more gilt, throne-like daybed back. KEPT. Old = v6/.
 - Our notes (not prompt edits): HQP bedroom side curtains/lanterns stay red → yellow may read < half of KN; KN aisle floor under the feet ~10-15 %; HQP reception floor ~23 % (layout liked, not chased).
 - Sheet C: img/_review/place-rank/place-rank-C-hqp-vs-hh.jpg; people singles people-khon-ninh-cung.jpg, people-truong-xuan-cung-hqp(-ngu).jpg. Credits this round: PR7 2,565 + PR8 405 = 2,970 / 4,500.
-- (3) Phi bedroom: waiting for ROOT-51's answer on whether the owner saw v6e.
+- (3) Phi bedroom: ROOT-51 (18:54Z): v6e trim sent to the owner (Lượt 576); do NOT redraw unless she rejects it. PR8 idle, waiting.
