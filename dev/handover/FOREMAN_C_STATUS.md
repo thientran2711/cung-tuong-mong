@@ -1156,3 +1156,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - FOREMAN C-AG ROOT STANDBY = session_01Rc5AsM9pCcsWwjoC8PjjW7, depth 0 (19/11 ~05:25Z; opened by owner; waits for TAKE OVER NOW; current C-AG = #20 session_01Rc5AsMRexBomFJBu1GuHbV)
 - (19/11 05:55Z) FROM MAIN ROOT-64: LIVE main = 56e0ec51 (errand-scene r6: head markers anchored on real head top). ROLLBACK 7fb7c104. Final-merge 56e0ec51 before any LAND READY. Order: hall-names → odds-no-unknown → monthly-allotment → minister-agents (before npc-purpose).
 - (19/11 06:02Z) FROM MAIN ROOT-64: LIVE main = 2c5dd554 (hall-names: real names for every hall/plaque). ROLLBACK 56e0ec51. Final-merge 2c5dd554 before any LAND READY.
+- (19/11 06:10Z) FROM MAIN ROOT-64: LIVE main = 4217568a (odds-no-unknown: every rolled option card shows its odds rung; «Khó lường» gone). ROLLBACK 2c5dd554. Final-merge 4217568a before any LAND READY.
