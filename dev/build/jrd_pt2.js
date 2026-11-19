@@ -67,7 +67,7 @@ rdDef("pt_tang",5,{t:"Một khoang thuyền",w:"emp",sj:"khoang thuyền dành c
   {n:"Nhờ Tịnh Viên hỏi giúp",f:"le",wx:"không ồn ào",lx:"lời qua miệng người khác",rt:"Tịnh Viên mang về một danh mục kinh thầy muốn gửi."},
   {n:"Chọn quà theo ý mình",f:"tu",wx:"việc xong nhanh",lx:"thầy không được hỏi",rt:"Ngươi chọn kinh chép tay và mấy bức thư nhà."}]},
  c1:{h:"Nhà {v} xin khoang thuyền",w:"v",need:["v"],t:"{v} cho người đến nói khéo: nhà nàng ta có hai mươi xấp lụa muốn gửi sang {land} bán, chỉ cần nửa khoang thuyền của ngươi.",o:[
-  {n:"Nhường nửa khoang cho lụa nhà {v}",wx:"{v} nợ ngươi một lần",lx:"kinh sách bớt chỗ",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} gửi sang một hộp trà sen cảm ơn."},
+  {n:"Nhường nửa khoang cho lụa nhà {v}",/* pt6c: ship space, not an object; the silk is {v}'s house goods and sails with the envoy ship */wx:"{v} nợ ngươi một lần",lx:"kinh sách bớt chỗ",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} gửi sang một hộp trà sen cảm ơn."},
   {n:"Từ chối: khoang thuyền là ân của Hoàng thượng, không để buôn",wx:"không ai nói ngươi buôn bán",lx:"{v} mất một mối lời",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Người nhà {v} ra về không chào."},
   {n:"Chỉ nhà {v} sang thuê thuyền buôn Tân La",wx:"cả hai cùng xong việc",lx:"mất công lo hộ",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Nhà {v} thuê được thuyền Tân La, còn rẻ hơn.",rf:"Thuyền Tân La đòi giá cao, nhà {v} cho là ngươi chỉ sai chỗ."}]},
  c2:{h:"Nội vụ phủ kiểm hàng",w:"emp",t:"Nội vụ phủ đến kiểm khoang thuyền. Quan coi kho nói: kinh sách của Đại Hy là của quý, mang ra khỏi nước phải có chỉ.",o:[
@@ -81,7 +81,7 @@ rdDef("pt_tang",5,{t:"Một khoang thuyền",w:"emp",sj:"khoang thuyền dành c
  x1:{h:"Ngày thuyền nhổ neo",w:"emp",t:"Thuyền sắp nhổ neo. Danh mục khoang thuyền phải trình lên Nội vụ phủ trước giờ Thìn. Thầy Trí Viễn, Tịnh Viên và người nhà {v} đều chờ ở cửa cung.",o:[
   {n:"Trình danh mục: cả khoang là kinh sách",e:["win","lose"],rt:"Mười rương kinh xuống thuyền. Thầy Trí Viễn chắp tay về phía cung ngươi.",rf:"Nội vụ phủ giữ lại sáu rương vì thiếu chỉ. Thuyền đi với bốn rương."},
   {n:"Trình danh mục: nửa kinh, nửa hạt giống trà",e:["win2","mid"],rt:"Kinh và trà cùng xuống thuyền. Tịnh Viên viết thư dặn bên kia gieo hạt ở núi có sương.",rf:"Hạt giống bị ẩm, Tịnh Viên phải giữ lại một nửa.",go:(A,ok)=>{if(ok)ptO("hatgiong","tn");return""}},
-  {n:"Nhường khoang cho hàng của triều",e:"mid",lx:"thầy không gửi được gì",rt:"Khoang thuyền chở lụa và đồ sứ của Nội vụ phủ."}]}},
+  {n:"Nhường khoang cho hàng của triều",/* pt6c: ship space; the court goods stay the Nội vụ phủ's */e:"mid",lx:"thầy không gửi được gì",rt:"Khoang thuyền chở lụa và đồ sứ của Nội vụ phủ."}]}},
  E:{win:{tag:"Kinh qua bể",w:"emp",t:"Kinh sách Đại Hy sang {land} trước thầy. {mh} viết thư: chùa nào cũng xin chép lại."},
   win2:{tag:"Kinh và trà",w:"emp",t:"Thuyền chở cả kinh lẫn hạt trà. Thầy Trí Viễn nói: “Có trà thì người tu không ngủ gục.”"},
   mid:{tag:"Khoang thuyền của triều",t:"Thuyền đi, khoang của ngươi chở hàng của triều. Thầy vẫn chờ một chuyến khác."},
@@ -101,7 +101,7 @@ rdDef("pt_tang",6,{t:"Chuyến vượt biển bị chặn",w:"emp",sj:"chuyến 
  c1:{h:"Đệ tử nhỏ",w:"maid",t:"Đệ tử nhỏ báo quan quỳ khóc ở cổng chùa Pháp Vân. Nó nói nó chỉ sợ thầy chết, không muốn hại thầy.",o:[
   {n:"Cho người đón nó về chùa, không trách",wx:"chùa yên, thầy vui",lx:"kẻ báo quan không bị phạt",rt:"Đệ tử nhỏ quét sân chùa từ sáng đến tối, không dám ngẩng đầu."},
   {n:"Bắt nó khai ai xui nó báo quan",wx:"biết kẻ đứng sau",lx:"nó sợ, nói lung tung",rt:"Nó khai: một viên quan Từ bộ hứa cho nó độ điệp.",rf:"Nó khóc quá, không nói được gì."},
-  {n:"Đưa nó vào cung làm tiểu thái giám, xa chùa",wx:"không còn ai nhắc chuyện",lx:"người ta nói ngươi giấu người làm chứng",rt:"Đệ tử nhỏ theo {maid} vào cung."}]},
+  {n:"Đưa nó vào cung làm tiểu thái giám, xa chùa",/* pt6c: a person, not an object — an unnamed novice who becomes a servant of her palace (servant pool, fb pt_tang.detu) */wx:"không còn ai nhắc chuyện",lx:"người ta nói ngươi giấu người làm chứng",rt:"Đệ tử nhỏ theo {maid} vào cung, từ đó hầu ở cung ngươi.",go:()=>{RD_FL("pt_tang.detu","cung");return""}}]},
  c2:{h:"{v} dâng lời",w:"v",need:["v"],t:"{v} tâu với Hoàng hậu: công chúa {land} dụ một cao tăng Đại Hy bỏ nước. Lén xuất cảnh là tội, kẻ đứng sau còn nặng hơn.",o:[
   {n:"Xin Hoàng hậu cho đối chất ngay",wx:"không để lời đồn đi trước",lx:"phải đứng trước mặt {v}",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Ngươi đưa thư của thầy ra: thầy tự đi, không ai dụ.",rf:"Hoàng hậu nói: “Thư ấy ai viết cũng được.”"},
   {n:"Im lặng, để Hoàng thượng phán",wx:"không cãi nhau trong hậu cung",lx:"{v} nói được nhiều hơn",rt:"Hoàng hậu không xét thêm, chờ ý ngài."},
@@ -202,7 +202,7 @@ rdDef("pt_tang",9,{t:"Xá lợi",w:"emp",sj:"ba hạt xá lợi của tháp Phá
   {n:"Gặp riêng {v}, đổi xá lợi lấy im lặng",wx:"xá lợi về mà không ồn ào",lx:"{v} nắm được ngươi một việc",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);ptO("xaloi","ta");return""},rt:"{v} cho người mang túi gấm sang. Hai người không nói thêm một lời."},
   {n:"Để Từ bộ xét hắn",wx:"việc theo phép",lx:"xá lợi chưa về",rt:"Từ bộ đưa hắn đi. Túi gấm chưa thấy đâu."}]},
  c2:{h:"Ba hạt sỏi trắng",w:"maid",t:"Tịnh Viên nói: ba hạt sỏi trong bình là sỏi bãi biển Minh Châu, loại chỉ có ở chùa bến. Kẻ tráo đã chuẩn bị từ chuyến đi lén.",o:[
-  {n:"Giữ ba hạt sỏi làm chứng",wx:"có chứng vật",lx:"chứng vật nhỏ, dễ bị nói là bịa",rt:"Ba hạt sỏi gói trong khăn lụa, cất cùng thư của thầy."},
+  {n:"Giữ ba hạt sỏi làm chứng",wx:"có chứng vật",lx:"chứng vật nhỏ, dễ bị nói là bịa",rt:"Ba hạt sỏi gói trong khăn lụa, cất cùng thư của thầy.",go:()=>ptO("soi","ta")},
   {n:"Sai người xuống chùa bến hỏi ai đã nhặt sỏi",wx:"lần đến tận gốc",lx:"chậm, tốn bạc",rt:"Một chú tiểu chùa bến nhớ có người lạ đến nhặt sỏi.",rf:"Không ai nhớ gì."},
   {n:"Bảo Tịnh Viên đừng nói chuyện sỏi với ai",wx:"kẻ tráo không biết ngươi đã biết",lx:"mất một manh mối",rt:"Tịnh Viên gật đầu."}]},
  t1:{h:"Hoàng thượng hỏi xá lợi",w:"emp",t:()=>"Hoàng thượng cho gọi ngươi: “Lễ rước định vào ngày mồng tám. Xá lợi ở đâu?” "+(PTXL()==="ta"?"Túi gấm đang nằm trong tay áo ngươi.":"Ngươi chưa có xá lợi trong tay."),o:[
@@ -416,7 +416,7 @@ rdDef("pt_dang",7,{t:"Tiền chuộc",w:"maid",sj:"tiền chuộc người trên
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Hộp ngọc trai của {mh}",w:"maid",if:RDW(1),t:"Trong rương hồi môn của ngươi có một hộp ngọc trai {mh} trao lúc ra bến. {maid} mở hộp, ngọc sáng như trăng.",o:[
   {n:"Quyết đem ngọc chuộc người",f:"bien",wx:"người bị giữ có đường về",lx:"mất vật của {mh}",rt:"Ngươi đếm ngọc, đủ chuộc bốn mươi người."},
-  {n:"Giữ ngọc, xin Hộ bộ một khoản chuộc",f:"phep",wx:"của triều chuộc dân triều",lx:"Hộ bộ chậm",rt:"Hộ bộ nhận đơn, hứa xét trong tháng.",rf:"Hộ bộ nói: “Triều không chuộc người với giặc.”"},
+  {n:"Giữ ngọc, xin Hộ bộ một khoản chuộc",go:()=>ptO("ngoctrai","ta"),f:"phep",wx:"của triều chuộc dân triều",lx:"Hộ bộ chậm",rt:"Hộ bộ nhận đơn, hứa xét trong tháng.",rf:"Hộ bộ nói: “Triều không chuộc người với giặc.”"},
   {n:"Cho thợ làm ngọc giả trộn vào hộp",f:"muu",wx:"giữ được ngọc của {mh}",lx:"nếu giặc biết là ngọc giả",rt:"Thợ ngọc làm hai mươi hạt giả, giống như thật.",go:()=>{RD_FL("pt_dang.ngocgia",1);return""}}]},
  s2:{h:"Dân chài kêu",w:"maid",if:RDW(0),t:"Vợ con những người bị giữ kéo đến cửa Thị bạc ty kêu khóc. Có người nói: “Công chúa có ngọc, sao không chuộc?”",o:[
   {n:"Gửi gạo và bạc cho nhà người bị giữ",f:"bien",wx:"dân bến bớt oán",lx:"bạc ra",rt:"Nhà nào cũng có gạo qua tháng."},
@@ -462,7 +462,7 @@ rdDef("pt_dang",8,{t:"Thị bạc ty",w:"emp",sj:"sổ thu của Thị bạc ty 
  c2:{h:"Nhà {v} và Thị bạc sứ",w:"v",need:["v"],t:"{maid} nghe được: Thị bạc sứ là anh họ bên ngoại của {v}. Mỗi năm nhà {v} nhận một rương quà từ bến.",o:[
   {n:"Cho người dò rương quà nhà {v}",wx:"biết của từ đâu",lx:"{v} biết bị dò",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Rương quà năm nay có cả bạc Tân La.",rf:"Người dò bị bắt gặp ở cửa nhà {v}."},
   {n:"Gặp {v}, khuyên nàng tránh xa việc bến",wx:"{v} có đường lui",lx:"{v} biết ngươi biết",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} im lặng rất lâu, rồi gật đầu."},
-  {n:"Giữ chuyện này, chờ lúc cần",wx:"có một con bài",lx:"việc bến chưa xong",rt:"Ngươi ghi một dòng vào sổ riêng."}]},
+  {n:"Giữ chuyện này, chờ lúc cần",/* pt6c: a secret kept, not an object */wx:"có một con bài",lx:"việc bến chưa xong",rt:"Ngươi ghi một dòng vào sổ riêng."}]},
  t1:{h:"Cuốn sổ thật",w:"maid",t:"Đêm ấy, người của ngươi lấy được cuốn sổ thu thật từ rương Thị bạc sứ, thay vào một cuốn sổ trắng. Trang cuối ghi: ba giấy thông hành bán cho thuyền buồm đen.",o:[
   {n:"Giữ sổ trong cung, chưa nói với ai",f:"muu",wx:"sổ an toàn",lx:"giữ sổ ăn cắp là tội",rt:"Cuốn sổ nằm dưới đáy rương áo.",go:()=>ptO("sothibac","ta")},
   {n:"Đưa sổ cho Hộ bộ ngay",f:"phep",wx:"việc theo phép",lx:"Hộ bộ có người của Thị bạc sứ",rt:"Hộ bộ nhận sổ, niêm phong.",rf:"Hộ bộ nhận sổ, rồi nói sổ bị nước làm nhòe.",go:()=>ptO("sothibac","kho")},
@@ -552,7 +552,7 @@ rdDef("pt_dang",11,{t:"Luật biển",w:"emp",sj:"luật biển cho bến Minh C
  p:[["s1","s2"],["c1","c2","c3","c4"],["t1"],["x1"]],
  B:{s1:{h:"Bản thảo của Hộ bộ",w:"emp",if:RDW(1),t:"Hộ bộ gửi bản thảo luật: thuyền ngoại quốc nộp thuế một lần ở Thị bạc ty, có giấy thì được buôn, không giấy thì giữ thuyền.",o:[
   {n:"Thêm một điều: thuyền gặp nạn được cứu, không bị coi là hàng buôn",f:"bien",wx:"người đi bể được che",lx:"Hộ bộ mất một khoản",rt:"Hộ bộ ghi thêm điều ấy, đặt tên là “điều thuyền hồi môn”."},
-  {n:"Giữ nguyên bản của Hộ bộ",f:"phep",wx:"Hộ bộ nể ngươi",lx:"luật chẳng có gì mới",rt:"Hộ bộ cảm tạ."},
+  {n:"Giữ nguyên bản của Hộ bộ",/* pt6c: a draft text left unchanged; the draft stays with Hộ bộ */f:"phep",wx:"Hộ bộ nể ngươi",lx:"luật chẳng có gì mới",rt:"Hộ bộ cảm tạ."},
   {n:"Thêm một điều: Thị bạc sứ phải nộp sổ thật mỗi mùa lên kinh",f:"muu",wx:"Thị bạc ty khó ăn bớt",lx:"Thị bạc ty ghét ngươi",rt:"Điều ấy được viết thêm bằng mực son."}]},
  s2:{h:"Luật chưa có ai soạn",w:"maid",if:RDW(0),t:"Hộ bộ đùn cho Hồng Lư tự, Hồng Lư tự đùn cho Binh bộ. Bản thảo luật biển ba tháng vẫn trắng.",o:[
   {n:"Tự viết một bản, dâng lên Hoàng thượng",f:"bien",wx:"luật có hình hài",lx:"người ta nói phi tần soạn luật",rt:"Ngươi viết mười điều, mỗi điều một dòng."},
