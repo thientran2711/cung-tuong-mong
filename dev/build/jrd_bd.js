@@ -7,6 +7,14 @@
 /* the .4 premise arcs go through j67 arcFx (BAL.arc.fx); a stand-alone scan of this file has none */
 const bdArc=(id,d)=>typeof arcFx==="function"?arcFx(id,d):d;
 const BD_OLD=["bd_hoa","bd_ngua","bd_tuc","bd_hoang"];
+/* BA TƯ (owner OD 19/11 ~06:40Z / ~06:42Z, MAIN order foreign-princess-3; E19 mapping reports/foreign-princess-3-history.md §A.2/§C.2):
+   the bd princess origin is now the daughter of the fallen king of Ba Tư (Sasanian Persia) who pleads Đại Hy for an ally. Code ids/keys stay
+   "bd" (saves). A life already on an OLD premise (BD_OLD) keeps every Bắc Địch word (law 6c: its text never changes under it); every other
+   bd life reads the Ba Tư row. Bắc Địch itself stays a neighbour country in court events (owner ~06:50Z) — those strings are not touched. */
+const bdLegacy=()=>{try{return BD_OLD.includes(S.st.f14.road)}catch(e){return false}};
+const bdCountry=()=>{try{return S.origin.k==="bd"?(bdLegacy()?"bd":"bt"):"nc"}catch(e){return"nc"}};
+if(typeof NCL==="object"){NCL.bt={land:"Ba Tư",pv:"Phụ vương",mh:"Vương hậu",quan:"Vương trung vương",pa:"Thế tử huynh",pb:"Vương thúc",canh:"cơm nấu thịt cừu, hạt dẻ và lựu",laq:"bụi gai sa mạc",nden:"giữ lửa thánh trong lò"};
+ if(typeof TOK67==="object")for(const k of Object.keys(NCL.bt))TOK67[k]=()=>NCL[bdCountry()][k]}
 /* a new life's premise pool (j67 arcIds67 → jst14 roll, j67 phase-1 frame): old bd premises out; saves keep the ids already written in their plan */
 (function(){if(typeof arcIds67!=="function")return;const a0=arcIds67;arcIds67=function(o){const r=a0.apply(this,arguments);if(o!=="bd")return r;const n=r.filter(id=>!BD_OLD.includes(id));return n.length?n:r}/* until a new road exists the old ones stay dealt (no empty pool) */})();
 /* ---------- BDP: the steppe people of bd's roads (law 6b, ROAD_MAP §5.4) — one living state per life, kept in the road flag book ----------
