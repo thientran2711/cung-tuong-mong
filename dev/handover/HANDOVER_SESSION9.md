@@ -993,3 +993,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - Owner open items: iPad 5-option event scrolls (rv note; owner may judge) — not asked. Old ROOT-57/58 scheduled tasks: owner turns off herself (trig_01Ja7zaN36ChYwfwpjXs1Riu, trig_01Y8P1vJkddJqWiWLgYUtY47).
 - Foreman depths 19/11 ~00:45Z: B ROOT-3 d3, C ROOT-36 d6, C-AG #18 d5 (session_01Rc5AsLo1KXQFDUGVweKun8, opens workers for main on request), D #4 d4, E ROOT #7 d6 (maybe a child at d7).
 - FOR MAIN: ROOT-61 hit depth 8 → the OWNER opens MAIN ROOT-62 from claude.ai with the paste block in dev/handover/TAKEOVER_MAIN_ROOT62.md.
+- (19/11 ~02:08Z real) errand-scene badge-lines successor = session_01Rc5AsL23c5v2Nwya3bgsRc (opus, C-AG child) — it reports to ROOT-61; ROOT-62 must tell it 'main is now ROOT-62'.
