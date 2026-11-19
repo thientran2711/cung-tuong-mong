@@ -50,7 +50,12 @@ def broken(good):
     for s in S: t = t.replace(s, "", 1)
     out["(a) master block removed"] = t
     s = S[2]; out["(b) master M03 edited ('parchment'→'silk')"] = good.replace(s, s.replace("parchment", "silk"), 1)
-    out["(c) thướt tha FABRIC M06 dropped"] = good.replace(S[5], "", 1)
+    if S[5] in good:   # low rank (t1-t5, faces, maids): M06 thướt tha must be there, brocade never (B12, Lượt 781)
+        out["(c) thướt tha FABRIC M06 dropped"] = good.replace(S[5], "", 1)
+        out["(d) B12 brocade added at a low rank"] = good.replace(S[5], S[5] + " " + MC.BROCADE, 1)
+    else:              # t6+ / Thái hậu / Hoàng thượng / Nữ đế: brocade exactly once, never M06 (B12, Lượt 781)
+        out["(c) B12 brocade FABRIC dropped (t6+)"] = good.replace(MC.BROCADE, "", 1)
+        out["(d) B12 M06 thướt tha added at t6+"] = good.replace(S[3], S[3] + " " + S[5], 1)
     return out
 
 

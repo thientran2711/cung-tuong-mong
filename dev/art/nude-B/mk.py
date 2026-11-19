@@ -120,6 +120,6 @@ for age in ("a18","a26","a36","a51","a65"):
     # NDX4 r4 (ROOT-56, owner Lượt 702 item colour): the item word "hand warmer of gold" fights HELD ITEM COLOUR (came out gold in r3) -> only the colour word changes
     if "a hand warmer of gold carved with dragons" in o: o=o.replace("a hand warmer of gold carved with dragons","a hand warmer of green jade carved with dragons")
     assert "hand warmer of gold" not in o
-    sys.path.insert(0,os.path.join(ROOT,"dev/art")); import master_common; o=master_common.apply(o)   # B25 MASTER block (MG1), last step after the edits above
+    sys.path.insert(0,os.path.join(ROOT,"dev/art")); import master_common; o=master_common.apply(o,high=True)   # + B12 (owner Lượt 781, MG2): Nữ đế = brocade, never M06   # B25 MASTER block (MG1), last step after the edits above
     open(os.path.join(R,"prompts",f"{p}_{age}.txt"),"w",encoding="utf-8").write(o)
     print(p,age,len(o),"chars")

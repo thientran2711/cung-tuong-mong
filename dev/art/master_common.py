@@ -24,9 +24,27 @@ def ids():
 def _norm(s): return re.sub(r"\s+", " ", s).strip()
 
 
-def apply(text):
-    S = sentences(); t = text
-    for k, s in zip(ids(), S):
+# B12 FABRIC BY RANK (owner Lượt 781 via ROOT-57, MG2): t6 Quý phi and ABOVE (Quý phi t6, HQP t7, HH t8, princesses t7/t8 as their builders already are,
+# triều phục t6-t8, Thái hậu, Hoàng thượng, Nữ đế) do NOT get master M06 (thin flowing silk + gauze, thướt tha); their fabric sentence is store prompt B BROCADE
+# (verbatim, the BUILDER puts it in) + M07 'The silk has real weight' stays. t1-t5, thiếu nữ faces, princesses t1-t6, ma ma / cung nữ / states keep M06.
+# Never both. high=True selects the high-rank variant in apply() and check().
+M06_ID = "M06"
+BROCADE = "FABRIC: thick gold-embroidered brocade with a graceful, flowing drape."
+HIGH_SCOPES = {"tp6", "tp7", "tp8", "pr7", "pr8", "trieu6", "trieu7", "trieu8", "nude", "thaihau", "state:thaihau", "emperor"}
+
+
+def high_scope(scope): return scope in HIGH_SCOPES
+
+
+def _master(high):
+    return [(k, s) for k, s in zip(ids(), sentences()) if not (high and k == M06_ID)]
+
+
+def apply(text, high=False):
+    """high=True (B12, rank t6+ / Thái hậu / Hoàng thượng / Nữ đế): M06 is not inserted (and must not be in the text); the builder supplies BROCADE."""
+    if high: assert sentences()[ids().index(M06_ID)] not in text, "B12: master M06 (thin silk+gauze) in a t6+ / royal prompt"
+    S = [s for _, s in _master(high)]; t = text
+    for k, s in _master(high):
         assert t.count(s) <= 1, f"master {k} already present {t.count(s)} times (builder duplicates it)"
     miss = [s for s in S if s not in t]
     if not miss: return t
@@ -45,9 +63,16 @@ STYLE_OLD = ("Semi-realistic painterly guofeng portrait style, near-3D realistic
 STYLE_OLD_TY = STYLE_OLD.replace("the reference portraits;", "the style reference image;")
 
 
+# C2 (owner Lượt 780 = B9, MG2): the old K3 'transparent background' sentence (every wording the builders used, incl. the ref-renumbered ones).
+K3_RX = (r" ?(?:The \w+ reference image is style only: IGNORE its background completely|IGNORE (?:the style reference image's|the reference image's) background completely)"
+         r"[;:] the background is completely transparent with NOTHING behind or around (?:her|him): no backdrop, no parchment, no painted flowers(?:/| or )branches, "
+         r"no smoke, no haze, no glow, no stain\.")
+
+
 def legacy(text):
     t = text.replace(STYLE_OLD, "Full-body standing figure").replace(STYLE_OLD_TY, "Full-body standing figure")
     t = t.replace("skin rendering, painterly near-3D drawing style, fabric", "skin rendering, drawing style, fabric")
+    t = re.sub(K3_RX, "", t)   # C2 (Lượt 780): the old transparent-background sentence is gone
     return t
 
 
@@ -58,9 +83,14 @@ def _overlap(s, text):
     return best
 
 
-def check(text):
+def check(text, high=False):
     t = _norm(text); out = []
-    for k, s in zip(ids(), sentences()):
+    m06 = sentences()[ids().index(M06_ID)]; nb = t.count(BROCADE)
+    if high:   # B12 (Lượt 781): t6+ / royal = BROCADE exactly once, never M06
+        if _norm(m06) in t: out.append((M06_ID, "HIGH RANK", "B12: master M06 (thin silk+gauze, thướt tha) in a t6+ / Thái hậu / Hoàng thượng / Nữ đế prompt"))
+        if nb != 1: out.append(("B12", "BROCADE MISSING" if nb == 0 else "NOT ONCE", f"B12: t6+ fabric sentence '{BROCADE}' {nb} times (must be 1)"))
+    elif nb: out.append(("B12", "LOW RANK", f"B12: brocade fabric sentence in a t1-t5 / face / maid prompt (must be M06 thướt tha only)"))
+    for k, s in _master(high):
         n = t.count(_norm(s))
         if n == 1: continue
         if n > 1: out.append((k, "NOT ONCE", f"master sentence {n} times: {s[:70]}…")); continue

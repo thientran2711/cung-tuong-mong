@@ -126,11 +126,11 @@ NOFLOWER="NO flowers in the hair or on the crown at this rank (flowers only at r
 def angle_sentence(person,rank,age="a18"):
     """Lượt 440: one of the 14 standing angles (7 + 7 mirrored, build.py ANG14); E12 (BW6): the plan of THIS age (was always the a18 plan); the head turns WITH the body; frontal or three-quarter only."""
     return "ANGLE: "+LAST_G["ANG14"][plan(age)[(ALIAS.get(person,person),rank)][0]]+"; her head turns together with her shoulders and body, never back-turned, never in profile."
-def laws(t,age="a18"):
+def laws(t,age="a18",princess=False):
     L=[HAIR_LOW if t<=3 and age in ("a18","a26") else HAIR_HIGH,sleeve(t)]+([SLEEVE_FLOOR_HOLD] if t>=7 else [])+[ONE_LAYER]   # F11 (owner Lượt 583): a36/a51/a65 = hair UP for everyone (t1-t3 too); loose only a18/a26
     L.append(SZ[t] if t<=6 else NOFLOWER)
     L.append(HEADBODY)
-    if t>=7: L.append(FABRIC_B)
+    if t>=7 or (t==6 and not princess): L.append(FABRIC_B)   # B12 (owner Lượt 781, MG2): consort Quý phi t6 and above = brocade (princess t6 stays as her builder is: M06)
     return L
 # Lượt 397 item 4 (PHI BẠCH): the draped sheer shawl behind the back / over the arms goes on EVERY thường phục rank t1-t6 (ROOT-47 ruling; wording differs where the store text has no shawl); NOT on t7 HQP, t8 Hoàng hậu, Nữ đế.
 # Its colour = the outfit's SECONDARY colour (second word group of her palette), explicit per person, so it does not melt into the dress.
@@ -469,7 +469,7 @@ def build(person,rank,age="a18"):
     S=_clean_pose(S)
     S=apply_dedupe(person,rank,age,S); store(person,rank,age); S=_sec_slot(person,rank,S)   # Lượt 469 pose dedupe (slot); re-run store so LAST_G is this rank's
     anchor=" Pose:"; assert S.count(anchor)==1,("pose anchor",person,rank)
-    add=(laws(rank,age) if isinstance(rank,int) else laws(rank))+[angle_sentence(person,rank,age),grace_sentence(person,rank,age)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
+    add=(laws(rank,age,person in PR) if isinstance(rank,int) else laws(rank))+[angle_sentence(person,rank,age),grace_sentence(person,rank,age)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
     return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
 
 # ---------------- THÁI HẬU (owner Lượt 618 + 624, ROOT-53 order: BASE = the 18/11 Thái hậu prompt the owner liked, VERBATIM) ----------------
@@ -508,12 +508,14 @@ def thaihau(person,age):
     F=open(TH_BASE,encoding="utf-8").read().strip(); D=[]
     def sw(old,new,cnt=1,why=""):
         nonlocal F; assert F.count(old)==cnt,("TH base slot",old[:50],F.count(old)); F=F.replace(old,new); D.append((why,old,new))
+    sys.path.insert(0,ART); import master_common as _MC0
+    sw(_MC0.STYLE_OLD,"Full-body standing figure",why="C1 (owner Lượt 779, MG2): old store style clause removed; style = master M01/M02 only")
     sw(TH_OLD["face"],face,why="SLOT face (B8: her KC v3 face words)")
     sw(TH_OLD["ident"],g["IDENT_LAW"],why="B8 identity law (owner words)")
     sw(TH_OLD["style"],"",why="B8: no style image -> style sentence removed")
     if age!="a36":
         _ta,_tc=th1811(age).split(" Her robe keeps",1); assert _ta+" Her robe keeps"+_tc==th1811(age)   # 18/11 AGE TEXT | COLOUR TEXT
-        sw(g["AGE_TXT"]["a36"],_ta+" "+g["D15_STYLE3"]+" Her robe keeps"+_tc,why="AGE+COLOUR a51/a65 = 18/11 verbatim (elder-copy file); D15 STYLE LOCK between AGE and COLOUR TEXT (image 2 = swatch -> her a36 picture = third reference, ROOT-56)")
+        sw(g["AGE_TXT"]["a36"],_ta+" "+g["D15_STYLE3"]+" Her robe keeps"+_tc+g["ELDER_M05_SENT"],why="+ C5 (owner Lượt 779, MG2): elder colours win over master M05 (ELDER_M05_SENT after the 18/11 COLOUR TEXT); "+"AGE+COLOUR a51/a65 = 18/11 verbatim (elder-copy file); D15 STYLE LOCK between AGE and COLOUR TEXT (image 2 = swatch -> her a36 picture = third reference, ROOT-56)")
     sw(TH_OLD["colour"],main,cnt=2,why="SLOT colour name (her main)")
     sw(TH_OLD["item"],item,why="SLOT item (IT1 TH_ITEMS[TH_AGE])")
     sw(TH_OLD["hands"],"Her hands and body: "+hands+"."+tail,why="SLOT hands for her item (+ ADDED HH pose tail)")
@@ -522,7 +524,7 @@ def thaihau(person,age):
     sw(TH_OLD["tailpos"]," nothing covering the face."+swatch+g["D9_FOREHEAD"]+" Everyone beautiful at every age.",why="ADDED royal-yellow swatch sentence (18/11 TH_SWATCH, image 2) + D9 forehead")
     sw("the royal golden yellow (honey-gold like #EFBD69)","the deep antique-gold royal yellow #CE9C48",why="B22 (owner Lượt 670): Thái hậu yellow = deep antique-gold royal yellow #CE9C48 (measured on the v624 m05 a36 robe), not #EFBD69")
     assert "#EFBD69" not in F,"B22: #EFBD69 left in a Thái hậu prompt"
-    sys.path.insert(0,ART); import master_common as _MC; F=_MC.apply(F); D.append(("B25 MASTER block (owner Lượt 745/766; MG1 master_common.apply, last step, as every other path)","",""))   # SL1 (ROOT-57): the Thái hậu path starts from the 18/11 BASE file, so the master block was missing
+    sys.path.insert(0,ART); import master_common as _MC; F=_MC.apply(F,high=True); D.append(("B25 MASTER block (owner Lượt 745/766; MG1 master_common.apply, last step, as every other path)","",""))   # SL1 (ROOT-57): the Thái hậu path starts from the 18/11 BASE file, so the master block was missing
     globals()["TH_DIFF"]=D
     return None,F,add
 TH_EXEMPT={"a18":"S03","a26":"S03","a36":"S03","a51":"S33","a65":"S33"}

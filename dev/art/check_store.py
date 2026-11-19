@@ -107,10 +107,10 @@ APPROVED = [{'id': 'S01',
  {'id': 'S07',
   'title': 'FABRIC prompt B t7/t8/Nữ đế',
   'text': 'FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.',
-  'scope': 'tp7-8 pr7-8 nude',
+  'scope': 'tp6-8 pr7-8 nude trieu6-8 thaihau state:thaihau emperor',
   'confirm': '',
   'ages': '',
-  'luot': '364 (B12)',
+  'luot': '364 (B12); 781 (B12 rewritten: t6 Quý phi and above, Thái hậu, Hoàng thượng, Nữ đế, triều t6-t8)',
   'source': 'dev/art/store-all/build_all.py FABRIC_B = prompt B',
   'proof': 'dev/art/approved/proof/c06_t8_a18.txt',
   'picture': "t8 Hoàng hậu prompt B (18/11 ~18:20Z 'Prompt này rất là ok') · c25 a18 t8 v0 · https://ctm-img.victoria-tntt.workers.dev/img/_review/t8-reprompt/c25_a18_t8_v0.png",
@@ -681,7 +681,16 @@ BANNED = [{'id': 'X01',
   'unless': '',
   'negation': 'no',
   'luot': '779 (C1, via ROOT-57; MG2)',
-  'why': "the drawing style is the approved thiếu nữ style ONLY (master M01/M02); the old store style clause is gone from every builder. Scope 'any' = every prompt of every scope, faces and states included"}]
+  'why': "the drawing style is the approved thiếu nữ style ONLY (master M01/M02); the old store style clause is gone from every builder. Scope 'any' = every prompt of every scope, faces and states included"},
+ {'id': 'X19',
+  'title': "transparent-background words (B9 GEN METHOD: draw on parchment, then images_remove_background)",
+  'regex': 'background is (?:completely |fully )?transparent|transparent background|(?:completely|fully) transparent with NOTHING',
+  'slot': '',
+  'scope': 'any',
+  'unless': '',
+  'negation': 'no',
+  'luot': '780 (C2 = B9, via ROOT-57; MG2)',
+  'why': "B9 GEN METHOD: no transparentBackground and no transparent-background prompt words; master M03 (plain light parchment) is the ONLY background sentence; the cut-out is images_remove_background after the gen. Scope 'any' incl. face and states"}]
 
 # G15 (owner Lượt 559): QUÝ NHÂN t3 DESIGN = option B v2. The t3 outfit-design words of the store (TIER_LOW[3] robe in t8-prompt-B/build.py) are REPLACED
 # by the Outfit words of dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt, copied verbatim; slots only: lilac -> {main}, deep teal -> {sec}
@@ -809,7 +818,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail)."""
     if S is None: S, X = load_registry()
     text = norm(text); fails, warns, found = [], [], {}
-    for k, kind, d in master_common.check(text):   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
+    for k, kind, d in master_common.check(text, high=master_common.high_scope(scope)):   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
         fails.append((k, "MASTER " + kind, d))
     # SL1 (owner Lượt 773/778): ANY prompt (every scope) whose sleeve sentence sends the sleeves to the floor must carry S37 (sleeve-hold sentence) exactly once
     if FLOOR_SLEEVE_RX.search(text):

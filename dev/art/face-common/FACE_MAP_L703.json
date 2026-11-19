@@ -1378,5 +1378,15 @@
   "ver": "v5",
   "prompt_file": "dev/art/face-common/s61.v5.FULL.txt",
   "kind": "NEWFACE-761"
+ },
+ "s60": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T23:45:00Z",
+  "cut": "lJtpjSYgv9",
+  "gen": "lJtpxtNgv9",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s60.v5.FULL.txt",
+  "kind": "NEWFACE-761"
  }
 }
