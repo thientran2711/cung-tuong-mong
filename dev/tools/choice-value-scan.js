@@ -13,21 +13,21 @@
      HINT-NO-GAIN  an EVENT card (rows hidden in play, GỢI Ý line instead) whose option has a gain, but its hint (jk2b kitHint, lowest level)
                 reads «chẳng được gì» → law 3 fault as she sees it (the hint reader did not take the gain words as a gain)
    Options that neither cost nor gain anything ("Đóng", "Thôi") are not COST-ONLY; they are DOMINATED only by a free, sure, gain-only sibling.
-   usage: node dev/tools/choice-value-scan.js [--turns N] [--seed S] [--out file.json] [--md] [--words] [--plant]   (--plant: self-test, plants 3 bad choices; exit 1 = all caught, 3 = gate broken)   (run from the repo root of a BUILT site)
+   usage: node dev/tools/choice-value-scan.js [--turns N] [--seed S] [--out file.json] [--md] [--words] [--plant] [--fullsuc]   (--plant: self-test, plants 3 bad choices; exit 1 = all caught, 3 = gate broken)   (run from the repo root of a BUILT site)
    exit 1 when any COST-ONLY or DOMINATED row is found (the gate), 0 when clean. Last line = one-line summary. */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const D=require('../test/lib/device');
 const A=process.argv.slice(2);const arg=(k,d)=>A.includes(k)?A[A.indexOf(k)+1]:d;
-const TURNS=+arg('--turns',60),SEED=+arg('--seed',7),OUT=arg('--out',null),MD=A.includes('--md'),PLANT=A.includes('--plant');
+const TURNS=+arg('--turns',60),SEED=+arg('--seed',7),OUT=arg('--out',null),MD=A.includes('--md'),PLANT=A.includes('--plant');const FULLSUC=A.includes('--fullsuc');/* every card drawn with Sức at her cap: a «giữ sức» road must still show a gain when Sức +N clamps to 0 (seed-7 find, #4) */
 const ROOT=path.resolve(__dirname,'../..');
 /* (3) the demo option pair of the shot scripts: same rule, the owner saw it in a shot (OD 18/11 ~09:20Z) */
 function fixtureRows(){const R=[];const dir=path.join(ROOT,'dev/test');
  for(const f of fs.readdirSync(dir).filter(f=>/\.js$/.test(f))){const s=fs.readFileSync(path.join(dir,f),'utf8');
-  const re=/\[(\{n:(['"])[^'"]*\2,fx:\{[^}]*\},x:(['"])[^'"]*\3[^\]]*?)\]/g;let m;while((m=re.exec(s))){const body=m[1];const opts=[...body.matchAll(/\{n:(['"])([^'"]*)\1,fx:\{([^}]*)\},x:(['"])([^'"]*)\4/g)].map(x=>({n:x[2],fx:x[3],x:x[5]}));
+  const re=/\[(\{n:(['"])[^'"]*\2,fx:\{[^}]*\},x:(['"])[^'"]*\3[^\]]*?)\]/g;let m;while((m=re.exec(s))){const body=m[1];const opts=[...body.matchAll(/\{n:(['"])([^'"]*)\1,fx:\{([^}]*)\},x:(['"])([^'"]*)\4(?:,hint:(['"])([^'"]*)\6)?/g)].map(x=>({n:x[2],fx:x[3],x:x[5],hint:x[7]||''}));
    if(opts.length<2)continue;const fxNum=t=>[...t.matchAll(/(\w+):(-?\d+)/g)].map(z=>[z[1],+z[2]]);
-   const cs=opts.map(o=>{const f=fxNum(o.fx);const xs=[...o.x.matchAll(/([^\s·]+(?: [^\s·+\-0-9]+)*)\s*([+-]\d+)/g)].map(z=>[z[1],+z[2]]);
+   const cs=opts.map(o=>{const f=fxNum(o.fx);const hg=o.hint&&!/^(không|chưa rõ)\b/i.test(o.hint)?[['gợi ý: '+o.hint.split(/\s*;?\s*nhưng\s+/)[0],1]]:[];/* jopic kitOptFinal shows a GỢI Ý wording in Được */const xs=[...o.x.matchAll(/([^\s·]+(?: [^\s·+\-0-9]+)*)\s*([+-]\d+)/g)].map(z=>[z[1],+z[2]]);
     const hw=/(?:^|·)\s*thành:/.test(o.x)?[['thành',1]]:[];/* a word gain after «thành:» counts */
     const xs2=xs.filter(z=>!/^hỏng|hỏng:/.test(z[0]));
-    const gain=[...f.filter(z=>z[1]>0),...xs2.filter(z=>z[1]>0),...hw],cost=[...f.filter(z=>z[1]<0),...xs.filter(z=>z[1]<0)];return{t:o.n,gain,cost}});
+    const gain=[...f.filter(z=>z[1]>0),...xs2.filter(z=>z[1]>0),...hw,...hg],cost=[...f.filter(z=>z[1]<0),...xs.filter(z=>z[1]<0)];return{t:o.n,gain,cost}});
    cs.forEach(c=>{if(c.cost.length&&!c.gain.length)R.push({src:'fixture:dev/test/'+f,title:'demo option pair (shot scripts)',opt:c.t,flag:'COST-ONLY',ton:c.cost.map(z=>z.join(' ')).join(' · '),duoc:''})})}}
  return R}
 (async()=>{const srv=await D.serveRoot(ROOT);const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
@@ -39,6 +39,7 @@ function fixtureRows(){const R=[];const dir=path.join(ROOT,'dev/test');
   for(let i=0;i<40;i++){start();if(S.ps&&!(typeof isSrv==='function'&&isSrv()))break}Q.length=0;$("modal").hidden=true;
   /* show every outcome row (event choices hide them for play; the scan must see the gains) */
   window.__cvsShowAll=1;if(typeof kitIsEventChoice==='function'){const k0=kitIsEventChoice;window.__cvsK0=k0;window.kitIsEventChoice=kitIsEventChoice=function(m){return window.__cvsShowAll?false:k0(m)}}});
+ if(FULLSUC)await g.evaluate(()=>{const s0=showModal;window.showModal=showModal=function(){try{if(S&&typeof sucCap==='function')S.suc=sucCap(S)}catch(e){}return s0.apply(this,arguments)}});
  await g.addStyleTag({content:'#kroul,#kroulw,.kmov{display:none!important}'});
  /* one modal → its options as the kit card shows them */
  const probe=()=>g.evaluate(()=>{const M=document.getElementById('modal');if(!M||M.hidden)return null;const op=M.querySelector('.opts');if(!op)return null;
@@ -48,7 +49,8 @@ function fixtureRows(){const R=[];const dir=path.join(ROOT,'dev/test');
   let isEv=false;try{isEv=!!(window.__cvsK0&&window.__cvsK0(m))}catch(e){}const OL=isEv?(m.o||m.opts||[]):[];const HN=nm=>{const o=OL.find(o=>o&&o.n&&nm.startsWith(T({textContent:o.n})));if(!o||typeof kitHint!=='function')return'';try{return kitHint(o,m,0).hint||''}catch(e){return''}};
   const cs=bs.map(bt=>{const rows={ton:[],duoc:[],mat:[],kem:[]};
    bt.querySelectorAll('.kr').forEach(r=>{const k=[...r.classList].find(c=>/^kr-/.test(c));if(!k)return;let key=k.slice(3);if(key==='thanh'||key==='bai')key='duoc';if(!rows[key])return;
-    r.querySelectorAll('.krv>.ef').forEach(e=>rows[key].push({h:T(e),c:e.classList.contains('g')?'g':e.classList.contains('r')?'r':e.classList.contains('t')?'t':'n'}))});
+    if(r.classList.contains('kfill'))return;/* opt-card-short (jopic kitOptFinal): a filler row («Tốn: không», «Được: không») carries no value */r.querySelectorAll('.krv>.ef:not(.kdup)').forEach(e=>rows[key].push({h:T(e),c:e.classList.contains('g')?'g':e.classList.contains('r')?'r':e.classList.contains('t')?'t':'n'}))});
+   /* kitOptFinal (opt-card-short #10, LAW 3): with no Được row the GỢI Ý wording is shown in Được (before «nhưng») and Tốn (after it) as .kdup chips: read those too */if(!rows.duoc.length){const fd=bt.querySelector('.kr-duoc.kfill');if(fd)fd.querySelectorAll('.krv>.ef.kdup').forEach(e=>rows.duoc.push({h:T(e),c:'g'}));const ft=bt.querySelector('.kr-ton.kdup0');if(ft)ft.querySelectorAll('.krv>.ef.kdup.r').forEach(e=>rows.ton.push({h:T(e),c:'r'}))}
    const odds=T(bt.querySelector('.kodds,.oc'));const name=T(bt.querySelector('.kan,.kat'))||T(bt).slice(0,60);
    return{t:name.slice(0,80),rows,odds,hint:HN(name),dis:bt.disabled||bt.classList.contains('off')||bt.getAttribute('aria-disabled')==='true'}});
   return{title:title.slice(0,60),pid:m.pid||'',cs}});
