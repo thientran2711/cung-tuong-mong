@@ -1,10 +1,10 @@
-# review-ev-pic-followups — r2 PASS 3b3f7631a1014d9fa37e73f906d7c9f69dbfa809 (r1 FAIL below, kept as history)
+# review-ev-pic-followups — r2 PASS 2481c80da1738089006763472d0356ddcc323dc9 (r1 FAIL below, kept as history)
 PRIORITY #1 CHECK: OD 19/11 ~04:15Z, own r1 FAIL list, worker report ev-pic-followups §r2 | main kszOver3 jksize.js | review/* opt-scroll-reset (scroll-reset loop, separate) | claims ev-pic-followups.
-## r2 verdict: PASS 3b3f7631a1014d9fa37e73f906d7c9f69dbfa809 (= worker r2 34d4b3c7 + final-merge origin/main d9b32074 (re-merged after 7627f79c, quickcheck PASS 244 s + 11-frame regression subset 0 REG on the final build), only generated index.html/sw.js conflicted, rebuilt by build_site.sh, 0 markers)
+## r2 verdict: PASS 2481c80da1738089006763472d0356ddcc323dc9 (= worker r2 34d4b3c7 + final-merge origin/main 6b1ab390 (earlier d9b32074) (re-merged after 7627f79c, quickcheck PASS 244 s + 11-frame regression subset 0 REG on the final build), only generated index.html/sw.js conflicted, rebuilt by build_site.sh, 0 markers)
 - kszOver3 now counts .k3right>.opts: my r1 cause fixed. Diff of game code vs r1 branch = that one line (+ merges).
 - Own regression scan (opt-frame-scroll-scan + opt-frame-scroll-diff, LIVE 7627f79c vs merged, one process per device): Fold FAIL 18→14, 1180 69→65, 1366 66→32. Raw REG 1+2+2 under 6-process load; those 5 frames (e68hairpinThief, e68giftArrive, giftin, newgirl, vlnvp) rerun twice in isolation on all 3 sizes: REGRESSIONS 0 both runs (load noise). My r1 five (rvframe, loveletter, e68droughtPrayer, e68leakRoof, e68servHero) no longer regress.
 - Leftover FAILs all also FAIL on LIVE (stay=n: scroll-reset loop, opt-scroll-reset f6462525 owns it) — FOR MAIN: land opt-scroll-reset too.
-- quickcheck --cpu 4 on 3b3f7631a1014d9fa37e73f906d7c9f69dbfa809: PASS 229 s, old save ok, core gates PASS, render 283/271, tab 473/518, buổi 1215/1753, tasks>200ms 21/21.
+- quickcheck --cpu 4 on 2481c80da1738089006763472d0356ddcc323dc9: PASS 229 s, old save ok, core gates PASS, render 283/271, tab 473/518, buổi 1215/1753, tasks>200ms 21/21.
 - Shots DSF2 live|merged, Fold 755x1000, iPad 1180x820, 1366x1024 (rvframe, night1, caning, e68borrowDress; looked rvframe+night1 all 3 sizes): rvframe identical to LIVE, picture strip + 3 cards in frame; night1 Fold unchanged, iPad list scrolls inside with «Kéo xuống» (end snapped back = scroll-reset loop, same on LIVE). Not shot: person dialog / shop / identity card (selectors only touch .kszlive L/XL option frames).
 - EVENTS.json part still PASS (r1).
 
