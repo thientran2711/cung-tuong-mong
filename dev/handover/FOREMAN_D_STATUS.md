@@ -385,3 +385,17 @@ LESSONS: (1) grep the WHOLE STATUS on each wake — FROM MAIN lines land mid-fil
 - (19/11 13:54Z, D #7) receiver-choice RV3 rolled over (context line) after merging LIVE 1a4df595 → review/receiver-choice-rv 0247fadf9 (gates not run) → archived RV3; **RE-CHECK #4 (sonnet) = session_01964izCUGaeTZGKDvmdFhUK** (brief briefs/D7-receiver-choice-recheck4.md, follows RV3 addendum). SEATS 8/12.
 - (19/11 14:30Z, npc-purpose reviewer session_01964izEUgw5hZTBxuEguL4K) **FOR C-AG #22 + MAIN: npc-purpose PHASE B on fe88277c is green except 1 rate family. NOT LAND READY yet.** All suites, quickcheck ×2 (perf flat), coop-e2e 68/68 ×3 under load and old save PASS. Open: (1) NPC calm-down lines 1.8x (680 → 1247; đàn hát 3x), to fix or explain as a family; (2) the rate gate flipped FAIL/PASS on that row; (3) final-merge live 1a4df595 (role-parity-scan.js conflict). G1 #14 has the list; the delta re-gate follows. Details: reports/review-npc-purpose.md §PHASE B.
 - (19/11 14:03Z, D #7) **FOR C-AG #22 session_01Rc5AsM9pCcsWwjoC8PjjW7:** npc-purpose PHASE B on fe88277c = green except 1 rate family (NPC calm-down log lines 1.8× 680→1247, đàn hát 3× → rate gate flips) — NOT LAND READY. G1 #14 already merged LIVE 1a4df595 → e37d844c and is probing/fixing that family; delta re-gate ~2 h, then new SSK → reviewer re-gates delta. No action needed from C-AG.
+- (19/11 ~14:40Z, REVIEW rare-reach BIG opus session_01964izFL2poZEbpoqCfkXD1, depth 7) **LAND READY review/rare-reach 29b25146** (final-merged LIVE 1a4df595; ancestor of main OK). Verdict PASS with 2 reviewer fixes:
+  - (1) jkc eligibility is now per door. The pooled .04 let kcR3 (vi hành, eligible in 18 of 86 home lives) roll sure, about 5× its own chance. Now BAL.arc.r97.elig.kc {kcR3 .2, kcR2 .05, d .04}.
+  - (2) The kcR3 temple door numbers moved into BAL (values unchanged).
+  - Gates one at a time on 29b25146: one-core PASS (inline 3969) · quickcheck --runs 6 PASS + old save · coop-e2e 68/68 · role-parity ALL PASS · rr-static 0/87.
+  - My own re-run (12 + 12 lives, same seeds) confirms the mechanics: road finales blocked by Lợi thế 5/5 → 0/4; arc roll sure at p .15. Too small to re-measure the life rates, so the worker's 60+63-life table stands.
+  - nc/td/ch = follow-up (static 0/87 dead; they fail for ordinary reasons, fewer climaxes before ch 12), not a bug of this job. Report: dev/handover/reports/rare-reach.md § REVIEW.
+- FOR MAIN (rare-reach, LAND READY 29b25146), table for the owner: | | before | after |
+  - hidden conditions met at the climax: 12.4 % | 12.5 % (road finales 9.4 % → 19.4 % after the Lợi thế fix)
+  - roll once eligible: 9–13.5 % | sure on most arcs, about half to ¾ on road finales
+  - lives with ≥ 1 kỳ ngộ: 3.2 % | 10 % (13 % at the final BAL)
+  - median lives to her first: 22 | 7 (5)
+  - by style: sens 0 → 5 %, mix 5 → 10 %, bold 5 → 15 %
+  - Home-road (nhà) rares: per door, so «vi hành» stays about 4–5 % of home lives (not 1 in 5).
+  - **QUESTION FOR HER (not decided by us):** «Hạ mức Lợi thế cần cho kết hiếm tuyến truyện xuống 1?» → arc eligibility 8.8 % → 14 %. The roll is re-set by the same rule, so each road's chance stays the same; only the wait gets shorter.

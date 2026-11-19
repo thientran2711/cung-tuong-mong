@@ -90,3 +90,76 @@ GAME=<build> node dev/measure/runrr.js sens 5 out/rr_sens_0.json   # then: node 
 ## Handover
 
 Nothing is left to do except review. The scratch data (before/, after/, kc-before.json) stays outside the repo.
+
+## REVIEW (BIG, opus, session_01964izFL2poZEbpoqCfkXD1, 19/11) — verdict: PASS (2 reviewer fixes) → **LAND READY review/rare-reach 29b25146**
+
+PRIORITY #1 CHECK ('rare-reach r97Roll kỳ ngộ'): OD 1947 (19/11 ~03:25Z real, read verbatim) | brief D5-rare-reach.md + ORDER ROOT-62 | main edb2e724: r97Roll / RD97L / BAL.arc.r97.elig = none (only on review/rare-reach) | review/* : review/rare-reach only | claims: this review.
+
+18 LAWS read first (START_CORE + START_WORKER + START_REVIEWER).
+
+### Owner's words vs the code
+- The owner's rule: «Ví dụ như họ lúc nào cũng 100% đủ điều kiện thì lúc đó hãy gieo 9 hay 13%». The code matches it. The roll once eligible is min(1, p × BAL.arc.r97.k ÷ BAL.arc.r97.elig[src]), so the chance per road is about p × k (9–13.5 %), as if she were always eligible, and never more than sure.
+- One function, r97Roll, serves all four sources: the j97 arcs, the jroad .11 finales, jkc and j99succ.
+- **Law 6 (real proof) is kept.** The hidden chain, Lợi thế and the stat condition all still gate the rare. Nothing is free. Most arcs (p .15) now roll sure once eligible (.135 ÷ .12 > 1), so for those arcs the eligibility is the whole gate. That is exactly what her words ask for.
+
+### Laws
+- **Law 2 / law 3: PASS.** The ✦ option and its cost are unchanged, and no visible option became dominant. The path choices stay hidden. The road Lợi thế carry (rdSc97) only affects the hidden condition: the climax odds and the .11 ending tier still read the thread's own Lợi thế.
+- **Law 4: PASS after a reviewer fix.**
+  - one-core guard: inlineNow 3977 → 3975.
+  - The worker moved kcR1–R6, the succession a/b/c and the j96 Giả chết thresholds into BAL, with values unchanged (I checked the diff line by line).
+  - Missed in the same family (law 11): the temple door of kcR3 (jkc kcChance «chua»: `S.year>=2&&S.sac>=70&&roll(4)`). Now BAL.arc.r97.kc.kcR3.chua {yr 2, sac 70, p .04}, values unchanged.
+- **Law 5: PASS.** No rank scaling existed in the rare roll before, and none was removed. The climaxes themselves are untouched.
+- **Law 7: PASS.** No player-visible text changed. RARE_ENDINGS.md is a design file.
+- **Law 11: PASS.** All rare rolls were found: j97, jroad, jkc (6 doors), j99succ and j96. NPCs have no ✦ ending.
+
+### Reviewer fix 1: jkc eligibility per door (commit 57903b1a)
+- **The problem.** `elig.kc` .04 was the mean of the 6 doors. kcR3 (Hoàng thượng vi hành, at the festival or temple door) is far more common than the others:
+  - the worker's probe: 11 of 63 home lives
+  - my rr-kc probe on the branch: 7 of 23
+  - together: 18 of 86 = 21 %
+- **The result before the fix.** kcR3 base .043 ÷ .04 > 1, so the roll was sure. kcR3 fired in about 1 home life in 4–5 (all 7 eligible lives in my probe hit). That is about 5× its chance at full eligibility, the opposite of her rule.
+- **The fix.** `BAL.arc.r97.elig.kc = {kcR3:.2, kcR2:.05, d:.04}`. r97Roll takes the door id for a per-door table.
+- **Effect.** kcR3 rolls .22 (festival) / .27 (temple), so ≈ 4–5 % of home lives, which is its base. kcR1, kcR2 and kcR4–R6 still roll sure once eligible, as before. Arc, road and succ are unchanged.
+
+### Re-run on my own seeds (smaller sample, as ordered)
+Setup:
+- 3 styles (sens / mix / bold) × 4 lives × 2 arms.
+- Seeds 9300–9302, the same per style in both arms. Origin offsets 0 / 4 / 8, so all 9 origins are covered.
+- Stop at chapter 12.
+- BEFORE = LIVE edb2e724. AFTER = the branch at efbdb1bd (final-merged; the arc / road code is the same as at the LAND READY sha).
+
+| | BEFORE (12 lives) | AFTER (12 lives) |
+|---|---|---|
+| climaxes | 16 | 14 |
+| arcs eligible | 1 of 11 (9.1 %) | 1 of 10 (10 %) |
+| road finales eligible | 0 of 5 | 0 of 4 |
+| road finales failing on Lợi thế | **5 of 5** | **0 of 4** (path short 3, broke 1) |
+| roll once eligible | 13.5 % (0 of 1 hit) | **sure** (1 of 1 hit; P = 1 for p .15) |
+
+- My first test life on the branch (seed 7101, muoi) also met the road rare muoi_no_11: roll .53 = .09 ÷ .17, hit, taken.
+- **What this confirms.** The Lợi thế bug on road finales is real (my BEFORE arm: 5 of 5 blocked; worker: 62.5 % → 3.2 %). The fix removes it. Arc eligibility of about 10 % matches the .12 setting. The roll now follows the rule.
+- **What this cannot confirm.** 12 lives cannot measure 3.2 % → 10 % lives-with-rare, or the median 22 → 7. Neither arm had a life with a rare. That fits the worker's rates: at 10 %, 0 of 12 happens about 28 % of the time.
+- I accept the worker's 60+63-life table. Its mechanics match mine, and the arithmetic holds: road eligibility of about 19 % × roll .53–.79, plus arc eligibility of about 9–12 % × roll of about 1.
+- **One observation (not this branch).** The after-arm muoi_lau hit (bold, turn 38) was never taken: the life ran to turn 133 at chapter 4 and ended on the emperor's death. The bot always takes a ✦ (rare97.js), so the climax beat probably never played before the reign ended. This is the same climax queue as on live. I put it in follow-ups.
+
+### nc / td / ch with 0 eligible: a follow-up, not a bug of this job
+- Static scan rr-static (re-run by me): 0 of 87 chains impossible. Every path, bad and x name matches real options.
+- In my sample, nc had 1 climax in 2 lives, td 2 in 2, ch 5 in 4. They failed for ordinary reasons (path short, a bad choice taken, Lợi thế), not on one blocked condition.
+- What stands out is fewer climaxes before chapter 12 for nc / td. That is a measuring-window effect (their arcs climax late), not a dead chain. Keep it as the worker's follow-up.
+
+### Gates (one at a time, on **29b25146** = final-merged LIVE **1a4df595** + reviewer fix 57903b1a)
+- **one-core guard: PASS** (inlineNow 3969 vs baseline 4212, 0 fails)
+- **quickcheck --runs 6: PASS** (core gates, time-spill, open 1723 ms, old save loads and plays a buổi). Perf median new / live:
+  - render 282 / 270 ms
+  - tab 526 / 504 ms
+  - buổi 1332 / 1175 ms. This is load noise: the same code on edb2e724 read 1348 / 1331, and the worker's run read 1185 / 1202. The branch adds only a few rare-path lines.
+  - tasks > 200 ms: 22 / 21
+- **coop-e2e: 68/68**
+- **role-parity: ALL PASS** (on 1a4df595 the role-parity-drift-2 fixes are live; on edb2e724 the branch and main had the identical 12 open gaps, 0 branch-only)
+- **rr-static: PASS** (0 of 87 chains impossible)
+- The same gates were also green on the edb2e724 merge (57903b1a): quickcheck PASS, coop-e2e 68/68.
+
+### Owner question (for HER, not decided by us)
+«Lợi thế floor −1 on arcs»:
+- Arc eligibility would go from 8.8 % to 14 % (my small sample, n 10–11 arc climaxes per arm: before arm 9 % → 18 %, after arm 10 % → 10 %, too few to rank).
+- The roll is re-set from the new eligibility by the same rule, so the per-road chance stays p × 0.9. Only the wait gets shorter.
