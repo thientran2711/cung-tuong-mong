@@ -230,15 +230,24 @@ OFFSET={"nude":5}   # Nữ đế and Hoàng hậu share the lady pool: shift so 
 def pick_kind(c,age,tier):
     """Person cNN at age: rotate by person index; never the same KIND at two of her ages (owner 3f)."""
     n=int(c[1:]) if c[1:].isdigit() else sum(map(ord,c))
-    used=set()
+    used=set(); got={}
+    # pass 1: the ages this status is drawn at (unchanged picks)
     for a in AGES:
         if a not in TIER_AGES[tier]: continue
         L=cell_kinds(a,tier); i=(n-1+OFFSET.get(tier,0))%len(L)
         for j in range(len(L)):
             x=L[(i+j)%len(L)]
             if x not in used: break
-        used.add(x)
-        if a==age: return x
+        used.add(x); got[a]=x
+    # pass 2 (E7, owner Lượt 529 "inside ONE person the ages NEVER repeat an item"): an age outside TIER_AGES used to take the NEAREST age's item
+    # (same item twice); now it takes the nearest age's CELL but a kind not yet used by any other age of this person (rotation continues).
+    for a in AGES:
+        if a in got: continue
+        ok=TIER_AGES[tier]; na=min(ok,key=lambda x:abs(int(x[1:])-int(a[1:])))
+        L=cell_kinds(na,tier); i=(n-1+OFFSET.get(tier,0)+AGES.index(a))%len(L)
+        x=next((L[(i+j)%len(L)] for j in range(len(L)) if L[(i+j)%len(L)] not in used),L[i])
+        used.add(x); got[a]=x
+    if age in got: return got[age]
     raise KeyError((c,age,tier))
 def pick_item(c,age,tier,vn=False):
     return fill(pick_kind(c,age,tier),tier,vn)

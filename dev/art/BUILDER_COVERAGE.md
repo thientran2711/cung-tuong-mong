@@ -11,40 +11,40 @@ build.py refs emitter (--log/--refs): YES · emperor-B refs emitter: NO
 
 | tier | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|---|
-| t1 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| t2 | ✅* | ✅* | ✅* | ✅* | ✅* |
-| t3 | ✅* | ✅* | ✅* | ✅* | ✅* |
-| t4 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| t5 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| t6 | ❌ POSE=(1) | ❌ POSE=(3) | ❌ POSE=(5) | ❌ POSE=(6) | ❌ POSE=(7) |
-| t7 | ❌ POSE=(2) | ❌ POSE=(1) | ❌ POSE=(6) | ❌ POSE=(5) | ❌ POSE=(9) |
-| t8 | ❌ POSE=(2) | ❌ POSE=(1) | ❌ POSE=(5) | ❌ POSE=(5) | ❌ POSE=(10) |
-| Thái hậu | — | — | ❌ POSE=(5) | ❌ POSE=(5) | ❌ POSE=(8) |
-| Nữ đế | ❌ POSE= | ❌ POSE=(26) | ❌ POSE= | ❌ POSE= | ❌ POSE= |
-| khuê các | ✅ | ✅ | — | — | — |
-| nhà nghèo | ✅ | ✅ | — | — | — |
-| cung nữ tm0 | ❌ POSE=(2)* | ✅* | ❌ POSE=(2)* | — | — |
-| cung nữ tm1 | ✅* | ✅* | ✅* | ✅* | ✅* |
-| cung nữ tm2 | ✅* | ✅* | ✅* | ✅* | ✅* |
-| cung nữ tm3 | ✅* | ✅* | ✅* | ✅* | ✅* |
-| cung nữ tm4 | ❌ POSE=(3)* | ❌ POSE=(1)* | ❌ POSE=(9)* | ❌ POSE=(2)* | ❌ POSE=(9)* |
-| trung y ty1 | ✅* | ❌ POSE=(3)* | ❌ POSE=(6)* | ❌ POSE=(8)* | ❌ POSE=(11)* |
-| trung y ty2 | ❌ POSE=(1)* | ❌ POSE=(3)* | ❌ POSE=(5)* | ❌ POSE=(8)* | ❌ POSE=(11)* |
-| trung y ty3 | ❌ POSE=(1)* | ❌ POSE=(2)* | ❌ POSE=(7)* | ❌ POSE=(8)* | ❌ POSE=(11)* |
-| trung y ty4 | ❌ POSE=(1)* | ❌ POSE=(2)* | ❌ POSE=(6)* | ❌ POSE=(8)* | ❌ POSE=(11)* |
-| trung y ty5 | ✅* | ❌ POSE=(1)* | ❌ POSE=(6)* | ❌ POSE=(8)* | ❌ POSE=(10)* |
-| trung y ty6 | ❌ POSE=(2)* | ❌ POSE=(5)* | ❌ POSE=(11)* | ❌ POSE=(14)* | ❌ POSE=(18)* |
-| trung y ty7 | ❌ POSE=(2)* | ❌ POSE=(4)* | ❌ POSE=(12)* | ❌ POSE=(14)* | ❌ POSE=(20)* |
-| trung y ty8 | ❌ POSE=(3)* | ❌ POSE=(4)* | ❌ POSE=(11)* | ❌ POSE=(14)* | ❌ POSE=(21)* |
-| lãnh cung | ✅* | ❌ POSE=(2)* | ❌ POSE=(3)* | ❌ POSE=(3)* | ❌ POSE=(4)* |
-| triều phục 1 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
-| triều phục 2 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
-| triều phục 3 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
-| triều phục 4 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
-| triều phục 5 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
-| triều phục 6 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
-| triều phục 7 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
-| triều phục 8 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
+| t1 | ❌ FRONT | ❌ FRONT | ❌ FRONT | ❌ FRONT | ❌ FRONT |
+| t2 | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* |
+| t3 | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* |
+| t4 | ❌ FRONT | ❌ FRONT | ❌ FRONT | ❌ FRONT | ❌ FRONT |
+| t5 | ❌ FRONT | ❌ FRONT | ❌ FRONT | ❌ FRONT | ❌ FRONT |
+| t6 | ❌ FRONT POSE=(1) | ❌ FRONT POSE=(3) | ❌ FRONT POSE=(5) | ❌ FRONT POSE=(6) | ❌ FRONT POSE=(7) |
+| t7 | ❌ FRONT POSE=(2) | ❌ FRONT POSE=(1) | ❌ FRONT POSE=(6) | ❌ FRONT POSE=(5) | ❌ FRONT POSE=(9) |
+| t8 | ❌ FRONT POSE=(2) | ❌ FRONT POSE=(1) | ❌ FRONT POSE=(5) | ❌ FRONT POSE=(5) | ❌ FRONT POSE=(10) |
+| Thái hậu | — | — | ❌ FRONT POSE=(5) | ❌ FRONT POSE=(5) | ❌ FRONT POSE=(8) |
+| Nữ đế | ❌ FRONT POSE | ❌ FRONT POSE | ❌ FRONT POSE | ❌ FRONT POSE | ❌ FRONT POSE |
+| khuê các | ❌ FRONT | ❌ FRONT | — | — | — |
+| nhà nghèo | ❌ FRONT | ❌ FRONT | — | — | — |
+| cung nữ tm0 | ❌ FRONT POSE=(2)* | ❌ FRONT* | ❌ FRONT POSE=(2)* | — | — |
+| cung nữ tm1 | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* |
+| cung nữ tm2 | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* |
+| cung nữ tm3 | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* |
+| cung nữ tm4 | ❌ FRONT POSE=(3)* | ❌ FRONT POSE=(1)* | ❌ FRONT POSE=(9)* | ❌ FRONT POSE=(2)* | ❌ FRONT POSE=(9)* |
+| trung y ty1 | ❌ FRONT* | ❌ FRONT POSE=(3)* | ❌ FRONT POSE=(6)* | ❌ FRONT POSE=(8)* | ❌ FRONT POSE=(11)* |
+| trung y ty2 | ❌ FRONT POSE=(1)* | ❌ FRONT POSE=(3)* | ❌ FRONT POSE=(5)* | ❌ FRONT POSE=(8)* | ❌ FRONT POSE=(11)* |
+| trung y ty3 | ❌ FRONT POSE=(1)* | ❌ FRONT POSE=(2)* | ❌ FRONT POSE=(7)* | ❌ FRONT POSE=(8)* | ❌ FRONT POSE=(11)* |
+| trung y ty4 | ❌ FRONT POSE=(1)* | ❌ FRONT POSE=(2)* | ❌ FRONT POSE=(6)* | ❌ FRONT POSE=(8)* | ❌ FRONT POSE=(11)* |
+| trung y ty5 | ❌ FRONT* | ❌ FRONT POSE=(1)* | ❌ FRONT POSE=(6)* | ❌ FRONT POSE=(8)* | ❌ FRONT POSE=(10)* |
+| trung y ty6 | ❌ FRONT POSE=(2)* | ❌ FRONT POSE=(5)* | ❌ FRONT POSE=(11)* | ❌ FRONT POSE=(14)* | ❌ FRONT POSE=(18)* |
+| trung y ty7 | ❌ FRONT POSE=(2)* | ❌ FRONT POSE=(4)* | ❌ FRONT POSE=(12)* | ❌ FRONT POSE=(14)* | ❌ FRONT POSE=(20)* |
+| trung y ty8 | ❌ FRONT POSE=(3)* | ❌ FRONT POSE=(4)* | ❌ FRONT POSE=(11)* | ❌ FRONT POSE=(14)* | ❌ FRONT POSE=(21)* |
+| lãnh cung | ❌ FRONT* | ❌ FRONT POSE=(2)* | ❌ FRONT POSE=(3)* | ❌ FRONT POSE=(3)* | ❌ FRONT POSE=(4)* |
+| triều phục 1 | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* |
+| triều phục 2 | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* |
+| triều phục 3 | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* |
+| triều phục 4 | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* |
+| triều phục 5 | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* |
+| triều phục 6 | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* |
+| triều phục 7 | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* |
+| triều phục 8 | ❌ FRONT POSE POSE=(3)* | ❌ FRONT POSE POSE=(3)* | ❌ FRONT POSE* | ❌ FRONT POSE POSE=(14)* | ❌ FRONT POSE POSE=(20)* |
 
 Commands (example, a26): `dev/art/t8-prompt-B/build.py c01 --low 1 v0 --spec5pose --age a26` · `dev/art/t8-prompt-B/build.py c01 --low 2 v0 --spec5pose --age a26` · `dev/art/t8-prompt-B/build.py c01 --low 3 v0 --spec5pose --age a26` · `dev/art/t8-prompt-B/build.py c01 --low 4 v0 --spec5pose --age a26` …
 
@@ -52,40 +52,40 @@ Commands (example, a26): `dev/art/t8-prompt-B/build.py c01 --low 1 v0 --spec5pos
 
 | tier | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|---|
-| t1 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| t2 | ✅* | ✅* | ✅* | ✅* | ✅* |
-| t3 | ✅* | ✅* | ✅* | ✅* | ✅* |
-| t4 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| t5 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| t6 | ✅ | ❌ POSE=(6) | ❌ POSE=(8) | ❌ POSE=(13) | ❌ POSE=(13) |
-| t7 | ❌ POSE=(2) | ❌ POSE=(5) | ❌ POSE=(8) | ❌ POSE=(10) | ❌ POSE=(12) |
-| t8 | ❌ POSE=(3) | ❌ POSE=(4) | ❌ POSE=(9) | ❌ POSE=(10) | ❌ POSE=(14) |
-| Thái hậu | — | — | ❌ POSE=(9) | ❌ POSE=(7) | ❌ POSE=(10) |
-| Nữ đế | ❌ POSE= | ❌ POSE=(42) | ❌ POSE= | ❌ POSE= | ❌ POSE= |
-| khuê các | ✅ | ✅ | — | — | — |
-| nhà nghèo | ✅ | ✅ | — | — | — |
-| cung nữ tm0 | ❌ POSE=(3)* | ✅* | ❌ POSE=(3)* | — | — |
-| cung nữ tm1 | ✅* | ✅* | ✅* | ✅* | ✅* |
-| cung nữ tm2 | ✅* | ✅* | ✅* | ✅* | ✅* |
-| cung nữ tm3 | ✅* | ✅* | ✅* | ✅* | ✅* |
-| cung nữ tm4 | ❌ POSE=(5)* | ❌ POSE=(1)* | ❌ POSE=(14)* | ❌ POSE=(4)* | ❌ POSE=(14)* |
-| trung y ty1 | ❌ POSE=(1)* | ❌ POSE=(3)* | ❌ POSE=(8)* | ❌ POSE=(10)* | ❌ POSE=(15)* |
-| trung y ty2 | ❌ POSE=(1)* | ❌ POSE=(3)* | ❌ POSE=(9)* | ❌ POSE=(10)* | ❌ POSE=(17)* |
-| trung y ty3 | ❌ POSE=(1)* | ❌ POSE=(4)* | ❌ POSE=(9)* | ❌ POSE=(11)* | ❌ POSE=(16)* |
-| trung y ty4 | ❌ POSE=(1)* | ❌ POSE=(4)* | ❌ POSE=(8)* | ❌ POSE=(11)* | ❌ POSE=(15)* |
-| trung y ty5 | ❌ POSE=(2)* | ❌ POSE=(3)* | ❌ POSE=(6)* | ❌ POSE=(11)* | ❌ POSE=(13)* |
-| trung y ty6 | ❌ POSE=(2)* | ❌ POSE=(9)* | ❌ POSE=(18)* | ❌ POSE=(23)* | ❌ POSE=(28)* |
-| trung y ty7 | ❌ POSE=(3)* | ❌ POSE=(9)* | ❌ POSE=(18)* | ❌ POSE=(23)* | ❌ POSE=(29)* |
-| trung y ty8 | ❌ POSE=(4)* | ❌ POSE=(9)* | ❌ POSE=(19)* | ❌ POSE=(23)* | ❌ POSE=(31)* |
-| lãnh cung | ❌ POSE=(1)* | ❌ POSE=(3)* | ❌ POSE=(7)* | ❌ POSE=(4)* | ❌ POSE=(7)* |
-| triều phục 1 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
-| triều phục 2 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
-| triều phục 3 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
-| triều phục 4 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
-| triều phục 5 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
-| triều phục 6 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
-| triều phục 7 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
-| triều phục 8 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
+| t1 | ❌ FRONT | ❌ FRONT | ❌ FRONT | ❌ FRONT | ❌ FRONT |
+| t2 | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* |
+| t3 | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* |
+| t4 | ❌ FRONT | ❌ FRONT | ❌ FRONT | ❌ FRONT | ❌ FRONT |
+| t5 | ❌ FRONT | ❌ FRONT | ❌ FRONT | ❌ FRONT | ❌ FRONT |
+| t6 | ❌ FRONT | ❌ FRONT POSE=(6) | ❌ FRONT POSE=(8) | ❌ FRONT POSE=(13) | ❌ FRONT POSE=(13) |
+| t7 | ❌ FRONT POSE=(2) | ❌ FRONT POSE=(5) | ❌ FRONT POSE=(8) | ❌ FRONT POSE=(10) | ❌ FRONT POSE=(12) |
+| t8 | ❌ FRONT POSE=(3) | ❌ FRONT POSE=(4) | ❌ FRONT POSE=(9) | ❌ FRONT POSE=(10) | ❌ FRONT POSE=(14) |
+| Thái hậu | — | — | ❌ FRONT POSE=(9) | ❌ FRONT POSE=(7) | ❌ FRONT POSE=(10) |
+| Nữ đế | ❌ FRONT POSE | ❌ FRONT POSE | ❌ FRONT POSE | ❌ FRONT POSE | ❌ FRONT POSE |
+| khuê các | ❌ FRONT | ❌ FRONT | — | — | — |
+| nhà nghèo | ❌ FRONT | ❌ FRONT | — | — | — |
+| cung nữ tm0 | ❌ FRONT POSE=(3)* | ❌ FRONT* | ❌ FRONT POSE=(3)* | — | — |
+| cung nữ tm1 | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* |
+| cung nữ tm2 | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* |
+| cung nữ tm3 | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* | ❌ FRONT* |
+| cung nữ tm4 | ❌ FRONT POSE=(5)* | ❌ FRONT POSE=(1)* | ❌ FRONT POSE=(14)* | ❌ FRONT POSE=(4)* | ❌ FRONT POSE=(14)* |
+| trung y ty1 | ❌ FRONT POSE=(1)* | ❌ FRONT POSE=(3)* | ❌ FRONT POSE=(8)* | ❌ FRONT POSE=(10)* | ❌ FRONT POSE=(15)* |
+| trung y ty2 | ❌ FRONT POSE=(1)* | ❌ FRONT POSE=(3)* | ❌ FRONT POSE=(9)* | ❌ FRONT POSE=(10)* | ❌ FRONT POSE=(17)* |
+| trung y ty3 | ❌ FRONT POSE=(1)* | ❌ FRONT POSE=(4)* | ❌ FRONT POSE=(9)* | ❌ FRONT POSE=(11)* | ❌ FRONT POSE=(16)* |
+| trung y ty4 | ❌ FRONT POSE=(1)* | ❌ FRONT POSE=(4)* | ❌ FRONT POSE=(8)* | ❌ FRONT POSE=(11)* | ❌ FRONT POSE=(15)* |
+| trung y ty5 | ❌ FRONT POSE=(2)* | ❌ FRONT POSE=(3)* | ❌ FRONT POSE=(6)* | ❌ FRONT POSE=(11)* | ❌ FRONT POSE=(13)* |
+| trung y ty6 | ❌ FRONT POSE=(2)* | ❌ FRONT POSE=(9)* | ❌ FRONT POSE=(18)* | ❌ FRONT POSE=(23)* | ❌ FRONT POSE=(28)* |
+| trung y ty7 | ❌ FRONT POSE=(3)* | ❌ FRONT POSE=(9)* | ❌ FRONT POSE=(18)* | ❌ FRONT POSE=(23)* | ❌ FRONT POSE=(29)* |
+| trung y ty8 | ❌ FRONT POSE=(4)* | ❌ FRONT POSE=(9)* | ❌ FRONT POSE=(19)* | ❌ FRONT POSE=(23)* | ❌ FRONT POSE=(31)* |
+| lãnh cung | ❌ FRONT POSE=(1)* | ❌ FRONT POSE=(3)* | ❌ FRONT POSE=(7)* | ❌ FRONT POSE=(4)* | ❌ FRONT POSE=(7)* |
+| triều phục 1 | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* |
+| triều phục 2 | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* |
+| triều phục 3 | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* |
+| triều phục 4 | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* |
+| triều phục 5 | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* |
+| triều phục 6 | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* |
+| triều phục 7 | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* | ❌ FRONT POSE POSE=* |
+| triều phục 8 | ❌ FRONT POSE POSE=(5)* | ❌ FRONT POSE POSE=(5)* | ❌ FRONT POSE* | ❌ FRONT POSE POSE=(22)* | ❌ FRONT POSE POSE=(32)* |
 
 Commands (example, a26): `dev/art/t8-prompt-B/build.py m01 --low 1 v0 --spec5pose --age a26` · `dev/art/t8-prompt-B/build.py m01 --low 2 v0 --spec5pose --age a26` · `dev/art/t8-prompt-B/build.py m01 --low 3 v0 --spec5pose --age a26` · `dev/art/t8-prompt-B/build.py m01 --low 4 v0 --spec5pose --age a26` …
 
@@ -96,12 +96,12 @@ NOTE: build.py has ONE generic face per country (PDATA nc / bd), not the 3 + 3 p
 | tier | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|---|
 | pre | ❌ NOCMD* | — | — | — | — |
-| t1 | ❌ POSE* | ❌ POSE* | ❌ POSE* | ❌ POSE* | ❌ POSE* |
+| t1 | ❌ FRONT POSE* | ❌ FRONT POSE* | ❌ FRONT POSE* | ❌ FRONT POSE* | ❌ FRONT POSE* |
 | t2 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | t3 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | t4 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | t5 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| t6 | ❌ ITEM(3) POSE POSE=(3) ROYAL3 | ❌ ITEM(3) POSE POSE=(3) ROYAL3 | ❌ ITEM(3) POSE POSE=(3) ROYAL3 | ❌ ITEM(3) POSE POSE=(3) ROYAL3 | ❌ ITEM(3) POSE POSE=(3) ROYAL3 |
+| t6 | ❌ AGE(3) FRONT(3) ITEM(3) POSE POSE=(3) ROYAL3 | ❌ AGE(3) FRONT(3) ITEM(3) POSE POSE=(3) ROYAL3 | ❌ AGE(3) FRONT(3) ITEM(3) POSE POSE=(3) ROYAL3 | ❌ AGE(3) FRONT(3) ITEM(3) POSE POSE=(3) ROYAL3 | ❌ AGE(3) FRONT(3) ITEM(3) POSE POSE=(3) ROYAL3 |
 | t7 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | t8 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | Thái hậu | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
@@ -122,7 +122,7 @@ Commands (example, a26): `dev/art/t8-prompt-B/build.py nc --state nc1 --age a26`
 
 | tier | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|---|
-| base | ❌ BG ITEM POSE POSE= REFS | ❌ BG ITEM POSE POSE= REFS | ❌ BG ITEM POSE POSE= REFS | ❌ BG ITEM POSE POSE= REFS | ❌ REFS RUN* |
+| base | ❌ BG ITEM POSE POSE= REFS | ❌ BG ITEM POSE POSE= REFS | ❌ BG ITEM POSE POSE= REFS | ❌ BG ITEM POSE POSE= REFS | ❌ BG ITEM POSE POSE= REFS* |
 
 Commands (example, a26): `dev/art/emperor-B/build.py live1 --age a26`
 
@@ -141,7 +141,7 @@ Codes as above, plus NOSRC = no old prompt exists (rule 6: never invented; owner
 
 | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|
-| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ HELD |
+| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= |
 
 ### Thái giám u01–u30 rank r0
 
@@ -171,55 +171,55 @@ Codes as above, plus NOSRC = no old prompt exists (rule 6: never invented; owner
 
 | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|
-| ❌ HELD(1) ITEM(5) POSE(5) POSE=(5) | ❌ HELD(1) ITEM(5) POSE(5) POSE=(5) | ❌ HELD(1) ITEM(5) POSE(5) POSE=(5) | ❌ HELD(1) ITEM(5) POSE(5) POSE=(5) | ❌ HELD |
+| ❌ HELD(1) ITEM(5) POSE(5) POSE=(5) | ❌ HELD(1) ITEM(5) POSE(5) POSE=(5) | ❌ HELD(1) ITEM(5) POSE(5) POSE=(5) | ❌ HELD(1) ITEM(5) POSE(5) POSE=(5) | ❌ HELD(1) ITEM(5) POSE(5) POSE=(5) |
 
 ### Thái y physician-p1–p3
 
 | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|
-| ❌ ITEM(2) NOSRC(1) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(1) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(1) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(1) POSE(2) POSE=(2) | ❌ HELD(2) NOSRC(1) |
+| ❌ ITEM(2) NOSRC(1) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(1) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(1) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(1) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(1) POSE(2) POSE=(2) |
 
 ### Thị vệ man-thive-1–4
 
 | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|
-| ❌ ITEM(2) NOSRC(2) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(2) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(2) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(2) POSE(2) POSE=(2) | ❌ HELD(2) NOSRC(2) |
+| ❌ ITEM(2) NOSRC(2) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(2) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(2) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(2) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(2) POSE(2) POSE=(2) |
 
 ### Thái y (romance) man-thaiy-1
 
 | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|
-| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ HELD |
+| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= |
 
 ### Vương gia man-vuonggia-1–2
 
 | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|
-| ❌ HELD(1) ITEM(1) POSE(1) POSE=(1) | ❌ HELD(1) ITEM(1) POSE(1) POSE=(1) | ❌ HELD(1) ITEM(1) POSE(1) POSE=(1) | ❌ HELD(1) ITEM(1) POSE(1) POSE=(1) | ❌ HELD |
+| ❌ HELD(1) ITEM(1) POSE(1) POSE=(1) | ❌ HELD(1) ITEM(1) POSE(1) POSE=(1) | ❌ HELD(1) ITEM(1) POSE(1) POSE=(1) | ❌ HELD(1) ITEM(1) POSE(1) POSE=(1) | ❌ HELD(1) ITEM(1) POSE(1) POSE=(1) |
 
 ### Nhạc sư / Họa sư man-nhacsu-1, man-hoasu-1
 
 | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|
-| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ HELD |
+| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= |
 
 ### Sứ thần man-suthan-1–2
 
 | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|
-| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ HELD |
+| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= |
 
 ### Quý tử man-quytu-1–9 + Bắc Địch prince man-bacdich-1
 
 | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|
-| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ HELD |
+| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= |
 
 ### Công tử man-congtu-1–10
 
 | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|
-| ❌ ITEM POSE POSE=(5) | ❌ ITEM POSE POSE=(5) | ❌ ITEM POSE POSE=(7) | ❌ ITEM POSE POSE=(3) | ❌ HELD |
+| ❌ ITEM POSE POSE=(5) | ❌ ITEM POSE POSE=(5) | ❌ ITEM POSE POSE=(7) | ❌ ITEM POSE POSE=(3) | ❌ NOSRC |
 
 ### Huynh man-huynh-1–2
 
@@ -274,70 +274,54 @@ Codes as above, plus NOSRC = no old prompt exists (rule 6: never invented; owner
 - Công chúa kid-f01–f24: `NO SOURCE: kids/kspec.py has ages 4/9/14/20 only; no old prompt for kid a26 (owner/ROOT-36)`
 - Công chúa kid-f01–f24: `NO SOURCE: kids/kspec.py has ages 4/9/14/20 only; no old prompt for kid a36 (owner/ROOT-36)`
 - Công chúa kid-f01–f24: `NO SOURCE: kids/kspec.py has ages 4/9/14/20 only; no old prompt for kid a51 (owner/ROOT-36)`
-- Công tử man-congtu-1–10: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
-- Emperor (emperor-B: live1, live2, e1–e4): `KeyError: 'a65'`
+- Công tử man-congtu-1–10: `NO SOURCE: công tử pose list (CT_P) has a18-a51 only; no old a65 pose source (men age text a65 exists since J6) -> ROOT-50/owner`
 - Hoàng tử kid-p01–p24: `NO SOURCE: kids/kspec.py has ages 4/9/14/20 only; no old prompt for kid a26 (owner/ROOT-36)`
 - Hoàng tử kid-p01–p24: `NO SOURCE: kids/kspec.py has ages 4/9/14/20 only; no old prompt for kid a36 (owner/ROOT-36)`
 - Hoàng tử kid-p01–p24: `NO SOURCE: kids/kspec.py has ages 4/9/14/20 only; no old prompt for kid a51 (owner/ROOT-36)`
 - Huynh man-huynh-1–2: `NO SOURCE: outsideart/huynh_jobs.json has no prompt text`
 - Mama k01–k08 (owner: = older cung nữ, build.py tm3/tm4 a36+): `NOT HERE: owner (FIGURE_GATE WHO): mama = an older cung nữ -> maid uniform tm3/tm4 a36+ in build.py (N5c)`
 - Người thương thuở nhỏ (tm96 lover): `NO SOURCE: no old prompt for the tm96 childhood lover`
-- Nhạc sư / Họa sư man-nhacsu-1, man-hoasu-1: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
 - Phế phi Lý: `NO SOURCE: no old prompt for Phế phi Lý`
-- Quan official-o1–o6: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
 - Quan official-o1–o6: `HELD: the old prompt dresses him in purple; owner rule 'men never pink/purple' -> ROOT-36/owner decide the colour (no invented colour)`
-- Quý tử man-quytu-1–9 + Bắc Địch prince man-bacdich-1: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
 - Steward / tutor: `NO SOURCE: no old prompt for the steward`
-- Sứ thần man-suthan-1–2: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
-- Thái giám u01–u30 (base robe): `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
 - Thái giám u01–u30 rank r0: `NO SOURCE: no old prompt for eunuch ranks r0-r3 (fig-eunuch-uNN-rN) on main/handover; owner/ROOT-36`
 - Thái giám u01–u30 rank r1: `NO SOURCE: no old prompt for eunuch ranks r0-r3 (fig-eunuch-uNN-rN) on main/handover; owner/ROOT-36`
 - Thái giám u01–u30 rank r2: `NO SOURCE: no old prompt for eunuch ranks r0-r3 (fig-eunuch-uNN-rN) on main/handover; owner/ROOT-36`
 - Thái giám u01–u30 rank r3: `NO SOURCE: no old prompt for eunuch ranks r0-r3 (fig-eunuch-uNN-rN) on main/handover; owner/ROOT-36`
-- Thái y (romance) man-thaiy-1: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
-- Thái y physician-p1–p3: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
 - Thái y physician-p1–p3: `NO SOURCE: jobs.json S-physician-1 has 2 men (p1, p2) only`
-- Thị vệ man-thive-1–4: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
 - Thị vệ man-thive-1–4: `NO SOURCE: old men pool has 2 guards only`
-- Vương gia man-vuonggia-1–2: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
 - Vương gia man-vuonggia-1–2: `HELD: the old prompt dresses him in purple; owner rule 'men never pink/purple' -> ROOT-36/owner decide the colour (no invented colour)`
 
 ## RED LIST (grouped)
 
-- **Consorts c01–c32 (32)** — POSE=: t6/a18, t6/a26, t6/a36, t6/a51, t6/a65, t7/a18, t7/a26, t7/a36, t7/a51, t7/a65, t8/a18, t8/a26, t8/a36, t8/a51 … (+58)
-- **Consorts c01–c32 (32)** — POSE POSE=: tr1/a18, tr1/a26, tr1/a36, tr1/a51, tr1/a65, tr2/a18, tr2/a26, tr2/a36, tr2/a51, tr2/a65, tr3/a18, tr3/a26, tr3/a36, tr3/a51 … (+26)
-- **Maid faces m01–m52 (52) in every woman tier** — POSE=: t6/a26, t6/a36, t6/a51, t6/a65, t7/a18, t7/a26, t7/a36, t7/a51, t7/a65, t8/a18, t8/a26, t8/a36, t8/a51, t8/a65 … (+60)
-- **Maid faces m01–m52 (52) in every woman tier** — POSE POSE=: tr1/a18, tr1/a26, tr1/a36, tr1/a51, tr1/a65, tr2/a18, tr2/a26, tr2/a36, tr2/a51, tr2/a65, tr3/a18, tr3/a26, tr3/a36, tr3/a51 … (+26)
+- **Consorts c01–c32 (32)** — FRONT: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+34)
+- **Consorts c01–c32 (32)** — FRONT POSE=: t6/a18, t6/a26, t6/a36, t6/a51, t6/a65, t7/a18, t7/a26, t7/a36, t7/a51, t7/a65, t8/a18, t8/a26, t8/a36, t8/a51 … (+53)
+- **Consorts c01–c32 (32)** — FRONT POSE: nude/a18, nude/a26, nude/a36, nude/a51, nude/a65, tr8/a36
+- **Consorts c01–c32 (32)** — FRONT POSE POSE=: tr1/a18, tr1/a26, tr1/a36, tr1/a51, tr1/a65, tr2/a18, tr2/a26, tr2/a36, tr2/a51, tr2/a65, tr3/a18, tr3/a26, tr3/a36, tr3/a51 … (+25)
+- **Maid faces m01–m52 (52) in every woman tier** — FRONT: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+32)
+- **Maid faces m01–m52 (52) in every woman tier** — FRONT POSE=: t6/a26, t6/a36, t6/a51, t6/a65, t7/a18, t7/a26, t7/a36, t7/a51, t7/a65, t8/a18, t8/a26, t8/a36, t8/a51, t8/a65 … (+55)
+- **Maid faces m01–m52 (52) in every woman tier** — FRONT POSE: nude/a18, nude/a26, nude/a36, nude/a51, nude/a65, tr8/a36
+- **Maid faces m01–m52 (52) in every woman tier** — FRONT POSE POSE=: tr1/a18, tr1/a26, tr1/a36, tr1/a51, tr1/a65, tr2/a18, tr2/a26, tr2/a36, tr2/a51, tr2/a65, tr3/a18, tr3/a26, tr3/a36, tr3/a51 … (+25)
 - **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — NOCMD (no builder mode): pre/a18, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51, t3/a65, t4/a18, t4/a26, t4/a36 … (+72)
-- **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — POSE: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65
-- **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — ITEM POSE POSE= ROYAL3: t6/a18, t6/a26, t6/a36, t6/a51, t6/a65
-- **Emperor (emperor-B: live1, live2, e1–e4)** — BG ITEM POSE POSE= REFS: base/a18, base/a26, base/a36, base/a51
-- **Emperor (emperor-B: live1, live2, e1–e4)** — REFS RUN: base/a65
+- **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — FRONT POSE: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65
+- **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — AGE FRONT ITEM POSE POSE= ROYAL3: t6/a18, t6/a26, t6/a36, t6/a51, t6/a65
+- **Emperor (emperor-B: live1, live2, e1–e4)** — BG ITEM POSE POSE= REFS: base/a18, base/a26, base/a36, base/a51, base/a65
 - **NPC Thái hậu h1–h3** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51, base/a65
-- **Thái giám u01–u30 (base robe)** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
-- **Thái giám u01–u30 (base robe)** — HELD: base/a65
+- **Thái giám u01–u30 (base robe)** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51, base/a65
 - **Thái giám u01–u30 rank r0** — NOSRC: r0/a18, r0/a26, r0/a36, r0/a51, r0/a65
 - **Thái giám u01–u30 rank r1** — NOSRC: r1/a18, r1/a26, r1/a36, r1/a51, r1/a65
 - **Thái giám u01–u30 rank r2** — NOSRC: r2/a18, r2/a26, r2/a36, r2/a51, r2/a65
 - **Thái giám u01–u30 rank r3** — NOSRC: r3/a18, r3/a26, r3/a36, r3/a51, r3/a65
-- **Quan official-o1–o6** — HELD ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
-- **Quan official-o1–o6** — HELD: base/a65
-- **Thái y physician-p1–p3** — ITEM NOSRC POSE POSE=: base/a18, base/a26, base/a36, base/a51
-- **Thái y physician-p1–p3** — HELD NOSRC: base/a65
-- **Thị vệ man-thive-1–4** — ITEM NOSRC POSE POSE=: base/a18, base/a26, base/a36, base/a51
-- **Thị vệ man-thive-1–4** — HELD NOSRC: base/a65
-- **Thái y (romance) man-thaiy-1** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
-- **Thái y (romance) man-thaiy-1** — HELD: base/a65
-- **Vương gia man-vuonggia-1–2** — HELD ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
-- **Vương gia man-vuonggia-1–2** — HELD: base/a65
-- **Nhạc sư / Họa sư man-nhacsu-1, man-hoasu-1** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
-- **Nhạc sư / Họa sư man-nhacsu-1, man-hoasu-1** — HELD: base/a65
-- **Sứ thần man-suthan-1–2** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
-- **Sứ thần man-suthan-1–2** — HELD: base/a65
-- **Quý tử man-quytu-1–9 + Bắc Địch prince man-bacdich-1** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
-- **Quý tử man-quytu-1–9 + Bắc Địch prince man-bacdich-1** — HELD: base/a65
+- **Quan official-o1–o6** — HELD ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51, base/a65
+- **Thái y physician-p1–p3** — ITEM NOSRC POSE POSE=: base/a18, base/a26, base/a36, base/a51, base/a65
+- **Thị vệ man-thive-1–4** — ITEM NOSRC POSE POSE=: base/a18, base/a26, base/a36, base/a51, base/a65
+- **Thái y (romance) man-thaiy-1** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51, base/a65
+- **Vương gia man-vuonggia-1–2** — HELD ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51, base/a65
+- **Nhạc sư / Họa sư man-nhacsu-1, man-hoasu-1** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51, base/a65
+- **Sứ thần man-suthan-1–2** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51, base/a65
+- **Quý tử man-quytu-1–9 + Bắc Địch prince man-bacdich-1** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51, base/a65
 - **Công tử man-congtu-1–10** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
-- **Công tử man-congtu-1–10** — HELD: base/a65
+- **Công tử man-congtu-1–10** — NOSRC: base/a65
 - **Huynh man-huynh-1–2** — NOSRC: base/a18, base/a26, base/a36, base/a51, base/a65
 - **Người thương thuở nhỏ (tm96 lover)** — NOSRC: base/a18, base/a26, base/a36, base/a51, base/a65
 - **Steward / tutor** — NOSRC: base/a18, base/a26, base/a36, base/a51, base/a65
