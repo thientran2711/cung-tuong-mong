@@ -202,7 +202,7 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | FOREMAN E ROOT #8 (opus; child of E ROOT #7, depth 7) | handover FOREMAN_E_STATUS | E ROOT #7 | session_01DgYSWoyrPRWJPqSp4gfECg | DONE (rolled over 06:45Z) | 19/11 01:50Z |
 | MAIN ROOT-62 (opus; owner-opened ROOT, depth 0; successor of ROOT-61) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsJvnKvJMiKUjEhRST1 | DONE → ROOT-63 | 19/11 02:20Z |
 | maid-ladder-6 (opus; BIG) | review/maid-ladder-6 | B | session_01N1tNP6uwmf4WjfcYZ2eBKe | SẴN SÀNG KIỂM cb5a7cb3 (on LIVE 1cf5e8bb; quickcheck PASS, coop-e2e 63/63, maid-ladder-6 13/13; report reports/maid-ladder-6.md; shots img/_review/maid-ladder-6/) | 19/11 ~03:45Z |
-| law3-cost-only (opus; SMALL) | review/law3-cost-only | B | session_01N1tNP6PHnsEVwUKbZMrXkQ | SẴN SÀNG KIỂM ae218b59 (on main c12a5878) (4 named rows: 3 = display, 1 = D's; 2 rows fixed; see reports/law3-cost-only.md) | 19/11 04:10Z |
+| law3-cost-only (opus; SMALL) | review/law3-cost-only | B | session_01N1tNP6PHnsEVwUKbZMrXkQ | LIVE 62055a31, archived — was SẴN SÀNG KIỂM ae218b59 (on main c12a5878) (4 named rows: 3 = display, 1 = D's; 2 rows fixed; see reports/law3-cost-only.md) | 19/11 04:10Z |
 | art-wiring-1119 (opus; SMALL) | review/art-wiring-1119-r2 | B | session_01N1tNP59FAL2oqUhk7AUxRa | LIVE fd6118cd (r2) | 19/11 04:20Z |
 | coop-thin F2 #2 (opus; successor of 3eu44fWy at 6eaf01a) | review/coop-thin-f2 | B | session_01N1tNP54k39FoQxynYXS2Xp | SUPERSEDED by F2 FIX r2 083227d4 (archived) — was SẴN SÀNG KIỂM 4dabbd46 (report: reports/coop-thin-f2.md '## F2 #2 — Done') | 19/11 04:30Z |
 | seal-lean (sonnet; owner OD 19/11 ~02:15Z, kit §38.4 idle sway + lean-in) | review/seal-lean | MAIN ROOT-62 | session_01Rc5AsKsNitSW71UKQUtLKJ | SẴN SÀNG KIỂM 5f7aef61 | 19/11 03:05Z |
@@ -216,7 +216,7 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | odds-meter-back r2 SMALL REVIEW (sonnet) | review/odds-meter-back 42bda6a9 | MAIN ROOT-63 | session_01Rc5AsJ4JEEMogtiNCfMZ6x | LIVE f43a2ba6 | 19/11 03:43Z |
 | errand-scene r6 head markers + real video (opus; successor of L23c5v2N) | review/errand-scene | MAIN ROOT-63 | session_01Rc5AsJBScJTqmWZxTCvmtQ | READY c4c25bbd | 19/11 05:00Z |
 rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach | worker see FOREMAN_D_STATUS 03:50Z line (opus) | RUNNING | 19/11 03:50Z | owner D #5
-| REVIEW law3-cost-only r1 (sonnet SMALL) of ae218b59 | review/law3-cost-only-r1 | B | session_01N1tNP6f1q3NHgpGP4qDDsQ | LAND READY 62055a31 (on 950508fc) | 19/11 03:55Z |
+| REVIEW law3-cost-only r1 (sonnet SMALL) of ae218b59 | review/law3-cost-only-r1 | B | session_01N1tNP6f1q3NHgpGP4qDDsQ | LIVE 62055a31, archived | 19/11 03:55Z |
 | bd-roads BIG review (opus E14r; 23278b63) | review/bd-roads | E ROOT #8 | session_01DgYSWnZE2bT1FR9J6cjqDy | RUNNING | 19/11 04:06Z |
 | CTM odds-no-unknown (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/odds-no-unknown; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsN4DdpqemYGteNSCE6 | DONE — LIVE 4217568a (archived 19/11 06:05Z) | 19/11 05:35Z |
 | CTM hall-names (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/hall-names c294e1d; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsJqjDM27hysYd7E48b | DONE — LIVE 2c5dd554 (archived 19/11 05:55Z) | 19/11 05:20Z |
@@ -261,7 +261,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN ROOT-66 (opus; child of ROOT-65, depth 4) | handover HANDOVER_SESSION9 | ROOT-65 | session_01Rc5AsNSzMY2cT8dMMPe7xW | DONE → ROOT-67 | 19/11 07:33Z |
 | opt-scroll-reset (opus; MAIN ROOT-65 follow-up via C-AG #22: 22 option frames re-render loop resets scroll, root cause + whole group) | review/opt-scroll-reset; briefs/cag22-opt-scroll-reset.md | C-AG #22 for ROOT-65 | session_01Rc5AsJ7aS6giCFsrSaRM6d | RUNNING | 19/11 07:40Z |
 | caoly-road BIG review (sonnet E20r; 30d7cca8) | review/caoly-road; briefs/E20r-review-caoly-road.md | FOREMAN E | session_01DgYSWq4WTWY2p7LTCaMp3M | RUNNING | 19/11 07:45Z |
-| REVIEW coop-thin-f4 r1 (opus BIG) of ac66808f | review/coop-thin-f4-r1 | B | session_01N1tNP32iT6Kmupog2YrxpC | RUNNING | 19/11 07:47Z |
+| REVIEW coop-thin-f4 r1 (opus BIG) of ac66808f | review/coop-thin-f4-r1 | B | session_01N1tNP32iT6Kmupog2YrxpC | PASS review/coop-thin-f4-r1 d913db71 (descends from origin/main 62055a31; fix R1 shelf-plant ctx; report reports/coop-thin-f4.md "## REVIEW r1") | 19/11 08:50Z |
 | coop-thin F5 (opus; mini-game score ends as intents; stacked on F4) | review/coop-thin-f5 | B | session_01N1tNP3xrJgrfek8aioQFv2 | RUNNING | 19/11 07:48Z |
 | MAIN ROOT-67 (opus; child of ROOT-66, depth 5) | handover HANDOVER_SESSION9 | ROOT-66 | session_01Rc5AsM5xHa2zs9qd5o5eTU | RUNNING | 19/11 08:46Z | START_CTX ~8 %
 | kit-head-say (sonnet kit keeper; K-HEAD-SAY for E palace-chatter) | review/kit-head-say; briefs/kit-head-say.md | MAIN ROOT-67 | session_01Rc5AsKFj6ZBZuHqopPwMU3 | RUNNING | 19/11 08:42Z |

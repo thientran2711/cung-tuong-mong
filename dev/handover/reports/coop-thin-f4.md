@@ -104,3 +104,44 @@ Gates after the merge: coop-thin-f4 L9 18/18 · swap 18/18 · TRIP F4 entry 0 / 
 - coop-thin-f4 L9 20/20 · swap 19/19 (K2 skipped: nobody left to ask) · TRIP F4 entry 0 / 0 · quickcheck PASS (render 237/255, tab 464/434, buổi 1174/1421 ms new/live; old save ok) · coop-e2e 68/68.
 - C1 (as F3 'W'): every «Xong việc» line her F4 acts earn → its card on HER phone once, none on the host. This run earned no task line (her road's task nhap14 = an / di / trang, no buy quest; a synthetic sung14 staging did not match the task variant, removed) → the check is conditional, like F3's. The path itself is the one F3 W proved: every registration (reg9 too) runs through F.reg's host run = TH.tapRun (quiet off).
 - F2-r2 quiet scan over the F4 roots (`ROOTS=petDo,petcMaid,petcQuick,shelfPlantQuick,rcpRead,rcpAskGo,tdsRun,kitShopBuy`; the scan now also parses reg8 / reg9 / the F3 UI tuple list — before, F3 + F4 roots were missing from its root list): 32 of 41 global-quiet reads "reachable" (static, over-approximate: most paths go through closeModal → tryEnd → nextBuoi, which a registered run never takes). The direct ones: apply (j1:139, j11:78, j85:70, jagknow:380: screen / Sổ ghi suffix), spend → errCan / screenOff (behaviour gates), jagknow tmTry / tmFear (Sổ ghi), jtq14 doneCard via note (kit shop onBuy). All run with quiet OFF inside TH.tapRun since f2-r2 → not silenced; screen effects captured (UICAP) and played on her phone.
+
+## REVIEW r1 — PASS review/coop-thin-f4-r1 d913db71 (descends from origin/main 62055a31)
+PRIORITY #1 CHECK ('coop-thin F4 review'): OD 17/11 thin guest + L1487/L1489/L1493/L1494 (brief) | main 62055a31: F1 live, no F4 registration | review/*: coop-thin-f4 8d48cc57 (worker, merged here), coop-thin-f3-r1 3e8e3b85 (F3 reviewer, kitSfx in UICAP, merged here), coop-thin-f2-r2 083227d4 (inside F3) | claims: this reviewer session_01N1tNP32iT6Kmupog2YrxpC.
+Reviewer session_01N1tNP32iT6Kmupog2YrxpC (opus), depth 6 (get_session lineage.depth), START_CTX ≈ 4 % of 1M (used_tokens reads 0; estimate) → rollover at ≈ 29 %, ceiling 60 %; finished below it.
+Branch = ac66808f + merge main 950508fc + reviewer fix fc9e3f3e + worker 8d48cc57 (C1 task-card row, quiet-scan roots) + f3-r1 3e8e3b85 + main 62055a31 + build_site.sh (d913db71). Land order unchanged: F2-r2 → F3 (f3-r1) → F4.
+
+### Fixed here (blocking, small)
+| # | finding | before | after |
+|---|---|---|---|
+| R1 | jcoopthinf CX9 `OBJ("shpc",()=>({g:SHPC.g}))`: the setter Object.assign-ed her slot onto a FRESH copy → the host never set SHPC.g → her shelf plant «Để trời định» from the guest did NOTHING (no roll, no log, no change), or rolled on the plant in the HOST's own open slot. G1 was green only because its check was `x=>true`. | G1 with a real check (old code, ROWS=G1): **FAIL** f4p:40 → f4p:40, no log line | ctx = plain value set on SHPC.g; G1 **ok** (pc up or the «chưa thành» line) L9 / swap / 4G |
+| R2 | same CX9 `OBJ("petc",PETC)`: carried PETC.bath (pointer listener functions, stripped by JSON) back onto the host's own running bath game (his listeners could not be removed → a stale stroke counter; rare: host mid-bath + her intent) | whole PETC | only {i, game}; P5 now checks the roll ran on HER pet 0 |
+Test hardening in coop-thin-f4.js: G1 / P5 real checks (above), T1 LOOK shot 'cook'.
+
+### Checks
+1. Every F4 act from the guest = solo (twin rows P1 P2 P4 K1 R1), her cards / floaters / screens on HER phone once, none on host (P5 / G1 / C1 / hostCard): L9 20/20 · swap 19/19 · 4G 17/17 (pre-8d48cc57 table 18/18 · swap 18/18). Law 6c: pets counted on both phones (P2 one less, P3 one more or the sick line), the work made in ONE place (T1), the book stays in her bag (R1). Law 4: no new number (one-core ×4 PASS). Laws 7/9–12: no new word, no UI part changed (LOOK below). Laws 1–3/5/6ab: not touched.
+2. Level gate: kitShopBuy 'pet' + every reg9 only at L9 (= min of both caps, Worker); L8 old road 17/17 (nothing sent); a L1 24/24 · b L4 136/136 · c L4 16/16 · d L4 47/53 (= main: 6 kit sameDom) · e L5 33/33 · e-net L6 20/20.
+3. Old guest path: the moved engines are the solo engines (no separate guest copy); at L9 the guest never runs them — tripwire F4 entry writes L8 **354** → L9 **0** / swap **0**. Deleting the below-L9 road waits for part H (same contract as F1–F3).
+4. Latency (live Worker, n=10): L8 local 114 ms · L9 swap no throttle 312 ms · 4G (LAG 85 both phones + host CPU ×4) median **1067 ms** (850–2422). Cause: 4 × 85 ms network legs (≈340 ms) + the host's run + view diff on a ×4 CPU; P1/P2 (petDo, snap soft → the host's stage repaint) are the 2.2–2.4 s tail. Not a FAIL (FOR MAIN line).
+5. LOOK (scratch only, nothing uploaded, deleted): guest iPad 1180x820@2 — her care screen redrawn with «Vừa rồi: Để trời định…» (kit frame; the test's rank edict sits on top = staging), her work card «Hà bao thêu hoa mai · Tinh xảo» (T1); host Fold 755x1000@2 — only his own screens (his own entry scene / contest card), nothing of hers.
+
+### LUẬT SỬA CẢ NHÓM — UI capture scan (every F1–F4 run on the host, dynamic: preload wrapping TH.tapRun / non-UICAP NOOPs / screenOff gates / DOM writes, over f2 L9 + f3 L9 + f4 L9 + swaps)
+| run | captured → played (all in UICAP) | dropped non-UICAP NOOP | host DOM writes in her ctx |
+|---|---|---|---|
+| F4 petcMaid / petcQuick / shelfPlantQuick | petcDraw / shelfPlantDraw (max 1) | none | none |
+| F4 petDo / rcpRead / rcpAskGo / tdsRun / kitShopBuy pet | kitStatFx, feedback (max 2) | render / resultShow / save (by design: cardLater + her render) | none |
+| F3 sellItem / giveTo / tsGiftPieceGo | kitStatFx, feedback | **kitSfx** (her sound) → already fixed by F3 r1 (7fd3c08a, merged here) | none |
+| F2 goTo / visitPal / accEtqGo / accSneak / talk | feedback, kitStatFx | render | **renderStage / k3Stage / j59 / kaNorm1 / kpActArt** write the HOST's stage + act cards (designed for walks: D.after host render) — **talk** has host:null (no host repaint) → FOR B / F2 reviewer: his act cards may show her talk state until his next render; plus krvTick (name-reveal flip of kidMeet/k61Meet) gated off in her run and not captured |
+Before/after (captured names missing from UICAP): before the worker's merge fix 4 (petcDraw, petcClose, shelfPlantDraw, petcGrowShow) → after 0; F3 kitSfx 1 → 0 (F3 r1). Risk noted: the host answer keeps only `ui.slice(0,4)` (jcoopthinf onDo "f") while tapRun keeps 12; F1–F4 runs reach at most 3 today, a grow (kitStatFx + kitSfx + petcGrowShow + petcClose) reaches 4 — FOR B if a 5th effect is ever added.
+
+### Gates (this branch, live Worker)
+| gate | result |
+|---|---|
+| coop-thin-f4 L9 / swap / 4G / L8 | 20/20 · 19/19 (final d913db71) · 17/17 · 17/17 |
+| coop-thin-f3 L9 / swap · f2 L9 / swap · f1 L9 / swap | 37/37 / 37/37 · 25/25 / 25/25 · 22/22 / 22/22 alone (21/23 under 2 parallel suites: one log-only red, a different kind each run = the known class in reports/coop-thin-f2.md) |
+| coop-thin quiet scan | 41 quiet reads, 32 reachable; every registered run goes through TH.tapRun (quiet off) |
+| coop-cyc THIN=9 / CYC_SWAP | 72/73 / 72/73 — the red = the mixed part (old.html = origin/main): **main itself fails it too** (main + THIN=9: 69/73, mixed red) → test expectation stale since main went thin, not F4 |
+| coop-e2e / swap · p2 · night · timer | 68/68 / 68/68 · 45/45 · 105/105 · 43/43 |
+| coop-b1 | 35/41; main 36/43 (same flake class: laydo / musk / takeaway / plant rows) |
+| coop-one-world seeds 1–10 · one-core guard / text / text-rule / bind | 10 × PASS · PASS ×4 |
+| quickcheck d913db71 | PASS (old save ok; render 202/224, tab 404/419, buổi 1219/1033 ms new/live; core gates PASS) |
+FOR MAIN: 4G co-op tap → answer 1.07 s median (2.4 s worst on petDo) — network legs + host CPU; owner call already open (FOREMAN_B_STATUS).
