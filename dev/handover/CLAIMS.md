@@ -216,7 +216,7 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | odds-meter-back r2 SMALL REVIEW (sonnet) | review/odds-meter-back 42bda6a9 | MAIN ROOT-63 | session_01Rc5AsJ4JEEMogtiNCfMZ6x | LIVE f43a2ba6 | 19/11 03:43Z |
 | errand-scene r6 head markers + real video (opus; successor of L23c5v2N) | review/errand-scene | MAIN ROOT-63 | session_01Rc5AsJBScJTqmWZxTCvmtQ | READY c4c25bbd | 19/11 05:00Z |
 rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach | worker see FOREMAN_D_STATUS 03:50Z line (opus) | RUNNING | 19/11 03:50Z | owner D #5
-| REVIEW law3-cost-only r1 (sonnet SMALL) of ae218b59 | review/law3-cost-only-r1 | B | session_01N1tNP6f1q3NHgpGP4qDDsQ | LAND READY 4ed2831d (on 5dc5d9e0) | 19/11 03:55Z |
+| REVIEW law3-cost-only r1 (sonnet SMALL) of ae218b59 | review/law3-cost-only-r1 | B | session_01N1tNP6f1q3NHgpGP4qDDsQ | LAND READY 62055a31 (on 950508fc) | 19/11 03:55Z |
 | bd-roads BIG review (opus E14r; 23278b63) | review/bd-roads | E ROOT #8 | session_01DgYSWnZE2bT1FR9J6cjqDy | RUNNING | 19/11 04:06Z |
 | CTM odds-no-unknown (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/odds-no-unknown; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsN4DdpqemYGteNSCE6 | DONE — LIVE 4217568a (archived 19/11 06:05Z) | 19/11 05:35Z |
 | CTM hall-names (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/hall-names c294e1d; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsJqjDM27hysYd7E48b | DONE — LIVE 2c5dd554 (archived 19/11 05:55Z) | 19/11 05:20Z |
@@ -262,3 +262,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | opt-scroll-reset (opus; MAIN ROOT-65 follow-up via C-AG #22: 22 option frames re-render loop resets scroll, root cause + whole group) | review/opt-scroll-reset; briefs/cag22-opt-scroll-reset.md | C-AG #22 for ROOT-65 | session_01Rc5AsJ7aS6giCFsrSaRM6d | RUNNING | 19/11 07:40Z |
 | caoly-road BIG review (sonnet E20r; 30d7cca8) | review/caoly-road; briefs/E20r-review-caoly-road.md | FOREMAN E | session_01DgYSWq4WTWY2p7LTCaMp3M | RUNNING | 19/11 07:45Z |
 | REVIEW coop-thin-f4 r1 (opus BIG) of ac66808f | review/coop-thin-f4-r1 | B | session_01N1tNP32iT6Kmupog2YrxpC | RUNNING | 19/11 07:47Z |
+| coop-thin F5 (opus; mini-game score ends as intents; stacked on F4) | review/coop-thin-f5 | B | session_01N1tNP3xrJgrfek8aioQFv2 | RUNNING | 19/11 07:48Z |
