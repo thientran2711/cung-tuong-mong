@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""triều phục r20 t1-t6 (ROOT-48 full-size look, relayed by ROOT-47): build r20/t1..t6_c06_RAN.txt from r19/tN_c06_RAN.txt.
+"""triều phục r20 (FINAL order = owner verdict on r19 via ROOT-48: redo t1, t4, t5, t6 only; t2/t3/t7/t8 kept).
+r20a (superseded, a_superseded/): t1-t6 (ROOT-48 full-size look, relayed by ROOT-47): build r20/t1..t6_c06_RAN.txt from r19/tN_c06_RAN.txt.
 ADD/REPLACE only: (a) all: hà bí tips join + bí trụy AT THE ANKLES (just above the slippers, level with the robe hem);
 (b) t4-t6: ONE added sentence after the builder ankle SLEEVES sentence (builder sentence kept verbatim, Lượt 351/443);
 (c) t6: pendant phoenix -> white-jade lotus in gold (no phoenix; phoenix only for Hoàng hậu); under-skirt in the robe colour, no yellow."""
@@ -38,10 +39,38 @@ def build(n):
         t = rep(t, OLD_P6, NEW_P6)
     return t
 
+# --- owner verdict on r19 (ROOT-48 → ROOT-47): ---
+TASSEL = ("with no loose tassels at the band ends", "with no loose tassels at the band ends; only a small, soft silk tassel "
+          "(tua rua) hangs from the tail of the bí trụy itself, soft and pretty")
+LAYER = (" LAYERING: the stiff cầu vai shoulder pieces lie ON TOP of the hà bí where the bands cross the shoulders, covering "
+         "the bands there; the hà bí never lies over the cầu vai.")
+T1W = ("NARROW bands with a plain, simple edge", "bands of medium width, as wide as the rank-2 and rank-3 bands (never narrow), "
+       "with a plain, simple edge")
+EMB5 = (" EMBROIDERY (Phi, rank 5): MUCH more embroidery than the lower ranks: rich gold-thread and silk embroidery of "
+        "butterflies and flowers covers the WHOLE of both sleeves from shoulder to sleeve hem and much of the robe, never "
+        "a small patch; the brocade pattern and the embroidery spread over the full sleeve.")
+EMB6 = (" EMBROIDERY (Quý phi, rank 6): a little more gold-thread embroidery over the sleeves and robe than the Phi, "
+        "covering the whole sleeve.")
+REDO = (1, 4, 5, 6)
+
+
+def build_final(n):
+    t = build(n)
+    if n == 6:
+        t = rep(t, SKIRT6, '')  # owner: a little yellow is OK (drop the r20a no-yellow skirt sentence)
+    t = rep(t, *TASSEL)
+    hb_end = TASSEL[1] + '.'
+    t = rep(t, hb_end, hb_end + LAYER)
+    if n == 1:
+        t = rep(t, *T1W)
+    if n in (5, 6):
+        t = rep(t, hb_end + LAYER, hb_end + LAYER + (EMB5 if n == 5 else EMB6))
+    return t
+
 
 if __name__ == '__main__':
-    for n in range(1, 7):
+    for n in REDO:
         p = os.path.join(H, 't%d_c06_RAN.txt' % n)
-        s = build(n)
+        s = build_final(n)
         open(p, 'w', encoding='utf-8').write(s)
         print(p, len(s.encode()))
