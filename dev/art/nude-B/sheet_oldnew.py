@@ -3,18 +3,19 @@
 import sys,os
 from PIL import Image,ImageDraw,ImageFont
 D,OUT=sys.argv[1],sys.argv[2]
-R2=len(sys.argv)>3 and sys.argv[3] in("r2","r3"); R3=len(sys.argv)>3 and sys.argv[3]=="r3"; SAME=set()
+R2=len(sys.argv)>3 and sys.argv[3] in("r2","r3"); R3=len(sys.argv)>3 and sys.argv[3]=="r3"; R4=len(sys.argv)>3 and sys.argv[3]=="r4"; R2=R2 or R4; SAME=set()
 AGES=["a18","a26","a36","a51","a65"]
 ITEMS=["white-jade flute","dragon silk parasol","jade calligraphy brush","jade tiger tally","gold dragon hand warmer"]
 OLD=["xSBcFrNjfW","Lw8T5OwswO","BhNSM53oQR","bxMAuPm5Y2","KLpnLBAkqp"]
 NEW=["If3JHx0tvE","N2qvcZA6D9","YMl58coWeC","eIPlua7dqL","s7IM3ycl8e"]
 if R2: OLD,NEW=NEW,["eIPlrOzdqL","EbYi4eAuuO","gOmpVvOSXO","4RFmIQW9Aa","cpSkKkH0eP"]
-if R3: OLD,NEW=NEW,NEW[:3]+["fHzNi9jCDY","jUoTDPcLD0"]; SAME={0,1,2}
+if R4: OLD,NEW=["eIPlrOzdqL","EbYi4eAuuO","gOmpVvOSXO","fHzNi9jCDY","jUoTDPcLD0"],["Lw8VXB8swO","cpSkl1a0eP","xSB0XPJjfW","s7IMfxEl8e","Xm9S2dYBfo"]; NEWITEM4="green jade dragon hand warmer"
+elif R3: OLD,NEW=NEW,NEW[:3]+["fHzNi9jCDY","jUoTDPcLD0"]; SAME={0,1,2}
 FH=820; CW=470; TAG=96; HEAD=60; ROWH=FH+TAG+40; BG=(236,230,220)
 F=lambda s,b=False: ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans%s.ttf"%("-Bold" if b else ""),s)
 W=CW*5+40; H=HEAD+2*ROWH
 sh=Image.new("RGB",(W,H),BG); d=ImageDraw.Draw(sh)
-TITLE=("Lượt 694 · Nữ đế m05 — TOP = OLD (NDX4 round 2) · BOTTOM = NEW: a51/a65 with D15 STYLE LOCK + her a36 picture as reference (a18–a36 unchanged)" if R3 else None) or ("Lượt 692 · Nữ đế m05 — TOP = OLD (NDX4 round 1) · BOTTOM = NEW (+ HH: no-flowers, HEAD AND BODY, ANGLE, HELD ITEM COLOUR; FABRIC moved)" if R2 else None)
+TITLE=("Lượt 701+702 · Nữ đế m05 — TOP = OLD (NDX4 r3) · BOTTOM = NEW: HH crown (differs per age), a51/a65 bright a36 colours + style lock" if R4 else None) or ("Lượt 694 · Nữ đế m05 — TOP = OLD (NDX4 round 2) · BOTTOM = NEW: a51/a65 with D15 STYLE LOCK + her a36 picture as reference (a18–a36 unchanged)" if R3 else None) or ("Lượt 692 · Nữ đế m05 — TOP = OLD (NDX4 round 1) · BOTTOM = NEW (+ HH: no-flowers, HEAD AND BODY, ANGLE, HELD ITEM COLOUR; FABRIC moved)" if R2 else None)
 d.text((20,14),TITLE or "Lượt 683 · Nữ đế m05 — TOP = OLD (NDX3) · BOTTOM = NEW (NDX4: Hoàng hậu sleeve sentences copied: sleeves to the floor, one single layer)",fill=(60,30,20),font=F(26))
 for r,(ids,lab) in enumerate(((OLD,"OLD"),(NEW,"NEW"))):
     y0=HEAD+r*ROWH
@@ -25,7 +26,7 @@ for r,(ids,lab) in enumerate(((OLD,"OLD"),(NEW,"NEW"))):
         if im.width>CW-10: s=(CW-10)/im.width; im=im.resize((CW-10,int(im.height*s)),Image.LANCZOS)
         x=20+i*CW+(CW-im.width)//2; sh.paste(im,(x,y0+40+FH-im.height),im)
         cx=20+i*CW+CW//2; ty=y0+40+FH+6
-        for k,(t,f,c) in enumerate(((AGES[i]+" · "+("same (r2)" if (lab=="NEW" and i in SAME) else lab),F(30,True),(80,20,20)),(ITEMS[i],F(22),(60,40,30)),("m05 Nữ đế · "+cid,F(20),(90,70,60)))):
+        for k,(t,f,c) in enumerate(((AGES[i]+" · "+("same (r2)" if (lab=="NEW" and i in SAME) else lab),F(30,True),(80,20,20)),((NEWITEM4 if (lab=="NEW" and i==4 and "NEWITEM4" in globals()) else ITEMS[i]),F(22),(60,40,30)),("m05 Nữ đế · "+cid,F(20),(90,70,60)))):
             w=d.textlength(t,font=f); d.text((cx-w/2,ty+[0,36,64][k]),t,fill=c,font=f)
 q=92
 while True:
