@@ -46,3 +46,19 @@ Singles: https://ctm-img.victoria-tntt.workers.dev/img/_review/ev-pic-fig/{befor
 ## FOR MAIN
 1. EVENTS.json (the ONE event→picture table, CDN; not pushed by me — a manifest push is live at once): add to `events`: `"thInv":"hao-huu"` (co-op friend befriends / gifts → two friends at the moon gate), `"thBribe":"hoi-lo"` (bribe → silver pouch), `"giftto":"qua-tang"` (gift chest → gift box). `cdn_sync --pull img/EVENTS.json`, add 3 keys, push the named file. Then ev-pic-coverage shows 0 placeholder.
 2. Seen, NOT in scope (pre-existing, owner OD 18/11 ~07:25Z (1) "info fixed, only buttons scroll"): on iPad the XL option frame scrolls the WHOLE #mb (picture + text + options together; R.maxHeight = max(L, k3body.clientHeight) feeds on itself → 883 px), the last card is clipped at the frame edge with no «Kéo xuống». Fold scrolls only the info column. Suggest one kit job.
+
+## r1 addendum (MAIN ROOT-63/64 messages 04:37Z–04:55Z) · review/ev-pic-fig 739bfdf3
+- Merged LIVE main 7fb7c104 (contains fd6118cd art-wiring-1119) → eb54037f; generated files rebuilt. Quickcheck vs live **PASS** (189 s, old save ok, core gates PASS).
+- Owner scope OD 19/11 ~04:55Z: ev-pic-coverage now REQUIRES the picture only in M / L / XL frames; S / narrow frames are listed apart (never a figure added to S). Merged build: M/L/XL frames 262, picture shown 262, NOT shown 0; S frames opened by the PEND pass 0 (the Q-kinds news / S choice keep their left picture, see table).
+- Size table (kitFramePick3 / kszLivePick3 data-ksz; expected = KIT_SIZE.fig[KIT_SIZE.lay[size].fig].h on main = fig3 M 284 · L 351 · XL 393 (KIT 56.12/56.8; the "XL 480" in KIT §v3 (2)/(9b) is the older table, overwritten by 56.12); measured = skull→feet px; band = .k3ev / S left picture):
+| frame | dev | size | expected body | measured before | measured after | band before | band after |
+|---|---|---|---|---|---|---|---|
+| night1 | Fold | XL | 393 | 393 | 606 (56.17 fill) | NO (hidden) | yes 85 px strip |
+| night1 | iPad | XL | 393 | 393 | 409 | 56 px NS | yes 140 px NL |
+| vlget | Fold | XL | 393 | 393 | 589 | NO | yes 85 px strip |
+| vlget | iPad | XL | 393 | 393 | 393 | 56 px NS | yes 140 px NL |
+| tt3 | Fold / iPad | XL | 393 | 393 | 393 | 85 / 168 px | same |
+| info-long | Fold / iPad | XL | 393 | 393 | 393 | 85 / 140 px | same |
+| notice | both | M | 284 | 284 | 284 | 82 px | same |
+| choice-2 / news | both | S | (no figure: picture left) | – | – | left 67 / 160 px | same |
+  So the night path DID pick XL and the class body; the faults were (1) the band hidden by kszEvLaw10 step 2 and (2) the frame growing with content while the body stayed the class value — both fixed in the kit for every frame kind.
