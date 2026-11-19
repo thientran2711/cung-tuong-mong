@@ -82,3 +82,37 @@ Targets: HH 40 % vs 39 % (target ≥ live − 3: ✓). Deaths 2.63 vs 2.29 and e
 - 00:17Z: a container restart killed the confirmation arms. They were restarted on shards 21, 23, 24 and 25; the partial lives of shards 20 and 22 are kept. Interim at 59 vs 48 lives (01:50Z): HH 46 vs 50 %, ended < 3 y 8 vs 4 %, Phi 95 vs 92 %, QP 88 vs 79 %, Danh m24 99 vs 97. This matches the final arms.
 - 01:00Z–01:55Z: merged live main bb8e8ec9 → **02171abd** (jnroadhp added to the assemble list), then 96188526 (jstagehere and jnotice added, 355 modules; jbal line 1 keeps main's noticeMax and entryToastMs note and the branch's outQ 30). Static guards are running.
 - STATE / ETA (01:55Z): confirmation arms end ≈ 02:45Z, then browser gates on the final sha, then SẴN SÀNG KIỂM ≈ 03:45Z.
+
+### PRIORITY #1 CHECK: main never pushed, no PR, no owner contact, shots only in scratch.
+### STATE 19/11 ~03:45Z — review/balance-final = **0281bbf7** (pushed). NOT YET SẴN SÀNG KIỂM: night-final / night-multi still flaky (see below)
+Merges since 16b3c8c8: 53544bd8, 1130a49e, 9a1d6922 (j42 srvRise = main's riseCore + branch's BAL.danhG.srvRise Danh carry-over applied before it), bb8e8ec9, 96188526 (jbal line 1: main's noticeMax/entryToastMs note + the branch's outQ 30), 1cf5e8bb (current live main). assemble.py = 356 modules, no duplicates.
+Test-only commits: ffc07bd1 (balance-core Tai mắt under window.__tmOff because jagknow's mat getter drops a plain set; night-final: every rival marked met so no jtsb card; non-night Q cleared before case 7; case 8 runs with BAL.ag.day.on and custom nights off, because AG switches visRoll off), 0281bbf7 (rules-one-source: the no-son need reads BAL.hhThNoSon / hhThNoSonHieu instead of the old tn + 30; quickcheck's core gate G2 failed before this).
+
+Confirmation arms (778537e7 vs live 9a1d6922, seeds 1020–1025, 62/61 lives): HH 44 vs 44 %, ended < 3 y 8 vs 10 %, ended before HH/cap 16 vs 25 %, Phi 95 vs 89 %, QP 89 vs 75 %, deaths 1.88 vs 2.38 /100 y, kids/y 0.083 vs 0.107, Danh m24 98 vs 97. Pooled with the final arms: QP 87 vs 80 % (−7) and ended before HH/cap 19 vs 25 %. Both are FLAGGED for the reviewer; HH, deaths and Danh hold.
+
+Gates on 0281bbf7 (run one at a time on an idle box; under 4-browser load the night tests flake much more):
+| gate | result |
+|---|---|
+| one-core-guard / bind / text / text-rule, time-spill | PASS |
+| quickcheck --runs 5 (old save, perf vs live, core gates) | PASS (render 241/222 ms, tab 447/474, buổi 1043/1506, tasks > 200 ms 20/22) |
+| balance-core | PASS |
+| ledger | ALL PASS |
+| night-steal-unit | PASS |
+| night-coop-park | ALL OK 6/6 |
+| coop-night | 105/105 |
+| coop-e2e | 63/63 branch, 63/63 live 1cf5e8bb |
+| Fold 755x1000@2, iPad 1180x820@2 shots | origin screen renders, 0 page errors (scratch only) |
+| night-multi | 6/7 pass over the last runs; failures: case 6 (the defender saw the attacker's cards) and case 5 (kept → keepNoSteal, kg null) |
+| **night-final ×5** | **1/5 PASS**; fails: case 8 ×2, cases 1+7, one crash in case 9 (`findIndex` of undefined, night-final.js:83). Pre-merge 16b3c8c8 was 0/3 (case 8 every run). Across ~20 idle runs the failing case varies (1, 2, 4, 7, 8, 9). Common symptom: the flip choice (Q pid nfch) never reaches her, or arrives late, so opts is "" or choice is false. |
+
+### HANDOVER (worker rollover at ~27 % context; the coordinator opens the successor)
+Successor steps:
+1. Fix the night-final / night-multi flakes on review/balance-final (branch-only tests: dev/test/night-final.js, night-multi.js). Hypotheses tried:
+   - AG day off for all cases: does NOT fix it.
+   - Custom-off + clearing ill/confined in T.fresh: made it WORSE (3/8, new case-8 visQ0 failures), so it was reverted.
+   - What helped: no jtsb card, clearing the Q before case 7, case-8 AG/custom off.
+   Next suspects: the ledger night choice (jledger) or the AG emperor plan picking the night outside nightCh steering (T.only steers nightCh only), and the sum/visit queue order when AG is on. Run one at a time on an idle box: `node dev/test/night-final.js file://<abs index.html>`.
+2. Final-merge current origin/main (it moves every ~30 min; usually only the assemble list + generated files conflict: take main's list + the branch-only jbalcore/jledger/jnf, then `git checkout --theirs index.html sw.js assets.json` and rebuild).
+3. Re-run the gates (table above) on the final sha, then write SẴN SÀNG KIỂM <sha> + `git diff --stat origin/main...HEAD -- dev/build` (57 files, +967/−220 at 0281bbf7), the FOREMAN_D_STATUS line, and send_message to Foreman D.
+OWNER FLAGS for the final report: kids/y ≈ 1.45× live (0.108 vs 0.074; her births 1.5×, so birth deaths 8 vs 4); seat vacancy blocks promotions (BAL.seat unchanged per brief); QP −7 pooled; NPC Sủng lower on the branch (m12 38 vs 46).
+Worktrees on this box (lost on a new session): /home/user/wt/mg2 = 0281bbf7, /home/user/wt/live2 = 1cf5e8bb, arms data in /home/user/wt/arms (rL/rB final, cL/cB confirmation).
