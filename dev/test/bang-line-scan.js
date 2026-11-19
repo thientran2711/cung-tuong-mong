@@ -7,9 +7,8 @@
    Checks per stage × kind × sex:
      me / hap: badge BOTTOM − that sex's line (kitMarkLine(st,sex).bottom) ≤ 2 px; bottom spread ≤ 2 (level); column offset equal ± 2; bottom ≤ the figure's head top (never over a face);
                and «ta ở đây» level with the women's «!» (same line).
-     emo: centre on that sex's head spot (floor − KIT_FIGSEAL.dy × Hs) ± 2; top spread ≤ 2 (level); |column offset| equal ± 2; the chip never overlaps the FACE box
-          (head top .. + .13 body, centre line ± .05 body); "at the head": chip centre within the figure's head band (head top − .06 .. + .16 body); two mood chips never overlap.
-     every badge inside the stage. Men's marks must sit higher than women's (line m < line f).
+     emo (r6, owner OD 19/11 ~03:50Z): bottom ON that sex's line ± 2 (beside «ta ở đây» / the bubble), bottom spread ≤ 2 (level), |column offset| equal ± 2, bottom ≤ head top; two mood chips never overlap.
+     every badge inside the stage. Real-head gaps, alpha under marks and every mark–mark overlap: dev/test/head-marker-gap.js.
    Each stage gets ≥ 3 figures (her + up to 2 rivals + Hoàng thượng added to the visit when fewer are there) so men and crowded rows are covered.
    BEFORE mode (a build without the sex lines): the same table from the real elements only (spreads per sex group, face overlap).
    usage: node dev/test/bang-line-scan.js <baseURL> [W H] [jsonOut]  → markdown table + PASS/FAIL line, exit 1 on FAIL. Env PLACES=k1,k2 limits the stages; SHOTS=dir [TAG, DPR] = one shot per stage; CAST=qn = only Hoàng thượng + a Quý nhân; HH=1 = the player is the crowned Hoàng hậu (consort c09, tier 8: the tallest phoenix crown).
@@ -70,12 +69,9 @@ function table(ALL,errs){let bad=0;const lines=[];const P2=v=>v==null||!isFinite
   const fb={};
   for(const kind of ['me','hap','emo'])for(const sx of ['f','m']){const L=R.figs.filter(f=>f.b[kind]&&(f.man?'m':'f')===sx).map(f=>Object.assign({nm:f.nm,man:f.man,headTop:f.headTop,cx:f.cx,body:f.body||(R.line?R.line.H*(f.man?1.07:1):100)},f.b[kind]));if(!L.length)continue;
    const ln=R.lines&&R.lines[sx];let dl=null,lev,osp,gapv,band='–',bandOk=true;
-   if(kind==='emo'){const cy=L.map(x=>(x.top+x.bottom)/2);lev=Math.max(...L.map(x=>x.top))-Math.min(...L.map(x=>x.top));const ao=L.map(x=>Math.abs(x.off));osp=Math.max(...ao)-Math.min(...ao);
-     if(ln&&R.dy)dl=Math.max(...cy.map(c=>Math.abs(c-(ln.floor-R.dy*ln.Hs))));
-     /* face box: head top .. + .13 body, centre ± .05 body */
-     const ov=L.map(x=>{const fx0=x.cx-.05*x.body,fx1=x.cx+.05*x.body,fy0=x.headTop,fy1=x.headTop+.13*x.body;const w=Math.max(0,Math.min(fx1,x.right)-Math.max(fx0,x.left)),h=Math.max(0,Math.min(fy1,x.bottom)-Math.max(fy0,x.top));return w*h});
-     gapv=Math.max(...ov);const bd=L.map((x,i)=>(cy[i]-x.headTop)/x.body);band=`${Math.min(...bd).toFixed(2)}…${Math.max(...bd).toFixed(2)}`;bandOk=bd.every(v=>v>=-.06&&v<=.16);
-     L.forEach((x,i)=>{x.bad=ov[i]>0||bd[i]<-.06||bd[i]>.16})}
+   if(kind==='emo'){/* r6 (owner OD 19/11 ~03:50Z): the seal stands ON the sex line beside the primary mark (bottom = line); head gap / alpha / overlaps = dev/test/head-marker-gap.js */
+     lev=Math.max(...L.map(x=>x.bottom))-Math.min(...L.map(x=>x.bottom));const ao=L.map(x=>Math.abs(x.off));osp=Math.max(...ao)-Math.min(...ao);if(ln)dl=Math.max(...L.map(x=>Math.abs(x.bottom-ln.bottom)));
+     const g=L.map(x=>x.headTop-x.bottom);gapv=0;bandOk=g.every(v=>v>=0);band=`${Math.min(...g).toFixed(1)} px over the head`;L.forEach((x,i)=>{x.bad=g[i]<0})}
    else{lev=Math.max(...L.map(x=>x.bottom))-Math.min(...L.map(x=>x.bottom));const of=L.map(x=>x.off);osp=Math.max(...of)-Math.min(...of);if(ln)dl=Math.max(...L.map(x=>Math.abs(x.bottom-ln.bottom)));
      const g=L.map(x=>x.headTop-x.bottom);gapv=Math.min(...g);L.forEach((x,i)=>{x.bad=g[i]<0});if(kind!=='emo'&&sx==='f')fb[kind]=L.map(x=>x.bottom)}
    const ins=L.every(x=>x.inStage);const okFace=kind==='emo'?gapv<=0:gapv>=0;
@@ -87,7 +83,7 @@ function table(ALL,errs){let bad=0;const lines=[];const P2=v=>v==null||!isFinite
   {const C=R.figs.filter(f=>f.b.emo).map(f=>f.b.emo);for(let i=0;i<C.length;i++)for(let j=i+1;j<C.length;j++){const a=C[i],c=C[j];if(a.left<c.right-1&&c.left<a.right-1&&a.top<c.bottom-1&&c.top<a.bottom-1){bad++;fails.push({k:R.k,kind:'emo overlap'})}}}
   /* «ta ở đây» level with the women's «!» */
   if(fb.me&&fb.hap){const d=Math.max(...fb.hap.map(v=>Math.abs(v-fb.me[0])));if(d>2){bad++;fails.push({k:R.k,kind:'me~hap',d})}const S=sum['me~hap']=sum['me~hap']||{n:0,d:0};S.n++;S.d=Math.max(S.d,d)}
-  if(R.lines&&R.lines.f&&R.lines.m&&!(R.lines.m.bottom<R.lines.f.bottom)){bad++;fails.push({k:R.k,kind:'men line not higher'})}}
+  /* r6: lines come from the REAL head tops (a crowned woman can stand taller than the men), so no men-higher rule */}
  lines.push(`\n${bad?'FAIL':'PASS'} · ${ALL.length} stages · ${ALL.reduce((a,r)=>a+(r.figs||[]).length,0)} figures · page errors ${errs.length}`);
  lines.push('SUMMARY '+JSON.stringify(sum));
  if(fails.length)lines.push('FAILS: '+JSON.stringify(fails).slice(0,4000));
