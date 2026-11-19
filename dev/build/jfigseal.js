@@ -39,7 +39,7 @@ function kitFigSeal(fig){try{
  const p=kfsPerson(fig);if(!p)return kfsDrop(fig);const html=emoBadge(p);if(!html)return kfsDrop(fig);
  const host=kfsHost(fig);if(!host)return kfsDrop(fig);
  let el=KFS_SEAL.get(fig);
- if(!el||el.parentNode!==host||el.__h!==html){if(el)el.remove();const t=document.createElement("template");t.innerHTML=html.trim();el=t.content.firstChild;if(!el)return;
+ if(!el||el.parentNode!==host||el.__h!==html){const prev=el&&el.parentNode===host&&el.complete&&el.naturalWidth&&el.style.display!=="none"?el:null;/* mood changed: the OLD still stays on screen until the NEW one is decoded (jemoseal kesWatch removes it), never a blank gap */if(el&&el!==prev)el.remove();if(prev&&prev.__prev){prev.__prev.remove();prev.__prev=null}const t=document.createElement("template");t.innerHTML=html.trim();el=t.content.firstChild;if(!el)return;if(prev){el.__prev=prev;prev.__t=performance.now();prev.classList.add("kfseal-old")}
   el.classList.add("kfseal");el.style.display="none";el.__h=html;el.__fig=fig;host.appendChild(el);KFS_SEAL.set(fig,el)}
  const b=kitFigBody(src,()=>kfsSched());if(!b){el.style.display="none";return}
  const B=kfsBox(fig);if(B.bh<60){el.style.display="none";return}
@@ -74,7 +74,7 @@ function kitFigSeal(fig){try{
  const css=`left:${(L-hr.left+host.scrollLeft).toFixed(1)}px;top:${(T-hr.top+host.scrollTop).toFixed(1)}px;width:${s}px;height:${s}px`;
  if(el.style.cssText!==css){el.style.cssText=css}
  el.dataset.kfsb=body.toFixed(0);el.dataset.kfsa=ax.toFixed(1);el.dataset.kfsf=feet.toFixed(1)}catch(e){console.error("kitFigSeal",e)}}
-function kfsSweep(){document.querySelectorAll("img.kfseal").forEach(s=>{const f=s.__fig;if(!f||!f.isConnected)s.remove()})}
+function kfsSweep(){document.querySelectorAll("img.kfseal").forEach(s=>{const f=s.__fig;if(!f||!f.isConnected||(s.classList.contains("kfseal-old")&&performance.now()-(s.__t||0)>3000))s.remove()})}
 function kfsAll(){kfsSweep();kfsFigs().forEach(kitFigSeal)}
 let kfsT=0,kfsT2=0,kfsQ=0;function kfsSched(){clearTimeout(kfsT);clearTimeout(kfsT2);if(!kfsQ)kfsQ=requestAnimationFrame(()=>{kfsQ=0;kfsAll()});kfsT=setTimeout(()=>{kfsAll();kfsT2=setTimeout(kfsAll,700)},250)}
 window.kitFigSeal=kitFigSeal;window.kitFigSealAll=kfsAll;
@@ -88,4 +88,5 @@ try{new MutationObserver(ms=>{if(ms.every(m=>m.target.closest&&m.target.closest(
 .kfshost{position:relative}
 img.kemo.kfseal{position:absolute!important;z-index:7;display:block;box-sizing:border-box;object-fit:contain;border-radius:50%;pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent;filter:drop-shadow(0 1px 2px #000a);transform:none;margin:0;max-width:none;max-height:none;animation:none}
 img.kemo.kfseal.kemo-an{opacity:.85}
+img.kemo.kfseal.kfseal-old{pointer-events:none;z-index:6}/* the previous still, kept under the new one until it is decoded */
 `;document.head.appendChild(st)})();
