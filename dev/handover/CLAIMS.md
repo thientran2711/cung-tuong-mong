@@ -234,7 +234,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | hist-kyngo (Kỳ ngộ thường ngày step 1, history expert, sonnet E16; MAIN ORDER 03:31Z) | handover reports/hist-kyngo.md | E ROOT #8 | session_01DgYSWo26476tX9sf2PverF | DONE 018d29b8 | 19/11 04:50Z |
 | palace-chatter (PL#6 bubble talk, opus lead E17; MAIN ORDER 04:06Z) | review/palace-chatter | E ROOT #8 | session_01DgYSWoCjG7erCEJGy1Y514 | RUNNING | 19/11 04:50Z |
 | ge-writers-w3 BIG review (opus E11r-w3; cb72b507) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWn2u8M4jdAipxwpiJf | DONE FAIL cb72b507 (reports/ge-writers-w3-review.md: 3 fixes, law 6 b/c) | 19/11 |
-| kyngo-daily (Kỳ ngộ thường ngày design + build, opus E18) | review/kyngo-daily | E ROOT #8 | session_01DgYSWnqwrFPkcU8D76tS79 | RUNNING | 19/11 04:53Z |
+| kyngo-daily (Kỳ ngộ thường ngày design + build, opus E18) | review/kyngo-daily | E ROOT #8 | session_01DgYSWnqwrFPkcU8D76tS79 | SẴN SÀNG KIỂM 8cb39e38 (archived 11:00Z; review E18r) | 19/11 04:53Z |
 | palace-chatter line banks (sonnet E17b, under E17) | review/palace-chatter-lines | E ROOT #8 | session_01DgYSWnyBgE1MomXSwtCiXz | DONE a171292 | 19/11 04:58Z |
 | seal-lean-2 big slow lean-in + real video (sonnet; OD 05:05Z) | review/seal-lean-2 | ROOT-63 → ROOT-64 | session_01Rc5AsHrbnHixrk74QyLYuV | DONE — LIVE 5400c87b | 19/11 04:58Z |
 | REVIEW role-parity-drift r1 (opus BIG) of 127fe1ea | review/role-parity-drift-r1 | B | session_01N1tNP522pSWxVAQMo8r88Z | DONE — LIVE 950508fc | 19/11 07:00Z |
@@ -280,3 +280,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin F6b #2 (opus; successor of 4XtuMraU at a4d77f3c) | review/coop-thin-f6b | B | session_01N1tNP3uQwFDZBPxqqP6ZN8 | RUNNING | 19/11 10:34Z |
 | MAIN ROOT-69 (opus; child of ROOT-68, depth 7) | handover HANDOVER_SESSION9 | ROOT-68 | session_01Rc5AsMesCGqrqL1dGjCJXv | RUNNING | 19/11 10:48Z | START_CTX ~4 %
 | palace-chatter successor: apply K-HEAD-SAY jchat-say.patch + end-to-end run (opus E17c) | review/palace-chatter; briefs/E17c-palace-chatter-say.md | FOREMAN E #11 | session_01DgYSWnKfwZsB2F92BggLCq | RUNNING | 19/11 10:49Z |
+| kyngo-daily BIG REVIEW (opus E18r) of 8cb39e38 | review/kyngo-daily; briefs/E18r-review-kyngo-daily.md | FOREMAN E #11 | session_01DgYSWnzDSXLeyEPaWuBrQQ | RUNNING | 19/11 11:00Z |
