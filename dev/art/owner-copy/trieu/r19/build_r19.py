@@ -2,7 +2,7 @@
 """triều phục r19 t1-t6 (owner Lượt 437 on r18 final): build r19/t1..t6_c06_RAN.txt.
 Base = r18/tN_c06_RAN.txt (r18 FINAL as drawn). t7/t8 are KEPT (not rebuilt).
 REPLACE only the owner-named items: (1) SLEEVES = builder sentence verbatim (mk_ranks_v3): t1-t3 KNEE, t4-t6 ANKLE;
-(2) t1 fabric: ADD one BROCADE (gấm) sentence; (3) hà bí: own style per rank;
+(2) fabric: ADD one identical BROCADE (gấm) sentence to t1-t6 (Lượt 437 t1, Lượt 444 all ranks); (3) hà bí: own style per rank;
 (4) bí trụy: own pendant per rank, rising in luxury. Everything else byte-identical to r18."""
 import os, sys
 H = os.path.dirname(os.path.abspath(__file__))
@@ -37,9 +37,8 @@ ANKLE = ("SLEEVES: the wide sleeves of the outer robe are very long and hang all
          "sleeve layer, flowing softly, never stiff.")
 OLD_ANK = ("SLEEVES: the wide sleeves of the outer robe are very long and hang all the way down to her ANKLES, one single "
            "sleeve layer, flowing softly, never stiff.")
-BROCADE = ("FABRIC OF THIS COURT ROBE: the robe and sleeves are rich silk BROCADE (gấm), woven with a tone-on-tone pattern "
-           "visible in the cloth, with the same body, fullness and sheen as the higher ranks' court robes, never thin, limp, "
-           "flimsy or sheer.")
+BROCADE = ("FABRIC OF THIS COURT ROBE: the robe and sleeves are rich silk BROCADE (gấm) with a woven pattern, flowing as "
+           "brocade flows, the same brocade on every rank, never thin, limp or flimsy.")  # owner Lượt 444: ONE identical sentence in t1-t6 (rule for t7/t8 too)
 
 
 def build(n):
@@ -47,12 +46,10 @@ def build(n):
     # t1-t3 = B.OLD_SLV (knees, Lượt 321 wide thướt tha), t4-t6 = OLD_ANK (ankles). No own sleeve wording (KNEE/ANKLE unused).
     t = open(os.path.join(R18, 't%d_c06_RAN.txt' % n), encoding='utf-8').read()
     t = B.rep(t, B.HABI.format(deep=B.DEEP[n]), HABI.format(deep=B.DEEP[n], style=STYLE[n], pend=PEND[n]))
-    if n == 1:
-        t = B.rep(t, B.OLD_SLV, BROCADE + ' ' + B.OLD_SLV)
-    elif n <= 3:
-        t = B.rep(t, B.NEW_SLV, B.OLD_SLV)
+    if n <= 3:
+        t = B.rep(t, B.OLD_SLV if n == 1 else B.NEW_SLV, BROCADE + ' ' + B.OLD_SLV)
     else:
-        assert t.count(OLD_ANK) == 1
+        t = B.rep(t, OLD_ANK, BROCADE + ' ' + OLD_ANK)
     return t
 
 if __name__ == '__main__':
