@@ -932,3 +932,14 @@ for k in ('truong-xuan-cung-hqp-ngu-F12-r1', 'canh-phuc-cung-quyphi-ngu-F12-r1')
     out12c[k[:-3] + '-r2'] = dict(prompt=p.replace(OLD12, NEW12), refs=out12b[k]['refs'])
 json.dump(out12c, open(os.path.join(D, 'prompts_v12c.json'), 'w'), ensure_ascii=False, indent=1)
 print('v12c', list(out12c))
+# ---- v12d (ROOT-55 relay 21:43Z, A21): Quý phi frontal: drop image 3 gOmViD0SXO (it held the bed at 31 % W in 3 tries). Only the image-3 words go:
+#      the 'Image 3 is this same room…' sentence, 'than the bed in image 3', and the camera clause 'the same … as image 3 (this same room as drawn before)'.
+p = out12c['canh-phuc-cung-quyphi-ngu-F12-r2']['prompt']
+for a, b in ((" Image 3 is this same room as drawn before (there with three walls and rose red silks): keep its furniture and its arrangement around the centred bed with the two moon gates, but now with two walls and the rank colour written here.", ""),
+             (" The bed is clearly bigger and wider than the bed in image 3: its front", " Its front"),
+             ("eye level of a standing woman, the same camera distance, eye level and natural people scale as image 3 (this same room as drawn before);", "eye level of a standing woman, natural people scale;")):
+    assert p.count(a) == 1, a[:50]; p = p.replace(a, b)
+assert 'image 3' not in p
+out12d = {'canh-phuc-cung-quyphi-ngu-F12-r3': dict(prompt=p, refs=['gOmYI7iSXO', 'EbYJzsMuuO'])}
+json.dump(out12d, open(os.path.join(D, 'prompts_v12d.json'), 'w'), ensure_ascii=False, indent=1)
+print('v12d', len(p))
