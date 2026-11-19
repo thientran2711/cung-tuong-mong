@@ -4,6 +4,8 @@
   python3 make_season_old_new.py tone  <before.json>   -> season_tone_old_new.jpg (4 seasons before/after tone change,
                                                           C/L numbers per season, ★ roots: gốc cũ | gốc chỉnh tông)
 After = the current dev/art/face-common/palettes_season.json. Before = an older copy of it (git show <rev>:...).
+  python3 make_season_old_new.py v86   <before.json>   -> v86/changes_old_new.jpg (owner Lượt 763: only the people whose
+                                                          non-root pairs changed to break a duplicate; old | new per season)
 Both <= 900 KB."""
 import json, os, sys, statistics as st
 from PIL import Image, ImageDraw, ImageFont
@@ -110,7 +112,43 @@ def sheet_tone(old, new):
         dr.text((x + 436, y + 6), fit(dr, f"{p['main']} + {p['sec']}", fnt(13), 155), font=fnt(13), fill=SUB)
     save(im, 'season_tone_old_new.jpg')
 
+def sheet_v86(old, new):
+    """one row per changed person; 4 season columns; a changed season shows cũ (top) / mới (bottom), unchanged = one pair"""
+    ids = [k for k in ids_of(new) if k in old and any(not new[k][se].get('root') and
+           (old[k][se]['main'], old[k][se]['main_hex'], old[k][se]['sec'], old[k][se]['sec_hex']) !=
+           (new[k][se]['main'], new[k][se]['main_hex'], new[k][se]['sec'], new[k][se]['sec_hex']) for se in SEASONS)]
+    IDW, CW, RH, PAD, HEAD = 130, 560, 176, 12, 150
+    W = PAD * 2 + IDW + 4 * CW; H = HEAD + len(ids) * RH + 50
+    im = Image.new('RGB', (W, H), BG); dr = ImageDraw.Draw(im)
+    dr.text((PAD + 4, 14), f'Cặp màu đã đổi để không trùng ai (Lượt 763) — {len(ids)} người', font=fnt(46, True), fill=INK)
+    dr.text((PAD + 4, 74), 'Ô có đổi: trên = cũ, dưới = mới · ô không đổi: chỉ một cặp · ★ gốc không bao giờ đổi · trái = màu chính, phải = màu phụ',
+            font=fnt(24), fill=SUB)
+    for c, se in enumerate(SEASONS):
+        dr.text((PAD + IDW + c * CW + 10, HEAD - 40), VN[se], font=fnt(32, True), fill=INK)
+    for r, k in enumerate(ids):
+        y = HEAD + r * RH
+        dr.line([(PAD, y), (W - PAD, y)], fill=(200, 192, 184), width=2)
+        dr.text((PAD + 6, y + 60), k, font=fnt(34, True), fill=INK)
+        for c, se in enumerate(SEASONS):
+            x = PAD + IDW + c * CW; o, n = old[k][se], new[k][se]; root = bool(n.get('root'))
+            ch = (o['main'], o['main_hex'], o['sec'], o['sec_hex']) != (n['main'], n['main_hex'], n['sec'], n['sec_hex'])
+            if root or not ch:
+                pair(dr, x + 10, y + 50, 170, 60, n['main_hex'], n['sec_hex'])
+                dr.text((x + 190, y + 52), fit(dr, ('★ ' if root else '') + n['main'], fnt(22), CW - 200), font=fnt(22), fill=STAR if root else SUB)
+                dr.text((x + 190, y + 82), fit(dr, '+ ' + n['sec'], fnt(22), CW - 200), font=fnt(22), fill=SUB)
+                continue
+            dr.rectangle([x + 4, y + 6, x + CW - 6, y + RH - 6], outline=(46, 120, 160), width=3)
+            for j, (lab, p) in enumerate((('cũ', o), ('mới', n))):
+                yy = y + 14 + j * 80
+                dr.text((x + 12, yy + 20), lab, font=fnt(22, True), fill=SUB if j == 0 else (46, 120, 160))
+                pair(dr, x + 66, yy, 150, 64, p['main_hex'], p['sec_hex'])
+                dr.text((x + 226, yy + 2), fit(dr, p['main'] + ' ' + p['main_hex'], fnt(21), CW - 236), font=fnt(21), fill=INK)
+                dr.text((x + 226, yy + 32), fit(dr, '+ ' + p['sec'] + ' ' + p['sec_hex'], fnt(21), CW - 236), font=fnt(21), fill=INK)
+    global OUT
+    OUT = os.path.join(OUT, 'v86'); os.makedirs(OUT, exist_ok=True)
+    save(im, 'changes_old_new.jpg')
+
 if __name__ == '__main__':
     new = json.load(open(os.path.join(ROOT, 'dev/art/face-common/palettes_season.json')))
     old = json.load(open(sys.argv[2]))
-    dict(xuan=sheet_xuan, ha=sheet_ha, tone=sheet_tone)[sys.argv[1]](old, new)
+    dict(xuan=sheet_xuan, ha=sheet_ha, tone=sheet_tone, v86=sheet_v86)[sys.argv[1]](old, new)
