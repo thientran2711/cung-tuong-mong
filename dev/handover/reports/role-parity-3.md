@@ -50,3 +50,10 @@ C-AG #3 target worlds: harm:pushp 6, harm:tat 4, harm:trip 2, follow 1, mediate 
 
 ## For B4 (review/role-parity-4b)
 Send scan changes to B3 (session of this report). The wider probe (sub-tabs, person pages, item menu) also reads the maid/up columns: check your rows against role-parity-open.json on review/role-parity-3 before you start.
+
+## UPDATE #2 — SẴN SÀNG KIỂM 03e9fe6b (open 111 → 20, OPEN_MAX 20)
+Commits: 972f23ed merge origin/main 9a1d6922 (= role-parity r3 LIVE 40d05b76 + later main) + B4 scan diff · 03e9fe6b rebuilt root site.
+- Merge: C-AG #3's target ladder and its own «staff» world are kept (B3's staff world dropped: staff* / laydo are C-AG's per the 22:53Z note); B3 worlds wares / faction / disfavour kept; snap adds facs / hh / cutPay.
+- B4 (review/role-parity-4b, session_01N1tNP2gQKk2oaABEKk69p3) scan diff applied VERBATIM: KEYLAB maid:scout += «Tự đi dò la cho chủ»; MVAR maid-life worlds (maid phase only, mSnap/mRest); asNeeds for a maid's #real pass; the NPC promotion probe moved to the maid page right after her srvRise (one world for «up»). Exempt added: «Cúi đầu lui tránh» (maid, B4's proposal).
+- Open list = exactly the 20 gaps the scan still sees (all other rows of main's 111 are closed on this branch — B4 need not trim): Cầm cố t4–t7+hh 5 (REAL, NPC never pawns) · up cx3:def_* 4 + cx3:staffHoi (REAL, risen-NPC household timing) · up cx3:tell, cx:buy (NEW from the one-world up probe, probe world — B4) · up cx:maidR · maid maid:beside / maid:errand (REAL per B4: beside unreachable for her unless her master is Hoàng hậu; errand has no NPC option) · rouge up/hh 3 · cx2:chest hh/up 2 (palace empty only by day-plan draw).
+- Gates on 972f23ed: role-parity.test ALL PASS (≤ 20; promotion exact both; riseCore same numbers; no page errors) · one-core-guard PASS · ag-stf2 23/23. No game code.
