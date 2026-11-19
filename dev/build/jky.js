@@ -170,6 +170,8 @@ function runOpt(c,i){const F=c.F,E=c.E,O=E.o?E.o[i]:E.plain,G=sc(O.g,c.b),C=sc(O
  if(C.seen){if(!roll(seenOd(c))){ap(F,{danh:-KB().seenDanh});out.push(`có người trông thấy, Danh -${KB().seenDanh}`)}}
  const st={};for(const k of ["danh","sung","duc","tamco","th"])if(G[k])st[k]=Math.round(G[k]*(k==="danh"?g:1));if(G.sucR)st.suc=Math.round(KB().sucRest*G.sucR/(KB().V[c.b]||1));
  if(Object.keys(st).length)ap(F,st);
+ {const NM={danh:"Danh",sung:"Sủng",duc:"Đức",tamco:"Tâm cơ",th:"Thái hậu thiện cảm",suc:"Sức"};for(const k in st)out.push(`${NM[k]} +${st[k]}`);if(C.suc)out.push(`Sức -${C.suc}`);if(C.bac)out.push(`Bạc -${C.bac}`)}
+ if(G.rel&&c.W&&c.W.kind!=="th"&&c.W.kind!=="emp")out.push(`${wName(c.W)||"người ấy"} thiện cảm +${Math.round(G.rel*g)}`);
  if(G.rel)relTo(F,c.W,Math.round(G.rel*g));
  const ak=O.a||null;if(G.art&&ak){try{addArtP(F,ak,G.art);out.push(`${ART_N(ak)} tiến bộ ${G.art} phần`)}catch(e){kerr("art",e)}}
  if(O.s)try{const r=SPEC[O.s](c,O);if(r)out.push(r)}catch(e){kerr("spec "+O.s,e)}
