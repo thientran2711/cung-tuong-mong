@@ -869,18 +869,23 @@ TY_COLOUR={1:"ivory",2:"pale sage-green",3:"pale blue",4:"pale powder-pink",5:"p
 TY_HAIR=" HAIR: neat bun with soft strands; ONE small gold hairpin set close against the side of the bun with a short pearl bead tassel hanging down along the hair; the hairpin must lie within the hair outline: NO stick or rod sticking out sideways beyond the hair, no flower."
 COLD_OUTFIT="Outfit (the cold palace, ONE plain outfit identical for everyone): a plain UNDYED pale grey-white coarse linen robe with a simple cross collar and a plain linen sash, NO embroidery, NO pattern, NO colour, NO jewellery, NO gold; hair in a simple neat low bun held by ONE plain wooden hairpin, no flowers, no ornaments; clean, neat and tidy, never ragged, torn, dirty or poor-looking; she is still very beautiful, graceful and dignified."
 COLD_FAB=" The linen robe hangs straight and calm, the sleeves and sash fall naturally with NO swirling and NO flying fabric; all fabrics opaque."
+# TY0 fixes (ROOT-39 order 19/11, 2K sample faults 3-6): face sentence = FIGURE_GATE D.1 "Face = the person's OWN face ... never m09's face" + l.518 "face and hair only — do NOT copy its outfit or sleeves";
+# colour negatives = the approved yellow wording "not pale cream, beige or khaki" / "not beige/tan/ochre" (b10 prompts); a65 one step deeper than a51 (AGE_TXT a65 "clearly older than her 51-year-old self" + "DEEPER, DARKER").
+TYC_FACE=" Her face is HER OWN face from her first reference image (face and hair only — do NOT copy its outfit or sleeves), never a face from the style reference image."
+TYC_HUE=", still clearly {col} at a glance, never khaki, sand, beige or tan"
 def build_ty_cold(c,state):
     n=int(c[1:]); right=(n%2==1); pal,face=DATA[c]
     who="A palace maid" if c[0]=="m" else "An imperial consort"
-    s=PRE+f" {who}."+(f" Her face: {face}." if face else " Her face and facial features exactly as in the identity reference image.")+IDENT+" "+AGE_TXT[AGE]   # AGE_TXT verbatim (rule 0); its generic a51/a65 colour examples are overridden by this state's own COLOUR RULE below (same hue family, no switch)
+    s=PRE+f" {who}."+(f" Her face: {face}." if face else " Her face and facial features exactly as in the identity reference image.")+IDENT+TYC_FACE+" "+AGE_TXT[AGE]   # TY0 fix6: +TYC_FACE. AGE_TXT verbatim (rule 0); its generic a51/a65 colour examples are overridden by this state's own COLOUR RULE below (same hue family, no switch)
     if state=="cold":
         item,hk=age_item(c,"lanh","a plain wooden bowl","two")
-        s+=" "+COLD_OUTFIT+" COLOUR RULE: the linen stays the same undyed pale grey-white at every age, never dyed, never deeper, no other colour anywhere; this replaces the colour examples above."+COLD_FAB
+        s+=" "+COLD_OUTFIT+" COLOUR RULE: the linen stays the same undyed pale grey-white at every age (not beige, tan, khaki or cream), never dyed, never deeper, no other colour anywhere; this replaces the colour examples above."+COLD_FAB
     else:
         N=int(state[2:]); col=TY_COLOUR[N]
         item,hk=age_item(c,"t%d"%N,"an embroidered handkerchief","one")
         s+=f" Outfit (her trung y, the plain inner robe worn alone, no outer garment): a plain {col} silk trung y inner robe (simple crossed collar, tied sash, long skirt, no embroidery, no outer layer), {col}, matte soft silk with gentle folds, no gloss."+TY_HAIR
-        if AGE in ("a51","a65"): s+=f" COLOUR RULE: the whole trung y is a deeper, more muted shade of the same {col}, same hue family (rich and dignified, never bright, never pastel, never black or brown), no other colour anywhere; this replaces the colour examples above."
+        if AGE=="a51": s+=f" COLOUR RULE: the whole trung y is a deeper, more muted shade of the same {col}, same hue family (rich and dignified, never bright, never pastel, never black or brown)"+TYC_HUE.format(col=col)+"; no other colour anywhere; this replaces the colour examples above."
+        elif AGE=="a65": s+=f" COLOUR RULE: the whole trung y is an even deeper, more muted shade of the same {col} than at 51 (DEEPER than her 51-year-old trung y, never lighter or paler), same hue family (rich and dignified, never bright, never pastel, never black or brown)"+TYC_HUE.format(col=col)+"; no other colour anywhere; this replaces the colour examples above."
         else: s+=f" COLOUR RULE: the whole trung y, collar and sash are one plain {col}, as soft and pale as the rank-colour portrait frame; no other colour anywhere."
         s+=" Any flower or pattern on the fabric would be real silk embroidery, never printed or pasted-on."
     return s+_pose(item,hk,right)+CLOSE+END
@@ -1145,6 +1150,7 @@ def spec5pose(o,c,t):
     # N5c (owner 19/11 ~00:50Z, FIGURE_GATE 3d2 "từ đây về sau là không có vẽ góc 3 phần tư nữa"): FRONTAL ONLY. Applied AFTER the pose choice (skip lists above see the verbatim spec5 text, so every person keeps the same pose);
     # only the turn/side words change, the hand/item action stays; every spec5 pose then states the frontal body.
     for _o,_n in SPEC5_FRONTAL: raw=raw.replace(_o,_n)
+    if globals().get("STATE")=="cold": raw=raw.replace("a gold hairpin","her one plain wooden hairpin")   # TY0 fix2: COLD_OUTFIT "ONE plain wooden hairpin ... NO gold"; the pose keeps her wooden pin (same pose choice, no skip)
     pose=raw.format(prop=prop)+", body and face frontal, facing the viewer squarely, no turn"+(", with stately grace" if t>=7 else ", poised" if t>=5 else "")
     # N5b (ROOT-36 order; FIGURE_GATE A0 rule 3 + canon 19/11 (e) "Nữ đế mass pose = CALM at all ages (item below the chin, no flying cloth)"): --state nude only -> one calm sentence for every person and age; every other output byte-identical
     # F4 fix1 (ROOT-39, owner verdict 19/11 ~03:05Z item 5 "bộ trang phục nó lại thuần luộc, đi xuống dưới chân"): the N5b sentence ("standing still and upright ... elbows close to her body ... all hang straight down, still ... no movement") was the ONLY difference from the approved Hoàng hậu prompt B / Nữ đế A outfit+fabric text and made the robe a stiff tube.
