@@ -10,3 +10,10 @@ ROUND 2 (main asked to close the gaps) — branch @ 5d9cdd5d = merged live main 
 - Re-scan after that change: Fold 755x1000 PASS (148 bubbles, 0 dropped, 9 raised); iPad 1180x820 PASS (196, 2 dropped, 8 raised).
 - LOOKED at: servant fold, servant ipadAir, servant iphone14, direct Fold/iPad/1366 stage shots. Shots on CDN img/_review/kit-head-say/ (say-host-{consort,servant}-{fold,ipadAir,ipadPro,pixel-412x1058,iphone14}.png + 3 direct-mode stage shots made BEFORE the plaque no-go change). Delete them with the verdict (cdn_sync.py --wipe-review kit-head-say).
 GAPS (honest): the 2nd bubble is smaller than the 1st on narrow stages (iPad 9.45 px) and absent in the consort home with seal + plaque; on the consort life only the first bubble shows; jchat rewire is dev/test/jchat-say.patch (apply on review/palace-chatter, not run end to end); quickcheck of 5d9cdd5d: see below.
+
+## REVIEW (small kit reviewer)
+PASS 6b1ab390 (origin/main d9b32074 is an ancestor; no merge needed).
+- Found: second bubble shrank to 9.45 design px on narrow iPad stage = under the smallest kit text (.64rem = 10.24; KIT.md 9.92 smallest). Fixed: KIT_HEADMK.sayMinPx 10.5 floor in kitSay (jact.js, jmark.js), KIT.md §78.z updated, rebuilt. Effect: on the 582-wide iPad stage the 2nd bubble now closes (no room) instead of shrinking; Fold keeps 13.5 / 10.8.
+- Laws 9/10/11: one part (§78.z say), in KIT.md + kit sample; no private chip; bubbles avoid #kshR/#kshL, seals, heads (shots LOOKED: servant Fold, servant iPad Air, consort iPad Pro; no clipping, tails on speakers).
+- Tests: head-say.js Fold PASS (148, 0 dropped, 37 raised) · iPad 1180x820 PASS (200, 2 dropped, 8 raised) · COOP=1 Fold PASS · oldsave-r1 16/16. Note: "raised" count on Fold rose 9→37 (smaller floor → more last-resort lifts above another bubble; still never over a head). Wording: bubble text is caller's (jchat patch), none added by the part.
+- Not run: jchat-say.patch end to end (Foreman E applies). CDN shots: none uploaded by me (nothing to wipe beyond worker's img/_review/kit-head-say/).
