@@ -702,6 +702,15 @@ OPEN: THỬ TAY CTM-CAL code (waits owner).
 - 8 children: hall-names wk JqjDM27h + rv JrdYiTbK (PASS aed411f); minister-agents wk Hjti1YnX + rv HdFbiZEL (PASS a2c6ce4e); monthly-allotment wk NLFYkPdJ + rv LJxqXyKq (reviewing 9aceea6); odds-no-unknown wk N4Ddpqem + rv LQg8htXC (reviewing 7a56b2e).
 - STANDBY C-AG ROOT = session_01Rc5AsM9pCcsWwjoC8PjjW7 (depth 0): send "TAKE OVER NOW" when depth-8 C-AG #21 cannot open its successor.
 - (05:27Z) C-AG #21 OPENED = session_01Rc5AsJdyHeEjvDVWQaB6oq (opus, depth 8). C-AG #20 wake trig_01Bcog2zwHfsfg2NJuCmj536 DELETED; ROOT-64 + STANDBY told. C-AG #20 stops.
+## HANDOVER C-AG #21 → C-AG STANDBY (19/11 06:19Z)
+- C-AG #21 ctx 31.5 % of 1M (START ~6 %, roll 31 %) → rolling over. Depth 8 = limit: create_session + create_trigger REFUSED → STANDBY session_01Rc5AsM9pCcsWwjoC8PjjW7 takes over (sent TAKE OVER NOW). FOR MAIN: C-AG lineage restarts at the STANDBY (depth 0); if it does not answer, owner opens a C-AG ROOT from claude.ai.
+- LIVE main 98f9f0f1 (monthly-allotment). MAIN ROOT-64 session_01Rc5AsLZQkh3A3nV1PEQaVf (read newest MAIN id in HANDOVER_SESSION9 before relaying).
+- DONE this shift (all LIVE, worker + rv archived, CLAIMS DONE): hall-names 2c5dd554, odds-no-unknown 4217568a, monthly-allotment 98f9f0f1.
+- RUNNING (adopt; env cung-tuong-mong env_019grJGwi91Hpq39gwwgSaVX): minister-agents worker session_01Rc5AsHjti1YnXbSGeocwni (idle) + BIG rv session_01Rc5AsHdFbiZELj46cV3rq8 (PASS a2c6ce4e on review/minister-agents-r1; ROOT-64 calls it after MAIN's seal-lean-2 lands → rv final-merges then-LIVE → LAND READY; land BEFORE npc-purpose). After LIVE: archive both. Follow-up (non-blocking): j67 arc cards anonymous «Ngự sử» ({ns} token).
+- Optional follow-up (non-blocking, no seat): monthly-allotment.js assert !isSrv() after start() (one flake).
+- npc-purpose D seat G1 #13 01964izCVSXwrPa8QDuYLmCB (D account, files only via FOREMAN_D_STATUS); C-AG coordinates.
+- OPEN: THỬ TAY CTM-CAL (owner code → dev/tools/mgcal_apply.py into BAL.ag.mg2.cal). SEATS running 2 / cap 12; no unclaimed whole job.
+- Lesson: shallow `git fetch origin <branch>` may not update refs/remotes/...; fetch with explicit +refs/heads/X:refs/remotes/origin/X before FF checks.
 ## FOREMAN C-AG #21
 FOREMAN C-AG #21 = session_01Rc5AsJdyHeEjvDVWQaB6oq (child of C-AG #20) · START_CTX ~6 % (est; window 1M; get_session reads 0) → roll over at >= 31 %, ceiling 60 % · depth 8 (limit 8 = last; successor via STANDBY session_01Rc5AsM9pCcsWwjoC8PjjW7 "TAKE OVER NOW") · wake hourly :32 (own trigger) · reports to MAIN ROOT-64 session_01Rc5AsLZQkh3A3nV1PEQaVf.
 - 05:30Z C-AG #21 took over (TAKEOVER_FOREMAN_C_AG21.md). LOAD 8 own children adopted: hall-names wk JqjDM27h + rv JrdYiTbK (PASS aed411f), minister-agents wk Hjti1YnX + rv HdFbiZEL (PASS a2c6ce4e), monthly-allotment wk NLFYkPdJ + rv LJxqXyKq (reviewing 9aceea6), odds-no-unknown wk N4Ddpqem + rv LQg8htXC (reviewing 7a56b2e). npc-purpose D seat G1 #13 (files only). LIVE main 7fb7c104. SEATS running 8 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code).
