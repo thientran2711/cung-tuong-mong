@@ -179,11 +179,11 @@ TH.withSeat=function(seat,fn){
    sounds (sfx / kitSfx / kitResultSfx), stat floaters (kitStatFx / kitStatGlow / kitStatDelta), overlays (kitEdict / kitGloom / kitReward /
    kitResultFx). ONE list (TH.NOOP); coop-thin-b.js checks each name is wrapped. */
 TH.NOOP=["render","showModal","save","kmPush","kmReset","kitLine","sfx","kitSfx","kitResultSfx","kitStatFx","kitStatGlow","kitStatDelta","kitEdict","kitGloom","kitReward","kitResultFx",
- /* F2 (her walks / visits on the host): her arrival must not open his place page (phone shell) or toast on his
+ /* F2 (her walks / visits on the host): her arrival must not toast on his
     phone; a toast her run raises (srvToast / kitLine) is captured (TH.uiCap, set by part F's run) and plays on HER phone with the answer.
     renderStage is NOT here: its wrappers also write her person (name reveals, residence, roster: guest-side writers, F6/G) and F1/E rely on
     them running once in her context; the host's stage is repainted right after her run instead (part F: D.after → render) */
- "srvToast","k3ShowPlace","k3Shell"];TH.NOOPED=[];TH.uiCap=null;
+ "srvToast"];/* k3ShowPlace / k3Shell live inside jk3's IIFE (its own calls never see a window wrapper): they return at once there when COOPW.ctx is set */TH.NOOPED=[];TH.uiCap=null;
 /* resultShow is not a no-op inside her context either (it writes her Sổ ghi line's stat suffix, F1 relies on it); a result card a run in her
    context leaves for LATER (a timer: accEtqGo's +30 ms) carries a snapshot marked with her seat and never shows on the host (below) */
 TH.NOOP.push("resultShow");
