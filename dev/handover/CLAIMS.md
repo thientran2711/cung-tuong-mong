@@ -288,7 +288,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | medallion-size (sonnet; MAIN ROOT-69 order via C-AG #22: speaker face medallion too large over figure/title in event dialogs, kit part, whole group) | review/medallion-size; briefs/cag22-medallion-size.md | C-AG #22 for ROOT-69 | session_01Rc5AsMVX8FxdFVTmmDezsu | DONE (blocked → successor RESCAN row) | 19/11 11:35Z |
 | MAIN ROOT-70 (opus; child of ROOT-69, depth 8 = LIMIT) | handover HANDOVER_SESSION9 | ROOT-69 | session_01Rc5AsKJHPE6qV9k9Ugyhj7 | DONE → MAIN STANDBY 01Rc5AsJ8S2aNYjotfjzaioU | 19/11 11:34Z |
 | FOREMAN C-AG #23 (opus; child of C-AG #22, depth 1) | handover FOREMAN_C_STATUS | C-AG #22 | session_01Rc5AsHuCYUKscp1y5MsPDQ | RUNNING | 19/11 11:40Z |
-| FOREMAN E #12 (opus; child of E #11, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #11 | session_01DgYSWoiPTxVs5xQni4RvZw | RUNNING | 19/11 11:38Z | PICKUP 11:42Z START_CTX ~5 %
+| FOREMAN E #12 (opus; child of E #11, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #11 | session_01DgYSWoiPTxVs5xQni4RvZw | DONE → E #13 | 19/11 11:38Z | PICKUP 11:42Z START_CTX ~5 %
 | kyngo-daily FIX r2 (opus E18b; 9 fixes from E18r) | review/kyngo-daily; briefs/E18b-kyngo-fix-r2.md | FOREMAN E #11 | session_01DgYSWose5CuxgwKoCBMKGm | DONE a2ae3ac2 → PASS → LAND READY cc29a89a FOR MAIN; archived | 19/11 11:37Z |
 | kyngo-daily FIX r2 (opus E18b; 9 review fixes) | review/kyngo-daily; briefs/E18b-kyngo-fix-r2.md | FOREMAN E #11→#12 | session_01DgYSWose5CuxgwKoCBMKGm | SẴN SÀNG KIỂM a2ae3ac2 r2 (depth 2) | 19/11 11:40Z |
 | REVIEW seal-lean-3 r8 (sonnet SMALL; ROOT-70 ORDER via C-AG #23) of 2111eb10 | review/seal-lean-3; reports/seal-lean-3.md | C-AG #23 for ROOT-70 | session_01Rc5AsMYavicZ6i6he17EQf | DONE — LIVE 2bda29a1 (archived 19/11 15:18Z) | 19/11 12:01Z |
@@ -300,5 +300,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN ROOT-71 (opus; from MAIN STANDBY, depth 0) | handover HANDOVER_SESSION9 | ROOT-70 TAKE OVER NOW | session_01Rc5AsJ8S2aNYjotfjzaioU | RUNNING | 19/11 15:35Z | START_CTX ~10 % |
 | REVIEW coop-thin-hostnull r1 (opus BIG) of 1fc3b8a0 | review/coop-thin-hostnull-r1 | B | session_01N1tNP5FGJzDEEndPqePkcQ | RUNNING | 19/11 16:05Z |
 | coop-ptime-reds (opus; LIVE co-op f1/f2/f3/d reds + runAct 'sv is not defined' since parallel-time) | review/coop-ptime-reds | B | session_01N1tNP4mYCDDrFNfWP327T3 | RUNNING | 19/11 16:05Z |
-| runact-sv-fix (sonnet SMALL; LIVE j29 runAct `sv is not defined`, solo too; owner-bug fast lane) | review/runact-sv-fix | B | session_01N1tNP5qKRnDd9rqJPdwUFh | RUNNING | 19/11 17:25Z |
+| runact-sv-fix (sonnet SMALL; LIVE j29 runAct `sv is not defined`, solo too; owner-bug fast lane) | review/runact-sv-fix | B | session_01N1tNP5qKRnDd9rqJPdwUFh | SẴN SÀNG KIỂM 868c682c | 19/11 17:25Z |
 | REVIEW coop-thin-f6b r1 (opus BIG) of dcda88d7 | review/coop-thin-f6b-r1 | B | session_01N1tNP3MvM7Uixh5xp1DqdQ | RUNNING | 19/11 17:33Z |
+| REVIEW runact-sv-fix r1 (sonnet SMALL) of c623c7c8 | review/runact-sv-fix-r1 | B | session_01N1tNP5hyQYhXXDPH7CU3pc | RUNNING | 19/11 17:44Z |
+| FOREMAN E #13 (opus; child of E #12, depth 3) | handover FOREMAN_E_STATUS | FOREMAN E #12 | session_01DgYSWn1PrMTN5k7RU4bD1R | RUNNING | 19/11 17:50Z | PICKUP 17:53Z START_CTX ~5 %, wake trig_01LeFDghMhHQ61kguGiZtCQk :47 |

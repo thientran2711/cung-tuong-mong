@@ -3,6 +3,9 @@
 ## ⛔ ONE BOOK — ART RULES LIVE ONLY IN THIS FILE
 ONE BOOK: never create another art rule file; new owner art rules go INTO this file in place (canon overwrite) the same hour. Owner 18/11 ~22:45Z real, verbatim: "Rồi mày nói là có quá nhiều sổ luật đúng không? Rồi bây giờ tao cần mày phải chọn lọc lại hết những cái sổ luật này nè. Những cái ý nào ý cũ gạch bỏ, không xài lại. Những ý nào ý mới tiếp tục giữ nguyên. Ok, chứ bây giờ mà mày nói từ bữa nay sổ chỉ nằm ở đây nhưng mà ba cái sổ kia vẫn cứ nằm đó và thợ mới hoặc là quản đốc mới vẫn cứ tạo sổ mới là cũng như không."
 
+## ⛔⛔⛔⛔ LAW #0 — ONLY THE OWNER'S WORDS CHANGE A PROMPT (owner Lượt 505, 19/11, "đưa cái này là một cái luật hàng đầu")
+Change a prompt ONLY for what the owner herself raised. Every fault/idea the foreman, a worker or a reviewer notices on its own = a NOTE shown to her with the question "có muốn sửa không?". No answer = NO CHANGE. Never turn our own remarks into prompt edits, new sentences, restraints or rules. Approved prompts stay word for word except the exact points she asked.
+
 ## ⛔⛔⛔ LAW #1 — KEEP THE STORE PROMPT (owner Lượt 397, 19/11, "nhấn mạnh rất nhiều lần … làm thành cái luật đầu tiên … giữ cái prom này cho tôi, không có thay đổi nữa")
 The fabric/brushwork of the 19/11 store prompts (dev/art/store-all/build_all.py f73a457 as used for the Lượt 395 sheets: Nữ đế, ma ma, công chúa, triều phục fabric) is APPROVED: "vẽ rất là đẹp, cái kiểu tả vải bắt đầu đẹp rồi". Never rewrite or "improve" those sentences; changes below are ADD/REPLACE only on the named items.
 OWNER VERDICTS Lượt 397:

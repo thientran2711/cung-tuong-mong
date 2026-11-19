@@ -31,3 +31,6 @@ Scratch dir S = /tmp/claude-0/-home-user-cung-tuong-mong/f1b54cf7-4c52-5d19-a246
 
 ## Report (final message, short)
 Per person: ages done with gen ids, regens + reasons, any image you are unsure of. Total gens. Nothing else.
+
+## Forehead dots (learned c03/c08)
+Some own t1 face refs carry a small red/pink dot on the forehead, and the one-ref method copies it. If a gen shows a forehead dot, check her t1 face (head sheet, tile 1): if the REF has the dot too, do ONE regen only; if it fails again keep the cleaner try, log it, and flag it in the report (do not burn the 2nd regen).

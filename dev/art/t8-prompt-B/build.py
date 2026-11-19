@@ -978,6 +978,9 @@ def build_mama(c):
         s+=(f" COLOUR RULE: take ONLY the cut from image 3; RECOLOUR the whole costume to her own colour {main} (the same colour family as her 36-year-old self) at "+step+", never brown, never black; with the embroidery in a lighter tone of the same colour and one soft gold accent; do not copy the brown of image 3.")
     else:
         s+=(f" COLOUR RULE: take ONLY the cut from image 3; RECOLOUR the whole costume to her colour {main}, a medium-saturation, medium-lightness clear tone (fresh, never pale, never dark, never brown), with the embroidery in a lighter tone of the same colour and one soft gold accent; do not copy the brown of image 3.")
+    if "--twocol" in sys.argv:   # owner Lượt 499 / ART_RULES B15 (ONE ma ma sample first): APPROVED two-colour sentence copied VERBATIM from dev/art/owner-copy/pr_cl_t2_V2.txt; only the two colour names are slot words. Opt-in flag -> every other output byte-identical.
+        sec=sys.argv[sys.argv.index("--twocol")+1]
+        s+=f" TWO-COLOUR RULE: the whole outfit uses EXACTLY TWO colours that clearly interact: the MAIN colour {main} and the SECONDARY colour {sec}, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, never a third colour."
     s+=" Any flower or pattern on the fabric is fine silk-thread embroidery stitched directly into the fabric, flat, following the folds, never printed or pasted-on."
     item,hk=age_item(c,"mama","an embroidered handkerchief","one")
     if c not in MAMA_DRAWN: s+=" ANGLE: "+ang_for(c,8)+"; her head turns together with her shoulders and body, never a frontal head on a turned body."   # Lượt 440

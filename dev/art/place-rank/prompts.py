@@ -3,7 +3,7 @@
 v3 (owner Lượt 461 A–D + Lượt 462): luohan daybed receptions, bottom-right corner rule, phối bedroom with two beds + three low-rank
 colours, richness shifted up one step (phối = old Tần level), Quý phi gold-yellow a bit more visible.
 python3 dev/art/place-rank/prompts.py  -> writes prompts.json next to this file."""
-import json, os
+import json, os, re
 D = os.path.dirname(os.path.abspath(__file__))
 T = open(os.path.join(D, '..', 'place-redraw', 'prompt_template.txt')).read().strip()
 NOPE = ' No phoenix anywhere (no phoenix carving, embroidery, figure or pendant), no imperial yellow, no golden-yellow fabrics.'
@@ -89,11 +89,73 @@ ROOMS['thua-minh-cung-dong-phoi'] = dict(room="Thừa Minh cung Đông phối đ
         floor='warm polished wooden floorboards', mat='the luohan daybed', key='the luohan daybed with its kang table')
 V4REF = 'SyhTG51Ub8'  # image 3 = layout reference (v3 Phi bedroom)
 V4 = ('canh-phuc-cung-phi', 'canh-phuc-cung-quyphi', 'thua-minh-cung-dong-phoi-ngu', 'thua-minh-cung-dong-phoi')
+
+# ---- v5 (owner Lượt 491, FIGURE_GATE 14d, ART_RULES L5 L7 L11; ROOT-49 GO for ONE round) ----
+# KEEP: canh-phuc-cung-phi-ngu (v3 SyhTG51Ub8 = layout template), canh-phuc-cung-tan (WDgFohIcXe), thua-minh-cung-dong-phoi (JNCp5R3Oq4),
+# khon-ninh-cung + khon-ninh-cung-ngu. REDRAW: tan-ngu, quyphi-ngu, phi + quyphi receptions, phối bedroom. Tần ≠ Phi ≠ Quý phi (L11).
+RECT = (" ROOM SHAPE (owner Lượt 491): the room reads rectilinear with square corners, straight walls and straight beams, never a curved hall, "
+        "never furniture in an arc or a curve; every piece of furniture stands in clear straight lines along the walls, square to the walls, orderly, "
+        "never scattered and never at a slant.")
+CORNER5 = (" LAYOUT NUMBERS (owner Lượt 477, 491): seen from as close as in image 3, the furniture fills about five sixths of the room, the main piece "
+           "large with its base reaching down to about four fifths of the picture height; the open floor in front is only a strip of about one fifth "
+           "of the picture height at the centre, never more floor than in image 3, and nothing stands on that strip, because people will stand there. "
+           "Image 3 is only a guide for how close and how full the room is, NOT for where things stand: this room has its own different arrangement "
+           "as written above. The right corner is furnished, never empty or bare: a table group stands there inside the outer fifth of the width, "
+           "set back from the bottom edge, between one half and seven eighths of the picture height, so a person standing in front of it covers it naturally.")
+L5BED = {
+ 'tan': ("seen as a corner of two walls meeting at a square corner on the right: the back wall straight across the picture and the right side wall "
+         "running towards the viewer in clear perspective, with tall carved lattice windows in the right side wall onto a sunny courtyard garden with "
+         "a tree and a lotus pond; dark rosewood pillars and beams; the canopy bed stands in a real bed place in the RIGHT half of the back wall: set "
+         "deep into a carved rosewood bed alcove built into the back wall just right of the centre (the bed between about two fifths and three quarters "
+         "of the width), its back and both ends enclosed by the alcove, its long side facing the room, two steps in front of it; in the LEFT part of "
+         "the back wall a carved wooden partition with a round moon-gate opening shows a glimpse of a small study with a desk and bookshelves; between "
+         "the moon gate and the bed alcove a dressing table with a mirror stands flat against the back wall; "),
+ 'quyphi': ("seen straight on as a correct box of three walls with square corners: the back wall straight across the picture and the left and right "
+            "side walls running towards the viewer in clear one-point perspective; dark rosewood pillars and beams; the canopy bed stands exactly "
+            "centred against the back wall on a low carved platform, perfectly symmetric, with a carved rosewood partition with a round moon-gate "
+            "opening on EACH side of it in the back wall, the two moon gates mirroring each other; tall carved lattice windows in the right side wall "
+            "onto a sunny courtyard garden with a tree and a lotus pond; tall curio shelves standing flat against the left side wall; "),
+}
+L5REC = {
+ 'phi': ("seen as a corner of two walls meeting at a square corner on the left: the back wall straight across the picture and the left side wall "
+         "running towards the viewer in clear perspective; dark rosewood pillars and beams, carved lattice windows across the right part of the back "
+         "wall opening onto a sunny courtyard garden with a tree and a lotus pond, a carved wooden partition with a round moon-gate opening in the "
+         "left side wall; the luohan daybed stands against the back wall a little right of the centre, square to it and seen straight on, a carved "
+         "screen behind it; ONE straight row of armchairs with tea tables between them stands flat along the left side wall, from the moon gate "
+         "towards the room, square to that wall (seen in perspective, never curved); one more pair of armchairs with a tea table stands in a straight "
+         "line against the back wall to the left of the daybed; "),
+ 'quyphi': ("seen straight on as a correct box of three walls with square corners: the back wall straight across the picture and the left and right "
+            "side walls running towards the viewer in clear one-point perspective, like a real rectangular hall; dark rosewood pillars and beams, "
+            "carved lattice windows high in both side walls opening onto a sunny courtyard garden, a carved wooden partition with a round moon-gate "
+            "opening in the back wall to the left; the luohan daybed stands on a low wide platform against the back wall, exactly centred, square to "
+            "it and seen straight on, a large screen behind it; TWO straight rows of armchairs with tea tables between them stand along the left and "
+            "the right side walls, each row flat against its wall and square to it, the two rows facing each other across the room (seen in "
+            "perspective, never curved, never turned towards the viewer); "),
+}
+for k in ('tan', 'quyphi'):
+    r = RANK[k]
+    ROOMS[f'canh-phuc-cung-{k}-ngu'] = dict(room="Cảnh Phúc cung chính điện bedroom, the private bedchamber of the imperial consort who heads this palace in ancient China, a real room in daily use, "
+        + L5BED[k] + "the canopy bed is the large clear main subject: " + r['bed'] + "; around the room, along the walls, " + r['bedx'] + ". " + CARD_CP + r['lux']
+        + f" The {r['col']} accent colour is woven through the bedding, curtains and cushions." + (NOPE_QF if r['nope'] else NOPE) + RECT + CORNER5,
+        floor='warm polished wooden floorboards', mat='the bed step', key='the canopy bed')
+for k in ('phi', 'quyphi'):
+    r = RANK[k]
+    ROOMS[f'canh-phuc-cung-{k}'] = dict(room="Cảnh Phúc cung chính điện reception room, the sitting room where the imperial consort who heads this palace in ancient China receives her guests, a real room in daily use, no bed anywhere: "
+        + L5REC[k] + "the furniture: " + re.sub(r', flanked on each side by a pair of (.*?) with a small tea table between each pair', r'; the armchairs are \1, standing only in the straight rows described above', r['rec']) + ". " + CARD_CP + r['lux'] + f" The {r['col']} accent colour is woven through the cushions, curtains and silks."
+        + (NOPE_QF if r['nope'] else NOPE) + NOSOFA + RECT + CORNER5,
+        floor='warm polished wooden floorboards', mat='the luohan daybed', key='the luohan daybed with its kang table')
+# PHỐI v5 (L7): split by OBJECT TYPE, not by bed: ALL curtains pale blue, ALL furniture fabrics pale green; layout close to v4 1ldAmKir4r (image 3 here)
+ROOMS['thua-minh-cung-dong-phoi-ngu'] = dict(room="Thừa Minh cung Đông phối điện bedroom, the cosy bedchamber SHARED by two lower-ranking imperial consorts (a Thường tại and a Quý nhân) living in the east side hall of a palace in ancient China, a real room in daily use, seen from a little closer so the room feels snug and full, not a big empty hall: wooden pillars, lattice windows at the back onto a sunny garden, the back wall and both sides lined with furniture; TWO canopy beds of carved lacquered wood with painted flowers stand side by side against the back wall, square to it, with a painted orchid screen between them, together the large clear main subject, each bed with its own small dressing table with a bronze mirror, a stool and a clothes rack with a robe; along the walls a shelf with a few boxes and books, hanging paper lanterns with tassels, vases of white and blue orchids, slippers at the bed steps. COLOURS BY OBJECT TYPE (owner Lượt 491): ALL the curtains of the room are pale blue (the gauze curtains of BOTH beds, the window curtains, the lantern tassels), and ALL the furniture fabrics are pale green (the bedding and cushions of BOTH beds, the stool cushions, the seat cushions, the robes on the racks); the two beds look alike in colour, never one bed blue and the other green. " + QN + " Exactly two beds; only the two colours pale blue (curtains) and pale green (fabrics)." + NOPE + RECT + CORNER5.replace("a table group stands there", "a small round tea table with two stools and a low cabinet with a vase of orchids stand there").replace("so a person standing in front of it covers it naturally.", "so a person standing in front of it covers it naturally; this group stands forward in the right part of the room, NOT pushed back against the window wall: its front stools stand at about five sixths of the picture height, so the lower right of the picture is furnished and never bare floor, like the tea table in the right corner of an Empress's bedroom.").replace("Image 3 is only a guide for how close and how full the room is, NOT for where things stand: this room has its own different arrangement as written above.", "Image 3 is the previous version of this same room: keep its layout, closeness and fullness closely; only the colours change and the right corner is furnished."),
+        floor='warm polished wooden floorboards', mat='the bed steps', key='the two canopy beds')
+V5 = ('canh-phuc-cung-tan-ngu', 'canh-phuc-cung-quyphi-ngu', 'canh-phuc-cung-phi', 'canh-phuc-cung-quyphi', 'thua-minh-cung-dong-phoi-ngu')
+V5REF = {k: 'SyhTG51Ub8' for k in V5}; V5REF['thua-minh-cung-dong-phoi-ngu'] = '1ldAmKir4r'  # image 3 (share guide; phối = its own v4 layout)
 out = {}
 for k, r in ROOMS.items():
     out[k] = (T.replace('{SEASON_TIME}', 'summer morning').replace('{TIME_LIGHT}', 'morning daylight').replace('{ROOM_LINE}', r['room'])
                .replace('{FLOOR}', r['floor']).replace('{MAT_UNDER}', r['mat']).replace('{KEY_PIECE}', r['key']))
     # the only right-side mention allowed is the RIGHT sentence (ROOT-48 wording for owner Lượt 461 B)
+    if k in V5:
+        assert '{' not in out[k] and 'right corner nearest the viewer stays almost clear' not in r['room'], k; continue
     assert 'right side' not in r['room'] and r['room'].count('right') == 1 + (k in V4) * CORNER.count('right') + (k == 'thua-minh-cung-dong-phoi-ngu') and '{' not in out[k], k
 json.dump(out, open(os.path.join(D, 'prompts.json'), 'w'), ensure_ascii=False, indent=1)
 print(len(out), max(len(v) for v in out.values()))
