@@ -163,3 +163,4 @@ PEOPLE: sheets A and B show all 10 rooms small alone + large with the 4 figures 
 - B: dev/handover/review-sheets/place-rank/place-rank-B-phoi-khon-ninh.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/place-rank-B-phoi-khon-ninh.jpg
 - spread: dev/handover/review-sheets/place-rank/place-rank-quyphi-ngu-spread.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/place-rank-quyphi-ngu-spread.jpg
 Credits v5: 7 gens × 135 = 945 (5 kept + 2 rejected first gens). TOTAL place-rank = 52 gens = 7,020 credits.
+WORDING CHANGES (LAW #0, owner Lượt 505; ROOT-49 ruled both KEEP): (a) dropped RIGHT "bottom-right almost clear" in the 5 v5 rooms → serves owner point 14d-5 (empty right corner); (b) receptions' "flanked on each side" → "armchairs only in the straight rows described above" → serves owner point 14d-4 (arc). Floor share 25–27 %, armchairs at edges, stool y 93 %, bottom-left box 14 % = NOTES only, no prompt change.
