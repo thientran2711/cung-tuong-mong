@@ -144,10 +144,9 @@ function errSync(){if(!S||S.dead||ER.syncing)return;ER.syncing=1;try{
   if(open){const c=document.createElement("span");c.className="kchip n kmerr-slot";c.textContent=errWord(t.k);c.style.left=cx+"px";c.style.top=((r.top+r.height*.45-sr.top)/sc)+"px";lay.appendChild(c)}
   else{/* the kit yellow round «!» (kitHapHtml = the Dư đồ mark) ABOVE HER HEAD, never on the emotion chip beside it (owner OD 18/11 ~22:10Z) */
    const w=document.createElement("span");w.innerHTML=typeof kitHapHtml==="function"?kitHapHtml(`${t.nm} đã về: có tin báo`,"button"):"";const c=w.firstChild;if(!c)continue;c.classList.add("kmerr-bang");c.setAttribute("tabindex","0");
-   let hx=r.left+r.width/2,hy=r.top+r.height*.04;try{const b=typeof J59BB!=="undefined"&&img&&J59BB[img.getAttribute("src")];if(b){hx=r.left+(b.l+b.r)/2*r.width;hy=r.top+(typeof j59bt==="function"?j59bt(b):b.t)*r.height}}catch(e){}
-   /* the SAME top line as the player's «ta ở đây» marker (kitMarkLine, KIT §78); only raised when that would touch her head (head always wins), never typed px */
-   const ml=typeof kitMarkLine==="function"?kitMarkLine(st):null;const hh=c.offsetHeight||19;let topV=ml?ml.top:hy-hh-10;topV=Math.min(topV,hy-hh-2);c.dataset.line=ml?"mark":"head";
-   c.style.left=((hx-sr.left)/sc-9.5)+"px";c.style.top=Math.max(2,(topV-sr.top)/sc)+"px";
+   /* KIT §78.y: the ONE stage badge row (jmark kitBadgeAt: standard crowned Hoàng hậu top + gap), on her centre line — the same row and column rule as «ta ở đây» and the mood chip, never her own head */
+   const hh=c.offsetHeight||19,ww=c.offsetWidth||19;const P=typeof kitBadgeAt==="function"&&img?kitBadgeAt(st,img,"hap",ww):null;if(!P)continue;c.dataset.line="row";
+   c.style.left=((P.left-sr.left)/sc)+"px";c.style.top=((P.top-sr.top)/sc)+"px";
    const go=e=>{e.preventDefault();e.stopPropagation();errOpen();setTimeout(errSync,60)};c.addEventListener("click",go);c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")go(e)});lay.appendChild(c)}}
  /* a person whose task is over and read: nobody keeps her hidden */
  for(const x of document.querySelectorAll("#tokens .tok.fig")){const g=x.querySelector(".tag");if(!g||x.style.visibility!=="hidden")continue;const nm=g.textContent;

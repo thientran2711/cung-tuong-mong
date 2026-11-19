@@ -7,6 +7,7 @@
      · room / place / Dư đồ place view / lãnh cung / home visits (j59 stage): #tokens .tok.fig img.figimg and her own #mefig
      · event / person dialogs, person pages of the book, pet-care dialog (kitStageFig → img.kesimg; person registered by the wrapper below)
    NOT: silhouettes ("Người lạ"), the game figure of a mini-game (.kgfig), the new-life identity card (.kpfig), any crowd / shadow.
+   STAGE (owner OD 19/11 ~00:25Z): on #stage the chip sits on the ONE stage badge row (jmark kitBadgeAt, KIT §78.y) — the rule below is for dialogs / book pages.
    PLACEMENT RULE (the same fraction for every figure, size and screen): the seal sits at HEAD height, on the side of the head with room (right first, left when the right
    would leave the stage / dialog), its inner edge KIT_FIGSEAL.gap × body from the painted head-and-hair edge (kitFigBody wl/wr of the top 15 % of the painting).
    SIZE: KIT_FIGSEAL.k × the figure's body height (kitFigBody head top → feet), between min and max px — it grows and shrinks with the figure.
@@ -46,6 +47,15 @@ function kitFigSeal(fig){try{
  const s=Math.round(Math.max(K.min,Math.min(K.max,body*K.k)));
  /* KIT 34.6 r5 (owner 18/11 ~03:35Z "figure runs under the ? chip"): on a BOOK person page the seal sits in ONE fixed slot, the right end of the name row of the text column (padding reserved by .kbk-phead), never on any figure, the same slot on every page */
  if(host.matches&&host.matches(".kbk-person.kbk-full")){const ph=host.querySelector(":scope>.kbk-phead");if(ph){const q=Math.min(s,46),css=`left:${ph.offsetLeft+ph.offsetWidth-q}px;top:${ph.offsetTop+2}px;width:${q}px;height:${q}px`;if(el.style.cssText!==css)el.style.cssText=css;el.dataset.kfsb="book";return}}
+ /* KIT §78.y STAGE BADGE ROW (owner OD 19/11 ~00:25Z "ngang hàng nhau, cùng cột với nhau"): on a stage the chip sits on the ONE badge row of jmark (standard crowned Hoàng hậu), at ONE column offset
+    from its figure's centre line (KIT_BADGE.col.emo × the stage body) and ONE size per stage (kitBadgeEmoSize) — never from this figure's own head / body. The plaque columns #kshR / #kshL stay a no-go zone:
+    a chip that would cross one goes to the mirror column (same distance, other side); it never leaves the row. */
+ {const st=fig.closest("#stage");if(st&&typeof kitBadgeAt==="function"){const s2=kitBadgeEmoSize(st);const P=s2?kitBadgeAt(st,fig,"emo",s2):null;if(!P){el.style.display="none";return}
+  const pad=K.pad!=null?K.pad:10,Z=[...st.querySelectorAll("#kshR,#kshL")].filter(e=>!e.hidden&&e.offsetHeight&&e.getClientRects().length).map(e=>e.getBoundingClientRect());
+  const hit=l=>Z.some(q=>l<q.right+pad&&l+s2>q.left-pad&&P.top<q.bottom+pad&&P.top+s2>q.top-pad);const off=KIT_BADGE.col.emo*P.line.H;let L=P.left,side=P.side;
+  if(hit(L)){const l2=P.cx-side*off-s2/2;if(!hit(l2)){L=l2;side=-side;el.dataset.kfscol="1"}else el.dataset.kfscol="x"}else delete el.dataset.kfscol;
+  const hr2=host.getBoundingClientRect(),css=`left:${(L-hr2.left+host.scrollLeft).toFixed(1)}px;top:${(P.top-hr2.top+host.scrollTop).toFixed(1)}px;width:${s2}px;height:${s2}px`;if(el.style.cssText!==css)el.style.cssText=css;
+  el.dataset.kfsb=P.line.H.toFixed(0);el.dataset.kfsa=P.cx.toFixed(1);el.dataset.kfsf=P.line.floor.toFixed(1);el.dataset.kfsr="row";el.dataset.kfss=side;return}}
  const k=Math.min(20,Math.max(1,K.rows|0)),rr=b.wr&&b.wr[k]!=null?b.wr[k]:null,ll=b.wl&&b.wl[k]!=null?b.wl[k]:null;
  /* owner 18/11 ~06:20Z: ONE fixed offset from the figure's standing anchor (ax = slot centre, feet = floor line), in body heights, so it scales with the figure and sits at the same spot for everyone: centre = ax ± dx x body, feet − dy x body (right first; left when the right would leave the frame) */
  const ax=B.bx+B.bw/2,feet=B.by+B.bh*b.b;/* standing anchor: picture centre = slot centre, painted feet = floor line */
