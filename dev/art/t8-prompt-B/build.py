@@ -215,21 +215,19 @@ def _e6_picks(c,age):
     lst,d=L["nude"]; k8=e6_kind(out["t8"][0])
     out["nude"]=lst[next((d[age][(j+k)%5] for k in range(5) if e6_kind(lst[d[age][(j+k)%5]][0])!=k8),d[age][j])]
     _E6_CACHE[key]=out; return out
-# E12 SAME RANK, DIFFERENT PEOPLE (owner Lượt 650/656; ROOT-54 ruling (b), BW6 19/11): inside one LOOK GROUP (dev/art/face-common/LOOK_GROUPS.md; members = the m people,
-# c*/nc* there are proposals only) at one rank + age every person holds a DIFFERENT item. E11 lists hold 8 items per rank per age, so 8 people x 8 ranks:
+# E12 SAME RANK, DIFFERENT PEOPLE (owner Lượt 650/656; ROOT-54 ruling (b), BW6 19/11): inside one LOOK GROUP (owner groups Lượt 686, OWNER_GROUPS_L686.json, m and c ids) at one rank + age every person holds a DIFFERENT item. E11 lists hold 8 items per rank per age, so 8 people x 8 ranks:
 # the items of one age form a bipartite multigraph rank -- item kind (every rank 8 items, every kind <= 8 items at one age); a proper 8-edge-colouring (Kőnig,
 # alternating-path method, deterministic edge order t1..t8 x list order) gives 8 colour classes, each = one item per rank with 8 different kinds (E6).
 # Group member number i (members sorted) takes colour class i % 8 (groups bigger than 8: each item at most ceil(members/8) times, the pigeonhole minimum).
 _LG=None
 def look_groups():
+    """owner Lượt 686 (ROOT-54 21:13Z): the owner's own face groups = dev/art/face-common/OWNER_GROUPS_L686.json (person -> group, m AND c ids);
+    replaces the old (n-1)%6 lists of LOOK_GROUPS.md. {group: sorted members}."""
     global _LG
     if _LG is None:
-        _LG={}; cur=None
-        for ln in open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)),"..","face-common","LOOK_GROUPS.md"),encoding="utf-8"):
-            m=re.match(r"## (.+?)( \(|$)",ln.strip())
-            if m: cur=m.group(1).strip(); continue
-            ids=re.findall(r"\bm\d\d\b",ln) if cur and re.match(r"m\d\d\s*(,|$)",ln.strip()) else []   # member lines only (a line that STARTS with an m id), never a note such as "m01–m52"
-            if ids: _LG.setdefault(cur,[]).extend(ids)
+        import json as _js; _LG={}
+        for k,v in _js.load(open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)),"..","face-common","OWNER_GROUPS_L686.json"),encoding="utf-8")).items():
+            _LG.setdefault(v,[]).append(k)
         _LG={k:sorted(v) for k,v in _LG.items()}
     return _LG
 def group_slot(c):

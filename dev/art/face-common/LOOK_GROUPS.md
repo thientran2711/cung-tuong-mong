@@ -60,3 +60,10 @@ File máy đọc: dev/art/face-common/OWNER_GROUPS_L686.json
 - Sản xuất người MỚI chỉ thuộc 4 nhóm: Sắc sảo, Kiêu kỳ, Lạnh lùng, Quyến rũ. KHÔNG vẽ thêm người mới cho Tươi tắn / Dịu dàng / Đoan trang / Tinh nghịch.
 - Viết lại prompt 4 nhóm này (tả mặt + tính cách thật mạnh), gửi chủ mẫu 3 người mỗi nhóm (12 người) → NF4.
 - Vẫn giữ: sửa răng c06 c14 c19 c31 (môi khép), c27 người mới.
+
+## Lượt 695 (chủ) — sau khi sửa răng + duyệt Sắc sảo
+- c06 → Tươi tắn (từ Tinh nghịch). c14 → Đoan trang (từ Dịu dàng). c19, c31 → Tươi tắn (giữ).
+- Sắc sảo DUYỆT: c27 (người mới), s07, s08, s09 (người mới). Đã ghi vào OWNER_GROUPS_L686.json.
+- Lượt 696 (chủ, THAY Lượt 695): c06, c14, c19, c31 VẼ LẠI HẾT với mặt SẮC SẢO → nhóm Sắc sảo (quá nhiều Tươi tắn + Đoan trang rồi). → NF4.
+- Lượt 697 (chủ): cân bằng nhóm — mỗi nhóm 11 người (84 chỗ / 8 nhóm); dư thì cất vào KHO (dev/art/face-common/KHO_L697.md, json value "Kho"). 29 chỗ trống → người MỚI Kiêu kỳ 10 / Lạnh lùng 10 / Quyến rũ 9.
+- Lượt 700 (chủ): Kiêu kỳ s10–s12, Lạnh lùng s13–s15, Quyến rũ s16–s18 ĐẠT. GO đủ: thêm Kiêu kỳ 7, Lạnh lùng 7, Quyến rũ 6 (NF4).

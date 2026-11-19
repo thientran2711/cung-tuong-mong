@@ -26,3 +26,39 @@ Credits: 5 × (135 + 3) = 690. No redraws were needed. All 5 are in the ledger (
 
 ## 3. Sheet
 dev/handover/review-sheets/nu-de-B/nudeB_m05_old_vs_new_HHsleeve.jpg (OLD NDX3 row above NEW row, 3-line tags, 576 KB). Code: dev/art/nude-B/sheet_oldnew.py.
+
+## ROUND 2 — owner Lượt 692 via ROOT-55 (full sentence diff vs HH t8, dev/handover/reports/nude-B-vs-HH-ROOT55.md)
+Prompt change (mk.py, commit aec28b3be). The diff against round 1 is exactly this, at every age:
+| HH t8 sentence | round 1 | round 2 |
+|---|---|---|
+| NO flowers in the hair or on the crown at this rank (flowers only at ranks 1 to 6). | missing | added verbatim |
+| HEAD AND BODY: her head turns together with her shoulders and body … never a frontal head on a turned body. | missing | added verbatim |
+| ANGLE: … (HH t8 of the same age, verbatim: a18 3/4 LEFT · a26 slight LEFT · a36 slight RIGHT · a51 slight shoulder LEFT · a65 fully frontal) | missing | added verbatim |
+| HELD ITEM COLOUR: … clearly different from BOTH her robe colour {main} and her secondary colour {sec}. | missing | added with the HH template; only the colours differ: "royal golden yellow" / "wine-crimson like #7E2A33" |
+| FABRIC: thick gold-embroidered brocade with a graceful, flowing drape. | before "The silk has real weight" | moved to the HH place (after HEAD AND BODY, before ANGLE) |
+| spec5 pose phrase ", body turned slightly three-quarters to the right," (a26, a51) | present | REMOVED. It contradicted the HH ANGLE (left turn) at those ages; in HH the turn is given only by ANGLE |
+Order now = HH order: weight → SLEEVE LENGTH → ONE SINGLE SLEEVE LAYER → NO flowers → HEAD AND BODY → FABRIC → ANGLE → HELD ITEM COLOUR → Pose.
+Not copied (they are Nữ đế-specific, or ROOT-55 did not list them): HH GRACE line, HH THREE-COLOUR rule (Nữ đế keeps her own COLOUR RULE), HH HAIR rank law (Nữ đế has her own bun sentence).
+Gate: each sentence is asserted verbatim in that age's HH t8 build (HELD ITEM COLOUR: the template up to the colour names); each appears exactly once in the Nữ đế prompt; the HH order is asserted; "three-quarters to the right" is asserted gone. check_store --scope nude --age PASS 5/5.
+Gens (same settings and refs):
+| age | gen | cut | result |
+|---|---|---|---|
+| a18 | xSB0GHBjfW | eIPlrOzdqL | PASS: 3/4 left with the head, floor sleeves, one layer, white-jade flute |
+| a26 | aFG9JtRfSh | EbYi4eAuuO | PASS: slight turn, floor sleeves, the parasol is now JADE-TEAL (not crimson) |
+| a36 | hu2P7VDvqL | gOmpVvOSXO | PASS: slight turn, floor sleeves, jade brush |
+| a51 | KLpnABLkqp | 4RFmIQW9Aa | PASS: floor sleeves, green jade tally, silver streaks |
+| a65 | aFG9Po4fSh | cpSkKkH0eP | PASS: fully frontal, floor sleeves, hand warmer teal-and-gold (raw had edge speckle; cut clean) |
+Credits round 2: 690 (5 × 138), no redraws. NDX4 total 1380.
+Sheet: dev/handover/review-sheets/nu-de-B/nudeB_m05_r1_vs_r2_HHfull.jpg (round-1 row above the round-2 row, 3-line tags, 574 KB).
+Note: the Nữ đế angle now equals her own HH t8 angle at each age (copied verbatim, as ordered), so her Nữ đế and Hoàng hậu pictures face the same way at each age.
+
+## ROUND 3 — owner Lượt 694, rule D15 (via ROOT-55): elder STYLE LOCK at a51/a65
+Prompt (mk.py, commit 2dc5b1001): at a51/a65 only, right after the age text and before the elder colour text (the ma ma place), the STYLE LOCK sentence is copied VERBATIM from dev/handover/reports/mama-specs/m05-a51.styleref.r55.prompt.txt (read from the file, not retyped). The only change is "the second reference" → "the third reference", because the ref order here is image 1 identity, image 2 royal swatch, image 3 her own Nữ đế a36 picture (ROOT-55 allowed this). Gate: found exactly once in the source file; exactly once in the prompt; placed between the age text and the colour text. The a51/a65 prompt = the round-2 prompt + that one sentence (cmp-checked); a18–a36 are unchanged. check_store PASS.
+Refs a51/a65: KLpSlnEkqp + TdwDfOyVNR + gOmpVvOSXO (her round-2 Nữ đế a36 cut). log.py records the 3rd ref (NDX_REF3).
+| age | gen | cut | result |
+|---|---|---|---|
+| a51 | w4aXB0a7EI | fHzNi9jCDY | PASS: painterly face, same drawing as a36, silver streaks, sleeves to the floor |
+| a65 | 8ai7O7MIrU | jUoTDPcLD0 | PASS: painterly face, frontal, sleeves to the floor. NOTE: gold again, because the item list says "a hand warmer of gold" |
+Credits round 3: 276. NDX4 total 1656.
+Sheet: dev/handover/review-sheets/nu-de-B/nudeB_m05_r2_vs_r3_stylelock.jpg (round-2 row above; new row = a18–a36 "same (r2)" + new a51/a65; 575 KB).
+FINAL m05 Nữ đế set: a18 eIPlrOzdqL · a26 EbYi4eAuuO · a36 gOmpVvOSXO · a51 fHzNi9jCDY · a65 jUoTDPcLD0.
