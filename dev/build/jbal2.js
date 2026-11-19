@@ -1059,9 +1059,9 @@ Object.assign(BAL.ag,{toil2:{on:1,est:3,base:2,k:1,wMin:.2,
    ord     a servant sent on a dishonourable deed: obey × lòng/100, refuse (+ loyalTr for a trung thành one), tell × (1 − lòng/100) × spy when she
            already spies for someone (old rule: a trung thành servant refused at 30 %, others never)
    cm      the close maid: "nghe" = talSpy × spy × lòng / talLoy; a leaked secret (debt / spy / family) = secOut × leak × (100 − lòng) / (100 − secTrust) */
-Object.assign(BAL.ag,{stf2:{base:1,net:{confess:{trung:1.5,nhat:1.5},social:{lanh:1.5,chuyen:1.3},bribe:{tham:1.6},flee:{tham:1.4,lanh:1.3},help:{trung:1.8},work:{nhat:1.3}},
+Object.assign(BAL.ag,{stf2:{base:1,net:{confess:{trung:1.5,nhat:1.5},social:{lanh:1.5,chuyen:1.3},bribe:{tham:1.6},flee:{tham:1.4,lanh:1.3},help:{trung:1.8},work:{nhat:1.3},half:{lanh:1.4,nhat:1.2}},
  poison:{cost:10,k:1,u:1},accPen:15,hit:{k:2},pil:{k:1,sell:.5,lauWk:10},pilW:{pun:1,forgive:1,back:.4,ignore:.3,harsh:2.5},leave:{k:1,cd:6,u:.2},lvW:{keep:1,demote:1,let:1},
- bribe:{tell:1,quiet:.3},ord:{obey:1,refuse:.03,loyalTr:.35,tell:.03,spy:3},cm:{spy:1,leak:1}}});
+ bribe:{tell:1,quiet:.3},ord:{obey:1,refuse:.03,loyalTr:.35,tell:.03,spy:3,half:.2},cm:{spy:1,leak:1}}});
 /* AG-ALL-2 part 2b — per-khắc event-driven re-decide (jagday agHeard / agTell / agRdTick; owner OD 17/11 ~15:25Z (2)):
    keep  × BAL.ag.routine = the weight of keeping her plan when news reaches her (against the deeds aimed at the one she heard of: their utility)
    tell  weight that a servant standing there tells her master (× her loyalty / 100 × the master's interest), quiet = keeping it to herself */
@@ -1327,6 +1327,40 @@ BAL.bookFigW=.343;BAL.figWideRef=.65;/* painted width / body (skull top -> feet)
 /* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
    someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
 Object.assign(BAL,{actHere:{plant:15}});
+/* PARALLEL TIME (owner OD 18/11 ~20:15Z/~20:20Z/~20:35Z; jptime): every button where she asks / sends ANOTHER person.
+   o = khắc the SENDER pays to give the order (her card's Tốn); n = khắc the person sent is away, counted from the tap, walk included
+   (= the RECEIVER's own act length when she plays the receiver: the maid road order frame shows the same n). The result lands at tap + n.
+   Equal value (laws 2/3/4, D check): every send costs the same 1 khắc order and keeps the person away 2 khắc; what each send gives and risks
+   stays the button's own BAL rows (odds, evidence, loyalty −, oán …), shown on the sender card and on the receiver's frame alike.
+   on = 0: every button runs at once as before. */
+Object.assign(BAL,{ptime:{on:1,kinds:{
+ def:{o:1,n:2},
+ spy:{o:1,n:2},     /* Sai đi dò la (her maid / a servant) · NPC cx2:maidSpy */
+ listen:{o:1,n:2},  /* Nghe ngóng chung */
+ scout:{o:1,n:2},   /* Sai tai mắt dò nơi ở (her runner) */
+ invite:{o:1,n:2},  /* Mời đến cung ta (messenger; the guest comes at the due khắc) */
+ harm:{o:1,n:2},    /* a deed on a consort done by a sent servant (not together: "phải sai người đi", j8 doAct / bestSent) */
+ plant:{o:1,n:2},   /* Sai người lẻn vào cung cài đồ */
+ gift:{o:1,n:2},    /* Tặng quà by hand when not together (a servant carries it) */
+ bribe:{o:1,n:2},   /* Cài người hầu vào cung khác (j10 PEND.plantsv → jptime §19): the servant walks over, placed at due. «Mua chuộc» kẻ hầu cung khác (j10 servAct mua) = FACE: she meets the servant herself (2 khắc) */
+ clothes:{o:0,n:2}, /* Sai cung nữ đến Nội vụ phủ xin y phục (jeitem): the option's own Sức is the order (no khắc, as before) */
+ buy:{o:1,n:2},     /* Sai cung nữ thân tín mua lén ngoài cung (the goods still come next tuần) */
+ errand:{o:1,n:2},  /* maid road: Việc chủ sai (receiver side: her own walk + task) */
+ ask:{o:0,n:2},     /* Sai <cung nữ> đi đòi (jstip, the monthly cắt xén card: no khắc before, none now; the result at the due khắc) */
+ vlbuy:{o:1,n:2},   /* Sai người mua lén ngoài cung (jveil mạng che mặt; the bạc is paid at the order, the veil comes with the person) */
+ mktspy:{o:0,n:2},  /* Sai tai mắt dò bên chủ hội (jmkt; bạc paid at the order, no khắc before, none now) */
+ summon:{o:1,n:2},  /* SUMMON (D ruling 18/11: a send): Truyền thái y · Mời thái y bắt mạch · Truyền họa sư / nhạc sư vào cung: the messenger goes,
+                       the person called comes at the due khắc and does the work then (the old k was the visit: o = 1 = the order) */
+ giftin:{o:0,n:2},  /* TWO-WAY: an NPC sends a servant with a gift to her (the NPC's deed already paid its khắc): the servant is away n, the gift arrives at due */
+ npcinv:{o:0,n:2},  /* TWO-WAY: an NPC host sends word (AG cx3:invite2): her servant is away n, the guest / her invitation lands at due */
+ shop:{o:0,n:2},    /* Nhờ thái giám mua đồ (PEND.shop): the eunuch goes for the tray (no khắc before, none now), the tray comes at due */
+ },
+ repMax:8,          /* the most unread reports of hers kept behind the «tin» icon (older ones count as read) */
+ taskMin:1,         /* FAIL 4 item 2 (law 3): the least khắc «Giúp qua loa» (any receiver answer that does the deed) costs her; hết lòng is always one more (jptime ptRecvN) */
+ ansK:2,            /* an order to her (maid road) waits as a notice; unanswered after ansK khắc = «Từ chối» with its cost (OD 18/11 ~21:15Z) */
+ errRefuse:3,       /* «Việc chủ sai» (a harmless errand): Từ chối = Chủ tin −errRefuse (no one to tell on: 3 answers) */
+ errHalfTin:1       /* «Việc chủ sai»: Giúp qua loa = the same công lao, done sloppily: Chủ tin −errHalfTin, n − 1 khắc */
+}});
 /* ERRAND SCENE (owner OD 18/11 ~20:05Z..~20:20Z, jerr): n = khắc the person she sends stays away (counted from the tap, the walk included) when the parallel-time core
    (jptime BAL.ptime.kinds[k].n) is not in the build; the scene reads the ONE state through the jerr adapter either way. msWalk = one walk off / on stage (ms, x BAL.pace via kitPace). */
 Object.assign(BAL,{errand:{n:2,msWalk:650}});

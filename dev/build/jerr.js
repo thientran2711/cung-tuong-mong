@@ -33,7 +33,10 @@ function errWhen(K){if(errOn()&&PTIME.when)try{return PTIME.when(K)}catch(e){}
  if(b===nb)return`khắc ${i+1}`;if(Math.floor(b/B4)===Math.floor(nb/B4)){let n="";try{n=BUOI[b%B4].toLowerCase()}catch(e){}return`${n}, khắc ${i+1}`}return"ngày mai"}
 function errZ(){if(!S)return[];if(!Array.isArray(S.erra))S.erra=[];return S.erra}
 /* every send of HERS, normalised: the parallel-time core's S.away rows (by "me") or the fallback rows */
-function errTasks(){try{if(!S)return[];if(errOn())return(Array.isArray(S.away)?S.away:[]).filter(a=>a&&a.by==="me").map(a=>({id:a.id,who:a.who,nm:a.nm,lbl:a.lbl,k:a.kind,t0:a.t0,due:a.due,back:!!a.back,read:!!a.read,rep:a.rep}));return errZ()}catch(e){return[]}}
+/* newest send first (fixer #6): the task she just gave is the one the scene / panel speaks of first, in both adapters; k = the act key when the core row carries one
+   (a "harm" row sent through runAct keeps ACT key a.a.k: «đang đi rỉ tai tin đồn…», not the generic word) */
+function errNew(L){return L.map((t,i)=>[t,i]).sort((x,y)=>(y[0].t0-x[0].t0)||(y[1]-x[1])).map(x=>x[0])}
+function errTasks(){try{if(!S)return[];if(errOn())return errNew((Array.isArray(S.away)?S.away:[]).filter(a=>a&&a.by==="me").map(a=>({id:a.id,who:a.who,nm:a.nm,lbl:a.lbl,k:(a.a&&typeof a.a.k==="string"&&a.a.k)||a.kind,t0:a.t0,due:a.due,back:!!a.back,read:!!a.read,rep:a.rep})));return errNew(errZ())}catch(e){return[]}}
 function errAwayOf(id){for(const t of errTasks())if(t.who===id&&!t.back)return t;return null}
 function errNews(){return errTasks().filter(t=>t.back&&t.rep&&!t.read)}
 function errMine(){return errTasks().filter(t=>!t.back)}
@@ -52,7 +55,7 @@ function errLedger(){if(errOn()||!S||typeof j95on!=="function"||!j95on())return;
  if(ch)try{const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){}}
 /* fallback landing: her clock reached khắc K */
 function errTick(){if(errOn()||!S||S.dead)return;const now=errNow();let ch=false;
- for(const t of errZ())if(!t.back&&t.due<=now){t.back=1;ch=true;try{if(errCan())errNotify(t.id,`${t.nm} đã về báo tin`,`${t.nm} đã về từ việc ${t.lbl||"được sai"}: có tin báo.`)}catch(e){}}
+ for(const t of errZ())if(!t.back&&t.due<=now){t.back=1;ch=true;try{if(errCan())errNotify(t.id,`${t.nm} đã về: có tin báo.`,/* the same landing line as the core (jptime pt:back): ONE wording */`${t.nm} đã về từ việc ${t.lbl||"được sai"}: có tin báo.`)}catch(e){}}
  if(ch){try{const day=errKH()*3;S.erra=errZ().filter(t=>!t.back||(!t.read&&t.rep)||now-t.due<day)}catch(e){}errLedger();errIcon()}}
 /* the report panel: ONE implementation for both adapters. kitPanel info spec: subject = the person who REALLY went and came back (law 6b), facts = what she learned
    (the act's own log lines), sections = the gain / loss chips (kit chips), «Đợi tin» only with the parallel-time core */
@@ -83,8 +86,35 @@ function errOpen(){try{if(typeof kitStatusIcon!=="undefined")kitStatusIcon.open(
 /* the gate: run an errand action; in the fallback the action runs ONCE as before (no double charge, no deferred report), then the task is recorded */
 function errAdd(sv,spec,L,dl){const t0=errNow();/* fallback: away n khắc counted from the END of her order (the act's own khắc already paid); jptime counts from the tap with its own o/n rows */const w=ERRV[spec.k]||ERRV_DEFAULT;const t={id:"e"+(++ER.n)+"-"+t0,who:errId(sv),nm:sv.name,k:spec.k,lbl:"đi "+w,t0,due:t0+errN(spec.k),back:0,read:0,rep:{t:`${sv.name} ${w} trở về`,ok:null,L:L.length?L:[`${sv.name} đã về.`],d:dl||[]}};
  errZ().push(t);ER.seen[t.id]={fresh:1};try{errNotify(t.id,`${t.nm} đã đi ${w}, về ${errWhen(t.due)}`)}catch(e){}errIcon();return t}
+/* PTIME GATE (fixer #6, FAIL 1 of review parallel-time #3; law 6b + law 11 whole group): jptime builds its own task at the buttons it adapts (doAct ptHarmSend, j21
+   scout / invite, spy / listen / plant / gift / buy / clothes); every OTHER errand gate (runAct from the card game jsgame, j70 events, j9 talk acts, jpetcare; h54Act thu,
+   tdAct gift, htAct ask) ran at once with nobody leaving. Now: the act runs ONCE as before (same odds, same result, no double charge), and when the core made no task for
+   it, the person who went is written into the core's ONE state (PTIME.send, kind of the BAL.ptime row, away n khắc from the end of her order) with the act's own report
+   (runner "errpic": the lines + gain / loss read here, shown when she is back). Never during a landing (the core's own runner calls runAct). */
+function errMineN(){try{return(Array.isArray(S.away)?S.away:[]).filter(a=>a&&a.by==="me").length}catch(e){return 0}}
+function errPtRun(fn,ctx,args,spec){
+ try{if(PTIME.landing&&PTIME.landing())return fn.apply(ctx,args)}catch(e){}
+ let sv=null;try{sv=spec.act?bestSent(S):(typeof ptRunner==="function"?ptRunner():errRunner())}catch(e){sv=null}
+ if(!sv||errAwayOf(errId(sv)))return fn.apply(ctx,args);
+ const n0=errMineN(),u0=used,l0=S.logSeq||0,b0=typeof rsnap==="function"?rsnap():null;const r=fn.apply(ctx,args);
+ if(errMineN()!==n0)return r;/* the core made its own task (an adapted button) */
+ if(!spec.always&&used===u0&&(S.logSeq||0)===l0&&!(typeof Q!=="undefined"&&Q.length))return r;
+ const w=ERRV[spec.k]||ERRV_DEFAULT;let kind=spec.act?"harm":spec.k;try{if(!(BAL.ptime&&BAL.ptime.kinds&&BAL.ptime.kinds[kind]))kind="def"}catch(e){kind="def"}
+ let a=null;try{a=PTIME.send({who:errId(sv),nm:sv.name,kind,lbl:"đi "+w,a:{run:"errpic",k:spec.k,sid:sv.sid!=null?sv.sid:null,t:`${sv.name} ${w} trở về`,L:[],d:[]}})}catch(e){console.error("jerr ptSend",e)}
+ if(a)setTimeout(()=>{try{const x=errRep(l0,b0);/* a caller that does not log the act's result line (it only returns it): that line is the report */if(!x.L.length&&typeof r==='string'&&r.trim())x.L=[typeof plain==='function'?plain(r):r.replace(/<[^>]*>/g,'')];if(x.L.length)a.a.L=x.L;a.a.d=x.d}catch(e){console.error(e)}},0);
+ try{errSync()}catch(e){console.error(e)}return r}
+/* the act's own log lines and gain / loss since the snapshot (the act finishes its lines and result card AFTER the gate returns: read at the end of this tick) */
+function errRep(l0,b0){const n=Math.max(0,Math.min((S.logs||[]).length,(S.logSeq||0)-l0));
+ const L=(S.logs||[]).slice(0,n).map(x=>String(x).split(/ — (?=<span class="[gr]">)/)[0]).map(x=>typeof plain==="function"?plain(x):String(x).replace(/<[^>]*>/g,"")).map(x=>x.replace(/^T\d+\/\d+\s+\S+\s+tuần\s*/,"").replace(/\s*\(sai [^)]*đi\)\s*/,' ').replace(/\s+—\s+/g,' · ').trim()).filter(Boolean).reverse();
+ const d=[];if(b0)for(const [k,nm] of RKEYS){const x=(S[k]||0)-(b0[k]||0);if(x)d.push([nm,x])}return{L,d}}
+/* the core lands a picture task at its due khắc: the report = what the act really did when she gave the order */
+function errPicReg(){try{if(window.PTIME&&typeof PTIME.reg==="function")PTIME.reg("errpic",a=>{const x=a.a||{};return{t:x.t,ok:null,txt:(x.L&&x.L.length?x.L.join(" "):`${a.nm} đã về.`)}})}catch(e){console.error("jerr errpic",e)}}
+errPicReg();
+/* after a landing: the picture task's report keeps the act's own lines and gain / loss chips (ptLand writes one joined line and no chips: nothing changed at landing) */
+function errPicFix(){try{if(!errOn()||!Array.isArray(S.away))return;for(const a of S.away)if(a&&a.back&&a.rep&&a.a&&a.a.run==="errpic"&&!a.a.fixd){a.a.fixd=1;if((a.a.L||[]).length)a.rep.L=a.a.L.slice();a.rep.d=(a.a.d||[]).slice()}}catch(e){}}
 function errRun(fn,ctx,args,spec){
- if(!errCan()||errOn())return fn.apply(ctx,args);/* jptime builds its own task at the button (ptSend); this file only draws it */
+ if(!errCan())return fn.apply(ctx,args);
+ if(errOn())return errPtRun(fn,ctx,args,spec);
  const sv=errRunner();if(!sv)return fn.apply(ctx,args);
  const u0=used,l0=S.logSeq||0,b0=typeof rsnap==="function"?rsnap():null;const r=fn.apply(ctx,args);
  if(!spec.always&&used===u0&&(S.logSeq||0)===l0&&!(typeof Q!=="undefined"&&Q.length))return r;
@@ -155,15 +185,15 @@ function errSync(){if(!S||S.dead||ER.syncing)return;ER.syncing=1;try{
 ER.sync=errSync;
 /* ---- wiring: the clock and the stage ---- */
 try{kmOnReset(()=>{for(const l of document.querySelectorAll(".kmerr-lay .kmerr-fig"))l.remove();ER.walk={};ER.live=0})}catch(e){}
-{const sp=spend;spend=function(){const r=sp.apply(this,arguments);try{errTick();errLedger();errSync()}catch(e){console.error(e)}return r}}
-if(typeof nextBuoi==="function"){const nb=nextBuoi;nextBuoi=function(){const r=nb.apply(this,arguments);try{errTick();errLedger();errSync()}catch(e){console.error(e)}return r}}
+{const sp=spend;spend=function(){const r=sp.apply(this,arguments);try{errPicFix();errTick();errLedger();errSync()}catch(e){console.error(e)}return r}}
+if(typeof nextBuoi==="function"){const nb=nextBuoi;nextBuoi=function(){const r=nb.apply(this,arguments);try{errPicFix();errTick();errLedger();errSync()}catch(e){console.error(e)}return r}}
 {const r0=render;render=function(){const r=r0.apply(this,arguments);try{errIcon();errSync()}catch(e){console.error(e)}return r}}
 if(typeof j59lay==="function"){const j0=j59lay;j59lay=function(){const r=j0.apply(this,arguments);try{errSync()}catch(e){}return r}}
 /* ---- entry points (the scan table in dev/handover/reports/errand-scene.md lists every one) ---- */
 {/* every ACT sent to someone elsewhere: runAct, the one gate for player acts (doAct, the card game, the picked plant / gift flows) */
  const r0=runAct;runAct=function(a,t,k,extra){if(a!==S||typeof together!=="function"||together(a,t)||ACT_NOSEND.includes(k)||ER.self.includes(k)||(typeof sameHouse==="function"&&sameHouse(a,t)))return r0.apply(this,arguments);
   /* doAct already spent the khắc before runAct: this call IS the errand (always) */
-  return errRun(r0,this,arguments,{k,n:(typeof BAL==="object"&&BAL.time&&BAL.time.cost&&BAL.time.cost.harm)||1,always:1})}}
+  return errRun(r0,this,arguments,{k,act:1,n:(typeof BAL==="object"&&BAL.time&&BAL.time.cost&&BAL.time.cost.harm)||1,always:1})}}
 {const f0=scout;scout=function(){return errRun(f0,this,arguments,{k:"scout"})}}
 {const f0=invite;invite=function(){return errRun(f0,this,arguments,{k:"invite"})}}
 /* her child far away: letter + gift (j54 h54Act "thu") and the in-law house gift (j55 tdAct "gift") */
