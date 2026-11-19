@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"dcda88d7+","t":"2026-11-19T17:10Z","c":"coop-thin tests: f6b A1 taps her Tự học card by its slot and prints her hand when no game opens; b L4 prints the withSeat round-trip diff p…","b":"458b0f35c0e2","h":[{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"}]};
+window.CTM_BI={"s":"de419976+","t":"2026-11-19T18:59Z","c":"review coop-thin-f6b r1: her saved môn stay until the host drops the pending start (an end refused / dropped on a buổi change is sent again…","b":"6513598f3076","h":[{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5190,9 +5190,9 @@ const DIRTY=["poison","kpoison","frame","kframe","plant","musk","catswap","pushp
    the «…cung nữ thân tín…» routes (jecon econLoyalMaid), else the sent servant bestSent */
 const DIRTY_SENT={bribel:a=>typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid,laydol:a=>typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid};
 let ACTK=null;
-(function(){const r0=runAct;runAct=function(a,t,k){const p=ACTK;ACTK=k;try{let oc=null;
+(function(){const r0=runAct;runAct=function(a,t,k){const p=ACTK;ACTK=k;try{let oc=null,sv=null;/* review coop-thin-f6 r1: sv lives here (the «qua loa» line below reads it; a const inside the if threw ReferenceError, solo too) */
   /* trung thành refuses (or begs against) a dishonourable order: the act does not happen */
-  if(a&&k&&DIRTY.includes(k)&&!together(a,t)){const sv=(DIRTY_SENT[k]||bestSent)(a);/* AG-ALL-2 G10: with the loop on the sent servant CHOOSES among the player maid's own "Lệnh của chủ" options (j42 cnvOrdOpts: Vâng lệnh / Từ chối / Mật báo) by her lòng and nết (jagstf2 stf2Ord); off → the old trung thành roll */
+  if(a&&k&&DIRTY.includes(k)&&!together(a,t)){sv=(DIRTY_SENT[k]||bestSent)(a);/* AG-ALL-2 G10: with the loop on the sent servant CHOOSES among the player maid's own "Lệnh của chủ" options (j42 cnvOrdOpts: Vâng lệnh / Từ chối / Mật báo) by her lòng and nết (jagstf2 stf2Ord); off → the old trung thành roll */
    oc=sv&&typeof stf2Ord==="function"?stf2Ord(a,sv,t,k):null;if(oc&&oc!=="obey"&&oc!=="half"){sv.kn=a===S?1:sv.kn;if(a===S&&oc==="refuse")servLearn(sv,"Từ chối việc bẩn");return a===S?(oc==="refuse"?`${sv.name} quỳ xin nương nương đừng làm việc thất đức; việc không thành. `:`${sv.name} viện cớ thoái thác; việc không thành. `):""}
    if(!oc&&sv&&netIs(sv,"loyal")&&roll(30)){sv.kn=a===S?1:sv.kn;const m=`${sv.name} quỳ xin ${a===S?"nương nương":NM(a)} đừng làm việc thất đức; việc không thành. `;if(a===S)servLearn(sv,"Từ chối việc bẩn");return a===S?m:""}}
   const r=oc==="half"?(a===S?`${sv.name} làm qua loa cho xong việc. `:"")+ordHalf(()=>r0.apply(this,arguments)):r0.apply(this,arguments);
@@ -31034,6 +31034,9 @@ Object.assign(BAL,{truth:{spyKnowB:8,spyKnowW:6,clearBase:20,clearMat:5,ksW:2,ks
    readMs = after the buổi ran out, a dialog with no choice (or only one road) is read for her after this long · syncMs = host re-sends the clock ·
    graceMs = after the deadline the screens show "Hết buổi" this long before the step (lag between the two players). */
 Object.assign(BAL,{coopTm:{lens:[3,5,8],buoiMs:300000,pauseCapMs:60000,readMs:8000,syncMs:4000,graceMs:1500}});
+/* CO-OP THIN GUEST, her effects (review/coop-thin-hostnull, jcoopthin TH.uiPlay): the floaters / toasts / sounds / face reveals her tap raised
+   on the host play on HER phone at most `batch` at once; the rest wait in order and play `gapMs` later, batch by batch (never dropped). */
+Object.assign(BAL,{coopUi:{batch:4,gapMs:900}});
 /* ITEM DETAIL (KIT §70, review/item-info): allow = show "hạn mức phẩm ta N" (her rank's luxury allowance) on the Xa xỉ row of every item detail,
    and mark "quá hạn mức" when wearing the piece would take her over it (coordinator 15/11 design "xa xỉ value vs her rank allowance", after the
    owner's 23:05Z dress-contest ruling; the older 08:10Z ruling hid the allowance — set false to hide it again, the row keeps "món này N · Bên mình N → M").
@@ -42179,6 +42182,9 @@ const CW=window.COOPW={tr:[],on:false,seat:"",base:null,pend:false,sent:-1,dying
 const me=()=>(CW.ctx||CW.seat)==="a"?901:902, fp=()=>(CW.ctx||CW.seat)==="a"?902:901, fs=()=>(CW.ctx||CW.seat)==="a"?"b":"a";
 const T=x=>{try{CW.tr.push(x+" f="+(rivals||[]).some(v=>v&&v.coop));if(CW.tr.length>80)CW.tr.shift()}catch(e){}};
 const isF=v=>!!(v&&v.coop);CW.isF=isF;
+/* hostnull (e), law 1 two-way: an ASK act between the two players (Tặng quà / Kết giao) runs only after the OTHER PLAYER said yes (CW.inv =
+   the accepted invite); that player decided — no NPC roll may refuse it afterwards (jdis dislike refusal; Kết giao: jrcv rcvAsk takes the yes road, never the NPC receiver pick). */
+window.coopAccepted=t=>!!(CW.inv&&isF(t));
 /* the same item, keys in any order (a patch / ilUid can add a key in another order on one phone): coop-thin F3, whole family */
 const SJ=o=>JSON.stringify(o,(k,v)=>v&&typeof v==="object"&&!Array.isArray(v)?Object.keys(v).sort().reduce((r,x)=>(r[x]=v[x],r),{}):v);
 const host=()=>CW.seat==="a";
@@ -56544,7 +56550,7 @@ const KPM_ACT={tat:{m:"slap",ok:/./},phatquy:{m:"slap",ok:/./},
  ally:{m:"join",two:1,ok:/thành/,no:/lạnh nhạt/},xinhh:{m:"join",two:1,ok:/thành/,no:/không thành/},banphe:{m:"betray",two:1,ok:/./,no:/không thành|bị phát hiện/}};
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function"||o.__kpm)return;const w=f(o);w.__kpm=1;window[n]=w;try{(0,eval)(n+"=window."+n)}catch(e){}};
  for(const k in KPM_ACT){const A=typeof ACT==="object"&&ACT[k];if(!A||typeof A.f!=="function"||A.f.__kpm)continue;const D=KPM_ACT[k],F=A.f;
-  A.f=function(a,t){const r=F.apply(this,arguments);try{const s=String(r||"");if(t&&t!=="string"&&typeof t==="object"&&D.ok.test(s)&&!(D.no&&D.no.test(s)))setTimeout(()=>kpmGo(D.m,t,D.two?a:null),typeof kitPace==="function"?kitPace(450):450)}catch(e){}return r};A.f.__kpm=1}
+  A.f=function(a,t){const r=F.apply(this,arguments);try{const s=String(r||"");if(t&&t!=="string"&&typeof t==="object"&&D.ok.test(s)&&!(D.no&&D.no.test(s))){/* co-op thin (hostnull d): an act run in the other player's context on the host is HERS: the move is taken now (jcoopthin captures it for her phone), never later on the host's stage */if(window.COOPW&&COOPW.ctx)kpmGo(D.m,t,D.two?a:null);else setTimeout(()=>kpmGo(D.m,t,D.two?a:null),typeof kitPace==="function"?kitPace(450):450)}}catch(e){}return r};A.f.__kpm=1}
  /* death: an NPC on the stage greys, sinks and fades (kill = illness, ban chết, childbirth, dieIf) */
  for(const n of ["kill","deathSentence","dieIf"])W(n,o=>function(p){const was=p&&typeof p==="object"&&p!==S&&p.alive!==false;const r=o.apply(this,arguments);try{if(was&&p.alive===false)kpmGo("death",p)}catch(e){}return r});
  /* punished / phế: dragged off the stage (NPC, sev 2+ or fall); a light punishment is a flush */
@@ -56816,7 +56822,10 @@ function cfPlay(plan){dbg('push '+plan.wk);const gen=life;kmPush(done=>{dbg('run
    const deck=deckOf(S.nightWhy);if(!deck.length){dbg('nodeck');done();return}dbg('play '+deck.length);
    Promise.all([ART.a,ART.b,ART.hand,ART.seal].map(preload)).then(()=>{try{if(gen!==life){done();return}const sc=kitCardFlip({deck,pick:plan.pick,turned:plan.turned,resHTML:resHTML(plan,plan),onEnd:()=>{if(cur===sc)cur=null;done()}});cur=sc||null;window.cfLast=plan}catch(e){console.error(e);done()}})}catch(e){console.error(e);done()}};go()})}
 if(typeof flip==="function"){const f0=flip;flip=function(){inFlip=true;stoleFrom=null;let r;try{r=f0.apply(this,arguments)}finally{inFlip=false}
- try{if(want()){const plan=cfPlan();if(plan)cfPlay(plan)}}catch(e){console.error(e)}return r}}
+ try{if(want()){const plan=cfPlan();if(plan)cfPlay(plan)}else{/* co-op thin (hostnull d): her flip run on the host (her pick there): the scene is hers, shown on HER phone. The plan is taken HERE (her
+   night, her stoleFrom — per-seat state of this run; her phone does not have it) and plays there as is (review r1: cfShow with no plan re-read
+   stoleFrom on her phone = null → the wrong turned card after a stolen night) */const T=window.COOPW&&COOPW.ctx&&COOPW.thin;if(T&&T.uiCap){const plan=cfPlan();if(plan)T.uiCap.push(["cfShow",[JSON.parse(JSON.stringify(plan))]])}}}catch(e){console.error(e)}return r}}
+window.cfShow=function(plan){try{if(want()){const p=plan&&typeof plan==="object"&&plan.wk!=null?plan:cfPlan();if(p)cfPlay(p)}}catch(e){console.error(e)}};
 setTimeout(function warm(){try{if(typeof S==="undefined"||!S){setTimeout(warm,7000);return}[ART.a,ART.b,ART.hand,ART.seal].forEach(preload)}catch(e){}},12000);
 window.kitCardFlip=kitCardFlip;window.cfDeckOf=deckOf;window.cfGrid=grid;
 /* demo (kit page / tests): n cards from the live court, k of them barred; who = "me" | index | null */
@@ -62380,7 +62389,7 @@ window.disOf=disOf;window.disInit=disInit;window.disKnown=known;window.disUnk=p=
  if(!k){const out0=g0.apply(this,arguments);try{if(a===S&&e&&out0&&r&&r!=="emp"&&r!=="th"&&r!=="maid"&&typeof r==="object"&&r!==S){const lk=likeKeys(r),gk=giftKeys(e).find(x=>lk.includes(x));if(gk)likeLearn(r,gk,"Dâng quà hợp ý")}}catch(x){}return out0}
  const emp=r==="emp",th=r==="th",who=emp?"Hoàng thượng":th?"Thái hậu":`${rkName(r)} ${r.name}`,en=entry(k).n,nm=iname(e),pr=emp?"ngài":th?"người":"nàng",key=emp||th?r:r;
  const loss=(n)=>emp?`Sủng -${n}`:th?`Thái hậu -${n}`:`thiện cảm của nàng -${n}`;
- if(roll(BAL.dis.refuse)){learn(key,k,"Bị từ chối quà");if(emp)ap(S,{sung:-BAL.dis.refSung});else if(th)ap(S,{th:-BAL.dis.refAff});else affAdd(r,S,-BAL.dis.refAff);
+ if(!(typeof coopAccepted==="function"&&coopAccepted(r))/* co-op: the other player accepted it (law 1) */&&roll(BAL.dis.refuse)){learn(key,k,"Bị từ chối quà");if(emp)ap(S,{sung:-BAL.dis.refSung});else if(th)ap(S,{th:-BAL.dis.refAff});else affAdd(r,S,-BAL.dis.refAff);
   return `<span class="r">${who} không nhận ${nm}: ${pr} không ưa ${en}.</span> ${emp?`Sủng -${BAL.dis.refSung}`:th?`Thái hậu -${BAL.dis.refAff}`:`Thiện cảm của nàng -${BAL.dis.refAff}`}. Món quà vẫn còn trong rương. `}
  const out=g0.apply(this,arguments);if(!out)return out;learn(key,k,"Dâng quà sai ý");
  if(emp)ap(S,{sung:-BAL.dis.sung});else if(th)ap(S,{th:-BAL.dis.aff});else affAdd(r,S,-BAL.dis.aff);
@@ -74224,7 +74233,11 @@ function rcvSabO(p,t,o){const H=BAL.road.hp,R=BAL.rcv.help,me=t===S,tq=rcvQ(p,t)
 const RCVK={};
 function rcvAsk(k,p,t,x){const D=RCVK[k];if(!D||!p||!t||p===t)return"";if(D.ok&&!D.ok(p,t,x))return"";
  if(t===S){rcvCard("rcvAsk",{k,a:key(p),x:x||null},D.t,p);return `${p.name} sai người sang ${D.act} ngươi. `}
- const c=rcvPick(t,p,D.opts(p,t,x),D.kind||"help");if(!c)return"";const r=c.go();const s=r&&typeof r==="object"?r.r:r;return s?String(s).replace(/([^.!?])$/,"$1. "):""}
+ const O=D.opts(p,t,x);let c=null;
+ if(typeof coopAccepted==="function"&&coopAccepted(t)){/* co-op (law 1 two-way, hostnull e, merged here by review r1): the other PLAYER already said «Nhận» on the
+   co-op ask card (jcoopworld ASK → CW.inv): the yes road (full; half when her Sức is short), never an NPC pick that refuses or tells (mách) after it */
+  const ok=O.filter(o=>o&&!(typeof o.lk==="function"&&o.lk()));c=ok.find(o=>o.id==="full")||ok.find(o=>o.id==="half")||ok.find(o=>o.id==="no")||null}
+ else c=rcvPick(t,p,O,D.kind||"help");if(!c)return"";const r=c.go();const s=r&&typeof r==="object"?r.r:r;return s?String(s).replace(/([^.!?])$/,"$1. "):""}
 PEND.rcvAsk=pp=>{const D=RCVK[pp.k],p=byKey(pp.a);if(!D||!p||p===S||!p.alive||p.out||(D.ok&&!D.ok(p,S,pp.x)))return null;
  return{who:pv(p),t:D.line(p,pp.x),o:D.opts(p,S,pp.x).map(o=>({n:o.n,fx:o.fx,x:o.x,risk:o.risk,go:()=>{const r=o.go();const s=r&&typeof r==="object"?r.r:r;if(s)log(s)}}))}};
 const rcvSg=(p,me,a,b)=>p===S?a:me?b:null;
@@ -78852,6 +78865,11 @@ TH.withSeat=function(seat,fn){
     runs without D's steps (never takeQ on the rolled life) and is logged ("held-run", the tests assert none) */
  const hd=TH.held(seat)&&TH.curDo!=="life";if(hd)D.log.push(["held-run",seat,TH.curDo||"later"]);
  const dW=dOn&&TH.curDo!=="life"&&!hd;
+ /* review r1 (hostnull a, the whole family beyond tap runs): ANY run in her context may write the host's page — her part B life intent wrote the
+    host's open card (#modal: jload lDlgWait klifewait + the kit size attributes of his .dlg, outer showModal wrappers run past the NOOP), a
+    part D pick its #modal class — with no repaint (TH.tapRun sees only tap runs). This net watches every outer run of hers (part D on: the
+    host's after-run exists) and asks the same one repaint (rpAsk) when it wrote his DOM and no tap run inside already asked. */
+ let wso=null;const wpn=TH.paintN;if(dOn&&typeof MutationObserver==="function"&&document.body)try{wso=WSO=WSO||new MutationObserver(()=>{});wso.takeRecords();wso.observe(document.body,{subtree:true,childList:true,attributes:true,characterData:true})}catch(e){wso=null}
  try{if(B.fresh){fixRefs(S);B.fresh=false}if(dW&&D.hold)D.hold(S);v=standIn(PA,S);if(v)v.__inv0=(v.inv||[]).slice();if(dW&&!D.noPatch)try{p0=pSnap()}catch(e){console.error("thin p0",e)}D.cur={p0,rv:dW&&!D.noPatch?D.rvIn(seat):null};return fn()}
  finally{const sN=S;
   /* F6a: what a part does in her context as it closes (her hand of cards brought up to date, her render-diff engines; before takeQ: a card they raise goes out now) */
@@ -78868,6 +78886,7 @@ TH.withSeat=function(seat,fn){
    if(dOn&&Array.isArray(e.inv))for(const x of e.inv)if(x&&x.k&&!x.h&&!(e.__inv0||[]).includes(x))TH.bridgeItems.push(J(x));
    for(const k of X.STAT)if(k!=="hh"&&typeof e[k]==="number"&&e[k]!==b[k]){TH.bridge.push([k,b[k],e[k]]);A.S[k]=e[k]}
    for(const [f,m] of [["rel","rl"],["oan","ro"]])if(e[f]!==b[f]){A.S[m]=A.S[m]||{};A.S[m][PID[seat]]=e[f];TH.bridge.push([m,b[f],e[f]])}}
+  if(wso)try{const R=wso.takeRecords();wso.disconnect();if(R.length&&TH.paintN===wpn){const M=document.getElementById("modal");TH.paintN++;TH.wsPaintN=(TH.wsPaintN|0)+1;rpAsk(!!M&&R.some(x=>x.target===M||M.contains(x.target)))}}catch(e){}/* before the context closes: rpAsk queues in AFTER */
   B.pers=persTake(A.S);swapView(seat,CW.seat,mks,A.S);persPut(A.S,hp);X.pushFriend(L);
   CW.ctx=undefined;TH.outerS=null;S=A.S;for(const r of REG)try{r[2](A.g[r[0]])}catch(e){}quiet=A.quiet;
   if(dOn)D.afterRun(seat)}};
@@ -78890,17 +78909,55 @@ TH.NOOP.push("resultShow");
    gates read screenOff() (j1: true inside COOPW.ctx), so nothing of hers draws on the host's screen; her floaters / numbers / item and coin
    effects called in her run are captured here (UICAP, plain arguments only) and play on HER phone once, with the answer (TH.uiPlay).
    E's buổi step, B's life, C's world frame and D's deferred work stay quiet (turns that are not her tap). */
-const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */]);
-for(const n of UICAP)if(!TH.NOOP.includes(n))TH.NOOP.push(n);
+const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */,
+ "kpmPlay"/* hostnull (d): her act's figure move on the stage (jpres kpmGo: slap / drag / thread …), played on HER stage */,"cfShow"/* hostnull (d): her night card-flip scene (jflip) */,
+ "krvFlip"/* hostnull (b): her face reveal (jreveal krvFlip, raised by k61Know / k61Meet in her run) plays on HER phone, never on the host (below) */]);
+for(const n of UICAP)if(!TH.NOOP.includes(n)&&n!=="kpmPlay")TH.NOOP.push(n);/* kpmPlay: defined below (her stage replays it); in any context its kpmGo is already captured / a no-op, so it needs no wrapper (coop-thin-b NOOP check) */
 TH.UICAP=UICAP;/* F4: a part adds the screen redraws it captures itself (its own wrappers push them to TH.uiCap); TH.uiPlay plays only names in this set */
 const uiArg=a=>{try{return JSON.parse(JSON.stringify(a,(k,v)=>typeof v==="function"||(typeof Node!=="undefined"&&v instanceof Node)?undefined:v))}catch(e){return null}};
-TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let r,ui;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0}return {r,ui:ui&&ui.length?ui.slice(0,12):null}};
+/* hostnull (a), the whole family (every part F registration — walks, talk, scout, invite, bag, pets … —, every part D pick, every part E
+   step: all of them run through here): an engine her run calls may paint the HOST's own screen with HER state (renderStage / k3Stage / the
+   act cards / the stage figures are not no-ops in her context: their wrappers also write her person, F1/E rely on that). Whatever her run
+   wrote into the host's page is seen here (MutationObserver.takeRecords: synchronous, no list of painters to keep up to date) and the host
+   repaints his own screen from his own state when her context closes (rpAsk below). Her screen gets her own result with the
+   answer (her view → one render). (c) No cap here: every effect her run raised is kept (BAL.coopUi paces them on her phone). */
+let PMO=null,WSO=null;TH.paintN=0;
+TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let mo=null;
+ if(!u0&&CW.ctx&&host()&&typeof MutationObserver==="function"&&document.body)try{mo=PMO=PMO||new MutationObserver(()=>{});mo.takeRecords();mo.observe(document.body,{subtree:true,childList:true,attributes:true,characterData:true})}catch(e){mo=null}
+ let r,ui,dirty=false,dm=false;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0;if(mo)try{const R=mo.takeRecords();mo.disconnect();dirty=R.length>0;
+   if(dirty){const M=document.getElementById("modal");dm=!!M&&R.some(x=>x.target===M||M.contains(x.target))}}catch(e){}}
+ if(dirty){TH.paintN++;rpAsk(dm)}
+ return {r,ui:ui&&ui.length?ui:null,dirty}};
+/* hostnull (a) r2, cost + safety: the host repaints in D.afterRun, i.e. in the SAME task right after her context closes, before the page's
+   own observers run (they run at the microtask checkpoint: jreveal krvTick, jsfx, the kit fitters …). A repaint deferred to a later frame
+   was tried and dropped: in that gap the host's observers saw HER painted DOM and acted on it (the host flipped her face, H2 red). Cost =
+   one host render per run that wrote his DOM (measured: ~300 ms at CPU ×4 on a talk; median tap→answer unchanged on 4G). showModal()
+   (rebuilds #modal from Q[0]: his scroll, his open card) only when her run wrote into #modal or other waiting work asks for it; otherwise
+   render() alone. Nothing observes during the repaint (the observer is disconnected): it cannot feed itself, no loop. */
+let RPM=false;TH.rpN=0;TH.rpMs=0;const RPF=()=>{};
+function rpAsk(m){RPM=RPM||m;try{D.after(RPF)}catch(e){}}
 /* guest: what her run on the host captured, played once on her own screen */
-TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;
- try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}TH.uiN=(TH.uiN|0)+n;return n};
-for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx&&n!=="resultShow"){if(TH.uiCap&&UICAP.has(n)&&TH.uiCap.length<12)try{const a=[...arguments].map(uiArg);if(n==="kitLine"||n==="srvToast")a[0]=String(a[0]==null?"":a[0]).slice(0,300);TH.uiCap.push([n,a])}catch(e){}return}
+/* hostnull (c): ONE cap rule (BAL.coopUi, one core): at most BAL.coopUi.batch effects play at once; the rest wait in order and play
+   BAL.coopUi.gapMs later, batch by batch — an effect is never dropped (the old answer kept only 4, the run 12). Returns the number queued. */
+const UIQ=[];let uiT=0;
+function uiPump(){uiT=0;const B=BAL.coopUi/* one core (law 4): no typed fallback */;let n=0;
+ while(UIQ.length&&n<Math.max(1,B.batch|0)){const [f,a]=UIQ.shift();try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}
+ TH.uiN=(TH.uiN|0)+n;if(UIQ.length)uiT=setTimeout(uiPump,Math.max(0,B.gapMs|0))}
+TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;UIQ.push([f,a]);n++}
+ if(n&&!uiT)uiT=setTimeout(uiPump,0)/* after every listener of the same view (her patch + render): an effect reads the state it shows */;return n};
+TH.uiQ=()=>UIQ.length;
+for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx&&n!=="resultShow"){if(TH.uiCap&&UICAP.has(n))try{const a=[...arguments].map(uiArg);if(n==="kitLine"||n==="srvToast")a[0]=String(a[0]==null?"":a[0]).slice(0,300);TH.uiCap.push([n,a])}catch(e){}return}
   /* a result card whose snapshot was taken in another seat's context (her greeting's card at +30 ms, accEtqGo) is hers, never the host's */
   if(n==="resultShow"&&arguments[1]&&arguments[1].__ctx&&CW.seat!==arguments[1].__ctx)return;return f.apply(this,arguments)};TH.NOOPED.push(n)}
+/* hostnull (b): a face reveal her run raises (k61Know / k61Meet → jreveal krvFlip) belongs to HER screen: inside any other seat's context it
+   never touches the host's reveal state (KRV: the host would replay her reveal on a face he already knew, at his next paint); inside her tap
+   run it is captured and plays on her phone with the answer (her own krvFlip: once, the reveal window dedupes the flip her render also finds) */
+/* hostnull (d): a figure move her run raises (jpres kpmGo, gated off inside her context: kpmOn reads screenOff) is captured with the people as
+   references (her = "me", the other player = "f", an NPC = its id) and played on HER stage (kpmPlay finds them in her own world) */
+if(typeof kpmGo==="function"){const kg=kpmGo;const ref=p=>p===S?"me":p&&typeof p==="object"&&p.coop?"f":p&&typeof p==="object"&&p.id!=null?{id:p.id}:null;
+ kpmGo=function(m,p,q){if(CW.ctx){if(TH.uiCap&&typeof m==="string"&&p&&typeof p==="object"&&p.nodeType!==1){const a=ref(p);if(a)TH.uiCap.push(["kpmPlay",[m,a,q?ref(q):null]])}return false}return kg.apply(this,arguments)};
+ window.kpmPlay=function(m,a,b){const res=x=>x==="me"?S:x==="f"?(CW.friend?CW.friend():null):x&&x.id!=null?(rivals||[]).find(v=>v&&v.id===x.id)||null:null;const p=res(a);if(!p)return false;return kpmGo(m,p,b?res(b):null)}}
+if(typeof krvFlip==="function"){const kf=krvFlip;krvFlip=function(k){if(CW.ctx){if(TH.uiCap&&typeof k==="string"&&k)TH.uiCap.push(["krvFlip",[k]]);return}return kf.apply(this,arguments)}}
 
 /* stable text of the host's whole state (the round-trip check) */
 function stable(o){const seen=new WeakSet();return JSON.stringify(o,function(k,v){if(typeof v==="function")return undefined;
@@ -79091,7 +79148,8 @@ D.after=fn=>{if(CW.ctx)AFTER.push(fn);else try{fn()}catch(e){console.error("thin
 D.afterRun=function(seat){const L=AFTER.splice(0);for(const f of L)try{f()}catch(e){console.error("thin after",e)}
  if(TH.bridgeItems&&TH.bridgeItems.length){const pid=PID[seat];for(const e of TH.bridgeItems.splice(0)){const x=J(e);x.from=pid;if(x.by==="me")x.by=pid;
   try{pushDil(mkP("giftin",{f:pid,e:x}),"Quà tặng")}catch(er){console.error(er)}}}
- if(L.length||AFTER.length)try{showModal();render()}catch(e){}
+ if(L.length||AFTER.length){const rp=L.length&&L.every(f=>f===RPF)&&!AFTER.length,m=RPM;RPM=false;const t=performance.now();
+  try{if(!rp||m)showModal();render()}catch(e){console.error("thin repaint",e)}if(L.includes(RPF)){TH.rpN++;TH.rpMs+=performance.now()-t}}
  try{if(CW.reEnd)CW.reEnd()}catch(e){}};
 /* run fn in her context from the top of the event loop (her cards, her res); rid = a host wait (CW.rpend) released when she has it.
    B r2 (seam, the ONE gate for every D path into her context): while her rolled life is held (TH.held) the work is DEFERRED (D.DF), never
@@ -80008,7 +80066,7 @@ TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();don
       cards on her phone; her toasts / floaters / coin and item effects captured, played on HER phone with the answer; nothing on the host's screen) */
    if(R.noRes)NORES++;RSL=null;let T;try{T=TH.tapRun(()=>{if(R.pre)R.pre(args)/* F5: what the host does first in her run (the deferred cost, the host's own rolls) */;return PRE[a.n].apply(null,args)})}finally{if(R.noRes)NORES--}/* F3: a registered UI function's own wrapR card shows on her phone (cardLater), never here */
    const r=T.r,ui=T.ui;F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
-   if(typeof r==="boolean")out.rv=r;if(R.noRes&&RSL){out.rs=[String(RSL[0]==null?"":RSL[0]).replace(/<[^>]+>/g,"").slice(0,160),RSL[1]==null?null:!!RSL[1]];RSL=null}if(ui&&ui.length)out.ui=ui.slice(0,4);
+   if(typeof r==="boolean")out.rv=r;if(R.noRes&&RSL){out.rs=[String(RSL[0]==null?"":RSL[0]).replace(/<[^>]+>/g,"").slice(0,160),RSL[1]==null?null:!!RSL[1]];RSL=null}if(ui&&ui.length)out.ui=ui/* hostnull (c): all of them; BAL.coopUi paces them on her phone (was slice(0,4): a 5th effect was lost) */;
    if(R.back){const c={};for(const [n,g] of R.ctx||[])if(R.back.includes(n))try{const v=g();c[n]=v===undefined?null:J(v)}catch(e){}out.c=c}
    if(R.host)try{R.host(args,out)}catch(e){console.error("thin F host",e)}}}
  catch(e){console.error("thin F run",a.n,e);out={st:"err",e:String(e&&e.message||e).slice(0,200)}}
@@ -80191,10 +80249,10 @@ function reg9(name,K,o){o=o||{};const R=Object.assign({lv:L9,ctx:CX9,back:BACK8,
  R.mine=A=>live()&&(o.mine?o.mine(A):isMe(A[0]));return F.reg(name,R)}
 /* her care / plant screens draw into the HOST's DOM (petcClose → closeModal = the host's own card queue) when run in her context there:
    captured instead, replayed on her phone with the answer (her pet / plant read from her patched person) */
-const UI9=n=>{if(typeof window[n]!=="function")return;const f=window[n];window[n]=function(){if(CW.ctx&&host()&&on(L9)){if(TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push([n,String(arguments[0]==null?"1":arguments[0]).slice(0,300)||"1"]);return}return f.apply(this,arguments)}};
+const UI9=n=>{if(typeof window[n]!=="function")return;const f=window[n];window[n]=function(){if(CW.ctx&&host()&&on(L9)){if(TH.uiCap)TH.uiCap.push([n,String(arguments[0]==null?"1":arguments[0]).slice(0,300)||"1"]);return}return f.apply(this,arguments)}};
 ["petcDraw","petcClose","shelfPlantDraw"].forEach(UI9);
 try{for(const n of ["petcDraw","petcClose","shelfPlantDraw","petcGrowShow"])TH.UICAP.add(n)}catch(e){}
-if(typeof petcGrowCard==="function"){const f=petcGrowCard;petcGrowCard=function(P){if(CW.ctx&&host()&&on(L9)){const i=tsbPets(S).indexOf(P);if(i>=0&&TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push(["petcGrowShow",String(i)]);return}return f.apply(this,arguments)};
+if(typeof petcGrowCard==="function"){const f=petcGrowCard;petcGrowCard=function(P){if(CW.ctx&&host()&&on(L9)){const i=tsbPets(S).indexOf(P);if(i>=0&&TH.uiCap)TH.uiCap.push(["petcGrowShow",String(i)]);return}return f.apply(this,arguments)};
  window.petcGrowShow=i=>{try{const P=tsbPets(S)[+i];if(P)f(P)}catch(e){}}}
 /* pets */
 KSH.pet=()=>petShop();
@@ -80444,10 +80502,36 @@ F.f6bStart=ST;
    host side otherwise (no capture yet) — listed for H. */
 if(TH.gLift){TH.gLift.exam=L12;TH.gLift.toil=L12;TH.gLift.steal=L12}
 /* ===== 1-2. the exams (her exam, the servant exam): exRun plays on her phone with a throw-away state; the end = exEnd ===== */
+/* review r1 (law 3: a start paid on the host must end the solo way): the host keeps her pending game IN HER STATE (exam: e.pend with a
+   start id "co", as solo exRun; veil: S.vlPend) — never in host memory only. While it is pending her ticks never abort it (her game is on
+   HER phone: the host's own #kg82 says nothing about it). Her phone saves the môn played so far (localStorage, this room + start id);
+   when the start is pending in her view but no game of hers runs (her reload / app kill), her phone sends the solo end once:
+   exam = the môn played + exSkipRaw for the rest (solo exAbort), veil = «Kết nhanh» (material back). */
+let EXL=null,VLL=null,EXT=null;const SENT={};
+const coId=k=>k+":"+(Date.now()%1e9).toString(36)+Math.floor(Math.random()*1e4);
+const exPd=k=>{try{const e=k==="srv"?S&&S.srv&&S.srv.ex:S&&S.ex;return e&&e.pend&&e.pend.co?e.pend:null}catch(x){return null}};/* a plain read (exS / exSrvS write lazily) */
+const LSX=()=>"ctm-f6b-ex:"+((window.COOP&&COOP.state&&COOP.state.room)||"")+":"+(CW.seat||"");
+function exLocKeep(kind,t){clearInterval(EXT);const w=()=>{try{const pd=exPd(kind);if(t.pend&&pd)localStorage.setItem(LSX(),JSON.stringify({co:pd.co,raws:t.pend.raws,sk:t.pend.sk}))}catch(x){}};w();EXT=setInterval(w,400)}
+/* her end sent: the saved môn stay until the host's view drops the pending start (an end refused / dropped on a buổi change is sent again
+   by the gone-check below, the same môn: the start never stays paid with no result) */
+function exLocStop(kind,res){clearInterval(EXT);EXT=null;EXL=null;const pd=exPd(kind);try{if(pd&&res)localStorage.setItem(LSX(),JSON.stringify({co:pd.co,raws:res.raws||[],sk:res.sk||[]}))}catch(x){}}
+if(typeof exTick==="function"){const t0=exTick;exTick=function(){if(on()&&exPd("me"))return;return t0.apply(this,arguments)};window.exTick=exTick}
+if(typeof exSrvTick==="function"){const t0=exSrvTick;exSrvTick=function(){if(on()&&exPd("srv"))return;return t0.apply(this,arguments)};window.exSrvTick=exSrvTick}
+/* her phone: a pending start with no game of hers running, still so 3 s later (a game opened by an answer opens on the next tick) */
+const gone=()=>{if(host()||!on()||!CW.seat||CW.ctx||!TH.view||F.pend||!S||S.dead)return null;
+ for(const k of ["me","srv"]){const pd=exPd(k);if(pd&&!SENT[pd.co]&&EXL!==k&&!document.getElementById("kg82"))return {k,co:pd.co}}
+ try{const sv=JSON.parse(localStorage.getItem(LSX())||"null");if(sv&&sv.co&&!exPd("me")&&!exPd("srv"))localStorage.removeItem(LSX())}catch(x){}/* her start ended on the host: its saved môn go */
+ const v=S.vlPend;if(v&&v.co&&!SENT[v.co]&&VLL!==v.co&&!document.getElementById("kg82"))return {k:"veil",co:v.co,m:v.m};return null};
+function abortGone(now){const g=gone();if(!g)return false;const fire=()=>{const h=gone();if(!h||h.co!==g.co||!g12())return;SENT[g.co]=1;setTimeout(()=>{delete SENT[g.co]},20000);F.stat.coAbort=(F.stat.coAbort|0)+1;
+  if(g.k==="veil"){window.vlCraftEnd(g.m,5,true);return}let sv=null;try{sv=JSON.parse(localStorage.getItem(LSX())||"null")}catch(x){}
+  const ok=sv&&sv.co===g.co&&Array.isArray(sv.raws);window.exEnd(g.k,ok?sv.raws:[],ok&&Array.isArray(sv.sk)?sv.sk:[])};
+ if(now)fire();else setTimeout(fire,3000);return true}
+let AGT=0;if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(!host()&&on()&&Date.now()-AGT>3500&&gone()){AGT=Date.now();abortGone(false)}}catch(e){console.error("thin F6b gone",e)}return r};window.render=render}
+F.f6bExDrop=()=>{clearInterval(EXT);EXT=null;EXL=null;VLL=null};F.f6bGone=()=>abortGone(true);/* tests: her page gone (the game and its flags; localStorage kept) / the 3 s check at once */
 if(typeof exRun==="function"){const x0=exRun;
  exRun=function(P,e,done){const kind=P&&P.srv?"srv":"me";
-  if(hctx()){stSet("exam",kind);return cap("exGame",[kind])}
-  if(g12()){const t={};let sk=null;const r=x0.call(this,P,t,res=>exEnd(kind,res&&res.raws||[],sk||[]));sk=t.pend&&t.pend.sk;F.stat.exLocal=(F.stat.exLocal|0)+1;return r}
+  if(hctx()){stSet("exam",kind);if(e&&typeof e==="object")e.pend={raws:[],sk:[],co:coId(kind)}/* review r1: her pending exam in HER state on the host, as solo exRun (survives her reload) */;return cap("exGame",[kind])}
+  if(g12()){const t={};let sk=null;EXL=kind;const r=x0.call(this,P,t,res=>{exLocStop(kind,{raws:res&&res.raws||[],sk:sk||[]});exEnd(kind,res&&res.raws||[],sk||[])});sk=t.pend&&t.pend.sk;exLocKeep(kind,t);F.stat.exLocal=(F.stat.exLocal|0)+1;return r}
   return x0.apply(this,arguments)}}
 /* her phone: an opener replayed by an answer runs on the next tick (inside the view apply gOn is false: the game took the old road) */
 const nextTick=fn=>{if(host())return fn();setTimeout(()=>{try{fn()}catch(e){console.error("jcoopthinf6b opener",e)}},0)};
@@ -80455,7 +80539,7 @@ window.exGame=function(kind){noCard();nextTick(()=>{const P=kind==="srv"?exSrvPl
 TH.UICAP.add("exGame");
 reg12("exEnd",["v","v","v"],{title:A=>A[0]==="srv"?"Khảo hạch Nội vụ phủ":"Khảo hạch",
  dec:a=>{const x=X5.decA9(["v","v","v"],a);if(!x)return null;const [kind,raws,sk0]=x;if(kind!=="me"&&kind!=="srv")return bad("exEnd");
-  if(lifted("exam")&&!stTake("exam",kind))return bad("exEnd");/* lifted: only after her card ran on the host */
+  const pd0=exPd(kind);if(lifted("exam")&&!stTake("exam",kind)&&!pd0)return bad("exEnd");/* lifted: only after her card ran on the host (its token, or her pending exam in her state: a host reload keeps it) */
   const e=kind==="srv"?exSrvS():exS(S);if(!e||(e.w1==null&&!e.pend))return bad("exEnd");/* her window is open (one end per exam) */
   const P=kind==="srv"?exSrvPlan(e.to):exPlanFull();const sk=Array.isArray(sk0)?sk0.map(Boolean):[];
   if(!Array.isArray(raws)||raws.length>P.rounds.length)return bad("exEnd");for(let j=0;j<raws.length;j++)if(!raw0(raws[j],sk[j]))return bad("exEnd");
@@ -80474,22 +80558,26 @@ reg12("kc2SelEnd",["v"],{title:()=>"Tuyển chọn",
 
 /* ===== 8. the veil craft: vlCraftGame (mgEnd 12 = F5's held cost machinery), the end = vlCraftEnd ===== */
 capFn("vlCraftGame");
-{const v0=window.vlCraftGame;if(typeof v0==="function")window.vlCraftGame=function(m){if(hctx())stSet("veil",m);return v0.apply(this,arguments)};vlCraftGame=window.vlCraftGame}
-/* her start ran on her phone: its cost travels held (F5 aa ctx); the host takes it only when it is at least the solo khắc + Sức (VL; the material is paid by vlCraft in the end) */
-const vlHeld=m=>{const c=window.__aaPend;return !!c&&typeof c==="object"&&(c.khac|0)>=VL.craftK&&(+c.suc||0)<=-VL.craftSuc};
+{const v0=window.vlCraftGame;if(typeof v0==="function")window.vlCraftGame=function(m){if(hctx()){stSet("veil",m);S.vlPend={m,co:coId("vl")}/* review r1: in her state */}else if(g12()&&S.vlPend&&S.vlPend.co)VLL=S.vlPend.co;return v0.apply(this,arguments)};vlCraftGame=window.vlCraftGame}
+/* her start ran on her phone: its cost travels held (F5 aa ctx); the host takes it only when it is at least the solo khắc + Sức + the material
+   she picked (VL; review r1: the held bạc too — vlCraftEnd gives the option's material back and vlCraft pays it once, so a held cost without
+   it made a ngọc veil with no material paid) */
+const vlHeld=m=>{const c=window.__aaPend;return !!c&&typeof c==="object"&&(c.khac|0)>=VL.craftK&&(+c.suc||0)<=-VL.craftSuc&&(+c.bac||0)<=-(VL.mat[m]||0)};
 /* mgEnd 12 means "an F6b end": below level 12 (or not her own tap) the game runs exactly as before (F5's wrapper sees no mgEnd) */
 if(typeof playArt==="function"){const p0=playArt;playArt=function(o){if(o&&o.mgEnd===12&&!g12())o=Object.assign({},o,{mgEnd:0});return p0.call(this,o)};window.playArt=playArt}
 reg12("vlCraftEnd",["v","v","v"],{title:()=>"Tự tay kết mạng che mặt",
  dec:a=>{const x=X5.decA9(["v","v","v"],a);if(!x)return null;const [m,raw,sk]=x;if(![0,1,2].includes(m)||!raw0(raw,sk))return bad("vlCraftEnd");
-  if(!stTake("veil",m)&&!vlHeld(m))return bad("vlCraftEnd");/* the start: run on the host (paid there), or her held solo cost */return [m,sk?5:raw,!!sk]},
- pre:A=>payAA(sc=>{sc.skip=!!A[2];sc.raw=A[2]?null:cl0(Math.round(A[1]||0),0,10);sc.ok=!A[2]&&sc.raw>=5})});
+  const vp=S.vlPend&&S.vlPend.m===m;if(!stTake("veil",m)&&!vp&&!vlHeld(m))return bad("vlCraftEnd");/* the start: run on the host (paid there), or her held solo cost */return [m,sk?5:raw,!!sk]},
+ pre:A=>{try{delete S.vlPend}catch(e){}payAA(sc=>{sc.skip=!!A[2];sc.raw=A[2]?null:cl0(Math.round(A[1]||0),0,10);sc.ok=!A[2]&&sc.raw>=5})}});
+{const w=window.vlCraftEnd;window.vlCraftEnd=function(){if(!host()&&VLL){const c=VLL;SENT[c]=1;setTimeout(()=>{delete SENT[c]},20000);VLL=null}return w.apply(this,arguments)}}
 
 /* ===== 10. Chải chuốt: the end = wdGroomEnd, its rows (wdGroomShow) on her phone ===== */
 /* her result rows replay into HER open game frame; the frame closed meanwhile (✕, a reload) = nothing to draw (the end is applied all the same) */
 const frameOnly=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(!host()&&on()&&!document.getElementById("kg82box")){F.stat.noFrame=(F.stat.noFrame|0)+1;return}return f.apply(this,arguments)}};
 frameOnly("wdGroomShow");frameOnly("toilFinShow");
 capFn("wdGroomShow");
-reg12("wdGroomEnd",["v"],{title:()=>"Chải chuốt",dec:a=>{const x=X5.decA9(["v"],a);if(!x)return null;return ["ok","over","under"].includes(x[0])?[x[0]]:bad("wdGroomEnd")}});
+/* review r1: the end pays its 1 khắc (spend(1) in wdGroomEnd): refused when she has no khắc left (solo: wdGroomUI never opens the game then) */
+reg12("wdGroomEnd",["v"],{title:()=>"Chải chuốt",dec:a=>{const x=X5.decA9(["v"],a);if(!x)return null;return ["ok","over","under"].includes(x[0])&&!S.dead&&can(1)?[x[0]]:bad("wdGroomEnd")}});
 
 /* ===== 9. the mirror (Điểm trang; also the face of Hội phối đồ): the end = toilFinish (TOIL.st rides in ctx "toil"), its rows = toilFinShow ===== */
 capFn("toilFinShow");capFn("toilGo");
@@ -80599,7 +80687,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="458b0f35c0e2";window.CTM_BUILD=BUILD;
+const BUILD="6513598f3076";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
