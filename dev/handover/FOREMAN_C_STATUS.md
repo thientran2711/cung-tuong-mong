@@ -1230,3 +1230,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (19/11 08:55Z) FROM MAIN: main is now ROOT-67 session_01Rc5AsM5xHa2zs9qd5o5eTU (depth 5). Send every report / SẴN SÀNG / LAND READY to ROOT-67. LIVE 62055a31.
 - (19/11 10:00Z) FROM MAIN ROOT-67: LIVE main = d9b32074 (coop-thin F2→F3→F4 landed). ROLLBACK 62055a31. Final-merge d9b32074 before any LAND READY.
 - (19/11 10:00Z) FROM MAIN: main is now ROOT-68 session_01Rc5AsHe8w1z2UgZJUycHEJ (depth 6). Send every report / SẴN SÀNG / LAND READY to ROOT-68. LIVE d9b32074, ROLLBACK 62055a31.
+- (19/11 10:40Z) FROM MAIN ROOT-68: LIVE main = 6b1ab390 (kit-head-say: K-HEAD-SAY speech bubbles kit part, font floor 10.5). ROLLBACK d9b32074. Final-merge 6b1ab390 before any LAND READY.
