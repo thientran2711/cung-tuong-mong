@@ -117,3 +117,40 @@ SHA: review/errand-scene @ 1489362f (pushed; origin/main 1cf5e8bb merged).
 WHAT: kit part kitHeadMarkHtml(title,role,state) in jact.js → <i class="khead"> with the bubble picture itself, NO disc: on = ico-talk-y (whole bubble yellow, black dots), off = ico-talk-w (white, black dots); KIT_HEADMK.px 24, khapNudge motion, glow on «on»; probe once, fallback .khead.kfb = the yellow «!» disc. jerr.js errSync uses it (.kmerr-bang), still bottom on the sex line (level with «ta ở đây»). Option-card «!», top-bar #kntbox, Dư đồ labels keep .khap. KIT.md §78.z (new) + §78.y/§90 lines updated in place; kit sample §78.z. Only one head-marker user exists in the game today (errand return); any future one must call kitHeadMarkHtml.
 TESTS: QUICKCHECK PASS (195 s, old save ok); errand-scene 53/53 Fold + iPad (on-stage check now asserts .khead + ico-talk-y + no background disc); bang-line-scan PASS Fold 19/35, iPad 19/56, HH=1 iPad PASS.
 SHOT (LOOKED): Fold | iPad on-stage return: https://ctm-img.victoria-tntt.workers.dev/img/_review/errand-scene/montage-head-bubble.jpg
+
+## r6 — HEAD MARKERS FROM THE REAL HEAD TOP + REAL VIDEO (worker session_01Rc5AsJBScJTqmWZxTCvmtQ, ROOT-63; depth 2; START_CTX ~4 %)
+PRIORITY #1 CHECK ('head marker real head top video'): OD L1949 (19/11 ~03:50Z FAIL r5, verbatim) + L1941/L1942/L1943/L1945/L1946 | main: jemoseal.js seal lean LIVE, kitFigBody (jkit.js, alpha top t, cached per picture) | review/*: review/errand-scene r5 1489362f (this branch) | claims: this session | reused: kitFigBody t (no new measure), kitBadgeAt/kitMarkLine (§78.y), kitHeadMarkHtml (§78.z), kitEmoSeal.lean, scan scaffold of bang-line-scan.js.
+SHA: review/errand-scene @ 6be6674f (= my 9842196e tree, identical; reviewer pushed the same LIVE f43a2ba6 merge first). Work commits d0671a0e + e81010e2. b6b1bcba DEMO switch kept (test-only, bang-line-scan env DEMO; not in the build).
+CAUSE of the r5 FAIL: the line was built from the STANDARD head (fig-ht face-mesh skull top, floor − H), so on every figure the bubble / «ta ở đây» stood ON the hair bun / ornaments / crown (BEFORE table: every mark 20–50 px INTO the art, thousands of opaque px under the marks).
+WHAT (ONE kit part jmark.js kitMarkLine / kitBadgeAt; jfigseal stage branch; jerr comment; KIT §78.y + §28.8d + §41 stage line + §90 line canon-overwritten in place):
+- line of a sex = min(REAL head top of every visible figure of that sex on the stage: kitHeadTop(fig) = kitFigBody t, first opaque row incl. hair / crown / hat) − G; G = max(KIT_BADGE.gapMin 7 px, .024 × H) + .2 × seal size (the seal's lean-in + droop reach). Fallback (no figure of that sex shows): standard body. Two lines (women / men, OD ~02:05Z), every mark of a sex level.
+- «ta ở đây» + bubble bottom ON the line, centre line; the mood seal on the SAME line BESIDE them (centre ± (mw .1 H /2 + sp .012 H + seal/2)); mirrored left at the stage edge / plaques / a neighbour's mark column. A tall hat / crown that lifts the line past the frame room → the marker and seal shrink, never sink onto a head (Hoàng thượng at Càn Chính điện).
+SCAN dev/test/head-marker-gap.js (new): every stage (home + 18 places) × figure × mark (me real, seal real, bubble real on servants / kitBadgeAt for everyone else): G1 bottom ≤ own real head top − 6 (seal: + reach), G2 0 opaque px of ANY figure under the mark (+2 px), G3 no mark–mark overlap, G4 level per sex ±2, G5 inside the stage.
+| device | kind/sex | n | BEFORE r5 1489362f: min (gap−need) px · opaque px under marks · FAIL | AFTER r6: min (gap−need) px · opaque px · FAIL |
+|---|---|---|---|---|
+| Fold 755x1000 | «ta ở đây» f | 19 | −33.8 · 22021 · 19 | +15.9 · 0 · 0 |
+| Fold 755x1000 | bubble f | 12 | −52.3 · 6600 · 12 | +16.9 · 0 · 0 |
+| Fold 755x1000 | bubble m | 4 | −36.7 · 2850 · 4 | +16.9 · 0 · 0 |
+| Fold 755x1000 | seal f | 27 | −126.3 · 508 · 27 | +10.9 · 0 · 0 |
+| Fold 755x1000 | seal m | 1 | −114.0 · 0 · 1 | +12.3 · 0 · 0 |
+| Fold 755x1000 | level spread f / m | 19 / 1 st | 77.9 / 81.3 px | 1.0 / 0.1 px |
+| iPad 1180x820 | «ta ở đây» f | 19 | −27.9 · 14212 · 19 | +11.6 · 0 · 0 |
+| iPad 1180x820 | bubble f | 28 | −41.9 · 12015 · 27 | +12.5 · 0 · 0 |
+| iPad 1180x820 | bubble m | 9 | −29.7 · 4930 · 9 | +12.5 · 0 · 0 |
+| iPad 1180x820 | seal f | 32 | −101.3 · 3683 · 32 | +7.9 · 0 · 0 |
+| iPad 1180x820 | seal m | 1 | −91.7 · 0 · 1 | +8.5 · 0 · 0 |
+| iPad 1180x820 | level spread f / m | 19 / 3 st | 63.4 / 66.0 px | 1.0 / 0.0 px |
+| iPad HH=1 crowned Hoàng hậu | «ta ở đây» f | 19 | −48.0 · 35340 · 19 | +11.5 · 0 · 0 |
+| iPad HH=1 | bubble f / m | 29 / 10 | −41.9 / −29.7 · 13639 / 5663 | +15.7 / +11.5 · 0 · 0 |
+| iPad HH=1 | seal f / m | 32 / 2 | −106.4 / −91.7 | +7.9 / +7.9 · 0 · 0 |
+| all | mark–mark overlaps | 19 st | 0 | 0 |
+(BEFORE seal: at head height beside the head = the r4 rule; owner 03:50Z puts it above the head with the others. Fold HH=1 AFTER: PASS 19/35.)
+REAL VIDEO (Playwright recordVideo → ffmpeg H.264 yuv420p faststart, 16 s each, room stage Dưỡng Xuân hiên, Cảnh động on): her = «ta ở đây» + seal BUỒN; her maid = REAL errand return → YELLOW bubble 0–8 s, then the plain WHITE bubble on the same kit spot 8–16 s (test-only swap: the game shows the white state nowhere yet) + seal GIẬN; idle sway all along, lean-ins forced at 1.5/8/14 s (giận ×3) and 4.5/11 s (buồn ×2) on top of the kit's own random ones. Only 2 figures fit in view on both devices at home (Fold 2-per-view; iPad stage column), so yellow and white are shown in sequence.
+- Fold 755x1000: https://ctm-img.victoria-tntt.workers.dev/img/_review/errand-scene/r6-video-fold-755x1000.mp4
+- iPad 1180x820: https://ctm-img.victoria-tntt.workers.dev/img/_review/errand-scene/r6-video-ipad-1180x820.mp4
+- FRAME CHECK (LOOKED, 6 frames each at 0.5/2/5/8.6/11.6/14.6 s): https://ctm-img.victoria-tntt.workers.dev/img/_review/errand-scene/r6-frames-fold.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/errand-scene/r6-frames-ipad.jpg — every mark clearly above the hair with air, nothing touches hair/ornaments/face, «ta ở đây» level with the bubble, seals beside them, giận lean (bigger red seal, frame 2), buồn droop (frame 5), yellow → white swap at the same spot. First takes were thrown away after looking (2× size drawn in a corner; the Nhập cung dialog covered the stage; the fake notice got consumed at 5 s; white bubble on a stale figure) — all fixed in the script.
+- Script: node dev/test/head-marker-video.js <base> W H out.mp4 [s].
+STILLS LOOKED (scan SHOTS, tall headdresses): Càn Chính điện iPad (Hoàng thượng mũ: seal above the hat), Khôn Ninh Fold (Hoàng hậu phượng quan: the women's line lifted above her crown, her «ta ở đây» level with it — level per OD ~02:05Z, so on that stage the player's marks float ~45 px over her own head).
+GATES (on the 6be6674f tree): QUICKCHECK PASS (390 s, old save ok, core gates PASS, perf ≤ live render/tab); errand-scene 53/53 Fold + iPad; bang-line-scan PASS Fold 19/35, iPad 19/57 (emo check overwritten: seal bottom on the sex line; no men-higher rule); head-marker-gap PASS Fold 19/35/63 marks, iPad 19/56/89, HH=1 Fold + iPad PASS; 0 page errors.
+coop-e2e: BLOCKED BY THE ENVIRONMENT, not this branch: the session's network policy denies host ctm-coop.victoria-tntt.workers.dev (proxy CONNECT 403; no WebSocket opens), the r5 base 1489362f fails the same 4 steps identically. Needs a session whose network allows that host (environment settings → Network access → Allowed domains).
+CDN review files to wipe after the verdict: python3 dev/site/cdn_sync.py --wipe-review errand-scene.
