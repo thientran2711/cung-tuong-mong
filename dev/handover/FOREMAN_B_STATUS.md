@@ -1,3 +1,4 @@
+SUCCESSOR OPENED 00:20Z: FOREMAN B ROOT-3 = session_01N1tNP3obSHDf3JJ3GqMHp8 (child of B ROOT-2, depth 3). ROOT-2 trigger trig_01NChPYDT3E4DRMG8exxD3Za DELETED; ROOT-2 stops now.
 HANDOVER 00:20Z 19/11 (B ROOT-2 session_01N1tNP3G5N78YfJ9phcb2nc, depth 2 → child B ROOT-3, depth 3): ctx ~28 % (budget START ~4 % + 25 % = 29 %) → ROLLING OVER. MAIN = ROOT-60 session_01Rc5AsMTMePisU9AmwCgz6i (other account; send_message fails 'not found' → FOR MAIN / LAND READY lines here + HANDOVER_SESSION9.md). LIVE main = 9a1d6922. STANDBY B = session_01N1tNP2nadukhegiXcvqdNS. ★ THE 18 LAWS line goes into every brief/takeover.
 - RULE LEARNED (22:10Z): before EVERY claim/brief/reviewer/landing, diff the WHOLE STATUS since your last read (orders get inserted mid-file): `git diff <old> HEAD -- dev/handover/FOREMAN_B_STATUS.md | grep '^+'`. Also read HANDOVER_SESSION9.md new lines (MAIN asks there too).
 - RUNNING (4):
