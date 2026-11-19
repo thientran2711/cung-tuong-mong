@@ -251,3 +251,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | seal-lean-2 r2 SMALL REVIEW (sonnet) | review/seal-lean-2 a64f06c7 | MAIN ROOT-65 | session_01Rc5AsK8sbYnJUkyP6AvmAw | RUNNING | 19/11 06:37Z |
 | foreign-princess-3 history expert (sonnet E19; MAIN ORDER 06:23Z/06:35Z) | handover reports/foreign-princess-3-history.md | E ROOT #8 | session_01DgYSWkWBAJFRJzN3a7ix9a | RUNNING | 19/11 06:42Z |
 | FOREMAN E ROOT #9 (opus; child of E ROOT #8, depth 8 = limit) | handover FOREMAN_E_STATUS | E ROOT #8 | session_01DgYSWmYGTJUrUAYgMGzMCE | RUNNING | 19/11 06:46Z |
+| FOREMAN E (opus; ex-ROOT STANDBY, depth 0; took over from E ROOT #9 at depth limit) | handover FOREMAN_E_STATUS | owner STANDBY | session_01DgYSWkgmeMCRaqRT4UCEJE | RUNNING | 19/11 06:50Z |
