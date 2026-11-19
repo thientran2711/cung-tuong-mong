@@ -34,3 +34,12 @@ SHEET: https://ctm-img.victoria-tntt.workers.dev/img/_review/nude-mass/fix1/shee
   3. Nữ đế colour slot: "DOMINANT yellow ... wide borders" gives more brocade than the HH's coral silk.
   Suggest the foreman ask the owner: test 1 gen of fix2 with style3_girls Xm9tPkMBfo (or m09) as image 1, to isolate (1).
 Credits: 4 × 135 = 540. No mass. Nữ đế painters stay STOPPED until the owner/foreman judges this sheet.
+
+## DIAGNOSTIC (ROOT-39 GO 03:17Z, 2 TEST gens, internal only — never a style proposal to the owner)
+Sheet BIG one row: https://ctm-img.victoria-tntt.workers.dev/img/_review/nude-mass/fix1/sheet_fix2.jpg = Nữ đế A | c17 a18 fix2 | (a) | (b) (each cell 1024x2304).
+- (a) 5jDLFgnKxe: fix2 exact stdout, image 1 = style3_girls Xm9tPkMBfo → STILL heavy brocade trapezoid, almost the same as fix2. Style image is NOT the variable.
+- (b) bxMjQS45Y2: fix2 stdout with the pose = Nữ đế A stored pose ("standing as a breeze lifts her long silk stole, one hand catching the stole, <item> in the other hand") + frontal words, style 6AbGv6EiJO → CLEARLY SOFTER: a sheer gauze stole layer appears, held in one hand, draping in curved folds over the robe; reads close to Nữ đế A. Frontal, lips closed, face clear, fan at chest. Silhouette still a little wider than Nữ đế A.
+- VERDICT: the POSE is the variable — the "catching the stole" pose makes the model add a light sheer outer layer, and that is what reads soft. The calm "hang straight / hands on sash" poses give no sheer layer.
+- Both logged in gen_ledger.jsonl as TEST lines (cmd starts "TEST F4 diag", argv ["TEST"]).
+- Proposal for the foreman (builder change NOT made, needs GO): for --state nude use the spec5 pose list again (varied per person/age, as the owner asked 03:15Z "ai cũng đứng ở một cái kiểu"), frontal, item held, with the Nữ đế A stole action kept as in her stored prompt ("one hand catching the stole") for at least the young ages; canon (e) "no flying cloth" conflicts with the word "breeze" — owner/foreman to decide whether "her sheer silk stole held in one hand" (no breeze) is allowed.
+Credits this round 2 × 135 = 270 (F4 total 810).
