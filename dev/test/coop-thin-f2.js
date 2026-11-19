@@ -166,15 +166,16 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
     asked as an intent) brings it; her phone gets the result (task back, the answer line) in the host's view */
  if(await G.p.evaluate(()=>PTIME.on())){await reset();await H.p.evaluate(()=>{COOPW.thin.withSeat('b',()=>{S.away=[]});try{COOPW.thin.flush()}catch(e){}});await sync();
   const v=await G.p.evaluate(()=>{const x=rivals.find(v=>v&&!v.coop&&v.alive&&!v.out&&!sameHouse(S,v));return x&&x.id});
-  const snap=()=>Promise.all([G.p.evaluate(()=>({now:PTIME.now(),aw:(S.away||[]).filter(a=>a.kind==='invite').map(a=>[a.due,a.back]),back:PTIME.stat.back,log:(S.logs||[]).slice(0,3).map(x=>String(x).replace(/<[^>]+>/g,''))})),
-   H.p.evaluate(()=>({back:PTIME.stat.back,her:COOPW.thin.withSeat('b',()=>(S.away||[]).filter(a=>a.kind==='invite').map(a=>[a.due,a.back]))}))]);
-  await G.p.evaluate(v=>invite(v),v);await until(G,()=>!COOPW.thin.F.pend,null,15000);await sleep(600);await sync();const s1=await snap();
+  const snap=()=>Promise.all([G.p.evaluate(()=>({now:PTIME.now(),aw:(S.away||[]).filter(a=>a.kind==='invite').map(a=>[a.due,a.back]),back:PTIME.stat.back,log:(S.logs||[]).slice(0,3).map(x=>String(x).replace(/<[^>]+>/g,'')),nt:kitNoticeList().map(x=>x.id).filter(x=>/^pt:/.test(x))})),
+   H.p.evaluate(()=>({back:PTIME.stat.back,nt:kitNoticeList().map(x=>x.id).filter(x=>/^pt:/.test(x)),her:COOPW.thin.withSeat('b',()=>(S.away||[]).filter(a=>a.kind==='invite').map(a=>[a.due,a.back]))}))]);
+  const s0=await snap(); await G.p.evaluate(v=>invite(v),v);await until(G,()=>!COOPW.thin.F.pend,null,15000);await sleep(600);await sync();const s1=await snap();
   const w=await G.p.evaluate(()=>{const ok=PTIME.waitOk();let r=null;try{r=PTIME.wait()}catch(e){r='EXC '+e.message}return {ok,r}});
   await sleep(1500);await until(G,()=>!COOPW.thin.F.pend,null,15000);await sleep(800);await sync();const s2=await snap();
   const nm=await G.p.evaluate(v=>(rivals.find(x=>x.id===v)||{}).name||'',v);
   const good=s1[0].aw.length===1&&s1[0].aw[0][1]===0&&s1[1].her.length===1&&w.ok&&w.r===true&&s2[0].aw.length===1&&s2[0].aw[0][1]===1&&s2[1].her[0][1]===1
-   &&s2[0].back===s1[0].back/* her phone landed nothing */&&s2[1].back===s1[1].back+1/* the host landed it, once */&&s2[0].log.some(l=>l.includes(nm));
-  ok(good,'P5b her invite lands at the due khắc once, on the host in her context (not on her phone); «Đợi tin» on her phone brings it; the answer reaches her phone',{v,nm,s1,w,s2})}
+   &&s2[0].back===s1[0].back/* her phone landed nothing */&&s2[1].back===s1[1].back+1/* the host landed it, once */&&s2[0].log.some(l=>l.includes(nm))
+   /* review r1: her notices (sent «đã đi …», landed «đã về: có tin báo») are on HER phone, never on the host's screen */&&s1[0].nt.some(x=>/^pt:go:/.test(x))&&s2[0].nt.some(x=>/^pt:back:/.test(x))&&s2[1].nt.every(x=>s0[1].nt.includes(x));
+  ok(good,'P5b her invite lands at the due khắc once, on the host in her context (not on her phone); «Đợi tin» on her phone brings it; the answer reaches her phone; her notices on her phone only',{v,nm,s1,w,s2})}
  /* P6: a real map tap (Dư đồ tab, j77Tap): pending at once, no place card while pending, arrival switches her to the act tab (j38, via ctx
     back) and the HOST's tab stays his own */
  await reset();if(await G.p.evaluate(()=>S.place!=='home'))await walk('goTo','home','home');
