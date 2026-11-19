@@ -56,7 +56,8 @@ KIT_SAMPLES.push(
   return box("","#fbf3e2")+`<div class="modal night" style="position:static;display:block;background:none;margin-top:8px">${box("","#140b08;color:#f3e6cf")}</div>`}},
  {id:"§49.1",title:"kitRel2 · quan hệ hai cột (Ân oán: hai người · Hoàng thượng · chưa rõ)",where:"<b>Ân oán</b> (pair view), Gia tộc card, every place that shows how two people stand. LEFT box = that person → me, RIGHT box = me → that person. Short words, number in its colour, no bars.",html:()=>`<div style="max-width:360px">${kitRel2([{head:"Hoàng hậu → ta",dir:"them",rows:[{w:"Thiện cảm",now:-24,kind:"good"},{w:"Oán",now:12,kind:"bad"}]},{head:"Ta → Hoàng hậu",dir:"me",rows:[{w:"Thiện cảm",now:41,kind:"good"},{w:"Oán",unk:"chưa rõ"}]}])}${kitRel2([{head:"Hoàng thượng → ta",dir:"them",rows:[{w:"Sủng",now:42,kind:"pos"},{w:"Ân tình",now:5,kind:"pos"}]}])}${kitRel2([{head:"Tô Lan Chi → Ôn Ngưng Sương",dir:"x",rows:[{w:"Thiện cảm",unk:"chưa rõ"}]}])}</div>`});/* §53 (KIT 28.6 event options + §7 result card parts) (review/opt-render, moved here by reviewer r7 — ONE kit sample page). The event option is the
 /* §53 (KIT 28.6 event options + §7 result card parts) (review/opt-render, moved here by reviewer r7 — ONE kit sample page). The event option is the
-   game's own modal option markup (button.opt + dilLine) run through kaNorm → kitHideOut (data-khide), so hint + risk come from the real kitHint. */
+   game's own modal option markup (button.opt + dilLine) run through kaNorm → kitHideOut (data-khide), so the hint comes from the real kitHint and
+   the odds meter is the card's own (a certain option: «Nắm chắc»; owner 19/11 ~01:48Z, kitRisk retired). */
 function kitPgEvOpts(){const W=o=>typeof word==="function"?word(o):"Khó lường";const O=[{n:"Gói bánh ú dâng Thái hậu",fx:{suc:-5,th:4},x:"Thái hậu thiện cảm +4"},
   {n:"Xin ân cho gia đình",fx:{},x:`${W(55)} · thành: Danh +3, Bạc +40 · hỏng: Sủng -4`},
   {n:"Theo cha mưu đại sự",fx:{},x:`${W(20)} · thành: Hoàng hậu bị phế, Danh +10 · hỏng: cả họ bị tru di`}];
@@ -68,8 +69,8 @@ function kitPgWhy(){const w=(c,t,r)=>`<span class="kitem"><span class="ef ${c}">
  return `<span class="kb rtoast karesult" style="position:static;display:grid"><span class="kr kr-duoc"><span class="krl">Được</span><span class="krv">${w("g","Sức 56→74 (+18)","nghỉ qua đêm")}</span></span><span class="kr kr-mat"><span class="krl">Mất</span><span class="krv">${w("r","Sủng 26→25 (−1)","lâu không được gặp Hoàng thượng")}${w("r","Bạc 80→65 (−15)","sai tai mắt dò chủ hội")}</span></span></span>`}
 KIT_SAMPLES.push(
  {id:"§7",title:"Result card lines: value · short why (one source = Sổ ghi)",html:kitPgWhy},
- {id:"§53",title:"kitChip tones · kitRisk",html:()=>`<p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("có rủi ro","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p><p>${kitRisk("an toàn")}${kitRisk("có rủi ro")}${kitRisk("liều")}</p>`},
- {id:"§53",title:"Event option in cost mode: Tốn + kitHintRow + kitRisk (no Tốn when free)",html:kitPgEvOpts},
+ {id:"§53",title:"kitChip tones · option odds meter (kitOdds, 7 steps)",html:()=>`<p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("cẩn thận","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p><p>${KIT_ODDS.map(w=>kitOdds(w)).join(" ")}</p>`},
+ {id:"§53",title:"Event option in cost mode: odds meter + Tốn + kitHintRow (no Tốn when free; certain = Nắm chắc)",html:kitPgEvOpts},
  {id:"§53",title:"kitResultSeal: THÀNH · BẠI · KẾT QUẢ",html:kitPgSeals},
  {id:"§53",title:"kitKemRow (tap for names)",html:kitPgKem});
 /* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */
