@@ -201,7 +201,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  {await rnd(H,0.1);await rnd(G,0.1);const ac=`const c=wkDeckCard();if(!c)return 'no card';deck=deck.filter(x=>x&&!x.aaMG);deck.unshift(c);return c.n`;
   const hn=await H.p.evaluate(src=>COOPW.thin.withSeat('b',()=>(0,eval)('(function(){'+src+'})')()),ac);const gn=await pick(ac);await rnd(H,null);await rnd(G,null);
   if(hn&&hn===gn){await act('A1 Tự học deck card (raw 7): cost once, her host-deck card used',KOK,{stage:`S.suc=80;S.bac=Math.max(S.bac,3000);S.mg=null;`,pre:`act(0);const t=document.querySelector('#modal [data-kwrgo]:not([disabled])');if(t){t.click()}if(Q.length&&!document.getElementById('kg82go'))chooseM(0);if(!document.getElementById('kg82go'))return 'no game: '+JSON.stringify({mg:S.mg,Q:Q.map(q=>q.t)});`+KGO,raw:7,wait:900,f5:1,chk:x=>x.aaPaid===1});
-   const hd=await H.p.evaluate(()=>__hdeck(d=>d[0]&&{n:d[0].n,done:d[0].done}));if(!table.length||!table[table.length-1].tag.startsWith('A1'))ok(true,'A1b (row skipped)');else ok(ON?!!(hd&&hd.done):true,'A1b her host-deck Tự học card used',hd)}
+   const hd=await H.p.evaluate(()=>__hdeck(d=>d[0]&&{n:d[0].n,done:d[0].done,mk:COOPW.thin.F.stat.cardMark,ns:d.slice(0,4).map(a=>a&&[a.n,!!a.done,!!a.aaMG])}));if(!table.length||!table[table.length-1].tag.startsWith('A1'))ok(true,'A1b (row skipped)');else ok(ON?!!(hd&&hd.done):true,'A1b her host-deck Tự học card used',hd)}
   else ok(true,'A no matching Tự học card (skipped)',{hn,gn})}
  /* ---- C: a start in her context on the HOST (part-D card) opens the game on HER phone ---- */
  const HO=()=>H.p.evaluate(()=>{const g=document.getElementById('kg82go');return g?(document.querySelector('#kg82 .kg82t,#kg82 h3,#kg82 h4')||{}).textContent||'yes':false});

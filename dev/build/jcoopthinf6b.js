@@ -42,7 +42,10 @@ capFn("kitPersonReveal");/* the new servant's reveal of that set (kmPush is sile
 const reg12=(name,K,o)=>{prPost(name);return reg10(name,K,Object.assign({lv:L12,ctx:CX12},o||{}))};
 const raw0=(raw,sk)=>sk||inR(raw,MSC().raw);
 /* her own card in her host deck (the same rule F6a uses: index + name; else the first not-done card with that name) */
-function myCard(c){if(!c||!Array.isArray(deck))return -1;const i=c.i|0;if(deck[i]&&deck[i].n===c.n)return i;return deck.findIndex(a=>a&&a.n===c.n&&!a.done)}
+function myCard(c){if(!c||!Array.isArray(deck))return -1;const i=c.i|0;if(deck[i]&&deck[i].n===c.n)return i;const j=deck.findIndex(a=>a&&a.n===c.n&&!a.done);if(j>=0||!c.aa)return j;
+ /* her Tự học card (aaMG, still F6a's old road: __g): her phone shows ITS OWN Tự học card in the host's slot (F6a gHand: by name, else any
+    aaMG card of hers — another subject, another name) → the host's card is the one in that slot (her hand = the host's, slot for slot) */
+ if(deck[i]&&deck[i].aaMG&&!deck[i].done)return i;return deck.findIndex(a=>a&&a.aaMG&&!a.done)}
 
 /* her phone: a game opened by the answer of a card run on the host (F6a's act(i): the exam, the mirror, a steal card) is the card's own
    screen — the half result card that answer brings (cardLater → resultShow, next tick) is not shown over it (solo shows none before the
@@ -139,7 +142,7 @@ window.stealEnd=function(src,raw,sk){const f0=window.__smgFake;window.__smgFake=
    PRE.act on the host, below every window wrapper — without this the host ran her steal card with no capture: the game opened nowhere) */
 const wAct=a0=>function(i){const a=Array.isArray(deck)?deck[i]:null;
   if(a&&typeof window.stealIsCard==="function"&&window.stealIsCard(a)&&(g12()||hctx())&&!window.__smgFake){const self=this,args=arguments;return withSrc({c:1,i,n:a.n},()=>a0.apply(self,args))}
-  if(a&&a.aaMG&&g12())CARD={i,n:a.n};/* her Tự học card: marked used on the host with her lesson's end */
+  if(a&&a.aaMG&&g12())CARD={i,n:a.n,aa:1};/* her Tự học card: marked used on the host with her lesson's end */
   return a0.apply(this,arguments)};
 const wDo=d0=>function(i,k){if((k==="steal"||k==="road")&&(g12()||hctx())&&!window.__smgFake){const v=rivals[i];
    if(v&&v.id!=null){const self=this,args=arguments;return withSrc({v:v.id,k},()=>d0.apply(self,args))}}return d0.apply(this,arguments)};
