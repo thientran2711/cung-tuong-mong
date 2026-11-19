@@ -44,7 +44,7 @@ _K3 = (" IGNORE the style reference image's background completely: the backgroun
        "no backdrop, no parchment, no painted flowers or branches, no smoke, no haze, no glow, no stain.")  # build.py build_trieu, verbatim
 assert _K3 in open(os.path.join(HERE, "build.py"), encoding="utf-8").read()
 K3 = {"f": _K3, "m": _K3.replace("around her:", "around him:")}
-STYLE_REF = "style3_girls Xm9tPkMBfo"        # FIGURE_GATE A0 REFERENCES (every gen, image 1)
+STYLE_REF = "style2_portraits_c01_c12 6AbGv6EiJO"        # FIGURE_GATE A0 REFERENCES (every gen, image 1)
 
 class Held(Exception): pass                  # exit 3: owner decision pending / no old source
 

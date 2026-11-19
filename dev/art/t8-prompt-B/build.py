@@ -1174,7 +1174,7 @@ def nude2(o,c,opt):
 # --verify LEDGER [--since TS]  re-runs every logged cmd, compares the fresh prompt with magnific_prompt (what Magnific really received), PASS/FAIL per line, exit 1 on any FAIL
 import os
 LEDGER=os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","gen_ledger.jsonl")
-REF_STYLE={"name":"style3_girls (the three approved girls m09 + c06 + c25, one image) = STYLE only","magnific_id":"Xm9tPkMBfo","url":"https://ctm-img.victoria-tntt.workers.dev/img/_review/style-refs/style3_girls.png"}
+REF_STYLE={"name":"style2_portraits_c01_c12 (owner-approved square portraits c01 pink + c12 green, redrawn in m09 style; FIGURE_GATE 19/11 ~02:55Z) = STYLE only","magnific_id":"6AbGv6EiJO","url":"https://ctm-img.victoria-tntt.workers.dev/img/_review/style-refs/style2_portraits_c01_c12.png"}
 REF_SWATCH={"name":"royal-yellow swatch = colour only","magnific_id":"TdwDfOyVNR (OLD account: re-upload the CDN file on the current one)","url":"https://ctm-img.victoria-tntt.workers.dev/img/_review/swatch/royal_yellow_C2.png"}
 def _reorder_refs(o):
     o=o.replace("The second reference image is style only","The FIRST_REF_TMP reference image is style only")
