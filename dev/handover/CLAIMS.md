@@ -224,7 +224,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | CTM minister-agents (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/minister-agents; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsHjti1YnXbSGeocwni | DONE — LIVE f3114755 (archived 19/11 06:35Z) | 19/11 04:09Z |
 | coop-thin F3 (opus; bag/shop/wear/gifts; stacked on F2) | review/coop-thin-f3 | B | session_01N1tNP4NVrwK67H3DPhD9Ld | SẴN SÀNG KIỂM 46ec7743 (f659cf7b + f2-r2 81ac2af8 + main f3114755; report reports/coop-thin-f3.md) | 19/11 06:30Z |
 | REVIEW coop-thin-f2 r1 (opus BIG) of 4dabbd46 | review/coop-thin-f2-r1 | B | session_01N1tNP6D9LFcHNTVw1PfbmV | FAIL: her walk cards lost at L7 (withSeat quiet=true silences card emitters; fix for the intent family) + resend should check buổi; merge 3db28bd8 pushed; report reports/coop-thin-f2.md "
-| ev-pic-fig event scene picture + figure scale (opus; owner bug OD 04:15Z) | review/ev-pic-fig | MAIN ROOT-63 | session_01Rc5AsLHx5NBHb8tkZaoLUU | SẴN SÀNG KIỂM 739bfdf3 r1 (report reports/ev-pic-fig.md) | 19/11 05:38Z |
+| ev-pic-fig event scene picture + figure scale (opus; owner bug OD 04:15Z) | review/ev-pic-fig | MAIN ROOT-63 | session_01Rc5AsLHx5NBHb8tkZaoLUU | DONE — LIVE 5dc5d9e0 | 19/11 05:38Z |
 | hall-names SMALL REVIEW (sonnet) | review/hall-names c294e1d | C-AG #20 for ROOT-63 | session_01Rc5AsJrdYiTbKYwJ53EVEQ | DONE — LIVE 2c5dd554 (archived 19/11 05:55Z) | 19/11 04:31Z |
 | monthly-allotment BIG REVIEW (opus) | review/monthly-allotment 9aceea6 | C-AG #20 for ROOT-63 | session_01Rc5AsLJxqXyKq4keVP4fuk | DONE — LIVE 98f9f0f1 (archived 19/11 06:17Z) | 19/11 04:32Z |
 | minister-agents BIG REVIEW (opus) | review/minister-agents 822f17c4 | C-AG #20 for ROOT-63 | session_01Rc5AsHdFbiZELj46cV3rq8 | DONE — LIVE f3114755 (archived 19/11 06:35Z) | 19/11 04:46Z |
@@ -240,7 +240,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | odds-no-unknown BIG REVIEW (opus) | review/odds-no-unknown 7a56b2e | C-AG #20 for ROOT-64 | session_01Rc5AsLQg8htXCMAz8FnrmD | DONE — LIVE 4217568a (archived 19/11 06:05Z) | 19/11 05:12Z |
 | coop-thin F2 FIX r2 (opus BIG; reviewer FAIL r1: guest cards silenced by withSeat quiet, whole intent family + buổi resend check) | review/coop-thin-f2-r2 | B | session_01N1tNP4v5eCkat9E4cy6HXG | SẴN SÀNG KIỂM 083227d4 (report: reports/coop-thin-f2.md "## FIX r2" + addendum E step) | 19/11 |
 | seal-lean-2 SMALL REVIEW (sonnet) | review/seal-lean-2 db1762f1 | MAIN ROOT-64 | session_01Rc5AsMN2AumPZrBeDRpV5o | PASS fb76ed7b | 19/11 05:43Z |
-| ev-pic-fig BIG REVIEW (opus) | review/ev-pic-fig 946a2900 | MAIN ROOT-64 | session_01Rc5AsMDVid7pMws13KWPgr | RUNNING | 19/11 05:43Z |
+| ev-pic-fig BIG REVIEW (opus) | review/ev-pic-fig 946a2900 | MAIN ROOT-64 | session_01Rc5AsMDVid7pMws13KWPgr | DONE — LIVE 5dc5d9e0 | 19/11 05:43Z |
 | bd-roads r2 fixes (opus E14c, successor of E14) | review/bd-roads | E ROOT #8 | session_01DgYSWmKcwf5VUb22x4YGU3 | RUNNING | 19/11 05:53Z |
 | ge-writers-w3 r2 fixes (opus E11d, successor of E11c) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWogWMATZVoosS7SFEk | RUNNING | 19/11 05:56Z |
 | MAIN ROOT-65 (opus; child of ROOT-64, depth 3) | handover HANDOVER_SESSION9 | ROOT-64 | session_01Rc5AsMRSKCNFbYwLJhNeY7 | RUNNING | 19/11 06:24Z |
