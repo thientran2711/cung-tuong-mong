@@ -80,3 +80,15 @@ Measure (`MODES=kind,cruel … - 2 1 <out> cnv_chu,ch_bi,thd_hoc sens`, alone): 
 
 ## 18 LAWS (round 2)
 2 / 3 / 4 OK (BAL rows unchanged except the W2 merge rows) · 6 (b) OK · 6 (c) one ha line → fix · 7 OK · 11 family done except the ht/ha pass · others n/a.
+
+---
+# ROUND 3 — review of 73a97efa (E11d r3), order from Foreman E #12 session_01DgYSWoiPTxVs5xQni4RvZw
+PRIORITY #1 CHECK ('ge-writers-w3 r3'): review/ge-writers-w3 (FAIL r2 c13b7748) | W1 + W2 LIVE | claims E11d | reviewer = me. 18 LAWS re-read.
+
+## VERDICT: **PASS — READY b79930bf** (= 73a97efa + final-merge LIVE origin/main 2bda29a1; pushed to review/ge-writers-w3, fast-forward; origin/main is its ancestor, so the coordinator can fast-forward main).
+- r2 fix: thd_sach_4 ha = «chép lại sách cha, theo người ấy đem in bán dưới tên khác» → matches its a («bộ ‘Trị quốc sách’ ngươi tự chép lại»); the only change in jgedata_w3.js since c13b7748 (diff checked). My r2 rescan of ht/ha of every changed ending found only this line, so the fix-1 family is closed.
+- Final merge: conflicts only assemble.py (main added jrcv.js) + index.html / sw.js; resolved = main's list + `jgedata_w3.js` after `jgedata_w2.js` (order …w1, w2, w3, jge.js); rebuilt by build_site.sh.
+- Tests on b79930bf: ge-guard **6/6** (36 live branches) · one-core PASS · **quickcheck ALONE PASS** (core gates PASS, open 1420 ms, old save ok, render 205/237, tab 410/449, buổi 850/3194, tasks>200 19/21) · ge-engine `- all` 1148/1160 then **1160/1160** on rerun.
+
+## Note FOR E (shared test, not this branch)
+ge-engine «thd_hoc: the life runs the road thd_sach» failed in 3 of my 5 full runs (r2, r3, and E11c's r1 first run): the thd_hoc premise (jrd_thd.js:772 P.ok) needs a school-age royal child of a living rival, which a fresh random test life does not always have, so __life falls to another thd road. Not caused by any wave; the shared ge-engine block should retry the life or seed a pupil (one line, all waves).
