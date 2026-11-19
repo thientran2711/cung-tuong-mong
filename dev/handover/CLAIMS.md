@@ -249,3 +249,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin F4 (opus; pets/garden/kitchen/study; same worker as F3, stacked on F3) | review/coop-thin-f4 | B | session_01N1tNP2DFfqtxibVd8wgyr6 | RUNNING | 19/11 06:33Z |
 | ev-pic-followups (sonnet; MAIN ROOT-65 job via C-AG #22: iPad XL option frame scroll kit fix whole group + PEND:eunuch scene) | review/ev-pic-followups; briefs/cag22-ev-pic-followups.md | C-AG #22 for ROOT-65 | session_01Rc5AsMN9rc6gf4qRzmEoJF | RUNNING | 19/11 06:40Z |
 | seal-lean-2 r2 SMALL REVIEW (sonnet) | review/seal-lean-2 a64f06c7 | MAIN ROOT-65 | session_01Rc5AsK8sbYnJUkyP6AvmAw | RUNNING | 19/11 06:37Z |
+| foreign-princess-3 history expert (sonnet E19; MAIN ORDER 06:23Z/06:35Z) | handover reports/foreign-princess-3-history.md | E ROOT #8 | session_01DgYSWkWBAJFRJzN3a7ix9a | RUNNING | 19/11 06:42Z |
