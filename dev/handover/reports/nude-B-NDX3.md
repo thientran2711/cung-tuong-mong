@@ -47,3 +47,8 @@ New diff (on top of ruling (b)), mk.py + _build_item.py:
    m01: a18 jade seal · a26 dragon sceptre · a36 edict scroll · a51 ruyi · a65 round fan.
 9. D13 a51 only — before the hair sentence: "She looks younger than her age but is still clearly about 50: never like an 18-26-year-old, with soft fine lines and clearly visible silver at the temples."
 (Builder BW3 now fills the face words itself; mk.py checks they appear once.) check_store --scope nude PASS 5/5.
+
+## UPDATE 3 — BW4 identity sentence + IT1 item lists (no gens)
+- BW4 b4b796a: identity sentence now "keep ONLY her face, facial features, hair COLOUR and signature colour family; do NOT copy poses, outfit, HAIRSTYLE, …".
+- E11: items = IT1 build.py NUDE_LIST (25) / NUDE_AGE (5 per age), pick NUDE_LIST[NUDE_AGE[age][(n-1)%5]] (commit 438794d); interim 9-item list removed.
+  m01: a18 dragon tú cầu · a26 pipa · a36 jade mountain carving · a51 table screen · a65 edict scroll. check_store --scope nude PASS 5/5.

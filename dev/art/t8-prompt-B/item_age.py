@@ -205,6 +205,40 @@ POOL={"lady":{
  "a36":_PS+["p_sheets","p_umb","p_plum","p_twigs","p_greens","p_paddle","p_sandals"],
  "a51":_PS+["p_beads","p_stick","p_roots","p_sutra","p_seeds","p_inc","p_whisk"],
  "a65":_PS+["p_cane","p_fish","p_chrys","p_warm","p_keep","p_yarn","p_hanky"]}}
+# ---- E11 (owner Lượt 583/585, IT1): AGE5 = the EXISTING per-age pools split to 5 items per age for the tiers whose only list lives here
+# (lãnh cung, nhà nghèo, tm0–tm4, ma ma, khuê các, Nam Chiêu): 25 different kinds per tier, adjacent ranks (tm0|tm1|…|tm4|ma ma, nghèo|lãnh)
+# never share a kind at one age. Kinds come from POOL[group][age] (names unchanged) + the few added kinds below (POOL_EXTRA, kept OUT of POOL
+# so cell()/pick_kind() and every existing pick stay byte-identical). Builder pick: age5_item(cNN, age, tier) = AGE5[tier][age][(n-1)%5].
+# t1–t8 / Nữ đế / Thái hậu / Bắc Địch keep their lists in build.py (L3F / ITEMS7 / ITEMS / NUDE_LIST / TH_ITEMS / BD_ITEMS + *_AGE).
+k("m_mirror","her mistress's hand mirror wrapped in {S}","gương cầm tay của chủ tử bọc {S}")
+k("m_fan","plain round fan of {S} with a handle of {H}","quạt tròn {S}, cán {H}")
+k("m_pinbox","small box of hairpins of {H} for her mistress","hộp trâm nhỏ {H} của chủ tử")
+k("m_flowers","bundle of fresh flowers for the vases wrapped in {S}","bó hoa tươi để cắm bình bọc {S}")
+k("m_pot","small potted flower in a pot of {H}","chậu hoa nhỏ {H}")
+k("m_pattern","rolled embroidery pattern sheets tied with {S}","cuộn mẫu thêu buộc {S}")
+k("m_scissors","pair of tailor's scissors on a cord of {S}","kéo may treo dây {S}")
+k("m_bell","small hand bell with a handle of {H}","chuông cầm tay nhỏ cán {H}")
+k("m_inv","rolled storeroom inventory scroll tied with {S}","cuộn sổ kho buộc {S}")
+k("m_seal","small storeroom seal of {H} on a cord","con dấu kho nhỏ {H} treo dây")
+k("m_clapper","small night-watch wooden clapper of {H}","mõ cầm canh nhỏ {H}")
+k("m_pine","small potted pine in a pot of {H}","chậu tùng nhỏ {H}")
+k("m_herbbag","small bag of dried herbs of {S}","túi thảo dược khô {S}")
+k("p_kite","small {A} paper kite on a string","diều giấy nhỏ {A}")
+k("p_pinwheel","small {A} paper pinwheel on a bamboo stick","chong chóng giấy nhỏ {A} trên que tre")
+k("p_rice","small {A} cloth bag of rice","túi vải nhỏ {A} đựng gạo")
+k("p_needle","{A} bamboo needle case on a cord","ống kim tre {A} treo dây")
+k("p_ruler","{A} bamboo measuring ruler","thước tre {A}")
+k("p_slips","{A} bundle of bamboo slips tied with cord","bó thẻ tre {A} buộc dây")
+k("p_lotus","{A} dried lotus seed pod on its stem","đài sen khô {A} còn cuống")
+k("p_bell","small {A} iron bell on a cord","chuông sắt nhỏ {A} treo dây")
+k("p_pine","small {A} clay pot with a pine seedling","chậu đất nhỏ {A} trồng cây tùng con")
+k("p_almanac","{A} paper almanac","cuốn lịch giấy {A}")
+k("p_gourd","small {A} dried gourd on a cord","quả bầu khô nhỏ {A} treo dây")
+k("p_jujube","{A} cloth pouch of dried jujubes","túi vải {A} đựng táo tàu khô")
+POOL_EXTRA={"maid":{"a18":["m_mirror","m_fan","m_pinbox"],"a26":["m_flowers","m_pot","m_pattern"],"a36":["m_scissors","m_bell","m_pattern"],
+ "a51":["m_inv","m_seal","m_scissors"],"a65":["m_clapper","m_pine","m_herbbag","m_inv"]},
+ "poor":{"a18":["p_kite","p_pinwheel","p_mulb"],"a26":["p_rice","p_needle","p_kite"],"a36":["p_ruler","p_slips","p_lotus","p_rice"],
+ "a51":["p_bell","p_pine","p_almanac","p_lotus"],"a65":["p_gourd","p_jujube","p_almanac","p_bell"]},"lady":{a:[] for a in AGES}}
 def allowed(kind,tier):
     r=K[kind][2]; L=LEVEL[tier]
     if r is None: return True
@@ -290,6 +324,36 @@ def check():
         for a in AGES:
             if pick_kind(c,a,"nude")==pick_kind(c,a,"t8"): bad.append(f"NUDE=T8 {c} {a}")
     return bad
+AGE5={"ngheo":{"a18": ["p_pinwheel", "p_wbask", "p_hemp", "p_sprig", "p_hsach"], "a26": ["p_sewb", "p_hoop", "p_mulb", "p_spindle", "p_fherbs"], "a36": ["p_lotus", "p_umb", "p_paddle", "p_rice", "p_plum"], "a51": ["p_beads", "p_sutra", "p_stick", "p_comb", "p_bundle"], "a65": ["p_yarn", "p_hanky", "p_almanac", "p_bell", "p_cane"]},
+"lanh":{"a18": ["p_bundle", "p_mulb", "p_orchid", "p_lant", "p_flute"], "a26": ["p_kite", "p_needle", "p_rice", "p_broom", "p_laundry"], "a36": ["p_ruler", "p_slips", "p_sheets", "p_fan", "p_sandals"], "a51": ["p_bell", "p_whisk", "p_lotus", "p_inc", "p_pine"], "a65": ["p_gourd", "p_comb", "p_keep", "p_chrys", "p_fish"]},
+"tm0":{"a18": ["m_pinbox", "m_letter", "m_tbask", "m_broom", "m_fan"], "a26": ["m_hoop", "m_sewbox", "m_bolt", "m_pot", "m_flowers"], "a36": ["m_umb", "m_bell", "m_keys", "m_brocade", "m_lant"], "a51": ["m_inv", "m_herbs", "m_duster", "m_bcase", "m_mend"], "a65": ["m_cane", "m_almanac", "m_clapper", "m_incst", "m_whisk"]},
+"tm1":{"a18": ["m_lant", "m_mirror", "m_cbox", "m_fbask", "m_ribbon"], "a26": ["m_incbox", "m_robe", "m_ptray", "m_meds", "m_candle"], "a36": ["m_slip", "m_duster", "m_pattern", "m_medbox", "m_ruler"], "a51": ["m_warmer", "m_abacus", "m_beads", "m_ledger", "m_seal"], "a65": ["m_herbbag", "m_chrys", "m_sutra", "m_pine", "m_inv"]},
+"tm2":{"a18": ["m_tbask", "m_pinbox", "m_letter", "m_fan", "m_ftray"], "a26": ["m_bolt", "m_flowers", "m_pot", "m_pattern", "m_sewbox"], "a36": ["m_keys", "m_umb", "m_bell", "m_food", "m_robe"], "a51": ["m_herbs", "m_inv", "m_bcase", "m_scissors", "m_duster"], "a65": ["m_whisk", "m_cane", "m_almanac", "m_fish", "m_incst"]},
+"tm3":{"a18": ["m_robe", "m_fbask", "m_broom", "m_ribbon", "m_cbox"], "a26": ["m_duster", "m_lant", "m_hoop", "m_incbox", "m_meds"], "a36": ["m_medbox", "m_slip", "m_scissors", "m_ruler", "m_pattern"], "a51": ["m_ledger", "m_mend", "m_abacus", "m_seal", "m_warmer"], "a65": ["m_pine", "m_sutra", "m_herbbag", "m_inv", "m_clapper"]},
+"tm4":{"a18": ["m_mirror", "m_fan", "m_pinbox", "m_letter", "m_tbask"], "a26": ["m_pot", "m_bolt", "m_flowers", "m_candle", "m_ptray"], "a36": ["m_bell", "m_brocade", "m_lant", "m_duster", "m_keys"], "a51": ["m_bcase", "m_scissors", "m_inv", "m_robe", "m_herbs"], "a65": ["m_chrys", "m_incst", "m_cane", "m_whisk", "m_fish"]},
+"mama":{"a18": ["m_broom", "m_cbox", "m_ribbon", "m_ftray", "m_fbask"], "a26": ["m_meds", "m_pattern", "m_sewbox", "m_hoop", "m_incbox"], "a36": ["m_ruler", "m_medbox", "m_umb", "m_slip", "m_food"], "a51": ["m_seal", "m_ledger", "m_warmer", "m_beads", "m_abacus"], "a65": ["m_almanac", "m_clapper", "m_pine", "m_herbbag", "m_sutra"]},
+"kc":{"a18": ["slant", "ball", "flute", "hoop", "fbask"], "a26": ["rfan", "combbox", "pend", "pbook", "plant"], "a36": ["powder", "casket", "hanky", "hcomb", "orchid"], "a51": ["sutra", "ffan", "whisk", "album", "pouch"], "a65": ["pine", "bell", "mirror", "peach", "pastebox"]},
+"nc":{"a18": ["flute", "sachet", "speony", "fbask", "parasol"], "a26": ["rfan", "plant", "combbox", "vase", "pscroll"], "a36": ["incbox", "hanky", "casket", "beads", "orchid"], "a51": ["warmer", "album", "ffan", "iball", "pouch"], "a65": ["chrys", "pastebox", "bell", "staff", "almanac"]}}
+def age5_item(c,age,tier,vn=False):
+    """E11 pick for the tiers in AGE5: person cNN (n) at age -> AGE5[tier][age][(n-1)%5] filled with the tier material."""
+    n=int(c[1:]) if c[1:].isdigit() else sum(map(ord,c))
+    return fill(AGE5[tier][age][(n-1)%5],tier,vn)
+def check_age5():
+    """E11 test: 5 per age, 25 different kinds per tier, kind allowed and in that age's pool, adjacent ranks share no kind at one age."""
+    import re
+    bad=[]
+    for t,d in AGE5.items():
+        ks=[x for a in AGES for x in d[a]]
+        if len(ks)!=25 or len(set(ks))!=25: bad.append(f"AGE5-ROW {t}")
+        for a in AGES:
+            g=GROUP[t]
+            for x in d[a]:
+                if x not in POOL[g][a]+POOL_EXTRA[g][a] or not allowed(x,t): bad.append(f"AGE5-POOL {t} {a} {x}")
+                if re.search(r"\b(cup|teacup|teapot|bowl|goblet)\b",fill(x,t)): bad.append(f"AGE5-CUP {t} {x}")
+    for x,y in [("ngheo","lanh"),("tm0","tm1"),("tm1","tm2"),("tm2","tm3"),("tm3","tm4"),("tm4","mama")]:
+        for a in AGES:
+            if set(AGE5[x][a])&set(AGE5[y][a]): bad.append(f"AGE5-ADJ {x}/{y} {a}")
+    return bad
 if __name__=="__main__":
     import sys
     if sys.argv[1:2]==["md"]:
@@ -302,6 +366,6 @@ if __name__=="__main__":
                     print(f"| {TIER_NAME[t]} | "+" · ".join(f"{i+1} {e} — *{v}*" for i,(e,v) in enumerate(zip(cell(a,t),cell(a,t,True))))+" |")
             print()
     elif sys.argv[1:2]==["check"]:
-        b=check(); print("\n".join(b)); print("bad",len(b))
+        b=check()+check_age5(); print("\n".join(b)); print("bad",len(b))
     elif sys.argv[1:2]==["pick"]:
         print(pick_item(sys.argv[2],sys.argv[3],sys.argv[4]))
