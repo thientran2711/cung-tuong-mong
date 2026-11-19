@@ -66,7 +66,9 @@ if(typeof exRun==="function"){const x0=exRun;
   if(hctx()){stSet("exam",kind);return cap("exGame",[kind])}
   if(g12()){const t={};let sk=null;const r=x0.call(this,P,t,res=>exEnd(kind,res&&res.raws||[],sk||[]));sk=t.pend&&t.pend.sk;F.stat.exLocal=(F.stat.exLocal|0)+1;return r}
   return x0.apply(this,arguments)}}
-window.exGame=function(kind){noCard();const P=kind==="srv"?exSrvPlan(exSrvS().to):exPlanFull();return exRun(P,{},null)};
+/* her phone: an opener replayed by an answer runs on the next tick (inside the view apply gOn is false: the game took the old road) */
+const nextTick=fn=>{if(host())return fn();setTimeout(()=>{try{fn()}catch(e){console.error("jcoopthinf6b opener",e)}},0)};
+window.exGame=function(kind){noCard();nextTick(()=>{const P=kind==="srv"?exSrvPlan(exSrvS().to):exPlanFull();exRun(P,{},null)})};
 TH.UICAP.add("exGame");
 reg12("exEnd",["v","v","v"],{title:A=>A[0]==="srv"?"Khảo hạch Nội vụ phủ":"Khảo hạch",
  dec:a=>{const x=X5.decA9(["v","v","v"],a);if(!x)return null;const [kind,raws,sk0]=x;if(kind!=="me"&&kind!=="srv")return bad("exEnd");
@@ -126,7 +128,8 @@ window.__smgEnd=function(mode,raw,sk){if(!SRC||!g12())return false;const s=SRC;S
 window.__smgOpen=function(mode,o){if(!host()){if(SRC)OPN=true;return false}if(!hctx()||!HSRC)return false;cap("stealGame",[mode,HSRC]);return true};
 /* her phone: SRC lives while her game is open; a card / act that opened no game (top rung, no art) took the old road: SRC dropped */
 const withSrc=(src,fn)=>{if(host()){HSRC=src;try{return fn()}finally{HSRC=null}}SRC=src;OPN=false;try{return fn()}finally{if(!OPN&&SRC===src)SRC=null}};
-window.stealGame=function(mode,src){noCard();if(!src||typeof window.stealMgPlay!=="function")return;let o=null;
+window.stealGame=function(mode,src){noCard();nextTick(()=>stealGame0(mode,src))};
+const stealGame0=function(mode,src){if(!src||typeof window.stealMgPlay!=="function")return;let o=null;
  if(src.c){const i=myCard(src);o=i>=0?deck[i].o:null}else o=window.stealO0(S,mode);if(o==null)return;withSrc(src,()=>window.stealMgPlay(mode,o,()=>{SRC=null}))};
 TH.UICAP.add("stealGame");
 window.stealEnd=function(src,raw,sk){const f0=window.__smgFake;window.__smgFake=()=>({raw:sk?0:raw,skipped:!!sk,sync:1});
