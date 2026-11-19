@@ -1156,7 +1156,18 @@ def spec5pose(o,c,t):
     # F4 fix1 (ROOT-39, owner verdict 19/11 ~03:05Z item 5 "bộ trang phục nó lại thuần luộc, đi xuống dưới chân"): the N5b sentence ("standing still and upright ... elbows close to her body ... all hang straight down, still ... no movement") was the ONLY difference from the approved Hoàng hậu prompt B / Nữ đế A outfit+fabric text and made the robe a stiff tube.
     # Now = approved HH prompt B pose wording copied ("calm standing pose; she holds ... at chest height below the chin") + 3d2 frontal words + Nữ đế A "with stately grace"; only the canon (e) clause "no flying, floating or windblown cloth" kept. The fabric sentence (HH B: "hang and fold naturally ... natural creases, never stiff") is untouched and no longer contradicted.
     # F4 fix2: fix1 ("in one or both hands") still gave a symmetric column (both hands centred). Hands = HH prompt B "Her hands and body" clause copied (item in one hand, the other hand resting over her sash); only its "three-quarters" turn replaced by the 3d2 frontal words.
-    if globals().get("STATE")=="nude": pose=f"calm standing pose; she holds {prop}, the item held below the chin, the hand really gripping it. Her hands and body: the item upright in one hand at chest height below the chin, the other hand resting over her sash, body and face frontal, standing squarely facing the viewer, no turn, with stately grace; no flying, floating or windblown cloth"
+    # F4b option (i) (ROOT-39 GO; owner 19/11 ~03:15Z "ai cũng đứng ở một cái kiểu" + Nữ đế must be soft like Nữ đế A / HH): fix2's single pose replaced by a Nữ đế-only list of 5 calm poses built ONLY from approved wording
+    # (Nữ đế A stole action without "breeze" = F4 test (b) bxMjQS45Y2, proven soft; HH B "item upright in one hand at chest height below the chin, the other hand resting over her sash"; HH low builder "gently presenting / turning / touching it").
+    # EVERY pose keeps the sheer silk stole (the soft layer). One pose per age, rotated per person (pose = (age index + person number) % 5) so the 5 ages of one person and same-age neighbours differ. --state nude only; every other output byte-identical.
+    if globals().get("STATE")=="nude":
+        _NP=["one hand holding the edge of her long sheer silk stole, {prop} in the other hand",
+             "{prop} upright in one hand at chest height below the chin, the other hand resting over her sash, holding the edge of her long sheer silk stole",
+             "gently presenting {prop} in one hand at chest height, the other hand holding the edge of her long sheer silk stole",
+             "gently turning {prop} in one hand at chest height, the other hand holding the edge of her long sheer silk stole",
+             "{prop} upright in one hand at chest height, the other hand gently touching it, her long sheer silk stole over both arms"]
+        _A5=["a18","a26","a36","a51","a65"]; _cn=int(re.sub(r"\D","",c) or 0)
+        _np=_NP[((_A5.index(AGE) if AGE in _A5 else 0)+_cn)%5].format(prop=prop)
+        pose=f"calm standing pose; {_np}, the item held below the chin, body and face frontal, standing squarely facing the viewer, no turn, with stately grace; no flying, floating or windblown cloth"
     a=o.index(" Pose: calm standing pose;"); b=o.index(" Every hairpin is inserted")
     new=f" Pose: {pose}. The item is in a contrasting colour, not the robe colour, and the hand really grips it; the whole face fully visible with the head up toward the viewer, eyes open, lips closed, never looking down, nothing covering the face."
     o=o[:a]+new+o[b:]
