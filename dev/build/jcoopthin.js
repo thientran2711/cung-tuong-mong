@@ -203,7 +203,7 @@ const uiArg=a=>{try{return JSON.parse(JSON.stringify(a,(k,v)=>typeof v==="functi
    step: all of them run through here): an engine her run calls may paint the HOST's own screen with HER state (renderStage / k3Stage / the
    act cards / the stage figures are not no-ops in her context: their wrappers also write her person, F1/E rely on that). Whatever her run
    wrote into the host's page is seen here (MutationObserver.takeRecords: synchronous, no list of painters to keep up to date) and the host
-   repaints his own screen from his own state after her context closes (rpAsk below). Her screen gets her own result with the
+   repaints his own screen from his own state when her context closes (rpAsk below). Her screen gets her own result with the
    answer (her view → one render). (c) No cap here: every effect her run raised is kept (BAL.coopUi paces them on her phone). */
 let PMO=null;TH.paintN=0;
 TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let mo=null;
@@ -212,18 +212,14 @@ TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let mo
    if(dirty){const M=document.getElementById("modal");dm=!!M&&R.some(x=>x.target===M||M.contains(x.target))}}catch(e){}}
  if(dirty){TH.paintN++;rpAsk(dm)}
  return {r,ui:ui&&ui.length?ui:null,dirty}};
-/* hostnull (a) r2, cost: the host repaint is OFF her answer's path and never rebuilds the host's own open card for nothing. It runs once per
-   burst of her runs (coalesced), after the run returned (her answer is not held by his render), outside any seat context and with no observer on (it cannot feed itself: no loop). Timing: the next animation frame (before the screen is drawn:
-   her state never shows on his screen; the delta's 0 ms timer, queued first, normally runs before it), a 200 ms timer as the backstop
-   (rAF does not run while his tab is hidden). showModal() (rebuilds #modal from Q[0]: his scroll, his open
-   card) only when her run wrote into #modal; otherwise render() alone (stage, tokens, HUD: his own state). When her context closes with
-   waiting work (D.afterRun: showModal + render, e.g. her walks' herMoved) that render already repaints him: the queued one is dropped. */
-let RPT=0,RPK=0,RPM=false;TH.rpN=0;TH.rpMs=0;
-function rpAsk(m){RPM=RPM||m;if(RPT)return;const k=RPT=++RPK;const go=()=>{if(RPT===k)rpRun()};
- try{requestAnimationFrame(go)}catch(e){}setTimeout(go,200)}
-function rpRun(){RPT=0;const m=RPM;RPM=false;if(CW.ctx){rpAsk(m);return}const t=performance.now();
- try{if(m)showModal();render()}catch(e){console.error("thin repaint",e)}TH.rpN++;TH.rpMs+=performance.now()-t}
-TH.rpDrop=function(){RPT=0;RPM=false};
+/* hostnull (a) r2, cost + safety: the host repaints in D.afterRun, i.e. in the SAME task right after her context closes, before the page's
+   own observers run (they run at the microtask checkpoint: jreveal krvTick, jsfx, the kit fitters …). A repaint deferred to a later frame
+   was tried and dropped: in that gap the host's observers saw HER painted DOM and acted on it (the host flipped her face, H2 red). Cost =
+   one host render per run that wrote his DOM (measured: ~300 ms at CPU ×4 on a talk; median tap→answer unchanged on 4G). showModal()
+   (rebuilds #modal from Q[0]: his scroll, his open card) only when her run wrote into #modal or other waiting work asks for it; otherwise
+   render() alone. Nothing observes during the repaint (the observer is disconnected): it cannot feed itself, no loop. */
+let RPM=false;TH.rpN=0;TH.rpMs=0;const RPF=()=>{};
+function rpAsk(m){RPM=RPM||m;try{D.after(RPF)}catch(e){}}
 /* guest: what her run on the host captured, played once on her own screen */
 /* hostnull (c): ONE cap rule (BAL.coopUi, one core): at most BAL.coopUi.batch effects play at once; the rest wait in order and play
    BAL.coopUi.gapMs later, batch by batch — an effect is never dropped (the old answer kept only 4, the run 12). Returns the number queued. */
@@ -436,7 +432,8 @@ D.after=fn=>{if(CW.ctx)AFTER.push(fn);else try{fn()}catch(e){console.error("thin
 D.afterRun=function(seat){const L=AFTER.splice(0);for(const f of L)try{f()}catch(e){console.error("thin after",e)}
  if(TH.bridgeItems&&TH.bridgeItems.length){const pid=PID[seat];for(const e of TH.bridgeItems.splice(0)){const x=J(e);x.from=pid;if(x.by==="me")x.by=pid;
   try{pushDil(mkP("giftin",{f:pid,e:x}),"Quà tặng")}catch(er){console.error(er)}}}
- if(L.length||AFTER.length)try{TH.rpDrop();showModal();render()}catch(e){}
+ if(L.length||AFTER.length){const rp=L.length&&L.every(f=>f===RPF)&&!AFTER.length,m=RPM;RPM=false;const t=performance.now();
+  try{if(!rp||m)showModal();render()}catch(e){console.error("thin repaint",e)}if(L.includes(RPF)){TH.rpN++;TH.rpMs+=performance.now()-t}}
  try{if(CW.reEnd)CW.reEnd()}catch(e){}};
 /* run fn in her context from the top of the event loop (her cards, her res); rid = a host wait (CW.rpend) released when she has it.
    B r2 (seam, the ONE gate for every D path into her context): while her rolled life is held (TH.held) the work is DEFERRED (D.DF), never

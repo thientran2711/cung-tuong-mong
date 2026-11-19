@@ -112,10 +112,11 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   await G.p.evaluate(i=>{popIdx=i;popMsg='';used=0;if(S.visit){S.visit.tk={};S.visit.talked=false}render()},PI);
   const card=await H.p.evaluate(()=>{const c={t:'hn-own',h:'hn-own card',opts:[{n:'Thôi'}]};Q.unshift(c);showModal();const mb=document.getElementById('mb');mb.__hn=1;const mk=document.createElement('i');mk.id='hn-mark';mb.appendChild(mk);return !document.getElementById('modal').hidden});
   const oi=await G.p.evaluate(()=>{const p=curPeople()[popIdx];return p?talkOpts(p).findIndex(a=>!a.open&&!a.lock&&canPay(a)):-1});
+  await H.p.evaluate(()=>{window.__hsfx=[];for(const n of ['kitSfx','sfx']){const f=window[n];if(typeof f!=='function'||f.__hn)continue;const w=function(){if(!COOPW.ctx)__hsfx.push(n+':'+String(arguments[0]));return f.apply(this,arguments)};w.__hn=1;window[n]=w}});
   const r=oi>=0?await herRun('talk',oi):null;await sleep(600);
-  const m=await H.p.evaluate(()=>({mark:!!document.getElementById('hn-mark'),q0:Q[0]&&Q[0].t,open:!document.getElementById('modal').hidden,rpN:COOPW.thin.rpN|0}));
+  const m=await H.p.evaluate(()=>({sfx:__hsfx.slice(),mark:!!document.getElementById('hn-mark'),q0:Q[0]&&Q[0].t,open:!document.getElementById('modal').hidden,rpN:COOPW.thin.rpN|0}));
   await H.p.evaluate(()=>{const i=Q.findIndex(c=>c.t==='hn-own');if(i>=0)Q.splice(i,1);showModal();render()});
-  ok(!!card&&!!r&&r.got&&r.ran===1&&m.mark&&m.q0==='hn-own'&&m.open,'H6 his own open card is not rebuilt by her run (her talk wrote no #modal): same card, still open',{card,r:r&&{got:r.got,ran:r.ran,paint:r.paint},m});
+  ok(!!card&&!!r&&r.got&&r.ran===1&&m.mark&&m.q0==='hn-own'&&m.open&&!m.sfx.length,'H6 his own open card is not rebuilt by her run (her talk wrote no #modal): same card, still open; no sound on the host',{card,r:r&&{got:r.got,ran:r.ran,paint:r.paint},m});
   const i0=await H.p.evaluate(()=>[COOPW.thin.rpN|0,COOPW.thin.paintN|0]);await sleep(3000);const i1=await H.p.evaluate(()=>[COOPW.thin.rpN|0,COOPW.thin.paintN|0]);
   ok(i0[0]===i1[0]&&i0[1]===i1[1],'H6 no repaint loop: 3 s with no run of hers, no repaint and no paint step',{i0,i1});
   const c=await H.p.evaluate(()=>({run:(COOPW.thin.lat||[]).map(x=>Math.round(x.run||0)),rpN:COOPW.thin.rpN|0,rpMs:Math.round(COOPW.thin.rpMs||0),paintN:COOPW.thin.paintN|0,lt:__lt}));
