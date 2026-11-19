@@ -1,3 +1,16 @@
+# review-opt-card-short #2 — PASS LAND READY 96188526 (worker sha 7d693c26 + final merge of LIVE main 73790cb7)
+PRIORITY #1 CHECK: OD 18/11 21:20Z/21:35Z/22:05Z | review/opt-card-short = -b = 96188526 | main 0 | claims opt-card worker MxWaub8y.
+Final merge: origin/main 73790cb7 merged into 7d693c26 (only built files index.html/sw.js/assets.json conflicted; resolved by rebuild with build_site.sh, source merged clean). `git merge-base --is-ancestor origin/main 96188526` = OK (FF). Pushed to review/opt-card-short and -b (both = 96188526). Rollback = main 73790cb7.
+quickcheck 96188526: PASS (core gates, time-spill, open 1493 ms, old save ok, perf median new/live render 236/196, buoi 1284/895, tasks>200ms 20/17).
+Findings of the first review: (1) placeholder samples → FIXED (real approach events: real title/text/options; shots show «Tiếp chuyện cả buổi», «Nhận lời giúp hết lòng», «Hẹn hôm khác», «Đến ngay/Cáo bệnh», «Sai người đi hỏi tội»…). (2) law 3 → see below. (3) perf → PASS now (earlier 19 ms over was noise).
+Looked (CDN shots, real pictures): fold-many (3 cards, all visible, no «Kéo xuống»), fold-thtrieu (2 cards, figure+cards fill the frame, no empty band), ipad-many (Chuyện trong cung, 5 options: 3rd cut, «Kéo xuống» cue, picture strip 56 px kept — scroll is unavoidable for 5 cards on iPad; NOTE: law 10 strict reading says picture should drop if it still scrolls — worker says rule drops it when that helps; owner may judge). Fold fig-mat2 loaded, not re-judged.
+LAW 3 fix (kitOptFinal): reads the event's own «Gợi ý» wording only (split at «nhưng» into Được / Tốn); never invents a gain; falls back to «không». Shots confirm: «được lòng bề trên», «mất lòng bề trên» / «giữ trọn khắc và Sức buổi này». RISK (note, not fail): a hint with no «nhưng» goes wholly into Được even if it describes only a loss/risk; no real case seen in the shots, event authors should word hints as gain «nhưng» loss.
+Real-data law-3 faults (event owners, per worker #10): Chuyện trong cung «Theo hầu trọn buổi» (Sức -8 / không), «Cúng dầu đèn hậu hình» (Bạc -15 / không), «Cáo bận việc cung» (không / không); Kẻ hầu «Từ chối» shows only «lòng -10». Not blockers of this kit change.
+Law check: 10 (B, TIERCHK bad 0), 9/11 kit-conform PASS, 2/3 as above, 7 no new player text from the kit.
+VERDICT: PASS LAND READY 96188526.
+~100% review done / ~90% chơi được for option cards.
+
+---
 # review-opt-card-short (reviewer for MAIN ROOT-61, order via C-AG #18) — verdict on 04f09798: FAIL (re-review on the newer sha)
 PRIORITY #1 CHECK: OD 18/11 ~21:20Z/~21:35Z/22:05Z | review/opt-card-short = -b = 04f09798 | main 0 | claims opt-card worker session_01Rc5AsMxWaub8yKfYn3AbWS.
 Judged: origin/review/opt-card-short @ 04f09798 vs LIVE origin/main bb8e8ec9 (ls-remote at verdict time: both unchanged; no newer worker sha yet). FF: `git merge-base --is-ancestor origin/main 04f09798` = OK.
