@@ -113,7 +113,7 @@ function kitNoticeOpen(id){try{if(typeof kitPanel!=="function")return null;const
  const U=unread();const L=one?[one]:(U.length?U:NT.list.slice(0,6));if(!L.length)return null;
  const lead=L[0];/* plain kit text rows (kpsec html), not kitFacts: no person figure is guessed from the words — the panel stays SMALL */
  const html=L.map(x=>`<p class="kntp">${esc(x.text)}${!one&&x.seen?" <small>(đã xem)</small>":""}</p>`).join("");
- const go=L.find(x=>typeof x.go==="function");const opts=go?[{n:go.goLabel||"Để ta xem",fx:{},go:()=>{try{go.go()}catch(e){}boxPaint()}}]:undefined;
+ const go=L.find(x=>typeof x.go==="function");const opts=go?[{n:go.goLabel||"Để ta xem",fx:{},go:()=>{try{go.go()}catch(e){}boxPaint()}},{n:"Để sau",fx:{},go:()=>{boxPaint()}}]:undefined;/* review r4: a kit panel with options has no ✕ (jksize) — «Để sau» always lets her close it without being sent to Dư đồ */
  const m=kitPanel({kind:"notice",title:"Tin báo",sub:one?"":(U.length?`${U.length} tin mới`:"Đã xem hết"),sections:[{html}],opts,onClose:()=>boxPaint()},true);m.__ntc=lead;showModal();picSwap(document,lead);for(const t of [0,150,400,800,1500])setTimeout(()=>{if(NT.open===m)picSwap(document,lead)},t);NT.open=m;
  for(const x of L)x.seen=true;const c=$("kntchip");if(c)chipHide(c);setTimeout(boxPaint,0);return m}catch(e){console.error("kitNoticeOpen",e);return null}}
 /* the panel's picture = the notice's own (the kit info panel puts kitInfoArt("Tin báo") there; a notice with a picture swaps it in the same kit frame) */
