@@ -74,7 +74,7 @@ Baseline before parallel time = 9aad0c66 (first parent of 1a4df595).
 ## Done — review/coop-ptime-reds @ be1b357c (pushed; = LIVE 2bda29a1 + fixes; index.html / sw.js / assets.json rebuilt by build_site.sh)
 Commits: b2fe6908 (faults + f1/f2 tests), be1b357c (tick stat, f3 G1, launch flags, undef-scan). Shots: none (no UI change). Worktrees removed after push.
 
-## REVIEW r1 — PASS review/coop-ptime-reds-r1 @ b3979a21 (opus BIG, session_01N1tNP5SHLVhU9jjuhFnqjA, 11/19/2026)
+## REVIEW r1 — PASS review/coop-ptime-reds-r1 @ db6ac757 (b3979a21 + merge of main 3584ea42, cdn-kc-guard tooling only, no game file) (opus BIG, session_01N1tNP5SHLVhU9jjuhFnqjA, 11/19/2026)
 PRIORITY #1 CHECK: grep OWNER_DECISIONS / HANDOVER_1115_PM / PROGRESS for ptTickHer, kitNotice, F.pend busy, rcvAsk coop → no ruling against; git grep origin/main + origin/review/*: j29 sv fix also on review/runact-sv-fix 868c682c (reused verbatim, not re-made); UICAP / TH.uiPlay / kitNotice / ptOpenTin / errOpen / rcvOpen / ptOrdOpen reused (no new kit part, no new number). CLAIMS row 308 read; Foreman B = ROOT-7 (FOREMAN_B_STATUS).
 
 Branch = be1b357c + 3 reviewer commits + merge of main 80c52782 (npc-purpose G1 #15 + manifest-floor; only index/sw/assets conflicted, rebuilt by build_site.sh). j29.js = byte-identical to 868c682c's hunk (git merge-tree with origin/review/runact-sv-fix: j29 merges clean, only the generated assets.json / index.html / sw.js conflict → rebuild).
