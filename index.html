@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e98beaf8","t":"2026-11-19T07:21Z","c":"coop-thin F3: generated files rebuilt after the f2-r2 083227d4 merge","b":"b2e79cd91b2f","h":[{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"}]};
+window.CTM_BI={"s":"bb9a307c","t":"2026-11-19T07:35Z","c":"coop-thin F4: her screen redraws replayed through TH.uiPlay after the f2-r2 merge (TH.UICAP exposed; petcDraw / petcClose / shelfPlantDraw …","b":"c3b603731ecc","h":[{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -77791,6 +77791,7 @@ TH.NOOP.push("resultShow");
    E's buổi step, B's life, C's world frame and D's deferred work stay quiet (turns that are not her tap). */
 const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx"]);
 for(const n of UICAP)if(!TH.NOOP.includes(n))TH.NOOP.push(n);
+TH.UICAP=UICAP;/* F4: a part adds the screen redraws it captures itself (its own wrappers push them to TH.uiCap); TH.uiPlay plays only names in this set */
 const uiArg=a=>{try{return JSON.parse(JSON.stringify(a,(k,v)=>typeof v==="function"||(typeof Node!=="undefined"&&v instanceof Node)?undefined:v))}catch(e){return null}};
 TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let r,ui;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0}return {r,ui:ui&&ui.length?ui.slice(0,12):null}};
 /* guest: what her run on the host captured, played once on her own screen */
@@ -79083,9 +79084,10 @@ function reg9(name,K,o){o=o||{};const R=Object.assign({lv:L9,ctx:CX9,back:BACK8,
  R.mine=A=>live()&&(o.mine?o.mine(A):isMe(A[0]));return F.reg(name,R)}
 /* her care / plant screens draw into the HOST's DOM (petcClose → closeModal = the host's own card queue) when run in her context there:
    captured instead, replayed on her phone with the answer (her pet / plant read from her patched person) */
-const UI9=n=>{if(typeof window[n]!=="function")return;const f=window[n];window[n]=function(){if(CW.ctx&&host()&&on(L9)){if(TH.uiCap&&TH.uiCap.length<8)TH.uiCap.push([n,String(arguments[0]==null?"1":arguments[0]).slice(0,300)||"1"]);return}return f.apply(this,arguments)}};
+const UI9=n=>{if(typeof window[n]!=="function")return;const f=window[n];window[n]=function(){if(CW.ctx&&host()&&on(L9)){if(TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push([n,String(arguments[0]==null?"1":arguments[0]).slice(0,300)||"1"]);return}return f.apply(this,arguments)}};
 ["petcDraw","petcClose","shelfPlantDraw"].forEach(UI9);
-if(typeof petcGrowCard==="function"){const f=petcGrowCard;petcGrowCard=function(P){if(CW.ctx&&host()&&on(L9)){const i=tsbPets(S).indexOf(P);if(i>=0&&TH.uiCap&&TH.uiCap.length<8)TH.uiCap.push(["petcGrowShow",String(i)]);return}return f.apply(this,arguments)};
+try{for(const n of ["petcDraw","petcClose","shelfPlantDraw","petcGrowShow"])TH.UICAP.add(n)}catch(e){}
+if(typeof petcGrowCard==="function"){const f=petcGrowCard;petcGrowCard=function(P){if(CW.ctx&&host()&&on(L9)){const i=tsbPets(S).indexOf(P);if(i>=0&&TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push(["petcGrowShow",String(i)]);return}return f.apply(this,arguments)};
  window.petcGrowShow=i=>{try{const P=tsbPets(S)[+i];if(P)f(P)}catch(e){}}}
 /* pets */
 KSH.pet=()=>petShop();
@@ -79129,7 +79131,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b2e79cd91b2f";window.CTM_BUILD=BUILD;
+const BUILD="c3b603731ecc";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
