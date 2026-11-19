@@ -31,18 +31,10 @@ Check per image: live | new at ≤600 px (looked at every one) + numeric alpha s
 | m29 | ngheo | scroll → H6 plain cloth bundle tied with a knot | SyhyTiFUb8 | jUoUzHqLD0 |
 | m30 | kc | cup → H8 small silk lantern on a bamboo stick | O6E6eG7ynm | JNCNDLgOq4 |
 | m30 | ngheo | scroll → H8 branch of plum blossoms | If3fg5EtvE | Xm9mxT3Bfo |
-| m31 | kc | cup → H2 painted paper folding fan (redo; try1 Lw8wW7kswO too golden) | N2q2IyB6D9 | 8aialWpIrU |
+| m31 | kc | cup → H2 painted paper folding fan | Lw8wW7kswO | 8aialWpIrU |
 | m31 | ngheo | scroll → H4 bunch of fresh herbs tied with straw | p8y8rmbehw | If3fg0AtvE |
 | m32 | kc | cup → H5 sprig of peony blossoms | BhNhsCioQR | SyhyT5DUb8 |
 | m32 | ngheo | scroll → H9 plain bamboo-leaf fan | ksesA7s16B | O6E6ejfynm |
-| m33 | kc | cup → H7 bamboo flute | BhNhlfNoQR | hu2u7d9vqL |
-| m33 | ngheo | scroll → H2 skein of hemp thread | O6E6XZlynm | fHzHy87CDY |
-| m34 | kc | cup → H1 embroidered silk handkerchief | s7I704Kl8e | UPvPMjZwny |
-| m34 | ngheo | scroll → H10 small clay pot of orchid sprout | xSBSYbojfW | 4RFRo7z9Aa |
-| m35 | kc | lantern → H8 small silk lantern on a bamboo stick (kept) | w4a4e6P7EI | xSBSYQJjfW |
-| m35 | ngheo | plum branch → H8 branch of plum blossoms (kept) | nVsVHe9YQD | 9ZHZISMNYZ |
-| m36 | kc | cup → H9 painted-silk sachet with cord | 0eUeKIJTfW | eIPIjWNdqL |
-| m36 | ngheo | scroll → H3 wooden comb on plain cloth | lJtJV2Cgv9 | If3fUpntvE |
 
 ## Sheet 1 — gương mặt m21–m25 (rows = face; cols = khuê các hiện tại | khuê các mới 2K | nhà nghèo hiện tại | nhà nghèo mới 2K)
 https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k-mass/sheet_K6b_1.jpg ; 2K files img/_review/kc2k-mass/mNN_a18_{kc,ngheo}_2k.png
@@ -51,13 +43,5 @@ Honest notes: m23 khuê các honey-yellow sits at the upper end of "medium" (sti
 ## Sheet 2 — gương mặt m26–m30
 https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k-mass/sheet_K6b_2.jpg
 All 10 passed on the first try. The live m29 khuê các has a forehead mark; the new one is bare (checked by face zoom). m30 khuê các lantern tassel reaches the margin (0.09 % margin alpha = the figure itself, no haze).
-
-## Sheet 3 — gương mặt m31–m36
-https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k-mass/sheet_K6b_3.jpg
-12/12 pass (1 redo): m31 khuê các first try (Lw8wW7kswO) came out strong golden/marigold yellow, above the sheet5 level and close to royal yellow → regenerated with "soft warm honey-apricot yellow, toned down a step, never golden-bright or marigold" → N2q2IyB6D9 (kept). Honest note: the redo hue drifted from buttercup toward apricot; if the owner wants it closer to yellow, the next try = "soft muted honey yellow" wording. m33 khuê các periwinkle is at the stronger end of medium. m36 khuê các ivory was lifted to warm champagne-camel (ivory can't be "medium" otherwise). m35 both kept their items (lantern / plum branch, already H8).
-
-## DONE — all 16 faces m21–m36 × 2 = 32 figures, 33 gens (1 redo) ≈ 4,455 cr
-Files: CDN img/_review/kc2k-mass/mNN_a18_{kc,ngheo}_2k.png (1520x2688 RGBA, transparent straight from the model, margin alpha 0.00–0.09 %), sheets sheet_K6b_1..3.jpg. Neighbours differ in every column (incl. m20 kc H4/ngheo H6 and m37 kc H3/ngheo H8 from K3). Not done: going live (FIGURES-kc.json / webp at game size) — waits for the owner's verdict; cutcheck.py not run.
+In progress: m31 khuê các REDO (first try 'Lw8wW7kswO' = strong golden/marigold yellow, above sheet5 level and close to royal yellow; the prompt now says "soft warm honey-apricot yellow, toned down a step, never golden-bright or marigold"). m31 nhà nghèo, m32 both: pass.
 STATE: nothing live changed; only CDN review folder img/_review/kc2k-mass/ (K6b files: sheet_K6b_*.jpg + m21–m36 PNGs).
-
-~100 % xong (32/32 hình m21–m36, review folder only) / ~0 % chơi được (nothing live yet).
