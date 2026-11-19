@@ -114,6 +114,10 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
     const t=liveRivals(true).find(v=>v!==m&&!v.out&&(v.staff||[]).some(x=>x&&x.role==="maid"&&x!==a&&x!==fr));
     if(t){oanAdd(m,t,60);oanAdd(t,m,60);const z=t.staff.find(x=>x&&x.role==="maid"&&x!==a&&x!==fr);F[z.sid]=-40;ME(a,z)}}],
   ["m-away",a=>{const m=MST(a);if(!m)return;S.where=S.where||{};S.where[m.id]="vuon";const e=S.roster&&S.roster.P&&S.roster.P["v"+m.id];if(e)for(const x of e)if(Array.isArray(x))x[0]="vuon"}],
+  /* npc-purpose G1 #14: the master AT HOME (the twin of m-away). NPCs now walk by purpose (jagwhy), so in the seeded start world every probed
+     NPC master may be out — the srvTalk "mis" acts (Dâng trà, Đấm lưng, Xin ban thưởng, Bẩm tin, Xin tiến cử: jagstaff asOpts home = asMisHome)
+     were then P-ONLY by probe only. Same mutation for her master (srvM) and an NPC maid's master. */
+  ["m-home",a=>{const m=MST(a);if(!m)return;const h=palaceOf(m);S.where=S.where||{};S.where[m.id]=h;const e=S.roster&&S.roster.P&&S.roster.P["v"+m.id];if(e)for(const x of e)if(Array.isArray(x))x[0]=h}],
   ["m-senior",a=>{SV(a).rk=SRVA.books.rk}],
   ["m-worn",a=>{a.suc=30;a.bac=200}],
   ["m-plain",a=>{a.sac=10;a.tai=10;a.duc=10}],
