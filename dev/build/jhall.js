@@ -15,9 +15,6 @@ const HALL_PN={
  "Trường Xuân cung":["Lạc Thọ điện","Vĩnh Xuân hiên","Hàm Thu trai"],
  "Vĩnh Thọ cung":["Ngưng Tường điện","Tuyên Hòa hiên","Hoài Cẩn trai"],
  "Dực Khôn cung":["Hậu Đức điện","Hòa Sướng hiên","Mặc Hương trai"],
- "Trữ Tú cung":["Tụ Anh điện","Triêu Hà hiên","Vãn Quế trai"],
- "Hàm Phúc cung":["Diễn Khánh điện","Lan Xuân hiên","Cúc Thu trai"],
- "Thái Cực điện":["Chấp Trung điện","Vĩnh Nhân hiên","Thận Nghĩa trai"],
  "Càn Ninh cung":["Mẫu Nghi điện"]};
 const HALL_ROLE={chinh:"Chính điện",dong:"Đông phối điện",tay:"Tây phối điện",cungnhan:"Dãy nhà cung nhân"};
 const HALL_IDX={chinh:0,dong:1,tay:2};

@@ -12,7 +12,7 @@
    SIZE: KIT_FIGSEAL.k × the figure's body height (kitFigBody head top → feet), between min and max px — it grows and shrinks with the figure.
    NEVER covers the face (it stands beside the head, the face is inside the head edge), never clipped (clamped inside the stage / dialog), never above the head (that place is the
    "this is you" marker kitMeMark of jmark).  Off switch for measuring: window.__emoOff=1 (the same as the portrait seals). ===== */
-window.KIT_FIGSEAL=window.KIT_FIGSEAL||{k:.105,min:22,max:50,dx:.194,dy:.916};/* dx/dy = seal centre from the standing anchor, in body heights (owner 18/11 ~06:20Z: one fixed offset for everybody) */
+window.KIT_FIGSEAL=window.KIT_FIGSEAL||{k:.105,min:22,max:50,dx:.194,dy:.916,pad:10};/* pad = clear gap to the stage plaque columns #kshR/#kshL *//* dx/dy = seal centre from the standing anchor, in body heights (owner 18/11 ~06:20Z: one fixed offset for everybody) */
 const KFS_REG=new Map();let KFS_ID=0;
 /* kitStageFig is the one maker of img.kesimg: remember WHOSE figure it is (never read from the picture) */
 (function(){if(typeof kitStageFig!=="function")return;const f0=kitStageFig;kitStageFig=function(p,o){let h=f0.apply(this,arguments);try{const q=p&&(p.__kp||p);
@@ -53,6 +53,14 @@ function kitFigSeal(fig){try{
  let L=ax+K.dx*body-s/2;if(L+s>bb.right-2)L=ax-K.dx*body-s/2;
  L=Math.max(bb.left+2,Math.min(L,bb.right-2-s));
  let T=feet-K.dy*body-s/2;T=Math.max(bb.top+2,Math.min(T,bb.bottom-2-s));
+ /* ROOT-56/57 (owner 18/11 ~21:40Z/~21:52Z): on the stage the plaque columns #kshR / #kshL (maid, court, group buttons, Ân sủng) are a no-go zone: the seal box + KIT_FIGSEAL.pad (10 px)
+    never crosses one. Measured from layout values (the column box and the figure anchor), never from the seal's own animated box. Order: right of the head, left of the head
+    (the usual rule), else the nearest of: just left of the column / just below it. */
+ if(bd.id==="stage"){const pad=K.pad!=null?K.pad:10,Z=[...bd.querySelectorAll("#kshR,#kshL")].filter(e=>!e.hidden&&e.offsetHeight&&e.getClientRects().length).map(e=>e.getBoundingClientRect());
+  const hit=(l,t)=>Z.some(q=>l<q.right+pad&&l+s>q.left-pad&&t<q.bottom+pad&&t+s>q.top-pad),cl=l=>Math.max(bb.left+2,Math.min(l,bb.right-2-s)),ct=t=>Math.max(bb.top+2,Math.min(t,bb.bottom-2-s));
+  if(Z.length&&hit(L,T)){let best=null;for(const l of[ax+K.dx*body-s/2,ax-K.dx*body-s/2].map(cl))if(!hit(l,T)){best=[l,T];break}
+   if(!best){let d0=1e9;Z.forEach(q=>[[q.left-pad-s,T],[L,q.bottom+pad]].forEach(([l,t])=>{l=cl(l);t=ct(t);const d=Math.hypot(l-L,t-T);if(!hit(l,t)&&d<d0){d0=d;best=[l,t]}}))}
+   if(best){L=best[0];T=best[1];el.dataset.kfscol="1"}else delete el.dataset.kfscol}else delete el.dataset.kfscol}
  const css=`left:${(L-hr.left+host.scrollLeft).toFixed(1)}px;top:${(T-hr.top+host.scrollTop).toFixed(1)}px;width:${s}px;height:${s}px`;
  if(el.style.cssText!==css){el.style.cssText=css}
  el.dataset.kfsb=body.toFixed(0);el.dataset.kfsa=ax.toFixed(1);el.dataset.kfsf=feet.toFixed(1)}catch(e){console.error("kitFigSeal",e)}}

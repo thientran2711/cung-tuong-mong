@@ -6,7 +6,7 @@ mọi chỗ gọi figFor) mặc TRUNG Y đúng bậc. NPC: cùng luật nhưng c
 ## Duyệt (điều phối chuyển lời sếp)
 - 8 bậc = màu RCOL (KIT §1.3) bản lụa nhạt: Đáp ứng ngà · Thường tại lục nhạt · Quý nhân lam nhạt · Tần hồng phấn · Phi tím nhạt ·
   Quý phi hồng đào · Hoàng quý phi cam nhạt · Hoàng hậu vàng nhạt (viền mây phượng vàng đậm rõ). Kín đáo, viền cùng màu, bậc cao viền tinh hơn.
-- 84 mặt (32 consort + 52 maid) × 8 = 672 lần sửa; bỏ 4 look cũ (sổ cũ không S.pid giữ áo thường); cung nữ: bỏ; lãnh cung giữ tranh cold.
+- 84 nhân vật nữ (ids c01–c32 + m01–m52) × 8 = 672 lần sửa; bỏ 4 look cũ (sổ cũ không S.pid giữ áo thường); cung nữ: bỏ; lãnh cung giữ tranh cold.
 - Nguồn: tranh CDN t1 hiện tại (đã thu hoa điền + bỏ nốt ruồi), KHÔNG phải sheet Magnific gốc.
 - Luật: ô trống thật sau thu hồi / cướp / cởi; Nội vụ phủ cấp lại áo trơn đúng phẩm sau BAL.ty.reissueWk tuần (rương kitReward);
   cởi áo chỉ trong tẩm cung, không phạt; ra ngoài / gặp người mới phạt.
@@ -47,7 +47,7 @@ Tên tệp: img/fig-<role>-<id>-ty<1..8>-<a18|a26|a36|a51>.webp, img/por-…; b�
 
 
 ## BÀN GIAO 15/11 ~09:35Z (phiên tiếp tục từ git)
-- VẼ: XONG cả 84 mặt (bg.txt 672 dòng = 84×8; m20–m52 vẽ 15/11 08:57–09:17Z, Space a33ac200-206b-4037-b4a6-8ef22bff296b,
+- VẼ: XONG cả 84 nhân vật nữ (bg.txt 672 dòng = 84×8; m20–m52 vẽ 15/11 08:57–09:17Z, Space a33ac200-206b-4037-b4a6-8ef22bff296b,
   6 nút ref A..F = 3b202139 d189d91f ab326c81 61b823bd b4cb2f82 f4110233; nút lỗi "credits service" chạy lại `singular`). KHÔNG còn mặt nào chưa vẽ.
 - TRONG img/ + FIGURES-ty.json (384 bản ghi): CHỈ c01–c12.
 - Mẻ 2 c13 c15 c16 c18 c19: đã tách nền + alpha-holes --fix (trong .tywork/out), tờ dev/art/trung-y/batch2-c13-c19.jpg, CHƯA publish vì đáng ngờ:
@@ -80,7 +80,7 @@ b14 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae9db-7f34-428b-84b0-fbf5efa0
      `python3 .tywork/alpha-holes.py --fix .tywork/out <fig+por của các mặt đó>`; `python3 dev/figwork/cutcheck.py <các tệp>` (≥3 thì soi bằng mắt, cắt lại nếu tệ);
      `TYW=.tywork python3 dev/art/trung-y/ty.py sheet dev/art/trung-y/batchN-....jpg <role-id...>` rồi XEM tờ (hoa điền nhỏ, không nốt ruồi, không chữ Hán, tay);
      `python3 dev/art/trung-y/ty.py publish <role-id...>` (chép vào img/ + dựng lại img/FIGURES-ty.json, giữ bản ghi cũ); commit tờ + code, push review/trung-y.
-  4. Đủ 84 mặt (672×4 fig + por) → báo SẴN SÀNG KIỂM; lệnh đẩy (điều phối chạy): `python3 dev/site/cdn_sync.py img/fig-*-ty*.webp img/por-*-ty*.webp img/FIGURES-ty.json`.
+  4. Đủ 84 nhân vật nữ (672×4 fig + por) → báo SẴN SÀNG KIỂM; lệnh đẩy (điều phối chạy): `python3 dev/site/cdn_sync.py img/fig-*-ty*.webp img/por-*-ty*.webp img/FIGURES-ty.json`.
 
 ## TIẾP TỤC 15/11 ~10:45Z (máy mới, worktree /home/user/wt/trung-y)
 - NGUỒN AN TOÀN: zip b2–b14 tải về, giữ dạng `.tywork/src/<gen>.webp` (full-res 3840x1920, webp q96; `dev/art/trung-y/bin/dl2.sh` + `z2src.py`), zip xóa sau khi đổi (đĩa chung chật).
@@ -96,7 +96,7 @@ b14 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae9db-7f34-428b-84b0-fbf5efa0
 - img/ ở máy chỉ có FIGURES-ty.json (kéo từ CDN); publish giữ bản ghi cũ dù tệp không ở máy.
 
 ## 15/11 ~13:30Z
-- LÊN CDN (refine v6): c13–c32 (đủ 32 phi tần) + m01–m06. FIGURES-ty.json trên CDN: (384 + 26×32) bản ghi. Tờ duyệt: dev/art/trung-y/sheet-g1..g4 + por-g*.
+- LÊN CDN (refine v6): c13–c32 (đủ c01–c32) + m01–m06. FIGURES-ty.json trên CDN: (384 + 26×32) bản ghi. Tờ duyệt: dev/art/trung-y/sheet-g1..g4 + por-g*.
 - refine v7 (lỗ áo ngà phẳng m18 ty1): holes.py → 122 tờ có lỗ kín (redo-v7.txt) đang cắt lại; xong thì cdn_sync các tệp đổi của mặt đã đẩy (md5 tự bỏ qua tệp không đổi), rồi publish m07–m19.
 - Chân dung: cỡ mặt theo trung vị tờ (ty.py portraits()), porcheck.py: 0 lỗi ở c01–c22 đã đẩy.
 - Bước 4 (m20–m52): ĐÃ VẼ từ trước (PROGRESS 09:35Z), nguồn đủ ở máy → chỉ còn cắt + kiểm + đẩy (worker đang chạy tiếp theo thứ tự bg.txt).
@@ -107,8 +107,8 @@ b14 https://pikaso.cdnpk.net/tmp/bulk-downloads/a33ae9db-7f34-428b-84b0-fbf5efa0
 - Kiểm mỗi nhóm: solid.py 0 bán trong suốt / 1632 fig; porcheck 0; tờ sheet-g1..g5 + por-g1..g4 đã xem.
 - Đang chạy: 3 worker cắt m20–m52 (nguồn đủ). Tiếp: fin.sh → xem → pub.sh theo nhóm ~8 mặt.
 
-## 15/11 ~14:45Z — STEP 4 DONE, ALL 84 FACES ON CDN
-- CDN: c01–c32 + m01–m52 = 84 faces × 8 tiers × 4 ages: 2688 fig + 2688 por (all 5376 keys verified present on the CDN);
+## 15/11 ~14:45Z — STEP 4 DONE, ALL 84 PAINTED WOMEN ON CDN
+- CDN: c01–c32 + m01–m52 = 84 painted women × 8 tiers × 4 ages: 2688 fig + 2688 por (all 5376 keys verified present on the CDN);
   img/FIGURES-ty.json on the CDN: 2688 records, md5 matches local.
 - Review sheets: dev/art/trung-y/sheet-g1..g8 (+ por-g1..g8). Every group passed solid.py (0 semi-transparent), porcheck (0),
   holes.py (m45/m46/m51 holes = real gaps between arm and body/head).
