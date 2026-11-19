@@ -198,7 +198,7 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | role-parity-seed (riseCore test seed fix; opus B3) | review/role-parity-seed | B | session_01N1tNP5LzLhxHn4SfWgKpNQ | LIVE 89aa1bd9 (with role-parity-3) | 19/11 01:17Z |
 | ge-writers-w2 remerge #5 main 96188526 (sonnet E11w2m3) | review/ge-writers-w2 | E ROOT #7 → #8 | session_01DgYSWq43v8g897s6AtupYe | RUNNING | 19/11 01:50Z |
 | FOREMAN E ROOT #8 (opus; child of E ROOT #7, depth 7) | handover FOREMAN_E_STATUS | E ROOT #7 | session_01DgYSWoyrPRWJPqSp4gfECg | RUNNING | 19/11 01:50Z |
-| MAIN ROOT-62 (opus; owner-opened ROOT, depth 0; successor of ROOT-61) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsJvnKvJMiKUjEhRST1 | RUNNING | 19/11 02:20Z |
+| MAIN ROOT-62 (opus; owner-opened ROOT, depth 0; successor of ROOT-61) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsJvnKvJMiKUjEhRST1 | DONE → ROOT-63 | 19/11 02:20Z |
 | maid-ladder-6 (opus; BIG) | review/maid-ladder-6 | B | session_01N1tNP6uwmf4WjfcYZ2eBKe | SẴN SÀNG KIỂM cb5a7cb3 (on LIVE 1cf5e8bb; quickcheck PASS, coop-e2e 63/63, maid-ladder-6 13/13; report reports/maid-ladder-6.md; shots img/_review/maid-ladder-6/) | 19/11 ~03:45Z |
 | law3-cost-only (opus; SMALL) | review/law3-cost-only | B | session_01N1tNP6PHnsEVwUKbZMrXkQ | RUNNING | 19/11 02:30Z |
 | art-wiring-1119 (opus; SMALL) | review/art-wiring-1119-r2 | B | session_01N1tNP59FAL2oqUhk7AUxRa | SẴN SÀNG KIỂM r2 84530d06 | 19/11 04:20Z |
@@ -210,3 +210,4 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | REVIEW art-wiring-1119 r1 (opus BIG) of 69a26198 | review/art-wiring-1119-r1 | B | session_01N1tNP6nQ6XCj5Xu1dFX9af | RUNNING | 19/11 02:58Z |
 | REVIEW maid-ladder-6 r1 (opus BIG) of cb5a7cb3 | review/maid-ladder-6-r1 | B | session_01N1tNP3R1PQaRUv57AFoczD | PASS c12a5878 | 19/11 03:05Z |
 | seal-anim-sheet (sonnet; show-only, owner asked to see each seal animation) | handover report | MAIN ROOT-62 | session_01Rc5AsLhf6D4pDFssmG94et | SHEET READY | 19/11 03:15Z |
+| MAIN ROOT-63 (opus; child of ROOT-62, depth 1) | handover HANDOVER_SESSION9 | ROOT-62 | session_01Rc5AsN8fHJWShQ7rSPxjx5 | RUNNING | 19/11 03:37Z |
