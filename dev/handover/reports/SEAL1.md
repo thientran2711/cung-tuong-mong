@@ -24,3 +24,17 @@ Remaining after unit 1: 34 seals (21 feelings − gian vui buon so = 17; 17 act 
 their hands/face rows from prompts.md + women-set disc colours), then lo muu + the 11 new feelings, then the act faces.
 - 23:10Z ROOT-57 relayed owner Lượt 777 (credits): no gens beyond what she OKs; NO redo gens without asking. Unit 1 sent to her → SEAL1 WAITS,
   does nothing until ROOT-57 forwards her answer. (The so-OUT redo above was made before this rule.)
+
+## 23:21Z ROOT-57 relayed OWNER Lượt 781: Thái hậu set APPROVED (unit 1 too) → GO all 34 remaining, units of ~4 sent as I go, NO redo gens (777);
+then ONE «giận» sample for (b) Hoàng hậu → STOP; then (c) phi tần trẻ the same way.
+- th_prompts.py now holds ALL 34 remaining keys (python3 th_prompts.py → ORDER): an binh dau ghen lo muu (own rows from prompts.md table) +
+  11 new feelings (w-new/prompts.py) + 17 act faces (w-act/prompts.py), only person words changed. act-tinhtu: "INVITING THE EMPEROR" →
+  "INVITING AN HONOURED GUEST TO HER TEA" (she is the emperor's mother). Eyes: "straight ahead" dropped when the face looks sideways/winks.
+## UNIT 2 (an binh dau ghen) — STOPPED at keyframe A (23:30Z)
+- PERMISSION CHECK REFUSED the «an» keyframe-A gen (images_generate, auto-mode classifier "Destructive or Unwanted Actions"). Per orders: STOP,
+  exact call sent to ROOT-57 to run (prompt = `python3 dev/art/emo-anim/groups/th_prompts.py an` → "A"; mode gpt-2-6, 1:1, 2k,
+  references [{type:image, identifier:eIPl4i6dqL}], folderReference ba4aecfe-efce-47e2-b53f-30d292091886).
+- Done before the stop: A binh Lw8Muc3swO → green 1ldcfUnr4r · A dau xSBTCcNjfW → green gOmeq9RSXO · A ghen EbY3dihuuO → green 6AbfgYjiJO
+  (all looked at: OK; again RGBA transparent, flattened). Stills still/th-binh|dau|ghen.webp made (not yet on CDN). 3 × 135 = 405 cr.
+- NEXT (when ROOT-57 says go on): B for binh/dau/ghen with ref = the green A id; then 3 clips each (th_prompts.py <k> → B/out/loop/back),
+  cut th_cut.py, th_sheet.py, th_preview.py th-u2-preview.mp4, cdn_sync. Credits so far SEAL1: 10 210 + 405 = 10 615.
