@@ -288,9 +288,10 @@ function reg9(name,K,o){o=o||{};const R=Object.assign({lv:L9,ctx:CX9,back:BACK8,
  R.mine=A=>live()&&(o.mine?o.mine(A):isMe(A[0]));return F.reg(name,R)}
 /* her care / plant screens draw into the HOST's DOM (petcClose → closeModal = the host's own card queue) when run in her context there:
    captured instead, replayed on her phone with the answer (her pet / plant read from her patched person) */
-const UI9=n=>{if(typeof window[n]!=="function")return;const f=window[n];window[n]=function(){if(CW.ctx&&host()&&on(L9)){if(TH.uiCap&&TH.uiCap.length<8)TH.uiCap.push([n,String(arguments[0]==null?"1":arguments[0]).slice(0,300)||"1"]);return}return f.apply(this,arguments)}};
+const UI9=n=>{if(typeof window[n]!=="function")return;const f=window[n];window[n]=function(){if(CW.ctx&&host()&&on(L9)){if(TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push([n,String(arguments[0]==null?"1":arguments[0]).slice(0,300)||"1"]);return}return f.apply(this,arguments)}};
 ["petcDraw","petcClose","shelfPlantDraw"].forEach(UI9);
-if(typeof petcGrowCard==="function"){const f=petcGrowCard;petcGrowCard=function(P){if(CW.ctx&&host()&&on(L9)){const i=tsbPets(S).indexOf(P);if(i>=0&&TH.uiCap&&TH.uiCap.length<8)TH.uiCap.push(["petcGrowShow",String(i)]);return}return f.apply(this,arguments)};
+try{for(const n of ["petcDraw","petcClose","shelfPlantDraw","petcGrowShow"])TH.UICAP.add(n)}catch(e){}
+if(typeof petcGrowCard==="function"){const f=petcGrowCard;petcGrowCard=function(P){if(CW.ctx&&host()&&on(L9)){const i=tsbPets(S).indexOf(P);if(i>=0&&TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push(["petcGrowShow",String(i)]);return}return f.apply(this,arguments)};
  window.petcGrowShow=i=>{try{const P=tsbPets(S)[+i];if(P)f(P)}catch(e){}}}
 /* pets */
 KSH.pet=()=>petShop();

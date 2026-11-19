@@ -128,7 +128,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await stage(`if(!S.maid)S.maid={name:'Tiểu Thúy',loyal:90};S.maid.loyal=90;(S.pets[0]||{}).maidW=0`);
  await act('P4 Giao kẻ hầu chăm (petcMaid): same as solo',`PETC.i=0;petcMaid(0)`,{twin:true,chk:x=>/\/[1-9]\d*$/.test(x.g1.pets.split(',')[0])});
  {const r=await act('P5 Để trời định in the care game (petcQuick): her care screen redrawn on HER phone, nothing on the host',`petcQuick('feed')`,{pre:`petcOpen(0);PETC.game=null`,shot:'care'});
-  const ui=await both(()=>!!document.getElementById('kpcare'));if(!r.skip)ok(ON?(ui[1]&&!ui[0]):true,'P5 her care screen open on her phone after the answer, none on the host',ui);await G.p.evaluate(()=>{try{petcClose()}catch(e){}})}
+  const ui=await both(()=>{const b=document.getElementById('kpcare');return b?/Vừa rồi|Để trời định/.test(b.textContent):false});if(!r.skip)ok(ON?(ui[1]&&!ui[0]):true,'P5 her care screen REDRAWN with the result on her phone after the answer (replayed petcDraw), none on the host',ui);await G.p.evaluate(()=>{try{petcClose()}catch(e){}})}
  /* ---- G: her shelf plant ---- */
  {const pk=await pick(`return Object.keys(BAL.shelf.it).find(k=>BAL.shelf.it[k].care)||null`);
   if(pk){await stage(`shelfOf(S).g.f4p={k:${JSON.stringify(pk)},pc:40}`);
