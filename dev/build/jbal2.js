@@ -1336,6 +1336,9 @@ BAL.rcv={help:{af:[8,3],half:.5,qAf:5,danh:2},
  k:{help:[1,1,1,1],gift:[1,1,.5,1],emp:[1,1,.2,.2]},
  /* every request / proposal (jrcv rcvYesO / rcvNoO): «giúp hết lòng» costs the receiver Sức suc (her time); «từ chối» a proposal keeps her out of cliques: Danh + danh */
  prop:{suc:4,danh:1,ghen:10},
+ /* Kết giao (law 2, review FAIL 6 #6): «nhận lời» = kết bè, Danh − danh (and the asker's worst foe quý the receiver − BAL.eff.j8.f_2, the mirror of the
+    thiện cảm gained); «từ chối» = Danh + danh and that foe + f_2 × help.half; «qua loa» = half of each */
+ ally:{danh:3},
  /* a request to a JUDGE (the Hoàng hậu asked by «Xin Hoàng hậu giáng» xinhh / «Trình Hoàng hậu» trinhhh, OD 18/11 ~21:15Z law 1): she as the Hoàng hậu
    gets the card, an NPC queen answers with the SAME options at the asker's shown odds (rcvJudge). yes = the act (xinhh: the lễ comes to the judge)
    · cost: the punished one's oán + oan, and for taking a lễ to demote someone Đức − duc; no = the act's own refusal effect · gain: Danh + prop.danh */

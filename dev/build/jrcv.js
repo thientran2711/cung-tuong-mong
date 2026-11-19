@@ -43,7 +43,18 @@ function rcvHelpOpts(p,t){const X=BAL.ag.cx2.help,R=BAL.rcv.help,H=BAL.road.hp,q
 /* the asker's side (her j9 card and cx2:help): the receiver NPC answers now; when the receiver is HER, her card comes (PEND.rcvHelp) */
 /* HER card: ONE notice path. With parallel-time's receiver notice (jptime ptOrdAdd: S.ordQ + «信» icon, answered from the panel when her act ends,
    unanswered past BAL.ptime.ansK = the option «Từ chối» with its cost) the card waits there; without it, a queued dialog after the current one. */
-function rcvCard(pid,pp,title,p){try{if(typeof ptOrdAdd==="function"&&typeof ptOn==="function"&&ptOn()){if(ptOrdAdd(pid,pp,title,p))return""}}catch(e){}return pushDil(mkP(pid,pp),title)}
+/* ONE NOTICE SYSTEM (MAIN 19/11 ~00:30Z, owner OD 18/11 ~22:10Z): without parallel-time, when the kit notice (jnotice kitNotice, review/stage-here) is present her
+   card waits as ONE notice (the «!» box + top chip; the panel's option row opens the card). The card itself stays saveable: S.rcvPend {id,pid,pp,title}
+   (re-raised as notices after a load). No kitNotice → the queued dialog as before. ptOrdAdd on → only its notice (no double notice). */
+function rcvCard(pid,pp,title,p){try{if(typeof ptOrdAdd==="function"&&typeof ptOn==="function"&&ptOn()){if(ptOrdAdd(pid,pp,title,p))return""}}catch(e){}
+ try{if(typeof window.kitNotice==="function"&&mkP(pid,pp)){S.rcvSeq=(S.rcvSeq||0)+1;const it={id:"rcv:"+S.rcvSeq,pid,pp,title};(S.rcvPend=S.rcvPend||[]).push(it);if(rcvNote(it))return"";S.rcvPend.pop()}}catch(e){}
+ return pushDil(mkP(pid,pp),title)}
+function rcvNote(it){const d=mkP(it.pid,it.pp);if(!d){rcvDrop(it.id);return null}const who=d.who&&d.who.n?d.who.n:"";const tx=String(d.t||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+ return window.kitNotice({id:it.id,line:`${it.title}${who?": "+who:""}`,text:tx,kind:"rcv",sticky:true,goLabel:"Trả lời",go:()=>rcvOpen(it.id)})}
+function rcvDrop(id){S.rcvPend=(S.rcvPend||[]).filter(x=>x.id!==id);try{if(typeof kitNoticeDrop==="function")kitNoticeDrop(id)}catch(e){}}
+function rcvOpen(id){const it=(S.rcvPend||[]).find(x=>x.id===id);rcvDrop(id);if(!it)return"";const d=mkP(it.pid,it.pp);if(!d)return"";pushDil(d,it.title);try{showModal()}catch(e){}return""}
+/* after a load (S replaced) the pending answers are notices again (the notice list itself lives in memory only) */
+(function(){const seen=new WeakSet();if(typeof render!=="function")return;const r0=render;render=function(){try{if(S&&!seen.has(S)){seen.add(S);if(typeof window.kitNotice==="function")for(const it of (S.rcvPend||[]).slice())rcvNote(it)}}catch(e){}return r0.apply(this,arguments)};window.render=render})();
 function helpAsk(p,t){if(t===S){rcvCard("rcvHelp",{a:p.id},"Lời nhờ",p);return{ok:1,r:`${p.name} sai người sang nhờ ngươi giúp`}}
  const c=rcvPick(t,p,rcvHelpOpts(p,t),"help");return c.go()}
 PEND.rcvHelp=pp=>{const p=RV(pp.a);if(!p||!p.alive||p.out)return null;
@@ -86,12 +97,18 @@ PEND.rcvAsk=pp=>{const D=RCVK[pp.k],p=byKey(pp.a);if(!D||!p||p===S||!p.alive||p.
  return{who:pv(p),t:D.line(p,pp.x),o:D.opts(p,S,pp.x).map(o=>({n:o.n,fx:o.fx,x:o.x,risk:o.risk,go:()=>{const r=o.go();const s=r&&typeof r==="object"?r.r:r;if(s)log(s)}}))}};
 const rcvSg=(p,me,a,b)=>p===S?a:me?b:null;
 /* Kết giao (j8 ACT.ally, NPC cx:ally): the asker sends BAL.actBac.ally bạc as the gift (paid when sent); yes / mách keep it, «từ chối» sends it back */
+/* law 2 (equal value, review FAIL 6 #6): to kết giao is to take the asker's side — the asker's worst foe (rcvFoe: the most hostile living consort toward
+   the asker) quý the receiver − BAL.eff.j8.f_2 (the mirror of the thiện cảm gained) and «kết bè» Danh − BAL.rcv.ally.danh; refusing keeps out of cliques
+   (Danh + ally.danh) and that foe quý the receiver + f_2 × help.half. Qua loa: half of each (+ its seen-through risk). Same numbers for an NPC receiver. */
+function rcvFoe(p,t){try{const L=consorts().filter(x=>x&&x!==p&&x!==t&&(x===S||x.alive!==false&&!x.out)&&!x.coop);let b=null,bh=0;for(const x of L){const h=hostility(x,p);if(h>bh){bh=h;b=x}}return b}catch(e){return null}}
+const rcvFoeX=(f,t,n)=>f?`${f===S?"ngươi":f.name} (kẻ đối đầu của nàng) quý ${t===S?"ngươi":t.name} ${balSg(n)}`:"";
 RCVK.ally={t:"Lời kết giao",act:"xin kết giao với",kind:"help",
- line:p=>`<p>${p.name} sai người mang ${BAL.actBac.ally} lượng bạc làm lễ sang: “Nương nương nhà ta muốn kết tình tỷ muội.”</p><p class="past">Ngươi có thể nhận lời, nhận nửa lễ mà giữ khoảng cách, trả lễ từ chối, hoặc đem chuyện đi mách.</p>`,
- opts:(p,t)=>{const g=BAL.actBac.ally,hl=Math.round(g*BAL.rcv.help.half),me=t===S,keep=()=>rcvAp(t,{bac:g});return[
-  rcvYesO(p,t,0,{n:"Nhận lời kết giao",g:`lễ ${g} lượng, thiện cảm ${balSg(BAL.eff.j8.f_2)}${me?"":`, bớt ghen ${BAL.rcv.prop.ghen}`}`,go:()=>{keep();relAdd(p,t,BAL.eff.j8.f_2);if(!me)t.ghen=cl((t.ghen||0)-BAL.rcv.prop.ghen,0,100);return `${NMc(p)} kết giao với ${NM(t)}: <span class="g">thành</span>`}}),
-  rcvYesO(p,t,1,{n:"Nhận nửa lễ, giữ khoảng cách",g:`lễ ${hl} lượng (trả lại ${g-hl})`,go:()=>{rcvAp(t,{bac:hl});rcvAp(p,{bac:g-hl});return `${me?"Ngươi":t.name} nhận nửa lễ của ${NM(p)} nhưng giữ khoảng cách`}}),
-  rcvNoO(p,t,{g:`không dính bè phái, Danh ${balSg(BAL.rcv.prop.danh)}`,fx:{danh:BAL.rcv.prop.danh},go:()=>rcvAp(p,{bac:g}),r:`${me?"Ngươi":t.name} trả lễ, khéo từ chối kết giao với ${NM(p)}`}),
+ line:p=>`<p>${p.name} sai người mang ${BAL.actBac.ally} lượng bạc làm lễ sang: “Nương nương nhà ta muốn kết tình tỷ muội.”</p><p class="past">Kết giao là đứng về phía nàng: kẻ đối đầu của nàng sẽ ghét ngươi. Ngươi có thể nhận lời, nhận nửa lễ mà giữ khoảng cách, trả lễ từ chối, hoặc đem chuyện đi mách.</p>`,
+ opts:(p,t)=>{const g=BAL.actBac.ally,H=BAL.rcv.help.half,hl=Math.round(g*H),me=t===S,keep=()=>rcvAp(t,{bac:g}),A=BAL.rcv.ally,F=BAL.eff.j8.f_2,fo=rcvFoe(p,t),fh=Math.round(F*H),dh=Math.round(A.danh*H);
+  const foeAdd=n=>{if(fo)affAdd(fo,t,n)};return[
+  rcvYesO(p,t,0,{n:"Nhận lời kết giao",fx:{danh:-A.danh},g:`lễ ${g} lượng, thiện cảm ${balSg(F)}${me?"":`, bớt ghen ${BAL.rcv.prop.ghen}`}`,c:[`kết bè: Danh ${balSg(-A.danh)}`,rcvFoeX(fo,t,-F)].filter(Boolean).join(", "),go:()=>{keep();relAdd(p,t,F);foeAdd(-F);if(!me)t.ghen=cl((t.ghen||0)-BAL.rcv.prop.ghen,0,100);return `${NMc(p)} kết giao với ${NM(t)}: <span class="g">thành</span>`}}),
+  rcvYesO(p,t,1,{n:"Nhận nửa lễ, giữ khoảng cách",fx:dh?{danh:-dh}:{},g:`lễ ${hl} lượng (trả lại ${g-hl})`,c:[dh?`Danh ${balSg(-dh)}`:"",rcvFoeX(fo,t,-fh)].filter(Boolean).join(", "),go:()=>{rcvAp(t,{bac:hl});rcvAp(p,{bac:g-hl});foeAdd(-fh);return `${me?"Ngươi":t.name} nhận nửa lễ của ${NM(p)} nhưng giữ khoảng cách`}}),
+  rcvNoO(p,t,{g:[`không dính bè phái, Danh ${balSg(A.danh)}`,rcvFoeX(fo,t,fh)].filter(Boolean).join(", "),fx:{danh:A.danh},go:()=>{rcvAp(p,{bac:g});foeAdd(fh)},r:`${me?"Ngươi":t.name} trả lễ, khéo từ chối kết giao với ${NM(p)}`}),
   rcvSabO(p,t,{g:`giữ lễ ${g} lượng`,go:keep,r:tq=>`${me?"Ngươi":t.name} nhận lễ của ${NM(p)} rồi đem chuyện đi kể${tq?" với "+rcvQn(tq):""}`})]}};
 /* Lập phe cùng (j10 found: her button, NPC cx3:facFound) */
 RCVK.facFound={t:"Lời rủ lập phe",act:"rủ lập phe với",kind:"help",ok:(p,t)=>!facOf(p)&&!facOf(t),
@@ -144,6 +161,32 @@ RCVK.blockf={t:"Lời nhờ trả ơn",act:"nhờ trả ơn",kind:"help",ok:(p,v
   rcvYesO(p,v,1,{g:"trả ơn cho có",c:"Kính sự phòng khó nghe hơn",go:()=>rcvBlockGo(p,v,t,BAL.road.hp.half)}),
   rcvNoO(p,v,{g:"không dính vào chuyện thẻ bài",r:`${me?"Ngươi":v.name} khéo từ chối, không nhúng tay vào thẻ bài của ${tn}`}),
   rcvSabO(p,v,{g:"không dính vào chuyện thẻ bài",r:tq=>`${me?"Ngươi":v.name} đem chuyện ${NM(p)} nhờ rút thẻ bài của ${tn} đi kể${tq?" với "+rcvQn(tq):""}`})]}};
+/* Xin đồng minh (j83 illBuy "ally", her j83 card + NPC cx4:illAlly; review FAIL 6 #3): the HOLDER of a forbidden item is asked for it (x = the item key).
+   yes = she hands it over and holds BAL.eff.j83.evIllBuy chứng cứ of the asker (as before) · qua loa = she lets it go for bạc (the item's price × help.half)
+   · no = keeps it, out of đồ cấm · mách = keeps it, the Hoàng hậu holds BAL.ag.ev.one chứng cứ of the asker. She as the holder gets the card (PEND.rcvAsk). */
+const rcvIllE=(t,k)=>(t&&t.inv||[]).find(e=>e.k===k&&!e.h&&!e.t);
+function rcvIllGive(p,t,k){const e=rcvIllE(t,k);if(!e)return false;t.inv.splice(t.inv.indexOf(e),1);(p.inv=p.inv||[]).push({k,from:key(t)});/*evok: the asker has just asked for a forbidden item (illBuy deed)*/evA(t,p,BAL.eff.j83.evIllBuy);return true}
+RCVK.illAlly={t:"Xin đồ cấm",act:"xin một món đồ cấm của",kind:"help",ok:(p,t,k)=>!!rcvIllE(t,k),
+ line:(p,k)=>`<p>${p.name} sai người lén sang: “Nương nương nhà ta cần ${itm(k).n}, xin người nhường lại.”</p><p class="past">${itm(k).n}: ${(WILL[k]||{}).eff||"đồ cấm"}. Ai đưa đồ cấm cũng nắm chứng cứ của người xin.</p>`,
+ opts:(p,t,k)=>{const me=t===S,pn=p===S?"ngươi":p.name,nm=itm(k).n,ev=BAL.eff.j83.evIllBuy,pr=Math.round((itm(k).pr||0)*BAL.rcv.help.half),one=BAL.ag.ev.one;
+  const half=rcvYesO(p,t,1,{n:"Nhường lại, lấy chút bạc",g:`bạc +${pr}, nắm ${balAb(ev)} chứng cứ của ${pn}`,c:`mất ${nm}`,go:()=>{if(!rcvIllGive(p,t,k))return"";const n=Math.max(0,Math.min(pr,(p===S?S.bac:p.bac)||0));rcvAp(p,{bac:-n});rcvAp(t,{bac:n});return `${me?"Ngươi":t.name} nhường ${nm} lại cho ${NM(p)}, lấy ${n} lượng`}});
+  const lk0=half.lk;half.lk=()=>lk0()||(p===S?S.bac:p.bac||0)<pr;return[
+  rcvYesO(p,t,0,{n:`Đưa ${nm} cho nàng`,g:`nắm ${balAb(ev)} chứng cứ của ${pn}`,c:`mất ${nm}`,go:()=>rcvIllGive(p,t,k)?`${me?"Ngươi":t.name} đưa ${nm} cho ${NM(p)}, nắm ${balAb(ev)} chứng cứ`:""}),
+  half,
+  rcvNoO(p,t,{g:`giữ ${nm}, không dính vào đồ cấm`,r:`${me?"Ngươi":t.name} khéo từ chối, không đưa đồ cấm cho ${NM(p)}`}),
+  rcvSabO(p,t,{g:`giữ ${nm}`,go:()=>{const q=rcvQ(p,t);/*evok: the asker has just asked for a forbidden item*/if(q)evA(q,p,one)},r:tq=>`${me?"Ngươi":t.name} giữ ${nm}, đem chuyện ${NM(p)} xin đồ cấm đi kể${tq?" với "+rcvQn(tq)+` (nắm ${balAb(one)} chứng cứ)`:""}`})]}};
+/* Mượn son phấn (jration lxBorrowCard: her talk card + NPC cx4:rougeBorrow; review FAIL 6 #1 / #4): the LENDER answers (x = the part she lacks).
+   yes = half the box (lxGive "half", as before) · qua loa = a little, the box's lượt × help.half × help.half · no = keeps it · mách = keeps it, tells
+   that the asker has run out. She as the lender gets the card (PEND.rcvAsk, saveable, the ONE notice path) — was a private 2-answer Q.push (lxAskHer). */
+const rcvLxE=(t,part)=>typeof lxLend==="function"?lxLend(t,part):null;
+RCVK.rougeBorrow={t:"Sang mượn son phấn",act:"xin chia son phấn với",kind:"help",ok:(p,t,part)=>!!part&&!!rcvLxE(t,part)&&lxMiss(p).includes(part),
+ line:(p,part)=>{const e=rcvLxE(S,part),lbl=TOIL_COL[part].label.toLowerCase();return `<p>Cung nữ của ${rkName(p)} ${p.name} sang thưa: chủ tử nhà nàng hết ${lbl}, xin ngươi chia cho một ít.</p>${e?kitRows([["Rương ngươi",`${lxName(e)}, còn ${e.u} lần dùng`,"n"]]):""}`},
+ opts:(p,t,part)=>{const me=t===S,e=rcvLxE(t,part),lbl=TOIL_COL[part].label.toLowerCase(),H=BAL.rcv.help.half,u=e?e.u:0,nh=Math.max(1,Math.ceil(u/2)),nl=Math.max(1,Math.round(u*H*H));
+  const give=n=>{const x=rcvLxE(t,part);if(!x)return null;const g=lxGive(t,p,x,n);if(p!==S)lxFix(p);if(t!==S)lxFix(t);return g};return[
+  rcvYesO(p,t,0,{n:"Chia cho nàng một nửa",c:`nửa hộp ${lbl} (${nh} lần dùng)`,go:()=>{const g=give("half");return g?`${me?"Ngươi":t.name} chia cho ${NM(p)} ${lxName(g)} (${g.u} lần dùng)`:""}}),
+  rcvYesO(p,t,1,{n:"Chia chút ít cho có",c:`${nl} lần dùng ${lbl}`,go:()=>{const g=give(nl);return g?`${me?"Ngươi":t.name} chia cho ${NM(p)} chút ít ${lbl} (${g.u} lần dùng)`:""}}),
+  rcvNoO(p,t,{g:`giữ hộp ${lbl}`,r:`${me?"Ngươi":t.name} khéo từ chối, không chia son phấn cho ${NM(p)}`}),
+  rcvSabO(p,t,{g:`giữ hộp ${lbl}`,r:tq=>`${me?"Ngươi":t.name} giữ hộp ${lbl}, đem chuyện ${NM(p)} hết son phấn đi kể${tq?" với "+rcvQn(tq):""}`})]}};
 /* Ngự giá lâm cung (jvisit visGo via the Emperor's plan emp:visit): an NPC consort answers with HER card's roads (j7 / jvisit PEND.empnight):
    Thắp đèn hầu rượu (the visit) · Phô tài (Sức − BAL.visit.show.suc, Sủng / Danh on success) · Khuyên ngài giữ long thể (Đức + adviseDuc, Sủng − adviseSung) */
 function rcvVisit(p){if(!p||p===S||p.coop||typeof rcvPick!=="function")return"go";const V=BAL.visit;
@@ -205,4 +248,4 @@ RCVK.invite={t:"Lời mời sang chơi",act:"mời sang cung chơi",kind:"help",
   rcvNoO(p,t,{g:`giữ buổi cho mình, Danh ${balSg(BAL.rcv.prop.danh)}`,fx:{danh:BAL.rcv.prop.danh},r:`${me?"Ngươi":t.name} cáo bận, không sang cung ${NM(p)}`}),
   rcvSabO(p,t,{g:"nghe được chuyện của chủ nhà",r:tq=>`${me?"Ngươi":t.name} nhận lời rồi đem chuyện cung ${NM(p)} đi kể${tq?" với "+rcvQn(tq):""}`,go:()=>{rcvInvAt(p,t);t.__invC=1}})]}};
 function rcvInviteGo(h,g){if(!g||g===S)return false;delete g.__invC;const r=rcvAsk("invite",h,g);if(r)try{log(r.trim())}catch(e){}const c=!!g.__invC;delete g.__invC;return c}
-Object.assign(window,{rcvP,rcvW,rcvWord,rcvPick,rcvHelpOpts,helpAsk,rcvGiftIn,RCVK,rcvCard,rcvAsk,rcvYesO,rcvNoO,rcvSabO,rcvVisit,rcvMaidBribe,rcvKw,rcvSeen,rcvSeenX,RCVJ,rcvJudge,rcvOddsPick,rcvInviteGo,rcvInvAt});
+Object.assign(window,{rcvNote,rcvOpen,rcvDrop,rcvFoe,rcvIllGive,rcvP,rcvW,rcvWord,rcvPick,rcvHelpOpts,helpAsk,rcvGiftIn,RCVK,rcvCard,rcvAsk,rcvYesO,rcvNoO,rcvSabO,rcvVisit,rcvMaidBribe,rcvKw,rcvSeen,rcvSeenX,RCVJ,rcvJudge,rcvOddsPick,rcvInviteGo,rcvInvAt});

@@ -26,17 +26,20 @@ const RCVX={poison:"bỏ độc (lén)",plant:"giấu bùa (lén)",taint:"hạ t
 /* JUDGE a THIRD person is asked to decide about the target (xin Hoàng hậu giáng, trình Hoàng hậu / Thái hậu): the judge is the receiver (judge probe below)
    EVERY act key is classified HERE (review FAIL 6 #4: no hand list may send an unlisted act to DONE). The key list itself comes from the live act tables
    (TW / ACT / AGRUN, in the page); a reached inter-person act whose key is in no list is kind NEW → verdict NEW = a gap, the test fails until it is classified. */
-const KINDS={REQ:"help doctor facJoin blockf bribel bribe bribeSrv rougeBorrow illAlly rougeBeg",PROP:"ally facFound invite2 call mediate manHail manFlirt manToken manTryst",ORDER_SRV:"illMaid",ORDER:"summon visit",
+const KINDS={REQ:"help facJoin blockf bribel bribe bribeSrv rougeBorrow illAlly rougeBeg",PROP:"ally facFound invite2 call mediate manHail manFlirt manToken manTryst",ORDER_SRV:"illMaid",ORDER:"summon visit",
  JUDGE:"xinhh trinhhh trinhth takeaway",
  /* staffUp «Tiến cử»: a request to Nội vụ phủ (an office; recommend() is one rule for her and every NPC) and the servant only gains (law 3) → GIFT (reviewer 88de83c5f) */
- GIFT:"gift reward petcare charity staffUp teachV teachD thHelp hhShield pardon release tqGift tyGift staffChe treat petBuy",
+ /* doctor «Mời làm thái y tâm phúc» (surfaced by the UNREACHED / no-self-skip check, round 4): a paid service of an office (Thái y viện; the thái y is the court seat
+    S.court.ty, not a consort with her own answer list) — the same sure deed for her (j2, o:100) and every NPC (cx2:doctor); the physician only gains (the fee,
+    a patron: law 3). Same ruling as staffUp (reviewer 88de83c5f). If the reviewer wants him to answer, that needs a living thái y person (law 6b) → parking lot */
+ GIFT:"doctor gift reward petcare charity staffUp teachV teachD thHelp hhShield pardon release tqGift tyGift staffChe treat petBuy",
  /* SELF: the doer's own deed (no other person is asked or given anything; when a probe still sees it touch someone it is OK, never a hidden ask) */
  SELF:"face arts book alms sutra maidR rest study buy portrait maidTalk fert dance anthai restLat sell work hire facLeave drug def_canh def_thudoc def_theodoi def_giuchung qin kidCare kidGuard cycFix cycMama illCho illThaiy",COVERT:Object.keys(RCVX).join(" ")+" tieuhuy chest laydo laydol slowpoison petsteal pgift rougeSteal",
  DONE:"accuse expose manCut kidGreet kidHeal kidMed test pushp banphe batnat block huydung ink kpoison ksab lygian musk nuoc phatquy phonghoa pond rash rumor spyk tea thathu tocao trip uyhiep vp xx "+
   "apol announce drop catswap kframe steal road giahoa tat thaopet hearMe joinMe hear join judge vent invoke staffPhat staffDoi staffTam threat facSell facDiv "+
   "flat true show favor court nurse likes old humble search staffHoi staffThuong talkGossip talkHealth talkPraise talkSecret tell use conf cutpay admon check fakeIll fakePreg flaunt follow humil ksp pray provoke thHH thTH warn"};
 /* STAFF: a servant's own deed (ag maid:* / srv:*, the maid road): those receiver rows live in C-AG's ONE role-parity table (jagstf2 G10 cards) */
-const KIND=k=>{const b=k.replace(/^[a-z0-9]+:/,"").replace(/^[a-z0-9]+:/,"");if(k==="tw:help"||k==="th:gift"||k==="ag:th:gift")return"GIFT";if(/^(ag:)?(maid|srv):/.test(k))return"STAFF";
+const KIND=k=>{const b=k.replace(/^[a-z0-9]+:/,"").replace(/^[a-z0-9]+:/,"");if(k==="tw:help"||k==="th:gift"||k==="ag:th:gift"||k==="tw:visit")return"GIFT";/* tw:visit «Thăm lúc ốm mệt»: the sick one only gains (thiện cảm, Sức), law 3 — not the Emperor's emp:visit ORDER */if(/^(ag:)?(maid|srv):/.test(k))return"STAFF";
  for(const K in KINDS)if(KINDS[K].split(" ").includes(b))return K;return"NEW"};
 /* a judge with no player seat (she is never the Thái hậu): the NPC judge's own roll stands; listed with its reason (reviewer 88de83c5f: OK as it stands) */
 const JUDGE_NPC_ONLY={trinhth:"Thái hậu xét: ngươi không bao giờ ngồi ghế Thái hậu",takeaway:"Hoàng thượng chuẩn: ngươi không bao giờ ngồi ghế Hoàng thượng",
@@ -58,7 +61,7 @@ function inPage(arg){const {TRIES}=arg;const out={rows:{},err:[],pend:[]};
  
  const realOpts=m=>(m&&m.opts||[]).filter(o=>o&&o.n&&!/^(Thôi|Lui|Đóng|Đã hiểu)\b/.test(o.n));
  const run=(fam,k,a,t)=>{const q0=Q.length,c0=CH.length,t0=T(t),a0=T(a);let r="";SEED(11);
-  try{if(fam==="tw")r=twDo(a,t,k,false);else if(fam==="act"){const A=ACT[k];if(!A.ok||A.ok(a,t))r=A.f(a,t)}else if(fam==="ag"){r=AGRUN[k](a,t,{k,vid:a===S?null:a.id,t:t===S?"me":t?"v"+t.id:null,id:a===S?"me":"v"+a.id,key:"rc"});if(LAND[k])LAND[k](a,t)}}catch(e){if(t)E(fam+":"+k,e)}
+  try{if(typeof k==="function")r=k(a,t);else if(fam==="tw")r=twDo(a,t,k,false);else if(fam==="act"){const A=ACT[k];if(!A.ok||A.ok(a,t))r=A.f(a,t)}else if(fam==="ag"){r=AGRUN[k](a,t,{k,vid:a===S?null:a.id,t:t===S?"me":t?"v"+t.id:null,id:a===S?"me":"v"+a.id,key:"rc"});if(LAND[k])LAND[k](a,t)}}catch(e){if(t)E(fam+":"+k,e)}
   const nq=Q.slice(q0);Q.length=q0;const ch=CH.slice(c0).filter(c=>c.p&&c.p!==a&&typeof c.p==="object"&&c.n!==1);
   const cards=nq.filter(m=>realOpts(m).length>=2);const acted=T(t)!==t0||T(a)!==a0||!!r||nq.length>0;
   const touched=t?acted:false;
@@ -87,6 +90,33 @@ function inPage(arg){const {TRIES}=arg;const out={rows:{},err:[],pend:[]};
   if(fam==="ag"&&k==="cx4:rougeBorrow"){try{const V=L();const v=V[0];rich(v);row.P=null;v.inv=(v.inv||[]).filter(e=>!lxOf(e.k));const M=lxMiss(v);
     for(const x of V)if(x!==v)x.inv=(x.inv||[]).filter(e=>!lxOf(e.k));if(M.length){S.inv=(S.inv||[]).filter(e=>!lxOf(e.k));S.inv.push({k:lxKey(M[0],3),d:S.turn,u:BAL.ration.borrow.spare*2});try{lxFix(S)}catch(e){}
      window.__bot=0;let x;try{x=run(fam,k,v,S)}finally{window.__bot=1}if(x.touched||x.pc.length)row.P=x}}catch(e){E("lender:"+k,e)}}
+  /* SELF-PICKED holder (Xin đồng minh, review FAIL 6 #3: the deed picks its own holder, illAllies) → N→P = she is the ONLY holder · P→N = she asks an NPC
+     holder (her j83 card → illBuy) · N↔N = an NPC asks the only NPC holder. The holder likes the asker (illAllies: thiện cảm ≥ 40) */
+  if(fam==="ag"&&k==="cx4:illAlly"){try{const V=L();const v=V[0],t=V[1],u=V[2];const ik=Object.keys(WILL)[0];const strip=x=>{x.inv=(x.inv||[]).filter(e=>!WILL[e.k])};
+    const only=(h,a)=>{for(const x of [S].concat(V))strip(x);rich(h);rich(a);h.inv.push({k:ik});affAdd(h,a,300)};
+    only(S,v);window.__bot=0;let x;try{x=run(fam,k,v,S)}finally{window.__bot=1}row.P=x.touched||x.pc.length?x:null;
+    only(t,S);x=run(fam,(a,b)=>illBuy(a,"ally",ik,b),S,t);row.N=x.touched?x:null;
+    only(t,u);x=run(fam,(a,b)=>illBuy(a,"ally",ik,b),u,t);row.NN=x.touched?x:null;/* the cx4:illAlly runner's executor (its day-plan key pick is the NPC's malice gate, not the receiver) */for(const y of [S].concat(V))strip(y)}catch(e){E("holder:"+k,e)}}
+  /* Mượn son phấn, the NPC lender (review FAIL 6 #1): P→N = she asks an NPC lender (her talk card lxBorrowCard → run) · N↔N = an NPC asks the only lender */
+  if(fam==="ag"&&k==="cx4:rougeBorrow"){try{const V=L();const t=V[1],u=V[2];const only=(h,a)=>{for(const x of [S].concat(V))x.inv=(x.inv||[]).filter(e=>!lxOf(e.k));const M=lxMiss(a);if(!M.length)return false;
+     h.inv.push({k:lxKey(M[0],3),d:S.turn,u:BAL.ration.borrow.spare*2});try{lxFix(h)}catch(e){}return true};
+    if(only(t,S)){const x=run(fam,(a,b)=>lxBorrowCard(a,b).run(),S,t);if(x.touched)row.N=x}if(only(t,u)){const x=run(fam,k,u,t);if(x.touched)row.NN=x}}catch(e){E("lender2:"+k,e)}}
+  /* PRECONDITION probes (review FAIL 6 #5: an ask the random probe never reached is now a gap — these reach it): Hòa giải (the receiver holds oán ≥ 20
+     toward a third person, twFoeOf) · Xin vào phe (the receiver leads a faction, facLeader = highest rank) · Xin son phấn (the receiver is the Hoàng hậu:
+     N→P = she sits in the queen seat, rank 7; the asker has run out, no cooldown) */
+  if(fam==="tw"&&k==="mediate"){try{const V=L();const v=V[0],t=V[1],u=V[2],x=V[3]||V[0];
+    const prep=(h,f)=>{for(const y of [S].concat(V))rich(y);oanAdd(h,f,60)};
+    let sd=101;const paid=(a,b)=>{SEED(sd++);const it=AG.inTick;AG.inTick=true;try{return twDo(a,b,"mediate",true)}finally{AG.inTick=it}};/* an NPC doer's TW deed runs inside the agent
+       tick (jagent mutes it outside), paid by its plan; the ODDS CAP roll of the asker (twDo) may fail softly on one seed, so up to 8 seeds */
+    const go=(a,b,f)=>{let y;for(let i=0;i<8;i++){prep(b,x);y=run(fam,f,a,b);if(y.touched||y.pc.length)break}return y};
+    let y=go(v,S,paid);if(y.touched||y.pc.length)row.P=y;y=go(S,t,k);if(y.touched)row.N=y;y=go(u,t,paid);if(y.touched)row.NN=y}catch(e){E("pre:"+k,e)}}
+  if(fam==="ag"&&k==="cx3:facJoin"){try{const V=L();const v=V[0],t=V[1],u=V[2],x=V[3]||V[0];const f0=S.facs,rk0=S.rank;
+    const fac=(h,m)=>{S.facs=[{id:91,m:[key(h),key(m)],name:"phe thử"}];for(const y of [S].concat(V))rich(y)};
+    fac(S,x);S.rank=8;let y=run(fam,k,v,S);if(y.touched||y.pc.length)row.P=y;S.rank=rk0;
+    fac(t,x);const tr=t.rank;t.rank=9;y=run(fam,k,S,t);if(y.touched)row.N=y;fac(t,x);y=run(fam,k,u,t);if(y.touched)row.NN=y;t.rank=tr;S.facs=f0}catch(e){E("pre:"+k,e)}}
+  if(fam==="ag"&&k==="cx4:rougeBeg"){try{const V=L();const rk0=S.rank;const out0=x=>{x.inv=(x.inv||[]).filter(e=>!lxOf(e.k));x.lxBeg={}};
+    const v=V.find(z=>!z.queen)||V[0];out0(v);S.rank=7;window.__bot=0;let y;try{y=run(fam,k,v,S)}finally{window.__bot=1}if(y.touched||y.pc.length)row.P=y;S.rank=rk0;
+    const q=queenP();if(q&&q!==S){out0(S);y=run(fam,(a)=>lxBegCard(a,"hh").run(),S,q);if(y.touched)row.N=y;const u=V.find(z=>z!==q&&z!==v)||v;out0(u);y=run(fam,k,u,q);if(y.touched)row.NN=y}}catch(e){E("pre:"+k,e)}}
   if(fam==="act"&&k==="blockf"){try{const V=L();const v=V[0],t=V[1];for(const x of [S,v,t])rich(x);t.block=0;const a0=aff(S,v);affAdd(S,v,300);const x=run(fam,k,v,t);affAdd(S,v,a0-aff(S,v));if(x.touched||x.pc.length)row.P=x}catch(e){E("third:"+k,e)}}
   out.rows[fam+":"+k]=row}
  /* OWN-SERVANT receiver (review FAIL 6 #4): every dirty act is carried by a servant the doer ORDERS (j29 runAct: DIRTY, DIRTY_SENT → jagstf2 stf2Ord
@@ -99,6 +129,12 @@ function inPage(arg){const {TRIES}=arg;const out={rows:{},err:[],pend:[]};
      try{const w0=JSON.stringify(S.where||{});if(S.where){S.where[b.id]="xx_far";if(a!==S)S.where[a.id]="xx_far2"}const c0=CH.length;let r="";try{r=runAct(a,b,k)}catch(e){E("srv:"+k,e)}
       const ch=CH.slice(c0).filter(c=>c.f==="stf2Ord"&&c.p&&c.p!==a);row[dir]={acted:true,touched:true,pc:[],nc:ch.map(c=>c.f+"(sv)"),r:String(r||"").slice(0,80)};S.where=JSON.parse(w0)}catch(e){E("srv:"+k,e)}window.__j95off=0}}
    out.rows["srv:"+k]=row}}catch(e){E("srv",e)}
+ /* ORDER_SRV (review FAIL 6 #2): «Sai cung nữ thân tín mua lén ngoài cung» (j83 IROUTE.maid) ORDERS the doer's trusted maid → she answers through
+    jagstf2 stf2Ord (obey / refuse / tell). P→N = she orders her maid · N↔N = an NPC orders hers. Her seat as the ORDERED maid is the maid road. */
+ try{const SRUN={"cx4:illMaid":a=>illBuy(a,"maid",IROUTE.maid.ks[0])};for(const k in SRUN){const id="ag:"+k;const row=out.rows[id]||{fam:"ag",k,n:"",ex:{}};row.P=null;row.N=null;row.NN=null;row.srvOrd=1;
+   for(let i=0;i<3;i++){const V=L();const v=V[i%V.length];for(const [dir,a] of [["N",S],["NN",v]]){if(row[dir]&&row[dir].nc.length)continue;rich(a);if(a.maid){a.maid.loyal=90;a.maid.spyFor=null}
+     const c0=CH.length;let r="";try{r=SRUN[k](a)}catch(e){E("srvord:"+k,e)}const ch=CH.slice(c0).filter(c=>c.f==="stf2Ord"&&c.p&&c.p!==a);row[dir]={acted:true,touched:true,pc:[],nc:ch.map(c=>c.f+"(maid)"),r:String(r||"").slice(0,80)}}}
+   out.rows[id]=row}}catch(e){E("srvord",e)}
  Math.random=R0;out.pendIds=Object.keys(PEND);out.keys=keys.map(([f,k])=>f==="ag"?"ag:"+k:f+":"+k);return out}
 
 async function scan(html,opt){opt=opt||{};const {chromium}=require('playwright');const URL=/^(https?|file):/.test(html)?html:'file://'+path.resolve(html);
@@ -113,11 +149,15 @@ const SRVR=["bribe","cx2:bribeSrv","bribel"];
 function cell(x,side,k){if(!x||!x.touched)return"n/a";return (side==="P"&&!SRVR.includes(k)?x.pc.length:x.nc.length||x.pc.length)?"CHOICE":"AUTO"}
 function build(o){const rows=[],gaps=[];
  for(const id in o.rows){const R=o.rows[id];const k=R.k,kind=R.srv?"ORDER":KIND(id.replace(/^ag:/,""));const c={P:cell(R.P,"P",k),N:cell(R.N,"N",k),NN:cell(R.NN,"N",k)};
-  if(c.P==="n/a"&&c.N==="n/a"&&c.NN==="n/a"||R.self&&!(R.P&&R.P.pc.length))continue;
+  /* review FAIL 6 #5: a REQ / PROP / ORDER / ORDER_SRV / JUDGE key the probe never reaches is NOT a silent pass: verdict UNREACHED = a gap (fix it, give it
+     a probe, or list it in role-parity-open.json role «receiver» with its owner); a self-run of such a key does not hide it either */
+  const ask=/^(REQ|PROP|ORDER|ORDER_SRV|JUDGE)$/.test(kind)&&!JUDGE_NPC_ONLY[k.replace(/^[a-z0-9]+:/,"")];
+  if(ask&&c.P==="n/a"&&c.N==="n/a"&&c.NN==="n/a"){const row={id,k,n:R.n||"",fam:R.fam,kind,P:c.P,N:c.N,NN:c.NN,v:"UNREACHED",pc:[],nc:[],r:""};rows.push(row);gaps.push({id,k,n:row.n,kind,v:"UNREACHED"});continue}
+  if(!ask&&(c.P==="n/a"&&c.N==="n/a"&&c.NN==="n/a"||R.self&&!(R.P&&R.P.pc.length)))continue;
   /* verdict: ASYM = one receiver chooses, the other is forced (law 1) · FORCED = asked / proposed / ordered and no receiver can say no (21:15Z) ·
      SAME = every receiver chooses · OK = done-to / covert, no receiver answers at the moment on either side (counterplay after) */
   const nside=c.N!=="n/a"?c.N:c.NN;const sides=[c.P,c.N,c.NN].filter(x=>x!=="n/a");let v;
-  if(kind==="NEW")v="NEW";else if(sides.length&&sides.every(x=>x==="CHOICE"))v="SAME";else if(sides.includes("CHOICE"))v="ASYM";else if(JUDGE_NPC_ONLY[k.replace(/^[a-z0-9]+:/,"")])v="OK";else if(/REQ|PROP|ORDER|JUDGE/.test(kind))v="FORCED";else v="OK"
+  if(kind==="NEW")v="NEW";else if(sides.length&&sides.every(x=>x==="CHOICE"))v="SAME";else if(sides.includes("CHOICE"))v="ASYM";else if(JUDGE_NPC_ONLY[k.replace(/^[a-z0-9]+:/,"")])v="OK";else if(ask)v="FORCED";else v="OK"
   const row={id,k,n:R.n||"",fam:R.fam,kind,P:c.P,N:c.N,NN:c.NN,v,pc:(R.P&&R.P.pc||[]).slice(0,2),nc:[...new Set((R.N&&R.N.nc||[]).concat(R.NN&&R.NN.nc||[]))].slice(0,3),r:R.P&&R.P.r||R.N&&R.N.r||""};
   rows.push(row);if(v==="ASYM"||v==="FORCED"||v==="NEW")gaps.push({id,k,n:row.n,kind,v})}
  rows.sort((a,b)=>a.kind.localeCompare(b.kind)||a.id.localeCompare(b.id));
