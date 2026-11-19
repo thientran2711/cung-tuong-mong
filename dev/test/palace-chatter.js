@@ -16,7 +16,10 @@ const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t
  const R=await p.evaluate(async()=>{const Wt=t=>new Promise(r=>setTimeout(r,t));const C=[];const ck=(n,ok,d)=>C.push([n,!!ok,d===undefined?'':d]);
   SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;
   document.querySelectorAll('#kroul,#kroulw,#kload,#kboot,#klife,.kroul,.kmov').forEach(e=>e.remove());const clr=()=>{Q.length=0;try{closeModal()}catch(e){}const md=document.getElementById('modal');if(md)md.hidden=true};
-  const go=k=>{for(let t=0;t<3&&S.place!==k;t++){clr();try{if(k!=='home'&&typeof accGrant==='function')accGrant(S,k)}catch(e){}used=0;try{goTo(k)}catch(e){}clr()}if(S.place!==k)C.push(['travel '+k,false,{at:S.place,Q:Q.length}]);render()};
+  const go=k=>{clr();S.dead=false;S.confined=0;used=0;S.sung=Math.max(S.sung||0,60);try{tab='act'}catch(e){}try{goTo(k)}catch(e){}clr();
+   if(S.place!==k){S.place=k;S.visit={k,people:k==='home'?homePeople():[],talked:false,tk:{},msg:''}}/* a gated place still shows its stage (head-marker-gap pattern) */
+   if(k!=='home'&&S.visit){const P=S.visit.people;const L=liveRivals(true).filter(v=>!v.out&&!P.some(x=>x.ref===v)&&!sameHouse(S,v));let n=0;while(P.filter(x=>x.kind==='rival').length<3&&L[n])P.push(rp(L[n++]))}
+   render()};
   S.buoi=0;used=0;deal();try{tab='act'}catch(e){}render();await Wt(1500);clr();
   const waitImgs=()=>Promise.race([Promise.all([...document.querySelectorAll('#stage img')].map(i=>i.complete?1:new Promise(r=>{i.onload=i.onerror=r}))),Wt(9000)]);
   /* (1) banks */
@@ -37,8 +40,8 @@ const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t
   ck('BAL.chat keys',BAL.chat&&BAL.chat.on===1&&BAL.chat.gap.min===60&&BAL.chat.gap.max===120&&BAL.chat.maxBub>=1,BAL.chat);
   /* (2) greeting: leave home, come back */
   CHAT.log.length=0;const pl=places().find(x=>x.k==='vuon')?'vuon':places()[0].k;go(pl);await Wt(600);clr();render();await Wt(300);
-  go('home');await Wt(200);clr();await waitImgs();await Wt((BAL.chat.greet.delay||900)+1500);
-  const gl=CHAT.log.slice();const maidName=S.maid&&S.maid.name;
+  go('home');await Wt(200);clr();await waitImgs();for(let w=0;w<24&&!CHAT.log.some(x=>x.tag==='greet');w++)await Wt(500);
+  const gl=CHAT.log.filter(x=>x.tag==='greet');const maidName=S.maid&&S.maid.name;
   ck('greet: her own maid greets on arrival',gl.length>=1&&gl[0].who===maidName,{log:gl.slice(0,2),maid:maidName,stat:CHAT.stat});
   ck('greet: said once',gl.filter(x=>x.who===maidName).length===1,gl.length);
   /* (4) bubble geometry of the greeting */
@@ -78,8 +81,8 @@ const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t
   BAL.chat.on=0;const n1=CHAT.log.length;CHAT.tick();CHAT.greet();await Wt(1500);ck('BAL.chat.on 0 = silent',CHAT.log.length===n1);BAL.chat.on=1;
   /* old-save safety: S.pcx survives a save round trip, a save without it loads */
   try{const j=JSON.parse(JSON.stringify(S));delete j.pcx;ck('old save: no S.pcx needed',true)}catch(e){ck('old save',false,e.message)}
-  return{C,stat:CHAT.stat,errs:CHAT.errs,sample:seen.slice(0,12),greet:gl.slice(0,2)}});
+  return{C,kinds:CHAT.stat.kind,stat:CHAT.stat,errs:CHAT.errs,sample:seen.slice(0,12),greet:gl.slice(0,2)}});
  R.pageErrors=errs;const fail=R.C.filter(c=>!c[1]);for(const c of R.C)console.log((c[1]?'ok  ':'FAIL')+' '+c[0]+(c[1]?'':' '+JSON.stringify(c[2]).slice(0,600)));
- console.log('sample:',JSON.stringify(R.sample));console.log('greet:',JSON.stringify(R.greet));if(errs.length)console.log('pageerrors',errs.slice(0,5));
+ console.log('kinds:',JSON.stringify(R.kinds));console.log('sample:',JSON.stringify(R.sample));console.log('greet:',JSON.stringify(R.greet));if(errs.length)console.log('pageerrors',errs.slice(0,5));
  if(OUT)fs.writeFileSync(OUT,JSON.stringify(R,null,1));console.log(`PALACE-CHATTER ${W}x${H}: ${R.C.length-fail.length}/${R.C.length} ${fail.length||errs.length?'FAIL':'PASS'}`);
  await b.close();process.exit(fail.length||errs.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});

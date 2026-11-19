@@ -87,7 +87,7 @@ function fresh(x){const M=mem(),k=hk(x),g=(C().noRepeat|0)||60;return M.u[k]==nu
 function used(x){const M=mem();M.n=(M.n|0)+1;M.u[hk(x)]=M.n}
 /* choose from a list of candidates [item, weight] the freshest one (least recently used when all are spent) */
 const kx=o=>o&&typeof o==="object"&&!Array.isArray(o)&&o.x!=null?o.x:o;/* a candidate object is remembered by its exchange */
-function choose(L){if(!L.length)return null;const F=L.filter(x=>fresh(kx(x[0])));if(F.length){let s=0;for(const x of F)s+=x[1];let r=Math.random()*s;for(const x of F){r-=x[1];if(r<=0)return x[0]}return F[F.length-1][0]}
+function choose(L,strict){if(!L.length)return null;const F=L.filter(x=>fresh(kx(x[0])));if(!F.length&&strict)return null;/* chatter: silence rather than a line said lately */if(F.length){let s=0;for(const x of F)s+=x[1];let r=Math.random()*s;for(const x of F){r-=x[1];if(r<=0)return x[0]}return F[F.length-1][0]}
  const M=mem();return L.slice().sort((a,b)=>(M.u[hk(kx(a[0]))]||0)-(M.u[hk(kx(b[0]))]||0))[0][0]}
 /* ---------- the stage ---------- */
 function stage(){return document.getElementById("stage")}
@@ -107,7 +107,7 @@ function sayKit(){try{return !!(window.KIT_HEADMK&&KIT_HEADMK.say&&typeof kitHea
 function lay(st){try{let l=st.querySelector(":scope>.kmerr-lay");if(l)return l;if(window.ERR&&typeof ERR.sync==="function"){try{ERR.sync()}catch(e){}l=st.querySelector(":scope>.kmerr-lay");if(l)return l}
  if(document.getElementById("kerr-css")){l=document.createElement("div");l.className="kmfly kmerr kmerr-lay";st.appendChild(l);return l}}catch(e){err("lay",e)}return null}
 function clearB(){try{document.querySelectorAll(".kchat-b").forEach(e=>e.remove())}catch(e){}}
-function show(P,txt,ms){const st=stage();if(!st||!P.img.isConnected)return false;if(noticeOn(P))return false;const c=C();
+function show(P,txt,ms,tag){const st=stage();if(!st||!P.img.isConnected)return false;if(noticeOn(P))return false;const c=C();
  const lim=Math.max(1,c.maxBub|0||2);const cur=[...st.querySelectorAll(".kchat-b")];while(cur.length>=lim)cur.shift().remove();
  const w=document.createElement("span");const kit=sayKit();const title=`${nameOf(P.e,P.p)}: ${txt}`;
  w.innerHTML=kit?kitHeadMarkHtml(title,"img","say",txt):typeof kitHeadMarkHtml==="function"?kitHeadMarkHtml(title,"img","off"):"";const b=w.firstChild;if(!b)return false;
@@ -116,12 +116,12 @@ function show(P,txt,ms){const st=stage();if(!st||!P.img.isConnected)return false
  const Pz=typeof kitBadgeAt==="function"?kitBadgeAt(st,P.img,kit?"say":"hap",ww,hh):null;if(!Pz){b.remove();return false}
  b.style.position="absolute";b.style.left=((Pz.left-sr.left)/sc)+"px";b.style.top=((Pz.top-sr.top)/sc)+"px";b.dataset.line=Pz.sex;
  if(!kit&&typeof kitLine==="function")try{kitLine(`${nameOf(P.e,P.p)}: “${txt}”`,ms)}catch(e){}
- setTimeout(()=>{try{b.remove()}catch(e){}},ms);CH.stat.lines++;CH.log.push({t:Date.now(),who:P.p.name,txt,kit});if(CH.log.length>60)CH.log.shift();return true}
+ setTimeout(()=>{try{b.remove()}catch(e){}},ms);CH.stat.lines++;CH.log.push({t:Date.now(),who:P.p.name,txt,kit,tag:tag||""});if(CH.log.length>60)CH.log.shift();return true}
 function dur(t){const c=C().say||{};return Math.round(Math.max(c.min||2600,Math.min(c.max||6000,(c.base||1400)+String(t).length*(c.ch||55))))}
 /* play the turns one after another; a turn whose speaker left the stage ends the exchange */
 function play(T,tag){if(!T||!T.length)return false;CH.run=++CH.seq;const id=CH.run;let i=0;CH.stat.said++;
  const step=()=>{if(CH.run!==id)return;if(i>=T.length){CH.run=0;return}if(busy()){CH.run=0;return}const t=T[i++];const P=present().find(x=>x.p===t.who.p)||null;
-  if(!P||!show(P,t.txt,dur(t.txt))){CH.run=0;return}setTimeout(step,dur(t.txt)+((C().turnGap)|0))};step();return true}
+  if(!P||!show(P,t.txt,dur(t.txt),tag)){CH.run=0;return}setTimeout(step,dur(t.txt)+((C().turnGap)|0))};step();return true}
 /* ---------- build an exchange ---------- */
 function pairKey(a,b){return a.k+"-"+b.k}
 function topicsFor(A,B){const T=(window.CHAT_L&&CHAT_L.topics)||[];const k1=B?pairKey(A,B):A.k+"-me",k2=B?pairKey(B,A):null;const out=[];
@@ -129,7 +129,7 @@ function topicsFor(A,B){const T=(window.CHAT_L&&CHAT_L.topics)||[];const k1=B?pa
 function build(A,B,topicList,c){const c0=c||ctx(A,B);const X={c:c0,v:{}};const used0=new Set([A.e,B&&B.e].filter(Boolean));const cand=[];
  for(const [t,sw] of topicList){let p=null;if(t.need){const f=NEED[t.need];p=f?f(used0):null;if(!p)continue}
   for(const x of t.x){const tg=Array.isArray(x)?tagOf(x[0]):tagOf(x);if(tg&&!tagOk(tg,c0))continue;cand.push([{t,sw,x,p},t.w||1])}}
- for(let n=0;n<6&&cand.length;n++){const o=choose(cand);if(!o)return null;const i=cand.findIndex(z=>z[0]===o);cand.splice(i,1);
+ for(let n=0;n<6&&cand.length;n++){const o=choose(cand,true);if(!o)return null;const i=cand.findIndex(z=>z[0]===o);cand.splice(i,1);
   const a=o.sw?B:A,b=o.sw?A:B;X.p=o.p;const L=(Array.isArray(o.x)?o.x:[o.x]).map(untag);const T=[];let ok=true;
   for(const s of L){const r=fill(s,a,b,X);if(!r||(!b&&s.charAt(0)==="B")){ok=false;break}T.push(r)}if(!ok||!T.length)continue;used(o.x);return T}return null}
 /* the people of a happening here this khắc (jagday deeds: doer + target at this place) */
@@ -145,7 +145,7 @@ function tick(){CH.t=0;if(!on())return arm();CH.stat.tick++;const b=busy();if(b|
   /* (b) idle chatter: a pair (or one person to her) */
   if(!T){const pairs=[];for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){const tp=topicsFor(L[i],L[j]);if(tp.length)pairs.push([[L[i],L[j],tp],wPair(L[i],L[j])])}
    for(const a of L){const tp=topicsFor(a,null);if(tp.length)pairs.push([[a,null,tp],((C().w||{}).solo)||.6])}
-   for(let n=0;n<4&&pairs.length&&!T;n++){const z=wpick(pairs);T=build(z[0],z[1],z[2]);if(!T)pairs.splice(pairs.findIndex(q=>q[0]===z),1)}}
+   for(let n=0;n<6&&pairs.length&&!T;n++){const z=wpick(pairs);T=build(z[0],z[1],z[2]);const kk=z[0].k+"-"+(z[1]?z[1].k:"me");const K=CH.stat.kind=CH.stat.kind||{};K[kk]=K[kk]||[0,0];K[kk][T?0:1]++;if(!T)pairs.splice(pairs.findIndex(q=>q[0]===z),1)}}
   if(T)play(T,"idle");else CH.stat.skip++}catch(e){err("tick",e)}arm()}
 function wPair(a,b){const W=C().w||{};if(a.k==="srv"&&b.k==="srv"||a.k==="srv"&&b.k==="eun"||a.k==="eun"&&b.k==="srv")return W.srv||1.2;
  try{if(a.e&&b.e&&typeof aff==="function"){const f=aff(a.e,b.e);if(f>=(BAL.voice&&BAL.voice.warm||40))return W.friend||1.5;if(f<=(BAL.voice&&BAL.voice.cold||-25))return W.rival||1.3}}catch(e){}return W.base||1}
@@ -153,7 +153,7 @@ function wpick(L){let s=0;for(const x of L)s+=x[1];let r=Math.random()*s;for(con
 function arm(short){if(CH.t)clearTimeout(CH.t);const c=C();if(!c||!c.on)return;const g=c.gap||{};const s=short?(c.retry||20):R(g.min||60,g.max||120);CH.t=setTimeout(tick,s*1000)}
 /* ---------- (a) greeting on arrival home ---------- */
 function greet(){if(!on())return;const run=(n)=>{const b=busy();if(b==="modal"||b==="queue"){if(n<((C().greet||{}).tries||6))return setTimeout(()=>run(n+1),((C().greet||{}).wait||1500));return}
-  if(b)return;const L=present();const M=L.find(x=>x.p.kind==="maid");if(!M)return;const pool=(window.CHAT_L&&CHAT_L.greet)||[];const c=ctx(M,null);
+  if(b&&b!=="nostage")return;const L=b?[]:present();const M=L.find(x=>x.p.kind==="maid");if(!M){/* her figure picture may still be loading */if(n<((C().greet||{}).tries||6)&&S.place==="home")return setTimeout(()=>run(n+1),((C().greet||{}).wait||1500));return}const pool=(window.CHAT_L&&CHAT_L.greet)||[];const c=ctx(M,null);
   const cand=pool.filter(s=>{const t=tagOf(s);return !t||tagOk(t,c)}).map(s=>[s,1]);const s=choose(cand);if(!s)return;const r=fill("A:"+untag(s),M,null,{c,v:{}});if(!r)return;used(s);
   CH.run=0;clearB();if(play([r],"greet"))CH.stat.greet++};setTimeout(()=>run(0),((C().greet||{}).delay||900))}
 /* ---------- (c) the people of one happening stand together (once per visit) ---------- */
