@@ -24,3 +24,4 @@ WORKERS:
 - BW6 session_01PEhRbwCBpjGw93PR3JjeST builder (depth 7): D15 into all builders (+ a36 ref), then "Kho" wiring. No gens.
 - MMX4 session_01PEhRbuTKMiDoYTEkwV2Gou ma ma: idle, recipe frozen.
 - TH1 session_01PEhRbx8LwDyXqAFRvZwPB7 idle at roll line (Thái hậu waits; handover in thai-hau-TH1.md). CP1 session_01PEhRbvNebkpZ54ojbmG2mh idle: season palette sheets dev/handover/review-sheets/palettes-season/season_sheet1–3.jpg await owner (not yet shown to her — show when there is a calm moment, full-size look first).
+ADDENDUM (ROOT-55 ~21:38Z): NF4 c06/c14/c19/c31 Sắc sảo done (sheet nf4_c06_c14_c19_c31_sacsao.jpg, not yet sent) → send after a full-size look; tell NF4 GO the 20 new people now (owner already approved, Lượt 700). NDX4 rolled → NDX5 session_01PEhRbtmYSywEskZtUmAi7W (crown + B23 + a65 hand-warmer colour); NDX4 round-3 sheet nudeB_m05_r2_vs_r3_stylelock.jpg superseded by NDX5's.
