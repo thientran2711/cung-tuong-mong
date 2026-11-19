@@ -106,11 +106,11 @@ Main ones (read by hand):
 
 | # | builder(s) | approved sentence already there | master sentence it now meets |
 |---|---|---|---|
-| C1 | build.py / build_all (all ranks, ma ma, triều, Nữ đế), build_npc, emperor-B | 'Semi-realistic painterly guofeng portrait style, near-3D realistic rendering…' | M01 'Soft painted guofeng game illustration … NOT a photo … NOT 3D' (opposite rendering words) |
+| C1 | build.py / build_all (all ranks, ma ma, triều, Nữ đế), build_npc, emperor-B | 'Semi-realistic painterly guofeng portrait style, near-3D realistic rendering…' | M01 'Soft painted guofeng game illustration … NOT a photo … NOT 3D' (opposite rendering words)  **RESOLVED Lượt 779 (MG2): old clause removed from every builder, X18 bans it (scope any incl. face) — dev/handover/reports/MG2.md** |
 | C2 | store ranks | 'IGNORE the reference image's background completely; the background is completely transparent…' | M03 'plain light parchment background' |
 | C3 | all multi-reference prompts (store: identity ref / image 1 / image 2; face v3b redraws: 'From image 2 take ONLY…') | numbered references | M01/M02 speak of 'the reference image' (one ref) |
 | C4 | face makers v3/v5 (c/s files) | 'Colour tone: all colours at ONE medium tone level…' (the old medium-tone face sentence, Lượt 750 says the master replaces it) | M05 B18 tone |
-| C5 | all a51/a65 (store, Thái hậu, ma ma) | elder 'DEEPER, DARKER' colour rule (S33) / maid 'clear, soft and held back' | M05 young B18 tone (G4) |
+| C5 | all a51/a65 (store, Thái hậu, ma ma) | elder 'DEEPER, DARKER' colour rule (S33) / maid 'clear, soft and held back' | M05 young B18 tone (G4)  **RESOLVED Lượt 779 (MG2): elder rule kept, sits after M05 + bridging clause 'this elder colour rule wins over the first COLOUR RULE…' (store S33 + Thái hậu); Nữ đế B23 unchanged — dev/handover/reports/MG2.md** |
 | C6 | face v3 base files (m01–m52, 35 c, 12 s) | 'mouth CLOSED with the lips softly together…' (old) | M10 strong closed-mouth words (both now in the prompt) |
 | C7 | store t7/t8/Nữ đế; outfit slots | 'FABRIC: thick gold-embroidered brocade…', 'silk satin', 'silk crepe' | M06 thin light flowing silk and gauze |
 | C8 | store / triều / ma ma / emperor | 'body and face frontal…', 'calm standing pose', 'standing calmly' | M09 weight on one leg, knee softly bent |
