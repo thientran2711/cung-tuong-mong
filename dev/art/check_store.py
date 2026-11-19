@@ -21,10 +21,10 @@ APPROVED = [{'id': 'S01',
   'title': 'TWO-COLOUR RULE (hai màu)',
   'text': 'TWO-COLOUR RULE: the whole outfit uses EXACTLY TWO colours that clearly interact: the MAIN colour {main} and the SECONDARY colour {secondary}, the secondary clearly visible in large areas '
           '(inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, never a third colour.',
-  'scope': 'tp1-6 pr1-6 mama',
-  'confirm': 'tp7-8 pr7-8 nude trieu1-8',
+  'scope': 'tp1-8 pr1-8 mama',
+  'confirm': 'nude trieu1-8',
   'ages': '',
-  'luot': '489, 499 (ART_RULES B15)',
+  'luot': '489, 499 (ART_RULES B15); 529 (G14: t7/t8 blocking)',
   'source': 'dev/art/owner-copy/pr_cl_t2_V2.txt (Cao Ly V2, owner Lượt 301-303)',
   'proof': 'dev/art/owner-copy/pr_cl_t2_V2.txt',
   'picture': 'Cao Ly V2 t2 (Lượt 301-303) · gen Lw8y0mCswO · cut 79f3BGcJAL (ledger :288) · NO file on CDN/repo (sent in chat only) — ART_RULES B15 lists xSByOSyjfW/yiuGA83PW9/cpS8oJg0eP, but the '
@@ -433,6 +433,30 @@ APPROVED = [{'id': 'S01',
   'picture': "Lượt 395 store sheets, approved Lượt 397 'vẽ rất là đẹp' · https://ctm-img.victoria-tntt.workers.dev/img/_review/morning-1119/sheet_congchua.jpg",
   'vn': 'Tuổi 51/65: mọi màu là sắc TRẦM, ĐẬM hơn của màu trẻ (sang, điềm đạm, không tươi, không nhạt, không xám bụi).',
   'store': True},
+ {'id': 'S34',
+  'title': 'FOREHEAD: nothing on the forehead (D9)',
+  'text': 'NOTHING on the forehead (no hoa điền, no dot, no mark, nothing).',
+  'scope': 'any',
+  'confirm': '',
+  'ages': '',
+  'luot': '529 (ART_RULES D9, owner via ROOT-49 chat Lượt 521)',
+  'source': 'owner words, ART_RULES D9 (dev/art/ART_RULES.md); builders: t8-prompt-B/build.py D9_FOREHEAD, build_npc.py, emperor-B/build.py',
+  'proof': 'dev/art/t8-prompt-B/build.py',
+  'picture': '- (owner order, not a picture verdict)',
+  'vn': 'Trán KHÔNG có gì (không hoa điền, không chấm, không dấu, không gì cả).',
+  'store': True},
+ {'id': 'S35',
+  'title': 'NO hair flowers on cung nữ / nữ quan (K15)',
+  'text': 'NO flowers in the hair (no fresh or silk flowers), only her hairpins.',
+  'scope': 'tm1-2 tm4',
+  'confirm': '',
+  'ages': '',
+  'luot': '520 (K15; ROOT-50 19/11 18:24Z: copy into tm1/tm2 + nữ quan)',
+  'source': 'dev/art/t8-prompt-B/build.py build_mama --noflower (MMX3, ROOT-50 ruling A)',
+  'proof': 'dev/art/t8-prompt-B/build.py',
+  'picture': '- (owner order Lượt 520)',
+  'vn': 'Cung nữ, nữ quan: KHÔNG cài hoa trên tóc (không hoa tươi, không hoa lụa), chỉ trâm.',
+  'store': True},
  {'id': 'S32',
   'title': 'MA MA two front panels (hai tà)',
   'text': 'a short front layer made of TWO separate long embroidered front panels (hai tà, never one single panel), one hanging down each side of the front from the waist, each with a gold-edged '
@@ -541,10 +565,10 @@ BANNED = [{'id': 'X01',
   'title': 'hair flowers on a ma ma (K15)',
   'regex': 'tucked beside the bun|hair flower|fresh flower|flowers? in (?:her|the) hair',
   'slot': '',
-  'scope': 'mama',
+  'scope': 'mama tm0-4',
   'unless': '',
   'negation': 'yes',
-  'luot': '520 (K15; ROOT-50 ruling A, MMX3)',
+  'luot': '520 (K15; ROOT-50 ruling A, MMX3); 529 scope widened to cung nữ/nữ quan tm0-tm4 (ROOT-50)',
   'why': 'ma ma, cung nữ, nữ quan wear NO hair flowers; only consorts'},
  {'id': 'X13',
   'title': 'style image sentence (style image retired)',
@@ -574,10 +598,29 @@ BANNED = [{'id': 'X01',
   'luot': '483, 486 (G4)',
   'why': 'phi bạch never gold/yellow below t6'}]
 
+# G15 (owner Lượt 559): QUÝ NHÂN t3 DESIGN = option B v2. The t3 outfit-design words of the store (TIER_LOW[3] robe in t8-prompt-B/build.py) are REPLACED
+# by the Outfit words of dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt, copied verbatim; slots only: lilac -> {main}, deep teal -> {sec}
+# (her secondary, as in the TWO-COLOUR sentence), wisteria -> {motif} (her own t3 motif, the one the store already used). Used by store-all/build_all.py
+# (_t3_slot) and by store_check below: the gate then DEMANDS the option-B words (slots = any words) instead of the old t3 design.
+G15_T3_OLD=re.compile(r"a fine silk robe with wide embroidered (.+?) bands at the collar, sleeves and hem, long trailing wide sleeves, a silk waistband with hanging jade belt pendants and tassels, a sheer silk shawl")
+G15_T3_OPTB=("a structured, rich COURTLY palace consort dress (cung đình), never plain, never a simple wrap robe, NO crossed wrap collar, NO high-waisted chest-wrap skirt: "
+ "an ankle-length {main} silk court robe with a straight SQUARE NECKLINE framed by a wide stiff {sec} embroidered {motif} band; a wide stiff {sec} brocade girdle at the natural waist, "
+ "from which hangs down the centre front an embroidered {sec} APRON PANEL (a long narrow ceremonial front panel, {motif} embroidery, gold-braid edge) reaching to the ankles; "
+ "on each side of the apron hangs a long ceremonial jade pendant set down to the knees: small carved jade plaques linked by strings of pearls, ending in silk tassels; "
+ "wide embroidered {motif} bands at the sleeve ends and the hem; a sheer silk shawl")
+def g15_t3(text,main,sec):
+    """old t3 design -> option B (exactly one occurrence required)."""
+    m=G15_T3_OLD.search(text); assert m and len(G15_T3_OLD.findall(text))==1,"G15 t3 outfit slot"
+    return text[:m.start()]+G15_T3_OPTB.format(main=main,sec=sec,motif=m.group(1))+text[m.end():]
 def store_check(pf, prompt, args):
     """STORE GATE (owner Lượt 371/373/375), unchanged logic: -> list of (best, sentence) missing/rewritten."""
     B=os.path.join(ART,'t8-prompt-B')
     store=subprocess.run(['python3','build.py']+args,cwd=B,capture_output=True,text=True).stdout
+    m=G15_T3_OLD.search(store)
+    if m:   # G15: the t3 design words must be option B (main/secondary = any words, motif = the store's motif), never the old t3 design
+        rx=re.escape(G15_T3_OPTB).replace(re.escape('{main}'),'(.+?)').replace(re.escape('{sec}'),'(.+?)').replace(re.escape('{motif}'),re.escape(m.group(1)))
+        store=store[:m.start()]+store[m.end():]
+        if not re.search(rx,prompt): return [(0,'G15 Quý nhân t3 option-B outfit words missing (dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt)')]
     sp=lambda s:[x.strip() for x in re.split(r'(?<=[.;])\s+',s) if len(x.strip())>12]
     P=sp(prompt); bad=[]
     for s in sp(store):
@@ -626,6 +669,7 @@ def scope_from_store_args(args):
     pre = "pr" if person in ("p01", "p02", "p03", "bt", "cl", "pt") else "tp"
     if "--state" in args:
         st = args[args.index("--state") + 1]
+        if re.fullmatch(r"tm[0-4]", st): return st   # K15/X14 (Lượt 529): cung nữ / nữ quan states get their own scope token
         return {"mama": "mama", "nude": "nude"}.get(st, "state:" + st)
     if "--nude3" in args or "nude" in args: return "nude"
     if "--low" in args: return f"{pre}{int(args[args.index('--low') + 1])}"
@@ -647,12 +691,23 @@ def best_overlap(sentence, text):
     return best
 
 
+_KC_FACES = None
+def _strip_kc_faces(text):
+    """remove every exact KC_REFS face_words string (owner-approved identity words, ART_RULES B8) from the text used for the BANNED scan only."""
+    global _KC_FACES
+    if _KC_FACES is None:
+        import json
+        P = json.load(open(os.path.join(ART, "KC_REFS.json"), encoding="utf-8"))["people"]
+        _KC_FACES = [norm(p["face_words"]) for p in P.values() if p.get("m09_ok") == "yes" and (p.get("face_words") or "").startswith("Her face: ")]
+    for f in _KC_FACES:
+        if f in text: text = text.replace(f, " ")
+    return text
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail)."""
     if S is None: S, X = load_registry()
     text = norm(text); fails, warns, found = [], [], {}
     for e in S:
-        req = scope in parse_scope(e["scope"]); conf = scope in parse_scope(e.get("confirm", ""))
+        req = e["scope"] == "any" or scope in parse_scope(e["scope"]); conf = scope in parse_scope(e.get("confirm", ""))   # 'any' = every prompt of every scope (D9)
         if not (req or conf): continue
         if skip_store and e.get("store"): continue   # already enforced by the STORE part (same prompt, store args)
         ages = (e.get("ages") or "all").split()
@@ -662,6 +717,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
         ov = best_overlap(e["text"], text)
         item = (e["id"], "REWRITTEN" if ov >= 0.6 else "MISSING", f"{e['title']} (best overlap {ov:.0%})")
         (fails if req else warns).append(item)
+    text = _strip_kc_faces(text)   # B8 (BW3): the owner's verbatim KC face words are approved as a whole: never scanned for banned phrases (m13 "PHOENIX eyes" = eye shape, not the X08 motif; m43 "covering the teeth completely")
     for x in X:
         if scope not in parse_scope(x["scope"]): continue
         if x.get("unless") and x["unless"] in found: continue
@@ -786,7 +842,7 @@ def registry_md():
        "ledger line carries \"store_check\":\"PASS\" and \"approved_check\":\"PASS\". Audit: dev/art/APPROVED_AUDIT.md. Owner sheet: dev/handover/review-sheets/approved/.","",
        "Scopes: `tp1-8` thường phục rank (consorts c01–c32, m01–m52) · `pr1-8` princesses p01–p03 · `trieu1-8` triều phục · `mama` · `nude` Nữ đế · `all`. "
        "`scope` = REQUIRED (missing → FAIL); `confirm` = owner still to confirm there → WARN only. `store: yes` = a store sentence, already demanded by the store part when the prompt is checked with store args.","",
-       "Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as a whole** — sheet sent for her one-time OK.","","## Sentences (S)",""]
+       "Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as a whole** — sheet sent for her one-time OK.","","**NEW CHARACTER (owner Lượt 555):** the only new-person prompt = `dev/art/NEW_CHARACTER_TEMPLATE.md` (set B: COMMON_v3 + mNN.v3 line, ONE ref M09 eIyOFEidqL). RETIRED, never approved sentences: COMMON v1/v2 (dev/art/_retired/face-common/), style-image sentences for 6AbGv6EiJO / style2_portraits / style3_girls Xm9tPkMBfo, kc2k / khuê các 18/11 recipes, the 'new-character style sentence', one-ref from img/hd/fig-*-t1.","","## Sentences (S)",""]
     for e in APPROVED:
         L+=[f"### {e['id']} · {e['title']}",f"- text: `{e['text']}`",f"- scope: {e['scope']}",f"- confirm: {e['confirm'] or '-'}",f"- ages: {e['ages'] or 'all'}",
             f"- store: {'yes' if e['store'] else 'no'}",f"- luot: {e['luot']}",f"- source: {e['source']}",f"- proof: {e['proof']}",f"- picture: {e['picture']}",f"- vn: {e['vn']}",""]
