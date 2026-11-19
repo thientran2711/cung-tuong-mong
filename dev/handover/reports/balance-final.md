@@ -121,3 +121,18 @@ Worktrees on this box (lost on a new session): /home/user/wt/mg2 = 0281bbf7, /ho
 START_CTX ≈ 4 % of 1M (get_session reads 0, so this is an estimate) → rollover at 29 %, ceiling 60 %. Depth 6.
 PRIORITY #1 CHECK ('balance final'): OD 0 | ledger 0 | claims 0 (this job) | main 0 | review/balance-final 0281bbf7 = this branch.
 - 03:50Z: worktree /home/user/wt/bf3 = 0281bbf7. Step 1: night-final / night-multi flakes.
+- 05:05Z: **night flakes fixed** → 4c2f9683 (pushed). Found with a case-repeat harness (each night-final case / night-multi sequence run 20–46×). Causes and fixes:
+
+| # | cause (seen as) | fix | kind |
+|---|---|---|---|
+| 1 | jmoodknow's "Tin trong cung" news runs after EVERY endTurn, also jnf's held one at the flip: the choice stayed "wait" behind it, so her summons (ksp) was answered first and the defence/attack choice never came (nf 2/4/7, nm 5/6) | jnf step: a kind:"news" card never holds the choice back; showChoice puts nfch at the queue FRONT (no dialog may cover the flip choice, night-final #4) | game (jnf) |
+| 2 | another dialog queued at the flip (a visitor «Có người tìm đến») goes first by design, but the flip's own summons sat IN FRONT of it and was answered before the choice → her night played without the choice (nm 5) | jnf pullKsp: while other dialogs go first, ksp/prep leave the queue and come back after the choice (x.ksp), as openChoice already does | game (jnf) |
+| 3 | kmReset drops queued card-flip scenes whose done() never runs → cfBusy() stuck true → in bot mode the choice never shows (nf 8 after nf 7) | jflip: kmOnReset → CFN = 0; tests: T.fresh calls kmReset | game (jflip) + test |
+| 4 | the forced flip went to nobody / someone else: AG3 maid pool (jagmaid empPick, `k:"maid"`), jemoact mood noFlip, jmind mindPick slip (random candidate) (nf 2/8, nm 6) | T.only also sets BAL.ag.maid.ch.cap 0, window.__eaOff, BAL.mind.slip 0 (night-multi) while the flip is forced, restored after | test |
+| 5 | a dialog queued by nextBuoi as tối ends held the commit back, so T.flipTo's steering was undone before the real flip (nf 2/7) | T.flipTo answers it and ends tối again, still steered; T.toChoice / T.pass answer the dialogs that go first before the choice | test |
+| 6 | case 8: his forced visit (chance 100) still missed: roll() caps at BAL.odds.hi; world events / his illness also block it | case 8 lifts odds.hi to 100, world off, emp.ill null for the case (it tests ORDER, not odds) | test |
+| 7 | T.fresh sometimes gave < 2 rivals on the tray (crash `findIndex`/`.id` of undefined) | T.fresh re-rolls the life until ≥ 3 rivals can serve | test |
+| 8 | case 1 read khắc after the bot answered an evening dialog that costs a khắc; case 2's seeded win roll was drawn by another call first | k0 read as tối starts; seq of 4 wins | test |
+Tried and dropped: AG day loop off for all cases (the flip then often picks nobody — as #2 found).
+Result on 4c2f9683, idle box: **night-final 8/8, night-multi 8/8** (+ harness: 46 nf cases, 20 nm sequences clean).
+- 05:20Z: merged origin/main fd6118c (maid-ladder-6, art-wiring-1119) → **242f7f3e** (pushed): assemble list = main's + jbalcore/jledger/jnf (357 modules); j2 S init = ours (origSet BAL.start) + main's lad6; index/sw rebuilt. Static guards PASS (one-core-guard / bind / text / text-rule, time-spill). Browser gates running.
