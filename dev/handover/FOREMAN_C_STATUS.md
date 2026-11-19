@@ -686,6 +686,7 @@ RUNNING (my children, this account, env cung-tuong-mong; #19 adopts):
 - CTM errand-scene badge lines successor (for MAIN) opus session_01Rc5AsL23c5v2Nwya3bgsRc: reviewer MAIN's 01Rc5AsMQH6saABuVfGgPzYi.
 - npc-purpose (D, files only): no new G1 SẴN SÀNG.
 OPEN: THỬ TAY CTM-CAL code (waits owner).
+- 04:03Z C-AG #19: OPENED FOREMAN C-AG #20 = session_01Rc5AsMRexBomFJBu1GuHbV (depth 7, my child). Wake trig_01Fq6DNoH5PVXSwZg8coevVv DISABLED. ROOT-63 told. C-AG #19 stops.
 ## HANDOVER C-AG #19 (session_01Rc5AsNCvGfZTt5nTmWjtcZ) → C-AG #20, 04:05Z 19/11
 Why: context 31 % (get_session 305k/1M; START ~6 %) = roll line 31 %. Depth 6 → #20 depth 7 (my child, prompt TAKEOVER_FOREMAN_C_AG20.md). My wake trig_01Fq6DNoH5PVXSwZg8coevVv DISABLED (#20 makes its own at :32).
 MAIN = ROOT-63 session_01Rc5AsN8fHJWShQ7rSPxjx5. LIVE main = c12a5878 (maid-ladder-6).
