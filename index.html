@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2b5288f9+","t":"2026-11-19T07:19Z","c":"review coop-thin-f3 r1: merge review/coop-thin-f3 abb9a6a6 + origin/main 5dc5d9e0; generated files rebuilt","b":"2ab6c925c953","h":[{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"},{"s":"360c0edd+","t":"2026-11-19T03:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f"},{"s":"cbacdb55+","t":"2026-11-19T03:45Z","c":"art-wiring-1119 r2: fix review r1 FAIL 1+2"},{"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them"}]};
+window.CTM_BI={"s":"7fd3c08a+","t":"2026-11-19T08:25Z","c":"review coop-thin-f3 r1 fix: her F3 act sounds play on her phone (kitSfx in TH UICAP)","b":"b2ab894df216","h":[{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"},{"s":"360c0edd+","t":"2026-11-19T03:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f"},{"s":"cbacdb55+","t":"2026-11-19T03:45Z","c":"art-wiring-1119 r2: fix review r1 FAIL 1+2"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -6114,8 +6114,8 @@ Object.assign(BAL,{
  ngocboiSung:15,           /* the Ngọc bội ngự ban keeps its owner's Sủng from falling below this (j8; item text, jinv) */
  sinhThanSung:50,          /* her birthday is bestowed only when Sủng is at least this (j20; ban thưởng list) */
  m30:{tocaoEv:1,exposeEv:2,xinhhAff:40},     /* j30: chứng cứ for «Tố tội thật» / «Bóc chuyện tư tình»; Hoàng hậu thiện cảm for «Xin Hoàng hậu giáng» */
- srvx:{tinOut:10,keepTin:60,secNeed:2,friendAf:30}, /* cung nữ road (j42): Chủ tin below tinOut = sent to Tân Giả khố; from keepTin the chủ keeps her past
-                           the age; secNeed = secrets of the chủ she must know to betray; friendAf = quý from which a colleague counts as a friend */
+ srvx:{tinOut:10,keepTin:60,secNeed:2,friendAf:30,colN:10}, /* cung nữ road (j42): Chủ tin below tinOut = sent to Tân Giả khố; from keepTin the chủ keeps her past
+                           the age; secNeed = secrets of the chủ she must know to betray; friendAf = quý from which a colleague counts as a friend  colN = rows in her Đồng liêu list (j42 srvColleagues: her palace first, then friends, ill-wishers, the rest). */
  virx:{hanhCap:80,camSung:40},               /* j85: Hạnh bậc 3 monthly Đức +1 stops at hanhCap; Cầm bậc 5 cheers the Emperor when Sủng is at least camSung */
  tsx:{empSung:30,denSung:20},                /* jts: at a birth the Emperor bestows when Sủng is at least empSung; he sees the lake lantern from denSung */
  sucNeed:{self:25,wk:15,rcp:10,kid:5,yKid:15}, /* Sức an act needs (the lock, its «Sức dưới N» word and the act's own check read the same key): self = «Tự học»
@@ -6868,7 +6868,14 @@ const SRVA={
 function srvCa(k,a,m){const c=SRVA[k].c;return typeof c==="function"?c(a,m):(c||{})}
 function srvWa(k,a,m){const w=SRVA[k].w;return typeof w==="function"?w(a,m):(w||{})}
 function srvAf(s,n){S.srv.af[s.sid]=cl((S.srv.af[s.sid]||0)+n,-100,100)}
-function srvColleagues(){const m=srvM();const L=(m&&m.staff||[]).slice();for(const sid of S.srv.met||[]){const s=servById(sid);if(s&&!L.includes(s))L.push(s)}return L.slice(0,10)}
+/* role-parity-drift (19/11, law 1): the list shows 10 people; with live servants she meets many more at places (S.srv.met grows), and a friend met
+   late fell past the 10th row — «Nhờ dò tin» / «Trò chuyện» / «Biếu quà» with her were gone for the player while an NPC maid asks any friend.
+   Same 10 rows, ordered: her own palace first, then the people she knows by liking (friends before strangers), so a friend is never pushed off. */
+function srvColleagues(){const m=srvM();const L=(m&&m.staff||[]).slice();const af=(S.srv&&S.srv.af)||{};const M=[];
+ for(const sid of S.srv.met||[]){const s=servById(sid);if(s&&!L.includes(s)&&!M.includes(s))M.push(s)}
+ /* review r1 (law 6a): a plain liking sort put every ill-wisher (af<0) last, so past 10 rows srvFramedEvent («Bị vu oan», picks from af<0 here) never fired.
+    Groups: friends (from BAL.srvx.friendAf) → ill-wishers → the rest; inside a group the stronger tie first; ties keep meeting order (stable sort). */
+ const gr=s=>{const v=af[s.sid]||0;return v>=BAL.srvx.friendAf?0:v<0?1:2};M.sort((a,b)=>gr(a)-gr(b)||Math.abs(af[b.sid]||0)-Math.abs(af[a.sid]||0));return L.concat(M).slice(0,BAL.srvx.colN)}
 function srvFriendList(){return srvColleagues().filter(s=>(S.srv.af[s.sid]||0)>=BAL.srvx.friendAf)}
 function srvMax(){const m=srvM();return m?srkMax(m,{role:"maid"}):BAL.srvRk.dai}/* no master: the lowest cap (nhất đẳng), maid-ladder-6 r1 */
 function srvToast(msg){if(window.__bot)return;let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}t.onclick=()=>t.classList.remove("on");
@@ -79138,7 +79145,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2ab6c925c953";window.CTM_BUILD=BUILD;
+const BUILD="b2ab894df216";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
