@@ -342,3 +342,4 @@ LESSONS: (1) grep the WHOLE STATUS each wake — the RARE-REACH ORDER was insert
 - (19/11 10:40Z) FROM MAIN ROOT-68: LIVE main = 6b1ab390 (kit-head-say: K-HEAD-SAY speech bubbles kit part, font floor 10.5). ROLLBACK d9b32074. Final-merge 6b1ab390 before any LAND READY.
 - (19/11 10:46Z) FROM MAIN: main is now ROOT-69 session_01Rc5AsMesCGqrqL1dGjCJXv (depth 7). Send every report / SẴN SÀNG / LAND READY to ROOT-69. LIVE 6b1ab390, ROLLBACK d9b32074.
 - (19/11 10:52Z) FROM MAIN ROOT-69: LIVE main = 2481c80d (ev-pic-followups: EVENTS.json wildcard keys, kszOver3 scroll owner). ROLLBACK 6b1ab390. Final-merge 2481c80d before any LAND READY.
+- (19/11 11:31Z) FROM MAIN ROOT-69: LIVE main = edb2e724 (opt-scroll-reset: option frames keep scroll on re-render). ROLLBACK 2481c80d. Final-merge edb2e724 before any LAND READY.
