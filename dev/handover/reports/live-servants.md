@@ -246,3 +246,6 @@ After merging 9a1d692 quickcheck G4 coop-one-world failed seed 3 (3/3 on the bra
 | seeded diff of the perf cut | 0 (3 × 40 buổi, K=4) |
 | coop-e2e | BLOCKED = sandbox only (co-op Worker host, proxy 403); no jcoop* file touched; j95s / picker / S.knw off in co-op (j95on false) |
 Shots (scratch only, looked at; not in git): Fold 755x1000 + iPad 1180x820, picker with 6 people (CDN on, before / after taps): no picture, rows GHI CHÚ / CẦN / THÀNH / BẠI, "Thôi" = the kit ✕. Repro: /home/user/wt/ls4x/pickn.js (container only).
+
+
+## REVIEW r2 VERDICT (reviewer opus, 19/11 ~01:40Z): PASS — LAND READY 55e806b1 (review/live-servants-r2 = 797f87e + final merge origin/main bb8e8ec9 + reviewer ag-know NPC-case test fix). All 8 items fixed; perf buổi median +7.2 % (≤ +10 %). coop-e2e BLOCKED = sandbox 403 only, no co-op sync change. Details: reports/review-live-servants.md § RE-CHECK r2.

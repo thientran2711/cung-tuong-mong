@@ -37,3 +37,23 @@ Read: 18 LAWS + START_CORE / START_WORKER / START_REVIEWER, brief live-servants.
 
 Shots (scratch only, not in git; looked at): Fold 755x1000 picker top / list / bottom, iPad 1180x820 picker top.
 Next: worker fixes 1–8 on review/live-servants (merge newest origin/main first), re-runs live-servants.test, quickcheck, ag-* (ag-carry 10/10), perf ×10 interleaved, Fold + iPad shots, then SẴN SÀNG KIỂM again.
+
+
+## RE-CHECK r2 — 797f87e (LIVE-SERVANTS #4) — reviewer opus session_01Rc5AsKp5X8AnT5HJ7WoyXK, 19/11 ~01:40Z
+PRIORITY #1 CHECK: same as above + C-AG #17 order 00:33Z | main 8113f42e → bb8e8ec9 (final-merged) | review/live-servants @ 797f87e → review/live-servants-r2 @ 55e806b1 | claims LIVE-SERVANTS #4.
+### VERDICT: PASS — LAND READY 55e806b1 (review/live-servants-r2; origin/main bb8e8ec9 is its ancestor → fast-forward)
+Reviewer commits on r2: 16de85fd final merge 8113f42e (assemble.py conflict: main's list + j95s.js after jagstaff.js; site rebuilt) · 8161fa8c ag-know test fix (below) · 55e806b1 final merge bb8e8ec9 (only index.html/sw.js; rebuilt by build_site.sh).
+| item | re-check |
+|---|---|
+| 1 raw deed keys | FIXED as a family: one act word j95sActW (ACT95 → J95S_DW servant deeds → AGACTW → "lo việc riêng", never a key) used by j95sNotFree, j95sWhy, j95here / j95whereId, j95table, rlog words, roster.js. Fold shot: "đang quét dọn trong cung". live-servants-words.js: keys 333 raw 0 · rows 10 192 raw 0 · roster runs 216 raw 0 |
+| 2 Đi một mình | FIXED: THÀNH "việc ta làm bên ngoài được giữ kín · mọi người ở lại trông cung", BẠI "không ai thấy giùm ta" (Fold + iPad) |
+| 3 kèm misuse | FIXED: every person row = neutral Ghi chú "(cung nữ, lòng 78, đang ở cung và rảnh)"; greyed reason only in Cần |
+| 4 picture / law 10 | FIXED: act-picker frame (KIT_ACT_PIDS "entpick"), no picture, no speaker; list scrolls inside the kit options box with the kit "Kéo xuống" hint; kitEvArt guessed evId dropped before render + KIT REQUEST filed (non-blocking) |
+| 5 ag-carry | FIXED: seeded 3 lives × 16 days, §5 per-life correctness + carry > 0 over the lives (not weakened); 10/10 + 1 on the final sha green (26/26) |
+| 6 law 4 | FIXED: BAL.slv.ent.mood {v,lv} + lv {min,close,def,unit} |
+| 7 day 0 / wording | FIXED: no "ngủ bù" on day 0 (slept && d>0); "khắc 1" when the turn is 1 khắc |
+| 8 perf (ruling (a) ≤ +10 %/buổi) | PASS: ag2perf-probe 24 buổi × 4 khắc, CPU 4x, 10 interleaved pairs vs live 8113f42e: buổi step median +7.2 %, mean +4.9 %, whole buổi (4 khắc + step) +6.1 %; khắc mean +18.8 %, median +56.4 % (accepted feature cost), p95 −11.9 %. quickcheck smoke ×4 on r2: buổi new/live 1013/1202 · 1868/1075 · 1011/838 · 1118/1389 ms (direction flips = noise, unthrottled), tasks>200 ms 17/18 · 18/17 · 17/17 · 20/18 |
+| out-of-scope j43 (drop empty v.bel after decay) | right and minimal: every reader guards (`if(!v.bel)continue`, `v.bel&&…`, belOf recreates); fixes G4 coop-one-world seed 3 |
+REVIEWER FIX (same family as item 5 / the worker's §3 fix, law 11): ag-know "ONE RULE (NPC)" failed on the branch only (2 of 8 runs; live 0 of 5): a consort's close maid also knows only where her row stands now → the case plants her row at the garden (restored after), exactly like §3. After: 0 of 8. Remaining ag-know flakes "TIN BÁO API item fields null" / "8 khắc chain" are PRE-EXISTING on live main too (live 2 of 5 runs) — not this branch; noted for MAIN.
+GATES on the final sha 55e806b1: quickcheck PASS ×3 (own build, core gates one-core-guard · rules-one-source · kit-conform · coop-one-world · hooks; time-spill; old save loads + plays) · live-servants.test (3 lives) PASS · live-servants-words PASS · ag-carry 26/26 · ag-all 21/21 · (on 16de85fd, same code but bb8e8ec9's kit/pdlg files) ag-* 14/14 apart from the pre-existing ag-know flake · Fold 755x1000 + iPad 1180x820 picker shots looked at on both shas (scratch only, deleted).
+coop-e2e: BLOCKED = sandbox only (co-op Worker host refused by this env's proxy). No co-op sync change left untested: the branch touches no jcoop* file; j95s / picker / S.knw are off in co-op (j95on false); the one co-op-related change (j43 empty bel) is covered by quickcheck G4 coop-one-world PASS.
