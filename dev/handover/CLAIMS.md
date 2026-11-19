@@ -234,3 +234,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | ge-writers-w3 BIG review (opus E11r-w3; cb72b507) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWn2u8M4jdAipxwpiJf | RUNNING | 19/11 04:52Z |
 | kyngo-daily (Kỳ ngộ thường ngày design + build, opus E18) | review/kyngo-daily | E ROOT #8 | session_01DgYSWnqwrFPkcU8D76tS79 | RUNNING | 19/11 04:53Z |
 | palace-chatter line banks (sonnet E17b, under E17) | review/palace-chatter-lines | E ROOT #8 | session_01DgYSWnyBgE1MomXSwtCiXz | RUNNING | 19/11 04:58Z |
+| seal-lean-2 big slow lean-in + real video (sonnet; OD 05:05Z) | review/seal-lean-2 | ROOT-63 → ROOT-64 | session_01Rc5AsHrbnHixrk74QyLYuV | RUNNING | 19/11 04:58Z |
