@@ -39,6 +39,16 @@ OLD_HL = ("Hair (HAIR LAW, ranks 1-3): her hair in a HALF-UP style: the top half
           "the court crown, the rest of her long hair hanging loose down her back.")
 
 
+HOT = {1: 'plain polished wood', 2: 'fine lacquered wood', 3: 'bamboo-ivory', 4: 'ivory',
+       5: 'carved ivory with a thin gold edge', 6: 'white jade', 7: 'white jade with gold mounts and small gems',
+       8: 'the finest imperial jade, framed in gold, with a carved phoenix and jewels'}
+POSE = ("Pose: calm, solemn standing pose facing the viewer; she holds the court tablet, the hốt (笏), of {mat}: a long, "
+        "narrow, flat tablet, slightly curved at the top, held upright in both hands in front of her chest, the whole face "
+        "fully visible.")
+HANDS = ("Her hands and body: both hands hold the hốt upright at chest height, one hand above the other on its lower half, "
+         "its top just below her chin, never covering the face.")
+
+
 def rep(t, a, b):
     assert t.count(a) == 1, a[:60]
     return t.replace(a, b)
@@ -60,6 +70,12 @@ def build(n):
         add = habi + ' ' + HAIR + ((' ' + BODIEU) if n >= 7 else '')
         anc = ' Image 4 is the Nữ quan' if n == 6 else ' Image 3 is the Nữ quan'
         t = rep(t, anc, ' ' + add + anc)
+    # Lượt 415: the hốt replaces the everyday item and its pose (owner-named swap)
+    import re
+    m = re.findall(r'Pose: calm standing pose; [^.]*\.', t); assert len(m) == 1
+    t = rep(t, m[0], POSE.format(mat=HOT[n]))
+    m = re.findall(r'Her hands and body: [^.]*\.', t); assert len(m) == 1
+    t = rep(t, m[0], HANDS)
     return t
 
 
