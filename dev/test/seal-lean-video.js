@@ -20,6 +20,7 @@ async function open(b,dpr,rec){const ctx=await b.newContext({viewport:{width:W,h
   S.emo={k:'gian',v:70,why:'thử',t:null,w:0};S.emp.emo={k:'gian',v:70,why:'bị quần thần can gián',t:null,w:0};(S.nightLog=S.nightLog||[]).push(typeof emoW==='function'?emoW():0);
   S.met=S.met||{};const ks=['ghen','vui','buon','so','muu'];rivals.slice(0,5).forEach((v,i)=>{S.met[v.id]=1;try{k61Meet(v,'gặp',3)}catch(e){}v.emo={k:ks[i%5],v:60,why:'thử',w:0}});
   for(const m of (S.men||[]).slice(0,3)){try{k61Meet(m,'gặp',3)}catch(e){}m.emo={k:'so',v:60,why:'thử',w:0}}try{k61Meet(S.emp,'gặp',3)}catch(e){}render()});
+ if(process.env.GIAN3)await p.evaluate(b=>{KIT_EMOSEAL.anim=b},process.env.GIAN3);/* seal-lean-3 giận 3-part set: test-only base (the _review CDN folder), live img/kit/emo-anim untouched */
  await p.waitForTimeout(3000);
  await p.evaluate(()=>{window.__L=[];const ob=new MutationObserver(ms=>{for(const m of ms){for(const n of m.addedNodes)if(n.nodeType===1&&n.classList&&n.classList.contains('kemo-big')){const l={t:performance.now(),maxW:0,inside:true};window.__L.push(l);n.__l=l;
    (function tick(){if(!n.isConnected){l.end=performance.now();return}const r=n.getBoundingClientRect();if(r.width>l.maxW)l.maxW=r.width;l.inside=l.inside&&r.left>=-1&&r.top>=-1&&r.right<=innerWidth+1&&r.bottom<=innerHeight+1;requestAnimationFrame(tick)})()}
@@ -32,7 +33,9 @@ async function open(b,dpr,rec){const ctx=await b.newContext({viewport:{width:W,h
   cp.execFileSync('ffprobe',['-v','error','-show_entries','format=duration','-of','csv=p=0',`${OUT}/raw-${SZ}.webm`]);const dur=+cp.execFileSync('ffprobe',['-v','error','-show_entries','format=duration','-of','csv=p=0',`${OUT}/raw-${SZ}.webm`]).toString();
   cp.execFileSync('ffmpeg',['-y','-loglevel','error','-ss',String(Math.max(0,dur-SECS-1.5)),'-i',`${OUT}/raw-${SZ}.webm`,'-an','-c:v','libx264','-pix_fmt','yuv420p','-crf','23','-preset','fast',`${OUT}/full-${SZ}.mp4`])}
  /* seal-lean-3 (owner 19/11 ~07:25Z): the EVENT DIALOG take: every opening of the event dialog (.ksz3) plays the seal lean once; recorded full screen, dialog opened at the START of the kept part */
- {const {ctx,p,errs}=await open(b,1,true);await p.evaluate(()=>{window.__T0=performance.now()});await p.waitForTimeout(1500);const t0=Date.now();await p.evaluate(()=>{try{kitPopSample('event')}catch(e){console.error(e)}});await p.waitForTimeout(11000);
+ {const {ctx,p,errs}=await open(b,1,true);await p.evaluate(()=>{window.__T0=performance.now()});await p.waitForTimeout(1500);const t0=Date.now();await p.evaluate(()=>{try{kitPopSample('event')}catch(e){console.error(e)}});
+  if(process.env.GIANEV)await p.evaluate(()=>new Promise(res=>{let n=0;const t=setInterval(()=>{const e=document.querySelector('.ksz3 img.kemo.kfseal');if((e&&e.__fig)||++n>60){clearInterval(t);if(e&&e.__fig){try{const q=kfsPerson(e.__fig);S.met=S.met||{};if(q&&q.id)S.met[q.id]=1;try{k61Meet(q,'gặp',3)}catch(x){}q.emo={k:'gian',v:70,why:'thử',t:null,w:0};kitFigSeal(e.__fig)}catch(x){console.error(x)}}res()}},30)}));/* event take: the dialog person is made angry (a real mood, not a class hack), so her seal is the real giận seal */
+  await p.waitForTimeout(11000);
   log.event=await p.evaluate(()=>window.__L.filter(l=>l.end).map(l=>({secs:+((l.end-l.t)/1e3).toFixed(1),bigPx:Math.round(l.maxW)})));log.errsE=errs;const v=p.video();await ctx.close();await v.saveAs(`${OUT}/rawe-${SZ}.webm`);
   const dur=+cp.execFileSync('ffprobe',['-v','error','-show_entries','format=duration','-of','csv=p=0',`${OUT}/rawe-${SZ}.webm`]).toString();
   cp.execFileSync('ffmpeg',['-y','-loglevel','error','-ss',String(Math.max(0,dur-13.5)),'-i',`${OUT}/rawe-${SZ}.webm`,'-an','-c:v','libx264','-pix_fmt','yuv420p','-crf','23','-preset','fast',`${OUT}/event-${SZ}.mp4`])}
