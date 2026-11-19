@@ -1,5 +1,6 @@
 # POSES_30 — 30 standing poses in 3 groups (owner Lượt 495, 19/11 ~17:40Z; draft by ROOT-48, waiting owner OK)
 Rule: pose group follows RANK. LIVELY = t1 Đáp ứng, t2 Thường tại, t3 Quý nhân (young, energetic). MEDIUM = t4 Tần, t5 Phi (graceful, some movement). CALM = t6 Quý phi, t7 Hoàng quý phi, t8 Hoàng hậu (still, dignified).
+OWNER Lượt 501: robes hide legs/hips — describe liveliness in the UPPER BODY (hands, arms, sleeves, shoulders, head, torso, gaze); lower body = one short visible effect only (hem swinging / robe falling still). Leg/hip phrases below must be rewritten.
 Draw: seeded random per (person, rank) INSIDE the rank's group (FIGURE_GATE 12b); no repeat within one person; spread evenly across people. The 14 standing ANGLES stay a separate draw. Every pose keeps the held item really gripped and the face fully visible, head turning WITH the body.
 
 ## LIVELY (t1–t3)

@@ -578,3 +578,38 @@ POINT 1 FINDINGS (TP2, done, no gen): r20/t1 vs r21/t1 prompt diff (`diff <(tr '
 - So the darker read comes from (a)–(c): the light white-jade cuff accents became wide deep-celadon borders along both sleeve openings (much more dark green area on the figure), plus normal render variation from the changed text (same seed ≠ same picture once text changes). The colour words themselves were not changed.
 - Restoring the r20 t1 colour without breaking 8d (cuff = hà bí colour) is a conflict: ask ROOT-49 whether the hà bí/cuff green may be lighter on t1 only, or whether point 6's "fresher" wording is enough. Also confirm which picture is "the earlier approved t1" (r20 P3QXiOf42C→nVsuDuUYQD, or r18/r19).
 RECIPE for the successor: §29/§30 (refs, settings, check_store args `c06 v0 --low N --nostyle`, cut with images_remove_background, sheet script = 480x1080 cells on (244,239,229) with labels, cdn_sync with CLOUDFLARE_API_TOKEN=proxy-injected from a temporary img/ folder, then rm -rf img). Lượt 482: refs = c06's own picture (+ Nữ quan colour/cloth ref, + swatch on t6) — no style image. Build: add an r22/build_r22.py on top of r21 prompts (ADD/REPLACE only the listed items).
+
+## §32 — r22 t1/t2/t3/t5 (TP3, art worker of Foreman C ROOT-49; owner Lượt 492, FIGURE_GATE 8e, ART_RULES H5/H6/A17) — 19/11 — 6 gens + 4 cuts
+BUILD: `python3 dev/art/owner-copy/trieu/r22/build_r22.py`. Base = the r21/tN_c06_RAN.txt files, unchanged. t4 was NOT redrawn: Tần is OK, and its colour did not need point 6. t6, t7 and t8 are untouched. Refs, seed and settings are the same as r21: image 1 is TdU0vvvVNR and image 2 is s7IO0AUl8e, model gpt-2-6 at 1024x2304 2k, seed 7172, folder ba4aecfe, no transparentBackground, then images_remove_background. Store check: the same FAIL list as r21 on all four ranks (t1–t3: 1 owner-named sentence; t5: 3), nothing new.
+ROOT-49 DECISION used for point 1: "the earlier approved t1" = r20 nVsuDuUYQD. The cuff stays in the hà bí colour (8d), but only as a NARROW band at the sleeve end. The t1 green is made lighter and fresher.
+PROMPT DIFF vs r21 (A17; `diff <(tr '.;' '\n\n' < r21/tN) <(tr '.;' '\n\n' < r22/tN)`):
+- ALL four (point 6): in the COLOUR RULE, "neither too fresh nor too dark," → "a little FRESHER and brighter than before: clear, lively, fresh colours (tươi) but never loud or garish (đừng rực), never too dark, in the game's colour tone,". No hex code was changed except t1's hà bí colour.
+- t1 (point 1): the hà bí and cuff colour "a deep lustrous jade-celadon green like #6FA88A (the white-jade hue made much stronger, clearly jade, never white or pale)" → "a lighter, fresh lustrous jade-celadon green like #8DC2A2 (a clear soft jade green, lighter and fresher than a deep jade, never dark, never white or pale)" (2 places). The TP2 CUFF_X sentence (wide border along the whole sleeve opening) → CUFF_N "These cuff bands are only a NARROW band (about two fingers wide) at the very END of each sleeve, at the bottom of the hanging sleeve; NOT a wide border running along the whole sleeve opening: the sleeve opening edges stay the court red." + FIX1 (regen, see below).
+- t2 (point 2): + "ROBE BODY: the red robe body (front, sides and skirt) is embroidered with scattered gold-and-coloured silk-thread flowers, butterflies and small birds, spread over the whole robe body at the SAME density and spacing as the rank-4 (Tần) court robe, SMALL motifs, the robe body clearly embroidered, never bare." + FIX2 (regen).
+- t3 (point 3): + the same ROBE BODY sentence with "small-to-medium motifs, at least as much embroidery as the lower ranks, never sparse". The t3 CUFF_X sentence is kept (not listed).
+- t5 (point 4): + the ROBE BODY sentence, using "peonies, birds and butterflies … SAME density … as the rank-4 (Tần) court robe, but with LARGER motifs than the Tần robe: bigger, bolder flowers and birds covering the robe body as fully as the Tần robe, NOT many small motifs".
+- Motif size rises with rank: t2 SMALL < t3 small-to-medium < t4 (r21, no sentence) < t5 LARGER.
+FIX WORDS (added by TP3 after looking at the first gens; these are fault fixes, not owner points, flagged as in TP2's CUFF_X):
+- FIX1 (t1, after yiuXphzPW9: the robe body came out bare, unlike r20/r21, which breaks H6, and no cuff showed at the sleeve end): "ROBE BODY: small florets and butterflies scattered over the red robe body and skirt, as on the earlier approved version, the robe body never bare. The narrow cuff band in the hà bí green is clearly VISIBLE at the bottom end of each hanging sleeve."
+- FIX2 (t2, after iG5mITr3uK: flowers and birds appeared on the sleeves, but t2 sleeves must be plain under 8d): "The hanging sleeves themselves show NO flowers, NO birds and NO butterflies: plain red brocade; the scattered embroidery is ONLY on the robe body and skirt."
+- First-try prompts: r22/superseded/.
+GENS (→ cut):
+- t1 yiuXphzPW9 FAIL (bare robe body) → lJt0Vrvgv9 (FIX1) → 5jDZzRnKxe
+- t2 iG5mITr3uK FAIL (embroidered sleeves) → 9ZH8t41NYZ (FIX2) → jUoYTWuLD0
+- t3 CqnPOI6EEy → xSBncLojfW
+- t5 0eUbqLqTfW → vQAJPENa47
+LOOK (full size):
+- t1: jade bands lighter and fresher, close to r20; small florets and butterflies on the robe body; reads like r20.
+- t2: deep jade bands; small flowers, birds and butterflies over the robe body and skirt; sleeves plain.
+- t3: clearly more robe-body embroidery than t1 (lotus and peonies on the skirt, hem border), close to Tần; sapphire a little fresher.
+- t5: big peonies and birds on the robe and sleeves at about Tần coverage, fewer and larger motifs than r21; violet fresher.
+FAULTS:
+- (1) t1: no distinct narrow green band shows at the bottom of the hanging sleeves. Only the short florets bands at the wrists read as cuffs. The sleeve hems are red, which avoids the r21 darkness, but the 8d cuff is weak. The regen cap was reached.
+- (2) t1 r22 has no embroidered hem border on the skirt (r20 had one).
+- (3) t3: a few small butterflies and a bird appear on the sleeves (t3 sleeves should be plain); not regenerated (cap).
+- (4) t2 and t3 robe-body coverage is still a little below t4 Tần.
+- (5) Sleeves still end above the ankle on t1–t3 (as in r20 and r21).
+CREDITS r22: 828 (6 gens × 135 + 4 cuts × 3; the 2 first tries were not cut).
+CDN: img/_review/trieu-phuc/r19/c06_a18_trieu22_t1/t2/t3/t5.png + c06_sheet22.jpg. The sheet is 10 cells: r20 t1 | r21 t1 | r22 t1 | r21 t2 | r22 t2 | r21 t3 | r22 t3 | r21 t4 (kept, density ref) | r21 t5 | r22 t5. Repo copy: dev/handover/review-sheets/trieu-phuc/c06_sheet22.jpg. Ledger: 6 lines.
+STOP after this round (ROOT-49). No handover needed: TP3 finished inside its context budget.
+TIMING NOTE (TP3): ROOT-49's "owner paused drawing — HOLD" message was queued at 17:42:45Z but only reached TP3 after the push. The first 4 gens (17:40:45Z) were made before it. The 2 regens (t1 lJt0Vrvgv9, t2 9ZH8t41NYZ, 17:44:25Z) and the cuts were made AFTER the pause was queued, without TP3 knowing (270 + 18 credits). TP3 is now on HOLD. Ledger times have been corrected to the real creation times.
