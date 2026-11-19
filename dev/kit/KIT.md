@@ -99,23 +99,23 @@ Kit core: `j15` (person card, pager, buttons), `j17` (effect lines), `j19` (act 
 - risks are on their own red line labelled `kèm` (`.kl` label + `.ef.r`), never mixed into the gain line.
 - result toast deltas use the same `.ef g/r` spans (`resultShow`).
 
-### 1.3 ONE rank palette (harem + servants + roles) — `dev/build/j1.js` (owner 11/16 13:00Z "nhạt nhòa quá → tươi hơn")
+### 1.3 ONE rank palette B24 (owner Lượt 726/728: avatar frame/badge/halo, triều phục, rooms, any rank accent = the SAME colour per rank) (harem + servants + roles) — `dev/build/j1.js` (owner 11/16 13:00Z "nhạt nhòa quá → tươi hơn")
 The values are typed ONLY in j1: `RCOL` (8 ranks), `RCOL_COLD` (lãnh cung), `MRCOL` (maids), `ERCOL` (eunuchs), `KIT_ROLE` (non-rank roles). Nobody keeps a copy:
 read live `RCOL[rank]` / `KIT_RANK_COL[rank]` / `kitRankCol(rank|'cold')` (j60) / `kitServCol(role,rank)`. Used by: halo, ring, chips, card colour `--c`, portrait ground `.rk-c0..c7`,
-text tone. The TEXT tone on paper is DERIVED, never typed: `kitToneOf(base)` (jk4) = same hue, saturation kept ≥ .75 for vivid families, lightness lowered only until contrast ≥ 3.6:1
+text tone. B24 note: Quý phi's "small royal-yellow touch, less than t7" (B21) has no existing kit accent slot; not invented here (see report). The TEXT tone on paper is DERIVED, never typed: `kitToneOf(base)` (jk4) = same hue, saturation kept ≥ .75 for vivid families, lightness lowered only until contrast ≥ 3.6:1
 on parchment #fbf3e2 (jewel tones; plain text, no edge); `kitRankTone(title)` looks the title up in `KIT_RT` (title words → base colour read from j1) and applies `kitToneOf`.
 Portrait grounds `.rk-c0..c7` are generated from `RCOL` by the `kit-rk` style (jk4), not typed in CSS.
 
 | rank | name | base colour (RCOL) | family |
 |---|---|---|---|
-| 0 | Đáp ứng | `#b8862f` | champagne-bronze |
-| 1 | Thường tại | `#27b04c` | green |
-| 2 | Quý nhân | `#2d7ef0` | blue |
-| 3 | Tần | `#f0489a` | pink |
-| 4 | Phi | `#9b4ee6` | purple |
-| 5 | Quý phi | `#ee2a3f` | red |
-| 6 | Hoàng quý phi | `#ff7a10` | orange |
-| 7 | Hoàng hậu | `#ffc20a` | gold |
+| 0 | Đáp ứng | `#eae3d0` | cream-ivory (kem / trắng ngà) |
+| 1 | Thường tại | `#7fb394` | green (xanh lá) |
+| 2 | Quý nhân | `#7e9ccb` | blue (xanh dương) |
+| 3 | Tần | `#e3a3b8` | hồng phấn |
+| 4 | Phi | `#a88bcb` | purple (tím) |
+| 5 | Quý phi | `#e3a25b` | orange (cam) |
+| 6 | Hoàng quý phi | `#d46a64` | red (đỏ) |
+| 7 | Hoàng hậu | `#efbd69` | gold (vàng) |
 | cold | Lãnh cung | `#8fa3b8` | cool steel grey |
 
 Frame / gem / brocade art (`img/kit/frame-consort-N`, `gem-N`, `bg-consort-N`) are painted pictures per rank (see §3); they keep their painted look (re-painting them brighter is an art task, not a palette change).
@@ -3163,7 +3163,7 @@ merit invitation, opened for real and measured (layout, one person, banner in th
   7 amber-gold phoenix with spread wings (Hoàng hậu; owner 11/15 swapped 6↔7). Size factor `KIT_MEMARK.sc[r]` (0.78 → 1.22). Sheet dev/shots/me-mark/ranks8.jpg.
 - Where: her stage figure `#mefig` (any slot) and her figure in dialogs / event stages (`kitStageFig` adds `.kesme`). Never on anyone else.
 - STAGE SIZE (owner 18/11 ~06:15Z "chốt A1"; line: owner OD 19/11 ~02:05Z + ~03:50Z): on stages the marker stands ON the badge line of her sex (§78.y `kitMarkLine(st,sex)`: the highest REAL head top of the visible figures of that sex − G), on her centre line, level with every bubble of that line; `KIT_SLOTS.band` 70 and `KIT_FIG.h` .79 are unchanged; j59 `meCap` shrinks the one body H just enough that the men's standard line + bounce stay inside the frame (`kitMarkRoom`); when a crown / tall hat lifts the line past that room the marker shrinks (down to `KIT_MEMARK.tiny`), never sinks onto a head.
-- GLOW: `.kmemark` / `.kmmapmk` drop-shadow stack uses the Hoàng hậu title pill's gold (`--dh` = RCOL[7] #ffc400, jtitle kdh tier 8): white core + 3 halos 6/12/22 px.
+- GLOW: `.kmemark` / `.kmmapmk` drop-shadow stack uses the Hoàng hậu title pill's gold (`--dh` = RCOL[7] #efbd69, jtitle kdh tier 8): white core + 3 halos 6/12/22 px.
 - DIALOG placement rule (dialogs / event stages; stages use the row above): marker bottom = top of her head (first opaque row of the figure art, hair ornaments included) − `KIT_MEMARK.gap` (1.2 %)
   × her drawn figure height. Measured: iPad dialog 6.3 px on 524 px, 390 dialog 3.8 px on
   320 px (all = rule). Height 8.5 % of the figure × sc[r], 26–72 px; when the room above the head is short (dialog, scene title, plaques,

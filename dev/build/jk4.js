@@ -699,7 +699,7 @@ function kitToneOf(base,paper){const key=base+"|"+(paper||"");if(KIT_TONE_CACHE[
  if(typeof KIT_IMP==="string"&&base.toLowerCase()===KIT_IMP)return KIT_TONE_CACHE[key]=KIT_IMP;/* imperial yellow stays bright (owner 16:10Z) */
  let[r,g,b]=rgb(base).map(x=>x/255);const M=Math.max(r,g,b),m=Math.min(r,g,b);let l=(M+m)/2,s=0,H=0;
  if(M!==m){const d=M-m;s=l>.5?d/(2-M-m):d/(M+m);H=M===r?(g-b)/d+(g<b?6:0):M===g?(b-r)/d+2:(r-g)/d+4;H*=60}
- if(s>=.4)s=Math.max(s,.9);/* vivid families stay vivid; steel-grey stays grey */
+ if(s>=.4&&!(typeof RCOL!=="undefined"&&RCOL.some(c=>c.toLowerCase()===base.toLowerCase())))s=Math.max(s,.9);/* vivid families stay vivid; steel-grey stays grey; B24 rank colours keep their own soft saturation (same colour per rank, lightness-only darkening) */
  const hx=(H,s,l)=>{const f=n=>{const k=(n+H/30)%12,a=s*Math.min(l,1-l);return Math.round((l-a*Math.max(-1,Math.min(k-3,9-k,1)))*255).toString(16).padStart(2,"0")};return"#"+f(0)+f(8)+f(4)};
  let x=hx(H,s,l);while(cr(x)<3.6&&l>.04){l-=.005;x=hx(H,s,l)}return KIT_TONE_CACHE[key]=x}
 window.kitToneOf=kitToneOf;
