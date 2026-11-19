@@ -60,9 +60,12 @@ function inPage(arg){const {TRIES}=arg;const out={rows:{},err:[],pend:[]};
   return JSON.stringify([x.suc,x.bac,x.danh,x.duc,x.sung,x.ghen,x.preg,x.confined,x.out,x.ev,x.rl,x.aff,x.oan,x.af,x.loyal,x.inv&&x.inv.length])};
  
  const realOpts=m=>(m&&m.opts||[]).filter(o=>o&&o.n&&!/^(Thôi|Lui|Đóng|Đã hiểu)\b/.test(o.n));
- const run=(fam,k,a,t)=>{const q0=Q.length,c0=CH.length,t0=T(t),a0=T(a);let r="";SEED(11);
+ const run=(fam,k,a,t)=>{const q0=Q.length,c0=CH.length,t0=T(t),a0=T(a),p0=(S.rcvPend||[]).length;let r="";SEED(11);
   try{if(typeof k==="function")r=k(a,t);else if(fam==="tw")r=twDo(a,t,k,false);else if(fam==="act"){const A=ACT[k];if(!A.ok||A.ok(a,t))r=A.f(a,t)}else if(fam==="ag"){r=AGRUN[k](a,t,{k,vid:a===S?null:a.id,t:t===S?"me":t?"v"+t.id:null,id:a===S?"me":"v"+a.id,key:"rc"});if(LAND[k])LAND[k](a,t)}}catch(e){if(t)E(fam+":"+k,e)}
-  const nq=Q.slice(q0);Q.length=q0;const ch=CH.slice(c0).filter(c=>c.p&&c.p!==a&&typeof c.p==="object"&&c.n!==1);
+  const nq=Q.slice(q0);Q.length=q0;
+  /* her card may wait as the ONE notice (jrcv rcvCard → kitNotice, S.rcvPend) instead of a queued dialog: count it as her card too (reviewer #3: with
+     review/stage-here live the scan read every N→P card as AUTO) */
+  if(S.rcvPend&&S.rcvPend.length>p0){for(const it of S.rcvPend.splice(p0)){try{if(typeof kitNoticeDrop==="function")kitNoticeDrop(it.id)}catch(e){}const d=mkP(it.pid,it.pp);if(d)nq.push({pid:it.pid,t:it.title,opts:d.o})}}const ch=CH.slice(c0).filter(c=>c.p&&c.p!==a&&typeof c.p==="object"&&c.n!==1);
   const cards=nq.filter(m=>realOpts(m).length>=2);const acted=T(t)!==t0||T(a)!==a0||!!r||nq.length>0;
   const touched=t?acted:false;
   return{acted,touched,pc:cards.map(m=>(m.pid||m.t||"?")+"["+realOpts(m).map(o=>o.n.replace(/<[^>]+>/g,"").slice(0,24)).join("/")+"]"),nc:ch.map(c=>c.f+"("+c.n+")"),r:String(r||"").slice(0,80)}};

@@ -21,6 +21,7 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
  const {chromium}=require('playwright');const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  const r=await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;
+  /* the card checks read the queued dialog: the real kit notice (review/stage-here, live) is set aside here and checked on its own in (8) */window.__KN=window.kitNotice;window.__KND=window.kitNoticeDrop;window.kitNotice=undefined;
   const V=liveRivals(true).filter(x=>x!==S&&!x.out&&!x.coop);const a=V[0],t=V[1];const out={};
   /* (2) her card */Q.length=0;helpAsk(a,S);const card=Q[0];out.card=card?card.opts.map(o=>({n:o.n,x:o.x})):null;out.kw=[BAL.road.hp.kw.full,BAL.road.hp.kw.half,BAL.road.hp.kw.no,BAL.road.hp.kw.lk];out.kwCopy=BAL.rcv.kw!==undefined;
   /* (5) old save: pending card round trip */const ser=serQ();const de=deserQ(JSON.parse(JSON.stringify(ser)));out.save={pid:ser[0]&&ser[0].pid,n:de[0]&&de[0].opts.length};Q.length=0;
@@ -94,24 +95,29 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
  /* (8) round 4 (review RE-CHECK #2 FAIL 6): illMaid ordered maid · illAlly holder · her lender card · Kết giao law 2 · ONE NOTICE SYSTEM · scan UNREACHED */
  const r8=await p.evaluate(()=>{const V=liveRivals(true).filter(x=>x!==S&&!x.out&&!x.coop);const [a,t,u]=V;const out={};Q.length=0;const ik=Object.keys(WILL)[0];
   const strip=x=>{x.inv=(x.inv||[]).filter(e=>!WILL[e.k])};
+  /* her card: a queued dialog, or (kitNotice live, review/stage-here on main) the ONE notice — open the newest pending one (rcvOpen) */
+  const card0=()=>{if(Q[0])return Q[0];const it=(S.rcvPend||[]).slice(-1)[0];if(it){rcvOpen(it.id)}return Q[0]};
   /* illMaid: the trusted maid answers obey / refuse / tell (stf2Ord) — her maid and an NPC's */
   const O0=window.stf2Ord;const OM={me:{},npc:{}};window.stf2Ord=function(A,sv){const r=O0.apply(this,arguments);const w=A===S?OM.me:OM.npc;if(sv===A.maid)w[r||"null"]=(w[r||"null"]||0)+1;return r};
   for(let i=0;i<240;i++){const A=i%2?S:a;A.bac=5000;if(A.maid){A.maid.loyal=40+(i%6)*12;A.maid.spyFor=null}try{illBuy(A,"maid",ik)}catch(e){}A.illP=[]}window.stf2Ord=O0;out.maid=OM;
   /* illAlly: she as the holder gets the 4-answer card; an NPC holder draws all 4; she is in illAllies now */
-  for(const x of [S].concat(V))strip(x);S.inv.push({k:ik});affAdd(S,a,300);out.allies=illAllies(a).includes(S);Q.length=0;illBuy(a,"ally",ik);const c=Q[0];out.illCard=c?c.opts.map(o=>({n:o.n,x:o.x})):null;
+  for(const x of [S].concat(V))strip(x);S.inv.push({k:ik});affAdd(S,a,300);out.allies=illAllies(a).includes(S);Q.length=0;illBuy(a,"ally",ik);const c=card0();out.illCard=c?c.opts.map(o=>({n:o.n,x:o.x})):null;
   {const ser=serQ();out.illSave=deserQ(JSON.parse(JSON.stringify(ser))).map(m=>(m.opts||[]).length)}Q.length=0;strip(S);
   const IA={};for(let i=0;i<300;i++){strip(t);t.inv.push({k:ik});t.rl=t.rl||{};t.rl[a.id]=(i%9-4)*10;t.suc=80;t.bac=500;a.bac=500;window.__rcvN={};illBuy(a,"ally",ik,t);const id=["full","half","no","sab"].find(z=>window.__rcvN[z])||"?";IA[id]=(IA[id]||0)+1}out.illNpc=IA;strip(t);strip(a);
   /* her lender card (was a private 2-answer Q.push): 4 answers, saveable */
   a.inv=(a.inv||[]).filter(e=>!lxOf(e.k));const M=lxMiss(a);S.inv=S.inv.filter(e=>!lxOf(e.k));if(M.length){S.inv.push({k:lxKey(M[0],3),d:S.turn,u:BAL.ration.borrow.spare*2});lxFix(S)}
-  Q.length=0;lxBorrowCard(a,S).run();const lc=Q[0];out.lend=lc?lc.opts.map(o=>({n:o.n,x:o.x})):null;{const ser=serQ();out.lendSave=deserQ(JSON.parse(JSON.stringify(ser))).map(m=>(m.opts||[]).length)}Q.length=0;
+  Q.length=0;lxBorrowCard(a,S).run();const lc=card0();out.lend=lc?lc.opts.map(o=>({n:o.n,x:o.x})):null;{const ser=serQ();out.lendSave=deserQ(JSON.parse(JSON.stringify(ser))).map(m=>(m.opts||[]).length)}Q.length=0;
   /* Kết giao law 2: the yes carries «kết bè» Danh − ally.danh and the asker's foe's dislike (− f_2); the no Danh + ally.danh and the foe's + f_2 × half — her card and an NPC */
-  Q.length=0;oanAdd(u,a,80);rcvAsk("ally",a,S);const ac=Q[0];out.ally=ac?ac.opts.map(o=>o.x):null;out.allyFx=ac?ac.opts.map(o=>o.fx&&o.fx.danh||0):null;Q.length=0;
+  Q.length=0;oanAdd(u,a,80);rcvAsk("ally",a,S);const ac=card0();out.ally=ac?ac.opts.map(o=>o.x):null;out.allyFx=ac?ac.opts.map(o=>o.fx&&o.fx.danh||0):null;Q.length=0;
   {const fo=rcvFoe(a,t);out.foe=!!fo;const F=BAL.eff.j8.f_2,H=BAL.rcv.help.half,A2=BAL.rcv.ally;const D={};for(let i=0;i<300&&!(D.full&&D.no);i++){t.suc=80;t.bac=500;a.bac=500;t.danh=50;t.rl=t.rl||{};t.rl[a.id]=(i%9-4)*10;
     if(fo)affAdd(fo,t,-aff(fo,t));const f0=fo?aff(fo,t):0,d0=t.danh;window.__rcvN={};rcvAsk("ally",a,t);const id=["full","half","no","sab"].find(z=>window.__rcvN[z]);if((id==="full"||id==="no")&&!D[id])D[id]={foe:fo?aff(fo,t)-f0:null,danh:t.danh-d0}}
    out.allyNpc=D;out.allyWant={full:{foe:-F,danh:-A2.danh},no:{foe:Math.round(F*H),danh:A2.danh}}}
   /* ONE NOTICE SYSTEM: with window.kitNotice present her card waits as ONE notice (saveable S.rcvPend), its option row opens the card; no queued dialog */
   {const got=[];window.kitNotice=x=>{got.push(x);return x};window.kitNoticeDrop=()=>{};Q.length=0;S.rcvPend=[];rcvAsk("call",a,S);out.nt={n:got.length,q:Q.length,pend:(S.rcvPend||[]).length,go:!!(got[0]&&got[0].go),line:got[0]&&got[0].line};
    if(got[0]&&got[0].go){got[0].go();out.nt.open=Q[0]?Q[0].opts.length:0;out.nt.after=(S.rcvPend||[]).length}delete window.kitNotice;delete window.kitNoticeDrop;Q.length=0;try{document.getElementById('modal').hidden=true}catch(e){}}
+  /* the REAL kit notice (jnotice, on main): one «rcv» notice, no dialog, «Trả lời» opens the 4-answer card, S.rcvPend emptied */
+  {window.kitNotice=window.__KN;window.kitNoticeDrop=window.__KND;Q.length=0;S.rcvPend=[];const R={has:typeof window.kitNotice==="function"};if(R.has){rcvAsk("call",a,S);const L=kitNoticeList().filter(x=>x.kind==="rcv");R.n=L.length;R.q=Q.length;R.pend=S.rcvPend.length;
+    if(L[0]&&L[0].go){L[0].go();R.open=Q[0]?Q[0].opts.length:0;R.after=S.rcvPend.length;R.left=kitNoticeList().filter(x=>x.kind==="rcv").length}}out.real=R;window.kitNotice=undefined;Q.length=0;try{document.getElementById('modal').hidden=true}catch(e){}}
   return out});
  ok(r8.maid.me.obey>0&&(r8.maid.me.refuse||0)+(r8.maid.me.tell||0)>0&&r8.maid.npc.obey>0&&(r8.maid.npc.refuse||0)+(r8.maid.npc.tell||0)>0,'Sai cung nữ thân tín mua lén ngoài cung: the trusted maid answers obey / refuse / tell (stf2Ord) — her maid and an NPC\'s',r8.maid);
  ok(r8.allies&&r8.illCard&&r8.illCard.length===4&&r8.illCard[2].n==="Từ chối"&&r8.illCard.every(o=>/được:/.test(o.x)&&/mất:/.test(o.x)),'Xin đồng minh: she is a holder (illAllies), an NPC asking HER gets her 4-answer card, every answer gain AND cost',r8.illCard&&r8.illCard.map(o=>o.n));
@@ -120,6 +126,7 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
  ok(r8.lend&&r8.lend.length===4&&r8.lend[2].n==="Từ chối"&&/Sức -\d/.test(r8.lend[1].x)&&/bị nhìn thấu/.test(r8.lend[1].x)&&r8.lendSave[0]===4,'Mượn son phấn: her lender card = the 4 answers (RCVK, qua loa Sức + risk), saveable',r8.lend&&r8.lend.map(o=>o.n));
  ok(r8.ally&&/kết bè: Danh -\d/.test(r8.ally[0])&&/Danh \+\d/.test(r8.ally[2])&&r8.allyFx[0]<0&&r8.allyFx[2]>0&&(!r8.foe||/kẻ đối đầu/.test(r8.ally[0])),'Kết giao law 2: «nhận lời» costs Danh (kết bè) + the asker\'s foe\'s dislike; «từ chối» gains Danh + the foe\'s regard (her card)',r8.ally);
  ok(r8.allyNpc.full&&r8.allyNpc.no&&r8.allyNpc.full.danh===r8.allyWant.full.danh&&r8.allyNpc.no.danh===r8.allyWant.no.danh&&(r8.allyNpc.full.foe===null||r8.allyNpc.full.foe===r8.allyWant.full.foe&&r8.allyNpc.no.foe>=r8.allyWant.no.foe&&r8.allyNpc.no.foe<=2*r8.allyWant.no.foe),'Kết giao law 2: an NPC receiver pays / gains the same numbers (BAL.rcv.ally, f_2; a liking GAIN is scaled by the foe\'s own nết / mood, j28 / jfeel — one rule both ways)',{got:r8.allyNpc,want:r8.allyWant});
+ ok(!r8.real.has||(r8.real.n===1&&r8.real.q===0&&r8.real.pend===1&&r8.real.open===4&&r8.real.after===0&&r8.real.left===0),'ONE NOTICE SYSTEM (the REAL jnotice kitNotice when present): one notice, no dialog, «Trả lời» opens the 4-answer card',r8.real);
  ok(r8.nt.n===1&&r8.nt.q===0&&r8.nt.pend===1&&r8.nt.go&&r8.nt.open===4&&r8.nt.after===0,'ONE NOTICE SYSTEM: with kitNotice her card is ONE notice (no queued dialog), saved in S.rcvPend, its option row opens the 4-answer card',r8.nt);
  {const {build}=require('../tools/receiver-choice-scan.js');const B=build({rows:{"ag:cx2:help":{fam:"ag",k:"cx2:help",P:null,N:null,NN:null,self:true},"ag:cx4:illMaid":{fam:"ag",k:"cx4:illMaid",P:null,N:null,NN:null}},keys:[],err:[]});
   ok(B.gaps.length===2&&B.gaps.every(g=>g.v==="UNREACHED"),'scan: a REQ / ORDER_SRV key the probe never reaches is a gap (UNREACHED), never a silent pass',B.gaps)}
