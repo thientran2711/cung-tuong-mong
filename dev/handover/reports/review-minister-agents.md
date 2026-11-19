@@ -2,7 +2,10 @@
 PRIORITY #1 CHECK ('minister'): OD 4 | ledger 0 | claims 6 | main 15 | review/* 0 | archive 0 (PL#7 moved E → C-AG; reuses the LIVE npc agent engine: agOn/agCap/agErr, mindPick, jnet, j55 acts, j61 registry — no second system: confirmed in code).
 START_CTX ≈ 3 % (context_usage read 0; estimate).
 
-## VERDICT: PASS — LAND READY a2c6ce4eb09ba2ed1e3dcc34539da4c8fbfa064d
+## FINAL MERGE (19/11 ~06:25Z, MAIN ROOT-65 call): LAND READY f3114755f38538c6840415dd2403b6a59a704f4e
+review/minister-agents-r1 @ f3114755 = a2c6ce4e + final-merge LIVE main 98f9f0f1 (assemble.py: union jallot / jgedata_w2 / jerr + jagmin; index.html / sw.js / assets.json rebuilt). Gates re-run: minister-agents 11/11 ×3, one-core-guard PASS, agemp 20/20, QUICKCHECK --cpu 4 PASS (render 190/169, tab 383/321, buổi 998/1125 ms). FF on 98f9f0f1.
+
+## VERDICT (first pass): PASS — LAND READY a2c6ce4eb09ba2ed1e3dcc34539da4c8fbfa064d (superseded by f3114755 above)
 Branch `review/minister-agents-r1` @ a2c6ce4e = worker 0d3f2b03 (already final-merged LIVE main fd6118cd) + reviewer fixes. origin/main fd6118cd is an ancestor → fast-forward only.
 
 ## Reviewer fixes (on review/minister-agents-r1)
