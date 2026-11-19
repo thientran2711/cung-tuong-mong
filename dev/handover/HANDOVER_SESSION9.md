@@ -1105,3 +1105,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (19/11 06:51Z) LANDED seal-lean-2 r2 → main 5400c87b (SMALL rv K8sbYnJU PASS, merged f3114755; my quickcheck PASS 192 s; FF). ROLLBACK f3114755. CDN wiped. Videos (local copies) sent to owner. Next: ev-pic-fig (worker remerges 5400c87b).
 - (19/11 07:02Z) OWNER OD ~06:55Z: seal lean-in grow FAST, shrink slow, max size = figure head size → worker seal-lean-3 (to open).
 - (19/11 07:04Z) OWNER OD ~07:05Z: green ordinary seal (vui/bình) has no animation → whole group: ART ORDER to Foreman C for painted loops of every feeling (vui+bình first); seal-lean-3 worker: visible own motion until painted + wire animKey as loops arrive.
+- (19/11 07:06Z) OWNER OD ~07:15Z: break-out-of-frame emo-anim with hands; MAIN paints pilot giận itself now; Foreman C mass order on hold until her verdict.
