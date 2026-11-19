@@ -465,7 +465,7 @@ rdDef("bd_hen",8,{t:"Lá thư bị chặn",w:"emp",sj:"lá thư chữ {land}",ca
   {n:"Đưa thư hồi cho Hoàng thượng",f:"that",go:()=>bdO("thuhoi","vua"),wx:"Hoàng thượng thấy ngươi viết gì",lx:"không còn gì riêng",rt:"Hoàng thượng đọc: “Ta ở lại. Chàng về đi.” Ngài gấp thư, cất vào tay áo."}]},
  x1:{h:"Đại Lý tự trình thư",w:"emp",t:"Đại Lý tự trình lá thư lên Hoàng thượng. Thác Bạt Phong bị gọi đến đứng cuối điện. Hoàng thượng hỏi ngươi trước, rồi mới hỏi chàng.",o:[
   {n:"Tâu: xin đọc nguyên văn trước điện, để chữ tự nói",e:["win","lose"],rt:"Nguyên văn được đọc; lời hẹn bỏ trốn không có trong thư. Hoàng thượng phạt thông dịch Tứ Di quán.",rf:"Nguyên văn được đọc, nhưng lời trong thư đủ để người ta nghi."},
-  {n:"Tâu: thần thiếp xin chịu tội, xin tha cho người viết",e:["win","mid"],rt:"Hoàng thượng phạt ngươi cấm túc, tha cho chàng tội đưa thư.",rf:"Hoàng thượng phạt ngươi, chàng vẫn bị giữ."},
+  {n:"Tâu: thần thiếp xin chịu tội, xin tha cho người viết",e:["win","mid"],rt:"Hoàng thượng phạt bổng lộc của ngươi, tha cho chàng tội đưa thư.",rf:"Hoàng thượng phạt ngươi, chàng vẫn bị giữ."},
   {n:"Im lặng",e:"mid",lx:"chàng một mình đứng cuối điện",rt:"Ngươi im lặng; Hoàng thượng hỏi chàng."}]}},
  E:{win:{tag:"Bản dịch bị lật",w:"emp",t:"Bản dịch bị lật trước điện. Lá thư về tay Hoàng thượng, và Tứ Di quán mất một thông dịch.",go:()=>{bdO("thu","vua")}},
   mid:{tag:"Thư nằm ở Đại Lý tự",t:"Lá thư nằm ở Đại Lý tự, chờ ngày xét. Không ai nhắc, cũng không ai quên.",go:()=>{if(bdO("thu")!=="dot")bdO("thu","dly")}},
