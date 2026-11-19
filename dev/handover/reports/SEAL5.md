@@ -37,3 +37,42 @@ Faults (777: reported, NOT redone):
 - tinhnghich OUT frames 13–27: big lunge forward with both arms flung wide (no edge touch, but a jump in size).
 - tinhtu: clean (BACK short, 47 frames).
 Credits unit 4: 8 × 135 + 12 × 940 = 12 360 (SEAL5 total 24 720). Ledger +20 lines (SEAL5 40).
+
+## UNIT 5 DONE (20/11 ~00:20Z) — th-hothen, th-chan, th-khochiu, th-choang — sent to ROOT-57
+| seal | A (used) | B | OUT | LOOP | BACK | frames out/loop/back |
+|---|---|---|---|---|---|---|
+| hothen (mauve-pink) | BhN78lAoQR | EbYRFZMuuO | rgXTlucxtc | 79f84xQJAL | vQANuXDa47 | 50/60/52 |
+| chan (grey-taupe) | 6AbCRVHiJO (= s7IpgTLl8e flat.) | hu29f6mvqL | w4aoPjv7EI | 3zKuGP9REY | mEZ4CBDhJQ | 48/60/52 |
+| khochiu (mustard-khaki) | 0eUxMvsTfW (= fHziENDCDY flat.) | YMlk0xGWeC | tCRPCFkmZJ | rgXTgJUxtc | If3yfFctvE | 58/60/60 |
+| choang (slate grey-blue) | jUoMsMRLD0 | SyhX7IgUb8 | VX7LXmrMMU | yiumizWPW9 | Lw8Dw9CswO | 58/60/58 |
+CDN: same names, th-u5-preview.mp4 (65.1 s). khochiu B added a small hand fan and a tiny "?" squiggle (fits the prompt's "fans her face").
+Faults (777: reported, NOT redone):
+- chan BACK frames ~33–48: she shrinks to a tiny figure inside the disc, then pops back to A size (same glitch as muu BACK).
+  chan OUT frames 18–21: one arm swings out wide and touches the RIGHT edge.
+- choang BACK: she stays leaned out almost to the end and snaps back into the disc in the last frames (no slow slide).
+- khochiu BACK: same, she only slides back in the last ~10 frames.
+- hothen: clean (LOOP frame 10: one sparkle dot touches the top edge for 1 frame).
+Credits unit 5: 8 × 135 + 12 × 940 = 12 360. SEAL5 total 37 080 (3 units). Balance 400 475 (00:20Z, shared pool). Ledger SEAL5 60 lines.
+
+# SEAL5 HANDOVER (20/11 ~00:22Z) — at my roll line (START ≈4 %, now ≈29 % of 1M by own estimate; line 29 %, ceiling 60 %).
+COORDINATOR (ROOT-57) opens the successor (SEAL6). Everything is in place:
+- Done Thái hậu (all on CDN …/img/_review/emo-anim-groups/): gian vui buon so an binh dau ghen (SEAL1) + lo muu tutin hanghai
+  tinhtu chuyentam hungkhoi tinhnghich hothen chan khochiu choang (SEAL5). REMAINING 18 (checked against th_prompts.py ORDER):
+  hon act-buon act-chan act-choang act-chuyentam act-ghen act-gian act-hanghai act-hon act-hothen act-hungkhoi act-khochiu act-lo
+  act-so act-tinhnghich act-tinhtu act-tutin act-vui. Next units: [hon act-buon act-chan act-choang] → [act-chuyentam act-ghen act-gian
+  act-hanghai] → [act-hon act-hothen act-hungkhoi act-khochiu] → [act-lo act-so act-tinhnghich act-tinhtu] → [act-tutin act-vui];
+  previews th-u6-preview.mp4, th-u7-…  KEY RISK: act-hanghai ("fresh bright spring green") and act-ghen ("deeper olive green") discs —
+  same problem as hanghai (green disc keyed out) → ROOT-57 was told; wait for his word on those two before generating them.
+- Recipe exactly as SEAL1.md handover. My helper scripts (scratchpad, lost with this container — re-create, they are short):
+  flat.py (A png → flatten RGBA on #00FF00 when transparent + still/th-k.webp 160 px medallion crop + contact sheet),
+  proc.sh k [start] (th_cut out/loop/back → move *.npy out of img/ → edge check alpha>40 on 2-px border → th_sheet),
+  half.py (½-scale combined frame sheets to look at), ledger.py (5 lines per seal: A, B, OUT, LOOP, BACK; refs = USED ids).
+- Seen this round: A keyframes come back RGBA transparent about half the time; a B came back transparent once (tinhnghich) → check
+  EVERY A and B (`PIL mode == 'RGBA'`) and flatten + upload before using as keyframe/ref. Batch upload (creations_request_upload count=n +
+  finalize uploads[]) returns ids in the same order (verified once with creations_get names).
+- Pipeline that worked (no waiting between units): fire next unit's A keyframes while the current unit's 12 clips render (~3 min).
+- Watch the disc colour vs the green key: spring-green disc (hanghai) got keyed semi-transparent. Remaining discs: check th_prompts.py
+  colours before gen; if one is green/yellow-green, tell ROOT-57 BEFORE generating (prompt change = owner's call), do not change it yourself.
+- Rules: Lượt 781 GO all Thái hậu, units of ~4 to ROOT-57 as you go, no waiting; Lượt 777 NO redo gens; refused gen → send ROOT-57 the
+  exact call and continue with the next seal. Branch claude/cung-tuong-mong-handover-hj0h8w only; gen_ledger.jsonl is skip-worktree →
+  `git update-index --no-skip-worktree` first; on merge conflict keep BOTH sides (drop <<< === >>> lines), check every line parses as JSON.
