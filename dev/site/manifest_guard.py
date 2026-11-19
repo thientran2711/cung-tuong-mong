@@ -10,7 +10,7 @@
 import json, os, sys, urllib.request, collections
 PUBLIC = os.environ.get("CTM_IMG_BASE") or "https://ctm-img.victoria-tntt.workers.dev/"
 HERE = os.path.dirname(os.path.abspath(__file__)); FLOOR = os.path.join(HERE, "manifest-floor.json")
-GUARDED = ("FIGURES.json", "FIGURES-servants.json", "FIGURES-others.json", "FIGURES-kids.json", "FIGURES-kc.json", "FIGURES-ty.json", "FIGURES-congtu.json", "FIGURES-huynh.json")
+GUARDED = ("FIGURES.json", "FIGURES-servants.json", "FIGURES-others.json", "FIGURES-kids.json", "FIGURES-kc.json", "FIGURES-ty.json", "FIGURES-congtu.json", "FIGURES-huynh.json", "FIGURES-x.json")
 # act-pic-match 18/11: img/ACTS.json and img/EVENTS.json were overwritten at 17/11 02:41Z by the same stale-checkout push that shrank FIGURES.json
 # (every act without its key showed the kit placeholder, ~130 acts shared pictures). They are DICT manifests: guarded by the size of each section.
 DICT_GUARDED = {"ACTS.json": ("acts", "prefix", "log"), "EVENTS.json": ("categories", "events", "stories")}
@@ -32,7 +32,11 @@ def counts(L):
     c = collections.Counter(); [c.update([f"{f.get('role')}|{f.get('tier')}"]) for f in L if isinstance(f, dict)]; return c
 def fetch(name):
     r = urllib.request.Request(PUBLIC + "img/" + name, headers={"Cache-Control": "no-cache", "User-Agent": "ctm-manifest-guard"})
-    return json.load(urllib.request.urlopen(r, timeout=60))
+    try:
+        return json.load(urllib.request.urlopen(r, timeout=60))
+    except urllib.error.HTTPError as e:
+        if e.code == 404: return []  # a new manifest (e.g. FIGURES-x.json, art-wiring-1119) has no live copy yet
+        raise
 def check(name, new, live=None, floor=None, index=None):
     """returns a list of problems ([] = ok)"""
     new, bad = lst(new), []
