@@ -81,3 +81,10 @@ PRIORITY #1 CHECK: OD seal-lean-3 rows 19/11 | main jemoseal.js/jfigseal.js | re
 - fig-seal solo: Fold/iPad/1366 grow .24-.33 s, hold 3.5-3.6 s, shrink 1.5-1.6 s, big = head frame, moodSwap 0 zero frames, 0 errors, dialog lean once per open. Screens (room/event/say, Fold + iPad) LOOKED: seal sits beside the head inside the dialog, never over a face or bubble.
 - quickcheck PASS 253 s (open 1674 ms, old save ok, core gates PASS, render 297/302, tab 566/529, buổi 1555/1794).
 - Watch item (NOT an r8 regression; same on base 1bf7ac5d): under CPU load (4 parallel browsers) the dialog seal sometimes never gets `kemo-live` (IntersectionObserver) so no dialog lean runs (observed 1 solo Fold run and most loaded runs, base and r8 alike; solo 6/7 pass both). Shrink measure can read 1.47 s vs 1.5 threshold under load (css = 1.8 s). Suggest a follow-up: also kick kesSchedule when the dialog seal is measured, not only on IO.
+
+## REVIEW r8b (C-AG #23 rv) PASS 69bd07667d817034d37ca6ce965993e74e12d8ac
+PRIORITY #1 CHECK: OD seal-lean-3 rows 19/11 (owner OK on giận videos) | main = 1a4df595 (already inside the branch) | review/seal-lean-3 69bd0766 | claims seal-lean-3 landing.
+- Merge 69bd0766 = 2111eb10 + LIVE 1a4df595. Seal sources (jemoseal/jfigseal/jmark, seal-say.js, fig-seal.js) are byte-identical to the r8 PASS 2111eb10; branch vs main still = the seal work only (10 files). index.html differs from a rebuild only by the CTM_BI build-stamp line.
+- seal-say.js Fold + iPad: overlap frames 0/0/0, 0 errors. fig-seal Fold + iPad: grow .24-.42 s, hold 3.4-3.6 s, shrink 1.5-1.7 s, big = head, dialog lean once per open, moodSwap 0 zero frames, 0 errors. (One Fold shrink reading 1.46 s vs the 1.5 s threshold = load noise, css 1.8 s; rerun passes.)
+- quickcheck PASS 248 s (open 1699 ms, old save ok, core gates PASS, render 255/301, tab 631/634, buổi 1292/1424).
+- Same watch item as r8 (dialog seal not marked live under heavy load, identical on the base), not a regression.
