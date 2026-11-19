@@ -74,6 +74,25 @@ for i,(cid,age,face,shape,eyes,lips,hair,outfit,m,s,game,pose,item,itemshort) in
     o2=o2.replace(' an jade',' a jade')   # article after the swap (ivory→jade green)
     out[f"{cid}.v3b"]=line(age,face,EXPR[look],hair,o2,mn,mh,sn,sh,pose,ak)
 
+# ---- Lượt 640 (owner verdict on nf3_4kieu, via ROOT-53): v4b redraws; only her points change (A17) ----
+import copy
+TYPES_B=copy.deepcopy(TYPES)
+# s01: head lifted too high → chin lifted only moderately, still proud
+TYPES_B["Kiêu kỳ"]["face"]=TYPES["Kiêu kỳ"]["face"].replace("the chin LIFTED slightly so she looks a little down along her nose (the whole face still clearly visible)","the chin raised only a little (moderately, the head almost level) so she looks just slightly down along her nose (the whole face clearly visible)")
+TYPES_B["Kiêu kỳ"]["expr"]=TYPES["Kiêu kỳ"]["expr"].replace("chin lifted,","chin raised only a little,")
+# s03: not alluring enough → stronger allure in eyes, gaze, lips, slight head tilt (lips closed, no teeth)
+TYPES_B["Quyến rũ"]["face"]=TYPES["Quyến rũ"]["face"].replace("large glossy almond eyes whose outer corners curve softly UP","large glossy, liquid-bright almond eyes with long sweeping upper lashes whose outer corners curve softly UP").replace("FULL plump lips with a rich rose tint, closed","FULL plump glossy lips with a rich rose tint and a soft curved bow, closed")
+TYPES_B["Quyến rũ"]["expr"]="A seductive, alluring look: the head tilted slightly to one side, a slow lingering sidelong gaze from the fully open eyes straight to the viewer, a knowing half-smile with the full lips closed, one corner lifted more than the other, eyes fully open, never a stretched grin."
+# s04: too masculine + harder line style → same heroic spirit, clearly feminine, soft; no weapon-like item
+TYPES_B["Anh khí"]=dict(
+ face="a graceful OVAL face with a gently defined jawline and a soft small chin, smooth soft cheeks, dark well-shaped brows a little fuller than usual that lift gently toward the temples, large bright clear almond eyes with a steady direct gaze, fully open, a straight elegant nose with a slightly high bridge, softly full lips in a calm closed line; a soft, beautiful, clearly feminine young lady with a heroic spirit",
+ expr="A bright, steady, confident gaze straight at the viewer, a gentle assured closed-lip smile, head held upright with graceful poise, eyes fully open, never a stretched grin.")
+SB={"s01":"s01","s03":"s03","s04":"s04"}
+for sid,ty,age,hair,outfit,(mn,mh),(sn,sh),pose,ak in S:
+    if sid not in SB: continue
+    if sid=="s04": pose=pose.replace("a slim sheathed straight sword with a black lacquer scabbard and a white silk tassel held upright at her side in one hand","a sprig of white plum blossom held upright at chest height in one hand")
+    out[f"{sid}.v4b"]=line(age,TYPES_B[ty]['face'],TYPES_B[ty]['expr'],hair,outfit,mn,mh,sn,sh,pose,ak)
+
 for k,v in out.items():
     open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
     print(f"== {k}\n{v}\n")
