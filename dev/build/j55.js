@@ -159,7 +159,7 @@ function tdMonth(){if(!tdOn())return"";const T=trS();let ev="";
 (function(){const s0=storyMonth;storyMonth=function(){const r=s0.apply(this,arguments)||"";try{const T=trS();if(T&&r){
  if(/phá tan quân giặc/.test(r)){T.bien=cl(T.bien+10,0,100);tdPowAdd("Đại tướng quân",BAL.eff.j55.top_8);tdNews("Đại tướng quân thắng trận ở biên ải.");T.praise="Đại tướng quân"}
  else if(/thua một trận/.test(r)){T.bien=cl(T.bien-10,0,100);tdPowAdd("Đại tướng quân",BAL.eff.j55.top_9);tdNews("Quân Đại tướng quân thua một trận ở Nhạn Môn quan.")}
- else if(/Chiến tranh với Nam Chiếu|Nam Chiếu thắng trận|Nam Chiếu thua trận/.test(r)){T.bien=cl(T.bien-15,0,100);tdNews("Chiến tranh với Nam Chiếu.")}}}catch(e){}return r}})();
+ else if(/Chiến tranh với Cao Ly|Cao Ly thắng trận|Cao Ly thua trận/.test(r)){T.bien=cl(T.bien-15,0,100);tdNews("Chiến tranh với Cao Ly.")}}}catch(e){}return r}})();
 /* lãnh cung: 'nhờ cha dâng sớ' leans on her house's real standing and spends it */
 (function(){if(typeof coldActs!=="function")return;const c0=coldActs;coldActs=function(){const A=c0.apply(this,arguments);try{const c=tdHouse(S);if(!c)return A;const a=A.find(x=>x.n==="Nhờ người bên ngoài"&&/cha/.test(x.t||""));if(!a)return A;
  a.o=od(BAL.odb.j55.odO+tdPow(c)/4);a.t=`Nhờ cha (nhà ${c}, thế lực ${tdPow(c)}) dâng sớ xin tha.`;a.x=`được tha · kèm: nhà ${c} thế lực ${balSg(BAL.eff.j55.go)}`;const g=a.go;a.go=function(){tdPowAdd(c,BAL.eff.j55.go);return g.apply(this,arguments)};const f=a.fail;a.fail=function(){tdPowAdd(c,BAL.eff.j55.fail);if(f)return f.apply(this,arguments)}}catch(e){}return A}})();
