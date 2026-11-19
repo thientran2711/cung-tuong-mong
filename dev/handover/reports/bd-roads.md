@@ -35,3 +35,41 @@ Branch: review/bd-roads (PLAN commit fcc296d7: dev/story/ROAD_MAP.md §4.5b + §
 - E14 (me): bd_san + bd_soi, BDP, legacy/migration, assemble, jbalbd lead block, tests + measure harness.
 - Writer 2: bd_tuyet + bd_hen to the ROAD_MAP §4.5b outline in `jrd_bd2.js` + the writer-2 block of jbalbd.js; base = review/bd-roads after my scaffold commit (I will message Foreman E «SCAFFOLD bd-roads <sha>» once jrd_bd.js helpers + empty jrd_bd2.js + jbalbd.js + assemble entries are pushed, so writer 2 starts on a building tree). Writer 2 pushes to `review/bd-roads-w2`; I merge.
 - Both: every chapter = equal-value options (gain-only ok, never cost-only), two-way, real evidence/people/objects, harder with rank, cổ trang words, raw option names carrying the GE Chuỗi/Khóa intents of GRAND_ENDINGS §3/§4.2 with thiện- and ác-leaning options on every Chuỗi.
+
+## §WRITER 2 — bd_tuyet + bd_hen (E14b, opus; branch review/bd-roads-w2, base review/bd-roads @23647ebf, merged 61b40bfe; head ecd14280)
+PRIORITY #1 CHECK ('bd_tuyet' / 'bd_hen' / 'Năm tuyết trắng' / 'Lời thề bên đống đá'): OD 18/11 ~22:05Z (GE D2 = own 4 roads) | main: none (no bd_tuyet / bd_hen code; dtq_bien «Khói lửa Nhạn Môn» is a different road, no reuse) | review/*: review/bd-roads (scaffold + bd_san/bd_soi, BDP book, BD97, lead number helpers bdR/bdS/bdX/bdE/bdG — reused), review/grand-endings-design §3 bd rows (GE intents) | claims: E14 (lead), me (writer 2).
+START_CTX ≈ 4 % of the window.
+
+### Files (only these two)
+- `dev/build/jrd_bd2.js`: `ARC67.bd_tuyet` / `ARC67.bd_hen` (.4, arcFx, o:"bd") + RTHEME67 entries + `BD97.push` (.4 rares) · rdDef `.5–.11` for both · `RD97L.push(rdRare(…))` (.11 rares) · object helper `bdO` (fb "bd.o.<thing>").
+- `dev/build/jbalbd.js` writer-2 block: `BAL.arc.fx.bd_tuyet|bd_hen`, `BAL.arc.rare.bd_tuyet|bd_hen`, `BAL.road.fx.bd_tuyet_5…11|bd_hen_5…11`, `BAL.road.rare.bd_tuyet_11|bd_hen_11`; uses the lead's bdR / bdS / bdX (law 5: `["-m","rank",BAL.road.bd.rk]` on every risky option and climax) / bdE / bdG, plus `bd2E` (bdE + the e67bien ending amounts). No typed number in any text (ONE CORE); rare bars print `BAL.arc.rare.<road>.bar` / `RR(id).bar`.
+
+### Per-chapter table
+| ch | bd_tuyet · Năm tuyết trắng | bd_hen · Lời thề bên đống đá |
+|---|---|---|
+| .4 | Năm tuyết trắng — A Sử Na Cát begs grain at Nhạn Môn; win Lương qua cửa ải / win2 Lương đổi ngựa / mid / lose Cửa ải đóng; j97 rare «Tuyết tan giữa đông» (rw nt_hocuu) | Lời thề bên đống đá — Phong rides in with the embassy guard; win / win2 Chàng ở lại kinh thành / mid / lose Lời đồn theo chân ngươi; j97 rare «Hòn đá thề trở về» (rw ngocboi) |
+| .5 | Kho Thường Bình — ask / buy / pledge the dowry chest (hoimon "kho"); granary ledger evidence; {v}'s grain house | Hòn đá trong tay áo — keep (da "ta") / return ("tra") / show the Emperor ("vua") / bury ("chon"); maid who saw the bag |
+| .6 | Chợ lương đổi ngựa — the price: fair, Binh bộ's rule, or mares / the south pasture; wet grain sack, skimmed horses | Kết nghĩa — sworn brotherhood before the court; who presides; exchange of knife and hairpin (dao) |
+| .7 | Cướp biên — the chief binds the raiders / they flee; mercy, law, heads at the gate; {v}'s cousin in Binh bộ (two-way) | Trận đấu vật — the poisoned cup (chen "ta"/"thaiy"/"dly"); thái y; {v}'s steward (two-way) |
+| .8 | Người lánh nạn ở Nhạn Môn — tents under the wall, a spy in the camp, census | Lá thư bị chặn — mistranslation by {v}'s Tứ Di quán interpreter / a true letter (thu "dly"/"dot"/"vua"); intercept {v}'s letter (two-way) |
+| .9 | Sốt trong trại — steppe cure, thái y, or fire; lose = A Sử Na Cát dies (bdKill) | Ngục Đại Lý tự — Phong jailed (w "nguc"); jailer, witness, her written statement |
+| .10 | Mở cửa ải — the gate tally (lenhbai "ta"/"tra"/"asnc"); open for people / for the whole tribe (only if she holds the tally or bought the small gate) / hold | Đêm trước phiên xử — plead, the steward, or open the cell (flag mo); win freed (kinh, or tn if fled) / mid exiled (tn) / lose dies (bdKill) |
+| .11 | Khúc ca mùa xuân — the winter song (khuc "thien"/"oan", ge4 written in t1); results Mùa xuân mang tên ngươi / Tuyết tan, người ở lại / Mùa xuân không về; RD97L «Bia đá bên ải Nhạn Môn» (rw bienngu) | Lời thề sau cùng — with him / exiled / his coffin (openings by bdAlive); results Lời thề giữ trọn / Người đi, lời ở lại / Lời thề nhuốm máu; RD97L «Hoàng thượng làm chứng lời thề» (rw nt_dongchau, needs Phong alive) |
+
+People (law 6b): A Sử Na Cát (BDP asnc: met .4, w "ai" .8, killed on .9 lose, w "tn" .11) and Thác Bạt Phong (BDP phong: w "kinh" .4, "nguc" .9, freed / exiled / killed .10) read by later openings (`bdAlive`). Everyone else is a standing office (Lang trung bộ Hộ, lão tướng trấn thủ Nhạn Môn, Đại Lý tự, Tứ Di quán, Hồng Lô tự, Thận hình ty) or the cast rival {v}. No new BDP person.
+Objects (law 6c): dowry chest, gate tally, winter song, oath stone, knife, poisoned cup, seized letter — each has an owner state in fb `bd.o.*`, moved only by a choice, never vanished (sold = "ban" for the tribe's goats; burnt letter = "dot").
+Two-way (law 1): every {v} beat has an option that does back to {v} what {v} does (counter-memorial, dig {v}'s cousin's horse book, intercept {v}'s letter, name {v}'s steward).
+GE reach (§3 rows) — options carry both shadings on every Chuỗi (raw names for the GE wave): ge1 relief («tự ra ải phát lương», «Gửi áo bông…», «Nhận sợi dây da…» / ác «Nhắn trưởng lão: con gái thì phải nghe lời»); ge2 trade («giá công bằng», «mỗi năm mở chợ lương đổi ngựa» / ác «đồng cỏ phía nam sông», «Đòi ngựa cái chửa»); ge3 gate («mở cửa cho người, đóng cửa với giặc» / ác «Tự trao lệnh bài…», «mua chuộc lính giữ cửa nhỏ», «Giữ lệnh bài…»); ge4 song («Viết khúc ca tuyết trắng» / ác «Viết khúc ca oán»). bd_hen: ge1 («Giữ hòn đá trong tay áo», «chờ ta ở cửa Tây», «Cho ngục tốt mở cửa…» ác), ge2 («Đưa hòn đá cho Hoàng thượng», «Chôn hòn đá…», «Khai: không quen…», «người {land} nóng tính, xin xử nghiêm» ác), ge3 («Uống bát rượu kết nghĩa», «nghĩa huynh của Đại Hy» / ác «xin chàng làm thị vệ của cung»), ge4 (Phong dead: «Thề trước linh cữu: đòi máu cho chàng» ác / «truy tội kẻ đã giết chàng» thiện). Flag counts per chapter (thiện-leaning an/nghia/that/le vs ác uy): bd_tuyet 9–12 / 2–5, bd_hen 3–11 / 1–4 (+ tinh / phan neutral).
+
+### Measures and tests (build file:///…/dev/index.html of this branch)
+- Structure probe (scratch chk.js): both roads rdFull, 8 chapters, R97 + RD97L rows present, every beat's numbers array length = its options, no go: using G without its g amounts, every option has a cost, new bd pool = bd_san, bd_soi, bd_tuyet, bd_hen; 0 page errors.
+- Option level (scratch val.js, one value scale per stat, risky options at their real odds): mean spread per beat bd_tuyet+bd_hen 1.04 (lead roads 1.26), max 2.0; no free-gain option (every sure option has a cost; gain-only none).
+- road-rare.js bd_tuyet,bd_hen: ALL PASS (E.r97, road tally, rare fired → ✦ tag + title + finale, recast told, 0 page errors).
+- npc-roads-tokscan.js: titleBad 0, tagBad 0, errs 0.
+- dev/measure/bd-roads-bal.js (lead harness) 20 lives per road: no-loss options 0, beats with spread > 6: 0 (three beats levelled in ecd14280), rolled options not harder at higher rank 0, digits/% 0, unknown tokens none; bot bd_tuyet 20/20 reach .11 (win 4 · mid 10 · lose 6), bd_hen 20/20 reach .11 (win 11 · mid 3 · lose 6); page errors 0.
+- road-full.js: life 1 of bd_tuyet walked .1–.14 in order (4:bd_tuyet … 11:bd_tuyet_11, fin «Mùa xuân mang tên ngươi»); the long 20-life run then crashed the browser target (memory, run in parallel with another bot) — reachability is covered by bd-roads-bal above.
+- Wording: no %, no digit, no modern word in player text; Emperor «nàng / trẫm», Thái hậu «ai gia», servants «chủ tử», officials «nương nương».
+- NOT run here (lead's harness): kc-roads direct / coop-together and npc-roads bd extension, old-save migration, quickcheck gates — E14 runs them on the merged branch.
+
+### FOR C (pictures, via MAIN; draw nothing): .4 + .11 scenes and the 4 rares — snow at Nhạn Môn with grain carts; the oath ovoo stone on a steppe hill; Phong at the Ngọ môn; the stone stele «Bia đá bên ải Nhạn Môn»; the Emperor on the west gate tower with her.
+### FOR E14: merge review/bd-roads-w2 (only jrd_bd2.js + the writer-2 block of jbalbd.js).
