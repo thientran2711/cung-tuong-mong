@@ -283,3 +283,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kyngo-daily BIG REVIEW (opus E18r) of 8cb39e38 | review/kyngo-daily; briefs/E18r-review-kyngo-daily.md | FOREMAN E #11 | session_01DgYSWnzDSXLeyEPaWuBrQQ | RUNNING | 19/11 11:00Z |
 | REVIEW role-parity-drift-2 r1 (sonnet SMALL, tooling only) of 6ffe38a4 | review/role-parity-drift-2-r1 | B | session_01N1tNP6yFh7EgvwXvnX7ku3 | RUNNING | 19/11 11:06Z |
 | coop-thin F6a #2 (opus; successor of 5ex6HrG5 at 594fe744) | review/coop-thin-f6 | B | session_01N1tNP5kNmqN7AE6fHZAd5u | RUNNING | 19/11 11:07Z |
+| palace-chatter BIG REVIEW (opus E17r) of 115717a8 | review/palace-chatter; briefs/E17r-review-palace-chatter.md | FOREMAN E #11 | session_01DgYSWpBsw8KySsaQyoredH | RUNNING | 19/11 11:31Z |
