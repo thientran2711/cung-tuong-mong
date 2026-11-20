@@ -50,6 +50,14 @@ def rows():
     yield ("5 C5 Lượt 779 (Nữ đế B23)", "C5", "nude a51/a65", "Nữ đế m29 a51 (stored, redraw-ready)", nd, ["--scope", "nude", "--age", "a51"],
            [("elder clause added", nd.replace(" No text, no labels.", SENT + ": her own colours. No text, no labels."), "C5")])
 
+    # MG3 (L784 item 6, B20 Lượt 763/769/770): face prompt of a known person = her ROOT hex pair only, no deep/dark colour adjective
+    fp = ["--scope", "face", "--pid", "s46"]
+    yield ("6 B20 root hex (MG3)", "B20 ROOT HEX / DEEP COLOUR", "face (pid known: face_gate key / --pid)", "face s46.v5 + face_gate", face, fp,
+           [("old root hex #5D5894 instead of #A898CC", face.replace("#A898CC", "#5D5894"), "B20"), ("self-picked extra hex", face.replace("#86CDB9", "#86CDB9 and #123456", 1), "B20"),
+            ("'deep blue-violet' colour word", face.replace("soft lilac violet", "deep blue-violet", 1) if "soft lilac violet" in face else face.replace("#A898CC", "deep blue-violet #A898CC", 1), "B20")])
+    yield ("LEN gen-tool limit (MG3)", "LEN", "every scope", "Nữ đế m29 a51", nd, ["--scope", "nude", "--age", "a51"],
+           [("prompt > 10 000 chars", nd.replace(" No text, no labels.", " " + "Every hairpin points upward. " * 60 + "No text, no labels."), "LEN")])
+
 
 def main():
     out = ["| rule | check id | scopes | prompt | case | expected | got | first FAIL line |", "|---|---|---|---|---|---|---|---|"]; bad = 0

@@ -9,5 +9,8 @@ e={"ts":datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S
  "settings":"gpt-2-6 1024x2304 2k, no seed, folder ba4aecfe","refs":[{"type":"image","id":kc["ref_id"],"what":"set-B thiếu nữ v3 cut"},{"type":"image","id":"TdwDfOyVNR","what":"royal swatch"}]+([{"type":"image","id":os.environ["NDX_REF3"],"what":"her own Nữ đế a36 picture (D15 style lock)"}] if os.environ.get("NDX_REF3") else []),
  "store_check":"PASS","approved_check":"PASS","kc_check":"PASS","person":p,"age":age,"nudeopt":opt,
  "gen_id":gid,"cut_id":cut,"credits":int(cr),"prompt_file":f"dev/art/nude-B/prompts/{p}_{age}.txt",
+ **({"owner_ok":os.environ["NDX_OWNER_OK"]} if os.environ.get("NDX_OWNER_OK") else {}),
  "store_args":f"{p} v0 --state nude --spec5pose --nudeopt {opt} --nostyle"+("" if age=="a18" else f" --age {age}")+" + nude-B/mk.py (ROOT-50 ruling b)"+os.environ.get("NDX_ARGS_TAIL",""),"note":note}
+import subprocess,sys as _s
+if subprocess.run([_s.executable,os.path.join(R,"dev/art/ledger_guard.py"),"--person",p,"--age",age,"--state","nude"]+(["--owner-ok",os.environ["NDX_OWNER_OK"]] if os.environ.get("NDX_OWNER_OK") else [])).returncode: print("ledger line written anyway (the gen already ran) — REPORT this redraw to your foreman")
 open(os.path.join(R,"dev/art/gen_ledger.jsonl"),"a",encoding="utf-8").write(json.dumps(e,ensure_ascii=False)+"\n"); print("logged",p,age,gid,cut)

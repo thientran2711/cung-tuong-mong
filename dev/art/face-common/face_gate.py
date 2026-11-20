@@ -4,7 +4,7 @@ make_sacsao_L737 / make_lanhlung_L761 and any new maker): final(v, key) ->
   1. master_common.apply(v): the MASTER block (dev/art/MASTER_COMMON.txt) verbatim, sentences the prompt already has stay put;
   2. D9 (owner Lượt 529, ART_RULES D9 'every prompt'): the store's D9_FOREHEAD words, read from t8-prompt-B/build.py (never retyped),
      right before the END sentence 'No text, no labels.' exactly as the store/NPC/emperor builders place it;
-  3. check_store.check_text(v, 'face') -> any FAIL raises (the maker writes nothing): no gate PASS = no prompt file = no gen."""
+  3. check_store.check_text(v, 'face', pid) -> any FAIL raises (pid from key 'sNN…': B20 root hex pair, MG3 L784 #6) (the maker writes nothing): no gate PASS = no prompt file = no gen."""
 import os, re, sys
 D = os.path.dirname(os.path.abspath(__file__)); ART = os.path.dirname(D)
 sys.path.insert(0, ART)
@@ -20,6 +20,7 @@ def final(v, key=""):
     if D9.strip() not in v:
         assert v.count(END) == 1, (key, "END")
         i = v.index(END); v = v[:i].rstrip() + D9 + " " + v[i:]
-    f, w, _ = check_store.check_text(v, "face")
+    m = re.match(r"([smc]\d\d)", os.path.basename(key or ""))   # MG3 L784 #6: person id -> B20 root-hex check
+    f, w, _ = check_store.check_text(v, "face", pid=m.group(1) if m else None)
     if f: raise SystemExit(f"FACE GATE FAIL {key}: " + "; ".join(f"{i} {k} {d}" for i, k, d in f))
     return v

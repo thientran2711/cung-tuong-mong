@@ -11,7 +11,8 @@ p = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-
 n = 0
 for nm, cap in items:
     last = None
-    for f in [f"{D}/{nm}-out.webp", f"{D}/{nm}.webp", f"{D}/{nm}.webp", f"{D}/{nm}-back.webp"]:
+    import os
+    for f in [x for x in [f"{D}/{nm}-out.webp", f"{D}/{nm}.webp", f"{D}/{nm}.webp", f"{D}/{nm}-back.webp"] if os.path.exists(x)]:   # missing part (e.g. moderation-blocked clip) skipped
         im = Image.open(f)
         for i in range(im.n_frames):
             im.seek(i); c = Image.new("RGBA", im.size, BG + (255,)); c.alpha_composite(im.convert("RGBA"))

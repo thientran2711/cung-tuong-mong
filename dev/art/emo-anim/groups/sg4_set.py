@@ -39,8 +39,10 @@ def person(g, k):
         s = s.replace("with his popping out", "with him popping out")
         if g == "htg" and part in ("out", "loop", "back") and k != "so":
             s = s.replace(" Smooth, ", SKIN + " Smooth, ").replace(" Slow enough to read,", SKIN + " Slow enough to read,")
+        if BANNED.search(s): raise SystemExit(f"BANNED word in {g} {k} {part}: {BANNED.findall(s)}")
         out[part] = s
     return out
+BANNED = re.compile(r"qing|manchu|qipao|cheongsam|two-wing|flag-head", re.I)   # ROOT-59 00:20Z, owner F14
 BAD = re.compile(r"\b(she|her|She|Her|empress|dowager|phoenix|pearl|plum|seventy|bun)\b")
 if __name__ == "__main__":
     if sys.argv[1:] == ["--check"]:

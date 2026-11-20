@@ -10,14 +10,14 @@ import json, sys
 CROWN = "a small gold imperial crown with a short gold pin, a tiny gold dragon on the front and two short red silk tassels (clearly an emperor's crown, nothing like an official's or a eunuch's black hat)"
 ROBE = "a royal yellow (#EFBD69) dragon robe with a deep teal-blue (#2E5E73) collar and a gold dragon embroidered on the chest and shoulders"
 G = {  # key: (WHO for A, SAME for B, sleeves in B, face word in B, headgear motion in B, short name in clips, headgear motion in LOOP, BACK end face, "above his X")
- "ht": ("a YOUNG EMPEROR (Hoàng thượng) of the Qing-style inner palace: a handsome young man about twenty-two, clean-shaven, smooth fair face, "
+ "ht": ("a YOUNG EMPEROR (Hoàng thượng) of the inner palace: a handsome young man about twenty-two, clean-shaven, smooth fair face, "
         f"neat black hair drawn up into a topknot under {CROWN}, {ROBE}",
         "Same young emperor, same soft hand-painted storybook style, same small gold imperial crown with the short gold pin and red tassels, "
         "same neat black hair, same clean-shaven young face, same royal yellow (#EFBD69) dragon robe with deep teal-blue (#2E5E73) collar",
         "wide royal yellow sleeves with teal-blue cuffs visible", "angry shouting young face", "crown tassels swinging",
         "young emperor in the small gold imperial crown", "the red tassels of his crown swing",
         "an angry young face with the small gold imperial crown", "crown"),
- "htg": ("an OLD EMPEROR (Hoàng thượng) of the Qing-style inner palace: a dignified older man about sixty, a fuller mature face with soft wrinkles at the eyes and brow, "
+ "htg": ("an OLD EMPEROR (Hoàng thượng) of the inner palace: a dignified older man about sixty, a fuller mature face with soft wrinkles at the eyes and brow, "
          "silver-grey hair streaked with a little black drawn up into a topknot, a neatly trimmed silver-grey moustache and a short full silver-grey beard, "
          f"under {CROWN}, {ROBE}",
          "Same old emperor, same soft hand-painted storybook style, same small gold imperial crown with the short gold pin and red tassels, "
@@ -25,7 +25,7 @@ G = {  # key: (WHO for A, SAME for B, sleeves in B, face word in B, headgear mot
          "wide royal yellow sleeves with teal-blue cuffs visible", "angry shouting old bearded face", "crown tassels swinging",
          "old bearded emperor in the small gold imperial crown", "the red tassels of his crown swing",
          "an angry old bearded face with the small gold imperial crown", "crown"),
- "tg": ("a PALACE EUNUCH (thái giám) of the Qing-style inner palace: a man about forty, a round soft face, beardless with smooth clean cheeks "
+ "tg": ("a PALACE EUNUCH (thái giám) of the inner palace: a man about forty, a round soft face, beardless with smooth clean cheeks "
         "(no beard, no moustache), a round black gauze palace hat (a eunuch's hat, nothing like an emperor's gold crown), "
         "a dark steel blue (#3D5A80) round-collar palace robe with a pale blue (#A9C4DE) collar and a plain belt",
         "Same palace eunuch, same soft hand-painted storybook style, same round black gauze palace hat, same beardless round face, "
@@ -33,7 +33,7 @@ G = {  # key: (WHO for A, SAME for B, sleeves in B, face word in B, headgear mot
         "steel-blue sleeves with pale blue cuffs visible", "angry shouting beardless face", "hat wobbling",
         "beardless palace eunuch in the black gauze hat", "his black hat wobbles",
         "an angry beardless face with the black gauze hat", "hat"),
- "tv": ("a PALACE GUARD (thị vệ) of the Qing-style inner palace: a strong young man about twenty-eight, clean-shaven, a firm handsome face with thick straight brows, "
+ "tv": ("a PALACE GUARD (thị vệ) of the inner palace: a strong young man about twenty-eight, clean-shaven, a firm handsome face with thick straight brows, "
         "a polished steel helmet with cheek guards and a red plume tassel on top (a soldier's helmet, nothing like an emperor's crown), "
         "steel-grey lamellar armour with gold edging and shoulder plates over a deep red (#A8323A) robe",
         "Same palace guard, same soft hand-painted storybook style, same steel helmet with cheek guards and red plume, same clean-shaven firm face, "

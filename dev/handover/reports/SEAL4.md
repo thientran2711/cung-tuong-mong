@@ -60,3 +60,84 @@ the bottom · lo BACK smoke clouds, then sleeves turn greenish semi-transparent 
 size jump fr 12–24, sleeves at/over the edge · hanghai OUT small pop fr 18–21, BACK fr 3–14 zoom-in + yellow-green confetti near chroma.
 Clean: buon, binh, muu. ghen A reads more angry than jealous.
 Credits ht set: 20 × 135 + 30 × 940 = 30 900. Balance at end 191 294 (shared pool, started 413 165). Ledger +50 lines.
+
+## F14 (owner Lượt 800, relayed 20/11 ~00:20Z): "Qing-style" banned → sg4_prompts.py now "of the inner palace" (pushed).
+Made with the old wording: only the A keyframe prompts carry it (B/clip prompts never did) → the 4 giận samples' A, and all 10 A of
+ht, htg, tg, tv (all made before the rule). Headwear look: emperors = gold crown on topknot (not Qing) but a STANDING round collar;
+tg = round black hat with red knob (reads Qing eunuch cap); tv = helmet, not Qing. Fix would need new keyframes → not done, told ROOT-59.
+
+## SET tv (20/11 ~00:25Z) — palace guard, 10 seals, sub-agent
+| seal | A used | B used | OUT | LOOP | BACK | fr out/loop/back | OUT start |
+|---|---|---|---|---|---|---|---|
+| vui | VX7LBElMMU | Cqn35KqEEy | 5jDYlJtKxe | SyhX928Ub8 | yiumZccPW9 | 49/60/58 | 0.75 s |
+| buon | gOmdyGTSXO | 79f86igJAL | gOmd4AwSXO | ksecS9h16B | DoOltFNpcl | 56/60/48 | auto |
+| so | N2qfAev6D9 | aFG6qKHfSh | 0eUxBEjTfW | 1ld0U3Ar4r | cpSrXuS0eP | 54/60/54 | auto |
+| an | bxMnjuO5Y2 (flat of lJteOzEgv9) | cpSrd9M0eP (flat of xSBVwy9jfW) | 1ld0UZRr4r | tCRPQgwmZJ | rgXTwGixtc | 58/60/45 | auto |
+| binh | YMlkDAtWeC (flat of jUoMwGSLD0) | ksecgJ816B | 1ld0UGAr4r | ov6JCgf829 | 3zKucj1REY | 43/60/47 | 1.2 s |
+| ghen | p8ygasqehw (flat of 0eUx8ErTfW) | Lw8D4uVswO | jUoM4EnLD0 | cpSrINc0eP | Cqn3xdcEEy | 54/60/47 | auto |
+| lo | TdwjtLdVNR (flat of lJte9nDgv9) | mEZ4bVRhJQ | lJte6qygv9 | aFG61eYfSh | DoOlaGhpcl | 51/60/58 | 0.55 s |
+| muu | jUoMPePLD0 (flat of EbYRrO9uuO) | Cqn3rXTEEy | 9ZHaWgJNYZ | JNCIAj8Oq4 | If3yqDstvE | 50/60/53 | 0.7 s |
+| tutin | DoOlhK3pcl | VX7LmADMMU | 6AbC0J2iJO | 79f8GZjJAL | ksecyJD16B | 48/60/58 | 0.85 s |
+| hanghai (coral) | MBJsmKMDCm | VX7LmGpMMU | P3Qhnwm42C | u5WZLasQLD | YMlkI8FWeC | 50/60/57 | 0.7 s |
+CDN: tv-<k>-out.webp, tv-<k>.webp, tv-<k>-back.webp, still/tv-<k>.webp, tv-<k>-frames.jpg, tv-set-preview.mp4 (159 s).
+Faults (no redo): hanghai BACK jumps to a new pose (big raised fist, other arm cut by the bottom/right edge, yellow sparks) before shrinking
+back — I looked, confirmed · tutin OUT strong zoom, BACK arm cut bottom-left · ghen OUT hands + handkerchief below the bottom edge, BACK
+handkerchief falls out · vui/so/lo OUT size jumps · an LOOP mist near the side edges · buon LOOP almost still. Clean: binh, muu.
+Credits tv set: 30 900. Balance at end 183 904 (shared). Ledger +50.
+
+## SET tg (20/11 ~00:27Z) — palace eunuch, 10 seals, sub-agent
+| seal | A used | B used | OUT | LOOP | BACK | fr out/loop/back | OUT start |
+|---|---|---|---|---|---|---|---|
+| vui | KLpWs9xkqp | cpSrdB50eP | xSBV7JXjfW | gOmd4NZSXO | aFG6bkHfSh | 44/60/58 | 1.1 s |
+| buon | 79f8Nc6JAL | rgXTUJaxtc | If3yuHYtvE | vQANqkua47 | P3Qh2nl42C | 45/60/28 | auto |
+| so | YMlkDfSWeC | 5jDYsh6Kxe (flat of 3zKuYVTREY) | DoOltfOpcl | 0eUxBhKTfW | jUoMOjELD0 | 54/60/45 | auto |
+| an | jUoMw1ILD0 (flat of N2qfAXf6D9) | KLpWlJbkqp | w4ao3JC7EI | DoOlhd1pcl | 4RFvz6y9Aa | 52/60/48 | auto |
+| binh | ksecl5D16B (flat of EbYR5O3uuO) | ov6JfcO829 (flat of Cqn35sxEEy) | Lw8DPSpswO | gOmdNJPSXO | MBJsmXPDCm | 44/60/46 | 1.1 s |
+| ghen | tCRPqWWmZJ (flat of ksecwEN16B) | SyhXiL4Ub8 | rgXTPS5xtc | dt4UuhyXSL | ksecOST16B | 42/60/43 | auto |
+| lo | MBJsmzxDCm | JNCI2UfOq4 | w4ao2iH7EI | MBJsamNDCm | Xm9wQEyBfo | 48/60/54 | auto |
+| muu | hu29bX5vqL | O6EtGkRynm (flat of SyhXiSiUb8) | nVsKoBKYQD | bxMnwJz5Y2 | iG5EMlC3uK | 48/60/47 | 0.8 s |
+| tutin | lJte913gv9 | Lw8D9uNswO (flat of rgXTyjMxtc) | jUoMNEVLD0 | 5jDYJhJKxe | hu291DCvqL | 47/60/47 | auto |
+| hanghai (coral) | ksecwHR16B | DoOladKpcl | 1ld0PCar4r | ov6Jq0g829 | rgXT4QRxtc | 46/60/60 | 1.0 s |
+CDN: tg-<k>-*.webp, still/tg-<k>.webp, tg-<k>-frames.jpg, tg-set-preview.mp4.
+Faults (no redo): so OUT fr 4–17 lunges far out with flailing arms, hands past the side edges, then snaps back (I looked: confirmed; purple
+face = fear tint) · ghen BACK pink handkerchief falls off the bottom edge · hanghai LOOP big bounces, energy lines near the edges, BACK opens
+with a jump-up; coral disc reads quite red · vui OUT size jump · buon BACK short (28 fr). Clean: an binh lo muu tutin.
+The eunuch hat has a red knob/cord on top in every seal (F14 Qing look, see above).
+Credits tg set: 30 900. Balance at end 182 964 (shared). Ledger +50.
+
+## Rule ROOT-59 00:20Z: every seal prompt checked for Qing/Manchu/qipao/cheongsam/two-wing/flag-head before the gen (sg4_set.py now refuses
+them); MG3 gate script to be used once its path arrives. Why Qing passed: copied with the approved th-gian person block, not checked against F14.
+
+## SET htg (20/11 ~00:30Z) — old emperor, 10 seals, sub-agent (clips carry the "natural skin colour, never purple" sentence except so)
+| seal | A used | B used | OUT | LOOP | BACK | fr out/loop/back | OUT start |
+|---|---|---|---|---|---|---|---|
+| vui | aFG6HgLfSh | s7IpORal8e | s7Ipyz9l8e | JNCI3M9Oq4 | Cqn3KOUEEy | 46/60/60 | 1.0 |
+| buon | Cqn3bwSEEy | aFG6qlxfSh | mEZ4FU1hJQ | 5jDYlRFKxe | SyhX9VaUb8 | 48/60/54 | 0.8 |
+| so | gOmdPw4SXO (flat of BhN7vrPoQR) | mEZ4QLbhJQ | N2qfztu6D9 | xSBVOUUjfW | rgXTJS1xtc | 37/60/50 | auto 1.6 |
+| an | SyhXPcEUb8 | 1ld0S33r4r | Lw8DPJBswO | xSBVyPXjfW | 5jDYUyIKxe | 40/60/54 | 1.3 |
+| binh | EbYRKHruuO (flat of p8ygIx5ehw) | SyhX4WmUb8 | O6EtAcFynm | ksec7Gu16B | rgXTObYxtc | 48/60/52 | 0.8 |
+| ghen | aFG6bp0fSh | xSBVJ8IjfW | ksec7qR16B | YMlkBGBWeC | 1ld0Ohor4r | 40/60/54 | 1.3 |
+| lo | 1ld0UCfr4r | EbYR10puuO | rgXTya6xtc | hu29KVCvqL | cpSrtwR0eP | 50/60/48 | 0.7 |
+| muu | eIPShYkdqL | lJte4fwgv9 | xSBV4IBjfW | 79f8AQMJAL | lJte3Bbgv9 | 52/60/37 | auto 0.6 |
+| tutin | dt4UaLpXSL (flat of rgXTwFYxtc) | DoOlm68pcl | 3zKuDqaREY | ov6Jq9Q829 | 3zKupeYREY | 37/60/57 | 1.6 |
+| hanghai (coral) | fHzi5tHCDY | xSBVJvOjfW | fHziLXICDY | s7Ip3bBl8e | lJteZFSgv9 | 47/60/58 | 0.9 |
+CDN: htg-<k>-*.webp, still/htg-<k>.webp, htg-<k>-frames.jpg, htg-set-preview.mp4 (154.6 s).
+Purple face: NONE (except so = intended fear tint) → the skin sentence worked.
+Faults (no redo): an LOOP fr ~19–30: he shrinks into the disc, disc goes dark/black ~0.8 s, pops back (I looked: confirmed) · ghen OUT ~5 fr
+overshoot cut by the edge, BACK handkerchief drops out the bottom · so OUT 3–4 oversized frames · vui BACK white glow halo flash · hanghai
+LOOP size pulses. Clean: buon (little motion) binh lo muu tutin.
+Credits htg set: 30 900. Balance at end 182 019 (shared). Ledger +50.
+SEAL4 TOTAL since GO (Lượt 812): 4 sets × 30 900 = 123 600 cr (+ 12 360 for the 4 samples before). All 40 A keyframes carry the old
+"Qing-style" wording (made before F14); emperors wear a standing collar, the eunuch hat a red knob → owner to decide.
+
+## HANDOVER (20/11 ~00:35Z) — SEAL4 context 31.7 % of 1M (> START_CTX 4.5 % + 25 %) → ROLL; ROOT-59 opens the successor (worker never does).
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+STATE: ALL WORK DONE. 4 giận samples + 4 full sets (ht htg tg tv × vui buon so an binh ghen lo muu tutin hanghai) on CDN
+img/_review/emo-anim-groups/, ledger merged (200 sg4_set lines + 20 sample lines), everything pushed. Nothing running, no sub-agents left.
+Tools: sg4_prompts.py (person blocks, Qing removed), sg4_set.py (Thái hậu prompt word for word, person swap, hanghai coral, htg skin sentence,
+refuses banned words), sg4_post.py (flat / cut+still+sheet). Successor waits for ROOT-59: owner verdict on the 4 sets, and on the F14 open
+points (emperor standing collar, eunuch red-knob hat = new keyframes if she wants). Redo candidates listed per set above (no redo without OK).
+MG3 seal gate script: when ROOT-59 sends its path, run every prompt through it before any gen.

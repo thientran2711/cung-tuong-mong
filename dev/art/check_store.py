@@ -11,11 +11,12 @@ Usage
   python3 dev/art/check_store.py <prompt_file> <store_args...> [--refs id,id]                     # both parts (scope from the args / prompt)
   python3 dev/art/check_store.py <prompt_file> --scope tpN|prN|trieuN|mama|nude|face [--age aNN]   # approved part only (no store args)
   scope face = thiếu nữ face prompts (face-common mNN/cNN/sNN .FULL.txt, or a maker's stdout via prompt_file "-")
+  --pid sNN (scope face): B20 root-hex check, her root pair only (MG3 L784 #6); every scope: prompt > 10 000 chars = FAIL (gen tool limit)
 MASTER BLOCK (owner B25, Lượt 745/766, MG1): in EVERY scope every sentence of dev/art/MASTER_COMMON.txt must be present verbatim exactly once
   (dev/art/master_common.py); missing / edited / doubled = FAIL "MASTER ...".
   python3 dev/art/check_store.py --self | --audit | --registry-md
 Exit 1 = FAIL -> do NOT generate. Ledger lines carry "store_check":"PASS" and "approved_check":"PASS"."""
-import subprocess,sys,re,os,glob,collections
+import subprocess,sys,re,os,glob,collections,json
 ART=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(os.path.dirname(ART))
 sys.path.insert(0, ART); import master_common   # B25 ONE MASTER COMMON BLOCK (dev/art/MASTER_COMMON.txt), checked in EVERY scope
 NEG=re.compile(r"\b(no|not|never|without|nothing|none|nor)\b", re.I)
@@ -690,7 +691,16 @@ BANNED = [{'id': 'X01',
   'unless': '',
   'negation': 'no',
   'luot': '780 (C2 = B9, via ROOT-57; MG2)',
-  'why': "B9 GEN METHOD: no transparentBackground and no transparent-background prompt words; master M03 (plain light parchment) is the ONLY background sentence; the cut-out is images_remove_background after the gen. Scope 'any' incl. face and states"}]
+  'why': "B9 GEN METHOD: no transparentBackground and no transparent-background prompt words; master M03 (plain light parchment) is the ONLY background sentence; the cut-out is images_remove_background after the gen. Scope 'any' incl. face and states"},
+ {'id': 'F14',
+  'title': "Qing headdress words (liangbatou / two-wing board / flag-style headdress / Qing / Manchu)",
+  'regex': r'liang[- ]?ba[- ]?tou|\bqi[- ]?tou\b|two[- ]wing(?:ed)?\s+(?:black\s+)?(?:satin\s+)?(?:board|headdress)|(?:flat|black)[- ]board\s+headdress|board[- ]like\s+headdress|flag[- ](?:style|shaped)\s+headdress|banner\s+headdress|\bQing\b|\bManchu(?:rian)?\b',
+  'slot': '',
+  'scope': 'any',
+  'unless': '',
+  'negation': 'no',
+  'luot': '800 (F14, via ROOT-58; MG3)',
+  'why': "owner Lượt 800: no black two-wing board headdress (liangbatou, 'cái cục trên đầu') and no Qing look on ANY person; the words are banned in every scope, even negated (seal prompts included)"}]
 
 # G15 (owner Lượt 559): QUÝ NHÂN t3 DESIGN = option B v2. The t3 outfit-design words of the store (TIER_LOW[3] robe in t8-prompt-B/build.py) are REPLACED
 # by the Outfit words of dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt, copied verbatim; slots only: lilac -> {main}, deep teal -> {sec}
@@ -809,15 +819,64 @@ def grey_hits(text):
         if re.search(r"hair|temples|eyebrow|brows", ctx, re.I): continue
         out.append(ctx)
     return out
+# MG3 (owner Lượt 784 item 6, B20 Lượt 763/769/770): a FACE prompt of a known person must carry exactly her ROOT hex pair
+# (s-ids: face-common/s_root_colours.json; others: palettes_season.json, the season marked root:true) and no other #hex; old / self-picked hex = FAIL.
+PROMPT_MAX = 10000   # MG3: the Magnific gen tool refuses prompts over 10 000 characters (Thái hậu a51 L781 = 10 229 -> refused) -> FAIL before the gen
+HEX_RX = re.compile(r"#[0-9A-Fa-f]{6}\b")
+DEEP_COLOUR_RX = re.compile(r"\b(?:deep|dark|darker|deeper|dusky)[- ](?:blue|violet|blue-violet|purple|green|red|pink|rose|plum|teal|jade|navy|burgundy|crimson|wine|aubergine|lilac|lavender|aqua|aquamarine|turquoise|coral|peach|gold|yellow|orange|mint|periwinkle|emerald|sapphire|indigo|magenta|mauve|ochre|cyan|celadon|olive|maroon|scarlet|ruby|amber)\b", re.I)
+def root_pair(pid):
+    """-> (main_hex, sec_hex) of the person's ROOT palette, or None when the id has none (Kho / Công chúa / unknown)."""
+    if not pid: return None
+    fc = os.path.join(ART, "face-common")
+    sr = json.load(open(os.path.join(fc, "s_root_colours.json"), encoding="utf-8"))
+    if pid in sr and pid != "_note": return (sr[pid]["main_hex"].upper(), sr[pid]["sec_hex"].upper())
+    ps = json.load(open(os.path.join(fc, "palettes_season.json"), encoding="utf-8")).get(pid)
+    if isinstance(ps, dict):
+        for k, v in ps.items():
+            if isinstance(v, dict) and v.get("root"): return (v["main_hex"].upper(), v["sec_hex"].upper())
+    return None
+def root_hex_fails(text, pid):
+    rp = root_pair(pid)
+    if not rp: return []
+    have = {h.upper() for h in HEX_RX.findall(text)}
+    out = []
+    miss = [h for h in rp if h not in have]
+    if miss: out.append(("B20", "ROOT HEX", f"{pid}: root pair {rp[0]}/{rp[1]} required, missing {', '.join(miss)}"))
+    extra = sorted(have - set(rp))
+    if extra: out.append(("B20", "ROOT HEX", f"{pid}: hex not in her root pair (old or self-picked): {', '.join(extra)}"))
+    return out
+# MG3 (owner Lượt 784 item 7 = B24, owner Lượt 726/728/766): ONE rank colour per rank. A triều phục prompt (scope trieuN) must carry
+# the B24 hex of rank N and no other rank's B24 hex (royal yellow #EFBD69 allowed at t6+: 'small royal-yellow touch' / t8 itself)
+# and none of the dead option-B / old codes.
+B24_HEX = {1: "#EAE3D0", 2: "#7FB394", 3: "#7E9CCB", 4: "#E3A3B8", 5: "#A88BCB", 6: "#E3A25B", 7: "#D46A64", 8: "#EFBD69"}
+B24_DEAD = {"#5FA8A6": "old t4 jade-teal (option B)", "#4F86A8": "old t6 kingfisher blue (option B)"}
+def b24_fails(text, scope):
+    m = re.fullmatch(r"trieu(\d)", scope or "")
+    if not m: return []
+    n = int(m.group(1)); have = {h.upper() for h in HEX_RX.findall(text)}; out = []
+    if B24_HEX[n] not in have: out.append(("B24", "RANK HEX", f"triều t{n}: rank colour {B24_HEX[n]} missing (B24 Lượt 726/728)"))
+    other = sorted(h for k, h in B24_HEX.items() if k != n and h in have and not (h == "#EFBD69" and n >= 6))
+    if other: out.append(("B24", "RANK HEX", f"triều t{n}: another rank's B24 colour in the prompt: {', '.join(other)}"))
+    dead = sorted(f"{h} ({w})" for h, w in B24_DEAD.items() if h in have)
+    if dead: out.append(("B24", "DEAD HEX", f"triều t{n}: dead rank code(s): {', '.join(dead)}"))
+    return out
 # K18 LIVE GAME HANDS-OFF (owner Lượt 591, BW4): a live game picture path (img/fig-*, img/hd/*, any img/ path outside img/_review and img/_keep) in the prompt or --refs = FAIL.
 K18_LIVE = re.compile(r"(?:^|[/\s\"'(,])(img/(?!_review/|_keep/)[\w./-]+|fig-[\w-]+\.(?:webp|png|jpg))")
 FLOOR_SLEEVE_RX = re.compile(r"(?:SLEEVE LENGTH|SLEEVES:)[^.]*(?:touch(?:es|ing)? the floor|sweep(?:s|ing)? the floor|reach(?:es|ing)? the floor|to the floor)", re.I)   # SL1: floor-length sleeve sentence (any wording)
 
 
-def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
-    """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail)."""
+def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None):
+    """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail). pid = person id (sNN/mNN/cNN) for the face root-hex check."""
     if S is None: S, X = load_registry()
-    text = norm(text); fails, warns, found = [], [], {}
+    fails, warns, found = [], [], {}
+    if len(text.strip()) > PROMPT_MAX: fails.append(("LEN", "TOO LONG", f"prompt is {len(text.strip())} characters, the gen tool refuses more than {PROMPT_MAX}"))
+    text = norm(text)
+    fails += b24_fails(text, scope)   # MG3 L784 item 7 (B24)
+    if scope == "face":   # MG3 L784 item 6 (B20 / Lượt 763/769/770)
+        fails += root_hex_fails(text, pid)
+        for m in DEEP_COLOUR_RX.finditer(text):
+            if negated(text, m.start(), m.end()): continue
+            fails.append(("B20", "DEEP COLOUR", f"'deep/dark' adjective on a colour word (all seasons light and fresh, Lượt 769): …{text[max(0,m.start()-30):m.end()+20]}…")); break
     for k, kind, d in master_common.check(text, high=master_common.high_scope(scope)):   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
         fails.append((k, "MASTER " + kind, d))
     for k, kind, d in master_common.check_elder(text, scope, age):   # C5 (owner Lượt 779/784): elder colours win over M05 at a51/a65, never in Nữ đế
@@ -1002,8 +1061,8 @@ def main():
     if live:   # K18 (owner Lượt 591): references only from our store, never a live game file
         print('STORE CHECK FAIL',pf,'— K18 LIVE GAME FILE used as reference (refs only from our store: KC_REFS cut ids / store ids):',', '.join(sorted(set(live)))); return 1
     if "--scope" in a:   # prompt without store args (triều phục, ma ma spec files, …): approved part only
-        scope=a[a.index("--scope")+1]; age=a[a.index("--age")+1] if "--age" in a else None
-        f,w,_=check_text(prompt,scope,age=age); report(pf,scope,f,w)
+        scope=a[a.index("--scope")+1]; age=a[a.index("--age")+1] if "--age" in a else None; pid=a[a.index("--pid")+1] if "--pid" in a else None
+        f,w,_=check_text(prompt,scope,age=age,pid=pid); report(pf,scope,f,w)
         if f: print('STORE CHECK FAIL',pf,'— APPROVED CHECK FAIL: do NOT generate'); return 1
         print('STORE CHECK PASS',pf,'(approved_check PASS, scope',scope+')'); return 0
     args=a[1:]
