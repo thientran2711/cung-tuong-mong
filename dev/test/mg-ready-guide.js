@@ -71,10 +71,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const cal=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const k0=kg82Play;const o={};
   kg82Play=(kind,onEnd)=>setTimeout(()=>onEnd(7),30);/* the board itself is tested above; here only the save */
   try{const n=BAL.ag.mg2.cal.d.length;const has=k=>new RegExp("(^| )"+k+":").test(mgCalCode());o.ve0=has("ve");o.mua0=has("mua");
-   mgCalRun("mua");for(let i=0;i<n-2;i++){await sleep(200);document.getElementById("kg82go").click();await sleep(200);const b=document.getElementById("kg82ok");if(b&&i<n-3)b.click()}
+   mgCalRun("mua");for(let i=0;i<n-2;i++){await sleep(200);document.getElementById("kg82go").click();await sleep(200);const b=(document.getElementById("mgcal-nx")||document.getElementById("kg82ok"));if(b&&i<n-3)b.click()}
    await sleep(200);kg82Close();o.partial=has("mua");
-   mgCalRun("ve");for(let i=0;i<n;i++){await sleep(200);document.getElementById("kg82go").click();await sleep(250);if(i<n-1)document.getElementById("kg82ok").click()}
-   o.lastBtn=(document.getElementById("kg82ok")||{}).textContent;o.kept=has("ve");kg82Close();await sleep(100);o.keptAfterLeave=has("ve")}catch(e){o.err=String(e.message||e)}finally{kg82Play=k0}
+   mgCalRun("ve");for(let i=0;i<n;i++){await sleep(200);document.getElementById("kg82go").click();await sleep(250);if(i<n-1)(document.getElementById("mgcal-nx")||document.getElementById("kg82ok")).click()}
+   o.lastBtn=((document.getElementById("mgcal-nx")||document.getElementById("kg82ok"))||{}).textContent;o.kept=has("ve");kg82Close();await sleep(100);o.keptAfterLeave=has("ve")}catch(e){o.err=String(e.message||e)}finally{kg82Play=k0}
   return o});
  console.log(JSON.stringify(cal));
  /* the scan table */

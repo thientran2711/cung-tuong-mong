@@ -89,6 +89,9 @@ const ENT_INTRO={
  ch:["Thái hậu là cô ruột của ngươi; từ nhỏ ngươi đã quen từng lối đi trong Từ Ninh cung.","Thái hậu muốn một người nhà mình đứng cạnh Hoàng thượng. Có người chống lưng là may, nhưng phẩm vị vẫn phải tự mình giành lấy."],
  thd:["Cha ngươi là thầy đồ nghèo; nhà chỉ có mấy giá sách cũ và một mái tranh dột.","Văn chương của ngươi lọt tai quan huyện, tên ngươi vào sổ tuyển. Ngoài chữ nghĩa, ngươi không có gì mang theo."],
  cnv:["Lệnh tuyển cung nữ về tới làng. Nhà ngươi nghèo, nợ chồng lên nợ; tên ngươi được ghi vào sổ.","Một bọc áo, một lời mẹ dặn: vào cung thì cúi đầu mà sống."]};
+/* Ba Tư for new bd lives (owner OD 19/11; THE one per-life switch bdTxt, jrd_bd.js): an old-premise life keeps the Bắc Địch lines above */
+if(typeof bdTxtProp==="function")["Ba Tư ở xa tận phía tây, cuối con đường tơ lụa; lửa thánh cháy trong đền ngày đêm không tắt, ngựa quý và bạc trắng nổi tiếng khắp các nước.",
+ "Quân Đại Thực đã lấy ba phần đất nước. Phụ vương gả ngươi sang Đại Hy, mong một nước lớn làm chỗ dựa."].forEach((t,i)=>bdTxtProp(ENT_INTRO.bd,i,ENT_INTRO.bd[i],t));
 function entIntroCard(){const k=S.origin&&S.origin.k;const T=ENT_INTRO[k];if(!T)return null;
  const road="Kiếp này ngươi vào cung ngay.";
  return{t:`Tiền truyện · ${S.origin.n}`,who:pMe(),art:(typeof kitOriginWide==="function"?kitOriginWide(k):`img/origin-wide-${k}.webp`),btn:"Tiếp theo",entI:1,
@@ -106,6 +109,7 @@ const ENT_LINE={tt:"Cửa cung khép lại sau lưng; từ nay tiếng của cha
  nc:"Kiệu hoa qua Ngọ môn; tiếng nhạc cố quốc tắt ở bên kia cửa.",bd:"Ba trăm con ngựa dừng ngoài cửa thành; ngươi đi tiếp một mình.",
  td:"Ngươi bước qua cửa cung, đầu cúi thấp, tên mới trên môi.",ch:"Từ Ninh cung ở ngay bên kia vườn; nhưng con đường của ngươi phải tự mình đi.",
  thd:"Một bọc sách, một bộ áo sạch: ngươi bước vào nơi chữ nghĩa cũng là gươm.",cnv:"Ma ma đi trước, ngươi theo sau, qua những cánh cửa đỏ không đếm xuể."};
+if(typeof bdTxtProp==="function")bdTxtProp(ENT_LINE,"bd",ENT_LINE.bd,"Đoàn lạc đà chở bạc dừng ngoài Kim Quang môn; ngươi đi tiếp một mình.");/* Ba Tư (bdTxt) */
 function entReveal(){if(!S||S.dead||S.entIn||!S.entV)return;S.entIn=1;const srv=!!S.srv;const k=S.origin&&S.origin.k;
  const sub=`${S.origin?S.origin.n:""} · ${srv?"Cung nữ":RANKS[S.rank]?RANKS[S.rank].n:""}`;
  try{if(typeof kitPersonReveal==="function")kitPersonReveal({who:S,title:srv?"Nhập cung làm cung nữ":"Nhập cung",sub,line:ENT_LINE[k]||"",btn:srv?"Theo ma ma":"Tạ ơn"})}catch(e){console.error("entReveal",e)}}

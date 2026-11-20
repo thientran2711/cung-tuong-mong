@@ -263,7 +263,7 @@ ARC67.tt_co=arcFx("tt_co",{o:"tt",t:"Quân cờ trong tay cha",w:"dad",sj:"thư 
  t1:{h:"Cha tính đường lui",w:"dad",t:"Tin từ phủ: cha đang lo đưa một em họ của ngươi vào kỳ tuyển tú tới, phòng khi ngươi không còn dùng được.",o:[
   {n:"Viết thư nhắc cha công lao của ngươi",wx:"cha đổi ý",lx:"cha vẫn đưa em họ vào",rt:"Cha gác lại việc em họ.",rf:"Cha vẫn cho em họ học lễ nghi."},
   {n:"Tự đứng vững, không cần cha",f:"own",wx:"tự gây thế lực",rt:"Ngươi dùng bạc riêng nuôi tai mắt của mình."},
-  {n:"Để mặc",wx:"không tốn gì",lx:"thêm một đối thủ trong nhà",rt:"Ngươi không đáp."}]},
+  {n:"Để mặc",wx:"giữ bạc riêng, êm chuyện với cha",lx:"thêm một đối thủ trong nhà",rt:"Ngươi không đáp."}]},
  x1:{h:"Ván cờ lớn của cha",w:"dad",t:"Cha muốn ngươi khuyên Hoàng thượng giao Lại bộ cho ông nắm trọn. Được thì nhà ngươi nghiêng triều, mà mất thì cả nhà mất.",o:[
   {n:"Đặt điều kiện: cha theo ngươi, không phải ngươi theo cha",e:["win","lose"],rt:"Cha im lặng rất lâu rồi đồng ý.",rf:"Cha nổi giận, coi ngươi là con bất hiếu."},
   {n:"Khuyên Hoàng thượng như lời cha",e:["win","mid"],rt:"Hoàng thượng nghe theo.",rf:"Hoàng thượng chỉ cười, không đáp."},
