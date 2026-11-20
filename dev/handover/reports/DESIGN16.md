@@ -33,3 +33,9 @@ KEPT byte-identical from _cloak7: "a slim cloak hanging close, never bell-wide,"
 
 ## Handover
 Job done; nothing left open for a successor. ROLLOVER/LINEAGE lines: see START_ART_WORKER.md §6 (unchanged).
+
+## Update: G37 one-tier vân kiên on t8 (owner Lượt 1543, relayed by DESIGN14 / C #12)
+Both t8 _cloak9 files (s62 AND m02, so _cloak9 does not undo the m02_t8_cloak8 G37 fix of 379e8b0):
+"a SOFT jewelled cloud collar of supple silk in two small tiers of softly scalloped cloud-shaped lobes (upper tier smaller)," → "a moderately firm (never too stiff) jewelled cloud collar of supple silk in ONE small tier of softly scalloped cloud-shaped lobes," (the same wording as m02_t8_cloak8, word for word). .keep got 2 allow lines tagged "# owner Lượt 1543 G37". t7 is already single-tier, so nothing changes there.
+Chars now s62_t8 9993 · m02_t8 9904 (keep_check). keep_check --sidecar PASS ×2 · --all 203 PASS · check_store output still identical to _cloak7.
+NOTE for C #12: m02_t8 now has two branches, _cloak8 (DESIGN14: G37 only) and _cloak9 (embroidery + light gấm + G37). _cloak9 holds everything in _cloak8, so _cloak9 is the one to use.
