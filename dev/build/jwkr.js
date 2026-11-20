@@ -93,7 +93,8 @@ function wkrRefresh(){const el=document.querySelector("#modal .kshop.kwr");if(!e
 /* step 2: the material for that recipe (the j83 cards: odds at 5 phần, score needed per tier, ceiling, gift / sale value) */
 function wkrMat(kind,rid){const k=KWR.k,mode=KWR.mode,run=KWR.run,K=WK[kind],r=wkrOf(kind,rid),a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode==="teacher"?tchFee(k):0;const O=[];
  for(let m=0;m<3;m++)O.push({n:`${r.n} · ${K.mn[m]}`,fx:K.mat[m]?{bac:-K.mat[m]}:{},x:`${wkOddsTxt(S,kind,m)}${K.per?" · phải dâng trong tuần":""}${K.fin?" · "+wkFinTxt(K):""}`,
-  go:()=>{wkPend={kind,mat:m,r:rid,subj:wkrSubj(kind,r)};run();if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}});
+  go:()=>{const u=typeof kgSnap==="function"?kgSnap():null;if(u)KG82.preBack=()=>{u();if(K.mat[m])S.bac+=K.mat[m]};/* KIT §13.9: ✕ before «Sẵn sàng» = everything the lesson took back */
+   wkPend={kind,mat:m,r:rid,subj:wkrSubj(kind,r)};try{run()}finally{KG82.preBack=null}if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}});
  O.push({n:"Thôi",fx:{}});
  Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`${kitNumBox(`<p>Phẩm = phần chơi (từ 0 đến 10) + ${a.n} bậc ${l}: +${wkLvQ(S,a.k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p>`)}<p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}
 wkAsk=function(k,mode,run){const a=ARTS.find(x=>x.k===k);if(!wkKindsOf(k).some(x=>WKR[x]))return;Object.assign(KWR,{k,mode,run,kind:KWR.k===k?KWR.kind:null});

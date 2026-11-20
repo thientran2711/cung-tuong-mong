@@ -39,25 +39,25 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
     document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(250);__yes();await sleep(o.resWait||900);await __fx();r.after_rules=__state();r.x_res=__x()}
    else{await sleep(400);r.after_rules=__state()}
    /* the result of the give-up: ✕ = its «Đã hiểu» */
-   if(r.after_rules.open&&r.after_rules.res){document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(500);r.after_res=__state()}
+   if(r.after_rules.open&&r.after_rules.res){document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(400);if(__cf()){__yes();await sleep(400)}r.after_res=__state()}
    /* again: tutorial + play */
    __clean();(0,eval)(src);await sleep(W);const box=kg82Box();const tb=box&&box.querySelector('#kgrtut');
    if(tb){tb.click();await sleep(1200);r.x_tut=__x();r.tutOn=!!KG82.tut;document.getElementById('kgtback')&&document.getElementById('kgtback').click();await sleep(300)}
    const go=box&&box.querySelector('.kgr-go');if(go){go.click();await sleep(o.playWait||2200);r.x_play=__x();r.s_play=__state();
     document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(250);r.cf_play=__cf();if(r.cf_play){__yes()}await sleep(o.resWait||1200);await __fx();r.after_play=__state();r.x_res2=__x();
-    if(r.after_play.open&&r.after_play.res){document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(500);r.after_res2=__state()}}
+    if(r.after_play.open&&r.after_play.res){document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(400);if(__cf()){r.res_ask=1;__yes();await sleep(400)}r.after_res2=__state()}}
    __clean();return r}});
  await p.waitForTimeout(3000);
  const rows=[];const run=async(label,src,o,meta)=>{let r;try{r=await p.evaluate(([s,o])=>window.__cb(s,o),[src,o||{}])}catch(e){r={err:String(e.message).slice(0,160)}}rows.push([label,r,meta||{}]);return r};
  const v=`(liveRivals(true)[0])`;const D='(x)=>window.__done.push(x===undefined?"cb":x&&x.raw!=null?x.raw:x&&x.score!=null?"s"+x.score:x)';
  await run('startContest (hội thi)',`startContest({art:"dan",title:"Hội Thượng nguyên",onDone:${D}})`,{},{cost:'contest stake / place prizes',back:'give up → last-place result (0/10 màn thi)'});
- await run('playArt (học, tự học, tác phẩm)',`playArt({art:"mua",title:"Tự học",onDone:${D}})`,{},{cost:'khắc / materials already spent by the caller',back:'give up → «Màn chơi 0/10»'});
+ await run('playArt (học, tự học, tác phẩm)',`playArt({art:"mua",title:"Tự học",onDone:${D}})`,{},{cost:'callers that pre-charge (j83, jrcp, jveil) pass their undo',back:'rules: free back with the charge undone (or give up when no undo); play: give up → «Màn chơi 0/10»'});
  await run('jexam khảo hạch',`exRun(exPlan(S),{},${D})`,{},{cost:'exam subject',back:'give up → this subject 0/10, exam goes on'});
  await run('jentry tuyển chọn',`kcEntryExam("dan",${D},{})`,{},{cost:'entry exam',back:'give up → 0/10'});
  await run('jslap Tát / Né',`slapGame({dodge:false,by:${v},title:"Giáng tay",rows:[],go:"Tát",skip:"Tát luôn",skipSub:"",onDone:${D}})`,{},{cost:'slap stake',back:'give up → 0/10 lose result'});
- await run('jtd Tu đức','(TDS.busy=false,S.mg=null,tdPlay("cong","self"))',{},{cost:'khắc of the lesson',back:'give up → 0/10'});
+ await run('jtd Tu đức','(TDS.busy=false,S.mg=null,tdPlay("cong","self"))',{},{cost:'nothing before tdFinish',back:'rules: free back = its «Thôi, để lúc khác»; play: give up → 0/10'});
  await run('jts Hoàng thượng triệu',`tsGame({kind:"duho",odds:50,onDone:${D}})`,{},{cost:'the summons',back:'give up → 0/10 lose'});
- await run('jsgame mưu kế',`sgPlay({G:SG.K.rumor,art:"Mưu kế",v:${v},p0:()=>50,run:${D},cost:""})`,{},{cost:'scheme odds',back:'give up → 0/10 odds result, ✕ there = «Ra tay»'});
+ await run('jsgame mưu kế',`sgPlay({G:SG.K.rumor,art:"Mưu kế",v:${v},p0:()=>50,run:${D},cost:""})`,{},{cost:'pay (khắc / bạc) at the choice',back:'rules: free back, pay undone (sgpick); play: give up → 0/10 odds; result ✕ asks «Ra tay?»'});
  await run('jroute Nghiệm thân',`rtNgSleight("alum",3,${D})`,{},{cost:'the trick',back:'give up → «bị nhìn thấy»'});
  await run('j92 Chải chuốt','(can(1)||(S.ap=9),wdGroomUI())',{},{cost:'spend(1) only at the end',back:'rules: straight back (nothing spent); play: give up → «quá giản dị» (the timeout rule)'});
  /* 2 Thử tay */
@@ -78,6 +78,36 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(400);o.list_close=!document.getElementById('kg82')}catch(e){o.err=String(e.message||e)}
   __clean();return o});
  console.log(JSON.stringify(cal));
+ /* 6 free back before «Sẵn sàng» (rv-mg-back fixes 1+2): ✕ = closed, no confirm, S + khắc exactly as before the act began; 7 jsgame result ✕ asks first */
+ const pre=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const R={};
+  const AMB=['pcx','log','logs','logSeq','stat','emp','where','roster','tb','knw'];/* ambient (the living world ticks on timers): chatter memory, log lines, dialog counter, the Emperor's walk, who is where */
+  const SJ=()=>{const o=Object.assign({},S);AMB.forEach(k=>delete o[k]);return JSON.stringify([o,used])};/* S.pcx = ambient chatter memory; log lines aside */
+  const pick=async(i)=>{await sleep(150);const m=Q[0];if(!m||!m.opts)return false;const ix=typeof i==='function'?m.opts.findIndex(i):i;if(ix<0)return false;chooseM(ix);await sleep(200);return true};
+  /* the recipe picker (jwkr, KIT 28.13e) in front of the material dialog: tap the first open tile */
+  const tile=async()=>{await sleep(200);const t=[...document.querySelectorAll('#modal [data-kwrgo]')].find(x=>!x.disabled);if(t){t.click();await sleep(250)}return !!t};
+  const back=async()=>{const x=document.querySelector('#kg82 .kit-x[data-kitx=kgback]');if(!x)return 'noX';x.click();await sleep(300);return __cf()?'confirm':document.getElementById('kg82')?'open':'closed'};
+  const one=async(label,open,prep)=>{const r={};try{__clean();S.ap=9;S.suc=100;S.bac=999;used=0;Q.length=0;if(prep){prep();try{render()}catch(e){}await sleep(900)}await sleep(100);const s0=SJ();await open();await sleep(900);
+    r.frame=!!document.getElementById('kg82')&&!!(kg82Box()&&kg82Box().querySelector('.kgr-go'));r.paid=SJ()!==s0;r.x=await back();if(r.x==='confirm')__no();await sleep(200);
+    r.same=SJ()===s0;if(!r.same){const [a,u0]=JSON.parse(s0);r.diff=Object.keys(S).filter(k=>!AMB.includes(k)&&JSON.stringify(S[k])!==JSON.stringify(a[k])).slice(0,6);r.used=[u0,used]}
+    r.mg=S.mg;r.pend=!!window.__aaPend;r.ok=r.frame&&r.x==='closed'&&r.same&&!S.mg&&!r.pend/* nothing left pending: the next act is not blocked */}catch(e){r.err=String(e.message||e)}R[label]=r};
+  await one('jtd Tu đức (self)',async()=>{TDS.busy=false;S.mg=null;tdPlay("cong","self")});
+  await one('jtd Tu đức (thầy)',async()=>{TDS.busy=false;S.mg=null;tdPlay("dung","teacher")});
+  await one('j83 Tự học (bậc 5, vật liệu tốt)',async()=>{wkPractice(ARTS[0].k);await tile();await pick(1)},()=>{S.arts[ARTS[0].k]=5});
+  await one('j83 học: tự học',async()=>{lessonMode(ARTS[1].k,"self");await tile();await pick(1)},()=>{S.arts[ARTS[1].k]=1});
+  await one('jrcp học với thầy',async()=>{lessonMode(ARTS[2].k,"teacher");await pick(0);await tile();await pick(1)},()=>{S.arts[ARTS[2].k]=1});
+  await one('jrcp thầy dạy lối mới (bậc 5)',async()=>{rcpMaster(window.__rk);await pick(0);await tile();await pick(0)},()=>{const k=window.__rk=ARTS[3].k;S.arts[k]=5});
+  await one('j83 thẻ Tự học (Hành sự)',async()=>{const c=wkDeckCard();deck.push(c);window.__dc=c;window.__dcw={aaPend:!!window.__aaPend,mg:!!S.mg};act(deck.length-1)});
+  R['j83 thẻ Tự học (Hành sự)'].why=window.__dcw;R['j83 thẻ Tự học (Hành sự)'].cardFree=window.__dc&&!window.__dc.done;R['j83 thẻ Tự học (Hành sự)'].ok=R['j83 thẻ Tự học (Hành sự)'].ok&&R['j83 thẻ Tự học (Hành sự)'].cardFree;
+  await one('jveil kết mạng (dây bạc)',async()=>{const m=1;if(VL.mat[m])S.bac-=VL.mat[m];vlCraftRun(m)});/* the dialog option's fx pays the material, then go */
+  await one('jsgame mua chuộc (trả khắc)',async()=>{const sv=allServ().find(x=>{const o=ownerOf(x);return o&&o!==S});if(!sv)throw new Error('no servant');sgAsk({j:"serv",sid:sv.sid},"Mua chuộc");await pick(0)});
+  /* jsgame result ✕ asks first */
+  try{__clean();const v=liveRivals(true)[0];let ran=0;sgPlay({G:SG.K.rumor,art:"Mưu kế",v,p0:()=>50,run:()=>{ran++},cost:""});await sleep(900);
+   KG82.giveUp=1;document.getElementById('sggo').click();KG82.giveUp=0;await sleep(600);R.sgRes=!!document.getElementById('sgdo');
+   document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(300);R.sgAsk=__cf()&&/Ra tay\?/.test(document.getElementById('modal').textContent);R.sgRan0=ran;
+   __no();await sleep(250);R.sgStay=!!document.getElementById('sgdo')&&ran===0;
+   document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(300);__yes();await sleep(400);R.sgRan=ran;R.sgClosed=!document.getElementById('kg82')}catch(e){R.sgErr=String(e.message||e)}
+  __clean();return R});
+ console.log(JSON.stringify(pre));
  if(SHOT){const fs=require('fs');fs.mkdirSync(SHOT,{recursive:true});const tag=`${VW}x${VH}`;
   await p.evaluate(()=>{__clean();mgCalRun("dan")});await p.waitForTimeout(1500);await p.screenshot({path:`${SHOT}/rules-${tag}.png`});
   await p.evaluate(()=>{document.getElementById('kg82go').click()});await p.waitForTimeout(3000);await p.screenshot({path:`${SHOT}/play-${tag}.png`});
@@ -85,7 +115,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   await p.evaluate(()=>__yes());await p.waitForTimeout(800);await p.screenshot({path:`${SHOT}/list-${tag}.png`});
   await p.evaluate(()=>{__clean();startContest({art:"dan",title:"Hội Thượng nguyên",onDone:()=>{}})});await p.waitForTimeout(1500);
   await p.evaluate(()=>document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click());await p.waitForTimeout(600);await p.screenshot({path:`${SHOT}/contest-confirm-${tag}.png`});
-  await p.evaluate(()=>__yes());await p.waitForTimeout(1200);await p.screenshot({path:`${SHOT}/contest-giveup-${tag}.png`});await p.evaluate(()=>__clean())}
+  await p.evaluate(()=>__yes());await p.waitForTimeout(1200);await p.screenshot({path:`${SHOT}/contest-giveup-${tag}.png`});await p.evaluate(()=>__clean());
+  await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));__clean();sgPlay({G:SG.K.rumor,art:"Mưu kế",v:liveRivals(true)[0],p0:()=>50,run:()=>{},cost:""});await sleep(900);
+   KG82.giveUp=1;document.getElementById('sggo').click();KG82.giveUp=0;await sleep(600);document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click()});await p.waitForTimeout(700);
+  await p.screenshot({path:`${SHOT}/scheme-raytay-${tag}.png`});await p.evaluate(()=>__clean())}
  /* the scan table */
  const X=x=>x&&x.vis&&x.inView&&x.onTop&&x.n===1&&x.head?'✕':'NO '+JSON.stringify(x);
  console.log('\n| caller | rules ✕ | Hướng dẫn ✕ | play ✕ | result ✕ | rules ✕ goes to | play ✕ goes to | cost/stake effect |');console.log('|---|---|---|---|---|---|---|---|');
@@ -95,11 +128,15 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const bad=f=>rows.filter(([l,r])=>!f(l,r)).map(([l,r])=>l+' '+JSON.stringify(r).slice(0,260));
  const XV=x=>x&&x.vis&&x.inView&&x.onTop&&x.n===1&&x.head&&x.label==='Quay lại';
  let B=bad((l,r)=>XV(r.x_rules)&&(!r.x_tut||XV(r.x_tut))&&XV(r.x_play)&&(XV(r.x_res2)||XV(r.x_res)));ok(!B.length,'1 one kit ✕ «Quay lại» in the header on rules / Hướng dẫn / play / result (every caller)',B);
- B=bad((l,r)=>/Chải chuốt/.test(l)?(!r.cf_rules&&!r.after_rules.open):(r.cf_rules&&r.keep&&r.after_rules.open&&r.after_rules.res));ok(!B.length,'3 rules ✕ → confirm («Chơi tiếp» keeps the rules) → the caller\'s own give-up result (Chải chuốt: straight back)',B);
+ B=bad((l,r)=>/Chải chuốt|Tu đức/.test(l)?(!r.cf_rules&&!r.after_rules.open):(r.cf_rules&&r.keep&&r.after_rules.open&&r.after_rules.res));ok(!B.length,'3 rules ✕ → confirm («Chơi tiếp» keeps the rules) → the caller\'s own give-up result (Chải chuốt, Tu đức: straight back, nothing spent)',B);
  B=bad((l,r)=>r.cf_play&&r.after_play&&r.after_play.open&&r.after_play.res&&!r.after_play.run);ok(!B.length,'4 play ✕ → confirm → the caller\'s own result screen, board stopped',B);
  B=bad((l,r)=>{const a=r.after_res2;return a&&(/khảo hạch/.test(l)?(a.open&&/Môn 2/.test(a.title)):!a.open&&(/(Tu đức|Nghiệm thân|mưu kế|Chải chuốt)/.test(l)||a.done.length===1))});ok(!B.length,'4 ✕ on the give-up result = its «Đã hiểu» (frame closes, onDone once; khảo hạch: the next subject)',B);
  B=rows.filter(([l,r])=>r.after_play&&/\d+\/10/.test(r.after_play.resTxt)&&!/(^|\D|Môn \d)0\/10/.test(r.after_play.resTxt)).map(([l,r])=>l+' '+r.after_play.resTxt);ok(!B.length,'4 the give-up result reads 0/10 where the caller shows a score',B);
  ok(!cal.err&&XV(cal.list_x)&&cal.noThoi&&XV(cal.rules_x)&&cal.rules_back&&XV(cal.tut_x)&&cal.tut_back&&XV(cal.play_x)&&cal.playing&&cal.play_cf&&cal.play_back&&XV(cal.mid_x)&&cal.mid_nx&&cal.mid_back&&!cal.dan0&&!cal.dan1&&cal.list_close,'2 Thử tay: ✕ → kind list from rules / Hướng dẫn / play (confirm) / between rounds; kind not saved; ✕ closes the list',cal);
+ {const L=Object.keys(pre).filter(k=>typeof pre[k]==='object'&&pre[k]&&'ok' in pre[k]);const B2=L.filter(k=>!pre[k].ok).map(k=>k+' '+JSON.stringify(pre[k]));
+  ok(L.length>=9&&!B2.length,'6 before «Sẵn sàng»: ✕ = free back, no confirm, nothing spent (Sức, bạc, phí, khắc, vật liệu identical) — jtd, j83 (dialog + deck card), jrcp, jveil, jsgame pay',B2);
+  ok(L.filter(k=>!/jtd|thẻ/.test(k)).every(k=>pre[k].paid),'6 those callers charged (or hold pending) before the frame (the test sees it)',L.map(k=>k+':'+pre[k].paid));
+  ok(pre.sgRes&&pre.sgAsk&&pre.sgRan0===0&&pre.sgStay&&pre.sgRan===1&&pre.sgClosed,'7 jsgame result: ✕ asks «Ra tay?» first («Ở lại» keeps the card, nothing runs; «Ra tay» runs once)',pre)}
  const hid=await p.evaluate(()=>window.__cfHidden||0);ok(!hid,'3/4 the kit confirm lies on top of the game (its button takes a real tap)',{covered:hid});
  ok(!errs.length,'5 no page errors',errs.slice(0,5));
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`FAIL ${f}/${res.length}`:`PASS ${res.length}/${res.length}`);process.exit(f?1:0)})();
