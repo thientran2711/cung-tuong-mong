@@ -98,7 +98,13 @@ function kc3Left(){const ar=S.kc.ar;if(!ar)return 0;let n=ar.A?ar.A.seq.length-a
 function kc3Fire(){const ar=S.kc.ar;if(!ar||S.dead||!kc3On()||Q.some(m=>m.pid==="kc3"))return;
  if(!ar.A){if(ar.i>=ar.plan.length)return;let A=null;while(ar.i<ar.plan.length&&!(A=kc3Thread(ar.plan[ar.i]))||A&&!kc3Next(A)){if(!A)ar.i++;else{ar.i++;A=null}}if(!A)return;ar.A=A}
  const A=ar.A,id=kc3Next(A);if(!id){kc3End(A,kc3ScEnd(A));return}const b=kc3Beat(A,id);A.cur=id;const O=kc3Opts(A,b);
- pushDil(mkP("kc3",{a:A.a,b:id,o:O.map(o=>kc3Od(A,o,b))}),KCA[A.a].t)}
+ pushDil(mkP("kc3",{a:A.a,b:id,o:O.map(o=>kc3Od(A,o,b))}),KCA[A.a].t);kc3Pic(Q[Q.length-1],A.a)}
+/* the chapter picture (review r1 item 4): every home chapter names its EVENTS.json meaning group, given to the kit as the dialog's evId
+   "cat:<group>" (jevban kitDlgId / j89 evArtCat, KIT §28.10c) — the same picture on the beat card, its result card and the ending card;
+   a reloaded save gets it back (deserQ). No new picture, no new frame: the kit's own event picture slot. */
+const KC3PIC={kc_tt:"mat-uoc",kc_dtq:"bien-ai",kc_muoi:"bac-tien",kc_thd:"tai-nghe",kc_ch:"thu-nha",kc_td:"vu-oan",kc_ke:"am-muu",kc_hon:"khach-den",tm96z:"tu-tinh"};
+function kc3Pic(q,a){try{if(q&&(q.pid==="kc3"||q.kc3a)&&KC3PIC[a]&&evArtCat("cat:"+KC3PIC[a]))q.evId="cat:"+KC3PIC[a]}catch(e){}return q}
+(function(){if(typeof deserQ!=="function")return;const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q&&q.pid==="kc3"&&q.pp)kc3Pic(q,q.pp.a)})}catch(e){}return out}})();
 function kc3Line(o,od0,A,a){const sure=od0>=100,G=t=>t?`<span class="g">${t}</span>`:"",Rd=t=>t?`<span class="r">${t}</span>`:"";const end=o.e?(Array.isArray(o.e)?o.e:[o.e,o.e]):null;
  const eT=k=>{const E=a.E[k];return E?(E.k<0?Rd:G)("kết: "+kc3Fill(E.tag,A)):""};const gain=[fmt(o.w||{}),G(kc3Fill(o.wx||"",A)),o.sc>0?`Lợi thế +${o.sc}`:""].filter(Boolean).join(" · ");
  const cost=fmt(o.c||{});const lose=[fmt(o.l||{}),Rd(kc3Fill(o.lx||"",A)),end&&end[1]!==end[0]?eT(end[1]):""].filter(Boolean).join(" · ");
@@ -119,7 +125,8 @@ function kc3End(A,key,silent){const ar=S.kc.ar,a=KCA[A.a],E=a.E[key]||a.E.mid;if
  const seed=typeof E.seed==="function"?E.seed(A):E.seed;if(seed&&ARC67[seed])S.kc.seed3={id:seed,sc:E.sc||0,from:A.a};
  ar.done.push({a:A.a,e:key,tag:kc3Fill(E.tag,A),k:E.k||0,seed:seed||""});ar.A=null;ar.i++;ar.due=S.turn+BAL.kc3.cal.gap[0];
  log(`<b class="${E.k<0?"r":"g"}">${a.t} — kết: ${kc3Fill(E.tag,A)}.</b> ${kc3Fill(E.t,A)}${txt?" "+txt:""}`);kcFix();
- if(!silent&&!window.__bot&&!quiet)Q.push({t:a.t,who:kc3Who(E.w||a.w),h:`<p>${kc3Fill(E.t,A)}${txt?" "+txt:""}</p>`+kitRows([["Kết chương",kc3Fill(E.tag,A),E.k<0?"r":"g"]].concat(seed&&ARC67[seed]?[["Vào cung sẽ gặp",`${ARC67[seed].t}${E.sc?` · Lợi thế +${E.sc}`:""}`,"t"]]:[]))})}
+ if(!silent&&!window.__bot&&!quiet)Q.push({kc3a:1,t:a.t,who:kc3Who(E.w||a.w),h:`<p>${kc3Fill(E.t,A)}${txt?" "+txt:""}</p>`+kitRows([["Kết chương",kc3Fill(E.tag,A),E.k<0?"r":"g"]].concat(seed&&ARC67[seed]?[["Vào cung sẽ gặp",`${ARC67[seed].t}${E.sc?` · Lợi thế +${E.sc}`:""}`,"t"]]:[]))});
+ if(!silent&&!window.__bot&&!quiet)kc3Pic(Q[Q.length-1],A.a)}
 /* the month: the old three fixed beats stay for old saves only; one chapter beat at most a month; the arcs close before tuyển tú */
 (function(){const o0=kcOrigin;kcOrigin=function(){if(kc3On())return null;return o0.apply(this,arguments)}})();
 (function(){const m0=kcMonth;kcMonth=function(){const r=m0.apply(this,arguments);try{if(kc3On()&&!S.dead)kc3Month()}catch(e){console.error("kc3 month",e)}return r}})();

@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9d860229+","t":"2026-11-20T09:22Z","c":"KIT REQUEST: home stats (khm/kgt/kap/kld) on option cost rows","b":"36dd215b5672","h":[{"s":"9b6e9395+","t":"2026-11-20T08:46Z","c":"rv mg-play2: keep only the vetted face points — the 70 changed kc rows from the live img/mk-fit (no new v1/v2 rows: anchor-table gate flags…"},{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."}]};
+window.CTM_BI={"s":"1bf9bbb9+","t":"2026-11-20T09:29Z","c":"home-chapters r2: one core (BAL.kc3.fx -> jbalkc3.js, inline rule numbers -> BAL.kc3, one kcR1 gate), every roster person a face (pool chai…","b":"b0625a9a79dd","h":[{"s":"9b6e9395+","t":"2026-11-20T08:46Z","c":"rv mg-play2: keep only the vetted face points — the 70 changed kc rows from the live img/mk-fit (no new v1/v2 rows: anchor-table gate flags…"},{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -71352,7 +71352,13 @@ function kc3Left(){const ar=S.kc.ar;if(!ar)return 0;let n=ar.A?ar.A.seq.length-a
 function kc3Fire(){const ar=S.kc.ar;if(!ar||S.dead||!kc3On()||Q.some(m=>m.pid==="kc3"))return;
  if(!ar.A){if(ar.i>=ar.plan.length)return;let A=null;while(ar.i<ar.plan.length&&!(A=kc3Thread(ar.plan[ar.i]))||A&&!kc3Next(A)){if(!A)ar.i++;else{ar.i++;A=null}}if(!A)return;ar.A=A}
  const A=ar.A,id=kc3Next(A);if(!id){kc3End(A,kc3ScEnd(A));return}const b=kc3Beat(A,id);A.cur=id;const O=kc3Opts(A,b);
- pushDil(mkP("kc3",{a:A.a,b:id,o:O.map(o=>kc3Od(A,o,b))}),KCA[A.a].t)}
+ pushDil(mkP("kc3",{a:A.a,b:id,o:O.map(o=>kc3Od(A,o,b))}),KCA[A.a].t);kc3Pic(Q[Q.length-1],A.a)}
+/* the chapter picture (review r1 item 4): every home chapter names its EVENTS.json meaning group, given to the kit as the dialog's evId
+   "cat:<group>" (jevban kitDlgId / j89 evArtCat, KIT §28.10c) — the same picture on the beat card, its result card and the ending card;
+   a reloaded save gets it back (deserQ). No new picture, no new frame: the kit's own event picture slot. */
+const KC3PIC={kc_tt:"mat-uoc",kc_dtq:"bien-ai",kc_muoi:"bac-tien",kc_thd:"tai-nghe",kc_ch:"thu-nha",kc_td:"vu-oan",kc_ke:"am-muu",kc_hon:"khach-den",tm96z:"tu-tinh"};
+function kc3Pic(q,a){try{if(q&&(q.pid==="kc3"||q.kc3a)&&KC3PIC[a]&&evArtCat("cat:"+KC3PIC[a]))q.evId="cat:"+KC3PIC[a]}catch(e){}return q}
+(function(){if(typeof deserQ!=="function")return;const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q&&q.pid==="kc3"&&q.pp)kc3Pic(q,q.pp.a)})}catch(e){}return out}})();
 function kc3Line(o,od0,A,a){const sure=od0>=100,G=t=>t?`<span class="g">${t}</span>`:"",Rd=t=>t?`<span class="r">${t}</span>`:"";const end=o.e?(Array.isArray(o.e)?o.e:[o.e,o.e]):null;
  const eT=k=>{const E=a.E[k];return E?(E.k<0?Rd:G)("kết: "+kc3Fill(E.tag,A)):""};const gain=[fmt(o.w||{}),G(kc3Fill(o.wx||"",A)),o.sc>0?`Lợi thế +${o.sc}`:""].filter(Boolean).join(" · ");
  const cost=fmt(o.c||{});const lose=[fmt(o.l||{}),Rd(kc3Fill(o.lx||"",A)),end&&end[1]!==end[0]?eT(end[1]):""].filter(Boolean).join(" · ");
@@ -71373,7 +71379,8 @@ function kc3End(A,key,silent){const ar=S.kc.ar,a=KCA[A.a],E=a.E[key]||a.E.mid;if
  const seed=typeof E.seed==="function"?E.seed(A):E.seed;if(seed&&ARC67[seed])S.kc.seed3={id:seed,sc:E.sc||0,from:A.a};
  ar.done.push({a:A.a,e:key,tag:kc3Fill(E.tag,A),k:E.k||0,seed:seed||""});ar.A=null;ar.i++;ar.due=S.turn+BAL.kc3.cal.gap[0];
  log(`<b class="${E.k<0?"r":"g"}">${a.t} — kết: ${kc3Fill(E.tag,A)}.</b> ${kc3Fill(E.t,A)}${txt?" "+txt:""}`);kcFix();
- if(!silent&&!window.__bot&&!quiet)Q.push({t:a.t,who:kc3Who(E.w||a.w),h:`<p>${kc3Fill(E.t,A)}${txt?" "+txt:""}</p>`+kitRows([["Kết chương",kc3Fill(E.tag,A),E.k<0?"r":"g"]].concat(seed&&ARC67[seed]?[["Vào cung sẽ gặp",`${ARC67[seed].t}${E.sc?` · Lợi thế +${E.sc}`:""}`,"t"]]:[]))})}
+ if(!silent&&!window.__bot&&!quiet)Q.push({kc3a:1,t:a.t,who:kc3Who(E.w||a.w),h:`<p>${kc3Fill(E.t,A)}${txt?" "+txt:""}</p>`+kitRows([["Kết chương",kc3Fill(E.tag,A),E.k<0?"r":"g"]].concat(seed&&ARC67[seed]?[["Vào cung sẽ gặp",`${ARC67[seed].t}${E.sc?` · Lợi thế +${E.sc}`:""}`,"t"]]:[]))});
+ if(!silent&&!window.__bot&&!quiet)kc3Pic(Q[Q.length-1],A.a)}
 /* the month: the old three fixed beats stay for old saves only; one chapter beat at most a month; the arcs close before tuyển tú */
 (function(){const o0=kcOrigin;kcOrigin=function(){if(kc3On())return null;return o0.apply(this,arguments)}})();
 (function(){const m0=kcMonth;kcMonth=function(){const r=m0.apply(this,arguments);try{if(kc3On()&&!S.dead)kc3Month()}catch(e){console.error("kc3 month",e)}return r}})();
@@ -82757,7 +82764,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="36dd215b5672";window.CTM_BUILD=BUILD;
+const BUILD="b0625a9a79dd";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
