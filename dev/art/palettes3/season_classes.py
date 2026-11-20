@@ -26,9 +26,9 @@ colourlib.oklch = functools.lru_cache(maxsize=None)(lambda h: _ok(h))
 from colourlib import *
 from seasons import SEASONS, VN
 import re
-KW = [('thu', 'terracotta rust brick sienna olive moss bamboo sage khaki brown aubergine'),
-      ('ha', 'orange apricot peach mango marigold sunflower yellow honey saffron amber caramel persimmon melon cantaloupe gold lemon'),
-      ('xuan', 'pink rose coral blush peony cherry lotus raspberry fuchsia magenta crimson red garnet wine burgundy lychee'),
+KW = [('thu', 'coral pomegranate cranberry berry olive leaf'),
+      ('ha', 'orange apricot peach mango marigold sunflower yellow honey saffron persimmon melon cantaloupe gold lemon butter'),
+      ('xuan', 'pink rose blush peony cherry lotus raspberry fuchsia magenta crimson red garnet wine burgundy lychee'),
       ('dong', 'blue navy indigo violet purple lilac lavender orchid plum jade teal aqua celadon mint emerald pine ice frost white ivory pearl cream')]
 def word_season(name):
     n = name.lower()
@@ -80,17 +80,37 @@ def ungrey(h, ref):
     return lch2hex(L, 0.035 if L >= 0.86 else 0.06, Hn)
 
 # season colour FAMILIES (the classification itself): name, OKLCH hue, chroma — each shown pale / medium / deep
-# (depth is NOT the season). Yellows kept off the royal-yellow band H 80–100 (B21): mango H 72, lemon H 106.
+# (depth is NOT the season; yellow / honey / mango 'deep' stays bright, a dark yellow reads brown). Yellows kept off the royal-yellow band H 80–100 (B21): mango H 72, lemon H 106.
 FAMILIES = {
- 'xuan': [('cherry-blossom pink', 2, .09), ('rose', 10, .11), ('coral pink', 25, .12), ('peony', 350, .12),
+ 'xuan': [('cherry-blossom pink', 2, .09), ('rose', 10, .11), ('coral pink', 18, .11), ('peony', 350, .12),
           ('raspberry', 355, .14), ('Tết red', 22, .16), ('spring green', 138, .11)],
  'ha':   [('peach', 45, .09), ('apricot', 55, .11), ('orange', 50, .15), ('mango', 72, .13), ('marigold', 65, .15),
-          ('honey', 78, .10), ('saffron', 60, .14), ('lemon yellow', 106, .12)],
- 'thu':  [('terracotta', 38, .11), ('rust', 45, .13), ('brick', 30, .10), ('burnt sienna', 50, .09), ('olive', 115, .09),
-          ('moss', 128, .08), ('sage', 145, .05), ('aubergine', 330, .09)],
+          ('honey', 78, .12), ('saffron', 60, .15), ('lemon yellow', 106, .13)],
+ 'thu':  [('coral orange', 35, .15), ('coral red', 28, .16), ('pomegranate red', 20, .16), ('cranberry', 5, .15),
+          ('berry', 350, .14),
+          ('fresh olive green', 125, .12), ('leaf green', 135, .12)],
  'dong': [('ice blue', 230, .06), ('sapphire', 260, .12), ('indigo', 275, .11), ('violet', 300, .12), ('orchid', 320, .10),
           ('jade', 160, .09), ('teal', 195, .08), ('emerald', 165, .12)],
 }
+
+OLDW = r'brown|rust|brick|sienna|terracotta|caramel|chestnut|olive|aubergine|burgundy|wine|dusty|muddy|smoky|khaki|bamboo|moss|sage|beige|champagne|slate|amber|saffron'
+def freshen(h, name):
+    """owner Lượt 9xx 'bỏ những cái tông màu nâu, màu già': brown / dull / old-named colour -> young colour, SAME lightness"""
+    L, C, H = oklch(h); n = name.lower()
+    if is_white(h):
+        if re.search(r'beige|champagne|gold', n):
+            return lch2hex(L, 0.05, 50), 'pale peach', 'be/champagne (màu già) → hồng đào nhạt tươi'
+        return None
+    if 20 <= H <= 112 and L < 0.67 and C < 0.15:              # brown: dark warm hue
+        if H > 95: return lch2hex(L, 0.13, 138), cname(lch2hex(L, 0.13, 138)) .replace('leaf green', 'leaf green'), 'nâu ô-liu (màu già) → xanh lá tươi'
+        return lch2hex(L, 0.15, 30), ('deep ' if L < 0.55 else 'soft ') + 'coral red', 'nâu (màu già) → đỏ san hô tươi'
+    if (H >= 340 or H < 20) and L < 0.56 and C < 0.12:        # brown-red: burgundy / wine / rose-brown
+        return lch2hex(L, 0.14, 355), 'deep berry', 'đỏ nâu / rượu (màu già) → đỏ quả mọng'
+    if 0.40 < L < 0.80 and C < 0.07:                          # dull / dusty / smoky
+        h2 = lch2hex(L, 0.09, H); return h2, cname(h2), 'xỉn (màu già) → cùng màu, tươi hơn'
+    if re.search(OLDW, n):                                    # old name, colour already fine: freshen a touch + young name
+        h2 = lch2hex(L, min(C + 0.02, 0.17), H); return h2, cname(h2), 'tên/sắc già → tươi hơn một chút'
+    return None
 
 def main():
     R, log = {}, {}
@@ -103,6 +123,11 @@ def main():
                 h2 = ungrey(q[role + '_hex'], code[role + '_hex'])
                 q[role + '_hex'] = h2; q[role] = cname(h2)
                 why.append(f"{'chính' if role == 'main' else 'phụ'} xám → {q[role]} cùng độ sáng (bỏ xám)")
+        for role in ('main', 'sec'):
+            f = freshen(q[role + '_hex'], q[role])
+            if f:
+                q[role + '_hex'], q[role] = f[0], f[1]
+                why.append(f"{'chính' if role == 'main' else 'phụ'} {f[2]}")
         R[k] = q
         if why: log[k] = dict(old=old, why=why)
     # season by colour character (same pair, any depth)
@@ -110,13 +135,13 @@ def main():
     # twins: two roots in one season failing the gate -> move the one whose smallest hue shift clears ALL its clashes
     def clashes(k, q):
         return [o for o in ids if o != k and S[o] == S[k] and pair_verdict(q, R[o])[0] == 'FAIL']
-    for rnd in range(4):
+    for rnd in range(10):
         moved = False
         for a, b in itertools.combinations(ids, 2):
             if S[a] != S[b] or pair_verdict(R[a], R[b])[0] != 'FAIL': continue
             best = None
             for k in (b, a) if k_pref(a, b) else (a, b):
-                for role, dh in sorted(((r, d) for r in ('sec', 'main') for d in (12, -12, 20, -20, 28, -28, 36, -36, 44, -44, 52, -52)),
+                for role, dh in sorted(((r, d) for r in ('sec', 'main') for d in (12, -12, 20, -20, 28, -28, 36, -36, 44, -44, 52, -52, 64, -64, 80, -80)),
                                        key=lambda x: abs(x[1]) + (0 if x[0] == 'sec' else 5)):
                     L, C, H = oklch(R[k][role + '_hex']); h2 = lch2hex(L, max(C, 0.05), (H + dh) % 360)
                     q = dict(R[k]); q[role + '_hex'] = h2; q[role] = cname(h2)
@@ -130,12 +155,12 @@ def main():
                 R[k] = q; moved = True
         if not moved: break
     # stylist hand picks (replace an auto move that changed her character)
-    HAND = {'c32': (dict(main='soft ivory', main_hex='#EDDCC6', sec='indigo blue', sec_hex='#49659C'),
+    HAND = {'c31': (dict(main='soft pale jade', main_hex='#ABD4BB', sec='soft coral', sec_hex='#D67064'),
+                    'phụ gần trùng m29 (cùng ngọc + hồng) → san hô tươi cùng độ đậm: ngọc nhạt + san hô (cặp xuân trẻ)'),
+            'c32': (dict(main='soft ivory', main_hex='#EDDCC6', sec='indigo blue', sec_hex='#49659C'),
                     'phụ gần trùng c14 → chàm ngả xanh hơn 10°, giữ ngà + chàm (cặp kinh điển), giữ độ đậm'),
             's19': (dict(main='soft garnet red', main_hex='#AA3C4E', sec='pale jade', sec_hex='#B2D3C6'),
-                    'phụ xám → ngọc nhạt cùng độ sáng: đỏ lựu + ngọc bích (cặp lụa cổ điển), khác s07 đỏ rượu + xanh lam'),
-            's44': (dict(main='soft burnt sienna', main_hex='#A6593F', sec='sage green', sec_hex='#94B594'),
-                    'phụ xám → xanh lá xô thơm cùng độ sáng (bỏ xám); F3 vẽ s44 bằng #94B594')}
+                    'phụ xám → ngọc nhạt cùng độ sáng: đỏ lựu + ngọc bích (cặp lụa cổ điển), khác s07 đỏ rượu + xanh lam')}
     for k, (q, why) in HAND.items():
         log.setdefault(k, dict(old=dict(R[k]), why=[]))
         src = D[k][D[k]['root_season']]; src = src.get('root_drawn', src)     # the DRAWN pair (s44 deep root already patched)
@@ -144,7 +169,8 @@ def main():
     left = [(a, b) for a, b in itertools.combinations(ids, 2) if S[a] == S[b] and pair_verdict(R[a], R[b])[0] == 'FAIL']
     fam = {}
     for se, lst in FAMILIES.items():
-        fam[se] = [dict(name=n, swatches=[lch2hex(L, min(C * f, 0.17), H) for L, f in ((0.84, 0.75), (0.70, 1.0), (0.52, 0.95))])
+        fam[se] = [dict(name=n, swatches=[lch2hex(L, min(C * f, 0.18), H) for L, f in
+                   (((0.90, 0.7), (0.82, 1.0), (0.74, 1.15)) if 40 <= H <= 112 else ((0.85, 0.7), (0.72, 1.0), (0.58, 1.1)))])
                    for n, H, C in lst]
     out = {'_note': __doc__.strip(), 'families': fam, 'status': 'PROPOSAL — owner approves the classification before per-person seasons',
            'counts': {VN[s]: sum(1 for k in ids if S[k] == s) for s in SEASONS}, 'gate_fails_left': left}
