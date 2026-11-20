@@ -48,7 +48,7 @@ function npwPick(L,score,o){const B=npwB();const R=(L||[]).map(x=>[x,+score(x)||
  const w=top.map(r=>Math.pow(r[1],pw));let x=Math.random()*w.reduce((a,b)=>a+b,0);for(let i=0;i<top.length;i++){x-=w[i];if(x<=0)return top[i][0]}return top[top.length-1][0]}
 function npwAsk(kind,ctx){const d=NPW.reg[kind];if(!d)throw new Error("npcWhy: unknown kind "+kind);const B=npwB();const O=[];let cd=0;
  const lim=typeof d.lim==="function"?d.lim(ctx||{}):(d.lim||0);let n=0;
- for(const p of (d.who(ctx||{})||[])){if(!p)continue;if(lim){if(!npwCdOk(kind,p)){cd++;continue}if(n>=lim)break;n++}let r=null;try{r=d.why(p,ctx||{})}catch(e){console.error("npcWhy "+kind,e);r=null}
+ for(const p of (d.who(ctx||{})||[])){if(!p||p.coop)continue;/* review coop-thin-f6b r1 (law 1, the whole npc-purpose family): the co-op friend entry (jcoopworld {coop:true}: a consort or a servant) is a PLAYER, never an NPC actor of a kind (loTake / dhTake kept a stolen piece in his stand-in → bridged to him as her «Quà tặng»; arson, omen, mock … acted in his name). seekEmp / cmScorn / cmLand already excluded him one by one */if(lim){if(!npwCdOk(kind,p)){cd++;continue}if(n>=lim)break;n++}let r=null;try{r=d.why(p,ctx||{})}catch(e){console.error("npcWhy "+kind,e);r=null}
   if(!r||!(r.s>=B.min))continue;if(!npwCdOk(kind,p)){cd++;continue}O.push({kind,who:p,tgt:r.t||null,why:r.r||"",place:r.k||null,flag:r.flag||null,s:r.s})}
  if(cd)npwSt(kind,"cd");return O}
 function npwOnFire(kind,o,ctx){const d=NPW.reg[kind];if(d&&typeof d.on==="function")try{d.on(o,ctx||{})}catch(e){console.error("npcWhy on "+kind,e)}}

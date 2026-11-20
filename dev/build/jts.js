@@ -105,6 +105,7 @@ function tsGame(o){const odds=oddsCl(Math.round(o.odds||50));const skipRes=()=>t
   kg82ShowRes(tsRows(rows)+`<div class="kg82act"><button class="kbtn" id="kg82ok">Đã hiểu</button></div>`,r.skipped?!!r.ok:r.raw>=5);kg82Set("score",`${r.raw}/10`);kg82Set("time","đã hết");
   $("kg82ok").onclick=()=>{kg82Close();try{o.onDone(r)}catch(e){console.error(e)}}};
  KG82.phase="intro";box.innerHTML=(o.intro?tsRows(o.intro):"")+`<div class="kg82act"><button class="kbtn" id="kg82go">Bắt đầu</button>${kitQuick({id:"kg82skip",n:"Bỏ qua",sub:`tính theo cơ may thường: ${word(odds)}`})}</div>`;
+ kgReady(box,{kind:o.kind});/* KIT §13.7 */
  $("kg82go").onclick=()=>kg82Play(o.kind,raw=>fin({raw,skipped:false,guard:o.risk?(KG82.tsGuard?1:0):null}));$("kg82skip").onclick=()=>fin(skipRes())}
 window.tsGame=tsGame;
 

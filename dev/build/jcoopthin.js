@@ -207,7 +207,7 @@ TH.NOOP.push("resultShow");
    gates read screenOff() (j1: true inside COOPW.ctx), so nothing of hers draws on the host's screen; her floaters / numbers / item and coin
    effects called in her run are captured here (UICAP, plain arguments only) and play on HER phone once, with the answer (TH.uiPlay).
    E's buổi step, B's life, C's world frame and D's deferred work stay quiet (turns that are not her tap). */
-const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitNotice"/* review coop-ptime-reds r1 (whole family: her notices raised by her run on the host — jptime pt:go / pt:back / pt:ord, jrcv rcv:, jerr errand:, jstagehere close: — showed on the HOST's screen, her report text included, and never on hers): captured, shown on HER phone (uiPlay gives the «go» back) */,"kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */,
+const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitNotice"/* review coop-ptime-reds r1 (main): her notices raised by her run on the host (jptime pt:go / pt:back / pt:ord, jrcv rcv:, jerr errand:, jstagehere close:) shown on HER phone (uiPlay gives the «go» back: noteGo) */,"kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */,
  "kpmPlay"/* hostnull (d): her act's figure move on the stage (jpres kpmGo: slap / drag / thread …), played on HER stage */,"cfShow"/* hostnull (d): her night card-flip scene (jflip) */,
  "krvFlip"/* hostnull (b): her face reveal (jreveal krvFlip, raised by k61Know / k61Meet in her run) plays on HER phone, never on the host (below) */]);
 for(const n of UICAP)if(!TH.NOOP.includes(n)&&n!=="kpmPlay")TH.NOOP.push(n);/* kpmPlay: defined below (her stage replays it); in any context its kpmGo is already captured / a no-op, so it needs no wrapper (coop-thin-b NOOP check) */
@@ -234,20 +234,20 @@ TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let mo
    render() alone. Nothing observes during the repaint (the observer is disconnected): it cannot feed itself, no loop. */
 let RPM=false;TH.rpN=0;TH.rpMs=0;const RPF=()=>{};
 function rpAsk(m){RPM=RPM||m;try{D.after(RPF)}catch(e){}}
+/* guest: what her run on the host captured, played once on her own screen */
+/* hostnull (c): ONE cap rule (BAL.coopUi, one core): at most BAL.coopUi.batch effects play at once; the rest wait in order and play
+   BAL.coopUi.gapMs later, batch by batch — an effect is never dropped (the old answer kept only 4, the run 12). Returns the number queued. */
+const UIQ=[];let uiT=0;
 /* a captured notice loses its «go» (a function never travels): given back by its id on her phone, the same go its maker set (a notice had a go iff it has a goLabel) */
 function noteGo(sp){try{if(!sp||typeof sp!=="object"||!sp.goLabel)return sp;const id=String(sp.id||"");let go=null;
  if(/^pt:ord:/.test(id)&&typeof ptOrdQ==="function"&&typeof ptOrdOpen==="function"){const k=id.slice(7);go=()=>{const o=ptOrdQ().find(z=>String(z.id)===k);if(o)setTimeout(()=>ptOrdOpen(o),0)}}
  else if(/^pt:/.test(id)&&typeof ptOpenTin==="function")go=ptOpenTin;else if(/^errand:/.test(id)&&typeof errOpen==="function")go=errOpen;
  else if(/^rcv:/.test(id)&&typeof rcvOpen==="function")go=()=>rcvOpen(id);
  return go?Object.assign({},sp,{go}):Object.assign({},sp,{goLabel:""})}catch(e){return sp}}
-/* guest: what her run on the host captured, played once on her own screen */
-/* hostnull (c): ONE cap rule (BAL.coopUi, one core): at most BAL.coopUi.batch effects play at once; the rest wait in order and play
-   BAL.coopUi.gapMs later, batch by batch — an effect is never dropped (the old answer kept only 4, the run 12). Returns the number queued. */
-const UIQ=[];let uiT=0;
 function uiPump(){uiT=0;const B=BAL.coopUi/* one core (law 4): no typed fallback */;let n=0;
- while(UIQ.length&&n<Math.max(1,B.batch|0)){const [f,a]=UIQ.shift();try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}
+ while(UIQ.length&&n<Math.max(1,B.batch|0)){const [f,a]=UIQ.shift();if(f==="kitNotice"&&Array.isArray(a))a[0]=noteGo(a[0])/* ptime-reds (main): the notice's «go» given back */;try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}
  TH.uiN=(TH.uiN|0)+n;if(UIQ.length)uiT=setTimeout(uiPump,Math.max(0,B.gapMs|0))}
-TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;if(f==="kitNotice"&&Array.isArray(a))a[0]=noteGo(a[0]);UIQ.push([f,a]);n++}
+TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;UIQ.push([f,a]);n++}
  if(n&&!uiT)uiT=setTimeout(uiPump,0)/* after every listener of the same view (her patch + render): an effect reads the state it shows */;return n};
 TH.uiQ=()=>UIQ.length;
 for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx&&n!=="resultShow"){if(TH.uiMiss&&!UICAP.has(n))TH.uiMiss[n]=(TH.uiMiss[n]||0)+1;/* part G: what her runs raise that her phone never replays (sfx attribution) */if(TH.uiCap&&UICAP.has(n))try{const a=[...arguments].map(uiArg);if(n==="kitLine"||n==="srvToast")a[0]=String(a[0]==null?"":a[0]).slice(0,300);TH.uiCap.push([n,a])}catch(e){}return}
