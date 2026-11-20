@@ -485,3 +485,4 @@ Hourly wake: D #11's send_later trig_01B4Qtz99jDbmqYCNDyu3h8G (~20:37Z) fires in
   Load: working = JW #4, chain #5, emo, review rival-hauthay; idle-waiting = lander EaTxKjoN, reviewers GMDXZAV9 / E9Hd8tHX / CjH2dKcm, workers DuRCG31a (rival FAILs) / CzXkfovc (econ). Context D #12 ≈ 19 % (est.) < 32 %. Next wake ~00:24Z.
 - (21/11 ~00:35Z) FROM MAIN ROOT-82: LIVE now b1033eb0 (jtq14-addr + ge-rank). Merge before LAND READY.
 - (21/11 ~00:40Z) FROM MAIN ROOT-82: econ-tamco kit block — ORDERED kit keeper MtjP4KTg to build the «Tốn» row part (KIT_REQUESTS L85 + L80 same family) on review/kit-ton-row, target KIT READY well before 12:00Z; KIT READY line will come here. Keep econ-tamco ready for the 2-line swap.
+- 20/11 23:20Z PICKUP REVIEW rival-hauthay BIG session_01964izCzS3APtxAsgZxDkgd, depth 4, START_CTX ≈ 4 % (est.; get_session used_tokens 0). Rollover at 29 %, ceiling 60 %. Reviewing review/rival-hauthay ff63a590 (base night-final-r3 73a09248).
