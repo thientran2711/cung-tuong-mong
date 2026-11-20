@@ -19,16 +19,18 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 2 */
   const ds=[-2,-1,0,1,2],raws=[9,8,7,6,5];let s=0;ds.forEach((d,i)=>s+=raws[i]-(mgMedD(d)-mgMedD(0)));o.base=mgCalBase(raws,ds);o.baseX=Math.round(s/5*10)/10;o.baseClamp=mgCalBase([10,10,10,10,10],[2,2,2,2,2]);
   /* 3 */
-  const L=liveRivals(true).filter(v=>v.alive);o.def=mgCalBand("dan");const before=L.map(v=>mgHand("dan",v));
-  const v=L[0];const keep=v.mgH,keepV=v.mgHv;delete v.mgH;delete v.mgHv;o.oldSave=mgHand("dan",v)===before[0];v.mgH=keep;v.mgHv=keepV;
-  C.k.dan={b:7,n:5,at:"11/17/2026"};const Bd=mgCalBand("dan");o.band=Bd;o.bandX={hi:Math.min(C.max,7+H.w/2+C.up),lo:Math.max(C.min,7+H.w/2-C.dn)};
-  const after=L.map(v=>mgHand("dan",v));o.inBand=after.every(h=>h>=Bd.lo-1e-9&&h<=Bd.hi+1e-9);
-  const ord=a=>a.map((h,i)=>[h,i]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]).join(",");o.order=ord(before)===ord(after);o.otherKind=mgCalBand("co").sig===o.def.sig;
+  /* steps 3–4 run on kinds the owner has NOT calibrated (BAL.ag.mg2.cal.k), picked at run time: a landed owner code (dan 8.3, 72f7c0c5) must not break them */
+  const UNC=mgCalKinds().filter(k=>!(C.k||{})[k]);const K=UNC[0],K2=UNC[1];o.K=K;o.K2=K2;
+  const L=liveRivals(true).filter(v=>v.alive);o.def=mgCalBand(K);const before=L.map(v=>mgHand(K,v));
+  const v=L[0];const keep=v.mgH,keepV=v.mgHv;delete v.mgH;delete v.mgHv;o.oldSave=mgHand(K,v)===before[0];v.mgH=keep;v.mgHv=keepV;
+  C.k[K]={b:7,n:5,at:"11/17/2026"};const Bd=mgCalBand(K);o.band=Bd;o.bandX={hi:Math.min(C.max,7+H.w/2+C.up),lo:Math.max(C.min,7+H.w/2-C.dn)};
+  const after=L.map(v=>mgHand(K,v));o.inBand=after.every(h=>h>=Bd.lo-1e-9&&h<=Bd.hi+1e-9);
+  const ord=a=>a.map((h,i)=>[h,i]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]).join(",");o.order=ord(before)===ord(after);o.otherKind=mgCalBand(K2).sig===o.def.sig;
   /* 4 */
-  const plays=[];for(let i=0;i<600;i++){const q={name:"T"+i,id:9000+i};for(let j=0;j<3;j++)plays.push(mgNpcRaw("dan",q,{d:0}))}plays.sort((a,b)=>a-b);
+  const plays=[];for(let i=0;i<600;i++){const q={name:"T"+i,id:9000+i};for(let j=0;j<3;j++)plays.push(mgNpcRaw(K,q,{d:0}))}plays.sort((a,b)=>a-b);
   o.reach=plays.filter(x=>x>=7).length/plays.length;o.med=plays[plays.length>>1];o.max=plays[plays.length-1];
-  const lows=[];for(let i=0;i<600;i++)lows.push(mgHand("dan",{name:"T"+i,id:9000+i}));lows.sort((a,b)=>a-b);o.loPlay=lows[0]-H.w/2;
-  delete C.k.dan;o.back=mgCalBand("dan").sig===o.def.sig&&mgHand("dan",v)===before[0];
+  const lows=[];for(let i=0;i<600;i++)lows.push(mgHand(K,{name:"T"+i,id:9000+i}));lows.sort((a,b)=>a-b);o.loPlay=lows[0]-H.w/2;
+  delete C.k[K];o.back=mgCalBand(K).sig===o.def.sig&&mgHand(K,v)===before[0];
   return o});
  console.log(JSON.stringify(r));
  ok(!r.row0&&r.row1===1&&r.kctl,'1 owner flag only: no row without it; one kit .kctl row with it',{row0:r.row0,row1:r.row1,kctl:r.kctl});
@@ -40,10 +42,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const u=await p.evaluate(async()=>{const o={tiers:[]};const sleep=t=>new Promise(r=>setTimeout(r,t));const k0=kg82Play;let n=0;
   window.kg82Play=function(kind,onEnd){n++;setTimeout(()=>onEnd(10-n),10)};try{kg82Play=window.kg82Play}catch(e){}
   mgCalOpen();await sleep(200);const box=()=>document.getElementById("kg82");o.frame=!!box()&&!box().hidden;o.kinds=mgCalKinds();
-  o.btns=document.querySelectorAll("[data-mgcal-k]").length;document.querySelector('[data-mgcal-k="dan"]').click();
+  o.btns=document.querySelectorAll("[data-mgcal-k]").length;o.sig0=mgCalBand("dan").sig;/* the shared band before her test (dan may carry the owner's landed code) */document.querySelector('[data-mgcal-k="dan"]').click();
   for(let i=0;i<5;i++){await sleep(150);o.tiers.push(KG82.tier&&KG82.tier.word);const g=document.getElementById("kg82go");if(!g){o.noGo=i;break}g.click();await sleep(150);document.getElementById("kg82ok").click()}
   await sleep(200);const txt=(document.getElementById("kg82")||{}).textContent||"";o.res=/Mức tay của người/.test(txt);o.code=/CTM-CAL dan:/.test(txt);
-  const R=JSON.parse(localStorage.getItem("ctm-mgcal")||"{}");o.rec=R.dan&&R.dan.raws;o.b=R.dan&&R.dan.b;o.shared=mgCalBand("dan").sig===BAL.ag.mg2.hand.lo+"/"+BAL.ag.mg2.hand.hi;
+  const R=JSON.parse(localStorage.getItem("ctm-mgcal")||"{}");o.rec=R.dan&&R.dan.raws;o.b=R.dan&&R.dan.b;o.shared=mgCalBand("dan").sig===o.sig0;
   o.only=mgCalCode().split(" ").length===2;o.pct=/%/.test(txt);document.getElementById("kg82ok").click();await sleep(150);o.back=document.querySelectorAll("[data-mgcal-k]").length;{const t2=(document.getElementById("kg82")||{}).textContent||"";o.rows=/Đã thử 1\/\d+ môn/.test(t2)&&/Chưa thử/.test(t2)}kg82Close();try{kg82Play=k0}catch(e){}return o});
  console.log(JSON.stringify(u));
  ok(u.frame&&u.btns===u.kinds.length&&u.kinds.length>=10,'5 the kit game frame opens with one button per mini-game kind',{btns:u.btns,kinds:u.kinds.length});

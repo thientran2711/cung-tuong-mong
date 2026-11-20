@@ -419,17 +419,21 @@ function rtNgSleight(kind,n,cb){const o=rtMgO(n);if(!rtMgOn()){cb(roll(o));retur
  const done=ok=>{const res=typeof kitGameResult==="function"?kitGameResult({parts:[["Ra tay",ok?"không ai thấy":"bị nhìn thấy"],["Người canh",`${n} người`]],note:ok?"Bát nước đã như ý ngươi.":"Có người đã thấy tay ngươi động vào bát."}):"";
   kg82ShowRes(res+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,!!ok);$("kg82ok").onclick=()=>{kg82Close();cb(ok)}};/* merge-train-4: result sound (result-sfx) */
  $("kg82skip").onclick=()=>{rtStat("mg_skip");done(roll(o))};
- $("kg82go").onclick=()=>{box.innerHTML="";const C=kg82Canvas(box,.75,440);const {g,W,H}=C;const red=typeof kmReduced==="function"&&kmReduced();
+ /* KIT §13.7 (mg-ready-guide): one play function for the real round and the guided round (env.tut: no HUD, no clock, env.end instead of the result) */
+ const play=(box,fin,env)=>{const tut=!!(env&&env.tut);const set=(k,v)=>{if(!tut)kg82Set(k,v)};const C=kg82Canvas(box,.75,440);const {g,W,H}=C;const red=typeof kmReduced==="function"&&kmReduced();
   const sp=(.75+n*.18-S.tamco/220)*(1+rtDf().h-1),wd=(.2+n*.02-eyes(S)*.012);
   const cones=Array.from({length:n},(_,i)=>({x:W*(i+1)/(n+1),y:H*.2,ph:Math.random()*6,sp:sp*(.8+Math.random()*.4),w:Math.max(.12,wd),a:0,on:false}));
-  let hoi=1,win=0,t0=performance.now(),raf=0,lock=0;const BX=W/2,BY=H*.72;
+  let hoi=1,win=0,t0=performance.now(),raf=0,lock=0,dead=0;const BX=W/2,BY=H*.72;
   const upd=t=>{for(const c of cones){const tt=red?Math.floor(t*2)/2:t;c.a=Math.sin(tt*c.sp+c.ph)*.9;const ang=Math.atan2(-(BX-c.x),BY-c.y);c.on=Math.abs(c.a-ang)<c.w}};
-  const frame=now=>{const t=(now-t0)/1000;upd(t);rtMgDraw(g,W,H,t,cones);kg82Set("time",`${Math.max(0,Math.ceil(6-t))} giây`);if(t>=6&&!lock){step(false);return}raf=requestAnimationFrame(frame)};
-  const step=ok=>{lock=1;cancelAnimationFrame(raf);if(ok)win++;rtMgDraw(g,W,H,0,cones,0,ok?"rgba(60,140,80,.18)":"rgba(170,40,30,.22)");kg82Set("score",`${Math.min(win,2)}/2`);
-   if(win>=2||hoi-win>=2||hoi>=3){setTimeout(()=>done(win>=2),500);return}hoi++;kg82Set("round",`${hoi}/3`);setTimeout(()=>{lock=0;t0=performance.now();raf=requestAnimationFrame(frame)},600)};
+  const frame=now=>{if(dead)return;const t=(now-t0)/1000;upd(t);rtMgDraw(g,W,H,t,cones);set("time",`${Math.max(0,Math.ceil(6-t))} giây`);if(t>=6&&!lock){step(false);return}raf=requestAnimationFrame(frame)};
+  const step=ok=>{lock=1;cancelAnimationFrame(raf);if(ok)win++;rtMgDraw(g,W,H,0,cones,0,ok?"rgba(60,140,80,.18)":"rgba(170,40,30,.22)");set("score",`${Math.min(win,2)}/2`);
+   if(win>=2||hoi-win>=2||hoi>=3){setTimeout(()=>{if(!dead)fin(win>=2)},500);return}hoi++;set("round",`${hoi}/3`);setTimeout(()=>{lock=0;t0=performance.now();raf=requestAnimationFrame(frame)},600)};
   const act=document.createElement("div");act.className="kg82act";act.innerHTML=`<button class="${kg82Btn()}" id="kg82tap">Ra tay</button>`;box.appendChild(act);
-  $("kg82tap").onclick=()=>{if(lock)return;upd((performance.now()-t0)/1000);step(!cones.some(c=>c.on))};
-  KG82.run={stop:()=>cancelAnimationFrame(raf)};raf=requestAnimationFrame(frame)}}
+  act.querySelector("#kg82tap").onclick=()=>{if(lock)return;upd((performance.now()-t0)/1000);step(!cones.some(c=>c.on))};
+  KG82.peek=()=>lock?null:(upd((performance.now()-t0)/1000),cones.some(c=>c.on)?null:{sel:"#kg82tap"});/* the hint hook (guided round): «Ra tay» while no gaze touches the bowl */
+  raf=requestAnimationFrame(frame);return()=>{dead=1;cancelAnimationFrame(raf);KG82.peek=()=>null}};
+ kgReady(box,{n:"Nghiệm thân",t:`Lén ${what}`,how:`Ánh mắt của ${n} người quét qua lại trong điện. Chạm «Ra tay» lúc không ánh mắt nào chạm vào bát. Ba hồi, cần thành hai.`,e:"swing",pic:"",tutor:(b,env)=>play(b,()=>env.end(),env)});
+ $("kg82go").onclick=()=>{box.innerHTML="";const st=play(box,done);KG82.run={stop:st}}}
 function rtNgScene(shown,kn,cb){if(!rtMgOn()){cb();return}
  const d=kg82Open({art:"Nghiệm thân",title:"Giọt máu trong bát nước",how:`Một giọt máu của Hoàng thượng, một giọt máu của ${kn}.`});if(!d){cb();return}
  kg82Set("score","–");kg82Set("round","–");kg82Set("time","–");const box=kg82Box();const C=kg82Canvas(box,.75,440);const {g,W,H}=C;const red=typeof kmReduced==="function"&&kmReduced();
