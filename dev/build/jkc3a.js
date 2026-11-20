@@ -1,45 +1,4 @@
 /* jkc3a: origin arcs dtq muoi thd ch td (format: jkc3.js kc_tt). Every number in BAL.kc3.fx.<arc>; go amounts come in as G[i]. */
-Object.assign(BAL.kc3.fx,{
- kc_dtq:{
-  s1:[{c:{suc:-5},w:{tamco:1},g:[8]},{c:{suc:-5},w:{duc:2},g:[-6,4]},{c:{suc:-5},o:[40,["d","tamco",3]],w:{tamco:2},sc:1,g:[5]}],
-  c1:[{c:{bac:-40},w:{duc:2},sc:1,g:[8]},{c:{suc:-20},o:[45,["d","tamco",4],["d","suc",10]],sc:1,l:{kgt:-3},g:[8]},{c:{},w:{kgt:2},g:[-6]}],
-  c2:[{c:{suc:-10},w:{duc:2},g:[8]},{c:{},w:{kgt:2},g:[-8,6]},{c:{suc:-5},o:[40,["d","tamco",3]],sc:1,l:{kgt:-4},g:[6]}],
-  c3:[{c:{suc:-15},o:[45,["d","tai",3]],w:{danh:3},sc:1,l:{suc:-5}},{c:{},w:{duc:2},g:[-4]},{c:{suc:-10},w:{tamco:2},g:[5]}],
-  t1:[{c:{suc:-5},w:{duc:2},g:[6]},{c:{suc:-5},o:[45,["d","tamco",3]],sc:1,l:{kgt:-3},g:[-8]},{c:{bac:-30},w:{kgt:2},g:[5]}],
-  x1:[{c:{suc:-5},g:[8]},{c:{suc:-5},g:[-6]},{c:{suc:-10},o:[35,["d","tamco",3],["d","duc",4]]},{c:{}}],
-  E:{win:{fx:{danh:3},sc:2},mid:{fx:{kgt:3},sc:1},lose:{fx:{duc:2},sc:1}}},
- kc_muoi:{
-  s1:[{c:{suc:-5},w:{kgt:4},g:[20,8]},{c:{suc:-5},w:{tamco:2},g:[-6]},{c:{suc:-5},o:[40,["d","tamco",3]],w:{tamco:1},sc:1,g:[10,6,-5]}],
-  c1:[{c:{suc:-10},w:{tamco:2},g:[8]},{c:{suc:-5},w:{duc:3},g:[-8]},{c:{bac:-40},o:[45,["d","tamco",3]],sc:1,l:{kgt:-3}}],
-  c2:[{c:{suc:-5},w:{bac:30},g:[6]},{c:{suc:-5},o:[40,["d","tamco",3]],w:{duc:2},sc:1,l:{bac:-20},g:[-6]},{c:{},w:{duc:1}}],
-  c3:[{c:{bac:-40},w:{danh:3,duc:2},g:[6]},{c:{suc:-20},w:{duc:3,danh:2}},{c:{},w:{bac:20},g:[4]}],
-  t1:[{c:{},w:{bac:20},g:[5]},{c:{suc:-10},o:[40,["d","tamco",3]],sc:1,l:{kgt:-3},g:[-8]},{c:{},w:{duc:2},g:[-4]}],
-  x1:[{c:{suc:-5},g:[8]},{c:{suc:-10},o:[40,["d","tamco",3]],g:[-6]},{c:{suc:-5}},{c:{}}],
-  E:{win:{fx:{bac:40},sc:2},mid:{fx:{tamco:2},sc:1},lose:{fx:{duc:2},sc:1}}},
- kc_thd:{
-  s1:[{c:{bac:-20},w:{duc:2},g:[10]},{c:{},w:{tai:1},g:[-6]},{c:{suc:-15},o:[45,["d","tai",3]],w:{danh:2},sc:1}],
-  c1:[{c:{suc:-15},o:[40,["d","tai",3],["a","thi",8]],w:{danh:5},sc:1,l:{danh:-1}},{c:{},w:{duc:2},g:[10]},{c:{suc:-5},w:{tai:1},g:[5]}],
-  c2:[{c:{},w:{duc:2}},{c:{suc:-5},o:[45,["d","tamco",3]],w:{danh:2},sc:1,g:[-3]},{c:{suc:-10},w:{tai:2}}],
-  c3:[{c:{suc:-10},w:{danh:2},g:[5,-4]},{c:{suc:-5},o:[40,["d","tamco",3]],sc:1,l:{kgt:-2},g:[6]},{c:{},w:{duc:2},g:[-4]}],
-  t1:[{c:{suc:-10},w:{duc:2},g:[6]},{c:{suc:-10},o:[40,["d","tai",3]],w:{danh:3},sc:1,l:{danh:-2}},{c:{bac:-25},w:{kgt:2},g:[4]}],
-  x1:[{c:{suc:-5},g:[8]},{c:{suc:-5},o:[40,["d","tamco",3],["d","tai",6]],g:[-6]},{c:{}}],
-  E:{win:{fx:{danh:4},sc:2},mid:{fx:{tai:2},sc:1},lose:{fx:{duc:2},sc:1}}},
- kc_ch:{
-  s1:[{c:{suc:-10},w:{duc:2},g:[4]},{c:{suc:-5},w:{tamco:1},g:[3]},{c:{suc:-5},o:[40,["d","tai",3]],w:{tai:1},sc:1,g:[6,-2]}],
-  c1:[{c:{suc:-5},w:{duc:2},g:[10]},{c:{suc:-5},o:[40,["d","tamco",3]],w:{tamco:2},sc:1,l:{kgt:-3}},{c:{},w:{duc:1},g:[-3]}],
-  c2:[{c:{bac:-30},w:{kgt:2},g:[3]},{c:{suc:-15},w:{duc:2},g:[3]},{c:{},w:{tamco:1},g:[-2]}],
-  c3:[{c:{suc:-5},w:{tamco:2},g:[-6]},{c:{},w:{duc:2},g:[4]},{c:{suc:-5},o:[40,["d","tamco",3]],sc:1,l:{duc:-2}}],
-  t1:[{c:{suc:-5},w:{duc:2},g:[3]},{c:{suc:-10},o:[45,["d","tai",3]],sc:1,l:{kgt:-2},g:[4]},{c:{bac:-30},w:{sac:2},g:[2]}],
-  x1:[{c:{suc:-10},g:[8]},{c:{suc:-10},o:[40,["d","sac",3],["d","tai",6]],g:[3]},{c:{}}],
-  E:{win:{fx:{danh:2},sc:2},mid:{fx:{duc:2},sc:1},lose:{fx:{tamco:2},sc:1}}},
- kc_td:{
-  s1:[{c:{suc:-5},w:{tamco:2},g:[6]},{c:{suc:-5},w:{duc:3},g:[-8]},{c:{suc:-10},o:[40,["d","tamco",3]],sc:1,l:{kgt:-2}}],
-  c1:[{c:{suc:-10},o:[40,["d","tamco",3]],sc:1,l:{suc:-5},g:[5]},{c:{},w:{duc:2},g:[-6]},{c:{bac:-30},w:{tamco:1},sc:1}],
-  c2:[{c:{suc:-10},o:[45,["d","tamco",3]],sc:1,l:{kgt:-3}},{c:{suc:-5},w:{duc:2},g:[6]},{c:{},w:{tamco:2},g:[-4]}],
-  c3:[{c:{suc:-5},w:{duc:2},g:[6]},{c:{bac:-30},w:{tamco:1},sc:1},{c:{suc:-15},o:[40,["d","tamco",3],["d","suc",10]],sc:1,l:{kgt:-3}}],
-  t1:[{c:{suc:-5},w:{duc:2},g:[6]},{c:{suc:-10},o:[40,["d","tamco",3]],sc:1,l:{kgt:-3}},{c:{bac:-30},w:{tamco:1},g:[4]}],
-  x1:[{c:{suc:-5},g:[6]},{c:{suc:-5},g:[6]},{c:{suc:-10},o:[35,["d","tamco",3]]}],
-  E:{win:{fx:{tamco:3},sc:2},mid:{fx:{duc:2},sc:1},lose:{fx:{tamco:1},sc:1}}}});
 /* ================= dtq «Tin dữ Nhạn Môn»: the brother lost at the border; seeds dtq_huynh / dtq_bien / dtq_binh ================= */
 kc3Reg("kc_dtq",{t:"Tin dữ Nhạn Môn",w:"cha",g:"Huynh trưởng {huynhN} lạc trong trận ở Nhạn Môn. Cha ngươi, {dadT} {chaN}, giữ kín tin dữ, sợ triều đình mượn cớ. Cứu người trong nhà hay giữ thế của nhà trên triều.",
  p:[["s1"],["c1","c2","c3"],["t1"],["x1"]],
@@ -68,7 +27,7 @@ kc3Reg("kc_dtq",{t:"Tin dữ Nhạn Môn",w:"cha",g:"Huynh trưởng {huynhN} l�
   {n:"Ủng hộ cha",e:"win",wx:"cha ra trận với lòng con gái",lx:"nhà vắng chủ, triều càng nghi binh quyền",rt:"Cha mặc giáp, xoa đầu ngươi rồi lên ngựa.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Khuyên cha ở lại kinh thành",e:"mid",wx:"cha giữ được thế trên triều",lx:"huynh trưởng vẫn trong tay giặc",rt:"Cha ở lại. Đêm nào ông cũng ngồi trước bản đồ biên ải.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Xin cha chuộc huynh trước, rồi mới bàn binh",e:["win","lose"],wx:"cứu được người mà giữ được thế",lx:"giặc dời trại, mất dấu huynh",rt:"Cha gật đầu. Lái buôn ngựa lại lên đường.",rf:"Giặc dời trại trong đêm. Cha lặng người."},
-  {n:"✦ Cải trang nam nhi, theo quân ra Nhạn Môn",if:A=>S.suc>=BAL.kc3.rare.dtqSuc&&!A.f.obey&&kcRare("kcR4",.6),wx:"tự tay đưa huynh về",lx:"bỏ cả kỳ tuyển tú",rt:"Ngươi cắt tóc ngắn, đêm ấy theo đoàn quân ra cửa bắc.",go:()=>{kcEnd("kcR4")}}]}},
+  {n:"✦ Cải trang nam nhi, theo quân ra Nhạn Môn",if:A=>S.suc>=BAL.kc3.rare.dtqSuc&&!A.f.obey&&kcRare("kcR4",BAL.kc3.rare.r4),wx:"tự tay đưa huynh về",lx:"bỏ cả kỳ tuyển tú",rt:"Ngươi cắt tóc ngắn, đêm ấy theo đoàn quân ra cửa bắc.",go:()=>{kcEnd("kcR4")}}]}},
  E:{
  win:{tag:"Cha ra Nhạn Môn",w:"cha",seed:()=>roll(BAL.kc3.seedP)?"dtq_bien":"dtq_huynh",t:"Cha cầm quân ra biên ải, mang theo lời hứa đưa huynh trưởng về. Vào cung, ngươi sẽ là người đầu tiên nghe tin chiến sự."},
  mid:{tag:"Giữ thế ở kinh thành",w:"cha",seed:"dtq_binh",t:"Nhà ngươi giữ được thế trên triều, nhưng binh quyền của cha thành cái gai trong mắt nhiều người. Hoàng thượng sẽ hỏi ngươi về nó."},
@@ -78,9 +37,9 @@ kc3Reg("kc_muoi",{t:"Sổ muối",w:"cha",g:"Nhà buôn muối giàu nứt vách
  p:[["s1"],["c1","c2","c3"],["t1"],["x1"]],
  B:{
  s1:{h:"Một tước vị cho nhà buôn",w:"cha",t:"Cha muốn bỏ nửa gia sản dâng quốc khố để xin một tước vị, để nhà buôn thành nhà có tước trước kỳ tuyển tú.",o:[
-  {n:"Ủng hộ cha",f:"obey",wx:"nhà có tước, Gia thanh lên",lx:"gia tư vơi một nửa",rt:"Cha cười lớn, sai người khiêng bạc lên Hộ bộ.",go:(A,ok,G)=>{S.kgtu=Math.max(10,S.kgtu-G[0]);kc3Af("cha",G[1])}},
+  {n:"Ủng hộ cha",f:"obey",wx:"nhà có tước, Gia thanh lên",lx:"gia tư vơi một nửa",rt:"Cha cười lớn, sai người khiêng bạc lên Hộ bộ.",go:(A,ok,G)=>{S.kgtu=Math.max(BAL.kc3.gtuMin,S.kgtu-G[0]);kc3Af("cha",G[1])}},
   {n:"Khuyên cha giữ bạc",f:"own",wx:"nhà còn của làm vốn",lx:"cha chê ngươi đầu óc nhà buôn",rt:"Cha lắc đầu, cất sổ vào rương.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
-  {n:"Xin cha dâng một phần, giữ một phần",wx:"được tước mà không cạn của",lx:"cha thấy ngươi so đo",rt:"Cha nghĩ một đêm rồi nghe theo.",rf:"Quan Hộ bộ chê ít, đòi đủ số.",go:(A,ok,G)=>{if(ok){S.kgtu=Math.max(10,S.kgtu-G[0]);S.kgt+=G[1]}else kc3Af("cha",G[2])}}]},
+  {n:"Xin cha dâng một phần, giữ một phần",wx:"được tước mà không cạn của",lx:"cha thấy ngươi so đo",rt:"Cha nghĩ một đêm rồi nghe theo.",rf:"Quan Hộ bộ chê ít, đòi đủ số.",go:(A,ok,G)=>{if(ok){S.kgtu=Math.max(BAL.kc3.gtuMin,S.kgtu-G[0]);S.kgt+=G[1]}else kc3Af("cha",G[2])}}]},
  c1:{h:"Sổ muối có chỗ thiếu",w:"cha",t:"Sổ muối có chỗ thiếu: người của quan Hộ bộ đòi chia phần.",o:[
   {n:"Giúp cha chép lại sổ",f:"obey",wx:"cha coi ngươi là người giữ sổ",lx:"tay ngươi dính vào sổ giả",rt:"Ngươi chép suốt ba đêm, nét chữ khớp từng dòng.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Khuyên cha khai thật",f:"own",wx:"lòng ngay",lx:"cha giận, quan Hộ bộ thù",rt:"Cha nhìn ngươi như nhìn người lạ.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
@@ -101,7 +60,7 @@ kc3Reg("kc_muoi",{t:"Sổ muối",w:"cha",g:"Nhà buôn muối giàu nứt vách
   {n:"Hứa che chở cho nhà",e:"mid",wx:"nhà sẽ gửi bạc vào cung cho ngươi",lx:"ngươi gánh luôn tội của sổ muối",rt:"Cha trao cho ngươi một tờ ngân phiếu lớn.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Đòi cha đốt sổ giả, làm ăn cho sạch",e:["win","lose"],wx:"nhà sạch sổ, tước giữ được lâu",lx:"cha giận, cắt bạc",rt:"Cha đốt sổ giả trước mặt ngươi.",rf:"Cha không chịu. Từ đó ông chỉ gửi bạc khi ngươi xin.",go:(A,ok,G)=>{if(!ok)kc3Af("cha",G[0])}},
   {n:"Không hứa gì, chỉ xin cha giữ mình",e:"lose",wx:"không mắc nợ tội của nhà",lx:"nhà không coi ngươi là chỗ dựa",rt:"Cha gật đầu, cất sổ."},
-  {n:"✦ Xin cha giao cho ngươi giữ cả sổ muối",if:()=>S.tamco>=BAL.kc3.rare.muoiTc&&S.kgtu>=BAL.kc2.st.kc.gtuRich&&kcRare("kcR6",.8),wx:"cả cơ nghiệp vào tay ngươi",lx:"bỏ kỳ tuyển tú",rt:"Cha trao chìa khóa kho muối.",go:()=>{kcEnd("kcR6")}}]}},
+  {n:"✦ Xin cha giao cho ngươi giữ cả sổ muối",if:()=>S.tamco>=BAL.kc3.rare.muoiTc&&S.kgtu>=BAL.kc2.st.kc.gtuRich&&kcRare("kcR6",BAL.kc3.rare.r6),wx:"cả cơ nghiệp vào tay ngươi",lx:"bỏ kỳ tuyển tú",rt:"Cha trao chìa khóa kho muối.",go:()=>{kcEnd("kcR6")}}]}},
  E:{
  win:{tag:"Sổ sạch, tước vững",w:"cha",seed:"muoi_tuoc",t:"Nhà ngươi có tước mà sổ sách sạch. Vào cung, chuyện xin phong tước cho nhà buôn muối sẽ còn tiếp, và ngươi đi bước đầu bằng tay mình."},
  mid:{tag:"Người che chở cho nhà",w:"cha",seed:()=>roll(BAL.kc3.seedP)?"muoi_lau":"muoi_no",t:"Ngươi mang theo bạc của nhà và cả bí mật của những chuyến thuyền đêm. Có ngày nó sẽ theo ngươi vào cung."},
@@ -199,6 +158,6 @@ kc3Reg("kc_td",{t:"Án đang dựng",w:"cha",g:"Cha ngươi, Thị lang bộ L�
   {n:"Đốt thư từ của cha",e:"mid",wx:"kẻ lục soát chẳng có gì để dựa vào",lx:"mất luôn chứng cứ minh oan",rt:"Thư từ của cha thành tro.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Lần theo người của kẻ thù đến tận phủ hắn",e:["win","lose"],wx:"biết mặt kẻ dựng án",lx:"bị bắt gặp, kẻ thù đề phòng",rt:"Ngươi thấy tận mắt kẻ ra vào phủ ấy: người của nhà đang muốn hại cha.",rf:"Người gác cổng phủ kia nhìn thấy ngươi."}]}},
  E:{
- win:{tag:"Chứng cứ còn đó",w:"cha",seed:"td_an",t:"Ngày nhà ngươi sụp đổ vẫn sẽ đến, nhưng chứng cứ thật đã ở nơi an toàn. Vào cung, ngươi có thứ để lật lại án.",go:A=>{S.kc.tdCopy=1;if(A&&A.f.bro)S.kc.tdBro=1;try{const e=rivals.find(x=>x.enemy);if(e&&A&&A.f.foe)k61Know(e,"con gái kẻ vu cha",true,2)}catch(e){}return""}},
+ win:{tag:"Chứng cứ còn đó",w:"cha",seed:"td_an",t:"Ngày nhà ngươi sụp đổ vẫn sẽ đến, nhưng chứng cứ thật đã ở nơi an toàn. Vào cung, ngươi có thứ để lật lại án.",go:A=>{S.kc.tdCopy=1;if(A&&A.f.bro)S.kc.tdBro=1;try{const e=rivals.find(x=>x.enemy);if(e&&A&&A.f.foe)k61Know(e,"con gái kẻ vu cha",true,BAL.kc3.know.foe)}catch(e){}return""}},
  mid:{tag:"Không để lại dấu vết",w:"cha",seed:A=>A&&A.f.bro?"td_song":"td_ke",t:"Ngươi không để lại gì cho kẻ thù bám vào. Nhưng kẻ đứng sau màn vẫn chưa lộ mặt.",go:A=>{if(A&&A.f.bro)S.kc.tdBro=1;if(A&&A.f.copy)S.kc.tdCopy=1;return""}},
- lose:{tag:"Kẻ thù đã biết ngươi",w:"cha",seed:"td_tha",t:"Kẻ dựng án đã thấy mặt ngươi. Vào cung, con gái nhà hắn sẽ nhận ra ngươi trước khi ngươi kịp nhận ra nàng.",go:A=>{if(A&&A.f.bro)S.kc.tdBro=1;try{const e=rivals.find(x=>x.enemy);if(e)k61Know(e,"con gái kẻ vu cha",true,2)}catch(e){}return""}}}});
+ lose:{tag:"Kẻ thù đã biết ngươi",w:"cha",seed:"td_tha",t:"Kẻ dựng án đã thấy mặt ngươi. Vào cung, con gái nhà hắn sẽ nhận ra ngươi trước khi ngươi kịp nhận ra nàng.",go:A=>{if(A&&A.f.bro)S.kc.tdBro=1;try{const e=rivals.find(x=>x.enemy);if(e)k61Know(e,"con gái kẻ vu cha",true,BAL.kc3.know.foe)}catch(e){}return""}}}});

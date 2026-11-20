@@ -1,31 +1,6 @@
 /* jkc3b: shared home arcs kc_ke «Kế mẫu» · kc_hon «Hôn sự» · tm96z «Thuở thanh mai» (format: jkc3.js kc_tt; numbers BAL.kc3.fx).
    No palace seed: what they carry is real — the stepmother / thứ muội favour (thứ muội enters with it), the proof against the stepmother,
    Lời đồn, the suitor people; tm96z writes S.tm96.endZ {tok, promise, force} that tm96a reads ({lvforce}, the token). */
-Object.assign(BAL.kc3.fx,{
- kc_ke:{
-  s1:[{c:{suc:-5,kgt:-2},w:{duc:2},g:[5]},{c:{suc:-5},o:[40,["d","tamco",3]],sc:1,g:[6,6]},{c:{bac:-15},g:[10]}],
-  c1:[{c:{suc:-10},o:[40,["d","tamco",3]],sc:1,g:[1,10,4]},{c:{suc:-5},w:{tamco:2}},{c:{suc:-5},o:[35,["d","tamco",3]],sc:1,g:[3,10,6]}],
-  c2:[{c:{suc:-10},o:[40,["d","tamco",3],["f","proof",15,0]],sc:1,g:[12,6,4,-8]},{c:{bac:-20},g:[6,4]},{c:{suc:-5},o:[35,["d","tamco",3]],sc:1,g:[6,10,3]}],
-  c3:[{c:{suc:-15},o:[45,["d","tai",3]],w:{danh:2},g:[8]},{c:{},g:[8,6]},{c:{suc:-5},o:[35,["d","tamco",3]],sc:1,g:[3,10,3]}],
-  t1:[{c:{},w:{tamco:1},g:[12]},{c:{suc:-5},o:[40,["d","tamco",3]],sc:1,g:[1,8]},{c:{},w:{duc:2},g:[8]}],
-  x1:[{c:{suc:-10},o:[35,["d","tamco",4],["f","muoi",15,0],["f","proof",10,0]]},{c:{},w:{duc:3}},{c:{suc:-10},o:[25,["d","tamco",3]]}],
-  E:{win:{fx:{kgt:4},sc:0,g:[6,10,15]},mid:{fx:{duc:2},sc:0,g:[8]},lose:{fx:{},sc:0,g:[15,5,10]}}},
- kc_hon:{
-  s1:[{c:{suc:-5,kap:4},w:{tamco:1},g:[5]},{c:{},o:[45,["d","kgt",4]],w:{kap:-6},g:[-6]},{c:{bac:-15},g:[10]}],
-  c1:[{c:{kap:4},w:{duc:2},g:[8]},{c:{kgt:-2},w:{kap:-5},g:[-8]},{c:{kap:5},g:[8]}],
-  c2:[{c:{kgt:-3},w:{kap:-6},g:[10]},{c:{suc:-5},o:[40,["d","kgt",5]],g:[-6,6]},{c:{},w:{duc:1},g:[-6]}],
-  c3:[{c:{suc:-10},o:[45,["d","tamco",3]],w:{kap:-8},l:{kgt:-3}},{c:{bac:-20},w:{kap:-6},g:[6]},{c:{kap:6},w:{kgt:3},g:[8]}],
-  t1:[{c:{},w:{duc:2},g:[6]},{c:{suc:-5},o:[40,["d","tamco",3]],sc:1,g:[8,-6]},{c:{kap:5},g:[10]}],
-  x1:[{c:{}},{c:{suc:-10},o:[40,["d","kgt",4],["f","cha",15,0]]},{c:{kgt:-3},w:{duc:2}}],
-  E:{win:{fx:{kgt:4},sc:0,g:[25]},mid:{fx:{},sc:0,g:[10]},lose:{fx:{},sc:0}}},
- tm96z:{
-  s1:[{c:{},g:[10,3]},{c:{},w:{duc:2},g:[8]},{c:{suc:-5},o:[45,["d","tamco",4]],w:{tamco:1},g:[8,8]}],
-  c1:[{c:{bac:-5},g:[6]},{c:{suc:-10},g:[8,3]},{c:{},w:{duc:1},g:[6]}],
-  c2:[{c:{},g:[8,10]},{c:{kap:4},g:[8,10]},{c:{suc:-5},o:[40,["d","tamco",4]],g:[6,8]}],
-  c3:[{c:{suc:-10},o:[50,["d","tamco",4]],g:[10,12]},{c:{},w:{duc:1},g:[6]},{c:{bac:-5},g:[6]}],
-  t1:[{c:{suc:-10,kap:5},g:[6]},{c:{kgt:-4},g:[15,10]},{c:{suc:-5},o:[35,["d","tamco",3]],g:[12]}],
-  x1:[{c:{suc:-5},o:[45,["d","tamco",4],["f","hen",15,0]]},{c:{},w:{duc:2},g:[15]},{c:{suc:-20}},{c:{suc:-20}}],
-  E:{win:{fx:{},sc:0},mid:{fx:{duc:2},sc:0},lose:{fx:{},sc:0}}}});
 const kc3Di=()=>kc3P("di");
 function kc3Proof(n){const d=kc3Di();if(d&&n){S.kc.proof[d.id]=(S.kc.proof[d.id]||0)+n;S.kc.diAct=(S.kc.diAct||0)+1}}
 function kc3Ld(n){S.kld=Math.max(0,(S.kld||0)+n)}
@@ -126,7 +101,7 @@ kc3Reg("tm96z",{t:"Thuở thanh mai",w:"tm",g:"{tmN} là người ngươi hẹn 
   {n:"Giữ tín vật, hồi thư hẹn kiếp sau",e:["win","lose"],wx:"lời hẹn còn nguyên",lx:"thư lọt vào tay cha",rt:"Ngươi viết một dòng: kiếp này không thành, xin hẹn kiếp sau.",rf:"Phong thư rơi vào tay gia nhân, đến tay cha."},
   {n:"Đốt thư, gửi trả tín vật",e:"mid",wx:"dứt được, không ai nói được gì",lx:"chàng hiểu ngươi đã buông tay",rt:"Ngươi đốt thư trước đèn.",go:(A,ok,G)=>{kc3Tm(-G[0])}},
   {n:"Đến bến sông",e:"lose",wx:"đi theo chàng",lx:"bị bắt lại thì mất hết",rt:"Ngươi khoác áo tối, lẻn ra cửa sau.",go:A=>{kcElope(false);if(S.dead)A.done=1}},
-  {n:"✦ Theo chàng đi, có tỳ nữ lo liệu đường đi",if:()=>S.tm96.h>=80&&(S.maid?S.maid.loyal:0)>=60&&S.kld<55&&kcRare("kcR1",.6),e:"win",wx:"bỏ trốn cùng người thương",lx:"rời bỏ nhà và kỳ tuyển",rt:"Thuyền rời bến trước khi trống canh tư điểm.",go:A=>{A.done=1;kcElope(true)}}]}},
+  {n:"✦ Theo chàng đi, có tỳ nữ lo liệu đường đi",if:()=>kcR1Ok()&&kcRare("kcR1",BAL.kc3.rare.r1.p),e:"win",wx:"bỏ trốn cùng người thương",lx:"rời bỏ nhà và kỳ tuyển",rt:"Thuyền rời bến trước khi trống canh tư điểm.",go:A=>{A.done=1;kcElope(true)}}]}},
  E:{
  win:{tag:"Hẹn kiếp sau",t:"Ngươi vẫn giữ {tmTok} và lời hẹn với {tmN}. Vào cung rồi, đó là thứ ngươi phải giấu kỹ nhất.",go:()=>{kc3EndZ(1,1,"Ngày kiệu hoa đến cổng, {tmN} đứng ở đầu ngõ; hai người đã hẹn nhau kiếp sau.")}},
  mid:{tag:"Buông tay",t:"Ngươi gửi trả {tmTok}, dặn {tmN} lập công danh và quên mình.",go:()=>{kc3EndZ(0,0,"Ngươi tự tay gửi trả tín vật, dặn chàng lập công danh và quên mình.")}},
