@@ -7,7 +7,7 @@ const {chromium}=require('playwright');const path=require('path');
   const go=k=>{window.__forceOrigin=k;for(let i=0;i<60;i++){try{localStorage.clear()}catch(e){}start();if(S.origin.k===k)break}Q.length=0;S.mg=0};
   for(const k of Object.keys(BAL.start).filter(k=>k!=="npcW"&&k!=="npc"&&k!=="quan")){go(k);const o=BAL.start[k],in_=(v,r)=>Array.isArray(r)?v>=r[0]&&v<=r[1]:v===r;
    ok(`${k}: Sắc/Tài/Tâm cơ/Đức from BAL.start`,in_(S.sac,o.sac)&&in_(S.tai,o.tai)&&in_(S.tamco,o.tamco)&&S.duc===o.duc,{sac:S.sac,tai:S.tai,tamco:S.tamco,duc:S.duc});
-   ok(`${k}: arts = table points`,Object.keys(o.art).every(a=>Math.abs(artPts(S,a)-o.art[a])<=1)&&Math.max(...ARTS.map(a=>artPts(S,a.k)))<=45,ARTS.map(a=>artPts(S,a.k)))}
+   {const A=originArts(k,S.st&&S.st.f14&&S.st.f14.road),T=BAL.art.tier;ok(`${k}: arts = BAL.orig.art row (one table) at the ladder floor`,ARTS.every(a=>artPts(S,a.k)===(A[a.k]?T[A[a.k]]:0))&&Object.keys(A).filter(a=>!ARTS.some(x=>x.k===a)).every(v=>S.vir[v]===A[v]),{arts:ARTS.map(a=>artPts(S,a.k)),row:A})}}
   go("tt");const v=liveRivals(true)[0];ok("NPC has an origin from the same table",!!(v&&BAL.start[v.org]),v&&v.org);
   ok("NPC Sắc/Tài inside her origin's range",v&&v.sac>=BAL.start[v.org].sac[0]-10&&v.tai<=BAL.start[v.org].tai[1]+10,v&&[v.sac,v.tai]);
   /* ladder */const P={arts:{cam:0},artp:{cam:0}};let n=0;while(P.arts.cam<5&&n<500){crsPush(P.arts,P.artp,"cam",2);n++}
