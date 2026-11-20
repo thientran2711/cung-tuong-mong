@@ -85,12 +85,12 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    let out="",err=null;try{out=runAct(S,t,k,extra)}catch(e){err=String(e&&e.stack||e).slice(0,400)}finally{Math.random=nat}
    const aft=JSON.stringify(rivals.find(v=>v.id===id)),same=aft===before;let diff=null;if(!same){const B=JSON.parse(before),A2=JSON.parse(aft);const dd=(x,y,p,o)=>{if(JSON.stringify(x)===JSON.stringify(y))return;if(x&&y&&typeof x==='object'&&typeof y==='object'){for(const f of new Set([...Object.keys(x),...Object.keys(y)]))dd(x[f],y[f],p+'.'+f,o);return}o.push([p,JSON.stringify(x),JSON.stringify(y)].map(z=>String(z).slice(0,120)))};diff=[];dd(B,A2,'',diff)}
    const ops=(C.stat.sent>s0?C.ops:[]).filter(o=>o.id===id||o.t==="add"||o.t==="w");Q.length=0;S.mg=null;try{closeModal()}catch(e){}
-   return {k,id,name:t.name,out:String(out||'').slice(0,90),err,same,ops,diff,staged:sid!=null&&t.id===sid}})()}catch(e){return {k,skip:'EXC '+String(e&&e.stack).slice(0,500)}}},[k,st&&st.id]);
+   return {k,id,tog:(()=>{try{return together(S,t)}catch(e){return 'x'}})(),name:t.name,out:String(out||'').slice(0,90),err,same,ops,diff,staged:sid!=null&&t.id===sid}})()}catch(e){return {k,skip:'EXC '+String(e&&e.stack).slice(0,500)}}},[k,st&&st.id]);
   if(r.skip){const dbg=process.env.DBG&&st?{g:await G.p.evaluate(([id,k])=>{const t=rivals.find(v=>v&&v.id===id);if(!t)return 'gone';let ok=null;try{ok=ACT[k].ok(S,t)}catch(e){ok='EXC '+e.message}
      return {ok,preg:t.preg,hid:t.hidden,kids:(t.kids||[]).map(x=>[x.age,x.alive,x.sex]),inv:(t.inv||[]).length,rank:t.rank,rk:rkOf(t),rkS:rkOf(S),tog:together(S,t),ton:tonightOf()===t,tn:String(S.tonight&&S.tonight.id||S.tonight),sh:sameHouse(S,t),alive:t.alive,out:t.out,pen:t.pen,inS:(S.inv||[]).length,conf:S.confined,vpi:vpItems(t).length,inv0:JSON.stringify((t.inv||[])[0]),it0:(t.inv||[])[0]&&JSON.stringify(itm(t.inv[0].k)).slice(0,160)}},[st.id,k]),
     h:await H.p.evaluate(id=>{const t=rivals.find(v=>v&&v.id===id&&!v.coop);return t?{preg:t.preg,kids:(t.kids||[]).length,inv:(t.inv||[]).length,rank:t.rank,alive:t.alive,out:t.out}:'gone'},st.id)}:undefined;
    table.push({k,skip:r.skip,stage:st,dbg});if(dbg)console.log('skip',k,JSON.stringify(dbg).slice(0,600));continue}
-  if(!r.ops.length){table.push({k,id:r.id,same:r.same,ops:0,out:r.out,err:r.err});if(!r.same)ok(false,'C2 '+k+': no op but her world changed',{diff:r.diff,out:r.out,err:r.err});continue}
+  if(!r.ops.length){table.push({k,id:r.id,tog:r.tog,same:r.same,ops:0,out:r.out,err:r.err});if(!r.same)ok(false,'C2 '+k+': no op but her world changed',{diff:r.diff,out:r.out,err:r.err});continue}
   nAct++;
   /* wait for the host's answer to come back (her view's dr = this intent) and compare */
   const got=await until(G,()=>{const V=COOPW.thin.view;return !!(V&&V.o&&V.o.dr&&V.o.dr.op==='npc'&&V.o.dr.id===COOPW.thin.C.lastId)},null,15000);

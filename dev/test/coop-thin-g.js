@@ -94,12 +94,12 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   /* her full state (person + world, her perspective) for the solo replay */
   let snap=null;TH.withSeat('b',()=>{S.buoi=typeof B4L==='number'?B4L:2;snap=ser()});
   snap.S.tuan=2;snap.R=(snap.R||[]).filter(r=>!r.coop);
-  S.tuan=2;Math.random=()=>k;let ok1=false;try{ok1=G.herWeek(true)}finally{Math.random=R0}
+  S.tuan=2;Math.random=()=>k;let ok1=false;const HW={};window.__hire=[];for(const f of ['hireTake','fillStaff','hireCard']){HW[f]=window[f];if(typeof HW[f]==='function')window[f]=function(){window.__hire.push([f,(arguments[0]&&arguments[0].name)||String(arguments[0]),arguments[1],new Error().stack.split('\n').slice(2,7).join(' | ')]);return HW[f].apply(this,arguments)}}try{ok1=G.herWeek(true)}finally{Math.random=R0;for(const f in HW)window[f]=HW[f]}
   const A=TH.seatOf('b').S;const out={};for(const x of K)out[x]=A[x];out.kids=(A.kids||[]).map(c=>c&&c.age).join(',');out.inv=(A.inv||[]).length;out.staff=(A.staff||[]).length;out.loy=(A.staff||[]).map(s=>s&&s.loy).join(',');out.preg=JSON.stringify(A.preg||null).slice(0,40);out.ill=JSON.stringify(A.ill||null).slice(0,40);out.dead=!!A.dead;
   const hostP1=myKeys(ser().S);if(hostP0!==hostP1){const a=JSON.parse(hostP0),b=JSON.parse(hostP1);window.__hd=Object.keys(Object.assign({},a,b)).filter(x=>JSON.stringify(a[x])!==JSON.stringify(b[x])).map(x=>{const A=a[x],B=b[x];if(A&&B&&typeof A==='object'&&typeof B==='object')return [x,Object.keys(Object.assign({},A,B)).filter(y=>JSON.stringify(A[y])!==JSON.stringify(B[y])).map(y=>[y,String(JSON.stringify(A[y])).slice(0,200),String(JSON.stringify(B[y])).slice(0,200)])];return [x,String(JSON.stringify(A)).slice(0,300),String(JSON.stringify(B)).slice(0,300)]})}const L1=JSON.stringify(Object.keys(localStorage).filter(x=>!/^(ctm-thin|ctm-f6b|ctm-coop)/.test(x)).sort().map(x=>[x,localStorage.getItem(x)]));
   /* put everything back */
   TH.seatOf('b').S=JSON.parse(b0);TH.seatOf('b').fresh=true;quiet=true;try{deser(JSON.parse(d0))}finally{quiet=false}Q.length=0;
-  return {ran:ok1,A:out,snap,hd:window.__hd||null,hostSame:hostP0===hostP1,lsSame:L0===L1,dev:G.devKeys,miss:TH.uiMiss}},KEYS);
+  return {hire:window.__hire,ran:ok1,A:out,snap,hd:window.__hd||null,hostSame:hostP0===hostP1,lsSame:L0===L1,dev:G.devKeys,miss:TH.uiMiss}},KEYS);
  ok(pr.ran,'G2 her month week end ran on the host (constant dice probe)');
  ok(pr.hostSame,'G3 the host\'s own person unchanged by her week end (no leak between the two)',pr.hd);
  ok(pr.lsSame,'G3 the host\'s device storage unchanged by her week end (device ledgers kept off)',pr.dev);
@@ -109,7 +109,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const B2=await sp.evaluate(([snap,K])=>{const k=0.37;const R0=Math.random;BAL.world.on=0;/* the world windows (jworld tick / start: e.g. Khoa thi Đình gives her house's consorts Danh) are the HOST's world in co-op (part C; her share rides his week as a delta on her entry): the solo side compares her PERSONAL month only */quiet=true;try{deser(snap)}finally{quiet=false}Q.length=0;S.dead=false;
   Math.random=()=>k;try{nextBuoi()}catch(e){return {err:e.message}}finally{Math.random=R0}
   const A=S;const out={};for(const x of K)out[x]=A[x];out.kids=(A.kids||[]).map(c=>c&&c.age).join(',');out.inv=(A.inv||[]).length;out.staff=(A.staff||[]).length;out.loy=(A.staff||[]).map(s=>s&&s.loy).join(',');out.preg=JSON.stringify(A.preg||null).slice(0,40);out.ill=JSON.stringify(A.ill||null).slice(0,40);out.dead=!!A.dead;out.month=S.month;return out},[pr.snap,KEYS]);
- console.log('SAMEDICE',JSON.stringify({host:pr.A,solo:B2}));
+ console.log('HIRE',JSON.stringify(pr.hire).slice(0,3000));console.log('SAMEDICE',JSON.stringify({host:pr.A,solo:B2}));
  const dd=B2.err?[['err',B2.err]]:diff(pr.A,Object.fromEntries(Object.entries(B2).filter(([x])=>x!=='month')));
  ok(!B2.err&&dd.length===0,'G2 her month on the host = the solo rules, same dice (personal keys)',dd);
  await So.close();

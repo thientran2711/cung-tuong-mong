@@ -21,7 +21,7 @@ const C=()=>(typeof BAL!=="undefined"&&BAL.chat)||null;
 const CH={t:0,run:0,seq:0,visit:null,prev:undefined,stat:{tick:0,said:0,greet:0,hap:0,eav:0,skip:0,lines:0},log:[],errs:[],pm:{}};
 window.CHAT=CH;
 function err(w,e){try{CH.errs.push(w+": "+(e&&e.message||e));if(CH.errs.length>30)CH.errs.shift()}catch(x){}}
-function guest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat==="b")}catch(e){return false}}
+function guest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat==="b"||(window.coopGuest&&coopGuest()))}catch(e){return false}}
 function on(){try{const c=C();return !!(c&&c.on&&typeof S!=="undefined"&&S&&!S.dead&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet))}catch(e){return false}}
 function R(a,b){return a+Math.random()*(b-a)}
 function pick(L){return L[Math.floor(Math.random()*L.length)]}
