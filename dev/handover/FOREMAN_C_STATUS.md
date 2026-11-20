@@ -269,3 +269,4 @@ ROOT-65 Lượt 984 ~03:35Z: OWNER verbatim "Vẽ 1 cô thử theo bảng màu m
 - (20/11 03:08Z) FROM MAIN ROOT-73: LIVE 94c3bddc (mg-ready-guide, owner bug) on 72922870. ROLLBACK 72922870. Final-merge 94c3bddc before LAND READY.
 ROOT-65 Lượt 985 ~03:45Z: F3 c06 THU trial (gen tCR4nH2mZJ cut BhNJ2ShoQR, 138 cr, F3 total 552) LOOKED + sent. Fault: red+green reads "Giáng sinh", red shoes/tassel. check_store DEEP_SEASON_TRIAL={"c06":"thu"} added. F3 AT ROLL LINE (~29 %) → further face work needs a successor = FOR MAIN (I am depth 8). Next Lượt 986.
 ROOT-65 Lượt 986: OWNER "Gửi hình phòng đợt 1" → resent rooms 31–35 as 5 separate labelled crops. Next Lượt 987.
+ROOT-65 Lượt 987: OWNER verbatim "Làm thử cô đó màu hạ xem" → PR19 (F3 at roll) GO: c06 HẠ trial, F3 recipe, 1 gen ~138 cr, sheet CŨ|THU|HẠ. Next Lượt 988.
