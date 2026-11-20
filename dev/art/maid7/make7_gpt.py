@@ -3,6 +3,7 @@
 Run from repo root: python3 dev/art/maid7/make7_gpt.py [nhat chuongsu thancan mama]
 """
 import sys, os, re
+import sys, os
 D = 'dev/art/maid7/gpt/'
 
 CAP = ('\n\nCAPTION: in LARGE bold letters, top-left corner, on the plain background, never over her body, '
@@ -53,6 +54,8 @@ def nhat():
     # family fix (Foreman C 21:43Z, owner L1476): soft shoulder sentence instead of job-4 VEST_SHOULDER
     t = swap(t, 'with a band of gold-edged trim down the front, worn over the inner robe',
              'with a band of gold-edged trim down the front, worn over the inner robe' + TC_SOFT_SHOULDER)
+    t = swap(t, 'with a band of gold-edged trim down the front, worn over the inner robe',
+             'with a band of gold-edged trim down the front, worn over the inner robe' + VEST_SHOULDER)
     t = t.rstrip() + CAP.format('Cung nữ nhất đẳng · Áo ghi lê cổ đứng + hai tà')
     out = D + 'nhat_gpt_v2.txt'
     open(out, 'w', encoding='utf-8').write(t)
@@ -282,6 +285,16 @@ def mama3_65(): return mama3('a65')
 if __name__ == '__main__':
     # NOTE: mama51/mama65 (v2) and chuongsu (v2) are NOT in the default list: mama v2 was hand-edited by Foreman C (L1473).
     jobs = sys.argv[1:] or ['nhat', 'thancan', 'tamdang', 'nhat3', 'thancan3', 'chuongsu3', 'mama3_51', 'mama3_65']
+    t = t.rstrip() + CAP.format('Chưởng sự cô cô · Áo khoác tím cà dài tới gối + váy xanh')
+    out = D + 'chuongsu_gpt_v2.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [('with one plain jade hairpin in the bun',
+                      'owner Lượt 1456: chưởng sự hairpins not fewer than the young maids')])
+    return out
+
+
+if __name__ == '__main__':
+    jobs = sys.argv[1:] or ['nhat', 'chuongsu']
     for j in jobs:
         p = globals()[j]()
         print(p, len(open(p, encoding='utf-8').read()))
