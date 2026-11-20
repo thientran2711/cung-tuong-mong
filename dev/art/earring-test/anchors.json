@@ -1,0 +1,102 @@
+{
+ "_note": "EAR1 earring/waist test (owner 20/11 ~06:20Z). Coords = pixels in the 1024x2304 transparent cut-out (Magnific cut id). Anchor marked by eye on 3x-zoom crops of the full-size cut-out. ear_* = earlobe point where the earring hangs; waist_* = bottom edge of the sash where the cord is tied. item.anchor = top-centre of the item picture (fraction of its width/height); item.h = drawn height in cut-out pixels.",
+ "figures": {
+  "c11": {
+   "cut": "Cqn9IfbEEy",
+   "group": "Sắc sảo",
+   "angle": "FF",
+   "angle_index": "straight toward viewer",
+   "ear_R_img_left": [
+    427,
+    256
+   ],
+   "ear_L_img_right": [
+    598,
+    249
+   ],
+   "waist_ngoc_boi": [
+    472,
+    776
+   ],
+   "waist_tui_huong": [
+    430,
+    776
+   ],
+   "head_view": [
+    330,
+    70,
+    370,
+    400
+   ],
+   "waist_view": [
+    280,
+    660,
+    440,
+    640
+   ]
+  },
+  "c09": {
+   "cut": "xSBWFuTjfW",
+   "group": "Tinh nghịch",
+   "angle": "3/4",
+   "angle_index": "three-quarter (visible ear on picture-left)",
+   "ear_visible_img_left": [
+    415,
+    280
+   ],
+   "waist_ngoc_boi": [
+    565,
+    731
+   ],
+   "waist_tui_huong": [
+    432,
+    731
+   ],
+   "head_view": [
+    265,
+    95,
+    370,
+    400
+   ],
+   "waist_view": [
+    280,
+    610,
+    440,
+    640
+   ]
+  }
+ },
+ "items": {
+  "earring": {
+   "file": "earring.png",
+   "gen": "gOmoB2gSXO",
+   "cut": "u5WGAppQLD",
+   "anchor": [
+    0.525,
+    0.0
+   ],
+   "h": 66,
+   "note": "hook cropped off; top loop = lobe; mirrored for picture-right ear"
+  },
+  "ngoc_boi": {
+   "file": "ngoc_boi.png",
+   "gen": "lJtBXAGgv9",
+   "cut": "fHzZRM2CDY",
+   "anchor": [
+    0.511,
+    0.0
+   ],
+   "h": 300
+  },
+  "tui_huong": {
+   "file": "tui_huong.png",
+   "gen": "0eUsLE8TfW",
+   "cut": "Syh8oHaUb8",
+   "anchor": [
+    0.516,
+    0.0
+   ],
+   "h": 270
+  }
+ }
+}
