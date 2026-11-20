@@ -107,3 +107,54 @@ Fix 1 first (a rename + newest LIVE merge), then 2–5 with the scan extensions;
 - How I tested r1 (reuse): sparse worktree /home/user/wt/<name>; merge newest origin/main locally; bash dev/site/build_site.sh; `python3 -m http.server 8765` in the worktree, tests on http://127.0.0.1:8765/index.html (over http the npc-roads VOICES.json fail is gone). Run ONE Chromium test at a time (box 15 GB; 2 in parallel → «Target crashed»). Bot life ≈ 10 min; road-full 1 life/road ≈ 15 min.
 - Checks to redo on r2: node --check dev/build/all.js after main merge (fix 1 ptX clash; scan every pt top-level name vs main); pt-scan new 6c-read / 6b-state passes and spot-read the r1 file:line lists (fixes 2–4: chest .9/.10, pearls .8, log page .7 t1, order burn pt_su .10, hộp kinh pt_tang .5 c2, sword .10/.9, ledger pt_dang .8, monk sight .7→.8–.11, sure ptS wins vs {v}: jrd_pt :275 :186 :249 :426 :458 :493, jrd_pt2 :270 :576 :32 :324 :236 :495 :141); fix 5 route.js --origin=pf must show no «Vương muội/Vương thúc»; fix 6 {quan} in Đại Hy narration, giấy dó; fix 7 ge-guard PASS (jgecat generated). Re-run pt-roads-bal STATIC, pt-vp, one-core-guard, quickcheck, direct, coop cnv+pf, road-full ×4, a few bot lives.
 - Scratch probes (not in git, recreate if needed): an option audit (cost-only / strict dominance / bạc table) and an old-save cross-build test (save on LIVE _live_main.html → deser in new build).
+
+## §ROUND 2 — E21r2 (BIG reviewer, opus), 20/11
+PRIORITY #1 CHECK ('phutang|E21r'): OD 0 | ledger 0 | claims 8 | main 0 | review/* 2 | archive 0 — REUSED: my r1 report + HANDOVER, worker §ROUND 2 (E21b/E21c), pt-clash.py, pt-law6.js (+ok json), pt-scan.py, pt-vp.py, pt-roads-bal.js, quickcheck, kc-roads, road-full, ge-guard, npc-roads.
+depth 5 · START_CTX ≈ 0 % (get_session used_tokens 0 at start)
+
+Under review: review/phutang-road @ b868bbce (r1 fixes cddb913f + LIVE 377d5ce3 + bd-roads 4adea508). Scope = `git diff 4adea508 b868bbce` (26 files, the same family list as r1 + the new scans). NOTE: origin/review/bd-roads has moved on to d76511d3 since (LIVE fig-label/mg-score-same merges), so `git diff origin/review/bd-roads origin/review/phutang-road` now shows 51 files incl. reversed main work (jmgt, fig-label, KIT_REQUESTS…) — those are NOT phutang changes; I reviewed against 4adea508.
+Local test build: b868bbce + bd-roads tip d76511d3 + LIVE main 66bd36cd merged (only generated index.html/sw.js conflicted), `bash dev/site/build_site.sh` → built 12979792, `node --check all.js` OK. Merge NOT pushed.
+
+### VERDICT: PASS b868bbce
+
+### r1 fixes, item by item (my own reading of the files on the merged tree, not the worker table)
+| r1 fix | result | what I checked |
+|---|---|---|
+| 1 build clash | FIXED | whole family renamed pt*→pf* (save keys "pt.p.*"/"pt.o.*", road ids, RD_FL keys unchanged → no save break). pt-clash.py on main 66bd36cd: 36 names · clashes 0 · stale 0. node --check all.js OK after merging newest LIVE. |
+| 2 law 6c objects | FIXED | pt_hai .9 g/.9 c1 read pfO("ruong") (lost chest → «rương cống ba thuyền đầu»); .8 x1 «Mang ngọc đến chuộc» `if` pearls in ta/kho/kimthanh + PFNGOCN names the box; pt_su .10 «Đốt tờ lệnh» `if pfO("lenh")==="ta"`; pt_tang .10 «Trẫm giữ hộ» books daotang→vua; pt_dang .9 x1 text per daochem holder (tn / thuyquan / vua); pt_dang .7 x1 pearls vs silver by holder. pt-law6 6c read UNGUARDED 0; I read all 40 reviewed exceptions in pt-law6-ok-*.json — each is a fact/record/policy true for every holder or a point where only one holder is possible; accepted. |
+| 3 law 6a sure vs {v} | FIXED | pt-law6 6a SURE-VS-V 0 (every option whose go calls rdOan(A,"v") is rolled). Spot: jrd_pt.js:192, :255, :281 now have rf texts and roll; :281 fail leaves the hairpin with {v} (tram→v). Fact flags read (pt.f.tubo / traoxl / daoban / anhho, danhsach swap). rdOan on a failed try kept on purpose (commented) — accepted as the price of trying (law 3 gain-and-loss). |
+| 4 law 6b state | FIXED | Trí Viễn's sight stored (pfP trivien.mat) at .7 endings; .8–.11 lines branch on PFMAT() (jrd_pt2.js:183, :261, :267, :290, :291); pt_su .11 g tells the ten-day royal journey to Minh Châu (jrd_pt.js:583); pt_dang .6 E.win follows Kim Hựu Thành's place (:404); queen guards need:["v","hh"]. pt-law6 6b UNGUARDED 0; pt-scan 6b 0 unguarded moves (50). |
+| 5 pf home titles | FIXED | kc2Muoi() beside kc2Thuc(); jkc2.js literals «Vương thúc/Vương muội» remain only in the nc/bd fallbacks (:38, :39, :141 nc branch, :571 nc migration). route.js --origin=pf: «Vương muội/Vương thúc» 0, «Hoàng muội» ×2. |
+| 6 smaller (law 8, GE, logic) | FIXED (1 note) | «giấy dó» 0 in jrd_pt/jrd_pt2/jkc2; Đại Hy narration uses «Quốc chủ {land}»; two failed crossings told; «Mười ngày một trang»; GE hooks named in the header; new ác options in the listed chapters. Note R2-N1 below. |
+| 7 GE catalogue | FIXED | pf in dev/test/ge_guard/cat.py; gen_js.py regenerates jgecat.js with no diff; check.py ERRORS 0. |
+
+### Per-law (touched by the diff)
+1 two-way OK (new pt_dang .7 c2 counter-rumour) · 2 equal value OK (STATIC spread >6: 0, climax dominance 0, 4 roads) · 3 gain-and-loss OK (no-loss options 0) · 4 one core OK (one-core-guard PASS; road files type no numbers) · 5 harder with rank OK (0 not harder) · 6a/6b/6c OK (pt-law6 PASS, pt-scan PASS) · 7 wording OK (pt-vp PASS 3802 strings; digits/% 0) · 8 history OK (note R2-N1) · 9 kit OK (no UI in the diff) · 11 whole family OK (every fix came with a scan + before/after table).
+
+### Tests (run by me on the main-66bd36cd-merged build, over http://127.0.0.1:8765, one Chromium at a time)
+| test | result |
+|---|---|
+| node --check all.js after newest LIVE merge | OK |
+| pt-clash.py | 36 names · clashes 0 · stale 0 · PASS |
+| pt-law6.js | 6a 0 · 6b 0 · 6c 0 · PASS |
+| pt-scan.py | 6b 0 unguarded moves · 6c NO BOOK 0 |
+| pt-vp.py | PASS 3802 strings |
+| ge_guard gen_js.py + check.py | jgecat.js generated (no diff) · ERRORS 0 |
+| quickcheck.sh (local merge) | CORE GATES PASS (one-core-guard · rules-one-source · kit-conform · coop-one-world · hooks 6) · TIME-SPILL PASS · open 1536 ms · old save ok · perf new/live render 166/174 · tab 361/336 · buổi 890/974 · tasks>200ms 16/17. (Its "NOT BUILT" line = my local merge commit does not carry the rebuilt index.html — local artifact, not the branch.) |
+| pt-roads-bal STATIC, 4 roads | no-loss 0 · spread>6 0 · climax dominance 0 · not harder at rank 0 · digits/% 0 · unknown tokens none (options 151/149/155/161) |
+| kc-roads direct.js ORIGINS=pf,nc,bd | rc 0 · fail [] errs [] ×3 (pt_hai, nc_gian, bd_soi) |
+| kc-roads route.js --origin=pf | rc 0 · fail [] · «Vương muội/Vương thúc» 0 · «Hoàng muội» ×2 |
+| kc-roads coop-together.js --a=cnv --b=pf | 26/26 passed |
+| road-full.js, 1 life per road (own process each) | pt_hai «Lễ không thành» · pt_su «Thuyền đi không chiếu» · pt_tang «Thuyền đi không có thầy» · pt_dang «Luật bị bỏ dở» — each 14/14 chapters in order (1–3 tutorial, 4 premise, 5–11 road, 12–14 endgame), 9/9 checks |
+| bot lives pt-roads-bal, 1 life per road, own browser each | pt_hai .11=mid · pt_su .11=win · pt_tang .11=mid · pt_dang .11=win2 — 4/4 reach .11, 0 errors. (The worker's 20 valid lives/road on f5a5a0f9 stand: no pt file changed f5a5a0f9→b868bbce; ≥20/road in one browser is not possible on this box, see R2-N2.) |
+| ge-guard.js (http) | 6/6 pass |
+| npc-roads ORG=pf (http), 1 life × 120 months | 14/14 pass · gain-and-loss scan 24 options, 0 without cost or loss |
+
+### Notes (not blocking)
+- R2-N1 (law 8, wording): two hint lines in Đại Hy voice still print {quan} (= «Thiên hoàng»): jrd_pt.js:308 wx «{quan} biết bà chết vì ai» and :362 wx «giữ đúng lời {quan}». Both sit in scenes about the Phù Tang ruler's own letter/list with the Phù Tang envoy present, so I accept them; if E wants zero, swap to «Quốc chủ {land}» in the land pass.
+- R2-N2 (box / FOR E, not this branch): one Chromium renderer grows over long play; my first bot run (2 lives in one browser) crashed the renderer on life 2 and the container restarted (exit 137). Same finding as the worker (E21c box note 1). One life per process runs clean. Worth a memory look on LIVE (jchat/jchatl landed since r1).
+- R2-N3 (landing): bd-roads is now d76511d3 (not on main yet). Landing order stays bd-roads first, then phutang; the land merge only conflicts in generated index.html/sw.js (rebuild with build_site.sh), as in my local merge.
+- r1 notes N1 (rank-scaled bạc), N2 (j72 fam_pf typed numbers, pre-existing shape), N3 (nc origin name on the bd/caoly base) stay open FOR E — not this branch.
+
+### FOR E #17
+PASS b868bbce. Do not touch main from here; foreman verifies FF / writes LAND READY after bd-roads lands.
