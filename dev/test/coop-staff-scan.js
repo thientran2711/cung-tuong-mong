@@ -15,6 +15,9 @@ for(const f of files('dev/build').filter(f=>/\/j[^/]*\.js$/.test(f))){const L=re
   if(/buildFriendSrv\(/.test(l)&&/staff\.push/.test(l))rows.push(['code',f+':'+(i+1),'puts her coop entry into her mistress staff','taken out by pullFriend (toCanon / world loops) / npcMine filter',/pullFriend|staff\.filter\(s=>!s\.coop\)/.test(read(f))?'PAIRED':'UNPAIRED']);
   if(/rivals\.(push|unshift)\(v\)/.test(l)&&/buildFriend|placeFriend/.test(L.slice(Math.max(0,i-3),i+1).join('\n')))rows.push(['code',f+':'+(i+1),'puts her coop entry into rivals','taken out by pullFriend / R.filter(!coop)',/pullFriend/.test(read(f))?'PAIRED':'UNPAIRED']);
   if(/staff\.filter\(s=>plain\(s\)&&s\.coop\)/.test(l))rows.push(['code',f+':'+(i+1),'guest keeps the host\'s coop entry across a host delta','host delta drops it (npcMine staff.filter(!coop))','PAIRED']);})}
+/* (1b) household counts: the ONE count hhHas (j10) must leave her coop entry out (fill / trim / room / promotion gifts / hire all read it) */
+{const f='dev/build/j10.js';const L=read(f).split('\n');const i=L.findIndex(l=>/^function hhHas\(/.test(l));if(i>=0){const l=L[i];rows.push(['code',f+':'+(i+1),'household count hhHas (cap table)','her coop entry is no allotted servant',/!s\.coop/.test(l)?'EXCLUDES coop':'UNPAIRED (counts her: host-only trim / churn)'])}
+ for(const g of files('dev/build').filter(f=>/\/j[^/]*\.js$/.test(f)&&!/\/jcoop/.test(f))){read(g).split('\n').forEach((l,j)=>{if(/hhHas\(/.test(l)&&!/function hhHas/.test(l))rows.push(['code',g+':'+(j+1),'reads hhHas','one count (j10)','PAIRED'])})}}
 /* (2) tests: cross-seat comparisons of world staff names */
 for(const f of files('dev/test').filter(f=>/\.js$/.test(f)&&!/coop-staff-scan/.test(f))){const s=read(f);const L=s.split('\n');L.forEach((l,i)=>{
   const re=/\(v\.staff\|\|\[\]\)(\.filter\([^)]*\))?\.map\(x=>x\.name\)/g;let m;while((m=re.exec(l))){const cross=/A\.p\.evaluate|B\.p\.evaluate|a\.N===c\.N|same\(/.test(l)||/a\.N===c\.N/.test(s);
