@@ -41,3 +41,42 @@ Files: dev/build/jbal2.js (BAL.dc — every number/table), dev/build/jdc0.js (en
 - Shots Fold 755x1000@2 + iPad 1180x820@2 (looked at each): gate frame, trâm card (Màu row), robe card (Màu + Hợp mùa), "Áo trái mùa" frame, calendar popover. Kept in /home/user/wt/e30-shots (CDN upload 401 on this account, not uploaded). Seen and noted: a sure event option shows the kit's "Nắm chắc" chip and "Được: không" (existing kit behaviour of event choices, not changed here); the robe card says Lục/Tím while the robe ICON may be pink — the art gap above (colour = her painting).
 
 SẴN SÀNG KIỂM dresscode 459a91bf94870fb83e3d764d59d4b7272225da9d
+
+## r2 — review r1 fixes (E30r FAIL 459a91bf, dresscode-review.md) · branch review/dresscode from review/dresscode-r6 b840116f + LIVE 794c6b77
+| # | review item | before | after (code) | test |
+|---|---|---|---|---|
+| 1 | NPCs never dress for a festival | NPCs only had a season change | dcNpcFest: own trâm of a missing colour → borrow from a consort who likes her (aff ≥ fav, same dcBorrow/dcReturn) → buy at Nội vụ phủ (Bạc); mocked after the festival (dcNpcSettle, once) | dresscode.test fix 1 ×2 + buy road; dresscode-npc-scan.js table below |
+| 2 | borrow dominated by own trâm | both offered for the same colour | borrow / buy offered only for a needed colour her chest cannot cover; own pieces first, one per colour (BAL.dc.chg.max) | fix 2 check |
+| 3 | one road only; «Được không» | 9/9 gates had one road | every gate offers «Cáo lỗi, về cung nghỉ»; new road «Sai người mua … ở Nội vụ phủ» (Bạc, same for NPCs); every option names what it gives («thành: có màu Đỏ cho lễ», «vào dự lễ như đang mặc», «về cung nghỉ, không dự lễ»), costs only (HANDOVER L90) | fix 3 check |
+| 4 | taboo on the painted robe | +1 missing for life for trắng/đỏ-main identities | BAL.dc.kyOn = 0 until 11c recolour; popover hides the taboo words while off | fix 4 + popover check |
+| 5 | season cost with no robe of her phẩm | Quý nhân paid every winter | dcSeasonRoad: cost only if a robe of the season exists at her phẩm (court pool) or she owns one at/under it; same for NPCs | fix 5 check |
+| 6 | season flip charged at once | she paid in the flip tuần | first tuần of a season = «Sang mùa mới» warning frame, no cost; NPC forgetters the same | fix 6 check |
+| 7 | NPC season cost no Thái hậu part | Danh only | Danh + th by rank, same table | fix 7 check |
+| 8 | borrowed piece sellable | wdSell / wdPawn / giveTo / sellItem / plantItem took it | one guard (e.bor) on all five (her + NPC AI), no acts on a borrowed piece, item detail row «Mượn: của … · qua tuần sau trả» | fix 8 check |
+| 9 | co-op guest duplicates | guest mutated NPC inventories | dcLenders / NPC ask / NPC-held returns only where worldOn() | fix 9 check (worldOn false) |
+| 10 | «Lễ Lễ Vu Lan» | «Lễ ${f.name}» | f.name alone (also «cho ${f.name}») | fix 10 scan over all 13 codes |
+| 11 | contest rows hide the cut | det7 listed arts only | det7 adds «y phục −N» (rowsH7 + mini-game talent line, one place) | fix 11 check |
+| 12 | item dialog drops rows | — | KIT fault → FOREMAN E #22 filed it to MAIN (not hand-fixed, per order); rows live in kitItemDetailRows (KIT §70) + wdItemRowsE | — |
+| 13 | typed .slice(0,2) | typed | BAL.dc.chg.max | one-core PASS |
+| 14 | canon taboo rule | expert §3 ≠ code | expert §3 + BAL comment: turn away ONLY when none of the colours; taboo off until 11c | — |
+
+NPC scan (dev/test/dresscode-npc-scan.js, seed 777, 2 years of real endTurn; before = as they stand before the festival tuần, after = after their roads):
+| festival | year | strict | NPCs | turned away before → after | mocked before → after | fit before → after |
+|---|---|---|---|---|---|---|
+| Tết Đoan ngọ | 1 |  | 10 | 0 → 0 | 8 → 5 | 2 → 5 |
+| Tết Thất tịch | 1 |  | 10 | 0 → 0 | 6 → 3 | 4 → 7 |
+| Lễ Vu Lan | 1 |  | 10 | 0 → 0 | 6 → 4 | 4 → 6 |
+| Thánh thọ Thái hậu | 1 | yes | 9 | 9 → 0 | 0 → 4 | 0 → 5 |
+| Tiết Đông chí | 1 |  | 9 | 0 → 0 | 8 → 8 | 1 → 1 |
+| Tiết Thanh minh | 2 |  | 9 | 0 → 0 | 6 → 3 | 3 → 6 |
+| Tết Đoan ngọ | 2 |  | 9 | 0 → 0 | 4 → 2 | 5 → 7 |
+| Tết Thất tịch | 2 |  | 9 | 0 → 0 | 4 → 2 | 5 → 7 |
+| Lễ Vu Lan | 2 |  | 9 | 0 → 0 | 3 → 0 | 6 → 9 |
+| Tết Trung thu | 2 |  | 9 | 0 → 0 | 5 → 2 | 4 → 7 |
+| Tiết Vạn thọ | 2 | yes | 9 | 4 → 0 | 2 → 2 | 3 → 7 |
+| Tết Trùng cửu | 2 |  | 9 | 0 → 0 | 2 → 2 | 7 → 7 |
+| Tiết Đông chí | 2 |  | 9 | 0 → 0 | 8 → 7 | 1 → 2 |
+| Lễ Lạp bát | 2 |  | 10 | 0 → 0 | 7 → 2 | 3 → 8 |
+| Đêm Giao thừa | 2 |  | 10 | 0 → 0 | 3 → 2 | 7 → 8 |
+| Tết Nguyên đán | 3 | yes | 10 | 0 → 0 | 2 → 2 | 8 → 8 |
+TOTAL 16 festivals · NPC-days 150 · turned away 13 → 0 · fit 63 → 100 · page errors 0
