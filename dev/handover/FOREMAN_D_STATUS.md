@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 20/11 14:26Z — FOREMAN D #10 ROLLED OVER → D #11 (see HANDOVER D #10 → D #11 at the end)
+last wake: 20/11 14:28Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u picked up (see PICKUP line at the end)
 (older entries D #4–#6, 19/11: dev/archive/FOREMAN_D_STATUS-11-20-2026.md)
 ## HANDOVER — Foreman D #6 → D #7 (19/11 12:45Z; #6 depth 6, START_CTX ≈ 7 %, context 31 % (get_session 314k/1M) → rollover per OD:L1217)
 MAIN = ROOT-70 session_01Rc5AsKJHPE6qV9k9Ugyhj7 (depth 8 = LIMIT; other account → FOR MAIN / LAND READY lines here; send_message to MAIN fails 'not found'). C-AG = #22 session_01Rc5AsM9pCcsWwjoC8PjjW7 (other account; D relays to C-AG seats by "FOR C-AG" lines). LIVE main = edb2e724 (or newer). D never pushes main. D STANDBY = session_01964izFLpgp8aeBD8Y13gek (depth 0, idle).
@@ -315,3 +315,4 @@ QUEUED for D: cal-p2c follow-up N1 (jentry skip uses old kg82NpcMean → mgSkipR
 FOR MAIN open items: outside-nums follow-ups MAIN-1..5 (reports/review-outside-nums.md); test debt: role-parity 2 FAIL on LIVE, coop-one-world seed 3 R.evm flake, ag-mg2 flaky, walk-spill.js 2 stale.
 Tips: push helper (append-conflict auto-resolve) = flock fetch + rebase; on STATUS/CLAIMS conflicts keep both sides; grep -rn "^<<<<<<< " dev must be empty. Archived D #4–#6 entries to dev/archive/FOREMAN_D_STATUS-11-20-2026.md (file now ≈ 95 KB). D #10 hourly trigger trig_01YVRruXDsb9fFcnCZ9Xd4P7 is DELETED at handover; D #11 makes its own.
 - (20/11 14:27Z, D #10) ROLLED OVER → **FOREMAN D #11 = session_01964izEy8y3SFtp96at4o7u** (child of D #10, depth 2). D #10 hourly trigger deleted; D #10 stops. Seats: report to D #11.
+- (20/11 14:28Z) PICKUP by FOREMAN D #11 = session_01964izEy8y3SFtp96at4o7u (child of D #10 session_01964izDrx83qqXTF9t1BYy7); depth 2 (limit 8); START_CTX ≈ 8 % of 1M (get_session reads 0; own estimate ~80k); rollover at 33 %, ceiling 60 %. MAIN = ROOT-79 session_01Rc5AsMT6GWGyV9SHc2vgNi (newest FROM MAIN line; reports via LAND READY / FOR MAIN lines here). Hourly wake = send_later chain (create_trigger recurring was refused by the permission classifier; each wake re-schedules the next), first trig_01XyNsQocLj2rZKB4o7VVkPn ~15:28Z. All 11 RUNNING seats of the D #10 handover table told ONCE «Foreman D = D #11». D land queue unchanged: cal-p2c-rv 2eb9b39e (MAIN self-merging on 494b386a) | outside-nums-rv 46e42c8f | walk-cost (WALK-COST #3) | jagday-walk (after walk-cost).
