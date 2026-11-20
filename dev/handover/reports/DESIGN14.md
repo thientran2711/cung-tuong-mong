@@ -115,3 +115,6 @@ Scope found (grep "tier" in thu_comoi + dong_hientai): only the HH t8 files say 
 ## For DESIGN16 (s62_t8 cloak7 → cloak9): the same swap as m02 cloak8 above (its text is identical there).
 ## Checks: keep_check --sidecar PASS ×4, --all 199 PASS; check_store FAIL set identical to each base (no new fails).
 ## Q (L1541 lost look): in s62_t8_HAN_BAC_open9 AND open10 the HQP words are present exactly once, byte-identical to HQP t7 open6/open8: the OPEN-NECK opener, "collar is worn OPEN, pulled wide OFF the neck … cross only LOW at the sash", "sewn flat along the wide V out to the shoulders", the whole "long-spiral quju (khúc cư), its front panel wound SEVERAL times in a long spiral … never covered by any other robe" clause, and "two broad … borders along the wrap edge edged with pearls". So the prompt has them; the loss is in the draw (model), not in the prompt.
+## Job 6 update (C #12: DESIGN16 cloak9 files free)
+- t8 s62/m02 cloak9 → cloak10: C #12 already made these (4d89050) with my exact G37 swap; checked: keep PASS, both ≤ 10 000. Nothing for me to add. My m02_t8 cloak8 (from cloak7) is now SUPERSEDED by cloak10. Don't use it.
+- t7 s62/m02 cloak9: already "ONE small single-tier SOFT jewelled cloud collar". G37 wants one tier, soft for everyone except HH, so they already comply. No cloak10 made.
