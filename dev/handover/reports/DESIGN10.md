@@ -43,6 +43,26 @@ t7 added: COLLAR FROM HORIZONTAL LOW OUTER THE across alluring an at×3 band×3 
 t8 lost: ALSO Phi's V×6 WIDE are broad collar×4 covered crossed-collar deep down edge edges every fully in inside is×2 it lapels like lines meet near nested×2 only open reach robe×2 sash shoulders shows so the×5 to×2 very visible whose wide zhiju
 t8 added: COLLAR FROM HORIZONTAL LOW OUTER THE across alluring an at×3 band×2 begin blush bright cleavage collars×3 cross crossed edged graceful layer long-spiral neck no×2 opaque pearl pink points quju royal sheer shoulder showing skin straight top upper-chest with yellow
 
+## Stage 4 — owner Lượt 1406 (sent by C #8): STOP the _vai neckline work; new files _open2 (base = _open, DESIGN9 af01373)
+The _vai files stay in the repo, but this direction is stopped. New: dev/art/seasons4/s62_t{4..8}_HAN_BAC_open2.txt (+ .keep, base = _open), built by make_han_open2_L1406.py.
+- The ONE inner-layer sentence, verbatim (the same in all 5, placed where the bare-skin clause was, right after the collar edges): "between them an opaque bright blush pink inner layer over the chest (no bare chest, no cleavage, shoulders covered), its neckline left natural;"
+- Removed because they contradict it: the TOP line "bare neck, collarbones and upper chest" is now "bare neck and collarbones"; "BARE SKIN: the whole neck, both collarbones and the upper chest to mid-chest (modest, no cleavage, shoulders covered)" is replaced by the sentence above; ", leaving the skin open"; "never a straight horizontal inner top or band across the chest" (t4/t5); "no horizontal inner top" (t6–t8); the hard colour word in "the pink inner collar" became "the inner collar" (t4/t5).
+- Kept: the outer collar edges from the OUTER shoulder points, crossing LOW at the sash; the narrow bands along the edges; everything else as in _open.
+- Hem by rank (owner L1399), the same as 3a80455: t5 short wrap "like the Tần's" (I dropped "exactly" to fit) + caption "Khúc cư vạt ngắn"; t6 a long-wrap quju replaces the straight-hem zhiju + caption "Khúc cư vạt dài"; t7 "long-spiral quju (khúc cư)"; t8 "longest-spiral quju (khúc cư)".
+- Length: t4 9820 · t5 9993 · t6 9964 · t7 9966 · t8 9970. No boilerplate cut.
+- Gate: check_store FAIL set = the _open base for all 5 (t4 M07 S12 S13 · t5 M07 S12 · t6 B12 M07 S07 S12 · t7/t8 B12 S07). keep_check --sidecar PASS ×5, --all 70 PASS.
+Word diff _open → _open2:
+t4 lost: BARE SKIN a across and band both chest collarbones horizontal leaving mid-chest modest neck never open or skin straight the×3 to top upper×2 whole
+t4 added: an bare blush bright its layer left natural neckline no opaque over
+t5 lost: BARE SKIN around band body both chest collarbones curved-hem down floor from horizontal leaving mid-chest modest neck open or reaching skin spiral straight the×5 to top upper×2 waist whole wound đoạn
+t5 added: ONCE Tần's a an bare blush bright curved edge ends floor-length its layer left like long natural neckline never×2 ngắn no opaque over panels petal points short side simple smooth softly swallowtail vạt wrap wraps
+t6 lost: BARE SKIN Trực and at both collarbones hems×2 horizontal leaving level mid-chest modest neck skin stepped×2 straight straight-hem three×2 top trực upper×2 whole zhiju
+t6 added: Khúc LONG-wrap SEVERAL a×2 an bare blush body bright dài edges front in its×2 khúc layer left long×2 middle natural neckline one opaque outer over panel pink quju×2 robe round spiral×3 the times under vạt wound wrap×2
+t7 lost: BARE SKIN and both collarbones horizontal leaving mid-chest modest neck open skin the×2 to top upper×2 whole zhiju
+t7 added: an bare blush bright cư its khúc layer left long-spiral natural neckline opaque over pink quju
+t8 lost: BARE SKIN and both collarbones horizontal leaving mid-chest modest neck open skin the×2 to top upper×2 whole zhiju
+t8 added: an bare blush bright cư its khúc layer left longest-spiral natural neckline opaque over pink quju
+
 ## Open
 - Ready for a 1-sample gen when the owner says yes (A20/A21). Suggested first sample: t4 Tần (worst in the _open run).
 - If the model still makes the inner top look like bare skin, next lever = name the inner top's colour as "bright blush pink silk" (currently "pink").
