@@ -13,14 +13,20 @@
    "sec": "deep blue-violet",
    "sec_hex": "#5D5894"
   },
-  "note": "Lượt 770: codes only, picture not redrawn"
+  "note": "Lượt 770: codes only, picture not redrawn",
+  "root_drawn": {
+   "main": "cool aquamarine",
+   "main_hex": "#86CDB9",
+   "sec": "deep blue-violet",
+   "sec_hex": "#5D5894"
+  }
  },
  "s47": {
   "main": "periwinkle",
   "main_hex": "#949BD8",
   "sec": "mint",
   "sec_hex": "#9ACBB7",
-  "root_season": "ha",
+  "root_season": "dong",
   "src": "Lượt 761 Lạnh lùng"
  },
  "s48": {
@@ -36,7 +42,7 @@
   "main_hex": "#C98A97",
   "sec": "soft sage jade",
   "sec_hex": "#A3C4A0",
-  "root_season": "thu",
+  "root_season": "xuan",
   "src": "Lượt 761 Lạnh lùng",
   "root_old": {
    "main": "soft burgundy rose",
@@ -44,7 +50,13 @@
    "sec": "pine teal",
    "sec_hex": "#388581"
   },
-  "note": "Lượt 770: codes only, picture not redrawn"
+  "note": "Lượt 770: codes only, picture not redrawn",
+  "root_drawn": {
+   "main": "soft burgundy rose",
+   "main_hex": "#C37986",
+   "sec": "pine teal",
+   "sec_hex": "#388581"
+  }
  },
  "s50": {
   "main": "clear ice blue",
@@ -59,319 +71,559 @@
    "sec": "deep raspberry",
    "sec_hex": "#A55D7A"
   },
-  "note": "Lượt 770: codes only, picture not redrawn"
+  "note": "Lượt 770: codes only, picture not redrawn",
+  "root_drawn": {
+   "main": "clear ice blue",
+   "main_hex": "#A6C9E4",
+   "sec": "deep raspberry",
+   "sec_hex": "#A55D7A"
+  }
  },
  "s07": {
   "main": "soft wine red",
-  "main_hex": "#A34353",
-  "sec": "silver grey",
-  "sec_hex": "#B7BBC2",
-  "root_season": "thu",
-  "src": "drawn colours of the approved s07.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "main_hex": "#D3898A",
+  "sec": "silver blue",
+  "sec_hex": "#9AA8C9",
+  "root_season": "xuan",
+  "src": "drawn colours of the approved s07.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft wine red",
+   "main_hex": "#A34353",
+   "sec": "silver grey",
+   "sec_hex": "#B7BBC2"
+  }
  },
  "s08": {
   "main": "soft emerald green",
-  "main_hex": "#3B9174",
+  "main_hex": "#5DB193",
   "sec": "pearl white",
   "sec_hex": "#E9E7E2",
   "root_season": "dong",
-  "src": "drawn colours of the approved s08.v5b.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s08.v5b.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft emerald green",
+   "main_hex": "#3B9174",
+   "sec": "pearl white",
+   "sec_hex": "#E9E7E2"
+  }
  },
  "s09": {
   "main": "soft indigo violet",
-  "main_hex": "#634EA2",
+  "main_hex": "#A094D5",
   "sec": "pale rose",
   "sec_hex": "#E6BCC3",
   "root_season": "dong",
-  "src": "drawn colours of the approved s09.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s09.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft indigo violet",
+   "main_hex": "#634EA2",
+   "sec": "pale rose",
+   "sec_hex": "#E6BCC3"
+  }
  },
  "s10": {
   "main": "soft crimson",
-  "main_hex": "#BF4051",
+  "main_hex": "#D28691",
   "sec": "pale gold beige",
-  "sec_hex": "#DBD0BD",
-  "root_season": "thu",
-  "src": "drawn colours of the approved s10.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "sec_hex": "#E1DBC7",
+  "root_season": "xuan",
+  "src": "drawn colours of the approved s10.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft crimson",
+   "main_hex": "#BF4051",
+   "sec": "pale gold beige",
+   "sec_hex": "#DBD0BD"
+  }
  },
  "s11": {
   "main": "soft royal purple",
-  "main_hex": "#794096",
-  "sec": "silver grey",
-  "sec_hex": "#B7BBC2",
+  "main_hex": "#B48FC9",
+  "sec": "silver blue",
+  "sec_hex": "#A9BCDC",
   "root_season": "dong",
-  "src": "drawn colours of the approved s11.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s11.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft royal purple",
+   "main_hex": "#794096",
+   "sec": "silver grey",
+   "sec_hex": "#B7BBC2"
+  }
  },
  "s12": {
   "main": "soft peacock blue",
-  "main_hex": "#3686A1",
+  "main_hex": "#5CAAC6",
   "sec": "warm ivory",
   "sec_hex": "#EAD7BF",
-  "root_season": "dong",
-  "src": "drawn colours of the approved s12.v5b.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "root_season": "ha",
+  "src": "drawn colours of the approved s12.v5b.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft peacock blue",
+   "main_hex": "#3686A1",
+   "sec": "warm ivory",
+   "sec_hex": "#EAD7BF"
+  }
  },
  "s13": {
   "main": "soft frost white",
   "main_hex": "#E2E6E9",
-  "sec": "slate blue",
-  "sec_hex": "#536D93",
+  "sec": "light slate blue",
+  "sec_hex": "#ABC9F3",
   "root_season": "dong",
-  "src": "drawn colours of the approved s13.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s13.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft frost white",
+   "main_hex": "#E2E6E9",
+   "sec": "slate blue",
+   "sec_hex": "#536D93"
+  }
  },
  "s14": {
   "main": "soft ink blue",
-  "main_hex": "#3E5079",
-  "sec": "pale silver grey",
-  "sec_hex": "#C9CBCF",
-  "root_season": "dong",
-  "src": "drawn colours of the approved s14.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "main_hex": "#899ECC",
+  "sec": "pale silver blue",
+  "sec_hex": "#BBCBED",
+  "root_season": "ha",
+  "src": "drawn colours of the approved s14.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft ink blue",
+   "main_hex": "#3E5079",
+   "sec": "pale silver grey",
+   "sec_hex": "#C9CBCF"
+  }
  },
  "s15": {
   "main": "soft pale celadon",
-  "main_hex": "#B7D7C7",
-  "sec": "deep teal",
-  "sec_hex": "#316D72",
-  "root_season": "dong",
-  "src": "drawn colours of the approved s15.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "main_hex": "#B1D9C5",
+  "sec": "light teal",
+  "sec_hex": "#7FBCC1",
+  "root_season": "ha",
+  "src": "drawn colours of the approved s15.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft pale celadon",
+   "main_hex": "#B7D7C7",
+   "sec": "deep teal",
+   "sec_hex": "#316D72"
+  }
  },
  "s16": {
   "main": "soft peach-blossom pink",
-  "main_hex": "#DE9CA4",
-  "sec": "plum rose",
-  "sec_hex": "#B35685",
-  "root_season": "thu",
-  "src": "drawn colours of the approved s16.v4c.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "main_hex": "#DF9C9E",
+  "sec": "soft plum rose",
+  "sec_hex": "#C17A9B",
+  "root_season": "xuan",
+  "src": "drawn colours of the approved s16.v4c.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft peach-blossom pink",
+   "main_hex": "#DE9CA4",
+   "sec": "plum rose",
+   "sec_hex": "#B35685"
+  }
  },
  "s17": {
   "main": "soft coral pink",
-  "main_hex": "#D88579",
+  "main_hex": "#D3887D",
   "sec": "champagne ivory",
-  "sec_hex": "#E6DDD1",
+  "sec_hex": "#E4DED1",
   "root_season": "xuan",
-  "src": "drawn colours of the approved s17.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s17.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft coral pink",
+   "main_hex": "#D88579",
+   "sec": "champagne ivory",
+   "sec_hex": "#E6DDD1"
+  }
  },
  "s18": {
   "main": "soft violet mauve",
-  "main_hex": "#AD6EB9",
-  "sec": "deep rose",
-  "sec_hex": "#A63F59",
-  "root_season": "thu",
-  "src": "drawn colours of the approved s18.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "main_hex": "#BA8BC2",
+  "sec": "soft rose",
+  "sec_hex": "#C67887",
+  "root_season": "xuan",
+  "src": "drawn colours of the approved s18.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft violet mauve",
+   "main_hex": "#AD6EB9",
+   "sec": "deep rose",
+   "sec_hex": "#A63F59"
+  }
  },
  "s19": {
   "main": "soft garnet red",
-  "main_hex": "#AA3C4E",
-  "sec": "pale silver grey",
-  "sec_hex": "#C9CBCF",
-  "root_season": "thu",
-  "src": "drawn colours of the approved s19.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "main_hex": "#D3868C",
+  "sec": "pale silver blue",
+  "sec_hex": "#BBCBED",
+  "root_season": "xuan",
+  "src": "drawn colours of the approved s19.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft garnet red",
+   "main_hex": "#AA3C4E",
+   "sec": "pale silver grey",
+   "sec_hex": "#C9CBCF"
+  }
  },
  "s20": {
   "main": "soft deep teal",
-  "main_hex": "#377A81",
+  "main_hex": "#69ACAE",
   "sec": "warm ivory",
   "sec_hex": "#E6DDD1",
-  "root_season": "dong",
-  "src": "drawn colours of the approved s20.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "root_season": "ha",
+  "src": "drawn colours of the approved s20.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft deep teal",
+   "main_hex": "#377A81",
+   "sec": "warm ivory",
+   "sec_hex": "#E6DDD1"
+  }
  },
  "s21": {
   "main": "soft amethyst purple",
-  "main_hex": "#824CA9",
-  "sec": "pale lilac grey",
-  "sec_hex": "#CCC7D1",
+  "main_hex": "#B090CC",
+  "sec": "pale lilac lilac",
+  "sec_hex": "#D3C1E3",
   "root_season": "dong",
-  "src": "drawn colours of the approved s21.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s21.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft amethyst purple",
+   "main_hex": "#824CA9",
+   "sec": "pale lilac grey",
+   "sec_hex": "#CCC7D1"
+  }
  },
  "s22": {
   "main": "soft midnight blue",
-  "main_hex": "#35436E",
+  "main_hex": "#8B9DCE",
   "sec": "pearl white",
-  "sec_hex": "#E9E7E2",
+  "sec_hex": "#EAE6E2",
   "root_season": "dong",
-  "src": "drawn colours of the approved s22.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s22.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft midnight blue",
+   "main_hex": "#35436E",
+   "sec": "pearl white",
+   "sec_hex": "#E9E7E2"
+  }
  },
  "s23": {
   "main": "soft pine green",
-  "main_hex": "#356E52",
+  "main_hex": "#73AD8F",
   "sec": "pale jade",
-  "sec_hex": "#AFCFBF",
+  "sec_hex": "#A9D1BD",
   "root_season": "dong",
-  "src": "drawn colours of the approved s23.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s23.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft pine green",
+   "main_hex": "#356E52",
+   "sec": "pale jade",
+   "sec_hex": "#AFCFBF"
+  }
  },
  "s24": {
   "main": "soft burgundy",
-  "main_hex": "#7D364D",
+  "main_hex": "#D28795",
   "sec": "champagne beige",
-  "sec_hex": "#DFD3C3",
-  "root_season": "thu",
-  "src": "drawn colours of the approved s24.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "sec_hex": "#E3D1C5",
+  "root_season": "xuan",
+  "src": "drawn colours of the approved s24.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft burgundy",
+   "main_hex": "#7D364D",
+   "sec": "champagne beige",
+   "sec_hex": "#DFD3C3"
+  }
  },
  "s25": {
   "main": "soft cobalt blue",
-  "main_hex": "#3F6AA6",
+  "main_hex": "#94B3EE",
   "sec": "silver white",
-  "sec_hex": "#DDE0E3",
-  "root_season": "dong",
-  "src": "drawn colours of the approved s25.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "sec_hex": "#DEE0E3",
+  "root_season": "ha",
+  "src": "drawn colours of the approved s25.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft cobalt blue",
+   "main_hex": "#3F6AA6",
+   "sec": "silver white",
+   "sec_hex": "#DDE0E3"
+  }
  },
  "s26": {
-  "main": "soft slate grey-blue",
-  "main_hex": "#667F99",
+  "main": "soft slate blue",
+  "main_hex": "#87A1BD",
   "sec": "soft white",
   "sec_hex": "#EDEBE9",
-  "root_season": "dong",
-  "src": "drawn colours of the approved s26.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "root_season": "ha",
+  "src": "drawn colours of the approved s26.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft slate grey-blue",
+   "main_hex": "#667F99",
+   "sec": "soft white",
+   "sec_hex": "#EDEBE9"
+  }
  },
  "s27": {
   "main": "soft ice lavender",
   "main_hex": "#BEB6D8",
-  "sec": "deep indigo",
-  "sec_hex": "#353A6E",
-  "root_season": "dong",
-  "src": "drawn colours of the approved s27.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "sec": "light indigo",
+  "sec_hex": "#9099D5",
+  "root_season": "ha",
+  "src": "drawn colours of the approved s27.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft ice lavender",
+   "main_hex": "#BEB6D8",
+   "sec": "deep indigo",
+   "sec_hex": "#353A6E"
+  }
  },
  "s28": {
   "main": "soft frost blue",
-  "main_hex": "#BDD1DB",
-  "sec": "deep navy",
-  "sec_hex": "#263359",
-  "root_season": "dong",
-  "src": "drawn colours of the approved s28.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "main_hex": "#ACD4E8",
+  "sec": "light navy",
+  "sec_hex": "#9CAEDC",
+  "root_season": "ha",
+  "src": "drawn colours of the approved s28.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft frost blue",
+   "main_hex": "#BDD1DB",
+   "sec": "deep navy",
+   "sec_hex": "#263359"
+  }
  },
  "s29": {
   "main": "soft pale mint",
   "main_hex": "#BFD9CE",
-  "sec": "deep slate green",
-  "sec_hex": "#396059",
+  "sec": "light slate green",
+  "sec_hex": "#91BFB5",
   "root_season": "dong",
-  "src": "drawn colours of the approved s29.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s29.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft pale mint",
+   "main_hex": "#BFD9CE",
+   "sec": "deep slate green",
+   "sec_hex": "#396059"
+  }
  },
  "s30": {
-  "main": "soft pewter grey",
-  "main_hex": "#9196A1",
+  "main": "soft pewter blue",
+  "main_hex": "#909EBE",
   "sec": "pale ice blue",
   "sec_hex": "#CDDDE4",
-  "root_season": "ha",
-  "src": "drawn colours of the approved s30.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "root_season": "dong",
+  "src": "drawn colours of the approved s30.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft pewter grey",
+   "main_hex": "#9196A1",
+   "sec": "pale ice blue",
+   "sec_hex": "#CDDDE4"
+  }
  },
  "s31": {
   "main": "soft moonlight white",
   "main_hex": "#E2E4E9",
-  "sec": "deep plum",
-  "sec_hex": "#5D325D",
-  "root_season": "thu",
-  "src": "drawn colours of the approved s31.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "sec": "light plum",
+  "sec_hex": "#E4B2E3",
+  "root_season": "xuan",
+  "src": "drawn colours of the approved s31.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft moonlight white",
+   "main_hex": "#E2E4E9",
+   "sec": "deep plum",
+   "sec_hex": "#5D325D"
+  }
  },
  "s32": {
   "main": "soft steel blue",
-  "main_hex": "#6A8CAF",
-  "sec": "pale silver grey",
-  "sec_hex": "#C9CBCF",
+  "main_hex": "#77A5C3",
+  "sec": "pale silver blue",
+  "sec_hex": "#BBCBED",
   "root_season": "ha",
-  "src": "drawn colours of the approved s32.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s32.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft steel blue",
+   "main_hex": "#6A8CAF",
+   "sec": "pale silver grey",
+   "sec_hex": "#C9CBCF"
+  }
  },
  "s33": {
   "main": "soft peony pink",
-  "main_hex": "#D98CA6",
-  "sec": "deep wine",
-  "sec_hex": "#6B2E3D",
-  "root_season": "thu",
-  "src": "drawn colours of the approved s33.v5r2.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "main_hex": "#D78DA6",
+  "sec": "soft wine",
+  "sec_hex": "#C17B89",
+  "root_season": "xuan",
+  "src": "drawn colours of the approved s33.v5r2.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft peony pink",
+   "main_hex": "#D98CA6",
+   "sec": "deep wine",
+   "sec_hex": "#6B2E3D"
+  }
  },
  "s34": {
   "main": "soft coral red",
-  "main_hex": "#D37269",
+  "main_hex": "#D3877F",
   "sec": "pale peach ivory",
-  "sec_hex": "#EAD9CD",
-  "root_season": "thu",
-  "src": "drawn colours of the approved s34.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "sec_hex": "#ECD7D1",
+  "root_season": "xuan",
+  "src": "drawn colours of the approved s34.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft coral red",
+   "main_hex": "#D37269",
+   "sec": "pale peach ivory",
+   "sec_hex": "#EAD9CD"
+  }
  },
  "s35": {
   "main": "soft fuchsia rose",
-  "main_hex": "#C05995",
+  "main_hex": "#CA88AB",
   "sec": "pale blush",
   "sec_hex": "#EACDD2",
-  "root_season": "thu",
-  "src": "drawn colours of the approved s35.v5r2.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "root_season": "xuan",
+  "src": "drawn colours of the approved s35.v5r2.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft fuchsia rose",
+   "main_hex": "#C05995",
+   "sec": "pale blush",
+   "sec_hex": "#EACDD2"
+  }
  },
  "s36": {
   "main": "soft lychee red",
-  "main_hex": "#C6535C",
+  "main_hex": "#D38688",
   "sec": "soft gold beige",
-  "sec_hex": "#D2C4AC",
+  "sec_hex": "#D7C3A2",
   "root_season": "thu",
-  "src": "drawn colours of the approved s36.v5r2.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s36.v5r2.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft lychee red",
+   "main_hex": "#C6535C",
+   "sec": "soft gold beige",
+   "sec_hex": "#D2C4AC"
+  }
  },
  "s37": {
   "main": "soft orchid pink",
-  "main_hex": "#C982BE",
-  "sec": "deep violet",
-  "sec_hex": "#593A78",
+  "main_hex": "#C28AB9",
+  "sec": "soft violet",
+  "sec_hex": "#A182C3",
   "root_season": "thu",
-  "src": "drawn colours of the approved s37.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s37.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft orchid pink",
+   "main_hex": "#C982BE",
+   "sec": "deep violet",
+   "sec_hex": "#593A78"
+  }
  },
  "s38": {
   "main": "soft apricot rose",
   "main_hex": "#D99F8C",
-  "sec": "deep rose brown",
-  "sec_hex": "#743E47",
+  "sec": "soft rose brown",
+  "sec_hex": "#BB7F87",
   "root_season": "thu",
-  "src": "drawn colours of the approved s38.v5r2.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s38.v5r2.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft apricot rose",
+   "main_hex": "#D99F8C",
+   "sec": "deep rose brown",
+   "sec_hex": "#743E47"
+  }
  },
  "s39": {
   "main": "soft saffron amber",
-  "main_hex": "#C89741",
-  "sec": "smoky teal",
-  "sec_hex": "#477A85",
+  "main_hex": "#C19959",
+  "sec": "soft smoky teal",
+  "sec_hex": "#689CA7",
   "root_season": "thu",
-  "src": "drawn colours of the approved s39.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s39.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft saffron amber",
+   "main_hex": "#C89741",
+   "sec": "smoky teal",
+   "sec_hex": "#477A85"
+  }
  },
  "s40": {
   "main": "soft cerulean blue",
-  "main_hex": "#4384B1",
+  "main_hex": "#6DA4D6",
   "sec": "pale apricot",
   "sec_hex": "#E7D3C6",
-  "root_season": "dong",
-  "src": "drawn colours of the approved s40.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "root_season": "ha",
+  "src": "drawn colours of the approved s40.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft cerulean blue",
+   "main_hex": "#4384B1",
+   "sec": "pale apricot",
+   "sec_hex": "#E7D3C6"
+  }
  },
  "s41": {
   "main": "soft olive green",
-  "main_hex": "#788A42",
+  "main_hex": "#97A966",
   "sec": "pale gold beige",
   "sec_hex": "#DBD0BD",
   "root_season": "thu",
-  "src": "drawn colours of the approved s41.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s41.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft olive green",
+   "main_hex": "#788A42",
+   "sec": "pale gold beige",
+   "sec_hex": "#DBD0BD"
+  }
  },
  "s42": {
   "main": "soft raspberry magenta",
-  "main_hex": "#A63F6A",
+  "main_hex": "#CE87A0",
   "sec": "pale mint",
   "sec_hex": "#C6DDD3",
-  "root_season": "thu",
-  "src": "drawn colours of the approved s42.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "root_season": "xuan",
+  "src": "drawn colours of the approved s42.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft raspberry magenta",
+   "main_hex": "#A63F6A",
+   "sec": "pale mint",
+   "sec_hex": "#C6DDD3"
+  }
  },
  "s43": {
   "main": "soft sapphire blue",
-  "main_hex": "#385A9F",
+  "main_hex": "#81A0D9",
   "sec": "pale lemon cream",
   "sec_hex": "#EAE5CD",
   "root_season": "dong",
-  "src": "drawn colours of the approved s43.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s43.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft sapphire blue",
+   "main_hex": "#385A9F",
+   "sec": "pale lemon cream",
+   "sec_hex": "#EAE5CD"
+  }
  },
  "s44": {
   "main": "soft burnt sienna",
-  "main_hex": "#A6593F",
+  "main_hex": "#D18C74",
   "sec": "sage grey",
-  "sec_hex": "#9EB39E",
+  "sec_hex": "#99B599",
   "root_season": "thu",
-  "src": "drawn colours of the approved s44.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s44.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft burnt sienna",
+   "main_hex": "#A6593F",
+   "sec": "sage grey",
+   "sec_hex": "#9EB39E"
+  }
  },
  "s45": {
   "main": "soft aubergine purple",
-  "main_hex": "#7C4587",
+  "main_hex": "#B98BC3",
   "sec": "pale gold",
   "sec_hex": "#DACEA9",
   "root_season": "thu",
-  "src": "drawn colours of the approved s45.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
+  "src": "drawn colours of the approved s45.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)",
+  "root_drawn": {
+   "main": "soft aubergine purple",
+   "main_hex": "#7C4587",
+   "sec": "pale gold",
+   "sec_hex": "#DACEA9"
+  }
  },
  "s51": {
   "main": "cool lilac",

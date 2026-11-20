@@ -1,0 +1,3436 @@
+{
+ "nonroot": [
+  {
+   "id": "m02",
+   "season": "xuan",
+   "old": {
+    "main": "rose pink",
+    "main_hex": "#DB94A0",
+    "sec": "peach ivory",
+    "sec_hex": "#F0DCC8"
+   },
+   "new": {
+    "main": "silk rose pink",
+    "main_hex": "#DE9DA3",
+    "sec": "pale mint",
+    "sec_hex": "#C9E5D4"
+   }
+  },
+  {
+   "id": "m02",
+   "season": "dong",
+   "old": {
+    "main": "turquoise",
+    "main_hex": "#7EC4C4",
+    "sec": "deep raspberry",
+    "sec_hex": "#A55D7A"
+   },
+   "new": {
+    "main": "sky blue",
+    "main_hex": "#97C9D4",
+    "sec": "cool rose pink",
+    "sec_hex": "#CE8AA7"
+   }
+  },
+  {
+   "id": "m04",
+   "season": "xuan",
+   "old": {
+    "main": "warm rose",
+    "main_hex": "#D88C8C",
+    "sec": "powder blue",
+    "sec_hex": "#A9BEDB"
+   },
+   "new": {
+    "main": "warm rose",
+    "main_hex": "#D2908F",
+    "sec": "soft sea blue",
+    "sec_hex": "#7AA1BE"
+   }
+  },
+  {
+   "id": "m04",
+   "season": "thu",
+   "old": {
+    "main": "warm apricot",
+    "main_hex": "#DBB294",
+    "sec": "indigo blue",
+    "sec_hex": "#4E5D97"
+   },
+   "new": {
+    "main": "warm apricot",
+    "main_hex": "#DBB294",
+    "sec": "cool aquamarine",
+    "sec_hex": "#93DAC6"
+   }
+  },
+  {
+   "id": "m04",
+   "season": "dong",
+   "old": {
+    "main": "hydrangea blue",
+    "main_hex": "#9DAADC",
+    "sec": "deep plum",
+    "sec_hex": "#7C516F"
+   },
+   "new": {
+    "main": "soft jade",
+    "main_hex": "#6EAD9B",
+    "sec": "soft plum",
+    "sec_hex": "#B081A1"
+   }
+  },
+  {
+   "id": "m05",
+   "season": "xuan",
+   "old": {
+    "main": "blush pink",
+    "main_hex": "#E8ABAE",
+    "sec": "sea green",
+    "sec_hex": "#7DC2A8"
+   },
+   "new": {
+    "main": "blush pink",
+    "main_hex": "#E6B1A7",
+    "sec": "sea green",
+    "sec_hex": "#7DC2A8"
+   }
+  },
+  {
+   "id": "m05",
+   "season": "ha",
+   "old": {
+    "main": "blue hyacinth",
+    "main_hex": "#8C93CC",
+    "sec": "deep jade",
+    "sec_hex": "#4E9E80"
+   },
+   "new": {
+    "main": "blue hyacinth",
+    "main_hex": "#9BA2DD",
+    "sec": "soft jade",
+    "sec_hex": "#54A486"
+   }
+  },
+  {
+   "id": "m05",
+   "season": "dong",
+   "old": {
+    "main": "pale orchid",
+    "main_hex": "#D3AED6",
+    "sec": "deep sapphire",
+    "sec_hex": "#506798"
+   },
+   "new": {
+    "main": "pale orchid",
+    "main_hex": "#D3AED6",
+    "sec": "soft teal",
+    "sec_hex": "#6FAEB5"
+   }
+  },
+  {
+   "id": "m08",
+   "season": "xuan",
+   "old": {
+    "main": "peach-salmon",
+    "main_hex": "#DBA694",
+    "sec": "jade green",
+    "sec_hex": "#5DAC85"
+   },
+   "new": {
+    "main": "coral rose",
+    "main_hex": "#DD9185",
+    "sec": "soft pale jade",
+    "sec_hex": "#A2CAB2"
+   }
+  },
+  {
+   "id": "m08",
+   "season": "dong",
+   "old": {
+    "main": "pale orchid",
+    "main_hex": "#DAB4DD",
+    "sec": "deep sea blue",
+    "sec_hex": "#4B809D"
+   },
+   "new": {
+    "main": "lavender violet",
+    "main_hex": "#AF8FC6",
+    "sec": "clear ice blue",
+    "sec_hex": "#ACD4EC"
+   }
+  },
+  {
+   "id": "m09",
+   "season": "ha",
+   "old": {
+    "main": "clear ice blue",
+    "main_hex": "#A6C9E4",
+    "sec": "teal",
+    "sec_hex": "#499597"
+   },
+   "new": {
+    "main": "soft ink blue",
+    "main_hex": "#84A1C6",
+    "sec": "aqua blue",
+    "sec_hex": "#9CDBE7"
+   }
+  },
+  {
+   "id": "m09",
+   "season": "thu",
+   "old": {
+    "main": "rose pink",
+    "main_hex": "#D5909C",
+    "sec": "teal",
+    "sec_hex": "#499597"
+   },
+   "new": {
+    "main": "soft pink",
+    "main_hex": "#D09BA4",
+    "sec": "aqua blue",
+    "sec_hex": "#7CBAC6"
+   }
+  },
+  {
+   "id": "m09",
+   "season": "dong",
+   "old": {
+    "main": "lake blue",
+    "main_hex": "#8BBCE0",
+    "sec": "deep blue-violet",
+    "sec_hex": "#6863A3"
+   },
+   "new": {
+    "main": "sky blue",
+    "main_hex": "#9BC4E6",
+    "sec": "soft jade green",
+    "sec_hex": "#95A986"
+   }
+  },
+  {
+   "id": "m10",
+   "season": "ha",
+   "old": {
+    "main": "mango",
+    "main_hex": "#E1AF7F",
+    "sec": "soft blue-violet",
+    "sec_hex": "#8E88C8"
+   },
+   "new": {
+    "main": "mango",
+    "main_hex": "#E1AF7F",
+    "sec": "soft blue-violet",
+    "sec_hex": "#9D91D0"
+   }
+  },
+  {
+   "id": "m10",
+   "season": "thu",
+   "old": {
+    "main": "sage green",
+    "main_hex": "#ABCDA2",
+    "sec": "deep rose",
+    "sec_hex": "#CA7281"
+   },
+   "new": {
+    "main": "sage green",
+    "main_hex": "#ABCDA2",
+    "sec": "apple-blossom pink",
+    "sec_hex": "#FFC7C6"
+   }
+  },
+  {
+   "id": "m10",
+   "season": "dong",
+   "old": {
+    "main": "sky blue",
+    "main_hex": "#93C2E1",
+    "sec": "plum",
+    "sec_hex": "#9A6286"
+   },
+   "new": {
+    "main": "soft ink blue",
+    "main_hex": "#899FC7",
+    "sec": "ice pink",
+    "sec_hex": "#ECC0D5"
+   }
+  },
+  {
+   "id": "m14",
+   "season": "xuan",
+   "old": {
+    "main": "persimmon",
+    "main_hex": "#D2906C",
+    "sec": "soft jade",
+    "sec_hex": "#7DBA9E"
+   },
+   "new": {
+    "main": "melon orange",
+    "main_hex": "#E8A887",
+    "sec": "soft jade",
+    "sec_hex": "#86C4A7"
+   }
+  },
+  {
+   "id": "m14",
+   "season": "ha",
+   "old": {
+    "main": "ivory white",
+    "main_hex": "#EDE0CC",
+    "sec": "jade green",
+    "sec_hex": "#5DAC85"
+   },
+   "new": {
+    "main": "cool lilac",
+    "main_hex": "#D0BBF3",
+    "sec": "soft spring green",
+    "sec_hex": "#8FD29E"
+   }
+  },
+  {
+   "id": "m14",
+   "season": "thu",
+   "old": {
+    "main": "olive green",
+    "main_hex": "#AEB77C",
+    "sec": "rust red",
+    "sec_hex": "#B16A59"
+   },
+   "new": {
+    "main": "olive green",
+    "main_hex": "#AEB77C",
+    "sec": "lavender violet",
+    "sec_hex": "#A088C0"
+   }
+  },
+  {
+   "id": "m16",
+   "season": "xuan",
+   "old": {
+    "main": "apple-blossom pink",
+    "main_hex": "#F6BDC2",
+    "sec": "jade green",
+    "sec_hex": "#75C7A9"
+   },
+   "new": {
+    "main": "apple-blossom pink",
+    "main_hex": "#FBC2CD",
+    "sec": "jade green",
+    "sec_hex": "#75C7A9"
+   }
+  },
+  {
+   "id": "m16",
+   "season": "ha",
+   "old": {
+    "main": "lavender purple",
+    "main_hex": "#AD91CA",
+    "sec": "jade green",
+    "sec_hex": "#5DAC85"
+   },
+   "new": {
+    "main": "lavender violet",
+    "main_hex": "#A991CA",
+    "sec": "soft willow green",
+    "sec_hex": "#9DC18E"
+   }
+  },
+  {
+   "id": "m16",
+   "season": "thu",
+   "old": {
+    "main": "warm blush",
+    "main_hex": "#E2A9A0",
+    "sec": "pine teal",
+    "sec_hex": "#388581"
+   },
+   "new": {
+    "main": "warm blush",
+    "main_hex": "#E2A9A0",
+    "sec": "teal",
+    "sec_hex": "#60ABA7"
+   }
+  },
+  {
+   "id": "m18",
+   "season": "xuan",
+   "old": {
+    "main": "spring leaf green",
+    "main_hex": "#A4CA8B",
+    "sec": "warm rose",
+    "sec_hex": "#D88C8C"
+   },
+   "new": {
+    "main": "spring leaf green",
+    "main_hex": "#A4CA8B",
+    "sec": "cherry-blossom pink",
+    "sec_hex": "#E6ACB1"
+   }
+  },
+  {
+   "id": "m18",
+   "season": "thu",
+   "old": {
+    "main": "moss green",
+    "main_hex": "#AAC281",
+    "sec": "carmine rose",
+    "sec_hex": "#BB6D77"
+   },
+   "new": {
+    "main": "moss green",
+    "main_hex": "#AAC281",
+    "sec": "carmine rose",
+    "sec_hex": "#D1818B"
+   }
+  },
+  {
+   "id": "m18",
+   "season": "dong",
+   "old": {
+    "main": "clear ice blue",
+    "main_hex": "#A6C9E4",
+    "sec": "blue-violet",
+    "sec_hex": "#776DB5"
+   },
+   "new": {
+    "main": "clear ice blue",
+    "main_hex": "#A6C9E4",
+    "sec": "peach pink",
+    "sec_hex": "#D4A491"
+   }
+  },
+  {
+   "id": "m19",
+   "season": "xuan",
+   "old": {
+    "main": "peach",
+    "main_hex": "#E5AE92",
+    "sec": "aqua celadon",
+    "sec_hex": "#8BC6BE"
+   },
+   "new": {
+    "main": "peach",
+    "main_hex": "#E5AE92",
+    "sec": "aqua celadon",
+    "sec_hex": "#9AD6CE"
+   }
+  },
+  {
+   "id": "m19",
+   "season": "ha",
+   "old": {
+    "main": "sunflower yellow",
+    "main_hex": "#E5DA90",
+    "sec": "soft teal",
+    "sec_hex": "#6FAFB0"
+   },
+   "new": {
+    "main": "sunflower yellow",
+    "main_hex": "#E5DA90",
+    "sec": "aqua blue",
+    "sec_hex": "#89C7D3"
+   }
+  },
+  {
+   "id": "m19",
+   "season": "dong",
+   "old": {
+    "main": "cool celadon",
+    "main_hex": "#A0D3C9",
+    "sec": "deep sea blue",
+    "sec_hex": "#4F809A"
+   },
+   "new": {
+    "main": "soft jade",
+    "main_hex": "#6EAD9B",
+    "sec": "clear ice blue",
+    "sec_hex": "#AFD3EE"
+   }
+  },
+  {
+   "id": "m20",
+   "season": "xuan",
+   "old": {
+    "main": "azalea pink",
+    "main_hex": "#CF8698",
+    "sec": "cream",
+    "sec_hex": "#EFE0C4"
+   },
+   "new": {
+    "main": "salmon rose",
+    "main_hex": "#E0A3A2",
+    "sec": "cream",
+    "sec_hex": "#EFE0C4"
+   }
+  },
+  {
+   "id": "m20",
+   "season": "ha",
+   "old": {
+    "main": "slate blue",
+    "main_hex": "#8E95C2",
+    "sec": "apricot",
+    "sec_hex": "#D6A585"
+   },
+   "new": {
+    "main": "slate blue",
+    "main_hex": "#87A0C7",
+    "sec": "sage green",
+    "sec_hex": "#A7BF8B"
+   }
+  },
+  {
+   "id": "m20",
+   "season": "thu",
+   "old": {
+    "main": "warm apricot",
+    "main_hex": "#DDB08E",
+    "sec": "pomegranate red",
+    "sec_hex": "#BE6F72"
+   },
+   "new": {
+    "main": "soft persimmon",
+    "main_hex": "#CC9369",
+    "sec": "cherry-blossom pink",
+    "sec_hex": "#FABFC4"
+   }
+  },
+  {
+   "id": "m22",
+   "season": "ha",
+   "old": {
+    "main": "summer peach",
+    "main_hex": "#EBB297",
+    "sec": "periwinkle",
+    "sec_hex": "#949BD8"
+   },
+   "new": {
+    "main": "summer peach",
+    "main_hex": "#EBB297",
+    "sec": "hydrangea blue",
+    "sec_hex": "#ACB1E5"
+   }
+  },
+  {
+   "id": "m22",
+   "season": "thu",
+   "old": {
+    "main": "peach coral",
+    "main_hex": "#DAA390",
+    "sec": "deep teal",
+    "sec_hex": "#4F979A"
+   },
+   "new": {
+    "main": "peach coral",
+    "main_hex": "#DAA390",
+    "sec": "aqua blue",
+    "sec_hex": "#96D3E5"
+   }
+  },
+  {
+   "id": "m22",
+   "season": "dong",
+   "old": {
+    "main": "periwinkle",
+    "main_hex": "#9AA1DF",
+    "sec": "deep plum",
+    "sec_hex": "#764C6A"
+   },
+   "new": {
+    "main": "periwinkle",
+    "main_hex": "#9697D5",
+    "sec": "clear ice blue",
+    "sec_hex": "#AFD3EE"
+   }
+  },
+  {
+   "id": "m28",
+   "season": "xuan",
+   "old": {
+    "main": "mauve pink",
+    "main_hex": "#CD90A8",
+    "sec": "warm ivory",
+    "sec_hex": "#EAD7BF"
+   },
+   "new": {
+    "main": "mauve pink",
+    "main_hex": "#CD90A8",
+    "sec": "canary yellow",
+    "sec_hex": "#E5DE97"
+   }
+  },
+  {
+   "id": "m28",
+   "season": "ha",
+   "old": {
+    "main": "cool lilac",
+    "main_hex": "#BFA3D8",
+    "sec": "teal",
+    "sec_hex": "#499597"
+   },
+   "new": {
+    "main": "soft violet",
+    "main_hex": "#AF8FCC",
+    "sec": "teal",
+    "sec_hex": "#55A1A3"
+   }
+  },
+  {
+   "id": "m28",
+   "season": "dong",
+   "old": {
+    "main": "sky blue",
+    "main_hex": "#93C2E1",
+    "sec": "deep blue-violet",
+    "sec_hex": "#6864A0"
+   },
+   "new": {
+    "main": "sky blue",
+    "main_hex": "#97C9D4",
+    "sec": "lilac",
+    "sec_hex": "#BE96C0"
+   }
+  },
+  {
+   "id": "m29",
+   "season": "ha",
+   "old": {
+    "main": "marigold",
+    "main_hex": "#DFB17B",
+    "sec": "blue hyacinth",
+    "sec_hex": "#8C93CC"
+   },
+   "new": {
+    "main": "marigold",
+    "main_hex": "#DFB17B",
+    "sec": "soft sea blue",
+    "sec_hex": "#7AA1BE"
+   }
+  },
+  {
+   "id": "m29",
+   "season": "thu",
+   "old": {
+    "main": "pale celadon",
+    "main_hex": "#AFD4BC",
+    "sec": "deep rose",
+    "sec_hex": "#CA7281"
+   },
+   "new": {
+    "main": "celadon green",
+    "main_hex": "#86BB92",
+    "sec": "soft pink",
+    "sec_hex": "#D19B9E"
+   }
+  },
+  {
+   "id": "m29",
+   "season": "dong",
+   "old": {
+    "main": "aqua blue",
+    "main_hex": "#87C3D4",
+    "sec": "deep raspberry",
+    "sec_hex": "#A55D7A"
+   },
+   "new": {
+    "main": "aqua blue",
+    "main_hex": "#8DC9DB",
+    "sec": "cherry-blossom pink",
+    "sec_hex": "#E6ACB1"
+   }
+  },
+  {
+   "id": "c02",
+   "season": "xuan",
+   "old": {
+    "main": "mauve pink",
+    "main_hex": "#CD90A8",
+    "sec": "cream",
+    "sec_hex": "#EFE0C4"
+   },
+   "new": {
+    "main": "lotus pink",
+    "main_hex": "#E6A5BF",
+    "sec": "cream",
+    "sec_hex": "#EFE0C4"
+   }
+  },
+  {
+   "id": "c02",
+   "season": "ha",
+   "old": {
+    "main": "soft sapphire blue",
+    "main_hex": "#7E8FBE",
+    "sec": "warm ivory",
+    "sec_hex": "#EAD7BF"
+   },
+   "new": {
+    "main": "clear ice blue",
+    "main_hex": "#A0BEDC",
+    "sec": "ivory white",
+    "sec_hex": "#EFDFCD"
+   }
+  },
+  {
+   "id": "c02",
+   "season": "thu",
+   "old": {
+    "main": "warm apricot",
+    "main_hex": "#DDB08E",
+    "sec": "pomegranate red",
+    "sec_hex": "#BE6F72"
+   },
+   "new": {
+    "main": "warm apricot",
+    "main_hex": "#D0A882",
+    "sec": "sky blue",
+    "sec_hex": "#9BC4E6"
+   }
+  },
+  {
+   "id": "c04",
+   "season": "xuan",
+   "old": {
+    "main": "apple-blossom pink",
+    "main_hex": "#F6BDC2",
+    "sec": "sea green",
+    "sec_hex": "#7DC2A8"
+   },
+   "new": {
+    "main": "apple-blossom pink",
+    "main_hex": "#F6BDC2",
+    "sec": "cool aquamarine",
+    "sec_hex": "#9DE4D0"
+   }
+  },
+  {
+   "id": "c04",
+   "season": "ha",
+   "old": {
+    "main": "soft royal purple",
+    "main_hex": "#A87FBD",
+    "sec": "rose-red",
+    "sec_hex": "#CF818C"
+   },
+   "new": {
+    "main": "lavender violet",
+    "main_hex": "#A991CA",
+    "sec": "apple-blossom pink",
+    "sec_hex": "#F6BDC2"
+   }
+  },
+  {
+   "id": "c04",
+   "season": "thu",
+   "old": {
+    "main": "peach coral",
+    "main_hex": "#DAA390",
+    "sec": "deep violet",
+    "sec_hex": "#8068A8"
+   },
+   "new": {
+    "main": "peach coral",
+    "main_hex": "#DAA390",
+    "sec": "soft spring green",
+    "sec_hex": "#86C895"
+   }
+  },
+  {
+   "id": "c05",
+   "season": "xuan",
+   "old": {
+    "main": "melon orange",
+    "main_hex": "#E19E7A",
+    "sec": "soft jade",
+    "sec_hex": "#7DBA9E"
+   },
+   "new": {
+    "main": "melon orange",
+    "main_hex": "#EBA783",
+    "sec": "peach ivory",
+    "sec_hex": "#EEDDC7"
+   }
+  },
+  {
+   "id": "c05",
+   "season": "thu",
+   "old": {
+    "main": "light leaf green",
+    "main_hex": "#A3C889",
+    "sec": "carmine rose",
+    "sec_hex": "#BB6D77"
+   },
+   "new": {
+    "main": "soft jade green",
+    "main_hex": "#95A986",
+    "sec": "soft pink",
+    "sec_hex": "#E5AEB1"
+   }
+  },
+  {
+   "id": "c05",
+   "season": "dong",
+   "old": {
+    "main": "cool celadon",
+    "main_hex": "#9ACDC3",
+    "sec": "indigo blue",
+    "sec_hex": "#535F8A"
+   },
+   "new": {
+    "main": "sea green",
+    "main_hex": "#86CCB1",
+    "sec": "soft blue-violet",
+    "sec_hex": "#8F97D9"
+   }
+  },
+  {
+   "id": "c06",
+   "season": "xuan",
+   "old": {
+    "main": "soft vermilion",
+    "main_hex": "#CF816E",
+    "sec": "jade green",
+    "sec_hex": "#6AAF98"
+   },
+   "new": {
+    "main": "peach-blossom pink",
+    "main_hex": "#EBB0A9",
+    "sec": "aqua blue",
+    "sec_hex": "#7CBAC6"
+   }
+  },
+  {
+   "id": "c06",
+   "season": "ha",
+   "old": {
+    "main": "cantaloupe",
+    "main_hex": "#E7B08A",
+    "sec": "bluebell violet",
+    "sec_hex": "#9B94D4"
+   },
+   "new": {
+    "main": "olive green",
+    "main_hex": "#BEBE82",
+    "sec": "bluebell violet",
+    "sec_hex": "#9B94D4"
+   }
+  },
+  {
+   "id": "c06",
+   "season": "dong",
+   "old": {
+    "main": "mint green",
+    "main_hex": "#9FD4BF",
+    "sec": "deep sea blue",
+    "sec_hex": "#547F97"
+   },
+   "new": {
+    "main": "mint green",
+    "main_hex": "#9FD4BF",
+    "sec": "salmon rose",
+    "sec_hex": "#E0A3A2"
+   }
+  },
+  {
+   "id": "c08",
+   "season": "ha",
+   "old": {
+    "main": "canary yellow",
+    "main_hex": "#DBD48E",
+    "sec": "blue hyacinth",
+    "sec_hex": "#8C93CC"
+   },
+   "new": {
+    "main": "canary yellow",
+    "main_hex": "#DBD48E",
+    "sec": "hydrangea blue",
+    "sec_hex": "#ACB1E5"
+   }
+  },
+  {
+   "id": "c08",
+   "season": "thu",
+   "old": {
+    "main": "peach",
+    "main_hex": "#E5AE92",
+    "sec": "pine teal",
+    "sec_hex": "#33807C"
+   },
+   "new": {
+    "main": "marigold",
+    "main_hex": "#D9A575",
+    "sec": "aqua blue",
+    "sec_hex": "#7CBAC6"
+   }
+  },
+  {
+   "id": "c08",
+   "season": "dong",
+   "old": {
+    "main": "pale orchid",
+    "main_hex": "#DAB4DD",
+    "sec": "sapphire blue",
+    "sec_hex": "#6277AB"
+   },
+   "new": {
+    "main": "pale orchid",
+    "main_hex": "#DAB4DD",
+    "sec": "cool jade",
+    "sec_hex": "#62B5A7"
+   }
+  },
+  {
+   "id": "c10",
+   "season": "xuan",
+   "old": {
+    "main": "soft peach",
+    "main_hex": "#DFBB9F",
+    "sec": "jade teal",
+    "sec_hex": "#53ACA5"
+   },
+   "new": {
+    "main": "soft jade green",
+    "main_hex": "#95A986",
+    "sec": "cool aquamarine",
+    "sec_hex": "#99E4D6"
+   }
+  },
+  {
+   "id": "c10",
+   "season": "thu",
+   "old": {
+    "main": "melon orange",
+    "main_hex": "#DE9F7E",
+    "sec": "teal",
+    "sec_hex": "#4B9799"
+   },
+   "new": {
+    "main": "soft plum",
+    "main_hex": "#C996B2",
+    "sec": "teal",
+    "sec_hex": "#55A1A3"
+   }
+  },
+  {
+   "id": "c10",
+   "season": "dong",
+   "old": {
+    "main": "cool aquamarine",
+    "main_hex": "#86CDB9",
+    "sec": "deep periwinkle",
+    "sec_hex": "#6B74AB"
+   },
+   "new": {
+    "main": "cool aquamarine",
+    "main_hex": "#86CDB9",
+    "sec": "soft persimmon",
+    "sec_hex": "#CF916E"
+   }
+  },
+  {
+   "id": "c11",
+   "season": "xuan",
+   "old": {
+    "main": "peony pink",
+    "main_hex": "#E29DA2",
+    "sec": "leaf green",
+    "sec_hex": "#82A664"
+   },
+   "new": {
+    "main": "soft lotus pink",
+    "main_hex": "#DFA79F",
+    "sec": "soft pine teal",
+    "sec_hex": "#5FAAA6"
+   }
+  },
+  {
+   "id": "c11",
+   "season": "ha",
+   "old": {
+    "main": "sky blue",
+    "main_hex": "#8DBCDA",
+    "sec": "soft mauve pink",
+    "sec_hex": "#C98DAA"
+   },
+   "new": {
+    "main": "sky blue",
+    "main_hex": "#8FBECD",
+    "sec": "soft mauve pink",
+    "sec_hex": "#C98DAA"
+   }
+  },
+  {
+   "id": "c11",
+   "season": "thu",
+   "old": {
+    "main": "soft lilac",
+    "main_hex": "#BC9FCE",
+    "sec": "deep rose",
+    "sec_hex": "#C76B82"
+   },
+   "new": {
+    "main": "soft lilac",
+    "main_hex": "#B794C0",
+    "sec": "apple-blossom pink",
+    "sec_hex": "#FFC7C6"
+   }
+  },
+  {
+   "id": "c14",
+   "season": "xuan",
+   "old": {
+    "main": "warm rose",
+    "main_hex": "#D88C8C",
+    "sec": "light leaf green",
+    "sec_hex": "#A1C986"
+   },
+   "new": {
+    "main": "cherry-blossom pink",
+    "main_hex": "#E6ACB1",
+    "sec": "light leaf green",
+    "sec_hex": "#A2C988"
+   }
+  },
+  {
+   "id": "c14",
+   "season": "thu",
+   "old": {
+    "main": "pale persimmon",
+    "main_hex": "#DDA786",
+    "sec": "deep lavender",
+    "sec_hex": "#917CB5"
+   },
+   "new": {
+    "main": "pale persimmon",
+    "main_hex": "#D0A079",
+    "sec": "soft lilac",
+    "sec_hex": "#CCB2E0"
+   }
+  },
+  {
+   "id": "c14",
+   "season": "dong",
+   "old": {
+    "main": "soft ivory cream",
+    "main_hex": "#EAD7BF",
+    "sec": "blue-violet",
+    "sec_hex": "#6B64B4"
+   },
+   "new": {
+    "main": "cool celadon",
+    "main_hex": "#ACDDCE",
+    "sec": "cool lilac",
+    "sec_hex": "#CCB0E5"
+   }
+  },
+  {
+   "id": "c16",
+   "season": "xuan",
+   "old": {
+    "main": "rose pink",
+    "main_hex": "#DB94A0",
+    "sec": "warm ivory",
+    "sec_hex": "#EAD7BF"
+   },
+   "new": {
+    "main": "rose pink",
+    "main_hex": "#DB94A0",
+    "sec": "clear ice blue",
+    "sec_hex": "#ACD4EC"
+   }
+  },
+  {
+   "id": "c16",
+   "season": "ha",
+   "old": {
+    "main": "apricot orange",
+    "main_hex": "#E0AB81",
+    "sec": "soft blue-violet",
+    "sec_hex": "#8E88C8"
+   },
+   "new": {
+    "main": "apricot orange",
+    "main_hex": "#E0AB81",
+    "sec": "teal",
+    "sec_hex": "#63A7B5"
+   }
+  },
+  {
+   "id": "c16",
+   "season": "dong",
+   "old": {
+    "main": "turquoise",
+    "main_hex": "#7EC4C4",
+    "sec": "deep raspberry",
+    "sec_hex": "#A55D7A"
+   },
+   "new": {
+    "main": "aqua celadon",
+    "main_hex": "#88C2BA",
+    "sec": "warm rose",
+    "sec_hex": "#CD828A"
+   }
+  },
+  {
+   "id": "c19",
+   "season": "ha",
+   "old": {
+    "main": "lake blue",
+    "main_hex": "#7FAFD3",
+    "sec": "cool rose pink",
+    "sec_hex": "#D893B0"
+   },
+   "new": {
+    "main": "soft peacock blue",
+    "main_hex": "#78B0CE",
+    "sec": "pomegranate red",
+    "sec_hex": "#D1838E"
+   }
+  },
+  {
+   "id": "c19",
+   "season": "thu",
+   "old": {
+    "main": "coral pink",
+    "main_hex": "#D89D91",
+    "sec": "deep jade",
+    "sec_hex": "#609A83"
+   },
+   "new": {
+    "main": "coral pink",
+    "main_hex": "#D89D91",
+    "sec": "ivory",
+    "sec_hex": "#E1D3BC"
+   }
+  },
+  {
+   "id": "c19",
+   "season": "dong",
+   "old": {
+    "main": "aqua blue",
+    "main_hex": "#87C3D4",
+    "sec": "deep sapphire",
+    "sec_hex": "#566D9F"
+   },
+   "new": {
+    "main": "aqua blue",
+    "main_hex": "#8DC9DB",
+    "sec": "pale sand apricot",
+    "sec_hex": "#D3B08F"
+   }
+  },
+  {
+   "id": "c20",
+   "season": "ha",
+   "old": {
+    "main": "lemon yellow",
+    "main_hex": "#E5E29C",
+    "sec": "sky blue",
+    "sec_hex": "#8DBCDA"
+   },
+   "new": {
+    "main": "lemon yellow",
+    "main_hex": "#E5E29C",
+    "sec": "powder blue",
+    "sec_hex": "#B8CEEC"
+   }
+  },
+  {
+   "id": "c20",
+   "season": "thu",
+   "old": {
+    "main": "light terracotta",
+    "main_hex": "#D39584",
+    "sec": "pine teal",
+    "sec_hex": "#33807C"
+   },
+   "new": {
+    "main": "light terracotta",
+    "main_hex": "#D39584",
+    "sec": "soft moonlight blue",
+    "sec_hex": "#97B4CD"
+   }
+  },
+  {
+   "id": "c20",
+   "season": "dong",
+   "old": {
+    "main": "jade green",
+    "main_hex": "#82D4B6",
+    "sec": "deep periwinkle",
+    "sec_hex": "#6B74AB"
+   },
+   "new": {
+    "main": "jade green",
+    "main_hex": "#82D4B6",
+    "sec": "pale sand apricot",
+    "sec_hex": "#E0B89A"
+   }
+  },
+  {
+   "id": "c22",
+   "season": "ha",
+   "old": {
+    "main": "aqua blue",
+    "main_hex": "#87C3D4",
+    "sec": "soft rose pink",
+    "sec_hex": "#D9A3B6"
+   },
+   "new": {
+    "main": "aqua blue",
+    "main_hex": "#87C3D4",
+    "sec": "soft rose pink",
+    "sec_hex": "#E3ACC0"
+   }
+  },
+  {
+   "id": "c22",
+   "season": "thu",
+   "old": {
+    "main": "warm apricot",
+    "main_hex": "#DDB08E",
+    "sec": "carmine rose",
+    "sec_hex": "#BD6F79"
+   },
+   "new": {
+    "main": "warm apricot",
+    "main_hex": "#DDB08E",
+    "sec": "powder blue",
+    "sec_hex": "#BCCCEC"
+   }
+  },
+  {
+   "id": "c22",
+   "season": "dong",
+   "old": {
+    "main": "powder blue",
+    "main_hex": "#A9BEDB",
+    "sec": "deep raspberry",
+    "sec_hex": "#A55D7A"
+   },
+   "new": {
+    "main": "powder blue",
+    "main_hex": "#B3C3E2",
+    "sec": "rose-red",
+    "sec_hex": "#DA8B8D"
+   }
+  },
+  {
+   "id": "c26",
+   "season": "ha",
+   "old": {
+    "main": "sky blue",
+    "main_hex": "#8DBCDA",
+    "sec": "soft mauve pink",
+    "sec_hex": "#C98DAA"
+   },
+   "new": {
+    "main": "sky blue",
+    "main_hex": "#8DBCDA",
+    "sec": "caramel apricot",
+    "sec_hex": "#C79479"
+   }
+  },
+  {
+   "id": "c26",
+   "season": "thu",
+   "old": {
+    "main": "soft burgundy rose",
+    "main_hex": "#C37986",
+    "sec": "celadon green",
+    "sec_hex": "#76B28F"
+   },
+   "new": {
+    "main": "soft pink",
+    "main_hex": "#DAA4AD",
+    "sec": "celadon green",
+    "sec_hex": "#76B28F"
+   }
+  },
+  {
+   "id": "c26",
+   "season": "dong",
+   "old": {
+    "main": "cool aquamarine",
+    "main_hex": "#93DAC6",
+    "sec": "deep peacock blue",
+    "sec_hex": "#508195"
+   },
+   "new": {
+    "main": "cool aquamarine",
+    "main_hex": "#93DAC6",
+    "sec": "cool rose pink",
+    "sec_hex": "#D893B0"
+   }
+  },
+  {
+   "id": "c27",
+   "season": "xuan",
+   "old": {
+    "main": "camellia pink",
+    "main_hex": "#DA9099",
+    "sec": "mint green",
+    "sec_hex": "#9FD4BF"
+   },
+   "new": {
+    "main": "camellia pink",
+    "main_hex": "#DA9099",
+    "sec": "cool aquamarine",
+    "sec_hex": "#9DE4D0"
+   }
+  },
+  {
+   "id": "c27",
+   "season": "ha",
+   "old": {
+    "main": "lavender",
+    "main_hex": "#B3A1D9",
+    "sec": "cool celadon",
+    "sec_hex": "#9ACDC3"
+   },
+   "new": {
+    "main": "lavender",
+    "main_hex": "#B3A1D9",
+    "sec": "jade green",
+    "sec_hex": "#7CD4BE"
+   }
+  },
+  {
+   "id": "c27",
+   "season": "dong",
+   "old": {
+    "main": "aqua celadon",
+    "main_hex": "#8BC6BE",
+    "sec": "deep blue-violet",
+    "sec_hex": "#5D5894"
+   },
+   "new": {
+    "main": "aqua celadon",
+    "main_hex": "#8BC6BE",
+    "sec": "warm sand apricot",
+    "sec_hex": "#EBC7A7"
+   }
+  },
+  {
+   "id": "c28",
+   "season": "ha",
+   "old": {
+    "main": "cantaloupe",
+    "main_hex": "#E7B08A",
+    "sec": "periwinkle",
+    "sec_hex": "#949BD8"
+   },
+   "new": {
+    "main": "soft jade green",
+    "main_hex": "#A7BB98",
+    "sec": "periwinkle",
+    "sec_hex": "#9AA1DF"
+   }
+  },
+  {
+   "id": "c28",
+   "season": "thu",
+   "old": {
+    "main": "soft celadon",
+    "main_hex": "#98CAA5",
+    "sec": "rose-red",
+    "sec_hex": "#CA727E"
+   },
+   "new": {
+    "main": "soft pale jade",
+    "main_hex": "#AFD3B7",
+    "sec": "soft pink",
+    "sec_hex": "#D19B9E"
+   }
+  },
+  {
+   "id": "c28",
+   "season": "dong",
+   "old": {
+    "main": "turquoise",
+    "main_hex": "#7EC4C4",
+    "sec": "plum",
+    "sec_hex": "#9A6286"
+   },
+   "new": {
+    "main": "soft spring green",
+    "main_hex": "#89C797",
+    "sec": "ice pink",
+    "sec_hex": "#D8ADC1"
+   }
+  },
+  {
+   "id": "c31",
+   "season": "ha",
+   "old": {
+    "main": "sunflower yellow",
+    "main_hex": "#E5DA90",
+    "sec": "aqua blue",
+    "sec_hex": "#87C3D4"
+   },
+   "new": {
+    "main": "olive green",
+    "main_hex": "#BEBE82",
+    "sec": "aqua blue",
+    "sec_hex": "#96D3E5"
+   }
+  },
+  {
+   "id": "c31",
+   "season": "thu",
+   "old": {
+    "main": "spring leaf green",
+    "main_hex": "#A5C98D",
+    "sec": "madder red",
+    "sec_hex": "#AE6163"
+   },
+   "new": {
+    "main": "soft jade",
+    "main_hex": "#85C0A2",
+    "sec": "persimmon",
+    "sec_hex": "#D2906C"
+   }
+  },
+  {
+   "id": "c31",
+   "season": "dong",
+   "old": {
+    "main": "jade green",
+    "main_hex": "#75C7A9",
+    "sec": "sapphire blue",
+    "sec_hex": "#5A73AD"
+   },
+   "new": {
+    "main": "jade green",
+    "main_hex": "#6FB489",
+    "sec": "cornflower blue",
+    "sec_hex": "#8196CC"
+   }
+  },
+  {
+   "id": "c32",
+   "season": "xuan",
+   "old": {
+    "main": "peach-blossom pink",
+    "main_hex": "#EBB0A9",
+    "sec": "sea green",
+    "sec_hex": "#7DC2A8"
+   },
+   "new": {
+    "main": "peach-blossom pink",
+    "main_hex": "#EBB0A9",
+    "sec": "soft jade green",
+    "sec_hex": "#9AB393"
+   }
+  },
+  {
+   "id": "c32",
+   "season": "thu",
+   "old": {
+    "main": "peach",
+    "main_hex": "#E5AE92",
+    "sec": "deep teal",
+    "sec_hex": "#4F979A"
+   },
+   "new": {
+    "main": "peach",
+    "main_hex": "#E3B08E",
+    "sec": "ivory cream",
+    "sec_hex": "#F1E2C8"
+   }
+  },
+  {
+   "id": "c32",
+   "season": "dong",
+   "old": {
+    "main": "soft ivory",
+    "main_hex": "#EDDCC6",
+    "sec": "indigo blue",
+    "sec_hex": "#54629C"
+   },
+   "new": {
+    "main": "sage green",
+    "main_hex": "#AFD8B1",
+    "sec": "soft lilac",
+    "sec_hex": "#CCB2E0"
+   }
+  },
+  {
+   "id": "s46",
+   "season": "xuan",
+   "old": {
+    "main": "soft willow green",
+    "main_hex": "#ADC992",
+    "sec": "deep rose",
+    "sec_hex": "#CF7E83"
+   },
+   "new": {
+    "main": "soft willow green",
+    "main_hex": "#ADC992",
+    "sec": "carnation pink",
+    "sec_hex": "#E1A1BE"
+   }
+  },
+  {
+   "id": "s46",
+   "season": "ha",
+   "old": {
+    "main": "pale aqua",
+    "main_hex": "#A4D1D6",
+    "sec": "orchid pink",
+    "sec_hex": "#D49CC6"
+   },
+   "new": {
+    "main": "soft peacock teal",
+    "main_hex": "#75B5B4",
+    "sec": "orchid pink",
+    "sec_hex": "#D49CC6"
+   }
+  },
+  {
+   "id": "s46",
+   "season": "thu",
+   "old": {
+    "main": "peach pink",
+    "main_hex": "#DFAC9F",
+    "sec": "plum rose",
+    "sec_hex": "#B8618C"
+   },
+   "new": {
+    "main": "soft lotus pink",
+    "main_hex": "#DEA89A",
+    "sec": "pale celadon",
+    "sec_hex": "#ACD4C0"
+   }
+  },
+  {
+   "id": "s47",
+   "season": "xuan",
+   "old": {
+    "main": "dusty rose",
+    "main_hex": "#C28993",
+    "sec": "celadon green",
+    "sec_hex": "#6AAF81"
+   },
+   "new": {
+    "main": "soft cherry red",
+    "main_hex": "#D28692",
+    "sec": "warm sand apricot",
+    "sec_hex": "#E5CAA4"
+   }
+  },
+  {
+   "id": "s47",
+   "season": "ha",
+   "old": {
+    "main": "periwinkle",
+    "main_hex": "#949BD8",
+    "sec": "mint",
+    "sec_hex": "#9ACBB7"
+   },
+   "new": {
+    "main": "periwinkle",
+    "main_hex": "#92A3E0",
+    "sec": "soft crimson red",
+    "sec_hex": "#D2827F"
+   }
+  },
+  {
+   "id": "s47",
+   "season": "thu",
+   "old": {
+    "main": "soft coral pink",
+    "main_hex": "#DEA69B",
+    "sec": "deep jade",
+    "sec_hex": "#609A83"
+   },
+   "new": {
+    "main": "soft peach sand",
+    "main_hex": "#E6C7A6",
+    "sec": "aqua celadon",
+    "sec_hex": "#82BCB4"
+   }
+  },
+  {
+   "id": "s48",
+   "season": "ha",
+   "old": {
+    "main": "lilac",
+    "main_hex": "#C3A1CE",
+    "sec": "cool jade",
+    "sec_hex": "#5DAC97"
+   },
+   "new": {
+    "main": "lavender violet",
+    "main_hex": "#A991CA",
+    "sec": "cool jade",
+    "sec_hex": "#5DAC97"
+   }
+  },
+  {
+   "id": "s48",
+   "season": "thu",
+   "old": {
+    "main": "soft persimmon",
+    "main_hex": "#CF916E",
+    "sec": "teal",
+    "sec_hex": "#499597"
+   },
+   "new": {
+    "main": "soft persimmon",
+    "main_hex": "#CF916E",
+    "sec": "soft ink blue",
+    "sec_hex": "#7A97BC"
+   }
+  },
+  {
+   "id": "s48",
+   "season": "dong",
+   "old": {
+    "main": "hydrangea blue",
+    "main_hex": "#A3B0E3",
+    "sec": "plum",
+    "sec_hex": "#95507E"
+   },
+   "new": {
+    "main": "aqua celadon",
+    "main_hex": "#82BCB4",
+    "sec": "ice pink",
+    "sec_hex": "#D8ADC1"
+   }
+  },
+  {
+   "id": "s49",
+   "season": "ha",
+   "old": {
+    "main": "soft lavender",
+    "main_hex": "#B8A0D2",
+    "sec": "mint",
+    "sec_hex": "#9ACBB7"
+   },
+   "new": {
+    "main": "soft lavender",
+    "main_hex": "#A792CD",
+    "sec": "ice pink",
+    "sec_hex": "#E9C0D9"
+   }
+  },
+  {
+   "id": "s49",
+   "season": "thu",
+   "old": {
+    "main": "soft burgundy rose",
+    "main_hex": "#C37986",
+    "sec": "pine teal",
+    "sec_hex": "#388581"
+   },
+   "new": {
+    "main": "olive green",
+    "main_hex": "#ABAB70",
+    "sec": "aqua blue",
+    "sec_hex": "#80B8CE"
+   }
+  },
+  {
+   "id": "s49",
+   "season": "dong",
+   "old": {
+    "main": "powder blue",
+    "main_hex": "#AFC4E2",
+    "sec": "pine teal",
+    "sec_hex": "#3B8783"
+   },
+   "new": {
+    "main": "powder blue",
+    "main_hex": "#B3C3E2",
+    "sec": "celadon green",
+    "sec_hex": "#86BB92"
+   }
+  },
+  {
+   "id": "s50",
+   "season": "xuan",
+   "old": {
+    "main": "soft peach",
+    "main_hex": "#DFBB9F",
+    "sec": "lavender",
+    "sec_hex": "#B3A1D9"
+   },
+   "new": {
+    "main": "spring leaf green",
+    "main_hex": "#AED396",
+    "sec": "lavender",
+    "sec_hex": "#B3A1D9"
+   }
+  },
+  {
+   "id": "s50",
+   "season": "ha",
+   "old": {
+    "main": "soft ink blue",
+    "main_hex": "#7F95BD",
+    "sec": "ice pink",
+    "sec_hex": "#E2B6CB"
+   },
+   "new": {
+    "main": "soft pine teal",
+    "main_hex": "#62ADAF",
+    "sec": "ice pink",
+    "sec_hex": "#E2B6CB"
+   }
+  },
+  {
+   "id": "s50",
+   "season": "thu",
+   "old": {
+    "main": "soft sage green",
+    "main_hex": "#B1BD7F",
+    "sec": "rose",
+    "sec_hex": "#C76B82"
+   },
+   "new": {
+    "main": "soft sage green",
+    "main_hex": "#B1BD7F",
+    "sec": "cherry-blossom pink",
+    "sec_hex": "#EDB5C6"
+   }
+  }
+ ],
+ "roots": [
+  {
+   "id": "m02",
+   "drawn": {
+    "main": "moss green",
+    "main_hex": "#A8C379",
+    "sec": "coral rose",
+    "sec_hex": "#CF8377"
+   },
+   "old_season": "thu",
+   "new": {
+    "main": "moss green",
+    "main_hex": "#AAC280",
+    "sec": "coral rose",
+    "sec_hex": "#CF8377",
+    "root": true,
+    "root_drawn": {
+     "main": "moss green",
+     "main_hex": "#A8C379",
+     "sec": "coral rose",
+     "sec_hex": "#CF8377"
+    },
+    "season": "thu"
+   }
+  },
+  {
+   "id": "m04",
+   "drawn": {
+    "main": "warm apricot",
+    "main_hex": "#DBB294",
+    "sec": "indigo blue",
+    "sec_hex": "#4E5D97"
+   },
+   "old_season": "thu",
+   "new": {
+    "main": "warm apricot",
+    "main_hex": "#DBB294",
+    "sec": "light indigo blue",
+    "sec_hex": "#889AD9",
+    "root": true,
+    "root_drawn": {
+     "main": "warm apricot",
+     "main_hex": "#DBB294",
+     "sec": "indigo blue",
+     "sec_hex": "#4E5D97"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "m05",
+   "drawn": {
+    "main": "coral red",
+    "main_hex": "#D4897D",
+    "sec": "teal",
+    "sec_hex": "#499597"
+   },
+   "old_season": "thu",
+   "new": {
+    "main": "coral red",
+    "main_hex": "#D28C71",
+    "sec": "teal",
+    "sec_hex": "#6BB1C4",
+    "root": true,
+    "root_drawn": {
+     "main": "coral red",
+     "main_hex": "#D4897D",
+     "sec": "teal",
+     "sec_hex": "#499597"
+    },
+    "season": "thu"
+   }
+  },
+  {
+   "id": "m08",
+   "drawn": {
+    "main": "peach-salmon",
+    "main_hex": "#DBA694",
+    "sec": "jade green",
+    "sec_hex": "#5DAC85"
+   },
+   "old_season": "xuan",
+   "new": {
+    "main": "peach-salmon",
+    "main_hex": "#DBA694",
+    "sec": "jade green",
+    "sec_hex": "#5DAC85",
+    "root": true,
+    "season": "thu"
+   }
+  },
+  {
+   "id": "m09",
+   "drawn": {
+    "main": "rose pink",
+    "main_hex": "#D5909C",
+    "sec": "teal",
+    "sec_hex": "#499597"
+   },
+   "old_season": "thu",
+   "new": {
+    "main": "rose pink",
+    "main_hex": "#D5909C",
+    "sec": "teal",
+    "sec_hex": "#55A1A3",
+    "root": true,
+    "root_drawn": {
+     "main": "rose pink",
+     "main_hex": "#D5909C",
+     "sec": "teal",
+     "sec_hex": "#499597"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "m10",
+   "drawn": {
+    "main": "sage green",
+    "main_hex": "#ABCDA2",
+    "sec": "deep rose",
+    "sec_hex": "#CA7281"
+   },
+   "old_season": "thu",
+   "new": {
+    "main": "sage green",
+    "main_hex": "#A7C295",
+    "sec": "light rose",
+    "sec_hex": "#DA8995",
+    "root": true,
+    "root_drawn": {
+     "main": "sage green",
+     "main_hex": "#ABCDA2",
+     "sec": "deep rose",
+     "sec_hex": "#CA7281"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "m14",
+   "drawn": {
+    "main": "ivory white",
+    "main_hex": "#EDE0CC",
+    "sec": "jade green",
+    "sec_hex": "#5DAC85"
+   },
+   "old_season": "ha",
+   "new": {
+    "main": "ivory white",
+    "main_hex": "#EDE0CC",
+    "sec": "light jade green",
+    "sec_hex": "#88D7AE",
+    "root": true,
+    "root_drawn": {
+     "main": "ivory white",
+     "main_hex": "#EDE0CC",
+     "sec": "jade green",
+     "sec_hex": "#5DAC85"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "m16",
+   "drawn": {
+    "main": "lavender purple",
+    "main_hex": "#AD91CA",
+    "sec": "jade green",
+    "sec_hex": "#5DAC85"
+   },
+   "old_season": "ha",
+   "new": {
+    "main": "lavender purple",
+    "main_hex": "#AD91CA",
+    "sec": "jade green",
+    "sec_hex": "#5DAC85",
+    "root": true,
+    "season": "dong"
+   }
+  },
+  {
+   "id": "m18",
+   "drawn": {
+    "main": "powder blue",
+    "main_hex": "#A7BAD2",
+    "sec": "deep rose",
+    "sec_hex": "#CA7281"
+   },
+   "old_season": "ha",
+   "new": {
+    "main": "powder blue",
+    "main_hex": "#A3BAD8",
+    "sec": "light rose",
+    "sec_hex": "#D0808C",
+    "root": true,
+    "root_drawn": {
+     "main": "powder blue",
+     "main_hex": "#A7BAD2",
+     "sec": "deep rose",
+     "sec_hex": "#CA7281"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "m19",
+   "drawn": {
+    "main": "caramel apricot",
+    "main_hex": "#CE9F7E",
+    "sec": "teal",
+    "sec_hex": "#499597"
+   },
+   "old_season": "thu",
+   "new": {
+    "main": "caramel apricot",
+    "main_hex": "#CE9F7E",
+    "sec": "teal",
+    "sec_hex": "#55A1A3",
+    "root": true,
+    "root_drawn": {
+     "main": "caramel apricot",
+     "main_hex": "#CE9F7E",
+     "sec": "teal",
+     "sec_hex": "#499597"
+    },
+    "season": "thu"
+   }
+  },
+  {
+   "id": "m20",
+   "drawn": {
+    "main": "slate blue",
+    "main_hex": "#8E95C2",
+    "sec": "apricot",
+    "sec_hex": "#D6A585"
+   },
+   "old_season": "ha",
+   "new": {
+    "main": "slate blue",
+    "main_hex": "#949BC8",
+    "sec": "apricot",
+    "sec_hex": "#D6A585",
+    "root": true,
+    "root_drawn": {
+     "main": "slate blue",
+     "main_hex": "#8E95C2",
+     "sec": "apricot",
+     "sec_hex": "#D6A585"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "m22",
+   "drawn": {
+    "main": "dusty rose",
+    "main_hex": "#C28993",
+    "sec": "jade green",
+    "sec_hex": "#5DAC85"
+   },
+   "old_season": "xuan",
+   "new": {
+    "main": "dusty rose",
+    "main_hex": "#C78C91",
+    "sec": "jade green",
+    "sec_hex": "#66B68E",
+    "root": true,
+    "root_drawn": {
+     "main": "dusty rose",
+     "main_hex": "#C28993",
+     "sec": "jade green",
+     "sec_hex": "#5DAC85"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "m28",
+   "drawn": {
+    "main": "coral pink",
+    "main_hex": "#D9998C",
+    "sec": "indigo blue",
+    "sec_hex": "#4E5D97"
+   },
+   "old_season": "thu",
+   "new": {
+    "main": "coral pink",
+    "main_hex": "#D9998C",
+    "sec": "soft indigo blue",
+    "sec_hex": "#7D8FCD",
+    "root": true,
+    "root_drawn": {
+     "main": "coral pink",
+     "main_hex": "#D9998C",
+     "sec": "indigo blue",
+     "sec_hex": "#4E5D97"
+    },
+    "season": "thu"
+   }
+  },
+  {
+   "id": "m29",
+   "drawn": {
+    "main": "pale celadon",
+    "main_hex": "#AFD4BC",
+    "sec": "deep rose",
+    "sec_hex": "#CA7281"
+   },
+   "old_season": "thu",
+   "new": {
+    "main": "pale celadon",
+    "main_hex": "#AFD4BC",
+    "sec": "light rose",
+    "sec_hex": "#F0A4C6",
+    "root": true,
+    "root_drawn": {
+     "main": "pale celadon",
+     "main_hex": "#AFD4BC",
+     "sec": "deep rose",
+     "sec_hex": "#CA7281"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "c02",
+   "drawn": {
+    "main": "soft sapphire blue",
+    "main_hex": "#7E8FBE",
+    "sec": "warm ivory",
+    "sec_hex": "#EAD7BF"
+   },
+   "old_season": "ha",
+   "new": {
+    "main": "soft sapphire blue",
+    "main_hex": "#909EC4",
+    "sec": "warm ivory",
+    "sec_hex": "#ECD6C0",
+    "root": true,
+    "root_drawn": {
+     "main": "soft sapphire blue",
+     "main_hex": "#7E8FBE",
+     "sec": "warm ivory",
+     "sec_hex": "#EAD7BF"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "c04",
+   "drawn": {
+    "main": "soft royal purple",
+    "main_hex": "#A87FBD",
+    "sec": "rose-red",
+    "sec_hex": "#CF818C"
+   },
+   "old_season": "ha",
+   "new": {
+    "main": "soft royal purple",
+    "main_hex": "#B48DC8",
+    "sec": "rose-red",
+    "sec_hex": "#E3939E",
+    "root": true,
+    "root_drawn": {
+     "main": "soft royal purple",
+     "main_hex": "#A87FBD",
+     "sec": "rose-red",
+     "sec_hex": "#CF818C"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "c05",
+   "drawn": {
+    "main": "soft peacock teal",
+    "main_hex": "#7EBFBD",
+    "sec": "dusty rose",
+    "sec_hex": "#C5777E"
+   },
+   "old_season": "ha",
+   "new": {
+    "main": "soft peacock teal",
+    "main_hex": "#7EBFBD",
+    "sec": "dusty rose",
+    "sec_hex": "#C7797F",
+    "root": true,
+    "root_drawn": {
+     "main": "soft peacock teal",
+     "main_hex": "#7EBFBD",
+     "sec": "dusty rose",
+     "sec_hex": "#C5777E"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "c06",
+   "drawn": {
+    "main": "soft vermilion",
+    "main_hex": "#CF816E",
+    "sec": "jade green",
+    "sec_hex": "#6AAF98"
+   },
+   "old_season": "xuan",
+   "new": {
+    "main": "soft vermilion",
+    "main_hex": "#D28977",
+    "sec": "jade green",
+    "sec_hex": "#6AAF98",
+    "root": true,
+    "root_drawn": {
+     "main": "soft vermilion",
+     "main_hex": "#CF816E",
+     "sec": "jade green",
+     "sec_hex": "#6AAF98"
+    },
+    "season": "thu"
+   }
+  },
+  {
+   "id": "c08",
+   "drawn": {
+    "main": "soft cherry-blossom pink",
+    "main_hex": "#DF9FA2",
+    "sec": "jade green",
+    "sec_hex": "#74B47E"
+   },
+   "old_season": "xuan",
+   "new": {
+    "main": "soft cherry-blossom pink",
+    "main_hex": "#DE9FA7",
+    "sec": "jade green",
+    "sec_hex": "#87A463",
+    "root": true,
+    "root_drawn": {
+     "main": "soft cherry-blossom pink",
+     "main_hex": "#DF9FA2",
+     "sec": "jade green",
+     "sec_hex": "#74B47E"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "c10",
+   "drawn": {
+    "main": "soft peach",
+    "main_hex": "#DFBB9F",
+    "sec": "jade teal",
+    "sec_hex": "#53ACA5"
+   },
+   "old_season": "xuan",
+   "new": {
+    "main": "soft peach",
+    "main_hex": "#DFBB9F",
+    "sec": "light jade teal",
+    "sec_hex": "#5EB7AF",
+    "root": true,
+    "root_drawn": {
+     "main": "soft peach",
+     "main_hex": "#DFBB9F",
+     "sec": "jade teal",
+     "sec_hex": "#53ACA5"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "c11",
+   "drawn": {
+    "main": "soft lilac",
+    "main_hex": "#BC9FCE",
+    "sec": "deep rose",
+    "sec_hex": "#C76B82"
+   },
+   "old_season": "thu",
+   "new": {
+    "main": "soft lilac",
+    "main_hex": "#BC9FCE",
+    "sec": "soft rose",
+    "sec_hex": "#C67A8B",
+    "root": true,
+    "root_drawn": {
+     "main": "soft lilac",
+     "main_hex": "#BC9FCE",
+     "sec": "deep rose",
+     "sec_hex": "#C76B82"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "c14",
+   "drawn": {
+    "main": "soft ivory cream",
+    "main_hex": "#EAD7BF",
+    "sec": "blue-violet",
+    "sec_hex": "#6B64B4"
+   },
+   "old_season": "dong",
+   "new": {
+    "main": "soft ivory cream",
+    "main_hex": "#ECE4C8",
+    "sec": "light blue-violet",
+    "sec_hex": "#CCB8FD",
+    "root": true,
+    "root_drawn": {
+     "main": "soft ivory cream",
+     "main_hex": "#EAD7BF",
+     "sec": "blue-violet",
+     "sec_hex": "#6B64B4"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "c16",
+   "drawn": {
+    "main": "soft sage green",
+    "main_hex": "#B1BD7F",
+    "sec": "plum rose",
+    "sec_hex": "#B8618C"
+   },
+   "old_season": "thu",
+   "new": {
+    "main": "soft sage green",
+    "main_hex": "#B1BD7F",
+    "sec": "light plum rose",
+    "sec_hex": "#C67FA0",
+    "root": true,
+    "root_drawn": {
+     "main": "soft sage green",
+     "main_hex": "#B1BD7F",
+     "sec": "plum rose",
+     "sec_hex": "#B8618C"
+    },
+    "season": "thu"
+   }
+  },
+  {
+   "id": "c19",
+   "drawn": {
+    "main": "soft plum",
+    "main_hex": "#BD7FA1",
+    "sec": "soft jade",
+    "sec_hex": "#7CB699"
+   },
+   "old_season": "xuan",
+   "new": {
+    "main": "soft plum",
+    "main_hex": "#C788AA",
+    "sec": "soft jade",
+    "sec_hex": "#73AD90",
+    "root": true,
+    "root_drawn": {
+     "main": "soft plum",
+     "main_hex": "#BD7FA1",
+     "sec": "soft jade",
+     "sec_hex": "#7CB699"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "c22",
+   "drawn": {
+    "main": "soft orchid purple",
+    "main_hex": "#B27FBD",
+    "sec": "rose pink",
+    "sec_hex": "#D28995"
+   },
+   "old_season": "xuan",
+   "new": {
+    "main": "soft orchid purple",
+    "main_hex": "#B98BC3",
+    "sec": "rose pink",
+    "sec_hex": "#D597A0",
+    "root": true,
+    "root_drawn": {
+     "main": "soft orchid purple",
+     "main_hex": "#B27FBD",
+     "sec": "rose pink",
+     "sec_hex": "#D28995"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "c26",
+   "drawn": {
+    "main": "soft burgundy rose",
+    "main_hex": "#C37986",
+    "sec": "celadon green",
+    "sec_hex": "#76B28F"
+   },
+   "old_season": "thu",
+   "new": {
+    "main": "soft burgundy rose",
+    "main_hex": "#CE86A0",
+    "sec": "celadon green",
+    "sec_hex": "#81A574",
+    "root": true,
+    "root_drawn": {
+     "main": "soft burgundy rose",
+     "main_hex": "#C37986",
+     "sec": "celadon green",
+     "sec_hex": "#76B28F"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "c27",
+   "drawn": {
+    "main": "soft terracotta",
+    "main_hex": "#CF776E",
+    "sec": "deep teal",
+    "sec_hex": "#4D9699"
+   },
+   "old_season": "thu",
+   "new": {
+    "main": "soft terracotta",
+    "main_hex": "#D3877F",
+    "sec": "soft teal",
+    "sec_hex": "#57A0A3",
+    "root": true,
+    "root_drawn": {
+     "main": "soft terracotta",
+     "main_hex": "#CF776E",
+     "sec": "deep teal",
+     "sec_hex": "#4D9699"
+    },
+    "season": "thu"
+   }
+  },
+  {
+   "id": "c28",
+   "drawn": {
+    "main": "soft celadon",
+    "main_hex": "#98CAA5",
+    "sec": "rose-red",
+    "sec_hex": "#CA727E"
+   },
+   "old_season": "thu",
+   "new": {
+    "main": "soft celadon",
+    "main_hex": "#A0BD8C",
+    "sec": "light rose-red",
+    "sec_hex": "#C47B9C",
+    "root": true,
+    "root_drawn": {
+     "main": "soft celadon",
+     "main_hex": "#98CAA5",
+     "sec": "rose-red",
+     "sec_hex": "#CA727E"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "c31",
+   "drawn": {
+    "main": "soft pale jade",
+    "main_hex": "#ABD4BB",
+    "sec": "rose-red",
+    "sec_hex": "#CD7A88"
+   },
+   "old_season": "xuan",
+   "new": {
+    "main": "soft pale jade",
+    "main_hex": "#ABD4BB",
+    "sec": "light rose-red",
+    "sec_hex": "#E0909D",
+    "root": true,
+    "root_drawn": {
+     "main": "soft pale jade",
+     "main_hex": "#ABD4BB",
+     "sec": "rose-red",
+     "sec_hex": "#CD7A88"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "c32",
+   "drawn": {
+    "main": "soft ivory",
+    "main_hex": "#EDDCC6",
+    "sec": "indigo blue",
+    "sec_hex": "#54629C"
+   },
+   "old_season": "dong",
+   "new": {
+    "main": "soft ivory",
+    "main_hex": "#EFDBC7",
+    "sec": "light indigo blue",
+    "sec_hex": "#ABBDFE",
+    "root": true,
+    "root_drawn": {
+     "main": "soft ivory",
+     "main_hex": "#EDDCC6",
+     "sec": "indigo blue",
+     "sec_hex": "#54629C"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "s07",
+   "drawn": {
+    "main": "soft wine red",
+    "main_hex": "#A34353",
+    "sec": "silver grey",
+    "sec_hex": "#B7BBC2"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft wine red",
+    "main_hex": "#D3898A",
+    "sec": "silver blue",
+    "sec_hex": "#9AA8C9",
+    "root": true,
+    "root_drawn": {
+     "main": "soft wine red",
+     "main_hex": "#A34353",
+     "sec": "silver grey",
+     "sec_hex": "#B7BBC2"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "s08",
+   "drawn": {
+    "main": "soft emerald green",
+    "main_hex": "#3B9174",
+    "sec": "pearl white",
+    "sec_hex": "#E9E7E2"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft emerald green",
+    "main_hex": "#5DB193",
+    "sec": "pearl white",
+    "sec_hex": "#E9E7E2",
+    "root": true,
+    "root_drawn": {
+     "main": "soft emerald green",
+     "main_hex": "#3B9174",
+     "sec": "pearl white",
+     "sec_hex": "#E9E7E2"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "s09",
+   "drawn": {
+    "main": "soft indigo violet",
+    "main_hex": "#634EA2",
+    "sec": "pale rose",
+    "sec_hex": "#E6BCC3"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft indigo violet",
+    "main_hex": "#A094D5",
+    "sec": "pale rose",
+    "sec_hex": "#E6BCC3",
+    "root": true,
+    "root_drawn": {
+     "main": "soft indigo violet",
+     "main_hex": "#634EA2",
+     "sec": "pale rose",
+     "sec_hex": "#E6BCC3"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "s10",
+   "drawn": {
+    "main": "soft crimson",
+    "main_hex": "#BF4051",
+    "sec": "pale gold beige",
+    "sec_hex": "#DBD0BD"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft crimson",
+    "main_hex": "#D28691",
+    "sec": "pale gold beige",
+    "sec_hex": "#E1DBC7",
+    "root": true,
+    "root_drawn": {
+     "main": "soft crimson",
+     "main_hex": "#BF4051",
+     "sec": "pale gold beige",
+     "sec_hex": "#DBD0BD"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "s11",
+   "drawn": {
+    "main": "soft royal purple",
+    "main_hex": "#794096",
+    "sec": "silver grey",
+    "sec_hex": "#B7BBC2"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft royal purple",
+    "main_hex": "#B48FC9",
+    "sec": "silver blue",
+    "sec_hex": "#A9BCDC",
+    "root": true,
+    "root_drawn": {
+     "main": "soft royal purple",
+     "main_hex": "#794096",
+     "sec": "silver grey",
+     "sec_hex": "#B7BBC2"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "s12",
+   "drawn": {
+    "main": "soft peacock blue",
+    "main_hex": "#3686A1",
+    "sec": "warm ivory",
+    "sec_hex": "#EAD7BF"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft peacock blue",
+    "main_hex": "#5CAAC6",
+    "sec": "warm ivory",
+    "sec_hex": "#EAD7BF",
+    "root": true,
+    "root_drawn": {
+     "main": "soft peacock blue",
+     "main_hex": "#3686A1",
+     "sec": "warm ivory",
+     "sec_hex": "#EAD7BF"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "s13",
+   "drawn": {
+    "main": "soft frost white",
+    "main_hex": "#E2E6E9",
+    "sec": "slate blue",
+    "sec_hex": "#536D93"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft frost white",
+    "main_hex": "#E2E6E9",
+    "sec": "light slate blue",
+    "sec_hex": "#ABC9F3",
+    "root": true,
+    "root_drawn": {
+     "main": "soft frost white",
+     "main_hex": "#E2E6E9",
+     "sec": "slate blue",
+     "sec_hex": "#536D93"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "s14",
+   "drawn": {
+    "main": "soft ink blue",
+    "main_hex": "#3E5079",
+    "sec": "pale silver grey",
+    "sec_hex": "#C9CBCF"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft ink blue",
+    "main_hex": "#899ECC",
+    "sec": "pale silver blue",
+    "sec_hex": "#BBCBED",
+    "root": true,
+    "root_drawn": {
+     "main": "soft ink blue",
+     "main_hex": "#3E5079",
+     "sec": "pale silver grey",
+     "sec_hex": "#C9CBCF"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "s15",
+   "drawn": {
+    "main": "soft pale celadon",
+    "main_hex": "#B7D7C7",
+    "sec": "deep teal",
+    "sec_hex": "#316D72"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft pale celadon",
+    "main_hex": "#B1D9C5",
+    "sec": "light teal",
+    "sec_hex": "#7FBCC1",
+    "root": true,
+    "root_drawn": {
+     "main": "soft pale celadon",
+     "main_hex": "#B7D7C7",
+     "sec": "deep teal",
+     "sec_hex": "#316D72"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "s16",
+   "drawn": {
+    "main": "soft peach-blossom pink",
+    "main_hex": "#DE9CA4",
+    "sec": "plum rose",
+    "sec_hex": "#B35685"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft peach-blossom pink",
+    "main_hex": "#DF9C9E",
+    "sec": "soft plum rose",
+    "sec_hex": "#C17A9B",
+    "root": true,
+    "root_drawn": {
+     "main": "soft peach-blossom pink",
+     "main_hex": "#DE9CA4",
+     "sec": "plum rose",
+     "sec_hex": "#B35685"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "s17",
+   "drawn": {
+    "main": "soft coral pink",
+    "main_hex": "#D88579",
+    "sec": "champagne ivory",
+    "sec_hex": "#E6DDD1"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft coral pink",
+    "main_hex": "#D3887D",
+    "sec": "champagne ivory",
+    "sec_hex": "#E4DED1",
+    "root": true,
+    "root_drawn": {
+     "main": "soft coral pink",
+     "main_hex": "#D88579",
+     "sec": "champagne ivory",
+     "sec_hex": "#E6DDD1"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "s18",
+   "drawn": {
+    "main": "soft violet mauve",
+    "main_hex": "#AD6EB9",
+    "sec": "deep rose",
+    "sec_hex": "#A63F59"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft violet mauve",
+    "main_hex": "#BA8BC2",
+    "sec": "soft rose",
+    "sec_hex": "#C67887",
+    "root": true,
+    "root_drawn": {
+     "main": "soft violet mauve",
+     "main_hex": "#AD6EB9",
+     "sec": "deep rose",
+     "sec_hex": "#A63F59"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "s19",
+   "drawn": {
+    "main": "soft garnet red",
+    "main_hex": "#AA3C4E",
+    "sec": "pale silver grey",
+    "sec_hex": "#C9CBCF"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft garnet red",
+    "main_hex": "#D3868C",
+    "sec": "pale silver blue",
+    "sec_hex": "#BBCBED",
+    "root": true,
+    "root_drawn": {
+     "main": "soft garnet red",
+     "main_hex": "#AA3C4E",
+     "sec": "pale silver grey",
+     "sec_hex": "#C9CBCF"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "s20",
+   "drawn": {
+    "main": "soft deep teal",
+    "main_hex": "#377A81",
+    "sec": "warm ivory",
+    "sec_hex": "#E6DDD1"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft deep teal",
+    "main_hex": "#69ACAE",
+    "sec": "warm ivory",
+    "sec_hex": "#E6DDD1",
+    "root": true,
+    "root_drawn": {
+     "main": "soft deep teal",
+     "main_hex": "#377A81",
+     "sec": "warm ivory",
+     "sec_hex": "#E6DDD1"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "s21",
+   "drawn": {
+    "main": "soft amethyst purple",
+    "main_hex": "#824CA9",
+    "sec": "pale lilac grey",
+    "sec_hex": "#CCC7D1"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft amethyst purple",
+    "main_hex": "#B090CC",
+    "sec": "pale lilac lilac",
+    "sec_hex": "#D3C1E3",
+    "root": true,
+    "root_drawn": {
+     "main": "soft amethyst purple",
+     "main_hex": "#824CA9",
+     "sec": "pale lilac grey",
+     "sec_hex": "#CCC7D1"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "s22",
+   "drawn": {
+    "main": "soft midnight blue",
+    "main_hex": "#35436E",
+    "sec": "pearl white",
+    "sec_hex": "#E9E7E2"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft midnight blue",
+    "main_hex": "#8B9DCE",
+    "sec": "pearl white",
+    "sec_hex": "#EAE6E2",
+    "root": true,
+    "root_drawn": {
+     "main": "soft midnight blue",
+     "main_hex": "#35436E",
+     "sec": "pearl white",
+     "sec_hex": "#E9E7E2"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "s23",
+   "drawn": {
+    "main": "soft pine green",
+    "main_hex": "#356E52",
+    "sec": "pale jade",
+    "sec_hex": "#AFCFBF"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft pine green",
+    "main_hex": "#73AD8F",
+    "sec": "pale jade",
+    "sec_hex": "#A9D1BD",
+    "root": true,
+    "root_drawn": {
+     "main": "soft pine green",
+     "main_hex": "#356E52",
+     "sec": "pale jade",
+     "sec_hex": "#AFCFBF"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "s24",
+   "drawn": {
+    "main": "soft burgundy",
+    "main_hex": "#7D364D",
+    "sec": "champagne beige",
+    "sec_hex": "#DFD3C3"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft burgundy",
+    "main_hex": "#D28795",
+    "sec": "champagne beige",
+    "sec_hex": "#E3D1C5",
+    "root": true,
+    "root_drawn": {
+     "main": "soft burgundy",
+     "main_hex": "#7D364D",
+     "sec": "champagne beige",
+     "sec_hex": "#DFD3C3"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "s25",
+   "drawn": {
+    "main": "soft cobalt blue",
+    "main_hex": "#3F6AA6",
+    "sec": "silver white",
+    "sec_hex": "#DDE0E3"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft cobalt blue",
+    "main_hex": "#94B3EE",
+    "sec": "silver white",
+    "sec_hex": "#DEE0E3",
+    "root": true,
+    "root_drawn": {
+     "main": "soft cobalt blue",
+     "main_hex": "#3F6AA6",
+     "sec": "silver white",
+     "sec_hex": "#DDE0E3"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "s26",
+   "drawn": {
+    "main": "soft slate grey-blue",
+    "main_hex": "#667F99",
+    "sec": "soft white",
+    "sec_hex": "#EDEBE9"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft slate blue",
+    "main_hex": "#87A1BD",
+    "sec": "soft white",
+    "sec_hex": "#EDEBE9",
+    "root": true,
+    "root_drawn": {
+     "main": "soft slate grey-blue",
+     "main_hex": "#667F99",
+     "sec": "soft white",
+     "sec_hex": "#EDEBE9"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "s27",
+   "drawn": {
+    "main": "soft ice lavender",
+    "main_hex": "#BEB6D8",
+    "sec": "deep indigo",
+    "sec_hex": "#353A6E"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft ice lavender",
+    "main_hex": "#BEB6D8",
+    "sec": "light indigo",
+    "sec_hex": "#9099D5",
+    "root": true,
+    "root_drawn": {
+     "main": "soft ice lavender",
+     "main_hex": "#BEB6D8",
+     "sec": "deep indigo",
+     "sec_hex": "#353A6E"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "s28",
+   "drawn": {
+    "main": "soft frost blue",
+    "main_hex": "#BDD1DB",
+    "sec": "deep navy",
+    "sec_hex": "#263359"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft frost blue",
+    "main_hex": "#ACD4E8",
+    "sec": "light navy",
+    "sec_hex": "#9CAEDC",
+    "root": true,
+    "root_drawn": {
+     "main": "soft frost blue",
+     "main_hex": "#BDD1DB",
+     "sec": "deep navy",
+     "sec_hex": "#263359"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "s29",
+   "drawn": {
+    "main": "soft pale mint",
+    "main_hex": "#BFD9CE",
+    "sec": "deep slate green",
+    "sec_hex": "#396059"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft pale mint",
+    "main_hex": "#BFD9CE",
+    "sec": "light slate green",
+    "sec_hex": "#91BFB5",
+    "root": true,
+    "root_drawn": {
+     "main": "soft pale mint",
+     "main_hex": "#BFD9CE",
+     "sec": "deep slate green",
+     "sec_hex": "#396059"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "s30",
+   "drawn": {
+    "main": "soft pewter grey",
+    "main_hex": "#9196A1",
+    "sec": "pale ice blue",
+    "sec_hex": "#CDDDE4"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft pewter blue",
+    "main_hex": "#909EBE",
+    "sec": "pale ice blue",
+    "sec_hex": "#CDDDE4",
+    "root": true,
+    "root_drawn": {
+     "main": "soft pewter grey",
+     "main_hex": "#9196A1",
+     "sec": "pale ice blue",
+     "sec_hex": "#CDDDE4"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "s31",
+   "drawn": {
+    "main": "soft moonlight white",
+    "main_hex": "#E2E4E9",
+    "sec": "deep plum",
+    "sec_hex": "#5D325D"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft moonlight white",
+    "main_hex": "#E2E4E9",
+    "sec": "light plum",
+    "sec_hex": "#E4B2E3",
+    "root": true,
+    "root_drawn": {
+     "main": "soft moonlight white",
+     "main_hex": "#E2E4E9",
+     "sec": "deep plum",
+     "sec_hex": "#5D325D"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "s32",
+   "drawn": {
+    "main": "soft steel blue",
+    "main_hex": "#6A8CAF",
+    "sec": "pale silver grey",
+    "sec_hex": "#C9CBCF"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft steel blue",
+    "main_hex": "#77A5C3",
+    "sec": "pale silver blue",
+    "sec_hex": "#BBCBED",
+    "root": true,
+    "root_drawn": {
+     "main": "soft steel blue",
+     "main_hex": "#6A8CAF",
+     "sec": "pale silver grey",
+     "sec_hex": "#C9CBCF"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "s33",
+   "drawn": {
+    "main": "soft peony pink",
+    "main_hex": "#D98CA6",
+    "sec": "deep wine",
+    "sec_hex": "#6B2E3D"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft peony pink",
+    "main_hex": "#D78DA6",
+    "sec": "soft wine",
+    "sec_hex": "#C17B89",
+    "root": true,
+    "root_drawn": {
+     "main": "soft peony pink",
+     "main_hex": "#D98CA6",
+     "sec": "deep wine",
+     "sec_hex": "#6B2E3D"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "s34",
+   "drawn": {
+    "main": "soft coral red",
+    "main_hex": "#D37269",
+    "sec": "pale peach ivory",
+    "sec_hex": "#EAD9CD"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft coral red",
+    "main_hex": "#D3877F",
+    "sec": "pale peach ivory",
+    "sec_hex": "#ECD7D1",
+    "root": true,
+    "root_drawn": {
+     "main": "soft coral red",
+     "main_hex": "#D37269",
+     "sec": "pale peach ivory",
+     "sec_hex": "#EAD9CD"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "s35",
+   "drawn": {
+    "main": "soft fuchsia rose",
+    "main_hex": "#C05995",
+    "sec": "pale blush",
+    "sec_hex": "#EACDD2"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft fuchsia rose",
+    "main_hex": "#CA88AB",
+    "sec": "pale blush",
+    "sec_hex": "#EACDD2",
+    "root": true,
+    "root_drawn": {
+     "main": "soft fuchsia rose",
+     "main_hex": "#C05995",
+     "sec": "pale blush",
+     "sec_hex": "#EACDD2"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "s36",
+   "drawn": {
+    "main": "soft lychee red",
+    "main_hex": "#C6535C",
+    "sec": "soft gold beige",
+    "sec_hex": "#D2C4AC"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft lychee red",
+    "main_hex": "#D38688",
+    "sec": "soft gold beige",
+    "sec_hex": "#D7C3A2",
+    "root": true,
+    "root_drawn": {
+     "main": "soft lychee red",
+     "main_hex": "#C6535C",
+     "sec": "soft gold beige",
+     "sec_hex": "#D2C4AC"
+    },
+    "season": "thu"
+   }
+  },
+  {
+   "id": "s37",
+   "drawn": {
+    "main": "soft orchid pink",
+    "main_hex": "#C982BE",
+    "sec": "deep violet",
+    "sec_hex": "#593A78"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft orchid pink",
+    "main_hex": "#C28AB9",
+    "sec": "soft violet",
+    "sec_hex": "#A182C3",
+    "root": true,
+    "root_drawn": {
+     "main": "soft orchid pink",
+     "main_hex": "#C982BE",
+     "sec": "deep violet",
+     "sec_hex": "#593A78"
+    },
+    "season": "thu"
+   }
+  },
+  {
+   "id": "s38",
+   "drawn": {
+    "main": "soft apricot rose",
+    "main_hex": "#D99F8C",
+    "sec": "deep rose brown",
+    "sec_hex": "#743E47"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft apricot rose",
+    "main_hex": "#D99F8C",
+    "sec": "soft rose brown",
+    "sec_hex": "#BB7F87",
+    "root": true,
+    "root_drawn": {
+     "main": "soft apricot rose",
+     "main_hex": "#D99F8C",
+     "sec": "deep rose brown",
+     "sec_hex": "#743E47"
+    },
+    "season": "thu"
+   }
+  },
+  {
+   "id": "s39",
+   "drawn": {
+    "main": "soft saffron amber",
+    "main_hex": "#C89741",
+    "sec": "smoky teal",
+    "sec_hex": "#477A85"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft saffron amber",
+    "main_hex": "#C19959",
+    "sec": "soft smoky teal",
+    "sec_hex": "#689CA7",
+    "root": true,
+    "root_drawn": {
+     "main": "soft saffron amber",
+     "main_hex": "#C89741",
+     "sec": "smoky teal",
+     "sec_hex": "#477A85"
+    },
+    "season": "thu"
+   }
+  },
+  {
+   "id": "s40",
+   "drawn": {
+    "main": "soft cerulean blue",
+    "main_hex": "#4384B1",
+    "sec": "pale apricot",
+    "sec_hex": "#E7D3C6"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft cerulean blue",
+    "main_hex": "#6DA4D6",
+    "sec": "pale apricot",
+    "sec_hex": "#E7D3C6",
+    "root": true,
+    "root_drawn": {
+     "main": "soft cerulean blue",
+     "main_hex": "#4384B1",
+     "sec": "pale apricot",
+     "sec_hex": "#E7D3C6"
+    },
+    "season": "ha"
+   }
+  },
+  {
+   "id": "s41",
+   "drawn": {
+    "main": "soft olive green",
+    "main_hex": "#788A42",
+    "sec": "pale gold beige",
+    "sec_hex": "#DBD0BD"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft olive green",
+    "main_hex": "#97A966",
+    "sec": "pale gold beige",
+    "sec_hex": "#DBD0BD",
+    "root": true,
+    "root_drawn": {
+     "main": "soft olive green",
+     "main_hex": "#788A42",
+     "sec": "pale gold beige",
+     "sec_hex": "#DBD0BD"
+    },
+    "season": "thu"
+   }
+  },
+  {
+   "id": "s42",
+   "drawn": {
+    "main": "soft raspberry magenta",
+    "main_hex": "#A63F6A",
+    "sec": "pale mint",
+    "sec_hex": "#C6DDD3"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft raspberry magenta",
+    "main_hex": "#CE87A0",
+    "sec": "pale mint",
+    "sec_hex": "#C6DDD3",
+    "root": true,
+    "root_drawn": {
+     "main": "soft raspberry magenta",
+     "main_hex": "#A63F6A",
+     "sec": "pale mint",
+     "sec_hex": "#C6DDD3"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "s43",
+   "drawn": {
+    "main": "soft sapphire blue",
+    "main_hex": "#385A9F",
+    "sec": "pale lemon cream",
+    "sec_hex": "#EAE5CD"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft sapphire blue",
+    "main_hex": "#81A0D9",
+    "sec": "pale lemon cream",
+    "sec_hex": "#EAE5CD",
+    "root": true,
+    "root_drawn": {
+     "main": "soft sapphire blue",
+     "main_hex": "#385A9F",
+     "sec": "pale lemon cream",
+     "sec_hex": "#EAE5CD"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "s44",
+   "drawn": {
+    "main": "soft burnt sienna",
+    "main_hex": "#A6593F",
+    "sec": "sage grey",
+    "sec_hex": "#9EB39E"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft burnt sienna",
+    "main_hex": "#D18C74",
+    "sec": "sage grey",
+    "sec_hex": "#99B599",
+    "root": true,
+    "root_drawn": {
+     "main": "soft burnt sienna",
+     "main_hex": "#A6593F",
+     "sec": "sage grey",
+     "sec_hex": "#9EB39E"
+    },
+    "season": "thu"
+   }
+  },
+  {
+   "id": "s45",
+   "drawn": {
+    "main": "soft aubergine purple",
+    "main_hex": "#7C4587",
+    "sec": "pale gold",
+    "sec_hex": "#DACEA9"
+   },
+   "old_season": null,
+   "new": {
+    "main": "soft aubergine purple",
+    "main_hex": "#B98BC3",
+    "sec": "pale gold",
+    "sec_hex": "#DACEA9",
+    "root": true,
+    "root_drawn": {
+     "main": "soft aubergine purple",
+     "main_hex": "#7C4587",
+     "sec": "pale gold",
+     "sec_hex": "#DACEA9"
+    },
+    "season": "thu"
+   }
+  },
+  {
+   "id": "s46",
+   "drawn": {
+    "main": "cool aquamarine",
+    "main_hex": "#86CDB9",
+    "sec": "deep blue-violet",
+    "sec_hex": "#5D5894"
+   },
+   "old_season": "dong",
+   "new": {
+    "main": "cool aquamarine",
+    "main_hex": "#86CDB9",
+    "sec": "soft lilac violet",
+    "sec_hex": "#A898CC",
+    "root": true,
+    "root_drawn": {
+     "main": "cool aquamarine",
+     "main_hex": "#86CDB9",
+     "sec": "deep blue-violet",
+     "sec_hex": "#5D5894"
+    },
+    "season": "dong"
+   }
+  },
+  {
+   "id": "s47",
+   "drawn": {
+    "main": "periwinkle",
+    "main_hex": "#949BD8",
+    "sec": "mint",
+    "sec_hex": "#9ACBB7"
+   },
+   "old_season": "ha",
+   "new": {
+    "main": "periwinkle",
+    "main_hex": "#949BD8",
+    "sec": "mint",
+    "sec_hex": "#9ACBB7",
+    "root": true,
+    "season": "dong"
+   }
+  },
+  {
+   "id": "s49",
+   "drawn": {
+    "main": "soft burgundy rose",
+    "main_hex": "#C37986",
+    "sec": "pine teal",
+    "sec_hex": "#388581"
+   },
+   "old_season": "thu",
+   "new": {
+    "main": "soft dusty rose",
+    "main_hex": "#C98A97",
+    "sec": "soft sage jade",
+    "sec_hex": "#A3C4A0",
+    "root": true,
+    "root_drawn": {
+     "main": "soft burgundy rose",
+     "main_hex": "#C37986",
+     "sec": "pine teal",
+     "sec_hex": "#388581"
+    },
+    "season": "xuan"
+   }
+  },
+  {
+   "id": "s50",
+   "drawn": {
+    "main": "clear ice blue",
+    "main_hex": "#A6C9E4",
+    "sec": "deep raspberry",
+    "sec_hex": "#A55D7A"
+   },
+   "old_season": "dong",
+   "new": {
+    "main": "clear ice blue",
+    "main_hex": "#A6C9E4",
+    "sec": "soft raspberry pink",
+    "sec_hex": "#D498B0",
+    "root": true,
+    "root_drawn": {
+     "main": "clear ice blue",
+     "main_hex": "#A6C9E4",
+     "sec": "deep raspberry",
+     "sec_hex": "#A55D7A"
+    },
+    "season": "dong"
+   }
+  }
+ ]
+}

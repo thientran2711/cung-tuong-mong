@@ -132,3 +132,30 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+## PR14 — owner Lượt 817 COMPOSITE TEST (0 gens): new-palette thiếu nữ s46–s61 in the PR13/PR14 rooms + robe colour measure
+Figures = the approved cut-outs from gen_ledger (latest cut_id per s; s51/s54 = Lượt 786 eye redraws). Stage = nf_tags.py (same numbers as ipad_tags.py; any 4 figures). Sheets (CDN img/_review/place-rank/pr13/nf817/): nf817-thua-minh-cung-tay-phoi-ngu (s46–s49) · nf817-thua-minh-cung-tay-phoi (s50–s53) · nf817-canh-phuc-cung-dong-phoi-ngu (s54–s57) · nf817-canh-phuc-cung-dong-phoi (s58–s61) · nf817-canh-phuc-cung-tay-phoi-ngu (s46 s51 s56 s61, one per group).
+Measure = robe_colour.py (alpha > 250, rows 30–92 % of the figure box, k-means 4 in CIELAB; MAIN = biggest cluster, SEC = most chromatic other cluster ≥ 12 %). Palette = palettes_season.json, all 92 people × 4 seasons (n = 368): MAIN L 64–81 (median 75), C 19–36 (median 27); SEC L 45–77 (median 59), C 21–38 (median 30) [10th–90th percentile].
+| figure | MAIN hex L / C | SEC hex L / C |
+|---|---|---|
+| c06 Chu Thục Nghi (sheet) | #EACBB7 84 / 16 | #C2654F 54 / 45 |
+| c30 Lý Băng Tâm (sheet) | #ECDDD7 89 / 6 | #B1AEB9 72 / 6 |
+| m19 Tiểu Đào (sheet) | #D7B297 75 / 21 | #AC816A 58 / 23 |
+| m39 Người lạ (sheet) | #C6BFC5 78 / 4 | #AFA8B1 70 / 5 |
+| s46 | #ACBEBA 76 / 7 | #6F649B 46 / 33 |
+| s47 | #B3C1B8 77 / 7 | #9192B8 62 / 21 |
+| s48 | #D49C9D 70 / 22 | #E2B6B5 78 / 17 |
+| s49 | #66787A 49 / 7 | #B5727C 56 / 28 |
+| s50 | #B7B8C4 75 / 6 | #B6687F 54 / 34 |
+| s51 | #BFA4BE 71 / 18 | #D9BEBF 79 / 10 |
+| s52 | #AEC3CD 78 / 9 | #D9A193 71 / 25 |
+| s53 | #C1A2C2 70 / 21 | #B0B0A6 72 / 6 |
+| s54 | #E5A8B0 75 / 25 | #D28F98 66 / 27 |
+| s55 | #B4A38F 68 / 13 | #CC99A3 68 / 21 |
+| s56 | #C89FBC 70 / 22 | #E1AD9E 75 / 23 |
+| s57 | #C395AD 67 / 22 | #D8B5A5 76 / 17 |
+| s58 | #C98073 61 / 33 | #B36A5D 53 / 34 |
+| s59 | #E5AF9F 76 / 24 | #D29989 68 / 26 |
+| s60 | #E79B96 72 / 31 | #D07F7A 62 / 35 |
+| s61 | #EDD1BC 86 / 16 | #BE755D 57 / 36 |
+READING: the 4 sheet people the owner likes are pale and low-chroma (MAIN C 4–21, L 75–89; only c06's red-orange SEC is strong). The palette itself is more vivid (MAIN C median 27, SEC C median 30, SEC L down to 45). In the rooms the figures that stand out most are those with dark or strong SEC colours: s46 (violet L46 C33), s49 (dark teal MAIN L49 + raspberry), s50 (raspberry C34), s58 / s60 / s61 (coral-terracotta C31–36). Softest / best blended: s47, s48, s51, s52, s53, s55, s57 (C ≤ 22). Suggestion for the owner/foreman (no action taken): a palette cap near the sheet people, e.g. MAIN C ≤ ~22 and SEC L ≥ ~60, C ≤ ~28.
