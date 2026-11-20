@@ -1,0 +1,5 @@
+cells 12410
+changed 2 ['s57|8|a36|dong', 's58|8|a36|dong']
+bad 0 []
+still > 10 000 and not over at HEAD 7007acc: 177 {'t5 a51 None': 29, 't5 a51 dong': 32, 'tnude a51 None': 1, 't5 a65 dong': 79, 'tnude a65 None': 1, 't5 a65 None': 35}
+note: the 2 'tnude' cells (c06 nude a51/a65 normal: 10414 / 10258) are the same length at HEAD 7007acc = pre-existing, not new (HEAD_OVER10K holds t1-t8 only). NEW > 10 000 vs HEAD 7007acc = 175, all t5 a51/a65 (job 1, not fixed).

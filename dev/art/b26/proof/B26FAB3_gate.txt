@@ -1,0 +1,7 @@
+PASS s57|8|a36|dong 9901
+PASS s58|8|a36|dong 9900
+PASS s13|8|a36|dong 9994
+PASS s57|8|a36|None 9871
+PASS s45|7|a36|dong 9999
+PASS c08|5|a36|dong 9467
+PASS m11|5|a26|None 9140

@@ -547,7 +547,7 @@ _HEAD_OVER=None
 def b26_fit_ok(person,rank,age,season):
     """-> 'while' (cut while > 10 000), 'whole' (cell over at HEAD, t4/t5: the JOB 1 all-or-nothing fit kept as it was, so nothing that fitted before goes over again), or False."""
     global _HEAD_OVER
-    if not (isinstance(rank,int) and 1<=rank<=6): return False
+    if not (isinstance(rank,int) and 1<=rank<=8): return False   # B26FAB3 (Foreman C #6, 20/11): t7/t8 too (F2 embroidery names), same cut-while step
     if _HEAD_OVER is None:
         import json as _j; _HEAD_OVER=set(_j.load(open(os.path.join(ART,"b26","HEAD_OVER10K.json"),encoding="utf-8"))["cells"])
     if not ({f"{x}|{rank}|{age}|{season}" for x in (person,ALIAS.get(person,person))} & _HEAD_OVER): return 'while'
