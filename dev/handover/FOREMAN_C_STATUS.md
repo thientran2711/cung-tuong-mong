@@ -263,3 +263,4 @@ ROOT-65 Lượt 976 (my chat; collides with ROOT-64's 976) + 977 ~03:10Z: takeov
 ROOT-65 ~03:13Z: OWNER (via ROOT-64) verbatim "Xuân" = 2nd deep season → P4: Xuân hơi đậm · Hạ unchanged · Thu hơi đậm + real autumn · Đông nhạt. Next Lượt 978.
 ROOT-65 Lượt 979 ~03:16Z: P4 THU v2 (747805a, four-seasons-1..4) LOOKED (sheet 1 top) + sent; made before Xuân đậm/Thu hơi đậm/Đông nhạt → next round. P4 told ROOT-65 is foreman. Next Lượt 980.
 ROOT-65 Lượt 980 ~03:20Z: P4 Round 3 (a42b5f6: Xuân/Thu hơi đậm, Hạ kept, Đông nhạt; 0 cr, gate 0 fail) LOOKED (sheet 2 top) + sent. Asked owner: 42 ★GỐC drawn pairs in Đông, some deep (s22 s23 s25) — keep or lighten (= redraw). Next Lượt 981.
+ROOT-65 Lượt 981 ~03:25Z: PR19 batch 1 (rooms 31–35 Tần, 675 cr) LOOKED + sent. Faults: 31≈35 same layout, 34 doorway arch, floors bit glossy, bedrooms very pink. Asked owner batch-2 go (~675 cr; ~31 rooms left ≈4 200 cr). Next Lượt 982.
