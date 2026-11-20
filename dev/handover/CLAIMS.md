@@ -353,7 +353,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | ge-writers-w3 re-merge LIVE 0de74d9e (opus E11r-w3, unarchived; was PASS r3 b79930bf, stale) | review/ge-writers-w3 | FOREMAN E #16 | session_01DgYSWn2u8M4jdAipxwpiJf | RUNNING | 20/11 05:50Z |
 - (20/11 05:50Z, E #16) caoly-road LIVE 0de74d9e; REVIEW caoly-road E20r session_01DgYSWq4WTWY2p7LTCaMp3M ARCHIVED.
 | mg-play2 (opus; OWNER bugs OD 20/11 ~07:45Z/~07:55Z Hoa điền hidden anchored target + no tilt, ~08:05Z Hoa đăng avoid + strong lane) | review/mg-play2; briefs/root74-mg-play2.md | MAIN ROOT-74 | session_01Rc5AsLZkqCJgRFkBMuacEz | RUNNING | 20/11 06:05Z |
-| mg-allkinds (sonnet; OWNER OD 20/11 ~08:40Z Điểm trang into Thử tay + every mini-game outside KG82_KIND) | review/mg-allkinds; briefs/root74-mg-allkinds.md | MAIN ROOT-74 | session_01Rc5AsLukNSPzJp2rKp4opU | RUNNING | 20/11 06:05Z |
+| mg-allkinds (sonnet; OWNER OD 20/11 ~08:40Z Điểm trang into Thử tay + every mini-game outside KG82_KIND) | review/mg-allkinds; briefs/root74-mg-allkinds.md | MAIN ROOT-74 | session_01Rc5AsLukNSPzJp2rKp4opU | SẴN SÀNG KIỂM 5b07ad6e | 20/11 06:05Z |
 | REVIEW mg-visual (SMALL sonnet) of d9800e60 | review/mg-visual(-rv) | MAIN ROOT-74 | session_01Rc5AsLyyrm1QVkoFVnhPYy | RUNNING | 20/11 06:00Z |
 | REVIEW mg-noword-b (SMALL sonnet) of 7e0d6c26 | review/mg-noword-b(-rv) | MAIN ROOT-74 | session_01Rc5AsMoh1gaditXxUMq1Nh | RUNNING | 20/11 06:00Z |
 | mg-fair-ratio (opus; owner ask OD 20/11 ~06:20Z better/equal/worse NPC split per kind group on mg-fair-hands 3fe87277; HOLD until owner OK) | review/mg-fair-ratio; briefs/cag28-mg-fair-ratio.md; reports/mg-fair-ratio.md | C-AG #28 for ROOT-74 | session_01Rc5AsMnKfGBSQk1sEvtKda | RUNNING | 20/11 06:08Z |
