@@ -4,13 +4,15 @@
      over33Max   frames > 33.5 ms with FX on          medDeltaMs   median(FX on) - median(FX off)      p95Max   95th-percentile frame ms with FX on
      pageErrors  page errors during the run
    Any miss = exit 1. CI runs a software-GL Chromium (pessimistic vs a real GPU), so these are regression ceilings, not goals. */
-const {spawnSync}=require('child_process');const fs=require('fs'),path=require('path');const D=require('./lib/device');
+const {spawn}=require('child_process');const fs=require('fs'),path=require('path');const D=require('./lib/device');
 const A=process.argv.slice(2);const opt=(k,d)=>{const i=A.indexOf('--'+k);return i<0?d:A[i+1]};
 const KIND=opt('kind','rain'),VP=opt('vp','755x1000'),CPU=opt('cpu','4'),OUT=opt('out',null);
 const BUD=JSON.parse(fs.readFileSync(opt('budget',path.join(__dirname,'perf-budget.json')),'utf8')).fxGate;
 (async()=>{if(!BUD){console.error('perf-budget.json has no fxGate block');process.exit(2)}
  const srv=await D.serveRoot(path.resolve(__dirname,'../..'));let res;
- try{res=spawnSync('node',[path.join(__dirname,'perf-fx.js'),srv.url,KIND,VP,CPU],{encoding:'utf8',timeout:600000,maxBuffer:1<<24})}finally{srv.close()}
+ try{/* async spawn: spawnSync would freeze this process and with it the static server the child loads the game from */
+  res=await new Promise(ok=>{const c=spawn('node',[path.join(__dirname,'perf-fx.js'),srv.url+'?khost=0',KIND,VP,CPU]);let o='',e='';const t=setTimeout(()=>c.kill(),600000);
+   c.stdout.on('data',d=>o+=d);c.stderr.on('data',d=>e+=d);c.on('close',()=>{clearTimeout(t);ok({stdout:o,stderr:e})})})}finally{srv.close()}
  const line=(res.stdout||'').trim().split('\n').filter(l=>l[0]==='{').pop();
  if(!line){console.error('perf-fx.js printed no result\n'+(res.stderr||'').slice(-800));process.exit(2)}
  const r=JSON.parse(line);const miss=[];
