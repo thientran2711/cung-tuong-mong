@@ -29,3 +29,6 @@ What I saw:
 **Plain verdict:** her worry is partly right. The sentence itself was not magic, but it made the model cut her out itself, and that kept sheer cloth even. Without it, remove_bg usually cuts fine (hair, tassels, brocade, most sheer pieces) but can leave patchy half-transparent spots in pale sheer cloth (1 of the 3 NEW sheer cases here). Small sample.
 **Seals (SEAL2b pt/ptl gauze) are a different cause:** the seal prompts NEVER had that sentence (git history of dev/art/emo-anim has no "completely transparent"); they are cut from chroma green by our keyer (th_cut.py un-mix), and thin gauze over green gets un-mixed into pale/see-through patches. Removing the sentence did not touch them.
 Options for owner (A18 — no rule changed by me): (a) keep B9 and add a free automatic check on every cut that flags blotchy half-transparency inside the figure (I can build it); (b) ≤ 2 test keyframes, same prompt with / without the sentence, sheer shawl person (~270 cr) — only on her yes; (c) for seals: a keyer fix on the existing clips (no gens).
+
+## Job 4 — relayed to ROOT-60 (no action): a51 store prompts 236 FAIL LEN (10 002–11 154 ch); build.py TRIEU dead hexes t4 #5FA8A6 / t6 #4F86A8 / t7 #E3A25B / t8 #C65A4C; game RCOL old palette (UI).
+STATUS: jobs 1–4 done (1962903b0 · 498c7f1f1 · 204855068). Context ≈ 15 %, depth 4. Waiting for ROOT-60.
