@@ -82,8 +82,9 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ck=(n,c,x)=>{conso
  const ak=await p.evaluate(()=>{Q.length=0;S.dcF={key:'x',ch:'ok'};S.dcAk=null;S.dcNk=null;const v=rivals.find(x=>x.alive&&!x.out&&!x.coop&&!x.confined);v.rel=70;v.fid='consort:c09';v.rank=3;v.queen=0;wdOf(v).tram={k:'tramngoc',src:'cap',nvp:1};
   window.__aff0=window.__aff0||aff;aff=(x,y)=>(x===v&&y===S)?70:-50;S.inv.push({k:'thoa_vang',from:'emp'});dcWeek();aff=window.__aff0;const r0=v.rel;const A=Q.find(q=>q.evId==='dc:ask');if(!A)return{none:Q.map(q=>q.t)};
   const rb=v.rel;A.opts[0].go();const lent=wdOf(v).tram&&wdOf(v).tram.k;const gone=!S.inv.some(e=>e.k==='thoa_vang');const rel=v.rel-rb;S.turn++;dcReturn();
-  return{t:A.t,lent,gone,rel,back:S.inv.some(e=>e.k==='thoa_vang'&&!e.bor),vt:wdOf(v).tram&&wdOf(v).tram.k}});
+  return{t:A.t,ox:A.opts.map(o=>o.x),lent,gone,rel,back:S.inv.some(e=>e.k==='thoa_vang'&&!e.bor),vt:wdOf(v).tram&&wdOf(v).tram.k}});
  ck('NPC asks to borrow her trâm; lending moves it, thiện cảm +BAL.dc.bor.thanks',ak.lent==='thoa_vang'&&ak.gone&&ak.rel>0,ak);ck('lent trâm comes back next tuần, the NPC wears her own piece again',ak.back&&ak.vt&&ak.vt!=='thoa_vang',ak);
+ ck('r2: the NPC ask frame names what each answer costs / gives (lend: tốn + thiện cảm; refuse: keeps it)',ak.ox&&/tốn:/.test(ak.ox[0])&&/thiện cảm/.test(ak.ox[0])&&/thành:/.test(ak.ox[1]),ak.ox);
 
  /* 10. calendar popover, old save, round trip */
  const z=await p.evaluate(()=>{const h=mcPopHTML('newyear',0)||'';const z0=JSON.parse(JSON.stringify({d:1}));let ok=true,err='';
@@ -132,6 +133,7 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ck=(n,c,x)=>{conso
  ck('fix 4: taboo does not count against the painted robe (kyOn 0)',r1.taboo===false,r1.taboo);
  ck('fix 2: borrow is never offered for a colour her own chest covers (no dominated road)',r1.gate.ownDo&&!r1.gate.borDo,r1.gate.opts);
  ck('fix 3: every gate offers more than one road, stay always there, roads name what they give',r1.gate.stay&&r1.gate.road>=2&&r1.gate.opts.every(x=>/thành:/.test(x)),r1.gate.opts);
+ ck('r2: borrow names the lender thiện cảm it spends; buy names the piece it keeps',r1.gate.opts.filter(x=>/^Mượn/.test(x)).every(x=>/kèm: thiện cảm/.test(x))&&r1.gate.opts.filter(x=>/^Sai người mua/.test(x)).every(x=>/giữ lại trong rương/.test(x)),r1.gate.opts);
  ck('fix 1: NPC puts on her own trâm of the missing colour',r1.npc.aOwn==='thoa_vang'&&r1.npc.aMiss[1]<r1.npc.aMiss[0],r1.npc);
  ck('fix 1: NPC borrows from a consort who likes her; the piece moves and comes back',r1.npc.bBor==='tram_maudon'&&r1.npc.cLost&&r1.npc.bMiss[1]<r1.npc.bMiss[0]&&r1.npcBack.c&&r1.npcBack.b==='tramngoc',[r1.npc,r1.npcBack]);
  ck('fix 9: no world, no request path: no NPC lending, no NPC ask',r1.guest.lenders===0&&!r1.guest.ask,r1.guest);

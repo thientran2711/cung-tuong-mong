@@ -89,6 +89,8 @@ function dcLend(){return dcWorld()||dcGuest()}
 function dcAsk(k,o){try{S.coopAsk=Array.isArray(S.coopAsk)?S.coopAsk:[];const a=Object.assign({id:k+":"+o.bid,k},JSON.parse(JSON.stringify(o)));if(S.coopAsk.some(x=>x&&x.id===a.id))return;
  a.w=(COOP.state&&COOP.state.week)||0;S.coopAsk.push(a);/* sent at once too, so a host that has not ended this week applies it this week (jcoopask live relay) */
  setTimeout(()=>{try{if(COOP.state.status==="open")COOP.send({t:"act",k:"ctm-ask",mode:"ask",id:"ask:"+a.id,L:[JSON.parse(JSON.stringify(a))]})}catch(e){}},0)}catch(e){console.error("dcAsk",e)}}
+/* a thiện cảm change as the kit words it (jaudit pvQuy, KIT_REL) */
+function dcRelW(v,n){try{if(typeof pvQuy==="function")return pvQuy(v,n)}catch(e){}return `thiện cảm ${n>0?"+":""}${n}`}
 function dcBid(e){return e&&e.bor&&e.bor.id}
 /* the third road (same for everyone): buy a trâm of a missing colour at her own phẩm or under it from Nội vụ phủ — the cheapest that fits; a real new piece */
 function dcBuyFit(p,fams){try{const P=Math.min(8,wdPOf(p));let best=null;for(let q=Math.max(0,P);q>=0;q--)for(const k of wdPool("tram",q,true)){const w=WD_ITEMS[k];const c=dcPiece(k);if(!w||w.nt||!c||!fams.includes(c[0]))continue;if(!best||w.pr<best.pr)best={k,f:c[0],pr:w.pr|0,w}}return best}catch(e){return null}}
@@ -139,10 +141,10 @@ function dcGateItem(f,st){const D=BAL.dc;const opts=[];const need=st.missing.len
  for(const c of own.filter((c,i)=>own.findIndex(x=>x.f===c.f)===i).slice(0,D.chg.max))opts.push({n:`Cài ${c.w.n} (${dcFamN(c.f)}) của mình`,fx:{},x:`tốn: ${D.chg.khac} khắc · thành: có màu ${dcFamN(c.f)} cho lễ`,
   go:()=>{const w=wdOf(S);const i=S.inv.indexOf(c.e);if(i>=0){S.inv.splice(i,1);if(w.tram)S.inv.push(w.tram);delete c.e.w;w.tram=c.e;spend(D.chg.khac);dcHer().ch="chg"}dcEnter(f)}});
  const lack=need.filter(x=>!ownF.has(x));
- if(lack.length)for(const L of dcLenders(S,lack))opts.push({n:`Mượn ${L.w.n} (${dcFamN(L.f)}) của ${dcName(L.v)}`,fx:{},x:`tốn: ${D.bor.khac} khắc · thành: có màu ${dcFamN(L.f)} cho lễ, qua tuần sau trả`,
+ if(lack.length)for(const L of dcLenders(S,lack))opts.push({n:`Mượn ${L.w.n} (${dcFamN(L.f)}) của ${dcName(L.v)}`,fx:{},x:`tốn: ${D.bor.khac} khắc · thành: có màu ${dcFamN(L.f)} cho lễ, qua tuần sau trả · kèm: ${dcRelW(L.v,-D.bor.use)}`,
   go:()=>{if(dcBorrow(S,L.v,L.e)){spend(D.bor.khac);dcHer().ch="bor";try{log(`Mượn ${L.w.n} của ${dcName(L.v)} để dự ${f.name}; qua tuần sau phải trả.`)}catch(e){}}dcEnter(f)}});
  const buy=lack.length?dcBuyFit(S,lack):null;/* offered only when she has the silver (a road she can take) */
- if(buy&&S.bac>=buy.pr)opts.push({n:`Sai người mua ${buy.w.n} (${dcFamN(buy.f)}) ở Nội vụ phủ`,fx:{},x:`tốn: ${D.buy.khac} khắc, Bạc -${buy.pr} · thành: có màu ${dcFamN(buy.f)} cho lễ`,
+ if(buy&&S.bac>=buy.pr)opts.push({n:`Sai người mua ${buy.w.n} (${dcFamN(buy.f)}) ở Nội vụ phủ`,fx:{},x:`tốn: ${D.buy.khac} khắc, Bạc -${buy.pr} · thành: có màu ${dcFamN(buy.f)} cho lễ, trâm giữ lại trong rương`,
   go:()=>{if(dcBuy(S,buy)){spend(D.buy.khac);dcHer().ch="chg";try{log(`Mua ${buy.w.n} ở Nội vụ phủ để dự ${f.name}.`)}catch(e){}}dcEnter(f)}});
  if(!st.refused)opts.push({n:"Cứ thế vào dự",fx:{},x:"thành: vào dự lễ như đang mặc",go:()=>dcEnter(f)});
  opts.push({n:"Cáo lỗi, về cung nghỉ",fx:{},x:"thành: về cung nghỉ, không dự lễ",go:()=>dcOut(f)});
@@ -188,8 +190,8 @@ function dcWeek(){if(!dcOn()||!S||S.dead)return;const R=typeof rivals!=="undefin
   for(const v of R){if(!v||!v.alive||v.out||v.coop||aff(v,S)<BAL.dc.bor.fav)continue;const st=dcStat(v,f.k);if(!st||(!st.miss&&!st.refused)||!st.missing.length)continue;
    const c=dcOwnFit(S,st.missing,"tram")[0];if(!c)continue;
    Q.push({t:`${dcName(v)} xin mượn trâm`,who:v,ev:"dc",evId:"dc:ask",h:`<p>${v.name} thiếu màu ${dcFamList(st.missing)} cho ${f.name}, sai cung nữ sang xin mượn ${c.w.n} của ngươi, qua tuần sau trả.</p>`,
-    opts:[{n:`Cho mượn ${c.w.n}`,fx:{},x:"",go:()=>{if(dcBorrow(v,S,c.e))try{log(`Cho ${dcName(v)} mượn ${c.w.n} dự ${f.name}.`)}catch(e){}}},
-     {n:"Khéo từ chối",fx:{},x:"",go:()=>{try{log(`Từ chối cho ${dcName(v)} mượn trâm.`)}catch(e){}}}]});break}}}
+    opts:[{n:`Cho mượn ${c.w.n}`,fx:{},x:`tốn: ${c.w.n} rời rương đến tuần sau · thành: ${dcRelW(v,BAL.dc.bor.thanks)}`,go:()=>{if(dcBorrow(v,S,c.e)){try{log(`Cho ${dcName(v)} mượn ${c.w.n} dự ${f.name}.`)}catch(e){}}else try{log(`${c.w.n} không còn trong rương, không cho ${dcName(v)} mượn được.`)}catch(e){}}},
+     {n:"Khéo từ chối",fx:{},x:`thành: ${c.w.n} vẫn ở trong rương`,go:()=>{try{log(`Từ chối cho ${dcName(v)} mượn trâm.`)}catch(e){}}}]});break}}}
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{dcWeek()}catch(e){console.error("dcWeek",e)}return r}})();
 /* ---------- the shared contest formula and the guest list (j71) ---------- */
 (function(){if(typeof SC7!=="object")return;for(const kd of Object.keys(SC7)){const o=SC7[kd];if(!o||typeof o.f!=="function"||o.f.__dc)continue;const f0=o.f;
