@@ -1557,3 +1557,4 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - SESSIONS main owns: keeper MtjP4KTg, rv MSxpxbsA (idle). Archived: rv/wk ge-map, rv kit-modal-spin, rv/wk mg-ui-rest, rv kit-rows-b KUs8C86Z. NEVER archive Đại Hy sessions.
 - WAKE: ROOT-78 trig_017FyRCFr2C8q9DGAUKzMS6G (minute 32) → next main creates its own, disables this one. Brief common: briefs/root78-common.md (copy to root79-common.md with new id + LIVE).
 - STANDBY: MAIN ROOT STANDBY session_01Rc5AsNA483VGFgtAtqERSa (TAKE OVER NOW only if create_session refused). NEXT MAIN = depth 8 = LAST: it cannot open a child → at ITS roll point it sends TAKE OVER NOW to the STANDBY (and writes a FOR MAIN line so the owner opens a fresh ROOT; standby must then pick a new standby).
+- (20/11 14:06Z) ROOT-78 opened child MAIN ROOT-79 = session_01Rc5AsMT6GWGyV9SHc2vgNi (depth 8 = LAST). ROOT-78 stops; ROOT-79 disables trig_017FyRCFr2C8q9DGAUKzMS6G.
