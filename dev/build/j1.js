@@ -33,6 +33,8 @@ const ORIGINS=[
    par = the origin it belongs to. The branch is rolled with the origin (j69, weights BAL.orig.br). Old saves with origin "bd" load through originByKey. */
 const ORIGIN_BR={};
 function originByKey(k){return ORIGINS.find(o=>o.k===k)||ORIGIN_BR[k]||null}
+/* her start arts = the identity row (origin × road) of BAL.orig.art (law 4; road "" / unknown = the origin's own row); a fresh copy, never the table */
+function originArts(k,road){try{const T=BAL.orig.art[k];if(!T)return{};return Object.assign({},(road&&T[road])||T[""]||{})}catch(e){return{}}}
 function originRoot(k){const b=ORIGIN_BR[k];return b?b.par:k}
 /* branch of origin k for a roll r in [0,1): weights BAL.orig.br[k] ({branch key: weight}); an origin without branches is itself */
 function originBrPick(k,r){try{const W=BAL.orig.br[k];if(!W)return k;const L=Object.keys(W).filter(b=>W[b]>0&&originByKey(b));const tot=L.reduce((a,b)=>a+W[b],0);

@@ -17,6 +17,9 @@ function start(){
   normAll();
   if(S.ally)allyBond(liveRivals(false));
   const s=STORY[o.k];if(s.init)s.init();
+  /* origin-arts (owner OD 20/11 ~02:05Z): her start arts + tứ đức = the row of HER identity (origin × the road STORY init just rolled, S.st.f14.road)
+     in BAL.orig.art; old saves never pass here, so they keep the arts they have (law 6c) */
+  S.vir=S.vir||{};S.virp=S.virp||{};origArtSet(S,o.k,S.st&&S.st.f14&&S.st.f14.road);/* one table BAL.orig.art → the one ladder (jbalcore origArtSet) */
   S.visit={k:"home",people:homePeople(),talked:false};S.buoi=0;rollWx();
   quiet=false;used=0;tab="act";
   const E=S.emp;

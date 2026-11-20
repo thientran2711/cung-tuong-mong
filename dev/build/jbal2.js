@@ -262,6 +262,13 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
    pop = scale of the lit / pressed target (was 1.08 / 1.14: hard to see) · ms = how long the pop + lit ring stay · glow/ring = colours · blur = glow size px ·
    pass = glow passes (shadow stacks) · ringW = ring width as a share of the target's width · dim = darkening of the UNLIT painting under a lit cue (contrast) */
 BAL.mgFx={pop:1.24,ms:300,glow:"#fff0a0",ring:"#ffffff",blur:44,pass:3,ringW:.07,dim:.18};
+/* mg-play2 (owner OD 20/11 ~08:05Z Hoa đăng «luồng ánh sáng màu vàng này quá nhạt … không có thấy đường» + «cứ tưởng là phải hứng mấy cái hoa sen»): two more
+   parts of the SAME cue kit (j82 kg82FxLane / kg82FxBad), for every board that has a path to follow or a thing to AVOID:
+   lane = opacity of the lit path's core (was a .32 gradient: hard to see) · laneEdge = width px of its two bright edges · laneDim = darkening of the board OUTSIDE
+   the path (the path reads by contrast) · laneMin = the least luminance gap (0..255) the lit path must keep over the board beside it (test mg-play2) ·
+   bad = width share of the danger ring round a thing to avoid (colour = kit --bad) · badMs = how long the hit burst stays · badShake = px the hit thing / the player's
+   piece shakes on a hit */
+Object.assign(BAL.mgFx,{lane:.62,laneEdge:3,laneDim:.34,laneMin:40,bad:.09,badMs:520,badShake:5,zone:.62});/* zone: gauge «keep it here» band alpha (kg82FxLane.zone) */
 BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timing game's right moment that the hand says «chạm» (KG82.hint: rhythm, aim), a reaction time */
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
    condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
@@ -477,22 +484,22 @@ BAL.steal={cost:{feign:{duc:4},road:{suc:5}},failSung:3,rel:15,ghen:25,
 /* ================= BALANCE CORE (review/balance-core, owner OD 16/11 23:00Z / 23:05Z / 23:08Z, 22:50Z) =================
    ONE table for every start value, ONE ladder for every art and Tứ đức course, ONE growth curve, the night-choice odds.
    orig.<k>: the start of a girl of that origin — the player AND every NPC consort (NPCs draw an origin by orig.npcW; "quan" = daughter of a
-     mid official, the usual consort, NPC-only). Ranges [lo,hi] roll evenly; th / hh = Thái hậu / Hoàng hậu → her at entry (the court mood adjusts it after); art / vir = course points (art ladder below) at entry, 18 years old.
+     mid official, the usual consort, NPC-only). Ranges [lo,hi] roll evenly; th / hh = Thái hậu / Hoàng hậu → her at entry (the court mood adjusts it after). Start ARTS / tứ đức are NOT here: ONE table BAL.orig.art (jbal.js, origin × story road, bậc; owner OD 20/11 ~02:05Z, law 4/14), read by origSet / origArtSet (jbalcore) at the floor points of that bậc.
      Bạc / Danh / Sủng / rank keep the approved origin odds (OD:L19/L43, owner OD:L1218: old origins are not re-tested);
-     Sắc / Tài / Tâm cơ / Đức / Sức / arts fit the origin (history check: dev/handover/reports/balance-core.md §1).
-   NPCs: their own rank adds what years in the palace give (npc: danh/bac per rank, art points per rank to their best courses). */
+     Sắc / Tài / Tâm cơ / Đức / Sức fit the origin (history check: dev/handover/reports/balance-core.md §1).
+   NPCs: their own rank adds what years in the palace give (npc: danh/bac per rank, art points per rank to their best courses of their BAL.orig.art row). */
 BAL.start={
- tt:  {sac:[45,70],tai:[35,50],tamco:[20,30],duc:40,danh:33,sung:8,bac:210,suc:75,th:5,hh:-15,art:{cam:22,thi:18,hoa:14,ky:10},vir:{dung:12,ngon:12}},
- dtq: {sac:[45,70],tai:[15,30],tamco:[10,20],duc:30,danh:23,sung:8,bac:140,suc:100,th:0,hh:0,art:{vu:22,ky:8,y:6},vir:{}},
- muoi:{sac:[50,75],tai:[20,35],tamco:[20,30],duc:30,danh:8,sung:8,bac:380,suc:80,th:-5,hh:0,art:{cam:12,nau:16,theu:10},vir:{cong:12}},
- cn:  {sac:[55,80],tai:[10,25],tamco:[30,40],duc:30,danh:14,sung:28,bac:70,suc:90,th:5,hh:0,art:{y:16,nau:16,theu:14},vir:{cong:12,ngon:10}},
- nc:  {sac:[55,80],tai:[20,35],tamco:[15,25],duc:30,danh:38,sung:8,bac:180,suc:85,th:-15,hh:0,art:{vu:24,y:16,cam:10},vir:{}},
- bd:  {sac:[50,75],tai:[10,20],tamco:[15,25],duc:30,danh:23,sung:8,bac:150,suc:100,th:-20,hh:0,art:{vu:22,nau:10,y:8},vir:{}},
- td:  {sac:[45,70],tai:[30,45],tamco:[30,40],duc:30,danh:14,sung:18,bac:130,suc:75,th:0,hh:0,art:{thi:18,cam:12,theu:12},vir:{}},
- ch:  {sac:[45,70],tai:[25,40],tamco:[20,30],duc:40,danh:28,sung:8,bac:160,suc:80,th:40,hh:-5,art:{hoa:16,cam:12,theu:10},vir:{dung:12,hanh:10}},
- thd: {sac:[45,70],tai:[40,55],tamco:[15,25],duc:45,danh:8,sung:8,bac:80,suc:75,th:0,hh:5,art:{thi:26,ky:16,hoa:10,theu:8,nau:8},vir:{hanh:12}},
- cnv: {sac:[45,70],tai:[10,25],tamco:[25,35],duc:30,danh:2,sung:0,bac:8,suc:85,th:0,hh:0,art:{theu:12,nau:12},vir:{cong:12}},
- quan:{sac:[45,75],tai:[25,40],tamco:[15,30],duc:40,danh:12,sung:8,bac:90,suc:80,th:0,hh:0,art:{cam:14,thi:12,theu:12,hoa:8},vir:{dung:10}},
+ tt:  {sac:[45,70],tai:[35,50],tamco:[20,30],duc:40,danh:33,sung:8,bac:210,suc:75,th:5,hh:-15},
+ dtq: {sac:[45,70],tai:[15,30],tamco:[10,20],duc:30,danh:23,sung:8,bac:140,suc:100,th:0,hh:0},
+ muoi:{sac:[50,75],tai:[20,35],tamco:[20,30],duc:30,danh:8,sung:8,bac:380,suc:80,th:-5,hh:0},
+ cn:  {sac:[55,80],tai:[10,25],tamco:[30,40],duc:30,danh:14,sung:28,bac:70,suc:90,th:5,hh:0},
+ nc:  {sac:[55,80],tai:[20,35],tamco:[15,25],duc:30,danh:38,sung:8,bac:180,suc:85,th:-15,hh:0},
+ bd:  {sac:[50,75],tai:[10,20],tamco:[15,25],duc:30,danh:23,sung:8,bac:150,suc:100,th:-20,hh:0},
+ td:  {sac:[45,70],tai:[30,45],tamco:[30,40],duc:30,danh:14,sung:18,bac:130,suc:75,th:0,hh:0},
+ ch:  {sac:[45,70],tai:[25,40],tamco:[20,30],duc:40,danh:28,sung:8,bac:160,suc:80,th:40,hh:-5},
+ thd: {sac:[45,70],tai:[40,55],tamco:[15,25],duc:45,danh:8,sung:8,bac:80,suc:75,th:0,hh:5},
+ cnv: {sac:[45,70],tai:[10,25],tamco:[25,35],duc:30,danh:2,sung:0,bac:8,suc:85,th:0,hh:0},
+ quan:{sac:[45,75],tai:[25,40],tamco:[15,30],duc:40,danh:12,sung:8,bac:90,suc:80,th:0,hh:0},
  npcW:{quan:40,tt:8,dtq:8,muoi:10,cn:6,ch:3,thd:10,td:3,nc:1,bd:1,cnv:0},
  npc:{danh:8,bac:20,art:4,mal:6,duc:10,study:60,focus:4}  /* per NPC rank: Danh +8, Bạc +20, art points +4 to her two best courses; malice moves Tâm cơ ±(malice−40)/mal and Đức ∓(malice−40)/2, duc = Đức of her years of palace conduct (keeps NPC Đức ≈ the old mean 48);
    study = % a month she takes a lesson (j85 npcStudy, beside j8 npcMonthly), focus = weight of her best art in that pick */
@@ -1148,18 +1155,33 @@ Object.assign(BAL.ag.kh2.rd,{see:1,go:1,cap:6,qMax:40});Object.assign(BAL.ag.kh2
         an NPC's slap tier = one draw from it at the NPC's own board (mgTier "tat", her/his rank and Vũ); an NPC dodges a slap at BAL.slap.dodgeOdds[tier]
    study  1 = an NPC's lesson gains the player's points from one draw (lessonPts / tdPoints, j85 npcStudyDo); 0 = the old flat 1 / 2–3 */
 Object.assign(BAL.ag,{mg2:{on:1,med:[[-2,8.9],[0,7.5],[2,5.8]],w:8,tat:{e:[0,2,5],w:[[32,54,15],[18,58,24],[2,50,49]]},study:1}});
-/* AG-ALL-2d hand ceiling (owner OD 17/11 ~16:00Z L1640; jmgt mgHand): lo / hi = the clumsiest / best hand (graded play reached on a matching board;
-   hi − w/2 = 7.5 = the skilled human bot's median at the matching board, dev/PROGRESS_mg-balance.md); w = how far under her ceiling a play falls (mean of 3 draws) */
-/* skew (owner ~16:20Z (f): strong NPC hands RARE, weak hands clearly WORSE than her): hand = lo + (hi − lo)·b^skew, b = mean of 2 draws — median hand ≈ 5
-   (plays ≈ 3 on a matching board vs the skilled human 7.5), about 2 % of hands reach 8.5+. Interim mg-bots bands until the owner-only calibration writes them. */
-BAL.ag.mg2.hand={on:1,lo:3,hi:9.5,w:4,skew:1.6};
+/* AG-ALL-2d hand ceiling (owner OD 17/11 ~16:00Z L1640; jmgt mgHand) — FAIR SPREAD (owner OD 20/11 ~01:10Z: "đa số npc chơi dở hơn tôi, tôi thấy không
+   fair" → "Duyệt cả 3 ý, làm luôn đi"): w = how far under her ceiling a play falls (mean of 3 draws; average play = hand − w/2);
+   BELL CURVE (owner OD 20/11 ~06:40Z, verbatim: "ở ngoài đời mình có thật sự là mình sẽ gặp 1/3 những người mình gặp là sẽ là những người giỏi, hoặc là 1/3
+        người mình gặp là những người bình thường, hoặc 1/3 người gặp là những người dở hay không á. Cái tỷ lệ này đã đúng hay chưa?" → MAIN ROOT-74 bell-curve
+        proposal; OWNER OK OD ~07:15Z "Ok, làm theo mấy cái ý mà bạn nói ở trên đi"; overwrites the thirds of OD ~01:18Z): every NPC's average play in a kind
+        (her hand − w/2) is one hashed draw of Normal(ctr, sd) (clamped ± zMax·sd; jmgt mgZ / mgHand, jmgcal mgCalBand) — the real adult population, NOT centred on her;
+   ctr  = the average ADULT play on the fitted board, per kind (key = kind; "" = every kind not listed): 7 (OD ~07:20Z via MAIN: cal-p2 fits each board so the
+          average adult scores ≈ 7);
+   sd   = the spread of adult play per skill group (grp): c careful / strategy 1.4, a artistic 1.5, r reflex 1.7 (reaction / timing varies most between adults);
+          "" = a kind in no group;
+   eqZ  = the "about equal to her" band, ± eqZ·sd round HER calibrated play (BAL.ag.mg2.cal.k b) — only for reading her place: better / equal / worse FALL OUT
+          of where her b sits on the curve (her at the top 15 % → ≈ 7 / 20 / 73 %, at the median → ≈ 37 / 33 / 30 %; jmgcal mgCalShare);
+   zMax = the curve tails: a hand lies within ± zMax·sd of the centre (jmgt mgZ clamp, mgCalBand lo / hi);
+   slapZ = the slap scale in sd: an NPC "tat" hand ± slapZ·sd from the centre lands the heavy blow least / most (jslap slapNpcDraw via mgCalBand far);
+   grp  = the skill group of every mini-game kind (KG82_KIND): c fine hand, patience, memory, logic · a timing, taste, craft · r anticipation, aim, balance;
+   art  = hand points per art level of that kind above / below the player's own level (a trained NPC clearly beats her, an untrained one is weak);
+        UPBRINGING / palace shift of the curve per NPC (owner OD 20/11 ~01:50Z: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà
+        nghèo mới yếu"; OD ~02:05Z per-identity table): a person's art level for this lift (and her board) = max(her own, the start bậc of her identity
+        (origin × road) in BAL.orig.art, jbal.js) (jmgt mgOrgLv); the bậc are tuned there.
+        Rank gives NO skill: law 5 comes from her harder board as she climbs and from who she meets. */
+BAL.ag.mg2.hand={on:1,w:4,art:.2,ctr:{"":7},sd:{c:1.4,a:1.5,r:1.7,"":1.5},eqZ:.43,zMax:3,slapZ:2,
+ grp:{c:["co","tho","doi","doden","ve","theu","kim","kinh","may","hoadien","td_cong","td_hanh","le","tc","xa","thq"],a:["dan","hat","hoa","mua","banh","huong"],r:["dauho","ban","tat","ne","td_ngon","td_dung","chai","duho","den"]}};
 /* AG-ALL-2d2 OWNER CALIBRATION (owner OD 17/11 ~16:20Z (f) + ~16:40Z option 1: "chỉ có tôi test và cái số của tôi dùng chung cho mọi người"; jmgcal):
    d  = the board gaps of the test rounds, easy → hard (one round each; 5 rounds, rising difficulty)
-   up / dn = how far above / below HER play the best / clumsiest NPC hand plays on a matching board (hand band hi = b + w/2 + up, lo = b + w/2 − dn);
-   min / max = hand floor / ceiling (max = the interim hand hi: never a perfect player)
    k  = her calibrated base per mini-game kind {b: her graded play on a matching board, n: rounds, at: mm/dd/yyyy}, written from her «CTM-CAL …» code by
-        dev/tools/mgcal_apply.py — ONE base for every player; a kind not in k keeps the default band above */
-BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],up:1,dn:4,min:1,max:9.5,k:{dan:{b:8.3,n:5,at:"11/19/2026"},co:{b:9.7,n:5,at:"11/19/2026"},ve:{b:9.5,n:5,at:"11/19/2026"},doi:{b:9.1,n:5,at:"11/19/2026"},hoa:{b:7.9,n:5,at:"11/19/2026"},hat:{b:8.1,n:5,at:"11/19/2026"},tho:{b:8.7,n:5,at:"11/19/2026"},theu:{b:9.7,n:5,at:"11/19/2026"},ban:{b:9.1,n:5,at:"11/19/2026"},kim:{b:7.7,n:5,at:"11/19/2026"},doden:{b:9.9,n:5,at:"11/19/2026"},tat:{b:4.9,n:5,at:"11/19/2026"},ne:{b:4.1,n:5,at:"11/19/2026"},mua:{b:6.3,n:5,at:"11/19/2026"},banh:{b:6.1,n:5,at:"11/19/2026"},huong:{b:4.5,n:5,at:"11/19/2026"},td_cong:{b:10.0,n:5,at:"11/20/2026"},td_ngon:{b:6.7,n:5,at:"11/20/2026"},td_hanh:{b:9.3,n:5,at:"11/20/2026"},le:{b:9.9,n:5,at:"11/20/2026"},tc:{b:9.5,n:5,at:"11/20/2026"},xa:{b:9.5,n:5,at:"11/20/2026"},thq:{b:8.5,n:5,at:"11/20/2026"},duho:{b:7.9,n:5,at:"11/20/2026"},kinh:{b:9.9,n:5,at:"11/20/2026"},may:{b:10.0,n:5,at:"11/20/2026"}}};
+        dev/tools/mgcal_apply.py — ONE base for every player; it places HER on that kind's adult bell curve (BAL.ag.mg2.hand ctr / sd / eqZ above) */
+BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],k:{dan:{b:8.3,n:5,at:"11/19/2026"},co:{b:9.7,n:5,at:"11/19/2026"},ve:{b:9.5,n:5,at:"11/19/2026"},doi:{b:9.1,n:5,at:"11/19/2026"},hoa:{b:7.9,n:5,at:"11/19/2026"},hat:{b:8.1,n:5,at:"11/19/2026"},tho:{b:8.7,n:5,at:"11/19/2026"},theu:{b:9.7,n:5,at:"11/19/2026"},ban:{b:9.1,n:5,at:"11/19/2026"},kim:{b:7.7,n:5,at:"11/19/2026"},doden:{b:9.9,n:5,at:"11/19/2026"},tat:{b:4.9,n:5,at:"11/19/2026"},ne:{b:4.1,n:5,at:"11/19/2026"},mua:{b:6.3,n:5,at:"11/19/2026"},banh:{b:6.1,n:5,at:"11/19/2026"},huong:{b:4.5,n:5,at:"11/19/2026"},td_cong:{b:10.0,n:5,at:"11/20/2026"},td_ngon:{b:6.7,n:5,at:"11/20/2026"},td_hanh:{b:9.3,n:5,at:"11/20/2026"},le:{b:9.9,n:5,at:"11/20/2026"},tc:{b:9.5,n:5,at:"11/20/2026"},xa:{b:9.5,n:5,at:"11/20/2026"},thq:{b:8.5,n:5,at:"11/20/2026"},duho:{b:7.9,n:5,at:"11/20/2026"},kinh:{b:9.9,n:5,at:"11/20/2026"},may:{b:10.0,n:5,at:"11/20/2026"}}};
 /* j71 odds words under mg2: the same draw (mgNpcRaw, seeded by the plan) for every entrant, her included, on this contest's board (j71 mgX7) */
 (function(){if(typeof cOdds7!=="function"||typeof fxOdds7!=="function")return;const c0=cOdds7,f0=fxOdds7;
  const win=(E,base,kindAt,mi,r)=>{let w=0;const N=500;for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+mgNpcRaw(kindAt(i),E[i],{rnd:r})/10*J71.luck;if(x>b){b=x;bi=i}}if(bi===mi)w++}return oddsCl(Math.round(100*w/N))};
