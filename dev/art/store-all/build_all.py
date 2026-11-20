@@ -528,7 +528,7 @@ def _build_season(person,rank,age="a18",season=None):
     a36=build(person,rank,"a36")[1] if rank<=3 else None
     S0,S,add=build(person,rank,age,_season=season); S,notes=winter_g28.season(S,rank,a36,season)
     _m=b26_fit_ok(person,rank,age,season)
-    if _m and len(S)>10000: S,notes=b26_fit(S,notes,angle=False,whole=_m=='whole')   # B26 length: winter_g28.season already dropped ANGLE
+    if _m and len(S)>10000: S,notes=b26_fit(S,notes,angle=False,whole=_m=='whole',rank=_c2rank(rank))   # B26 length: winter_g28.season already dropped ANGLE
     return S0,S,add+notes
 
 def _kc_drawn(person):   # B8 (BW3): same table + rule as build.py kc_drawn (dev/art/KC_REFS.json m09_ok yes + real face words)
@@ -546,10 +546,12 @@ def eyes(S):
 def build(person,rank,age="a18",_season=None):
     S0,S,add=_build(person,rank,age); S=eyes(S)
     _m=b26_fit_ok(person,rank,age,_season)
-    if _m and len(S)>10000: S,add=b26_fit(S,add,angle=True,whole=_m=='whole')
+    if _m and len(S)>10000: S,add=b26_fit(S,add,angle=True,whole=_m=='whole',rank=_c2rank(rank))
     return S0,S,add
 # B26FAB2 (Foreman C #5 decision 1, 20/11): length step t1-t6, CUT WHILE > 10 000 (no longer all-or-nothing), only for cells that were <= 10 000 at HEAD 7007acc
 # (before B26/JOB 2/JOB 3); the cells already over then are listed in dev/art/b26/HEAD_OVER10K.json and are never cut. Logged ART_RULES_CONFLICTS.md item 17(d).
+def _c2rank(rank):   # B26FAB4: t7 gets the LEN_CUTS2 cuts only in the HQP SHORT pass (the long-collar pass stays as before, so every t7 cell that fitted stays the same)
+    return None if rank==7 and not HQP_SHORT else rank
 _HEAD_OVER=None
 def b26_fit_ok(person,rank,age,season):
     """-> 'while' (cut while > 10 000), 'whole' (cell over at HEAD, t4/t5: the JOB 1 all-or-nothing fit kept as it was, so nothing that fitted before goes over again), or False."""
@@ -559,7 +561,7 @@ def b26_fit_ok(person,rank,age,season):
         import json as _j; _HEAD_OVER=set(_j.load(open(os.path.join(ART,"b26","HEAD_OVER10K.json"),encoding="utf-8"))["cells"])
     if not ({f"{x}|{rank}|{age}|{season}" for x in (person,ALIAS.get(person,person))} & _HEAD_OVER): return 'while'
     return 'whole' if rank in (4,5) else False
-def b26_fit(S,add,angle,whole=False):
+def b26_fit(S,add,angle,whole=False,rank=None):
     """B26 length (owner Lượt 1283 đoạn sentence; JOB 2/3 growth): t1-t6, (1) drop the ANGLE sentence (owner ~15:39Z length rule, as winter_g28.season) when
     angle=True, (2) master_common.doan_fit master-repeat store clauses (Foreman C #5 decision (a)), each only while still > 10 000."""
     sys.path.insert(0,ART); import winter_g28 as _W, master_common as _MC
@@ -567,7 +569,7 @@ def b26_fit(S,add,angle,whole=False):
     m=_W.ANGLE_RX.search(T) if angle else None
     if m: T=T.replace(m.group(0)+" ","",1); notes.append("ANGLE dropped (length, B26)")
     if len(T)>10000:
-        T,_c=_MC.doan_fit(T,low=not whole); notes+=[f"B26 length cut (repeats {x})" for x in _c]
+        T,_c=_MC.doan_fit(T,low=not whole,rank=None if whole else rank); notes+=[f"B26 length cut (repeats {x})" for x in _c]
     if whole and len(T)>10000: return S,add   # JOB 1 all-or-nothing (cells already over at HEAD)
     return T,add+notes
 # HQP COLLAR (owner Lượt 1384 via Foreman C #7, 20/11: "Áp dụng Hoàng Quý Phi cho cái trang phục hiện tại luôn"): t7 current outfit = the LAYERED NECKLINE block

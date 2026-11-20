@@ -1037,7 +1037,9 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
         if not (req or conf): continue
         if e.get("season") and not _winter: continue   # SEASON: winter-only sentence (W01-W05)
         if e.get("not_season") and _winter: continue   # SEASON: replaced in winter by its W twin
-        if e["id"] == "S24" and len(master_common.doan_cuts_made(text,scope)) == len(master_common.DOAN_LEN_CUTS): continue   # B26 length exception: S24 repeats master M13 (cut last, only when needed)
+        if e["id"] in ("S24", "S16", "S19"):   # B26 length exception: S24 repeats master M13 (cut 5); B26FAB4: S16 / S19 tails cut by LEN_CUTS2 N1 / N2 (same-prompt repeats), only when needed
+            _made = [x[0] for x in master_common.doan_cuts_made(text,scope)]; _k = {"S24": master_common.DOAN_LEN_CUTS[4][0], "S16": master_common.LEN_CUTS2[0][0], "S19": master_common.LEN_CUTS2[2][0]}[e["id"]]
+            if _k in _made: continue
         if skip_store and e.get("store") and not e.get("season"): continue   # already enforced by the STORE part (same prompt, store args)
         ages = (e.get("ages") or "all").split()
         if age and "all" not in ages and age not in ages: continue

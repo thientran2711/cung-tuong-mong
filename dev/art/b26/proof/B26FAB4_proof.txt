@@ -1,0 +1,24 @@
+# B26FAB4 proof: base = 9f833ae dump (dump.py, all 12 410 cells), new = B26FAB4 working tree; python3 dev/art/b26/proof/cmp8.py base.json new.json
+changed cells: 194
+  t5 a51 None: 29
+  t5 a51 dong: 32
+  t5 a65 None: 35
+  t5 a65 dong: 79
+  t7 a18 dong: 4
+  t7 a36 dong: 15
+cuts used:
+  t5 N1: 32
+  t5 N1+ITEM: 26
+  t5 N1+ITEM+N2: 29
+  t5 N1+ITEM+N2+E1: 30
+  t5 N1+ITEM+N2+E1+E2: 58
+  t7 N1: 5
+  t7 N1+N2: 14
+bad: 0 []
+changed cells that were <= 10000 in base (must be 0): 0
+cells > 10000 now that fitted at HEAD 7007acc (not in HEAD_OVER10K):
+  t5 a51 dong (9): c04 +22, c08 +43, c09 +31, c14 +69, c20 +5, c25 +33, c29 +47, c30 +16, m11 +116
+  t5 a65 dong (41): m01 +80, m03 +109, m05 +91, m06 +87, m07 +61, m08 +82, m10 +97, m13 +36, m14 +116, m15 +106, m16 +78, m18 +72, m19 +97, m20 +60, m21 +66, m22 +66, m24 +94, m26 +58, m27 +60, m28 +43, m29 +83, m30 +59, m32 +31, m33 +76, m34 +44, m35 +103, m36 +116, m38 +18, m39 +100, m40 +67, m41 +94, m42 +12, m43 +57, m44 +11, m45 +65, m46 +4, m48 +45, m49 +124, m50 +93, m51 +41, m52 +22
+  t7 a36 dong (1): s45 +11
+  tnude a51 None (1): c06 +414
+  tnude a65 None (1): c06 +258

@@ -64,28 +64,54 @@ def _norm1(s): return re.sub(r"\s+", " ", s).strip()
 LEN_SCOPES = {f"{k}{n}" for k in ("tp", "pr") for n in range(1, 9)}   # B26FAB3 (Foreman C #6, 20/11): + tp7/tp8 pr7/pr8 (t7/t8 F2 embroidery names pushed 2 cells over)
 
 
-def doan_fit(text, low=False):
-    """-> (text, list of cut ids). Only for a t4/t5 DOAN prompt (or any t1-t6 prompt when low=True) over LIMIT; cuts in order, each only while still over LIMIT."""
+# B26FAB4 (Foreman C #8 brief b26fab4-L1404, 20/11; t5 = Foreman C #7 decision, owner L1379 "Thôi, phi ok rồi" = cape text verbatim): more cuts AFTER the 5 above,
+# same cut-while / prefix / last-cut-needed rules, ONLY for cells that fitted at HEAD 7007acc ('while' cells, build_all.b26_fit_ok) and only at the ranks listed.
+# Each one only drops words another sentence of the SAME prompt already says (N1/N2 = check_store S16/S19 tails; ITEM = S16 'item colour' vs HELD ITEM COLOUR law).
+# (exact store words, what stays, what it repeats, ranks). ITEM works on the N1 result (chained).
+LEN_CUTS2 = [
+ (", and the hand really grips it; the whole face fully visible with the head up toward the viewer, eyes open, lips closed, never looking down, nothing covering the face.",
+  "; the head up toward the viewer, never looking down, nothing covering the face.", "N1 (S16 tail: 'EXACTLY ONE held item, the hand really gripping it' + 'The whole face clearly visible, eyes fully open' + 'MOUTH FULLY CLOSED')", (5, 7)),
+ ("The item is in a contrasting colour, not the robe colour; the head up toward the viewer", "The head up toward the viewer", "ITEM (HELD ITEM COLOUR law)", (5,)),
+ ("Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe, only slipper toe tips peeking under the hem, no train, no cup, nothing covering the face.",
+  "Luminous smooth porcelain skin, no flower mark, floor-length robe, only slipper toe tips peeking under the hem, no train.", "N2 (S19 tail: 'Bare clean forehead, no forehead mark' + 'NOTHING on the forehead' + 'eyes open' + 'no cup' + 'nothing covering the face')", (5, 7)),
+ ("(medium-light tone): her own colours in the DEEPER, DARKER mature shades described above, never bright, never pastel; ", "(medium-light tone); ", "E1 (elder COLOUR RULE: 'all colours in the DEEPER, DARKER mature shades described above (... never bright, never pastel ...)')", (5,)),
+ ("; gold only as thin accents.", ".", "E2 ('gold only as embroidery accents' + TWO-COLOUR 'gold or silver only as thin accents')", (5,)),
+]
+
+
+def len_cuts(rank=None):
+    """-> the (old, new, mid) list for a prompt of this rank: DOAN_LEN_CUTS + the LEN_CUTS2 entries of that rank (rank None = DOAN_LEN_CUTS only)."""
+    return DOAN_LEN_CUTS + [(o, n, m) for o, n, m, r in LEN_CUTS2 if rank in r]
+
+
+def _scope_rank(scope):
+    m = re.fullmatch(r"(?:tp|pr)(\d)", scope or ""); return int(m.group(1)) if m else None
+
+
+def doan_fit(text, low=False, rank=None):
+    """-> (text, list of cut ids). Only for a t4/t5 DOAN prompt (or any t1-t8 prompt when low=True) over LIMIT; cuts in order, each only while still over LIMIT.
+    rank (B26FAB4) = also the LEN_CUTS2 cuts of that rank (the caller passes it only for 'while' cells)."""
     cuts = []
     if DOAN not in text and not low: return text, cuts
-    for old, new, mid in DOAN_LEN_CUTS:
+    for old, new, mid in len_cuts(rank):
         if len(text) <= LIMIT: break
-        if old in text: text = text.replace(old, new, 1); cuts.append(mid)
+        if old in text: text = text.replace(old, new, 1); cuts.append(mid.split(" ")[0])
     return text, cuts
 
 
 def doan_cuts_made(text, scope=None):
-    """-> the (old, new) pairs of DOAN_LEN_CUTS this prompt shows cut, when allowed (t4/t5 DOAN prompt or scope in LEN_SCOPES, prefix rule, last cut needed), else []."""
+    """-> the (old, new) pairs of len_cuts(rank of scope) this prompt shows cut, when allowed (t4/t5 DOAN prompt or scope in LEN_SCOPES, prefix rule, last cut needed), else []."""
     t = _norm1(text)
     if DOAN not in t and scope not in LEN_SCOPES: return []
+    L = len_cuts(_scope_rank(scope))
     made = []
-    for old, new, _ in DOAN_LEN_CUTS:
+    for i, (old, new, _) in enumerate(L):
         o, n = _norm1(old), _norm1(new)
         if o in t: break
-        if n and n not in t: break
+        if n and n not in t and not (i + 1 < len(L) and _norm1(L[i + 1][1]) in t and _norm1(L[i + 1][0]) not in t): break   # chained (ITEM on the N1 result): the next cut was made on this one's result
         made.append((old, new))
     if not made: return []
-    for old, new, _ in DOAN_LEN_CUTS[len(made):]:
+    for old, new, _ in L[len(made):]:
         if _norm1(old) not in t: return []   # a later clause missing too = not a prefix
     if len(t) + len(_norm1(made[-1][0])) - len(_norm1(made[-1][1])) <= LIMIT: return []   # the last cut was not needed
     return made

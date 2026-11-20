@@ -1,0 +1,35 @@
+FAIL c11|5|a51|None cuts=N1 len=9927 ['  FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): … in image 1 (her first reference): soft pink-grey silk like #D6BFC3 i…', 'APPROVED CHECK FAIL /tmp/tmph3fddc7o.txt scope tp5', 'STORE CHECK FAIL /tmp/tmph3fddc7o.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS c13|5|a51|None cuts=N1 len=9955 
+PASS m32|5|a51|None cuts=N1+N2 len=10000 
+PASS m42|5|a51|None cuts=N1+N2 len=9979 
+PASS m49|5|a51|None cuts=N1+N2+E1 len=9990 
+PASS m06|5|a51|None cuts=N1+N2+E1 len=9954 
+PASS c03|5|a51|dong cuts=N1+N2+E1 len=9976 
+FAIL c32|5|a51|dong cuts=N1+N2+E1 len=9917 ['  FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): …our ivory and the SECONDARY colour soft grey-blue, the secondary clea…', 'APPROVED CHECK FAIL /tmp/tmp19r6wivc.txt scope tp5', 'STORE CHECK FAIL /tmp/tmp19r6wivc.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS c12|5|a51|dong cuts=N1+N2+E1+E2 len=9994 
+PASS c13|5|a51|dong cuts=N1+N2+E1+E2 len=9991 
+FAIL m11|5|a51|dong cuts=N1+N2+E1+E2 len=10116 ['FAIL LEN TOO LONG: prompt is 10116 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmp_5s_gq60.txt scope tp5', 'STORE CHECK FAIL /tmp/tmp_5s_gq60.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL c20|5|a51|dong cuts=N1+N2+E1+E2 len=10005 ['FAIL LEN TOO LONG: prompt is 10005 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmp7gu55y_l.txt scope tp5', 'STORE CHECK FAIL /tmp/tmp7gu55y_l.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS m46|5|a65|None cuts=N1 len=9968 
+PASS m45|5|a65|None cuts=N1 len=9971 
+PASS m14|5|a65|None cuts=N1+N2 len=9930 
+PASS m19|5|a65|None cuts=N1+N2 len=9911 
+PASS c23|5|a65|dong cuts=N1 len=9982 
+FAIL c32|5|a65|dong cuts=N1 len=9972 ['  FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): …our ivory and the SECONDARY colour soft grey-blue, the secondary clea…', 'APPROVED CHECK FAIL /tmp/tmps_zeqmwp.txt scope tp5', 'STORE CHECK FAIL /tmp/tmps_zeqmwp.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS c16|5|a65|dong cuts=N1+N2 len=9915 
+PASS c12|5|a65|dong cuts=N1+N2 len=9918 
+PASS p02|5|a65|dong cuts=N1+N2+E1 len=9995 
+PASS c14|5|a65|dong cuts=N1+N2+E1 len=9950 
+PASS m09|5|a65|dong cuts=N1+N2+E1+E2 len=9990 
+PASS m11|5|a65|dong cuts=N1+N2+E1+E2 len=9995 
+FAIL m20|5|a65|dong cuts=N1+N2+E1+E2 len=10060 ['FAIL LEN TOO LONG: prompt is 10060 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpxfx69j8f.txt scope tp5', 'STORE CHECK FAIL /tmp/tmpxfx69j8f.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL m03|5|a65|dong cuts=N1+N2+E1+E2 len=10109 ['FAIL LEN TOO LONG: prompt is 10109 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpqwxy863r.txt scope tp5', 'STORE CHECK FAIL /tmp/tmpqwxy863r.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS s42|7|a18|dong cuts=N1 len=9975 
+PASS s58|7|a18|dong cuts=N1+N2 len=9954 
+PASS s36|7|a18|dong cuts=N1+N2 len=9931 
+PASS s42|7|a36|dong cuts=N1 len=9981 
+FAIL s61|7|a36|dong cuts=N1 len=9946 ['FAIL F16 NOFRUIT: fruit in a held item (owner Lượt 1052/1054/1058: nobody holds fruit, any rank, any age): …a colour family clearly different from BOTH her robe colour persimmon and her secondary colour deep…', 'APPROVED CHECK FAIL /tmp/tmpvoffrhor.txt scope tp7', 'STORE CHECK FAIL /tmp/tmpvoffrhor.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS s43|7|a36|dong cuts=N1+N2 len=9948 
+PASS s44|7|a36|dong cuts=N1+N2 len=9992 
+FAIL s45|7|a36|dong cuts=N1+N2 len=10011 ['FAIL LEN TOO LONG: prompt is 10011 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmp12v3mn7o.txt scope tp7', 'STORE CHECK FAIL /tmp/tmp12v3mn7o.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+gate (ok, over10k): {(False, False): 4, (True, False): 25, (False, True): 5}
