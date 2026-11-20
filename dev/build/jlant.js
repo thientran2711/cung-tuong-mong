@@ -31,7 +31,7 @@ function lmDraw(g,cx,cy,w,h,shape,col,lit,st,sway){const C=LM_COL[col];g.save();
  g.strokeStyle=C[0];g.lineWidth=2;g.beginPath();g.moveTo(0,by+bh*.97+5);g.lineTo(0,by+bh*.97+h*.16);g.stroke();g.restore()}
 function lmShuf(a){return kg82Shuf(a.slice())}
 function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lantern.short.h?BAL.lantern.short.min:0),{g,W,H}=C;const tier=lmTier(env),B=BAL.lantern,LIM=B.lim[tier],IDLE=B.idle[tier];
- let rd=-1,pts=0,R=null,t0=0,tAct=0,done=false,wait=0;const pops=[];const hb=k91Btns(box,[["k92hint","Gợi ý","bớt một ít phần"]]);
+ let rd=-1,pts=0,R=null,t0=0,tAct=0,done=false,wait=0;const pops=[];const hb=k91Btns(box,[["k92hint","?","","Gợi ý: bớt một ít phần"]]);
  const dm=k91DemoCard(box,"doden2",{title:"CÁCH CHƠI: THẮP ĐÈN",done:()=>{hb.hidden=false;t0=tAct=performance.now();setTimeout(fit,50)},
   lines:["Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn trên màn.","Hồi 1: chạm mọi chiếc đèn giống đèn mẫu (cùng dáng, cùng màu). Hồi 2: chạm để thắp đèn cho giống hình mẫu. Hồi 3: chạm đèn theo đúng thứ tự dải mẫu.","Chạm nhầm thì đèn tối đi, chạm lại. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."]});
  if(dm)hb.hidden=true;
@@ -80,15 +80,15 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lanter
   g.fillStyle="#fff1d0";g.font=k91F(700,Math.max(12,Math.min(15,W/28)),1);g.textAlign="center";g.textBaseline="alphabetic";
   if(R.type===0){/* sample card, left */
    const cw=Math.min(W*.3,tz*1.0);k91RR(g,10,8,cw,tz-12,10);g.fillStyle="rgba(255,250,236,.92)";g.fill();g.strokeStyle=K91C.hair;g.lineWidth=2;g.stroke();
-   lmDraw(g,10+cw/2,8+(tz-12)*.52,cw*.55,(tz-12)*.62,R.samp.s,R.samp.c,true,"n",sw);g.fillStyle="#5a3a0c";g.font=k91F(700,12,1);g.textAlign="center";g.fillText("Đèn mẫu",10+cw/2,tz-8);
-   g.fillStyle="#fff1d0";g.font=k91F(700,Math.max(12,Math.min(15,W/28)),1);g.textAlign="left";kg82Lbl(g,TXT[0],cw+22,tz*.4,W-cw-30,true);g.font=k91F(600,12,1);kg82Lbl(g,`Đã thấy ${R.found}/${R.need} chiếc`,cw+22,tz*.4+20,W-cw-30,true)}
+   lmDraw(g,10+cw/2,8+(tz-12)*.52,cw*.55,(tz-12)*.62,R.samp.s,R.samp.c,true,"n",sw);g.fillStyle="#5a3a0c";g.font=k91F(700,12,1);g.textAlign="center";
+   g.fillStyle="#fff1d0";g.font=k91F(700,Math.max(12,Math.min(15,W/28)),1);g.textAlign="left";kg82Lbl(g,`${R.found}/${R.need}`,cw+22,tz*.4,W-cw-30,true)}
   else if(R.type===1){/* sample grid, right */
    const m=G.m,x0=m[0].x-4,y0=m[0].y-4,mw=m[0].w*R.cols+8,mh=m[0].h*R.rows+8;k91RR(g,x0,y0,mw,mh,8);g.fillStyle="rgba(255,250,236,.9)";g.fill();g.strokeStyle=K91C.hair;g.lineWidth=2;g.stroke();
    m.forEach((c,i)=>{const [w,h]=lw(c);lmDraw(g,c.x+c.w/2,c.y+c.h*.5,w*.8,h*.8,R.sc,1,!!R.T[i],R.T[i]?"n":"off",0)});
-   g.fillStyle="#fff1d0";g.font=k91F(700,Math.max(12,Math.min(15,W/28)),1);g.textAlign="left";kg82Lbl(g,TXT[1],12,tz*.42,x0-16,true)}
+   g.fillStyle="#fff1d0";g.font=k91F(700,Math.max(12,Math.min(15,W/28)),1);g.textAlign="left";}
   else{/* sample string */
    G.s.forEach((c,i)=>{const [w,h]=lw({w:c.w,h:c.h});const lit=i<R.k;lmDraw(g,c.x+c.w/2,c.y+c.h*.55,w*.78,h*.78,R.S[i].s,R.S[i].c,lit,"n",sw);if(i===R.k&&!R.fin){g.save();g.globalAlpha=.55+.45*Math.sin(now/170);g.strokeStyle="#e0a526";g.lineWidth=3;k91RR(g,c.x+3,c.y,c.w-6,c.h,8);g.stroke();g.restore()}});
-   g.textAlign="center";kg82Lbl(g,TXT[2],W/2,16,W-16,true)}
+   }
   G.f.forEach((c,i)=>{const [w,h]=lw(c);const sy=Math.sin(now/600+i)*.02;let sh,co,lit=false,st="n";
    if(R.type===0){const L=R.L[i];sh=L.s;co=L.c;lit=!!L.on;if(L.on)st="ok";else if(L.bad>now)st="dim"}
    else if(R.type===1){sh=R.sc;co=1;lit=!!R.P[i];if(!lit)st="off"}
