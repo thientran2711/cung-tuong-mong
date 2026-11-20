@@ -102,3 +102,16 @@ I3: t7/t8 robes carry a stitched phoenix, flowers allowed with it. I1: HH phoeni
 - TRIM (open9 was 10 031 > 10 000, gate LEN FAIL): sentence "Floor-length robe, only slipper toe tips peeking under the hem, no train." removed. It repeats the outfit hem words "floor-length … hem just at the floor, NO train". (I tried trimming the "The silk has real weight" sentence instead; that is a gate master sentence (M07), so it stays.)
 ## Checks
 keep_check --sidecar PASS both (t7 3, t8 2 allowed); --all 189 PASS; check_store = only the pre-existing B12/S07 FAILs (LEN now OK).
+
+# Job 6 — owner L1543 rule G37: vân kiên ONE tier for everyone, HH moderately firm — 0 gens
+Scope found (grep "tier" in thu_comoi + dong_hientai): only the HH t8 files say two tiers. The current t7 cloak7 files (m02, s62) already say "ONE small single-tier SOFT" → no change. Older superseded versions (thu v4–v8, cloak–cloak6) and one-off gen tests (_FRONTAL_test, _LUAMONG_test, already drawn) are NOT re-versioned. s62_t8 cloak7 is DESIGN16's file, so I sent DESIGN16 the words instead. owner-copy/trieu not touched.
+## thu_comoi m02_t8 v5→v6 (9981), m28_t8 v5→v6 (9979), s62_t8 v9→v10 (9912) — same 4 swaps each
+- "a jewelled cloud collar of two tiers of scalloped" → "a jewelled cloud collar of ONE tier of scalloped"
+- "over the shoulders (upper tier smaller), edged" → "over the shoulders, edged"
+- "light and flat," → "light and flat, moderately firm, never too stiff," (HH stiffness, G37)
+- "drops hanging straight down from both lobe tiers" → "… from the lobes"
+## dong_hientai m02_t8 cloak7→cloak8 (9923)
+- "a SOFT jewelled cloud collar of supple silk in two small tiers of softly scalloped cloud-shaped lobes (upper tier smaller)," → "a moderately firm (never too stiff) jewelled cloud collar of supple silk in ONE small tier of softly scalloped cloud-shaped lobes,"
+## For DESIGN16 (s62_t8 cloak7 → cloak9): the same swap as m02 cloak8 above (its text is identical there).
+## Checks: keep_check --sidecar PASS ×4, --all 199 PASS; check_store FAIL set identical to each base (no new fails).
+## Q (L1541 lost look): in s62_t8_HAN_BAC_open9 AND open10 the HQP words are present exactly once, byte-identical to HQP t7 open6/open8: the OPEN-NECK opener, "collar is worn OPEN, pulled wide OFF the neck … cross only LOW at the sash", "sewn flat along the wide V out to the shoulders", the whole "long-spiral quju (khúc cư), its front panel wound SEVERAL times in a long spiral … never covered by any other robe" clause, and "two broad … borders along the wrap edge edged with pearls". So the prompt has them; the loss is in the draw (model), not in the prompt.
