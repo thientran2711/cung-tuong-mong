@@ -24,13 +24,15 @@ async function life(b,mode){const p=await b.newPage();const errs=[];p.on('pageer
   const mine=new Set(S.staff.map(s=>s.sid));const npc=[];for(const v of liveRivals(true))if(v!==S)for(const s of v.staff||[])if(s.sid!=null&&!s.coop)npc.push(s);
   const P3={mine:0,npc:0},FADE={n:0,bad:0};const p30=window.p3Cnv;if(p30)window.p3Cnv=function(x){const o=ownerOf(x);if(o===S)P3.mine++;else P3.npc++;return p30.apply(this,arguments)};
   const C={};const c0=window.asC;window.asC=function(s,k){if(s&&mine.has(s.sid)&&/^grant|^age_/.test(k))C[k]=(C[k]||0)+1;return c0.apply(this,arguments)};
-  const fmLost=[];const W={},A={};let Mo={},Mk={};const a0=window.asAp;window.asAp=function(s,fx){if(fx&&fx.suc===BAL.ag.staff.monthSuc&&fx.bac){const k=s.coop?"coop":(mine.has(s.sid)||ownerOf(s)===S)?"mine":"npc";/* a maid she hires later is hers too */W[k]=(W[k]||0)+1;A[s.sid]=(A[s.sid]||0)+1;Mo[s.sid]=(Mo[s.sid]||0)+1;if(k==="mine")Mk[s.sid]=1}return a0.apply(this,arguments)};
+  const fmLost=[];const W={},A={};let Mo={},Mk={};const a0=window.asAp;window.asAp=function(s,fx){if(fx&&fx.suc===BAL.ag.staff.monthSuc&&fx.bac&&!window.__cgaPost){const k=s.coop?"coop":(mine.has(s.sid)||ownerOf(s)===S)?"mine":"npc";/* a maid she hires later is hers too */W[k]=(W[k]||0)+1;A[s.sid]=(A[s.sid]||0)+1;Mo[s.sid]=(Mo[s.sid]||0)+1;if(k==="mine")Mk[s.sid]=1}return a0.apply(this,arguments)};
   const age0={};for(const s of S.staff)age0[s.sid]=s.age||0;const out={},lov={grant:0};
   const ml0=window.maidLoveMonth;/* count the old dice grant of HER maids (line «được chủ ban gả cho») */const L0=window.log;window.log=function(t){try{if(/được chủ ban gả cho/.test(t)&&[...mine].some(id=>{const s=servById(id);return s&&t.indexOf(s.name)===0}))lov.grant++}catch(e){}return L0.apply(this,arguments)};
   const runs={as:0,mine:0};const am0=window.asMonth;
   let err="";const months=[];
-  try{for(let m=0;m<12;m++){Mo={};Mk={};S.tuan=2;if(M[1]&&!M[1].out)M[1].loyal=100;S.ill=null;S.suc=Math.max(S.suc||0,60);S.preg=0;/* keep her alive: the probe is about her staff */const rg=(S.staff||[]).filter(x=>x.role==="maid"&&!x.out);for(const x of rg)x.sung=20;monthTick();for(const x of rg)if(!x.out&&(S.staff||[]).includes(x)){if(x.sung===20-amD().decay)FADE.n++;else if(x.sung!==20)FADE.bad++}const paid=Object.keys(Mk).length;const twice=Object.keys(Mo).filter(id=>Mo[id]>1).length;/* twice: ANY staff (hers, an NPC's, the friend's stand-in) paid more than once in one month */
+  try{for(let m=0;m<12;m++){Mo={};Mk={};S.tuan=2;if(M[1]&&!M[1].out)M[1].loyal=100;S.ill=null;S.suc=Math.max(S.suc||0,60);S.preg=0;/* keep her alive: the probe is about her staff */const rg=(S.staff||[]).filter(x=>x.role==="maid"&&!x.out);for(const x of rg)x.sung=20;monthTick();for(const x of rg)if(!x.out&&(S.staff||[]).includes(x)){FADE.m=(FADE.m||0)+1;if(x.sung===20-amD().decay)FADE.n++;else if(x.sung!==20)FADE.bad++}const paid=Object.keys(Mk).length;const twice=Object.keys(Mo).filter(id=>Mo[id]>1).length;/* twice: ANY staff (hers, an NPC's, the friend's stand-in) paid more than once in one month */
     months.push([paid,twice]);if(fm&&!fmLost.length&&!liveRivals(false).some(v=>(v.staff||[]).includes(fm)))fmLost.push(m,fm.out||0,(()=>{const v=liveRivals(true).concat(rivals).find(x=>x&&(x.staff||[]).includes(fm));return v?v.name:"none"})(),(window.__fmWhy||""));if(S.dead)break}}catch(e){err=e.message+" "+String(e.stack).slice(0,300)}
+  /* review r1: a fresh young maid after the 12 months, one more servMonth: his regard of her fades exactly once on every seat (the in-loop count is empty when the seed sends her maids away in month 1) */
+  if(!S.dead)try{FADE.p3=0;const x=mkServ("maid");x.age=18;x.sung=20;x.loyal=60;S.staff.push(x);const mo=S.month;window.__cgaPost=1;try{S.month=2;servMonth();FADE.post=(S.staff||[]).includes(x)?(x.sung===20-amD().decay?1:"sung "+x.sung):"gone";/* a fest month: the p3 cards of the same fresh maid */S.month=1;const p0=P3.mine;servMonth();FADE.p3=P3.mine-p0}finally{window.__cgaPost=0;S.month=mo}}catch(e){FADE.post="err "+e.message}
   for(const id of mine){const s=servById(id);const all=[...(S.staff||[])];const here=all.find(x=>x.sid===id);if(!here){const x=Object.values(window).length&&null;out[id]=1}}
   const gone=[...mine].filter(id=>!(S.staff||[]).some(x=>x.sid===id));
   const outWhy={};for(const id of gone){let w="?";try{for(const s of (window.__cgaSeen||[]))if(s.sid===id)w=s.out}catch(e){}outWhy[id]=w}
@@ -48,7 +50,7 @@ async function life(b,mode){const p=await b.newPage();const errs=[];p.on('pageer
    friendStaff:(()=>{try{const P={pid:902,name:"X",S:Object.assign(JSON.parse(JSON.stringify(ser().S)),{kc:null,dead:false,staff:[{sid:1,role:"maid",name:"a"}]}),life:0};const v=COOPW.X.buildFriend(P,S);return v?(v.staff||[]).length:-1}catch(e){return"err "+e.message}})()}},mode);
  await p.close();return{r,errs}}
 (async()=>{const b=await chromium.launch();const R={};
- for(const m of ["solo","guest","host"]){const x=await life(b,m);R[m]=x.r;console.log(m,JSON.stringify(x.r));ok(!x.r.err,`${m}: 12 months ran`,x.r.err||undefined);ok(!x.errs.length,`${m}: no page error`,x.errs.slice(0,3))}
+ for(const m of ["solo","guest","host"]){let x=await life(b,m);for(let t=0;t<2&&x.r&&(x.r.dead||x.r.FADE&&x.r.FADE.post==="gone");t++){console.log(m,"retry: probe life died / fresh maid left (harness, not the subject)");x=await life(b,m)}R[m]=x.r;console.log(m,JSON.stringify(x.r));ok(!x.r.err,`${m}: 12 months ran`,x.r.err||undefined);ok(!x.errs.length,`${m}: no page error`,x.errs.slice(0,3))}
  const S=R.solo,G=R.guest,H=R.host;
  const once=r=>r.months.every(([p,t])=>t===0);
  ok(S.months.every(([p])=>p>0)&&once(S),'SOLO: her staff paid exactly once every month',S.months);
@@ -68,7 +70,8 @@ async function life(b,mode){const p=await b.newPage();const errs=[];p.on('pageer
  ok(H.DAY.mine>0&&H.DAY.npc===0&&H.DAY.ticks===8&&H.DAY.again===0,'HOST in her context (her buổi step, level ≥ 5): her staff act once per buổi, no NPC staff',H.DAY);
  ok(S.DAY.ticks===0,'SOLO: staff day acts stay on the jagday day plan (asTick unchanged: planned → no extra tick)',S.DAY);
  ok(G.FADE.n>0&&G.FADE.bad===0,'GUEST: his regard of her maids fades once a month (amD decay), never twice',G.FADE);
- ok(S.FADE.n>0,'SOLO: fade runs (unchanged path; a maid his night touched that month may differ)',S.FADE);
- ok(G.P3.mine>0&&G.P3.npc===0,'GUEST: her maids get their monthly p3 cards (fest months), no NPC maid on her seat',G.P3);
+ ok((S.FADE.n>0||!S.FADE.m)&&S.FADE.post===1,'SOLO: fade runs (unchanged path; a maid his night touched that month may differ; + a fresh maid after the 12 months fades once)',S.FADE);
+ ok(G.FADE.post===1&&H.FADE.post===1,'GUEST / HOST: a fresh maid after the 12 months fades exactly once',{g:G.FADE.post,h:H.FADE.post});
+ ok((G.P3.mine>0||G.FADE.p3>0)&&G.P3.npc===0,'GUEST: her maids get their monthly p3 cards (fest months; + the fresh maid in a fest month), no NPC maid on her seat',{P3:G.P3,post:G.FADE.p3});
  ok(S.P3.mine+S.P3.npc>0,'SOLO / HOST: p3 cards still run for every household',{s:S.P3,h:H.P3});
  const f=res.filter(x=>!x).length;console.log(f?`FAIL ${f}/${res.length}`:`ALL OK ${res.length}`);await b.close();process.exit(f?1:0)})();
