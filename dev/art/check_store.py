@@ -757,6 +757,7 @@ def store_check(pf, prompt, args):
         store=store[:m.start()]+store[m.end():]
         if not re.search(rx,prompt): return [(0,'G15 Quý nhân t3 option-B outfit words missing (dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt)')]
     for _o,_n in master_common.doan_cuts_made(prompt,scope_from_store_args(args)):   # B26 length exception (Foreman C #5 (a)): the same master-repeat clauses cut from the store text (prefix + necessity rule)
+    for _o,_n in master_common.doan_cuts_made(prompt):   # B26 length exception (Foreman C #5 (a)): the same master-repeat clauses cut from the store text (prefix + necessity rule)
         store=store.replace(_o,_n,1)
     sp=lambda s:[x.strip() for x in re.split(r'(?<=[.;])\s+',s) if len(x.strip())>12]
     P=sp(prompt); bad=[]
@@ -1013,6 +1014,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
         if e.get("season") and not _winter: continue   # SEASON: winter-only sentence (W01-W05)
         if e.get("not_season") and _winter: continue   # SEASON: replaced in winter by its W twin
         if e["id"] == "S24" and len(master_common.doan_cuts_made(text,scope)) == len(master_common.DOAN_LEN_CUTS): continue   # B26 length exception: S24 repeats master M13 (cut last, only when needed)
+        if e["id"] == "S24" and len(master_common.doan_cuts_made(text)) == len(master_common.DOAN_LEN_CUTS): continue   # B26 length exception: S24 repeats master M13 (cut last, only when needed)
         if skip_store and e.get("store") and not e.get("season"): continue   # already enforced by the STORE part (same prompt, store args)
         ages = (e.get("ages") or "all").split()
         if age and "all" not in ages and age not in ages: continue

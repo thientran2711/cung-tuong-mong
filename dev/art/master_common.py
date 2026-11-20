@@ -69,6 +69,10 @@ def doan_fit(text, low=False):
     """-> (text, list of cut ids). Only for a t4/t5 DOAN prompt (or any t1-t6 prompt when low=True) over LIMIT; cuts in order, each only while still over LIMIT."""
     cuts = []
     if DOAN not in text and not low: return text, cuts
+def doan_fit(text):
+    """-> (text, list of cut ids). Only for a t4/t5 DOAN prompt over LIMIT; cuts in order, each only while still over LIMIT."""
+    cuts = []
+    if DOAN not in text: return text, cuts
     for old, new, mid in DOAN_LEN_CUTS:
         if len(text) <= LIMIT: break
         if old in text: text = text.replace(old, new, 1); cuts.append(mid)
@@ -79,6 +83,10 @@ def doan_cuts_made(text, scope=None):
     """-> the (old, new) pairs of DOAN_LEN_CUTS this prompt shows cut, when allowed (t4/t5 DOAN prompt or scope in LEN_SCOPES, prefix rule, last cut needed), else []."""
     t = _norm1(text)
     if DOAN not in t and scope not in LEN_SCOPES: return []
+def doan_cuts_made(text):
+    """-> the (old, new) pairs of DOAN_LEN_CUTS this prompt shows cut, when allowed (t4/t5 DOAN prompt, prefix rule, last cut needed), else []."""
+    t = _norm1(text)
+    if DOAN not in t: return []
     made = []
     for old, new, _ in DOAN_LEN_CUTS:
         o, n = _norm1(old), _norm1(new)
