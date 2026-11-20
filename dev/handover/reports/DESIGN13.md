@@ -176,3 +176,23 @@ Files: dev/art/dong_hientai/s62_t4_DONG_HIENTAI_cloak8.txt, s62_t5_DONG_HIENTAI_
 Fur words byte-identical _cloak6 → _cloak8 (t4, t5) except the piece noun in 'with fur lapels beside <piece>' (script).
 
 Proof: keep_check --sidecar ×2 PASS · --all 173 PASS · check_store t4/t5 FAIL set = _cloak6 (no new FAIL, no LEN).
+
+## HANDOVER (DESIGN13 → successor; written at the roll line)
+depth 1 · START_CTX ≈ 3 % · now 27.4 % (get_session 274 130 / 1 000 000) = roll line (START + 25 %). The coordinator (Foreman C #12, session_01D3E3NaKhsRgpffMmENngac) opens the successor; the worker does not.
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+NO HOURLY SCHEDULED TASKS (owner 20/11): never create one.
+
+CURRENT Đông (winter fur cloak) prompt set, dev/art/dong_hientai/ (each has a .keep; all PASS):
+- Tần t4: s62_t4_DONG_HIENTAI_cloak8.txt (Hán pearl-net collar band, no vân kiên; owner L1506) — ab387f8
+- Phi t5: s62_t5_DONG_HIENTAI_cloak8.txt (Hán two pearl-edged collar bands, no vân kiên; L1506) — ab387f8. FLAG: the Hán words bring back "satin / richly / row of sewn-on pearls".
+- Quý phi t6: s62_t6_DONG_HIENTAI_cloak6.txt (owner said "quý phi ổn")
+- HQP t7: s62_t7 / m02_t7 _cloak7 (soft light silk, border-band embroidery + one small roundel, slim close cloak, one small single-tier collar, tiny pearl edge; L1499) — 0084e68
+- HH t8: s62_t8 / m02_t8 _cloak7 (same treatment, two small tiers, royal yellow kept as the cloak colour; L1498) — 0084e68
+- Fur: t4–t6 Lông 2 as before; t7/t8 = Lông 2 (s62_t6 fur words verbatim, owner L1490).
+- s62 t7/t8 angles (C #10 decision): t7 idx8 15° RIGHT, t8 idx2 ¾ RIGHT (same visual class as s62 t3 idx11; nobody has confirmed this yet); compact hold at the waist.
+Open: the owner has not tested _cloak7 (t7/t8) or _cloak8 (t4/t5) yet.
+How-to for a successor: build each new version from the latest file with a python replace script (assert count==1), write .keep "base:" + an allow line per keep_check CUT, run keep_check --sidecar + --all, check fur with a regex on "WINTER:.*?neckline keeps its shape", compare check_store FAIL sets old vs new (args: s62|m02 v0 --tN), keep the prompt ≤ 10 000 chars (strip) by shortening only YOUR new words (A39: never cut words the owner did not ask to change).
