@@ -113,3 +113,29 @@ FAIL 1 = 7 bare far jumps / 160 buổi (reviewer seeded scan: seeds 1–10 × 16
 - My scan tools (container-local, may be gone): /home/user/wt/jw2-tools/farscan6.js <index.html> <runs> <buổi> (SEED0 env) — lacks the AGL flush; add it (reviewer probe: deeds.js «AGL flush»; grep `AGL` in dev/build/jagent.js for the flush call).
 - Gates after the fix, one at a time: walk-cost · ag-walk · ptime · ptime2 · invite-host-away ×10 (A–H, C 10/10) · time-spill-guard · coop-e2e 68/68 · quickcheck (old save) · reviewer-setting scan → 0. Then SẴN SÀNG KIỂM <sha> in FOREMAN_D_STATUS.md + send_message D #12 and reviewer CAkPLwbF.
 Pitfalls: top-level helper names collide across modules (one-core-guard G1: grep `function <name>` first); STATUS push conflicts = keep both sides; ag-all has 2 pre-existing flakes (perf p95, cx2O card — also on LIVE).
+
+## JAGDAY-WALK #3 (session_01964izFxPbxKJAN3n8Je4g4, opus, depth 4, START_CTX ≈ 4 %) — ROUND 4 FAIL 1 fix
+PRIORITY #1 CHECK: OD L1976 | main 548dcd0d (no agWalkGuard / walkLeadIn) | review/* jagday-walk-rv 64750121 (base), jagday-walk-r2 00452105 | claims CLAIMS.md jagday-walk row (D).
+Branch: review/jagday-walk-rv = 64750121 + fix 5390905c + merge LIVE 548dcd0d (1dab9933). FF push.
+Root (as the reviewer named it): a row next to a deed is written AFTER agWalkGuard ran in that khắc, and some writers were not deed-aware. Found with a write tracer (Proxy on R.P rows, stack per write; seeded Math.random, AGL flushed every khắc). Fixed per writer class (law 11):
+| class | writer found by the tracer | fix |
+|---|---|---|
+| (b) deed AT the khắc now | agSeePlan / agSlot with kh = cur: agWalkShort read row[cur] (its own row) | agWalkShort: kh ≤ cur → start row kh−1 (khắc 0: row 0) |
+| (a) retinue row after the guard | j95sPass / j95sGuard ran AFTER agWalkGuard in the j95fixHouse chain | guard call moved into the jwalk wrapper: after every row writer, right before walkNpcPass |
+| (a) rows written after the last sync of a khắc (AGL slices, reactions) | agLater jobs land frames after j95sync | first pass of a khắc (fresh: R.kh < kh) re-checks deeds starting NOW from row cur−1; jwalk may walk the not-yet-shown khắc now (same count both sides) |
+| deed↔other «X/follow \| Y/ag_routine» | agLzRun repaints staff rows with the world-forced slot label «ag_routine» (k null) → agWalkHeld called it held | agWalkHeld: an «ag_» row no pend deed holds = plan label = free (every deed write has its pend entry) |
+| meeting with no road | j95secApply re-applied by placeWhere after a started deed; agLzRun repainted the lead-in road («go» rows); khắc 0 never a road | agWalkCut (started deed leaves 1 khắc early, still lands); walkIsRoad (repaint never takes a road); record not shown yet: only held rows block the lead-in; first pass may use khắc 0 as road |
+| (b) carried deed at khắc 0 | agSpill wrote rows 0…k1 with no road to the next kept row | not carried when the road on does not fit (same as a khắc not free) |
+| errand → errand (her own) | ptLedger «mine» rows took each khắc's slot place (repainted mid-window) | one place per window per buổi (a.mpl) |
+Before / after (bare far jumps = travel ≥ 2 per walker, no «on the way» khắc; «ngoai» not a place; forced «confined» and card-bound «here» by design, counted apart):
+| build | driver | buổi | bare jumps (deed / deed↔other / follow / errand / other) | deeds landed |
+|---|---|---|---|---|
+| 64750121 (base) | reviewer: seeds 1–10 × 16 | 160 | 7 (2 / 4 / 1 / 0 / 0) (reviewer's table) | 1526 (reviewer) |
+| 64750121 (base) | mine, seeds 31–70 × 24 | 960 | 15 (0 / 12 / 0 / 0 / 3) | ≈ 9 200 |
+| 5390905c (fix) | mine, seeds 1–120 × 24 | 2 880 | **0** | 7 % more than base per buổi |
+| 5390905c | timer-driven (awaits between sync and flush), seeds 1–20 × 24 | 480 | **0** (+1 «confined», forced) | — |
+| 1dab9933 (merged) | walk-cost test 12 = reviewer setting, seeds 1–10 × 16 | 160 | **0** of 195 far moves | 1593 |
+Test: walk-cost 12 (new) = units (b) / fresh-khắc guard / plan label free + the seeded 10 × 16 scan (mulberry32 via addInitScript, AGL flush every khắc, all classes 0). Test 11 fixture now books its deeds in pend (a label alone is the plan).
+Gates on 1dab9933 (one at a time): walk-cost ALL OK (5 all rows 0/73; 11 0 vs off 3; 12 0/195) · ag-walk 19/20 (the 1 FAIL = «4 carry» tin báo item missing next buổi; ALSO on base 64750121: 1–2 per 8 runs here; main 548dcd0d 8/8 → a pre-existing branch flake, not r4; not chased) · ptime ALL OK · ptime2 ALL OK · invite-host-away ×10 = 10/10 (9/9) · time-spill-guard PASS (76 checks) · coop-e2e 68/68 · QUICKCHECK --cpu 4 PASS (old save ok, core gates PASS incl. one-core-guard, perf new/live render 212/206, tab 408/380, buổi 1253/1123 ms).
+Scan tools (container-local): /home/user/wt/jw3-tools/scan4.js <html> <seed0> <seed1> <buổi> (tracer: last writer stack per cell).
+SẴN SÀNG KIỂM review/jagday-walk-rv 1dab993378e404f6a8578de84b114ce2f82fc425 (TIER BIG)
