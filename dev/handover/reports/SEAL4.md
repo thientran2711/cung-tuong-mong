@@ -38,3 +38,25 @@ Credits (mine): 8 keyframes × 135 + 12 clips × 940 = 12 360. Ledger: 20 lines 
   puff in front of the mouth).
 - tv: cleanest of the four. OUT first ~1.3 s still → cut from 1.90 s (32 frames). LOOP: fist + plume swing; BACK smooth.
 Redo candidates if the foreman/owner wants: htg BACK (940), maybe ht OUT (940). Nothing redone.
+
+## SET ht (20/11 ~00:15Z) — 10 Thái hậu-approved seals (owner Lượt 812 via ROOT-58), prompts sg4_set.py ht, done by a SEAL4 sub-agent
+| seal | A used (gen → flat) | B used | OUT | LOOP | BACK | fr out/loop/back |
+|---|---|---|---|---|---|---|
+| vui | s7IpJA9l8e → If3yCo9tvE | nVsKDBLYQD | w4ao6Gs7EI | bxMnsOT5Y2 | tCRPQrLmZJ | 55/60/58 |
+| buon | 1ld0g3Rr4r → 4RFvZyO9Aa | rgXTUPExtc | s7IpyAPl8e | ov6JCrI829 | hu29HlzvqL | 50/60/42 |
+| so | 1ld0gRZr4r → u5WZKEyQLD | P3QhZWU42C | fHzi5w3CDY | 1ld0UZzr4r | hu29HUWvqL | 48/60/48 |
+| an | cpSreQ70eP → gOmdylFSXO | 1ld0S9Rr4r | eIPShrTdqL | iG5EYhD3uK | JNCIZoROq4 | 52/60/50 |
+| binh | cpSreFJ0eP → 9ZHa29nNYZ | YMlkphLWeC | SyhX6eCUb8 | Lw8DPM9swO | w4ao3o67EI | 55/60/48 |
+| ghen | u5WZ1vSQLD → gOmd9BtSXO | N2qfnlO6D9 | If3yH10tvE | dt4UCbzXSL | 5jDYU9hKxe | 52/60/45 |
+| lo | ksecSq016B → hu29q6dvqL | MBJstArDCm | s7Ip9zyl8e | jUoMPnOLD0 | MBJshjdDCm | 57/60/60 |
+| muu | ov6JCdi829 → Cqn3k26EEy | MBJstGxDCm | cpSr81y0eP | Lw8D9SfswO | ov6JFh2829 | 58/60/48 |
+| tutin | p8ygmMnehw → s7IpPXjl8e | yium2lsPW9 | 6AbC0GeiJO | Cqn3xbfEEy | Lw8D9JQswO | 47/60/55 |
+| hanghai (bright coral) | Lw8DOjaswO → rgXT7pWxtc | xSBVJqbjfW → 1ld0JjLr4r | xSBVPJwjfW | 4RFvYzi9Aa | Lw8DNVKswO | 57/60/58 |
+CDN …/img/_review/emo-anim-groups/: ht-<k>-out.webp, ht-<k>.webp, ht-<k>-back.webp, still/ht-<k>.webp, ht-<k>-frames.jpg, ht-set-preview.mp4 (159.5 s).
+All 10 A + hanghai B came back RGBA → flattened on green and uploaded. 6 clip calls hit the account's parallel-video limit (not charged) and were resent.
+Faults (no redo): vui OUT arms fly wide then shrink · so OUT size jump fr 3–7, face strongly purple (= fear tint, but strong) · an grey mist
+drifts outside the disc in LOOP/BACK · ghen OUT size jump fr 12–21, arms + handkerchief cut by the bottom edge; BACK handkerchief falls out
+the bottom · lo BACK smoke clouds, then sleeves turn greenish semi-transparent and dissolve (fr ~36–45, I looked: confirmed) · tutin OUT
+size jump fr 12–24, sleeves at/over the edge · hanghai OUT small pop fr 18–21, BACK fr 3–14 zoom-in + yellow-green confetti near chroma.
+Clean: buon, binh, muu. ghen A reads more angry than jealous.
+Credits ht set: 20 × 135 + 30 × 940 = 30 900. Balance at end 191 294 (shared pool, started 413 165). Ledger +50 lines.
