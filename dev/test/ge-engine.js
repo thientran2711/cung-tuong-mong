@@ -40,7 +40,7 @@ const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JS
    o.board=(S.geBoard||[]).length===1&&S.geBoard[0].ti===r.ti;o.book=!!(geStore().t[key]);o.evt=Q.some(m=>m.pid==='geR'&&/Đại kết cục/.test(m.h));
    o.exit=(()=>{const d=mkP('geR',{});return d&&d.o[0].n==='Tạ ơn'})();o.done=s2.done===1;o.twice=geAnswer(0,0,true)===null;
    /* shading rules on fresh states */const shade=(lt,i)=>{S.ge=null;const s=geS();s.lt=lt;s.d0=S.duc;s.r1=C.e[i][3];return geAnswer(C.e[i][3],C.e[i][4],true)};
-   const iA=C.e.findIndex(e=>e[2]==='A'),iT=C.e.findIndex(e=>e[2]!=='A');
+   const iA=C.e.findIndex(e=>e[2]==='A'),iT=(()=>{S.ge=null;const s0=geS();geLive(s0);return C.e.findIndex((e,i)=>e[2]!=='A'&&s0.st[i]==='o')})();/* W3: skip a thiện ending whose fail-only rule holds in this test life (e.g. cnv_chu_2 needs {mis}, not cast yet) */
    const Qs=rivals.map(v=>v.queen);rivals.forEach(v=>v.queen=false);/* seats free for the shading check (seat lock has its own test) */
    const rA=shade(0,iA),rT=shade(0,iT),rX=shade(-50,iT),rY=shade(50,iA);rivals.forEach((v,i)=>v.queen=Qs[i]);
    o.shade=rA.sh==='a'&&rT.sh==='t'&&rX.sh==='a'&&rY.sh==='t'&&rX.ti===C.e[iT][7]&&rY.ti===C.e[iA][6];
