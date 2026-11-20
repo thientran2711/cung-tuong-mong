@@ -168,7 +168,7 @@
    ]
   },
   "c09": {
-   "cut": "xSBWFuTjfW",
+   "cut": "UPvIb4owny",
    "group": "Tinh nghịch",
    "angle": "3/4",
    "sub": "Tai gần đeo đủ; tai xa nhỏ hơn, nằm DƯỚI lớp mặt nên tự khuất. 3 chỗ cài.",
@@ -176,16 +176,16 @@
     {
      "item": "earring",
      "pt": [
-      415,
-      280
+      403,
+      276
      ],
      "z": "ear"
     },
     {
      "item": "earring",
      "pt": [
-      584,
-      258
+      577,
+      250
      ],
      "mirror": true,
      "scale": 0.8,
@@ -194,16 +194,16 @@
     {
      "item": "ngoc_boi",
      "pt": [
-      565,
-      731
+      590,
+      718
      ],
      "z": "waist"
     },
     {
      "item": "tui_huong",
      "pt": [
-      432,
-      731
+      466,
+      718
      ],
      "z": "waist"
     }
@@ -212,8 +212,8 @@
     {
      "name": "bên trái (phía gần), trên thái dương",
      "pt": [
-      396,
-      86
+      395,
+      88
      ],
      "shaft": -105,
      "len": 0.6,
@@ -223,8 +223,8 @@
     {
      "name": "đỉnh búi, phía sau",
      "pt": [
-      515,
-      64
+      510,
+      56
      ],
      "shaft": 95,
      "len": 0.5,
@@ -235,7 +235,7 @@
      "name": "bên phải (phía xa)",
      "pt": [
       566,
-      112
+      106
      ],
      "shaft": 105,
      "len": 0.5,
@@ -251,10 +251,11 @@
    ],
    "waist_view": [
     280,
-    610,
+    590,
     440,
     640
-   ]
+   ],
+   "cut_note": "new picture (owner-approved hand fix, gen w4atqqr7EI); old xSBWFuTjfW retired"
   },
   "c22": {
    "cut": "rgXY1yHxtc",
