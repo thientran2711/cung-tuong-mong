@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"13fedc78+","t":"2026-11-20T16:06Z","c":"coop-staff-split r1: coop-e2e one-place check by identity (one coop entry); a world person sharing a player's full name is its own check (n…","b":"540984d1450d","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
+window.CTM_BI={"s":"7a8d0c5d+","t":"2026-11-20T16:15Z","c":"coop-name-clash: one name list over both players (law 6b) — host decides, guest reads the same","b":"f693b17e6796","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -83583,18 +83583,22 @@ function nmOrdApply(why){try{const O=S&&S.nmOrd;const L=O&&O[nmPidMe()];if(!Arra
 /* a NEW LIFE (first character, rebirth, either seat) is a draft until it enters the room: every person of it whose full name is already
    held in the room's world C (NPCs, their servants and children, court, men, the other player and her people, every name ever given:
    C.W.S.nmReg + dnames) is renamed now, before it is sent (jcoopworld attach). Her own name too: the new character is not yet anyone. */
-function nmNamesOfC(C){const A=[];try{const W=C.W||{},WS=W.S||{};const b=x=>{if(x&&typeof x==="object"&&typeof x.name==="string")A.push(nmBare(x.name))};
-  for(const r of W.R||[]){if(!r||r.coop)continue;b(r);b(r.maid);(r.staff||[]).forEach(x=>{if(x&&!x.coop)b(x)});(r.kids||[]).forEach(b)}
-  const Cc=WS.court||{};for(const k in Cc){const c=Cc[k];if(c&&typeof c==="object"){if(c.pn)A.push(nmBare(c.pn));b(c)}}
-  (WS.men||[]).forEach(b);try{for(const c in (WS.trieu&&WS.trieu.H)||{})b(WS.trieu.H[c])}catch(e){}try{(WS.thO&&WS.thO.staff||[]).forEach(b)}catch(e){}
+function nmNamesOfC(C){const A=[],V=new Set();try{const W=C.W||{},WS=W.S||{};const live=x=>x.alive!==false&&x.alive!==0&&!x.dead&&!x.out;
+  const b=(x,lv)=>{if(x&&typeof x==="object"&&typeof x.name==="string"){const n=nmBare(x.name);A.push(n);if(lv!==false&&live(x))nmVars(n).forEach(v=>V.add(v))}};
+  for(const r of W.R||[]){if(!r||r.coop)continue;b(r);b(r.maid);(r.staff||[]).forEach(x=>{if(x&&!x.coop)b(x)});(r.kids||[]).forEach(x=>b(x))}
+  const Cc=WS.court||{};for(const k in Cc){const c=Cc[k];if(c&&typeof c==="object"){if(c.pn){A.push(nmBare(c.pn));nmVars(nmBare(c.pn)).forEach(v=>V.add(v))}else b(c)}}
+  (WS.men||[]).forEach(x=>b(x));try{for(const c in (WS.trieu&&WS.trieu.H)||{})b(WS.trieu.H[c])}catch(e){}try{(WS.thO&&WS.thO.staff||[]).forEach(x=>b(x))}catch(e){}
   for(const k in WS.nmReg||{})A.push(k);(WS.dnames||[]).forEach(n=>A.push(nmBare(n)));
-  for(const seat in C.P||{}){if(seat===(window.COOPW&&window.COOPW.seat))continue;const P=C.P[seat];if(P&&P.S&&!P.dead)nmPers(P.S).forEach(e=>A.push(nmBare(e.o.name)))}}catch(e){console.error("nmNamesOfC",e)}
- return A.filter(Boolean)}
+  for(const seat in C.P||{}){if(seat===(window.COOPW&&window.COOPW.seat))continue;const P=C.P[seat];if(P&&P.S&&!P.dead)nmPers(P.S).forEach(e=>b(e.o))}}catch(e){console.error("nmNamesOfC",e)}
+ return{full:A.filter(Boolean),vars:V}}
 const NM_BIRTH={runs:0,renamed:[]};
-function nmBirth(C){if(!C||!C.W||typeof S==="undefined"||!S)return 0;const taken=new Set(nmNamesOfC(C));const mine=nmPers(S);const own=new Set();let n=0;NM_BIRTH.runs++;
- for(const e of mine){const raw=String(e.o.name),b=nmBare(raw);if(!taken.has(b)&&!own.has(b)){own.add(b);continue}
-  const pre=raw.slice(0,raw.length-b.length);const more=[...taken,...own];const op={more,reg:nmOwner()};if(e.fam&&nmSurOf(b))op.sur=nmSurOf(b);
-  const nb=e.kind==="prince"||e.kind==="princess"?nmNew(e.kind,{more,reg:nmOwner()}):nmNew(e.kind,op);e.o.name=pre+nb;own.add(nb);n++;
+/* her person is a clash when the full name is taken (living or dead, ever given) or, as nmFix judges the living, a short form of it is a
+   living person's (no "Phương Hoa" beside "Bạch Phương Hoa"): checked here so the host's join sweep has nothing of the room to rename */
+function nmBirth(C){if(!C||!C.W||typeof S==="undefined"||!S)return 0;const T=nmNamesOfC(C);const taken=new Set(T.full);const mine=nmPers(S);const own=new Set(),ownV=new Set();let n=0;NM_BIRTH.runs++;
+ const hit=(b,kind)=>taken.has(b)||own.has(b)||(kind!=="mo"&&nmVars(b).some(v=>T.vars.has(v)||ownV.has(v)));
+ for(const e of mine){const raw=String(e.o.name),b=nmBare(raw);if(!hit(b,e.kind)){own.add(b);nmVars(b).forEach(v=>ownV.add(v));continue}
+  const pre=raw.slice(0,raw.length-b.length);const more=[...taken,...T.vars,...own,...ownV];const op={more,reg:nmOwner()};if(e.fam&&nmSurOf(b))op.sur=nmSurOf(b);
+  const nb=e.kind==="prince"||e.kind==="princess"?nmNew(e.kind,{more,reg:nmOwner()}):nmNew(e.kind,op);e.o.name=pre+nb;own.add(nb);nmVars(nb).forEach(v=>ownV.add(v));n++;
   try{nmRewrite(b,nb,mine.map(m=>String(m.o.name)))}catch(x){}NM_BIRTH.renamed.push({p:e.fp,old:b,neu:nb})}
  return n}
 window.nmBirth=nmBirth;window.nmOrdApply=nmOrdApply;window.NM_ORD=NM_ORD;window.NM_BIRTH=NM_BIRTH;
@@ -85180,7 +85184,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="540984d1450d";window.CTM_BUILD=BUILD;
+const BUILD="f693b17e6796";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

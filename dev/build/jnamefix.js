@@ -83,18 +83,22 @@ function nmOrdApply(why){try{const O=S&&S.nmOrd;const L=O&&O[nmPidMe()];if(!Arra
 /* a NEW LIFE (first character, rebirth, either seat) is a draft until it enters the room: every person of it whose full name is already
    held in the room's world C (NPCs, their servants and children, court, men, the other player and her people, every name ever given:
    C.W.S.nmReg + dnames) is renamed now, before it is sent (jcoopworld attach). Her own name too: the new character is not yet anyone. */
-function nmNamesOfC(C){const A=[];try{const W=C.W||{},WS=W.S||{};const b=x=>{if(x&&typeof x==="object"&&typeof x.name==="string")A.push(nmBare(x.name))};
-  for(const r of W.R||[]){if(!r||r.coop)continue;b(r);b(r.maid);(r.staff||[]).forEach(x=>{if(x&&!x.coop)b(x)});(r.kids||[]).forEach(b)}
-  const Cc=WS.court||{};for(const k in Cc){const c=Cc[k];if(c&&typeof c==="object"){if(c.pn)A.push(nmBare(c.pn));b(c)}}
-  (WS.men||[]).forEach(b);try{for(const c in (WS.trieu&&WS.trieu.H)||{})b(WS.trieu.H[c])}catch(e){}try{(WS.thO&&WS.thO.staff||[]).forEach(b)}catch(e){}
+function nmNamesOfC(C){const A=[],V=new Set();try{const W=C.W||{},WS=W.S||{};const live=x=>x.alive!==false&&x.alive!==0&&!x.dead&&!x.out;
+  const b=(x,lv)=>{if(x&&typeof x==="object"&&typeof x.name==="string"){const n=nmBare(x.name);A.push(n);if(lv!==false&&live(x))nmVars(n).forEach(v=>V.add(v))}};
+  for(const r of W.R||[]){if(!r||r.coop)continue;b(r);b(r.maid);(r.staff||[]).forEach(x=>{if(x&&!x.coop)b(x)});(r.kids||[]).forEach(x=>b(x))}
+  const Cc=WS.court||{};for(const k in Cc){const c=Cc[k];if(c&&typeof c==="object"){if(c.pn){A.push(nmBare(c.pn));nmVars(nmBare(c.pn)).forEach(v=>V.add(v))}else b(c)}}
+  (WS.men||[]).forEach(x=>b(x));try{for(const c in (WS.trieu&&WS.trieu.H)||{})b(WS.trieu.H[c])}catch(e){}try{(WS.thO&&WS.thO.staff||[]).forEach(x=>b(x))}catch(e){}
   for(const k in WS.nmReg||{})A.push(k);(WS.dnames||[]).forEach(n=>A.push(nmBare(n)));
-  for(const seat in C.P||{}){if(seat===(window.COOPW&&window.COOPW.seat))continue;const P=C.P[seat];if(P&&P.S&&!P.dead)nmPers(P.S).forEach(e=>A.push(nmBare(e.o.name)))}}catch(e){console.error("nmNamesOfC",e)}
- return A.filter(Boolean)}
+  for(const seat in C.P||{}){if(seat===(window.COOPW&&window.COOPW.seat))continue;const P=C.P[seat];if(P&&P.S&&!P.dead)nmPers(P.S).forEach(e=>b(e.o))}}catch(e){console.error("nmNamesOfC",e)}
+ return{full:A.filter(Boolean),vars:V}}
 const NM_BIRTH={runs:0,renamed:[]};
-function nmBirth(C){if(!C||!C.W||typeof S==="undefined"||!S)return 0;const taken=new Set(nmNamesOfC(C));const mine=nmPers(S);const own=new Set();let n=0;NM_BIRTH.runs++;
- for(const e of mine){const raw=String(e.o.name),b=nmBare(raw);if(!taken.has(b)&&!own.has(b)){own.add(b);continue}
-  const pre=raw.slice(0,raw.length-b.length);const more=[...taken,...own];const op={more,reg:nmOwner()};if(e.fam&&nmSurOf(b))op.sur=nmSurOf(b);
-  const nb=e.kind==="prince"||e.kind==="princess"?nmNew(e.kind,{more,reg:nmOwner()}):nmNew(e.kind,op);e.o.name=pre+nb;own.add(nb);n++;
+/* her person is a clash when the full name is taken (living or dead, ever given) or, as nmFix judges the living, a short form of it is a
+   living person's (no "Phương Hoa" beside "Bạch Phương Hoa"): checked here so the host's join sweep has nothing of the room to rename */
+function nmBirth(C){if(!C||!C.W||typeof S==="undefined"||!S)return 0;const T=nmNamesOfC(C);const taken=new Set(T.full);const mine=nmPers(S);const own=new Set(),ownV=new Set();let n=0;NM_BIRTH.runs++;
+ const hit=(b,kind)=>taken.has(b)||own.has(b)||(kind!=="mo"&&nmVars(b).some(v=>T.vars.has(v)||ownV.has(v)));
+ for(const e of mine){const raw=String(e.o.name),b=nmBare(raw);if(!hit(b,e.kind)){own.add(b);nmVars(b).forEach(v=>ownV.add(v));continue}
+  const pre=raw.slice(0,raw.length-b.length);const more=[...taken,...T.vars,...own,...ownV];const op={more,reg:nmOwner()};if(e.fam&&nmSurOf(b))op.sur=nmSurOf(b);
+  const nb=e.kind==="prince"||e.kind==="princess"?nmNew(e.kind,{more,reg:nmOwner()}):nmNew(e.kind,op);e.o.name=pre+nb;own.add(nb);nmVars(nb).forEach(v=>ownV.add(v));n++;
   try{nmRewrite(b,nb,mine.map(m=>String(m.o.name)))}catch(x){}NM_BIRTH.renamed.push({p:e.fp,old:b,neu:nb})}
  return n}
 window.nmBirth=nmBirth;window.nmOrdApply=nmOrdApply;window.NM_ORD=NM_ORD;window.NM_BIRTH=NM_BIRTH;
