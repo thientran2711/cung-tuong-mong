@@ -97,3 +97,27 @@ Faults: ghen LOOP+BACK blocked by Seedance moderation (handkerchief-biting?) —
 tutin OUT ~0.5 s she rises tall above the medallion top; hanghai OUT sleeves swing out wide like wings ~0.3 s, LOOP energy lines grow into big yellow bursts.
 Credits: unit 2 = 12×135 + 16×940 = 16 660; pt/ptl v3 = 6 180. Balance 219 764 (shared) at 00:22Z.
 NEXT: nothing — đau/tĩnh tu/… and act-* wait for ROOT-58 GO.
+
+## HANDOVER SEAL2b → SEAL2c (depth 2; START_CTX ≈ 4 %, now 27 % ≈ roll line 29 %) — 20/11 ~00:40Z. Foreman = ROOT-60 (session_01PEhRbxsHLiHaB6yGGXAQRY).
+- DONE: hh giận(SEAL2) + unit1 vui buon so an (SEAL2) + unit2 binh ghen lo muu tutin hanghai (SEAL2b; ghen LOOP/BACK moderation-blocked,
+  reword waits OWNER — do not redo). pt/ptl giận v3 sent owner (Lượt 825). All ids: sg2_state.json + tables above.
+- GO from ROOT-60 00:37Z: "continue the remaining Hoàng hậu units (owner GO for whole set) … EXCEPT ghen LOOP/BACK; no redo of unit-1 faults".
+  Remaining keys (hh_prompts.ORDER): dau tinhtu chuyentam hungkhoi tinhnghich hothen chan khochiu choang hon + 17 act-*.
+  CONFIRM with ROOT-60 first: (a) owner Lượt 812 said hh ONLY Thái hậu-approved seals — is the whole-set GO newer? (b) đau: SEAL5's TH đau
+  was being redone; hh_prompts.DAU is SEAL2's own heart-ache text — use the owner-approved one.
+- SEAL GATE (A24, MG4 1962903b0): `python3 dev/art/emo-anim/seal_gate.py --builder groups/hh_prompts.py <keys>` right before EVERY gen;
+  exit 1 = no gen. Also re-check that hh_prompts SWAP still matches SEAL5's latest th_prompts text (hanghai 'bright coral' swap is in SWAP).
+- Credits: account_balance before each unit; under 60 000 start nothing new (ROOT-59/60). 182 019 at 00:43Z.
+- Method (per unit of ≤6): A gpt-2-6 1:1 2k ref gOmeqH6SXO ×N → kf.py (flatten transparent→green) → flattened: copy to
+  img/_review/emo-anim-groups/kf/, cdn_sync, creations_upload_image from the CDN URL → B (ref = own A) → look → clips
+  bytedance-seedance-fast-2.0 duration 4, 1:1, 720p, withSoundEffects false, keyframes start/end (out A→B, loop B→B, back B→A);
+  account video parallel limit ≈ 8–10 (on "parallel limit" wait 300 s, nothing charged) → cutset.py hh-<k> out=… loop=… back=… A=/tmp/sg2/g/hh-<k>-A.png
+  (re-cut with out@<s>= where she sits still) → look at hh-<k>-frames.jpg → preview_vi.py img/_review/emo-anim-groups/hh-uN-preview.mp4
+  "hh-<k>:Hoàng hậu · <VI>" … (skips missing parts) → cdn_sync → ledger append (git add --sparse dev/art/gen_ledger.jsonl; on rebase
+  conflict drop the <<<<<<< ======= >>>>>>> lines, keep both sides) → report ROOT-60 (preview + frames URLs + faults + credits).
+- Takeover lines to copy verbatim (owner):
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
