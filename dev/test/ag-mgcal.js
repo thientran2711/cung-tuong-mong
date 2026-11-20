@@ -1,10 +1,11 @@
 /* AG-ALL-2d2 — OWNER-ONLY MINIGAME CALIBRATION (owner OD 17/11 ~16:20Z (f) + ~16:40Z option 1). node dev/test/ag-mgcal.js [dev/index.html]
    1 owner flag only: no flag → no «Thử tay tài nghệ» row in Thiết lập; flag (?hieuchuan=1 / localStorage ctm-owner-cal) → one kit .kctl row
    2 mgCalBase: her rounds brought back to a matching board (raw − (mgMedD(d) − mgMedD(0))), mean, 0..10
-   3 bands: no calibration → BAL default band (2d hands unchanged, old saves roll the same); a calibrated kind → hi = b + w/2 + up, lo = b + w/2 − dn;
+   3 bands (owner OD 20/11 ~01:10Z fair spread): no calibration → centred on the skilled human median (old saves roll the same); a calibrated kind →
+     centre b + w/2, lo / hi = centre ∓ far (thirds, OD 20/11 ~01:18Z);
      hands re-roll inside the new band from the SAME draw (order of people kept)
-   4 fairness with her base b: strong NPC hands rare (≤ 10 % of NPC plays reach her b on a matching board), the middle NPC plays clearly below her (≥ 1.5),
-     the clumsiest hands about dn below her; never above 10
+   4 fairness with her base b (fair spread): the middle NPC plays like her, about half the NPC plays at or above her on a matching board, symmetric:
+     as many hands above her as below; never above 10
    5 the test itself (kit game frame): 5 rounds easy → hard (Dễ … Khó words), result rows, record + «CTM-CAL» code on her device; her device does NOT
      change the shared band (one core: only BAL.ag.mg2.cal.k does)
    6 no page errors */
@@ -19,25 +20,25 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 2 */
   const ds=[-2,-1,0,1,2],raws=[9,8,7,6,5];let s=0;ds.forEach((d,i)=>s+=raws[i]-(mgMedD(d)-mgMedD(0)));o.base=mgCalBase(raws,ds);o.baseX=Math.round(s/5*10)/10;o.baseClamp=mgCalBase([10,10,10,10,10],[2,2,2,2,2]);
   /* 3 */
-  /* steps 3–4 run on kinds the owner has NOT calibrated (BAL.ag.mg2.cal.k), picked at run time: a landed owner code (dan 8.3, 72f7c0c5) must not break them */
+  /* steps 3–4 run on kinds the owner has NOT calibrated (BAL.ag.mg2.cal.k), picked at run time: a landed owner code must not break them */
   const UNC=mgCalKinds().filter(k=>!(C.k||{})[k]);const K=UNC[0],K2=UNC[1];o.K=K;o.K2=K2;
-  const L=liveRivals(true).filter(v=>v.alive);o.def=mgCalBand(K);const before=L.map(v=>mgHand(K,v));
+  const L=liveRivals(true).filter(v=>v.alive);o.def=mgCalBand(K);o.defMed=(H.ctr[K]!=null?H.ctr[K]:H.ctr[""])+H.w/2;const before=L.map(v=>mgHand(K,v));
   const v=L[0];const keep=v.mgH,keepV=v.mgHv;delete v.mgH;delete v.mgHv;o.oldSave=mgHand(K,v)===before[0];v.mgH=keep;v.mgHv=keepV;
-  C.k[K]={b:7,n:5,at:"11/17/2026"};const Bd=mgCalBand(K);o.band=Bd;o.bandX={hi:Math.min(C.max,7+H.w/2+C.up),lo:Math.max(C.min,7+H.w/2-C.dn)};
+  C.k[K]={b:7,n:5,at:"11/17/2026"};const Bd=mgCalBand(K);o.band=Bd;o.same=Bd.sig===o.def.sig;o.share=mgCalShare(K);o.share0=mgCalShare(K2);
   const after=L.map(v=>mgHand(K,v));o.inBand=after.every(h=>h>=Bd.lo-1e-9&&h<=Bd.hi+1e-9);
-  const ord=a=>a.map((h,i)=>[h,i]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]).join(",");o.order=ord(before)===ord(after);o.otherKind=mgCalBand(K2).sig===o.def.sig;
+  const ord=a=>a.map((h,i)=>[h,i]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]).join(",");o.order=ord(before)===ord(after)&&after.every((h,i)=>h===before[i]);o.otherKind=mgCalBand(K2).sig===o.def.sig;
   /* 4 */
-  const plays=[];for(let i=0;i<600;i++){const q={name:"T"+i,id:9000+i};for(let j=0;j<3;j++)plays.push(mgNpcRaw(K,q,{d:0}))}plays.sort((a,b)=>a-b);
+  const plays=[];for(let i=0;i<600;i++){const q={name:"T"+i,id:9000+i,rank:S.rank,arts:Object.assign({},S.arts),ag:{o:(S.origin&&S.origin.k)||"_"}};/* equal to her in art and upbringing: no lift */for(let j=0;j<3;j++)plays.push(mgNpcRaw(K,q,{d:0}))}plays.sort((a,b)=>a-b);
   o.reach=plays.filter(x=>x>=7).length/plays.length;o.med=plays[plays.length>>1];o.max=plays[plays.length-1];
-  const lows=[];for(let i=0;i<600;i++)lows.push(mgHand(K,{name:"T"+i,id:9000+i}));lows.sort((a,b)=>a-b);o.loPlay=lows[0]-H.w/2;
+  const hs=[];for(let i=0;i<600;i++)hs.push(mgHand(K,{name:"T"+i,id:9000+i})-H.w/2-7);o.up=hs.filter(x=>x>1).length;o.dn=hs.filter(x=>x<-1).length;o.loPlay=Math.min(...hs)+7;
   delete C.k[K];o.back=mgCalBand(K).sig===o.def.sig&&mgHand(K,v)===before[0];
   return o});
  console.log(JSON.stringify(r));
  ok(!r.row0&&r.row1===1&&r.kctl,'1 owner flag only: no row without it; one kit .kctl row with it',{row0:r.row0,row1:r.row1,kctl:r.kctl});
  ok(r.base===r.baseX&&r.baseClamp===10,'2 her base = mean of rounds brought back to a matching board, clamped',{base:r.base,want:r.baseX,clamp:r.baseClamp});
- ok(r.def.lo===3&&r.def.hi===9.5&&r.oldSave,'3 no calibration → BAL default band; an old save rolls the same hand',{def:r.def,old:r.oldSave});
- ok(Math.abs(r.band.hi-r.bandX.hi)<.01&&Math.abs(r.band.lo-r.bandX.lo)<.01&&r.inBand&&r.order&&r.otherKind&&r.back,'3 calibrated kind → her band; hands re-roll in it from the same draw; other kinds untouched; removing it restores',{band:r.band,want:r.bandX,inBand:r.inBand,order:r.order,other:r.otherKind,back:r.back});
- ok(r.reach<=.1&&r.med<=7-1.5&&r.max<=10&&r.loPlay<=7-3,'4 fair to her (b 7): strong NPC plays rare, the middle NPC clearly below her, clumsy hands far below',{reach:r.reach,med:r.med,max:r.max,loPlay:r.loPlay});
+ ok(Math.abs(r.def.c-r.defMed)<.01&&r.oldSave,'3 the NPC curve centres on the average adult play (BAL.ag.mg2.hand ctr) + w/2; an old save rolls the same hand',{def:r.def,old:r.oldSave});
+ {const sh=r.share||{},t=sh.better+sh.equal+sh.worse;ok(r.same&&r.inBand&&r.order&&r.otherKind&&r.back&&Math.abs(t-1)<.01&&Math.abs(sh.better-sh.worse)<.08&&sh.equal>.28&&sh.equal<.38&&r.share0===null,'3 her calibration does NOT move the curve (same hands); it places her on it: b = the adult average → better / equal / worse ≈ 37 / 33 / 30; an uncalibrated kind has no place',{same:r.same,inBand:r.inBand,order:r.order,other:r.otherKind,back:r.back,share:sh,share0:r.share0})}
+ ok(r.reach>=.45&&r.reach<=.7&&Math.abs(r.med-7)<=.5&&r.max<=10&&Math.abs(r.up-r.dn)<=60,'4 her b 7 = the adult average: the middle NPC plays like her, about half at or above her, as many hands above her as below',{reach:r.reach,med:r.med,max:r.max,up:r.up,dn:r.dn,loPlay:r.loPlay});
  /* 5 the test UI */
  const u=await p.evaluate(async()=>{const o={tiers:[]};const sleep=t=>new Promise(r=>setTimeout(r,t));const k0=kg82Play;let n=0;
   window.kg82Play=function(kind,onEnd){n++;setTimeout(()=>onEnd(10-n),10)};try{kg82Play=window.kg82Play}catch(e){}
