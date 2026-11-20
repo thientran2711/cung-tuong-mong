@@ -49,3 +49,16 @@ Sheet: dev/handover/review-sheets/maid7/m18_maid_ladder_v2_sheet.webp. Prompts d
 Gate: thô sử PASS; tam đẳng, nhất đẳng STORE FAIL only on swapped sentences (approved PASS); nữ quan approved FAIL only on B12/M06 = the owner-ordered brocade swap (B12 needs a nữ quan exception if approved).
 All faces same girl, mouth closed, no earrings, no hair flowers. No redraw.
 Open: nhất đẳng — shorten the vest / drop the two long front panels, and add the "ALL hair up, nothing loose" sentence for maids at a18?
+
+## ROUND 3 (owner 20/11 ~15:35Z, brief maid7c.md) — 6 gens × 135 = 810 cr
+| rank | gen | look |
+|---|---|---|
+| Thô sử v3 | hu2cFrpvqL | one clean pink sash ✔ (no blotch), apron, basket, hair up ✔ |
+| Tam đẳng v3 | Tdw9BE8VNR | pink brocade short top, front panel fully visible ✔, hem embroidery ✔ |
+| Nhị đẳng v3 | rgXhURcxtc | blue bijia + pink skirt, embroidery only on hem band ✔, hair up ✔; colour-wise close to nhất đẳng |
+| Nhất đẳng v3 | Lw8fJnzswO | hair up ✔, same outfit (vest + panels still read knee-long, owner said OK) |
+| Chưởng sự v3 | ksetgGU16B | tím cà, ledger book + keys ✔, hair up ✔; purple a bit strong/saturated |
+| Nữ quan | 5jDomu5Kxe (v2 kept) | — |
+| Ma ma v3 a36 | SyhQ4ewUb8 | new outfit: jade blue-green open coat + ivory skirt, umbrella, bun ✔, young-looking |
+All: hair up, no broom, no earrings/hair flowers, same face. Sheet dev/handover/review-sheets/maid7/m18_maid_ladder_v3_sheet.webp. Rules added: K20 (hair always up), K21 (no broom). Gate: 5/6 approved PASS; ma ma FAIL only S32 hai tà (old outfit, expected). No cut-outs (test, A34 refinement). Prompts test3_*.txt (make3.py), CHANGES.md §ROUND 3.
+Open: ma ma secondary colour (ivory = my pick); her personal accent colour (K19 open); nhị vs nhất look similar in colour.
