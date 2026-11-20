@@ -79,7 +79,7 @@ function tsEngSteer(box,env){const C=kg82Canvas(box,1.05,470),{g,W,H}=C;const lv
   const gr=g.createLinearGradient(cx-cw,0,cx+cw,0);gr.addColorStop(0,"rgba(255,240,190,0)");gr.addColorStop(.5,"rgba(255,240,190,.32)");gr.addColorStop(1,"rgba(255,240,190,0)");g.fillStyle=gr;g.fillRect(cx-cw,0,cw*2,H);
   for(const p of pads)kg82Spr(g,"hat-lotus",p.x,p.y,p.r*2.1,null,{alpha:.95});
   if(!kg82Spr(g,"doden-lantern",lx,ly,48,null,{glow:hit>now?0:1}))kg82Blossom(g,lx,ly,16,"#e06030",true);
-  g.font=`700 13px ${kg82Col("--display","serif")}`;g.textAlign="center";kg82Lbl(g,wind>.15?"Gió đẩy sang phải":wind<-.15?"Gió đẩy sang trái":"Lặng gió",W/2,18);kg82DrawPops(g,pops,now)}
+  g.font=`700 13px ${kg82Col("--display","serif")}`;g.textAlign="center";kg82Lbl(g,wind>.15?"→":wind<-.15?"←":"·",W/2,18);kg82DrawPops(g,pops,now)}
  function frame(now){if(stop)return;const tt=now-t0;wind=Math.sin(tt/1700)*.6+Math.sin(tt/530)*.25;
   lx+=(tx-lx)*.12+wind*1.6;lx=cl(lx,20,W-20);
   if(tt>nextPad){pads.push({x:20+Math.random()*(W-40),y:-30,r:22+Math.random()*10});nextPad=tt+900+Math.random()*700}
