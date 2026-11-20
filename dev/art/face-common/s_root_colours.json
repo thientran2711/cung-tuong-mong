@@ -778,5 +778,37 @@
    "sec": "lake blue",
    "sec_hex": "#85B5DA"
   }
+ },
+ "s62": {
+  "main": "ice blue",
+  "main_hex": "#70B8DD",
+  "sec": "blush pink",
+  "sec_hex": "#FFDEE7",
+  "root_season": "dong",
+  "src": "F4 PLACEHOLDER (A32 toned pick, OKLCH band of four_season86_a32.BAND, no FAIL/WARN vs any root or same-season pair); REPLACE with P6's A32 root pair at GO"
+ },
+ "s63": {
+  "main": "peach orange",
+  "main_hex": "#FEB894",
+  "sec": "ivory",
+  "sec_hex": "#F3E7CE",
+  "root_season": "ha",
+  "src": "F4 PLACEHOLDER (A32 toned pick, OKLCH band of four_season86_a32.BAND, no FAIL/WARN vs any root or same-season pair); REPLACE with P6's A32 root pair at GO"
+ },
+ "s64": {
+  "main": "young bud green",
+  "main_hex": "#9FBC83",
+  "sec": "orchid mist",
+  "sec_hex": "#FEDCF5",
+  "root_season": "xuan",
+  "src": "F4 PLACEHOLDER (A32 toned pick, OKLCH band of four_season86_a32.BAND, no FAIL/WARN vs any root or same-season pair); REPLACE with P6's A32 root pair at GO"
+ },
+ "s65": {
+  "main": "plum",
+  "main_hex": "#AB6E9E",
+  "sec": "ivory",
+  "sec_hex": "#ECE0C8",
+  "root_season": "thu",
+  "src": "F4 PLACEHOLDER (A32 toned pick, OKLCH band of four_season86_a32.BAND, no FAIL/WARN vs any root or same-season pair); REPLACE with P6's A32 root pair at GO"
  }
 }
