@@ -262,6 +262,14 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
    pop = scale of the lit / pressed target (was 1.08 / 1.14: hard to see) · ms = how long the pop + lit ring stay · glow/ring = colours · blur = glow size px ·
    pass = glow passes (shadow stacks) · ringW = ring width as a share of the target's width · dim = darkening of the UNLIT painting under a lit cue (contrast) */
 BAL.mgFx={pop:1.24,ms:300,glow:"#fff0a0",ring:"#ffffff",blur:44,pass:3,ringW:.07,dim:.18};
+/* mg-craft-hoa (owner OD 20/11 ~08:15Z, design MG_CRAFTS.md §3): Cắm hoa «Chọn mùa · cắt cành · nghiêng thế» (jcraft_hoa.js). Levers = [ease 0, ease 5] through mgLev:
+   ghost = share of the ruler ticks / lean fan shown · cutTol = length error that still counts full (share of the target) · angTol = lean error in degrees that counts full ·
+   alike = off-season look-alikes in the tray of 6 · sway = stem wobble while it is turned (share of half a turn) · limStem = ms per stem of the vase (clock = stems × this).
+   BAL.mgTier.hoa: n = stems of the 3 vases (+ mgMore, at most maxMore) · thien = Thiên length in vase heights · k = Nhân/Thiên, Địa/Nhân · guest = guest stems ÷ the Nhân (odd) / Địa (even) they hang off ·
+   ang = lean degrees per stem, signed (Thiên, Nhân, Địa, guests) · cut = uncut stem in vase heights · zero = the error (× its tolerance) at which a part scores 0 · seat = mouth radius in vase heights ·
+   w = score weights (season, length, lean, balance) · wrong = season share lost per wilted pick · balTol = balance error (share of the stem lengths) that scores 0 · judgeMs = pause on the stars. */
+Object.assign(BAL.mgTier.lev.hoa=BAL.mgTier.lev.hoa||{},{ghost:[0,1],cutTol:[.06,.15],angTol:[8,20],alike:[3,0],sway:[.03,0],limStem:[11000,17000]});
+BAL.mgTier.hoa={n:[3,4,5],maxMore:2,thien:1.5,k:[.75,.75],guest:[.85,.85,.65,.65],ang:[-10,45,-75,25,-50,60,-30],cut:2.2,zero:3,seat:.4,w:{sea:.2,len:.4,ang:.3,bal:.1},wrong:.5,balTol:.35,judgeMs:1500};
 BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timing game's right moment that the hand says «chạm» (KG82.hint: rhythm, aim), a reaction time */
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
    condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
