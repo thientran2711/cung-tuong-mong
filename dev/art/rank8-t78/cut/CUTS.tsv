@@ -1,4 +1,4 @@
-# CDN-T78 20/11: transparent cut-outs live on the CDN only (law: images on the CDN, not in git). PNG = native 1024x2304 RGBA; .webp = lossless copies used by sacsao-page/ (git copy kept). m18 t7 = v2 redraw SyhuHMnUb8 (cut by CDN-T78).
+# CDN-T78 20/11: transparent cut-outs live on the CDN only (law: images on the CDN, not in git). PNG = native 1024x2304 RGBA; .webp = lossless copies used by sacsao-page/ (git copy kept). m18 t7 = v2 redraw SyhuHMnUb8 (cut by CDN-T78). MARKFIX 20/11: s18 t7, s37 t8, s57 t7/t8, s59 t7/t8, s60 t7/t8 point to the beauty-mark-fixed *-a18-mf.png (old objects kept on the CDN).
 id	t	gen	cut_id	cdn_url	md5	size
 m02	t7	lJt8ujFgv9	Lw8aFWhswO	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/m02-t7-a18.png	0cfbf881ead50ea6d2ddb7510a5519fd	3785637
 m02	t8	kseDhr516B	cpSyi5h0eP	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/m02-t8-a18.png	1747a7a8c1c86e17e6ab561eadee24c2	4382072
@@ -46,7 +46,7 @@ s16	t7	rgXdJUgxtc	3zKLJcKREY	https://ctm-img.victoria-tntt.workers.dev/img/fig-c
 s16	t8	Syhm66eUb8	79fHxZXJAL	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s16-t8-a18.png	1684046bbb6dbea86b4dba6f8f1646be	4487843
 s17	t7	tCR35uqmZJ	Lw8aqNTswO	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s17-t7-a18.png	4e89fac236eb7610c6ed4a4cb942cd92	4100831
 s17	t8	VX7wvtKMMU	JNCqjzXOq4	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s17-t8-a18.png	0b36188346d3f2021606ea67914e6ae7	4609932
-s18	t7	79faA27JAL	lJtC5Rrgv9	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s18-t7-a18.png	3c91bde178f0c19761eeeae39567c4f3	4586646
+s18	t7	79faA27JAL	lJtC5Rrgv9	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s18-t7-a18-mf.png	475d0e27eea9d604414e43622bae5795	3828271
 s18	t8	WDglIhFcXe	xSBhFi9jfW	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s18-t8-a18.png	9ae348ae6420272a717e12c380fb03a1	4548073
 s19	t7	yiuEWavPW9	s7IfbAil8e	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s19-t7-a18.png	92fb105f79269cd370c58d3959606c19	4137771
 s19	t8	EbYnlcDuuO	p8yinPdehw	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s19-t8-a18.png	4ff6252891ffb85107140c3ad19c908e	4832719
@@ -85,7 +85,7 @@ s35	t8	EbYnS1juuO	s7IfK9wl8e	https://ctm-img.victoria-tntt.workers.dev/img/fig-c
 s36	t7	gOmtA3ZSXO	mEZYd59hJQ	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s36-t7-a18.png	32a2bd0cbaaa96a12927d4245a62fcd4	4277517
 s36	t8	8ai6kktIrU	1ldtFyhr4r	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s36-t8-a18.png	1ff0038c0892a42ebaa3201184217829	4593905
 s37	t7	eIPyHbAdqL	kseIQPJ16B	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s37-t7-a18.png	90e88dd1d906655de3914a07c822d953	4494334
-s37	t8	YMlshEsWeC	iG5jOpF3uK	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s37-t8-a18.png	999000f9145fbcce236cb2bc3aeb0aa5	4852810
+s37	t8	YMlshEsWeC	iG5jOpF3uK	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s37-t8-a18-mf.png	a39ec80adc4aea76183a61b148e16b7c	3960724
 s38	t7	fHzGlyRCDY	WDgOZvRcXe	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s38-t7-a18.png	7f37a952f1c8f050538d07bfb698914c	4253690
 s38	t8	lJtI2pqgv9	5jDoE99Kxe	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s38-t8-a18.png	e4d2610beff351269abc0a83130b3fdd	4546542
 s39	t7	BhN9ueuoQR	SyhuqPgUb8	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s39-t7-a18.png	f84145f4d268c0292942f97073afddbd	4033596
@@ -124,14 +124,14 @@ s55	t7	Syhm2y0Ub8	1ldtHJdr4r	https://ctm-img.victoria-tntt.workers.dev/img/fig-c
 s55	t8	KLpDylfkqp	Xm9ZV7lBfo	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s55-t8-a18.png	f6abf711635b841f5975d3f4207f78b8	4587804
 s56	t7	If3iKHntvE	5jDoucWKxe	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s56-t7-a18.png	3b5a3584e97b915d45fffc1c086f38a8	4162673
 s56	t8	TdwUavZVNR	s7IfkXbl8e	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s56-t8-a18.png	089433c0e660591cda6fa5d3d713b0fe	4518430
-s57	t7	3zK5pXpREY	YMlJZLfWeC	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s57-t7-a18.png	d2fdc9af729a18b1e22161d4b709398a	4185737
-s57	t8	Xm94H1nBfo	If3zei3tvE	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s57-t8-a18.png	e136e9116a3bdc84efb3be18310e960f	4951316
+s57	t7	3zK5pXpREY	YMlJZLfWeC	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s57-t7-a18-mf.png	6eabb61032b93de9037e7ad228fcd366	3635889
+s57	t8	Xm94H1nBfo	If3zei3tvE	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s57-t8-a18-mf.png	d4f4b119aaf921e017efb77e30ddd8cf	4092581
 s58	t7	WDglmFkcXe	s7IfkIDl8e	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s58-t7-a18.png	c423344dae068d13d2f8a8090bd2eb6c	3934536
 s58	t8	xSBXNWqjfW	iG5jyKP3uK	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s58-t8-a18.png	87ecf719a1cb50ead4443ddbee116d4d	4304310
-s59	t7	VX7wfL9MMU	yiu5SHRPW9	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s59-t7-a18.png	cd8283a9250e16b3356d6835113079b5	4550760
-s59	t8	jUoB6dGLD0	cpSyAJq0eP	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s59-t8-a18.png	daf80b831bca552f21979ecd0933df82	4637404
-s60	t7	xSBXNBojfW	ov6AD2T829	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s60-t7-a18.png	9ce8cf2accade21c46e5175f485b8650	4302033
-s60	t8	fHzGLWXCDY	vQAco0Ea47	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s60-t8-a18.png	0665eb05a95f7cb8a2220e40efc57396	4619021
+s59	t7	VX7wfL9MMU	yiu5SHRPW9	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s59-t7-a18-mf.png	32c25e9b6a9a93a21b7f6798e45594da	3856102
+s59	t8	jUoB6dGLD0	cpSyAJq0eP	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s59-t8-a18-mf.png	5d9d19f02c21bd854bb6475a3e11696e	3747449
+s60	t7	xSBXNBojfW	ov6AD2T829	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s60-t7-a18-mf.png	6ab30ea387940abc7067a98bd6c99305	3680368
+s60	t8	fHzGLWXCDY	vQAco0Ea47	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s60-t8-a18-mf.png	316ed8806adfbf629a2d8c6bebf68c27	3879740
 s63	t7	iG5bDLQ3uK	EbYMmpUuuO	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s63-t7-a18.png	8481e2be6cd5ae613c5dadc245daaa7f	4214700
 s63	t8	8ai65W4IrU	Tdw4z6ZVNR	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/s63-t8-a18.png	35c76284284819a91308fa18f4cbbdd3	4592739
 m09	t7	s7IoHAXl8e	yiu51b0PW9	https://ctm-img.victoria-tntt.workers.dev/img/fig-cut/rank8/m09-t7-a18.webp	a6007b70afb29d4213d7b83b6f415cc7	1539914

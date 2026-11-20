@@ -28,9 +28,24 @@ Marks copied at native size (face-size ratios 0.93–1.03, no rescale needed); p
 - Fixed pictures: dev/handover/review-sheets/rank8-t78/fixed/<id>_t<n>_a18.webp (originals untouched)
 - Per-picture before/after: fixed/<id>_t<n>_markfix_before_after.jpg; overview: fixed/MARKFIX_sheet.jpg ("TRƯỚC | SAU")
 - Log: fixed/markfix_log.json. Scripts: dev/art/beautymark/markfix_batch.py, markfix_sheets.py
-- Cut-outs: none of the 17 people have files in dev/art/rank8-t78/cut/ → nothing to apply.
+- Cut-outs (CORRECTED; my first report wrongly said none exist; they are on the CDN, listed in dev/art/rank8-t78/cut/CUTS.tsv): the same 8 ops were applied to the CDN cut-outs (RGB only, alpha byte-identical, checked; cut and full picture are aligned, phase-correlation shift <0.15 px). They were saved as NEW objects img/fig-cut/rank8/<id>-<t>-a18-mf.png via dev/site/cdn_sync.py (old objects kept). CUTS.tsv rows now point to the -mf objects with the new md5/size. Public GET md5 = local md5 for all 8. No PNG in git.
+  Run: `python3 dev/art/beautymark/markfix_batch.py --cuts <dir with the CDN <id>-<t>-a18.png>`.
+- Heal-only (if the owner says s57/s59/s60 have no mark): `python3 dev/art/beautymark/markfix_batch.py --heal-only s57,s59,s60` (add `--cuts DIR` for the cut-outs).
+- The fixed full pictures in git are webp q100 (lossy re-encode, mean 1/255 difference away from the mark); the cut-out PNGs are exact.
 
 ## Notes
 - s57 t7 / s59 marks are her own painted dots, which are lighter than s58's; s60 uses s58's darker dot.
 - s16 face cut also has a tiny forehead speck (not in scope, untouched).
 - Gens used: 0. Gate: n/a (no prompt).
+
+## CDN cut-outs (-mf)
+| key | md5 | size |
+|---|---|---|
+| s18-t7-a18-mf.png | 475d0e27eea9d604414e43622bae5795 | 3828271 |
+| s37-t8-a18-mf.png | a39ec80adc4aea76183a61b148e16b7c | 3960724 |
+| s57-t7-a18-mf.png | 6eabb61032b93de9037e7ad228fcd366 | 3635889 |
+| s57-t8-a18-mf.png | d4f4b119aaf921e017efb77e30ddd8cf | 4092581 |
+| s59-t7-a18-mf.png | 32c25e9b6a9a93a21b7f6798e45594da | 3856102 |
+| s59-t8-a18-mf.png | 5d9d19f02c21bd854bb6475a3e11696e | 3747449 |
+| s60-t7-a18-mf.png | 6ab30ea387940abc7067a98bd6c99305 | 3680368 |
+| s60-t8-a18-mf.png | 316ed8806adfbf629a2d8c6bebf68c27 | 3879740 |
