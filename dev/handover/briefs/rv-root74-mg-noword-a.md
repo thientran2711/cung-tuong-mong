@@ -1,0 +1,7 @@
+PRIORITY #1 CHECK: OD 20/11 ~05:10Z (no text in mini-game play) + ~06:20Z (clarity) | main j82 kit frame | review/mg-noword-a ab5e4f68 | claims mg-noword-a JjhKkEPJ
+# REVIEW mg-noword-a (SMALL, sonnet) — MAIN ROOT-74
+Read briefs/root74-common.md first (all), START_REVIEWER.md, topic kit-ui.md, KIT.md parts touched (demo motions "pull"/"slide"), VANPHONG.md.
+Owner rule (OD 20/11 ~05:10Z, verbatim): "không có một cái mini game nào mà có chữ hết trơn á. Lỡ đâu người nước ngoài người ta chơi game không biết tiếng Việt sao chơi, nên để bằng hình ảnh chẳng hạn." Owner bug (OD ~06:20Z): "Cái trò dung này là tôi chịu quá, tôi không hiểu cách chơi." → clarity by picture/animation for every kind.
+Target review/mg-noword-a = ab5e4f68 (report reports/mg-noword-a.md; brief briefs/root73-mg-noword-a.md).
+CHECK: 0 words in play + «Hướng dẫn» for the 15 group-a kinds (run dev/test/mg-noword-a.js, look yourself); new demo motions are kit parts registered in KIT.md (no private look); every pictogram readable on Fold 755x1000 + iPad 1180x820 (LOOK at shots); clarity table honest; mg-ready-guide 9/9, ag-mgcal, quickcheck incl. old save; no touch of BAL.mgFx (mg-visual) or group-b kinds. If PASS: final-merge newest origin/main on review/mg-noword-a-rv (index/sw rebuild), rerun tests, FF-check.
+VERDICT: reports/rv-mg-noword-a.md; CLAIMS row; send_message MAIN ROOT-74 session_01Rc5AsLW7a12BUC5kZhtsTy "PASS <final sha>" or "FAIL <sha> <n fixes>" (fixes to worker JjhKkEPJ).
