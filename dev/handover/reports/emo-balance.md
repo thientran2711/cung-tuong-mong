@@ -28,3 +28,10 @@ Keep 150/arm. Early stop allowed: once ON ≥ 75 lives, if every key metric's OF
 - Shard 4 (seed 504) was OOM-killed at 6 lives (dmesg: chrome-headless 3.3 GB anon). Renderer RSS grows with lives per page (shard 5: 4.4 GB at 27 lives); 4 browsers use ~12 of 15 GB, so a 5th cannot run alongside.
 - Plan: let shards 1/2/3/5 finish (crashes keep the lives already written), then top up to 150 in chunks of ≤10 lives per process, ≤4 browsers, new seeds 6xx listed here. ON arm uses the same chunk/seed plan.
 - Note for resume: the watcher loop hits the 2 h background limit; a send_later wake is set for 14:03Z.
+
+## 14:05Z — container slept 12:36–14:04 (all bot processes gone; files kept)
+- Lesson: bot runs only live while this session has a background task; a detached nohup run dies when the container is reclaimed. Runs are now the background task itself, in chunks that end before the 2 h background limit.
+- New tool dev/measure/run4c.sh (review/emo-balance): one browser per seed, ≤4 at once, CAP 6900 s, out <label>_s<seed>.json.
+- OFF so far: run5b shards seeds 501/502/503/505 = 14/19/17/27, seed 504 = 6 (OOM) → 83 lives.
+- OFF top-up round 1: seeds 601–604 × 8 lives (14:05Z). Round 2 planned: 605–608 × 9.
+- ON plan (same shape): run5b-like first part is not repeated; ON = seeds 501–505 and 601–608 via run4c in the same per-seed counts as OFF.
