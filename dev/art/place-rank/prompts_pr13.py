@@ -350,6 +350,84 @@ HA_TAY_REC = ("Hàm An cung Tây phối điện reception room, the small sittin
     "runner). " + QN + " Only the two colours soft green (curtains) and soft blue (fabrics)." + NOPE + P['NOSOFA'] + RECT + GUIDE_S + FR)
 OUT['ham-an-cung-tay-phoi'] = dict(prompt=room9(HA_TAY_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3])
 
+# ---- PR16 pre-build (ROOT-59 00:38Z: "pre-build Diên Huy (CARD_DH + pair) while waiting; no gens"). Pairs = the least-used so far
+#      (TT 2, QQ 2, ĐĐ 2 vs ĐT/ĐQ/TQ 4–5): Diên Huy đông = TT (whole room soft green), tây = QQ (whole room soft blue).
+#      Walls / windows continue the alternation from room 18 (3w right): 19 = 2w left, 20 = 3w right, 21 = 2w left, 22 = 3w right.
+# Diên Huy style card (new, PR16; pattern of CARD_CP/KT/CT/HA: flower, carved motif, wood + inlay, furniture shape, partition shape — none of
+# these used by another palace): chrysanthemums; pairs of swallows among willow branches; chestnut-brown huanghuali +
+# small white jade plaques; tall-backed lamp-hanger chairs without arms; an octagonal doorway in a lattice of interlocking coin circles.
+CARD_DH = ("Diên Huy cung signature style, the same in every room of this palace: chrysanthemums (hoa cúc) are its flower, painted on the screens, "
+    "embroidered on the silks and in the pots; motifs of pairs of swallows among willow branches carved in the beams and furniture; warm "
+    "chestnut-brown huanghuali wood with small white jade plaques; tall-backed lamp-hanger side chairs without arms; an octagonal doorway in a "
+    "lattice partition of interlocking coin circles. ")
+# 19) Diên Huy ĐÔNG phối bedroom — pair Thường tại + Thường tại (TT): whole room soft green #7FB394. TWO walls, windows LEFT (image 3 8aiwqQTIrU).
+#     Own layout (10 = both beds on one shared platform in the left two thirds; 15/17 = beds at both ends): both beds side by side in the RIGHT
+#     two thirds of the back wall, each on its own low bed step, a small carved bedside cabinet between them; the octagonal doorway at the LEFT end
+#     of the back wall; along the left window wall a dressing table with a round mirror + stool and a clothes rack with a robe. + CARD_DH + BEDH4 + BEDW + FG.
+DH_DONG_NGU = ("Diên Huy cung Đông phối điện bedroom, the cosy bedchamber SHARED by two lower-ranking imperial consorts (two Thường tại) living in "
+    "the east side hall of a palace in ancient China, a real room in daily use, " + WL2 + ": wooden pillars, lattice windows in the LEFT side wall "
+    "onto a sunny garden; against the back wall in its RIGHT two thirds, square to it and seen straight on, TWO tall, WIDE, generous free-standing "
+    "canopy frame beds of carved chestnut-brown huanghuali wood side by side, each on its own low bed step with slippers, a small carved bedside "
+    "cabinet with a lamp between them, each bed whole in width inside the picture, together the large clear main subject; at the LEFT end of the "
+    "back wall a lattice partition with the octagonal doorway onto an inner room; along the left window wall a dressing table with a round bronze "
+    "mirror and a low stool, and a clothes rack with a robe; hanging paper lanterns with tassels, pots of chrysanthemums, a small embroidery basket. "
+    + CARD_DH + pair1('soft green', '#7FB394') + "the gauze curtains of BOTH beds, the window curtains, the curtain of the doorway, the lantern "
+    "tassels, the bedding and cushions of BOTH beds and the stool cushion, set off by the chestnut-brown wood; the two beds look alike. " + QN
+    + " Exactly two beds; the only rank colour is soft green." + NOPE + RECT + GUIDE_S + BEDH4 + BEDW + FG)
+OUT['dien-huy-cung-dong-phoi-ngu'] = dict(prompt=room9(DH_DONG_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M2X])
+
+# 20) Diên Huy ĐÔNG phối reception — TT soft green. THREE walls, windows RIGHT (image 3 cpS5YIl0eP). Own layout (daybeds 9/14/16, dais 18,
+#     chair pairs 11 centred + two doorways / 12 right half + screen): host seats = a pair of tall-backed lamp-hanger chairs + square tea table
+#     in the CENTRE of the back wall before a long narrow side table with a vase, under a large horizontal painted chrysanthemum panel; the
+#     octagonal doorway at the LEFT end of the back wall only; RIGHT end = a tall standing embroidered screen panel; left side wall = writing
+#     desk; right windows = two chrysanthemum stands + small weiqi table. + CARD_DH + FR.
+DH_DONG_REC = ("Diên Huy cung Đông phối điện reception room, the small sitting room where two lower-ranking imperial consorts (two Thường tại) "
+    "living in the east side hall of a palace in ancient China receive their guests, a real room in daily use, no bed anywhere, " + W3R + ": wooden "
+    "pillars, lattice windows in the RIGHT side wall onto a sunny garden; in the middle of the back wall, square to it and seen straight on, the "
+    "host seats, the large clear main subject: a pair of tall-backed lamp-hanger side chairs of chestnut-brown huanghuali wood with a square tea "
+    "table and a tea set between them, before a long narrow side table with a vase of chrysanthemums, under a large horizontal painted panel of "
+    "chrysanthemums and swallows; at the LEFT end of the back wall a lattice partition with the octagonal doorway onto an inner room; at the RIGHT "
+    "end of the back wall a tall standing screen panel embroidered with willows; against the left side wall a writing desk with brushes and an "
+    "inkstone; along the right window wall two stands with potted chrysanthemums and a small weiqi game table with two stools; hanging paper "
+    "lanterns with tassels, a small incense burner. " + CARD_DH + pair1('soft green', '#7FB394') + "the sheer window curtains tied back, the "
+    "curtain of the doorway, the lantern tassels, the seat cushions and the table runner, set off by the chestnut-brown wood. " + QN
+    + " The only rank colour is soft green." + NOPE + P['NOSOFA'] + RECT + GUIDE_S + FR)
+OUT['dien-huy-cung-dong-phoi'] = dict(prompt=room9(DH_DONG_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3])
+
+# 21) Diên Huy TÂY phối bedroom — pair Quý nhân + Quý nhân (QQ): whole room soft blue #7E9CCB. TWO walls, windows LEFT (image 3 8aiwqQTIrU).
+#     Own layout (owner L816 frontal, beds at both ends; centre used before: doorway 15, round panel + dressing table 17, shelf 1, vase door 8):
+#     centre = a pair of tall compound wardrobes side by side; the octagonal doorway in the LEFT side wall's far end; along the left window wall a
+#     small tea table with two stools. + CARD_DH + BEDH4 + BEDW + FG.
+DH_TAY_NGU = ("Diên Huy cung Tây phối điện bedroom, the cosy bedchamber SHARED by two lower-ranking imperial consorts (two Quý nhân) living in "
+    "the west side hall of a palace in ancient China, a real room in daily use, " + WL2 + ": wooden pillars, lattice windows in the LEFT side wall "
+    "onto a sunny garden; against the back wall, square to it and seen straight on, TWO tall, WIDE, generous free-standing canopy frame beds of "
+    "carved chestnut-brown huanghuali wood, one at the LEFT end and one at the RIGHT end of the back wall, each on its own low bed step with "
+    "slippers, each bed whole in width inside the picture, together the large clear main subject; in the middle of the back wall between them a "
+    "pair of tall compound wardrobes side by side (a small top cabinet on a tall cabinet) with brass fittings and a pot of chrysanthemums before "
+    "them; at the far end of the left side wall a lattice partition with the octagonal doorway; along the left window wall a small tea table with "
+    "two stools; hanging paper lanterns with tassels, a small embroidery basket. " + CARD_DH + pair1('soft blue', '#7E9CCB') + "the gauze "
+    "curtains of BOTH beds, the window curtains, the curtain of the doorway, the lantern tassels, the bedding and cushions of BOTH beds and the "
+    "stool cushions, set off by the chestnut-brown wood; the two beds look alike. " + QN + " Exactly two beds; the only rank colour is soft blue."
+    + NOPE + RECT + GUIDE_S + BEDH4 + BEDW + FG)
+OUT['dien-huy-cung-tay-phoi-ngu'] = dict(prompt=room9(DH_TAY_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M2X])
+
+# 22) Diên Huy TÂY phối reception — QQ soft blue. THREE walls, windows RIGHT (image 3 cpS5YIl0eP). Own layout (≠ room 20 centred chairs): host
+#     seats = a pair of lamp-hanger chairs + small tea table in the RIGHT two thirds of the back wall on a low wide platform before a large round
+#     framed embroidered screen of chrysanthemums; the octagonal doorway at the LEFT end; left side wall = a long painting table with scrolls in a
+#     jar; right windows = a tall flower stand with chrysanthemums + a low cabinet with a fish bowl. + CARD_DH + FR.
+DH_TAY_REC = ("Diên Huy cung Tây phối điện reception room, the small sitting room where two lower-ranking imperial consorts (two Quý nhân) "
+    "living in the west side hall of a palace in ancient China receive their guests, a real room in daily use, no bed anywhere, " + W3R + ": wooden "
+    "pillars, lattice windows in the RIGHT side wall onto a sunny garden; against the back wall in its RIGHT two thirds, square to it and seen "
+    "straight on, the host seats, the large clear main subject: a pair of tall-backed lamp-hanger side chairs of chestnut-brown huanghuali wood "
+    "with a small tea table and a tea set between them, on a low wide platform, before a large round-framed standing screen embroidered with "
+    "chrysanthemums and swallows; at the LEFT end of the back wall a lattice partition with the octagonal doorway onto an inner room; against the "
+    "left side wall a long painting table with brushes and a porcelain jar of scrolls; along the right window wall a tall flower stand with "
+    "potted chrysanthemums and a low cabinet with a blue-and-white fish bowl; hanging paper lanterns with tassels, a small incense burner. "
+    + CARD_DH + pair1('soft blue', '#7E9CCB') + "the sheer window curtains tied back, the curtain of the doorway, the lantern tassels, the seat "
+    "cushions and the table runner, set off by the chestnut-brown wood. " + QN + " The only rank colour is soft blue." + NOPE + P['NOSOFA']
+    + RECT + GUIDE_S + FR)
+OUT['dien-huy-cung-tay-phoi'] = dict(prompt=room9(DH_TAY_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3])
+
 # GATE (as v9): common block present, method refs, no drift words, no phoenix/yellow below t7.
 for k, v in OUT.items():
     p = v['prompt']
