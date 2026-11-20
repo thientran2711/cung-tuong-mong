@@ -388,11 +388,11 @@ const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,pattern:kg82Pattern,steps:kg82Steps,
 
 /* ---------- running one game inside the frame ---------- */
 function kg82Play(kind,onEnd){kgPay();const box=kg82Box();if(!box)return;box.classList.remove("kgintro");box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";{const d=kg82El();if(d){d.classList.add("kg-run");d.classList.remove("kg-idle")}}
- let done=false,dead=false,stop=null;const env={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:raw=>{if(done)return;done=true;clearTimeout(guard);KG82.quit=null;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.rawF=raw;const gm=raw===0&&KG82.gaveUp?0:mgGrade(raw,kind);kg82Set0("score",`${gm}/10`);/* review/mg-score-same: the board ends on the mark given */onEnd(gm)}};/* mg-balance: engines pass a float; graded by BAL.mgTier.gamma */
+ let done=false,dead=false,stop=null;const env=KG82.cur={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:raw=>{if(done)return;done=true;clearTimeout(guard);KG82.quit=null;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.rawF=raw;const gm=raw===0&&KG82.gaveUp?0:mgGrade(raw,kind);kg82Set0("score",`${gm}/10`);/* review/mg-score-same: the board ends on the mark given */onEnd(gm)}};/* mg-balance: engines pass a float; graded by BAL.mgTier.gamma */
  let guard=0;KG82.gaveUp=0;if(KG82.giveUp){KG82.giveUp=0;KG82.gaveUp=1;env.end(0);return}/* KIT §13.9 kit ✕ «Quay lại» on the rules screen: given up before «Sẵn sàng» = the caller's own 0/10 result, no board, no clock */
  guard=setTimeout(()=>env.end(0),97500);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};KG82.quit=()=>{KG82.gaveUp=1;env.end(0)};/* §13.9: given up during play */
  /* the board paintings load first (≤2.5 s), then the game starts */
- kg82Preload(kind).then(()=>{if(dead||done)return;try{stop=KG82_ENG[KG82_KIND[kind].e](box,env)}catch(e){console.error(e);env.end(5)}})}
+ kg82Preload(kind).then(()=>{if(dead||done)return;try{if(typeof kitGameMark==="function")kitGameMark("–/10");/* kit-mark: the chip shows 0/10 from the first moment, engines that call env.hud overwrite it */stop=KG82_ENG[KG82_KIND[kind].e](box,env)}catch(e){console.error(e);env.end(5)}})}
 function kg82Word(raw){return mgWord(raw)}/* thresholds in BAL.mgTier.word (jmgt) */
 function kg82Norm(st){if(!st)return[];if(Array.isArray(st))return st.filter(x=>x&&x[1]);return Object.entries(st).filter(([k,v])=>v&&typeof v==="number").map(([k,v])=>[(typeof NAMES!=="undefined"&&NAMES[k])||k,v])}
 
@@ -539,7 +539,7 @@ function kgReady(box,spec){box=box||kg82Box();if(!box)return false;const s=kgRea
  const old=box.querySelector(".kgr");if(old)old.remove();
  const rows=[["Môn",s.t?`${s.n} · ${s.t}`:s.n,"t"]].concat(s.steps&&s.steps.length?s.steps.map(r=>[r[0],r[1],r[2]||"t"]):s.how?[["Luật",s.how,"t"]]:[]);
  let pic="";try{pic=s.pic!=null?s.pic:(s.kind&&!["duho","den","may"].includes(s.kind)?`img/kit/mg-${kg82BgName(s.kind)}.webp`:"")}catch(e){}/* the board painting under the picture of the move (no painting: plain card) */
- const html=`<div class="kgr"><h4 class="kpst">Luật chơi · ${s.n}</h4>${kg82Rows(rows)}${kgReadyDemo(KG82_DEMO[s.e]||"tap",pic)}`+
+ const html=`<div class="kgr"><h4 class="kpst">Luật chơi · ${s.n}</h4>${kg82Rows(rows)}${(window.NWB_DEMO&&window.NWB_DEMO[s.e]?window.NWB_DEMO[s.e]():kgReadyDemo(KG82_DEMO[s.e]||"tap",pic))}`+
   `<p class="kpnote kgr-note">${s.timed?"Đọc kỹ luật, xem hình mẫu; chưa tính giờ. Chạm «Sẵn sàng» thì ván mới bắt đầu và mới tính giờ.":"Đọc kỹ luật, xem hình mẫu. Chạm «Sẵn sàng» thì ván mới bắt đầu."}</p></div>`;
  box.insertAdjacentHTML("afterbegin",html);box.classList.add("kgintro");
  const go=box.querySelector(s.go);
