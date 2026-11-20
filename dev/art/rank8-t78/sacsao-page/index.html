@@ -74,23 +74,23 @@ figcaption span{font:600 13px var(--body);color:var(--muted)}
   <img id="bigimg" alt="">
 </div>
 <script>
-const PEOPLE=__PEOPLE__;
+const PEOPLE=[{"id": "m09"}, {"id": "s07"}, {"id": "s08"}, {"id": "s09"}, {"id": "s39"}, {"id": "s40"}, {"id": "s41"}, {"id": "s42"}];
 const RANKS=[["t7","Hoàng quý phi"],["t8","Hoàng hậu"]];
 let i=0,g="check",bigRank=0;
 const $=id=>document.getElementById(id);
 const strip=$("strip");
-PEOPLE.forEach((p,k)=>{const b=document.createElement("button");b.className="pick";b.innerHTML=`<img src="cut/${p.id}_t7.png" alt="" loading="lazy">${p.id}`;b.onclick=()=>show(k);strip.appendChild(b);});
+PEOPLE.forEach((p,k)=>{const b=document.createElement("button");b.className="pick";b.innerHTML=`<img src="cut/${p.id}_t7.webp" alt="" loading="lazy">${p.id}`;b.onclick=()=>show(k);strip.appendChild(b);});
 function show(k){i=(k+PEOPLE.length)%PEOPLE.length;const p=PEOPLE[i];
   [...strip.children].forEach((b,n)=>b.setAttribute("aria-current",n===i));strip.children[i].scrollIntoView({block:"nearest",inline:"center"});
   $("who").innerHTML=`${p.id}<small>${i+1} / ${PEOPLE.length} · nhóm Sắc sảo</small>`;
-  $("pair").innerHTML=RANKS.map(([t,n],r)=>`<figure><figcaption>${n}<span>${t} · ${p.id}</span></figcaption><div class="frame g-${g}" data-r="${r}"><img src="cut/${p.id}_${t}.png" alt="${p.id} ${n}"></div></figure>`).join("");
+  $("pair").innerHTML=RANKS.map(([t,n],r)=>`<figure><figcaption>${n}<span>${t} · ${p.id}</span></figcaption><div class="frame g-${g}" data-r="${r}"><img src="cut/${p.id}_${t}.webp" alt="${p.id} ${n}"></div></figure>`).join("");
   document.querySelectorAll(".frame").forEach(f=>f.onclick=()=>openBig(+f.dataset.r));
   if(location.hash!=="#"+p.id)history.replaceState(null,"","#"+p.id);
   if(!$("big").hidden)openBig(bigRank);}
 function setG(x){g=x;document.querySelectorAll(".grounds button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.g===g));
   document.querySelectorAll(".frame").forEach(f=>f.className="frame g-"+g);$("big").className="big g-"+g+($("big").classList.contains("fit")?" fit":"");}
 document.querySelectorAll(".grounds button").forEach(b=>b.onclick=()=>setG(b.dataset.g));
-function openBig(r){bigRank=r;const p=PEOPLE[i],[t,n]=RANKS[r];const im=$("bigimg");im.src=`cut/${p.id}_${t}.png`;im.alt=`${p.id} ${n}`;$("big").hidden=false;}
+function openBig(r){bigRank=r;const p=PEOPLE[i],[t,n]=RANKS[r];const im=$("bigimg");im.src=`cut/${p.id}_${t}.webp`;im.alt=`${p.id} ${n}`;$("big").hidden=false;}
 $("close").onclick=()=>$("big").hidden=true;
 $("zoom").onclick=()=>{const fit=$("big").classList.toggle("fit");$("zoom").textContent=fit?"Xem 100%":"Vừa màn hình";};
 $("bignext").onclick=()=>{if(bigRank===0)openBig(1);else{bigRank=0;show(i+1);}};
