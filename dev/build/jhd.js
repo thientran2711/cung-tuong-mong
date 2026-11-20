@@ -114,6 +114,10 @@ function hdBoard(o){const B=BAL.hd,{C,G}=o,{g,W,H}=C;let stop=false,raf=0;const 
  raf=requestAnimationFrame(frame);
  /* test oracle (like KG82.peek): where the anchor and the sticker are, in client px */
  HD.peek=()=>A?{anchor:C.client(A.x,A.y),at:C.client(pos[0],pos[1]),ang,ideal:A.ang,ed:A.ed*(C.cv.getBoundingClientRect().width/W),mesh:A.mesh}:null;
+ /* hint hook (KIT §13.7 guided round, mg-ready-guide): drag the sticker onto the forehead, then tilt, then «Dán» */
+ KG82.peek=()=>{if(stop||!A||drag)return null;if(!o.box.querySelector("#hdok"))return null;const d=Math.hypot(pos[0]-A.x,pos[1]-A.y);
+  if(d>A.ed*.12){const a=C.client(pos[0],pos[1]),b=C.client(A.x,A.y);return{drag:[[a.x,a.y],[b.x,b.y]]}}
+  const a=((ang-A.ang)%360+540)%360-180;if(Math.abs(a)>B.rot/2)return{sel:a>0?"#hdl":"#hdr"};return{sel:"#hdok"}};
  return{stop:()=>{stop=true;cancelAnimationFrame(raf)},result}}
 const HD={peek:()=>null};window.HD=HD;
 
