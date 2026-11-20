@@ -1,0 +1,7 @@
+base: dev/art/dong_hientai/s62_t8_DONG_HIENTAI_cloak7.txt
+allow: ANGLE: FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn   # owner L1528 test: s62 HH frontal, pair with m02 1ldEZphr4r
+allow: a clear THREE-QUARTER view toward the RIGHT side of the picture   # frontal test
+allow: her whole body   # frontal test
+allow: hips and face turned about 45 degrees so that her chest and face point toward the right edge of the picture   # frontal test
+allow: the shoulder on the picture's left side nearer the viewer   # frontal test
+allow: face fully visible   # frontal test
