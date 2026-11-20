@@ -18,3 +18,8 @@ mg-noword-a all 15 clean (play + tutorial, no page errors); mg-ready-guide PASS 
 - KIT_REQUESTS (painted icons wanted to replace glyph signs): hint (?), done (✓), huong sample/hers markers, hat ●↑○↓, dauho pull-back arrow. Glyphs used until then.
 - Merge note: kg82Pop/k91Say/k91Btns/k91DemoCard touch the same lines as mg-visual/mg-noword-b; trivial merge.
 - Not done: iPad/other-device shots of every kind; ban/theu already had no text.
+
+## CLARITY (ROOT-74 add, OD ~06:20Z) — sha ab5e4f68 (merged LIVE d74f86a5)
+Rules screen already animates a hand per engine group + «Hướng dẫn» guided ghost-hand round (mg-ready-guide, PASS 9/9 again). Audit kind | clear before? | change:
+dan fall ✓ | hat hold ✓ | co tap (generic) — left | dauho drag-generic ✗ → new kit motion "pull" (hand pulls back, release, arrow flies) | ban swing ✓ | ve trace drag ✓ | hoa drag ✓ | theu/kim ✓ (tap / drag) | mua tap ✓ | huong generic drag ✗ → new "slide" (vertical bar fills) | doden tap ✓ | den swing ✓ | tat/ne swing ✓. Kit CSS only (j82 KG82_DEMO + .kgr-demo data-m pull/slide). Fold+iPad rules shots looked (dauho, huong).
+Weak, not fixed: co (Cờ) still the generic tap demo; no board-specific picture of "the empty spot next to the white group" — would need a painted demo (KIT_REQUESTS).
