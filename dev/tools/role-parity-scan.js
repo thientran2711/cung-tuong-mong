@@ -177,11 +177,23 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
         hashed-by-Math.random pick no longer decides which acts the probe sees; a new module's draws moved hh off its only maid-palace target) */
      const P0=window.pickTarget;let TG=[];try{TG=(others(v)||[]).filter(x=>(x.staff||[]).some(s=>s.role==="maid"))}catch(e){}if(!TG.length)TG=[null];
      try{for(const tg of TG){if(tg)window.pickTarget=()=>tg;for(let i=0;i<12;i++){const r=asHitPick(v);if(r&&r.k&&r.k!=="bribe")addN(role,"ml:"+r.k,"asHitPick")}}}catch(e){E("asHitPick",e)}finally{window.traitsOf=T0;window.pickTarget=P0}}}
+    /* E22e round C (drift-2 method, no exempt): a scheme's target is ONE hashed pick (jagharm haOpts0 → jmind mindPickBy keyed on the doer), so which
+       deeds the probe saw hung on the doer's id and on every other module's draws (the risen maid and her born clone picked different targets:
+       PROMO onlyBorn / up P-ONLY harm:taint). The probe world is explicit: every target in her danger band is asked in turn, the same for every doer */
+    if((g0(v)==="consort"||g0(v)==="hh")&&typeof haOpts0==="function"&&typeof haTargets==="function"){const M0=window.mindPickBy;let TT=[];
+     try{TT=haTargets(v).filter(x=>bandOf(danger(v,x))>=1)}catch(e){E("haTargets",e)}
+     /* her nature too: a scheme's weight is persW of her traits (drawn per person), so she is asked as she is and as a scheming consort (Xảo quyệt),
+        the same as the asHitPick probe above */
+     const T0=window.traitsOf;try{for(const cr of [0,1]){if(cr)window.traitsOf=p=>p===v?["Xảo quyệt"]:T0(p);for(const tg of TT.concat([null])){window.mindPickBy=(L,w,p)=>p===v&&tg&&(L||[]).includes(tg)?tg:M0(L,w,p);/* and a real grudge toward that target (the m-peers oán), undone after */const oo=tg?Object.assign({},v.oan||{}):null;if(tg){v.oan=v.oan||{};v.oan[tg.id]=Math.max(v.oan[tg.id]||0,80)}try{for(const need of [null,"spite"])for(const o of haOpts0(v,Object.assign({},N0),need)||[])if(o&&o.k)addN(role,o.k,"haOpts0@target")}finally{if(oo)v.oan=oo}}}}catch(e){E("haOpts0",e)}finally{window.mindPickBy=M0;window.traitsOf=T0}}
     try{if(typeof agOpts==="function"&&g0(v)!=="maid")for(const need of [null,"sung","ally","spite","danh","safe","kid","rest","th","hh","bac"])for(const o of agOpts(v,Object.assign({},N0),need)||[])addN(role,o.k,"agOpts")}catch(e){}}
    /* role-parity-drift-2: an NPC servant's «Lén giữ đồ Nội vụ phủ phát» is no agent option: jeitem eitPilfer runs on her master's monthly goods (stipGoods),
        chosen by eitPilWho (lòng under BAL.eit.pil.loyal or a spy, not caught lately) — the same gate as her card (eitPilMaidOk: S.tin under the same loyal,
        spyFor, pilDet) plus this month's Nội vụ phủ piece (eitPilPick). Read that gate for the NPC side (maid:pil was P-ONLY by probe only once 98f9f0f1
        gave every master this month's goods) */
+    /* E22e round C: «Việc chủ sai» (a master's errand) — the player maid gets it as a card (j42 S.srv.err, roll SRVA.errand.offer), an NPC servant
+       as her record row (j95 planner: a household staff of a master not in lãnh cung is sent «chủ sai đi lấy thuốc / Kính sự phòng», p.__err). Both
+       are draws; the probe read only hers (P-ONLY whenever her draw came up). Read the NPC gate (same rule: a servant of a master outside lãnh cung) */
+    if(g0(v)==="maid")try{const m=ownerOf(v);if(m&&m.alive!==false&&!m.out)addN(role,"maid:errand","j95 errand gate")}catch(e){E("errandGate",e)}
     if(g0(v)==="maid"&&typeof eitPilWho==="function")try{const m=ownerOf(v);if(m&&!m.out&&eitPilPick(m)&&eitPilWho(m).some(c=>c.s===v&&c.ch>0))addN(role,"maid:pil","eitPilWho")}catch(e){E("eitPilWho",e)}
    if(g0(v)!=="maid"&&g0(v)!=="srv")gates(role,v);restoreW(W);if(W2)mRest(W2)}};
  /* shared gates: TW deeds and ACT deeds — the same req/ok function decides for her and an NPC */
@@ -232,7 +244,9 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
    for(const f of ["staffTabHTML","staffHTML","facHTML","artTabHTML","invHTML","wkTabHTML","petPanelHTML","kidTabHTML"])try{for(const h of tabAll(f))for(const n of lab(h))addP(role,n,f)}catch(e){E(f,e)}
    /* B3: the item-detail menu (jinv kinvOpen: Dùng / Bán / Nghiệm độc / Tặng …) opens per item in a kit modal — read each item's buttons */
    try{const M0=window.kitModal;let mh="";window.kitModal=o=>{mh+=(o&&o.html)||""};try{for(const it of kinvItems()||[]){mh="";try{kinvOpen(it)}catch(e){}for(const n of lab(mh))addP(role,n,"kinvOpen")}}finally{window.kitModal=M0}}catch(e){E("kinvOpen",e)}}
-  else{try{for(const c of srvCards()||[])addP(role,c.n,"srvCards")}catch(e){E("srvCards",e)}try{for(const n of lab(srvStaffHTML()))addP(role,n,"srvStaff")}catch(e){E("srvStaff",e)}}
+  /* E22e round C: the master has an errand for her this buổi (explicit world, the twin of the NPC j95 errand gate in npcOpts): SRVA.errand.offer
+     forced for this read only, her drawn errand cleared before and restored after (the card was there only when the seeded draw came up) */
+  else{const E0=SRVA.errand.offer,R0=S.srv&&S.srv.err;try{SRVA.errand.offer=100;if(S.srv)S.srv.err=null;for(const c of srvCards()||[])addP(role,c.n,"srvCards")}catch(e){E("srvCards",e)}finally{SRVA.errand.offer=E0;if(S.srv)S.srv.err=R0}try{for(const n of lab(srvStaffHTML()))addP(role,n,"srvStaff")}catch(e){E("srvStaff",e)}}
   if(!isSrv())gates(role,S)};
  const playerLabels=(role,VL)=>{for(const [vn,f] of (VL||VAR)){const W=snapW(),W2=/^m-/.test(vn)?mSnap():null;SEED(7);try{rich(S);f(S)}catch(e){E("pvar "+vn,e)}playerOnce(role);restoreW(W);if(W2)mRest(W2)}};
  if(phase==="consort"){
