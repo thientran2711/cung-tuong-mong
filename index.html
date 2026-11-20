@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge","b":"7be3ebe747dd","h":[{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"}]};
+window.CTM_BI={"s":"548dcd0d+","t":"2026-11-20T21:13Z","c":"review road-triggers r2: PASS 6692d20f — report","b":"9e315514c929","h":[{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -34669,8 +34669,9 @@ BAL.ge={
  quietLoss:false,      /* D8 */
  mapOn:true,           /* K-GE-1 kitBranchMap landed (90b7e797): the Sơ đồ nhánh page in Sổ luân hồi is on */
  pull:{step:1,push:1}, /* a Chuỗi option adds step to its ending's pull; a push option takes push away (never below 0) */
- /* odds of the open ending her pair points to: base + pull × per, clamped [min, max]; its condition not met → capped at noCond */
- odds:{base:22,per:9,min:5,max:88,noCond:12},
+ /* odds of the open ending her pair points to: base + pull × per − rank × her rank step (law 5, harder as she climbs: 0 Đáp ứng … 7 Hoàng hậu,
+    ONE key for every branch of every wave, brief E35), clamped [min, max]; its condition not met → capped at noCond */
+ odds:{base:22,per:9,rank:2,min:5,max:88,noCond:12},
  /* option C shading lean: lean = Σ option tags × tag + (Đức now − Đức at life start) × duc + Ngã rẽ 2 sign × last; ≥ cut → thiện, ≤ −cut → ác, else natural */
  var:{tag:4,duc:.05,last:3,cut:8},/* run 3 (sensible bot): Đức climbs +19..+70 in every mode, so .25 drowned the arc choices; tag 4 + duc .05 lets the choices lead */
  /* "người ấy" for «Theo người ấy đi»: the strongest real bond — a man's tình ≥ men, or a consort's thiện cảm ≥ sis */
@@ -64717,7 +64718,11 @@ window.geNote=geNote;
 function geLean(s){const V=GB().var;const last=s.r2===0?1:s.r2===1?-1:0;return s.lt*V.tag+((S.duc|0)-(s.d0|0))*V.duc+last*V.last}
 function geShade(s,i){const L=geLean(s),c=GB().var.cut;if(L>=c)return"t";if(L<=-c)return"a";return C(s).e[i][2]==="A"?"a":"t"}
 /* ---------- odds ---------- */
-function geOdds(s,i){const O=GB().odds;let p=O.base+s.pull[i]*O.per;p=Math.max(O.min,Math.min(O.max,p));if(!geCond(s,i))p=Math.min(p,O.noCond);return Math.round(p)}
+/* law 5 (harder as she climbs, OD:L1254; brief E35): ONE key BAL.ge.odds.rank = odds lost per rank step, read here for every branch of every wave;
+   her rank step = rkOf(S) (the one rank reader, j8), 0 Đáp ứng … 7 Hoàng hậu; a servant life is step 0 until she is raised */
+function geRk(){try{return Math.max(0,Math.min(RANKS.length-1,(typeof rkOf==="function"?rkOf(S):S.rank)|0))}catch(e){return 0}}
+window.geRk=geRk;
+function geOdds(s,i){const O=GB().odds;let p=O.base+s.pull[i]*O.per-geRk()*(O.rank||0);p=Math.max(O.min,Math.min(O.max,p));if(!geCond(s,i))p=Math.min(p,O.noCond);return Math.round(p)}
 window.geOdds=geOdds;
 /* ---------- the Hồi kết nhánh ---------- */
 function geReady(){const s=geS();if(!s||s.done||S.dead||S.out)return false;try{if(GB().when==="r11")return !!(typeof rdEnd==="function"&&rdEnd(BAL.road.last));return !!S.st.ch.all}catch(e){return false}}
@@ -85318,7 +85323,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7be3ebe747dd";window.CTM_BUILD=BUILD;
+const BUILD="9e315514c929";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
