@@ -357,5 +357,7 @@ for k, v in OUT.items():
     assert v['refs'][:2] == list(G9) and len(v['refs']) == 3, k
     for w in ('everywhere', 'BRIGHT', 'coffered', 'high ceiling', 'floor-to-ceiling', 'apricot', 'ruby', '{', 'transparent'):
         assert w not in p, (k, w)
+import sys; sys.path.insert(0, D); import room_gate  # A24 ROOM GATE (MG4): FAIL = exit 1 before the JSON is written = no gen
+room_gate.guard(OUT, 'pr13')
 json.dump(OUT, open(os.path.join(D, 'prompts_pr13.json'), 'w'), ensure_ascii=False, indent=1)
 print({k: len(v['prompt']) for k, v in OUT.items()})
