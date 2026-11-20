@@ -8,7 +8,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  if(!(await p.evaluate(()=>typeof nfOn==='function'&&typeof nfStep==='function'))){console.log("SKIP: no jnf in this build");await b.close();return}
  await p.evaluate(()=>{window.T={};
   /* his own visit (jvisit, from main) is not what these cases test: off (cap 0); night-final case 8 tests its order */T.vcap=BAL.visit.cap;BAL.visit.cap=0;
-  /* the 10-night ledger (jledger) adds the tuần's other nights at the commit: these cases count the PLAYED tối only, so the ledger is off here; its own cases: dev/test/ledger.js */BAL.nt.on=false;
+  /* the 10-night ledger (jledger) adds the tuần's other nights at the commit: these cases count the PLAYED tối only, so the ledger is off here; its own cases: dev/test/ledger.js */if(BAL.nt)BAL.nt.on=false;/* the ledger lands after night-final (review/night-ledger) */
   T.fresh=()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;window.__bot=1;document.getElementById('title').hidden=true;
    for(let i=0;i<60;i++){start();if(!isSrv()&&!(typeof isKc==="function"&&isKc())&&!(window.cycOn&&cycOn(S)))break}Q.length=0;S.preg=0;S.pregUnk=0;S.cyc=null;
    const L=liveRivals(false).filter(v=>nightCh(v)>0);L.forEach(v=>{v.preg=0});return L};
