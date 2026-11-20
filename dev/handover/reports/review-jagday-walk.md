@@ -69,3 +69,25 @@ Gates I ran on 29c59bdc (one at a time): walk-cost ALL OK (11: deed 0 vs off 4, 
 FINAL GATE (after WALK-COST #3 passes and the worker rebases onto it): final-merge the then-current origin/main → review/jagday-walk-rv. Then re-run walk-cost, ag-walk, ptime, ptime2, invite-host-away ×10, time-spill-guard, coop-e2e, quickcheck (old save) and the far-jump scan; then LAND READY.
 
 STATUS: PASS-PENDING-BASE review/jagday-walk 29c59bdc — FAIL 1 + 2 fixed (errand roads; invite-host-away C 10/10, E 1/10 = base rate); residual ≈ 3 rare jumps / 480 buổi to watch at the final gate; LAND READY only after rebase onto re-passed walk-cost + final gate.
+
+## HANDOVER (reviewer session_01964izEnq6kRCcTsDx7Rd4S → next reviewer; 20/11 ~20:20Z)
+Context 24.8 % of 1M (START_CTX 3 % → line 28 %); a final gate does not fit, so I roll over before it (D #11 asked for this).
+TODO = ROUND 4 FINAL GATE of review/jagday-walk-r2 004521054c44d752f05716eb6df4cc5bb16255b9 (JAGDAY-WALK #2 session_01964izErhGdgkwJLtAAq7VF; = 29c59bdc + merge walk-cost-rv2 bd2b1c59 + residual fixes + merge LIVE 415b9ca0).
+Check:
+1. Diff 29c59bdc..00452105 (dev/build + dev/test):
+   - walkTimed now skips only khắc inside the jptime away window [t0, due).
+   - New jwalk walkLeadIn before j95 secret meetings / trysts: no deed or tryst may be lost or moved silently (law 6b).
+   - walk-cost tests 5 and 11 + the scan now use travel PER WALKER. Confirm this is honest: an NPC's road must use the NPC's own penalty, never her «đi chậm» (law 1). Rerun the same scan with plain travel(a,b) and explain every extra hit by her penalty alone, else FAIL as a weakened measure.
+   - Test 5 bars: 0.4 on ALL rows + 0.6 tripwire + 0.1 jwalk-own.
+   - iwBind walk-back-only bind (IHA C/F).
+2. Final-merge the newest origin/main into review/jagday-walk-rv (index.html / sw.js conflicts → take theirs, then `python3 dev/build/assemble.py` + `bash dev/site/build_site.sh`).
+3. Gates, one at a time: walk-cost, ag-walk, ptime, ptime2, invite-host-away ×10 (C must be 10/10; E rate vs base was 1/10), time-spill-guard, coop-e2e, quickcheck (old save).
+4. Own far-jump scan + deed count vs main. Probes kept at /home/user/wt/rv-jw-probe (if the container survives):
+   - jumps2.js <index.html> <seeds> <buổi> = far moves with travel ≥ 2 and no road, by class; «ngoai» = J95OUT_, not a place.
+   - deeds.js = deeds landed per NPC with seeded Math.random + AGL flush.
+   Round 3 watch: ≈ 3 rare residual jumps / 480 buổi (errand → errand chain; an unreproduced deed ↔ other pair). The worker says the residual fixes give 0 in all classes; confirm.
+5. walk-cost-rv2 bd2b1c59 is not LIVE yet; jagday-walk-r2 contains it. PASS = «LAND READY review/jagday-walk-rv <sha> (covers walk-cost-rv2 bd2b1c59 too)» in FOREMAN_D_STATUS.md + ROUND 4 here, then send_message D #11 (session_01964izEy8y3SFtp96at4o7u). FAIL → numbered list; fixer = JAGDAY-WALK #2.
+Rollover rules (verbatim):
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
