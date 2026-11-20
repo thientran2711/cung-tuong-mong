@@ -25,7 +25,7 @@ Edit script (for audit): every replacement is an exact one-time swap; listed bel
 - `an embroidered satin cloud collar (yunjian)` → `an embroidered brocade cloud collar (yunjian)`
 - Caption: `Quý phi · Khuê y đuôi én, đoạn + vân kiên` → `Quý phi · Trực cư gấm ba lớp + vân kiên`
 
-**t7 Hoàng quý phi: no change.**
+**t7 Hoàng quý phi: shape unchanged. v3 fact sync (Foreman C #5): `richer than the Quý phi's satin` → `richer than the Quý phi's brocade` (t6 is gấm); allow line added to its .keep; 9979 chars; gate PASS.**
 
 **t8 Hoàng hậu → EXACTLY 4 layers = HQP's 4 (owner Lượt 1293), less bulk.**
 - `in FIVE visible layers` → `in EXACTLY FOUR visible layers, the SAME four layers as the Hoàng quý phi (never a fifth)`
@@ -41,7 +41,7 @@ Edit script (for audit): every replacement is an exact one-time swap; listed bel
 | t4 | 9994 | 9958 |
 | t5 | 9868 | 9975 |
 | t6 | 9966 | 9965 |
-| t8 | 9997 | 9962 |
+| t8 | 9997 | 9970 (v3) |
 
 ## Every cut (boilerplate only, to stay ≤ 10 000; all listed as allow lines)
 From the duplicated line `Full-body standing figure head to feet, soft even light; fair porcelain skin; gentle expression … mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; 3/4 or frontal view.` (its content is repeated by the MASTER head-to-feet/skin/proportion sentences and the ANGLE line; S18 smile clause kept verbatim):
@@ -59,9 +59,9 @@ No outfit / embroidery / jewellery / hair words cut. Every removed shape phrase 
 1. **S12 PHI BẠCH vs G32** (t4–t6): store wants the phi bạch shawl, G32/DESIGN2 removed it ("no shawl"). Unchanged.
 2. **S13 throat clasp vs open neck** (t4): S13 says "the robe closes only at the throat clasp"; owner Lượt 1280 open neck. Unchanged (S13 still REWRITTEN).
 3. **M06/M07 vs đoạn** (t4–t6; t6 now gấm): MASTER thin-silk/gauze fabric sentence vs owner's matte đoạn / gấm. Unchanged.
-4. **NEW — S19 "no train" vs t8 train**: brief asks for a long train BEHIND the Empress; S19 boilerplate (verbatim, gate) says `floor-length robe, only slipper toe tips peeking under the hem, no train`. I kept S19 verbatim (editing it FAILS S19) and added the train in the outfit text, so t8 now contains both. Needs an S19 exemption for t8 or the train dropped.
-5. **NEW — t7 says "thick BROCADE (gấm), richer than the Quý phi's satin"**: t6 is now gấm, so the t7 comparison is out of date. t7 left untouched per brief ("KEEP as is"); suggest a one-word fix (`satin` → `brocade`) if the owner agrees.
-6. (pre-existing, noticed) t6 pose line says `a breeze lifts her long stole` while the outfit says `no shawl`.
+4. **RESOLVED v3 (owner Lượt 1294 OK'd the train) — S19 "no train" vs t8 train**: brief asks for a long train BEHIND the Empress; S19 boilerplate (verbatim, gate) says `floor-length robe, only slipper toe tips peeking under the hem, no train`. I kept S19 verbatim (editing it FAILS S19) and added the train in the outfit text, so t8 now contains both. v3: S19 kept verbatim; added right after it the separate sentence `Exception: her own long train behind her.` (inside S19's parentheses FAILS S19). To fit ≤10 000 the t8 outer-robe text was shortened (my own added words only): `falling STRAIGHT and CLOSE to the floor`, `with a long train BEHIND her`. t8 gate PASS.
+5. **FIXED v3 — t7 said "thick BROCADE (gấm), richer than the Quý phi's satin"**: t6 is now gấm, so the t7 comparison is out of date. t7 left untouched per brief ("KEEP as is"); suggest a one-word fix (`satin` → `brocade`) if the owner agrees.
+6. (pre-existing, left as is per Foreman C #5) t6 pose line says `a breeze lifts her long stole` while the outfit says `no shawl`.
 
 ## Handover
 Done; nothing left but this report + push. No successor needed.
