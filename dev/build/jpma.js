@@ -50,7 +50,11 @@ function pmStakes(a,t){const V=pmV(a,t),d=pmDanhOf(V);const bac=p=>p===S?S.bac:(
 function pmPut(st,p,a){if(!st)return"";if(st.s==="item")return (p===a?st.wa:st.wt)||st.what;return st.what}
 function pmStakeOf(a,t,s){return pmStakes(a,t).find(x=>x.s===s)||null}
 /* ---------- scores, odds ---------- */
-function pmRaw(p,kind,R){try{return kg82NpcRaw(p,kind,{occ:"pm",rank:R})}catch(e){return 5}}
+function pmRaw(p,kind,R){return kg82NpcRaw(p,kind,{occ:"pm",rank:R})}
+/* fix 4 (laws 4 + 5): ONE value for the quick option «Để tài nghệ quyết định» on every pm board = her median on this board tier (jmgt mgSkipRaw of mgTier occ pm at rank R);
+   playArt scores quick.raw, the sub text prints the same number. No typed fallback. */
+function pmSk(kind,R){return mgSkipRaw(mgTier(kind,{occ:"pm",rank:R}))}
+function pmQuick(kind,R){const sk=pmSk(kind,R);return{n:"Để tài nghệ quyết định",sub:`tính như người cùng bậc (${sk}/10)`,raw:sk}}
 function pmTal(p,kind){try{return kg82Parts(p,kind).total}catch(e){return 0}}
 function pmScore(p,kind,R,raw){return pmTal(p,kind)+Math.round((raw==null?pmRaw(p,kind,R):raw)/10*B().luck)}
 function pmOdds(a,t,kind){const R=pmR(a,t),N=B().oddsN,ta=pmTal(a,kind),tt=pmTal(t,kind),L=B().luck;let w=0;
@@ -109,7 +113,7 @@ function pmRun(a,t,x){if(!x||!live(a)||!live(t))return"";
  const place=whereOf(a);
  const title=`${x.a==="play"?"Cùng chơi":"Thách đấu"} với ${o.name}`;
  if(x.kind==="co"&&typeof KG82_ENG==="object"&&KG82_ENG.gomoku)return pmKyRun(a,t,x,me,o,R,place,title);
- if(x.a==="play"){playArt({art:x.kind,title,occ:"pm",rank:R,quick:{n:"Để tài nghệ quyết định",sub:"tính 5/10"},onDone:raw=>{const ro=pmRaw(o,x.kind,R);const r=me===a?pmPlayEnd(a,t,x,raw,ro):pmPlayEnd(a,t,x,ro,raw);
+ if(x.a==="play"){playArt({art:x.kind,title,occ:"pm",rank:R,quick:pmQuick(x.kind,R),onDone:raw=>{const ro=pmRaw(o,x.kind,R);const r=me===a?pmPlayEnd(a,t,x,raw,ro):pmPlayEnd(a,t,x,ro,raw);
    log(pmEnd(r.r)+".");pushModal({t:title,who:pv(o),h:`<p>${r.r}.</p>`});try{showModal();render()}catch(e){}}});return""}
  const st=pmStakeOf(a,t,x.s);const note=st?`Cược: ${st.s==="item"?`${nm(a)} đặt ${st.wa}, ${nm(t)} đặt ${st.wt}`:st.what+" mỗi bên"} · thắng lấy cược của đối thủ, thua mất cược của mình`:"";
  startContest({art:x.kind,title,rivals:[o],occ:"pm",rank:R,noCup:1,luck:B().luck,stakes:{note},onGo:rows=>pmVsGo(rows,o,x.kind),onDone:out=>{const iWin=!!out&&out.place===1;const aWins=me===a?iWin:!iWin;
@@ -204,7 +208,7 @@ function pmMeFree(){return !(S.pmMeW===wk()&&(S.pmMeN||0)>=B().npc.me)}
 function pmHash(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)/4294967296}
 function pmPickBy(L,w,v,salt){if(L.includes(S)){const O=L.filter(x=>x!==S);if(!O.length||wk()-(S.pmMeL==null?-1e9:S.pmMeL)>=B().npc.meGap||pmHash([key(v),salt,"me",typeof bkey==="function"?bkey():""].join("|"))<B().npc.meShare)return S;L=O}const W=L.map(x=>Math.max(BAL.mind.pickMin,w(x)));const T=W.reduce((s,x)=>s+x,0);let r=pmHash([key(v),salt,typeof bkey==="function"?bkey():"",L.map(key).join(",")].join("|"))*T;for(let i=0;i<L.length;i++){r-=W[i];if(r<=0)return L[i]}return L[L.length-1]}
 /* the NPC's own estimate of a duel (no draw): each side's median board (jmgt mgSkipRaw on its gap d) + talent → the share of the luck range */
-function pmOddsEst(a,t,kind){const R=pmR(a,t),L=B().luck;const med=p=>{try{return mgSkipRaw(mgTier(kind,{occ:"pm",rank:R,p,lv:kg82LvFor(p,kind)}))}catch(e){return 5}};
+function pmOddsEst(a,t,kind){const R=pmR(a,t),L=B().luck;const med=p=>mgSkipRaw(mgTier(kind,{occ:"pm",rank:R,p,lv:kg82LvFor(p,kind)}));
  const d=(pmTal(a,kind)+med(a)/10*L)-(pmTal(t,kind)+med(t)/10*L);return oddsCl(Math.round(100/2+d/L*100))}
 if(typeof agReg==="function"&&typeof p3O==="function"){
  agReg("consort","pm",(v,N,need)=>{const O=[];try{if(!(typeof p3On==="function"&&p3On())||v===S||!live(v)||v.confined||v.coop||!pmFree(v))return O;const G=B().npc.g;
@@ -268,7 +272,7 @@ function pmLadMonth(){const T=B().lad.top,out=[];for(const k of B().lad.arts){co
  return out.length?`Bảng tài nghệ hậu cung — ${out.join(" · ")}.`:""}
 if(typeof monthPay==="function"){const m0=monthPay;monthPay=function(){let r=m0.apply(this,arguments);try{if(S&&!S.dead&&S.pmL){const t=pmLadMonth();if(t){log(t);}}}catch(e){console.error(e)}return r};window.monthPay=monthPay}
 /* ---------- C1 split board data ---------- */
-function pmVsGo(rows,o,kind){const vs={me:0,f:0,t0:0,kind,opp:(rows||[]).map(r=>({who:r.p||o,raw:r.raw!=null?r.raw:5,shown:0}))};KG82.vs=vs;
+function pmVsGo(rows,o,kind){const vs={me:0,f:0,t0:0,kind,opp:(rows||[]).map(r=>({who:r.p||o,raw:r.raw!=null?r.raw:pmRaw(r.p||o,kind,pmR(S,r.p||o)),shown:0}))};KG82.vs=vs;
  KG82.onHud=h=>{pmHud(vs,h,kind);for(const p of vs.opp)p.shown=Math.min(p.raw,Math.round(p.raw*vs.f));pmVsShow(vs,o,h)}}
 /* one reader of the engines' own hud (her running «N/10» graded as the board grades it, the Hồi «n/m», the clock «N giây»): the NPC board and the co-op live board */
 function pmHud(vs,h,kind){const m=/^(\d+)\s*\/\s*10/.exec(String(h.score==null?"":h.score));if(m)vs.me=+m[1];/* E22g: the board hud is already the ONE graded mark (main mg-score-same: jmgt mgLive = mgGrade); graded again it read 10 for a 6 */
@@ -310,12 +314,15 @@ function kgGomoku(b,env){const K=BAL.pm.ky,n=7,B0=Array(n*n).fill(0);let over=fa
  if(ME===2)oppTurn();else hud();
  try{cells[A.mid*n+A.mid].focus({preventScroll:true})}catch(e){}return()=>{over=true;clearTimeout(wt)}}
 if(typeof KG82_ENG==="object")KG82_ENG.gomoku=kgGomoku;
+/* fix 3 (owner OD 20/11 ~08:40Z guard, mg-allkinds): the 7×7 board is a mini-game she plays → its own KG82 kind, so Thử tay (jmgcal mgCalKinds / mgCalRun) lists it.
+   own = the board hands its own mark (win / hòa / loss from BAL.pm.ky, not the graded curve); guard = BAL.pm.ky.guard (untimed board). The pm acts keep kind "co" + eng PM_KY. */
+if(typeof KG82_KIND==="object"&&!KG82_KIND.co7)KG82_KIND.co7={e:"gomoku",n:"Cờ năm quân",t:PM_KY.t,how:PM_KY.how,timed:false,own:1,get guard(){return BAL.pm.ky.guard}};
 function pmKyRun(a,t,x,me,o,R,place,title){const duel=x.a==="duel",st=duel?pmStakeOf(a,t,x.s):null,E=pmEyes(a,t,place);
  const rows=[["Đối thủ",`${o.name} cầm quân trắng · ${pmWord(pmOdds(me,o,"co"))}`,"t"]].concat(st?[["Cược",st.s==="item"?`${nm(a)} đặt ${st.wa}, ${nm(t)} đặt ${st.wt}`:`${st.what} mỗi bên`,"t"]]:[],E.length?[["Người xem",pmEyeTxt(E),"t"]]:[]);
- let SK=5;try{SK=mgSkipRaw(mgTier("co",{occ:"pm",rank:R}))}catch(e){}
+ const QK=pmQuick("co",R),SK=QK.raw;
  const out=(raw,sk)=>{if(sk){const iw=pmScore(me,"co",R,SK)>pmScore(o,"co",R);return iw?"win":"lose"}return KG82.kyOut||(raw>=K0().win?"win":"lose")};
  let res=null;
- playArt({art:"co",eng:PM_KY,title,occ:"pm",rank:R,rowsHead:"Ván cờ",rows,go:"Bắt đầu",quick:{n:"Để tài nghệ quyết định",sub:`tính như người cùng bậc (${SK}/10)`},
+ playArt({art:"co",eng:PM_KY,title,occ:"pm",rank:R,rowsHead:"Ván cờ",rows,go:"Bắt đầu",quick:QK,
   onGo:()=>{KG82.kyNoise=pmKyNoise(o,me,R);KG82.guardMs=B().ky.guard;
    /* the kit plate K-PM-1 on the Cờ board: each side's longest run (×2 = phần of 10) and whose turn it is (duel only: «Cùng chơi» has no win / lose) */
    if(duel){const vs={me:0,f:1,opp:[{who:o,raw:0,shown:0}],ui:null};KG82.onVs=v=>{vs.me=v.me;vs.opp[0].shown=v.opp;vs.turn=v.turn;pmVsShow(vs,o,{round:v.round})}}},
@@ -378,16 +385,16 @@ if(typeof COOP==="object"&&COOP.on)COOP.on("act",m=>{try{if(m&&m.k==="pm-live"&&
 function pmLvBoard(L){const f=pmFr();if(!f){if(!L.remote)pmLvFall(L);return}L.board=1;const x=L.x,duel=x.a==="duel",R=pmR(S,f),A=L.role==="a"?S:f,T=L.role==="a"?f:S;
  const title=`${duel?"Thách đấu":"Cùng chơi"} với ${f.name}`,st=duel?pmStakeOf(A,T,x.s):null;
  const stRow=st?[["Cược",st.s==="item"?`${nm(A)} đặt ${st.wa}, ${nm(T)} đặt ${st.wt}`:`${st.what} mỗi bên`,"t"]]:[];
- if(x.kind==="co"&&typeof KG82_ENG==="object"&&KG82_ENG.gomoku){let SK=5;try{SK=mgSkipRaw(mgTier("co",{occ:"pm",rank:R}))}catch(e){}let res=null;
+ if(x.kind==="co"&&typeof KG82_ENG==="object"&&KG82_ENG.gomoku){const QK=pmQuick("co",R),SK=QK.raw;let res=null;
   const out=(raw,sk)=>sk?(pmScore(S,"co",R,SK)>pmScore(f,"co",R)?"win":"lose"):KG82.kyOut||(raw>=K0().win?"win":"lose");
   playArt({art:"co",eng:L.role==="a"?PM_KY:PM_KYW,title,occ:"pm",rank:R,rowsHead:"Ván cờ",rows:[["Đối thủ",`${f.name} (hảo hữu) cầm quân ${L.role==="a"?"trắng, đi sau":"đen, đi trước"}`,"t"]].concat(stRow),go:"Bắt đầu",
-   quick:{n:"Để tài nghệ quyết định",sub:`tính như người cùng bậc (${SK}/10)`},
+   quick:QK,
    onGo:()=>{L.go=1;KG82.onFin=(r,g)=>{if(g)pmLvGu(L)};if(L.opGu)setTimeout(()=>pmLvGuEnd(L),0);KG82.kyNoise=pmKyNoise(f,S,R);KG82.guardMs=K0().guard;L.net=KG82.kyNet={side:L.role==="a"?1:2,q:(L.net&&L.net.q)||[],mvWait:B().live.mv,send:(i,n)=>pmLvSay(L.g,"mv",{i,n})};
     if(duel){const vs={me:0,f:1,opp:[{who:f,raw:0,shown:0}],ui:null};KG82.onVs=v=>{vs.me=v.me;vs.opp[0].shown=v.opp;vs.turn=v.turn;pmVsShow(vs,f,{round:v.round})}}},
    resRows:(raw,sk)=>{const w=out(raw,sk);res={w,raw:sk?SK:raw};return[["Ván cờ",w==="win"?"Ngươi thắng":w==="draw"?"Hòa cờ":`${f.name} thắng`,"t"]]},
    onDone:raw=>{const w=res?res.w:out(raw,false),r0=res?res.raw:raw;KG82.kyNoise=KG82.kyOut=KG82.onVs=KG82.kyNet=null;pmLvMine(L,r0,w)}});
   if(!L.net)L.net={q:[]};return}
- playArt({art:x.kind,title,occ:"pm",rank:R,rowsHead:duel?"Ván so tài":"Cùng chơi",rows:[["Cùng chơi với",`${f.name} (hảo hữu) · hai bên chơi cùng lúc`,"t"]].concat(stRow),go:"Bắt đầu",quick:{n:"Để tài nghệ quyết định",sub:"tính 5/10"},
+ playArt({art:x.kind,title,occ:"pm",rank:R,rowsHead:duel?"Ván so tài":"Cùng chơi",rows:[["Cùng chơi với",`${f.name} (hảo hữu) · hai bên chơi cùng lúc`,"t"]].concat(stRow),go:"Bắt đầu",quick:pmQuick(x.kind,R),
   onGo:()=>{L.go=1;L.sc=0;KG82.onFin=(r,g)=>{if(g)pmLvGu(L)};if(L.opGu)setTimeout(()=>pmLvGuEnd(L),0);
    if(!duel){KG82.onHud=h=>{const m=/^(\d+)\s*\/\s*10/.exec(String(h&&h.score!=null?h.score:""));if(m)L.sc=+m[1]};return}
    const vs={me:0,f:0,t0:0,kind:x.kind,opp:[{who:f,raw:0,shown:0}],ui:null};KG82.vs=vs;L.tx=0;
@@ -416,5 +423,5 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 try{if(window.MEM_DEEDS){Object.assign(MEM_DEEDS,{pmplay:[1,0,"cùng {o} chơi {x}"],pmwin:[-1,0,"thắng {o} một ván {x}, lấy mất món cược"],pmyield:[1,0,"nhường {o} một ván {x}"],pmsaw:[0,0,"xem {o} thắng một ván {x}"],pmlad:[-1,0,"bị {o} giành ngôi trên bảng {x}"]})}
  if(BAL.mem&&BAL.mem.w)Object.assign(BAL.mem.w,B().mem)}catch(e){}
 try{if(typeof MGT_OCCN==="object")MGT_OCCN.pm="so tài"}catch(e){}
-Object.assign(window,{pmArtTake,pmArtIn,pmLiveAns,pmLvSan,pmLiveRes,pmLvMsg,PML,pmHud,pmVsShow,pmVsUI,pmLadHTML,pmLadLine,pmLadBtn,pmLadAim,pmEyes,pmEyeFx,pmLad,pmLadPos,pmLadWin,pmLadDrop,pmLadFor,pmLadMonth,pmVsGo,pmKyNoise,pmKyRun,PM_KY,pmCoopYield,pmCoopX,pmCoopCard,pmArts,pmR,pmV,pmStakes,pmStakeOf,pmOdds,pmRun,pmAuto,pmX,pmPlayEnd,pmDuelEnd,pmYield,pmYieldAff,pmBtns,pmRows,pmPlayOpts,pmDuelOpts,pmScore,pmItem,pmGoTap});
+Object.assign(window,{pmSk,pmQuick,pmArtTake,pmArtIn,pmLiveAns,pmLvSan,pmLiveRes,pmLvMsg,PML,pmHud,pmVsShow,pmVsUI,pmLadHTML,pmLadLine,pmLadBtn,pmLadAim,pmEyes,pmEyeFx,pmLad,pmLadPos,pmLadWin,pmLadDrop,pmLadFor,pmLadMonth,pmVsGo,pmKyNoise,pmKyRun,PM_KY,pmCoopYield,pmCoopX,pmCoopCard,pmArts,pmR,pmV,pmStakes,pmStakeOf,pmOdds,pmRun,pmAuto,pmX,pmPlayEnd,pmDuelEnd,pmYield,pmYieldAff,pmBtns,pmRows,pmPlayOpts,pmDuelOpts,pmScore,pmItem,pmGoTap});
 })();
