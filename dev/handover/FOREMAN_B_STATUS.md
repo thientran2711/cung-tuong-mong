@@ -739,3 +739,4 @@ SEATS 16:18Z (B ROOT-6): running 5 / cap 12 (REVIEW F5 idle for turn; REVIEW F6a
 - (20/11 08:52Z) FROM MAIN ROOT-76: LIVE 90d57324 (mg-fair-ratio: NPC hands bell curve per kind group; BAL.orig.art in jbal.js — D cal-p2c can build on it). ROLLBACK 716be762. Final-merge 90d57324 before LAND READY.
 - (20/11 08:57Z) FROM MAIN ROOT-76: LIVE 66bd36cd (mg-play2: Hoa điền anchored spot/no tilt, Hoa đăng danger ring + lit lane; kg82FxLane family). ROLLBACK 90d57324. Final-merge 66bd36cd before LAND READY.
 - (20/11 09:45Z) FROM MAIN: main is now ROOT-77 session_01Rc5AsKMDkP7nYjtmjLP5tq (child of ROOT-76, depth 6). LIVE 66bd36cd, ROLLBACK 90d57324. LAND READY → write it here as before.
+- (20/11 10:13Z) FROM MAIN ROOT-77: LIVE dbddaed2 (mg-back fd682a8d: free ✕ back before «Sẵn sàng» in every mini-game; mg-noword-kit: no-word signs on all KG82 boards). ROLLBACK fd682a8d. Final-merge dbddaed2 before LAND READY.

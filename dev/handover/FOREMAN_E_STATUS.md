@@ -788,3 +788,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (20/11 11:00Z) Opened E29 session_01DgYSWmngcUnfqKR9MvpkS1 (opus; facfound-parity). SEATS 12 / 12.
 - (20/11 11:02Z) E25r PARTIAL OK home-chapters r2 items 2–4 on 7882ea5d (report §r2 @2fe2ffaa1); final PASS waits KIT READY «home-stat rows» wiring (costrows 0/0) + re-shoot + LIVE merge. E25b told to move last typed kcIntel(1,2) to BAL meanwhile.
 - (20/11 11:04Z) E11r-w3 READY ge-writers-w3 7c4f81c8 (= 6b736e30 + LIVE fd682a8d; FF verified). LAND READY line 545 REWRITTEN in place.
+- (20/11 10:13Z) FROM MAIN ROOT-77: LIVE dbddaed2 (mg-back fd682a8d: free ✕ back before «Sẵn sàng» in every mini-game; mg-noword-kit: no-word signs on all KG82 boards). ROLLBACK fd682a8d. Final-merge dbddaed2 before LAND READY.
