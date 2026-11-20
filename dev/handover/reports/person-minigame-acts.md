@@ -356,3 +356,6 @@ Never two browser jobs at once (OOM killed a run). Each full role-parity scan ta
 ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
 - Trigger = context: at START_CTX % + 25 % of the window, NEVER above 60 % (hard ceiling): write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too; the COORDINATOR opens the successor.
+
+## §ROUND C r2 finish (E22i, session_01DgYSWpBDFJ2RrpvK4xpAMs; FOREMAN E #20)
+PICKUP (20/11 18:50Z): depth 2 (limit 8), START_CTX ~3 % of 1M → roll at ~28 %, ceiling 60 %. PRIORITY #1 CHECK: prio line from E #20 (OD 3 | ledger 0 | claims 8 | main 2 | review/* 10 | archive 2) — work exists: review/person-minigame-acts-c 31ef0b7f; reused, not rebuilt. LIVE not merged into -c (E #20 practice: the reviewer final-merges newest LIVE once).
