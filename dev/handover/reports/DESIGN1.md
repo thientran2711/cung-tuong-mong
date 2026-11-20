@@ -130,3 +130,14 @@ Common to every rank: thu colours (main + secondary of the person); NO phi bạc
 | t7 Hoàng quý phi | 2 lớp áo, vàng hoàng gia nhiều ở dải cổ + cổ tay + gấu; thân thêu kim tuyến dày, mây lớn; mũ phượng HQP |
 | t8 Hoàng hậu | Vàng hoàng gia nhiều nhất, dải cổ + gấu dệt kim rộng nhất, hai bộ ngọc tổ bội; mũ phượng lớn nhất, ít tua |
 STEP 2 (after owner OK): 8 prompts per era on s62 a18 thu colours, captions "Mùa Thu · Thiết kế thời Minh/Hán · <bậc>".
+
+## JOB 4 STEP 2 — 5 prompts (owner asked 5 only), dev/art/seasons4/make_ladder.py
+Base = build_all.py s62 N (saved ladder_base/s62_t{5,6,7}.txt), thu colours swapped like s62_t5_thu_MINH (plum #DF9ED9 + bright blush pink); ONLY the outfit design words replaced (t6 keeps the royal-yellow image-2 swatch wording + inner colour rule; t7 keeps the HQP phoenix crown clause + yellow placement); PHI BẠCH sentence removed (G32), "no shawl" in the outfit; robe body "densely embroidered ALL OVER" (H6/H12); CAPTION line (G31).
+| File | chars | gate |
+|---|---|---|
+| s62_t5_MINH_LADDER.txt (Phi: long standing-collar jacket, square buzi, shoulder-sleeve gold bands, mamian 2 gold bands, jinbu) | 9288 | FAIL only S12 (phi bạch sentence required t1–t6) |
+| s62_t6_MINH_LADDER.txt (Quý phi: + ankle pifeng with pearl-edged gold front bands, big diadem) | 9993 | FAIL only S12 |
+| s62_t7_MINH_LADDER.txt (HQP: floor pifeng, gold-woven mamian, 2 jinbu, phoenix crown kept) | 9911 | PASS |
+| s62_t6_HAN_LADDER.txt (Quý phi: 2-robe zhiju, wide collar to shoulders, triple collar, wide belt + zupei) | 9965 | FAIL only S12 |
+| s62_t7_HAN_LADDER.txt (HQP: 2-robe, gold-woven pearl-edged triple collar, 2 zupei, phoenix crown kept) | 9941 | PASS |
+GATE CONFLICT for the Foreman: check_store approved S12 (PHI BẠCH t1–t6) contradicts owner G32 (no phi bạch in Minh/Hán). Fine for ChatGPT tests (no Magnific); the gate needs a G32 exemption before any Magnific use. t7 store sentences still say "cape" (colour rule "robe, cape and sleeves", HQP LUXURY "trims along the cape edges") — kept verbatim (store), outfit says "no cape"; watch for a cape in the ChatGPT result.
