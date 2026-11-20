@@ -57,7 +57,7 @@ roots were wired (s_root_colours.json → gen_palettes3.load_p1), reused for s07
 # P2 — successor of P1 (Foreman C ROOT-57 → ROOT-58 → ROOT-59)
 START_CTX ~4 % of 1M window (get_session used_tokens read 0 at start; own estimate ~40k), lineage depth 1. Rollover at ~29 % (ceiling 60 %). Finished at ~25 %.
 
-## RESULT: DONE — 86 consorts, unique pair per person in every season, both gates 0 FAIL
+## RESULT: DONE (commit 7fb4427) — 86 consorts, unique pair per person in every season, both gates 0 FAIL
 - check_unique.py: `consorts: 86 expected, 86 present` · Xuân 0 FAIL / 51 WARN · Hạ 0 / 17 · Thu 0 / 23 · Đông 0 / 21 · `TOTAL 0 FAIL, 112 WARN` (3655 pairs per season, NO exemptions).
 - check_seasons.py: `86 women; root palettes per season: {'Xuân': 26, 'Hạ': 19, 'Thu': 20, 'Đông': 21}; 0 FAIL`.
 - Sheets (Vietnamese labels, ≤ 2400 px wide, all LOOKED at full size): dev/handover/review-sheets/palettes-season/v86/
