@@ -47,11 +47,18 @@ def chuongsu():
     base = D + 'chuongsu_gpt.txt'
     t = open(base, encoding='utf-8').read()
     t = swap(t, 'with one plain jade hairpin in the bun', SENIOR_PINS)
-    t = t.rstrip() + CAP.format('Chưởng sự cô cô · Áo khoác tím cà dài tới gối + váy xanh')
+    # K26 (owner L1461): m18 own main powder blue ~ cung nữ uniform blue -> her own SECONDARY deep rose
+    assert t.count('powder blue like #A7BAD2') == 2 and t.count('powder blue') == 5, t.count('powder blue')
+    t = t.replace('powder blue like #A7BAD2', 'deep rose like #CA7281').replace('powder blue', 'deep rose')
+    t = t.rstrip() + CAP.format('Chưởng sự cô cô · Áo khoác tím cà dài tới gối + váy hồng')
     out = D + 'chuongsu_gpt_v2.txt'
     open(out, 'w', encoding='utf-8').write(t)
     keep(out, base, [('with one plain jade hairpin in the bun',
-                      'owner Lượt 1456: chưởng sự hairpins not fewer than the young maids')])
+                      'owner Lượt 1456: chưởng sự hairpins not fewer than the young maids'),
+                     ('with broad powder blue front-edge borders and a powder blue lining showing at the hem', 'K26 owner L1461: secondary = her deep rose'),
+                     ('over a long inner robe and skirt in powder blue like #A7BAD2', 'K26 owner L1461'),
+                     ('in lighter tones of purple and powder blue with fine gold thread', 'K26 owner L1461'),
+                     ('the MAIN colour eggplant purple and the SECONDARY colour powder blue like #A7BAD2', 'K26 owner L1461')])
     return out
 
 

@@ -32,12 +32,14 @@ Young maids (nhất v1 / nhị test5): "several silver and pearl hairpins". Chư
 Appended after "No text, no labels." on a new paragraph, like the house files:
 `CAPTION: in LARGE bold letters, top-left corner, on the plain background, never over her body, write exactly this Vietnamese text WITH accents: "<rank> · <outfit>"`
 - nhất: "Cung nữ nhất đẳng · Áo ghi lê cổ đứng + hai tà"
-- chưởng sự: "Chưởng sự cô cô · Áo khoác tím cà dài tới gối + váy xanh"
+- chưởng sự: "Chưởng sự cô cô · Áo khoác tím cà dài tới gối + váy hồng"
 - thân cận / ma ma: after GO ("Cung nữ thân cận · …", "Ma ma · …")
 
 ## Job 4 — vest shoulders (prompts with the over-vest: nhất, thân cận; ma ma only if the confirmed base has the vest. Chưởng sự kiểu D has a coat, no vest)
 Added after "worn over the inner robe": ", the over-vest cut from a firmer, lightly stiffened brocade with crisp, slightly structured shoulders that keep a clean straight shoulder line and sit a little away from her shoulders (not soft, never clinging to or hugging the shoulder, never padded or boxy)".
 Note: the global sentence "never stiff, flat or board-like" (fabric) is kept. The vest sentence is more specific and should win; if ChatGPT still softens it, the next step would be to scope that global sentence to "the robe and sleeves".
+
+## K26 (owner L1461, via Foreman C 21:20Z) applied to chưởng sự v2: m18 own main powder blue ≈ cung nữ uniform blue → her own SECONDARY deep rose #CA7281 = the large second colour (borders, lining, inner robe + skirt, embroidery tones). nhất v2 already follows K24 (blue main + rose inner). Thân cận/ma ma: checked when written after GO.
 
 ## Job 5 — colours (English only; NOT for the owner)
 - chuongsu_gpt: MAIN = eggplant purple (tím cà) = the chưởng sự cô cô ROLE UNIFORM colour (K19: "chưởng sự cô cô tím cà (proposal)"). SECONDARY = powder blue #A7BAD2 = the CHARACTER's own main colour (m18 main = powder blue; K19: secondary = the person's own main colour). It happens to be the same blue as the cung nữ uniform, which is why it looks like "the maid colour".
@@ -47,5 +49,5 @@ Note: the global sentence "never stiff, flat or board-like" (fabric) is kept. Th
 | file | base | change | keep_check | check_store --scope mama --age a18 |
 |---|---|---|---|---|
 | gpt/nhat_gpt_v2.txt (8340 c) | gpt/nhat_gpt.txt | + vest shoulders, + caption | PASS (0 allowed) | PASS |
-| gpt/chuongsu_gpt_v2.txt (7529 c) | gpt/chuongsu_gpt.txt | hairpin swap, + caption | PASS (1 allowed) | FAIL S32 "ma ma hai tà" only — same as v1 (chưởng sự has no hai tà; scope mismatch, pre-existing) |
-Own Counter word diff (LOST words, base − new): nhat v2: none. chuongsu v2: "one", "hairpin" (singular; now "hairpins") — the hairpin swap only. keep_check --all: 135 sidecars PASS.
+| gpt/chuongsu_gpt_v2.txt (7519 c) | gpt/chuongsu_gpt.txt | hairpin swap, + K26 colour (all 5 "powder blue" → "deep rose", #A7BAD2 → #CA7281), + caption | PASS (5 allowed) | before K26: FAIL S32 "ma ma hai tà" only (same as v1, scope mismatch). After K26: gate CANNOT RUN — dev/art/master_common.py line 124 IndentationError on branch tip (commit feeb9fc, not mine) |
+Own Counter word diff (LOST words, base − new): nhat v2: none. chuongsu v2: "one", "hairpin" (hairpin swap) + powder×5, blue×5, #a7bad2×2 (K26 swap) — nothing else. keep_check --all: 135 sidecars PASS.
