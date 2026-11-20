@@ -28,6 +28,7 @@ OPEN = "OPEN at the front (its lobes resting on the shoulders and back, never co
 def mkJ():
   return {
  4: ("b26/s62_t4.txt", "Mùa Thu · Thiết kế hiện tại · Tần · Áo choàng nhỏ + cổ mở", [
+     ("exactly ONE fresh flower in her hair", "exactly ONE fresh lotus flower in her hair"),   # F2 hair = embroidery species (C #6 / dev/art/f2/s62_tN wording)
      ("WIDE gold-thread embroidered borders of plum blossoms at sleeves and hem, a few LARGE embroidered plum blossoms on the robe",
       "WIDE gold-thread embroidered borders of lotus flowers at sleeves and hem, a few LARGE embroidered lotus flowers on the robe"),
      ("a crossed collar,", layer("a richer gold-brocade band (the Tần edge)", "a slim gold edge", "the ice blue outer robe") + ","),
@@ -37,6 +38,7 @@ def mkJ():
       "the outer robe closes only at the sash, never at the throat, never buttoned down the front,"),
      ('"Bậc Tần · Vải đoạn mờ"\n', "")]),
  5: ("b26/s62_t5_v2.txt", "Mùa Thu · Thiết kế hiện tại · Phi · 2 choàng vai + lưới ngọc trai + cổ mở", [
+     ("exactly ONE fresh flower in her hair", "exactly ONE fresh double hollyhock in her hair"),   # F2 hair = embroidery species (C #6 / dev/art/f2/s62_tN wording)
      ("a layered satin (đoạn) court robe of two or three visible layers,",
       "a layered satin (đoạn) court robe of two or three visible layers with " + layer("a wide gold-embroidered band (the Phi edge)", "a slim gold-edged band", "the ice blue outer robe") + "; the robe"),
      ("richly embroidered in gold with peonies and small birds", "richly embroidered in gold with double hollyhocks and small birds"),
@@ -48,6 +50,7 @@ def mkJ():
       "(the same kind of beaded pearl net as the Tần's capelet), never covering the neckline, never hiding the neck or the square inner neckline,"),
      ('"Bậc Phi · Vải đoạn mờ"\n', "")]),
  6: ("swap56/s62_t6_v2.txt", "Mùa Thu · Thiết kế hiện tại · Quý phi · Vân kiên cổ cuộn mây + cổ mở", [
+     ("exactly ONE fresh flower in her hair", "exactly ONE fresh incurved chrysanthemum in her hair"),   # F2 hair = embroidery species (C #6 / dev/art/f2/s62_tN wording)
      ("a HEAVY silk brocade robe in SATURATED ice blue silk,",
       "a HEAVY silk brocade robe in SATURATED ice blue silk with " + layer("a pearl-edged gold band (the Quý phi edge)", "slim, pearl-edged", "the ice blue outer robe") + "; the robe"),
      ("embroidered with peonies and plum blossoms in ice blue and gold thread", "embroidered with incurved chrysanthemums in ice blue and gold thread"),

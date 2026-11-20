@@ -1,4 +1,5 @@
 base: dev/art/b26/s62_t4.txt
+allow: exactly ONE fresh flower in her hair  # F2 Lượt 1352 (C #6 msg, dev/art/f2 wording): hair flower named = embroidery species
 allow: a crossed collar  # owner Lượt 1361: layered neckline of t1–t3 on t4–t8 (overrides G22 Tần collar)
 allow: over only the shoulders and upper chest  # L1361: capelet re-seated OPEN at the front (now "and the outer upper chest")
 allow: a jade clasp at the throat  # L1361: clasp kept, moved low on the chest below the square neckline (never at the throat)
