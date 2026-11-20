@@ -1020,6 +1020,19 @@ window.toilMkDraw=toilMkDraw;window.toilColOfP=toilColOfP;
 
 /* ---------- KIT §60 kitSwatches: one row per part (label · the picked name · round colour swatches with a short name) ---------- */
 const KSWT={reg:{}};
+/* §60.1 kitColDot (kit-e-rows, E30 dresscode, PARKING #11): a READ-ONLY colour dot + the family name (kitSwatches below is a picker). The colour is DATA, never the kit's own:
+   fam = a key of the ONE table BAL.dc.fam (jbal2: {hex,n}) or a ready object {hex|col, n|name}. kitColDot(fam,{role:"main"|"sec", size:"sm"|"md"}) · kitColDots([[fam,role],…]) = a row, «·» between. */
+function kitColDot(fam,o){o=o||{};const T=(typeof BAL==="object"&&BAL&&BAL.dc&&BAL.dc.fam)||{};const f=typeof fam==="object"&&fam?fam:T[fam]||{};const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,"");
+ const hex=f.hex||f.col||"",name=f.n||f.name||(typeof fam==="string"?fam:"");const sz=o.size==="md"?"md":"sm",role=o.role==="main"?"main":o.role==="sec"?"sec":"";
+ return `<span class="kcdot kcdot-${sz}${role?" kcdot-"+role:""}"${hex?` style="--cd:${esc(hex)}"`:""} title="${esc(name)}"><i aria-hidden="true"></i><b>${esc(name)}</b>${role?`<small>${role==="main"?"chính":"phụ"}</small>`:""}</span>`}
+function kitColDots(L,o){return (L||[]).filter(Boolean).map(x=>Array.isArray(x)?kitColDot(x[0],Object.assign({},o,{role:x[1]})):kitColDot(x,o)).join('<span class="ksep"> · </span>')}
+window.kitColDot=kitColDot;window.kitColDots=kitColDots;
+(function(){const st=document.createElement("style");st.id="kcdot-css";st.textContent=`
+.kcdot{display:inline-flex;align-items:center;gap:5px;vertical-align:middle;white-space:nowrap;color:var(--ink,#2a1a12);font-size:.75rem;line-height:1.2}
+.kcdot i{flex:none;display:block;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 34% 30%,rgba(255,255,255,.55),rgba(255,255,255,0) 42%),var(--cd,var(--line,#d6c7a8));box-shadow:inset 0 0 0 1px var(--line,rgba(0,0,0,.18))}
+.kcdot-md i{width:16px;height:16px}.kcdot-md{font-size:.82rem}
+.kcdot small{color:var(--dim,#7a6650);font-size:.68rem}.kcdot-main b{font-weight:700}
+`;document.head.appendChild(st)})();
 function kitSwatches(o){o=o||{};const key=o.key||"sw";KSWT.reg[key]=o;const esc=s=>String(s).replace(/[&<>"]/g,"");
  return `<div class="kswt" data-kswt="${key}">`+(o.rows||[]).map(r=>{const cur=r.items.find(i=>i.k===r.sel)||r.items[0];
   return `<div class="kswt-r"><div class="kswt-h"><b>${esc(r.label)}</b><span>${esc(cur?cur.name:"")}</span></div><div class="kswt-g" role="radiogroup" aria-label="${esc(r.label)}">`+
@@ -1053,6 +1066,8 @@ window.kitFaceZoom=kitFaceZoom;
 .kfzoom-i>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
 /* kv3:.kv1 */`;document.head.appendChild(st)})();
 function toilColRows(c){return ["mat","ma","son","may"].map(k=>({k,label:TOIL_COL[k].label,sel:c[k],items:TOIL_COL[k].L.map(x=>({k:x[0],name:x[1],short:x[2],col:x[3]}))}))}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60.1",title:"kitColDot · chấm màu chỉ để xem + tên họ màu (không bấm được)",where:"thông tin món y phục / trang sức (hàng «Màu»), lịch lễ, cổng lễ: màu chính + màu phụ; màu lấy từ MỘT bảng dữ liệu (BAL.dc.fam), kit không tự giữ màu nào",
+ html:()=>{const D=[{hex:"#c0392b",n:"Đỏ"},{hex:"#d4a017",n:"Vàng"},{hex:"#8fa98c",n:"Lục"},{hex:"#e8a0a8",n:"Hồng"}];return `<p class="kpnote">kitColDot · cỡ nhỏ / vừa</p>${kitRows([["Màu",kitColDot(D[0],{role:"main"})+'<span class="ksep"> · </span>'+kitColDot(D[1],{role:"sec"})],["Màu (vừa)",kitColDot(D[2],{size:"md"})]])}<p class="kpnote">kitColDots · một hàng</p>${kitRows([["Họ màu",kitColDots([[D[3],"main"],[D[2],"sec"]])]])}`}})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60",title:"kitSwatches · màu trang điểm (phấn mắt, phấn má, son môi, màu mày)",html:()=>{let z="";try{if(typeof S!=="undefined"&&S){const f=kitFile(toilPor().src);TOIL.prev={look:"dep",col:toilColDef()};try{z=kitFaceZoom(S,f)}finally{TOIL.prev=null}}}catch(e){}return `<div style="display:grid;grid-template-columns:minmax(110px,200px) 1fr;gap:10px;align-items:start">${z||"<span></span>"}${kitSwatches({key:"kitpage",rows:toilColRows(toilColDef())})}</div>`}})}catch(e){}
 
 /* (b0) CHỌN MÀU — before the three hồi: her portrait wears the picks live (the same layers as all day, at the "đẹp" strength) */
