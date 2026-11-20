@@ -27,13 +27,15 @@ function mySide(){return typeof isKc==="function"&&isKc()?"h":"p"}
 /* on: a co-op room, both alive, one at home and one in the palace (both in the palace = the normal co-op acts) */
 function kccoOn(){try{const c=CW();if(!c||!c.on||!S||S.dead||S.srv||(typeof isSrv==="function"&&isSrv()))return false;const P=fBlob();return !!P&&sideOf(P)!==mySide()}catch(e){return false}}
 window.kccoOn=kccoOn;
-function fName(){const P=fBlob();return P&&P.name||"hảo hữu"}
+/* fog (owner OD:L165 / OD:L1060, j61 K61FR): the friend is "Hảo hữu của ta" until met — one at home and one in the palace have never met */
+function fLabel(){const FR=window.K61FR||"Hảo hữu của ta";try{const e=typeof k61CoopEnt==="function"?k61CoopEnt():null;if(e&&!k61Coop(e))return e.name}catch(x){}return FR}
+function fName(){return fBlob()?fLabel():"hảo hữu"}
 function fPid(){return pidOf(oth(seat()))}
 function bond(n){if(!n)return;S.rl=S.rl||{};const k=fPid();S.rl[k]=cl((S.rl[k]||0)+n,-100,100)}
 const HOUSE={tt:"Tể tướng",dtq:"Đại tướng quân",thd:"Hàn lâm",td:"Lễ bộ"};
 function clanOfS(s){const c=s&&s.origin&&HOUSE[s.origin.k];return c&&typeof CLANS!=="undefined"&&CLANS.includes(c)?c:null}
 function myClan(){return clanOfS(S)}
-function fClan(){const P=fBlob();return P?clanOfS(P.S):null}
+function fClan(){const P=fBlob();if(!P)return null;const c=HOUSE[P.ok]||(P.S&&P.S.origin&&HOUSE[P.S.origin.k]);/* P.ok = her origin key (jcoopworld P) */return c&&typeof CLANS!=="undefined"&&CLANS.includes(c)?c:null}
 function hist(t){const o=kccoS();o.log.unshift({y:S.year,m:S.month,t});if(o.log.length>K().keep)o.log.length=K().keep}
 function mid(){return seat()+"-"+(S.turn||0)+"-"+Math.random().toString(36).slice(2,8)}
 /* ---------- transport ---------- */
@@ -73,7 +75,7 @@ function intel(id){const v=typeof RV==="function"?RV(id):null;if(!v||!v.alive)re
 const nameKey=()=>mySide()==="h"?"Lời đồn":"Danh";
 function nameMove(n){/* her name with the world: palace Danh up = good; at home Lời đồn (kld) down = good */if(mySide()==="h")S.kld=Math.max(0,(S.kld||0)-n);else S.danh=Math.max(0,(S.danh||0)+n)}
 const nameTxt=n=>mySide()==="h"?`Lời đồn ${balSg(-n)}`:`Danh ${balSg(n)}`;
-PEND.kcco=p=>{const m=p&&p.m;if(!m||!S||S.dead)return null;const C=K(),fn=esc(m.fn||"Hảo hữu"),go=f=>()=>{const b=rsnap();const t=f();if(t)log(t);try{resultShow("Hảo hữu",b,true)}catch(e){}};
+PEND.kcco=p=>{const m0=p&&p.m;if(!m0||!S||S.dead)return null;const m=Object.assign({},m0,{fn:fLabel()});const C=K(),fn=esc(fLabel()),go=f=>()=>{const b=rsnap();const t=f();if(t)log(t);try{resultShow("Hảo hữu",b,true)}catch(e){}};
  const at=m.fs==="h"?"ở nhà":"trong cung";
  if(m.kind==="letter"){const v=m.pl.v!=null&&RV(m.pl.v);const tin=v?`${v.name}: ${RANKS[v.rank]?RANKS[v.rank].n:""}, ${v.trait||"tính chưa rõ"}`:"lời hỏi thăm";
   return{who:who(),t:`<p>Thư của hảo hữu ${fn} ${at} gửi đến.</p>`+kitRows([["Tin trong thư",tin,"t"]]),o:[
@@ -107,7 +109,7 @@ PEND.kcco=p=>{const m=p&&p.m;if(!m||!S||S.dead)return null;const C=K(),fn=esc(m.
 H.card=m=>{if(m.kind==="so"&&m.pl.dir==="dn"){pushDil(mkP("kcco",{m}),"Sớ hặc");return}
  const d=mkP("kcco",{m});if(!d){answer(m,"gone");return}pushDil(d,{letter:"Thư hảo hữu",gift:"Quà hảo hữu",so:"Sớ tiến cử",rumour:"Lời đồn",join:"Đón hảo hữu"}[m.kind]||"Hảo hữu")};
 /* the sender's side of the answer */
-H.ans=r=>{const o=kccoS();const m=o.out.find(x=>x.id===r.id);if(m)m.ans=r.ans;const fn=r.rn||"Hảo hữu";
+H.ans=r=>{const o=kccoS();const m=o.out.find(x=>x.id===r.id);if(m)m.ans=r.ans;const fn=fLabel();
  if(r.kind==="gift"&&(r.ans==="back"||r.ans==="gone")&&r.pl&&r.pl.e){const e=Object.assign({},r.pl.e);delete e.from;S.inv=S.inv||[];S.inv.push(e);try{if(typeof ilLog==="function")ilLog(e,"coop:"+pidOf(r.to),"me","hảo hữu trả lại")}catch(x){}
   log(`${fn} gửi trả ${itm(e.k).n}.`);hist(`${fn} trả lại ${itm(e.k).n}`)}
  else if(r.kind==="gift"&&r.ans==="take"){log(`${fn} đã nhận ${itm(r.pl.e.k).n}.`);hist(`${fn} nhận quà`)}
@@ -179,7 +181,7 @@ function kccoCards(have){const X=[];if(!kccoOn()||mySide()!=="h")return X;for(co
 function kccoPalHTML(){if(!kccoOn()||mySide()!=="p")return"";const P=fBlob();
  const acts=`<div class="rbtn">`+kccoActs().map(a=>pbtn(`data-kcco="${a.k}"`,a.n,`${a.o>=100?"an toàn":word(a.o)} · tốn: ${a.kh} khắc${a.c.suc?` · Sức ${-a.c.suc}`:""}${a.c.bac?` · Bạc ${-a.c.bac}`:""} · thành: ${a.x}${a.l?` · hỏng: ${a.l}`:""}`,a.lock||(!can(a.kh)?"hết khắc":"")||(a.c.bac&&S.bac<-a.c.bac?"không đủ bạc":"")||(a.c.suc&&S.suc<-a.c.suc?"không đủ Sức":""))).join("")+`</div>`;
  const L=kccoS().log;const rows=L.length?L.map(x=>[`Tháng ${x.m}, năm thứ ${x.y}`,x.t,"t"]):[["Chưa có tin","Hai người chưa gửi gì cho nhau","n"]];
- return kitRows([["Hảo hữu",`${P.name||""} · đang ở nhà chờ tuyển tú · tình hảo hữu ${(S.rl||{})[fPid()]||0}`,"t"]])+acts+`<h4 class="kpst">Thư từ qua lại</h4>`+kitRows(rows)}
+ return kitRows([["Hảo hữu",`${fName()} · đang ở nhà chờ tuyển tú · tình hảo hữu ${(S.rl||{})[fPid()]||0}`,"t"]])+acts+`<h4 class="kpst">Thư từ qua lại</h4>`+kitRows(rows)}
 window.kccoPalHTML=kccoPalHTML;
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kcco]");if(!b||!kccoOn()||mySide()!=="p")return;e.stopPropagation();e.preventDefault();if(b.disabled||S.dead||Q.length)return;
  const a=kccoActs().find(x=>x.k===b.dataset.kcco);if(!a||a.lock||!can(a.kh)||!canPay(a))return;const bs=rsnap();spend(a.kh);apply(a.c);

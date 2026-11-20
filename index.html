@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"970c11a8+","t":"2026-11-20T09:03Z","c":"outside-coop: OR13 co-op half — friend at home \u003c-> friend in the palace: letter / gift / sớ / rumour / join, both ways (jkcco.js, BAL.kcco)","b":"69b2ff64ef82","h":[{"s":"9b6e9395+","t":"2026-11-20T08:46Z","c":"rv mg-play2: keep only the vetted face points — the 70 changed kc rows from the live img/mk-fit (no new v1/v2 rows: anchor-table gate flags…"},{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."}]};
+window.CTM_BI={"s":"feedd1b5+","t":"2026-11-20T09:19Z","c":"outside-coop: OR13 co-op half — friend at home \u003c-> friend in the palace: letter / gift / sớ / rumour / join, both ways (jkcco.js, BAL.kcco)","b":"e0430c06069b","h":[{"s":"9b6e9395+","t":"2026-11-20T08:46Z","c":"rv mg-play2: keep only the vetted face points — the 70 changed kc rows from the live img/mk-fit (no new v1/v2 rows: anchor-table gate flags…"},{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -80783,13 +80783,15 @@ function mySide(){return typeof isKc==="function"&&isKc()?"h":"p"}
 /* on: a co-op room, both alive, one at home and one in the palace (both in the palace = the normal co-op acts) */
 function kccoOn(){try{const c=CW();if(!c||!c.on||!S||S.dead||S.srv||(typeof isSrv==="function"&&isSrv()))return false;const P=fBlob();return !!P&&sideOf(P)!==mySide()}catch(e){return false}}
 window.kccoOn=kccoOn;
-function fName(){const P=fBlob();return P&&P.name||"hảo hữu"}
+/* fog (owner OD:L165 / OD:L1060, j61 K61FR): the friend is "Hảo hữu của ta" until met — one at home and one in the palace have never met */
+function fLabel(){const FR=window.K61FR||"Hảo hữu của ta";try{const e=typeof k61CoopEnt==="function"?k61CoopEnt():null;if(e&&!k61Coop(e))return e.name}catch(x){}return FR}
+function fName(){return fBlob()?fLabel():"hảo hữu"}
 function fPid(){return pidOf(oth(seat()))}
 function bond(n){if(!n)return;S.rl=S.rl||{};const k=fPid();S.rl[k]=cl((S.rl[k]||0)+n,-100,100)}
 const HOUSE={tt:"Tể tướng",dtq:"Đại tướng quân",thd:"Hàn lâm",td:"Lễ bộ"};
 function clanOfS(s){const c=s&&s.origin&&HOUSE[s.origin.k];return c&&typeof CLANS!=="undefined"&&CLANS.includes(c)?c:null}
 function myClan(){return clanOfS(S)}
-function fClan(){const P=fBlob();return P?clanOfS(P.S):null}
+function fClan(){const P=fBlob();if(!P)return null;const c=HOUSE[P.ok]||(P.S&&P.S.origin&&HOUSE[P.S.origin.k]);/* P.ok = her origin key (jcoopworld P) */return c&&typeof CLANS!=="undefined"&&CLANS.includes(c)?c:null}
 function hist(t){const o=kccoS();o.log.unshift({y:S.year,m:S.month,t});if(o.log.length>K().keep)o.log.length=K().keep}
 function mid(){return seat()+"-"+(S.turn||0)+"-"+Math.random().toString(36).slice(2,8)}
 /* ---------- transport ---------- */
@@ -80829,7 +80831,7 @@ function intel(id){const v=typeof RV==="function"?RV(id):null;if(!v||!v.alive)re
 const nameKey=()=>mySide()==="h"?"Lời đồn":"Danh";
 function nameMove(n){/* her name with the world: palace Danh up = good; at home Lời đồn (kld) down = good */if(mySide()==="h")S.kld=Math.max(0,(S.kld||0)-n);else S.danh=Math.max(0,(S.danh||0)+n)}
 const nameTxt=n=>mySide()==="h"?`Lời đồn ${balSg(-n)}`:`Danh ${balSg(n)}`;
-PEND.kcco=p=>{const m=p&&p.m;if(!m||!S||S.dead)return null;const C=K(),fn=esc(m.fn||"Hảo hữu"),go=f=>()=>{const b=rsnap();const t=f();if(t)log(t);try{resultShow("Hảo hữu",b,true)}catch(e){}};
+PEND.kcco=p=>{const m0=p&&p.m;if(!m0||!S||S.dead)return null;const m=Object.assign({},m0,{fn:fLabel()});const C=K(),fn=esc(fLabel()),go=f=>()=>{const b=rsnap();const t=f();if(t)log(t);try{resultShow("Hảo hữu",b,true)}catch(e){}};
  const at=m.fs==="h"?"ở nhà":"trong cung";
  if(m.kind==="letter"){const v=m.pl.v!=null&&RV(m.pl.v);const tin=v?`${v.name}: ${RANKS[v.rank]?RANKS[v.rank].n:""}, ${v.trait||"tính chưa rõ"}`:"lời hỏi thăm";
   return{who:who(),t:`<p>Thư của hảo hữu ${fn} ${at} gửi đến.</p>`+kitRows([["Tin trong thư",tin,"t"]]),o:[
@@ -80863,7 +80865,7 @@ PEND.kcco=p=>{const m=p&&p.m;if(!m||!S||S.dead)return null;const C=K(),fn=esc(m.
 H.card=m=>{if(m.kind==="so"&&m.pl.dir==="dn"){pushDil(mkP("kcco",{m}),"Sớ hặc");return}
  const d=mkP("kcco",{m});if(!d){answer(m,"gone");return}pushDil(d,{letter:"Thư hảo hữu",gift:"Quà hảo hữu",so:"Sớ tiến cử",rumour:"Lời đồn",join:"Đón hảo hữu"}[m.kind]||"Hảo hữu")};
 /* the sender's side of the answer */
-H.ans=r=>{const o=kccoS();const m=o.out.find(x=>x.id===r.id);if(m)m.ans=r.ans;const fn=r.rn||"Hảo hữu";
+H.ans=r=>{const o=kccoS();const m=o.out.find(x=>x.id===r.id);if(m)m.ans=r.ans;const fn=fLabel();
  if(r.kind==="gift"&&(r.ans==="back"||r.ans==="gone")&&r.pl&&r.pl.e){const e=Object.assign({},r.pl.e);delete e.from;S.inv=S.inv||[];S.inv.push(e);try{if(typeof ilLog==="function")ilLog(e,"coop:"+pidOf(r.to),"me","hảo hữu trả lại")}catch(x){}
   log(`${fn} gửi trả ${itm(e.k).n}.`);hist(`${fn} trả lại ${itm(e.k).n}`)}
  else if(r.kind==="gift"&&r.ans==="take"){log(`${fn} đã nhận ${itm(r.pl.e.k).n}.`);hist(`${fn} nhận quà`)}
@@ -80935,7 +80937,7 @@ function kccoCards(have){const X=[];if(!kccoOn()||mySide()!=="h")return X;for(co
 function kccoPalHTML(){if(!kccoOn()||mySide()!=="p")return"";const P=fBlob();
  const acts=`<div class="rbtn">`+kccoActs().map(a=>pbtn(`data-kcco="${a.k}"`,a.n,`${a.o>=100?"an toàn":word(a.o)} · tốn: ${a.kh} khắc${a.c.suc?` · Sức ${-a.c.suc}`:""}${a.c.bac?` · Bạc ${-a.c.bac}`:""} · thành: ${a.x}${a.l?` · hỏng: ${a.l}`:""}`,a.lock||(!can(a.kh)?"hết khắc":"")||(a.c.bac&&S.bac<-a.c.bac?"không đủ bạc":"")||(a.c.suc&&S.suc<-a.c.suc?"không đủ Sức":""))).join("")+`</div>`;
  const L=kccoS().log;const rows=L.length?L.map(x=>[`Tháng ${x.m}, năm thứ ${x.y}`,x.t,"t"]):[["Chưa có tin","Hai người chưa gửi gì cho nhau","n"]];
- return kitRows([["Hảo hữu",`${P.name||""} · đang ở nhà chờ tuyển tú · tình hảo hữu ${(S.rl||{})[fPid()]||0}`,"t"]])+acts+`<h4 class="kpst">Thư từ qua lại</h4>`+kitRows(rows)}
+ return kitRows([["Hảo hữu",`${fName()} · đang ở nhà chờ tuyển tú · tình hảo hữu ${(S.rl||{})[fPid()]||0}`,"t"]])+acts+`<h4 class="kpst">Thư từ qua lại</h4>`+kitRows(rows)}
 window.kccoPalHTML=kccoPalHTML;
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kcco]");if(!b||!kccoOn()||mySide()!=="p")return;e.stopPropagation();e.preventDefault();if(b.disabled||S.dead||Q.length)return;
  const a=kccoActs().find(x=>x.k===b.dataset.kcco);if(!a||a.lock||!can(a.kh)||!canPay(a))return;const bs=rsnap();spend(a.kh);apply(a.c);
@@ -82525,7 +82527,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="69b2ff64ef82";window.CTM_BUILD=BUILD;
+const BUILD="e0430c06069b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

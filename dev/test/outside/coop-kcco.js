@@ -114,6 +114,8 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  const aCards=await A.p.evaluate(()=>deck.filter(a=>a.kcco).map(a=>a.n));ok(aCards.length>=4,"A's «Thư từ» has the co-op cards",aCards);
  await clear(B);await B.p.evaluate(()=>{try{S.mg=null;tab='inv';render();const b=document.querySelector('[data-kinvsub="hh"]');if(b)b.click();setTimeout(()=>{const x=document.querySelector('[data-kcco]');if(x)x.scrollIntoView({block:'center'})},200)}catch(e){}});await B.p.waitForTimeout(600);await B.p.evaluate(()=>{const t=[...document.querySelectorAll('*')].find(e=>e.childElementCount===0&&/^Tuyển chọn:/.test((e.textContent||'').trim()));let e=t;while(e&&e!==document.body&&getComputedStyle(e).position!=='fixed')e=e.parentElement;if(e&&e!==document.body){e.dataset.kccoHid=e.style.visibility||'1';e.style.visibility='hidden'}});
  const bPane=await B.p.evaluate(()=>!!document.querySelector('[data-kcco="letter"]'));ok(bPane,"B's Tư trang › «Hảo hữu ở nhà» has the acts");await shot(B,'10-palace-hao-huu');await B.p.evaluate(()=>{document.querySelectorAll('[data-kcco-hid]').forEach(e=>{e.style.visibility='';delete e.dataset.kccoHid})});
+ ok(await B.p.evaluate(()=>{const a=KCCO.acts().find(x=>x.k==='soUp');return a&&!a.lock}),'B can petition for A\'s house (friend clan read from the room blob)');
+ ok(await A.p.evaluate(()=>{const a=KCCO.acts().find(x=>x.k==='soUp');return a&&!a.lock}),'A can petition for B\'s house');
  /* A -> B letter */
  const nA0=await inv(B,'thunha');await A.p.evaluate(()=>{log(kccoDo('letter'))});
  let r=await pick(B,'Thư hảo hữu',/^Đọc thư, cất/);ok(r&&r.ok,'B gets A\'s letter card and keeps it',r);
