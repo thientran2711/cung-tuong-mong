@@ -300,3 +300,4 @@ ROOT-65 Lượt 1002: OWNER verbatim "Ủa mà đã có cái bản mới chưa m
 ## FOREMAN C-AG #27
 - FOREMAN C-AG #27 = session_01Rc5AsMZyX6xYaDzLF6VnCT; START_CTX ~6 % (get_session reads 0; estimate); roll at 31 %, ceiling 60 %; depth 5 (limit 8). Took over 20/11 ~04:15Z. LIVE 82ed060e. LOAD 1 own (rv NKC33KHM idle, kit-gamevs LAND READY at MAIN); (B) mg-fair-hands HOLD for owner ratio. SEATS running 1 / cap 12.
 - (20/11 04:12Z) FROM MAIN ROOT-73: LIVE b74e84cb (owner mgcal hat+tho, BAL only). ROLLBACK 82ed060e. Final-merge b74e84cb before LAND READY.
+- (20/11 04:19Z) FROM MAIN ROOT-73: LIVE 40e26887 (owner mgcal theu + mgcal_apply first-try rule). ROLLBACK b74e84cb. Final-merge 40e26887 before LAND READY.

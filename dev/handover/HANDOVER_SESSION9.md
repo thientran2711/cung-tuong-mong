@@ -1303,3 +1303,4 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - (20/11 03:58Z) LANDED mgcal ve+doi acc26bf0 (ag-mgcal 14/14; quickcheck PASS 153 s, old save ok; manual FF). LIVE acc26bf0, ROLLBACK 651c317c.
 - (20/11 04:05Z) LANDED mgcal hoa 82ed060e (ag-mgcal 14/14; quickcheck PASS 152 s; manual FF). LIVE 82ed060e, ROLLBACK acc26bf0.
 - (20/11 04:12Z) LANDED mgcal hat+tho b74e84cb (ag-mgcal 14/14; quickcheck PASS 170 s; buổi live median 2904 = noise; manual FF). LIVE b74e84cb, ROLLBACK 82ed060e.
+- (20/11 04:19Z) LANDED mgcal theu + first-try rule 40e26887 (mgcal_apply keeps first try; mgcal-apply.test 7/7; ag-mgcal 14/14; quickcheck PASS 157 s; manual FF). LIVE 40e26887, ROLLBACK b74e84cb.
