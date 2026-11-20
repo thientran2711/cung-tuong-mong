@@ -399,7 +399,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | GAP OD05+OD01+OD02+OD03 night land chain (opus; balance-core-r3 → night-final-r3 + giữ chân + môn ưa) | review/balance-core-r3, review/night-final-r3; briefs/D9-gap-jobs.md JOB 1 | D #9 for ROOT-76 | session_01964izFUQc1YiGuMjw5qYC7 | RUNNING | 20/11 08:24Z |
 | GAP OD07 day-khắc land (opus) | review/day-khac-audit-r2; JOB 2 | D #9 for ROOT-76 | session_01964izDcv1Uu66VaTiD7hZB | RUNNING | 20/11 08:24Z |
 | GAP OR11+OR12 outside-route numbers (opus) | review/outside-nums (or kc2val-home-r1); JOB 3 | D #9 for ROOT-76 | session_01964izCCWYwRvyU2FTazDMZ | RUNNING | 20/11 08:24Z |
-| GAP OR21 economy §5 Tâm cơ + paid safety (opus) | review/econ-tamco; JOB 4 | D #9 for ROOT-76 | session_01964izCz6DHEnx8DabpRi97 | RUNNING | 20/11 08:24Z |
+| GAP OR21 economy §5 Tâm cơ + paid safety (opus) | review/econ-tamco; JOB 4 | D #9 for ROOT-76 | session_01964izCzXkfovcY4kd6X4Mk (#2; #1 Cz6DHEnx archived) | RUNNING | 20/11 08:24Z |
 | GAP EM01 emotion balance proof (opus) | review/emo-balance; JOB 5 | D #9 for ROOT-76 | session_01964izFYgpKE1QKqdLq7n1c | RUNNING | 20/11 08:24Z |
 | person-minigame-acts r3 fixes (A walk khắc / word mode, B co-op art practice) + ROUND C finish (opus E22f; successor of E22e @acb38351, -c 47cb41b9) | review/person-minigame-acts(-c) | FOREMAN E #17 | session_01DgYSWkzA9w5sqzXzCyN3Xk | RUNNING | 20/11 09:30Z |
 | mg-ui-rest (sonnet; GAP MG04 td_dung guided + MG12 kgReady pet/plant care + KP05 scheme seal/HUD) | review/mg-ui-rest; briefs/root76-mg-ui-rest.md | MAIN ROOT-76 | session_01Rc5AsHdrZN7mzQfdLCDDAN | RUNNING | 20/11 08:30Z |
