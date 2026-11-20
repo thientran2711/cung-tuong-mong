@@ -55,8 +55,8 @@ function kg82SlapBar(box,env){KG82.slapHint=false;KG82.slapEnd=null;KG82.slapDem
   if(!kg82Spr(g,"tat-hand",x,by-bh/2-4,null,bh*1.25,{ay:1})){g.fillStyle="#3a2412";g.beginPath();g.moveTo(x,by-bh/2-2);g.lineTo(x-9,by-bh/2-18);g.lineTo(x+9,by-bh/2-18);g.closePath();g.fill()}
   g.fillStyle="#3a2412";g.fillRect(x-1.5,by-bh/2-2,3,bh+4);
   g.font=`700 13px ${kg82Col("--display","serif")}`;g.textAlign="center";g.fillStyle=ink;
-  kg82Lbl(g,idle?(dodge?"Vùng xanh đang sáng: chạm khi kim vào đó":"Giữa thước đang sáng: chạm khi kim lướt qua vùng đỏ"):(dodge?"Chạm khi kim vào vùng xanh":"Chạm khi kim lướt qua giữa vùng đỏ"),W/2,H*.2,W-24);
-  if(resT){g.font=`700 16px ${kg82Col("--display","serif")}`;g.fillStyle=resT[1];kg82Lbl(g,resT[0],W/2,H*.82)}else kg82DrawPops(g,pops,now);
+  
+  if(resT){g.font=`700 16px ${kg82Col("--display","serif")}`;g.fillStyle=resT[1];kg82Lbl(g,kg82Sym(resT[0]),W/2,H*.82)}else kg82DrawPops(g,pops,now);
   if(dm&&dm.on)dm.draw(g,W,H,now)}
  function end(raw,txt,col){if(stop)return;lock=true;env.hud({score:mgLive(env,raw)});/* review/mg-score-same: the mark given, on the board at the tap */KG82.slapEnd={still,txt};if(still)resT=[txt,col];else kg82Pop(pops,W/2,H*.82,txt,col);draw(performance.now());stop=true;setTimeout(()=>env.end(raw),B.endMs)}
  function tap(){if(lock||stop||(dm&&dm.on))return;const now=performance.now();hitX=pos(now);const raw=zoneOf(hitX);lock=true;

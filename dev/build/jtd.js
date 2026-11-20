@@ -75,7 +75,7 @@ function kgTdThread(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const N=44,
 /* ---------- 2. Dung: Đi đứng giữ bát ---------- */
 function kgTdWalk(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEase(env.lv),BAND=mgLev(env,"td_dung","band"),KICK=mgLev(env,"td_dung","kick"),SPL=mgLev(env,"td_dung","spill"),DUR=20,STEP=1.6,KN=12;/* mg-balance-2: safe band + step sway by ease (BAL.mgTier.lev.td_dung) */
  const kicks=Array.from({length:KN},(_,k)=>({t:2.4+k*STEP,d:k%3===2?(Math.random()<.5?-1:1):(k%2?-1:1)*(Math.random()<.35?-1:1),m:(.9+.4*Math.random())*KICK}));
- let x=0,v=0,t=0,inB=0,spill=0,stag=0,dir=0,pend=0,ki=0,stop=false,raf=0,last=performance.now();const ptr=new Map(),pops=[];
+ let x=0,v=0,t=0,inB=0,spill=0,stag=0,dir=0,dirAt=0,pend=0,ki=0,stop=false,raf=0,last=performance.now();const ptr=new Map(),pops=[];
  const good=kg82Col("--good","#2d7a52"),red=kg82Col("--red","#c23b22");
  const FY=H*.8,TOPY=H*.3;
  function draw(now){kg82Bg(g,W,H,"td_dung",.06,.6);g.textAlign="center";g.textBaseline="alphabetic";
@@ -88,11 +88,11 @@ function kgTdWalk(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEa
    g.fillStyle="#fff3d6";g.font=`700 ${Math.round(16*sc+4)}px ${kg82Col("--body","sans-serif")}`;g.save();g.shadowColor="#5a1208";g.shadowBlur=6;g.fillText(kk.d<0?"◀ trái":"phải ▶",W/2,y+5);g.restore()}
   g.save();g.strokeStyle="rgba(143,95,12,.8)";g.lineWidth=3;g.beginPath();g.moveTo(W*.2,FY+8);g.lineTo(W*.8,FY+8);g.stroke();g.restore();
   /* the bowl, tipping about its foot */
-  const ang=Math.max(-1.2,Math.min(1.2,x))*.45;g.save();g.translate(W/2,FY-6);g.rotate(ang);if(!kg82Spr(g,"banh-pot",0,0,W*.26,null,{ay:1})){g.fillStyle="#b07a3a";g.fillRect(-30,-40,60,40)}g.restore();
+  const ang=Math.max(-1.2,Math.min(1.2,x))*.45;g.save();g.translate(W/2,FY-6);g.rotate(ang);if(!kg82Spr(g,"banh-pot",0,0,W*.26*(dir?kg82FxPop(dirAt,now):1),null,{ay:1,glow:dir?BAL.mgFx.glow:null})){g.fillStyle="#b07a3a";g.fillRect(-30,-40,60,40)}g.restore();
   if(stag>0){g.save();g.fillStyle="rgba(255,246,220,.7)";g.fillRect(0,0,W,H);g.restore()}
   /* touch halves */
   g.fillStyle="#3a1a0c";g.font=`700 13px ${kg82Col("--body","sans-serif")}`;g.textAlign="left";kg82Lbl(g,"◀ giữ nửa trái đỡ bát sang trái",10,H-12,W*.45);g.textAlign="right";kg82Lbl(g,"giữ nửa phải đỡ bát sang phải ▶",W-10,H-12,W*.45);g.textAlign="center";
-  if(dir){g.save();g.fillStyle="rgba(255,224,138,.22)";g.fillRect(dir<0?0:W/2,H*.2,W/2,H*.7);g.restore()}
+  if(dir)kg82FxRing(g,W/2+dir*W*.1,FY-W*.07,W*.14,dirAt,now);/* touch feedback = the kit pop/glow on the bowl only (mg-visual), no half-screen yellow box */
   kg82DrawPops(g,pops,now)}
  function step(dt){t+=dt;
   while(ki<KN&&t>=kicks[ki].t){v+=kicks[ki].d*kicks[ki].m*1.1;ki++}
@@ -103,7 +103,7 @@ function kgTdWalk(box,env){const C=kg82Canvas(box,1,430),{g,W,H}=C;const lv=tdEa
  function frame(now){if(stop)return;const dl=Math.min(.6,Math.max(0,(now-last)/1000));last=now;const n=Math.max(1,Math.ceil(dl/.034));for(let q=0;q<n&&t<DUR+1;q++)step(dl/n);pend=0;
   env.hud({score:10*Math.min(1,(inB+Math.max(0,DUR-Math.max(0,t)))/DUR),round:`Bước ${Math.min(ki+1,KN)}/${KN}`,time:`${Math.max(0,Math.ceil(DUR+1-t))} giây`});
   draw(now);if(t>=DUR+1){stop=true;return setTimeout(()=>env.end(Math.min(10,inB/DUR*10)),300)/* review/mg-score-same: the float (kg82Play grades once; a rounded raw here made the board and the result differ) */}raf=requestAnimationFrame(frame)}
- const setDir=()=>{let d=0;ptr.forEach(s=>d+=s);dir=Math.max(-1,Math.min(1,d))};
+ const setDir=()=>{let d=0;ptr.forEach(s=>d+=s);d=Math.max(-1,Math.min(1,d));if(d!==dir)dirAt=performance.now();dir=d};
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();const [px]=C.at(e);ptr.set(e.pointerId,px<W/2?-1:1);pend=px<W/2?-1:1;try{C.cv.setPointerCapture(e.pointerId)}catch(_){}setDir()});
  const up=e=>{ptr.delete(e.pointerId);setDir()};C.cv.addEventListener("pointerup",up);C.cv.addEventListener("pointercancel",up);
  KG82.dbg=()=>({x,v,t,dir,inB,spill,ki,stag,n:ptr.size});KG82.peek=()=>{/* a player reads the floor mark: lean against the coming step just before it lands */const kk=kicks[ki],pre=kk&&kk.t-t<.3&&kk.t-t>0?kk.d*kk.m*1.1*.6:0;const f=x+.4*(v+pre);if(Math.abs(f)<BAND*.15)return{hold:false};const want=-Math.sign(f);const c=C.client(want<0?W*.25:W*.75,H*.5);return{hold:true,x:c.x,y:c.y}};
