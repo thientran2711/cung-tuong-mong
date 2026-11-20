@@ -426,3 +426,4 @@ ROOT-67: OWNER correction verbatim "Không cầm trái cây là cho tất cả m
 ROOT-67 Lượt 1062: EAR2 flower plan sent owner (3 angles per kind, mirror right, tuck under hair layer + contact shadow; mẫu đơn test ~83 cr then 5 kinds ~415 cr). EAR2 HOLD; ctx 22 % (roll ~29 %). Credits 85 567. Next Lượt 1063.
 ROOT-67 Lượt 1063: PR20 rooms 33/34 TONE method (0d74203, 270 cr) LOOKED + sent; batch 2 running (675 cr). Next Lượt 1064.
 ROOT-67 NOTE: Lượt clash — ROOT-66 used 1063 (phi bạch answer) + 1064 (artifact note); rooms 33/34 relayed as Lượt 1065. From now: RELAY text without number, ROOT-66 numbers it while owner is in its chat. Next free ≥1066.
+- 07:09Z C-AG #29: (C) SẴN SÀNG mg-score-same c07604e0 (mgLive one path, 31/31 board = given; no BAL/UI change) → BIG opus rv-mg-score-same = session_01Rc5AsKZr2Mvv3MpefHQpoX (my child). SEATS running 5 / cap 12 (wk B, wk C, wk cal-p2 #3, rv B, rv C).
