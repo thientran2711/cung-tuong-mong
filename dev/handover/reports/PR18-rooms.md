@@ -34,3 +34,4 @@ OWNER DECISION L26 (ROOT-62 01:52Z, verbatim "Tôi quyết định là giữ l�
 NEXT (HELD until the owner's go via ROOT-62): room 30 sample per L25 (hạ sáng light/base, textiles = rank colour, white-light sentence, no brown-wood/warm-floor words) — sheet room 28 old | room 30 new + hạ sáng ref.
 - owner ~02:00Z: same composites on the live Ngự hoa viên hạ sáng bg: nf867-nhv-{a,b,c}-lbl.jpg (c = s54 s55 s56 s58), 0 cr.
 - Coordinator now Foreman C ROOT-63 session_01PEhRbvZfdPoYPcwQjYD5EG (child of ROOT-62, verified 01:57Z).
+- L25 update (ROOT-63 01:58Z, owner ~01:57Z 'Giữ bảng màu gốc, đồng thời lấy thêm ánh sáng của ngự hoa viên làm mẫu'): room 30 sample LIGHT refs = tam-cung-dem-ha-sang.webp + ngu-hoa-vien-ha-sang.webp (light only). Still HELD.
