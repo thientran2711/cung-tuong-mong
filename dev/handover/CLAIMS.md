@@ -443,3 +443,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin G #5 (opus; successor of G #4 5UhwqVC9 @f1b926a3) | review/coop-thin-g | B | session_01N1tNP5Wy7doJg2EzqJMECh | RUNNING | 20/11 11:21Z |
 | GAP GE08+GE09+GE10+OR19 ge-npc #2 (opus; successor of 2MH8Qedc @f9045383) | review/ge-npc | B | session_01N1tNP2HPE2wxkW8ADNGHw1 | RUNNING | 20/11 11:21Z |
 | kit-item-big KIT KEEPER (sonnet; Group 2 IT01 of ROOT-77 kit queue — already met by §28.13b; scan + guard test + art gaps) | review/kit-item-big; reports/kit-item-big.md | MAIN ROOT-77 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM bbe1b20f | 20/11 11:55Z |
+| MAIN ROOT-78 (opus; child of ROOT-77, depth 7) | handover HANDOVER_SESSION9 | ROOT-77 | session_01Rc5AsMLiYk8Qo5FC3nWVM1 | RUNNING | 20/11 11:29Z |
