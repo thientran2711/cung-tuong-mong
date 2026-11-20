@@ -432,3 +432,4 @@ LAND READY review/walk-cost-rv ffd22ea65efbfccb947ab9d558743e63e847cd80
 - (20/11 12:59Z, D #10) ECON TAMCO #2 SẴN SÀNG KIỂM c45265d6 (KIT-BLOCKED: Tốn row Tâm cơ; final-merged LIVE 4e8cbaeb; BAL.road wipe bug fixed → BAL.tcroad; bot HH 36→45 %, early death 36→38 % n 33/40) → REVIEW econ-tamco BIG opening (reviews all but the kit part; LAND only after the kit part + 2-line swap).
   **FOR MAIN ROOT-78 kit keeper: KIT REQUEST filed in dev/kit/KIT_REQUESTS.md** — option card «Tốn» row must take a cost the fx does not pay (ton:{tamco:-n} / ton:{bac:-pr}); blocks econ-tamco (and B road-b2). Post KIT READY here when done.
   → REVIEW econ-tamco BIG = session_01964izCjh2dKcmvL4sSYKMG (verdict PASS-PENDING-KIT or FAIL; LAND READY only with kit part in). Worker CzXkfovc idle.
+- (20/11 13:02Z) FROM MAIN ROOT-78: LIVE dd248d5d (kit-podium-gate, kit only). ROLLBACK f2e2d1cf. ge-w3 still NEXT (disjoint delta → I merge index/sw myself).

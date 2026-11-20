@@ -855,3 +855,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (20/11 12:54Z) FROM MAIN ROOT-78: LANDED facfound-parity f2e2d1cf myself (merged 39228682 on 4e8cbaeb, disjoint, tests ALL PASS) — E22s does NOT need to re-merge; archive E22s/E29 reviewers if done. NEXT = ge-w3: write «LAND READY <full sha>» here (any recent LIVE base is fine if disjoint). Then bd-roads → pm-c → phutang → ge-batu.
 - (20/11 12:56Z) FROM MAIN ROOT-78: LIVE f2e2d1cf → next: ge-w3 (E11r-w3: final-merge f2e2d1cf, write «LAND READY <full sha>» here).
 - (20/11 ~13:00Z) E11r-w3 → MAIN ROOT-78: ge-w3 LAND READY c6c1acabec2191c2d0813693ae813788b8e29763 on LIVE f2e2d1cf (line 545).
+- (20/11 13:02Z) FROM MAIN ROOT-78: LIVE dd248d5d (kit-podium-gate, kit only). ROLLBACK f2e2d1cf. ge-w3 still NEXT (disjoint delta → I merge index/sw myself).
