@@ -97,3 +97,23 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - Trigger = context: at START_CTX % + 25 % of the window, NEVER above 60 % (hard ceiling): write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too; the COORDINATOR opens the successor.
 LINEAGE (owner 17/11): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover + send "TAKE OVER NOW" to your line's standby (or a FOR MAIN line if none). Every takeover prompt copies this line.
+
+## §ROUND B (E22b, depth 5, start ctx ~0 %; FOREMAN E #14 rulings 20/11)
+PRIORITY #1 CHECK ('role-parity-drift|seeded-probe|person-minigame'): OD 2 | ledger 0 | claims 8 | main 1 | review/* 5 | archive 0 — reused review/person-minigame-acts + the role-parity-drift-2 method (review/role-parity-drift-2 6ffe38a4, PASS). 18 LAWS read; touched: 1, 2, 3, 4, 6b, 7, 9, 11.
+
+| item | what changed | result |
+|---|---|---|
+| (a) role-parity «maid:N-ONLY accuse / flirt / hail» | probe limit, not game code: the player maid met a palace man / the Hoàng hậu only by the seeded day plan (main: both at the Thái y viện); jpma's new NPC options moved them (the life start() draws differs). dev/tools/role-parity-scan.js: new maid world «m-meet» (both doers): every palace man stands in the garden all day (S.menW + roster) and the Hoàng hậu stands before her (the hh person entry srvVisitOf builds — she has no roster rel and goTo puts her back in Khôn Ninh, where another palace's maid is not let in); undone by UNDO / mSnap. No exempt, no open entry added. | see §SUITES-B |
+| (b2) NPC → her frequency | BAL.pm.npc.meShare .4 (when she is among those an NPC may pick: share of picks on her, hashed — no global dice), meGap 6 (weeks without any NPC asking her → an NPC who may pick her picks her), g ×2.5 (play.ally 10, duel spite 10 / danh 3.75). jpma pmPickBy reads them; S.pmMeL = last week one asked her (old saves: absent = none yet). Test (6) asserts NPC → her ≥ 4 and NPC → NPC ≥ 4 in 200 buổi (seeded Math.random, role-parity idiom). | 200 buổi: NPC → her 6–18, NPC → NPC 13–38 (7 seeded + 4 unseeded runs: unseeded worlds can still draw 2–3 when nobody likes or resents her enough — eligibility is the same rule as for anyone, law 1) |
+| (b3) co-op «Nhường bề trên» | kit option card (pushModal opts, the same rows as Nhận / Từ chối): jcoopworld askYield adds «Nhường bề trên» to the friend's duel card (old relay onAct + part-D PEND.thInv) when the asker outranks the reader (jpma pmCoopYield, same preview as pmDuelOpts); ok:"yield" rides back like ok:true; invRun / invHer set COOPW.yd → ACT.pmduel runs pmYield (reader pays the stake, asker likes +, oán −). No new kit part → no KIT REQUEST. | test (7b): card has it when outranked, not otherwise; stake moves, bạc conserved |
+| (b1), (b4) | accepted as built (no change) | — |
+
+Shots (Fold 755x1000@2 + iPad 1180x820@2, looked 3×): co-op friend duel card with Nhận / Nhường bề trên / Từ chối — kit rows, no overflow. CDN upload refused in this container last round → /home/user/wt/pma-shots (not in git); can upload on request.
+
+### §SUITES-B (final sha fd5dd5ae = review/person-minigame-acts, final-merged LIVE origin/main 72922870 palace-chatter; assemble.py = main's list + jpma after jstagehere)
+- dev/test/person-minigame-acts.test.js PASS 23/23 (new: (6) NPC → her ≥ 4 / NPC → NPC ≥ 4 in 200 buổi, seeded; (7b) co-op «Nhường bề trên»).
+- role-parity.test.js ×2 ALL PASS, outputs byte-identical (md5 b9bbde2a…). Open list 18 → 17 (maid P-ONLY maid:errand closed by the m-meet world; OPEN_MAX 17). No exempt added.
+- receiver-choice.test.js ALL PASS · pm-equal.js ALL WITHIN TOLERANCE · pm-rank.js stake rises ok, her board raw falls ok (chance vs real rank-R NPCs still noisy n = 1–2, print only — ruling (1) accepted).
+- QUICKCHECK PASS · open 1649 ms · old save ok · perf new/live render 253/231, tab 519/481, buổi 1282/1293 ms, tasks>200 20/21 · core gates PASS (one-core, rules-one-source, kit-conform, co-op one-world).
+Diff vs main: dev/build/jpma.js, jbal2.js (BAL.pm), j82.js, jcoopworld.js, assemble.py, dev/test/person-minigame-acts.test.js, dev/measure/pm-*.js, dev/tools/role-parity-scan.js (m-meet world), role-parity-open.json, role-parity.test.js (OPEN_MAX), index.html / sw.js.
+**SẴN SÀNG KIỂM person-minigame-acts fd5dd5ae1b9d4f2d144efaebbd43225729ce2aa8**
