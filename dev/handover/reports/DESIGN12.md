@@ -58,3 +58,13 @@ Rebuilt from current bases (pulled): dong_hientai/s62_t6, s62_t7, s62_t8, m02_t8
 - fur short form on all four: "along the front edges below the <cloud collar | cloud-collar cape> down to the hem, the hem and her cuffs," + " The <piece> sits ON TOP of the fur; no fur on the shoulders or neck."
 - boilerplate trims (allow lines): late hairpin sentence, "NOTHING on the forehead (…)", "Luminous smooth porcelain skin … nothing covering the face." → short floor-length line; pose-tail duplicates ("and the hand really grips it", "eyes open, lips closed", "nothing covering the face") where needed; t7 "Everyone beautiful at every age."; t8 ", never copy anything but its colour".
 Chars: t6 9785, t7 9973, t8 9974, m02_t8 9993 (all ≤ 10 000). keep_check PASS ×4, --all 112 PASS. check_store vs base: t6 −LEN; t7/t8/m02_t8 −LEN +W03 REWRITTEN (owner-asked fur change). No cleavage wording in any đông _vk (A42 revoked L1442).
+
+# DESIGN12 job 4 — WINTER FUR CLOAK (owner Lượt 1445, brief dong-furcloak-L1445.md). 0 gens. Context ~22 % of 1M.
+New: dev/art/dong_hientai/{s62_t4..t8, m02_t7, m02_t8}_DONG_HIENTAI_cloak.txt (+ .keep, base = latest _vk; t8 = 2-tier collar from _vk/thu v8).
+Change (A39, only the winter/fur wording):
+- "WINTER: " → "WINTER: her outer robe is worn as an open-front FUR CLOAK over the crossed-collar outfit, the <capelet | shoulder capes | cloud collar | cloud-collar cape> on the cloak's shoulders; " + the rank's fur-width words unchanged (G26: t4–t6 VERY WIDE ~2.5 hands, t7/t8 WIDEST ~3.5 hands)
+- "along the front edges below the <piece> down to the hem, the hem and her cuffs," → "along the cloak's front edges from the neck to the floor, its hem and cuffs, with fur lapels beside the <piece>,"
+- removed " The <piece> sits ON TOP of the fur; no fur on the shoulders or neck." (replaced by the cloak idea).
+- Cloak colour/cloth = her outer robe (main colour; t8 golden yellow as her outer robe; fabric per rank stays). Outfit/shoulder-piece sentences untouched.
+Trims to fit 10 000 (allow lines): s62_t7 + m02_t8 duplicate "Full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; " (the earlier full-body/skin sentence stays); s62_t8 " Floor-length robe with slippers visible, no train." → " No train." (outfit already says floor-length robe with slippers visible) and pose tail "the whole face fully visible with the head up toward the viewer" → "her head up toward the viewer".
+Chars: t4 9835, t5 9763, t6 9869, t7 9935, t8 9983, m02_t7 9861, m02_t8 9955. keep_check --sidecar PASS ×7, --all 119 PASS. check_store FAIL set IDENTICAL to each _vk base (no new FAIL; W03 REWRITTEN on t7/t8/m02 t7/t8 still from the fur change).
