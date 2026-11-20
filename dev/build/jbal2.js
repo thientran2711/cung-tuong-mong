@@ -1623,7 +1623,12 @@ BAL.tdCourt={giftAf:20,backs:40};
    duel: pubDanh = Danh ± for winner / loser at a public place (pub); shame = extra Danh a HIGHER-rank loser loses per rank of gap (max shameMax); oan = her oán of the winner.
    yield («Nhường», the challenged side when the challenger outranks her): no game, she pays the stake; the challenger's liking + round(V·yieldK/affBac), oán − yieldOan.
    refuse: the challenger outranks the receiver → his/her liking of the refuser − up more (rank etiquette; the rcvNoO cost applies to every refusal).
-   npc: gapW = weeks between two pm acts of one NPC; me = at most per week aimed at her; g = the need weights of the day plan; minAff / spite = who they pick.
+   npc: gapW = weeks between two pm acts of one NPC; me = at most per week aimed at her; g = the need weights of the day plan; minAff / spite = who they pick;
+        meShare = when she is among the people an NPC may pick, the share of picks that land on HER (hashed, no global dice; law 1 two-way + 6b: the court
+        watches the rising one, so NPCs really invite / challenge HER; the rest go to the other NPCs by liking / spite; meGap = weeks with no NPC asking her
+        after which an NPC who may pick her (likes or resents her, as for anyone) picks HER (S.pmMeL = the last week one did; old saves: none yet);
+        g ×2.5 (20/11) so the court plays / duels a few times a year each. Measured over 200 buổi (dev/test/person-minigame-acts.test.js (6), 4 runs):
+        NPC → her 6–18, NPC → NPC 13–38 (was her 0–3 with no meShare / meGap and g 4); foreman E #14 ruling 20/11: NPC → her ≥ 4).
    oddsN = draws behind her ladder word (no %, law 7). */
 Object.assign(BAL.mgTier.occ,{pm:[1,.5]});
 BAL.pm={kc:1,luck:30,minLv:1,
@@ -1634,7 +1639,7 @@ BAL.pm={kc:1,luck:30,minLv:1,
  refuse:{up:1},
  pub:["vuon","kn","tn"],
  mem:{pmplay:6,pmwin:10,pmyield:10},
- npc:{gapW:2,me:1,g:{play:{ally:4},duel:{spite:4,danh:1.5}},minAff:0,spite:3},
+ npc:{gapW:2,me:1,meShare:.4,meGap:6,g:{play:{ally:10},duel:{spite:10,danh:3.75}},minAff:0,spite:3},
  oddsN:120};
 /* receiver weights for a pastime / duel ask (jrcv rcvPick): no «mách lẻo» slot */
 BAL.rcv.k.pm=BAL.rcv.k.help.slice(0,3).concat([BAL.rcv.k.help[3]*BAL.mgTier.occ.hoc[0]]);/* = help weights, slot 3 off (× 0) */

@@ -39,7 +39,13 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
    AGRUN["cx3:pmPlay"](v,S);v.pmW=null;S.pmMeW=null;S.bac=Math.max(S.bac,200);v.bac=Math.max(v.bac||0,200);AGRUN["cx3:pmDuel"](v,S);rcvCard=rc0;out.exec=me;Q.length=0}
   /* (7) co-op friend entry */const f=Object.assign({},t,{id:9901,coop:true,name:"Hảo hữu",rl:{},ro:{},inv:[],bac:300,danh:50});rivals.push(f);window.COOPW=window.COOPW||{};const cw0=Object.assign({},window.COOPW);
   window.COOPW.on=false;window.COOPW.inv=1;const xc=pmX(S,f,"duel",{s:"bac"});S.bac=Math.max(S.bac,200);const bS=S.bac+f.bac;const r1=ACT.pmduel.f(S,f,xc);const r2=ACT.pmplay.f(f,S,pmX(f,S,"play"));
-  out.coop={r1,r2,cons:S.bac+f.bac===bS,ask:typeof ACT_NOSEND!=="undefined"&&ACT_NOSEND.includes("pmplay")&&ACT_NOSEND.includes("pmduel")};Object.assign(window.COOPW,cw0);window.COOPW.inv=0;rivals.splice(rivals.indexOf(f),1);
+  out.coop={r1,r2,cons:S.bac+f.bac===bS,ask:typeof ACT_NOSEND!=="undefined"&&ACT_NOSEND.includes("pmplay")&&ACT_NOSEND.includes("pmduel")};
+  /* (7b) foreman E #14 ruling (3): the friend's duel card offers «Nhường bề trên» when the asker outranks the reader (as with an NPC), not otherwise;
+     the answer «yield» runs pmYield inside the accepted ask (COOPW.yd): the reader pays the stake, no game, bạc conserved */
+  {const r0=S.rank,f0=f.rank;const cardN=()=>{try{return (PEND.thInv({id:"t7b",k:"pmduel",who:"Hảo hữu",v:f.id}).o||[]).map(o=>o.n)}catch(e){return["ERR "+e.message]}};
+   S.rank=1;f.rank=3;const up=cardN();S.rank=3;f.rank=1;const low=cardN();
+   const xy=pmX(S,f,"duel",{s:"bac"});const bY=S.bac+f.bac,sb=S.bac;window.COOPW.inv=1;window.COOPW.yd=true;const ry=ACT.pmduel.f(S,f,xy);window.COOPW.yd=false;
+   out.coopY={up,low,ry,gain:S.bac-sb,V:pmV(S,f),cons:S.bac+f.bac===bY};S.rank=r0;f.rank=f0}Object.assign(window.COOPW,cw0);window.COOPW.inv=0;rivals.splice(rivals.indexOf(f),1);
   /* (9) Emperor summons untouched (law 16): the functions still exist and run */out.ts=typeof tsSummonKind==="function"&&typeof tsSummonOdds==="function"&&typeof tsSummonGo==="function";
   return out});
  const L=r.ladder;const lad=x=>L.some(w=>x.startsWith(w+" ·")||x===w);
@@ -57,15 +63,18 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
  ok(r.pop.length===2&&r.popSame.length===2,'popup rows «Cùng chơi» + «Thách đấu», also inside the same palace',{pop:r.pop,same:r.popSame});
  ok(r.card3===2&&r.walk,'Hậu cung card: both buttons in «Gặp mặt», bound to walking to her (goSee) or her place unknown',{n:r.card3,walk:r.walk});
  ok(/thắng|ván/.test(r.coop.r1)&&r.coop.cons&&r.coop.ask,'co-op friend: the accepted duel resolves by both hands, bạc conserved; both acts are ask acts',r.coop);
+ ok(r.coopY&&r.coopY.up.includes('Nhường bề trên')&&!r.coopY.low.includes('Nhường bề trên')&&/nhường/.test(r.coopY.ry)&&r.coopY.gain===r.coopY.V&&r.coopY.cons,'co-op friend card: «Nhường bề trên» when the asker outranks (same as NPC), the yield pays the stake, bạc conserved',r.coopY);
  ok(r.ts,'Emperor summons (jts tsSummon*) still in place');
  /* (6) NPC day plan over ≥ 10 days (fresh page) */
- const p2=await b.newPage();p2.on('pageerror',e=>errs.push(e.message));await p2.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());await p2.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p2.waitForTimeout(2500);
+ const p2=await b.newPage();p2.on('pageerror',e=>errs.push(e.message));/* a seeded Math.random for the 200-buổi day plan (the role-parity-scan idiom): the world it starts from is the same each run */await p2.addInitScript(()=>{let s=7;Math.random=()=>{s=(s*16807)%2147483647;return (s-1)/2147483646}});await p2.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());await p2.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p2.waitForTimeout(2500);
  const d=await p2.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;window.__bot=1;window.__agAll=1;quiet=false;Q.length=0;
   const me=[];const rc0=rcvCard;rcvCard=function(pid,pp,title,p){if(pp&&/^pm/.test(pp.k||""))me.push(pp.k);return rc0.apply(this,arguments)};const t0=[S.year,S.month,S.tuan];let n=0;
   for(let i=0;i<200&&!S.dead;i++){Q.length=0;S.mg=null;nextBuoi();n++}const sim={n,t0,t1:[S.year,S.month,S.tuan],by:{play:AG3.stat.by.pmPlay||0,duel:AG3.stat.by.pmDuel||0},me:me.slice()};
   sim.S={dead:!!S.dead,out:!!S.out,conf:S.confined||0,srv:typeof isSrv==="function"&&isSrv()};return sim});
  ok(d.by.play+d.by.duel>=2,'NPC → NPC over ≥ 10 game days (day plan cx3:pmPlay / cx3:pmDuel land)',d);
  ok(r.exec.includes("pmPlay")&&r.exec.includes("pmDuel"),'NPC → her: the day-plan deed reaches her as her answer card (both acts)',{exec:r.exec,simMe:d.me,S:d.S});
+ /* foreman E #14 ruling (2) 20/11: law 1 two-way + 6b — over 200 buổi NPCs really invite / challenge HER (≥ 4, BAL.pm.npc.meK) and NPC → NPC still lands (≥ 4) */
+ const nMe=d.me.length,nNpc=d.by.play+d.by.duel-nMe;ok(d.n>=200&&nMe>=4&&nNpc>=4,'NPC → her ≥ 4 in 200 buổi, NPC → NPC still lands (≥ 4)',{buoi:d.n,me:nMe,npc:nNpc,kinds:d.me});
  /* (8) old save */
  const o=await p2.evaluate(()=>{try{window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;Q.length=0;delete S.pmM;delete S.pmGo;delete S.pmMeW;delete S.pmMeN;for(const v of rivals)delete v.pmW;save();const d=loadSlot(SLOT);quiet=true;deser(d);quiet=false;render();
   const v=liveRivals(true).find(x=>x!==S&&!x.out);return{ok:!!S&&!S.dead&&!!d,rows:talkOpts({kind:"rival",ref:v}).filter(z=>z.pm).length,st:pmStakes(S,v).length}}catch(e){return{err:e.message}}});
