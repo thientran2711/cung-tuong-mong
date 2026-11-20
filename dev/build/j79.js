@@ -559,7 +559,7 @@ window.kitGameMark=kitGameMark;window.kitGameMarkVal=kitGameMarkVal;
    only the HUD value "<n> giây" is a time limit ("nhìn kỹ", "–", "5 tên", "đã hết", "không hạn" are not) -> the chip is hidden. No new part, no chip row. */
 function kitGameClock(v){document.querySelectorAll(".kgame .kgclk").forEach(e=>{const m=/^\s*(\d+)\s*giây\s*$/.exec(String(v==null?"":v));
  if(!m||typeof kitCoopClock!=="function"){e.hidden=true;e.innerHTML="";return}const n=+m[1]*1000,len=Math.max(+e.dataset.len||0,n);e.dataset.len=len;/* amber = the full-marks window of the time part (jmgt mgFast, ONE CORE) is passed; a new round starts with left back at len -> normal again */
- const c=typeof KG82!=="undefined"?KG82.cur:null,fw=c&&c.kind&&typeof mgFast==="function"?mgFast(c,c.kind):null,amber=fw!=null&&(len-n)>fw*len;
+ const c=typeof KG82!=="undefined"?KG82.cur:null,fw=c&&c.kind&&typeof mgFast==="function"?mgFast(c,c.kind):null,amber=fw!=null&&fw>0&&(len-n)>fw*len;
  e.classList.toggle("kgclk-amber",!!amber);e.innerHTML=kitCoopClock({left:n,len,tone:amber?"w":"n"});e.hidden=false})}
 window.kitGameClock=kitGameClock;
 /* kitGameResult({raw, talent, prep, total, place:"Nhất", of:4, rivals:[{who:person, score}], gains:[["Sủng",3]], losses:[["Sức",-10]], note})

@@ -46,8 +46,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   ok(r.a===f(r.exp8)&&r.b===f(r.exp5)&&r.c===f(r.exp7),`kind ${k}: chip = HUD mark (no second grading)`,[r.a,r.b,r.c,r.exp8,r.exp5,r.exp7]);
   ok(r.popB&&!r.popA,`kind ${k}: pop on a drop only`,[r.popA,r.popB]);
   ok(r.after===f(mgGrade_(r)),`kind ${k}: chip after end = result mark`,[r.after,mgGrade_(r)]);
-  if(r.fast!=null&&r.fast!=='nofn'&&r.t0){ok(r.t0&&!r.t0.amber&&r.t1&&r.t1.amber&&r.t1.w&&r.t2&&!r.t2.amber,`kind ${k}: clock normal → AMBER after the window → normal at a new round`,[r.t0,r.t1,r.t2,r.fast])}
-  else if(r.t1)ok(!r.t1.amber,`kind ${k}: no time part → clock never amber`,r.t1);
+  if(r.fast!=null&&r.fast!=='nofn'&&r.fast>0&&r.t0){ok(r.t0&&!r.t0.amber&&r.t1&&r.t1.amber&&r.t1.w&&r.t2&&!r.t2.amber,`kind ${k}: clock normal → AMBER after the window → normal at a new round`,[r.t0,r.t1,r.t2,r.fast])}
+  else if(r.t1)ok(!r.t1.amber,`kind ${k}: no time part or window 0 → clock never amber`,r.t1);
  }
  function mgGrade_(r){return r.lastExp}
  ok(!errs.length,'no page errors',errs.slice(0,3));
