@@ -409,7 +409,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW perf-ci r1 (sonnet SMALL tooling) of 56d4c0a6 | review/perf-ci-r1 | B | session_01N1tNP4bjLTgLhGHK2jSsH8 | PASS 5a32532c → ARCHIVED | 20/11 08:40Z |
 | REVIEW cal-p2b (BIG opus) of 45768ff8 (huong/mua/banh broken grading + 9 pace full-marks windows) | review/cal-p2b-rv; briefs/rv-root76-cal-p2b.md | MAIN ROOT-76 | session_01Rc5AsJGMmUL6NpNpYgiR6c | PASS 62e3c9f1 → LAND READY (FF fd682a8d); report reports/rv-cal-p2b.md; dropped cal.k huong/mua/banh for her re-test | 20/11 08:45Z |
 | REVIEW home-chapters (BIG opus E25r) of 03c2cade | review/home-chapters; briefs/E25r-review-home-chapters.md | FOREMAN E #17 | session_01DgYSWpQvWQ5ka4h6t1ZQRC | RUNNING | 20/11 09:48Z |
-| REVIEW palace-life-gaps r1 (opus BIG) of 3af67a8e | review/palace-life-gaps-r1 | B | session_01N1tNP6rEmQko7Y5Qk716AK | RUNNING | 20/11 08:52Z |
+| REVIEW palace-life-gaps r1 (opus BIG) of 3af67a8e | review/palace-life-gaps-r1 | B | session_01N1tNP6rEmQko7Y5Qk716AK | PASS 5b670afb (1 fix: estrangement month; reports/palace-life-gaps.md) | 20/11 10:40Z |
 | REVIEW names-unique-r2 r1 (opus BIG; save migration) of bf9f80002 | review/names-unique-r2-r1 | B | session_01N1tNP6fWrZSFyTwWVjxNXT | RUNNING | 20/11 08:53Z |
 | REVIEW mg-ui-rest (SMALL sonnet) of b5253eeb | review/mg-ui-rest-rv; briefs/rv-root76-mg-ui-rest.md | MAIN ROOT-76 | session_01Rc5AsM53iAEvG6q2NjA1iN | PASS 2859b245 | 20/11 08:57Z |
 | REVIEW outside-gaps r1 (opus BIG) of 70f3c853 | review/outside-gaps-r1 | B | session_01N1tNP3qXHKuMuUrxD5QGRQ | PASS 52f0638e (contains LIVE fd682a8d; 5 reviewer fixes; +15 cap OFF confirmed, decision → MAIN; kc-end + role-parity FAILs pre-existing on LIVE) | 20/11 10:40Z |
