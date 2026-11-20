@@ -18,11 +18,22 @@ function walkErrRow(e,b0,a,i,place,x){if(!walkNpcOn()||!a||!x||!place)return x;t
   const fr=a.wfr;if(!real(place))return x;const D=a.due-b0,y=D>=0&&D<e.length?e[D]:null;const bk=y&&real(y[0])&&y[1]!=="errand"?y[0]:fr;/* back = where her day goes on at due (this buổi), else where she came from */
   const w=walkWho(a.who),n=Math.max(0,a.due-a.t0);let tO=0,tB=0;try{if(real(fr)&&fr!==place)tO=travel(fr,place,w);if(real(bk)&&bk!==place)tB=travel(place,bk,w)}catch(z){}if(!tO&&!tB)return x;const gO=Math.min(Math.max(0,tO-1),n),gB=Math.min(Math.max(0,tB-1),n-gO);
   const K=b0+i,why=x[3]||"đi việc";if(K-a.t0<gO)return[place,"go",x[2],why+" · đang trên đường"];if(K>=a.due-gB)return[bk,"go",x[2],why+" · đang trên đường về"];return x}catch(z){return x}}
+/* MEETING ROADS (final gate of review/jagday-walk, law 11 whole group): a secret meeting / tryst (j95secApply) is written straight into the
+   record at its khắc; jwalk never rewrites that kept row and never the khắc 0 of a fresh record, so she was at the meeting spot with no road.
+   The khắc right before it become her road (same rule as walkNpcPass «leave earlier»: free, not kept, not yet shown), travel per walker. */
+function walkLeadIn(R,id,i0,place,why,tgt){if(!walkNpcOn()||!R||!R.P||!(i0>0))return 0;const row=R.P[id];if(!Array.isArray(row))return 0;const OUT=typeof J95OUT_!=="undefined"?J95OUT_:"__out";
+ const real=k=>!!k&&typeof k==="string"&&k!==OUT&&k!=="ngoai";if(!real(place))return 0;let q=i0-1,g=0;while(q>=0&&row[q]&&row[q][0]===place&&row[q][1]==="go"){g++;q--}
+ if(q<0||!row[q]||!real(row[q][0])||row[q][0]===place)return 0;let t=0;try{t=travel(row[q][0],place,walkWho(id))}catch(e){t=0}let need=t-1-g,n=0;
+ let k0=-1;try{if(JWALK.seen&&JWALK.seen.key===R.key&&typeof j95kh==="function")k0=j95kh()}catch(e){}/* a record already shown: never the khắc now or before */
+ while(need>0&&q>k0&&q>=0&&!walkKeepRow(row[q],id,q,R)){row[q]=[place,"go",tgt==null?null:tgt,walkRoadWhy(why)];need--;n++;JWALK.stat.lead=(JWALK.stat.lead||0)+1;q--}
+ if(need>0)JWALK.stat.miss++;return n}
 function walkNpcOn(){try{return BAL.walk.npc!==0}catch(e){return false}}
 const JWALK={stat:{fix:0,late:0,miss:0,now:0},errs:[],seen:null};
 /* review/jagday-walk r2: a row turned into «on the way» keeps its own why and target (a guest's leave reason, whom a follower follows) */
 function walkRoadWhy(w,pre){const s=w&&!/^\s*$/.test(w)?String(w):(pre||"");if(/đang trên đường/.test(s))return s;return s?s+" · đang trên đường":"đang trên đường"}
-function walkTimed(id,x){if(x&&(x[1]==="visit"||x[1]==="back"))return true;try{return typeof ptAwayOf==="function"&&!!ptAwayOf(id)}catch(e){return false}}
+/* r2 (final gate): a jptime task skips only the khắc INSIDE its away window [t0, due) — once due has come her day's next move walks like any other
+   (the task stays open until it settles, so ptAwayOf alone also held the khắc after due: a servant sent on to her own errand jumped there) */
+function walkTimed(id,x,kh){if(x&&(x[1]==="visit"||x[1]==="back"))return true;try{const a=typeof ptAwayOf==="function"?ptAwayOf(id):null;if(!a)return false;if(kh==null||typeof bid!=="function"||typeof ptKH!=="function")return true;const K=bid()*ptKH()+kh;return K>=a.t0&&K<a.due}catch(e){return false}}
 const walkSig=x=>x?x[0]+"|"+x[1]+"|"+(x[2]||""):"";
 function walkKeepRow(x,id,q,R){if(!x)return true;const a=x[1]||"";
  /* review/jagday-walk: an «ag_» row is kept only while a deed / binding really holds it (jagday agWalkHeld); the day plan's label alone is free */
@@ -38,7 +49,7 @@ function walkNpcPass(R,kh){if(!walkNpcOn()||!R||!R.P)return 0;let n=0;const K=(t
  for(const id in R.P){if(id==="me"||/^mm:me$/.test(id))continue;const row=R.P[id];if(!Array.isArray(row)||row.length<K)continue;
   /* r2: never a row the timed ledger wrote — an invite guest arriving («visit») / leaving («back»), a person on a jptime task: their khắc
      already hold the walk (the task's due = after the road, jptime) */
-  const now=kh>=1&&kh<K&&SN&&SN[id]&&SN[id][kh]!==walkSig(row[kh])&&!walkTimed(id,row[kh]);
+  const now=kh>=1&&kh<K&&SN&&SN[id]&&SN[id][kh]!==walkSig(row[kh])&&!walkTimed(id,row[kh],kh);
   for(let j=Math.max(1,now?kh:kh+1);j<K;j++){const x=row[j];if(!x||!real(x[0])||x[1]==="go")continue;if(x[1]==="follow"&&x[2]==="me")continue;
    let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&row[q][1]==="go"){g++;q--}if(q<0||!row[q]||!real(row[q][0])||row[q][0]===x[0])continue;
    let t=0;try{t=travel(row[q][0],x[0],walkWho(id))}catch(e){t=0}let need=t-1-g;if(need<=0)continue;

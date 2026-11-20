@@ -41,8 +41,10 @@ const boot=`localStorage.clear();SLOT=4;document.getElementById('title').hidden=
  /* 5 NPCs */
  const scan=async off=>{await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);return p.evaluate(([boot,off])=>{eval(boot);if(off)BAL.walk.npc=0;const o={far:0,bad:0,kfar:0,kbad:0};
   for(let s=0;s<48;s++){/* 48 buổi */Q.length=0;S.mg=0;for(let u=0;u<4;u++){used=u;try{j95sync()}catch(e){}}const R=S.roster;if(R&&R.P)for(const id in R.P){if(id==="me")continue;const row=R.P[id];if(!Array.isArray(row))continue;
-    for(let j=1;j<row.length;j++){const x=row[j];if(!x||x[0]==null||x[1]==="go"||(x[1]==="follow"&&x[2]==="me"))continue;let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&row[q][1]==="go"){g++;q--}
-     if(q<0||!row[q]||row[q][0]==null||row[q][0]===x[0])continue;const t=travel(row[q][0],x[0]);if(t<2)continue;o.far++;const kp=walkKeepRow(row[q])||walkKeepRow(x)||/^(errand|follow)$/.test(row[q][1])||/^(errand|follow)$/.test(x[1]);if(kp)o.kfar++;if(g<t-1){o.bad++;if(kp)o.kbad++}}}
+    for(let j=1;j<row.length;j++){const x=row[j];if(!x||x[0]==null||x[1]==="go"||x[1]==="ag_tell"||(x[1]==="follow"&&x[2]==="me"))continue;let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&(row[q][1]==="go"||row[q][1]==="ag_tell")){g++;q--}
+     /* jagday-walk final gate: an «ag_tell» row is the TIN BÁO bearer's road (written only on her road khắc, at her master's place = a «go» row);
+        the road is the NPC's own (travel per walker, test 10) — travel(a,b) alone added HER «đi chậm» to every NPC road */
+     if(q<0||!row[q]||row[q][0]==null||row[q][0]===x[0])continue;const t=travel(row[q][0],x[0],walkWho(id));if(t<2)continue;o.far++;const kp=walkKeepRow(row[q])||walkKeepRow(x)||/^(errand|follow)$/.test(row[q][1])||/^(errand|follow)$/.test(x[1]);if(kp)o.kfar++;if(g<t-1){o.bad++;if(kp)o.kbad++}}}
    try{nextBuoi()}catch(e){}}o.errs=JWALK.errs;return o},[boot,off])};
  const off=await scan(true),on=await scan(false);
  /* WALK-COST #4 root cause of the 0.42 tail (probe = this scan; ffd22ea6 and this branch alike): EVERY bare far jump left with jwalk on
@@ -113,7 +115,7 @@ const boot=`localStorage.clear();SLOT=4;document.getElementById('title').hidden=
  const scan11=async off=>{await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);return p.evaluate(([boot,off])=>{eval(boot);if(off)BAL.walk.npc=0;const o={far:0,bad:0,deed:0,L:[]};
   for(let s=0;s<16;s++){Q.length=0;S.mg=0;for(let u=0;u<4;u++){used=u;try{j95sync()}catch(e){}}const R=S.roster;if(R&&R.P)for(const id in R.P){if(id==="me")continue;const row=R.P[id];if(!Array.isArray(row))continue;
     for(let j=1;j<row.length;j++){const x=row[j];if(!x||x[0]==null||x[1]==="go"||x[1]==="ag_tell"||(x[1]==="follow"&&x[2]==="me"))continue;let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&(row[q][1]==="go"||row[q][1]==="ag_tell")){g++;q--}
-     if(q<0||!row[q]||row[q][0]==null||row[q][0]===x[0]||row[q][1]==="ag_tell")continue;const t=travel(row[q][0],x[0]);if(t<2)continue;o.far++;if(g<t-1){o.bad++;if(/^ag_/.test(x[1])&&/^ag_/.test(row[q][1])){o.deed++;o.L.push(id+" "+row.map(e=>e[0]+"/"+e[1]).join("|"))}else if(x[1]==="errand"||row[q][1]==="errand"){o.errand=(o.errand||0)+1;o.L.push(id+" "+row.map(e=>e[0]+"/"+e[1]).join("|"))}}}}
+     if(q<0||!row[q]||row[q][0]==null||row[q][0]===x[0]||row[q][1]==="ag_tell")continue;const t=travel(row[q][0],x[0],walkWho(id));/* the NPC's own road (not her «đi chậm») */if(t<2)continue;o.far++;if(g<t-1){o.bad++;if(/^ag_/.test(x[1])&&/^ag_/.test(row[q][1])){o.deed++;o.L.push(id+" "+row.map(e=>e[0]+"/"+e[1]).join("|"))}else if(x[1]==="errand"||row[q][1]==="errand"){o.errand=(o.errand||0)+1;o.L.push(id+" "+row.map(e=>e[0]+"/"+e[1]).join("|"))}}}}
    try{nextBuoi()}catch(e){}}o.errs=JWALK.errs.concat(AGD.errs.filter(e=>/walk/.test(e)));return o},[boot,off])};
  const on11=await scan11(false),off11=await scan11(true);
  ok(on11.deed===0,'11 16 buổi: NPC far moves deed → deed without «on the way» khắc: on '+on11.deed+' (all far jumps '+on11.bad+'/'+on11.far+') vs off '+off11.deed+' ('+off11.bad+'/'+off11.far+')',on11.L.slice(0,3));

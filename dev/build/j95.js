@@ -256,6 +256,8 @@ function j95secApply(R){const z=j95z();const c=R.c;
  for(const s of z.sec){if(s.c!==c||s.wk!==wk())continue;s.key=R.key;const A=R.P[s.a];if(!A)continue;
   for(const i of s.kh){A[i]=[s.k,s.kind,s.b,s.why];if(s.b){if(!R.P[s.b]){const m=manById(s.b);if(m)R.who[s.b]=[m.name,m.role];R.P[s.b]=[0,1,2,3].map(()=>[null,"go",null,""])}
     if(R.P[s.b])R.P[s.b][i]=[s.k,s.kind,s.a,s.kind==="tryst"?"tư tình":"chủ sai việc kín"]}}
+  /* jwalk walkLeadIn (review/jagday-walk final gate): the khắc before the meeting are her road there (and her servant's) */
+  try{if(typeof walkLeadIn==="function"&&s.kh.length){const i0=Math.min.apply(null,s.kh);walkLeadIn(R,s.a,i0,s.k,s.why,s.b);if(s.b&&/^s\d+$/.test(s.b))walkLeadIn(R,s.b,i0,s.k,"chủ sai việc kín",s.a)}}catch(e){}
   /* men only in the palace for the meeting: outside at the other khắc → drop them out of the record those khắc by putting them at the meeting spot only */
   if(s.b&&R.P[s.b]){for(let i=0;i<4;i++)if(R.P[s.b][i][0]==null)R.P[s.b][i]=[s.k,"go",null,"lặng lẽ đến chỗ hẹn"]}
   /* NPC passers-by at the same place and khắc may see (same odds as hers) */

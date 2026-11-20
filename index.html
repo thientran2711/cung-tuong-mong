@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"29c59bdc+","t":"2026-11-20T14:50Z","c":"jagday-walk r2: build (index.html / sw.js)","b":"fa5cb71075f7","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
+window.CTM_BI={"s":"a30be97f+","t":"2026-11-20T19:11Z","c":"review walk-cost r4: the invitation bind lasts only while the invitation holds (leave: walk-back khắc bound, rest of the buổi free again) +…","b":"65968668c8af","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -66802,6 +66802,8 @@ function j95secApply(R){const z=j95z();const c=R.c;
  for(const s of z.sec){if(s.c!==c||s.wk!==wk())continue;s.key=R.key;const A=R.P[s.a];if(!A)continue;
   for(const i of s.kh){A[i]=[s.k,s.kind,s.b,s.why];if(s.b){if(!R.P[s.b]){const m=manById(s.b);if(m)R.who[s.b]=[m.name,m.role];R.P[s.b]=[0,1,2,3].map(()=>[null,"go",null,""])}
     if(R.P[s.b])R.P[s.b][i]=[s.k,s.kind,s.a,s.kind==="tryst"?"tư tình":"chủ sai việc kín"]}}
+  /* jwalk walkLeadIn (review/jagday-walk final gate): the khắc before the meeting are her road there (and her servant's) */
+  try{if(typeof walkLeadIn==="function"&&s.kh.length){const i0=Math.min.apply(null,s.kh);walkLeadIn(R,s.a,i0,s.k,s.why,s.b);if(s.b&&/^s\d+$/.test(s.b))walkLeadIn(R,s.b,i0,s.k,"chủ sai việc kín",s.a)}}catch(e){}
   /* men only in the palace for the meeting: outside at the other khắc → drop them out of the record those khắc by putting them at the meeting spot only */
   if(s.b&&R.P[s.b]){for(let i=0;i<4;i++)if(R.P[s.b][i][0]==null)R.P[s.b][i]=[s.k,"go",null,"lặng lẽ đến chỗ hẹn"]}
   /* NPC passers-by at the same place and khắc may see (same odds as hers) */
@@ -83511,11 +83513,22 @@ function walkErrRow(e,b0,a,i,place,x){if(!walkNpcOn()||!a||!x||!place)return x;t
   const fr=a.wfr;if(!real(place))return x;const D=a.due-b0,y=D>=0&&D<e.length?e[D]:null;const bk=y&&real(y[0])&&y[1]!=="errand"?y[0]:fr;/* back = where her day goes on at due (this buổi), else where she came from */
   const w=walkWho(a.who),n=Math.max(0,a.due-a.t0);let tO=0,tB=0;try{if(real(fr)&&fr!==place)tO=travel(fr,place,w);if(real(bk)&&bk!==place)tB=travel(place,bk,w)}catch(z){}if(!tO&&!tB)return x;const gO=Math.min(Math.max(0,tO-1),n),gB=Math.min(Math.max(0,tB-1),n-gO);
   const K=b0+i,why=x[3]||"đi việc";if(K-a.t0<gO)return[place,"go",x[2],why+" · đang trên đường"];if(K>=a.due-gB)return[bk,"go",x[2],why+" · đang trên đường về"];return x}catch(z){return x}}
+/* MEETING ROADS (final gate of review/jagday-walk, law 11 whole group): a secret meeting / tryst (j95secApply) is written straight into the
+   record at its khắc; jwalk never rewrites that kept row and never the khắc 0 of a fresh record, so she was at the meeting spot with no road.
+   The khắc right before it become her road (same rule as walkNpcPass «leave earlier»: free, not kept, not yet shown), travel per walker. */
+function walkLeadIn(R,id,i0,place,why,tgt){if(!walkNpcOn()||!R||!R.P||!(i0>0))return 0;const row=R.P[id];if(!Array.isArray(row))return 0;const OUT=typeof J95OUT_!=="undefined"?J95OUT_:"__out";
+ const real=k=>!!k&&typeof k==="string"&&k!==OUT&&k!=="ngoai";if(!real(place))return 0;let q=i0-1,g=0;while(q>=0&&row[q]&&row[q][0]===place&&row[q][1]==="go"){g++;q--}
+ if(q<0||!row[q]||!real(row[q][0])||row[q][0]===place)return 0;let t=0;try{t=travel(row[q][0],place,walkWho(id))}catch(e){t=0}let need=t-1-g,n=0;
+ let k0=-1;try{if(JWALK.seen&&JWALK.seen.key===R.key&&typeof j95kh==="function")k0=j95kh()}catch(e){}/* a record already shown: never the khắc now or before */
+ while(need>0&&q>k0&&q>=0&&!walkKeepRow(row[q],id,q,R)){row[q]=[place,"go",tgt==null?null:tgt,walkRoadWhy(why)];need--;n++;JWALK.stat.lead=(JWALK.stat.lead||0)+1;q--}
+ if(need>0)JWALK.stat.miss++;return n}
 function walkNpcOn(){try{return BAL.walk.npc!==0}catch(e){return false}}
 const JWALK={stat:{fix:0,late:0,miss:0,now:0},errs:[],seen:null};
 /* review/jagday-walk r2: a row turned into «on the way» keeps its own why and target (a guest's leave reason, whom a follower follows) */
 function walkRoadWhy(w,pre){const s=w&&!/^\s*$/.test(w)?String(w):(pre||"");if(/đang trên đường/.test(s))return s;return s?s+" · đang trên đường":"đang trên đường"}
-function walkTimed(id,x){if(x&&(x[1]==="visit"||x[1]==="back"))return true;try{return typeof ptAwayOf==="function"&&!!ptAwayOf(id)}catch(e){return false}}
+/* r2 (final gate): a jptime task skips only the khắc INSIDE its away window [t0, due) — once due has come her day's next move walks like any other
+   (the task stays open until it settles, so ptAwayOf alone also held the khắc after due: a servant sent on to her own errand jumped there) */
+function walkTimed(id,x,kh){if(x&&(x[1]==="visit"||x[1]==="back"))return true;try{const a=typeof ptAwayOf==="function"?ptAwayOf(id):null;if(!a)return false;if(kh==null||typeof bid!=="function"||typeof ptKH!=="function")return true;const K=bid()*ptKH()+kh;return K>=a.t0&&K<a.due}catch(e){return false}}
 const walkSig=x=>x?x[0]+"|"+x[1]+"|"+(x[2]||""):"";
 function walkKeepRow(x,id,q,R){if(!x)return true;const a=x[1]||"";
  /* review/jagday-walk: an «ag_» row is kept only while a deed / binding really holds it (jagday agWalkHeld); the day plan's label alone is free */
@@ -83531,7 +83544,7 @@ function walkNpcPass(R,kh){if(!walkNpcOn()||!R||!R.P)return 0;let n=0;const K=(t
  for(const id in R.P){if(id==="me"||/^mm:me$/.test(id))continue;const row=R.P[id];if(!Array.isArray(row)||row.length<K)continue;
   /* r2: never a row the timed ledger wrote — an invite guest arriving («visit») / leaving («back»), a person on a jptime task: their khắc
      already hold the walk (the task's due = after the road, jptime) */
-  const now=kh>=1&&kh<K&&SN&&SN[id]&&SN[id][kh]!==walkSig(row[kh])&&!walkTimed(id,row[kh]);
+  const now=kh>=1&&kh<K&&SN&&SN[id]&&SN[id][kh]!==walkSig(row[kh])&&!walkTimed(id,row[kh],kh);
   for(let j=Math.max(1,now?kh:kh+1);j<K;j++){const x=row[j];if(!x||!real(x[0])||x[1]==="go")continue;if(x[1]==="follow"&&x[2]==="me")continue;
    let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&row[q][1]==="go"){g++;q--}if(q<0||!row[q]||!real(row[q][0])||row[q][0]===x[0])continue;
    let t=0;try{t=travel(row[q][0],x[0],walkWho(id))}catch(e){t=0}let need=t-1-g;if(need<=0)continue;
@@ -85122,7 +85135,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fa5cb71075f7";window.CTM_BUILD=BUILD;
+const BUILD="65968668c8af";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
