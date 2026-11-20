@@ -86,3 +86,19 @@ Files: dev/art/seasons4/s62_t8_HAN_BAC_open8.txt (+.keep, base = _open7 as edite
 - TRIMS: ", lips closed, no teeth, mouth never open" (dup); item sentence "and the hand really grips it", "the whole face fully visible with", "eyes open, lips closed,", "nothing covering the face" (dups).
 ## Checks
 keep_check --sidecar PASS both (t7 5 allowed, t8 16); --all 183 PASS; check_store = same pre-existing FAIL set as base (B12, S07), no new fails.
+
+# Job 5 — owner L1536 (via C #12): HQP phoenix by the rule + one flower per person — 0 gens
+## Chrysanthemum answer (plain)
+- "incurved chrysanthemum" is NOT shared by everyone. It is s62's OWN flower: rule F2 (Lượt 1352) gives each person one species, `F2_FL[rank][(n-1)%5]` in t8-prompt-B/build.py (n = number in her id). For s62, (62-1)%5 = 1 → t6 list item 2 = incurved chrysanthemum (cúc đại đóa). t7/t8 reuse her t6 species, as embroidery only.
+- The store builder (`flower_outfit`) swaps EVERY flower word in the outfit to her species. That is why the store's "large phoenixes, peonies and clouds" prints as "incurved chrysanthemums" for her.
+- The two-flowers problem came from hand-made Hán words, not the store: HQP had "incurved chrysanthemums" (store) + "many LARGER spring flowers" (Hán) one after another, and both HQP and HH had "small peonies" on the collar bands. Per F2 (one flower per person, her own): all now = incurved chrysanthemums, said once in the robe-body motif.
+## Phoenix rule used (rule.py find I1, I3; A28 = crown only; G33 = plumage palette, HOLD / not in builder → untouched)
+I3: t7/t8 robes carry a stitched phoenix, flowers allowed with it. I1: HH phoenix = the most dazzling; HQP "phoenix allowed", and "nobody's yellow or phoenix ever outshines the ranks above". So HQP phoenixes are smaller than HH's.
+## t7 HQP _open8 (from _open7, 9985 chars)
+- "in gold with small peonies and" → "in gold with small incurved chrysanthemums and" (F2)
+- "with phoenixes, incurved chrysanthemums and auspicious clouds in gold thread on the chest and along the borders, and many LARGER spring flowers spread over the whole garment" → "with phoenixes in gold thread on the chest and along the borders, SMALLER than the Empress's, never as large, and many LARGER incurved chrysanthemums and auspicious clouds spread over the whole garment" (I1 + F2; store t7 words kept)
+## t8 HH _open10 (from C #12's _open9 = open8 + "slim, hanging close, never bell-wide", 9972 chars)
+- "in gold with small peonies and" → "in gold with small incurved chrysanthemums and" (F2). Body motif stays "large phoenixes, incurved chrysanthemums and clouds" (store, = her one flower).
+- TRIM (open9 was 10 031 > 10 000, gate LEN FAIL): sentence "Floor-length robe, only slipper toe tips peeking under the hem, no train." removed. It repeats the outfit hem words "floor-length … hem just at the floor, NO train". (I tried trimming the "The silk has real weight" sentence instead; that is a gate master sentence (M07), so it stays.)
+## Checks
+keep_check --sidecar PASS both (t7 3, t8 2 allowed); --all 189 PASS; check_store = only the pre-existing B12/S07 FAILs (LEN now OK).
