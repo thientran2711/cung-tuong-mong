@@ -33,7 +33,7 @@ accState=function(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:
  if(S.out)return{why:"đang ở lãnh cung"};if(S.confined)return{why:`cấm túc ${S.confined} tháng`};
  const a=accessOf(S,k);const tc=k===S.place?0:travel(S.place,k);
  if(!a.ok){const st={why:a.why,kind:a.kind,ask:a.ask,tc};st.sneakOk=dayFit(tc+1);if(a.ask==="yk")st.empAway=(S.where||{}).emp!==k;st.askOk=dayFit(tc+1)&&!st.empAway;return st}
- if(k!=="home"&&!j77Kh(tc))return{why:j77WalkWhy(tc,k),tc,walk:1};
+ if(!j77Kh(tc))return{why:j77WalkWhy(tc,k),tc,walk:1}; /* home too (OD L1976): a long road home spills like every walk */
  return{why:"",tc}};
 /* sneaking: 1 khắc at the side gate, then the walk; the Emperor's halls are a serious offence */
 function accSneakPen(k){return typeof ACC_ETQ!=="undefined"&&ACC_ETQ.sneakHeavy[k]?{danh:-BAL.sneak.heavy,sev:2,txt:`Danh -${BAL.sneak.heavy}, ${typeof aaPunishTxt==="function"?aaPunishTxt(2):"tội nặng (có thể bị giáng phẩm)"}`}:{danh:-BAL.sneak.danh,sev:1,txt:`Danh -${BAL.sneak.danh}, ${typeof aaPunishTxt==="function"?aaPunishTxt(1):"bị phạt"}`}}
@@ -222,9 +222,16 @@ function accLead(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=t
   else m.h+=`<p class="past">Nhờ thái giám dẫn vào: ${!dayFit(tc+1)?j77Bound(tc+1):`cần ${accLeadCost()} bạc (có ${S.bac})`}.</p>`;
   m.h+=`<p class="past">Hoặc chờ được triệu.</p>`;showModal()}catch(e){}}})();
 /* map tiles: a palace whose chủ vị outranks her shows the greeting in its price */
+/* one source for a printed walk price (walk-cost r3): "home" (her own phối điện too, jres resMeHoused) = the walk home only, no greeting;
+   a palace whose chủ vị outranks her and is in = walk + the greeting (accEtq) — also the chủ vị's halls of the palace she lives in.
+   Used by the Dư đồ spot (her home spot prints accWalkTxt("home")) and the palace-view hall rows (jpm). */
+function accResHomeK(){try{const r=typeof resMeHoused==="function"&&resMeHoused();return r?palaceOf(r.head):null}catch(e){return null}}
+function accWalkCost(k){if(!S||!k)return{tc:0};const tc=k===S.place?0:travel(S.place,k);const who=k==="home"?null:accEtq(S,k);return{tc,who,n:tc+(who?ACC_ETQ.khac:0)}}
+function accWalkTxt(k){const c=accWalkCost(k);return `${c.n} khắc${c.who?" · bái kiến":""}`}
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(window.__mapList)return h;
  try{h=h.replace(/(<button class="mspot[^"]*" data-go="([^"]+)"[^>]*>)([\s\S]*?)(<\/button>)/g,(all,open,k,inner,close)=>{const who=accEtq(S,k);if(!who)return all;
-   const tc=travel(S.place,k);inner=inner.replace(/<em class="ok">\d+ khắc<\/em>/,`<em class="ok">${tc+ACC_ETQ.khac} khắc · bái kiến</em>`);
+   if(k===accResHomeK())return open.replace(/title="([^"]*)"/,(m,t)=>`title="${t} · vào chính điện: bái kiến ${accRkName(who)} ${who.name} (+${ACC_ETQ.khac} khắc)"`)+inner.replace(/<em class="ok">\d+ khắc<\/em>/,`<em class="ok">${accWalkTxt("home")}</em>`)+close; /* her home: the label is the walk home goTo("home") charges */
+   const tc=travel(S.place,k);inner=inner.replace(/<em class="ok">\d+ khắc<\/em>/,`<em class="ok">${accWalkTxt(k)}</em>`);
    open=open.replace(/title="([^"]*)"/,(m,t)=>`title="${t} · bái kiến ${accRkName(who)} ${who.name} (+${ACC_ETQ.khac} khắc)"`);return open+inner+close})}catch(e){}return h}})();
 /* TRA CỨU: the rules as they now stand */
 accInfo=function(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;

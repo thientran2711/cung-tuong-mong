@@ -6,6 +6,8 @@
    The pass runs last in the j95fixHouse chain (every khắc, rows from the current khắc on); it leaves earlier when the khắc before is free,
    otherwise arrives later; kept rows (deeds, meetings, forced lists: j95sKeep) and the current khắc are never rewritten.
    BAL.walk.npc = 0 turns the NPC part off (tests / rollback). */
+/* the walker of a record row (her penalty never lengthens an NPC's road; theirs does — law 1) */
+function walkWho(id){try{const c=String(id)[0];if(c==="v")return (typeof RV==="function"&&RV(+String(id).slice(1)))||null;if(c==="s"&&typeof j95sv==="function")return j95sv(id)||null}catch(e){}return null}
 function walkNpcOn(){try{return BAL.walk.npc!==0}catch(e){return false}}
 const JWALK={stat:{fix:0,late:0,miss:0},errs:[]};
 function walkKeepRow(x){if(!x)return true;try{if(typeof j95sKeep==="function"&&j95sKeep(x))return true}catch(e){}const a=x[1]||"";return /^ag_/.test(a)}
@@ -14,7 +16,7 @@ function walkNpcPass(R,kh){if(!walkNpcOn()||!R||!R.P)return 0;let n=0;const K=(t
  for(const id in R.P){if(id==="me"||/^mm:me$/.test(id))continue;const row=R.P[id];if(!Array.isArray(row)||row.length<K)continue;
   for(let j=Math.max(1,kh+1);j<K;j++){const x=row[j];if(!x||!real(x[0])||x[1]==="go")continue;if(x[1]==="follow"&&x[2]==="me")continue;
    let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&row[q][1]==="go"){g++;q--}if(q<0||!row[q]||!real(row[q][0])||row[q][0]===x[0])continue;
-   let t=0;try{t=travel(row[q][0],x[0])}catch(e){t=0}let need=t-1-g;if(need<=0)continue;
+   let t=0;try{t=travel(row[q][0],x[0],walkWho(id))}catch(e){t=0}let need=t-1-g;if(need<=0)continue;
    /* leave earlier: the free khắc right before the walk (never the current khắc, never a kept row) */
    while(need>0&&q>kh&&!walkKeepRow(row[q])){row[q]=[x[0],"go",null,x[3]&&!/^\s*$/.test(x[3])?x[3]:"đang trên đường"];need--;n++;JWALK.stat.fix++;q--}
    /* else arrive later: the arrival khắc (and on) become «on the way», when free */
