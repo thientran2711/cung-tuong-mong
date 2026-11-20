@@ -84,7 +84,7 @@ Object.assign(GE_DATA,{
   {pull:["Thưa thật: {land} nghĩ thế, vì {land} ở xa","Thưa: ở {land} từng có nữ chúa","Đáp: Đại Hy lớn nên không sợ một chữ","Xin cho {land} viết lại quốc thư, thiếp xin chịu lỗi thay","Đề nghị: không gọi gì, chỉ ghi ‘gửi {land}’","Bước ra khỏi rèm, quỳ lạy cùng đại sứ","Tâu: ở {land}, quỳ một gối là lễ trọng nhất","Thưa: ông sẽ quỳ theo lệ {land}, xin ngài rộng lượng","Xin cho {land} đủ sách, kể cả luật lệnh","Viết thư dài, kể mọi chuyện","Hứa sẽ ra bến đón","Xin ngài cho một thuyền Đại Hy đi kèm đến Ngũ Đảo","@pt_su_11=win2"],
    close:["Thưa: thư của Đại Hy, {land} phải vui","Ngồi yên sau rèm","Thưa: thiếp không biết"],
    cond:[["s","tamco"],["s","danh"]],fo:[],
-   cw:"cần gan dạ và tiếng thơm trong triều, để một lá thư viết bằng máu được Hoàng thượng nghe",
+   cw:"cần tâm cơ đủ sâu và tiếng thơm trong triều, để một lá thư viết bằng máu được Hoàng thượng nghe",
    t:"Đêm trước khi thuyền đi, ngươi chích ngón tay, viết dòng cuối của hồi thư bằng máu mình: con gái Phù Tang xin làm lời hẹn giữa hai nước. Hoàng thượng đọc xong, im lặng hồi lâu, rồi cho ngươi theo thuyền sứ mang hồi thư về. Ngươi rời cung cấm, đi giữ lời hẹn ấy suốt đời.",
    a:"Ngươi viết hồi thư bằng máu trước mặt cả triều, rồi quỳ xin mang nó về cố quốc. Hoàng thượng không thể từ chối mà không mất mặt trước sứ các nước; ngài phải cho ngươi đi. Ngươi rời cung cấm với lá thư máu trong tay áo, và ai cũng biết chính ngươi đã ép ngai vàng.",
    ht:"viết hồi thư bằng máu rồi tự mang về cố quốc",ha:"dùng lá thư máu ép Hoàng thượng phải cho ngươi về nước",
