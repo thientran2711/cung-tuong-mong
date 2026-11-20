@@ -18,7 +18,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    render()});
    await sleep(1000);
    for(let tr=0;tr<4;tr++){await p.evaluate(k=>{Q.length=0;const md=document.getElementById("modal");md.hidden=true;const R0=liveRivals(true).filter(v=>!v.queen);const R=R0.filter(v=>k61St(v)>=1).concat(R0.filter(v=>k61St(v)<1));kn();R.slice(0,2).forEach(v=>S.met[v.id]=1);const v=R[0],v2=R[1]||R[0];
-    const eun={__fig:"img/fig-eunuch-ndp-tray.webp",__cap:"Tiểu Lý Tử",__role:"Thái giám Nội vụ phủ",age:28,sex:"m"};const o=[{n:"Tiếp",fx:{},x:"thân +3",go:()=>{}},{n:"Từ chối",fx:{},x:"thân -3",go:()=>{}}];
+    const eun={__fig:"img/fig-eunuch-ndp-tray.webp",__cap:"Tiểu Lý Tử",__role:"Thái giám Nội vụ phủ",age:28,sex:"m"};const o=[{n:"Tiếp",fx:{suc:-3},x:"thân +3",go:()=>{}},{n:"Từ chối",fx:{suc:3},x:"thân -3",go:()=>{}}];
     if(k==="woman")Q.push({t:"Có người đến",stage:[v],who:pv(v),h:`<p>${v.name} sang chơi.</p>`,opts:o});
     if(k==="man")Q.push({t:"Có người đến",stage:[eun],h:`<p>Thái giám Nội vụ phủ đến bẩm việc.</p>`,opts:o});
     if(k==="two")Q.push({t:"Có người đến",stage:[v,v2],who:pv(v),h:`<p>${v.name} cùng ${v2.name} sang thăm.</p>`,opts:o});

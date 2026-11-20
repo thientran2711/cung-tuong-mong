@@ -176,7 +176,7 @@ for(const k in LK_ACT){const D=LK_ACT[k];
   Object.assign(tsOpt({n:"Né",odds:BAL.slap.dodgeOdds[slapMg(true,a).tier],later:1,duoc:["nhẹ đi một bậc","nhẹ thì tránh hẳn"],mat:["dính trọn"],kem:["một ván ngắn"],go:()=>{
    slapGame({dodge:true,by:a,title:"Né",go:"Né",skip:"Đứng yên",skipSub:"không né",rows:[["Né kịp","nhẹ đi một bậc; nhẹ thì tránh hẳn","g"],["Không né","dính trọn","r"]],
     onDone:res=>show(fin(res.skipped||res.raw<BAL.slap.raw[3]?sev:sev-1))})}}),{}),
-  tsOpt({n:"Đứng yên",odds:null,kem:["dính trọn"],go:()=>{const r=fin(sev);if(r){log(r);pushModal({t:D.n,who,h:`<p>${r}</p>`})}}})]});
+  tsOpt({n:"Đứng yên",odds:null,duoc:[`nhẫn nhịn: Đức +${BAL.cv.duc}`],kem:["dính trọn"],go:()=>{apply({duc:BAL.cv.duc});const r=fin(sev);if(r){log(r);pushModal({t:D.n,who,h:`<p>${r}</p>`})}}})]});
  return""}})();
 /* ---------- thủy đậu + đậu mùa (j13 rulebook) ---------- */
 try{const X=lkB().pox.thuydau;if(typeof ILL==="object"&&!ILL.thuydau)ILL.thuydau={n:"Thủy đậu",sea:X.sea,cont:X.cont,die:X.die}}catch(e){}
