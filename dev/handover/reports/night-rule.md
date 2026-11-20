@@ -29,4 +29,9 @@ night-final f7c54202 and night-ledger 55141158 named in the brief are OLDER link
 A. (recommended) Drop J1 as a build job; mark OD01/OD02/KP01 "closed by review/balance-final 40775131 (LAND READY, D queue)" in GAP_LIST; D's queue does the final-merge after choice-value.
 B. If D cannot staff it soon: this worker (or a successor) does the final-merge of balance-final onto newest LIVE on a NEW branch review/balance-final-r2 (never pushing D's branch), re-runs balance-final's gate table, SSK → BIG re-gate. Needs D's OK first (same files as choice-value; whoever lands second merges).
 
-Status: WAITING for Foreman B (A or B). No code changed, no branch pushed.
+## 5. MAIN ROOT-76 ruling 20/11 08:45Z (seen after §1–4) and what it means
+Ruling: night-final (OD01/OD02) stays with D (#9 night-land-chain FUQc1YiG: balance-core-r3 → night-final-r3); B night-rule keeps ONLY KP01 (ledger), built on top of D's night-final-r3 (or LIVE once landed).
+FLAG for MAIN + D (PRIORITY #1): review/balance-final 40775131 (D's own branch, BIG PASS 19/11) ALREADY holds balance-core + night-final + night-ledger-r1 merged and gated together. A fresh balance-core-r3 → night-final-r3 chain re-does that merge; D should start from balance-final (final-merge LIVE) instead, or say why not.
+KP01 plan for this worker once night-final-r3 (or LIVE) has jnf: port review/night-ledger-r1 37018e74's own diff (jledger.js, j8 ldPin/ntP, j75 by-day custom + pace, jcycle cyLdDay, BAL.nt, ledger.js, ledger-bot.js) — the same lines balance-final already resolved against newer main (use them as the conflict guide) — re-run ledger.js / night-final / night-multi / coop-night / coop-e2e + ledger-bot before/after (NPC Ân, her Ân), SSK → BIG.
+
+Status: WAITING for D's review/night-final-r3 on origin (or Foreman B's answer to §5 FLAG). No code changed, no branch pushed.
