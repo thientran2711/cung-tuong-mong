@@ -105,5 +105,8 @@ window.nmBirth=nmBirth;window.nmOrdApply=nmOrdApply;window.NM_ORD=NM_ORD;window.
 (function(){
  const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{nmFix("load")}catch(e){}return r};
  const s0=start;start=function(){const r=s0.apply(this,arguments);try{nmFix("start")}catch(e){}return r};
+ /* coop-name-clash: an order the host relays inside the week (review/coop-host-lag ops carry the world key nmOrd) is applied at the next
+    render on her seat, as a sync from the host (CW.inFC: the guest tripwire counts only writes outside a sync); no orders = one lookup */
+ if(typeof render==="function"){const r0=render;render=function(){try{const W=window.COOPW;if(W&&W.on&&S&&S.nmOrd&&!nmOwner()){const L=S.nmOrd[nmPidMe()];if(Array.isArray(L)&&L.length){W.inFC=(W.inFC||0)+1;try{nmOrdApply("relay")}finally{W.inFC--}}}}catch(e){}return r0.apply(this,arguments)}}
  if(typeof monthTick==="function"){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{nmFix("month")}catch(e){}return r}}
 })();
