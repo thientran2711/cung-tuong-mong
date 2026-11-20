@@ -1,86 +1,68 @@
 {
- "_note": "P4 round 4 — rule A31 (owner via ROOT-65: \"Tại sao thu và hạ có chung màu xanh, cùng 1 người không được có màu giống nhau\").\nWithin ONE person her 8 colours (4 seasons × main + phụ) must not look alike, every colour vs every other:\n  FAIL  same hue family twice (colourlib.family: pink-rose, red-coral, orange-apricot, yellow, olive-yellowgreen, green,\n        jade-bluegreen, teal-aqua, blue, indigo-violet, lilac-purple, plum-magenta, ivory)\n  FAIL  ΔE2000 < 20 between any two\n★ GỐC drawn pairs stay fixed (inside the root pair itself nothing is changed); the other 3 seasons move.\nEverything else kept: season families (Xuân hồng/đỏ/lá xuân · Hạ cam/vàng · Thu autumn v2 · Đông lạnh), depth per season\n(Xuân hơi đậm · Hạ giữ độ đậm · Thu hơi đậm · Đông nhạt), no grey/brown/old/royal yellow, unique pair per season across people.\nSolver: per person (random order), depth-first search over her non-root seasons (Hạ, Thu, Xuân, Đông) through ranked candidate\npairs; a person who cannot fit keeps her least-bad pairs, flagged A31 with the reason (never silently broken).\nRun: python3 dev/art/palettes3/four_season86_a31.py   (reads four_season86.py helpers; writes palettes_season_deep.json)\nseed 1. Thu families v2 + depth offsets {'xuan': 0.4, 'ha': 0.0, 'thu': 0.4, 'dong': -0.5} from four_season86.py.",
- "status": "PROPOSAL (P4 round 4, A31) — owner verdict pending",
- "_accents_A31": {
-  "xuan": {
-   "wisteria lilac": [
-    "#DAC1F8",
-    "#B691E1",
-    "#8C64B7"
-   ],
-   "spring sky blue": [
-    "#A4D9F9",
-    "#64B2DE",
-    "#2D86B6"
-   ]
+ "_note": "P5 — rule A32 (owner Lượt 999 \"Ok, làm theo các khuyến nghị ở trên đi.\" + \"Bảng màu nói chuyên gia thời trang phối lại ...\nnếu cần thì có thể phối giữa đậm và nhạt cho 1 bộ\") on top of A31.\nPALETTE = PERSONALITY TONE + SEASON FAMILY, styled like the c06 CŨ outfit (#CF816E soft mid main + #EAD7BF light ivory phụ):\n  * GROUP sets the tone band of the MAIN and the kind of PHỤ (BAND below);\n  * SEASON sets the colour family of the main (Xuân hồng/đỏ/lá xuân · Hạ cam/vàng · Thu lá phong/hồng/bí/mận/rêu/hổ phách ·\n    Đông lam/tím/ngọc) and nudges depth ONE notch inside the band (Xuân/Thu deeper, Đông lighter, Hạ as is);\n  * PHỤ = a light tinted NEUTRAL (ngà, vàng nhạt, kem đào, hồng phấn nhạt, bạc hà nhạt, xanh sương, tím khói nhạt, trắng ngà),\n    a different one each season; Quyến rũ may take a warm light colour (cam hồng, đào, hồng san hô) instead.\nA31 kept: a person's 8 colours never alike — no family twice (colourlib.family for colours; every named light neutral is its\nown family, a root neutral counts as its nearest named neutral) and ΔE2000 ≥ 20 (neutral vs neutral ≥ 15, owner allowance).\nNo grey / brown / old / royal yellow (four_season86.bad_colour for colours), unique pair per season across people\n(check_unique, gate 0 FAIL). ★ GỐC drawn pairs stay fixed; misfits vs their group band are counted, never recoloured.\nRun: python3 dev/art/palettes3/four_season86_a32.py   -> writes palettes_season_deep.json\nseed 3.",
+ "status": "PROPOSAL (P5, A32 personality tone + season family, A31 kept) — owner verdict pending",
+ "_bands_A32": {
+  "Dịu dàng": {
+   "L": 0.77,
+   "lo": 0.72,
+   "hi": 0.84,
+   "C": 0.095,
+   "pL": 0.93,
+   "vi": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem)"
   },
-  "ha": {
-   "sea turquoise": [
-    "#93E5E4",
-    "#43C3C3",
-    "#0E999C"
-   ]
+  "Đoan trang": {
+   "L": 0.67,
+   "lo": 0.61,
+   "hi": 0.74,
+   "C": 0.1,
+   "pL": 0.91,
+   "vi": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son + ngà)"
   },
-  "thu": {
-   "peacock teal": [
-    "#93D9DC",
-    "#30A4AC",
-    "#017781"
-   ],
-   "autumn indigo": [
-    "#B6C1F2",
-    "#727FCE",
-    "#4A54A6"
-   ]
+  "Sắc sảo": {
+   "L": 0.52,
+   "lo": 0.44,
+   "hi": 0.59,
+   "C": 0.15,
+   "pL": 0.955,
+   "vi": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)"
   },
-  "dong": {}
+  "Kiêu kỳ": {
+   "L": 0.47,
+   "lo": 0.39,
+   "hi": 0.55,
+   "C": 0.13,
+   "pL": 0.92,
+   "vi": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)"
+  },
+  "Lạnh lùng": {
+   "L": 0.76,
+   "lo": 0.68,
+   "hi": 0.84,
+   "C": 0.1,
+   "pL": 0.92,
+   "vi": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)"
+  },
+  "Quyến rũ": {
+   "L": 0.58,
+   "lo": 0.51,
+   "hi": 0.65,
+   "C": 0.16,
+   "pL": 0.9,
+   "vi": "đậm đà, ấm, rực (đỏ rượu + cam hồng)"
+  }
  },
- "_thu_families_v2": {
-  "maple red": [
-   "#FDA297",
-   "#EC5C50",
-   "#C52C2A"
-  ],
-  "persimmon": [
-   "#FCAF91",
-   "#F3743F",
-   "#D44F13"
-  ],
-  "pumpkin": [
-   "#FEB48A",
-   "#F88A3D",
-   "#E16C10"
-  ],
-  "amber": [
-   "#FFBA81",
-   "#FF972F",
-   "#ED8714"
-  ],
-  "ginkgo yellow": [
-   "#EDE58D",
-   "#E9DE67",
-   "#E5D956"
-  ],
-  "wine berry": [
-   "#ED9CB5",
-   "#CD4A78",
-   "#A42052"
-  ],
-  "plum": [
-   "#DCA2CE",
-   "#B559A3",
-   "#89327E"
-  ],
-  "moss green": [
-   "#B2D994",
-   "#7DB04E",
-   "#508524"
-  ],
-  "fresh olive green": [
-   "#C3DD93",
-   "#97BA4F",
-   "#709517"
-  ]
+ "_neutrals_A32": {
+  "ngà": "#ECE0C8",
+  "vàng nhạt": "#ECE2B6",
+  "kem đào": "#FBDAC1",
+  "hồng phấn nhạt": "#FCD6E0",
+  "bạc hà nhạt": "#C7EBDA",
+  "xanh sương": "#C7E6FD",
+  "tím khói nhạt": "#E7DAFF",
+  "trắng ngà": "#E5E1D7",
+  "kem chanh": "#E2E6BC",
+  "hồng tím phấn": "#F7D5EF",
+  "xanh ngọc sương": "#BFEBED"
  },
  "_flags": {
   "s44_brown_root": "nâu: main #A6593F (burnt sienna) is brown by the owner rule; stylist proposal deep coral red #B94738 + soft leaf green #87BA87 — foreman decides",
@@ -141,120 +123,342 @@
   ],
   "A31_cannot_fit": {
    "c20": [
-    "Đông: #77C8CE same family teal-aqua as #43C3C3"
+    "Xuân: #DC8F97 ΔE 7.9 to #EBA197"
    ],
-   "s48": [
-    "Đông: #8FE1CF same family jade-bluegreen as #70CCC1"
+   "s19": [
+    "Đông: #FEDEC4 same family n:peachc as #FEDEC4"
    ],
-   "s52": [
-    "Xuân: #9BB466 same family olive-yellowgreen as #9FB76C"
+   "s26": [
+    "Thu: #CAEFDD ΔE 8.1 to #C3EEF0"
    ],
-   "s58": [
-    "Đông: #8FE1CF ΔE 6.4 to #B0DDD0"
+   "s45": [
+    "Thu: #BA3E38 same family red-coral as #DF500C"
    ],
-   "s59": [
-    "Xuân: #FA807F ΔE 14.4 to #EDA98C"
+   "s30": [
+    "Thu: #EADEFF same family n:smoke as #EADEFF"
    ],
-   "s57": [
-    "Xuân: #E86273 same family pink-rose as #F68592"
+   "s25": [
+    "Hạ: no unique pair left in this season",
+    "Thu: #941617 same family red-coral as #D75928"
+   ],
+   "s42": [
+    "Hạ: no unique pair left in this season",
+    "Đông: #FFEAEF same family n:blush as #FFEAEF"
+   ],
+   "c32": [
+    "Thu: #FFE7EE ΔE 12.2 to #E3D6FE"
+   ]
+  },
+  "A31_impossible_even_alone": [
+   "c20",
+   "s19",
+   "s26",
+   "s30",
+   "s42",
+   "s45"
+  ],
+  "root_band_misfit": {
+   "c02": [
+    "có màu đậm (L 0.65) — Dịu dàng không bao giờ đậm"
+   ],
+   "c04": [
+    "phụ không phải trung tính sáng"
+   ],
+   "c05": [
+    "chính không đậm (L 0.76)",
+    "phụ không sáng — thiếu tương phản"
+   ],
+   "c06": [
+    "chính không đậm (L 0.68)",
+    "phụ không sáng — thiếu tương phản"
+   ],
+   "c10": [
+    "chính L 0.82 ngoài tầm trung dịu",
+    "phụ không phải trung tính sáng"
    ],
    "c11": [
-    "Xuân: #B86184 same family pink-rose as #C76B82"
+    "chính không đậm (L 0.74)",
+    "phụ không sáng — thiếu tương phản"
    ],
-   "m10": [
-    "Đông: #A0DADE same family teal-aqua as #6FD4D4"
+   "c14": [
+    "chính không đậm (L 0.89)",
+    "phụ không sáng — thiếu tương phản"
+   ],
+   "c16": [
+    "chính L 0.77 ngoài tầm trung dịu",
+    "phụ không phải trung tính sáng"
+   ],
+   "c19": [
+    "chính không đậm (L 0.67)",
+    "phụ không sáng — thiếu tương phản"
+   ],
+   "c22": [
+    "phụ không phải trung tính sáng"
+   ],
+   "c26": [
+    "có màu đậm (L 0.66) — Dịu dàng không bao giờ đậm"
+   ],
+   "c27": [
+    "chính không đậm (L 0.66)",
+    "phụ không sáng — thiếu tương phản"
    ],
    "c28": [
-    "Đông: #ABDBC0 same family green as #98CAA5"
+    "chính L 0.79 ngoài tầm trung dịu",
+    "phụ không phải trung tính sáng"
+   ],
+   "c31": [
+    "chính không đậm (L 0.83)",
+    "phụ không sáng — thiếu tương phản"
+   ],
+   "c32": [
+    "có màu đậm (L 0.51) — Dịu dàng không bao giờ đậm"
+   ],
+   "m04": [
+    "chính L 0.79 ngoài tầm trung dịu",
+    "phụ không phải trung tính sáng"
+   ],
+   "m05": [
+    "phụ không phải trung tính sáng"
+   ],
+   "m09": [
+    "chính không đậm (L 0.73)",
+    "phụ không sáng — thiếu tương phản"
+   ],
+   "m10": [
+    "chính L 0.81 ngoài tầm trung dịu",
+    "phụ không phải trung tính sáng"
+   ],
+   "m16": [
+    "phụ không phải trung tính sáng"
+   ],
+   "m18": [
+    "có màu đậm (L 0.65) — Dịu dàng không bao giờ đậm"
+   ],
+   "m19": [
+    "có màu đậm (L 0.62) — Dịu dàng không bao giờ đậm"
+   ],
+   "m22": [
+    "phụ không phải trung tính sáng"
+   ],
+   "m28": [
+    "phụ không phải trung tính sáng"
+   ],
+   "m29": [
+    "chính L 0.84 ngoài tầm trung dịu",
+    "phụ không phải trung tính sáng"
+   ],
+   "s07": [
+    "phụ không sáng — thiếu tương phản"
+   ],
+   "s09": [
+    "phụ không sáng — thiếu tương phản"
+   ],
+   "s11": [
+    "phụ không phải vàng nhạt/ngà sáng"
+   ],
+   "s12": [
+    "chính không đậm quý phái (L 0.58)"
+   ],
+   "s14": [
+    "chính đậm (L 0.44) — Lạnh lùng tầm trung → sáng"
+   ],
+   "s16": [
+    "chính không rực (C 0.08)"
+   ],
+   "s17": [
+    "chính không rực (C 0.10)"
+   ],
+   "s18": [
+    "chính không ấm"
+   ],
+   "s19": [
+    "phụ không phải vàng nhạt/ngà sáng"
+   ],
+   "s21": [
+    "phụ không phải vàng nhạt/ngà sáng"
+   ],
+   "s23": [
+    "phụ không phải vàng nhạt/ngà sáng"
+   ],
+   "s26": [
+    "chính đậm (L 0.59) — Lạnh lùng tầm trung → sáng",
+    "trắng xám không tông"
+   ],
+   "s33": [
+    "chính không rực (C 0.10)"
+   ],
+   "s37": [
+    "chính không rực (C 0.12)"
+   ],
+   "s38": [
+    "chính không rực (C 0.07)"
+   ],
+   "s39": [
+    "chính không đậm (L 0.71)",
+    "phụ không sáng — thiếu tương phản"
+   ],
+   "s41": [
+    "chính không đậm (L 0.60)"
+   ],
+   "s43": [
+    "chính không rực (C 0.12)",
+    "chính không ấm"
+   ],
+   "s44": [
+    "chính không rực (C 0.11)"
+   ],
+   "s45": [
+    "chính không ấm"
+   ],
+   "s48": [
+    "chính ấm, không lạnh"
+   ],
+   "s49": [
+    "chính ấm, không lạnh"
+   ],
+   "s51": [
+    "chính không đậm quý phái (L 0.80)",
+    "phụ không phải vàng nhạt/ngà sáng"
+   ],
+   "s52": [
+    "chính không đậm quý phái (L 0.80)",
+    "phụ không phải vàng nhạt/ngà sáng"
+   ],
+   "s53": [
+    "chính không đậm quý phái (L 0.70)"
+   ],
+   "s54": [
+    "chính không đậm quý phái (L 0.78)",
+    "phụ không phải vàng nhạt/ngà sáng"
    ],
    "s55": [
-    "Đông: #97CFA7 same family green as #95B77B"
+    "chính không đậm quý phái (L 0.76)",
+    "phụ không phải vàng nhạt/ngà sáng"
+   ],
+   "s56": [
+    "chính không rực (C 0.07)"
+   ],
+   "s57": [
+    "chính không rực (C 0.09)",
+    "chính không ấm"
+   ],
+   "s58": [
+    "chính không rực (C 0.11)"
+   ],
+   "s59": [
+    "chính không rực (C 0.09)"
+   ],
+   "s60": [
+    "chính không rực (C 0.08)"
+   ],
+   "s61": [
+    "chính không rực (C 0.09)"
    ]
   }
  },
  "c02": {
   "root_season": "dong",
   "group": "Dịu dàng",
+  "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem)",
   "xuan": {
-   "main": "rich peony",
-   "main_hex": "#C46A97",
-   "sec": "pale coral pink",
-   "sec_hex": "#F9B5B6"
+   "main": "soft clear peony pink",
+   "main_hex": "#DE89B2",
+   "sec": "mint mist",
+   "sec_hex": "#CDF2E0",
+   "main_vi": "hồng mẫu đơn dịu",
+   "sec_vi": "bạc hà nhạt"
   },
   "ha": {
-   "main": "deep tangerine",
-   "main_hex": "#F78C06",
-   "sec": "rich coral red",
-   "sec_hex": "#E45F52",
-   "main_depth_moved": "t 1.5 -> 2.0",
-   "sec_depth_moved": "t 0.0 -> 1.5",
-   "sec_borrowed": "Hạ: secondary borrowed from coral red (main stays orange/yellow)"
+   "main": "light clear warm coral orange",
+   "main_hex": "#FEA28B",
+   "sec": "blush",
+   "sec_hex": "#FFDEE7",
+   "main_vi": "cam san hô sáng",
+   "sec_vi": "hồng phấn nhạt"
   },
   "thu": {
-   "main": "deep plum",
-   "main_hex": "#893A8C",
-   "sec": "light fresh olive green",
-   "sec_hex": "#A7D181"
+   "main": "soft clear moss green",
+   "main_hex": "#88B86D",
+   "sec": "mist blue",
+   "sec_hex": "#D2ECFF",
+   "main_vi": "xanh rêu dịu",
+   "sec_vi": "xanh sương"
   },
   "dong": {
    "main": "soft sapphire blue",
    "main_hex": "#7E8FBE",
    "sec": "warm ivory",
    "sec_hex": "#EAD7BF",
-   "root": true
-  }
+   "root": true,
+   "band_misfit": "có màu đậm (L 0.65) — Dịu dàng không bao giờ đậm"
+  },
+  "stylist": "chính sáng dịu, phụ kem/sương nhạt — mềm mại, không đậm; phụ mỗi mùa một màu: bạc hà nhạt, hồng phấn nhạt, xanh sương · ★ gốc lệch tông (có màu đậm (L 0.65) — Dịu dàng không bao giờ đậm) — giữ như tranh"
  },
  "c04": {
   "root_season": "dong",
   "group": "Đoan trang",
+  "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son + ngà)",
   "xuan": {
-   "main": "deep Tết red",
-   "main_hex": "#C73E31",
-   "sec": "deep spring green",
-   "sec_hex": "#638C39"
+   "main": "rich spring leaf green",
+   "main_hex": "#649958",
+   "sec": "peach cream",
+   "sec_hex": "#FBDAC1",
+   "main_vi": "xanh lá xuân đậm vừa",
+   "sec_vi": "kem đào"
   },
   "ha": {
-   "main": "rich apricot",
-   "main_hex": "#F3A46E",
-   "sec": "sea turquoise",
-   "sec_hex": "#36BABA",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "soft muted apricot",
+   "main_hex": "#D57C11",
+   "sec": "smoke lilac",
+   "sec_hex": "#E7DAFF",
+   "main_vi": "cam mơ dịu",
+   "sec_vi": "tím khói nhạt"
   },
   "thu": {
-   "main": "deep plum",
-   "main_hex": "#903984",
-   "sec": "rich ginkgo yellow",
-   "sec_hex": "#E6DA5C"
+   "main": "rich muted warm persimmon",
+   "main_hex": "#BF4F34",
+   "sec": "mint mist",
+   "sec_hex": "#C7EBDA",
+   "main_vi": "cam quả hồng đậm vừa",
+   "sec_vi": "bạc hà nhạt"
   },
   "dong": {
    "main": "soft royal purple",
    "main_hex": "#A87FBD",
    "sec": "rose-red",
    "sec_hex": "#CF818C",
-   "root": true
-  }
+   "root": true,
+   "band_misfit": "phụ không phải trung tính sáng"
+  },
+  "stylist": "công thức c06: chính trầm dịu, phụ ngà/kem sáng — nền nã, chỉn chu; phụ mỗi mùa một màu: kem đào, tím khói nhạt, bạc hà nhạt · ★ gốc lệch tông (phụ không phải trung tính sáng) — giữ như tranh"
  },
  "c05": {
   "root_season": "dong",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
-   "main": "spring green",
-   "main_hex": "#73B374",
-   "sec": "deep spring sky blue",
-   "sec_hex": "#278EB7",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "deep clear vermilion",
+   "main_hex": "#A8260A",
+   "sec": "peach cream",
+   "sec_hex": "#FFECDE",
+   "main_vi": "đỏ son đậm",
+   "sec_vi": "kem đào"
   },
   "ha": {
-   "main": "light lemon yellow",
-   "main_hex": "#DCD884",
-   "sec": "peach",
-   "sec_hex": "#F2AD8E"
+   "main": "pale lime lemon",
+   "main_hex": "#E2EB78",
+   "sec": "pastel pink",
+   "sec_hex": "#FFCFDC",
+   "main_vi": "vàng chanh non nhạt",
+   "sec_vi": "hồng pastel"
   },
   "thu": {
-   "main": "plum",
-   "main_hex": "#AA58A9",
-   "sec": "deep maple red",
-   "sec_hex": "#C93712"
+   "main": "rich clear pumpkin",
+   "main_hex": "#CD6504",
+   "sec": "mist blue",
+   "sec_hex": "#E3F3FF",
+   "main_vi": "cam bí ngô đậm vừa",
+   "sec_vi": "xanh sương"
   },
   "dong": {
    "main": "soft teal",
@@ -273,43 +477,53 @@
      "chính xỉn (màu già) → cùng màu, tươi hơn",
      "phụ tên/sắc già → tươi hơn một chút"
     ]
-   }
-  }
+   },
+   "band_misfit": "chính không đậm (L 0.76); phụ không sáng — thiếu tương phản"
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: kem đào, hồng pastel, xanh sương · ★ gốc lệch tông (chính không đậm (L 0.76); phụ không sáng — thiếu tương phản) — giữ như tranh"
  },
  "c06": {
   "root_season": "xuan",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
    "main": "soft vermilion",
    "main_hex": "#CF816E",
    "sec": "jade green",
    "sec_hex": "#6AAF98",
-   "root": true
+   "root": true,
+   "band_misfit": "chính không đậm (L 0.68); phụ không sáng — thiếu tương phản"
   },
   "ha": {
-   "main": "pale peach",
-   "main_hex": "#FFD2BC",
-   "sec": "light lemon yellow",
-   "sec_hex": "#DAD67D",
-   "main_depth_moved": "t 1.3 -> 0.0",
-   "sec_depth_moved": "t 1.1 -> 0.5"
+   "main": "light clear cantaloupe",
+   "main_hex": "#F79806",
+   "sec": "ivory",
+   "sec_hex": "#FBEFD6",
+   "main_vi": "cam dưa lưới sáng",
+   "sec_vi": "ngà"
   },
   "thu": {
-   "main": "deep wine berry",
-   "main_hex": "#AB2859",
-   "sec": "rich moss green",
-   "sec_hex": "#5E9332"
+   "main": "deep clear plum",
+   "main_hex": "#932B83",
+   "sec": "mist blue",
+   "sec_hex": "#E3F3FF",
+   "main_vi": "tím mận đậm",
+   "sec_vi": "xanh sương"
   },
   "dong": {
-   "main": "light orchid",
-   "main_hex": "#C89AD3",
-   "sec": "light ice blue",
-   "sec_hex": "#7CBEDD"
-  }
+   "main": "rich muted sapphire",
+   "main_hex": "#4972C0",
+   "sec": "blush",
+   "sec_hex": "#FFEAEF",
+   "main_vi": "lam ngọc bích đậm vừa",
+   "sec_vi": "hồng phấn nhạt"
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: ngà, xanh sương, hồng phấn nhạt · ★ gốc lệch tông (chính không đậm (L 0.68); phụ không sáng — thiếu tương phản) — giữ như tranh"
  },
  "c08": {
   "root_season": "xuan",
   "group": "Dịu dàng",
+  "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem)",
   "xuan": {
    "main": "soft cherry-blossom pink",
    "main_hex": "#DF9FA2",
@@ -318,133 +532,164 @@
    "root": true
   },
   "ha": {
-   "main": "pale lemon yellow",
-   "main_hex": "#E5E29B",
-   "sec": "orange",
-   "sec_hex": "#FFA565",
-   "main_depth_moved": "t 0.7 -> 0.0"
+   "main": "pale lemon",
+   "main_hex": "#F0EA7F",
+   "sec": "mist blue",
+   "sec_hex": "#D2ECFF",
+   "main_vi": "vàng chanh nhạt",
+   "sec_vi": "xanh sương"
   },
   "thu": {
-   "main": "plum",
-   "main_hex": "#B257A1",
-   "sec": "rich maple red",
-   "sec_hex": "#DA483E"
+   "main": "soft muted amber",
+   "main_hex": "#E98F30",
+   "sec": "peach cream",
+   "sec_hex": "#FFE2CB",
+   "main_vi": "hổ phách dịu",
+   "sec_vi": "kem đào"
   },
   "dong": {
-   "main": "pale indigo",
-   "main_hex": "#B1C6FC",
-   "sec": "light teal",
-   "sec_hex": "#75C7CC"
-  }
+   "main": "light clear lilac",
+   "main_hex": "#DDAAF4",
+   "sec": "mint mist",
+   "sec_hex": "#CDF2E0",
+   "main_vi": "tím hoa cà sáng",
+   "sec_vi": "bạc hà nhạt"
+  },
+  "stylist": "chính sáng dịu, phụ kem/sương nhạt — mềm mại, không đậm; phụ mỗi mùa một màu: xanh sương, kem đào, bạc hà nhạt"
  },
  "c10": {
   "root_season": "ha",
   "group": "Đoan trang",
+  "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son + ngà)",
   "xuan": {
-   "main": "light spring green",
-   "main_hex": "#B3C989",
-   "sec": "rich Tết red",
-   "sec_hex": "#EA6A48"
+   "main": "rich spring leaf green",
+   "main_hex": "#649958",
+   "sec": "orchid mist",
+   "sec_hex": "#F7D5EF",
+   "main_vi": "xanh lá xuân đậm vừa",
+   "sec_vi": "hồng tím phấn"
   },
   "ha": {
    "main": "soft peach",
    "main_hex": "#DFBB9F",
    "sec": "jade teal",
    "sec_hex": "#53ACA5",
-   "root": true
+   "root": true,
+   "band_misfit": "chính L 0.82 ngoài tầm trung dịu; phụ không phải trung tính sáng"
   },
   "thu": {
-   "main": "light wine berry",
-   "main_hex": "#D16AA3",
-   "sec": "rich moss green",
-   "sec_hex": "#3E9A4F"
+   "main": "soft clear autumn rose",
+   "main_hex": "#C66878",
+   "sec": "mint mist",
+   "sec_hex": "#C7EBDA",
+   "main_vi": "hồng thu dịu",
+   "sec_vi": "bạc hà nhạt"
   },
   "dong": {
-   "main": "pale orchid",
-   "main_hex": "#E7BFE6",
-   "sec": "light sapphire",
-   "sec_hex": "#85BAF4"
-  }
+   "main": "soft violet",
+   "main_hex": "#AB93D7",
+   "sec": "mist blue",
+   "sec_hex": "#C7E6FD",
+   "main_vi": "tím dịu",
+   "sec_vi": "xanh sương"
+  },
+  "stylist": "công thức c06: chính trầm dịu, phụ ngà/kem sáng — nền nã, chỉn chu; phụ mỗi mùa một màu: hồng tím phấn, bạc hà nhạt, xanh sương · ★ gốc lệch tông (chính L 0.82 ngoài tầm trung dịu; phụ không phải trung tính sáng) — giữ như tranh"
  },
  "c11": {
   "root_season": "dong",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
-   "main": "spring green",
-   "main_hex": "#69B67F",
-   "sec": "deep rose",
-   "sec_hex": "#B86184",
-   "A31": "CANNOT FIT: #B86184 same family pink-rose as #C76B82"
+   "main": "deep Tết red",
+   "main_hex": "#A5292B",
+   "sec": "bright ivory white",
+   "sec_hex": "#F9F5EB",
+   "main_vi": "đỏ Tết đậm",
+   "sec_vi": "trắng ngà"
   },
   "ha": {
-   "main": "peach",
-   "main_hex": "#FBB5A7",
-   "sec": "rich sea turquoise",
-   "sec_hex": "#23A9BC",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "pale warm lemon",
+   "main_hex": "#F5E46E",
+   "sec": "pastel aqua",
+   "sec_hex": "#97F0F4",
+   "main_vi": "vàng chanh nhạt",
+   "sec_vi": "ngọc pastel"
   },
   "thu": {
-   "main": "persimmon",
-   "main_hex": "#E9701E",
-   "sec": "deep moss green",
-   "sec_hex": "#5F830F"
+   "main": "deep clear warm plum",
+   "main_hex": "#993793",
+   "sec": "pastel peach",
+   "sec_hex": "#FFD4B8",
+   "main_vi": "tím mận đậm",
+   "sec_vi": "đào pastel"
   },
   "dong": {
    "main": "soft lilac",
    "main_hex": "#BC9FCE",
    "sec": "deep rose",
    "sec_hex": "#C76B82",
-   "root": true
-  }
+   "root": true,
+   "band_misfit": "chính không đậm (L 0.74); phụ không sáng — thiếu tương phản"
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: trắng ngà, ngọc pastel, đào pastel · ★ gốc lệch tông (chính không đậm (L 0.74); phụ không sáng — thiếu tương phản) — giữ như tranh"
  },
  "c14": {
   "root_season": "dong",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
-   "main": "light raspberry",
-   "main_hex": "#F29ECA",
-   "sec": "deep spring green",
-   "sec_hex": "#2C7432"
+   "main": "deep clear spring leaf green",
+   "main_hex": "#1F7100",
+   "sec": "soft blush",
+   "sec_hex": "#FFE0E8",
+   "main_vi": "xanh lá xuân đậm",
+   "sec_vi": "hồng phấn nhạt"
   },
   "ha": {
-   "main": "rich orange",
-   "main_hex": "#FF954E",
-   "sec": "deep coral orange",
-   "sec_hex": "#C94C2D",
-   "main_depth_moved": "t 0.0 -> 1.5",
-   "sec_borrowed": "Hạ: secondary borrowed from coral orange (main stays orange/yellow)"
+   "main": "rich coral orange",
+   "main_hex": "#D75928",
+   "sec": "mist blue",
+   "sec_hex": "#E3F3FF",
+   "main_vi": "cam san hô đậm vừa",
+   "sec_vi": "xanh sương"
   },
   "thu": {
-   "main": "light fresh olive green",
-   "main_hex": "#B1CF79",
-   "sec": "deep wine berry",
-   "sec_hex": "#85003D"
+   "main": "deep wine berry",
+   "main_hex": "#9C2E5A",
+   "sec": "mint mist",
+   "sec_hex": "#D5FAE9",
+   "main_vi": "đỏ rượu đậm",
+   "sec_vi": "bạc hà nhạt"
   },
   "dong": {
    "main": "soft ivory cream",
    "main_hex": "#EAD7BF",
    "sec": "blue-violet",
    "sec_hex": "#6B64B4",
-   "root": true
-  }
+   "root": true,
+   "band_misfit": "chính không đậm (L 0.89); phụ không sáng — thiếu tương phản"
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: hồng phấn nhạt, xanh sương, bạc hà nhạt · ★ gốc lệch tông (chính không đậm (L 0.89); phụ không sáng — thiếu tương phản) — giữ như tranh"
  },
  "c16": {
   "root_season": "thu",
   "group": "Đoan trang",
+  "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son + ngà)",
   "xuan": {
-   "main": "Tết red",
-   "main_hex": "#F87B5A",
-   "sec": "deep wisteria lilac",
-   "sec_hex": "#7362B7",
-   "sec_accent": "A31: secondary is the Xuân cool accent wisteria lilac (her warm families are all used)"
+   "main": "rich spring leaf green",
+   "main_hex": "#528747",
+   "sec": "mist blue",
+   "sec_hex": "#C7E6FD",
+   "main_vi": "xanh lá xuân đậm vừa",
+   "sec_vi": "xanh sương"
   },
   "ha": {
-   "main": "pale apricot",
-   "main_hex": "#FFD1AE",
-   "sec": "deep spring green",
-   "sec_hex": "#548B40",
-   "main_depth_moved": "t 0.6 -> 0.0",
-   "sec_borrowed": "Hạ: secondary borrowed from spring green (main stays orange/yellow)"
+   "main": "soft muted warm coral orange",
+   "main_hex": "#D9755D",
+   "sec": "blush",
+   "sec_hex": "#FCD6E0",
+   "main_vi": "cam san hô dịu",
+   "sec_vi": "hồng phấn nhạt"
   },
   "thu": {
    "main": "soft olive",
@@ -462,64 +707,77 @@
     "why": [
      "chính tên/sắc già → tươi hơn một chút"
     ]
-   }
+   },
+   "band_misfit": "chính L 0.77 ngoài tầm trung dịu; phụ không phải trung tính sáng"
   },
   "dong": {
-   "main": "pale teal",
-   "main_hex": "#9CD7D6",
-   "sec": "rich sapphire",
-   "sec_hex": "#6A97E3"
-  }
+   "main": "soft muted teal",
+   "main_hex": "#5FB1B5",
+   "sec": "peach cream",
+   "sec_hex": "#FBDAC1",
+   "main_vi": "xanh mòng két dịu",
+   "sec_vi": "kem đào"
+  },
+  "stylist": "công thức c06: chính trầm dịu, phụ ngà/kem sáng — nền nã, chỉn chu; phụ mỗi mùa một màu: xanh sương, hồng phấn nhạt, kem đào · ★ gốc lệch tông (chính L 0.77 ngoài tầm trung dịu; phụ không phải trung tính sáng) — giữ như tranh"
  },
  "c19": {
   "root_season": "dong",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
-   "main": "deep Tết red",
-   "main_hex": "#CA3E55",
-   "sec": "rich spring sky blue",
-   "sec_hex": "#4D93C8",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "deep peony pink",
+   "main_hex": "#973069",
+   "sec": "peach cream",
+   "sec_hex": "#FFECDE",
+   "main_vi": "hồng mẫu đơn đậm",
+   "sec_vi": "kem đào"
   },
   "ha": {
-   "main": "deep peach",
-   "main_hex": "#E19673",
-   "sec": "light lemon yellow",
-   "sec_hex": "#DAD67D",
-   "main_depth_moved": "t 1.4 -> 2.0",
-   "sec_depth_moved": "t 0.9 -> 0.5"
+   "main": "light clear cantaloupe",
+   "main_hex": "#F79806",
+   "sec": "lemon cream",
+   "sec_hex": "#F0F5CA",
+   "main_vi": "cam dưa lưới sáng",
+   "sec_vi": "kem chanh"
   },
   "thu": {
-   "main": "deep maple red",
-   "main_hex": "#BE4504",
-   "sec": "rich plum",
-   "sec_hex": "#934CA3"
+   "main": "deep clear cool maple red",
+   "main_hex": "#A8260F",
+   "sec": "mist blue",
+   "sec_hex": "#E3F3FF",
+   "main_vi": "đỏ lá phong đậm",
+   "sec_vi": "xanh sương"
   },
   "dong": {
    "main": "soft plum",
    "main_hex": "#BD7FA1",
    "sec": "soft jade",
    "sec_hex": "#7CB699",
-   "root": true
-  }
+   "root": true,
+   "band_misfit": "chính không đậm (L 0.67); phụ không sáng — thiếu tương phản"
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: kem đào, kem chanh, xanh sương · ★ gốc lệch tông (chính không đậm (L 0.67); phụ không sáng — thiếu tương phản) — giữ như tranh"
  },
  "c20": {
   "root_season": "thu",
   "group": "Dịu dàng",
+  "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem)",
   "xuan": {
-   "main": "raspberry",
-   "main_hex": "#E082C0",
-   "sec": "rich spring sky blue",
-   "sec_hex": "#5B94CD",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "soft peach-blossom pink",
+   "main_hex": "#DC8F97",
+   "sec": "ivory",
+   "sec_hex": "#F3E7CE",
+   "main_vi": "hồng hoa đào dịu",
+   "sec_vi": "ngà",
+   "A31": "CANNOT FIT: #DC8F97 ΔE 7.9 to #EBA197"
   },
   "ha": {
-   "main": "deep tangerine",
-   "main_hex": "#F78C06",
-   "sec": "sea turquoise",
-   "sec_hex": "#43C3C3",
-   "main_depth_moved": "t 0.6 -> 2.0",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "light muted warm cantaloupe",
+   "main_hex": "#F89B42",
+   "sec": "mist blue",
+   "sec_hex": "#D2ECFF",
+   "main_vi": "cam dưa lưới sáng",
+   "sec_vi": "xanh sương"
   },
   "thu": {
    "main": "soft coral",
@@ -541,37 +799,42 @@
    }
   },
   "dong": {
-   "main": "pale violet",
-   "main_hex": "#CFC5FF",
-   "sec": "light teal",
-   "sec_hex": "#77C8CE",
-   "A31": "CANNOT FIT: #77C8CE same family teal-aqua as #43C3C3"
-  }
+   "main": "light clear lilac",
+   "main_hex": "#D3A1EA",
+   "sec": "bright smoke lilac",
+   "sec_hex": "#F2EAFF",
+   "main_vi": "tím hoa cà sáng",
+   "sec_vi": "tím khói nhạt"
+  },
+  "stylist": "chính sáng dịu, phụ kem/sương nhạt — mềm mại, không đậm; phụ mỗi mùa một màu: ngà, xanh sương, tím khói nhạt"
  },
  "c22": {
   "root_season": "dong",
   "group": "Đoan trang",
+  "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son + ngà)",
   "xuan": {
-   "main": "deep coral pink",
-   "main_hex": "#A0444B",
-   "sec": "rich spring green",
-   "sec_hex": "#6BA058",
-   "main_depth_moved": "t 1.8 -> 2.5"
+   "main": "rich spring leaf green",
+   "main_hex": "#649958",
+   "sec": "ivory",
+   "sec_hex": "#ECE0C8",
+   "main_vi": "xanh lá xuân đậm vừa",
+   "sec_vi": "ngà"
   },
   "ha": {
-   "main": "light lemon yellow",
-   "main_hex": "#DAD67D",
-   "sec": "rich sea turquoise",
-   "sec_hex": "#24AEB0",
-   "main_depth_moved": "t 1.4 -> 0.5",
-   "sec_depth_moved": "t 1.1 -> 1.5",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "soft muted apricot",
+   "main_hex": "#D57C11",
+   "sec": "mint mist",
+   "sec_hex": "#C7EBDA",
+   "main_vi": "cam mơ dịu",
+   "sec_vi": "bạc hà nhạt"
   },
   "thu": {
-   "main": "deep plum",
-   "main_hex": "#933B87",
-   "sec": "rich amber",
-   "sec_hex": "#FA8D00"
+   "main": "rich clear autumn rose",
+   "main_hex": "#A84D5F",
+   "sec": "blush",
+   "sec_hex": "#FCD6E0",
+   "main_vi": "hồng thu đậm vừa",
+   "sec_vi": "hồng phấn nhạt"
   },
   "dong": {
    "main": "soft orchid purple",
@@ -589,12 +852,15 @@
     "why": [
      "phụ gần trùng c04 → xoay sắc +20°, giữ độ đậm"
     ]
-   }
-  }
+   },
+   "band_misfit": "phụ không phải trung tính sáng"
+  },
+  "stylist": "công thức c06: chính trầm dịu, phụ ngà/kem sáng — nền nã, chỉn chu; phụ mỗi mùa một màu: ngà, bạc hà nhạt, hồng phấn nhạt · ★ gốc lệch tông (phụ không phải trung tính sáng) — giữ như tranh"
  },
  "c26": {
   "root_season": "xuan",
   "group": "Dịu dàng",
+  "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem)",
   "xuan": {
    "main": "soft rose",
    "main_hex": "#CC7384",
@@ -612,44 +878,54 @@
      "chính tên/sắc già → tươi hơn một chút",
      "phụ gần trùng m22 → xoay sắc -20°, giữ độ đậm"
     ]
-   }
+   },
+   "band_misfit": "có màu đậm (L 0.66) — Dịu dàng không bao giờ đậm"
   },
   "ha": {
-   "main": "rich orange",
-   "main_hex": "#FF9572",
-   "sec": "sea turquoise",
-   "sec_hex": "#42BFD1",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "light clear warm peach orange",
+   "main_hex": "#FEA47E",
+   "sec": "mist blue",
+   "sec_hex": "#D2ECFF",
+   "main_vi": "cam đào sáng",
+   "sec_vi": "xanh sương"
   },
   "thu": {
-   "main": "deep ginkgo yellow",
-   "main_hex": "#E5D959",
-   "sec": "rich plum",
-   "sec_hex": "#A14892"
+   "main": "light muted warm plum",
+   "main_hex": "#E1B3DC",
+   "sec": "bright peach cream",
+   "sec_hex": "#FFEADA",
+   "main_vi": "tím mận sáng",
+   "sec_vi": "kem đào"
   },
   "dong": {
-   "main": "sapphire",
-   "main_hex": "#7BA8F0",
-   "sec": "light orchid",
-   "sec_hex": "#D0A6DA"
-  }
+   "main": "light clear warm teal",
+   "main_hex": "#52D8D8",
+   "sec": "bright lemon cream",
+   "sec_hex": "#EFF3C9",
+   "main_vi": "xanh mòng két sáng",
+   "sec_vi": "kem chanh"
+  },
+  "stylist": "chính sáng dịu, phụ kem/sương nhạt — mềm mại, không đậm; phụ mỗi mùa một màu: xanh sương, kem đào, kem chanh · ★ gốc lệch tông (có màu đậm (L 0.66) — Dịu dàng không bao giờ đậm) — giữ như tranh"
  },
  "c27": {
   "root_season": "thu",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
-   "main": "deep raspberry",
-   "main_hex": "#BB476F",
-   "sec": "deep wisteria lilac",
-   "sec_hex": "#7658AC",
-   "sec_accent": "A31: secondary is the Xuân cool accent wisteria lilac (her warm families are all used)"
+   "main": "deep clear warm Tết red",
+   "main_hex": "#A82133",
+   "sec": "mist blue",
+   "sec_hex": "#E3F3FF",
+   "main_vi": "đỏ Tết đậm",
+   "sec_vi": "xanh sương"
   },
   "ha": {
-   "main": "rich marigold",
-   "main_hex": "#F79825",
-   "sec": "deep spring green",
-   "sec_hex": "#568D42",
-   "sec_borrowed": "Hạ: secondary borrowed from spring green (main stays orange/yellow)"
+   "main": "pale lemon",
+   "main_hex": "#EEE771",
+   "sec": "soft peach cream",
+   "sec_hex": "#FFE4CF",
+   "main_vi": "vàng chanh nhạt",
+   "sec_vi": "kem đào"
   },
   "thu": {
    "main": "soft coral red",
@@ -667,18 +943,23 @@
     "why": [
      "chính nâu (màu già) → đỏ san hô tươi"
     ]
-   }
+   },
+   "band_misfit": "chính không đậm (L 0.66); phụ không sáng — thiếu tương phản"
   },
   "dong": {
-   "main": "indigo",
-   "main_hex": "#8BA6EC",
-   "sec": "orchid",
-   "sec_hex": "#C087BF"
-  }
+   "main": "rich muted violet",
+   "main_hex": "#8160B5",
+   "sec": "mint mist",
+   "sec_hex": "#D5FAE9",
+   "main_vi": "tím đậm vừa",
+   "sec_vi": "bạc hà nhạt"
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: xanh sương, kem đào, bạc hà nhạt · ★ gốc lệch tông (chính không đậm (L 0.66); phụ không sáng — thiếu tương phản) — giữ như tranh"
  },
  "c28": {
   "root_season": "xuan",
   "group": "Đoan trang",
+  "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son + ngà)",
   "xuan": {
    "main": "soft celadon",
    "main_hex": "#98CAA5",
@@ -695,33 +976,39 @@
     "why": [
      "phụ gần trùng m10 → xoay sắc -28°, giữ độ đậm"
     ]
-   }
+   },
+   "band_misfit": "chính L 0.79 ngoài tầm trung dịu; phụ không phải trung tính sáng"
   },
   "ha": {
-   "main": "light peach",
-   "main_hex": "#FEC3A7",
-   "sec": "rich coral red",
-   "sec_hex": "#E45F53",
-   "sec_borrowed": "Hạ: secondary borrowed from coral red (main stays orange/yellow)"
+   "main": "soft muted warm coral orange",
+   "main_hex": "#D9755D",
+   "sec": "ivory",
+   "sec_hex": "#ECE0C8",
+   "main_vi": "cam san hô dịu",
+   "sec_vi": "ngà"
   },
   "thu": {
-   "main": "ginkgo yellow",
-   "main_hex": "#E9DF6E",
-   "sec": "deep autumn indigo",
-   "sec_hex": "#4E59AA",
-   "sec_accent": "A31: secondary is the Thu cool accent autumn indigo (her warm families are all used)"
+   "main": "soft amber",
+   "main_hex": "#EC8904",
+   "sec": "pastel pink",
+   "sec_hex": "#FFCFDC",
+   "main_vi": "hổ phách dịu",
+   "sec_vi": "hồng pastel"
   },
   "dong": {
-   "main": "pale jade",
-   "main_hex": "#ABDBC0",
-   "sec": "ice blue",
-   "sec_hex": "#6EAFCE",
-   "A31": "CANNOT FIT: #ABDBC0 same family green as #98CAA5"
-  }
+   "main": "soft clear teal",
+   "main_hex": "#06B7BF",
+   "sec": "mist blue",
+   "sec_hex": "#C7E6FD",
+   "main_vi": "xanh mòng két dịu",
+   "sec_vi": "xanh sương"
+  },
+  "stylist": "công thức c06: chính trầm dịu, phụ ngà/kem sáng — nền nã, chỉn chu; phụ mỗi mùa một màu: ngà, hồng pastel, xanh sương · ★ gốc lệch tông (chính L 0.79 ngoài tầm trung dịu; phụ không phải trung tính sáng) — giữ như tranh"
  },
  "c31": {
   "root_season": "xuan",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
    "main": "soft pale jade",
    "main_hex": "#ABD4BB",
@@ -738,50 +1025,63 @@
     "why": [
      "phụ gần trùng m29 (cùng ngọc + hồng) → san hô tươi cùng độ đậm: ngọc nhạt + san hô (cặp xuân trẻ)"
     ]
-   }
+   },
+   "band_misfit": "chính không đậm (L 0.83); phụ không sáng — thiếu tương phản"
   },
   "ha": {
-   "main": "pale tangerine",
-   "main_hex": "#FEC8A4",
-   "sec": "rich sea turquoise",
-   "sec_hex": "#2DAFC2",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "soft cool tangerine",
+   "main_hex": "#D87A09",
+   "sec": "bright blush",
+   "sec_hex": "#FFF1F5",
+   "main_vi": "cam quýt dịu",
+   "sec_vi": "hồng phấn nhạt"
   },
   "thu": {
-   "main": "light ginkgo yellow",
-   "main_hex": "#EBE17A",
-   "sec": "deep wine berry",
-   "sec_hex": "#AB2859"
+   "main": "deep warm maple red",
+   "main_hex": "#A52932",
+   "sec": "soft mist blue",
+   "sec_hex": "#D6EDFF",
+   "main_vi": "đỏ lá phong đậm",
+   "sec_vi": "xanh sương"
   },
   "dong": {
-   "main": "pale sapphire",
-   "main_hex": "#AECFFF",
-   "sec": "orchid",
-   "sec_hex": "#C393CE"
-  }
+   "main": "rich midnight violet",
+   "main_hex": "#6965C9",
+   "sec": "pastel peach",
+   "sec_hex": "#FFD4B8",
+   "main_vi": "tím than đậm vừa",
+   "sec_vi": "đào pastel"
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: hồng phấn nhạt, xanh sương, đào pastel · ★ gốc lệch tông (chính không đậm (L 0.83); phụ không sáng — thiếu tương phản) — giữ như tranh"
  },
  "c32": {
   "root_season": "dong",
   "group": "Dịu dàng",
+  "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem)",
   "xuan": {
-   "main": "light coral pink",
-   "main_hex": "#F1A6A7",
-   "sec": "deep spring green",
-   "sec_hex": "#3C7227"
+   "main": "soft clear young bud green",
+   "main_hex": "#90B667",
+   "sec": "aqua mist",
+   "sec_hex": "#C6F2F4",
+   "main_vi": "xanh chồi non dịu",
+   "sec_vi": "xanh ngọc sương"
   },
   "ha": {
-   "main": "orange",
-   "main_hex": "#FFA565",
-   "sec": "deep coral red",
-   "sec_hex": "#B52B25",
-   "main_depth_moved": "t 0.0 -> 1.0",
-   "sec_borrowed": "Hạ: secondary borrowed from coral red (main stays orange/yellow)"
+   "main": "soft muted tangerine",
+   "main_hex": "#F28E42",
+   "sec": "pastel lilac",
+   "sec_hex": "#E3D6FE",
+   "main_vi": "cam quýt dịu",
+   "sec_vi": "tím pastel"
   },
   "thu": {
-   "main": "light fresh olive green",
-   "main_hex": "#B1CF79",
-   "sec": "deep plum",
-   "sec_hex": "#6F1765"
+   "main": "soft clear autumn rose",
+   "main_hex": "#E68897",
+   "sec": "bright blush",
+   "sec_hex": "#FFE7EE",
+   "main_vi": "hồng thu dịu",
+   "sec_vi": "hồng phấn nhạt",
+   "A31": "CANNOT FIT: #FFE7EE ΔE 12.2 to #E3D6FE"
   },
   "dong": {
    "main": "soft ivory",
@@ -799,25 +1099,30 @@
     "why": [
      "phụ gần trùng c14 → chàm ngả xanh hơn 10°, giữ ngà + chàm (cặp kinh điển), giữ độ đậm"
     ]
-   }
-  }
+   },
+   "band_misfit": "có màu đậm (L 0.51) — Dịu dàng không bao giờ đậm"
+  },
+  "stylist": "chính sáng dịu, phụ kem/sương nhạt — mềm mại, không đậm; phụ mỗi mùa một màu: xanh ngọc sương, tím pastel, hồng phấn nhạt · ★ gốc lệch tông (có màu đậm (L 0.51) — Dịu dàng không bao giờ đậm) — giữ như tranh"
  },
  "m02": {
   "root_season": "thu",
   "group": "Dịu dàng",
+  "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem)",
   "xuan": {
-   "main": "peony",
-   "main_hex": "#CE7AAE",
-   "sec": "deep spring green",
-   "sec_hex": "#498F4D"
+   "main": "light clear warm peony pink",
+   "main_hex": "#E593C2",
+   "sec": "ivory",
+   "sec_hex": "#F3E7CE",
+   "main_vi": "hồng mẫu đơn sáng",
+   "sec_vi": "ngà"
   },
   "ha": {
-   "main": "pale peach",
-   "main_hex": "#FFD2BC",
-   "sec": "deep tangerine",
-   "sec_hex": "#F78C06",
-   "main_depth_moved": "t 0.5 -> 0.0",
-   "sec_depth_moved": "t 1.2 -> 2.0"
+   "main": "light muted warm cantaloupe",
+   "main_hex": "#F89B42",
+   "sec": "bright blush",
+   "sec_hex": "#FFE7EE",
+   "main_vi": "cam dưa lưới sáng",
+   "sec_vi": "hồng phấn nhạt"
   },
   "thu": {
    "main": "soft leaf green",
@@ -838,20 +1143,26 @@
    }
   },
   "dong": {
-   "main": "pale jade",
-   "main_hex": "#A1DAC9",
-   "sec": "light violet",
-   "sec_hex": "#A9A5F2"
-  }
+   "main": "light clear cool jade",
+   "main_hex": "#66D9BA",
+   "sec": "mist blue",
+   "sec_hex": "#D2ECFF",
+   "main_vi": "xanh ngọc sáng",
+   "sec_vi": "xanh sương"
+  },
+  "stylist": "chính sáng dịu, phụ kem/sương nhạt — mềm mại, không đậm; phụ mỗi mùa một màu: ngà, hồng phấn nhạt, xanh sương"
  },
  "m04": {
   "root_season": "ha",
   "group": "Đoan trang",
+  "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son + ngà)",
   "xuan": {
-   "main": "Tết red",
-   "main_hex": "#F36F6F",
-   "sec": "deep spring green",
-   "sec_hex": "#3C7227"
+   "main": "rich spring leaf green",
+   "main_hex": "#649958",
+   "sec": "mint mist",
+   "sec_hex": "#C7EBDA",
+   "main_vi": "xanh lá xuân đậm vừa",
+   "sec_vi": "bạc hà nhạt"
   },
   "ha": {
    "main": "soft apricot",
@@ -869,68 +1180,84 @@
     "why": [
      "chính xỉn (màu già) → cùng màu, tươi hơn"
     ]
-   }
+   },
+   "band_misfit": "chính L 0.79 ngoài tầm trung dịu; phụ không phải trung tính sáng"
   },
   "thu": {
-   "main": "ginkgo yellow",
-   "main_hex": "#E9DF6E",
-   "sec": "deep wine berry",
-   "sec_hex": "#85003D"
+   "main": "soft clear autumn rose",
+   "main_hex": "#C66878",
+   "sec": "blush",
+   "sec_hex": "#FCD6E0",
+   "main_vi": "hồng thu dịu",
+   "sec_vi": "hồng phấn nhạt"
   },
   "dong": {
-   "main": "pale orchid",
-   "main_hex": "#E3C0EB",
-   "sec": "deep teal",
-   "sec_hex": "#1F8585"
-  }
+   "main": "soft cerulean",
+   "main_hex": "#6AA8DC",
+   "sec": "bright mist blue",
+   "sec_hex": "#D2ECFF",
+   "main_vi": "xanh da trời dịu",
+   "sec_vi": "xanh sương"
+  },
+  "stylist": "công thức c06: chính trầm dịu, phụ ngà/kem sáng — nền nã, chỉn chu; phụ mỗi mùa một màu: bạc hà nhạt, hồng phấn nhạt, xanh sương · ★ gốc lệch tông (chính L 0.79 ngoài tầm trung dịu; phụ không phải trung tính sáng) — giữ như tranh"
  },
  "m05": {
   "root_season": "thu",
   "group": "Đoan trang",
+  "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son + ngà)",
   "xuan": {
-   "main": "rich spring green",
-   "main_hex": "#6A9F57",
-   "sec": "deep peony",
-   "sec_hex": "#AE5281"
+   "main": "rich warm rose pink",
+   "main_hex": "#A65D78",
+   "sec": "blush",
+   "sec_hex": "#FCD6E0",
+   "main_vi": "hồng đậm vừa",
+   "sec_vi": "hồng phấn nhạt"
   },
   "ha": {
-   "main": "light lemon yellow",
-   "main_hex": "#DAD67D",
-   "sec": "deep marigold",
-   "sec_hex": "#F38F00",
-   "main_depth_moved": "t 1.1 -> 0.5"
+   "main": "soft clear cool peach orange",
+   "main_hex": "#FC8114",
+   "sec": "ivory",
+   "sec_hex": "#ECE0C8",
+   "main_vi": "cam đào dịu",
+   "sec_vi": "ngà"
   },
   "thu": {
    "main": "coral red",
    "main_hex": "#D4897D",
    "sec": "teal",
    "sec_hex": "#499597",
-   "root": true
+   "root": true,
+   "band_misfit": "phụ không phải trung tính sáng"
   },
   "dong": {
-   "main": "light orchid",
-   "main_hex": "#CEA2D8",
-   "sec": "sapphire",
-   "sec_hex": "#6F9CE7"
-  }
+   "main": "soft clear sapphire",
+   "main_hex": "#78A1EC",
+   "sec": "soft mint mist",
+   "sec_hex": "#C0E5D3",
+   "main_vi": "lam ngọc bích dịu",
+   "sec_vi": "bạc hà nhạt"
+  },
+  "stylist": "công thức c06: chính trầm dịu, phụ ngà/kem sáng — nền nã, chỉn chu; phụ mỗi mùa một màu: hồng phấn nhạt, ngà, bạc hà nhạt · ★ gốc lệch tông (phụ không phải trung tính sáng) — giữ như tranh"
  },
  "m08": {
   "root_season": "thu",
   "group": "Dịu dàng",
+  "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem)",
   "xuan": {
-   "main": "peony",
-   "main_hex": "#E083A5",
-   "sec": "rich wisteria lilac",
-   "sec_hex": "#9276CA",
-   "sec_accent": "A31: secondary is the Xuân cool accent wisteria lilac (her warm families are all used)"
+   "main": "soft peony pink",
+   "main_hex": "#D58FB0",
+   "sec": "mist blue",
+   "sec_hex": "#D2ECFF",
+   "main_vi": "hồng mẫu đơn dịu",
+   "sec_vi": "xanh sương"
   },
   "ha": {
-   "main": "light lemon yellow",
-   "main_hex": "#DAD67D",
-   "sec": "deep sea turquoise",
-   "sec_hex": "#008588",
-   "sec_depth_moved": "t 1.3 -> 2.5",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "pale lemon",
+   "main_hex": "#F0EA7F",
+   "sec": "bright blush",
+   "sec_hex": "#FFE7EE",
+   "main_vi": "vàng chanh nhạt",
+   "sec_vi": "hồng phấn nhạt"
   },
   "thu": {
    "main": "soft coral",
@@ -951,45 +1278,57 @@
    }
   },
   "dong": {
-   "main": "pale violet",
-   "main_hex": "#D1BCFA",
-   "sec": "light ice blue",
-   "sec_hex": "#77B8D7"
-  }
+   "main": "light clear cool teal",
+   "main_hex": "#39C3D0",
+   "sec": "mint mist",
+   "sec_hex": "#CDF2E0",
+   "main_vi": "xanh mòng két sáng",
+   "sec_vi": "bạc hà nhạt"
+  },
+  "stylist": "chính sáng dịu, phụ kem/sương nhạt — mềm mại, không đậm; phụ mỗi mùa một màu: xanh sương, hồng phấn nhạt, bạc hà nhạt"
  },
  "m09": {
   "root_season": "xuan",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
    "main": "rose pink",
    "main_hex": "#D5909C",
    "sec": "teal",
    "sec_hex": "#499597",
-   "root": true
+   "root": true,
+   "band_misfit": "chính không đậm (L 0.73); phụ không sáng — thiếu tương phản"
   },
   "ha": {
-   "main": "orange",
-   "main_hex": "#FFA767",
-   "sec": "rich spring green",
-   "sec_hex": "#62984F",
-   "sec_borrowed": "Hạ: secondary borrowed from spring green (main stays orange/yellow)"
+   "main": "rich coral orange",
+   "main_hex": "#D75928",
+   "sec": "ivory",
+   "sec_hex": "#FBEFD6",
+   "main_vi": "cam san hô đậm vừa",
+   "sec_vi": "ngà"
   },
   "thu": {
-   "main": "wine berry",
-   "main_hex": "#BD4589",
-   "sec": "deep ginkgo yellow",
-   "sec_hex": "#CCE267"
+   "main": "deep clear moss green",
+   "main_hex": "#3E7B03",
+   "sec": "mist blue",
+   "sec_hex": "#E3F3FF",
+   "main_vi": "xanh rêu đậm",
+   "sec_vi": "xanh sương"
   },
   "dong": {
-   "main": "pale emerald",
-   "main_hex": "#83D5B2",
-   "sec": "sapphire",
-   "sec_hex": "#76A3ED"
-  }
+   "main": "rich muted violet",
+   "main_hex": "#8160B5",
+   "sec": "blush",
+   "sec_hex": "#FFEAEF",
+   "main_vi": "tím đậm vừa",
+   "sec_vi": "hồng phấn nhạt"
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: ngà, xanh sương, hồng phấn nhạt · ★ gốc lệch tông (chính không đậm (L 0.73); phụ không sáng — thiếu tương phản) — giữ như tranh"
  },
  "m10": {
   "root_season": "xuan",
   "group": "Đoan trang",
+  "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son + ngà)",
   "xuan": {
    "main": "soft leaf green",
    "main_hex": "#A4D098",
@@ -1006,53 +1345,62 @@
     "why": [
      "chính tên/sắc già → tươi hơn một chút"
     ]
-   }
+   },
+   "band_misfit": "chính L 0.81 ngoài tầm trung dịu; phụ không phải trung tính sáng"
   },
   "ha": {
-   "main": "pale apricot",
-   "main_hex": "#FFD1AE",
-   "sec": "light sea turquoise",
-   "sec_hex": "#6FD4D4",
-   "sec_depth_moved": "t 1.5 -> 0.5",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "soft muted cool coral orange",
+   "main_hex": "#E97C48",
+   "sec": "peach cream",
+   "sec_hex": "#FBDAC1",
+   "main_vi": "cam san hô dịu",
+   "sec_vi": "kem đào"
   },
   "thu": {
-   "main": "light maple red",
-   "main_hex": "#EF7949",
-   "sec": "deep plum",
-   "sec_hex": "#833D94"
+   "main": "deep clear warm plum",
+   "main_hex": "#955290",
+   "sec": "blush",
+   "sec_hex": "#FCD6E0",
+   "main_vi": "tím mận đậm",
+   "sec_vi": "hồng phấn nhạt"
   },
   "dong": {
-   "main": "pale teal",
-   "main_hex": "#A0DADE",
-   "sec": "violet",
-   "sec_hex": "#A897EA",
-   "A31": "CANNOT FIT: #A0DADE same family teal-aqua as #6FD4D4"
-  }
+   "main": "soft muted cerulean",
+   "main_hex": "#77A7D1",
+   "sec": "aqua mist",
+   "sec_hex": "#BFEBED",
+   "main_vi": "xanh da trời dịu",
+   "sec_vi": "xanh ngọc sương"
+  },
+  "stylist": "công thức c06: chính trầm dịu, phụ ngà/kem sáng — nền nã, chỉn chu; phụ mỗi mùa một màu: kem đào, hồng phấn nhạt, xanh ngọc sương · ★ gốc lệch tông (chính L 0.81 ngoài tầm trung dịu; phụ không phải trung tính sáng) — giữ như tranh"
  },
  "m14": {
   "root_season": "dong",
   "group": "Dịu dàng",
+  "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem)",
   "xuan": {
-   "main": "pale coral pink",
-   "main_hex": "#F9B5B6",
-   "sec": "rich spring sky blue",
-   "sec_hex": "#51A2CF",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "soft peach-blossom pink",
+   "main_hex": "#DC8F97",
+   "sec": "mist blue",
+   "sec_hex": "#D2ECFF",
+   "main_vi": "hồng hoa đào dịu",
+   "sec_vi": "xanh sương"
   },
   "ha": {
-   "main": "orange",
-   "main_hex": "#FFA565",
-   "sec": "rich coral red",
-   "sec_hex": "#E45F52",
-   "main_depth_moved": "t 0.0 -> 1.0",
-   "sec_borrowed": "Hạ: secondary borrowed from coral red (main stays orange/yellow)"
+   "main": "pale clear cool lime lemon",
+   "main_hex": "#DCF185",
+   "sec": "mint mist",
+   "sec_hex": "#CDF2E0",
+   "main_vi": "vàng chanh non nhạt",
+   "sec_vi": "bạc hà nhạt"
   },
   "thu": {
-   "main": "light plum",
-   "main_hex": "#C787C5",
-   "sec": "rich ginkgo yellow",
-   "sec_hex": "#DADF63"
+   "main": "soft muted amber",
+   "main_hex": "#E98F30",
+   "sec": "bright blush",
+   "sec_hex": "#FFE7EE",
+   "main_vi": "hổ phách dịu",
+   "sec_vi": "hồng phấn nhạt"
   },
   "dong": {
    "main": "ivory white",
@@ -1060,61 +1408,74 @@
    "sec": "jade green",
    "sec_hex": "#5DAC85",
    "root": true
-  }
+  },
+  "stylist": "chính sáng dịu, phụ kem/sương nhạt — mềm mại, không đậm; phụ mỗi mùa một màu: xanh sương, bạc hà nhạt, hồng phấn nhạt"
  },
  "m16": {
   "root_season": "dong",
   "group": "Đoan trang",
+  "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son + ngà)",
   "xuan": {
-   "main": "deep coral pink",
-   "main_hex": "#BB6079",
-   "sec": "deep spring sky blue",
-   "sec_hex": "#4982BE",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "rich clear warm rose pink",
+   "main_hex": "#B85F81",
+   "sec": "mist blue",
+   "sec_hex": "#C7E6FD",
+   "main_vi": "hồng đậm vừa",
+   "sec_vi": "xanh sương"
   },
   "ha": {
-   "main": "rich marigold",
-   "main_hex": "#FE9C5D",
-   "sec": "rich sea turquoise",
-   "sec_hex": "#24A9BD",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "soft muted warm coral orange",
+   "main_hex": "#D9755D",
+   "sec": "peach cream",
+   "sec_hex": "#FBDAC1",
+   "main_vi": "cam san hô dịu",
+   "sec_vi": "kem đào"
   },
   "thu": {
-   "main": "rich maple red",
-   "main_hex": "#D1401E",
-   "sec": "deep moss green",
-   "sec_hex": "#668A1A"
+   "main": "soft amber",
+   "main_hex": "#EC8904",
+   "sec": "mint mist",
+   "sec_hex": "#C7EBDA",
+   "main_vi": "hổ phách dịu",
+   "sec_vi": "bạc hà nhạt"
   },
   "dong": {
    "main": "lavender purple",
    "main_hex": "#AD91CA",
    "sec": "jade green",
    "sec_hex": "#5DAC85",
-   "root": true
-  }
+   "root": true,
+   "band_misfit": "phụ không phải trung tính sáng"
+  },
+  "stylist": "công thức c06: chính trầm dịu, phụ ngà/kem sáng — nền nã, chỉn chu; phụ mỗi mùa một màu: xanh sương, kem đào, bạc hà nhạt · ★ gốc lệch tông (phụ không phải trung tính sáng) — giữ như tranh"
  },
  "m18": {
   "root_season": "dong",
   "group": "Dịu dàng",
+  "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem)",
   "xuan": {
-   "main": "spring green",
-   "main_hex": "#72BB86",
-   "sec": "deep wisteria lilac",
-   "sec_hex": "#8170C6",
-   "sec_accent": "A31: secondary is the Xuân cool accent wisteria lilac (her warm families are all used)"
+   "main": "soft clear young bud green",
+   "main_hex": "#90B667",
+   "sec": "pale gold",
+   "sec_hex": "#F3E8BD",
+   "main_vi": "xanh chồi non dịu",
+   "sec_vi": "vàng nhạt"
   },
   "ha": {
-   "main": "light apricot",
-   "main_hex": "#FEC09E",
-   "sec": "rich coral orange",
-   "sec_hex": "#DD6A39",
-   "sec_borrowed": "Hạ: secondary borrowed from coral orange (main stays orange/yellow)"
+   "main": "light warm coral orange",
+   "main_hex": "#FEB19E",
+   "sec": "mint mist",
+   "sec_hex": "#CDF2E0",
+   "main_vi": "cam san hô sáng",
+   "sec_vi": "bạc hà nhạt"
   },
   "thu": {
-   "main": "ginkgo yellow",
-   "main_hex": "#DDE16C",
-   "sec": "deep plum",
-   "sec_hex": "#823486"
+   "main": "soft muted amber",
+   "main_hex": "#E98F30",
+   "sec": "smoke lilac",
+   "sec_hex": "#ECE2FE",
+   "main_vi": "hổ phách dịu",
+   "sec_vi": "tím khói nhạt"
   },
   "dong": {
    "main": "soft blue",
@@ -1133,18 +1494,22 @@
      "chính xám → soft blue cùng độ sáng (bỏ xám)",
      "chính xỉn (màu già) → cùng màu, tươi hơn"
     ]
-   }
-  }
+   },
+   "band_misfit": "có màu đậm (L 0.65) — Dịu dàng không bao giờ đậm"
+  },
+  "stylist": "chính sáng dịu, phụ kem/sương nhạt — mềm mại, không đậm; phụ mỗi mùa một màu: vàng nhạt, bạc hà nhạt, tím khói nhạt · ★ gốc lệch tông (có màu đậm (L 0.65) — Dịu dàng không bao giờ đậm) — giữ như tranh"
  },
  "m19": {
   "root_season": "ha",
   "group": "Dịu dàng",
+  "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem)",
   "xuan": {
-   "main": "cherry-blossom pink",
-   "main_hex": "#C6819C",
-   "sec": "deep wisteria lilac",
-   "sec_hex": "#905DAD",
-   "sec_accent": "A31: secondary is the Xuân cool accent wisteria lilac (her warm families are all used)"
+   "main": "soft clear peach-blossom pink",
+   "main_hex": "#E68893",
+   "sec": "blush",
+   "sec_hex": "#FFDEE7",
+   "main_vi": "hồng hoa đào dịu",
+   "sec_vi": "hồng phấn nhạt"
   },
   "ha": {
    "main": "soft apricot",
@@ -1162,43 +1527,54 @@
     "why": [
      "chính tên/sắc già → tươi hơn một chút"
     ]
-   }
+   },
+   "band_misfit": "có màu đậm (L 0.62) — Dịu dàng không bao giờ đậm"
   },
   "thu": {
-   "main": "maple red",
-   "main_hex": "#E25046",
-   "sec": "deep moss green",
-   "sec_hex": "#4C811F"
+   "main": "soft clear moss green",
+   "main_hex": "#88B86D",
+   "sec": "mint mist",
+   "sec_hex": "#CDF2E0",
+   "main_vi": "xanh rêu dịu",
+   "sec_vi": "bạc hà nhạt"
   },
   "dong": {
-   "main": "light emerald",
-   "main_hex": "#74CDA8",
-   "sec": "rich indigo",
-   "sec_hex": "#8190DB"
-  }
+   "main": "light ice blue",
+   "main_hex": "#7FCCF4",
+   "sec": "ivory",
+   "sec_hex": "#F3E7CE",
+   "main_vi": "xanh băng sáng",
+   "sec_vi": "ngà"
+  },
+  "stylist": "chính sáng dịu, phụ kem/sương nhạt — mềm mại, không đậm; phụ mỗi mùa một màu: hồng phấn nhạt, bạc hà nhạt, ngà · ★ gốc lệch tông (có màu đậm (L 0.62) — Dịu dàng không bao giờ đậm) — giữ như tranh"
  },
  "m20": {
   "root_season": "dong",
   "group": "Dịu dàng",
+  "band": "nhạt + dịu, không bao giờ đậm (hồng phấn + kem)",
   "xuan": {
-   "main": "rich Tết red",
-   "main_hex": "#DC5356",
-   "sec": "peony",
-   "sec_hex": "#D97FAB"
+   "main": "light clear warm peach-blossom pink",
+   "main_hex": "#FEA8B7",
+   "sec": "ivory white",
+   "sec_hex": "#ECE8DE",
+   "main_vi": "hồng hoa đào sáng",
+   "sec_vi": "trắng ngà"
   },
   "ha": {
-   "main": "light lemon yellow",
-   "main_hex": "#DAD67D",
-   "sec": "light sea turquoise",
-   "sec_hex": "#6FD4D4",
-   "main_depth_moved": "t 1.3 -> 0.5",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "pale lemon",
+   "main_hex": "#F0EA7F",
+   "sec": "smoke lilac",
+   "sec_hex": "#ECE2FE",
+   "main_vi": "vàng chanh nhạt",
+   "sec_vi": "tím khói nhạt"
   },
   "thu": {
-   "main": "rich plum",
-   "main_hex": "#914193",
-   "sec": "moss green",
-   "sec_hex": "#6AAF57"
+   "main": "soft clear moss green",
+   "main_hex": "#88B86D",
+   "sec": "aqua mist",
+   "sec_hex": "#C6F2F4",
+   "main_vi": "xanh rêu dịu",
+   "sec_vi": "xanh ngọc sương"
   },
   "dong": {
    "main": "soft periwinkle",
@@ -1217,11 +1593,13 @@
      "chính xỉn (màu già) → cùng màu, tươi hơn"
     ]
    }
-  }
+  },
+  "stylist": "chính sáng dịu, phụ kem/sương nhạt — mềm mại, không đậm; phụ mỗi mùa một màu: trắng ngà, tím khói nhạt, xanh ngọc sương"
  },
  "m22": {
   "root_season": "xuan",
   "group": "Đoan trang",
+  "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son + ngà)",
   "xuan": {
    "main": "soft rose",
    "main_hex": "#CC8391",
@@ -1238,93 +1616,115 @@
     "why": [
      "chính tên/sắc già → tươi hơn một chút"
     ]
-   }
+   },
+   "band_misfit": "phụ không phải trung tính sáng"
   },
   "ha": {
-   "main": "light lemon yellow",
-   "main_hex": "#DAD67D",
-   "sec": "pale peach",
-   "sec_hex": "#FFD2BC",
-   "main_depth_moved": "t 1.2 -> 0.5",
-   "sec_depth_moved": "t 1.3 -> 0.0"
+   "main": "soft muted coral orange",
+   "main_hex": "#E07148",
+   "sec": "lemon cream",
+   "sec_hex": "#E2E6BC",
+   "main_vi": "cam san hô dịu",
+   "sec_vi": "kem chanh"
   },
   "thu": {
-   "main": "rich plum",
-   "main_hex": "#99418C",
-   "sec": "rich pumpkin",
-   "sec_hex": "#E97623"
+   "main": "deep plum",
+   "main_hex": "#925786",
+   "sec": "peach cream",
+   "sec_hex": "#FBDAC1",
+   "main_vi": "tím mận đậm",
+   "sec_vi": "kem đào"
   },
   "dong": {
-   "main": "light violet",
-   "main_hex": "#AAA6F3",
-   "sec": "light teal",
-   "sec_hex": "#6DBDC9"
-  }
+   "main": "soft violet",
+   "main_hex": "#AB93D7",
+   "sec": "blush",
+   "sec_hex": "#FCD6E0",
+   "main_vi": "tím dịu",
+   "sec_vi": "hồng phấn nhạt"
+  },
+  "stylist": "công thức c06: chính trầm dịu, phụ ngà/kem sáng — nền nã, chỉn chu; phụ mỗi mùa một màu: kem chanh, kem đào, hồng phấn nhạt · ★ gốc lệch tông (phụ không phải trung tính sáng) — giữ như tranh"
  },
  "m28": {
   "root_season": "xuan",
   "group": "Đoan trang",
+  "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son + ngà)",
   "xuan": {
    "main": "coral pink",
    "main_hex": "#D9998C",
    "sec": "indigo blue",
    "sec_hex": "#4E5D97",
-   "root": true
+   "root": true,
+   "band_misfit": "phụ không phải trung tính sáng"
   },
   "ha": {
-   "main": "deep marigold",
-   "main_hex": "#F38F00",
-   "sec": "deep sea turquoise",
-   "sec_hex": "#008588",
-   "main_depth_moved": "t 0.8 -> 2.0",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "soft muted apricot",
+   "main_hex": "#D57C11",
+   "sec": "lemon cream",
+   "sec_hex": "#E2E6BC",
+   "main_vi": "cam mơ dịu",
+   "sec_vi": "kem chanh"
   },
   "thu": {
-   "main": "fresh olive green",
-   "main_hex": "#8DB144",
-   "sec": "deep plum",
-   "sec_hex": "#6F1765"
+   "main": "rich plum",
+   "main_hex": "#AF71A1",
+   "sec": "aqua mist",
+   "sec_hex": "#BFEBED",
+   "main_vi": "tím mận đậm vừa",
+   "sec_vi": "xanh ngọc sương"
   },
   "dong": {
-   "main": "light violet",
-   "main_hex": "#D1A7E8",
-   "sec": "deep emerald",
-   "sec_hex": "#2E8446"
-  }
+   "main": "soft muted cerulean",
+   "main_hex": "#77A7D1",
+   "sec": "smoke lilac",
+   "sec_hex": "#E7DAFF",
+   "main_vi": "xanh da trời dịu",
+   "sec_vi": "tím khói nhạt"
+  },
+  "stylist": "công thức c06: chính trầm dịu, phụ ngà/kem sáng — nền nã, chỉn chu; phụ mỗi mùa một màu: kem chanh, xanh ngọc sương, tím khói nhạt · ★ gốc lệch tông (phụ không phải trung tính sáng) — giữ như tranh"
  },
  "m29": {
   "root_season": "xuan",
   "group": "Đoan trang",
+  "band": "chính trầm dịu tầm trung + phụ trung tính sáng = công thức c06 CŨ (đỏ son + ngà)",
   "xuan": {
    "main": "pale celadon",
    "main_hex": "#AFD4BC",
    "sec": "deep rose",
    "sec_hex": "#CA7281",
-   "root": true
+   "root": true,
+   "band_misfit": "chính L 0.84 ngoài tầm trung dịu; phụ không phải trung tính sáng"
   },
   "ha": {
-   "main": "pale peach",
-   "main_hex": "#FFCDC2",
-   "sec": "rich coral orange",
-   "sec_hex": "#DA6E27",
-   "sec_borrowed": "Hạ: secondary borrowed from coral orange (main stays orange/yellow)"
+   "main": "soft coral orange",
+   "main_hex": "#F37344",
+   "sec": "pastel lilac",
+   "sec_hex": "#E3D6FE",
+   "main_vi": "cam san hô dịu",
+   "sec_vi": "tím pastel"
   },
   "thu": {
-   "main": "light ginkgo yellow",
-   "main_hex": "#EAE075",
-   "sec": "deep maple red",
-   "sec_hex": "#C42A28"
+   "main": "deep clear warm plum",
+   "main_hex": "#955290",
+   "sec": "mist blue",
+   "sec_hex": "#C7E6FD",
+   "main_vi": "tím mận đậm",
+   "sec_vi": "xanh sương"
   },
   "dong": {
-   "main": "pale ice blue",
-   "main_hex": "#8ACCEB",
-   "sec": "violet",
-   "sec_hex": "#A587DA"
-  }
+   "main": "soft cerulean",
+   "main_hex": "#609FD2",
+   "sec": "pastel peach",
+   "sec_hex": "#FFD4B8",
+   "main_vi": "xanh da trời dịu",
+   "sec_vi": "đào pastel"
+  },
+  "stylist": "công thức c06: chính trầm dịu, phụ ngà/kem sáng — nền nã, chỉn chu; phụ mỗi mùa một màu: tím pastel, xanh sương, đào pastel · ★ gốc lệch tông (chính L 0.84 ngoài tầm trung dịu; phụ không phải trung tính sáng) — giữ như tranh"
  },
  "s07": {
   "root_season": "xuan",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
    "main": "deep rose",
    "main_hex": "#AB3A50",
@@ -1343,49 +1743,62 @@
      "chính tên/sắc già → tươi hơn một chút",
      "phụ xỉn (màu già) → cùng màu, tươi hơn"
     ]
-   }
+   },
+   "band_misfit": "phụ không sáng — thiếu tương phản"
   },
   "ha": {
-   "main": "deep peach",
-   "main_hex": "#EE6C56",
-   "sec": "light sea turquoise",
-   "sec_hex": "#73D3E3",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "pale warm lemon",
+   "main_hex": "#F5E46E",
+   "sec": "aqua mist",
+   "sec_hex": "#CEFAFC",
+   "main_vi": "vàng chanh nhạt",
+   "sec_vi": "xanh ngọc sương"
   },
   "thu": {
-   "main": "deep plum",
-   "main_hex": "#641E75",
-   "sec": "moss green",
-   "sec_hex": "#68BB70"
+   "main": "deep clear warm plum",
+   "main_hex": "#8F2E8A",
+   "sec": "ivory white",
+   "sec_hex": "#F4F0E6",
+   "main_vi": "tím mận đậm",
+   "sec_vi": "trắng ngà"
   },
   "dong": {
-   "main": "deep teal",
-   "main_hex": "#328D7E",
-   "sec": "pale orchid",
-   "sec_hex": "#EBBEE1"
-  }
+   "main": "rich warm jade",
+   "main_hex": "#008A60",
+   "sec": "soft blush",
+   "sec_hex": "#FFE0E8",
+   "main_vi": "xanh ngọc đậm vừa",
+   "sec_vi": "hồng phấn nhạt"
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: xanh ngọc sương, trắng ngà, hồng phấn nhạt · ★ gốc lệch tông (phụ không sáng — thiếu tương phản) — giữ như tranh"
  },
  "s08": {
   "root_season": "dong",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
-   "main": "deep coral pink",
-   "main_hex": "#A94C5D",
-   "sec": "light spring green",
-   "sec_hex": "#99CD99"
+   "main": "soft clear warm young bud green",
+   "main_hex": "#7BA204",
+   "sec": "pastel peach",
+   "sec_hex": "#FFD4B8",
+   "main_vi": "xanh chồi non dịu",
+   "sec_vi": "đào pastel"
   },
   "ha": {
-   "main": "rich tangerine",
-   "main_hex": "#FA9933",
-   "sec": "pale coral red",
-   "sec_hex": "#FFB1A5",
-   "sec_borrowed": "Hạ: secondary borrowed from coral red (main stays orange/yellow)"
+   "main": "rich muted warm coral orange",
+   "main_hex": "#D45B3D",
+   "sec": "pastel mint",
+   "sec_hex": "#ACF0CB",
+   "main_vi": "cam san hô đậm vừa",
+   "sec_vi": "bạc hà pastel"
   },
   "thu": {
-   "main": "deep fresh olive green",
-   "main_hex": "#709618",
-   "sec": "pale plum",
-   "sec_hex": "#D89BCA"
+   "main": "deep wine berry",
+   "main_hex": "#9C2E5A",
+   "sec": "soft smoke lilac",
+   "sec_hex": "#EEE4FF",
+   "main_vi": "đỏ rượu đậm",
+   "sec_vi": "tím khói nhạt"
   },
   "dong": {
    "main": "soft emerald green",
@@ -1393,41 +1806,51 @@
    "sec": "pearl white",
    "sec_hex": "#E9E7E2",
    "root": true
-  }
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: đào pastel, bạc hà pastel, tím khói nhạt"
  },
  "s09": {
   "root_season": "dong",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
-   "main": "deep Tết red",
-   "main_hex": "#B12330",
-   "sec": "light spring sky blue",
-   "sec_hex": "#83C5EB",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "deep clear peony pink",
+   "main_hex": "#9E246B",
+   "sec": "mist blue",
+   "sec_hex": "#E3F3FF",
+   "main_vi": "hồng mẫu đơn đậm",
+   "sec_vi": "xanh sương"
   },
   "ha": {
-   "main": "deep peach",
-   "main_hex": "#E87132",
-   "sec": "pale lemon yellow",
-   "sec_hex": "#E2DF94"
+   "main": "rich coral orange",
+   "main_hex": "#D75928",
+   "sec": "mint mist",
+   "sec_hex": "#D5FAE9",
+   "main_vi": "cam san hô đậm vừa",
+   "sec_vi": "bạc hà nhạt"
   },
   "thu": {
-   "main": "deep moss green",
-   "main_hex": "#396C02",
-   "sec": "light plum",
-   "sec_hex": "#C87CB8"
+   "main": "deep clear moss green",
+   "main_hex": "#3E7B03",
+   "sec": "ivory",
+   "sec_hex": "#FBEFD6",
+   "main_vi": "xanh rêu đậm",
+   "sec_vi": "ngà"
   },
   "dong": {
    "main": "soft indigo violet",
    "main_hex": "#634EA2",
    "sec": "pale rose",
    "sec_hex": "#E6BCC3",
-   "root": true
-  }
+   "root": true,
+   "band_misfit": "phụ không sáng — thiếu tương phản"
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: xanh sương, bạc hà nhạt, ngà · ★ gốc lệch tông (phụ không sáng — thiếu tương phản) — giữ như tranh"
  },
  "s10": {
   "root_season": "xuan",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
    "main": "soft crimson",
    "main_hex": "#BF4051",
@@ -1447,47 +1870,58 @@
    }
   },
   "ha": {
-   "main": "deep marigold",
-   "main_hex": "#F38F00",
-   "sec": "coral orange",
-   "sec_hex": "#F37E61",
-   "sec_depth_moved": "t 0.0 -> 1.0",
-   "sec_borrowed": "Hạ: secondary borrowed from coral orange (main stays orange/yellow)"
+   "main": "soft clear tangerine",
+   "main_hex": "#DB7101",
+   "sec": "bright aqua mist",
+   "sec_hex": "#C9F5F7",
+   "main_vi": "cam quýt dịu",
+   "sec_vi": "xanh ngọc sương"
   },
   "thu": {
-   "main": "deep moss green",
-   "main_hex": "#0D7830",
-   "sec": "pale wine berry",
-   "sec_hex": "#DF8AB8"
+   "main": "jewel-deep muted plum",
+   "main_hex": "#733567",
+   "sec": "pale gold",
+   "sec_hex": "#F0E5BA",
+   "main_vi": "tím mận thẫm",
+   "sec_vi": "vàng nhạt"
   },
   "dong": {
-   "main": "rich violet",
-   "main_hex": "#8B78CE",
-   "sec": "pale jade",
-   "sec_hex": "#A7DBC5"
-  }
+   "main": "deep sapphire",
+   "main_hex": "#3B63B0",
+   "sec": "smoke lilac",
+   "sec_hex": "#EADEFF",
+   "main_vi": "lam ngọc bích đậm",
+   "sec_vi": "tím khói nhạt"
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: xanh ngọc sương, vàng nhạt, tím khói nhạt"
  },
  "s11": {
   "root_season": "dong",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
-   "main": "deep raspberry",
-   "main_hex": "#A63050",
-   "sec": "peony",
-   "sec_hex": "#D88EC6"
+   "main": "jewel-deep spring leaf green",
+   "main_hex": "#1F600C",
+   "sec": "mint mist",
+   "sec_hex": "#CAEFDD",
+   "main_vi": "xanh lá xuân thẫm",
+   "sec_vi": "bạc hà nhạt"
   },
   "ha": {
-   "main": "deep peach",
-   "main_hex": "#EC6B54",
-   "sec": "light spring green",
-   "sec_hex": "#8ECC9D",
-   "sec_borrowed": "Hạ: secondary borrowed from spring green (main stays orange/yellow)"
+   "main": "light clear cantaloupe",
+   "main_hex": "#F79806",
+   "sec": "pastel pink",
+   "sec_hex": "#FFCFDC",
+   "main_vi": "cam dưa lưới sáng",
+   "sec_vi": "hồng pastel"
   },
   "thu": {
-   "main": "deep fresh olive green",
-   "main_hex": "#5A7B00",
-   "sec": "amber",
-   "sec_hex": "#FE9D42"
+   "main": "jewel-deep maple red",
+   "main_hex": "#941617",
+   "sec": "ivory",
+   "sec_hex": "#EFE3CB",
+   "main_vi": "đỏ lá phong thẫm",
+   "sec_vi": "ngà"
   },
   "dong": {
    "main": "soft royal purple",
@@ -1506,60 +1940,76 @@
      "phụ xám → soft blue cùng độ sáng (bỏ xám)",
      "phụ xỉn (màu già) → cùng màu, tươi hơn"
     ]
-   }
-  }
+   },
+   "band_misfit": "phụ không phải vàng nhạt/ngà sáng"
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: bạc hà nhạt, hồng pastel, ngà · ★ gốc lệch tông (phụ không phải vàng nhạt/ngà sáng) — giữ như tranh"
  },
  "s12": {
   "root_season": "dong",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
-   "main": "deep peony",
-   "main_hex": "#9C477E",
-   "sec": "light spring sky blue",
-   "sec_hex": "#91C7F1",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "jewel-deep spring leaf green",
+   "main_hex": "#1F600C",
+   "sec": "mist blue",
+   "sec_hex": "#CCE9FF",
+   "main_vi": "xanh lá xuân thẫm",
+   "sec_vi": "xanh sương"
   },
   "ha": {
-   "main": "deep apricot",
-   "main_hex": "#EC9162",
-   "sec": "pale leaf green",
-   "sec_hex": "#AEDDA9",
-   "sec_borrowed": "Hạ: secondary borrowed from leaf green (main stays orange/yellow)"
+   "main": "rich coral orange",
+   "main_hex": "#D75928",
+   "sec": "blush",
+   "sec_hex": "#FFD9E3",
+   "main_vi": "cam san hô đậm vừa",
+   "sec_vi": "hồng phấn nhạt"
   },
   "thu": {
-   "main": "deep fresh olive green",
-   "main_hex": "#668B00",
-   "sec": "pale wine berry",
-   "sec_hex": "#E689A5"
+   "main": "jewel-deep muted plum",
+   "main_hex": "#733567",
+   "sec": "mint mist",
+   "sec_hex": "#CAEFDD",
+   "main_vi": "tím mận thẫm",
+   "sec_vi": "bạc hà nhạt"
   },
   "dong": {
    "main": "soft peacock blue",
    "main_hex": "#3686A1",
    "sec": "warm ivory",
    "sec_hex": "#EAD7BF",
-   "root": true
-  }
+   "root": true,
+   "band_misfit": "chính không đậm quý phái (L 0.58)"
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: xanh sương, hồng phấn nhạt, bạc hà nhạt · ★ gốc lệch tông (chính không đậm quý phái (L 0.58)) — giữ như tranh"
  },
  "s13": {
   "root_season": "dong",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main": "pale coral pink",
-   "main_hex": "#F6AEA8",
-   "sec": "deep peony",
-   "sec_hex": "#933F75"
+   "main": "soft clear peony pink",
+   "main_hex": "#DD84AF",
+   "sec": "smoke lilac",
+   "sec_hex": "#EADEFF",
+   "main_vi": "hồng mẫu đơn dịu",
+   "sec_vi": "tím khói nhạt"
   },
   "ha": {
-   "main": "pale lemon yellow",
-   "main_hex": "#E5E29B",
-   "sec": "deep peach",
-   "sec_hex": "#EE7738"
+   "main": "light clear peach orange",
+   "main_hex": "#F9A275",
+   "sec": "mint mist",
+   "sec_hex": "#CAEFDD",
+   "main_vi": "cam đào sáng",
+   "sec_vi": "bạc hà nhạt"
   },
   "thu": {
-   "main": "light plum",
-   "main_hex": "#C787C5",
-   "sec": "deep moss green",
-   "sec_hex": "#246E17"
+   "main": "soft moss green",
+   "main_hex": "#86B46D",
+   "sec": "ivory",
+   "sec_hex": "#EFE3CB",
+   "main_vi": "xanh rêu dịu",
+   "sec_vi": "ngà"
   },
   "dong": {
    "main": "pale blue",
@@ -1579,28 +2029,36 @@
      "phụ xỉn (màu già) → cùng màu, tươi hơn"
     ]
    }
-  }
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: tím khói nhạt, bạc hà nhạt, ngà"
  },
  "s14": {
   "root_season": "dong",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main": "deep Tết red",
-   "main_hex": "#B1261C",
-   "sec": "light peony",
-   "sec_hex": "#E8A0CB"
+   "main": "soft cool spring leaf green",
+   "main_hex": "#77B779",
+   "sec": "soft blush",
+   "sec_hex": "#F9D2DD",
+   "main_vi": "xanh lá xuân dịu",
+   "sec_vi": "hồng phấn nhạt"
   },
   "ha": {
-   "main": "deep apricot",
-   "main_hex": "#DB7E07",
-   "sec": "pale peach",
-   "sec_hex": "#FFCFBE"
+   "main": "light clear warm apricot",
+   "main_hex": "#FDA259",
+   "sec": "bright peach cream",
+   "sec_hex": "#FFE6D3",
+   "main_vi": "cam mơ sáng",
+   "sec_vi": "kem đào"
   },
   "thu": {
-   "main": "deep wine berry",
-   "main_hex": "#85003D",
-   "sec": "light moss green",
-   "sec_hex": "#99C674"
+   "main": "soft clear plum",
+   "main_hex": "#D387C2",
+   "sec": "lemon cream",
+   "sec_hex": "#E5E9BF",
+   "main_vi": "tím mận dịu",
+   "sec_vi": "kem chanh"
   },
   "dong": {
    "main": "soft ink blue",
@@ -1618,31 +2076,38 @@
     "why": [
      "phụ xám → pale blue cùng độ sáng (bỏ xám)"
     ]
-   }
-  }
+   },
+   "band_misfit": "chính đậm (L 0.44) — Lạnh lùng tầm trung → sáng"
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: hồng phấn nhạt, kem đào, kem chanh · ★ gốc lệch tông (chính đậm (L 0.44) — Lạnh lùng tầm trung → sáng) — giữ như tranh"
  },
  "s15": {
   "root_season": "dong",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main": "light Tết red",
-   "main_hex": "#FD9A97",
-   "sec": "deep wisteria lilac",
-   "sec_hex": "#744B9D",
-   "sec_accent": "A31: secondary is the Xuân cool accent wisteria lilac (her warm families are all used)"
+   "main": "soft clear warm young bud green",
+   "main_hex": "#93B25A",
+   "sec": "mist blue",
+   "sec_hex": "#CCE9FF",
+   "main_vi": "xanh chồi non dịu",
+   "sec_vi": "xanh sương"
   },
   "ha": {
-   "main": "pale peach",
-   "main_hex": "#FBD5B5",
-   "sec": "deep spring green",
-   "sec_hex": "#556E06",
-   "sec_borrowed": "Hạ: secondary borrowed from spring green (main stays orange/yellow)"
+   "main": "light clear peach orange",
+   "main_hex": "#F9A275",
+   "sec": "smoke lilac",
+   "sec_hex": "#EADEFF",
+   "main_vi": "cam đào sáng",
+   "sec_vi": "tím khói nhạt"
   },
   "thu": {
-   "main": "light plum",
-   "main_hex": "#CD85BD",
-   "sec": "deep persimmon",
-   "sec_hex": "#D44F13"
+   "main": "soft autumn rose",
+   "main_hex": "#DB8A96",
+   "sec": "ivory white",
+   "sec_hex": "#E8E4DA",
+   "main_vi": "hồng thu dịu",
+   "sec_vi": "trắng ngà"
   },
   "dong": {
    "main": "pale jade",
@@ -1662,41 +2127,51 @@
      "phụ xỉn (màu già) → cùng màu, tươi hơn"
     ]
    }
-  }
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: xanh sương, tím khói nhạt, trắng ngà"
  },
  "s16": {
   "root_season": "xuan",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
    "main": "soft peach-blossom pink",
    "main_hex": "#DE9CA4",
    "sec": "plum rose",
    "sec_hex": "#B35685",
-   "root": true
+   "root": true,
+   "band_misfit": "chính không rực (C 0.08)"
   },
   "ha": {
-   "main": "marigold",
-   "main_hex": "#FFB17C",
-   "sec": "deep leaf green",
-   "sec_hex": "#2E8947",
-   "sec_borrowed": "Hạ: secondary borrowed from leaf green (main stays orange/yellow)"
+   "main": "pale lime lemon",
+   "main_hex": "#E2EB78",
+   "sec": "paler soft peach",
+   "sec_hex": "#FEC7A2",
+   "main_vi": "vàng chanh non nhạt",
+   "sec_vi": "đào"
   },
   "thu": {
-   "main": "fresh olive green",
-   "main_hex": "#93B64B",
-   "sec": "deep maple red",
-   "sec_hex": "#B21017"
+   "main": "rich maple red",
+   "main_hex": "#BA3E38",
+   "sec": "pastel mint",
+   "sec_hex": "#ACF0CB",
+   "main_vi": "đỏ lá phong đậm vừa",
+   "sec_vi": "bạc hà pastel"
   },
   "dong": {
-   "main": "pale violet",
-   "main_hex": "#C0BDFE",
-   "sec": "rich teal",
-   "sec_hex": "#489EAB"
-  }
+   "main": "rich clear violet",
+   "main_hex": "#9867E1",
+   "sec": "smoke lilac",
+   "sec_hex": "#E4D6FD",
+   "main_vi": "tím đậm vừa",
+   "sec_vi": "tím khói nhạt"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: đào, bạc hà pastel, tím khói nhạt · ★ gốc lệch tông (chính không rực (C 0.08)) — giữ như tranh"
  },
  "s17": {
   "root_season": "xuan",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
    "main": "soft coral pink",
    "main_hex": "#D88579",
@@ -1713,62 +2188,77 @@
     "why": [
      "phụ be/champagne (màu già) → hồng đào nhạt tươi"
     ]
-   }
+   },
+   "band_misfit": "chính không rực (C 0.10)"
   },
   "ha": {
-   "main": "rich orange",
-   "main_hex": "#FA9C45",
-   "sec": "pale sea turquoise",
-   "sec_hex": "#80DCD3",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "soft clear cool peach orange",
+   "main_hex": "#FE8005",
+   "sec": "soft orchid mist",
+   "sec_hex": "#EDCCE5",
+   "main_vi": "cam đào dịu",
+   "sec_vi": "hồng tím phấn"
   },
   "thu": {
-   "main": "rich wine berry",
-   "main_hex": "#B73564",
-   "sec": "light ginkgo yellow",
-   "sec_hex": "#EBE27F"
+   "main": "rich muted plum",
+   "main_hex": "#9E4B8E",
+   "sec": "pale gold",
+   "sec_hex": "#E9DFB3",
+   "main_vi": "tím mận đậm vừa",
+   "sec_vi": "vàng nhạt"
   },
   "dong": {
-   "main": "light orchid",
-   "main_hex": "#CDA1D7",
-   "sec": "pale sapphire",
-   "sec_hex": "#AECFFF"
-  }
+   "main": "rich midnight violet",
+   "main_hex": "#7976E3",
+   "sec": "bright mint mist",
+   "sec_hex": "#CAEFDD",
+   "main_vi": "tím than đậm vừa",
+   "sec_vi": "bạc hà nhạt"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: hồng tím phấn, vàng nhạt, bạc hà nhạt · ★ gốc lệch tông (chính không rực (C 0.10)) — giữ như tranh"
  },
  "s18": {
   "root_season": "dong",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
-   "main": "deep spring green",
-   "main_hex": "#5F8834",
-   "sec": "deep spring sky blue",
-   "sec_hex": "#1E6A9F",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "deep cool vermilion",
+   "main_hex": "#B8431A",
+   "sec": "paler soft peach",
+   "sec_hex": "#FEC7A2",
+   "main_vi": "đỏ son đậm",
+   "sec_vi": "đào"
   },
   "ha": {
-   "main": "rich orange",
-   "main_hex": "#FF9148",
-   "sec": "deep sea turquoise",
-   "sec_hex": "#058789",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "pale muted cool lime lemon",
+   "main_hex": "#D9ED86",
+   "sec": "aqua mist",
+   "sec_hex": "#BCE8EA",
+   "main_vi": "vàng chanh non nhạt",
+   "sec_vi": "xanh ngọc sương"
   },
   "thu": {
-   "main": "deep ginkgo yellow",
-   "main_hex": "#D8DC5C",
-   "sec": "deep persimmon",
-   "sec_hex": "#D64B30"
+   "main": "rich moss green",
+   "main_hex": "#438106",
+   "sec": "orchid mist",
+   "sec_hex": "#F4D2EB",
+   "main_vi": "xanh rêu đậm vừa",
+   "sec_vi": "hồng tím phấn"
   },
   "dong": {
    "main": "soft violet mauve",
    "main_hex": "#AD6EB9",
    "sec": "deep rose",
    "sec_hex": "#A63F59",
-   "root": true
-  }
+   "root": true,
+   "band_misfit": "chính không ấm"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: đào, xanh ngọc sương, hồng tím phấn · ★ gốc lệch tông (chính không ấm) — giữ như tranh"
  },
  "s19": {
   "root_season": "xuan",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
    "main": "soft garnet red",
    "main_hex": "#AA3C4E",
@@ -1785,48 +2275,63 @@
     "why": [
      "phụ xám → ngọc nhạt cùng độ sáng: đỏ lựu + ngọc bích (cặp lụa cổ điển), khác s07 đỏ rượu + xanh lam"
     ]
-   }
+   },
+   "band_misfit": "phụ không phải vàng nhạt/ngà sáng"
   },
   "ha": {
-   "main": "deep tangerine",
-   "main_hex": "#DC7D0A",
-   "sec": "pale lemon yellow",
-   "sec_hex": "#E0DC8D"
+   "main": "rich coral orange",
+   "main_hex": "#D75928",
+   "sec": "smoke lilac",
+   "sec_hex": "#EADEFF",
+   "main_vi": "cam san hô đậm vừa",
+   "sec_vi": "tím khói nhạt"
   },
   "thu": {
-   "main": "deep moss green",
-   "main_hex": "#396C02",
-   "sec": "light maple red",
-   "sec_hex": "#F68275"
+   "main": "jewel-deep clear plum",
+   "main_hex": "#7E2570",
+   "sec": "peach cream",
+   "sec_hex": "#FEDEC4",
+   "main_vi": "tím mận thẫm",
+   "sec_vi": "kem đào"
   },
   "dong": {
-   "main": "deep orchid",
-   "main_hex": "#9966A5",
-   "sec": "pale sapphire",
-   "sec_hex": "#AECFFF"
-  }
+   "main": "deep sapphire",
+   "main_hex": "#3B63B0",
+   "sec": "peach cream",
+   "sec_hex": "#FEDEC4",
+   "main_vi": "lam ngọc bích đậm",
+   "sec_vi": "kem đào",
+   "A31": "CANNOT FIT: #FEDEC4 same family n:peachc as #FEDEC4"
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: tím khói nhạt, kem đào, kem đào · ★ gốc lệch tông (phụ không phải vàng nhạt/ngà sáng) — giữ như tranh"
  },
  "s20": {
   "root_season": "dong",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
-   "main": "deep spring green",
-   "main_hex": "#15753D",
-   "sec": "light raspberry",
-   "sec_hex": "#EE9FD3"
+   "main": "jewel-deep rose pink",
+   "main_hex": "#85284A",
+   "sec": "mist blue",
+   "sec_hex": "#CCE9FF",
+   "main_vi": "hồng thẫm",
+   "sec_vi": "xanh sương"
   },
   "ha": {
-   "main": "deep orange",
-   "main_hex": "#F27A25",
-   "sec": "pale coral red",
-   "sec_hex": "#FFB1A5",
-   "sec_borrowed": "Hạ: secondary borrowed from coral red (main stays orange/yellow)"
+   "main": "pale clear warm lemon",
+   "main_hex": "#F5E46E",
+   "sec": "mint mist",
+   "sec_hex": "#CAEFDD",
+   "main_vi": "vàng chanh nhạt",
+   "sec_vi": "bạc hà nhạt"
   },
   "thu": {
-   "main": "deep wine berry",
-   "main_hex": "#820248",
-   "sec": "light ginkgo yellow",
-   "sec_hex": "#E1E683"
+   "main": "jewel-deep cool maple red",
+   "main_hex": "#941903",
+   "sec": "smoke lilac",
+   "sec_hex": "#EADEFF",
+   "main_vi": "đỏ lá phong thẫm",
+   "sec_vi": "tím khói nhạt"
   },
   "dong": {
    "main": "deep teal",
@@ -1845,29 +2350,37 @@
      "chính xỉn (màu già) → cùng màu, tươi hơn"
     ]
    }
-  }
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: xanh sương, bạc hà nhạt, tím khói nhạt"
  },
  "s21": {
   "root_season": "dong",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
-   "main": "deep spring green",
-   "main_hex": "#3C7227",
-   "sec": "light spring sky blue",
-   "sec_hex": "#84C5EB",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "jewel-deep clear rose pink",
+   "main_hex": "#8C1C49",
+   "sec": "mint mist",
+   "sec_hex": "#CAEFDD",
+   "main_vi": "hồng thẫm",
+   "sec_vi": "bạc hà nhạt"
   },
   "ha": {
-   "main": "deep orange",
-   "main_hex": "#EF7036",
-   "sec": "pale peach",
-   "sec_hex": "#FCD0B4"
+   "main": "soft muted warm coral orange",
+   "main_hex": "#D9755D",
+   "sec": "mist blue",
+   "sec_hex": "#E3F3FF",
+   "main_vi": "cam san hô dịu",
+   "sec_vi": "xanh sương",
+   "band_borrowed": "Sắc sảo"
   },
   "thu": {
-   "main": "deep maple red",
-   "main_hex": "#A3092A",
-   "sec": "light plum",
-   "sec_hex": "#C871A9"
+   "main": "deep muted moss green",
+   "main_hex": "#4C7731",
+   "sec": "peach cream",
+   "sec_hex": "#FEDEC4",
+   "main_vi": "xanh rêu đậm",
+   "sec_vi": "kem đào"
   },
   "dong": {
    "main": "soft amethyst purple",
@@ -1885,32 +2398,38 @@
     "why": [
      "phụ xám → soft lavender cùng độ sáng (bỏ xám)"
     ]
-   }
-  }
+   },
+   "band_misfit": "phụ không phải vàng nhạt/ngà sáng"
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: bạc hà nhạt, xanh sương, kem đào · ★ gốc lệch tông (phụ không phải vàng nhạt/ngà sáng) — giữ như tranh"
  },
  "s22": {
   "root_season": "dong",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
-   "main": "deep Tết red",
-   "main_hex": "#B1261C",
-   "sec": "pale spring green",
-   "sec_hex": "#B0CF95"
+   "main": "jewel-deep spring leaf green",
+   "main_hex": "#1F600C",
+   "sec": "pastel peach",
+   "sec_hex": "#FFD4B8",
+   "main_vi": "xanh lá xuân thẫm",
+   "sec_vi": "đào pastel"
   },
   "ha": {
-   "main": "deep peach",
-   "main_hex": "#E87132",
-   "sec": "sea turquoise",
-   "sec_hex": "#43C3C3",
-   "main_depth_moved": "t 3.3 -> 2.5",
-   "sec_depth_moved": "t 0.0 -> 1.0",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "rich coral orange",
+   "main_hex": "#D75928",
+   "sec": "soft aqua mist",
+   "sec_hex": "#BCE8EA",
+   "main_vi": "cam san hô đậm vừa",
+   "sec_vi": "xanh ngọc sương"
   },
   "thu": {
-   "main": "deep plum",
-   "main_hex": "#770F53",
-   "sec": "light maple red",
-   "sec_hex": "#F68592"
+   "main": "jewel-deep clear plum",
+   "main_hex": "#7E2570",
+   "sec": "blush",
+   "sec_hex": "#FFD9E3",
+   "main_vi": "tím mận thẫm",
+   "sec_vi": "hồng phấn nhạt"
   },
   "dong": {
    "main": "soft midnight blue",
@@ -1918,30 +2437,36 @@
    "sec": "pearl white",
    "sec_hex": "#E9E7E2",
    "root": true
-  }
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: đào pastel, xanh ngọc sương, hồng phấn nhạt"
  },
  "s23": {
   "root_season": "dong",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
-   "main": "deep coral pink",
-   "main_hex": "#9B4048",
-   "sec": "light wisteria lilac",
-   "sec_hex": "#C5A5EB",
-   "sec_accent": "A31: secondary is the Xuân cool accent wisteria lilac (her warm families are all used)"
+   "main": "soft clear warm young bud green",
+   "main_hex": "#7DA127",
+   "sec": "blush",
+   "sec_hex": "#FFD9E3",
+   "main_vi": "xanh chồi non dịu",
+   "sec_vi": "hồng phấn nhạt"
   },
   "ha": {
-   "main": "deep marigold",
-   "main_hex": "#D97F05",
-   "sec": "pale coral orange",
-   "sec_hex": "#FDAB94",
-   "sec_borrowed": "Hạ: secondary borrowed from coral orange (main stays orange/yellow)"
+   "main": "rich coral orange",
+   "main_hex": "#D75928",
+   "sec": "peach cream",
+   "sec_hex": "#FEDEC4",
+   "main_vi": "cam san hô đậm vừa",
+   "sec_vi": "kem đào"
   },
   "thu": {
-   "main": "deep plum",
-   "main_hex": "#6F1765",
-   "sec": "light ginkgo yellow",
-   "sec_hex": "#EAE178"
+   "main": "jewel-deep wine berry",
+   "main_hex": "#85284D",
+   "sec": "mist blue",
+   "sec_hex": "#CCE9FF",
+   "main_vi": "đỏ rượu thẫm",
+   "sec_vi": "xanh sương"
   },
   "dong": {
    "main": "soft pine green",
@@ -1959,27 +2484,30 @@
     "why": [
      "phụ xám → soft jade cùng độ sáng (bỏ xám)"
     ]
-   }
-  }
+   },
+   "band_misfit": "phụ không phải vàng nhạt/ngà sáng"
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: hồng phấn nhạt, kem đào, xanh sương · ★ gốc lệch tông (phụ không phải vàng nhạt/ngà sáng) — giữ như tranh"
  },
  "s24": {
   "root_season": "thu",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
-   "main": "deep Tết red",
-   "main_hex": "#AC3106",
-   "sec": "pale wisteria lilac",
-   "sec_hex": "#C3BAFA",
-   "sec_accent": "A31: secondary is the Xuân cool accent wisteria lilac (her warm families are all used)"
+   "main": "jewel-deep cool Tết red",
+   "main_hex": "#94180D",
+   "sec": "mist blue",
+   "sec_hex": "#CCE9FF",
+   "main_vi": "đỏ Tết thẫm",
+   "sec_vi": "xanh sương"
   },
   "ha": {
-   "main": "deep peach",
-   "main_hex": "#E87132",
-   "sec": "deep sea turquoise",
-   "sec_hex": "#0E999C",
-   "main_depth_moved": "t 3.0 -> 2.5",
-   "sec_depth_moved": "t 0.0 -> 2.0",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "soft apricot",
+   "main_hex": "#D27906",
+   "sec": "pastel mint",
+   "sec_hex": "#ACF0CB",
+   "main_vi": "cam mơ dịu",
+   "sec_vi": "bạc hà pastel"
   },
   "thu": {
    "main": "deep berry",
@@ -2001,33 +2529,45 @@
    }
   },
   "dong": {
-   "main": "deep indigo",
-   "main_hex": "#4760A9",
-   "sec": "pale jade",
-   "sec_hex": "#A7DBC5"
-  }
+   "main": "deep clear midnight violet",
+   "main_hex": "#5B56B8",
+   "sec": "smoke lilac",
+   "sec_hex": "#EADEFF",
+   "main_vi": "tím than đậm",
+   "sec_vi": "tím khói nhạt"
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: xanh sương, bạc hà pastel, tím khói nhạt"
  },
  "s25": {
   "root_season": "dong",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
-   "main": "deep spring green",
-   "main_hex": "#546D03",
-   "sec": "light peony",
-   "sec_hex": "#F3A3B5"
+   "main": "jewel-deep clear peony pink",
+   "main_hex": "#871F5B",
+   "sec": "blush",
+   "sec_hex": "#FFD9E3",
+   "main_vi": "hồng mẫu đơn thẫm",
+   "sec_vi": "hồng phấn nhạt"
   },
   "ha": {
-   "main": "deep peach",
-   "main_hex": "#E87920",
-   "sec": "pale sea turquoise",
-   "sec_hex": "#95E6DE",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "soft muted warm coral orange",
+   "main_hex": "#D9755D",
+   "sec": "mint mist",
+   "sec_hex": "#D5FAE9",
+   "main_vi": "cam san hô dịu",
+   "sec_vi": "bạc hà nhạt",
+   "band_borrowed": "Sắc sảo",
+   "A31": "CANNOT FIT: #D9755D same family red-coral as #941617; #D5FAE9 same family n:mint as #CAEFDD"
   },
   "thu": {
-   "main": "deep plum",
-   "main_hex": "#6F1765",
-   "sec": "light moss green",
-   "sec_hex": "#9DC879"
+   "main": "jewel-deep maple red",
+   "main_hex": "#941617",
+   "sec": "mint mist",
+   "sec_hex": "#CAEFDD",
+   "main_vi": "đỏ lá phong thẫm",
+   "sec_vi": "bạc hà nhạt",
+   "A31": "CANNOT FIT: #941617 same family red-coral as #D75928"
   },
   "dong": {
    "main": "soft cobalt blue",
@@ -2046,30 +2586,37 @@
      "phụ xám → pale blue cùng độ sáng (bỏ xám)"
     ]
    }
-  }
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: hồng phấn nhạt, bạc hà nhạt, bạc hà nhạt"
  },
  "s26": {
   "root_season": "dong",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main": "deep spring green",
-   "main_hex": "#467C31",
-   "sec": "light wisteria lilac",
-   "sec_hex": "#CBAEEF",
-   "sec_accent": "A31: secondary is the Xuân cool accent wisteria lilac (her warm families are all used)"
+   "main": "soft clear spring leaf green",
+   "main_hex": "#7BB76E",
+   "sec": "smoke lilac",
+   "sec_hex": "#EADEFF",
+   "main_vi": "xanh lá xuân dịu",
+   "sec_vi": "tím khói nhạt"
   },
   "ha": {
-   "main": "deep peach",
-   "main_hex": "#DC9C68",
-   "sec": "pale coral red",
-   "sec_hex": "#FFAFB4",
-   "sec_borrowed": "Hạ: secondary borrowed from coral red (main stays orange/yellow)"
+   "main": "light clear peach orange",
+   "main_hex": "#F9A275",
+   "sec": "aqua mist",
+   "sec_hex": "#C3EEF0",
+   "main_vi": "cam đào sáng",
+   "sec_vi": "xanh ngọc sương"
   },
   "thu": {
-   "main": "deep maple red",
-   "main_hex": "#B41419",
-   "sec": "light fresh olive green",
-   "sec_hex": "#B1CF79"
+   "main": "soft clear plum",
+   "main_hex": "#D387C2",
+   "sec": "mint mist",
+   "sec_hex": "#CAEFDD",
+   "main_vi": "tím mận dịu",
+   "sec_vi": "bạc hà nhạt",
+   "A31": "CANNOT FIT: #CAEFDD ΔE 8.1 to #C3EEF0"
   },
   "dong": {
    "main": "soft blue",
@@ -2088,30 +2635,38 @@
      "chính xám → soft blue cùng độ sáng (bỏ xám)",
      "chính xỉn (màu già) → cùng màu, tươi hơn"
     ]
-   }
-  }
+   },
+   "band_misfit": "chính đậm (L 0.59) — Lạnh lùng tầm trung → sáng; trắng xám không tông"
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: tím khói nhạt, xanh ngọc sương, bạc hà nhạt · ★ gốc lệch tông (chính đậm (L 0.59) — Lạnh lùng tầm trung → sáng; trắng xám không tông) — giữ như tranh"
  },
  "s27": {
   "root_season": "dong",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main": "spring green",
-   "main_hex": "#9EB76B",
-   "sec": "deep raspberry",
-   "sec_hex": "#A63050"
+   "main": "soft clear rose pink",
+   "main_hex": "#E2839F",
+   "sec": "lemon cream",
+   "sec_hex": "#E5E9BF",
+   "main_vi": "hồng dịu",
+   "sec_vi": "kem chanh"
   },
   "ha": {
-   "main": "light peach",
-   "main_hex": "#FEC3A7",
-   "sec": "deep sea turquoise",
-   "sec_hex": "#008588",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "light muted apricot",
+   "main_hex": "#F4993C",
+   "sec": "aqua mist",
+   "sec_hex": "#C3EEF0",
+   "main_vi": "cam mơ sáng",
+   "sec_vi": "xanh ngọc sương"
   },
   "thu": {
-   "main": "plum",
-   "main_hex": "#BC66AA",
-   "sec": "deep moss green",
-   "sec_hex": "#396C02"
+   "main": "soft clear cool moss green",
+   "main_hex": "#7BB76E",
+   "sec": "peach cream",
+   "sec_hex": "#FEDEC4",
+   "main_vi": "xanh rêu dịu",
+   "sec_vi": "kem đào"
   },
   "dong": {
    "main": "soft lavender",
@@ -2130,30 +2685,36 @@
      "chính xỉn (màu già) → cùng màu, tươi hơn"
     ]
    }
-  }
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: kem chanh, xanh ngọc sương, kem đào"
  },
  "s28": {
   "root_season": "dong",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main": "pale peony",
-   "main_hex": "#EFB4DF",
-   "sec": "deep wisteria lilac",
-   "sec_hex": "#814690",
-   "sec_accent": "A31: secondary is the Xuân cool accent wisteria lilac (her warm families are all used)"
+   "main": "soft warm young bud green",
+   "main_hex": "#95B162",
+   "sec": "blush",
+   "sec_hex": "#FFD9E3",
+   "main_vi": "xanh chồi non dịu",
+   "sec_vi": "hồng phấn nhạt"
   },
   "ha": {
-   "main": "pale lemon yellow",
-   "main_hex": "#E5E29B",
-   "sec": "deep coral red",
-   "sec_hex": "#B12620",
-   "sec_borrowed": "Hạ: secondary borrowed from coral red (main stays orange/yellow)"
+   "main": "light clear warm apricot",
+   "main_hex": "#FDA259",
+   "sec": "bright ivory white",
+   "sec_hex": "#EFEBE1",
+   "main_vi": "cam mơ sáng",
+   "sec_vi": "trắng ngà"
   },
   "thu": {
-   "main": "light maple red",
-   "main_hex": "#F78687",
-   "sec": "deep moss green",
-   "sec_hex": "#246E17"
+   "main": "soft clear autumn rose",
+   "main_hex": "#E48393",
+   "sec": "pastel mint",
+   "sec_hex": "#ACF0CB",
+   "main_vi": "hồng thu dịu",
+   "sec_vi": "bạc hà pastel"
   },
   "dong": {
    "main": "pale sky blue",
@@ -2172,30 +2733,36 @@
      "chính xám → pale sky blue cùng độ sáng (bỏ xám)"
     ]
    }
-  }
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: hồng phấn nhạt, trắng ngà, bạc hà pastel"
  },
  "s29": {
   "root_season": "dong",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main": "light Tết red",
-   "main_hex": "#FD918F",
-   "sec": "deep spring sky blue",
-   "sec_hex": "#026D9B",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "soft clear cool spring leaf green",
+   "main_hex": "#69AF6C",
+   "sec": "mist blue",
+   "sec_hex": "#CCE9FF",
+   "main_vi": "xanh lá xuân dịu",
+   "sec_vi": "xanh sương"
   },
   "ha": {
-   "main": "pale apricot",
-   "main_hex": "#FFD1AE",
-   "sec": "deep coral orange",
-   "sec_hex": "#AC300D",
-   "sec_borrowed": "Hạ: secondary borrowed from coral orange (main stays orange/yellow)"
+   "main": "light clear warm peach orange",
+   "main_hex": "#FF9E76",
+   "sec": "bright peach cream",
+   "sec_hex": "#FFE6D3",
+   "main_vi": "cam đào sáng",
+   "sec_vi": "kem đào"
   },
   "thu": {
-   "main": "light plum",
-   "main_hex": "#CD85BD",
-   "sec": "deep fresh olive green",
-   "sec_hex": "#5A7B00"
+   "main": "soft clear plum",
+   "main_hex": "#D387C2",
+   "sec": "smoke lilac",
+   "sec_hex": "#EADEFF",
+   "main_vi": "tím mận dịu",
+   "sec_vi": "tím khói nhạt"
   },
   "dong": {
    "main": "soft pale mint",
@@ -2214,30 +2781,37 @@
      "phụ xỉn (màu già) → cùng màu, tươi hơn"
     ]
    }
-  }
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: xanh sương, kem đào, tím khói nhạt"
  },
  "s30": {
   "root_season": "dong",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main": "deep raspberry",
-   "main_hex": "#B9559A",
-   "sec": "light wisteria lilac",
-   "sec_hex": "#D3A2E1",
-   "sec_accent": "A31: secondary is the Xuân cool accent wisteria lilac (her warm families are all used)"
+   "main": "soft muted cool rose pink",
+   "main_hex": "#D1909C",
+   "sec": "smoke lilac",
+   "sec_hex": "#EADEFF",
+   "main_vi": "hồng dịu",
+   "sec_vi": "tím khói nhạt"
   },
   "ha": {
-   "main": "rich peach",
-   "main_hex": "#F2A597",
-   "sec": "pale spring green",
-   "sec_hex": "#A9DDB5",
-   "sec_borrowed": "Hạ: secondary borrowed from spring green (main stays orange/yellow)"
+   "main": "light clear peach orange",
+   "main_hex": "#F9A275",
+   "sec": "lemon cream",
+   "sec_hex": "#E5E9BF",
+   "main_vi": "cam đào sáng",
+   "sec_vi": "kem chanh"
   },
   "thu": {
-   "main": "deep pumpkin",
-   "main_hex": "#E46F17",
-   "sec": "light ginkgo yellow",
-   "sec_hex": "#EBE179"
+   "main": "soft clear cool moss green",
+   "main_hex": "#7BB76E",
+   "sec": "smoke lilac",
+   "sec_hex": "#EADEFF",
+   "main_vi": "xanh rêu dịu",
+   "sec_vi": "tím khói nhạt",
+   "A31": "CANNOT FIT: #EADEFF same family n:smoke as #EADEFF"
   },
   "dong": {
    "main": "soft blue",
@@ -2257,30 +2831,36 @@
      "chính xỉn (màu già) → cùng màu, tươi hơn"
     ]
    }
-  }
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: tím khói nhạt, kem chanh, tím khói nhạt"
  },
  "s31": {
   "root_season": "dong",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main": "light peony",
-   "main_hex": "#EAA4CD",
-   "sec": "deep spring sky blue",
-   "sec_hex": "#1E6A9F",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "soft clear peony pink",
+   "main_hex": "#DD84AF",
+   "sec": "aqua mist",
+   "sec_hex": "#C3EEF0",
+   "main_vi": "hồng mẫu đơn dịu",
+   "sec_vi": "xanh ngọc sương"
   },
   "ha": {
-   "main": "pale peach",
-   "main_hex": "#FED3B8",
-   "sec": "deep coral red",
-   "sec_hex": "#B02333",
-   "sec_borrowed": "Hạ: secondary borrowed from coral red (main stays orange/yellow)"
+   "main": "light clear warm peach orange",
+   "main_hex": "#FBA07B",
+   "sec": "ivory white",
+   "sec_hex": "#E8E4DA",
+   "main_vi": "cam đào sáng",
+   "sec_vi": "trắng ngà"
   },
   "thu": {
-   "main": "light maple red",
-   "main_hex": "#F7877B",
-   "sec": "deep fresh olive green",
-   "sec_hex": "#5A7B00"
+   "main": "soft moss green",
+   "main_hex": "#86B46D",
+   "sec": "blush",
+   "sec_hex": "#FFD9E3",
+   "main_vi": "xanh rêu dịu",
+   "sec_vi": "hồng phấn nhạt"
   },
   "dong": {
    "main": "pale blue",
@@ -2299,30 +2879,36 @@
      "chính xám → pale blue cùng độ sáng (bỏ xám)"
     ]
    }
-  }
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: xanh ngọc sương, trắng ngà, hồng phấn nhạt"
  },
  "s32": {
   "root_season": "dong",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main": "deep Tết red",
-   "main_hex": "#D14D27",
-   "sec": "pale peony",
-   "sec_hex": "#E8A9D8"
+   "main": "soft clear spring leaf green",
+   "main_hex": "#7BB76E",
+   "sec": "soft ivory white",
+   "sec_hex": "#E2DED4",
+   "main_vi": "xanh lá xuân dịu",
+   "sec_vi": "trắng ngà"
   },
   "ha": {
-   "main": "apricot",
-   "main_hex": "#FCB17E",
-   "sec": "pale spring green",
-   "sec_hex": "#B6DAA9",
-   "main_depth_moved": "t 1.7 -> 1.0",
-   "sec_borrowed": "Hạ: secondary borrowed from spring green (main stays orange/yellow)"
+   "main": "light muted apricot",
+   "main_hex": "#F4993C",
+   "sec": "mint mist",
+   "sec_hex": "#CAEFDD",
+   "main_vi": "cam mơ sáng",
+   "sec_vi": "bạc hà nhạt"
   },
   "thu": {
-   "main": "deep fresh olive green",
-   "main_hex": "#628600",
-   "sec": "light wine berry",
-   "sec_hex": "#D55F86"
+   "main": "soft clear plum",
+   "main_hex": "#D387C2",
+   "sec": "blush",
+   "sec_hex": "#FFD9E3",
+   "main_vi": "tím mận dịu",
+   "sec_vi": "hồng phấn nhạt"
   },
   "dong": {
    "main": "soft blue",
@@ -2342,11 +2928,13 @@
      "chính xỉn (màu già) → cùng màu, tươi hơn"
     ]
    }
-  }
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: trắng ngà, bạc hà nhạt, hồng phấn nhạt"
  },
  "s33": {
   "root_season": "xuan",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
    "main": "soft peony pink",
    "main_hex": "#D98CA6",
@@ -2363,42 +2951,54 @@
     "why": [
      "phụ đỏ nâu / rượu (màu già) → đỏ quả mọng"
     ]
-   }
+   },
+   "band_misfit": "chính không rực (C 0.10)"
   },
   "ha": {
-   "main": "peach",
-   "main_hex": "#F6B396",
-   "sec": "deep tangerine",
-   "sec_hex": "#DC7D0A"
+   "main": "soft clear peach orange",
+   "main_hex": "#EA6A08",
+   "sec": "pastel lilac",
+   "sec_hex": "#E3D6FE",
+   "main_vi": "cam đào dịu",
+   "sec_vi": "tím pastel"
   },
   "thu": {
-   "main": "rich plum",
-   "main_hex": "#9851A8",
-   "sec": "deep fresh olive green",
-   "sec_hex": "#358121"
+   "main": "rich maple red",
+   "main_hex": "#BA3E38",
+   "sec": "peach cream",
+   "sec_hex": "#F8D7BE",
+   "main_vi": "đỏ lá phong đậm vừa",
+   "sec_vi": "kem đào"
   },
   "dong": {
-   "main": "light violet",
-   "main_hex": "#BDAFF6",
-   "sec": "deep teal",
-   "sec_hex": "#076F76"
-  }
+   "main": "rich lilac",
+   "main_hex": "#AA64C7",
+   "sec": "aqua mist",
+   "sec_hex": "#BCE8EA",
+   "main_vi": "tím hoa cà đậm vừa",
+   "sec_vi": "xanh ngọc sương"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: tím pastel, kem đào, xanh ngọc sương · ★ gốc lệch tông (chính không rực (C 0.10)) — giữ như tranh"
  },
  "s34": {
   "root_season": "thu",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
-   "main": "rich spring green",
-   "main_hex": "#6E9646",
-   "sec": "pale raspberry",
-   "sec_hex": "#FCA5BE"
+   "main": "deep clear warm peony pink",
+   "main_hex": "#B23586",
+   "sec": "orchid mist",
+   "sec_hex": "#F4D2EB",
+   "main_vi": "hồng mẫu đơn đậm",
+   "sec_vi": "hồng tím phấn"
   },
   "ha": {
-   "main": "rich mango",
-   "main_hex": "#FBA158",
-   "sec": "pale sea turquoise",
-   "sec_hex": "#94E3F1",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "soft clear cool peach orange",
+   "main_hex": "#FE8005",
+   "sec": "lemon cream",
+   "sec_hex": "#DEE2B9",
+   "main_vi": "cam đào dịu",
+   "sec_vi": "kem chanh"
   },
   "thu": {
    "main": "soft coral red",
@@ -2419,15 +3019,19 @@
    }
   },
   "dong": {
-   "main": "light emerald",
-   "main_hex": "#6BC9A3",
-   "sec": "pale indigo",
-   "sec_hex": "#BFCBFF"
-  }
+   "main": "rich midnight violet",
+   "main_hex": "#7976E3",
+   "sec": "aqua mist",
+   "sec_hex": "#BCE8EA",
+   "main_vi": "tím than đậm vừa",
+   "sec_vi": "xanh ngọc sương"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: hồng tím phấn, kem chanh, xanh ngọc sương"
  },
  "s35": {
   "root_season": "xuan",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
    "main": "soft fuchsia rose",
    "main_hex": "#C05995",
@@ -2436,28 +3040,35 @@
    "root": true
   },
   "ha": {
-   "main": "deep tangerine",
-   "main_hex": "#F99323",
-   "sec": "pale leaf green",
-   "sec_hex": "#B6DBA3",
-   "sec_borrowed": "Hạ: secondary borrowed from leaf green (main stays orange/yellow)"
+   "main": "soft clear peach orange",
+   "main_hex": "#DC6303",
+   "sec": "pastel mint",
+   "sec_hex": "#ACF0CB",
+   "main_vi": "cam đào dịu",
+   "sec_vi": "bạc hà pastel"
   },
   "thu": {
-   "main": "deep fresh olive green",
-   "main_hex": "#688D03",
-   "sec": "light maple red",
-   "sec_hex": "#F7877B"
+   "main": "rich maple red",
+   "main_hex": "#BA3E38",
+   "sec": "ivory",
+   "sec_hex": "#E9DDC4",
+   "main_vi": "đỏ lá phong đậm vừa",
+   "sec_vi": "ngà"
   },
   "dong": {
-   "main": "violet",
-   "main_hex": "#9B89DD",
-   "sec": "pale teal",
-   "sec_hex": "#A0DADE"
-  }
+   "main": "rich midnight violet",
+   "main_hex": "#7976E3",
+   "sec": "mist blue",
+   "sec_hex": "#C4E3F9",
+   "main_vi": "tím than đậm vừa",
+   "sec_vi": "xanh sương"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: bạc hà pastel, ngà, xanh sương"
  },
  "s36": {
   "root_season": "xuan",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
    "main": "soft lychee red",
    "main_hex": "#C6535C",
@@ -2477,63 +3088,80 @@
    }
   },
   "ha": {
-   "main": "deep orange",
-   "main_hex": "#FD8753",
-   "sec": "pale sea turquoise",
-   "sec_hex": "#86DEE5",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "soft cool peach orange",
+   "main_hex": "#D46B09",
+   "sec": "blush",
+   "sec_hex": "#F9D2DD",
+   "main_vi": "cam đào dịu",
+   "sec_vi": "hồng phấn nhạt"
   },
   "thu": {
-   "main": "deep fresh olive green",
-   "main_hex": "#648704",
-   "sec": "light plum",
-   "sec_hex": "#C678B5"
+   "main": "rich muted plum",
+   "main_hex": "#9E4B8E",
+   "sec": "pastel mint",
+   "sec_hex": "#ACF0CB",
+   "main_vi": "tím mận đậm vừa",
+   "sec_vi": "bạc hà pastel"
   },
   "dong": {
-   "main": "rich jade",
-   "main_hex": "#5BA57F",
-   "sec": "pale violet",
-   "sec_hex": "#D6C2FD"
-  }
+   "main": "rich muted cerulean",
+   "main_hex": "#288DD4",
+   "sec": "mist blue",
+   "sec_hex": "#C4E3F9",
+   "main_vi": "xanh da trời đậm vừa",
+   "sec_vi": "xanh sương"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: hồng phấn nhạt, bạc hà pastel, xanh sương"
  },
  "s37": {
   "root_season": "xuan",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
    "main": "soft orchid pink",
    "main_hex": "#C982BE",
    "sec": "deep violet",
    "sec_hex": "#593A78",
-   "root": true
+   "root": true,
+   "band_misfit": "chính không rực (C 0.12)"
   },
   "ha": {
-   "main": "peach",
-   "main_hex": "#F6AA9C",
-   "sec": "deep sea turquoise",
-   "sec_hex": "#0A8394",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "rich cool coral orange",
+   "main_hex": "#D55C13",
+   "sec": "coral pink",
+   "sec_hex": "#F6A78F",
+   "main_vi": "cam san hô đậm vừa",
+   "sec_vi": "cam hồng"
   },
   "thu": {
-   "main": "rich wine berry",
-   "main_hex": "#B73463",
-   "sec": "deep moss green",
-   "sec_hex": "#396C02"
+   "main": "rich muted wine berry",
+   "main_hex": "#AD456B",
+   "sec": "ivory",
+   "sec_hex": "#E9DDC4",
+   "main_vi": "đỏ rượu đậm vừa",
+   "sec_vi": "ngà"
   },
   "dong": {
-   "main": "light emerald",
-   "main_hex": "#61C9AB",
-   "sec": "deep sapphire",
-   "sec_hex": "#1F63AB"
-  }
+   "main": "rich midnight violet",
+   "main_hex": "#7976E3",
+   "sec": "orchid mist",
+   "sec_hex": "#F4D2EB",
+   "main_vi": "tím than đậm vừa",
+   "sec_vi": "hồng tím phấn"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: cam hồng, ngà, hồng tím phấn · ★ gốc lệch tông (chính không rực (C 0.12)) — giữ như tranh"
  },
  "s38": {
   "root_season": "ha",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
-   "main": "raspberry",
-   "main_hex": "#DD77AE",
-   "sec": "deep spring green",
-   "sec_hex": "#2C7432"
+   "main": "deep muted spring leaf green",
+   "main_hex": "#3C812B",
+   "sec": "ivory",
+   "sec_hex": "#E9DDC4",
+   "main_vi": "xanh lá xuân đậm",
+   "sec_vi": "ngà"
   },
   "ha": {
    "main": "soft apricot rose",
@@ -2551,29 +3179,38 @@
     "why": [
      "phụ đỏ nâu / rượu (màu già) → đỏ quả mọng"
     ]
-   }
+   },
+   "band_misfit": "chính không rực (C 0.07)"
   },
   "thu": {
-   "main": "moss green",
-   "main_hex": "#84A73B",
-   "sec": "deep persimmon",
-   "sec_hex": "#CB5905"
+   "main": "rich clear cool persimmon",
+   "main_hex": "#C14F00",
+   "sec": "orchid mist",
+   "sec_hex": "#F4D2EB",
+   "main_vi": "cam quả hồng đậm vừa",
+   "sec_vi": "hồng tím phấn"
   },
   "dong": {
-   "main": "pale teal",
-   "main_hex": "#93D0D5",
-   "sec": "deep violet",
-   "sec_hex": "#6852A7"
-  }
+   "main": "rich clear sapphire",
+   "main_hex": "#4680F1",
+   "sec": "aqua mist",
+   "sec_hex": "#BCE8EA",
+   "main_vi": "lam ngọc bích đậm vừa",
+   "sec_vi": "xanh ngọc sương"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: ngà, hồng tím phấn, xanh ngọc sương · ★ gốc lệch tông (chính không rực (C 0.07)) — giữ như tranh"
  },
  "s39": {
   "root_season": "ha",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
-   "main": "rich spring green",
-   "main_hex": "#819B47",
-   "sec": "deep raspberry",
-   "sec_hex": "#A63050"
+   "main": "deep clear peony pink",
+   "main_hex": "#9E246B",
+   "sec": "aqua mist",
+   "sec_hex": "#CEFAFC",
+   "main_vi": "hồng mẫu đơn đậm",
+   "sec_vi": "xanh ngọc sương"
   },
   "ha": {
    "main": "soft honey",
@@ -2592,42 +3229,54 @@
      "chính tên/sắc già → tươi hơn một chút",
      "phụ xỉn (màu già) → cùng màu, tươi hơn"
     ]
-   }
+   },
+   "band_misfit": "chính không đậm (L 0.71); phụ không sáng — thiếu tương phản"
   },
   "thu": {
-   "main": "rich persimmon",
-   "main_hex": "#E4622C",
-   "sec": "deep moss green",
-   "sec_hex": "#396C02"
+   "main": "deep maple red",
+   "main_hex": "#A52A26",
+   "sec": "bright blush",
+   "sec_hex": "#FFF1F5",
+   "main_vi": "đỏ lá phong đậm",
+   "sec_vi": "hồng phấn nhạt"
   },
   "dong": {
-   "main": "light emerald",
-   "main_hex": "#6FCBA5",
-   "sec": "rich sapphire",
-   "sec_hex": "#5685D2"
-  }
+   "main": "rich muted violet",
+   "main_hex": "#8160B5",
+   "sec": "pale gold",
+   "sec_hex": "#FBF1C5",
+   "main_vi": "tím đậm vừa",
+   "sec_vi": "vàng nhạt"
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: xanh ngọc sương, hồng phấn nhạt, vàng nhạt · ★ gốc lệch tông (chính không đậm (L 0.71); phụ không sáng — thiếu tương phản) — giữ như tranh"
  },
  "s40": {
   "root_season": "dong",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
-   "main": "deep Tết red",
-   "main_hex": "#BE323B",
-   "sec": "light wisteria lilac",
-   "sec_hex": "#CBAEEF",
-   "sec_accent": "A31: secondary is the Xuân cool accent wisteria lilac (her warm families are all used)"
+   "main": "deep clear peony pink",
+   "main_hex": "#9E246B",
+   "sec": "pale gold",
+   "sec_hex": "#FBF1C5",
+   "main_vi": "hồng mẫu đơn đậm",
+   "sec_vi": "vàng nhạt"
   },
   "ha": {
-   "main": "rich orange",
-   "main_hex": "#FF9148",
-   "sec": "pale lemon yellow",
-   "sec_hex": "#E5E29B"
+   "main": "rich coral orange",
+   "main_hex": "#D75928",
+   "sec": "bright smoke lilac",
+   "sec_hex": "#F7F3FF",
+   "main_vi": "cam san hô đậm vừa",
+   "sec_vi": "tím khói nhạt"
   },
   "thu": {
-   "main": "deep moss green",
-   "main_hex": "#437710",
-   "sec": "light wine berry",
-   "sec_hex": "#E17D9C"
+   "main": "deep clear moss green",
+   "main_hex": "#3E7B03",
+   "sec": "mint mist",
+   "sec_hex": "#D5FAE9",
+   "main_vi": "xanh rêu đậm",
+   "sec_vi": "bạc hà nhạt"
   },
   "dong": {
    "main": "soft cerulean blue",
@@ -2646,23 +3295,28 @@
      "phụ gần trùng s12 → xoay sắc -12°, giữ độ đậm"
     ]
    }
-  }
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: vàng nhạt, tím khói nhạt, bạc hà nhạt"
  },
  "s41": {
   "root_season": "thu",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
-   "main": "deep Tết red",
-   "main_hex": "#C2363E",
-   "sec": "light spring green",
-   "sec_hex": "#A1CB92"
+   "main": "deep vermilion",
+   "main_hex": "#A42D15",
+   "sec": "pale gold",
+   "sec_hex": "#FBF1C5",
+   "main_vi": "đỏ son đậm",
+   "sec_vi": "vàng nhạt"
   },
   "ha": {
-   "main": "deep honey",
-   "main_hex": "#E98C0F",
-   "sec": "pale sea turquoise",
-   "sec_hex": "#7FD9E8",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "soft clear tangerine",
+   "main_hex": "#DF7405",
+   "sec": "mist blue",
+   "sec_hex": "#E3F3FF",
+   "main_vi": "cam quýt dịu",
+   "sec_vi": "xanh sương"
   },
   "thu": {
    "main": "soft leaf green",
@@ -2681,18 +3335,23 @@
      "chính tên/sắc già → tươi hơn một chút",
      "phụ be/champagne (màu già) → hồng đào nhạt tươi"
     ]
-   }
+   },
+   "band_misfit": "chính không đậm (L 0.60)"
   },
   "dong": {
-   "main": "rich emerald",
-   "main_hex": "#06A790",
-   "sec": "pale orchid",
-   "sec_hex": "#D4BCEF"
-  }
+   "main": "rich muted sapphire",
+   "main_hex": "#4972C0",
+   "sec": "mint mist",
+   "sec_hex": "#D5FAE9",
+   "main_vi": "lam ngọc bích đậm vừa",
+   "sec_vi": "bạc hà nhạt"
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: vàng nhạt, xanh sương, bạc hà nhạt · ★ gốc lệch tông (chính không đậm (L 0.60)) — giữ như tranh"
  },
  "s42": {
   "root_season": "xuan",
   "group": "Sắc sảo",
+  "band": "chính ĐẬM, tương phản mạnh với phụ rất sáng (đỏ thắm + trắng ngà)",
   "xuan": {
    "main": "soft raspberry magenta",
    "main_hex": "#A63F6A",
@@ -2701,74 +3360,90 @@
    "root": true
   },
   "ha": {
-   "main": "deep peach",
-   "main_hex": "#E87132",
-   "sec": "spring green",
-   "sec_hex": "#82B570",
-   "sec_depth_moved": "t 0.0 -> 1.0",
-   "sec_borrowed": "Hạ: secondary borrowed from spring green (main stays orange/yellow)"
+   "main": "soft muted warm coral orange",
+   "main_hex": "#D9755D",
+   "sec": "bright blush",
+   "sec_hex": "#FFF1F5",
+   "main_vi": "cam san hô dịu",
+   "sec_vi": "hồng phấn nhạt",
+   "A31": "CANNOT FIT: #FFF1F5 ΔE 2.9 to #FFEAEF; #FFF1F5 ΔE 2.9 to #FFEAEF"
   },
   "thu": {
-   "main": "deep maple red",
-   "main_hex": "#A50310",
-   "sec": "light ginkgo yellow",
-   "sec_hex": "#EBE27F"
+   "main": "deep clear moss green",
+   "main_hex": "#3E7B03",
+   "sec": "blush",
+   "sec_hex": "#FFEAEF",
+   "main_vi": "xanh rêu đậm",
+   "sec_vi": "hồng phấn nhạt"
   },
   "dong": {
-   "main": "deep orchid",
-   "main_hex": "#8E6CB1",
-   "sec": "pale indigo",
-   "sec_hex": "#CBC7FC"
-  }
+   "main": "rich clear midnight violet",
+   "main_hex": "#6862D4",
+   "sec": "blush",
+   "sec_hex": "#FFEAEF",
+   "main_vi": "tím than đậm vừa",
+   "sec_vi": "hồng phấn nhạt",
+   "A31": "CANNOT FIT: #FFEAEF same family n:blush as #FFEAEF"
+  },
+  "stylist": "đậm + sáng tương phản mạnh — sắc nét, nổi bật; phụ mỗi mùa một màu: hồng phấn nhạt, hồng phấn nhạt, hồng phấn nhạt"
  },
  "s43": {
   "root_season": "dong",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
-   "main": "deep peony",
-   "main_hex": "#963D6C",
-   "sec": "light wisteria lilac",
-   "sec_hex": "#CBAEEF",
-   "sec_accent": "A31: secondary is the Xuân cool accent wisteria lilac (her warm families are all used)"
+   "main": "deep warm Tết red",
+   "main_hex": "#B93D46",
+   "sec": "orchid mist",
+   "sec_hex": "#F4D2EB",
+   "main_vi": "đỏ Tết đậm",
+   "sec_vi": "hồng tím phấn"
   },
   "ha": {
-   "main": "rich peach",
-   "main_hex": "#ECA483",
-   "sec": "pale sea turquoise",
-   "sec_hex": "#93E5E4",
-   "main_depth_moved": "t 2.7 -> 1.5",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "soft clear tangerine",
+   "main_hex": "#DF7405",
+   "sec": "coral pink",
+   "sec_hex": "#F6A78F",
+   "main_vi": "cam quýt dịu",
+   "sec_vi": "cam hồng"
   },
   "thu": {
-   "main": "deep persimmon",
-   "main_hex": "#D64B30",
-   "sec": "light moss green",
-   "sec_hex": "#92CB82"
+   "main": "rich muted plum",
+   "main_hex": "#9E4B8E",
+   "sec": "aqua mist",
+   "sec_hex": "#BCE8EA",
+   "main_vi": "tím mận đậm vừa",
+   "sec_vi": "xanh ngọc sương"
   },
   "dong": {
    "main": "soft sapphire blue",
    "main_hex": "#385A9F",
    "sec": "pale lemon cream",
    "sec_hex": "#EAE5CD",
-   "root": true
-  }
+   "root": true,
+   "band_misfit": "chính không rực (C 0.12); chính không ấm"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: hồng tím phấn, cam hồng, xanh ngọc sương · ★ gốc lệch tông (chính không rực (C 0.12); chính không ấm) — giữ như tranh"
  },
  "s44": {
   "root_season": "thu",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
-   "main": "deep raspberry",
-   "main_hex": "#9D3371",
-   "sec": "spring sky blue",
-   "sec_hex": "#60A4D7",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "rich peony pink",
+   "main_hex": "#AF3E7C",
+   "sec": "pastel aqua",
+   "sec_hex": "#97F0F4",
+   "main_vi": "hồng mẫu đơn đậm vừa",
+   "sec_vi": "ngọc pastel"
   },
   "ha": {
-   "main": "deep peach",
-   "main_hex": "#EA7B23",
-   "sec": "coral red",
-   "sec_hex": "#F97678",
-   "sec_borrowed": "Hạ: secondary borrowed from coral red (main stays orange/yellow)"
+   "main": "soft muted cool tangerine",
+   "main_hex": "#D87A08",
+   "sec": "coral rose",
+   "sec_hex": "#F09DA2",
+   "main_vi": "cam quýt dịu",
+   "sec_vi": "hồng san hô"
   },
   "thu": {
    "main": "soft burnt sienna",
@@ -2776,6 +3451,7 @@
    "sec": "sage green",
    "sec_hex": "#94B594",
    "root": true,
+   "band_misfit": "chính không rực (C 0.11)",
    "root_code": {
     "main": "soft burnt sienna",
     "main_hex": "#D18C74",
@@ -2798,33 +3474,43 @@
    }
   },
   "dong": {
-   "main": "deep teal",
-   "main_hex": "#30908F",
-   "sec": "light violet",
-   "sec_hex": "#C3AAF1"
-  }
+   "main": "rich muted violet",
+   "main_hex": "#9470CD",
+   "sec": "peach cream",
+   "sec_hex": "#F8D7BE",
+   "main_vi": "tím đậm vừa",
+   "sec_vi": "kem đào"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: ngọc pastel, hồng san hô, kem đào · ★ gốc lệch tông (chính không rực (C 0.11)) — giữ như tranh"
  },
  "s45": {
   "root_season": "dong",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
-   "main": "deep spring green",
-   "main_hex": "#546D03",
-   "sec": "pale coral pink",
-   "sec_hex": "#F5AFA1"
+   "main": "deep muted spring leaf green",
+   "main_hex": "#3C812B",
+   "sec": "aqua mist",
+   "sec_hex": "#BCE8EA",
+   "main_vi": "xanh lá xuân đậm",
+   "sec_vi": "xanh ngọc sương"
   },
   "ha": {
-   "main": "deep marigold",
-   "main_hex": "#E87222",
-   "sec": "pale sea turquoise",
-   "sec_hex": "#94E3F1",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "rich clear coral orange",
+   "main_hex": "#DF500C",
+   "sec": "coral rose",
+   "sec_hex": "#F09DA2",
+   "main_vi": "cam san hô đậm vừa",
+   "sec_vi": "hồng san hô"
   },
   "thu": {
-   "main": "deep maple red",
-   "main_hex": "#A20739",
-   "sec": "light moss green",
-   "sec_hex": "#7DC782"
+   "main": "rich maple red",
+   "main_hex": "#BA3E38",
+   "sec": "smoke lilac",
+   "sec_hex": "#E4D6FD",
+   "main_vi": "đỏ lá phong đậm vừa",
+   "sec_vi": "tím khói nhạt",
+   "A31": "CANNOT FIT: #BA3E38 same family red-coral as #DF500C"
   },
   "dong": {
    "main": "deep orchid",
@@ -2842,30 +3528,38 @@
     "why": [
      "chính tên/sắc già → tươi hơn một chút"
     ]
-   }
-  }
+   },
+   "band_misfit": "chính không ấm"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: xanh ngọc sương, hồng san hô, tím khói nhạt · ★ gốc lệch tông (chính không ấm) — giữ như tranh"
  },
  "s46": {
   "root_season": "dong",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main": "peony",
-   "main_hex": "#DE8EBF",
-   "sec": "deep Tết red",
-   "sec_hex": "#B1261C"
+   "main": "soft clear spring leaf green",
+   "main_hex": "#609B53",
+   "sec": "bright smoke lilac",
+   "sec_hex": "#EFE6FF",
+   "main_vi": "xanh lá xuân dịu",
+   "sec_vi": "tím khói nhạt"
   },
   "ha": {
-   "main": "light lemon yellow",
-   "main_hex": "#DCD882",
-   "sec": "deep spring green",
-   "sec_hex": "#3C7227",
-   "sec_borrowed": "Hạ: secondary borrowed from spring green (main stays orange/yellow)"
+   "main": "light clear warm coral orange",
+   "main_hex": "#FF8D70",
+   "sec": "pastel lemon",
+   "sec_hex": "#E5E2A0",
+   "main_vi": "cam san hô sáng",
+   "sec_vi": "chanh pastel"
   },
   "thu": {
-   "main": "amber",
-   "main_hex": "#FE9E44",
-   "sec": "deep wine berry",
-   "sec_hex": "#85003D"
+   "main": "soft clear plum",
+   "main_hex": "#D387C2",
+   "sec": "mist blue",
+   "sec_hex": "#CCE9FF",
+   "main_vi": "tím mận dịu",
+   "sec_vi": "xanh sương"
   },
   "dong": {
    "main": "cool aquamarine",
@@ -2873,29 +3567,36 @@
    "sec": "deep blue-violet",
    "sec_hex": "#5D5894",
    "root": true
-  }
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: tím khói nhạt, chanh pastel, xanh sương"
  },
  "s47": {
   "root_season": "dong",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main": "deep spring green",
-   "main_hex": "#42975E",
-   "sec": "peony",
-   "sec_hex": "#D183BE"
+   "main": "soft muted peony pink",
+   "main_hex": "#C287A2",
+   "sec": "bright ivory white",
+   "sec_hex": "#EFEBE1",
+   "main_vi": "hồng mẫu đơn dịu",
+   "sec_vi": "trắng ngà"
   },
   "ha": {
-   "main": "rich orange",
-   "main_hex": "#FA9D47",
-   "sec": "light coral red",
-   "sec_hex": "#FC8A89",
-   "sec_borrowed": "Hạ: secondary borrowed from coral red (main stays orange/yellow)"
+   "main": "light tangerine",
+   "main_hex": "#EDA97C",
+   "sec": "blush",
+   "sec_hex": "#FFD9E3",
+   "main_vi": "cam quýt sáng",
+   "sec_vi": "hồng phấn nhạt"
   },
   "thu": {
-   "main": "rich plum",
-   "main_hex": "#934BA2",
-   "sec": "light ginkgo yellow",
-   "sec_hex": "#D3E77D"
+   "main": "rich moss green",
+   "main_hex": "#6B9852",
+   "sec": "mist blue",
+   "sec_hex": "#CCE9FF",
+   "main_vi": "xanh rêu đậm vừa",
+   "sec_vi": "xanh sương"
   },
   "dong": {
    "main": "periwinkle",
@@ -2903,11 +3604,13 @@
    "sec": "mint",
    "sec_hex": "#9ACBB7",
    "root": true
-  }
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: trắng ngà, hồng phấn nhạt, xanh sương"
  },
  "s48": {
   "root_season": "xuan",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
    "main": "soft blush pink",
    "main_hex": "#DF9FA8",
@@ -2924,32 +3627,39 @@
     "why": [
      "phụ xỉn (màu già) → cùng màu, tươi hơn"
     ]
-   }
+   },
+   "band_misfit": "chính ấm, không lạnh"
   },
   "ha": {
-   "main": "apricot",
-   "main_hex": "#FCB17E",
-   "sec": "light lemon yellow",
-   "sec_hex": "#DAD67D",
-   "main_depth_moved": "t 0.6 -> 1.0"
+   "main": "soft muted cool coral orange",
+   "main_hex": "#E97C48",
+   "sec": "mist blue",
+   "sec_hex": "#CCE9FF",
+   "main_vi": "cam san hô dịu",
+   "sec_vi": "xanh sương"
   },
   "thu": {
-   "main": "wine berry",
-   "main_hex": "#BD458A",
-   "sec": "moss green",
-   "sec_hex": "#5CB365"
+   "main": "soft moss green",
+   "main_hex": "#86B46D",
+   "sec": "bright lemon cream",
+   "sec_hex": "#EBF0C6",
+   "main_vi": "xanh rêu dịu",
+   "sec_vi": "kem chanh"
   },
   "dong": {
-   "main": "pale violet",
-   "main_hex": "#C2C0FE",
-   "sec": "pale emerald",
-   "sec_hex": "#8FE1CF",
-   "A31": "CANNOT FIT: #8FE1CF same family jade-bluegreen as #70CCC1"
-  }
+   "main": "soft clear violet",
+   "main_hex": "#AD90E1",
+   "sec": "smoke lilac",
+   "sec_hex": "#EADEFF",
+   "main_vi": "tím dịu",
+   "sec_vi": "tím khói nhạt"
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: xanh sương, kem chanh, tím khói nhạt · ★ gốc lệch tông (chính ấm, không lạnh) — giữ như tranh"
  },
  "s49": {
   "root_season": "xuan",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
    "main": "soft rose",
    "main_hex": "#CC7384",
@@ -2967,50 +3677,62 @@
      "chính tên/sắc già → tươi hơn một chút",
      "phụ gần trùng m09 → xoay sắc -12°, giữ độ đậm"
     ]
-   }
+   },
+   "band_misfit": "chính ấm, không lạnh"
   },
   "ha": {
-   "main": "rich peach",
-   "main_hex": "#EAA87F",
-   "sec": "deep leaf green",
-   "sec_hex": "#5F8421",
-   "sec_borrowed": "Hạ: secondary borrowed from leaf green (main stays orange/yellow)"
+   "main": "soft muted coral orange",
+   "main_hex": "#F5835B",
+   "sec": "pastel aqua",
+   "sec_hex": "#97F0F4",
+   "main_vi": "cam san hô dịu",
+   "sec_vi": "ngọc pastel"
   },
   "thu": {
-   "main": "deep plum",
-   "main_hex": "#903984",
-   "sec": "deep persimmon",
-   "sec_hex": "#D44F13"
+   "main": "light clear warm plum",
+   "main_hex": "#EDA4E6",
+   "sec": "lemon cream",
+   "sec_hex": "#E5E9BF",
+   "main_vi": "tím mận sáng",
+   "sec_vi": "kem chanh"
   },
   "dong": {
-   "main": "orchid",
-   "main_hex": "#BD95D4",
-   "sec": "rich ice blue",
-   "sec_hex": "#5A93B6"
-  }
+   "main": "light sapphire",
+   "main_hex": "#9BBEFF",
+   "sec": "peach cream",
+   "sec_hex": "#FEDEC4",
+   "main_vi": "lam ngọc bích sáng",
+   "sec_vi": "kem đào"
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: ngọc pastel, kem chanh, kem đào · ★ gốc lệch tông (chính ấm, không lạnh) — giữ như tranh"
  },
  "s50": {
   "root_season": "dong",
   "group": "Lạnh lùng",
+  "band": "lạnh, trong, tầm trung → sáng, không xám (xanh băng + tím khói nhạt)",
   "xuan": {
-   "main": "light spring green",
-   "main_hex": "#7AC08D",
-   "sec": "deep spring sky blue",
-   "sec_hex": "#00708C",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "soft clear spring leaf green",
+   "main_hex": "#7BB76E",
+   "sec": "mint mist",
+   "sec_hex": "#CAEFDD",
+   "main_vi": "xanh lá xuân dịu",
+   "sec_vi": "bạc hà nhạt"
   },
   "ha": {
-   "main": "pale lemon yellow",
-   "main_hex": "#E0DC8D",
-   "sec": "deep coral orange",
-   "sec_hex": "#C5492A",
-   "sec_borrowed": "Hạ: secondary borrowed from coral orange (main stays orange/yellow)"
+   "main": "light muted peach orange",
+   "main_hex": "#FD9156",
+   "sec": "blush",
+   "sec_hex": "#FFD9E3",
+   "main_vi": "cam đào sáng",
+   "sec_vi": "hồng phấn nhạt"
   },
   "thu": {
-   "main": "light pumpkin",
-   "main_hex": "#FC995B",
-   "sec": "deep plum",
-   "sec_hex": "#741D6A"
+   "main": "soft clear plum",
+   "main_hex": "#DD90CC",
+   "sec": "bright ivory white",
+   "sec_hex": "#EFEBE1",
+   "main_vi": "tím mận dịu",
+   "sec_vi": "trắng ngà"
   },
   "dong": {
    "main": "clear ice blue",
@@ -3018,94 +3740,113 @@
    "sec": "deep raspberry",
    "sec_hex": "#A55D7A",
    "root": true
-  }
+  },
+  "stylist": "màu trong và mát, phụ sương lạnh — thanh, lạnh, không xám; phụ mỗi mùa một màu: bạc hà nhạt, hồng phấn nhạt, trắng ngà"
  },
  "s51": {
   "root_season": "dong",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
-   "main": "light Tết red",
-   "main_hex": "#F98AA1",
-   "sec": "rich spring sky blue",
-   "sec_hex": "#639BD4",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "jewel-deep rose pink",
+   "main_hex": "#85284A",
+   "sec": "bright aqua mist",
+   "sec_hex": "#C9F5F7",
+   "main_vi": "hồng thẫm",
+   "sec_vi": "xanh ngọc sương"
   },
   "ha": {
-   "main": "light peach",
-   "main_hex": "#FDC0A4",
-   "sec": "spring green",
-   "sec_hex": "#75A962",
-   "sec_borrowed": "Hạ: secondary borrowed from spring green (main stays orange/yellow)"
+   "main": "soft clear cool coral orange",
+   "main_hex": "#F06400",
+   "sec": "bright blush",
+   "sec_hex": "#FFF1F5",
+   "main_vi": "cam san hô dịu",
+   "sec_vi": "hồng phấn nhạt",
+   "band_borrowed": "Sắc sảo"
   },
   "thu": {
-   "main": "plum",
-   "main_hex": "#B75DA6",
-   "sec": "rich ginkgo yellow",
-   "sec_hex": "#E6DA5B"
+   "main": "deep muted moss green",
+   "main_hex": "#4C7731",
+   "sec": "lemon cream",
+   "sec_hex": "#E5E9BF",
+   "main_vi": "xanh rêu đậm",
+   "sec_vi": "kem chanh"
   },
   "dong": {
    "main": "cool lilac",
    "main_hex": "#CCB0E5",
    "sec": "soft pine teal",
    "sec_hex": "#62AEA9",
-   "root": true
-  }
+   "root": true,
+   "band_misfit": "chính không đậm quý phái (L 0.80); phụ không phải vàng nhạt/ngà sáng"
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: xanh ngọc sương, hồng phấn nhạt, kem chanh · ★ gốc lệch tông (chính không đậm quý phái (L 0.80); phụ không phải vàng nhạt/ngà sáng) — giữ như tranh"
  },
  "s52": {
   "root_season": "dong",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
-   "main": "spring green",
-   "main_hex": "#9BB466",
-   "sec": "rich spring sky blue",
-   "sec_hex": "#578FCA",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)",
-   "A31": "CANNOT FIT: #9BB466 same family olive-yellowgreen as #9FB76C"
+   "main": "soft clear warm young bud green",
+   "main_hex": "#7DA127",
+   "sec": "pastel mint",
+   "sec_hex": "#ACF0CB",
+   "main_vi": "xanh chồi non dịu",
+   "sec_vi": "bạc hà pastel"
   },
   "ha": {
-   "main": "pale peach",
-   "main_hex": "#FAD3B3",
-   "sec": "spring green",
-   "sec_hex": "#9FB76C",
-   "sec_borrowed": "Hạ: secondary borrowed from spring green (main stays orange/yellow)"
+   "main": "soft clear cool tangerine",
+   "main_hex": "#D47705",
+   "sec": "ivory",
+   "sec_hex": "#EFE3CB",
+   "main_vi": "cam quýt dịu",
+   "sec_vi": "ngà"
   },
   "thu": {
-   "main": "light plum",
-   "main_hex": "#B96DB7",
-   "sec": "rich wine berry",
-   "sec_hex": "#BB3557"
+   "main": "jewel-deep wine berry",
+   "main_hex": "#85284D",
+   "sec": "blush",
+   "sec_hex": "#FFD9E3",
+   "main_vi": "đỏ rượu thẫm",
+   "sec_vi": "hồng phấn nhạt"
   },
   "dong": {
    "main": "sky blue",
    "main_hex": "#98C8D7",
    "sec": "soft coral",
    "sec_hex": "#D38A7B",
-   "root": true
-  }
+   "root": true,
+   "band_misfit": "chính không đậm quý phái (L 0.80); phụ không phải vàng nhạt/ngà sáng"
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: bạc hà pastel, ngà, hồng phấn nhạt · ★ gốc lệch tông (chính không đậm quý phái (L 0.80); phụ không phải vàng nhạt/ngà sáng) — giữ như tranh"
  },
  "s53": {
   "root_season": "dong",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
-   "main": "deep rose",
-   "main_hex": "#BD6172",
-   "sec": "light spring sky blue",
-   "sec_hex": "#78BEE6",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "jewel-deep rose pink",
+   "main_hex": "#85284A",
+   "sec": "lemon cream",
+   "sec_hex": "#E5E9BF",
+   "main_vi": "hồng thẫm",
+   "sec_vi": "kem chanh"
   },
   "ha": {
-   "main": "orange",
-   "main_hex": "#FFA565",
-   "sec": "leaf green",
-   "sec_hex": "#83B567",
-   "sec_depth_moved": "t 0.0 -> 1.0",
-   "sec_borrowed": "Hạ: secondary borrowed from leaf green (main stays orange/yellow)"
+   "main": "soft clear tangerine",
+   "main_hex": "#DB7101",
+   "sec": "peach cream",
+   "sec_hex": "#FEDEC4",
+   "main_vi": "cam quýt dịu",
+   "sec_vi": "kem đào"
   },
   "thu": {
-   "main": "deep persimmon",
-   "main_hex": "#DA561D",
-   "sec": "light ginkgo yellow",
-   "sec_hex": "#EAE073"
+   "main": "jewel-deep cool maple red",
+   "main_hex": "#941903",
+   "sec": "blush",
+   "sec_hex": "#FFD9E3",
+   "main_vi": "đỏ lá phong thẫm",
+   "sec_vi": "hồng phấn nhạt"
   },
   "dong": {
    "main": "soft orchid",
@@ -3123,12 +3864,15 @@
     "why": [
      "chính gần trùng s47 → xoay sắc +12°, giữ độ đậm"
     ]
-   }
-  }
+   },
+   "band_misfit": "chính không đậm quý phái (L 0.70)"
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: kem chanh, kem đào, hồng phấn nhạt · ★ gốc lệch tông (chính không đậm quý phái (L 0.70)) — giữ như tranh"
  },
  "s54": {
   "root_season": "xuan",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
    "main": "carnation pink",
    "main_hex": "#E4A1B7",
@@ -3145,31 +3889,39 @@
     "why": [
      "phụ xỉn (màu già) → cùng màu, tươi hơn"
     ]
-   }
+   },
+   "band_misfit": "chính không đậm quý phái (L 0.78); phụ không phải vàng nhạt/ngà sáng"
   },
   "ha": {
-   "main": "light lemon yellow",
-   "main_hex": "#DCD884",
-   "sec": "coral orange",
-   "sec_hex": "#F38063",
-   "sec_borrowed": "Hạ: secondary borrowed from coral orange (main stays orange/yellow)"
+   "main": "pale clear lime lemon",
+   "main_hex": "#E2EB78",
+   "sec": "ivory white",
+   "sec_hex": "#E8E4DA",
+   "main_vi": "vàng chanh non nhạt",
+   "sec_vi": "trắng ngà"
   },
   "thu": {
-   "main": "plum",
-   "main_hex": "#B160AF",
-   "sec": "rich moss green",
-   "sec_hex": "#569C46"
+   "main": "jewel-deep muted plum",
+   "main_hex": "#733567",
+   "sec": "bright smoke lilac",
+   "sec_hex": "#EFE6FF",
+   "main_vi": "tím mận thẫm",
+   "sec_vi": "tím khói nhạt"
   },
   "dong": {
-   "main": "pale violet",
-   "main_hex": "#C0BEFF",
-   "sec": "light emerald",
-   "sec_hex": "#4EC5AF"
-  }
+   "main": "deep clear midnight violet",
+   "main_hex": "#5B56B8",
+   "sec": "aqua mist",
+   "sec_hex": "#C3EEF0",
+   "main_vi": "tím than đậm",
+   "sec_vi": "xanh ngọc sương"
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: trắng ngà, tím khói nhạt, xanh ngọc sương · ★ gốc lệch tông (chính không đậm quý phái (L 0.78); phụ không phải vàng nhạt/ngà sáng) — giữ như tranh"
  },
  "s55": {
   "root_season": "xuan",
   "group": "Kiêu kỳ",
+  "band": "chính đậm quý phái tông ngọc + phụ vàng nhạt / ngà (tím than, xanh ngọc + vàng nhạt)",
   "xuan": {
    "main": "soft raspberry pink",
    "main_hex": "#D79BC4",
@@ -3187,83 +3939,100 @@
      "chính xỉn (màu già) → cùng màu, tươi hơn",
      "phụ xỉn (màu già) → cùng màu, tươi hơn"
     ]
-   }
+   },
+   "band_misfit": "chính không đậm quý phái (L 0.76); phụ không phải vàng nhạt/ngà sáng"
   },
   "ha": {
-   "main": "light peach",
-   "main_hex": "#FCB9AB",
-   "sec": "sea turquoise",
-   "sec_hex": "#53C6D8",
-   "sec_accent": "A31: secondary is the Hạ cool accent sea turquoise (her warm families are all used)"
+   "main": "light clear cantaloupe",
+   "main_hex": "#F79806",
+   "sec": "bright smoke lilac",
+   "sec_hex": "#EFE6FF",
+   "main_vi": "cam dưa lưới sáng",
+   "sec_vi": "tím khói nhạt"
   },
   "thu": {
-   "main": "plum",
-   "main_hex": "#AA58A9",
-   "sec": "pumpkin",
-   "sec_hex": "#ED871F"
+   "main": "jewel-deep wine berry",
+   "main_hex": "#85284D",
+   "sec": "ivory",
+   "sec_hex": "#EFE3CB",
+   "main_vi": "đỏ rượu thẫm",
+   "sec_vi": "ngà"
   },
   "dong": {
-   "main": "pale sapphire",
-   "main_hex": "#AAC4FD",
-   "sec": "light jade",
-   "sec_hex": "#97CFA7",
-   "A31": "CANNOT FIT: #97CFA7 same family green as #95B77B"
-  }
+   "main": "deep muted violet",
+   "main_hex": "#70569B",
+   "sec": "mist blue",
+   "sec_hex": "#CCE9FF",
+   "main_vi": "tím đậm",
+   "sec_vi": "xanh sương"
+  },
+  "stylist": "màu ngọc đậm quý phái + phụ vàng nhạt/ngà — sang, xa cách; phụ mỗi mùa một màu: tím khói nhạt, ngà, xanh sương · ★ gốc lệch tông (chính không đậm quý phái (L 0.76); phụ không phải vàng nhạt/ngà sáng) — giữ như tranh"
  },
  "s56": {
   "root_season": "ha",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
-   "main": "Tết red",
-   "main_hex": "#ED6879",
-   "sec": "rich spring sky blue",
-   "sec_hex": "#4A90C5",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "rich vermilion",
+   "main_hex": "#B94129",
+   "sec": "aqua mist",
+   "sec_hex": "#BCE8EA",
+   "main_vi": "đỏ son đậm vừa",
+   "sec_vi": "xanh ngọc sương"
   },
   "ha": {
    "main": "apricot",
    "main_hex": "#D6A585",
    "sec": "lavender violet",
    "sec_hex": "#A991CA",
-   "root": true
+   "root": true,
+   "band_misfit": "chính không rực (C 0.07)"
   },
   "thu": {
-   "main": "fresh olive green",
-   "main_hex": "#93B64B",
-   "sec": "rich plum",
-   "sec_hex": "#9C448F"
+   "main": "deep clear warm wine berry",
+   "main_hex": "#B83274",
+   "sec": "blush",
+   "sec_hex": "#F9D2DD",
+   "main_vi": "đỏ rượu đậm",
+   "sec_vi": "hồng phấn nhạt"
   },
   "dong": {
-   "main": "pale ice blue",
-   "main_hex": "#9BCFE2",
-   "sec": "light emerald",
-   "sec_hex": "#61C9AB"
-  }
+   "main": "rich clear sapphire",
+   "main_hex": "#4680F1",
+   "sec": "bright pale gold",
+   "sec_hex": "#F0E5BA",
+   "main_vi": "lam ngọc bích đậm vừa",
+   "sec_vi": "vàng nhạt"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: xanh ngọc sương, hồng phấn nhạt, vàng nhạt · ★ gốc lệch tông (chính không rực (C 0.07)) — giữ như tranh"
  },
  "s57": {
   "root_season": "dong",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
-   "main": "rich Tết red",
-   "main_hex": "#E86273",
-   "sec": "pale spring sky blue",
-   "sec_hex": "#9ACDF5",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)",
-   "A31": "CANNOT FIT: #E86273 same family pink-rose as #F68592"
+   "main": "deep clear rose pink",
+   "main_hex": "#BC3066",
+   "sec": "bright smoke lilac",
+   "sec_hex": "#EADEFF",
+   "main_vi": "hồng đậm",
+   "sec_vi": "tím khói nhạt"
   },
   "ha": {
-   "main": "deep peach",
-   "main_hex": "#E87132",
-   "sec": "pale leaf green",
-   "sec_hex": "#B6DBA3",
-   "main_depth_moved": "t 1.1 -> 2.5",
-   "sec_borrowed": "Hạ: secondary borrowed from leaf green (main stays orange/yellow)"
+   "main": "rich clear coral orange",
+   "main_hex": "#DF500C",
+   "sec": "lemon cream",
+   "sec_hex": "#DEE2B9",
+   "main_vi": "cam san hô đậm vừa",
+   "sec_vi": "kem chanh"
   },
   "thu": {
-   "main": "rich plum",
-   "main_hex": "#A8417C",
-   "sec": "light maple red",
-   "sec_hex": "#F68592"
+   "main": "rich moss green",
+   "main_hex": "#438106",
+   "sec": "aqua mist",
+   "sec_hex": "#BCE8EA",
+   "main_vi": "xanh rêu đậm vừa",
+   "sec_vi": "xanh ngọc sương"
   },
   "dong": {
    "main": "soft orchid purple",
@@ -3281,27 +4050,30 @@
     "why": [
      "phụ be/champagne (màu già) → hồng đào nhạt tươi"
     ]
-   }
-  }
+   },
+   "band_misfit": "chính không rực (C 0.09); chính không ấm"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: tím khói nhạt, kem chanh, xanh ngọc sương · ★ gốc lệch tông (chính không rực (C 0.09); chính không ấm) — giữ như tranh"
  },
  "s58": {
   "root_season": "thu",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
-   "main": "rich raspberry",
-   "main_hex": "#CE659E",
-   "sec": "light spring sky blue",
-   "sec_hex": "#91C7F1",
-   "sec_accent": "A31: secondary is the Xuân cool accent spring sky blue (her warm families are all used)"
+   "main": "deep clear rose pink",
+   "main_hex": "#BC3066",
+   "sec": "blush",
+   "sec_hex": "#F9D2DD",
+   "main_vi": "hồng đậm",
+   "sec_vi": "hồng phấn nhạt"
   },
   "ha": {
-   "main": "deep marigold",
-   "main_hex": "#F38F00",
-   "sec": "leaf green",
-   "sec_hex": "#83B567",
-   "main_depth_moved": "t 1.1 -> 2.0",
-   "sec_depth_moved": "t 0.0 -> 1.0",
-   "sec_borrowed": "Hạ: secondary borrowed from leaf green (main stays orange/yellow)"
+   "main": "soft clear apricot",
+   "main_hex": "#F08B00",
+   "sec": "peach cream",
+   "sec_hex": "#F8D7BE",
+   "main_vi": "cam mơ dịu",
+   "sec_vi": "kem đào"
   },
   "thu": {
    "main": "soft coral",
@@ -3319,25 +4091,30 @@
     "why": [
      "chính tên/sắc già → tươi hơn một chút"
     ]
-   }
+   },
+   "band_misfit": "chính không rực (C 0.11)"
   },
   "dong": {
-   "main": "light orchid",
-   "main_hex": "#C8ADE6",
-   "sec": "pale emerald",
-   "sec_hex": "#8FE1CF",
-   "A31": "CANNOT FIT: #8FE1CF ΔE 6.4 to #B0DDD0"
-  }
+   "main": "rich lilac",
+   "main_hex": "#AA64C7",
+   "sec": "bright lemon cream",
+   "sec_hex": "#E5E9BF",
+   "main_vi": "tím hoa cà đậm vừa",
+   "sec_vi": "kem chanh"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: hồng phấn nhạt, kem đào, kem chanh · ★ gốc lệch tông (chính không rực (C 0.11)) — giữ như tranh"
  },
  "s59": {
   "root_season": "ha",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
-   "main": "Tết red",
-   "main_hex": "#FA807F",
-   "sec": "spring green",
-   "sec_hex": "#88B976",
-   "A31": "CANNOT FIT: #FA807F ΔE 14.4 to #EDA98C"
+   "main": "deep clear rose pink",
+   "main_hex": "#BC3066",
+   "sec": "pale gold",
+   "sec_hex": "#E9DFB3",
+   "main_vi": "hồng đậm",
+   "sec_vi": "vàng nhạt"
   },
   "ha": {
    "main": "soft apricot",
@@ -3356,79 +4133,101 @@
      "chính xỉn (màu già) → cùng màu, tươi hơn",
      "phụ xỉn (màu già) → cùng màu, tươi hơn"
     ]
-   }
+   },
+   "band_misfit": "chính không rực (C 0.09)"
   },
   "thu": {
-   "main": "ginkgo yellow",
-   "main_hex": "#E9DF6E",
-   "sec": "plum",
-   "sec_hex": "#B961A8"
+   "main": "rich clear cool persimmon",
+   "main_hex": "#C14F00",
+   "sec": "bright mint mist",
+   "sec_hex": "#CAEFDD",
+   "main_vi": "cam quả hồng đậm vừa",
+   "sec_vi": "bạc hà nhạt"
   },
   "dong": {
-   "main": "pale orchid",
-   "main_hex": "#E7BFE6",
-   "sec": "pale teal",
-   "sec_hex": "#A1DBD5"
-  }
+   "main": "rich cool lilac",
+   "main_hex": "#AF62C1",
+   "sec": "orchid mist",
+   "sec_hex": "#F4D2EB",
+   "main_vi": "tím hoa cà đậm vừa",
+   "sec_vi": "hồng tím phấn"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: vàng nhạt, bạc hà nhạt, hồng tím phấn · ★ gốc lệch tông (chính không rực (C 0.09)) — giữ như tranh"
  },
  "s60": {
   "root_season": "xuan",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
    "main": "coral pink",
    "main_hex": "#D9998C",
    "sec": "soft sea blue",
    "sec_hex": "#649AB8",
-   "root": true
+   "root": true,
+   "band_misfit": "chính không rực (C 0.08)"
   },
   "ha": {
-   "main": "pale lemon yellow",
-   "main_hex": "#E5E29B",
-   "sec": "rich spring green",
-   "sec_hex": "#6BA058",
-   "main_depth_moved": "t 0.8 -> 0.0",
-   "sec_borrowed": "Hạ: secondary borrowed from spring green (main stays orange/yellow)"
+   "main": "soft clear cool coral orange",
+   "main_hex": "#F06400",
+   "sec": "soft mint mist",
+   "sec_hex": "#BDE1D0",
+   "main_vi": "cam san hô dịu",
+   "sec_vi": "bạc hà nhạt"
   },
   "thu": {
-   "main": "amber",
-   "main_hex": "#FE9219",
-   "sec": "deep plum",
-   "sec_hex": "#903984"
+   "main": "rich muted wine berry",
+   "main_hex": "#AD456B",
+   "sec": "mist blue",
+   "sec_hex": "#C4E3F9",
+   "main_vi": "đỏ rượu đậm vừa",
+   "sec_vi": "xanh sương"
   },
   "dong": {
-   "main": "pale emerald",
-   "main_hex": "#7BD4B9",
-   "sec": "orchid",
-   "sec_hex": "#BD95D4"
-  }
+   "main": "rich lilac",
+   "main_hex": "#AA64C7",
+   "sec": "ivory",
+   "sec_hex": "#E9DDC4",
+   "main_vi": "tím hoa cà đậm vừa",
+   "sec_vi": "ngà"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: bạc hà nhạt, xanh sương, ngà · ★ gốc lệch tông (chính không rực (C 0.08)) — giữ như tranh"
  },
  "s61": {
   "root_season": "ha",
   "group": "Quyến rũ",
+  "band": "đậm đà, ấm, rực (đỏ rượu + cam hồng)",
   "xuan": {
-   "main": "deep spring green",
-   "main_hex": "#44985F",
-   "sec": "light cherry-blossom pink",
-   "sec_hex": "#D89CBA"
+   "main": "deep clear peony pink",
+   "main_hex": "#B5347D",
+   "sec": "pastel mint",
+   "sec_hex": "#ACF0CB",
+   "main_vi": "hồng mẫu đơn đậm",
+   "sec_vi": "bạc hà pastel"
   },
   "ha": {
    "main": "persimmon",
    "main_hex": "#D2906C",
    "sec": "ivory",
    "sec_hex": "#EDDCC6",
-   "root": true
+   "root": true,
+   "band_misfit": "chính không rực (C 0.09)"
   },
   "thu": {
-   "main": "rich wine berry",
-   "main_hex": "#BA3866",
-   "sec": "light fresh olive green",
-   "sec_hex": "#B1CF79"
+   "main": "rich maple red",
+   "main_hex": "#BA3E38",
+   "sec": "blush",
+   "sec_hex": "#F9D2DD",
+   "main_vi": "đỏ lá phong đậm vừa",
+   "sec_vi": "hồng phấn nhạt"
   },
   "dong": {
-   "main": "light indigo",
-   "main_hex": "#94B7F3",
-   "sec": "pale emerald",
-   "sec_hex": "#8FE1CF"
-  }
+   "main": "rich clear sapphire",
+   "main_hex": "#4680F1",
+   "sec": "mist blue",
+   "sec_hex": "#C4E3F9",
+   "main_vi": "lam ngọc bích đậm vừa",
+   "sec_vi": "xanh sương"
+  },
+  "stylist": "màu ấm rực đậm đà + phụ ấm cam hồng/đào — nồng nàn; phụ mỗi mùa một màu: bạc hà pastel, hồng phấn nhạt, xanh sương · ★ gốc lệch tông (chính không rực (C 0.09)) — giữ như tranh"
  }
 }
