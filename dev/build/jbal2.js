@@ -1637,4 +1637,4 @@ BAL.pm={kc:1,luck:30,minLv:1,
  npc:{gapW:2,me:1,g:{play:{ally:4},duel:{spite:4,danh:1.5}},minAff:0,spite:3},
  oddsN:120};
 /* receiver weights for a pastime / duel ask (jrcv rcvPick): no «mách lẻo» slot */
-BAL.rcv.k.pm=[1,1,1,0];
+BAL.rcv.k.pm=BAL.rcv.k.help.slice(0,3).concat([BAL.rcv.k.help[3]*BAL.mgTier.occ.hoc[0]]);/* = help weights, slot 3 off (× 0) */
