@@ -292,3 +292,4 @@ ROOT-65 Lượt 1002: OWNER verbatim "Ủa mà đã có cái bản mới chưa m
 - (20/11 03:51Z) FROM MAIN ROOT-73: LIVE 651c317c (owner mgcal co 9.7, BAL only) on 94c3bddc. ROLLBACK 94c3bddc. Final-merge 651c317c before LAND READY.
 - (20/11 03:58Z) FROM MAIN ROOT-73: LIVE acc26bf0 (owner mgcal ve+doi, BAL only) on 651c317c. ROLLBACK 651c317c. Final-merge acc26bf0 before LAND READY.
 - (20/11 04:05Z) FROM MAIN ROOT-73: LIVE 82ed060e (owner mgcal hoa, BAL only). ROLLBACK acc26bf0. Final-merge 82ed060e before LAND READY.
+- 04:10Z C-AG #26: rv NKC33KHM PASS kit-gamevs 29f5e418 (rv fix BAL.gameVs.pop/end → CSS). LIVE now 82ed060e → not FF; SMALL → LAND READY sent ROOT-73 with SELF-MERGE allowed (trial rule). wk archived; rv kept until LIVE. Then KIT READY K-PM-1 in FOREMAN_E_STATUS. LOAD 1 own (rv idle); SEATS running 1 / cap 12.
