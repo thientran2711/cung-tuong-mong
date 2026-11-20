@@ -403,3 +403,4 @@ ROOT-66 Lượt 1043–1044: c09 hand redraw (w4atqqr7EI, 138 cr) sent; OWNER "D
 ROOT-66 Lượt 1045: OWNER "Vẽ" → F4 GO s62–s65 (4 gens ~552 cr).
 - (20/11 06:47Z) FROM MAIN: main rolls over ROOT-74 → ROOT-75 session_01Rc5AsKTznPCBPujNFrdVVF. Send reports there.
 ROOT-66 Lượt 1046: OWNER: player character = random among the 90; hair-swap option DROPPED ("Thôi option tóc bỏ đi, quay lại cái option gắn trăm đi") — angles differ per figure. Hairpin/flower slots (EAR1) continue.
+- 06:47Z C-AG #29: wk #2 MmEgNigP ROLLOVER (handover reports/cal-p2.md @5b2f6c30) → archived; successor wk #3 = session_01Rc5AsJrsgDY7hAuWGR2XNq (opus, my child): PART 1 broken games huong/mua/banh on review/cal-p2b from LIVE; PART 2 identity offset (OD ~07:35Z) on review/cal-p2c from review/mg-fair-ratio (BLOCKER: BAL.orig.art only on mg-fair-hands → option (a): comes with mg-fair-ratio landing); PART 3 real-world section. Fixes from rv-dauho go to wk #3. SEATS running 5 / cap 12.
