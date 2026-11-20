@@ -1643,3 +1643,10 @@ BAL.pm={kc:1,luck:30,minLv:1,
  oddsN:120};
 /* receiver weights for a pastime / duel ask (jrcv rcvPick): no «mách lẻo» slot */
 BAL.rcv.k.pm=BAL.rcv.k.help.slice(0,3).concat([BAL.rcv.k.help[3]*BAL.mgTier.occ.hoc[0]]);/* = help weights, slot 3 off (× 0) */
+/* PALACE CHATTER (PL#6 bubble talk, jchat.js; owner OD:L1627 (5) "every 1–2 min NPCs chat"): gap = seconds between two chatter ticks (real time),
+   retry = seconds to look again when the stage is busy (dialog / hidden page), maxBub = bubbles on one stage at once, turnGap = ms between two lines of
+   one exchange, say = how long a line stays (ms: base + ch per letter, clamped min..max), noRepeat = exchanges / greetings said before one may come back,
+   mem = remembered keys (ring), greet = arrival greeting (delay ms, wait ms per retry while a dialog is open, tries), w = pick weights (hap = chance a
+   happening pair talks first, 1 = always while the deed is on (owner OD:L1627 (5)), idle topics only after its pool is spent; srv / friend / rival / base pair weights; solo = one person speaking to her). on:0 turns the whole feature off. */
+BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400,ch:55,min:2600,max:6000},noRepeat:60,mem:400,
+ greet:{delay:900,wait:1500,tries:20},w:{hap:1,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
