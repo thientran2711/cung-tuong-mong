@@ -34,7 +34,7 @@ for(const [f,t] of Object.entries(src)){t.split('\n').forEach((ln0,i)=>{const ln
  for(const h of L.hits){const k=h.kind+h.line;if(seen.has(k))continue;seen.add(k);rep('L-'+h.kind,`${h.name||''} :: ${h.line}`)}
  if(!L.hits.length)rep('ok','L no raw unmet name, no "???" in any log line');
  if(L.lines<50)rep('L-FAIL','too few log lines to mean anything');
- const R=await p.evaluate(()=>{for(let i=0;i<40;i++){start();if(S.ps&&!(typeof isSrv==='function'&&isSrv())&&S.origin.k!=='tt')break}Q.length=0;
+ const R=await p.evaluate(()=>{for(let i=0;i<40;i++){try{nlNew()}catch(e){}start();if(S.ps&&!(typeof isSrv==='function'&&isSrv())&&S.origin.k!=='tt')break}Q.length=0;
   const un=rivals.filter(v=>v.alive&&!v.out&&!v.queen&&!kitKnownName(v)).slice(0,6);const out={n:un.length,rows:[],pal:[]};
   const before=rsnap();before.rel=before.rel||{};for(const v of un)before.rel[v.id]={a:aff(v,S)-5*(un.indexOf(v)%2?-1:1),m:aff(S,v),e:v.ev||0,g:v.ghen||0,o:Math.round(oan(v,S))};
   const [G,Bd]=kaResultRows(before);out.rows=[...G,...Bd].map(x=>x.replace(/<[^>]+>/g,''));out.names=un.map(v=>v.name);

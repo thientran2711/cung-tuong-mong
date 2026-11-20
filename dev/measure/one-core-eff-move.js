@@ -1,0 +1,44 @@
+/* one-core-eff-move (review/one-core-dup, family F3): move the typed amounts of relation / power effect calls (the guard's `amt` kind:
+   relAdd, oanAdd, affAdd, kcAf, tdPowAdd, rdOan, rdRel, e67*) of the NON-road, NON-arc modules into BAL.eff (dev/build/jbaleff.js).
+   Only calls inside a function body are moved (they run after BAL exists). Key = <module>.<enclosing name>[_<n>]; a `cond?A:B` amount
+   becomes [A,B] read as cond?K[0]:K[1]. Writes jbaleff.js and the edited modules.
+   usage: node dev/measure/one-core-eff-move.js f1.js,f2.js,…   (proof: dev/measure/one-core-eff-same.js) */
+const fs=require('fs');
+const acorn=(()=>{try{return require('acorn')}catch(e){return require('/opt/node-tools/node_modules/acorn')}})();
+const FN=/^(?:rdOan|rdRel|relAdd|oanAdd|affAdd|kcAf|tdPowAdd|e67(?:dad|bien|kho|ally|pun|foe|drop))$/;
+const files=(process.argv[2]||'').split(',').filter(Boolean);
+const OUT='dev/build/jbaleff.js';
+const cur=fs.existsSync(OUT)?Function('const BAL={};'+fs.readFileSync(OUT,'utf8')+';return BAL.eff')():{};
+const num=n=>n&&((n.type==='Literal'&&typeof n.value==='number')||(n.type==='UnaryExpression'&&/^[+-]$/.test(n.operator)&&n.argument.type==='Literal'&&typeof n.argument.value==='number'));
+const val=n=>n.type==='Literal'?n.value:(n.operator==='-'?-n.argument.value:+n.argument.value);
+function nameOf(stack){for(let i=stack.length-1;i>=0;i--){const n=stack[i],p=stack[i-1];
+  if(n.type==='FunctionDeclaration'&&n.id)return n.id.name;
+  if(n.type==='Property'&&n.key)return n.key.name||String(n.key.value);
+  if(n.type==='VariableDeclarator'&&n.id&&n.id.name)return n.id.name;
+  if(n.type==='AssignmentExpression'&&n.left.type==='MemberExpression'&&n.left.property)return n.left.property.name||String(n.left.property.value);
+  if(n.type==='CallExpression'&&n.arguments[0]&&n.arguments[0].type==='Literal'&&typeof n.arguments[0].value==='string'&&/^[\w$]{2,24}$/.test(n.arguments[0].value)&&stack.slice(i+1).some(x=>/Function/.test(x.type)))return n.arguments[0].value}
+ return 'top'}
+for(const f of files){const mod=f.replace(/\.js$/,'');const src=fs.readFileSync('dev/build/'+f,'utf8');const ast=acorn.parse(src,{ecmaVersion:'latest'});
+ const edits=[];const keys=cur[mod]=cur[mod]||{};const used={};
+ (function walk(n,stack){if(!n||typeof n.type!=='string')return;stack.push(n);
+  if(n.type==='CallExpression'&&n.callee.type==='Identifier'&&FN.test(n.callee.name)&&n.arguments.length&&stack.some(x=>/Function/.test(x.type))){
+   const a=n.arguments[n.arguments.length-1];let v=null;
+   if(num(a)&&val(a)!==0)v={k:'n',x:val(a),a};
+   else if(a.type==='ConditionalExpression'&&num(a.consequent)&&num(a.alternate))v={k:'c',x:[val(a.consequent),val(a.alternate)],a};
+   if(v){let base=nameOf(stack.slice(0,-1)).replace(/[^\w$]/g,'_');used[base]=(used[base]||0)+1;const key=used[base]>1?base+'_'+used[base]:base;
+    if(keys[key]!==undefined&&JSON.stringify(keys[key])!==JSON.stringify(v.x))throw new Error(f+' key clash '+key);keys[key]=v.x;
+    const ref=`BAL.eff.${mod}${/^[A-Za-z_$][\w$]*$/.test(key)?'.'+key:'["'+key+'"]'}`;
+    edits.push(v.k==='n'?[a.start,a.end,ref]:[a.consequent.start,a.consequent.end,ref+'[0]'],...(v.k==='c'?[[a.alternate.start,a.alternate.end,ref+'[1]']]:[]))}}
+  for(const k in n){if(k==='type'||k==='start'||k==='end')continue;const c=n[k];if(Array.isArray(c))c.forEach(x=>walk(x,stack));else if(c&&typeof c.type==='string')walk(c,stack)}
+  stack.pop()})(ast,[]);
+ let out=src;for(const [a,b,r] of edits.sort((x,y)=>y[0]-x[0]))out=out.slice(0,a)+r+out.slice(b);
+ if(edits.length)fs.writeFileSync('dev/build/'+f,out);console.log(f,edits.length,'amounts →',`BAL.eff.${mod}`)}
+const body=Object.keys(cur).sort().map(m=>' '+m+':{'+Object.entries(cur[m]).map(([k,v])=>(/^[A-Za-z_$][\w$]*$/.test(k)?k:JSON.stringify(k))+':'+JSON.stringify(v)).join(',')+'}').join(',\n');
+fs.writeFileSync(OUT,`/* ================= jbaleff: ONE CORE (OD:L1267) amounts of relation / power effects (review/one-core-dup, family F3) =================
+   BAL.eff.<module>.<site> = the amount the module's effect call applies (relAdd thiện cảm, oanAdd oán, affAdd, kcAf, tdPowAdd …);
+   [a,b] = the two amounts of a \`cond ? a : b\` call. Site = the enclosing function / option key (_2, _3 … for the next calls in it).
+   Moved from inline literals by dev/measure/one-core-eff-move.js; proof dev/measure/one-core-eff-same.js (values unchanged). */
+Object.assign(BAL,{eff:{
+${body}
+}});
+`);

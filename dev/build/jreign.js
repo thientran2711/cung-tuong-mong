@@ -197,7 +197,7 @@ function rgChOf(id){for(let i=0;i<RGC.length;i++){const j=RGC[i].b.indexOf(id);i
 function rgTitle(id){const c=rgChOf(id);if(c)return `Phụ tuyến · ${RGT} · Chương ${c[0]+1} · Hồi ${c[1]+1}/${RGC[c[0]].b.length}`;return `Phụ tuyến · ${RGT} · Việc của phe`}
 function rgLine(o){const od=rgOd(o),c=rgCost(o.c);const cost=fmt(c);const win=[fmt(o.w||{}),o.wx?`<span class="g">${rgTok(o.wx)}</span>`:""].filter(Boolean).join(" · ");
  if(od>=100)return [cost?"tốn: "+cost:"",win?"thành: "+win:""].filter(Boolean).join(" · ");
- const lose=[fmt(o.l||{}),o.lx?`<span class="r">${rgTok(o.lx)}</span>`:"",o.pun?`<span class="r">${o.pun>1?"có thể bị giáng bậc":"bị cấm túc"}</span>`:""].filter(Boolean).join(" · ");
+ const lose=[fmt(o.l||{}),o.lx?`<span class="r">${rgTok(o.lx)}</span>`:"",o.pun?`<span class="r">${o.pun>1?"có thể bị giáng bậc":"bị cấm túc"}</span>`:""].filter(Boolean).join(", ");
  return `${word(od)} · ${cost?"tốn: "+cost+" · ":""}thành: ${win||"qua được"} · hỏng: ${lose||"không mất gì thêm"}`}
 PEND.rg=pp=>{try{if(!rgOn())return null;const b=rgBeatDef(pp.b);if(!b)return null;const O=rgOpts(b);if(!O.length)return null;
  const t=typeof b.t==="function"?b.t():b.t;const wk_=typeof b.w==="function"?b.w():b.w;
@@ -208,11 +208,12 @@ function rgFire(id){const d=mkP("rg",{b:id});if(!d)return false;const m={t:rgTit
 /* the side's enemies: a consort of the named side (or any foe of hers) gets proof against her */
 function rgFoe(side){const s=rgSideNow();const L=liveRivals(true).filter(v=>side==="foe"?(rgSideOf(v)&&rgSideOf(v)!==s):rgSideOf(v)===side);return L.length?pick(L):null}
 function rgRes(id,i,od){const b=rgBeatDef(id);if(!b)return;const o=rgOpts(b)[i];if(!o)return;const r=rgMe();const W=rgW();
+ if(od>=100&&!roll(BAL.odds.hi)){oddsSoft(`${rgTitle(id)}: ${rgTok(o.n)}`,o.c);return}/* ODDS CAP: a sure court choice fails softly at the cap */
  const ok=od>=100||roll(od);const side=o.s||rgSideNow();const t0=rgTitle(id);const before=rsnap();let ex=[];
  r.done[id]=(r.done[id]||0)+1;r.last=S.turn;
  if(ok){apply(o.w||{});if(o.pw)rgPush(side,o.pw);if(o.tr)rgTr(o.tr);if(o.lq)rgQAf(o.lq);if(o.lead)rgLead(side,o.lead)}
  else{apply(o.l||{});if(o.pl)rgPush(side,o.pl);if(o.lq)rgQAf(o.lq);
-  if(o.ev){const v=rgFoe(o.ev);if(v){evA(v,S,1);ex.push(`${(()=>{try{return typeof kitKnownName!=="function"||kitKnownName(v)}catch(e){return true}})()?v.name:"Một vị phi tần chưa quen biết"} nắm Chứng cứ về ngươi.`)}}
+  if(o.ev){const v=rgFoe(o.ev);if(v){evA(v,S,BAL.eff.jreign.evRgRes);ex.push(`${(()=>{try{return typeof kitKnownName!=="function"||kitKnownName(v)}catch(e){return true}})()?v.name:"Một vị phi tần chưa quen biết"} nắm Chứng cứ về ngươi.`)}}
   if(o.pun){try{punish(S,"can dự chuyện triều chính",o.pun)}catch(e){}}}
  if(o.lq0)rgQAf(o.lq0);
  if(o.join)ex.push(rgJoin(o.join,id==="c2a",o.swc));
@@ -234,12 +235,12 @@ function rgSwitchOpen(){if(rgCanSwitch()||!rgOn())return;const s=rgSideNow();
  const O=rgJoinOpts(false).map(o=>({n:"Đổi phe: "+o.n.charAt(0).toLowerCase()+o.n.slice(1),fx:{},j67:`tốn: Danh -${BAL.rg.swDanh} · kèm: <span class="r">phe ${rgSideN(s)} thành kẻ thù, phe mới chưa tin ngươi</span>`,go:()=>{const t=rgJoin(o.join,false,1);log(`Phụ tuyến · ${RGT} · Đổi phe: ${t}`);render()}}));
  O.push({n:"Thôi",fx:{}});pushModal({t:`Phụ tuyến · ${RGT} · Đổi phe`,who:pMe(),h:`<p>Ngươi đang ${rgSideTag(s)}. Đổi phe thì phe cũ thành kẻ thù, Danh giảm, phe mới phải lấy lòng lại từ đầu.</p>`,opts:O,act:1});showModal()}
 /* outcome effects on the court (host computes; personal effects per player) */
-function rgAmnesty(){for(const v of rgMembers("quyen"))relAdd(v,S,10);rgQAf(15);return "Bệ hạ ân xá cho nhà Tể tướng."}
-function rgPurge(){let n=0;for(const v of rgMembers("quyen")){if(v.queen||rkOf(v)<=0)continue;v.rank=seatDown(v,v.rank-1);relAdd(v,S,-15);n++}return n?`${n} phi tần nhà Tể tướng bị giáng một bậc.`:""}
+function rgAmnesty(){for(const v of rgMembers("quyen"))relAdd(v,S,BAL.eff.jreign.rgAmnesty);rgQAf(15);return "Bệ hạ ân xá cho nhà Tể tướng."}
+function rgPurge(){let n=0;for(const v of rgMembers("quyen")){if(v.queen||rkOf(v)<=0)continue;v.rank=seatDown(v,v.rank-1);relAdd(v,S,BAL.eff.jreign.rgPurge);n++}return n?`${n} phi tần nhà Tể tướng bị giáng một bậc.`:""}
 function rgDecide(){const W=rgW();if(!W||W.out)return;const p=W.p;W.out=p>=BAL.rg.B?"emp":p<BAL.rg.A?"quyen":"th";if(W.out==="th"&&S.thDead)W.out=p>=(BAL.rg.A+BAL.rg.B)/2?"emp":"quyen";W.at=S.turn;
- const o=W.out;try{if(o==="emp"){tdPowAdd(RGQC,-BAL.rg.loseHouse);tdPowAdd("Hàn lâm",8);tdPowAdd("Lễ bộ",8);if(S.emp)S.emp.mood=Math.max(0,(S.emp.mood||1)-1)}
-  else if(o==="quyen"){tdPowAdd(RGQC,BAL.rg.winHouse);tdPowAdd("Hàn lâm",-10);tdPowAdd("Lễ bộ",-10);if(S.emp)S.emp.mood=Math.min(3,(S.emp.mood||1)+1)}
-  else{tdPowAdd(RGQC,-10);tdPowAdd("Đại tướng quân",10)}}catch(e){}
+ const o=W.out;try{if(o==="emp"){tdPowAdd(RGQC,-BAL.rg.loseHouse);tdPowAdd("Hàn lâm",BAL.eff.jreign.rgDecide);tdPowAdd("Lễ bộ",BAL.eff.jreign.rgDecide_2);if(S.emp)S.emp.mood=Math.max(0,(S.emp.mood||1)-1)}
+  else if(o==="quyen"){tdPowAdd(RGQC,BAL.rg.winHouse);tdPowAdd("Hàn lâm",BAL.eff.jreign.rgDecide_3);tdPowAdd("Lễ bộ",BAL.eff.jreign.rgDecide_4);if(S.emp)S.emp.mood=Math.min(3,(S.emp.mood||1)+1)}
+  else{tdPowAdd(RGQC,BAL.eff.jreign.rgDecide_5);tdPowAdd("Đại tướng quân",BAL.eff.jreign.rgDecide_6)}}catch(e){}
  for(const v of liveRivals(true)){const s=rgSideOf(v);if(!s)continue;v.sung=cl((v.sung||0)+(s===o?BAL.rg.npcWin:-BAL.rg.npcLose),0,100)}
  W.n.unshift(`T${S.month}/${S.year}: ${({emp:"Hoàng thượng thân chính",th:"Thái hậu buông rèm nghe chính",quyen:"Tể tướng nhiếp chính"})[o]}`)}
 /* her result once the court has decided (applied once, before the last beat) */
@@ -250,13 +251,13 @@ function rgMine(){const r=rgMe(),W=rgW();if(!W||!W.out||r.res)return"";const o=W
    const d=S.rank<Bg.rankCap&&typeof promoReward==="function"&&S.sung>=(typeof sungFloor==="function"?sungFloor(S.rank+1):0)+Bg.rankSung?promoReward(S,"emp",{fx:1}):"";
    t=d?`Bệ hạ nhớ công phò tá. ${d}`:"Bệ hạ nhớ công, ban thưởng hậu hĩnh."}
   else if(s==="th"){apply({th:Math.round(Bg.winTh*k),danh:Bg.winDanh});S.shield=Math.max(S.shield||0,Bg.winShield);t=`Thái hậu nhớ công, che chở ngươi ${Bg.winShield} tháng: phi tần khó hại ngươi.`;const d=S.rank<Bg.rankCap&&typeof promoReward==="function"?promoReward(S,"th",{fx:1}):"";if(d)t+=` ${d}`}
-  else{apply({bac:Math.round(b0*k),danh:Bg.winDanh,mat:1});const h=rgFamH();if(h&&rgFam()==="quyen")tdPowAdd(h.c,8);rgQAf(20);t="Nhà Tể tướng nhớ công, đưa bạc vào cung, tai mắt khắp nơi.";const d=S.rank<Bg.rankCap&&typeof promoReward==="function"?promoReward(S,"quyen",{fx:1}):"";if(d)t+=` ${d}`}
+  else{apply({bac:Math.round(b0*k),danh:Bg.winDanh,mat:1});const h=rgFamH();if(h&&rgFam()==="quyen")tdPowAdd(h.c,BAL.eff.jreign.rgMine);rgQAf(20);t="Nhà Tể tướng nhớ công, đưa bạc vào cung, tai mắt khắp nơi.";const d=S.rank<Bg.rankCap&&typeof promoReward==="function"?promoReward(S,"quyen",{fx:1}):"";if(d)t+=` ${d}`}
   rgLead(s,0)}
  else{r.res="lose";
   if(s==="emp"){apply({sung:-Bg.loseSung,th:-Bg.loseTh});t="Phe bệ hạ thua, nhà Tể tướng và Thái hậu đều để ý ngươi."}
   else if(s==="th"){apply({th:-Math.round(Bg.loseTh/2),danh:-Bg.loseDanh,sung:-Math.round(Bg.loseSung/2)});t="Thái hậu thất thế, người theo bà cũng bị gạt ra."}
   else{apply({danh:-Bg.loseDanh,sung:-Bg.loseSung});try{punish(S,"là người của phe Tể tướng",1)}catch(e){}t="Nhà Tể tướng thất thế, ngươi bị liên lụy."}}
- const f=rgFam();if(f&&f!==o){const h=rgFamH();if(h)tdPowAdd(h.c,-8)}
+ const f=rgFam();if(f&&f!==o){const h=rgFamH();if(h)tdPowAdd(h.c,BAL.eff.jreign.rgMine_2)}
  return t}
 (function(){if(typeof exGw!=="function")return;const g0=exGw;exGw=function(e){return e&&e.gw==="rg"?"công phò tá bệ hạ thân chính":g0.apply(this,arguments)}})();
 /* ---------- month (host: the world; everyone: her next beat) ---------- */
@@ -272,8 +273,11 @@ function rgWorldMonth(){const W=rgW();if(!W||W.out)return"";const Bg=BAL.rg;let 
 function rgNext(second){const W=rgW(),r=rgMe();if(!W)return null;const queued=new Set(Q.filter(m=>m.pid==="rg").map(m=>m.pp&&m.pp.b));
  for(let c=0;c<Math.min(W.ch,RGC.length);c++){for(const id of RGC[c].b){if(r.done[id]||queued.has(id))continue;const b=RGBT[id];
   if(b.if&&!b.if()){r.done[id]=-1;continue}if(b.fin&&!W.out)return null;return id}}
- const s=rgSideNow();if(!second&&s&&!W.out&&S.turn-(r.erT==null?-99:r.erT)>=BAL.rg.erCd&&S.turn-(r.last||-99)>=2&&roll(BAL.rg.erP)){
-  const L=RGE[s].filter(e=>(!e.if||e.if())&&(r.done[s+":"+e.id]||0)<1);const e=L.length?pick(L):pick(RGE[s].filter(e=>!e.if||e.if()));if(e){r.erT=S.turn;return s+":"+e.id}}
+ const s=rgSideNow();if(!second&&s&&!W.out&&S.turn-(r.erT==null?-99:r.erT)>=BAL.rg.erCd&&S.turn-(r.last||-99)>=2){
+  /* npc-purpose G2: the leader asks only when she trusts her enough, and asks for what she needs now (an errand whose occasion is live, one not done yet);
+     erP = the chance the need comes up this month */
+  const Wr=BAL.ag.why.rgErr;const L=RGE[s].filter(e=>!e.if||e.if());
+  const e=(r.tr||0)>=Wr.trMin?npwPick(L,e=>Wr.base+(e.if?Wr.need:0)+((r.done[s+":"+e.id]||0)<1?Wr.fresh:0)+(r.tr||0)*Wr.tr):null;if(e&&roll(BAL.rg.erP)){r.erT=S.turn;return s+":"+e.id}}
  return null}
 function rgMonth(){if(!rgOn())return"";let ev="";if(!rgGuest())ev+=rgWorldMonth();
  const W=rgW(),r=rgMe();if(S.thDead&&r.side==="th"&&!(W&&W.out)){r.side="ngoai";log(`<b>${RGT}</b>: Thái hậu băng hà, phe Thái hậu tan rã. Ngươi thành người đứng ngoài.`)}if(W&&W.out&&!r.res){const t=rgMine();if(t)log(`<b>${RGT}</b>: ${t}`)}
@@ -289,7 +293,7 @@ function rgLate(){const W=rgW(),r=rgMe();if(!W)return 0;let n=0;for(let c=0;c<Ma
 const RGL={
  th:{who:"Thái hậu",g:"Giữ yên xã tắc cho con, nhìn thấy hoàng tôn đầy nhà, rồi yên lòng niệm Phật.",q:["rgl_th1","rgl_th2","rgl_th3"]},
  hh:{who:"Hoàng hậu",g:"Sinh đích tử, giữ vững Trung cung.",q:["rgl_hh1","rgl_hh2","rgl_hh3"]},
- ly:{who:"Phế phi họ Lý",g:"Rửa oan án năm xưa, được ra khỏi lãnh cung trước khi nhắm mắt.",q:["rgl_ly1","rgl_ly2","rgl_ly3"]},
+ ly:{who:"Phế phi họ Lý",g:"Rửa oan án năm xưa trước khi nhắm mắt.",q:["rgl_ly1","rgl_ly2","rgl_ly3"]},
  maid:{who:"Cung nữ thân tín",g:"Lo cho mẹ già ở quê, đến tuổi được xuất cung về nhà.",q:["rgl_mb1","rgl_mb2","rgl_mb3"]},
  eun:{who:"Tổng quản thái giám",g:"Có người nối dõi hương khói, về già có đất dưỡng lão.",q:["rgl_tq1","rgl_tq2","rgl_tq3"]},
  doc:{who:"Thái y",g:"Soạn xong bộ y thư thầy truyền lại, dâng lên cho đời sau dùng.",q:["rgl_ty1","rgl_ty2","rgl_ty3"]}};
@@ -337,7 +341,7 @@ function rgLOk(k){if(k==="th")return !S.thDead;if(k==="hh")return typeof qOn==="
   ok:{fx:{tamco:1},r:10,ch:"rgl_ly3"},no:{r:-5},bad:{fx:{danh:-3}},badT:"Lời khai lọt ra ngoài."},ln("ly",2)));
  T7("rgl_ly3","risk",Object.assign({fu:1,r:"ly",t:"Tâm nguyện Phế phi họ Lý (3/3): Rửa oan",h:"“Chỉ còn một việc: đưa lời khai đến trước mặt Hoàng thượng. Ta không cần phục vị, chỉ cần một chữ oan.”",dl:6,
   s:[G("","Dâng lời khai lên Hoàng thượng","sung",45,1,{},"b",{emp:1,pl:null})],
-  ok:{fx:{duc:4,danh:3},r:20,d:2,fn:X=>{const o=lyFallen();o.freed=1;return fin("ly")(X)+" Hoàng thượng cho Phế phi họ Lý ra khỏi lãnh cung, về chùa tu hành."}},no:{r:-5,fx:{sung:-2}},bad:{fx:{sung:-4,th:-3}},badT:"Hoàng thượng nổi giận vì chuyện cũ bị khơi lại."},ln("ly",3)));
+  ok:{fx:{duc:4,danh:3},r:20,d:2,fn:X=>{const o=lyFallen();o.cleared=1;return fin("ly")(X)+" Hoàng thượng hạ chỉ rửa oan cho Phế phi họ Lý. Bà xin ở lại Trường Môn viện, sớm hôm niệm Phật đến ngày nhắm mắt."}},no:{r:-5,fx:{sung:-2}},bad:{fx:{sung:-4,th:-3}},badT:"Hoàng thượng nổi giận vì chuyện cũ bị khơi lại."},ln("ly",3)));
  /* her maid: her mother at home */
  T7("rgl_mb1","fam",Object.assign({fu:1,r:"maid",t:"Tâm nguyện {A} (1/3): Thư nhà",h:"“Nô tỳ đã ba năm không có tin mẹ. Nghe nói quê nhà mất mùa... {Nc} cho nô tỳ gửi một lá thư.”",dl:4,
   s:[C("Gửi thư",O("Nhờ người Nội vụ phủ chuyển thư",{c:{bac:-15},p:90,lto:"stay"}),O("Đợi ngày mệnh phụ vào cung, nhờ mang ra",{c:{suc:-4},p:60,sk:"danh",lto:"stay"})),W("Đợi thư hồi âm",2)],
@@ -380,7 +384,10 @@ function rgLNext(){if(!rgOn()||typeof q72CanOffer!=="function"||!q72CanOffer())r
   const tid=RGL[k].q[Math.min(l.st,2)];return !act.has(tid)&&!RGL[k].q.some(t=>act.has(t))});
  if(!C.length)return null;const k=pick(C);const l=L[k]||{st:0};const T=T72I[RGL[k].q[Math.min(l.st,2)]];if(!T)return null;
  const A=rgLA(k);if(!A)return null;const x=q72Make(T,A);if(!x)return null;L._t=S.turn;return x}
-(function(){if(typeof q72Tick!=="function")return;const t0=q72Tick;q72Tick=function(){const r=t0.apply(this,arguments);try{if(rgOn()&&S.tuan===1&&Q.length<=1&&!evBusy()){const x=rgLNext();if(x){q72Offer(x,"");evBusyMark()}}}catch(e){console.error(e)}return r}})();
+/* npc-purpose G1 #10: the line person asks FIRST at tuần 1 (her open step is a standing reason); the generic errand (q72Tick, every BAL.ag.why.q72.gap
+   tuần = one month, so it sat on the same tuần each month) then finds the tuần busy and waits. Before: the errand took tuần 1 first and the
+   'Tâm nguyện' offers fell 50 → 9 in 12 × 200 tuần (rate gate 'Phụ tuyến · Tâm nguyện … (#/#)' 22 → 3). q72Tick's step / deadline pass still runs. */
+(function(){if(typeof q72Tick!=="function")return;const t0=q72Tick;q72Tick=function(){try{if(rgOn()&&S.tuan===1&&Q.length<=1&&!evBusy()){const x=rgLNext();if(x){q72Offer(x,"");evBusyMark()}}}catch(e){console.error(e)}return t0.apply(this,arguments)}})();
 
 /* ---------- Mệnh truyện › Triều cục / Tâm nguyện (kit: kitSubTabs, kitSkillCard, rows67/kitRows, kitChecks, kchip, pbtn) ---------- */
 function rgPWord(p){const Bg=BAL.rg;return p>=Bg.B?"bệ hạ nắm được triều chính":p>=Bg.B-6?"thế bệ hạ đang lên":p<Bg.A?"nhà Tể tướng nắm triều chính":p<Bg.A+6?"nhà Tể tướng đang mạnh":"ba phe giằng co"}
@@ -393,7 +400,7 @@ function rgPaneHTML(){const W=rgW(),r=rgMe();if(!W)return kitEmpty("Triều cụ
  const mem=k=>kitNameList(rgMembers(k),v=>`${rkName(v)} ${v.name}`,"chưa ai");
  h+=rows67([["Mục tiêu","Hoàng thượng mới đăng cơ, quyền còn trong tay Thái hậu và Tể tướng phụ chính. Ngươi chọn đứng về phía ai, hay đứng ngoài."],
   ["Chương",c?`Chương ${c} «${RGC[c-1].t}»`:"chưa mở"],["Triều cục",W.out?({emp:"Hoàng thượng thân chính",th:"Thái hậu buông rèm nghe chính",quyen:`${rgQN()} nhiếp chính`})[W.out]:rgPWord(W.p),W.out?"g":""],
-  ["Phe của ngươi",s?rgSideTag(s):r.side==="ngoai"?"đứng ngoài":"chưa chọn",s?"g":""],s?["Phe tin ngươi",r.tr>=60?"rất tin":r.tr>=35?"tin":r.tr>=15?"còn dè dặt":"chưa tin"]:null,
+  ["Phe của ngươi",s?rgSideTag(s):r.side==="ngoai"?"đứng ngoài":"chưa chọn",s?"g":""],s?["Phe tin ngươi",r.tr>=BAL.cut.rgTrust[2]?"rất tin":r.tr>=BAL.cut.rgTrust[1]?"tin":r.tr>=BAL.cut.rgTrust[0]?"còn dè dặt":"chưa tin"]:null,
   rgFam()?["Nhà ngươi",({quyen:"phụ thân là Tể tướng phụ chính",th:"đứng sau Thái hậu",emp:"theo bệ hạ"})[rgFam()]]:null,
   r.res?["Kết cục của ngươi",r.res==="win"?"phe ngươi thắng":r.res==="lose"?"phe ngươi thua":"đứng ngoài, giữ được mình",r.res==="win"?"g":r.res==="lose"?"r":""]:null,
   ["Phe Hoàng thượng",mem("emp")],["Phe Thái hậu",S.thDead?"Thái hậu đã mất":mem("th")],["Phe quyền thần",mem("quyen")]]);
@@ -405,11 +412,11 @@ function rgGoalHTML(){const L=rgL();const R=[];let n=0;
   if(l.done)n++;const st=l.done?"đã thành tâm nguyện":ok?`bước ${Math.min(3,l.st+1)}/3: ${plain(String(T72I[RGL[k].q[Math.min(l.st,2)]].t).replace(/^Tâm nguyện [^:]*: /,"").replace(/\{A\}/g,who))}`:"người này không còn ở đây";
   const sub=`${RGL[k].g} · ${st}`;const A=ok&&!l.done?rgLA(k):null;R.push(`<div class="ktprow">${A&&typeof ktPerson==="function"?ktPerson(A,sub):`<div class="kpl"><span class="kplt"><b>${who}</b><small>${sub}</small></span></div>`}</div>`)}
  return kitSkillCard({kind:"story",k:"rgl",kicker:"Phụ tuyến",name:"Tâm nguyện",level:n,max:Object.keys(RGL).length,word:"Xong",bar:false,next:"",img:""})+
-  `<div class="ktop">${kitInfo("Tâm nguyện")}</div><div class="ktpeople">${R.join("")}</div>`}
+  `<div class="ktpeople">${R.join("")}</div>`}
 try{KIT_GLOSS["Tâm nguyện"]="Mỗi người có một tâm nguyện. Họ sẽ tự tìm đến nhờ ngươi từng việc (mục Việc nhờ). Giúp trọn ba việc thì tâm nguyện thành."}catch(e){}
 (function(){if(typeof ktStoryHTML!=="function"||typeof kitSubTabs!=="function")return;const k0=kitSubTabs;
- kitSubTabs=function(key,list){if(key==="story"&&S&&S.ps&&S.reign&&!list.some(x=>x.k==="rg")){list=list.concat([{k:"rg",label:"Triều cục",n:""},{k:"rgl",label:"Tâm nguyện",n:""}])}return k0.call(this,key,list)};
+ kitSubTabs=function(key,list,info){if(key==="story"&&S&&S.ps&&S.reign&&!list.some(x=>x.k==="rg")){list=list.concat([{k:"rg",label:"Triều cục",n:""},{k:"rgl",label:"Tâm nguyện",n:""}])}return k0.call(this,key,list,info)};
  const h0=ktStoryHTML;ktStoryHTML=function(){if(S&&S.ps&&S.reign){const L=[{k:"now",label:"Chương này",n:""},{k:"rank",label:"Sắc phong",n:""},{k:"past",label:"Đã qua",n:String(((S.st&&S.st.ch&&S.st.ch.past)||[]).length+(S.r97||[]).length)},{k:"rg",label:"Triều cục",n:""},{k:"rgl",label:"Tâm nguyện",n:""}];
-   const cur=ktSubGet("story",L);if(cur==="rg"||cur==="rgl"){const sub=kitSubTabs("story",L.slice(0,3));return sub.html+(cur==="rg"?rgPaneHTML():rgGoalHTML())}}return h0.apply(this,arguments)}})();
+   const cur=ktSubGet("story",L);if(cur==="rg"||cur==="rgl"){const sub=kitSubTabs("story",L.slice(0,3),kitInfo(cur==="rgl"?"Tâm nguyện":"Luật chương"));return sub.html+(cur==="rg"?rgPaneHTML():rgGoalHTML())}}return h0.apply(this,arguments)}})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-rgsw]");if(!b||b.disabled)return;e.stopPropagation();try{rgSwitchOpen()}catch(x){console.error(x)}},true);
 /* co-op: the guest's own S.reign is personal; the court (S.trieu.rg) comes from the host's world */

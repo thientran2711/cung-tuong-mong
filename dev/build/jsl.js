@@ -104,20 +104,20 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
  function clamp(){q=0;try{document.querySelectorAll(".kbk-person.kbk-full .kesfi").forEach(f=>{const box=f.closest(".kbk-person");if(!box)return;
    const por=box.querySelector(":scope>.kbk-por"),pg=box.closest(".kbk-pg");if(!por)return;
    f.style.transform="";{const i0=f.querySelector("img");if(i0&&i0.style.maskImage){i0.style.maskImage="";i0.style.webkitMaskImage=""}}
-   /* KIT 34.6 (owner 16/11 "Nhân vật sao chưa theo tỉ lệ chuẩn"): the figure (real or silhouette) is sized by its BODY — kitBookFig, the stage / dialog rule:
-      body = min(KIT_FIG.h × column, maxPx) × fac, feet on the column floor, true aspect. Not measured yet → hidden (never shown at its raw box size). */
-   let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight;
-    if(!b1||!Hc){f.style.visibility="hidden"}else{const kf=parseFloat(getComputedStyle(box).getPropertyValue("--kfr"))||1;let kk=1;
-     const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hc);const pwc=por.clientWidth,pw1=Math.max(.2,(b1.r||1)-(b1.l||0))*g.iw;if(pwc&&pw1>pwc)kk=pwc/pw1;dyF=g.dy*kk;dxF=-(b1.l||0)*g.iw*kk;   /* fitted INTO the narrow column by its PAINTED width (sleeves / train included): feet visible, nothing cut, painted left edge on the column's left edge */
-     f.style.height=(g.ih*kk).toFixed(1)+"px";f.style.width=(g.iw*kk).toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(g.body*kk).toFixed(1);
-     /* KIT 32.2b EQUAL GAPS (owner 16/11 s21/s22, whole group): the two frame lines round the figure are the running-head rule (.kbk-rh)
-        and the page frame's bottom line: the painted border's inner edge on art pages (KBK_ART_LINE.b of the page height, measured on
-        book-right/left.webp), the drawn .kbk-in frame on plain pages. Gap above the painted head = gap under the feet: the figure is raised
-        by half the difference (never lowered past its column floor — the page number row — never above the column top). */
+   /* KIT 56.3 FULL-BODY FIGURE (owner 18/11 ~07:10Z + ~07:20Z, overwrites the 17/11 narrow-column fit, the 18/11 "wide robes cropped" and the frame-shape rules): LAYOUT = the live Tuần lục layout (--porf column, text column as live).
+      SIZE = ONE body for everybody: SKULL TOP (kitFigBody ht = head-top table / face mesh, never crown, bun or hat) to FEET = column width / BAL.bookFigW (her p.5 shot: Fold 641 / iPad 534); kids by KIT_FIG.fac.
+      Nothing is cut, nobody is shrunk: a wide robe / sleeve / lantern spreads out of the column over the text area (the text is drawn ON TOP, the figure is transparent); the painted left edge is on the column's left edge as live.
+      Crowns rise into the free paper; ONE feet line for everybody: the column floor, moved DOWN (toward the page's bottom line) only as far as the tallest Hoàng hậu crown (BAL.bookFrame.cRef) needs to clear the running-head rule by BAL.bookFrame.gap px; only if that is not enough the ONE body is lowered for all. */
+   let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight,BF=BAL.bookFrame;
+    if(!b1||!Hc||!por.clientWidth){f.style.visibility="hidden"}else{
+     const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,kid=/fig-kid-/.test(s1)&&typeof KIT_FIG==="object"?KIT_FIG.fac(s1):1;
+     let body=por.clientWidth/BAL.bookFigW,shift=0;
      try{const inEl=box.closest(".kbk-in"),rh=inEl&&inEl.querySelector(":scope > .kbk-rh");const rel=e=>{let y=0,x=e;while(x&&x!==inEl){y+=x.offsetTop;x=x.offsetParent}return x===inEl?y:null};const pt=inEl?rel(por):null;
       const pgE=box.closest(".kbk-pg"),art=!!(pgE&&(pgE.classList.contains("r")&&box.closest(".kbk.art-right")||pgE.classList.contains("l")&&box.closest(".kbk.art-left")));
-      if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=art?pgE.offsetHeight*(1-KBK_ART_LINE.b)-inEl.offsetTop:inEl.clientHeight,figH=g.ih*kk*Math.max(.2,b1.b-b1.t),feet=pt+Hc;
-       const s=Math.max(-(Hc-figH),Math.min(0,((lb-feet)-(feet-figH-lt))/2));dyF+=s;f.dataset.kgap=Math.round(feet+s-figH-lt)+"/"+Math.round(lb-feet-s)}}catch(e){}}}
+      if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=(art?pgE.offsetHeight*(1-KBK_ART_LINE.b)-inEl.offsetTop:inEl.clientHeight)-BF.footGap,feet0=pt+Hc,need=lt+BF.gap+body*(1+BF.cRef);
+       shift=Math.max(0,Math.min(need-feet0,lb-feet0));if(feet0+shift<need-.5)body=Math.max(60,(feet0+shift-lt-BF.gap)/(1+BF.cRef));f.dataset.kshift=Math.round(shift)}}catch(e){}
+     const bd=Math.max(.2,b1.b-kitFigTop(b1)),ih=body*kid/bd,iw=ih*ar1;dyF=ih*(1-b1.b)+shift;dxF=kitFullFigX(b1,iw,por.clientWidth,Math.max(0,por.getBoundingClientRect().left-(box.closest(".kbk-in")||box).getBoundingClientRect().left));
+     f.style.height=ih.toFixed(1)+"px";f.style.width=iw.toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(ih*(b1.b-kitFigTop(b1))).toFixed(1);{const im=f.querySelector("img");if(im)im.style.clipPath=""}}}
    const w0=f.offsetWidth;if(!w0||!box.offsetWidth)return;
    f.style.transformOrigin="50% 100%";const t=Math.abs(dyF)>0.5||Math.abs(dxF)>0.5?`translate(${dxF.toFixed(1)}px,${dyF.toFixed(1)}px)`:"";if(f.style.transform!==t)f.style.transform=t})}catch(e){}}
  function soon(){if(!q){q=requestAnimationFrame(clamp);setTimeout(clamp,450);setTimeout(clamp,1300)}}

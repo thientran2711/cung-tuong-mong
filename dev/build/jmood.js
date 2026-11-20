@@ -27,12 +27,15 @@ function mbS(){if(!S)return null;if(!S.mood||typeof S.mood!=="object"||typeof S.
 function mbW(){try{return wk()}catch(e){return 0}}
 const cl2=(x,a,b)=>Math.max(a,Math.min(b,x));
 /* push the bar; merge pushes of the same cause kind in the same tuần ("Việc thành ×3: Đánh đàn, Làm thơ") */
-function mbAdd(d,why,kind){if(!mbOn()||!d)return 0;const M=mbS();/* the deeper she already is, the less a push the same way moves her (saturation, BAL.mood.sat) */const same=Math.max(0,Math.sign(d)*M.v);d=Math.round(d*Math.max(B().satMin,1-same/B().sat));if(!d)return 0;const v0=M.v;M.v=cl2(M.v+d,-100,100);const real=M.v-v0;if(!real)return 0;
+function mbAdd(d,why,kind){if(!mbOn()||!d)return 0;const M=mbS();/* the deeper she already is, the less a push the same way moves her (saturation, BAL.mood.sat) */const same=Math.max(0,Math.sign(d)*M.v);d=Math.round(d*Math.max(B().satMin,1-same/B().sat));if(!d)return 0;
+ /* THE SIMS MODEL (owner OD 17/11 ~18:10Z): the push is a cause with its own khắc timer (jmoodknow mkBar); the bar = the sum of live causes */
+ if(typeof mkBar==="function"&&typeof mkOn==="function"&&mkOn()){const real=mkBar(d,why,kind||why);MOOD_N.pushes[kind||why]=(MOOD_N.pushes[kind||why]||0)+real;return real}
+ const v0=M.v;M.v=cl2(M.v+d,-100,100);const real=M.v-v0;if(!real)return 0;
  const W=mbW();kind=kind||why;MOOD_N.pushes[kind]=(MOOD_N.pushes[kind]||0)+real;
  const x=M.log.find(e=>e.w===W&&e.k===kind);if(x){x.d+=real;x.n=(x.n||1)+1;if(why&&x.why.indexOf(why)<0&&x.why.length<70)x.why+=", "+why}else M.log.unshift({w:W,k:kind,d:real,why:String(why||"").slice(0,80),n:1});
  M.log=M.log.filter(e=>W-e.w<=B().keep).slice(0,B().logMax);return real}
 /* ---------- bands ---------- */
-function mbFlav(){try{const e=typeof emoGet==="function"?emoGet(S):null;if(!e||e.k==="binh")return"";if(e.k==="gian")return"gian";if(e.k==="ghen")return"ghen";if(e.k==="so"||e.k==="lo")return"so";return""}catch(e){return""}}
+function mbFlav(){try{const e=typeof emoGet==="function"?emoGet(S):null;if(!e||e.k==="binh")return"";const k=typeof feelGrp==="function"?feelGrp(e.k):e.k;/* FEELINGS-18: a new kind reads its group */if(k==="gian")return"gian";if(k==="ghen")return"ghen";if(k==="so"||k==="lo")return"so";return""}catch(e){return""}}
 const MB_LOW={"":["Phiền muộn","U uất"],gian:["Bực dọc","Phẫn uất"],ghen:["Hờn tủi","Hờn ghen"],so:["Bất an","Hoảng hốt"]};
 function mbBand(v){if(v==null){const M=mbS();v=M?M.v:0}const b=B().band;const f=mbFlav();
  if(v>=b[3])return{i:2,name:"Hân hoan",cls:"g",f:""};if(v>=b[2])return{i:1,name:"Vui vẻ",cls:"g",f:""};
@@ -45,7 +48,7 @@ function mbAffK(v){if(!mbOn())return 0;if(v==null)v=mbS().v;const a=Math.abs(v),
 function mbLocked(a){if(!a||!mbOn())return false;return mbBand().i<=-2&&B().lock.includes(a.n)}
 window.mbS=mbS;window.mbBand=mbBand;window.mbOdPts=mbOdPts;window.mbAdd=mbAdd;window.mbAffK=mbAffK;
 /* odds: her acts only (NPCs keep jemo's own small emotion rule) */
-(function(){if(typeof odA!=="function")return;const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{if(a===S&&mbOn()){const m=mbOdPts();if(m){MOOD_N.odN++;MOOD_N.odSum+=m;MOOD_N.odMax=Math.max(MOOD_N.odMax,Math.abs(m));return cl2(r+m,5,95)}}}catch(e){}return r}})();
+(function(){if(typeof odA!=="function")return;const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{if(a===S&&mbOn()){const m=mbOdPts();if(m){MOOD_N.odN++;MOOD_N.odSum+=m;MOOD_N.odMax=Math.max(MOOD_N.odMax,Math.abs(m));return oddsCl(r+m)}}}catch(e){}return r}})();
 /* "Vì sao <bậc>?": the real formula re-run with her mood at calm (whyDiff), and the deck cards (static odds) name it too */
 (function(){if(typeof whyDiff!=="function")return;const w0=whyDiff;whyDiff=function(fn,subj){const L=w0.apply(this,arguments);try{if(!mbOn()||!(subj||[]).some(x=>x&&x[0]===S))return L;const M=mbS(),v=M.v;if(!mbOdPts(v))return L;
   let o0,o1;try{o0=fn();M.v=0;o1=fn()}finally{M.v=v}if(o0!=null&&o1!=null&&o0!==o1)L.push([`Tâm trạng ngươi: ${mbBand(v).name.toLowerCase()}`,o0-o1])}catch(e){}return L}})();
@@ -60,13 +63,13 @@ window.mbS=mbS;window.mbBand=mbBand;window.mbOdPts=mbOdPts;window.mbAdd=mbAdd;wi
  ghenN=function(n){return n0(mk(n))};ghenAll=function(n){try{const n2=mk(n);if(n2!==n)MOOD_N.ghen+=n2-n}catch(e){}return g0.apply(this,arguments)}})();
 /* ---------- inputs ---------- */
 /* every feeling that lands on her moves the bar (even when a stronger feeling keeps the seal) */
-(function(){if(typeof emoSet!=="function")return;const s0=emoSet;emoSet=function(p,k,v,why){try{if(mbOn()&&p&&(p===S||(typeof emoRes==="function"&&emoRes(p)===S))&&v>0&&typeof emoOn==="function"&&emoOn()){const c=B().emo[k]||0;
+(function(){if(typeof emoSet!=="function")return;const s0=emoSet;emoSet=function(p,k,v,why){try{if(mbOn()&&!(typeof mkOn==="function"&&mkOn())&&p&&(p===S||(typeof emoRes==="function"&&emoRes(p)===S))&&v>0&&typeof emoOn==="function"&&emoOn()){const c=B().emo[k]||0;
   if(c)mbAdd(c*v,why||(typeof EMO==="object"&&EMO[k])||"","e:"+(why||k))}}catch(e){}return s0.apply(this,arguments)}})();
 /* her own acts with a real roll: deck cards and talk options */
 (function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const rolled=!!(a&&a.o!=null&&a.o<100&&!a.exam);const r=r0.apply(this,arguments);
  try{if(rolled&&(r===true||r===false)&&mbOn()){MOOD_N.acts++;const nm=String(a.n||"").replace(/<[^>]+>/g,"").slice(0,30);r?mbAdd(B().ok,nm,"ok"):mbAdd(B().fail,nm,"fail")}}catch(e){}return r}})();
 /* consort acts (Hậu cung): read the act's own result words */
-(function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&mbOn()&&r){const A=ACT[k];let o=100;try{o=A&&A.o?A.o(S,t):100}catch(e){}
+(function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&mbOn()&&r){const A=ACT[k];let o=100;try{o=A&&A.o?actOdds(S,t,k):100}catch(e){}
   if(o<100){MOOD_N.acts++;const bad=(typeof FAILRE!=="undefined"?FAILRE:/hỏng|không thành|bị phát hiện|bị lộ/).test(String(r).replace(/<[^>]+>/g,""));const nm=String(A.n||k).replace(/<[^>]+>/g,"").slice(0,30);bad?mbAdd(B().fail,nm,"fail"):mbAdd(B().ok,nm,"ok")}}}catch(e){}return r}})();
 /* rest cards lift a low mood (up to restCap): the card says so in Được */
 function mbRestGain(a){const M=mbS();if(!M||!a)return 0;const g=a.rest==="ds"?B().restDs:B().rest;return Math.max(0,Math.min(g,B().restCap-M.v))}
@@ -89,7 +92,7 @@ const mbNeedT=()=>`tâm trạng không ${mbBand().name.toLowerCase()} (lòng ch�
 /* the tuần: needs, people, weather, then the drift back to calm */
 function mbWeek(){if(!mbOn())return;const M=mbS(),b=B(),W=mbW();if(M.wk===W)return;M.wk=W;
  /* decay toward 0 (at least 1 point) */
- if(M.v){const d=Math.max(1,Math.round(Math.abs(M.v)*b.decay));M.v=M.v>0?Math.max(0,M.v-d):Math.min(0,M.v+d)}
+ if(M.v&&!(typeof mkOn==="function"&&mkOn())){const d=Math.max(1,Math.round(Math.abs(M.v)*b.decay));M.v=M.v>0?Math.max(0,M.v-d):Math.min(0,M.v+d)}/* old path only: with causes on khắc timers there is no drift (OD 17/11 ~18:10Z) */
  const N=b.need;
  if((S.suc||0)<N.sucLo)mbAdd(N.sucLoD,`Sức chỉ còn ${S.suc}`,"w:suc");else if((S.suc||0)>=N.sucHi)mbAdd(N.sucHiD,"thân thể khỏe khoắn","w:suc");
  try{if(typeof illOf==="function"&&illOf(S))mbAdd(N.ill,`đang ${typeof illName==="function"?illName(S).toLowerCase():"ốm"}`,"w:ill")}catch(e){}
@@ -102,7 +105,7 @@ function mbWeek(){if(!mbOn())return;const M=mbS(),b=B(),W=mbW();if(M.wk===W)retu
   if(fo)mbAdd(-Math.min(b.foe.cap,fo*b.foe.d),`${fo} người oán ngươi`,"w:foe");
   if(S.maid&&(S.maid.loyal||0)>=b.maidHi)mbAdd(b.maidD,`${S.maid.name||"cung nữ"} hết lòng với ngươi`,"w:maid")}catch(e){}
  /* weather */
- try{const x=S.wx;if(x){if(b.wx.nice.includes(x.n))mbAdd(b.wx.niceD,`trời ${x.n}`,"w:wx");else if(x.f===2||x.f===3||x.f===4)mbAdd(b.wx.harshD,`trời ${x.n}`,"w:wx");else if(x.f===1)mbAdd(b.wx.wetD,`trời ${x.n}`,"w:wx")}}catch(e){}
+ try{const x=S.wx;if(x){if(b.wx.nice.includes(x.b||x.n))mbAdd(b.wx.niceD,`trời ${x.n}`,"w:wx");else if(x.f===2||x.f===3||x.f===4)mbAdd(b.wx.harshD,`trời ${x.n}`,"w:wx");else if(x.f===1)mbAdd(b.wx.wetD,`trời ${x.n}`,"w:wx")}}catch(e){}
  /* measuring */
  MOOD_N.wk++;const bk=Math.round(M.v/20)*20;MOOD_N.hist[bk]=(MOOD_N.hist[bk]||0)+1;if(Math.abs(M.v)>=b.band[3])MOOD_N.ext++;if(M.v>=b.band[3])MOOD_N.hi++;if(M.v<=b.band[0])MOOD_N.lo++;
  mbComfort()}
@@ -125,9 +128,9 @@ function mbBarHTML(v){const s=v>0?"+"+v:String(v);return `${typeof kitSignedBar=
 /* the rows of the mood box: bar · why it moved · what it does now */
 function mbSecs(){const M=mbS();if(!M)return[];const v=M.v,bd=mbBand(v),b=B();
  const bar=[[bd.name,`<span class="ef ${bd.cls}">${mbBarHTML(v)}</span>`]];
- const L=M.log.filter(e=>mbW()-e.w<=b.keep).slice(0,6).map(e=>[`${e.d>0?"+":"−"}${Math.abs(e.d)}`,`${mbWhy(e)} · ${mbAgo(e.w)}`,e.d>0?"g":"r"]);
+ const L=M.log.filter(e=>e.left!=null?e.left>0:mbW()-e.w<=b.keep).slice(0,6).map(e=>[`${e.d>0?"+":"−"}${Math.abs(e.d)}`,`${mbWhy(e)} · ${e.left!=null?`còn ${e.left} khắc`:mbAgo(e.w)}`,e.d>0?"g":"r"]);
  if(!L.length)L.push(["Vì sao","không có chuyện gì đáng kể gần đây","n"]);
- L.push(["Mỗi tuần",`nguôi dần về bình thản (${Math.round(b.decay*10)} phần mười mỗi tuần)`,"n"]);
+ L.push(typeof mkOn==="function"&&mkOn()?["Mỗi chuyện","phai dần theo khắc, hết khắc thì thôi","n"]:["Mỗi tuần",`nguôi dần về bình thản (${Math.round(b.decay*10)} phần mười mỗi tuần)`,"n"]);
  const od=mbOdPts(v),ak=mbAffK(v),E=[];
  E.push(["Cơ may",od?`mọi việc ngươi làm ${typeof whyStep==="function"?whyStep(od):(od>0?"dễ hơn":"khó hơn")}`:"không đổi",od>0?"g":od<0?"r":"n"]);
  E.push(["Người khác",ak>0?`thấy ngươi tươi tắn, thiện cảm với ngươi dễ lên hơn${bd.i>=2?"; kẻ ganh thì ghen hơn":""}`:ak<0?(bd.f==="gian"?"thấy ngươi cau có, thiện cảm với ngươi khó lên":"thấy ngươi ủ ê, thiện cảm với ngươi khó lên hơn"):"không đổi",ak>0?"g":ak<0?"r":"n"]);
@@ -143,6 +146,26 @@ function mbTile(){try{if(!mbOn()||typeof kitSkillCard!=="function")return"";cons
 window.mbTile=mbTile;
 (function(){if(typeof selfCardHTML!=="function")return;const s0=selfCardHTML;selfCardHTML=function(){const h=s0.apply(this,arguments);try{const t=mbTile();if(!t)return h;
   const i=h.indexOf('data-g="Tư chất"');if(i<0)return h;const j=h.indexOf('<div class="pcg',i);const at=j<0?h.lastIndexOf("</div></div>"):h.lastIndexOf("</div>",j);if(at<0)return h;return h.slice(0,at)+t+h.slice(at)}catch(e){return h}}})();
+/* ---------- TOP BAR (owner 18/11 ~05:40Z: "cho cái thanh tâm trạng nằm ở thanh trên cố định của game, sắp xếp sao cho đẹp") ----------
+   ONE part, every screen that has the fixed top bar (header.hud, last child, one full-width grid row): her mood seal + band word + kitSignedBar (KIT §49.1: calm at the
+   centre, red left = low, green right = high) + the signed number. Tap = the existing mood box (data-emo-open="me", jpcf). ONE accessor for the number:
+   kitMoodVal() reads moodBar(S) when the npc-chain model is live, else S.mood.v — no second number.
+   Owner picked this full-row layout (18/11 ~06:05Z, "kiểu 1"). */
+window.kitMoodVal=function(){try{if(typeof moodBar==="function"){const x=moodBar(S);const n=typeof x==="number"?x:x&&x.v;if(typeof n==="number"&&isFinite(n))return Math.round(n)}}catch(e){}return S&&S.mood&&typeof S.mood.v==="number"?Math.round(S.mood.v):0};
+function mbHud(){try{const hd=document.querySelector("header.hud");if(!hd)return;let el=document.getElementById("hud-mood"); if(!mbOn()){if(el)el.hidden=true;return}
+ if(!el){el=document.createElement("div");el.id="hud-mood";el.setAttribute("role","button");el.tabIndex=0;el.dataset.emoOpen="me";hd.appendChild(el);
+  el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();el.click()}})}
+ el.className="kstm";el.hidden=false;const v=kitMoodVal(),bd=mbBand(v),sg=v>0?"+"+v:String(v);let seal="";try{seal=typeof emoBadge==="function"?emoBadge(S):""}catch(e){}
+ const h=`<span class="kmd-seal">${seal}</span><small class="kmd-l">Tâm trạng</small><b class="kmd-w ef ${bd.cls}">${bd.name}</b>${typeof kitSignedBar==="function"?kitSignedBar(v):""}<span class="kmd-n">${sg}</span>`;
+ if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h;el.title=`Tâm trạng ${bd.name} ${sg} · chạm để xem vì sao`}}catch(e){}}
+(function(){const st=document.createElement("style");st.id="kit-moodhud";st.textContent=`
+header.hud>.kstm{grid-area:auto;grid-column:1/-1;box-sizing:border-box;display:flex;align-items:center;gap:7px;height:20px;margin-top:2px;padding:2px 4px 0;cursor:pointer;min-width:0;border-top:1px solid var(--k-hair,#e6d3ac)}
+.kstm .kmd-seal{display:inline-flex;width:18px;height:18px;flex:0 0 18px}.kstm .kmd-seal img.kemo{width:18px;height:18px;border-radius:50%;object-fit:cover;margin:0;position:static}
+.kstm .kmd-l{font-size:.7rem;color:var(--dim);white-space:nowrap}.kstm .kmd-w{font-family:var(--display);font-size:.85rem;white-space:nowrap;min-width:3.6em}
+.kstm .ksbar{flex:1 1 auto;width:auto;min-width:40px;height:8px}.kstm .kmd-n{font-family:var(--display);font-size:.85rem;font-variant-numeric:tabular-nums;min-width:2.4em;text-align:right;color:var(--ink)}
+`;document.head.appendChild(st)})();
+if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);mbHud();return r}}
+window.mbHud=mbHud;
 /* measuring hook */
 window.moodStat=function(){return Object.assign({v:S&&S.mood?S.mood.v:null},MOOD_N)};
 })();

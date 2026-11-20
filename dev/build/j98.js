@@ -32,4 +32,5 @@ function itemArt(key,tier){try{
   if(!(k in ITEM_ART_G))return null;const g=ITEM_ART_G[k];
   return {key:k,src:`img/item-${k}.webp`,src512:`img/item512/item-${k}.webp`,grade:g,gradeName:ITEM_GRADE[g]}}catch(e){return null}}
 /* existing small icons (j8 iic → "item-"+ITIMG[k]) now point at the new paintings, one file per key */
-try{if(typeof ITIMG==="object"&&ITIMG)for(const k in ITEM_ART_G)ITIMG[k]=k}catch(e){}
+/* jreg: paintings registered by later modules (jpoison, jitev…) too; jeitem/jkc/jstip/jweather also set it themselves (same value) */
+if(typeof ITIMG==="object"&&ITIMG)regEach(ITEM_ART_G,k=>{ITIMG[k]=k},"ITIMG");

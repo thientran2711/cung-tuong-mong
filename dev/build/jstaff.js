@@ -1,6 +1,6 @@
 /* ================= jstaff: NAMED PALACE STAFF (owner 16/11, review/elder-staff) =================
    Five named servants hold the palace's offices, each with 3–4 duties (numbers and names in BAL.staff, jbal.js):
-     gt  Giáo tập ma ma, Trữ Tú cung: sent by Thái hậu, in Thái hậu's household; teaches tú nữ, lễ nghi, tuyển tú; the tutorial guide.
+     gt  Giáo tập ma ma, Nội vụ phủ: sent by Thái hậu, in Thái hậu's household; teaches tú nữ, lễ nghi, tuyển tú; the tutorial guide.
      tn  Chưởng sự cô cô, Đức Thọ cung: Thái hậu's woman; her edicts, cung quy, punishments, Tân Giả khố.
      kn  Quản sự ma ma, Càn Ninh cung: Hoàng hậu's woman (kept in Thái hậu's household while the seat is empty); maid assignments,
          lệ bạc, Thượng cung cục, the monthly palace report.
@@ -24,25 +24,25 @@ if(typeof allServ==="function"){const a0=allServ;allServ=function(){const L=a0.a
 if(typeof ownerOf==="function"){const o0=ownerOf;ownerOf=function(s){const r=o0.apply(this,arguments);if(r)return r;try{if(S&&S.thO&&(S.thO.staff||[]).includes(s))return S.thO}catch(e){}return null}}
 /* Thái hậu ranks above every consort: the highest servant rank, the biggest household */
 if(typeof srkMax==="function"){const m0=srkMax;srkMax=function(o,s){if(S&&o&&o===S.thO)return s&&s.role==="maid"?4:3;return m0.apply(this,arguments)}}
-if(typeof capOf==="function"){const c0=capOf;capOf=function(p){if(S&&p&&p===S.thO)return[4,2];return c0.apply(this,arguments)}}
 /* her title is her post (SRK has no "ma ma" word: rank 4 is the Nữ quan dress) */
 if(typeof srkName==="function"){const n0=srkName;srkName=function(s){const p=s&&s.eid&&postOf(s.eid);return p?p.title:n0.apply(this,arguments)}}
 function elders(){try{return allServ().filter(s=>s&&s.eid&&postOf(s.eid))}catch(e){return[]}}
 function elderBy(id){return elders().find(s=>s.eid===id)||null}
-function masterFor(post){if(post.master==="hh"){const q=typeof queenP==="function"?queenP():null;if(q&&(q===S||(q.alive!==false&&!q.out)))return q}return thH()}
+function masterFor(post){if(post.master==="hh"){const q=typeof queenP==="function"?queenP():null;/* a queen in the cold palace keeps no palace office (review/staff-root): the woman goes back to Thái hậu's household */if(q&&!q.out&&(q===S||q.alive!==false))return q}return thH()}
 function masterName(m){if(!m)return"";if(m===S.thO)return"Thái hậu";if(m===S)return"ngươi";return m.queen?`Hoàng hậu ${m.name}`:m.name}
 function mk(post,i,age){const nm=post.names[i%post.names.length];if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>s.sid||0),0);
  return{sid:typeof sidN!=="undefined"?++sidN:Date.now(),eid:post.id,n:i,name:nm[0],call:nm[1],role:"maid",rk:post.rk,age,retire:rint(...(B().retire||[63,68])),
   tr:post.tr||"trung",loyal:70+R(16),spyFor:null,lover:null,af:{},hue:0,face:-1,fc:"",fk:"",fid:"",elder:1,since:S?S.year:1}}
 const elderCallOf=m=>{const st=(m.staff||[]).find(s=>s.eid);return st?st.call:"ma ma"};
-/* keep the household rule: a master over her cap sends an ordinary maid back to Nội vụ phủ (never a named one, a spy of hers, a lover) */
-function fitCap(m){try{if(!m||!m.staff||m===S.thO)return;const cap=capOf(m)[0];let n=m.staff.filter(s=>s.role==="maid").length+1;
- while(n>cap){const L=m.staff.filter(s=>s.role==="maid"&&!s.eid&&s.spyFor!=="me"&&!s.lover);const x=L[L.length-1]||m.staff.find(s=>s.role==="maid"&&!s.eid);if(!x)break;
-  m.staff.splice(m.staff.indexOf(x),1);try{if(x.fid){const U=figUsed();const i=U.indexOf(x.fid);if(i>=0)U.splice(i,1)}}catch(e){}n--;if(m===S)log(`Nội vụ phủ điều ${x.name} sang cung khác để ${elderCallOf(m)} về hầu.`)}}catch(e){}}
+/* keep the household rule: a master over her cap sends ordinary servants back to Nội vụ phủ (never a named one) — the ONE trim (j10 capTrim,
+   review/staff-cap-fix): same order, and she is told of every removal */
+function fitCap(m){try{if(!m||!m.staff||m===S.thO)return;capTrim(m)}catch(e){}}
 /* every post filled, each woman in the right household; her rank within the master's cap (srkMax) */
 function place(st){const post=postOf(st.eid);if(!post)return;const m=masterFor(post);if(!m)return;if(!m.staff)m.staff=[];
  for(const o of [S,S.thO].concat(rivals||[]))if(o&&o!==m&&Array.isArray(o.staff)&&o.staff.includes(st))o.staff.splice(o.staff.indexOf(st),1);
  if(!m.staff.includes(st)){m.staff.push(st);fitCap(m)}st.rk=Math.min(post.rk,srkMax(m,st));if(st.spyFor&&m===S)st.spyFor=null}
+/* every household sweep (j10 capSweep: render, buổi, month) first puts each named woman back with her right master (a queen sent to the cold palace loses hers at once) */
+if(typeof capSweep==="function"){const cs0=capSweep;capSweep=function(){try{if(S&&!isGuest())for(const st of elders())place(st)}catch(e){}return cs0.apply(this,arguments)}}
 function giveFace(st){if(!S||!st||isGuest())return;
  if(!st.fc&&typeof drawF==="function"){try{st.fc=drawF(["mama","womid"],st.age)||"";st.fk="mama"}catch(e){}}
  if(st.fid||typeof FIGS==="undefined"||!FIGS.length)return;
@@ -53,10 +53,11 @@ function giveFace(st){if(!S||!st||isGuest())return;
 function elderInit(){if(!S||isGuest())return;thH();
  for(const post of B().posts){let st=elderBy(post.id);if(!st)st=mk(post,0,rint(post.age[0],post.age[1]));place(st);giveFace(st)}
  for(const st of elders()){st.elder=1;try{const K=typeof k61S==="function"?k61S():S.known;if(K&&typeof kOf61==="function"){const k=kOf61(st);if((+K[k]||0)<2)K[k]=2}}catch(e){}}}
-/* the identity's picture: the a51 art of her identity */
+/* the identity's picture: her elder art = the a51 band or older (a65 at 65+ when painted, art-wiring-1119: BAL.ageBand), nearest age of her identity */
 function figRec(st){try{if(!st||!st.fid||typeof FIGIX==="undefined")return null;const r=st.fid.split(":")[0];const L=(FIGIX[r]||{})[st.fid]||[];if(!L.length)return null;
- if(r==="maid")return L.find(f=>(f.tier==null||f.tier==="")&&f.ageBand==="a51")||null;
- return L.find(f=>f.ageBand==="a51"&&f.por)||L.find(f=>f.ageBand==="a51")||figBest(L,null,st.age||55)}catch(e){return null}}
+ const ag=Math.max(BAL.ageBand[2],st.age||55);
+ if(r==="maid"){const N=L.filter(f=>f.tier==null||f.tier==="");return N.length?figBest(N,null,ag):null}
+ const P=L.filter(f=>f.por);return figBest(P.length?P:L,null,ag)}catch(e){return null}}
 const porSrc=st=>{const f=figRec(st);return f?figPath(f.por||f.file||f.src):""};
 const figSrc=st=>{const f=figRec(st);return f?figPath(f.file||f.src):""};
 if(typeof figFor==="function"){const ff=figFor;figFor=function(p,kind){try{let w=p&&(p.ref||p);if(w&&w.kind==="elder"&&w.ref)w=w.ref;if(w&&w.eid&&postOf(w.eid)){giveFace(w);const s=kind==="por"?porSrc(w):figSrc(w);if(s)return s}}catch(e){}return ff.apply(this,arguments)}}
@@ -92,15 +93,19 @@ if(typeof heirMonth==="function"){const h0=heirMonth;heirMonth=function(){const 
 window.elderTabRows=function(){try{const T=S&&S.thO&&S.thO.staff||[];return T.map((s,j)=>({t:"thh",s,f:pServ(s),name:typeof shortN==="function"?shortN(s.name):s.name,sep:j?"":"Cung Thái hậu"}))}catch(e){return[]}};
 function giaoBtns(st){const p=postOf(st.eid);const t2=typeof whyTime==="function"?whyTime(B().talk||2):"";const g=B().gift||20;
  return [pbtn(`data-elder="bieu" data-eid="${st.eid}"`,"Biếu",`Bạc -${g} · người ấy quý ngươi +${B().giftAf||10}`,S.bac<g?`cần ${g} bạc`:""),
-  pbtn(`data-elder="hoi" data-eid="${st.eid}"`,"Hỏi chuyện",`Chắc chắn · ${B().talk||2} khắc · thành: nghe chuyện ${p.palace}`,t2)]}
-function dutyRows(st){const p=postOf(st.eid);const m=ownerOf(st);return[["Chức",`${p.title} ${p.palace}`,"t"],["Chủ",masterName(m)+(p.master==="hh"&&m===S.thO?" (giữ thay Hoàng hậu)":p.id==="gt"?" sai đến Trữ Tú cung":""),"t"],["Việc",p.duties.join(", "),"t"]]}
+  pbtn(`data-elder="hoi" data-eid="${st.eid}"${capAt({k:B().talk})}`,"Hỏi chuyện",`${capW()} · ${B().talk} khắc · thành: nghe chuyện ${p.palace}`,t2)]}
+function dutyRows(st){const p=postOf(st.eid);const m=ownerOf(st);return[["Chức",`${p.title} ${p.palace}`,"t"],["Chủ",masterName(m)+(p.master==="hh"&&m===S.thO?" (giữ thay Hoàng hậu)":p.id==="gt"?" sai đến Nội vụ phủ":""),"t"],["Việc",p.duties.join(", "),"t"]]}
 window.elderGroups=st=>{try{return st&&st.eid&&postOf(st.eid)?[["Chức việc",dutyRows(st)],["Giao thiệp",giaoBtns(st)]]:[]}catch(e){return[]}};
 /* ---------- the stage: where each one works; her card = the kit pcard ---------- */
+/* ONE rule (stage, record j95, map): the Giáo tập ma ma visits her room in her first days to teach a new tú nữ; a former palace maid
+   (origin cn, or risen from the servant road) needs no teaching, so she never stands there (owner 17/11 02:45Z, review/staff-root) */
+function gtAtHome(){return !!(S&&(S.turn||0)<=BAL.staff.gtDays&&!S.out&&!(S.origin&&S.origin.k==="cn")&&!(S.srv&&S.srv.risen))}
+window.gtAtHome=gtAtHome;
 function stageP(st){const p=postOf(st.eid);return{kind:"elder",ref:st,eid:st.eid,name:st.call,ini:String(st.call).split(" ")[0],col:staffFace(st).col,info:`${p.title} ${p.palace}`}}
 function addStage(V){try{if(!V||!V.people)return V;const k=V.k;if(V.people.some(p=>p.kind==="elder"))return V;
  const put=id=>{const st=elderBy(id);if(st)V.people.push(stageP(st))};
  if(k==="tn"&&!S.thDead)put("tn");if(k==="kn")put("kn");if(k==="tgk")put("tn");
- if(k==="home"&&(S.turn||0)<=4&&!S.out)put("gt")}catch(e){}return V}
+ if(k==="home"&&gtAtHome())put("gt")}catch(e){}return V}
 const tgkMsg=st=>`Nước giặt lạnh buốt, chậu gỗ chất cao. ${st.call} của Đức Thọ cung cầm roi đứng canh.`;
 if(typeof goTo==="function"){const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(S&&S.visit&&S.visit.k===k&&k!=="home"){addStage(S.visit);render()}}catch(e){}return r}}
 if(typeof homePeople==="function"){const h0=homePeople;homePeople=function(){const L=h0.apply(this,arguments);try{return addStage({k:"home",people:L}).people}catch(e){return L}}}
@@ -120,34 +125,34 @@ const STAFF_SAY={
  knMid:["“Hoàng hậu chưa nói gì về {goi}.”","“Hoàng hậu bận việc lục cung, ít khi nhắc tên ai. {Goi} chớ bận lòng.”","“Hoàng hậu xưa nay xét người lâu. {Goi} cứ giữ lễ là hơn.”","“Hoàng hậu không nói gì, nhưng người vẫn để ý từng cung.”","“Hoàng hậu thích người chăm chỉ thỉnh an, {goi} nhớ cho.”"],
  knLo:["“Hoàng hậu thấy {goi} chưa biết phận.”","“Nô tỳ nói thật lòng: Hoàng hậu dạo này nhắc đến {goi} chẳng mấy vui.”","“Cây cao thì gió lay. Hoàng hậu đang để mắt đến {goi} đấy.”","“Hoàng hậu bảo, có người nên bớt khoe khoang. Nô tỳ chẳng dám nói là ai.”","“Hôm qua Hoàng hậu xem lại sổ cung {goi}, rất lâu.”"]};
 function talkLine(st){const warm=((st.af&&st.af.me)||0)>=30;
- if(st.eid==="gt")return kLine("staff:gt",[`[lo]“Đi đứng chớ ngẩng cao đầu quá vai người trên. Cung quy là thế.”`,`[lo]“Gặp Hoàng hậu thì quỳ trước, thưa sau. Gặp Thái hậu thì chờ người cho đứng dậy.”`,`[lo]“Tú nữ mới năm nay có mấy người lanh lợi. Chớ để bị lấn.”`,`“Lời nói trong cung như nước đổ, không hốt lại được.”`,`“Ăn không nói, ngủ không than. Trong cung, cái miệng phải theo phép.”`,`[lo]“Bước nhỏ, đầu cúi, tay đặt trước người. Người trên nhìn xuống, chỉ nên thấy sự nhu thuận.”`,`“Cẩn ngôn thận hành, bốn chữ ấy giữ mạng người trong cung.”`,`[mid]“{Goi} nay đã làm chủ một cung, người dưới học theo từng bước đi của {goi}.”`,`[mid]“Chủ vị giữ lễ thì cả cung yên. Lão nô chỉ dám nhắc vậy.”`,`[mid]“Cung riêng thì việc riêng nhiều. Kẻ hầu phải dạy từ sớm, {goi} ạ.”`,`[hi]“Phẩm càng cao, lễ càng phải đủ. Lão nô dạy cả đời, chỉ nói được vậy.”`,`[hi]“Ngồi gần Trung cung thì phải biết lùi một bước.”`,`[hi]“Các phi đều nhìn {goi}. Một cái nhíu mày cũng thành chuyện.”`,`[hq]“Mẫu nghi thiên hạ, một lời ban ra là lệ của lục cung.”`,`[hq]“Trung cung khoan hòa thì lục cung yên ổn.”`,`[hq]“Lão nô dạy {goi} từ ngày mới vào cung. Nay {goi} ngồi Trung cung, lão nô chỉ biết mừng.”`],{sp:{srv:"f"},ls:S});
+ if(st.eid==="gt")return kLine("staff:gt",kTP("staff:gt")||[`[lo]“Đi đứng chớ ngẩng cao đầu quá vai người trên. Cung quy là thế.”`,`[lo]“Gặp Hoàng hậu thì quỳ trước, thưa sau. Gặp Thái hậu thì chờ người cho đứng dậy.”`,`[lo]“Tú nữ mới năm nay có mấy người lanh lợi. Chớ để bị lấn.”`,`“Lời nói trong cung như nước đổ, không hốt lại được.”`,`“Ăn không nói, ngủ không than. Trong cung, cái miệng phải theo phép.”`,`[lo]“Bước nhỏ, đầu cúi, tay đặt trước người. Người trên nhìn xuống, chỉ nên thấy sự nhu thuận.”`,`“Cẩn ngôn thận hành, bốn chữ ấy giữ mạng người trong cung.”`,`[mid]“{Goi} nay đã làm chủ một cung, người dưới học theo từng bước đi của {goi}.”`,`[mid]“Chủ vị giữ lễ thì cả cung yên. Lão nô chỉ dám nhắc vậy.”`,`[mid]“Cung riêng thì việc riêng nhiều. Kẻ hầu phải dạy từ sớm, {goi} ạ.”`,`[hi]“Phẩm càng cao, lễ càng phải đủ. Lão nô dạy cả đời, chỉ nói được vậy.”`,`[hi]“Ngồi gần Trung cung thì phải biết lùi một bước.”`,`[hi]“Các phi đều nhìn {goi}. Một cái nhíu mày cũng thành chuyện.”`,`[hq]“Mẫu nghi thiên hạ, một lời ban ra là lệ của lục cung.”`,`[hq]“Trung cung khoan hòa thì lục cung yên ổn.”`,`[hq]“Lão nô dạy {goi} từ ngày mới vào cung. Nay {goi} ngồi Trung cung, lão nô chỉ biết mừng.”`],{sp:{srv:"f"},ls:S,t:kToneSt(null,"gt")});
  /* palace voice: each answer is a pool by how things stand (jvoice kLine, no repeat within BAL.voice.noRepeat tuần), address from the one core */
- if(st.eid==="tn"){if(S.thDead)return kLine("staff:tn:dead",STAFF_SAY.tnDead);const t=S.th||0;
-  return kLine("staff:tn:"+(t>=30?"hi":t>=0?"mid":"lo"),STAFF_SAY["tn"+(t>=30?"Hi":t>=0?"Mid":"Lo")],{sp:{srv:"f"},ls:S})+(warm?` Thái hậu → ngươi: thiện cảm <b>${t}</b>.`:"")}
- if(st.eid==="kn"){const q=typeof queenP==="function"?queenP():null;if(!q)return kLine("staff:kn:none",STAFF_SAY.knNone);if(q===S)return kLine("staff:kn:me",STAFF_SAY.knMe,{sp:{srv:"f"},ls:S});
-  const v=typeof rel==="function"?rel(q,S):0;return kLine("staff:kn:"+(v>=10?"hi":v>-10?"mid":"lo"),STAFF_SAY["kn"+(v>=10?"Hi":v>-10?"Mid":"Lo")],{sp:{srv:"f"},ls:S})+(warm?` Hoàng hậu → ngươi: thiện cảm <b>${v}</b>.`:"")}
+ if(st.eid==="tn"){if(S.thDead)return kLine("staff:tn:dead",kTP("staff:tn:dead")||STAFF_SAY.tnDead,{t:kToneSt(null,"tn")});const t=S.th||0;const C=BAL.staff.say.tn,w=t>=C[0]?"hi":t>=C[1]?"mid":"lo";
+  return kLine("staff:tn:"+w,kTP("staff:tn:"+w)||STAFF_SAY["tn"+w[0].toUpperCase()+w.slice(1)],{sp:{srv:"f"},ls:S,t:kToneSt(null,"tn")})+(warm?` Thái hậu → ngươi: thiện cảm <b>${t}</b>.`:"")}
+ if(st.eid==="kn"){const q=typeof queenP==="function"?queenP():null;if(!q)return kLine("staff:kn:none",kTP("staff:kn:none")||STAFF_SAY.knNone,{t:kToneSt(null,"kn")});if(q===S)return kLine("staff:kn:me",kTP("staff:kn:me")||STAFF_SAY.knMe,{sp:{srv:"f"},ls:S,t:kToneSt(null,"kn")});
+  const v=typeof rel==="function"?rel(q,S):0;const C=BAL.staff.say.kn,w=v>=C[0]?"hi":v>C[1]?"mid":"lo";return kLine("staff:kn:"+w,kTP("staff:kn:"+w)||STAFF_SAY["kn"+w[0].toUpperCase()+w.slice(1)],{sp:{srv:"f"},ls:S,t:kToneSt(null,"kn")})+(warm?` Hoàng hậu → ngươi: thiện cảm <b>${v}</b>.`:"")}
  return""}
 function cardHTML(st){const p=postOf(st.eid);const f=staffFace(st);
  const lines=[typeof tuoi==="function"?tuoi(st.age):"",`Thiện cảm <b>${(st.af&&st.af.me)||0}</b>`].filter(Boolean);
  const close=`<button type="button" class="kit-x pcx" id="popx" aria-label="Đóng" title="Đóng">✕</button>`;
- return pcard({f,col:f.col,name:`${st.call} · ${st.name}`,rank:p.title,lines,chips:[],close,note:popMsg||"",groups:window.elderGroups(st),empty:""})}
+ return pcard({f,col:f.col,name:`${st.call} · ${st.name}`,rank:p.title,lines,chips:[],close,note:"",groups:window.elderGroups(st),empty:""})}
 window.staffTalkLine=st=>talkLine(typeof st==="string"?elderBy(st):st);/* palace-voice audit (dev/test/voice-pool-sim.js) */
 window.elderCardHTML=st=>{try{return cardHTML(typeof st==="string"?elderBy(st):st)}catch(e){return""}};
 if(typeof popCard==="function"){const c0=popCard;popCard=function(p){if(p&&p.kind==="elder"&&p.ref)return cardHTML(p.ref);return c0.apply(this,arguments)}}
-function act(a,id){const st=elderBy(id);if(!st||!S||S.dead||Q.length)return;let r="";
+function act(a,id){const st=elderBy(id);if(!st||!S||S.dead||Q.length)return;let r="";const bf=typeof rsnap==="function"?rsnap():null;
  if(a==="bieu"){const g=B().gift||20;if(S.bac<g)return;apply({bac:-g});st.af.me=(st.af.me||0)+(B().giftAf||10);r=`Biếu ${st.call} ${g} lượng: người ấy quý ngươi +${B().giftAf||10}.`}
- if(a==="hoi"){const n=B().talk||2;if(!can(n))return;spend(n);st.af.me=(st.af.me||0)+1;try{if(typeof k61Meet==="function"&&k61St(st)<3)k61Meet(st,"trò chuyện",3)}catch(e){}r=`${st.call}: ${talkLine(st)}`}
- if(r){log(r);popMsg=r;render()}}
+ if(a==="hoi"){const n=B().talk||2;if(!can(n))return;spend(n);st.af.me=(st.af.me||0)+BAL.eff.jstaff.meAct;try{if(typeof k61Meet==="function"&&k61St(st)<3)k61Meet(st,"trò chuyện",3)}catch(e){}r=`${st.call}: ${talkLine(st)}`}
+ if(r){log(r);popMsg=r;render();try{if(bf&&typeof resultShow==="function")resultShow(st.call,bf,null)}catch(e){}/* person-dialog-restore: the result is the bottom result card */}}
 document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("[data-elder]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();act(b.dataset.elder,b.dataset.eid)},true);
 /* ---------- they speak by name in events and the log (LUẬT SỬA CẢ NHÓM: one table for every generic "ma ma" of these offices) ---------- */
 function tx(s){if(!s||typeof s!=="string"||!S)return s;const tn=elderBy("tn"),gt=elderBy("gt");let o=s;
  if(tn&&!S.thDead){o=o.replace(/Ma ma thân tín của Thái hậu/g,`${tn.call}, người thân tín của Thái hậu,`).replace(/Ma ma bên Đức Thọ cung/g,`${tn.call} bên Đức Thọ cung`)
   .replace(/Ma ma Đức Thọ cung/g,`${tn.call} ở Đức Thọ cung`).replace(/Ma ma của Thái hậu/g,`${tn.call} của Thái hậu`)}
- if(gt)o=o.replace(/[Tt]heo ma ma giáo tập học/g,`Theo ${gt.call}, giáo tập ma ma Trữ Tú cung, học`);
+ if(gt)o=o.replace(/[Tt]heo ma ma giáo tập học/g,`Theo ${gt.call}, giáo tập ma ma Nội vụ phủ, học`);
  return o}
 window.elderTx=tx;
 function eventLines(m){try{if(!m||m.__el||typeof m.h!=="string")return;m.__el=1;m.h=tx(m.h);const gt=elderBy("gt"),tn=elderBy("tn"),kn=elderBy("kn");
- if(m.t==="Tuyển tú"&&gt)m.h+=`<p>${gt.call}, giáo tập ma ma Trữ Tú cung, phụng chỉ Thái hậu dạy quy củ cho tú nữ mới: đi, đứng, quỳ, thưa, từng bước một.</p>`;
+ if(m.t==="Tuyển tú"&&gt)m.h+=`<p>${gt.call}, giáo tập ma ma Nội vụ phủ, phụng chỉ Thái hậu dạy quy củ cho tú nữ mới: đi, đứng, quỳ, thưa, từng bước một.</p>`;
  if(m.t==="Tân Giả khố"&&tn)m.h+=`<p>${tn.call}, chưởng sự cô cô Đức Thọ cung, đọc lệnh phạt: “Cung quy không tha ai. Giặt cho sạch, đủ hạn thì ra.”</p>`;
  if(m.t==="Đổi chủ"&&kn)m.h+=`<p>${kn.call}, quản sự ma ma Càn Ninh cung, ghi tên ngươi vào sổ cung nữ của cung mới.</p>`}catch(e){}}
 if(typeof showModal==="function"){const s0=showModal;showModal=function(){try{if(Q&&Q[0])eventLines(Q[0])}catch(e){}return s0.apply(this,arguments)}}

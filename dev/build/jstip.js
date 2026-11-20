@@ -16,11 +16,11 @@
    3. goodsGive(p, keys, {from, title, sub, kind}) — THE way any text that gives goods gives a real item (LUẬT SỬA CẢ NHÓM, dev/test/goods-scan.py):
       used by EV6 events (STIP_EV table), j67 (beat/option/end field gi), j71 festival prizes (STIP_FPRIZE), j72 favours. ================= */
 Object.assign(BAL,{stip:{
- goods:[[["vaibong",1],["tragoi",1]],[["vaibong",1],["tragoi",1]],[["luahang",1],["tragoi",1]],[["luahang",1],["trahop",1],["sonphan",1]],
-  [["luahang",2],["trahop",1],["sonphan",1]],[["gamto",1],["luahang",1],["trahop",1],["sonphan",1]],[["gamto",1],["luahang",1],["trahop",2],["sonphan",1],["yensao",1]],
-  [["gamto",2],["trahop",2],["sonphan",1],["yensao",1],["nhansam",1]]],
+ goods:[[["vaibong",1],["tragoi",1]],[["vaibong",1],["tragoi",1]],[["luahang",1],["tragoi",1]],[["luahang",1],["trahop",1]],
+  [["luahang",2],["trahop",1]],[["gamto",1],["luahang",1],["trahop",1]],[["gamto",1],["luahang",1],["trahop",2],["yensao",1]],
+  [["gamto",2],["trahop",2],["yensao",1],["nhansam",1]]],
  coal:[1,1,1,1,2,2,2,3],coldGoods:[["vaitho",1]],coldCoal:1,npcKeep:4,resell:40,
- down:{bangda:"bangvun",gamto:"luahang",luahang:"vaitho",vaibong:"vaitho",trahop:"tramoc",tragoi:"tramoc",thanbac:"thanden",sonphan:null,yensao:null,nhansam:null},
+ down:{bangda:"bangvun",gamto:"luahang",luahang:"vaitho",vaibong:"vaitho",trahop:"tramoc",tragoi:"tramoc",thanbac:"thanden",yensao:null,nhansam:null},
  w:{sung:30,fault:35,sup:40,eun:25,maid:20},cap:80,meekAdd:10,spiteAdd:15,
  lowSung:15,dropSung:10,faultM:2,supRank:4,oan:30,safeSung:55,tipM:3,allyLoyal:75,allyTips:3,maidLoyal:35,
  cutSmall:.15,cutBig:.25,tip:[8,10,12,15,18,22,26,30],greedy:50,punishM:6,
@@ -29,19 +29,19 @@ Object.assign(BAL,{stip:{
 (function(){const N={
  vaibong:{n:"Vải bông",kd:"Vải vóc",d:"May áo thường: Sắc +1 trong 3 tháng · tặng, bán được",pr:8,rk:0,dr:1,tg:["rv"]},
  vaitho:{n:"Vải thô (hàng kém)",kd:"Vải vóc",d:"Hàng kém Nội vụ phủ phát: may áo cho cung nữ thân tín, lòng +3",pr:2,use:{maid:3},tg:[]},
- tragoi:{n:"Trà Long Tĩnh",kd:"Trà",d:"Pha mời phi tần đến chơi: thiện cảm +3 · uống: Sức +3 · tặng được",pr:6,use:{suc:3},host:3,tg:["rv","th"]},
- trahop:{n:"Trà Quân Sơn ngân châm",kd:"Trà",d:"Trà thượng hạng: mời khách thiện cảm +5 · uống: Sức +4, Đức +1 · tặng Thái hậu, Hoàng thượng",pr:25,use:{suc:4,duc:1},host:5,gv:4,tg:["rv","th","emp","hh"]},
- tramoc:{n:"Trà mốc (hàng kém)",kd:"Trà",d:"Trà cũ ẩm mốc Nội vụ phủ phát: mời khách thì bị chê (thiện cảm -2) · uống: Sức +1",pr:0,use:{suc:1},host:-2,tg:[]},
+ tragoi:{n:"Trà Long Tĩnh",kd:"Trà",d:`Pha mời phi tần đến chơi: thiện cảm +3 · uống: Sức ${balSg(BAL.eff.jstip.sucUse)} · tặng được`,pr:6,use:{suc:BAL.eff.jstip.sucUse},host:3,tg:["rv","th"]},
+ trahop:{n:"Trà Quân Sơn ngân châm",kd:"Trà",d:`Trà thượng hạng: mời khách thiện cảm +5 · uống: Sức ${balSg(BAL.eff.jstip.sucUse_2)}, Đức ${balSg(BAL.eff.jstip.ducUse)} · tặng Thái hậu, Hoàng thượng`,pr:25,use:{suc:BAL.eff.jstip.sucUse_2,duc:BAL.eff.jstip.ducUse},host:5,gv:4,tg:["rv","th","emp","hh"]},
+ tramoc:{n:"Trà mốc (hàng kém)",kd:"Trà",d:`Trà cũ ẩm mốc Nội vụ phủ phát: mời khách thì bị chê (thiện cảm -2) · uống: Sức ${balSg(BAL.eff.jstip.sucUse_3)}`,pr:0,use:{suc:BAL.eff.jstip.sucUse_3},host:-2,tg:[]},
  thanbac:{n:"Than bạc sương",kd:"Than sưởi",d:"Đốt sưởi: mùa đông Sức +6, mùa khác Sức +2",pr:6,heat:[6,2],tg:["rv"]},
  thanden:{n:"Than đen (hàng kém)",kd:"Than sưởi",d:"Than khói Nội vụ phủ phát: mùa đông Sức +3, mùa khác Sức +1",pr:1,heat:[3,1],tg:[]},
- banhtrai:{n:"Hộp điểm tâm",kd:"Điểm tâm",d:"Ăn: Sức +3 · tặng, chia kẻ hầu",pr:5,use:{suc:3},tg:["rv"]},
- ruoucuc:{n:"Rượu hoa cúc",kd:"Rượu",d:"Uống: Sức +4 · tặng Hoàng thượng, phi tần",pr:12,use:{suc:4},gv:3,tg:["emp","rv"]},
+ banhtrai:{n:"Hộp điểm tâm",kd:"Điểm tâm",d:`Ăn: Sức ${balSg(BAL.eff.jstip.sucUse_4)} · tặng, chia kẻ hầu`,pr:5,use:{suc:BAL.eff.jstip.sucUse_4},tg:["rv"]},
+ ruoucuc:{n:"Rượu hoa cúc",kd:"Rượu",d:`Uống: Sức ${balSg(BAL.eff.jstip.sucUse_5)} · tặng Hoàng thượng, phi tần`,pr:12,use:{suc:BAL.eff.jstip.sucUse_5},gv:3,tg:["emp","rv"]},
  aolong:{n:"Áo lông chồn tiến cống",kd:"Vải vóc",d:"Mặc mùa đông: Sắc +4 trong 3 tháng",pr:120,rk:0,dr:4,tg:["th"]},
  cocngoc:{n:"Bộ cờ ngọc",kd:"Lễ vật",d:"Tặng người mê cờ: rất hợp ý",pr:100,gv:10,tg:["emp","th","rv"]},
- guong:{n:"Gương Tây dương",kd:"Trang sức",d:"Dùng: bày lên bàn trang điểm, Sắc +3",pr:60,use:{sac:3},tg:["rv"]},
+ guong:{n:"Gương Tây dương",kd:"Trang sức",d:`Dùng: bày lên bàn trang điểm, Sắc ${balSg(BAL.eff.jstip.sacUse)}`,pr:60,use:{sac:BAL.eff.jstip.sacUse},tg:["rv"]},
  thamba:{n:"Thảm Ba Tư",kd:"Lễ vật",d:"Tặng: êm ấm, quý hiếm",pr:120,gv:9,tg:["th","rv","hh"]},
  cungbac:{n:"Cung bạc chạm rồng",kd:"Lễ vật",d:"Tặng Hoàng thượng: hợp ý người mê săn bắn",pr:60,gv:8,tg:["emp"]},
- traicay:{n:"Giỏ trái cây tiến cống",kd:"Điểm tâm",d:"Ăn: Sức +5 · tặng",pr:15,use:{suc:5},tg:["rv","th"]},
+ traicay:{n:"Giỏ trái cây tiến cống",kd:"Điểm tâm",d:`Ăn: Sức ${balSg(BAL.eff.jstip.sucUse_6)} · tặng`,pr:15,use:{suc:BAL.eff.jstip.sucUse_6},tg:["rv","th"]},
  lanquy:{n:"Chậu lan quý",kd:"Lễ vật",d:"Tặng người yêu hoa",pr:40,gv:5,tg:["rv","th","hh"]}};
  for(const k in N){if(!IT[k])IT[k]=N[k]}
  /* coal: the use depends on the season (read when shown and when used) */
@@ -49,7 +49,7 @@ Object.assign(BAL,{stip:{
  const G={vaibong:0,vaitho:0,tragoi:0,trahop:1,tramoc:0,thanbac:0,thanden:0,banhtrai:0,ruoucuc:0,aolong:2,cocngoc:2,guong:1,thamba:2,cungbac:1,traicay:0,lanquy:1};
  try{Object.assign(ITEM_ART_G,G);for(const k in G)ITIMG[k]=k}catch(e){}
  try{if(BAL.priceTier)for(const k in N)if(BAL.priceTier[k]==null)BAL.priceTier[k]=N[k].pr}catch(e){}})();
-const STIP_UNIT={vaibong:"súc",vaitho:"súc",luahang:"súc",gamto:"súc",tragoi:"gói",tramoc:"gói",trahop:"hộp",thanbac:"giỏ",thanden:"giỏ",bangda:"khối",bangvun:"chậu",sonphan:"hộp",yensao:"hộp",nhansam:"củ"};
+const STIP_UNIT={vaibong:"súc",vaitho:"súc",luahang:"súc",gamto:"súc",tragoi:"gói",tramoc:"gói",trahop:"hộp",thanbac:"giỏ",thanden:"giỏ",bangda:"khối",bangvun:"chậu",yensao:"hộp",nhansam:"củ"};
 function stipNm(k,n){const it=IT[k];return `${n} ${STIP_UNIT[k]||"món"} ${it?it.n.replace(/ \(hàng kém\)$/,""):k}${it&&/hàng kém/.test(it.n)?" (hàng kém)":""}`}
 function stipWinter(){try{return SEASON[S.month-1]==="Đông"}catch(e){return false}}
 function stipSummer(){try{return SEASON[S.month-1]==="Hạ"}catch(e){return false}}
@@ -62,6 +62,8 @@ function stipRuleTxt(){const B=BAL.stip;return `<p class="past">Đồ phát là 
 /* ---------- state (old saves: created on first use) ---------- */
 function stipSt(p){if(!p.stip||typeof p.stip!=="object")p.stip={};return p.stip}
 function stipW(){if(!S.stipW||typeof S.stipW!=="object")S.stipW={};const W=S.stipW;if(W.greedy==null)W.greedy=roll(BAL.stip.greedy)?1:0;return W}
+/* the odds of «Sai <cung nữ> đi đòi» (one formula: the card and the parallel-time landing, jptime) */
+function stipAskOdds(m,SK){const B=BAL.stip;return oddsCl(B.askBase+Math.round((m.loyal||0)/3)+nq(m,"sharp",BAL.net.k.askSharp)+Math.round((S.sung||0)/4)-(SK&&SK.sup?25:0))}
 function stipEunName(){try{return S.court&&S.court.ped&&S.court.ped.name||"thái giám Nội vụ phủ"}catch(e){return"thái giám Nội vụ phủ"}}
 function stipWho(p){return p===S?"ngươi":p.name}
 function stipAlly(p){const st=stipSt(p);if((st.tips||0)>=BAL.stip.allyTips)return"người quen ở Nội vụ phủ (đã nhiều lần lót tay)";
@@ -84,9 +86,9 @@ function stipSkim(p,base,cut){try{if(!p||p.out||p.dead||rkOf(p)>=7||p.queen||(p=
  const ally=stipAlly(p);const tipped=st.tip!=null&&S.turn-st.tip<B.tipM;
  if(!C.length||(!cut&&((p.sung||0)>=B.safeSung||ally||tipped))){keep();return null}
  let ch=C.reduce((a,c)=>a+(B.w[c.k]||0),0)+(st.meek!=null&&S.turn-st.meek<=1?B.meekAdd:0)+(st.spite!=null&&S.turn-st.spite<=2?B.spiteAdd:0);
- if(!cut&&!roll(Math.min(B.cap,ch))){keep();return null}
+ const lead=cut?null:npwPick(C,c=>B.w[c.k]||0);/* npc-purpose G2a: a skim needs a cause that drives the Nội vụ phủ eunuch (a grudge-holder above her, his greed, her fall); roll = it passes */if(!cut&&(!lead||!roll(Math.min(B.cap,ch)))){keep();return null}
  keep();const bac=cut?0:Math.round(base*(C.length>=2?B.cutBig:B.cutSmall));
- return{bac,items:stipItemN(p,C),C,sup,why:C.map(c=>c.txt).join("; "),cut:!!cut}}catch(e){console.error("stipSkim",e);return null}}
+ return{bac,items:stipItemN(p,C),C,sup,why:(lead?[lead].concat(C.filter(c=>c!==lead)):C).map(c=>c.txt).join("; "),cut:!!cut}}catch(e){console.error("stipSkim",e);return null}}
 /* econ-items (owner 15/11 20:05Z #4): HOW MANY of the goods are skimmed scales with her standing: more causes, low Sủng, a low rank → more lines
    worse / missing; a high rank → fewer (BAL.eit.skimN). Seasonal charcoal / ice go first (the classic squeeze), then the dearest. */
 function stipItemN(p,C){const N=(BAL.eit&&BAL.eit.skimN)||{base:1,many:1,lowSung:1,lowRank:1,lowRankMax:1,highRank:5};const r=rkOf(p);
@@ -99,7 +101,7 @@ function stipGoods(p,SK){const G=[];try{if(!p||p.dead||(p===S&&typeof isSrv==="f
  for(const [k0,n0] of L){let k=k0,n=n0,kem=false,lost=false;
   if(hit.has(L.findIndex(x=>x[0]===k0))){kem=true;k=D[k0];if(k0==="thanbac"||k0==="bangda")n=Math.max(1,n0-1);if(!k){lost=true}}
   const g={k0,n0,k,n,kem,lost,E:[]};if(!lost&&IT[k])for(let i=0;i<n;i++){const e={k,from:"noivu",d:S.turn};p.inv.push(e);g.E.push(e)}G.push(g)}
- if(p!==S){const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w);const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1)})}
+ if(p!==S){const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w&&!(typeof lxOf==="function"&&lxOf(e.k)));/* son phấn boxes are spent, never trimmed (jration) */const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1)})}
  }catch(e){console.error("stipGoods",e)}return G}
 function stipGoodsTxt(G){return (G||[]).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n0).replace(/^\d+ \S+ /,"")}`:stipNm(g.k,g.n)).join(" · ")}
 /* Nội vụ phủ buys its own issue back cheaply */
@@ -107,7 +109,7 @@ function stipGoodsTxt(G){return (G||[]).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n
 /* ---------- one way to give goods + the reveal (kitReward of j93; game-feel's kitGain/kitReward keep the same call) ---------- */
 function stipRevItem(k){const it=IT[k]||{};let tier=0;try{const a=itemArt(k);tier=a?a.grade|0:(typeof kmTierOf==="function"?kmTierOf(k):0)}catch(e){}
  return{k,n:itm(k).n,d:it.d||"",img:typeof kmItemImg==="function"?kmItemImg(k):"",tier}}
-function stipReveal(entries,o){try{if(window.__bot||(typeof quiet!=="undefined"&&quiet)||typeof kitReward!=="function")return;
+function stipReveal(entries,o){try{if(screenOff()||typeof kitReward!=="function")return;
  try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&KMSNAP.inv)entries.forEach(e=>KMSNAP.inv.push(e))}catch(e){}
  if(typeof kmOn==="function"&&!kmOn())return;kitReward({kind:o.kind||"gift",title:o.title||"Hộp gấm",from:o.sub||"",items:entries.map(e=>stipRevItem(e.k)),bac:o.bac||0})}catch(e){console.error("stipReveal",e)}}
 const STIP_FROM={emp:["royal","Ngự tứ","Hoàng thượng ban"],th:["tray","Mâm thưởng","Thái hậu ban"],hh:["tray","Mâm thưởng","Hoàng hậu ban"],noivu:["chest","Rương bảo vật","Nội vụ phủ phát"],story:["gift","Hộp gấm",""]};
@@ -135,21 +137,22 @@ function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const
  const supTxt=SK.sup?`${rkName(SK.sup)} ${SK.sup.name}`:"";
  O.push({n:"Đút bạc cho thái giám",fx:{bac:-tip},x:SK.sup?`tốn: Bạc -${tip} · thành: ${eun} nhận bạc, từ nay ${B.tipM} tháng không bớt xén nữa, nhưng không dám trả lại đồ vì ${supTxt} đã dặn`:`tốn: Bạc -${tip} · thành: đổi lại đồ tốt, ${B.tipM} tháng tới không bớt xén`,
   go:()=>{st.tip=S.turn;st.tips=(st.tips||0)+1;const n=SK.sup?0:stipRestore(S,G);log(`Ngươi dúi ${tip} bạc cho ${eun}.${n?" Hắn đổi lại đồ tốt ngay.":SK.sup?` Hắn nhận bạc, nhưng không dám trái ý ${supTxt}.`:""}${st.tips>=B.allyTips?" Từ nay ngươi có người quen ở Nội vụ phủ.":""}`)}});
- if(S.maid&&!S.maid.spyFor){const m=S.maid;const od=cl(B.askBase+Math.round((m.loyal||0)/3)+nq(m,"sharp",15)+Math.round((S.sung||0)/4)-(SK.sup?25:0),5,95);
-  O.push({n:`Sai ${m.name} đi đòi`,fx:{},x:`${word(od)} · thành: đòi lại ${SK.bac?"đủ bạc và ":""}đồ tốt · hỏng: ${m.name} bị mắng đuổi về, lòng -5, Nội vụ phủ để bụng (tháng sau dễ bị bớt xén hơn)`,
-   go:()=>{if(roll(od)){back();log(`${m.name} đến Nội vụ phủ đòi đủ phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`)}else{m.loyal=cl((m.loyal||0)-5,0,100);st.spite=S.turn;log(`<span class="r">${m.name} bị ${eun} mắng đuổi về.</span> Lòng cung nữ -5.`)}}})}
- const T=stipReportTo(SK);if(T){const stat=T.k==="hh"?(S.hh||0):(S.th||0);const ev=W.ev||0;const od=T.risky?5:cl(B.reportBase+Math.round(stat/2)+Math.round((S.danh||0)/5)+ev*15,5,95);
+ if(S.maid&&!S.maid.spyFor){const m=S.maid;const od=stipAskOdds(m,SK);
+  O.push({n:`Sai ${m.name} đi đòi`,fx:{},x:`${word(od)} · thành: đòi lại ${SK.bac?"đủ bạc và ":""}đồ tốt · hỏng: ${m.name} bị mắng đuổi về, lòng -${balAb(BAL.eff.jstip.loyalGo)}, Nội vụ phủ để bụng (tháng sau dễ bị bớt xén hơn)`,
+   go:()=>{if(roll(od)){back();log(`${m.name} đến Nội vụ phủ đòi đủ phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`)}else{m.loyal=cl((m.loyal||0)-BAL.eff.jstip.loyalGo,0,100);st.spite=S.turn;log(`<span class="r">${m.name} bị ${eun} mắng đuổi về.</span> Lòng cung nữ -${balAb(BAL.eff.jstip.loyalGo)}.`)}}})}
+ const T=stipReportTo(SK);if(T){const stat=T.k==="hh"?(S.hh||0):(S.th||0);const ev=W.ev||0;const od=T.risky?5:oddsCl(B.reportBase+Math.round(stat/2)+Math.round((S.danh||0)/5)+ev*15);
   O.push({n:`Tố lên ${T.n}`,fx:{},x:`${word(od)} · thành: ${eun} bị phạt, trả lại ${SK.bac?"bạc và ":""}đồ tốt${SK.sup&&!T.risky?`, ${supTxt} bị trách (Danh -2)`:""} · hỏng: Danh -1, Nội vụ phủ để bụng${T.risky?`, ${T.n} chính là người sai chèn ép: nàng thù ngươi thêm`:""}`,
-   go:()=>{if(roll(od)){back();W.pun=S.turn;W.ev=0;if(SK.sup&&!T.risky){ap(SK.sup,{danh:-2});oanAdd(SK.sup,S,5)}log(`${T.n} nghe ngươi tâu, sai phạt ${eun}${SK.sup&&!T.risky?`, trách ${supTxt}`:""}. Nội vụ phủ trả lại đủ phần.`)}
-    else{apply({danh:-1});st.spite=S.turn;if(T.risky&&T.v)oanAdd(T.v,S,10);log(`<span class="r">${T.n} gạt đi, cho là ngươi nhỏ nhen.</span> Danh -1.${T.risky?` ${T.n} thù ngươi thêm.`:""}`)}}})}
- const om=cl(B.remember+(S.mat||0)*10,5,95);
- O.push({n:"Ghi nhớ để trả thù sau",fx:{},x:`${word(om)} · thành: Tai mắt dò ra ${SK.sup?`chứng cứ về ${supTxt} (chứng cứ +1)`:`sổ sách ${eun} ăn bớt (lần tố sau dễ thành)`} · hỏng: không dò được gì`,
-  go:()=>{if(roll(om)){const n=SK.sup?/*evok: checked (n)*/evA(S,SK.sup,1):0;if(!SK.sup)W.ev=(W.ev||0)+1;log(SK.sup&&!n?`Ngươi ghi nhớ. Tai mắt dò ra ${supTxt} không dính líu: chỉ ${eun} ăn bớt.`:`Ngươi ghi nhớ. Tai mắt dò ra ${SK.sup?`chứng cứ về ${supTxt}: chứng cứ +1`:`sổ sách ${eun} ăn bớt`}.`)}else log("Ngươi ghi nhớ, nhưng chưa dò được gì.")}});
+   go:()=>{if(roll(od)){back();W.pun=S.turn;W.ev=0;if(SK.sup&&!T.risky){ap(SK.sup,{danh:-2});oanAdd(SK.sup,S,BAL.eff.jstip.go)}log(`${T.n} nghe ngươi tâu, sai phạt ${eun}${SK.sup&&!T.risky?`, trách ${supTxt}`:""}. Nội vụ phủ trả lại đủ phần.`)}
+    else{apply({danh:BAL.eff.jstip.danhGo});st.spite=S.turn;if(T.risky&&T.v)oanAdd(T.v,S,BAL.eff.jstip.go_2);log(`<span class="r">${T.n} gạt đi, cho là ngươi nhỏ nhen.</span> Danh ${balSg(BAL.eff.jstip.danhGo)}.${T.risky?` ${T.n} thù ngươi thêm.`:""}`)}}})}
+ const om=oddsCl(B.remember+eyes(S)*10);
+ O.push({n:"Ghi nhớ để trả thù sau",fx:{},x:`${word(om)} · thành: Tai mắt dò ra ${SK.sup?`chứng cứ về ${supTxt} (chứng cứ ${balSg(BAL.eff.jstip.evN)})`:`sổ sách ${eun} ăn bớt (lần tố sau dễ thành)`} · hỏng: không dò được gì`,
+  go:()=>{if(roll(om)){const n=SK.sup?/*evok: checked (n)*/evA(S,SK.sup,BAL.eff.jstip.evN):0;if(!SK.sup)W.ev=(W.ev||0)+1;log(SK.sup&&!n?`Ngươi ghi nhớ. Tai mắt dò ra ${supTxt} không dính líu: chỉ ${eun} ăn bớt.`:`Ngươi ghi nhớ. Tai mắt dò ra ${SK.sup?`chứng cứ về ${supTxt}: chứng cứ ${balSg(BAL.eff.jstip.evN)}`:`sổ sách ${eun} ăn bớt`}.`)}else log("Ngươi ghi nhớ, nhưng chưa dò được gì.")}});
  return{ev:1,t:"Bổng lộc bị cắt xén",evId:"j3:embezzle",who:typeof pEunCourt==="function"?pEunCourt("ped"):null,h,opts:O}}
 /* NPCs: the same rule; their answer by purse and patron; news by Tai mắt */
 function stipNpc(p,SK,G){const B=BAL.stip,st=stipSt(p),tip=B.tip[Math.min(7,rkOf(p))];let how="";
- if(!SK.sup&&(p.bac||0)>=tip*2&&roll(50)){ap(p,{bac:-tip});st.tip=S.turn;st.tips=(st.tips||0)+1;stipRestore(p,G);how="nàng lót tay cho thái giám, được đổi đồ tốt"}
- else if(p.maid&&!p.maid.spyFor&&roll(30)&&roll(cl(B.askBase+Math.round((p.maid.loyal||0)/3)-(SK.sup?25:0),5,95))){ap(p,{bac:SK.bac});stipRestore(p,G);how=`cung nữ ${p.maid.name} đi đòi được đủ phần`}
+ const W=BAL.ag.why.stipAns,ans=npwPick(["tip","ask","meek"],k=>k==="tip"?(!SK.sup&&(p.bac||0)>=tip*2?W.tip+(p.bac||0)/tip:0):k==="ask"?(p.maid&&!p.maid.spyFor?(p.maid.loyal||0)*W.askLoy:0):W.meek+Math.max(0,netQ(p,"timid"))*W.timid);/* npc-purpose G2a: her answer by purse, maid and nết */
+ if(ans==="tip"){ap(p,{bac:-tip});st.tip=S.turn;st.tips=(st.tips||0)+1;stipRestore(p,G);how="nàng lót tay cho thái giám, được đổi đồ tốt"}
+ else if(ans==="ask"&&roll(oddsCl(B.askBase+Math.round((p.maid.loyal||0)/3)-(SK.sup?25:0)))){ap(p,{bac:SK.bac});stipRestore(p,G);how=`cung nữ ${p.maid.name} đi đòi được đủ phần`}
  else{st.meek=S.turn;how="nàng đành nhịn"}
  try{newsAdd(p,"stip",`Nội vụ phủ bớt xén bổng lộc của ${rkName(p)} ${p.name} (${SK.why}); ${how}`,SK.sup===S)}catch(e){}}
 /* ---------- faults: a scheme caught counts as a recent fault ---------- */

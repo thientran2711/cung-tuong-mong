@@ -9,15 +9,24 @@
      §65.1 the reward chest = j93 kitReward kind "chest" (servant road: "pouch"), title «Phẩm phục <rank>» (jmark adds the head mark) → Nhận;
      §65.2 kitPersonReveal: the servant Nội vụ phủ newly assigns stands big, full-body, transparent, in the centre (kitFigOf + kitFigBody
            body fit, KIT_FIG 90 % rule), with one cổ trang line («… Nội vụ phủ phụ cấp thêm …») → Nhận.
-   Staff: HER capOf grows by one servant at every rank (BAL.promo.cap, [maids incl. her own maid, eunuchs]; NPC caps unchanged); on a rank-up
+   Staff: the ONE household table BAL.promo.cap ([maids incl. the personal maid, eunuchs], her and NPCs alike; review/staff-root); on a rank-up that raises it
    Nội vụ phủ assigns the new one FREE (prStaff: pool candidate, new face, or moved from the lowest household — faces stay unique). Servant road ranks get no servant (nobody serves a cung nữ): chest only.
    NPC consorts: the same set + servant, data only (no screens), on the co-op host only (world agency, jcoopworld mute rule).
    Old saves: the rank seen so far is set silently on load (no chest for the past). State S.prSeen = {r: consort rank | null, s: servant rank}.
    Per-rank Đeo eo / Đeo tay / Túi thơm pictures (D45 small-art) are wired: BAL.promo.waist / wrist / scent, items in jinv RANKED_*. */
 window.PROMO_SET=1;
 Object.assign(BAL,{promo:{
- /* [maids incl. her own personal maid, eunuchs] per consort rank 0..7: one more servant at every rank */
- cap:[[1,1],[2,1],[2,2],[3,2],[3,3],[4,3],[4,4],[5,4]],
+ /* THE household table (one core, review/staff-root; owner 17/11 04:48Z "phẩm thấp nhất chỉ có 1 cung nữ hoặc 1 thái giám", OD:L1155 ceiling):
+    [maids incl. the personal (close) maid, eunuchs] per consort rank 0..7, for her AND every NPC consort (j10 capOf / hhHas read it; cold palace = row 0).
+    Owner final OD 18/11 ~02:15Z + ~02:50Z (review/staff-cap-apply): Đáp ứng 1+0 · Thường tại 2+0 · Quý nhân 2+0 · Tần 2+1 ·
+    Phi 3+1 · Quý phi 3+2 · Hoàng quý phi 4+2 · Hoàng hậu 5+2. Eunuchs start at Tần. */
+ cap:[[1,0],[2,0],[2,0],[2,1],[3,1],[3,2],[4,2],[5,2]],
+ /* Nữ đế (j99succ path "c"): harem style, mostly cung nữ (owner OD 18/11 ~02:05Z + ~02:50Z: 5 + 3) */
+ capNd:[5,3],
+ /* Thái hậu's household (jstaff: her named women Giáo tập ma ma, Chưởng sự cô cô, Quản sự ma ma while the queen seat is empty) */
+ capTh:[5,2],
+ /* a servant she trusts this much leaves her household (over the table) with a farewell scene, not a log line (j10 capTrim) */
+ trimTrust:70,
  wrist:["vongngoc","vongngoc_r1","vongngoc_r2","vongngoc_r3","vongngoc_r4","vongvang","vongvang","vongvang"],
  waist:["ngocboi_r0","ngocboi_r1","ngocboi_r2","ngocboi_r3","ngocboi_r4","ngocboi_r5","ngocboi_r6","ngocboi_r7"],
  scent:["tuithom","tuithom_r1","tuithom_r2","tuithom_r3","tuithom_r4","tuithom_r5","tuithom_r6","tuithom_r7"],
@@ -29,12 +38,11 @@ Object.assign(BAL,{promo:{
   [["gamto",1],["luahang",1],["trahop",1],["traicay",1],["ruoucuc",1],["yensao",1]],
   [["gamto",2],["trahop",2],["traicay",1],["ruoucuc",1],["yensao",1],["nhansam",1]],
   [["gamvang",1],["gamto",1],["trahop",2],["traicay",1],["ruoucuc",2],["yensao",1],["nhansam",1]]],
- /* servant road: index = SRK.maid rank 1..4, 5 = ma ma; "wd:" = a WD garment / pin */
- srv:[[],[["vaibong",1],["banhtrai",1]],[["wd:y_luamoc",1],["wd:tram_dong",1],["vaibong",1],["tragoi",1],["banhtrai",1]],
+ /* servant road: index = SRK.maid rank 1..5, 6 = ma ma (BAL.srvRk, maid-ladder-6: nhị đẳng row inserted); "wd:" = a WD garment / pin */
+ srv:[[],[["vaibong",1],["banhtrai",1]],[["vaibong",1],["tragoi",1],["banhtrai",1]],[["wd:y_luamoc",1],["wd:tram_dong",1],["vaibong",1],["tragoi",1],["banhtrai",1]],
   [["wd:y_chuongsu",1],["luahang",1],["tragoi",1],["traicay",1],["tuithom",1]],[["wd:y_nuquan",1],["luahang",2],["trahop",1],["traicay",1],["ruoucuc",1]],[["wd:y_mama",1],["luahang",1],["trahop",1],["traicay",1],["ruoucuc",1]]]}});
-/* ---------- staff capacity: one more servant at every rank ---------- */
-/* HER household only: NPC households keep j10's caps, so the palace's servant count (bounded by the unique face pool) stays as it was */
-(function(){if(typeof capOf!=="function")return;const c0=capOf;capOf=function(p){try{const C=BAL.promo&&BAL.promo.cap;if(C&&p===S&&!(typeof isSrv==="function"&&isSrv()))return C[Math.max(0,Math.min(7,rkOf(p)))].slice()}catch(e){}return c0.apply(this,arguments)}})();
+/* ---------- staff capacity: the table above (rank-ups that raise it bring one more servant) ---------- */
+/* (the private capOf wrapper that lived here is gone: j10 capOf reads BAL.promo.cap for everyone — review/staff-root) */
 /* ---------- the set ---------- */
 function prRankName(r){return r>=7?"Hoàng hậu":RANKS[Math.max(0,Math.min(7,r))].n}
 /* [[key, n, "wd"|"it"]] for consort rank r */
@@ -49,11 +57,11 @@ function prGive(p,L){const E=[];p.inv=p.inv||[];for(const [k,n,kind] of L)for(le
   if(kind==="wd"&&typeof wdGain==="function"){const g=wdGain(p,k,{from:"nvp",giver:"Nội vụ phủ",nvp:1});if(g&&g.e)E.push(g.e)}
   else{const e={k,from:"nvp",giver:"Nội vụ phủ",d:S.turn};p.inv.push(e);E.push(e)}}
  return E}
-/* one new servant, free, while under the rank's cap (maids first). Faces are unique in the whole palace (j17 roomFor = the face pool), so:
+/* one new servant, free, while under the rank's cap (maids first). Faces are unique in the whole palace (j17 roomFor = the figure identity pool, FIGIX maid ids m01–m52 + 8 ma ma / 30 eunuch), so:
    1. this month's Nội vụ phủ candidate (j29 npool), 2. a new person while the face pool has room, 3. (her only) a servant Nội vụ phủ moves
    from the lowest-ranked household that has one to spare. null when nobody can come. */
 function prStaff(p){try{if(!p||typeof mkServ!=="function")return null;p.staff=p.staff||[];const [cm,ce]=capOf(p);
- const m=p.staff.filter(s=>s.role==="maid").length+1,e=p.staff.filter(s=>s.role==="eunuch").length;
+ const [m,e]=hhHas(p);
  const order=m-cm<=e-ce?["maid","eunuch"]:["eunuch","maid"];
  for(const role of order){const under=role==="maid"?m<cm:e<ce;if(!under)continue;let s=null;
   try{s=typeof takeFromPool==="function"?takeFromPool(role):null}catch(x){}
@@ -75,8 +83,8 @@ function kitPersonRevealHTML(o){const p=o.who;let src="";try{src=kitFigOf(p)}cat
   <div class="kprev-card"><div class="kprev-n">${nm}</div>${o.line?`<p class="kprev-l">${o.line}</p>`:""}<button type="button" class="kbtn kmtake" data-km-close>${kmEsc(o.btn||"Nhận")}</button></div></div>`}
 /* body fit (KIT 33 rule): the body (head top..feet) fills 90 % of the figure box, feet on its bottom line; never shrunk to the canvas */
 function kprevFit(root){try{const box=root.querySelector(".kprev-fig"),im=root.querySelector(".kprev-img");if(!box||!im)return;const src=im.getAttribute("src");
- const b=typeof kitFigBody==="function"?kitFigBody(src,()=>kprevFit(root)):null;const H=box.clientHeight;if(!H)return;
- if(!b){im.style.height=H+"px";im.style.top="0";return}const bf=Math.max(.3,b.b-b.ht);const h=H*.9/bf;im.style.height=h+"px";im.style.top=(H-b.b*h)+"px"}catch(e){}}
+ const b=(typeof kitFigBody==="function"?kitFigBody(src,()=>kprevFit(root)):null)||(typeof kitFigWaitBody==="function"&&kitFigWaitBody(im,()=>kprevFit(root)))||null;const H=box.clientHeight;if(!H)return;
+ if(!b){im.style.height=H+"px";im.style.top="0";return}const bf=Math.max(.3,b.b-kitFigTop(b));const h=H*.9/bf;im.style.height=h+"px";im.style.top=(H-b.b*h)+"px"}catch(e){}}
 function kitPersonReveal(o){if(!o||!o.who||typeof kmPush!=="function")return;window.__prRev=(window.__prRev||0)+1;
  kmPush(done=>{const st=kmStage("km-reward km-prev",kitPersonRevealHTML(o),{manual:true,dur:60000,onEnd:done});st.ov.id="kprevov";const root=st.ov.querySelector(".kprev");
   kprevFit(root);requestAnimationFrame(()=>kprevFit(root));const rs=()=>kprevFit(root);addEventListener("resize",rs);const mo=new MutationObserver(()=>{if(!st.ov.isConnected){removeEventListener("resize",rs);mo.disconnect()}});mo.observe(document.body,{childList:true});
@@ -86,11 +94,11 @@ function prServLine(s,r){const maid=s.role==="maid";const self=maid?"Nô tỳ":"
 function prServSub(s){const b=[];try{b.push(srkName(s))}catch(e){}if(s.age)b.push(`${s.age} tuổi`);if(s.org)b.push(s.org);return b.join(" · ")}
 /* ---------- her: any code path that raises her rank (render diff, like j93 kmDiff) ---------- */
 function prRoad(){return typeof isSrv==="function"&&isSrv()}
-function prSrvRk(){return S.srv&&S.srv.mama?5:Math.max(0,S.srv&&S.srv.rk|0)}
+function prSrvRk(){return S.srv&&S.srv.mama?BAL.srvRk.mama:Math.max(0,S.srv&&S.srv.rk|0)}
 function prCheck(){if(!S||S.dead)return;const srv=prRoad();let z=S.prSeen;
  if(!z||typeof z!=="object"){S.prSeen={r:srv?null:S.rank,s:srv?prSrvRk():null};return}
  if(srv){const cur=prSrvRk();if(z.s==null||S.srv.lau>0){z.s=cur;return}if(cur>z.s){const E=[];for(let i=z.s+1;i<=cur;i++)E.push(...prGive(S,prSrvSetFor(i)));z.s=cur;
-   prChest(E,{kind:"pouch",title:`Đồ thưởng ${cur===5?"Ma ma":SRK.maid[cur]}`,from:"Nội vụ phủ phát theo bậc mới"});window.__prN=(window.__prN||0)+1}else if(cur<z.s)z.s=cur;return}
+   prChest(E,{kind:"pouch",title:`Đồ thưởng ${cur===BAL.srvRk.mama?"Ma ma":SRK.maid[cur]}`,from:"Nội vụ phủ phát theo bậc mới"});window.__prN=(window.__prN||0)+1}else if(cur<z.s)z.s=cur;return}
  if(S.out)return;const cur=S.rank;const from=z.r==null?-1:z.r;
  if(cur>from){const E=[],staff=[];for(let r=from+1;r<=cur;r++){E.push(...prGive(S,prSetFor(r)));const s=prStaff(S);if(s)staff.push([s,r])}z.r=cur;z.s=null;
   prChest(E,{title:`Phẩm phục ${prRankName(cur)}`,from:`Nội vụ phủ phụng chỉ đưa tới · ${prRankName(cur)}`});window.__prN=(window.__prN||0)+1;
@@ -100,8 +108,8 @@ function prCheck(){if(!S||S.dead)return;const srv=prRoad();let z=S.prSeen;
 function prHostOK(){try{const W=window.COOPW;return !(W&&W.on&&W.seat!=="a")}catch(e){return true}}
 function prNpcScan(){if(!S||!prHostOK())return;for(const v of (typeof rivals!=="undefined"?rivals:[])){if(!v||v.coop||v.alive===false)continue;const r=rkOf(v);
   if(v.prSeen==null){v.prSeen=r;continue}if(v.out)continue;if(r>v.prSeen){for(let i=v.prSeen+1;i<=r;i++){prGive(v,prSetFor(i));prStaff(v)}v.prSeen=r;window.__prNpc=(window.__prNpc||0)+1}else if(r<v.prSeen)v.prSeen=r}}
-(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{prCheck()}catch(e){console.error("promo set",e)}return r}})();
-(function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{prNpcScan();prCheck()}catch(e){console.error("promo npc",e)}return r}})();
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{prCheck()}catch(e){console.error("promo set",e)}/* a demotion / the cold palace sheds the extra servants at once (j10 capSweep, review/staff-root) */try{if(typeof capSweep==="function")capSweep()}catch(e){}return r}})();
+(function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{prNpcScan();prCheck()}catch(e){console.error("promo npc",e)}try{if(typeof capSweep==="function")capSweep()}catch(e){}return r}})();
 (function(){if(typeof rivalsMonth!=="function")return;const m0=rivalsMonth;rivalsMonth=function(){const r=m0.apply(this,arguments);try{prNpcScan()}catch(e){console.error("promo npc",e)}return r}})();
 /* ---------- CSS: §65.2 person reveal (§65.1 is j93 kitReward's own look) ---------- */
 (function(){const st=document.createElement("style");st.textContent=`

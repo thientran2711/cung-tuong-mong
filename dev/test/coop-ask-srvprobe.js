@@ -42,7 +42,7 @@ async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms)
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{const ke=[...document.querySelectorAll('.kmov .kmend')].find(x=>x.offsetParent!==null&&!x.disabled);if(ke){ke.click();return'x'}const kv=[...document.querySelectorAll('.kmov')].find(x=>!x.classList.contains('km-out')&&!x.querySelector('.kmend')&&!x.dataset.tsk);if(kv){kv.dataset.tsk=1;kv.click();return'x'}const c=__co();if(c.frozen||c.waiting)return'coop';
    const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.parentElement&&x.closest('[class^=km],[class*=" km"]')&&(x.classList.contains('kmend')||/^(Nhận|Đã hiểu|Tạ ơn|Lĩnh chỉ|Tuân chỉ)$/.test(x.textContent.trim())));if(ov){ov.click();return'x'}
   const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
-   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])');if(b){b.click();return'x'}return'stuck'});
+   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'});
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 /* press "Qua buổi"/"Qua đêm" when it is enabled (waits up to 20 s: after the friend's dialogs, the host's NPC places, …) */
@@ -107,8 +107,12 @@ async function weekAll(A,B,tag){const wk=(await C(A)).week;await weekBoth(A,B,1)
  ok(pa.m<=pa.cap[0]&&pa.e<=pa.cap[1],'probe host: the grown NPC household stays within its cap (no guest fill copied in)',pa);
  ok(!pa.log.some(l=>/ s\d/.test(l)),'probe host: no srv request applied',pa.log);
  console.log('probe host',JSON.stringify(pa));console.log('probe guest',JSON.stringify(pb));
- /* srvout: she takes a servant out of an NPC household into hers (as prStaff / j72 do) → the host's copy leaves that household */
- const o0=await B.p.evaluate(()=>{const v=rivals.find(x=>!x.coop&&x.id<900&&x.alive&&!x.out&&(x.staff||[]).some(s=>!s.coop&&!s.eid));const s=v.staff.find(s=>!s.coop&&!s.eid);v.staff.splice(v.staff.indexOf(s),1);s.spyFor=null;S.staff.push(s);return{id:v.id,sid:s.sid,name:s.name}});
+ /* srvout: she takes a servant out of an NPC household into hers (as prStaff / j72 do) → the host's copy leaves that household.
+    review staff-root-fix-1 r1: the real paths only move a servant into ROOM her rank gives (jpromo prStaff: only while hhHas < capOf, called
+    on a promotion; j72 rescue: capOk()). At rank 0 her table [1,0] is already full with the personal maid, so the old raw push went PAST the
+    table and staff-root's guest capTrim (r1 rule) sent the extra away before the week's ser (no srvout) — a path no game action takes.
+    So the probe first gives her the room, as a promotion does (rank up until the table has a maid seat free), then takes the servant. */
+ const o0=await B.p.evaluate(()=>{while(S.rank<8&&hhHas(S)[0]>=capOf(S)[0])S.rank++;if(hhHas(S)[0]>=capOf(S)[0])return{noRoom:1};const v=rivals.find(x=>!x.coop&&x.id<900&&x.alive&&!x.out&&(x.staff||[]).some(s=>!s.coop&&!s.eid));const s=v.staff.find(s=>!s.coop&&!s.eid);v.staff.splice(v.staff.indexOf(s),1);s.spyFor=null;S.staff.push(s);return{id:v.id,sid:s.sid,name:s.name}});
  for(let w=0;w<2;w++)await weekAll(A,B,'o'+w);
  const o1=await A.p.evaluate(o=>{const v=rivals.find(x=>x.id===o.id);return{inNpc:(v.staff||[]).some(s=>s.sid===o.sid&&s.name===o.name),log:(window.__askN||{}).log||[]}},o0);
  const o2=await B.p.evaluate(o=>({mine:(S.staff||[]).some(s=>s.sid===o.sid),inNpc:(rivals.find(x=>x.id===o.id).staff||[]).some(s=>s.sid===o.sid)}),o0);

@@ -20,7 +20,7 @@ const blob=(rev,f)=>execFileSync('git',['cat-file','blob',rev+':'+f],{cwd:__dirn
   await p.addStyleTag({content:'#kroul{display:none!important}'});if(process.env.ONLY24)await p.evaluate(()=>{window.__ONLY24=1});if(process.env.MAXN)await p.evaluate(n=>{window.__MAXN=n},+process.env.MAXN);
   if(SAVE){await p.evaluate(j=>{localStorage.setItem(SK(1),j);const kl=document.getElementById('kload');if(kl)kl.remove();showTitle()},fs.readFileSync(SAVE,'utf8'));await sleep(500);
    await p.evaluate(()=>{document.getElementById('title').hidden=false;document.querySelector('[data-load="1"]').click()});await sleep(2500)}
-  else await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;for(let i=0;i<400;i++){start();if(!isSrv())break}});
+  else await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
   /* collect the dialogs */
   const n=await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;const d=document.getElementById('dawn');if(d){d.hidden=true;d.innerHTML='';document.body.classList.remove('kbk-open')}
    S.th=Math.max(S.th||0,40);S.sung=Math.max(S.sung,65);const seen=new Map();const add=(m,src)=>{if(!m||!m.t)return;const k=String(m.t).replace(/<[^>]+>/g,'').slice(0,50)+'|'+String(m.h||'').replace(/<[^>]+>/g,'').slice(0,18);if(!seen.has(k))seen.set(k,Object.assign(m,{__src:src}))};
@@ -49,7 +49,7 @@ const blob=(rev,f)=>execFileSync('git',['cat-file','blob',rev+':'+f],{cwd:__dirn
     const dawn=document.getElementById('dawn');if(dawn&&!dawn.hidden&&dawn.innerHTML){const go=dawn.querySelector('#dawn-go');try{go&&go.click()}catch(e){}await W(40);dawn.hidden=true;dawn.innerHTML='';document.body.classList.remove('kbk-open');continue}
     if(Q.length){const m=Q[0];const M=document.getElementById('modal');if(M.hidden)showModal();await W(60);
      const key=String(m.t||'').replace(/<[^>]+>/g,'').slice(0,40)+'|'+(m.pid||'');if(!seen.has(key)&&kitStagePeople(m).length&&!M.hidden){seen.add(key);const r=await window.__meas(m);r.src='play';out.push(r)}
-     if(m.opts&&m.opts.length){const i=m.opts.findIndex(c=>!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));if(i<0)closeModal();else chooseM(i)}else closeModal();await W(30);continue}
+     if(m.opts&&m.opts.length){const i=m.opts.findIndex(c=>!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));if(i<0)closeModal();else chooseM(i)}else closeModal();await W(30);continue}
     try{nextBuoi()}catch(e){}await W(40)}return out},+process.env.PLAY);rows.push(...pr)}
 
   /* one picture per kind for the eye */

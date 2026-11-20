@@ -11,7 +11,10 @@
    Travel: a trip longer than the khắc left first finishes this buổi (clock turns), then she arrives in the new
    buổi with the rest of the trip already spent, meeting whoever is there in that buổi.
    NPCs never use can/spend, so they are untouched. */
-function j76left(){return !S?0:(BAL.time.khac-used)+BAL.time.khac*(B4L-(S.buoi||0))}
+/* THE ONE DAY-KHẮC FUNCTION (owner OD L852/L886/L1473 + 17/11 16:45Z "tổng số khắc còn lại của một ngày"): the khắc left in the DAY =
+   the rest of buổi b (u khắc used) + every later buổi of the day. Every "is there still time" check reads it (player: can/dayFit/j76need;
+   an NPC deed of n khắc at buổi b, khắc kh of her record row: n <= j76left(b, kh)). Buổi is only a label: an act longer than the buổi spills into the next. */
+function j76left(b,u){if(!S)return 0;if(b==null)b=S.buoi||0;if(u==null)u=used;return Math.max(0,BAL.time.khac-u)+BAL.time.khac*Math.max(0,B4L-b)}
 function j76nextName(){const b=Math.min(B4L,(S.buoi||0)+1);return BUOI[b].replace("Buổi ","buổi ")}
 /* would an act of c khắc started now spill into the next buổi? (only when it is allowed) */
 function j76spills(c){return !!S&&!S.dead&&c>0&&used<BAL.time.khac&&used+c>BAL.time.khac&&!S.j76carry&&!window.__j76win&&(S.buoi||0)<B4L&&c<=j76left()}
@@ -107,8 +110,8 @@ try{HX.buoi="Mỗi buổi có "+(BAL.time.khac)+" khắc, ngày có "+(B4N)+" bu
    now in every day's deck, free of bạc and Sức, and come back each buổi (rest may be repeated): rest, talk with the trusted maid, read.
    A card already done shows the true reason ("Đã làm hôm nay — mai chia bài mới"); it is a per-day deck. */
 function j76stand(){if(!S||S.dead)return[];const A=[{n:"Nghỉ ngơi một lát",t:"Nằm nghỉ trong tẩm cung, uống chén trà sen.",k:1,c:{},o:100,w:{suc:6},dom:"Sức khỏe",j76:1,rep:1}];
- if(!S.out&&S.maid)A.push({n:"Trò chuyện với cung nữ",t:`Ngồi nghe ${S.maid.name} kể chuyện trong cung.`,k:1,c:{},o:100,w:{maid:3},x:"có khi nghe được tin",dom:"Giao thiệp",j76:1,go:()=>{if(roll(15)){const t=liveRivals(true);if(t.length){const v=pick(t);seeLoc&&seeLoc(v);log(`${S.maid.name} kể: ${v.name} đang ở ${placeName(whereOf(v))} buổi này.`)}}}});
- A.push({n:"Đọc sách giải khuây",t:"Mở một cuốn sử, đọc vài trang bên cửa sổ.",k:1,c:{},o:100,w:{suc:2},x:"có khi Tâm cơ +1",dom:"Tài nghệ",j76:1,go:()=>{if(roll(20))apply({tamco:1})}});
+ if(!S.out&&S.maid)A.push({n:"Trò chuyện với cung nữ",t:`Ngồi nghe ${S.maid.name} kể chuyện trong cung.`,k:1,c:{},o:100,inner:1,w:{maid:3},x:"có khi nghe được tin",dom:"Giao thiệp",j76:1,go:()=>{if(roll(BAL.ag.why.g3.maid.o)){/* NPC-PURPOSE G3: she keeps an eye on the one who bears her mistress the worst will (near-best by hostility), not a random consort */const v=npwPick(liveRivals(true),x=>1+Math.max(0,hostility(x,S)));if(v){seeLoc&&seeLoc(v);log(`${S.maid.name} kể: ${v.name}${hostility(v,S)>=BAL.ag.why.tell.host?", người vẫn để bụng với chủ nhân,":""} đang ở ${placeName(whereOf(v))} buổi này.`)}}}});
+ A.push({n:"Đọc sách giải khuây",t:"Mở một cuốn sử, đọc vài trang bên cửa sổ.",k:1,c:{},o:100,inner:1,w:{suc:2},x:`có khi Tâm cơ ${balSg(BAL.eff.j76.tamcoGo)}`,dom:"Tài nghệ",j76:1,go:()=>{if(roll(20))apply({tamco:BAL.eff.j76.tamcoGo})}});
  return A}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv())&&Array.isArray(deck)&&!deck.some(a=>a.j76))deck.unshift(...j76stand())}catch(e){}return r}})();
 /* resting can be repeated as long as khắc remain (it is never the last thing greyed) */
@@ -124,9 +127,9 @@ function j76stand(){if(!S||S.dead)return[];const A=[{n:"Nghỉ ngơi một lát"
    Applied before the night is resolved; the morning news shows the whole night's gain in green. */
 function j76sleep(p){let n=(typeof harsh==="function"&&harsh())?8:14;if(p.suc<30)n+=6;if(p===S&&S.doctor)n+=4;return n}
 (function(){const e0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||(typeof isSrv==="function"&&isSrv()))return e0.apply(this,arguments);
- const t0=S.turn,tu=S.tuan,s0=S.suc;S.suc=cl(S.suc+j76sleep(S),0,100);try{liveRivals(true).forEach(v=>v.suc=cl(v.suc+j76sleep(v),0,100))}catch(e){}const mid=S.suc;
+ const t0=S.turn,tu=S.tuan,s0=S.suc;S.suc=cl(S.suc+j76sleep(S),0,sucCap(S));try{liveRivals(true).forEach(v=>v.suc=cl(v.suc+j76sleep(v),0,sucCap(v)))}catch(e){}const mid=S.suc;
  const r=e0.apply(this,arguments);
- try{if(S&&!S.dead&&(S.turn!==t0||S.tuan!==tu)){const g=Math.min(100,mid+((typeof harsh==="function"&&harsh())?1:4))-s0;if(g>0){
+ try{if(S&&!S.dead&&(S.turn!==t0||S.tuan!==tu)){const g=Math.min(typeof sucCap==="function"?sucCap(S):100,mid+((typeof harsh==="function"&&harsh())?1:4))-s0;if(g>0){
   log(`<span class="g">Ngủ một đêm: Sức +${g}</span>`);const line=`<p>Ngươi ngủ một đêm: <span class="g">Sức +${g}</span>${S.doctor?" (có thái y tâm phúc)":""}</p>`;
   const m=Q.find(x=>x&&/^Tin trong cung/.test(x.t||"")&&typeof x.h==="string");if(m)m.h+=line;else{try{popNum&&popNum("suc",g)}catch(e){}}}
   if(Q.length&&$("modal").hidden)showModal();render()}}catch(e){}return r}})();

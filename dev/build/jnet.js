@@ -33,6 +33,8 @@ function netTrong(p){if(!Array.isArray(p.trong)||p.trong.length!==2)return;const
 (function(){const r0=trTraits;trTraits=function(p){try{const n=netOf(p);if(n)return [n[1],n[0],n[2]]}catch(e){}return r0.apply(this,arguments)}})();
 /* the balance-law line of a nết (gain + cost), for tooltips and the coming SHOW-WHY row */
 function netTip(t){const R=BAL.net.T[t];return R?`Được: ${R.gain}. Mất: ${R.cost}.`:""}
+/* nv(p,key): the value of a nết-keyed table BAL.net.n[key] for p — keys tested in order (nết name → hasT, "q:<quality>" → netIs), first hit wins, else "_" */
+function nv(p,key){const M=BAL.net.n[key];if(!M)return 0;try{if(p)for(const k in M){if(k==="_")continue;if(k.startsWith("q:")?netIs(p,k.slice(2)):hasT(p,k))return M[k]}}catch(e){}return M._!=null?M._:0}
 function hasT(p,t){try{return traitsOf(p).includes(t)}catch(e){return false}}
 function netRx(p,re){try{return re.test(traitsOf(p).join(" "))}catch(e){return false}}
 function netTxt(p,sep){try{return traitsOf(p).join(sep||", ")}catch(e){return""}}

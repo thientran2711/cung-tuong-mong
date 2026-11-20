@@ -6,7 +6,7 @@ const {chromium}=require('playwright');const fs=require('fs');
 const [,,BASE,OUT,SHOTS]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const VP=[[755,1000,2,'fold'],[1000,755,2,'fold-land'],[1180,820,2,'ipad'],[1366,1024,2,'ipad-pro'],[844,390,3,'phone-land']];
 const L=(...a)=>console.error(new Date().toISOString().slice(11,19),...a);const sleep=t=>new Promise(r=>setTimeout(r,t));
-const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;
+const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;
  const m=document.getElementById('modal');if(m)m.hidden=true;['kroul','dawn','kload','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov').forEach(e=>e.remove());render();return S.name};
 const settle=p=>p.waitForFunction(()=>KFX.parts.length===0&&KFK.lights===0&&KFK.sheets===0&&!document.querySelector('.kfxk'),null,{timeout:60000,polling:500}).then(()=>true,()=>false);
 (async()=>{const b=await chromium.launch({args:['--use-gl=swiftshader','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required','--js-flags=--expose-gc','--enable-precise-memory-info']});const R={};let fail=0;

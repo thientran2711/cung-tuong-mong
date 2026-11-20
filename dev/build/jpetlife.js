@@ -17,7 +17,7 @@
       petLose, src "th") — that rule stays for neglect / harm / theft only. A Ngự tứ pet that dies takes its ĐỠ MỘT MẠNG with it; NO compensation
       (owner 16/11 18:50Z, verbatim scope).
    5. Co-op: her own pets roll locally; NPC pets roll and die on the host only (jmort convention), the guest mirrors the host's state. */
-Object.assign(BAL.pet,{life:{on:1,wY:36,floorW:4,oldDecay:1.4,careOk:70,careAff:50,careP:25,careLapse:40,giaArt:0,
+Object.assign(BAL.pet,{life:{on:1,wY:36,floorW:4,oldDecay:1.4,careOk:70,careLow:30,careAff:50,careP:25,careLapse:40,giaArt:0,
  /* years: mean / sd / lo / hi of the bell curve; old = age the pet turns Già; careMax = most years care can add (hard ceiling) */
  dice:{thu:{mean:12,sd:3,lo:6,hi:20,old:9,careMax:1},chim:{mean:15,sd:4,lo:7,hi:25,old:11,careMax:1},ca:{mean:18,sd:5,lo:8,hi:30,old:13,careMax:1},
   hac:{mean:30,sd:7,lo:18,hi:45,old:22,careMax:2},linh:{mean:28,sd:7,lo:15,hi:45,old:21,careMax:2},than:{mean:40,sd:10,lo:22,hi:70,old:30,careMax:3}},
@@ -31,7 +31,7 @@ function plDice(k){const L=BAL.pet.life;return L.dice[L.grp[k]]||L.dice.thu}
 function plRoll(k,min){const c=plDice(k);for(let i=0;i<200;i++){const x=Math.floor(Math.max(c.lo,Math.min(c.hi,c.mean+c.sd*plGauss())));if(x>=min)return x}return Math.ceil(min)}
 /* the pet-year tick of care: returns the new care years (never above careMax, never below 0) */
 function plCareYear(P,k){const L=BAL.pet.life,c=plDice(k),x=P.lifeX||0;
- if((P.care||0)>=L.careOk&&(P.aff||0)>=L.careAff&&x<c.careMax&&Math.random()*100<L.careP)return x+1;
+ if((P.care||0)>=L.careOk&&(P.aff||0)>=L.careAff&&x<c.careMax&&roll(L.careP))return x+1;
  if((P.care||0)<L.careLapse&&x>0)return x-1;return x}
 /*}CORE*/
 (function(){if(typeof BAL!=="object"||!BAL.pet||!BAL.pet.life||typeof petWeek!=="function")return;const L=BAL.pet.life;

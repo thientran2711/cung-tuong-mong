@@ -30,7 +30,7 @@ function chapModel(){try{const st=S&&S.st;if(!st)return null;const c=st.ch,M=st.
    o.steps.push({ok:rk,t:`Bậc Tần (nay ${chapRank(S.rank)})`,d:rk?"":"Lên bậc ở mục Sắc phong: đủ Sủng, Danh, rồi khảo hạch"});
    o.steps.push({ok:av,t:"Dâng sớ lật án",d:av?"":ce>=3&&w&&rk?"Đủ cả: dâng sớ ở Hành sự":"Mở được khi đủ chứng cứ, nhân chứng và bậc Tần"});
    o.risks=[["Hồ sơ cháy","Kho hồ sơ Hình bộ có thể bốc cháy trong đêm: mất một chứng cứ","r"],["Dâng sớ hỏng","Hoàng thượng nổi giận: chứng cứ bị thu hủy, Danh và Sủng giảm","r"],["Kẻ thù",S.foe?`${S.foe} và ${S.foeDad}`:"người đứng sau vụ án"]]}
-  else{const nn=P.n||0;for(let i=1;i<=nn;i++)o.steps.push({ok:i<P.i||!!st.done,t:`Hồi ${i}/${nn}`,d:""});o.risks=[["Kết cục",st.done?(st.tag||""):"chưa định"]]}}
+  else{const nn=P.n||0;for(let i=1;i<=nn;i++)o.steps.push({ok:i<P.i||!!st.done,t:`Hồi ${i}/${nn}`,d:""});o.risks=[["Kết quả",st.done?(st.tag||""):"chưa định"]]}}
  else return null;
  o.past=o.past.length?o.past:[];return o}catch(e){console.error("chapModel",e);return null}}
 /* inline progress (under the card): the steps as check lines with where/how, the risks, the "Đi làm" link */
@@ -47,7 +47,7 @@ function chapRankOpen(){if(Q.some(m=>m.kit&&m.kit.chap))return;if(S.rank>=7||S.o
 function chapChipHint(c){const t=(c.innerText||"").replace(/\s+/g," ").trim();const C=typeof Q72CFG==="object"?Q72CFG:{max:4,mo:2};
  if(/^Đang làm/.test(t))return [`Đang làm ${t.replace(/^Đang làm\s*/,"")}`,`Số việc nhờ ngươi đang nhận; nhận tối đa ${C.max} việc một lúc.`];
  if(/^Lời nhờ tháng/.test(t))return ["Lời nhờ tháng này",`Mỗi tháng người trong cung ngỏ lời nhờ ngươi tối đa ${C.mo} lần.`];
- if(/^Xong/.test(t))return ["Xong","Số việc nhờ ngươi đã làm trọn."];if(/^Hỏng/.test(t))return ["Hỏng","Số việc nhờ ngươi làm hỏng hoặc bỏ dở."];if(/^Từ chối/.test(t))return ["Từ chối","Số lời nhờ ngươi đã từ chối; từ chối thì người nhờ mếch lòng."];
+ if(/^Xong/.test(t))return ["Xong","Số việc nhờ ngươi đã làm trọn."];if(/^(Hỏng|Bại)/.test(t))return ["Bại","Số việc nhờ ngươi làm hỏng hoặc bỏ dở."];if(/^Từ chối/.test(t))return ["Từ chối","Số lời nhờ ngươi đã từ chối; từ chối thì người nhờ mếch lòng."];
  if(/^Đức/.test(t))return ["Đức",KIT_GLOSS["Ngôi Hoàng hậu"]||"Đức là điều kiện của ngôi Hoàng hậu."];if(/khảo hạch|điều kiện/i.test(t))return ["Khảo hạch tấn phong",(typeof kitGlossText==="function"&&kitGlossText("Khảo hạch tấn phong"))||"Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ mới được thăng bậc."];
  return null}
 document.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)return;const go=t.closest("[data-chapgo]");if(go){e.stopPropagation();e.preventDefault();if(Q.length&&Q[0].kit&&Q[0].kit.chap){Q.shift();showModal()}tab="act";render();return}

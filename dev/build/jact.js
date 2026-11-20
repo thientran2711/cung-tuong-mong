@@ -26,12 +26,12 @@ function adDoorOfPop(kind,on){for(const n in AD_DOOR){const d=AD_DOOR[n];if(d[0]
 const AD_DOOR_WHY={th:"đã thỉnh an tuần này",hh:"đã thỉnh an tuần này",ksp:"đã lo việc thẻ bài tuần này",maid:"đã sai nàng việc này"};
 /* ---------- 2. what leaves Hành sự (and where it lives now) ---------- */
 const AD_OUT=/^(Tự học |Tự luyện |Phát chẩn cho cung nhân$|Tụng kinh, làm việc thiện$|Đánh đàn ở ngự hoa viên$|Chữa bệnh cho con$|Dạy (hoàng tử|công chúa)|Dạy dỗ|Đưa con đến thỉnh an Hoàng thượng$|Luyện cầm kỳ thi họa$|Thưởng cung nữ$)/;
-function adSrv(){try{return !!(S&&(S.out||S.srv||(typeof isSrv==="function"&&isSrv())))}catch(e){return false}}
+function adSrv(){try{return !!(S&&(S.out||(S.srv&&!S.srv.risen)||(typeof isSrv==="function"&&isSrv())))/* ROLE PARITY: a maid risen to consort has the consort doors (was: any S.srv) */}catch(e){return false}}
 /* maid acts dealt as Hành sự cards (the same option objects her pop-up shows: jwhy spy formula, j76 talk) */
 function adMaidCards(){if(!S||S.out||!S.maid)return[];const A=[];let O=[];try{O=talkOpts({kind:"maid"})||[]}catch(e){return A}
  const sp=O.find(a=>a&&a.n==="Sai đi dò la"),ng=O.find(a=>a&&a.n==="Nghe ngóng chung");
- if(sp)A.push({n:"Sai cung nữ đi dò la",t:`Sai ${S.maid.name} đi dò la một phi tần (chọn người khi sai đi).`,k:2,c:{},o:sp.o==null?100:sp.o,dom:sp.dom||"Mưu kế",x:sp.x||"",lock:!!sp.lock,adT:sp.t,why:sp.why,adOpen:sp.open,ad:1});
- if(ng)A.push({n:"Nghe ngóng chung",t:`${S.maid.name} đi một vòng nghe ngóng chuyện trong cung.`,k:1,c:{},o:100,dom:"Giao thiệp",x:ng.x||"",adRun:ng.run,ad:1});
+ if(sp)A.push({n:"Sai cung nữ đi dò la",t:`Sai ${S.maid.name} đi dò la một phi tần (chọn người khi sai đi).`,k:typeof ptK==="function"?ptK("spy",2):2,c:{},o:sp.o==null?100:sp.o,dom:sp.dom||"Mưu kế",x:sp.x||"",lock:!!sp.lock,adT:sp.t,why:sp.why,adOpen:sp.open,ad:1});
+ if(ng)A.push({n:"Nghe ngóng chung",t:`${S.maid.name} đi một vòng nghe ngóng chuyện trong cung.`,k:typeof ptK==="function"?ptK("listen",1):1,c:{},o:100,dom:"Giao thiệp",x:ng.x||"",adRun:ng.run,ad:1});
  return A}
 /* the Tài nghệ charity as a Hành sự card (danh-p1, owner P1 16/11: "shared Hành sự door"): the same act (j85 charityFx), the same
    monthly lock (S.charM); khắc spent by the card path above, like the maid cards */
@@ -42,7 +42,7 @@ function adCharityCard(){if(!S||S.out||typeof charityFx!=="function")return null
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(!S||S.dead||!Array.isArray(deck)||adSrv())return r;
   /* every pool card is dealt (no random five): same objects, same wrappers (j83 WFOLD, jrest) */
   let P=[];try{P=pool()||[]}catch(e){}const have=new Set(deck.map(a=>a&&a.n));
-  for(const a of P){if(a&&!have.has(a.n)){try{if(typeof vOddsFor==="function"){const b=vOddsFor(a);if(b&&a.o!=null&&a.o<100)a.o=cl(a.o+b,5,95)}}catch(e){}deck.push(a);have.add(a.n)}}
+  for(const a of P){if(a&&!have.has(a.n)){try{if(typeof vOddsFor==="function"){const b=vOddsFor(a);if(b&&a.o!=null&&a.o<100)a.o=oddsCl(a.o+b)}}catch(e){}deck.push(a);have.add(a.n)}}
   for(const a of adMaidCards())if(!have.has(a.n)){deck.push(a);have.add(a.n)}
   {const a=adCharityCard();if(a&&!have.has(a.n)){deck.push(a);have.add(a.n)}}
   deck=deck.filter(a=>!(a&&AD_OUT.test(a.n||"")));
@@ -55,7 +55,7 @@ if(typeof kitActArt==="function"){const k0=kitActArt;kitActArt=function(name){tr
 /* cards that open a picker / run a text act (the pop-up's own code), and the door stamp on every shared card */
 (function(){const a0=act;act=function(i){const a=deck&&deck[i];
  if(a&&a.ad&&(a.adOpen||a.adRun)){if(a.done||S.dead||Q.length||a.lock||!can(cardCost(a)))return;const k=cardCost(a);
-  if(a.adRun){spend(k);a.done=1;adDoorMark(a.n);let t="";try{t=a.adRun()||""}catch(e){console.error(e)}if(t){log(`${a.n}: ${t}`);pushModal({t:a.n,h:`<p>${t}</p>`});showModal()}render();return}
+  if(a.adRun){spend(k);a.done=1;adDoorMark(a.n);let t="";try{t=oddsCapped(a)&&!roll(BAL.odds.hi)?oddsSoft("",a.c):a.adRun()||""}catch(e){console.error(e)}/* ODDS CAP soft fail */if(t){log(`${a.n}: ${t}`);pushModal({t:a.n,h:`<p>${t}</p>`});showModal()}render();return}
   spend(k);window.__adPend=a;try{a.adOpen()}catch(e){console.error(e);window.__adPend=null}render();return}
  const r=a0.apply(this,arguments);try{if(a&&AD_DOOR[a.n]&&a.done)adDoorMark(a.n)}catch(e){}return r}})();
 /* the dò la picker: the card is done (and the door shut) only when someone is picked; "Thôi" refunds the khắc as before */
@@ -66,8 +66,8 @@ const AD_ACTNAME={"Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào
 (function(){const t0=talkOpts;talkOpts=function(p){let A=t0.apply(this,arguments);try{if(!p||!Array.isArray(A)||adSrv())return A;
   if(p.kind==="ty")A=A.filter(a=>a&&a.n!=="Học hỏi y lý");
   if(p.kind==="fallen")A=A.filter(a=>a&&a.n!=="Đưa cơm áo");
-  if(p.kind==="maid"&&S.maid){const i=A.findIndex(a=>a&&a.n==="Tâm sự");if(i>=0)A[i]={n:"Trò chuyện với cung nữ",o:100,w:{maid:3},x:"có khi nghe được tin",go:()=>{if(roll(15)){const t=liveRivals(true);if(t.length){const v=pick(t);try{seeLoc&&seeLoc(v)}catch(e){}log(`${S.maid.name} kể: ${v.name} đang ở ${placeName(whereOf(v))} buổi này.`)}}}}}
-  if(p.kind==="peddler")A=[{n:"Xem hàng Nội vụ phủ",o:100,x:`hàng mua từ ngoài cung${adRare()?" · tuần này có một món hiếm":""} · không tốn khắc`,adShop:1}];
+  if(p.kind==="maid"&&S.maid){const i=A.findIndex(a=>a&&a.n==="Tâm sự");if(i>=0)A[i]={n:"Trò chuyện với cung nữ",o:100,inner:1,w:{},x:`lòng +${BAL.ag.cx2.maidTalk.w.maid} · có khi nghe được tin`,go:()=>{maidTalkDo(S)}}}
+  if(p.kind==="peddler")A=[{n:"Để ta xem",o:100,x:`hàng mua từ ngoài cung${adRare()?" · tuần này có một món hiếm":""} · không tốn khắc`,adShop:1}];
   if(p.kind==="rival"||p.kind==="hh")A=A.map(a=>{const k=a&&AD_ACTNAME[a.n];return k&&ACT[k]&&ACT[k].n?Object.assign({},a,{n:ACT[k].n}):a});
   A=A.map(a=>{const n=a&&adDoorOfPop(p.kind,a.n);return n&&adDoorUsed(n)?Object.assign({},a,{lock:true,t:(AD_DOOR[n][2]==="buoi"?"đã làm buổi này":(AD_DOOR_WHY[p.kind]||"đã làm tuần này"))}):a})
  }catch(e){console.error("jact talkOpts",e)}return A}})();
@@ -77,9 +77,9 @@ const AD_ACTNAME={"Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào
  try{if(p&&a&&!a.open){const n=adDoorOfPop(p.kind,a.n);if(n&&((typeof used!=="undefined"&&used!==u0)||(S.logSeq||0)!==l0))adDoorMark(n)}}catch(e){}return r}})();
 /* ---------- 3. Hoàng tự: "Chữa bệnh cho con" moved from Hành sự (Y thuật ≥4, Sức -10, Sức khỏe con +30) ---------- */
 if(typeof kidActs==="function"){const k0=kidActs;kidActs=function(k){const L=k0.apply(this,arguments);try{if(k&&k.alive&&S.arts&&S.arts.y>=BAL.art.gate.yCure&&k.hp<70&&!adSrv()){const t2=whyTime(2);
-  L.push(pbtn(`data-kid="heal" data-kn="${k.name}"`,"Tự bốc thuốc cho con",`Chắc chắn · tốn: 2 khắc, Sức -10 · thành: Sức khỏe con +30 (Y thuật của ngươi)`,t2||(S.suc<15?"thiếu Sức":"")))}}catch(e){}return L}}
+  L.push(pbtn(`data-kid="heal" data-kn="${k.name}"${capAt(BAL.btn.kidHeal)}`,"Tự bốc thuốc cho con",`${capW()} · tốn: ${BAL.btn.kidHeal.k} khắc, Sức -${BAL.btn.kidHeal.suc} · thành: Sức khỏe con +30 (Y thuật của ngươi)`,t2||(S.suc<BAL.sucNeed.yKid?"thiếu Sức":"")))}}catch(e){}return L}}
 if(typeof kidAct==="function"){const k0=kidAct;kidAct=function(a,name){if(a!=="heal")return k0.apply(this,arguments);const k=S.kids.find(x=>x.name===name&&x.alive);
- if(!k||S.dead||Q.length||!can(2)||S.suc<15||!(S.arts.y>=BAL.art.gate.yCure))return;const b=rsnap();spend(2);apply({suc:-10});k.hp=Math.min(100,k.hp+30);log(`Ngươi tự bốc thuốc cho ${k.name}: Sức khỏe con +30.`);resultShow("Việc của con",b,"sure");render()}}
+ const K=BAL.btn.kidHeal;if(!k||S.dead||Q.length||!can(K.k)||S.suc<BAL.sucNeed.yKid||!(S.arts.y>=BAL.art.gate.yCure))return;const b=rsnap();spend(K.k);apply({suc:-K.suc});k.hp=Math.min(100,k.hp+BAL.eff.jact.hpTop);log(`Ngươi tự bốc thuốc cho ${k.name}: Sức khỏe con ${balSg(BAL.eff.jact.hpTop)}.`);resultShow("Việc của con",b,"sure");render()}}
 /* ---------- 4. grey card tap = the reason (kit popover). A disabled button gets no click: open on pointerup, and keep the
    click that follows (on touch it can come later) from closing the popover at once. ---------- */
 window.addEventListener("click",e=>{const R=window.__adGreyR;if(R&&Date.now()-(window.__adGreyT||0)<1500&&e.clientX>=R.left&&e.clientX<=R.right&&e.clientY>=R.top&&e.clientY<=R.bottom){e.stopPropagation();e.preventDefault()}},true);
@@ -110,7 +110,22 @@ const KIT_PLACE_IC={nvp:"bac",tyv:"y-thuat",vuon:"place-vuon",thu:"sung",dtd:"su
  ksp:"place-ksp",lc:"place-lc",home:"place-cung",cnh:"place-cnh",tgk:"place-tgk",ttp:"place-ttp",acs:"place-acs",dc:"place-dc"};
 /* every place has a glyph (D56): the consort palaces r<N> (and her own home) share the palace-roof glyph */
 function kitPlaceIcon(k,s){const n=KIT_PLACE_IC[k]||(/^r\d+$/.test(k||"")?"place-cung":"");return n&&typeof ic==="function"?ic(n,s||14).replace('class="ic"','class="ic kplic"'):""}
-function kitHapMark(k){const h=adHapAt(k);return h?`<i class="khap" role="img" aria-label="Có chuyện buổi này" title="Có chuyện buổi này">!</i>`:""}
+/* the ONE yellow round «!» markup (KIT §78.x); kitHapMark = a place with business this buổi, kitHapHtml(title) = any other «!» (a returned errand person, §90): same element, same class .khap */
+function kitHapHtml(title,role){const t=String(title||"Có chuyện buổi này").replace(/"/g,"&quot;");return `<i class="khap" role="${role||"img"}" aria-label="${t}" title="${t}">!</i>`}
+window.kitHapHtml=kitHapHtml;
+function kitHapMark(k){const h=adHapAt(k);return h?kitHapHtml("Có chuyện buổi này"):""}
+/* KIT §78.z HEAD MARKER (owner OD 19/11 ~02:40Z + ~03:05Z, canon overwrite of the yellow «!» disc ABOVE A PERSON'S HEAD): the speech bubble ITSELF is the marker, no round disc behind it —
+   on = the WHOLE bubble bright yellow, black dots (img/kit/ico-talk-y.webp: someone brought a notice), off = the plain state, white bubble, black dots (img/kit/ico-talk-w.webp).
+   Shown above a person only when that person has a notice; same nudge motion as .khap; placed by the stage badge lines (jmark kitBadgeAt "hap", §78.y). Option-card «!», the top-bar
+   notice box and the Dư đồ place labels keep the .khap «!». The file is probed once; until it loads (or if it fails) the marker falls back to today's yellow «!» disc (.khead.kfb). */
+window.KIT_HEADMK=window.KIT_HEADMK||{on:"img/kit/ico-talk-y.webp",off:"img/kit/ico-talk-w.webp",px:24};
+/* "say" state (K-HEAD-SAY): max bubble width + font per device tier (stage width: s < bp[0] = phone / Fold portrait, m < bp[1] = tablet portrait, l = iPad landscape and up), design px */
+Object.assign(KIT_HEADMK,{say:1,sayW:{s:150,m:188,l:230,bp:[480,760]},sayFs:{s:12.5,m:13.5,l:15},sayMinF:.7,sayMinPx:10.5,sayGap:4,sayIn:200,sayOut:150,sayWait:1800});
+let khmOk=null;(function(){try{const i=new Image();i.onload=()=>{khmOk=true};i.onerror=()=>{khmOk=false};i.src=KIT_HEADMK.on}catch(e){khmOk=false}})();
+function kitHeadMarkHtml(title,role,state,text){const t=String(title||"Có tin báo").replace(/"/g,"&quot;"),off=state==="off",src=off?KIT_HEADMK.off:KIT_HEADMK.on;
+ if(state==="say"){const x=String(text==null?"":text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");return `<i class="khead ksay" role="${role||"img"}" aria-label="${t}" title="${t}"><span class="ksay-t">${x}</span><b class="ksay-tail"></b></i>`}
+ return `<i class="khead${off?" koff":""}${khmOk===false?" kfb":""}" role="${role||"img"}" aria-label="${t}" title="${t}">${khmOk===false?"":`<img alt="" draggable="false" src="${src}" onerror="this.parentNode.classList.add('kfb');this.remove()">`}</i>`}
+window.kitHeadMarkHtml=kitHeadMarkHtml;
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);try{if(!S||adSrv())return h;
   h=h.replace(/(<(?:button|div) class="mspot[^"]*" data-(?:go|ak)="([^"]+)"[^>]*>(?:(?!class="mspot)[\s\S])*?<span class="mlab">)([\s\S]*?)(<\/span>)/g,(all,open,k,lab,end)=>open+kitPlaceIcon(k)+lab+kitHapMark(k)+end)}catch(e){console.error("jact map",e)}return h}})();
 (function(){const g0=mapHTMLgrid;mapHTMLgrid=function(){let h=g0.apply(this,arguments);try{if(!S||adSrv())return h;
@@ -137,7 +152,8 @@ function adHapNow(){if(!S||S.dead||adSrv()||S.out)return[];let b="";try{b=bkey()
 function adHapAt(k){return adHapNow().find(h=>h.k===k&&!h.done)||null}
 const AD_HAP_T={emp:"Hoàng thượng dạo vườn",quarrel:"Hai phi tần cãi nhau",gossip:"Nghe lỏm chuyện",favour:"Có người nhờ việc"};
 const AD_HAP_FIRE={};/* id → (h,k) => fired (jact2 adds fest, cold) */
-function adHapArrive(k){if(S.place!==k||S.dead)return;let any=false;for(let i=0;i<2;i++){const h=adHapAt(k);if(!h)break;if(adHapFire1(h,k))any=true}if(any){try{showModal()}catch(e){}}}
+/* AG-ALL-2c G1 (owner OD 17/11 ~14:50Z "có bao nhiêu sự kiện có thể xảy ra là nó đều xuất hiện"): no cap — every happening of that place fires on arrival */
+function adHapArrive(k){if(S.place!==k||S.dead)return;let any=false;const n=adHapNow().length;for(let i=0;i<n;i++){const h=adHapAt(k);if(!h)break;if(adHapFire1(h,k))any=true;else h.done=1}if(any){try{showModal()}catch(e){}}}
 function adHapFire1(h,k){h.done=1;let fired=false;if(AD_HAP_FIRE[h.id]){try{fired=!!AD_HAP_FIRE[h.id](h,k)}catch(e){console.error("jact fire",e)}return fired}
  if(h.id==="emp"&&(S.where||{}).emp==="vuon"){const d=mkP("adStroll",{});if(d){pushDil(d,AD_HAP_T.emp);fired=true}}
  else if(h.id==="quarrel"){const R=liveRivals(true).filter(v=>!v.confined);const here=adPresent(k);const a=here[0]||pick(R);const b=here.find(v=>v!==a)||pick(R.filter(v=>v!==a));
@@ -147,20 +163,43 @@ function adHapFire1(h,k){h.done=1;let fired=false;if(AD_HAP_FIRE[h.id]){try{fire
  else if(h.id==="favour"&&h.x){try{if(q72X(h.x)&&q72CanOffer()){q72().a.push(h.x);fired=q72Offer(h.x,"meet");if(!fired){const q=q72();q.a.splice(q.a.indexOf(h.x),1)}}}catch(e){console.error(e)}}
  return fired}
 /* the Emperor in the garden: "Đánh đàn ở ngự hoa viên" (was a Hành sự card) now lives here, same numbers */
-PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes,tt=has("trongtai")?2:1;const o=od(35+S.tai/3+artOE(S,"cam")+(K.music?15:0)+mm());const w=K.music?9:7;
+PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes;const C=qinCard(S);/* 2e4: ONE card with the NPC (jagacts3 qinCard, BAL.ag.par3.qin) */const o=C.o;const w=C.w.sung;
  return{who:pEmp(),t:`<p>Hoàng thượng đang dạo bước trong Ngự hoa viên, thái giám theo hầu cách xa mấy bước.</p>`,o:[
-  {n:"Đánh đàn chờ ngự giá",fx:{suc:-10},x:`${word(o)} · thành: Sủng +${w}${K.music?` (tấu ${L.music}, khúc ngài thích)`:""} · hỏng: Sủng -1`,go:()=>{const b=rsnap();if(roll(o)){apply({sung:w});log(`Tiếng đàn làm Hoàng thượng dừng bước. Sủng +${w}.`)}else{apply({sung:-1});log("Ngài đi qua, không để ý tiếng đàn. Sủng -1.")}}},
+  {n:"Đánh đàn chờ ngự giá",fx:{...C.c},x:`${word(o)} · thành: Sủng +${w}${K.music?` (tấu ${L.music}, khúc ngài thích)`:""} · hỏng: Sủng ${balSg(C.l.sung)}`,go:()=>{const b=rsnap();if(agTry(o)){apply({sung:w});log(`Tiếng đàn làm Hoàng thượng dừng bước. Sủng +${w}.`)}else if(agSoft(o))agSoftTxt(S,"Đánh đàn chờ ngự giá");else{apply({sung:C.l.sung});log(`Ngài đi qua, không để ý tiếng đàn. Sủng ${balSg(C.l.sung)}.`)}}},
   {n:"Ra vấn an",fx:{},x:"chạm vào ngài trên cảnh để nói chuyện"},
   {n:"Lánh đi lối khác",fx:{},x:"không được không mất"}]}};
 (function(){const st=document.createElement("style");st.textContent=`
 /* KIT 78 (owner 11/16 15:00Z 5.6): the place icon sits ABOVE the name, centred, never left of it — map chips, map tiles, the stage title, the kit sample */
 .ic.kplic{display:block;margin:0 auto 1px;flex:none}
 .mspot .mlab:has(>.kplic),.mtile b:has(>.kplic),#sc-t h2:has(>.kplic){display:flex;flex-direction:column;align-items:center;text-align:center;gap:0}
-.mspot .mlab:has(>.kplic),.mtile b:has(>.kplic){position:relative}.mspot .mlab:has(>.kplic)>.khap,.mtile b:has(>.kplic)>.khap{position:absolute;top:-5px;right:-5px;margin:0}
+.mspot .mlab:has(>.kplic),.mtile b:has(>.kplic){position:relative}.mspot .mlab:has(>.kplic)>.khap,.mtile b:has(>.kplic)>.khap{position:absolute;top:-7px;right:-7px;margin:0}
 #sc-t h2:has(>.kplic){align-items:flex-start;text-align:left}#sc-t h2>.kplic{margin:0 0 1px}
 /* the 4.4em floor of a map chip counts the glyph (14 px + 3 px gap): a narrow chip (Trường Môn viện) must not push its text out of the border (OD:L1033) */
 .mspot .mlab:has(>.kplic){max-width:max(100%,4.4em)}
-.khap{display:inline-block;font-style:normal;font-weight:800;font-size:.62rem;line-height:13px;color:var(--ink);background:var(--trim);border-radius:50%;width:13px;height:13px;text-align:center;margin-left:4px;vertical-align:1px;box-shadow:0 0 0 1.5px #fff8e6,0 0 6px var(--trim)}
-.mspot.sm .khap{width:12px;height:12px;line-height:12px;font-size:.56rem}`;document.head.appendChild(st)})();
+.khap,.mspot .mlab i.khap,.khead.kfb{--khy:#ffd91a;display:inline-block;font-style:normal;font-weight:900;font-size:.82rem;line-height:19px;color:#3a2200;background:radial-gradient(circle at 35% 30%,#fff27a,var(--khy) 62%,#f2b800);border-radius:50%;width:19px;height:19px;text-align:center;margin-left:4px;vertical-align:1px;box-shadow:0 0 0 1.5px #fffbe0,0 0 5px 1px #ffe24a,0 0 11px 2px #ffd40099;transform-origin:50% 80%}
+/* KIT §78 (owner 17/11 ~13:32Z): the "!" is a BRIGHT FRESH YELLOW badge (--khy) with a soft glow; every ~5 s it gives a little shake + hop (transform only, 3 phases so the marks do not move together); reduced motion = the static glow */
+@keyframes khapNudge{0%,72%,100%{transform:none}76%{transform:translateY(-3px) rotate(-14deg)}80%{transform:translateY(0) rotate(12deg)}84%{transform:translateY(-2px) rotate(-9deg)}88%{transform:rotate(6deg)}92%{transform:none}}
+@media (prefers-reduced-motion:no-preference){.khap{animation:khapNudge 5.2s ease-in-out infinite}.mspot:nth-child(3n+1) .khap{animation-delay:-1.7s}.mspot:nth-child(3n+2) .khap{animation-delay:-3.4s}}
+/* KIT §78.z head marker: the bubble picture alone (no disc), a thin dark rim for contrast on any background; fallback .kfb = the .khap disc with «!» */
+.khead{display:inline-block;width:${(window.KIT_HEADMK||{}).px||24}px;height:${(window.KIT_HEADMK||{}).px||24}px;font-style:normal;line-height:0;transform-origin:50% 80%}
+.khead>img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 1px #2a1a12) drop-shadow(0 1px 2px #0006)}
+.khead:not(.koff):not(.kfb)>img{filter:drop-shadow(0 0 1px #2a1a12) drop-shadow(0 0 5px #ffe24a) drop-shadow(0 1px 2px #0005)}
+.khead.kfb{margin:0}.khead.kfb::after{content:"!"}
+@media (prefers-reduced-motion:no-preference){.khead:not(.ksay){animation:khapNudge 5.2s ease-in-out infinite}}
+/* KIT §78.z "say" (K-HEAD-SAY): the SAME head-marker part grown to hold a spoken line — plain white bubble, black text, small tail down to the speaker; placed by kitSay (§78.y lines) on its OWN stage layer .ksay-lay */
+.ksay-lay{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:41;filter:none}
+.khead.ksay{--ksay-w:${((window.KIT_HEADMK||{}).sayW||{}).m||188}px;--ksay-fs:13.5px;--ksay-tx:50%;display:inline-flex;flex-direction:column;width:auto;height:auto;max-width:var(--ksay-w);line-height:1.22;transform-origin:var(--ksay-tx) 100%;filter:drop-shadow(0 0 1px #2a1a12) drop-shadow(0 1px 2px #0006);font-style:normal;pointer-events:none}
+.ksay-lay>.khead.ksay{position:absolute;margin:0}
+.ksay-t{display:block;box-sizing:border-box;background:#fff;color:#14100a;font-family:inherit;font-weight:600;font-size:var(--ksay-fs);text-align:center;padding:.34em .7em .4em;border-radius:.95em;overflow-wrap:anywhere}
+.khead.ksay.k1{max-width:none}.ksay.k1 .ksay-t{white-space:nowrap}
+.ksay-tail{display:block;width:12px;height:8px;margin:-1px 0 0 calc(var(--ksay-tx) - 6px);background:#fff;clip-path:polygon(0 0,100% 0,50% 100%)}
+.khead.ksay.kin{animation:ksayIn var(--ksay-in,200ms) cubic-bezier(.2,.8,.3,1.2) both}
+.khead.ksay.kout{animation:ksayOut var(--ksay-out,150ms) ease-in both}
+@keyframes ksayIn{0%{opacity:0;transform:translateY(6px) scale(.55)}55%{opacity:1;transform:translateY(-3px) scale(1.07) rotate(-3deg)}78%{transform:translateY(0) scale(1) rotate(2deg)}100%{opacity:1;transform:none}}
+@keyframes ksayOut{0%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-3px) scale(.7)}}
+@media (prefers-reduced-motion:reduce){.khead.ksay.kin,.khead.ksay.kout{animation:none}}
+/* .sm uses the same size: the old .mspot.sm .khap rule (13 px) never applied (lost to .mspot .mlab i.khap), so one size everywhere */`;document.head.appendChild(st)})();
 /* kit page samples */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78.z say",title:"kitHeadMarkHtml(…,\"say\",text): bóng nói trắng chứa một câu thoại (đặt bởi kitSay trên đường huy hiệu §78.y)",html:()=>`<div style="display:flex;gap:18px;align-items:flex-end;padding:12px 8px;background:#7a4e3a;flex-wrap:wrap">${kitHeadMarkHtml("Cung nữ: chủ tử về rồi","img","say","Chủ tử về rồi!")}${kitHeadMarkHtml("Nương nương: gió thu hiu hắt","img","say","Gió thu hiu hắt, nương nương nhớ thêm áo ấm kẻo cảm lạnh.")}</div>`})}catch(e){}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78.z",title:"kitHeadMarkHtml: dấu trên đầu người có tin báo (bóng nói vàng) · trạng thái thường (bóng nói trắng)",html:()=>`<div style="display:flex;gap:18px;align-items:center;padding:8px;background:#7a4e3a">${kitHeadMarkHtml("Có tin báo","img","on")}${kitHeadMarkHtml("Thường","img","off")}</div>`})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78",title:"kitPlaceIcon + kitHapMark: tên nơi chốn có biểu tượng công dụng, dấu ! có chuyện",html:()=>Object.keys(KIT_PLACE_IC).map(k=>`<span class="mspot" style="position:static;transform:none;display:inline-flex;margin:4px 8px"><span class="mlab">${kitPlaceIcon(k)}${PLNAME[k]?PLNAME[k][0]:({home:"Cung của ta"}[k]||k)}${k==="vuon"?`<i class="khap" role="img" aria-label="Có chuyện buổi này">!</i>`:""}</span></span>`).join("")})}catch(e){}

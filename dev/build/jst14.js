@@ -30,14 +30,16 @@ function f14Srv(){return S.origin.k==="cnv"&&!(S.srv&&S.srv.risen)}
 /* the time step of a tutorial chapter (third item "t" = only the limit that lets the story go on) */
 function f14Late(m,L,w){const e=f14El(m);return[`Hoặc qua ${f14Nv(L)} tháng${w||""} (${Math.min(L,e)}/${L}), không thưởng`,e>=L,"t"]}
 const F14G=()=>BAL.st14.goal,F14L=()=>BAL.st14.lim,F14D=()=>BAL.st14.danh,F14R=()=>BAL.st14.rw;
+/* chương 1 time limit of a consort road: longer when she enters at rank lim.hiR or above (entry rank = m.r0, else her origin's rank) */
+function f14NhapL(m){const L=F14L();let r=0;try{r=m&&m.r0!=null?m.r0:S.st&&S.st.ms&&S.st.ms.r0!=null?S.st.ms.r0:(S.origin&&S.origin.r)|0}catch(e){}return r>=L.hiR?L.nhapHi:L.nhap}
 /* tutorial milestones (phase 1): every step is a real state check she can do from her real position (fix r1 item 2: the cung nữ road
    serves first, so its steps are servant steps until she is raised; «Từ kẻ hầu thành tiểu chủ» runs only if she is not raised yet) */
 Object.assign(MS67,{
- nhap14:{t:()=>S.origin.k==="cnv"?"Kẻ hầu mới vào cung":"Nhập cung, đứng vững",lim:()=>S.origin.k==="cnv"?F14L().nhapCnv:F14L().nhap,wait:()=>f14Home(),
+ nhap14:{t:()=>S.origin.k==="cnv"?"Kẻ hầu mới vào cung":"Nhập cung, đứng vững",lim:()=>S.origin.k==="cnv"?F14L().nhapCnv:f14NhapL(),wait:()=>f14Home(),
   g:()=>S.origin.k==="cnv"?`Mới vào cung làm kẻ hầu: làm tròn phận sự, giữ lòng tin của chủ. Chủ tin lên ${F14G().tin}, hoặc được thăng Đại cung nữ, thì xong chương, có thưởng; qua ${f14Nv(F14L().nhapCnv)} tháng thì chương tự khép, không thưởng.`
-   :`Mới vào cung: giữ mình, được Hoàng thượng để mắt. Được tấn phong một bậc thì xong chương, có thưởng; qua ${f14Nv(F14L().nhap)} tháng thì chương tự khép, không thưởng.`,
-  steps:m=>S.origin.k==="cnv"?[[`Chủ tin ${S.tin||0}/${F14G().tin}`,(S.tin||0)>=F14G().tin],["Được thăng Đại cung nữ",!!(S.srv&&S.srv.rk>=2)],["Được phong Đáp ứng",!!(S.srv&&S.srv.risen)],f14Late(m,F14L().nhapCnv," đầu")]
-   :[[`Được tấn phong một bậc (nay ${RANKS[Math.min(S.rank,7)].n})`,S.rank>m.r0],f14Late(m,F14L().nhap," đầu")],
+   :`Mới vào cung: giữ mình, được Hoàng thượng để mắt. Được tấn phong một bậc thì xong chương, có thưởng; qua ${f14Nv(f14NhapL())} tháng thì chương tự khép, không thưởng.`,
+  steps:m=>S.origin.k==="cnv"?[[`Chủ tin ${S.tin||0}/${F14G().tin}`,(S.tin||0)>=F14G().tin],[`Được thăng ${SRK.maid[BAL.srvRk.dai]} (Đại cung nữ)`,!!(S.srv&&S.srv.rk>=BAL.srvRk.dai)],["Được phong Đáp ứng",!!(S.srv&&S.srv.risen)],f14Late(m,F14L().nhapCnv," đầu")]
+   :[[`Được tấn phong một bậc (nay ${RANKS[Math.min(S.rank,7)].n})`,S.rank>m.r0],f14Late(m,f14NhapL(m)," đầu")],
   any:1,get fx(){return{danh:F14D().nhap}},end:"Ngươi đã đứng được chân trong cung.",get rw(){return["court",F14R().nhap]}},
  sung14:{t:()=>f14Srv()?"Lọt vào mắt Hoàng thượng":"Lần đầu được sủng",lim:()=>F14L().sung,wait:()=>f14Home(),
   g:()=>f14Srv()?`Kẻ hầu cũng có ngày được Hoàng thượng để mắt: Hoàng thượng để ý lên ${F14G().nt}, hoặc được phong Đáp ứng, thì xong chương, có thưởng. Quá ${f14Nv(F14L().sung)} tháng mà chưa được thì chương tự khép để truyện đi tiếp, không thưởng.`
@@ -54,7 +56,7 @@ Object.assign(MS67,{
     if she was raised before this chapter, a shared arc takes its place (chAdvance67 below) */
  len14:{t:()=>"Từ kẻ hầu thành tiểu chủ",
   g:()=>"Được Hoàng thượng để mắt mà phong Đáp ứng thì xong chương, có thưởng. Đến lúc ấy, các chương sau của đời người mới mở.",
-  steps:m=>[[S.srv&&S.srv.risen?"Được phong Đáp ứng":`Được phong Đáp ứng (Hoàng thượng để ý ${S.nt||0}/${BAL.ntRise.at})`,!!(S.srv&&S.srv.risen)]],
+  steps:m=>[[S.srv&&S.srv.risen?"Được phong Đáp ứng":(typeof amOn==="function"&&amOn()?`Được phong Đáp ứng (Hoàng thượng để ý ${S.nt||0})`:`Được phong Đáp ứng (Hoàng thượng để ý ${S.nt||0}/${BAL.ntRise.at})`),!!(S.srv&&S.srv.risen)]],
   any:1,get fx(){return{danh:F14D().len}},end:"Ngươi đã thành tiểu chủ.",get rw(){return["court",F14R().len]}}});
 /* "all2": every real step (not "t") must be done, or the time step */
 (function(){const d0=msDone67;msDone67=function(m){const d=MS67[m.id];if(d&&d.all2){const st=d.steps(m),real=st.filter(x=>!x[2]);return real.every(x=>x[1])||st.some(x=>x[2]&&x[1])}return d0.apply(this,arguments)}})();
@@ -98,7 +100,7 @@ function f14Shared(E){const c=S.st.ch;const ids=arcIds67("*").filter(id=>!c.used
  /* a chapter with tutorial quests (jtq14): really done = milestone AND every quest; the time step is the only "t" step */
  const real=m.q14&&typeof tq14Real==="function"?tq14Real(m,st):st.filter(x=>!x[2]).some(x=>x[1]),late=st.some(x=>x[2]==="t"&&x[1]);if(real||!late)return m0.apply(this,arguments);
  c.past.push({ms:m.id,t:d.t(),tag:"Lỡ dịp",k:0,n:c.n,late:1});log(`<b>Chương ${c.n} «${d.t()}» tự khép.</b> Hết hạn mà việc chưa thành: không có phần thưởng.`);
- card67("result",`Chương ${c.n} khép lại`,[["Kết cục","Lỡ dịp"],["Sự việc","Hết hạn mà việc của chương chưa thành, truyện đi tiếp."],["Phần thưởng","không có: phần thưởng chỉ đến khi tự tay làm xong việc của chương","r"],["Về sau","Đường lên ngôi Hoàng hậu vẫn còn mở"]],pMe(),d.t());
+ card67("result",`Chương ${c.n} khép lại`,[["Kết quả","Lỡ dịp"],["Sự việc","Hết hạn mà việc của chương chưa thành, truyện đi tiếp."],["Phần thưởng","không có: phần thưởng chỉ đến khi tự tay làm xong việc của chương","r"],["Về sau","Đường lên ngôi Hoàng hậu vẫn còn mở"]],pMe(),d.t());
  S.st.ms=null;chAdvance67(null);syncMain67()}})();
 /* palace entry from a home road (jkc kcEnter, also the co-op friend who waited at home): the running tutorial chapter starts now, from her real
    entry rank, with its full time (fix r1 item 1) */
@@ -110,6 +112,25 @@ function f14Info(){if(!f14())return null;const c=S.st.ch,n=Math.max(1,c.n||1),pi
  const rows=F14.parts.map((p,i)=>{const st=c.all||i<pi?"đã qua":i===pi?`đang ở chương ${n}`:"chưa tới";return[`Phần ${["đầu","giữa","cuối"][i]}`,`Chương ${p.a}–${p.b} · ${p.t}${i===1&&road?` «${road}»`:""} · ${st}`,i===pi&&!c.all?"g":""]});
  return {n,max:F14.max,part:P.t,partNo:pi,left:c.all?0:F14.max-n,road,rows}}
 window.f14Info=f14Info;
+/* OLD SAVES (review/story-frame, story bot fault 1): a life of an origin whose STORY entry came after j67 (jorigins bd: wrapped by the jreg
+   sweep, W.__late) could be saved with NO chapter frame (S.st without v2). On load the frame starts at the chapter that life has reached:
+   tutorial chapters whose months are already over close «Lỡ dịp» (no reward, exactly what their time limit would have done), the running
+   one keeps only the months it has left, then the story goes on as in a new life. Runs once (afterwards v267() is true): no double chapter.
+   The save holds no palace-entry month: a life that began in the palace entered at month 0; at home (f14Home) the tutorial just waits. */
+function f67Mig(){try{if(!S||S.dead||!S.origin||!S.st||v267())return 0;const k=S.origin.k,W=STORY[k];if(!W||!W.__late||!W.__old)return 0;
+ const q0=quiet,ls0=S.logSeq||0;quiet=true;let closed=0;
+ try{a67init(k);const c=S.st.ch;if(!c)return 0;const el=Math.max(0,S.turn||0);let used=0;
+  for(let g=0;g<6&&S.st.ms&&F14T.test(S.st.ms.id)&&!f14Home();g++){const m=S.st.ms,d=MS67[m.id],L=d&&d.lim?d.lim():0;if(!L)break;
+   if(el>=used+L){c.past.push({ms:m.id,t:d.t(),tag:"Lỡ dịp",k:0,n:c.n,late:1,mig:1});S.st.ms=null;used+=L;closed++;chAdvance67(null);continue}
+   m.t0=S.turn-(el-used);break}}
+ finally{quiet=q0;/* the chapter lines written while catching up would carry today's date: one summary line instead */
+  try{const d=(S.logSeq||0)-ls0;if(d>0)S.logs.splice(0,Math.min(d,S.logs.length))}catch(e){}}
+ syncMain67();const c=S.st.ch,m=S.st.ms;const now=m&&MS67[m.id]?MS67[m.id].t():S.st.M&&ARC67[S.st.M.a]?ARC67[S.st.M.a].t:"";
+ log(`<b>Mệnh truyện mở lại.</b> Đời này đang ở chương ${c.n}${now?` «${now}»`:""}${closed?`; ${closed} chương đầu đã qua hạn, khép lại không thưởng`:""}.`);
+ return 1}catch(e){console.error("f67Mig",e);return 0}}
+window.f67Mig=f67Mig;
+/* after a save loads (normAll); a new life is already framed by then (STORY init runs right after normAll), so this is a no-op there */
+(function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{setTimeout(()=>{if(f67Mig())try{render()}catch(e){}},0)}catch(e){}return r}})();
 /* the servant road panel (panel67, j67): same words for the 14-chapter frame */
 (function(){const p0=panel67;panel67=function(){let h=p0.apply(this,arguments);try{const F=f14Info();if(!F)return h;
  const pn=F14.parts.map(p=>f14Nv(p.b-p.a+1));
@@ -150,7 +171,7 @@ function f14Parts(A){const P=[];if(!f14())return P;const C=BAL.st14.ctx;try{cons
  if(tm)P.push([tm,tm>0?"Tâm cơ của ta đủ sâu":"Tâm cơ của ta còn non"]);if(du)P.push([du,du>0?"Đức của ta được người kính":"Đức của ta còn mỏng"]);
  const foes=liveRivals(true).filter(x=>(oan(x,S)||0)>=C.foeOan).length;if(foes)P.push([-Math.min(C.foeCap,foes),`${f14Nv(foes)} người trong cung oán ta, đang dõi theo`])}catch(e){}return P}
 function f14Ctx(A){if(!f14())return 0;const C=BAL.st14.ctx;return cl(f14Parts(A).reduce((s,x)=>s+x[0],0),-C.cap,C.cap)}
-(function(){const o0=oOf67;oOf67=function(A,o,b){const x=o0.apply(this,arguments);if(!f14()||o.o==null||x>=100)return x;const O=BAL.st14.odds;return cl(Math.round(x+f14Ctx(A)),O[0],O[1])}})();
+(function(){const o0=oOf67;oOf67=function(A,o,b){const x=o0.apply(this,arguments);if(!f14()||o.o==null||x>=100)return x;return oddsCl(Math.round(x+f14Ctx(A)))}/* ODDS CAP: the one cap BAL.odds (was its own copy BAL.st14.odds) */})();
 window.f14Ctx=f14Ctx;
 /* OD:L1253 for endings no roll decides: an option whose ending is the same whether it succeeds or fails (sure, or o.e one key), or a chapter that
    ends on the tally of Lợi thế (scEnd67) after such an option. The ending still reads this life's context: c = f14Ctx + (Lợi thế − 1) × shift.sc
@@ -173,5 +194,5 @@ function f14Why(A,worse){const P=f14Parts(A).filter(x=>worse?x[0]<0:x[0]>0).sort
  const E=ARC67[A.a].E,k0=E[k]?k:Object.keys(E)[0],k1=f14Shift(A,k0);if(k1===k0)return e0.call(this,A,k0,ign);
  const worse=({win:"mid",mid:"lose"})[k0]===k1;const why=f14Why(A,worse);
  const row=["Xoay chiều",`Tưởng đã định «${fill67(E[k0].tag,A)}», nay thành «${fill67(E[k1].tag,A)}»: ${why}.`,worse?"r":"g"];A.turn14=[k0,k1];
- const c0=card67;card67=function(kind,t,rows,...more){if(kind==="result"&&Array.isArray(rows)){rows=rows.slice();const j=rows.findIndex(x=>x&&x[0]==="Kết cục");rows.splice(j+1,0,row);card67=c0}return c0.call(this,kind,t,rows,...more)};
+ const c0=card67;card67=function(kind,t,rows,...more){if(kind==="result"&&Array.isArray(rows)){rows=rows.slice();const j=rows.findIndex(x=>x&&(x[0]==="Kết quả"||x[0]==="Kết cục"));rows.splice(j+1,0,row);card67=c0}return c0.call(this,kind,t,rows,...more)};
  try{return e0.call(this,A,k1,ign)}finally{card67=c0;try{log(`<span class="${worse?"r":"g"}">Kết cục xoay chiều: ${why}.</span>`)}catch(e){}}}})();

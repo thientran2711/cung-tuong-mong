@@ -13,11 +13,16 @@
   python3 dev/site/cdn_sync.py --git REF --missing-only    only keys the CDN does not have yet (never overwrite)
   python3 dev/site/cdn_sync.py --pull [globs]  download from the CDN into img/ audio/ (default: the *.json manifests only;
                                                --pull 'img/fig-maid-*' or --pull all) — files that differ locally are replaced
+  NEVER write a manifest any other way (no curl / dashboard / wrangler / own script): put() and DELETE here refuse an unchecked
+  img/FIGURES*.json / ACTS / EVENTS, even when a script imports this module (cdn-kc-guard 19/11).
   python3 dev/site/cdn_sync.py --index         only rebuild img/_index.json (the list of every object with hash and size)
   --wipe-review TOPIC                          DELETE every object under img/_review/TOPIC/ (review shots live there while a verdict is
                                                pending, never in git; wipe them with the verdict) and rebuild the index; --dry-run lists only
   --prune                                      also DELETE objects under the synced folders that are not in the source (careful)
-  --allow-shrink                               push a figure manifest even if it has FEWER entries than the live one / the floor (manifest_guard.py)
+  --manifest                                   a bulk run may overwrite a differing top-level img/*.json (default: held; name the .json file)
+  --allow-shrink --reason "<owner order>"      push a figure manifest even if it has FEWER entries than the live one / the floor (manifest_guard.py);
+                                               the reason is REQUIRED; the lowered floor is recorded on the CDN (img/_floor-sanctioned.json) and
+                                               written to dev/site/manifest-floor.json here: COMMIT that file on your branch (cdn-kc-guard 19/11)
   --force                                      push a *.json manifest even if someone else changed it on the CDN since your last pull
 
   Manifests (img/*.json) are shared by every worker: pull right before editing, push right after. A push of a manifest whose CDN copy
@@ -66,6 +71,10 @@ def req(method, url, data=None, ctype=None, tries=10):
         h["Authorization"] = "Bearer " + tok
     if ctype:
         h["Content-Type"] = ctype
+    if method == "DELETE" and "/objects/" in url and not ALLOW_SHRINK[0]:
+        k = urllib.parse.unquote(url.split("/objects/", 1)[1])
+        if guarded_key(k):
+            raise SystemExit(f"REFUSED DELETE {k}: a guarded manifest is never deleted (manifest_guard; --allow-shrink --reason to override)")
     for i in range(tries):
         if url.startswith("https://api.cloudflare.com/"):
             _pace()
@@ -114,7 +123,29 @@ def keyurl(key):
     return urllib.parse.quote(key, safe="/-_.~")
 
 
+_CLEARED = set()      # guarded manifest keys main() has already checked (or the user allowed to shrink) in this run
+ALLOW_SHRINK = [False]
+
+
+def guarded_key(key):
+    return key.startswith("img/") and key.count("/") == 1 and GUARD.is_guarded(key[4:])
+
+
+def guard_put(key, data):
+    """NEVER-SHRINK at the lowest level: a script that imports this module and calls put() directly gets the same guard as the CLI"""
+    if not guarded_key(key) or key in _CLEARED or ALLOW_SHRINK[0]:
+        return
+    try:
+        bn = key[4:]; nj = json.loads(data); fl = GUARD.effective_floor(GUARD.load_floor()); lj = GUARD.fetch(bn)
+        bad = GUARD.dcheck(bn, nj, live=lj, floor=fl) if bn in GUARD.DICT_GUARDED else GUARD.check(bn, nj, live=lj, floor=fl)
+    except Exception as e:
+        bad = [f"{key}: guard could not run ({e})"]
+    if bad:
+        raise SystemExit("REFUSED put " + key + " (manifest_guard): " + " | ".join(bad))
+
+
 def put(key, data):
+    guard_put(key, data)
     ext = key.rsplit(".", 1)[-1].lower()
     _, b = req("PUT", API + "/objects/" + keyurl(key), data=data, ctype=TYPES.get(ext, "application/octet-stream"))
     j = json.loads(b)
@@ -228,6 +259,40 @@ def pull(globs):
     print(f"pull: {len(keys)} on CDN match, {n} downloaded ({by / 1e6:.1f} MB) into {R}")
 
 
+def anchor_check(uploaded):
+    """owner 17/11 (toil-reveal-fix): after a face picture upload (por-/fig- of the consort faces / player looks) the face-mesh anchor check runs by itself
+    (dev/art/mkfit/verify.py --names, report only; needs mediapipe + the model, else a loud notice). Fix: bash dev/art/mkfit/on-upload.sh"""
+    import re, subprocess
+    uploaded = [u[0] if isinstance(u, (tuple, list)) else u for u in uploaded]
+    names = sorted(k.split("/")[-1] for k in uploaded if re.match(r"img/(por|fig)-(consort|player)-.*\.webp$", k))
+    if not names: return
+    print(f"anchor check: {len(names)} face pictures uploaded -> dev/art/mkfit/verify.py (face-mesh points must sit on the painted face)")
+    try:
+        import mediapipe  # noqa: F401
+    except Exception:
+        print("  !! mediapipe is not installed: the anchor check did NOT run. pip install mediapipe, then: python3 -I dev/art/mkfit/verify.py --names " + ",".join(names[:5]) + (",..." if len(names) > 5 else ""))
+        return
+    here = os.path.dirname(os.path.abspath(__file__))
+    r = subprocess.run([sys.executable, "-I", os.path.join(here, "..", "art", "mkfit", "verify.py"), "--names", ",".join(names), "--jobs", "4"], capture_output=True, text=True)
+    print("\n".join(("  " + l) for l in (r.stdout + r.stderr).splitlines() if l.strip() and "Traceback" not in l and "File " not in l)[-1500:])
+
+
+def record_sanctioned(sanc, reason):
+    """an intended shrink lowers the floor in BOTH places, so --live-check on every branch keeps passing (cdn-kc-guard 19/11)"""
+    key = "img/" + GUARD.SANCTIONED
+    rec = GUARD.sanctioned(); at = time.strftime("%Y-%m-%dT%H:%MZ", time.gmtime())
+    for bn, (old, new) in sanc.items():
+        rec[bn] = {"from": old, "repo": GUARD.load_floor().get(bn), "to": new, "reason": reason, "at": at}
+    put(key, json.dumps(rec, ensure_ascii=False, indent=1, sort_keys=True).encode())
+    floor = GUARD.load_floor()
+    for bn, (old, new) in sanc.items():
+        if floor.get(bn) == old or bn not in floor:
+            floor[bn] = new
+    json.dump(floor, open(GUARD.FLOOR, "w"), indent=1, sort_keys=True)
+    open(GUARD.FLOOR, "a").write("\n")
+    print(f"FLOOR LOWERED for {sorted(sanc)} -> recorded in {key} and written to dev/site/manifest-floor.json: COMMIT that file on your branch")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("paths", nargs="*", help="files/folders/globs under img/ or audio/ (default: all)")
@@ -239,10 +304,15 @@ def main():
     ap.add_argument("--wipe-review", metavar="TOPIC")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--allow-shrink", action="store_true")
+    ap.add_argument("--reason", default="", help="required with --allow-shrink: the owner order / why the manifest shrinks (recorded on the CDN)")
+    ap.add_argument("--manifest", action="store_true", help="allow a bulk run (no path / a folder / a glob) to overwrite a top-level img/*.json manifest that differs from the live one (default: refused, name the .json file instead)")
     ap.add_argument("--pull", action="store_true")
     ap.add_argument("--index", action="store_true")
     ap.add_argument("-j", type=int, default=6, help="parallel uploads (default 6; the API pace CTM_CDN_RATE=3.2/s is the real limit)")
     a = ap.parse_args()
+    if a.allow_shrink and not GUARD.owner_reason(a.reason):
+        raise SystemExit("--allow-shrink needs --reason naming the owner order, e.g. --reason \"owner Lượt 557\" (recorded on the CDN with the lowered floor)")
+    ALLOW_SHRINK[0] = False   # put()/DELETE stay guarded; main() clears each checked key itself
     sel = []
     for p in a.paths:
         if os.path.isabs(p) or os.path.exists(p):
@@ -274,6 +344,7 @@ def main():
     remote = remote_list()
     st = load_state()
     todo, same, held, sizes, shrunk = [], 0, [], {}, []
+    sanc = {}   # guarded manifests pushed with --allow-shrink that really shrink: name -> (old floor entry, new floor entry)
 
     def hash_one(k):
         b = src[k]()
@@ -294,24 +365,35 @@ def main():
         if r and k.endswith(".json") and not a.force and st.get(k) and st[k] != r[0]:
             held.append(k)
             continue
-        if k.startswith("img/") and os.path.basename(k) in GUARD.GUARDED and not a.allow_shrink:
+        if r and k.startswith("img/") and k.count("/") == 1 and k.endswith(".json") and k != INDEX and not a.manifest and not any(x.endswith(".json") for x in a.paths):
+            # 17/11 02:41Z: a bulk `cdn_sync` from a checkout holding stale tracked manifests overwrote ACTS/EVENTS/FIGURES*/INFO on the CDN. A manifest is only pushed when its file is NAMED.
+            held.append(k + " (bulk run: name the manifest file, or pass --manifest)")
+            continue
+        if guarded_key(k):
             # NEVER-SHRINK GUARD (17/11: the live FIGURES.json lost its consort t5–t8 entries): a figure manifest may not drop entries / counts
             try:
-                bad = GUARD.check(os.path.basename(k), json.loads(src[k]()), live=GUARD.fetch(os.path.basename(k)) if r else None, floor=GUARD.load_floor())
+                bn = os.path.basename(k); nj = json.loads(src[k]()); lj = GUARD.fetch(bn) if r else None
+                fl = GUARD.effective_floor(GUARD.load_floor())
+                bad = GUARD.dcheck(bn, nj, live=lj, floor=fl) if bn in GUARD.DICT_GUARDED else GUARD.check(bn, nj, live=lj, floor=fl)
             except Exception as e:
-                bad = [f"{k}: guard could not run ({e})"]
-            if bad:
+                bad = [f"{k}: guard could not run ({e})"]; nj = None
+            if bad and not (a.allow_shrink and nj is not None):
                 shrunk.extend(bad); continue
+            if bad:
+                print("  SHRINK ALLOWED (" + a.reason + "): " + " | ".join(bad))
+                sanc[bn] = (fl.get(bn), GUARD.lowered(fl.get(bn), GUARD.entry(bn, nj)))
+            _CLEARED.add(k)
         todo.append((k, h))
     gone = []
     if a.prune and not a.missing_only:
         tops = {k.split("/", 1)[0] for k in src}
-        gone = sorted(k for k in remote if k != INDEX and k.split("/", 1)[0] in tops and k not in src and want(k, sel))
+        gone = sorted(k for k in remote if k != INDEX and k.split("/", 1)[0] in tops and k not in src and want(k, sel)
+                      and not (k.count("/") == 1 and k.endswith(".json")))  # --prune never deletes a top-level manifest (cdn-kc-guard 19/11)
     tot = sum(sizes[k] for k, _ in todo)
     print(f"source {'git ' + a.git if a.git else 'disk'}: {len(src)} files, {sum(sizes.values()) / 1e6:.1f} MB · CDN has {len(remote)} objects"
           f" · same {same} · to upload {len(todo)} ({tot / 1e6:.1f} MB){' · to delete ' + str(len(gone)) if gone else ''}")
     for k in held:
-        print(f"  HELD {k}: changed on the CDN since your last pull/push — run --pull {k}, merge, push again (or --force)")
+        print(f"  HELD {k}" if "(bulk run" in k else f"  HELD {k}: changed on the CDN since your last pull/push — run --pull {k}, merge, push again (or --force)")
     for m in shrunk:
         print("  SHRINK " + m)
     if shrunk:
@@ -348,6 +430,8 @@ def main():
         req("DELETE", API + "/objects/" + keyurl(k))
         remote.pop(k, None)
     save_state(st)
+    if sanc:
+        record_sanctioned(sanc, a.reason)
     if todo or gone or INDEX not in remote:
         remote = remote_list()  # authoritative listing (also catches other workers' uploads) for the check + index
         up_set = set(todo)
@@ -356,6 +440,7 @@ def main():
             raise SystemExit(f"after upload {len(bad)} files do not match on the CDN, e.g. {bad[:5]}")
         write_index(remote)
     print(f"done: uploaded {done} ({by / 1e6:.1f} MB), deleted {len(gone)}, unchanged {same}, held {len(held)} in {time.time() - t0:.0f} s")
+    anchor_check(todo)
     if held:
         sys.exit(2)
 

@@ -16,7 +16,7 @@ const opts={viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScal
  await fetch(BASE+'__ver/old');
  {const c=await b.newContext(Object.assign({},opts,{serviceWorkers:'block'}));const p=await c.newPage();p.setDefaultTimeout(120000);
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await sleep(3000);
-  R.oldSave=await p.evaluate(()=>{try{SLOT=2;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){start();if(S.origin.k!=='cnv')break}Q.length=0;
+  R.oldSave=await p.evaluate(()=>{try{SLOT=2;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){try{nlNew()}catch(e){}start();if(S.origin.k!=='cnv')break}Q.length=0;
    for(let i=0;i<5;i++){try{Q.length=0;endTurn()}catch(e){}Q.length=0}
    localStorage.setItem(SK(2),JSON.stringify(ser()));localStorage.setItem('hclh-slot','2');
    const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);o[k]=localStorage.getItem(k)}return{name:S.name,turn:S.turn,ls:o}}catch(e){return{err:String(e)}}});
@@ -60,9 +60,9 @@ const opts={viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScal
  const weeks=+(WEEKS||3);
  /* one tuần = one endTurn (Qua đêm after the last buổi); each buổi: every tab, a walk to a random place, then "Qua buổi" */
  R.play=await p.evaluate(async weeks=>{const out={buoi:0,tuan:0,dialogs:0,walks:0,err:null,places:new Set()};const sl=t=>new Promise(r=>setTimeout(r,t));
-  try{SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){start();if(S.origin.k!=='cnv')break}Q.length=0;render();
+  try{SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){try{nlNew()}catch(e){}start();if(S.origin.k!=='cnv')break}Q.length=0;render();
    const e0=endTurn;endTurn=function(){out.tuan++;return e0.apply(this,arguments)};
-   const drain=async()=>{for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length){chooseM(Math.floor(Math.random()*m.opts.length))}else closeModal()}catch(e){Q.shift();try{showModal()}catch(e){}}out.dialogs++;await sl(120)}
+   const drain=async()=>{for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length){chooseM((L=>L.length?L[Math.floor(Math.random()*L.length)]:0)(m.opts.map((c,i)=>c.off?-1:i).filter(i=>i>=0)))}else closeModal()}catch(e){Q.shift();try{showModal()}catch(e){}}out.dialogs++;await sl(120)}
     for(const x of [...document.querySelectorAll('#ov,#modal')].filter(x=>!x.hidden)){const bt=[...x.querySelectorAll('button')].find(b=>b.offsetParent&&!b.disabled);if(bt){bt.click();await sl(120)}}};
    for(let i=0;i<weeks*30&&out.tuan<weeks&&!S.dead;i++){await drain();if(Q.length){Q.length=0;render()}
     for(const t of [...document.querySelectorAll('#tabs [data-tab]')].filter(b=>b.offsetParent)){t.click();await sl(120)}

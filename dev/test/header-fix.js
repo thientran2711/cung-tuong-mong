@@ -10,7 +10,7 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(LIVE,{waitUntil:'domcontentloaded'});await p.addStyleTag({content:'#kroul,#kroulw,.kroul{display:none!important}'}).catch(()=>{});await p.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(2500);
  await p.evaluate((LONG)=>{const kl=document.getElementById('kload');if(kl)kl.remove();window.__rmov=()=>{['kroul','kroulw','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()})};try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
-  for(let i=0;i<60;i++){start();if(!isSrv())break}window.__srv=isSrv();Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}
+  for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}window.__srv=isSrv();Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}
   if(LONG&&LONG!=='typ'){S.name="Hoàng Phủ Uyển Nghiêm";if(LONG!=='srv')S.rank=6;S.age=29;S.month=11;S.year=10;S.tuan=1;S.lot={lv:0,dom:"Giao thiệp"};S.wx={n:"mai nở trong tuyết",k:"snowp",f:0};window.__long=1}
   render()},LONG||'');
  await p.waitForTimeout(1500);

@@ -28,7 +28,7 @@ const T={rec:REC,on:false,step:-1,ask:false,tip:null,tipQ:[],replay:false,fresh:
 window.KTUT=T;
 function optOn(){try{return typeof OPT==="undefined"||OPT.tut!==false}catch(e){return true}}
 function testFlag(){try{return localStorage.getItem("hclh-tut-test")==="1"||/[?&]tut=1\b/.test(location.search)}catch(e){return false}}
-function botOff(){try{return !!window.__bot||(typeof quiet!=="undefined"&&quiet)}catch(e){return false}}
+function botOff(){try{return screenOff()}catch(e){return false}}
 function autoOk(){return !botOff()&&optOn()&&(!navigator.webdriver||testFlag())}
 function rm(){try{return typeof kmReduced==="function"?kmReduced():matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
 function vis(e){return !!e&&!e.hidden&&e.getClientRects().length>0&&getComputedStyle(e).visibility!=="hidden"&&getComputedStyle(e).display!=="none"}
@@ -196,7 +196,7 @@ const R=(k,v,c)=>[k,v,c||"n"];
 /* ---------- tab groups, read live (data-tab, KG, .ksub .ksubb[data-ksub]) ---------- */
 const GROUP_ANCHORS=["rv","rel","staff"];
 const SUBSAY={rv:"thẻ từng phi tần: chạm mặt để xem, giao thiệp hay ra tay",rel:"ai thương, ai ghen, ai oán {x}",fac:"các phe trong cung và chỗ đứng của {x}",
- staff:"kẻ hầu của {x}: Lòng là họ trung bao nhiêu, Ta tin cậy là {x} đặt lòng tin vào họ bao nhiêu; Lòng dưới 45 dễ bị mua chuộc",
+ staff:`kẻ hầu của {x}: Lòng là họ trung bao nhiêu, Ta tin cậy là {x} đặt lòng tin vào họ bao nhiêu; Lòng dưới ${balAb(BAL.loy.warn)} dễ bị mua chuộc`,
  court:"Hoàng thượng, Thái hậu: hầu hạ, thỉnh an, xem lòng người trên",emp:"Hoàng thượng, Thái hậu: hầu hạ, thỉnh an, xem lòng người trên",th:"Thái hậu: thỉnh an, xem lòng người",men:"nam nhân trong cung: thái y, thị vệ, quan viên",
  story:"truyện riêng của thân phận {x}",log:"mọi việc đã qua",kid:"con của {x}",art:"các môn tài nghệ",inv:"rương đồ của {x}"};
 function grpOf(k){try{for(const g in KG)if(KG[g].keys.includes(k))return g}catch(e){}return null}
@@ -260,7 +260,7 @@ const STEPS=[
   html:()=>say(`<p class="ktut-do">{X} chạm vào thẻ đang sáng để làm thử một việc thật.</p><p>Làm xong sẽ có thẻ kết quả.</p>`)},
  {id:"ketqua",title:"Thẻ kết quả",target:()=>resOn(),pad:4,skipIf:()=>!resOn(),
   prep(){try{clearTimeout(window.__rtT)}catch(e){}},
-  html:()=>say(`<p>Sau mỗi việc, thẻ kết quả đóng dấu <b>Thành</b> hay <b>Hỏng</b>, ghi đúng những gì được và mất.</p><p>Thẻ tự lui sau ít lâu; việc đã qua đều chép vào Sổ ghi.</p>`)},
+  html:()=>say(`<p>Sau mỗi việc, thẻ kết quả đóng dấu <b>Thành</b> hay <b>Bại</b>, ghi đúng những gì được và mất.</p><p>Thẻ tự lui sau ít lâu; việc đã qua đều chép vào Sổ ghi.</p>`)},
  {id:"dudo",title:"Dư đồ",when:()=>!!groupBtn("go"),target:()=>mapSpot(),pad:6,prep(){goTab("go")},marks:[()=>groupBtn("go")],
   html:()=>say(`<p>Dư đồ là bản đồ hậu cung. Mỗi nhãn ghi số bóng người ở đó và đường đi tốn mấy khắc; bóng người chưa cho biết là ai, đến nơi mới thấy mặt.</p><p>Chạm nhãn để đi. Nơi có dấu khóa thì phải xin yết kiến, hoặc lẻn vào và chịu hiểm.</p>`)},
  /* GROUP STEPS (tab layout may change: review/hau-cung-ui 06:00Z). Read from data attributes only: the tab keys (data-tab) and the
@@ -313,7 +313,7 @@ const TIPS={
  "tab-fac":{t:"Phe phái",h:"Trong cung ai cũng có chỗ dựa. Theo một phe thì được che chở, nhưng phe đối nghịch sẽ để mắt tới {x}."},
  "tab-court":{t:"Chí tôn",h:"Hoàng thượng và Thái hậu: hầu hạ, thỉnh an, xem lòng người trên. Người trên thương thì đường tấn phong rộng mở."},
  "tab-men":{t:"Nam nhân",h:"Thái y, thị vệ, quan viên trong cung. Giao thiệp có ích, nhưng gần gũi quá dễ sinh lời ra tiếng vào."},
- "tab-staff":{t:"Cung nhân",h:"Lòng là kẻ hầu trung với {x} bao nhiêu, Ta tin cậy là {x} đặt lòng tin vào họ bao nhiêu. Lòng dưới 45 thì dễ bị người khác mua chuộc."},
+ "tab-staff":{t:"Cung nhân",h:`Lòng là kẻ hầu trung với {x} bao nhiêu, Ta tin cậy là {x} đặt lòng tin vào họ bao nhiêu. Lòng dưới ${balAb(BAL.loy.warn)} thì dễ bị người khác mua chuộc.`},
  "tab-kid":{t:"Hoàng tự",h:"Con của {x} ở đây: Sức khỏe, Tài và lòng Hoàng thượng thương. Chăm dạy con chu đáo; con được trọng thì mẫu thân cũng được nể."},
  "tab-inv":{t:"Tư trang",h:"Rương đồ của {x}: trâm cài, y phục, quà được ban. Mặc vượt phẩm hay quá giản dị đều có người để ý; đồ ngự tứ không được bán."},
  "tab-art":{t:"Tài nghệ",h:"Mỗi môn có bậc; mỗi bài học là một trò nhỏ, chơi khéo thì lên bậc nhanh. Bậc cao mở việc mới và giúp thắng thi tài."},
@@ -383,7 +383,7 @@ function loop(){try{
 }catch(e){console.error(e)}}
 setInterval(loop,500);
 /* a new kiếp: fresh (the tour may start); after a past life, the luân hồi tip */
-try{const s0=start;start=function(){const r=s0.apply(this,arguments);try{/* not botOff(): quiet is still on while Luân hồi waits for the figures (j52 nlBegin) */if(!window.__bot){T.fresh=true;PICK=null;let past=0;try{past=lifeLog().length}catch(e){}if(past)NEWLIFE=true}}catch(e){}return r};window.start=start}catch(e){}
+try{const s0=start;start=function(){const r=s0.apply(this,arguments);try{/* not botOff(): quiet is still on while Luân hồi waits for the figures (j52 nlBegin) */if(!window.__bot&&!(window.COOPW&&COOPW.ctx)/* co-op thin B: the host building the GUEST's life (context b) is not a new life on this phone */){T.fresh=true;PICK=null;let past=0;try{past=lifeLog().length}catch(e){}if(past)NEWLIFE=true}}catch(e){}return r};window.start=start}catch(e){}
 
 /* ---------- Thiết lập: "Lời dặn tân thủ" switch (kit toggle) ---------- */
 try{const oh=optHTML;optHTML=function(){const h=oh.apply(this,arguments);
@@ -395,8 +395,10 @@ try{const oh=optHTML;optHTML=function(){const h=oh.apply(this,arguments);
 
 /* ---------- ☰ menu: "Xem lại lời dặn" (only with a kiếp in play) ---------- */
 function addReplay(){const m=document.querySelector("#modal.kpthome .kpmenu");if(!m||m.querySelector(".ktutb"))return;
- const cont=m.querySelector('[data-tgo="cont"]');if(!cont||typeof S==="undefined"||!S||S.dead||botOff())return;
+ const cont=m.querySelector('[data-tgo="slots"]');/* the home menu (j74 homeMenu): Tiếp tục / Bắt đầu is data-tgo="slots" */if(!cont||typeof S==="undefined"||!S||S.dead||botOff())return;
  const b=document.createElement("button");b.type="button";b.className="kbtn alt ktutb";b.dataset.ktutReplay="1";b.innerHTML=`Xem lại lời dặn<small>${MMN()} chỉ lối</small>`;m.appendChild(b)}
+/* a full-width row under the other home buttons (same rule as the co-op button, jcooplobby .kco) */
+try{const st=document.createElement("style");st.textContent=".kpmenu .kbtn.ktutb{grid-column:1/-1}";document.head.appendChild(st)}catch(e){}
 new MutationObserver(addReplay).observe(document.getElementById("modal"),{childList:true,subtree:true});
 document.getElementById("modal").addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ktut-replay]");if(!b)return;e.stopPropagation();e.preventDefault();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}

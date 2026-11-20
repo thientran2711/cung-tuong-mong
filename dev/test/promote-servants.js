@@ -10,8 +10,8 @@ const [,,URL,OLD0,OUT,...SZ]=process.argv;const OLD=OLD0&&OLD0!=='-'?OLD0:null;c
 if(OUT)fs.mkdirSync(OUT,{recursive:true});
 const boot=async(p,u)=>{await p.goto(u,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1500);
  await p.evaluate(()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
-  for(let i=0;i<80;i++){start();if(!isSrv()&&S.rank<=2)break}Q.length=0;showModal();S.bac=300;S.suc=90;S.hh=60;S.th=60;
-  S.staff.length=0;const m1=mkServ("maid"),m2=mkServ("maid"),e1=mkServ("eunuch");m1.rk=2;m2.rk=2;m2.age=(m1.age||20)+5;e1.rk=1;[m1,m2,e1].forEach(s=>{s.mp=5;s.loyal=70;s.kn=1;s.tr="trung"});S.staff.push(m1,m2,e1);render()})};
+  for(let i=0;i<80;i++){try{nlNew()}catch(e){}start();if(!isSrv()&&S.rank<=2)break}Q.length=0;showModal();S.bac=300;S.suc=90;S.hh=60;S.th=60;
+  S.staff.length=0;const m1=mkServ("maid"),m2=mkServ("maid"),e1=mkServ("eunuch");m1.rk=BAL.srvRk.dai;m2.rk=BAL.srvRk.dai;/* maid-ladder-6: nhất đẳng = old Đại cung nữ */m2.age=(m1.age||20)+5;e1.rk=1;[m1,m2,e1].forEach(s=>{s.mp=5;s.loyal=70;s.kn=1;s.tr="trung"});/* review/staff-root: the ONE household table (BAL.promo.cap) keeps 2 maids + 1 eunuch from Phi up; below that render() sends extras away */S.rank=Math.max(S.rank,4);S.prSeen={r:S.rank,s:null};S.staff=[];S.staff.push(m1,m2,e1);render()})};
 const clearQ=async p=>{for(let i=0;i<3;i++){await p.evaluate(()=>{if(!document.getElementById('tkmov')){const st=document.createElement('style');st.id='tkmov';st.textContent='.kmov{display:none!important}';document.head.appendChild(st)}/* test only: queued stage overlays (week flip, edicts) hidden for the shots */document.querySelectorAll('.kmov').forEach(e=>e.remove());try{KMQ.length=0;kmBusy=false}catch(e){}Q.length=0;showModal()});await p.waitForTimeout(700)}};
 (async()=>{const b=await chromium.launch();const T=[];const errs=[];const ok=(c,n,x)=>T.push([c?'PASS':'FAIL',n,x==null?'':JSON.stringify(x).slice(0,220)]);
  for(const [si,SZs] of SIZES.entries()){const [wh,d]=SZs.split('@');const [W,H]=wh.split('x').map(Number);
@@ -21,10 +21,10 @@ const clearQ=async p=>{for(let i=0;i<3;i++){await p.evaluate(()=>{if(!document.g
   if(si===0){
    /* 1. caps per rank: srkMax table + the real button state */
    const cap=await p.evaluate(()=>{const R=[];for(let r=0;r<=7;r++){S.rank=r;const m=srkMax(S,{role:"maid"}),e=srkMax(S,{role:"eunuch"});R.push([r,SRK.maid[m],SRK.eunuch[e]])}return R});
-   const exp=[[0,'Đại cung nữ','Thái giám'],[3,'Đại cung nữ','Thủ lĩnh thái giám'],[4,'Chưởng sự cô cô','Thủ lĩnh thái giám'],[5,'Chưởng sự cô cô','Tổng quản thái giám'],[7,'Nữ quan','Tổng quản thái giám']];
+   const exp=[[0,'Cung nữ nhất đẳng','Thái giám'],[3,'Cung nữ nhất đẳng','Thủ lĩnh thái giám'],[4,'Chưởng sự cô cô','Thủ lĩnh thái giám'],[5,'Chưởng sự cô cô','Tổng quản thái giám'],[7,'Nữ quan','Tổng quản thái giám']];
    ok(exp.every(([r,m,e])=>cap[r][1]===m&&cap[r][2]===e),'cap per her rank (low rank: no Chưởng sự / no Tổng quản)',cap);
    const btn=await p.evaluate(()=>{const s=S.staff[0],e=S.staff[2];const st=r=>{S.rank=r;const h=servJudgeBtns(s).join(""),he=servJudgeBtns(e).join("");const g=x=>{const m=x.match(/<button data-kneed="[^"]*" data-dbsv[^>]*>/);return m?/disabled/.test(m[0]):null};return{m:g(h),e:g(he),mt:(h.match(/Đề bạt lên [^<]+/)||[""])[0],et:(he.match(/Đề bạt lên [^<]+/)||[""])[0],why:(h.match(/kwhy">([^<]+)/)||[])[1]}};return{r2:st(2),r4:st(4)}});
-   ok(btn.r2.m===true&&/Đại cung nữ/.test(btn.r2.why||'')&&btn.r4.m===false&&/Chưởng sự cô cô/.test(btn.r4.mt),'maid card: rank 2 locked (reason names the cap), rank 4 open to Chưởng sự cô cô',btn);
+   ok(btn.r2.m===true&&/nhất đẳng/.test(btn.r2.why||'')&&btn.r4.m===false&&/Chưởng sự cô cô/.test(btn.r4.mt),'maid card: rank 2 locked (reason names the cap), rank 4 open to Chưởng sự cô cô',btn);
    ok(btn.r2.e===true&&btn.r4.e===false&&/Thủ lĩnh/.test(btn.r4.et),'eunuch card: rank 2 locked, rank 4 open to Thủ lĩnh (Tổng quản needs rank 5)',btn);
    /* 2. favour price by rank (bạc-equivalence) */
    const fp=await p.evaluate(()=>{const s=S.staff[0];const R={};for(const r of [2,4,6,7]){S.rank=r;const f=spFav(S,s);R[r]={bac:dbCost(s),fav:f.n,k:f.k,pay:BAL.pay[r]}}S.rank=4;return R});
@@ -35,7 +35,7 @@ const clearQ=async p=>{for(let i=0;i<3;i++){await p.evaluate(()=>{if(!document.g
    const open=await p.evaluate(()=>{const b=document.querySelector('#panel [data-dbsv]');if(!b)return{nobtn:1};b.click();const m=Q[0];return{t:m&&m.t,n:m&&m.opts&&m.opts.map(o=>o.n),dis:m&&m.opts&&m.opts.map(o=>!!o.tsDis),shown:!document.getElementById('modal').hidden}});
    ok(open.t&&/Đề bạt/.test(open.t)&&open.n.length===2&&open.dis.every(x=>!x)&&open.shown,'button opens the two-road card (both open)',open);
    const rb=await p.evaluate(()=>{const s=S.staff[0],o2=S.staff[1],e=S.staff[2];const b0={bac:S.bac,hh:S.hh,rk:srk(s),l:s.loyal,l2:o2.loyal,le:e.loyal,k:S.used||0};const R=Math.random;Math.random=()=>0.01;try{chooseM(0)}finally{Math.random=R}
-    return{b0,bac:S.bac,hh:S.hh,rk:srk(s),l:s.loyal,l2:o2.loyal,le:e.loyal,cost:BAL.dbCost[3],proud:!!s.proud,kh:(S.used||0)}});
+    return{b0,bac:S.bac,hh:S.hh,rk:srk(s),l:s.loyal,l2:o2.loyal,le:e.loyal,cost:BAL.dbCost[b0.rk+1]/* the price of the rung she was raised from (maid-ladder-6: no typed index) */,proud:!!s.proud,kh:(S.used||0)}});
    ok(rb.bac===rb.b0.bac-rb.cost&&rb.hh===rb.b0.hh&&rb.rk===rb.b0.rk+1,'Bạc road: Bạc −dbCost, favour untouched, rank +1',rb);
    ok(rb.l>=rb.b0.l+8-3&&rb.le===rb.b0.le-3&&rb.l2===rb.b0.l2-3-5,'gain + loss: promoted lòng +8, others −3 envy, the passed-over senior −5 more',rb);
    await clearQ(p);

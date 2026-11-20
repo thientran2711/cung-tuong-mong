@@ -1,7 +1,9 @@
 /* review/opt-render (owner 11/15 14:30Z / 15:05Z / 15:10Z, KIT 28.6) — EVERY event choice in cost mode, every active act with full numbers.
    usage: node dev/test/opt-render.js <build page url> <outdir> [WxH@dpr] [--bot]      (default 1180x820@2; --bot = a longer play run)
    A  every PEND event dialog (mkP / pushDil): no Được / Mất / Thành / Hỏng / Kèm / Ghi chú row, no odds word, no "Tốn: không" row, ONE kit
-      hint row (kitHintRow: words only, no digit, none of the retired phrases) and ONE kit risk chip (kitRisk: .kchip an toàn / có rủi ro / liều).
+      hint row (kitHintRow: words only, no digit, none of the retired phrases) and the kit ODDS METER (kitOdds .kodm in .kat > .kodds) at the
+      option's REAL odds (the ladder word of its own line = the roll's odds; a certain option = «Nắm chắc»); NO kitRisk chip (.krisk, retired
+      by the owner 19/11 ~01:48Z).
    B  every ACTIVE-act picker (KIT_ACT_PIDS: gift / plant / taint / evidence / shop / veil / runner …): NOT hidden — no hint, no risk chip.
    C  the builders that put an event straight into the queue (approachOne visits incl. Thái hậu triệu / Kẻ hầu xin / Một ánh mắt, all FESTEV
       festivals, servant matters, the palace grant) → cost mode; the act confirms / pickers (Xuất gia?, Nội vụ phủ đưa người) and the shop
@@ -21,7 +23,7 @@ async function boot(b,W,H,dpr){const ctx=await b.newContext({viewport:{width:W,h
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(PAGE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&typeof kitHint==='function');await sleep(2500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;start()});
- for(let i=0;i<40;i++){await p.waitForFunction(()=>typeof S!=="undefined"&&S&&S.name,null,{timeout:90000});if(!(await p.evaluate(()=>isSrv())))break;await p.evaluate(()=>{S=null;start()})}
+ for(let i=0;i<40;i++){await p.waitForFunction(()=>typeof S!=="undefined"&&S&&S.name,null,{timeout:90000});if(!(await p.evaluate(()=>isSrv())))break;await p.evaluate(()=>{S=null;try{nlNew()}catch(e){}start()})}
  await sleep(1800);await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}'});
  await p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove());Q.length=0;const md=document.getElementById('modal');md.hidden=true;md.className='modal';try{NLP=null}catch(e){}S.bac=300;S.suc=80;S.th=Math.max(S.th||0,40);render()});
  return {ctx,p,errs}}
@@ -33,8 +35,8 @@ async function boot(b,W,H,dpr){const ctx=await b.newContext({viewport:{width:W,h
   const ovf=document.documentElement.scrollWidth>innerWidth+1;
   return {t:T(m.t),pid:m.pid||"",ev,ovf,opts:m.opts.map((o,i)=>{const b=M.querySelector(`#mb .opt[data-m="${i}"]`);if(!b)return{n:T(o.n),gone:true};
    const rows=[...b.querySelectorAll(".kr")].map(r=>[T((r.querySelector(".krl")||{}).textContent),T((r.querySelector(".krv")||r).textContent)]);
-   const rk=b.querySelector(".kat > .krisk");
-   return{n:T(o.n).slice(0,48),rows,odds:!!b.querySelector(".kodds"),hidden:b.classList.contains("khideout"),hint:T((b.querySelector(".kr-hint .krv")||{}).textContent),
+   const rk=b.querySelector(".krisk");const km=b.querySelector(".kat > .kodds .kodm");let want=6;try{const od=kitOptModel(o).odds;want=od?KIT_ODDS.indexOf(od):6}catch(e){}
+   return{n:T(o.n).slice(0,48),rows,odds:!!b.querySelector(".kodds"),meter:km?+km.dataset.kodds:null,want,hidden:b.classList.contains("khideout"),hint:T((b.querySelector(".kr-hint .krv")||{}).textContent),
     risk:rk?T(rk.textContent):"",riskKit:!!(rk&&rk.classList.contains("kchip")),wide:b.scrollWidth>b.clientWidth+2,showOut:!!(o.showOut||m.showOut)}})}};
   window.__close=()=>{Q.length=0;const md=document.getElementById('modal');md.hidden=true;try{render()}catch(e){}}});
  const R={sz:SZ||"1180x820@2",fails:[],warn:[],A:{},B:{},C:{},D:null,E:null,F:null};
@@ -42,14 +44,14 @@ async function boot(b,W,H,dpr){const ctx=await b.newContext({viewport:{width:W,h
  const checkEvent=(where,a)=>{if(!a)return;if(!a.ev)R.fails.push([where,a.t,"not in cost mode (kitIsEventChoice false)"]);if(a.ovf)R.fails.push([where,a.t,"page overflow"]);
   const hs=[];for(const o of a.opts){if(o.gone||o.showOut)continue;if(o.wide)R.fails.push([where,o.n,"option wider than its box"]);
    const out=o.rows.filter(([l])=>/^(Được|Mất|Thành|Hỏng|Kèm|Ghi chú)$/i.test(l));if(out.length)R.fails.push([where,o.n,"outcome row on an event choice",out.join(" / ")]);
-   if(o.odds)R.fails.push([where,o.n,"odds word shown"]);if(o.rows.some(([l,v])=>/^Tốn$/i.test(l)&&/^không$/i.test(v)))R.fails.push([where,o.n,'"Tốn: không" row']);
+   if(o.meter==null)R.fails.push([where,o.n,"no kit odds meter"]);else if(o.want>=0&&o.meter!==o.want)R.fails.push([where,o.n,"meter step ≠ the option's own odds",o.meter+"≠"+o.want]);if(o.rows.some(([l,v])=>/^Tốn$/i.test(l)&&/^không$/i.test(v)))R.fails.push([where,o.n,'"Tốn: không" row']);
    if(isClose(o.n))continue;
    if(!o.hint)R.fails.push([where,o.n,"no hint"]);else{if(/\d/.test(o.hint))R.fails.push([where,o.n,"digit in hint",o.hint]);if(RETIRED.test(o.hint))R.fails.push([where,o.n,"retired hint wording",o.hint])}
-   if(!/^(an toàn|có rủi ro|liều)$/.test(o.risk)||!o.riskKit)R.fails.push([where,o.n,"no kit risk chip",o.risk]);hs.push(o.hint)}
+   if(o.risk)R.fails.push([where,o.n,"retired kitRisk chip shown",o.risk]);hs.push(o.hint)}
   if(hs.length>1&&new Set(hs).size<hs.length)R.warn.push([where,a.t,"two options with the same hint",hs.join(" | ")])};
  const checkAct=(where,a)=>{if(!a)return;if(a.ev)R.fails.push([where,a.t,"an active act / shop shown in cost mode"]);
   for(const o of a.opts){if(o.gone)continue;if(o.hidden||o.hint||o.risk)R.fails.push([where,o.n,"hint / risk / hidden outcome on an active act",o.hint])}};
- const dump=a=>a&&a.opts?a.opts.map(o=>o.gone?`(${o.n}: ✕)`:`${o.n} [${o.risk||"-"}] | ${o.rows.map(r=>r.join(": ")).join(" / ")}`):a;
+ const dump=a=>a&&a.opts?a.opts.map(o=>o.gone?`(${o.n}: ✕)`:`${o.n} [${o.meter==null?"-":o.meter}] | ${o.rows.map(r=>r.join(": ")).join(" / ")}`):a;
  /* ---- A: every PEND event dialog ---- */
  const ACT=await p.evaluate(()=>[...KIT_ACT_PIDS]);
  const ids=(await p.evaluate(()=>Object.keys(PEND))).filter(k=>!ACT.includes(k));
@@ -78,7 +80,7 @@ async function boot(b,W,H,dpr){const ctx=await b.newContext({viewport:{width:W,h
  await one("palCeremony",`S.pal=S.pal==null?1:S.pal;S.palCer=1;palCeremony()`,"event");
  await one("xgConfirm",`xgConfirm(()=>{})`,"act");
  await one("hireCard",`hireCard("maid")`,"act");
- await one("Hàng chợ đen",`roll=()=>true;(S.staff||[]).forEach(s=>{s.tr="tham";s.spyFor=null});servTraitMonth()`,"mixed");
+ await one("Hàng chợ đen",`roll=()=>true;(S.staff||[]).forEach(s=>{s.net=null;s.tr="tham";s.spyFor=null;netOf(s)});servTraitMonth()`,"mixed");
  { const c=R.C["Hàng chợ đen"]||[];if(!c.some(x=>x.t==="Hàng chợ đen"))R.warn.push(["C:Hàng chợ đen","not produced"]);}
  /* ---- D: the real night, Bạc −5 of the prep ---- */
  R.D=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));Q.length=0;document.getElementById('modal').hidden=true;S.tonight=null;S.bac=300;
@@ -102,13 +104,13 @@ async function boot(b,W,H,dpr){const ctx=await b.newContext({viewport:{width:W,h
  /* rolled seals still come from the roll */
  R.rolled=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const b=rsnap();S.danh-=3;resultShow("Tung tin đồn",b,false);await W(300);const t=document.getElementById('rtoast');const s1=(t.querySelector('.seal')||{}).textContent;
   const b2=rsnap();S.danh+=3;resultShow("Thỉnh an",b2,true);await W(300);return{fail:s1,ok:(t.querySelector('.seal')||{}).textContent}});
- if(R.rolled.fail!=="HỎNG"||R.rolled.ok!=="THÀNH")R.fails.push(["rolled seals",JSON.stringify(R.rolled)]);
+ if(R.rolled.fail!=="BẠI"||R.rolled.ok!=="THÀNH")R.fails.push(["rolled seals",JSON.stringify(R.rolled)]);
  /* ---- E: clarity by Tâm cơ, and the night talk options told apart ---- */
  R.E=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const out={};const t0=S.tamco,m0=S.mat;
-  const read=()=>[...document.querySelectorAll('#mb .opt')].map(b=>`${(b.querySelector('.kan')||b).textContent.trim()} — ${(b.querySelector('.kr-hint .krv')||{}).textContent||""} [${(b.querySelector('.krisk')||{}).textContent||""}]`);
-  for(const [k,tc,mt] of [["vague",5,0],["plain",30,0],["sharp",70,3]]){S.tamco=tc;S.mat=mt;Q.length=0;pushDil(mkP("giu",{}),"Giữ hay không giữ");showModal();await W(350);out["giu "+k]=read();
+  const read=()=>[...document.querySelectorAll('#mb .opt')].map(b=>`${(b.querySelector('.kan')||b).textContent.trim()} — ${(b.querySelector('.kr-hint .krv')||{}).textContent||""} [${((b.querySelector('.kat .kodm b'))||{}).textContent||""}]`);
+  for(const [k,tc,mt] of [["vague",5,0],["plain",30,0],["sharp",70,3]]){S.tamco=tc;tmPlace(S,mt);Q.length=0;pushDil(mkP("giu",{}),"Giữ hay không giữ");showModal();await W(350);out["giu "+k]=read();
    Q.length=0;pushDil(mkP("night1",{q:3,vp:0}),"Đêm thị tẩm");showModal();await W(350);out["night1 "+k]=read()}
-  S.tamco=t0;S.mat=m0;__close();return out});
+  S.tamco=t0;tmPlace(S,m0);__close();return out});
  { const E=R.E;const h=k=>E[k].map(s=>s.split(" — ")[1].replace(/ \[[^\]]*\]$/,""));
   if(h("giu vague").join()===h("giu plain").join())R.fails.push(["E:giu","hint does not sharpen from Tâm cơ 5 to 30"]);
   if(!/long thai/.test(h("giu plain")[1]||""))R.fails.push(["E:giu","'Đút bạc xin giữ' does not name keeping the pregnancy",h("giu plain")[1]]);
@@ -122,7 +124,7 @@ async function boot(b,W,H,dpr){const ctx=await b.newContext({viewport:{width:W,h
   try{for(let i=0;i<N;i++){if(!S||S.dead){start();await W(50)}Q.length=0;try{endTurn()}catch(e){met["ERR "+e.message.slice(0,60)]={n:1,ev:false,flag:"error"}}
    for(const m of Q.slice()){if(!m||!m.opts||!m.opts.length)continue;const ev=kitIsEventChoice(m);const flag=m.act?"act":m.shop?"shop":m.showOut?"showOut":m.pid&&KIT_ACT_PIDS.has(m.pid)?"act-pid":"";
     const key=(m.pid||"")+" · "+String(m.t||"").replace(/<[^>]+>/g,"").slice(0,40);const r=met[key]=met[key]||{n:0,ev,flag,hint:[]};r.n++;
-    if(ev&&!r.hint.length)r.hint=m.opts.map(o=>{const h=kitHint(o,m);return `${String(o.n).replace(/<[^>]+>/g,"").slice(0,30)}: ${h.hint} [${h.risk}]`})}
+    if(ev&&!r.hint.length)r.hint=m.opts.map(o=>{const h=kitHint(o,m);return `${String(o.n).replace(/<[^>]+>/g,"").slice(0,30)}: ${h.hint} [${(()=>{try{return kitOptModel(o).odds||"Nắm chắc"}catch(e){return""}})()}]`})}
    Q.length=0;if(i%10===9)await W(20)}}finally{showModal=sm0;Q.length=0;document.getElementById('modal').hidden=true}
   return met},BOT?240:80);
  for(const [k,v] of Object.entries(R.F)){if(v.flag==="error"){R.warn.push(["F:play",k]);continue}if(!v.ev&&!v.flag)R.fails.push(["F:play",k,"a dialog with choices the game pushed that is neither an event nor a flagged act / shop"]);

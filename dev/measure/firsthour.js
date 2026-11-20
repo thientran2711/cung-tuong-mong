@@ -19,7 +19,7 @@ const OUT=path.join(__dirname,'../site/first-hour.txt');
   const R=await game.evaluate(async([weeks,want])=>{const out={buoi:0,tuan:0};const sl=t=>new Promise(r=>setTimeout(r,t));
    try{SLOT=3;document.getElementById('title').hidden=true;window.__forceOrigin=want;start();out.origin=S.origin.k;Q.length=0;render();
    const e0=endTurn;endTurn=function(){out.tuan++;return e0.apply(this,arguments)};
-   const drain=async()=>{for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length){chooseM(Math.floor(Math.random()*m.opts.length))}else closeModal()}catch(e){Q.shift();try{showModal()}catch(e){}}await sl(100)}
+   const drain=async()=>{for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length){chooseM((L=>L.length?L[Math.floor(Math.random()*L.length)]:0)(m.opts.map((c,i)=>c.off?-1:i).filter(i=>i>=0)))}else closeModal()}catch(e){Q.shift();try{showModal()}catch(e){}}await sl(100)}
     for(const x of [...document.querySelectorAll('#ov,#modal')].filter(x=>!x.hidden)){const bt=[...x.querySelectorAll('button')].find(b=>b.offsetParent&&!b.disabled);if(bt){bt.click();await sl(100)}}};
    for(let i=0;i<weeks*30&&out.tuan<weeks&&!S.dead;i++){await drain();if(Q.length){Q.length=0;render()}
     for(const t of [...document.querySelectorAll('#tabs [data-tab]')].filter(b=>b.offsetParent)){t.click();await sl(100)}

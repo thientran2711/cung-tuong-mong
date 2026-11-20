@@ -10,7 +10,7 @@ const RANKS=[
 const PAL_HEAD=3;
 /* KIT 1.3 · THE ONE RANK PALETTE (owner 11/16 13:00Z "nhạt nhòa quá → tươi hơn"; jewel tones): every rank colour in the game is read from here (ring, halo, chips, card colour, portrait ground
    .rk-cN, text tone via kitToneOf in jk4). Vivid bases, same colour family per rank; text on paper is DERIVED (kitToneOf), never typed again. Nobody keeps a copy. */
-const RCOL=["#c4861a","#12b84a","#1f6cff","#ff3d8f","#a23cff","#ff1f3d","#ff6a00","#ffc400"];/* Đáp ứng champagne-bronze, Thường tại green, Quý nhân blue, Tần pink, Phi purple, Quý phi red, Hoàng quý phi orange, Hoàng hậu gold */
+const RCOL=["#eae3d0","#7fb394","#7e9ccb","#e3a3b8","#a88bcb","#e3a25b","#d46a64","#efbd69"];/* B24 ONE rank colour system (owner Lượt 726/728): t1 Đáp ứng cream-ivory, t2 Thường tại green, t3 Quý nhân blue, t4 Tần hồng phấn, t5 Phi purple, t6 Quý phi orange, t7 Hoàng quý phi red, t8 Hoàng hậu gold */
 const RCOL_COLD="#8fa3b8";/* Lãnh cung / Phế phi: cool steel grey */
 window.MRCOL=["#3aa38f","#00bf94","#2f6fff","#ff4a1c","#9b4dff"];/* maids: thô sử grey-jade, cung nữ jade, đại cung nữ blue, chưởng sự cô cô terracotta, nữ quan violet */
 window.ERCOL=["#6fb03a","#12b35a","#1f8fe0","#d9601a"];/* eunuchs: tiểu thái giám sage, thái giám green, thủ lĩnh steel blue, tổng quản bronze */
@@ -22,11 +22,21 @@ const ORIGINS=[
  {k:"dtq",n:"Con gái Đại tướng quân",r:1,t:"Cha giữ binh quyền biên ải. Thân thể khỏe mạnh."},
  {k:"muoi",n:"Con gái nhà buôn muối",r:0,t:"Giàu mà xuất thân thấp. Có bạc để mua lòng người."},
  {k:"cn",n:"Cung nữ được sủng hạnh",r:1,ally:1,t:"Từng hầu trà ở Càn Thanh cung. Quen biết khắp đám cung nhân."},
- {k:"nc",n:"Công chúa nước Nam Chiếu hòa thân",r:3,t:"Người ngoại tộc. Thái hậu không ưa."},
+ {k:"nc",on:"Công chúa hòa thân",land:"Cao Ly",n:"Công chúa nước Cao Ly hòa thân",r:3,t:"Người nước phiên. Thái hậu không ưa."},
  {k:"td",n:"Con gái tội thần",r:0,x:{thu:1},ally:1,t:"Cả nhà bị xử trảm. Ngươi vào cung để báo thù."},
  {k:"ch",n:"Cháu gái Thái hậu",r:2,t:"Có Thái hậu chống lưng."},
  {k:"thd",n:"Con gái thầy đồ nghèo",r:0,t:"Thơ văn hơn người, ngoài ra không có gì."}
 ];
+/* HÒA THÂN = ONE origin with COUNTRY BRANCHES (owner OD:L1213–L1216): the roulette and every origin-level table show ONE card, the ORIGINS
+   entry nc ("on" = the origin's own name, Công chúa hòa thân). A life plays one country branch: nc itself (Nam Chiếu) or a branch in ORIGIN_BR
+   (jorigins adds bd = Bắc Địch). A branch keeps its own key for its own story road (STORY / QUEST67 / ARC67 bd_*, letters, close maid, home money);
+   par = the origin it belongs to. The branch is rolled with the origin (j69, weights BAL.orig.br). Old saves with origin "bd" load through originByKey. */
+const ORIGIN_BR={};
+function originByKey(k){return ORIGINS.find(o=>o.k===k)||ORIGIN_BR[k]||null}
+function originRoot(k){const b=ORIGIN_BR[k];return b?b.par:k}
+/* branch of origin k for a roll r in [0,1): weights BAL.orig.br[k] ({branch key: weight}); an origin without branches is itself */
+function originBrPick(k,r){try{const W=BAL.orig.br[k];if(!W)return k;const L=Object.keys(W).filter(b=>W[b]>0&&originByKey(b));const tot=L.reduce((a,b)=>a+W[b],0);
+ let x=r*tot;for(const b of L){x-=W[b];if(x<0)return b}return L.length?L[L.length-1]:k}catch(e){return k}}
 const SURN=["Thẩm","Tô","Lâm","Diệp","Ôn","Hạ","Mộ Dung","Bạch","Liễu","Cố","Tạ","Vân","Chu","Trịnh","Phùng","Lục","Tống","Hàn","Lý","Đường","Thượng Quan","Âu Dương","Hoa","Kiều","Tần","Nhan","Mạnh","Từ","Khương","Đoan Mộc"];
 const GIVEN=["Mi Trang","Uyển Nhi","Thanh Ca","Lan Chi","Như Ý","Nguyệt Hoa","Tuyết Dao","Cẩm Tú","Ngọc Hành","Tịnh Nghi","Lăng Vân","Thục Nghi","Diễm Thu","Hàm Hương","Bích Dao","Linh Lung","Yên Nhiên","Tố Tâm","Mạn Châu","Khinh Vũ","Tử Yên","Vân Thường","Nhược Lan","Hải Đường","Thanh Liên","Mộng Điệp","Ngưng Sương","Tú Uyển","Phương Hoa","Họa Mi","Vân Khanh","Bạch Lộ","Kiều Nguyệt","Thủy Tiên","Hồng Diệp","Tịch Nhan","Lạc Anh","Băng Tâm","Ngọc Dao","Dao Cầm"];
 const MALEN=["Văn Uyên","Tử Khiêm","Minh Viễn","Thừa Chí","Lục Trường","Tiêu Viễn","Hàn Phong","Lăng Vân","Kính Chi","Bá Ngôn"];
@@ -81,9 +91,7 @@ function can(c){return !!S&&!S.dead&&used+c<=BAL.time.khac&&(c<=1||S.suc>=BAL.ti
 function spend(c){used=Math.max(0,used+c)}
 function pips(n){n=Math.max(0,Math.min(4,n));return `<span class="pip">${"●".repeat(n)}${"○".repeat(4-n)}</span>`}
 
-/* the ladder index 0 Liều … 6 Nắm chắc of odds o (BAL.lad, one source for word / kitOddsLv / sgLv / rungDown) */
-function ladIdx(o){const L=(typeof BAL!=="undefined"&&BAL.lad)||[31,46,56,66,81,91];let i=0;for(const f of L)if(o>=f)i++;return i}
-function word(o){const L=(typeof BAL!=="undefined"&&BAL.lad)||[31,46,56,66,81,91];return o>=L[5]?"Nắm chắc":o>=L[4]?"Rất chắc":o>=L[3]?"Chắc":o>=L[2]?"Khá chắc":o>=L[1]?"Năm ăn năm thua":o>=L[0]?"Khó":"Liều"}
+function word(o){return KIT_ODDS[oddsLv(o)]}
 /* TWO scales, never mixed (owner 11/14, coordinator 11/15): word() above = the 7-step ladder, ONLY for the act's own success/failure (the one
    word in the card corner / beside an option). Every side chance of something that comes along (có thai, được ban thưởng, lật thẻ, bị lộ,
    chết… in Được / Mất / Kèm, result cards, Sổ ghi, hints, the HUD) reads on the chance scale Rất thấp / Thấp / Vừa / Cao / Rất cao. Same numbers. */
@@ -92,18 +100,48 @@ function chanceLo(n){return chanceLvl(n).toLowerCase()}
 function chanceW(n){return n<=0?"không có khả năng":"khả năng "+chanceLo(n)}
 const CHW=/khả năng (rất thấp|thấp|vừa|cao|rất cao)|không có khả năng/;
 function cl(v,a,b){return Math.max(a,Math.min(b,v))}
-function roll(o){return Math.random()*100<o}
+/* ODDS CAP (owner 17/11 ~17:00Z + 17:35Z "Trần 95%, việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"): nothing rolled is ever sure. ONE cap in BAL:
+   BAL.odds.lo / hi (5 / 95). roll(o) = THE roll every chance in the game uses (hers and NPCs'): it never passes above hi. oddsCl(o) = an act's
+   odds clamped to [lo, hi] (odA and every act odds). An act that used to be sure (o 100 or no o) now rolls at the cap (oddsOf) and fails
+   SOFTLY through ONE path (j63 oddsSoft: khắc and effort spent, bạc kept, nothing gained); pure bookkeeping (oddsSure: a.fix, a shop list,
+   opening a panel, an exam / minigame whose own play decides) is never rolled. */
+function roll(o){return Math.random()*100<Math.min(o,BAL.odds.hi)}
+function oddsCl(o){return cl(o,BAL.odds.lo,BAL.odds.hi)}
+/* a.inner = the act's OWN inner roll decides (a cure, a check-up, a side risk): roll() caps that inner roll once, so the act is NOT
+   gated again at the cap and shows no false Nắm chắc; a.oi (optional) = the inner odds shown as its word (review r1 2a). */
+function oddsSure(a){return !!(a&&(a.fix||a.open||a.adShop||a.exam||a.aaMG||a.inner))}
+function oddsCapped(a){return !!a&&(a.o==null||a.o>=100)&&!oddsSure(a)}
+/* ONE odds of a card option (review/shown-odds-one-path): the card word (j19 cardH) and the roll (j2 runOpt) both read this */
+function optOdds(a){const o=oddsOf(a);return o>=100?o:oddsCl(o+lotB(S,a.dom))}
+function oddsOf(a){if(a&&a.inner)return a.oi!=null?oddsCl(+a.oi):100;const o=a.o==null?100:a.o;return o>=100?(oddsSure(a)?100:BAL.odds.hi):o}
+/* capRes(ok, o) = a result that came from noise draws (a contest / exam score, not roll) keeps its odds inside the ONE cap: o = the raw odds
+   of that result (0..100); above hi a win is undone with the right share, below lo a loss is turned with the right share, so P(ok) = oddsCl(o). */
+function capRes(ok,o){o=+o||0;const H=BAL.odds.hi,L=BAL.odds.lo;if(o>H)return !!ok&&Math.random()*o<H;if(o<L)return !!ok||Math.random()*(100-o)<L-o;return !!ok}
+function capW(){return word(BAL.odds.hi)}
 function has(t){return S.emp.traits.includes(t)}
 function mm(){return [10,0,-8,-15][S.emp.mood]}
 function sg(n){if(!n)return 0;let f=has("nongnay")?1.3:1;if(n>0&&has("lanhlung"))f*=.7;const r=Math.round(n*f);return n>0?Math.max(1,r):r}
-function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{if(k==="sung")v=sg(v);return `<span class="${v>=0?"g":"r"}">${NAMES[k]} ${v>0?"+":""}${v}</span>`}).join(" · ")}
+/* KLOW: numbers where a FALL is good for her (Áp lực hôn sự / Nợ nhà / Phe chủ chiến, Lời đồn) — coloured by meaning (OD:L908), here and in the result card (j63) */
+const KLOW={kap:1,kld:1};function kGood(k,v){return KLOW[k]?v<=0:v>=0}
+/* AG-ALL-2f3: ONE stat-preview text. A Tai mắt GAIN is not a number handed over (OD 17/11 ~16:50Z / ~17:00Z): it is N approaches to real people who each
+   decide (jagknow tmTry) → "Tai mắt: ngỏ lời N người"; every other stat (and a Tai mắt loss) keeps "<Tên> ±N". Read by every preview formatter. */
+/* AG-ALL-2f3 BALANCE: the eyes a formula reads. Since 2f r2 / 2f2 "Tai mắt" is the count of REAL people (typ. 0–3; NPCs ≈ 0.3 after 30 days,
+   dev/measure/tm-count.js) where formulas were tuned on the old 0–10 stat: every odds / gate that weighs Tai mắt reads eyes(p) = count × BAL.ag.eye.w
+   (cap BAL.ag.eye.cap). The chip / lists still show the real count (p.mat). window.__tmOff (old-stat test knob) reads the plain number. */
+function eyes(p){if(!p)return 0;const n=+p.mat||0;if(window.__tmOff)return n;try{const E=BAL.ag.eye;return Math.min(E.cap,n*E.w)}catch(e){return n}}
+function statTxt(k,v,lbl){const n=lbl||NAMES[k]||k;if(k==="mat"&&v>0)return `${n}: ngỏ lời ${v} người`;return `${n} ${v>0?"+":""}${v}`}
+function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{if(k==="sung")v=sg(v);return `<span class="${kGood(k,v)?"g":"r"}">${statTxt(k,v)}</span>`}).join(" · ")}
 function apply(o){const pops=[];
   for(const k in o){let v=o[k];if(!v)continue;
     if(k==="maid"){S.maid.loyal=cl(S.maid.loyal+v,0,100);pops.push([k,v]);continue}
     if(k==="sung")v=sg(v);S[k]=(S[k]||0)+v;if(NAMES[k])pops.push([k,v])}
-  for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);
-  S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);S.mat=cl(S.mat,0,10);
+  for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);S.suc=Math.min(S.suc,sucCap(S));
+  S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);/* 2f2: mat = the real list (jagknow tmInstall), no clamp */
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
+/* the screen of THIS phone (effects, scenes, sounds, floaters): off for bots, quiet code paths, and while a co-op host runs the other seat's
+   turn (COOPW.ctx). coop-thin F2 r2: her intents run on the host with quiet off (her cards reach her through her Q, her floaters / effects are
+   captured and play on HER phone, jcoopthin uiCap); every screen gate reads this ONE rule, so nothing of hers draws on the host's screen */
+function screenOff(){return !!window.__bot||(typeof quiet!=="undefined"&&quiet)||!!(window.COOPW&&COOPW.ctx)}
 function popNum(k,v,i){if(typeof kitStatFx==="function")return kitStatFx([{k,dv:v}],{src:"apply"});/* fallback before jstatfx is loaded */
   const el=$("hud-"+k)||$("stage");if(!el)return;const r=el.getBoundingClientRect();
   const s=document.createElement("span");s.className="fly "+(v>0?"g":"r");s.textContent=`${NAMES[k]} ${v>0?"+":""}${v}`;s.style.left=Math.max(4,r.left)+"px";s.style.top=(r.bottom+4)+"px";document.body.appendChild(s);setTimeout(()=>s.remove(),1900)}
@@ -140,15 +178,25 @@ function kidDie(k,why,mine){k.alive=false;const wasH=k.heir;if(wasH){k.heir=fals
   return `<span class="r">${k.name} ${why}.</span>${mine?" Ngươi đau đớn khôn nguôi.":""}${wasH?" Ngôi Đông cung bỏ trống.":""} `}
 /* ghenN(n) = the jealousy one "every consort ghen +n" really adds (Hoàng thượng đa tình ×BAL.ghen.datinh). ONE CORE (OD:L1267): ghenAll applies it and every text that shows that gain prints ghenN(n). */
 function ghenN(n){let k=1;try{if(has("datinh"))k=BAL.ghen.datinh}catch(e){}return Math.round(n*k)}
-function ghenAll(n){const d=ghenN(n);liveRivals(true).forEach(v=>v.ghen=cl(v.ghen+d,0,100))}
+/* MOODKNOW step 0 (owner s35 Lượt 41 + OD 17/11 ~18:38Z): ONE way to RAISE the jealousy SCORE v.ghen. It adds n (clamped 0–100) and, for the real
+   rise, a short Chạnh lòng FEELING cause (jmoodknow ghenFeel: true why, aimed at the one who caused it 'by', khắc timer BAL.mood2.dur.e.ghenUp).
+   Lowering stays a plain write; the feeling ending never touches the score. Returns the real rise. */
+function ghenUp(v,n,why,by){if(!v||typeof v!=="object"||!(n>0))return 0;const g0=+v.ghen||0;v.ghen=cl(g0+n,0,100);const d=v.ghen-g0;
+ if(d>0&&typeof ghenFeel==="function")try{ghenFeel(v,d,why,by===undefined?S:by)}catch(e){}return d}
+/* her own jealousy SCORE toward a consort (v.pg, "Ngươi ghen N") — same family as ghenUp: the ONE way to raise it; the real rise also adds a short
+   Chạnh lòng FEELING on her (ghenFeel), aimed at that consort. Lowering stays a plain write; the feeling ending never touches the score. */
+function pgUp(v,n,why){if(!v||typeof v!=="object"||!(n>0))return 0;const g0=+v.pg||0;v.pg=cl(g0+n,0,100);const d=v.pg-g0;
+ if(d>0&&typeof ghenFeel==="function")try{ghenFeel(S,d,why,v)}catch(e){}return d}
+function ghenAll(n,why){const d=ghenN(n);liveRivals(true).forEach(v=>ghenUp(v,d,why||"thấy ngươi nổi bật hơn người",S))}
 function namesInUse(){const a=[];if(S){a.push(S.name);if(S.maid)a.push(S.maid.name);if(S.foe)a.push(S.foe);if(S.st){if(S.st.guard)a.push(S.st.guard);if(S.st.stu)a.push(S.st.stu)}}(rivals||[]).forEach(v=>a.push(v.name));allKids().forEach(([k])=>a.push(k.name));return a}
 function freshName(){const used=namesInUse();const sur=used.map(n=>SURN.find(x=>n.startsWith(x+" "))).filter(Boolean);
   let ss=SURN.filter(x=>!sur.includes(x));if(!ss.length)ss=SURN;
   for(let t=0;t<200;t++){const n=pick(ss)+" "+pick(GIVEN);if(!used.includes(n)&&!used.some(u=>u.endsWith(" "+n.split(" ").slice(-2).join(" "))))return n}
   for(const a of SURN)for(const b of GIVEN){const n=a+" "+b;if(!used.includes(n))return n}return pick(SURN)+" "+pick(GIVEN)+" "+(R(90)+10)}
+function ghenNew0(){return R(BAL.ghenNew)}/* ONE CORE: the jealousy a new face starts with (newRival + co-op part B rebase) */
 function newRival(rank,isQueen){const t=pick(TRAITS);
   return rstats({id:++rid,name:freshName(),rank,queen:!!isQueen,trait:t[0],malice:t[1]+R(20)-10,sung:20+rank*9+R(10),rel:isQueen?-5:R(20)-10,ev:0,alive:true,out:false,
-    kids:[],/* palace-start (owner 16/11): nobody arrives with a child; the few children at a new game are seeded by psSeedKids() */ghen:R(15),pg:0,nights:0,age:(rank>=5||isQueen?23:18)+R(8)},rank)}
+    kids:[],/* palace-start (owner 16/11): nobody arrives with a child; the few children at a new game are seeded by psSeedKids() */ghen:ghenNew0(),pg:0,nights:0,age:(rank>=5||isQueen?23:18)+R(8)},rank)}
 function mkEmp(){const t=[];const ks=Object.keys(ETRAITS);
   while(t.length<2){const k=pick(ks);if(t.includes(k)||CLASH.some(([a,b])=>(a===k&&t.includes(b))||(b===k&&t.includes(a))))continue;t.push(k)}
   return {era:pick(ERA),age:BAL.ps.empAge[0]+R(BAL.ps.empAge[1]+1),reignY:1,traits:t,mood:1,likes:{flower:pick(LIKES.flower),music:pick(LIKES.music),dish:pick(LIKES.dish)},known:{}}}

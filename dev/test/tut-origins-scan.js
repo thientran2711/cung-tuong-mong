@@ -1,6 +1,7 @@
 /* tut-origins-scan (review/tut-followups): every origin in ORIGINS starts a NEW life inside the 14-chapter frame (jst14) with chapter 1
    «nhap14» and its tutorial quests (jtq14), owner priority 16/11 21:38Z (chapters 1–3 for every origin). Also checks the story slot of
    every origin is wrapped by j67 (STORY[k].__old) so a module that registers an origin after j67 (jorigins bd) cannot skip the frame.
+   Country branches (j1 ORIGIN_BR: hòa thân · Bắc Địch) are scanned too.
    Prints one table row per origin. usage: NODE_PATH=$(npm root -g) node dev/test/tut-origins-scan.js <built page url> */
 const {chromium}=require('playwright');const {autoDismissRoulette,dismissRoulette}=require('./lib/roulette');
 const [,,URL]=process.argv;
@@ -9,7 +10,7 @@ const [,,URL]=process.argv;
  const p=await ctx.newPage();p.setDefaultTimeout(30000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL+(URL.includes('?')?'&':'?')+'khost=0',{waitUntil:'domcontentloaded',timeout:0});
  await p.waitForFunction(()=>typeof start==='function'&&typeof ORIGINS!=='undefined',null,{timeout:0});await p.waitForTimeout(800);
- const keys=await p.evaluate(()=>ORIGINS.map(o=>o.k));
+ const keys=await p.evaluate(()=>ORIGINS.map(o=>o.k).concat(typeof ORIGIN_BR==='object'?Object.keys(ORIGIN_BR):[]));/* + every country branch (hòa thân · Bắc Địch, j1 ORIGIN_BR) */
  console.log('| origin | wrapped | frame f14 | chapter 1 | quests | variant |');console.log('|---|---|---|---|---|---|');
  for(const k of keys){
   await p.evaluate(k=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__forceOrigin=k;start()},k);

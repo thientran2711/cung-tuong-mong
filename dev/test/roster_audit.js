@@ -24,7 +24,7 @@ const HOOK=`(function(){const A=window.__aud={checks:0,lives:0,khac:0,err:{a:0,b
  function expected(){/* independent count of everyone alive in the palace now */const ids=new Set(["emp","me"]);if(!S.thDead)ids.add("th");
   for(const v of rivals)if(v.alive)ids.add("v"+v.id);
   for(const p of [S].concat(rivals)){if(p!==S&&!p.alive)continue;const pk=p===S?"me":p.id;if(p.maid&&p.maid.name&&!(p===S&&typeof isSrv==="function"&&isSrv()))ids.add("mm:"+pk);for(const s of p.staff||[])if(s&&s.sid!=null)ids.add("s"+s.sid)}
-  for(const c in (S.court||{}))if(S.court[c]&&S.court[c].name)ids.add("c:"+c);if(typeof plxPeople==="function"){ids.add("c:tgk");ids.add("c:ttp")}/* jplx place fixtures */
+  for(const c in (S.court||{}))if(S.court[c]&&S.court[c].name)ids.add("c:"+c);/* npc-death-wire: Phế phi họ Lý lives in Trường Môn viện while alive */if(S.lyF&&!S.lyF.dead&&!S.lyF.freed)ids.add("c:ly");if(typeof plxPeople==="function"){ids.add("c:tgk");ids.add("c:ttp")}/* jplx place fixtures */
   try{for(const x of (S.thO&&S.thO.staff)||[])if(x&&x.sid!=null)ids.add("s"+x.sid)}catch(e){}
   const jm=typeof menSchedRoad==="function"?menSchedRoad():typeof menRoad==="function"&&menRoad();/* people ledger: the fixed men's schedule on both roads */for(const m of S.men||[]){if(!m.alive)continue;if(jm?((S.menWhy||{})[m.id]&&!(typeof menBanned==="function"&&menBanned(m))):(m.rw==="thái y"||m.rw==="thị vệ"||(S.menW&&S.menW[m.id])))ids.add(m.id)}
   if(jm)try{const H=trS().H||{};for(const c in (S.minW||{}))if(H[c])ids.add("q:"+c)}catch(e){}

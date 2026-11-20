@@ -28,7 +28,10 @@ Object.assign(BAL,{tw:{
  /* gains (one source, read by both sides and by the option text) */
  g:{help:10,helpOan:5,apol:15,thTH:[8,2,1,-2],thHH:[4,2,1,-3,5],thTHo:75,thHHo:70,prayO:50,pray:2,ksp:2,ill:3,illWk:2,preg:[6,5,-5],ann:[6,5,6],
     provoke:[1,-15,10,9],humil:[10,2],visit:[5,3],mediate:10,flaunt:2,test:[3,-6,55],drop:20,follow:6,gossip:1,praiseO:60,warn:10,admon:5,admonCd:6,
-    accFail:[8,25,20],vu:[10,5,4],ky:[2,1],conf:[20,15],reward:[20,10,3]}
+    accFail:[8,25,20],vu:[10,5,4],ky:[2,1],conf:[20,15],reward:[20,10,3],
+    /* pillow slander at night (her night2 option and an NPC's night, two-way row 24, AG2): odds = o[0] + Ân tình / o[1] + night score × o[2]
+       − o[3] when he is Đa nghi; thành: the target's Sủng −hit, liking −rel; hỏng: Đa nghi → the speaker's Sủng −dg[0], Danh −dg[1], else Sủng −fail */
+    pillow:{o:[30,2,3,10],hit:10,rel:5,dg:[6,3],fail:2}}
 }});
 function twCost(k){return (BAL.tw&&BAL.tw[k])||{}}
 /* can doer a pay deed k? (the player's rule: bạc ≥ price; a Sức cost needs more Sức than it costs, j76) */
@@ -40,7 +43,8 @@ const TW={};
 function TWD(k,o){o.k=k;TW[k]=o}
 /* run deed k: pays (unless the caller already paid, as the player's talk() does with a.c), rolls the shared odds, applies the effect */
 function twDo(a,t,k,paid){const D=TW[k];if(!D||!a)return"";try{if(D.req&&!D.req(a,t))return"";if(!paid){if(!twCanPay(a,k))return"";twPay(a,k)}
- const o=D.o?D.o(a,t):100;const ok=o>=100||roll(o);return D.run(a,t,ok)||""}catch(e){console.error(e);return""}}
+ const o=D.o?D.o(a,t):100;/* ODDS CAP: a sure deed rolls at the cap too (hers through talk() already rolled: paid) and fails softly, nothing happens */
+ if(o>=100&&!(a===S&&paid)&&!roll(BAL.odds.hi))return a===S?oddsSoft("",null):"";const ok=o>=100||aRoll(o,a);/* her deed inside fzRun (talk card, j2) rolls the odds she saw (j9) */return D.run(a,t,ok)||""}catch(e){console.error(e);return""}}
 const G=()=>BAL.tw.g;
 /* --- deeds both sides had (NPC side now pays and rolls like hers) --- */
 TWD("help",{n:"Giúp đỡ nàng",req:(a,t)=>!!t,run:(a,t)=>{relAdd(a,t,G().help);oanAdd(t,a,-G().helpOan);return `${twNm(a)} sang giúp ${NM(t)} việc khó`}});
@@ -54,20 +58,20 @@ TWD("fakePreg",{n:"Giả mang thai",req:a=>!a.preg&&(a.tamco||0)>=50,o:a=>odA(a,
  a.preg=1;a.fake=1;a.hidden=false;a.pregWk=wk();twAp(a,{sung:g[0],th:g[1]});return `${twNm(a)} báo tin có thai`}});
 TWD("announce",{n:"Báo tin có thai",req:a=>a.preg&&a.hidden,run:a=>{const g=G().ann;a.hidden=false;twAp(a,{sung:g[0],th:g[1]});
  /* the same jealousy she raises when she announces (ghenAll): every other consort's ghen; when an NPC announces, the player has no ghen bar → resentment */
- liveRivals(true).forEach(x=>{if(x!==a)x.ghen=cl((x.ghen||0)+g[2],0,100)});return `${twNm(a)} báo tin có thai`}});
-TWD("provoke",{n:"Khiêu khích",req:(a,t)=>!!t,run:(a,t)=>{const g=G().provoke;twAp(a,{danh:g[0]});relAdd(a,t,g[1]);if(t!==S)t.ghen=cl((t.ghen||0)+g[2],0,100);else oanAdd(S,a,g[3]);return `${twNm(a)} buông lời khiêu khích ${NM(t)}`}});
-TWD("warn",{n:"Cảnh báo nàng",req:(a,t)=>!!t,run:(a,t)=>{const x=liveRivals(true).find(x=>x!==a&&x!==t&&(oan(x,t)>=30||bandOf(danger(x,t))>=2));if(!x){affAdd(t,a,-2);return `${twNm(a)} nhắc ${NM(t)} đề phòng, nhưng không có căn cứ`}
+ liveRivals(true).forEach(x=>{if(x!==a)ghenUp(x,g[2],`nghe ${twNm(a)} báo tin có thai`,a)});return `${twNm(a)} báo tin có thai`}});
+TWD("provoke",{n:"Khiêu khích",req:(a,t)=>!!t,run:(a,t)=>{const g=G().provoke;twAp(a,{danh:g[0]});relAdd(a,t,g[1]);if(t!==S)ghenUp(t,g[2],`bị ${twNm(a)} khiêu khích`,a);else oanAdd(S,a,g[3]);return `${twNm(a)} buông lời khiêu khích ${NM(t)}`}});
+TWD("warn",{n:"Cảnh báo nàng",req:(a,t)=>!!t,run:(a,t)=>{const x=liveRivals(true).find(x=>x!==a&&x!==t&&(oan(x,t)>=30||bandOf(danger(x,t))>=2));if(!x){affAdd(t,a,BAL.eff.jtwoway.run);return `${twNm(a)} nhắc ${NM(t)} đề phòng, nhưng không có căn cứ`}
  affAdd(t,a,G().warn);oanAdd(t,x,G().warn);if(t===S){S.dKnown=S.dKnown||{};S.dKnown[x.id]=wk();noteAdd(x.id,`${a.name} báo: nàng có ý hại ngươi`)}else t.shield=Math.max(t.shield||0,1);return `${twNm(a)} lén báo ${NM(t)} đề phòng ${x===S?"ngươi":x.name}`}});
 /* --- deeds only NPCs had: now one deed for both (player option added below) --- */
 TWD("visit",{n:"Thăm lúc ốm mệt",req:(a,t)=>!!t&&((t.suc||0)<50||!!t.preg),run:(a,t)=>{const g=G().visit;relAdd(a,t,g[0]);twAp(t,{suc:g[1]});return `${twNm(a)} sang thăm ${NM(t)} lúc ốm mệt`}});
-TWD("mediate",{n:"Hòa giải",req:(a,t)=>!!t&&!!twFoeOf(a,t),run:(a,t)=>{const x=twFoeOf(a,t);oanAdd(t,x,-G().mediate);return `${twNm(a)} đứng ra hòa giải giữa ${NM(t)} và ${x===S?"ngươi":x.name}`}});
+TWD("mediate",{n:"Hòa giải",req:(a,t)=>!!t&&!!twFoeOf(a,t),run:(a,t)=>{const x=twFoeOf(a,t);/* RECEIVER CHOICE (jrcv RCVK.mediate): the one who holds the oán answers */return x?rcvAsk("mediate",a,t,key(x)):""}});
 TWD("humil",{n:"Hạ nhục",req:(a,t)=>!!t&&rkOf(a)>=rkOf(t),run:(a,t)=>{const g=G().humil;oanAdd(t,a,g[0]);twAp(t,{danh:-g[1]});return `${twNm(a)} hạ nhục ${NM(t)} trước mặt cung nhân`}});
-TWD("flaunt",{n:"Khoe quà ngự ban",req:a=>(a.sung||0)>=40,run:a=>{liveRivals(true).forEach(x=>{if(x!==a)x.ghen=cl((x.ghen||0)+G().flaunt,0,100)});return `${twNm(a)} đi khắp cung khoe quà ngự ban`}});
+TWD("flaunt",{n:"Khoe quà ngự ban",req:a=>(a.sung||0)>=40,run:a=>{liveRivals(true).forEach(x=>{if(x!==a)ghenUp(x,G().flaunt,`thấy ${twNm(a)} khoe quà ngự ban`,a)});return `${twNm(a)} đi khắp cung khoe quà ngự ban`}});
 TWD("test",{n:"Thử lòng",req:(a,t)=>!!t&&aff(a,t)>=0,o:()=>G().test[2],run:(a,t,ok)=>{affAdd(a,t,ok?G().test[0]:G().test[1]);return `${twNm(a)} thử lòng ${NM(t)}: ${ok?"tin thêm một chút":"càng ngờ vực"}`}});
 TWD("drop",{n:"Lạnh nhạt",req:(a,t)=>!!t&&aff(a,t)>=30&&((t.sung||0)<25||!!t.confined),run:(a,t)=>{affAdd(a,t,-G().drop);return `${twNm(a)} lạnh nhạt với ${NM(t)} lúc sa cơ`}});
 TWD("follow",{n:"Nương theo",req:(a,t)=>!!t&&rkOf(t)>rkOf(a)+1,run:(a,t)=>{relAdd(a,t,G().follow);return `${twNm(a)} nép theo ${NM(t)}`}});
-TWD("gossip",{n:"Rỉ tai chuyện trong cung",req:(a,t)=>!!t,run:(a,t)=>{const x=pick(liveRivals(true).filter(y=>y!==a&&y!==t));if(x)ap(x,{danh:-G().gossip});return `${twNm(a)} rỉ tai ${NM(t)} chuyện trong cung`}});
-TWD("check",{n:"Soát quà được tặng",req:a=>(a.inv||[]).some(e=>!e.h),run:a=>{const i=(a.inv||[]).findIndex(e=>e.t);if(i>=0){a.inv.splice(i,1);return `${twNm(a)} cho soát quà, vứt bỏ một món có độc`}return `${twNm(a)} cho thái y soát lại quà được tặng`}});
+TWD("gossip",{n:"Rỉ tai chuyện trong cung",req:(a,t)=>!!t,run:(a,t)=>{/* NPC-PURPOSE G3: the talk is about the one the teller resents (her foe, near-best by hostility); no foe → harmless talk */const x=npwPick(liveRivals(true).filter(y=>y!==a&&y!==t),y=>Math.max(0,hostility(a,y)-BAL.ag.why.min));if(x)ap(x,{danh:-G().gossip});return `${twNm(a)} rỉ tai ${NM(t)} chuyện trong cung${x?` về ${NM(x)}`:""}`}});
+TWD("check",{n:"Soát quà được tặng",req:a=>(a.inv||[]).some(e=>!e.h),run:a=>{/* 2e4: her "Kiểm tra đồ" detection (j8 inspect: oSee odds per item, trail evidence) */const f=inspect(a);return f.length?`${twNm(a)} cho soát quà, tìm ra: ${f.join("; ")}`:`${twNm(a)} cho soát lại quà được tặng, không thấy gì lạ`}});
 TWD("admon",{n:"Khuyên Hoàng thượng mưa móc đều khắp",req:(a,t)=>{if(!t||t===a||!(a===S?S.rank>=7:a.queen))return false;const f=typeof favNow==="function"?favNow():null;return !!f&&f.p===t&&!(t.admonWk!=null&&wk()-t.admonWk<G().admonCd)},
  run:(a,t)=>{twAp(t,{sung:-G().admon});t.admonWk=wk();return `${twNm(a)} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${NM(t)}`}});
 /* whom t resents most (not the doer): the quarrel a mediator can settle */
@@ -82,7 +86,7 @@ window.TW=TW;window.twDo=twDo;window.twCost=twCost;
   o.ok=function(v,t){if(!twCanPay(v,k))return false;if(TW[k].req&&!TW[k].req(v,k==="follow"?twFollowT(v):k==="thHH"?queenP():t))return false;return ok0.apply(this,arguments)};
   o.run=function(v,t){return twDo(v,k==="follow"?twFollowT(v):t,k)}}
  /* "Khen nàng" (feign = warm words): the player's Khen tài nghệ, same odds */
- if(SOC.feign)SOC.feign.run=function(v,t){if(!roll(odA(v,G().praiseO+(v.tai||0)/5))){affAdd(t,v,-2);return `${v.name} khen ${NM(t)} mà nghe giả lả`}affAdd(t,v,4);return `${v.name} niềm nở với ${NM(t)}, chuyện trò thân mật`};
+ if(SOC.feign)SOC.feign.run=function(v,t){if(!roll(odA(v,G().praiseO+(v.tai||0)/5))){affAdd(t,v,BAL.eff.jtwoway.run_2);return `${v.name} khen ${NM(t)} mà nghe giả lả`}affAdd(t,v,BAL.eff.jtwoway.run_3);return `${v.name} niềm nở với ${NM(t)}, chuyện trò thân mật`};
  /* spying and befriending: the player's own ACT (free "Tự đi dò la" / paid "Kết giao"), same odds, same caught rules */
  if(SOC.spy)SOC.spy.run=function(v,t){return strip(ACT.spyk?runAct(v,t,"spyk"):"")};
  if(SOC.ally){const ok0=SOC.ally.ok;SOC.ally.ok=(v,t)=>ACT.ally.ok(v,t)&&ok0(v,t);SOC.ally.run=function(v,t){return strip(runAct(v,t,"ally"))}}})();

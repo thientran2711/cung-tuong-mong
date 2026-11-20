@@ -35,6 +35,8 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Tab kẻ hầu | Cung nhân (mục con của Hậu cung) | Kẻ hầu (tên tab; trong câu vẫn dùng "kẻ hầu") |
 | Tab con cái | Hoàng tự | Con cái (tên tab) |
 | Tab rương | Tư trang (chữ ngắn cũng "Tư trang") | Rương đồ, Rương |
+| Phòng bày đồ quý (owner OD 17/11 ~21:22Z) | **Đa Bảo Các** (thanh trái, đầu bảng; phòng người khác: "Đa Bảo Các của <tên>") | Nơi trưng bày, Phòng trưng bày, Kệ trưng bày |
+| Bộ đồ bày (display-set-bonus) | «Bộ <tên>: Đức +2.» · «Bộ <tên>: còn thiếu <món>.» · «Bộ <tên> khuyết: <món> héo úa.» · «Bộ <tên> đủ lại.» · tới trần: «Bộ <tên>: đủ bộ, nhưng đã tới mức, không thêm.» | set, combo, bonus, điểm bộ |
 | Tab phe | Phe phái (chữ ngắn "Phe") | — |
 | Việc học một môn (Tài nghệ, Tứ đức) (sếp 15/11) | Tự học · Học với thầy · Học với ma ma · Học với Thái hậu (tên thật người dạy giữ trong lời, vd. "ma ma giáo tập") | Tự rèn, Tự luyện, Theo ma ma giáo tập, Xin Thái hậu cho học cùng |
 | Khoảng số trên thẻ việc (sếp 15/11) | "tiến bộ Thi một hai phần", "Sủng +3 đến +8" | "+1..2", "0..10" |
@@ -61,8 +63,9 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Tên kẻ hầu | không trùng trong cả cung, không có số ("Thúy 2") | tên kèm số |
 | Số đo (Sắc, Tài, Sủng…) | gọi đúng tên; khi chung chung: "không đổi gì" | chỉ số, stat, điểm |
 | Điểm thi (tuyển tú, thi tài) | phần: "nàng mất 2 phần" | điểm |
-| Bậc may rủi (CHỈ cơ may thành/hỏng của chính việc làm: một chữ ở góc thẻ / cạnh lựa chọn) | Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc (việc chắc không ghi chữ) | %, Chắc chắn, random |
+| Bậc may rủi (CHỈ cơ may thành/hỏng của chính việc làm: một chữ ở góc thẻ / cạnh lựa chọn) | Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc. TRẦN (sếp 17/11): không việc may rủi nào chắc chắn — cao nhất là Nắm chắc (BAL.odds.hi); việc xưa nay "chắc ăn" nay ghi Nắm chắc và hỏng thì hỏng nhẹ ("hỏng: chỉ uổng công, không mất gì khác", j63 kitSoftW). Việc không phải may rủi (đi lại, mua theo giá, mở bảng, quyết định trong sự kiện) không ghi chữ | %, Chắc chắn, random |
 | Khả năng của một điều kèm theo (có thai, được ban thưởng, lật thẻ, bị lộ, bị phạt, chết… trong Được / Mất / Kèm, thẻ kết quả, Sổ ghi, lời dặn, ô trạng thái) | Rất thấp / Thấp / Vừa / Cao / Rất cao (không có thì "Không có"); trong dòng: "có thai: khả năng thấp · được ban thưởng: khả năng vừa"; ô: "Có thai: Thấp"; sổ ghi: "(khả năng: vừa)". Hàm `chanceW` / `chanceLvl` (j1) | "có thai: Liều", "được ban thưởng: Khó", "cơ may: …" cho điều kèm theo |
+| Chờ / đang xử lý (mọi dòng chờ) | một bảng duy nhất `CTM_WAIT` (dev/site/kwait.js): "Cửa cung đang mở…", "Tranh luân hồi đang trải các thân phận…", "đường xa" (mạng), "mở lại" (tải lại), "khớp sổ" (đồng bộ) | tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt |
 | Chạm màn hình (lời dặn) | chạm | bấm, click, nhấn |
 | Mở một tab (lời dặn) | Vào mục Phe phái | Mở tab Phe phái |
 | Quan hệ hai chiều (thẻ người, Giao tình, sổ tuần, kết quả việc) | chủ ngữ + động từ + đối tượng: "Nàng quý ngươi: Bình thường · -5", "Nàng oán ngươi: 0", "Ngươi quý nàng …", "Ngươi oán nàng …"; theo vai khi tự nhiên: "Hoàng hậu quý ngươi", "Hắn quý ngươi"; chưa biết: "Nàng quý ngươi: chưa rõ" | Thiện cảm (đứng trơ), Ngươi với nàng, Nàng với ngươi | (thẻ người, sổ tuần, kết quả việc vẫn dùng lối này)
@@ -79,6 +82,26 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Đồ đang đeo | Bên mình | Đang mang |
 | Bảng xếp hạng | Bảng vàng | Bảng vinh danh, leaderboard |
 | Tab Hoàng thượng + Thái hậu | Chí tôn | Hoàng thượng · Thái hậu, Thánh thượng |
+
+### Makeup (Điểm trang): the FIVE result levels — owner 17/11 05:03Z / 05:16Z (OD:L1553-1554); 15:35Z (OD L1638, makeup-lux) Diêm dúa dropped as a level, Khuynh thành = the maximum. ONE label source: `TOIL_MK` (jtoil.js; `toilMkW` inside a sentence: a name keeps its capital, only "mặt mộc" is lower case)
+
+| Level id (code, saves) | Player name | Meaning |
+|---|---|---|
+| `moc` | Mặt mộc | no makeup: her own face, no layer |
+| `vung` | Vụng về | a part went wrong: smeared lip / cheek (brows untouched), funny but still pretty |
+| `vua` | Đoan trang | a decent face, the light layer; not enough for a big occasion |
+| `dep` | Kiều diễm | the beautiful level (positive); what big occasions / bold đề require |
+| `tuyet` | Khuynh thành | the most beautiful: luminous, never heavy |
+
+- A look shows its NAME only — the name is its beauty, no beauty number (owner ~15:45Z, OD L1639). Each look has ONE xa xỉ value (`BAL.toil.lv[level].lux`, same scale as clothes/jewels) and a xa xỉ tier word (`TOIL_LUXW`): Mặt mộc **Mộc mạc** · Vụng về **Sơ sài** · Đoan trang **Thanh nhã** · Kiều diễm **Diễm lệ** · Khuynh thành **Lộng lẫy**; shown as `toilLvChips` (word chip + `kitLuxChip` "Xa xỉ N"), the mirror ladder `toilLvRows`. The TOTAL (y phục + trang sức + son phấn + thú cưng = `luxTotal`) is MAIN's kit display.
+- **diêm dúa** is no longer a level: it is the WORD people say when the whole look (y phục + trang sức + son phấn, the ONE total `luxOf`) is far above the occasion (`BAL.lux.diem` × its ceiling) — `TOIL_DV.diem`, in a reason line "ăn vận diêm dúa". Old saves holding the `diem` level read as Khuynh thành.
+
+- Preset groups the player picks from (`TOIL_STY`): **Kiểu thanh nhã** · **Kiểu cầu kỳ** (bold, elaborate, NOT negative; owner 03:38Z). A preset shows ONLY its own name (owner 03:35Z: never "(sắc lạnh)" / "(sắc ấm)").
+- The hidden tone a person / a Hội phối đồ đề likes, once she learns it (`TOIL_TONE`): **tông đào cam** · **tông hồng tím**. Hoàng thượng's row in "Điều ngài thích": **Son phấn**.
+- The liked LEVEL a person has (makeup-lux, jmkt): "ưa dung nhan Đoan trang / Kiều diễm / Khuynh thành"; Hoàng thượng's row: **Dung nhan**.
+- Never use "đẹp / tuyệt / vừa / vụng" as a level name on screen; "đoan trang" is not used for dress hints any more (dress: "chỉnh tề", "y phục đoan trang" for the dress taste).
+
+**Memory waking a feeling** (MOOD-MEM, owner OD 17/11 ~18:25Z (b); jmoodknow mwWhy): "gặp X, chợt nhớ chuyện cũ: nàng/ngài từng …" (the name again when both would be "nàng") · "trở lại <nơi>, chợt nhớ chuyện cũ: …" · "tròn một năm ngày …". (Ghen score vs Chạnh lòng feeling: see the feeling-vs-score line in §Mood below.)
 
 Từ đã cổ trang, giữ nguyên: Bạc, Sức, Sủng, Danh, Sắc, Tài, Tâm cơ, Đức, Tai mắt, Ân tình, Phúc duyên, Lòng, Chủ tin, thiện cảm, oán, ghen, khắc, quẻ, thẻ bài, thị tẩm, tấn phong, sắc phong, lãnh cung, cấm túc, ân thưởng, bổng lộc, Phi tần, Phe phái, Kẻ hầu, Con cái, Rương đồ, Tài nghệ, Bảng phẩm vị.
 
@@ -139,11 +162,11 @@ Nguồn đối chiếu (chuyên gia, sếp OD:L1327): bản lồng tiếng / ph�
 6. **Theo tâm trạng và quan hệ.** Cùng một việc, người thương nói ấm, người ghét nói mát, người trên giận nói gọn và lạnh. Mỗi tình huống lặp lại có một **chùm câu** (≥ 4 câu, chia theo tâm trạng / quan hệ / kết quả), không lặp câu trong `BAL.voice.noRepeat` ngày (jvoice `kLine`).
 
 ### 2.5 Lời giải thích được / mất (thẻ việc, kết quả)
-Giữ rõ luật (mục 4): con số, bậc may rủi, Tốn/Thành/Hỏng/Kèm không đổi. Câu chữ kèm theo viết theo giọng cung: nói được gì, mất gì, ai vừa lòng ai phật ý — gọn, có hình ảnh, không sáo rỗng, không %.
+Giữ rõ luật (mục 4): con số, bậc may rủi, Tốn/Thành/Bại/Kèm không đổi. Câu chữ kèm theo viết theo giọng cung: nói được gì, mất gì, ai vừa lòng ai phật ý — gọn, có hình ảnh, không sáo rỗng, không %.
 | Khô | Cung đấu |
 |---|---|
 | Thái hậu thiện cảm +2 khi gặp hôm nay | Thái hậu khẽ gật đầu, ánh mắt dịu đi — thiện cảm +2 |
-| Hỏng thì Hoàng hậu phật ý | Hỏng thì Hoàng hậu ngoài mặt cười, trong lòng ghi một nét |
+| Bại thì Hoàng hậu phật ý | Bại thì Hoàng hậu ngoài mặt cười, trong lòng ghi một nét |
 | Có rủi ro | Được ăn cả, ngã về không |
 | Không đổi gì | Gió lặng sóng yên, chẳng ai để tâm |
 
@@ -167,14 +190,15 @@ Giữ rõ luật (mục 4): con số, bậc may rủi, Tốn/Thành/Hỏng/Kèm 
 ## 4. Giữ rõ luật chơi
 
 - Con số giữ nguyên và đứng sau tên: "Sủng +6", "Bạc -30", "Sủng 28 → 31".
-- Các dòng của bộ giao diện (Cần / Tốn / Được / Mất / Kèm / Ghi chú; Tốn / Thành / Hỏng / Kèm trên thẻ việc) là của chủ bộ giao diện: không ai tự đổi. Đề xuất chữ cổ (chờ chủ bộ giao diện duyệt):
+- Các dòng của bộ giao diện (Cần / Tốn / Được / Mất / Kèm / Ghi chú; Tốn / Thành / Bại / Kèm trên thẻ việc; thẻ có roll: hàng THÀNH (xanh, thay Được) và hàng BẠI (đỏ, thay Mất), Kèm riêng; thẻ chắc chắn giữ Được / Mất / Kèm, không có chữ THÀNH/BẠI; không có dòng tiêu đề THÀNH/BẠI riêng) là của chủ bộ giao diện: không ai tự đổi. Đề xuất chữ cổ (chờ chủ bộ giao diện duyệt):
+- Khối BẠI không có gì để ghi: một dòng mờ "Tốn công, không được gì". Khối THÀNH không có gì để ghi (chỉ có phần hỏng): một dòng mờ riêng "Không được gì thêm". Việc không có roll mà chỉ có một khoản mất chắc chắn: MỘT khối THÀNH, hàng Mất. Nút cuộn của khung: "Kéo xuống". Dấu kết quả sau mỗi việc: THÀNH / BẠI / KẾT QUẢ (không còn "HỎNG").
 
 | Hiện tại | Đề xuất |
 |---|---|
 | Cần | Phải có |
 | Tốn | Hao |
 | Được / Thành | Đắc / Thành |
-| Mất / Hỏng | Thất / Hỏng |
+| Mất / Bại | Thất / Bại |
 | Kèm | Hệ lụy |
 | Ghi chú | Lời chua |
 
@@ -198,3 +222,4 @@ Giữ rõ luật (mục 4): con số, bậc may rủi, Tốn/Thành/Hỏng/Kèm 
 
 - Nết (trait) names: the pre-judged villain nết "Hiểm độc" is now "Xảo quyệt" (owner 17/11 05:35Z). One label map TRAIT_OLD/traitLabel in j1.js; old saves migrate on load (trMigrate in deser).
 - Nết (ONE TRAIT POOL, owner 17/11 05:45Z–06:20Z): the only nết words the player reads are the rows of BAL.net (jbal2.js): Tính tình Ân cần/Lạnh lùng, Nóng nảy/Điềm tĩnh, Nhiều chuyện/Kín đáo, Kiêu ngạo/Khiêm nhường (men: Cương trực/Xu nịnh); Lòng dạ Thật thà/Xảo quyệt, Thanh liêm/Ham lợi, Rộng lượng/Thù dai, Trọng nghĩa/Thực dụng; Chí hướng Tham vọng/An phận, Ham học/Ham vui, Mê tín/Thực tế, Vì gia tộc/Vì mình. Each row's tend/gain/cost text is cổ trang and shown as "Hay:" and the nết tooltip (Được … · Mất …). Old words (Hiền lành, Đa nghi, Nhu mì, Tham tiền, servant trung thành/tham lam/nhát gan/lanh lợi…) are never shown again; old saves map them (BAL.net.old).
+- Feeling vs score (owner 17/11 ~18:38Z "Dùng từ chạnh lòng được á"): the short jealous FEELING (mood seal / cause list, key `ghen`) is named "Chạnh lòng" — ONE constant `EMO_GHEN` (jemo.js), read by EMO.ghen and the outburst text; the long-term SCORE v.ghen keeps the word "Ghen" (chips, gloss, "ghen +n").

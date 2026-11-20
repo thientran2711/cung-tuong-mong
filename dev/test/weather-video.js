@@ -10,7 +10,7 @@ function KIT_OR(k){return k}
  const t0=Date.now();
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function');await sleep(2500);
  await p.addStyleTag({content:'#kload{display:none!important}'});
- await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){start();if(!isSrv())break}});
+ await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
  for(let i=0;i<60&&await p.evaluate(()=>typeof NLP!=='undefined'&&!!NLP);i++){await p.evaluate(()=>{const b=document.querySelector('button[data-nl="ok"]');if(b)b.click()});await sleep(300)}
  for(let i=0;i<40;i++){const k=await p.evaluate(()=>{const r=document.querySelector('#kroul,.kroul');if(r){const bs=[...r.querySelectorAll('button')];const b=bs.find(x=>/Bỏ qua/.test(x.textContent))||bs.find(x=>/Tiếp|Vào|Nhập/.test(x.textContent))||bs[0];if(b)b.click();else r.click()}const o=document.querySelector('.kmov');if(o){o.click();const kb=o.querySelector('.kmend');if(kb)kb.click()}const d=document.getElementById('dawn');if(d){d.classList.remove('on');d.hidden=true}return !!r||!!o||(typeof kmBusy!=='undefined'&&kmBusy)});if(!k)break;await sleep(600)}
  await p.evaluate(cfg=>{Q.length=0;document.getElementById('modal').hidden=true;document.querySelectorAll('.kmov').forEach(e=>e.remove());document.querySelectorAll('#kroul').forEach(e=>e.remove());S.place="home";S.month=cfg.month;S.buoi=cfg.buoi;S.wx=cfg.wx;render()},CFG);

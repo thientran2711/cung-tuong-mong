@@ -5,7 +5,7 @@
    1. ONE course ladder for every art (p.arts / p.artp) and every Tứ đức course (p.vir / p.virp): p.arts[k] = bậc 0..5 (every old reader keeps
       working), p.artp[k] = points inside that bậc; points = BAL.art.tier[bậc] + artp (0–100). crsPush() is the only way points grow (her lessons,
       events, NPC study: addArt / addArtP / addVir call it). artO(p,k) = the ONE odds bonus of a course (BAL.art.odds[bậc]).
-   2. Start values: origSet(p,k) from BAL.start for her (j2 start) and for every new NPC consort (rstats, origin drawn by BAL.start.npcW).
+   2. Start values (Tai mắt is not a start number: it is her real spy list, main AG-ALL-2f2): origSet(p,k) from BAL.start for her (j2 start) and for every new NPC consort (rstats, origin drawn by BAL.start.npcW).
    3. Growth curve BAL.grow on every gain of Sắc / Tài / Tâm cơ (apply for her, ap for NPCs: one rule).
    4. Night choices: oSteal(a,mode) (j8, reads BAL.steal.m), oKeep(p), stealFail(a,t,mode), keepNoSteal / keepRobbed, rungDown(o,n) for jnf.
       The Emperor's month art S.emp.ea {m,f,d} (empArtMonth, host only in co-op); who knows it: p.eaK === S.turn (eaLearn).
@@ -44,9 +44,9 @@ function origSet(p,k,npc){const o=origRow(k);p.org=k;p.arts=p.arts||{};p.artp=p.
  const ap0=Object.assign({},o.art||{});
  if(npc){const N=BAL.start.npc,rk=npc.rank|0,mal=npc.malice==null?40:npc.malice;
   p.tamco=cl(p.tamco+Math.round((mal-40)/N.mal),0,100);p.duc=cl(p.duc+Math.round((40-mal)/2)+R(11)-5+N.duc,0,100);
-  p.danh=origRoll(o.danh)+rk*N.danh;p.bac=origRoll(o.bac)+rk*N.bac;p.mat=origRoll(o.mat)+R(2);p.th=origRoll(o.th)+R(20)-5;p.hh=origRoll(o.hh)+R(20)-5;
+  p.danh=origRoll(o.danh)+rk*N.danh;p.bac=origRoll(o.bac)+rk*N.bac;p.th=origRoll(o.th)+R(20)-5;p.hh=origRoll(o.hh)+R(20)-5;
   const best=Object.keys(ap0).sort((a,b)=>ap0[b]-ap0[a]).slice(0,2);if(!best.length)best.push("cam");for(const b of best)ap0[b]=(ap0[b]||0)+rk*N.art}
- else{p.danh=origRoll(o.danh);p.bac=origRoll(o.bac);p.sung=origRoll(o.sung);p.mat=origRoll(o.mat);p.th=origRoll(o.th);p.hh=origRoll(o.hh)}
+ else{p.danh=origRoll(o.danh);p.bac=origRoll(o.bac);p.sung=origRoll(o.sung);p.th=origRoll(o.th);p.hh=origRoll(o.hh)}
  for(const a in ap0)if(p.arts[a]!=null||ARTS.some(x=>x.k===a))crsSet(p.arts,p.artp,a,ap0[a]);
  for(const v in (o.vir||{}))crsSet(p.vir,p.virp,v,o.vir[v]);
  p.crsV=1;return p}
@@ -100,8 +100,8 @@ function stealFail(a,t,mode){const L=stealLose(mode);ap(a,L);return `${NMc(a)} �
 /* Giữ chân Hoàng thượng: nobody took her night → keepSung; robbed anyway (w = winner, mode = its choice) → the steal's thiện cảm / oán hit is × oanX (the extra part here) */
 function keepNoSteal(p){const n=BAL.steal.keep.gain;if(n)ap(p,{sung:n});return n}
 function keepRobbed(p,w,mode){try{const M=BAL.steal.m[mode==="road"?"road":"feign"]||{};const x=Math.round((M.rel==null?BAL.steal.rel:M.rel)*(BAL.steal.keep.oan-1));if(x>0&&w&&w!==p)relAdd(w,p,-x)}catch(e){}}
-/* the word() ladder (BAL.lad): odds o dropped n rungs, keeping its place inside the band */
-function rungDown(o,n){const F=[0].concat(BAL.lad),top=100;let i=0;for(let j=0;j<F.length;j++)if(o>=F[j])i=j;const lo=F[i],hi=i+1<F.length?F[i+1]:top;
+/* the word() ladder (BAL.odds.cut, the one ladder of oddsLv / word / stealRungUp): odds o dropped n rungs, keeping its place inside the band */
+function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let j=0;j<F.length;j++)if(o>=F[j])i=j;const lo=F[i],hi=i+1<F.length?F[i+1]:top;
  const t=Math.max(0,i-(n|0)),lo2=F[t],hi2=t+1<F.length?F[t+1]:top;return Math.max(5,Math.round(lo2+(o-lo)*(hi2-lo2)/Math.max(1,hi-lo)))}
 /* ---- the bậc effect texts print the constants (one core): Tài/Sắc per bậc (BAL.art.stUp), Danh at bậc 3/5 (BAL.art.danh), "dễ thành hơn"
    = BAL.art.odds[bậc] (passive weights: × BAL.art.side), Tứ đức Dung / Ngôn odds = the same ladder ---- */

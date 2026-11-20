@@ -41,7 +41,7 @@ async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms)
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{const ke=[...document.querySelectorAll('.kmov .kmend')].find(x=>x.offsetParent!==null&&!x.disabled);if(ke){ke.click();return'x'}const kv=[...document.querySelectorAll('.kmov')].find(x=>!x.classList.contains('km-out')&&!x.querySelector('.kmend')&&!x.dataset.tsk);if(kv){kv.dataset.tsk=1;kv.click();return'x'}const c=__co();if(c.frozen||c.waiting)return'coop';
    const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.parentElement&&x.closest('[class^=km],[class*=" km"]')&&(x.classList.contains('kmend')||/^(Nhận|Đã hiểu|Tạ ơn|Lĩnh chỉ|Tuân chỉ)$/.test(x.textContent.trim())));if(ov){ov.click();return'x'}
   const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
-   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])');if(b){b.click();return'x'}return'stuck'});
+   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'});
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 /* press "Qua buổi"/"Qua đêm" when it is enabled (waits up to 20 s: after the friend's dialogs, the host's NPC places, …) */
@@ -96,19 +96,24 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  const ev=(o,f,a)=>o.p.evaluate(f,a);
  const read=(o,friend)=>ev(o,fr=>{const p=fr?rivals.find(v=>v.coop):S;if(!p)return{none:1};const was=S.toilSeen;S.toilSeen=null;
    const out={};for(const h of ["th","emp"]){const t=toilFx(p,h,toilFOf(h),"ok");out[h]=t?[t.mk,t.dress,t.aff,t.danh]:null}
-   out.face=toilLookOfP(p)||"";S.toilSeen=was;return out},friend);
+   out.face=toilLookOfP(p)||"";out.mkLux=typeof toilMkLux==="function"?toilMkLux(p):0;S.toilSeen=was;return out},friend);/* makeup-lux: the face's xa xỉ, the same on both seats */
  const same=async(tag)=>{for(let i=0;i<40;i++){const x=JSON.stringify(await read(A,false)),y=JSON.stringify(await read(B,true)),x2=JSON.stringify(await read(B,false)),y2=JSON.stringify(await read(A,true));if(x===y&&x2===y2)break;await clear(A);await clear(B);await sleep(300)}
    const ra=await read(A,false),rb=await read(B,true),rb2=await read(B,false),ra2=await read(A,true);
    ok(JSON.stringify(ra)===JSON.stringify(rb),tag+': A herself = A as seen on B',[ra,rb]);ok(JSON.stringify(rb2)===JSON.stringify(ra2),tag+': B herself = B as seen on A',[rb2,ra2]);return[ra,rb,rb2]};
  const sit=(o,t)=>ev(o,t=>{S.toilette=t?Object.assign({wk:toilWk(),day:toilWk()*10,F:1,occ:["th"],style:"fit",dv:"hopdip",makeup:true},t):null;render();return true},t);
  await same('no sitting (mặt mộc)');
  await sit(A,{score:72,look:"diem",col:{mat:"hongmai",ma:"yenchi",son:"dotham",may:"den",want:"diem",seed:1}});await sit(B,{score:30,look:"vung",col:{seed:2}});
- const [d1,,d2]=await same('A diêm dúa · B vụng');ok(d1.face==="diem"&&d2.face==="vung","face layer reads diêm dúa / vụng on both seats",[d1.face,d2.face]);
+ const [d1,,d2]=await same('A old diêm dúa · B vụng');ok((d1.face==="tuyet"||d1.face==="dep")&&d2.face==="vung"&&d1.mkLux>0&&d2.mkLux>0,"face layer reads the old diêm dúa as Khuynh thành / vụng on both seats, xa xỉ of the face counted (makeup-lux)",[d1.face,d2.face,d1.mkLux,d2.mkLux]);
  /* review r1: shots of each seat with the friend's page open (OUT is outside the repo). Check, not asserted: her portrait stays a silhouette
     until met (k61 rule), so her makeup shows where her picture is drawn (stage); the data check above is the binding one. */
  const look=async(o,n)=>{await clear(o);await ev(o,()=>{const f=rivals.find(v=>v.coop);tab='rv';PG.rv=rivals.indexOf(f);render()});await sleep(1500);await shot(o,n)};
  await look(A,'07-friend-look');await look(B,'07-friend-look');
  await sit(A,{score:90,look:"dep"});await sit(B,{score:55,look:null});await same('A tuyệt · B vừa');
+ /* npc-chain-land #3 root: a pos relay lost on a socket that is down / reconnecting (COOP.send → false) is said again on the next render
+    (posKey kept only once sent), so the friend never keeps an old look */
+ const lost=await ev(B,()=>{const s0=COOP.send;let n=0;COOP.send=function(m){if(m&&m.t==="pos"&&!n){n++;return Promise.resolve(false)}return s0.apply(this,arguments)};
+  try{S.toilette=Object.assign({},S.toilette,{score:80,look:null});render()}finally{setTimeout(()=>{COOP.send=s0},50)}return n});
+ await sleep(400);await ev(B,()=>{render();return 1});await same('B\'s pos lost once, said again');ok(lost===1,'the lost pos send was hit (test hook)',lost);
  /* A puts on another dress (worn set wd): B's dress verdict for A follows */
  const wdA=await ev(A,()=>{const w=wdOf(S);const L=Object.keys(WD_ITEMS||{}).filter(k=>WD_ITEMS[k].sl==="y"&&(!w.y||w.y.k!==k));const k=L[L.length-1];if(k)w.y={k,from:"test"};render();return k||""});
  if(wdA){await same('A in another dress ('+wdA+')');let wa,wb;for(let i=0;i<30;i++){wa=await ev(A,()=>JSON.stringify(S.wd));wb=await ev(B,()=>JSON.stringify((rivals.find(v=>v.coop)||{}).wd));if(wa===wb)break;await sleep(300)}await same('A in another dress, relayed');ok(wa===wb,'B holds A\'s worn clothes (wd relay)',[wa,wb])}else ok(false,'no other dress to try');

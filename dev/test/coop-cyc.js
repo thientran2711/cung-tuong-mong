@@ -12,11 +12,12 @@ async function serve(ctx){ctx.__html=ctx.__html||path.join(ROOT,'dev/index.html'
  const f=path.join(ROOT,p);if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return route.fulfill({status:404,body:'nf'});route.fulfill({status:200,contentType:MIME[path.extname(f)]||'application/octet-stream',body:fs.readFileSync(f)})})}
 const OUT=path.resolve(process.argv[2]||path.join(__dirname,'../../.tmp/coop-cyc'));fs.mkdirSync(OUT,{recursive:true});
 const WURL=process.argv[3]||'https://ctm-coop.victoria-tntt.workers.dev';
+const THIN=+process.env.THIN>=4;/* thin guest (part D cards, her person on the host): the rewrite for the thin model */
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const DCL={waitUntil:'domcontentloaded'};
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
-  await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u},WURL);
+  await serve(ctx);await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}},[WURL,name==='host'&&process.env.THIN?+process.env.THIN:0]);/* THIN=<level>: the host asks for that thin room level (coop-thin-e: 5) */
   const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);
     p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms,polling:250});return true}catch(e){return false}}
@@ -28,13 +29,13 @@ const shot=async(o,n)=>{try{await o.p.screenshot({path:`${OUT}/${n}.png`,timeout
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{const ke=[...document.querySelectorAll('.kmov .kmend')].find(x=>x.offsetParent!==null&&!x.disabled);if(ke){ke.click();return'x'}const kv=[...document.querySelectorAll('.kmov')].find(x=>!x.classList.contains('km-out')&&!x.querySelector('.kmend')&&!x.dataset.tsk);if(kv){kv.dataset.tsk=1;kv.click();return'x'}
    const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
    const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
-   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||m.querySelector('.kbk-x,[aria-label="Đóng"]');if(b){b.click();return'x'}return'stuck'}).catch(()=>'err');
+   const m=document.getElementById('modal');if(window.__keepCy&&m&&!m.hidden&&/Báo đúng ngày/.test(m.textContent))return'cy';if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||m.querySelector('.kbk-x,[aria-label="Đóng"]')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'}).catch(()=>'err');
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 const K=o=>o.p.evaluate(()=>({k:COOPW.tm.myKey(),rk:COOPW.tm.roomKey(),v:COOPW.tm.view(),bend:COOPW.bend,pend:COOPW.pend,pb:!!COOPW.pendBuoi,Q:Q.length,mg:!!S.mg,next:document.getElementById('next').textContent,chip:(document.getElementById('kctm')||{}).textContent||'',chipOn:!!(document.getElementById('kctm')&&!document.getElementById('kctm').hidden)}));
 /* r1: a seat already night-ready by itself (a night with the Emperor → jnight) counts as pressed */
 const isRd=o=>o.p.evaluate(()=>!!(window.COOPW&&COOPW.on&&COOPW.nReady&&COOPW.nReady()));
-const press1=o=>o.p.evaluate(()=>{const b=document.getElementById('next');if(!b||b.disabled)return false;b.click();return true});
+const press1=o=>o.p.evaluate(()=>{const b=document.getElementById('next');if(!b||b.disabled)return false;const m=document.getElementById('modal');if(m&&!m.hidden&&(/Báo đúng ngày/.test(m.textContent)||window.__keepCy))return false;/* a player cannot reach #next under an open card (the guest: any card) */b.click();return true});
 async function press(o,ms=20000){const t0=Date.now();while(Date.now()-t0<ms){if(await press1(o))return true;await clear(o);await sleep(300)}return false}
 const setTm=(o,t)=>o.p.evaluate(t=>{Object.assign(BAL.coopTm,t)},t);
 const reset=o=>o.p.evaluate(()=>COOPW.tm.reset());
@@ -42,16 +43,16 @@ const reset=o=>o.p.evaluate(()=>COOPW.tm.reset());
 const past=(o,k,ms)=>until(o,k=>COOPW.tm.myKey()!==k||COOPW.pend||COOPW.sent===(COOP.state.week||0),k,ms);
 async function bothPast(A,B,k,ms){const t0=Date.now();while(Date.now()-t0<ms){const a=await A.p.evaluate(k=>COOPW.tm.myKey()!==k,k),b=await B.p.evaluate(k=>COOPW.tm.myKey()!==k,k);if(a&&b)return Date.now()-t0;await sleep(250)}return -1}
 async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,4000)}
-(async()=>{const b=await chromium.launch();
- const A=await mk(b,'host',[755,1000,2]),B=await mk(b,'guest',[1180,820,2]);
+(async()=>{const b=await chromium.launch(/127\.0\.0\.1|localhost/.test(WURL)?{args:['--disable-web-security','--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,LocalNetworkAccessChecks']}:{})/* a local wrangler dev Worker (as coop-e2e) */;
+ /* CYC_SWAP=1: swapped roles (host iPad 1180x820, guest Fold 755x1000) */const SW=!!process.env.CYC_SWAP;const A=await mk(b,'host',SW?[1180,820,2]:[755,1000,2]),B=await mk(b,'guest',SW?[755,1000,2]:[1180,820,2]);
  if(process.env.CYC_HTML){A.ctx.__html=B.ctx.__html=path.resolve(process.env.CYC_HTML)}/* the BEFORE run: an older build for both seats */
  const inGame=o=>o.p.evaluate(()=>!!(COOPW.on&&typeof S!=='undefined'&&S&&!COOPW.inLife&&document.getElementById('title').hidden&&!document.getElementById('kroul')&&document.getElementById('next').offsetParent)).catch(()=>false);
  async function bothIn(lbl){const t0=Date.now();while(Date.now()-t0<150000){await clear(A);await clear(B);if(await inGame(A)&&await inGame(B))break;await sleep(700)}ok(await inGame(A)&&await inGame(B),lbl)}
- const isCy=o=>o.p.evaluate(()=>{const m=document.getElementById('modal');return !!(m&&!m.hidden&&/báo thế nào/.test(m.textContent))});
+ const isCy=o=>o.p.evaluate(()=>{const m=document.getElementById('modal');return !!(m&&!m.hidden&&/Báo đúng ngày/.test(m.textContent))});
  /* close everything on B except her maid's cycle card (the test answers that one itself) */
- const clearB=async()=>{for(let i=0;i<25;i++){if(await isCy(B))return 'cy';const s=await clear(B,1);if(s!=='x'&&s!=='many'&&s!=='mg')return s}};
+ const clearB=async()=>{await B.p.evaluate(()=>{window.__keepCy=1});for(let i=0;i<25;i++){if(await isCy(B))return 'cy';const s=await clear(B,1);if(s==='cy')return s;if(s!=='x'&&s!=='many'&&s!=='mg')return s}};
  const wkA=()=>A.p.evaluate(()=>COOP.state.week||0),wkB=()=>B.p.evaluate(()=>COOP.state.week||0);
- async function merge(w0,lbl,keepB){for(let i=0;i<60;i++){await clear(A);if(!(keepB&&await wkB()>w0))await clear(B);await press1(A);await press1(B);await sleep(800);if(await wkA()>w0&&await wkB()>w0)break}
+ async function merge(w0,lbl,keepB){for(let i=0;i<60;i++){if(await wkA()>w0&&await wkB()>w0)break;/* thin: her card is asked at the new week's start (the week has merged already) */await clear(A);if(!(keepB&&await wkB()>w0))await clear(B);await press1(A);await press1(B);await sleep(800);if(await wkA()>w0&&await wkB()>w0)break}
   /* keep the guest's dialogs (her "Kính sự phòng báo tin" card): clear() takes its first road, which may decline the night */
   for(let i=0;i<4;i++){await clear(A);if(!keepB)await clear(B);await sleep(300)}ok(await wkA()>w0&&await wkB()>w0,lbl)}
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);
@@ -60,50 +61,66 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  ok(await until(A,()=>COOP.code&&COOP.seat==='a'),'A has a room');const code=await A.p.evaluate(()=>COOP.code);console.log('room',code);
  await join(B,code);ok(await until(B,()=>COOP.seat==='b'&&!COOP.frozen,null,60000),'B in seat b');
  await bothIn('both in the game');
+ if(process.env.CYC_DBG){await A.p.evaluate(()=>{window.__do=[];COOP.on('do',m=>{try{window.__do.push([m.op,m.id,m.n,Date.now()%1e6]);if(window.__do.length>30)window.__do.shift()}catch(e){}})});
+  await B.p.evaluate(()=>{window.__ds=[];const T=COOPW.thin,f=T.doSend;T.doSend=function(op){const id=f.apply(this,arguments);try{window.__ds.push([op,id,Date.now()%1e6]);if(window.__ds.length>30)window.__ds.shift()}catch(e){}return id};
+   window.__er=[];COOP.on('error',m=>{try{window.__er.push([m&&m.code,m&&m.id,Date.now()%1e6]);if(window.__er.length>20)window.__er.shift()}catch(e){}})})}
  for(const o of [A,B])await setTm(o,{buoiMs:600000});
- for(const [o,rk] of [[A,5],[B,3]])await o.p.evaluate(rk=>{if(S.srv)S.srv.risen=1;S.rank=rk;S.bac=Math.max(S.bac||0,400);S.duc=Math.max(S.duc||0,60);render()},rk);
+ {const RK=rk=>{if(S.srv)S.srv.risen=1;S.rank=rk;S.bac=Math.max(S.bac||0,400);S.duc=Math.max(S.duc||0,60);if(!COOPW.ctx)render()};
+  await A.p.evaluate(RK,5);
+  /* thin: her person lives on the host: set in the host store (withSeat b), the patch brings it to her phone */
+  if(THIN)await A.p.evaluate(src=>{COOPW.thin.withSeat('b',()=>(0,eval)('('+src+')')(3));try{COOPW.thin.flush()}catch(e){}},RK.toString());else await B.p.evaluate(RK,3)}
  if(!(await until(A,()=>!!COOPW.friend(),null,20000)))await merge(await wkA(),'setup: one week (a life that starts as a cung nữ / at home: her consort entry comes with the merged week)');
  {const fa=await until(A,()=>!!COOPW.friend(),null,60000),fb=await until(B,()=>!!COOPW.friend(),null,60000);console.log('guest sees the host entry:',fb);ok(fa,'the host has the guest as a consort entry (her card in the host deck)',[fa,fb,await A.p.evaluate(()=>[S.rank,!!S.srv,S.place]),await B.p.evaluate(()=>[S.rank,!!S.srv,S.place,typeof COOPW.friend])])}
  /* host: forced deck — only the friend's card can win; the REAL nightCh chain (with jcycle's tray rule) still decides whether it is on the tray */
- await A.p.evaluate(()=>{if(window.__ff)return;window.__ff=1;const f=flip;flip=function(){const r0=roll,n0=nightCh;roll=x=>x>=60;
-  nightCh=function(p){const c=n0.apply(this,arguments);return p&&p.coop?(c>0?100:0):0};try{return f.apply(this,arguments)}finally{roll=r0;nightCh=n0}}});
+ await A.p.evaluate(()=>{if(window.__ff)return;window.__ff=1;const f=flip;flip=function(){const r0=roll,n0=nightCh,v0=window.visRoll,e0=window.__eaOff;roll=x=>x>=60;
+  /* main's other night routes stay out of the forced deck (r1 #2): Ngự giá lâm cung (jvisit: an NPC's held visit S.visNpc, the visit roll),
+     the Emperor's mood skip (jemoact eaQ); NPC stealing needs nightCh>0 (jsteal stEligible), so the forced nightCh already keeps it out */
+  if(typeof S!=='undefined'&&S)S.visNpc=null;window.visRoll=()=>'';window.__eaOff=1;const es0=window.empSummon;if(typeof es0==='function')window.empSummon=()=>true;/* r1 #3: AG emperor (jagemp empSummon: his own summon odds, busy → rest) would skip the night outside the forced roll */
+  nightCh=function(p){const c=n0.apply(this,arguments);return p&&p.coop?(c>0?100:0):0};try{return f.apply(this,arguments)}finally{try{(window.__fd=window.__fd||[]).push([wk(),S.buoi,S.tonight==='me'?'me':S.tonight&&S.tonight.id,(()=>{try{const z=S.emp&&S.emp.why;return JSON.stringify(z||null).slice(0,80)}catch(e){return'?'}})(),typeof empOn==='function'&&empOn(),(()=>{try{return JSON.stringify(typeof ntTaken==='function'?ntTaken():null).slice(0,60)}catch(e){return'x'}})()]);if(window.__fd.length>12)window.__fd.shift()}catch(e){}roll=r0;nightCh=n0;window.visRoll=v0;window.__eaOff=e0;if(typeof es0==='function')window.empSummon=es0}}});
  const R=await A.p.evaluate(()=>BAL.cyc.rep);
  const CASES=[['dung',/^Báo đúng/,false,0],['lui',/^Báo lùi/,false,-R.luiDuc],['som',/^Báo sớm/,true,-R.somDuc],['giau',/^Giấu/,true,0]];
  const before=[];
  for(const [k,re,on,dDuc] of CASES.filter(c=>!process.env.CYC_ONLY||process.env.CYC_ONLY.split(',').includes(c[0]))){
   /* her cycle tuần = the tuần the next week opens: a name whose cyBase t matches (cycle = pure function of the name); a maid; not pregnant */
-  const nb=await B.p.evaluate(()=>{if(!S.maid)S.maid=(S.staff||[])[0]||{name:'Thử',loyal:60};S.preg=0;S.hidden=false;S.fake=0;S.cyb={};S.sung=Math.max(S.sung||0,40);S.age=Math.min(S.age||18,30);
-   const want=((S.tuan||0)+1)%3,base=window.__nm0||(window.__nm0=S.name);for(let i=0;i<400;i++){S.name=base+(i?' '+i:'');if(cyBase(S).t===want)break}render();return{name:S.name,want,t:cyBase(S).t,age:S.age}});
-  await A.p.evaluate(n=>{const f=COOPW.friend();if(f){f.name=n.name;f.age=n.age;f.preg=0;f.fake=0}},nb);
+  /* thin rewrite (THIN>=4: her person lives on the host): her state is set in the host's store (withSeat b, the patch brings it to her
+     phone), never on her phone; the host's entry of her follows from her person. Before THIN: her phone + the host's entry, as before. */
+  const STG=()=>{if(!S.maid)S.maid=(S.staff||[])[0]||{name:'Thử',loyal:60};S.preg=0;S.hidden=false;S.fake=0;S.cyb={};S.sung=Math.max(S.sung||0,40);S.age=Math.min(S.age||18,30);
+   const want=((S.tuan||0)+1)%3,base=window.__nm0||(window.__nm0=S.name);for(let i=0;i<400;i++){S.name=base+(i?' '+i:'');if(cyBase(S).t===want)break}if(!COOPW.ctx)render();return{name:S.name,want,t:cyBase(S).t,age:S.age}};
+  const nb=THIN?await A.p.evaluate(src=>{const r=COOPW.thin.withSeat('b',()=>(0,eval)('('+src+')')());try{COOPW.thin.flush()}catch(e){}return r},STG.toString()):await B.p.evaluate(STG);
+  if(THIN)ok(await until(B,n=>S.name===n&&!!S.maid&&!S.preg,nb.name,15000),`${k}: her staged person reached her phone (host patch)`,await B.p.evaluate(()=>[S.name,!!S.maid,S.preg]));
+  if(!THIN)await A.p.evaluate(n=>{const f=COOPW.friend();if(f){f.name=n.name;f.age=n.age;f.preg=0;f.fake=0}},nb);
+  if(process.env.CYC_DBG)await B.p.evaluate(()=>{if(window.__flw)return;window.__flw=1;window.__fl=[];const f=flip;flip=function(){try{window.__fl.push([S.tuan,wk(),cycOn(S),!!S.maid,COOPW.inTurn,JSON.stringify(S.cyb||{}).slice(0,60),cyBase(S).t,S.name]);if(window.__fl.length>8)window.__fl.shift()}catch(e){}return f.apply(this,arguments)}});
   const w0=await wkA();let held=null,asked=false;
-  for(let i=0;i<60&&!(asked&&held);i++){await clear(A);if((await clearB())==='cy')asked=true;await press1(A);if(!asked)await press1(B);await sleep(700);
-   if(asked&&!held)held=await A.p.evaluate(()=>COOPW.pend&&COOPW.cyHold!=null&&COOPW.sent!==(COOP.state.week||0)?{hold:COOPW.cyHold}:null)}
-  ok(asked,`${k}: B (guest) gets her maid's Kỳ nguyệt sự card`,nb);
+  for(let i=0;i<60&&!(asked&&held);i++){if(process.env.CYC_DBG&&await isCy(A))console.log('dbg: the cycle card is on the HOST screen',i);await clear(A);if((await clearB())==='cy')asked=true;await press1(A);if(!asked)await press1(B);await sleep(700);
+   if(asked&&!held)held=await A.p.evaluate(th=>th?(COOPW.cyHold!=null&&COOPW.cyHold===wk()?{hold:COOPW.cyHold,thin:1}:null)/* thin: the host's draw of THIS week is held (no night drawn) */:COOPW.pend&&COOPW.cyHold!=null&&COOPW.sent!==(COOP.state.week||0)?{hold:COOPW.cyHold}:null,THIN)}
+  if(process.env.CYC_DBG)console.log('dbg asked',JSON.stringify(await A.p.evaluate(()=>({tuan:S.tuan,wk:wk(),week:COOP.state.week,hold:COOPW.cyHold}))));
+  ok(asked,`${k}: B (guest) gets her maid's Kỳ nguyệt sự card`,nb);if(!asked&&process.env.CYC_DBG)console.log('dbg A',JSON.stringify(await A.p.evaluate(()=>{const f=COOPW.friend();const T=COOPW.thin;return{cyA:T.E&&T.E.stat.cyA,elog:T.E&&T.E.log.filter(x=>x[0]!=='host-ready').slice(-20),do:window.__do&&window.__do.slice(-10),blk:{held:T.held&&T.held('b'),hold:T.holdOf&&JSON.stringify(T.holdOf('b')||null).slice(0,200),rd:T.E&&T.E.rd,hr:T.E&&T.E.hr,Q:Q.map(m=>m.t),pend:COOPW.pend,inLife:COOPW.inLife,mg:!!S.mg,buoi:S.buoi,week:COOP.state.week,fz:!!(COOPW.isFrozen&&COOPW.isFrozen()),modal:!document.getElementById('modal').hidden&&document.getElementById('modal').textContent.slice(0,80),next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,lk:{bend:COOPW.bend,nr:COOPW.nReady&&COOPW.nReady(),wt:COOPW.isWaiting&&COOPW.isWaiting(),sent:COOPW.sent,pb:!!COOPW.pendBuoi,base:!!COOPW.base,bh:COOPW.hold,ended:COOP.state.ended,st:COOP.state.status,po:COOP.state.peerOnline,cyHold:COOPW.cyHold,inTurn:COOPW.inTurn,nrdy:COOPW.nrdy,wk:wk()}},trAll:COOPW.tr.slice(-14),tr:COOPW.tr.filter(x=>/cy/.test(x)).slice(-6),fcyb:COOPW.fcyb(),dlog:T.D&&T.D.log.slice(-25),thq:(()=>{const B=T.seatOf('b');return B&&(B.S.thq||[]).map(c=>c.pid||c.t)})(),f:f&&[f.name,cycOn(f),cyBase(f).t],tuan:S.tuan,wk:wk(),herS:(()=>{const B=T.seatOf('b');return B&&[B.S.name,!!B.S.maid,B.S.tuan,JSON.stringify(B.S.cyb)]})()}})));if(!asked&&process.env.CYC_DBG)console.log('dbg B',JSON.stringify(await B.p.evaluate(()=>({tr:COOPW.tr.slice(-30),cyb:S.cyb,tuan:S.tuan,wk:wk(),name:S.name,maid:!!S.maid,on:cycOn(S),t:cyBase(S).t,E:COOPW.thin.E&&COOPW.thin.E.log.slice(-12),fl:window.__fl,ds:window.__ds&&window.__ds.slice(-10),er:window.__er,g:(()=>{const T=COOPW.thin,V=T.view,o=V&&V.o,P=o&&o.P&&o.P[COOPW.seat];return{buoi:S.buoi,thpn:S.thpn,mine:T.E&&T.E.mine,on5:T.on(5),lv:T.level&&T.level(),vw:o&&o.w,vb:o&&o.buoi,pq:o&&(o.pq||[]).map(x=>x.n),Pb:P&&P.buoi,wk:COOP.state.week,Q:Q.map(m=>m.t),mg:!!S.mg,inLife:COOPW.inLife,lask:!!(T.life&&T.life.ask),lhold:!!(T.life&&T.life.hold),lstat:T.life&&T.life.stat,bend:COOPW.bend,pend:COOPW.pend,dlog:T.D&&T.D.log&&T.D.log.slice(-12),next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled}})()}))));
   ok(!!held,`${k}: the host's week draw waits for her answer (no draw, no week end sent)`,held);
   if(!before.length){await shot(B,'cyc-guest-card-1180x820');await shot(A,'cyc-host-wait-755x1000')}
   const d0=await B.p.evaluate(()=>({duc:S.duc,ghen:liveRivals(true).filter(v=>!v.coop).reduce((a,v)=>a+(v.ghen||0),0)}));
   if(!before.length)console.log('card buttons:',await B.p.evaluate(()=>[...document.querySelectorAll('#modal button')].filter(x=>x.offsetParent!==null).map(x=>(x.className||'-')+'|'+x.textContent.trim().replace(/\s+/g,' ').slice(0,50)).join(' || ')));
-  if(k==='lui')await B.p.evaluate(()=>{window.__r0=Math.random;Math.random=()=>0});/* c6 odds roll: success */
+  if(k==='lui')await (THIN?A:B).p.evaluate(()=>{window.__r0=Math.random;Math.random=()=>0});/* c6 odds roll: success (thin: her option runs on the host) */
   /* tap her option (kit option card), then whatever confirm the kit card asks */
   const tapped=await B.p.evaluate(src=>{const R=new RegExp(src);const x=[...document.querySelectorAll('#modal button')].find(b=>b.offsetParent!==null&&R.test(b.textContent.trim()));if(x){x.click();return true}return false},re.source);
-  for(let i=0;i<8&&!(await B.p.evaluate(()=>S.cyb&&S.cyb.rk===wk()));i++){await sleep(400);
+  /* r1 #2: her answer runs on the host and comes back as the patch (network round trip): wait up to ~12 s, the check is unchanged */for(let i=0;i<30&&!(await B.p.evaluate(()=>S.cyb&&S.cyb.rk===wk()));i++){await sleep(400);
    const bs=await B.p.evaluate(()=>[...document.querySelectorAll('#modal button')].filter(x=>x.offsetParent!==null&&!x.disabled).map(x=>x.textContent.trim().replace(/\s+/g,' ').slice(0,40)));if(!before.length)console.log('after tap:',JSON.stringify(bs));
    await B.p.evaluate(src=>{const R=new RegExp(src);const x=[...document.querySelectorAll('#modal button')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()));if(x)x.click()},'^(Chọn|Đồng ý|Quyết|Làm|Thử|Xác nhận)'+'|'+re.source)}
-  if(k==='lui')await B.p.evaluate(()=>{Math.random=window.__r0});
+  if(k==='lui')await (THIN?A:B).p.evaluate(()=>{Math.random=window.__r0});
   const d1=await B.p.evaluate(()=>({duc:S.duc,rk:S.cyb.rk===wk(),rv:S.cyb.rv,lie:S.cyb.lie===wk(),back:S.cyb.back,w:wk(),ghen:liveRivals(true).filter(v=>!v.coop).reduce((a,v)=>a+(v.ghen||0),0)}));
   ok(tapped&&d1.rk&&d1.rv===k,`${k}: B answered "${k}"`,d1);
   ok(d1.duc-d0.duc===dDuc,`${k}: her cost lands once on her side (Đức ${dDuc})`,[d0.duc,d1.duc]);
   if(k==='giau')ok(d1.ghen>d0.ghen,'giau: the palace grows jealous (ghen up, on her side)',[d0.ghen,d1.ghen]);
-  ok(await until(A,w=>{const r=COOPW.fcy;return r&&r.w===w&&!r.pend},d1.w,15000),`${k}: her answer reached the host before the host's draw`);
+  ok(await until(A,([w,th])=>{if(th){const c=COOPW.fcyb();return c.rk===w}const r=COOPW.fcy;return r&&r.w===w&&!r.pend},[d1.w,THIN],15000),`${k}: her answer reached the host before the host's draw`);
   await merge(w0,`${k}: the week merges`,true);
   for(let i=0;i<10&&!(await A.p.evaluate(()=>!!(S.tn&&S.tn.w===COOP.state.week))&&await B.p.evaluate(()=>!!(S.tn&&S.tn.w===COOP.state.week)));i++)await sleep(500);
   const a=await A.p.evaluate(()=>{const f=COOPW.friend();return{w:COOP.state.week,tn:S.tn,t:S.tonight==='me'?'me':S.tonight&&S.tonight.id,off:f?cyTray(f):null,on:f?cycOn(f):null,duc:f&&f.duc,hold:COOPW.cyHold}});
   const c=await B.p.evaluate(()=>({w:COOP.state.week,tn:S.tn,t:S.tonight==='me'?'me':S.tonight&&S.tonight.id,off:cyTray(S),on:cycOn(S),duc:S.duc}));
   console.log(k,'host',JSON.stringify(a),'guest',JSON.stringify(c));
+  if(process.env.CYC_DBG)console.log('dbg after',JSON.stringify(await A.p.evaluate(()=>{const f=COOPW.friend();return{pulled:(COOPW.pulled||[]).length,inDeck:!!f,ch:f?nightCh(f):null,tuan:S.tuan,wk:wk(),f:f&&[f.name,cyBase(f).t],tr:COOPW.tr.filter(x=>/cy/.test(x)).slice(-6),E:COOPW.thin.E&&COOPW.thin.E.log.filter(x=>/cy/.test(JSON.stringify(x))).slice(-6)}})),JSON.stringify(await B.p.evaluate(()=>({tuan:S.tuan,wk:wk(),name:S.name,t:cyBase(S).t,fl:window.__fl}))));
   ok(a.on&&c.on,`${k}: the merged week is her cycle tuần on both`,[a.on,c.on]);
   ok(a.off===!on&&c.off===!on,`${k}: her card is ${on?'ON':'OFF'} the tray on BOTH screens (host deck = her answer)`,[a.off,c.off]);
-  ok(a.tn&&a.tn.w===a.w&&(on?a.tn.who===902:a.tn.who!==902),`${k}: host drew ${on?'her':'not her'} (forced deck)`,a.tn);
-  ok(c.tn&&c.tn.w===c.w&&c.tn.who===a.tn.who&&(on?c.t==='me':c.t!=='me'),`${k}: the guest has the same night (one fact)`,[c.tn,c.t]);
+  {const g=a.tn&&a.tn.w===a.w&&(on?a.tn.who===902:a.tn.who!==902);ok(g,`${k}: host drew ${on?'her':'not her'} (forced deck)`,a.tn);if(!g&&process.env.CYC_DBG)console.log('dbg fd',JSON.stringify(await A.p.evaluate(()=>window.__fd||[])))}
+  ok(c.tn&&c.tn.w===c.w&&(c.tn.who===a.tn.who||(THIN&&a.tn.who===902&&c.tn.who==='me')/* thin view: her own pid reaches her phone as "me" (part A mapView) */)&&(on?c.t==='me':c.t!=='me'),`${k}: the guest has the same night (one fact)`,[c.tn,c.t]);
   ok(a.hold==null,`${k}: no hold left on the host`);
   ok(a.duc===c.duc,`${k}: her Đức on the host's entry == her own (cost once)`,[a.duc,c.duc]);
   if(k==='giau'){const t=await A.p.evaluate(n=>{cyBook('thử');const m=document.getElementById('modal');const s=m?m.textContent:'';return s.slice(Math.max(0,s.indexOf(n)),s.indexOf(n)+90)},nb.name);

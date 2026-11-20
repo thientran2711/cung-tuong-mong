@@ -20,7 +20,7 @@ function ctxHash(s){let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=
 function ctxKey(p){try{return typeof key==="function"?key(p):p&&p.id}catch(e){return""}}
 /* the person's taste for this kind of answer this life: −1, −½, 0, ½, 1 */
 function ctxTaste(p,ans){const n=String(ans||"").replace(/<[^>]+>/g,"").replace(/\{[^}]*\}|\d+/g,"").toLowerCase().split(/[,:(]/)[0].trim();const h=ctxHash(ctxSeed()+"|"+ctxKey(p)+"|"+n);return [-1,-.5,0,.5,1][h%5]}
-function ctxMood(p){try{const e=emoGet(p);if(!e||e.k==="binh")return 0;if(["gian","ghen","dau"].includes(e.k))return BAL.ctxMoodBad;if(e.k==="vui")return BAL.ctxMoodGood;if(e.k==="so")return 3;return -3}catch(e){return 0}}
+function ctxMood(p){try{const e=emoGet(p);if(!e||e.k==="binh")return 0;const g=typeof feelGrp==="function"?feelGrp(e.k):e.k;if(g==="binh")return 0;if(["gian","ghen"].includes(g)||(g==="buon"&&typeof feelLv==="function"&&feelLv(p,e.k)>=3))return BAL.ctxMoodBad;if(g==="vui")return BAL.ctxMoodGood;if(g==="so")return 3;return -3}catch(e){return 0}}
 function ctxRel(p){try{if(!p||p===S||!rivals.includes(p))return 0;return cl(Math.round(aff(p,S)/BAL.ctxRelDiv),-BAL.ctxRelCap,BAL.ctxRelCap)}catch(e){return 0}}
 function ctxOdds(p,ans){if(!p||!S)return 0;return cl(Math.round(ctxTaste(p,ans)*BAL.ctxTaste+ctxMood(p)+ctxRel(p)),-BAL.ctxCap,BAL.ctxCap)}
 window.ctxOdds=ctxOdds;
@@ -32,7 +32,7 @@ window.ctxOdds=ctxOdds;
 (function(){if(typeof oOf67!=="function")return;const o0=oOf67;oOf67=function(A,o,b){const r=o0.apply(this,arguments);try{if(o.o==null||window.__ctxOff)return r;
   let p=null;const w=b&&b.w;if(w==="v"||w==="v2")p=rv67(A,w);else if(w==="foe")p=typeof foe67==="function"?foe67():null;else if(w==="hh")p=qOn()?rivals[0]:null;
   let d=p?ctxOdds(p,o.n):0;if(w==="emp"&&S.emp)d+=BAL.ctxEmp[S.emp.mood|0]||0;if(!p&&w!=="emp")d+=Math.round(ctxTaste({id:"arc:"+A.a+":"+(b.h||"")},o.n)*BAL.ctxTaste*.6);
-  return od(cl((typeof o.o==="function"?o.o(A):o.o)+((o.e||b.x)?(A.sc||0)*7:0)+d,1,99))}catch(e){return r}}})();
+  return od((typeof o.o==="function"?o.o(A):o.o)+((o.e||b.x)?(A.sc||0)*7:0)+d)}catch(e){return r}}})();
 /* ---------- (3) mood causes ---------- */
 let EVB_ART="";  /* the picture of the event whose choice is resolving now (evbMood): stored on each cause it sets (x.a) */
 (function(){if(typeof emoSet!=="function")return;const s0=emoSet;emoSet=function(p,k,v,why,t){const r=s0.apply(this,arguments);try{const q=emoRes(p);if(q&&EMO[k]&&v>0&&why){const W=emoW();
@@ -57,15 +57,18 @@ function emoCauseArt(c){try{if(!c)return"";if(c.a)return c.a;if(typeof evArtCat!
 function emoBoxArt(p,m,L){const k=m.known?m.k:"an";const c=m.known?(L.find(x=>x.k===m.k)||(m.k==="binh"?null:L[0])):null;
  let set="";try{set=typeof emoArtSet==="function"?emoArtSet(p):""}catch(e){}
  const own=emoCauseArt(c);const w=typeof emoW==="function"?emoW():0;
- const src=own||`img/ev-mood-${EMO[k]||k==="an"?k:"binh"}${w%2?"-2":""}.webp`;
+ /* FEELINGS-18: a new kind shows the picture of its nearest painted kind (FEEL_FB) */const pk=typeof FEEL_FB!=="undefined"&&FEEL_FB[k]?FEEL_FB[k]:k;
+ const src=own||`img/ev-mood-${EMO[k]||k==="an"?pk:"binh"}${w%2?"-2":""}.webp`;
  const cap=c?String(c.why).replace(/\s*«[^»]*»/g,"").replace(/[,.]\s*$/,"").trim():m.known?(EMO[k]||""):"Chưa rõ lòng người";
- return{src,label:cap,mark:`img/kit/emo-${set}${k}.webp`,markAlt:`Tâm trạng: ${m.known?m.name:"chưa rõ"}`}}
+ return{src,label:cap,mark:`img/kit/emo-${set}${(()=>{try{if(m.known&&typeof faceKeyFor==="function"){const f=faceKeyFor(p);if(f&&f.art)return f.art}}catch(e){}return typeof feelArt==="function"?feelArt(k,set):k})()}.webp`,markAlt:`Tâm trạng: ${m.known?m.name:"chưa rõ"}`}}
 function emoBox(k){const p=emoByKey(k);if(!p||!S||S.dead)return;const m=window.kitEmotion(p);if(!m)return;let nm=p===S?"Ngươi":emoName(p);/* rank + name always together (owner 15/11, OD L820-821): same plain title+name as Đã biết về X */try{if(p!==S&&typeof kitName==="function"&&typeof kpPlain==="function"){const t=kpPlain(kitName(p)).trim();if(t)nm=t}}catch(e){}
- const cls=x=>x==="vui"?"g":["gian","buon","dau","so","lo","ghen"].includes(x)?"r":"";const W=emoW();const ago=w=>W-w<=0?"tuần này":`${W-w} tuần trước`;
+ const cls=x=>window.kitEmoTone(x);const W=emoW();const ago=w=>W-w<=0?"tuần này":`${W-w} tuần trước`;
  const L=m.known?emoCauses(p):[];
- const rows=m.known?(L.length?L.map(x=>[EMO[x.k]||x.k,`${x.why} · ${ago(x.w)}`,cls(x.k)]):[["Nguyên nhân","không có chuyện gì đáng kể gần đây"]]):[["Nguyên nhân","chưa rõ: ngươi chưa gặp, chưa có tai mắt bên người này"]];
+ const faceRows=m.known&&typeof kitFaceRows==="function"?kitFaceRows(p,m,{cls}):[];
+ const rows0=m.known?(L.length?(L.some(x=>x.left!=null)&&typeof kitMoodCauseRows==="function"?kitMoodCauseRows(L,kitFaceDrive(p,m),{cls,ago:x=>ago(x.w)}):L.map(x=>[kitEmoWord(x.k),`${x.why} · ${ago(x.w)}`,cls(x.k)])):[["Nguyên nhân","không có chuyện gì đáng kể gần đây"]]):[["Nguyên nhân","chưa rõ: ngươi chưa gặp, chưa có tai mắt bên người này"]];
+ const rows=m.known&&faceRows.length?faceRows.concat(rows0):rows0;
  let art=null;try{art=emoBoxArt(p,m,L)}catch(e){}
- kitModal({kind:"info",look:1,title:`Tâm trạng · ${nm}`,sub:m.known?`Hiện nay: ${m.name}${p===S&&typeof mbBand==="function"&&!window.__moodOff?` · ${mbBand().name}`:""}`:"chưa rõ",subject:p,headArt:art||undefined,
+ kitModal({kind:"info",look:1,title:`Tâm trạng · ${nm}`,sub:m.known?`Hiện nay: ${kitSealName(p,m)}${p===S&&typeof mbBand==="function"&&!window.__moodOff?` · ${mbBand().name}`:""}`:"chưa rõ",subject:p,headArt:art||undefined,
   sections:p===S&&typeof mbSecs==="function"&&!window.__moodOff?(M=>[M[0],M[1],{h:"Cảm xúc lúc này",rows},M[2]])(mbSecs()):[{h:"Đang tác động",rows},{h:"",rows:[["Ảnh hưởng",p===S?"tâm trạng của ngươi đổi cơ may của mọi việc một chút":"vui thì dễ chịu nghe, giận hay ghen thì khó nói chuyện, dễ ra tay hơn"]]}],btn:"Đã rõ"})}
 window.emoBox=emoBox;window.emoCauseArt=emoCauseArt;
 /* LOOK-UP PANELS (kit.look: Tâm trạng · X, Đã biết về X, Chứng cứ về X — panels she opens herself) are not visits: they show only the picture
@@ -94,7 +97,7 @@ function evbMood0(m,c,b){const nm=String(c.n||"").replace(/<[^>]+>/g,"").split("
  s.vf=function(p){let ok=null;try{ok=vf0?vf0(p):null}catch(e){}const all=ok&&ok.length?ok:[...(s.v||[]).keys()];const v=RV(p.a0);const gave=!!(v&&(v.inv||[]).some(e=>e.from==="me"));return all.filter(i=>i!==2||gave)};
  const P0=PEND.e68doubtVisit;PEND.e68doubtVisit=function(p){const d=P0.apply(this,arguments);try{if(!d||p.vi!==2)return d;const v=RV(p.a0);const i=v?(v.inv||[]).findIndex(e=>e.from==="me"):-1;
   if(i<0&&!p.gk)return null;const k=p.gk||v.inv[i].k;p.gk=k;d.t=String(d.t).replace("trả lại quà ngươi tặng",`trả lại ${IT[k]?itm(k).n:"món quà"} ngươi tặng`);
-  d.o=d.o.map(o=>Object.assign({},o,{go:()=>{try{if(!p.back){const j=(v.inv||[]).findIndex(e=>e.from==="me"&&e.k===k);if(j>=0){v.inv.splice(j,1);S.inv.push({k,from:"back"});p.back=1;log(`${itm(k).n} trở về rương của ngươi.`)}}}catch(e){}if(o.go)return o.go()}}))}catch(e){console.error(e)}return d}}catch(e){}})();
+  d.o=d.o.map(o=>Object.assign({},o,{go:()=>{try{if(!p.back){const j=(v.inv||[]).findIndex(e=>e.from==="me"&&e.k===k);if(j>=0){const x=v.inv.splice(j,1)[0];x.from="back";S.inv.push(x);p.back=1;log(`${itm(k).n} trở về rương của ngươi.`)}}}catch(e){}if(o.go)return o.go()}}))}catch(e){console.error(e)}return d}}catch(e){}})();
 (function(){try{const s=E68I&&E68I.borrowDress;if(!s)return;const vf0=s.vf;
  const own=()=>{const L=(S.inv||[]).filter(e=>!e.h&&IT[e.k]);return{robe:L.find(e=>itm(e.k).kd==="Y phục"),pin:L.find(e=>itm(e.k).kd==="Trâm cài"||itm(e.k).sl==="hair"),inst:L.find(e=>e.k==="dancoc")||((S.arts&&S.arts.cam)>=1?{k:null}:null)}};
  s.vf=function(p){let ok=null;try{ok=vf0?vf0(p):null}catch(e){}const all=ok&&ok.length?ok:[0,1,2,3];const o=own();return all.filter(i=>i===0?!!o.robe:i===1?!!o.inst:i===2?!!o.pin:!!S.maid)};

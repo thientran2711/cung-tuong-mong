@@ -5,7 +5,7 @@ const ILL={phonghan:{n:"Phong hàn",sea:["Thu","Đông"],die:0,cont:1},sotret:{n
 const STG=["","nhẹ","nặng","nguy kịch"];
 function illOf(p){return p&&p.ill&&ILL[p.ill.k]?p.ill:null}
 function illName(p){const i=illOf(p);return i?`${ILL[i.k].n} · ${STG[i.st]}`:""}
-function illKnown(p){const i=illOf(p);if(!i)return false;return p===S||i.known||ILL[i.k].cont&&i.st>=2||S.mat>=3}
+function illKnown(p){const i=illOf(p);if(!i)return false;return p===S||i.known||ILL[i.k].cont&&i.st>=2||eyes(S)>=3}
 function catchIll(p,k){if(illOf(p)||p.dead||p.alive===false)return"";p.ill={k,st:1,known:p===S};return p===S?`<span class="r">Ngươi mắc ${ILL[k].n.toLowerCase()}.</span> `:""}
 function careOdds(p){return (p.doctor?15:0)+(p.arts?artO(p,"y"):0)+(p.anthai?5:0)}
 function illMonthP(p){const me=p===S;let ev="";const i=illOf(p);
@@ -16,12 +16,12 @@ function illMonthP(p){const me=p===S;let ev="";const i=illOf(p);
   else{const near=others(p).find(x=>illOf(x)&&ILL[x.ill.k].cont&&(together(p,x)||sameHouse(p,x)));if(near&&roll(8))ev+=catchIll(p,near.ill.k)}
   return ev}
  const d=ILL[i.k];ap(p,{suc:-5*i.st});if(d.sac)ap(p,{sac:d.sac});if(d.sung)ap(p,{sung:d.sung});
- const c=careOdds(p);if(roll(30+c-(d.slow?15:0))){p.ill=null;if(d.scar)ap(p,{sac:d.scar});return ev+(me?`Ngươi khỏi ${d.n.toLowerCase()}${d.scar?", nhưng mặt để lại sẹo (Sắc "+d.scar+")":""}. `:"")}
- if(i.st<3&&roll(35-c/2)){i.st++;if(me)ev+=`<span class="r">${d.n} trở ${STG[i.st]}.</span> `}
+ const c=careOdds(p);if(roll(BAL.odb.j13.rbIllMonthP+c-(d.slow?15:0))){p.ill=null;if(d.scar)ap(p,{sac:d.scar});return ev+(me?`Ngươi khỏi ${d.n.toLowerCase()}${d.scar?", nhưng mặt để lại sẹo (Sắc "+d.scar+")":""}. `:"")}
+ if(i.st<3&&roll(BAL.odb.j13.rbIllMonthP_2-c/2)){i.st++;if(me)ev+=`<span class="r">${d.n} trở ${STG[i.st]}.</span> `}
  else if(i.st===3&&d.die&&roll(25*d.die)){if(me){die(`${d.n} nguy kịch, không qua khỏi`);return ev}p.alive=false;if(p.queen)p.queen=false;return ev+`<span class="r">${p.name} mất vì ${d.n.toLowerCase()}.</span> `}
  return ev}
 function epidemic(){const P=consorts().filter(p=>p===S||p.alive&&!p.out);if(!roll(1.2))return"";const h=pick(P),hk=houseOf(h);let ev=`<span class="r">Dịch đậu mùa phát ở ${houseName(h)==="cung riêng"?"cung "+NM(h):houseName(h)}.</span> Cả cung bị phong tỏa một tháng. `;
- for(const p of P)if(houseOf(p)===hk){if(roll(35))ev+=catchIll(p,"daumua")||(p!==S?`${p.name} nhiễm bệnh. `:"");p.confined=Math.max(p.confined||0,1);for(const k of kidsOf(p))if(roll(45)){k.hp-=40;if(k.hp<=0)ev+=kidDie(k,"mất vì đậu mùa",p===S)}(p.staff||[]).slice().forEach(s=>{if(roll(10))p.staff.splice(p.staff.indexOf(s),1)})}
+ for(const p of P)if(houseOf(p)===hk){if(roll(35))ev+=catchIll(p,"daumua")||(p!==S?`${p.name} nhiễm bệnh. `:"");p.confined=Math.max(p.confined||0,1);for(const k of kidsOf(p))if(roll(45)){k.hp-=BAL.eff.j13.hpEpidemic;if(k.hp<=0)ev+=kidDie(k,"mất vì đậu mùa",p===S)}(p.staff||[]).slice().forEach(s=>{if(roll(10))p.staff.splice(p.staff.indexOf(s),1)})}
  return ev}
 function illMonth(){let ev="";for(const p of consorts())ev+=illMonthP(p);ev+=epidemic();
  if(worldOn()){/* Emperor + Thái hậu illness: world facts, rolled on the host only (jcoopworld worldOn) */
@@ -32,16 +32,17 @@ function illMonth(){let ev="";for(const p of consorts())ev+=illMonthP(p);ev+=epi
  return ev}
 /* the Emperor avoids the sick; quarantine blocks nights */
 function illNightF(p){const i=illOf(p);if(p.fakeIll)return 1.2;return !i?1:ILL[i.k].cont?0:i.st>=2?.3:.7}
-function treatO(p,way){return cl(lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+artO(p,"y"):20+careOdds(p)),5,95)}
+function treatO(p,way){return oddsCl(lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+artO(p,"y"):20+careOdds(p)))}
 function treat(p,way){const i=illOf(p);if(!i)return"";let o=lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+artO(p,"y"):20+careOdds(p));
- const bribed=typeof thyBribedBy==="function"?thyBribedBy(p):liveRivals(true).find(v=>v!==p&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=40);
- if(way==="ty"&&bribed&&roll(25)){i.st=Math.min(3,i.st+1);return `<span class="r">Thang thuốc của thái y làm bệnh nặng thêm.</span> (Có kẻ đã mua chuộc thái y?) `}
- if(roll(cl(o,5,95))){p.ill=null;return `${NMc(p)} khỏi bệnh. `}if(i.st>1&&roll(50)){i.st--;return `Bệnh đỡ, còn ${STG[i.st]}. `}return "Bệnh chưa thuyên giảm. "}
+ const bribed=typeof thyBribedBy==="function"?thyBribedBy(p):mindPickBy(liveRivals(true).filter(v=>v!==p&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=40),v=>hostility(v,p)*mindW(v,"bribe"),null);/* npc-mind: was FIRST */
+ const ob=way==="ty"&&bribed?npcWhy("thyHarm",{p,b:bribed},()=>roll(BAL.ag.why.thyHarm.p)):null;/* npc-purpose G2: only a rival who really paid the physician (thyBribedBy) and still wants her harmed; the old 25 = the success */
+ if(ob){i.st=Math.min(3,i.st+1);return `<span class="r">Thang thuốc của thái y làm bệnh nặng thêm.</span> (Có kẻ đã mua chuộc thái y?) `}
+ if(roll(oddsCl(o))){p.ill=null;return `${NMc(p)} khỏi bệnh. `}if(i.st>1&&roll(50)){i.st--;return `Bệnh đỡ, còn ${STG[i.st]}. `}return "Bệnh chưa thuyên giảm. "}
 function illCards(){const A=[];const i=illOf(S);
- if(i){A.push({n:"Truyền thái y",t:`Mời thái y đến chữa ${ILL[i.k].n.toLowerCase()}.`,c:{bac:-40},o:100,k:2,w:{},x:`khỏi bệnh: ${chanceW(treatO(S,"ty"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(50)}`,go:()=>log(treat(S,"ty"))});
-  if(S.arts.y>=3)A.push({n:"Tự bốc thuốc",t:"Dùng y thuật của mình.",c:{suc:-5},o:100,k:2,w:{},x:`khỏi bệnh: ${chanceW(treatO(S,"self"))} (Y thuật bậc ${S.arts.y})`,go:()=>log(treat(S,"self"))});
-  A.push({n:"Tĩnh dưỡng",t:"Đóng cửa nằm nghỉ cả buổi.",c:{},o:100,k:4,w:{suc:15},x:`khỏi bệnh: ${chanceW(treatO(S,"rest"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(50)}`,go:()=>log(treat(S,"rest"))})}
- else if(!S.fakeIll)A.push({n:"Giả bệnh",t:"Cáo bệnh để Hoàng thượng thương xót, tránh việc khó.",c:BAL.tw.fakeIll,o:100,k:1,w:{sung:BAL.tw.g.ill},x:`2 tháng: dễ được lật thẻ hơn · kèm: thái y bắt mạch ra, Danh -6, bị phạt: ${chanceW(28)}`,go:()=>{S.fakeIll=BAL.tw.g.illWk}});
+ if(i){A.push({n:"Truyền thái y",t:`Mời thái y đến chữa ${ILL[i.k].n.toLowerCase()}.`,c:{bac:-40},o:100,inner:1,oi:treatO(S,"ty"),k:2,w:{},x:`khỏi bệnh: ${chanceW(treatO(S,"ty"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(50)}`,go:()=>log(treat(S,"ty"))});
+  if(S.arts.y>=3)A.push({n:"Tự bốc thuốc",t:"Dùng y thuật của mình.",c:{suc:-5},o:100,inner:1,oi:treatO(S,"self"),k:2,w:{},x:`khỏi bệnh: ${chanceW(treatO(S,"self"))} (Y thuật bậc ${S.arts.y})`,go:()=>log(treat(S,"self"))});
+  A.push({n:"Tĩnh dưỡng",t:"Đóng cửa nằm nghỉ cả buổi.",c:{},o:100,inner:1,oi:treatO(S,"rest"),k:4,w:{suc:15},x:`khỏi bệnh: ${chanceW(treatO(S,"rest"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(50)}`,go:()=>log(treat(S,"rest"))})}
+ else if(!S.fakeIll)A.push({n:"Giả bệnh",t:"Cáo bệnh để Hoàng thượng thương xót, tránh việc khó.",c:BAL.tw.fakeIll,o:100,inner:1,k:1,w:{sung:BAL.tw.g.ill},x:`2 tháng: dễ được lật thẻ hơn · kèm: thái y bắt mạch ra, Danh -6, bị phạt: ${chanceW(28)}`,go:()=>{S.fakeIll=BAL.tw.g.illWk}});
  return A}
 
 /* ================= THE TUẦN'S FORTUNE: xin xăm ================= */
@@ -56,8 +57,8 @@ const LOTS=[[0,"Phượng hoàng đậu ngọn ngô đồng,\nMây lành năm s�
 const LDOM=["Sủng","Giao thiệp","Danh","Mưu kế","Con cái","Tài nghệ","Con cái","Danh","Giao thiệp","Mưu kế","Tài nghệ","Sức khỏe","Mưu kế","Giao thiệp","Con cái","Sủng","Giao thiệp","Sức khỏe","Sức khỏe","Sủng","Danh","Giao thiệp","Mưu kế","Con cái","Hung","Sức khỏe","Hung","Danh","Mưu kế","Hung"];
 function drawLot(p,better){const pickL=()=>{const i=R(LOTS.length);return{i,lv:LOTS[i][0],dom:LDOM[i]||"Sủng"}};let l=pickL();if(better){const m=pickL();if(m.lv<l.lv)l=m}p.lot=l;return l}
 function lotB(p,dom){return p&&p.lot&&dom&&p.lot.dom===dom?LVB[p.lot.lv]:0}
-const LADW=["Liều","Khó","Năm ăn năm thua","Khá chắc","Chắc","Rất chắc","Nắm chắc"];
-function ladI(o){return LADW.indexOf(word(cl(Math.round(o),5,95)))}
+/* odds step of o (ONE CORE: the step words live only in KIT_ODDS j79, the cuts in BAL.odds; review/one-core-dup-r1) */
+function ladI(o){return oddsLv(cl(Math.round(o),BAL.odds.lo,BAL.odds.hi))}
 /* the lot's pull on one card, in ladder steps; o = the odds before the lot */
 function lotTag(dom,o){const b=lotB(S,dom);if(!b)return"";const d=o==null?0:ladI(o+b)-ladI(o);return ` · Quẻ: ${b<0?"khó":"dễ"} hơn ${d?Math.abs(d)+" bậc":"một chút"}`}
 /* the lot in plain words: scope, direction, the cards it touches */
