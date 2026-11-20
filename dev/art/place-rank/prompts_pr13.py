@@ -199,6 +199,22 @@ CT_DONG_NGU = ("Chung Tú cung Đông phối điện bedroom, the cosy bedchambe
     + NOPE + RECT + GUIDE_S + BEDH4 + FG)
 OUT['chung-tu-cung-dong-phoi-ngu'] = dict(prompt=room9(CT_DONG_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3])
 
+# 11) Chung Tú ĐÔNG phối reception — same pair as room 10 (ĐT: curtains soft green, fabrics cream-ivory). TWO walls, windows LEFT (image 3 8aiwqQTIrU).
+#     Own layout: host seats = a pair of low rose chairs + tea table CENTRED on the back wall before a large painted plum-blossom wall panel,
+#     flanked by two rounded doorways in cracked-ice lattice (left and right); along the left window wall an embroidery frame and a guqin table. + CARD_CT + FR.
+CT_DONG_REC = ("Chung Tú cung Đông phối điện reception room, the small sitting room where two lower-ranking imperial consorts (a Đáp ứng and a "
+    "Thường tại) living in the east side hall of a palace in ancient China receive their guests, a real room in daily use, no bed anywhere, " + WL2
+    + ": wooden pillars, lattice windows in the LEFT side wall onto a sunny garden; in the middle of the back wall, square to it and seen straight on, "
+    "the host seats, the large clear main subject: a pair of low-backed rose chairs of dark red sandalwood with a small square tea table and a tea "
+    "set between them, on a low wide platform, before a large painted wall panel of plum blossoms and magpies; to the left and to the right of that "
+    "panel, in the back wall, two cracked-ice lattice partitions each with a rounded doorway onto an inner room; along the left window wall an "
+    "embroidery frame on its stand and a low table with a guqin zither; a tall slim cabinet with porcelain at the right end of the back wall; "
+    "hanging paper lanterns with tassels, vases of plum blossoms, a small incense burner. " + CARD_CT + "COLOURS BY OBJECT TYPE (owner Lượt 491, "
+    "766): ALL the curtains of the room are soft green like #7FB394 (the sheer window curtains tied back, the curtains of the doorways, the lantern "
+    "tassels), and ALL the furniture fabrics are cream-ivory like #EAE3D0 (the chair cushions, the platform mat edge, the table runner). " + QN
+    + " Only the two colours soft green (curtains) and cream-ivory (fabrics)." + NOPE + P['NOSOFA'] + RECT + GUIDE_S + FR)
+OUT['chung-tu-cung-dong-phoi'] = dict(prompt=room9(CT_DONG_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M2X])
+
 # GATE (as v9): common block present, method refs, no drift words, no phoenix/yellow below t7.
 for k, v in OUT.items():
     p = v['prompt']
