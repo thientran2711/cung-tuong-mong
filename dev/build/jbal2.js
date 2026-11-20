@@ -1089,20 +1089,22 @@ Object.assign(BAL.ag,{mg2:{on:1,med:[[-2,8.9],[0,7.5],[2,5.8]],w:8,tat:{e:[0,2,5
    BELL CURVE (owner OD 20/11 ~06:40Z, verbatim: "ở ngoài đời mình có thật sự là mình sẽ gặp 1/3 những người mình gặp là sẽ là những người giỏi, hoặc là 1/3
         người mình gặp là những người bình thường, hoặc 1/3 người gặp là những người dở hay không á. Cái tỷ lệ này đã đúng hay chưa?" → MAIN ROOT-74 bell-curve
         proposal; OWNER OK OD ~07:15Z "Ok, làm theo mấy cái ý mà bạn nói ở trên đi"; overwrites the thirds of OD ~01:18Z): every NPC's average play in a kind
-        (her hand − w/2) is one hashed draw of Normal(ctr, sd) (clamped ±3 sd; jmgt mgZ / mgHand, jmgcal mgCalBand) — the real adult population, NOT centred on her;
+        (her hand − w/2) is one hashed draw of Normal(ctr, sd) (clamped ± zMax·sd; jmgt mgZ / mgHand, jmgcal mgCalBand) — the real adult population, NOT centred on her;
    ctr  = the average ADULT play on the fitted board, per kind (key = kind; "" = every kind not listed): 7 (OD ~07:20Z via MAIN: cal-p2 fits each board so the
           average adult scores ≈ 7);
    sd   = the spread of adult play per skill group (grp): c careful / strategy 1.4, a artistic 1.5, r reflex 1.7 (reaction / timing varies most between adults);
           "" = a kind in no group;
    eqZ  = the "about equal to her" band, ± eqZ·sd round HER calibrated play (BAL.ag.mg2.cal.k b) — only for reading her place: better / equal / worse FALL OUT
           of where her b sits on the curve (her at the top 15 % → ≈ 7 / 20 / 73 %, at the median → ≈ 37 / 33 / 30 %; jmgcal mgCalShare);
+   zMax = the curve tails: a hand lies within ± zMax·sd of the centre (jmgt mgZ clamp, mgCalBand lo / hi);
+   slapZ = the slap scale in sd: an NPC "tat" hand ± slapZ·sd from the centre lands the heavy blow least / most (jslap slapNpcDraw via mgCalBand far);
    grp  = the skill group of every mini-game kind (KG82_KIND): c fine hand, patience, memory, logic · a timing, taste, craft · r anticipation, aim, balance;
    art  = hand points per art level of that kind above / below the player's own level (a trained NPC clearly beats her, an untrained one is weak);
         UPBRINGING / palace shift of the curve per NPC (owner OD 20/11 ~01:50Z: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà
         nghèo mới yếu"; OD ~02:05Z per-identity table): a person's art level for this lift (and her board) = max(her own, the start bậc of her identity
         (origin × road) in BAL.orig.art, jbal.js) (jmgt mgOrgLv); the bậc are tuned there.
         Rank gives NO skill: law 5 comes from her harder board as she climbs and from who she meets. */
-BAL.ag.mg2.hand={on:1,w:4,art:.2,ctr:{"":7},sd:{c:1.4,a:1.5,r:1.7,"":1.5},eqZ:.43,
+BAL.ag.mg2.hand={on:1,w:4,art:.2,ctr:{"":7},sd:{c:1.4,a:1.5,r:1.7,"":1.5},eqZ:.43,zMax:3,slapZ:2,
  grp:{c:["co","tho","doi","doden","ve","theu","kim","kinh","may","hoadien","td_cong","td_hanh","le","tc","xa","thq"],a:["dan","hat","hoa","mua","banh","huong"],r:["dauho","ban","tat","ne","td_ngon","td_dung","chai","duho","den"]}};
 /* AG-ALL-2d2 OWNER CALIBRATION (owner OD 17/11 ~16:20Z (f) + ~16:40Z option 1: "chỉ có tôi test và cái số của tôi dùng chung cho mọi người"; jmgcal):
    d  = the board gaps of the test rounds, easy → hard (one round each; 5 rounds, rising difficulty)

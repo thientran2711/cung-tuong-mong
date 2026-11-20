@@ -25,12 +25,12 @@ function mgCalBase(raws,ds){const n=Math.min(raws.length,ds.length);if(!n)return
  return Math.round(cl(s/n,0,10)*10)/10}
 /* the NPC hand band of a kind: {lo, hi, sig} (sig changes when the band changes, so a cached hand is re-rolled from the same hash) */
 /* the NPC hand curve of a kind (owner OD 20/11 ~06:40Z bell curve, OK ~07:15Z; BAL.ag.mg2.hand ctr / sd / grp): the average adult play m = ctr (per kind, "" default),
-   spread sd of the kind's skill group; hands = m + w/2 + sd·z. c = the hand centre, lo / hi = ± 3 sd, far = 2 sd (the scale jslap reads); sig changes when
+   spread sd of the kind's skill group; hands = m + w/2 + sd·z. c = the hand centre, lo / hi = ± zMax·sd, far = slapZ·sd (the scale jslap reads); sig changes when
    the curve changes, so a cached hand is re-rolled from the same hash. Her calibrated b does NOT move the curve — it only places her on it (mgCalShare). */
 function mgCalGrp(kind){const G=BAL.ag.mg2.hand.grp||{};for(const g in G)if((G[g]||[]).includes(kind))return g;return""}
-function mgCalBand(kind){const H=BAL.ag.mg2.hand,r=x=>Math.round(x*100)/100,T=H.ctr||{},D=H.sd||{};
- const m=+(T[kind]!=null?T[kind]:T[""]!=null?T[""]:mgMedD(0)),sd=+(D[mgCalGrp(kind)]!=null?D[mgCalGrp(kind)]:D[""]!=null?D[""]:1.5),c=r(m+H.w/2);
- return{c,m:r(m),sd,lo:r(c-3*sd),hi:r(c+3*sd),far:r(2*sd),sig:"n/"+r(m)+"/"+sd}}
+function mgCalBand(kind){const H=BAL.ag.mg2.hand,r=x=>Math.round(x*100)/100,T=H.ctr,D=H.sd,g=mgCalGrp(kind);/* every number from BAL (law 4, rv) */
+ const m=+(T[kind]!=null?T[kind]:T[""]),sd=+(D[g]!=null?D[g]:D[""]),c=r(m+H.w/2);
+ return{c,m:r(m),sd,lo:r(c-H.zMax*sd),hi:r(c+H.zMax*sd),far:r(H.slapZ*sd),sig:"n/"+r(m)+"/"+sd}}
 /* where HER calibrated play b sits on that curve: the shares of NPCs (before art / upbringing lifts) better / about equal (± eqZ·sd) / worse than her */
 function mgCalShare(kind){const H=BAL.ag.mg2.hand,c=C(),e=c.on&&c.k&&c.k[kind];if(!(e&&isFinite(+e.b)))return null;const Bd=mgCalBand(kind),z=(+e.b-Bd.m)/Bd.sd,q=H.eqZ||0;
  const P=x=>.5*(1+erf(x/Math.SQRT2)),r=x=>Math.round(x*1000)/1000;return{b:+e.b,z:r(z),better:r(1-P(z+q)),equal:r(P(z+q)-P(z-q)),worse:r(P(z-q))}}

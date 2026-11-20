@@ -82,7 +82,7 @@ function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||M
    on the CURVE of jmgcal mgCalBand(kind) — BELL CURVE (owner OD 20/11 ~06:40Z, verbatim: "ở ngoài đời mình có thật sự là mình sẽ gặp 1/3 những người
    mình gặp là sẽ là những người giỏi, hoặc là 1/3 người mình gặp là những người bình thường, hoặc 1/3 người gặp là những người dở hay không á" → OWNER OK
    ~07:15Z; overwrites the thirds of ~01:18Z): the average play (hand − w/2) of the real adult population = Normal(ctr, sd) per kind (BAL.ag.mg2.hand ctr / sd
-   / grp), hand = c + sd·z, c = ctr + w/2, z = mgZ (one standard-normal draw hashed on person + kind, ±3). NOT centred on her: her calibrated b only places
+   / grp), hand = c + sd·z, c = ctr + w/2, z = mgZ (one standard-normal draw hashed on person + kind, ± zMax). NOT centred on her: her calibrated b only places
    her on the curve (mgCalShare), so better / equal / worse fall out of her real standing in each kind.
    (2) ART: mgHandEff adds BAL.ag.mg2.hand.art per art level of that kind above
    the player's own level (kg82LvFor; minus below): a trained NPC clearly beats her, an untrained one is weak. (3) UPBRINGING (owner OD 20/11 ~01:50Z,
@@ -96,9 +96,10 @@ function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||M
    rolls below its ceiling most of the time. Saved on the person (p.mgH[kind]); the draw is hashed on the person + kind, so an old save (no p.mgH) and a
    co-op guest roll the very same hand lazily. Off: BAL.ag.mg2.hand.on = 0 (one skilled-bot curve for everyone, as part 2b). */
 function mgHashU(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}h^=h>>>13;h=Math.imul(h,0x5bd1e995);h^=h>>>15;return (h>>>0)/4294967296}
-function mgBand(kind){const H=BAL.ag.mg2.hand;if(typeof mgCalBand==="function")return mgCalBand(kind);const m=mgMedD(0),sd=1.5,c=m+H.w/2;return{c,m,sd,lo:c-3*sd,hi:c+3*sd,far:2*sd,sig:"n/"+m+"/"+sd}}
-/* the offset of a person's hand from the curve centre, in sd: one standard-normal draw hashed on the person + kind (Box–Muller of two hashes), clamped ±3 */
-function mgZ(id){const u=Math.max(1e-9,mgHashU(id+"|a")),v=mgHashU(id+"|b");return cl(Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v),-3,3)}
+/* the curve of a kind: ONE formula, jmgcal mgCalBand (BAL.ag.mg2.hand; no private centre / spread here — law 4, rv) */
+function mgBand(kind){return mgCalBand(kind)}
+/* the offset of a person's hand from the curve centre, in sd: one standard-normal draw hashed on the person + kind (Box–Muller of two hashes), clamped ± BAL.ag.mg2.hand.zMax */
+function mgZ(id){const u=Math.max(1e-9,mgHashU(id+"|a")),v=mgHashU(id+"|b"),Z=BAL.ag.mg2.hand.zMax;return cl(Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v),-Z,Z)}
 function mgHand(kind,p){const H=BAL.ag.mg2.hand,Bd=mgBand(kind);if(!p||typeof p!=="object")return Bd.c;let M=p.mgH;if(!M||typeof M!=="object")M=p.mgH={};
  /* AG-ALL-2d2: p.mgHv[kind] = the band it was rolled in — a changed band re-rolls the SAME hash draw inside the new band (old saves rolled in the old
     skewed / half-half bands carry another sig and re-roll here) */
