@@ -531,3 +531,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | cold-faction E33 (opus; faction acts while she is in lãnh cung; briefs/E33-cold-faction.md) | review/cold-faction | FOREMAN E #23 | session_01DgYSWntLTqn83CRYF8pg1G | RUNNING | 20/11 21:45Z |
 | jtq14-addr E34 (sonnet; jtq14 X() → jvoice kAddr, whole family; briefs/E34-jtq14-addr.md) | review/jtq14-addr | FOREMAN E #23 | session_01DgYSWkVYi1pgWU4VLXgARQ | RUNNING | 20/11 21:45Z |
 | ge-rank → ge-phutang E35 (opus; GE law-5 rank key all waves, then Phù Tang GE; briefs/E35-ge-rank.md) | review/ge-rank, review/ge-phutang | FOREMAN E #23 | session_01DgYSWmjPvugYh1ZvnrYsFG | RUNNING | 20/11 21:45Z |
+| PARKING #11 dresscode r2 E30b (opus; successor of E30 @7438275b; handover reports/dresscode.md «HANDOVER (E30 → successor)») | review/dresscode | FOREMAN E #23 | session_01DgYSWoKR63FnqBVfM37DPu | RUNNING | 20/11 21:32Z |
