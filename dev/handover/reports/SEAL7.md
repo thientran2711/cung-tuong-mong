@@ -55,3 +55,51 @@ depth 4 · START_CTX ≈ 4.5 % of 1M (get_session read 0 → own estimate) · ro
 ## Recipe notes for a successor
 Same as SEAL6/SEAL1 handover. img/ is gitignored in this checkout and empty at start → download any older webp from the CDN before building
 a set preview. My helpers were scratchpad-only (proc.sh = download + th_cut + move .npy + edge check; edge.py).
+
+## FEELING-SEAL AUDIT (owner ruling ~02:05Z via ROOT-62: feeling seals = face + light posture only; HĐ seals = deed with object) — 0 cr
+Method: every group uses the SAME per-emotion wording (th_prompts.py / th-gian.md; hh_prompts, grp_set_prompts, grp_gian/sg2/sg4 swap only
+the person block), so the verdict is per emotion and holds for every group that has it. Checked the B + LOOP wording of all 21 feeling
+seals + a grid of the Thái hậu mid-LOOP frames (looked at). Common to ALL: B = "she bursts OUT of the medallion … both arms come forward
+over the rim" — the burst itself is a big body move; toning down could also mean "leans out a little, hands rest on the rim".
+Groups that have each emotion (on CDN): th + hh = all 21 (hh no dau yet); bg / bt / mm = giận + vui buồn sợ ẩn bình ghen lo mưu tự tin hăng hái;
+pt ptl ht htg tg tv = giận only.
+
+| emotion | verdict | what it acts out (B / LOOP) |
+|---|---|---|
+| giận | **ACTS OUT** (worst) | raised clenched fist shaken, shouting/scolding, steam — owner named it. ALL 13 groups. |
+| hăng hái | **ACTS OUT** | both fists pumped up and down, bouncing |
+| chuyên tâm | **ACTS OUT** | holds and reads a book, turns pages (prop deed; same as HĐ·chuyên tâm book) |
+| ghen | **ACTS OUT** | tugs and bites a pink handkerchief (prop deed) |
+| khó chịu | **ACTS OUT** | tugs collar + fans her face quickly, squirms |
+| vui | **ACTS OUT** | waves both hands, claps |
+| tinh nghịch | **ACTS OUT** | pulls eyelid 'bleh', tongue out, waves hand, wiggles head |
+| ẩn | ACTS OUT (medium) | finger 'shh' at lips + hand parting the grey mist |
+| hổ thẹn | ACTS OUT (medium) | both hands cover cheeks, hides/peeks through fingers repeatedly |
+| lo | ACTS OUT (medium) | wrings hands, nibbles fingertip |
+| mưu | ACTS OUT (medium) | taps chin, drums fingers on the rim |
+| hưng khởi | ACTS OUT (medium) | finger raised high and wiggled, bouncing, big star |
+| sợ | light-medium | both hands up at mouth trembling (gesture, but reads as feeling) |
+| tình tứ | light-medium | hand on cheek + twirls a lock of hair |
+| bình | light | small friendly wave |
+| tự tin | light | hand on chest, small proud nod / pat |
+| choáng | OK (face/light posture) | hand on forehead, sways |
+| buồn | OK | chin resting on folded arms, sigh, tear |
+| chán | OK | cheek on hand, lazy finger drum |
+| hờn | OK | arms crossed, chin up, turned away |
+| đau (old th-dau) | OK posture, WRONG feeling | the made th-dau is open-mouth sobbing (looks like crying) — that is why the owner asked for dau2 |
+
+### Proposed SAMPLE (one group: Thái hậu; 2–3 worst) — NOT made (seal HOLD on)
+th-giận, th-hăng hái, th-chuyên tâm redone as STILLS only (no clips), toned down:
+- giận: furious face (knitted brows, glare, flushed, tight mouth), both hands resting tense on the rim, one small steam puff — no fist, no shouting.
+- hăng hái: bright determined eyes, big eager smile, shoulders lifted, hands resting on the rim — no fist pumping.
+- chuyên tâm: calm focused eyes looking steadily ahead, lips pressed, chin resting lightly on one hand — no book (book stays only in HĐ·chuyên tâm).
+Cost: A still 135 + B still 135 per seal → 3 × 270 = **810 cr** (A only: 3 × 135 = 405). Prompt change = the B pose clause (+ A face line) only;
+the rest stays word for word (A17 diff listed when made). Gate + label as usual. Owner picks before any clip.
+
+## HANDOVER (SEAL7 at ≈ 26 % context, roll line ≈ 29.5 %) — for the successor; the COORDINATOR (ROOT-62) opens it
+- Seal HOLD on (owner "Khoan vẽ tiếp ấn" ~01:30Z): no gens until ROOT-62 relays her word.
+- Waiting work: (1) the feeling-seal sample above (810 cr) if she says go; (2) L870 fix list (ROOT-62 msg ~01:28Z): th tình tứ 3 hands,
+  dau2 clips (A O6Et0g2ynm / B hu29sg9vqL, B not looked at yet), th chán fan cut at bottom, HĐ ghen / hổ thẹn / lo / tình tứ / vui redo as clear
+  deeds with an object (est. 20–24.5k) — only when HOLD lifts.
+- Recipe: SEAL1 / SEAL5 handovers + this file. img/ is gitignored and empty in a fresh checkout: curl the needed webps from the CDN first.
+  Captions/labels: groups/th_names.py (A27), th_sheet.py / th_preview.py draw them. Gate: seal_gate.py before every call.
