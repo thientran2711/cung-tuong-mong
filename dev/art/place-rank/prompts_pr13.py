@@ -428,6 +428,23 @@ DH_TAY_REC = ("Diên Huy cung Tây phối điện reception room, the small sitt
     + RECT + GUIDE_S + FR)
 OUT['dien-huy-cung-tay-phoi'] = dict(prompt=room9(DH_TAY_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3])
 
+# PR16 R3 of room 10 (owner Lượt 835 via ROOT-60: r2 looked IDENTICAL to the old one → "vẽ lại … khác đi, đừng có chạy lại cái prompt này nữa":
+#     a NEW prompt, not a rerun). Same occupants + colours (ĐT: curtains soft green, fabrics cream-ivory, pair_cols(2, 1)) + CARD_CT, but a
+#     different picture: windows LEFT (old: right) with image 3 = M3X 1ldYySkr4r; beds at the LEFT and RIGHT ENDS of the back wall, frontal
+#     (owner L816; old: side by side on one platform in the left two thirds; room 13 = side by side too); centre = a tall painted plum-blossom
+#     folding screen with two low rose chairs + a small tea table before it; doorway in the RIGHT side wall; dressing table + stool on the
+#     left window wall. + BEDH4 + BEDW (the r2 width sentence, now the shared BEDW) + FG.
+CT_DONG_NGU_R3 = ("Chung Tú cung Đông phối điện bedroom, the cosy bedchamber SHARED by two lower-ranking imperial consorts (a Đáp ứng and a Thường tại) "
+    "living in the east side hall of a palace in ancient China, a real room in daily use, " + WL3 + ": wooden pillars, lattice windows in the LEFT "
+    "side wall onto a sunny garden; against the back wall, square to it and seen straight on, TWO tall, WIDE, generous free-standing canopy frame "
+    "beds of carved dark red sandalwood, one at the LEFT end and one at the RIGHT end of the back wall, each on its own low bed step with slippers, "
+    "each bed whole in width inside the picture, together the large clear main subject; in the middle of the back wall between them a tall "
+    "folding screen painted with plum blossoms and magpies, and before it two low rose chairs with a small tea table; in the right side wall a "
+    "cracked-ice lattice partition with its rounded doorway onto an inner room; along the left window wall a small dressing table with a bronze "
+    "mirror and a stool; hanging paper lanterns with tassels, vases of plum blossoms, a small embroidery basket. " + CARD_CT + pair_cols(2, 1) + QN
+    + " Exactly two beds; only the two colours soft green (curtains) and cream-ivory (fabrics)." + NOPE + RECT + GUIDE_S + BEDH4 + BEDW + FG)
+OUT['chung-tu-cung-dong-phoi-ngu-r3'] = dict(prompt=room9(CT_DONG_NGU_R3, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3X])
+
 # GATE (as v9): common block present, method refs, no drift words, no phoenix/yellow below t7.
 for k, v in OUT.items():
     p = v['prompt']
