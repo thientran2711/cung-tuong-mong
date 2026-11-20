@@ -815,3 +815,4 @@ NEWACCT#10 ~21:13Z: #9 relayed OWNER L1453: fur trim stays exactly as *_cloak (n
 NEWACCT#9 ~23:33Z: OWNER L1453: fur stays as is (no thinner) → DESIGN12 + #10 told. Next Lượt 1454.
 NEWACCT#10 ~21:14Z: DESIGN12 3fd437aa _cloak2 changed fur width/lapels too → violates OWNER L1453/L1454 (only vân kiên size). #10 ordered REDO from _cloak, only shoulder-piece size words, fur byte-identical, diff in report. Next Lượt 1455.
 NEWACCT#10 ~21:16Z: DESIGN12 9fdbddd2 _cloak2 REDO: #10 A38 sentence diff vs _cloak = ONLY vân kiên/cape size words (t4 also drops 'and the outer upper chest'); fur sentence identical; keep --sidecar PASS ×7, --all 126 PASS. Sent owner L1456 (7 files). Next Lượt 1457.
+NEWACCT#10 ~21:20Z: #9 relayed OWNER L1456 (maid GPT prompts): thân cận ≠ round-1 look, chưởng sự/ma ma colour question, hairpins fewer than maids, no name caption, vest shoulders too soft → brief maid-fix-L1456.md → worker MAIDP2 (Opus). Next Lượt 1458.
