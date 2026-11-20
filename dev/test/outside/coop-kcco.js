@@ -20,7 +20,8 @@ const ROOT=path.resolve(__dirname,'../../..');
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
-  await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u;
+  await serve(ctx);if(process.env.THIN&&name==='fold')await ctx.addInitScript(w=>{try{localStorage.setItem('ctm-thin',w)}catch(e){}},process.env.THIN);/* THIN=<n>: the host asks for that thin room level (review r1) */
+  await ctx.addInitScript(u=>{window.COOP_URL=u;
     /* one view of the co-op hooks, whatever the client module names them */
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const you=c.seat||s.you||null;const ended=c.ended||s.ended||{};
       const online=c.online||(s.seats?{a:!!(s.seats.a&&s.seats.a.online),b:!!(s.seats.b&&s.seats.b.online)}:{});
@@ -103,6 +104,7 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  await clear(A);await clear(B);await shot(A,'05-home');await shot(B,'05-palace');
 
  /* ---- OR13 co-op acts ---- */
+ console.log('thin level',await A.p.evaluate(()=>COOPW.thin&&COOPW.thin.lvl),await B.p.evaluate(()=>COOPW.thin&&COOPW.thin.lvl));
  const on=await Promise.all([A,B].map(o=>o.p.evaluate(()=>kccoOn())));ok(on[0]&&on[1],'kcco on for both (one home, one palace)',on);
  const pick=async(o,title,re,force)=>{const t0=Date.now();while(Date.now()-t0<25000){const r=await o.p.evaluate(([t,src,force])=>{const i=Q.findIndex(m=>m.t===t);if(i<0)return null;
     if(i>0){const m=Q.splice(i,1)[0];Q.unshift(m)}showModal();const m=Q[0];const j=m.opts.findIndex(c=>new RegExp(src).test(c.n));if(j<0)return{bad:m.opts.map(c=>c.n)};
@@ -119,51 +121,63 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  /* A -> B letter */
  const nA0=await inv(B,'thunha');await A.p.evaluate(()=>{log(kccoDo('letter'))});
  let r=await pick(B,'Thư hảo hữu',/^Đọc thư, cất/);ok(r&&r.ok,'B gets A\'s letter card and keeps it',r);
- ok(await inv(B,'thunha')===nA0+1,'B holds the letter item');
+ ok(await until(B,n=>(S.inv||[]).filter(e=>e.k==='thunha').length===n+1,nA0,20000),'B holds the letter item');
  ok(await until(A,()=>(S.kcco.out||[]).some(m=>m.kind==='letter'&&m.ans==='keep'),null,20000),'A gets B\'s answer (letter kept)');
  /* A -> B gift taken */
  await A.p.evaluate(()=>{S.inv.push({k:'tuithom',from:'test'});const ix=S.inv.length-1;log(kccoDo('gift',{ix}));S.kcco.out[0].due=S.turn});
  const tA=await inv(A,'tuithom'),tB=await inv(B,'tuithom');
  r=await pick(B,'Quà hảo hữu',/^Nhận$/);ok(r&&r.ok,'B gets the gift card on the visiting day and takes it',r);
- ok(await inv(B,'tuithom')===tB+1,'the item is in B\'s chest');
- ok(await B.p.evaluate(()=>(S.il&&S.il.log||[]).some(l=>l[2]==='tuithom'&&String(l[3]).startsWith('coop:'))),'B\'s item ledger has the line from A');
+ ok(await until(B,n=>(S.inv||[]).filter(e=>e.k==='tuithom').length===n+1,tB,20000),'the item is in B\'s chest');
+ ok(await until(B,()=>(S.il&&S.il.log||[]).some(l=>l[2]==='tuithom'&&String(l[3]).startsWith('coop:')),null,20000),'B\'s item ledger has the line from A');
  ok(await A.p.evaluate(()=>(S.il&&S.il.log||[]).some(l=>l[2]==='tuithom'&&String(l[4]).startsWith('coop:'))),'A\'s item ledger has the line to B');
  /* A -> B gift returned */
  await A.p.evaluate(()=>{S.kcco.last.gift=-1;S.inv.push({k:'luahang',from:'test'});const ix=S.inv.length-1;kccoDo('gift',{ix});S.kcco.out[0].due=S.turn});const lA=await inv(A,'luahang');
  r=await pick(B,'Quà hảo hữu',/^Trả lại quà/);ok(r&&r.ok,'B returns the second gift',r);
  ok(await until(A,n=>(S.inv||[]).filter(e=>e.k==='luahang').length===n+1,lA,20000),'the returned item is back in A\'s chest');
  /* A -> B sớ tiến cử (B's house = Đại tướng quân), accepted; world on the host (A) */
- const p0=await A.p.evaluate(()=>tdPow('Đại tướng quân'));const bc=await B.p.evaluate(()=>BAL.kcco&&COOPW&&(S.origin||{}).k);
+ const bc=await B.p.evaluate(()=>(S.origin||{}).k);const BH={tt:'Tể tướng',dtq:'Đại tướng quân',thd:'Hàn lâm',td:'Lễ bộ'}[bc]||'Đại tướng quân';const p0=await A.p.evaluate(h=>tdPow(h),BH);
  await A.p.evaluate(()=>{log(kccoDo('so',{dir:'up'}))});r=await pick(B,'Sớ tiến cử',/^Đội ơn/);ok(r&&r.ok,'B accepts the sớ tiến cử ('+bc+')',r);
- ok(await until(A,p=>tdPow('Đại tướng quân')===p+BAL.kcco.so.pow,p0,20000),'host world: B\'s house power +'+'so.pow',[p0,await A.p.evaluate(()=>tdPow('Đại tướng quân'))]);
+ ok(await until(A,([p,h])=>tdPow(h)===p+BAL.kcco.so.pow,[p0,BH],20000),'host world: B\'s house power +so.pow ('+BH+')',[p0,await A.p.evaluate(h=>tdPow(h),BH)]);
+ if(process.env.THIN)ok(await until(B,([p,h])=>tdPow(h)===p+BAL.kcco.so.pow,[p0,BH],30000),'thin: both phones read the same house power at once (level 0 merges the world at the week end)',[await A.p.evaluate(h=>tdPow(h),BH),await B.p.evaluate(h=>tdPow(h),BH)]);
  /* A -> sớ hặc: target house power down (host), B's note */
  const pw=()=>A.p.evaluate(()=>CLANS.map(c=>tdPow(c)));const tg=await A.p.evaluate(()=>KCCO.acts().find(x=>x.k==='soDn')&&!KCCO.acts().find(x=>x.k==='soDn').lock);
  if(tg){const w0=await pw();await A.p.evaluate(()=>{log(kccoDo('so',{dir:'dn'}))});ok(await until(A,w0=>CLANS.some((c,i)=>tdPow(c)===Math.max(0,w0[i]-BAL.kcco.so.pow)),w0,20000),'host world: sớ hặc house power down',[w0,await pw()]);
   r=await pick(B,'Sớ hặc',/^Biết rồi/);ok(r&&r.ok,'B gets the sớ hặc note',r)}else ok(true,'sớ hặc: no other house at court (skipped)');
  /* A -> B bad rumour, B «Mặc kệ» */
  const d0=await B.p.evaluate(()=>S.danh);await A.p.evaluate(()=>{log(kccoDo('rumour',{dir:-1}))});r=await pick(B,'Lời đồn',/^Mặc kệ/);ok(r&&r.ok,'B gets the bad rumour card',r);
- ok(await B.p.evaluate(d=>S.danh===Math.max(0,d-BAL.kcco.rumour.n),d0),'B Danh down by rumour.n',[d0,await B.p.evaluate(()=>S.danh)]);
+ ok(await until(B,d=>S.danh===Math.max(0,d-BAL.kcco.rumour.n),d0,20000),'B Danh down by rumour.n',[d0,await B.p.evaluate(()=>S.danh)]);
  /* B -> A letter + gift + good rumour + sớ for A's house */
  const lt=await inv(A,'thunha');await B.p.evaluate(()=>{log(kccoDo('letter'))});r=await pick(A,'Thư hảo hữu',/^Đọc thư, cất/);ok(r&&r.ok,'A gets B\'s letter',r);ok(await inv(A,'thunha')===lt+1,'A holds B\'s letter');
- ok(await until(B,()=>(S.kcco.out||[]).some(m=>m.kind==='letter'&&m.ans==='keep'),null,20000),'B gets A\'s answer (letter kept)');
+ ok(await until(B,()=>(S.kcco.out||[]).some(m=>m.kind==='letter'&&m.ans==='keep')||[...document.querySelectorAll('#log *,.klog *')].some(e=>/đã nhận thư của ngươi/.test(e.textContent||''))||JSON.stringify(S.logs||[]).includes('đã nhận thư của ngươi'),null,20000),'B gets A\'s answer (letter kept: out status, or her log line at thin)');
  await B.p.evaluate(()=>{S.inv.push({k:'huongtram',from:'test'});kccoDo('gift',{ix:S.inv.length-1});S.kcco.out[0].due=S.turn});const hA=await inv(A,'huongtram');
  r=await pick(A,'Quà hảo hữu',/^Nhận$/);ok(r&&r.ok,'A takes B\'s gift',r);ok(await inv(A,'huongtram')===hA+1,'B\'s item is in A\'s chest');
  const k0=await A.p.evaluate(()=>S.kld||0);await B.p.evaluate(()=>{log(kccoDo('rumour',{dir:1}))});r=await pick(A,'Lời đồn',/^Biết rồi/);ok(r&&r.ok,'A gets the good rumour',r);
- ok(await A.p.evaluate(k=>(S.kld||0)===Math.max(0,k-BAL.kcco.rumour.n),k0),'A Lời đồn down by rumour.n');
+ ok(await until(A,k=>(S.kld||0)===Math.max(0,k-BAL.kcco.rumour.n),k0,20000),'A Lời đồn down by rumour.n');
  const q0=await A.p.evaluate(()=>tdPow('Tể tướng'));await B.p.evaluate(()=>{log(kccoDo('so',{dir:'up'}))});r=await pick(A,'Sớ tiến cử',/^Đội ơn/);ok(r&&r.ok,'A accepts B\'s sớ for her house',r);
  ok(await until(A,p=>tdPow('Tể tướng')===p+BAL.kcco.so.pow,q0,25000),'guest ans -> host world: A\'s house power +so.pow',[q0,await A.p.evaluate(()=>tdPow('Tể tướng'))]);
+ /* review r1: B -> A gift RETURNED (law 6c both ways: the item comes back to B once, never doubled, never lost) */
+ const bb0=await inv(B,'khantay');await B.p.evaluate(()=>{S.kcco.last.gift=-1;S.inv.push({k:'khantay',from:'test'});kccoDo('gift',{ix:S.inv.length-1});S.kcco.out[0].due=S.turn});
+ r=await pick(A,'Quà hảo hữu',/^Trả lại quà/);ok(r&&r.ok,'A returns B\'s gift',r);
+ ok(await until(B,n=>(S.inv||[]).filter(e=>e.k==='khantay').length===n+1,bb0,20000),'the returned item is back in B\'s chest (once)',[bb0,await inv(B,'khantay')]);
  await shot(A,'11-home-after');await shot(B,'11-palace-after');
  /* a merged week keeps everything */
  const ia=await inv(A,'huongtram'),ib=await inv(B,'tuithom');
  {const wk=(await C(A)).week;await weekBoth(A,B,1);for(const o of [A,B])ok(await untilC(o,x=>__co().week===x+1,wk,90000),'merged week: '+o.name+' advanced')}
  await clear(A);await clear(B);
  ok(await inv(A,'huongtram')===ia&&await inv(B,'tuithom')===ib,'moved items survive the merged week',[ia,ib]);
+ if(process.env.THIN){/* review r1: the guest's phone and the host's stored copy of her read the same numbers */
+  await sleep(3000);const hb=await A.p.evaluate(()=>{const TH=COOPW.thin;let o=null;TH.withSeat('b',()=>{o={danh:S.danh,inv:(S.inv||[]).map(e=>e.k).sort().join(),rl:(S.rl||{})[901]||0,log:(S.kcco&&S.kcco.log||[]).length}});return o});
+  const gb=await B.p.evaluate(()=>({danh:S.danh,inv:(S.inv||[]).map(e=>e.k).sort().join(),rl:(S.rl||{})[901]||0,log:(S.kcco&&S.kcco.log||[]).length}));
+  ok(JSON.stringify(hb)===JSON.stringify(gb),'thin: guest phone == host copy of her (Danh, chest, tình hảo hữu, log)',{host:hb,guest:gb});
+  ok(await inv(B,'khantay')===bb0+1,'thin: B\'s returned gift still once after the merged week',[bb0,await inv(B,'khantay')])}
  const la=await flog(A),lb=await flog(B);ok(la.length>=4&&lb.length>=4,'both kcco logs survive the merged week',[la.length,lb.length]);
  /* join: A passes the tuyển tú; B (made a chủ vị for the test) asks for her as a side-hall resident */
- await B.p.evaluate(()=>{S.rank=Math.max(S.rank,PAL_HEAD)});
+ await B.p.evaluate(()=>{S.rank=Math.max(S.rank,PAL_HEAD)});if(process.env.THIN)await A.p.evaluate(()=>{COOPW.thin.withSeat('b',()=>{S.rank=Math.max(S.rank,PAL_HEAD)})});
  const ent=await A.p.evaluate(()=>{if(!isKc())return{skip:S.kc&&S.kc.end};for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}if(!isKc())return{skip:'ended'};S.kc.soOk=1;S.kc.tt={early:false,raw:5};kcEnter(1);return{kc:isKc(),rank:S.rank}});
  if(!ent.skip){ok(!ent.kc,'A entered the palace',ent);await shot(B,'12-join-card');
-  r=await pick(B,'Đón hảo hữu',/^Xin ban nàng/,true);ok(r&&r.ok,'B asks for A as a side-hall resident',r);
+  /* at thin level >= 4 her card's choice runs on the host (part D): the forced roll must be the host's too */
+  if(process.env.THIN)await A.p.evaluate(()=>{window.__r0=roll;roll=()=>true});
+  r=await pick(B,'Đón hảo hữu',/^Xin ban nàng/,true);if(process.env.THIN){await sleep(3000);await A.p.evaluate(()=>{roll=window.__r0})}ok(r&&r.ok,'B asks for A as a side-hall resident',r);
   ok(await until(A,()=>S.resHead===902,null,20000),'A lives in B\'s palace (resHead = B)',await A.p.evaluate(()=>S.resHead))}
  else ok(true,'join skipped: '+ent.skip);
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
