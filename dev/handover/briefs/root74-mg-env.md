@@ -1,0 +1,7 @@
+PRIORITY #1 CHECK: OD 20/11 ~06:55Z (owner bug, relayed by ROOT-73) | main j92.js:441 kg92Groom env.zw, j92:463 KG82_ENG.groom | review/* none (mg-back touches j92 give-up only — merge it if it lands first) | claims none
+# mg-env — OWNER BUG fast lane (sonnet), MAIN ROOT-74
+Read briefs/root74-common.md first, in full.
+Owner bug (OD 20/11 ~06:55Z, screenshot): Thử tay «Chải chuốt» shows NO green «đúng phẩm» zone.
+Root cause (ROOT-73 check): j92.js:441 kg92Groom uses env.zw; the generic kg82Play path (Thử tay etc., KG82_ENG.groom=kg92Groom, j92:463) passes no zw → lo/hi NaN → zones not drawn.
+BUILD: (1) when env.zw is missing use the same width the real caller uses (wdGroomW(S) or its BAL source — ONE CORE, no typed number). (2) WHOLE GROUP (law 11): scan EVERY KG82_ENG engine for env fields that only some callers pass; each missing field gets the same BAL-based default the main caller uses. Scan script + table: engine | env fields read | passed by kg82Play? | default added. (3) Test dev/test/mg-env.js: every kind started through the generic kg82Play/Thử tay path draws its target/zone (no NaN in engine state, canvas zone drawn); + mg-ready-guide + ag-mgcal + quickcheck incl. old save; Fold 755x1000 + iPad 1180x820 shots of Chải chuốt LOOKED. Do NOT touch tap highlight/touch fx (mg-visual) nor in-play text (mg-noword-a/b).
+Branch review/mg-env from newest origin/main. SMALL. Report dev/handover/reports/mg-env.md, then "SẴN SÀNG KIỂM mg-env <sha>" to MAIN ROOT-74.

@@ -1,0 +1,6 @@
+PRIORITY #1 CHECK: OD 20/11 ~06:30Z (owner screenshot, verbatim in OD) | main j3/j14/j15/j2/j10 caption sites | review/fig-label e9f34064 | claims fig-label K3uCShUk
+# REVIEW fig-label (SMALL, sonnet) — MAIN ROOT-74
+Read briefs/root74-common.md (all), START_REVIEWER.md, topic kit-ui.md, KIT.md caption part, VANPHONG.md, the brief briefs/root74-fig-label.md and report reports/fig-label.md.
+Owner: "Cái chỗ này nè, vừa hiện là cung nữ tam đẳng, rồi vừa hiện là cung nữ thân tín. Dài dòng quá không? Bây giờ mình chọn một thứ một thôi. Có thể là cung nữ thân tín tam đẳng chẳng hạn."
+CHECK: one merged title «Cung nữ thân tín tam đẳng» + name alone under the maid figure (like «Đáp ứng / Hạ Lăng Vân»); WHOLE GROUP — every person caption/card/list with role+rank uses ONE kit helper, no role word twice anywhere (run the worker's scan + your own grep); rank from SRK/BAL, not typed; fits Fold 755x1000 + iPad 1180x820 (LOOK at home stage, servants list, a card); old save loads; quickcheck. If PASS: final-merge newest origin/main (eb056f7b or newer) on review/fig-label-rv (rebuild index/sw), rerun tests, FF-check.
+VERDICT: reports/rv-fig-label.md; CLAIMS row; send_message MAIN ROOT-74 session_01Rc5AsLW7a12BUC5kZhtsTy "PASS <final sha>" or "FAIL <sha> <n fixes>" (fixes to worker K3uCShUk).
