@@ -1,0 +1,5 @@
+# ROOT-77 reviewer brief — kit-modal-spin (SMALL kit) — sonnet
+PRIORITY #1 CHECK: GAP KP18/KP16/KP06 | main kitModal j79/jk4, KIT_ACT_CATS j79, jph picWait | review/kit-modal-spin 5a3cc86a (keeper MtjP4KTg) | claims keeper row
+READ: dev/handover/briefs/root77-common.md (all laws) + START_REVIEWER.md, report reports/kit-modal-spin.md, KIT.md §8.3 / §59.2 / §6.1.
+REVIEW review/kit-modal-spin 5a3cc86a: KP18 kitModal above #title everywhere (per-place patches removed, in-game unchanged); KP16 kitSpin one kit part (stops under Gọn / reduced motion), the picture-wait dialog uses it; KP06 «Y dược» group: check the 15 moved acts table (no wrong moves, «Hầu thuốc» stays Hầu hạ), art loads. Consistency scan of each part across places. Tests: dev/test/kit-modal-spin.js Fold 755x1000 + iPad 1180x820, quickcheck (golive.sh check part), LOOK at shots.
+VERDICT: merge LIVE origin/main (f43efc71 or newer) into review/kit-modal-spin-rv, rerun, push; report reports/rv-kit-modal-spin.md; send MAIN ROOT-77 session_01Rc5AsKMDkP7nYjtmjLP5tq "PASS <full sha>" or "FAIL <sha> + list".
