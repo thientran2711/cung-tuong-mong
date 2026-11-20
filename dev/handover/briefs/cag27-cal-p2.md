@@ -20,13 +20,18 @@ tho 8.7/7.1 · theu 9.7/9.9 · ban 9.1/9.3 · dauho 1.1/1.7 · tat 4.9/6.1 · ne
 "Còn cái vấn đề mà chỉnh độ khó đó, bây giờ vậy nè, thật ra mà nói giữa một đứa bé 7 tuổi và một người 35 tuổi cũng khó mà nói được người đó chơi game giỏi hay là như thế nào lắm. Bởi vì con nít ngày nay á, tụi nó chơi game rất là hay, hiểu không? Còn tôi, thứ nhất tôi lớn tuổi hơn, cái phản xạ của tôi chậm hơn chẳng hạn. Mình cần phải có một cái sự khách quan, chứ không phải là cứ nhỏ tuổi hơn mà làm bằng tôi thì có nghĩa là cái game đó quá dễ, cũng không phải vậy. Phải phân tích cho nó rõ và cho nó kỹ."
 → NO simple "child ≈ adult ⇒ too easy". OBJECTIVE analysis per kind.
 
-## JOB (per kind, in this order)
-(1) SKILL TYPE the kind really tests, from its engine code: reflex/timing, fine hand control, pattern/memory, strategy/knowledge, patience (one or a mix, with weights).
-(2) REAL-WORLD EVIDENCE (law 8, expert/research FIRST): how a 7-year-old of today (plays games a lot) vs a 35-year-old adult perform in that skill type — reaction time, motor control, working memory, strategy, patience; cite sources (WebSearch extended allowed). Write this section before any verdict.
-(3) NOISE of one 5-round try for each of them (score spread from the engine / bot sim with dev/measure/mg-bots.js): how far apart must two scores be to mean anything.
-(4) Only then VERDICT per kind (too easy / fair / too hard / broken) with the reasons written out, + her REAL level per kind (what BAL.ag.mg2.cal.k should hold), + any BAL knob change proposed (before/after, bot-checked; law 4 one core, law 5 harder as she climbs).
-Đầu hồ (dauho): ROOT-74 runs a separate fast-lane fix for "unplayable". Do NOT propose or touch aim knobs of dauho without coordinating through C-AG #27 → ROOT-74; analyse it, mark the overlap.
-Write it all to dev/handover/reports/cal-p2.md (handover branch). PROPOSAL ONLY: nothing lands without the owner's OK (via MAIN ROOT-74). Draft BAL changes may sit on review/cal-p2 only if asked later. No new features (law 18).
+## OWNER WORDS (verbatim, 20/11 ~05:50Z) — canon overwrite: HER score is the yardstick
+"Tức là vậy nè, cái điểm nào mà tôi đang chơi ở mức 9 chấm mấy, tức là tôi chơi được á, thì có nghĩa là tôi cũng muốn vô trong game là tôi chơi cũng được như vậy, những cái trò chơi đó, hiểu không? Chứ chơi mà chơi khó quá và thua nó sẽ rất là nản, bạn hiểu không? Bây giờ mình phải đưa ra những cái mốc nào đã ok rồi thì không cần chỉnh sửa, những cái game nào mà nó khó quá, điểm thấp quá là phải chỉnh sửa lại chẳng hạn."
+MARKS (her first tries): ≥ 8 = OK, KEEP as is (co 9.7, theu 9.7, doden 9.9, ve 9.5, doi 9.1, ban 9.1, tho 8.7, dan 8.3, hat 8.1); 7–8 = OK, light look only (hoa 7.9, kim 7.7); < 7 = TOO HARD → FIX (ne 4.1, huong 4.5, tat 4.9, banh 6.1, mua 6.3; dauho 1.1 = ROOT-74 fast lane). Kingston's numbers = side note only. The 14 untested kinds follow the same marks later.
+
+## JOB
+For each FIX kind (ne, huong, tat, banh, mua; dauho analysed only):
+(1) SKILL TYPE from the engine (reflex/timing, fine hand, pattern/memory, strategy/knowledge, patience) = the WHY of the fix (incl. age: an adult's slower reflex weighs on reflex/timing kinds; brief research with sources, law 8).
+(2) NOISE of one 5-round try (bot sim, dev/measure/mg-bots.js).
+(3) PROPOSED BAL knob change (before/after numbers; law 4 one core; law 5 still harder as she climbs) that should let her land ≈ 8 on a re-test (re-test of fixed kinds allowed: old board was too hard) — bot-checked against her current level.
+For hoa/kim: a short "light look" note (keep unless something is clearly off). For ≥ 8 kinds: confirm keep, no change.
+Đầu hồ (dauho): ROOT-74 runs a separate fast-lane fix for "unplayable". Do NOT propose or touch dauho aim knobs; note any overlap for C-AG #27 → ROOT-74.
+Write it all to dev/handover/reports/cal-p2.md (handover branch). PROPOSAL ONLY: nothing lands without the owner's OK (via MAIN ROOT-74). No new features (law 18).
 
 ## RULES
 - Push only to review/cal-p2; never main; no PR. Commit messages English, with the attribution lines your system gives.
