@@ -77,3 +77,4 @@ cell, same family as `kitResultSeal`. When it lands, jmgid `mgIdRow` swaps the l
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
 | 20/11 | wk map-places | **place-nth** (Ngự thiện phòng: cooking pot / chopsticks over a bowl) and **place-pd** (Phật đường: lotus + incense) kit glyphs, 128 px webp, same style as place-ttp | KIT_PLACE_IC (jact.js) nth/pd; today stand-ins `suc` / `duc` | Foreman C art / kit keeper | OPEN |
+| 20/11 | E22t (FOREMAN E #19) | **«quý nhau» entry in the kit word/hint map** (jk2b:234/:253): decline rows must show the liking loss instead of «Tốn: không» (hidden -3 liking); also hits LIVE receiver-choice jrcv:84 | person-minigame-acts-c, receiver-choice | MAIN kit keeper | OPEN |
