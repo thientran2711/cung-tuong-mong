@@ -99,3 +99,24 @@ Credits used: 0.
   "Công chúa (Tinh nghịch)") · face crop face_page/faces/c09.jpg (crop.py on the new cut, looked) · ledger OWNER-OK line · LOOK_GROUPS.md line. No CDN step (F3's s44 had none).
 - NOT touched: dev/art/earring-test/anchors.json + EAR1.md still use the old cut xSBWFuTjfW (c09, one ear picture-left) → EAR1 refits. The new picture
   also shows one ear on the picture's left, bare. face_page/ASSETS_L703.json + face_tick.html (old L703 page) also still list the old cut, same as s44 (F3 didn't update them).
+
+## s62–s65 DRAWN (owner GO "Vẽ" Lượt 1045) ~07:15Z
+- Roots now marked "chosen-in-band … owner GO Lượt 1045" in s_root_colours.json (no longer placeholder). Gate PASS ×4. gpt-2-6 1024x2304 2k seed 7172, ref eIyOFEidqL, 1 try each.
+  | id | gen | cut | credits |
+  |---|---|---|---|
+  | s62 Dịu dàng | ov6PVaf829 | nVsrRMPYQD | 138 |
+  | s63 Dịu dàng | s7IX5y2l8e | kseVFSr16B | 138 |
+  | s64 Dịu dàng | s7IX54Gl8e | JNChlRROq4 | 138 |
+  | s65 Đoan trang | jUoeq99LD0 | jUoe5yJLD0 | 138 |
+  4 × 138 = 552 cr. F4 total 690 (with c09).
+- Sheet: dev/handover/review-sheets/new-faces-v4/new_s62_65_F4.jpg (make_sheet_new_s62_65.py): big labels "sNN · group · MẶT MỚI · thử khuôn", full figure + face zoom + root swatches.
+- LOOKED (full figure, face zooms, hand zooms): eyes level, mouths closed, no teeth, no forehead mark, ears covered by hair → no earring visible on any,
+  hands 5 fingers, no Qing headdress, outfit = the two root colours on all 4; s62 braid + ONE jasmine flower, wind chime brass bells + red cord in one hand;
+  s63 half-up loop + jade pin, brown rabbit cradled; s64 half-up pearl-wrapped top-knot, loquats held; s65 half-up neat loop + gold pearl pin, prayer beads.
+- Faults (not fixed, L777):
+  1. s62, s63, s64 faces look much alike (same seed 7172 + ref; the Dịu dàng block wording is shared) — the face swaps are subtle.
+  2. s64 loquats carry green LEAVES (prompt: "short bare twig") → small third colour.
+  3. s63 amber reads warm tan-brown; the brown rabbit nearly merges with the robe (flagged before).
+  4. s65 hair: one gold pin visible (prompt: a pair); top looks like a small bun more than a loop.
+  5. s64 lilac reads clearly lilac (more colour than "smoke lilac" #ECE2FE suggests).
+- FACE_CUTS / FACE_MAP NOT wired (owner OK pending).
