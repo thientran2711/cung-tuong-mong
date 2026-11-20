@@ -1,5 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
+last wake: 20/11 22:22Z — FOREMAN D #12 session_01964izBwRw7YgvQWHVn4wG2 (hourly; deadline ETA list)
 last wake: 20/11 21:20Z — FOREMAN D #12 session_01964izBwRw7YgvQWHVn4wG2 (hourly)
 last wake: 20/11 20:20Z — FOREMAN D #12 session_01964izBwRw7YgvQWHVn4wG2 (pickup)
 last wake: 20/11 20:17Z — FOREMAN D #11 ROLLING OVER → D #12 (see HANDOVER D #11 → D #12 at the end)
@@ -428,3 +429,13 @@ Hourly wake: D #11's send_later trig_01B4Qtz99jDbmqYCNDyu3h8G (~20:37Z) fires in
 - (20/11 21:30Z) FROM MAIN ROOT-81: LIVE now 548dcd0d (E road-triggers r2). DEADLINE reminder: per-job ETA list in this file now (owner wants all non-UI features 100 % by 21/11 ~20:00Z); items that cannot make it → say so.
 - (20/11 21:35Z) FROM MAIN (ROOT-79 relay): OWNER restated (OD line 'Co-op: helping/harming…' rewritten in place, verbatim): every feature must work in BOTH solo and 2-player co-op. LAND GATE now: no LAND READY without coop-e2e PASS + the feature's own co-op check (both seats see/do it, two-way). Reviewers FAIL solo-only features.
 - (20/11 21:45Z) FROM MAIN ROOT-81: CO-OP LAND GATE (owner ~21:30Z, verbatim in OD): every LAND READY must state 'coop-e2e PASS' + the feature's own co-op check on both seats (solo AND 2 players), run by your reviewer; main lands nothing without it. B: coop-thin-g + coop-host-lag are top of the deadline list.
+- (20/11 22:22Z, hourly, D #12) LIVE 548dcd0d. Noted FROM MAIN: OWNER DEADLINE all non-UI features LIVE by 21/11 ~20:00Z; CO-OP LAND GATE (coop-e2e PASS + the feature's own co-op check on both seats, solo AND 2 players, run by the reviewer) — relayed to every D seat with a land in front of it.
+  **FOR MAIN ROOT-81 — D PER-JOB ETA (deadline 21/11 ~20:00Z):**
+  1. jagday-walk-rv (+ walk-cost-rv2): JAGDAY-WALK #3 FxPbxKJ fixing ROUND 4 FAIL 1 → SSK ~21/11 01:00Z → reviewer CAkPLwbF re-gate (+co-op check) → **LAND READY ~03:00Z**. ON TRACK.
+  2. night-final-r3 (+ balance-core-r3 + giữ chân + môn ưa): chain #5 E3179UkN final ×10 + studying-bot measure → SSK ~01:00Z → BIG reviewer (GMDXZAV9, has bot tools) → **LAND READY ~05:00Z**. ON TRACK (risk: measure shows HH ≪ 32 % → a §7-keeping knob + re-run, +3 h, still before 20:00Z).
+  3. balance-final 40775131: after night-final LIVE → reviewer E9Hd8tHX re-merge + re-measure → **LAND READY ~10:00Z**. ON TRACK if (2) lands by ~06:00Z.
+  4. j75 rivalNight hầu-thay GAP (law 1): **RIVAL HAUTHAY #1 = session_01964izDuRCG31a2ffq84NH7** (opus, opened now on review/rival-hauthay from night-final-r3; claim row in CLAIMS) → SSK ~04:00Z → BIG reviewer → **LAND READY ~08:00Z** (after night-final). ON TRACK.
+  5. EMO BALANCE (EM01) FYgpKE1Q: OFF arm n=145 done 18:00Z, ON arm running; ETA asked from the seat → I post it next wake. AT RISK until it answers.
+  6. ECON TAMCO (OR21) c45265d6: code SSK, **BLOCKED on MAIN kit keeper** (KIT_REQUESTS L85: option-card «Tốn» row must show a cost the fx does not pay — Tâm cơ / scheme price on «Làm như thường»). **CANNOT make 20:00Z unless the kit part is KIT READY by ~21/11 12:00Z** (then reviewer CjH2dKcm + co-op check ~4 h). Please put it on the kit keeper now.
+  7. cal-p2c follow-up N1 (jentry kg82NpcMean → mgSkipRaw): small; bundled into balance-final re-merge (E9Hd8tHX) unless you say otherwise.
+  Load: 4 working (JW #3, chain #5, emo, rival-hauthay #1), 6 idle-waiting (reviewers CAkPLwbF / GMDXZAV9 / E9Hd8tHX / CjH2dKcm, lander EaTxKjoN, econ worker CzXkfovc). Context D #12 ≈ 13 % (est.) < 32 %. Next wake ~23:22Z.
