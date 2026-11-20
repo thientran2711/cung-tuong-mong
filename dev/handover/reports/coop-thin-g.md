@@ -282,3 +282,7 @@ Earlier (#6/#7, same code): ow seeds 1–10 PASS, gup 16/16, b/bs e/es f1/f1s f2
 - FOR MAIN: deploy the Worker with THINMAX 13 at landing.
 
 **SẴN SÀNG KIỂM review/coop-thin-g @ 7fcae66b** (origin/main 24dd2c62 merged).
+
+## coop-thin-f6b-r2 (Foreman B ROOT-3 ask 11/20: LAND BLOCKED F5..F6b 26f36042 vs LIVE kgDefer) — ONE BRANCH with G
+review/coop-thin-g @ 7fcae66b already CONTAINS review/coop-thin-f6b-r1 26f36042 (merged in #2 @0891e223) AND origin/main 24dd2c62 (git merge-base --is-ancestor both true). The kgDefer vs F6b host-run named-ends conflict was resolved in #5 d476d3b9 keeping BOTH (main's deferred charge wrapped around the split game part: j23 lessonMode, j83 wkPractice, jrcp teacher lesson, jveil vlCraftRun, jsgame sgServ, jtoil toilFinShow; in her context on the host the captured game opens nothing → kgDefer charges at once). kgDefer count per file = main's (j23 2, j83 2, jrcp 2, jveil 3, jsgame 3, jtoil 0). Lanes on 7fcae66b cover F5..F6b: f3s 37/37, f4s 18/18, f5s 30/30 + #6/#7 f6/f6s f6b/f6bs PASS, mg-back 755x1000 + 1180x820 12/12 (#5), quickcheck PASS. → land F5..F6b + G together from review/coop-thin-g (no separate -r2 branch); BIG re-review on 7fcae66b.
+Merge note: review/coop-guest-agent (b7648b65) conflicts in jagent.js 27–28 (ours agGuest→coopGuest, theirs agLive/agOn/agSelf): whoever lands second keeps both, reruns g4 / g4s / cycs.
