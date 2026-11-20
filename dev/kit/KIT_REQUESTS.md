@@ -102,3 +102,10 @@ KIT FIRST: the worker draws nothing. Data is ready in jshelf.js `shelfView(p)` �
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
 | 19/11 | E18b kyngo-daily | **kaSent class precedence** (j63.js:18): today a value's MEANING (kcls: KRED words) wins over its explicit kit class `<span class="g">`; an item NAME holding a bad-sounding word (e.g. «Son phần giáng», key lxson2) under «thành:» is shown under TỐN / MẤT. Ask: an explicit class g/r set by the writer wins over kcls (or kcls ignores text inside `<b>` item names). Family: every option line that prints an item name (shops, gifts, lost pieces, Nội vụ phủ). | jky.js specW worked around (names no piece on the option line) | MAIN kit keeper | OPEN |
+
+
+## mg-noword-b (worker, 20/11) — painted signs wanted for mini-game play (no word in play, owner OD 20/11 ~05:10Z)
+Group b play areas now use plain inline SVG / glyph signs from dev/build/jnwb.js (NWB) so nothing blocks; painted versions would replace them in ONE place (NWB.P):
+- icon-hint (lamp / «?» seal), icon-done (check seal), icon-voice (td_ngon Thưa hold button), icon-rotl / icon-rotr (hoa điền tilt), icon-shield (duho Hộ giá),
+- icon-bowl (Hạnh pool), person signs elder / child / sick / adult (td_hanh row), pips (filled / empty dot) — all in the kit stroke style.
+Rule sentences stay on the rules screen only; the frame «Cách chơi» row is hidden while a game runs (#kg82.kg-run .kghow).
