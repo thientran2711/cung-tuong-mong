@@ -23,6 +23,13 @@ def VAI(band,coll="the plum outer crossed collar STARTS AT THE SHOULDERS: its tw
 CC="the crossed collars begin"
 CC6="the crossed collars START AT THE SHOULDERS: their edges begin"
 YB="a broad royal yellow pearl-edged band"
+    return ("COLLAR FROM THE SHOULDERS: a real opaque pink inner top with a straight "
+            "HORIZONTAL neckline across the upper chest, edged by "+band+", covers the whole chest; "+coll+
+            " at the OUTER shoulder points, never at the neck, and cross LOW at the sash, framing it; "
+            "neck and collarbones visible above it; no cleavage, no sheer chest layer"+tail)
+CC="the crossed collars begin"
+CC6="the crossed collars START AT THE SHOULDERS: their edges begin"
+YB="a broad flat royal yellow pearl-edged band"
 J={
  4:('s62_t4_HAN_BAC_gon2.txt',[
    ("the crossed collars of BOTH robes open WIDE: the lapels sweep out toward the edge of the SHOULDERS and meet low at the chest in a broad V, showing her neck and collarbones fully but modestly (never narrow near the neck, never a tight high crossing), the pink inner collar showing as a wide layered edge inside the plum outer collar, never a straight horizontal inner top or band across the chest;",
