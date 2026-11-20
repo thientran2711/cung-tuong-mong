@@ -102,3 +102,6 @@ KIT FIRST: the worker draws nothing. Data is ready in jshelf.js `shelfView(p)` �
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
 | 19/11 | E18b kyngo-daily | **kaSent class precedence** (j63.js:18): today a value's MEANING (kcls: KRED words) wins over its explicit kit class `<span class="g">`; an item NAME holding a bad-sounding word (e.g. «Son phần giáng», key lxson2) under «thành:» is shown under TỐN / MẤT. Ask: an explicit class g/r set by the writer wins over kcls (or kcls ignores text inside `<b>` item names). Family: every option line that prints an item name (shops, gifts, lost pieces, Nội vụ phủ). | jky.js specW worked around (names no piece on the option line) | MAIN kit keeper | OPEN |
+
+## KR home-stat cost row (review/home-chapters, E25, 20/11)
+The act/option card model shows «Tốn: không» for a home-road cost in Hồi môn (`khm`; also `kgt` Gia thanh, `kap` Áp lực hôn sự, `kld` Lời đồn) although `fx` / the j67 line carry it (example: E28 «Dâng phần hồi môn để cha lo lót», fx {khm:-40}). Please let the kit cost/gain rows render these home stats (NAMES has kgt/kap/khm via jkc.js:44). Not a gate for home-chapters; the cost is applied correctly and printed on the result card.
