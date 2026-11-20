@@ -587,3 +587,4 @@ NEWACCT#2 ~18:40Z: TANG1 Job A DONE 77bb3d9 (405 cr; t4 KLpIv3dkqp t5 4RF1Lym9Aa
 NEWACCT#2 ~18:45Z: OWNER: 'bậc tần tao đã trả về cổ áo trước đó, không còn vuông như 3 bậc dưới nữa' → Tần neckline back to pre-G22 collar (all seasons). ITEMFIX: builder revert t4 (0 cr). WINTER1 told to use old collar if not fired.
 NEWACCT#2 ~18:50Z: WINTER1 fur v2 DONE 06a82bb (VX7Nn0OMMU, square neck — fired before revert; G26 v2 sentence) LOOKED + sent Lượt 1198. WINTER1 total 1 215 cr.
 NEWACCT#2 ~18:55Z: OWNER: Tang+current hybrid (TANG1 Job A) DROPPED, don't resend; inspiration: Tang-era drama open necks + Three Kingdoms open necks → TANG1 reworking plan (full Tang w/ chest-band ladder + Han/Three Kingdoms option), no gens.
+NEWACCT#2 ~19:00Z: OWNER: fur width ladder t1–t3 = v2, t4–t6 wider, t7–t8 widest; sample 1 Tần → WINTER1 (135 cr, pre-G22 collar). TANG1 plan v3 (T full Tang / H Han) sent Lượt 1201, waiting pick.
