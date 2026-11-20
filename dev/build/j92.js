@@ -438,7 +438,7 @@ if(typeof wrapR==="function"){wrapR("wdAutoUI",()=>"Tự chọn đồ");wrapR("w
 function wdGroomW(p){const tai=(p.tai||0)/WD.groomTai;let art=0;try{art=WD.groomArt*Math.max(kg82Lv(p,"hoa")||0,kg82Lv(p,"theu")||0)}catch(e){}
  return Math.min(WD.groomMax,WD.groomBase+tai+art+(wdMama(p)?WD.groomMama:0))}
 const KG92={last:null};window.KG92=KG92;
-function kg92Groom(box,env){const C=kg82Canvas(box,.62,320),{g,W,H}=C;const w=env.zw;const lo=.5-w/2,hi=.5+w/2;const STEPS=["Cài trâm","Chọn áo","Điểm trang"];
+function kg92Groom(box,env){const C=kg82Canvas(box,.62,320),{g,W,H}=C;const w=env.zw!=null?env.zw:wdGroomW(typeof S!=="undefined"&&S&&!S.dead?S:{});/* mg-env: generic kg82Play / Thử tay passes no zw → same ONE width the real round uses (wdGroomW, WD.groom* only) */const lo=.5-w/2,hi=.5+w/2;const STEPS=["Cài trâm","Chọn áo","Điểm trang"];
  let k=0,stop=false,raf=0,t0=performance.now(),T0=t0,marks=[];const pops=[];const LIM=WD.groomSec*1000;const x0=W*.08,x1=W*.92,by=H*.52;
  const pos=now=>{const sp=.0016+k*.0006;return .5+.5*Math.sin((now-t0)*sp+k*1.7)};
  function draw(now){kg82Silk(g,W,H,"#f6ead6","#ead6b4");const bw=x1-x0;
