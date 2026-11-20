@@ -37,7 +37,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    /* the guest lands at the due khắc while she is out; the walk home costs travel(place,home) like every walk (walk-cost, OD L1976) */
    r.dest=dest;r.th=travel(S.place,"home");r.last=PT.stat.iwLast?Object.assign({},PT.stat.iwLast):null;goTo("home");Q.length=0;
    r.t3=used;r.left=S.invW.length===0;r.whereHome=S.where[v.id];r.atHome=curPeople().some(p=>p.ref===v);r.dRel=relOf(v)-a0;r.loss=LOSS.slice();
-   const e=S.roster&&S.roster.P["v"+v.id];r.row=e?e[Math.min(e.length-1,j95kh())]:null;r.note=(S.logs||[]).slice(0,4).map(x=>String(x).replace(/<[^>]*>/g,"")).join(" | ");return r};
+   const e=S.roster&&S.roster.P["v"+v.id];r.row=e?e[Math.min(e.length-1,j95kh())]:null;r.note=(S.logs||[]).slice(0,8)/* jagday-walk r2: witness / encounter cards on her walk home can log 3–4 lines after the notice */.map(x=>String(x).replace(/<[^>]*>/g,"")).join(" | ");return r};
   /* force the khắc-4 draw: 0 → stay, 99 → leave */
   const d0=iwDraw;
   iwDraw=()=>0;BAL.invite.wait.o=100;o.B=run(null,1);
