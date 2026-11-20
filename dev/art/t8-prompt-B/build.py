@@ -154,7 +154,7 @@ _HK={"rfan":"rfan","ffan":"ffan","mirror":"mirror","ball":"dangle","slant":"lant
 "hoop":"hoop","speony":"sprig","pipa":"two","parasol":"one","sceptre":"one","sealbox":"box","edict":"scroll","vase":"vase","pbook":"book","pscroll":"scroll",
 "combbox":"box","plant":"lantern","gobox":"box","pend":"dangle","ruyi":"ruyi","hot":"two","incbox":"box","casket":"box","hanky":"kerchief","orchid":"two",
 "powder":"box","hcomb":"one","beads":"dangle","censer":"one","jseal":"two","sutra":"book","warmer":"two","brush":"one","iball":"dangle","whisk":"one",
-"album":"book","pouch":"dangle","coral":"stand","staff":"one","peach":"two","almanac":"book","pastebox":"box","pine":"scroll","hballs":"two","chrys":"sprig","bell":"dangle",
+"album":"book","pouch":"dangle","coral":"stand","staff":"one","plaque":"two","almanac":"book","pastebox":"box","pine":"scroll","hballs":"two","chrys":"sprig","bell":"dangle",
 "p_sprig":"sprig","p_plum":"sprig","p_wbask":"basket","p_flute":"flute","p_lant":"lantern","p_hsach":"dangle","p_mulb":"basket","p_sutra":"book","p_beads":"dangle",
 "m_lant":"lantern","m_fbask":"basket","m_beads":"dangle","m_sutra":"book","m_ledger":"book"}
 def age_item(c,tier,item,hk):
@@ -178,7 +178,7 @@ _E6_KINDS=[("box",r"\bbox\b|casket"),("censer",r"censer|incense"),("healthballs"
  ("scroll",r"scroll"),("book",r"\bbook\b|almanac"),("lantern",r"lantern"),("flute",r"flute"),("vase",r"\bvase\b"),("basket",r"basket"),
  ("sachet",r"sachet"),("beads",r"beads?\b|bead string"),("pendant",r"pendant"),("hairpin",r"hairpin"),("comb",r"\bcomb\b"),
  ("handkerchief",r"handkerchief"),("hoop",r"\bhoop\b"),("ball",r"\bball\b|tú cầu"),("lute",r"\bpipa\b|\blute\b"),("parasol",r"parasol"),
- ("warmer",r"hand warmer|\bwarmer\b"),("seal",r"\bseal\b"),("staff",r"\bstaff\b"),("peach",r"\bpeach\b"),("cage",r"\bcage\b|birdcage"),
+ ("warmer",r"hand warmer|\bwarmer\b"),("seal",r"\bseal\b"),("staff",r"\bstaff\b"),("plaque",r"longevity plaque"),("cage",r"\bcage\b|birdcage"),
  ("drum",r"\bdrum\b"),("kite",r"\bkite\b"),("letter",r"\bletter\b"),("brush",r"\bbrush\b"),("whisk",r"whisk"),("screen",r"\bscreen\b"),
  ("flask",r"flask"),("ruyi",r"\bruyi\b"),("sceptre",r"sceptre"),("tablet",r"tablet"),("coral",r"coral branch"),("figurine",r"statuette|jade mountain|jade crane|lingzhi|mandarin ducks"),
  ("plant",r"potted|\bpot with\b"),("flowers",r"sprig|chrysanthemums|blossoms\b"),("fish",r"wooden fish"),("bell",r"\bbell\b"),("whistle",r"whistle"),("needle",r"needle case"),("pouch",r"\bpouch\b")]   # +3 kinds for the E12 items (BW6)
@@ -359,7 +359,7 @@ ITEMS=[("a gold ruyi set with gems","one"),("an imperial phoenix-embroidered rou
 ("a small coral branch on a gold phoenix stand","box"),
 ("a sutra book bound in phoenix-embroidered imperial silk","two"),
 ("a small white-jade statuette of Guanyin on a gold stand","two"),
-("a carved imperial-jade longevity peach on a gold stand","two"),
+("a round imperial-jade longevity plaque carved with a round shou symbol, on a gold stand","two"),
 ("a pair of imperial-jade health balls","two"),
 ("an imperial phoenix-embroidered silk ball (tú cầu) with pearl tassels","one"),
 ("a folded letter on gold-flecked imperial paper tied with a pearl cord","two"),
@@ -513,7 +513,7 @@ ITEMS7=[("a gilded hand censer","c"),("an imperial round fan with a gold filigre
 ("a hanging scroll on kingfisher silk with gold-filigree rollers","two"),
 ("a small potted orchid in a gold-filigree pot set with gems","two"),
 ("a string of imperial-jade prayer beads with a gold tassel","one"),
-("a gold-filigree longevity peach set with gems","two")]
+("a round gold-filigree longevity plaque carved with a round shou symbol, set with gems","two")]
 # E11 (owner Lượt 583/585, IT1): +15 items appended (the first 10 unchanged, same order) -> 25; {age: 5 indices}, 25 different items per rank, adjacent ranks (t1..t8, Nữ đế, Thái hậu) never share an item kind at one age. Pick: LIST[AGE_DICT[age][(n-1)%5]].
 ITEMS7_AGE={"a18": [1, 12, 6, 8, 11, 25, 26, 27], "a26": [10, 16, 13, 19, 21, 28, 29, 30], "a36": [14, 9, 2, 18, 7, 31, 32, 33], "a51": [0, 3, 4, 5, 17, 34, 35, 36], "a65": [22, 24, 23, 20, 15, 37, 38, 39]}
 GOLDEN7={"c06":0,"c25":2}
@@ -757,7 +757,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a small lacquered hand warmer in an embroidered silk cover","two"),
 ("a sutra book bound in embroidered silk","book"),
 ("a thread-bound almanac in an embroidered silk cover","book"),
-("a carved wooden longevity peach","two"),
+("a round carved wooden longevity plaque carved with a round shou symbol","two"),
 ("a string of agate prayer beads","dangle"),
 ("a fly-whisk of white horsehair with a lacquered handle","one"),
 ("a small paper kite painted like a butterfly, its string on a lacquered reel","two"),
@@ -804,7 +804,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a small silver hand censer with a silk tassel","one"),
 ("a fly-whisk of white horsehair with a silver handle","one"),
 ("a string of red-agate prayer beads with a silver tassel","dangle"),
-("a carved red-agate longevity peach","two"),
+("a round red-agate longevity plaque carved with a round shou symbol","two"),
 ("a thread-bound almanac in a silver-thread cover","book")],
 4:[("a round fan with a carved jade handle and jade tassel","rfan"),("a sandalwood folding fan with carved ribs","ffan"),("a lacquered jewel box","box"),("a scroll with jade rollers","scroll"),("a jade disc pendant on a silk cord","dangle"),("a silver-and-enamel hand mirror","mirror"),("a small cloisonné vase with flowers","vase"),("a gauze palace lantern with a jade pendant","lantern"),("a silver-mounted book box","box"),("a small white-jade vase with blossoms","vase"),
 ("a jade butterfly hairpin, held in the hand","dangle"),
@@ -820,7 +820,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a small carved-jade hand warmer in a brocade cover","two"),
 ("a small carved jade mountain on a rosewood stand","stand"),
 ("a carved jade crane on a rosewood stand","stand"),
-("a carved jade longevity peach","two"),
+("a round jade longevity plaque carved with a round shou symbol","two"),
 ("a small jade statuette of Guanyin on a stand","stand"),
 ("an embroidered silk ball (tú cầu) with small jade tassels","dangle"),
 ("a folded letter on jade-green flower paper tied with a silk cord","two"),
@@ -864,7 +864,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a calligraphy brush with a gilded sandalwood shaft","one"),
 ("a gilded hand censer inlaid with mother-of-pearl","one"),
 ("a gold-mounted fly-whisk with a fine-jade handle","one"),
-("a fine-jade longevity peach on a gilded stand","two"),
+("a round fine-jade longevity plaque carved with a round shou symbol, on a gilded stand","two"),
 ("a small potted orchid in a cloisonné pot","two"),
 ("a thread-bound almanac with gold clasps","book"),
 ("a string of gold-and-jade prayer beads","dangle")],
@@ -882,7 +882,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a white-jade hand warmer in a pearl-embroidered cover","two"),
 ("an openwork gold incense ball with pearl tassels","dangle"),
 ("a hanging scroll of pine and cranes on pearl-embroidered silk with white-jade rollers","scroll"),
-("a carved white-jade longevity peach on a gold stand","two"),
+("a round white-jade longevity plaque carved with a round shou symbol, on a gold stand","two"),
 ("a pair of white-jade health balls","two"),
 ("a pearl-embroidered silk ball (tú cầu) with jade tassels","dangle"),
 ("a folded letter on gold-flecked paper sealed with white jade","two"),
@@ -1215,7 +1215,7 @@ TH_ITEMS=[("a string of sandalwood prayer beads","one"),("a jade-headed dragon-h
 ("a small hand warmer of gilt bronze in a brocade cover","two"),
 ("an openwork gilt-bronze incense ball on a long silk tassel","one"),
 ("a fly-whisk of white horsehair with a sandalwood handle","one"),
-("a carved old-jade longevity peach","two"),
+("a round old-jade longevity plaque carved with a round shou symbol","two"),
 ("a small old-jade statuette of Guanyin on a sandalwood base","two"),
 ("a pair of old-jade health balls","two"),
 ("a small potted orchid in a dark glazed pot","two"),

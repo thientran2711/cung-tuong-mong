@@ -99,7 +99,7 @@ k("pouch","small drawstring pouch of {S}{D}","túi gấm rút dây {S}{D}",("max
 k("coral","small coral branch on a stand of {H}","cành san hô nhỏ trên đế {H}",("min",6))
 # a65 — old lady, longevity
 k("staff","walking staff of {H}{D}","gậy chống {H}{D}")
-k("peach","carved longevity peach of {H}","đào thọ chạm {H}")
+k("plaque","round longevity plaque of {H} carved with a round shou symbol","bài Thọ tròn {H} chạm chữ Thọ")   # F16 NOFRUIT (owner Lượt 1052/1054): was "peach" carved longevity peach
 k("almanac","thread-bound almanac in a cover of {S}","lịch thư đóng chỉ bìa {S}")
 k("pastebox","small lidded seal-paste box of {H}","hộp mực son nhỏ {H}")
 k("pine","hanging scroll of pine and cranes on {S}, rollers of {H}","tranh tùng hạc trên {S}, trục {H}")
@@ -110,7 +110,7 @@ k("bell","small hand bell of {H}{D}","chuông cầm tay nhỏ {H}{D}")
 k("m_lant","palace lantern of {S} on a carrying pole of {H}{D}","đèn lồng {S}, sào {H}{D}")
 k("m_robe","neatly folded robe wrapped in {S}","xấp áo gấp gọn bọc {S}")
 k("m_duster","feather duster with a handle of {H}","chổi lông gà cán {H}")
-k("m_ftray","small tray of {H} with fresh fruit","khay nhỏ {H} đựng trái cây")
+k("m_ttray","small tray of {H} with neatly folded hand towels","khay nhỏ {H} đựng khăn lau tay gấp gọn")   # F16 NOFRUIT: was m_ftray tray of fresh fruit
 k("m_fbask","flower basket of {H} for the vases{D}","giỏ hoa {H} để cắm bình{D}")
 k("m_tbask","small sewing basket of {H} with thread","giỏ chỉ khâu nhỏ {H}")
 k("m_broom","small hand broom with a handle of {H}","chổi nhỏ cán {H}")
@@ -192,9 +192,9 @@ POOL={"lady":{
  "a26":_LS+["sealbox","edict","vase","pbook","pscroll","combbox","plant","gobox","pend"],
  "a36":_LS+["ruyi","hot","incbox","casket","hanky","orchid","powder","hcomb","beads"],
  "a51":_LS+["censer","jseal","sutra","warmer","brush","iball","whisk","album","pouch","coral"],
- "a65":_LS+["staff","peach","almanac","pastebox","pine","hballs","chrys","bell"]},
+ "a65":_LS+["staff","plaque","almanac","pastebox","pine","hballs","chrys","bell"]},
 "maid":{
- "a18":_MS+["m_ftray","m_fbask","m_tbask","m_broom","m_ribbon","m_cbox","m_letter"],
+ "a18":_MS+["m_ttray","m_fbask","m_tbask","m_broom","m_ribbon","m_cbox","m_letter"],
  "a26":_MS+["m_incbox","m_ptray","m_hoop","m_bolt","m_meds","m_sewbox","m_candle"],
  "a36":_MS+["m_food","m_keys","m_umb","m_ruler","m_brocade","m_slip","m_medbox"],
  "a51":_MS+["m_abacus","m_ledger","m_beads","m_herbs","m_warmer","m_bcase","m_mend"],
@@ -233,12 +233,12 @@ k("p_lotus","{A} dried lotus seed pod on its stem","đài sen khô {A} còn cu�
 k("p_bell","small {A} iron bell on a cord","chuông sắt nhỏ {A} treo dây")
 k("p_pine","small {A} clay pot with a pine seedling","chậu đất nhỏ {A} trồng cây tùng con")
 k("p_almanac","{A} paper almanac","cuốn lịch giấy {A}")
-k("p_gourd","small {A} dried gourd on a cord","quả bầu khô nhỏ {A} treo dây")
-k("p_jujube","{A} cloth pouch of dried jujubes","túi vải {A} đựng táo tàu khô")
+k("p_amulet","{A} folded paper temple amulet on a cord","bùa giấy chùa gấp {A} treo dây")   # F16 NOFRUIT: was p_gourd dried gourd
+k("p_sole","{A} cloth shoe sole half-stitched, with needle and thread","đế giày vải {A} khâu dở, kèm kim chỉ")   # F16 NOFRUIT: was p_jujube pouch of dried jujubes
 POOL_EXTRA={"maid":{"a18":["m_mirror","m_fan","m_pinbox"],"a26":["m_flowers","m_pot","m_pattern"],"a36":["m_scissors","m_bell","m_pattern"],
  "a51":["m_inv","m_seal","m_scissors"],"a65":["m_clapper","m_pine","m_herbbag","m_inv"]},
  "poor":{"a18":["p_kite","p_pinwheel","p_mulb"],"a26":["p_rice","p_needle","p_kite"],"a36":["p_ruler","p_slips","p_lotus","p_rice"],
- "a51":["p_bell","p_pine","p_almanac","p_lotus"],"a65":["p_gourd","p_jujube","p_almanac","p_bell"]},"lady":{a:[] for a in AGES}}
+ "a51":["p_bell","p_pine","p_almanac","p_lotus"],"a65":["p_amulet","p_sole","p_almanac","p_bell"]},"lady":{a:[] for a in AGES}}
 def allowed(kind,tier):
     r=K[kind][2]; L=LEVEL[tier]
     if r is None: return True
@@ -325,14 +325,14 @@ def check():
             if pick_kind(c,a,"nude")==pick_kind(c,a,"t8"): bad.append(f"NUDE=T8 {c} {a}")
     return bad
 AGE5={"ngheo":{"a18": ["p_pinwheel", "p_wbask", "p_hemp", "p_sprig", "p_hsach"], "a26": ["p_sewb", "p_hoop", "p_mulb", "p_spindle", "p_fherbs"], "a36": ["p_lotus", "p_umb", "p_paddle", "p_rice", "p_plum"], "a51": ["p_beads", "p_sutra", "p_stick", "p_comb", "p_bundle"], "a65": ["p_yarn", "p_hanky", "p_almanac", "p_bell", "p_cane"]},
-"lanh":{"a18": ["p_bundle", "p_mulb", "p_orchid", "p_lant", "p_flute"], "a26": ["p_kite", "p_needle", "p_rice", "p_broom", "p_laundry"], "a36": ["p_ruler", "p_slips", "p_sheets", "p_fan", "p_sandals"], "a51": ["p_bell", "p_whisk", "p_lotus", "p_inc", "p_pine"], "a65": ["p_gourd", "p_comb", "p_keep", "p_chrys", "p_fish"]},
+"lanh":{"a18": ["p_bundle", "p_mulb", "p_orchid", "p_lant", "p_flute"], "a26": ["p_kite", "p_needle", "p_rice", "p_broom", "p_laundry"], "a36": ["p_ruler", "p_slips", "p_sheets", "p_fan", "p_sandals"], "a51": ["p_bell", "p_whisk", "p_lotus", "p_inc", "p_pine"], "a65": ["p_amulet", "p_comb", "p_keep", "p_chrys", "p_fish"]},
 "tm0":{"a18": ["m_pinbox", "m_letter", "m_tbask", "m_broom", "m_fan"], "a26": ["m_hoop", "m_sewbox", "m_bolt", "m_pot", "m_flowers"], "a36": ["m_umb", "m_bell", "m_keys", "m_brocade", "m_lant"], "a51": ["m_inv", "m_herbs", "m_duster", "m_bcase", "m_mend"], "a65": ["m_cane", "m_almanac", "m_clapper", "m_incst", "m_whisk"]},
 "tm1":{"a18": ["m_lant", "m_mirror", "m_cbox", "m_fbask", "m_ribbon"], "a26": ["m_incbox", "m_robe", "m_ptray", "m_meds", "m_candle"], "a36": ["m_slip", "m_duster", "m_pattern", "m_medbox", "m_ruler"], "a51": ["m_warmer", "m_abacus", "m_beads", "m_ledger", "m_seal"], "a65": ["m_herbbag", "m_chrys", "m_sutra", "m_pine", "m_inv"]},
-"tm2":{"a18": ["m_tbask", "m_pinbox", "m_letter", "m_fan", "m_ftray"], "a26": ["m_bolt", "m_flowers", "m_pot", "m_pattern", "m_sewbox"], "a36": ["m_keys", "m_umb", "m_bell", "m_food", "m_robe"], "a51": ["m_herbs", "m_inv", "m_bcase", "m_scissors", "m_duster"], "a65": ["m_whisk", "m_cane", "m_almanac", "m_fish", "m_incst"]},
+"tm2":{"a18": ["m_tbask", "m_pinbox", "m_letter", "m_fan", "m_ttray"], "a26": ["m_bolt", "m_flowers", "m_pot", "m_pattern", "m_sewbox"], "a36": ["m_keys", "m_umb", "m_bell", "m_food", "m_robe"], "a51": ["m_herbs", "m_inv", "m_bcase", "m_scissors", "m_duster"], "a65": ["m_whisk", "m_cane", "m_almanac", "m_fish", "m_incst"]},
 "tm3":{"a18": ["m_robe", "m_fbask", "m_broom", "m_ribbon", "m_cbox"], "a26": ["m_duster", "m_lant", "m_hoop", "m_incbox", "m_meds"], "a36": ["m_medbox", "m_slip", "m_scissors", "m_ruler", "m_pattern"], "a51": ["m_ledger", "m_mend", "m_abacus", "m_seal", "m_warmer"], "a65": ["m_pine", "m_sutra", "m_herbbag", "m_inv", "m_clapper"]},
 "tm4":{"a18": ["m_mirror", "m_fan", "m_pinbox", "m_letter", "m_tbask"], "a26": ["m_pot", "m_bolt", "m_flowers", "m_candle", "m_ptray"], "a36": ["m_bell", "m_brocade", "m_lant", "m_duster", "m_keys"], "a51": ["m_bcase", "m_scissors", "m_inv", "m_robe", "m_herbs"], "a65": ["m_chrys", "m_incst", "m_cane", "m_whisk", "m_fish"]},
-"mama":{"a18": ["m_broom", "m_cbox", "m_ribbon", "m_ftray", "m_fbask"], "a26": ["m_meds", "m_pattern", "m_sewbox", "m_hoop", "m_incbox"], "a36": ["m_ruler", "m_medbox", "m_umb", "m_slip", "m_food"], "a51": ["m_seal", "m_ledger", "m_warmer", "m_beads", "m_abacus"], "a65": ["m_almanac", "m_clapper", "m_pine", "m_herbbag", "m_sutra"]},
-"kc":{"a18": ["slant", "ball", "flute", "hoop", "fbask"], "a26": ["rfan", "combbox", "pend", "pbook", "plant"], "a36": ["powder", "casket", "hanky", "hcomb", "orchid"], "a51": ["sutra", "ffan", "whisk", "album", "pouch"], "a65": ["pine", "bell", "mirror", "peach", "pastebox"]},
+"mama":{"a18": ["m_broom", "m_cbox", "m_ribbon", "m_ttray", "m_fbask"], "a26": ["m_meds", "m_pattern", "m_sewbox", "m_hoop", "m_incbox"], "a36": ["m_ruler", "m_medbox", "m_umb", "m_slip", "m_food"], "a51": ["m_seal", "m_ledger", "m_warmer", "m_beads", "m_abacus"], "a65": ["m_almanac", "m_clapper", "m_pine", "m_herbbag", "m_sutra"]},
+"kc":{"a18": ["slant", "ball", "flute", "hoop", "fbask"], "a26": ["rfan", "combbox", "pend", "pbook", "plant"], "a36": ["powder", "casket", "hanky", "hcomb", "orchid"], "a51": ["sutra", "ffan", "whisk", "album", "pouch"], "a65": ["pine", "bell", "mirror", "plaque", "pastebox"]},
 "nc":{"a18": ["flute", "sachet", "speony", "fbask", "parasol"], "a26": ["rfan", "plant", "combbox", "vase", "pscroll"], "a36": ["incbox", "hanky", "casket", "beads", "orchid"], "a51": ["warmer", "album", "ffan", "iball", "pouch"], "a65": ["chrys", "pastebox", "bell", "staff", "almanac"]}}
 def age5_item(c,age,tier,vn=False):
     """E11 pick for the tiers in AGE5: person cNN (n) at age -> AGE5[tier][age][(n-1)%5] filled with the tier material."""
