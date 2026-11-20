@@ -135,3 +135,15 @@ Group b play areas now use plain inline SVG / glyph signs from dev/build/jnwb.js
 - icon-hint (lamp / «?» seal), icon-done (check seal), icon-voice (td_ngon Thưa hold button), icon-rotl / icon-rotr (hoa điền tilt), icon-shield (duho Hộ giá),
 - icon-bowl (Hạnh pool), person signs elder / child / sick / adult (td_hanh row), pips (filled / empty dot) — all in the kit stroke style.
 Rule sentences stay on the rules screen only; the frame «Cách chơi» row is hidden while a game runs (#kg82.kg-run .kghow).
+
+## 20/11 kit-cost-rows-home (MAIN ROOT-80 order; E25 «KR home-stat rows», E22t «quý nhau»)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | E25b home-chapters | **KR home-stat rows** — Gia thanh (kgt), Áp lực hôn sự (kap), Hồi môn (khm), Lời đồn (kld) in the act/option card rows Tốn / Được / Thành / Bại and in word mode | every home card (jkc kcCard, jkc2, jkc3 kc3/kcE) | kit keeper | **KIT READY** review/kit-cost-rows-home (KIT §13.14) |
+| 20/11 | E22t | **«quý nhau» in the word/hint map** (jk2b) — the decline row of a receiver choice (jrcv rcvNoO «mất: hai bên quý nhau −F») showed «Tốn: không» | jrcv, every «quý nhau» line | kit keeper | **KIT READY** review/kit-cost-rows-home (KIT §13.14) |
+
+## 20/11 kit-e-rows (MAIN ROOT-80 order; E30 `kitColDot`, E25b «KR thế lực nhà»)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | E30 dresscode | **`kitColDot` / `kitColDots`** read-only colour dot + family name | item rows «Màu», jmcal popover, festival gate | kit keeper | **KIT READY** review/kit-e-rows (KIT §60.1) |
+| 20/11 | E25b home-chapters | **«thế lực nhà ±n» in the word/hint map** | jkc3 E28 (kcE hac) | kit keeper | **KIT READY** review/kit-e-rows (KIT §13.15; built on top of review/kit-cost-rows-home 3332c63b — same file / lines) |
