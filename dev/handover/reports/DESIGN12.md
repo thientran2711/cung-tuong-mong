@@ -147,3 +147,8 @@ Chars: t4 9842, t5 9843, t6 9997, t7 9990, t8 9988, m02_t7 9916, m02_t8 9960. ke
 - s62_t8: (identical to _cloak3)
 - m02_t7: [-cloud-collar cape-] {+cloud collar+} [-cloud-collar cape,-] {+cloud collar,+} 
 - m02_t8: (identical to _cloak3)
+
+## HANDOVER (DESIGN12, depth 8 = limit, context 28.5 % of 1M at 21:24Z; START ~8 % → roll line ~33 %)
+State: all jobs done and pushed (last e12f816f). Live winter set = dev/art/dong_hientai/*_DONG_HIENTAI_cloak4.txt (s62 t4–t8, m02 t7/t8; fur sentence byte-identical to *_cloak; vân kiên restrained Hán-style, nouns shoulder-piece / shoulder bands / cloud collar). Hán set = seasons4/s62_t{4,6,7,8}_HAN_BAC_open5 (+ t5 _open3). Thu compact collar = thu_comoi/s62_t{7,8}_THU_COMOI_vk (t8 superseded by v8 2-tier, owner L1442).
+Open: W03 (t7/t8 winter fur) FAILs = owner-ordered fur changes → foreman updates W03. Scripts used: copy edits by exact-string replace + assert WINTER unchanged; keep sidecars generated from keep_check CUT lines.
+Successor (opened by the COORDINATOR, not me): start from this file + the latest brief; always git pull first.
