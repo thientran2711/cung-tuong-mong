@@ -62,3 +62,46 @@ Her gates in that life: 9 of 9 had ONE road only («Cứ thế vào dự»); no 
 
 ## Shots (local only, deleted with the verdict)
 fold/ipad-gate (gate: options + «ĐƯỢC không»; iPad: taboo trắng), fold/ipad-cal (popover «Y phục: Đỏ, Vàng · kiêng áo Trắng, Đen · …» fits, no cut text), fold-tram / fold-robe / fold-cellA / fold-cellB / fold-slotY (no Màu row anywhere on the real tap). The «Trân phẩm» reveal over some shots came from my own test setup (a piece pushed into the chest), not from the branch.
+
+## ROUND 2 (E30r2, opus, session_01DgYSWpFMntGUa2vqhwPDpr) — re-review of review/dresscode 94abcf83 · FOREMAN E #23 → #24
+PRIORITY #1 CHECK ('dresscode|dress code|trái mùa|BAL.dc'): OD 0 | review/* review/dresscode 94abcf83 (+ r6 b840116f) | claims E30/E30b rows — re-review only; jcoopask H map reused, KIT §60.2 kitDressPicker (LIVE 24dd2c62) checked.
+
+### VERDICT: PASS 8b46c3f0b1ab3545420833a522aad14579a280dd (review/dresscode-r2; FF on LIVE 24dd2c62) — rules part. Item 12 = open KIT dependency (MAIN kit keeper), not this branch.
+Branch: review/dresscode-r2 = 94abcf83 + LIVE 463d3d70 (41a33d80; assemble = main's list + jdc0 before j31 + jdc after jcloth) + reviewer fix 69cb45dd + LIVE 24dd2c62 (8b46c3f0; only index.html/sw.js conflicted → rebuilt).
+
+### r1 fixes — checked in code + tests
+| # | r1 item | r2 state |
+|---|---|---|
+| 1 | NPCs never dress for a festival | DONE: dcNpcFest own trâm → borrow (aff ≥ fav, same dcBorrow/dcReturn) → buy; turned away by the same rule; mocked once (dcNpcSettle); E30 scan 13 → 0 turned away, fit 63 → 100 / 150 |
+| 2 | borrow dominated | DONE: borrow/buy only for a colour her chest cannot cover; reviewer fix: borrow now shows its cost «kèm: thiện cảm −6» of the lender (kit pvQuy) and buy its gain «trâm giữ lại trong rương», so borrow no longer LOOKS cheaper than buy (law 2 as she reads it) |
+| 3 | single road / «Được không» | DONE: «Cáo lỗi» on every gate, every road names its gain; reviewer fix (fix-the-group): the NPC ask frame had empty x on both answers → «Cho mượn»: tốn the piece till next tuần · thành thiện cảm; «Khéo từ chối»: thành keeps it; a lend that can no longer happen (piece put on meanwhile) logs a line instead of silently doing nothing |
+| 4 | taboo on painted robe | DONE: BAL.dc.kyOn 0 until 11c; popover hides taboo words |
+| 5 | season gap at her phẩm | DONE: dcSeasonRoad, same for NPCs; test checks the COST |
+| 6 | season flip charged at once | DONE: first tuần = «Sang mùa mới» warning, no cost, NPCs alike |
+| 7 | NPC cost lacks Thái hậu | DONE |
+| 8 | borrowed piece sellable | DONE: guard on wdSell/wdPawn/sellItem/giveTo/plantItem (her + NPC AI), no acts, loan row «Mượn: của …» |
+| 9 | co-op guest duplicates | DONE: guest side via jcoopask dcout/dcin, world-id keys (id:901/902), dcGot once-only return, NPC loops host-only |
+| 10 | «Lễ Lễ» | DONE (scan over 13 codes) |
+| 11 | contest rows hide cut | DONE: det7 «y phục −N» |
+| 13 | typed slice(0,2) | DONE: BAL.dc.chg.max |
+| 14 | canon taboo rule | DONE: expert §3 + BAL comment = turn away only when none of the colours |
+| 12 | item dialog drops rows | OPEN KIT DEPENDENCY (below) |
+
+Laws: 1 two-way (NPCs take her roads, ask her, she lends) ✓ · 2/3 (every option gain + cost visible, no dominated road) ✓ after reviewer fix · 4 one-core PASS · 5 ladders rise ✓ · 6c borrowed objects real, returned, never sold ✓ · 7 wording no %/điểm ✓ · 9 kit only (kit option cards, kitRows, kitColDot, popover row form; dresscode builds NO dress picker of its own — the season frame points to Tư trang → Ô y phục, so KIT §60.2 kitDressPicker has no dresscode caller to switch; grep jdc.js toil/Picker = 0).
+
+### Item 12 on LIVE 24dd2c62 — still NOT fixed
+Real tap (my probe, Fold 755x1000@2): Tư trang → tap the worn trâm cell → dialog shows only «Ta đang mặc.» + act card «Tháo trâm»; no .kinvrows, no «Màu», no «Hợp mùa». «Màu» (with kitColDot dots «Đỏ chính · Vàng phụ») and «Hợp mùa» ARE visible only in the kit item card (kitItemCard, KIT §70 — shop / reward / other item cells) and in the calendar popover line «Y phục: ● Đỏ, ● Vàng · …». So on the owner's own path (bấm ô y phục / món đồ trong Tư trang) the colours are NOT visible yet. Owner of the fix: MAIN kit keeper (wdOpen/kinvOpen dialog must use kitItemDetailRows). 11c robe recolour: still waits the owner (Foreman C sample); nothing half-wired.
+
+### Gates
+| gate | on 69cb45dd (LIVE 463d3d70) | on 8b46c3f0 (LIVE 24dd2c62) |
+|---|---|---|
+| dresscode.test.js | ALL PASS (+2 r2 checks) | ALL PASS |
+| coop-dresscode.js (2 seats, LIVE Worker) | 33/33 ×2 | 33/33 |
+| coop-e2e.js (CO-OP LAND GATE) | 68/68 | 68/68 |
+| kit-dress-picker.js | — | PASS 19 |
+| one-core-guard | PASS (fails 0, inline 3776 ≤ 3930) | (in quickcheck core gates) PASS |
+| role-parity ×2 | ALL PASS both, logs byte-identical | — (no game-rule change since) |
+| quickcheck (alone) | PASS 374 s, old save ok | PASS 375 s, old save ok, perf new/live render 184/209, tab 413/443, buổi 1080/1200 ms |
+| shots Fold 755x1000@2 + iPad 1180x820@2 | gate (Cài / Sai người mua … / Cáo lỗi, kit cards, no cut text), trâm card with dots, calendar popover with dots, real-tap dialog (no rows = item 12) — looked at; local only (/home/user/wt/e30r2-scr, deleted with verdict), never committed |
+
+LAND READY dresscode 8b46c3f0b1ab3545420833a522aad14579a280dd
