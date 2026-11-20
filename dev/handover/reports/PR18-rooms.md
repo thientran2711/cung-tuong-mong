@@ -24,3 +24,4 @@ Prompts: dev/art/face-common/pastel_L867/sNN.pastel.FULL.txt, made by make_paste
 | s59 k=0.64 | soft apricot #DEAF9B → #E7C0B0 | soft moonlight blue #A4BCD8 → #B8CBE1 |
 | s60 k=0.55 | coral pink #D9998C → #EBB9AF | soft sea blue #649AB8 → #9ABFD7 |
 | s61 k=0.55 | persimmon #D2906C → #EAB599 | ivory #EDDCC6 → #E9DDCC |
+- B20 EXEMPTION (ROOT-62 01:30Z): "B20 OK — for these 16 L867 pastel TEST gens only (owner's explicit order to draw with the lowered codes = the exemption; they replace no game art)". GATE NOTE: every pastel prompt = all checks PASS except B20 ROOT HEX (exempted); ledger lines carry "gate":"PASS except B20 (L867 exemption ROOT-62)".
