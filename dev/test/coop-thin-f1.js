@@ -157,6 +157,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    if(A===G){await until(G,()=>!COOPW.thin.F.pend,null,15000);const la=await G.p.evaluate(()=>COOPW.thin.F.lastAns);r.ans=la&&la.r}
    if(k==='gift'){const sm=()=>B.p.evaluate(()=>{try{const m=document.getElementById('modal');if(Q.length&&(!m||m.hidden))showModal()}catch(e){}});await sleep(1500);await sm();r.inv=await tapText(B,/^Nhận/,10000);await sleep(2500);await sm();r.keep=await tapText(B,/^Nhận/,10000)}
    await force(false);await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sleep(2000);
+   if(k==='laydo'&&A===H)ok(!r.err&&await H.p.evaluate(()=>!Q.some(q=>q&&q.pid==='giftin')),'F2 host→guest laydo: no «Quà tặng» card of the stolen piece on the host (her mirror of the thief was bridged back: a second piece; review coop-thin-laydo)',await H.p.evaluate(()=>[Q.map(q=>q&&[q.pid||q.t,JSON.stringify(q.pp||{}).slice(0,300)])]));
    const nt=await notes(B);for(let i=0;i<4;i++){await clear(H);await clear(G);await sleep(300)}await sync();
    const a1=await pers(A),t1=await pers(B);const good=!r.err&&chk(t0,t1,a0,a1);
    table.push({dir,k,r,t0,t1,a0,a1,notes:nt});ok(good,`F2 ${dir} ${k} (${what}): the effect on the target's own person + the actor`,{r,t0,t1,a0,a1,notes:nt});
