@@ -78,3 +78,8 @@ cell, same family as `kitResultSeal`. When it lands, jmgid `mgIdRow` swaps the l
 |---|---|---|---|---|---|
 | 20/11 | wk map-places | **place-nth** (Ngự thiện phòng: cooking pot / chopsticks over a bowl) and **place-pd** (Phật đường: lotus + incense) kit glyphs, 128 px webp, same style as place-ttp | KIT_PLACE_IC (jact.js) nth/pd; today stand-ins `suc` / `duc` | Foreman C art / kit keeper | OPEN |
 | 20/11 | E22t (FOREMAN E #19) | **«quý nhau» entry in the kit word/hint map** (jk2b:234/:253): decline rows must show the liking loss instead of «Tốn: không» (hidden -3 liking); also hits LIVE receiver-choice jrcv:84 | person-minigame-acts-c, receiver-choice | MAIN kit keeper | OPEN |
+
+## 20/11 econ-tamco (GAP OR21) — Tốn row: cost not paid by fx
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | ECON TAMCO #2 (FOREMAN D #10) | **option card «Tốn» row takes a cost the fx does not pay** (`ton:{tamco:-n}` / `ton:{bac:-pr}`): show Tâm cơ cost and the scheme price on the «Làm như thường» road (same as FOREMAN_B_STATUS ~L376 road-b2) | jtamco PEND.roadpick (2-line swap after kit), 13 bạc schemes × 3 roads | MAIN ROOT-78 kit keeper | OPEN — review/econ-tamco c45265d6 is KIT-BLOCKED on it |
