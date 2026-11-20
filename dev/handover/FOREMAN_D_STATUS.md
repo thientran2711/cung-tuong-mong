@@ -312,3 +312,4 @@ RUNNING (D #9):
 | session_01964izF2nVQrqY9Ytdpwd6C | INVITE-HOST-AWAY #1 (opus, owner bug) | review/invite-host-away | SẴN SÀNG KIỂM → D opens BIG reviewer → LAND READY to ROOT-75 |
 | session_01964izFKstgvyB8Sbpgkgc3 | CHOICE-VALUE final-merge 70bea3d3 (opus) | review/choice-value-audit | SẴN SÀNG KIỂM → reviewer re-gate → LAND READY |
 - (20/11 07:30Z, D #9) ORDER ROOT-75 07:25Z «cal-p2c identity offset» ACCEPTED (whole job, opus lead): brief briefs/D9-cal-p2c.md; worker CAL-P2C #1 opening now (id in next line). choice-value worker told «final-merge LIVE 70bea3d3 → SẴN SÀNG KIỂM». npc-purpose seats G1 #15 + reviewer ARCHIVED (in LIVE).
+| session_01964izF6sJHzxcBve2mGhvJ | CAL-P2C #1 (opus lead, BIG numbers/save; ORDER ROOT-75 07:25Z) | review/cal-p2c (after mg-fair-ratio lands) | SẴN SÀNG KIỂM → D opens BIG opus reviewer → LAND READY to ROOT-75 |
