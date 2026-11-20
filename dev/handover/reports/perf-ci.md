@@ -19,3 +19,9 @@ PRIORITY #1 CHECK: OD:L719 rule 6 | main: dev/test/perf.js, play-perf.js, perf-f
 - fxGate ceilings are PROVISIONAL (~1.5x one sandbox measurement); tighten from the first CI summary. pixelLand has no own budget block yet (falls back to default).
 - A push that is red on main from the first run is possible if a runner is slower than the budgets assume (perf.js budgets were set for a 4-CPU box); rerun once, then tune the JSON only.
 - Shots: none (tooling only).
+
+## REVIEW r1 (sonnet SMALL, session_01N1tNP4bjLTgLhGHK2jSsH8; written by Foreman B from the reviewer's message)
+PASS review/perf-ci-r1 5a32532c (contains origin/main). Diff: perf.yml, perf-fx-gate.js, perf-budget.json (fxGate block), perf-fx.js (proxy arg); no game/BAL/save/co-op file.
+FOUND + FIXED 57c58071: the 3 test steps piped into `| tee` without pipefail, so a failing perf.js / play-perf.js / fx gate would not turn the job red → `shell: bash` (-eo pipefail) on those steps.
+Checked: YAML parses; triggers main + review/** + manual dispatch only; no secrets; standalone check (no deploy workflow); budgets only from perf-budget.json / play-perf-budget.json; fxGate ceilings PROVISIONAL; perf-fx-gate.js at 755x1000 cpu4 exit 0. Not run: perf.js / play-perf.js (files unchanged), the workflow on GitHub.
+Caveats: fxGate has no over33Max (check skipped); first CI run may be red on a slower runner → rerun once, then tune the JSON only (possible / small / fix = JSON edit).

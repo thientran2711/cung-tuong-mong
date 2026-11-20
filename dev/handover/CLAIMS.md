@@ -406,6 +406,6 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-bgtone KIT KEEPER (sonnet; OWNER order 20/11 ~07:45Z game background/UI colours to suit rank-8 costume tone) | review/kit-bgtone; briefs/root76-kit-bgtone.md | MAIN ROOT-76 | session_01Rc5AsMtjP4KTgBZVjENGLs | RUNNING | 20/11 08:35Z |
 | REVIEW mg-craft g1 (opus BIG; scaffold + Thêu + Khéo tay @993b8929; brief briefs/b-review-mg-craft-g1.md) | review/mg-craft-r1 | B | session_01N1tNP3G3tPpDtXygm5qtc9 | RUNNING | 20/11 08:36Z |
 | REVIEW map-places r1 (sonnet SMALL) of 6883c4feb | review/map-places-r1 | B | session_01N1tNP2yqZBK3vdqp6L52Zt | PASS 7c2aaa08c (reports/map-places.md  20/11 08:38Z |
-| REVIEW perf-ci r1 (sonnet SMALL tooling) of 56d4c0a6 | review/perf-ci-r1 | B | session_01N1tNP4bjLTgLhGHK2jSsH8 | RUNNING | 20/11 08:40Z |
+| REVIEW perf-ci r1 (sonnet SMALL tooling) of 56d4c0a6 | review/perf-ci-r1 | B | session_01N1tNP4bjLTgLhGHK2jSsH8 | PASS 5a32532c → ARCHIVED | 20/11 08:40Z |
 | REVIEW cal-p2b (BIG opus) of 45768ff8 (huong/mua/banh broken grading + 9 pace full-marks windows) | review/cal-p2b-rv; briefs/rv-root76-cal-p2b.md | MAIN ROOT-76 | session_01Rc5AsJGMmUL6NpNpYgiR6c | RUNNING | 20/11 08:45Z |
 | REVIEW home-chapters (BIG opus E25r) of 03c2cade | review/home-chapters; briefs/E25r-review-home-chapters.md | FOREMAN E #17 | session_01DgYSWpQvWQ5ka4h6t1ZQRC | RUNNING | 20/11 09:48Z |
