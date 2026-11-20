@@ -148,3 +148,41 @@ So in a co-op room nothing this branch adds runs: no jwalk walkNpcPass / walkErr
 What does run in co-op: her own walk cost (walk-cost-rv2: goTo → travel / BAL.walk). On the guest it is a host intent (F2), and coop-e2e 68/68 covers it.
 Seat-check verdict: solo = the scan above; 2 players = identical by construction (the record is off). This was pre-existing design, not changed here. Whether NPC walks should exist in co-op at all is a MAIN / owner question for later (parking lot), not this branch.
 At the re-gate: re-run the probe (both seats, record absent or equal) + coop-e2e.
+
+## ROUND 5: RE-GATE review/jagday-walk-rv 1dab9933 (= 64750121 + fix 5390905c + LIVE 548dcd0d) → VERDICT: FAIL (1 item: ag-walk «4 carry NEAR» flake); round-4 FAIL 1 FIXED
+PRIORITY #1 CHECK ('agWalkGuard|walkIsRoad|agWalkCut|knCarryOut|4 carry'): OD L1976 + law 1 / 6b / 11 | main 548dcd0d | review/* jagday-walk-rv 1dab9933 (this) | claims JAGDAY-WALK #3 session_01964izFxPbxKJAN3n8Je4g4 (done) → #4 opened by D.
+Code read of 5390905c:
+- The guard now runs in the jwalk j95fixHouse wrapper, after j95sPass / j95sGuard and before the road pass.
+- On a fresh khắc, deeds that start now are checked from row kh−1.
+- An «ag_» row that no pend deed holds is free.
+- A carried deed with no road is not spilled: agLand lands it now, so it is not lost.
+- agWalkCut ends a running deed one khắc early so she can walk to a later meeting. The deed still lands.
+- Roads (walkIsRoad) are never repainted.
+- The «mine» errand row keeps one place per buổi.
+OK on laws 1 / 6b / 11.
+The build is its own: rebuilt, only CTM_BI differs.
+### Gates on 1dab9933 (one at a time)
+| gate | result |
+|---|---|
+| walk-cost | ALL OK (12: seeds 1–10 × 16, bare jumps 0 of 188 far; deeds landed 1616) |
+| ag-walk ×8 | **7/8**: run 5 FAIL «4 carry NEAR». main 548dcd0d ×8 = 8/8 |
+| ptime / ptime2 | ALL OK / ALL OK |
+| invite-host-away ×10 | 10/10 runs 9/9 (C 10/10, E 10/10) |
+| time-spill-guard | PASS |
+| coop-e2e | 68/68 |
+| quickcheck --cpu 4 | PASS: old save ok; render 272/259, tab 532/523, buổi 1527/1179 ms; core gates PASS |
+| own far-jump scan (my driver, seeds 1–10 × 16) | **0** bare jumps / 411 far moves (all classes 0, plain-travel extra 0); deeds landed 1658, consorts 312; walkDrop 7 (was 50); JWALK.miss 37 (roads that could not fit; none left a bare jump) |
+| co-op seat check | record off in co-op (j95.js:28): both seats equal by construction (ROUND 4 addendum) |
+### FAIL item (fixer = JAGDAY-WALK #4, opened by D #12)
+1. **ag-walk «4 carry NEAR» flake starts on this branch line.** Branch 1dab9933: 7/8. Main 548dcd0d: 8/8, and 16/16 counting the worker's runs. The worker's base 64750121 also fails 1–2/8.
+   Failing shape (run 5): `{"walk":1,"C":[{"id":"0-1:ksp:gossip:…:c","due":0}],"due":0,"at":["-","-","-","-"]}`. The carried item is computed with due 0 and should land at khắc 1. It never appears in tinBaoList at any khắc of the next buổi. FAR in the same run is fine.
+   Reproduced in one page with probe dev/handover/reports/probes/rv-jw-agwalk-carry.js (14 carries in a row, NEAR only, near = tyv): 1/14 lost. In that case BOTH knCarryOut calls (the test's own and the nextBuoi wrapper's) still had `tyv:gossip@0` in S.tb.C. So the loss happens AFTER knCarryOut: in knCarryIn / knCarryTick, or in a knTb reset or rewrite during the buổi turn.
+   The probe's later runs log `b x->y W … K … C` after nextBuoi; 28 more carries did not fail. Next step: run the probe in a loop until it fails and read the dbg line (is the item in T.W, in T.K, or in neither; did S.buoi move once).
+   Suspects:
+   - (a) something in the jagday-walk chain (agSpill / agLand / agWalkCut, or a j95sync inside nextBuoi) re-enters nextBuoi or rebuilds S.tb before knCarryIn;
+   - (b) knCarryTick runs with agKh() > due and an item is deleted by a later pass;
+   - (c) the deed «pend» that the test pushes is dropped / landed by the new walk-guard path, so adHapNow no longer lists h and something clears T.W.
+   Fix the root cause, not the test (law 6b: a news item must never vanish). Then ag-walk ≥ 16/16 and the probe ≥ 50 carries with 0 lost.
+Everything else PASSES. Once item 1 is fixed, re-run ag-walk ×16 + the probe + a quick walk-cost; then LAND READY.
+
+STATUS: FAIL review/jagday-walk-rv 1dab9933. Round-4 jumps are fixed (0 / 411). The one item is the ag-walk «4 carry NEAR» flake (main 8/8, branch 7/8; a carried news item is lost after knCarryOut). All other gates green, co-op seat check equal.
