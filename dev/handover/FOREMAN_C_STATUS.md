@@ -663,3 +663,4 @@ NEWACCT#4 ~17:33Z: OWNER Lượt 1281: Sonnet+retries wasteful → ALL prompt wr
 NEWACCT#4 ~17:34Z: ITEMFIX4 edcb027: m11 t4 matte đoạn 8aiY6uzIrU (135 cr); #4 LOOKED, sent Lượt 1282 (notes: small earring left ear = fault, scalloped capelet, book+bird). ITEMFIX4 archived.
 NEWACCT#4 ~17:35Z: OWNER Lượt 1283: matte đoạn for t4 Tần, t5 Phi, t6 Quý phi (rule added, overrides B12 for t4–t6). Builder change to do AFTER SWAP56 finishes (same files) — Opus worker.
 NEWACCT#4 ~17:36Z: OWNER Lượt 1284 correction: Quý phi t6 KEEPS gấm → B26 = matte đoạn t4 Tần + t5 Phi only. NOTE Hán ladder prompts have t6 đoạn — follow-up for owner.
+NEWACCT#4 ~17:40Z: DESIGN4 ed3e8fd (signature low on outer shoulders, V open, 'neck…never covered'); #4 also replaced S13 'closes only at the throat clasp' in Hán t4 (ChatGPT test only; S13 exemption needed before Magnific); keep_check PASS; sent owner Lượt 1289.
