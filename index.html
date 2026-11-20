@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"18238d11+","t":"2026-11-20T06:41Z","c":"round C: index/sw rebuilt after r2 + LIVE eb056f7b merge","b":"7fe29ea827aa","h":[{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"},{"s":"dddb1f94+","t":"2026-11-20T04:29Z","c":"Tay đối thủ ở Thắp đèn nay đo theo đúng tài của nàng"},{"s":"b3f5a05c+","t":"2026-11-20T04:20Z","c":"Tay đối thủ ở Bắn cung, Đầu hồ và Kim chỉ nay đo theo đúng tài của nàng"},{"s":"29f5e418+","t":"2026-11-20T04:01Z","c":"Kit mới: bảng thi đấu đối mặt cho «Thách đấu» (chuẩn bị, chưa mở trong game)"},{"s":"b74e84cb+","t":"2026-11-20T04:06Z","c":"Tay đối thủ ở Thêu nay đo theo đúng tài của nàng"},{"s":"82ed060e+","t":"2026-11-20T03:59Z","c":"Tay đối thủ ở Hát và Thơ nay đo theo đúng tài của nàng"}]};
+window.CTM_BI={"s":"457c40b7+","t":"2026-11-20T07:06Z","c":"person-minigame-acts-c Q-C2: co-op LIVE two-human board via pm-live state messages (Cờ = one move per message on one 7x7 board, asker black…","b":"667f74843c15","h":[{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"},{"s":"dddb1f94+","t":"2026-11-20T04:29Z","c":"Tay đối thủ ở Thắp đèn nay đo theo đúng tài của nàng"},{"s":"b3f5a05c+","t":"2026-11-20T04:20Z","c":"Tay đối thủ ở Bắn cung, Đầu hồ và Kim chỉ nay đo theo đúng tài của nàng"},{"s":"29f5e418+","t":"2026-11-20T04:01Z","c":"Kit mới: bảng thi đấu đối mặt cho «Thách đấu» (chuẩn bị, chưa mở trong game)"},{"s":"b74e84cb+","t":"2026-11-20T04:06Z","c":"Tay đối thủ ở Thêu nay đo theo đúng tài của nàng"},{"s":"82ed060e+","t":"2026-11-20T03:59Z","c":"Tay đối thủ ở Hát và Thơ nay đo theo đúng tài của nàng"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -79492,19 +79492,21 @@ function pmLvSay(g,mode,o){try{return COOP.send(Object.assign({t:"act",k:"pm-liv
 function pmLvN(v){return typeof v==="number"&&isFinite(v)?Math.max(0,Math.min(10,Math.round(v))):null}
 function pmLvSan(lv){if(!lv||typeof lv!=="object")return null;const o={},a=pmLvN(lv.ra),t=pmLvN(lv.rt);if(a!=null)o.ra=a;if(t!=null)o.rt=t;if(["a","t","d"].includes(lv.w))o.w=lv.w;return Object.keys(o).length?o:null}
 const pmLvId=()=>`${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`;/* a message / game id (radix, not a number of the game) */
+const pmLvT=(...a)=>{try{if(window.__pmLvTrace)window.__pmLvTrace.push(a.map(x=>typeof x==="object"?JSON.stringify(x):String(x)).join(" "))}catch(e){}};/* test trace (off unless a test sets window.__pmLvTrace = []) */
 const pmLvOt=r=>r==="a"?"t":"a";
 /* the card's «Nhận» (jcoopworld askCard): send(ok, lv) is the relay answer; anything but a plain yes, or no room, answers at once */
-function pmLiveAns(k,x0,ok,send){const x=pmCoopX(k,x0);if(ok!==true||!x||!pmLvOn()||S.dead){send(ok);return}
+function pmLiveAns(k,x0,ok,send){const x=pmCoopX(k,x0);pmLvT("ans",k,ok,!!x,pmLvOn(),window.COOPW&&COOPW.ctx);if(ok!==true||!x||!pmLvOn()||S.dead){send(ok);return}
  const role=window.COOPW&&COOPW.ctx?"a":"t",g=pmLvId();
  setTimeout(()=>{const L=PML[g]={g,x,role,send,me:null,op:null,opSc:0,w:null};pmLvSay(g,"go",{x,role:pmLvOt(role)});L.tm=setTimeout(()=>pmLvFall(L),B().live.wait)},0)}
-function pmLvFall(L){if(L.fin||L.board)return;L.fin=true;delete PML[L.g];log("Hảo hữu chưa vào ván; hai bên theo tài nghệ của mình.");L.send(true)}
-function pmLvSend(L){if(L.fin)return;L.fin=true;clearTimeout(L.tm);delete PML[L.g];const lv={};if(L.me!=null)lv["r"+L.role]=L.me;if(L.op!=null)lv["r"+pmLvOt(L.role)]=L.op;if(L.w)lv.w=L.w;L.send(true,pmLvSan(lv)||undefined)}
+function pmLvFall(L){pmLvT("fall",L.fin,L.board);if(L.fin||L.board)return;L.fin=true;delete PML[L.g];log("Hảo hữu chưa vào ván; hai bên theo tài nghệ của mình.");L.send(true)}
+function pmLvSend(L){pmLvT("send",L.fin,L.me,L.op,L.w);if(L.fin)return;L.fin=true;clearTimeout(L.tm);delete PML[L.g];const lv={};if(L.me!=null)lv["r"+L.role]=L.me;if(L.op!=null)lv["r"+pmLvOt(L.role)]=L.op;if(L.w)lv.w=L.w;L.send(true,pmLvSan(lv)||undefined)}
 function pmLvMine(L,raw,lo){L.me=pmLvN(raw);if(lo)L.w=lo==="draw"?"d":lo==="win"?L.role:pmLvOt(L.role);pmLvSay(L.g,"end",{raw:L.me,w:L.w||null});
  if(L.remote){delete PML[L.g];log("Ván đã xong; đợi hảo hữu báo kết quả.");return}
  if(L.op!=null)pmLvSend(L);else{clearTimeout(L.tm);L.tm=setTimeout(()=>pmLvSend(L),B().live.wait)}}
-function pmLvMsg(m){const L=PML[m.g];
+/* her device is busy (any kg82 frame open, a result not yet confirmed included: replacing it would drop that game) → «no» → the asker falls back */
+function pmLvMsg(m){const L=PML[m.g];pmLvT("msg",m.mode,!!L);
  if(m.mode==="go"){if(L)return;const x=pmCoopX(m.x&&m.x.a==="play"?"pmplay":"pmduel",m.x);
-  if(!x||S.dead||!pmLvOn()||(typeof KG82==="object"&&KG82.phase)){pmLvSay(m.g,"no");return}
+  if(!x||S.dead||!pmLvOn()||(typeof KG82==="object"&&KG82.phase)){pmLvT("no-why",!!x,S.dead,pmLvOn(),KG82.phase);pmLvSay(m.g,"no");return}
   const N=PML[m.g]={g:m.g,x,role:m.role==="a"?"a":"t",me:null,op:null,opSc:0,w:null,remote:1};pmLvSay(m.g,"rdy");pmLvBoard(N);return}
  if(!L)return;
  if(m.mode==="rdy"){if(!L.remote&&!L.board&&!L.fin){clearTimeout(L.tm);pmLvBoard(L)}return}
@@ -82400,7 +82402,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7fe29ea827aa";window.CTM_BUILD=BUILD;
+const BUILD="667f74843c15";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

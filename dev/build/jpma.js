@@ -337,19 +337,21 @@ function pmLvSay(g,mode,o){try{return COOP.send(Object.assign({t:"act",k:"pm-liv
 function pmLvN(v){return typeof v==="number"&&isFinite(v)?Math.max(0,Math.min(10,Math.round(v))):null}
 function pmLvSan(lv){if(!lv||typeof lv!=="object")return null;const o={},a=pmLvN(lv.ra),t=pmLvN(lv.rt);if(a!=null)o.ra=a;if(t!=null)o.rt=t;if(["a","t","d"].includes(lv.w))o.w=lv.w;return Object.keys(o).length?o:null}
 const pmLvId=()=>`${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`;/* a message / game id (radix, not a number of the game) */
+const pmLvT=(...a)=>{try{if(window.__pmLvTrace)window.__pmLvTrace.push(a.map(x=>typeof x==="object"?JSON.stringify(x):String(x)).join(" "))}catch(e){}};/* test trace (off unless a test sets window.__pmLvTrace = []) */
 const pmLvOt=r=>r==="a"?"t":"a";
 /* the card's «Nhận» (jcoopworld askCard): send(ok, lv) is the relay answer; anything but a plain yes, or no room, answers at once */
-function pmLiveAns(k,x0,ok,send){const x=pmCoopX(k,x0);if(ok!==true||!x||!pmLvOn()||S.dead){send(ok);return}
+function pmLiveAns(k,x0,ok,send){const x=pmCoopX(k,x0);pmLvT("ans",k,ok,!!x,pmLvOn(),window.COOPW&&COOPW.ctx);if(ok!==true||!x||!pmLvOn()||S.dead){send(ok);return}
  const role=window.COOPW&&COOPW.ctx?"a":"t",g=pmLvId();
  setTimeout(()=>{const L=PML[g]={g,x,role,send,me:null,op:null,opSc:0,w:null};pmLvSay(g,"go",{x,role:pmLvOt(role)});L.tm=setTimeout(()=>pmLvFall(L),B().live.wait)},0)}
-function pmLvFall(L){if(L.fin||L.board)return;L.fin=true;delete PML[L.g];log("Hảo hữu chưa vào ván; hai bên theo tài nghệ của mình.");L.send(true)}
-function pmLvSend(L){if(L.fin)return;L.fin=true;clearTimeout(L.tm);delete PML[L.g];const lv={};if(L.me!=null)lv["r"+L.role]=L.me;if(L.op!=null)lv["r"+pmLvOt(L.role)]=L.op;if(L.w)lv.w=L.w;L.send(true,pmLvSan(lv)||undefined)}
+function pmLvFall(L){pmLvT("fall",L.fin,L.board);if(L.fin||L.board)return;L.fin=true;delete PML[L.g];log("Hảo hữu chưa vào ván; hai bên theo tài nghệ của mình.");L.send(true)}
+function pmLvSend(L){pmLvT("send",L.fin,L.me,L.op,L.w);if(L.fin)return;L.fin=true;clearTimeout(L.tm);delete PML[L.g];const lv={};if(L.me!=null)lv["r"+L.role]=L.me;if(L.op!=null)lv["r"+pmLvOt(L.role)]=L.op;if(L.w)lv.w=L.w;L.send(true,pmLvSan(lv)||undefined)}
 function pmLvMine(L,raw,lo){L.me=pmLvN(raw);if(lo)L.w=lo==="draw"?"d":lo==="win"?L.role:pmLvOt(L.role);pmLvSay(L.g,"end",{raw:L.me,w:L.w||null});
  if(L.remote){delete PML[L.g];log("Ván đã xong; đợi hảo hữu báo kết quả.");return}
  if(L.op!=null)pmLvSend(L);else{clearTimeout(L.tm);L.tm=setTimeout(()=>pmLvSend(L),B().live.wait)}}
-function pmLvMsg(m){const L=PML[m.g];
+/* her device is busy (any kg82 frame open, a result not yet confirmed included: replacing it would drop that game) → «no» → the asker falls back */
+function pmLvMsg(m){const L=PML[m.g];pmLvT("msg",m.mode,!!L);
  if(m.mode==="go"){if(L)return;const x=pmCoopX(m.x&&m.x.a==="play"?"pmplay":"pmduel",m.x);
-  if(!x||S.dead||!pmLvOn()||(typeof KG82==="object"&&KG82.phase)){pmLvSay(m.g,"no");return}
+  if(!x||S.dead||!pmLvOn()||(typeof KG82==="object"&&KG82.phase)){pmLvT("no-why",!!x,S.dead,pmLvOn(),KG82.phase);pmLvSay(m.g,"no");return}
   const N=PML[m.g]={g:m.g,x,role:m.role==="a"?"a":"t",me:null,op:null,opSc:0,w:null,remote:1};pmLvSay(m.g,"rdy");pmLvBoard(N);return}
  if(!L)return;
  if(m.mode==="rdy"){if(!L.remote&&!L.board&&!L.fin){clearTimeout(L.tm);pmLvBoard(L)}return}
