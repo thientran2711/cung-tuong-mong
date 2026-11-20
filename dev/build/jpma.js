@@ -53,6 +53,8 @@ function pmStakeOf(a,t,s){return pmStakes(a,t).find(x=>x.s===s)||null}
 function pmRaw(p,kind,R){return kg82NpcRaw(p,kind,{occ:"pm",rank:R})}
 /* fix 4 (laws 4 + 5): ONE value for the quick option «Để tài nghệ quyết định» on every pm board = her median on this board tier (jmgt mgSkipRaw of mgTier occ pm at rank R);
    playArt scores quick.raw, the sub text prints the same number. No typed fallback. */
+/* a person's MEDIAN board on this tier (her own level): the expected hand, not a draw (pmOddsEst, pmKyNoise) */
+function pmMed(p,kind,R){return mgSkipRaw(mgTier(kind,{occ:"pm",rank:R,p,lv:kg82LvFor(p,kind)}))}
 function pmSk(kind,R){return mgSkipRaw(mgTier(kind,{occ:"pm",rank:R}))}
 function pmQuick(kind,R){const sk=pmSk(kind,R);return{n:"Để tài nghệ quyết định",sub:`tính như người cùng bậc (${sk}/10)`,raw:sk}}
 function pmTal(p,kind){try{return kg82Parts(p,kind).total}catch(e){return 0}}
@@ -208,7 +210,7 @@ function pmMeFree(){return !(S.pmMeW===wk()&&(S.pmMeN||0)>=B().npc.me)}
 function pmHash(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)/4294967296}
 function pmPickBy(L,w,v,salt){if(L.includes(S)){const O=L.filter(x=>x!==S);if(!O.length||wk()-(S.pmMeL==null?-1e9:S.pmMeL)>=B().npc.meGap||pmHash([key(v),salt,"me",typeof bkey==="function"?bkey():""].join("|"))<B().npc.meShare)return S;L=O}const W=L.map(x=>Math.max(BAL.mind.pickMin,w(x)));const T=W.reduce((s,x)=>s+x,0);let r=pmHash([key(v),salt,typeof bkey==="function"?bkey():"",L.map(key).join(",")].join("|"))*T;for(let i=0;i<L.length;i++){r-=W[i];if(r<=0)return L[i]}return L[L.length-1]}
 /* the NPC's own estimate of a duel (no draw): each side's median board (jmgt mgSkipRaw on its gap d) + talent → the share of the luck range */
-function pmOddsEst(a,t,kind){const R=pmR(a,t),L=B().luck;const med=p=>mgSkipRaw(mgTier(kind,{occ:"pm",rank:R,p,lv:kg82LvFor(p,kind)}));
+function pmOddsEst(a,t,kind){const R=pmR(a,t),L=B().luck;const med=p=>pmMed(p,kind,R);
  const d=(pmTal(a,kind)+med(a)/10*L)-(pmTal(t,kind)+med(t)/10*L);return oddsCl(Math.round(100/2+d/L*100))}
 if(typeof agReg==="function"&&typeof p3O==="function"){
  agReg("consort","pm",(v,N,need)=>{const O=[];try{if(!(typeof p3On==="function"&&p3On())||v===S||!live(v)||v.confined||v.coop||!pmFree(v))return O;const G=B().npc.g;
@@ -287,7 +289,7 @@ function pmVsShow(vs,o,h){const u=pmVsUI(vs,o);if(!u)return;u.setScore("me",vs.m
  if(vs.turn!==undefined)u.setTurn(vs.turn)}
 /* ---------- C2 the real 7×7 Cờ ---------- */
 const PM_KY={e:"gomoku",n:"Cờ",t:"Năm quân liền hàng",timed:false,how:"Bàn 7×7. Ngươi cầm quân đen đi trước, đối thủ cầm quân trắng; mỗi bên lần lượt đặt một quân vào ô trống. Ai có năm quân liền một hàng (ngang, dọc hay chéo) trước là thắng; kín bàn mà chưa ai đủ năm là hòa."};
-function pmKyNoise(o,me,R){const K=B().ky;return Math.round(cl(K.base-K.k*(pmScore(o,"co",R)-pmTal(me,"co"))-K.rankN*R,K.min,K.max))}
+function pmKyNoise(o,me,R){const K=B().ky;return Math.round(cl(K.base-K.k*(pmScore(o,"co",R,pmMed(o,"co",R))-pmTal(me,"co"))-K.rankN*R,K.min,K.max))}
 /* KG82.kyNet (Q-C2, co-op live board): {side: 1 black (the asker, first) | 2 white, send(i,n) = her move to the friend, q = friend moves already come,
    on = set here, mvWait = ms of friend silence on his turn before the AI takes his side with HIS hand (offline fallback)}; absent = the AI opponent as before */
 function kgGomoku(b,env){const K=BAL.pm.ky,n=7,B0=Array(n*n).fill(0);let over=false,maxRun=0,oppRun=0,lock=false,mv=0,wt=0;
