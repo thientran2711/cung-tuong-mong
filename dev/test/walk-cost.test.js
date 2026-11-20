@@ -37,7 +37,7 @@ const boot=`localStorage.clear();SLOT=4;document.getElementById('title').hidden=
  ok(r.forced.cost===0&&r.forced.at==="home",'4 forced move home charges nothing',r.forced);
  /* 5 NPCs */
  const scan=async off=>{await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);return p.evaluate(([boot,off])=>{eval(boot);if(off)BAL.walk.npc=0;const o={far:0,bad:0};
-  for(let s=0;s<16;s++){Q.length=0;S.mg=0;for(let u=0;u<4;u++){used=u;try{j95sync()}catch(e){}}const R=S.roster;if(R&&R.P)for(const id in R.P){if(id==="me")continue;const row=R.P[id];if(!Array.isArray(row))continue;
+  for(let s=0;s<48;s++){/* 48 buổi (was 16): the ratio over ~20 far moves ranged 0.08–0.55 on any build (a 0.48 tail failed 2/40 runs); over ~100 moves it holds 0.20–0.33 — same 0.4 bar, more evidence */Q.length=0;S.mg=0;for(let u=0;u<4;u++){used=u;try{j95sync()}catch(e){}}const R=S.roster;if(R&&R.P)for(const id in R.P){if(id==="me")continue;const row=R.P[id];if(!Array.isArray(row))continue;
     for(let j=1;j<row.length;j++){const x=row[j];if(!x||x[0]==null||x[1]==="go"||(x[1]==="follow"&&x[2]==="me"))continue;let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&row[q][1]==="go"){g++;q--}
      if(q<0||!row[q]||row[q][0]==null||row[q][0]===x[0])continue;const t=travel(row[q][0],x[0]);if(t<2)continue;o.far++;if(g<t-1)o.bad++}}
    try{nextBuoi()}catch(e){}}o.errs=JWALK.errs;return o},[boot,off])};
