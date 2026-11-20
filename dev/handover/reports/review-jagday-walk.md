@@ -35,3 +35,21 @@ Nothing else to fix: once item 1 is done, the rest of 80d1cc41 can PASS as it is
 Stacking: walk-cost-rv ffd22ea6 is not in main yet (main dd248d5d). The fix goes on review/jagday-walk (stacked on walk-cost); the PASS branch will be the final merge of the then-current main («lands right after walk-cost»).
 
 STATUS: FAIL review/jagday-walk 80d1cc41 — 1 item (errand-ledger jumps = same family, fix in ptLedger/errLedger); deeds not lost (921→926 / 880→872 landed; guard 2 drops re-planned); fixer session_01964izFMBWywRUbAg2MV1QH.
+
+## ROUND 2 — review/jagday-walk b25e42cc (r1 fix of FAIL 1) → VERDICT: FAIL (1 new item; FAIL 1 fixed)
+PRIORITY #1 CHECK ('walkErrRow|ptLedger|"back"|invite-host-away'): OD L1976 + OD 18/11 ~20:00Z/~20:05Z | main dd248d5d | review/walk-cost-rv ffd22ea6 (WITHDRAWN per D #10, WALK-COST #3 on review/walk-cost-regate) | claims JAGDAY-WALK #1 session_01964izFMBWywRUbAg2MV1QH.
+1. FIXED (round 1 item 1). jwalk walkErrRow + ptLedger: an NPC sender's errand window = road there | errand | road back; due, cost, ptAwayOf unchanged; road rows are «go» with a why (j95sKeep → busy). Rows by her own people are unchanged by design. Own scan, 5 seeds × 16 buổi: far moves 112, every jump class 0 (errand 5 → 0; deed 45 → 0; follower 5 → 0). Gates on b25e42cc: walk-cost ALL OK (11 incl. errand unit + errand class), ptime ALL OK, ptime2 ALL OK.
+2. **NEW FAIL — invite-host-away test C regressed by this branch** (10 runs each, same box):
+   | build | C fails | E fails |
+   |---|---|---|
+   | base walk-cost-rv ffd22ea6 | 0/10 | 1/10 (pre-existing flake) |
+   | branch b25e42cc | **6/10** | 0/10 |
+   Failing detail: the guest decides to LEAVE at the last khắc; her row is expected as the walk-back row [her palace, "back", …, «… quay về»]. The branch writes `["kn","go",null,"đang trên đường"]`. Cause: jwalk's new «move decided IN the khắc now starts its walk now» rule (round 0, jwalk.js walkNpcPass `now`) rewrites her current-khắc «back» row through the arrive-later loop. That loop writes the generic «đang trên đường» and drops the row's own why. invite-host-away was not in the worker's gate list.
+   Fix pointer:
+   - (a) In walkNpcPass's arrive-later loop, keep the row's own why (and target) when rewriting a row into «go», as the follower case already does: a «back» row → [place, "go", x[2], x[3] (the leave reason) + " · đang trên đường"].
+   - (b) Update test C to OD L1976: she is on her road home, so the leave row is [her palace, "back" OR "go" carrying the leave reason]. Keep every other C assert (left, loss = 1, notice, whereHome ≠ home).
+   - (c) Gates: invite-host-away ≥ 10 runs with C 10/10 (report the E rate). Also run walk-cost, ag-walk, ptime, ptime2, time-spill-guard, coop-e2e, quickcheck (old save).
+Note: E did not fail on this branch (0/10 vs 1/10 on base). It is the walk-cost E flake, not caused here.
+Base: walk-cost-rv is withdrawn → after WALK-COST #3 passes, the worker rebases onto review/walk-cost-regate and I do the final gate (no LAND READY before that).
+
+STATUS: FAIL review/jagday-walk b25e42cc — FAIL 1 fixed (errand jumps 0); NEW item 2: invite-host-away C 6/10 (base 0/10), jwalk now-rule rewrites the leaving guest's «back» row into a why-less «go»; fixer session_01964izFMBWywRUbAg2MV1QH.
