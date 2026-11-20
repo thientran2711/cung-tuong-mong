@@ -14,3 +14,9 @@ STATUS 20/11 ~05:20Z: depth 1 (limit 8), START_CTX ~3 % (get_session used_tokens
 - Gen settings when the go comes (PR19 METHOD): images_generate gpt-2-6 2k 2688×1386, folder ba4aecfe-efce-47e2-b53f-30d292091886, refs from the json, then measure_floor.py (target base ≥ 82 % H), webp q88 pr20/<key>-ha-sang.webp, labelled sheet, LOOK, cdn_sync, ledger.
 - Cost: r3334 270 cr · batch2 675 cr · both 945 cr. Remaining after that (Tần TM ×2 needs a card; Phi 12; Quý phi 12) ≈ 26 rooms ≈ 5–6 batches ≈ 3 500 cr; + Từ Ninh ~2 + ~35 place scenes ≈ 5 000 cr.
 - Open: Thừa Minh has no palace card (foreman); 34 arch doorway (owner never raised it).
+
+## s62–s65 in the white-light room (ROOT-67, owner "Đặt thử 4 cô này vào cái phòng tầng mà mình mới vừa vẽ theo cái phong cách ánh sáng trắng thử coi.") — 0 cr
+- Room = newest white-light Tần room = room 32 Khải Tường cung chính điện reception (khai-tuong-cung-tan, VX7s33bMMU, approved).
+- Cut-outs (F4): s62 nVsrRMPYQD · s63 kseVFSr16B · s64 JNChlRROq4 (Dịu dàng) · s65 jUoe5yJLD0 (Đoan trang), all thiếu nữ. Composer sheet_row.py → nf_tags.py (live iPad stage numbers: same figure height + feet line as the game).
+- Sheet CDN img/_review/place-rank/pr20/room32-s62-65-lbl.jpg (2324×1418), with big labels: face id · group · thiếu nữ · room name in the header.
+- LOOK: all 4 girls stand on the floor strip in front of the daybed, doorway and armchairs, at a believable scale against the furniture, with clean edges. In the white light their robe colours read true (blue, ochre, pink/lavender, green/peach). Rooms 33/34 + batch 2 still HOLD.
