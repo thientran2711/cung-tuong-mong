@@ -171,8 +171,12 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
     for(const need of [null].concat(Object.keys(N0)))for(const g of grps)for(const k in AGREG[g]||{}){try{for(const o of AGREG[g][k](v,Object.assign({},N0),need)||[])if(o&&o.k)addN(role,o.k,g+"."+k)}catch(e){}}
     /* B3: a consort's choice to hit another palace's maid (jagstaff asHitPick, run monthly by jmline mlHit) is not an AGREG option: read it here.
        «Bắt quỳ» is weighed only by a cruel consort (Xảo quyệt / Kiêu ngạo): the probe asks it as such a consort too */
-    if(g0(v)==="consort"&&typeof asHitPick==="function"){const T0=window.traitsOf;for(const cr of [0,1]){if(cr)window.traitsOf=p=>p===v?["Xảo quyệt"]:T0(p);
-     try{for(let i=0;i<12;i++){const r=asHitPick(v);if(r&&r.k&&r.k!=="bribe")addN(role,"ml:"+r.k,"asHitPick")}}catch(e){E("asHitPick",e)}finally{window.traitsOf=T0}}}
+    /* E22d r2: the Hoàng hậu is in consorts() too (jmline mlMonth runs mlHit for her), so she is asked as well (agGrp = "hh") */
+    if((g0(v)==="consort"||g0(v)==="hh")&&typeof asHitPick==="function"){const T0=window.traitsOf;for(const cr of [0,1]){if(cr)window.traitsOf=p=>p===v?["Xảo quyệt"]:T0(p);
+     /* drift-2 method (E22d r2): the probe world is explicit — every other palace that has a maid is asked as the target in turn (j8 pickTarget's
+        hashed-by-Math.random pick no longer decides which acts the probe sees; a new module's draws moved hh off its only maid-palace target) */
+     const P0=window.pickTarget;let TG=[];try{TG=(others(v)||[]).filter(x=>(x.staff||[]).some(s=>s.role==="maid"))}catch(e){}if(!TG.length)TG=[null];
+     try{for(const tg of TG){if(tg)window.pickTarget=()=>tg;for(let i=0;i<12;i++){const r=asHitPick(v);if(r&&r.k&&r.k!=="bribe")addN(role,"ml:"+r.k,"asHitPick")}}}catch(e){E("asHitPick",e)}finally{window.traitsOf=T0;window.pickTarget=P0}}}
     try{if(typeof agOpts==="function"&&g0(v)!=="maid")for(const need of [null,"sung","ally","spite","danh","safe","kid","rest","th","hh","bac"])for(const o of agOpts(v,Object.assign({},N0),need)||[])addN(role,o.k,"agOpts")}catch(e){}}
    /* role-parity-drift-2: an NPC servant's «Lén giữ đồ Nội vụ phủ phát» is no agent option: jeitem eitPilfer runs on her master's monthly goods (stipGoods),
        chosen by eitPilWho (lòng under BAL.eit.pil.loyal or a spy, not caught lately) — the same gate as her card (eitPilMaidOk: S.tin under the same loyal,
