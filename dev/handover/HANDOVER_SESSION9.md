@@ -1558,3 +1558,7 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - WAKE: ROOT-78 trig_017FyRCFr2C8q9DGAUKzMS6G (minute 32) → next main creates its own, disables this one. Brief common: briefs/root78-common.md (copy to root79-common.md with new id + LIVE).
 - STANDBY: MAIN ROOT STANDBY session_01Rc5AsNA483VGFgtAtqERSa (TAKE OVER NOW only if create_session refused). NEXT MAIN = depth 8 = LAST: it cannot open a child → at ITS roll point it sends TAKE OVER NOW to the STANDBY (and writes a FOR MAIN line so the owner opens a fresh ROOT; standby must then pick a new standby).
 - (20/11 14:06Z) ROOT-78 opened child MAIN ROOT-79 = session_01Rc5AsMT6GWGyV9SHc2vgNi (depth 8 = LAST). ROOT-78 stops; ROOT-79 disables trig_017FyRCFr2C8q9DGAUKzMS6G.
+
+## MAIN = ROOT-79 session_01Rc5AsMT6GWGyV9SHc2vgNi (20/11 14:20Z); START_CTX ~9 % (get_session reads 0; own estimate); roll at ~34 %, ceiling 60 %; depth 8 = LAST (create_session will be refused → TAKE OVER NOW to STANDBY session_01Rc5AsNA483VGFgtAtqERSa + FOR MAIN line)
+- LOAD: main running 1 (keeper MtjP4KTg KP14/KP22; rv MSxpxbsA idle) | B free ~7 (podium-wire-r1, coop-host-lag #2, coop-thin-g #6, ge-npc #2, mg-craft-r2 running) | C free ? (STATUS silent since 09:20Z) | D free ~6 (walk-cost #3, jagday-walk rv, cal-p2c re-gate lander) | E free 3 (9/12) | moved: none
+- LIVE 7a35db20. Land queue: E bd-roads 4403fbbd (stale on 5cd6d24a → main self-merges 7a35db20) → D cal-p2c (re-gate lander) → D walk-cost/jagday → E pm-c/phutang/ge-batu → B wear-slots/kc-fail-effects/coop-staff-split/podium-wire.
