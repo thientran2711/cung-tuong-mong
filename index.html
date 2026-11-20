@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge","b":"7be3ebe747dd","h":[{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"}]};
+window.CTM_BI={"s":"3afe13f1+","t":"2026-11-20T22:20Z","c":"kit-dress-picker r0: no width media query (media-check, KIT §0) — the phone case (≤520 px: no stand) is decided in JS","b":"24ce8ee18d74","h":[{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -27440,7 +27440,7 @@ function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div cl
 function kitGameFig(g){g=g||{};try{const p=g.fig&&g.fig!==true?g.fig:(typeof S!=="undefined"?S:null);if(!p||typeof kitStageFig!=="function")return"";const f=kitStageFig(p,{cap:false});if(!f)return"";
  const an=typeof OPT!=="undefined"&&OPT.fxon&&!(typeof RM!=="undefined"&&RM);
  return `<div class="kgfig${an?" kgf-anim":""}" data-kgf="${p===S?"me":"other"}">${f}${g.prop&&g.pic?`<img class="kgprop" src="${g.pic}" alt="" draggable="false" onerror="this.remove()">`:""}</div>`}catch(e){return""}}
-function kitGameFigRefresh(p){try{const c=document.querySelector(".kgame .kgfig");if(!c||typeof kitStageFig!=="function")return;p=p||(c.dataset.kgf==="me"?S:null)||S;const f=kitStageFig(p,{cap:false});if(!f)return;
+function kitGameFigRefresh(p,o){try{const c=document.querySelector(".kgame .kgfig");if(!c||typeof kitStageFig!=="function")return;p=p||(c.dataset.kgf==="me"?S:null)||S;const f=kitStageFig(p,Object.assign({cap:false},o&&o.src?{src:o.src}:{}));/* kit-dress-picker: o.src = a preview figure (the dress she is trying on) */if(!f)return;
  const t=document.createElement("div");t.innerHTML=f;const n=t.firstElementChild,o=c.querySelector(".kesf");if(!n)return;if(o)o.replaceWith(n);else c.prepend(n)}catch(e){}}
 window.kitGameFig=kitGameFig;window.kitGameFigRefresh=kitGameFigRefresh;
 function kitGameSet(k,v){document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v);if(k==="score"){KG82.lastScore=v;kitGameMark(v)}if(k==="time"){kitGameClock(v);kitGameMark(KG82.lastScore)}}
@@ -52954,10 +52954,7 @@ function toilDressUI(){const box=kg82Box();if(!box)return;KG82.setup=1;box.hidde
  const sum=kitChips([wb.sac-(wb.shSac||0)?["Sắc",wb.sac-(wb.shSac||0)]:null,wb.danh?["Danh",wb.danh]:null].filter(Boolean))+kitLuxChip(x);
  const por=toilPor();const me=pMe();
  const mama=toilSkill().mama;
- box.innerHTML=`<div class="toilw toil1">`+
-  (mama?`<p class="past toilmama">${mama.name} khẽ nhắc: “Dịp ${st.F===2?"yến lễ phải lộng lẫy mà không vượt phẩm":st.F===1?"thỉnh an nên chỉnh tề, đủ phẩm":"thường ngày nên nhã nhặn, đừng phô trương"}.”</p>`:"")+
-  `<div class="toilinv">${kitInvGrid({key:"toil",tabs,items,minRows:2,minSlots:12,onPick:toilPick,side:kitEquipSlots({key:"toil",title:"Đang mặc",slots,sum,onPick:toilSlotPick,col:true}),sum})}`+
-  `<div class="toildet">${toilDetHTML(sel)}</div></div></div>`+
+ box.innerHTML=`<div class="toilw toil1">`+kitDressPicker({p:S,rank:por.rank,head:(mama?`<p class="past toilmama">${mama.name} khẽ nhắc: “Dịp ${st.F===2?"yến lễ phải lộng lẫy mà không vượt phẩm":st.F===1?"thỉnh an nên chỉnh tề, đủ phẩm":"thường ngày nên nhã nhặn, đừng phô trương"}.”</p>`:""),body:`<div class="toilinv">${kitInvGrid({key:"toil",tabs,items,minRows:2,minSlots:12,onPick:toilPick,side:kitEquipSlots({key:"toil",title:"Đang mặc",slots,sum,onPick:toilSlotPick,col:true}),sum})}`+`<div class="toildet">${toilDetHTML(sel)}</div></div>`})+`</div>`+
   `<div class="kg82act"><button class="${kg82Btn()}" id="toilok">Mặc bộ này</button><button class="${kg82Btn(true)}" id="toilkeep">Giữ đồ hôm qua<small>mặc như cũ</small></button></div>`;
  try{kitInvFit()}catch(e){}
  try{kitGameFigRefresh()}catch(e){}
@@ -53642,6 +53639,27 @@ window.toilMkDraw=toilMkDraw;window.toilColOfP=toilColOfP;
 
 /* ---------- KIT §60 kitSwatches: one row per part (label · the picked name · round colour swatches with a short name) ---------- */
 const KSWT={reg:{}};
+/* §60.2 kitDressPicker — ONE dressing view for EVERY dress picker (kit-dress-picker, owner OD 20/11 ~21:45Z: «màn chọn trang phục … không có nhân vật bên khung trái … thêm nhân vật thay đồ bên trái, làm sao cho đẹp, chứ không phải như mấy khung sự kiện»).
+   kitDressPicker({p, rank, head, body}) → HER FULL-BODY FIGURE on the left (a warm mirror-like stand with a floor shadow, name plate under it, NOT the event frame) as a LIVE preview:
+   the figure is the one of the rank of the dress she has on right now (rank = the dress's phẩm), so every pick that re-renders the picker changes it; the choices (wear column + bag + detail) are `body` on the right,
+   `head` (optional line) above them. A frame narrower than 480 px (a phone; measured, not a viewport breakpoint): no room for the stand — none is built and the picker reads as before (the two target devices are Fold 755 and iPad 1180). Used by: makeup «Trước gương đồng» step 1 (toilDressUI; also the Hội phối đồ theme dress step and the co-op redraw, same function). */
+function kitDressFigSrc(p,rank){if(rank==null||typeof figFor!=="function"||typeof figTierOf!=="function"||p!==S)return"";const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"")||""}catch(e){return""}finally{figTierOf=f0}}/* her figure at the tier of the dress she wears (j88 picks by figTierOf); same trick as toilFigAt / toilPorAt below */
+function kitDressPicker(o){o=o||{};const p=o.p||S;let src="";try{src=kitDressFigSrc(p,o.rank)}catch(e){}if(!src)try{src=kitFigOf(p)}catch(e){}
+ /* a game frame that already has its own left figure column (.kgfig, wide screens) is THE preview: it is refreshed with the dress she wears now, no second figure; otherwise (Fold) the picker brings its own */
+ /* a frame narrower than 480 px (a phone) has no room for a figure beside the wear column + bag (law 12: Fold 755 + iPad first): none there, the picker reads as before (decided by the MEASURED frame width, not by a viewport breakpoint — media-check, KIT §0) */
+ let fig="";const own=[...document.querySelectorAll(".kgame .kgfig")].find(e=>{const r=e.getBoundingClientRect();return r.width>40&&r.height>80&&getComputedStyle(e).display!=="none"});if(own){try{if(src)kitGameFigRefresh(p,{src})}catch(e){}}else if(((document.getElementById("kg82")||{}).clientWidth||999)>=480)try{fig=typeof kitStageFig==="function"&&src?kitStageFig(p,{src}):""}catch(e){}
+ return `<div class="kdpk">${fig?`<aside class="kdpk-fig" aria-label="Nàng đang thử y phục">${fig}</aside>`:""}<div class="kdpk-body">${o.head||""}${o.body||""}</div></div>`}
+window.kitDressPicker=kitDressPicker;
+(function(){const st=document.createElement("style");st.id="kdpk-css";st.textContent=`
+.kdpk{display:grid;grid-template-columns:minmax(150px,34%) minmax(0,1fr);gap:12px;align-items:stretch;min-width:0}
+.kdpk:not(:has(>.kdpk-fig)){grid-template-columns:minmax(0,1fr)}
+.kdpk-fig{position:relative;display:flex;align-items:flex-end;justify-content:center;min-height:min(420px,calc(52*var(--kvh,1dvh)));padding:10px 6px 14px;border-radius:14px;overflow:hidden;
+ background:radial-gradient(ellipse 70% 55% at 50% 30%,#fffaf1 0%,#f6e8d0 60%,#ead7b6 100%);box-shadow:inset 0 0 0 1px var(--line,#d6c7a8),inset 0 -26px 30px -18px rgba(120,80,40,.22)}
+.kdpk-fig::after{content:"";position:absolute;left:14%;right:14%;bottom:30px;height:16px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(70,40,20,.28),rgba(70,40,20,0) 70%);pointer-events:none}
+.kdpk-fig .kesf{position:relative;z-index:1;width:100%;flex:1 1 auto}.kdpk-fig .kesfi>.kesimg{max-height:calc(min(calc(52*var(--kvh,1dvh)),460px)*var(--kfr,1))}
+.kdpk-fig .kpsn{max-width:100%;text-align:center;font-size:.8rem}
+.kdpk-body{min-width:0;display:flex;flex-direction:column;gap:8px}
+`;document.head.appendChild(st)})();
 /* §60.1 kitColDot (kit-e-rows, E30 dresscode, PARKING #11): a READ-ONLY colour dot + the family name (kitSwatches below is a picker). The colour is DATA, never the kit's own:
    fam = a key of the ONE table BAL.dc.fam (jbal2: {hex,n}) or a ready object {hex|col, n|name}. kitColDot(fam,{role:"main"|"sec", size:"sm"|"md"}) · kitColDots([[fam,role],…]) = a row, «·» between. */
 function kitColDot(fam,o){o=o||{};const T=(typeof BAL==="object"&&BAL&&BAL.dc&&BAL.dc.fam)||{};const f=typeof fam==="object"&&fam?fam:T[fam]||{};const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,"");
@@ -53688,6 +53706,8 @@ window.kitFaceZoom=kitFaceZoom;
 .kfzoom-i>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
 /* kv3:.kv1 */`;document.head.appendChild(st)})();
 function toilColRows(c){return ["mat","ma","son","may"].map(k=>({k,label:TOIL_COL[k].label,sel:c[k],items:TOIL_COL[k].L.map(x=>({k:x[0],name:x[1],short:x[2],col:x[3]}))}))}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60.2",title:"kitDressPicker · màn chọn trang phục: nhân vật của nàng bên trái (xem trước theo bộ đang mặc), lựa chọn bên phải",where:"MỌI màn chọn y phục / trang sức (hiện: «Trước gương đồng» bước 1, cả Hội phối đồ): màn rộng dùng cột nhân vật có sẵn của khung trò chơi, Fold tự mang một bệ đứng ấm; điện thoại hẹp thì ẩn",
+ html:()=>{try{return `<p class="kpnote">Fold / khung chưa có cột nhân vật: bệ đứng của kit</p>${kitDressPicker({p:S,rank:S.rank,body:`<p class="past">Chạm một món trong rương để xem; mặc, cài hay tháo bằng nút dưới thông tin.</p>`})}`}catch(e){return ""}}})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60.1",title:"kitColDot · chấm màu chỉ để xem + tên họ màu (không bấm được)",where:"thông tin món y phục / trang sức (hàng «Màu»), lịch lễ, cổng lễ: màu chính + màu phụ; màu lấy từ MỘT bảng dữ liệu (BAL.dc.fam), kit không tự giữ màu nào",
  html:()=>{const D=[{hex:"#c0392b",n:"Đỏ"},{hex:"#d4a017",n:"Vàng"},{hex:"#8fa98c",n:"Lục"},{hex:"#e8a0a8",n:"Hồng"}];return `<p class="kpnote">kitColDot · cỡ nhỏ / vừa</p>${kitRows([["Màu",kitColDot(D[0],{role:"main"})+'<span class="ksep"> · </span>'+kitColDot(D[1],{role:"sec"})],["Màu (vừa)",kitColDot(D[2],{size:"md"})]])}<p class="kpnote">kitColDots · một hàng</p>${kitRows([["Họ màu",kitColDots([[D[3],"main"],[D[2],"sec"]])]])}`}})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60",title:"kitSwatches · màu trang điểm (phấn mắt, phấn má, son môi, màu mày)",html:()=>{let z="";try{if(typeof S!=="undefined"&&S){const f=kitFile(toilPor().src);TOIL.prev={look:"dep",col:toilColDef()};try{z=kitFaceZoom(S,f)}finally{TOIL.prev=null}}}catch(e){}return `<div style="display:grid;grid-template-columns:minmax(110px,200px) 1fr;gap:10px;align-items:start">${z||"<span></span>"}${kitSwatches({key:"kitpage",rows:toilColRows(toilColDef())})}</div>`}})}catch(e){}
@@ -85318,7 +85338,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7be3ebe747dd";window.CTM_BUILD=BUILD;
+const BUILD="24ce8ee18d74";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
