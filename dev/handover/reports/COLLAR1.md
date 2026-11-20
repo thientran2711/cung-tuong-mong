@@ -28,3 +28,9 @@ OWNER verbatim: "Sửa cái prompt, cái chân lại cho nó phù hợp đi."
 - (3) natural-legs sentence untouched. G21 collar code, t4 Tần work and INNER_EMB untouched.
 - Gate: check_store `walk_still_fails` (G23 WALK+STILL) FAILS when a walking pose and "still and straight" are in the same prompt (negative test: FAIL as expected).
 - Test s62 + m29, t1/t4/t7 at a18 + a36: 11 PASS. s62 t4 a36 FAIL LEN only (10 047 chars). It was already 10 024 before this job, so the overflow pre-dates it (open, same as the a51/a65 LEN question). Store-args gate PASS for m29 t7 a18 and s62 t1 a36.
+
+# COLLAR1 job 3 — t4 Tần: no collar-embroidery words (G22 correction, ROOT-70 relay ~08:11Z)
+- t8-prompt-B/build.py build_low t==4 (a18/a26): removed ", none at the collar" from the G22 flower clause; the rest of G22 is kept (rank-1 square cut, richer gold-brocade edge, borders at sleeves and hem, a few LARGE flowers fewer than Phi). G22 rule text updated with the owner correction verbatim (rule.py set).
+- Gate tp4: s62 a18 PASS (9 963 chars) / a26 PASS · m29 a18/a26/a36 PASS · s62 a36 FAIL LEN only (10 047, the pre-existing over-length issue; a36 is not G22 scope).
+- Prompt ready for the test gen: dev/art/rank8-s62/g22/s62_t4_a18.txt (build_all s62 4 --age a18).
+- Test gen NOT made: my spawn brief says "NO image generation at all" and A20/A21 require the owner's yes to come from the owner, not through a peer session; it was sent back to ROOT-70 to confirm or to give it to a gen worker.
