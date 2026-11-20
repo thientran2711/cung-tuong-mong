@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"dddb1f94+","t":"2026-11-20T04:29Z","c":"Tay đối thủ ở Thắp đèn nay đo theo đúng tài của nàng","b":"9c5013adac5d","h":[{"s":"b3f5a05c+","t":"2026-11-20T04:20Z","c":"Tay đối thủ ở Bắn cung, Đầu hồ và Kim chỉ nay đo theo đúng tài của nàng"},{"s":"29f5e418+","t":"2026-11-20T04:01Z","c":"Kit mới: bảng thi đấu đối mặt cho «Thách đấu» (chuẩn bị, chưa mở trong game)"},{"s":"b74e84cb+","t":"2026-11-20T04:06Z","c":"Tay đối thủ ở Thêu nay đo theo đúng tài của nàng"},{"s":"82ed060e+","t":"2026-11-20T03:59Z","c":"Tay đối thủ ở Hát và Thơ nay đo theo đúng tài của nàng"},{"s":"acc26bf0+","t":"2026-11-20T03:53Z","c":"Tay đối thủ ở Cắm hoa nay đo theo đúng tài của nàng"},{"s":"651c317c+","t":"2026-11-20T03:45Z","c":"Tay đối thủ ở Vẽ và Câu đối nay đo theo đúng tài của nàng"},{"s":"94c3bddc+","t":"2026-11-20T03:01Z","c":"Tay cờ của đối thủ nay đo theo đúng sức cờ của nàng"},{"s":"6acc0133","t":"2026-11-20T01:44Z","c":"Mini-game: màn luật chơi trước, bấm «Sẵn sàng» mới tính giờ; thêm «Hướng dẫn» chơi thử"},{"s":"b7633b66+","t":"2026-11-19T23:50Z","c":"palace-chatter: CHAT_L topic hh-me (12 lines, Hoàng hậu to her; warm/cool/cold + season tags) — the only -me pair kind with no bank, so a H…"},{"s":"2f328213+","t":"2026-11-19T23:11Z","c":"coop-ptime-reds r1 (review): merge main 7bc73251 (B24 rank palette, colour only); index/sw/assets rebuilt by build_site.sh"}]};
+window.CTM_BI={"s":"9144ec1b","t":"2026-11-20T04:50Z","c":"cal-p2: player-2 calibration profile (BAL.ag.mg2.cal.k2) for the co-op seat p2","b":"35ebbad2aca4","h":[{"s":"dddb1f94+","t":"2026-11-20T04:29Z","c":"Tay đối thủ ở Thắp đèn nay đo theo đúng tài của nàng"},{"s":"b3f5a05c+","t":"2026-11-20T04:20Z","c":"Tay đối thủ ở Bắn cung, Đầu hồ và Kim chỉ nay đo theo đúng tài của nàng"},{"s":"29f5e418+","t":"2026-11-20T04:01Z","c":"Kit mới: bảng thi đấu đối mặt cho «Thách đấu» (chuẩn bị, chưa mở trong game)"},{"s":"b74e84cb+","t":"2026-11-20T04:06Z","c":"Tay đối thủ ở Thêu nay đo theo đúng tài của nàng"},{"s":"82ed060e+","t":"2026-11-20T03:59Z","c":"Tay đối thủ ở Hát và Thơ nay đo theo đúng tài của nàng"},{"s":"acc26bf0+","t":"2026-11-20T03:53Z","c":"Tay đối thủ ở Cắm hoa nay đo theo đúng tài của nàng"},{"s":"651c317c+","t":"2026-11-20T03:45Z","c":"Tay đối thủ ở Vẽ và Câu đối nay đo theo đúng tài của nàng"},{"s":"94c3bddc+","t":"2026-11-20T03:01Z","c":"Tay cờ của đối thủ nay đo theo đúng sức cờ của nàng"},{"s":"6acc0133","t":"2026-11-20T01:44Z","c":"Mini-game: màn luật chơi trước, bấm «Sẵn sàng» mới tính giờ; thêm «Hướng dẫn» chơi thử"},{"s":"b7633b66+","t":"2026-11-19T23:50Z","c":"palace-chatter: CHAT_L topic hh-me (12 lines, Hoàng hậu to her; warm/cool/cold + season tags) — the only -me pair kind with no bank, so a H…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29339,7 +29339,11 @@ function mgHand(kind,p){const H=BAL.ag.mg2.hand;if(!p||typeof p!=="object"){cons
  /* AG-ALL-2d2: the band per kind comes from the owner's calibration (jmgcal mgCalBand: BAL.ag.mg2.cal.k) or the BAL default; p.mgHv[kind] = the band it was
     rolled in — a changed band re-rolls the SAME hash draw inside the new band (old saves without p.mgHv re-roll identically under the default band) */
  const Bd=typeof mgCalBand==="function"?mgCalBand(kind):{lo:H.lo,hi:H.hi,sig:H.lo+"/"+H.hi};let V=p.mgHv;if(!V||typeof V!=="object")V=p.mgHv={};
- if(M[kind]==null||V[kind]!==Bd.sig){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;const b=(mgHashU(id+"|a")+mgHashU(id+"|b"))/2;M[kind]=Math.round((Bd.lo+(Bd.hi-Bd.lo)*Math.pow(b,H.skew||1))*100)/100;V[kind]=Bd.sig;MGX.hand=(MGX.hand||0)+1}
+ const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind,roll=B=>Math.round((B.lo+(B.hi-B.lo)*Math.pow((mgHashU(id+"|a")+mgHashU(id+"|b"))/2,H.skew||1))*100)/100;
+ /* cal-p2 (owner OD 20/11 ~05:00Z): in player 2's play (jmgcal mgCalWho 2, the co-op seat BAL.ag.mg2.cal.p2) a kind of HIS profile (cal.k2) rolls the SAME
+    hash draw inside HIS band, never cached: p.mgH / p.mgHv stay her profile's, so the shared NPC record is the same on both seats and solo is unchanged */
+ if(typeof mgCalWho==="function"&&mgCalWho()===2){const B1=mgCalBand(kind,1);if(B1.sig!==Bd.sig)return roll(Bd)}
+ if(M[kind]==null||V[kind]!==Bd.sig){M[kind]=roll(Bd);V[kind]=Bd.sig;MGX.hand=(MGX.hand||0)+1}
  return M[kind]}
 window.mgHand=mgHand;
 function mgSkipRaw(t){return cl(Math.round(mgMedD(t&&t.d!=null?t.d:0)),0,10)}
@@ -32187,8 +32191,13 @@ BAL.ag.mg2.hand={on:1,lo:3,hi:9.5,w:4,skew:1.6};
    up / dn = how far above / below HER play the best / clumsiest NPC hand plays on a matching board (hand band hi = b + w/2 + up, lo = b + w/2 − dn);
    min / max = hand floor / ceiling (max = the interim hand hi: never a perfect player)
    k  = her calibrated base per mini-game kind {b: her graded play on a matching board, n: rounds, at: mm/dd/yyyy}, written from her «CTM-CAL …» code by
-        dev/tools/mgcal_apply.py — ONE base for every player; a kind not in k keeps the default band above */
+        dev/tools/mgcal_apply.py — her profile (player 1): solo play and her co-op seat; a kind not in k keeps the default band above
+   k2 = PLAYER 2's profile (owner OD 20/11 ~05:00Z: her second tries are Kingston's = "số liệu của người chơi thứ hai"), same shape, written by
+        dev/tools/mgcal_apply.py --p2; used ONLY for the co-op seat p2 (jmgcal mgCalWho / mgCalBand); a kind not in k2 falls back to k; never mixed into k
+   p2 = the co-op seat that is player 2 ("b" = the hảo hữu who joins her room); seat "a" and solo always read k */
 BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],up:1,dn:4,min:1,max:9.5,k:{dan:{b:8.3,n:5,at:"11/19/2026"},co:{b:9.7,n:5,at:"11/19/2026"},ve:{b:9.5,n:5,at:"11/19/2026"},doi:{b:9.1,n:5,at:"11/19/2026"},hoa:{b:7.9,n:5,at:"11/19/2026"},hat:{b:8.1,n:5,at:"11/19/2026"},tho:{b:8.7,n:5,at:"11/19/2026"},theu:{b:9.7,n:5,at:"11/19/2026"},ban:{b:9.1,n:5,at:"11/19/2026"},dauho:{b:1.1,n:5,at:"11/19/2026"},kim:{b:7.7,n:5,at:"11/19/2026"},doden:{b:9.9,n:5,at:"11/19/2026"}}};
+BAL.ag.mg2.cal.p2="b";
+BAL.ag.mg2.cal.k2={tho:{b:7.1,n:5,at:"11/19/2026"},theu:{b:9.9,n:5,at:"11/19/2026"},ban:{b:9.3,n:5,at:"11/19/2026"},dauho:{b:1.7,n:5,at:"11/19/2026"}};
 /* j71 odds words under mg2: the same draw (mgNpcRaw, seeded by the plan) for every entrant, her included, on this contest's board (j71 mgX7) */
 (function(){if(typeof cOdds7!=="function"||typeof fxOdds7!=="function")return;const c0=cOdds7,f0=fxOdds7;
  const win=(E,base,kindAt,mi,r)=>{let w=0;const N=500;for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+mgNpcRaw(kindAt(i),E[i],{rnd:r})/10*J71.luck;if(x>b){b=x;bi=i}}if(bi===mi)w++}return oddsCl(Math.round(100*w/N))};
@@ -75819,9 +75828,11 @@ npwReg("frameMe",{grp:"consort",who:c=>[c.a],why(a){return npw1Mot(a,S,"frame",n
    NPC HAND BAND per kind (jmgt mgHand reads mgCalBand): hi = min(cal.max, b + w/2 + cal.up), lo = max(cal.min, b + w/2 − cal.dn) — an NPC's average
    play is (hand − w/2), so the best hands play about cal.up above her (rare: skew), the clumsy ones cal.dn below her, the middle hand clearly below.
    No calibration for a kind yet → the BAL default band (BAL.ag.mg2.hand lo / hi, interim mg-bots).
-   WHERE HER NUMBERS LIVE: one core — BAL.ag.mg2.cal.k[kind] = {b, n, at} in jbal2.js, the SAME for every player (no test for anyone else). Her device
+   WHERE THE NUMBERS LIVE: one core, TWO profiles in jbal2.js (owner OD 20/11 ~05:00Z: her second tries are Kingston's = "số liệu của người chơi thứ
+   hai"): BAL.ag.mg2.cal.k[kind] = {b, n, at} = HER profile (player 1: solo play and her co-op seat); BAL.ag.mg2.cal.k2[kind] = PLAYER 2's profile, read
+   only in the play of the co-op seat BAL.ag.mg2.cal.p2 (mgCalWho), a kind k2 lacks falls back to k; never mixed (first try per profile). Her device
    keeps the raw record (localStorage "ctm-mgcal") and shows a short code line «CTM-CAL …» with a copy button; the coordinator writes it into BAL with
-   dev/tools/mgcal_apply.py "<code>". Her device does NOT apply its local record (co-op and every other player must roll the same hands).
+   dev/tools/mgcal_apply.py "<code>" (player 2: --p2 "<code>"). Her device does NOT apply its local record (co-op: both devices must roll the same hands).
    WHO SEES IT: only with the owner flag (localStorage "ctm-owner-cal" = "1", set once by opening the game with ?hieuchuan=1; ?hieuchuan=0 clears it):
    one kit row «Thử tay tài nghệ» at the end of Thiết lập (the same .kctl row + .kbtn.alt jnotes uses). Nobody else ever sees the row. */
 (function(){try{
@@ -75833,8 +75844,15 @@ function C(){return (BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.cal)||{on:0,d:[0],up:1,dn:4,
 /* her base on a matching board from the rounds she played (raws[i] at gap ds[i]) */
 function mgCalBase(raws,ds){const n=Math.min(raws.length,ds.length);if(!n)return null;let s=0;for(let i=0;i<n;i++)s+=(+raws[i]||0)-(mgMedD(ds[i])-mgMedD(0));
  return Math.round(cl(s/n,0,10)*10)/10}
-/* the NPC hand band of a kind: {lo, hi, sig} (sig changes when the band changes, so a cached hand is re-rolled from the same hash) */
-function mgCalBand(kind){const H=BAL.ag.mg2.hand,c=C(),e=c.on&&c.k&&c.k[kind];
+/* WHOSE PLAY (cal-p2, owner OD 20/11 ~05:00Z): 2 = the co-op seat BAL.ag.mg2.cal.p2 (the hảo hữu) — on her own device that is COOPW.seat, on the host
+   while it runs that seat's turn COOPW.ctx (jcoopthin withSeat), so both devices pick the same profile from shared room state; 1 = everything else
+   (solo, her seat). Never from a device-local record. */
+function mgCalWho(){try{const W=window.COOPW,c=C();if(!W||!W.on||!c.p2)return 1;return (W.ctx||W.seat)===c.p2?2:1}catch(e){return 1}}
+/* the calibration entry of a kind for a player: player 2 → cal.k2[kind], falling back to her cal.k[kind] for kinds k2 lacks; player 1 → cal.k[kind] */
+function mgCalEntry(kind,who){const c=C();if(!c.on)return null;if((who||mgCalWho())===2&&c.k2&&c.k2[kind])return c.k2[kind];return c.k&&c.k[kind]||null}
+/* the NPC hand band of a kind (in the play of player `who`, default mgCalWho()): {lo, hi, sig} (sig changes when the band changes, so a cached hand is
+   re-rolled from the same hash) */
+function mgCalBand(kind,who){const H=BAL.ag.mg2.hand,c=C(),e=mgCalEntry(kind,who);
  if(!e||!isFinite(+e.b))return{lo:H.lo,hi:H.hi,sig:H.lo+"/"+H.hi};
  const w2=H.w/2;let hi=Math.min(c.max!=null?c.max:H.hi,+e.b+w2+c.up),lo=Math.max(c.min,+e.b+w2-c.dn);if(lo>hi-.5)lo=Math.max(0,hi-.5);
  lo=Math.round(lo*100)/100;hi=Math.round(hi*100)/100;return{lo,hi,sig:lo+"/"+hi}}
@@ -75892,7 +75910,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  const go=()=>{let n=0;const t=setInterval(()=>{const T=$("title");if((!T||T.hidden)||++n>40){clearInterval(t);pick()}},250)};
  if(typeof kitMenuResume==="function"&&kitMenuResume()){go();return}
  const x=document.querySelector("#modal .kph button, #modal #mclose");if(x)x.click();go()},true);
-Object.assign(window,{mgCalBase,mgCalBand,mgCalKinds,mgCalCode,mgCalOwner,mgCalOpen:pick,mgCalRun:run});
+Object.assign(window,{mgCalBase,mgCalBand,mgCalWho,mgCalEntry,mgCalKinds,mgCalCode,mgCalOwner,mgCalOpen:pick,mgCalRun:run});
 }catch(e){console.error(e)}})();
 /* KIT §13.8 kitGameVs (K-PM-1, owner OD 20/11 ~01:00Z item 1, review/kit-gamevs): ONE shared live head-to-head «Thách đấu» split board for EVERY person-minigame art
    (đàn, cờ, hát, múa, thư pháp, họa, thêu, hương … any KG82 / person game): her board + the opponent's live score and clock side by side. Pure display: NO game logic,
@@ -81592,7 +81610,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9c5013adac5d";window.CTM_BUILD=BUILD;
+const BUILD="35ebbad2aca4";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
