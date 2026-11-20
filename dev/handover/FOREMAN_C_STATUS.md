@@ -634,3 +634,4 @@ NEWACCT#3 ~18:17Z: OWNER: Minh+Hán improved OK; need rank ladder (t1–t3 same,
 NEWACCT#3 ~18:22Z: OWNER: phi bạch ("feedback" in voice) only xuân+hạ; thu+đông thicker without; current design was heading to đông — or move current to xuân? asked which season starts open neck. Proposed Lượt 1248: Xuân=hiện tại (hở cổ vuông + phi bạch), Hạ=Đường, Thu=Hán (cổ chéo rộng, không phi bạch), Đông=Minh (cổ đứng kín) + lông G26 moved to Minh. Waiting.
 NEWACCT#3 ~18:30Z: DESIGN1 5 ladder prompts 2be4223a (MINH t5/t6/t7, HAN t6/t7) sent Lượt 1250. Note: S12 gate requires phi bạch t1–t6 (conflict G32) → exemption before any Magnific use.
 NEWACCT#3 HANDOVER ~18:40Z: depth 2, ctx 29 % (START 4 % + 25 %). Last owner order (layered neckline JOB A t1–t3 fix + JOB B spring t4–t7) → DESIGN1. TAKEOVER_FOREMAN_C_NEWACCT4.md written; opening child #4. Next Lượt 1251.
+NEWACCT#3 ~18:45Z: child #4 opened session_01D3E3NZPt7cysxtbybnExBK. #3 stops.
