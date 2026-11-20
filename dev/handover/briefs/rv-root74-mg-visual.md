@@ -1,0 +1,7 @@
+PRIORITY #1 CHECK: OD 20/11 ~05:10Z (Múa cue/pop + Nấu ăn pictures) + ~06:30Z (td_dung yellow boxes) | main BAL.mgFx (new) | review/mg-visual d9800e60 | claims mg-visual Lez7azLX
+# REVIEW mg-visual (SMALL, sonnet; BAL.mgFx is a display constant, not rules) — MAIN ROOT-74
+Read briefs/root74-common.md (all), START_REVIEWER.md, topic kit-ui.md, KIT.md parts touched, VANPHONG.md.
+Owner words (OD 20/11 ~05:10Z verbatim): "Cái mini game của cái màn múa này là cái vòng xung quanh cái hình tròn mà nó sáng lên để mà mình bấm theo á, cái màu sáng nó chưa có đủ sáng ... cái nút đó animation khi mà cái nút đó được chọn ... cái độ thay đổi nó so với cái hình góc ban đầu không nhiều cho nên khó nhìn quá." + no text in Nấu ăn list. OD ~06:30Z: td_dung shows bright yellow boxes covering the screen on each touch.
+Target review/mg-visual = d9800e60 (report reports/mg-visual.md, scan tables).
+CHECK: one BAL.mgFx source used by every engine (no per-engine numbers); cue clearly brighter + press pop clearly bigger (LOOK Fold 755x1000 + iPad 1180x820, Múa, Nấu ăn, td_dung, + 3 other engines); Nấu ăn 0 words in play; no screen-covering touch flash in ANY kind (scan all 31 via tests); kit-only; mg-visual test, mg-ready-guide 9/9, ag-mgcal, quickcheck incl. old save. If PASS: final-merge newest origin/main on review/mg-visual-rv (rebuild index/sw), rerun tests, FF-check.
+VERDICT: reports/rv-mg-visual.md; CLAIMS row; send_message MAIN ROOT-74 session_01Rc5AsLW7a12BUC5kZhtsTy "PASS <final sha>" or "FAIL <sha> <n fixes>" (fixes to worker Lez7azLX).
