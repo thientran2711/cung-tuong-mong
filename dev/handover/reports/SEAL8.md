@@ -80,3 +80,22 @@ bottom: bt-hanghai LOOP frames recoloured.
 - Shade mismatches (same hue): digital with tight tol possible but risky where the robe shares the hue (tutin/vui amber-yellow vs
   royal yellow robes); recommend: muu ht/htg/tv + ghen mm/htg + buon tv digital (review each), tutin mm leave. 0 cr.
 Also tell the builders: prompts should carry the hex from disc_colours.json (e.g. "yellow-green (#C3B23F)") — not done (A18: needs OK).
+
+## HANDOVER (20/11 ~01:30Z) — SEAL8 context ≈ 30 % (START_CTX 3 % + 25 % passed) → ROLL; ROOT-60 opens the successor (worker never does).
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+STATE: D (male ghen) DONE + uploaded · C (mm-muu + broken-clip scan, 6 clips redone) DONE + uploaded · A (colour table, audit, sheet) DONE,
+MG4 told the path · B plan written (§5), NOT applied — waits for ROOT-60.
+NEXT for the successor (only on ROOT-60's word):
+1. Apply digital recolour (0 cr) per §5: for bt/mm/th hanghai run discs/disc_recolour.py on still/<g>-hanghai.webp and <g>-hanghai-out.webp,
+   <g>-hanghai.webp, <g>-hanghai-back.webp (measured: bt #144FC0, mm #1B45DB, th #8DC423; tol 25, raise to ~35 if blue bits stay), LOOK at
+   each (sheet: th_sheet.py), keep old files in scratchpad, cdn_sync the files, rebuild bt/mm set previews (th_preview.py).
+   NOTE: `cdn_sync.py --pull` REPLACES local files that differ — never pull a glob over files you just made.
+2. act-ghen: owner/ROOT OK on colour first (proposed #1E6B5C), then redraw A+B+3 clips (3 090 cr) with the gate.
+3. Optional (ROOT asks): ghen LOOP of ht/htg/tg turns the back to the viewer ~1 s → redo with "turns his head aside" (3 × 940).
+Scan tool for broken clips: scratchpad scan2.py is not in the repo — the method: per frame count opaque pixels NOT of the disc colour
+(mode colour ±70); ratio min/min(first,last) < ~0.75 → look. (Copy into discs/ if needed again.)
+Credits: balance 93 226 at 01:10Z (shared). Stop under 60 000.
