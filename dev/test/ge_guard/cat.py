@@ -1,6 +1,6 @@
 # Grand-ending catalogue (design data only). fields: id, name(<=4 words), group 1-10, variant T/H/A, dir O/Q/R/T, manner A/U/B, summit, lever
 G={1:"Quyền lực",2:"Chính trị",3:"Tình yêu",4:"Tình bạn",5:"Báo thù",6:"Con cái",7:"Gia tộc",8:"Tự do",9:"Tài nghệ",10:"Thiên hạ"}
-ID={"tt":"Con gái Tể tướng","dtq":"Con gái Đại tướng quân","muoi":"Con gái nhà buôn muối","cn":"Cung nữ được sủng hạnh","nc":"Công chúa hòa thân · Cao Ly","bd":"Công chúa hòa thân · Bắc Địch","td":"Con gái tội thần","ch":"Cháu gái Thái hậu","thd":"Con gái thầy đồ nghèo","cnv":"Cung nữ tuyển vào cung"}
+ID={"tt":"Con gái Tể tướng","dtq":"Con gái Đại tướng quân","muoi":"Con gái nhà buôn muối","cn":"Cung nữ được sủng hạnh","nc":"Công chúa hòa thân · Cao Ly","bd":"Công chúa hòa thân · Bắc Địch","pf":"Công chúa hòa thân · Phù Tang","td":"Con gái tội thần","ch":"Cháu gái Thái hậu","thd":"Con gái thầy đồ nghèo","cnv":"Cung nữ tuyển vào cung"}
 R=[
 ("tt_co","Quân cờ trong tay cha",[("Ngai vàng họ ngoại",1,"A","Q","U","NDE","clan"),("Hiền tướng hậu cung",2,"T","O","A","ADV","court"),("Buông cờ về núi",8,"T","R","B","FREE","father hills"),("Đại nghĩa diệt thân",7,"A","O","U","PURGE","clan")]),
 ("tt_oan","Phủ Tể tướng mắc oan",[("Thanh thiên hậu cung",5,"T","O","A","JUST","law"),("Máu trả máu",5,"A","Q","U","REV","clan"),("Nữ phán quan",9,"T","Q","B","OFFICE","law"),("Hoa nở ngoài cung",3,"T","T","B","FOLLOW","censor")]),
