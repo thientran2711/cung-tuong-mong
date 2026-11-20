@@ -882,3 +882,4 @@ NEWACCT#11 ~23:05Z: OWNER L1515 on Hán _open6 tests (pics owner_L1515/): 'Copy 
 NEWACCT#11 ~23:10Z: DESIGN14 7a903a3 Hán t8 _open7 (HQP t7 _open6 outfit + vân kiên verbatim; HH colours/crown/item/face kept; 6 collar bands). #11 changed 'near-empress' → 'empress' (.keep allow); keep --all 176 PASS. Sent L1516. Next Lượt 1517.
 - (20/11 22:40Z) FROM MAIN ROOT-81: LIVE now 463d3d70 (E person-minigame-acts r4).
 NEWACCT#11 ~23:15Z: GEN1 98ff064 4 maid gens (tam aFGdKgifSh, nhị gOm5NnCSXO, nhất N2qSYXL6D9, chưởng sự hu2pbShvqL; 540 cr). #11 LOOKED at sheet: tam sash visible over jacket, small flowers OK. Sent sheet L1517. GEN1 idle. Next Lượt 1518.
+NEWACCT#11 ~23:20Z: OWNER L1518 on maid sheet: nhị fabric+rose ≠ tam/nhất → unify (nhi_gpt from shared block), nhị sleeves 1 layer only, nhị collar → crossed like tam; thân cận collar → nhị's current square collar; nhất + 1 short front tà on top (2 layers visible); chưởng sự no change (length OK). → MAIDP2. Next Lượt 1519.
