@@ -9,6 +9,9 @@
    8 «Thôi, lui về cung» (jagent) prints the walk home it charges (r3 FAIL 2)
    9 phối điện resident: Dư đồ home spot label = the walk home charged, no «bái kiến»; palace-view hall rows print their cost (r3 FAIL 3)
    10 «đi chậm» (jface penalty) adds BAL.walk.pen to HER walk (shown = charged), never to an NPC's road (j9 travel per walker) (r3 FAIL 4)
+   11 DEED WALKS (review/jagday-walk, FOLLOW-UP GAP): a deed is never placed where the walk from / to the kept rows around it does not fit
+      (jagday agWalkShort, travel per walker); a deed that lost its road to a later fixed row moves to a later khắc (agWalkGuard); 16 buổi of
+      play: NPC far moves between two deed rows without their «on the way» khắc = 0 (and vs BAL.walk.npc = 0)
    6 no page errors */
 const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
@@ -72,5 +75,34 @@ const boot=`localStorage.clear();SLOT=4;document.getElementById('title').hidden=
  if(r3.res){const n=+((r3.t9.lab.match(/(\d+) khắc/)||[])[1]);ok(r3.etq&&n===r3.t9.tc&&!/bái kiến/.test(r3.t9.lab)&&r3.t9.paid===r3.t9.tc&&r3.t9.at==="home",'9 resident home spot label = walk home charged, no bái kiến',r3.t9);
   ok(new RegExp(`tốn: ${r3.t9.tc} khắc`).test(r3.t9.row)&&r3.t9.oth.length&&r3.t9.oth.every(x=>x.includes("tốn: "+r3.t9.othTxt))&&/tốn: \d+ khắc · bái kiến/.test(r3.t9.chinh),'9 palace-view hall rows print their cost (her room = walk home; other halls = accWalkTxt)',r3.t9)}else console.log('skip 9 (not a phối điện resident in this game)');
  if(r3.t10){const t=r3.t10;ok(t.pen===t.base+t.B&&t.paid===t.pen&&+t.lab===t.pen,'10 đi chậm: her walk +BAL.walk.pen, shown = charged',t);ok(t.npc===t.base&&t.bare===t.base&&t.npcPen===t.base+t.B,'10 her penalty never on an NPC road; an NPC\'s own penalty is',t)}
+
+ /* 11 DEED WALKS */
+ await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
+ const r11=await p.evaluate(boot=>{eval(boot);const o={};used=0;try{j95sync()}catch(e){}const R=S.roster;const v=liveRivals(true).find(x=>x.alive&&!x.out&&!x.confined&&R.P["v"+x.id]);if(!v)return{none:1};const id="v"+v.id;
+  const K=["home","vuon","tyv","ksp","thu","kn","tn","nvp"];let A=null,B=null;for(const a of K)for(const b of K)if(!A&&a!==b&&travel(a,b,v)===BAL.walk.far){A=a;B=b}if(!A)return{nofar:1};o.A=A;o.B=B;o.far=BAL.walk.far;
+  const keep=R.P[id].map(x=>x.slice()),pend=agZ().pend.slice();agZ().pend=agZ().pend.filter(x=>x.id!==id);
+  try{R.P[id]=[[A,"ag_testA",null,"t"],[A,"rest",null,""],[A,"rest",null,""],[A,"rest",null,""]];
+   o.s1=agWalkShort(R,id,1,1,B,v,0);o.s2=agWalkShort(R,id,2,1,B,v,0);o.s3=agWalkShort(R,id,3,1,B,v,0);o.near=agWalkShort(R,id,1,1,A,v,0);
+   R.P[id][3]=[A,"ag_testC",null,"t"];o.after=agWalkShort(R,id,1,1,B,v,0);o.after2=agWalkShort(R,id,2,1,B,v,0);
+   /* a slot the deed planner offers: never one without the road */
+   R.P[id]=[[A,"ag_testA",null,"t"],[A,"rest",null,""],[A,"rest",null,""],[A,"rest",null,""]];const sl=[];for(let kh=0;kh<4;kh++)if(agWalkOk(R,id,kh,1,B,v,0))sl.push(kh);o.slots=sl;
+   /* guard: a deed placed at khắc 1, then a fixed row lands right before it → it moves on to where the road fits */
+   R.P[id]=[[A,"rest",null,""],[A,"rest",null,""],[B,"ag_testG",null,"t"],[A,"rest",null,""]];const pp={key:R.key,id,vid:v.id,k:"testG",kd:"",t:null,kh:2,k1:2,kc:1,pl:B,act:"",why:"t"};agZ().pend.push(pp);
+   o.g0=agWalkShort(R,id,2,1,B,v,0);R.P[id][0]=[A,"ag_testA",null,"t"];o.g1=agWalkShort(R,id,2,1,B,v,0);const n=agWalkGuard(R,0);o.guard={n,kh:pp.kh,drop:!!pp.drop,row:R.P[id].map(x=>x[0]+"/"+x[1]).join(" | ")};
+  }finally{R.P[id]=keep;agZ().pend=pend}
+  return o},boot);
+ if(r11.none||r11.nofar)ok(false,'11 setup',r11);else{
+  ok(r11.s1===r11.far&&r11.s2===r11.far-1&&r11.s3===0&&r11.near===0,'11 after a kept deed the next far deed needs the whole walk between (short '+[r11.s1,r11.s2,r11.s3]+')',r11);
+  ok(r11.after>0&&r11.after2>0,'11 and the walk on to the next kept row must fit too',r11);
+  ok(JSON.stringify(r11.slots)===JSON.stringify([r11.far+1]),'11 the planner offers only khắc with the road ('+r11.slots+')',r11.slots);
+  ok(r11.g0===0&&r11.g1>0&&r11.guard.kh===r11.far+1&&!r11.guard.drop,'11 guard: a deed that lost its road moves on (kh '+r11.guard.kh+')',r11.guard)}
+ const scan11=async off=>{await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);return p.evaluate(([boot,off])=>{eval(boot);if(off)BAL.walk.npc=0;const o={far:0,bad:0,deed:0,L:[]};
+  for(let s=0;s<16;s++){Q.length=0;S.mg=0;for(let u=0;u<4;u++){used=u;try{j95sync()}catch(e){}}const R=S.roster;if(R&&R.P)for(const id in R.P){if(id==="me")continue;const row=R.P[id];if(!Array.isArray(row))continue;
+    for(let j=1;j<row.length;j++){const x=row[j];if(!x||x[0]==null||x[1]==="go"||x[1]==="ag_tell"||(x[1]==="follow"&&x[2]==="me"))continue;let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&(row[q][1]==="go"||row[q][1]==="ag_tell")){g++;q--}
+     if(q<0||!row[q]||row[q][0]==null||row[q][0]===x[0]||row[q][1]==="ag_tell")continue;const t=travel(row[q][0],x[0]);if(t<2)continue;o.far++;if(g<t-1){o.bad++;if(/^ag_/.test(x[1])&&/^ag_/.test(row[q][1])){o.deed++;o.L.push(id+" "+row.map(e=>e[0]+"/"+e[1]).join("|"))}}}}
+   try{nextBuoi()}catch(e){}}o.errs=JWALK.errs.concat(AGD.errs.filter(e=>/walk/.test(e)));return o},[boot,off])};
+ const on11=await scan11(false),off11=await scan11(true);
+ ok(on11.deed===0,'11 16 buổi: NPC far moves deed → deed without «on the way» khắc: on '+on11.deed+' (all far jumps '+on11.bad+'/'+on11.far+') vs off '+off11.deed+' ('+off11.bad+'/'+off11.far+')',on11.L.slice(0,3));
+ ok(!on11.errs.length,'11 no walk errors',on11.errs);
  ok(!errs.length,'6 no page errors',errs.slice(0,3));
  await b.close();const n=res.filter(x=>!x).length;console.log(n?`${n} FAIL`:'ALL OK');process.exit(n?1:0)})();
