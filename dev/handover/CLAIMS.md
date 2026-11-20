@@ -403,3 +403,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | GAP EM01 emotion balance proof (opus) | review/emo-balance; JOB 5 | D #9 for ROOT-76 | session_01964izFYgpKE1QKqdLq7n1c | RUNNING | 20/11 08:24Z |
 | person-minigame-acts r3 fixes (A walk khắc / word mode, B co-op art practice) + ROUND C finish (opus E22f; successor of E22e @acb38351, -c 47cb41b9) | review/person-minigame-acts(-c) | FOREMAN E #17 | session_01DgYSWkzA9w5sqzXzCyN3Xk | RUNNING | 20/11 09:30Z |
 | mg-ui-rest (sonnet; GAP MG04 td_dung guided + MG12 kgReady pet/plant care + KP05 scheme seal/HUD) | review/mg-ui-rest; briefs/root76-mg-ui-rest.md | MAIN ROOT-76 | session_01Rc5AsHdrZN7mzQfdLCDDAN | RUNNING | 20/11 08:30Z |
+| kit-bgtone KIT KEEPER (sonnet; OWNER order 20/11 ~07:45Z game background/UI colours to suit rank-8 costume tone) | review/kit-bgtone; briefs/root76-kit-bgtone.md | MAIN ROOT-76 | session_01Rc5AsMtjP4KTgBZVjENGLs | RUNNING | 20/11 08:35Z |
