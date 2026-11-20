@@ -89,3 +89,35 @@ Not changed (correct exclusions): every world / NPC loop (rows 6, 9, 13 above), 
 ## Leftovers FOR B
 - Row 12: her servants' DAY acts (asTick / day plans) in co-op — a lane of its own (host-computes contract).
 - Rows 10–11: her maids' regard fade and p3 monthly cards on her seat.
+
+## REVIEW r1 (BIG, opus; reviewer session_01N1tNP34YLAbVuMi631JPUN) — PASS a00be4e5 (review/coop-guest-agent-r1)
+PRIORITY #1 CHECK: OD 0 | main 463d3d70 jagent.js:28 agOn() (no other fix) | review/* review/coop-thin-g (jagent.js:27 agGuest → coopGuest, same lines) | claims CLAIMS:539 (this review) + 529/541/542 (worker).
+Reviewed 60ff8f11 (code cec0b93d). r1 = merge LIVE 548dcd0d (8500c108) + reviewer test fix (9d36517a) + merge LIVE 463d3d70 (a00be4e5, index.html/sw.js rebuilt; no source overlap with the branch; main's jcoopworld change = jpma ask kinds, unrelated).
+
+### Design check (every person's month / day act exactly once across the room)
+| path | solo / host | guest phone | host in her context (level ≥ 5, her buổi step) | verdict |
+|---|---|---|---|---|
+| asMonth (wage, Sức, secrets, betrayal, Ban gả, age choice) | asOn → all households (unchanged); her stand-in staff:[]; s.coop friend-maid skipped | her household only (asSelfOn(S), agSelfRun, mine filter) at her week end (j3 endTurn → monthTick) | never (herStep loop stops at the host's buổi; never reaches endTurn below level 13) | once |
+| asTickMine day acts | asPlanned → jagday (unchanged) | week start key w-0 (j3 endTurn → placeWhere → asTick); all buổi at level < 5 | jagstaff nextBuoi wrapper after each of her steps (jcoopthine's placeWhere wrapper is outermost and returns early in herStep → no second path) | once per key (guard S.asK in her person; travels in the part-D patch / her erd diff) |
+| jagmaid fade / favoured rise; p3 cards | amOn / p3On → unchanged | agSelfRun, amMaids = hers | (level 13 only, G) | once |
+| old dice off via asSelfOn(owner) (j10 lover init / spy report / friend tell, j14 sale, jmline seek, j42 love+grant) | asSelfOn = asOn → unchanged | off for HER household only; NPC households unchanged | — | replaced, not lost: Hẹn ước / Lén báo tin / Trò chuyện / Quỳ dâng trà / love acts are in asOpts and now run on her seat (r2); the sale has no agent twin in SOLO either (solo agent mode = buyer's fillStaff) → parity with solo |
+Solo / host: every changed line returns the old value there (agSelf = agOn, asSelfOn = asOn, mine = false, maidLoveMonth returns at asOn) → no number moves; bots not needed (law 4: no new number, everything from BAL; one-core guard PASS).
+Laws: 1 two-way ✔ (her people live as the host's / solo), 4 ✔, 6b ✔ (no zero, no twice), 7/9 n/a (no new player word, no UI).
+
+### Tests (reviewer runs)
+| test | result |
+|---|---|
+| dev/test/coop-guest-agent.js | on merged build first **24/25**: SOLO fade check had no maid left (the seed sends both her maids away in month 1) — fragile probe, not code; also found p3 / host-DAY reds across reruns (probe life died, fest month luck). **Fixed (9d36517a)**: a fresh young maid after the 12 months, one non-fest servMonth (fade exactly once on solo / guest / host) + one fest servMonth (her p3 cards); post-month wages not counted; a probe life that died is rerun. Now **ALL OK 26 ×4** (incl. on a00be4e5) |
+| REAL ROOM level 9 (LIVE Worker; coop-thin-e.js 9 + counters, scratch, not committed) | E-suite 33/33; her staff day acts: host in ctx b keys 0-1, 0-2, 0-3; her phone 1-0 (week start) → disjoint by seat. Repeats of 0-1 / 0-2 on the host came only after E14's own state surgery (the test rewinds her stored buổi on the host but keeps her staff) — no real path rewinds buổi without rewinding the person (host reload restores the whole store or rebuilds it from the week base, S.asK included) |
+| REAL ROOM coop-e2e (+ counters) | the LIVE Worker room in coop-e2e runs at level 0 (old relay): her ticks on her phone 0-1 … 3-0, 12 keys, none twice, host 0 |
+| quickcheck | PASS on 548dcd0d merge and on a00be4e5 (149 s; core gates PASS, old save ok; render 170/161, tab 273/320, buổi 1040/833 ms new/live) |
+| coop-e2e | 68/68 ×3 on the 548dcd0d merge, 68/68 with counters, 68/68 on a00be4e5 |
+| e2e 66/68 (worker run 3, 'same Thái hậu picture', guest fid null) | not reproduced in 5 runs; picture load race on the guest (figure fid read before the CDN face loads) — servants code never touches the Thái hậu figure → flake, not this branch |
+| role-parity | ALL PASS (548dcd0d and a00be4e5) |
+| coop-cyc PAIRED (new vs LIVE 548dcd0d, same old guest .tmp/old.html, 2 runs each) | NEW 58/11, 60/9 · LIVE 60/9, 58/11 — the same 10 cycle night-draw reds on both sides (dung/lui/som/giau 'week draw waits', 'same night', som/giau 'forced deck'); 'mixed: host waited for old guest' red in 1 NEW run (worker saw it on LIVE), 'lui: halves her NEXT flip' red in 1 LIVE run → flaky on both, pre-existing, not servants |
+| coop-thin g4 / g4s / cyc / cycs | not on main (review/coop-thin-g) → G #8 runs them after merging this branch |
+
+### Notes FOR B (not blocking)
+- Merge with review/coop-thin-g: textual conflict jagent.js 27–28; keep G's agGuest body (coopGuest()) + this branch's agLive / agOn / agMine / agSelfRun / agSelf. Under G, coopGuest() is true in her context on the host → agOn() false there outside agSelfRun; asMonth / jagmaid / jagacts3 / asTickMine all enter agSelfRun via agMine() → still once.
+- Edge (low, rare): her own CHIEF maid (S.maid.fav) rising on the guest seat (amRise close path) is not kept in CW.askMaid like a staff maid (mlRose) → if the host refuses the rise request she does not come back. fav is set only by the Emperor's world (host), where her maids are not present → practically unreachable today.
+- asTickMine guard is "last key ≠ this key" (as ASN.key solo); a monotonic key would block test-made rewinds too but could zero her acts if keys ever went backwards — kept as is.
