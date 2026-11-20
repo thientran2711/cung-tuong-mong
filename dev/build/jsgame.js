@@ -236,11 +236,11 @@ SG.K.serv={g:"mac",t:"Mặc cả",eng:sgMac,dur:"3 hồi, mỗi hồi 10 giây",
 const SG_ACTS=[["Dò la","spy"],["Tung tin đồn","rumor"],["Bỏ độc vào trà nàng","poison"],["Bỏ xạ hương vào thuốc nàng","musk"],["Đẩy con nàng xuống hồ","pond"],["Vu oan","frame"]];
 function sgServCost(s){return nv(s,"bribeCost")}
 function sgServOdds(s){return bribeOdds(S,s)}/* 2f2 one core: Mặc cả = the Mua chuộc odds (j29 bribeOdds = jagknow tmOdds) */
-function sgPopPay(pi,tc){return()=>{if(!can(tc))return false;spend(tc);try{S.payOnPick=0}catch(e){}try{if(pi!=null&&S.visit){S.visit.tk=S.visit.tk||{};S.visit.tk[pi]=1}}catch(e){}return true}}
+function sgPopPay(pi,tc){const f=()=>{if(!can(tc))return false;spend(tc);try{S.payOnPick=0}catch(e){}try{if(pi!=null&&S.visit){S.visit.tk=S.visit.tk||{};S.visit.tk[pi]=1}}catch(e){}return true};f.chk=()=>can(tc);return f}
 function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act";
  if(p.j==="act"||p.j==="place"){const v=RV(p.v),k=p.k,a=ACT[k],G=SG.K[k];if(!v||!a||!G)return null;
   const J={gk:k,G,t:G.t,v,name:NM(v),art:G.hide?NM(v):a.n,ask:G.ask(v),cost:fmt(a.c)||"không tốn bạc",p0:()=>sgOdds(v,k),line:w=>sgLine(v,k,w,fmt(a.c)||"không tốn bạc")};
-  if(p.j==="act"){J.pay=()=>true;J.run=m=>sgRun(v.id,k,m)}
+  if(p.j==="act"){J.pay=Object.assign(()=>true,{chk:()=>true});J.run=m=>sgRun(v.id,k,m)}
   else{J.pay=sgPopPay(p.pi,BAL.actK);J.run=m=>{SG.mod=m&&m.step?m:null;let r="";try{r=runAct(S,v,k)||""}finally{SG.mod=null}if(r)log(`${a.n}: ${r}`);render()}}
   return J}
  if(p.j==="over"){const G=SG.K.over,b=40+eyes(S)*6;
@@ -249,15 +249,17 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
  if(p.j==="serv"){const s=servById(p.sid),G=SG.K.serv;if(!s)return null;const o=ownerOf(s),c=sgServCost(s);if(!o||o===S)return null;
   return{gk:"serv",G,t:G.t,v:{maid:s},name:s.name,art:"Mua chuộc",ask:`Mua chuộc ${s.name}, người hầu của ${NM(o)}: tự mặc cả, hay giao cho người làm?`,cost:`${c} bạc`,p0:()=>sgServOdds(s),
    line:w=>`Mua chuộc ${s.name} · ${w} · thành: thành tai mắt của ngươi, tốn ${c} bạc · bại: không mất bạc; nàng có thể mách chủ, kẻ đi đưa lời sợ liên lụy`,/* 2f3: bạc only on success (bribeServ) */
-   pay:()=>{if(S.bac<c||!can(BAL.servK))return false;spend(BAL.servK);return true},run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=bribeServ(S,s)||""}finally{SG.mod=null}if(r)log(r);render()}}}
+   pay:Object.assign(()=>{if(S.bac<c||!can(BAL.servK))return false;spend(BAL.servK);return true},{chk:()=>S.bac>=c&&can(BAL.servK)}),run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=bribeServ(S,s)||""}finally{SG.mod=null}if(r)log(r);render()}}}
  return null}
 
 /* ---------- the choice: Tự ra tay (game) · Giao cho người làm (plain odds) · Thôi ---------- */
 PEND.sgpick=p=>{const J=sgJob(p);if(!J)return null;const G=J.G,p0=J.p0();
  const up=word(sgShift(p0,1)),dn=word(sgShift(p0,-1));const base=J.line(word(p0));
  const gl=base+` · (tự chơi ${G.dur}: khéo thì lên ${up}, vụng thì xuống ${dn})`;
- const go=f=>()=>{const J2=sgJob(p);if(!J2)return;/* the odds she saw, read BEFORE the pay (spend); the run rolls them (+ the game's step), j9 fzRun */const fz=J2.p0();if(!J2.pay()){try{render()}catch(e){}return}
-  J2.fz=fz;const r0=J2.run;J2.run=m=>fzRun(sgShift(fz,(m&&m.step)||0),J2.gk,()=>r0(m));f(J2)};
+ const go=f=>()=>{const J2=sgJob(p);if(!J2)return;/* the odds she saw, read BEFORE the pay (spend); the run rolls them (+ the game's step), j9 fzRun */const fz=J2.p0();
+  /* KIT §13.9: the pay (khắc / the visit's turn) is taken on «Sẵn sàng» or «Giao cho người làm» (kgDefer); the ✕ before it = free back. pay.chk = can she pay now */
+  const dfr=typeof kgDefer==="function"&&typeof J2.pay.chk==="function";if(dfr){if(!J2.pay.chk()){try{render()}catch(e){}return}}else if(!J2.pay()){try{render()}catch(e){}return}
+  J2.fz=fz;const r0=J2.run;J2.run=m=>fzRun(sgShift(fz,(m&&m.step)||0),J2.gk,()=>r0(m));if(dfr)kgDefer(J2.pay,()=>f(J2));else f(J2)};
  return{t:`<p>${J.ask}</p>`,who:p.j==="act"||p.j==="place"?(typeof pv==="function"?pv(J.v):null):null,o:[{n:`Tự ra tay: ${G.t}`,fx:{},x:gl,showOut:true,go:go(J2=>sgPlay(J2))},{n:"Giao cho người làm",fx:{},x:base,showOut:true,go:go(J2=>J2.run(null))},{n:"Thôi",fx:{},showOut:true}]}};
 function sgAsk(p,title){const d=mkP("sgpick",p);if(!d)return;pushDil(d,title);showModal()}
 /* the act-card click (person card / Hậu cung): capture before j6's panel handler; bots that call doAct() directly are untouched */
@@ -294,11 +296,13 @@ function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render
   const note=st>0?"Khéo léo: cơ may lên một bậc.":st<0?"Vụng về: cơ may xuống một bậc.":"Cơ may giữ nguyên.";
   const html=kitGameResult({parts,note:note+" Chạm «Ra tay»: việc làm theo cơ may này, kết quả hiện ở thẻ kết quả."})+kitRows(xr)+
    `<div class="kg82act"><button class="${kg82Btn()}" id="sgdo">Ra tay</button></div>`;
-  kg82ShowRes(html,st>0?true:st<0?false:null);/* merge-train-4: result sound (result-sfx): odds up = win, down = lose */kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");$("sgdo").onclick=()=>{kg82Close();J.run(m)};const dd=kg82El();if(dd)dd.scrollTop=0};
+  kg82ShowRes(html,st>0?true:st<0?false:null);/* merge-train-4: result sound (result-sfx): odds up = win, down = lose */kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");$("sgdo").onclick=()=>{kg82Close();J.run(m)};KG82.quit=null;/* §13.9: the ✕ never acts silently: it asks first; «Ra tay» stays the only way on (the pay is spent), «Ở lại» keeps this card */
+  KG82.xdo=()=>kg82Ask([`Ra tay ngay: việc làm theo cơ may ${word(p1)}.`,"Kết quả hiện ở thẻ kết quả."],"Ra tay",()=>{const b=$("sgdo");if(b)b.click()},"Ra tay?","Ở lại");const dd=kg82El();if(dd)dd.scrollTop=0};
  intro()}
 function sgEng(G,v,onEnd){const box=kg82Box();box.innerHTML="";const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";let done=false,dead=false,stop=null;
  KG82.peekBad=null;const env={v,lv:0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:(raw,info)=>{if(done)return;done=true;clearTimeout(guard);KG82.peek=()=>null;KG82.peekBad=null;const st=stop;KG82.run=null;try{if(st)st()}catch(e){}onEnd(cl(Math.round(raw),0,10),info||{})}};
- const guard=setTimeout(()=>env.end(0,{}),70000);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};
+ let guard=0;if(KG82.giveUp){KG82.giveUp=0;env.end(0,{gaveUp:1});return}/* KIT §13.9 ✕ «Quay lại» on the rules screen: given up = 0/10, the scheme's own odds result */
+ guard=setTimeout(()=>env.end(0,{}),70000);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};KG82.quit=()=>env.end(0,{gaveUp:1});
  kg82Preload(G.g).then(()=>{if(dead||done)return;try{stop=G.eng(box,env)}catch(e){console.error(e);env.end(5,{})}})}
 /* run the act through the normal doAct chain (cost, result card, logs, notes); the step lives only inside this call */
 function sgRun(id,k,m){const v=RV(id),i=rivals.indexOf(v);if(i<0)return;SG.mod=m&&m.step?m:null;try{doAct(i,k)}finally{SG.mod=null}}

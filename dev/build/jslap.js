@@ -58,12 +58,12 @@ function kg82SlapBar(box,env){KG82.slapHint=false;KG82.slapEnd=null;KG82.slapDem
   
   if(resT){g.font=`700 16px ${kg82Col("--display","serif")}`;g.fillStyle=resT[1];kg82Lbl(g,kg82Sym(resT[0]),W/2,H*.82)}else kg82DrawPops(g,pops,now);
   if(dm&&dm.on)dm.draw(g,W,H,now)}
- function end(raw,txt,col){if(stop)return;lock=true;KG82.slapEnd={still,txt};if(still)resT=[txt,col];else kg82Pop(pops,W/2,H*.82,txt,col);draw(performance.now());stop=true;setTimeout(()=>env.end(raw),B.endMs)}
+ function end(raw,txt,col){if(stop)return;lock=true;env.hud({score:mgLive(env,raw)});/* review/mg-score-same: the mark given, on the board at the tap */KG82.slapEnd={still,txt};if(still)resT=[txt,col];else kg82Pop(pops,W/2,H*.82,txt,col);draw(performance.now());stop=true;setTimeout(()=>env.end(raw),B.endMs)}
  function tap(){if(lock||stop||(dm&&dm.on))return;const now=performance.now();hitX=pos(now);const raw=zoneOf(hitX);lock=true;
   if(dodge)end(raw,raw?"Né kịp!":"Không kịp",raw?good:red);else{const s=slapTierOf(raw);end(raw,["","Nhẹ tay","Vừa tay","Nặng tay!"][s],[ink,ink,gold,red][s])}}
  function frame(now){if(stop)return;if(lock||(dm&&dm.on)){draw(now);raf=requestAnimationFrame(frame);return}const tt=now-t0;
   if(tt>D.ms){lock=true;hitX=pos(now);end(dodge?0:R[0],dodge?"Không kịp":"Chậm quá, tay nhẹ",red);return}
-  env.hud({score:"–/10",round:"Hồi 1/1",time:`${Math.max(0,Math.ceil((D.ms-tt)/1000))} giây`});draw(now);raf=requestAnimationFrame(frame)}
+  env.hud({score:mgLive(env,10),round:"Hồi 1/1",time:`${Math.max(0,Math.ceil((D.ms-tt)/1000))} giây`});draw(now);raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();tap()});const kd=e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();tap()}};document.addEventListener("keydown",kd);
  /* test/measure oracle: {x,y} = the zone centre on screen, at = ms until the needle next crosses it (≥ BAL.slap.see ms ahead: a person sees it coming) */
  KG82.peek=()=>{if(lock||stop||(dm&&dm.on))return null;const now=performance.now(),th=ph+(now-t0)*w,P=2*Math.PI,s0=Math.asin(cl(zs,-1,1));let best=1e9;
@@ -130,9 +130,11 @@ window.slapNpcTier=slapNpcTier;
    Off (agOn false) = the old BAL.slap.npc weights, NPC targets never dodge, an NPC's slap on an NPC is nhẹ (B.def). */
 function slapNpcDraw(a){const T=BAL.ag.mg2.tat,E=T.e,e=cl(mgTier("tat",{occ:"tat",p:a}).ease,E[0],E[E.length-1]);let i=0;while(i<E.length-2&&e>E[i+1])i++;
  const f=(e-E[i])/(E[i+1]-E[i]),w=T.w[i].map((x,j)=>x+(T.w[i+1][j]-x)*f);
- /* AG-ALL-2d hand ceiling (OD L1640, jmgt mgHand): the table is the skilled human bot = the best hand; a weaker hand lands the heavy blow less (what
-    she misses falls to nhẹ) — q = where her "tat" hand sits between BAL.ag.mg2.hand.lo and .hi */
- {const H=BAL.ag.mg2.hand;if(H&&H.on&&a&&a!==S&&typeof mgHand==="function"){const Bd=typeof mgCalBand==="function"?mgCalBand("tat"):H;/* AG-ALL-2d2: the band of the owner calibration when set */const q=cl((mgHand("tat",a)-Bd.lo)/Math.max(.01,Bd.hi-Bd.lo),0,1);w[0]+=w[2]*(1-q);w[2]*=q}}
+ /* AG-ALL-2d hand ceiling (OD L1640, jmgt mgHand) — fair spread (OD 20/11 ~01:10Z): the table is the skilled human bot = the middle hand of the band;
+    f = where her "tat" hand (+ art / upbringing lift, mgHandEff) sits from the band centre, −1 … +1 at ± 2 sd of the curve (mgBand far): a weaker hand lands the heavy blow less
+    (what she misses falls to nhẹ), a stronger hand lands it more (taken from nhẹ) — symmetric */
+ {const H=BAL.ag.mg2.hand;if(H&&H.on&&a&&a!==S&&typeof mgHandEff==="function"){const Bd=mgBand("tat"),f=cl((mgHandEff("tat",a)-Bd.c)/Math.max(.01,Bd.far),-1,1);
+  if(f<0){w[0]+=w[2]*-f;w[2]*=1+f}else{const m=w[0]*f;w[0]-=m;w[2]+=m}}}
  let r=Math.random()*(w[0]+w[1]+w[2]);for(let j=0;j<3;j++){if(r<w[j])return j+1;r-=w[j]}return 1}
 function slapNeOdds(t,a){const D=BAL.slap.dodgeOdds;return D[mgTier("ne",{occ:"ne",p:t,rank:typeof rkOf==="function"?rkOf(a):0}).tier]}
 window.slapNpcDraw=slapNpcDraw;window.slapNeOdds=slapNeOdds;

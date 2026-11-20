@@ -11,6 +11,10 @@ const kpN=n=>(n>0?"+":n<0?"−":"")+Math.abs(Math.round(n*100)/100);
 /* ---------- people: title (rank word) + name coloured by rank, face ---------- */
 function kitTitle(p){try{if(!p)return"";if(p===S)return"";if(S&&p===S.emp)return"Hoàng thượng";if(S&&(p===S.thO||p.kind==="th"))return"Thái hậu";
  const f=kitFace(p);let rw=String(f&&f.rw||"").split("·")[0].trim();if(/^(Hoàng tử|Công chúa|Thái tử)/.test(p.name||""))return"";return rw}catch(e){return""}}
+/* fig-label (owner 20/11 "vừa cung nữ tam đẳng, vừa cung nữ thân tín … chọn một thứ một thôi"): ONE merged title for a role that carries a rank.
+   kitMaidTitle(m,lower) = role + rank said once, rank from SRK.maid (never typed): "Cung nữ thân tín tam đẳng"; a rank that is not a "Cung nữ ..." rung
+   keeps its own word + the role: "Chưởng sự cô cô thân tín". EVERY place that shows her role AND rank (stage figure caption, person card, home list, staff list) calls this. */
+function kitMaidTitle(m,lower){let t="Cung nữ thân tín";try{m=m||(S&&S.maid);if(m&&typeof SRK!=="undefined"&&typeof srk==="function"){const r=SRK.maid[srk(m)]||"";t=/^Cung nữ /.test(r)?"Cung nữ thân tín "+r.slice(8):r?r+" thân tín":t}}catch(e){}return lower?t.charAt(0).toLowerCase()+t.slice(1):t}
 /* KIT 48.1: the rank-title colour of a title (kitRankTone lives in jk4, later in the build; until then the CSS falls back to --rc) */
 function kitRtOf(t,col){try{return typeof kitRankTone==="function"?kitRankTone(t,col):""}catch(e){return""}}
 function kitPersonCol(p){try{if(typeof rivals!=="undefined"&&rivals.includes(p))return p.out?KIT_COLD_COL:RCOL[p.queen?7:cl(p.rank||0,0,7)];if(p===S)return S.out?KIT_COLD_COL:RCOL[cl(S.rank||0,0,7)];
