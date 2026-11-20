@@ -40,6 +40,17 @@ button:disabled{opacity:.35;cursor:default}
 .cmp>div{flex:1}
 .cmp img.rank{width:100%;display:block;border-radius:10px;border:1px solid var(--line)}
 .cmp .cl{font-size:14px;font-weight:600;margin:4px 2px}
+.vw{cursor:zoom-in}
+.vw.full{flex:0 0 100%!important;width:100%;max-width:560px;margin:0 auto}
+.hint{margin:0 16px 10px;font-size:14px;font-weight:600;color:var(--accent)}
+#zoom{position:fixed;inset:0;z-index:1000;background:rgba(25,12,14,.94);display:none;flex-direction:column}
+#zoom.on{display:flex}
+#zoom .bar{display:flex;flex-wrap:wrap;gap:8px;padding:8px 12px;align-items:center;color:#fff;font-size:15px}
+#zoom .bar b{margin-right:auto}
+#zoom .sc{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:8px}
+#zoom .pane{position:relative;margin:0 auto;overflow:hidden;background-color:#fff;background-image:linear-gradient(45deg,#ddd 25%,transparent 25%),linear-gradient(-45deg,#ddd 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#ddd 75%),linear-gradient(-45deg,transparent 75%,#ddd 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
+#zoom .pane>.zs{position:absolute;left:0;top:0;width:1024px;height:2304px;transform-origin:0 0}
+#zoom .pane>.zs .stage{transform:none!important}
 </style>
 </head>
 <body>
@@ -89,7 +100,7 @@ function makeView(id,box,label){
     maskPosition:`${SK[1]}px ${SK[2]}px`,webkitMaskPosition:`${SK[1]}px ${SK[2]}px`,maskRepeat:'no-repeat',webkitMaskRepeat:'no-repeat'};Object.assign(n.style,ms);}
   for(const p of f.place)addItem(g,p);
   addJewels(g,f);
-  vw.appendChild(st);const s={vw,st,box,g,id};stages.push(s);return s;
+  vw.appendChild(st);const s={vw,st,box,g,id};stages.push(s);vw.onclick=()=>openZoom(st.cloneNode(true));return s;
 }
 function fit(){for(const s of stages){const k=s.vw.clientWidth/s.box[2];s.st.style.transform=`scale(${k}) translate(${-s.box[0]}px,${-s.box[1]}px)`;}}
 // head items: pin = shaft (rotated into the hair, under the hair layer) + ornament (upright, small tilt, above the hair)
@@ -117,7 +128,7 @@ function card(id){
   const info=el('div','slotinfo');c.appendChild(info);
   const v=el('div','views');c.appendChild(v);
   const vs=[makeView(id,f.head_view,'Cận mặt'),makeView(id,f.wrist_view,'Cổ tay'),makeView(id,f.waist_view,'Dải lưng'),makeView(id,[0,0,1024,2304],'Toàn thân')];
-  vs.forEach(s=>v.appendChild(s.vw));
+  vs.forEach(s=>v.appendChild(s.vw));vs[3].vw.classList.add('full');
   for(const k of ['earring','bangle','necklace',...(f.ribbon?['phibach']:[]),'ngoc_boi','tui_huong']){
     const bt=el('button');bt.textContent=NAMES[k][0];bt.dataset.k=k;
     bt.onclick=()=>{const on=!bt.classList.contains('on');bt.classList.toggle('on',on);bt.textContent=NAMES[k][on?1:0];vs.forEach(s=>s.st.classList.toggle('w-'+k,on));};
@@ -155,9 +166,15 @@ for(const id of Object.keys(A.figures))card(id);
   const row=el('div','cmp');c.appendChild(row);
   const mk=(id,lab)=>{const d=el('div');const s=makeView(id,[0,0,1024,2304],lab);s.st.classList.add('w-phibach');d.appendChild(s.vw);d.insertAdjacentHTML('beforeend',`<div class="cl">${lab}</div>`);row.appendChild(d);};
   mk('c22','A · c22 ghép lớp');
-  const d2=el('div');d2.innerHTML=`<div class="vw" style="aspect-ratio:1024/2304;background:#fff"><span class="lbl">B · sửa ảnh</span><img src="${JEW.pbB}" style="width:100%;display:block"></div><div class="cl">B · c22 sửa ảnh thật</div>`;row.appendChild(d2);
+  const d2=el('div');d2.innerHTML=`<div class="vw" style="aspect-ratio:1024/2304;background:#fff"><span class="lbl">B · sửa ảnh</span><img src="${JEW.pbB}" style="width:100%;display:block"></div><div class="cl">B · c22 sửa ảnh thật</div>`;row.appendChild(d2);d2.querySelector('.vw').onclick=()=>{const im=new Image();im.src=JEW.pbB;Object.assign(im.style,{position:'absolute',left:0,top:0,width:'1024px',height:'2304px'});openZoom(im);};
   mk('c11','A · c11 (cùng hình)');mk('c09','A · c09 (cùng hình)');
   document.getElementById('wrap').appendChild(c);})();
+const Z=el('div');Z.id='zoom';Z.innerHTML='<div class="bar"><b>Hình gốc 1024×2304 · nền trong suốt</b><button id="zfit">Vừa màn hình</button><button id="z1">Cỡ gốc (kéo để xem)</button><button id="z2">Phóng 2×</button><button id="zx">Đóng ✕</button></div><div class="sc"><div class="pane"></div></div>';document.body.appendChild(Z);
+let ZW=null,zk='fit';
+function zlayout(){if(!ZW)return;const sc=Z.querySelector('.sc'),p=Z.querySelector('.pane');const k=zk==='fit'?Math.min((sc.clientWidth-16)/1024,(sc.clientHeight-16)/2304):zk;p.style.width=1024*k+'px';p.style.height=2304*k+'px';ZW.style.transform=`scale(${k})`;}
+function openZoom(node){const p=Z.querySelector('.pane');p.innerHTML='';ZW=el('div','zs');node.style.transform='';ZW.appendChild(node);p.appendChild(ZW);zk='fit';Z.classList.add('on');zlayout();}
+Z.querySelector('#zfit').onclick=()=>{zk='fit';zlayout()};Z.querySelector('#z1').onclick=()=>{zk=1;zlayout()};Z.querySelector('#z2').onclick=()=>{zk=2;zlayout()};Z.querySelector('#zx').onclick=()=>{Z.classList.remove('on');ZW=null};addEventListener('resize',zlayout);
+document.querySelector('h1').insertAdjacentHTML('afterend','<p class="hint">Bấm vào bất kỳ hình nào để mở hình gốc 1024×2304 nền trong suốt (có nút cỡ gốc / phóng 2×). Món đang đeo cũng hiện trong hình phóng.</p>');
 fit();addEventListener('resize',fit);new ResizeObserver(fit).observe(document.body);
 </script>
 </body>
