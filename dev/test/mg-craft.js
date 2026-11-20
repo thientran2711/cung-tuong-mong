@@ -54,7 +54,10 @@ const SRC0=k=>k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}
     else if(pk.drag){const L=pk.drag;const ex=jit(),ey=jit();fire('pointerdown',L[0][0],L[0][1]);const n=8;for(let i=1;i<=n;i++){const f=i/n,seg=Math.min(L.length-2,Math.floor(f*(L.length-1))),t=f*(L.length-1)-seg;
       const x=L[seg][0]+(L[seg+1][0]-L[seg][0])*t+ex*f,y=L[seg][1]+(L[seg+1][1]-L[seg][1])*t+ey*f;fire('pointermove',x,y);await sleep(14)}
      const lx=L[L.length-1][0]+ex,ly=L[L.length-1][1]+ey;fire('pointerup',lx,ly);await sleep(200)}
-    else if(pk.x!=null){const d=Math.max(0,(o.ms0||0)+gauss()*(o.msS||0));if(d)await sleep(d/(CRAFT.speed||1));fire('pointerdown',pk.x,pk.y);fire('pointerup',pk.x,pk.y);await sleep(60)}
+    else if(pk.x!=null){let x=pk.x,y=pk.y;/* memory slip: the sample is covered and a look-alike spool / shape is near: picks it now and then */
+     if(o.slip&&pk.hidden&&pk.alike&&pk.alike.length&&Math.random()<o.slip*pk.alike.length){const a=pk.alike[Math.floor(Math.random()*pk.alike.length)];x=a.x;y=a.y}
+     if(pk.at!=null){/* a timed tap: aim at the moment (+ the hand's spread), on the craft clock */const aim=pk.at+(o.ms0||0)+gauss()*(o.msS||0);let w;while((w=aim-crNow())>0)await sleep(Math.min(4,w/(CRAFT.speed||1)))}
+     fire('pointerdown',x,y);fire('pointerup',x,y);await sleep(pk.at!=null?20:120)}
     busy=false}
    return acts};
   /* open with a caller source, «Sẵn sàng», return what the board shows */
@@ -95,8 +98,8 @@ const SRC0=k=>k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}
   const play=async(ease,bot)=>{const r=await ev(([s,k,e,bot,sp])=>{CRAFT.speed=sp;return window.__open(s,{kind:k,ease:e,bot})},[SRC0(k),k,ease,bot,SPEED]);
    await ev(()=>{CRAFT.speed=1;try{kg82Close()}catch(e){}});return r};
   const row={k,e5:[],e0:[],r5:[],e2:[]};
-  for(let i=0;i<RUNS;i++){const a=await play(5,{px:.012,ms0:0,msS:35});row.e5.push(a.rawF);if(i===0)ok(typeof a.rawF==='number'&&a.rawF>=0&&a.rawF<=10&&a.res,`4 ${k} full bot play ends with a float raw 0..10 + result`,{rawF:a.rawF,acts:a.acts,res:a.res});
-   const c=await play(0,{px:.012,ms0:0,msS:35});row.e0.push(c.rawF);const m=await play(2,{px:.012,ms0:0,msS:35});row.e2.push(m.rawF);const z=await play(5,{random:1});row.r5.push(z.rawF)}
+  for(let i=0;i<RUNS;i++){const a=await play(5,{px:.012,ms0:0,msS:45,slip:.08});row.e5.push(a.rawF);if(i===0)ok(typeof a.rawF==='number'&&a.rawF>=0&&a.rawF<=10&&a.res,`4 ${k} full bot play ends with a float raw 0..10 + result`,{rawF:a.rawF,acts:a.acts,res:a.res});
+   const c=await play(0,{px:.012,ms0:0,msS:45,slip:.08});row.e0.push(c.rawF);const m=await play(2,{px:.012,ms0:0,msS:45,slip:.08});row.e2.push(m.rawF);const z=await play(5,{random:1});row.r5.push(z.rawF)}
   const mean=a=>a.filter(x=>typeof x==='number').reduce((s,x,_,A)=>s+x/A.length,0);
   table.push([k,mean(row.e5),mean(row.e2),mean(row.e0),mean(row.r5)]);
   if(!MEASURE){ok(mean(row.e5)>=9,`5 ${k} skilled bot ≥ 9 raw at ease 5`,row.e5);ok(mean(row.e0)<mean(row.e5),`5 ${k} lower at ease 0 than at ease 5 (law 5)`,{e0:row.e0,e5:row.e5});ok(mean(row.r5)<mean(row.e5)-2,`5 ${k} random bot well below skilled`,row.r5)}
