@@ -64,5 +64,9 @@ Note: the global sentence "never stiff, flat or board-like" (fabric) is kept. Th
 | gpt/thancan_gpt_v2.txt (9034 c) | dev/art/maid7/test_mama.txt | who, vest collar+shoulders, colour placement, header, caption | PASS (3 allowed) | gate broken (master_common.py) |
 | gpt/mama_gpt_v2_a51.txt (6959 c) | mama-specs/m05-a51.styleref.r55.prompt.txt | header, hairpins, caption | PASS (1 allowed) | gate broken |
 | gpt/mama_gpt_v2_a65.txt (6775 c) | mama-specs/m05-a65.styleref.r55.prompt.txt | header, hairpins, caption | PASS (1 allowed) | gate broken |
-keep_check --all: 145 sidecars PASS. check_store: dev/art/master_common.py line 124 IndentationError (commit feeb9fc, B26FAB4 repairing) -> re-run all 5 when fixed.
+keep_check --all: 145 sidecars PASS.
+check_store (gate fixed upstream after 8fc3436; `--scope mama --age aNN`):
+- nhat_gpt_v2 PASS · thancan_gpt_v2 PASS (a36)
+- chuongsu_gpt_v2 FAIL S32 'ma ma hai tà' (pre-existing, chưởng sự has no hai tà) + S01 TWO-COLOUR overlap 59% (kiểu D's own TWO-COLOUR sentence was never the S01 wording; v1 just passed the threshold, and K26 colour words pushed it below). Not changed (A18). Fix if wanted: replace kiểu D's TWO-COLOUR sentence with the S01 text (main eggplant purple, secondary deep rose like #CA7281).
+- mama_gpt_v2_a51/a65 FAIL X18 'Semi-realistic … near-3D' + X19 'background completely transparent': both come from the owner-frozen B prompt (Lượt 694); the base itself fails X19. Not changed because the owner chose B verbatim (L1465). For ChatGPT, X19 only means it may draw no background. Foreman/owner decide.
 Own Counter word diff (LOST words, base − new): nhat v2: none. chuongsu v2: "one", "hairpin" (hairpin swap) + powder×5, blue×5, #a7bad2×2 (K26 swap) — nothing else. thancan v2: small, by, stand (old knot-button collar), ma x4, senior, woman, staff (who), costume ('whole costume' -> 'outer layers') — nothing else. mama v2 a51/a65: nothing.
