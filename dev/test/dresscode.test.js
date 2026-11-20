@@ -116,7 +116,7 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ck=(n,c,x)=>{conso
   aff=(x,y)=>(x===c&&y===b)?60:(y===S?-50:-50);const m0=dcStat(a,'newyear').miss,mb0=dcStat(b,'newyear').miss;dcNpcFest(a,'newyear');dcNpcFest(b,'newyear');aff=window.__aff0;
   o.npc={aOwn:wdOf(a).tram.k,aMiss:[m0,dcStat(a,'newyear').miss],bBor:wdOf(b).tram.k,bFrom:(wdOf(b).tram.bor||{}).from,cLost:!c.inv.some(e=>e.k==='tram_maudon'),bMiss:[mb0,dcStat(b,'newyear').miss]};
   S.turn++;const t0=S.turn;dcReturn();o.npcBack={c:c.inv.some(e=>e.k==='tram_maudon'&&!e.bor),b:wdOf(b).tram.k};
-  /* fix 9: co-op guest seat (worldOn false): no NPC lending, no NPC ask */
+  /* fix 9: worldOn false WITHOUT the request path (no room / thin room): no NPC lending, no NPC ask; the guest of an ordinary room borrows through jcoopask (dev/test/coop-dresscode.js) */
   const wo=window.worldOn;window.worldOn=()=>false;try{worldOn=window.worldOn}catch(e){}aff=(x,y)=>60;o.guest={lenders:dcLenders(S,['do','vang']).length};S.dcAk=null;Q.length=0;dcWeek();o.guest.ask=Q.some(q=>q.evId==='dc:ask');aff=window.__aff0;window.worldOn=wo;try{worldOn=wo}catch(e){}
   /* fix 8: a borrowed piece cannot be sold / pawned / given; the item detail shows the loan */
   S.inv.push({k:'tram_hong',from:'emp',bor:{from:'id:'+a.id,due:S.turn}});const ix=S.inv.length-1;o.guard={sell:wdSell(S,ix),pawn:wdPawn(S,ix),give:giveTo(S,a,ix),still:!!(S.inv[ix]&&S.inv[ix].bor),acts:wdActBtns(S.inv[ix],{i:ix}).length,
@@ -134,7 +134,7 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ck=(n,c,x)=>{conso
  ck('fix 3: every gate offers more than one road, stay always there, roads name what they give',r1.gate.stay&&r1.gate.road>=2&&r1.gate.opts.every(x=>/thành:/.test(x)),r1.gate.opts);
  ck('fix 1: NPC puts on her own trâm of the missing colour',r1.npc.aOwn==='thoa_vang'&&r1.npc.aMiss[1]<r1.npc.aMiss[0],r1.npc);
  ck('fix 1: NPC borrows from a consort who likes her; the piece moves and comes back',r1.npc.bBor==='tram_maudon'&&r1.npc.cLost&&r1.npc.bMiss[1]<r1.npc.bMiss[0]&&r1.npcBack.c&&r1.npcBack.b==='tramngoc',[r1.npc,r1.npcBack]);
- ck('fix 9: co-op guest seat: no NPC lending, no NPC ask',r1.guest.lenders===0&&!r1.guest.ask,r1.guest);
+ ck('fix 9: no world, no request path: no NPC lending, no NPC ask',r1.guest.lenders===0&&!r1.guest.ask,r1.guest);
  ck('fix 8: a borrowed piece cannot be sold, pawned or given; no acts; the detail shows the loan',!r1.guard.sell&&!r1.guard.pawn&&!r1.guard.give&&r1.guard.still&&r1.guard.acts===0&&r1.guard.row,r1.guard);
  ck('fix 11: contest rows show the dress cut',r1.cut>0&&new RegExp('y phục −'+r1.cut).test(r1.det),[r1.det,r1.cut]);
  ck('fix 10: no doubled head word (Lễ Lễ / Lễ Tết …)',!r1.dbl.length,r1.dbl);

@@ -16,9 +16,14 @@
       rule, and are mocked after the festival (dcNpcSettle). Season: same first-tuần grace and no cost where no robe of the season exists at
       the phẩm; NPC cost includes the Thái hậu part.
    5. BORROW = REAL OBJECTS (law 6c): the piece moves, is worn, cannot be sold / pawned / given while borrowed, shows «Mượn của …» in the item
-      detail, and goes back at the next tuần. NPCs ask to borrow hers (two-way). Co-op: lending touches the host-owned world → only where
-      worldOn(); the guest seat never lends or borrows NPC pieces.
-   Co-op: her own gate / season / borrow run on her own seat (personal); NPC loops only where worldOn() (host / solo). Old saves: every field lazy. */
+      detail, and goes back at the next tuần. NPCs ask to borrow hers (two-way).
+   Co-op (owner co-op land gate, MAIN 20/11 21:35Z: every feature works for BOTH seats): her own gate / season / borrow run on her own seat
+   (personal); NPC loops (season dress, NPC festival roads, mocking) only where worldOn() (host / solo). The GUEST borrows from / lends to NPCs
+   too: her side (her S) moves on her seat, the NPC side goes to the host as jcoopask requests (PROTOCOL §4.1): «dcout» = the host takes
+   the piece out of that NPC's chest, «dcin» = the host puts a piece into it (worn when it is a loan to the NPC). A player's key in a loan is
+   her WORLD id ("id:901" host / "id:902" guest), so both seats resolve it; a loan given back to another seat's player is that seat's side.
+   Thin rooms (dev flag level >= 3, world is a read-only lens on the guest): the guest's NPC borrow / lend stays off (not the default room).
+   Old saves: every field lazy (old "me:" keys still mean her). */
 function dcOn(){return !!(typeof BAL==="object"&&BAL.dc&&BAL.dc.on)}
 function dcSeason(){try{const n=BAL.dc.season.n.indexOf(SEASON[S.month-1]);return n<0?0:n}catch(e){return 0}}
 function dcFamN(f){const F=BAL.dc.fam[f];return F?F.n:""}
@@ -65,32 +70,51 @@ function dcName(v){if(!v)return"";if(v===S)return"ngươi";const t=v.queen?"Hoà
 function dcRankN(p){try{return p===S?(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):(p.queen?"Hoàng hậu":RANKS[p.rank].n)}catch(e){return""}}
 function dcFamList(L){return L.map(dcFamN).filter(Boolean).join(", ")}
 /* ---------- borrow: the piece really moves (law 6c) ---------- */
-function dcOwnKey(p){return p===S?"me:"+(S.pid||S.name||""):"id:"+p.id}
-function dcByKey(k){if(!k)return null;if(k===dcOwnKey(S))return S;if(/^id:/.test(k)){const id=k.slice(3);return (typeof rivals!=="undefined"?rivals:[]).find(v=>String(v.id)===id)||null}return null}
+/* co-op: a player's world id (PROTOCOL §3: host 901, guest 902), the same table as jcoopworld me() */
+function dcCoop(){const c=window.COOPW;return !!(c&&c.on&&c.seat)}
+function dcMyId(){const c=window.COOPW;return (c.ctx||c.seat)==="a"?901:902}
+/* a key of the OTHER seat's player (co-op world ids 901 / 902; NPC ids are < 900) */
+function dcOther(k){return dcCoop()&&/^id:90[12]$/.test(k||"")&&k!==dcOwnKey(S)}
+function dcOwnKey(p){return p===S?(dcCoop()?"id:"+dcMyId():"me:"+(S.pid||S.name||"")):"id:"+p.id}
+function dcByKey(k){if(!k)return null;if(k===dcOwnKey(S)||k==="me:"+(S.pid||S.name||""))return S;if(/^id:/.test(k)){const id=k.slice(3);return (typeof rivals!=="undefined"?rivals:[]).find(v=>String(v.id)===id)||null}return null}
 function dcInv(p){p.inv=Array.isArray(p.inv)?p.inv:[];return p.inv}
 /* her pieces / an NPC's pieces of slot sl whose MAIN colour is one of fams, not worn, not borrowed */
 function dcOwnFit(p,fams,sl){const out=[];dcInv(p).forEach((e,i)=>{if(!e||e.h||e.bor||e.dcPrev)return;const w=WD_ITEMS[e.k];if(!w||w.sl!==sl||w.nt)return;const c=dcPiece(e.k);if(c&&fams.includes(c[0]))out.push({e,i,f:c[0],w})});return out}
-/* co-op: lending moves NPC pieces (host-owned world) → only where worldOn() (review r1 fix 9) */
+/* co-op: NPC loops roll once, on the host (review r1 fix 9) */
 function dcWorld(){return typeof worldOn!=="function"||worldOn()}
+/* the guest seat in an ordinary room: her NPC borrow / lend goes to the host as requests (jcoopask H kinds dcout / dcin) */
+function dcGuest(){const c=window.COOPW;return dcCoop()&&c.seat!=="a"&&!!c.askH&&!(typeof thinW==="function"&&thinW())}
+/* may HER borrow / lend touch an NPC chest here: solo, host, or the guest through requests */
+function dcLend(){return dcWorld()||dcGuest()}
+function dcAsk(k,o){try{S.coopAsk=Array.isArray(S.coopAsk)?S.coopAsk:[];const a=Object.assign({id:k+":"+o.bid,k},JSON.parse(JSON.stringify(o)));if(S.coopAsk.some(x=>x&&x.id===a.id))return;
+ a.w=(COOP.state&&COOP.state.week)||0;S.coopAsk.push(a);/* sent at once too, so a host that has not ended this week applies it this week (jcoopask live relay) */
+ setTimeout(()=>{try{if(COOP.state.status==="open")COOP.send({t:"act",k:"ctm-ask",mode:"ask",id:"ask:"+a.id,L:[JSON.parse(JSON.stringify(a))]})}catch(e){}},0)}catch(e){console.error("dcAsk",e)}}
+function dcBid(e){return e&&e.bor&&e.bor.id}
 /* the third road (same for everyone): buy a trâm of a missing colour at her own phẩm or under it from Nội vụ phủ — the cheapest that fits; a real new piece */
 function dcBuyFit(p,fams){try{const P=Math.min(8,wdPOf(p));let best=null;for(let q=Math.max(0,P);q>=0;q--)for(const k of wdPool("tram",q,true)){const w=WD_ITEMS[k];const c=dcPiece(k);if(!w||w.nt||!c||!fams.includes(c[0]))continue;if(!best||w.pr<best.pr)best={k,f:c[0],pr:w.pr|0,w}}return best}catch(e){return null}}
 function dcBuy(p,b){if(!b)return false;const bac=p===S?S.bac:(p.bac||0);if(bac<b.pr)return false;const e={k:b.k,from:"buy"};
  if(p===S)apply({bac:-b.pr});else ap(p,{bac:-b.pr});const w=wdOf(p);if(w.tram)dcInv(p).push(w.tram);w.tram=e;return true}
-function dcLenders(to,fams){const D=BAL.dc.bor;const L=[];if(typeof rivals==="undefined"||!dcWorld())return L;
+function dcLenders(to,fams){const D=BAL.dc.bor;const L=[];if(typeof rivals==="undefined"||!(to===S?dcLend():dcWorld()))return L;
  for(const v of rivals){if(!v||v===to||!v.alive||v.out||v.confined||v.coop)continue;if(aff(v,to)<D.fav)continue;
   for(const sl of D.sl){const c=dcOwnFit(v,fams,sl);if(c.length){L.push({v,...c[0]});break}}if(L.length>=D.max)break}return L}
 function dcBorrow(to,from,e){const D=BAL.dc;const inv=dcInv(from);const i=inv.indexOf(e);if(i<0)return false;inv.splice(i,1);
- const b=Object.assign({},e);delete b.w;b.bor={from:dcOwnKey(from),due:S.turn};const w=wdOf(to);const sl=(WD_ITEMS[b.k]||{}).sl;
+ const b=Object.assign({},e);delete b.w;b.bor={from:dcOwnKey(from),due:S.turn,id:`${S.turn}:${b.k}:${dcOwnKey(from)}>${dcOwnKey(to)}`};const w=wdOf(to);const sl=(WD_ITEMS[b.k]||{}).sl;
  if(sl==="tram"){const prev=w.tram;if(prev)dcInv(to).push(Object.assign(prev,{dcPrev:1}));w.tram=b}else dcInv(to).push(b);
+ /* the guest: the NPC side is the host's (her copy of the NPC is replaced at the week merge) */
+ if(dcGuest()){if(to===S&&from!==S&&!from.coop)dcAsk("dcout",{bid:b.bor.id,from:from.id,pk:e.k});else if(from===S&&to!==S&&!to.coop)dcAsk("dcin",{bid:b.bor.id,to:to.id,e:b,wear:sl==="tram"?1:0})}
  try{affAdd(from,to,-D.bor.use);affAdd(to,from,D.bor.thanks)}catch(x){}/* the same for everyone: the lender spends goodwill, the borrower owes thanks */
  return true}
 /* give back every piece whose festival tuần has passed (her seat handles the pieces she holds and the pieces she lent) */
-function dcGiveBack(holder,e,where){const own=dcByKey(e.bor&&e.bor.from);const w=wdOf(holder);
+function dcGiveBack(holder,e,where){const e0from=e.bor&&e.bor.from;const own=dcByKey(e0from);const w=wdOf(holder);const bid=dcBid(e);
  if(where==="slot"){const pi=dcInv(holder).findIndex(x=>x&&x.dcPrev);if(pi>=0){const prev=dcInv(holder).splice(pi,1)[0];delete prev.dcPrev;w.tram=prev}else w.tram=null}
  else{const i=dcInv(holder).indexOf(e);if(i>=0)dcInv(holder).splice(i,1)}
- delete e.bor;dcInv(own||holder).push(e);return own}
+ delete e.bor;
+ if((own&&own.coop)||dcOther(e0from))return own;/* lent by the other seat's player (found or not in the list this moment): she takes it back on her own seat */
+ if(own===S&&bid&&dcCoop()){S.dcGot=Array.isArray(S.dcGot)?S.dcGot:[];if(S.dcGot.includes(bid))return own;S.dcGot=S.dcGot.slice(-19).concat([bid])}/* once, whatever the merge timing */
+ if(dcGuest()&&own&&own!==S&&holder===S)dcAsk("dcin",{bid:"b"+bid,to:own.id,e,wear:0});
+ dcInv(own||holder).push(e);return own}
 function dcReturn(){if(!S)return;const me=dcOwnKey(S);const back=[];
- const scan=(p,mine)=>{if(!p)return;const w=wdOf(p);const W=dcWorld();const due=e=>e&&e.bor&&e.bor.due<S.turn&&(mine||(W&&(e.bor.from===me||/^id:/.test(e.bor.from))));
+ const scan=(p,mine)=>{if(!p)return;const w=wdOf(p);const W=dcWorld(),G=dcGuest();const due=e=>e&&e.bor&&e.bor.due<S.turn&&(mine||(W&&(e.bor.from===me||/^id:/.test(e.bor.from)))||(G&&e.bor.from===me));
   if(w&&due(w.tram)){const e=w.tram;const o=dcGiveBack(p,e,"slot");back.push([e,p,o])}
   for(const e of dcInv(p).slice())if(due(e)){const o=dcGiveBack(p,e,"inv");back.push([e,p,o])}};
  scan(S,true);for(const v of (typeof rivals!=="undefined"?rivals:[]))if(v&&!v.coop)scan(v,false);
@@ -160,7 +184,7 @@ function dcWeek(){if(!dcOn()||!S||S.dead)return;const R=typeof rivals!=="undefin
     h:`<p>Đang mùa ${sn[dcSeason()]} mà y phục đang mặc là ${y?y.n:"áo"} (${BAL.dc.season.fabN[dcYFab(y&&y.k)]||"vải"}, hợp mùa ${dcYSeasons(y&&y.k).map(i=>sn[i]).join(", ")}).</p><p>Buổi thỉnh an, Thái hậu và các cung chê không biết lễ đổi y phục theo mùa.</p><p>Muốn khỏi bị chê: vào Tư trang, chạm ô Y phục, chọn bộ hợp mùa.</p>`});
    try{log(`Mặc áo trái mùa: ${Object.entries(fx).map(([k,v])=>statTxt(k,v)).join(", ")}.`)}catch(e){}}}
  /* two-way borrow: a consort who lacks a colour asks to borrow her trâm (her seat; the piece moves for real) */
- const f=dcFestNow();if(f&&dcHerOn()&&dcWorld()&&S.dcAk!==dcKey(f)){S.dcAk=dcKey(f);
+ const f=dcFestNow();if(f&&dcHerOn()&&dcLend()&&S.dcAk!==dcKey(f)){S.dcAk=dcKey(f);
   for(const v of R){if(!v||!v.alive||v.out||v.coop||aff(v,S)<BAL.dc.bor.fav)continue;const st=dcStat(v,f.k);if(!st||(!st.miss&&!st.refused)||!st.missing.length)continue;
    const c=dcOwnFit(S,st.missing,"tram")[0];if(!c)continue;
    Q.push({t:`${dcName(v)} xin mượn trâm`,who:v,ev:"dc",evId:"dc:ask",h:`<p>${v.name} thiếu màu ${dcFamList(st.missing)} cho ${f.name}, sai cung nữ sang xin mượn ${c.w.n} của ngươi, qua tuần sau trả.</p>`,
@@ -181,6 +205,21 @@ try{if(typeof wdSell==="function"&&window.wdSell!==wdSell){wdSell=window.wdSell;
 try{if(typeof giveTo==="function"&&window.giveTo!==giveTo){giveTo=window.giveTo;plantItem=window.plantItem}}catch(e){}
 (function(){if(typeof wdActBtns!=="function")return;const b0=wdActBtns;wdActBtns=function(e){try{if(e&&e.bor)return[]}catch(x){}return b0.apply(this,arguments)};window.wdActBtns=wdActBtns})();
 function dcLoanRow(e){if(!e||!e.bor)return null;const o=dcByKey(e.bor.from);return["Mượn",`của ${o?dcName(o):"người khác"} · qua tuần sau trả`,"n"]}
+/* ---------- co-op host: the guest's requests (jcoopask H, PROTOCOL §4.1); 1 = done, 0 = refused ---------- */
+(function(){const CW=window.COOPW;if(!CW||!CW.askH)return;
+ const npc=id=>(typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===id&&!v.coop)||null;
+ /* dcout: the piece she borrowed leaves the NPC's chest (or the NPC's hair, if the NPC put it on this week) */
+ CW.askH.dcout=function(a){const v=npc(a.from);if(!v)return 0;const inv=dcInv(v);const i=inv.findIndex(e=>e&&e.k===a.pk&&!e.bor&&!e.dcPrev&&!e.h);
+  if(i>=0){inv.splice(i,1);return 1}const w=wdOf(v);if(w&&w.tram&&w.tram.k===a.pk&&!w.tram.bor){w.tram=null;return 1}return 0};
+ /* dcin: a piece goes into the NPC's chest; a loan TO the NPC is worn (her own trâm kept aside, dcPrev, as dcBorrow does) */
+ CW.askH.dcin=function(a){const v=npc(a.to);if(!v||!a.e||!a.e.k)return 0;const e=JSON.parse(JSON.stringify(a.e));const w=wdOf(v);const bid=dcBid(e);
+  if(bid&&((w.tram&&dcBid(w.tram)===bid)||dcInv(v).some(x=>dcBid(x)===bid)))return 1;
+  if(a.wear){const prev=w.tram;if(prev)dcInv(v).push(Object.assign(prev,{dcPrev:1}));w.tram=e}else dcInv(v).push(e);return 1};
+ /* guest: a refused dcout (the NPC no longer had it) → the piece never came; her own trâm goes back on */
+ CW.askBack=CW.askBack||{};CW.askBack.dcout=function(d,a,res){if(res[0]!==0||!d||!d.S)return;const bid=a.bid;const w=d.S.wd;const inv=Array.isArray(d.S.inv)?d.S.inv:[];
+  if(w&&w.tram&&dcBid(w.tram)===bid){const pi=inv.findIndex(x=>x&&x.dcPrev);if(pi>=0){const p=inv.splice(pi,1)[0];delete p.dcPrev;w.tram=p}else w.tram=null}
+  else{const i=inv.findIndex(x=>dcBid(x)===bid);if(i>=0)inv.splice(i,1)}
+  d.S.askNote=(d.S.askNote||[]).concat(["Món trâm định mượn đã không còn trong rương người cho mượn; ngươi cài lại trâm của mình."])}})();
 /* ---------- kit surfaces: item rows (Tư trang), wear-slot label, calendar popover ---------- */
 function dcItemRows(k){const w=WD_ITEMS[k];if(!w)return"";const R=[];
  if(w.sl==="y"){const sn=BAL.dc.season.n;R.push(["Màu",dcPair(dcRobe(S)).concat(["theo tranh dáng người đang mặc"]),"n"]);
