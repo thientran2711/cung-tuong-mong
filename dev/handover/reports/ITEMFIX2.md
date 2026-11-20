@@ -36,3 +36,10 @@ Owner verdict needed (only "duyệt" approves).
 
 ## Files
 dev/art/t8-prompt-B/build.py, store-all/build_all.py, check_store.py (S13), APPROVED_SENTENCES.md, approved/proof/c06_t4_a18.txt, itemfix2/*.txt, gen_ledger.jsonl, this report, the sheet.
+
+## HANDOVER (ITEMFIX2 rolls over by context: START_CTX ≈ 3 %, now 27.4 % of 1 M; threshold 28 %) — depth 3
+NOT STARTED: Foreman C #4 job (session_01D3E3NZPt7cysxtbybnExBK), owner GO Lượt 1260, gist verbatim: "thử rên cái prompt y chang như vậy cho bậc Tần ở bên mình thử xem, nhưng mà là một người mới hoàn toàn". ONE Magnific gen (~135 cr), one try:
+- Person: a NEW approved face, never drawn at any rank (not m03, not s62). Candidates checked by me (approved face, 0 ledger lines, no rank picture in the repo): m06 m11 m17 m21 m23 m40 m45 m50 m52 (m24 had old maid figures; m01/m30 have ledger lines). Tell #4 who before firing.
+- Prompt: `python3 dev/art/store-all/build_all.py <p> 4 a18` (gate PASS = exit 0), then swap ONLY the fabric words as in dev/art/seasons4/m03_t4_VAI_DOAN.txt (medium-weight silk SATIN đoạn: the FABRIC sentence, "layered satin (đoạn) robe", "clearly <her colour> satin", "The satin has real weight, a little more than thin silk:"). No CAPTION line. ≤ 10 000. Run the gate on the swapped text (`python3 dev/art/check_store.py <file> <p> v0 --nostyle --low 4`) and report any FAIL honestly (S-rule wording may differ).
+- Settings exactly like m03: images_generate mode gpt-2-6, 1024×2304, resolution 2k, seed 7172, folderReference ba4aecfe-efce-47e2-b53f-30d292091886, refs = her KC ref (`python3 dev/art/kc_ref.py <p>` → ref_id), no swatch at t4. Paste the prompt verbatim, then check creations_get metadata.prompt == file.
+- Ledger kind RANK-TEST-DOAN. Sheet: new picture big + her face ref small + m03 t4 silk (gen P3QrRn242C) for comparison, VN labels (DejaVuSans, webp in dev/handover/review-sheets/). LOOK full size, push, report to Foreman C #4.
