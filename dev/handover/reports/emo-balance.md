@@ -20,3 +20,6 @@ Branch: review/emo-balance (from origin/main 30e8714e). Worktree /home/user/wt/e
 Resume: wait for emo-out/off_*.json (30 each), then run ON:
 `cd /home/user/wt/emo-out && OUT=$PWD SEEDB=500 CAP=30000 bash /home/user/wt/emo/dev/measure/run5b.sh $PWD/live.html on 30`
 Then table per EMOTION_PLAN.md §7, tune only BAL.feel (odAll / w.*.idle / dg.cap), rebuild, re-measure ON-tuned with same seeds, before/after table, final-merge origin/main, gates, SẴN SÀNG KIỂM.
+
+## 10:25Z — foreman D #10 (session_01964izDrx83qqXTF9t1BYy7) ruling
+Keep 150/arm. Early stop allowed: once ON ≥ 75 lives, if every key metric's OFF/ON gap is clearly outside the seed-to-seed spread (state the spread), stop ON, tune BAL.feel, re-measure tuned with the same count. Progress lines + SẴN SÀNG KIỂM go in FOREMAN_D_STATUS.md. OFF at 42/150 by 10:24Z (~22 lives/h).
