@@ -93,3 +93,9 @@ Credits used: 0.
   Mains ≥ 26 ΔE2000 apart. Nearest of P6's mains: s62 5.7 (s48) · s63 3.3 (m19) · s64 4.7 (m02 xuân) · s65 5.8 (s36). The Dịu dàng band is nearly full:
   only 2 clean candidates were left for s63, both at the band's darker edge (OKLCH L .72, L* 66).
   Item colours re-checked: brass + red cord (ice blue/mint) · brown rabbit (amber/ivory — brown is close-ish to amber, flag) · golden-orange loquats (pink/lilac) · brown sandalwood (jade/peach).
+
+## c09 APPROVED (owner "Duyệt", Lượt 1044) → switched ~07:05Z
+- FACE_CUTS_L703.json c09.cut xSBWFuTjfW → UPvIb4owny (src c09.v3h.FULL.txt) · FACE_MAP_L703.json c09 (gen w4atqqr7EI, ver v3h, kind HANDFIX-F4, group unchanged
+  "Công chúa (Tinh nghịch)") · face crop face_page/faces/c09.jpg (crop.py on the new cut, looked) · ledger OWNER-OK line · LOOK_GROUPS.md line. No CDN step (F3's s44 had none).
+- NOT touched: dev/art/earring-test/anchors.json + EAR1.md still use the old cut xSBWFuTjfW (c09, one ear picture-left) → EAR1 refits. The new picture
+  also shows one ear on the picture's left, bare. face_page/ASSETS_L703.json + face_tick.html (old L703 page) also still list the old cut, same as s44 (F3 didn't update them).

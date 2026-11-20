@@ -602,12 +602,12 @@
  "c09": {
   "group": "Công chúa (Tinh nghịch)",
   "hidden": false,
-  "ts": "2026-11-19T20:05:30Z",
-  "cut": "xSBWFuTjfW",
-  "gen": "xSBWQlajfW",
-  "ver": "v3",
-  "prompt_file": "dev/art/face-common/c09.v3.FULL.txt",
-  "kind": "OWNER-GO"
+  "ts": "2026-11-20T07:05:00Z",
+  "cut": "UPvIb4owny",
+  "gen": "w4atqqr7EI",
+  "ver": "v3h",
+  "prompt_file": "dev/art/face-common/c09.v3h.FULL.txt",
+  "kind": "HANDFIX-F4"
  },
  "c10": {
   "group": "Đoan trang",
