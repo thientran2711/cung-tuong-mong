@@ -1,0 +1,7 @@
+Counter({'hits': 27280, 'palette': 6662, 'jewellery / metal / embroidery accent (B15 thin accents)': 6527, 'LEFTOVER': 6137, 'ban / negation (not a colour used)': 4658, 'royal yellow (B17/B21/B22)': 1156, 'body (skin/hair/eyes/lips)': 972, 'held item (B16/E5)': 389, 'rank colour (B24/K13/L1)': 276, 'flower / nature object': 196, 'background (parchment, B9)': 132, 'fabric quality (sheer / gauze, no hue)': 126, 'colour-rule text (describes tone, not a colour used)': 35, 'maid / role uniform': 8, 'winter fur ivory (G26)': 6})
+SAMPLE seasons4 (not yet duyệt) 52
+SAMPLE thu_comoi (not yet duyệt) 8
+SAMPLE b26 s62 (not yet duyệt) 3
+APPROVED approved/proof 12
+APPROVED owner-copy 427
+APPROVED KC face pictures (KC_REFS prompt_file) 115

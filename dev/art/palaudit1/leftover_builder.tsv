@@ -1,0 +1,305 @@
+src	term	cells	people	example_cell	context
+build_all.py	navy	1829	68	m03|t1|a51|-	pink becomes deep rose-plum, blue becomes deep navy blue, green becomes deep dark jade, purple b
+build_all.py	burgundy	1813	67	m03|t1|a51|-	comes deep dark jade, purple becomes deep aubergine, red becomes deep burgundy;
+build_all.py	purple	1651	59	m03|t1|a51|-	rose-plum, blue becomes deep navy blue, green becomes deep dark jade, purple becomes deep aubergine, red becomes deep bur
+build_all.py	red	1598	56	m03|t1|a51|-	vy blue, green becomes deep dark jade, purple becomes deep aubergine, red becomes deep burgundy;
+build_all.py	plum	1144	40	m03|t1|a51|-	pink becomes deep rose-plum, blue becomes deep navy blue, green becomes 
+build_all.py	pearl	1100	37	m12|t5|a18|-	Outfit (rank-5 consort (Phi), clearly much richer and more splendid than the lower ranks): a NEW outfit, a lay
+build_all.py	jade	1027	34	m03|t1|a51|-	 deep rose-plum, blue becomes deep navy blue, green becomes deep dark jade, purple becomes deep aubergine, red becomes 
+build_all.py	rose	1006	34	m03|t1|a51|-	pink becomes deep rose-plum, blue becomes deep navy blue, green bec
+build_all.py	pink	785	30	m03|t1|a51|-	pink becomes deep rose-plum, blue becomes deep na
+build_all.py	green	570	19	m03|t1|a51|-	pink becomes deep rose-plum, blue becomes deep navy blue, green becomes deep dark jade, purple becomes deep 
+build_all.py	blue	570	22	m30|t1|a51|-	pink becomes deep rose-plum, blue becomes deep navy blue, green becomes deep d
+build_all.py	blue	470	3	m16|t8|a18|-	 in its beak, jewelled wings spreading wide on both sides, kingfisher-blue inlay, rubies and pearls, and a few clean pe
+build_all.py	blue	340	5	m01|t7|a18|dong	than the Empress's nine-phoenix crown) with pearl strands, kingfisher-blue inlay and a few gold tassels.
+build_all.py	rose	130	4	m14|t5|a18|-	r three visible layers, richly embroidered in gold with double cotton-rose hibiscus flowers and small birds, TWO layere
+build_all.py	wine	130	8	m04|tnude|a18|-	imperial dragon ceremonial robe of golden yellow silk mixed with deep wine-crimson, richly embroidered on the chest, sh
+build_all.py	blue	130	11	m01|tnude|a18|-	sleeves with large dragons, peonies and clouds in gold and kingfisher-blue silk thread (far denser than any other rank)
+build_all.py	wine	130	8	m04|tnude|a18|-	eeves and skirt (more than half of everything visible), a deep, quiet wine-crimson like #7E2A33 is the second colour (c
+build_all.py	#hex	130	8	m04|tnude|a18|-	ore than half of everything visible), a deep, quiet wine-crimson like #HEX is the second colour (collar, inner robe, wi
+build_all.py	crimson	125	7	m04|tnude|a18|-	ial dragon ceremonial robe of golden yellow silk mixed with deep wine-crimson, richly embroidered on the chest, shoulders 
+build_all.py	crimson	125	7	m04|tnude|a18|-	 and skirt (more than half of everything visible), a deep, quiet wine-crimson like #7E2A33 is the second colour (collar, i
+build_all.py	blue	90	4	m27|t8|a18|-	 phoenixes, incurved chrysanthemums and clouds in gold and kingfisher-blue silk thread (far denser than any other rank)
+build_all.py	blue	80	4	m16|t8|a18|-	 with large phoenixes, tree peonies and clouds in gold and kingfisher-blue silk thread (far denser than any other rank)
+build_all.py	lilac	80	3	m22|t1|a18|dong	Outfit (rank-1 consort (Đáp ứng), the lowest consort rank, elegant, never poor): a NEW outfit, a Tang-style TW
+build_all.py	rose	70	2	m23|t5|a18|-	ree visible layers, richly embroidered in gold with tea-scented China roses and small birds, TWO layered embroidered so
+build_all.py	blue	70	4	m25|t8|a18|-	nixes, bomb-form herbaceous peonies and clouds in gold and kingfisher-blue silk thread (far denser than any other rank)
+build_all.py	coral	60	1	c06|t1|a18|-	INAL robe colour is kept exactly as in image 1 (her first reference): coral red silk like #D5745E is the main colour of 
+build_all.py	red	60	1	c06|t1|a18|-	obe colour is kept exactly as in image 1 (her first reference): coral red silk like #D5745E is the main colour of the 
+build_all.py	#hex	60	1	c06|t1|a18|-	kept exactly as in image 1 (her first reference): coral red silk like #HEX is the main colour of the robe, sleeves and 
+build_all.py	coral	50	1	c06|t1|a18|-	her signature colour family coral red and ivory stays the MAIN robe colour (co
+build_all.py	red	50	1	c06|t1|a18|-	her signature colour family coral red and ivory stays the MAIN robe colour (coral 
+build_all.py	ivory	50	1	c06|t1|a18|-	her signature colour family coral red and ivory stays the MAIN robe colour (coral red, NOT g
+build_all.py	rose	40	1	m03|t5|a18|-	ree visible layers, richly embroidered in gold with tea-scented China roses and small birds, TWO layered embroidered sl
+build_all.py	blue	40	4	m24|t8|a18|-	large phoenixes, mophead hydrangeas and clouds in gold and kingfisher-blue silk thread (far denser than any other rank)
+build_all.py	lilac	20	2	m12|t1|a18|-	he skirt in a lighter tone of the same colour with a wide embroidered lilac sprays hem band, small sprays of embroidered
+build_all.py	coral	20	1	c06|t1|a18|-	the robe itself is clearly coral red silk, little gold, NOT a cream, beige or
+build_all.py	red	20	1	c06|t1|a18|-	the robe itself is clearly coral red silk, little gold, NOT a cream, beige or all
+build_all.py	coral	10	1	c06|t3|a18|-	the robe itself is clearly coral red silk, a little gold thread only at the b
+build_all.py	red	10	1	c06|t3|a18|-	the robe itself is clearly coral red silk, a little gold thread only at the borde
+build_all.py	coral	10	1	c06|t4|a18|-	the robe itself is clearly coral red satin, NOT a cream, beige or all-gold ro
+build_all.py	red	10	1	c06|t4|a18|-	the robe itself is clearly coral red satin, NOT a cream, beige or all-gold robe.
+build_all.py	coral	10	1	c06|t5|a18|-	with formal double camellias and small birds, TWO layered embroidered coral red SHORT shoulder capes, one over the other
+build_all.py	red	10	1	c06|t5|a18|-	h richer and more splendid than the lower ranks): a NEW outfit, a layered satin (đoạn) court robe of two or three visi
+build_all.py	coral	10	1	c06|t5|a18|-	the robe itself is clearly coral red satin, gold only as embroidery accents, 
+build_all.py	red	10	1	c06|t5|a18|-	the robe itself is clearly coral red satin, gold only as embroidery accents, NOT 
+build_all.py	coral	10	1	c06|t6|a18|-	he lower ranks): a NEW outfit, a HEAVY silk brocade robe in SATURATED coral red silk, embroidered with tree peonies and 
+build_all.py	red	10	1	c06|t6|a18|-	er ranks): a NEW outfit, a HEAVY silk brocade robe in SATURATED coral red silk, embroidered with tree peonies and butt
+build_all.py	coral	10	1	c06|t6|a18|-	COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly coral red silk (her signature colour family coral 
+build_all.py	red	10	1	c06|t6|a18|-	LOUR RULE: robe, skirt, sleeves, cape and train are all clearly coral red silk (her signature colour family coral red 
+build_all.py	ivory	10	1	c06|t6|a18|-	all clearly coral red silk (her signature colour family coral red and ivory), with large areas of plain coral red silk v
+build_all.py	ivory	10	1	c06|t6|a18|-	ivory only as a small accent;
+build_all.py	coral	10	1	c06|t7|a18|-	INAL robe colour is kept exactly as in image 1 (her first reference): coral red silk like #D5745E is the MAIN colour of 
+build_all.py	red	10	1	c06|t7|a18|-	obe colour is kept exactly as in image 1 (her first reference): coral red silk like #D5745E is the MAIN colour of the 
+build_all.py	#hex	10	1	c06|t7|a18|-	kept exactly as in image 1 (her first reference): coral red silk like #HEX is the MAIN colour of the robe, cape and sle
+build_all.py	coral	10	1	c06|t8|a18|-	s's imperial phoenix ceremonial robe of golden yellow silk mixed with coral red, richly embroidered on the chest, should
+build_all.py	red	10	1	c06|t8|a18|-	perial phoenix ceremonial robe of golden yellow silk mixed with coral red, richly embroidered on the chest, shoulders 
+build_all.py	coral	10	1	c06|t8|a18|-	INAL robe colour is kept exactly as in image 1 (her first reference): coral red silk like #D5745E, with jade green in th
+build_all.py	red	10	1	c06|t8|a18|-	obe colour is kept exactly as in image 1 (her first reference): coral red silk like #D5745E, with jade green in the in
+build_all.py	#hex	10	1	c06|t8|a18|-	kept exactly as in image 1 (her first reference): coral red silk like #HEX, with jade green in the inner robe and linin
+build_all.py	rose	10	1	m13|t5|a18|-	ree visible layers, richly embroidered in gold with tea-scented China roses and small birds, TWO layered embroidered li
+build_all.py	rose	10	1	m33|t5|a18|-	ree visible layers, richly embroidered in gold with tea-scented China roses and small birds, TWO layered embroidered la
+build_all.py	white	10	1	m36|t6|a18|-	rt, sleeves, cape and train are all clearly luminous cool ivory cream-white silk (her signature colour family ivory crea
+build_all.py	white	10	1	m44|t6|a18|-	e, skirt, sleeves, cape and train are all clearly luminous cool ivory-white silk (her signature colour family ivory and 
+build_all.py	rose	10	1	s52|t3|a18|-	 APRON PANEL (a long narrow ceremonial front panel, semi-double China rose scrolls embroidery, gold-braid edge) reachin
+build_all.py	rose	10	1	s52|t3|a18|-	wide embroidered semi-double China rose scrolls bands at the sleeve ends and the hem
+build_all.py	coral	9	1	c06|t7|a18|-	ore splendid than the lower ranks): a near-empress ceremonial robe of coral red silk with a LAYERED NECKLINE (two-garmen
+build_all.py	red	9	1	c06|t7|a18|-	lendid than the lower ranks): a near-empress ceremonial robe of coral red silk with a LAYERED NECKLINE (two-garment lo
+build_all.py	coral	9	1	c06|t7|a18|-	OVER it the coral red outer robe worn OPEN at the front, its t
+build_all.py	red	9	1	c06|t7|a18|-	OVER it the coral red outer robe worn OPEN at the front, its two s
+build_all.py	rose	8	1	s52|t3|a18|dong	kline framed by a wide stiff soft coral embroidered semi-double China rose scrolls band;
+build_all.py	white	4	2	m06|t6|a18|-	Pose: mid-step with a folded letter on gold-flecked paper sealed with white jade raised in one hand, sleeves flowing, po
+build_all.py	jade	4	2	m18|t4|a18|-	irling one long sleeve, a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not fl
+build_all.py	jade	4	2	m31|t4|a18|-	ng on her draped shawl, a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not fl
+build_all.py	red	4	2	m33|t3|a26|-	e: a small songbird perched on her raised finger, feeding it, a small red-lacquered box in the other hand, the skirt h
+build_all.py	white	4	2	m45|t8|a26|-	ard mid-step with sleeves flowing, a pair of mandarin ducks carved in white jade on a pearl cord in one hand, with state
+build_all.py	pearl	4	2	m45|t8|a26|-	h sleeves flowing, a pair of mandarin ducks carved in white jade on a pearl cord in one hand, with stately grace, the ro
+build_all.py	gold	4	1	m11|t5|a51|-	Pose: weight on one leg, a gold-mounted fly-whisk with a fine-jade handle ra
+build_all.py	jade	4	1	m11|t5|a51|-	Pose: weight on one leg, a gold-mounted fly-whisk with a fine-jade handle raised and admired, the other hand be
+build_all.py	red	4	1	s64|t3|a51|-	as a breeze lifts her long silk stole, one hand catching the stole, a red-lacquer box with silver corners in the other
+build_all.py	silver	4	1	s64|t3|a51|-	 long silk stole, one hand catching the stole, a red-lacquer box with silver corners in the other hand, the skirt hem swi
+build_all.py	pearl	4	1	s64|t5|a51|-	wing back her long sleeve, a gilded hand censer inlaid with mother-of-pearl in the other hand at her chest, poised, the 
+build_all.py	white	4	2	m06|t6|a51|-	Pose: walking forward mid-step with sleeves flowing, a fly-whisk of white horsehair with a white-jade-and-gold handle 
+build_all.py	gold	4	2	m06|t6|a51|-	sleeves flowing, a fly-whisk of white horsehair with a white-jade-and-gold handle in one hand, poised, the robe hem sti
+build_all.py	jade	4	2	m18|t5|a51|-	t hem slightly with one hand as if stepping up a stair, a carved fine-jade lingzhi fungus on a gilded stand in the othe
+build_all.py	white	4	2	m34|t6|a51|-	Pose: both hands presenting a pair of white-jade health balls slightly forward, solemn a
+build_all.py	white	4	1	m03|t2|a65|-	Pose: a graceful dance step, twirling one long sleeve, a fly-whisk of white horsehair with a lacquered handle in the oth
+build_all.py	white	4	1	m26|t1|a65|-	Pose: twirling one long sleeve in a light dance step, a bundle of white chrysanthemums tied with a silk ribbon in th
+build_all.py	red	4	1	m29|t3|a65|-	Pose: gazing at her lightly raised hand, a red-lacquer walking staff with a silver head in 
+build_all.py	silver	4	1	m29|t3|a65|-	gazing at her lightly raised hand, a red-lacquer walking staff with a silver head in the other hand, the skirt hem swingi
+build_all.py	white	2	1	m01|t6|a18|-	Pose: walking forward mid-step with sleeves flowing, a white-jade perfume flask with a gold stopper in on
+build_all.py	jade	2	1	m01|t6|a18|-	Pose: walking forward mid-step with sleeves flowing, a white-jade perfume flask with a gold stopper in one han
+build_all.py	gold	2	1	m01|t6|a18|-	ward mid-step with sleeves flowing, a white-jade perfume flask with a gold stopper in one hand, poised, the robe hem st
+build_all.py	gold	2	1	m06|t6|a18|-	Pose: mid-step with a folded letter on gold-flecked paper sealed with white jade raised 
+build_all.py	jade	2	1	m06|t6|a18|-	mid-step with a folded letter on gold-flecked paper sealed with white jade raised in one hand, sleeves flowing, poised,
+build_all.py	gold	2	1	m09|t6|a18|-	 slightly with one hand as if stepping up a stair, a folded letter on gold-flecked paper sealed with white jade in the 
+build_all.py	white	2	1	m09|t6|a18|-	tepping up a stair, a folded letter on gold-flecked paper sealed with white jade in the other hand, poised, the robe hem
+build_all.py	silver	2	1	m19|t3|a18|-	 resting on her raised finger, a small pellet drum (trống lắc) with a silver-banded handle, a deep drum with two pellets,
+build_all.py	gold	2	1	m22|t5|a18|-	 forward mid-step with sleeves flowing, a small pipa lute inlaid with gold and mother-of-pearl in one hand, poised, the
+build_all.py	pearl	2	1	m22|t5|a18|-	ith sleeves flowing, a small pipa lute inlaid with gold and mother-of-pearl in one hand, poised, the robe hem stirring s
+build_all.py	gold	2	1	m25|t5|a18|-	ding still with a slight shoulder turn, a small pipa lute inlaid with gold and mother-of-pearl cradled in the crook of 
+build_all.py	pearl	2	1	m25|t5|a18|-	light shoulder turn, a small pipa lute inlaid with gold and mother-of-pearl cradled in the crook of one arm, poised, the
+build_all.py	white	2	1	m34|t6|a18|-	Pose: both hands presenting a white-jade perfume flask with a gold stopper sligh
+build_all.py	jade	2	1	m34|t6|a18|-	Pose: both hands presenting a white-jade perfume flask with a gold stopper slightly f
+build_all.py	gold	2	1	m34|t6|a18|-	Pose: both hands presenting a white-jade perfume flask with a gold stopper slightly forward, solemn and serene,
+build_all.py	white	2	1	m38|t6|a18|-	Pose: standing still with a slight shoulder turn, a white-jade perfume flask with a gold stopper cradl
+build_all.py	gold	2	1	m38|t6|a18|-	 still with a slight shoulder turn, a white-jade perfume flask with a gold stopper cradled in the crook of one arm, poi
+build_all.py	white	2	1	m48|t6|a18|-	Pose: gazing at a small butterfly resting on her raised finger, a white-jade perfume flask with a gold stopper in th
+build_all.py	gold	2	1	m48|t6|a18|-	erfly resting on her raised finger, a white-jade perfume flask with a gold stopper in the other hand, poised, the robe 
+build_all.py	white	2	1	s64|t6|a18|-	Pose: offering a white-jade perfume flask with a gold stopper forwa
+build_all.py	jade	2	1	s64|t6|a18|-	Pose: offering a white-jade perfume flask with a gold stopper forward wi
+build_all.py	gold	2	1	s64|t6|a18|-	Pose: offering a white-jade perfume flask with a gold stopper forward with both hands, head tilted
+build_all.py	red	2	1	s65|t2|a18|-	y with one hand as if stepping up a stair, a folded letter on painted red-and-gold paper tied with a silk cord in the 
+build_all.py	gold	2	1	s65|t2|a18|-	ne hand as if stepping up a stair, a folded letter on painted red-and-gold paper tied with a silk cord in the other han
+build_all.py	pearl	2	1	s14|t5|a18|-	ing one long sleeve, a small pipa lute inlaid with gold and mother-of-pearl in the other hand, poised, the robe hem stir
+build_all.py	pearl	2	1	s25|t5|a18|-	sleeve sliding back, a small pipa lute inlaid with gold and mother-of-pearl in the other hand, poised, the robe hem stir
+build_all.py	gold	2	1	s26|t5|a18|-	: a graceful dance step, twirling one long sleeve, a folded letter on gold-flecked paper tied with a silk cord in the o
+build_all.py	red	2	1	s27|t2|a18|-	ing forward mid-step with sleeves flowing, a folded letter on painted red-and-gold paper tied with a silk cord in one 
+build_all.py	gold	2	1	s27|t2|a18|-	ard mid-step with sleeves flowing, a folded letter on painted red-and-gold paper tied with a silk cord in one hand, the
+build_all.py	jade	2	1	s31|t4|a18|-	and catching the stole, a small pellet drum (trống lắc) with a carved jade handle, a deep drum with two pellets, not fl
+build_all.py	white	2	1	s34|t6|a18|-	Pose: hands folded at her waist under the long sleeves, a small white-jade pellet drum (trống lắc) with pearl stri
+build_all.py	white	2	1	s35|t6|a18|-	Pose: a white-jade perfume flask with a gold stopper swing
+build_all.py	jade	2	1	s35|t6|a18|-	Pose: a white-jade perfume flask with a gold stopper swinging g
+build_all.py	white	2	1	s37|t6|a18|-	leeve sliding back, a folded letter on gold-flecked paper sealed with white jade in the other hand, poised, the robe hem
+build_all.py	jade	2	1	s37|t6|a18|-	sliding back, a folded letter on gold-flecked paper sealed with white jade in the other hand, poised, the robe hem stir
+build_all.py	red	2	1	s40|t2|a18|-	Pose: stepping forward to offer a folded letter on painted red-and-gold paper tied with a silk cord in both
+build_all.py	gold	2	1	s40|t2|a18|-	Pose: stepping forward to offer a folded letter on painted red-and-gold paper tied with a silk cord in both hands, s
+build_all.py	white	2	1	s40|t6|a18|-	Pose: swaying gently, a small white-jade pellet drum (trống lắc) with pearl stri
+build_all.py	gold	2	1	s42|t8|a18|-	Pose: one hand drawing back her long sleeve, a folded letter on gold-flecked imperial paper tied with a pearl cor
+build_all.py	pearl	2	1	s42|t8|a18|-	ng sleeve, a folded letter on gold-flecked imperial paper tied with a pearl cord in the other hand at her chest, with st
+build_all.py	silver	2	1	s43|t3|a18|-	tep, twirling one long sleeve, a small pellet drum (trống lắc) with a silver-banded handle, a deep drum with two pellets,
+build_all.py	gold	2	1	s43|t5|a18|-	ilk stole, one hand catching the stole, a small pipa lute inlaid with gold and mother-of-pearl in the other hand, poise
+build_all.py	pearl	2	1	s43|t5|a18|-	 catching the stole, a small pipa lute inlaid with gold and mother-of-pearl in the other hand, poised, the robe hem stir
+build_all.py	jade	2	1	s46|t7|a18|-	Pose: weight on one leg, a gold-mounted jade vase with peonies raised and admired, the ot
+build_all.py	white	2	1	s53|t6|a18|-	Pose: head slightly raised, composed, a small white-jade pellet drum (trống lắc) with pearl stri
+build_all.py	gold	2	1	s55|t8|a18|-	 slightly with one hand as if stepping up a stair, a folded letter on gold-flecked imperial paper tied with a pearl cor
+build_all.py	pearl	2	1	s55|t8|a18|-	p a stair, a folded letter on gold-flecked imperial paper tied with a pearl cord in the other hand, with stately grace, 
+build_all.py	red	2	1	s56|t2|a18|-	Pose: mid-step with a folded letter on painted red-and-gold paper tied with a silk cord raised 
+build_all.py	gold	2	1	s56|t2|a18|-	Pose: mid-step with a folded letter on painted red-and-gold paper tied with a silk cord raised in one ha
+build_all.py	white	2	1	s56|t6|a18|-	Pose: raising a small white-jade pellet drum (trống lắc) with pearl stri
+build_all.py	gold	2	1	s58|t8|a18|-	Pose: gazing at her lightly raised hand, a folded letter on gold-flecked imperial paper tied with a pearl cor
+build_all.py	pearl	2	1	s58|t8|a18|-	ised hand, a folded letter on gold-flecked imperial paper tied with a pearl cord in the other hand, with stately grace, 
+build_all.py	silver	2	1	s61|t3|a18|-	and as if stepping up a stair, a small pellet drum (trống lắc) with a silver-banded handle, a deep drum with two pellets,
+build_all.py	ivory	2	1	c06|t1|a18|-	ing that shows her neck and collarbones, edged only by a narrow plain ivory silk band with no embroidery on it;
+build_all.py	ivory	2	1	c06|t2|a18|-	rbones, its edge a LAYERED border of two stacked narrow bands, a thin ivory
+build_all.py	rose	2	1	s52|t3|a18|-	KLINE framed by a wide stiff soft coral embroidered semi-double China rose scrolls band;
+build_all.py	red	2	1	m13|t3|a26|-	reeze lifts her long silk stole, one hand catching the stole, a small red-lacquered box in the other hand, the skirt h
+build_all.py	jade	2	1	m34|t4|a26|-	ding still with a slight shoulder turn, a small pipa lute inlaid with jade cradled in the crook of one arm, the robe he
+build_all.py	white	2	1	m35|t8|a26|-	long sleeve in a light dance step, a pair of mandarin ducks carved in white jade on a pearl cord in the other hand, with
+build_all.py	pearl	2	1	m35|t8|a26|-	 light dance step, a pair of mandarin ducks carved in white jade on a pearl cord in the other hand, with stately grace, 
+build_all.py	white	2	1	m40|t8|a26|-	Pose: offering a pair of mandarin ducks carved in white jade on a pearl cord forward with both hands
+build_all.py	jade	2	1	m40|t8|a26|-	Pose: offering a pair of mandarin ducks carved in white jade on a pearl cord forward with both hands, hea
+build_all.py	pearl	2	1	m40|t8|a26|-	Pose: offering a pair of mandarin ducks carved in white jade on a pearl cord forward with both hands, head tilted ge
+build_all.py	jade	2	1	m45|t8|a26|-	d-step with sleeves flowing, a pair of mandarin ducks carved in white jade on a pearl cord in one hand, with stately gr
+build_all.py	red	2	1	m48|t3|a26|-	Pose: mid-step with a small red-lacquered box raised in one hand, sleeves fl
+build_all.py	white	2	1	s56|t8|a26|-	Pose: weight on one leg, a pair of mandarin ducks carved in white jade on a pearl cord raised and admired, the
+build_all.py	pearl	2	1	s56|t8|a26|-	weight on one leg, a pair of mandarin ducks carved in white jade on a pearl cord raised and admired, the other hand bene
+build_all.py	red	2	1	m12|t3|a36|-	Pose: walking forward mid-step with sleeves flowing, a silver-mounted red-agate pendant on a silk cord in one hand, th
+build_all.py	silver	2	1	m22|t3|a36|-	Pose: mid-step with a small pipa lute inlaid with silver raised in one hand, sleeves flowing, the ski
+build_all.py	silver	2	1	m26|t3|a36|-	 twirl, the skirt still flaring softly, a small pipa lute inlaid with silver close to her chest, the skirt hem swinging s
+build_all.py	pearl	2	1	m29|t6|a36|-	 with a slight shoulder turn, a small pipa lute inlaid with mother-of-pearl and white jade cradled in the crook of one a
+build_all.py	white	2	1	m29|t6|a36|-	ight shoulder turn, a small pipa lute inlaid with mother-of-pearl and white jade cradled in the crook of one arm, poised
+build_all.py	jade	2	1	m29|t6|a36|-	houlder turn, a small pipa lute inlaid with mother-of-pearl and white jade cradled in the crook of one arm, poised, the
+build_all.py	silver	2	1	m41|t3|a36|-	Pose: stepping forward to offer a small pipa lute inlaid with silver in both hands, sleeves swinging, the skirt h
+build_all.py	pearl	2	1	m44|t6|a36|-	Pose: a small pipa lute inlaid with mother-of-pearl and white jade swinging gently from her hand
+build_all.py	silver	2	1	s17|t3|a36|-	 forward mid-step with sleeves flowing, a small pipa lute inlaid with silver in one hand, the skirt hem swinging softly.
+build_all.py	red	2	1	s59|t3|a36|-	em slightly with one hand as if stepping up a stair, a silver-mounted red-agate pendant on a silk cord in the other ha
+build_all.py	red	2	1	m01|t3|a51|-	Pose: twirling one long sleeve in a light dance step, a red-lacquer box with silver corners in the other
+build_all.py	silver	2	1	m01|t3|a51|-	wirling one long sleeve in a light dance step, a red-lacquer box with silver corners in the other hand, the skirt hem swi
+build_all.py	pearl	2	1	m02|t5|a51|-	eve in a light dance step, a gilded hand censer inlaid with mother-of-pearl in the other hand, poised, the robe hem stir
+build_all.py	jade	2	1	m06|t6|a51|-	tep with sleeves flowing, a fly-whisk of white horsehair with a white-jade-and-gold handle in one hand, poised, the rob
+build_all.py	white	2	1	m07|t3|a51|-	Pose: gazing at her lightly raised hand, a fly-whisk of white horsehair with a silver handle in the other 
+build_all.py	silver	2	1	m07|t3|a51|-	ing at her lightly raised hand, a fly-whisk of white horsehair with a silver handle in the other hand, the skirt hem swin
+build_all.py	bronze	2	1	m09|t1|a51|-	Pose: stepping forward to offer a small bronze hand censer with a plain wooden handle in bo
+build_all.py	bronze	2	1	m10|t1|a51|-	Pose: a small bronze hand censer with a plain wooden handle swing
+build_all.py	jade	2	1	m12|t4|a51|-	Pose: twirling one long sleeve in a light dance step, a pair of jade health balls in the other hand, the robe hem
+build_all.py	white	2	1	m12|t6|a51|-	Pose: gazing at her lightly raised hand, a fly-whisk of white horsehair with a white-jade-and-gold handle 
+build_all.py	jade	2	1	m12|t6|a51|-	 her lightly raised hand, a fly-whisk of white horsehair with a white-jade-and-gold handle in the other hand, poised, t
+build_all.py	gold	2	1	m12|t6|a51|-	tly raised hand, a fly-whisk of white horsehair with a white-jade-and-gold handle in the other hand, poised, the robe h
+build_all.py	jade	2	1	m13|t5|a51|-	Pose: offering a carved fine-jade lingzhi fungus on a gilded stand forward wit
+build_all.py	white	2	1	m18|t3|a51|-	Pose: a fly-whisk of white horsehair with a silver handle swinging gent
+build_all.py	white	2	1	m18|t6|a51|-	Pose: mid-step with a white-jade ruyi raised in one hand, sleeves flowin
+build_all.py	jade	2	1	m18|t6|a51|-	Pose: mid-step with a white-jade ruyi raised in one hand, sleeves flowing, po
+build_all.py	white	2	1	m20|t8|a51|-	Pose: a graceful dance step, twirling one long sleeve, a small white-jade statuette of Guanyin on a gold stand in
+build_all.py	jade	2	1	m20|t8|a51|-	Pose: a graceful dance step, twirling one long sleeve, a small white-jade statuette of Guanyin on a gold stand in the 
+build_all.py	gold	2	1	m20|t8|a51|-	wirling one long sleeve, a small white-jade statuette of Guanyin on a gold stand in the other hand, with stately grace,
+build_all.py	white	2	1	m21|t6|a51|-	Pose: a graceful dance step, twirling one long sleeve, a white-jade ruyi in the other hand, poised, the rob
+build_all.py	jade	2	1	m21|t6|a51|-	Pose: a graceful dance step, twirling one long sleeve, a white-jade ruyi in the other hand, poised, the robe hem
+build_all.py	white	2	1	m24|t6|a51|-	Pose: one hand resting on her draped shawl, a white-jade ruyi in the other hand at her hip, pois
+build_all.py	white	2	1	m26|t6|a51|-	Pose: one hand drawing back her long sleeve, a white-jade ruyi in the other hand at her chest, po
+build_all.py	jade	2	1	m26|t6|a51|-	Pose: one hand drawing back her long sleeve, a white-jade ruyi in the other hand at her chest, poised,
+build_all.py	white	2	1	m28|t8|a51|-	Pose: one hand drawing back her long sleeve, a small white-jade statuette of Guanyin on a gold stand in
+build_all.py	jade	2	1	m28|t8|a51|-	Pose: one hand drawing back her long sleeve, a small white-jade statuette of Guanyin on a gold stand in the 
+build_all.py	gold	2	1	m28|t8|a51|-	ng back her long sleeve, a small white-jade statuette of Guanyin on a gold stand in the other hand at her chest, with s
+build_all.py	white	2	1	m29|t6|a51|-	Pose: standing still with a slight shoulder turn, a pair of white-jade health balls cradled in the crook of on
+build_all.py	jade	2	1	m29|t6|a51|-	Pose: standing still with a slight shoulder turn, a pair of white-jade health balls cradled in the crook of one arm
+build_all.py	white	2	1	m30|t8|a51|-	Pose: gazing at her lightly raised hand, a small white-jade statuette of Guanyin on a gold stand in
+build_all.py	gold	2	1	m30|t8|a51|-	her lightly raised hand, a small white-jade statuette of Guanyin on a gold stand in the other hand, with stately grace,
+build_all.py	jade	2	1	m32|t5|a51|-	Pose: gazing at her lightly raised hand, a carved fine-jade lingzhi fungus on a gilded stand in the othe
+build_all.py	jade	2	1	m33|t5|a51|-	Pose: a carved fine-jade lingzhi fungus on a gilded stand swinging ge
+build_all.py	jade	2	1	m34|t6|a51|-	Pose: both hands presenting a pair of white-jade health balls slightly forward, solemn and se
+build_all.py	peach	2	1	m35|t3|a51|-	Pose: walking forward mid-step with sleeves flowing, a carved peach-wood comb in a silk case in one hand, the sk
+build_all.py	white	2	1	m36|t6|a51|-	e hand raised gracefully at shoulder height, fingers softly curved, a white-jade ruyi in the other hand, poised, the rob
+build_all.py	jade	2	1	m36|t6|a51|-	 raised gracefully at shoulder height, fingers softly curved, a white-jade ruyi in the other hand, poised, the robe hem
+build_all.py	jade	2	1	m37|t5|a51|-	Pose: standing still with a slight shoulder turn, a carved fine-jade lingzhi fungus on a gilded stand cradled in 
+build_all.py	white	2	1	m41|t6|a51|-	Pose: offering a white-jade ruyi forward with both hands, head tilt
+build_all.py	jade	2	1	m41|t6|a51|-	Pose: offering a white-jade ruyi forward with both hands, head tilted ge
+build_all.py	peach	2	1	m50|t3|a51|-	Pose: stepping forward to offer a carved peach-wood comb in a silk case in both hands, slee
+build_all.py	white	2	1	s12|t8|a51|-	 just finished a small twirl, the skirt still flaring softly, a small white-jade statuette of Guanyin on a gold stand cl
+build_all.py	gold	2	1	s12|t8|a51|-	rt still flaring softly, a small white-jade statuette of Guanyin on a gold stand close to her chest, with stately grace
+build_all.py	jade	2	1	s13|t5|a51|-	finished a small twirl, the skirt still flaring softly, a carved fine-jade lingzhi fungus on a gilded stand close to he
+build_all.py	jade	2	1	s16|t5|a51|-	Pose: stepping forward to offer a carved fine-jade lingzhi fungus on a gilded stand in both han
+build_all.py	jade	2	1	s18|t4|a51|-	Pose: just finished a small twirl, the skirt still flaring softly, a jade-handled fly-whisk of white horsehair close t
+build_all.py	white	2	1	s18|t4|a51|-	ll twirl, the skirt still flaring softly, a jade-handled fly-whisk of white horsehair close to her chest, the robe hem s
+build_all.py	red	2	1	s21|t3|a51|-	ing her skirt hem slightly with one hand as if stepping up a stair, a red-lacquer box with silver corners in the other
+build_all.py	silver	2	1	s21|t3|a51|-	ghtly with one hand as if stepping up a stair, a red-lacquer box with silver corners in the other hand, the skirt hem swi
+build_all.py	bronze	2	1	s23|t1|a51|-	Pose: a graceful dance step, twirling one long sleeve, a small bronze hand censer with a plain wooden handle in th
+build_all.py	white	2	1	s24|t6|a51|-	ing her skirt hem slightly with one hand as if stepping up a stair, a white-jade ruyi in the other hand, poised, the rob
+build_all.py	gold	2	1	s25|t5|a51|-	Pose: walking forward mid-step with sleeves flowing, a gold-mounted fly-whisk with a fine-jade handle in
+build_all.py	jade	2	1	s25|t5|a51|-	d mid-step with sleeves flowing, a gold-mounted fly-whisk with a fine-jade handle in one hand, poised, the robe hem sti
+build_all.py	red	2	1	s28|t3|a51|-	Pose: walking forward mid-step with sleeves flowing, a red-lacquer box with silver corners in one hand,
+build_all.py	silver	2	1	s28|t3|a51|-	walking forward mid-step with sleeves flowing, a red-lacquer box with silver corners in one hand, the skirt hem swinging 
+build_all.py	pearl	2	1	s28|t5|a51|-	Pose: mid-step with a gilded hand censer inlaid with mother-of-pearl raised in one hand, sleeves flowing, poised,
+build_all.py	jade	2	1	s30|t4|a51|-	Pose: mid-step with a pair of jade health balls raised in one hand, sleeves flo
+build_all.py	white	2	1	s33|t6|a51|-	Pose: twirling one long sleeve in a light dance step, a pair of white-jade health balls in the other hand, poised,
+build_all.py	jade	2	1	s33|t6|a51|-	Pose: twirling one long sleeve in a light dance step, a pair of white-jade health balls in the other hand, poised, the 
+build_all.py	red	2	1	s35|t3|a51|-	Pose: gazing at her lightly raised hand, a red-lacquer box with silver corners in the other
+build_all.py	silver	2	1	s35|t3|a51|-	Pose: gazing at her lightly raised hand, a red-lacquer box with silver corners in the other hand, the skirt hem swi
+build_all.py	bronze	2	1	s37|t1|a51|-	reeze lifts her long silk stole, one hand catching the stole, a small bronze hand censer with a plain wooden handle in th
+build_all.py	jade	2	1	s37|t4|a51|-	aised gracefully at shoulder height, fingers softly curved, a pair of jade health balls in the other hand, the robe hem
+build_all.py	silver	2	1	s38|t3|a51|-	 hand, her sleeve sliding back, a fly-whisk of white horsehair with a silver handle in the other hand, the skirt hem swin
+build_all.py	gold	2	1	s44|t8|a51|-	tepping forward to offer a small white-jade statuette of Guanyin on a gold stand in both hands, sleeves swinging, with 
+build_all.py	jade	2	1	s46|t4|a51|-	Pose: standing still with a slight shoulder turn, a jade-handled fly-whisk of white horsehair cradled
+build_all.py	white	2	1	s46|t4|a51|-	anding still with a slight shoulder turn, a jade-handled fly-whisk of white horsehair cradled in the crook of one arm, t
+build_all.py	jade	2	1	s51|t4|a51|-	Pose: stepping forward to offer a jade-handled fly-whisk of white horsehair in both
+build_all.py	jade	2	1	s51|t8|a51|-	Pose: twirling one long sleeve in a light dance step, a small white-jade statuette of Guanyin on a gold stand in the 
+build_all.py	gold	2	1	s51|t8|a51|-	e in a light dance step, a small white-jade statuette of Guanyin on a gold stand in the other hand, with stately grace,
+build_all.py	pearl	2	1	s54|t5|a51|-	as if stepping up a stair, a gilded hand censer inlaid with mother-of-pearl in the other hand, poised, the robe hem stir
+build_all.py	bronze	2	1	s59|t1|a51|-	Pose: mid-step with a small bronze hand censer with a plain wooden handle raise
+build_all.py	white	2	1	s59|t6|a51|-	Pose: standing still with a slight shoulder turn, a fly-whisk of white horsehair with a white-jade-and-gold handle 
+build_all.py	white	2	1	s60|t6|a51|-	Pose: walking forward mid-step with sleeves flowing, a white-jade ruyi in one hand, poised, the robe hem 
+build_all.py	jade	2	1	s60|t6|a51|-	Pose: walking forward mid-step with sleeves flowing, a white-jade ruyi in one hand, poised, the robe hem stirr
+build_all.py	peach	2	1	s63|t3|a51|-	Pose: mid-step with a carved peach-wood comb in a silk case raised in one hand,
+build_all.py	jade	2	1	m01|t5|a65|-	ifts her long silk stole, one hand catching the stole, a pair of fine-jade health balls in the other hand, poised, the 
+build_all.py	white	2	1	m01|t6|a65|-	Pose: walking forward mid-step with sleeves flowing, a carved white-jade lingzhi fungus on a gold stand in one h
+build_all.py	jade	2	1	m01|t6|a65|-	Pose: walking forward mid-step with sleeves flowing, a carved white-jade lingzhi fungus on a gold stand in one hand, 
+build_all.py	gold	2	1	m01|t6|a65|-	id-step with sleeves flowing, a carved white-jade lingzhi fungus on a gold stand in one hand, poised, the robe hem stir
+build_all.py	white	2	1	m04|t6|a65|-	Pose: mid-step with a carved white-jade lingzhi fungus on a gold stand raised i
+build_all.py	gold	2	1	m04|t6|a65|-	Pose: mid-step with a carved white-jade lingzhi fungus on a gold stand raised in one hand, sleeves flowing, p
+build_all.py	white	2	1	m05|t2|a65|-	Pose: mid-step with a fly-whisk of white horsehair with a lacquered handle raised in 
+build_all.py	jade	2	1	m06|t4|a65|-	rl, the skirt still flaring softly, a sandalwood walking staff with a jade head close to her chest, the robe hem stirri
+build_all.py	jade	2	1	m10|t4|a65|-	lder height, fingers softly curved, a sandalwood walking staff with a jade head in the other hand, the robe hem stirrin
+build_all.py	jade	2	1	m10|t8|a65|-	Pose: one hand drawing back her long sleeve, a carved imperial-jade lingzhi fungus on a gold stand in the other 
+build_all.py	gold	2	1	m10|t8|a65|-	wing back her long sleeve, a carved imperial-jade lingzhi fungus on a gold stand in the other hand at her chest, with s
+build_all.py	white	2	1	m12|t1|a65|-	Pose: a bundle of white chrysanthemums tied with a silk ribbon swing
+build_all.py	jade	2	1	m12|t8|a65|-	Pose: both hands presenting a carved imperial-jade lingzhi fungus on a gold stand slightly forw
+build_all.py	gold	2	1	m12|t8|a65|-	ose: both hands presenting a carved imperial-jade lingzhi fungus on a gold stand slightly forward, solemn and serene, w
+build_all.py	coral	2	1	m13|t5|a65|-	Pose: both hands presenting a coral-and-pearl bead tassel ornament slightly forw
+build_all.py	white	2	1	m17|t2|a65|-	Pose: twirling one long sleeve in a light dance step, a fly-whisk of white horsehair with a lacquered handle in the oth
+build_all.py	jade	2	1	m17|t7|a65|-	Pose: gazing at her lightly raised hand, a carved imperial-jade crane on a gold stand in the other hand, wit
+build_all.py	gold	2	1	m17|t7|a65|-	 gazing at her lightly raised hand, a carved imperial-jade crane on a gold stand in the other hand, with stately grace,
+build_all.py	jade	2	1	m20|t4|a65|-	ifts her long silk stole, one hand catching the stole, a small carved jade mountain on a rosewood stand in the other ha
+build_all.py	white	2	1	m21|t1|a65|-	irt hem slightly with one hand as if stepping up a stair, a bundle of white chrysanthemums tied with a silk ribbon in th
+build_all.py	coral	2	1	m23|t5|a65|-	Pose: a graceful dance step, twirling one long sleeve, a coral-and-pearl bead tassel ornament in the other 
+build_all.py	jade	2	1	m26|t8|a65|-	Pose: standing still with a slight shoulder turn, a pair of imperial-jade health balls cradled in the crook of one arm
+build_all.py	white	2	1	m27|t2|a65|-	Pose: gazing at her lightly raised hand, a fly-whisk of white horsehair with a lacquered handle in the oth
+build_all.py	coral	2	1	m33|t5|a65|-	Pose: a coral-and-pearl bead tassel ornament swinging gent
+build_all.py	red	2	1	m34|t3|a65|-	Pose: just finished a small twirl, the skirt still flaring softly, a red-lacquer walking staff with a silver head clo
+build_all.py	silver	2	1	m34|t3|a65|-	l, the skirt still flaring softly, a red-lacquer walking staff with a silver head close to her chest, the skirt hem swing
+build_all.py	jade	2	1	m34|t4|a65|-	Pose: mid-step with a small carved jade mountain on a rosewood stand raised in one h
+build_all.py	jade	2	1	m34|t6|a65|-	Pose: both hands presenting a carved jade incense box slightly forward, solemn and ser
+build_all.py	white	2	1	m36|t1|a65|-	t finished a small twirl, the skirt still flaring softly, a bundle of white chrysanthemums tied with a silk ribbon close
+build_all.py	jade	2	1	m36|t8|a65|-	Pose: mid-step with a pair of imperial-jade health balls raised in one hand, sleeves flo
+build_all.py	red	2	1	m39|t3|a65|-	e hand raised gracefully at shoulder height, fingers softly curved, a red-lacquer walking staff with a silver head in 
+build_all.py	silver	2	1	m39|t3|a65|-	der height, fingers softly curved, a red-lacquer walking staff with a silver head in the other hand, the skirt hem swingi
+build_all.py	jade	2	1	m40|t4|a65|-	Pose: one hand resting on her draped shawl, a small jade statuette of Guanyin on a stand in the other
+build_all.py	gold	2	1	m42|t7|a65|-	 hand drawing back her long sleeve, a carved imperial-jade crane on a gold stand in the other hand at her chest, with s
+build_all.py	jade	2	1	m43|t4|a65|-	Pose: stepping forward to offer a carved jade crane on a rosewood stand in both hands, sle
+build_all.py	white	2	1	m46|t1|a65|-	Pose: walking forward mid-step with sleeves flowing, a bundle of white chrysanthemums tied with a silk ribbon in on
+build_all.py	jade	2	1	m46|t8|a65|-	Pose: stepping forward to offer a pair of imperial-jade health balls in both hands, sleeves swinging
+build_all.py	jade	2	1	m50|t5|a65|-	 gracefully at shoulder height, fingers softly curved, a pair of fine-jade health balls in the other hand, poised, the 
+build_all.py	jade	2	1	s62|t6|a65|-	Pose: walking forward mid-step with sleeves flowing, a carved jade incense box in one hand, poised, the robe he
+build_all.py	gold	2	1	s65|t7|a65|-	nce step, twirling one long sleeve, a carved imperial-jade crane on a gold stand in the other hand, with stately grace,
+build_all.py	coral	2	1	s09|t5|a65|-	Pose: one hand resting on her draped shawl, a coral-and-pearl bead tassel ornament in the other 
+build_all.py	jade	2	1	s13|t4|a65|-	Pose: twirling one long sleeve in a light dance step, a small jade statuette of Guanyin on a stand in the other
+build_all.py	coral	2	1	s15|t5|a65|-	as a breeze lifts her long silk stole, one hand catching the stole, a coral-and-pearl bead tassel ornament in the other 
+build_all.py	jade	2	1	s16|t8|a65|-	 slightly with one hand as if stepping up a stair, a pair of imperial-jade health balls in the other hand, with stately
+build_all.py	red	2	1	s21|t3|a65|-	irt hem slightly with one hand as if stepping up a stair, a string of red-agate prayer beads with a silver tassel in t
+build_all.py	red	2	1	s22|t3|a65|-	Pose: a round red-agate longevity plaque carved with a round s
+build_all.py	jade	2	1	s27|t5|a65|-	 twirl, the skirt still flaring softly, a gilded walking staff with a jade head close to her chest, poised, the robe he
+build_all.py	red	2	1	s35|t3|a65|-	Pose: mid-step with a string of red-agate prayer beads with a silver tassel rais
+build_all.py	jade	2	1	s35|t5|a65|-	Pose: one hand drawing back her long sleeve, a pair of fine-jade health balls in the other hand at her chest,
+build_all.py	jade	2	1	s37|t4|a65|-	 gazing at her lightly raised hand, a sandalwood walking staff with a jade head in the other hand, the robe hem stirrin
+build_all.py	jade	2	1	s46|t4|a65|-	Pose: standing still with a slight shoulder turn, a small carved jade mountain on a rosewood stand cradled in the 
+build_all.py	coral	2	1	s46|t5|a65|-	e hand raised gracefully at shoulder height, fingers softly curved, a coral-and-pearl bead tassel ornament in the other 
+build_all.py	silver	2	1	s47|t3|a65|-	pty hand, her sleeve sliding back, a red-lacquer walking staff with a silver head in the other hand, the skirt hem swingi
+build_all.py	red	2	1	s50|t3|a65|-	 raised gracefully at shoulder height, fingers softly curved, a round red-agate longevity plaque carved with a round s
+build_all.py	jade	2	1	s51|t4|a65|-	Pose: twirling one long sleeve in a light dance step, a small carved jade mountain on a rosewood stand in the other ha
+build_all.py	red	2	1	s57|t3|a65|-	Pose: a string of red-agate prayer beads with a silver tassel swin
+build_all.py	jade	2	1	s57|t6|a65|-	Pose: gazing at her lightly raised hand, a carved white-jade lingzhi fungus on a gold stand in the other 
+build_all.py	gold	2	1	s57|t6|a65|-	g at her lightly raised hand, a carved white-jade lingzhi fungus on a gold stand in the other hand, poised, the robe he
+build_all.py	white	2	1	s58|t2|a65|-	ifts her long silk stole, one hand catching the stole, a fly-whisk of white horsehair with a lacquered handle in the oth
+build_all.py	white	2	1	s59|t1|a65|-	e lifts her long silk stole, one hand catching the stole, a bundle of white chrysanthemums tied with a silk ribbon in th
+build_all.py	jade	2	1	s60|t8|a65|-	: a graceful dance step, twirling one long sleeve, a pair of imperial-jade health balls in the other hand, with stately
+build_all.py	coral	1	1	c06|t7|a36|dong	ore splendid than the lower ranks): a near-empress ceremonial robe of coral red silk with a LAYERED NECKLINE: a jade gre
+build_all.py	red	1	1	c06|t7|a36|dong	lendid than the lower ranks): a near-empress ceremonial robe of coral red silk with a LAYERED NECKLINE: a jade green i
