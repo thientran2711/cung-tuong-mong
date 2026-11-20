@@ -492,3 +492,4 @@ ROOT-69 08:05Z: RANK8-C rolled (34.7 %, handover RANK8-C.md 3d009e4). COLLAR1 se
 ROOT-69 08:06Z: G-rule INNER_EMB t7/t8 (owner verbatim) added to build_all; gate PASS s62/m29 t7/t8.
 ROOT-69 08:07Z: FRUITPET2 DONE a950648 (0 gens): pets kids công chúa a4–a20 + hoàng tử a4–a14; s62–s65 season pairs (s62/s63/s64 one Hạ A31 fail each). OPEN (ask owner when convenient): foreign princesses nc/bd/bt/cl/pt pets? kid-p a20 pet? RANK8-A skins G19 afe601c (+m20 t1/t2 asked).
 ROOT-69 08:09Z: OWNER (Lượt 1133/1134): HQP/HH drawn = keep, prompt only; t4 Tần = same square cut as Đáp ứng, richer + big flower embroidery < Phi, not on collar (builder, RANK8-A); t5/t6: GO TEST s62 2 gens same neckline/openness as t1, no 'kín' words, cape not covering neck (RANK8-A, builder after OK).
+ROOT-69 08:10Z: COLLAR1 DONE acdc5b8 G21 (a36/a51/a65 t1/t2 pre-G17 words, t3 crossed). OPEN: t1–t3 a51/a65 prompts LEN >10 000 (pre-existing) → need owner OK to trim before any gen at those ages.
