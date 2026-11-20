@@ -644,3 +644,4 @@ NEWACCT#4 ~17:03Z: OWNER Lượt 1256: 'Thời Hán duyệt … khá là ổn'; 
 NEWACCT#4 ~17:05Z: OWNER Lượt 1257: t4 Tần fabric test — thicker than thin silk but not brocade → prompt seasons4/m03_t4_VAI_DOAN.txt (medium-weight satin đoạn, copy of ITEMFIX2 m03_t4_a18 with fabric words only), 0 cr, sent.
 NEWACCT#4 ~17:08Z: OWNER Lượt 1259: Hán A AND B both used — A = t4 Tần, B = t5 Phi, higher ranks each a different outer layer + fabric, clearer difference → DESIGN2 brief briefs/design2-han-ladder.md (0 cr).
 NEWACCT#4: DESIGN2 opened session_01D3E3NZr6Cf5L4QzQmijkv5 (child of #4).
+NEWACCT#4 ~17:10Z: OWNER Lượt 1260: likes satin đoạn on ChatGPT; asked how it differs from low-rank silk; GO 1 Magnific gen t4 Tần đoạn on a NEW never-drawn person (~135 cr) → ITEMFIX2.
