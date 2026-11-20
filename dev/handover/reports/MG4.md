@@ -38,3 +38,8 @@ S10 MALE: male seal (he/his/him, man, emperor, prince, eunuch, official… outnu
 S11 CONSORT: consort seal (consort / phi tần / any rank name incl. Hoàng hậu; NOT Thái hậu, maid, ma ma, prince/princess) + silk/gauze/sheer/translucent/see-through/chiffon/organza/tulle on clothing (robe, sleeves, shawl, sash, collar…) not negated → FAIL. Silk flowers / silk tassels / a maid's or girl's silk are not hit.
 --self: 11 bad + 4 extra good samples (man with "no handkerchief", Tần "plain brocade, no silk", dowager in silk, maid with silk handkerchief) → 0 problems.
 --all hits (8 of 1 165): grp_set bt ghen B/out/loop/back (little prince tugs a pink silk handkerchief) · sg2 pt A+B and ptl A+B ("robe of thin, light, flowing silk and gauze") → those builders now refuse until reworded (grp_set bt: ask keys without ghen, e.g. `grp_set_prompts.py bt vui buon`, to get the others).
+
+## Queue 2 (c) — owner L835 ('mặt trắng héo'): Nữ đế L781 redraw sheets, transparent bg, 0 gens
+4 transparent WebP sheets (figures cut out at full size, 2–3 per sheet; label plates on top), CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/mg4-nude-l835/:
+nude_m05_a18-a36.webp (Xm9wCzQBfo 0eUx86WTfW lJte9QOgv9) · nude_m05_a51-a65.webp (jUoM4FdLD0 SyhX3kyUb8) · nude_m29_a18-a36.webp (79f8RktJAL xSBVOu9jfW 4RFvzx59Aa) · nude_m29_a51-a65.webp (iG5ET7b3uK Xm9wu0qBfo).
+Tool: dev/handover/reports/MG4-l826/nd_sheet_transparent.py. (d) S12 disc table waits for SEAL8's path.
