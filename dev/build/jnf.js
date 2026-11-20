@@ -161,7 +161,7 @@ function canAtt(a,t){try{if(!a||!t||a===t)return false;if(a===S){if(S.dead)retur
  if(typeof cyTray==="function"&&cyTray(a))return false;return true}catch(e){return false}}
 function roleOf(a,t){if(!t)return null;if(a===t)return "def";return canAtt(a,t)?"att":null}
 const VALID=v=>v==="feign"||v==="road"||v==="keep"?v:null;
-/* S.nfX: st "wait" (flip done, other dialogs first) → "open" (choices running) → "done" */
+/* S.nfX: st "wait" (flip done, the dialogs it pushed first) → "open" (choices running) → "done" */
 function X(){const x=S&&S.nfX;return x&&x.d===day()?x:null}
 const scene=()=>{try{return (typeof window.cfBusy==="function"&&window.cfBusy())||!!document.querySelector(".kmov.kcf")}catch(e){return false}};
 /* no dialog may cover the flip choice (night-final #4, coop-steal family): while the card-flip scene or the choice is on screen, a tap on a
@@ -171,10 +171,14 @@ const LOOKUP="img.kemo[data-emo],[data-emo-open],[data-svlook]";
 window.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest||!t.closest(LOOKUP)||!S||!nfOn())return;const x=X();
  if(!(scene()||(x&&x.st==="open"&&Q[0]&&Q[0].pid==="nfch")))return;e.stopPropagation();e.preventDefault()}catch(z){}},true);
 let WT=null;
+/* the dialogs already waiting when the tablet flips (a person met on the way, the entering-the-palace card, a rumour …) never hold the forced
+   choice: it comes right after the flip scene (owner OD 16/11 22:45Z) and they follow it (Q.unshift in showChoice). Only while tonight is NOT hers already:
+   when it is hers (her card turned, a night already won: notice nfsum, bath and night dialogs) every waiting dialog goes first, as before. Not saved: after a reload every waiting dialog goes first. */
+let PREQ=new WeakSet();
 function wake(){step();if(!WT&&!window.__bot)WT=setInterval(step,250)}
 function sleep(){if(WT){clearInterval(WT);WT=null}}
 function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(!x||x.st==="done"){sleep();return}
- if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"))return;openChoice()}
+ if(x.st==="wait"){const pre=S.tonight!=="me";if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&!(pre&&m.pid!=="nfsum"&&PREQ.has(m))))return;openChoice()}
  if(x.st!=="open")return;
  if(x.me===undefined&&!x.dlg){if(scene()&&Date.now()-(x.at||0)<B().choice.waitMs*2)return;showChoice()}
  if(guest())return;
@@ -272,7 +276,7 @@ function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
  const d=day();
  if(S.nfC!==d){S.nfC=d;
-  if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait"};if(S.nfN!==d&&!flippedToday())realFlip()}   /* her night already played today (his visit, a summons): no flip, no choice */
+  if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait"};PREQ=new WeakSet(Q.filter(m=>m&&typeof m==="object"));if(S.nfN!==d&&!flippedToday())realFlip()}   /* her night already played today (his visit, a summons): no flip, no choice */
   else ask()}
  if(!guest()){const x=X();if(x&&x.st!=="done"){hold();wake();return}}
  else if(S.nfFin!==d){S.nfW=d;ask();hold();wake();return}       /* the host's flip, then the host's last word on who holds tonight */
