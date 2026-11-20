@@ -534,3 +534,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | PARKING #11 dresscode r2 E30b (opus; successor of E30 @7438275b; handover reports/dresscode.md «HANDOVER (E30 → successor)») | review/dresscode | FOREMAN E #23 | session_01DgYSWoKR63FnqBVfM37DPu | RUNNING | 20/11 21:32Z |
 | REVIEW home-chapters r2 re-merge E25r2 (opus BIG; successor of E25r; handover reports/home-chapters-review.md «HANDOVER (E25r → E25r2)») | review/home-chapters* | FOREMAN E #23 | session_01DgYSWoGroauPy7gr26dtfY | WAITING GO (co-op check prep) | 20/11 21:33Z |
 | REVIEW coop-guest-agent r1 (opus BIG) of 60ff8f11 | review/coop-guest-agent-r1 | B | session_01N1tNP34YLAbVuMi631JPUN | RUNNING | 20/11 22:03Z |
+| REVIEW ge-rank r1 E35r (opus BIG) of c5ebab9a | review/ge-rank-r1; reports/ge-rank-review.md | FOREMAN E #23 | session_01DgYSWp7SnXwAmHQzVR8omH | RUNNING | 20/11 22:05Z |
