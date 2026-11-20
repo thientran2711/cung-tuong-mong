@@ -515,7 +515,16 @@ def _kc_drawn(person):   # B8 (BW3): same table + rule as build.py kc_drawn (dev
     p=_j.load(open(os.path.join(ART,"KC_REFS.json"),encoding="utf-8"))["people"].get(person)
     return bool(p and p.get("m09_ok")=="yes" and (p.get("face_words") or "").startswith("Her face: "))
 def g_pets_allowed(rank,age): return isinstance(rank,int) and rank<=6 and age in ("a18","a26")
+# EYES (CUT-SS via Foreman C, 20/11: m18 t7 drawn cross-eyed; the owner EYES sentence was only in the s-people face words): every figure prompt that lacks it
+# gets the exact face-common/make_nf4.py EYES_STRAIGHT sentence right after the "Her face: ..." sentence (prompts that already hold it: unchanged).
+EYES_STRAIGHT=re.search(r'^EYES_STRAIGHT="(.+)"$',open(os.path.join(ART,"face-common","make_nf4.py"),encoding="utf-8").read(),re.M).group(1)
+def eyes(S):
+    if EYES_STRAIGHT[:-1] in S: return S
+    m=re.search(r"Her face: [^.]*\. ",S); assert m,"EYES: face sentence"
+    return S[:m.end()]+EYES_STRAIGHT+" "+S[m.end():]
 def build(person,rank,age="a18"):
+    S0,S,add=_build(person,rank,age); return S0,eyes(S),add
+def _build(person,rank,age="a18"):
     if not _kc_drawn(ALIAS.get(person,person)): raise NotDrawn(person)   # B8: people NOT drawn are refused (CLI exit 2, --check counts them HELD)
     person=ALIAS.get(person,person); S0=store(person,rank,age); S=S0
     if rank=="nude": S0=LAST_G["_PETS"].depet(S0); return S0,S0,[]   # F17 PETS: Nữ đế never holds an animal pose

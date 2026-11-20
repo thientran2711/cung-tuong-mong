@@ -553,3 +553,12 @@ NEWACCT-ROOT ~16:15Z: MAID7 round 3 DONE 9c519901 (810 cr), sheet sent Lượt 1
 NEWACCT-ROOT HANDOVER ~16:20Z: depth 0, ctx 41 % (START ~8 % + 25 % passed). TAKEOVER_FOREMAN_C_NEWACCT2.md written; opening child successor.
 NEWACCT-ROOT ~16:22Z: successor #2 session_01D3E3NZjsQSKDvCk39HnE5m opened; 5 workers told to report there. NEWACCT-ROOT stops.
 NEWACCT-ROOT ~16:25Z: OWNER: chưởng sự sleeves = nhất đẳng width, no narrow sleeves (rule added, MAID8 told). Successor #2 please confirm with MAID8.
+NEWACCT-ROOT ~16:30Z: forwarded to #2: ITEMFIX DONE 68f27adf (LEN open s31 t4/s33 t6), CDN-T78 DONE 61235f12 (150 on CDN img/fig-cut/rank8/), nhất đẳng v3 needs redo per K24 (waiting owner yes).
+NEWACCT-ROOT ~16:33Z: OWNER: HOLD chưởng sự/ma ma variants (MAID8 told STOP); send old sample first, batch her edits, redraw once (rule added). Old sample crop review-sheets/maid7/chuongsu_mama_mau_cu.webp sent.
+NEWACCT-ROOT ~16:36Z: MARKFIX DONE 947595c4 forwarded to #2 (8 fixed; cut-outs on CDN still need the same fix; s57/s59/s60 faces have no mark → ask owner). NEWACCT-ROOT STOPS.
+NEWACCT#2 ~16:40Z: depth 1, START_CTX ~5 % (52k/1M) → roll at ~30 %. Took over 5 workers. CDN-T78 + MARKFIX + ITEMFIX done (read reports). MARKFIX sheet LOOKED + sent Lượt 1160. MAID8 on HOLD (A36). THANCAN1 firing. ITEMFIX: EYES sentence not in report yet — asked.
+NEWACCT-ROOT ~16:42Z: OWNER round-3 maid edits recorded briefs/maid-edits-1162.md (skirt blue all ranks, nhị = round-1 outfit recoloured, nhất blue skirt+sleeves smaller, ma ma coat rejected) + rule A37 compare with old rounds; forwarded to #2; no redraw until she confirms the full list.
+NEWACCT#2 ~16:50Z: THANCAN1 DONE 9e942f45 (540 cr) sheet LOOKED + sent Lượt 1163. Maid edit list (briefs/maid-edits-1162.md) → compare sheet maid7/maid_so_sanh_nhi_nhat.webp sent Lượt 1164 + full list asked Lượt 1165 (A36: one redraw after her yes). MARKFIX told to apply the 8 fixes to the CDN cut-outs (new -mf objects).
+NEWACCT#2 ~16:55Z: MARKFIX cut-outs DONE fdb28d16 (8 *-a18-mf.png on CDN, 0 cr). NOTE Lượt collision: NEWACCT-ROOT also sent thancan sheet as 'Lượt 1164' while I used 1163–1165; next = 1166. NEWACCT-ROOT has stopped.
+NEWACCT-ROOT ~16:52Z: OWNER thân cận 4 kiểu rejected (not distinctive; collar = Tần/Phi collar forbidden) → added to briefs/maid-edits-1162.md item 7. Asked about Nữ đế: not drawn for the new faces.
+NEWACCT-ROOT ~16:55Z: OWNER: thân cận sleeves ≈ nhất đẳng (item 8 in maid-edits-1162.md).
