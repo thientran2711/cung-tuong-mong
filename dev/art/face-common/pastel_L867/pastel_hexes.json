@@ -1,0 +1,226 @@
+{
+ "s46": {
+  "src": "s46.v5",
+  "k": 0.55,
+  "main": [
+   "cool aquamarine",
+   "#86CDB9",
+   "#A6DACA"
+  ],
+  "sec": [
+   "deep blue-violet",
+   "#5D5894",
+   "#76709E"
+  ]
+ },
+ "s47": {
+  "src": "s47.v5",
+  "k": 0.55,
+  "main": [
+   "periwinkle",
+   "#949BD8",
+   "#B9BDEC"
+  ],
+  "sec": [
+   "mint",
+   "#9ACBB7",
+   "#B3D8C8"
+  ]
+ },
+ "s48": {
+  "src": "s48.v5",
+  "k": 0.55,
+  "main": [
+   "soft blush pink",
+   "#DF9FA8",
+   "#EDBCC2"
+  ],
+  "sec": [
+   "aqua celadon",
+   "#8BC6BE",
+   "#ABD6CF"
+  ]
+ },
+ "s49": {
+  "src": "s49.v5",
+  "k": 0.55,
+  "main": [
+   "soft burgundy rose",
+   "#C37986",
+   "#E3A9B1"
+  ],
+  "sec": [
+   "pine teal",
+   "#388581",
+   "#82B7B4"
+  ]
+ },
+ "s50": {
+  "src": "s50.v5",
+  "k": 0.6,
+  "main": [
+   "clear ice blue",
+   "#A6C9E4",
+   "#B9D4E9"
+  ],
+  "sec": [
+   "deep raspberry",
+   "#A55D7A",
+   "#CA8FA5"
+  ]
+ },
+ "s51": {
+  "src": "s51.v5b",
+  "k": 0.55,
+  "main": [
+   "cool lilac",
+   "#CCB0E5",
+   "#DAC5ED"
+  ],
+  "sec": [
+   "soft pine teal",
+   "#62AEA9",
+   "#95CBC7"
+  ]
+ },
+ "s52": {
+  "src": "s52.v5",
+  "k": 0.61,
+  "main": [
+   "sky blue",
+   "#98C8D7",
+   "#AFD4DF"
+  ],
+  "sec": [
+   "soft coral",
+   "#D38A7B",
+   "#E8AB9F"
+  ]
+ },
+ "s53": {
+  "src": "s53.v5",
+  "k": 0.55,
+  "main": [
+   "soft lavender",
+   "#A893CE",
+   "#C8B7E5"
+  ],
+  "sec": [
+   "pale mint green",
+   "#B0DDD0",
+   "#BFE0D6"
+  ]
+ },
+ "s54": {
+  "src": "s54.v5b",
+  "k": 0.55,
+  "main": [
+   "carnation pink",
+   "#E4A1B7",
+   "#EFBCCC"
+  ],
+  "sec": [
+   "soft sea blue",
+   "#75A7C3",
+   "#A2C6DB"
+  ]
+ },
+ "s55": {
+  "src": "s55.v5",
+  "k": 0.6,
+  "main": [
+   "pink lilac",
+   "#CEA1BF",
+   "#DEBAD2"
+  ],
+  "sec": [
+   "soft jade green",
+   "#9EB28F",
+   "#B8C8AC"
+  ]
+ },
+ "s56": {
+  "src": "s56.v5",
+  "k": 0.55,
+  "main": [
+   "apricot",
+   "#D6A585",
+   "#E7C0A8"
+  ],
+  "sec": [
+   "lavender violet",
+   "#A991CA",
+   "#C9B6E2"
+  ]
+ },
+ "s57": {
+  "src": "s57.v5",
+  "k": 0.55,
+  "main": [
+   "soft orchid purple",
+   "#BA8CC4",
+   "#D6B3DD"
+  ],
+  "sec": [
+   "warm beige cream",
+   "#E8D3B8",
+   "#E7D7C3"
+  ]
+ },
+ "s58": {
+  "src": "s58.v5",
+  "k": 0.55,
+  "main": [
+   "soft rust red",
+   "#D28B79",
+   "#EAB2A3"
+  ],
+  "sec": [
+   "pale mint green",
+   "#B0DDD0",
+   "#BFE0D6"
+  ]
+ },
+ "s59": {
+  "src": "s59.v5",
+  "k": 0.64,
+  "main": [
+   "soft apricot",
+   "#DEAF9B",
+   "#E7C0B0"
+  ],
+  "sec": [
+   "soft moonlight blue",
+   "#A4BCD8",
+   "#B8CBE1"
+  ]
+ },
+ "s60": {
+  "src": "s60.v5",
+  "k": 0.55,
+  "main": [
+   "coral pink",
+   "#D9998C",
+   "#EBB9AF"
+  ],
+  "sec": [
+   "soft sea blue",
+   "#649AB8",
+   "#9ABFD7"
+  ]
+ },
+ "s61": {
+  "src": "s61.v5",
+  "k": 0.55,
+  "main": [
+   "persimmon",
+   "#D2906C",
+   "#EAB599"
+  ],
+  "sec": [
+   "ivory",
+   "#EDDCC6",
+   "#E9DDCC"
+  ]
+ }
+}
