@@ -91,7 +91,7 @@ function check(why){if(!live()||!host())return;HL.stat.checks++;const t0=perform
 const FID=new Map();
 function whoKey(w){try{if(!w||typeof w!=="object"||w.coop)return null;if(S&&w===S.thO)return "th";if((rivals||[]).includes(w))return "r"+w.id+"|"+(w.name||"");
   if(w.sid!=null)return "s"+w.sid+"|"+(w.name||"");return w.name?"n"+w.name:null}catch(e){return null}}
-function fidNote(w){try{if(!CW.on||!host()||!w||!w.fid)return;const k=whoKey(w);if(k&&!FID.has(k))FID.set(k,w.fid)}catch(e){}}
+function fidNote(w){try{if(!CW.on||!host()||lvl3()||!w||!w.fid)return;const k=whoKey(w);if(k&&!FID.has(k))FID.set(k,w.fid)}catch(e){}}
 function fidBack(){if(!host()||!FID.size||!S)return 0;let n=0;const U=typeof figUsed==="function"?figUsed():null;if(!U)return 0;
  const L=worldPeople();const held=new Map();for(const p of L)if(p.fid)held.set(p.fid,p);
  for(const p of L){const k=whoKey(p);const f=k&&FID.get(k);if(!f||p.fid===f)continue;const o=held.get(f);if(o&&o!==p)continue;/* someone else holds it now */
@@ -103,7 +103,7 @@ HL.check=check;
 function baseFrom(C,why){if(!host()||!C||!C.W)return;try{shared=fromC(J(C.W))}catch(e){shared=null}soon(why,60)}
 COOP.on("week",m=>{if(!CW.on||!m||!m.state)return;if(host())baseFrom(m.state,"week");else setTimeout(nmAgain,0)});
 COOP.on("state",m=>{if(CW.on&&m&&m.state&&host()&&!shared)baseFrom(m.state,"state")});
-COOP.on("start",d=>{shared=null;nmQ=[];const C=(d&&d.state)||(COOP.state&&COOP.state.C);try{if(CW.on&&host())fidBack()/* no render here: the room's own start flow draws next (a render inside "start" stalled a level-3 room at week 0) */}catch(e){console.error("hl fidBack",e)}setTimeout(()=>{if(CW.on&&host()&&C)baseFrom(C,"start")},0)});
+COOP.on("start",d=>{shared=null;nmQ=[];const C=(d&&d.state)||(COOP.state&&COOP.state.C);try{if(CW.on&&host()&&!lvl3())fidBack()/* no render here: the room's own start flow draws next (a render inside "start" stalled a level-3 room at week 0) */}catch(e){console.error("hl fidBack",e)}setTimeout(()=>{if(CW.on&&host()&&C)baseFrom(C,"start")},0)});
 COOP.on("stop",()=>{shared=null;nmQ=[];HL.nm=[];FID.clear()});
 /* the guest (re)joins: she rebuilt from the room's C; the host's writes since are sent again */
 COOP.on("peer",on=>{if(on&&CW.on&&host()&&CW.base)baseFrom(CW.base,"peer")});
@@ -122,7 +122,16 @@ const hash=s=>{let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.cha
 if(typeof figPick==="function"){const p0=figPick;figPick=function(who){try{if(CW.on&&!host()&&!lvl3()/* level >= 3: the lens drops her world writes */&&who&&typeof who==="object"&&!who.coop&&!mine(who)&&!(who.fid&&typeof figxHas==="function"&&figxHas(who.fid))){
    const U=figUsed(),n=U.length,f0=who.fid;const k=seeded(hash((who.id!=null?who.id:"")+"|"+(who.sid!=null?who.sid:"")+"|"+(who.name||"")),()=>p0.call(this,who));
    who.fid=f0;U.length=n;HL.stat.gPick=(HL.stat.gPick||0)+1;return k}}catch(e){console.error("hl gpick",e)}
-  const a=who&&who.fid;const r=p0.apply(this,arguments);try{if(CW.on&&host()&&who&&who.fid){fidNote(who);if(who.fid!==a)soon("pick")}}catch(e){}return r};window.figPick=figPick}
+  const a=who&&who.fid;const r=p0.apply(this,arguments);try{if(CW.on&&host()&&who&&who.fid){fidNote(who);if(who.fid!==a)soon("pick")}
+   else if(live()&&!host()&&who&&who.fid&&who.fid!==a&&mine(who))rsvSend(who.fid)}catch(e){}return r};window.figPick=figPick}
+/* r1 (reviewer): a face the guest gives one of HER OWN people (her new maid / servant / child, drawn on her seat) is reserved in the host's ONE
+   world face list at once (before: only when her next end came back, so for that week the host could give the same face to a world person;
+   e2e Q3 after rejoin: S.fidUsed held maid:m50 / maid:m36 on her seat only). The host adds it and relays its list (the next check). */
+let rsvQ=[],rsvT=0;
+function rsvSend(f){if(typeof f!=="string"||!POOLF.test(f))return;rsvQ.push(f);clearTimeout(rsvT);rsvT=setTimeout(()=>{rsvT=0;const L=[...new Set(rsvQ.splice(0))];
+  try{if(L.length&&live()&&!host())COOP.send({t:"act",k:K,rsv:L,id:K+"r"+Date.now().toString(36)})}catch(e){}},120)}
+function rsvTake(L){if(!Array.isArray(L)||!host()||!live()||typeof figUsed!=="function")return;const U=figUsed();let n=0;
+ for(const f of L)if(typeof f==="string"&&POOLF.test(f)&&!U.includes(f)){U.push(f);n++}if(n){HL.stat.rsvIn=(HL.stat.rsvIn||0)+n;soon("rsv")}}
 /* the same rule for a world person's trust (jtin tinOf: a lazy first value stored on READ, from loyal at that moment): a guest's read (her
    visit shows a man / a consort's servant) stored a value the host never had (S.men is host-only: never merged) and froze it at her
    moment's loyal; on her seat the first value is shown, not stored; the host stores it and sends it (a value whose base is unset) */
@@ -145,7 +154,7 @@ function figFill(){if(!CW.on||!host()||!S||S.dead||typeof figPick!=="function")r
  for(const p of worldPeople()){try{if(p.alive===false||p.dead)continue;const a=p.fid;if(p===S.thO){if(typeof figThPick==="function")figThPick()}else if(typeof figRoles==="function"&&figRoles(p).length)figPick(p);if(p.fid&&p.fid!==a)n++}catch(e){}}
  HL.stat.fill=(HL.stat.fill||0)+n;return n}
 HL.figFill=figFill;
-if(typeof endTurn==="function"){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(CW.on&&host()&&!CW.ctx)figFill()}catch(e){console.error("hl fill",e)}return r}}
+if(typeof endTurn==="function"){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(CW.on&&host()&&!lvl3()/* r1: inert at level >= 3, as the header says */&&!CW.ctx)figFill()}catch(e){console.error("hl fill",e)}return r}}
 
 /* ---------- GUEST: world housing is the host's ---------- */
 function npcList(){return (rivals||[]).filter(v=>plain(v)&&!v.coop)}
@@ -157,6 +166,13 @@ if(typeof palFix==="function"){const pf0=palFix;const hsig=()=>JSON.stringify(np
   if(l0)log=function(t){if(typeof t==="string"&&!/^Ngươi/.test(t)){HL.stat.hLog=(HL.stat.hLog||0)+1;return}return l0.apply(this,arguments)};
   let r;try{r=pf0.apply(this,arguments)}finally{if(l0)log=l0;let n=0;for(const [v,a] of snap)HOUSE.forEach((f,i)=>{if(a[i][0]){if(v[f]!==a[i][1]){v[f]=a[i][1];n++}}else if(f in v){delete v[f];n++}});if(n)HL.stat.hKeep=(HL.stat.hKeep||0)+n}
   return r};window.palFix=palFix}
+/* r1 (reviewer, same family, guest side): the servant-name dedupe (j95c j95cDedupe, run by start() / ageInit) renamed a WORLD servant on
+   the guest seat only when her own new maid drew the same name (e2e E1: R8 maid sid21 "Thu Thiền" on the host, "San Hô" on the guest for the
+   whole first week, then renamed back by the merge: one person, two names). At level < 3 world names are the host's (jnamefix: the friend's
+   own people hold their names, the host's world people give way): on her seat every world servant keeps the name it had */
+if(typeof j95cDedupe==="function"){const dd0=j95cDedupe;j95cDedupe=function(){if(!live()||host())return dd0.apply(this,arguments);const snap=[];
+  try{for(const v of npcList())for(const s of v.staff||[])if(plain(s)&&!s.coop)snap.push([s,s.name]);for(const s of (S.thO&&S.thO.staff)||[])if(plain(s))snap.push([s,s.name])}catch(e){}
+  const r=dd0.apply(this,arguments);let n=0;for(const [s,nm] of snap)if(s.name!==nm){s.name=nm;n++}if(n)HL.stat.gDd=(HL.stat.gDd||0)+n;return r};window.j95cDedupe=j95cDedupe}
 /* her week end: every world person's housing = the room base's (whatever else wrote it on her seat) */
 {const cw0=CW.cW;CW.cW=function(out){out=cw0?cw0(out):out;try{if(live()&&!host()&&out&&out.W&&Array.isArray(out.W.R)&&CW.base&&CW.base.W){
   const bm=new Map((CW.base.W.R||[]).filter(plain).map(r=>[String(r.id),r]));for(const r of out.W.R){const b=bm.get(String(r.id));if(!b||!plain(r))continue;
@@ -198,11 +214,12 @@ function nmText(x){try{if(typeof nmRewrite!=="function"||!x[2])return;const b=ty
 /* after her next merged week: her P came back from her own end (which may have left with the old texts) */
 function nmAgain(){if(!live()||host())return;const w=COOP.state.week||0;HL.nm=HL.nm.filter(x=>w-x.w<=2);const q=quiet;quiet=true;CW.inFC=(CW.inFC||0)+1;try{for(const x of HL.nm)nmText([x.o,x.n,x.r])}finally{quiet=q;CW.inFC--}}
 HL.apply=apply;
-COOP.on("act",m=>{if(!m||m.k!==K||!CW.on||m.from===CW.seat)return;try{if(m.ask){if(host()&&CW.base)baseFrom(CW.base,"ask");return}apply(m)}catch(e){console.error("hl apply",e)}});
+COOP.on("act",m=>{if(!m||m.k!==K||!CW.on||m.from===CW.seat)return;try{if(m.rsv){rsvTake(m.rsv);if(!m.ask)return}if(m.ask){if(host()&&CW.base)baseFrom(CW.base,"ask");return}apply(m)}catch(e){console.error("hl apply",e)}});
 /* the guest (re)opened the room (reload / rejoin / first join): she was rebuilt from the room's C; she asks for the host's writes since.
    A FIRST join has no world of hers at "start" (she waits for the host's world, then picks her person: "state" -> newLife): the host's
    writes sent before that were dropped (no S) and nobody asked again (e2e W10: no Thái hậu face on her seat for the whole first week) */
-function ask(){try{if(live()&&!host())COOP.send({t:"act",k:K,ask:1,id:K+"q"+Date.now().toString(36)})}catch(e){}}
+function ask(){try{if(live()&&!host()){/* r1: with the faces her own people hold (her P), so the host reserves them before it answers */
+  const F=[...pFids({pid:S.pid,maid:S.maid,staff:S.staff,kids:S.kids},new Set(),0)];COOP.send({t:"act",k:K,ask:1,rsv:F,id:K+"q"+Date.now().toString(36)})}}catch(e){}}
 COOP.on("start",()=>setTimeout(ask,400));
 COOP.on("state",()=>{if(!host())setTimeout(ask,400)});
 }catch(e){console.error("jcoophl",e)}})();
