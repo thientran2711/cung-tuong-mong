@@ -151,3 +151,11 @@ Final t1/t2 = G17 square neckline. Files: dev/handover/review-sheets/skins-1120/
 - m19 | t1 Đáp ứng a18 (20/11) | gen EbYGtmwuuO cut yiufJaxPW9 | dev/handover/review-sheets/skins-1120/m19_t1_a18_crossedcollar_cut.webp | replaced by G17 square neckline (old crossed collar)
 - m19 | t2 Thường tại a18 (20/11) | gen P3QCUdD42C cut 8ai9BNiIrU | dev/handover/review-sheets/skins-1120/m19_t2_a18_crossedcollar_cut.webp | replaced by G17 square neckline (old crossed collar)
 - m20 | t2 Thường tại a18 (20/11, OLD4) | gen If3NIDRtvE cut — | dev/handover/review-sheets/skins-1120/m20_t2_a18_G17v1_plainband.webp | replaced by G17 clarification (t2 = t1 square cut + 2-layer edge); this one has the first G17 plain band
+
+## 20/11 t4/t5/t6 square-neckline TESTS → SKINS (rule G24, owner verbatim: "Ok, những cái hình mà mình mới sản xuất ra ở lượt 1132 nè là vẫn lưu vào trong kho skin giùm tôi nha, tôi không cần nhắc, bạn vẫn cứ vậy mà làm nha.")
+Copies in dev/handover/review-sheets/skins-1120/. Never delete. Rejected-for-defect pictures are NOT here → dev/handover/review-sheets/rejected-1120/ (m29 t7 old, cross-eyed).
+- s62 | t4 Tần THỬ cổ vuông a18 (20/11) | gen eIPOIm2dqL cut — | dev/handover/review-sheets/skins-1120/s62_t4_a18_THU_covuong.webp | test; final t4 = builder G22
+- s62 | t5 Phi THỬ cổ vuông kín a18 (20/11) | gen UPvmPCKwny cut — | dev/handover/review-sheets/skins-1120/s62_t5_a18_THU_covuong.webp | closed-collar test, superseded by covuong2
+- s62 | t6 Quý phi THỬ cổ đứng a18 (20/11) | gen 79fvNG6JAL cut — | dev/handover/review-sheets/skins-1120/s62_t6_a18_THU_covuong.webp | standing-collar test, superseded by covuong2
+- s62 | t5 Phi THỬ cổ vuông y chang Đáp ứng a18 (20/11) | gen MBJwQZqDCm cut — | dev/handover/review-sheets/skins-1120/s62_t5_a18_THU_covuong2.webp | test (RANK8-A2); leaves this list if the owner approves it as final
+- s62 | t6 Quý phi THỬ cổ vuông y chang Đáp ứng a18 (20/11) | gen SyhtzkOUb8 cut — | dev/handover/review-sheets/skins-1120/s62_t6_a18_THU_covuong2.webp | test (RANK8-A2); leaves this list if the owner approves it as final

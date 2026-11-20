@@ -10,3 +10,13 @@ Gate: check_store --scope tp5/tp6 --age a18 STORE CHECK PASS; lengths 9 027 / 9 
 Gens: t5 MBJwQZqDCm, t6 SyhtzkOUb8 (gpt-2-6, 1024x2304, 2k, seed 7172; refs t5 [nVsrRMPYQD], t6 [nVsrRMPYQD, TdwDfOyVNR]).
 Sheet: dev/handover/review-sheets/rank8-s62/s62_THU_covuong3_t1-t5-t6.webp (.jpg too) — t1 ĐÃ DUYỆT | t5 THỬ | t6 THỬ.
 Looked full size (honest): both = open square neckline, neck + collarbones visible, no stand collar, cape/cloud collar on the shoulders, not covering. t5 edge = pink-gold floral brocade band; t6 edge = gold peony brocade band, plus pearl strands across the chest + necklace (from the original t6 outfit, kept). The square on t5/t6 sits a bit higher/narrower than t1's (t1 is a deeper cut). Faces fine: eyes aligned, lips closed, no earrings. No redraw.
+
+## JOB 2 — skins + rejected + standing rule (0 cr)
+- Rule G24 added (rule.py add, both owner verbatims): every GOOD non-final picture (tests, superseded/alternate) → skin archive automatically, never deleted, no need to ask; owner-REJECTED-for-defect pictures → rejected-<MMDD>/ + ledger REJECTED, not skins; a test approved as final leaves the skin list.
+- Skins (SKINS.md new "20/11 t4/t5/t6" section + 5 ledger rows SKIN-1120, copies in skins-1120/): s62 t4/t5/t6 first square tests (eIPOIm2dqL, UPvmPCKwny, 79fvNG6JAL) + my t5/t6 tests (MBJwQZqDCm, SyhtzkOUb8 — remove from skins if the owner approves them as final).
+- Rejected: m29 t7 old (kseMqUH16B, cut gOm8LDpSXO, cross-eyed) → dev/handover/review-sheets/rejected-1120/m29_t7_a18_OLD_le_cut.webp + README + ledger kind REJECTED. It was never in SKINS.md.
+- Nothing deleted.
+
+## OPEN
+- Owner verdict on t5/t6 covuong3 sheet. If OK → builder t5/t6 neckline change (not done; builder untouched).
+- Context at end ≈ 9 % (well under roll line). No handover needed.
