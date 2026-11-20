@@ -31,6 +31,16 @@ def _norm(s): return re.sub(r"\s+", " ", s).strip()
 # Never both. high=True selects the high-rank variant in apply() and check().
 M06_ID = "M06"
 BROCADE = "FABRIC: thick gold-embroidered brocade with a graceful, flowing drape."
+# B26 FABRIC ĐOẠN MỜ (owner Lượt 1283 + CORRECTION 1284, matte text Lượt 1275): t4 Tần + t5 Phi ONLY (thường phục, consorts + princesses at t4/t5) get DOAN
+# IN PLACE OF master M06 (thin silk + gauze); words = the FABRIC sentence of dev/art/seasons4/m11_t4_VAI_DOAN.txt verbatim. t1-t3 keep M06, t6+ keep BROCADE (B12). Never both.
+# M07 'The silk has real weight' stays (master; m11 test file has no M07 -> ART_RULES_CONFLICTS.md, not decided here). Winter: DOAN is already opaque -> same words (G28 swaps nothing).
+DOAN = 'The FABRIC is medium-weight silk SATIN (đoạn) with a soft MATTE finish and only a very faint gentle lustre, like fine old silk, never glossy, shiny, wet-looking or plastic: clearly thicker and more opaque than thin silk gauze, with a faint woven self-pattern (damask), yet still soft and supple, NOT heavy stiff brocade like the Empress; it hangs in fuller, rounder, heavier folds while still flowing gracefully (thướt tha); the small embroidered motifs are stitched in fine gold thread.'
+DOAN_SCOPES = {"tp4", "tp5", "pr4", "pr5"}
+
+
+def doan_scope(scope): return scope in DOAN_SCOPES
+
+
 HIGH_SCOPES = {"tp6", "tp7", "tp8", "pr7", "pr8", "trieu6", "trieu7", "trieu8", "nude", "thaihau", "state:thaihau", "emperor"}
 
 
@@ -95,23 +105,26 @@ def apply_ear(text):
     return text.rstrip() + " " + EAR_SENT + text[len(text.rstrip()):]
 
 
-def _master(high):
-    return [(k, s) for k, s in zip(ids(), sentences()) if not (high and k == M06_ID)]
+def _master(high, doan=False):
+    return [(k, DOAN if (doan and k == M06_ID) else s) for k, s in zip(ids(), sentences()) if not (high and k == M06_ID)]
 
 
-def apply(text, high=False, female=True):
+def apply(text, high=False, female=True, doan=False):
     """high=True (B12, rank t6+ / Thái hậu / Hoàng thượng / Nữ đế): M06 is not inserted (and must not be in the text); the builder supplies BROCADE.
     female=True (NOEAR, owner Lượt 1037): EAR_SENT is put right after M11 and the text must hold no earring word. Men / boys pass female=False."""
-    t = _apply(text, high)
+    t = _apply(text, high, doan)
     if not female: return t
     assert not EAR_RX.search(t.replace(EAR_SENT, " ")), "NOEAR (owner Lượt 1037): earring word in a woman's prompt: " + EAR_RX.search(t.replace(EAR_SENT, " ")).group(0)
     return apply_ear(t)
 
 
-def _apply(text, high=False):
+def _apply(text, high=False, doan=False):
     if high: assert sentences()[ids().index(M06_ID)] not in text, "B12: master M06 (thin silk+gauze) in a t6+ / royal prompt"
-    S = [s for _, s in _master(high)]; t = text
-    for k, s in _master(high):
+    if high: assert not doan, "B26: đoạn is t4/t5 only, never with the t6+ brocade"
+    if doan: text = text.replace(sentences()[ids().index(M06_ID)], DOAN, 1)   # B26: a builder text that already holds M06 gets DOAN in its place
+    elif DOAN in text: raise AssertionError("B26: đoạn fabric sentence outside t4/t5")
+    S = [s for _, s in _master(high, doan)]; t = text
+    for k, s in _master(high, doan):
         assert t.count(s) <= 1, f"master {k} already present {t.count(s)} times (builder duplicates it)"
     miss = [s for s in S if s not in t]
     if not miss: return t
@@ -151,7 +164,7 @@ def _overlap(s, text):
     return best
 
 
-def check(text, high=False, female=True, winter=False):
+def check(text, high=False, female=True, winter=False, doan=False):
     """winter=True (SEASON đông, dev/art/winter_g28.py): each master sentence is checked in its G28 winter form (M06 = opaque silk, never see-through)."""
     import winter_g28
     t = _norm(text); out = ear_fails(text) if female else []
@@ -160,7 +173,9 @@ def check(text, high=False, female=True, winter=False):
         if _norm(m06) in t: out.append((M06_ID, "HIGH RANK", "B12: master M06 (thin silk+gauze, thướt tha) in a t6+ / Thái hậu / Hoàng thượng / Nữ đế prompt"))
         if nb != 1: out.append(("B12", "BROCADE MISSING" if nb == 0 else "NOT ONCE", f"B12: t6+ fabric sentence '{BROCADE}' {nb} times (must be 1)"))
     elif nb: out.append(("B12", "LOW RANK", f"B12: brocade fabric sentence in a t1-t5 / face / maid prompt (must be M06 thướt tha only)"))
-    for k, s in _master(high):
+    if doan and _norm(m06) in t: out.append(("B26", "THIN SILK", "B26 (owner Lượt 1283): t4 Tần / t5 Phi must carry the matte satin đoạn sentence, not master M06 (thin silk+gauze)"))
+    if not doan and _norm(DOAN) in t: out.append(("B26", "NOT T4/T5", "B26 (owner Lượt 1283/1284): the matte satin đoạn sentence is for t4 Tần + t5 Phi only"))
+    for k, s in _master(high, doan):
         s = winter_g28.master_form(s, winter)
         n = t.count(_norm(s))
         if n == 1: continue

@@ -28,7 +28,8 @@ def _rx(tpl):
     return re.compile(re.escape(a) + r"(?P<sec>[^()]+?)" + re.escape(b) + r"(?P<main>[^()]+?)" + re.escape(c))
 PHI_ORIG_RX, PHI_WINTER_RX = _rx(PHI_ORIG), _rx(PHI_WINTER)
 SHEER = re.compile(r"\b(sheer|translucent|gauze|chiffon|organza|see-through)\b", re.I)
-SHEER_OK = ["no sheer floating scarf, stole, shawl or veil unless her outfit names one", "never see-through"]
+SHEER_OK = ["no sheer floating scarf, stole, shawl or veil unless her outfit names one", "never see-through",
+            "clearly thicker and more opaque than thin silk gauze"]   # B26 (owner Lượt 1283): t4/t5 matte satin đoạn sentence says it is NOT gauze
 BANNED = re.compile(r"\b(thick|padded|quilted|bulky fabric|heavier folds|warm cloth)\b", re.I)   # owner ~19:24Z
 assert not any(BANNED.search(w) for _, w in FABRIC) and not BANNED.search(PHI_WINTER)
 

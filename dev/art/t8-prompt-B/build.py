@@ -1971,6 +1971,18 @@ for _c in list(DATA):
         _fw=KC_PEOPLE[_c]["face_words"]; assert _fw.endswith("."),_c
         DATA[_c]=(DATA[_c][0],_fw[len("Her face: "):-1])
 KC_ID=re.compile(r"(?:c|m|p|s)\d\d|nc\d|bd\d")
+# B26 FABRIC ĐOẠN MỜ (owner Lượt 1283 + CORRECTION 1284; words = owner-approved m11 test dev/art/seasons4/m11_t4_VAI_DOAN.txt, Lượt 1275): t4 Tần / t5 Phi robe = satin (đoạn).
+# ONLY the robe's fabric word changes (as in the m11 file: 'a layered satin (đoạn) robe', 'the robe itself is clearly <main> satin'); every detail (capelet, capes,
+# embroidery, cuffs, girdle, pendants, shawl, headdress) is kept word for word; brocade cuffs / gold brocade girdle trims stay (details). Master M06 -> DOAN in master_common.
+DOAN_SWAPS=[("a layered silk robe of two or three visible layers","a layered satin (đoạn) robe of two or three visible layers"),   # t4 Tần (m11 test words)
+            ("a layered silk brocade court robe of two or three visible layers","a layered satin (đoạn) court robe of two or three visible layers")]   # t5 Phi
+DOAN_MAIN_RX=re.compile(r"(the robe itself is clearly [^,;.]+?) silk\b")
+def doan_outfit(o):
+    n=0
+    for a,b in DOAN_SWAPS:
+        if a in o: o=o.replace(a,b,1); n+=1
+    o,k=DOAN_MAIN_RX.subn(r"\1 satin",o,count=1)
+    return o
 if __name__=="__main__":
     if "--verify" in sys.argv:
         i=sys.argv.index("--verify"); _since=sys.argv[sys.argv.index("--since")+1] if "--since" in sys.argv else None
@@ -2077,7 +2089,9 @@ if __name__=="__main__":
         _HIGH=(STATE in ("nude","thaihau")) or (TRIEUN is not None and TRIEUN>=6) or (not STATE and TRIEUN is None and not BDQ and ((LOWN if "--low" in sys.argv else 7 if "--t7" in sys.argv else 8)>=(7 if _PRIN else 6)))   # B12 (owner Lượt 781, MG2): fabric by rank
         if _HIGH and (STATE=="thaihau" or TRIEUN is not None) and _MC.BROCADE not in _o:   # B12: triều t6-t8 / Thái hậu state get the store prompt-B fabric sentence right before Pose (thường phục t6-t8: store-all/build_all.py laws)
             assert _o.count(" Pose:")==1,"B12 pose anchor"; _o=_o.replace(" Pose:"," "+_MC.BROCADE+" Pose:",1)
-        _o=_MC.apply(_o,high=_HIGH)
+        _DOAN=(not _HIGH) and not STATE and TRIEUN is None and not BDQ and "--low" in sys.argv and LOWN in (4,5)   # B26 (owner Lượt 1283/1284): t4 Tần + t5 Phi = matte satin đoạn
+        if _DOAN: _o=doan_outfit(_o)
+        _o=_MC.apply(_o,high=_HIGH,doan=_DOAN)
     print(_o,end="")
     _lg=[x for x in _RAW if x not in ("--log","--refs")]
     if "--gen-id" in _lg: _i=_lg.index("--gen-id"); _gid=_lg[_i+1]; _lg[_i:_i+2]=[]

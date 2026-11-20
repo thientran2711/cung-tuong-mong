@@ -997,7 +997,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
             if negated(text, m.start(), m.end()): continue
             fails.append(("B20", "DEEP COLOUR", f"'deep/dark' adjective on a colour word (all seasons light and fresh, Lượt 769): …{text[max(0,m.start()-30):m.end()+20]}…")); break
     import winter_g28; _winter = winter_g28.is_winter(text)   # SEASON đông: G26 fur sentence present -> winter twins (W*) replace S06/S12, M06 in its G28 form
-    for k, kind, d in master_common.check(text, high=master_common.high_scope(scope), female=not master_common.male_scope(scope), winter=_winter):   # + NOEAR (owner Lượt 1037): every woman / girl scope = bare-earlobes sentence once + no earring word; men / boys (--scope emperor|men) unchanged   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
+    for k, kind, d in master_common.check(text, high=master_common.high_scope(scope), female=not master_common.male_scope(scope), winter=_winter, doan=master_common.doan_scope(scope)):   # + NOEAR (owner Lượt 1037): every woman / girl scope = bare-earlobes sentence once + no earring word; men / boys (--scope emperor|men) unchanged   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
         fails.append((k, "MASTER " + kind, d))
     for k, kind, d in master_common.check_elder(text, scope, age):   # C5 (owner Lượt 779/784): elder colours win over M05 at a51/a65, never in Nữ đế
         fails.append((k, kind, d))
