@@ -412,3 +412,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW palace-life-gaps r1 (opus BIG) of 3af67a8e | review/palace-life-gaps-r1 | B | session_01N1tNP6rEmQko7Y5Qk716AK | RUNNING | 20/11 08:52Z |
 | REVIEW names-unique-r2 r1 (opus BIG; save migration) of bf9f80002 | review/names-unique-r2-r1 | B | session_01N1tNP6fWrZSFyTwWVjxNXT | RUNNING | 20/11 08:53Z |
 | REVIEW mg-ui-rest (SMALL sonnet) of b5253eeb | review/mg-ui-rest-rv; briefs/rv-root76-mg-ui-rest.md | MAIN ROOT-76 | session_01Rc5AsM53iAEvG6q2NjA1iN | RUNNING | 20/11 08:57Z |
+| REVIEW outside-gaps r1 (opus BIG) of 70f3c853 | review/outside-gaps-r1 | B | session_01N1tNP3qXHKuMuUrxD5QGRQ | RUNNING | 20/11 08:59Z |
+| GAP OR13 co-op half outside-coop (opus; J3b) | review/outside-coop | B | session_01N1tNP4iVdUXvnLhmBA3k9Y | RUNNING | 20/11 08:59Z |
