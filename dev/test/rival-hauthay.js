@@ -4,8 +4,8 @@
      prep spend Bạc / Sức, bestow, pillow talk, tablet kept); the maid gets the night (amNightGain) — same delta as the player's maid
    2 the player's «Tiến cử»: unchanged — she gets nothing of the night, her maid gets the same gain (same Sắc → same number, Math.random fixed)
    3 a free seat: the maid is raised Đáp ứng, the raised maid holds the ONE night record of the day + the conception roll; the mistress none
-   4 no «Tiến cử» on a night she took (Tranh sủng / Chặn ngự giá: nightWhy stolen / S.ntk) or on his visit (S.visNpc) — her cards offer none;
-     amSendQ is not even asked and her night plays as before
+   4 no «Tiến cử» on a night she took (Tranh sủng / Chặn ngự giá: nightWhy cause stolen) or on his visit (S.visNpc) — her cards offer none;
+     amSendQ is not even asked and her night plays as before; the same when her maid is busy elsewhere (jptime ptMaidOut: nobody to send)
    5 her maids' «Hầu trà khi ngự giá» (amNightTea) runs only on HER night, not when her maid served in her place
    6 not sending: her night as before (nights +1, conception roll on her)
    7 agents off (amOn false → npcWhy fallback + j8 sendMaid): the same two-way result for her and the NPC
@@ -39,9 +39,13 @@ const {chromium}=require('playwright');const [,,U0]=process.argv;const URL=/^(ht
    fresh();v=pickV();tabletFor(v);const b0=snap(v);reset();askAs(true);roomFor=()=>true;const n0=rivals.length;rivalNight(v);roomFor=rf0;const nw=rivals.length>n0?rivals[rivals.length-1]:null;
    const all=[S].concat(rivals);out.rise={same:same(b0,snap(v)),rose:!!nw,nwN:nw&&nw.nights,nwRoll:!!nw&&SP.night.includes(nw.id),vRoll:SP.night.includes(v.id),
     day:all.reduce((s,x)=>s+((x.nightLog||[]).filter(z=>z===wk()).length),0)};
-   /* 4 stolen / taken / visit: no «Tiến cử» */
-   const K={};for(const k of ["stolen","ntk","visit"]){fresh();v=pickV();tabletFor(v);if(k==="stolen")S.nightWhy.cause="stolen";if(k==="ntk")S.ntk={w:wk(),who:v.id,nm:v.name};if(k==="visit")S.visNpc={w:wk(),id:v.id};
-    const c0=snap(v);reset();askAs(true);rivalNight(v);K[k]={can:htCan(v),ask:SP.ask,send:SP.send.length,nights:(v.nights||0)-c0.nights,roll:SP.night.includes(v.id)}}out.took=K;
+   /* 1b the real entry: S.tonight = her, resolveTonight (j75 writes S.ntk for the holder, jagmaid / jnf wrappers) → she sends, no night of her own */
+   fresh();v=pickV();tabletFor(v);S.tonight=v;const r0=snap(v);reset();askAs(true);roomFor=()=>false;resolveTonight();roomFor=rf0;
+   out.entry={same:same(r0,snap(v)),ask:SP.ask,send:SP.send.slice(),night:SP.night.slice(),ntk:!!(S.ntk&&S.ntk.who===v.id)};
+   /* 4 stolen / visit / maid busy: no «Tiến cử» */
+   const K={};for(const k of ["stolen","visit"]){fresh();v=pickV();tabletFor(v);if(k==="stolen")S.nightWhy.cause="stolen";if(k==="visit")S.visNpc={w:wk(),id:v.id};
+    const c0=snap(v);reset();askAs(true);rivalNight(v);K[k]={can:htCan(v),ask:SP.ask,send:SP.send.length,nights:(v.nights||0)-c0.nights,roll:SP.night.includes(v.id)}}{fresh();v=pickV();tabletFor(v);const po=window.ptMaidOut;window.ptMaidOut=x=>x===v;const c0=snap(v);reset();askAs(true);try{rivalNight(v)}finally{window.ptMaidOut=po}
+    K.busy={can:null,ask:SP.ask,send:SP.send.length,nights:(v.nights||0)-c0.nights,roll:SP.night.includes(v.id)}}out.took=K;
    /* 5 + 6 not sending: her night as before, her maids' tea asked */
    fresh();v=pickV();tabletFor(v);const e0=snap(v);reset();askAs(false);rivalNight(v);out.keep={nights:(v.nights||0)-e0.nights,log:(v.nightLog||[]).length-e0.log,roll:SP.night.includes(v.id),tea:SP.tea,ask:SP.ask};
    /* 7 agents off: fallback npcWhy + j8 sendMaid, both ways */
@@ -56,8 +60,9 @@ const {chromium}=require('playwright');const [,,U0]=process.argv;const URL=/^(ht
  ck(n.send.length===1&&n.fav&&n.maidSung>0&&n.tea===0,"1 NPC hầu thay: the maid serves (one sendMaid), gets his regard, favoured; no tea on a night that is not hers",{send:n.send,maidSung:n.maidSung,fav:n.fav,tea:n.tea});
  ck(m.same&&m.tonight===null&&!m.night.length&&m.send.join()==="me"&&/hầu thay/.test(m.opt),"2 player «Tiến cử»: unchanged — she gets nothing of the night, the one sendMaid",m);
  ck(m.maidSung===n.maidSung&&m.fav===n.fav,"2 two-way: her maid and the NPC's maid get the SAME night gain from the same code (same Sắc, same roll)",{me:m.maidSung,npc:n.maidSung});
+ ck(r.entry.same&&r.entry.ask===1&&r.entry.send.length===1&&!r.entry.night.length,"1b real entry resolveTonight (S.ntk written for the holder): she sends, no night of her own",r.entry);
  ck(r.rise.same&&r.rise.rose&&r.rise.nwN===1&&r.rise.nwRoll&&!r.rise.vRoll&&r.rise.day===1,"3 free seat: the raised maid holds the one night record + the conception roll; the mistress none",r.rise);
- for(const k of ["stolen","ntk","visit"]){const x=r.took[k];ck(!x.can&&x.ask===0&&x.send===0&&x.nights===1&&x.roll,`4 ${k}: a night she took / his visit offers no «Tiến cử»; her night plays`,x)}
+ for(const k of ["stolen","visit","busy"]){const x=r.took[k];ck(!x.can&&x.ask===0&&x.send===0&&x.nights===1&&x.roll,`4 ${k}: a night she took / his visit / her maid busy elsewhere (jptime) offers no «Tiến cử»; her night plays`,x)}
  ck(r.keep.nights===1&&r.keep.log===1&&r.keep.roll&&r.keep.tea===1&&r.keep.ask===1,"5+6 not sending: her night as before (record, conception roll, her maids' tea)",r.keep);
  ck(r.off.npc.same&&!r.off.npc.night.length&&r.off.npc.send.length===1&&r.off.me.same&&r.off.me.tonight===null&&r.off.me.send.join()==="me","7 agents off: the same two-way result (npcWhy + j8 sendMaid)",r.off);
  console.log("page errors:",errs.length,errs.slice(0,3));const pass=T.every(Boolean)&&!errs.length;console.log(pass?"ALL PASS":"FAILED",T.filter(Boolean).length+"/"+T.length);

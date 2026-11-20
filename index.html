@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"73a09248+","t":"2026-11-20T20:44Z","c":"balance-core test: growth curve replays the same seeded draws for her and the NPC (unseeded rounding failed ~1 in 16 by chance; [0,8] seen)…","b":"52a536f5a7a1","h":[{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"}]};
+window.CTM_BI={"s":"4ed3663a+","t":"2026-11-20T22:31Z","c":"rival hầu-thay (law 1 two-way): an NPC who sends her maid on her night decides BEFORE the night, like her own «Tiến cử» on the ksp summons …","b":"050a39c6e6dd","h":[{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -25159,8 +25159,9 @@ function talkOpts(p){const E=S.emp;return [has("trongtai")?3:(p.tai||0)>=60?1:0,
    her cards offer no «Tiến cử». An NPC decides at the same point (amSendQ / npcWhy, her own need) and then has NO night of her own: no prep
    spend, no Sủng / Ân, no jealousy rise, no conception roll, no pillow talk, no bestow, the tablet bribe kept (her nightFx is what spends it);
    the maid's night is the one sendMaid (jagmaid: amNightGain, amRise → night() / amFav, BAL.ag.maid), the same call as her «Tiến cử». */
-function htCan(v){try{if(!v||v===S||v.coop)return false;const w=wk(),d=S.nightWhy,n=S.ntk,x=S.visNpc;
-  if(d&&d.wk===w&&d.cause==="stolen"&&d.pick===v.id)return false;if(n&&n.w===w&&n.who===v.id)return false;if(x&&x.w===w&&x.id===v.id)return false;return true}catch(e){return false}}
+function htCan(v){try{if(!v||v===S||v.coop)return false;const w=wk(),d=S.nightWhy,x=S.visNpc;/* S.ntk is NOT a steal mark: resolveTonight (below) writes it for every holder */
+  if(d&&d.wk===w&&d.cause==="stolen"&&d.pick===v.id)return false;if(x&&x.w===w&&x.id===v.id)return false;
+  if(!v.maid||(typeof ptMaidOut==="function"&&ptMaidOut(v)))return false;/* no maid at hand (jptime: busy elsewhere) → nobody to send: her night plays */return true}catch(e){return false}}
 window.htCan=htCan;
 rivalNight=function(v){
  if(htCan(v)&&(typeof amOn==="function"&&amOn()?amSendQ(v):npcWhy("sendMaid",{v})))return `Đêm qua thẻ bài của ${v.name} được lật. `+sendMaid(v);/* AG3: her own choice (jagmaid), before the night */
@@ -85554,7 +85555,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="52a536f5a7a1";window.CTM_BUILD=BUILD;
+const BUILD="050a39c6e6dd";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

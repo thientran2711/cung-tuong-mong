@@ -139,8 +139,9 @@ function talkOpts(p){const E=S.emp;return [has("trongtai")?3:(p.tai||0)>=60?1:0,
    her cards offer no «Tiến cử». An NPC decides at the same point (amSendQ / npcWhy, her own need) and then has NO night of her own: no prep
    spend, no Sủng / Ân, no jealousy rise, no conception roll, no pillow talk, no bestow, the tablet bribe kept (her nightFx is what spends it);
    the maid's night is the one sendMaid (jagmaid: amNightGain, amRise → night() / amFav, BAL.ag.maid), the same call as her «Tiến cử». */
-function htCan(v){try{if(!v||v===S||v.coop)return false;const w=wk(),d=S.nightWhy,n=S.ntk,x=S.visNpc;
-  if(d&&d.wk===w&&d.cause==="stolen"&&d.pick===v.id)return false;if(n&&n.w===w&&n.who===v.id)return false;if(x&&x.w===w&&x.id===v.id)return false;return true}catch(e){return false}}
+function htCan(v){try{if(!v||v===S||v.coop)return false;const w=wk(),d=S.nightWhy,x=S.visNpc;/* S.ntk is NOT a steal mark: resolveTonight (below) writes it for every holder */
+  if(d&&d.wk===w&&d.cause==="stolen"&&d.pick===v.id)return false;if(x&&x.w===w&&x.id===v.id)return false;
+  if(!v.maid||(typeof ptMaidOut==="function"&&ptMaidOut(v)))return false;/* no maid at hand (jptime: busy elsewhere) → nobody to send: her night plays */return true}catch(e){return false}}
 window.htCan=htCan;
 rivalNight=function(v){
  if(htCan(v)&&(typeof amOn==="function"&&amOn()?amSendQ(v):npcWhy("sendMaid",{v})))return `Đêm qua thẻ bài của ${v.name} được lật. `+sendMaid(v);/* AG3: her own choice (jagmaid), before the night */
