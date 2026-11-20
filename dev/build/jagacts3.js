@@ -203,7 +203,7 @@ agReg("consort","par3fac",(v,N,need)=>{const O=[];if(!p3FacOn()||v===S||v.out||!
 function p3FacRes(v,k,r){v.p3FacM=S.turn;r=String(r||"").trim();if(r&&typeof seenNPC==="function"){const s=seenNPC(v,v,r);if(s)try{log(s)}catch(e){}}return p3Res(k,r)}
 agRunReg("cx3:facFound",(v,t)=>t&&!facOf(v)&&!facOf(t)?p3FacRes(v,"facFound",rcvAsk("facFound",v,t)):"");
 agRunReg("cx3:facJoin",(v,l)=>{const g=l&&facOf(l);return g&&!facOf(v)?p3FacRes(v,"facJoin",askJoin(v,g)):""});
-agRunReg("cx3:facLeave",v=>facOf(v)?p3FacRes(v,"facLeave",leaveFac(v)):"");
+agRunReg("cx3:facLeave",v=>facOf(v)?p3FacRes(v,"facLeave",leaveFacSelf(v)):"");
 agRunReg("cx3:facSell",v=>facOf(v)?p3FacRes(v,"facSell",sellOut(v)):"");
 agRunReg("cx3:facDiv",(v,l)=>{const g=l&&facOf(l);return g&&g!==facOf(v)?p3FacRes(v,"facDiv",divide(v,g)):""});
 Object.assign(window,{p3FacOn});

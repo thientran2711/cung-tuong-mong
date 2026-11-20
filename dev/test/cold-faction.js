@@ -63,6 +63,11 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   reset(16);{const [m,n]=L();found(S,m);joinFac(n,facOf(S));const f=facOf(S);goCold();restore(false,"Thử");Q.length=0;o.back=[!herCold(),facMembers(f).includes(S)]}
   /* 12. every number from BAL (law 4): the card / button words print the keys */
   reset(17);{const [m,n]=L();found(S,m);joinFac(n,facOf(S));const h=facHTML();o.bal=[h.includes("Danh "+balSg(B.fac.sell.danh)),h.includes("oán "+balSg(B.fac.sell.oan)),h.includes(balSg(-B.fac.leave.rel))]}
+  /* 13. review (law 3 + law 2): Rời phe of her own will is never cost-only — her tab and an NPC's cx3:facLeave = the letter (Danh + prop.danh);
+     the free maid road never beats the eunuch road outright (best maid odds ≤ eunuch odds) */
+  reset(18);{const [m,n]=L();found(S,m);joinFac(n,facOf(S));const h=facHTML();const d0=S.danh;facAct("roi",{});o.lv13=[h.includes("Rời phe<small>Danh "+balSg(PD)),!facOf(S),S.danh===d0+PD];
+   const [v,x,y]=L();found(v,x);joinFac(y,facOf(v));const dv=v.danh;AGRUN["cx3:facLeave"](v);o.lv13.push(!facOf(v),v.danh===dv+PD);
+   o.lv13.push(LT.maidO+100/LT.loyD<=LT.euO)}
   for(const k in snap){try{S[k]=JSON.parse(snap[k])}catch(e){}}S.facs=[];S.out=0;Q.length=0;
   return o});
  console.log(JSON.stringify(r));
@@ -84,5 +89,6 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r.co&&r.co.every(Boolean),'10 co-op friend mirror in lãnh cung: same rule on this seat (not present, on the roll)',r.co);
  ok(r.back&&r.back.every(Boolean),'11 back from lãnh cung: present again, still a member',r.back);
  ok(r.bal&&r.bal.every(Boolean),'12 words print BAL keys (sell / leave)',r.bal);
+ ok(r.lv13&&r.lv13.every(Boolean),'13 review: Rời phe (her tab, NPC cx3) has the Danh gain like the letter; maid road odds ≤ eunuch road',r.lv13);
  ok(!errs.length,'no page errors',errs.slice(0,3));
  const n=res.filter(x=>!x).length;console.log(n?`COLD-FACTION FAIL ${n}/${res.length}`:`COLD-FACTION ALL PASS ${res.length}`);await b.close();process.exit(n?1:0)})();

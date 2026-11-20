@@ -29,7 +29,7 @@ function coldFacActs(p){const me=p===S,L=BAL.ag.par3.cold.lt,F=BAL.ag.par3.fac,o
  if(m)R.push({w:m.name,c:{},o:odP(L.maidO+(m.loyal||0)/L.loyD),fail:()=>{m.loyal=cl((m.loyal||0)-L.maidLoy,0,100);return say(`${m.name} bị lính gác bắt được thư, bị tra hỏi một trận. Lòng trung ${balSg(-L.maidLoy)}.`)},fx:` · bị bắt: ${m.name} lòng trung ${balSg(-L.maidLoy)}`});
  const card=(n,t,x,ag,go)=>R.map(r=>({n:`${n} (nhờ ${r.w})`,t,c:{...r.c},o:r.o,k:2,w:{},l:{},ag,x:x+(r.fx||""),go:()=>say(go()),fail:r.fail}));
  if(f){A.push(...card(`Gửi thư xin rời ${f.name}`,"Viết thư báo với phe rằng ngươi không muốn liên lụy ai nữa.",`rời phe, không dính bè phái: Danh ${balSg(BAL.rcv.prop.danh)} · đồng đảng quý ${me?"ngươi":p.name} ${balSg(-F.leave.rel)}`,F.gLeave,
-   ()=>{const r=leaveFac(p);if(r)rcvAp(p,{danh:BAL.rcv.prop.danh});return r}));
+   ()=>leaveFacSelf(p)));
   if(facRoll(f).some(x=>x!==p)){const q=queenP()&&queenP()!==p?queenP():null;
    A.push(...card(`Gửi thư tố ${f.name}`,`Kể hết chuyện của phe trong thư, nhờ người dâng lên ${q?(q===S?"ngươi":"Hoàng hậu"):"Hoàng thượng"}.`,`Danh ${balSg(F.sell.danh)}, Sủng ${balSg(F.sell.sung)} · cả phe oán ${balSg(F.sell.oan)}`,F.gSell,()=>sellOut(p)))}}
  else{const G=(S.facs||[]).map(g=>({g,l:facLeader(g)})).filter(o=>o.l&&o.l!==p&&facIn(o.l)&&aff(o.l,p)>=F.clanAff).sort((a,b)=>aff(b.l,p)-aff(a.l,p));const o=G[0];

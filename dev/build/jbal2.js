@@ -1280,8 +1280,8 @@ BAL.ag.par3={on:1,
  use:{sucBelow:60,g:{"rest":2}},sell:{bacBelow:40,g:{"bac":2}},
  cutRisk:30,cold:{friend:40,sonAge:8,beg:{bac:20,anD:2,sungD:4},out:{bac:10,dad:50,affD:3,facD:10,dadD:5},ev:{mat:6,tcD:5},poem:{an:30,anD:2,thi:8},son:{fondD:2},/* odds bases: BAL.odb.j14.odO…odO_6, evidence need: BAL.coldEvNeed (ONE CORE, merge r2) */
   sutra:{c:{"suc":-3},w:{"duc":3}},veg:{w:{"suc":6}},embro:{c:{"suc":-5},w:{"bac":10}},nunSuc:10,nunO:10,oanFree:20,
-  /* cold-faction: a faction letter from lãnh cung (j14 coldActsOf, her card = an NPC's): road A the food eunuch (Bạc bac, odds base euO), road B her own kept maid (no bạc, odds base maidO + the maid's loyalty / loyD; caught → that maid loyalty − maidLoy) */
-  lt:{bac:12,euO:80,maidO:45,loyD:2,maidLoy:15},gFree:{"sung":30},gStay:{"duc":1,"rest":1,"bac":1}},charity:{g:{"duc":3,"danh":2}},restLat:{sucBelow:50,g:{"rest":2}},tyGift:{g:{"spite":1,"safe":1}},work:{g:{"danh":2,"ally":1}},
+  /* cold-faction: a faction letter from lãnh cung (j14 coldActsOf, her card = an NPC's): road A the food eunuch (Bạc bac, odds base euO), road B her own kept maid (no bạc, odds base maidO + the maid's loyalty / loyD; caught → that maid loyalty − maidLoy). Law 2 (review): maid odds 30+70/2=65 at BAL.loy.trust … 80 at loyalty 100 = never above the eunuch's 80, so the free road pays in odds + the maid's risk, the eunuch road in bạc */
+  lt:{bac:12,euO:80,maidO:30,loyD:2,maidLoy:15},gFree:{"sung":30},gStay:{"duc":1,"rest":1,"bac":1}},charity:{g:{"duc":3,"danh":2}},restLat:{sucBelow:50,g:{"rest":2}},tyGift:{g:{"spite":1,"safe":1}},work:{g:{"danh":2,"ally":1}},
  /* 2e part 3 (AG-ALL-2e2): NPC↔NPC talk topics (P3T) — worth = the liking she would win from the listener */
  talk:{health:{"ally":1},praise:{"ally":1.5},secret:{"ally":2},gossip:{"ally":1.5,"spite":1},invoke:{"ally":2}},
  /* household: Nghiệm độc (her button + NPC; bạc, odds bonus over oSee), Thêm cung nữ / thái giám (bạc), Tiến cử (công lao), Tâm sự / Tra xét / Dọa tố worth */
@@ -1691,6 +1691,39 @@ BAL.ag.min={on:1,gT:[["Tham vọng","quyen"],["Vì gia tộc","nha"],["Vì mình
 /* TRIỀU ĐÌNH gift deed (j55 tdGift, her and every NPC consort, house heads and the censor alike): giftAf = regard a received gift adds;
    backs = regard from which an official stands behind / spares that consort (tdBacks). Were typed in j55 (+20, 40) — ONE CORE (review minister-agents r1). */
 BAL.tdCourt={giftAf:20,backs:40};
+/* PERSON MINIGAME ACTS (jpma, owner OD 19/11 ~23:55Z, PARKING_LOT #8; plan dev/handover/reports/person-minigame-acts.md) — «Cùng chơi» + «Thách đấu»
+   with any real person (her ↔ NPC ↔ NPC, co-op friend). ONE CORE: every number of jpma lives here.
+   occ pm = the board of a person duel / pastime (jmgt mgTier): base + perRank · R, R = the HIGHER rank of the two (one board for both; harder as she climbs, law 5).
+   kc: khắc the asker spends when she sends it (her talk card shows it; an NPC's day plan charges the same kc). luck: the skill range of the 1-vs-1 score (= j82 default).
+   play: «Cùng chơi» gain-only (law 3) — liking both ways by the game's mean raw: raw ≥ cut[i] → aff[i+1] (else aff[0]); suc = the receiver's Sức (her time);
+         xp = art practice points for both (addArt for her, the same on an NPC's artp); fade = the same pair again this month gives 1/(1+n) (the P3T idiom).
+   stake.bac[R] = V, the value of a duel stake by the higher rank (law 5: rises with rank); band = an item stake's price within V·(1 ± band);
+   val = the exchange rates the equal-value measure (dev/measure/pm-equal.js) uses: Danh in bạc (charity BAL.charity 35 bạc → Danh 5 + Đức 3),
+         one point of someone's liking in bạc («Giúp đỡ nàng» 20 bạc → thiện cảm 10 both ways), oán, khắc, Sức. eqTol = the most two answers / stakes may differ (bạc).
+   duel: pubDanh = Danh ± for winner / loser at a public place (pub); shame = extra Danh a HIGHER-rank loser loses per rank of gap (max shameMax); oan = her oán of the winner.
+   yield («Nhường», the challenged side when the challenger outranks her): no game, she pays the stake; the challenger's liking + round(V·yieldK/affBac), oán − yieldOan.
+   refuse: the challenger outranks the receiver → his/her liking of the refuser − up more (rank etiquette; the rcvNoO cost applies to every refusal).
+   npc: gapW = weeks between two pm acts of one NPC; me = at most per week aimed at her; g = the need weights of the day plan; minAff / spite = who they pick;
+        meShare = when she is among the people an NPC may pick, the share of picks that land on HER (hashed, no global dice; law 1 two-way + 6b: the court
+        watches the rising one, so NPCs really invite / challenge HER; the rest go to the other NPCs by liking / spite; meGap = weeks with no NPC asking her
+        after which an NPC who may pick her (likes or resents her, as for anyone) picks HER (S.pmMeL = the last week one did; old saves: none yet);
+        g ×2.5 (20/11) so the court plays / duels a few times a year each. Measured over 200 buổi (dev/test/person-minigame-acts.test.js (6), 4 runs):
+        NPC → her 6–18, NPC → NPC 13–38 (was her 0–3 with no meShare / meGap and g 4); foreman E #14 ruling 20/11: NPC → her ≥ 4).
+   oddsN = draws behind her ladder word (no %, law 7). */
+Object.assign(BAL.mgTier.occ,{pm:[1,.5]});
+BAL.pm={kc:1,luck:30,minLv:1,
+ play:{cut:[4,7],aff:[2,3,5],suc:6,xp:1,fade:1},
+ stake:{bac:[6,8,10,12,15,18,22,26],band:.3},
+ val:{danhBac:5,affBac:2,oanBac:1,khacBac:6,sucBac:1},eqTol:8,
+ duel:{pubDanh:2,shame:1,shameMax:3,oan:4,yieldK:.7,yieldOan:2},
+ refuse:{up:1},
+ pub:["vuon","kn","tn"],
+ mem:{pmplay:6,pmwin:10,pmyield:10},
+ npc:{gapW:2,me:1,meShare:.4,meGap:6,g:{play:{ally:10},duel:{spite:10,danh:3.75}},minAff:0,spite:3},
+ oddsN:120};
+/* receiver weights for a pastime / duel ask (jrcv rcvPick): no «mách lẻo» slot */
+BAL.pm.rcvOff=[3];/* receiver answer slots a pm ask does NOT have: slot 3 («mách lẻo»); Nhận · Nhường · Từ chối keep the help weights */
+BAL.rcv.k.pm=BAL.rcv.k.help.map((w,i)=>BAL.pm.rcvOff.includes(i)?0:w);
 /* PALACE CHATTER (PL#6 bubble talk, jchat.js; owner OD:L1627 (5) "every 1–2 min NPCs chat"): gap = seconds between two chatter ticks (real time),
    retry = seconds to look again when the stage is busy (dialog / hidden page), maxBub = bubbles on one stage at once, turnGap = ms between two lines of
    one exchange, say = how long a line stays (ms: base + ch per letter, clamped min..max), noRepeat = exchanges / greetings said before one may come back,
