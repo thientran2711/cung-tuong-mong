@@ -93,3 +93,22 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - Trigger = context: at START_CTX % + 25 % of the window, NEVER above 60 % (hard ceiling): write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too; the COORDINATOR opens the successor.
 LINEAGE (owner 17/11): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover + send "TAKE OVER NOW" to your line's standby (or a FOR MAIN line if none). Every takeover prompt copies this line.
+
+## r3 — E30b (session_01DgYSWoKR63FnqBVfM37DPu, successor of E30) · FOREMAN E #23 · 20/11 ~22:50Z
+PRIORITY #1 CHECK: 'dresscode|dress code|trái mùa|BAL.dc' → OD 0 | claims 8 (E30 rows) | review/dresscode 7438275b, review/dresscode-r6 b840116f — continued E30's branch, nothing new. jcoopask H map reused (no new transport).
+Head: review/dresscode 94abcf8366eefe9e3270f57711d9cff93dc9b72f.
+1. Merge LIVE origin/main 548dcd0d (b967adc3): only assemble.py (module list: LIVE list + jdc0 before j31 + jdc after jcloth) and index.html/sw.js (rebuilt) conflicted.
+2. CO-OP LAND GATE — guest borrow / lend (94abcf83 + fix): her side moves on her seat; the NPC side goes to the host through jcoopask (PROTOCOL §4.1). jcoopask: `CW.askH=H` (other modules add kinds) + `CW.askBack[kind]` (guest settle hook). jdc: kinds `dcout` {from npc, pk} (host takes the piece out of the NPC chest, or off her hair if she put it on that week; refused → guest puts her own trâm back + log line) and `dcin` {to npc, e, wear} (host puts the piece in the NPC chest, worn for a loan TO the NPC, her own trâm kept as dcPrev; deduped by loan id). Requests are also relayed at once (same week when the host has not ended). A player's loan key = her world id ("id:901"/"id:902", jcoopworld me()), old "me:" keys still mean her; a piece lent by the OTHER seat's player is never pushed on this seat (dcOther), she takes it back on hers, once (S.dcGot loan ids). NPC loops (season dress, dcNpcFest, mocking) stay host-only (worldOn). Thin rooms (dev flag level >= 3): guest NPC borrow/lend stays off (not the default room).
+3. Gates on 94abcf83:
+| gate | result |
+|---|---|
+| dresscode.test.js | ALL PASS (fix-9 check renamed: "no world, no request path") |
+| coop-dresscode.js (NEW, 2 seats vs LIVE Worker, Fold host + iPad guest) | 33/33 ×2 runs: gate on both seats with «Cáo lỗi»; guest borrows → host NPC loses it same week (relay) → both seats after merge, loan row «Mượn của …»; next tuần back to NPC, one copy each seat; NPC asks the GUEST (real dcWeek frame) → «Cho mượn» → host NPC wears it (bor.from id:902) → back to her ONCE, NPC has none on either seat; guest never ran the NPC loop; 0 page errors |
+| coop-e2e.js | 68/68 PASS |
+| one-core-guard | PASS (fails 0, inline 3776 ≤ 3930) |
+| role-parity.test.js ×2 | ALL PASS both |
+| quickcheck.sh (bash, alone) | PASS 431 s · core gates PASS · old save ok · perf new/live render 224/226, tab 443/398, buổi 1189/1132 ms |
+| shots Fold 755x1000@2 + iPad 1180x820@2 (dresscode-shots.js) | looked at: gate (roads «Cài … của mình», «Sai người mua … ở Nội vụ phủ», «Cứ thế vào dự», «Cáo lỗi» always), trâm card with LIVE kitColDot dots «Đỏ chính · Vàng phụ», robe card, season frame, calendar. Local only (/home/user/wt/e30b-scr, CDN 401). The script's tap-path note «no kinvrows» = review item 12 (KIT fault, with MAIN), unchanged. |
+Not built (unchanged): item 12 (KIT, MAIN kit keeper), 11c robe recolour (waits owner OK on Foreman C sample).
+
+SẴN SÀNG KIỂM dresscode 94abcf8366eefe9e3270f57711d9cff93dc9b72f
