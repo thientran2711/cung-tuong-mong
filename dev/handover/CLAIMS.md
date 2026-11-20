@@ -411,7 +411,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW home-chapters (BIG opus E25r) of 03c2cade | review/home-chapters; briefs/E25r-review-home-chapters.md | FOREMAN E #17 | session_01DgYSWpQvWQ5ka4h6t1ZQRC | RUNNING | 20/11 09:48Z |
 | REVIEW palace-life-gaps r1 (opus BIG) of 3af67a8e | review/palace-life-gaps-r1 | B | session_01N1tNP6rEmQko7Y5Qk716AK | RUNNING | 20/11 08:52Z |
 | REVIEW names-unique-r2 r1 (opus BIG; save migration) of bf9f80002 | review/names-unique-r2-r1 | B | session_01N1tNP6fWrZSFyTwWVjxNXT | RUNNING | 20/11 08:53Z |
-| REVIEW mg-ui-rest (SMALL sonnet) of b5253eeb | review/mg-ui-rest-rv; briefs/rv-root76-mg-ui-rest.md | MAIN ROOT-76 | session_01Rc5AsM53iAEvG6q2NjA1iN | FAIL 9137759f (1 fix) | 20/11 08:57Z |
+| REVIEW mg-ui-rest (SMALL sonnet) of b5253eeb | review/mg-ui-rest-rv; briefs/rv-root76-mg-ui-rest.md | MAIN ROOT-76 | session_01Rc5AsM53iAEvG6q2NjA1iN | PASS 2859b245 | 20/11 08:57Z |
 | REVIEW outside-gaps r1 (opus BIG) of 70f3c853 | review/outside-gaps-r1 | B | session_01N1tNP3qXHKuMuUrxD5QGRQ | PASS 52f0638e (contains LIVE fd682a8d; 5 reviewer fixes; +15 cap OFF confirmed, decision → MAIN; kc-end + role-parity FAILs pre-existing on LIVE) | 20/11 10:40Z |
 | GAP OR13 co-op half outside-coop (opus; J3b) | review/outside-coop; reports/outside-coop.md | B | session_01N1tNP4iVdUXvnLhmBA3k9Y | SẴN SÀNG KIỂM 2c904461 (coop-kcco 63/63, coop-e2e 68/68, coop-home 51/51) | 20/11 ~10:20Z |
 | mg-craft lead #2 (opus; STEP 4 integrate VE f1ef0106 + HOA c0f9fbbc (+ g1 review fixes) onto review/mg-craft) | review/mg-craft | B | session_01N1tNP3Whw8X1PLZAsT5ChZ | RUNNING | 20/11 09:06Z |
