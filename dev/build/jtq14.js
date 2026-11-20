@@ -80,6 +80,28 @@ const INTRO={
  s:{nhap14:"{N} ghi tên ngươi vào sổ cung nữ, nghiêm giọng: “Đã vào làm kẻ hầu thì phải biết việc, biết lễ, biết đường. Mấy việc này làm trước, sai một là bị phạt.”",
   sung14:"{N} liếc nhìn ngươi: “Kẻ hầu cũng có ngày được Hoàng thượng để mắt, nhưng phải tự lo cho mình: mặt mũi gọn gàng, biết chỗ ngự giá hay qua, có chút bạc riêng.”",
   tap14:"{N} dặn: “Ở lâu trong cung mới biết, kẻ hầu sống nhờ đồng liêu. Kết lấy người, biếu chút quà, luyện tay nghề, thì mới có chỗ đứng.”"}};
+/* per-origin beat (OD:L1259 STORY FIRST, STORY_ROADS_PLAN phase 2): why THIS girl does the same quests, told from her origin and her rolled road
+   (S.st.f14.road → {R} = the road's title). Only words: the deeds, rewards and numbers stay the quests' own (one core). Group → chapter → line. */
+const ORG={tt:"court",dtq:"court",ch:"court",muoi:"poor",thd:"poor",td:"fall",nc:"fore",bd:"fore",cn:"maid",cnv:"maid"};
+const BEAT={
+ court:{nhap14:"Thư nhà gửi vào: việc «{R}» đã có người dòm ngó nhà {x}. Việc đầu là ra mắt bề trên cho vững chân, để người nhà ngoài kia còn có chỗ nhờ.",
+  sung14:"Nhà đang cần bạc để yên lòng kẻ đang dò xét. Rương mang theo, món nào không dùng thì đổi bạc, dung nhan chỉnh tề để được ngự giá để mắt.",
+  tap14:"Người con gái của kẻ đối đầu với nhà {x} đã được sủng ái. Phải có chị em qua lại và một nghề trong tay thì «{R}» mới khỏi đè lên đầu {x}."},
+ poor:{nhap14:"Bổng lộc còn thiếu mà buổi họp mặt đầu đã có kẻ chê áo xiêm sơ sài. Thay y phục cho phải phép thì trước mặt mọi người mới ngẩng đầu được.",
+  sung14:"Muốn lo quà cáp thì phải có bạc. Nhờ thái giám Nội vụ phủ mua giúp một món, người ấy về sau còn dùng đến cho «{R}»; bạc tiêu đi tháng sau sẽ thấy tiếc.",
+  tap14:"Tay không thân thế, chỉ có tài mới đứng được. Kết một người trong Hậu cung, học thêm một môn, rồi «{R}» mới có chỗ để tựa."},
+ fall:{nhap14:"Người quản gia cũ của nhà gửi lời từ ngoài cung nhắn phải dò xem ai gác cửa hông. Ra mắt bề trên cho đủ lễ, rồi đi một vòng xem nơi nào ra vào được.",
+  sung14:"Muốn có manh mối vụ hãm hại nhà {x} thì phải có bạc mua tin và có dung nhan để được ngự giá nhớ mặt. Đi hỏi mua đồ, kẻ gác cổng cũng sẽ nhớ mặt {x}.",
+  tap14:"Một người trong Hậu cung nói được lời đỡ, một nghề trong tay giữ được thể diện. «{R}» còn dài, một mình {x} không lần ra được."},
+ fore:{nhap14:"Lễ bộ muốn thấy {x} giữ đúng quy củ cung đình. Thỉnh an cho đủ lễ, biết lối đi lối về; sứ thần cùng đi sẽ khó chịu nếu {x} cúi đầu quá thấp.",
+  sung14:"Thái hậu đã để mắt sơ qua, nhưng muốn được ngự giá nhớ thì phải có bạc lo việc và dung nhan chỉnh tề. Biết chỗ mua đồ thì «{R}» mới không bị bỏ lỡ.",
+  tap14:"Xứ lạ thì cần người quen. Kết chị em trong Hậu cung, học một môn tài nghệ, rồi mới có chỗ dựa cho «{R}»."},
+ maid:{nhap14:"Chủ nhân dặn kẻ hầu mới phải biết việc, biết lễ, biết đường. Làm xong mấy việc này thì khỏi lỡ chuyện lớn, kể cả phần việc của «{R}».",
+  sung14:"Chủ nhân cần một món quà dâng lên bậc trên, kẻ khác cũng muốn nhận việc này. Làm chu toàn có thể được lòng tin, nhưng người bị giành mất cơ hội sẽ oán.",
+  tap14:"Một người đồng liêu sẽ nâng đỡ khi gặp chuyện, và nghề tay giữ được chỗ đứng. Việc nhờ sắp tới trong «{R}» cũng đến từ chỗ này."}};
+function beatLine(m){try{const o=S.origin&&S.origin.k,g=ORG[o],R=S.st.f14&&S.st.f14.road&&typeof ARC67!=="undefined"&&ARC67[S.st.f14.road]?ARC67[S.st.f14.road].t:"";
+ const t=g&&BEAT[g]&&BEAT[g][m.id];if(!t||(!R&&/\{R\}/.test(t)&&!(R="đường đời nàng")))return "";return say(t.replace(/\{R\}/g,R))}catch(e){return ""}}
+window.tq14Beat=beatLine;
 function variant(){return srvNow()?"s":"c"}
 function defOf(v,ch,id){return ((TQ[v]||{})[ch]||[]).find(q=>q.id===id)||null}
 function need(id){const N=QB().need||{};return N[id]||1}
@@ -115,10 +137,10 @@ window.tq14Real=function(m,st){/* jst14 «Lỡ dịp» rule: did she really fini
 /* the chapter opens: quests given, the narrator tells the beat (one kit card instead of the plain chapter card) */
 function init(m){const v=variant();const L=((TQ[v]||{})[m.id]||[]).map(q=>({id:q.id,n:0}));if(L.length)m.q14={v,L}}
 function introCard(m){if(quiet||window.__bot||typeof kitPanel!=="function")return;const c=S.st.ch,d=MS67[m.id],n=narr();
- const rows=[["Lời dặn",say(INTRO[m.q14.v][m.id]).replace("{N}",esc(n.name)+(n.office?`, ${esc(n.office)},`:""))],["Mục tiêu",d.g()],
+ const rows=[["Lời dặn",say(INTRO[m.q14.v][m.id]).replace("{N}",esc(n.name)+(n.office?`, ${esc(n.office)},`:""))],...(beatLine(m)?[["Duyên cớ",beatLine(m)]]:[]),["Mục tiêu",d.g()],
   ["Phần thưởng",`mỗi việc xong: Bạc +${QB().bac[m.q14.v]}; đủ việc và đạt mục tiêu: phần thưởng của chương`],msHan67(m,1)];
- kitPanel({kind:"info",title:`Chương ${c.n}: ${d.t()}`,sub:`${n.name} dặn`,sections:[{h:"",rows:rows.slice(0,2).map(r=>[r[0],r[1],r[2]||""])},
-  {h:"Việc phải làm",html:qChecks(m)},{h:"",rows:rows.slice(2).map(r=>[r[0],r[1],r[2]||""])}],subject:n.face||null,btn:"Đã hiểu"})}
+ kitPanel({kind:"info",title:`Chương ${c.n}: ${d.t()}`,sub:`${n.name} dặn`,sections:[{h:"",rows:rows.slice(0,rows.length-2).map(r=>[r[0],r[1],r[2]||""])},
+  {h:"Việc phải làm",html:qChecks(m)},{h:"",rows:rows.slice(rows.length-2).map(r=>[r[0],r[1],r[2]||""])}],subject:n.face||null,btn:"Đã hiểu"})}
 (function(){const m0=msStart67;msStart67=function(id){if(!(typeof f14==="function"&&f14()&&F14T.test(id)))return m0.apply(this,arguments);
  /* the same steps as j67 msStart67, with the quests set before anything is shown */
  const c=S.st.ch;c.n++;S.st.ms={id,r0:S.rank,t0:S.turn};S.st.M=null;const d=MS67[id];init(S.st.ms);
