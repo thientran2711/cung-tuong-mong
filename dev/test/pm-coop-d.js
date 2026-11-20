@@ -55,10 +55,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
 
  /* every seat records the x each pm act really runs with (ACT.pmplay / ACT.pmduel .f, wherever the relay lands: own context or the seat's context on the host) */
  for(const o of [H,G])await o.p.evaluate(()=>{window.__pmx=[];for(const k of ["pmplay","pmduel"]){const f0=ACT[k].f;ACT[k].f=function(a,t,x){try{__pmx.push({k,x:x&&typeof x==="object"?{kind:x.kind,s:x.s||null,n:x.n,live:x.live||null}:x,ctx:!!COOPW.ctx})}catch(e){}return f0.apply(this,arguments)}}
-  S.bac=Math.max(S.bac||0,400);S.danh=Math.max(S.danh||0,60);render()});
+  S.bac=Math.max(S.bac||0,400);S.danh=Math.max(S.danh||0,60);for(const a of ARTS.slice(0,2))S.arts[a.k]=Math.min(4,Math.max(S.arts[a.k]||0,BAL.pm.minLv||1));/* r3: each seat has a real art to play */render()});
  await week(H,G,'stats in each other\'s entry');for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}
  /* her pick: the LAST art on offer + the LAST stake that is ok (never the defaults pmX falls back to: first art, first ok stake) */
- const pick=(o,a)=>o.p.evaluate(a=>{const f=rivals.find(v=>v.coop);const A=pmArts(S,f);const ar=A[A.length-1];const x={a,kind:ar.kind,ak:ar.ak,n:ar.n};
+ const pick=(o,a)=>o.p.evaluate(a=>{const f=rivals.find(v=>v.coop);const A=pmArts(S,f);const AK=A.filter(z=>z.ak&&(S.arts[z.ak]||0)<5);const ar=a==="play"&&AK.length?AK[AK.length-1]:A[A.length-1];/* r3: a pastime with a real art (Đầu hồ has none) */const x={a,kind:ar.kind,ak:ar.ak,n:ar.n};
    if(a==="duel"){const L=pmStakes(S,f).filter(z=>z.ok);x.s=L.length?L[L.length-1].s:null}return {x,arts:A.map(z=>z.kind),stakes:pmStakes(S,f).map(z=>[z.s,z.ok])}},a);
  /* Q-C2 live board: after «Nhận» both seats open the board (pm-live go / rdy); each takes «Để tài nghệ quyết định» then «Đã hiểu» */
  const pmAll=async k=>[...(await H.p.evaluate(()=>__pmx)),...(await G.p.evaluate(()=>__pmx))].filter(z=>z.k===k);
@@ -93,7 +93,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const xb=(await got()).pop();ok(xb&&xb.x&&xb.x.kind===pb.x.kind&&xb.x.s===pb.x.s,'guest→host: HER game + stake kept',{sent:pb.x,ran:xb});
  ok(xb&&xb.x&&xb.x.live&&xb.x.live.ra!=null&&xb.x.live.rt!=null&&(await got()).length===1,'live board guest→host: ran ONCE with both raws',{ran:xb,n:(await got()).length});
  /* ===== (C) Cùng chơi host → guest: her game kept ===== */
- await settle();await H.p.evaluate(()=>{__pmx=[]});const pc=await pick(H,"play");await H.p.evaluate(x=>String(runAct(S,rivals.find(v=>v.coop),'pmplay',x)),pc.x);
+ /* r3 fix B (law 1): the practice of «Cùng chơi» lands on BOTH real S (the asker's own, and the receiver's through res.fam {op:"art"}) */
+ const PT=(o,ak)=>o.p.evaluate(ak=>{if(!ak||!S.artp||S.artp[ak]==null)return null;let n=S.artp[ak];for(let l=0;l<(S.arts[ak]||0);l++)n+=l+2;return {n,lv:S.arts[ak]||0}},ak);
+ const XP=await H.p.evaluate(()=>BAL.pm.play.xp);
+ await settle();await H.p.evaluate(()=>{__pmx=[]});const pc=await pick(H,"play");const gC0=await PT(G,pc.x.ak),hC0=await PT(H,pc.x.ak);await H.p.evaluate(x=>String(runAct(S,rivals.find(v=>v.coop),'pmplay',x)),pc.x);
  ok(await until(G,()=>Q.some(q=>q.thin&&q.t==='Hảo hữu tìm đến'),null,20000),'guest: the pastime card arrives');
  const cc=await G.p.evaluate(()=>{const q=Q.find(q=>q.thin&&q.t==='Hảo hữu tìm đến');return {h:String(q.h||""),o:(q.opts||[]).map(o=>[o.n,String(o.x||"")])}});
  ok(cc.h.includes(pc.x.n)&&cc.o[0]&&cc.o[0][0]==='Nhận lời'&&/được:/.test(cc.o[0][1])&&/mất:/.test(cc.o[0][1]),'guest pastime card: the game named, được / mất on Nhận lời',cc);
@@ -102,5 +105,15 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  ok(await until(H,()=>__pmx.some(z=>z.k==='pmplay'),null,20000),'host: the pastime runs');const xc=await H.p.evaluate(()=>__pmx.filter(z=>z.k==='pmplay').pop());
  ok(xc&&xc.x&&xc.x.kind===pc.x.kind,'host→guest pastime: HER game kept',{sent:pc.x,ran:xc});
  ok(xc&&xc.x&&xc.x.live&&xc.x.live.ra!=null&&xc.x.live.rt!=null,'live board pastime: both raws',xc);
+ {let g1=null;const t0=Date.now();while(Date.now()-t0<20000){g1=await PT(G,pc.x.ak);if(g1&&gC0&&g1.n>gC0.n)break;await sleep(400)}const h1=await PT(H,pc.x.ak);
+  ok(gC0&&g1&&(g1.n-gC0.n===XP||g1.lv>=5)&&hC0&&h1&&(h1.n-hC0.n===XP||h1.lv>=5),'r3 fix B host→guest pastime: the RECEIVING guest gets the practice (BAL.pm.play.xp) on her own S, the host too',{ak:pc.x.ak,XP,g:[gC0,g1],h:[hC0,h1]})}
+ /* ===== (D) Cùng chơi guest → host: the receiving host gets the practice ===== */
+ await settle();await clear(H,6);await H.p.evaluate(()=>{__pmx=[]});await G.p.evaluate(()=>{__pmx=[]});const pd=await pick(G,"play");const hD0=await PT(H,pd.x.ak),gD0=await PT(G,pd.x.ak);
+ const rd=await G.p.evaluate(x=>String(runAct(S,rivals.find(v=>v.coop),'pmplay',x)),pd.x);ok(/đợi nàng trả lời/.test(rd),'pastime guest→host: an offer',rd);
+ ok(await until(H,()=>Q.some(q=>q.pid==='thInv'),null,20000),'host: his pastime card (thInv)');
+ await front(H,'Hảo hữu tìm đến');ok(await tapM(H,/^Nhận lời/),'host taps Nhận lời');
+ {const bD=await boards('pmplay');ok(bD.H&&bD.G,'live board pastime guest→host: both seats played',bD)}
+ {let h1=null,g1=null;const t0=Date.now();while(Date.now()-t0<25000){await clear(G);h1=await PT(H,pd.x.ak);g1=await PT(G,pd.x.ak);if(h1&&hD0&&h1.n>hD0.n&&g1&&gD0&&g1.n>gD0.n)break;await sleep(400)}
+  ok(hD0&&h1&&(h1.n-hD0.n===XP||h1.lv>=5)&&gD0&&g1&&(g1.n-gD0.n===XP||g1.lv>=5),'r3 fix B guest→host pastime: the RECEIVING host gets the practice on his own S, the guest too',{ak:pd.x.ak,XP,h:[hD0,h1],g:[gD0,g1]})}
  const errs=[...H.errs.map(e=>'H '+e),...G.errs.map(e=>'G '+e)].filter(e=>!/WebSocket|net::|ERR_|Failed to fetch|navigator\.vibrate/.test(e));ok(!errs.length,'no page errors',errs.slice(0,6));
  await b.close();const f=res.filter(r=>!r[0]).length;console.log(`pm-coop-d: ${res.length-f}/${res.length}`);process.exit(f?1:0)})().catch(e=>{console.error(e);process.exit(2)});

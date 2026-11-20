@@ -403,7 +403,8 @@ const PUB=["petcare","accuse","vp","xx","gift","ally","steal","road","takeaway",
 const DK=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat"];
 const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 function fsnap(v){const o={};for(const k of DK.concat(["confined","rel","oan"]))o[k]=v[k]||0;o.alive=v.alive;o.out=!!v.out;o.em=(v.evm&&v.evm.me)||0;return o}
-function sendRes(v,k,b0,txt,id,pet,items,fam){if(CW.ctx&&!fW())return;/* part D: her act on the host run by the host in her context: TH.bridge carries it */const b1=fsnap(v);const fx={};for(const x of DK)if(b1[x]!==b0[x])fx[x]=b1[x]-b0[x];
+function sendRes(v,k,b0,txt,id,pet,items,fam){if(CW.ctx&&!fW()){/* jpma r3 fix B: TH.bridge carries stats only; the «Cùng chơi» practice of the host lands on his own S once her context closes */
+  const ar=(fam||[]).filter(o=>o&&o.op==="art");if(ar.length&&CW.thin&&CW.thin.D&&CW.thin.D.after)CW.thin.D.after(()=>{try{for(const l of famApply(ar).out)log(l)}catch(e){console.error("pm art",e)}});return}/* part D: her act on the host run by the host in her context: TH.bridge carries it */const b1=fsnap(v);const fx={};for(const x of DK)if(b1[x]!==b0[x])fx[x]=b1[x]-b0[x];
  const flags={rel:b1.rel-b0.rel,oan:b1.oan-b0.oan,em:b1.em-b0.em,conf:b1.confined-b0.confined,dead:b0.alive&&!b1.alive,cold:!b0.out&&b1.out};
  const t=String(txt||"").replace(/<[^>]+>/g,"");const caught=/bị lộ|bị bắt|phát giác|khai ra|tố giác/.test(t);
  /* review/looks-2 r1 FAIL 1: face marks / looks the act put on her entry ride THIS message (tuần-scoped looks would expire before the week write-back);
@@ -491,6 +492,7 @@ function famDiff(t,k,inv0,K0,plants){const ops=[];const L1=t.inv||[];
   const d={};for(const x of ["hp","tal","fond"])if(typeof kd[x]==="number"&&kd[x]!==c[x])d[x]=kd[x]-(c[x]||0);const h0=!!c.heir&&!kd.heir;
   if(Object.keys(d).length||h0)ops.push(Object.assign({op:"kd",n,d},h0?{heir0:1}:{}))}
  if(K0.preg&&!t.preg)ops.push({op:"preg0"});
+ try{if(typeof pmArtTake==="function")for(const ak of pmArtTake(t))ops.push({op:"art",ak})}catch(e){}/* jpma r3 fix B: «Cùng chơi» practice for her */
  return ops}
 /* her side: returns the lines for her note; `quiet` lines are told by their own dialog (Đồ thất lạc) */
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
@@ -504,6 +506,7 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
   if(o.how==="burn"){try{if(typeof tsbLedger==="function")tsbLedger({what:nm,how:"cháy",cause:"có kẻ phóng hỏa (chưa rõ là ai)"})}catch(x){}out.push(`<span class="r">Kho đồ của ngươi bốc cháy: mất ${esc(nm)}.</span>`)}
   else if(o.how==="taken"){try{if(typeof tsbLedger==="function")tsbLedger({what:nm,how:"bị lấy",who:fp(),by:friendName()})}catch(x){}out.push(`<span class="r">Ngươi phải nộp ${esc(nm)} cho ${esc(friendName())}.</span>`)}
   else out.push(`<span class="r">${esc(nm)} trong rương ngươi không còn nữa.</span>`)}
+ for(const o of ops)if(o.op==="art"&&typeof pmArtIn==="function"){const l=pmArtIn(o.ak);if(l){out.push(esc(l));loud=1}}/* jpma r3 fix B: the practice of «Cùng chơi» on her own S */
  for(const o of ops)if(o.op==="plant"&&o.e&&o.e.k){const x=Object.assign({},o.e);delete x.ci;S.inv.push(x)}
  /* p2 B4: a thing given to her in the host's world (a contest prize, a bestowal): into her chest, told */
  for(const o of ops)if(o.op==="add"&&o.e&&o.e.k&&typeof IT==="object"&&IT[o.e.k]){const x=Object.assign({},o.e);delete x.ci;S.inv.push(x);loud=1;out.push(`<span class="g">Được ban ${esc(typeof iname==="function"?iname(x):x.k)}${o.why?` (${esc(o.why)})`:""}.</span>`)}
