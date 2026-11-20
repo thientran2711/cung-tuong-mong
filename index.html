@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"78b0ed90","t":"2026-11-20T12:15Z","c":"walk-cost r3: index.html/sw.js rebuilt on LIVE 0aaf8152","b":"9ea979ed83ff","h":[{"s":"bf7cc4de+","t":"2026-11-20T11:56Z","c":"Mời khách khi chủ vắng nhà: khách chờ đúng luật"},{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"},{"s":"f6f4a69c+","t":"2026-11-20T11:10Z","c":"Sổ luân hồi thêm trang «Sơ đồ nhánh»"},{"s":"d941502e","t":"2026-11-20T11:16Z","c":"Chip điểm và đồng hồ trò chơi: chỉ còn con số, đồng hồ hổ phách khi gấp"},{"s":"c12231a1","t":"2026-11-20T11:05Z","c":"Trò chơi không chữ nhóm b: Đặt hoa có hình chỉ dẫn, bỏ chữ trên bàn chơi"},{"s":"62e3c9f1+","t":"2026-11-20T09:47Z","c":"cal-p2b-rv: tests follow the review fixes (cal-p2b C reads FAN/COOL; ag-mgcal 3 compares K2 with its own group band)"},{"s":"d5b8c01b","t":"2026-11-20T10:25Z","c":"Khung chung: sơ đồ nhánh, biển Thiên mệnh hai sắc (trang còn tắt)"},{"s":"8c8b6fd7","t":"2026-11-20T09:45Z","c":"Trò chơi không chữ: khung trò dùng chung bộ khung chuẩn"}]};
+window.CTM_BI={"s":"0ad4d4ed","t":"2026-11-20T13:06Z","c":"jagday-walk: tin báo bearer walks her own road (agWalk/knWalkTo pass the servant, j9 per walker)","b":"7b17ffc51edd","h":[{"s":"bf7cc4de+","t":"2026-11-20T11:56Z","c":"Mời khách khi chủ vắng nhà: khách chờ đúng luật"},{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"},{"s":"f6f4a69c+","t":"2026-11-20T11:10Z","c":"Sổ luân hồi thêm trang «Sơ đồ nhánh»"},{"s":"d941502e","t":"2026-11-20T11:16Z","c":"Chip điểm và đồng hồ trò chơi: chỉ còn con số, đồng hồ hổ phách khi gấp"},{"s":"c12231a1","t":"2026-11-20T11:05Z","c":"Trò chơi không chữ nhóm b: Đặt hoa có hình chỉ dẫn, bỏ chữ trên bàn chơi"},{"s":"62e3c9f1+","t":"2026-11-20T09:47Z","c":"cal-p2b-rv: tests follow the review fixes (cal-p2b C reads FAN/COOL; ag-mgcal 3 compares K2 with its own group band)"},{"s":"d5b8c01b","t":"2026-11-20T10:25Z","c":"Khung chung: sơ đồ nhánh, biển Thiên mệnh hai sắc (trang còn tắt)"},{"s":"8c8b6fd7","t":"2026-11-20T09:45Z","c":"Trò chơi không chữ: khung trò dùng chung bộ khung chuẩn"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -69001,7 +69001,7 @@ function agMW(v,tag){const C=AG.mwc=AG.mwc||{};const k=(v===S?"me":v.id)+":"+tag
 /* a khắc the words of a card or a told deed already put her somewhere (j95b bind / turn-of-buổi act) is hers to keep: the loop never overwrites it */
 function agBound(id,kh,key){try{return typeof J95B!=="undefined"&&J95B.bind.some(b=>b.id===id&&b.kh===kh&&b.key===key)}catch(e){return false}}
 function agSlot(v,at,t,c){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<J95.KH;kh++){if(c&&typeof agFitDay==="function"&&typeof agKhC==="function"&&!agFitDay(kh,agKhC(c,v)))continue;/* the DAY must hold the whole deed (review ag-all-2 r2 B3) */const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
-  if(v.confined&&k!==palaceOf(v))continue;if(!j95acc(v,k)&&k!=="home"&&k!==palaceOf(v))continue;if(R&&R.P[id]&&R.P[id][kh]&&(R.P[id][kh][1]==="tryst"||R.P[id][kh][1]==="meet"))continue;if(R&&agBound(id,kh,R.key))continue;L.push([kh,k])}
+  if(v.confined&&k!==palaceOf(v))continue;if(!j95acc(v,k)&&k!=="home"&&k!==palaceOf(v))continue;if(R&&R.P[id]&&R.P[id][kh]&&(R.P[id][kh][1]==="tryst"||R.P[id][kh][1]==="meet"))continue;if(R&&agBound(id,kh,R.key))continue;/* the walk to it and on from it fits (jagday agWalkOk: kept rows are never rewritten by jwalk) */if(R&&typeof agWalkOk==="function"&&!agWalkOk(R,id,kh,c&&typeof agKhC==="function"?agKhC(c,v):1,k,v,k0))continue;L.push([kh,k])}
  /* NPC-PURPOSE G3: she does what she wants SOON — the near-best khắc from now (BAL.ag.why.g3.soon), never a random khắc */
  return L.length?npwPick(L,x=>agSoon(x[0],k0)):null}
 function agSoon(kh,k0){return Math.max(1,100-(kh-k0)*BAL.ag.why.g3.soon)}
@@ -72339,9 +72339,9 @@ function agPlanX(id,s,kh){const z=agZ(),R=agRec();const p={key:agKey(),id,vid:nu
  AG.stat.by[s.k]=(AG.stat.by[s.k]||0)+1;const L={w:wk(),b:S.buoi||0,kh,id,k:s.k,t:s.t||null,pl:s.pl,why:p.why};z.log.push(L);if(z.log.length>60)z.log.shift();return p}
 function agTickX(){if(!agDOn())return;const D=agDz();if(D.d!==wk())return;const z=agZ(),key=agKey();const k0=agKh();
  for(const id in D.P){if(/^v\d/.test(id))continue;const s=agDaySlot(id);if(!s||!s.k||!AGRUN[s.k])continue;if(z.pend.some(p=>p.id===id&&p.key===key)||(z.didX&&z.didX[id]===key))continue;
-  (z.didX=z.didX||{})[id]=key;
+  (z.didX=z.didX||{})[id]=key;let dX=null;try{dX=agDoer({id,vid:null})}catch(e){}
   /* the khắc she can do it: from now on, not one a card / told deed / secret meeting already holds (same rule as a consort's agSlot) */
-  const R=agRec();const free=[];for(let kh=k0;kh<J95.KH;kh++){const e=R&&R.P[id]&&R.P[id][kh];if(e&&(e[1]==="tryst"||e[1]==="meet"||e[1]==="offduty"||e[1]==="laundry"))continue;/* off duty / punished: her khắc is not hers */if(R&&agBound(id,kh,R.key))continue;free.push(kh)}
+  const R=agRec();const free=[];for(let kh=k0;kh<J95.KH;kh++){const e=R&&R.P[id]&&R.P[id][kh];if(e&&(e[1]==="tryst"||e[1]==="meet"||e[1]==="offduty"||e[1]==="laundry"))continue;/* off duty / punished: her khắc is not hers */if(R&&agBound(id,kh,R.key))continue;if(R&&!agWalkOk(R,id,kh,agKhC(s,dX),s.pl,dX,k0))continue;/* the walk to it and on from it fits (DEED WALKS) */free.push(kh)}
   if(!free.length){AGD.stat.miss++;continue}/* G3: the near-best khắc from now (agSoon), never a random one */agPlanX(id,s,npwPick(free,kh=>agSoon(kh,k0)));AGD.stat.land++}
  if(!agRec()){for(const p of z.pend.slice())if(p.key===key&&p.vid==null)agLand(p)}}
 (function(){
@@ -72416,7 +72416,7 @@ function agMore(d,id,prev,max){const A=BAL.ag.kh2;const R=agRec();if(!R||!R.P[id
   const o=mindPick(O.map(x=>[x,x.u]),d);if(!o)break;let at=null;try{at=o.at(k0,d,o.t)}catch(e){}if(!at)break;
   if(cons){if(d.confined&&at!==palaceOf(d))break;if(!j95acc(d,at)&&at!=="home"&&at!==palaceOf(d))break}
   let w=0;try{w=at===pl?0:travel(pl,at,d)}catch(e){w=0}const kh=k0+w,kc=Math.max(1,agKhC(o,d));if(!agFitDay(kh,kc))break;/* no time left in the DAY for it (OD L852: a deed may run on into the next buổi): she keeps her schedule */
-  let free=true;for(let q=kh;q<Math.min(kh+kc,J95.KH);q++)if(!agKhFree(R,id,q)){free=false;break}if(!free)break;
+  let free=true;for(let q=kh;q<Math.min(kh+kc,J95.KH);q++)if(!agKhFree(R,id,q)){free=false;break}if(!free)break;if(!agWalkOk(R,id,kh,kc,at,d))break;/* and on to her next kept row (DEED WALKS) */
   o.need=need;let p;if(cons){agPlan(d,o,N,kh,at);p=agZ().pend[agZ().pend.length-1]}else p=agPlanX(id,{k:o.k,t:o.t?ledgerId(o.t):null,pl:at,act:o.act,why:agWhyN(o,need)},kh);
   if(!p)break;n++;AGD.stat.more=(AGD.stat.more||0)+1;end=agK1(p);pl=at;last=o.k}
  return n}
@@ -72447,7 +72447,7 @@ function agSeeNpc(p,doer){if(!agKhOn()||!BAL.ag.kh2.see.on)return;const R=agRec(
 /* the reaction deed: kh = the khắc after she saw it, at that place; it must fit the DAY (agFitDay) and her khắc must be free, else she lets it go
    (agTouch: she re-thinks next buổi). Row "ag_see:<c>" = the khắc she spends on it. p.seen / p.sh: a reaction is not a new scene or meeting. */
 function agSeePlan(v,R,kh,pl,k,kd,tid,act,why){if(!v||!R)return false;const id=ledgerId(v);if(!id||!R.P[id])return false;
- if(!agFitDay(kh,1)||kh>=J95.KH){agTouch(v);return false}const e=R.P[id][kh];if(e&&(e[1]==="tryst"||e[1]==="meet"||e[1]==="offduty"||e[1]==="laundry"||/^ag_/.test(e[1]||""))||agBound(id,kh,R.key))return false;
+ if(!agFitDay(kh,1)||kh>=J95.KH){agTouch(v);return false}if(!agWalkOk(R,id,kh,1,pl,v,kh-1)){agTouch(v);return false}/* DEED WALKS: and on to her next kept row */const e=R.P[id][kh];if(e&&(e[1]==="tryst"||e[1]==="meet"||e[1]==="offduty"||e[1]==="laundry"||/^ag_/.test(e[1]||""))||agBound(id,kh,R.key))return false;
  const z=agZ();const p={key:R.key,id,vid:v.id,k,kd:kd||"",t:tid||null,kh,pl,act:act||"",why:why||"",seen:1,sh:1};z.pend.push(p);R.P[id][kh]=[pl,"ag_"+k,tid||null,why||""];
  try{const L=R.acts=R.acts||[];L.push({id,kh,k:"ag:"+k,t:tid||null,why:why||"",ok:1,ag:1,pl});if(L.length>60)L.shift()}catch(x){}
  try{const L={w:wk(),b:S.buoi||0,kh,id,k,t:tid||null,pl,why:why||""};z.log.push(L);if(z.log.length>60)z.log.shift()}catch(x){}return true}
@@ -72484,8 +72484,9 @@ function agHeard(v,info){if(!agRdOn()||!v||v===S||typeof v!=="object"||!v.alive|
  /* OD L1638/L1641 (one shared clock): she hears at the START of khắc k0 and decides + walks IN k0; she is at the place from k0 + walk (≥ 1).
     A deed of hers already running in k0 ends first (she starts after its last khắc). */
  let s0=k0;for(const p of agZ().pend)if(p.id===id&&p.key===R.key&&!p.drop&&p.kh<=s0&&s0<=agK1(p))s0=agK1(p)+1;
- const from=(R.P[id][Math.max(0,s0-1)]&&R.P[id][Math.max(0,s0-1)][0])||palaceOf(v);let w=0;try{w=at===from?0:travel(from,at)}catch(e){}const kh=s0+Math.max(1,w),kc=Math.max(1,agKhC(c,v));if(!agFitDay(kh,kc)){if(kh>=J95.KH&&kc<=j76left(S.buoi||0,kh))agTouch(v);return 0}/* the DAY gate (OD L852), never the buổi: a start past this buổi's record = she acts on it next buổi (agTouch re-plans her day, same as a late news) */
+ const from=(R.P[id][Math.max(0,s0-1)]&&R.P[id][Math.max(0,s0-1)][0])||palaceOf(v);let w=0;try{w=at===from?0:travel(from,at,v)}catch(e){}/* her road, her penalty (j9 per walker) */const kh=s0+Math.max(1,w),kc=Math.max(1,agKhC(c,v));if(!agFitDay(kh,kc)){if(kh>=J95.KH&&kc<=j76left(S.buoi||0,kh))agTouch(v);return 0}/* the DAY gate (OD L852), never the buổi: a start past this buổi's record = she acts on it next buổi (agTouch re-plans her day, same as a late news) */
  for(let q=s0;q<Math.min(kh+kc,J95.KH);q++){const e=R.P[id][q];if(!e||e[1]==="tryst"||e[1]==="meet"||/^ag_(see:|with$)/.test(e[1]||"")||agBound(id,q,R.key))return 0}
+ if(agWalkShort(R,id,kh,kc,at,v,kh-1,1)>0){AGD.stat.walkWait=(AGD.stat.walkWait||0)+1;agTouch(v);return 0}/* the walk on to her next kept row fits (DEED WALKS; the road there is the «go» rows below) */
  /* she changes her mind: the deeds of hers not yet started in that time are dropped */
  const z=agZ();for(const p of z.pend.slice())if(p.id===id&&p.key===R.key&&p.kh>=s0&&p.kh<kh+kc){p.drop=1;z.pend.splice(z.pend.indexOf(p),1);AG.stat.drop++}
  for(let q=s0;q<kh;q++)R.P[id][q]=[at,"go",null,info.why||""];/* on her way (this khắc is spent walking) */
@@ -72497,8 +72498,8 @@ function agHeard(v,info){if(!agRdOn()||!v||v===S||typeof v!=="object"||!v.alive|
    person reaches the master after the bearer's REAL Dư đồ walk from where she saw it to where the master is — the same travel() the player walks
    (BAL.walk near 1 / far 2; never a second distance table): seen at khắc k → near: known from k + 1, far: from k + 2 (later if the bearer is busy).
    agWalk = that walk, at least 1 khắc (the bearer must go); 0 when the relay is switched off (BAL.ag.kh2.rd.on / see + go = 0, the tests' knob). */
-function agWalk(a,b){try{const B=BAL.ag.kh2.rd;if(!agRdOn()||!((B.see||0)+(B.go||0)))return 0}catch(e){return 0}if(!a||!b||a===b)return 1;
- const W=window.__walkSpill;window.__walkSpill=null;/* her own half-walk (travel's special case) is not the bearer's road */let w=1;try{w=travel(a,b,null)}catch(e){}finally{window.__walkSpill=W}return Math.max(1,w||1)}
+function agWalk(a,b,who){try{const B=BAL.ag.kh2.rd;if(!agRdOn()||!((B.see||0)+(B.go||0)))return 0}catch(e){return 0}if(!a||!b||a===b)return 1;
+ const W=window.__walkSpill;window.__walkSpill=null;/* her own half-walk (travel's special case) is not the bearer's road */let w=1;try{w=travel(a,b,who||null)}catch(e){}/* the bearer's own road (her «đi chậm» too, j9 per walker; review/jagday-walk) */finally{window.__walkSpill=W}return Math.max(1,w||1)}
 /* a servant who stands at pl in khắc kh tells her master (not the player — her own servants are part 2c's TIN BÁO) by her own choice */
 function agTell(R,pl,kh,why0,who,interest){const B=BAL.ag.kh2.rd;let n=0;let why=null;const wy=()=>why!=null?why:(why=typeof why0==="function"?why0():why0);/* ag-deed-perf: the line (a place name: places() through every wrapper) is built only when a servant tells */
  for(const id in R.P){if(!/^s\d+$/.test(id))continue;const e=R.P[id][kh];if(!e||e[0]!==pl)continue;const s=servById(+id.slice(1));if(!s||s.out)continue;const m=ownerOf(s);
@@ -72507,7 +72508,7 @@ function agTell(R,pl,kh,why0,who,interest){const B=BAL.ag.kh2.rd;let n=0;let why
   const busy=q=>R.P[id][q]&&(/^ag_(?!tell$)/.test(R.P[id][q][1]||"")||AG_NOTFREE.has(R.P[id][q][1]));
   let ks=kh;while(ks+1<J95.KH&&busy(ks+1))ks++;/* busy with her own deed (or not hers): she sets off when it ends, never over a deed row (ag-kh2 G9) */
   let mp=null;try{mp=R.P["v"+m.id]&&R.P["v"+m.id][Math.min(ks,J95.KH-1)]?R.P["v"+m.id][Math.min(ks,J95.KH-1)][0]:palaceOf(m)}catch(e){}mp=mp||palaceOf(m);
-  const due=ks+Math.max(1,agWalk(pl,mp));/* OD 17/11 ~17:55Z (3): she sets off from pl the khắc she saw it; her REAL walk to her master (near 1 / far 2); he hears at the start of khắc due */
+  const due=ks+Math.max(1,agWalk(pl,mp,s));/* OD 17/11 ~17:55Z (3): she sets off from pl the khắc she saw it; her REAL walk to her master (near 1 / far 2); he hears at the start of khắc due */
   let kg=J95.KH;/* the khắc rows she spends on the road (a far walk: the khắc between); none for a near one */
   for(let q=ks+1;q<due&&q<J95.KH;q++){const e=R.P[id][q];if(!e||busy(q)||e[1]==="tryst"||e[1]==="meet")break;if(kg===J95.KH)kg=q;R.P[id][q]=[mp,"ag_tell",ledgerId(m),wy()]}
   agRdLog(R,id,kh,"ag:tell",ledgerId(m),wy(),pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;
@@ -72569,6 +72570,7 @@ function agShDecl(p,v){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.sp
 function agShNpc(p,d){if(!agShOn()||!p||p.vid==null||!p.t||p.t[0]!=="v")return 1;const R=agRec();if(!R||p.key!==R.key)return 1;const t=agTgt(p.t);if(!t||t===S||typeof t!=="object"||t===d)return 1;
  const id="v"+t.id,row=R.P[id];if(!row)return 1;const A=BAL.ag.kh2.sh;let here=true;const k1=Math.min(J95.KH-1,agK1(p));
  for(let q=p.kh;q<=k1;q++)if(!row[q]||row[q][0]!==p.pl||!agKhFree(R,id,q)){here=false;break}
+ if(here&&typeof agWalkShort==="function"&&agWalkShort(R,id,p.kh,k1-p.kh+1,p.pl,t,p.kh-1)>0)here=false;/* DEED WALKS: still on her road there (a deed / binding just before) = not home to receive */
  if(here&&agK1(p)>=J95.KH){/* the spilled part (review ag-all-2 r2 B3): the next buổi's record does not exist yet, so read her own day plan for that buổi */
   try{const nb=(S.buoi||0)+1;const sl=nb<4?agDaySlot(id,nb):null;if(sl&&sl.pl&&sl.pl!==p.pl)here=false}catch(e){}}
  let c="dec";if(here){const ho=Math.max(0,hostility(t,d))/BAL.ag.wit.hoD;try{c=mindPick([["rec",A.rec],["dec",A.dec*ho]].filter(x=>x[1]>0),t)||"rec"}catch(e){c="rec"}}
@@ -72603,9 +72605,57 @@ function agSpill(p){try{if(!p||!(p.sp>0)||p.drop||p.gone)return false;const R=ag
 /* the spill runs FIRST, at the first sight of the new record (j95sync → agRdTick, agTickX, agTick): it must hold its khắc 0 … before the re-deciders
    (agHeard), the staff plan (agTickX) or the deciders book them — the sliced landing (BAL.ag.perf.slice) may come frames later on a slow phone */
 function agSpillAll(){const R=agRec();if(!R||!agKhOn())return 0;let n=0;for(const p of agZ().pend.slice())if(p.sp>0&&p.key!==R.key&&!p.drop&&!p.gone&&agSpill(p))n++;
- if(n)agLater("sync",agSyncNow);/* the view of the khắc now shows her there */return n}
+ if(n){try{if(typeof agWalkGuard==="function")agWalkGuard(R,agKh())}catch(e){agdErr("walkGuard0",e)}/* her deeds planned before the spill took khắc 0 … keep their road (DEED WALKS) */agLater("sync",agSyncNow)}/* the view of the khắc now shows her there */return n}
 (function(){const k0=agTick;agTick=function(){try{agSpillAll()}catch(e){agdErr("spillAll",e)}return k0.apply(this,arguments)}})();
 Object.assign(window,{agFitDay,agCanDay,agWhyDay,agSpill,agSpillAll});
+/* ================= DEED WALKS (review/jagday-walk, FOLLOW-UP GAP of walk-cost; owner OD L1976 walks cost khắc, law 1 / 6b NPCs live by her rules) =================
+   A deed is a KEPT row (j95sKeep): jwalk.js never rewrites it, so the walk between two kept rows must be reserved when the deed is PLACED.
+   ONE rule for every place a deed (or a reaction) gets its start khắc — agSlot (jagent: day deed, jshelf call, jagknow react), agTickX (staff,
+   Emperor, Thái hậu), agMore (G8 next deed), agHeard (re-decide), agSeePlan (react next khắc): the deed [kh, kh+kc−1] at `at` fits only when
+   - from the place she is bound to before it — the last kept row before kh (a deed, meeting, forced list) or, at the latest, the khắc now —
+     she can walk there: travel(from, at, walker) khắc between them (after a kept row: whole khắc after it ends, as agMore always reserved;
+     from the khắc now: this khắc is spent walking, as agHeard), and
+   - from its last khắc she can walk on to the next kept row after it (same count).
+   The free rows in between become «on the way» rows (jwalk pass). travel() per walker = BAL.walk.near / far + BAL.walk.pen of THAT person (j9).
+   BAL.walk.npc = 0 → off (the old placing). No new number. */
+function agWalkFix(x){if(!x)return false;const a=x[1]||"";return /^ag_/.test(a)||a==="tryst"||a==="meet"||a==="offduty"||a==="laundry"||a==="confined"||a==="cold"||a==="called"}
+/* HELD row q of id: a card binding (J95B), a forced list / meeting (agWalkFix), or a deed that really holds the khắc (a pending deed's window,
+   a reaction, a bearer on her road). The day plan labels her whole buổi «ag_<deed>» (agRow) before the deed is placed: where no deed holds the
+   khắc that label is only the plan — a free row (jwalk may walk her through it). */
+function agWalkHeld(R,id,q){const row=R&&R.P&&R.P[id];const x=row&&row[q];if(!x)return false;try{if(agBound(id,q,R.key))return true}catch(e){}const a=x[1]||"";
+ if(!/^ag_/.test(a))return agWalkFix(x);if(a==="ag_tell"||a==="ag_with"||/^ag_see:/.test(a))return true;
+ for(const p of agZ().pend||[])if(p.id===id&&p.key===R.key&&!p.drop&&!p.gone&&p.kh<=q&&q<=agK1(p))return true;
+ const s=agDaySlot(id);if(s&&s.k&&a==="ag_"+s.k)return false;return true}
+function agWalkReal(k){return !!k&&typeof k==="string"&&k!==(typeof J95OUT_!=="undefined"?J95OUT_:"__out")}
+function agWalkT(a,b,d){if(!agWalkReal(a)||!agWalkReal(b)||a===b)return 0;try{return travel(a,b,d===undefined?null:d)||0}catch(e){return 0}}
+/* the khắc short (0 = it fits) for a deed of `id` at `at`, khắc kh … kh+kc−1, walker d; cur = the khắc now (rows before it are past) */
+function agWalkShort(R,id,kh,kc,at,d,cur,after){try{if(!(typeof walkNpcOn==="function"?walkNpcOn():BAL.walk.npc!==0))return 0;const row=R&&R.P&&R.P[id];if(!row||!agWalkReal(at))return 0;
+  const K=J95.KH,k1=Math.min(K-1,kh+Math.max(1,kc||1)-1);if(cur==null)cur=R.kh!=null?R.kh:agKh();let s=0;
+  const fx=q=>agWalkHeld(R,id,q);/* a deed, a card binding (J95B: a card said she was there), a forced list */
+  /* before: the last kept row before kh (whole khắc after it), else the khắc now (spent walking unless a kept row holds it) */
+  let q=kh-1;while(q>cur&&!fx(q))q--;if(q<cur)q=cur;/* kh = the khắc now: she walks from where she stands now */
+  if(!after&&q>=0&&q<K&&row[q]){const t=agWalkT(row[q][0],at,d);if(t>0){const gap=q>=kh?0:kh-q-(fx(q)?1:0);s=Math.max(s,t-gap)}}
+  /* after: the next kept row after the deed */
+  let a=k1+1;while(a<K&&!fx(a))a++;
+  if(a<K&&row[a]){const t=agWalkT(at,row[a][0],d);if(t>0)s=Math.max(s,t-(a-k1-1))}
+  return Math.max(0,s)}catch(e){agdErr("walkShort",e);return 0}}
+function agWalkOk(R,id,kh,kc,at,d,cur){const n=agWalkShort(R,id,kh,kc,at,d,cur);if(n>0){AGD.stat.walkWait=(AGD.stat.walkWait||0)+1;return false}return true}
+/* GUARD: a deed placed earlier can lose its road when a later write fixes a row next to it (a deed run on from the last buổi, agSpill; a card
+   binding her, J95B; a forced list). Every khắc (j95fixHouse chain, before the jwalk pass) each deed of this buổi NOT YET STARTED is checked:
+   no road → it moves to the first later khắc that has the road and is free (same deed, same cost, same place); none → dropped, she re-plans
+   (agTouch), as a deed she can no longer do. A started deed never moves. */
+function agWalkGuard(R,cur){if(!R||!R.P||!agKhOn())return 0;if(!(typeof walkNpcOn==="function"?walkNpcOn():BAL.walk.npc!==0))return 0;const z=agZ();let n=0;
+ for(const p of (z.pend||[]).slice()){if(p.key!==R.key||p.drop||p.gone||!(p.kh>cur)||!R.P[p.id]||p.cont)continue;let d=null;try{d=agDoer(p)}catch(e){}
+  const kc=Math.max(1,p.kc||agK1(p)-p.kh+1);if(!agWalkShort(R,p.id,p.kh,agK1(p)-p.kh+1,p.pl,d,cur))continue;
+  agShClear(p,p.kh,agK1(p));p.drop=1;let to=-1;
+  for(let kh=p.kh+1;kh<J95.KH;kh++){if(!agFitDay(kh,kc))continue;let ok=true;for(let q=kh;q<Math.min(kh+kc,J95.KH);q++)if(!agKhFree(R,p.id,q)){ok=false;break}if(!ok)continue;
+   if(agWalkShort(R,p.id,kh,Math.min(kc,J95.KH-kh),p.pl,d,cur))continue;to=kh;break}
+  if(to>=0){delete p.drop;p.kh=to;R.P[p.id][to]=[p.pl,"ag_"+p.k,p.t||null,p.why||""];agSpan(p,{k:p.k,kc},d);AGD.stat.walkMove=(AGD.stat.walkMove||0)+1;n++}
+  else{const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);AG.stat.drop++;AGD.stat.walkDrop=(AGD.stat.walkDrop||0)+1;if(d&&typeof d==="object")agTouch(d);n++}}
+ return n}
+(function(){if(typeof j95fixHouse!=="function")return;const f0=j95fixHouse;j95fixHouse=function(R,kh){let n=f0.apply(this,arguments)||0;
+ try{n+=agWalkGuard(R,R&&R.kh==null?0:kh)}catch(e){agdErr("walkGuard",e)}return n}})();
+Object.assign(window,{agWalkFix,agWalkShort,agWalkOk,agWalkGuard});
 /* ================= jagacts: AG-ALL part A — the acts of Hoàng hậu, Thái hậu and the consort acts the loop lacked =================
    Owner OD 17/11 ~13:20Z (L1588) + ~13:55Z: every group of NPCs gets the whole option set the player of that group has; missing acts are
    added without asking. Gap table: dev/handover/reports/ag-all.md §1 (consort), §5 (Thái hậu), §6 (Hoàng hậu). Core: jagday.js.
@@ -73118,10 +73168,10 @@ function j95sPass(R,kh,ppl){if(!j95sOn())return 0;const t0=performance.now();let
   const away=i=>{const k=op[i]&&op[i][0];return !!k&&k!==hk0&&k!=="lc"&&k!==J95OUT_&&hk0!=="lc"};
   const ret={};/* id → [i...] */const why={};
   for(let i=kh;i<4;){if(!away(i)){i++;continue}const k=op[i][0];let s0=i;while(s0>0&&op[s0-1]&&op[s0-1][0]===k)s0--;let e0=i;while(e0+1<4&&op[e0+1]&&op[e0+1][0]===k)e0++;
-   let prev=null;if(s0<kh){prev=hh.filter(q=>{const x=R.P[q.id]&&R.P[q.id][kh-1];return x&&x[1]==="follow"&&x[2]===oid}).map(q=>q.id)}
+   let prev=null;if(s0<kh){prev=hh.filter(q=>{const x=R.P[q.id]&&R.P[q.id][kh-1];return x&&(x[1]==="follow"||x[1]==="go"&&x[0]===k)&&x[2]===oid}).map(q=>q.id)/* on her way to her (jwalk, review/jagday-walk) = in the retinue */}
    const P=j95sPick(R,o,oid,hh,k,s0,base,kh,prev);const ow=j95sOw(o);
    for(const q of P.mem){const w=prev&&prev.length?`theo hầu ${ow} ở ${j95sPn(k)} (đi cùng từ đầu)`:`${ow} sang ${j95sPn(k)}: ${P.why}`;
-    for(let j=Math.max(i,kh);j<=e0;j++){if(j95sKeep(base[q.id][j]))break;/* only a deed / meeting takes her away mid-outing; her own day waits */(ret[q.id]=ret[q.id]||{})[j]=[k,"follow",oid,w]}
+    for(let j=Math.max(i,kh);j<=e0;j++){const bj=base[q.id][j];if(bj&&bj[1]==="go"&&bj[0]===k&&bj[2]===oid){(ret[q.id]=ret[q.id]||{})[j]=bj;continue}/* still on her way to her (jwalk) */if(j95sKeep(bj))break;/* only a deed / meeting takes her away mid-outing; her own day waits */(ret[q.id]=ret[q.id]||{})[j]=[k,"follow",oid,w]}
     st.ret++;if(q.close)st.close++}
    i=e0+1}
   /* write: retinue rows, else her day (while her mistress is out, serving = staying behind to keep the palace) */
@@ -73571,7 +73621,7 @@ function knMemo(){const k=agKey();if(!KN.m||KN.m.key!==k)KN.m={key:k,x:{},t:{},a
    where she saw it to where her master stands — knWalkTo. knRelay = the LONGEST such walk (BAL.walk.far; 0 = relay off), used only to bound the
    buổi-end carry. */
 function knRelay(){try{const B=BAL.ag.kh2.rd;return agRdOn()&&((B.see||0)+(B.go||0))?Math.max(BAL.walk.near||1,BAL.walk.far||1):0}catch(e){return 0}}
-function knWalkTo(from,id,kh){if(!knRelay())return 0;let to=null;try{to=knAt(id,Math.max(0,Math.min(kh,J95.KH-1)))}catch(e){}return agWalk(from,to||"home")}
+function knWalkTo(from,id,kh,who){if(!knRelay())return 0;let to=null;try{to=knAt(id,Math.max(0,Math.min(kh,J95.KH-1)))}catch(e){}return agWalk(from,to||"home",who)}/* who = the bearer when known (her own road, j9 per walker); a passer-by / messenger: null */
 function knSrvFrom(s,how,h){if(how==="listen"){const k=s&&s.sid!=null?knSlotK(s):"";const pl=String(k||"").split(":")[0];if(pl&&pl!=="listen")return pl}return h.k}
 function knFirst(id,h,w){for(let kh=w[0];kh<=w[1];kh++)if(knAt(id,kh)===h.k)return kh;return -1}
 function knId(x){return x===S?"me":x&&x.sid!=null?"s"+x.sid:x&&x.id!=null?"v"+x.id:""}
@@ -73621,7 +73671,7 @@ function knFor(x,h,noFriend){if(!x)return null;const hid=knHid(h);const M=knMemo
  const now=agKh(),D=knRelay();
  if(!r){for(const s of knStaff(x)){const how=knSrvKnows(s,x,h,w,hid);if(!how)continue;const q=Math.max(how==="here"&&s.sid!=null?knFirst("s"+s.sid,h,w):w[0],w[0]);
    /* the confidant maid walks with her mistress (one khắc to step aside and tell); any other servant walks from where she saw / heard it */
-   const at=q+(s.sid==null&&!knwMid(s,x)?Math.min(1,D):knWalkTo(knSrvFrom(s,how,h),id,q));if(at>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s,at};break}}}
+   const at=q+(s.sid==null&&!knwMid(s,x)?Math.min(1,D):knWalkTo(knSrvFrom(s,how,h),id,q,s&&s.sid!=null?s:null));if(at>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s,at};break}}}
  if(!r){let o=0;try{o=oSee(x,false)*knB().eye/100}catch(e){}if(knHit("e"+id+"|"+hid,o)){const at=w[0]+knWalkTo(h.k,id,w[0]);/* her Tai mắt / a passer-by walks from the place to her */if(at<=now){r=knEye(x,h,hid);if(r)r.at=at}}}
  if(!r&&!noFriend){const F=knB().friend;for(const v of liveRivals(true)){if(v===x||!v.alive||v.out)continue;const a=aff(v,x);if(a<F)continue;/* the news travels when they meet (same place this khắc), or a close friend sends word (aff ≥ close) */const meet=(()=>{const nw=agKh();return knAt(id,nw)!=null&&knAt("v"+v.id,nw)===knAt(id,nw)})();if(a<knB().close&&!meet)continue;const k=knFor(v,h,true);if(!k||k.by==="le"||k.how==="self")continue;
    let fa=now;if(!meet&&D>0){const ka=M.at["v"+v.id+"|"+hid+"|n"];if(ka==null)continue;fa=ka+knWalkTo(knAt("v"+v.id,ka),id,ka);if(fa>now)continue}/* sending word: her messenger's real walk from where she was when she knew to x (AG-ALL-2d4) */
@@ -81090,19 +81140,30 @@ KY.stat.npc=()=>({hit:Object.assign({},KY.stat.npcHit),buoi:Object.assign({},KY.
 /* the walker of a record row (her penalty never lengthens an NPC's road; theirs does — law 1) */
 function walkWho(id){try{const c=String(id)[0];if(c==="v")return (typeof RV==="function"&&RV(+String(id).slice(1)))||null;if(c==="s"&&typeof j95sv==="function")return j95sv(id)||null}catch(e){}return null}
 function walkNpcOn(){try{return BAL.walk.npc!==0}catch(e){return false}}
-const JWALK={stat:{fix:0,late:0,miss:0},errs:[]};
-function walkKeepRow(x){if(!x)return true;try{if(typeof j95sKeep==="function"&&j95sKeep(x))return true}catch(e){}const a=x[1]||"";return /^ag_/.test(a)}
+const JWALK={stat:{fix:0,late:0,miss:0,now:0},errs:[],seen:null};
+const walkSig=x=>x?x[0]+"|"+x[1]+"|"+(x[2]||""):"";
+function walkKeepRow(x,id,q,R){if(!x)return true;const a=x[1]||"";
+ /* review/jagday-walk: an «ag_» row is kept only while a deed / binding really holds it (jagday agWalkHeld); the day plan's label alone is free */
+ if(/^ag_/.test(a)&&R&&id!=null&&typeof agWalkHeld==="function"){try{return agWalkHeld(R,id,q)}catch(e){return true}}
+ try{if(typeof j95sKeep==="function"&&j95sKeep(x))return true}catch(e){}if(/^ag_/.test(a))return true;
+ /* a card-bound row (J95B: a card said she was there, review/jagday-walk) is never rewritten either */try{if(R&&id!=null&&typeof agBound==="function"&&agBound(id,q,R.key))return true}catch(e){}return false}
 function walkNpcPass(R,kh){if(!walkNpcOn()||!R||!R.P)return 0;let n=0;const K=(typeof J95!=="undefined"&&J95.KH)||4,OUT=typeof J95OUT_!=="undefined"?J95OUT_:"__out";
  const real=k=>k&&k!==OUT&&typeof k==="string";
+ /* review/jagday-walk: a move decided IN the khắc now (a servant sent on an errand, joining her mistress's outing: the j95s day writes the
+    current khắc) starts its walk now — the row of the khắc now is new since the last pass (JWALK.seen) and becomes «on the way» like a later
+    arrival; a row the record already showed at this khắc is never rewritten. */
+ const SN=JWALK.seen&&JWALK.seen.key===R.key&&JWALK.seen.kh<=kh?JWALK.seen.P:null;
  for(const id in R.P){if(id==="me"||/^mm:me$/.test(id))continue;const row=R.P[id];if(!Array.isArray(row)||row.length<K)continue;
-  for(let j=Math.max(1,kh+1);j<K;j++){const x=row[j];if(!x||!real(x[0])||x[1]==="go")continue;if(x[1]==="follow"&&x[2]==="me")continue;
+  const now=kh>=1&&kh<K&&SN&&SN[id]&&SN[id][kh]!==walkSig(row[kh]);
+  for(let j=Math.max(1,now?kh:kh+1);j<K;j++){const x=row[j];if(!x||!real(x[0])||x[1]==="go")continue;if(x[1]==="follow"&&x[2]==="me")continue;
    let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&row[q][1]==="go"){g++;q--}if(q<0||!row[q]||!real(row[q][0])||row[q][0]===x[0])continue;
    let t=0;try{t=travel(row[q][0],x[0],walkWho(id))}catch(e){t=0}let need=t-1-g;if(need<=0)continue;
    /* leave earlier: the free khắc right before the walk (never the current khắc, never a kept row) */
-   while(need>0&&q>kh&&!walkKeepRow(row[q])){row[q]=[x[0],"go",null,x[3]&&!/^\s*$/.test(x[3])?x[3]:"đang trên đường"];need--;n++;JWALK.stat.fix++;q--}
+   while(need>0&&q>kh&&!walkKeepRow(row[q],id,q,R)){row[q]=[x[0],"go",null,x[3]&&!/^\s*$/.test(x[3])?x[3]:"đang trên đường"];need--;n++;JWALK.stat.fix++;q--}
    /* else arrive later: the arrival khắc (and on) become «on the way», when free */
-   let a=j;while(need>0&&a<K&&!walkKeepRow(row[a])&&row[a][0]===x[0]){row[a]=[x[0],"go",null,"đang trên đường"];need--;n++;JWALK.stat.late++;a++}
+   let a=j;while(need>0&&a<K&&!walkKeepRow(row[a],id,a,R)&&row[a][0]===x[0]){const fo=row[a][1]==="follow";row[a]=[x[0],"go",fo?row[a][2]:null,fo?"đi theo hầu, đang trên đường":"đang trên đường"];need--;n++;JWALK.stat[a===kh?"now":"late"]++;a++}/* a follower keeps whom she follows (j95s retinue) */
    if(need>0)JWALK.stat.miss++;}}
+ {const P={};for(const id in R.P){const row=R.P[id];if(Array.isArray(row))P[id]=row.map(walkSig)}JWALK.seen={key:R.key,kh,P}}
  return n}
 (function(){if(typeof j95fixHouse!=="function")return;const f0=j95fixHouse;j95fixHouse=function(R,kh){let n=f0.apply(this,arguments)||0;
  try{n+=walkNpcPass(R,R&&R.kh==null?0:kh)}catch(e){if(JWALK.errs.length<20)JWALK.errs.push(e&&e.message||String(e))}return n}})();
@@ -82684,7 +82745,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9ea979ed83ff";window.CTM_BUILD=BUILD;
+const BUILD="7b17ffc51edd";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
