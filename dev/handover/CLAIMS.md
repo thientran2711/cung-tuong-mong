@@ -481,3 +481,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | PARKING #11 dresscode SEASON + COLOUR DRESS CODE (opus E30; ORDER MAIN 19:05Z; expert pass first OD:L1327) | review/dresscode; reports/dresscode.md | FOREMAN E #20 | session_01DgYSWnviLqLryPXMXj3CnP | RUNNING | 20/11 19:10Z |
 | FOREMAN E #21 (opus; child of E #20, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #20 | session_01DgYSWpNbcJyCoGaB1FhLFq | RUNNING | 20/11 18:55Z |
 | kit-cost-rows-home KIT KEEPER (sonnet; ROOT-80 order) | review/kit-cost-rows-home; reports/kit-cost-rows-home.md | MAIN ROOT-80 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 3332c63b | 20/11 |
+| kit-bgtone B «Đào phấn» final KIT KEEPER (owner pick) | review/kit-bgtone; reports/kit-bgtone.md | MAIN ROOT-80 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM fe6432c0 | 20/11 |

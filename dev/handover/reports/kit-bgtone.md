@@ -23,3 +23,7 @@ Note: A is clearly mint-sage, B clearly blush-peach, "now" is cream; both readab
 - Fold/iPad sheets above, no page errors in the shot run.
 - quickcheck (`dev/tools/quickcheck.sh 9f636249`, = build equality + core gates (one-core, rules-one-source, kit-conform) + old save + perf): QUICKCHECK PASS · 201 s · open 1689 ms · old save ok · perf (median of 3, new/live): render 239/231 ms, tab 407/439 ms, buổi 1307/1064 ms, tasks>200ms 21/19 · core gates PASS (one-core-guard, rules-one-source, kit-conform, hooks 6) · time-spill guard PASS.
 - Not run: `golive.sh` (the auto-mode classifier refused it; quickcheck.sh is its check part, nothing was pushed to main).
+
+## Owner pick B «Đào phấn» (OD 20/11 ~19:10Z) — final
+Branch `review/kit-bgtone` @ fe6432c0: `KIT_BG="b"` (j79), merged origin/main 983a9436 (j79 conflict = my colour-token block + main's kitBranchMap block, both kept; index.html / sw.js rebuilt). `bash dev/tools/quickcheck.sh fe6432c0`: QUICKCHECK PASS · 232 s · core gates PASS · old save ok · perf render 248/241 ms, tab 561/499, buổi 1575/1502. `golive.sh` not run (classifier refuses).
+Shots LOOKED on Fold 755x1000 and iPad 1180x820 (home, Hành sự): CDN `img/_review/kit-bgtone/bg-B-{fold,ipad}-{home,act}.jpg` — blush-peach paper, text / icons / gold / red / green / rank colours unchanged, readable. (The first Fold «act» frame shows a tooltip over the header — a stray hover, not the colour.) Delete the whole folder with the verdict: `python3 dev/site/cdn_sync.py --wipe-review kit-bgtone`.
