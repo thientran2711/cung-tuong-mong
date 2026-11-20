@@ -707,3 +707,4 @@ NEWACCT#6 ~18:28Z: Lượt COLLISION 1339 — #5 answered owner as 1339 in its c
 NEWACCT#5 ~19:48Z: OWNER Lượt 1340 (in #5 chat): wants 6 ChatGPT prompts, one sheet per rank showing its F2 flowers → dev/art/flower_sheets/hoa_bac_t1..t6.txt sent Lượt 1341.
 NEWACCT#5 ~19:50Z: OWNER Lượt 1342: t7 HQP + t8 HH embroidery flowers (they have no hair flower) = the t6 F2 species of that person (tree peony/cotton-rose/epiphyllum/large chrysanthemum/double magnolia by index) → for #6.
 NEWACCT#6 ~18:30Z: #5 still in owner chat: Lượt 1340/1341 (6 ChatGPT flower-sheet prompts dev/art/flower_sheets/hoa_bac_t1..t6.txt), OWNER Lượt 1342: t7/t8 embroidery flower = person's t6 F2 species → sent to B26FAB2 (table now t1–t8). #6 used 1340 too (collision). #5 used 1343. Next = 1344.
+NEWACCT#5 ~19:55Z: OWNER Lượt 1344: Hán HH collar spreads horizontally → slope down like t6/t7; Hán fabric: t6 gấm → lightest gấm, t7/t8 one step heavier but not old thick gấm → relayed to #6 (DESIGN5).
