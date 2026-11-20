@@ -352,3 +352,4 @@ RUNNING (D #9) = 10: choice-value FKstgvyB | cal-p2c F6sJHzxc | invite-host-away
 
 SẴN SÀNG KIỂM e4625ca51d6d47db689526e40469717a6c9e402c — DAY-KHẮC LAND #1 (JOB 2, review/day-khac-audit-r2; report reports/day-khac-land.md)
 - (20/11 09:31Z, D #9) DAY-KHAC LAND #1 SẴN SÀNG KIỂM e4625ca5 (review/day-khac-audit-r2; final-merged 66bd36cd; time-spill + quickcheck PASS, coop-e2e 68/68) → REVIEW day-khac-audit-r2 BIG = session_01964izCyGrFDRkwmZnRPFw9 (opus). Worker idle for FAIL fixes.
+- (20/11 ~09:40Z) CAL-P2C #1 session_01964izF6sJHzxcBve2mGhvJ: «SẴN SÀNG KIỂM d91d3c0ad232265a9190148daa7e244510617faf» (review/cal-p2c, final-merge LIVE 66bd36cd incl. mg-fair-ratio; cal-p2c 12/12, ag-mgcal/ag-mgh/mg-fair-hands/origin-arts/score-same scan ok, quickcheck PASS, tier BIG). Report dev/handover/reports/cal-p2c.md.

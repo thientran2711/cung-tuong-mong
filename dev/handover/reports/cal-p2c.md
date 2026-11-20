@@ -103,3 +103,9 @@ Branch head: review/cal-p2c f8784c91716f24eb7cb7f98caf9ad8b188439aec (PROGRESS; 
   the identity kit row on the result says why it differs from the live graded mark. mg-score-same-scan.py: 35 cells via the ONE grade, 0 raw, kg82Play ends on the given mark.
 - Re-run: cal-p2c.js ALL PASS (12, old save from LIVE 30e8714e) · ag-mgcal ok · ag-mgh ok · quickcheck PASS (core gates PASS, old save ok, perf ≈ live).
 - Branch now = review/mg-fair-ratio-rv c214ead + LIVE 30e8714e + cal-p2c. Still waiting only for mg-fair-ratio to land in LIVE (then one more merge of origin/main, rebuild, gates → SẴN SÀNG KIỂM).
+
+## FINAL (20/11 ~09:40Z) — «SẴN SÀNG KIỂM d91d3c0ad232265a9190148daa7e244510617faf»
+Final-merge CURRENT origin/main 66bd36cd (mg-fair-ratio 90d57324 + mg-play2) into review/cal-p2c: only index.html / sw.js conflicted (rebuilt); ONE BAL.orig.art table (LIVE's),
+one BAL.orig.doan, one BAL.orig.id. Diff vs LIVE = cal-p2c only (12 files: assemble.py, j82, jbal, jbal2, jmgcal, jmgid NEW, jmgt, measure/cal-p2c, tests ag-mg2 / ag-mgcal / ag-mgh / cal-p2c).
+Gates on d91d3c0a: cal-p2c.js ALL PASS (12; old save from LIVE 66bd36cd; co-op own b) · ag-mgcal · ag-mgh · mg-fair-hands · origin-arts · mg-score-same scan (35 / 0 / True) ·
+quickcheck PASS (core gates PASS incl. one-core, old save ok, perf ≈ live) · tier BIG → BIG opus reviewer. Pre-existing (identical on the base build): ag-mg2 3 FAIL, role-parity 2 FAIL.
