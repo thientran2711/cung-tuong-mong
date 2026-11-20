@@ -51,9 +51,9 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   await p.evaluate(async()=>{Q.length=0;try{KMQ.length=0}catch(e){}try{closeModal()}catch(e){}document.querySelectorAll('.kmov,#kroul,.kroul').forEach(e=>e.remove());const m=document.getElementById('modal');if(m)m.hidden=true;await new Promise(r=>setTimeout(r,400))});
   await p.screenshot({path:`${OUT}/${wh}-tutrang.png`});
   /* the item panel of the worn earring: «Tháo»; a stored earring: «Đeo» */
-  const A=await p.evaluate(async()=>{const ix=S.inv.findIndex(e=>e.k==="hoatai"&&!e.w);kinvOpen({g:{k:"hoatai",i:ix,n:1}});await new Promise(r=>setTimeout(r,500));
-   const M=document.getElementById('modal');return{shown:!M.hidden,btn:[...M.querySelectorAll('button')].map(b=>b.textContent.replace(/\s+/g,' ').trim().slice(0,50))}}).catch(e=>({err:e.message}));
-  console.log(sz,'panel',JSON.stringify(A));if(!A.btn||!A.btn.some(t=>/^Đeo/.test(t)))F(sz,'no «Đeo» on a stored earring');
+  const A=await p.evaluate(async()=>{document.querySelectorAll('#kroul,#kroulw,#kload,#kboot,#klife,.kroul,.kmov').forEach(e=>e.remove());const ix=S.inv.findIndex(e=>e.k==="hoatai"&&!e.w);/* r1: the real chest entry (kinvItems carries the painting grade the panel subtitle shows) */const x=kinvItems().find(x=>x&&x.g&&x.g.k==="hoatai"&&x.g.i===ix)||{g:{k:"hoatai",i:ix,n:1},grade:itemArt("hoatai").grade};kinvOpen(x);await new Promise(r=>setTimeout(r,500));
+   const M=document.getElementById('modal');return{shown:!M.hidden,sub:(M.textContent.match(/Trang sức · \S+ ?\S*/)||[''])[0],btn:[...M.querySelectorAll('button')].map(b=>b.textContent.replace(/\s+/g,' ').trim().slice(0,50))}}).catch(e=>({err:e.message}));
+  console.log(sz,'panel',JSON.stringify(A));if(!A.btn||!A.btn.some(t=>/^Đeo/.test(t)))F(sz,'no «Đeo» on a stored earring');if(!/Tinh phẩm/.test(A.sub||''))F(sz,'earring panel grade '+A.sub+' (painting = Tinh phẩm)');
   await p.screenshot({path:`${OUT}/${wh}-earring-panel.png`});
   /* the person card of the NPC from the parity check (K1 kitWearSlots row: 8 wear slots + pet) */
   const nm=await p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}const L=liveRivals(true);const i=L.findIndex(x=>x&&(x.inv||[]).some(e=>e.k==="hoatai"&&e.w));const v=L[i];
