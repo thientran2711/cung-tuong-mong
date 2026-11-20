@@ -67,7 +67,7 @@ function amCh(m){const C=amD().ch,st=amSt(m);return cl(Math.round(amSung(m)/C.su
 function amFind(k){if(k==="me")return isSrv()?{m:S,o:srvM()}:null;if(k&&k[0]==="s"){const s=servById(+k.slice(1));return s&&s.role==="maid"?{m:s,o:ownerOf(s)}:null}return null}
 /* ---------- 4 a maid's night ---------- */
 function amNightGain(m){const st=amSt(m);const q=Math.round(st.sac/20+R(4)-1);amAdd(m,amD().night.b+Math.max(0,Math.round(q/2)))}
-function amName(m){try{const used=namesInUse();const sur=freshName().split(" ")[0];const n=sur+" "+m.name;return used.includes(n)?freshName():n}catch(e){return m.name}}
+function amName(m){try{const used=namesInUse();const sur=nmSurOf(freshName());const n=sur+" "+m.name;if(used.includes(n)||nmTaken().full.has(n)||nmBad(n))return freshName();try{if(nmOwner()){const R0=nmReg();if(R0)R0[n]="f"}}catch(e){}return n}catch(e){return m.name}}/* one name core: maid's own name + a fresh surname, registered */
 /* ROLE PARITY (OD 18/11 ~21:30Z, law 1 + law 4): ONE promotion rule for a maid raised to consort — the player (j42 srvRise) and an NPC maid
    (amRise; j14 eye path) — so a promoted maid starts EXACTLY like a born Đáp ứng with the same gains: n = the new consort record (S for her),
    m = the maid she was (S for her), o = her old master, loy0 = her loyalty measure if the caller read it before the change (hers = Chủ tin, an NPC's = lòng).
@@ -79,7 +79,7 @@ function riseCore(n,m,o,loy0){const D=BAL.ag.maid.rise,B=BAL.mline;const loy=(lo
  if(o&&o!==n&&o.alive!==false){relAdd(o,n,loy?B.riseRel:-B.riseRel);if(o!==S)ghenUp(o,loy?D.ghen[0]:D.ghen[1],"thấy cung nữ cũ của mình được nâng lên làm phi tần",n)}
  return loy}
 function amRise(m,o,via){const B=BAL.mline,D=amD();const close=!!(o&&o.maid===m);
- if(close)o.maid=o===S?newMaid(pick(MAIDS.filter(x=>x!==m.name)),45):{name:pick(MAIDS.filter(x=>x!==m.name)),loyal:45};
+ if(close)o.maid=o===S?newMaid(nmNew("maid"),45):{name:nmNew("maid"),loyal:45};
  else if(o&&o.staff){const i=o.staff.indexOf(m);if(i>=0)o.staff.splice(i,1);try{if(typeof mlRose==="function")mlRose(o,m)}catch(e){}}
  const n=newRival(0);Object.assign(n,drawFace());try{f88Carry(n,m)}catch(e){}n.name=amName(m);/* her age: f88Carry */
  n.ag=Object.assign(n.ag||{},{o:"cn"});n.rel=0;n.fromMaidOf=o?key(o):null;
