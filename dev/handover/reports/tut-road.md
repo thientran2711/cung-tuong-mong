@@ -19,3 +19,6 @@ one-core-guard PASS 0 fails · tut-road 10/10 · tut-origins-scan 10/10 · tut-q
 ## Shots (looked at): chapter-open card, Fold 755x1000@2 + iPad 1180x820@2, roads tt_oan, td_an, cnv (random road). CDN upload REFUSED (cdn_sync HTTP 401 Authentication error) → shots stay in worker scratch /home/user/wt/tutroad-shots, NOT committed. iPad td shot read: new «Duyên cớ» row sits in the existing kit panel between Lời dặn and Mục tiêu, no overflow.
 ## Open
 cnv subject with an unlearnt name prints «???» (name mask, law 6b) — correct but reads odd: "chuyện cung nữ ??? bị vu".
+## r3 (Foreman E request): quickcheck + whole-family shop test — review/tut-road @ def9eaf0
+- `bash dev/tools/quickcheck.sh` run ALONE on def9eaf0 (nothing else running): **QUICKCHECK PASS** · 230 s · open 1731 ms · old save ok · perf new/live median: render 255/244 ms, tab 549/550 ms, buổi 1513/1400 ms, tasks>200ms 21/23 · core gates PASS · build 4 s · total 472 s.
+- New test dev/test/shop-buy-solo.js (law 11): the only two kitShop({key}) in the code are nvp (Nội vụ phủ, incl. il/rare tiles through it) and pet; no separate "errand shop" kitShop exists (grep all.js: only nvp, pet). Tap Mua → bạc down; nvp also chest +1. On this build PASS 2/2, 0 page errors; on clean main (bug) FAIL 2/2 (bạc 2000→2000, chest 9→9) → the test really guards the fault.
