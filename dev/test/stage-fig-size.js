@@ -41,7 +41,7 @@ const SHOT=process.env.SHOT||'';
    for(let tr=0;tr<3&&ok!==true;tr++){ok=await p.evaluate(async k=>{const W=t=>new Promise(r=>setTimeout(r,t));Q.length=0;const md=document.getElementById('modal');md.hidden=true;
     const R0=liveRivals(true).filter(v=>!v.queen);R0.slice(0,3).forEach(v=>S.met[v.id]=1);const v=R0[0],v2=R0[1]||R0[0];
     const eun={__fig:'img/fig-eunuch-ndp-tray.webp',__cap:'Tiểu Lý Tử',__role:'Thái giám Nội vụ phủ',age:28,sex:'m'};
-    const o=[{n:'Tiếp',fx:{},x:'thân +3',go:()=>{}},{n:'Từ chối',fx:{},x:'thân -3',go:()=>{}}];
+    const o=[{n:'Tiếp',fx:{suc:-3},x:'thân +3',go:()=>{}},{n:'Từ chối',fx:{suc:3},x:'thân -3',go:()=>{}}];
     const many=[1,2,3,4,5,6].map(i=>({n:'Cách thứ '+i+' để đối đáp cho phải lẽ',fx:{suc:-i},hint:'thành bại khó đoán, hỏng thì càng phật ý người trên',risk:'có rủi ro',go:()=>{}}));
     const j24=re=>{for(let i=0;i<400;i++){let m=null;try{m=approachOne()}catch(e){}if(m&&re.test(String(m.t||''))&&kitStagePeople(m).length)return m}return null};
     if(k==='toil'){const tm=j24(/Thái hậu triệu/);const thw=tm?kitStagePeople(tm)[0]:pTH();Q.length=0;toilReact({k:'th-scold',who:Object.assign(pTH(),{__kp:thw}),host:'th',n:-1,name:'Thái hậu',line:'trang điểm đẹp: Thái hậu thiện cảm -1',ctx:{mk:'dep',dress:'photruong'}});await W(60);if(!Q.length)return false;Q.forEach(m=>{m.must=1;if(tm)m.stage=kitStagePeople(tm)});showModal()}
