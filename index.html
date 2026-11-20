@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d2a602e4+","t":"2026-11-20T11:55Z","c":"cal-p2c test 9: expected offset from the loaded player's own class","b":"2c5c3c90da2f","h":[{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"},{"s":"f6f4a69c+","t":"2026-11-20T11:10Z","c":"Sổ luân hồi thêm trang «Sơ đồ nhánh»"},{"s":"d941502e","t":"2026-11-20T11:16Z","c":"Chip điểm và đồng hồ trò chơi: chỉ còn con số, đồng hồ hổ phách khi gấp"},{"s":"c12231a1","t":"2026-11-20T11:05Z","c":"Trò chơi không chữ nhóm b: Đặt hoa có hình chỉ dẫn, bỏ chữ trên bàn chơi"},{"s":"62e3c9f1+","t":"2026-11-20T09:47Z","c":"cal-p2b-rv: tests follow the review fixes (cal-p2b C reads FAN/COOL; ag-mgcal 3 compares K2 with its own group band)"},{"s":"d5b8c01b","t":"2026-11-20T10:25Z","c":"Khung chung: sơ đồ nhánh, biển Thiên mệnh hai sắc (trang còn tắt)"},{"s":"8c8b6fd7","t":"2026-11-20T09:45Z","c":"Trò chơi không chữ: khung trò dùng chung bộ khung chuẩn"},{"s":"f6e84391+","t":"2026-11-20T08:44Z","c":"review mg-back-rv: one core (law 4) — j83 practice + jrcp teacher name their charge once (pc), no duplicated suc:-10; index/sw rebuilt"},{"s":"9b6e9395+","t":"2026-11-20T08:46Z","c":"rv mg-play2: keep only the vetted face points — the 70 changed kc rows from the live img/mk-fit (no new v1/v2 rows: anchor-table gate flags…"}]};
+window.CTM_BI={"s":"f3271993+","t":"2026-11-20T12:06Z","c":"cal-p2c test 9: expected offset from the loaded player's own class","b":"ba315f05176d","h":[{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"},{"s":"f6f4a69c+","t":"2026-11-20T11:10Z","c":"Sổ luân hồi thêm trang «Sơ đồ nhánh»"},{"s":"d941502e","t":"2026-11-20T11:16Z","c":"Chip điểm và đồng hồ trò chơi: chỉ còn con số, đồng hồ hổ phách khi gấp"},{"s":"c12231a1","t":"2026-11-20T11:05Z","c":"Trò chơi không chữ nhóm b: Đặt hoa có hình chỉ dẫn, bỏ chữ trên bàn chơi"},{"s":"62e3c9f1+","t":"2026-11-20T09:47Z","c":"cal-p2b-rv: tests follow the review fixes (cal-p2b C reads FAN/COOL; ag-mgcal 3 compares K2 with its own group band)"},{"s":"d5b8c01b","t":"2026-11-20T10:25Z","c":"Khung chung: sơ đồ nhánh, biển Thiên mệnh hai sắc (trang còn tắt)"},{"s":"8c8b6fd7","t":"2026-11-20T09:45Z","c":"Trò chơi không chữ: khung trò dùng chung bộ khung chuẩn"},{"s":"f6e84391+","t":"2026-11-20T08:44Z","c":"review mg-back-rv: one core (law 4) — j83 practice + jrcp teacher name their charge once (pc), no duplicated suc:-10; index/sw rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -25650,7 +25650,7 @@ function kpConvert(root,m){const blocks=[];let sub="",prose=[],chipsLine="";
   if(/^H[1-6]$/.test(tg)){flush();blocks.push(`<h4 class="kpst">${n.innerHTML}</h4>`);continue}
   flush();n.classList.add("kpraw");blocks.push(n)}
  flush();return{sub,blocks}}
-function kpHeader(kind,title,sub){return `<div class="kph"><b class="kpseal kp-${kind}">${KP_SEAL[kind]||"BÁO"}</b><span class="kpht"><span class="kptitle">${title||""}</span>${sub?`<small class="kpsub">${sub}</small>`:""}</span></div>`}
+function kpHeader(kind,title,sub,seal){return `<div class="kph"><b class="kpseal kp-${kind}">${seal||KP_SEAL[kind]||"BÁO"}</b><span class="kpht"><span class="kptitle">${title||""}</span>${sub?`<small class="kpsub">${sub}</small>`:""}</span></div>`}
 function kpSubject(f,m){if(!f)return"";const p=f.__kp||null;let name="",role="";
  try{if(p){name=kitName(p,{cap:true})}else{name=`<b class="kname" style="--rc:${f.col||"#8a7350"}">${f.rw||""}</b>`}}catch(e){}
  return `<div class="kpsubj">${pframe(f)}<div class="kpsn">${name}</div></div>`}
@@ -25906,9 +25906,10 @@ window.kitQuick=kitQuick;window.kitQuickSub=kitQuickSub;window.kitQuickRoll=kitQ
 (function(){const st=document.createElement("style");st.id="kquick-css";/* ONE look wherever the quick button sits (inside .kg82act, in the j5 #ov lesson panel, under the care frames) */
  st.textContent=`button.kquick{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 #ov button.kquick small,button.kquick small{display:block;font-weight:400;font-family:var(--body);font-size:.72rem;opacity:.9}`;document.head.appendChild(st)})();
-/* kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
+/* seal: optional word for the header seal (default KP_SEAL.game "TÀI NGHỆ"; scheme games pass "MƯU") — one kit parameter for every caller
+   kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
    -> HTML of the frame; the game draws into #<id> (.kgbox). Update a HUD cell with kitGameSet("score", 12). */
-function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"").replace(/<\/div>$/,'<span class="kgmk" hidden></span><span class="kgclk" hidden></span></div>')}`+
+function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"",g.seal).replace(/<\/div>$/,'<span class="kgmk" hidden></span><span class="kgclk" hidden></span></div>')}`+
  `<div class="kgbody${fg?" kgfig-on":g.pic?" kgpic-on":""}">`+(fg||(g.pic?`<div class="kgpic"><img src="${g.pic}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.remove('kgpic-on');this.parentNode.remove()"></div>`:""))+`<div class="kginfo">`+
  (g.how?`<div class="kghow"><span class="krl">Cách chơi</span><span>${g.how}</span></div>`:"")+
  (g.hud&&g.hud.length?`<div class="kghud" hidden aria-hidden="true">${g.hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v==null?"":v}</b></span>`).join("")}</div>`:"")+
@@ -28605,8 +28606,8 @@ const KG82_RW=/^(Hồi|Câu|Môn|Vòng|Lượt|Bước)\s+(.+)$/,KG82_PLACE=/^(N
 function kg82Pic(kind){if(["duho","den","may"].includes(kind))return "";const s=`https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-${kg82BgName(kind)}.webp`;
  try{if(typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&!KIT_CDNHAVE.has(s)){if(typeof kitPhNote==="function")kitPhNote("mg",kg82BgName(kind),"light",(KG82_KIND[kind]||{}).t||kind);return ""}}catch(e){}return s}
 function kg82Frame(o){KG82.rlock=o.round||"";const hud=[["score","Phần","0/10"],["round",o.round||"Hồi",o.roundV||"–"],["time","Còn","–"]];
- if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box",pic:o.pic,fig:o.fig!==false});
- return `<div class="kgame"><div class="kph"><b class="kpseal">TÀI NGHỆ</b><span class="kpht"><span class="kptitle">${o.art}: ${o.title}</span></span></div><div class="kghow"><span class="krl">Cách chơi</span><span>${o.how}</span></div>`+
+ if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box",pic:o.pic,fig:o.fig!==false,seal:o.seal});
+ return `<div class="kgame"><div class="kph"><b class="kpseal">${o.seal||"TÀI NGHỆ"}</b><span class="kpht"><span class="kptitle">${o.art}: ${o.title}</span></span></div><div class="kghow"><span class="krl">Cách chơi</span><span>${o.how}</span></div>`+
   `<div class="kghud" hidden aria-hidden="true">${hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v}</b></span>`).join("")}</div><div class="kgbox" id="kg82box"></div><div class="kgres" id="kg82box-res" hidden></div></div>`}
 /* a HUD count "a/b" (Phần 7/10, Hồi 2/3) never shows above its ceiling; KG82.over counts any engine that tried (tests fail on it) */
 function kg82Cap(v){if(typeof v!=="string")return v;return v.replace(/(\d+)\/(\d+)/,(m,a,b)=>{if(+a>+b){KG82.over=(KG82.over||0)+1;return b+"/"+b}return m})}
@@ -29048,10 +29049,10 @@ function kgReady(box,spec){box=box||kg82Box();if(!box)return false;const s=kgRea
  box.insertAdjacentHTML("afterbegin",html);box.classList.add("kgintro");
  const go=box.querySelector(s.go);
  if(go){if(!go.dataset.kgrLabel)go.dataset.kgrLabel=go.textContent;go.innerHTML=`Sẵn sàng<small>${s.timed?"từ lúc này mới tính giờ":"bắt đầu chơi"}</small>`;go.classList.add("kgr-go");
-  go.addEventListener("click",()=>{const d=kg82El();if(d)d.classList.remove("kg-ready");KG82.ready=null;KG82.backPre=null;kgPay()/* §13.9: «Sẵn sàng» takes the remembered charge; from here on the back is no longer free */},{capture:true});
+  go.addEventListener("click",()=>{const d=kg82El()||box.closest(".kgame");if(d)d.classList.remove("kg-ready");KG82.ready=null;KG82.backPre=null;kgPay()/* §13.9: «Sẵn sàng» takes the remembered charge; from here on the back is no longer free */},{capture:true});
   if(kgReadyCan(s)&&!box.querySelector("#kgrtut")){go.insertAdjacentHTML("afterend",`<button type="button" class="${kg82Btn(true)} kgr-tut" id="kgrtut">Hướng dẫn<small>chơi thử một hồi dễ, không tính phần, thử lại được</small></button>`);
    box.querySelector("#kgrtut").onclick=()=>kgTut(box,s)}}
- const d=kg82El();if(d)d.classList.add("kg-ready");return true}
+ const d=kg82El()||box.closest(".kgame");if(d)d.classList.add("kg-ready");return true}
 /* the guided round */
 function kgTutPt(p,now){if(!p)return null;
  if(p.drag&&p.drag.length){const L=p.drag;if(L.length<2)return{x:L[0][0],y:L[0][1],m:"drag"};const seg=[];let tot=0;for(let i=1;i<L.length;i++){const l=Math.hypot(L[i][0]-L[i-1][0],L[i][1]-L[i-1][1]);seg.push(l);tot+=l}
@@ -29060,7 +29061,7 @@ function kgTutPt(p,now){if(!p)return null;
  if(p.x!=null&&p.y!=null)return{x:p.x,y:p.y,m:p.hold===true?"hold":p.hold===false?"up":"tap"};
  if(p.hold===false)return{m:"up"};return null}
 const KG82_TUTMSG={tap:"Chạm ngay chỗ bàn tay chỉ.",drag:"Đặt ngón tay rồi kéo theo bàn tay.",hold:"Giữ ngón tay ở chỗ bàn tay chỉ.",up:"Thả tay ra.",wait:"Xem kỹ, chờ bàn tay chỉ rồi làm theo."};
-function kgTut(box,spec){if(KG82.tut||!box)return;const s=kgReadySpec(spec);const d=kg82El();if(!d)return;
+function kgTut(box,spec){if(KG82.tut||!box)return;const s=kgReadySpec(spec);const d=kg82El()||box.closest(".kgame");if(!d)return;/* any kit game frame (the care games sit inside a dialog, not #kg82) */
  const T=BAL.mgTier.tut,frag=document.createDocumentFragment();while(box.firstChild)frag.appendChild(box.firstChild);
  const keep={tier:KG82.tier,lv:KG82.lv,occ:KG82.occ,ctx:KG82.ctx,noDemo:KG82.noDemo,phase:KG82.phase,peek:KG82.peek,hint:KG82.hint,last:KG82.last,rawF:KG82.rawF,run:KG82.run,rlock:KG82.rlock};
  let ease=5;try{const cd=((BAL.ag||{}).mg2||{}).cal;const dMin=cd&&cd.d&&cd.d.length?Math.min(...cd.d):0;if(s.kind&&KG82_KIND[s.kind])ease=mgSet(s.kind,{occ:"hoc",d:dMin}).ease}catch(e){}if(s.lv!=null)ease=s.lv;
@@ -29094,7 +29095,8 @@ function kgTut(box,spec){if(KG82.tut||!box)return;const s=kgReadySpec(spec);cons
  const go=()=>{if(dead)return;try{stop=s.tutor?s.tutor(box,env):KG82_ENG[KG82_KIND[s.kind].e](box,env)}catch(e){console.error(e);finish();return}KG82.run={stop:()=>cleanup()};raf=requestAnimationFrame(loop)};
  if(s.kind&&KG82_KIND[s.kind])kg82Preload(s.kind).then(go);else go();
  KG82.tutSteps=()=>steps}
-window.kgReady=kgReady;window.kgTut=kgTut;window.KG82_DEMO=KG82_DEMO;
+function kgTutDrop(){if(KG82.tut&&KG82.tut.stop){try{KG82.tut.stop()}catch(e){}}}/* a screen that leaves the rules screen without «Sẵn sàng» (quick roll, redraw, ✕) drops a running guided round */
+window.kgReady=kgReady;window.kgTut=kgTut;window.kgTutDrop=kgTutDrop;window.KG82_DEMO=KG82_DEMO;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgReady · màn Luật chơi (Sẵn sàng / Hướng dẫn) trước MỌI trò tài nghệ",where:"mọi trò tài nghệ, mọi chỗ mở (thi, học, Thử tay, khảo hạch, tuyển chọn, Tát, Tu đức, Hoàng thượng triệu, Chải chuốt, mưu kế, Nghiệm thân); chưa chạm «Sẵn sàng» thì chưa tính giờ",
  html:()=>{try{return ["dan","ban","co"].map(k=>{const b=document.createElement("div");b.className="kgbox";b.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${typeof kitQuick==="function"?kitQuick({n:"Để trời định",sub:"tính 5/10"}):""}</div>`;
   kgReady(b,{kind:k});b.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));return `<div class="mg kpanel kgame kg82" style="position:relative;max-width:560px;margin:0 auto 12px"><div class="kgame"><div class="kgbody"><div class="kginfo">${b.outerHTML}</div></div></div></div>`}).join("")}catch(e){return ""}}})}catch(e){}
@@ -29112,6 +29114,10 @@ body.kg82cf #modal{z-index:40}
 .kg82quiz .kb{font-size:1rem}.kg82quiz .kpnote{min-height:1.3em;margin-top:8px}.kg82 .kfact small{display:block}.kg82 .kgrow>b{flex:none;white-space:nowrap;padding-left:6px}
 /* KIT §13.7 rules screen + guided round (mg-ready-guide); colours from the kit tokens only */
 .kg82 .kghow{display:none}/* owner OD 20/11 ~05:10Z: no text in play — the rules sentence lives on the rules screen (.kgr) and in «Hướng dẫn»; never above the board */
+.kgame.kg-ready .kghow,.kgame.kg-tut .kghow{display:none}
+/* KIT §13.7 (law 10): a rules / guided / playing screen inside a figure-left dialog (.k3right is overflow:clip) must fit, so the care info above the game frame (bars, rows, act buttons) folds away while the frame is open; petcDraw / shelfPlantDraw bring it back */
+#kpcare.kg-open>:not(#kpcgw),#kshp.kg-open>:not(#kshpgw){display:none!important}
+#kpcgw .kgpic,#kshpgw .kgpic{display:none}#kpcgw .kgr-demo,#kshpgw .kgr-demo{max-width:110px;margin:4px auto 0}#kpcgw .kgr .kpst,#kshpgw .kgr .kpst{display:none}#kpcgw .kgr-st,#kshpgw .kgr-st{height:38px}#kpcgw .kgr-note,#kshpgw .kgr-note{display:none}
 .kgr{margin:0 0 6px}.kgr .kpst{margin-top:0}.kgr-note{margin:8px 0 2px}
 .kgr-demo{margin:8px auto 2px;max-width:340px}
 .kgr-st{position:relative;height:118px;border:1px solid var(--k-hair);border-radius:var(--k-rad,8px);overflow:hidden;background:var(--k-card) center/cover no-repeat}
@@ -46008,29 +46014,55 @@ petWeek=function(){for(const p of [S].concat(typeof petNpcs==="function"?petNpcs
     if(me&&n){log(`<span class="r">${tsbCap(n)} của ngươi bị bỏ bê lâu ngày, đã bỏ đi.</span>`);if(tsbOn()&&!tsbBot())Q.push({t:"Thú nuôi bỏ đi",who:typeof pMe==="function"?pMe():null,h:`<p class="r">${n} bị bỏ bê lâu ngày, sáng nay không thấy đâu nữa.</p>`})}continue}
    petcGrow(p,P,!me)}}};
 /* ---------- the care screen ---------- */
-const PETC={i:-1,game:null};
+const PETC={i:-1,game:null,kind:"",rdy:0};
 /* THE CARE SCREEN = the KIT 32.7 person dialog (same frame as the shop, kitShop 28.13d; review/pets-fix, KIT-first rule): the PET is the
    "person" — its stage picture full height in the left column at the kit figure scale, name chip under it; RIGHT: the four care numbers as
    kit stat cells with bars (kitStatRow, KIT 32.1), what it does now / next stage (kitRows), the mini-game in the kit mini-game frame
    (kitGameFrame, KIT 13: pieces are .kgbtn), then the act cards (pbtn). Closed by the kit ✕ (32.10). No style of its own. */
 function petcBars(P){return kitStatRow([{cells:[["No",P.full],["Sạch",P.clean],["Vui",P.joy],["Tình cảm",P.aff]].map(([l,v])=>kitStatCell("",l,Math.round(v),{bar:Math.round(v),title:`${l} ${Math.round(v)}/100`}))}])}
-function petcFig(){return document.querySelector("#modal .kpsubj.kes .kesimg")||document.querySelector("#modal .kpsubj.kes")}
+function petcFig(){/* her pet picture: the old subject frame, or the figure column of the figure-left layout (.kszfig, KIT 56.7) */return document.querySelector("#modal .kpsubj.kes .kesimg")||document.querySelector("#modal .kpsubj.kes")||document.querySelector("#modal .kszfig .kszfs")||document.querySelector("#modal .kszfig")}
 function petcOpen(i){const P=tsbPets(S)[i];if(!P)return;petcInit(P);PETC.i=i;PETC.game=null;const T=petT(P),s=petStage(P),a=petcStageSrc(P,1);
  try{if(!document.getElementById("modal").hidden)closeModal()}catch(e){}
  kitModal({kind:"info",title:`Chăm ${T.n.replace(/^./,c=>c.toLowerCase())}`,sub:`${(typeof petcStageN==="function"?petcStageN(P):BAL.pet.stages[s])} · ${PET_TIER[T.tr]}`,pick:true,
-  stage:[{__fig:a.src,__cap:T.n,__role:(typeof petcStageN==="function"?petcStageN(P):BAL.pet.stages[s]),age:20,sex:"f",__pet:1}],html:`<div id="kpcare">${petcBody(P)}</div>`,onClose:()=>{PETC.i=-1;PETC.game=null;try{render()}catch(e){}}})}
-function petcClose(){PETC.i=-1;PETC.game=null;try{closeModal()}catch(e){}try{render()}catch(e){}}
+  stage:[{__fig:a.src,__cap:T.n,__role:(typeof petcStageN==="function"?petcStageN(P):BAL.pet.stages[s]),age:20,sex:"f",__pet:1}],html:`<div id="kpcare">${petcBody(P)}</div>`,onClose:()=>{kgTutDrop();PETC.i=-1;PETC.game=null;try{render()}catch(e){}}})}
+function petcClose(){kgTutDrop();PETC.i=-1;PETC.game=null;try{closeModal()}catch(e){}try{render()}catch(e){}}
 function petcBody(P,msg){const T=petT(P);const t1=whyTime(BAL.pet.khac);const m=tsbMaid(S);
  const g=(k,n,x)=>pbtn(`data-petc="${k}"`,n,`tốn: ${BAL.pet.khac} khắc · ${x}`,t1);
  return petcBars(P)+kitRows([["Công dụng",petcEffects(P).length?petcEffects(P):["làm cung thêm vui"],"g"],["Lớn tiếp",[petcNextTxt(P)],"n"]].concat(msg?[["Vừa rồi",[msg],"n"]]:[]))+
   `<div id="kpcgw"></div><div class="rbtn">${g("feed","Cho ăn",`thành: No tăng, Tình cảm tăng · chọn đúng món ${T.n.toLowerCase()} ăn, kéo vào nó`)}${g("bath","Tắm, chải lông","thành: Sạch tăng · vuốt dọc lông nó 5 lần, đều tay")}${g("play","Chơi","thành: Vui tăng, Sức +1 · chạm đúng quả cầu đang sáng (3 lần)")}`+
   (m?pbtn(`data-petc="maid"`,`Giao ${m.name} chăm`,`thành: ${BAL.pet.maidW} tuần, mỗi tuần đỡ một nửa phần hao · kèm: không thêm tình cảm`,P.maidW>tsbWk()?`${m.name} đang chăm`:""):"")+`</div>`}
-function petcDraw(msg){const box=document.getElementById("kpcare");const P=tsbPets(S)[PETC.i];if(!box||!P){petcClose();return}PETC.game=null;box.innerHTML=petcBody(P,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(e){}}
+function petcDraw(msg){const box=document.getElementById("kpcare");const P=tsbPets(S)[PETC.i];if(!box||!P){petcClose();return}kgTutDrop();PETC.game=null;box.classList.remove("kg-open");box.innerHTML=petcBody(P,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(e){}}
 /* the game area: the kit mini-game frame inside the dialog; returns its box */
-function petcGameBox(title,how){const w=document.getElementById("kpcgw");if(!w)return null;w.innerHTML=kitGameFrame({art:"Chăm",title,how,id:"kpcgame"})+
+function petcGameBox(title,how){const w=document.getElementById("kpcgw");if(!w)return null;{const c=document.getElementById("kpcare");if(c)c.classList.add("kg-open")}/* care info folds away while the frame is open (class, not :has: perf) */w.innerHTML=kitGameFrame({art:"Chăm",title,how,id:"kpcgame"})+
   /* mg-skip-all (KIT §13.6): the quick option of every care game: won = BAL.skip.care of the gain (a middling hand), lost = nothing */
   `<div class="kg82act">${kitQuick({id:"kpcquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;
  try{w.scrollIntoView({block:"nearest"})}catch(e){}return document.getElementById("kpcgame")}
+/* KIT §13.7 (mg-ui-rest, owner OD:L1981): EVERY care game opens on the kit rules screen (kgReady: luật + picture of the move, «Hướng dẫn» guided round, «Sẵn sàng»);
+   NO khắc are spent and nothing runs until «Sẵn sàng»; then the khắc go and run(box) starts the real game. tutor(box, env) = the unscored guided round. */
+function petcRules(kind,title,how,e,tutor,run){const box=petcGameBox(title,how);if(!box)return;PETC.game=kind;PETC.kind=kind;PETC.rdy=0;
+ box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="kpcgo">Bắt đầu</button></div>`;
+ kgReady(box,{n:"Chăm",t:title,how,e,go:"#kpcgo",pic:"",timed:false,tutor});
+ try{const t=box.querySelector("#kgrtut")||box.querySelector("#kpcgo");if(t)t.scrollIntoView({block:"nearest"})}catch(e){}
+ box.querySelector("#kpcgo").addEventListener("click",()=>{if(PETC.game!==kind||PETC.rdy)return;if(!can(BAL.pet.khac))return;spend(BAL.pet.khac);PETC.rdy=1;box.classList.remove("kgintro");box.innerHTML="";run(box)})}
+/* guided rounds (unscored, nothing saved): the hand shows the move through KG82.peek; ends on the first success or two */
+function petcTutFeed(b,env){const P=tsbPets(S)[PETC.i];const ok=PETC_FOOD[petcKind(P.t)];const L=[ok].concat(PETC_FOODS.filter(x=>x!==ok).slice(0,2)).sort(()=>Math.random()-.5);
+ b.innerHTML=`<div class="rbtn">${L.map(x=>`<button type="button" class="kgbtn" data-food="${x}">${x}</button>`).join("")}</div>`;let sel=null,dead=false;const fig=petcFig();
+ const pickEl=e=>{const x=e.currentTarget.dataset.food;if(x===ok){sel=x;b.querySelectorAll(".kgbtn").forEach(y=>y.classList.toggle("on",y===e.currentTarget))}};
+ const eat=()=>{if(sel&&!dead){dead=true;KG82.peek=()=>null;setTimeout(()=>env.end(),500)}};
+ b.querySelectorAll("[data-food]").forEach(x=>x.addEventListener("click",pickEl));if(fig)fig.addEventListener("click",eat);
+ KG82.peek=()=>{if(dead)return null;if(!sel)return{sel:`[data-food="${ok}"]`};const f=petcFig();if(!f)return null;const r=f.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height*.55}};
+ return()=>{dead=true;KG82.peek=()=>null;if(fig)fig.removeEventListener("click",eat)}}
+function petcTutBath(b,env){const st=petcFig();if(!st)return()=>{};let n=0,a=null,dead=false;b.innerHTML=kitFacts(["Đã vuốt 0/2"]);st.style.touchAction="none";
+ const dn=e=>{e.preventDefault();try{st.setPointerCapture(e.pointerId)}catch(x){}a={x:e.clientX,y:e.clientY}},up=e=>{if(!a||dead)return;const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);a=null;if(d<20)return;n++;b.innerHTML=kitFacts([`Đã vuốt ${n}/2`]);if(n>=2){dead=true;KG82.peek=()=>null;setTimeout(()=>env.end(),500)}};
+ st.addEventListener("pointerdown",dn);st.addEventListener("pointerup",up);
+ KG82.peek=()=>{if(dead)return null;const r=st.getBoundingClientRect();return{drag:[[r.left+r.width*.5,r.top+r.height*.3],[r.left+r.width*.5,r.top+r.height*.75]]}};
+ return()=>{dead=true;KG82.peek=()=>null;st.style.touchAction="";st.removeEventListener("pointerdown",dn);st.removeEventListener("pointerup",up)}}
+function petcTutPlay(b,env){const N=["Trái","Giữa","Phải"];b.innerHTML=`<div class="rbtn">${N.map((x,i)=>`<button type="button" class="kgbtn" data-ball="${i}">${x}</button>`).join("")}</div>`;
+ let lit=-1,hits=0,tm=0,dead=false;const B=[...b.querySelectorAll("[data-ball]")];
+ const step=()=>{if(dead)return;let j;do{j=Math.floor(Math.random()*3)}while(j===lit);lit=j;B.forEach((x,i)=>x.classList.toggle("on",i===lit));tm=setTimeout(step,1500)};step();
+ B.forEach((x,i)=>x.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();if(dead||i!==lit)return;hits++;clearTimeout(tm);if(hits>=2){dead=true;KG82.peek=()=>null;setTimeout(()=>env.end(),500)}else step()}));
+ KG82.peek=()=>dead?null:{sel:`[data-ball="${lit}"]`};
+ return()=>{dead=true;clearTimeout(tm);KG82.peek=()=>null}}
 /* the "đã lớn" card of her pet (one function: solo shows it here; co-op thin F4 shows it on her phone after the host's answer) */
 function petcGrowCard(P){if(!P)return;const T=petT(P);const E=petcEffects(P);setTimeout(()=>{try{petcFx();kitModal({kind:"notice",title:`${T.n} đã lớn: ${BAL.pet.stages[P.stg]}`,sub:PET_TIER[T.tr],
    itemPic:petcPic(P,true),facts:[`Công dụng bây giờ: ${E.join(", ")||"làm cung thêm vui"}.`,P.stg<3?`Lớn tiếp: ${petcNextTxt(P)}.`:"Đã là Linh thú: công dụng mạnh nhất."]})}catch(e){}},60)}
@@ -46041,7 +46073,7 @@ function petcGain(kind,score){const P=tsbPets(S)[PETC.i];if(!P)return;const G=BA
  if(grew&&petStage(P)!==s0){petcClose();return}/* the "đã lớn" card (petcGrow) comes next */petcDraw(msg)}
 /* game 1: pick the food this species eats and drag it onto the pet (or tap the food, then the pet) */
 function petcFeed(){const P=tsbPets(S)[PETC.i];const ok=PETC_FOOD[petcKind(P.t)];const L=[ok].concat(PETC_FOODS.filter(x=>x!==ok).sort(()=>Math.random()-.5).slice(0,2)).sort(()=>Math.random()-.5);
- const box=petcGameBox("Cho ăn",`Kéo món ${petT(P).n.toLowerCase()} ăn vào nó (hay chạm món rồi chạm nó). Sai hai lần thì nó bỏ ăn.`);if(!box)return;PETC.game="feed";
+ petcRules("feed","Cho ăn",`Kéo món ${petT(P).n.toLowerCase()} ăn vào nó (hay chạm món rồi chạm nó). Sai hai lần thì nó bỏ ăn.`,"drag",petcTutFeed,box=>{PETC.game="feed";
  box.innerHTML=`<div class="rbtn">${L.map(x=>`<button type="button" class="kgbtn" data-food="${x}">${x}</button>`).join("")}</div>`;
  let sel=null,tries=0,over=false;const done=x=>{if(over)return;tries++;if(x===ok){over=true;petcGain("feed",tries===1?1:.5)}else if(tries>=2){over=true;petcGain("feed",.15)}
   else{box.querySelectorAll(".kgbtn").forEach(b=>b.classList.toggle("on",false));const w=box.querySelector(`[data-food="${x}"]`);if(w)w.disabled=true;sel=null}};
@@ -46050,27 +46082,28 @@ function petcFeed(){const P=tsbPets(S)[PETC.i];const ok=PETC_FOOD[petcKind(P.t)]
    const g=b.cloneNode(true);Object.assign(g.style,{position:"fixed",zIndex:99999,pointerEvents:"none",transform:"translate(-50%,-50%)",margin:0});document.body.appendChild(g);
    const mv=ev=>{g.style.left=ev.clientX+"px";g.style.top=ev.clientY+"px"};mv(e);const up=ev=>{removeEventListener("pointermove",mv);removeEventListener("pointerup",up);g.remove();if(onFig(ev.clientX,ev.clientY))done(sel)};
    addEventListener("pointermove",mv);addEventListener("pointerup",up)})});
- const col=document.querySelector("#modal .kpsubj.kes");if(col)col.onclick=()=>{if(sel&&PETC.game==="feed")done(sel)}}
+ const col=petcFig();if(col)col.onclick=()=>{if(sel&&PETC.game==="feed")done(sel)}})}
 /* game 2: five even strokes along the pet's coat (on its picture) */
-function petcBath(){const box=petcGameBox("Tắm, chải lông","Vuốt dọc lông nó 5 lần, đều tay (vuốt trên hình nó).");const st=document.querySelector("#modal .kpsubj.kes");if(!box||!st)return;PETC.game="bath";
+function petcBath(){petcRules("bath","Tắm, chải lông","Vuốt dọc lông nó 5 lần, đều tay (vuốt trên hình nó).","drag",petcTutBath,box=>{const st=petcFig();if(!st)return;PETC.game="bath";
  box.innerHTML=kitFacts(["Đã vuốt 0/5"]);const lens=[];let a=null;st.style.touchAction="none";
  const dn=e=>{e.preventDefault();try{st.setPointerCapture(e.pointerId)}catch(x){}a={x:e.clientX,y:e.clientY}},up=e=>{if(!a||PETC.game!=="bath")return;const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);a=null;if(d<20)return;lens.push(d);
   box.innerHTML=kitFacts([`Đã vuốt ${lens.length}/5`]);
   if(lens.length>=5){st.removeEventListener("pointerdown",dn);st.removeEventListener("pointerup",up);st.style.touchAction="";const m=lens.reduce((x,y)=>x+y)/5,sd=Math.sqrt(lens.reduce((x,y)=>x+(y-m)*(y-m),0)/5);petcGain("bath",cl(1-sd/m*1.6,0,1))}};
- st.addEventListener("pointerdown",dn);st.addEventListener("pointerup",up);PETC.bath={dn,up}}
+ st.addEventListener("pointerdown",dn);st.addEventListener("pointerup",up);PETC.bath={dn,up}})}
 /* game 3: the ball lights up under one of three kit buttons in turn; tap the lit one before it moves (3 rounds) */
-function petcPlay(){const box=petcGameBox("Chơi","Quả cầu sáng lên ở một ô rồi lăn sang ô khác: chạm đúng ô đang sáng (3 lần).");if(!box)return;PETC.game="play";
+function petcPlay(){petcRules("play","Chơi","Quả cầu sáng lên ở một ô rồi lăn sang ô khác: chạm đúng ô đang sáng (3 lần).","tap",petcTutPlay,box=>{PETC.game="play";
  const N=["Trái","Giữa","Phải"];box.innerHTML=`<div class="rbtn">${N.map((x,i)=>`<button type="button" class="kgbtn" data-ball="${i}">${x}</button>`).join("")}</div>`+kitFacts(["Lượt 0/3 · trúng 0"]);
  let lit=-1,n=0,hits=0,tm=0;const B=[...box.querySelectorAll("[data-ball]")];const step=()=>{if(PETC.game!=="play"||!document.body.contains(box)){clearTimeout(tm);return}
   let j;do{j=Math.floor(Math.random()*3)}while(j===lit);lit=j;B.forEach((b,i)=>b.classList.toggle("on",i===lit));tm=setTimeout(step,Math.max(420,820-n*140))};step();
  PETC.peek=()=>lit;B.forEach((b,i)=>b.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();if(PETC.game!=="play")return;if(i===lit)hits++;n++;
-  const f=box.querySelector(".kfacts");if(f)f.outerHTML=kitFacts([`Lượt ${n}/3 · trúng ${hits}`]);if(n>=3){clearTimeout(tm);PETC.game=null;petcGain("play",hits/3)}else{clearTimeout(tm);step()}}))}
+  const f=box.querySelector(".kfacts");if(f)f.outerHTML=kitFacts([`Lượt ${n}/3 · trúng ${hits}`]);if(n>=3){clearTimeout(tm);PETC.game=null;petcGain("play",hits/3)}else{clearTimeout(tm);step()}}))})}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-petc]");if(!b||b.disabled)return;e.stopPropagation();const k=b.dataset.petc;
  if(k==="close"){petcClose();return}const P=tsbPets(S)[PETC.i];if(!P)return;if(PETC.game)return;
  if(k==="maid"){petcMaid(PETC.i);return}
- if(!can(BAL.pet.khac))return;spend(BAL.pet.khac);if(k==="feed")petcFeed();else if(k==="bath")petcBath();else if(k==="play")petcPlay()},true);
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kpcquick");if(!b)return;e.stopPropagation();e.preventDefault();const kind=PETC.game;if(!kind)return;
- PETC.game=null;try{const st=document.querySelector("#modal .kpsubj.kes");if(st&&PETC.bath){st.removeEventListener("pointerdown",PETC.bath.dn);st.removeEventListener("pointerup",PETC.bath.up);st.style.touchAction=""}}catch(x){}
+ if(!can(BAL.pet.khac))return;/* KIT §13.7 (mg-ui-rest): the tap opens the RULES screen; the khắc are spent only on «Sẵn sàng» (petcRules) */if(k==="feed")petcFeed();else if(k==="bath")petcBath();else if(k==="play")petcPlay()},true);
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kpcquick");if(!b)return;e.stopPropagation();e.preventDefault();const kind=PETC.kind;if(!kind||!PETC.game)return;
+ if(!PETC.rdy){if(!can(BAL.pet.khac))return;spend(BAL.pet.khac)}/* «Để trời định» from the rules screen is a play-through too: same khắc */
+ kgTutDrop();PETC.game=null;PETC.rdy=0;try{const st=petcFig();if(st&&PETC.bath){st.removeEventListener("pointerdown",PETC.bath.dn);st.removeEventListener("pointerup",PETC.bath.up);st.style.touchAction=""}}catch(x){}
  petcQuick(kind)},true);
 /* the engines behind the care buttons (one function each: the tap ends here; co-op thin F4 registers them) */
 function petcMaid(i){const P=tsbPets(S)[i];const m=tsbMaid(S);if(!P||!m)return;P.maidW=tsbWk()+BAL.pet.maidW;petcDraw(`${m.name} nhận chăm ${petT(P).n.toLowerCase()} ${BAL.pet.maidW} tuần.`)}
@@ -59124,7 +59157,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 
 /* ---------- play → result page → act ---------- */
 function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render()}catch(e){}return}
- KG82.ctx="muu";kg82Preload(G.g).then(()=>{});const d=kg82Open({art:J.art,title:G.t,how:G.how});if(!d)return;const box=kg82Box();const p0=J.fz!=null?J.fz:J.p0();const v=J.v,k=J.gk;
+ KG82.ctx="muu";kg82Preload(G.g).then(()=>{});const d=kg82Open({art:J.art,title:G.t,how:G.how,seal:"MƯU"});if(!d)return;const box=kg82Box();const p0=J.fz!=null?J.fz:J.p0();const v=J.v,k=J.gk;
  const seenK="sg:"+G.t;
  const rows=[["Cơ may",kitOdds(p0)+`<small class="kpnote"> hiện nay; khéo thì lên ${word(sgShift(p0,1))}, vụng thì xuống ${word(sgShift(p0,-1))}</small>`]];
  if(G.g==="mac"){const m=v.maid||{};rows.push(["Cung nữ",`tính ${sgTemper(m)[0]}, lòng trung với chủ ${sgLoyW(m.loyal==null?50:m.loyal)}`]);
@@ -78491,7 +78524,7 @@ function shelfPlantBody(e,msg){const P=BAL.shelf.plant,W=shelfWord(e);const s=sh
   `<div id="kshpgw"></div><div class="rbtn">${pbtn(`data-shc="water"`,W.act,`tốn: ${P.khacSelf} khắc · thành: Tươi tốt tăng · dừng tay khi vừa đủ (${P.game.rounds} lần)`,t1)}</div>`}
 function shelfPlantOpen(g){const e=shelfOf(S).g[g];if(!shelfIsPlant(e))return;SHPC.g=g;SHPC.game=null;try{if(!document.getElementById("modal").hidden)closeModal()}catch(x){}
  kitModal({kind:"info",title:`Chăm ${shelfNm(e).toLowerCase()}`,sub:shelfGName(shelfSlotG(g)),itemPic:kitItem({src:typeof kitItemSrc==="function"?kitItemSrc(e.k,""):"",name:"",grade:0,size:"lg"}).replace('<span class="kitn"></span>',''),
-  html:`<div id="kshp">${shelfPlantBody(e)}</div>`,onClose:()=>{SHPC.g=null;SHPC.game=null}})}
+  html:`<div id="kshp">${shelfPlantBody(e)}</div>`,onClose:()=>{kgTutDrop();SHPC.g=null;SHPC.game=null}})}
 window.shelfPlantOpen=shelfPlantOpen;
 /* the care minigame (also the Thử tay calibration entry): water rises step by step; stop it inside the band; score = closeness over the rounds */
 function shelfWaterGame(box,done,W){W=W||SHELF_CARE.cay;const G=BAL.shelf.plant.game;let r=0,lv=0,tm=0,sum=0;const stop=()=>clearTimeout(tm);
@@ -78505,17 +78538,25 @@ function shelfPlantGain(score){const e=shelfOf(S).g[SHPC.g];if(!e)return;const G
  const msg=`Tươi tốt +${Math.round(e.pc-p0)}${score>=BAL.shelf.plant.word[1]?" · rất khéo tay":score<BAL.shelf.plant.word[0]?" · chưa khéo":""}.`;log(`Ngươi tự tay chăm ${shelfNm(e).toLowerCase()} (${msg})`);
  shelfPlantDraw(msg)}
 /* the open plant screen redrawn (one function: co-op thin F4 replays it on her phone after the host's answer) */
-function shelfPlantDraw(msg){const e=shelfOf(S).g[SHPC.g];const box=document.getElementById("kshp");if(box&&e){box.innerHTML=shelfPlantBody(e,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(x){}}}
+function shelfPlantDraw(msg){kgTutDrop();const e=shelfOf(S).g[SHPC.g];const box=document.getElementById("kshp");if(box&&e){box.classList.remove("kg-open");box.innerHTML=shelfPlantBody(e,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(x){}}}
 /* "Để trời định" (the quick roll of the care game): one engine */
 function shelfPlantQuick(){if(!shelfOf(S).g[SHPC.g])return;if(kitQuickRoll()){shelfPlantGain(BAL.skip.care);return}const msg="Để trời định: chưa thành, không thêm gì.";log(msg);shelfPlantDraw(msg)}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-shc]");if(!b||b.disabled)return;ev.stopPropagation();const k=b.dataset.shc;
  if(k==="pet"){try{closeModal()}catch(x){}petcOpen(+b.dataset.i);return}
  if(k==="plant"){shelfPlantOpen(b.dataset.g);return}
- if(k==="water"){if(SHPC.game||!SHPC.g)return;const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;if(c)spend(c);const w=document.getElementById("kshpgw");if(!w)return;
-  const W=shelfWord(shelfOf(S).g[SHPC.g]);w.innerHTML=kitGameFrame({art:"Chăm",title:W.act,how:W.how,id:"kshpgame"})+`<div class="kg82act">${kitQuick({id:"kshpquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;SHPC.game="water";SHPC.stop=shelfWaterGame(document.getElementById("kshpgame"),shelfPlantGain,W)}},true);
+ if(k==="water"){if(SHPC.game||!SHPC.g)return;const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;const w=document.getElementById("kshpgw");if(!w)return;{const c=document.getElementById("kshp");if(c)c.classList.add("kg-open")}
+  /* KIT §13.7 (mg-ui-rest, owner OD:L1981): the tap opens the RULES screen (kgReady: luật + «Hướng dẫn» + «Sẵn sàng»); the khắc are spent and the game starts only on «Sẵn sàng» */
+  const W=shelfWord(shelfOf(S).g[SHPC.g]);w.innerHTML=kitGameFrame({art:"Chăm",title:W.act,how:W.how,id:"kshpgame"})+`<div class="kg82act">${kitQuick({id:"kshpquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;SHPC.game="rules";SHPC.rdy=0;
+  const box=document.getElementById("kshpgame");box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="kshpgo">Bắt đầu</button></div>`;
+  kgReady(box,{n:"Chăm",t:W.act,how:W.how,e:"hold",go:"#kshpgo",pic:"",timed:false,tutor:(b,env)=>{const G=BAL.shelf.plant.game;const stop=shelfWaterGame(b,()=>{SHPC.game="rules";KG82.hint=null;env.end()},W);
+    KG82.hint=()=>{const bt=b.querySelector("[data-shw]");if(!bt)return null;const r=bt.getBoundingClientRect(),lv=SHPC.peek?SHPC.peek():0;return{x:r.left+r.width/2,y:r.top+r.height/2,soon:lv>=G.band[0]-1&&lv<=G.band[1]}};
+    return()=>{stop();KG82.hint=null;SHPC.game="rules"}}});
+  try{const t=box.querySelector("#kgrtut")||box.querySelector("#kshpgo");if(t)t.scrollIntoView({block:"nearest"})}catch(e){}
+  box.querySelector("#kshpgo").addEventListener("click",()=>{if(SHPC.game!=="rules"||SHPC.rdy)return;if(c&&!can(c))return;if(c)spend(c);SHPC.rdy=1;box.classList.remove("kgintro");box.innerHTML="";SHPC.game="water";SHPC.stop=shelfWaterGame(box,shelfPlantGain,W)})}},true);
 /* mg-skip-all (KIT §13.6): the quick option of the care game: won = BAL.skip.care of the gain, lost = nothing; the game in the frame stops */
-document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("#kshpquick");if(!b)return;ev.preventDefault();ev.stopPropagation();if(SHPC.game!=="water")return;
- try{if(SHPC.stop)SHPC.stop()}catch(x){}SHPC.stop=null;SHPC.game=null;const w=document.getElementById("kshpgw");if(w)w.innerHTML="";
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("#kshpquick");if(!b)return;ev.preventDefault();ev.stopPropagation();if(SHPC.game!=="water"&&SHPC.game!=="rules")return;
+ if(!SHPC.rdy){const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;if(c)spend(c)}/* «Để trời định» from the rules screen is a play-through too: same khắc */
+ kgTutDrop();try{if(SHPC.stop)SHPC.stop()}catch(x){}SHPC.stop=null;SHPC.game=null;SHPC.rdy=0;const w=document.getElementById("kshpgw");if(w)w.innerHTML="";{const c=document.getElementById("kshp");if(c)c.classList.remove("kg-open")}
  shelfPlantQuick()},true);
 /* Thử tay (calibration, OD 17/11 ~17:10Z (3)): every new minigame registers its entry; the calibration page lists window.MG_CAL */
 (window.MG_CAL=window.MG_CAL||[]).push({k:"chamcay",n:"Chăm cây (tưới, tỉa lá)",run:box=>new Promise(res=>shelfWaterGame(box,res))});
@@ -82621,7 +82662,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2c5c3c90da2f";window.CTM_BUILD=BUILD;
+const BUILD="ba315f05176d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
