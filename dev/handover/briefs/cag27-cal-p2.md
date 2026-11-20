@@ -16,12 +16,17 @@ Earlier rule stands (verbatim 20/11 ~04:30Z): "… bất kì lần 2 nào của 
 ## DATA (her first try / Kingston 7 y/o, all 5 rounds, 11/19/2026)
 tho 8.7/7.1 · theu 9.7/9.9 · ban 9.1/9.3 · dauho 1.1/1.7 · tat 4.9/6.1 · ne 4.1/2.1 · mua 6.3/4.9
 
-## JOB
-(a) Per kind: what the test really measures (engine, rounds, timing, scoring), and a verdict — TOO EASY (child ≈ or > adult), OK spread, TOO HARD / BROKEN (both near 0) — with the reason in the code.
-(b) Propose difficulty fixes per kind as BAL knob changes only (law 4 one core; law 5 harder as she climbs stays true). Give before/after numbers, and check with dev/measure/mg-bots.js (or a bot sim) that the fix opens a real child-vs-adult spread.
-(c) Propose her CORRECTED real-world level per kind (what BAL.ag.mg2.cal.k should hold once the test is fixed), with the method.
-(d) Write it all to dev/handover/reports/cal-p2.md (handover branch). You MAY put the proposed BAL changes on review/cal-p2 as a draft for review, but NOTHING lands without the owner's OK (MAIN asks her).
-(e) No new features (law 18). Player-visible words (if any) per dev/kit/VANPHONG.md.
+## OWNER WORDS (verbatim, 20/11 ~05:45Z) — canon overwrite of the method
+"Còn cái vấn đề mà chỉnh độ khó đó, bây giờ vậy nè, thật ra mà nói giữa một đứa bé 7 tuổi và một người 35 tuổi cũng khó mà nói được người đó chơi game giỏi hay là như thế nào lắm. Bởi vì con nít ngày nay á, tụi nó chơi game rất là hay, hiểu không? Còn tôi, thứ nhất tôi lớn tuổi hơn, cái phản xạ của tôi chậm hơn chẳng hạn. Mình cần phải có một cái sự khách quan, chứ không phải là cứ nhỏ tuổi hơn mà làm bằng tôi thì có nghĩa là cái game đó quá dễ, cũng không phải vậy. Phải phân tích cho nó rõ và cho nó kỹ."
+→ NO simple "child ≈ adult ⇒ too easy". OBJECTIVE analysis per kind.
+
+## JOB (per kind, in this order)
+(1) SKILL TYPE the kind really tests, from its engine code: reflex/timing, fine hand control, pattern/memory, strategy/knowledge, patience (one or a mix, with weights).
+(2) REAL-WORLD EVIDENCE (law 8, expert/research FIRST): how a 7-year-old of today (plays games a lot) vs a 35-year-old adult perform in that skill type — reaction time, motor control, working memory, strategy, patience; cite sources (WebSearch extended allowed). Write this section before any verdict.
+(3) NOISE of one 5-round try for each of them (score spread from the engine / bot sim with dev/measure/mg-bots.js): how far apart must two scores be to mean anything.
+(4) Only then VERDICT per kind (too easy / fair / too hard / broken) with the reasons written out, + her REAL level per kind (what BAL.ag.mg2.cal.k should hold), + any BAL knob change proposed (before/after, bot-checked; law 4 one core, law 5 harder as she climbs).
+Đầu hồ (dauho): ROOT-74 runs a separate fast-lane fix for "unplayable". Do NOT propose or touch aim knobs of dauho without coordinating through C-AG #27 → ROOT-74; analyse it, mark the overlap.
+Write it all to dev/handover/reports/cal-p2.md (handover branch). PROPOSAL ONLY: nothing lands without the owner's OK (via MAIN ROOT-74). Draft BAL changes may sit on review/cal-p2 only if asked later. No new features (law 18).
 
 ## RULES
 - Push only to review/cal-p2; never main; no PR. Commit messages English, with the attribution lines your system gives.
