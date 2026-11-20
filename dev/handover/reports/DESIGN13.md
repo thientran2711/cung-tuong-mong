@@ -128,3 +128,20 @@ Files: dev/art/dong_hientai/{s62_t8,m02_t8}_DONG_HIENTAI_cloak7.txt + .keep (bas
 Fur (Lông 2) words byte-identical _cloak6 → _cloak7: 2/2 (script).
 
 Proof: keep_check --sidecar ×2 PASS (the other 5 ranks unchanged at _cloak6; their sidecars still PASS in --all) · --all 169 PASS · check_store s62/m02 t8 FAIL set = _cloak6 (no new FAIL, no LEN).
+
+## _cloak7 — Hoàng quý phi t7 too (owner Lượt 1499 "Hqp cũng vậy", via C #10 / C #11)
+Files: dev/art/dong_hientai/{s62_t7,m02_t7}_DONG_HIENTAI_cloak7.txt + .keep (base _cloak6). Chars s62 9997 · m02 9985.
+WHY (picture cloak6_t7_hqp_L1499 + words): "the robe embroidered with phoenixes … on the chest and along the borders" gives big phoenixes over the whole blue cloak; "FABRIC: THICK gold-embroidered BROCADE" makes it heavy; no word on how the cloak falls, so it is bell-wide; the collar's "short pearl-and-gold DROP fringe (a little LONGER than the Quý phi's tassels)" gives a second hanging tier reaching the upper arm.
+Changes (scope: cloak cloth, motif size, fall, shoulder-piece size only):
+- "the outer robe plain except a border band of small phoenixes, incurved chrysanthemums and auspicious clouds in gold thread along its edges and cuffs, ONE small phoenix roundel on the back, no large motifs".
+- Collar: "ONE small single-tier SOFT jewelled cloud collar …"; fringe → "its tiny short pearl edge there only". s62 also drops "close-fitting, never a raised cap," (my cloak6 addition; now the same as m02, needed to fit 10 000).
+- FABRIC "soft light silk, not brocade,"; WINTER (before the fur words) "a slim cloak hanging close, never bell-wide,".
+- Fur Lông 2, crown, face, pose, inner dress and the HQP LUXURY line are byte-identical.
+NOTE for #11 on the t8 _cloak7 (done before your scope message): besides the cloak/collar words, s62_t8 has two length trims, both to my OWN earlier additions: GRACE "her neck long and elegant," (added in cloak5) and "still" in the sleeve line. Without them s62_t8 is 10 003 > 10 000.
+
+### Word diff _cloak6 → _cloak7 (t7)
+- s62_t7: "" → "outer"; "embroidered with" → "plain except a border band of small"; "" → "along its edges and cuffs, ONE small phoenix roundel"; "chest and along the borders, a" → "back, no large motifs, ONE small single-tier"; "close-fitting, never a raised cap," → ""; "" → "tiny"; "pearl-and-gold drop fringe (a little longer than the Quý phi's tassels)" → "pearl edge"; "thick gold-embroidered brocade" → "soft light silk, not brocade,"; "" → "a slim cloak hanging close, never bell-wide,"
+- m02_t7: "" → "outer"; "embroidered with" → "plain except a border band of small"; "" → "along its edges and cuffs, ONE small phoenix roundel"; "chest and along the borders, a" → "back, no large motifs, ONE small single-tier"; "" → "tiny"; "pearl-and-gold drop fringe (a little longer than the Quý phi's tassels)" → "pearl edge"; "thick gold-embroidered brocade" → "soft light silk, not brocade,"; "" → "a slim cloak hanging close, never bell-wide,"
+Fur (Lông 2) words byte-identical _cloak6 → _cloak7 t7: 2/2 (script).
+
+Proof: keep_check --sidecar PASS (s62_t7, m02_t7, s62_t8, m02_t8) · --all 171 PASS · check_store t7 FAIL set = _cloak6 (no new FAIL, no LEN).
