@@ -65,3 +65,10 @@ Prompt dev/art/seasons4/s62_t8_HAN_BAC_open9.txt exactly (10027 chars file, unch
 Base for the sheet: L1536 Lw8HVO8swO (GPT 2.5 low 15 cr, already drawn). Total new 95 cr.
 Sheet: dev/handover/review-sheets/model_test_L1545/sheet.jpg (+ a_mini_medium.webp, b_26_low.webp).
 Look (honest): Base 2.5 low: V collar open but modest, quju spiral NOT visible, plain straight gown. (a) 2.5 medium: richer all-over phoenix embroidery, V collar a little wider, still NO visible spiral wrap (straight gown), hem flares to the floor. (b) 2.6 low: collar widest, pulled down toward the shoulders with a cloud collar + pearl fringe on them; diagonal broad bands wrap across the body several times = the khúc cư spiral is clearly visible (best match); holds a teal ball/casket at the chest; hem still flares and slightly trails.
+
+# JOB L1547 — phoenix A/B (GPT 2.5 low, garment close-up, no face ref)
+Prompts dev/art/phoenix_test/s62_thu_phoenix_A.txt / _B.txt exactly (1020 / 998 chars). gpt-2-mini quality low (extraSettings), 1k 1:1 (1024x1024), seed 7172, no refs. simulate exact 15 cr each, total 30 cr.
+A (outer = robe plum) = w4a1mt97EI  https://www.magnific.com/app/creation/w4a1mt97EI
+B (outer = blush pink) = 5jDaT0bKxe  https://www.magnific.com/app/creation/5jDaT0bKxe
+Sheet: dev/handover/review-sheets/phoenix_L1547/sheet.jpg (+ phoenix_A.webp, phoenix_B.webp).
+Look: A — outer wing feathers are plum with gold outlines and darker plum edges, but the body/neck/tail read mostly blush pink, so the bird is only partly "same as robe"; it blends with the robe in the wings and shows by the gold outlines + pink body. Caption mis-spelt: "màu áo chinh" (missing accent on chính). B — outer feathers clearly blush pink, inner wing coverts plum, bird stands out strongly from the plum robe; tail eyes deep plum; cleanest reading of the idea; caption correct "màu phụ".
