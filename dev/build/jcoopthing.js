@@ -123,7 +123,7 @@ function wwHers(){if(!on()||!host()||CW.ctx||!CW.on||wwAsk||typeof worldWin!=="f
  try{for(const w of worldWin())if(w&&!seen[w.id]){need=true;break}const z=S.wwin;if(!need&&z&&Array.isArray(z.H))for(const h of z.H)if(h&&h.id!=null&&h.end&&seen[h.id]&&!ended[h.id]){need=true;break}}catch(e){return}
  if(!need)return;wwAsk=true;G.stat.ww=(G.stat.ww|0)+1;
  D.later(seat,()=>{wwAsk=false;if(!S||S.dead||S.mg)return;try{worldShow()}catch(e){console.error("thin G world cards",e)}})}
-{const r0=render;render=function(){const r=r0.apply(this,arguments);try{wwHers()}catch(e){console.error("thin G ww",e)}return r}}
+{const r0=render;render=function(){idNow();const r=r0.apply(this,arguments);try{wwHers()}catch(e){console.error("thin G ww",e)}return r}}
 /* ---------- her cards with options and no pid (the whole family; worker #2) ----------
    Part D keeps a card only as a pid (rebuilt at her pick) or as a note: a card with handlers and no pid raised in her context was DROPPED
    (D.bad; seen in her week end on the host: «Hội phối đồ: báo đề» jts tsPanel, «Một ánh mắt» j24 manPoem …). Until level 13 her phone
@@ -140,6 +140,23 @@ PEND.live=pp=>{const m=pp&&LIVE.get(pp.lid);if(!m){D.liveLost++;return null}retu
   return tq.apply(this,arguments)}}
 {const vo=D.vOf;D.vOf=function(m){const v=vo.apply(this,arguments);if(v&&v.pid==="live"){delete v.pid;delete v.pp}return v}}
 {const so=TH.seatDrop;if(typeof so==="function")TH.seatDrop=function(seat){try{if(LIVE.size>40){const ks=[...LIVE.keys()];for(const k of ks.slice(0,ks.length-40))LIVE.delete(k)}}catch(e){}return so.apply(this,arguments)}}
+/* ---------- her stand-in in the host's world follows her store (coop-thin G #4; coop-cyc L13) ----------
+   Until level 13 her entry in the host's world (the friend entry: his deck, his tray, his book) took its identity from the merged week
+   (fromCanon → placeFriend) and her live stats from her phone's pos (jcoopworld liveStats, which drops a pos whose name differs). At level 13
+   her store on the host IS her person: a name / age / pregnancy change made in her context mid-week left the entry stale until the next week,
+   so the host's week draw read a stale cycle (jcycle cycOn / cyTray on her entry: her Kỳ nguyệt sự card never asked, her card on the wrong
+   side of the tray) and every pos of hers after it was dropped. Now, after each run in her context closes, the identity fields of her entry
+   are copied from her store (the same rule buildFriend uses). Levels ≤ 12 and solo: unchanged. */
+function frIdent(){const IDK=["name","age"];const st=TH.seatOf(other()),s=st&&st.S;if(!s||s.dead)return;const f=(rivals||[]).find(X.isF)||null;if(!f||f.sid!=null)return;let n=0;
+ for(const k of IDK)if(s[k]!=null&&f[k]!==s[k]){f[k]=s[k];n++}
+ const pv=s.preg&&!s.hidden?s.preg:0,fk=pv&&s.fake?s.fake:0;if((f.preg||0)!==pv){if(pv)f.preg=pv;else delete f.preg;n++}if((f.fake||0)!==fk){if(fk)f.fake=fk;else delete f.fake;n++}
+ if(n){G.stat.ident=(G.stat.ident|0)+n;lg(["ident",wkR(),f.name])}}
+{const ws=TH.withSeat;TH.withSeat=function(seat){let outer=false;try{outer=on()&&host()&&!CW.ctx&&seat===other()}catch(e){}
+  try{return ws.apply(this,arguments)}finally{if(outer&&!CW.ctx)try{frIdent()}catch(e){console.error("thin G ident",e)}}}}
+/* her entry can also be rebuilt from the last week's blob mid-week (jcoopworld placeFriend from CW.base.P.b when it is missing): the host's
+   draw (flip) and every repaint read it after the same copy */
+function idNow(){try{if(on()&&host()&&!CW.ctx&&CW.on)frIdent()}catch(e){console.error("thin G ident",e)}}
+if(typeof flip==="function"){const f=flip;flip=function(){idNow();return f.apply(this,arguments)}}
 COOP.on("week",()=>{const k=wkR();for(const x of Object.keys(G.done))if(+x<k-2)delete G.done[x]});
 /* the guest: a room that reaches level 13 mid-week has no `end` of hers pending: drop any (the server refuses it: thinend) */
 COOP.on("error",m=>{if(m&&m.code==="thinend"){lg(["thinend",m.week]);}});

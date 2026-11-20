@@ -26,7 +26,7 @@ async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms)
   const el=h.asElement();if(el){try{await el.click({timeout:5000});return true}catch(e){}}await sleep(250)}return false}
 const shot=async(o,n)=>{try{await o.p.screenshot({path:`${OUT}/${n}.png`,timeout:120000})}catch(e){console.log('shot failed',n,e.message.split('\n')[0])}};
 /* close the normal game's dialogs (any button that only reads / takes the first road), end mini games: the test's own player */
-async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{
+async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{{const ov=document.getElementById('ov');if(ov&&!ov.hidden&&getComputedStyle(ov).display!=='none'){const vis=e=>!!(e&&e.offsetParent!==null&&!e.disabled);const b=[...ov.querySelectorAll('[id^=toilmoc],[id$=skip],[id$=done]')].filter(vis).filter(e=>e.id!=='mgskip').pop()||[...ov.querySelectorAll('[id$=skip]')].filter(vis).pop()||[...ov.querySelectorAll('button')].find(b=>/^(Bỏ qua|Xong|Thôi|Đã hiểu|Tiếp|Đóng)/.test(b.textContent.trim())&&vis(b));if(b){b.click();return'x'}}}/* coop-thin G: a mini game opened on HER phone (F6b dress board, «Hội phối đồ · <đề>» → Tự tay phối đồ): the room waits while she plays (CW.frPz); the bot skips it (her maid picks), as coop-thin-g mgSkip */
    const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
    const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
    const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||m.querySelector('.kbk-x,[aria-label="Đóng"]')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'}).catch(()=>'err');
@@ -109,7 +109,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   for(let i=0;i<3;i++){await clear(B);await sleep(300)}/* flip-entry: the tablet is turned at the START of buổi tối (jfe/jnf); the guest reads what tối brings (a summons is a real choice, never auto-made) and only then goes AFK */
   
   const t0=Date.now();await clear(A);ok(await isRd(A)||await press(A),'4: host presses, guest AFK');
-  let st=-1;while(Date.now()-t0<40000){const c=await D(B);if(c.pend||c.w>w0){st=Date.now()-t0;break}await sleep(300)}
+  let st=-1;while(Date.now()-t0<40000){const c=await D(B);if(c.pend||c.w>w0||c.sent===w0/* coop-thin G (level 13): her phone runs no night; the host's go reaches her as g-go (CW.sent = the week) */){st=Date.now()-t0;break}await sleep(300)}
   ok(st>=5000,'4: the guest night runs only when the clock ends (host commits)',st);await merged('4',w0)}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 5 guest ready, reloads; host presses */
