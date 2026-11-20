@@ -77,7 +77,7 @@ function nwCalli(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const T=BAL.nw
    if(glow>now)k91Glow(g,P[0][0]-12,P[0][1]-12,24,24,now)}
   inks.concat(ink?[ink]:[]).forEach(U=>{g.save();g.lineCap="round";g.lineJoin="round";g.strokeStyle="#1e140e";for(let i=1;i<U.length;i++){const sp=k91Dist(U[i][0],U[i][1],U[i-1][0],U[i-1][1]);g.lineWidth=Math.max(2.5,Math.min(10,10-sp*.35));g.beginPath();g.moveTo(U[i-1][0],U[i-1][1]);g.lineTo(U[i][0],U[i][1]);g.stroke()}g.restore()});
   {const tip2=ink&&ink.length?ink[ink.length-1]:null;if(tip2)kg82Spr(g,"ve-brush",tip2[0],tip2[1],S0*.2,null,{ax:.06,ay:.95,alpha:.95})}
-  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(10*Math.min(1,sum/NR/FULL))}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
+  kg82DrawPops(g,pops,now);env.hud({score:mgLive(env,(()=>{const j=cl(r+(phase==="judge"?1:0),0,NR),pl=phase==="play"&&j<NR?1:0;return 10*Math.min(1,(sum+(pl?Math.max(0,1-cost)*mgPace(env,"tho",now-t0,LIM):0)+(NR-j-pl))/NR/FULL)})()),round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play"||(dm&&dm.on))return;tAct=performance.now();ink=[[x,y]]},move:(x,y)=>{if(ink&&phase==="play"){const l=ink[ink.length-1];if(k91Dist(x,y,l[0],l[1])>=2)ink.push([x,y])}},
   up:()=>{if(!ink||phase!=="play"||si>=F.ns){ink=null;return}/* review/mg-train: an extra stroke in the 250 ms after the last one read F.S[ns] (page error) */const U=ink;ink=null;if(U.length<4)return;inks.push(U);const s=scoreStroke(F.S[si],U);sc.push(s);kg82Pluck(si,s>.5);si++;if(si>=F.ns)setTimeout(()=>{if(phase==="play")endGlyph()},250)}});
  KG82.peek=()=>{if(!F||phase!=="play"||(dm&&dm.on)||ink||si>=F.ns)return null;return{drag:F.S[si].filter((p,i,a)=>i%2===0||i===a.length-1).map(p=>{const c=C.client(p[0],p[1]);return[c.x,c.y]})}};
@@ -147,7 +147,7 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
   P.tiles.forEach(t=>{if(t===drag)return;const [tx,ty]=pos(t);drawT(t,tx,ty,t.locked?"ok":t===sel?"on":"n");
    if(P.glow&&phase==="play"&&!t.locked&&okFor(t,P.glow.i))k91Glow(g,tx,ty,t.w0,t.h0,now)});
   if(drag)drawT(drag,drag.x,drag.y,"on");
-  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(10*pts/Math.max(1,tot||1))}/10`,round:`Hồi ${Math.min(r+1,R.length)}/${R.length}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
+  kg82DrawPops(g,pops,now);env.hud({score:mgLive(env,(()=>{const j=cl(r+(phase==="judge"?1:0),0,R.length),pl=phase==="play"&&P&&j<R.length?1:0,all=R.reduce((a,b)=>a+b,0);return 10*(pts+(pl?Math.max(0,P.n-P.miss*T.miss-P.cost)*mgPace(env,"doi",now-t0,R[r]*nwP(T.sec,tier)*1000):0)+R.slice(j+pl).reduce((a,b)=>a+b,0))/Math.max(1,all)})()),round:`Hồi ${Math.min(r+1,R.length)}/${R.length}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  let dn=null;k91Pointer(C,{down:(x,y)=>{if(phase!=="play"||(dm&&dm.on))return;tAct=performance.now();const t=tileAt(x,y);dn={x,y,t,moved:false};if(t){drag=t;delete t.bk;t.ox=x-t.x;t.oy=y-t.y}},
   move:(x,y)=>{if(!dn||!drag)return;if(k91Dist(x,y,dn.x,dn.y)>6)dn.moved=true;drag.x=x-drag.ox;drag.y=y-drag.oy},
   up:(x,y)=>{if(!dn)return;const t=dn.t,moved=dn.moved;dn=null;drag=null;if(phase!=="play")return;

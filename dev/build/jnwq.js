@@ -69,7 +69,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
   if(P.glow&&phase==="play"){const it=P.glow.it,s=P.slots[P.glow.si];const h=it.size*it.sc;k91Glow(g,it.x-h/2,it.y-h/2,h,h,now);if(s)k91Glow(g,s.x-s.w/2,s.y-s.h/2,s.w,s.h,now)}
   const ty=P.tipY*H;if(phase==="judge"&&P.say){g.fillStyle="rgba(255,250,236,.9)";g.fillRect(8,ty-17,W-16,24);k91Say(g,P.say[0],P.say[1],W/2,ty,W-24)}
   else if(P.tip){g.fillStyle="rgba(255,250,236,.9)";g.fillRect(8,ty-17,W-16,24);g.textAlign="center";g.textBaseline="alphabetic";g.font=k91F(700,Math.min(14,W/26),1);g.fillStyle=P.tip.c;kg82Lbl(g,P.tip.t,W/2,ty,W-24)}
-  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(10*pts/Math.max(1,tot||1))}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
+  kg82DrawPops(g,pops,now);env.hud({score:mgLive(env,(()=>{const j=cl(r+(phase==="judge"?1:0),0,NR),pl=phase==="play"&&P&&j<NR?1:0,n=P?P.items.length:0,fut=(NR-j-pl)*n;return 10*(pts+(pl?Math.max(0,n-P.miss*B.miss-P.cost)*mgPace(env,kind,now-t0,LIM):0)+fut)/Math.max(1,tot+pl*n+fut)})()),round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  let dd=null;k91Pointer(C,{down:(x,y)=>{if(phase!=="play"||(dm&&dm.on))return;tAct=performance.now();const it=itemAt(x,y);if(!it)return;delete it.bk;if(it.slot>=0)unseat(it);dd={it,ox:x-it.x,oy:y-it.y};drag=it},
   move:(x,y)=>{if(!dd)return;dd.it.x=x-dd.ox;dd.it.y=y-dd.oy},
   up:(x,y)=>{if(!dd)return;const it=dd.it;dd=null;drag=null;if(phase!=="play"){home(it,false);return}const si=slotAtPt(it.x,it.y);if(si>=0)drop(it,si);else home(it,true)}});
@@ -207,7 +207,7 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
   const ty=H*.355-1;
   if(phase==="judge"&&P.say){g.fillStyle="rgba(255,250,236,.92)";g.fillRect(8,H*.36-3,W-16,26);k91Say(g,P.say[0],P.say[1],W/2,H*.36+15,W-24)}
   else if(P.tip){g.fillStyle="rgba(255,250,236,.92)";g.fillRect(8,H*.36-3,W-16,26);g.textAlign="center";g.textBaseline="alphabetic";g.font=k91F(700,Math.min(13,W/26),1);g.fillStyle=P.tip.c;kg82Lbl(g,P.tip.t,W/2,H*.36+15,W-24)}
-  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(pts)}/10`,round:`Vụ ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
+  kg82DrawPops(g,pops,now);env.hud({score:mgLive(env,(()=>{const j=cl(r+(phase==="judge"?1:0),0,NR),pl=phase==="play"&&P&&j<NR?1:0;return cl(pts+(pl?Math.max(B.xaFloor,2-P.cost-P.miss*B.xaMiss)*mgPace(env,"xa",now-t0,LIM):0)+10*(NR-j-pl)/NR,0,10)})()),round:`Vụ ${Math.min(r+1,NR)}/${NR}`,time:phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play"||(dm&&dm.on))return;const q=P.S.find(q=>x>=q.x&&x<=q.x+q.w&&y>=q.y&&y<=q.y+q.h);if(q)accuse(q)}});
  KG82.peek=()=>{if(phase!=="play"||!P||(dm&&dm.on))return null;const q=P.S.find(q=>q.cul);const c=C.client(q.x+q.w/2,q.y+q.h/2);return{x:c.x,y:c.y,cands:live().length*P.att.length/* review/mg-tune, bots: suspects × clues to compare */}};
  next();return()=>{done=true;stop()}}

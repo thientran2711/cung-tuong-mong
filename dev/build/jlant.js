@@ -95,7 +95,7 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lanter
    else{const t=R.tray[i];sh=t.s;co=t.c;if(t.used)st="dim";else if(t.bad>now)st="bad"}
    if(R.type===0&&R.L[i].bad>now)st="dim";lmDraw(g,c.x+c.w/2,c.y+c.h*.5,w,h,sh,co,lit,st,sy);
    if(R.glow===i&&now-R.glowAt<B.glow&&!R.fin)k91Glow(g,c.x+c.w*.12,c.y+c.h*.06,c.w*.76,c.h*.88,now)});
-  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(rd+1,3)}/3`,time:R.fin?"–":`${Math.max(0,Math.ceil(left/1000))} giây`})});
+  kg82DrawPops(g,pops,now);env.hud({score:mgLive(env,cl(pts+(R&&!R.fin?Math.max(0,B.pts[R.type]*(1-R.miss*B.miss)-R.cost):0)+B.pts.slice(Math.max(0,rd+1)).reduce((a,b)=>a+b,0),0,10)),round:`Hồi ${Math.min(rd+1,3)}/3`,time:R.fin?"–":`${Math.max(0,Math.ceil(left/1000))} giây`})});
  k91Pointer(C,{down:(x,y)=>tapAt(x,y)});
  KG82.peek=()=>{if(!R||R.fin||(dm&&dm.on))return null;const t=nextTarget();if(!t)return null;const c=geo().f[t.i];/* cands (review/mg-tune, bots only): the lanterns a person looks through for this tap */const n=R.type===0?R.L.filter(x=>!x.on).length:R.type===1?R.P.length:R.tray.filter(x=>!x.used).length;return Object.assign(C.client(c.x+c.w/2,c.y+c.h/2),{cands:n})};
  /* test oracle for the random-play measure: every cell centre of the round */
