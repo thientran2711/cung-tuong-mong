@@ -4420,3 +4420,12 @@ RIGHT-COLUMN PLACEMENT (owner 18/11 ~21:52Z, via ROOT-56): on the iPad (kv2) Dư
 
 ### 13.x NO TEXT IN MINI-GAME PLAY (owner OD 20/11 ~05:10Z; review/mg-noword-kit)
 One kit change, every kind and caller follows: (1) `.kg82 .kghow` («Cách chơi» sentence) never shows above the board — the sentence stays on the rules screen (.kgr) and in «Hướng dẫn»; (2) the clock chip in a game (`kitGameClock`) = the kit clock ring + the number only, never «Còn … giây»; (3) `kg82Signs` (j82, MutationObserver pass): inside the play area a button shows a SIGN (? hint, ✓ done, ↶ ↷ tilt, ♨ fan, ● other; word only in title/aria-label), `small` lines hidden, a kit row (.krl + sentence) hidden unless it holds a number (then only the number stays). Never the rules block, the guided bar, or the result. Test dev/test/mg-noword-kit.js (every KG82 kind, whole frame, DOM + canvas). Painted icons to replace the glyph signs: see KIT_REQUESTS.
+
+### 13.11 kit-rows-b (kit keeper, 20/11; KP12 · KP15 · KP17 · KP19 · KP20 · KP21 · K-PM-1)
+- **KP12 `kaSent`** (j63): the writer's explicit class `g`/`r` on a value wins over the word-meaning colouring (`kcls`); an unclassed `<b>item name</b>` never colours a row («Son phần giáng» under THÀNH stays green).
+- **KP15 `kitReward` shelf** (j93): at most 8 icons + one `+N` chip (`.kmsh-more`) while a box with more than 9 items is being opened; the full list below always holds every item, so 22 items never cover the list / «Nhận».
+- **KP17 `kitEvArt`** (jk4): an act picker / shop (`m.act`, `m.shop`, `m.pid` in `KIT_ACT_PIDS`) is never tagged with a guessed `evId`.
+- **KP19 `kitSteps(list)`** (jtabs): ONE step list with three states `[["done"|"now"|"next", text, note?]…]` → ✓ / ▸ / · (kitChecks has two). Used by Việc nhờ «Các bước» (j72).
+- **KP20 chapter cover**: the chapter detail panel (`kitGoalDetail`, jgoal) puts the chapter cover (`chapModel().cover`) in the `headArt` band instead of the origin picture.
+- **KP21 act-card parser** (j63): (1) a coloured item that starts with a label («kèm: <span class="g">…») has the label stripped and is routed by it (push); (2) a labelled value «a, Chủ tin với X +3» is split at top-level `;` / `, ` (not in a clause about «nàng») and each piece routed alone (pure gain in Kèm → Được; long lists = one short line per value).
+- **K-PM-1 `kitGameVs`** (jgamevs): panes no longer stretch to the tallest cell (`align-items:start`, was an empty lower half on Fold 755x1000); new `vs.setMood(side,text)` = a mood line IN the pane flow (`.kgvs-mood`), never a bubble over a board / ladder row.

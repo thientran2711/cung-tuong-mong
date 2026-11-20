@@ -256,14 +256,14 @@ function q72Card(x){const X=q72X(x);if(!X)return`<p class="past">Người nhờ 
    B.push(pbtn(`data-q72g="${pl}"`,`Đến ${q72PlN(pl)}`,`tốn: ${tc} khắc đi đường · thành: tới nơi làm bước này`,why))}
   if(st.ch)st.ch.forEach((o,i)=>B.push(pbtn(`data-q72d="${x.u}" data-q72o="${i}"`,q72Txt(o.n,X),q72Line(x,X,st,o),q72Why(x,X,st,o))));
   else B.push(pbtn(`data-q72d="${x.u}"`,q72Txt(st.n,X),q72Line(x,X,st,null),q72Why(x,X,st,null)))}
- const rows=T.s.map((s,i)=>{const p=q72StepPl(s,X);return [`${i<x.st?"✓":i===x.st?"▸":"·"} ${q72Txt(s.n,X)}`,s.w?`đợi ${s.w} tuần`:p?q72PlN(p):s.emp?"cạnh Hoàng thượng":"tùy chọn",i===x.st?"t":"n"]});
+ const rows=T.s.map((s,i)=>{const p=q72StepPl(s,X);return [i<x.st?"done":i===x.st?"now":"next",q72Txt(s.n,X),s.w?`đợi ${s.w} tuần`:p?q72PlN(p):s.emp?"cạnh Hoàng thượng":"tùy chọn"]});
  const lg=x.log.slice(-3).map(t=>`<div class="pcrow"><span>${t}</span></div>`);
  const drop=pbtn(`data-q72x="${x.u}"`,"Bỏ việc này",`tốn: ${no.join(", ")||"không"}`,Q.length?"đang có việc chờ":"");
  const dt=q72Debt(X.A);
  return pcard({f:X.A.f,name:X.A.n,rank:q72Role(X.A),tabKey:"q72",col:X.A.f.col,
   lines:[`<b>${q72Title(X)}</b>`,`${KIND72[T.kind]} · bước ${x.st+1}/${T.s.length} · còn <b class="${left<=1?"r":""}">${left} tuần</b>`,X.B?`Liên quan: ${mdH(X.B.f,"xs")} ${X.B.n}`:"",dt?(dt>0?`<span class="g">${q72Short(X.A)} đang nợ ngươi ${dt} ân</span>`:`<span class="r">Ngươi đang nợ ${q72Short(X.A)} ${-dt} ân</span>`):""],
   chips:[chip(`Thành: ${ok.map(plain).join(", ")||"êm chuyện"}`,"ok"),chip(`Bại/lỡ hẹn: ${no.map(plain).join(", ")}`,"hot"),bad.length?chip(`Bại lộ: ${bad.map(plain).join(", ")}`,"hot"):""],
-  groups:[["Bước này",B],["Các bước",rows.concat(lg)],["Bỏ việc",[drop]]]})}
+  groups:[["Bước này",B],["Các bước",[kitSteps(rows)].concat(lg)],["Bỏ việc",[drop]]]})}
 function q72HCard(h){const f=h.f||{ini:"?",col:KIT_ROLE.slate};const seal=h.res==="ok"?`<span class="g">Xong</span>`:h.res==="bad"?`<span class="r">Bại lộ</span>`:h.res==="gone"?"Dừng giữa chừng":`<span class="r">Không thành</span>`;
  return pcard({f,name:h.n||"",rank:f.rw||"",tabKey:"q72h",lines:[`<b>${h.t}</b>`,seal,h.end||"",h.tok?`Kết quả: ${h.tok}`:""],groups:[["Đã làm",(h.lg||[]).map(t=>`<div class="pcrow"><span>${t}</span></div>`)]],empty:"Không còn việc gì cần làm."})}
 function q72HTML(){const q=q72();const mo=q.mo[S.turn]||0;
