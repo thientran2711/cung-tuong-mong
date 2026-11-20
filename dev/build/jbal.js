@@ -146,6 +146,24 @@ Object.assign(BAL,{orig:{ /* jorigins.js: Bac Dich (bd) origin numbers */
  /* arc bd_tuc (steppe customs): same layout as hoa */ tuc:{s1a:{c:{danh:-2},w:{th:6}},s1b:{w:{th:4,danh:3},l:{th:-6}},s2a:{c:{bac:-10},w:{th:6},l:{th:-4}},s2b:{w:{duc:2}},c1a:{c:{suc:-3},w:{th:12},l:{th:-8}},c1b:{w:{tamco:2}},c2a:{c:{bac:-30},w:{danh:5},l:{th:-6}},c2b:{c:{suc:-2},w:{duc:3}},t1a:{l:{th:-4}},t1b:{c:{suc:-2},w:{th:6}},x1a:{c:{suc:-5}},x1b:{c:{suc:-4}},x1c:{c:{bac:-60},w:{th:3}},win:{th:22,danh:6},win2:{th:16,duc:3},mid:{th:4},lose:{th:-15,danh:-6}},
  /* arc bd_hoang (Khan succession): same layout as hoa */ hoang:{s1a:{c:{bac:-10},w:{duc:3,sung:2}},s1b:{w:{mat:1},l:{duc:-1}},s2a:{w:{tamco:2}},s2b:{w:{sung:4,danh:3},l:{danh:-3}},c1a:{w:{danh:5},l:{danh:-3}},c1b:{c:{duc:-3},w:{bac:80}},c2a:{w:{sung:5,danh:3},l:{sung:-2}},c2b:{c:{suc:-3},w:{mat:1}},t1a:{c:{suc:-3},l:{sung:-3}},t1b:{w:{tamco:2}},x1a:{c:{suc:-5}},x1b:{c:{suc:-4}},x1c:{w:{duc:2}},win:{danh:12,sung:6},win2:{bac:120,danh:6},mid:{danh:3},lose:{danh:-6,sung:-5}}
 }});
+/* ORIGIN START ARTS (owner OD 20/11 ~02:05Z, verbatim: "mỗi một thân phận là có 4 nhánh chuyện ... thì phải là 4 các cái tài nghệ của mỗi thân phận khác nhau
+   đi cho nó đa dạng"; MAIN + OD ~02:15Z: each set fits ITS story road; noble upbringing higher bậc, poor lower, OD ~01:50Z). ONE table: identity = origin ×
+   its road (the j67 premise arc id, S.st.f14.road / an NPC's v.nr.r) → {art: bậc}. Keys: ARTS cam ky thi hoa vu y theu nau (S.arts) + tứ đức VIR cong dung
+   ngon hanh (S.vir). "" = the origin's own row, used when the road is not known (an old save, an NPC without a road, F14 off) = the old one-art
+   ORIGINS art (moved here, law 14). Read by j1 originArts → j2 start (her start arts) and jmgt mgOrgLv (the upbringing shift of an NPC of that identity).
+   Totals per origin (every road of one origin the same bậc AND the same training points, law 2): tt nc bd 7 · ch dtq td 6 · muoi cn thd 5 · cnv 4. Reasons per art per road:
+   dev/handover/reports/mg-fair-hands.md (handover branch), item (O). */
+Object.assign(BAL.orig,{art:{
+ tt:{"":{cam:1},tt_co:{ky:2,cam:2,thi:2,dung:1},tt_oan:{thi:2,cam:2,ngon:2,hanh:1},tt_tranh:{cam:2,ky:2,hoa:2,ngon:1},tt_mat:{cam:2,dung:2,ngon:2,hoa:1}},
+ dtq:{"":{vu:1},dtq_bien:{vu:2,y:2,ky:1,ngon:1},dtq_vu:{thi:2,hoa:2,vu:1,ky:1},dtq_binh:{ky:2,ngon:2,vu:1,dung:1},dtq_huynh:{vu:2,ky:2,thi:1,hanh:1}},
+ muoi:{"":{ngon:1},muoi_tuoc:{ngon:2,dung:1,cam:1,thi:1},muoi_lau:{ngon:2,thi:1,nau:1,ky:1},muoi_doi:{nau:2,hanh:1,ngon:1,y:1},muoi_no:{ky:2,ngon:1,theu:1,dung:1}},
+ cn:{"":{y:2},cn_chu:{y:2,cong:1,ngon:1,theu:1},cn_tinh:{y:2,thi:1,theu:1,dung:1},cn_ban:{y:2,cong:1,hanh:1,nau:1},cn_than:{y:2,cam:1,thi:1,ngon:1}},
+ nc:{"":{vu:1},nc_gian:{vu:2,ky:2,ngon:2,hoa:1},nc_su:{vu:2,cam:2,ngon:2,nau:1},nc_tuc:{vu:2,nau:2,theu:2,dung:1},nc_vuong:{ky:2,thi:2,vu:2,ngon:1}},
+ bd:{"":{vu:1},bd_hoa:{vu:2,ngon:2,dung:2,hanh:1},bd_ngua:{vu:2,y:2,ky:2,nau:1},bd_tuc:{vu:2,nau:2,theu:2,cam:1},bd_hoang:{ky:2,ngon:2,vu:2,dung:1}},
+ td:{"":{thi:1},td_an:{thi:2,ngon:2,cam:1,ky:1},td_ke:{ky:2,hoa:2,thi:1,cam:1},td_song:{theu:2,hanh:2,thi:1,y:1},td_tha:{cam:2,hanh:2,thi:1,dung:1}},
+ ch:{"":{dung:1},ch_co:{dung:2,ky:2,ngon:1,cam:1},ch_benh:{y:2,hanh:2,nau:1,dung:1},ch_ho:{vu:2,cam:2,dung:1,hoa:1},ch_bi:{thi:2,dung:2,ky:1,ngon:1}},
+ thd:{"":{thi:1},thd_tho:{thi:2,hoa:1,cong:1,ngon:1},thd_sach:{thi:2,ky:1,hanh:1,cong:1},thd_tro:{thi:2,ngon:1,ky:1,nau:1},thd_hoc:{thi:2,ngon:1,hoa:1,hanh:1}},
+ cnv:{"":{cong:1},cnv_chu:{cong:1,nau:1,y:1,ngon:1},cnv_ban:{theu:1,cong:1,hanh:1,nau:1},cnv_mat:{cong:1,vu:1,dung:1,theu:1},cnv_ma:{cong:1,nau:1,dung:1,hanh:1}}}});
 /* ONE CORE (OD:L1267): her household on the room stage (jhouse.js), Tứ đức works (jtds.js), Tứ đức lessons (jtd.js). Same values as before. */
 Object.assign(BAL,{
  house:{ /* jhouse.js: acts on a household servant's stage card */
