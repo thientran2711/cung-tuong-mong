@@ -39,3 +39,11 @@ START_CTX ≈4 % of 1M (estimate; get_session read 0) · depth 7 (limit 8) · wo
 - Faults (not fixed): red drop earrings (not in prompt); NEW again very close to OLD (same body/robe), the change is the face + greener skirt.
 - FACE_CUTS/FACE_MAP for s44 NOT switched (waiting for owner OK).
 - Owner OK Lượt 961 → s44 FACE_CUTS/FACE_MAP/crop switched to DoOgxICpcl, ledger OWNER-OK. F3 done, idle. Total 414 credits.
+
+## c06 THU trial (ROOT-65, owner Lượt 982 "Vẽ 1 cô thử theo bảng màu mới")
+- Builder dev/art/face-common/make_c06_thu_trial.py: approved c06.v5.FULL.txt with ONLY the robe colours swapped (soft vermilion #CF816E → rich maple red #D13A48, warm ivory #EAD7BF → rich moss green #559C46, from palettes_season_deep.json c06.thu), then FG.final (adds the master COLOUR RULE + silk-weight sentences + D9 forehead line: c06.v5 predates them and failed the gate without them). Hair ribbon stays "vermilion" (hair, not robe). → c06.thu.FULL.txt.
+- Gate: check_store.root_pair gets DEEP_SEASON_TRIAL = {"c06": "thu"} (this trial only; remove or widen when the new palette is adopted). PASS.
+- gen tCR4nH2mZJ → cut BhNJ2ShoQR, seed 7174 (same as her approved picture), ref eIyOFEidqL, 1 try, 138 cr (F3 total 552).
+- Sheet: dev/handover/review-sheets/new-faces-v4/c06_thu_trial_F3.jpg (CŨ | MỚI·THU, big "c06 · Sắc sảo · THU · #D13A48 + #559C46").
+- Looked: same face, pose, ponytail and bird whistle as the current picture; eyes level, lips closed, no teeth. Jacket reads true maple red, skirt + sash clear moss green.
+- Faults/notes (not fixed): strong red + green reads a bit "Christmas"; red shoes + red sash tassel add more red; FACE_CUTS not touched (trial).
