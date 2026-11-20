@@ -307,7 +307,9 @@ function kitRowsAlign(root){if(!root)return;const KB=e=>e&&e.matches&&e.matches(
   let prev=null;for(const e of [...par.children]){const h=head(e),t0=prev&&tail(prev);
    if(h&&t0&&t0!==h){while(h.firstChild)t0.appendChild(h.firstChild);h.remove();if(e!==h&&!e.children.length&&!e.textContent.trim()){e.remove();continue}}
    if(e.parentElement===par)prev=e}})}
-function kitModal(spec){const m=kitPanel(spec,true);showModal();return m}
+/* KP18 (review/kit-modal-spin): a kit dialog opened while the title screen (#title) is up sits on the TITLE layer (class kptitle = .modal.kptitle z 55, j74) — one rule here, so kitConfirm / notice / pick work from any title sub-panel
+   and no caller patches it (the jcloud dropAsk patch is gone). Nothing else changes: kptitle is the existing "a screen of the title, not an event" mark (isMenuCard, saves). */
+function kitModal(spec){const m=kitPanel(spec,true);try{const t0=document.getElementById("title");if(t0&&!t0.hidden&&!/\bkptitle\b/.test(m.cls||""))m.cls=((m.cls||"")+" kptitle").trim()}catch(e){}showModal();return m}
 /* ================= KIT 83.9 · DANGER BUTTON + kitConfirm (kit request cloud-del / Foreman D, s18) =================
    `.kbtn.kdanger` = the button for an IRREVERSIBLE action: same size and shape as `.kbtn`, but charcoal with a cinnabar rim (never the lacquer red of `.kbtn`).
    `kitConfirm({title, lines:[…], yes, no, type?, onYes, onNo})` = a centre pop-up on kitModal: the lines, optional "type <code> to confirm" field (kitInput; the danger button stays
@@ -549,7 +551,7 @@ window.kitBranchMap=kitBranchMap;window.kitBranchMapMount=kitBranchMapMount;wind
 .kbm{display:flex;flex-direction:column;gap:8px;color:var(--ink);font-size:.84rem}
 .kbm-c{align-self:flex-start;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--k-card2);color:var(--k-lab);font-weight:700;font-size:.76rem}
 .kbm-sp{list-style:none;margin:0;padding:0 0 0 14px;position:relative}
-.kbm-n{position:relative;display:flex;align-items:center;flex-wrap:wrap;gap:4px 10px;min-height:34px;padding:2px 0 2px 22px;cursor:pointer}
+.kbm .kbm-n{position:relative;display:flex;align-items:center;flex-wrap:wrap;gap:4px 10px;min-height:34px;padding:2px 0 2px 22px;cursor:pointer}/* specificity (0,2,0): the Sổ luân hồi mount (.kpmain li{padding:2px 0}, 0,1,1) zeroed the 22px room of the dot and the dot sat on the first letter (ge-map, GE03) */
 .kbm-n::before{content:"";position:absolute;left:6px;top:0;bottom:0;border-left:2px solid var(--gold)}
 .kbm-n:first-child::before{top:50%}.kbm-n:last-child::before{bottom:50%}
 .kbm-n.ahead::before{border-left:2px dotted var(--line)}
@@ -580,8 +582,8 @@ html:where(.kv2) .kbm-es4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .kbm-sl{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}
 .kbm-sl .kdh{max-width:100%}
 .kbm-slq{display:inline-flex}
-.kbm-f{display:flex;align-items:baseline;gap:5px;font-size:.76rem;color:var(--dim);border-top:1px dashed var(--k-hair);padding-top:4px}
-.kbm-f small{font-size:.66rem;color:var(--k-lab)}
+.kbm-f{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 5px;font-size:.76rem;color:var(--dim);border-top:1px dashed var(--k-hair);padding-top:4px}
+.kbm-f small{flex:none;font-size:.66rem;color:var(--k-lab)}
 .kbm-f.lit{color:var(--bad);font-weight:700}
 `;document.head.appendChild(st)})();
 
@@ -900,6 +902,9 @@ kpActArt=function(b){if(b.dataset.kart)return;const kan=b.querySelector(":scope 
    Re-run after ACTS.json arrives: the title then sits inside .kabody (was missed, the card kept its first, pre-manifest picture).
    New category sung-ai "Tranh sủng" (Chặn ngự giá, Tranh sủng, lật thẻ…): winning the Emperor's night is not "Hại người". */
 try{KIT_CAT["sung-ai"]=["Tranh sủng","#b03a7a"];KIT_ACT_CATS.unshift(["sung-ai",/chặn ngự giá|tranh sủng|lật thẻ|rút thẻ|giữ thẻ|liếc mắt đưa tình/i])}catch(e){}
+/* KP06 (review/kit-modal-spin, KIT_REQUESTS 16/11 suc-khoe-fix): act group «Y dược» for medicine / pregnancy / physician acts (art img/act-cat-y-duoc.webp is on the CDN). Serving the Emperor medicine ("Hầu thuốc …") or carrying it
+   ("Mang … thuốc men") stays Hầu hạ. First in the list so «Uống thuốc phá thai» is not «Hại người», «Mua thuốc bổ» not «Buôn bán», «Chữa bệnh cho con» not «Chăm con». */
+try{KIT_CAT["y-duoc"]=["Y dược","#5d8a3c"];KIT_ACT_CATS.unshift(["y-duoc",/^(?!hầu |mang )(?=.*(thuốc|an thai|bào chế|thụ thai|mang thai|có thai|thúc sinh|thái y|chữa bệnh|khám bệnh|bồi bổ|bổ dưỡng|bắt mạch))/i])}catch(e){}
 /* review/placeholder-pics3 (LUẬT SỬA CẢ NHÓM): the Tài nghệ / Tứ đức buttons say only "Tự rèn" / "Tự học" — the course sits in the button's data-vlearn / data-learn.
    Without it "Tự rèn" resolved to the FIRST key of its prefix (Công's embroidery for Dung, Ngôn, Hạnh) and "Tự học" to the generic book for every art.
    The act name used for the picture now carries the course: "Tự rèn Dung", "Theo ma ma giáo tập học Ngôn", "Tự học Cầm" (the keys ACTS.json already has). */
