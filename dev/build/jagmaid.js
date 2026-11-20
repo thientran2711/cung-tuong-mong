@@ -43,7 +43,7 @@ function amJealP(o){const J=amD().jeal;return cl(J.b+((o&&o.malice)||40)/J.d,0,1
 function amJealN(o){return nv(o,"misJealTin")}/* the trust she loses: ONE table BAL.net.n.misJealTin (show-why) */
 function amJealD(o){if(!o||!roll(agCap(amJealP(o))))return 0;return amJealN(o)}
 /* ---------- 2 an NPC maid's deed ---------- */
-function amMaids(){const L=[];for(const p of consorts()){if(!p||!p.staff)continue;if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.role==="maid"&&mlAgeOk(s))L.push([s,p])}return L}
+function amMaids(){const L=[];const mine=typeof agMine==="function"&&agMine();for(const p of consorts()){if(!p||!p.staff||(mine&&p!==S))continue;/* coop-guest-agent r2: her own maids only on her seat */if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.role==="maid"&&mlAgeOk(s))L.push([s,p])}return L}
 function amSeeking(s){return !!(s.seek&&s.seek.until>=(S.turn||0))}
 function amNeed(s){const G=BAL.ag.goal,W=BAL.ag.road.cn||BAL.ag.road._;return cl((G.sung-(s.sung||0))/G.sung,0,1)*W.sung}
 function amMW(s){try{return typeof mindW==="function"?mindW(s,"social"):1}catch(e){return 1}}
@@ -140,10 +140,11 @@ Object.assign(EMPMEM,{tea:"chén trà",teaN:"chén trà",meet:"chén trà",erran
   if(roomFor("consort")){AMN.sendRise++;return amRise(m,a,"send")}return amFav(m,a,"send")||""};
  const k0=PEND.ksp;PEND.ksp=function(){const d=k0.apply(this,arguments);try{if(amOn()&&d&&d.o&&d.o[1])d.o[1].x=amSendX()}catch(e){}return d};
  /* the month: his regard fades (the player's: j42), a free seat goes to a favoured maid first */
- const sv0=servMonth;servMonth=function(){let r=sv0.apply(this,arguments)||"";if(!amOn())return r;try{const D=amD();
+ const amMonth=()=>{let r="";const D=amD();const mine=typeof agMine==="function"&&agMine();
    for(const [s] of amMaids())if(s.sung>0)s.sung=Math.max(0,s.sung-D.decay);
-   for(const [s,p] of amMaids())if(s.fav&&roomFor("consort"))r+=amRise(s,p,"fav");
-   for(const p of consorts())if(p&&p.maid&&p.maid.fav&&(p===S||p.alive&&!p.out)&&roomFor("consort"))r+=amRise(p.maid,p,"fav")}catch(e){console.error("jagmaid month",e)}return r};
+   for(const [s,p] of amMaids())if(s.fav&&roomFor("consort"))r+=amRise(s,p,"fav");/* her maid's rise on her seat = newRival → the guest→host request (jcoopask), as mlEye */
+   for(const p of consorts())if(p&&(!mine||p===S)&&p.maid&&p.maid.fav&&(p===S||p.alive&&!p.out)&&roomFor("consort"))r+=amRise(p.maid,p,"fav");return r};
+ const sv0=servMonth;servMonth=function(){let r=sv0.apply(this,arguments)||"";try{if(amOn())r+=amMonth();else if(typeof agMine==="function"&&agMine()&&typeof agSelf==="function"&&agSelf(S)&&BAL.ag.maid)r+=agSelfRun(()=>amOn()?amMonth():"")/* coop-guest-agent r2: her own maids' regard fades on her seat, once */}catch(e){console.error("jagmaid month",e)}return r};
  const sM0=srvMonth;srvMonth=function(){const r=sM0.apply(this,arguments);try{if(amOn()&&isSrv()&&!S.dead&&S.srv.fav&&!(S.srv.lau>0)&&roomFor("consort"))srvRise("Nội vụ phủ dâng tên cung nữ đã được sủng hạnh, Hoàng thượng phong")}catch(e){console.error(e)}return r};
 })();
 Object.assign(window,{amOn,amAlias,amTeaO,amTeaG,amJealD,amJealP,amWeek,amPool,amCh,amNight,amRise,amSendQ,amSendX,amMeNight,amDecide});
