@@ -131,8 +131,8 @@ Before / after (bare far jumps = travel ≥ 2 per walker, no «on the way» kh�
 | build | driver | buổi | bare jumps (deed / deed↔other / follow / errand / other) | deeds landed |
 |---|---|---|---|---|
 | 64750121 (base) | reviewer: seeds 1–10 × 16 | 160 | 7 (2 / 4 / 1 / 0 / 0) (reviewer's table) | 1526 (reviewer) |
-| 64750121 (base) | mine, seeds 31–70 × 24 | 960 | 15 (0 / 12 / 0 / 0 / 3) | ≈ 9 200 |
-| 5390905c (fix) | mine, seeds 1–120 × 24 | 2 880 | **0** | 7 % more than base per buổi |
+| 64750121 (base) | mine, seeds 31–70 × 24 | 960 | 13 (0 / 11 / 0 / 0 / 2), +1 «confined» | 9 195 |
+| 5390905c (fix) | mine, seeds 1–120 × 24 | 2 880 | **0** | ≈ 4 % more per buổi than base (fewer walk drops) |
 | 5390905c | timer-driven (awaits between sync and flush), seeds 1–20 × 24 | 480 | **0** (+1 «confined», forced) | — |
 | 1dab9933 (merged) | walk-cost test 12 = reviewer setting, seeds 1–10 × 16 | 160 | **0** of 195 far moves | 1593 |
 Test: walk-cost 12 (new) = units (b) / fresh-khắc guard / plan label free + the seeded 10 × 16 scan (mulberry32 via addInitScript, AGL flush every khắc, all classes 0). Test 11 fixture now books its deeds in pend (a label alone is the plan).
