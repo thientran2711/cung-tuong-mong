@@ -786,3 +786,4 @@ NEWACCT#8 ~21:12Z: OWNER Lượt 1420 (in #8 chat): gen on Magnific current outf
 NEWACCT#9 ~21:20Z: #8 relayed owner Lượt 1420 (chat #8): Magnific gen current outfit HQP t7 _nn + HH t8 v5 on 1 NEW person; m02 GENNEW1 pics = m02 final (no redraw). #8 opened GENNEW2 session_01D3E3NXsD8CEuvDgGYP3zjW (brief gen-newperson2-L1420.md, ~270 cr), reports to #9 → LOOK → send owner.
 NEWACCT#9 ~21:25Z: #8 relayed owner Lượt 1421: ĐÔNG = copy current outfit, closed crossed collar + fur, ranks/collars/capes same → DESIGN11 brief dong-hientai-L1421.md (7 files s62 t4–t8, m02 t7–t8; B20 đông colours, G26 fur, G28 fabric).
 NEWACCT#9 ~21:28Z: OWNER L1422 (via #8): a1 kingfisher-blue → varied PHOENIX PLUMAGE palette (not delete). B26FAB4 told HOLD a1. #9 proposing options to owner L1423.
+NEWACCT#9 ~21:30Z: OWNER L1423 (via #8): phoenix colour of robe = phoenix colour of crown (matched). Rule G added (phoenix plumage palette). Waiting A/B/C.
