@@ -1,0 +1,6 @@
+base: dev/art/thu_comoi/s62_t8_THU_COMOI_v2.txt
+allow: An imperial consort, the Empress.  # owner Lượt 1397: test without the name Empress/Hoàng hậu
+allow: Outfit (the Empress (Hoàng hậu), clearly  # owner Lượt 1397: test without the name Empress/Hoàng hậu
+allow: the Empress's imperial phoenix ceremonial robe of  # owner Lượt 1397: test without the name Empress/Hoàng hậu
+allow:  (the Hoàng hậu edge)  # owner Lượt 1397: test without the name Empress/Hoàng hậu
+allow: Hoàng hậu · Áo choàng lễ + vân kiên  # owner Lượt 1397: test without the name Empress/Hoàng hậu
