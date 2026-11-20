@@ -54,3 +54,4 @@ Room 23 = Vĩnh Hòa đông phối BEDROOM (2w left) HOLD until ROOT-61 names th
 
 ## A27 labels (ROOT-61 01:03Z): labelled copies, same CDN folders, suffix -lbl
 nf840-<room>-lbl.jpg ×5 (header per half: GỐC/PASTEL — palace · đông/tây phối · phòng ngủ/khách · occupants' ranks; under each figure: GROUP big + "thiếu nữ · sNN"; s46–50 Lạnh lùng, s51–55 Kiêu kỳ, s56–61 Quyến rũ from OWNER_GROUPS_L686.json; small numbers kept). Room 24: pr13-ipad-tags-vinh-hoa-cung-dong-phoi-lbl.jpg. Every later sheet gets the same header (A27).
+Batch 5 labelled (A27, 2-line 64 px header: "Phòng NN — palace" / "side hall · room type · occupants' ranks"): pr13-ipad-tags-{dien-huy-cung-dong-phoi, dien-huy-cung-tay-phoi-ngu, dien-huy-cung-tay-phoi, vinh-hoa-cung-dong-phoi}-lbl.jpg (CDN img/_review/place-rank/pr13/). ROOT-61 01:08Z: owner says rooms 13/15 are NOT the template she meant; candidates 1/3/5 sent to her (ROOT-61 guess room 3 Lw8MjWZswO). Bedrooms HOLD.
