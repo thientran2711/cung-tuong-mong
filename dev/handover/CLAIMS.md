@@ -376,3 +376,6 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW mg-env (SMALL sonnet) of 4f3b78f | review/mg-env(-rv); briefs/rv-root75-mg-env.md | MAIN ROOT-75 | session_01Rc5AsN2aQw9SEbdD3besJR | RUNNING | 20/11 06:51Z |
 | rv-mg-score-same (BIG opus reviewer of review/mg-score-same c74d3afd (r2); lands alone) | review/mg-score-same-rv; briefs/cag29-rv-mg-score-same.md; reports/rv-mg-score-same.md | C-AG #29 for ROOT-75 | session_01Rc5AsKZr2Mvv3MpefHQpoX | RUNNING | 20/11 07:09Z |
 | coop-thin G #4 (opus; successor of 3y9fZk3T at 0a481290) | review/coop-thin-g | B | session_01N1tNP5UhwqVC9izL9jLJXf | RUNNING | 20/11 07:15Z |
+| mg-craft lead (opus; ORDER MAIN ROOT-75 07:15Z: 4 craft mini-games MG_CRAFTS.md — scaffold + BAL lev + Thêu + Khéo tay + integration; brief briefs/b-mg-craft-lead.md) | review/mg-craft | B | session_01N1tNP6sTSG3yuHdpDD59P6 | RUNNING | 20/11 07:19Z |
+| mg-craft-ve (sonnet; Vẽ «Thủy mặc» MG_CRAFTS §2; brief briefs/b-mg-craft-ve.md) | review/mg-craft-ve | B | session_01N1tNP2gpsC12ARDUqUciDw | RUNNING | 20/11 07:19Z |
+| mg-craft-hoa (sonnet; Cắm hoa «Chọn mùa · cắt cành · nghiêng thế» MG_CRAFTS §3; KIT REQUEST KG82_DEMO "cut"; brief briefs/b-mg-craft-hoa.md) | review/mg-craft-hoa | B | session_01N1tNP5RwFKrATahSHTu5r6 | RUNNING | 20/11 07:19Z |
