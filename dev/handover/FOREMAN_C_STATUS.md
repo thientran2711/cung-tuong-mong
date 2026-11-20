@@ -266,3 +266,4 @@ ROOT-65 Lượt 980 ~03:20Z: P4 Round 3 (a42b5f6: Xuân/Thu hơi đậm, Hạ ke
 ROOT-65 Lượt 981 ~03:25Z: PR19 batch 1 (rooms 31–35 Tần, 675 cr) LOOKED + sent. Faults: 31≈35 same layout, 34 doorway arch, floors bit glossy, bedrooms very pink. Asked owner batch-2 go (~675 cr; ~31 rooms left ≈4 200 cr). Next Lượt 982.
 ROOT-65 Lượt 982 ~03:30Z: OWNER verbatim "Vẽ 1 cô thử theo bảng màu mới" then "Khaon, bảng mới xong chưa" (= Khoan → HOLD the test girl) → answered: new 4-season sheets done = Lượt 980 (a42b5f6); test girl waits her go + which girl/season. Next Lượt 983.
 ROOT-65 Lượt 984 ~03:35Z: OWNER verbatim "Vẽ 1 cô thử theo bảng màu mới" → F3 GO: c06 Sắc sảo THU pair #D13A48 + #559C46, 1 gen ~138 cr, CŨ|MỚI sheet. Next Lượt 985.
+- (20/11 03:08Z) FROM MAIN ROOT-73: LIVE 94c3bddc (mg-ready-guide, owner bug) on 72922870. ROLLBACK 72922870. Final-merge 94c3bddc before LAND READY.

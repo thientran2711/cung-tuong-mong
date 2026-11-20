@@ -285,3 +285,4 @@ LESSONS: (1) grep the WHOLE STATUS each wake. (2) Every new rule code a worker a
 - (20/11 00:20Z) FROM MAIN ROOT-72: LIVE 72f7c0c5 (owner mgcal dan into BAL, on 2f328213). ROLLBACK 2f328213. Final-merge 72f7c0c5 before LAND READY.
 - (20/11 01:50Z) FROM MAIN ROOT-72: LIVE 72922870 (palace-chatter, E) on 72f7c0c5. ROLLBACK 72f7c0c5. Final-merge 72922870 before LAND READY. Main rolls over to ROOT-73 now (id in HANDOVER_SESSION9 / next FROM MAIN line).
 - (20/11 01:42Z) FROM MAIN: main is now ROOT-73 session_01Rc5AsMpxuyLg8Q9fFBowWc (child of ROOT-72). LIVE 72922870, ROLLBACK 72f7c0c5. Send LAND READY / reports here.
+- (20/11 03:08Z) FROM MAIN ROOT-73: LIVE 94c3bddc (mg-ready-guide, owner bug) on 72922870. ROLLBACK 72922870. Final-merge 94c3bddc before LAND READY.
