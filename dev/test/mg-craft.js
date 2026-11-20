@@ -16,7 +16,9 @@ const URL0=pos[0]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:
 const [VW,VH]=(pos[1]||'755x1000').split('x').map(Number);const RUNS=+(opt('runs')||2),SPEED=+(opt('speed')||2),MEASURE=A.includes('--measure');
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 /* per-kind extra checks (in-page source, returns {ok, info}); builders add theirs */
-const KIND_CASES={};
+const KIND_CASES={/* ve (mg-craft-ve): the Thủy mặc levers exist and get harder toward ease 0; the stand-in motifs are listed as missing pictures (the «tạm» marker) */
+ ve:`(()=>{const L=BAL.mgTier.lev.ve,need=["place","tones","ramp","dry","peek","bleed","lim","limBase"];const m=(window.CTM_MISSING_PICS&&JSON.stringify(window.CTM_MISSING_PICS))||"";
+  return{ok:typeof k91Ve==="function"&&need.every(k=>Array.isArray(L[k]))&&L.place[0]<L.place[1]&&L.tones[0]>L.tones[1]&&L.ramp[0]<L.ramp[1]&&L.dry[0]<L.dry[1]&&L.peek[0]<L.peek[1],info:{lev:Object.keys(L),missing:m.slice(0,80)}}})()`};
 /* the engine names the kinds must reach (mirror of KG82_CRAFT; a mismatch = the wiring moved) */
 const KG82_CRAFT_E={theu:"stitch",kim:"papercut",ve:"inkwash",hoa:"ikebana"};
 /* the plain play of a kind: playArt (Cắm hoa has no plain art key — the plain "hoa" is Họa/Vẽ — so it opens by startContest) */
@@ -54,6 +56,8 @@ const SRC0=k=>k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}
     else if(pk.drag){const L=pk.drag;const ex=jit(),ey=jit();fire('pointerdown',L[0][0],L[0][1]);const n=8;for(let i=1;i<=n;i++){const f=i/n,seg=Math.min(L.length-2,Math.floor(f*(L.length-1))),t=f*(L.length-1)-seg;
       const x=L[seg][0]+(L[seg+1][0]-L[seg][0])*t+ex*f,y=L[seg][1]+(L[seg+1][1]-L[seg][1])*t+ey*f;fire('pointermove',x,y);await sleep(14)}
      const lx=L[L.length-1][0]+ex,ly=L[L.length-1][1]+ey;fire('pointerup',lx,ly);await sleep(200)}
+    else if('hold' in pk){/* a press-and-hold board (ve: the brush on the inkstone): press while the oracle says hold, lift when it says release */
+     if(pk.hold&&!window.__held){fire('pointerdown',pk.x,pk.y,7);window.__held=1}else if(!pk.hold&&window.__held){fire('pointerup',pk.x,pk.y,7);window.__held=0}await sleep(10)}
     else if(pk.x!=null){let x=pk.x,y=pk.y;/* memory slip: the sample is covered and a look-alike spool / shape is near: picks it now and then */
      if(o.slip&&pk.hidden&&pk.alike&&pk.alike.length&&Math.random()<o.slip*pk.alike.length){const a=pk.alike[Math.floor(Math.random()*pk.alike.length)];x=a.x;y=a.y}
      if(pk.at!=null){/* a timed tap: aim at the moment (+ the hand's spread), on the craft clock */const aim=crNow()+pk.at+(o.ms0||0)+gauss()*(o.msS||0);let w;while((w=aim-crNow())>0)await sleep(Math.min(4,w/(CRAFT.speed||1)))}

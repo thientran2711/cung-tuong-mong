@@ -283,7 +283,7 @@ BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timin
    ve «Thủy mặc» (jcraft_ve) · hoa «Chọn mùa · cắt cành · nghiêng thế» (jcraft_hoa): the design's proposed shapes; their builders tune and add knobs here. */
 Object.assign(BAL.mgTier.lev,{
  theu:{beat:[520,900],win:[45,75],near:[2,2],st:[3,3],alike:[3,0],sway:[.02,0],peek:[3000,40000],wC:[.35,.35],wS:[.65,.65],lim:[30000,30000],fast:[.8,.8],keep:[.6,.6]},
- ve:{place:[.07,.14],tones:[5,3],dry:[1400,30000],peek:[3000,40000],bleed:[.06,.03]},
+ ve:{place:[.016,.14],tones:[5,3],ramp:[450,2600],dry:[400,30000],peek:[3000,40000],bleed:[.07,.03],flick:[420,420],holdMin:[40,40],reach:[1.1,1.5],wPlace:[.5,.5],wTone:[.4,.4],wClean:[.1,.1],lim:[7000,9500],limBase:[8000,10000],fast:[.5,.7],keep:[.6,.8]},/* mg-craft-ve «Thủy mặc» [ease 0, ease 5]: place = hit radius, share of the scroll width · tones on the stone · ramp = ms for the brush to pass every tone · dry = ms before the loaded brush pales one tone · peek = ms the master's sample stays unrolled (a tap re-opens it) · bleed = blot radius share · flick = ms a person takes to flick (bot oracle) · holdMin = ms a press counts as loading · reach = flick hit radius × the layer's radius · wPlace/wTone/wClean = score parts · lim/limBase = ms per motif / fixed · fast/keep = mgPace */
  hoa:{ghost:[0,1],cutTol:[.06,.15],angTol:[8,20],alike:[3,0],sway:[.03,0]}});
 Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],holes:[2,2],size:[.11,.13],place:[.09,.17],peek:[4000,60000],alike:[2,0],lim:[30000,50000],extra:[.4,.4]});
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession

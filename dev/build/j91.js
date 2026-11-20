@@ -312,7 +312,7 @@ const KG82_CRAFT={
  kim:{e:"papercut",t:"Cắt hoa giấy",demo:"drag",spr:[],
   how:"Hoa giấy mẫu treo bên trái; bên phải là tờ giấy đỏ đã gấp. Kéo hình kéo cắt (trăng, tam giác, giọt) đặt lên tờ gấp ở chỗ mở ra sẽ thành lỗ của mẫu, rồi chạm ✓ để mở giấy. Lỗ trùng mẫu sáng lên, lỗ thừa bị trừ. 3 tờ."},
  ve:{e:"inkwash",t:"Thủy mặc",demo:"drag",mgl:"Họa: thủy mặc",
-  how:"Bức mẫu của thầy ghim ở góc. Kéo núi, nước, thuyền, tùng đặt lên cuộn lụa đúng chỗ như mẫu: càng cao càng xa, càng nhỏ và nhạt. Rồi giữ bút trên nghiên cho mực đậm dần, buông đúng sắc mực của lớp đang sáng và quệt lên lớp ấy. Mực lan vào chỗ trống thì thành vết. 3 bức."},
+  how:"Bức mẫu của thầy ghim ở góc. Kéo núi, nước, thuyền, tùng đặt lên cuộn lụa đúng chỗ như mẫu: càng cao càng xa, càng nhỏ và nhạt. Rồi chạm ✓: giữ bút trên nghiên cho mực đậm dần, buông đúng sắc mực của lớp đang sáng và quệt lên lớp ấy. Mực lan vào chỗ trống thì thành vết. 3 bức."},
  hoa:{e:"ikebana",t:"Chọn mùa · cắt cành · nghiêng thế",demo:"drag",
   how:"Ngoài song là mùa nào thì chọn hoa của mùa ấy. Vuốt ngang cành để cắt: Thiên dài chừng rưỡi thân bình, Nhân ba phần tư Thiên, Địa ba phần tư Nhân. Kéo cành vào miệng bình rồi xoay cho nghiêng: Thiên gần đứng, Nhân nghiêng vừa, Địa nghiêng nhiều. 3 bình."}};
 /* jreg: engines is read when asked, so engines of later modules (jnwp, jwkg…) are listed */
