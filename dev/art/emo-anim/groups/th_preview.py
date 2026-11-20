@@ -8,14 +8,18 @@ args = [a for a in sys.argv[1:] if not a.startswith("--")]
 d = "img/_review/emo-anim-groups"
 if "--dir" in sys.argv: d = sys.argv[sys.argv.index("--dir") + 1]; args.remove(d)
 dst, names = args[0], args[1:]
-BG, S, HH = (242, 238, 230), 576, 640
-FT = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
+BG, S, HH = (242, 238, 230), 576, 690
+FT = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 38)
 def frames(f, cap):
     im = Image.open(f)
     for i in range(im.n_frames):
         im.seek(i); c = Image.new("RGBA", im.size, BG + (255,)); c.alpha_composite(im.convert("RGBA"))
         fr = Image.new("RGB", (S, HH), BG); fr.paste(c.convert("RGB").resize((S, S), Image.LANCZOS), (0, 0))
-        d = ImageDraw.Draw(fr); w = d.textlength(cap, font=FT); d.text(((S - w) / 2, S + 12), cap, font=FT, fill=(60, 40, 40))
+        d = ImageDraw.Draw(fr)
+        for j, line in enumerate(cap.split(" · ", 1)):   # rule A27: rank on line 1, emotion on line 2, big
+            f = FT
+            while d.textlength(line, font=f) > S - 16: f = ImageFont.truetype(FT.path, f.size - 2)
+            w = d.textlength(line, font=f); d.text(((S - w) / 2, S + 6 + j * 54), line, font=f, fill=(60, 40, 40))
         yield fr
 p = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{S}x{HH}", "-r", "15", "-i", "-",
                       "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "20", dst], stdin=subprocess.PIPE)

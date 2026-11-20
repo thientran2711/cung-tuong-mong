@@ -15,10 +15,10 @@ for part, f in (("OUT", f"{d}/{name}-out.webp"), ("LOOP", f"{d}/{name}.webp"), (
         im.seek(i); fr.append(im.convert("RGBA").resize((T, T), Image.LANCZOS))
     for r in range(0, len(fr), N): rows.append((part, r, fr[r:r + N]))
 LW = 60
-W, CAP = LW + N * T, 44
+W, CAP = LW + N * T, 60
 H = CAP + len(rows) * T
 sheet = Image.new("RGB", (W, H), LIGHT); dr = ImageDraw.Draw(sheet)
-FT = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 28)
+FT = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 40)
 dr.text((LW, 6), caption(name, True), font=FT, fill=(60, 40, 40))
 for y, (part, r, fr) in enumerate(rows):
     bg = LIGHT if y % 2 == 0 else DARK

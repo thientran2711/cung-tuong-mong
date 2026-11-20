@@ -18,6 +18,13 @@ depth 4 · START_CTX ≈ 4.5 % of 1M (get_session read 0 → own estimate) · ro
 - Credits SEAL7: 31 clips × 940 = 29 140 (+1 upload, free). Ledger 31 lines. Balance (shared pool) 146 024 → 92 956 at 01:05Z (other workers too).
 - OUT trims (first second still): act-hon 0.8 s, hothen 1.2, hungkhoi 1.2, lo 1.0, tinhtu 0.9, tutin 0.7, vui 1.2, bg-so 1.3.
 
+## A27 LABEL ON THE PICTURE (ROOT-61 01:00Z) — applied to the WHOLE Thái hậu set (no gens)
+- th_sheet.py: title row 40 px «Thái hậu · Hành động · Sợ»; th_preview.py: two big lines under each seal (line 1 rank «Thái hậu», line 2 emotion, 38 px, shrinks to fit).
+- Rebuilt from the CDN clips: th-<k>-frames.jpg for ALL 38 Thái hậu seals; **th-set-preview.mp4** = the whole set in one file (38 seals, 612 s, 110 MB,
+  order gian vui buon so an binh dau ghen lo muu tutin hanghai tinhtu chuyentam hungkhoi tinhnghich hothen chan khochiu choang hon act-… ×17);
+  th-u8/u9/u10-preview.mp4 and bg-set-preview.mp4 + bg-so-frames.jpg rebuilt with labels. Older unit previews th-u1…u7 NOT rebuilt (unlabelled — use th-set-preview).
+- Foreman now ROOT-61 (session_01PEhRbxPG7XXXVSg4KgDLkW).
+
 ## FAULTS (looked at every frame sheet; NOT redone — A20/A21/777)
 - act-tinhnghich BACK: she turns FULLY AROUND mid-way (frames ~33–45: back of head, bun, crown from behind, dragon on her back) — worst fault.
   LOOP 15–28: oversized pointing hand + folded paper snake thrust at the viewer; OUT 23–28 the snake reaches the picture edge.
