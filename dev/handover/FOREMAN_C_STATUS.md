@@ -465,3 +465,4 @@ ROOT-68 Lượt 1081 (draft to ROOT-67): SPEND AUDIT reports/SPEND-AUDIT-ROOT68.
 
 ROOT-68 07:30Z: OWNER (via ROOT-67) no mass production tonight (out of credits; top-up tomorrow); only 3×8; then PACK for new account → TAKEOVER_FOREMAN_C_NEWACCOUNT.md written.
 ⚠ FOR MAIN (ROOT-75): owner is moving Foreman C to a NEW Claude account (old one near limit). New Foreman C ROOT starts from dev/handover/TAKEOVER_FOREMAN_C_NEWACCOUNT.md.
+ROOT-68 07:31Z: OWNER order: 32 old consorts c01–c32 redrawn too (new style + palette); 56 count wrong → 87 of 90 + c01–c32. Recorded in TAKEOVER_FOREMAN_C_NEWACCOUNT.md. RANK8 rows fbb5797; 3 workers drawing.
