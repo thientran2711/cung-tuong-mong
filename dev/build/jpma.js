@@ -215,8 +215,8 @@ function pmEyeTxt(L){return L.map(p=>p===S?"ngươi":p.name).join(", ")}
 function pmEyeFx(win,lose,x,place){const E=B().eye,L=pmEyes(win,lose,place);if(!L.length)return"";const d=Math.min(E.danhMax,E.danh*L.length);
  apx(win,{danh:d});apx(lose,{danh:-d});const env=[],res=[];
  for(const w of L){const sp=typeof agSpite==="function"&&w!==S?agSpite(w,win):Math.max(0,-aff(w,win));
-  if(sp>=E.spite){if(win===S&&w!==S){if(typeof ghenUp==="function")ghenUp(w,E.ghen,"thấy ngươi thắng trước mặt mọi người",S)}else oanAdd(w,win,E.oan);env.push(w)}
-  else if(aff(w,win)>=E.likeMin){affAdd(w,win,E.kinh);res.push(w)}
+  if(aff(w,win)>=E.likeMin){affAdd(w,win,E.kinh);res.push(w)}/* one who likes the winner respects her; else one who resents her envies her */
+  else if(sp>=E.spite){if(win===S&&w!==S){if(typeof ghenUp==="function")ghenUp(w,E.ghen,"thấy ngươi thắng trước mặt mọi người",S)}else oanAdd(w,win,E.oan);env.push(w)}
   pmMem(w,win,"pmsaw",x.n)}
  if(win!==S&&lose!==S&&!L.includes(S)){try{newsAdd(win,"pmwin",`${win.name} thắng ${lose.name} một ván ${x.n} trước mặt ${L.length} người`)}catch(e){}}
  return `người xem: ${pmEyeTxt(L)} — Danh ${nm(win)} +${d}, ${nm(lose)} −${d}${res.length?`; nể ${nm(win)}: ${pmEyeTxt(res)} (+${E.kinh})`:""}${env.length?`; ghét ${nm(win)} thêm: ${pmEyeTxt(env)}`:""}`}
@@ -288,5 +288,5 @@ const K0=()=>B().ky;
 try{if(window.MEM_DEEDS){Object.assign(MEM_DEEDS,{pmplay:[1,0,"cùng {o} chơi {x}"],pmwin:[-1,0,"thắng {o} một ván {x}, lấy mất món cược"],pmyield:[1,0,"nhường {o} một ván {x}"],pmsaw:[0,0,"xem {o} thắng một ván {x}"],pmlad:[-1,0,"bị {o} giành ngôi trên bảng {x}"]})}
  if(BAL.mem&&BAL.mem.w)Object.assign(BAL.mem.w,B().mem)}catch(e){}
 try{if(typeof MGT_OCCN==="object")MGT_OCCN.pm="so tài"}catch(e){}
-Object.assign(window,{pmEyes,pmEyeFx,pmLad,pmLadPos,pmLadWin,pmLadDrop,pmLadFor,pmLadMonth,pmVsGo,pmKyNoise,pmKyRun,PM_KY,pmCoopYield,pmArts,pmR,pmV,pmStakes,pmStakeOf,pmOdds,pmRun,pmAuto,pmX,pmPlayEnd,pmDuelEnd,pmYield,pmYieldAff,pmBtns,pmRows,pmPlayOpts,pmDuelOpts,pmScore,pmItem,pmGoTap});
+Object.assign(window,{pmLadAim,pmEyes,pmEyeFx,pmLad,pmLadPos,pmLadWin,pmLadDrop,pmLadFor,pmLadMonth,pmVsGo,pmKyNoise,pmKyRun,PM_KY,pmCoopYield,pmArts,pmR,pmV,pmStakes,pmStakeOf,pmOdds,pmRun,pmAuto,pmX,pmPlayEnd,pmDuelEnd,pmYield,pmYieldAff,pmBtns,pmRows,pmPlayOpts,pmDuelOpts,pmScore,pmItem,pmGoTap});
 })();
