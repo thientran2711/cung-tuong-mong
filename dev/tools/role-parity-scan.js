@@ -119,7 +119,18 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
        her and an NPC: «Trò chuyện với cung nữ» (cx2:maidTalk) is weighed by an NPC only below that lòng — up was P-ONLY by the drawn maid's lòng only */
     const cm=a.maid&&!a.maid.out&&a.maid.loyal!=null&&!L.includes(a.maid)?a.maid:null;if(cm){const b0=cm.loyal;UNDO.push(()=>{cm.loyal=b0});cm.loyal=Math.min(cm.loyal,BAL.ag.cx2.maidTalk.below-25)}const o=liveRivals(true).find(x=>x&&x!==a&&!x.out);
     const ST=[s=>{s.loyal=10},s=>{s.loyal=25},s=>{s.loyal=45},s=>{s.trouble=wk();s.loyal=60},s=>{if(o)s.af=Object.assign({},s.af||{},{[o.id]:40});s.loyal=80}];
-    L.forEach((s,i)=>{const b={loyal:s.loyal,trouble:s.trouble,af:s.af};UNDO.push(()=>Object.assign(s,b));ST[i%ST.length](s)})}]];
+    L.forEach((s,i)=>{const b={loyal:s.loyal,trouble:s.trouble,af:s.af};UNDO.push(()=>Object.assign(s,b));ST[i%ST.length](s)})}],
+  /* role-parity-drift-kyngo: proof on someone she ALSO resents — the «proof» world's 3 proofs plus the doer's own grudge (oán 60) and ill regard (−60) toward
+     each target, one world, the same for her and an NPC. An NPC tells / judges only from a motive (jagacts3 par3 tell: evG > 0 and agSpite > 0; jagacts
+     AGHHG judge: evG ≥ BAL.ag.ev.judge and rel < 0); the player decides herself. hh / up cx3:tell and hh hh:judge were held by the NPC side only because
+     the proof world's a.evm leaked into the later worlds (fixed in snapW). Raw j9 fields (as «liked»), only the doer → target direction, undone after
+     (UNDO), so no other world or doer sees this state */
+  ["proof-foe",a=>{if(a===S)try{const K=typeof k61S==="function"&&k61S();if(K){const K0=Object.assign({},K);UNDO.push(()=>{for(const z in K)delete K[z];Object.assign(K,K0)});
+    for(const t of others(a)){const kk=t&&t!==S&&kOf61(t);if(kk&&(+K[kk]||0)<3)K[kk]=3}}}catch(e){}
+   const F=t=>a===S?[S.ro,t.id,S.rl,t.id]:t===S?[a,"oan",a,"rel"]:[(a.ro=a.ro||{}),t.id,(a.rl=a.rl||{}),t.id];
+   for(const t of others(a)){try{if(typeof evA==="function")evA(a,t,3,"scan");else t.ev=3;const [O,ok,R,rk]=F(t);const o0=O[ok],r0=R[rk];UNDO.push(()=>{O[ok]=o0;R[rk]=r0});
+    O[ok]=Math.max(+o0||0,60);R[rk]=Math.min(+r0||0,-60)}catch(e){}}
+   try{if(a!==S&&typeof HA==="object"&&HA){const G=HA.gv=HA.gv||{};G[a.id]=(G[a.id]||0)+1}}catch(e){}}]];
  const UNDO=[];
  /* B4 (maid column): worlds of a maid life, the SAME mutation for the player maid (S, S.srv) and an NPC maid — friends / a same-palace foe /
     a hostile palace's maid (Nhờ dò tin, Tố lỗi, Bỏ độc), no friend yet (Biếu quà), the master out (Theo hầu chủ, Hầu bên cạnh chủ), a senior bậc
@@ -153,7 +164,11 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
  const mSnap=()=>JSON.stringify({where:S.where,roster:S.roster,srv:S.srv,S:{suc:S.suc,sac:S.sac,tai:S.tai,duc:S.duc,bac:S.bac,ro:S.ro},sv:allServ().map(x=>({sid:x.sid,af:x.af,rk:x.rk,sec:x.sec,intel:x.intel,suc:x.suc,bac:x.bac,sac:x.sac,tai:x.tai,duc:x.duc})),R:rivals.filter(v=>v!==S).map(v=>({id:v.id,ro:v.ro,oan:v.oan}))});
  const mRest=j=>{const o=JSON.parse(j);S.where=o.where;S.roster=o.roster;S.srv=o.srv;Object.assign(S,o.S);for(const x of o.sv){const s=servById(x.sid);if(s)Object.assign(s,x)}for(const x of o.R){const v=rivals.find(r=>r.id===x.id);if(v)Object.assign(v,x)}};
  const N0={};try{for(const k of Object.keys(agNeedsC(liveRivals(true)[0]||S)))N0[k]=100}catch(e){};["company","desire","tea","order","love","self","tin","mp"].forEach(k=>N0[k]=100);
- const snapW=()=>JSON.stringify({facs:S.facs||[],menW:S.menW||null,S:{malice:S.malice,hh:S.hh,cutPay:S.cutPay,rank:S.rank,preg:S.preg,hidden:S.hidden,kids:S.kids,inv:S.inv,confined:S.confined},R:rivals.map(v=>({id:v.id,rank:v.rank,queen:v.queen,confined:v.confined,suc:v.suc,sung:v.sung,preg:v.preg,hidden:v.hidden,kids:v.kids,inv:v.inv,ev:v.ev,malice:v.malice,hh:v.hh,cutPay:v.cutPay}))});
+ /* role-parity-drift-kyngo: the world snapshot also holds each NPC's own proof book (evm). The «proof» world gives the doer 3 proofs on every target:
+    for her they sit on the target (t.ev, restored here), for an NPC doer in her own a.evm — which was NOT restored, so an NPC's proof leaked into every
+    later world (malice / seen / wares / disfavour / staff) and the promoted maid (probed first) showed Uy hiếp / Bán cho phe khác / Tố giác that
+    neither she nor her born-Đáp-ứng clone holds in those worlds (up N-ONLY + PROMO-npc rows, red on LIVE d74f86a5 by the shifted draw only) */
+ const snapW=()=>JSON.stringify({facs:S.facs||[],menW:S.menW||null,S:{malice:S.malice,hh:S.hh,cutPay:S.cutPay,rank:S.rank,preg:S.preg,hidden:S.hidden,kids:S.kids,inv:S.inv,confined:S.confined},R:rivals.map(v=>({id:v.id,rank:v.rank,queen:v.queen,confined:v.confined,suc:v.suc,sung:v.sung,preg:v.preg,hidden:v.hidden,kids:v.kids,inv:v.inv,ev:v.ev,evm:v.evm||{},malice:v.malice,hh:v.hh,cutPay:v.cutPay}))});
  const restoreW=j=>{while(UNDO.length)try{UNDO.pop()()}catch(e){}const o=JSON.parse(j);S.facs=o.facs||[];S.menW=o.menW||{};Object.assign(S,o.S);for(const x of o.R){const v=rivals.find(r=>r.id===x.id);if(v)Object.assign(v,x)}};
  const npcOpts=(role,v,grps,VL)=>{for(const [vn,f] of (VL||VAR)){const W=snapW(),W2=/^m-/.test(vn)?mSnap():null;SEED(7);try{AG.sc={}}catch(e){}try{rich(v);f(v)}catch(e){E("var "+vn,e)}
    for(let t=0;t<TRIES;t++){try{for(const o of agOptsG(v,Object.assign({},N0),null)||[])addN(role,o.k,"agOptsG")}catch(e){E("agOptsG",e)}
