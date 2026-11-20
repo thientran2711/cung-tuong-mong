@@ -4,3 +4,4 @@ allow: no shoulder piece   # Luot 1263 owner: signature piece added
 allow: smooth with a soft satin lustre and a faint woven self-pattern   # Luot 1275 owner: fabric matte, new m03_t4_VAI_DOAN text
 allow: The satin has real weight   # fabric: lead sentence shortened, redundant with new FABRIC text (length)
 allow: a little more than thin silk   # same
+allow: both resting on the shoulders   # Lượt 1280 owner: capes now sit LOW on the outer shoulders/upper arms, cut in a deep V (v4 text)
