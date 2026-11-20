@@ -51,3 +51,8 @@ t8 (rank8-s62/s62_t8.txt): lost-word count 1; words GONE entirely: peonies
 - Also not adopted: f2 captions ("Bậc Tần · Hoa sen hồng" …) — Thu captions kept.
 2. Hair flower t4–t6 is still unnamed ("ONE fresh flower") as in the bases; F2 says hair = same species (lotus / double hollyhock / incurved chrysanthemum). Name it? (not done — brief said embroidery.)
 3. t1–t3 COMOI_v2 still embroider plum blossoms (pre-F2), t4–t8 now use F2 species → the ladder mixes. Update t1–t3 to F2 too?
+
+## Update 2 (C #6 msg 19:14Z: F2 in builder, samples dev/art/f2/s62_t1..t8)
+- Adopted the dev/art/f2 flower wording: t4–t6 "HAIR FLOWER SIZE: exactly ONE fresh lotus flower / double hollyhock / incurved chrysanthemum in her hair" (allow line added to each .keep); embroidery words were already identical to f2 (t4 lotus flowers, t5 double hollyhocks/hollyhock medallions, t6–t8 incurved chrysanthemums).
+- BASE kept = b26/s62_t4, b26/s62_t5_v2, swap56/s62_t6_v2, rank8-s62/s62_t7, s62_t8 (NOT rebased on f2/): f2/s62_t6 drops approved t6_v2 words (a few strands of pearls, "more gold ornaments", image-2 note …) and f2/s62_t7/t8 carry new pose/angle/held-item + INNER LAYER EMBROIDERED text and t8 drops "and richer embroidery" — none of that is in the L1361 brief. If C #6 wants those f2 changes, rebasing is a re-run of make_thu_comoi.py with the f2 paths (slots may need re-matching).
+- Also not adopted: f2 captions ("Bậc Tần · Hoa sen hồng" …) — Thu captions kept.
