@@ -72,7 +72,7 @@ function nmOrder(e){const pid=nmPidF();if(!pid||!e.fp)return;S.nmOrd=S.nmOrd&&ty
  if(!e.fr)e.o[e.f]=pre+x.n/* her coop entry on this seat (a display copy) shows the new name at once; her seat sends it back after she applies */}
 function nmOrdPrune(){try{const O=S.nmOrd;if(!O||typeof O!=="object")return;const W=window.COOPW;if(!W||!W.on){delete S.nmOrd;return}const P=nmFrBlob(),pid=String(nmPidF());
  for(const k of Object.keys(O)){if(k!==pid||!P){delete O[k];continue}/* done (her blob shows the new name), or her person is gone (rebirth): dropped */
-  O[k]=(Array.isArray(O[k])?O[k]:[]).filter(z=>{const o=nmAt(P.S,z.p);return !!(o&&nmBare(o.name)===z.o)});if(!O[k].length)delete O[k]}}catch(e){}}
+  const hers=nmPers(P.S);O[k]=(Array.isArray(O[k])?O[k]:[]).filter(z=>{const o=nmAt(P.S,z.p);return !!(o&&nmBare(o.name)===z.o)||hers.some(e=>nmBare(e.o.name)===z.o)/* review r1: a path from her entry's copy can miss her real S (kidsCopy drops dead children: "kids.i" shifts) -> still pending while any of her people holds the old name (nmOrdApply finds it by name the same way) */});if(!O[k].length)delete O[k]}}catch(e){}}
 /* the other player's own people from the room's P (on the guest too: the host at home is not on her stage, yet she holds her name) */
 function nmOtherHeld(b){try{const W=window.COOPW;const P=W&&W.on&&W.base&&W.base.P&&W.base.P[W.seat==="a"?"b":"a"];return P&&P.S&&!P.dead?nmPers(P.S).filter(e=>nmBare(e.o.name)===b).length:0}catch(e){return 0}}
 /* GUEST: apply the host's orders for her own people (idempotent: a person already renamed is skipped) */
