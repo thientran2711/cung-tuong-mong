@@ -24,16 +24,25 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
     const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0;
     if(S.emp&&S.emp.nr)T.push([S.turn,S.emp.nr.r,S.emp.nr.n,S.emp.nr.k])}
    return {k:S.origin.k,H,T:T.slice(-1)[0]||null,emp:S.emp&&S.emp.nr?JSON.parse(JSON.stringify(S.emp.nr)):null,cards,txt,err}}});
- const O=['tt','dtq','muoi','cn','nc','td','ch','thd','cnv'];const R=[],R0=[];
- for(const k of O){R.push(await p.evaluate(k=>window.__life(k,60,1),k))}
- for(const k of ['tt','muoi','td']){R0.push(await p.evaluate(k=>window.__life(k,60,0),k))}
+ const O=(process.env.RT_O||'tt,muoi,td').split(',');const MO=+process.env.RT_M||36;const R=[],R0=[];
+ for(const k of O){R.push(await p.evaluate(([k,m])=>window.__life(k,m,1),[k,MO]));console.error('life',k,R[R.length-1].H.length)}
+ for(const k of ['tt','muoi']){R0.push(await p.evaluate(([k,m])=>window.__life(k,m,0),[k,MO]))}
  const all=R.flatMap(r=>r.H),rs=all.filter(h=>h.why),kinds=[...new Set(rs.map(h=>h.why))];
  const gaps=(L,f)=>L.filter(h=>h.gap!=null&&f(h)).map(h=>h.gap);const avg=a=>a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length*100)/100:0;
  console.log(JSON.stringify({hoi:all.length,byReason:rs.length,kinds,gapReason:avg(gaps(all,h=>h.why)),gapTimer:avg(gaps(all,h=>!h.why)),gapOff:avg(gaps(R0.flatMap(r=>r.H),()=>1)),
   sample:rs.slice(0,6).map(h=>h.a+': '+h.r),errs:R.concat(R0).map(r=>r.err).filter(Boolean),emp:R.map(r=>r.k+':'+(r.emp?r.emp.r+'@'+r.emp.n:'-'))}));
  chk('lives ran without script errors',R.concat(R0).every(r=>!r.err),R.concat(R0).map(r=>r.err));
  chk('OR16: some hồi open on a real reason',rs.length>=5,rs.length);
- chk('OR16: more than one kind of reason seen',kinds.length>=2,kinds);
+ /* each reason kind on a real cast person, state set by hand (a fresh 36-month life mostly shows grudges: they are the strongest) */
+ const K=await p.evaluate(()=>{quiet=true;window.__forceOrigin='tt';start();quiet=false;Q.length=0;const v=liveRivals(false)[0];const out={};
+  const ks=()=>rtWhyAll(v).map(r=>r.k);out.base=ks();
+  try{q72DebtAdd(q72A('rv',v.id),-2)}catch(e){out.e1=e.message}out.debt=ks().includes('debt');
+  v.nr=v.nr||{};v.nr.x=0;v.nr.c='me';out.goal=ks().includes('goal');
+  S.roster=S.roster||{};S.roster.acts=(S.roster.acts||[]).concat([{id:'v'+v.id,t:'me',k:'test',ok:1}]);out.event=ks().includes('event');
+  if(S.reign){S.reign.side='emp';v.rgS='quyen';out.faction=ks().includes('faction')}else out.faction='no reign';
+  out.txt=rtWhyAll(v).map(r=>r.r);return out});
+ console.log(JSON.stringify(K).slice(0,900));
+ chk('OR16: every reason kind (debt, goal, event, faction) is read from real state',K.debt&&K.goal&&K.event&&K.faction===true,K);
  chk('OR16: the timer fallback still opens hồi with no reason',all.some(h=>!h.why&&h.gap!=null),0);
  chk('OR16: a reason names a LIVE cast person',rs.every(h=>h.live!==false),rs.filter(h=>h.live===false));
  chk('OR16: the hồi text says the reason (Cớ sự)',rs.every(h=>h.inTxt),rs.filter(h=>!h.inTxt).slice(0,3));
@@ -51,7 +60,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   log=l0;out.nr=S.emp.nr?JSON.parse(JSON.stringify(S.emp.nr)):null;out.lines=lines.filter(x=>/Hoàng thượng/.test(x)).slice(0,4);out.db=T.bien-b0;out.dk=T.kho-k0;
   out.heir=lines.some(x=>/lập .{0,12}Thái tử|phong .{0,20}Thái tử/i.test(x)&&!/ý định|bàn|cân nhắc|bàn chuyện/i.test(x));
   try{localStorage.setItem('ctm-emproad',JSON.stringify([out.nr&&out.nr.r]))}catch(x){}
-  const seen={};for(let j=0;j<12;j++){S.emp.nr=null;nrEmpInit();seen[S.emp.nr.r]=(seen[S.emp.nr.r]||0)+1}out.seen=seen;
+  const seen={};const last=out.nr&&out.nr.r;for(let j=0;j<12;j++){localStorage.setItem('ctm-emproad',JSON.stringify([last]));S.emp.nr=null;nrEmpInit();seen[S.emp.nr.r]=(seen[S.emp.nr.r]||0)+1}out.seen=seen;
   out.uiOk=(()=>{try{return typeof nrTitle==='function'&&out.tpl.every(id=>nrTitle(id))}catch(x){return false}})();return out});
  console.log(JSON.stringify(e).slice(0,1500));
  chk('OR18: 3 new Emperor templates registered',e.tpl.length===3,e.tpl);

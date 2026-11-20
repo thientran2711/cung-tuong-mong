@@ -26,14 +26,16 @@ function rtDebt(v){try{if(typeof q72Debt!=="function"||typeof q72A!=="function")
 /* a recent act of v on her (or of her on v) in the people ledger */
 function rtEvent(v){try{const L=(S.roster&&S.roster.acts)||[];const id="v"+v.id;const n=RTB().ev;for(let i=L.length-1;i>=0&&i>=L.length-n;i--){const x=L[i];if(!x||!x.ok)continue;if(x.id===id&&x.t==="me")return 1;if(x.id==="me"&&x.t===id)return -1}}catch(e){}return 0}
 /* every reason one person has right now; the strongest is kept (s ≥ BAL.ag.why.min fires) */
-function rtWhy(v){const T=RTB(),m=npwB().min;const R=[];const nm=npwNm(v);
+function rtWhyAll(v){const T=RTB(),m=npwB().min;const R=[];const nm=npwNm(v);
  try{const h=hostility(v,S);if(h>=T.gr)R.push({s:m*h/T.gr,k:"grudge",r:`${nm} ${npw1Gr(v,S)}`})}catch(e){}
  try{const o=oan(S,v);if(o>=T.gr)R.push({s:m*o/T.gr,k:"grudge",r:`ngươi còn mối oán với ${nm}`})}catch(e){}
  const d=rtDebt(v);if(d)R.push({s:m*(1+Math.abs(d)*T.debtK),k:"debt",r:d<0?`${nm} tìm đến đòi ngươi trả ân`:`${nm} muốn trả ân cho ngươi`});
  try{if(typeof rgSideOf==="function"&&typeof rgSideNow==="function"&&S.reign){const a=rgSideOf(v),b=rgSideNow();if(a&&b)R.push(a!==b?{s:m*T.fac,k:"faction",r:`phe ${rgSideN(a)} của ${nm} lấn tới`}:{s:m*T.facAlly,k:"faction",r:`${nm} cùng phe ${rgSideN(a)} cần ngươi`})}}catch(e){}
  try{if(v.nr&&!v.nr.x&&v.nr.c==="me")R.push({s:m*T.goal,k:"goal",r:`đường riêng của ${nm} vướng phải ngươi`})}catch(e){}
  const e=rtEvent(v);if(e)R.push({s:m*T.evK,k:"event",r:e>0?`${nm} vừa ra tay với ngươi`:`ngươi vừa ra tay với ${nm}`});
- R.sort((a,b)=>b.s-a.s);return R[0]||null}
+ return R.sort((a,b)=>b.s-a.s)}
+function rtWhy(v){return rtWhyAll(v)[0]||null}
+window.rtWhyAll=rtWhyAll;
 npwReg("hoi67",{grp:"story",who:c=>c&&c.A?rtCast(c.A):[],why(v){const r=rtWhy(v);return r?{s:r.s,t:S,r:r.r,flag:r.k}:null}});
 /* the hồi's reason, kept on the chapter until that hồi is played */
 function rtTry(A){if(!rtOn()||!A||A!==S.st.M||A.done||A.cur||!A.nb||S.turn>=A.due)return null;const lt=A.lt!=null?A.lt:A.st0!=null?A.st0:null;if(lt!=null&&S.turn<lt+RTB().min)return null;
