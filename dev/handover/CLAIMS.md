@@ -467,7 +467,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-fig2-left KIT KEEPER (sonnet; KP22 check, no code) | reports/kit-fig2-left.md | MAIN ROOT-79 | session_01Rc5AsMtjP4KTgBZVjENGLs | DONE (report only) | 20/11 |
 | rv-kit-opt-text REVIEWER (sonnet; small kit KP14) | review/kit-opt-text-rv; reports/rv-kit-opt-text.md | MAIN ROOT-79 | rv-signs session | DONE PASS 9f673ab2 | 20/11 14:41Z |
 | KP22 rel-men-servants (opus; ORDER MAIN ROOT-79 14:45Z; men + servants real pairwise relations → relGrp/GR groups) | review/rel-men-servants | B | session_01N1tNP6Ndqa9P3vKrpqp9M7 | READY ab189e51 (reports/rel-men-servants.md) | 20/11 16:55Z |
-| FOREMAN E #20 (opus; child of E #19, depth 1) | handover FOREMAN_E_STATUS | FOREMAN E #19 | session_01DgYSWktqRepcrRpV9LRJV2 | RUNNING | 20/11 15:49Z |
+| FOREMAN E #20 (opus; child of E #19, depth 1) | handover FOREMAN_E_STATUS | FOREMAN E #19 | session_01DgYSWktqRepcrRpV9LRJV2 | DONE → E #21 session_PENDING_E21 | 20/11 15:49Z |
 | coop-thin G #7 (opus; successor of G #6 5sNDT7i8 @fcaebe77) | review/coop-thin-g | B | session_01N1tNP4hKBjqGrnmw98Dz3q | RUNNING | 20/11 15:57Z |
 | REVIEW coop-host-lag r1 (opus BIG) of 3d73134b | review/coop-host-lag-r1 | B | session_01N1tNP6RAQ5d4gTSNa3cYiK | RUNNING | 20/11 15:59Z |
 | coop-name-clash (opus; co-op player-vs-NPC full-name clash, law 6b; on names-unique-r2-r1) | review/coop-name-clash | B | session_01N1tNP3ZzsWP7BnSee6wGzB | SẴN SÀNG KIỂM c2353df6 (reports/coop-name-clash.md: one name list over both players, host decides — nmReg/nmOrd world keys, her people in the host list, host orders for her seat, nmBirth at new life; contains names-unique-r2-r1 + coop-staff-split-r1; land before coop-host-lag) | 20/11 18:40Z |
@@ -479,3 +479,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW coop-name-clash r1 (opus BIG) of c2353df6 | review/coop-name-clash-r1 | B | session_01N1tNP3dftEE3NNrkg7qe5S | RUNNING | 20/11 18:01Z |
 | KIT kit-cost-rows-home (sonnet; KR home-stat rows + «quý nhau», E blockers of home-chapters / person-minigame) | review/kit-cost-rows-home | MAIN ROOT-80 | session_01Rc5AsMtjP4KTgBZVjENGLs | RUNNING | 20/11 18:50Z |
 | PARKING #11 dresscode SEASON + COLOUR DRESS CODE (opus E30; ORDER MAIN 19:05Z; expert pass first OD:L1327) | review/dresscode; reports/dresscode.md | FOREMAN E #20 | session_01DgYSWnviLqLryPXMXj3CnP | RUNNING | 20/11 19:10Z |
+| FOREMAN E #21 (opus; child of E #20, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #20 | session_PENDING_E21 | RUNNING | 20/11 18:55Z |
