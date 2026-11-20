@@ -82,3 +82,11 @@ Looked: both square, open, no round, no V, no cross collar. t1 = deep, low squar
 - Gate STORE CHECK PASS s62/s64/s65 t2 (dev/art/rank8-s62/g17/).
 - Gen 8ai9BR2IrU. Sheet dev/handover/review-sheets/rank8-s62/s62_THU_covuong2_t1-t2.webp (t1 đã OK | t2 THỬ MỚI).
 - Looked: t2 square is the same narrow size as t1 (not wide), edge = thin mint piping + plum-blossom band; rest of t2 outfit as before. Face ok, mouth closed, no earrings.
+
+## 10. TEST cổ vuông t4 Tần / t5 Phi / t6 Quý phi (owner) — 3 gens, 405 cr, builder untouched
+Test prompts dev/art/rank8-s62/test-square456/s62_t{4,5,6}_sq.txt (= current builder output + one neckline phrase). Approved gate --scope tp4/5/6 --age a18 PASS (t4 shortened to stay < 10 000 chars).
+- t4 Tần: ", a crossed collar," → ", a SQUARE NECKLINE (Tần, more covered): a small, high square opening at the base of the throat, collarbones covered, edged with a stiff embroidered band; never round, never a V, NO crossed wrap collar,"
+- t5 Phi: + "with a SQUARE COLLAR (Phi style, closed and covered): a high square-cut collar whose small square front frames the base of the neck, the neck covered up to the throat by a {S} inner collar, the square edged with a DOUBLE band of gold brocade; never round/V/cross"
+- t6 Quý phi: + "with a SQUARE STANDING COLLAR (Quý phi style, the most covered): a stiff upright collar with SQUARE corners closing high around the neck, only a very narrow square notch at the front of the throat, edged with plain gold brocade (no pearls, no fringe, no tassels on the collar); never round/V/cross"
+Gens eIPOIm2dqL / UPvmPCKwny / 79fvNG6JAL. Sheet dev/handover/review-sheets/rank8-s62/s62_THU_covuong_t4-t5-t6.webp.
+Looked (honest): t4 = small square neckline visible in the capelet opening under the jade clasp — reads square. t5 = closed mint stand collar under the cloud collar; the SQUARE does NOT read (looks like a mandarin stand collar). t6 = stand collar with squared top corners; square weak, reads mostly as a stand collar. Coverage rises t4 → t6 as asked. No redraw.
