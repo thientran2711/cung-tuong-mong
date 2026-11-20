@@ -574,3 +574,4 @@ NEWACCT#2 ~17:32Z: OWNER (via ROOT ~17:15Z) WINTER fur order → WINTER1 session
 NEWACCT#2 ~17:35Z: OWNER (via ROOT ~17:20Z) SEASON NECKLINE rule (thu+đông: t1–t3 old crossed collar; xuân+hạ: open square; t6–t8 always crossed; t4/t5 later) → sent to WINTER1 before firing (t1–t3 crossed + fur).
 NEWACCT-ROOT ~17:20Z: OWNER season neckline rule (G) added + forwarded to #2 (winter test t1–t3 crossed collar).
 NEWACCT#2 ~17:40Z: DESIGN1 DONE d51534d5 (540 cr; 4 thân cận ideas m05/m08/m10/m16 + ma ma text ideas) sheet LOOKED + sent Lượt 1177. Next Lượt 1178.
+NEWACCT#2 ~17:50Z: OWNER (this chat) Tang-style open neck for t4/t5/t6: Option 1 (keep rank collar/cape, Tang tube-top inner + open outer) DRAW NOW on s62 3 gens; Option 2 (new Tang rank ladder) PLAN first → TANG1 brief briefs/tang1.md. t4 winter: skipped (LEN), asked owner trim OK Lượt 1179 — no answer yet.
