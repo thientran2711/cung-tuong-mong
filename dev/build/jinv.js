@@ -465,7 +465,7 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
    Solo: o = the open shop (KSHOP.reg), the tile found by key, the same checks and onBuy as the tile's button. In the host's run for her
    (window.__kshBuild set by jcoopthinf, her context) the shop is rebuilt from HER data (kitShop data mode). True when the onBuy ran; the
    tile's stock (a count per opening) and the quantity reset stay with the open shop. */
-function kitShopBuy(key,k,q,mode){let o=KSHOP.reg[key];const B=window.__kshBuild;if(typeof B==="function"){o=B(key);if(o)o.mode=mode==="sell"?"sell":"buy"}
+function kitShopBuy(key,k,q,mode){let o=KSHOP.reg[key];const B=window.__kshBuild;if(typeof B==="function"){const o2=B(key);if(o2){o=o2;o.mode=mode==="sell"?"sell":"buy"}}/* solo / no co-op context: B returns undefined and the open shop stays (tut-road: it used to overwrite o and no solo buy ran) */
  if(!o||(mode&&o.mode!==mode))return false;const x=kitShopRaw(o).find(y=>y&&y.k===k);if(!x)return false;q=Math.max(1,q|0);if(kitShopWhyQ(o,x,q))return false;
  try{x.onBuy&&x.onBuy(x,q)}catch(err){console.error(err)}if(x.stock!=null&&!x.sell)x.stock-=q;o.q=o.q||{};o.q[x.k]=1;return true}
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHOP.reg){const o=KSHOP.reg[k];if(o.det!=null&&document.querySelector(`.kshop[data-kshop="${k}"] .kshdet`)){o.det=null;kitShopRefresh(k);e.stopPropagation();e.preventDefault();return}}}},true);
