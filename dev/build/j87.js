@@ -600,7 +600,7 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 /* event art beside each fact (j89 evArtOf): a small print pasted in the ledger */
 .kbk-ev{display:grid;grid-template-columns:minmax(0,1fr) 3em;gap:.55em;align-items:start;border-bottom:1px dashed #9a2c1c33}
 .kbk-ev>.kfacts .kfact{border-bottom:0}
-.kbk-evart{display:block;width:3em;height:4em;object-fit:cover;margin:.3em 0;padding:2px;background:#fffaf0;border:1px solid #9a2c1c88;box-shadow:0 1px 3px #3a210f55;transform:rotate(1.2deg)}
+.kbk-evart{display:block;width:3em;height:4em;object-fit:cover;margin:.3em 0;padding:2px;background:var(--k-card,#fffaf0);border:1px solid #9a2c1c88;box-shadow:0 1px 3px #3a210f55;transform:rotate(1.2deg)}
 .kbk-ev:nth-child(even) .kbk-evart{transform:rotate(-1deg)}
 body.kbk-open #rtoast,body:has(#dawn.kbkdawn:not([hidden])) #rtoast{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
 /* cover: indigo cloth, thread binding, title label */
