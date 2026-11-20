@@ -70,7 +70,8 @@ function mg2On(){try{return typeof agOn==="function"&&agOn()&&!!(BAL.ag&&BAL.ag.
 function mgWith(o,f){const k=MGX.o;MGX.o=o;try{return f()}finally{MGX.o=k}}
 function mgMedD(d){const P=BAL.ag.mg2.med;d=+d||0;let i=0;while(i<P.length-2&&d>P[i+1][0])i++;const [a,ma]=P[i],[b,mb]=P[i+1];return cl(ma+(mb-ma)*(d-a)/(b-a),0,10)}
 function mgNpcTier(kind,p,o){o=o||{};return mgTier(kind,{occ:o.occ,big:!!o.big,rank:o.rank!=null?o.rank:mgRankOf(p),lv:o.lv,p})}
-function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||Math.random,u=(r()+r()+r())/3;MGX.n++;const d=o.d!=null?o.d:mgNpcTier(kind,p,o).d;
+function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||Math.random,u=(r()+r()+r())/3;MGX.n++;if(o.lv==null&&p&&typeof p==="object"&&p!==S&&typeof mgOrgLv==="function"){const ol=mgOrgLv(p,kind);if(ol){let v=0;try{v=kg82LvFor(p,kind)}catch(e){}if(ol>v)o.lv=ol}}/* upbringing start bậc (OD 20/11 ~01:50Z): her board as the player's, whose arts hold it */
+ const d=o.d!=null?o.d:mgNpcTier(kind,p,o).d;
  const H=BAL.ag.mg2.hand;if(H&&H.on&&p!==S){/* AG-ALL-2d HAND CEILING: a roll under her own ceiling (her hand + her art / upbringing lift, mgHandEff), then the board's ease (the same gap shift the player's board gives) */
   const c=mgHandEff(kind,p,o);return cl(Math.round(c-(1-u)*H.w+(mgMedD(d)-mgMedD(0))),0,10)}
  return cl(Math.round(mgMedD(d)+(u-.5)*BAL.ag.mg2.w),0,10)}/* o.d: a known gap (no person: the matching level 0) */
@@ -84,10 +85,10 @@ function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||M
    better (c + eq … c + far), 1/3 worse (c − far … c − eq) — bell-shaped inside each third (mean of two hashed draws); eq / far = BAL.ag.mg2.hand.
    (2) ART: mgHandEff adds BAL.ag.mg2.hand.art per art level of that kind above
    the player's own level (kg82LvFor; minus below): a trained NPC clearly beats her, an untrained one is weak. (3) UPBRINGING (owner OD 20/11 ~01:50Z,
-   verbatim: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà nghèo mới yếu"): + BAL.ag.mg2.hand.up[origin] − up[her origin]
-   (mgOrgOf: j1 ORIGINS key of a consort — S.origin, v.nr.o / v.ag.o, jagent agOrg; a servant = "srv"; unknown "_"): noble-born trained from childhood
-   are strong on entry, poor-born weak, rising only through the palace art level. Rank itself gives NO skill — law 5 comes from who she meets higher up
-   (mostly noble-born, more trained). Art / upbringing are read live (never saved), measured against the player of seat a (mgRefP: S; a co-op guest reads
+   verbatim: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà nghèo mới yếu"; MAIN relay: read the EXISTING origin stats, no new
+   table): a person's art level for the lift = max(her own level, the start art bậc of her origin for that kind — j1 ORIGINS / ORIGIN_BR art:{…}, e.g. tt
+   cam 1, cn y 2, nc / bd vu 1, td / thd thi 1; mgOrgLv). Her origin key: mgOrgOf (S.origin; a consort's v.nr.o / v.ag.o / jagent agOrg; a servant "srv";
+   unknown "_" = none). Rank itself gives NO skill — law 5 comes from her harder board as she climbs and from who she meets. Art / upbringing are read live (never saved), measured against the player of seat a (mgRefP: S; a co-op guest reads
    the host's person) so both co-op seats roll the same play.
    Her play = a roll UNDER that ceiling (c − (1 − u)·w, u = mean of 3 draws), THEN the same board ease the player gets from her own art level / rank /
    occasion (mgMedD(d) − mgMedD(0): the skilled bot's measured shift between an easy / matching / hard board). Never a perfect player: even the best hand
@@ -110,12 +111,14 @@ function mgRefP(){try{if(typeof agGuest==="function"&&agGuest()&&typeof consorts
    (saved on her, host / solo only — a co-op guest reads what the host saved) */
 function mgOrgOf(p){try{if(!p||typeof p!=="object")return"_";if(p===S)return(S.origin&&S.origin.k)||"_";if(p.nr&&p.nr.o)return p.nr.o;if(p.ag&&p.ag.o)return p.ag.o;
  if(typeof p.org==="string")return"srv";if(p.rank!=null&&typeof agOrg==="function"&&!(typeof agGuest==="function"&&agGuest())&&typeof consorts==="function"&&consorts().includes(p)){const o=agOrg(p);if(o)return o}}catch(e){}return"_"}
-function mgUp(p){const U=BAL.ag.mg2.hand.up||{},k=mgOrgOf(p);return U[k]!=null?U[k]:(U._||0)}
-/* (2) + (3): the hand an NPC plays with now = her hand + art lift + upbringing lift (o.lv: the level the caller already knows for this kind) */
+/* the start art bậc her upbringing gave her for this kind (the origin's art:{stat: bậc}, the highest over the kind's stats — as kg82LvFor reads arts) */
+function mgOrgLv(p,kind){try{const O=typeof originByKey==="function"?originByKey(mgOrgOf(p)):null;if(!O||!O.art)return 0;let m=0;kg82FormulaOf(kind).forEach(([s])=>{if(s!=="help"&&O.art[s])m=Math.max(m,+O.art[s]||0)});return cl(m,0,5)}catch(e){return 0}}
+/* (2) + (3): the hand an NPC plays with now = her hand + art lift, her art level = max(her own level, her upbringing's start bậc) (o.lv: the level the caller
+   already knows for this kind) */
 function mgHandEff(kind,p,o){const h=mgHand(kind,p);if(!p||typeof p!=="object")return h;const H=BAL.ag.mg2.hand,R=mgRefP();if(!R||p===R)return h;
- const lv=x=>{try{return kg82LvFor(x,kind)}catch(e){return 0}};const lp=o&&o.lv!=null&&isFinite(+o.lv)?cl(+o.lv,0,5):lv(p);
- return Math.round((h+(H.art||0)*(lp-lv(R))+mgUp(p)-mgUp(R))*100)/100}
-window.mgHandEff=mgHandEff;window.mgBand=mgBand;window.mgRefP=mgRefP;window.mgOrgOf=mgOrgOf;window.mgUp=mgUp;
+ const lv=x=>{let v=0;try{v=kg82LvFor(x,kind)}catch(e){}return Math.max(v,mgOrgLv(x,kind))};const lp=Math.max(o&&o.lv!=null&&isFinite(+o.lv)?cl(+o.lv,0,5):lv(p),mgOrgLv(p,kind));
+ return Math.round((h+(H.art||0)*(lp-lv(R)))*100)/100}
+window.mgHandEff=mgHandEff;window.mgBand=mgBand;window.mgRefP=mgRefP;window.mgOrgOf=mgOrgOf;window.mgOrgLv=mgOrgLv;
 window.mgHand=mgHand;
 function mgSkipRaw(t){return cl(Math.round(mgMedD(t&&t.d!=null?t.d:0)),0,10)}
 window.mg2On=mg2On;window.mgWith=mgWith;window.mgMedD=mgMedD;window.mgNpcTier=mgNpcTier;window.mgNpcRaw=mgNpcRaw;window.mgSkipRaw=mgSkipRaw;window.MGX=MGX;
