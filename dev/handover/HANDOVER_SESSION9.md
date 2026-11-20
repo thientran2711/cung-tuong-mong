@@ -1600,3 +1600,4 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - OWNER (talks to ROOT-79 chat still; ROOT-79 relays): weekend-playable = land-queue priority filter. Kit-bgtone B picked. Waits on her: main-push permission; re-test list of mini-games; skill-gap share knob (rec 20–30 %).
 - STANDBY: none yet (owner was given the STANDBY paste at 16:05Z).
 - trig_01B8YuNe4EkX6ekT5X5Cazx9 (ROOT-80 hourly) — next main: create its own wake, then disable this one (and ROOT-79's trig_01ETFPaBo7mX5R8xb4SRqruF).
+- (20/11 19:36Z) ROOT-80 opened child MAIN ROOT-81 = session_01Rc5AsMW4846eL7xhTpzvjQ (depth 1). ROOT-80 stops; ROOT-81 disables trig_01B8YuNe4EkX6ekT5X5Cazx9.
