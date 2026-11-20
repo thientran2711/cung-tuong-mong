@@ -501,8 +501,8 @@ BAL.start={
  cnv: {sac:[45,70],tai:[10,25],tamco:[25,35],duc:30,danh:2,sung:0,bac:8,suc:85,th:0,hh:0},
  quan:{sac:[45,75],tai:[25,40],tamco:[15,30],duc:40,danh:12,sung:8,bac:90,suc:80,th:0,hh:0},
  npcW:{quan:40,tt:8,dtq:8,muoi:10,cn:6,ch:3,thd:10,td:3,nc:1,bd:1,cnv:0},
- npc:{danh:8,bac:20,art:4,mal:6,duc:10,study:60,focus:4}  /* per NPC rank: Danh +8, Bạc +20, art points +4 to her two best courses; malice moves Tâm cơ ±(malice−40)/mal and Đức ∓(malice−40)/2, duc = Đức of her years of palace conduct (keeps NPC Đức ≈ the old mean 48);
-   study = % a month she takes a lesson (j85 npcStudy, beside j8 npcMonthly), focus = weight of her best art in that pick */
+ npc:{danh:8,bac:20,art:4,mal:6,duc:10,study:60,focus:4,mal0:40,malDuc:2,ducJ:5,favJ:[20,5]}  /* per NPC rank: Danh +8, Bạc +20, art points +4 to her two best courses; malice moves Tâm cơ ±(malice−40)/mal and Đức ∓(malice−40)/2, duc = Đức of her years of palace conduct (keeps NPC Đức ≈ the old mean 48);
+   study = % a month she takes a lesson (j85 npcStudy, beside j8 npcMonthly), focus = weight of her best art in that pick; mal0 = the neutral malice (no NPC given one), malDuc = its Đức divisor, ducJ = Đức jitter ±, favJ = Thái hậu / Hoàng hậu favour jitter R(favJ[0])−favJ[1] */
 };
 /* ONE ladder for every art (ARTS) and every Tứ đức course (VIR): points 0–100, bậc 0–5 by floor (tier), named (nm); bậc 5 Tông sư = 100 points = a lifetime's mastery.
    gain: points per lesson point (the lesson game gives 1–3; teachers more) at each bậc — the higher, the slower (bot table in the report).
@@ -540,7 +540,7 @@ BAL.steal.m={feign:{b:30,w:{sung:.35},art:.75,win:{sung:1},lose:{sung:-3,duc:-1}
     road:{b:4,w:{sac:.35,sung:.25},art:2,win:{sung:8,danh:3},lose:{sung:-8,danh:-2},rel:18,hh:2,ghen:20}};
 BAL.steal.art={fav:1,dis:.75,neu:0};
 BAL.steal.keep={base:35,sung:.3,sac:.1,art:1,rung:1,gain:2,oan:1.5,npcP:.85};/* names agreed with night-final (jnf nfOdds "keep"): odds = base + Sủng×sung + Sắc×sac + best art×art + mood; gain = Sủng when nobody took her night; oan = × of the robbed hit; npcP = chance a flipped NPC presses it, costs nothing (night-final value) */
-BAL.steal.ea={mat:5,r0:5,rMat:4,disc:35};
+BAL.steal.ea={mat:5,r0:5,rMat:4,disc:35,w:2 /* draw weight of a month art his trait prizes (Trọng tài: Cầm/Kỳ/Thi/Họa · Mê sắc: Vũ); others 1 */};
 /* STEAL MINI-GAME (owner 16/11 ~22:20Z, PARKING_LOT #3b; jsmg.js): before a Tranh sủng / Chặn ngự giá try the one who tries may play ONE short tài nghệ
    game (an existing one, KIT tài nghệ frame). raw ≥ win → THAT try's odds go up `rung` rung(s) on the word ladder (BAL.odds.cut, keeping the place inside
    the band; capped at Nắm chắc / BAL.odds.hi); lose or skip → unchanged (no extra loss). art = the game per act (feign: Hát, road: Múa — "múa một khúc

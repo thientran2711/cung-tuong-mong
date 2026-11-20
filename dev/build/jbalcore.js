@@ -49,9 +49,9 @@ function origSet(p,k,npc){const o=origRow(k);p.org=k;p.arts=p.arts||{};p.artp=p.
  for(const a of ARTS){p.arts[a.k]=0;p.artp[a.k]=0}for(const v of (typeof VIR!=="undefined"?VIR:[])){p.vir[v.k]=0;p.virp[v.k]=0}
  p.sac=origRoll(o.sac);p.tai=origRoll(o.tai);p.tamco=origRoll(o.tamco);p.duc=origRoll(o.duc);p.suc=origRoll(o.suc);
  const ap0={},R0=origArtRow(k,npc&&npc.road);for(const a in R0)if(ARTS.some(x=>x.k===a))ap0[a]=origArtPts(R0[a]);
- if(npc){const N=BAL.start.npc,rk=npc.rank|0,mal=npc.malice==null?40:npc.malice;
-  p.tamco=cl(p.tamco+Math.round((mal-40)/N.mal),0,100);p.duc=cl(p.duc+Math.round((40-mal)/2)+R(11)-5+N.duc,0,100);
-  p.danh=origRoll(o.danh)+rk*N.danh;p.bac=origRoll(o.bac)+rk*N.bac;p.th=origRoll(o.th)+R(20)-5;p.hh=origRoll(o.hh)+R(20)-5;
+ if(npc){const N=BAL.start.npc,rk=npc.rank|0,mal=npc.malice==null?N.mal0:npc.malice;
+  p.tamco=cl(p.tamco+Math.round((mal-N.mal0)/N.mal),0,100);p.duc=cl(p.duc+Math.round((N.mal0-mal)/N.malDuc)+R(2*N.ducJ+1)-N.ducJ+N.duc,0,100);
+  p.danh=origRoll(o.danh)+rk*N.danh;p.bac=origRoll(o.bac)+rk*N.bac;p.th=origRoll(o.th)+R(N.favJ[0])-N.favJ[1];p.hh=origRoll(o.hh)+R(N.favJ[0])-N.favJ[1];
   const best=Object.keys(ap0).sort((a,b)=>ap0[b]-ap0[a]).slice(0,2);if(!best.length)best.push("cam");for(const b of best)ap0[b]=(ap0[b]||0)+rk*N.art}
  else{p.danh=origRoll(o.danh);p.bac=origRoll(o.bac);p.sung=origRoll(o.sung);p.th=origRoll(o.th);p.hh=origRoll(o.hh)}
  for(const a in ap0)if(p.arts[a]!=null||ARTS.some(x=>x.k===a))crsSet(p.arts,p.artp,a,ap0[a]);
@@ -75,7 +75,7 @@ function growPeak(p){if(!p)return;const pk=p.pk=p.pk||{};for(const k of BAL.grow
 (function(){const a0=ap;ap=function(p,o){try{growPeak(p);if(p&&p!==S&&!window.__noGrow)o=growScale(p,o)}catch(e){}return a0.apply(this,arguments.length>2?[p,o].concat([].slice.call(arguments,2)):[p,o])}})();
 /* ---- the Emperor's month art (owner 23:05Z) ---- */
 function empArtMonth(){if(!S||S.dead||!S.emp)return"";const E=S.emp;if(E.ea&&E.ea.m===S.turn)return"";
- const W=ARTS.map(a=>{let w=1;try{if((["cam","ky","thi","hoa"].includes(a.k)&&has("trongtai"))||(a.k==="vu"&&has("mesac")))w=2}catch(e){}return [a.k,w]});
+ const W=ARTS.map(a=>{let w=1;try{if((["cam","ky","thi","hoa"].includes(a.k)&&has("trongtai"))||(a.k==="vu"&&has("mesac")))w=BAL.steal.ea.w}catch(e){}return [a.k,w]});
  let r=Math.random()*W.reduce((s,x)=>s+x[1],0),f=W[0][0];for(const [k,w] of W){if((r-=w)<0){f=k;break}}
  const rest=ARTS.map(a=>a.k).filter(k=>k!==f);E.ea={m:S.turn,f,d:rest[R(rest.length)]};return""}
 function empArt(){const E=S&&S.emp;return E&&E.ea&&E.ea.m===S.turn?E.ea:null}
@@ -98,7 +98,7 @@ function stealArtB(p,mode){const M=mode==="keep"?BAL.steal.keep:(BAL.steal.m[mod
 /* the odds a person SEES (owner note r1 #6): without the month-art part when she does not know his month art (eaKnows); the roll uses the true odds */
 function stealArtN(p,mode){const M=mode==="keep"?BAL.steal.keep:(BAL.steal.m[mode]||{}),b=stBestArt(p);if(!b)return 0;return Math.round(BAL.art.odds[b.l]*BAL.steal.art.neu*(M.art==null?1:M.art))}
 function stealShown(a,mode){const t=mode==="keep"?oKeep(a):oSteal(a,mode==="road"?"road":"feign");if(!empArt()||eaKnows(a))return t;
- const m=mode==="keep"?"keep":mode==="road"?"road":"feign";return Math.max(5,Math.min(95,t-stealArtB(a,m)+stealArtN(a,m)))}
+ const m=mode==="keep"?"keep":mode==="road"?"road":"feign";return Math.max(BAL.odds.lo,Math.min(BAL.odds.hi,t-stealArtB(a,m)+stealArtN(a,m)))}
 function stealBase(a,mode){const M=BAL.steal.m[mode];let o=M.b;for(const k in M.w){const v=k==="sac"?effSac(a):(a[k]||0);o+=v*M.w[k]}return o+stealArtB(a,mode)}
 function oKeep(p){const K=BAL.steal.keep;return odA(p,K.base+(p.sung||0)*K.sung+effSac(p)*K.sac+stealArtB(p,"keep")+stealFit(p)+mm())}
 /* a failed Tranh sủng / Chặn ngự giá: the loss of that choice (BAL.steal.m[mode].lose); returns the line */
