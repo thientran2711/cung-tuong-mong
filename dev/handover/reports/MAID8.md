@@ -18,3 +18,17 @@ Gate: chưởng sự 4/4 PASS; ma ma 4/4 FAIL only S32 hai tà (expected).
 - Chưởng sự: tím cà softer than round 3 ✔, powder blue in large areas ✔, sleeves moderately wide (like round 3) ✔. B's roster tablet reads a bit like a wooden paddle. A/C/D also hang keys/pouch at the waist (staff signs, not held).
 - Ma ma: jade main + powder blue large ✔; both are blue family so the two colours are close (owner may want a stronger contrast). C's silver crown-piece looks a little like a tiara. Faces look about as young as the chưởng sự (young a36 as asked).
 Open for the owner: pick a design per role; ma ma jade vs powder blue too close?
+
+## HOLD note
+The HOLD messages (queued 15:10Z/15:12Z) reached this session only at 15:18Z, after round 4 had been fired (~15:15Z): round 4 = 1 080 cr already spent. Reported to Foreman C #2.
+
+## ROUND 5 (owner GO "tiến hành vẽ lại cung nữ, chưởng sự, mama", brief maid-edits-1162.md items 1–6, 8) — 4 × 135 = 540 cr
+| rank | gen | look |
+|---|---|---|
+| Nhị đẳng | dt4ZloSXSL | round-1 outfit: pink half-sleeve bijia, blue skirt + long blue sleeves ✔, hair up ✔; bijia hip-length, about the same length as round 1 and round 3 (owner's length question: not shortened) |
+| Nhất đẳng | ov6GUhR829 | blue skirt + whole blue sleeves with pink embroidered cuff band ✔, pink vest + two pink panels ✔, sleeves visibly smaller than round 3 (≈ round 1) ✔, hair up ✔ |
+| Chưởng sự | xSBvcwljfW | round-3 robe in tím cà, powder blue sash + collar band + inner skirt ✔, sleeves smaller than round 3 ✔, ledger + keys ✔; purple only slightly softer |
+| Ma ma a36 | aFGT4bhfSh | one closed jade dress, no open coat ✔, blue collar band, high sash, front panel, cuffs ✔, umbrella, bun ✔; plain-looking |
+Thô sử / tam đẳng (round 3) and nữ quan (round 2) kept, not redrawn.
+Sheet (A37, NEW big + old rounds small under each rank): dev/handover/review-sheets/maid7/m18_maid_ladder_v5_so_sanh.webp (395 KB). Ledger 4× MAID7-TEST. Prompts test5_*.txt (make5.py), CHANGES.md §ROUND 5. No redraw, no cut-outs.
+All same face, mouth closed, no earrings, no hair flowers, no broom.
