@@ -431,3 +431,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | GAP kc-fail-effects J3c (opus; home cards hide fail effects, whole group) | review/kc-fail-effects | B | session_01N1tNP6BY715rYe4KHs14ko | RUNNING | 20/11 10:20Z |
 | REVIEW ge-batu (BIG opus E28r) of e0424d54 | review/ge-batu | FOREMAN E #17 | session_01DgYSWokELeSAzf9p9MFqAS | RUNNING | 20/11 11:26Z |
 | GAP GE03 ge-map «Sơ đồ nhánh» page (sonnet; on kitBranchMap 90b7e797) | review/ge-map; briefs/root77-ge-map.md | MAIN ROOT-77 | session_01Rc5AsNQDQXeYG8Yk7ugFpA | RUNNING | 20/11 10:36Z |
+| FOREMAN E #18 (opus; child of E #17, depth 8 = LAST) | handover FOREMAN_E_STATUS | FOREMAN E #17 | session_01DgYSWnmvkdgnzELwSixER7 | RUNNING | 20/11 11:42Z |
