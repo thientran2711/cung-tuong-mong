@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"f10c227a+","t":"2026-11-20T12:17Z","c":"cal-p2c test 9: expected offset from the loaded player's own class","b":"1a15f2062a5e","h":[{"s":"bf7cc4de+","t":"2026-11-20T11:56Z","c":"Mời khách khi chủ vắng nhà: khách chờ đúng luật"},{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"},{"s":"f6f4a69c+","t":"2026-11-20T11:10Z","c":"Sổ luân hồi thêm trang «Sơ đồ nhánh»"},{"s":"d941502e","t":"2026-11-20T11:16Z","c":"Chip điểm và đồng hồ trò chơi: chỉ còn con số, đồng hồ hổ phách khi gấp"},{"s":"c12231a1","t":"2026-11-20T11:05Z","c":"Trò chơi không chữ nhóm b: Đặt hoa có hình chỉ dẫn, bỏ chữ trên bàn chơi"},{"s":"62e3c9f1+","t":"2026-11-20T09:47Z","c":"cal-p2b-rv: tests follow the review fixes (cal-p2b C reads FAN/COOL; ag-mgcal 3 compares K2 with its own group band)"},{"s":"d5b8c01b","t":"2026-11-20T10:25Z","c":"Khung chung: sơ đồ nhánh, biển Thiên mệnh hai sắc (trang còn tắt)"},{"s":"8c8b6fd7","t":"2026-11-20T09:45Z","c":"Trò chơi không chữ: khung trò dùng chung bộ khung chuẩn"}]};
+window.CTM_BI={"s":"02e2d634+","t":"2026-11-20T12:27Z","c":"cal-p2c test 9: expected offset from the loaded player's own class","b":"6b8bd5d2d3b0","h":[{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"},{"s":"39228682+","t":"2026-11-20T10:45Z","c":"Phi tần khác cũng rủ nàng lập phe, vào phe của nàng (luật hai chiều)"},{"s":"d39e3d2c+","t":"2026-11-20T12:07Z","c":"Nút «Mua» ở tiệm chơi một mình chạy lại; lời dẫn từng xuất thân chương 1–3"},{"s":"bf7cc4de+","t":"2026-11-20T11:56Z","c":"Mời khách khi chủ vắng nhà: khách chờ đúng luật"},{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"},{"s":"f6f4a69c+","t":"2026-11-20T11:10Z","c":"Sổ luân hồi thêm trang «Sơ đồ nhánh»"},{"s":"d941502e","t":"2026-11-20T11:16Z","c":"Chip điểm và đồng hồ trò chơi: chỉ còn con số, đồng hồ hổ phách khi gấp"},{"s":"c12231a1","t":"2026-11-20T11:05Z","c":"Trò chơi không chữ nhóm b: Đặt hoa có hình chỉ dẫn, bỏ chữ trên bàn chơi"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3761,7 +3761,7 @@ function facMonth(){let ev="";S.facs=(S.facs||[]).filter(f=>facMembers(f).length
  /* AG-ALL-2e2: with the day plan on, an NPC founds / asks to join / leaves / sells out / divides through her own options (jagacts3 cx3:fac*, the same functions as facAct) */
  if(!p3FacOn())for(const v of liveRivals(true)){if(facOf(v))continue;
   const fr=others(v).filter(x=>(x===S||x.alive)&&!sameHouse(v,x)&&(aff(v,x)>=35||clanOf(v)===clanOf(x)&&aff(v,x)>=15||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=30&&oan(x,e)>=30)));
-  const x=mindPickBy(fr.filter(y=>y!==S),y=>BAL.mind.pick.j10fr.base+Math.max(0,aff(v,y)),v);/* npc-mind: was FIRST */if(x&&roll(25)){const g=facOf(x);/* RECEIVER CHOICE (jrcv): the leader / the friend answers */const r=g?askJoin(v,g):rcvAsk("facFound",v,x);ev+=eyes(S)>=2||g&&facOf(S)===g?r:""}}
+  const x=mindPickBy(fr,y=>BAL.mind.pick.j10fr.base+Math.max(0,aff(v,y)),v);/* npc-mind: was FIRST; facfound-parity: she is in fr too (law 1, her answer = jrcv card) */if(x&&roll(25)){const g=facOf(x);/* RECEIVER CHOICE (jrcv): the leader / the friend answers */const r=g?askJoin(v,g):rcvAsk("facFound",v,x);ev+=eyes(S)>=2||g&&facOf(S)===g?r:""}}
  const mine=facOf(S);for(const f of S.facs){if(f===mine)continue;const l=facLeader(f);const oa=l&&l!==S&&!facOf(S)&&aff(l,S)>=35?npcWhy("facAsk",{p:l,minAff:35},()=>roll(10)):null;if(oa)rcvAsk("facInvite",l,S)/* npc-purpose G2 reason + her card: the 4 answers (jrcv) */}
  if(mine){const od=npcWhy("facDiv",{mine});const l=od&&od.who;if(l&&l!==S&&roll(5)){const r=divide(l,mine);if(r)ev+=r}}/* npc-purpose G2: a rival leader who bears her a grudge divides her faction */
  return ev}
@@ -35224,6 +35224,21 @@ function kitSceneEnd(ov,label,onClick){if(!ov)return null;ov.querySelectorAll(".
  if(!b){b=document.createElement("button");b.type="button";b.className="kbtn kmend";ov.appendChild(b)}ov.classList.add("km-endon");kitSceneFit(ov);b.textContent=label||"Tiếp theo";if(onClick)b.onclick=e=>{e.stopPropagation();onClick()};return b}
 window.kitSceneEnd=kitSceneEnd;
 
+/* ---------- KIT §81.1 kitEntryGate (K-OI-1 / KP07, review/kit-podium-gate; OD:L1244 + L1261): the ENTRY animation «palace gate → selection hall» ----------
+   kitEntryGate({kind, origin, road, to}) — kind "consort" (sedan: tt dtq muoi ch thd td) · "bride" (bridal sedan + envoy: nc bd) · "maid" (cnv: maids behind a mama) · "corridor" (cn: the Càn Thanh corridor);
+   to = the name of the selection she is about to enter (joi.js oiGate passes oiSel().head). A kmStage scene (queued with kmPush, one at a time): a painted gate whose two leaves swing open while the picture
+   pushes in, the caption «<cap> · Vào <to>», then ONE kit button (KIT §81, label by kind) — an outside tap only skips to the final frame. Gọn / reduced motion = the final frame at once.
+   ART SLOTS (Foreman C paints, nothing is drawn in code): img/kit/entry-gate-bg-<kind>.webp (the scene, 4:3), entry-gate-door-l.webp / entry-gate-door-r.webp (the two leaves, transparent, hinged at the outer edge).
+   A slot not on the CDN yet is listed once for painting (kitPhNote "entry") and the scene stays complete without it: dark gate ground, two plain kit-paper leaves (kind colour), the caption. */
+const KEG={consort:{cap:"Cổng cung",end:"Vào điện",col:"#8f1d1d"},bride:{cap:"Kiệu hoa đến cổng cung",end:"Vào điện",col:"#8f1d1d"},maid:{cap:"Cổng bên của cung nữ",end:"Theo ma ma",col:"#6a4a2a"},corridor:{cap:"Hành lang Càn Thanh",end:"Tiếp theo",col:"#1f2d4a"}};
+function kegPic(n){const s=`${KM_DIR}${n}.webp`;try{if(typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&!KIT_CDNHAVE.has(s)){if(typeof kitPhNote==="function")kitPhNote("entry",n,"light","Cổng cung · "+n);return""}}catch(e){}return s}
+function kitEntryGate(o){o=o||{};const kind=KEG[o.kind]?o.kind:"consort",K=KEG[kind];const bg=kegPic("entry-gate-bg-"+kind),dl=kind==="corridor"?"":kegPic("entry-gate-door-l"),dr=kind==="corridor"?"":kegPic("entry-gate-door-r");
+ const rm=`onerror="this.remove()"`;const to=o.to?kmEsc(String(o.to).replace(/<[^>]+>/g,"").trim()):"";
+ const door=(side,src)=>kind==="corridor"?"":src?`<img class="kmeg-d kmeg-d${side}" src="${src}" alt="" draggable="false" ${rm}>`:`<span class="kmeg-d kmeg-d${side} kmeg-dp" aria-hidden="true"></span>`;
+ const html=`<div class="kmeg kmeg-${kind}${bg?" kmeg-art":""}" style="--keg:${K.col}">${bg?`<img class="kmeg-bg" src="${bg}" alt="" draggable="false" ${rm}>`:""}<span class="kmeg-glow" aria-hidden="true"></span><div class="kmeg-gate">${door("l",dl)}${door("r",dr)}</div>`+
+  `<div class="kmeg-cap"><small>${K.cap}</small><b>${to?"Vào "+to:"Nhập cung"}</b></div></div>`;
+ kmPush(done=>{kmStage("km-gate km-gate-"+kind,html,{dur:3800,end:o.end||K.end,onEnd:done})})}
+window.kitEntryGate=kitEntryGate;
 /* ---------- stage overlay ---------- */
 function kmStage(cls,html,o){o=o||{};const red=kmReduced();const ov=document.createElement("div");ov.className="kmov "+cls+(red?" km-red km-skip":"");
  ov.setAttribute("role","dialog");ov.innerHTML=`<div class="kmst">${html}</div>${o.manual?"":`<div class="kmhint">${o.hint||"Chạm để bỏ qua"}</div>`}`;document.body.appendChild(ov);
@@ -35456,6 +35471,25 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
  padding:max(12px,env(safe-area-inset-top)) 16px max(12px,env(safe-area-inset-bottom));user-select:none;-webkit-user-select:none;cursor:pointer;overflow:hidden}
 .kmov.km-out{animation:kmFadeOut .24s ease forwards}
 .kmst{position:relative;width:100%;max-width:760px;max-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.km-gate{background:radial-gradient(ellipse at 50% 38%,#3a2418,#150c08 80%)}
+.kmeg{position:relative;width:min(92vw,560px,calc((100dvh - 190px)*4/3));aspect-ratio:4/3;overflow:hidden;border:1px solid var(--gold);border-radius:var(--k-rad,8px);box-shadow:0 0 0 3px #f6ead655,0 14px 40px #000a;background:linear-gradient(#2a1a12,#120a07 70%);perspective:900px;margin:0 auto}
+.kmeg-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kmegPush calc(3.4s*var(--pace,1)) ease-out both}
+.kmeg-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 52%,#ffe7a8cc 0,#f0b64f66 28%,transparent 62%);opacity:0;animation:kmegGlow calc(1.8s*var(--pace,1)) ease-out calc(.6s*var(--pace,1)) both}
+.kmeg-gate{position:absolute;left:14%;right:14%;top:12%;bottom:12%;display:flex;transform-style:preserve-3d}
+.kmeg-maid .kmeg-gate{left:24%;right:24%;top:18%}
+.kmeg-d{flex:1 1 50%;min-width:0;height:100%;object-fit:contain;display:block;box-sizing:border-box}
+.kmeg-dl{transform-origin:0 50%;animation:kmegOpenL calc(1.7s*var(--pace,1)) cubic-bezier(.4,.1,.2,1) calc(.5s*var(--pace,1)) both}
+.kmeg-dr{transform-origin:100% 50%;animation:kmegOpenR calc(1.7s*var(--pace,1)) cubic-bezier(.4,.1,.2,1) calc(.5s*var(--pace,1)) both}
+.kmeg-dp{background:linear-gradient(90deg,color-mix(in srgb,var(--keg) 80%,#000),var(--keg) 40%,color-mix(in srgb,var(--keg) 70%,#000));border:2px solid var(--trim,#d9b25f);box-shadow:inset 0 0 0 3px #00000040}
+.kmeg-dl.kmeg-dp{border-radius:6px 0 0 6px}.kmeg-dr.kmeg-dp{border-radius:0 6px 6px 0}
+.kmeg-corridor .kmeg-glow{background:radial-gradient(ellipse at 50% 55%,#b9c8ff55 0,#6e86c444 32%,transparent 66%)}
+.kmeg-cap{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 10px;text-align:center;background:linear-gradient(transparent,#0009 60%);color:#fffaf0;animation:kmFade calc(.8s*var(--pace,1)) ease-out calc(1.4s*var(--pace,1)) both}
+.kmeg-cap small{display:block;font-size:.76rem;letter-spacing:.06em;color:#f6ead6c0}.kmeg-cap b{font-family:var(--display);font-size:1.2rem;text-shadow:0 1px 3px #000}
+@keyframes kmegPush{from{transform:scale(1)}to{transform:scale(1.12)}}
+@keyframes kmegGlow{from{opacity:0}to{opacity:1}}
+@keyframes kmegOpenL{from{transform:rotateY(0)}to{transform:rotateY(-84deg)}}
+@keyframes kmegOpenR{from{transform:rotateY(0)}to{transform:rotateY(84deg)}}
+@media (prefers-reduced-motion:reduce){.kmeg *{animation:none!important}.kmeg-dl{transform:rotateY(-84deg)}.kmeg-dr{transform:rotateY(84deg)}.kmeg-glow,.kmeg-cap{opacity:1}.kmeg-bg{transform:scale(1.12)}}
 .kmov{--kmend-room:calc(68px + env(safe-area-inset-bottom,0px))}
 .kmov.km-endon{box-sizing:border-box;padding-bottom:var(--kmend-room)}
 /* KIT 81b (owner 17/11 toil-reveal bug): a FULL-BLEED scene (its own backdrop fills the screen: .km-full) has NO padding top or bottom, so the backdrop runs edge to edge
@@ -39474,7 +39508,7 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
    Solo: o = the open shop (KSHOP.reg), the tile found by key, the same checks and onBuy as the tile's button. In the host's run for her
    (window.__kshBuild set by jcoopthinf, her context) the shop is rebuilt from HER data (kitShop data mode). True when the onBuy ran; the
    tile's stock (a count per opening) and the quantity reset stay with the open shop. */
-function kitShopBuy(key,k,q,mode){let o=KSHOP.reg[key];const B=window.__kshBuild;if(typeof B==="function"){o=B(key);if(o)o.mode=mode==="sell"?"sell":"buy"}
+function kitShopBuy(key,k,q,mode){let o=KSHOP.reg[key];const B=window.__kshBuild;if(typeof B==="function"){const o2=B(key);if(o2){o=o2;o.mode=mode==="sell"?"sell":"buy"}}/* solo / no co-op context: B returns undefined and the open shop stays (tut-road: it used to overwrite o and no solo buy ran) */
  if(!o||(mode&&o.mode!==mode))return false;const x=kitShopRaw(o).find(y=>y&&y.k===k);if(!x)return false;q=Math.max(1,q|0);if(kitShopWhyQ(o,x,q))return false;
  try{x.onBuy&&x.onBuy(x,q)}catch(err){console.error(err)}if(x.stock!=null&&!x.sell)x.stock-=q;o.q=o.q||{};o.q[x.k]=1;return true}
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHOP.reg){const o=KSHOP.reg[k];if(o.det!=null&&document.querySelector(`.kshop[data-kshop="${k}"] .kshdet`)){o.det=null;kitShopRefresh(k);e.stopPropagation();e.preventDefault();return}}}},true);
@@ -60774,6 +60808,8 @@ window.KBM_SAMPLE={b:"sample",n:"Cung nữ · Đường vào cung",count:{txt:"�
   {i:3,n:"?",st:"o",ch:0,slots:[{sh:"t",ti:"?"},{sh:"a",ti:"?"}],fail:{n:"?"},card:{txt:"Chưa ai biết ngả này dẫn tới đâu."}}]};
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§82.1",title:"kitTitlePlate «Thiên mệnh» hai sắc · hàng có nhãn là danh hiệu",where:"mọi chỗ danh hiệu Thiên mệnh (thẻ trên sân khấu, tab Danh hiệu, Bảng Thiên mệnh, Sổ luân hồi); hàng có nhãn là bảng danh hiệu xếp bảng trên, giá trị dưới",html:()=>{try{const a=kitTitlePlate({id:"ge_x_1t",name:"Phượng triều thiên hạ",tier:8,sh:"t"},{id:false}),b=kitTitlePlate({id:"ge_x_1a",name:"Phượng triều thiên hạ",tier:8,sh:"a"},{id:false}),c=kitTitlePlate({id:"s8",name:"Phượng minh thiên hạ",tier:8},{id:false});return `<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">${a}${b}${c}</div><div class="kpb">${kitRows([[a,["Đạt được khi nàng ngồi vững ngôi Hoàng hậu"],"t"],["Trên đầu","chưa mang danh hiệu nào"]])}</div>`}catch(e){return ""}}})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§21.2",title:"kitBranchMap · Sơ đồ nhánh",where:"Sổ luân hồi (trang Sơ đồ nhánh): một sơ đồ cho mỗi nhánh; chạm một nút để xem thẻ",html:()=>{try{const id="kbmsample";setTimeout(()=>{const el=document.getElementById(id);if(el)kitBranchMapMount(el,window.KBM_SAMPLE)},0);return `<div id="${id}" style="max-width:760px;margin:0 auto"></div>`}catch(e){return ""}}})}catch(e){}
+/* KIT §81.1 sample (review/kit-podium-gate): the entry gate scene, one play button per kind */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§81.1",title:"kitEntryGate · cổng cung → điện tuyển",where:"một lần mỗi kiếp trước thẻ chọn đầu tiên trong cung (joi.js oiGate); bốn loại: consort · bride · maid · corridor",html:()=>`<div style="display:flex;gap:8px;flex-wrap:wrap">${["consort","bride","maid","corridor"].map(k=>`<button type="button" class="kbtn alt" onclick="kitEntryGate({kind:'${k}',to:'Điện tuyển'})">${k}</button>`).join("")}</div>`})}catch(e){}
 /* KIT §13.4 sample: the tài nghệ frame with her live figure (wide) — on the Fold (html.kv1) the column is not drawn */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.4",title:"kitGameFrame + kitGameFig · khung tài nghệ có hình toàn thân của nàng",where:"MỌI trò tài nghệ (thi, học, tự luyện, Điểm trang, khảo hạch…) qua kg82Open; cột trái chỉ ở màn rộng (kv2)",html:()=>{try{return `<div class="mg kpanel kgame kg82" style="position:relative;max-width:760px;margin:0 auto">${kitGameFrame({art:"Đàn",title:"Tấu khúc",how:"Chạm đúng dây khi hoa chạm vạch son.",hud:[["score","Phần","0/10"],["round","Hồi","1/20"],["time","Còn","30 giây"]],id:"kgsample",fig:true})}</div>`}catch(e){return ""}}})}catch(e){}
 /* ================= jdh: DANH HIỆU — the achievement title system, game logic (owner 16/11 13:00Z / 13:15Z / 13:20Z / 13:25Z (D) / 13:30Z;
@@ -66349,6 +66385,49 @@ const INTRO={
  s:{nhap14:"{N} ghi tên ngươi vào sổ cung nữ, nghiêm giọng: “Đã vào làm kẻ hầu thì phải biết việc, biết lễ, biết đường. Mấy việc này làm trước, sai một là bị phạt.”",
   sung14:"{N} liếc nhìn ngươi: “Kẻ hầu cũng có ngày được Hoàng thượng để mắt, nhưng phải tự lo cho mình: mặt mũi gọn gàng, biết chỗ ngự giá hay qua, có chút bạc riêng.”",
   tap14:"{N} dặn: “Ở lâu trong cung mới biết, kẻ hầu sống nhờ đồng liêu. Kết lấy người, biếu chút quà, luyện tay nghề, thì mới có chỗ đứng.”"}};
+/* per-origin beat (OD:L1259 STORY FIRST, STORY_ROADS_PLAN phase 2): why THIS girl does the same quests, told from HER origin (one line per origin
+   × chapter) and, in chapter 1, from her rolled road's own subject (ARC67[S.st.f14.road].sj: every road has one; a road whose subject still
+   holds a {placeholder} filled only when the road starts tells that person unnamed, SJ0 below). Only words: deeds, rewards and numbers stay the quests' own (one core).
+   {X}/{x} = how she is addressed (say()). */
+const BEAT={
+ tt:{nhap14:"Cha {x} là Tể tướng, đưa {x} vào cung để có người của phủ bên long sàng. Việc đầu là ra mắt bề trên cho đủ lễ, thay y phục cho xứng danh phủ Tể tướng.",
+  sung14:"Phủ Tể tướng gửi thư hỏi {x} đã được ngự giá nhớ mặt chưa. Đổi bớt đồ trong rương lấy bạc, điểm trang chỉnh tề, nhờ thái giám Nội vụ phủ mua giúp một món để dâng lên.",
+  tap14:"Người trong phủ dặn: một mình thì khó đứng, phải có chị em và một nghề trong tay. Kết một phi tần, học thêm một buổi tài nghệ, thân cận với cung nữ."},
+ dtq:{nhap14:"Cha {x} nắm binh quyền ngoài biên ải, trong cung ai cũng dè chừng. Ra mắt bề trên cho đủ lễ, biết lối đi lối về, ăn vận không để ai chê nhà võ thô lỗ.",
+  sung14:"Nhà võ chỉ biết giữ nước, ít biết lo quà cáp chốn cung đình. Bán bớt đồ trong rương lấy bạc, điểm trang cho tươm tất, nhờ thái giám Nội vụ phủ mua giúp một món.",
+  tap14:"Cha ở xa, trong cung {x} chỉ có một mình. Phải có chị em qua lại, một nghề trong tay, một cung nữ biết giữ lời."},
+ ch:{nhap14:"Thái hậu là cô mẫu, nhưng vào cung rồi {x} vẫn phải tự đứng vững. Ra mắt Thái hậu và Hoàng hậu cho đủ lễ, biết lối đi, ăn vận cho xứng cháu ngoại tộc của Thái hậu.",
+  sung14:"Có Thái hậu chống lưng nhưng muốn được ngự giá nhớ vẫn phải tự lo. Đổi đồ trong rương lấy bạc, điểm trang, nhờ thái giám Nội vụ phủ mua một món dâng lên.",
+  tap14:"Thái hậu dặn: đừng chỉ dựa vào cô mẫu. Kết chị em trong Hậu cung, học một môn tài nghệ, giữ cung nữ thân cận cho chắc."},
+ muoi:{nhap14:"Bổng lộc còn thiếu, mà buổi họp mặt đầu đã có kẻ chê áo xiêm của nhà buôn muối. Ra mắt bề trên, thay y phục cho phải phép để khỏi ai cười.",
+  sung14:"Nhà buôn biết giá từng món. Muốn lo quà cáp thì cần bạc: bán đồ trong rương, nhờ thái giám Nội vụ phủ mua giúp một món, người ấy về sau còn dùng đến. Bạc tiêu đi, tháng sau sẽ tiếc.",
+  tap14:"Không có thân thế đỡ lưng, {x} chỉ có tay nghề và tính toán. Kết một phi tần, học thêm một buổi tài nghệ, giữ lòng cung nữ."},
+ thd:{nhap14:"Nhà nghèo, chữ nghĩa là của hồi môn duy nhất. Ra mắt bề trên cho đủ lễ, thay y phục chỉnh tề, kẻo bị cười là nữ nhi nhà nghèo vào cung.",
+  sung14:"Một nữ nhân nhà nho khó có bạc dư. Bán bớt đồ trong rương, điểm trang tươm tất, nhờ thái giám Nội vụ phủ mua giúp một món cần dùng.",
+  tap14:"Chữ nghĩa chỉ có giá khi có người đọc. Kết một phi tần, học thêm tài nghệ, giữ cung nữ thân cận."},
+ td:{nhap14:"Người quản gia cũ của nhà gửi lời từ ngoài cung, nhắn {x} dò xem ai gác cửa hông. Ra mắt bề trên cho đủ lễ, rồi đi một vòng xem nơi nào ra vào được.",
+  sung14:"Muốn lần ra manh mối thì cần bạc mua tin và dung nhan để ngự giá nhớ mặt. Bán đồ trong rương, điểm trang, nhờ thái giám Nội vụ phủ mua giúp một món. Kẻ gác cổng cũng sẽ nhớ mặt {x}.",
+  tap14:"Một người trong Hậu cung nói được lời đỡ, một nghề trong tay giữ được thể diện. Một mình {x} không lần ra được."},
+ nc:{nhap14:"Lễ bộ muốn thấy {x} giữ đúng quy củ cung đình. Thỉnh an cho đủ lễ, biết lối đi lối về; sứ thần theo hầu sẽ khó chịu nếu {x} cúi đầu quá thấp.",
+  sung14:"Thái hậu đã để mắt sơ qua, nhưng muốn được ngự giá nhớ thì phải có bạc lo việc và dung nhan chỉnh tề. Bán đồ mang theo, nhờ thái giám Nội vụ phủ mua giúp một món.",
+  tap14:"Xứ lạ thì cần người quen. Kết chị em trong Hậu cung, học một môn tài nghệ, giữ cung nữ biết tiếng của {x}."},
+ bd:{nhap14:"Khả hãn gửi {x} sang làm người hòa thân, Lễ bộ nhìn xem có giữ quy củ không. Ra mắt bề trên cho đủ lễ, thay y phục theo phép cung đình, đừng để ai bảo người thảo nguyên thô lỗ.",
+  sung14:"Mang theo của hồi môn từ thảo nguyên, món nào không dùng thì đổi bạc. Điểm trang, nhờ thái giám Nội vụ phủ mua giúp một món để lo cho ngự giá.",
+  tap14:"Xa quê thì phải có người quen. Kết chị em trong Hậu cung, học một môn tài nghệ, giữ cung nữ thân cận."},
+ cn:{nhap14:"Nay đã là chủ tử, nhưng vài cung nữ cũ vẫn nhớ {x} từng bưng trà. Ra mắt bề trên cho đủ lễ, thay y phục cho đúng phẩm cấp, để không ai bảo {x} chưa quen vị trí.",
+  sung14:"Không có nhà sau lưng nên mọi thứ phải tự lo. Bán đồ trong rương, điểm trang, nhờ thái giám Nội vụ phủ mua giúp một món; vài kẻ đồng liêu cũ sẽ nhìn xem {x} chi tiêu ra sao.",
+  tap14:"Người cũ biết rõ {x}, người mới còn dò xét. Kết một phi tần, học thêm tài nghệ, thân cận với cung nữ."},
+ cnv:{nhap14:"Ngươi mới vào làm kẻ hầu, chủ nhân nhìn việc tay chân trước tiên. Làm xong mấy việc hầu hạ, học lễ nghi, biết lối đi lối về thì khỏi bị mắng oan.",
+  sung14:"Chủ nhân cần một món quà dâng lên bậc trên; ngươi chải chuốt, thêu khăn cho khéo, đi qua Ngự hoa viên lúc ngự giá hay dạo. Việc này làm tốt sẽ được tin cậy, nhưng kẻ bị giành mất cơ hội sẽ oán ngươi.",
+  tap14:"Đồng liêu nâng nhau thì sống, dìm nhau thì chết. Nói chuyện, biếu quà một người, luyện thêu thùa cho giỏi."}};
+/* a road's person is cast only when the road starts (j67 newThread67 fill67), so a {v}/{foe}/{mis} subject is told without a name: the
+   person stays unnamed here and is named by the road itself (law 6b: nobody is made up); any other {tag} → no road line */
+const SJ0={v:"một phi tần",foe:"một phi tần",mis:"chủ nhân"};
+function roadSj(){try{const id=S.st.f14&&S.st.f14.road,a=id&&typeof ARC67!=="undefined"&&ARC67[id];if(!a)return "";
+ const sj=String(a.sj||"").replace(/\{(v|foe|mis)\}/g,(m,k)=>SJ0[k]);if(!sj||/\{[^}]*\}/.test(sj))return "";return sj.replace(/\bngươi\b/g,"{x}")}catch(e){return ""}}
+function beatLine(m){try{const o=S.origin&&S.origin.k,t=BEAT[o]&&BEAT[o][m.id];if(!t)return "";
+ let r=say(t);if(m.id==="nhap14"){const sj=roadSj();if(sj)r+=" "+say("Điều {x} canh cánh trong lòng là "+sj+".")}return r}catch(e){return ""}}
+window.tq14Beat=beatLine;window.tq14Intro=m=>introCard(m);
 function variant(){return srvNow()?"s":"c"}
 function defOf(v,ch,id){return ((TQ[v]||{})[ch]||[]).find(q=>q.id===id)||null}
 function need(id){const N=QB().need||{};return N[id]||1}
@@ -66384,10 +66463,10 @@ window.tq14Real=function(m,st){/* jst14 «Lỡ dịp» rule: did she really fini
 /* the chapter opens: quests given, the narrator tells the beat (one kit card instead of the plain chapter card) */
 function init(m){const v=variant();const L=((TQ[v]||{})[m.id]||[]).map(q=>({id:q.id,n:0}));if(L.length)m.q14={v,L}}
 function introCard(m){if(quiet||window.__bot||typeof kitPanel!=="function")return;const c=S.st.ch,d=MS67[m.id],n=narr();
- const rows=[["Lời dặn",say(INTRO[m.q14.v][m.id]).replace("{N}",esc(n.name)+(n.office?`, ${esc(n.office)},`:""))],["Mục tiêu",d.g()],
+ const rows=[["Lời dặn",say(INTRO[m.q14.v][m.id]).replace("{N}",esc(n.name)+(n.office?`, ${esc(n.office)},`:""))],...(beatLine(m)?[["Duyên cớ",beatLine(m)]]:[]),["Mục tiêu",d.g()],
   ["Phần thưởng",`mỗi việc xong: Bạc +${QB().bac[m.q14.v]}; đủ việc và đạt mục tiêu: phần thưởng của chương`],msHan67(m,1)];
- kitPanel({kind:"info",title:`Chương ${c.n}: ${d.t()}`,sub:`${n.name} dặn`,sections:[{h:"",rows:rows.slice(0,2).map(r=>[r[0],r[1],r[2]||""])},
-  {h:"Việc phải làm",html:qChecks(m)},{h:"",rows:rows.slice(2).map(r=>[r[0],r[1],r[2]||""])}],subject:n.face||null,btn:"Đã hiểu"})}
+ kitPanel({kind:"info",title:`Chương ${c.n}: ${d.t()}`,sub:`${n.name} dặn`,sections:[{h:"",rows:rows.slice(0,rows.length-2).map(r=>[r[0],r[1],r[2]||""])},
+  {h:"Việc phải làm",html:qChecks(m)},{h:"",rows:rows.slice(rows.length-2).map(r=>[r[0],r[1],r[2]||""])}],subject:n.face||null,btn:"Đã hiểu"})}
 (function(){const m0=msStart67;msStart67=function(id){if(!(typeof f14==="function"&&f14()&&F14T.test(id)))return m0.apply(this,arguments);
  /* the same steps as j67 msStart67, with the quests set before anything is shown */
  const c=S.st.ch;c.n++;S.st.ms={id,r0:S.rank,t0:S.turn};S.st.M=null;const d=MS67[id];init(S.st.ms);
@@ -75105,8 +75184,10 @@ agRunReg("cx3:threat",v=>{const s=p3ThreatT(v);return s?p3Res("threat",String(th
 Object.assign(window,{itemTest,hireTake,staffTam,recommend,searchMaids});
 /* ---------------- phe phái: Lập phe cùng · Xin vào phe · Rời phe · Bán đứng · Ly gián (j10 facAct for her = found / askJoin / leaveFac / sellOut / divide; the same for an NPC) ---------------- */
 function p3FacOn(){return p3On()&&!!BAL.ag.par3.fac}
-function p3FacFr(v){const F=BAL.ag.par3.fac;return others(v).filter(x=>x&&x!==S&&x.alive&&!x.out&&!facOf(x)&&!sameHouse(v,x)&&(aff(v,x)>=F.frAff||clanOf(v)===clanOf(x)&&aff(v,x)>=F.clanAff||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=F.sharedOan&&oan(x,e)>=F.sharedOan)))}
-function p3FacJoin(v){const F=BAL.ag.par3.fac;return (S.facs||[]).filter(f=>{const l=facLeader(f);return l&&l!==S&&aff(v,l)>=F.clanAff})}
+function p3FacFr(v){const F=BAL.ag.par3.fac;return others(v).filter(x=>x&&(x===S||x.alive&&!x.out)&&!facOf(x)&&!sameHouse(v,x)&&(aff(v,x)>=F.frAff||clanOf(v)===clanOf(x)&&aff(v,x)>=F.clanAff||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=F.sharedOan&&oan(x,e)>=F.sharedOan)))}
+function p3FacJoin(v){const F=BAL.ag.par3.fac;return (S.facs||[]).filter(f=>{const l=facLeader(f);return l&&l!==v&&aff(v,l)>=F.clanAff})}
+/* facfound-parity (law 1 TWO-WAY): she can rủ an NPC to found a faction and ask to join an NPC's faction (j10 facAct lap / xin), so an NPC may rủ HER
+   (p3FacFr keeps S) and ask to join HER faction (p3FacJoin keeps a faction she leads); her answer is the jrcv card (PEND.rcvAsk facFound / facJoin, 4 answers) */
 function p3FacFoe(v){const F=BAL.ag.par3.fac;const mine=facOf(v);return (S.facs||[]).filter(f=>f!==mine&&facMembers(f).filter(x=>x!==v).length>=2&&facMembers(f).reduce((s,m)=>s+agSpite(v,m),0)/facMembers(f).length>=F.foeOan)}
 Object.assign(AGC3BTN,{facFound:"Lập phe cùng",facJoin:"Xin vào phe",facLeave:"Rời phe",facSell:"Bán đứng",facDiv:"Ly gián"});
 Object.assign(AGC3ACT,{facFound:"rủ người lập phe",facJoin:"xin vào phe",facLeave:"rời phe",facSell:"bán đứng phe mình",facDiv:"ly gián một phe"});
@@ -82724,7 +82805,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="1a15f2062a5e";window.CTM_BUILD=BUILD;
+const BUILD="6b8bd5d2d3b0";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
