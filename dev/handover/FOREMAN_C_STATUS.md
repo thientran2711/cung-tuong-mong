@@ -681,3 +681,4 @@ NEWACCT#5 ~18:02Z: OWNER Lượt 1298: Quý phi t6 prompt OK; asked recheck → 
 NEWACCT#5 ~18:04Z: OWNER Lượt 1300: Tần petal/lotus look NOT liked → Tần = wrap robe same family as Phi/Quý phi, not petal hem. Sent to DESIGN5 as correction.
 NEWACCT#5 ~18:07Z: DESIGN5 28bb2ff done BEFORE the L1300 correction (t4 still petal) → it is redoing t4; also told: t7 'satin'→'brocade' sync, t8 train exemption next to S19. Not sent to owner yet.
 NEWACCT#5 ~18:12Z: OWNER Lượt 1303: embroidery flowers t1–t6 = each person's OWN hair-flower species (not all peony); t7/t8 untouched → JOB 2 added to B26FAB brief (same builder, sequential).
+NEWACCT#5 ~18:14Z: OWNER Lượt 1305: HH t8 NO train (no space) → DESIGN5 told; S19 stays.
