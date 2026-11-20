@@ -496,4 +496,4 @@ ROOT-69 08:10Z: COLLAR1 DONE acdc5b8 G21 (a36/a51/a65 t1/t2 pre-G17 words, t3 cr
 ROOT-69 08:12Z: RANK8-A rolled (38.6 %, handover RANK8-A.md b01aa7b; did G22 Tần af2d618). RANK8-A2 session_01PEhRbwi8QNB5aZmUpY8fT9 opened: t5/t6 square test s62 (2 gens) + skins/rejected rule (owner: rejected-for-defect pictures NOT skins). COLLAR1 doing legs fix.
 ROOT-69 HANDOVER ~08:12Z: depth 3, ctx ~29 % (START ~5 % + 25 % close). TAKEOVER_FOREMAN_C_ROOT70.md written; opening ROOT-70 as child; trigger trig_01CFFH65FCGKiMGpiryTkMAf deleted.
 
-ROOT-70 ~08:15Z: depth 4, START_CTX ~5 %. Took over from ROOT-69. Open: t5/t6 test (RANK8-A2), t4 Tần no-collar-phrase removal + 1 test gen, NEWACCT takeover pack (owner: chuyển nhà).
+ROOT-70 ~08:15Z: depth 4, START_CTX ~5 %. Took over from ROOT-69. Open: t5/t6 test (RANK8-A2), t4 Tần no-collar-phrase removal + 1 test gen, NEWACCT takeover pack (owner: chuyển nhà).ROOT-69 08:32Z: OWNER moving house: TAKEOVER_FOREMAN_C_NEWACCT.md updated with START HERE block (mass t7+t8 a18 at once, no asking, stop at 52 000 cr; t6 2-layer + B neckline verdict; neckline rewrite proposal pending). Prompt given to owner to paste in the new account.
