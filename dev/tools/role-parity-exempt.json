@@ -1,145 +1,149 @@
 [
-{
-"reason": "UI only (a tab / group header / pager / navigation button, not an act)",
-"re": "^label:.*\\d+/\\d+$"
-},
-{
-"reason": "UI only (a tab / group header / pager / navigation button, not an act)",
-"re": "^label:(Trang sức|Y phục|Vải vóc|Thuốc men|Hương liệu|Lễ vật|Thư từ|Tác phẩm|Dấu ấn|Tạp vật|Tất cả) \\d+$"
-},
-{
-"reason": "UI only (a tab / group header / pager / navigation button, not an act)",
-"label": "ⓘ"
-},
-{
-"reason": "UI only (a tab / group header / pager / navigation button, not an act)",
-"label": "Phe phái hậu cung"
-},
-{
-"reason": "UI only (a tab / group header / pager / navigation button, not an act)",
-"label": "Triều đình"
-},
-{
-"reason": "UI only (a tab / group header / pager / navigation button, not an act)",
-"label": "Các lối, sách phổ"
-},
-{
-"reason": "UI only (a tab / group header / pager / navigation button, not an act)",
-"label": "Túi đồ"
-},
-{
-"reason": "UI only (a tab / group header / pager / navigation button, not an act)",
-"label": "Thú cưng"
-},
-{
-"reason": "UI only (a tab / group header / pager / navigation button, not an act)",
-"label": "Việc"
-},
-{
-"reason": "UI only (a tab / group header / pager / navigation button, not an act)",
-"label": "Đổi ›"
-},
-{
-"reason": "UI only (a tab / group header / pager / navigation button, not an act)",
-"label": "Cùng cung"
-},
-{
-"reason": "UI only: the person card's kit tab «Chuyện cũ» (jpcf SKIP_TAB, data-pct) switches the card to the info panel of past events (Sở trọng / Đã biết / Dạo này + jmem blocks); it is a tab, not an act — reviewer item (d)",
-"label": "Chuyện cũ"
-},
-{
-"reason": "movement (Dư đồ / day-plan place): NPCs move by their day plan (agDrawB + travel(), same khắc) — not an act key",
-"re": "^label:(Đến gặp|Đến cung nàng thăm)"
-},
-{
-"reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
-"label": "Xem sổ nguyệt sự"
-},
-{
-"reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
-"label": "Xem lén sổ nguyệt sự"
-},
-{
-"reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
-"label": "Hầu chuyện, xem lén sổ nguyệt sự"
-},
-{
-"reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
-"label": "Xem sổ thị tẩm"
-},
-{
-"reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
-"label": "Xem người"
-},
-{
-"reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
-"label": "Hỏi người hầu: đó là ai?"
-},
-{
-"reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
-"label": "Sai tai mắt dò nơi ở"
-},
-{
-"reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
-"label": "Nghe ngóng chung"
-},
-{
-"reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
-"label": "Mời thái y bắt mạch"
-},
-{
-"reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
-"label": "Sang Thái y viện xin bắt mạch"
-},
-{
-"reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
-"label": "Xin bắt mạch"
-},
-{
-"reason": "mini-game: an NPC plays Điểm trang through its draw (jagtoil tl2, OD L1640 minigame fairness); same judgement toilFx (ag-all-parity part 5)",
-"label": "Điểm trang"
-},
-{
-"reason": "emotion card (BAL.ea.card): NPC side jemoact eaNpcWeek, same card table, chance by feeling (ag-all-parity 1a, NUM, no AG key)",
-"re": "^label:(Đọc sách giải khuây|Đàn hát tự thưởng|Đập đồ|Mắng cung nữ|Khóc thầm|Viết thư nhà)"
-},
-{
-"reason": "first meeting (k61 greet): NPCs already know each other; NPC→her approach = jgreet gmOpts (ag-all-parity 1b); the whole k61 stranger gate (j61 k61Gate: «Chào hỏi» / «Hành lễ», then «Hỏi danh tính» / «Kính cẩn hỏi danh tính»): an NPC learns a name through k61Week npcWit / npcTell (npc-purpose G3) — law 11 family (G1 #14)",
-"re": "^label:(Chào hỏi|Hành lễ|Hỏi danh tính|Kính cẩn hỏi danh tính)$"
-},
-{
-"reason": "witness card: an NPC who sees a deed answers through agSeeNpc hear/join/mediate/ignore (ag-all-parity 1c, SAME choice set)",
-"label": "Nghe lén câu chuyện"
-},
-{
-"reason": "Tố xa xỉ: her card may accuse on a GUESS (jshelf shelfCause 'guess', owner rule in jshelf: 'The player may guess at anyone; an NPC guesses only in the monthly pass'); the NPC side is that monthly pass (shelfNpcAccuse: seen room / guess at BAL.shelf.acc.guessO → the same shelfAccuse / ACT.xx) + the day plan on a SEEN lavish dress (jdress mindMenu, xxCause). Both sides run one act; the probe's day plan sees only the second (role-parity part 2, verified)",
-"key": "harm:xx"
-},
-{
-"reason": "UI only (jstaff elderGroups kit group tab «Chức việc» of a palace elder's card: shows her post, not an act; role-parity-3)",
-"label": "Chức việc"
-},
-{
-"reason": "information only (jrcp food-taste knowledge: «Hỏi thái y kiêng kỵ» / «Sai cung nữ dò la khẩu vị» tell her what a person likes or must avoid; an NPC cook already reads that record, as the other information-only rows; role-parity-3)",
-"re": "^label:(Hỏi thái y kiêng kỵ|Sai cung nữ dò la khẩu vị)$"
-},
-{
-"reason": "self-dress (jwdinv / jinv item menu Đeo / Tháo / Cài / Mặc / May áo): an NPC dresses through j92 wdNpcDress → wdAutoFor → wdApply, the same wdApply as her «Tự chọn đồ»; a choice of what to wear, not an act on anyone (role-parity-3; listed for C-AG as a judgement call: the NPC side is a monthly auto-dress, not an AG option)",
-"re": "^label:(Đeo|Tháo|Cài|Mặc|May áo)$"
-},
-{
-"label": "Cúi đầu lui tránh",
-"roles": [
-"maid"
-],
-"reason": "the decline of srvTalk emp (keep her place, Đức +1): an NPC maid's same choice is keeping her routine instead of «Quỳ dâng trà» (jagstaff mindPick vs BAL.ag.routine) — not an act (B4 role-parity-4b, applied by B3)"
-},
-{
-"reason": "Cùng chơi (jpma): ACT.pmplay is only the co-op ask carrier of the ONE act whose NPC side is cx3:pmPlay (agReg consort pm, the same RCVK receiver answers and pmRun); the probe reads the label through ACT.n as a harm key. Both sides hold it (person-minigame-acts, dev/test/person-minigame-acts.test.js)",
-"key": "harm:pmplay"
-},
-{
-"reason": "Thách đấu (jpma): ACT.pmduel is only the co-op ask carrier of the ONE act whose NPC side is cx3:pmDuel (agReg consort pm, the same RCVK receiver answers and pmRun); the probe reads the label through ACT.n as a harm key. Both sides hold it (person-minigame-acts, dev/test/person-minigame-acts.test.js)",
-"key": "harm:pmduel"
-}
+ {
+  "reason": "UI only (a tab / group header / pager / navigation button, not an act)",
+  "re": "^label:.*\\d+/\\d+$"
+ },
+ {
+  "reason": "UI only (a tab / group header / pager / navigation button, not an act)",
+  "re": "^label:(Trang sức|Y phục|Vải vóc|Thuốc men|Hương liệu|Lễ vật|Thư từ|Tác phẩm|Dấu ấn|Tạp vật|Tất cả) \\d+$"
+ },
+ {
+  "reason": "UI only (a tab / group header / pager / navigation button, not an act)",
+  "label": "ⓘ"
+ },
+ {
+  "reason": "UI only (a tab / group header / pager / navigation button, not an act)",
+  "label": "Phe phái hậu cung"
+ },
+ {
+  "reason": "UI only (a tab / group header / pager / navigation button, not an act)",
+  "label": "Triều đình"
+ },
+ {
+  "reason": "UI only (a tab / group header / pager / navigation button, not an act)",
+  "label": "Các lối, sách phổ"
+ },
+ {
+  "reason": "UI only (a tab / group header / pager / navigation button, not an act)",
+  "label": "Túi đồ"
+ },
+ {
+  "reason": "UI only (a tab / group header / pager / navigation button, not an act)",
+  "label": "Thú cưng"
+ },
+ {
+  "reason": "UI only (a tab / group header / pager / navigation button, not an act)",
+  "label": "Việc"
+ },
+ {
+  "reason": "UI only (a tab / group header / pager / navigation button, not an act)",
+  "label": "Đổi ›"
+ },
+ {
+  "reason": "UI only (a tab / group header / pager / navigation button, not an act)",
+  "label": "Cùng cung"
+ },
+ {
+  "reason": "UI only: the person card's kit tab «Chuyện cũ» (jpcf SKIP_TAB, data-pct) switches the card to the info panel of past events (Sở trọng / Đã biết / Dạo này + jmem blocks); it is a tab, not an act — reviewer item (d)",
+  "label": "Chuyện cũ"
+ },
+ {
+  "reason": "movement (Dư đồ / day-plan place): NPCs move by their day plan (agDrawB + travel(), same khắc) — not an act key",
+  "re": "^label:(Đến gặp|Đến cung nàng thăm)"
+ },
+ {
+  "reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
+  "label": "Xem sổ nguyệt sự"
+ },
+ {
+  "reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
+  "label": "Xem lén sổ nguyệt sự"
+ },
+ {
+  "reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
+  "label": "Hầu chuyện, xem lén sổ nguyệt sự"
+ },
+ {
+  "reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
+  "label": "Xem sổ thị tẩm"
+ },
+ {
+  "reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
+  "label": "Xem người"
+ },
+ {
+  "reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
+  "label": "Hỏi người hầu: đó là ai?"
+ },
+ {
+  "reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
+  "label": "Sai tai mắt dò nơi ở"
+ },
+ {
+  "reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
+  "label": "Nghe ngóng chung"
+ },
+ {
+  "reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
+  "label": "Mời thái y bắt mạch"
+ },
+ {
+  "reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
+  "label": "Sang Thái y viện xin bắt mạch"
+ },
+ {
+  "reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
+  "label": "Xin bắt mạch"
+ },
+ {
+  "reason": "mini-game: an NPC plays Điểm trang through its draw (jagtoil tl2, OD L1640 minigame fairness); same judgement toilFx (ag-all-parity part 5)",
+  "label": "Điểm trang"
+ },
+ {
+  "reason": "emotion card (BAL.ea.card): NPC side jemoact eaNpcWeek, same card table, chance by feeling (ag-all-parity 1a, NUM, no AG key)",
+  "re": "^label:(Đọc sách giải khuây|Đàn hát tự thưởng|Đập đồ|Mắng cung nữ|Khóc thầm|Viết thư nhà)"
+ },
+ {
+  "reason": "first meeting (k61 greet): NPCs already know each other; NPC→her approach = jgreet gmOpts (ag-all-parity 1b); the whole k61 stranger gate (j61 k61Gate: «Chào hỏi» / «Hành lễ», then «Hỏi danh tính» / «Kính cẩn hỏi danh tính»): an NPC learns a name through k61Week npcWit / npcTell (npc-purpose G3) — law 11 family (G1 #14)",
+  "re": "^label:(Chào hỏi|Hành lễ|Hỏi danh tính|Kính cẩn hỏi danh tính)$"
+ },
+ {
+  "reason": "witness card: an NPC who sees a deed answers through agSeeNpc hear/join/mediate/ignore (ag-all-parity 1c, SAME choice set)",
+  "label": "Nghe lén câu chuyện"
+ },
+ {
+  "reason": "Tố xa xỉ: her card may accuse on a GUESS (jshelf shelfCause 'guess', owner rule in jshelf: 'The player may guess at anyone; an NPC guesses only in the monthly pass'); the NPC side is that monthly pass (shelfNpcAccuse: seen room / guess at BAL.shelf.acc.guessO → the same shelfAccuse / ACT.xx) + the day plan on a SEEN lavish dress (jdress mindMenu, xxCause). Both sides run one act; the probe's day plan sees only the second (role-parity part 2, verified)",
+  "key": "harm:xx"
+ },
+ {
+  "reason": "UI only (jstaff elderGroups kit group tab «Chức việc» of a palace elder's card: shows her post, not an act; role-parity-3)",
+  "label": "Chức việc"
+ },
+ {
+  "reason": "information only (jrcp food-taste knowledge: «Hỏi thái y kiêng kỵ» / «Sai cung nữ dò la khẩu vị» tell her what a person likes or must avoid; an NPC cook already reads that record, as the other information-only rows; role-parity-3)",
+  "re": "^label:(Hỏi thái y kiêng kỵ|Sai cung nữ dò la khẩu vị)$"
+ },
+ {
+  "reason": "self-dress (jwdinv / jinv item menu Đeo / Tháo / Cài / Mặc / May áo): an NPC dresses through j92 wdNpcDress → wdAutoFor → wdApply, the same wdApply as her «Tự chọn đồ»; a choice of what to wear, not an act on anyone (role-parity-3; listed for C-AG as a judgement call: the NPC side is a monthly auto-dress, not an AG option)",
+  "re": "^label:(Đeo|Tháo|Cài|Mặc|May áo)$"
+ },
+ {
+  "label": "Cúi đầu lui tránh",
+  "roles": [
+   "maid"
+  ],
+  "reason": "the decline of srvTalk emp (keep her place, Đức +1): an NPC maid's same choice is keeping her routine instead of «Quỳ dâng trà» (jagstaff mindPick vs BAL.ag.routine) — not an act (B4 role-parity-4b, applied by B3)"
+ },
+ {
+  "reason": "Cùng chơi (jpma): ACT.pmplay is only the co-op ask carrier of the ONE act whose NPC side is cx3:pmPlay (agReg consort pm, the same RCVK receiver answers and pmRun); the probe reads the label through ACT.n as a harm key. Both sides hold it (person-minigame-acts, dev/test/person-minigame-acts.test.js)",
+  "key": "harm:pmplay"
+ },
+ {
+  "reason": "Thách đấu (jpma): ACT.pmduel is only the co-op ask carrier of the ONE act whose NPC side is cx3:pmDuel (agReg consort pm, the same RCVK receiver answers and pmRun); the probe reads the label through ACT.n as a harm key. Both sides hold it (person-minigame-acts, dev/test/person-minigame-acts.test.js)",
+  "key": "harm:pmduel"
+ },
+ {
+  "reason": "UI only (a VIEW: the per-art palace ladder standings «Bảng tài nghệ hậu cung», jpma round C; opens a notice, changes nothing in the world, not an act toward anyone)",
+  "re": "^label:Bảng tài nghệ hậu cung$"
+ }
 ]

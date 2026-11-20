@@ -158,7 +158,7 @@ function pmBtns(v){if(!v||!live(v)||v===S||isSrvSafe())return[];const here=toget
 /* two more entries of the «Gặp mặt» group (each its own act card, counted by the group tab) */
 let PMCUR=null;
 if(typeof rvCard==="function"&&typeof pcard==="function"){const r0=rvCard;rvCard=function(v){PMCUR=v;try{return r0.apply(this,arguments)}finally{PMCUR=null}};window.rvCard=rvCard;
- const p0=pcard;pcard=function(o){try{const v=PMCUR;if(v&&o&&o.tabKey==="rival"&&Array.isArray(o.groups)){const g=o.groups.find(x=>x&&x[0]==="Gặp mặt");if(g&&Array.isArray(g[1]))g[1].push(...pmBtns(v),...pmLadBtn(v))}}catch(e){console.error(e)}return p0.apply(this,arguments)};window.pcard=pcard}
+ const p0=pcard;pcard=function(o){try{const v=PMCUR;if(v&&o&&o.tabKey==="rival"&&Array.isArray(o.groups)){const g=o.groups.find(x=>x&&x[0]==="Gặp mặt");if(g&&Array.isArray(g[1]))g[1].push(...pmBtns(v))}}catch(e){console.error(e)}return p0.apply(this,arguments)};window.pcard=pcard}
 function pmOpen(v,a){pushDil(mkP("pmPick",{v:v.id,a}),a==="play"?"Cùng chơi":"Thách đấu");try{showModal()}catch(e){}}
 function pmGoTap(id,a){const v=RV(id);if(!v||S.dead||Q.length)return;if(together(S,v)){pmOpen(v,a);render();return}
  S.pmGo={v:id,a,bk:bkey()};goSee(id);if(together(S,v)){S.pmGo=null;pmOpen(v,a)}render()}
@@ -294,8 +294,10 @@ PEND.pmLad=pp=>{const v=pp&&pp.v!=null?RV(pp.v):null;
  return{who:v?pv(v):null,t:`<p>Bảng tài nghệ hậu cung: xem thứ bậc của môn nào?</p><p class="past">Ba người đầu mỗi môn được thêm Danh mỗi tháng; ai đứng dưới có thể thách người trên để giành chỗ.</p>`,
   o:B().lad.arts.map(k=>{const L=pmLad(k),top=L[0];return{n:pmKindN(k),fx:{},x:`ngươi thứ ${pmLadPos(S,k)} / ${L.length}${v?` · ${v.name} thứ ${pmLadPos(v,k)}`:""}${top?` · đứng đầu: ${top===S?"ngươi":top.name}`:""}`,
    go:()=>{pushModal({t:`Bảng tài nghệ · ${pmKindN(k)}`,who:top?pv(top):null,h:pmLadHTML(k)});/* the figure = the art's leader */try{showModal()}catch(e){}}}}).concat([{n:"Thôi",fx:{}}])}};
-function pmLadBtn(v){if(!v||isSrvSafe())return[];const l=pmLadLine(v);return[pbtn(`data-pmlad="${v.id}"`,"Bảng tài nghệ",`xem thứ bậc từng môn trong hậu cung${l?` · nàng: ${l}`:""} · không tốn khắc`,"")]}
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-pmlad]");if(b&&!b.disabled){e.preventDefault();e.stopPropagation();pushDil(mkP("pmLad",{v:+b.dataset.pmlad}),"Bảng tài nghệ");try{showModal();render()}catch(x){}}},true);
+/* the entry = a VIEW, not an act toward a person (role-parity): one button at the end of her «Tài nghệ» tab (j83 artTabHTML) */
+function pmLadBtn(){if(isSrvSafe()||S.dead)return"";const l=pmLadLine(S);return pbtn(`data-pmlad="-1"`,"Bảng tài nghệ hậu cung",`xem thứ bậc từng môn${l?` · ngươi: ${l}`:""} · không tốn khắc`,"")}
+if(typeof artTabHTML==="function"){const a0=artTabHTML;artTabHTML=function(){const h=a0.apply(this,arguments);try{return h+pmLadBtn()}catch(e){console.error(e);return h}};window.artTabHTML=artTabHTML}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-pmlad]");if(b&&!b.disabled){e.preventDefault();e.stopPropagation();const id=+b.dataset.pmlad;pushDil(mkP("pmLad",id>=0?{v:id}:{}),"Bảng tài nghệ");try{showModal();render()}catch(x){}}},true);
 /* ---------- memory (jmem): the deeds this act leaves ---------- */
 try{if(window.MEM_DEEDS){Object.assign(MEM_DEEDS,{pmplay:[1,0,"cùng {o} chơi {x}"],pmwin:[-1,0,"thắng {o} một ván {x}, lấy mất món cược"],pmyield:[1,0,"nhường {o} một ván {x}"],pmsaw:[0,0,"xem {o} thắng một ván {x}"],pmlad:[-1,0,"bị {o} giành ngôi trên bảng {x}"]})}
  if(BAL.mem&&BAL.mem.w)Object.assign(BAL.mem.w,B().mem)}catch(e){}
