@@ -16,7 +16,11 @@ const URL0=pos[0]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:
 const [VW,VH]=(pos[1]||'755x1000').split('x').map(Number);const RUNS=+(opt('runs')||2),SPEED=+(opt('speed')||2),MEASURE=A.includes('--measure');
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 /* per-kind extra checks (in-page source, returns {ok, info}); builders add theirs */
-const KIND_CASES={};
+const KIND_CASES={
+ /* hoa (review/mg-craft-hoa): every lever the engine reads sits in the lead's BAL.mgTier.lev.hoa block as [ease0, ease5] (ONE CORE), the score weights add to 1, the tray has 6 slots;
+    the wrong-flower / cut / lean play checks live in dev/test/mg-craft-hoa.js */
+ hoa:()=>{const L=BAL.mgTier.lev.hoa,H=BAL.mgTier.hoa,need=["ghost","cutTol","angTol","alike","sway","limStem"],miss=need.filter(n=>!Array.isArray(L[n])||L[n].length!==2);
+  const ws=Object.values(H.w).reduce((a,b)=>a+b,0);return{ok:!miss.length&&Math.abs(ws-1)<1e-9&&H.n.length===3&&L.alike[0]<=3&&L.alike[0]+1<=6&&L.limStem[0]<L.limStem[1],miss,ws,n:H.n}}};
 /* the engine names the kinds must reach (mirror of KG82_CRAFT; a mismatch = the wiring moved) */
 const KG82_CRAFT_E={theu:"stitch",kim:"papercut",ve:"inkwash",hoa:"ikebana"};
 /* the plain play of a kind: playArt (Cắm hoa has no plain art key — the plain "hoa" is Họa/Vẽ — so it opens by startContest) */

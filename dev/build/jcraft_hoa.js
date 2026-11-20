@@ -13,6 +13,7 @@ const KCH_SEAS=[/* winter · summer · autumn · spring: the main flower + its l
  {k:"sen",fl:{col:"#f19ab8",ctr:"#f0d060",n:9,pt:.3},like:[{col:"#f5b0c8",ctr:"#9bb05a",n:9,pt:.3},{col:"#e98aac",ctr:"#f0d060",n:8,pt:.34},{col:"#f6c0d4",ctr:"#e3b23c",n:10,pt:.28}]},
  {k:"cuc",fl:{col:"#f2c230",ctr:"#a8691a",n:14,pt:.2},like:[{col:"#f6d25a",ctr:"#7a8a3a",n:14,pt:.2},{col:"#ecb020",ctr:"#a8691a",n:12,pt:.22},{col:"#f8dc7a",ctr:"#b8791a",n:16,pt:.18}]},
  {k:"dao",fl:{col:"#f8b4c4",ctr:"#c4425a",n:5,pt:.5},like:[{col:"#fbc4d0",ctr:"#e3b23c",n:5,pt:.5},{col:"#f4a0b6",ctr:"#c4425a",n:6,pt:.44},{col:"#fdd0da",ctr:"#9b4a6a",n:5,pt:.52}]}];
+const KCH_RCP={chrys:"cuc",plum:"mai",peach:"dao"};/* jwkr WKR_FL flower → this board's season flower */
 const KCH_OTHER=[{col:"#8aa4ea",ctr:"#fff4c0",n:6,pt:.38},{col:"#b58ad8",ctr:"#f0e0a0",n:7,pt:.34},{col:"#e8704a",ctr:"#5a2a10",n:8,pt:.3},{col:"#ffffff",ctr:"#444444",n:12,pt:.22}];
 /* one blossom (stand-in): n petals of length pt·r·2, centre disc; droop = wilted (greyed, bent) */
 function kchBloom(g,x,y,r,F,droop){g.save();g.translate(x,y);if(droop){g.rotate(1.15);g.globalAlpha*=.85}
@@ -38,7 +39,9 @@ function kchScene(g,x,y,w,h,si,F,now,fa){g.save();g.beginPath();g.rect(x,y,w,h);
 function kcHoa(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;C.cv.dataset.tam="hoa";const B=BAL.mgTier.hoa,L=n=>mgLev(env,"hoa",n);const NR=B.n.length;
  const hv=Math.min(H*.2,W*.28),MX=W*.5,MY=H*.56,TY=H*.9,HX=W*.07,LU=B.cut*hv,rB=hv*.2,more=Math.min(B.maxMore,mgMore(env));
  const ghost=L("ghost"),cutTol=L("cutTol"),angTol=L("angTol"),sway=L("sway"),nAlike=Math.round(L("alike"));
- const seas=kg82Shuf([0,1,2,3]);let r=-1,sum=0,P=null,phase="",done=false,gest=null,pops=[],falls=[],slash=null,tEnd=0;
+ /* a handmade-work recipe (j83 «Cắm hoa», jwkr WKR_FL) with one of this board's four flowers arranges only that flower: every vase takes its season (orchid / peony / mixed recipes keep the shuffle) */
+ const wk=(typeof wkrNow==="function"&&wkrNow())||null,rf=wk&&wk.kind==="bhoa"&&typeof WKR_FL!=="undefined"?KCH_RCP[WKR_FL[wk.r]]:null,ri=rf?KCH_SEAS.findIndex(x=>x.k===rf):-1;
+ const seas=ri>=0?[ri,ri,ri,ri]:kg82Shuf([0,1,2,3]);let r=-1,sum=0,P=null,phase="",done=false,gest=null,pops=[],falls=[],slash=null,tEnd=0;
  const btn=k91Btns(box,[["k91done","✓","","Cắm xong: chấm thế hoa"]]);const bd=btn.querySelector("#k91done");
  const rad=d=>d*Math.PI/180,dg=a=>a*180/Math.PI,wob=now=>rad(sway*180)*Math.sin(now/110);
  /* target of stem i: length in px (chain Thiên → Nhân → Địa; guests hang off Nhân / Địa alternately) and the lean in degrees */
