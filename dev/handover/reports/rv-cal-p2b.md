@@ -1,4 +1,4 @@
-# REVIEW cal-p2b (BIG, opus) — verdict PASS → LAND READY 62e3c9f1
+# REVIEW cal-p2b (BIG, opus) — verdict PASS → LAND READY f43efc71 (was 62e3c9f1; re-merged LIVE 90b7e797 on ROOT-77 ask)
 Reviewer session_01Rc5AsJGMmUL6NpNpYgiR6c (MAIN ROOT-76). Target review/cal-p2b 45768ff8 (worker session_01Rc5AsJrsgDY7hAuWGR2XNq). Result branch review/cal-p2b-rv 62e3c9f1 = cal-p2b + reviewer fixes + final-merge LIVE fd682a8d (mg-back; via 90d57324 mg-fair-ratio, 66bd36cd mg-play2); index.html/sw.js rebuilt; FF-OK on origin/main fd682a8d.
 PRIORITY #1 CHECK: OD L1997–1999, L2041 (~06:50Z «đạt hết mà toàn 9/10»), L2045 (~07:35Z CANON OVERWRITE: fix broken games only), L2046 (rolling b, Foreman D) | main fd682a8d: jmgt mgGrade/mgLive/mgPace/mgTol/mgLev, j82 kg82Steps, j91 k91Blend/k91Cook, jbal2 BAL.mgTier, BAL.ag.mg2.cal, dev/tools/mgcal_apply.py | review/* cal-p2c (Foreman D, identity offset, not touched here) | claims: this row.
 
@@ -56,3 +56,8 @@ Shots: scratch only (/home/user/wt/rv-calp2b-out/shots, not uploaded; nothing to
 - LAND READY 62e3c9f1 (FF from fd682a8d).
 - After land: tell her the three fixed games (Điều hương, Múa, Nấu ăn) are ready for re-test in Thử tay; their old first tries were dropped so the re-test is the counted first try.
 - Decision for MAIN (not done): whether the 9 pace kinds' first-try b should also be dropped for a re-test (my recommendation: keep; rolling b of cal-p2c covers it).
+
+## Re-merge for ROOT-77 (20/11 ~10:40Z): LIVE 90b7e797 (mg-noword-kit, tooling tests, kit-ge)
+review/cal-p2b-rv **f43efc716542074abc25e98e18d7b19f22bc3c69** = 62e3c9f1 + merge 90b7e797 (index.html/sw.js rebuilt; LIVE's j82/j91/jbal2 edits are the kit no-text pass, no overlap with the reviewed board code; darkCap/reach/blend/FAN-COOL intact). FF-OK on origin/main 90b7e797.
+Tests run one at a time: cal-p2b Fold + iPad PASS · ag-mgcal 0 FAIL · mgcal-apply PASS · mg-visual ALL OK · mg-back 12/12 · score-same-scan 35/0 raw · quickcheck PASS (old save ok; perf render 230/248, tab 535/527, buổi 1347/1200 ms).
+mg-skip FAILs 1 («makeup quick button (kit .kquick, odds word)»: the button shows «●») — SAME FAIL on LIVE 90b7e797 itself (assembled and run): pre-existing from mg-noword-kit's in-play sign pass turning the quick button's odds word into a sign. Not this branch. **For MAIN**: the odds word on that quick button is a VANPHONG odds-ladder display; route to the mg-noword-kit owner.
