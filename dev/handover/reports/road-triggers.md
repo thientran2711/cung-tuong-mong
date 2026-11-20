@@ -60,3 +60,28 @@ or isSrv() → today no j68 life at all in lãnh cung or as a servant. Plan: new
 Art: none needed (existing faces). Write it on a new branch from main or continue review/road-triggers after its verdict.
 
 SẴN SÀNG KIỂM road-triggers 72a9b918d92d79325567e924b0278e7baeeb799e (BIG: rules/numbers)
+
+## ROUND 2 (E26b, opus) — the 3 fixes of road-triggers-review.md @de4cf05a + N1 / N3 / N5
+PRIORITY #1 CHECK ('road-triggers|rtEvent|jrtrig|em_bien|em_cai|em_ke|nrask-m-scan'): OD 0 | ledger 0 | claims 8 | main 0 | review/* 2 (review/road-triggers 72a9b918, review/road-triggers-r1 4bf9ef18) | archive 0.
+Branch review/road-triggers-r1 (continued from 4bf9ef18; origin/main merged, assemble list = main + jrtrig/jnroade, index.html/sw.js rebuilt). Sha: last line.
+
+| Fix | Before (72a9b918) | After |
+|---|---|---|
+| 1 law 6 — event reason truth | rtEvent took ANY ok row → gift / visit / present / cleared all printed «X vừa ra tay với ngươi» | rtKind(x.k): H95 (incl. rumor / expose / giahoa / plot / provoke) → «vừa ra tay»; gift → «X vừa gửi lễ vật cho ngươi»; visit → «X vừa sang thăm ngươi»; other F95 (ally / tieuhuy / Giao thiệp group) → «X vừa tìm đến kết giao với ngươi»; cleared → «X đã hết hiểu lầm ngươi»; NO reason from present / chosen / warn / misbelief and jagent/jagday «ag:*» rows (those are day PLANS that may still be dropped). Friendly score = BAL.arc.trig.evF (new, 1), hostile keeps evK. |
+| 2 law 1 — reverse branch dead | no writer put her as actor → «ngươi vừa ra tay với X» never fired | ONE ledger write where her deed resolves: jrtrig wraps runAct (j9; her doAct, gift / plant picks, j70 plots by her, a sent servant's deed): a===S, target a consort, kind known to the ledger, deed went through (same failure words j95b.js reads for her harm record) → existing writer j95actLog(S,t,k) (id "me"). S.j95b.harm was checked first: hostile only, one per target → cannot carry the friendly side. Reverse lines: «ngươi vừa ra tay với X» / «ngươi vừa gửi lễ vật cho X» / «ngươi vừa sang thăm X» / «ngươi vừa tìm đến kết giao với X». |
+| 3 law 11 / Q1 — Emperor asks | em_bien / em_cai / em_ke: 0 asks → stock card; scan blind to jnroade.js | NRASK em_*_5..10 = 36 asks (2 per chapter, 2 kinds each; kinds th / thu / y / che / hh, «do» only on em_cai), trẫm via {me}/{call} (nrVoiceM → «Trẫm … Ái phi …»), never kind emp, never names an heir, every option on its stock cost (NRASK_ORD = the stock order exported from jnrask_m.js). Each chapter keeps one ask with no hh / queen alias (when she is Hoàng hậu). His help offer now passes his real rival on em_cai ({B} = the strongest old house's head, the "off" asker the house heads use) — before, e.g==="emp" gave no {B} at all, so even em_cai could not draw «do». nrask-m-scan reads jnroade.js (templates + the @nrask-emp block) with the trẫm voice + 4 Emperor rules (no emp kind, no {B}/do without a rival, one ask left for a queen player, heir regex). Content stays inside the OR18 history note (law 8). |
+| N1 | «phe … của X lấn tới» / «X cùng phe … cần ngươi» (a standing state worded as a move) | «X thuộc phe …, đối nghịch với ngươi» / «X cùng phe … với ngươi» |
+| N3 | queen: q72A("hh") hid a debt under "rv:<id>" | both books summed (dedup by q72Key) |
+| N5 | nrask-scan 3 FAIL nc_gian_9 {kha} | the engine fills {kha} (jnroad.js:224, TOK67.kha) → scan SLOT set gets 'kha' → ALL PASS |
+
+### Tests (ROUND 2, on review/road-triggers-r1)
+- dev/test/road-triggers.js (tt / muoi / td × 36 months + off lives + state tests): PASS 31/31, 0 page errors (17 hồi, 11 by reason, 6 timer; gap reason 1.63 / timer 2.5 / off 2.4 months). New: 10 r2 state checks (gift entry never «ra tay»; friendly / neutral / cleared / hostile kinds; HER rumour + HER friendly deed through runAct land in the ledger and give the reverse line; the reverse reason really opens the hồi via rtTry; N1; N3) + 4 Emperor checks (36 asks, «do» only em_cai, his own ask drawn, the real offer nrMenOffer → j72 quest with p.av ≥ 0, «Trẫm … Ái phi», {B} only on em_cai).
+  After merging LIVE 983a9436 (a99673e8): tt × 24 months gives 0 hồi on BOTH the pre-merge and post-merge build (tt's first hồi comes later) → not a regression; the 3×36 run above is on the pre-merge head with the same r2 code.
+  Crash note (reviewer's cnv crash / my first td crash): «Target crashed» came only when other browser jobs ran at the same time (kernel OOM kill in this box); alone, td 36 months runs clean on the r1 base AND on r2. Nothing in jrtrig / jnroade allocates per month beyond the 60-row ledger.
+- nrask-m-scan PASS (20 roads incl. 3 emp, 240 asks); nrask-scan ALL PASS (N5 fixed); nrask scans + one-core-guard (inline 3835 ≤ 4212) / -bind / -text / -text-rule PASS after the merge.
+- role-parity.test.js ×2: 2 FAIL, identical on current origin/main 983a9436 (up:N-ONLY harm:accuse/banphe/uyhiep, P-ONLY cx3:tell, PROMO-npc-onlyRisen) → pre-existing, not touched by this branch → for FOREMAN E's list.
+- QUICKCHECK PASS on the merged head: open 1579 ms · old save ok · perf new/live render 206/225, tab 465/419, buổi 1359/1094 ms, tasks>200ms 19/19 · core gates PASS.
+- Shots (Fold 755x1000 + iPad 1180x820 @2, looked at): hồi dialog «Cớ sự: ta vừa ra tay với …» (the dialog's own first-person voice turns ngươi → ta) and the Emperor's help card («Trẫm … Ái phi …», em_cai ch.7 / ch.10). CDN upload refused (HTTP 401, account E, same as round 1) → not uploaded, nothing committed.
+- Not done / open: N2 (reach) and N4 (old saves) accepted by the reviewer, untouched.
+
+SẴN SÀNG KIỂM road-triggers 255795cafbe70764f709a28d484fdb09e0e5be93
