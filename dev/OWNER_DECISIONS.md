@@ -591,7 +591,7 @@ ANSWERS to open questions:
 - doat-giai pictures with the Emperor handing the prize: KEEP.
 - Huadian size: 8.5%.
 - Ngự tứ pet life-save stage: owner asked coordinator to recommend (Linh thú now vs Trưởng thành) → coordinator decides; pet bar label "No" vs "Đói": owner did not pick → coordinator decides.
-- Co-op: helping/harming/stealing a friend's pet must be wired NOW. RULE: every feature must work in 2-player co-op; no "later".
+- Co-op: helping/harming/stealing a friend's pet must be wired NOW. RULE (restated by owner 20/11 ~21:30Z real, ROOT-79 chat, verbatim: "Cái quan trọng là chơi chung hai người. Cái đó là cái tôi nói với bạn ngay từ đầu. Đó là tôi muốn chơi với bạn của tôi được. Đó, bây giờ mình khi mà mình đưa một tính năng nào lên đó, là phải tính năng nó phải chạy được trên cả hai bản, tức là bản một mình và cả bản hai người nữa."): every feature must work in BOTH solo and 2-player co-op; no "later". LAND GATE: no branch goes live unless it works in solo AND co-op (coop-e2e + the feature's own co-op check: both seats see/do it, two-way); reviewers FAIL a feature that is solo-only.
 - Animation/frames ideas: once ideas are given, BUILD them without waiting for approval. Any future needed animation: just do it.
 
 BALANCE / SYSTEMS:
