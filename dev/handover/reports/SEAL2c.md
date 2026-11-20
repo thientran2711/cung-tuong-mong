@@ -32,3 +32,9 @@ Remaining hh_prompts.ORDER keys tinhtu chuyentam hungkhoi tinhnghich hothen chan
 were held for the whole-set send; no owner OK found in FOREMAN_C_STATUS / SEAL5 / SEAL6 → SKIPPED, waiting. đau: waits (wording). ghen LOOP/BACK: waits.
 → When the owner OKs the Thái hậu units 4+ (or ROOT-60 says the whole-set GO covers them), run them in units of ≤6 using the SEAL2b method (handover in SEAL2.md).
 Side fix: sg2_prompts.py pt/ptl silk/gauze → brocade (A25(3)), so MG4 S11 PASS; marked SUPERSEDED by rank_gian_prompts.py. seal_gate --all sg2 PASS.
+
+## Hoàng quý phi redo (owner ~01:01Z via ROOT-61, rule A28 / S9 updated e13a59f) — DONE
+t7 ornament wording changed (A17 diff: only this): "a BIG Hoàng quý phi phoenix crown as large as a Quý phi's big ornate gold headdress: one gold phoenix with spread wings on an ornate gold crown band set with rubies, sapphires, pearls and jade, with many gold tassels and pearl-and-gold dangles (as big as a Quý phi's headdress, but never larger or grander than an empress's large crown with its spread-wing phoenixes)". The first try was blocked by the old S9 'small' rule → no gen until MG4/ROOT-61 updated S9.
+New: t7y 3zKu15AREY, t7o DoOlPOlpcl (gate PASS, 270 cr). Sheet QP | HQP CŨ | HQP MỚI | HH, labels big on the picture (A27):
+https://ctm-img.victoria-tntt.workers.dev/img/_review/emo-anim-groups/rank-gian-hqp-v2-sheet.jpg
+Look: the crown is now as big as the Quý phi headdress ✓; a single phoenix whose wings are smaller than the Empress's ✓. Faults (list only): its band is about as wide as the Empress's and carries MORE hanging tassels, so at a glance it can read as grand as Hoàng hậu; the medallion is drawn a bit larger than its neighbours; young and older crowns differ slightly in gem colours.
