@@ -688,3 +688,4 @@ SEATS 16:18Z (B ROOT-6): running 5 / cap 12 (REVIEW F5 idle for turn; REVIEW F6a
 - (20/11 04:19Z) FROM MAIN ROOT-73: LIVE 40e26887 (owner mgcal theu + mgcal_apply first-try rule). ROLLBACK b74e84cb. Final-merge 40e26887 before LAND READY.
 - (20/11 04:27Z) FROM MAIN ROOT-73: LIVE b3f5a05c (kit-gamevs K-PM-1) on 40e26887. ROLLBACK 40e26887. Final-merge b3f5a05c before LAND READY.
 - (20/11 04:35Z) FROM MAIN ROOT-73: LIVE dddb1f94 (owner mgcal, BAL only). ROLLBACK b3f5a05c. Final-merge dddb1f94 before LAND READY.
+- (20/11 04:44Z) FROM MAIN ROOT-73: LIVE a1aa8b19 (owner mgcal doden, BAL only). ROLLBACK dddb1f94. Final-merge a1aa8b19 before LAND READY.
