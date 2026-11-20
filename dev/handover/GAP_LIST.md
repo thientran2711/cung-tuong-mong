@@ -121,7 +121,7 @@ Rows not in this table have no finished branch: they need a new worker.
 
 | id | item (short) | source | state | evidence | size | type | already on review/<branch>? | suggested owner |
 |---|---|---|---|---|---|---|---|---|
-| IT01 | Big centre item display: item alone on transparent ground, no grade frame, ≥1024 px source | OD:L686 | half | jk2b.js:797 has a big display, but the kitGain/kitReward path jkrev.js:37-39 kitRevealHTML draws graded kitItem({size:"xl"}); j98.js:3-4 serves ≤512 px | M | UI | review/item-big | MAIN UI (+ C art hi-res) |
+| IT01 ✅ LIVE 26f3bfa9 (already met §28.13b; art gaps → C) | Big centre item display: item alone on transparent ground, no grade frame, ≥1024 px source | OD:L686 | half | jk2b.js:797 has a big display, but the kitGain/kitReward path jkrev.js:37-39 kitRevealHTML draws graded kitItem({size:"xl"}); j98.js:3-4 serves ≤512 px | M | UI | review/item-big | MAIN UI (+ C art hi-res) |
 | IT02 | Wardrobe set: 20 per tier (10 trâm + 10 y phục) × 8 consort + 5 maid ranks = 260 | OD:L45 | half | j92.js WD_LIST ≈47 garments (25 y phục, 22 trâm) + 8 hoa điền; maids only 6+2, no maid ranks | L | art | review/wardrobe | C art (+ B data) |
 | IT03 | Extra wear slots: earrings (hoa tai) + shoes | OD:L175; PROGRESS_small-art-wire.md:16 | half | art keys at j98.js:22 "no wear slot yet: KIT REQUEST"; KEQ_TT jinv.js:302 has 6 slots | S | UI | none | MAIN UI |
 | IT04 | Hoa điền: transparent face sprites, per-face anchors, NPC hoa điền shown | ITEMS.md:90 | half | jhd.js:44 npcShow:0 waiting HD_ANCHOR; no 'HD_ANCHOR\s*=' in build; jhd.js:56-61 falls back to item picture | M | art | review/hoa-dien-art | C art |
