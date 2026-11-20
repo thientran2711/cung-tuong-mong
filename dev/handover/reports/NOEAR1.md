@@ -39,8 +39,12 @@ Owner (verbatim, 20/11 ~06:50Z): "Rồi, hoa tai ổn, ok nha. Vậy tiến hàn
 | emperor-B, build_npc men, sg4_set (men seals), ghen_male | men / boys | — | unchanged |
 | RECORDS, not edited (gate FAILs them if reused): gen_ledger.jsonl (37), owner-copy/** (copies shown to the owner + one-off makers mk_*.py, pr-night mk.py, trieu r18–r26 RAN files, m19 V3), t8-prompt-B/golden_low (64, frozen reproduction, --golden exempt from apply), store-all/test, ngheo_old.py (not imported), emo-anim/groups/th-gian.md (sample doc), _retired/** | — | yes | unchanged (history) |
 
-## Before / after counts
-SNAPSHOT_RESULTS
+## Before / after counts (17 880 builder commands + build_npc in-process: build.py every person × tier/state × age, foreign princesses, emperor, build_all 87 people × t1–t8/nude/thaihau × 5 ages)
+- Earring words in builder output: BEFORE 1 865 in 1 850 prompts → AFTER 0.
+- Women's prompts: 10 148 differ ONLY by the NOEAR edit (after == apply_ear(strip_ear(before))), all with the sentence exactly once; 260 tm4 (ma ma a36+) too after the anchor fix below; 7 644 = refusals/errors both before and after (KC_REFS B8 not-drawn people etc.).
+- Men (emperor-B + build_npc men/boys): 533 byte-identical, 0 sentences.
+- BUG FOUND + FIXED: build.py tm4 hair anchor 'with a gold ornament worn over her hair,' lost its comma when ', jade earrings' went → crash at tm4 a36+; anchor now 'hair;' → 260/260 tm4 prompts = only-NOEAR diff.
+- OPEN (owner/foreman decision): 85 build_all prompts were just under the 10 000-character gen limit and are now 10 001–10 105 chars → check_store FAIL LEN (no gen until trimmed): t7 a51 ×24 + a65 ×15, Thái hậu a65 ×24, t1 a51 ×14 + a65 ×1, t8 a65 ×5, t5 a51 ×2 (maid-persons m01–m52 mostly). Options: shorten EAR_SENT (saves ≤ ~80 chars, not enough for all) or trim another long sentence in those prompts — needs the owner's word (A18).
 
 ## Gate proof
 - `face-common/s54.v5.FULL.txt` (scope face, pid s54): after fix → STORE CHECK PASS. The pre-fix file → `FAIL NOEAR MASTER MISSING: bare-earlobes sentence 0 times`.

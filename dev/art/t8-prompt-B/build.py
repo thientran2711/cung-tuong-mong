@@ -1475,7 +1475,7 @@ def build_maid(c,state):
         colr="the robe is the court-dress red #99443F at every age"; tone=""
     if AGE in ("a36","a51","a65"):   # F11 (BW4): explicit bun at a36+; tm0-tm2 already say bun/buns, tm3/tm4 get it here
         if k==3: _h="one gold hairpin and a small gold comb in her hair"; assert s.count(_h)==1,"tm3 hair"; s=s.replace(_h,"ALL her hair swept UP into a neat bun (chignon), nothing loose down her back, with one gold hairpin and a small gold comb in the bun",1)
-        if k==4: _h="with a gold ornament worn over her hair,"; assert s.count(_h)==1,"tm4 hair"; s=s.replace(_h,"with a gold ornament worn over her hair, which is ALL pinned UP in a neat bun under the cap (nothing loose down her back),",1)
+        if k==4: _h="with a gold ornament worn over her hair;"; assert s.count(_h)==1,"tm4 hair"; s=s.replace(_h,"with a gold ornament worn over her hair, which is ALL pinned UP in a neat bun under the cap (nothing loose down her back);",1)   # NOEAR (Lượt 1037): anchor was 'hair,' before ', jade earrings' was removed
     if k in (1,2,4): s+=TM_NOFLOWER   # K15 (owner Lượt 520; ROOT-50 19/11 18:24Z): cung nữ tm1/tm2 + nữ quan tm4, the ma ma --noflower sentence copied VERBATIM (removal alone fails: the gen copies the face ref's flower)
     if k in (0,4): s+=f" COLOUR RULE: {colr}, the same at every age, never deeper, never another colour; this replaces the colour examples above."
     elif elder: s+=f" COLOUR RULE: {colr} in a deeper, more muted shade of the SAME colour, same hue family (rich and dignified, never bright, never black or brown), no other main colour; this replaces the colour examples above."
