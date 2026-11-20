@@ -872,3 +872,4 @@ NEWACCT#11 ~22:25Z: OWNER L1503 'Mama đang thêu hoa to kìa, dưới tần là
 NEWACCT#11 ~22:27Z: DESIGN13 0084e68 _cloak7 FINAL (neck/still + close-fitting restored, own words shortened); #11 word diff ×4 OK, keep --all 171 PASS; resent L1504 (replaces L1502). Next Lượt 1505.
 NEWACCT#11 ~22:30Z: MAIDP2 020000e ma ma v4 a51/a65 + K27 small-flower clause only (word diff = 1 clause, keep PASS ×2). Sent L1505. Next Lượt 1506.
 NEWACCT#11 ~22:35Z: OWNER L1506 (pics review-sheets/owner_L1506/): Hán set OK all; winter t4 Tần + t5 Phi: no vân kiên, use Hán pearl collar (vân kiên from Quý phi t6 up) → DESIGN13 _cloak8 t4/t5. Hán t7 HQP + t8 HH train length = Quý phi; HH khúc cư = HQP khúc cư → brief han-t78-L1506.md → DESIGN14 (Opus). Next Lượt 1507.
+NEWACCT#11 ~22:38Z: OWNER L1507: add K27 small-flower clause to nhất v3, thân cận v3, tam đẳng, chưởng sự v3 → MAIDP2. DESIGN14 session_01D3E3NYHkVs5PSkAxHkMKWW opened (Opus, depth 2) on han-t78-L1506.md. Next Lượt 1508.
