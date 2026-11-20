@@ -168,7 +168,7 @@ const KC2HAB={dan:{cha:[["dn_ruong",4],["dn_nha",2],["dn_dinh",1]],me:[["dn_nha"
  for(const m of S.kc.fam){if(!m.alive||m.hide&&!S.kc.sx)continue;let L=(KC2HAB[d][m.r]||[["",1]]).map(([k,w])=>[k?(d==="dan"?k:kc2P(k)):"",w]);
   if(b===3&&!["ly","ba","sx"].includes(m.r))L=L.filter(x=>!x[0]||KCPL[x[0]][2]).concat([["",1]]);
   if(m.r==="cha"&&b===0&&d==="dan")L=[["dn_ruong",1]];
-  const tot=L.reduce((a,x)=>a+x[1],0);let r=Math.random()*tot,p="";for(const [k,w] of L){r-=w;if(r<0){p=k;break}}if(p)S.kc.at[m.id]=p}}})();
+  const p=(npwPick(L,y=>y[1],{all:1})||[""])[0];/* npc-purpose G2: her own day duties (all habits, weighted: minor ones kept) */if(p)S.kc.at[m.id]=p}}})();
 (function(){const g0=kcGoWhy;kcGoWhy=function(k){if(!S||!S.kc||!S.kc.kd)return g0.apply(this,arguments);if(!kc2Mine(k))return"Không ở đây";if(k===S.place)return"Đang ở đây";
  if(kcCity(k)){if((S.buoi||0)===3)return S.kc.kd==="dan"?"Tối rồi, con gái không ra khỏi xóm":"Công chúa không ra ngoài buổi tối";if(S.kc.kd==="nc"&&!S.maid)return"Không có tỳ nữ đi cùng";if(!can(BAL.kc2.kcGoWhy_k))return"Hết khắc buổi này"}return""}})();
 /* night: the house is the safe place */
@@ -253,7 +253,7 @@ function kc2Week(){if(Q.length>2)return;const E=[];const K=S.kc;K.evT=K.evT||{};
  else{const th=kcR("thuc"),mu=kcR("muoi"),cha=kcR("cha");
   if(K.sx&&S.month===6)add("n_hoi",3);if(mu&&K.sx)add("n_muoi",(tv({"Kiêu ngạo":1.2,"Tham vọng":1.4},mu)||.4));if(cha)add("n_benh",.35);
   if(K.sx&&S.month>=5&&S.month<=8)add("n_le",1.2);if(K.sx&&S.kap>=BAL.kc2.st.nc.thich)add("n_thich",.5+S.kap/100);if(th)add("n_yen",.6)}
- const tot=E.reduce((a,x)=>a+x[1],0);if(!tot||!roll(KC.ev))return;let r=Math.random()*tot;for(const [e,w] of E){r-=w;if(r<0){const d=mkP("kcE",{e});if(d){K.evT[e]=S.turn;pushDil(d,KCE[e].t)}return}}}
+ const o=npcWhy("kcWeek",{E},()=>roll(KC.ev));if(!o)return;/* npc-purpose G2: the strongest motive acts */const e=o.who.e;const d=mkP("kcE",{e});if(d){K.evT[e]=S.turn;pushDil(d,KCE[e].t)}}
 (function(){const m0=kcMonth;kcMonth=function(){if(!S||!S.kc||!S.kc.kd)return m0.apply(this,arguments);return kc2Month()}})();
 function kc2Month(){S.turn++;const K=S.kc;const d=K.kd;
  if(d==="dan"){S.kap+=BAL.eff.jkc2.kapKc2Month;if(S.kap>=BAL.kc2.st.dan.siet&&!K.ev.d_siet){K.ev.d_siet=1;pushDil(mkP("kcE",{e:"d_siet"}),"Chủ nợ đến nhà")}apply({bac:BAL.kc2.kc2Month_o_bac})}

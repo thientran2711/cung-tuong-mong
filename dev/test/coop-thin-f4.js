@@ -112,7 +112,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const npcT="rivals.find(v=>v&&!v.coop&&v.alive!==false&&!v.out&&v.id<900&&!(typeof sameHouse==='function'&&sameHouse(S,v)))";
  /* F4 helpers: her pets, shelf plants, taste knowledge, recipe knowledge, maid loyalty, Tứ đức levels join the summary */
  const HELP4=()=>{const s0=window.__sum;window.__sum=s=>Object.assign(s0(s),{pets:(s.pets||[]).map(P=>P.t+':'+Math.round(P.full||0)+'/'+Math.round(P.clean||0)+'/'+Math.round(P.joy||0)+'/'+Math.round(P.aff||0)+'/'+(P.maidW||0)).join(','),petOn:s.petOn==null?null:s.petOn,
-   shelf:Object.entries((s.shelf&&s.shelf.g)||{}).filter(([g,e])=>e&&e.pc!=null).map(([g,e])=>g+':'+e.pc).sort().join(','),rcpK:JSON.stringify(s.rcpK||{}),rcpL:JSON.stringify(s.rcpL||{}),ml:s.maid?s.maid.loyal:null,vir:JSON.stringify(s.vir||{})})};
+   shelf:Object.entries((s.shelf&&s.shelf.g)||{}).filter(([g,e])=>e&&e.pc!=null).map(([g,e])=>g+':'+e.pc).sort().join(','),rcpK:JSON.stringify(s.rcpK||{}),rcpL:JSON.stringify(s.rcpL||{}),ml:s.maid?s.maid.loyal:null,vir:JSON.stringify(s.vir||{}),/* parallel time (jptime): her sends still away — a maid ask is a send that lands at the due khắc */ptTaste:(Array.isArray(s.away)?s.away:[]).filter(a=>a&&a.by==="me"&&!a.back&&a.who==="mm:me"&&a.a&&a.a.run==="taste").length,ptOn:!!(typeof BAL==="object"&&BAL.ptime&&BAL.ptime.on&&window.PTIME)})};
  await H.p.evaluate(HELP4);await G.p.evaluate(HELP4);
  /* F2 r2 (quiet off for her taps): a task card «Xong việc: …» (jtq14 doneCard) her F4 act earns (pet shop note "buy") reaches HER phone, once, never the host's (as F3 'W') */
  const DONEW=()=>{window.__done4=[];const seen=()=>{const m=document.getElementById('modal');if(!m||m.hidden)return;const t=(m.textContent||'').match(/Xong việc: ([^\n]{2,60}?)(Chương|$)/);if(t&&window.__done4[window.__done4.length-1]!==t[1].trim())window.__done4.push(t[1].trim())};
@@ -142,7 +142,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* ---- K: taste questions ---- */
  await act('K1 Hỏi thái y kiêng kỵ về chính mình (rcpAskGo ty, her): same as solo',`rcpAskGo('ty',S)`,{twin:true,chk:x=>x.g1.rcpK!==x.g0.rcpK});
  {const v=await pick(`const v=rcpPeople().find(r=>r&&typeof r==='object'&&rcpUnknown(r).length);return v?v.id:null`);
-  if(v!=null)await act('K2 Sai cung nữ dò la khẩu vị (rcpAskGo maid, a consort)',`rcpAskGo('maid',rivals.find(r=>r.id===${v}))`,{chk:x=>x.g1.rcpK!==x.g0.rcpK||x.g1.ml!==x.g0.ml});
+  if(v!=null)await act('K2 Sai cung nữ dò la khẩu vị (rcpAskGo maid, a consort)',`rcpAskGo('maid',rivals.find(r=>r.id===${v}))`,{chk:x=>x.g1.rcpK!==x.g0.rcpK||x.g1.ml!==x.g0.ml||/* parallel time (review parallel-time #4): her maid is SENT (order khắc paid, one more «taste» task away on HER state); what she learns lands at the due khắc */(x.g1.ptOn&&x.g1.ptTaste===x.g0.ptTaste+1&&x.g1.used>x.g0.used)});
   else ok(true,'K2 nobody left to ask about (skipped)')}
  /* ---- R: a recipe book read ---- */
  {const bk=await pick(`for(const k in IT)if(IT[k]&&IT[k].bk&&!rcpKnows(S,IT[k].bk.kind,IT[k].bk.sid))return k;return null`);
@@ -155,8 +155,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  {const xl=await G.p.evaluate(()=>(S.logs||[]).filter(x=>/Xong việc «/.test(String(x))).length)-xl0;const gs=await G.p.evaluate(()=>window.__done4),hs=await H.p.evaluate(()=>window.__done4);
   if(ON)ok(xl<=0||(gs.length===xl&&hs.length===0),'C1 task cards: every «Xong việc» line her F4 acts earned shows its card on HER phone once, none on the host',{lines:xl,guest:gs,host:hs})}
  /* double tap */
- if(ON){await reset();const r=await G.p.evaluate(()=>{const F=COOPW.thin.F,b0=F.stat.busy,s0=F.stat.sent;petcMaid(0);petcMaid(0);return {busy:F.stat.busy-b0,sent:F.stat.sent-s0,id:F.pend&&F.pend.id}});
-  await until(G,id=>!COOPW.thin.F.pend,r.id,20000);ok(r.sent===1&&r.busy===1,'D1 double tap: one intent, the second tap ignored',r)}
+ if(ON){await reset();const r=await G.p.evaluate(()=>{const F=COOPW.thin.F,b0=F.stat.busy,s0=F.stat.sent,h0=F.stat.held|0;const pre=F.pend&&F.pend.n||null;petcMaid(0);petcMaid(0);return {pre,busy:F.stat.busy-b0,sent:F.stat.sent-s0,held:(F.stat.held|0)-h0,id:F.pend&&F.pend.id}});
+  /* review r1: her due-task tick (ptTickHer) may be pending at the tap: the first tap is then HELD and sent after its answer, never lost */
+  await until(G,()=>!COOPW.thin.F.pend&&!COOPW.thin.F.next,null,20000);const s2=await G.p.evaluate(()=>COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.n);
+  ok(r.sent+r.held===1&&r.busy===1&&(!r.held||s2==='petcMaid'),'D1 double tap: one intent (held behind a pending due-task tick when there is one, then sent), the second tap ignored',Object.assign(r,{last:s2}))}
  /* latency */
  {const ms=table.filter(x=>typeof x.ms==='number').map(x=>x.ms).sort((a,b)=>a-b),lo=table.map(x=>x.r&&x.r.ms).filter(x=>typeof x==='number').sort((a,b)=>a-b);
   if(ms.length)console.log('LATENCY tap→answer ms (LAG '+(+process.env.LAG||0)+', host CPU ×'+(+process.env.CPU||1)+'): n='+ms.length+' median='+ms[ms.length>>1]+' min='+ms[0]+' max='+ms[ms.length-1]);

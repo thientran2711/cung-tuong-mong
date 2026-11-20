@@ -62,6 +62,8 @@ function stipRuleTxt(){const B=BAL.stip;return `<p class="past">Đồ phát là 
 /* ---------- state (old saves: created on first use) ---------- */
 function stipSt(p){if(!p.stip||typeof p.stip!=="object")p.stip={};return p.stip}
 function stipW(){if(!S.stipW||typeof S.stipW!=="object")S.stipW={};const W=S.stipW;if(W.greedy==null)W.greedy=roll(BAL.stip.greedy)?1:0;return W}
+/* the odds of «Sai <cung nữ> đi đòi» (one formula: the card and the parallel-time landing, jptime) */
+function stipAskOdds(m,SK){const B=BAL.stip;return oddsCl(B.askBase+Math.round((m.loyal||0)/3)+nq(m,"sharp",BAL.net.k.askSharp)+Math.round((S.sung||0)/4)-(SK&&SK.sup?25:0))}
 function stipEunName(){try{return S.court&&S.court.ped&&S.court.ped.name||"thái giám Nội vụ phủ"}catch(e){return"thái giám Nội vụ phủ"}}
 function stipWho(p){return p===S?"ngươi":p.name}
 function stipAlly(p){const st=stipSt(p);if((st.tips||0)>=BAL.stip.allyTips)return"người quen ở Nội vụ phủ (đã nhiều lần lót tay)";
@@ -84,9 +86,9 @@ function stipSkim(p,base,cut){try{if(!p||p.out||p.dead||rkOf(p)>=7||p.queen||(p=
  const ally=stipAlly(p);const tipped=st.tip!=null&&S.turn-st.tip<B.tipM;
  if(!C.length||(!cut&&((p.sung||0)>=B.safeSung||ally||tipped))){keep();return null}
  let ch=C.reduce((a,c)=>a+(B.w[c.k]||0),0)+(st.meek!=null&&S.turn-st.meek<=1?B.meekAdd:0)+(st.spite!=null&&S.turn-st.spite<=2?B.spiteAdd:0);
- if(!cut&&!roll(Math.min(B.cap,ch))){keep();return null}
+ const lead=cut?null:npwPick(C,c=>B.w[c.k]||0);/* npc-purpose G2a: a skim needs a cause that drives the Nội vụ phủ eunuch (a grudge-holder above her, his greed, her fall); roll = it passes */if(!cut&&(!lead||!roll(Math.min(B.cap,ch)))){keep();return null}
  keep();const bac=cut?0:Math.round(base*(C.length>=2?B.cutBig:B.cutSmall));
- return{bac,items:stipItemN(p,C),C,sup,why:C.map(c=>c.txt).join("; "),cut:!!cut}}catch(e){console.error("stipSkim",e);return null}}
+ return{bac,items:stipItemN(p,C),C,sup,why:(lead?[lead].concat(C.filter(c=>c!==lead)):C).map(c=>c.txt).join("; "),cut:!!cut}}catch(e){console.error("stipSkim",e);return null}}
 /* econ-items (owner 15/11 20:05Z #4): HOW MANY of the goods are skimmed scales with her standing: more causes, low Sủng, a low rank → more lines
    worse / missing; a high rank → fewer (BAL.eit.skimN). Seasonal charcoal / ice go first (the classic squeeze), then the dearest. */
 function stipItemN(p,C){const N=(BAL.eit&&BAL.eit.skimN)||{base:1,many:1,lowSung:1,lowRank:1,lowRankMax:1,highRank:5};const r=rkOf(p);
@@ -135,7 +137,7 @@ function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const
  const supTxt=SK.sup?`${rkName(SK.sup)} ${SK.sup.name}`:"";
  O.push({n:"Đút bạc cho thái giám",fx:{bac:-tip},x:SK.sup?`tốn: Bạc -${tip} · thành: ${eun} nhận bạc, từ nay ${B.tipM} tháng không bớt xén nữa, nhưng không dám trả lại đồ vì ${supTxt} đã dặn`:`tốn: Bạc -${tip} · thành: đổi lại đồ tốt, ${B.tipM} tháng tới không bớt xén`,
   go:()=>{st.tip=S.turn;st.tips=(st.tips||0)+1;const n=SK.sup?0:stipRestore(S,G);log(`Ngươi dúi ${tip} bạc cho ${eun}.${n?" Hắn đổi lại đồ tốt ngay.":SK.sup?` Hắn nhận bạc, nhưng không dám trái ý ${supTxt}.`:""}${st.tips>=B.allyTips?" Từ nay ngươi có người quen ở Nội vụ phủ.":""}`)}});
- if(S.maid&&!S.maid.spyFor){const m=S.maid;const od=oddsCl(B.askBase+Math.round((m.loyal||0)/3)+nq(m,"sharp",BAL.net.k.askSharp)+Math.round((S.sung||0)/4)-(SK.sup?25:0));
+ if(S.maid&&!S.maid.spyFor){const m=S.maid;const od=stipAskOdds(m,SK);
   O.push({n:`Sai ${m.name} đi đòi`,fx:{},x:`${word(od)} · thành: đòi lại ${SK.bac?"đủ bạc và ":""}đồ tốt · hỏng: ${m.name} bị mắng đuổi về, lòng -${balAb(BAL.eff.jstip.loyalGo)}, Nội vụ phủ để bụng (tháng sau dễ bị bớt xén hơn)`,
    go:()=>{if(roll(od)){back();log(`${m.name} đến Nội vụ phủ đòi đủ phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`)}else{m.loyal=cl((m.loyal||0)-BAL.eff.jstip.loyalGo,0,100);st.spite=S.turn;log(`<span class="r">${m.name} bị ${eun} mắng đuổi về.</span> Lòng cung nữ -${balAb(BAL.eff.jstip.loyalGo)}.`)}}})}
  const T=stipReportTo(SK);if(T){const stat=T.k==="hh"?(S.hh||0):(S.th||0);const ev=W.ev||0;const od=T.risky?5:oddsCl(B.reportBase+Math.round(stat/2)+Math.round((S.danh||0)/5)+ev*15);
@@ -148,8 +150,9 @@ function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const
  return{ev:1,t:"Bổng lộc bị cắt xén",evId:"j3:embezzle",who:typeof pEunCourt==="function"?pEunCourt("ped"):null,h,opts:O}}
 /* NPCs: the same rule; their answer by purse and patron; news by Tai mắt */
 function stipNpc(p,SK,G){const B=BAL.stip,st=stipSt(p),tip=B.tip[Math.min(7,rkOf(p))];let how="";
- if(!SK.sup&&(p.bac||0)>=tip*2&&roll(50)){ap(p,{bac:-tip});st.tip=S.turn;st.tips=(st.tips||0)+1;stipRestore(p,G);how="nàng lót tay cho thái giám, được đổi đồ tốt"}
- else if(p.maid&&!p.maid.spyFor&&roll(30)&&roll(oddsCl(B.askBase+Math.round((p.maid.loyal||0)/3)-(SK.sup?25:0)))){ap(p,{bac:SK.bac});stipRestore(p,G);how=`cung nữ ${p.maid.name} đi đòi được đủ phần`}
+ const W=BAL.ag.why.stipAns,ans=npwPick(["tip","ask","meek"],k=>k==="tip"?(!SK.sup&&(p.bac||0)>=tip*2?W.tip+(p.bac||0)/tip:0):k==="ask"?(p.maid&&!p.maid.spyFor?(p.maid.loyal||0)*W.askLoy:0):W.meek+Math.max(0,netQ(p,"timid"))*W.timid);/* npc-purpose G2a: her answer by purse, maid and nết */
+ if(ans==="tip"){ap(p,{bac:-tip});st.tip=S.turn;st.tips=(st.tips||0)+1;stipRestore(p,G);how="nàng lót tay cho thái giám, được đổi đồ tốt"}
+ else if(ans==="ask"&&roll(oddsCl(B.askBase+Math.round((p.maid.loyal||0)/3)-(SK.sup?25:0)))){ap(p,{bac:SK.bac});stipRestore(p,G);how=`cung nữ ${p.maid.name} đi đòi được đủ phần`}
  else{st.meek=S.turn;how="nàng đành nhịn"}
  try{newsAdd(p,"stip",`Nội vụ phủ bớt xén bổng lộc của ${rkName(p)} ${p.name} (${SK.why}); ${how}`,SK.sup===S)}catch(e){}}
 /* ---------- faults: a scheme caught counts as a recent fault ---------- */
