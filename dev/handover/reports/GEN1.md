@@ -57,3 +57,11 @@ gpt-2-mini, quality low (extraSettings), 1k 9:16 (752x1344), seed 7172, ref s7IP
 | Ma ma a51 | mama_gpt_v5_a51 | 3zK7Q2NREY |
 Webs: https://www.magnific.com/app/creation/<id>. Files + sheet: dev/handover/review-sheets/maid_L1542/ (sheet.jpg, new_*.webp). Ma ma came out with a transparent background (the prompt asks for it); I put white behind it on the sheet.
 Look: colours are flipped as asked (rose skirt + blue jacket/vest). Square collar is clear on tam/nhi (flat band + V of inner collar); on nhất it reads more like a V/sailor opening than a true square; chưởng sự and ma ma show a squarish opening. Tam's blue jacket is a little long (to hip) and blue sash not as obvious; nhị has no two short flaps clearly, and its half-sleeve is one layer (good); nhất has two long panels but the extra short top panel is hard to see. Chưởng sự: purple + rose clear, keys held. Ma ma: coral/teal, silver hair, abacus in hands, 3/4 turn.
+
+# JOB L1545 — model test, open9 same prompt (owner OK 95 cr)
+Prompt dev/art/seasons4/s62_t8_HAN_BAC_open9.txt exactly (10027 chars file, unchanged since L1536), refs nVsrRMPYQD + TdwDfOyVNR, seed 7172, 1k 9:16 (752x1344). simulate_cost exact: (a) 40, (b) 55 as expected.
+(a) gpt-2-mini quality medium = bxMvciV5Y2, 40 cr  https://www.magnific.com/app/creation/bxMvciV5Y2
+(b) gpt-2-6 quality low = SyhK8ToUb8, 55 cr  https://www.magnific.com/app/creation/SyhK8ToUb8
+Base for the sheet: L1536 Lw8HVO8swO (GPT 2.5 low 15 cr, already drawn). Total new 95 cr.
+Sheet: dev/handover/review-sheets/model_test_L1545/sheet.jpg (+ a_mini_medium.webp, b_26_low.webp).
+Look (honest): Base 2.5 low: V collar open but modest, quju spiral NOT visible, plain straight gown. (a) 2.5 medium: richer all-over phoenix embroidery, V collar a little wider, still NO visible spiral wrap (straight gown), hem flares to the floor. (b) 2.6 low: collar widest, pulled down toward the shoulders with a cloud collar + pearl fringe on them; diagonal broad bands wrap across the body several times = the khúc cư spiral is clearly visible (best match); holds a teal ball/casket at the chest; hem still flares and slightly trails.
