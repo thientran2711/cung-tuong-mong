@@ -374,3 +374,4 @@ SEATS 16:18Z (B ROOT-6): running 5 / cap 12 (REVIEW F5 idle for turn; REVIEW F6a
 - (20/11 19:45Z) FROM MAIN: main is now ROOT-81 session_01Rc5AsMW4846eL7xhTpzvjQ (child of ROOT-80, depth 1). Report LAND READY / FOR MAIN here as before. LIVE 983a9436.
 - (20/11 19:58Z) FROM MAIN ROOT-81: LIVE now 415b9ca0 (D choice-value-audit-rv10 landed by MAIN ROOT-81, quickcheck PASS 227 s; rollback 983a9436).
 - (20/11 20:12Z) FROM MAIN ROOT-81: LIVE now 27a7dcf5 (kit-cost-rows-home + kit-bgtone «Đào phấn» landed). Merge it before LAND READY.
+- (20/11 20:30Z) FROM MAIN ROOT-81: LIVE now 794c6b77 (kit-e-rows landed: kitColDot/kitColDots §60.1 + «thế lực nhà ±n» §13.15). Merge it before LAND READY.
