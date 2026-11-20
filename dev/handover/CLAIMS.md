@@ -527,7 +527,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | GAP MG11 mg11-thutay (opus; ORDER MAIN ROOT-79 16:25Z; reuse mg-allkinds scan; jkc2 envoy chess, pet care, plant care, mưu kế → Thử tay hand b) | review/mg11-thutay; briefs/b-mg11.md | B | session_01N1tNP6gfoaarxkj8jTD5Aw | SẴN SÀNG KIỂM ef94ad20 (38 kinds; mg-allkinds 12/12, ag-mgcal ok, mg-ready-guide 9/9, quickcheck PASS; report reports/mg11-thutay.md) | 20/11 21:20Z |
 | coop-thin G #8 (opus; successor of G #7 4hKBjqGr @67c18fc0; handover reports/coop-thin-g.md #7→#8) | review/coop-thin-g | B | session_01N1tNP2GuhdQbevDCFFiv1Q | RUNNING | 20/11 20:32Z |
 | coop-guest-agent (opus; agOn() false on co-op guest → guest's own servants skip agent month; found by G #7) | review/coop-guest-agent; briefs/b-coop-guest-agent.md | B | session_01N1tNP6ULPfAUKCrZASGHHM | SẴN SÀNG KIỂM 60ff8f11 r2 (reports/coop-guest-agent.md) | 20/11 23:10Z |
-| REVIEW mg11-thutay r1 (opus BIG) of ef94ad20 | review/mg11-thutay-r1 | B | session_01N1tNP4zyqBbxbsY5JQ3jjJ | RUNNING | 20/11 20:58Z |
+| REVIEW mg11-thutay r1 (opus BIG) of ef94ad20 | review/mg11-thutay-r1 | B | session_01N1tNP4zyqBbxbsY5JQ3jjJ | PASS 07c91580 (fixed law-2 scheme odds recentring + typed seconds; Thử tay list overlap = kit FOR MAIN) | 20/11 20:58Z |
 | FOREMAN E #23 (opus; child of E #22, depth 4) | handover FOREMAN_E_STATUS | FOREMAN E #22 | session_01DgYSWm5qy3Y59fKkn6eSf7 | RUNNING | 20/11 21:28Z |
 | GAP OR20 or20-j68q E31 (opus; j68 life in lãnh cung / servant / Hoàng hậu duty; briefs/E31-or20-j68q.md) | review/or20-j68q | FOREMAN E #23 | session_01DgYSWnmREuzk7Lkargpxp7 | RUNNING | 20/11 21:45Z |
 | errand-bal E32 (opus; law 4 one BAL key errand odds + jkc hand-typed numbers; briefs/E32-errand-bal.md) | review/errand-bal | FOREMAN E #23 | session_01DgYSWorKhgaqhMCCFzyuKs | RUNNING | 20/11 21:45Z |
@@ -540,7 +540,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW ge-rank r1 E35r (opus BIG) of c5ebab9a | review/ge-rank-r1; reports/ge-rank-review.md | FOREMAN E #23 | session_01DgYSWp7SnXwAmHQzVR8omH | RUNNING | 20/11 22:05Z |
 | coop-guest-agent (opus; agOn() false on co-op guest → guest's own servants skip agent month; found by G #7) | review/coop-guest-agent; briefs/b-coop-guest-agent.md | B | session_01N1tNP6ULPfAUKCrZASGHHM | RUNNING | 20/11 20:32Z |
 | coop-guest-agent (opus; agOn() false on co-op guest → guest's own servants skip agent month; found by G #7) | review/coop-guest-agent; briefs/b-coop-guest-agent.md | B | session_01N1tNP6ULPfAUKCrZASGHHM | SẴN SÀNG KIỂM b7648b65 (reports/coop-guest-agent.md) | 20/11 22:10Z |
-| REVIEW mg11-thutay r1 (opus BIG) of ef94ad20 | review/mg11-thutay-r1 | B | session_01N1tNP4zyqBbxbsY5JQ3jjJ | RUNNING | 20/11 20:58Z |
+| REVIEW mg11-thutay r1 (opus BIG) of ef94ad20 | review/mg11-thutay-r1 | B | session_01N1tNP4zyqBbxbsY5JQ3jjJ | PASS 07c91580 (fixed law-2 scheme odds recentring + typed seconds; Thử tay list overlap = kit FOR MAIN) | 20/11 20:58Z |
 | FOREMAN E #23 (opus; child of E #22, depth 4) | handover FOREMAN_E_STATUS | FOREMAN E #22 | session_01DgYSWm5qy3Y59fKkn6eSf7 | RUNNING | 20/11 21:28Z |
 | KIT dress-picker (owner UI ~21:45Z; figure live-preview left, every dress picker) | review/kit-dress-picker | keeper MtjP4KTg (ordered by MAIN ROOT-81) | session_01Rc5AsMtjP4KTgBZVjENGLs | RUNNING | 20/11 22:12Z |
 | REVIEW jtq14-addr r1 E34r (sonnet) of 685b71fb | review/jtq14-addr-r1; reports/jtq14-addr-review.md | FOREMAN E #23 | session_01DgYSWnxMa5aqrzNNQQsPe9 | RUNNING | 20/11 22:06Z |
