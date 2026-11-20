@@ -715,17 +715,28 @@ G15_T3_OPTB=("a structured, rich COURTLY palace consort dress (cung đình), nev
  "from which hangs down the centre front an embroidered {sec} APRON PANEL (a long narrow ceremonial front panel, {motif} embroidery, gold-braid edge) reaching to the ankles; "
  "on each side of the apron hangs a long ceremonial jade pendant set down to the knees: small carved jade plaques linked by strings of pearls, ending in silk tassels; "
  "wide embroidered {motif} bands at the sleeve ends and the hem; a sheer silk shawl")
-def g15_t3(text,main,sec):
-    """old t3 design -> option B (exactly one occurrence required)."""
+# G21 (owner 20/11, ROOT-67 chat Lượt 1128: 'Cái cổ áo từ 36, 51 và 65 tuổi á, là phải là cái cổ xéo kín đáo ... copy cái cổ này qua cho bên quý nhân'):
+# at a36/a51/a65 the t3 option-B words keep everything except the collar: the square neckline becomes the same snug crossed collar as the old (pre-G17) Đáp ứng words.
+G21_AGES=("a36","a51","a65")
+G21_T3_COLLAR=[("never plain, never a simple wrap robe, NO crossed wrap collar, NO high-waisted chest-wrap skirt: ","never plain, never a simple wrap robe, NO high-waisted chest-wrap skirt: "),
+ ("with a straight SQUARE NECKLINE framed by a wide stiff {sec} embroidered {motif} band;","with a modest snug crossed-collar neckline framed by a wide stiff {sec} embroidered {motif} band;")]
+def g15_t3_words(age=None):
+    w=G15_T3_OPTB
+    if age in G21_AGES:
+        for a,b in G21_T3_COLLAR: assert w.count(a)==1,("G21 t3 collar slot",a); w=w.replace(a,b)
+    return w
+def g15_t3(text,main,sec,age=None):
+    """old t3 design -> option B (exactly one occurrence required); G21: crossed collar at a36/a51/a65."""
     m=G15_T3_OLD.search(text); assert m and len(G15_T3_OLD.findall(text))==1,"G15 t3 outfit slot"
-    return text[:m.start()]+G15_T3_OPTB.format(main=main,sec=sec,motif=m.group(1))+text[m.end():]
+    return text[:m.start()]+g15_t3_words(age).format(main=main,sec=sec,motif=m.group(1))+text[m.end():]
 def store_check(pf, prompt, args):
     """STORE GATE (owner Lượt 371/373/375), unchanged logic: -> list of (best, sentence) missing/rewritten."""
     B=os.path.join(ART,'t8-prompt-B')
     store=subprocess.run(['python3','build.py']+args,cwd=B,capture_output=True,text=True).stdout
     m=G15_T3_OLD.search(store)
     if m:   # G15: the t3 design words must be option B (main/secondary = any words, motif = the store's motif), never the old t3 design
-        rx=re.escape(G15_T3_OPTB).replace(re.escape('{main}'),'(.+?)').replace(re.escape('{sec}'),'(.+?)').replace(re.escape('{motif}'),re.escape(m.group(1)))
+        _age=args[args.index('--age')+1] if '--age' in args else None
+        rx=re.escape(g15_t3_words(_age)).replace(re.escape('{main}'),'(.+?)').replace(re.escape('{sec}'),'(.+?)').replace(re.escape('{motif}'),re.escape(m.group(1)))
         store=store[:m.start()]+store[m.end():]
         if not re.search(rx,prompt): return [(0,'G15 Quý nhân t3 option-B outfit words missing (dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt)')]
     sp=lambda s:[x.strip() for x in re.split(r'(?<=[.;])\s+',s) if len(x.strip())>12]
