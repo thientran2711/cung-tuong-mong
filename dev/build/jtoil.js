@@ -1020,11 +1020,12 @@ const KSWT={reg:{}};
 /* §60.2 kitDressPicker — ONE dressing view for EVERY dress picker (kit-dress-picker, owner OD 20/11 ~21:45Z: «màn chọn trang phục … không có nhân vật bên khung trái … thêm nhân vật thay đồ bên trái, làm sao cho đẹp, chứ không phải như mấy khung sự kiện»).
    kitDressPicker({p, rank, head, body}) → HER FULL-BODY FIGURE on the left (a warm mirror-like stand with a floor shadow, name plate under it, NOT the event frame) as a LIVE preview:
    the figure is the one of the rank of the dress she has on right now (rank = the dress's phẩm), so every pick that re-renders the picker changes it; the choices (wear column + bag + detail) are `body` on the right,
-   `head` (optional line) above them. Phone-narrow (≤ 520 px): no room for the stand — it is hidden and the picker reads as before (the two target devices are Fold 755 and iPad 1180). Used by: makeup «Trước gương đồng» step 1 (toilDressUI; also the Hội phối đồ theme dress step and the co-op redraw, same function). */
+   `head` (optional line) above them. Phone-narrow (≤ 520 px, decided in JS, not by a media query): no room for the stand — none is built and the picker reads as before (the two target devices are Fold 755 and iPad 1180). Used by: makeup «Trước gương đồng» step 1 (toilDressUI; also the Hội phối đồ theme dress step and the co-op redraw, same function). */
 function kitDressFigSrc(p,rank){if(rank==null||typeof figFor!=="function"||typeof figTierOf!=="function"||p!==S)return"";const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"")||""}catch(e){return""}finally{figTierOf=f0}}/* her figure at the tier of the dress she wears (j88 picks by figTierOf); same trick as toilFigAt / toilPorAt below */
 function kitDressPicker(o){o=o||{};const p=o.p||S;let src="";try{src=kitDressFigSrc(p,o.rank)}catch(e){}if(!src)try{src=kitFigOf(p)}catch(e){}
  /* a game frame that already has its own left figure column (.kgfig, wide screens) is THE preview: it is refreshed with the dress she wears now, no second figure; otherwise (Fold) the picker brings its own */
- let fig="";const own=[...document.querySelectorAll(".kgame .kgfig")].find(e=>{const r=e.getBoundingClientRect();return r.width>40&&r.height>80&&getComputedStyle(e).display!=="none"});if(own){try{if(src)kitGameFigRefresh(p,{src})}catch(e){}}else try{fig=typeof kitStageFig==="function"&&src?kitStageFig(p,{src}):""}catch(e){}
+ /* a phone (≤ 520 px) has no room for a figure beside the wear column + bag (law 12: Fold 755 + iPad first): none there, the picker reads as before (decided here, not by a width media query — media-check, KIT §0) */
+ let fig="";const own=[...document.querySelectorAll(".kgame .kgfig")].find(e=>{const r=e.getBoundingClientRect();return r.width>40&&r.height>80&&getComputedStyle(e).display!=="none"});if(own){try{if(src)kitGameFigRefresh(p,{src})}catch(e){}}else if(innerWidth>520)try{fig=typeof kitStageFig==="function"&&src?kitStageFig(p,{src}):""}catch(e){}
  return `<div class="kdpk">${fig?`<aside class="kdpk-fig" aria-label="Nàng đang thử y phục">${fig}</aside>`:""}<div class="kdpk-body">${o.head||""}${o.body||""}</div></div>`}
 window.kitDressPicker=kitDressPicker;
 (function(){const st=document.createElement("style");st.id="kdpk-css";st.textContent=`
@@ -1036,7 +1037,6 @@ window.kitDressPicker=kitDressPicker;
 .kdpk-fig .kesf{position:relative;z-index:1;width:100%;flex:1 1 auto}.kdpk-fig .kesfi>.kesimg{max-height:calc(min(calc(52*var(--kvh,1dvh)),460px)*var(--kfr,1))}
 .kdpk-fig .kpsn{max-width:100%;text-align:center;font-size:.8rem}
 .kdpk-body{min-width:0;display:flex;flex-direction:column;gap:8px}
-@media (max-width:520px){.kdpk,.kdpk:not(:has(>.kdpk-fig)){grid-template-columns:minmax(0,1fr)}.kdpk-fig{display:none}}/* a phone has no room for a figure beside the wear column + bag (law 12: Fold 755 + iPad first); the picker reads as before there */
 `;document.head.appendChild(st)})();
 /* §60.1 kitColDot (kit-e-rows, E30 dresscode, PARKING #11): a READ-ONLY colour dot + the family name (kitSwatches below is a picker). The colour is DATA, never the kit's own:
    fam = a key of the ONE table BAL.dc.fam (jbal2: {hex,n}) or a ready object {hex|col, n|name}. kitColDot(fam,{role:"main"|"sec", size:"sm"|"md"}) · kitColDots([[fam,role],…]) = a row, «·» between. */
