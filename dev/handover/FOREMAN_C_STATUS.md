@@ -807,3 +807,4 @@ NEWACCT#9 ~23:10Z: DESIGN12 9163f728: đông _vk set complete (s62 t4–t8 + m02
 NEWACCT#9 ~23:15Z: DESIGN12 76e38f4a fur-cloak 7 files *_DONG_HIENTAI_cloak (keep PASS ×7, --all 119 PASS, no cleavage/pibo/necklace, gate FAIL = _vk). #9 sent owner L1448. DESIGN12 ctx ~22 %, free.
 NEWACCT#9 ~23:18Z: OWNER L1449: winter = only move her current vân kiên onto the fur cloak; NOTHING else in the outfit changes. #9: cloak files comply (only WINTER sentence changed + dup trims). Next Lượt 1450.
 NEWACCT#10 ~21:10Z 20/11: depth 0 (ROOT), START_CTX ~8 % (82k/1M) → roll at ~33 %, ceiling 60 %. Took over from #9. DESIGN12 + B26FAB4 told to report to #10. No schedules created. Next Lượt 1450.
+NEWACCT#9 ~23:22Z: OWNER L1450: cloak test — shoulder pieces (vân kiên/capes) too big, bulky, became a cape; open old prompts, find why, make small/neat → DESIGN12 brief dong-compact-L1450.md (*_cloak2). Next Lượt 1451.
