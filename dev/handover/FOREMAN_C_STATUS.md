@@ -600,3 +600,4 @@ NEWACCT#3 ~16:03Z: FROM #2: owner (~19:15Z) fur: "Cho bản lông trước đó 
 NEWACCT#3 ~16:05Z: TANG1 T/H test DONE 77e8b24 (s62 t5 xuân; T fHzM1ekCDY, H hu205pSvqL; 270 cr; TANG1 total 675). Sheet tang1/s62_t5_DUONG_vs_HAN.webp LOOKED + sent Lượt 1209. Fur t7/t8 sample offered Lượt 1207/1208 (135 cr) — no answer.
 NEWACCT#3 ~16:07Z: FROM #2: owner ~19:20Z "Trang phục mùa đông cho mặc vải không phải lụa mỏng" → rule G28 WINTER FABRIC added; WINTER1 told (wording only, no gens).
 NEWACCT#3 ~16:08Z: FROM #2: owner ~19:22Z "Hqp và hh không đổi vải, vì là gấm rồi" → G28 = t1–t6 only; WINTER1 told.
+NEWACCT#3 ~16:09Z: FROM #2: owner CORRECTION ~19:24Z "Không phải dày ấm, mà là vải không xuyên thấu…" → G28 = opaque silk, same drape, NOT thick/padded; WINTER1 told.
