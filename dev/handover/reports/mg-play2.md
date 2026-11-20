@@ -51,3 +51,5 @@ Remaining word on a board (not this lane): duho «Tầm tay» label in play — 
 5. Site built, LIVE merged, shots LOOKED (Fold 755x1000@2 + iPad 1180x820@2, rules + play, 7 kinds: hoadien den duho hat banh tho td_ngon) — CDN img/_review/mg-play2/<kind>-<rules|play>-<WxH>.jpg, e.g. https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-play2/den-play-755x1000.jpg , …/hoadien-play-1180x820.jpg (script dev/test/mg-play2-shots.js). Wipe with `cdn_sync.py --wipe-review mg-play2` after the verdict.
 Tests on the final sha 209f34dfd: mg-play2 19/19 ok (incl. new law-11 group check) · hoa-dien ALL OK (37; NPC-layer checks run only when an NPC wears one) · mg-ready-guide PASS 9/9 · ag-mgcal 14/14 · mg-noword-a 46 ok · QUICKCHECK PASS (open 1570 ms, old save ok, perf render 197/222 ms, core gates PASS).
 BIG (scoring/BAL) → opus reviewer. Her hoadien 5.5 and den 4.7 stay NOT counted; she re-tests after.
+
+UPDATE 20/11 ~07:55Z: merged LIVE 377d5ce3 (cal-p2, j91/jbal2 small) → final sha **7c9e977d9**; mg-play2 19/19 + ag-mgcal 0 FAIL re-run on it. Main is now ROOT-76 (session_01Rc5AsN56DP1NgSYAwWFJ8o).
