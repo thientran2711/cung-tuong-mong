@@ -89,3 +89,15 @@ All 4: clearly 2–3 layers and richer than nhất đẳng (dense gold-edged flo
 - 3: long front bands + side flaps read well; blue sash ribbon ends long.
 - 4: three stepped hems read clearly; a long blue sash end hangs to the knee.
 Designer pick: 1 (closest to what the owner described), then 4.
+
+---
+# JOB 3 — fashion expert, PROMPTS ONLY (owner 20/11 via Foreman C #3; G30/G31/H12, 0 Magnific credits)
+Owner: Ming autumn look OK but too simple / cheap-looking → more elaborate; Han: crossed collar must open WIDE, lapels reaching toward the shoulders, more elaborate.
+Files (make: dev/art/seasons4/make_thu_ab.py; only the Outfit sentence + CAPTION changed vs base, asserted):
+| File | Design | chars | gate tp5 a18 |
+|---|---|---|---|
+| s62_t5_thu_MINH_A.txt | knee-long standing-collar jacket + woven gold shoulder-and-sleeve bands (tongxiu lan) + dense chrysanthemum/maple body embroidery + blush mamian skirt with knee AND hem gold bands + jade pendant set (jinbu); square chest medallion | 9781 | PASS |
+| s62_t5_thu_MINH_B.txt | 3 layers: blush standing-collar inner jacket + ankle-long open-front pifeng over-robe with two broad gold-embroidered front bands + jade clasp + mamian skirt; round chrysanthemum chest medallion + jinbu | 9807 | PASS |
+| s62_t5_thu_HAN_A.txt | quju spiral-wrap robe, crossed collar opened WIDE to the shoulders (broad low V, neck + collarbones, modest), triple collar bands repeated on the spiral hem, wide belt + jade zupei to the knee | 9553 | PASS |
+| s62_t5_thu_HAN_B.txt | 2-robe zhiju (plum outer + blush inner), both collars opened wide to the shoulder edge, layered collar edges, deep embroidered hem/front border, sash + 2 jade pendants | 9645 | PASS |
+Notes: base MINH text "no Qing-style headdress" FAILS gate F14 (banned word even negated) → removed in A/B (the base s62_t5_thu_MINH.txt itself fails the gate — flag for Foreman). HAN_B "phoenix-free" failed X08 → removed. Inner sleeves stated "hidden inside" so the common ONE SINGLE SLEEVE LAYER rule holds. Phi bạch common sentences (G29: behind the back, never shoulders) kept verbatim. Captions: "Mùa Thu · Thiết kế thời Minh/Hán (cải tiến A/B) · Phi".
