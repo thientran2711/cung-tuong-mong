@@ -1188,6 +1188,12 @@ def main():
     if a[0]=="--registry-md":
         open(os.path.join(ART,"APPROVED_SENTENCES.md"),"w",encoding="utf-8").write(registry_md()); print("wrote dev/art/APPROVED_SENTENCES.md"); return 0
     pf=a[0]; prompt=sys.stdin.read() if pf=="-" else open(pf,encoding="utf-8").read()   # "-" = a builder's stdout piped in (face makers, MG1)
+    # KEEP CHECK (owner Lượt 1274): an edited prompt with a sidecar <prompt>.keep must not lose any BASE phrase except the allowed ones.
+    if pf!="-" and os.path.exists(pf+".keep"):
+        sys.path.insert(0,ART); import keep_check
+        kb,ka=keep_check.read_sidecar(pf)
+        if not kb or not keep_check.report(kb,pf,ka):
+            print('STORE CHECK FAIL',pf,'— KEEP CHECK: details cut vs base (dev/art/keep_check.py); restore them or get them allowed'); return 1
     # BANNED REFS (owner Lượt 554/555): old khuê các set A (kc2k / kc2k-mass keys or their Magnific ids) may never be used again.
     refs=a[a.index("--refs")+1] if "--refs" in a else ""
     if "--refs" in a: i=a.index("--refs"); a=a[:i]+a[i+2:]

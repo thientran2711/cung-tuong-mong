@@ -12,6 +12,7 @@ Every start read costs the owner credits. Use `wc -c` first, then `head`, `grep 
 ## 2. Before EVERY gen
 1. Build the prompt from the store / builder named in your brief; change ONLY what the owner asked (A17) and list the diff in your report.
 2. Run the gate: `python3 dev/art/check_store.py <prompt> <args>` (A19). FAIL = no gen.
+   **A38 KEEP CHECK (owner Lượt 1274): every prompt you make by EDITING another prompt needs a sidecar `<prompt>.keep` (`base: <file>` + one `allow: <phrase>  # owner Lượt …` per phrase the owner asked to change) and must PASS `python3 dev/art/keep_check.py --sidecar <prompt>`. Never cut outfit/embroidery/jewellery/hair words to fit 10 000 — trim only boilerplate, and list it as allow lines.**
 3. One sample first, owner verdict before more (A1/A2); mass runs one person at a time.
 
 ## 3. No redraw without the owner's yes
