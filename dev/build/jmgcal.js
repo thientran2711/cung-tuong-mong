@@ -9,9 +9,11 @@
    NPC HAND BAND per kind (jmgt mgHand reads mgCalBand): hi = min(cal.max, b + w/2 + cal.up), lo = max(cal.min, b + w/2 − cal.dn) — an NPC's average
    play is (hand − w/2), so the best hands play about cal.up above her (rare: skew), the clumsy ones cal.dn below her, the middle hand clearly below.
    No calibration for a kind yet → the BAL default band (BAL.ag.mg2.hand lo / hi, interim mg-bots).
-   WHERE HER NUMBERS LIVE: one core — BAL.ag.mg2.cal.k[kind] = {b, n, at} in jbal2.js, the SAME for every player (no test for anyone else). Her device
+   WHERE THE NUMBERS LIVE: one core, TWO profiles in jbal2.js (owner OD 20/11 ~05:00Z: her second tries are Kingston's = "số liệu của người chơi thứ
+   hai"): BAL.ag.mg2.cal.k[kind] = {b, n, at} = HER profile (player 1: solo play and her co-op seat); BAL.ag.mg2.cal.k2[kind] = PLAYER 2's profile, read
+   only in the play of the co-op seat BAL.ag.mg2.cal.p2 (mgCalWho), a kind k2 lacks falls back to k; never mixed (first try per profile). Her device
    keeps the raw record (localStorage "ctm-mgcal") and shows a short code line «CTM-CAL …» with a copy button; the coordinator writes it into BAL with
-   dev/tools/mgcal_apply.py "<code>". Her device does NOT apply its local record (co-op and every other player must roll the same hands).
+   dev/tools/mgcal_apply.py "<code>" (player 2: --p2 "<code>"). Her device does NOT apply its local record (co-op: both devices must roll the same hands).
    WHO SEES IT: only with the owner flag (localStorage "ctm-owner-cal" = "1", set once by opening the game with ?hieuchuan=1; ?hieuchuan=0 clears it):
    one kit row «Thử tay tài nghệ» at the end of Thiết lập (the same .kctl row + .kbtn.alt jnotes uses). Nobody else ever sees the row. */
 (function(){try{
@@ -23,8 +25,15 @@ function C(){return (BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.cal)||{on:0,d:[0],up:1,dn:4,
 /* her base on a matching board from the rounds she played (raws[i] at gap ds[i]) */
 function mgCalBase(raws,ds){const n=Math.min(raws.length,ds.length);if(!n)return null;let s=0;for(let i=0;i<n;i++)s+=(+raws[i]||0)-(mgMedD(ds[i])-mgMedD(0));
  return Math.round(cl(s/n,0,10)*10)/10}
-/* the NPC hand band of a kind: {lo, hi, sig} (sig changes when the band changes, so a cached hand is re-rolled from the same hash) */
-function mgCalBand(kind){const H=BAL.ag.mg2.hand,c=C(),e=c.on&&c.k&&c.k[kind];
+/* WHOSE PLAY (cal-p2, owner OD 20/11 ~05:00Z): 2 = the co-op seat BAL.ag.mg2.cal.p2 (the hảo hữu) — on her own device that is COOPW.seat, on the host
+   while it runs that seat's turn COOPW.ctx (jcoopthin withSeat), so both devices pick the same profile from shared room state; 1 = everything else
+   (solo, her seat). Never from a device-local record. */
+function mgCalWho(){try{const W=window.COOPW,c=C();if(!W||!W.on||!c.p2)return 1;return (W.ctx||W.seat)===c.p2?2:1}catch(e){return 1}}
+/* the calibration entry of a kind for a player: player 2 → cal.k2[kind], falling back to her cal.k[kind] for kinds k2 lacks; player 1 → cal.k[kind] */
+function mgCalEntry(kind,who){const c=C();if(!c.on)return null;if((who||mgCalWho())===2&&c.k2&&c.k2[kind])return c.k2[kind];return c.k&&c.k[kind]||null}
+/* the NPC hand band of a kind (in the play of player `who`, default mgCalWho()): {lo, hi, sig} (sig changes when the band changes, so a cached hand is
+   re-rolled from the same hash) */
+function mgCalBand(kind,who){const H=BAL.ag.mg2.hand,c=C(),e=mgCalEntry(kind,who);
  if(!e||!isFinite(+e.b))return{lo:H.lo,hi:H.hi,sig:H.lo+"/"+H.hi};
  const w2=H.w/2;let hi=Math.min(c.max!=null?c.max:H.hi,+e.b+w2+c.up),lo=Math.max(c.min,+e.b+w2-c.dn);if(lo>hi-.5)lo=Math.max(0,hi-.5);
  lo=Math.round(lo*100)/100;hi=Math.round(hi*100)/100;return{lo,hi,sig:lo+"/"+hi}}
@@ -82,5 +91,5 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  const go=()=>{let n=0;const t=setInterval(()=>{const T=$("title");if((!T||T.hidden)||++n>40){clearInterval(t);pick()}},250)};
  if(typeof kitMenuResume==="function"&&kitMenuResume()){go();return}
  const x=document.querySelector("#modal .kph button, #modal #mclose");if(x)x.click();go()},true);
-Object.assign(window,{mgCalBase,mgCalBand,mgCalKinds,mgCalCode,mgCalOwner,mgCalOpen:pick,mgCalRun:run});
+Object.assign(window,{mgCalBase,mgCalBand,mgCalWho,mgCalEntry,mgCalKinds,mgCalCode,mgCalOwner,mgCalOpen:pick,mgCalRun:run});
 }catch(e){console.error(e)}})();
