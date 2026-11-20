@@ -15,7 +15,7 @@
      tier spec "e2" = engine ease 2 directly; "hoc/3/2" = mgTier(kind, occ "hoc", rank 3, art level 2) (needs jmgt).                */
 const {chromium}=require('playwright');const fs=require('fs');
 const [,,BASE,KL,TL,BL,NN,PG,OUT]=process.argv;
-const ALL='dan,hat,co,dauho,ban,ve,hoa,theu,kim,mua,banh,huong,kinh,may,duho,den,td_cong,td_dung,td_ngon,td_hanh';
+const ALL=process.env.MGBOT_ALL31?'dan,hat,co,dauho,ban,tho,doi,doden,ve,hoa,theu,kim,mua,banh,huong,td_cong,td_dung,td_ngon,td_hanh,duho,den,kinh,may,chai,hoadien,tat,ne,le,tc,xa,thq':'dan,hat,co,dauho,ban,ve,hoa,theu,kim,mua,banh,huong,kinh,may,duho,den,td_cong,td_dung,td_ngon,td_hanh';
 const KINDS=(KL&&KL!=='all'?KL:ALL).split(',');const TIERS=(TL||'e2').split(',');const BOTS=(BL||'skilled,random').split(',');const N=+(NN||30);const PAGES=+(PG||3);
 const BOT={sloppy:+(process.env.MGBOT_SLOPPY||5),rt:+(process.env.MGBOT_RT||70),px:+(process.env.MGBOT_PX||.018),think:+(process.env.MGBOT_THINK||450),slip:+(process.env.MGBOT_SLIP||.06),thinkD:+(process.env.MGBOT_THINKD||900),slipD:+(process.env.MGBOT_SLIPD||.12),timing:'dan,ban,duho,hat,den,dauho,banh,td_dung,td_ngon',aim:+(process.env.MGBOT_AIM||40),seek:[+(process.env.MGBOT_SEEK0||600),+(process.env.MGBOT_SEEK1||350)]};
 const VCLOCK=()=>{const rP=performance.now.bind(performance),rST=window.setTimeout.bind(window),rCT=window.clearTimeout.bind(window);
@@ -91,6 +91,8 @@ const BOTS_SRC=(BOT)=>{
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>window.__ctmBuilt&&typeof start==='function',null,{timeout:60000,polling:200});
   await p.evaluate(()=>{try{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true}catch(e){}
    /* review/mg-tune: log the time share u = el/lim of every round scored by the ONE time part (jmgt mgPace), for the calibration table */
+   /* review/mg-score-same: record the last score the engine put on the board (HUD cell "score") before the play ended, to compare with the mark given */
+   if(typeof kg82Set==='function'){const s0=kg82Set;window.kg82Set=function(k,v){if(k==='score'&&KG82.phase==='play')window.__hudS=String(v);return s0.apply(this,arguments)}}
    if(typeof mgPace==='function'){const m0=mgPace;window.mgPace=function(env,kind,el,lim){(window.__pl=window.__pl||[]).push(+(cl((+el||0)/Math.max(1,+lim||1),0,1)).toFixed(3));return m0.apply(this,arguments)}}
    /* measuring only: freeze the rest of the game (whole-UI render loops) — the minigame engines do not use them */window.__mgQuiet=1;for(const f of ['render','kmmAll','k3CatTabs','kitBdBox','kitRankPaint','kmmSweep'])try{if(typeof window[f]==='function')window[f]=function(){}}catch(e){}
    const st=document.createElement('style');st.textContent='#kroul,#title{display:none!important} *,*::before,*::after{animation:none!important;transition:none!important} body *{visibility:hidden!important} #ov,#ov *{visibility:visible!important}';document.head.appendChild(st)});
@@ -103,10 +105,10 @@ const BOTS_SRC=(BOT)=>{
      const K=KG82_KIND[J.kind];if(!K)return{err:'no kind '+J.kind};
      let lv=0,tw='';KG82.tier=null;if(/^e-?[\d.]/.test(J.tier))lv=+J.tier.slice(1);else{const [occ,rank,alv]=J.tier.split('/');const t=mgTier(J.kind,{occ,rank:+rank,lv:+alv});lv=t.ease;tw=t.word;KG82.tier=t}
      KG82.mgBot=1;KG82.noDemo=1;const d=kg82Open({art:K.n,title:'đo',how:K.how||''});if(!d)return{err:'no frame'};
-     KG82.lv=lv;KG82.ctx='hoc';window.__pl=[];const r=await new Promise(res=>{kg82Play(J.kind,raw=>res(KG82.rawF!=null?+KG82.rawF:raw));const w=()=>{if(KG82.phase==='play')__mgBot(J.bot,J.kind);else setTimeout(w,16)};w()});
-     kg82Close(true);return{raw:r,lv,tw,u:window.__pl||[]}},J)])}catch(e){raw={err:'crash '+String(e.message).slice(0,60)};try{await ctx.close()}catch(x){}({ctx,p}=await open())}
+     KG82.lv=lv;KG82.ctx='hoc';window.__pl=[];window.__hudS=null;let shown=null,given=null;const r=await new Promise(res=>{kg82Play(J.kind,raw=>{shown=window.__hudS;given=raw;res(KG82.rawF!=null?+KG82.rawF:raw)});const w=()=>{if(KG82.phase==='play')__mgBot(J.bot,J.kind);else setTimeout(w,16)};w()});
+     kg82Close(true);return{raw:r,lv,tw,u:window.__pl||[],shown,given}},J)])}catch(e){raw={err:'crash '+String(e.message).slice(0,60)};try{await ctx.close()}catch(x){}({ctx,p}=await open())}
    const key=`${J.kind}|${J.tier}|${J.bot}`;(out[key]=out[key]||[]).push(raw.err?null:raw.raw);if(raw.err)errs.push(key+' '+raw.err);
-   if(OUT)fs.appendFileSync(OUT+'.jsonl',JSON.stringify({kind:J.kind,tier:J.tier,bot:J.bot,raw:raw.err?null:raw.raw,u:raw.u})+'\n');
+   if(OUT)fs.appendFileSync(OUT+'.jsonl',JSON.stringify({kind:J.kind,tier:J.tier,bot:J.bot,raw:raw.err?null:raw.raw,u:raw.u,shown:raw.shown,given:raw.given})+'\n');
    if(++done%20===0)process.stderr.write(`${done} plays, ${((Date.now()-t0)/1000)|0}s\n`)}
   await ctx.close()};
  await Promise.all([...Array(PAGES)].map((_,i)=>worker(i)));await b.close();
