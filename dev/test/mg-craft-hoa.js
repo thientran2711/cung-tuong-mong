@@ -10,6 +10,7 @@ const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(UR
 const [VW,VH]=(process.argv[3]||'755x1000').split('x').map(Number);const SH=process.argv[4];
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:VW,height:VH},deviceScaleFactor:SH?2:1});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ if(SH)await p.addInitScript(()=>{setInterval(()=>{document.querySelectorAll('#klife').forEach(e=>e.remove())},60)});/* the first-load cover (jload lCover #klife) is not part of the shots */
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>window.__ctmBuilt&&typeof start==='function',null,{timeout:60000,polling:200});
  await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;try{window.kitReward=function(){}}catch(e){}window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;try{render()}catch(e){}
   window.__oracle=async(ease,opt)=>{opt=opt||{};const sleep=t=>new Promise(r=>setTimeout(r,t));const pe=(el,t,x,y)=>el.dispatchEvent(new PointerEvent(t,{clientX:x,clientY:y,pointerType:'touch',pointerId:3,isPrimary:true,bubbles:true,cancelable:true,buttons:t==='pointerup'?0:1}));
