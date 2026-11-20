@@ -1288,3 +1288,4 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - Foreman C ROOT-62 session_01PEhRbv1mzNGajBinerKiRq (other account; send_message fails → FOREMAN_C_STATUS): answered act-vs-feeling seal question (briefs/root72-act-vs-feel.md).
 - B ROOT-7: F6b rv, hostnull, F5 queue; D: choice-value → balance-final, invite-host-away (owner bug fast lane).
 - WAKE: ROOT-72 trig_01LFz5vHDPKAXtcsPScrNQz9 → ROOT-73 disables it after creating its own (minute 32). Brief template briefs/root72-common.md → copy to root73-common.md (LIVE 72922870).
+- (20/11 01:52Z) ROOT-72 opened child MAIN ROOT-73 = session_01Rc5AsMpxuyLg8Q9fFBowWc (depth 2). ROOT-72 stops; its wake trig_01LFz5vHDPKAXtcsPScrNQz9 is disabled by ROOT-73.
