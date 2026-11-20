@@ -1094,13 +1094,8 @@ BAL.ag.mg2.hand={on:1,lo:3,hi:9.5,w:4,skew:1.6};
    up / dn = how far above / below HER play the best / clumsiest NPC hand plays on a matching board (hand band hi = b + w/2 + up, lo = b + w/2 − dn);
    min / max = hand floor / ceiling (max = the interim hand hi: never a perfect player)
    k  = her calibrated base per mini-game kind {b: her graded play on a matching board, n: rounds, at: mm/dd/yyyy}, written from her «CTM-CAL …» code by
-        dev/tools/mgcal_apply.py — her profile (player 1): solo play and her co-op seat; a kind not in k keeps the default band above
-   k2 = PLAYER 2's profile (owner OD 20/11 ~05:00Z: her second tries are Kingston's = "số liệu của người chơi thứ hai"), same shape, written by
-        dev/tools/mgcal_apply.py --p2; used ONLY for the co-op seat p2 (jmgcal mgCalWho / mgCalBand); a kind not in k2 falls back to k; never mixed into k
-   p2 = the co-op seat that is player 2 ("b" = the hảo hữu who joins her room); seat "a" and solo always read k */
+        dev/tools/mgcal_apply.py — ONE base for every player; a kind not in k keeps the default band above */
 BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],up:1,dn:4,min:1,max:9.5,k:{dan:{b:8.3,n:5,at:"11/19/2026"},co:{b:9.7,n:5,at:"11/19/2026"},ve:{b:9.5,n:5,at:"11/19/2026"},doi:{b:9.1,n:5,at:"11/19/2026"},hoa:{b:7.9,n:5,at:"11/19/2026"},hat:{b:8.1,n:5,at:"11/19/2026"},tho:{b:8.7,n:5,at:"11/19/2026"},theu:{b:9.7,n:5,at:"11/19/2026"},ban:{b:9.1,n:5,at:"11/19/2026"},dauho:{b:1.1,n:5,at:"11/19/2026"},kim:{b:7.7,n:5,at:"11/19/2026"},doden:{b:9.9,n:5,at:"11/19/2026"}}};
-BAL.ag.mg2.cal.p2="b";
-BAL.ag.mg2.cal.k2={tho:{b:7.1,n:5,at:"11/19/2026"},theu:{b:9.9,n:5,at:"11/19/2026"},ban:{b:9.3,n:5,at:"11/19/2026"},dauho:{b:1.7,n:5,at:"11/19/2026"}};
 /* j71 odds words under mg2: the same draw (mgNpcRaw, seeded by the plan) for every entrant, her included, on this contest's board (j71 mgX7) */
 (function(){if(typeof cOdds7!=="function"||typeof fxOdds7!=="function")return;const c0=cOdds7,f0=fxOdds7;
  const win=(E,base,kindAt,mi,r)=>{let w=0;const N=500;for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+mgNpcRaw(kindAt(i),E[i],{rnd:r})/10*J71.luck;if(x>b){b=x;bi=i}}if(bi===mi)w++}return oddsCl(Math.round(100*w/N))};

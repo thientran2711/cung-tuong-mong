@@ -88,11 +88,7 @@ function mgHand(kind,p){const H=BAL.ag.mg2.hand;if(!p||typeof p!=="object"){cons
  /* AG-ALL-2d2: the band per kind comes from the owner's calibration (jmgcal mgCalBand: BAL.ag.mg2.cal.k) or the BAL default; p.mgHv[kind] = the band it was
     rolled in — a changed band re-rolls the SAME hash draw inside the new band (old saves without p.mgHv re-roll identically under the default band) */
  const Bd=typeof mgCalBand==="function"?mgCalBand(kind):{lo:H.lo,hi:H.hi,sig:H.lo+"/"+H.hi};let V=p.mgHv;if(!V||typeof V!=="object")V=p.mgHv={};
- const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind,roll=B=>Math.round((B.lo+(B.hi-B.lo)*Math.pow((mgHashU(id+"|a")+mgHashU(id+"|b"))/2,H.skew||1))*100)/100;
- /* cal-p2 (owner OD 20/11 ~05:00Z): in player 2's play (jmgcal mgCalWho 2, the co-op seat BAL.ag.mg2.cal.p2) a kind of HIS profile (cal.k2) rolls the SAME
-    hash draw inside HIS band, never cached: p.mgH / p.mgHv stay her profile's, so the shared NPC record is the same on both seats and solo is unchanged */
- if(typeof mgCalWho==="function"&&mgCalWho()===2){const B1=mgCalBand(kind,1);if(B1.sig!==Bd.sig)return roll(Bd)}
- if(M[kind]==null||V[kind]!==Bd.sig){M[kind]=roll(Bd);V[kind]=Bd.sig;MGX.hand=(MGX.hand||0)+1}
+ if(M[kind]==null||V[kind]!==Bd.sig){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;const b=(mgHashU(id+"|a")+mgHashU(id+"|b"))/2;M[kind]=Math.round((Bd.lo+(Bd.hi-Bd.lo)*Math.pow(b,H.skew||1))*100)/100;V[kind]=Bd.sig;MGX.hand=(MGX.hand||0)+1}
  return M[kind]}
 window.mgHand=mgHand;
 function mgSkipRaw(t){return cl(Math.round(mgMedD(t&&t.d!=null?t.d:0)),0,10)}

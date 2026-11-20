@@ -7,7 +7,7 @@ Mã: `dev/build/j82.js` (khung thi, chấm điểm, 5 trò cũ) + `dev/build/j91
 `startContest` (hội thi j71, thi tài trong Tranh ghế), `playArt` (tác phẩm j83, tự luyện), `openMG` (học trong tab Tài nghệ: mỗi tài nghệ chơi đúng trò của môn mình).
 
 ## RULE: every new minigame ships with its «Thử tay» entry (owner 17/11 ~17:10Z, AG-ALL-2d2)
-The owner-only calibration (dev/build/jmgcal.js, Thiết lập «Thử tay tài nghệ», flag `?hieuchuan=1`) sets every NPC's hand per kind from HER play (BAL.ag.mg2.cal.k = her profile, player 1: solo + her co-op seat). PLAYER 2's profile (owner OD 20/11 ~05:00Z: her second tries are Kingston's) = BAL.ag.mg2.cal.k2, read only in the play of the co-op seat BAL.ag.mg2.cal.p2 (jmgcal mgCalWho; a kind k2 lacks falls back to k; first try per profile, never mixed); written with `python3 dev/tools/mgcal_apply.py --p2 "CTM-CAL …"`.
+The owner-only calibration (dev/build/jmgcal.js, Thiết lập «Thử tay tài nghệ», flag `?hieuchuan=1`) sets every NPC's hand per kind from HER play (BAL.ag.mg2.cal.k).
 A NEW minigame must: (1) register in KG82_KIND with `n` (name), `t`, `how` and an engine in KG82_ENG — then mgCalKinds() lists it automatically in the one 30+-kind run
 («Thử hết cả N môn» / «Thử tiếp các môn còn lại», resumes at the next kind not done) and the per-kind list; (2) read the board ease (env.lv / mgTier) so the 5 rounds d −2…+2 really get harder;
 (3) pass `node dev/test/ag-mgcal.js` (§5b starts every kind's real board from the test). Until she has played it, NPCs use the default band (BAL.ag.mg2.hand).
