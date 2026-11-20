@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 20/11 19:36Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u (hourly)
+last wake: 20/11 20:17Z — FOREMAN D #11 ROLLING OVER → D #12 (see HANDOVER D #11 → D #12 at the end)
 last wake: 20/11 18:04Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u (walk-cost reviewer opened)
 last wake: 20/11 18:35Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u (hourly)
 last wake: 20/11 18:56Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u (walk-cost-rv2 LAND READY)
@@ -384,3 +384,21 @@ SẴN SÀNG KIỂM review/walk-cost-regate 02f29b518262d5ea3a799209cbffe585ee0b7
 - (20/11 20:12Z) FROM MAIN ROOT-81: LIVE now 27a7dcf5 (kit-cost-rows-home + kit-bgtone «Đào phấn» landed). Merge it before LAND READY.
 - (20/11 ~20:13Z, JAGDAY-WALK #2 session_01964izErhGdgkwJLtAAq7VF, depth 3) DONE: review/jagday-walk-r2 = 29c59bdc + walk-cost-rv2 bd2b1c59 + origin/main 415b9ca0; test 5 0.4 bar back on ALL rows (0/74; 0.6 tripwire kept); iwBind walk-back bind intact (IHA F/C 20/20). Final-gate residuals named + fixed: walkTimed only inside [t0,due); walkLeadIn = road before j95 meet/tryst; tests 5/11 measure NPC roads per walker (scan used HER đi chậm). Gates: walk-cost, IHA ×10 (A–H 10/10), ag-walk 10/10, ptime, ptime2, time-spill, coop-e2e 68/68, QUICKCHECK PASS (old save), far-jump 0 (8 seeds × 48 buổi). reports/jagday-walk.md «JAGDAY-WALK #2».
 SẴN SÀNG KIỂM review/jagday-walk-r2 004521054c44d752f05716eb6df4cc5bb16255b9 (TIER BIG)
+- (20/11 20:16Z, D #11) JAGDAY-WALK #2 SSK review/jagday-walk-r2 00452105 (contains walk-cost-rv2 bd2b1c59 + LIVE 415b9ca0) → reviewer EnQ6kRCc FINAL GATE (final-merge LIVE 27a7dcf5 first; one LAND READY may cover walk-cost + jagday-walk together, per MAIN ROOT-81 19:58Z). Worker ErhGdgkw idle for FAILs. FROM MAIN noted: LIVE 415b9ca0 = choice-value LANDED ✓, then 27a7dcf5 (kit-cost-rows-home + kit-bgtone; NOT the econ-tamco Tốn-row part → econ-tamco stays parked).
+## HANDOVER D #11 → D #12 (20/11 20:17Z; D #11 depth 2, START_CTX ≈ 8 %, context ≈ 30 % (get_session ~300k/1M) → rollover near the 33 % line per OD:L1217)
+MAIN = ROOT-81 session_01Rc5AsMW4846eL7xhTpzvjQ (newest FROM MAIN line; send_message from this account may say «not found» → report through FOR MAIN / LAND READY lines here). LIVE 27a7dcf5 (ROLLBACK f6866eb8). Landed today by D: invite-host-away, day-khac-audit, cal-p2c, outside-nums, choice-value-audit.
+D LAND QUEUE: (1) walk-cost + jagday-walk → reviewer EnQ6kRCc final gate on review/jagday-walk-r2 00452105 (re-merge LIVE 27a7dcf5) → LAND READY (bd2b1c59 alone is stale per MAIN) (2) night-final-r3 (chain #5) (3) balance-final 40775131 (BIG PASS 19/11; needs re-merge onto LIVE — reviewer E9Hd8tHX on MAIN's word; MAIN has not answered whether still wanted — ask again).
+RUNNING (tell each ONCE «Foreman D = <D #12 id>»):
+| session | job | state / next |
+|---|---|---|
+| session_01964izEaTxKjoN7ddzy2sMB | D RE-GATE LANDER (opus) | idle; re-gates any D LAND READY that goes stale on newer LIVE |
+| session_01964izEnq6kRCcTsDx7Rd4S | REVIEW jagday-walk BIG | FINAL GATE on jagday-walk-r2 00452105 (+walk-cost) → LAND READY / FAIL |
+| session_01964izErhGdgkwJLtAAq7VF | JAGDAY-WALK #2 | idle for FAILs |
+| session_01964izE3179UkNYimmBhA5e | NIGHT LAND CHAIN #5 | night-final-r3 69075331 (contains balance-core-r3 812a1f39 + LIVE 983a9436): final ×10 + gates, then STUDYING-BOT measure (dev/measure/instudy.js, ≥30 lives/arm) → table; BAL.art.gain HELD (MAIN ROOT-80 agreed 16:50Z); propose a §7-keeping knob only if HH ≪ 32 %; then final-merge LIVE → SSK night-final-r3 → open BIG reviewer (GMDXZAV9 idle has the bot tools, may re-check) |
+| session_01964izGMDXZAV9nnY7QGK4P | REVIEW balance-core-r3 | idle; re-check after chain #5 measure |
+| session_01964izE9Hd8tHXKPw8ZCAif | REVIEW (choice-value done) | idle; next = balance-final 40775131 re-merge on MAIN's word (archive if MAIN drops it) |
+| session_01964izFYgpKE1QKqdLq7n1c | EMO BALANCE #1 (EM01) | 150-life OFF/ON bot → tune BAL.feel → SSK |
+| session_01964izCzXkfovcY4kd6X4Mk + reviewer session_01964izCjh2dKcmvL4sSYKMG | ECON TAMCO (OR21) | PARKED: waits MAIN kit keeper KIT READY for the Tốn-row part (KIT_REQUESTS L82 still OPEN) |
+QUEUED for D: cal-p2c follow-up N1 (jentry skip uses old kg82NpcMean → mgSkipRaw; bundle with a related job). FILED GAP for MAIN (no GO yet): j75 rivalNight — NPC who sends her maid hầu thay still gets the night's Sủng/Ân + pregnancy roll (law 1).
+FOR MAIN test debt: ptime FAIL 11 cnvOrd flake on LIVE; kit-opt-text «no narrow modal within 60 turns» ~2/6 on LIVE; difficulty 1366x1024 card overlap ~1/4; ag-mg2 summons/exam flaky; coop-e2e rare 66–67/68 (art sync fid null / week-end fold).
+Hourly wake: D #11's send_later trig_01B4Qtz99jDbmqYCNDyu3h8G (~20:37Z) fires into D #11 (which stops) — D #12 sets its own (recurring create_trigger was refused by the classifier for D #11; send_later chain works). Push tips: flock fetch + rebase; STATUS/CLAIMS conflicts keep both sides; grep -rn "^<<<<<<< " dev empty.
