@@ -44,14 +44,14 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  /* 3. A flipped; NPC B attacks at the same moment and wins; she said Thôi: B recorded, true Sổ ghi line */
  r=await p.evaluate(()=>{const L=T.fresh();const A=L[0],B=L[1];const kp=BAL.steal.keep.npcP;BAL.steal.keep.npcP=0;const sw=window.stealWant;window.stealWant=v=>v===B?{u:1,p:.999,mode:"feign",o:95}:{u:0,p:0,mode:null};
   const os=oSteal;oSteal=function(a,m){return a===B?95:os.apply(this,arguments)};B.confined=0;
-  T.toEvening();const b=T.recs(L);const s0=S.logSeq||0;T.flipTo(A);T.ch="Thôi";const rs=T.seq([.001,.001,.001,.001]);T.drain();rs();T.endDay();window.stealWant=sw;oSteal=os;BAL.steal.keep.npcP=kp;
+  T.toEvening();B.confined=0;B.out=0;/* the day can confine her (2 in 300): clear again before the flip */const b=T.recs(L);const s0=S.logSeq||0;T.flipTo(A);T.ch="Thôi";const rs=T.seq([.001,.001,.001,.001]);T.drain();rs();T.endDay();window.stealWant=sw;oSteal=os;BAL.steal.keep.npcP=kp;
   const e=T.recs(L);const logs=S.logs.slice(0,(S.logSeq||0)-s0).join(" ");return{A:e.r0-b.r0,B:e.r1-b.r1,me:e.me-b.me,wrong:new RegExp("thẻ bài của "+B.name+" được lật").test(logs)}});
  ok("3 NPC attack at the flip: B only, true line",r.A===0&&r.B===1&&r.me===0&&!r.wrong,r);
  /* 4. SHE is flipped, B (odds 85 = Rất chắc) attacks. (a) she presses Giữ chân and it rolls a success → B drops to Chắc and fails on a roll of 80 → her
        night + Sủng gain; (b) the same roll but she says Thôi → B wins (80 < 85), she gets the Kính sự phòng notice, B the night */
  r=await p.evaluate(()=>{const out={};for(const ch of ["Giữ chân Hoàng thượng","Thôi"]){const L=T.fresh();const B=L[1];const sw=window.stealWant;window.stealWant=v=>v===B?{u:1,p:.999,mode:"feign",o:85}:{u:0,p:0,mode:null};
    const os=oSteal;oSteal=function(a,m){return a===B?85:os.apply(this,arguments)};B.confined=0;B.sung=0;S.sung=50;
-   T.toEvening();const b=T.recs(L);T.flipTo(S);const sg=S.sung;T.ch=ch;const rs=T.seq(ch==="Thôi"?[.80]:[.01,.80]);T.drain(1);rs();const a={sung:S.sung-sg,notice:Q.some(m=>m.t==="Kính sự phòng"&&!m.opts),x:JSON.parse(JSON.stringify(S.nfX||{}))};
+   T.toEvening();B.confined=0;B.out=0;const b=T.recs(L);T.flipTo(S);const sg=S.sung;T.ch=ch;const rs=T.seq(ch==="Thôi"?[.80]:[.01,.80]);T.drain(1);rs();const a={sung:S.sung-sg,notice:Q.some(m=>m.t==="Kính sự phòng"&&!m.opts),x:JSON.parse(JSON.stringify(S.nfX||{}))};
    T.endDay();window.stealWant=sw;oSteal=os;const e=T.recs(L);a.me=e.me-b.me;a.B=e.r1-b.r1;a.tot=Object.keys(e).reduce((s,k)=>s+e[k]-b[k],0);out[ch]=a}
   out.gain=BAL.steal.keep.gain;out.rung=[nfRungDown(85,1),nfRungDown(50,1),nfRungDown(20,1),word(nfRungDown(85,1))];return out});
  {const g=r["Giữ chân Hoàng thượng"],t=r["Thôi"];
