@@ -263,6 +263,21 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
    pass = glow passes (shadow stacks) · ringW = ring width as a share of the target's width · dim = darkening of the UNLIT painting under a lit cue (contrast) */
 BAL.mgFx={pop:1.24,ms:300,glow:"#fff0a0",ring:"#ffffff",blur:44,pass:3,ringW:.07,dim:.18};
 BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timing game's right moment that the hand says «chạm» (KG82.hint: rhythm, aim), a reaction time */
+/* mg-craft (owner OD 20/11 ~08:15Z "4 cái game mà chơi cái kiểu mà đồ nét chữ … boring lắm": each craft its OWN real mechanic; design dev/design/MG_CRAFTS.md):
+   the board levers of the four craft boards, each [at ease 0 (hard), at ease 5 (easy)], read through mgLev(env, kind, name) — ONE CORE: no board number is typed in
+   the engines. Each kind's builder adds knobs ONLY inside its own block. Kind keys, kG / kAdj, cal.k and the hand band are unchanged (MAIN ROOT-75 order).
+   theu «Thêu lướt sắc» (jcraft_theu): beat = ms between stitches · win = on-beat window ms (±) · near = the «near» window as a multiple of win · alike = decoy spools one
+     shade step off the right one · sway = hoop drift as a share of the hoop · peek = ms the finished sample stays before its cloth covers it (≥ round time = stays) ·
+     wC / wS = weight of the right colour / the stitch rhythm in a piece · lim = ms per piece (the time part mgPace) · fast / keep = mgPace of that time.
+   kim «Cắt hoa giấy» (jcraft_kim): folds = most folds of the hardest sheet (sheets 2 · folds/2 · folds, folds 8 = 2·4·8, 4 = 2·2·4) · place = snap tolerance as a share of
+     the wedge · peek = ms the unfolded sample stays (≥ lim = stays) · alike = look-alike cutter shapes · lim = ms per sheet · extra = what one extra hole costs
+     (share of a right hole) · fast / keep = mgPace (kept from review/mg-tune-r1).
+   ve «Thủy mặc» (jcraft_ve) · hoa «Chọn mùa · cắt cành · nghiêng thế» (jcraft_hoa): the design's proposed shapes; their builders tune and add knobs here. */
+Object.assign(BAL.mgTier.lev,{
+ theu:{beat:[520,900],win:[90,190],near:[2,2],alike:[3,0],sway:[.02,0],peek:[3000,40000],wC:[.35,.35],wS:[.65,.65],lim:[26000,40000],fast:[.5,.7],keep:[.6,.6]},
+ ve:{place:[.07,.14],tones:[5,3],dry:[1400,30000],peek:[3000,40000],bleed:[.06,.03]},
+ hoa:{ghost:[0,1],cutTol:[.06,.15],angTol:[8,20],alike:[3,0],sway:[.03,0]}});
+Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],place:[.05,.12],peek:[4000,60000],alike:[2,0],lim:[30000,50000],extra:[.5,.5]});
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
    condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;

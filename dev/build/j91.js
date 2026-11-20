@@ -327,5 +327,19 @@ KG82_KIND.theu.how="Mũi thêu hiện trên khung rồi khuất. Chạm lại đ
 /* lessons (Tài nghệ tab): every art plays its own contest game (cam→đàn, ky→cờ, thi→thơ, hoa→vẽ, vu→múa, y→điều hương, theu→thêu, nau→nấu ăn) */
 Object.assign(KG82_MGL,{cam:["Cầm: tấu khúc","dan"],ky:["Kỳ: ăn quân","co"],thi:["Thi: điền câu lục bát","tho"],hoa:["Họa: đồ nét bút","ve"],vu:["Vũ: theo bước múa","mua"],
  y:["Y thuật & điều hương: pha hương","huong"],theu:["Thêu: nhớ mẫu thêu","theu"],nau:["Nấu nướng: canh lửa nấu món","banh"]});
+/* ---------- mg-craft (owner OD 20/11 ~08:15Z: each craft its OWN real mechanic, tracing only for Chép kinh; dev/design/MG_CRAFTS.md) ----------
+   THE ONE PLACE that maps the four craft kinds to their new engines. A kind switches the moment its engine registers (jcraft.js crReg, called by
+   jcraft_theu / jcraft_kim / jcraft_ve / jcraft_hoa); until then it keeps the engine above. Kind KEYS stay (theu, ve, hoa, kim): every caller (startContest,
+   playArt, lessons, jexam, jentry, Thử tay, works j83) and old saves keep working. e = engine · t / how = the rules screen (kgReady; text is allowed there,
+   never in play, OD 20/11 ~05:10Z) · demo = the KG82_DEMO move picture · mgl = the lesson label (KG82_MGL) when the kind is a lesson art. */
+const KG82_CRAFT={
+ theu:{e:"stitch",t:"Thêu lướt sắc",demo:"tap",mgl:"Thêu: thêu lướt sắc",
+  how:"Mẫu thêu nhỏ ở góc khung. Dải sáng trên khung là chỗ thêu kế: chạm cuộn chỉ cùng sắc với dải ấy trong mẫu, rồi chạm khung đúng lúc kim chúc xuống chấm sáng để gieo mũi. Lệch nhịp thì mũi lỏng, phải gieo lại. Thêu từ dải đậm ở mép vào dải nhạt ở lòng hoa. 3 tấm."},
+ kim:{e:"papercut",t:"Cắt hoa giấy",demo:"drag",
+  how:"Hoa giấy mẫu treo bên trái; bên phải là tờ giấy đỏ đã gấp. Kéo hình kéo cắt (trăng, tam giác, giọt) đặt lên tờ gấp ở chỗ mở ra sẽ thành lỗ của mẫu, rồi chạm ✓ để mở giấy. Lỗ trùng mẫu sáng lên, lỗ thừa bị trừ. 3 tờ."},
+ ve:{e:"inkwash",t:"Thủy mặc",demo:"drag",mgl:"Họa: thủy mặc",
+  how:"Bức mẫu của thầy ghim ở góc. Kéo núi, nước, thuyền, tùng đặt lên cuộn lụa đúng chỗ như mẫu: càng cao càng xa, càng nhỏ và nhạt. Rồi giữ bút trên nghiên cho mực đậm dần, buông đúng sắc mực của lớp đang sáng và quệt lên lớp ấy. Mực lan vào chỗ trống thì thành vết. 3 bức."},
+ hoa:{e:"ikebana",t:"Chọn mùa · cắt cành · nghiêng thế",demo:"drag",
+  how:"Ngoài song là mùa nào thì chọn hoa của mùa ấy. Vuốt ngang cành để cắt: Thiên dài chừng rưỡi thân bình, Nhân ba phần tư Thiên, Địa ba phần tư Nhân. Kéo cành vào miệng bình rồi xoay cho nghiêng: Thiên gần đứng, Nhân nghiêng vừa, Địa nghiêng nhiều. 3 bình."}};
 /* jreg: engines is read when asked, so engines of later modules (jnwp, jwkg…) are listed */
 window.K91={get engines(){return Object.keys(KG82_ENG)},kinds:()=>Object.fromEntries(Object.entries(KG82_KIND).map(([k,v])=>[k,v.e]))};
