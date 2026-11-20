@@ -43,3 +43,25 @@ Staff mutation sites (54 `staff.splice/push`) checked by hand: world loops (j14 
 Laws: 6b/6c (a real servant no longer vanishes; each player in exactly one place, same on both seats), 4 (one count hhHas), 11 (scan table), 14 (no second count). No UI change (no shots).
 
 SẴN SÀNG KIỂM coop-staff-split 797982a5 (review/coop-staff-split).
+
+## REVIEW r1 (opus BIG, session_01N1tNP57zWUL3xM4EWuAwtL) — PASS a069b6ea (review/coop-staff-split-r1)
+START_CTX ≈ 15 % (estimate). PRIORITY #1 CHECK: worker's line re-checked | main: hhHas j10:15 (one count), capTrim/capSweep j10 | review/* names-unique-r2-r1 (jnamefix: guest names hold, world people give way) | claims CLAIMS:442 worker, CLAIMS:452 this review.
+Branch review/coop-staff-split-r1 = 797982a5 + newest origin/main (26f3bfa9 → 8730f431 → 43fd334f merged; index.html/sw.js rebuilt each time) + one test commit. Diff vs main: j10 hhHas (1 line + comment) and tests only.
+
+### Verified
+- **Root cause real, fix right place.** capTrim counts `hhHas` but may only remove non-coop servants (`!s.coop`); capSweep on the host trims every rival → with her coop entry counted, a REAL servant was removed at her arrival (host only → seats split, law 6b/6c). hhHas now leaves coop entries out = solo parity (the solo cung-nữ player is never in m.staff). One count, 15 readers (fill / capTrim / capRoom / prStaff / spGoTo / hire / staff tab / p3HireRole / j72 capOk) read it — no second count (law 4/14).
+- **Test discriminates:** coop-staff-cap with hhHas reverted to main → FAIL (arrival trims, e.g. Đường Họa Mi rank 4 cap [3,1] sids 11,12,13 → 11,13); with the fix 48 households / 6 lives 0 trims 0 churns PASS.
+- **Not hiding a bug (law 6b), both seats inspected:** coop-e2e (STAFFLOG on) runs with guest cung nữ (`COOP_B_ORIGIN=cnv`) and both cung nữ: HOSTDRIFT 0 at every check; per-seat "one place" dumps show the friend as exactly one coop entry (R901/R902 or "staff of <mistress>") and herself in no list.
+- **Whole group:** coop-staff-scan 24 sites 0 open; hand spot-check of mutation paths: world loops run inside withoutFriend (rivalsBuoi + endTurn wrappers, jcoopworld:795/798, srvInit rebuilds), prStaff/spGoTo/capTrim skip `coop`.
+- **Solo unchanged:** quickcheck (one-core-guard G1, rules-one-source, kit-conform, hooks incl. coop-one-world + mk-layer-scan, time-spill, old save from LIVE loads + plays a buổi, perf) PASS on 58751cc9, 5ae4bc9a and a069b6ea (see last line below); undef-scan PASS; role-parity.test ALL PASS (note: open entry maid:P-ONLY:maid:errand now closed — trim role-parity-open.json in its lane).
+- **coop-e2e** (LIVE Worker): random 80/80, `cn` origin 80/80, guest cung nữ 88/88 ×2 (after r1 check split), both cung nữ 80/80.
+- **coop-thin lanes:** coop-bot THIN=9 and THIN=13, 6 weeks: weeks with divergence 0, page errors 0; rc=1 only from "buổi 0.0 NPC places differ" (first buổi before the first sync) — same on origin/main build (THIN=9 main run 1: same line, rc=1; run 2 rc=0) → pre-existing, not this branch.
+
+### r1 fix (test only, commit 7b2e2bcd)
+One guest-cung-nữ run FAILED the worker's new "one place" check 8×: guest "Bạch Phương Hoa" (maid of consort 8) and NPC consort R5 "Bạch Phương Hoa" on BOTH seats = two different people with the same full name (not a duplicate person: one is a consort, the other a maid serving consort 8). The check was name-based, so a name clash read as "one person in two places". Split into: (a) identity — exactly one coop entry (the friend), none for herself (hard check); (b) "no world person shares a player's full name" — its own FAIL line, owned by the names-unique lane (review/names-unique-r2-r1 jnamefix renames world people that clash with a guest). Nothing hidden: a clash still fails coop-e2e, now under the right name.
+
+### Follow-ups for Foreman B (not this branch)
+1. Player-vs-NPC full-name clash at a co-op start (guest cung nữ) — names-unique-r2-r1 should land; coop-e2e line (b) will go green with it.
+2. coop-bot THIN≥9 "buổi 0.0 NPC places differ" — pre-existing on main, first buổi only.
+3. Worker's V3-3 (Thái hậu face one week late on the guest) and host-after-merge family stand as reported.
+Laws touched: 1 (same rule both seats/solo), 4 + 14 (one count), 6b/6c (no vanishing servant, one place by identity), 11 (scan 0 open). No UI change → no shots.
