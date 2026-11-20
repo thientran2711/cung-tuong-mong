@@ -100,8 +100,7 @@ for _k, _v in _load("w-act").items(): W["act-" + _k] = _v
 for _k, _c in (("hanghai", "bright coral"), ("act-hanghai", "bright coral"), ("act-ghen", "deep jade-teal")):
     W[_k] = (_c,) + tuple(W[_k][1:])
 W["act-tinhtu"] = tuple(x.replace("INVITING THE EMPEROR", "INVITING AN HONOURED GUEST TO HER TEA") for x in W["act-tinhtu"])
-# SEAL6 20/11 (ROOT-58 brief): act-ghen disc = warm amber (replaces deep jade-teal above).
-W["act-ghen"] = ("warm amber",) + tuple(W["act-ghen"][1:])
+# SEAL6 20/11: th-act-ghen (unit 7) was MADE with disc "warm amber" (ROOT-58 first brief; his later word = deep jade-teal, read too late).
 # SEAL6 20/11: the th-dau redraw sample was made as key "dau2" with hh_prompts.DAU wording (plum cuffs) and the OLD WHO line — kept for
 # the record only (DAU2 below, not used by prompts()); S["dau"] above (SEAL5 wording) stays the store version.
 DAU2 = ("deep blue",

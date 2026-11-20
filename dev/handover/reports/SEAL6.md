@@ -9,6 +9,8 @@ depth 2 · START_CTX ≈ 4 % of 1M (get_session read 0 → own estimate) · roll
   All 19 A keyframes I made used the OLD WHO line with the words "Qing-style inner palace" (banned by F14, even in seal prompts).
   The pictures look the same as the approved set (gold phoenix crown, no two-wing board headdress) — owner's call whether to keep; NO redo.
   B keyframes + clips never had the word. th_prompts.py now = SEAL5's version + act-ghen 'warm amber' (ROOT-58 brief) + DAU2 record.
+- act-ghen: made with disc "warm amber" (ROOT-58 first brief); ROOT-58 00:00Z message (delivered to me only at 00:27Z read, after the gens) said deep jade-teal → store reverted to jade-teal; th-act-ghen itself is amber (owner call).
+- Foreman is ROOT-59 (session_01PEhRbxKh3jLw4atknQREnq) since 00:07Z — I saw that late; report sent to ROOT-58 first, then ROOT-59.
 - th-dau redraw: made as key **dau2** (A+B only, no clips) with hh_prompts.DAU wording (plum cuffs) — NOT SEAL5's own heart-ache wording
   that is in th_prompts.S["dau"]. Old th-dau files untouched. Owner/ROOT-58 choose which wording before clips.
 
