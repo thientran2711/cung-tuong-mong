@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c41d1c2c+","t":"2026-11-20T16:05Z","c":"rv names-unique r1: last literal person name — court Nội vụ phủ eunuch 'Tiểu Ngân Tử' (j10) now nmNew('eun'); it clashed with staff eunuchs…","b":"36429dc6077d","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
+window.CTM_BI={"s":"13fedc78+","t":"2026-11-20T16:06Z","c":"coop-staff-split r1: coop-e2e one-place check by identity (one coop entry); a world person sharing a player's full name is its own check (n…","b":"540984d1450d","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1013,16 +1013,33 @@ function nmBad(b){b=nmBare(b);if(!b)return"";const su=nmSurOf(b);if(su&&NM_BAN_S
 function nmPeople(){const L=[];if(typeof S==="undefined"||!S)return L;const seen=new Set();
  const add=(o,kind,f,x)=>{if(!o||typeof o!=="object"||seen.has(o))return;const v=o[f||"name"];if(typeof v!=="string"||!v.trim())return;seen.add(o);L.push(Object.assign({o,kind,f:f||"name"},x||{}))};
  add(S,"f","name",{me:1});
- try{(rivals||[]).forEach(v=>add(v,"f",null,v.coop?{guest:1}:null))}catch(e){}
- try{allKids().forEach(([k,v])=>add(k,k.sex==="m"?"prince":"princess",null,v&&v.coop?{guest:1}:null))}catch(e){}
+ try{(rivals||[]).forEach(v=>add(v,"f",null,v.coop?{guest:1,fp:"name"}:null))}catch(e){}
+ /* coop-name-clash: a player serving as cung nữ is ONE coop entry in her mistress's staff (jcoopworld buildFriendSrv): she is the friend herself */
+ try{(rivals||[]).forEach(v=>(v.staff||[]).forEach(s=>{if(s&&s.coop)add(s,"f",null,{guest:1,fp:"name"})}))}catch(e){}
+ try{allKids().forEach(([k,v])=>add(k,k.sex==="m"?"prince":"princess",null,v&&v.coop?{guest:1,fp:"kids."+(v.kids||[]).indexOf(k)}:null))}catch(e){}
  try{const C=S.court||{};for(const k in C){const c=C[k];if(!c||typeof c!=="object")continue;add(c,k==="ty"?"doc":k==="ped"?"eun":"eunE",c.pn?"pn":"name",{court:k})}}catch(e){}
  try{(S.men||[]).forEach(m=>add(m,"m"))}catch(e){}
  try{const T=S.trieu;if(T&&T.H)for(const c in T.H)add(T.H[c],"m",null,{fam:T.H[c]&&T.H[c].dadOf==="me"})}catch(e){}
  try{(S.kc&&S.kc.fam||[]).forEach(p=>add(p,p.role==="consort"?"f":p.role==="mama"?"mo":"m",null,{fam:/^(cha|huynh|muoi|to)$/.test(p.r||"")}))}catch(e){}
  try{(S.hPool||[]).forEach(p=>add(p,"m"))}catch(e){}
  try{(S.qPool||[]).forEach(p=>add(p,"f"))}catch(e){}
- try{add(S.maid,"maid");const sk=s=>s.role==="eunuch"?"eun":s.eid?"f":"maid";(S.staff||[]).forEach(s=>add(s,sk(s)));(rivals||[]).forEach(v=>{const G=v.coop?{guest:1}:null;add(v.maid,"maid",null,G);(v.staff||[]).forEach(s=>add(s,sk(s),null,G))});try{(S.thO&&S.thO.staff||[]).forEach(s=>add(s,sk(s)))}catch(e){}}catch(e){}
+ try{add(S.maid,"maid");const sk=s=>s.role==="eunuch"?"eun":s.eid?"f":"maid";(S.staff||[]).forEach(s=>add(s,sk(s)));(rivals||[]).forEach(v=>{add(v.maid,"maid",null,v.coop?{guest:1,fp:"maid"}:null);(v.staff||[]).forEach((s,i)=>add(s,sk(s),null,v.coop?{guest:1,fp:"staff."+i}:null))});try{(S.thO&&S.thO.staff||[]).forEach(s=>add(s,sk(s)))}catch(e){}}catch(e){}
+ try{nmFrPeople(add)}catch(e){}
  return L}
+/* coop-name-clash (law 6b, one living person = one full name, on BOTH seats): the personal people of an S-shaped object (a player and
+   the people only her own seat holds: her maid, her household servants, her children, her home family, her marriage pools), with their
+   path inside it ("name" = the player herself). One list for the host's view of the friend (nmFrPeople) and the new-life check (nmBirth). */
+function nmPers(s){const out=[];if(!s||typeof s!=="object")return out;const sk=x=>x.role==="eunuch"?"eun":x.eid?"f":"maid";const one=(o,kind,p,x)=>{if(o&&typeof o==="object"&&typeof o.name==="string"&&o.name.trim())out.push(Object.assign({o,kind,f:"name",fp:p},x||{}))};
+ one(s,"f","name");one(s.maid,"maid","maid");(s.staff||[]).forEach((x,i)=>{if(x&&!x.coop)one(x,sk(x),"staff."+i)});
+ (s.kids||[]).forEach((k,i)=>one(k,k&&k.sex==="m"?"prince":"princess","kids."+i));
+ ((s.kc&&s.kc.fam)||[]).forEach((p,i)=>one(p,p.role==="consort"?"f":p.role==="mama"?"mo":"m","kc.fam."+i,{fam:/^(cha|huynh|muoi|to)$/.test(p.r||"")}));
+ (s.hPool||[]).forEach((p,i)=>one(p,"m","hPool."+i));(s.qPool||[]).forEach((p,i)=>one(p,"f","qPool."+i));return out}
+/* the friend's blob (co-op host only): the room's last P of the other seat */
+function nmFrBlob(){try{const W=window.COOPW;if(!W||!W.on||!W.base||!W.base.P||!nmOwner())return null;const P=W.base.P[W.seat==="a"?"b":"a"];return P&&P.S&&!P.dead&&!P.S.dead?P:null}catch(e){return null}}
+/* HOST: the friend's own people (on her seat only) join the one name list as hers (guest, never renamed here: nmFix sends her a rename
+   order instead); the ones her coop entry already shows on this seat (her name, maid, children) are not added twice */
+function nmFrPeople(add){const P=nmFrBlob();if(!P)return;const ent=(rivals||[]).find(v=>v&&v.coop),srv=!ent&&(rivals||[]).some(v=>(v.staff||[]).some(x=>x&&x.coop));
+ for(const e of nmPers(P.S)){if(e.fp==="name"&&(ent||srv))continue;if(ent&&(e.fp==="maid"||/^kids\./.test(e.fp)))continue;add(e.o,e.kind,null,{guest:1,fr:1,fp:e.fp,fam:e.fam})}}
 function nmAlive(e){const o=e.o;return o.alive!==false&&o.alive!==0&&!o.dead&&!o.out}
 function nmReg(){if(typeof S==="undefined"||!S)return null;if(!S.nmReg||typeof S.nmReg!=="object")S.nmReg={};return S.nmReg}
 /* co-op: the host owns the one registry (owner rule); a guest never writes it (worldOn() of the one-world co-op, review/coop-one-world: true = solo or host; before it lands: COOPW seat "a" = host). A guest's new person is
@@ -1059,7 +1076,7 @@ function nmNew(kind,opts){const o=opts||{};const T=nmTaken();(o.more||[]).forEac
   if(!n&&kind==="prince")outer3:for(const a of NM_PGEN)for(const g of NM_PX){const c=a+" "+g;if(ok(c)){n=c;break outer3}}
   if(!n)outer2:for(const s of NM_SUR)for(const a of NM_SUR)for(const g of (kind==="f"||kind==="maid"?NM_F:NM_M)){const c=s+" "+a.split(" ")[0]+" "+g.split(" ")[1];if(!T.full.has(c)&&!nmBad(c)){n=c;break outer2}}}
  if(o.reg!==false&&nmOwner()){const R=nmReg();if(R){R[n]=kind;const m=/^Tiểu (.+) Tử$/.exec(n);if(m)R["Lão "+m[1]+" Tử"]=kind/* j25 ageInit: the same eunuch at 45 */}}return n}
-window.nmNew=nmNew;window.nmBare=nmBare;window.nmBad=nmBad;window.nmPeople=nmPeople;
+window.nmNew=nmNew;window.nmPers=nmPers;window.nmBare=nmBare;window.nmBad=nmBad;window.nmPeople=nmPeople;
 /* ONE per-life registry (review/newlife-reset, owner bug 17/11): S and rivals are rebuilt by start() / deser(); every OTHER store that belongs to one
    life (module-level lets, window.* holding people, timers, scenes) registers itself here: lifeStore(name, reset). j93 kmReset runs every reset on
    start() (new game, Luân hồi rebirth, co-op new life), on a slot load and on the title screen. LIFE_STORES = the names (dev/test/newlife-leak.js
@@ -44783,8 +44800,8 @@ window.stateOn=function(n){if(worldOn()||thinW())return true;try{const C=window.
 if(typeof COOP!=="object")return;
 /* thIll (Thái hậu illness), cm (Thái hậu / Hoàng hậu mood; her own "seen"/spy/drop part stays personal, CM_P), men (palace men; her own
    ties to each man stay personal, MEN_P) + menG2 are WORLD keys since review/coop-one-world. Old rooms: the host's copy wins (HOST_ONLY). */
-const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","wxDay","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn","thIll","cm","men","menG2","lyF","fdead","fidDead","dnames"];  /* tn: B2 the Emperor's night (host); D4 npc-death: Phế phi họ Lý + retired faces/names are world (host rolls) */
-const HOST_ONLY=["tn","thIll","cm","men","menG2","wxDay"];  /* wxDay: weather-khac, the host rolls the day (jwxk) */  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
+const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","wxDay","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn","thIll","cm","men","menG2","lyF","fdead","fidDead","dnames","nmReg","nmOrd"];  /* coop-name-clash: nmReg (every name ever given) + nmOrd (the host's rename orders for the friend's own people) are world, written by the host only (jnamefix) */  /* tn: B2 the Emperor's night (host); D4 npc-death: Phế phi họ Lý + retired faces/names are world (host rolls) */
+const HOST_ONLY=["tn","thIll","cm","men","menG2","wxDay","nmReg","nmOrd"];  /* wxDay: weather-khac, the host rolls the day (jwxk) */  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
 const CM_P=["seen","spy","thDrop","hhDrop"],MEN_P=["tinh","letters","trysts","knowsMe","af","grudge","grudgeN","debt","seen"];
 const REFF=["resHead","spyFor","lover","mid","owner","by","who","tgt","from","to"];   /* fields whose "me" value names the viewer */
 const STAT=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat","confined","shield","block"];
@@ -44928,7 +44945,7 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  const known=S.emp&&S.emp.known;
  /* the new life knows nobody yet: drop every link into the throwaway world */
  keep.rl={};keep.ro={};keep.tonight=null;keep.toMorning=0;keep.heir=null;keep.evd={};keep.chat={};keep.cev={};keep.resHead=null;keep.where=null;keep.dead=false;
- S=keep;const sS=J(ser().S);
+ S=keep;try{if(typeof nmBirth==="function")nmBirth(C)}catch(e){console.error("nmBirth",e)}/* coop-name-clash: her new life's people never repeat a name the room already holds (law 6b) */const sS=J(ser().S);
  const P={pid:mp,ok:S.origin&&S.origin.k,name:S.name,rank:S.rank,dead:false,srv:!!(S.srv&&!S.srv.risen),life:(CW.life||0)+1,S:{}};
  for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];splitP(sS,P.S);P.S.empKnown={};if(P.S.menP)for(const id in P.S.menP)P.S.menP[id]={};if(P.S.cmP)P.S.cmP={seen:{}};
  const C2=J(C);C2.P=C2.P||{};C2.P[CW.seat]=P;
@@ -45337,7 +45354,7 @@ function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
  if(!CW.base){CW.base=J(C);if(CW.waitWorld){CW.waitWorld=false;try{COOP_LOBBY.hostPick(false)}catch(e){}newLife()}return}
  /* the friend's character changed (first character / reborn): keep my week, take the new base and her new entry */
  const had=CW.base;CW.base=J(C);if(had&&had.P&&had.P[CW.seat]&&C.P&&!C.P[CW.seat])CW.base.P[CW.seat]=had.P[CW.seat];
- if(S&&!S.dead&&!CW.inLife){const old=friendEntry();placeFriend(C.P[fs()]);
+ if(S&&!S.dead&&!CW.inLife){const old=friendEntry();placeFriend(C.P[fs()]);try{if(host()&&typeof nmFix==="function")nmFix("join")}catch(e){console.error(e)}/* coop-name-clash: her new person against the one name list, at once */
   const P=C.P[fs()];const fk=P&&((P.name||"")+"#"+(P.life||0)+(friendHome(P)?"h":""));if(P)CW.fWasHome=friendHome(P);
   if(P&&!P.dead&&(old?old.name!==P.name:CW.fNote!==fk)){CW.fNote=fk;const home=friendHome(P);
    pushModal({t:home?"Hảo hữu chọn thân phận":"Hảo hữu vào cung",h:`<p>Hảo hữu ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}${home?"nay còn ở nhà cha chờ kỳ tuyển tú, chưa vào cung":"nay ở trong cung"+(friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:""))}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p>`+(home?`<p class="past">Qua kỳ tuyển tú, nàng sẽ vào cung; khi ấy hai người mới gặp được nhau.</p>`:`<p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`)})}
@@ -83502,7 +83519,7 @@ function nmRewrite(old,neu,protect){if(!old||old===neu)return 0;const re=new Reg
    if(k.indexOf(old)>=0){const k2=k.replace(rk,neu);if(k2!==k){if(!(k2 in o)){o[k2]=o[k];delete o[k]}else if(typeof o[k]==="number"&&typeof o[k2]==="number"){o[k2]=Math.max(o[k2],o[k]);delete o[k]}}}}};/* keys too (S.rcpK "v12<name>") */
  try{walk(S);walk(rivals)}catch(e){console.error("nmRewrite",e)}return n}
 const NM_FIX={runs:0,renamed:[]};
-function nmFix(why){if(typeof S==="undefined"||!S||!nmOwner())return null;const out=[];
+function nmFix(why){if(typeof S==="undefined"||!S)return null;if(!nmOwner()){nmOrdApply(why);return null}const out=[];nmOrdPrune();
  /* co-op: the friend's own people (e.guest: her coop entry and its maid/staff/kids) are named on her seat and never renamed here (a rename
    on the host copy would be undone by her next sync and the two seats would read different names); they hold their names first and the
    host's world people (which sync to both seats) give way */
@@ -83513,7 +83530,7 @@ function nmFix(why){if(typeof S==="undefined"||!S||!nmOwner())return null;const 
  try{const L0=nmPeople();const L=L0.filter(e=>e.me).concat(L0.filter(e=>!e.me&&e.guest),L0.filter(e=>!e.me&&!e.guest));const me=L.find(e=>e.me);const meSur=me?nmSurOf(nmBare(S.name)):"";
   const held=new Map();for(const e of L){const b=nmBare(e.o[e.f]);held.set(b,(held.get(b)||0)+1)}
   const full=new Set(),vars=new Set(),sur=new Set();const todo=[];
-  for(const e of L){const raw=e.o[e.f];const b=nmBare(raw);let bad=e.me||e.guest?"":nmBad(b);
+  for(const e of L){const raw=e.o[e.f];const b=nmBare(raw);let bad=e.me||e.guest?"":nmBad(b);if(e.guest&&!e.me&&full.has(b))bad="dup";/* coop-name-clash: her person behind a higher holder (the host herself / the friend / an earlier person of hers) */
    if(bad==="sur"&&e.fam&&nmSurOf(b)===meSur)bad="";/* her own family keeps her surname */
    if(!e.me&&!e.guest&&!bad){if(full.has(b))bad="dup";else if(nmAlive(e)&&(e.kind==="mo"?sur.has(nmSurOf(b)):nmVars(b).some(v=>vars.has(v))))bad="like"}
    if(bad){todo.push([e,bad]);continue}
@@ -83522,7 +83539,7 @@ function nmFix(why){if(typeof S==="undefined"||!S||!nmOwner())return null;const 
   const txt=[];try{if(S.st){if(S.st.guard)txt.push([S.st,"guard","m"]);if(S.st.stu)txt.push([S.st,"stu","m"])}if(S.lcfPn)txt.push([S,"lcfPn","f",{sur:"Tần"}])}catch(e){}
   for(const [o,f,kind,op] of txt){const b=nmBare(o[f]);const bad=nmBad(b)||(full.has(b)?"dup":"");if(bad)todo.push([{o,f,kind,txt:1,op},bad]);else full.add(b)}
   const names=L.map(e=>String(e.o[e.f]));const shared=new Map();
-  for(const [e,bad] of todo){const raw=String(e.o[e.f]);const b=nmBare(raw);const pre=raw.slice(0,raw.length-b.length);
+  for(const [e,bad] of todo){if(e.guest){nmOrder(e);continue}const raw=String(e.o[e.f]);const b=nmBare(raw);const pre=raw.slice(0,raw.length-b.length);
    const keepSur=e.fam&&nmSurOf(b)&&!NM_BAN_SUR.includes(nmSurOf(b))?nmSurOf(b):e.fam&&meSur&&!NM_BAN_SUR.includes(meSur)&&e.kind!=="mo"?meSur:null;
    let nb=e.kind==="prince"||e.kind==="princess"?nmNew(e.kind):nmNew(e.kind,e.op||(keepSur?{sur:keepSur}:{}));
    e.o[e.f]=pre+nb;if(e.f==="pn"&&e.o.name===b)e.o.name=nb;
@@ -83540,6 +83557,47 @@ function nmFix(why){if(typeof S==="undefined"||!S||!nmOwner())return null;const 
   S.nmV=1;NM_FIX.runs++;if(out.length){NM_FIX.renamed.push(...out.map(x=>Object.assign({at:why||""},x)));if(NM_FIX.renamed.length>400)NM_FIX.renamed.splice(0,NM_FIX.renamed.length-400)}
  }catch(e){console.error("nmFix",e)}return out}
 window.nmFix=nmFix;window.NM_FIX=NM_FIX;
+/* ---------- coop-name-clash: the two players' people in ONE name list (law 6b), the HOST decides, the guest reads the same ----------
+   S.nmReg and S.nmOrd are WORLD keys (jcoopworld W_KEYS + HOST_ONLY): the guest's new names avoid every name the host ever gave, and
+   the host's rename orders reach her. A person of the friend (her coop entry, her maid / servants / children / home family, read from
+   the room's P of her seat) holds her name before every world person and the host's own people (they give way: nmFix renames them, texts
+   follow). Only behind the host player herself (or an earlier person of the friend) does one of hers give way; the host cannot rename a
+   person that lives on her seat, so it writes an ORDER S.nmOrd[her pid] = [{p:path in her S, o:old, n:new}] (n registered at once) and
+   her seat applies it (nmOrdApply, after every rebuild and on the host-lag relay); the host drops an order once her blob shows it done. */
+const nmPidF=()=>{try{return window.COOPW.seat==="a"?902:901}catch(e){return 0}},nmPidMe=()=>{try{return window.COOPW.seat==="a"?901:902}catch(e){return 0}};
+function nmAt(s,p){let o=s;if(p==="name")return s;for(const k of String(p).split(".")){if(!o||typeof o!=="object")return null;o=o[k]}return o&&typeof o==="object"?o:null}
+function nmOrder(e){const pid=nmPidF();if(!pid||!e.fp)return;S.nmOrd=S.nmOrd&&typeof S.nmOrd==="object"?S.nmOrd:{};const L=S.nmOrd[pid]=Array.isArray(S.nmOrd[pid])?S.nmOrd[pid]:[];
+ const raw=String(e.o[e.f]),b=nmBare(raw),pre=raw.slice(0,raw.length-b.length);let x=L.find(z=>z.p===e.fp&&z.o===b);
+ if(!x){const n=e.kind==="prince"||e.kind==="princess"?nmNew(e.kind):nmNew(e.kind,e.fam&&nmSurOf(b)?{sur:nmSurOf(b)}:{});x={p:e.fp,o:b,n};L.push(x);NM_FIX.orders=(NM_FIX.orders||0)+1}
+ if(!e.fr)e.o[e.f]=pre+x.n/* her coop entry on this seat (a display copy) shows the new name at once; her seat sends it back after she applies */}
+function nmOrdPrune(){try{const O=S.nmOrd;if(!O||typeof O!=="object")return;const W=window.COOPW;if(!W||!W.on){delete S.nmOrd;return}const P=nmFrBlob(),pid=String(nmPidF());
+ for(const k of Object.keys(O)){if(k!==pid||!P){delete O[k];continue}/* done (her blob shows the new name), or her person is gone (rebirth): dropped */
+  O[k]=(Array.isArray(O[k])?O[k]:[]).filter(z=>{const o=nmAt(P.S,z.p);return !!(o&&nmBare(o.name)===z.o)});if(!O[k].length)delete O[k]}}catch(e){}}
+/* GUEST: apply the host's orders for her own people (idempotent: a person already renamed is skipped) */
+const NM_ORD={applied:0,last:null};
+function nmOrdApply(why){try{const O=S&&S.nmOrd;const L=O&&O[nmPidMe()];if(!Array.isArray(L)||!L.length)return 0;let n=0;const mine=nmPers(S);
+  for(const z of L){let o=nmAt(S,z.p);if(!o||nmBare(o.name)!==z.o){const e=mine.find(m=>nmBare(m.o.name)===z.o);o=e?e.o:null}if(!o)continue;
+   const raw=String(o.name),b=nmBare(raw),pre=raw.slice(0,raw.length-b.length);o.name=pre+z.n;n++;
+   const held=nmPeople().filter(e=>nmBare(e.o[e.f])===z.o).length;if(!held)nmRewrite(z.o,z.n,nmPeople().map(e=>String(e.o[e.f])))/* her texts follow when no one else here holds the old name */}
+  if(n){NM_ORD.applied+=n;NM_ORD.last={why:why||"",n}}return n}catch(e){console.error("nmOrdApply",e);return 0}}
+/* a NEW LIFE (first character, rebirth, either seat) is a draft until it enters the room: every person of it whose full name is already
+   held in the room's world C (NPCs, their servants and children, court, men, the other player and her people, every name ever given:
+   C.W.S.nmReg + dnames) is renamed now, before it is sent (jcoopworld attach). Her own name too: the new character is not yet anyone. */
+function nmNamesOfC(C){const A=[];try{const W=C.W||{},WS=W.S||{};const b=x=>{if(x&&typeof x==="object"&&typeof x.name==="string")A.push(nmBare(x.name))};
+  for(const r of W.R||[]){if(!r||r.coop)continue;b(r);b(r.maid);(r.staff||[]).forEach(x=>{if(x&&!x.coop)b(x)});(r.kids||[]).forEach(b)}
+  const Cc=WS.court||{};for(const k in Cc){const c=Cc[k];if(c&&typeof c==="object"){if(c.pn)A.push(nmBare(c.pn));b(c)}}
+  (WS.men||[]).forEach(b);try{for(const c in (WS.trieu&&WS.trieu.H)||{})b(WS.trieu.H[c])}catch(e){}try{(WS.thO&&WS.thO.staff||[]).forEach(b)}catch(e){}
+  for(const k in WS.nmReg||{})A.push(k);(WS.dnames||[]).forEach(n=>A.push(nmBare(n)));
+  for(const seat in C.P||{}){if(seat===(window.COOPW&&window.COOPW.seat))continue;const P=C.P[seat];if(P&&P.S&&!P.dead)nmPers(P.S).forEach(e=>A.push(nmBare(e.o.name)))}}catch(e){console.error("nmNamesOfC",e)}
+ return A.filter(Boolean)}
+const NM_BIRTH={runs:0,renamed:[]};
+function nmBirth(C){if(!C||!C.W||typeof S==="undefined"||!S)return 0;const taken=new Set(nmNamesOfC(C));const mine=nmPers(S);const own=new Set();let n=0;NM_BIRTH.runs++;
+ for(const e of mine){const raw=String(e.o.name),b=nmBare(raw);if(!taken.has(b)&&!own.has(b)){own.add(b);continue}
+  const pre=raw.slice(0,raw.length-b.length);const more=[...taken,...own];const op={more,reg:nmOwner()};if(e.fam&&nmSurOf(b))op.sur=nmSurOf(b);
+  const nb=e.kind==="prince"||e.kind==="princess"?nmNew(e.kind,{more,reg:nmOwner()}):nmNew(e.kind,op);e.o.name=pre+nb;own.add(nb);n++;
+  try{nmRewrite(b,nb,mine.map(m=>String(m.o.name)))}catch(x){}NM_BIRTH.renamed.push({p:e.fp,old:b,neu:nb})}
+ return n}
+window.nmBirth=nmBirth;window.nmOrdApply=nmOrdApply;window.NM_ORD=NM_ORD;window.NM_BIRTH=NM_BIRTH;
 (function(){
  const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{nmFix("load")}catch(e){}return r};
  const s0=start;start=function(){const r=s0.apply(this,arguments);try{nmFix("start")}catch(e){}return r};
@@ -85122,7 +85180,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="36429dc6077d";window.CTM_BUILD=BUILD;
+const BUILD="540984d1450d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -19,7 +19,7 @@ function nmRewrite(old,neu,protect){if(!old||old===neu)return 0;const re=new Reg
    if(k.indexOf(old)>=0){const k2=k.replace(rk,neu);if(k2!==k){if(!(k2 in o)){o[k2]=o[k];delete o[k]}else if(typeof o[k]==="number"&&typeof o[k2]==="number"){o[k2]=Math.max(o[k2],o[k]);delete o[k]}}}}};/* keys too (S.rcpK "v12<name>") */
  try{walk(S);walk(rivals)}catch(e){console.error("nmRewrite",e)}return n}
 const NM_FIX={runs:0,renamed:[]};
-function nmFix(why){if(typeof S==="undefined"||!S||!nmOwner())return null;const out=[];
+function nmFix(why){if(typeof S==="undefined"||!S)return null;if(!nmOwner()){nmOrdApply(why);return null}const out=[];nmOrdPrune();
  /* co-op: the friend's own people (e.guest: her coop entry and its maid/staff/kids) are named on her seat and never renamed here (a rename
    on the host copy would be undone by her next sync and the two seats would read different names); they hold their names first and the
    host's world people (which sync to both seats) give way */
@@ -30,7 +30,7 @@ function nmFix(why){if(typeof S==="undefined"||!S||!nmOwner())return null;const 
  try{const L0=nmPeople();const L=L0.filter(e=>e.me).concat(L0.filter(e=>!e.me&&e.guest),L0.filter(e=>!e.me&&!e.guest));const me=L.find(e=>e.me);const meSur=me?nmSurOf(nmBare(S.name)):"";
   const held=new Map();for(const e of L){const b=nmBare(e.o[e.f]);held.set(b,(held.get(b)||0)+1)}
   const full=new Set(),vars=new Set(),sur=new Set();const todo=[];
-  for(const e of L){const raw=e.o[e.f];const b=nmBare(raw);let bad=e.me||e.guest?"":nmBad(b);
+  for(const e of L){const raw=e.o[e.f];const b=nmBare(raw);let bad=e.me||e.guest?"":nmBad(b);if(e.guest&&!e.me&&full.has(b))bad="dup";/* coop-name-clash: her person behind a higher holder (the host herself / the friend / an earlier person of hers) */
    if(bad==="sur"&&e.fam&&nmSurOf(b)===meSur)bad="";/* her own family keeps her surname */
    if(!e.me&&!e.guest&&!bad){if(full.has(b))bad="dup";else if(nmAlive(e)&&(e.kind==="mo"?sur.has(nmSurOf(b)):nmVars(b).some(v=>vars.has(v))))bad="like"}
    if(bad){todo.push([e,bad]);continue}
@@ -39,7 +39,7 @@ function nmFix(why){if(typeof S==="undefined"||!S||!nmOwner())return null;const 
   const txt=[];try{if(S.st){if(S.st.guard)txt.push([S.st,"guard","m"]);if(S.st.stu)txt.push([S.st,"stu","m"])}if(S.lcfPn)txt.push([S,"lcfPn","f",{sur:"Tần"}])}catch(e){}
   for(const [o,f,kind,op] of txt){const b=nmBare(o[f]);const bad=nmBad(b)||(full.has(b)?"dup":"");if(bad)todo.push([{o,f,kind,txt:1,op},bad]);else full.add(b)}
   const names=L.map(e=>String(e.o[e.f]));const shared=new Map();
-  for(const [e,bad] of todo){const raw=String(e.o[e.f]);const b=nmBare(raw);const pre=raw.slice(0,raw.length-b.length);
+  for(const [e,bad] of todo){if(e.guest){nmOrder(e);continue}const raw=String(e.o[e.f]);const b=nmBare(raw);const pre=raw.slice(0,raw.length-b.length);
    const keepSur=e.fam&&nmSurOf(b)&&!NM_BAN_SUR.includes(nmSurOf(b))?nmSurOf(b):e.fam&&meSur&&!NM_BAN_SUR.includes(meSur)&&e.kind!=="mo"?meSur:null;
    let nb=e.kind==="prince"||e.kind==="princess"?nmNew(e.kind):nmNew(e.kind,e.op||(keepSur?{sur:keepSur}:{}));
    e.o[e.f]=pre+nb;if(e.f==="pn"&&e.o.name===b)e.o.name=nb;
@@ -57,6 +57,47 @@ function nmFix(why){if(typeof S==="undefined"||!S||!nmOwner())return null;const 
   S.nmV=1;NM_FIX.runs++;if(out.length){NM_FIX.renamed.push(...out.map(x=>Object.assign({at:why||""},x)));if(NM_FIX.renamed.length>400)NM_FIX.renamed.splice(0,NM_FIX.renamed.length-400)}
  }catch(e){console.error("nmFix",e)}return out}
 window.nmFix=nmFix;window.NM_FIX=NM_FIX;
+/* ---------- coop-name-clash: the two players' people in ONE name list (law 6b), the HOST decides, the guest reads the same ----------
+   S.nmReg and S.nmOrd are WORLD keys (jcoopworld W_KEYS + HOST_ONLY): the guest's new names avoid every name the host ever gave, and
+   the host's rename orders reach her. A person of the friend (her coop entry, her maid / servants / children / home family, read from
+   the room's P of her seat) holds her name before every world person and the host's own people (they give way: nmFix renames them, texts
+   follow). Only behind the host player herself (or an earlier person of the friend) does one of hers give way; the host cannot rename a
+   person that lives on her seat, so it writes an ORDER S.nmOrd[her pid] = [{p:path in her S, o:old, n:new}] (n registered at once) and
+   her seat applies it (nmOrdApply, after every rebuild and on the host-lag relay); the host drops an order once her blob shows it done. */
+const nmPidF=()=>{try{return window.COOPW.seat==="a"?902:901}catch(e){return 0}},nmPidMe=()=>{try{return window.COOPW.seat==="a"?901:902}catch(e){return 0}};
+function nmAt(s,p){let o=s;if(p==="name")return s;for(const k of String(p).split(".")){if(!o||typeof o!=="object")return null;o=o[k]}return o&&typeof o==="object"?o:null}
+function nmOrder(e){const pid=nmPidF();if(!pid||!e.fp)return;S.nmOrd=S.nmOrd&&typeof S.nmOrd==="object"?S.nmOrd:{};const L=S.nmOrd[pid]=Array.isArray(S.nmOrd[pid])?S.nmOrd[pid]:[];
+ const raw=String(e.o[e.f]),b=nmBare(raw),pre=raw.slice(0,raw.length-b.length);let x=L.find(z=>z.p===e.fp&&z.o===b);
+ if(!x){const n=e.kind==="prince"||e.kind==="princess"?nmNew(e.kind):nmNew(e.kind,e.fam&&nmSurOf(b)?{sur:nmSurOf(b)}:{});x={p:e.fp,o:b,n};L.push(x);NM_FIX.orders=(NM_FIX.orders||0)+1}
+ if(!e.fr)e.o[e.f]=pre+x.n/* her coop entry on this seat (a display copy) shows the new name at once; her seat sends it back after she applies */}
+function nmOrdPrune(){try{const O=S.nmOrd;if(!O||typeof O!=="object")return;const W=window.COOPW;if(!W||!W.on){delete S.nmOrd;return}const P=nmFrBlob(),pid=String(nmPidF());
+ for(const k of Object.keys(O)){if(k!==pid||!P){delete O[k];continue}/* done (her blob shows the new name), or her person is gone (rebirth): dropped */
+  O[k]=(Array.isArray(O[k])?O[k]:[]).filter(z=>{const o=nmAt(P.S,z.p);return !!(o&&nmBare(o.name)===z.o)});if(!O[k].length)delete O[k]}}catch(e){}}
+/* GUEST: apply the host's orders for her own people (idempotent: a person already renamed is skipped) */
+const NM_ORD={applied:0,last:null};
+function nmOrdApply(why){try{const O=S&&S.nmOrd;const L=O&&O[nmPidMe()];if(!Array.isArray(L)||!L.length)return 0;let n=0;const mine=nmPers(S);
+  for(const z of L){let o=nmAt(S,z.p);if(!o||nmBare(o.name)!==z.o){const e=mine.find(m=>nmBare(m.o.name)===z.o);o=e?e.o:null}if(!o)continue;
+   const raw=String(o.name),b=nmBare(raw),pre=raw.slice(0,raw.length-b.length);o.name=pre+z.n;n++;
+   const held=nmPeople().filter(e=>nmBare(e.o[e.f])===z.o).length;if(!held)nmRewrite(z.o,z.n,nmPeople().map(e=>String(e.o[e.f])))/* her texts follow when no one else here holds the old name */}
+  if(n){NM_ORD.applied+=n;NM_ORD.last={why:why||"",n}}return n}catch(e){console.error("nmOrdApply",e);return 0}}
+/* a NEW LIFE (first character, rebirth, either seat) is a draft until it enters the room: every person of it whose full name is already
+   held in the room's world C (NPCs, their servants and children, court, men, the other player and her people, every name ever given:
+   C.W.S.nmReg + dnames) is renamed now, before it is sent (jcoopworld attach). Her own name too: the new character is not yet anyone. */
+function nmNamesOfC(C){const A=[];try{const W=C.W||{},WS=W.S||{};const b=x=>{if(x&&typeof x==="object"&&typeof x.name==="string")A.push(nmBare(x.name))};
+  for(const r of W.R||[]){if(!r||r.coop)continue;b(r);b(r.maid);(r.staff||[]).forEach(x=>{if(x&&!x.coop)b(x)});(r.kids||[]).forEach(b)}
+  const Cc=WS.court||{};for(const k in Cc){const c=Cc[k];if(c&&typeof c==="object"){if(c.pn)A.push(nmBare(c.pn));b(c)}}
+  (WS.men||[]).forEach(b);try{for(const c in (WS.trieu&&WS.trieu.H)||{})b(WS.trieu.H[c])}catch(e){}try{(WS.thO&&WS.thO.staff||[]).forEach(b)}catch(e){}
+  for(const k in WS.nmReg||{})A.push(k);(WS.dnames||[]).forEach(n=>A.push(nmBare(n)));
+  for(const seat in C.P||{}){if(seat===(window.COOPW&&window.COOPW.seat))continue;const P=C.P[seat];if(P&&P.S&&!P.dead)nmPers(P.S).forEach(e=>A.push(nmBare(e.o.name)))}}catch(e){console.error("nmNamesOfC",e)}
+ return A.filter(Boolean)}
+const NM_BIRTH={runs:0,renamed:[]};
+function nmBirth(C){if(!C||!C.W||typeof S==="undefined"||!S)return 0;const taken=new Set(nmNamesOfC(C));const mine=nmPers(S);const own=new Set();let n=0;NM_BIRTH.runs++;
+ for(const e of mine){const raw=String(e.o.name),b=nmBare(raw);if(!taken.has(b)&&!own.has(b)){own.add(b);continue}
+  const pre=raw.slice(0,raw.length-b.length);const more=[...taken,...own];const op={more,reg:nmOwner()};if(e.fam&&nmSurOf(b))op.sur=nmSurOf(b);
+  const nb=e.kind==="prince"||e.kind==="princess"?nmNew(e.kind,{more,reg:nmOwner()}):nmNew(e.kind,op);e.o.name=pre+nb;own.add(nb);n++;
+  try{nmRewrite(b,nb,mine.map(m=>String(m.o.name)))}catch(x){}NM_BIRTH.renamed.push({p:e.fp,old:b,neu:nb})}
+ return n}
+window.nmBirth=nmBirth;window.nmOrdApply=nmOrdApply;window.NM_ORD=NM_ORD;window.NM_BIRTH=NM_BIRTH;
 (function(){
  const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{nmFix("load")}catch(e){}return r};
  const s0=start;start=function(){const r=s0.apply(this,arguments);try{nmFix("start")}catch(e){}return r};

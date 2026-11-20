@@ -40,8 +40,8 @@ window.stateOn=function(n){if(worldOn()||thinW())return true;try{const C=window.
 if(typeof COOP!=="object")return;
 /* thIll (Thái hậu illness), cm (Thái hậu / Hoàng hậu mood; her own "seen"/spy/drop part stays personal, CM_P), men (palace men; her own
    ties to each man stay personal, MEN_P) + menG2 are WORLD keys since review/coop-one-world. Old rooms: the host's copy wins (HOST_ONLY). */
-const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","wxDay","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn","thIll","cm","men","menG2","lyF","fdead","fidDead","dnames"];  /* tn: B2 the Emperor's night (host); D4 npc-death: Phế phi họ Lý + retired faces/names are world (host rolls) */
-const HOST_ONLY=["tn","thIll","cm","men","menG2","wxDay"];  /* wxDay: weather-khac, the host rolls the day (jwxk) */  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
+const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","wxDay","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn","thIll","cm","men","menG2","lyF","fdead","fidDead","dnames","nmReg","nmOrd"];  /* coop-name-clash: nmReg (every name ever given) + nmOrd (the host's rename orders for the friend's own people) are world, written by the host only (jnamefix) */  /* tn: B2 the Emperor's night (host); D4 npc-death: Phế phi họ Lý + retired faces/names are world (host rolls) */
+const HOST_ONLY=["tn","thIll","cm","men","menG2","wxDay","nmReg","nmOrd"];  /* wxDay: weather-khac, the host rolls the day (jwxk) */  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
 const CM_P=["seen","spy","thDrop","hhDrop"],MEN_P=["tinh","letters","trysts","knowsMe","af","grudge","grudgeN","debt","seen"];
 const REFF=["resHead","spyFor","lover","mid","owner","by","who","tgt","from","to"];   /* fields whose "me" value names the viewer */
 const STAT=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat","confined","shield","block"];
@@ -185,7 +185,7 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  const known=S.emp&&S.emp.known;
  /* the new life knows nobody yet: drop every link into the throwaway world */
  keep.rl={};keep.ro={};keep.tonight=null;keep.toMorning=0;keep.heir=null;keep.evd={};keep.chat={};keep.cev={};keep.resHead=null;keep.where=null;keep.dead=false;
- S=keep;const sS=J(ser().S);
+ S=keep;try{if(typeof nmBirth==="function")nmBirth(C)}catch(e){console.error("nmBirth",e)}/* coop-name-clash: her new life's people never repeat a name the room already holds (law 6b) */const sS=J(ser().S);
  const P={pid:mp,ok:S.origin&&S.origin.k,name:S.name,rank:S.rank,dead:false,srv:!!(S.srv&&!S.srv.risen),life:(CW.life||0)+1,S:{}};
  for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];splitP(sS,P.S);P.S.empKnown={};if(P.S.menP)for(const id in P.S.menP)P.S.menP[id]={};if(P.S.cmP)P.S.cmP={seen:{}};
  const C2=J(C);C2.P=C2.P||{};C2.P[CW.seat]=P;
@@ -594,7 +594,7 @@ function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
  if(!CW.base){CW.base=J(C);if(CW.waitWorld){CW.waitWorld=false;try{COOP_LOBBY.hostPick(false)}catch(e){}newLife()}return}
  /* the friend's character changed (first character / reborn): keep my week, take the new base and her new entry */
  const had=CW.base;CW.base=J(C);if(had&&had.P&&had.P[CW.seat]&&C.P&&!C.P[CW.seat])CW.base.P[CW.seat]=had.P[CW.seat];
- if(S&&!S.dead&&!CW.inLife){const old=friendEntry();placeFriend(C.P[fs()]);
+ if(S&&!S.dead&&!CW.inLife){const old=friendEntry();placeFriend(C.P[fs()]);try{if(host()&&typeof nmFix==="function")nmFix("join")}catch(e){console.error(e)}/* coop-name-clash: her new person against the one name list, at once */
   const P=C.P[fs()];const fk=P&&((P.name||"")+"#"+(P.life||0)+(friendHome(P)?"h":""));if(P)CW.fWasHome=friendHome(P);
   if(P&&!P.dead&&(old?old.name!==P.name:CW.fNote!==fk)){CW.fNote=fk;const home=friendHome(P);
    pushModal({t:home?"Hảo hữu chọn thân phận":"Hảo hữu vào cung",h:`<p>Hảo hữu ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}${home?"nay còn ở nhà cha chờ kỳ tuyển tú, chưa vào cung":"nay ở trong cung"+(friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:""))}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p>`+(home?`<p class="past">Qua kỳ tuyển tú, nàng sẽ vào cung; khi ấy hai người mới gặp được nhau.</p>`:`<p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`)})}
