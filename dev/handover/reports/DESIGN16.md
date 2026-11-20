@@ -82,3 +82,9 @@ GATES:
 - check_store --scope tpN --age a22: FAIL ×3 on ONE item only, "M06 MASTER MISSING". The master block needs the M06 thin-silk sentence word for word, and A-NẶNG is still a DESIGN15 proposal, not in MASTER_COMMON / master_common.py. So it is "do NOT generate" until the foreman (rule owner) adds an A-xuân fabric form to the master/gate (like winter_g28's M06 đông), or the owner approves A-NẶNG. With M06 in place the same files passed (commit e7e649e).
 - Store part (--low N): only the Tang square-neck outfit sentences + M06 (t1/t2) and G15 option B (t3, apron panel dropped per H12).
 Flags still open: B20 colours (plum/blush pink vs peach-blossom pink + ivory); H12 vs G15 apron (I followed the later H12).
+
+## L1554 fix 2 (C #13): colours = s62 XUÂN palette; fabric confirmed by B29
+- In place, s62_t{1,2,3}_HAN_BAC.txt: "light clear warm plum silk like #DF9ED9" → "peach-blossom pink silk like #EB8186"; "light clear warm plum" → "peach-blossom pink"; "bright blush pink" → "ivory white". Same words as seasons4/s62_t5_xuan_TONG.txt. No other words changed; no plum, blush pink or #DF9ED9 left. (The embroidery thread colour words "in ivory white and fine gold thread" follow the secondary colour.)
+- Fabric: A-NẶNG was already in (now owner-approved, B29).
+- Chars t1 9340 · t2 9591 · t3 9745. keep_check ×3 PASS (.keep rebuilt), --all 215 PASS.
+- GATE still FAILs on one item only: "M06 MASTER MISSING". The master/gate does not know the B29 t1–t3 xuân fabric yet. Foreman: add the A-NẶNG form to master_common/check_store (like winter_g28 for đông) before any gen.
