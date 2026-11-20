@@ -73,7 +73,7 @@ Rows not in this table have no finished branch: they need a new worker.
 | OD04 | Co-op thin-guest migration A→H (owner: co-op top priority) | OD:L1446, L1488, L1493 | half | jcoopthin.js:25 TH.CAP = A–E, F1–F4; F5, F6, G, H not live | L | rules-numbers | review/coop-thin-f5, -f6, -f6b, review/coop-thin-g (running) | B build |
 | OD05 | Balance pass on start stats + growth by origin (talents start ~75, hit 100 too fast; §7 approved) | OD:L1482, L1484, L1601 | half | branch not landed: reports/balance-core.md core gate G1 one-core-guard FAIL (jgrey.js 5 inline numbers); no balance-core tag on main | M | rules-numbers | review/balance-core, review/balance-core-r2 | D rules |
 | OD06 | Unique ancient-Chinese names, one shared registry, no Vietnamese-reading surnames | OD:L1444 | half | j1.js:191 freshName only avoids living consorts/kids; banned "Bùi" (j22.js:5), "Đặng" (j59.js:358) still in pools; no name registry | M | content | review/names-unique, review/names-unique-r1 | B build |
-| OD07 | Every "can it still be done" check uses khắc left in the DAY with spill (sweep + guard) | OD:L1472, L1654 | half | 34 "không kịp" hits; j76.js:9,25,35,67 gate per buổi; review/day-khac-audit SẴN SÀNG KIỂM 9e7ddc14 not landed | M | rules-numbers | review/day-khac-audit, review/khac-day | D rules |
+| OD07 ✅ LIVE 7a35db20 | Every "can it still be done" check uses khắc left in the DAY with spill (sweep + guard) | OD:L1472, L1654 | half | 34 "không kịp" hits; j76.js:9,25,35,67 gate per buổi; review/day-khac-audit SẴN SÀNG KIỂM 9e7ddc14 not landed | M | rules-numbers | review/day-khac-audit, review/khac-day | D rules |
 
 ## C. Outside route, economy, story roads, events (OUTSIDE_PLAN, ECONOMY, STORY_ROADS_PLAN, EVENTS_PROGRESS)
 
