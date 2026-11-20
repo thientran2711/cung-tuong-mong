@@ -1,4 +1,13 @@
-# REVIEW rv-mg-score-same — BIG reviewer (opus, session_01Rc5AsKZr2Mvv3MpefHQpoX) for C-AG #29 — **PASS 10f1dc0e**
+# REVIEW rv-mg-score-same — BIG reviewer (opus, session_01Rc5AsKZr2Mvv3MpefHQpoX) — **FINAL: PASS 892e5bb0 on review/mg-score-same-rv2** (target r2 c74d3afd)
+## UPDATE 20/11 ~07:45Z — target r2 c74d3afd (C-AG #29 target update; C-AG line ended → verdict to MAIN ROOT-75)
+- r2 = c07604e0 + the worker's gold pop for 8 kinds (co kim doden doi le tc thq xa, threshold sp<.995, kit K91C.gold). It replaces my own helper fix e3e0a491, which is DROPPED: the earlier branch review/mg-score-same-rv @10f1dc0e is SUPERSEDED (a force-push was refused, so the final lives on a new branch).
+- Whole family gap (law 11): **tho (Thư pháp, jnwp endGlyph) is an mgPace kind and was missing from r2.** Reviewer fix, same style: gold when sp<.995 on a glyph that would otherwise pop good.
+- Final **review/mg-score-same-rv2 @ 892e5bb0** = c74d3afd + tho fix + final-merge of origin/main 377d5ce3 (only sw.js/index.html conflicted → rebuilt by build_site.sh); descendant of origin/main: OK.
+- Retest on 892e5bb0: scan 35/0; mg-bots ALL31 **31/31 kinds, 93/93 plays** board = given; ag-mgcal rc 0; mg-noword-a rc 0; mg-visual rc 0; mg-skip PASS; ag-mg2 summons ×2 (pre-existing on main). cal-dauho prints "3 matching board easier than before" FAIL only because its 'before' build now already carries the Đầu hồ fix (main 377d5ce3 = the same values) → test-baseline artefact, not a regression.
+- kim/xa: the worker says these are not grading faults; I verified the same (BAL lev.kim fast [0,0] keep .6 kept on purpose in mg-tune-r1; lev.xa fast [.05,.1] keep .1). They are report-only numbers per OD ~07:35Z. The kit-mark DOUBLE-GRADING conflict (point 8 below) still stands.
+
+---
+## Earlier review of c07604e0 (kept for the record)
 PRIORITY #1 CHECK: OD 20/11 ~06:50Z (owner bug) + ~07:15Z(c) (chip + amber clock + gold round pop) + ~07:35Z (only broken games fixed, no retune) | main 377d5ce3: jmgt mgGrade/mgPace, kitGameClock (KIT §13) | review/mg-score-same c07604e0 (target), review/kit-mark 1c134a6f (MAIN, based on main 37e4a68f, NOT on this branch) | claims: wk session_01Rc5AsMwgUZdbs4boL9VMtH. START_CTX ~3 %.
 
 Final: **review/mg-score-same-rv @ 10f1dc0e** = target c07604e0 + reviewer fix e3e0a491 + final-merge origin/main 377d5ce3 (cal-p2 Đầu hồ fix; only sw.js/index.html conflicted → rebuilt). `git merge-base --is-ancestor origin/main 10f1dc0e` OK.
