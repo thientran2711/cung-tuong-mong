@@ -18,7 +18,7 @@ function ownerOf(s){const o=s&&typeof s==="object";if(o){const c=OWN_C.get(s);if
  for(const p of [S].concat(rivals))if(p&&p.staff&&p.staff.includes(s)){if(o)OWN_C.set(s,p);return p}return null}
 function servById(id){return allServ().find(s=>s.sid===id)||null}
 function staffInit(){sidN=Math.max(sidN,...allServ().map(s=>s.sid),0);capSweep();for(const p of consorts()){if(!p.staff)p.staff=[];fillStaff(p,true)}
- if(!S.court)S.court={tq:{name:"Tổng quản "+nmNew("eunE"),n:"Tổng quản thái giám Càn Thanh cung",af:{},age:56+R(6)},ksp:{name:"Thái giám Kính sự phòng Kính Sự",n:"Giữ thẻ bài",af:{},age:40+R(10)},ped:{name:"Tiểu Ngân Tử",n:"Thái giám Nội vụ phủ lo mua đồ",af:{},age:20+R(7)},ty:{name:"Thái y Trương",n:"Thái y viện",af:{},age:50+R(8)}};
+ if(!S.court)S.court={tq:{name:"Tổng quản "+nmNew("eunE"),n:"Tổng quản thái giám Càn Thanh cung",af:{},age:56+R(6)},ksp:{name:"Thái giám Kính sự phòng Kính Sự",n:"Giữ thẻ bài",af:{},age:40+R(10)},ped:{name:nmNew("eun"),n:"Thái giám Nội vụ phủ lo mua đồ",af:{},age:20+R(7)},ty:{name:"Thái y Trương",n:"Thái y viện",af:{},age:50+R(8)}};
  const L=allServ();if(!L.some(s=>s.af&&Object.keys(s.af).length))for(const s of L){const o=pick(L.filter(x=>ownerOf(x)!==ownerOf(s)));if(o){s.af[o.sid]=30;o.af[s.sid]=30}
   if(s.role==="eunuch"&&!(typeof asOn==="function"&&asOn())&&roll(20)){/* AG-ALL B: đối thực is chosen ("Hẹn ước", jagstaff) */const m=pick(L.filter(x=>x.role==="maid"&&!x.lover&&ownerOf(x)!==ownerOf(s)));if(m){s.lover=m.sid;m.lover=s.sid}}}}
 function fillStaff(p,free){const [cm,ce]=capOf(p);let [m,e]=hhHas(p);
