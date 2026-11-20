@@ -9,7 +9,7 @@ python3 "$D/dev/tools/mgcal_apply.py" "CTM-CAL dan:6.4/5@11/17/2026 co:5/5@11/17
 echo "$L" | grep -q 'dan:{b:6.4,n:5,at:"11/17/2026"}' && echo "$L" | grep -q 'co:{b:5.0' ; ok $? "1 first code: dan + co written"
 python3 "$D/dev/tools/mgcal_apply.py" "CTM-CAL dan:7.2/5@11/18/2026 ve:4.1/5@11/18/2026" >/dev/null; L=$(line)
 echo "$L" | grep -q 'dan:{b:6.4,n:5,at:"11/17/2026"}' && echo "$L" | grep -q 'co:{b:5.0,n:5,at:"11/17/2026"}' && echo "$L" | grep -q 've:{b:4.1' ; ok $? "2 merge: dan re-done keeps its first try 6.4, co untouched kept, ve added"
-echo "$L" | grep -q 'd:\[-2,-1,0,1,2\],up:1,dn:4' ; ok $? "3 the other cal keys untouched"
+echo "$L" | grep -q 'on:1,d:\[-2,-1,0,1,2\],k:' ; ok $? "3 the other cal keys untouched"
 python3 "$D/dev/tools/mgcal_apply.py" "CTM-CAL dan:12/5@11/18/2026" >/dev/null 2>&1; [ $? -ne 0 ] && [ "$(line)" = "$L" ]; ok $? "4 a base out of 0..10 is refused, nothing written"
 python3 "$D/dev/tools/mgcal_apply.py" "hello" >/dev/null 2>&1; [ $? -ne 0 ]; ok $? "4 a non-CTM-CAL line is refused"
 node -e "global.window={};global.BAL={ag:{mg2:{}}};eval(require('fs').readFileSync('$T/b.js','utf8').match(/BAL\.ag\.mg2\.cal=\{[^;]*\};/)[0]);if(BAL.ag.mg2.cal.k.co.b!==5)process.exit(1)"; ok $? "5 the written line is valid JS"
