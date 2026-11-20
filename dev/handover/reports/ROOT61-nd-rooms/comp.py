@@ -20,8 +20,8 @@ def run(room,out,figs,labels):
     glow=Image.new('RGBA',st.size,(255,248,235,0));glow.putalpha(halo.point(lambda v:min(255,v*2)*0.8))
     st.alpha_composite(glow);st.alpha_composite(txt)
     # header
-    st=st.convert('RGB');d=ImageDraw.Draw(st);hf=ImageFont.truetype(F+'DejaVuSans-Bold.ttf',26)
-    d.rectangle((0,0,st.width,44),fill=(250,243,230));d.text((14,8),out.split('/')[-1][:-4],font=hf,fill=(90,30,20))
+    st=st.convert('RGB');d=ImageDraw.Draw(st);hf=ImageFont.truetype(F+'DejaVuSans-Bold.ttf',64)
+    t='NỮ ĐẾ  ·  '+out.split('trong ')[-1][:-4];tw=d.textlength(t,font=hf);d.rounded_rectangle((st.width/2-tw/2-30,14,st.width/2+tw/2+30,104),18,fill=(250,243,230),outline=(150,40,30),width=4);d.text((st.width/2-tw/2,24),t,font=hf,fill=(150,30,20))
     st.save(out,quality=90);print(out,st.size)
 L=lambda ks:[('Nữ đế',k.split('-')[1]+(' '+k.split('-')[2] if k.split('-')[2].startswith('a') else '')) for k in ks]
 R=[('chung-tu-cung-dong-phoi-ngu-r3','Chung Tú đông · phòng ngủ',['nd-m05-0','nd-m29-1','nd-m05-a51','nd-m29-a65']),
