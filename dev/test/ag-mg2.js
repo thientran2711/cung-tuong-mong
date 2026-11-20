@@ -9,7 +9,7 @@ const {chromium}=require('playwright');const [,,URL0]=process.argv;const URL=/^(
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
- await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{deal()}catch(e){}render();
+ await p.evaluate(()=>{localStorage.clear();if(BAL.orig.id)BAL.orig.id.npc=0;/* cal-p2c: the bare core curve; the identity class shift (NPC + her skip) is checked in dev/test/cal-p2c.js */SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{deal()}catch(e){}render();
   /* spy on the ONE core: every NPC draw lands here with its game and occasion */
   const m0=mgNpcRaw;window.__mg=[];mgNpcRaw=function(kind,pp,o){const r=m0.apply(this,arguments);__mg.push({kind,occ:(Object.assign({},MGX.o||{},o||{})).occ,raw:r,me:pp===S});return r};
   window.__med=a=>{const s=a.slice().sort((x,y)=>x-y);return s.length?s[Math.floor(s.length/2)]:null};
@@ -32,8 +32,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r1.odds.n>0&&r1.odds.o>=3&&r1.odds.o<=97,'contest odds words: drawn with the same core (cOdds7)',r1.odds);
  /* 2 j82 rival rows (kg82NpcRaw) + her skip = her median */
  const r2=await p.evaluate(()=>{const v=__twin(liveRivals(true)[0]);__mg.length=0;const a=[];for(let i=0;i<800;i++)a.push(kg82NpcRaw(v,"co",{occ:"hoi",big:true}));
-  return{calls:__mg.length,med:__med(a),herMed:+mgMedD(mgTier("co",{occ:"hoi",big:true}).d).toFixed(2),skip:mgSkipRaw(mgTier("co",{occ:"hoi",big:true})),min:Math.min(...a),max:Math.max(...a)}});
- ok(r2.calls===800&&Math.abs(r2.med-r2.herMed)<=.75&&r2.min<r2.max,'j82 rivals: kg82NpcRaw = mgNpcRaw, median = hers, spread',r2);ok(Math.abs(r2.skip-r2.herMed)<=.5,'her "Để tài nghệ quyết định" = her median on that board',r2);
+  return{calls:__mg.length,med:__med(a),herMed:+mgMedD(mgTier("co",{occ:"hoi",big:true}).d).toFixed(2),skip:mgSkipRaw(mgTier("co",{occ:"hoi",big:true})),idSh:typeof mgIdShift==="function"?mgIdShift("co",S):0,min:Math.min(...a),max:Math.max(...a)}});
+ ok(r2.calls===800&&Math.abs(r2.med-r2.herMed)<=.75&&r2.min<r2.max,'j82 rivals: kg82NpcRaw = mgNpcRaw, median = hers, spread',r2);ok(Math.abs(r2.skip-r2.herMed-(r2.idSh||0))<=.5,'her "Để tài nghệ quyết định" = her median on that board',r2);
  /* 3 jts: the Emperor's private summons + lanterns */
  const r3=await p.evaluate(()=>{const v=__twin(liveRivals(true)[0]);__mg.length=0;const s0=v.sung;const g=[];for(let i=0;i<400;i++){const b=v.sung;tsSummonGo(v);g.push(v.sung-b);v.sung=Math.min(v.sung,60)}
   const ks=[...new Set(__mg.map(x=>x.kind))],occ=[...new Set(__mg.map(x=>x.occ))];const byK={};__mg.forEach(x=>(byK[x.kind]=byK[x.kind]||[]).push(x.raw));

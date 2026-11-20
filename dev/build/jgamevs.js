@@ -2,7 +2,7 @@
    (đàn, cờ, hát, múa, thư pháp, họa, thêu, hương … any KG82 / person game): her board + the opponent's live score and clock side by side. Pure display: NO game logic,
    NO numbers of its own (the tick / warn / settle knobs are BAL.gameVs, jbal2). Built on the kit game frame look (.kgbox / .kgame tokens), kitFaceH portraits, kitRows words.
    API:  const vs = kitGameVs({box, me:{p|face|name}, opp:{p|face|name}, unit:"phần", round:"Ván 1/3", clock:true, oppBoard:false});
-         vs.setScore(side,n) · vs.setClock(side,t) (t = seconds left, null = hide) · vs.setTurn(side|null) · vs.setRound(text) · vs.end({win:"me"|"opp"|"draw", text})
+         vs.setScore(side,n) · vs.setClock(side,t) (t = seconds left, null = hide) · vs.setTurn(side|null) · vs.setMood(side,text) · vs.setRound(text) · vs.end({win:"me"|"opp"|"draw", text})
          vs.me / vs.opp = the board slots (.kgvs-bd) the game draws into (opp slot only when oppBoard:true) · vs.destroy(). side = "me" | "opp".
    Layout: html.kv1 (Fold portrait, one page) = opponent pane on top, her pane below (stacked); html.kv2 (iPad / spread) = side by side with the round state between. */
 function kitGameVs(o){o=o||{};const B=BAL.gameVs||{pop:320,warn:.2,end:900};const unit=o.unit||"phần";
@@ -10,7 +10,7 @@ function kitGameVs(o){o=o||{};const B=BAL.gameVs||{pop:320,warn:.2,end:900};cons
  const side=(k,d)=>{d=d||{};let face="";try{face=d.face?d.face:kitFaceH(d.p,"sm")}catch(e){}
   return `<section class="kgvs-pane kgvs-${k}" data-side="${k}"><header class="kgvs-hd"><span class="kgvs-face">${face}</span><b class="kgvs-nm">${d.name||(d.p&&d.p.name)||""}</b><i class="kgvs-turn" hidden>Đến phiên</i></header>`+
    `<div class="kgvs-st"><span class="kchip kgvs-sc"><b data-vs="sc">0</b> <small>${unit}</small></span><span class="kchip kgvs-clk" data-vs="clk" hidden></span></div>`+
-   (k==="me"||o.oppBoard?`<div class="kgvs-bd"></div>`:"")+`</section>`};
+   `<small class="kgvs-mood" data-vs="mood" hidden></small>`+(k==="me"||o.oppBoard?`<div class="kgvs-bd"></div>`:"")+`</section>`};
  const el=document.createElement("div");el.className="kgvs";el.style.setProperty("--kgvs-pop",B.pop+"ms");el.style.setProperty("--kgvs-end",B.end+"ms");el.dataset.turn="";el.innerHTML=side("opp",o.opp)+`<div class="kgvs-mid"><b data-vs="round">${o.round||""}</b><span class="kgvs-res" hidden></span></div>`+side("me",o.me);
  box.insertBefore(el,box.firstChild);
  const q=(s,k)=>el.querySelector(`.kgvs-${s} [data-vs="${k}"]`),full=o.full||{};let over=false;
@@ -18,6 +18,8 @@ function kitGameVs(o){o=o||{};const B=BAL.gameVs||{pop:320,warn:.2,end:900};cons
   setScore(s,n){const e=q(s,"sc");if(!e||over)return;const t=String(n);if(e.textContent===t)return;e.textContent=t;const c=e.parentNode;c.classList.remove("kgvs-pop");void c.offsetWidth;c.classList.add("kgvs-pop");clearTimeout(c._t);c._t=setTimeout(()=>c.classList.remove("kgvs-pop"),B.pop)},
   setClock(s,t){const e=q(s,"clk");if(!e||over)return;if(t==null){e.hidden=true;return}e.hidden=false;e.textContent=`còn ${Math.max(0,Math.ceil(t))} giây`;if(o.total)e.classList.toggle("kgvs-warn",t<=o.total*B.warn)},
   setTurn(s){if(over)return;el.dataset.turn=s||"";el.querySelectorAll(".kgvs-turn").forEach(i=>{i.hidden=i.closest(".kgvs-pane").dataset.side!==s})},
+  /* K-PM-1 fix 20/11 (E22g): a mood / reaction line («Nàng ấy đang cười») lives HERE, in the pane flow under the score — never an absolute bubble over the board / a ladder row */
+  setMood(s,t){const e=q(s,"mood");if(!e)return;e.textContent=t||"";e.hidden=!t},
   setRound(t){const e=el.querySelector('[data-vs="round"]');if(e)e.textContent=t||""},
   end(r){if(over)return;over=true;r=r||{};el.dataset.turn="";el.dataset.end=r.win||"draw";el.querySelectorAll(".kgvs-turn").forEach(i=>i.hidden=true);
    const m=el.querySelector(".kgvs-res");m.hidden=false;m.textContent=r.text||(r.win==="me"?"Nàng thắng":r.win==="opp"?"Nàng thua":"Hòa nhau");
@@ -44,5 +46,5 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.8",title:"kit
 .kgvs-bd{min-height:80px}.kgvs-win{border-color:var(--good,#2d7a52);box-shadow:0 0 0 2px var(--good,#2d7a52)}
 .kgvs[data-end=opp] .kgvs-me{border-color:var(--bad,#c23b22)}
 .kgvs-res{font-weight:700;animation:kgvsEnd var(--kgvs-end) ease-out}@keyframes kgvsEnd{from{opacity:0;transform:translateY(4px)}}
-html.kv2 .kgvs{grid-template-columns:1fr auto 1fr}html.kv2 .kgvs-me{order:0}html.kv2 .kgvs-opp{order:2}html.kv2 .kgvs-mid{order:1;min-width:84px}
+html.kv2 .kgvs{grid-template-columns:1fr auto 1fr;align-items:start}.kgvs-pane{align-self:start}.kgvs-mood{color:var(--dim,#6b5a44);font-size:.8rem;line-height:1.3;overflow-wrap:anywhere}.kgvs-mood[hidden]{display:none}html.kv2 .kgvs-me{order:0}html.kv2 .kgvs-opp{order:2}html.kv2 .kgvs-mid{order:1;min-width:84px}
 @media (prefers-reduced-motion:reduce){.kgvs-pop,.kgvs-res{animation:none}}`;document.head.appendChild(st)})();

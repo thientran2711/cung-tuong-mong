@@ -1,7 +1,7 @@
 /* ================= jrd_nc: the four full roads of «Công chúa hòa thân» (nc, country branches Nam Chiếu / Bắc Địch), chapters .5–.11 (ROAD_MAP.md §4.5) =================
    ONE origin, country branches (owner OD:L1213/L1215): the roads are written ONCE with land tokens ({land} {pv} {mh} {quan} {pa} {pb}) and the
-   Bắc Địch branch (S.origin.k "bd", premises bd_* in jorigins.js) plays the SAME chapters .5–.11 under its own premise id (aliases at the end of
-   this file: bd_hoa→nc_su, bd_ngua→nc_gian, bd_tuc→nc_tuc, bd_hoang→nc_vuong). Chapter .5 opens on the .4 that was really played: nc openings
+   Bắc Địch branch (S.origin.k "bd", OLD premises bd_* in jorigins.js) plays the SAME chapters .5–.11 under its own premise id (LEGACY aliases, now in
+   jrd_bd.js, kept for saves that rolled an old bd premise; new bd lives play bd's own 4 roads: bd_hoa→nc_su, bd_ngua→nc_gian, bd_tuc→nc_tuc, bd_hoang→nc_vuong). Chapter .5 opens on the .4 that was really played: nc openings
    carry NCW(k), Bắc Địch openings BDW(k) (the bd premise ended differently). Helpers RDW / rdRel / rdOan come from jrd_tt.js (same script). */
 const ncBd=()=>{try{return S.origin.k==="bd"}catch(e){return false}};
 RDQ.ncvBL=()=>RD_FL("nc_vuong.bought")||RD_FL("nc_vuong.loser");/* named predicate an odds term in BAL.road.fx reads (rdOdds "q") */
@@ -51,7 +51,7 @@ rdDef("nc_gian",5,{t:"Đường thư qua Hội Đồng quán",w:"maid",sj:"đư�
  c1:{h:"Lão {kha} ra giá",w:"maid",t:"Lão {kha} nhắn vào: đường thư cần tiền lót tay lính gác cửa Tây Hoa và người đánh xe. Mỗi mùa một khoản, thiếu thì thư nằm lại.",o:[
   {n:"Trả đủ, dặn lão giữ miệng",wx:"đường thư êm",lx:"bạc ra mỗi mùa",rt:"Lão {kha} nhận bạc, lính gác thôi hỏi han."},
   {n:"Cho cung nữ thân tín tự đi đường riêng",wx:"không phải qua tay ai",lx:"cung nữ bị hỏi ở cửa cung",rt:"{maid} tìm được một lối qua phòng giặt.",rf:"{maid} bị thái giám gác cửa giữ lại hỏi chuyện."},
-  {n:"Bảo lão tự lo lấy",wx:"không tốn gì",lx:"lão {kha} báo về {land} rằng ngươi keo kiệt",rt:"Lão {kha} im lặng mấy ngày rồi vẫn đến."}]},
+  {n:"Bảo lão tự lo lấy",wx:"giữ lại bạc lót tay mỗi mùa",lx:"lão {kha} báo về {land} rằng ngươi keo kiệt",rt:"Lão {kha} im lặng mấy ngày rồi vẫn đến."}]},
  c2:{h:"{v} để ý cửa Tây Hoa",w:"v",need:["v"],t:"Người của {v} thấy cung nữ của ngươi ba lần ra cửa Tây Hoa trong một tháng. Nàng ta bắt đầu hỏi han Hội Đồng quán có ai người {land}.",o:[
   {n:"Đổi hẳn lối đi",wx:"{v} mất dấu",lx:"{v} biết ngươi đã đề phòng",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Từ đó thư đi qua phòng giặt, không qua cửa Tây Hoa."},
   {n:"Cho {v} thấy một việc vô hại",wx:"{v} theo nhầm đường",lx:"{v} càng nghi",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0])},rt:"Người của {v} theo cung nữ ra chợ, chỉ thấy nàng mua chỉ thêu.",rf:"{v} cười: “Mua chỉ thêu mà phải đi ba lần?”"},
@@ -182,7 +182,7 @@ rdDef("nc_gian",9,{t:"Lão {kha} bị bắt",w:"maid",sj:"lão {kha} trong ngụ
   {n:"Gặp {v}, xin nàng ta dừng tay",wx:"bớt một mũi tên",lx:"{v} biết ngươi đang sợ",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} nhìn ngươi lâu, rồi bảo người thôi đưa cơm.",rf:"{v} cười: “Tỷ tỷ cũng biết sợ.”"}]},
  t1:{h:"Lão {kha} nhắn ra",w:"maid",t:"Lão {kha} nhắn ra một câu: vợ con lão ở khu người {land} ngoài thành. Nếu ai đó lo cho họ, lão sẽ câm như đá.",o:[
   {n:"Đưa vợ con lão về {land}",wx:"lão {kha} câm",lx:"tốn bạc, thêm người biết chuyện",rt:"Vợ con lão {kha} đi theo một đoàn buôn khác trong đêm."},
-  {n:"Hứa suông",wx:"không tốn gì",lx:"lão biết ngươi chỉ hứa",rt:"Lão {kha} tạm tin.",rf:"Lão {kha} bảo: lời hứa không nuôi được ai."},
+  {n:"Hứa suông",wx:"lão {kha} tạm im, bạc còn nguyên",lx:"lão biết ngươi chỉ hứa",rt:"Lão {kha} tạm tin.",rf:"Lão {kha} bảo: lời hứa không nuôi được ai."},
   {n:"Nhờ sứ thần {land} lo",wx:"người {land} lo cho người {land}",lx:"thêm một lần gặp sứ thần",rt:"Sứ thần đưa vợ con lão về Hội Đồng quán.",rf:"Sứ thần sợ liên lụy, từ chối."}]},
  x1:{h:"Phiên thẩm vấn",w:"emp",t:"Sáng nay Đại Lý tự thẩm lão {kha}. Thiếu khanh hỏi: thư trong rương gửi cho ai trong cung.",o:[
   {n:"Lo lót để án chỉ còn là tội buôn lậu",e:["win","lose"],rt:"Đại Lý tự tâu lên: lão {kha} chỉ là kẻ buôn lậu. Hoàng thượng phê đuổi về nước. Lão đi, không nói thêm một chữ.",rf:"Thiếu khanh nghi có người lo lót, tra ngược: ai đã chạy án cho lão."},
@@ -242,7 +242,7 @@ rdDef("nc_gian",11,{t:"Trung với ai",w:"emp",sj:"sợi dây giữa hai nước
  c2:{h:"{v} đòi xử cho ra lẽ",w:"v",need:["v"],t:"{v} nhờ cha dâng sớ: “Một kẻ từng gửi tin ra ngoài không thể được nhắc tên trong quốc thư hồi đáp.”",o:[
   {n:"Xin Hoàng thượng cho đối chất",wx:"{v} không đủ chứng",lx:"chuyện cũ bị khơi lại",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"{v} không đưa ra được gì mới.",rf:"{v} đọc to lời khai cũ."},
   {n:"Gửi lễ hòa giải",wx:"hai cung tạm yên",lx:"{v} nắm thóp",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} nhận lễ, rút sớ.",rf:"{v} nhận lễ rồi vẫn để sớ đó."},
-  {n:"Mặc kệ",wx:"không tốn gì",lx:"sớ nằm trên án",rt:"Ngươi không đáp."}]},
+  {n:"Mặc kệ",wx:"chuyện cũ không bị khơi, chẳng ai nắm thóp ngươi",lx:"sớ nằm trên án",rt:"Ngươi không đáp."}]},
  t1:{h:"Lời của sứ thần",w:"emp",t:"Sau buổi tiếp sứ ở tiền triều, Hoàng thượng ân chuẩn cho sứ thần, vẫn là lão thần năm trước, vào bái kiến ngươi trong buổi gia lễ ở nội điện, cách một bức rèm, có thái giám Nội vụ phủ đứng hầu. Ông quỳ: “{pv} sai thần hỏi: công chúa còn là người {land} không.”",o:[
   {n:"Còn, và cũng là người Đại Hy",f:"double",wx:"hai bên nghe đều thuận",lx:"có người cho là lời nước đôi",rt:"Sứ thần cúi đầu thật thấp.",rf:"Thái giám Nội vụ phủ ghi câu ấy vào sổ, mặt không vui."},
   {n:"Không. Thiếp là người Đại Hy",f:"court",wx:"thái giám tâu lại nguyên lời với Hoàng thượng",lx:"sứ thần mang câu ấy về cho {pv}",rt:"Sứ thần nhắm mắt, lui ra."},
@@ -484,7 +484,7 @@ rdDef("nc_su",11,{t:"Chiếc cầu hai nước",w:"emp",sj:"quốc thư của {l
  c2:{h:"{v} tâu ngươi thiên vị cố quốc",w:"v",need:["v"],t:"{v} nói giữa buổi thỉnh an: “Năm nay sứ {land} được lợi đủ đường. Ai cũng biết vì ai.”",o:[
   {n:"Kể từng điều Đại Hy được lợi",wx:"lời {v} rỗng",lx:"cãi nhau giữa buổi thỉnh an",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"Ngươi kể ngựa, da, thuế chợ. Các phi tần gật đầu.",rf:"Cả điện thấy hai người cãi nhau, không ai đứng về phía nào."},
   {n:"Gửi lễ hòa giải",wx:"hai cung tạm yên",lx:"{v} nắm thóp",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} nhận lễ, thôi nói.",rf:"{v} nhận lễ, rồi vẫn nói."},
-  {n:"Mặc kệ",wx:"không tốn gì",lx:"lời ấy ở lại",rt:"Ngươi không đáp."}]},
+  {n:"Mặc kệ",wx:"êm chuyện ở buổi thỉnh an, chẳng ai nắm thóp ngươi",lx:"lời ấy ở lại",rt:"Ngươi không đáp."}]},
  t1:{h:"Dòng thư về ngươi",w:"emp",t:"Hoàng thượng hỏi: “Cha nàng nhắc đến nàng. Nàng muốn trẫm hồi đáp dòng ấy thế nào?”",o:[
   {n:"Xin ngài viết: nàng là cầu của hai nước",f:"bridge",wx:"tên ngươi đứng trong quốc thư",lx:"có người cho là ngươi tham danh",rt:"Hoàng thượng gật đầu, ghi lại.",rf:"Hoàng thượng bảo: “Quốc thư không viết tên phi tần.”"},
   {n:"Xin ngài viết: nàng là phi của trẫm",f:"law",wx:"ngài vui",lx:"{land} đọc thấy ngươi đã thuộc về Đại Hy",rt:"Hoàng thượng cười: “Đúng thế.”"},
@@ -1008,9 +1008,3 @@ RD97L.push(rdRare({a:"nc_vuong_11",tag:"Hai nhà thề hòa bằng rượu của
  bad:["Nhận vàng, hứa nói giúp","Nhận trang ấp","Khuyên chia đôi"],x:[()=>S.danh>=RR("nc_vuong_11").bar,"Danh từ "+RR("nc_vuong_11").bar],
  t:"Rượu hội thề được cất ở cung ngươi theo cách {mh} dạy, niêm ấn cung ngươi đưa ra Hồng Lô tự. Sứ của tân {quan} và sứ phe thua ngôi, hai bên từng muốn giết nhau, cùng nâng chén; Hoàng thượng về kể: “Họ uống rượu của nàng, nên không bên nào dám bội.” Hoàng thượng ban biển ngự bút «Trung hiếu lưỡng toàn»: trung với Đại Hy, hiếu với {land}. Ở cố quốc, người ta lập một tấm bia ghi tên ngươi bên cạnh lời thề.",
  go:(_A,G)=>e67bien(G[0]),rw:"bienngu",ti:"Người giữ lời thề hai nhà"}));
-/* Bắc Địch branch: the same chapters under the bd premise ids (road key = the premise rolled for this life).
-   Runs at load, before jbal2.js: it walks the registered chapters (ROAD14), not BAL.road. */
-(function(){const P={bd_hoa:"nc_su",bd_ngua:"nc_gian",bd_tuc:"nc_tuc",bd_hoang:"nc_vuong"};
- for(const b in P){const r=P[b];for(const n in ROAD14[r]||{}){const id=ROAD14[r][n];
-  const {o,road,rn,...d}=ARC67[id];d.rth=d.rth||RTHEME67[id];rdDef(b,+n,d)}
-  for(const x of RD97L.filter(x=>x.a===r+"_11"))RD97L.push(Object.assign({},x,{a:b+"_11"}))}})();
