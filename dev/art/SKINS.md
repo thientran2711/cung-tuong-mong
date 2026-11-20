@@ -132,3 +132,21 @@ Base https://ctm-img.victoria-tntt.workers.dev/img/_review/ (all files checked 2
 - c21 Thái hậu 2-ref test | a65 | gen 4RF3RqW9Aa→cut SyhOPY6Ub8 | img/_review/thaihau-2ref/c21_a65.png (+ c21_sheet.jpg; thaihau-mass-T2.md T2b) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
 - c13 Thái hậu states-sample (sheet3 = the approved collar, K5) | a51 | gen xSBs5fpjfW | img/_review/states-sample/c13_a51_thaihau_v0.png (+ _v1.png, sheet3.jpg; states-sample.md) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
 - c05 Thái hậu states-sample | a51 | gen dt4oDycXSL | img/_review/states-sample/c05_a51_thaihau_v0.png (+ _v1.png; states-sample.md) | Thái hậu 18/11 kept as skin, Lượt 618 redraw
+
+## 20/11 t1/t2 new-girl outfits → SKINS (owner, verbatim via ROOT-69: "những cái bộ trang phục nào mà đang sản xuất mới ngày hôm nay cho các cô mới nè, tức là cái bộ của đáp ứng và thường tại nè, làm thành skin. Ok, không bỏ nha, làm thành skin. Lỡ vẽ rồi thì ok không sao cả. Để làm thành skin.")
+Final t1/t2 = G17 square neckline. Files: dev/handover/review-sheets/skins-1120/ (copies; originals untouched). Never delete.
+- s62 | t1 Đáp ứng a18 (20/11) | gen mEZiZ8ShJQ cut EbYGd10uuO | dev/handover/review-sheets/skins-1120/s62_t1_a18_crossedcollar.webp | replaced by G17 square neckline (old crossed collar)
+- s62 | t2 Thường tại a18 (20/11) | gen 9ZHuqIGNYZ cut w4am5Rz7EI | dev/handover/review-sheets/skins-1120/s62_t2_a18_crossedcollar.webp | replaced by G17 square neckline (old crossed collar)
+- s62 | t2 Thường tại THỬ kiểu 2 a18 (20/11) | gen nVsx9M3YQD cut — | dev/handover/review-sheets/skins-1120/s62_t2_a18_THU_covuong_kieu2.webp | replaced by G17 square neckline (square style 2 rejected ('rộng quá'))
+- s64 | t1 Đáp ứng a18 (20/11) | gen mEZiZnFhJQ cut lJtoFzygv9 | dev/handover/review-sheets/skins-1120/s64_t1_a18_crossedcollar.webp | replaced by G17 square neckline (old crossed collar)
+- s64 | t2 Thường tại a18 (20/11) | gen YMljgXcWeC cut JNCvkVoOq4 | dev/handover/review-sheets/skins-1120/s64_t2_a18_crossedcollar.webp | replaced by G17 square neckline (old crossed collar)
+- s64 | t1 Đáp ứng THỬ a18 (20/11) | gen TdwgAm8VNR cut — | dev/handover/review-sheets/skins-1120/s64_t1_a18_THU_covuong.webp | replaced by G17 square neckline (square test (not the final G17 build))
+- s64 | t2 Thường tại THỬ a18 (20/11) | gen KLpVEomkqp cut — | dev/handover/review-sheets/skins-1120/s64_t2_a18_THU_covuong.webp | replaced by G17 square neckline (square test style 2 (rejected))
+- s65 | t1 Đáp ứng a18 (20/11) | gen u5Wzn36QLD cut tCR6YKWmZJ | dev/handover/review-sheets/skins-1120/s65_t1_a18_crossedcollar_cut.webp | replaced by G17 square neckline (old crossed collar)
+- s65 | t2 Thường tại a18 (20/11) | gen iG5Hb2f3uK cut cpSsPhc0eP | dev/handover/review-sheets/skins-1120/s65_t2_a18_crossedcollar_cut.webp | replaced by G17 square neckline (old crossed collar)
+- s65 | t1 Đáp ứng THỬ a18 (20/11) | gen bxM0vET5Y2 cut — | dev/handover/review-sheets/skins-1120/s65_t1_a18_THU_covuong.webp | replaced by G17 square neckline (square test (not the final G17 build))
+- s65 | t2 Thường tại THỬ a18 (20/11) | gen Lw8XqYiswO cut — | dev/handover/review-sheets/skins-1120/s65_t2_a18_THU_covuong.webp | replaced by G17 square neckline (square test style 2 (rejected))
+- m29 | t1 Đáp ứng a18 (20/11) | gen 6AbFJeJiJO cut lJtojGEgv9 | dev/handover/review-sheets/skins-1120/m29_t1_a18_crossedcollar_cut.webp | replaced by G17 square neckline (old crossed collar)
+- m29 | t2 Thường tại a18 (20/11) | gen BhNPVrToQR cut dt4ODkaXSL | dev/handover/review-sheets/skins-1120/m29_t2_a18_crossedcollar_cut.webp | replaced by G17 square neckline (old crossed collar)
+- m19 | t1 Đáp ứng a18 (20/11) | gen EbYGtmwuuO cut yiufJaxPW9 | dev/handover/review-sheets/skins-1120/m19_t1_a18_crossedcollar_cut.webp | replaced by G17 square neckline (old crossed collar)
+- m19 | t2 Thường tại a18 (20/11) | gen P3QCUdD42C cut 8ai9BNiIrU | dev/handover/review-sheets/skins-1120/m19_t2_a18_crossedcollar_cut.webp | replaced by G17 square neckline (old crossed collar)
