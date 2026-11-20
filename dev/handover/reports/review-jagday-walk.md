@@ -91,3 +91,53 @@ Rollover rules (verbatim):
 - The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+## ROUND 4 — FINAL GATE review/jagday-walk-r2 00452105 → review/jagday-walk-rv 64750121 (merge of LIVE 27a7dcf5) → VERDICT: FAIL (1 item; every gate green)
+Reviewer: REVIEW jagday-walk #2 session_01964izCAkPLwbFgegsZ7v5u (child of D #12, depth 4). START_CTX ≈ 4 % of 1M.
+PRIORITY #1 CHECK ('walkLeadIn|walkTimed|agWalkGuard|walkDrop|travel per walker'): OD L1976 + OD 18/11 ~20:00Z/~20:05Z + law 1 / 6b / 11 | main 27a7dcf5 (no jwalk walkLeadIn, no agWalkGuard) | review/* jagday-walk-r2 00452105 (this), walk-cost-rv2 bd2b1c59 (inside it) | claims JAGDAY-WALK #2 session_01964izErhGdgkwJLtAAq7VF.
+Merge: origin/main 27a7dcf5 into 00452105. The only conflicts were index.html and sw.js: I took theirs, then ran assemble.py + build_site.sh. Pushed as review/jagday-walk-rv 64750121, which has LIVE as an ancestor.
+
+### Code read (29c59bdc..00452105, the worker's own commits a30be97f + d3051334): OK
+- walkTimed now holds only the khắc inside the jptime away window [t0, due). After due, her next move walks like any other move.
+- walkLeadIn: the khắc before a j95 secret meeting / tryst become her road (and her servant's road). Kept rows (walkKeepRow) are never overwritten, and neither is the khắc now or an earlier one of a record already shown. A road that does not fit is counted in JWALK.stat.miss. No deed or tryst is moved or lost (law 6b OK).
+- Travel per walker in walk-cost tests 5/11 is honest (law 1). travel(a,b) with no walker defaults to S, which adds HER «đi chậm» to every NPC road. walkWho(id) gives the NPC's own penalty, which test 10 pins. In my scan, the plain travel(a,b) variant gave plainExtra = 0 over 160 buổi, so the change hides no jump.
+- Reading ag_tell as road is honest: jagday agTell writes «ag_tell» only on the bearer's khắc between seeing and due (due = ks + agWalk), at her master's place.
+- Test 5: the 0.4 bar is back on all rows, with the 0.6 tripwire and the 0.1 jwalk-own bar kept. The iwBind walk-back bind (IHA C/F) comes from bd2b1c59 and is unchanged here.
+
+### Gates on 64750121 (run one at a time)
+| gate | result |
+|---|---|
+| walk-cost | ALL OK (5: all rows 0/50 vs off 77/79; 11: deed 0 vs off 4, errand 0 vs off 1) |
+| ag-walk | 10/10 |
+| ptime / ptime2 | ALL OK / ALL OK |
+| invite-host-away ×10 | 10/10 runs 9/9: C 10/10, E 10/10 (base E rate was 1/10) |
+| time-spill-guard | PASS (static + runtime, 76 checks) |
+| coop-e2e (LIVE Worker) | 68/68 |
+| quickcheck --cpu 4 | PASS: core gates PASS, old save ok, perf new/live render 257/278, tab 463/499, buổi 1118/1344 ms |
+
+### Own far-jump scan + deeds (seeded Math.random, AGL flushed every khắc, 16 buổi per seed; class = the row pair around a far move with travel ≥ 2 per walker and no road)
+| build | seeds | far moves | bare jumps (deed / deed↔other / follow / errand / other) | deeds landed | consort deeds | walkDrop |
+|---|---|---|---|---|---|---|
+| main 27a7dcf5 | 1–5 | 307 | 307 (21 / 180 / 92 / 4 / 10) | 822 | 139 | 0 |
+| 64750121 | 1–5 | 183 | **2** (0 / 2 / 0 / 0 / 0) | 767 | 146 | 50 |
+| 64750121 | 6–10 | 176 | **5** (2 / 2 / 1 / 0 / 0) | 759 | 132 | 50 |
+| 00452105 (pre-merge) | 1–5 | 203 | 7 (2 / 3 / 1 / 1 / 0) | 795 | 130 | 59 |
+| 29c59bdc (round 3) | 1–5 | 181 | 2 (1 / 1 / 0 / 0 / 0) | 691 | 122 | 60 |
+Deeds: walkDrop ≈ 50–60 per 80 buổi is the same on round-3 29c59bdc, so it is not new. Each drop is counted (AG.stat.drop + AGD.stat.walkDrop) and its doer re-plans (agTouch). Deeds landed are −7 % vs main, and consort deeds are within the seed spread. That fits "walks cost khắc" (OD L1976). No agent / walk / page errors.
+
+### FAIL items (fixer = JAGDAY-WALK #2 session_01964izErhGdgkwJLtAAq7VF; the base is now review/jagday-walk-rv 64750121)
+1. **Residual far jumps are still there: 7 per 160 buổi, not 0.** This is the round-3 watch item. The rule was «a sample at the final gate must be named and fixed there». The worker reported 0 in all classes, but the scan above finds 2 + 5. Samples (row = khắc 0 | 1 | 2 | 3):
+   - s15 (seed 2, b1): `r4/shift | r2/go «Bạch Tuyết Dao sang Cảnh…» | r4/ag_maid:nvp | r4/ag_maid:nvp`. Instrumented: at khắc 2 agWalkShort ran with kh = cur and returned 0. With kh = cur it reads row[cur] (the deed's own row, r4) as her start, not row[cur−1] (r2), where she really was.
+   - s17 (seed 4, b4): `kn/follow | kn/go «Mạnh Bạch Lộ sang Càn Ninh…» | r5/ag_srv:chat | r5/ag_srv:chat`
+   - s20 (seed 6, b6): `r3/shift | r3/shift | vuon/go «Diệp Tử Yên sang Ngự hoa…» | r3/ag_maid:nvp`
+   - s11 (seed 6, b6) deed→deed: `r3/ag_maid:embro | vuon/ag_maid:follow ×3`. s3 (seed 10, b10): `r5/ag_maid:scout | kn/ag_maid:sweep ×3`.
+   - s42 (seed 2, b2) follow: `r14/brk | r14/go | vuon/follow «Thẩm Băng Tâm sang Ngự hoa…» | vuon/follow`
+   One root: a row next to a not-yet-started deed is written AFTER agWalkGuard ran in that khắc. Cases: a mistress's move that lands later (agLater / agent slice after j95sync) rewrites her maid's retinue «go/follow» row in the khắc now; a carried deed at khắc 0 of a new buổi. By the next khắc the deed has started (p.kh > cur fails), so the guard skips it, and jwalk never rewrites a kept deed row.
+   Fix pointer:
+   - (a) Re-run agWalkGuard on the record after every write that can change a deed's neighbour: the end of an AGL landing batch, agSpill / carry at khắc 0, and the j95s retinue rewrite.
+   - (b) In agWalkShort, when kh === cur, take her start from row[cur−1] (where she was) and not from row[cur]. A deed decided in the khắc now starts its walk now, the same as jwalk's now-rule.
+   - (c) For the follow class: a retinue «follow» row written after the jwalk pass needs the same road. One option is to run the jwalk pass after j95sPass for rows changed in the khắc now.
+   - Test: extend walk-cost test 11 (or a new 12) to seeds 1–10 × 16 buổi with seeded Math.random and an AGL flush every khắc. All classes must be 0. Report a before/after table with my classes. Then re-run every gate in the table above.
+Nothing else fails. Everything else in 00452105 (and walk-cost-rv2 bd2b1c59 inside it) can PASS as it is, once item 1 is 0.
+
+STATUS: FAIL review/jagday-walk-rv 64750121 (= jagday-walk-r2 00452105 + LIVE 27a7dcf5). All 8 gates green. The far-jump scan finds 7 bare jumps per 160 buổi (main 307 per 80), all from rows written after agWalkGuard in the khắc. Fixer: JAGDAY-WALK #2.
