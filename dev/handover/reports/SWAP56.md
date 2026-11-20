@@ -26,5 +26,12 @@ Owner L1266 20/11. Text only, 0 credits, no Magnific, no gens.
 - Rule: `python3 dev/art/rule.py set G1 ... --luot 1266` (old text -> ART_RULES_HISTORY). Other rules naming Phi vân kiên / Quý phi 2 capes: only G1 (grep "cloud collar|yunjian|2 capes|hai lớp|TWO layered" ART_RULES.md = G1 + unrelated G17/G27). rule.py check: 270 lines, 0 dup.
 - Not touched (archive/old test files, not live builders): dev/art/rank8-s62/*, rank8-old4/*, review-sheets/*, figwork/, t8-prompt-B golden dirs, owner-copy/mk_ranks_v3.py, seasons4/s62_t5_*_HAN/MINH/THU/... (those are other season test sets with their own "no cape, no cloud collar" words). If any should follow the swap, say so.
 
+## GATE (build_all.py --check, all ages, HEAD vs patched, FAIL keys person/rank/age)
+a18 433->433, a26 441->441, a36 441->439, a51 898->898, a65 895->895 FAIL lines. NEW failures = 0 at every age; fixed = 2 (s35 t6 a36, s45 t6 a36: t6 got shorter). Remaining FAILs are pre-existing (e.g. s16 t5 pose-dedupe, a51/a65 >10 000 length, m13 face 'PHOENIX eyes' X08), identical before/after.
+
+## A38 KEEP CHECK (after Foreman C #5 note)
+.keep sidecars + base copies (HEAD originals) in dev/art/swap56/base/: swap56/s62_t5.txt, s62_t6.txt, seasons4/s62_t5_XUAN_COMOI.txt, s62_t6_XUAN_COMOI.txt -> keep_check.py --sidecar PASS x4 (allowed drops = only the moved clause(s) + 'collar and cape trim' + caption words).
+CORRECTION: seasons4/ladder_base/s62_t6.txt at HEAD was NOT equal to the HEAD builder output (older YEL/LUX wording: 'rich gold-thread embroidery covering much of the robe', 'a few strands of pearls', 'royal yellow ... image 2 is only a colour reference'). So swap56/s62_t6.txt, ladder_base/s62_t6.txt and s62_t6_XUAN_COMOI.txt are made from the OLD files by string swap only (nothing else cut). t5 base = HEAD builder output (equal), so t5 files = swap only. t6 XUAN_COMOI: collar parenthetical shortened to '(lobes on the shoulders and back, never covering the neck)' to stay <=10 000 (9 986). make_comoi.py t6 now asserts >10 000 against the stale base -> do not re-run it for t6 (it is only a record of the swaps). NOTE for foreman: the LIVE builder (build.py) t6 still says the shorter YEL_T6 wording ('gold-thread embroidery over much of the robe', 'a few pearl strands'), unlike the older s62 t6 test files; unchanged by me (A18) - decide if the files or builder is the approved one.
+
 ## Open
-- Pre-existing gate/--check failures (see below) are not caused by the swap.
+- Nothing from the swap. Owner may want t5 capes wording restored longer (see call 4).
