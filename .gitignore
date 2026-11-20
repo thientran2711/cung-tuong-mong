@@ -8,3 +8,6 @@
 img/*.json
 dev/site/.cdn-state.json
 __pycache__/
+
+# rank8 cut-outs live on the CDN (img/fig-cut/rank8/, CDN-T78 20/11); never commit them
+dev/art/rank8-t78/cut/*.png
