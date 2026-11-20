@@ -418,7 +418,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW phutang-road r2 (BIG opus E21r2; successor of E21r @0448dc8c) of b868bbce | review/phutang-road | FOREMAN E #17 | session_01DgYSWod6Dw7HtUXCQisjD1 | RUNNING | 20/11 10:14Z |
 | home-chapters r2 fixes (opus E25b; successor of E25 @b6b5b99d5; E25r FAIL @a3cc98226) | review/home-chapters-r1 | FOREMAN E #17 | session_01DgYSWob7AScwYwurseKupN | SẴN SÀNG KIỂM r2 7882ea5d7 (kit part pending) | 20/11 10:18Z |
 | REVIEW role-parity-drift-kyngo (SMALL sonnet E23r; probe-only) of 41d620a5 | review/role-parity-drift-kyngo | FOREMAN E #17 | session_01DgYSWmgey4KqSWQJLrpZR5 | PASS 9a6eaa38; ARCHIVED | 20/11 10:20Z |
-| walk-cost «về nhà» khắc + every goTo/walk cost (opus; ORDER ROOT-76 08:36Z; OD L1976) | review/walk-cost; briefs/D9-gap-jobs.md JOB 6 | D #9 for ROOT-76 | session_01964izDFHWrShB8Y6GaEAHh | RUNNING | 20/11 09:21Z |
+| walk-cost «về nhà» khắc + every goTo/walk cost (opus; ORDER ROOT-76 08:36Z; OD L1976) | review/walk-cost; briefs/D9-gap-jobs.md JOB 6 | D #9 for ROOT-76 | session_01964izDFHWrShB8Y6GaEAHh | RUNNING | 20/11 09:21Z | | LAND READY ffd22ea6 (20/11 12:36Z)
 | person-minigame-acts ROUND C (opus E22g; successor of E22f @90f464f5; r3 42dba2ac with E22r) | review/person-minigame-acts-c | FOREMAN E #17 | session_01DgYSWpbhufsng6okRiVwYE | RUNNING | 20/11 10:28Z |
 | kit-ge KIT KEEPER (sonnet; K-GE-1 kitBranchMap + K-GE-2 two-tone Thiên mệnh plate + K-GE-3 plate-label rows) | review/kit-ge; reports/kit-ge.md | MAIN ROOT-76 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5bbdf1ea | 20/11 09:10Z |
 | REVIEW kit-ge (SMALL kit sonnet) of 5bbdf1ea (K-GE-1/2/3) | review/kit-ge-rv; briefs/rv-root76-kit-ge.md | MAIN ROOT-76 | session_01Rc5AsMf18e5QE71CKAndhz | PASS 5bbdf1ea | 20/11 09:28Z |
@@ -451,4 +451,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-rows-b KIT KEEPER (sonnet; KP12/13/15/17/19/20/21 + K-PM-1; KP14, KP22 open) | review/kit-rows-b; reports/kit-rows-b.md | MAIN ROOT-78 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM (see message) | 20/11 |
 | REVIEW coop-staff-split r1 (opus BIG) of 797982a5 | review/coop-staff-split-r1 | B | session_01N1tNP57zWUL3xM4EWuAwtL | RUNNING | 20/11 12:26Z |
 | coop-host-lag (opus; host-only world writes reach guest a week late: figThPick + names sweep + rebirth flake; stacked on names-unique-r2-r1) | review/coop-host-lag | B | session_01N1tNP6rvC3RLvQMFGeo8UB | RUNNING | 20/11 12:27Z |
-jagday-walk (GAP follow-up, MAIN GO) | review/jagday-walk | session_01964izFMBWywRUbAg2MV1QH | RUNNING | 20/11 12:35Z | Foreman D #10
+| jagday-walk NPC deed→deed walks (GAP follow-up, MAIN GO 10:42Z; opus) | review/jagday-walk | Foreman D #10 | session_01964izFMBWywRUbAg2MV1QH | RUNNING 20/11 12:35Z |
