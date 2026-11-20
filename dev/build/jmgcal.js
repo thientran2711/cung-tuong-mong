@@ -67,7 +67,7 @@ function run(kind,seq){const K=KG82_KIND[kind],ds=C().d.slice(),n=ds.length,raws
   const box=kg82Box();box.innerHTML=`<h4 class="kpst">Thử tay · ${K.n}</h4>`+kg82Rows([["Môn",`${K.n} · ${K.t}`,"t"],["Hồi",`${i+1}/${n}`,"t"],["Độ khó",mgDiffTxt(t,kind),"n"]])+
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button></div>`;
   kgReady(box,{kind});/* KIT §13.7 rules screen; mgcal numbers unchanged (rounds, gaps) */
-  $("kg82go").onclick=()=>kg82Play(kind,raw=>after(raw))};
+  $("kg82go").onclick=()=>kg82Play(kind,raw=>after(raw),{raw:1})};/* cal-p2c: Thử tay = her raw hand (no identity offset; her b is seeded from BAL cal.k, jmgid) */
  let L=null;/* owner bug 20/11 (ROOT-72): the kind is saved the moment the LAST round's raw arrives, before any button — leaving after round n keeps it;
     an unfinished kind is never saved (raws stay local until round n), so the code never carries a partial kind */
  const after=raw=>{raws.push(raw);i++;const last=i>=n;if(last)L=recSet(kind,raws.slice(),ds);
