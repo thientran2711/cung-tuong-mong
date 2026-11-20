@@ -9,7 +9,7 @@ function start(){
      preg:0,hidden:false,fake:0,fert:0,anthai:0,doctor:0,pray:0,kids:[],heir:null,lastPromo:0,turn:0,dead:false,
      arts:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},artp:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},master:0,confined:0,shield:0,tablet:0,
      place:"home",visit:null,tonight:null,inv:[],an:0,nightLog:[],evm:{},rl:{},hieu:"",block:0,dress:null,asthma:false,shop:[],seen:{},emp:mkEmp(),st:{step:0,done:0,tag:""},recorded:false,nights:0,thDead:false,logs:[],caseEv:0,avenged:false,lad6:1/* maid-ladder-6: born on the six-rung maid ladder */};
-  if(typeof tmInstall==="function")tmInstall(S);rivals=[];S.name=freshName();apply(o.o);if(o.art)Object.assign(S.arts,o.art);S.ally=o.ally?1:0;
+  if(typeof tmInstall==="function")tmInstall(S);rivals=[];S.name=freshName();apply(o.o);S.ally=o.ally?1:0;
   for(const [r,q] of BAL.ps.harem)rivals.push(newRival(r,q));
   /* palace-start: a young harem (the Emperor's household from before the throne + the first draft), 3–5 small children (psSeedKids), court still weak (S.reign: hook for the Emperor's side story, D5) */
   rivals.forEach(v=>{v.age=BAL.ps.consAge[0]+R(BAL.ps.consAge[1]+1)+(v.queen||v.rank>=4?BAL.ps.consAge[2]:0)});psSeedKids();S.ps=1;S.reign={y0:S.year,power:BAL.ps.power0,ch:0,side:null};/* D5 hook: Emperor side story chapters (ch) and her side road: side = "emp" | "th" | "quyen" */spreadTraits();
@@ -17,6 +17,9 @@ function start(){
   normAll();
   if(S.ally)allyBond(liveRivals(false));
   const s=STORY[o.k];if(s.init)s.init();
+  /* origin-arts (owner OD 20/11 ~02:05Z): her start arts + tứ đức = the row of HER identity (origin × the road STORY init just rolled, S.st.f14.road)
+     in BAL.orig.art; old saves never pass here, so they keep the arts they have (law 6c) */
+  {const A=originArts(o.k,S.st&&S.st.f14&&S.st.f14.road);S.vir=S.vir||{};for(const a in A){if(typeof VIR!=="undefined"&&VIR.some(x=>x.k===a))S.vir[a]=A[a];else S.arts[a]=A[a]}}
   S.visit={k:"home",people:homePeople(),talked:false};S.buoi=0;rollWx();
   quiet=false;used=0;tab="act";
   const E=S.emp;
@@ -29,7 +32,7 @@ function start(){
    <p class="past">Mỗi tháng ba tuần; mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi buổi ${BAL.time.khac} khắc. Mở Bản đồ để đi gặp người, chạm vào người để nói chuyện hay ra tay.</p>`});
   flip();newLots();deal();render();
 }
-function homePeople(){const p=[{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`Cung nữ thân tín · thiện cảm ${S.maid.loyal}${typeof cmInfo==="function"?cmInfo(S.maid):""}`}];
+function homePeople(){const p=[{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`${kitMaidTitle()} · thiện cảm ${S.maid.loyal}${typeof cmInfo==="function"?cmInfo(S.maid):""}`}];
   S.kids.filter(k=>k.alive).forEach(k=>p.push({kind:"kid",ref:k,name:k.name,ini:k.sex==="m"?"Tử":"Nữ",col:k.heir?"#f0d070":"#c9a0e0",info:`${k.age} tuổi · Sức khỏe ${k.hp} · Tài ${k.tal} · Hoàng thượng thương ${k.fond}${k.heir?" · Thái tử":""}`}));return p}
 
 function pool(){const L=S.emp.likes,K=S.emp.known,tt=has("trongtai")?2:1;

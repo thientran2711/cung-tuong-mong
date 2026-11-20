@@ -69,7 +69,7 @@ function hdLvF(lv){try{const v=mgLev({lv},"hoadien","tol");if(v!=null)return v}c
 /* NPC / bot: her best hoa điền for her phẩm (Kiêu ngạo / Tham vọng reach one above), q from her hand (hashed per day: no Math.random) */
 function hdNpc(v,h,sk){try{const L=hdOwned(v);if(!L.length)return null;let cap=Math.min(8,wdPOf(v));try{if(v!==S&&wdNpcBias(v)>0)cap++}catch(e){}
   const e=L.find(x=>WD_ITEMS[x.k].P<=cap)||L[L.length-1];const B=BAL.hd;
-  let c=B.npc.q0+B.npc.qSk*(sk||0);try{const H=BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.hand;if(v!==S&&H&&H.on&&typeof mgHand==="function")c=mgHand("hoadien",v)/10}catch(x){}
+  let c=B.npc.q0+B.npc.qSk*(sk||0);try{const H=BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.hand;if(v!==S&&H&&H.on&&typeof mgHandEff==="function")c=(mgHandEff("hoadien",v)-H.w/2)/10}/* fair spread (OD 20/11): her average play (hand + art / upbringing lift − w/2) */catch(x){}
   const r=i=>(wdHash(String(h)+":hd"+i)%1000)/1000;const q=Math.max(0,Math.min(B.npcCap,c+(r(1)+r(2)-1)*B.npc.spread));return{k:e.k,q:+q.toFixed(3)}}catch(x){return null}}
 
 /* ---------- forehead anchor (canvas coords) of a face drawn at img {x,y,w,h} ---------- */
@@ -176,7 +176,7 @@ function kgHoaDien(box,env){const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style
   gg.font=`700 15px ${kg82Col("--display","serif")}`;gg.textAlign="center";gg.fillStyle=kg82Col("--ink","#2a1a12");kg82Lbl(gg,run?"Kéo hoa điền vào giữa trán, nghiêng cho cân":"Đang soi gương…",W/2,22,W-20)}
  /* wait for THIS face's points (like the makeup board), then the board; no points after BAL.toil.meshWait → the face-box anchor */
  function wait(now){if(stop)return;let m=null;try{m=MK_FIT.get(file)}catch(e){}if(m||now-t0>BAL.toil.meshWait){let sk=0;try{sk=toilSkill().sk}catch(e){}
-   run=hdBoard({C,G,file,box,k,sk,lvF:hdLvF(env.lv),seed:wdHash(k+":"+Date.now()),paint,onEnd:q=>{if(!stop){stop=true;env.end(Math.round(q*100)/10)}}});return}
+   run=hdBoard({C,G,file,box,k,sk,lvF:hdLvF(env.lv),seed:wdHash(k+":"+Date.now()),paint,onEnd:q=>{if(!stop){stop=true;env.hud({score:mgLive(env,Math.round(q*100)/10)});/* review/mg-score-same: one placement, its mark on the board = the mark given */env.end(Math.round(q*100)/10)}}});return}
   paint(g);raf=requestAnimationFrame(wait)}
  raf=requestAnimationFrame(wait);
  return()=>{stop=true;cancelAnimationFrame(raf);if(run)run.stop()}}
