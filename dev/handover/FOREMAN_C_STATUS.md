@@ -461,3 +461,4 @@ ROOT-68: OWNER verbatim (via ROOT-67, ~07:21Z) "Thôi tao ngủ đây, cái vi�
 ROOT-68 Lượt 1078: OWNER ORDER (verbatim via ROOT-67 ~07:22Z) 8 ranks × 3 new people, new palette, 3 workers → brief briefs/rank8-L1078.md; s62/s64/s65; ~3 300 cr (credits 84 462).
 ROOT-68 07:23Z: RANK8-A s62 session_01PEhRbxbhyLK4bXcfhR6n4Q · RANK8-B s64 session_01PEhRbvyjEpmpyECdj6KJu5 · RANK8-C s65 session_01PEhRbtQ38zs6SXPa26zapU opened (children). Lượt 1078 sent to ROOT-67 to paste. Next Lượt 1079.
 ROOT-68 07:24Z: OWNER (via ROOT-67) "Trời ơi, tao mới vừa nạp vô 1 triệu mấy, credit giờ còn có 80 mấy ngàn. Mày đốt thì sợ thiệt." → RANK8-A/B/C HOLD, prep only (0 cr) until owner says how many people.
+ROOT-68 Lượt 1081 (draft to ROOT-67): SPEND AUDIT reports/SPEND-AUDIT-ROOT68.md — 454k cr since 22:00Z, 95% seal clips/keyframes (owner Lượt 812 GO, no total cost warned). All Foreman C gens HOLD.
