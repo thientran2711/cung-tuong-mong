@@ -129,3 +129,15 @@ LOOP size pulses. Clean: buon (little motion) binh lo muu tutin.
 Credits htg set: 30 900. Balance at end 182 019 (shared). Ledger +50.
 SEAL4 TOTAL since GO (Lượt 812): 4 sets × 30 900 = 123 600 cr (+ 12 360 for the 4 samples before). All 40 A keyframes carry the old
 "Qing-style" wording (made before F14); emperors wear a standing collar, the eunuch hat a red knob → owner to decide.
+
+## HANDOVER (20/11 ~00:35Z) — SEAL4 context 31.7 % of 1M (> START_CTX 4.5 % + 25 %) → ROLL; ROOT-59 opens the successor (worker never does).
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+STATE: ALL WORK DONE. 4 giận samples + 4 full sets (ht htg tg tv × vui buon so an binh ghen lo muu tutin hanghai) on CDN
+img/_review/emo-anim-groups/, ledger merged (200 sg4_set lines + 20 sample lines), everything pushed. Nothing running, no sub-agents left.
+Tools: sg4_prompts.py (person blocks, Qing removed), sg4_set.py (Thái hậu prompt word for word, person swap, hanghai coral, htg skin sentence,
+refuses banned words), sg4_post.py (flat / cut+still+sheet). Successor waits for ROOT-59: owner verdict on the 4 sets, and on the F14 open
+points (emperor standing collar, eunuch red-knob hat = new keyframes if she wants). Redo candidates listed per set above (no redo without OK).
+MG3 seal gate script: when ROOT-59 sends its path, run every prompt through it before any gen.
