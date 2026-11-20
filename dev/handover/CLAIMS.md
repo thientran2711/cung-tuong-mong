@@ -472,3 +472,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW coop-host-lag r1 (opus BIG) of 3d73134b | review/coop-host-lag-r1 | B | session_01N1tNP6RAQ5d4gTSNa3cYiK | RUNNING | 20/11 15:59Z |
 | coop-name-clash (opus; co-op player-vs-NPC full-name clash, law 6b; on names-unique-r2-r1) | review/coop-name-clash | B | session_01N1tNP3ZzsWP7BnSee6wGzB | RUNNING | 20/11 16:00Z |
 | MAIN ROOT-80 (opus; from standby, depth 0) | handover HANDOVER_SESSION9 | ROOT-79 | session_01Rc5AsNA483VGFgtAtqERSa | RUNNING | 20/11 16:04Z |
+| CUNG NỮ THÂN CẬN thancan (opus; ORDER MAIN ROOT-79 15:40Z; q.close reuse, master uniform look keys, NPC masters, BAL trust/gain-loss) | review/thancan | B | session_01N1tNP6BaLDPk6fvMeWW8hf | RUNNING | 20/11 16:19Z |
