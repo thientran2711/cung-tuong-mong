@@ -90,3 +90,6 @@ Test prompts dev/art/rank8-s62/test-square456/s62_t{4,5,6}_sq.txt (= current bui
 - t6 Quý phi: + "with a SQUARE STANDING COLLAR (Quý phi style, the most covered): a stiff upright collar with SQUARE corners closing high around the neck, only a very narrow square notch at the front of the throat, edged with plain gold brocade (no pearls, no fringe, no tassels on the collar); never round/V/cross"
 Gens eIPOIm2dqL / UPvmPCKwny / 79fvNG6JAL. Sheet dev/handover/review-sheets/rank8-s62/s62_THU_covuong_t4-t5-t6.webp.
 Looked (honest): t4 = small square neckline visible in the capelet opening under the jade clasp — reads square. t5 = closed mint stand collar under the cloud collar; the SQUARE does NOT read (looks like a mandarin stand collar). t6 = stand collar with squared top corners; square weak, reads mostly as a stand collar. Coverage rises t4 → t6 as asked. No redraw.
+
+## 11. JOB 1 SKINS (0 cr)
+15 pictures kept as skins: s62/s64/s65/m29/m19 t1+t2 old crossed collar (10) + square tests s62 t2 kiểu 2, s64 t1/t2, s65 t1/t2 (5). Not skins: s62 t1 kiểu 1 (approved) and s62 t2 covuong2 (new). Copies in dev/handover/review-sheets/skins-1120/ (s64 + square-test files fetched from Magnific, 0 cr; others copied from repo; webp). SKINS.md section "20/11 t1/t2 new-girl outfits", 15 ledger rows kind SKIN-1120, rule added (owner verbatim). Nothing deleted.

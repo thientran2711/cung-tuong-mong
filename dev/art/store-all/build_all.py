@@ -231,7 +231,7 @@ def extras(S0,person,rank):
         L.append(outfit_colours(person) if rank<=6 else outfit_colours3(person))   # B15 two-colour sentence verbatim: t1-t6 (Lượt 489/499) + t7 HQP / t8 HH (G14, owner Lượt 529: the secondary disappeared at t7/t8)
         L.append(item_colour(person,rank,S0))
         if rank==7: L.append(HQP_LUX)
-        if rank in (7,8): L.append(INNER_EMB)   # G19 owner 20/11 ~08:02Z: "Ghi vào, Hoàng Quý Phi và Hoàng hậu lớp áo trong cũng phải theo nha."
+        if rank in (7,8): L.append(INNER_EMB)   # G20 owner 20/11 ~08:02Z: "Ghi vào, Hoàng Quý Phi và Hoàng hậu lớp áo trong cũng phải theo nha."
     if isinstance(rank,int) and rank<=6:
         L.append(phi_bach(person,"shawl" in S0))   # owner Lượt 397 via ROOT-47: phi bạch on EVERY thường phục rank t1-t6 (consorts and princesses), also where the store text has no shawl; never t7/t8/Nữ đế/triều phục
         if "capelet" in S0 and rank==4: L.append(capelet_cut(person))   # Lượt 434: the curved/open-V cut is ONLY for the Tần t4 capelet; t5 (and every other rank) keeps the approved store collar (closed high collar covering the neck)
