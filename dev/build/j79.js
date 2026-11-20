@@ -544,14 +544,13 @@ function kitGameFigRefresh(p){try{const c=document.querySelector(".kgame .kgfig"
  const t=document.createElement("div");t.innerHTML=f;const n=t.firstElementChild,o=c.querySelector(".kesf");if(!n)return;if(o)o.replaceWith(n);else c.prepend(n)}catch(e){}}
 window.kitGameFig=kitGameFig;window.kitGameFigRefresh=kitGameFigRefresh;
 function kitGameSet(k,v){document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v);if(k==="score"){KG82.lastScore=v;kitGameMark(v)}if(k==="time"){kitGameClock(v);kitGameMark(KG82.lastScore)}}
-/* KIT §13.8 kitGameMark (review/kit-mark, owner OD 20/11 ~07:15Z): the ONE small «n/10» chip in the title line beside the clock, in EVERY kind (all go through kg82Set -> here):
-   the mark in hand = jmgt mgLive(kind) (the graded mark, equals the result at the end); until mgLive exists, the graded shown score (mgGrade). Number only, no words;
-   rewritten only when it changes; a kit pop (.kgmk-pop) when it DROPS. Hidden when there is no mark ("–/10"). The old PHẦN/HỒI/CÒN row stays hidden (owner 17/11). */
-function kitGameMarkVal(v){const c=typeof KG82!=="undefined"?KG82.cur:null;let n=null;try{if(c&&c.kind&&typeof mgLive==="function")n=mgLive(c.kind)}catch(e){}
- if(n==null||isNaN(n)){const t=String(v==null?"":v).replace("−","-"),m=/^\s*(\d+(?:\.\d+)?)\s*\/\s*(\d+)\s*$/.exec(t);/* "a/b": a count out of b (Chải chuốt 2/3) is read as 10·a/b */
-  if(!m){if(!/^\s*[–-]\s*\/\s*\d+\s*$/.test(t))return null;n=0}/* "–/10" = no mark yet = 0 */
-  else{const raw=+m[2]===10?+m[1]:10*(+m[1])/Math.max(1,+m[2]);n=c&&c.kind&&typeof mgGrade==="function"?mgGrade(raw,c.kind):raw}}
- return Math.max(0,Math.min(10,Math.round(n)))}
+/* KIT §13.9 kitGameMark (review/kit-mark, owner OD 20/11 ~07:15Z): the ONE small «n/10» chip in the title line beside the clock, in EVERY kind (all go through kg82Set -> here).
+   The value is the HUD score itself: since review/mg-score-same every engine reports env.hud({score: mgLive(env,x)}) = the ALREADY GRADED mark in hand ("n/10", equals the result),
+   so the chip only reads it — NEVER grades again (a second mgGrade double-graded: Cờ 8 -> 5). Number only, no words; rewritten only when it changes; a kit pop (.kgmk-pop) when it
+   DROPS. "a/b" (Chải chuốt 2/3) is read as 10·a/b, "–/10" = 0. Hidden before «Sẵn sàng». The old PHẦN/HỒI/CÒN row stays hidden (owner 17/11). */
+function kitGameMarkVal(v){const t=String(v==null?"":v).replace("−","-"),m=/^\s*(\d+(?:\.\d+)?)\s*\/\s*(\d+)\s*$/.exec(t);
+ if(!m){if(!/^\s*[–-]\s*\/\s*\d+\s*$/.test(t))return null;return 0}
+ return Math.max(0,Math.min(10,Math.round(+m[2]===10?+m[1]:10*(+m[1])/Math.max(1,+m[2]))))}
 function kitGameMark(v){const n=kitGameMarkVal(v);document.querySelectorAll(".kgame .kgmk").forEach(e=>{if(n==null){e.hidden=true;e.innerHTML="";delete e.dataset.v;return}
  const old=e.dataset.v;if(old!=null&&+old===n&&!e.hidden)return;e.dataset.v=n;e.innerHTML=kitChips([`<span class="kchip n kgmk-c"><b>${n}/10</b></span>`]);e.hidden=false;
  if(old!=null&&n<+old){e.classList.remove("kgmk-pop");void e.offsetWidth;e.classList.add("kgmk-pop")}})}
