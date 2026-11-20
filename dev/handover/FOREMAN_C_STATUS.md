@@ -637,3 +637,4 @@ NEWACCT#3 HANDOVER ~18:40Z: depth 2, ctx 29 % (START 4 % + 25 %). Last owner ord
 NEWACCT#3 ~18:45Z: child #4 opened session_01D3E3NZPt7cysxtbybnExBK. #3 stops.
 NEWACCT#4 ~16:59Z: depth 3, START_CTX ~4 % (used_tokens read 0; estimate) → roll at 29 %. Took over from #3; workers DESIGN1 ITEMFIX2 WINTER1 TANG1 MAID8 told to report to #4.
 NEWACCT#4 ~17:00Z: OWNER Lượt 1252: "Chưa chốt kế hoạch 4 mùa được đâu." → season plan (Lượt 1248) NOT confirmed, stays open; do not apply it anywhere (no fur→Minh move, no builder change).
+NEWACCT#4 ~17:01Z: DESIGN1 JOB A+B done (65cba137, handover 2ab02b51 in DESIGN1.md, rolled at ctx). #4 fixed G31 captions on the 7 files (LARGE/bold + outfit name 'Áo trong cổ vuông + áo ngoài mở'), trimmed t4/t6 ≤10 000; sent owner Lượt 1253. Gate conflicts open: S12 vs G32, S13 vs open-neck t4, s62_t5_thu_MINH F14.
