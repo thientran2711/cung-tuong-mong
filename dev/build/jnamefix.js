@@ -13,16 +13,20 @@ function nmRewrite(old,neu,protect){if(!old||old===neu)return 0;const re=new Reg
  const rk=new RegExp("(?<![\\p{L}])"+nmEsc(old)+"(?![\\p{L}\\p{N}])","u");/* keys like S.rcpK "v12<name>" */const P=(protect||[]).filter(p=>p&&p!==old&&p.indexOf(old)>=0&&nmBare(p)!==old)/* review r1: never protect the renamed person's own titled name ("Thị vệ X", "Công chúa X"), else her titled texts were never rewritten */.sort((a,b)=>b.length-a.length);let n=0;const seen=new Set();
  const fix=s=>{if(s.indexOf(old)<0)return s;let t=s;P.forEach((p,i)=>{t=t.split(p).join("\u0001"+i+"\u0001")});const u=t.replace(re,()=>{n++;return neu});
   return P.length?u.replace(/\u0001(\d+)\u0001/g,(m,i)=>P[+i]):u};
- const walk=o=>{if(!o||typeof o!=="object"||seen.has(o))return;seen.add(o);
+ const walk=o=>{if(!o||typeof o!=="object"||seen.has(o)||o===S.nmReg)return;seen.add(o);/* the registry keeps old names: never rewritten */
   if(Array.isArray(o)){for(let i=0;i<o.length;i++){const v=o[i];if(typeof v==="string")o[i]=fix(v);else walk(v)}return}
   for(const k of Object.keys(o)){const v=o[k];if(typeof v==="string")o[k]=fix(v);else if(v&&typeof v==="object")walk(v);
-   if(k.indexOf(old)>=0){const k2=k.replace(rk,neu);if(k2!==k&&!(k2 in o)){o[k2]=o[k];delete o[k]}}}};/* keys too (S.rcpK "v12<name>") */
+   if(k.indexOf(old)>=0){const k2=k.replace(rk,neu);if(k2!==k){if(!(k2 in o)){o[k2]=o[k];delete o[k]}else if(typeof o[k]==="number"&&typeof o[k2]==="number"){o[k2]=Math.max(o[k2],o[k]);delete o[k]}}}}};/* keys too (S.rcpK "v12<name>") */
  try{walk(S);walk(rivals)}catch(e){console.error("nmRewrite",e)}return n}
 const NM_FIX={runs:0,renamed:[]};
 function nmFix(why){if(typeof S==="undefined"||!S||!nmOwner())return null;const out=[];
  /* co-op: the friend's own people (e.guest: her coop entry and its maid/staff/kids) are named on her seat and never renamed here (a rename
    on the host copy would be undone by her next sync and the two seats would read different names); they hold their names first and the
    host's world people (which sync to both seats) give way */
+ /* first sweep of an old save (no registry yet): people who already left the save (sold, dead, sent home) still name their records
+    (S.dnames, name keys of S.npw "Name|kind"); their names go into the registry first so no one is renamed into them (review r1) */
+ try{if(!S.nmV){const R0=nmReg();(S.dnames||[]).forEach(n=>{const b=nmBare(n);if(b&&!R0[b])R0[b]="gone"});
+  for(const k in (S.npw||{})){const n=k.split("|")[0];if(n&&n!=="*"&&n!=="me"&&/^\p{Lu}/u.test(n)&&!/\d/.test(n)&&!R0[n])R0[n]="gone"}}}catch(e){}
  try{const L0=nmPeople();const L=L0.filter(e=>e.me).concat(L0.filter(e=>!e.me&&e.guest),L0.filter(e=>!e.me&&!e.guest));const me=L.find(e=>e.me);const meSur=me?nmSurOf(nmBare(S.name)):"";
   const held=new Map();for(const e of L){const b=nmBare(e.o[e.f]);held.set(b,(held.get(b)||0)+1)}
   const full=new Set(),vars=new Set(),sur=new Set();const todo=[];
