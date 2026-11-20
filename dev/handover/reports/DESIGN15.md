@@ -121,3 +121,12 @@ Ghi chú:
 - Q4: t8 đông cloak7 đang "soft light silk, not brocade" (L1498) — đưa về C-NẶNG (gấm nhẹ) hay giữ lụa riêng cho áo choàng đông của Hoàng hậu?
 
 Gens: 0. Gate: không chạy (không có prompt mới). Commit: xem tin nhắn cho Foreman.
+
+---
+# JOB L1536 — BẢNG MÀU LÔNG PHƯỢNG (G33, phương án A L1430) — 0 gen, không sửa prompt
+Nguồn màu: dev/art/face-common/palettes_season_deep.json (P6, chị duyệt L1042 'Bản màu ổn rồi đó'), 90 phi tần (86 + s62–s65), 4 mùa.
+Mỗi người × mùa: lông phượng = [màu chính, màu phụ, màu chính đậm hơn (đầu lông / mắt lông, dịu, sat ≤ 0.50)] + viền chỉ vàng #EFBD69. Cùng bộ màu cho phượng thêu trên áo (t7 HQP, t8 HH) và phượng trên mũ (t7/t8).
+Hình (tên + nhóm ghi trên hình, A27): dev/handover/review-sheets/phoenix_L1536/phoenix_{xuan,ha,thu,dong}_{1,2}.jpg (8 tấm, 45 người/tấm).
+Bảng: phoenix_L1536.json (kèm câu EN 'words' cho builder) + phoenix_L1536.md. Script: make_phoenix_L1536.py.
+Ghi chú: lớp ngoài lông = màu áo chính → trên áo cùng màu, phượng chỉ nổi nhờ viền vàng + màu phụ + màu đậm (như v7 L1430). Nếu chị muốn phượng nổi hơn: đổi thứ tự (phụ ngoài, chính trong). Chưa nối vào builder (G33 builder HOLD).
+Câu hỏi: 'đậm' là màu thứ 3 do tôi đề xuất (chính tối hơn một chút) — chị có muốn chỉ 2 màu (chính + phụ) không?
