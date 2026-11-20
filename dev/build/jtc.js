@@ -24,15 +24,16 @@ function thcOf(p){if(!p||p.thc==null)return null;const e=thcHouse(p).find(x=>x.i
 function thcIs(p,s){return !!s&&thcOf(p)===s}
 function thcRkOk(s,isM){const r=thcMaidRk(s,isM),R=thcB().rk;return r>=R[0]&&r<=R[1]}
 /* who may be chosen: why-not text (VANPHONG) or "" */
-function thcWhyNot(p,s){if(!s||s.role!=null&&s.role!=="maid"&&s!==p.maid)return "chỉ cung nữ";const isM=s===p.maid;if(!thcRkOk(s,isM))return "chỉ cung nữ tam đẳng đến nhất đẳng";
- if((s.loyal||0)<BAL.loy.trust)return `chưa đủ tin (lòng cần ${BAL.loy.trust})`;if(typeof p.bac==="number"&&p.bac<thcB().pick.bac)return `cần ${thcB().pick.bac} bạc`;return ""}
+function thcWhyNot(p,s,o){if(!s||s.role!=null&&s.role!=="maid"&&s!==p.maid)return "chỉ cung nữ";const isM=s===p.maid;if(!thcRkOk(s,isM))return "chỉ cung nữ tam đẳng đến nhất đẳng";
+ if((s.loyal||0)<BAL.loy.trust)return `chưa đủ tin (lòng cần ${BAL.loy.trust})`;if(!(o&&o.paid)&&typeof p.bac==="number"&&p.bac<thcB().pick.bac)return `cần ${thcB().pick.bac} bạc`;return ""}
 function thcPay(p,o){if(p===S)apply(o);else if(typeof p.bac==="number"&&o.bac)p.bac+=o.bac}
 /* ONE function for her and every NPC master (two-way): s = the maid to raise, or null = dismiss the current one. Returns the log line ("" = nothing) */
-function thcSet(p,s){const B=thcB();if(!p)return "";const cur=thcOf(p);const me=p===S;const H=thcHouse(p);let r="";
+function thcSet(p,s,o){/* o.paid: the uniform was already paid by the caller's own shown cost (j68g card) */const B=thcB();if(!p)return "";const cur=thcOf(p);const me=p===S;const H=thcHouse(p);let r="";
  if(s&&cur===s)return "";
+ if(s&&(thcWhyNot(p,s,o)||thcRef(p,s)==null))return "";/* r1: an ineligible pick (state moved since the card was drawn, e.g. a co-op intent landing late) changes nothing — never steps the current one down */
  if(cur){/* the one stepping down: her lòng drops, the others' envy eases */cur.loyal=cl((cur.loyal||0)+B.drop.loy,0,100);for(const e of H)if(e.s!==cur&&e.s!==s)e.s.loyal=cl((e.s.loyal||0)+B.drop.calm,0,100);delete p.thc;
   r=me?`${cur.name} thôi làm cung nữ thân cận: nàng: lòng ${balSg(B.drop.loy)}; cung nữ khác: lòng ${balSg(B.drop.calm)}.`:`${p.name} cho ${cur.name} thôi làm cung nữ thân cận.`}
- if(s){if(thcWhyNot(p,s))return r;const id=thcRef(p,s);if(id==null)return r;thcPay(p,{bac:-B.pick.bac});s.loyal=cl((s.loyal||0)+B.pick.loy,0,100);
+ if(s){const id=thcRef(p,s);if(!(o&&o.paid))thcPay(p,{bac:-B.pick.bac});s.loyal=cl((s.loyal||0)+B.pick.loy,0,100);
   for(const e of H)if(e.s!==s&&e.s!==cur)e.s.loyal=cl((e.s.loyal||0)-B.pick.envy,0,100);p.thc=id;s.thcAt=S?S.turn||0:0;
   const t=me?`Chọn ${s.name} làm cung nữ thân cận, may y phục thân cận riêng của cung ngươi (Bạc ${balSg(-B.pick.bac)}): nàng: lòng ${balSg(B.pick.loy)}; cung nữ khác ghen: lòng ${balSg(-B.pick.envy)}.`
    :`${p===S.thO?"Thái hậu":p.name} chọn ${s.name} làm cung nữ thân cận.`;r=r?r+" "+t:t}

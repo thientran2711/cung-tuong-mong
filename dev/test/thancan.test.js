@@ -48,6 +48,12 @@ for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on(
   const lo=o2.loyal,l1b=o1.loyal;thcPick(o2.sid,0);if(S.thc!=null)bad.push("T4 dismiss failed");if(o2.loyal!==lo+B.drop.loy)bad.push("T4 dismissed lòng");if(o1.loyal!==l1b+B.drop.calm)bad.push("T4 calm");
   /* personal maid can be chosen */
   S.maid.loyal=90;thcPick("m:"+S.maid.name,1);if(S.thc!=="m:"+S.maid.name)bad.push("T4 personal maid not chosen "+S.thc);
+  /* T9 (r1): an ineligible pick (lòng under the bar when the tap lands) changes nothing — the current one stays, no cost */
+  {const cur=S.thc,lm9=S.maid.loyal,b9=S.bac;o1.loyal=BAL.loy.trust-1;thcPick(o1.sid,1);if(S.thc!==cur)bad.push("T9 ineligible pick stepped the current one down "+S.thc);if(S.maid.loyal!==lm9||S.bac!==b9)bad.push("T9 ineligible pick cost something");o1.loyal=80}
+  /* T10 (r1): j68g servHero «Thăng làm người thân cận» (its own ok()) on a trusted maid really raises her through thcSet */
+  {const x=S.staff.find(s=>s.role==="maid"&&s!==o1&&s.rk>=1&&s.rk<=3);const E=E68I.servHero;if(x&&E){x.loyal=90;S.bac=Math.max(S.bac,200);const A={o:x,n:x.name,k:"sv"};const O=E.o({A});const c=O.find(o=>/thân cận/.test(JSON.stringify(o)||"")||/thân cận/.test(o.n||o.t||""));
+    const okf=c&&c.go;S.bac=Math.max(S.bac,200);const b10=S.bac;const fb=c.fx&&c.fx.bac;if(!(fb<0))bad.push("T10 card hides the uniform Bạc: "+JSON.stringify(c.fx));else apply(c.fx);/* shown cost (jbac fair-prices event bạc, law 2); the runner pays it, then go() *//* the event runner pays the shown cost, then go() */if(!okf)note.push("T10 option shape "+Object.keys(c||{}).join(","));else{okf();if(S.thc!==x.sid)bad.push("T10 j68g did not raise her "+S.thc);if(S.bac!==b10+fb)bad.push(`T10 j68g bạc ${b10}→${S.bac} (want the shown ${fb} once)`)}
+    thcPick("m:"+S.maid.name,1)}else note.push("T10 skipped")}
   /* T5 stale */
   thcPick(o1.sid,1);if(S.thc!==o1.sid)bad.push("T5 setup");S.staff.splice(S.staff.indexOf(o1),1);if(thcOf(S))bad.push("T5 stale tc still read");if(S.thc!=null)bad.push("T5 stale not cleared");
   /* T6 NPC */
@@ -58,7 +64,7 @@ for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on(
   if(!nv)bad.push("T6 no NPC picked");if(S.thO&&(S.thO.staff||[]).some(s=>s.role==="maid")&&!thcOf(S.thO))bad.push("T6 Thái hậu never picked");
   const v1=liveRivals(true).find(v=>thcOf(v));if(v1){const c=thcOf(v1);c.loyal=B.npc.drop-1;thcNpc(v1);if(thcOf(v1)===c)bad.push("T6 low-lòng thân cận kept")}
   /* T7 look slot */
-  const s7=S.staff.find(s=>s.role==="maid"&&s.rk>=1&&s.rk<=3);s7.loyal=90;thcPick(s7.sid,1);const k7=thcLookKey(s7);if(!/^maid-thancan-(p\d+|hh|x)-t\d$/.test(k7||""))bad.push("T7 key "+k7);
+  S.bac=Math.max(S.bac,200);const s7=S.staff.find(s=>s.role==="maid"&&s.rk>=1&&s.rk<=3);s7.loyal=90;thcPick(s7.sid,1);const k7=thcLookKey(s7);if(!/^maid-thancan-(p\d+|hh|x)-t\d$/.test(k7||""))bad.push("T7 key "+k7);
   if(!s7.fid){s7.fid="maid:m99";FIGIX.maid=FIGIX.maid||{};FIGIX.maid["maid:m99"]=[{file:"img/fake-base.webp"}]}const fk=s7.fid;note.push("T7 key "+k7+" fid "+fk);
   if(fk&&FIGIX){const r0=fk.split(":")[0];FIGIX[r0]=FIGIX[r0]||{};const L=FIGIX[r0][fk]=FIGIX[r0][fk]||[];const before=figFor(s7);L.push({file:"img/fake-tc.webp",tier:k7});L.push({file:"img/fake-tc-other.webp",tier:"maid-thancan-p99-t3"});
    if(!FIGS.length)FIGS.push({});
