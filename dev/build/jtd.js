@@ -254,6 +254,7 @@ function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);
  /* KIT §13.7 (mg-ready-guide): the step rules + example now sit in the shared rules block EVERY time (was: first time only), «Sẵn sàng» / «Hướng dẫn» */
  box.innerHTML=kg82Rows([["Gợi ý",HOWL[0],"n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${kitQuick({n:"Để trời định",win:"tiến bộ một phần",lose:"không tiến bộ"})}<button class="${kg82Btn(true)}" id="tdcancel">Thôi, để lúc khác<small>không tốn gì</small></button></div>`;
  kgReady(box,{kind,steps:TD_RULES[k].map(([n,t])=>[`Bước ${n}`,t,"t"]).concat([["Ví dụ",TD_EX[k],"n"]])});
+ KG82.backPre=cancel;/* KIT §13.9: ✕ before «Sẵn sàng» = its own free «Thôi, để lúc khác» (nothing is charged before tdFinish) */
  $("kg82go").onclick=()=>{tdSeen(k,1);kg82Play(kind,raw=>result(raw,false))};$("kg82skip").onclick=()=>{const ok=kitQuickRoll();result(ok?BAL.skip.raw:0,true,ok)};$("tdcancel").onclick=cancel}
 function tdFinish(k,mode,raw,skipped){if(!S||S.dead)return;vNorm(S);const l=S.vir[k],cost=virCost(l),V=VIR.find(x=>x.k===k);if(!V||l>=5)return;
  if(mode==="self"){if(!can(BAL.td.k)||S.suc<BAL.td.selfMin)return}else if(!can(BAL.td.k)||S.bac<cost)return;
