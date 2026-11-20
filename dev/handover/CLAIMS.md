@@ -426,7 +426,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN ROOT-77 (opus; child of ROOT-76, depth 6) | handover HANDOVER_SESSION9 | ROOT-76 | session_01Rc5AsKMDkP7nYjtmjLP5tq | RUNNING | 20/11 09:34Z |
 | REVIEW road-triggers (BIG opus E26r) of 72a9b918 (OR16+OR18) | review/road-triggers | FOREMAN E #17 | session_01DgYSWoJrr5AsLcXZYn2jsC | RUNNING | 20/11 10:48Z |
 | REVIEW tut-road (BIG opus E27r) of def9eaf0 (OR15 + LIVE kitShopBuy fix) | review/tut-road | FOREMAN E #17 | session_01DgYSWnb1B52Kz7WKbuAye1 | RUNNING | 20/11 10:50Z |
-| facfound-parity E29 (opus; LIVE law-1 regression «Lập phe» in role-parity-drift2-play, found by E23r) | review/facfound-parity; briefs/E29-facfound-parity.md | FOREMAN E #17 | session_01DgYSWmngcUnfqKR9MvpkS1 | RUNNING | 20/11 10:58Z |
+| facfound-parity E29 (opus; LIVE law-1 regression «Lập phe» in role-parity-drift2-play, found by E23r) | review/facfound-parity; briefs/E29-facfound-parity.md | FOREMAN E #17 | session_01DgYSWmngcUnfqKR9MvpkS1 | READY 5f46f023 (game change: NPC→her Lập phe / Xin vào phe + probe fix) | 20/11 10:58Z |
 | GAP IT03 wear-slots Hoa tai + Giày (opus; ORDER MAIN ROOT-77 10:20Z; brief briefs/b-wear-slots.md) | review/wear-slots | B | session_01N1tNP54h4MaGv7EfQy7u43 | SẴN SÀNG KIỂM 56f00454 (report reports/wear-slots.md; KIT REQUEST iPad 1180 wear column OPEN) | 20/11 ~11:30Z |
 | GAP kc-fail-effects J3c (opus; home cards hide fail effects, whole group) | review/kc-fail-effects | B | session_01N1tNP6BY715rYe4KHs14ko | RUNNING | 20/11 10:20Z |
 | REVIEW ge-batu (BIG opus E28r) of e0424d54 | review/ge-batu | FOREMAN E #17 | session_01DgYSWokELeSAzf9p9MFqAS | RUNNING | 20/11 11:26Z |
