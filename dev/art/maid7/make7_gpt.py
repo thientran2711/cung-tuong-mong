@@ -121,8 +121,31 @@ def mama51(): return mama('a51')
 def mama65(): return mama('a65')
 
 
+HDR_M18 = ("[ChatGPT: attach Image 1 = m18 face reference (the same single reference used on Magnific, s7IPw0Ll8e). "
+           "'The reference image' and 'the identity reference' below both mean Image 1. Make ONE tall portrait image "
+           "(about 1024x2304), one figure.]\n\n")
+
+
+def tamdang():
+    # owner L1470: tam đẳng outer top looks thin/flimsy -> same real outer jacket as nhị đẳng (test5_nhi bijia), only SHORTER
+    base = 'dev/art/maid7/test3_tm1.txt'
+    t = open(base, encoding='utf-8').read()
+    t = swap(t, 'with a SMALL SHORT outer top on top: a short jacket with short outer sleeves that ends just below the waist, '
+                'clearly smaller and shorter than a nhị đẳng maid\'s half-sleeve jacket',
+             'with a SHORT outer jacket on top: a layered half-sleeve brocade jacket (bijia) exactly like a nhị đẳng maid\'s, '
+             'the same real outer jacket with the same weight, body and structure (a proper jacket, never thin, flimsy or see-through), '
+             'only SHORTER than the nhị đẳng\'s, ending just below the waist')
+    t = HDR_M18 + t.rstrip() + CAP.format('Cung nữ tam đẳng · Áo khoác bỉ giáp ngắn hồng + váy xanh')
+    out = D + 'tamdang_gpt.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [('with a SMALL SHORT outer top on top', 'owner Lượt 1470: outer top too flimsy -> nhị đẳng jacket'),
+                     ('a short jacket with short outer sleeves that ends just below the waist', 'owner Lượt 1470: = nhị đẳng bijia, only shorter'),
+                     ('clearly smaller and shorter than a nhị đẳng maid\'s half-sleeve jacket', 'owner Lượt 1470: "chẳng qua là nó ngắn hơn thôi" (only shorter)')])
+    return out
+
+
 if __name__ == '__main__':
-    jobs = sys.argv[1:] or ['nhat', 'chuongsu', 'thancan', 'mama51', 'mama65']
+    jobs = sys.argv[1:] or ['nhat', 'chuongsu', 'thancan', 'mama51', 'mama65', 'tamdang']
     for j in jobs:
         p = globals()[j]()
         print(p, len(open(p, encoding='utf-8').read()))
