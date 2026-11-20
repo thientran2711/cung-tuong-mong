@@ -9,6 +9,6 @@
    if(k){const fee=typeof tchFee==="function"?tchFee(k):5+(S.arts[k]||0)*5;wkDone=w;
     if(S.bac>=fee+20){lesson(k);n.t++}else if(typeof lessonMode==="function"){lessonMode(k,"self");n.s++}
     if(S.mg||Q.length)return}}}}catch(e){}return nb.apply(this,arguments)};window.nextBuoi=nextBuoi;
- const st=start;start=function(){n={t:0,s:0};wkDone="";return st.apply(this,arguments)};
+ const st=start;start=function(){try{const R=window.__res,x=R&&R[R.length-1];if(x&&!x.study)x.study=Object.assign({},n)}catch(e){}/* HH-STOP rows skip over(): attach at the next start */n={t:0,s:0};wkDone="";return st.apply(this,arguments)};
  const ov=over;over=function(){const r=ov.apply(this,arguments);try{const x=window.__res[window.__res.length-1];if(x)x.study=Object.assign({},n)}catch(e){}return r};
 })();
