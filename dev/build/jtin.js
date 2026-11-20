@@ -5,7 +5,8 @@ function sbar(lbl,v,cls){v=Math.round(v||0);return `<span class="sbar ${cls||""}
 function bondBars(s){return sbar("Lòng",s.loyal,"lo")+sbar("Chủ tin",tinOf(s),"ti")}
 /* entrusting: a scheme order needs Chủ tin 40, guarding a tryst 60 (same for every mistress) */
 (function(){const b0=bestSent;bestSent=function(p){const L=(p.staff||[]).filter(s=>!s.spyFor&&tinOf(s)>=40);if(!L.length)return null;const sc=s=>s.loyal+tinOf(s)/2+nq(s,"sharp",BAL.net.k.spySharp);if(p!==S&&typeof mindPickBy==="function")return mindPickBy(L,s=>Math.pow(Math.max(BAL.mind.pick.tin.floor,sc(s)),BAL.mind.pick.tin.pow)*mindW(s,"spy"),p);/* npc-mind: an NPC mistress picks by trust, not always the best; her own pick stays the best (shown odds) */return L.slice().sort((a,b)=>sc(b)-sc(a))[0]}})();
-watcher=function(){const s=(S.staff||[]).filter(x=>x.loyal>=BAL.loy.close&&tinOf(x)>=BAL.tinLv.watch).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return{name:s.name,loyal:s.loyal,s};if(S.maid&&S.maid.loyal>=BAL.loy.close&&tinOf(S.maid)>=BAL.tinLv.watch)return{name:S.maid.name,loyal:S.maid.loyal};return null};
+/* p = the woman whose watcher this is (her by default; an NPC consort: j22 lộRisk(k,p) / manTryst, jchat eavesdrop partner) — keeps j22's watcher(p) signature (was: always S) */
+watcher=function(p){p=p||S;const s=(p.staff||[]).filter(x=>x&&x.loyal>=BAL.loy.close&&tinOf(x)>=BAL.tinLv.watch).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return{name:s.name,loyal:s.loyal,s};if(p.maid&&p.maid.loyal>=BAL.loy.close&&tinOf(p.maid)>=BAL.tinLv.watch)return{name:p.maid.name,loyal:p.maid.loyal};return null};
 /* trust moves: a task done well raises it, a servant caught lowers it; being trusted slowly warms the servant's heart */
 (function(){const m0=servMerit;servMerit=function(s,n){const r=m0.apply(this,arguments);tinAdd(s,(n||1)*1.5);return r}})();
 (function(){const c0=servCaught;servCaught=function(p,s){if(s)tinAdd(s,-12);return c0.apply(this,arguments)}})();

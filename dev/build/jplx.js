@@ -1,6 +1,6 @@
 /* ================= jplx: NƠI CHỐN CÒN THIẾU TRÊN DƯ ĐỒ (D42, owner 14-15/11: OD L82, L86, L87) =================
    Five places on the Dư đồ of the whole palace, each with the box read from the map picture (dev/PLACES_PLAN.md §1, §5):
-     cnh  Dãy nhà cung nhân  (servants' quarters; picture = the approved residence painting cung-nhan, 16 season x buổi)
+     cnh  Tích Cần viện (role: dãy nhà cung nhân; servants' quarters; picture = the approved residence painting cung-nhan, 16 season x buổi)
      tgk  Tân Giả khố        (= Hoán y cục, the laundry; picture tan-gia-kho already existed; now a place on the map)
      ttp  Thượng thư phòng   (the princes' study hall = "học đường"; new picture)
      acs  A ca sở            (where the princes from 6 years old live; new picture)
@@ -14,7 +14,7 @@
      princess 6-17: buổi sáng at Thượng thư phòng, then back with the mother
    The map count of each place = the people shown when she arrives (same list). Co-op: only S.where/S.place travel (state only). */
 const PLX={
- cnh:{n:"Dãy nhà cung nhân",fn:"chỗ ăn ngủ của cung nữ, thái giám",d:"Dãy nhà thấp mái xám, cung nữ và thái giám ăn ngủ ở đây.",img:"cung-nhan",box:{x:.085,y:.645,w:.11,h:.155},anchor:{x:.14,y:.69},pos:[2,-1],fl:.42},
+ cnh:{n:HALL_SRV,fn:"dãy nhà cung nhân, chỗ ăn ngủ của cung nữ, thái giám",d:"Dãy nhà thấp mái xám, cung nữ và thái giám ăn ngủ ở đây.",img:"cung-nhan",box:{x:.085,y:.645,w:.11,h:.155},anchor:{x:.14,y:.69},pos:[2,-1],fl:.42},
  tgk:{n:"Tân Giả khố",fn:"Hoán y cục: nơi cung nhân chịu phạt giặt giũ",d:"Nơi cung nhân bị phạt giặt giũ ngày đêm.",img:"tan-gia-kho",box:{x:.097,y:.466,w:.13,h:.10},anchor:{x:.16,y:.50},pos:[1,-1]},
  ttp:{n:"Thượng thư phòng",fn:"học đường của hoàng tử, công chúa",d:"Nơi các hoàng tử, công chúa theo thầy học chữ, học võ.",img:"thuong-thu-phong",box:{x:.825,y:.635,w:.07,h:.09},anchor:{x:.86,y:.67},pos:[0,3],fl:.62},
  acs:{n:"A ca sở",fn:"nơi các hoàng tử ở",d:"Các hoàng tử từ sáu tuổi dọn ra đây ở, sáng sang Thượng thư phòng học.",img:"a-ca-so",box:{x:.742,y:.098,w:.095,h:.125},anchor:{x:.79,y:.16},pos:[2,3],fl:.62},
@@ -69,7 +69,7 @@ function plxPeople(k){try{
 /* her own children keep the line the home stage gives them (Văn/Võ/Đức bars): take it from the unfiltered home list */
 let plxHomeFull=null;
 function plxHomeKid(kid){try{const f=plxHomeFull?plxHomeFull():[];const p=f.find(x=>x.kind==="kid"&&x.ref===kid);if(p)return p}catch(e){}return plxKidEntry(kid,null)}
-function plxPlaceMsg(k,n){if(n)return"";return({cnh:"Dãy nhà vắng, cung nhân đang làm việc.",ttp:(S.buoi||0)===0?"Chưa có ai trong Thượng thư phòng.":"Thượng thư phòng vắng, buổi học đã tan.",acs:(S.buoi||0)===0?"Các hoàng tử đã sang Thượng thư phòng học.":"A ca sở im ắng, chưa có hoàng tử nào ở đây.",dc:(S.buoi||0)===0?"Thái tử đã sang Thượng thư phòng học.":"Đông cung vắng, chưa lập Thái tử.",tgk:"Nước giặt lạnh buốt, chậu gỗ chất cao."})[k]||""}
+function plxPlaceMsg(k,n){if(n)return"";return({cnh:HALL_SRV+" vắng, cung nhân đang làm việc.",ttp:(S.buoi||0)===0?"Chưa có ai trong Thượng thư phòng.":"Thượng thư phòng vắng, buổi học đã tan.",acs:(S.buoi||0)===0?"Các hoàng tử đã sang Thượng thư phòng học.":"A ca sở im ắng, chưa có hoàng tử nào ở đây.",dc:(S.buoi||0)===0?"Thái tử đã sang Thượng thư phòng học.":"Đông cung vắng, chưa lập Thái tử.",tgk:"Nước giặt lạnh buốt, chậu gỗ chất cao."})[k]||""}
 
 /* her palace: children who live elsewhere this buổi are not on the home stage (and not in its head count) */
 (function(){if(typeof homePeople!=="function")return;const h0=homePeople;plxHomeFull=()=>h0.apply(null,[]);

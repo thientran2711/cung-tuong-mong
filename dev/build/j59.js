@@ -17,7 +17,7 @@ function j59fac(src,p){return KIT_FIG.fac(src,j59age(p))}
 let j59q=0;function j59sched(){if(j59q)return;j59q=requestAnimationFrame(()=>{j59q=0;j59lay()})}
 /* KIT · rank halo colour: one source for "her rank colour" = RCOL (j1, same list the rank badges/frames use); lãnh cung = pale grey */
 function j59srv(){try{return typeof isSrv==="function"&&isSrv()}catch(e){return false}}
-function haloColor(){try{if(S&&S.out)return RCOL_COLD;if(j59srv())return(window.MRCOL||[])[S.srv.rk||0]||"#9aa3a8";const k=S&&S.rank!=null?S.rank:0;return(typeof RCOL!=="undefined"&&RCOL[k])||"#f0d070"}catch(e){return"#f0d070"}}
+function haloColor(){try{if(S&&S.out)return RCOL_COLD;if(j59srv())return kitServCol("maid",S.srv.rk||0)||"#9aa3a8";const k=S&&S.rank!=null?S.rank:0;return(typeof RCOL!=="undefined"&&RCOL[k])||"#f0d070"}catch(e){return"#f0d070"}}
 window.haloColor=haloColor;
 /* scene name tags: title/role (small, on top) above the name, from the game's own ladders */
 function j59esc(t){return String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
@@ -28,7 +28,7 @@ function j59title(p){try{if(!p)return"";if(p===S)return j59srv()?SRK.maid[S.srv.
  if(k==="ty")return"Thái y";const w=typeof figWho==="function"?figWho(p):(p.ref||p);if(!w)return"";
  if((typeof rivals!=="undefined"&&rivals||[]).includes(w))return rkOfFace("consort",w)[1];
  const C=S.court||{};if(w===C.ty)return"Thái y";
- if(w.role&&SRK[w.role])return srkName(w);if(w===S.maid)return SRK.maid[srk(w)]||"Cung nữ";
+ if(w===S.maid)return kitMaidTitle(w);if(w.role&&SRK[w.role])return srkName(w);
  if(w===C.tq)return"Tổng quản thái giám";if(w===C.ksp||w===C.ped)return"Thái giám";
  if((S.men||[]).includes(w)){if(w.rw==="thái y")return"Thái y";return w.role||w.rw||""}
  return w.role&&typeof w.role==="string"&&w.role.length<28?w.role:""}catch(e){return""}}
@@ -39,7 +39,7 @@ const J59C=KIT_ROLE;
 function j59col(p){try{if(p===S)return haloColor();const k=p&&p.kind;if(k==="emp")return J59C.emp;if(k==="th")return J59C.th;if(k==="hh")return RCOL[7];
  const w=typeof figWho==="function"?figWho(p):(p.ref||p);if(!w)return J59C.slate;
  if((typeof rivals!=="undefined"&&rivals||[]).includes(w))return w.out?RCOL_COLD:RCOL[w.queen?7:w.rank]||J59C.slate;
- if(w===S.maid||w.role==="maid")return MRCOL[srk(w)]||MRCOL[1];
+ if(w===S.maid||w.role==="maid")return kitServCol("maid",srk(w))||MRCOL[1];
  if(w.role==="eunuch"||w===(S.court||{}).tq||w===(S.court||{}).ksp||w===(S.court||{}).ped)return ERCOL[w.role==="eunuch"?srk(w):3]||ERCOL[1];
  return w.hcol||w.houseCol||J59C.slate}catch(e){return J59C.slate}}
 function j59tagHTML(p,name){let t=j59title(p);const kn=j59known(p),c=j59col(p);const T=x=>`<span class="j59t" style="--tc:${c};--rt:${typeof kitRankTone==="function"?kitRankTone(x,c):c}">${j59esc(x)}</span>`;
@@ -50,11 +50,13 @@ function j59tagHTML(p,name){let t=j59title(p);const kn=j59known(p),c=j59col(p);c
 const J59U={};function j59unkSrc(g){const u=`img/kit/unknown-fig-${g}.webp`;if(J59U[g]===undefined){J59U[g]=null;const im=new Image();im.onload=()=>{J59U[g]=u;j59sched()};im.onerror=()=>{J59U[g]=false};im.src=u}return J59U[g]}
 function j59unk(b,p,im){const s0=im.getAttribute("src")||"";const m=/fig-(emperor|eunuch|official|physician|man)-|unknown-fig-m\./.test(s0)||p.kind==="emp";const u=j59unkSrc(/unknown-fig-k\./.test(s0)?"k":m?"m":"f");
  if(u){b.classList.remove("j59unk");if(im.getAttribute("src")!==u)im.src=u}else b.classList.add("j59unk")}
+/* fig-label: the kit's ONE shrink rule for a stage title line — it is one line, never wraps to a 3rd line; a long merged title ("Cung nữ thân tín tam đẳng") steps its font down until it fits the tag width (floor 9 px) */
+function kitFitTitle(L){try{L.forEach(g=>{const t=g.querySelector(".j59t");if(!t||!t.offsetParent)return;t.style.removeProperty("font-size");let fs=parseFloat(getComputedStyle(t).fontSize);const f0=fs;while(t.scrollWidth>t.clientWidth+1&&fs>9){fs-=.5;t.style.setProperty("font-size",fs+"px","important")}})}catch(e){}}
 function j59tags(st,tk){const ppl=typeof curPeople==="function"?curPeople():[];const TT=[];
  if(tk)tk.querySelectorAll(".tok").forEach(b=>{const g=b.querySelector(".tag"),p=ppl[+b.dataset.p];if(!g||!p)return;const h=j59tagHTML(p,p.name);if(g.dataset.j59!==h){g.innerHTML=h;g.dataset.j59=h}g.style.setProperty("--tc",j59col(p));g.classList.toggle("j59u",!j59known(p));g.classList.toggle("j59mine",p===S);TT.push(g);const im=b.querySelector(".figimg");if(im){if(!j59known(p))j59unk(b,p,im);else b.classList.remove("j59unk")}});
  /* lag-play: the tooltips read innerText (a layout read) AFTER all the writes: one layout instead of one per person */
  /* oi-render: and inside a render, at its end (jlag2 renderAfter: one layout for every part fit, not one more here) */
- (window.renderAfter||((k,f)=>f()))("j59tt",()=>{const L=TT.filter(g=>g.isConnected);const V=L.map(g=>g.innerText.replace(/\n/g," · "));L.forEach((g,i)=>{if(g.title!==V[i])g.title=V[i]})});
+ (window.renderAfter||((k,f)=>f()))("j59tt",()=>{const L=TT.filter(g=>g.isConnected);kitFitTitle(L);const V=L.map(g=>g.innerText.replace(/\n/g," · "));L.forEach((g,i)=>{if(g.title!==V[i])g.title=V[i]})});
  const me=document.getElementById("mefig");let mt=document.getElementById("j59metag");
  if(!me){if(mt)mt.remove();return null}
  if(!mt){mt=document.createElement("div");mt.id="j59metag";mt.className="tok j59me";mt.style.visibility="hidden";mt.innerHTML='<span class="tag"></span>';st.appendChild(mt)}
@@ -79,20 +81,30 @@ function j59sel(st,tk,me){let pi=null;try{pi=typeof popIdx==="number"?popIdx:nul
      corners (the name row), so they never cover a figure or a name.
    - the head count is ONE number (kitHereCount): the stage title, the page chips and the Dư đồ label of the place she stands in. */
 function j59person(p){return !!p&&p.kind!=="chest"&&p.kind!=="task"&&!(p.kind==="srv"&&p.sk==="task")}
+/* KIT 33.9 head-count icon (owner 17/11 ~14:15Z): the grey GROUP of three (man, woman, child) img/kit/unknown-ico-n.webp (192 px tall, ~145 px wide, ONE file, no srcset so the jcdn CDN fallback works).
+   j59ico(h) is the only place that draws it: the swipe-stage "+N" chips (j59chipIco) AND the place header "Ngọc Thanh các [icon] 5" (j59hdrCount) use it. Decorative alt="". */
+function j59ico(){return `<img class="j59ico" src="img/kit/unknown-ico-n.webp" alt="" draggable="false">`}window.j59ico=j59ico;
+function j59chipIco(n){return j59ico()+`<span class="j59n">+${n}</span>`}
+/* place header (every place with people): "Ở đây còn N người." -> [icon] N (the rest of a longer stage line is kept); "Không gặp ai." stays text */
+function j59hdrCount(){return;/* place-stage: the plaque is gone; the count chip is a kitStageRail item (jplst.js) */try{const m=document.querySelector("#sc-t .rmsg");if(!m||m.dataset.j59h===m.innerHTML)return;const t=m.innerHTML;const r=/^\s*·?\s*Ở đây (?:có|còn) (\d+) người\.?\s*/.exec(t);if(!r)return;
+  m.innerHTML=` <span class="kchip n j59hchip">${j59ico()}<span class="j59n">${r[1]}</span></span>`+(t.length>r[0].length?" · "+t.slice(r[0].length):"");m.classList.add("j59hc");m.setAttribute("aria-label",`Ở đây còn ${r[1]} người`);m.dataset.j59h=m.innerHTML}catch(e){}}
 function j59chips(st,R,P,again){/* morechip-fix: placed once now and once more on the next frame, after the side column (k3Stage) has its full height */if(!again)requestAnimationFrame(()=>{try{if(st.isConnected)j59chips(st,R,P,1)}catch(e){}});/* KIT 33.9 swipe stage: P: {pg, pages, before, after, xl, xr}. NO arrow buttons — two "+N" chips in the top corners of the backdrop: LEFT = people already passed (left of the view), RIGHT = people still to come; hidden at 0. Pure kit chip, not tappable (the row is swiped) */
  for(const side of ["l","r"]){let c=st.querySelector(".j59more.j59m"+side);const n=P&&P.pages>1?(side==="r"?P.after:P.before):0;
+  if(side==="r"){const hn=n>0?Math.ceil((c?c.getBoundingClientRect().height:0)||44)+10:0;if(st.style.getPropertyValue("--kgrb")!==hn+"px")st.style.setProperty("--kgrb",hn+"px")}
   if(!(n>0)){if(c)c.remove();continue}
   if(!c){c=document.createElement("div");c.className="kchip n j59more j59m"+side;st.appendChild(c)}
-  const txt="+"+n;if(c.textContent!==txt)c.textContent=txt;
+  /* morechip-sil (owner 17/11 ~14:05Z): the kit chip shows the grey gender-neutral figure icon + the number (no "+") — ONE kit function j59chipIco(n) for every chip, both corners, all sizes */
+  if(c.dataset.n!==String(n)){c.dataset.n=String(n);c.innerHTML=j59chipIco(n)}
   const lab=side==="r"?`${n} người ở bên phải · vuốt sang trái`:`${n} người ở bên trái · vuốt sang phải`;c.setAttribute("aria-label",lab);c.title=lab;
   /* morechip-corners (owner 17/11 13:02Z): the chip is BIG (kit chip size .kbig) and stands in the stage's BOTTOM corner of its own side: LEFT chip = people off the left side (bottom-left),
      RIGHT chip = people off the right side (bottom-right). Never on a side column / rail (it steps beside it), never on a figure's name chip (it steps up above the name row, then beside) */
   c.style.left=c.style.right=c.style.top=c.style.bottom="";c.style.bottom="6px";
-  if(side==="l")c.style.left=((P.xl||0)+6).toFixed(0)+"px";else c.style.right=((P.xr||0)+6).toFixed(0)+"px";
+  /* morechip-sil: the TRUE corners of the stage (6 px in); the side column / rail only moves the chip BESIDE it (flush against it), never the page gutters */
+  if(side==="l")c.style.left="6px";else c.style.right="6px";
   try{const R0=st.getBoundingClientRect();
    const hit=(a,q)=>a.left<q.right-1&&a.right>q.left+1&&a.top<q.bottom-1&&a.bottom>q.top+1;
    for(const e of st.querySelectorAll(side==="r"?"#kshR":"#kshL,.krailb")){if(!e.offsetParent||e.hidden||!e.offsetHeight)continue;const q=e.getBoundingClientRect(),cr=c.getBoundingClientRect();
-    if(hit(cr,q)){if(side==="r"){c.style.right=(R0.right-q.left+6).toFixed(0)+"px"}else{c.style.left=(q.right-R0.left+6).toFixed(0)+"px"}}}
+    if((side==="r"?cr.right>q.left-1:cr.left<q.right+1)&&cr.top<q.bottom+2&&cr.bottom>q.top-2){if(side==="r"){c.style.right=(R0.right-q.left+2).toFixed(0)+"px"}else{c.style.left=(q.right-R0.left+2).toFixed(0)+"px"}}}
    const tags=[...st.querySelectorAll(".tok .tag,#j59metag .tag")].filter(g=>g.offsetParent&&g.getBoundingClientRect().width>2);
    let cr=c.getBoundingClientRect();const over=tags.filter(g=>hit(cr,g.getBoundingClientRect()));
    if(over.length){const top=Math.min(...over.map(g=>g.getBoundingClientRect().top));c.style.bottom=(R0.bottom-top+4).toFixed(0)+"px"}}catch(e){}}}
@@ -143,15 +155,23 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const toks=tk?[...tk.querySelectorAll(".tok")]:[];if(!me&&!toks.length){j59clear(tk);return}
  const imgs=toks.map(t=>t.classList.contains("fig")?t.querySelector(".figimg"):null).filter(Boolean);
  let wait=false;
- for(const im of (me?[me,...imgs]:imgs)){const s=im.getAttribute("src");if(!im.complete||!im.naturalWidth){wait=true;if(!im.dataset.j59l){im.dataset.j59l=1;im.addEventListener("load",j59sched)}}if(s&&!j59bb(s,j59sched))wait=true}
+ /* review/life-preload-fu (A): a figure whose picture is still on its way (!complete) stands in its slot as the KIT §59.1 silhouette (unknown-fig-f|m, kit core file) laid out with the SILHOUETTE's own body box, exactly like a known person with a real picture; the real picture swaps in on load (j59sched). Only a failed / unmeasured picture still waits hidden (15 s cap below). */
+ const wsil=new Map(),whold=new Set();
+ for(const im of (me?[me,...imgs]:imgs)){const s=im.getAttribute("src");const g=s&&typeof kitPhFigG==="function"?kitPhFigG(s):"";const sb=()=>{const u=g&&j59unkSrc(g);return u&&j59bb(u,j59sched)};
+  if(!im.complete||!im.naturalWidth){if(!im.dataset.j59l){im.dataset.j59l=1;im.addEventListener("load",j59sched)}
+   /* a picture that FAILED (error: complete, no width) keeps the silhouette too — never an empty box where a person stands; a retry (jcdn) that lands clears the mark on load */
+   const ub=sb();if(ub){wsil.set(im,ub);if(im.complete&&!im.hasAttribute("data-kwait"))im.setAttribute("data-kwait",g)}else wait=true;continue}
+  /* arrived but its body box is not measured yet: that ONE figure keeps its slot as the silhouette, hidden (no stretched picture); the others are not held back by it */
+  if(s&&!j59bb(s,j59sched)){const ub=sb();if(ub){wsil.set(im,ub);whold.add(im)}else wait=true}}
+ for(const im of (me?[me,...imgs]:imgs))im.style.visibility=whold.has(im)?"hidden":"";
  {const now=Date.now();if(wait){if(!st.__j59w0)st.__j59w0=now}else st.__j59w0=0;st.classList.toggle("j59wait",wait&&now-st.__j59w0<15000)}/* a picture that never loads stops hiding the others after 15 s (stage-figsize: the first load after a new build can take 6 s+ on the CDN; an unplaced pile is what the owner saw) *//* KIT 33.12: while pictures still load, nobody stands in an unplaced pile (owner's Fold video: 3 figures on top of each other) */
  if(wait)return;
  const R=st.getBoundingClientRect(),sH=R.height,sW=R.width;if(sH<60||sW<60)return;
  const ppl=typeof curPeople==="function"?curPeople():[];
  const E=toks.map(tok=>{const im=tok.classList.contains("fig")?tok.querySelector(".figimg"):null;const p=ppl[+tok.dataset.p];
-  if(im){const s=im.getAttribute("src");return{tok,im,p,tag:tok.querySelector(".tag"),b:J59BB[s],f:j59fac(s,p),ar:im.naturalWidth/im.naturalHeight}}
+  if(im){const s=im.getAttribute("src");const ws=wsil.get(im);return{tok,im,p,tag:tok.querySelector(".tag"),b:ws||J59BB[s],f:j59fac(s,p),ar:ws?ws.ar:im.naturalWidth/im.naturalHeight,ws:!!ws}}
   return{tok,p,tag:tok.querySelector(".tag"),nf:1}});
- const mb=me?J59BB[me.getAttribute("src")]:null,mar=me?me.naturalWidth/me.naturalHeight:0;
+ const mws=me?wsil.get(me):null,mb=me?mws||J59BB[me.getAttribute("src")]:null,mar=me?(mws?mws.ar:me.naturalWidth/me.naturalHeight):0;
  /* KIT 33.8 STAGE PET: the ONE following pet of each person (kitPetOf: p.pets / p.petOn, already synced in co-op) stands in a fixed spot on that person's right */
  const j59pr=who=>{try{if(who&&who!==S&&!j59known(who))return null;/* r7-r1 review 1: a stranger ("Người lạ" silhouette) never shows a pet — the same known test as the figure (figWho first) */const P=kitPetOf(who);if(!P)return null;const a=kitPetArt(P,j59sched);if(!a)return null;const b=j59bb(a.src,j59sched);return b?{P,a,b}:null}catch(e){return null}};
  const mePet=me?j59pr(S):null;E.forEach(x=>{x.pet=x.im?j59pr(x.p):null});
@@ -159,7 +179,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const cmp=sH<420||sW<520;st.classList.toggle("j59c",cmp);
  const KF=KIT_FIG;
  let topR=8;try{const t=document.getElementById("sc-t");if(t&&t.offsetHeight){const q=t.getBoundingClientRect();if(q.bottom>R.top)topR=Math.max(topR,q.bottom-R.top+4)}}catch(e){}
- topR=Math.min(topR,sH*.12);
+ topR=Math.min(topR,sH*.12);topR=Math.max(topR,KIT_SLOTS.top||0);
  /* phones (< 600 px, coordinator 11/15): the right chip column (court chips, maid, "Ân sủng ›") folds into ONE compact row along the
     top edge under the place title, and the heads stand under that row — so two slots keep their width and no chip sits on a head */
  const ph=false;st.classList.toggle("j59ph",ph);/* KIT §0: the one-page room = the spread's left page (no phone stage variant) */
@@ -177,7 +197,10 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
  let capOn=(()=>{try{return kitView().pages===2}catch(e){return true}})();/* KIT §33 (canon): the maxPx cap applies to iPad-wide layouts only; Fold / phones keep the full .79 of their taller stage *//* KIT §0: the left page in the spread and the one-page room are the same page */
  let FOX=0;/* fig-tag-chip: floor band the wrapped name tags need (phones: a long rank/plate/name wraps to 4-5 lines) */
- const size=()=>{const fo=Math.max(kitSlotFloor(sH),FOX);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
+ /* owner 18/11 ~03:5xZ: the marker's whole bounce range stays INSIDE the stage frame; every figure shares the ONE H, so a tall stage shrinks all just enough */
+ /* KIT §78.y (owner OD 19/11 ~02:05Z): the higher badge line is the MEN's (standard man head top = H × KIT_FIG.man, no crown / hat) + the marks' room (jmark kitMarkRoom), so the ONE H is capped so that line stays inside the frame, for every stage (badges are for everyone, not only her) */
+ const meCap=fo=>{try{if(!window.kitMarkRoom)return 1e9;return (sH-fo-kitMarkRoom(KF.h*sH))/Math.max(1,KF.man||1)}catch(e){return 1e9}};
+ const size=()=>{const fo=Math.max(kitSlotFloor(sH),FOX);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,meCap(fo),(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
  const maxF=Math.max(1,...F.map(x=>x.f));
  const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);/* the right plaque column (court chips, maid, Ân sủng) is reserved when it reaches down to the heads: no face or name is ever under it
     (coordinator 11/15, supersedes "may stand under it"); a column that ends above the heads leaves the full width. Compact stages
@@ -219,10 +242,10 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const showMe=!!me&&pg===0;const vis=E.slice(s0,s1);
  if(me){me.classList.toggle("j59off",!showMe);if(mt)mt.classList.toggle("j59off",!showMe)}
  E.forEach(x=>{x.tok.style.display=vis.includes(x)?"":"none"});
- const persons=E.filter(x=>j59person(x.p)).length,after=E.slice(s1).filter(x=>j59person(x.p)).length,before=(showMe?0:1)+E.slice(0,s0).filter(x=>j59person(x.p)).length;
+ const persons=E.filter(x=>j59person(x.p)).length,after=E.slice(s1).filter(x=>j59person(x.p)).length,before=E.slice(0,s0).filter(x=>j59person(x.p)).length;
  if(pages>1)st.dataset.j59pg=[pg,pages,s0,s1,M].join(",");else delete st.dataset.j59pg;
  /* fixed slots (owner 16/11): 1 → centre, 2 → 1/3 · 2/3, 3 → 1/4 · 2/4 · 3/4 of the free width (stage minus the side column) */
- const kOn=(showMe?1:0)+vis.length;const cxOf=i=>kitSlotCxE(i,N,G.x0,G.avail);st.dataset.j59free=G.x0.toFixed(1)+","+G.avail.toFixed(1);const floorY=st.clientHeight-fo;
+ const kOn=(showMe?1:0)+vis.length;const cxOf=i=>kitSlotCxE(i,N,G.x0,G.avail);st.dataset.j59free=G.x0.toFixed(1)+","+G.avail.toFixed(1);const floorY=st.clientHeight-fo;st.dataset.kmlH=H.toFixed(1);st.dataset.kmlM=Math.min(H*(KF.man||1),CAP).toFixed(1);st.dataset.kmlF=floorY.toFixed(1);/* KIT §78.y: the one woman body H, the one man body (×KIT_FIG.man, capped under the ribbon like every man) + the floor line (stage px) = what kitMarkLine (jmark) builds the two badge lines from */
  if(tk){tk.style.setProperty("left","0px","important");tk.style.setProperty("right","0px","important");tk.style.setProperty("top","0px","important");tk.style.setProperty("bottom","0px","important");
   ["paddingLeft","paddingRight","paddingBottom","columnGap","justifyContent"].forEach(k=>tk.style[k]="")}
  const centres=[];let slot=0;const usedPets=[];
@@ -232,7 +255,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const cMid=b=>b.cl!=null&&b.cr>b.cl?(b.cl+b.cr)/2:(kCL(b)+kCR(b))/2;/* the BODY (core column) centre stands on the slot centre, not the sleeve-to-sleeve box (owner: bodies at their own slot centres) */
  const loX=KIT_SLOTS.edge||4,hiX=Math.min(sW-(KIT_SLOTS.edge||4),G.x0+G.avail+6-(KIT_SLOTS.edge||4));/* stage-figsize: visible art never cut by the stage edge nor under the side column (kitSlotIn) */
  if(showMe){const meH=H/(mb.b-j59bt(mb)),meW=meH*mar,meC=(cMid(mb)-.5)*meW;const cx=kitSlotIn(inLim(cxOf(slot++)),meW*(mb.l-cMid(mb)),meW*(mb.r-cMid(mb)),loX,hiX);centres.push(cx);usedPets.push([mePet,cx,G.sw,"me"]);
-  me.style.setProperty("height",meH.toFixed(1)+"px","important");me.classList.add("j59sz");
+  me.style.setProperty("height",meH.toFixed(1)+"px","important");if(mws)me.style.setProperty("width",meW.toFixed(1)+"px","important");else me.style.removeProperty("width");me.classList.add("j59sz");
   me.style.left=(cx-meC).toFixed(1)+"px";me.style.bottom=(fo-(1-mb.b)*meH).toFixed(1)+"px";
   if(mt){const g=mt.firstChild;mt.style.left=cx.toFixed(1)+"px";mt.style.top=(floorY+3).toFixed(1)+"px";g.style.translate="";mt.style.visibility="";
    /* her chip on the same top line as every other chip (the holder box may add its own offset) */
@@ -240,7 +263,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
   for(const x of vis){let cx=cxOf(slot++);if(!x.nf){const w0=boxW(x,H);cx=kitSlotIn(cx,w0*(kCL(x.b)-cMid(x.b)),w0*(kCR(x.b)-cMid(x.b)),loX,hiX)}centres.push(cx);const t=x.tok;if(!x.nf)usedPets.push([x.pet,cx,G.sw,"p"+(x.tok.dataset.p||"")]);
   if(x.nf){t.style.left=(cx-t.offsetWidth/2).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";continue}
   const ih=imgH(x,H),w=boxW(x,H),cw=coreW(x,H);
-  x.im.style.setProperty("height",ih.toFixed(1)+"px","important");x.im.style.setProperty("width","auto","important");
+  x.im.style.setProperty("height",ih.toFixed(1)+"px","important");x.im.style.setProperty("width",x.ws?w.toFixed(1)+"px":"auto","important");
   x.im.style.setProperty("margin-left",(-w*kCL(x.b)).toFixed(1)+"px","important");x.im.style.setProperty("margin-right",(-w*(1-kCR(x.b))).toFixed(1)+"px","important");
   x.im.style.setProperty("margin-bottom",(-(1-x.b.b)*ih).toFixed(1)+"px","important");x.im.classList.add("j59sz");x.im.style.translate="";
   t.style.left=(cx-w*(cMid(x.b)-kCL(x.b))).toFixed(1)+"px";t.style.bottom=fo.toFixed(1)+"px";t.style.zIndex="";if(x.tag)x.tag.style.translate=""}
@@ -265,7 +288,9 @@ const css=document.createElement("style");css.textContent=`
 .stage.j59.j59wait #tokens .tok,.stage.j59.j59wait #mefig,.stage.j59.j59wait #j59metag,.stage.j59.j59wait .kspet{visibility:hidden}
 .stage.j59 .j59more{position:absolute;z-index:4;pointer-events:none;font-weight:700;white-space:nowrap}
 /* morechip-corners: the big kit chip (KIT 33.9): readable at Fold 755 */
-.kchip.j59more{font-size:1.05rem;line-height:1.2;padding:5px 15px;border-radius:16px;border-width:2px;margin:0;box-shadow:0 2px 6px rgba(60,30,10,.28);background:#fff8ee}
+.kchip.j59more{display:flex;align-items:center;gap:3px;font-size:1.05rem;line-height:1.2;padding:3px 9px 3px 6px;border-radius:16px;border-width:2px;margin:0;box-shadow:0 2px 6px rgba(60,30,10,.28);background:#fff8ee}
+.kchip.j59more .j59ico{height:1.7rem;width:auto;display:block;flex:none;pointer-events:none;user-select:none}
+html body .stage #sc-t h2 .rt1{display:inline-block!important;padding:1px 10px;border:2px solid var(--line,#8a6a3a);border-radius:14px;background:#fff8ee;box-shadow:0 2px 6px rgba(60,30,10,.28);text-shadow:none!important;vertical-align:middle}.rmsg.j59hc{white-space:nowrap!important}.kchip.j59hchip{display:inline-flex;align-items:center;gap:3px;padding:1px 9px 1px 6px;border-radius:14px;border-width:2px;margin:0 0 0 4px;vertical-align:middle;font-size:1rem;font-weight:700;line-height:1.2;background:#fff8ee;box-shadow:0 2px 6px rgba(60,30,10,.28);color:var(--ink,#3a2a1a)}.kchip.j59hchip .j59ico{height:1.5rem;width:auto;display:block;flex:none}
 .stage.j59 #mefig,.stage.j59 #j59metag,.stage.j59 #tokens,.stage.j59 .kspet{translate:var(--j59dx,0px) 0;transition:var(--j59tr,none);will-change:translate}
 .stage.j59{touch-action:pan-y}
 .stage.j59 #mefig,.stage.j59 #tokens img{-webkit-user-drag:none;user-select:none}
@@ -309,6 +334,7 @@ html body #stage.j59slot #tokens{display:block!important;overflow:visible!import
 html body #stage.j59slot #tokens>.tok{position:absolute!important;margin:0!important;padding:0!important;pointer-events:auto;min-width:0!important;max-width:none!important;flex:none!important;translate:none!important}
 html body #stage.j59slot #tokens>.tok.fig{display:block;line-height:0}
 html body #stage.j59slot #tokens>.tok.fig .figimg{display:block;transform:none!important}
+html body #stage .tok .tag .j59t,html body #stage #j59metag .tag .j59t{white-space:nowrap;overflow:hidden}
 html body #stage.j59slot #tokens>.tok .tag,html body #stage.j59slot #j59metag .tag{width:max-content!important;max-width:var(--j59sw,200px)!important;white-space:normal!important;overflow-wrap:break-word;line-height:1.2!important;translate:none!important}
 html body #stage.j59slot #tokens>.tok.fig .tag{top:100%!important;margin-top:3px!important}
 html body #stage.j59slot #j59metag{translate:none!important}
@@ -360,7 +386,7 @@ function kitHereMsg(){try{const V=S&&S.visit;if(!V)return;const m=String(V.msg||
     the record can bring people in after the line was written) */
  if(m&&!/^(Ở đây (có|còn) \d+ người\.?|Không gặp ai\.?)$/.test(m)){if(/^Ở đây (có|còn) \d+ người\./.test(m)&&n)V.msg=m.replace(/^Ở đây (có|còn) \d+ người\./,`Ở đây còn ${n} người.`);return}
  V.msg=n?`Ở đây còn ${n} người.`:"Không gặp ai."}catch(e){}}
-const r0=renderStage;renderStage=function(){j59CourtNames();kitHereMsg();const r=r0.apply(this,arguments);try{j59lay()}catch(e){}return r};
+const r0=renderStage;renderStage=function(){j59CourtNames();kitHereMsg();const r=r0.apply(this,arguments);try{j59lay()}catch(e){}j59hdrCount();return r};
 /* every module has wrapped countAt by the time the game runs: the outermost wrap answers her own place from the stage itself */
 /* the maid road (j42 srvVisitOf) fills a place by its own rules: the same rules count its other places for the Dư đồ, so the
    number on the map is the number she meets on arrival (audit: dev/test/stage-counts.js) */

@@ -197,7 +197,7 @@ function rgChOf(id){for(let i=0;i<RGC.length;i++){const j=RGC[i].b.indexOf(id);i
 function rgTitle(id){const c=rgChOf(id);if(c)return `Phụ tuyến · ${RGT} · Chương ${c[0]+1} · Hồi ${c[1]+1}/${RGC[c[0]].b.length}`;return `Phụ tuyến · ${RGT} · Việc của phe`}
 function rgLine(o){const od=rgOd(o),c=rgCost(o.c);const cost=fmt(c);const win=[fmt(o.w||{}),o.wx?`<span class="g">${rgTok(o.wx)}</span>`:""].filter(Boolean).join(" · ");
  if(od>=100)return [cost?"tốn: "+cost:"",win?"thành: "+win:""].filter(Boolean).join(" · ");
- const lose=[fmt(o.l||{}),o.lx?`<span class="r">${rgTok(o.lx)}</span>`:"",o.pun?`<span class="r">${o.pun>1?"có thể bị giáng bậc":"bị cấm túc"}</span>`:""].filter(Boolean).join(" · ");
+ const lose=[fmt(o.l||{}),o.lx?`<span class="r">${rgTok(o.lx)}</span>`:"",o.pun?`<span class="r">${o.pun>1?"có thể bị giáng bậc":"bị cấm túc"}</span>`:""].filter(Boolean).join(", ");
  return `${word(od)} · ${cost?"tốn: "+cost+" · ":""}thành: ${win||"qua được"} · hỏng: ${lose||"không mất gì thêm"}`}
 PEND.rg=pp=>{try{if(!rgOn())return null;const b=rgBeatDef(pp.b);if(!b)return null;const O=rgOpts(b);if(!O.length)return null;
  const t=typeof b.t==="function"?b.t():b.t;const wk_=typeof b.w==="function"?b.w():b.w;
@@ -208,6 +208,7 @@ function rgFire(id){const d=mkP("rg",{b:id});if(!d)return false;const m={t:rgTit
 /* the side's enemies: a consort of the named side (or any foe of hers) gets proof against her */
 function rgFoe(side){const s=rgSideNow();const L=liveRivals(true).filter(v=>side==="foe"?(rgSideOf(v)&&rgSideOf(v)!==s):rgSideOf(v)===side);return L.length?pick(L):null}
 function rgRes(id,i,od){const b=rgBeatDef(id);if(!b)return;const o=rgOpts(b)[i];if(!o)return;const r=rgMe();const W=rgW();
+ if(od>=100&&!roll(BAL.odds.hi)){oddsSoft(`${rgTitle(id)}: ${rgTok(o.n)}`,o.c);return}/* ODDS CAP: a sure court choice fails softly at the cap */
  const ok=od>=100||roll(od);const side=o.s||rgSideNow();const t0=rgTitle(id);const before=rsnap();let ex=[];
  r.done[id]=(r.done[id]||0)+1;r.last=S.turn;
  if(ok){apply(o.w||{});if(o.pw)rgPush(side,o.pw);if(o.tr)rgTr(o.tr);if(o.lq)rgQAf(o.lq);if(o.lead)rgLead(side,o.lead)}
@@ -272,8 +273,11 @@ function rgWorldMonth(){const W=rgW();if(!W||W.out)return"";const Bg=BAL.rg;let 
 function rgNext(second){const W=rgW(),r=rgMe();if(!W)return null;const queued=new Set(Q.filter(m=>m.pid==="rg").map(m=>m.pp&&m.pp.b));
  for(let c=0;c<Math.min(W.ch,RGC.length);c++){for(const id of RGC[c].b){if(r.done[id]||queued.has(id))continue;const b=RGBT[id];
   if(b.if&&!b.if()){r.done[id]=-1;continue}if(b.fin&&!W.out)return null;return id}}
- const s=rgSideNow();if(!second&&s&&!W.out&&S.turn-(r.erT==null?-99:r.erT)>=BAL.rg.erCd&&S.turn-(r.last||-99)>=2&&roll(BAL.rg.erP)){
-  const L=RGE[s].filter(e=>(!e.if||e.if())&&(r.done[s+":"+e.id]||0)<1);const e=L.length?pick(L):pick(RGE[s].filter(e=>!e.if||e.if()));if(e){r.erT=S.turn;return s+":"+e.id}}
+ const s=rgSideNow();if(!second&&s&&!W.out&&S.turn-(r.erT==null?-99:r.erT)>=BAL.rg.erCd&&S.turn-(r.last||-99)>=2){
+  /* npc-purpose G2: the leader asks only when she trusts her enough, and asks for what she needs now (an errand whose occasion is live, one not done yet);
+     erP = the chance the need comes up this month */
+  const Wr=BAL.ag.why.rgErr;const L=RGE[s].filter(e=>!e.if||e.if());
+  const e=(r.tr||0)>=Wr.trMin?npwPick(L,e=>Wr.base+(e.if?Wr.need:0)+((r.done[s+":"+e.id]||0)<1?Wr.fresh:0)+(r.tr||0)*Wr.tr):null;if(e&&roll(BAL.rg.erP)){r.erT=S.turn;return s+":"+e.id}}
  return null}
 function rgMonth(){if(!rgOn())return"";let ev="";if(!rgGuest())ev+=rgWorldMonth();
  const W=rgW(),r=rgMe();if(S.thDead&&r.side==="th"&&!(W&&W.out)){r.side="ngoai";log(`<b>${RGT}</b>: Thái hậu băng hà, phe Thái hậu tan rã. Ngươi thành người đứng ngoài.`)}if(W&&W.out&&!r.res){const t=rgMine();if(t)log(`<b>${RGT}</b>: ${t}`)}
@@ -380,7 +384,10 @@ function rgLNext(){if(!rgOn()||typeof q72CanOffer!=="function"||!q72CanOffer())r
   const tid=RGL[k].q[Math.min(l.st,2)];return !act.has(tid)&&!RGL[k].q.some(t=>act.has(t))});
  if(!C.length)return null;const k=pick(C);const l=L[k]||{st:0};const T=T72I[RGL[k].q[Math.min(l.st,2)]];if(!T)return null;
  const A=rgLA(k);if(!A)return null;const x=q72Make(T,A);if(!x)return null;L._t=S.turn;return x}
-(function(){if(typeof q72Tick!=="function")return;const t0=q72Tick;q72Tick=function(){const r=t0.apply(this,arguments);try{if(rgOn()&&S.tuan===1&&Q.length<=1&&!evBusy()){const x=rgLNext();if(x){q72Offer(x,"");evBusyMark()}}}catch(e){console.error(e)}return r}})();
+/* npc-purpose G1 #10: the line person asks FIRST at tuần 1 (her open step is a standing reason); the generic errand (q72Tick, every BAL.ag.why.q72.gap
+   tuần = one month, so it sat on the same tuần each month) then finds the tuần busy and waits. Before: the errand took tuần 1 first and the
+   'Tâm nguyện' offers fell 50 → 9 in 12 × 200 tuần (rate gate 'Phụ tuyến · Tâm nguyện … (#/#)' 22 → 3). q72Tick's step / deadline pass still runs. */
+(function(){if(typeof q72Tick!=="function")return;const t0=q72Tick;q72Tick=function(){try{if(rgOn()&&S.tuan===1&&Q.length<=1&&!evBusy()){const x=rgLNext();if(x){q72Offer(x,"");evBusyMark()}}}catch(e){console.error(e)}return t0.apply(this,arguments)}})();
 
 /* ---------- Mệnh truyện › Triều cục / Tâm nguyện (kit: kitSubTabs, kitSkillCard, rows67/kitRows, kitChecks, kchip, pbtn) ---------- */
 function rgPWord(p){const Bg=BAL.rg;return p>=Bg.B?"bệ hạ nắm được triều chính":p>=Bg.B-6?"thế bệ hạ đang lên":p<Bg.A?"nhà Tể tướng nắm triều chính":p<Bg.A+6?"nhà Tể tướng đang mạnh":"ba phe giằng co"}

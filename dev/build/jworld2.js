@@ -98,7 +98,8 @@ EVD.thi={place:()=>"thu",
 const vgOf=()=>{try{menInit()}catch(e){}return (S.men||[]).find(m=>m.alive&&m.role==="Vương gia")||null};
 EVD.vuong={place:()=>"tn",
  start(w){const b=B().vuong;const m=vgOf();const T=T_();if(T&&T.bien<b.bien)moodFloor(b.mood);
-  let g=null;const L=liveR().filter(v=>!v.out&&!v.confined);if(m&&L.length){const v=npcPick(null,L.map(v=>[v,mW(v,"social")*(1+(v.sung||0)/b.sungDiv)]));if(v&&roll(b.gossip)){g=v;ap(v,{danh:b.meet.danh});try{newsAdd(v,"vuong",`Có kẻ đồn ${v.name} trò chuyện lâu với ${m.name}.`)}catch(e){}}}
+  let g=null;const L=liveR().filter(v=>!v.out&&!v.confined);if(m&&L.length){const v=npcPick(null,L.map(v=>[v,mW(v,"social")*(1+(v.sung||0)/b.sungDiv)]));/* NPC-PURPOSE G3: the talk has a mouth — a lady at the banquet who resents her (or is close to the player) spreads it (npcTell); nobody → no talk */
+   const tl=v&&npcTell(v,{from:L.filter(x=>x!==v),to:S});if(tl&&roll(b.gossip)){g=v;ap(v,{danh:b.meet.danh});try{newsAdd(v,"vuong",`${npwNm(tl.who)} đồn ${v.name} trò chuyện lâu với ${m.name}.`)}catch(e){}}}
   return `${m?m.name:"Vương gia"} về kinh triều kiến; Hoàng thượng mở gia yến, nữ quyến vương phủ vào Đức Thọ cung thỉnh an.${T&&T.bien<b.bien?" Biên cương chưa yên, ngài có phần dè chừng.":""}${g?` Lời đồn bay quanh ${g.name}.`:""}`},
  end(w){const m=vgOf();return `${m?m.name:"Vương gia"} đã về phiên trấn.`},
  card(w){const b=B().vuong;const m=vgOf();if(!meCons()||!m)return info(w);const o=od(b.meet.o[0]+(S.tai||0)/b.meet.o[1]);
@@ -113,9 +114,9 @@ EVD.ret={place:()=>"home",
    else if((v.bac||0)>=b.share.bac&&npcPick(v,[["share",mW(v,"help")],["keep",1]])==="share"){ap(v,{bac:-b.share.bac,duc:b.share.duc,danh:b.share.danh});Sh.push(v)}}
   try{for(const s of allServ())if(s&&s.role==="maid"&&roll(b.maidCatch))s.suc=Math.max(0,(s.suc||b.maidSuc)-b.suc)}catch(e){}
   return `Tuyết lớn phủ kín cung cấm; than sưởi chia theo phẩm, cung thấp và lãnh cung rét cóng.${Sh.length?` Chia than cho các cung thấp: ${nmList(Sh)}.`:""}${Su.length?` Chịu rét: ${nmList(Su)}.`:""}`},
- end(){return "Tuyết đã tan; Nội vụ phủ phát than như thường."},
+ end(){phongAfter(B().ret.phongP,"Sau trận đại hàn, Hoàng thượng cho giảm bớt người trong cung");return "Tuyết đã tan; Nội vụ phủ phát than như thường."},
  card(w){const b=B().ret;if(!meCons())return info(w);if(rkOf(S)<=b.rank)return Object.assign(info(w),{opts:[{n:"Bỏ bạc mua thêm than",fx:{bac:-b.buy.bac},x:"thành: qua mùa rét yên ổn"},
-   {n:"Chịu rét cho qua",fx:{suc:-b.cold.suc},x:"kèm: có thể bị nhiễm phong hàn",go:()=>{if(roll(b.catch)){const r=catchIll(S,b.ill);if(r)log(r)}}}]});
+   {n:"Chịu rét cho qua",fx:{suc:-b.cold.suc},x:`kèm: nhiễm phong hàn: ${chanceW(b.catch)}`/* law 4: the side chance it rolls (b.catch) */,go:()=>{if(roll(b.catch)){const r=catchIll(S,b.ill);if(r)log(r)}}}]});
   return Object.assign(info(w),{opts:[{n:"Chia than cho các cung thấp",fx:{bac:-b.share.bac},x:`thành: Đức +${b.share.duc}, Danh +${b.share.danh}`,go:()=>apply({duc:b.share.duc,danh:b.share.danh})},{n:"Giữ than cho cung mình",fx:{},x:"không được mất gì"}]})},
  night(){return false}};
 /* ---------- 8 NẠN CHÂU CHẤU (row 8): a flood / drought whose relief failed (j55) left Kho lúa low but not yet famine (dis.kho..kho),
@@ -135,10 +136,14 @@ EVD.vuco={place:()=>"home",
  start(w){const b=B().vuco;const F=[];for(const p of [S].concat(liveR())){const st=typeof staffOf==="function"?staffOf(p):(p.staff||[]);
    for(const s of st.slice())if(s&&s.spyFor&&roll(b.spyFind)){const i=(p.staff||[]).indexOf(s);if(i>=0){p.staff.splice(i,1);F.push(s.name)}}}
   w.x.F=F.length;return `Hình nhân bùa ngải trong tẩm cung ${w.x.tn||"một phi tần"} giữa lúc ${w.x.why||"người trong hoàng tộc lâm bệnh"}; Thận hình ti lục soát mọi cung, thị tẩm tạm dừng.${F.length?` Lôi ra tai mắt cài cắm: ${F.join(", ")}.`:""}`},
+ /* her own household: her accusation (S.wwMe acc) against the culprit the end found (o.got = its id); split out for thin E */
+ home(w,o){const b=B().vuco;if(meGet(w,"acc")!=null&&notSrv()){const a=byPid(meGet(w,"acc"));if(o&&a&&((o.got!=null&&a.id===o.got)||(o.gotFr&&a.coop)))apply({danh:b.accuse.danh});else apply({danh:b.accuse.miss})}},
  end(w){const b=B().vuco;const by=byPid(w.x.by);const me=meGet(w,"me")||"";let r="";let got=null;
-  if(by&&(by===S||by.alive)){let o=b.catch+(by.schemes||0)*b.schemeK;if(by===S&&me==="clean")o*=b.clean.mul;if(by!==S&&meGet(w,"acc")===by.id)o+=b.accuseK;if(by===S&&me==="open")o+=b.accuseK;
+  /* co-op (thin E): the culprit is the OTHER player (her entry): her own choice (S.wwMe in her person) counts as "me" (EVD.vuco.meOf, jcoopthine) */
+  const byMe=by===S?me:by&&by.coop&&EVD.vuco.meOf?(EVD.vuco.meOf(w,"me")||""):"";
+  if(by&&(by===S||by.alive)){let o=b.catch+(by.schemes||0)*b.schemeK;if((by===S||by.coop)&&byMe==="clean")o*=b.clean.mul;if(by!==S&&meGet(w,"acc")===by.id)o+=b.accuseK;if((by===S||by.coop)&&byMe==="open")o+=b.accuseK;
    if(roll(Math.round(o))){punish(by,"dùng bùa ngải hãm hại người",2);got=by;r=`Thận hình ti tra ra kẻ đặt bùa: ${nmOf(by)}.`}}
-  if(meGet(w,"acc")!=null&&notSrv()){const a=byPid(meGet(w,"acc"));if(got&&got===a)apply({danh:b.accuse.danh});else apply({danh:b.accuse.miss})}
+  EVD.vuco.home(w,{got:got&&got!==S?got.id:null,me:!!got&&got===S});/* me: the culprit caught is this player (co-op: the other player's accusation of her entry hits, o.gotFr) */
   if(!got&&roll(b.innocent)){const L=liveR().filter(v=>!v.out&&v.id!==w.x.tgt&&!(by&&v===by)).sort((x,y)=>rkOf(x)-rkOf(y));const v=L[0];if(v){punish(v,"bị nghi dính vào vu cổ",1);got=v;r=`Không tra ra kẻ chủ mưu; ${v.name} bị bắt làm người chịu tội.`}}
   if(got&&roll(b.toCam))ws("cam","Án vu cổ khép lại, cung cấm giới nghiêm");return (r||"Án vu cổ không tra ra ai; Thận hình ti đóng hồ sơ.")+" Thị tẩm trở lại."},
  card(w){const b=B().vuco;if(!meCons())return info(w);const t=liveR().filter(v=>!v.out).sort((x,y)=>(typeof oan==="function"?oan(S,y)-oan(S,x):0))[0];
@@ -160,26 +165,40 @@ const greedy=s=>{try{return typeof netIs==="function"&&netIs(s,"greed")}catch(e)
 EVD.trom={place:()=>"home",
  start(w){const b=B().trom;const C=[];for(const v of liveR())for(const s of (v.staff||[]).slice())if(greedy(s)&&roll(b.catch)){v.staff.splice(v.staff.indexOf(s),1);C.push(s.name)}w.x.C=C.length;
   return `Nội vụ phủ kiểm kê cuối năm, ngự khố thiếu cả rương lụa và vàng; kiểm từng cung, bổng lộc tạm giữ lại.${C.length?` Bắt được kẻ ăn cắp: ${C.join(", ")}.`:""}`},
- end(w){const b=B().trom;let n=w.x.C||0;const me=meGet(w,"me")||"open";const mine=(S.staff||[]).filter(greedy);
-  if(me==="self"||(me==="open"))for(const s of mine)if(me==="self"||roll(b.catch)){S.staff.splice(S.staff.indexOf(s),1);n++;log(`${s.name} trong cung ngươi bị bắt vì trộm của ngự khố.`)}
-  let r="";if(!n&&roll(b.scape)){const v=pick(liveR().filter(v=>!v.out));if(v){ap(v,{danh:b.scapeDanh});r=` Không bắt được ai; cung ${v.name} bị đổ tiếng.`}}
-  if(roll(b.phongP))ws("phong","Sau án trộm, Hoàng thượng cho giảm bớt người trong cung");return `Án trộm ngự khố đã xong.${r}`},
+ /* her own household (her choice S.wwMe): split out so the host can run it for the other player in her context (thin E) */
+ home(w){const b=B().trom;let n=0;const me=meGet(w,"me")||"open";const mine=(S.staff||[]).filter(greedy);
+  if(me==="self"||(me==="open"))for(const s of mine)if(me==="self"||roll(b.catch)){S.staff.splice(S.staff.indexOf(s),1);n++;log(`${s.name} trong cung ngươi bị bắt vì trộm của ngự khố.`)}return n},
+ end(w){const b=B().trom;let n=(w.x.C||0)+EVD.trom.home(w);
+  let r="";if(!n&&roll(b.scape)){/* NPC-PURPOSE G3: the blame is pinned by someone who resents her (npcWhy g3scape), not on a random palace */const o=npcWhy("g3scape",{});const v=o&&o.tgt;if(v){ap(v,{danh:b.scapeDanh});r=` Không bắt được ai; ${npwNm(o.who)} ${o.why}, đổ tiếng cho cung ${v.name}.`}}
+  phongAfter(b.phongP,"Sau án trộm, Hoàng thượng cho giảm bớt người trong cung");return `Án trộm ngự khố đã xong.${r}`},
  card(w){const b=B().trom;if(!meCons())return info(w);return Object.assign(info(w),{opts:[{n:"Mở kho cung mình cho kiểm",fx:{},x:"thành: kẻ gian trong cung ngươi có thể bị bắt",go:()=>{meSet(w,"me","open")}},
   {n:"Lo lót Nội vụ phủ cho qua",fx:{bac:-b.bribe.bac},x:`kèm: Đức ${b.bribe.duc}`,go:()=>{meSet(w,"me","bribe");apply({duc:b.bribe.duc})}},
   {n:"Tự tra người của mình",fx:{},x:`thành: kẻ tham trong cung ngươi bị lôi ra, Đức +${b.self.duc}`,go:()=>{meSet(w,"me","self");apply({duc:b.self.duc})}}]})},
  night(){return false},pay:1};
-/* ---------- 13 ĐẠI PHÓNG CUNG NHÂN (row 13): maids at BAL.srvAge.out (j42 rule, ageing j17) leave every household at once (spring, or
+/* ---------- 13 ĐẠI PHÓNG CUNG NHÂN (row 13): maids at BAL.srvAge.ask (j42 rule, ageing j17) leave every household at once (spring, or
    after a trộm / rét); rich NPCs pay Nội vụ phủ to keep a good one; Nội vụ phủ refills (fillStaff) at the end. Her: send them off with silver,
    keep one, or let them go. */
-const aged=s=>s&&s.role==="maid"&&(s.age||0)>=BAL.srvAge.out&&!s.eid&&!s.coop&&!((s.rk||0)>=3)&&s!==S.maid;
+/* mãn hạn = the j42 rule she meets as a maid: at BAL.srvAge.ask Nội vụ phủ asks her to leave; a chưởng sự (rk >= BAL.srvRk.cs) may stay as ma ma.
+   (srvAge.out 30 was never reached in a live household: NPC maids turn over or rise to chưởng sự first — world-ret-phong r1 bot, 0 in 2700 tuần.) */
+const aged=s=>s&&s.role==="maid"&&(s.age||0)>=BAL.srvAge.ask&&!s.eid&&!s.coop&&!((s.rk||0)>=BAL.srvRk.cs)&&s!==S.maid;
+/* ONE pool for every phóng cung opener and for the release itself: her household + the living NPC households not in lãnh cung
+   (a dead or cold-palace household is never counted, so the gate never opens an empty release). */
+const phongHH=()=>liveR();/* liveRivals: alive and not in lãnh cung */
+const phongN=()=>[S].concat(phongHH()).reduce((n,v)=>n+(v&&v.staff||[]).filter(aged).length,0);
+/* ONE opener (spring calendar, trộm end, đại hàn end): the cause's own BAL odds (clamped BAL.odds.lo..hi), then phong.min aged maids in
+   the pool; worldStart keeps phong's cd / maxOpen / host gate. */
+const phongOpen=(p,cause,o)=>{if(roll(cl(p,BAL.odds.lo,BAL.odds.hi))&&phongN()>=B().phong.min)return ws("phong",cause,o);return null};
+const phongAfter=(p,cause)=>phongOpen(p,cause);
 EVD.phong={place:()=>"home",
- start(w){const b=B().phong;let n=0;for(const v of liveR()){const L=(v.staff||[]).filter(aged);if(!L.length)continue;let keep=null;
-   if((v.bac||0)>=b.keep.bac&&roll(b.npcKeep)){keep=L.sort((x,y)=>(y.loyal||0)-(x.loyal||0))[0];ap(v,{bac:-b.keep.bac})}
+ start(w){const b=B().phong;let n=0;for(const v of phongHH()){const L=(v.staff||[]).filter(aged);if(!L.length)continue;let keep=null;
+   if(L.length>=2&&(v.bac||0)>=b.keep.bac&&roll(b.npcKeep)){/* keep one only when another still leaves: a release is never empty */keep=L.sort((x,y)=>(y.loyal||0)-(x.loyal||0))[0];ap(v,{bac:-b.keep.bac})}
    for(const s of L)if(s!==keep){v.staff.splice(v.staff.indexOf(s),1);n++}}
-  w.x.n=n;w.x.mine=(S.staff||[]).filter(aged).length;return `Chiếu cho cung nữ mãn hạn xuất cung về quê; ${n} người ở các cung đã ra đi.${w.x.mine?` Trong cung ngươi có ${w.x.mine} người đến tuổi.`:""}`},
- end(w){const b=B().phong;const me=meGet(w,"me")||"let";const L=(S.staff||[]).filter(aged);let keep=null;if(me==="keep"&&L.length)keep=L.sort((x,y)=>(y.loyal||0)-(x.loyal||0))[0];
-  for(const s of L)if(s!==keep)S.staff.splice(S.staff.indexOf(s),1);
-  for(const v of [S].concat(liveR()))try{if(v.staff&&typeof fillStaff==="function")fillStaff(v,true)}catch(e){}
+  w.x.n=n;w.x.mine=(S.staff||[]).filter(aged).length;return `Chiếu cho cung nữ mãn hạn xuất cung về quê${n?`; ${n} người ở các cung đã ra đi`:""}.${w.x.mine?` Trong cung ngươi có ${w.x.mine} người đến tuổi.`:""}`},
+ /* her own household (split out for thin E, as trộm) */
+ home(w){const b=B().phong;const me=meGet(w,"me")||"let";const L=(S.staff||[]).filter(aged);let keep=null;if(me==="keep"&&L.length)keep=L.sort((x,y)=>(y.loyal||0)-(x.loyal||0))[0];
+  for(const s of L)if(s!==keep)S.staff.splice(S.staff.indexOf(s),1);try{if(S.staff&&typeof fillStaff==="function")fillStaff(S,true)}catch(e){}return keep},
+ end(w){const keep=EVD.phong.home(w);
+  for(const v of liveR())try{if(v.staff&&typeof fillStaff==="function")fillStaff(v,true)}catch(e){}
   return `Nội vụ phủ đã đưa cung nữ mới về các cung.${keep?` ${keep.name} được giữ lại bên ngươi.`:""}`},
  card(w){const b=B().phong;const n=w.x.mine||0;if(!meCons()||!n)return info(w);return Object.assign(info(w),{opts:[{n:"Tặng bạc hồi hương",fx:{bac:-b.gift.bac*n},x:`thành: Đức +${b.gift.duc}, người đi nhớ ơn`,go:()=>{meSet(w,"me","let");apply({duc:b.gift.duc})}},
   {n:"Lo lót Nội vụ phủ giữ lại một người thân tín",fx:{bac:-b.keep.bac},x:"thành: người trung thành nhất ở lại",go:()=>{meSet(w,"me","keep")}},{n:"Để các nàng ra đi",fx:{},x:"không được mất gì",go:()=>{meSet(w,"me","let")}}]})},
@@ -265,7 +284,7 @@ function x2Tick(){if(!S||S.dead)return;const b=B(),z=wZ(),t=now(),y=S.year,m=S.m
  if(m===b.tinh.month&&tu===b.tinh.t&&!ww("cam"))ws("tinh","Sau Tết, gia quyến được vào cung thỉnh an",{len:b.tinh.len});
  if(m===b.phat.month&&tu===b.phat.t)ws("phat","Mồng tám tháng tư, lễ Phật đản",{len:b.phat.len});
  if(m===b.trom.month&&tu===b.trom.t&&allServ().some(greedy)&&roll(b.trom.p))ws("trom","Kiểm kê ngự khố cuối năm thấy thiếu hụt",{len:b.trom.len});
- if(m===b.phong.month&&tu===0&&allServ().filter(aged).length>=b.phong.min)ws("phong","Cung nữ mãn hạn, theo lệ cho xuất cung",{len:b.phong.len});
+ if(m===b.phong.month&&tu===0)phongOpen(b.phong.p,"Cung nữ mãn hạn, theo lệ cho xuất cung",{len:b.phong.len});
  /* the weather: heavy snow (rollWx f 4) in `run` of the last run+1 tuần */
  z.snowL=(z.snowL||[]).concat(wxDayAny(4)?1:0).slice(-(b.ret.run+1));z.snowR=z.snowL.reduce((a,c)=>a+c,0);if(wxDayAny(4)&&z.snowR>=b.ret.run)ws("ret","Tuyết lớn nhiều tuần liền, than sưởi không đủ",{len:b.ret.len});
  /* the court: a house too strong (monthly) */
@@ -289,3 +308,6 @@ function vucoCause(p,by){try{if(!S||!B().on||(typeof worldOn==="function"&&!worl
 if(typeof framed==="function"){const f0=framed;framed=function(p,why){const r=f0.apply(this,arguments);if(/bùa|hình nhân|trù ẻo/.test(String(why||"")))vucoCause(p,typeof ACTX!=="undefined"?ACTX.a:null);return r}}
 try{const K=typeof ACT!=="undefined"&&ACT.kframe;if(K&&K.f){const f0=K.f;K.f=function(a,t){const r=f0.apply(this,arguments);if(/đào được hình nhân/.test(String(r||"")))vucoCause(t,a);return r}}}catch(e){wErr("kframe",e)}
 })();
+/* NPC-PURPOSE G3 kind: who pins the theft on whom — the consort with the strongest grudge (≥ BAL.ag.why.g3.scape.min) against another */
+npwReg("g3scape",{who:()=>liveRivals(true).filter(v=>!v.out&&!v.confined),why:a=>{const L=liveRivals(true).filter(t=>t!==a&&!t.out);const t=npwPick(L,x=>hostility(a,x));
+ const s=t?hostility(a,t):0;return t&&s>=BAL.ag.why.g3.scape.min?{s:Math.min(100,s),t,r:"oán "+npwNm(t)}:null}});

@@ -68,19 +68,21 @@ function trongLearn(p,tags,why){if(!S||trongKnown(p))return;const H=trongHit(p,t
 function trongLine(p){return `Trọng: ${trongKnown(p)?trongOf(p).map(v=>`<b>${kitGloss(v)}</b>`).join(" · "):"chưa rõ"}`}
 
 /* ---------- ONE greeting rule ---------- */
-const TR_MH={vui:1.3,binh:1,buon:.8,lo:.8,so:1,gian:.4,ghen:.7,muu:.7,dau:.6},TR_MW={vui:1.1,buon:.85,dau:.8,gian:.75,lo:.9};
+const TR_MH={vui:1.3,binh:1,buon:.8,lo:.8,so:1,gian:.4,ghen:.7,dau:.6},TR_MW={vui:1.1,buon:.85,dau:.8,gian:.75,lo:.9};
 function trEmo(p){try{return typeof emoGet==="function"?emoGet(p).k:"binh"}catch(e){return"binh"}}
+/* FEELINGS-18: the table key of p's feeling (new kinds read their group's factor; Buồn at the heavy level = the old Đau khổ factor) */
+function trMK(T,p){const k=trEmo(p);try{if(k==="buon"&&T.dau!=null&&typeof feelLv==="function"&&feelLv(p,"buon")>=3)return"dau";return typeof feelIn==="function"?feelIn(T,k):k}catch(e){return k}}
 function trGreetLog(who,host){const k=host==="th"?"grT":"grH";who[k]=Array.isArray(who[k])?who[k]:[];return who[k]}
 function trGreetN(who,host){const now=wk();return trGreetLog(who,host).filter(w=>w<now&&w>=now-3).length}
 function trGreetMark(who,host){const L=trGreetLog(who,host),now=wk();if(L[L.length-1]!==now)L.push(now);if(L.length>12)L.splice(0,L.length-12)}
 function trGreet(who,host,opt){opt=opt||{};const B=BAL.trong,th=host==="th",A=th?thArch():null;who=who||S;
  const tags=opt.tags||(th?DEED.greet:DEED.greetHH),vm=trongMul(th?"th":host,tags);
  const base=opt.base!=null?opt.base:th?A.base:B.hhBase;const rk=rkOf(who)||0;const rkF=th?1+A.rk*(rk-3):1;
- const eh=trEmo(th?S.thO:host),ew=trEmo(who);const mH=TR_MH[eh]||1,mW=TR_MW[ew]||1;
+ const eh=trEmo(th?S.thO:host),ew=trEmo(who);const mH=TR_MH[trMK(TR_MH,th?S.thO:host)]||1,mW=TR_MW[trMK(TR_MW,who)]||1;
  const n=opt.noRep?0:trGreetN(who,host),repF=Math.max(B.repMin,1-(th?A.rep:B.hhRep)*n);
  const reg=th?(who===S?S.th:(who.th||0)):(who===S?S.hh:aff(host,who)),cap=th?A.cap:B.hhCap,capF=reg>cap?Math.max(0,1-(reg-cap)/B.capSpan):1;
  const shift=eh==="gian"?-2:0;const raw=base*vm*rkF*mH*mW*repF*capF+shift;const gain=cl(Math.round(raw),-4,20);
- const o=cl((th?A.o:B.hhO)+Math.round((vm-1)*10)+(eh==="gian"?-10:eh==="vui"?5:0),20,95);const scold=(th?A.scold:B.hhScold)+(eh==="gian"?2:0)+(vm<1?1:0);
+ const o=cl((th?A.o:B.hhO)+Math.round((vm-1)*10)+(eh==="gian"?-10:eh==="vui"?5:0),20,BAL.odds.hi);const scold=(th?A.scold:B.hhScold)+(eh==="gian"?2:0)+(vm<1?1:0);
  const H=th?"Thái hậu":"Hoàng hậu",X=[];
  if(th&&S.thO.archK)X.push(`${H} ${A.n.toLowerCase()}`);
  if(trongKnown(th?"th":host)){const hit=trongHit(th?"th":host,tags);if(hit.length)X.push(`${H} trọng ${hit.join(", ")}: ${vm>=1?"quý lễ này hơn":"không ưa"}`)}
@@ -90,7 +92,7 @@ function trGreet(who,host,opt){opt=opt||{};const B=BAL.trong,th=host==="th",A=th
 /* wraps a "Thỉnh an" talk option so the card shows (and runs) the real numbers */
 function trGreetOpt(a,host){const th=host==="th",k=th?"th":"hh",G=trGreet(S,host);const w=Object.assign({},a.w||{}),l=Object.assign({},a.l||{});
  if(G.gain)w[k]=G.gain;else delete w[k];l[k]=-G.scold;const why0=a.why;
- const o=Object.assign({},a,{o:a.o==null?od(G.o):cl(a.o+G.o-(th?75:70),5,95),w,l,risk:[a.risk,G.x].filter(Boolean).join(" · "),why:()=>{const F=why0?why0().slice():[];G.why.forEach(f=>F.push(f));return F}});
+ const o=Object.assign({},a,{o:a.o==null?od(G.o):oddsCl(a.o+G.o-(th?75:70)),w,l,risk:[a.risk,G.x].filter(Boolean).join(" · "),why:()=>{const F=why0?why0().slice():[];G.why.forEach(f=>F.push(f));return F}});
  const mark=()=>{trGreetMark(S,host);if(th){S.thO.archK=1}trongLearn(th?"th":host,th?DEED.greet:DEED.greetHH,"Qua buổi thỉnh an")};
  if(a.run){const r0=a.run;o.run=function(){mark();return r0.apply(this,arguments)}}
  else{const g0=a.go,f0=a.fail;o.go=function(){mark();return g0?g0.apply(this,arguments):undefined};o.fail=function(){mark();return f0?f0.apply(this,arguments):undefined}}

@@ -4,7 +4,7 @@ const {chromium}=require('playwright');const fs=require('fs'),path=require('path
 const [,,URL,OUT,SHOTS]=process.argv;fs.mkdirSync(OUT,{recursive:true});const FX=path.resolve(__dirname,'../../img/fx');
 const VP=[[755,1000,2,'fold'],[1000,755,2,'fold-land'],[1180,820,2,'ipad'],[1366,1024,2,'ipad-pro'],[844,390,3,'phone-land'],[390,844,3,'phone']];
 const sleep=t=>new Promise(r=>setTimeout(r,t));
-const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;
+const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;
  const m=document.getElementById('modal');if(m)m.hidden=true;['kroul','dawn','kload','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov').forEach(e=>e.remove());render();return S.name};
 const CLEAR=()=>{document.querySelectorAll('body > *').forEach(e=>{const s=getComputedStyle(e);if(s.position==='fixed'&&+s.zIndex>100)e.remove()});Q.length=0;render()};
 (async()=>{const b=await chromium.launch();let fail=0;const R={};

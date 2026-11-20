@@ -85,7 +85,7 @@ function pregFind(){if(!S||S.dead)return;if(!S.preg){S.pregUnk=0;return}if(!S.pr
  const h=`<p>Mấy hôm nay ${S.maid?`cung nữ ${S.maid.name}`:"cung nữ"} thấy ngươi biếng ăn, hay buồn nôn, liền mời thái y.</p><p><b class="g">Thái y bắt mạch: ngươi đã có thai, đang tháng thứ ${m}.</b></p>${canHide?`<p class="past">Ngươi có thể giấu thai đến hết tháng thứ 3, hoặc báo tin để được sủng ái.</p>`:""}`;
  const card={ev:1,t:"Thái y bắt mạch",who:pDoc(),h};/* ev: keep secret / announce is an EVENT choice (KIT 28.6; reviewer r7: its opts are set after the literal, so it slipped) */
  if(canHide)card.opts=[{n:"Giữ kín, dặn thái y không nói",fx:{},x:"giấu thai đến hết tháng thứ 3 · phi tần chưa biết để nhắm vào thai",go:()=>{S.hidden=true;log("Ngươi giữ kín tin có thai.")}},
-  {n:"Báo tin cho Hoàng thượng",fx:{sung:6,th:5},x:`các phi tần ghen +${ghenN(BAL.ghen.preg)} · kẻ ác có thể nhắm vào thai`,go:()=>{S.hidden=false;ghenAll(BAL.ghen.preg);log("Ngươi báo tin có thai.")}}];
+  {n:"Báo tin cho Hoàng thượng",fx:{sung:6,th:5},x:`các phi tần ghen +${ghenN(BAL.ghen.preg)} · kẻ ác có thể nhắm vào thai`,go:()=>{S.hidden=false;ghenAll(BAL.ghen.preg,"ngươi mang long thai");log("Ngươi báo tin có thai.")}}];
  else card.btn="Đã hiểu";
  log(`<span class="g">Thái y bắt mạch: ngươi đã có thai, đang tháng thứ ${m}.</span>`);Q.push(card)}
 window.pregFind=pregFind;
@@ -101,13 +101,13 @@ const ch0=chip;chip=function(t,cls){if(S&&S.preg&&/Mang thai tháng/.test(String
 
 /* --- prep: every option a real effect and a real cost; numbers it shows are the numbers it uses --- */
 const UA="mỗi +1: Ân tình +1 · mỗi +2: Sủng +1 · dễ được ban thưởng hơn";
-PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();const jb=wb.sac>0?Math.max(2,1+Math.round(wb.sac/3)):0;
+PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();const jsac=wb.sac-(wb.shSac||0)/* the shelf set Sắc is not jewellery (display-set-bonus) */,jb=jsac>0?Math.max(2,1+Math.round(jsac/3)):0;
  const lv=Math.max(1,b.l||0),oP=od(BAL.odb.j75.odOP+S.tai/2+(b.l||0)*8);
  const nx1=(q,vpv,ln)=>()=>{if(ln)log(ln);pushFront(mkP("night1",{q,vp:vpv}),"Đêm thị tẩm")};
  return{who:pMe(),t:`<p>Kính sự phòng đã báo tin. Còn hai canh giờ trước khi kiệu đến. Chỉ kịp chuẩn bị một việc.</p><p class="past">Được ưa đêm nay: ${UA}.</p>`,o:[
  {n:"Tắm cánh hoa, xông hương",fx:{bac:-15},x:"đêm nay được ưa +2",go:nx1(3,0,"Tắm cánh hoa, xông hương: đêm nay được ưa +2.")},
  {n:"Điểm trang lộng lẫy",fx:{bac:-5},x:"son phấn: Sắc đêm nay +3 → được ưa +1",go:nx1(2,0,"Điểm trang: Sắc đêm nay +3, được ưa +1.")},
- Object.assign({n:"Đeo trang sức đẹp nhất",fx:{},x:jb?`trang sức đang đeo Sắc +${wb.sac} → được ưa +${jb}${vp?" · kèm: vượt phẩm, Hoàng thượng có thể thu đồ, Danh -4":""}`:"cần đeo trang sức trong Rương đồ",go:nx1(1+jb,vp?1:0,`Đeo trang sức: được ưa +${jb}.`)},{lk:()=>jb?"":"Chưa đeo trang sức nào: vào mục Rương đồ, chọn Đeo"}),
+ Object.assign({n:"Đeo trang sức đẹp nhất",fx:{},x:jb?`trang sức đang đeo Sắc +${jsac} → được ưa +${jb}${vp?" · kèm: vượt phẩm, Hoàng thượng có thể thu đồ, Danh -4":""}`:"cần đeo trang sức trong Rương đồ",go:nx1(1+jb,vp?1:0,`Đeo trang sức: được ưa +${jb}.`)},{lk:()=>jb?"":"Chưa đeo trang sức nào: vào mục Rương đồ, chọn Đeo"}),
  {n:`Tập trước ${b.n}`,fx:{suc:-5},x:`${word(oP)} · thành: được ưa +${1+lv} · hỏng: được ưa +1`,go:()=>{const ok=roll(oP);const g=ok?1+lv:1;log(`Tập trước ${b.n}: <span class="${ok?"g":"r"}">${ok?"thành":"hỏng"}</span>, đêm nay được ưa +${g}.`);pushFront(mkP("night1",{q:1+g,vp:0}),"Đêm thị tẩm")}},
  {n:"Để mộc, nghỉ ngơi",fx:{suc:BAL.eff.j75.sucFx},x:`giữ sức: Sức ${balSg(BAL.eff.j75.sucFx)} · không thêm được ưa`,go:nx1(1,0,"")}]}};
 
@@ -135,23 +135,25 @@ const MOODW=["vui","bình thường","phiền muộn","giận dữ"];
 function talkOpts(p){const E=S.emp;return [has("trongtai")?3:(p.tai||0)>=60?1:0,has("chamchinh")?3:-1,has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,E.mood>=2?2:1]}
 /* (a) an NPC's night: same formula as hers (PEND.prep q, PEND.night1 talk + mood + R(3), nightFx gains and reward) */
 rivalNight=function(v){v.nights++;v.nightLog.push(wk());
- let q=1;if(v.bac>=BAL.bacFee.npcMat&&roll(55)){ap(v,{bac:-BAL.bacFee.npcMat});q=3}else if((v.suc||0)>=30){ap(v,{suc:-5});const lv=Math.max(1,Math.max(...Object.values(v.arts)));q=1+(roll(odA(v,40+(v.tai||0)/2+lv*8))?1+lv:1)}
+ let q=1;if(v.bac>=BAL.bacFee.npcMat&&npcWhy("nightPrep",{v})){ap(v,{bac:-BAL.bacFee.npcMat});q=3}else if((v.suc||0)>=30){ap(v,{suc:-5});const lv=Math.max(1,Math.max(...Object.values(v.arts)));q=1+(roll(odA(v,40+(v.tai||0)/2+lv*8))?1+lv:1)}
  const O=talkOpts(v);const fit=roll(BAL.odb.j75.rbFit+(v.tamco||0)/2)?Math.max(...O):pick(O);const mood=BAL.night.mood[S.emp.mood];
- const sc=q+fit+mood+R(3);const NG=nightGain(sc),g=NG.sung,an=NG.an;ap(v,{sung:g,an});v.pg=cl(v.pg+6,0,100);v.tablet=0;v.lastNightS=sc;
+ const sc=q+fit+mood+R(3);const NG=nightGain(sc),g=NG.sung,an=NG.an;ap(v,{sung:g,an});pgUp(v,BAL.mood2.ghen.pgNight,`${v.name} được thị tẩm`);v.tablet=0;v.lastNightS=sc;
  const grade=sc>=BAL.nightEnd.warm?"đêm vui":sc>=BAL.nightEnd.normal?"đêm êm":"đêm nhạt";
- let r=`Đêm qua thẻ bài của ${v.name} được lật${S.mat>=2?` (tai mắt nói: ${grade})`:""}. `;
+ let r=`Đêm qua thẻ bài của ${v.name} được lật${eyes(S)>=2?` (tai mắt nói: ${grade})`:""}. `;
  if(giuBlocked(v)){if(v.bac>=BAL.bacFee.giu&&roll(odA(v,45+v.tamco/3))){ap(v,{bac:-BAL.bacFee.giu});night(v)}}else night(v);
  {let x=null;if(typeof pillowNpc==="function"&&agOn())x=pillowNpc(v,sc);/* AG2: her own choice by her spite need (two-way row 24, one deed BAL.tw.g.pillow) */
-  else if(v.rel<-20&&roll(20)){const o=odA(v,30+v.an/2);if(roll(o)){const b=S.sung;apply({sung:-4});x={t:S,ok:1,b}}else if(DG()){ap(v,{sung:-6})}}
-  if(x&&x.t===S&&x.ok&&S.mat>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi.${x.b!==S.sung?` Sủng của ta ${x.b} → ${S.sung}.`:""} `}
- if(typeof amOn==="function"&&amOn()?amSendQ(v):roll(3)){r+=sendMaid(v)}/* AG3: her own choice (jagmaid) */
- if(roll(BAL.odb.j75.rbTop+sc*4))bestow(v,"night");return r};
+  else if(v.rel<-20&&npcWhy("pillowTalk",{v})){const o=odA(v,30+v.an/2);if(roll(o)){const b=S.sung;apply({sung:-4});x={t:S,ok:1,b}}else if(DG()){ap(v,{sung:-6})}}
+  if(x&&x.t===S&&x.ok&&eyes(S)>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi.${x.b!==S.sung?` Sủng của ta ${x.b} → ${S.sung}.`:""} `}
+ if(typeof amOn==="function"&&amOn()?amSendQ(v):npcWhy("sendMaid",{v})){r+=sendMaid(v)}/* AG3: her own choice (jagmaid) */
+ if(empGive(v,BAL.odb.j75.rbTop+sc*4,"night"))bestow(v,"night");return r};
 /* (b) the quiet favour is a world act with a cost */
+/* npc-purpose: who carries it to her — her own tai mắt serving in v's house (that is their job), else a consort who sees inside v's house (npwIn) with a reason (npcTell) */
+function j75Teller(v){const mt=npwMat(S,v);if(mt)return "Tai mắt "+mt.name;const tl=npcTell(v,{from:npwIn(v),cd:"tellJ75"});return tl?`${npwNm(tl.who)} (${tl.why})`:""}
 const QF=["dâng canh sâm lên Dưỡng Hòa điện","chép bài thơ dâng lên ngự thư phòng","thêu túi thơm dâng Hoàng thượng","đứng đợi ngự giá ở ngự hoa viên, dâng một khúc đàn"];
 const nm0=npcMonthly;npcMonthly=function(v){const a0=ap,fi0=v.fakeIll;let seen="";let armed=false;
  const od0=odA;odA=function(p,b){if(p===v&&!armed)armed=Math.abs(b-(55+v.sung/5+mm()))<1e-9;return od0.apply(this,arguments)};
  ap=function(p,o){if(armed&&p===v&&o&&o.sung===3&&Object.keys(o).length===1&&!(v.fakeIll===2&&fi0!==2)){armed=false;if((v.bac||0)<10)return;const b=v.sung;a0(p,{sung:3,bac:-10});
-   if(roll(BAL.odb.j75.rbTop_2+S.mat*10))seen+=`Tai mắt kể: ${v.name} ${pick(QF)}; Hoàng thượng vui lòng.${b!==v.sung?` Sủng của ${v.name} ${b} → ${v.sung}.`:""} `;return}return a0.apply(this,arguments)};
+   const tw=j75Teller(v);if(tw)seen+=`${tw} kể: ${v.name} ${pick(QF)}; Hoàng thượng vui lòng.${b!==v.sung?` Sủng của ${v.name} ${b} → ${v.sung}.`:""} `;return}return a0.apply(this,arguments)};
  let r;try{r=nm0.apply(this,arguments)}finally{ap=a0;odA=od0}return (r||"")+seen};
 /* (c) the same weekly decay for everyone (her rule from endTurn: -1, none for Hoàng hậu after the first tuần, none in tuần 2 if he is lạnh lùng) */
 /* NPCs work for Sủng as she does: the same acts as her deck cards (art ≥3: dance, zither, chess; else a small gift), same costs and odds shape */
@@ -165,17 +167,17 @@ const DECKN={vu:"múa Kinh hồng vũ trong yến tiệc",cam:"đàn khúc Phư�
 function npcEffortKind(v){if(v.confined||v.out||illOf(v)||(v.preg||0)>=7)return null;
  const A=v.arts||{},B=BAL.deck;let kd="";for(const k of ["vu","cam","ky"])if((A[k]||0)>=B[k].lv&&v.suc>=B[k].sucMin){kd=k;break}
  if(kd){const l=deckLoss(kd);return{kd,n:DECKN[kd],c:Object.assign({},B[kd].c),o:odA(v,deckOdds(v,kd)),w:deckGain(kd),lose:-(l.sung||0),l}}
- if((v.bac||0)>=B.qf.bac)return{kd:"qf",n:pick(QF),c:{bac:-B.qf.bac},o:odA(v,B.qf.o),w:{sung:B.qf.w},lose:0,l:{}};
+ if((v.bac||0)>=B.qf.bac){const kn=!!(v.eK&&v.eK.flower);/* AG-ALL-2: she asked Kính sự phòng what he likes (cx2:likes) — the player's known-flower rule */return{kd:"qf",n:pick(QF),c:{bac:-B.qf.bac},o:kn?100:odA(v,B.qf.o),w:{sung:kn?B.qf.wKnown:B.qf.w},lose:0,l:{}}}
  return null}
 window.deckOdds=deckOdds;window.deckGain=deckGain;window.deckLoss=deckLoss;
 /* force = the agent loop chose it (no weekly trait frequency) */
-function npcEffort(v,force){const K=npcEffortKind(v);if(!K)return "";const pt=tv(EFF,v)!=null?tv(EFF,v):.18;if(!force&&Math.random()>pt*FAIRN.eff)return "";
+function npcEffort(v,force){const K=npcEffortKind(v);if(!K)return "";const pt=tv(EFF,v)!=null?tv(EFF,v):.18;if(!force&&!roll(pt*FAIRN.eff*100))return "";
  const {kd,n,c,o,w,lose}=K;
  ap(v,c);const b=v.sung;const ok=roll(o);ap(v,ok?w:K.l);try{if(typeof empMet==="function")empMet(v,kd,ok)}catch(e){}/* AG2: he remembers it (her runOpt: jagemp) */
  /* two-way (owner 16/11 s21): her Kinh hồng vũ card also stirs the others (ghen +10, liking −5); an NPC dance does the same */
- if(kd==="vu"){liveRivals(true).forEach(x=>{if(x!==v){x.ghen=cl((x.ghen||0)+BAL.tw.g.vu[0],0,100);affAdd(x,v,-BAL.tw.g.vu[1])}});affAdd(S,v,-BAL.tw.g.vu[1])}
+ if(kd==="vu"){liveRivals(true).forEach(x=>{if(x!==v){ghenUp(x,BAL.tw.g.vu[0],`thấy ${v===S?"ngươi":v.name} múa Kinh hồng vũ được ngài khen`,v);affAdd(x,v,-BAL.tw.g.vu[1])}});affAdd(S,v,-BAL.tw.g.vu[1])}
  /* the change names whose Sủng it is; a line with no change says nothing about numbers (owner 11/15: "Sủng nàng 45 → 45") */
- return roll(BAL.odb.j75.rbTop_2+S.mat*10)?`Tai mắt kể: ${v.name} ${n}: ${ok?"Hoàng thượng vui lòng":"ngài không để ý"}.${b!==v.sung?` Sủng của ${v.name} ${b} → ${v.sung}.`:""} `:""}
+ const tw=j75Teller(v);return tw?`${tw} kể: ${v.name} ${n}: ${ok?"Hoàng thượng vui lòng":"ngài không để ý"}.${b!==v.sung?` Sủng của ${v.name} ${b} → ${v.sung}.`:""} `:""}
 window.npcEffort=npcEffort;window.npcEffortKind=npcEffortKind;
 const rt0=rivalsTurn;rivalsTurn=function(){let ev=rt0.apply(this,arguments)||"";try{if(S.dead)return ev;
  for(const v of liveRivals(true)){if(!v.alive||v.out)continue;ev+=window.npcEffort(v);/* the global one: jagent mutes this weekly dice while the agent loop owns the deed */const keep=(has("lanhlung")&&S.tuan===1)||(rkOf(v)>=7&&S.tuan!==0);if(!keep)v.sung=cl(v.sung-1,0,100)}
@@ -184,17 +186,18 @@ const rt0=rivalsTurn;rivalsTurn=function(){let ev=rt0.apply(this,arguments)||"";
 function nightsIn(p,n){const w0=wk();return (p.nightLog||[]).filter(w=>w0-w>=0&&w0-w<n).length}
 function favNow(){let best=null,bn=0;for(const p of consorts()){if(p!==S&&(!p.alive||p.out))continue;const n=nightsIn(p,6);if(n>bn){bn=n;best=p}}return bn>=FAIRN.fav?{p:best,n:bn}:null}
 function monopoly(){const f=favNow();if(!f)return"";const p=f.p,me=p===S,nm=me?"ngươi":p.name;let ev="";
- for(const v of liveRivals(true)){if(v===p||!v.alive||v.out)continue;if(me)v.ghen=cl((v.ghen||0)+2,0,100);else if((v.malice||0)>=40)oanAdd(v,p,BAL.eff.j75.monopoly)}
- if(!(p.admonWk!=null&&wk()-p.admonWk<BAL.tw.g.admonCd)&&roll(30)){const q=queenP();const who=q&&q!==p&&q!==S?`Hoàng hậu ${q.name}`:q===S&&!me?"ngươi (Hoàng hậu)":(!S.thDead?"Thái hậu":null);
-  if(who&&!(q===S&&!me)){const b=p.sung;ap(p,{sung:-BAL.tw.g.admon});p.admonWk=wk();
+ for(const v of liveRivals(true)){if(v===p||!v.alive||v.out)continue;if(me)ghenUp(v,2,"thấy Hoàng thượng chỉ lật thẻ bài của ngươi",S);else if((v.malice||0)>=40)oanAdd(v,p,BAL.eff.j75.monopoly)}
+ if(!(p.admonWk!=null&&wk()-p.admonWk<BAL.tw.g.admonCd)&&!(window.agDOn&&agDOn())){const q=queenP();/* npc-purpose: the Empress (else the Thái hậu) speaks up when the monopoly is real (kind admon: nights hogged × j75.admK); the player as Empress is never automated */
+  const W=q&&q!==p&&q!==S?[q]:q===S?[]:(!S.thDead?[(S.thO=S.thO||{})]:[]);const ad=W.length?npcWhy("admon",{p,n:f.n,W}):null;const who=ad?(ad.who===q?`Hoàng hậu ${q.name}`:"Thái hậu"):null;
+  if(who){const b=p.sung;ap(p,{sung:-BAL.tw.g.admon});p.admonWk=wk();
    const t=`${who} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${me?"ngươi":p.name} (${f.n} trong sáu đêm gần đây). ${b!==p.sung?`Sủng của ${me?"ta":p.name} ${b} → ${p.sung}; h`:"H"}ai tuần tới ngài để ý đến người khác.`;/* owner 11/15: name whose Sủng; no "30 → 30" */
    if(me)Q.push({t:"Mưa móc đều khắp",who:q&&q!==S?pv(q):pTH(),h:`<p>${t}</p>`});ev+=t+" "}}
- if(roll(25)){const L=consorts().filter(x=>x!==p&&(x===S||(x.alive&&!x.out)));const x=pick(L);if(x){const b=x.sung;ap(x,{sung:3});ev+=x===S?`Nhà ngươi thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến ngươi.${b!==S.sung?` Sủng của ngươi ${b} → ${S.sung}.`:""} `:`Nhà ${x.name} thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến con gái.${b!==x.sung?` Sủng của ${x.name} ${b} → ${x.sung}.`:""} `}}
+ {const L=consorts().filter(x=>x!==p&&(x===S||(x.alive&&!x.out)));const fg=npcWhy("famGift",{L});const x=fg&&fg.tgt;if(x){const b=x.sung;ap(x,{sung:3});ev+=x===S?`Nhà ngươi thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến ngươi.${b!==S.sung?` Sủng của ngươi ${b} → ${S.sung}.`:""} `:`Nhà ${x.name} thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến con gái.${b!==x.sung?` Sủng của ${x.name} ${b} → ${x.sung}.`:""} `}}
  return ev}
 window.favNow=favNow;
 function satN(p){return Math.max(0,nightsIn(p,6)-1)}
 {const ncS=nightCh;nightCh=function(p){p=p||S;const c=ncS.call(this,p);const k=satN(p);if(!c||!k||!FAIRN.sat)return c;return Math.max(1,Math.round(c*Math.max(FAIRN.satMin,1-FAIRN.sat*k)))}}
-{const os0=oSteal;oSteal=function(a,m){const o=os0.apply(this,arguments);const k=a?satN(a):0;return k&&FAIRN.satO?cl(o-FAIRN.satO*k,5,95):o}}
+{const os0=oSteal;oSteal=function(a,m){const o=os0.apply(this,arguments);const k=a?satN(a):0;return k&&FAIRN.satO?oddsCl(o-FAIRN.satO*k):o}}
 /* the admonition is heeded for 2 tuần: a visible cause, shown in the news and in nightWhy */
 const nc0=nightCh;nightCh=function(p){p=p||S;const c=nc0.call(this,p);if(c&&p.admonWk!=null&&wk()-p.admonWk>=0&&wk()-p.admonWk<=2)return Math.max(1,Math.round(c/2));return c};
 /* (d) mùng 1 / rằm: custom sends him to the Hoàng hậu; (f) the data of why */

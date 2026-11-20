@@ -40,6 +40,8 @@ const CODE_PAT={
  fx:new RegExp('(?<![\\w$.])'+ST+'\\s*:\\s*[+-]?\\d+(?:\\.\\d+)?\\b','g'),           /* {danh:-8}, {sung:3} … a typed gain / cost */
  khac:/\b(?:can|spend|j77Kh|walkOk)\(\s*\d+\s*\)/g,                                    /* can(2), spend(1) … typed khắc */
  roll:/\broll\(\s*\d+\s*\)/g,                                                         /* roll(35) … a typed odds base */
+ /* div = a typed divisor of a rule stat in a formula: (a.tamco||0)/4, v.sung/5 (review/poison-road-fix: jpq / jpoison odds read BAL.pg.tamDiv / trustDiv) */
+ div:new RegExp('\\.'+ST+'\\b(?:\\s*\\|\\|\\s*0\\s*\\))?\\s*\\/\\s*\\d+(?:\\.\\d+)?\\b','g'),
  /* review/one-core-dup (owner 17/11 03:00Z "cùng một vấn đề mà có 2-3 cái con số"; reviewer road-onecore-r1 item 3): typed amounts of
     dialog go: closures and option / ending fields. sw = a typed stat write S.x+=N; sc = an option's / ending's Lợi thế score;
     k = an ARC67 / road ending tier (-1 lose / 0 mid / 1 win, followed by its tag / text). */
@@ -110,7 +112,10 @@ function balEnd(src,i){let d=0,inS=null;for(let j=i;j<src.length;j++){const c=sr
   if(c==='"'||c==="'"||c==='`'){inS=c;continue}if(c==='{'||c==='['||c==='(')d++;else if(c==='}'||c===']'||c===')'){d--;if(d===0)return j}}return src.length}
 function maskBal(src){const re=/Object\.assign\(BAL(?:\.[\w$]+)*,\{|const BAL=\{|(?<![\w$.])BAL(?:\.[\w$]+)+\s*=(?!=)\s*[{[]/g;let m,out=src;while((m=re.exec(src))){const a=m.index+m[0].length-1,b=balEnd(src,a);
   out=out.slice(0,a+1)+out.slice(a+1,b).replace(/[^\n]/g,' ')+out.slice(b)}return out}
-for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');const T=lex(maskBal(src));const per={};const add=(k,s)=>{const m=per[k]=per[k]||{};m[s]=(m[s]||0)+1};
+/* rank rulebook = source of BAL.rank (OD:L1267 one core): rank/worker/src/score.js RULES IS BAL.rank (same object, set at its end), so its
+   numbers are rule definitions, not inline copies. Skipped by EXACT path only; RANK_CHECK below keeps BAL.rank bound to it (no twin can drift). */
+const RANK_BOOK='../../rank/worker/src/score.js';
+for(const f of ORDER){if(f===RANK_BOOK)continue;const src=fs.readFileSync(path.join(B,f),'utf8');const T=lex(maskBal(src));const per={};const add=(k,s)=>{const m=per[k]=per[k]||{};m[s]=(m[s]||0)+1};
  for(const t of T){
   if(t.t==='code'){for(const k in CODE_PAT){const m=t.s.match(CODE_PAT[k]);if(m)m.forEach(s=>{if(/(?:[<>=:]|^)\s*[+-]?0(?:\.0+)?$/.test(s))return;/* 0 = a sign / empty / clamp, not a tunable rule number */add(k,s.replace(/\s+/g,''))})}}
   else if(t.t==='str'||t.t==='tpl'){for(const k in TXT_PAT){const m=t.s.match(TXT_PAT[k]);if(m)m.forEach(s=>add('t.'+k,s.replace(/\s+/g,' ')))}
@@ -142,7 +147,7 @@ function objKeys(src,i){let d=0,inS=null,keys=[],tok='',want=true;for(let j=i;j<
   if('{[('.includes(c)){d++;if(d===1){want=true;tok=''}continue}if('}])'.includes(c)){d--;if(d===0)return keys;continue}
   if(d===1){if(c===','){want=true;tok='';continue}if(want){if(/[\w$]/.test(c))tok+=c;else if(c===':'&&tok){keys.push(tok);want=false}else if(!/\s/.test(c))tok=''}}}return keys}
 for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');let m;const re=/Object\.assign\(BAL(?:\.[\w$]+)*,\{|const BAL=\{/g;
- while((m=re.exec(src))){const ln=src.slice(0,m.index).split('\n').length;for(const k of objKeys(src,m.index+m[0].length-1))(sets[k]=sets[k]||[]).push(f+':'+ln)}
+ while((m=re.exec(src))){const ln=src.slice(0,m.index).split('\n').length;const pre=(m[0].match(/^Object\.assign\(BAL((?:\.[\w$]+)*),/)||[,''])[1].slice(1);/* full path: Object.assign(BAL.ag.why.cd,{k}) sets BAL.ag.why.cd.k, not BAL.k (npc-purpose G2) */for(const k of objKeys(src,m.index+m[0].length-1)){const K=pre?pre+'.'+k:k;(sets[K]=sets[K]||[]).push(f+':'+ln)}}
  for(const t of lex(src))if(t.t==='code'){const r2=/(?<![\w$.])BAL\.([A-Za-z_$][\w$]*)\s*=(?!=)\s*(?=[-+.\d\[{])/g  /* a typed value only (a copy b0 / a setter v forwards, not a second value) */;while((m=r2.exec(t.s))){(sets[m[1]]=sets[m[1]]||[]).push(f+':'+(t.line+t.s.slice(0,m.index).split('\n').length-1))}}}
 for(const k in sets)if(sets[k].length>1)fail.push(`BAL.${k} is set ${sets[k].length} times (${sets[k].join(', ')}): one rule, one value`);
 /* the same for every other knob table (const NAME={…} in one module, Object.assign(NAME,{…}) in another: J70CFG, FAIRN, WD …) */
@@ -180,6 +185,9 @@ else if(!base)fail.push('no baseline (run with --update once)');
 else for(const g of grew)fail.push('NEW inline rule number: '+g);
 if(process.env.OC_DUMP)fs.writeFileSync(process.env.OC_DUMP,JSON.stringify(now));
 const T0=total(now);
+/* RANK_CHECK: BAL.rank must be the score.js RULES object itself, and no other module may set BAL.rank or a BAL rank table */
+if(ORDER.includes(RANK_BOOK)){const rs=fs.readFileSync(path.join(B,RANK_BOOK),'utf8');if(!/BAL\.rank\s*=\s*CTM_RANK\.RULES\s*;/.test(rs))fail.push('rank rulebook: score.js must bind BAL.rank=CTM_RANK.RULES');
+ for(const f of ORDER){if(f===RANK_BOOK)continue;const src=fs.readFileSync(path.join(B,f),'utf8').replace(/\/\*[\s\S]*?\*\//g,'');if(/(?<![\w$.])BAL\.rank\s*=(?!=)|Object\.assign\(BAL\.rank\b/.test(src))fail.push('rank rulebook: '+f+' sets BAL.rank (a second rank table; read BAL.rank = score.js RULES)')}}
 console.log(JSON.stringify({modules:ORDER.length,inlineNow:T0,baseline:base?base.total:null,balKeys:Object.keys(sets).length,fails:fail.length}));
 if(fail.length){console.log('FAIL\n  '+fail.slice(0,+(process.env.OCG_MAX||80)).join('\n  ')+(fail.length>+(process.env.OCG_MAX||80)?`\n  … ${fail.length-(process.env.OCG_MAX||80)} more`:''));process.exit(1)}
 console.log('PASS: one core (no second value, no typed core text, no new inline rule number)');

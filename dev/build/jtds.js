@@ -82,8 +82,8 @@ function tdsOK(k,mode){if(!S||S.dead||Q.length||S.mg)return false;const l=virLv(
  if(mode==="self")return can(BAL.td.k)&&S.suc>=BAL.td.selfMin;return can(BAL.td.k)&&S.suc>=BAL.td.mMin}
 function tdsReset(){TDV.pend=null;TDV.tch=null;TDV.hit=null;TDV.raw=null;TDV.skip=0;RCPT.k=null;RCPT.t=null}
 function tdsTchAsk(k,then){const V=VIR.find(x=>x.k===k),fee=virCost(virLv(S,k),S),fav=rcpFavorOf(S),O=[];const t2=whyTime(BAL.td.k);
- O.push(kitOffBac({n:"Ma ma giáo tập",fx:{},x:`Nắm chắc · tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối, ra một món`,go:()=>{TDV.tch=null;RCPT.k=k;RCPT.t="nq";then()}},fee));
- for(const v of tdsTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${V.n} bậc ${v.vir[k]})`,fx:{},x:`Nắm chắc · tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc} · thành: tiến bộ +2..3, dạy các lối nàng ta biết, ra một món · kèm: nợ nàng ta một ân, thiện cảm -${fav}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,
+ O.push(kitOffBac({n:"Ma ma giáo tập",fx:{},x:`tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối, ra một món`,go:()=>{TDV.tch=null;RCPT.k=k;RCPT.t="nq";then()}},fee));
+ for(const v of tdsTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${V.n} bậc ${v.vir[k]})`,fx:{},x:`tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc} · thành: tiến bộ +2..3, dạy các lối nàng ta biết, ra một món · kèm: nợ nàng ta một ân, thiện cảm -${fav}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,
   go:()=>{TDV.tch=String(v.id);RCPT.k=k;RCPT.t=String(v.id);then()}});
  if(!O.length){log(`Chưa có ai dạy ${V.n}: ma ma cần ${fee} bạc, chưa có phi tần giỏi ${V.n} quý ta (thiện cảm ${BAL.rcp.tRel}).`);return}
  O.push({n:"Thôi",fx:{},go:()=>tdsReset()});
@@ -99,7 +99,7 @@ function tdsTchAsk(k,then){const V=VIR.find(x=>x.k===k),fee=virCost(virLv(S,k),S
  for(let m=0;m<3;m++){const need=fee+(K.mat[m]||0);O.push({n:`${r.n} · ${K.mn[m]}`,fx:{},x:`${K.mat[m]?`tốn: Bạc -${K.mat[m]} (trả khi làm xong) · `:""}${wkOddsTxt(S,kind,m)}${K.fin?" · "+wkFinTxt(K):""}${newSt?` · kèm: học ${rcpStN(kind,st[0])}`:""}`,
   dis:S.bac<need?`thiếu bạc (cần ${need})`:"",go:()=>{if(S.bac<need){log(`Không đủ bạc: cần ${need}.`);tdsReset();return}tdsRun(k,lm,{kind,mat:m,r:rid,subj:wkrSubj(kind,r)})}})}
  O.push({n:"Thôi",fx:{},go:()=>tdsReset()});
- Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (0..10) + ${V.n} bậc ${l}: +${wkLvQ(S,k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}})();
+ Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`${kitNumBox(`<p>Phẩm = phần chơi (0..10) + ${V.n} bậc ${l}: +${wkLvQ(S,k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p>`)}<p>Chỉ vật liệu quý mới thành Tuyệt phẩm.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}})();
 /* run the lesson itself (j85 lessonVir, or review/tuduc-mg tdPlay); the work is made once the lesson really happened */
 function tdsRun(k,mode,pick){TDV.pend=Object.assign({k,mode},pick);TDV.hit=null;
  if(mode==="prac"){if(!tdsOK(k,"prac")){tdsReset();return}apply({suc:-BAL.tds.pracSuc});spend(BAL.tds.pracK);TDV.hit={k};tdsFinish("tự học");save();render();return}
@@ -117,7 +117,7 @@ function tdsRun(k,mode,pick){TDV.pend=Object.assign({k,mode},pick);TDV.hit=null;
   if(TDS_KIND[k]&&after>before)for(let l=before+1;l<=after;l++){const kind=TDS_KIND[k];
    if(p===S){const i=BAL.tds.open.indexOf(l);if(i>0){const t=rcpGrant(kind,RCP_ST[kind][i][0],`${VIR.find(x=>x.k===k).n} lên bậc ${l}`);if(t)log(`<span class="g">${t}</span>`)}}
    const gft=rcpLvGift(p,k);if(gft&&p===S)log(rcpLvTxt(gft))}
-  if(p&&p!==S&&TDS_KIND[k]&&p.alive&&!p.out){p.inv=p.inv||[];if(p.inv.filter(e=>e.wk).length<BAL.tds.npcWkCap&&roll(BAL.tds.npcWk))wkNpcMake(p,k)}
+  if(p&&p!==S&&TDS_KIND[k]&&p.alive&&!p.out){p.inv=p.inv||[];if(p.inv.filter(e=>e.wk).length<BAL.tds.npcWkCap&&npcWhy("tdsMake",{p,k},()=>roll(BAL.tds.npcWk)))wkNpcMake(p,k)}/* npc-purpose G2: she makes a piece when her craft plan calls for one (skill to show, bạc to earn, a friend to give it to); npcWk = the success */
  }catch(e){console.error("tds vir",e)}return r}})();
 function tdsFinish(how){const P=TDV.pend,k=P&&P.k;TDV.hit=null;if(!P){return}
  if(TDV.skip){log("Để trời định: không ra thành phẩm.");tdsReset();return}
@@ -132,8 +132,8 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 /* ---------- Tài nghệ › Tứ đức cards: real costs, "ra một món", the lối list ---------- */
 (function(){if(typeof ktArtSkills!=="function")return;const s0=ktArtSkills;ktArtSkills=function(){const L=s0.apply(this,arguments);try{const t2=whyTime(BAL.td.k);for(const s of L){if(s.kind!=="vir"||!TDS_KIND[s.k])continue;const k=s.k,l=virLv(S,k),kind=TDS_KIND[k],W=WK[kind].w.toLowerCase();
   const fee=virCost(l,S),fav=rcpFavorOf(S),game=s.acts.some(h=>/trò nhỏ/.test(h))?"chơi một trò nhỏ · ":"";
-  s.acts=s.acts.map(h=>/data-mode="self"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="self"`,"Tự học",`Chắc chắn · ${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.selfSuc} · thành: tiến bộ ${game?"+1..2":"+1"}, ra một món ${W}`,t2||(S.suc<BAL.td.selfMin?`Sức dưới ${BAL.td.selfMin}`:""))
-   :/data-mode="master"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="master"`,"Học với thầy",`Chắc chắn · ${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} (ma ma) hoặc nợ một ân, thiện cảm -${fav} (phi tần giỏi ${VIR.find(x=>x.k===k).n}) · thành: tiến bộ +2..3, mở được lối mới, ra một món ${W}`,t2||(S.suc<BAL.td.mMin?`Sức dưới ${BAL.td.mMin}`:"")):h);
+  s.acts=s.acts.map(h=>/data-mode="self"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="self"`,"Tự học",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.selfSuc} · thành: tiến bộ ${game?"+1..2":"+1"}, ra một món ${W}`,t2||(S.suc<BAL.td.selfMin?`Sức dưới ${BAL.td.selfMin}`:""))
+   :/data-mode="master"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="master"`,"Học với thầy",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} (ma ma) hoặc nợ một ân, thiện cảm -${fav} (phi tần giỏi ${VIR.find(x=>x.k===k).n}) · thành: tiến bộ +2..3, mở được lối mới, ra một món ${W}`,t2||(S.suc<BAL.td.mMin?`Sức dưới ${BAL.td.mMin}`:"")):h);
   s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học, lối chưa học và cách học`,""))}}catch(e){console.error("tds skills",e)}return L}})();
 /* the lối list of a course: lối opened by level are named with their level */
 (function(){const o0=rcpListOpen;rcpListOpen=function(k){if(!TDS_KIND[k])return o0.apply(this,arguments);const V=VIR.find(x=>x.k===k),kind=TDS_KIND[k],R=[];
@@ -143,7 +143,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 /* ---------- Tài nghệ › Tác phẩm: one card per course (what it makes, lối learnt, practice when mastered) ---------- */
 (function(){if(typeof ktWorksHTML!=="function")return;const w0=ktWorksHTML;ktWorksHTML=function(){let h=w0.apply(this,arguments);try{const why=whyTime(BAL.tds.pracK)||(S.suc<BAL.tds.pracMin?`Sức dưới ${BAL.tds.pracMin}`:"");
   const C=VIR.filter(V=>TDS_KIND[V.k]).map(V=>{const k=V.k,l=virLv(S,k),kind=TDS_KIND[k],K=WK[kind],kn=rcpKnown()[kind].length;
-   const acts=l>=5?[pbtn(`data-tdsprac="${k}"`,"Tự học, làm đồ",`Chắc chắn · tốn: Sức -${BAL.tds.pracSuc}, ${BAL.tds.pracK} khắc · thành: một món ${K.w.toLowerCase()}, ${wkOddsTxt(S,kind,0)}`,why)]:[];
+   const acts=l>=5?[pbtn(`data-tdsprac="${k}"`,"Tự học, làm đồ",`tốn: Sức -${BAL.tds.pracSuc}, ${BAL.tds.pracK} khắc · thành: một món ${K.w.toLowerCase()}, ${wkOddsTxt(S,kind,0)}`,why)]:[];
    return{kind:"wk",k,name:`${V.n} · ${V.full}`,level:l,prog:S.virp[k],need:l+2,desc:`<span class="kchip n">lối đã học ${kn}/${RCP_ST[kind].length}</span> <span class="kchip n">${K.w}${K.fin?" · "+wkFinTxt(K):""}</span> <span class="kchip g">phẩm +${wkLvQ(S,k)}</span><br>${wkOddsTxt(S,kind,0)}`,next:"",acts,img:kitSkillArt("vir",k,V.n),can:!!(acts.length&&!why)}});
   const tail=h.indexOf(`data-skill="wk-taste"`);const cards=C.map(kitSkillCard).join("");
   if(tail>0){const i=h.lastIndexOf("<div",tail);h=h.slice(0,i)+cards+h.slice(i)}else h+=cards}catch(e){console.error("tds works",e)}return h}})();

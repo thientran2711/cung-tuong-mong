@@ -1,14 +1,14 @@
 /* ================= jcycle: KỲ NGUYỆT SỰ · the monthly cycle + the Kính sự phòng cycle book (owner 15/11 ~20:25Z, review/cycle) =================
    1. EVERY WOMAN has her own cycle (her, every consort, the co-op friend entry): a pure function of her name (cyBase) + the month index
       (small monthly jitter), so old saves need nothing, and host / guest of a co-op room compute the same days for everyone.
-      TIME MODEL (as jmcal): a month = 3 tuần (1–10 thượng, 11–20 trung, 21–30 hạ); her cycle = 5–7 days inside ONE tuần (cyBase.t).
+      TIME MODEL (as jmcal): a month = 3 tuần (1–10 thượng, 11–20 trung, 21–30 hạ); her cycle = BAL.cyc.len days (rolled EACH MONTH per woman, cyLen) inside ONE tuần (cyBase.t).
       No cycle while truly pregnant (preg && !fake) or from age 50 (đã dứt kỳ).
    2. THE NIGHT FLIP: during her cycle tuần her card is out of the flip (nightCh → 0), however favoured; she cannot steal a night
       (Tranh sủng / Chặn ngự giá, NPC stealNight), the "Thắp đèn hầu rượu" option of the late visit and the ksp tablet card are locked
       with the reason, and nightWhy rows get the reason "đang kỳ nguyệt sự". Her week starts with a kitLine notice + Sổ ghi line.
    3. THE BOOK (sổ nguyệt sự, kept by Kính sự phòng from the palace mamas' reports): what each woman REPORTED this month and last
       (days / chưa tới kỳ / không báo / đã dứt kỳ) + her nights this month. A truly pregnant woman stops reporting (unless her report is
-      forged: her own S.cyb.hide, a clever rival's cyHide). Reading it (Kính sự phòng, Tổng quản: two roads, bạc ↔ khắc + Sức + risk):
+      forged: her own S.cyb.hide, an NPC's own forgery card, v.cyHide). Reading it (Kính sự phòng, Tổng quản: two roads, bạc ↔ khắc + Sức + risk):
       - a rival who stopped reporting → note + she KNOWS (S.cyKnow) → "Bỏ xạ hương" becomes possible against that hidden pregnancy;
       - a rival whose pregnancy does not fit the book (pregMismatch, tư thông) → chứng cứ +2 (once per pregnancy);
       - a rival who "is pregnant" but still reports (fake) → chứng cứ +1;
@@ -35,7 +35,7 @@ if(typeof BAL==="object")BAL.cyc={
  backDanh:3,                       /* its failure: Danh lost (and the Tổng quản knows: S.ksKnows) */
  foeHost:50,npcRead:12,npcForge:4,forgeBac:30, /* NPC: hostility that makes a foe; monthly % she reads the book / forges a "không báo"; bạc it costs */
  rumSung:3,rumDanh:2,              /* uncorrected false "không báo": Sủng / Danh lost next month (mừng hụt) */
- fixAf:20,rvRead:6,rvHideTc:60,rvHide:40, /* correction names the forger when the Tổng quản's thiện cảm ≥ fixAf; rival-vs-rival monthly %; clever rival hides */
+ fixAf:20,rvRead:6, /* correction names the forger when the Tổng quản's thiện cảm ≥ fixAf; rival-vs-rival monthly % (an NPC hides by her own forgery card, cyHideCards) */
  /* MONTHLY REPORT pop-up (owner 16/11, review/cycle-r2): her maid asks how to report the cycle to Kính sự phòng.
     báo đúng: sure, card off this tuần. báo lùi: odds = "Khai lùi" (backO + Tâm cơ/backTc + loyalty/5), Đức -luiDuc, card off this tuần AND
     next tuần's flip × luiNext; a pregnancy begun within luiCover tuần after it reads one missed cycle later (foes, thái y) and its dates fit a
@@ -48,14 +48,22 @@ if(typeof BAL==="object")BAL.cyc={
  /* FERTILE WINDOW (owner 16/11 s9, D57 review/preg-rate, option 4 = 1+3): conception per night × by where the night falls in HER TRUE cycle
     (not what she reported): peak = the tuần after her cycle tuần (≈ 10–17 days after it starts), low = the tuần before it, cyc = her cycle
     tuần itself (a tryst / stolen night). No cycle (age ≥ 50, pregnant) → × 1. The base itself was doubled in BAL.conc (jbal.js). */
- fert:{peak:1.6,low:.5,cyc:.1}};
+ fert:{peak:1.6,low:.5,cyc:.1},
+ /* CYCLE LENGTH (owner 16/11 19:05Z OD:L1397, review/cycle-roll): EACH MONTH each woman rolls one of these day counts (player, NPCs,
+    co-op friend entry alike); seed = her name + the month index (S.turn: one value per year+month), so both co-op seats roll the same. */
+ len:[5,6,7]};
 const B=()=>(typeof BAL==="object"&&BAL.cyc)||{};
 const cl_=(x,a,b)=>Math.max(a,Math.min(b,x));
 function cyH(s){s=String(s==null?"":s);let h=2166136261>>>0;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0}return h>>>0}
 function cyName(p){return p===S?(S.name||"ta"):(p&&p.name)||""}
-function cyBase(p){const h=cyH("cyc|"+cyName(p));return{t:h%3,o:1+((h>>>3)%4),l:5+((h>>>7)%3)}}
-/* days (1..30) of month index mi (S.turn based) */
-function cyDaysM(p,mi){const b=cyBase(p);const j=(cyH("cyj|"+cyName(p)+"|"+mi)%3)-1;const o=cl_(b.o+j,1,11-b.l);const d0=b.t*10+o;const L=[];for(let i=0;i<b.l;i++)L.push(d0+i);return L}
+/* her fixed traits: t = her cycle tuần (0..2), o = her usual first day inside it. The LENGTH is NOT fixed per person: cyLen(p,mi). */
+function cyBase(p){const h=cyH("cyc|"+cyName(p));return{t:h%3,o:1+((h>>>3)%4)}}
+/* this month's length (review/cycle-roll, OD:L1397): rolled per (person, month index) from BAL.cyc.len — the ONE length function */
+function cyLen(p,mi){const L=Array.isArray(B().len)&&B().len.length?B().len:[5,6,7];return +L[cyH("cyl|"+cyName(p)+"|"+(mi|0))%L.length]||L[0]}
+/* days (1..30) of month index mi (S.turn based). The whole cycle sits inside ONE tuần of ONE month (first day clamped so the last day
+   stays in the tuần), so a cycle never crosses into the next month and never changes length mid-cycle. */
+const CY_TD=10; /* days per tuần (jmcal time model: 3 tuần × 10 days) */
+function cyDaysM(p,mi){const b=cyBase(p),l=cyLen(p,mi);const j=(cyH("cyj|"+cyName(p)+"|"+mi)%3)-1;const o=cl_(b.o+j,1,CY_TD+1-l);const d0=b.t*CY_TD+o;const L=[];for(let i=0;i<l;i++)L.push(d0+i);return L}
 function cyAge(p){return p===S?(S.age||18):(p&&p.age)||20}
 function cyPreg(p){return !!(p&&p.preg&&!p.fake)}
 function cyCur(){return S&&S.turn!=null?S.turn:0}
@@ -73,15 +81,15 @@ function cyTray(p){if(!cycOn(p))return false;const c=cybOf(p);if(c&&c.lie===wk()
    "cyb", COOPW.fcyb) and in her blob after every merge — so the host's flip, nightCh, the book and the rivals read ONE fact (OD:L96):
    her "báo sớm / giấu" keeps her card on the host's tray, her "báo lùi" halves her next flip and makes the book read late, her
    "Sửa sổ" hides her pregnancy from the host's rivals, her "giấu" / a forged line shows as "không báo" in the other player's book.
-   null = an NPC (no report of her own; the book follows the truth / cyHideOf's clever-rival rule). */
+   null = an NPC (no report of her own; the book follows the truth / her own forgery v.cyHide). */
 function cybOf(p){if(p===S)return S.cyb||{};if(p&&p.coop&&window.COOPW&&typeof COOPW.fcyb==="function")try{return COOPW.fcyb()||{}}catch(e){}return null}
 const CYK=["lie","lieM","back","rk","rv","df","hide","rum","giauM"];
 /* what jcoopworld relays: this week's flags + whether her maid's card is still waiting for her answer (the host's flip waits for it) */
 function cyRec(){const c=S&&S.cyb||{},o={};for(const k of CYK)if(c[k]!==undefined)o[k]=c[k];const w=wk();return{w,c:o,pend:c.df===w&&c.rk!==w}}
-window.cyRec=cyRec;window.cyWk=()=>wk();
+window.cyRec=cyRec;window.cyWk=()=>wk();window.cyAsk=()=>cyAsk();
 /* lateness as the BOOK shows it: a pregnancy begun within luiCover tuần after a "báo lùi" reads one cycle later (foes, thái y) */
 function cyLateSeen(p){p=p||S;const n=cycleLate(p);return n&&cyCover(p)?Math.max(0,n-1):n}
-window.cyNoFriend=(f)=>cyNoFriend(f);window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyBase=cyBase;window.cyAge=cyAge;
+window.cyNoFriend=(f)=>cyNoFriend(f);window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyBase=cyBase;window.cyLen=cyLen;window.cyDaysM=cyDaysM;window.cyAge=cyAge;
 function cyb(){S.cyb=S.cyb||{};return S.cyb}
 const TU=["thượng tuần","trung tuần","hạ tuần"];
 function dName(L){if(!L.length)return"";const a=L[0],b=L[L.length-1];return `${a<=10?"mồng ":"ngày "}${a}\u2060–\u2060${b}`}
@@ -100,7 +108,7 @@ const ns0=nightScene;nightScene=function(){if(cyTray(S)){log(`${RSN}.`);if(S.ton
     log(t);try{Q.push({t:"Kính sự phòng",who:typeof pEunCourt==="function"?pEunCourt("ksp"):null,h:`<p>${t}</p>`})}catch(e){}return}
    log("Ma ma Kính sự phòng soát người qua loa, không nhận ra điều gì.")}}}catch(e){console.error(e)}
  return ns0.apply(this,arguments)};
-function cyLieO(){const R=B().rep||{},loyal=(S.maid&&S.maid.loyal)||50;return cl_(Math.round(R.lieO+loyal/R.lieLoyal+(S.tamco||0)/R.lieTc),5,95)}
+function cyLieO(){const R=B().rep||{},loyal=(S.maid&&S.maid.loyal)||50;return oddsCl(Math.round(R.lieO+loyal/R.lieLoyal+(S.tamco||0)/R.lieTc))}
 function lockCyc(id,re){const p0=PEND[id];if(!p0)return;PEND[id]=function(){const d=p0.apply(this,arguments);try{if(d&&d.o){const o=d.o.find(o=>re.test(o.n||""));if(o){const lk0=o.lk;o.lk=()=>cyTray(S)?RSN:(typeof lk0==="function"?lk0():"")}}}catch(e){}return d}}
 lockCyc("ksp",/^Tắm gội chờ giá/);lockCyc("empnight",/^Thắp đèn hầu rượu/);
 const fl0=flip;flip=function(){const r=fl0.apply(this,arguments);try{if(!S||S.dead)return r;
@@ -128,17 +136,19 @@ const dl0=deal;deal=function(){const r=dl0.apply(this,arguments);try{if(!S||!Arr
 
 /* ---------- 2b. THE MONTHLY REPORT (owner 16/11): when her cycle tuần starts, her maid asks how to report it to Kính sự phòng.
    The week's flip waits for the answer (flip() is called again from the option), so a false report really puts her card back on the tray. ---------- */
-function cyAsk(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv())||!S.maid)return false;if(!cycOn(S))return false;const c=cyb();if(c.rk===wk()||c.df===wk())return false;
+/* co-op thin (E-fix, level 5+): the host asks her card in her context and holds her flags; her phone neither asks nor auto-answers (window.cyHostOwns, jcoopthine) */
+const cyHostOwns=()=>{try{return typeof window.cyHostOwns==="function"&&!!window.cyHostOwns()}catch(e){return false}};
+function cyAsk(){if(cyHostOwns())return false;if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv())||!S.maid)return false;if(!cycOn(S))return false;const c=cyb();if(c.rk===wk()||c.df===wk())return false;
  if(typeof PEND!=="object"||typeof pushDil!=="function")return false;
  /* review r3: never on the first screen of a new life (start() runs flip right after "Nhập cung"): that week the maid reports truly */
  if(Array.isArray(Q)&&Q.some(m=>m&&m.t==="Nhập cung")){c.rk=wk();c.rv="dung";return false}
  c.df=wk();pushDil(mkP("cyrep"),"Kỳ nguyệt sự");return true}
 PEND.cyrep=()=>{if(!S||!S.maid||!cycOn(S))return null;const R=B().rep,c=cyb(),loyal=S.maid.loyal||50,po=cyLieO(),
-  lo=cl_(od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5)),5,95),xg=kSay({srv:"f"},S,"{goi}")/* one address core (jvoice) */;
+  lo=oddsCl(od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5))),xg=kSay({srv:"f"},S,"{goi}")/* one address core (jvoice) */;
  const done=k=>{c.rk=wk();c.rv=k;try{cyNoFriend(flip)}catch(e){console.error(e)}try{render()}catch(e){}};
  const mk=(n,s,k,pre)=>{const o=c6(n,s);const g=o.go;o.go=()=>{try{if(pre)pre()}catch(e){console.error(e)}g();done(k)};return o};
  const risk=`được lật thẻ mà bị ma ma soát ra (${chanceW(100-po)}): mất đêm ấy, Sủng -${R.lieSung} Danh -${R.lieDanh}`,evi="kẻ thù tra sổ có thể nắm chứng cứ";
- const lie=k=>()=>{c.lie=wk();c.lieM=cyCur();c.lieEv=0;if(k==="giau"){c.giauM=cyCur();c.rum={by:"me",m:cyCur(),self:1};try{ghenAll(R.giauGhen)}catch(e){}}};
+ const lie=k=>()=>{c.lie=wk();c.lieM=cyCur();c.lieEv=0;if(k==="giau"){c.giauM=cyCur();c.rum={by:"me",m:cyCur(),self:1};try{ghenAll(R.giauGhen,"nghe xì xào ngươi có tin vui")}catch(e){}}};
  /* the option card is a palace-event card (kit hidden-outcome mode, KIT 28.6): Tốn row + one truthful HINT + risk chip; the hint names the
     odds word of the one rolled road and every risk in words; the full numbers come on the result card. (Full Được/Mất/Kèm rows overflow
     the kit option card in a scrolling dialog: KIT REQUEST in PROGRESS_cycle.md.) */
@@ -167,11 +177,13 @@ function cyNoFriend(f){if(!(window.COOPW&&COOPW.on)||COOPW.tnShared/* reviewer r
 try{if(typeof KIT_ACT_CATS!=="undefined"&&Array.isArray(KIT_ACT_CATS))KIT_ACT_CATS.unshift(["muu-ke",/nguyệt sự|báo ngày giả|xem sổ/i])}catch(e){}
 const fl1=flip;flip=function(){try{if(cyAsk()){S.tonight=null;return}}catch(e){console.error(e)}return fl1.apply(this,arguments)};
 /* never answered (closed, reloaded): the week ends with the true report */
-const et0=endTurn;endTurn=function(){try{const c=S&&S.cyb;if(c&&!(typeof Q!=="undefined"&&Q.length)&&c.df===wk()&&c.rk!==wk()){c.rk=wk();c.rv="dung"}}catch(e){}return et0.apply(this,arguments)};
+const et0=endTurn;endTurn=function(){try{const c=S&&S.cyb;if(c&&!cyHostOwns()&&!(typeof window.cyCardOpen==="function"&&window.cyCardOpen())&&!(typeof Q!=="undefined"&&Q.length)&&c.df===wk()&&c.rk!==wk()){c.rk=wk();c.rv="dung"}}catch(e){}return et0.apply(this,arguments)};
 
 /* ---------- 3. the book ---------- */
+/* an NPC hides only by her own forgery (cyHideCards through the day plan: p.cyHide = the pregnancy week it covers); the old flat
+   "clever rival" roll (rvHideTc / rvHide) is replaced by that choice (role-parity part 2, canon overwrite) */
 function cyHideOf(p){const k=p===S?cyb():cybOf(p);if(k){const h=k.hide;return !!(h&&p.preg&&h===p.pregWk)}
- if(!p.preg||p.fake||p.pregWk==null)return false;return (p.tamco||0)>=B().rvHideTc&&cyH("cyh|"+p.id+"|"+p.pregWk)%100<B().rvHide}
+ if(!p.preg||p.fake||p.pregWk==null)return false;return p.cyHide===p.pregWk}
 /* what the book says for p in month offset k (0 = this month, -1 = last month) */
 function cyRep(p,k){const mi=cyCur()+k,t=cyBase(p).t;if(cyAge(p)>=50)return{s:"old"};
  const k0=cybOf(p),rum=k0&&k0.rum;if(rum&&rum.m===mi&&k===0&&!rum.fixed)return{s:"miss",forged:1};
@@ -204,7 +216,7 @@ function cyBook(how){const c=cyb();c.read=cyCur();const F=[];const L=consorts().
 window.cyBook=cyBook;
 /* Kính sự phòng (Tổng quản): two roads to the book */
 const to0=talkOpts;talkOpts=function(p){const A=to0.apply(this,arguments);try{if(!p||p.kind!=="ksp"||!S||(typeof isSrv==="function"&&isSrv()))return A;
-  const r=Math.min(7,S.rank||0),cost=B().read[r],af=(S.court&&S.court.ksp&&S.court.ksp.af.me)||0;const po=cl_(Math.round(B().peekO+af*B().peekAf+(S.tamco||0)/B().peekTc),5,95);
+  const r=Math.min(7,S.rank||0),cost=B().read[r],af=(S.court&&S.court.ksp&&S.court.ksp.af.me)||0;const po=oddsCl(Math.round(B().peekO+af*B().peekAf+(S.tamco||0)/B().peekTc));
   const lk=A[0]&&A[0].k61?{lock:true,t:"Chưa biết người này là ai"}:{};/* j61 stranger gate: greet first, like every other talk card */
   A.push(Object.assign({n:"Xem sổ nguyệt sự",c:{bac:-cost},o:100,x:"thấy từng người báo kỳ ngày nào, ai tháng này không báo",run:()=>cyBook("đút lót xem sổ")},lk));
   A.push(Object.assign({n:"Hầu chuyện, xem lén sổ nguyệt sự",c:{suc:-B().peekSuc},o:po,act:1,x:`thấy từng người báo kỳ ngày nào · hỏng: bị Tổng quản bắt gặp (thiện cảm -${B().peekAfLoss}), Danh -${B().peekDanh}`,
@@ -221,14 +233,20 @@ function cyDeck(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv()))ret
  /* báo lùi last month: a mismatched conception already fits a real night (as "Khai lùi ngày nguyệt sự" would) */
  if(S.preg&&S.pregMismatch&&cyCover()&&(S.nightLog||[]).some(w=>S.pregWk-w>=2&&S.pregWk-w<=6)){S.pregMismatch=false;log("Nhờ ma ma đã báo lùi kỳ nguyệt sự, ngày có thai trong sổ Kính sự phòng khớp một đêm thị tẩm.")}
  /* hide a hidden pregnancy: the book keeps her reports */
- if(cyPreg(S)&&S.hidden&&!S.pregUnk&&c.hide!==S.pregWk&&S.preg<=3){const pw=S.pregWk;
-  deck.unshift({n:"Sửa sổ nguyệt sự",t:"Đút lót Kính sự phòng ghi tháng nào ngươi cũng báo, để không ai đoán ra tin vui.",c:{bac:-B().hide[r]},o:od(B().hideO),w:{},l:{},x:"sổ ghi ngươi vẫn báo đều, giữ kín được thai · hỏng: Tổng quản biết chuyện của ngươi",dom:"Mưu kế",go:()=>{c.hide=pw},fail:()=>{S.ksKnows=1}});
-  const o2=od(B().hideMaidO+Math.round(loyal/B().hideMaid));
-  deck.unshift({n:"Dặn ma ma báo ngày giả",t:`Dặn ${S.maid&&S.maid.name?"ma ma "+S.maid.name:"ma ma trong cung"} cứ đúng kỳ lên Kính sự phòng báo như thường.`,c:{duc:-B().hideDuc},o:o2,w:{},l:{},x:"sổ ghi ngươi vẫn báo đều, giữ kín được thai · hỏng: ma ma lỡ lời, cả cung biết ngươi có thai",dom:"Mưu kế",go:()=>{c.hide=pw},fail:()=>{S.hidden=false;try{ghenAll(BAL.ghen.preg)}catch(e){}log("Ma ma lỡ lời ở Kính sự phòng: cả cung biết ngươi có thai.")}})}
+ for(const C of cyHideCards(S))deck.unshift(C);
  /* the non-bạc twin of j22 "Hối lộ Kính sự phòng sửa sổ": move her last reported cycle so the conception falls after a real night */
  if(S.preg&&S.pregMismatch&&!S.out&&(S.nightLog||[]).some(w=>S.pregWk-w>=2&&S.pregWk-w<=6)){const o3=od(B().backO+Math.round((S.tamco||0)/B().backTc)+Math.round(loyal/5));
   deck.unshift({n:"Khai lùi ngày nguyệt sự",t:"Nhờ ma ma khai kỳ nguyệt sự tháng trước lùi lại, cho ngày có thai rơi đúng sau một đêm thị tẩm.",c:{duc:-B().backDuc},o:o3,w:{},l:{danh:-B().backDanh},x:"sổ khớp ngày, hết bị nghi · hỏng: Tổng quản biết chuyện của ngươi",dom:"Mưu kế",go:()=>{S.pregMismatch=false},fail:()=>{S.ksKnows=1}})}}
 
+/* ONE builder (role-parity part 2, law 1 + law 4): the two forgeries that hide a hidden pregnancy, for her deck (cyDeck) and an NPC
+   consort's day plan (jagacts4 cx4:cycFix / cx4:cycMama, run by p3Run) — same cost, same odds (odA of the doer), same success / failure. */
+function cyHideCards(p){if(!p||!cyPreg(p)||!p.hidden||p.pregUnk||p.preg>3||p.out)return[];const me=p===S,c=me?cyb():null;if((me?c.hide:p.cyHide)===p.pregWk)return[];
+ const r=Math.min(7,p.rank||0),pw=p.pregWk,loyal=(p.maid&&p.maid.loyal)||50,ng=me?"ngươi":p.name;const set=()=>{if(me)c.hide=pw;else p.cyHide=pw};
+ return [{n:"Sửa sổ nguyệt sự",t:`Đút lót Kính sự phòng ghi tháng nào ${ng} cũng báo, để không ai đoán ra tin vui.`,c:{bac:-B().hide[r]},o:odA(p,B().hideO),w:{},l:{},x:`sổ ghi ${ng} vẫn báo đều, giữ kín được thai · hỏng: Tổng quản biết chuyện của ${ng}`,dom:"Mưu kế",go:set,fail:()=>{p.ksKnows=1}},
+  {n:"Dặn ma ma báo ngày giả",t:`Dặn ${p.maid&&p.maid.name?"ma ma "+p.maid.name:"ma ma trong cung"} cứ đúng kỳ lên Kính sự phòng báo như thường.`,c:{duc:-B().hideDuc},o:odA(p,B().hideMaidO+Math.round(loyal/B().hideMaid)),w:{},l:{},x:`sổ ghi ${ng} vẫn báo đều, giữ kín được thai · hỏng: ma ma lỡ lời, cả cung biết ${ng} có thai`,dom:"Mưu kế",go:set,
+   fail:()=>{p.hidden=false;if(me){try{ghenAll(BAL.ghen.preg,"ngươi mang long thai")}catch(e){}log("Ma ma lỡ lời ở Kính sự phòng: cả cung biết ngươi có thai.")}
+    else{try{if(typeof p3GhenAll==="function")p3GhenAll(p,BAL.ghen.preg,`${p.name} mang long thai`)}catch(e){}try{newsAdd(p,"cyc",`Ma ma của ${p.name} lỡ lời ở Kính sự phòng: nàng đang mang long thai`,true)}catch(e){}}}}]}
+window.cyHideCards=cyHideCards;
 /* musk on a hidden pregnancy only for whoever read it in the book */
 function cyKnows(a,t){if(!a||!t||t.pregWk==null)return false;if(a===S)return !!(S.cyKnow&&S.cyKnow[t.id]===t.pregWk);if(t===S)return a.cyKnowMe===S.pregWk;return !!(a.cyKnow&&a.cyKnow[t.id]===t.pregWk)}
 if(typeof ACT==="object"&&ACT.musk){const ok0=ACT.musk.ok;ACT.musk.ok=function(a,t){if(ok0.apply(this,arguments))return true;try{return !!(t&&cyPreg(t)&&t.hidden&&a&&(a.bac||0)>=30&&cyKnows(a,t))}catch(e){return false}}}
@@ -241,17 +259,17 @@ const mp0=monthPay;monthPay=function(){let ev=mp0.apply(this,arguments)||"";try{
     const t=`Sổ Kính sự phòng ghi tháng trước ngươi không báo nguyệt sự; cả cung tưởng có tin vui, rồi mừng hụt. Sủng của ngươi ${b} → ${S.sung}, Danh ${d} → ${S.danh}.`;log(t);ev+=t+" "}}
   const F=foes();
   /* a foe reads the book: her hidden pregnancy guessed */
-  if(cyPreg(S)&&S.hidden&&(cyLateSeen(S)>=1||c.giauM===mi-1)&&!cyHideOf(S))for(const v of F){if(v.cyKnowMe===S.pregWk||!roll(B().npcRead))continue;v.cyKnowMe=S.pregWk;
-   if((S.mat||0)>=1){const t=`Tai mắt báo: ${v.name} cho người tra sổ nguyệt sự ở Kính sự phòng, đã đoán ra ngươi có tin vui.`;log(t);ev+=t+" "}break}
+  if(cyPreg(S)&&S.hidden&&(cyLateSeen(S)>=1||c.giauM===mi-1)&&!cyHideOf(S)){const o=npcWhy("cyRead",{F:F.filter(x=>x.cyKnowMe!==S.pregWk),t:S},()=>roll(B().npcRead));/* npc-purpose G2: every foe whose grudge + informants push her tries to read (reg each; the old per-foe roll), strongest first; nobody → nothing */const v=o&&o.who;if(v){v.cyKnowMe=S.pregWk;
+   if(eyes(S)>=1){const t=`Tai mắt báo: ${v.name} ${o.why}, cho người tra sổ nguyệt sự ở Kính sự phòng, đã đoán ra ngươi có tin vui.`;log(t);ev+=t+" "}}}
   /* her own false line last month (báo sớm / giấu) is forgery evidence for a foe who reads the book */
-  if(c.lieM===mi-1&&!c.lieEv){c.lieEv=1;cyDeed(S,"cyl:"+c.lieM,"cylie","khai man ngày nguyệt sự với Kính sự phòng");for(const v of F){if(!roll(B().npcRead))continue;if(!evA(v,S,BAL.eff.jcycle.evTop))continue;
-    if((S.mat||0)>=1){const t=`Tai mắt báo: ${v.name} tra sổ nguyệt sự, thấy ngày ma ma ngươi báo không khớp: nàng ta nắm chứng cứ ngươi khai man.`;log(t);ev+=t+" "}}}
+  if(c.lieM===mi-1&&!c.lieEv){c.lieEv=1;cyDeed(S,"cyl:"+c.lieM,"cylie","khai man ngày nguyệt sự với Kính sự phòng");for(const o of npcWhyAll("cyLie",{F,t:S})){const v=o.who;/* npc-purpose G2: every foe with a grudge and a way in reads it (each on her own cooldown) */if(!roll(B().npcRead))continue;if(!evA(v,S,BAL.eff.jcycle.evTop))continue;
+    if(eyes(S)>=1){const t=`Tai mắt báo: ${v.name} tra sổ nguyệt sự, thấy ngày ma ma ngươi báo không khớp: nàng ta nắm chứng cứ ngươi khai man.`;log(t);ev+=t+" "}}}
   /* a foe forges a "không báo" against her (this month) */
-  if(!cyPreg(S)&&cyAge(S)<50&&!(c.rum&&c.rum.m===mi)){const v=F.find(x=>(x.bac||0)>=B().forgeBac);if(v&&roll(B().npcForge)){ap(v,{bac:-B().forgeBac});c.rum={by:v.id,m:mi};cyDeed(v,"cyfo:"+mi,"cyforge","đút lót Kính sự phòng ghi sai sổ nguyệt sự của người khác");
+  if(!cyPreg(S)&&cyAge(S)<50&&!(c.rum&&c.rum.m===mi)){const o=npcWhy("cyForge",{F,t:S},()=>roll(B().npcForge));const v=o&&o.who;/* npc-purpose G2: a scheming foe who can pay forges it (cd stamped only when she does) */if(v){ap(v,{bac:-B().forgeBac});c.rum={by:v.id,m:mi};cyDeed(v,"cyfo:"+mi,"cyforge","đút lót Kính sự phòng ghi sai sổ nguyệt sự của người khác");
     const t="Trong cung xì xào: sổ Kính sự phòng ghi ngươi tháng này không báo nguyệt sự.";log(t);ev+=t+" "}}
  }catch(e){console.error(e)}return ev};
 /* rival vs rival (world; host only in co-op because rivalsMonth is muted on the guest) */
 const rm0=rivalsMonth;rivalsMonth=function(){let ev=rm0.apply(this,arguments)||"";try{const L=liveRivals(true).filter(v=>v.alive&&!v.out);
-  for(const t of L){if(!cyPreg(t)||!t.hidden||cyLateSeen(t)<1||cyHideOf(t))continue;const a=L.find(x=>x!==t&&!x.coop&&hostility(x,t)>=B().foeHost&&roll(B().rvRead));if(a){a.cyKnow=a.cyKnow||{};a.cyKnow[t.id]=t.pregWk}}
+  for(const t of L){if(!cyPreg(t)||!t.hidden||cyLateSeen(t)<1||cyHideOf(t))continue;const o=npcWhy("cyRead",{F:L.filter(x=>x!==t&&!x.coop),t},()=>roll(B().rvRead));const a=o&&o.who;/* npc-purpose G2: each rival with a grudge against t tries to read t's book (reg each, the old per-rival roll) */if(a){a.cyKnow=a.cyKnow||{};a.cyKnow[t.id]=t.pregWk}}
  }catch(e){console.error(e)}return ev};
 })();

@@ -22,7 +22,7 @@ function mortGauss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random
 /* one draw from a group's curve: {mean,sd,lo,hi} bell curve (owner 16/11: early death rare, the average most common, long life rare);
    a child curve {risk,early,adult}: risk % die young at an age from the `early` bands, else the adult curve. A string = alias of another group. */
 function mortDraw(grp){const D=BAL.mort.life.dice;let c=D[grp]||D.adult;while(typeof c==="string")c=D[c];
- if(c.risk!=null){if(Math.random()*100<c.risk)return mortBand(c.early);return mortDraw(c.adult||"adult")}
+ if(c.risk!=null){if(roll(c.risk))return mortBand(c.early);return mortDraw(c.adult||"adult")}
  return Math.max(c.lo,Math.min(c.hi,c.mean+c.sd*mortGauss()))}
 /* roll a lifespan (whole years of age at death) not below the present age (conditioned: redraw); floor = minimum years still to live (switch) */
 function mortRoll(grp,age,floor){const min=age+Math.max(0,floor||0);
@@ -41,8 +41,8 @@ function grpOf(p,K){return p===S?"me":p===S.emp?"emp":K.has(p)?"kid":"adult"}
 function nm(p){return p===S.emp?"Hoàng thượng":p===S.thO?"Thái hậu":p.name||"người hầu"}
 /* give p a lifespan once */
 function assign(p,K,oldSave){if(!p||typeof p!=="object"||p.tho>0||p.nb)return;const a=ageOf(p);if(!(a>=0))return;const g=grpOf(p,K);
- let fl=g==="me"?M.life.floorMe:g==="emp"?M.life.floorEmp:p.lyF&&M.ly?M.ly.floor:0;if(oldSave&&(g==="me"||g==="emp"))fl=Math.max(fl,M.oldFloor);
- p.tho=mortRoll(g,a,fl);p.thoM=1+R(12);if((p.tho-a)*12+(p.thoM-(S.month||1))<M.life.minMo)p.tho=a+1;p.thoO=Math.random()*100<M.sudden?0:M.omen[0]+R(M.omen[1]-M.omen[0]+1);
+ let fl=g==="me"?M.life.floorMe:g==="emp"?M.life.floorEmp:p.lyF===1&&M.ly?M.ly.floor:0;if(oldSave&&(g==="me"||g==="emp"))fl=Math.max(fl,M.oldFloor);
+ p.tho=mortRoll(g,a,fl);p.thoM=1+R(12);if((p.tho-a)*12+(p.thoM-(S.month||1))<M.life.minMo)p.tho=a+1;p.thoO=roll(M.sudden)?0:M.omen[0]+R(M.omen[1]-M.omen[0]+1);
  if(p===S&&M.life.show){const w=p.tho<BAL.cut.tho[0]?"yểu mệnh":p.tho<BAL.cut.tho[1]?"trung thọ":p.tho<BAL.cut.tho[2]?"thượng thọ":"hạc thọ";
   log(`Thầy tướng xem tay ngươi, phán: số ${w}${M.life.show>=2?`, thọ chừng ${p.tho} tuổi`:""}.`)}}
 function worldPeople(){const L=[S.emp];if(!S.thDead&&S.thO)L.push(S.thO);(rivals||[]).forEach(v=>{if(v.alive&&!v.coop)L.push(v);(v.kids||[]).forEach(k=>k.alive&&L.push(k));(v.staff||[]).forEach(s=>!s.coop&&L.push(s))});
@@ -56,14 +56,14 @@ const left=p=>(p.tho-ageOf(p))*12+(p.thoM-S.month);
 const OFFICIAL={tq:"Tổng quản thái giám",ksp:"Thái giám Kính sự phòng",ped:"Thái giám Nội vụ phủ",ty:"Thái y"},HEIRN=["Vương","Trần","Phùng","Tô","Cao","Lưu","Hà","Đỗ"];
 /* a person reaches the end of the lifespan (or an accident): remove them the way the game already does for that kind of person */
 /* death ledger for audits / bots: S.mort.dl = [{g group, a age, c cause, y year}] (last 300) */
-function note(p,why,K){try{const g=p===S?"me":p===S.emp?"emp":p===S.thO?"th":p.lyF?"ly":K.has(p)?"kid":rivals.includes(p)?"consort":p===S.maid?"maid":(S.men||[]).includes(p)?"men":Object.values(S.court||{}).includes(p)?"court":"staff";
+function note(p,why,K){try{const g=p===S?"me":p===S.emp?"emp":p===S.thO?"th":p.lyF===1?"ly":K.has(p)?"kid":rivals.includes(p)?"consort":p===S.maid?"maid":(S.men||[]).includes(p)?"men":Object.values(S.court||{}).includes(p)?"court":"staff";
  const c=!why?"lifespan":/Thích khách|độc/.test(why)?"plot":/ngã|nghẹn|ngất|trượt|cảm hàn sau|trúng phong|chè hạt sen/.test(why)&&p.tho-ageOf(p)>0?"accident":"lifespan";
  (S.mort.dl=S.mort.dl||[]).push({g,a:ageOf(p),c,y:S.year});if(S.mort.dl.length>300)S.mort.dl.shift()}catch(e){}}
 function kill(p,why,K){let ev="";note(p,why,K);
  if(p===S){S.mort.cause=why;die(why);return ""}
  /* D4 (owner OD:L641–643): every NPC can die; the dead person's portrait, figure and name are retired (npcRetire, jnpcd) so a replacement is a NEW person */
  if(p!==S.emp&&p!==S.thO&&!K.has(p)&&typeof npcRetire==="function")npcRetire(p);
- if(p.lyF)return typeof lyDie==="function"?lyDie(p,why):(p.dead=1,"");
+ if(p.lyF===1)return typeof lyDie==="function"?lyDie(p,why):(p.dead=1,"");
  if(p===S.emp){S.mort.empDue=why||(p.thoO?"Ngài lâm trọng bệnh đã lâu, thuốc thang vô hiệu":"Ngài trúng phong đột ngột giữa đêm");return ""}
  if(p===S.thO){if(!S.thDead){S.thDead=true;S.th=0;S.thIll=null;ev+=`<b>Thái hậu băng hà, thọ ${S.thAge} tuổi.</b> ${why?why+". ":""}`}return ev}
  if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||p.nbWhy||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<BAL.mortx.youngAge?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
@@ -91,14 +91,14 @@ const ACC={me:["trượt chân trên bậc đá đóng băng trước điện, k
  odd:["nghẹn hạt sen giữa yến tiệc","mải đuổi con vẹt sổng lồng, trượt chân ngã từ lầu vọng nguyệt","cười quá đà khi xem gánh chèo, ngất đi không tỉnh"],
  emp:["ngã ngựa khi săn bắn ở Nam Uyển","trúng phong giữa buổi chầu"],empOdd:["ăn liền ba bát chè hạt sen đêm Trung thu, đau bụng rồi không qua khỏi"]};
 function accY(p,K){if(K.has(p))return 0;return p===S?M.acc.me:p===S.emp?M.acc.emp:M.acc.npc}
-function accText(p){const odd=Math.random()*100<M.oddP;if(p===S.emp)return pick(odd?ACC.empOdd:ACC.emp);return pick(odd?ACC.odd:p===S?ACC.me:ACC.adult)}
+function accText(p){const odd=roll(M.oddP);if(p===S.emp)return pick(odd?ACC.empOdd:ACC.emp);return pick(odd?ACC.odd:p===S?ACC.me:ACC.adult)}
 /* Emperor plots: an omen month(s) first, then cấm quân foils it or not */
 function empPlot(){if(cw())return "";const P=S.mort;let ev="";
  if(P.plot){P.plot.mo--;if(P.plot.mo>0)return "";const k=P.plot.k;P.plot=null;
   if(roll(mortFoil(pw())))return k==="ass"?"Cấm quân bắt được thích khách nấp trong Ngự hoa viên; Hoàng thượng bình an. ":"Thái giám thử món phát hiện chén canh có độc; Ngự thiện phòng bị tra xét. ";
   P.empDue=k==="ass"?"Thích khách lẻn vào tẩm điện hành thích":"Ngự thiện bị kẻ gian bỏ độc";return ev}
  for(const k of ["ass","poi"])if(roll(mortPlotY(k,pw())/12)){P.plot={k,mo:M.emp.plotMo[0]+R(M.emp.plotMo[1])};
-  if(S.mat>=M.emp.rumourMat||roll(M.emp.rumour))ev+=k==="ass"?"Trong cung có tin đồn: có kẻ mưu hành thích. Cấm quân tăng canh. ":"Ngự thiện phòng xuất hiện người lạ; thái giám thử món phải nếm từng món. ";break}
+  if(eyes(S)>=M.emp.rumourMat||roll(M.emp.rumour))ev+=k==="ass"?"Trong cung có tin đồn: có kẻ mưu hành thích. Cấm quân tăng canh. ":"Ngự thiện phòng xuất hiện người lạ; thái giám thử món phải nếm từng món. ";break}
  return ev}
 function monthMort(){if(!S||!M.on||S.dead)return "";initAll();let ev="";const K=kidSet();
  for(const p of people()){if(S.dead)break;if(!(p.tho>0||p.nb))continue;if(p===S.emp&&cw())continue;if(p.alive===false)continue;
@@ -115,6 +115,8 @@ function thShift(){let ev="Quốc tang ba tháng. ";const q=typeof queenP==="fun
  if(q&&q!==S){ap(q,{danh:M.thDanh});ev+=`Hoàng hậu ${q.name} một mình nắm quyền lục cung. `}else if(S.rank>=7){apply({danh:M.thDanh});ev+=`Ngươi một mình nắm quyền lục cung. Danh +${M.thDanh}. `}
  if(S.emp)S.emp.mood=2;return ev}
 window.mortMonth=monthMort;
+/* D8 poison road (jpq): one way to remove a person, the same as a lifespan death */
+window.mortKill=function(p,why){return kill(p,why,kidSet())};
 /* hooks: the monthly pass runs inside illMonth (once a month, before rivals); the omen illnesses are kept away from the old cure rolls */
 (function(){const i0=illMonth;illMonth=function(){if(!M.on||!S)return i0.apply(this,arguments);
  const e=S.emp&&S.emp.ill&&S.emp.ill.mort?S.emp.ill:null,t=S.thIll&&S.thIll.mort?S.thIll:null;if(e)S.emp.ill=null;if(t)S.thIll=null;
@@ -149,7 +151,7 @@ function careN(p){return p?(p.suc>=M.life.careSuc?1:0)+(p.doctor?1:0)+(p.arts&&p
    Same rule for her and every NPC consort. The old death roll of birthP (roll birthRisk) is taken over here: birthRisk is set to 0 inside birthP. */
 function sonsAlive(){try{return allKids().filter(([k])=>k.alive&&k.sex==="m").length}catch(e){return 1}}
 function keepMomOdds(p,boy){const E=M.birth.emp;const th=p===S?S.th:(p.th||0);let o=E.base+E.sung*((p.sung||0)-50)+E.th*th*(has("hieuthao")?E.hieuthao:1);
- if(!sonsAlive())o-=E.heirNeed;if(boy)o-=E.boy;for(const k of ["nhantu","datinh","mesac","lanhlung","chamchinh"])if(has(k))o+=E[k];return cl(Math.round(o),5,95)}
+ if(!sonsAlive())o-=E.heirNeed;if(boy)o-=E.boy;for(const k of ["nhantu","datinh","mesac","lanhlung","chamchinh"])if(has(k))o+=E[k];return oddsCl(Math.round(o))}
 function birthEvent(t,h){if(typeof Q==="object"&&Q)Q.push({t,kind:"news",h})}
 (function(){const b0=birthP;birthP=function(p,fake){if(!M.on||fake||!p)return b0.apply(this,arguments);const me=p===S,B=M.birth;
  const r=birthRisk(p);const br0=birthRisk;let res;

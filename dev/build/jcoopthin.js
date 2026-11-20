@@ -22,7 +22,7 @@
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
 const X=CW.X,J=X.J,LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}}};
-const TH=CW.thin={CAP:2/* B (review/coop-thin-b): life creation + rebirth on the host, dev/build/jcoopthinb.js */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
+const TH=CW.thin={CAP:9/* F4 her pets / garden / kitchen / study as intents (jcoopthinf.js), F3 her bag / shop / wear / gifts as intents (jcoopthinf.js), F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
 const host=()=>CW.seat==="a";
 const D={};   /* part D (remote dialogs), filled in section 6 */
 TH.on=n=>!!(CW.on&&!CW.hold&&TH.lvl>=(n||1));
@@ -124,10 +124,12 @@ TH.seatOf=function(seat){if(ST[seat])return ST[seat];
  const g={};for(const r of REG)g[r[0]]=J(r[3]);g.used=0;g.deck=[];g.Q=[];g.popIdx=null;g.popMsg="";
  return ST[seat]={S:s,ok:P.ok||"tt",pers,g,fresh:true,pid:P.pid}};
 TH.seatDrop=seat=>{delete ST[seat]};
-function fixRefs(s){const kid=n=>{try{return allKids().map(x=>x[0]).find(k=>k.name===n)||null}catch(e){return null}};
+/* {$r:id} / {$k:name} refs (stored state AND every part-D patch value on her phone, review coop-thin-e: a patch left raw {$r} in her S → pFaceOf/pv crash) */
+function unref(o){const kid=n=>{try{return allKids().map(x=>x[0]).find(k=>k.name===n)||null}catch(e){return null}};
  const fix=o=>{if(!plain(o))return o;if(o.$r!=null&&Object.keys(o).length===1)return rivals.find(v=>v.id===o.$r)||null;if(o.$k!=null&&Object.keys(o).length===1)return kid(o.$k);
-  for(const k in o)o[k]=fix(o[k]);return o};
- for(const k in s)if(k!=="kids"&&!X.W_KEYS.includes(k))s[k]=fix(s[k])}
+  for(const k in o)o[k]=fix(o[k]);return o};return fix(o)}
+const refKey=k=>k!=="kids"&&!X.W_KEYS.includes(k);
+function fixRefs(s){for(const k in s)if(refKey(k))s[k]=unref(s[k])}
 function standIn(PA,mine){if(!PA)return null;try{
  if(X.friendSrv(PA)){const m=typeof RV==="function"?RV(PA.S.srv.mid):null;if(m){const v=X.buildFriendSrv(PA);m.staff=m.staff||[];m.staff.push(v);return v}return null}
  const v=X.buildFriend(PA,mine);if(!v)return null;
@@ -162,7 +164,7 @@ TH.withSeat=function(seat,fn){
   try{for(const r of REG)B.g[r[0]]=r[1]()}catch(e){}
   for(const k of X.W_KEYS){if(k in sN)A.S[k]=sN[k];else delete A.S[k]}
   try{B.ok=sN.origin&&sN.origin.k||B.ok;const ss=ser().S;for(const k of X.W_KEYS)delete ss[k];B.S=ss;B.fresh=true;
-   if(dOn){p0=D.cur&&D.cur.p0||p0;D.cur=null;if(dW&&p0){const pt=pDiff(p0,ss).concat(rvOps);if(pt.length)D.patchOut(seat,pt)}D.save()}}catch(e){console.error("thin ser",e);B.S=sN}
+   if(dOn){p0=D.cur&&D.cur.p0||p0;D.cur=null;if(dW&&p0){const pt=pDiff(p0,ss).concat(rvOps);if(pt.length)D.patchOut(seat,pt)}D.save()}}catch(e){console.error("thin ser",TH.curDo,e);B.S=sN}
   const Lb=X.pullFriend();TH.bridge=[];TH.bridgeItems=[];
   for(const [,e] of Lb){if(e!==v||!e.__b)continue;const b=e.__b;
    /* part D: things her turn put into the host's entry (a gift she gave, accepted by the host) go to the host as her gift (Quà tặng) */
@@ -176,8 +178,38 @@ TH.withSeat=function(seat,fn){
 /* parts B + D (contract C3 "UI side effects"): her events must not play on the host's phone: scene queue (kmPush / kmReset), toasts (kitLine),
    sounds (sfx / kitSfx / kitResultSfx), stat floaters (kitStatFx / kitStatGlow / kitStatDelta), overlays (kitEdict / kitGloom / kitReward /
    kitResultFx). ONE list (TH.NOOP); coop-thin-b.js checks each name is wrapped. */
-TH.NOOP=["render","showModal","save","kmPush","kmReset","kitLine","sfx","kitSfx","kitResultSfx","kitStatFx","kitStatGlow","kitStatDelta","kitEdict","kitGloom","kitReward","kitResultFx"];TH.NOOPED=[];
-for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx)return;return f.apply(this,arguments)};TH.NOOPED.push(n)}
+TH.NOOP=["render","showModal","save","kmPush","kmReset","kitLine","sfx","kitSfx","kitResultSfx","kitStatFx","kitStatGlow","kitStatDelta","kitEdict","kitGloom","kitReward","kitResultFx",
+ /* F2 (her walks / visits on the host): her arrival must not toast on his
+    phone; a toast her run raises (srvToast / kitLine) is captured (TH.uiCap, set by part F's run) and plays on HER phone with the answer.
+    renderStage is NOT here: its wrappers also write her person (name reveals, residence, roster: guest-side writers, F6/G) and F1/E rely on
+    them running once in her context; the host's stage is repainted right after her run instead (part F: D.after → render) */
+ "srvToast"];/* k3ShowPlace / k3Shell live inside jk3's IIFE (its own calls never see a window wrapper): they return at once there when COOPW.ctx is set */TH.NOOPED=[];TH.uiCap=null;
+/* resultShow is not a no-op inside her context either (it writes her Sổ ghi line's stat suffix, F1 relies on it); a result card a run in her
+   context leaves for LATER (a timer: accEtqGo's +30 ms) carries a snapshot marked with her seat and never shows on the host (below) */
+TH.NOOP.push("resultShow");
+/* F2 r2 (review r1 item 1, the whole family): HER TAP RUN ON THE HOST (part F intents, part D card picks) runs as solo: quiet OFF (j1 quiet
+   silences every card / Sổ ghi line / number of a turn that is not played: in her context that silenced her own walk's «Xong việc» card,
+   card67, tdPop, Lỡ hẹn, Tin về chủ nhân / Đổi chủ, deed lines …). Her cards go into HER Q → part D cards on her phone (takeQ); the screen
+   gates read screenOff() (j1: true inside COOPW.ctx), so nothing of hers draws on the host's screen; her floaters / numbers / item and coin
+   effects called in her run are captured here (UICAP, plain arguments only) and play on HER phone once, with the answer (TH.uiPlay).
+   E's buổi step, B's life, C's world frame and D's deferred work stay quiet (turns that are not her tap). */
+const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitNotice"/* review coop-ptime-reds r1 (whole family: her notices raised by her run on the host — jptime pt:go / pt:back / pt:ord, jrcv rcv:, jerr errand:, jstagehere close: — showed on the HOST's screen, her report text included, and never on hers): captured, shown on HER phone (uiPlay gives the «go» back) */,"kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */]);
+for(const n of UICAP)if(!TH.NOOP.includes(n))TH.NOOP.push(n);
+TH.UICAP=UICAP;/* F4: a part adds the screen redraws it captures itself (its own wrappers push them to TH.uiCap); TH.uiPlay plays only names in this set */
+const uiArg=a=>{try{return JSON.parse(JSON.stringify(a,(k,v)=>typeof v==="function"||(typeof Node!=="undefined"&&v instanceof Node)?undefined:v))}catch(e){return null}};
+TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let r,ui;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0}return {r,ui:ui&&ui.length?ui.slice(0,12):null}};
+/* a captured notice loses its «go» (a function never travels): given back by its id on her phone, the same go its maker set (a notice had a go iff it has a goLabel) */
+function noteGo(sp){try{if(!sp||typeof sp!=="object"||!sp.goLabel)return sp;const id=String(sp.id||"");let go=null;
+ if(/^pt:ord:/.test(id)&&typeof ptOrdQ==="function"&&typeof ptOrdOpen==="function"){const k=id.slice(7);go=()=>{const o=ptOrdQ().find(z=>String(z.id)===k);if(o)setTimeout(()=>ptOrdOpen(o),0)}}
+ else if(/^pt:/.test(id)&&typeof ptOpenTin==="function")go=ptOpenTin;else if(/^errand:/.test(id)&&typeof errOpen==="function")go=errOpen;
+ else if(/^rcv:/.test(id)&&typeof rcvOpen==="function")go=()=>rcvOpen(id);
+ return go?Object.assign({},sp,{go}):Object.assign({},sp,{goLabel:""})}catch(e){return sp}}
+/* guest: what her run on the host captured, played once on her own screen */
+TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;if(f==="kitNotice"&&Array.isArray(a))a[0]=noteGo(a[0]);
+ try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}TH.uiN=(TH.uiN|0)+n;return n};
+for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx&&n!=="resultShow"){if(TH.uiCap&&UICAP.has(n)&&TH.uiCap.length<12)try{const a=[...arguments].map(uiArg);if(n==="kitLine"||n==="srvToast")a[0]=String(a[0]==null?"":a[0]).slice(0,300);TH.uiCap.push([n,a])}catch(e){}return}
+  /* a result card whose snapshot was taken in another seat's context (her greeting's card at +30 ms, accEtqGo) is hers, never the host's */
+  if(n==="resultShow"&&arguments[1]&&arguments[1].__ctx&&CW.seat!==arguments[1].__ctx)return;return f.apply(this,arguments)};TH.NOOPED.push(n)}
 
 /* stable text of the host's whole state (the round-trip check) */
 function stable(o){const seen=new WeakSet();return JSON.stringify(o,function(k,v){if(typeof v==="function")return undefined;
@@ -210,14 +242,18 @@ function diff(a,b,pre,set,del){for(const k of Object.keys(b)){if(BADK.test(k)||k
 TH.diff=(a,b)=>{const set={},del=[];diff(a||{},b||{},"",set,del);return {set,del}};
 let lastSent=null;
 TH.snapSend=function(o){if(!host()||!TH.on(1))return false;lastSent=J(o);TH.hv++;return COOP.send({t:"snap",v:TH.hv,o:lastSent})};
-TH.deltaSend=function(o){if(!host()||!TH.on(1))return false;if(!lastSent)return TH.snapSend(o);const d=TH.diff(lastSent,o);
- if(!Object.keys(d.set).length&&!d.del.length)return false;lastSent=J(o);const base=TH.hv;TH.hv++;return COOP.send({t:"delta",v:TH.hv,base,set:d.set,del:d.del})};
+TH.deltaSend=function(o){if(!host()||!TH.on(1))return false;if(!lastSent)return TH.snapSend(o);const t=performance.now();const d=TH.diff(lastSent,o);
+ if(!Object.keys(d.set).length&&!d.del.length)return false;lastSent=J(o);const base=TH.hv;TH.hv++;const r=COOP.send({t:"delta",v:TH.hv,base,set:d.set,del:d.del});
+ /* F1 latency: every intent answered since the last send leaves now (q = its wait on the host, v = view build + diff + send) */
+ try{if(latP.length){const now=performance.now(),v=Math.round(now-t+(TH.hvMs||0));for(const x of latP.splice(0))latN({id:x.id,op:x.op,run:Math.round(x.run),q:Math.round(t-(TH.hvMs||0)-x.t1),v})}}catch(e){}return r};
 /* part A pipe: what the host sends (grows per part) */
-TH.hostView=function(){if(!S)return null;const d=ser();let b=null;try{const B=TH.seatOf(CW.seat==="a"?"b":"a");b=B&&J(B.S)}catch(e){}
- return {w:COOP.state.week||0,buoi:S.buoi||0,P:{a:d.S,b},R:d.R,rid,dn:TH.dn,dr:TH.dr}};
+TH.hostView=function(){if(!S)return null;const t0=performance.now();try{return hostView0()}finally{TH.hvMs=performance.now()-t0}};
+function hostView0(){const d=ser();let b=null;try{const B=TH.seatOf(CW.seat==="a"?"b":"a");b=B&&J(B.S)}catch(e){}
+ return {w:COOP.state.week||0,buoi:S.buoi||0,P:{a:d.S,b},R:d.R,rid,dn:TH.dn,dr:TH.dr}}
 function snapNow(){try{const o=TH.hostView();if(o)TH.snapSend(o)}catch(e){console.error("thin snap",e)}}
-let dT=0;function deltaSoon(ms){clearTimeout(dT);dT=setTimeout(()=>{try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error("thin delta",e)}},ms==null?1200:ms)}
-TH.flush=()=>{clearTimeout(dT);try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error(e)}};
+/* F1 latency: a later render's deltaSoon() (1200 ms) must never push back a sooner send already due (an intent's answer: deltaSoon(0)) */
+let dT=0,dDue=0;function deltaSoon(ms){ms=ms==null?1200:ms;const due=Date.now()+ms;if(dT&&dDue<=due)return;clearTimeout(dT);dDue=due;dT=setTimeout(()=>{dT=0;dDue=0;try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error("thin delta",e)}},ms)}
+TH.flush=()=>{clearTimeout(dT);dT=0;dDue=0;try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error(e)}};
 COOP.on("error",m=>{if(!m)return;if(m.code==="snapresync"&&host()&&TH.on(1)){TH.hv=Math.max(TH.hv,m.v|0);snapNow()}});
 COOP.on("week",()=>{if(host()&&TH.on(1))setTimeout(snapNow,0)});
 if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{if(!CW.ctx&&host()&&TH.on(1))deltaSoon()}catch(e){}return r}}
@@ -225,19 +261,22 @@ if(typeof render==="function"){const f=render;render=function(){const r=f.apply(
 COOP.on("snap",m=>{if(host()||!m||!m.o)return;TH.view={v:m.v|0,o:m.o};COOP.emit("thinview",TH.view)});
 COOP.on("delta",m=>{if(host()||!m)return;const V=TH.view;if(!V||V.v!==(m.base|0)){COOP.send({t:"snapreq"});return}
  for(const p in m.set||{}){if(p.split(".").some(k=>BADK.test(k)))continue;put(V.o,p,m.set[p],false)}for(const p of m.del||[])put(V.o,String(p),null,true);
- V.v=m.v|0;COOP.emit("thinview",V)});
+ V.v=m.v|0;const t=performance.now();COOP.emit("thinview",V);TH.gAp=Math.round(performance.now()-t);const A=TH.F&&TH.F.lastAns;if(A&&A.ap==null&&V.o&&V.o.dr&&V.o.dr.id===A.id)A.ap=TH.gAp});
 /* intents */
-const DO={};let doN=0;
-TH.onDo=(op,fn)=>{DO[op]=fn};
-TH.doSend=function(op,args){if(host()||!TH.on(1))return false;const id="d"+Date.now().toString(36)+"-"+(doN++);COOP.send({t:"do",op,args:args===undefined?null:args,base:TH.view?TH.view.v:0,id});return id};
+const DO={};let doN=0;TH.myPick=new Set();/* F2 r2: her own picks (their answer's screen effects play once) */
+TH.onDo=(op,fn)=>{DO[op]=fn};TH.doFn=op=>DO[op];/* part C wraps part B's "life" */
+TH.doSend=function(op,args){if(host()||!TH.on(1))return false;const id="d"+Date.now().toString(36)+"-"+(doN++);if(op==="pick"){TH.myPick.add(id);if(TH.myPick.size>40)TH.myPick.delete(TH.myPick.values().next().value)}COOP.send({t:"do",op,args:args===undefined?null:args,base:TH.view?TH.view.v:0,id});return id};
 function runDo(m){const fn=DO[m.op];let r=null;TH.curDo=m.op;
  try{if(fn)r=TH.withSeat(m.from||"b",()=>fn(m.args,m))}catch(e){console.error("thin do",m.op,e);r={err:String(e&&e.message||e)}}
  TH.curDo=null;/* D r1: call-scoped (a later D.later must not see a stale op) */return r}
-COOP.on("do",m=>{if(!host()||!m||!TH.on(1))return;let r;
+/* F1 latency split (report only): TH.lat = host times per intent id: run = her intent's run (withSeat + the act), q = wait from the run's end
+   to the delta timer, v = view build + diff + send (the guest's network time = her tap→answer minus these and her own apply) */
+TH.lat=[];const latN=x=>{TH.lat.push(x);if(TH.lat.length>60)TH.lat.shift()};let latP=[];
+COOP.on("do",m=>{if(!host()||!m||!TH.on(1))return;let r;const t0=performance.now();
  /* B r2 (seam): her intents other than the life itself wait while her rolled life is held (they run on her accepted person) */
  if(m.op!=="life"&&m.op!=="probe"&&TH.held(m.from||"b")){D.defer(m.from||"b",{op:m.op,args:m.args===undefined?null:J(m.args),m:{from:m.from||"b",id:m.id}});r={held:1}}
  else r=runDo(m);
- TH.dn=m.n|0;TH.dr={id:m.id,op:m.op,r:r===undefined?null:J(r)};deltaSoon(0)});
+ TH.dn=m.n|0;TH.dr={id:m.id,op:m.op,r:r===undefined?null:J(r)};latP.push({id:m.id,op:m.op,run:performance.now()-t0,t1:performance.now()});if(latP.length>20)latP.shift();deltaSoon(0)});
 /* part A test intent: read her person in context b (no change) */
 TH.onDo("probe",()=>({name:S.name,used,ctx:CW.ctx,host:(rivals.find(v=>v.coop)||{}).id||null}));
 
@@ -263,11 +302,14 @@ function pSnap(){const o=J(ser().S);for(const k of X.W_KEYS)delete o[k];return o
 /* person patch: [op, path, value]; path = keys, an array element as {i, id} (matched by its id / sid / name+bt / k on her side) */
 const eid=x=>plain(x)?(x.id!=null?"i"+x.id:x.sid!=null?"s"+x.sid:x.name!=null?"n"+x.name+"#"+(x.bt==null?"":x.bt):x.k!=null?"k"+x.k+"#"+(x.ci==null?"":x.ci):null):null;
 const jq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const SJ=o=>JSON.stringify(o,(k,v)=>v&&typeof v==="object"&&!Array.isArray(v)?Object.keys(v).sort().reduce((r,x)=>(r[x]=v[x],r),{}):v);
+/* thin E: the room's step is the host's alone: it travels as its value, never as a delta (a delta on a seat that is already there drifted to buổi 4) */
+const ABS=new Set(["buoi"]);
 function pDiff(a,b,pre,out){out=out||[];pre=pre||[];
- for(const k of new Set([...Object.keys(a||{}),...Object.keys(b||{})])){if(!pre.length&&SKIP.has(k))continue;if(BADK.test(k))continue;
+ for(const k of new Set([...Object.keys(a||{}),...Object.keys(b||{})])){if(!pre.length&&SKIP.has(k)&&!(k==="cyb"&&TH.on(5)/* E-fix: her cycle flags are the host's at level 5+: they travel in the patch */))continue;if(BADK.test(k))continue;
   const x=a[k],y=b[k],p=pre.concat([k]);if(jq(x,y))continue;
   if(!(k in b)){out.push(["-",p]);continue}
-  if(typeof x==="number"&&typeof y==="number"){out.push(["+",p,y-x]);continue}
+  if(typeof x==="number"&&typeof y==="number"){out.push(p.length===1&&ABS.has(k)?["=",p,y]:["+",p,y-x]);continue}
   if(Array.isArray(x)&&Array.isArray(y)){
    if(x.length===y.length&&x.every((e,i)=>plain(e)&&plain(y[i])&&eid(e)!=null&&eid(e)===eid(y[i]))){x.forEach((e,i)=>{if(!jq(e,y[i]))pDiff(e,y[i],p.concat([{i,id:eid(e)}]),out)});continue}
    const rest=x.map(e=>JSON.stringify(e)),add=[];for(const e of y){const j=rest.indexOf(JSON.stringify(e));if(j>=0)rest[j]=null;else add.push(e)}
@@ -281,11 +323,13 @@ TH.pDiff=(a,b)=>pDiff(a,b);
 D.rebase=()=>{if(D.cur&&CW.ctx)D.cur.p0=pSnap()};
 /* guest: one patch onto her live S */
 function pApply(root,L){let n=0;for(const [op,path,val,fr] of L||[]){try{if(op==="nv"){if(nvApply(path,val))n++;continue}let o=root;
-  for(let i=0;i<path.length-1;i++){const k=path[i];if(plain(k)&&Array.isArray(o)){o=o.find(e=>eid(e)===k.id)||(k.i<o.length&&eid(o[k.i])==null?o[k.i]:undefined)}else{if(typeof k!=="string"||BADK.test(k))o=undefined;else{if(!plain(o[k])&&(op==="+"||op==="="||op==="a")&&typeof path[i+1]==="string")o[k]={};o=o[k]}}if(!plain(o))break}
+  for(let i=0;i<path.length-1;i++){const k=path[i];if(plain(k)&&Array.isArray(o)){o=(k.i<o.length&&eid(o[k.i])===k.id?o[k.i]:null)/* F3: same position first (eid is not unique: two Yến sào are both "kyensao#") */||o.find(e=>eid(e)===k.id)||(k.i<o.length&&eid(o[k.i])==null?o[k.i]:undefined)}else{if(typeof k!=="string"||BADK.test(k))o=undefined;else{if(!plain(o[k])&&(op==="+"||op==="="||op==="a")&&typeof path[i+1]==="string")o[k]={};o=o[k]}}if(!plain(o))break}
   const k=path[path.length-1];if(!plain(o)||typeof k!=="string"||BADK.test(k))continue;
-  if(op==="+"){o[k]=(typeof o[k]==="number"?o[k]:0)+val}else if(op==="="){o[k]=J(val)}else if(op==="-"){delete o[k]}
-  else if(op==="a"){if(!Array.isArray(o[k]))o[k]=[];if(fr)o[k].unshift(...J(val));else o[k].push(...J(val))}
-  else if(op==="r"&&Array.isArray(o[k])){for(const e of val){const t=JSON.stringify(e);let j=o[k].findIndex(z=>JSON.stringify(z)===t);if(j<0&&eid(e)!=null)j=o[k].findIndex(z=>eid(z)===eid(e));if(j>=0)o[k].splice(j,1)}}
+  const V=x=>{const c=J(x);return root===S&&typeof path[0]==="string"&&refKey(path[0])?unref(c):c};
+  if(op==="+"){o[k]=(typeof o[k]==="number"?o[k]:0)+val}else if(op==="="){o[k]=V(val)}else if(op==="-"){delete o[k]}
+  else if(op==="a"){if(!Array.isArray(o[k]))o[k]=[];if(fr)o[k].unshift(...V(val));else o[k].push(...V(val))}
+  else if(op==="r"&&Array.isArray(o[k])){for(const e of val){const t=SJ(e);let j=o[k].findIndex(z=>SJ(z)===t)/* F3: keys in any order (else the eid fallback took the FIRST piece of that kind) */;if(j<0&&eid(e)!=null)j=o[k].findIndex(z=>eid(z)===eid(e));
+   if(j<0&&plain(e)&&Object.keys(e).length===1&&("$r" in e||"$k" in e)){const u=V(e);if(u)j=o[k].indexOf(u)}if(j>=0)o[k].splice(j,1)}}
   n++}catch(e){console.error("thin patch",e)}}return n}
 TH.pApply=pApply;
 /* D r1 (item 3, the whole family): HER viewer rows on the NPCs (rel / oan / ghen / ev = what that NPC feels / holds toward HER, and every
@@ -397,9 +441,12 @@ TH.onDo("pick",a=>{a=a||{};D.hold(S);const L=S.thq,i=L.findIndex(c=>c&&c.id===a.
  let m=null;if(c.pid){const d=mkP(c.pid,c.pp||{});if(d)m={t:c.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls}}else m={t:c.t,h:c.h,cls:c.cls,btn:c.btn};
  if(!m){D.log.push(["pick-stale",c.pid]);const g=D.GONE[c.pid];if(g)D.after(()=>g(c.pp||{}));return {stale:1}}
  Q.unshift(m);const k=+a.i;const nw=window.__kpNoWarn;window.__kpNoWarn=true;/* asked on her phone already (kpGate) */
- try{if(m.opts){if(k>=0&&m.opts[k])chooseM(k);if(Q[0]===m){Q.shift();if(k>=0){L.splice(i,0,c);return {refused:1}}}}
+ /* F2 r2: her pick is her tap: run as solo (TH.tapRun: quiet off, her follow-up cards / numbers reach HER phone) */
+ let ui=null;try{if(m.opts){if(k>=0&&m.opts[k])ui=TH.tapRun(()=>chooseM(k)).ui;if(Q[0]===m){Q.shift();if(k>=0){L.splice(i,0,c);return {refused:1}}}}
  else closeModal()}finally{window.__kpNoWarn=nw}
- D.log.push(["pick",c.pid||c.t,k]);return {ok:1,i:k}});
+ D.log.push(["pick",c.pid||c.t,k]);const o={ok:1,i:k};if(ui)o.ui=ui;return o});
+/* guest: the screen effects of her pick (captured on the host) play once, when its answer lands (dr = that pick's id) */
+COOP.on("thinview",V=>{try{const r=!host()&&V&&V.o&&V.o.dr;if(!r||r.op!=="pick"||!TH.myPick.has(r.id))return;TH.myPick.delete(r.id);if(r.r&&r.r.ui)TH.uiPlay(r.r.ui)}catch(e){console.error("thin pick ui",e)}});
 /* her ack of the patches she applied */
 TH.onDo("pack",a=>{const n=+(a&&a.n)||0;const seat=CW.ctx;const L=D.PQ[seat]||[];
  for(const x of L)if(x.n<=n&&CW.rpend){delete CW.rpend["pq"+seat+x.n];if(x.rid)delete CW.rpend[x.rid]}D.PQ[seat]=L.filter(x=>x.n>n);

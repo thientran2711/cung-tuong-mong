@@ -226,7 +226,7 @@ SG_THOI.forEach(k=>{if(!ACT[k]||!ACT[k].o||SG.K[k])return;
    j:"over"  "Nghe lén câu chuyện" at a place (j78 overhear) → Nghe ngóng          {pi}
    j:"serv"  "Mua chuộc" a servant of another palace (bribeServ j29 / j10 / j15) → Mặc cả   {sid}
    job = {gk (SG.K key), t (game title), v (target, for the game), name, p0() (odds now), line(word) (card text), ask, cost (silver text), pay()→bool (take the time/silver), run(m) (act under the step), art} */
-function sgOdds(v,k){const a=ACT[k];const o=a&&a.o?a.o(S,v):50;return cl(Math.round(o+(typeof lotB==="function"?lotB(S,ACTDOM[k]):0)),5,95)}
+function sgOdds(v,k){const a=ACT[k];const o=a&&a.o?actOdds(S,v,k):null;return oddsCl(Math.round(o==null?50:o))}/* actOdds (j9): the roll's own context, lá số included */
 function sgLine(v,k,w,c){const prev=typeof J78!=="undefined"?J78.cardV:null;try{if(typeof J78!=="undefined")J78.cardV=v;return actLineRaw(k,w,c)}finally{if(typeof J78!=="undefined")J78.cardV=prev}}
 function sgCan(i,k){const v=rivals[i],a=ACT[k];if(!v||!a||!SG.K[k]||typeof S==="undefined"||!S||S.dead||Q.length||!v.alive||v.out||!can(BAL.actK)||!a.ok(S,v))return false;
  if(typeof k61Named==="function"&&!k61Named(v))return false;if(S.confined&&typeof CRIME!=="undefined"&&CRIME.includes(k))return false;if(k==="bribe"&&!v.maid)return false;return true}
@@ -235,7 +235,7 @@ SG.K.over={g:"nghe",t:"Nghe ngóng",eng:sgNghe,dur:"30 giây",how:SG.K.spy.how,h
 SG.K.serv={g:"mac",t:"Mặc cả",eng:sgMac,dur:"3 hồi, mỗi hồi 10 giây",how:SG.K.bribe.how,hud:SG_HUD("10 giây"),steps:SG.K.bribe.steps,ask:()=>"Mua chuộc người hầu cung khác: tự mặc cả, hay giao cho người làm?"};
 const SG_ACTS=[["Dò la","spy"],["Tung tin đồn","rumor"],["Bỏ độc vào trà nàng","poison"],["Bỏ xạ hương vào thuốc nàng","musk"],["Đẩy con nàng xuống hồ","pond"],["Vu oan","frame"]];
 function sgServCost(s){return nv(s,"bribeCost")}
-function sgServOdds(s){return odA(S,35+nq(s,"greed",BAL.net.k.bribeGreed)-nq(s,"timid",BAL.net.k.bribeTimid)-nq(s,"loyal",BAL.net.k.bribeLoyal)-s.loyal/3+S.tamco/5)}
+function sgServOdds(s){return bribeOdds(S,s)}/* 2f2 one core: Mặc cả = the Mua chuộc odds (j29 bribeOdds = jagknow tmOdds) */
 function sgPopPay(pi,tc){return()=>{if(!can(tc))return false;spend(tc);try{S.payOnPick=0}catch(e){}try{if(pi!=null&&S.visit){S.visit.tk=S.visit.tk||{};S.visit.tk[pi]=1}}catch(e){}return true}}
 function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act";
  if(p.j==="act"||p.j==="place"){const v=RV(p.v),k=p.k,a=ACT[k],G=SG.K[k];if(!v||!a||!G)return null;
@@ -243,12 +243,12 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
   if(p.j==="act"){J.pay=()=>true;J.run=m=>sgRun(v.id,k,m)}
   else{J.pay=sgPopPay(p.pi,BAL.actK);J.run=m=>{SG.mod=m&&m.step?m:null;let r="";try{r=runAct(S,v,k)||""}finally{SG.mod=null}if(r)log(`${a.n}: ${r}`);render()}}
   return J}
- if(p.j==="over"){const G=SG.K.over,b=40+S.mat*6;
+ if(p.j==="over"){const G=SG.K.over,b=40+eyes(S)*6;
   return{gk:"over",G,t:G.t,v:{},name:"",art:"Nghe lén",ask:G.ask(),cost:"không tốn bạc",p0:()=>od(b),line:w=>`Nghe lén câu chuyện · ${w} · biết 1 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evTop)} · tốn: không tốn bạc`,pay:sgPopPay(p.pi,1),
    run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=overhear(S.place)||""}finally{SG.mod=null}if(r)log(`Nghe lén câu chuyện: ${r}`);render()}}}
  if(p.j==="serv"){const s=servById(p.sid),G=SG.K.serv;if(!s)return null;const o=ownerOf(s),c=sgServCost(s);if(!o||o===S)return null;
   return{gk:"serv",G,t:G.t,v:{maid:s},name:s.name,art:"Mua chuộc",ask:`Mua chuộc ${s.name}, người hầu của ${NM(o)}: tự mặc cả, hay giao cho người làm?`,cost:`${c} bạc`,p0:()=>sgServOdds(s),
-   line:w=>`Mua chuộc ${s.name} · ${w} · thành: thành tai mắt của ngươi · tốn: ${c} bạc · thất bại: nàng mách chủ`,
+   line:w=>`Mua chuộc ${s.name} · ${w} · thành: thành tai mắt của ngươi, tốn ${c} bạc · bại: không mất bạc; nàng có thể mách chủ, kẻ đi đưa lời sợ liên lụy`,/* 2f3: bạc only on success (bribeServ) */
    pay:()=>{if(S.bac<c||!can(BAL.servK))return false;spend(BAL.servK);return true},run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=bribeServ(S,s)||""}finally{SG.mod=null}if(r)log(r);render()}}}
  return null}
 
@@ -256,7 +256,8 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
 PEND.sgpick=p=>{const J=sgJob(p);if(!J)return null;const G=J.G,p0=J.p0();
  const up=word(sgShift(p0,1)),dn=word(sgShift(p0,-1));const base=J.line(word(p0));
  const gl=base+` · (tự chơi ${G.dur}: khéo thì lên ${up}, vụng thì xuống ${dn})`;
- const go=f=>()=>{const J2=sgJob(p);if(!J2||!J2.pay()){try{render()}catch(e){}return}f(J2)};
+ const go=f=>()=>{const J2=sgJob(p);if(!J2)return;/* the odds she saw, read BEFORE the pay (spend); the run rolls them (+ the game's step), j9 fzRun */const fz=J2.p0();if(!J2.pay()){try{render()}catch(e){}return}
+  J2.fz=fz;const r0=J2.run;J2.run=m=>fzRun(sgShift(fz,(m&&m.step)||0),J2.gk,()=>r0(m));f(J2)};
  return{t:`<p>${J.ask}</p>`,who:p.j==="act"||p.j==="place"?(typeof pv==="function"?pv(J.v):null):null,o:[{n:`Tự ra tay: ${G.t}`,fx:{},x:gl,showOut:true,go:go(J2=>sgPlay(J2))},{n:"Giao cho người làm",fx:{},x:base,showOut:true,go:go(J2=>J2.run(null))},{n:"Thôi",fx:{},showOut:true}]}};
 function sgAsk(p,title){const d=mkP("sgpick",p);if(!d)return;pushDil(d,title);showModal()}
 /* the act-card click (person card / Hậu cung): capture before j6's panel handler; bots that call doAct() directly are untouched */
@@ -274,14 +275,16 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 
 /* ---------- play → result page → act ---------- */
 function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render()}catch(e){}return}
- KG82.ctx="muu";kg82Preload(G.g).then(()=>{});const d=kg82Open({art:J.art,title:G.t,how:G.how});if(!d)return;const box=kg82Box();const p0=J.p0();const v=J.v,k=J.gk;
+ KG82.ctx="muu";kg82Preload(G.g).then(()=>{});const d=kg82Open({art:J.art,title:G.t,how:G.how});if(!d)return;const box=kg82Box();const p0=J.fz!=null?J.fz:J.p0();const v=J.v,k=J.gk;
  const seenK="sg:"+G.t;
  const rows=[["Cơ may",kitOdds(p0)+`<small class="kpnote"> hiện nay; khéo thì lên ${word(sgShift(p0,1))}, vụng thì xuống ${word(sgShift(p0,-1))}</small>`]];
  if(G.g==="mac"){const m=v.maid||{};rows.push(["Cung nữ",`tính ${sgTemper(m)[0]}, lòng trung với chủ ${sgLoyW(m.loyal==null?50:m.loyal)}`]);
   rows.push(["Tốn",`${J.cost} · như thẻ việc, mặc cả chỉ đổi cơ may`])}
  /* mg-easy: a one-screen how-to card the first time (S.mgSeen), then only the Gợi ý button + a quiet nudge when she stalls */
- const first=!kg82Seen(seenK);const how=first?`<h4 class="kpst">Cách chơi, lần đầu</h4>`+kitRows(G.steps.map((t,i)=>[`Bước ${i+1}`,t]))+`<div class="kpnote">Chưa rõ thì chạm «Gợi ý» (bớt một ít phần), hoặc để ma ma tự nhắc khi ngươi dừng lâu.</div>`:"";
- const intro=()=>{KG82.phase="intro";box.innerHTML=how+kitRows(rows)+`<div class="kg82act"><button class="${kg82Btn()}" id="sggo">${first?"Đã hiểu, bắt đầu":"Bắt đầu"}</button><button class="${kg82Btn(true)}" id="sgskip">Giao cho người làm<small>cơ may như hiện nay</small></button></div>`;
+ /* KIT §13.7 (mg-ready-guide): the step rules sit in the shared rules block EVERY time (was: first time only) + «Sẵn sàng» / «Hướng dẫn» (guided round of the same engine) */
+ const hint=`<div class="kpnote">Chưa rõ thì chạm «Gợi ý» (bớt một ít phần), hoặc để ma ma tự nhắc khi ngươi dừng lâu.</div>`;
+ const intro=()=>{KG82.phase="intro";box.innerHTML=kitRows(rows)+hint+`<div class="kg82act"><button class="${kg82Btn()}" id="sggo">Bắt đầu</button>${kitQuick({id:"sgskip",n:"Giao cho người làm",sub:`cơ may như hiện nay`})}</div>`;
+  kgReady(box,{n:J.art,t:G.t,steps:(G.steps||[]).map((t,i)=>[`Bước ${i+1}`,t]),how:G.how,go:"#sggo",pic:"",v,tutor:(b,env)=>G.eng(b,Object.assign(env,{v,lv:0}))});
   $("sggo").onclick=()=>{kg82Seen(seenK,true);sgEng(G,v,(raw,o)=>finish(raw,o))};$("sgskip").onclick=()=>{kg82Close();J.run(null)}};
  const finish=(raw,o)=>{KG82.phase="result";const st=sgStep(raw);const m={step:st};const p1=sgShift(p0,st);
   const parts=[["Phần chơi",`${kg82Word(raw)} · ${raw}/10`]];

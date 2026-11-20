@@ -98,10 +98,10 @@ const nrCKey=p=>p===S?"me":p.id;
 function nrCWho(k){return k==="me"?S:RV(k)}
 /* his rival (kept for the whole road; recast and told when gone) */
 function nrMenRival(e){const N=e.p.nr;const B=nrB().men;
- if(e.g==="men"){const L=(S.men||[]).filter(m=>m!==e.p&&m.alive!==false&&m.id!=="m96");const p=N.c!=null&&L.find(m=>m.id===N.c);if(p)return p;if(N.c!=null){N.rc=N.cn||"";N.c=null}if(!L.length)return null;const q=pick(L);N.c=q.id;N.cn=q.name;return q}
+ if(e.g==="men"){const L=(S.men||[]).filter(m=>m!==e.p&&m.alive!==false&&m.id!=="m96");const p=N.c!=null&&L.find(m=>m.id===N.c);if(p)return p;if(N.c!=null){N.rc=N.cn||"";N.c=null}if(!L.length)return null;/* NPC-PURPOSE G3: his rival = the man who also has his heart set on her (tình ý), near-best */const q=npwPick(L,m=>1+Math.max(0,m.tinh||0))||L[0];N.c=q.id;N.cn=q.name;return q}
  if(e.g==="off"){const T=trS();const L=Object.keys(T.H).filter(c=>c!==e.c);if(N.c&&L.includes(N.c))return N.c;if(!L.length)return null;
-  L.sort((a,b)=>NRM[N.r].ally?tdRel(e.c,b)-tdRel(e.c,a):tdRel(e.c,a)-tdRel(e.c,b));N.c=L[Math.min(L.length-1,R(Math.min(nrB().offTop,L.length)))];return N.c}
- if(e.g==="hz"){const L=allKids().map(z=>z[0]).filter(k=>k!==e.p&&k.sex==="m"&&k.alive);const p=N.c&&L.find(k=>k.name===N.c);if(p)return p;if(N.c){N.rc=N.c;N.c=null}if(!L.length)return null;const q=pick(L);N.c=q.name;return q}
+  L.sort((a,b)=>NRM[N.r].ally?tdRel(e.c,b)-tdRel(e.c,a):tdRel(e.c,a)-tdRel(e.c,b));/* G3: the clan his road stands with / against most (tdRel), near-best of the top offTop */N.c=npwPick(L.slice(0,Math.min(nrB().offTop,L.length)),c=>Math.max(1,(L.length-L.indexOf(c))*10));return N.c}
+ if(e.g==="hz"){const L=allKids().map(z=>z[0]).filter(k=>k!==e.p&&k.sex==="m"&&k.alive);const p=N.c&&L.find(k=>k.name===N.c);if(p)return p;if(N.c){N.rc=N.c;N.c=null}if(!L.length)return null;/* G3: his rival = the brother who stands closest to the succession (Tài + được thương), near-best */const q=npwPick(L,k=>1+(k.tal||0)+(k.fond||0))||L[0];N.c=q.name;return q}
  /* court men: the consort he leans toward (patron pk) and the one he leans against (c), from his af (key "me" = the player) */
  const C=liveRivals(true).filter(p=>!p.coop).concat(S.out||S.dead||nrLearn()?[]:[S]);const af=p=>(e.p.af&&e.p.af[nrCKey(p)])||0;
  const ok=k=>{const p=k!=null&&nrCWho(k);return p&&(p===S||p.alive&&!p.out)};
@@ -130,10 +130,11 @@ function nrMenPlay(e){const p=e.p,N=p.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N
 function nrMenAsk(e){try{if(isSrv()||S.out||nrLearn()||!e.a)return false;const M=nrB().men,p=e.p;
  if(e.g==="men")return (p.tinh||0)>=M.askTinh;const af=(p.af&&p.af.me)||0;if(af>=M.askAf)return true;
  if(e.g==="off"){const h=tdHouse(S);return !!(h&&tdRel(e.c,h)>=M.askRel)}return false}catch(x){return false}}
-function nrMenOffer(e){const N=e.p.nr,A=nrCh(N.r,N.n);if(!A||!e.a||typeof q72!=="function")return false;const hk=nrKind(A);if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
+function nrMenOffer(e){const N=e.p.nr,A=nrCh(N.r,N.n);if(!A||!e.a||typeof q72!=="function")return false;const q=q72();if(!q)return false;
  const [rk,ri]=e.a;if(q.ch.concat(q.a).some(c=>nrSameA(c,rk,ri)&&/^nr_/.test(c.tid)))return false;
  const riv=nrMenRival(e);let bk=null,bi=null;if(e.g==="men"&&riv){bk="man";bi=riv.id}else if(e.g==="off"&&riv){bk="off";bi=riv}else if(e.g==="court"&&riv&&riv!==S){bk=riv.queen?"hh":"rv";bi=riv.id}
- q.ch.push({tid:"nr_"+hk,at:wk(),rk,ri,bk,bi,p:{nr:N.r,nn:N.n}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
+ const K=typeof nrAskPick==="function"?nrAskPick(N,A,e.k,!!bk):{hk:nrKind(A),av:-1},hk=K.hk;if(!T72I["nr_"+hk])return false;
+ q.ch.push({tid:"nr_"+hk,at:wk(),rk,ri,bk,bi,p:{nr:N.r,nn:N.n,av:K.av}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
 function nrMenMonth(news){const B=nrB();let n=news||0;
  for(const e of nrMenL()){try{const N=e.p.nr||nrMenInit(e);if(!N||N.x||!N.n||S.turn<N.t)continue;
   if(N.h&&N.n===N.h&&!N.hs&&nrMenAsk(e)&&nrMenOffer(e))continue;
@@ -144,8 +145,11 @@ function nrMenMonth(news){const B=nrB();let n=news||0;
   if(r.hit||n<B.newsMo){log(line);n++}}catch(x){console.error(x)}}
  return n}
 /* the voice of a man in the help hồi (VANPHONG §2): eunuchs nô tài, a Vương gia bản vương, other men and officials thần */
-function nrVoiceM(X,goi){const k=X&&X.A&&X.A.k;if(k==="eun"||k==="ksp")return{me:"nô tài",call:goi()};
- if(k==="man")return{me:X.A.o&&X.A.o.role==="Vương gia"?"bản vương":"thần",call:goi()};if(k==="doc"||k==="off")return{me:"thần",call:goi()};return null}
+/* fix r2 (VANPHONG §2 table, whole family of men): Thái y, quan, sứ thần, họa sư, nhạc sư → «vi thần»; Thị vệ → «nô tài»; Vương gia → «bản vương»;
+   eunuchs → «nô tài». The player is called as a servant calls a consort (jvoice kAddr: tiểu chủ / nương nương / Hoàng hậu nương nương). */
+function nrVoiceM(X,goi){const k=X&&X.A&&X.A.k;const g=()=>{try{if(typeof kAddr==="function")return kAddr({srv:"m"},S).goi}catch(e){}return goi()};
+ if(k==="eun"||k==="ksp")return{me:"nô tài",call:g()};
+ if(k==="man"){const r=X.A.o&&X.A.o.role;return{me:r==="Vương gia"?"bản vương":r==="Thị vệ"?"nô tài":"vi thần",call:g()}}if(k==="doc"||k==="off")return{me:"vi thần",call:g()};return null}
 /* his road on his card (Nam nhân / Kẻ hầu / Triều đình / con cái cards): one more line of the kit person card (pcard lines, j70 pattern) */
 (function(){if(typeof pcard!=="function")return;const p0=pcard;pcard=function(o){try{if(S&&!window.__nroff&&o&&o.name&&!(o.lines||[]).some(l=>/Tuyến truyện:/.test(l))){
   const sn=x=>typeof shortN==="function"?shortN(x):x;const e=nrMenL().find(z=>z.p.nr&&(z.n===o.name||z.p.name===o.name||sn(z.p.name)===o.name));

@@ -22,7 +22,7 @@ function accessOf(p,k){p=p||S;if(!k)return{ok:false,why:"cung trống",kind:"rul
  if(ACC_DAY[k]){if(b<B4L)return{ok:true};return{ok:false,why:"đóng cửa tối",kind:"hour"}}
  return{ok:true}}
 /* the odds and prices (her side; an NPC module may call the same) */
-function accSneakO(k,a){a=a||S;const base=k==="dtd"?25:k==="thu"?30:k==="tn"||k==="kn"?35:k[0]==="r"?45:55;return odA(a,base+(a.tamco||0)/5+(a.mat||0)*3)}
+function accSneakO(k,a){a=a||S;const base=k==="dtd"?25:k==="thu"?30:k==="tn"||k==="kn"?35:k[0]==="r"?45:55;return odA(a,base+(a.tamco||0)/5+eyes(a)*3)}
 function accAskO(k,a){a=a||S;if(k==="dtd"||k==="thu"){let o=45+(rkOf(a)-4)*8+mm()+(a.sung||0)/5;if(has("chamchinh")&&k==="thu")o-=10;if(has("datinh")&&k==="dtd")o+=8;return odA(a,o)}
  const h=accHost(k);return odA(a,40+(h?aff(h,a)/2+(rkOf(a)-rkOf(h))*8:0))}
 function accName(k){try{return k==="home"?palName("home"):(typeof palName==="function"&&(PLNAME[k]||k[0]==="r")?palName(k):placeOf(k).n)}catch(e){return placeOf(k).n}}
@@ -103,7 +103,7 @@ function accSpot(all,cls,k,attrs,inner){const st=accState(k);if(st.here||!st.why
     buổi (card "Đi (đến nơi vào buổi sau)"), so its label stays the plain label with the red "đi N khắc" — no lock mark. */
  const lock=!st.walk;
  if(lock)inner=inner.replace(/(<span class="mlab">[\s\S]*?)(<\/span>)/,`$1${ACC_LOCK}$2`);
- return `<div class="mspot${cls.replace(/\soff/g,"")} off ${lock?"agrey":"awalk"}" data-ak="${k}"${attrs} aria-label="${accName(k)}: ${st.why}">${inner}</div>`}
+ return `<div class="mspot${cls.replace(/\soff/g,"")} off mgrey ${lock?"agrey":"awalk"}" data-ak="${k}"${attrs} aria-label="${accName(k)}: ${st.why}">${inner}</div>`}
 const ACC_LOCK=`<svg class="mlock" viewBox="0 0 12 14" width="10" height="12" aria-hidden="true"><path d="M3 6V4.2a3 3 0 0 1 6 0V6" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="1.5" y="6" width="9" height="7" rx="1.5" fill="currentColor"/></svg>`;
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(window.__mapList)return h;
  try{h=h.replace(/<button class="mspot([^"]*)" data-go="([^"]+)"([^>]*)>([\s\S]*?)<\/button>/g,(all,cls,k,attrs,inner)=>accSpot(all,cls,k,attrs,inner));
@@ -133,8 +133,8 @@ function accInfo(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
 (function(){const st=document.createElement("style");st.textContent=`
 .mspot.agrey,.mspot.awalk{cursor:pointer;pointer-events:auto}
 .mspot.agrey .mlab{opacity:1!important}
-/* owner 16/11 "chỗ không đủ khắc thì cho nút màu xám" (review/map-labels-2): ONE kit state for an open place that is farther than the khắc left (.awalk): the same label, greyed; still tappable (walk spill). Map label + Danh sách tile both. Real rule locks (.agrey) keep the normal label + lock mark. */
-.mspot.awalk .mlab{background:#d3d0c6f5;color:#6e6c63;border-color:#a9a698;box-shadow:0 1px 3px #3a2a1e40}.mspot.awalk .mlab i{background:#c2bfb3;color:#6e6c63}.mspot.awalk .mlab em{color:#8a3a2c}.mspot.awalk .mres{filter:grayscale(1);opacity:.75}
+/* owner 18/11 ~19:05Z + ~19:15Z: ONE kit grey state (.mgrey, jmapc.js §85) for EVERY place she cannot reach now (not enough khắc .awalk, rank too low / forbidden .agrey) and for empty palaces; GREY IS LOOK ONLY: every grey place stays tappable with its dialog (Lẻn vào, walk spill). */
+.mspot.awalk .mres{filter:grayscale(1);opacity:.75}
 .mspot .mlab .mlock{flex:none;display:block;margin-left:0;opacity:1;color:#6b4a1c}.mspot .mlab .kmlock{flex:none}
 .mspot .mwhy{display:block;background:#2b2b28d9;color:#c9c9c0;font-size:.55rem;line-height:1.2;border-radius:6px;padding:0 5px;margin-top:1px;white-space:nowrap;pointer-events:none}
 .mspot.sm .mwhy{font-size:.5rem;padding:0 3px}

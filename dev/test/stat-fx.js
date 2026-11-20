@@ -9,7 +9,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  for(const [W,H,D,tag] of VP){const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100});const p=await c.newPage();const errs=[];
   p.on('pageerror',e=>errs.push(e.message));await p.goto(BASE,{waitUntil:'domcontentloaded'});
   await p.waitForFunction(()=>typeof start==='function'&&typeof kitStatFx==='function'&&(typeof nlFigsReady!=='function'||nlFigsReady()),null,{timeout:120000});
-  await p.evaluate(()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();OPT.fxon=true});
+  await p.evaluate(()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();OPT.fxon=true});
   await sleep(800);const r={};
   /* 1: apply() Danh +2 -> label with the NAME, glow green after, pulses ~2.6 s */
   r.one=await p.evaluate(async()=>{const cell=document.getElementById('hud-danh');const t0=performance.now();apply({danh:2});await new Promise(r=>setTimeout(r,150));

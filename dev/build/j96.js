@@ -1,5 +1,5 @@
 /* ================= j96 THANH MAI TRÚC MÃ (owner 11/14): mạch tình kéo dài cả đời, ba chương trong chính tuyến j67 =================
-   Ai: con gái Tể tướng (tt), Đại tướng quân (dtq), nhà buôn muối (muoi), thầy đồ (thd), cháu Thái hậu (ch), tội thần (td), công chúa Nam Chiếu (nc).
+   Ai: con gái Tể tướng (tt), Đại tướng quân (dtq), nhà buôn muối (muoi), thầy đồ (thd), cháu Thái hậu (ch), tội thần (td), công chúa Cao Ly (nc).
    Người ấy là một nam nhân THẬT trong S.men (j22): tên, mặt có sẵn (không hồng tím), vai trò, chỉ số tình (m.tinh, hắn với nàng),
    lui tới nơi hợp vai (S.menW, bản ghi vị trí của j22; nếu sau này có bản ghi j95 thì đọc từ đó). Lòng nàng với hắn: S.tm96.h.
    Ba chương: tm96a đầu đời (tiến cung, gặp lại, tín vật) · tm96b giữa đời (liều mình, nghi ngờ, giá họa, Hoàng thượng thử lòng) ·
@@ -37,9 +37,9 @@ const TM96V={
   bg:"hôn phu đã định từ thuở nhỏ, trước khi nhà ngươi mang tội",how:"bỏ thi cử, học nghề y, vào Thái y viện để được ở gần ngươi",
   tok:"nửa tờ hôn thư đã cháy sém",force:"Nhà ngươi bị xử trảm, hôn ước tan theo. Ngươi đổi tên vào cung để báo thù. Đêm cuối, chàng tìm được ngươi ở bến sông, chỉ kịp nói: “Ta sẽ tìm nàng.”",
   route:"gói trong một thang thuốc bổ Thái y viện gửi sang",risk:"lén đổi bát thuốc có độc người ta dâng cho ngươi, rồi ghi bệnh án giả để che",bride:"con gái Viện sứ Thái y viện"},
- nc:{role:"Phó sứ Nam Chiếu",pre:"Phó sứ",up:"Đại sứ Nam Chiếu thường trú ở kinh thành",fr:"man",fid:["man:suthan-2","man:suthan-1"],haunts:["thu","vuon"],sur:["Đoàn","Mông"],
-  bg:"võ sĩ hộ vệ của ngươi ở cố quốc Nam Chiếu",how:"xin theo sứ đoàn Nam Chiếu làm phó sứ, vượt núi đến kinh thành",
-  tok:"chiếc vòng bạc chạm hoa trà, vật của mẹ chàng",force:"Phụ vương gả ngươi sang hòa thân để đổi lấy mười năm yên ổn nơi biên giới. Chàng cưỡi ngựa theo kiệu hoa đến tận cửa ải rồi phải quay về.",
+ nc:{role:"Phó sứ Cao Ly",pre:"Phó sứ",up:"Đại sứ Cao Ly thường trú ở kinh thành",fr:"man",fid:["man:suthan-2","man:suthan-1"],haunts:["thu","vuon"],sur:["Kim","Phác","Thôi"],
+  bg:"võ sĩ hộ vệ của ngươi ở cố quốc Cao Ly",how:"xin theo sứ đoàn Cao Ly làm phó sứ, vượt núi đến kinh thành",
+  tok:"chiếc vòng bạc chạm hoa mai, vật của mẹ chàng",force:"Phụ vương gả ngươi sang hòa thân để đổi lấy mười năm yên ổn nơi biên giới. Chàng cưỡi ngựa theo kiệu hoa đến tận cửa ải rồi phải quay về.",
   route:"giấu trong cống phẩm sứ đoàn dâng lên",risk:"đứng ra nhận tội thay khi sứ đoàn bị vu mang thư mật cho ngươi",bride:"một tiểu thư nhà quan được Hoàng thượng ban hôn để giữ chân sứ đoàn"}};
 function T96(){return S&&S.tm96||null}
 function V96(){const t=T96();return t?TM96V[t.k]:null}
@@ -65,7 +65,7 @@ function mkMan96(k){try{menInit()}catch(e){}if(!S.men)return null;const V=TM96V[
  const m={id:"m96",role:V.role,rw:V.role.toLowerCase(),haunts:V.haunts.slice(),age,name:nm,trait:tr,loyal:70+R(25),af:20,tinh:62+R(14),letters:0,trysts:0,alive:true,knowsMe:[],tm96:k,known:1};
  S.men=S.men.filter(x=>x.id!=="m96");S.men.push(m);return m}
 function tmRoll96(k){if(!window.TM96_ON)return false;let f=null;try{f=localStorage.getItem("ctm-tm96")}catch(e){}if(f==="0")return false;if(!TM96V[k])return false;if(f==="1")return true;
- let w=TM96_W[k]||0;const h=(hist67()["tm"]||[]);if(h[0]==="tm96a")w*=.6;return rnd67()<w}
+ let w=TM96_W[k]||0;const h=(hist67()["tm"]||[]);if(h[0]==="tm96a")w*=.6;return roll(w*100)}
 /* a new life: maybe weave the three chapters into the plan */
 (function(){const i0=a67init;a67init=function(k){const r=i0.apply(this,arguments);try{rareReg96();if(!tmRoll96(k))return r;const c=S.st&&S.st.ch;if(!c||!c.plan)return r;const m=mkMan96(k);if(!m)return r;
  S.tm96={k,mid:m.id,h:72,sus:0,ev:0,rise:0,tok:1,v:1};const P=c.plan;
@@ -111,7 +111,7 @@ ARC67.tm96a=arcFx("tm96a",{o:"tm",ok:ok96,t:"Thanh mai trúc mã: Ngày từ bi�
   {n:"Viết một dòng: “Hãy lập công danh”",go:()=>{adj96(BAL.arc.h96.tm96a.a1[2])},rt:"Ngươi gửi đi một dòng chữ, không ký tên."}]},
  a2:{h:"Gặp lại ở {lvp}",w:"lv",t:"Đi ngang {lvp}, ngươi khựng lại. {lv} đứng đó, y phục chỉnh tề. Chàng cúi đầu hành lễ như với mọi phi tần, chỉ có đôi mắt là không giấu được.",o:[
   {n:"Cúi đầu đi qua như người lạ",go:()=>{adj96(BAL.arc.h96.tm96a.a2[0]);A96f("cold")},rt:"Ngươi bước qua, không ngoái lại."},
-  {n:"Dừng lại hỏi một câu xã giao",go:(A,ok)=>{adj96({h:BAL.arc.h96.tm96a.a2[1].h,t:BAL.arc.h96.tm96a.a2[1].t,sus:ok?BAL.arc.h96.tm96a.a2[1].sus[0]:BAL.arc.h96.tm96a.a2[1].sus[1]});if(!ok){const v=pick(liveRivals(true));if(v)evA(v,S,BAL.eff.j96.evGo)}},rt:"Hai câu hỏi thăm, chỉ hai người hiểu nghĩa thật.",rf:"Một cung nữ của phi tần khác thấy hai người đứng hơi lâu."},
+  {n:"Dừng lại hỏi một câu xã giao",go:(A,ok)=>{adj96({h:BAL.arc.h96.tm96a.a2[1].h,t:BAL.arc.h96.tm96a.a2[1].t,sus:ok?BAL.arc.h96.tm96a.a2[1].sus[0]:BAL.arc.h96.tm96a.a2[1].sus[1]});if(!ok){/* NPC-PURPOSE G3: the one who really stands there and watches (npcWit), not a random consort */const w=npcWit(loc96(),null,{vs:S,not:[S,S.emp]})[0];const v=w?w.p:null;if(v)evA(v,S,BAL.eff.j96.evGo)}},rt:"Hai câu hỏi thăm, chỉ hai người hiểu nghĩa thật.",rf:"Một cung nữ của phi tần khác thấy hai người đứng hơi lâu."},
   {n:"Sai cung nữ chuyển lời: “Đừng tìm ta”",go:()=>{adj96(BAL.arc.h96.tm96a.a2[2]);A96f("cut")},rt:"{maid} chuyển lời. Chàng lặng người, rồi gật đầu."}]},
  a3:{h:"Tín vật trở lại",w:"maid",t:"{maid} run run đặt lên bàn một gói nhỏ: {lvtok}, {lvroute}. Bên trong có một mảnh giấy: “Vật này vẫn là của nàng.”",o:[
   {n:"Giữ lại, giấu thật kỹ",go:()=>{adj96(BAL.arc.h96.tm96a.a3[0]);T96().tok=1},rt:"Ngươi khâu tín vật vào lớp lót gối."},
@@ -163,7 +163,7 @@ ARC67.tm96b=arcFx("tm96b",{o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lửa thử v�
   {n:"Đút bạc bịt miệng",rt:"Hắn cười hì hì, cất bạc."},
   {n:"Dọa tố hắn với Tổng quản",go:(A,ok)=>{if(!ok)adj96(BAL.arc.h96.tm96b.b3b[1])},rt:"Hắn tái mặt, chuồn thẳng.",rf:"Hắn chạy đi kể khắp nơi."}]},
  b4:{h:"Tang vật trong cung ngươi",w:"maid",t:()=>hasEv96()?"{maid} hớt hải: có kẻ sắp dẫn người đến soát cung ngươi. Mà trong rương ngươi thật sự còn giữ đồ của {lvn}.":"{maid} hớt hải: có kẻ đã lén nhét một bức thư giả nét chữ {lvn} vào rương ngươi, sắp dẫn người đến soát.",o:[
-  {n:"Soát cung trước, tiêu hủy mọi thứ",o:()=>40+(S.mat||0)*6+(A96has("maid")?15:0),go:(A,ok)=>{if(ok){const m=man96();if(m){m.letters=0;if(S.aff)S.aff[m.id]=0}T96().ev=0;T96().tok=0;adj96(BAL.arc.h96.tm96b.b4[0][0])}else adj96(BAL.arc.h96.tm96b.b4[0][1])},rt:"Khi người soát cung đến, rương ngươi sạch như gương.",rf:"Người soát cung đến sớm hơn ngươi tưởng, kịp thấy một góc thư."},
+  {n:"Soát cung trước, tiêu hủy mọi thứ",o:()=>40+eyes(S)*6+(A96has("maid")?15:0),go:(A,ok)=>{if(ok){const m=man96();if(m){m.letters=0;if(S.aff)S.aff[m.id]=0}T96().ev=0;T96().tok=0;adj96(BAL.arc.h96.tm96b.b4[0][0])}else adj96(BAL.arc.h96.tm96b.b4[0][1])},rt:"Khi người soát cung đến, rương ngươi sạch như gương.",rf:"Người soát cung đến sớm hơn ngươi tưởng, kịp thấy một góc thư."},
   {n:"Nhờ {lvn} ra tay xóa dấu",if:()=>tinh96()>=40,o:()=>40+tinh96()/3,go:(A,ok)=>{adj96(BAL.arc.h96.tm96b.b4[1][0]);if(ok){T96().ev=0}else{T96().hurt=(T96().hurt||0)+1;adj96(BAL.arc.h96.tm96b.b4[1][1])}},rt:"Đêm ấy, mọi dấu vết biến mất. Người làm việc đó là chàng.",rf:"Chàng bị bắt gặp gần cung ngươi lúc nửa đêm, phải viện cớ tuần tra mới thoát."},
   {n:"Bình thản chờ, tin mình trong sạch",if:()=>!hasEv96(),go:(A,ok)=>{if(!ok)adj96(BAL.arc.h96.tm96b.b4[2])},rt:"Bức thư giả bị thái y nghiệm ra mực mới. Kẻ giá họa mất mặt.",rf:"Không ai chứng minh được thư giả, lời đồn vẫn bay."}]},
  b5:{h:"Hoàng thượng thử lòng",w:"emp",need:["nsrv"],t:"Yến tiệc trong cung. Hoàng thượng chợt gọi {lv} đến trước mặt, rồi quay sang ngươi: “{Goi} rót cho khanh ấy một chén. Trẫm nghe nói hai người là chỗ quen biết cũ.”",o:[
@@ -204,7 +204,7 @@ ARC67.tm96c=arcFx("tm96c",{o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lựa chọn c
   {n:"“Hãy sống tốt, đừng chờ ta”",go:()=>{adj96(BAL.arc.h96.tm96c.c3b[0]);A96f("cut")},rt:"Chàng đọc xong, đốt thư, rồi đi uống rượu suốt đêm."},
   {n:"“Lòng ta vẫn như năm ấy”",go:()=>adj96(BAL.arc.h96.tm96c.c3b[1]),rt:"Một dòng chữ, mà đủ làm chàng sống lại."}]},
  c4a:{h:"Đòn cuối của kẻ thù",w:"v",need:["v"],vf:v=>gate96(v,"accuse"),t:"{v} quỳ trước Hoàng thượng, dâng lên một xấp giấy: lời khai của một cung nhân về ngươi và {lv}. Thật giả lẫn lộn.",o:[
-  {n:"Tìm ra kẽ hở trong lời khai",o:()=>40+S.tamco/4+(S.mat||0)*5+(A96has("leverage")?15:0),go:(A,ok,G)=>{const v=rv67(A,"v");if(ok&&v)e67pun(v,G[0]);else adj96(BAL.arc.h96.tm96c.c4a[0])},rt:"Ngươi chỉ ra ba chỗ mâu thuẫn. Lời khai sụp đổ, {v} bị trách phạt.",rf:"Lời khai có phần thật. Hoàng thượng nhìn ngươi lâu hơn."},
+  {n:"Tìm ra kẽ hở trong lời khai",o:()=>40+S.tamco/4+eyes(S)*5+(A96has("leverage")?15:0),go:(A,ok,G)=>{const v=rv67(A,"v");if(ok&&v)e67pun(v,G[0]);else adj96(BAL.arc.h96.tm96c.c4a[0])},rt:"Ngươi chỉ ra ba chỗ mâu thuẫn. Lời khai sụp đổ, {v} bị trách phạt.",rf:"Lời khai có phần thật. Hoàng thượng nhìn ngươi lâu hơn."},
   {n:"Đổi chác: im chuyện của nàng ta lấy chuyện của mình",if:()=>A96has("leverage"),go:()=>adj96(BAL.arc.h96.tm96c.c4a[1]),rt:"{v} rút đơn, nói rằng mình nghe lầm."},
   {n:"Nhận phần nhỏ, che phần lớn",go:(A,ok)=>adj96({sus:ok?BAL.arc.h96.tm96c.c4a[2].sus[0]:BAL.arc.h96.tm96c.c4a[2].sus[1]}),rt:"Ngươi nhận có quen biết cũ, mọi thứ khác đều là bịa đặt. Hoàng thượng tạm tin.",rf:"Thừa nhận một nửa, người ta đoán được nửa kia."}]},
  c4b:{h:"Sóng ngầm trong triều",w:"lv",t:"Có người dâng sớ hặc tội {lv}, kể cả những việc chàng từng làm vì ngươi. Chàng có thể khai ra ngươi để tự cứu, mà chàng không khai.",o:[

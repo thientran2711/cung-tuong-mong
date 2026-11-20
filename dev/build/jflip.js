@@ -84,7 +84,7 @@ function kitEmpHand(hand,tel,opt){opt=opt||{};const H=CF.hand,SH=H.shadow,hi=han
 window.kitEmpHand=kitEmpHand;
 function byId(id){if(id==="me")return S;return (typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===id)||null}
 function rk(p){try{return p===S?S.rank:rkOf(p)}catch(e){return p&&p.rank||0}}
-function cycleOf(p){try{if(typeof inCycle==="function")return !!inCycle(p);if(typeof cycleDaysOf==="function"){const d=cycleDaysOf(p,S.month);return Array.isArray(d)&&d.includes(S.tuan)}}catch(e){}return false}
+function cycleOf(p){try{if(typeof cyTray==="function")return !!cyTray(p);if(typeof inCycle==="function")return !!inCycle(p);if(typeof cycleDaysOf==="function"){const d=cycleDaysOf(p,S.month);return Array.isArray(d)&&d.includes(S.tuan)}}catch(e){}return false}
 function known(p){try{return typeof kitKnownName==="function"?kitKnownName(p):true}catch(e){return true}}
 function rankName(p){const r=rk(p);return r>=7?"Hoàng hậu":(RANKS[Math.max(0,r)]||{}).n||""}
 function nameOf(p){return p===S?S.name:known(p)?p.name||"":"???"}
@@ -115,7 +115,7 @@ function plateBox(){const vw=innerWidth,vh=innerHeight;const P=PL(),R=P.rim;cons
 /* ---------- the scene ---------- */
 function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
  const me=o.pick==="me"&&o.turned==="me";const sp=me?1:CF.other;const SL=CF.slow||1;const T={};for(const k in CF.t)T[k]=CF.t[k]*sp;const still=red();
- const ov=document.createElement("div");ov.className="kmov kcf"+(still?" km-red":" kcf-act");ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Lật thẻ bài");ov.style.setProperty("--kcf-s",SL);ov.__t0=performance.now();
+ const ov=document.createElement("div");ov.className="kmov kcf km-full"+(still?" km-red":" kcf-act");ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Lật thẻ bài");ov.style.setProperty("--kcf-s",SL);ov.__t0=performance.now();
  const B=plateBox();const P=PL();let F=P.fa;let fx=B.W*F.x0,fy=B.H*F.y0,FW=B.W*(F.x1-F.x0),FH=B.H*(F.y1-F.y0);
  const toB=()=>{F=P.fb;fx=B.W*F.x0;fy=B.H*F.y0;FW=B.W*(F.x1-F.x0);FH=B.H*(F.y1-F.y0);after=grid(Math.max(1,keep.length),FW,FH);keep.forEach((c,i)=>keepPos.set(c,after[i]))};
  const all=grid(deck.length,FW,FH);const keep=deck.filter(c=>!c.bar);let after=grid(Math.max(1,keep.length),FW,FH);
@@ -227,7 +227,7 @@ try{if(typeof lifeStore==="function")lifeStore("flip scene",()=>{life++;try{cur&
 if(typeof stealNight==="function"){const s0=stealNight;stealNight=function(v,t){if(inFlip&&stoleFrom==null&&t)stoleFrom=t===S?"me":t.id;return s0.apply(this,arguments)}}
 if(typeof kitFlipTablet==="function"){const a0=kitFlipTablet;kitFlipTablet=function(){if(inFlip)return;return a0.apply(this,arguments)}}
 if(typeof kitFlipNote==="function"){const b0=kitFlipNote;kitFlipNote=function(){if(inFlip)return;return b0.apply(this,arguments)};window.kitFlipNote=kitFlipNote}
-function want(){return typeof S!=="undefined"&&S&&!S.dead&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)&&!(typeof isSrv==="function"&&isSrv())&&typeof kmPush==="function"}
+function want(){return typeof S!=="undefined"&&S&&!S.dead&&!screenOff()&&!(typeof isSrv==="function"&&isSrv())&&typeof kmPush==="function"}
 function cfPlan(){const d=S.nightWhy;if(!d||(typeof wk==="function"&&d.wk!==wk()))return null;
  const was=S.tonight;const pick=d.pick||null;const turned=stoleFrom||d.flip0||pick;
  if(!turned&&CF.skipNoPick)return null;return{wk:d.wk,pick,turned,cause:d.cause}}

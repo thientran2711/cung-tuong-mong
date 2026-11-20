@@ -48,15 +48,16 @@ function knownList(v){const out=[],seen=new Set();if(!v||v===S)return out;
  const nm=v.name,rk=typeof rkName==="function"?rkName(v):"";
  const esc=x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
  const short=t=>{let s=T(t).replace(/\.\s*$/,"");s=s.replace(new RegExp("^(?:"+esc(rk)+"\\s+)?"+esc(nm)+"\\s+"),"");s=s.replace(new RegExp("(?:"+esc(rk)+"\\s+)?"+esc(nm),"g"),"nàng");s=s.replace(/^nàng\s+/i,"");return cap(s)};
- const add=(fact,src,when)=>{const f=short(fact);if(!f||f.length<3)return;const k=f.replace(/\d+/g,"#").toLowerCase();if(seen.has(k))return;seen.add(k);out.push({f,src:T(src),when:T(when)})};
- try{const L=typeof intelOf==="function"?intelOf(v):[];for(let i=L.length-1;i>=0;i--){const x=L[i];if(x.current===false)continue;add(x.fact,x.by&&typeof x.by==="object"?x.by.name:x.by,x.when)}}catch(e){}
+ const add=(fact,src,when,how)=>{const f=short(fact);if(!f||f.length<3)return;const k=f.replace(/\d+/g,"#").toLowerCase();if(seen.has(k))return;seen.add(k);out.push({f,src:T(src),when:T(when),how:T(how||"")})};
+ try{const L=typeof intelOf==="function"?intelOf(v):[];for(let i=L.length-1;i>=0;i--){const x=L[i];if(x.current===false)continue;add(x.fact,x.by&&typeof x.by==="object"?x.by.name:x.by,x.when,x.how)}}catch(e){}
  try{kn();for(const n of (S.notes[v.id]||[])){let t=T(n),when="",src="";const m=t.match(/^(T\d+\/\d+ \S+ tuần):\s*/);if(m){when=m[1];t=t.slice(m[0].length)}
    const s2=t.match(/^([^:]{2,30}?) (dò được|kể|báo|nghe được):\s*/);if(s2){src=s2[1]+" "+s2[2];t=t.slice(s2[0].length)}
-   t.split(kRx("(?<=\\.)\\s+","")).forEach(x=>add(x.replace(/\.$/,""),src,when))}}catch(e){}
+   let how="";const s3=t.match(/^(Dò được|Chuyện trò|Dâng quà hợp ý|Dâng quà sai ý|Bị từ chối quà):\s*/);if(s3){how=s3[1];t=t.slice(s3[0].length)}/* pcard-facts: the "how" is detail (tap), never a prefix of the fact */
+   t.split(kRx("(?<=\\.)\\s+","")).forEach(x=>add(x.replace(/\.$/,""),src,when,how))}}catch(e){}
  return out}
 window.kitKnownList=knownList;
 function knownCol(v,max){const L=knownList(v);if(!L.length)return `<div class="kr3r"><b class="kr3h">Đã biết về ${v.name}</b><p class="kr3none">Chưa biết gì thêm. Dò la, hỏi kẻ hầu để biết.</p></div>`;
- const li=L.slice(0,max||4).map(x=>`<li><span>${x.f}</span>${x.src||x.when?`<small>${[x.src,x.when].filter(Boolean).join(" · ")}</small>`:""}</li>`).join("");
+ const li=L.slice(0,max||4).map(x=>`<li><span>${typeof kitFactTap==="function"?kitFactTap(x.f,x):x.f}</span></li>`).join("");
  return `<div class="kr3r"><b class="kr3h">Đã biết về ${v.name}</b><ul class="kr3l">${li}</ul>${L.length>(max||4)?`<button class="chip kchipb kr3more" data-kintel="${v.id}">Xem thêm ${L.length-(max||4)} điều ›</button>`:""}</div>`}
 
 /* ---------- THẺ QUAN HỆ 3 CỘT ---------- */
@@ -85,7 +86,7 @@ const relGrp=k=>k==="me"?"Ta":k==="emp"||k==="th"?"Chí tôn":"Phi tần";
 const relSeps=L=>L.map((x,i)=>Object.assign({},x,{sep:i&&relGrp(L[i-1].k)===relGrp(x.k)?"":relGrp(x.k)}));
 function relItems(){return relSeps([{k:"me"},{k:"emp"}].concat(S.thDead?[]:[{k:"th"}],liveRivals(true).map(v=>({k:v.id}))))}
 /* KIT 49.2c: strip label = kitNameRank (rank in its rank colour over the short name); Ta keeps her kmy glow */
-const stripItem=(x,q)=>({small:true,f:q.f,name:x.k==="me"?"Ta":x.k==="emp"||x.k==="th"?q.name:q.name.split(" ").length>2?q.name.split(" ").slice(-2).join(" "):q.name,rank:q.rank||"",col:q.col,me:x.k==="me"||undefined,sep:x.sep,dim:q.met===false});
+const stripItem=(x,q)=>({small:true,sz:"xs",f:q.f,name:x.k==="me"?"Ta":x.k==="emp"||x.k==="th"?q.name:q.name.split(" ").length>2?q.name.split(" ").slice(-2).join(" "):q.name,rank:q.rank||"",col:q.col,me:x.k==="me"||undefined,sep:x.sep,dim:q.met===false});
 /* KIT §49.2b (owner 11/15 "small tabs + a person strip like Hậu cung"): each picker = a row of small kit sub-tabs (kitSubTabs, §46: Ta ·
    Chí tôn · Phi tần with their head counts) over the Hậu cung pager strip of THAT group only (no group labels inside the strip). The X tab
    follows relSel when an outside link sets it; Y keeps its own tab (default the group of Ta, i.e. her own relation with X). */
@@ -118,7 +119,7 @@ function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"
 /* "Đã biết về X" = facts about X only (each with its source); X = Ta → the box is hidden (her own facts are in her Tư chất / Mệnh truyện) */
 function relPair(X,Y){const p=X.p,o=Y.p;const strangers=[X,Y].filter(q=>q.met===false);
  const note=strangers.map(q=>`<p class="kr3note">Ta chưa gặp ${q.name}, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt.</p>`).join("")+
-  (p!==S&&o===S&&p!=="emp"&&p!=="th"&&sameHouse(S,p)?`<p class="kr3note">Cùng ${houseName(p)} với ta.</p>`:"");
+  (p!==S&&o===S&&p!=="emp"&&p!=="th"&&sameHouse(S,p)?`<p class="kr3note">Cùng ${houseCung(p)} với ta.</p>`:"");
  const btn=p!==S&&p!=="emp"&&p!=="th"&&X.met!==false?seeBtn(p):"";
  const known=p!==S&&p!=="emp"&&p!=="th"&&X.met!==false?knownCol(p):"";
  return `<div class="krelpair"><h4 class="krelh">Quan hệ giữa ${X.k==="me"?"ta":X.name} và ${Y.k==="me"?"ta":Y.name}</h4>`+
@@ -247,16 +248,16 @@ const st=document.createElement("style");st.id="kit-hc";st.textContent=`
 html body :is(#panel,#kitpage) .krelpk{display:flex;flex-wrap:wrap;align-items:center;gap:0 8px;margin:0 0 2px;padding:0}
 html body :is(#panel,#kitpage) .krelpk>.krelst{margin:0;flex:0 0 auto;line-height:1.2}
 html body :is(#panel,#kitpage) .krelpk>.kcattabs.ktsub{margin:0!important;padding:2px 0!important;background:transparent!important;box-shadow:none!important;flex:0 1 auto;width:auto;min-width:0;overflow-x:auto}
-html body :is(#panel,#kitpage) .krelpk>.pstrip{flex:1 1 300px;margin:0!important;gap:3px!important}
+html body :is(#panel,#kitpage) .krelpk>.pstrip{flex:1 1 190px;margin:0!important;gap:3px!important}
 html body :is(#panel,#kitpage) .krelpk .pstrip>.parr{min-height:34px!important;min-width:26px!important;width:26px;font-size:1.1rem}
 html body :is(#panel,#kitpage) .krelpk .pface{min-height:0!important;min-width:40px;padding:1px 2px!important;gap:0}
 html body :is(#panel,#kitpage) .krelpk .pface .knr{display:flex;flex-direction:column;align-items:center;min-height:0;gap:0;line-height:1.05}
 html body :is(#panel,#kitpage) .krelpk .pface:not(.on) .knr>.knr-n{font-weight:500}
-.krelh{margin:10px 0 6px;font-family:var(--display);font-size:1.02rem;color:var(--ink,#3a2418)}
-.krel3.krpair{grid-template-columns:minmax(100px,150px) minmax(0,1fr) minmax(100px,150px);align-items:start}
+.krelh{margin:4px 0 4px;font-family:var(--display);font-size:1.02rem;color:var(--ink,#3a2418)}
+.krel3.krpair{grid-template-columns:minmax(88px,104px) minmax(0,1fr) minmax(88px,104px);align-items:start}
 .krpair>.kr3p{gap:4px}.krpair>.kr3p>.knr{min-height:2.6em;justify-content:flex-end}
-.krelpair>.kr3r{padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--k-card,#fffaf0)}
-@container (max-width:560px){.krel3.krpair{grid-template-columns:1fr 1fr}.krel3.krpair>.kr3p{max-width:150px;margin:0 auto}.krel3.krpair>.kr3m{grid-column:1/-1;grid-row:2;border-top:1px dashed var(--line);padding-top:6px}}
+.krel3.krpair>.kr3m{align-self:center}.krelpair>.kr3r{margin-top:4px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--k-card,#fffaf0)}
+@container (max-width:560px){.krel3.krpair{grid-template-columns:1fr 1fr}.krel3.krpair>.kr3p{max-width:104px;margin:0 auto}.krel3.krpair>.kr3m{grid-column:1/-1;grid-row:2;border-top:1px dashed var(--line);padding-top:6px}}
 .kr3note{margin:0;font-size:.74rem;color:var(--dim)}
 .kr3act{margin-top:4px;min-width:0;max-width:100%}
 html body #panel .krel3 .kr3act button.ka,html body #panel .krel3 .kr3act .card,html body #panel .krel3 .kr3act .kcard{width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important;flex:1 1 auto!important}

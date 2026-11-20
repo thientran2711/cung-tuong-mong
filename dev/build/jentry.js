@@ -42,7 +42,7 @@ function entSkipRaw(){try{return Math.round(kg82NpcMean(entArtLv(entKind(entBest
 function entFx(t){const f=BAL.entry.fx[t];if(f&&Object.keys(f).length)try{apply(f)}catch(e){console.error(e)}}
 /* who judges, what the top result is called, per road */
 function entCtx(o){const road=entRoad();const k=S.origin&&S.origin.k;const top=(S.origin&&S.origin.r)||0;const srv=k==="cnv";
- if(o&&o.phuc)return{road:"",head:"Phúc tuyển",judge:"Ma ma, nữ quan Trữ Tú cung",also:"cộng vào Điện tuyển cùng Sắc, Tài, Đức, Danh"};
+ if(o&&o.phuc)return{road:"",head:"Phúc tuyển",judge:"Ma ma, nữ quan Nội vụ phủ",also:"cộng vào Điện tuyển cùng Sắc, Tài, Đức, Danh"};
  if(srv)return{road,head:"Tuyển cung nữ",judge:"Ma ma Nội vụ phủ",also:`Sắc, Đức${road==="dan"?", khéo tay và lễ nghi học ở nhà, tiếng trong xóm, lời lý trưởng":""}`,topN:"phi tần bậc cao",srv:1};
  if(road==="nc")return{road,head:"Lễ ra mắt",judge:"Hoàng thượng, Thái hậu, bá quan",also:"Sắc, Tài, Đức, lễ nghi Đại Hy, lòng Thái hậu, lời sứ thần",topN:RANKS[top].n};
  return{road,head:"Tuyển chọn trước ngày phong",judge:"Hoàng thượng, Thái hậu",also:`Sắc, Tài, Đức, tài nghệ${(S.th||0)>=20?", lòng Thái hậu":""}`,topN:RANKS[top].n,flat:top<=0}}
@@ -57,10 +57,11 @@ function entExam(o,fin){o=o||{};let art=o.art||"";let k=entKind(art);if(!k||entW
   rows.push([X.flat?"Được để mắt":X.srv?"Về hầu phi tần bậc cao":`Lên tới ${X.topN}`,`để tài nghệ quyết định: ${entWord(pS)} · chơi xuất sắc: ${entWord(pG)}`,"n"])}
  const box=kg82Box();KG82.phase="intro";
  box.innerHTML=`<h4 class="kpst">${X.head}</h4>`+kg82Rows(rows)+
-  `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>tính ${SK}/10, như người cùng bậc</small></button></div>`;
+  `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`tính ${SK}/10, như người cùng bậc`})}</div>`;
  const after=(raw,sk)=>{KG82.phase="result";kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");
   kg82ShowRes(kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"],["Kết quả",o.note||"tính cùng Sắc, Tài, Đức","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
   $("kg82ok").onclick=()=>{kg82Close();end(raw)}};
+ kgReady(box,{kind:k});/* KIT §13.7 */
  $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)}
 /* the ONE seam (contract set by review/kc-roads-cn-nc-r1 at jkc2 kc2Play): kcEntryExam(kind, done(raw 0..10), info{art,origin,title,note}) */
 window.kcEntryExam=function(kind,fin,info){if(kind&&typeof kind==="object"){const o=kind;kind=null;info=o}info=info||{};entExam(Object.assign({},info,{kind}),fin)};
@@ -82,7 +83,7 @@ const ENT_INTRO={
  dtq:["Cha ngươi giữ binh quyền biên ải. Ngươi lớn lên giữa tiếng trống trận và bãi tập ngựa, chân cứng đá mềm.","Hoàng thượng cần lòng trung của Đại tướng quân; ngươi là sợi chỉ buộc lòng trung ấy vào cung cấm."],
  muoi:["Nhà ngươi giàu nhờ muối: thuyền muối của cha ngươi đi khắp các bến sông phương nam.","Bạc mua được lụa gấm, mua được một chỗ trong sổ tuyển; nhưng trong cung, người ta vẫn gọi sau lưng ngươi là con nhà buôn."],
  cn:["Ba năm nay ngươi hầu trà ở Càn Thanh cung. Ngươi biết Hoàng thượng thích nước trà thứ hai, biết thái giám nào nói thật, ma ma nào ăn bạc.","Một đêm mưa, Hoàng thượng giữ ngươi lại. Từ cung nữ thành chủ tử chỉ cách một lời khẩu dụ, và bao nhiêu ánh mắt."],
- nc:["Nam Chiếu ở xa về phương nam, nơi hồ Nhĩ Hải phẳng như gương, sơn trà nở quanh năm.","Hòa ước đổi lấy mười năm yên ổn nơi biên giới; cái giá của hòa ước là ngươi. Thái hậu không ưa người ngoại tộc."],
+ nc:["Cao Ly ở xa về phương đông, nơi biển Hải Đông xanh thẫm, hoa mai nở đầu xuân.","Hòa ước đổi lấy mười năm yên ổn nơi biên giới; cái giá của hòa ước là ngươi. Thái hậu không ưa người nước phiên."],
  bd:["Thảo nguyên Bắc Địch mênh mông, gió thổi rạp cỏ tới chân trời. Ngươi cưỡi ngựa trước khi biết đi giày thêu.","Ba trăm con ngựa theo ngươi làm của hồi môn, đổi lấy hòa ước mười năm với Đại Hy."],
  td:["Cả nhà ngươi bị xử trảm vì một bản sớ vu cáo. Người thế giao đổi tên ngươi trong sổ tuyển để giữ một đường sống.","Ngươi vào cung với cái tên không phải của mình, mang theo mối thù chưa ai hay."],
  ch:["Thái hậu là cô ruột của ngươi; từ nhỏ ngươi đã quen từng lối đi trong Từ Ninh cung.","Thái hậu muốn một người nhà mình đứng cạnh Hoàng thượng. Có người chống lưng là may, nhưng phẩm vị vẫn phải tự mình giành lấy."],

@@ -114,10 +114,10 @@ function j95bCheck(id,pp){const L=j95bActors(id,pp);if(L==null)return null;if(L.
  for(const r of L){r.g=j95bJudge(r);
   if(!r.g.ok&&!r.role.nb&&!r.role.nr&&id.indexOf("e68")!==0&&P95B[id]&&!r.xtra&&r.raw!=null&&!r.role.key){/* re-pick a person who passes */
    const others=L.filter(x=>x!==r&&x.o).map(x=>x.o).concat([r.by,r.t].filter(Boolean));const C=liveRivals(false).filter(v=>!others.includes(v)&&!v.confined&&j95bJudge(Object.assign({},r,{o:v,t:r.role.to?(L.find(x=>x.slot===r.role.to)||{}).o:r.t})).ok);
-   if(C.length){const w=r.role.w;const v=w?j95pw(C.map(x=>[x,w(x)])):C[Math.floor(Math.random()*C.length)];pp[r.slot]=v.id;r.o=v;r.g=j95bJudge(r);J95B.stat.repick++;
+   if(C.length){const w=r.role.w;const v=w?j95pw(C.map(x=>[x,w(x)])):npwPick(C,x=>1+Math.max(0,hostility(x,r.t||S)));pp[r.slot]=v.id;r.o=v;r.g=j95bJudge(r);J95B.stat.repick++;
     for(const x of L)if(x.role.to===r.slot)x.t=v}}
   if(r.xtra&&!r.g.ok){/* pact needs a reason against the Hoàng hậu too: re-pick the ally */const C=liveRivals(false).filter(v=>j95bGate({f:"ally"},v,S,"ally").ok&&j95bGate({h:"plot"},v,rivals[0],"plot").ok);
-   if(C.length&&pp.v!=null){const v=C[Math.floor(Math.random()*C.length)];pp.v=v.id;const a=L.find(x=>x.slot==="v");a.o=v;a.g=j95bJudge(a);r.o=v;r.g=j95bJudge(r);J95B.stat.repick++}}}
+   if(C.length&&pp.v!=null){const v=npwPick(C,x=>1+Math.max(0,hostility(x,rivals[0]))+Math.max(0,aff(x,S)));pp.v=v.id;const a=L.find(x=>x.slot==="v");a.o=v;a.g=j95bJudge(a);r.o=v;r.g=j95bJudge(r);J95B.stat.repick++}}}
  const bad=L.filter(r=>!r.g.ok&&!r.role.nb);return{ok:!bad.length,list:L,bad}}
 
 /* ---------------- 2. PLACES IN WORDS ---------------- */
@@ -127,7 +127,7 @@ const LEX95B=[[/ngự hoa viên|vườn ngự|hòn non bộ|thái dịch trì|th
 const NOW95B=/lời đồn|đồn |đồn:|rỉ tai|nghe nói|bóng gió|\bhay |thường|từng |hôm nọ|hôm qua|đêm qua|năm xưa|trước đây|\bsẽ |ngày mai|tối mai|đêm nay|tối nay|\bsắp |\bmuốn |(?:^|\s)định |\bnếu |\(sai |sai người|\bhứa|mơ thấy|vọng sang|có thể|nghi |\bmời .* ra |ngày rằm/;
 const AGENT95B=/(người của|người bên|cung nữ của|cung nữ bên|thái giám của|thái giám bên|kẻ hầu của|người hầu của|con của|cung|tặng|cho|của|về|nhắm vào|hại|vu|bắt|thăm|giúp|tố|với)\s*$/;
 function j95bStrip(h){return String(h||"").replace(/<br\s*\/?>/gi,". ").replace(/<\/p>/gi,". ").replace(/<[^>]+>/g," ").replace(/&nbsp;/g," ").replace(/\s+/g," ")}
-function j95bScan(h){/* → [{id,k,why}] who the words place where, now */const out=[];const txt=j95bStrip(h);const sents=txt.split(/(?<=[.!?…][)"”']?)\s+|\s*;\s*/);
+function j95bScan(h){/* → [{id,k,why}] who the words place where, now */const out=[];const txt=j95bStrip(h);const sents=txt.split(/\s*;\s*/).flatMap(x=>x.split(kRx("(?<=[.!?…][)\"”']?)\\s+","")));
  const L=liveRivals(true).concat(rivals.filter(v=>v.alive&&v.out)).map(v=>[v,v.name]).filter(x=>x[1]).sort((a,b)=>b[1].length-a[1].length);
  for(const s0 of sents){const s=s0.trim();if(!s)continue;const lo=s.toLowerCase().replace(/phe (càn ninh|đức thọ|từ ninh|dưỡng hòa|cần chính)\S*/g,"").replace(/sổ (sách )?kính sự phòng/g,"sổ");const lo2=j95bNoTitles(lo);if(NOW95B.test(lo2))continue;const k=j95bLexNow(lo2);if(!k)continue;
   const used=[];for(const [v,nm] of L){let i=s.indexOf(nm);while(i>=0){if(!used.some(u=>i>=u[0]&&i<u[1])){used.push([i,i+nm.length]);const pre=s.slice(Math.max(0,i-18),i).toLowerCase();
@@ -170,7 +170,7 @@ function j95bLexNow(lo){for(const [re,c] of LEX95B){const g=new RegExp(re.source
 function j95bLexOf(t){const lo=String(t||"").toLowerCase();for(const [re,c] of LEX95B)if(re.test(lo))return c;return null}
 
 function j95bPastText(r,src){/* bind every "X ... at <place>" sentence of a turn report to the buổi just ended; drop false ones */
- const parts=String(r).split(/(?<=[.!?][)"”']?)\s+/);const keep=[];
+ const parts=String(r).split(kRx("(?<=[.!?][)\"”']?)\\s+",""));const keep=[];
  for(const sen of parts){const L=j95bScan(sen);let drop=false;for(const x of L){if(x.id[0]!=="v")continue;const v=RV(+x.id.slice(1));if(!v)continue;
    if((v.out&&x.k!=="lc")||(v.confined&&x.k!==palaceOf(v))){drop=true;break}if(j95bPutPast(x.id,x.k,"here",x.why,src)==="seen"){drop=true;break}}if(!drop)keep.push(sen)}
  return keep.join(" ")}
@@ -201,7 +201,7 @@ function j95bClaim(y){/* true if she really harmed y (her own acts), else the sp
  let L=RUMF95B.slice();if((y.sung||0)<20)L=["xui Hoàng thượng lạnh nhạt với nàng","mua chuộc Kính sự phòng giấu thẻ bài của nàng"];return{txt:L[Math.floor(Math.random()*L.length)],truth:false}}
 function j95bSeed(x,y,how,claim){/* x spreads to y that SHE harmed y. x = rival or null (unknown) */if(!y||!y.alive||y.out||y===x||y===S)return null;const z=j95bZ();
  if(y.j95rum&&y.j95rum[key(S)]&&wk()-y.j95rum[key(S)].w<=J95B.RUMW)return null;
- const c=claim||j95bClaim(y);const pers=x?Math.max(0,aff(y,x))/4+(x.tai||40)/10:5;const credo=cl(Math.round(45+pers-Math.max(0,aff(y,S))/3+(nv(y,"coverUp"))+(c.truth?20:0)),5,90);
+ const c=claim||j95bClaim(y);const pers=x?Math.max(0,aff(y,x))/4+(x.tai||40)/10:5;const credo=oddsCl(Math.min(Math.round(45+pers-Math.max(0,aff(y,S))/3+(nv(y,"coverUp"))+(c.truth?20:0)),90));
  if(!j95dice(credo))return null;
  const oa=Math.round(18+pers),af=12;oanAdd(y,S,oa);affAdd(y,S,-af);const src=x?x.name:"không rõ";
  y.j95rum=y.j95rum||{};y.j95rum[key(S)]={txt:"ngươi "+c.txt,src,w:wk()};
@@ -209,7 +209,7 @@ function j95bSeed(x,y,how,claim){/* x spreads to y that SHE harmed y. x = rival 
  j95bAct("v"+y.id,"misbelief","me",{ok:true,ex:1,why:`tin đồn: ngươi ${c.txt}, nguồn: ${src} (${c.truth?"chuyện có thật":"bịa đặt"}; qua ${how})`},"rumor:"+how);
  if(x)j95bAct("v"+x.id,"rumor","v"+y.id,{ok:true,why:`rỉ tai ${y.name} rằng ngươi ${c.txt}`},"rumor:"+how);
  J95B.stat.rum++;if(c.truth)J95B.stat.rumTrue++;J95B.rumLog.push({w:wk(),y:y.id,x:x?x.id:null,how,truth:c.truth?1:0});if(J95B.rumLog.length>200)J95B.rumLog.splice(0,50);
- /* she hears of it only as hearsay */const hear=cl(15+(S.mat||0)*12+(spyOther95b(y)?25:0),5,80);if(j95dice(hear))j95bHear(r);return r}
+ /* she hears of it only as hearsay */const hear=oddsCl(Math.min(15+eyes(S)*12+(spyOther95b(y)?25:0),80));if(j95dice(hear))j95bHear(r);return r}
 function spyOther95b(y){try{return typeof spyIn70==="function"&&spyIn70(S,y)}catch(e){return false}}
 function j95bHear(r){const y=RV(r.y);if(!y||!y.alive)return;r.known=1;J95B.stat.heard++;const x=r.x!=null?RV(r.x):null;
  const src=x?`người bên cung ${x.name}`:"có kẻ";const txt=`Nghe đồn ${src} đã rỉ tai ${y.name} rằng ngươi ${r.txt}. Dạo này ${y.name} nhìn ngươi lạnh hẳn đi.`;
@@ -217,13 +217,13 @@ function j95bHear(r){const y=RV(r.y);if(!y||!y.alive)return;r.known=1;J95B.stat.
  Q.push({t:"Nghe đồn",who:pv(y),opt:1,h:`<p>${txt}</p><p><i>(Lời đồn; ngươi chưa thể chắc ai đã nói gì.)</i></p>`,rum95:r.u,
   opts:j95bRumOpts(r,y,x)})}
 /* port 16/11 (owner 11/15 07:15Z): whole Tốn / Được / Mất + odds word on every option */
-function j95bRumOpts(r,y,x){const oc=j95bClearOdds(r),ot=cl(35+(S.mat||0)*8+(S.tamco||0)/4,5,90);
+function j95bRumOpts(r,y,x){const oc=j95bClearOdds(r),ot=oddsCl(Math.min(35+eyes(S)*8+(S.tamco||0)/4,90));
  return[{n:`Sang gặp ${y.name} giải bày`,fx:{},x:`${word(oc)} · tốn: ${BAL.m95b.k} khắc · thành: hết hiểu lầm, ${y.name} bớt oán ngươi · hỏng: ${y.name} chưa tin, oán ngươi ${balSg(BAL.eff.j95b.j95bClear_3)} · (chuyện có thật thì khó giải, chỉ nguôi một nửa)`,go:()=>j95bClear(r.u,"card")},
   {n:"Cho người tra xem ai tung tin",fx:{...BAL.m95b.trace},x:`${word(ot)} · tốn: ${BAL.m95b.k} khắc · Bạc ${BAL.m95b.trace.bac} · thành: biết kẻ tung tin, chứng cứ về kẻ ấy ${balSg(BAL.eff.j95b.evJ95bTrace)} · giải bày về sau dễ hơn · hỏng: không lần ra ai`,go:()=>j95bTrace(r.u)},
-  {n:"Mặc kệ",fx:{},x:`Nắm chắc · kèm: ${y.name} vẫn tin lời đồn, sẽ tìm dịp ra tay với ngươi`,go:()=>log(`Ngươi bỏ ngoài tai lời đồn về ${y.name}.`)}]}
+  {n:"Mặc kệ",fx:{},x:`kèm: ${y.name} vẫn tin lời đồn, sẽ tìm dịp ra tay với ngươi`,go:()=>log(`Ngươi bỏ ngoài tai lời đồn về ${y.name}.`)}]}
 function j95bRumOf(y){const z=j95bZ();for(let i=z.rum.length-1;i>=0;i--){const r=z.rum[i];if(r.y===y.id&&!r.cleared&&wk()-r.w<=J95B.RUMW+4)return r}return null}
-function j95bClearOdds(r){const y=RV(r.y),x=r.x!=null?RV(r.x):null;if(!y)return 5;if(r.truth)return cl(Math.round(12+(S.duc||0)/8),5,30);
- return cl(Math.round(40+(S.tai||0)/5+(S.duc||0)/6+(r.traced?20:0)+(x&&evG(S,x)>=1?15:0)-(nv(y,"traceHide"))),5,90)}
+function j95bClearOdds(r){const y=RV(r.y),x=r.x!=null?RV(r.x):null;if(!y)return 5;if(r.truth)return oddsCl(Math.min(Math.round(12+(S.duc||0)/8),30));
+ return oddsCl(Math.min(Math.round(40+(S.tai||0)/5+(S.duc||0)/6+(r.traced?20:0)+(x&&evG(S,x)>=1?15:0)-(nv(y,"traceHide"))),90))}
 function j95bClear(u,how,face){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if(!r)return"";const y=RV(r.y);if(!y||!y.alive)return"";if(!face&&typeof can==="function"&&can(BAL.m95b.k))spend(BAL.m95b.k);
  J95B.stat.clear++;const o=j95bClearOdds(r);const x=r.x!=null?RV(r.x):null;let msg;
  if(j95dice(o)){r.cleared=1;J95B.stat.clearOk++;if(y.j95rum)delete y.j95rum[key(S)];
@@ -233,19 +233,19 @@ function j95bClear(u,how,face){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if
  else{oanAdd(y,S,BAL.eff.j95b.j95bClear_3);msg=r.truth?`${y.name} không nghe: chuyện ấy có thật.`:`${y.name} chưa tin lời ngươi.`}
  log(msg);if(!face)Q.push({t:"Giải bày",who:pv(y),h:`<p>${msg}</p>`});return msg}
 function j95bTrace(u){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if(!r)return"";if(typeof can==="function"&&can(BAL.m95b.k))spend(BAL.m95b.k);J95B.stat.trace++;const x=r.x!=null?RV(r.x):null;const y=RV(r.y);
- let msg;if(x&&x.alive&&j95dice(cl(35+(S.mat||0)*8+(S.tamco||0)/4,5,90))){r.traced=1;evA(S,x,BAL.eff.j95b.evJ95bTrace);try{noteAdd(x.id,`tra ra: người của nàng đã rỉ tai ${y?y.name:"một phi tần"} để gây hiểu lầm với ngươi`)}catch(e){}
+ let msg;if(x&&x.alive&&j95dice(oddsCl(Math.min(35+eyes(S)*8+(S.tamco||0)/4,90)))){r.traced=1;evA(S,x,BAL.eff.j95b.evJ95bTrace);try{noteAdd(x.id,`tra ra: người của nàng đã rỉ tai ${y?y.name:"một phi tần"} để gây hiểu lầm với ngươi`)}catch(e){}
   msg=`Tra ra: chính người bên cung ${x.name} đã rỉ tai ${y?y.name:"nàng ấy"}. Chứng cứ về ${x.name} ${balSg(BAL.eff.j95b.evJ95bTrace)}.`}
  else msg=x?"Lần theo mãi vẫn không ra kẻ tung tin.":"Lời đồn không rõ từ đâu ra, không lần được.";
  log(msg);Q.push({t:"Tra tin đồn",h:`<p>${msg}</p>`});return msg}
 /* who someone can whisper to: a consort the spreader is not on bad terms with and who does not already hate her */
-function j95bListener(x){const L=liveRivals(true).filter(y=>y!==x&&!sameHouse(y,S)&&aff(y,S)>-30&&(!x||aff(x,y)>=-5));return L.length?L[Math.floor(Math.random()*L.length)]:null}
+function j95bListener(x){const L=liveRivals(true).filter(y=>y!==x&&!sameHouse(y,S)&&aff(y,S)>-30&&(!x||aff(x,y)>=-5));return npwPick(L,y=>1+Math.max(0,x?aff(x,y):0)+Math.max(0,-aff(y,S)))}
 function j95bWeek(){if(!j95bOn()||S.dead||(typeof isSrv==="function"&&isSrv()))return;const z=j95bZ();if(z.wk===wk())return;z.wk=wk();
  /* the record of her harm fades */for(const id in z.harm)if(wk()-z.harm[id].w>12)delete z.harm[id];
  for(const x of liveRivals(true)){if(x.confined)continue;
   /* evidence in hand (j78): someone holding proof of her real harm tells the victim */
-  if(evG(x,S)>=1){for(const yid in z.harm){const y=RV(+yid);if(!y||y===x||!y.alive||y.out)continue;if(!motiveOK(x,S,"expose").ok)break;if(j95dice(12)){const g=motiveOK(x,S,"expose");j95bAct("v"+x.id,"expose","me",g,"rumor:j78");j95bSeed(x,y,"j78")}break}}
-  /* a lie from someone with a motive */const g=motiveOK(x,S,"rumor");if(!g.ok)continue;const p=(nv(x,"rumorP"))+(x.malice||0)/40;
-  if(j95dice(p)){const y=j95bListener(x);if(y){j95bAct("v"+x.id,"rumor","me",g,"rumor:tick");j95bSeed(x,y,"tick")}}}
+  if(evG(x,S)>=1){for(const yid in z.harm){const y=RV(+yid);if(!y||y===x||!y.alive||y.out)continue;if(!motiveOK(x,S,"expose").ok)break;if(npcWhy("exposeMe",{x})){const g=motiveOK(x,S,"expose");j95bAct("v"+x.id,"expose","me",g,"rumor:j78");j95bSeed(x,y,"j78")}break}}
+  /* a lie from someone with a motive */const g=motiveOK(x,S,"rumor");if(!g.ok)continue;
+  if(npcWhy("lieMe",{x})){const y=j95bListener(x);if(y){j95bAct("v"+x.id,"rumor","me",g,"rumor:tick");j95bSeed(x,y,"tick")}}}
  /* those who believe retaliate (the gate sees the rumour as their reason) */
  for(const r of z.rum){if(r.cleared||wk()-r.w>J95B.RUMW)continue;const y=RV(r.y);if(!y||!y.alive||y.out||y.confined)continue;if(!j95dice(30))continue;let t="";try{t=npcAct(y,S)}catch(e){}
   if(t){J95B.stat.revenge++;log(t);Q.push({t:"Có người ra tay",who:pv(y),opt:1,h:`<p>${t}</p>${r.known?`<p><i>Nghe đồn ${y.name} làm vậy vì tin lời đồn kia.</i></p>`:""}`})}}}
@@ -287,11 +287,11 @@ function j95bWeek(){if(!j95bOn()||S.dead||(typeof isSrv==="function"&&isSrv()))r
  const ra0=runAct;runAct=function(a,t,k){const r=ra0.apply(this,arguments);try{if(j95bOn()&&r&&a&&t&&a!==t){const okd=!/không ai tin|bị bắt|bị lộ|phát giác|chặn kịp|từ chối|không thành/.test(r);
    if(a===S&&t.rel!=null&&H95.has(k)&&okd)j95bZ().harm[t.id]={k,w:wk()};
    if(a!==S&&a.rel!=null&&k==="rumor"&&okd&&!(typeof isSrv==="function"&&isSrv())){const how=window.__j70exec?"j70":"act";
-    if(t===S){if(j95dice(45)){const y=j95bListener(a);if(y)j95bSeed(a,y,how)}}
-    else if(hostility(a,S)>=40&&j95dice(20)&&motiveOK(a,S,"rumor").ok)j95bSeed(a,t,how,{txt:"đứng sau lời đồn bẩn về nàng",truth:false})}}}catch(e){j95bErr("runAct",e)}return r};
+    if(t===S){const y=j95bListener(a);if(y)j95bSeed(a,y,how)}
+    else if(npcWhy("blameMe",{a}))j95bSeed(a,t,how,{txt:"đứng sau lời đồn bẩn về nàng",truth:false})}}}catch(e){j95bErr("runAct",e)}return r};
  /* a j70 plot carried out against another consort: the plotter may push the blame onto her */
  if(typeof exec70==="function"){const x0=exec70;exec70=function(p){const r=x0.apply(this,arguments);try{if(j95bOn()&&r&&p&&p.a!=="me"&&p.t!=="me"&&!(typeof isSrv==="function"&&isSrv())){const a=pa70(p),t=pt70(p);
-   if(a&&t&&a!==S&&t!==S&&t.alive&&!/bị cắt|bị bắt|quả tang|thời cơ đã qua/.test(r)&&hostility(a,S)>=45&&j95dice(25)&&motiveOK(a,S,"frame").ok){const M=pm70(p);j95bSeed(a,t,"j70",{txt:`đứng sau vụ ${M?M.n.toLowerCase():"mưu hại"} nhắm vào nàng`,truth:false})}}}catch(e){j95bErr("exec70",e)}return r}}
+   if(a&&t&&a!==S&&t!==S&&t.alive&&!/bị cắt|bị bắt|quả tang|thời cơ đã qua/.test(r)&&npcWhy("frameMe",{a})){const M=pm70(p);j95bSeed(a,t,"j70",{txt:`đứng sau vụ ${M?M.n.toLowerCase():"mưu hại"} nhắm vào nàng`,truth:false})}}}catch(e){j95bErr("exec70",e)}return r}}
  const et0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=et0.apply(this,arguments);after();try{if(j95bOn()&&S&&!S.dead&&w0!=null&&wk()!==w0){j95bWeek();if(Q.length&&$("modal").hidden)showModal()}}catch(e){j95bErr("week",e)}return r};
  /* a new life: the in-memory audit lists start again (the save holds what matters) */
  if(typeof start==="function"){const st0=start;start=function(){J95B.bind=[];J95B.ev=[];J95B.notes=[];J95B.next=[];return st0.apply(this,arguments)}}

@@ -20,7 +20,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function'&&typeof currentWeather==='function');await sleep(2500);
  await p.addStyleTag({content:'#kroul{display:none!important}'});
  const r=await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;
-  for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;try{NLP=null}catch(e){}render();
+  for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;try{NLP=null}catch(e){}render();
   const o={};const K=BAL.time.khac,N=wxkN(),D0=BAL.wx.day;o.N=N;
   /* §1 + §2 + §3 */
   const off=[],kinds={},lvk={},flow={},keep={};const y0=S.year;
@@ -69,7 +69,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    placeWhere();const none=!Object.values(S.where).includes("vuon");
    S.where.emp="thu";S.buoi=1;S.kmEmpDay=-1;const wWhy=typeof kmEmpWhy==="function"?kmEmpWhy(S,"walk"):"";const wO1=typeof kmEmpO==="function"?kmEmpO(S,"walk"):0;
    const sv=S.wx;S.wx={n:"nắng gắt",b:"nắng gắt",k:"sun",f:2,kd:"heat",kl:2};const wO0=typeof kmEmpO==="function"?kmEmpO(S,"walk"):0;S.wx=sv;
-   let left=0,n=0;const rid=String(v.id);for(let i=0;i<400;i++){const W={[rid]:"vuon"};wxkSweepW(W);n++;if(W[rid]!=="vuon")left++}
+   let left=0,n=0;const rid=String(v.id);const don=BAL.ag.day.on;BAL.ag.day.on=0;/* the sweep's own odds (no agent day plan; with the plan the NPC chooses in agDrawB, ag-wx.js — review ag-all-2 r2 W1) */try{for(let i=0;i<400;i++){const W={[rid]:"vuon"};wxkSweepW(W);n++;if(W[rid]!=="vuon")left++}}finally{BAL.ag.day.on=don}
    o.storm={open0:!!a0.ok,wx:S.wx.b,open1:!!a1.ok,why:st.why||"",grey:!!st.grey,walkWhy:/giông|tuyết/.test(wWhy),walkO:[wO0,wO1],leave:left/n,
     line:S.logs.slice(0,S.logs.length-nl).map(x=>String(x).replace(/<[^>]+>/g,"")).filter(x=>/giông/i.test(x)).join(" / "),lines:S.logs.slice(0,S.logs.length-nl).filter(x=>/giông/i.test(String(x))).length}}
   /* §9 frost */
@@ -83,7 +83,10 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   {S.month=5;S.place="vuon";const ids=[],wash=[];for(const l of [1,2,3]){S.wx={n:"mưa rào",b:"mưa rào",k:"rain",f:1,lv:l,kd:"rain",kl:l};const c=kfWxCfg()||{};ids.push([c.id,!!c.bolt,c.cap]);lightTick();const L=document.querySelector('#stage .light');const m=(L&&L.style.background.match(/rgba\(90, ?100, ?120, ?([\d.]+)\)/))||[];wash.push(+m[1]||0)}
    const wi=[];for(const l of [1,2,3]){S.wx={n:"gió lớn",b:"gió lớn",k:"wind",f:0,lv:0,kd:"wind",kl:l};wi.push((kfWxCfg()||{}).id)}
    const sn=[];for(const l of [1,3]){S.wx={n:"tuyết nhẹ",b:"tuyết nhẹ",k:"snow",f:1,lv:l,kd:"snow",kl:l};sn.push((kfWxCfg()||{}).id)}
-   S.wx={n:"giông tố",b:"giông tố",k:"storm",f:3,lv:3,kd:"storm",kl:3};const st=kfWxCfg()||{};o.look={ids,wash,wi,sn,storm:[st.id,!!st.bolt]}}
+   S.wx={n:"giông tố",b:"giông tố",k:"storm",f:3,lv:3,kd:"storm",kl:3};const st=kfWxCfg()||{};o.look={ids,wash,wi,sn,storm:[st.id,!!st.bolt]};
+   /* wx-anim: EVERY kind x level has its own row, caps / alpha rise nhẹ < vừa < nặng (day; heat not at night) */
+   const ALL={"mưa phùn":["rain","rain",1],"giông tố":["storm","storm",3],"tuyết nhẹ":["snow","snow",1],"gió lớn":["wind","wind",0],"sương mù":["fog","mist",0],"sương giá":["frost","frost",0],"nắng gắt":["heat","sun",2],"hoa đào bay":["petal","petal",0],"lá phong rơi":["leaf","leaf",0],"mai nở trong tuyết":["petal","snowp",0],"trời âm u":["cloud","cloud",0]};
+   S.buoi=1;o.all={};for(const n in ALL){const [kd,k,f]=ALL[n],r3=[];for(const l of [1,2,3]){S.wx={n,b:n,k,f,lv:[1,3,4].includes(f)?l:0,kd,kl:l};const c=kfWxCfg()||{};r3.push([c.id||null,c.cap||0,c.a0||0])}o.all[n]=r3}}
   return o});
  const ok1=r.offN===0&&["Xuân","Hạ","Thu","Đông"].every(s=>Object.keys(r.kinds[s]||{}).length>=5)&&r.kinds["Đông"].frost>0&&r.kinds["Thu"].fog>0&&r.kinds["Hạ"].wind>0&&r.kinds["Hạ"].storm>0,
   ok2=["rain","snow","storm","wind","fog","frost","heat"].every(k=>r.lvk[k]&&r.lvk[k][1]+r.lvk[k][2]+r.lvk[k][3]>0&&(r.lvk[k][2]+r.lvk[k][3])>0)&&r.lvk.calm[2]===0&&r.lvk.calm[3]===0,
@@ -91,7 +94,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   ok4=r.mono&&r.follow&&r.lvOnly,ok5=r.old.built&&r.old.kd==="wind"&&r.old.kl>=1&&r.old.lines===0&&r.old.zero,ok6=r.guest.every(Boolean),
   f=r.fog,ok7=f.sl.every((x,i)=>x===f.want[i])&&f.sl[2]<f.s0&&f.floor>=5&&f.noon===f.s0&&f.prev,
   s=r.storm,ok8=s.open0&&s.wx==="giông tố"&&s.open1&&!/giông|đóng/.test(s.why)&&!s.walkWhy&&s.walkO[1]<s.walkO[0]&&s.leave>.5&&s.leave<.9&&!/đóng cửa/.test(s.line)&&s.lines===1,
-  lk=r.look,ok10=lk.ids.map(x=>x[0]).join()==="drizzle,rain2,rainh"&&!lk.ids[2][1]&&lk.ids[0][2]<lk.ids[1][2]&&lk.ids[1][2]<lk.ids[2][2]&&lk.wash[2]>lk.wash[0]&&lk.wi.join()==="wind1,wind,wind3"&&lk.sn.join()==="snow,snowh"&&lk.storm[0]==="storm"&&lk.storm[1],
+  lk=r.look,ok10=lk.ids.map(x=>x[0]).join()==="drizzle,rain2,rainh"&&!lk.ids[2][1]&&lk.ids[0][2]<lk.ids[1][2]&&lk.ids[1][2]<lk.ids[2][2]&&lk.wash[2]>lk.wash[0]&&lk.wi.join()==="wind1,wind,wind3"&&lk.sn.join()==="snow1,snowh"&&lk.storm[0]==="storm"&&lk.storm[1]&&Object.values(r.all).every(a=>a.every(x=>x[0])&&new Set(a.map(x=>x[0])).size===3&&a[0][1]*a[0][2]<=a[1][1]*a[1][2]&&a[1][1]*a[1][2]<a[2][1]*a[2][2]),
     z=r.frost,ok9=Math.abs(z.e0.dan-z.d-z.e2.dan)<.051&&Math.abs(z.e0.theu-z.d-z.e2.theu)<.051&&z.e0.co===z.e2.co&&/tay cóng/.test(z.txt)&&/tay cóng/.test(z.pop)&&/Sương mù/.test(r.frost.popF)&&/Giông tố: ít ai ở lại ngoài vườn/.test(z.popS)&&!/đóng cửa/.test(z.popS);
  console.log(JSON.stringify(r,null,1));
  console.log("§1 kinds",ok1?"OK":"FAIL","§2 levels",ok2?"OK":"FAIL","§3 flow",ok3?"OK":"FAIL","§4 monotone",ok4?"OK":"FAIL","§5 old save",ok5?"OK":"FAIL","§6 guest",ok6?"OK":"FAIL","§7 fog",ok7?"OK":"FAIL","§8 storm",ok8?"OK":"FAIL","§9 frost",ok9?"OK":"FAIL","§10 looks",ok10?"OK":"FAIL");

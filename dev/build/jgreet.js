@@ -16,10 +16,10 @@
    State: S.gmeet {key, pend:[{vid,kh,pl,key}]} (lazy; old saves load without it). Perf: one pass over the consorts per buổi (window.__gmMs). */
 const GM={stat:{tick:0,stay:0,meet:0,her:0,npc:0,shown:0,drop:0,byPl:{},byOpt:{}},ms:[]};
 function grRank(p){const R=BAL.greet.rank;if(!p||!S)return 0;if(p===S.emp)return R.top;if(S.thO&&p===S.thO)return R.th;
- if(p===S){try{if(typeof isSrv==="function"&&isSrv())return R.srv+(S.srv.mama?R.mama:(+S.srv.rk||0))}catch(e){}return S.out?R.out:R.cons+(rkOf(S)||0)}
+ if(p===S){try{if(typeof isSrv==="function"&&isSrv())return R.srv+(S.srv.mama?R.mama:srkTier(+S.srv.rk||0))}catch(e){}return S.out?R.out:R.cons+(rkOf(S)||0)}
  if((rivals||[]).includes(p))return p.out?R.out:R.cons+(rkOf(p)||0);
  let k="";try{k=k61Kind(p)}catch(e){}if(k==="man"||k==="off"||k==="phys")return R.man;if(k==="tq")return R.srv+R.tq;if(k==="mama")return R.srv+R.mama;if(k==="kid")return R.cons+R.kid;
- return R.srv+(+p.rk||0)}
+ return R.srv+srkTier(+p.rk||0,p.role)}/* maid rung → tier (maid-ladder-6) */
 /* one seat / chí tôn: everyone knows who holds it */
 function grUniq(p){if(!p||!S)return false;if(p===S.emp||(S.thO&&p===S.thO))return true;const cons=p===S?!(typeof isSrv==="function"&&isSrv()):(rivals||[]).includes(p);
  if(!cons||p.out)return false;try{return BAL.seatCap[rkOf(p)]===1}catch(e){return false}}
@@ -30,7 +30,7 @@ function grNet(p){try{return nv(p,"greetName")?1:0}catch(e){return 1}}
 /* g = how the GIVER's name reaches the other: low (she named herself, lower), uniq (one seat), ann (herald), net (her nết said yes/no), me (her choice) */
 function grGive(g,o2,rg,ro,o,side){if(rg<ro)return{y:1,w:"low"};if(grUniq(g))return{y:1,w:"uniq"};if(grHerald(g,o))return{y:1,w:"ann"};
  if(g===S&&o&&o.me!=null)return{y:o.me?1:0,w:"me"};return{y:grNet(g),w:"net",t:grTT(g),eq:rg===ro}}
-function grLearn(x,y){if(!x||!y||x===y||!S)return;try{if(x===S){if(S.known&&!k61Named(y))k61Know(y,"",true,2);grMet(y)}else if(y===S)npcLearn(x,S);else npcLearn(x,y)}catch(e){}}
+function grLearn(x,y){if(!x||!y||x===y||!S)return;try{if(x===S){if(S.known&&k61St(y)<2)k61Know(y,"",true,2)/* greet-stranger: a public name (Hoàng hậu, level 0/1) still needs face + level 2, else the gate asks "Chào hỏi" again forever */;grMet(y)}else if(y===S)npcLearn(x,S);else npcLearn(x,y)}catch(e){}}
 function grFace(x,y){if(x!==S||!S||!S.known)return;try{if(k61St(y)<1)k61Know(y,"",true,1);grMet(y)}catch(e){}}
 function grMet(y){try{if((rivals||[]).includes(y)&&y.id!=null){S.met=S.met||{};if(S.met[y.id]==null)S.met[y.id]=wk()}}catch(e){}}
 /* she knows x's name / x knows hers BEFORE the greeting */
@@ -40,7 +40,7 @@ function greetName(a,b,o){o=o||{};const ra=grRank(a),rb=grRank(b);const ka=grKne
  if(A.y)grLearn(b,a);else grFace(b,a);if(B.y)grLearn(a,b);else grFace(a,b);
  const G={a,b,A,B,newA:!ka&&A.y,newB:!kb&&B.y,ra,rb};G.line=a===S||b===S?grLine(G):"";GM.stat["g_"+A.w]=(GM.stat["g_"+A.w]||0)+1;return G}
 /* ---- words (VANPHONG: cổ trang; the nết is named only when she knows it) ---- */
-function grPron(p){try{if(p===S.emp)return"Hoàng thượng";if(S.thO&&p===S.thO)return"Thái hậu";return netSex(p)==="m"?"người ấy":"nàng"}catch(e){return"nàng"}}
+function grPron(p){try{if(p===S.emp)return"Hoàng thượng";if(S.thO&&p===S.thO)return"Thái hậu";const k=typeof k61Kind==="function"?k61Kind(p):"";if(/^(man|off|phys|eun|tq)$/.test(k))return"người ấy"/* greet-stranger: thái y, thái giám, quan, nam nhân */;return netSex(p)==="m"?"người ấy":"nàng"}catch(e){return"nàng"}}
 function grKnowsT(p,t){try{return !!t&&(rivals||[]).includes(p)&&(trKnown(p)||[]).includes(t)}catch(e){return false}}
 function grWhy(p,g){const P=grPron(p);const T=()=>{try{return k61Named(p)?k61Title(p):k61Cap(k61Desc(p))}catch(e){return P}};
  if(g.w==="low")return`${P} phận dưới, xưng danh thỉnh an trước`;
@@ -63,6 +63,8 @@ function grPreview(a,b){const ra=grRank(a),rb=grRank(b);const P=grPron(b);const 
  else if(rb<ra)L.push("biết tên người ấy");if(rb<ra&&a===S&&!grUniq(S))L.push("tên ngươi: tùy tính nết ngươi có xưng danh đáp lễ hay không")/* r1: what happens to her own name is said too */;return L.join(" · ")}
 
 /* ===================== the greeting sites (LUẬT SỬA CẢ NHÓM: every one goes through greetName) ===================== */
+/* 0 greet-stranger (owner 18/11 01:38Z): the stranger gate again as the outer wrapper, so no kind can skip it (jmen "min" did) */
+(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{return typeof k61Gate==="function"?k61Gate(p,A):A}catch(x){return A}}})();
 /* 1 j61 talk face to face: "Chào hỏi" / "Hành lễ" of a stranger (was: face only + a 2nd tap "Hỏi danh tính"): the tap is edited in j61 (greetName); here the preview */
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(A&&A[0]&&A[0].k61==="greet"){const e=k61Ent(A[0].kke);if(e)A[0]=Object.assign({},A[0],{x:grPreview(S,e)})}}catch(x){}return A}})();
 /* 2 j61 NPC acts on her face to face (SOC run / runAct ally·gift): edited in j61 itself to call greetName(v,S) (was: her name + theirs always) */
@@ -73,7 +75,7 @@ function grWrapOpt(A,re,who){try{for(const o of A||[]){if(!o||!re.test(o.n||""))
   o[f]=function(){const r=f0.apply(this,arguments);let G=null;try{G=greetName(S,e)}catch(x){}if(f==="run"&&G&&(G.newA||G.newB))return (r?r+" ":"")+G.line;if(f==="go"&&G&&(G.newA||G.newB))try{log(G.line)}catch(x){}return r}}}}catch(e){}return A}
 (function(){if(typeof srvTalk!=="function")return;const s0=srvTalk;srvTalk=function(p){const A=s0.apply(this,arguments);try{
   const who=p&&p.sk==="man"?()=>manById(p.mid):p&&(p.sk==="rv"||p.sk==="hh")?()=>p.ref&&RV(p.ref.id):null;if(who)grWrapOpt(A,/^(Chào hỏi đúng lễ|Hành lễ thỉnh an)$/,who)}catch(e){}return A}})();
-(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&p.kind==="man"&&p.ref)grWrapOpt(A,/^Chào hỏi đúng lễ$/,()=>p.ref)}catch(e){}return A}})();
+(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&(p.kind==="man"||p.kind==="min")&&p.ref)grWrapOpt(A,/^Chào hỏi đúng lễ$/,()=>p.ref)/* min: officials too (greet-stranger) */}catch(e){}return A}})();
 
 /* ===================== AG-MEET: people at a place come to HER (and to each other) ===================== */
 function gmZ(){const z=S.gmeet=S.gmeet||{};z.pend=Array.isArray(z.pend)?z.pend:[];return z}
@@ -120,7 +122,7 @@ function gmOpts(v){const A=[],B=BAL.greet.meet;const f=chatF(v),g=n=>Math.max(1,
  return A}
 /* her replies: her own topicOpts entries for this person (same numbers), no khắc (the visitor spent hers); a proud higher one or a nod also offered */
 function gmReplies(v,G){const T=n=>{try{return topicOpts(v).find(a=>a.n===n)}catch(e){return null}};
- const wrap=a=>a&&{n:a.n,fx:a.c||{},x:a.x||"",go:()=>{let r="";try{if(a.c)apply(a.c);r=a.run?a.run():(runOpt(a)?"thành":"hỏng")}catch(e){}if(r)log(`${a.n}: ${r}`)}};
+ const wrap=a=>a&&{n:a.n,fx:a.c||{},x:oddsCapped(a)?kitCapLine(a.x?"thành: "+a.x:"",a.c):a.x||"",go:()=>{let r="";try{if(a.c)apply(a.c);r=a.run?(oddsCapped(a)&&!roll(BAL.odds.hi)?oddsSoft("",null):a.run()):(runOpt(a)?"thành":"hỏng")}catch(e){}if(r)log(`${a.n}: ${r}`)}};
  /* she is the higher one and nobody heralds her: her answer is HER choice (the rule's trait step is her own) */
  if(G&&G.B&&G.B.w==="me")return[{n:"Xưng danh đáp lễ",fx:{},x:`${grPron(v)} biết tên ngươi`,go:()=>{npcLearn(v,S);log(`Ngươi xưng danh đáp lễ ${v.name}.`)}},
   {n:"Khẽ gật đầu",fx:{},x:`giữ thể diện · ${grPron(v)} chưa biết tên ngươi`,go:()=>{log(`Ngươi chỉ khẽ gật đầu với ${v.name}.`)}}];

@@ -163,9 +163,11 @@ function kcWhere(){if(!S||!S.kc)return;const b=S.buoi||0;S.kc.at={};for(const m 
   if(m.r==="huynh"&&S.kc.lost)continue;/* KC LORE: dtq brother lost at Nhạn Môn */
   const H=KCHAB[m.r]||[["",1]];let L=H;if(b===3&&m.r!=="huynh")L=L.filter(x=>x[0]&&x[0]!=="kc_thu"||m.r==="cha");
   if(m.r==="cha"&&b===0)L=[["",1]];/* buổi sáng cha vào triều */
-  const tot=L.reduce((a,x)=>a+x[1],0);let r=Math.random()*tot,p="";for(const [k,w] of L){r-=w;if(r<0){p=k;break}}
+  const p=kcHab(L);/* npc-purpose G2: her own day duties (habits), near-best only */
   if(p)S.kc.at[m.id]=p}
- if(S.tm96){const man=manById(S.tm96.mid);if(man&&man.alive)S.kc.at.ftm=b===3?"":pick(["kc_chua","kc_sach","kc_tra","","",""])}}
+ if(S.tm96){const man=manById(S.tm96.mid);if(man&&man.alive)S.kc.at.ftm=b===3?"":kcTmWhere()}}
+function kcHab(L){const x=npwPick(L,y=>y[1],{all:1});return x?x[0]:""}/* her habits are all real duties: weighted by habit, minor ones kept (place cards) */
+function kcTmWhere(){const B=BAL.ag.why.kcTm,h=(S.tm96&&S.tm96.h)||0;return npwPick(["kc_chua","kc_sach","kc_tra",""],k=>k?h*B.seek:B.home)||""}/* npc-purpose G2: he goes where she might be, as much as he longs for her */
 function kcHere(k){k=k||S.place;return S.kc.fam.filter(m=>m.alive&&S.kc.at[m.id]===k)}
 function kcAt(m){const p=S.kc.at[m.id];return p?KCPL[p][0]:m.r==="huynh"&&S.kc.lost?"mất tin ở Nhạn Môn":"ra ngoài"}
 function kcTmMan(){return S.tm96?manById(S.tm96.mid):null}
@@ -221,10 +223,10 @@ function kcCards(){const X=[];if(!S||!S.kc)return X;const P=S.place;const mz=S.m
  if(to&&di&&(S.kc.proof[di.id]||0)>0)X.push(kcNeed(kcCard({g:"fam",who:to.id,n:`Tố ${di.t.toLowerCase()} trước tổ mẫu`,t:`Đem chứng cứ trình tổ mẫu.`,k:2,c:{suc:-15},o:od(BAL.kc2.kcCard.toTruocToMau_od+S.kc.proof[di.id]*12+to.af/5),w:{kgt:BAL.kc2.kcCard.toTruocToMau_w_kgt},l:{duc:-3},x:`${di.t} bị tổ mẫu răn dạy, thôi hại ngươi một thời gian`,go:()=>{S.kc.proof[di.id]=0;di.oan+=BAL.eff.jkc.oanGo_2;S.kc.diBan=S.turn+4;kcAf(to,BAL.eff.jkc.go_6)},fail:()=>{di.oan+=BAL.eff.jkc.oanFail_2;S.kc.proof[di.id]=0}}),to));
  if(cha||mom)X.push(kcNeed(kcCard({g:"fam",n:"Quản việc nhà",t:"Giữ sổ chi tiêu, sai bảo gia nhân.",k:3,c:{suc:-15},o:od(BAL.kc2.kcCard.quanViecNha_od+S.tamco/3),w:{tamco:2,kgt:BAL.kc2.kcCard.quanViecNha_w_kgt},l:{kgt:BAL.kc2.kcCard.quanViecNha_l_kgt},x:"Gia tư +2",go:()=>{S.kgtu=Math.min(100,S.kgtu+2)}}),null,"kc_sanh"));
  /* Giao du */
- X.push(kcNeed(kcCard({g:"soc",n:"Đi lễ chùa",t:"Dâng hương, cầu phúc, nghe giảng kinh.",k:3,c:{suc:-15,bac:-3},w:{duc:2,danh:1},go:()=>kcChance("chua")}),null,"kc_chua"));
+ X.push(kcNeed(kcCard({inner:1,g:"soc",n:"Đi lễ chùa",t:"Dâng hương, cầu phúc, nghe giảng kinh.",k:3,c:{suc:-15,bac:-3},w:{duc:2,danh:1},go:()=>kcChance("chua")}),null,"kc_chua"));
  X.push(kcNeed(kcCard({g:"soc",n:"Dạo phố chợ",t:"Xem lụa, mua phấn, nghe người qua lại.",k:2,c:{suc:-10,bac:-10},o:od(BAL.kc2.kcCard.daoPhoCho_od),w:{sac:1},l:{},x:"nghe một lời đồn trong kinh",go:()=>kcNews()}),null,"kc_cho"));
  X.push(kcNeed(kcCard({g:"soc",n:"Nghe chuyện ở trà lâu",t:"Giả trang ngồi nhã gian, nghe khách bàn chuyện cung đình.",k:2,c:{suc:-10,bac:-5},o:od(BAL.kc2.kcCard.ngheChuyenOTra_od+S.tamco/3),w:{},l:{kgt:BAL.kc2.kcCard.ngheChuyenOTra_l_kgt},x:"biết rõ một phi tần trong cung",go:()=>kcIntel(1,3),fail:()=>{S.kld+=12;log("Có người nhận ra ngươi dưới lớp áo nam.")}}),null,"kc_tra"));
- X.push(kcNeed(kcCard({g:"soc",n:"Lựa sách ở thư phường",t:"Chọn sách, đọc thơ mới chép.",k:2,c:{suc:-10,bac:-5},w:{tai:2},go:()=>kcChance("sach")}),null,"kc_sach"));
+ X.push(kcNeed(kcCard({inner:1,g:"soc",n:"Lựa sách ở thư phường",t:"Chọn sách, đọc thơ mới chép.",k:2,c:{suc:-10,bac:-5},w:{tai:2},go:()=>kcChance("sach")}),null,"kc_sach"));
  for(const f of S.kc.fam.filter(m=>m.alive&&/^ban/.test(m.r)))X.push(kcNeed(kcCard({g:"soc",who:f.id,n:`Thăm ${f.name}`,t:`Sang phủ thế giao, cùng ${f.name} thêu thùa, bàn chuyện tuyển tú.`,k:2,c:{suc:-10,bac:-5},o:od(BAL.kc2.kcCard.tham_od+f.af/4),w:{},l:{},x:`${f.name} với ngươi ${balSg(BAL.eff.jkc.go_7)} · có khi nghe tin trong cung`,go:()=>{kcAf(f,BAL.eff.jkc.go_7);f.me+=BAL.eff.jkc.meGo_2;if(roll(40))kcIntel(1,2)}}),null,"kc_hau"));
  if(S.kc.suit.length){const s=S.kc.suit[0];
   X.push(kcNeed(kcCard({g:"soc",n:`Khéo từ chối nhà ${s.n}`,t:`Nhờ mẹ nói khéo, giữ thể diện cho nhà ${s.n}.`,k:1,c:{suc:-10},o:od(BAL.kc2.kcCard.kheoTuChoiNha_od+S.tamco/3+S.danh/4),w:{kap:BAL.kc2.kcCard.kheoTuChoiNha_w_kap},l:{kgt:BAL.kc2.kcCard.kheoTuChoiNha_l_kgt},x:"bỏ mối này",go:()=>{S.kc.suit.shift()}}),null,"kc_sanh"));
@@ -233,11 +235,11 @@ function kcCards(){const X=[];if(!S||!S.kc)return X;const P=S.place;const mz=S.m
   X.push(kcCard({g:"soc",who:"ftm",n:`Gặp riêng ${tm.name}`,t:here?`Chàng đang ở ${KCPL[P][0].toLowerCase()}.`:night&&P==="kc_vuon"?"Hẹn chàng trèo tường vào hoa viên.":`Chỉ gặp được khi chàng ở cùng nơi, hoặc đêm ở hoa viên nhà`,lock:!(here||night&&P==="kc_vuon"),k:2,c:{suc:-10},o:od((here&&P==="kc_chua"?55:30)+S.tamco/4+mz/5),w:{},l:{},x:"tình ý của ta với chàng +8 · tình ý của chàng +6",go:()=>{S.tm96.h=Math.min(100,S.tm96.h+8);tm.tinh=(tm.tinh||0)+6;S.kld+=3;S.kc.met=(S.kc.met||0)+1},fail:()=>{S.kld+=12;pushDil(mkP("kcE",{e:"caught"}),"Bị bắt gặp")}}));
   X.push(kcCard({g:"soc",who:"ftm",n:"Gửi thư cho người ấy",t:`Nhờ ${S.maid?S.maid.name:"tỳ nữ"} đưa thư.`,k:1,c:{bac:-2},o:od(BAL.kc2.kcCard.guiThuChoNguoi_od+mz/2),w:{},l:{},x:"tình ý của ta với chàng +5",go:()=>{S.tm96.h=Math.min(100,S.tm96.h+5);tm.letters=(tm.letters||0)+1},fail:()=>{S.kld+=15;log("Thư lạc vào tay gia nhân.")}}))}
  /* Tài nghệ (the lessons themselves are the Tài nghệ panel of the base game: real minigames) */
- X.push(kcNeed(kcCard({g:"art",n:"Học lễ nghi cung đình",t:"Một ma ma xuất cung dạy cách đi đứng, quỳ lạy, đối đáp trong cung.",k:3,c:{suc:-15,bac:-12},lock:S.kc.le>=5,w:{duc:1},x:`Lễ nghi +1 (nay ${S.kc.le}/5, cộng vào Phúc tuyển) · biết thêm chuyện trong cung`,go:()=>{S.kc.le++;if(roll(50))kcIntel(1,2)}}),null,"kc_hoc"));
+ X.push(kcNeed(kcCard({g:"art",n:"Học lễ nghi cung đình",t:"Một ma ma xuất cung dạy cách đi đứng, quỳ lạy, đối đáp trong cung.",k:3,c:{suc:-15,bac:-12},inner:1,lock:S.kc.le>=5,w:{duc:1},x:`Lễ nghi +1 (nay ${S.kc.le}/5, cộng vào Phúc tuyển) · biết thêm chuyện trong cung`,go:()=>{S.kc.le++;if(roll(50))kcIntel(1,2)}}),null,"kc_hoc"));
  if(!S.kc.ds)X.push(kcCard({g:"art",n:"Mời danh sư",t:"Mời thầy giỏi nhất kinh thành về dạy.",k:1,c:{bac:-60},o:od(BAL.kc2.kcCard.moiDanhSu_od+S.kgt/2),w:{},l:{},x:"từ nay học tiến bộ nhanh gấp rưỡi",go:()=>{S.kc.ds=1}}));
  /* Thư từ */
  const ct=kcContact();X.push(kcCard({g:"mail",onceM:"thu",n:"Viết thư vào cung",t:ct?`Gửi thư cho ${ct}.`:"Không có người quen trong cung: thư gửi qua người lạ.",k:1,c:{bac:-3},o:od(ct?75:35),w:{},l:{},x:"biết rõ một phi tần",go:()=>kcIntel(1,3),fail:()=>{S.kld+=5;log("Thư bị chặn ở cửa cung.")}}));
- X.push(kcNeed(kcCard({g:"mail",onceM:"mua",n:"Mua tin của thái giám ra cung",t:"Dúi bạc cho tiểu thái giám đi chợ mua sắm.",k:2,c:{suc:-10,bac:-25},o:od(BAL.kc2.kcCard.muaTinCuaThai_od),w:{},l:{},x:"biết rõ hai phi tần",go:()=>kcIntel(2,3)}),null,"kc_cho"));
+ X.push(kcNeed(kcCard({g:"mail",onceM:"mua",n:"Mua tin của thái giám ra cung",t:"Dúi bạc cho tiểu thái giám đi chợ mua sắm.",k:2,c:{suc:-10},o:od(BAL.kc2.kcCard.muaTinCuaThai_od),w:{bac:-25},l:{}/* bạc only when he brings the news */,x:"biết rõ hai phi tần",go:()=>kcIntel(2,3)}),null,"kc_cho"));
  const gv=liveRivals(true).filter(v=>!(S.kc.gift||[]).includes(v.id)).sort((a,b)=>b.rank-a.rank)[0];
  if(gv)X.push(kcCard({g:"mail",n:`Gửi quà vào cung cho ${gv.name}`,t:`Nhờ người nhà gửi lễ vật cho ${rkName(gv)} ${gv.name}.`,k:1,c:{bac:-30},o:od(BAL.kc2.kcCard.guiQuaVaoCung_od),w:{},l:{},x:`${gv.name} với ngươi ${balSg(BAL.eff.jkc.go_8)} (vào cung còn nhớ)`,go:()=>{S.kc.gift=(S.kc.gift||[]).concat([gv.id]);try{affAdd(gv,S,BAL.eff.jkc.go_8)}catch(e){}kcIntel1(gv,2)}}));
  /* r2 · the non-bạc road of every bạc purchase (owner 15/11 20:30Z): same gain, a price of equal weight paid in Sức, khắc or a family favour */
@@ -254,10 +256,10 @@ function kcCards(){const X=[];if(!S||!S.kc)return X;const P=S.place;const mz=S.m
   if(mu&&S.maid)X.push(kcNeed(kcCard({g:"fam",who:mu.id,tw:"Ngáng chân thứ muội",n:"Sai tỳ nữ ngáng chân thứ muội",t:`${S.maid.name} lén đổi hộp phấn, giấu thiệp mời hội thơ của nàng; không phải mua chuộc ai.`,k:2,c:{suc:-10},o:od(BAL.kc2.kcCard.saiTyNuNgang_od+S.tamco/3),w:{},l:{duc:-5,kgt:BAL.kc2.kcCard.saiTyNuNgang_l_kgt},x:`thứ muội: Sắc của nàng -3 · Danh của nàng -3 (kỳ tuyển tú) · kèm: ${S.maid.name} thiện cảm ${balSg(-BAL.eff.jkc.mzL)}`,go:()=>{mzL(BAL.eff.jkc.mzL);mu.sac=Math.max(10,mu.sac-3);mu.danh=Math.max(0,mu.danh-3);mu.oan+=BAL.eff.jkc.oanGo_3},fail:()=>{mzL(BAL.eff.jkc.mzL);mu.oan+=BAL.eff.jkc.oanFail_3;kcAf(mu,BAL.eff.jkc.fail_15);if(to)kcAf(to,BAL.eff.jkc.fail_16);log("Chuyện vỡ lở; tổ mẫu nhìn ngươi bằng ánh mắt khác.")}}),mu));
   if(di)X.push(kcNeed(kcCard(S.maid?{g:"fam",who:di.id,tw:`Dò la viện ${di.t.toLowerCase()}`,n:`Sai tỳ nữ nghe ngóng viện ${di.t.toLowerCase()}`,t:`${S.maid.name} làm quen a hoàn bên ấy, nghe xem ${di.t.toLowerCase()} bàn tính gì.`,k:2,c:{suc:-10},o:od(BAL.kc2.kcCard.kcCards_od+S.tamco/3+mz/10),w:{},l:{},x:`có chứng cứ mưu tính của nàng · kèm: ${S.maid.name} thiện cảm ${balSg(-BAL.eff.jkc.mzL)}`,go:()=>{mzL(BAL.eff.jkc.mzL);S.kc.proof[di.id]=(S.kc.proof[di.id]||0)+1},fail:()=>{mzL(BAL.eff.jkc.mzL);S.kld+=5;kcAf(di,BAL.eff.jkc.fail_17);log(`${S.maid.name} bị ${di.t.toLowerCase()} bắt gặp.`)}}
    :{g:"fam",who:di.id,tw:`Dò la viện ${di.t.toLowerCase()}`,n:`Rình viện ${di.t.toLowerCase()} cả đêm`,t:`Không đút lót gia nhân: tự nấp ngoài song cửa, đợi ${di.t.toLowerCase()} bàn chuyện.`,k:3,c:{suc:-15},o:od(BAL.kc2.kcCard.kcCards_od_2+S.tamco/3),w:{},l:{},x:"có chứng cứ mưu tính của nàng",go:()=>{S.kc.proof[di.id]=(S.kc.proof[di.id]||0)+1},fail:()=>{S.kld+=5;kcAf(di,BAL.eff.jkc.fail_18);log(`Bị ${di.t.toLowerCase()} bắt gặp.`)}}),null,"kc_di"));
-  X.push(kcNeed(kcCard({g:"soc",tw:"Đi lễ chùa",n:"Lên chùa chép kinh",t:"Không dâng lễ: quét sân, chép kinh giúp nhà chùa, nghe giảng kinh.",k:4,c:{suc:-20},w:{duc:2,danh:1},go:()=>kcChance("chua")}),null,"kc_chua"));
+  X.push(kcNeed(kcCard({inner:1,g:"soc",tw:"Đi lễ chùa",n:"Lên chùa chép kinh",t:"Không dâng lễ: quét sân, chép kinh giúp nhà chùa, nghe giảng kinh.",k:4,c:{suc:-20},w:{duc:2,danh:1},go:()=>kcChance("chua")}),null,"kc_chua"));
   X.push(kcNeed(kcCard({g:"soc",tw:"Dạo phố chợ",n:"Đi xem chợ, không mua",t:"Đi bộ khắp phố, xem người ta phối lụa, tô phấn, nghe người qua lại.",k:3,c:{suc:-20},o:od(BAL.kc2.kcCard.diXemChoKhong_od),w:{sac:1},l:{},x:"nghe một lời đồn trong kinh",go:()=>kcNews()}),null,"kc_cho"));
   X.push(kcNeed(kcCard({g:"soc",tw:"Nghe chuyện ở trà lâu",n:"Nghe lỏm ngoài hiên trà lâu",t:"Không thuê nhã gian: giả trang đứng ngoài hiên nghe khách bàn chuyện cung đình; dễ bị nhận ra hơn.",k:2,c:{suc:-15},o:od(BAL.kc2.kcCard.ngheLomNgoaiHien_od+S.tamco/3),w:{},l:{kgt:BAL.kc2.kcCard.ngheLomNgoaiHien_l_kgt},x:"biết rõ một phi tần trong cung",go:()=>kcIntel(1,3),fail:()=>{S.kld+=12;log("Có người nhận ra ngươi dưới lớp áo nam.")}}),null,"kc_tra"));
-  X.push(kcNeed(kcCard({g:"soc",tw:"Lựa sách ở thư phường",n:"Đứng đọc ở thư phường",t:"Không mua: đứng đọc, chép lại thơ mới cả buổi.",k:3,c:{suc:-15},w:{tai:2},go:()=>kcChance("sach")}),null,"kc_sach"));
+  X.push(kcNeed(kcCard({inner:1,g:"soc",tw:"Lựa sách ở thư phường",n:"Đứng đọc ở thư phường",t:"Không mua: đứng đọc, chép lại thơ mới cả buổi.",k:3,c:{suc:-15},w:{tai:2},go:()=>kcChance("sach")}),null,"kc_sach"));
   for(const f of S.kc.fam.filter(m=>m.alive&&/^ban/.test(m.r)))X.push(kcNeed(kcCard({g:"soc",who:f.id,tw:`Thăm ${f.name}`,n:`Mang bánh nhà làm thăm ${f.name}`,t:`Tự tay làm bánh, đi bộ sang phủ thế giao, cùng ${f.name} thêu thùa, bàn chuyện tuyển tú.`,k:3,c:{suc:-15},o:od(BAL.kc2.kcCard.mangBanhNhaLam_od+f.af/4),w:{},l:{},x:`${f.name} với ngươi ${balSg(BAL.eff.jkc.go_15)} · có khi nghe tin trong cung`,go:()=>{kcAf(f,BAL.eff.jkc.go_15);f.me+=BAL.eff.jkc.meGo_4;if(roll(40))kcIntel(1,2)}}),null,"kc_hau"));
   if(S.kc.suit.length)X.push(kcCard({g:"soc",tw:"Giả bệnh tránh xem mặt",n:"Nhịn ăn tránh xem mặt",t:"Nhịn ăn mấy bữa cho mặt xanh xao, không cần thuốc thang, ai nhìn cũng tin là bệnh.",k:4,c:{suc:-15},o:od(BAL.kc2.kcCard.nhinAnTranhXem_od+S.tamco/3),w:{kap:BAL.kc2.kcCard.nhinAnTranhXem_w_kap},l:{duc:-3},x:"bỏ mối này",go:()=>{S.kc.suit.shift()},fail:()=>{if(cha)kcAf(cha,BAL.eff.jkc.fail_19)}}));
   const tm2=kcTmMan();if(tm2&&tm2.alive&&S.tm96)X.push(kcCard({g:"soc",who:"ftm",tw:"Gửi thư cho người ấy",n:"Tự tay đưa thư cho người ấy",t:"Lén ra cổng sau, tự tay đưa thư; không nhờ ai, dễ bị bắt gặp hơn.",k:2,c:{suc:-5},o:od(BAL.kc2.kcCard.tuTayDuaThu_od+S.tamco/2),w:{},l:{},x:"tình ý của ta với chàng +5",go:()=>{S.tm96.h=Math.min(100,S.tm96.h+5);tm2.letters=(tm2.letters||0)+1},fail:()=>{S.kld+=15;log("Thư lạc vào tay gia nhân.")}}));
@@ -275,9 +277,9 @@ function kcContact(){if(S.origin.k==="ch")return"Thái hậu (cô mẫu)";try{co
 function kcIntel1(v,st){try{k61Know(v,"thư nhà",true,st)}catch(e){}if(!S.kc.intel.includes(v.id))S.kc.intel.push(v.id)}
 function kcIntel(n,st){const L=shuf(liveRivals(true).filter(v=>!S.kc.intel.includes(v.id)));const got=L.slice(0,n);for(const v of got)kcIntel1(v,st);
  if(got.length)log(`Ngươi biết thêm về ${got.map(v=>`${rkName(v)} ${v.name} (tính ${netTxt(v)}${v.preg?", đang mang thai":""}, sủng ${v.sung>=BAL.sungLv.kc[1]?"rất cao":v.sung>=BAL.sungLv.kc[0]?"khá":"ít"})`).join("; ")}.`);else log("Không có tin gì mới.")}
-function kcNews(){try{const T=trS();const n=T&&T.news&&T.news[0];if(n){log(`Tin triều: ${String(n.h).replace(/<[^>]+>/g,"")}`);return}}catch(e){}const v=pick(liveRivals(true));if(v)log(`Người ta đồn ${rkName(v)} ${v.name} ${v.sung>=50?"đang được sủng":"ít được gọi thị tẩm"}.`)}
-function kcChance(where){const tm=kcTmMan();if(tm&&tm.alive&&S.tm96&&!S.kc.ev.meet&&roll(35)){S.kc.ev.meet=1;pushDil(mkP("kcE",{e:"meet"}),"Gặp lại người xưa");return}
- if(where==="chua"&&!S.kc.ev.vh&&S.year>=2&&S.sac>=70&&roll(4)){S.kc.ev.vh=1;pushDil(mkP("kcE",{e:"vihanh"}),"Khách lạ ở chùa")}}
+function kcNews(){try{const T=trS();const n=T&&T.news&&T.news[0];if(n){log(`Tin triều: ${String(n.h).replace(/<[^>]+>/g,"")}`);return}}catch(e){}const v=npwPick(liveRivals(true),x=>1+Math.max(0,x.sung||0));/* npc-purpose G2: talk is about the most favoured */if(v)log(`Người ta đồn ${rkName(v)} ${v.name} ${v.sung>=50?"đang được sủng":"ít được gọi thị tẩm"}.`)}
+function kcChance(where){const tm=kcTmMan();if(tm&&tm.alive&&S.tm96&&!S.kc.ev.meet&&npcWhy("kcMeet",{tm},()=>roll(35))){S.kc.ev.meet=1;pushDil(mkP("kcE",{e:"meet"}),"Gặp lại người xưa");return}
+ if(where==="chua"&&!S.kc.ev.vh&&S.year>=2&&S.sac>=70&&npcWhy("kcVh",{},()=>roll(4))){S.kc.ev.vh=1;pushDil(mkP("kcE",{e:"vihanh"}),"Khách lạ ở chùa")}}
 
 /* ---------- the week, the month ---------- */
 (function(){const n0=nextBuoi;nextBuoi=function(){if(!isKc())return n0.apply(this,arguments);const b0=S.buoi;const r=n0.apply(this,arguments);if(isKc()&&!S.dead&&S.buoi!==b0&&(S.buoi||0)>0){kcWhere();if(S.buoi===3&&kcCity(S.place)){S.place="kc_khue"}S.visit=kcVisit(S.place);deal();render()}return r}})();
@@ -308,7 +310,7 @@ function kcWeek(){if(Q.length>2)return;const E=[];const add=(e,w)=>{if(w>0)E.pus
  if(S.tm96&&kcTmMan()){add("tmrise",S.kc.ev.tmrise?0:.5);add("tmcam",S.kc.ev.tmcam||S.tm96.h<70?0:.6);add("tmtron",S.kc.ev.tmtron||S.tm96.h<85||S.year<2?0:.8)}
  if(!S.kc.ev.dich&&S.year>=2&&roll(KC.ill))add("dich",6);
  add("theu",.5);add("gianhan",.4);
- const tot=E.reduce((a,x)=>a+x[1],0);if(!tot||!roll(KC.ev))return;let r=Math.random()*tot;for(const [e,w] of E){r-=w;if(r<0){const d=mkP("kcE",{e});if(d)pushDil(d,KCE[e].t);return}}}
+ const o=npcWhy("kcWeek",{E},()=>roll(KC.ev));if(!o)return;/* npc-purpose G2: the strongest motive in the house acts (KC.ev = it comes to a head this week) */const e=o.who.e;const d=mkP("kcE",{e});if(d)pushDil(d,KCE[e].t)}
 function kcMonth(){S.turn++;const k=S.origin.k;
  apply({bac:5+Math.round(S.kgtu/6)});
  if(!S.kc.ev.chieu||S.kc.mien)S.kap+=KC.apM+(S.age>=19?1:0)+(S.kgtu<BAL.kc2.st.kc.gtuPoor?1:0)+(S.kc.suit.length?1:0);/* registered for tuyển tú: no match may be made */S.kld=Math.max(0,S.kld-2);
@@ -317,7 +319,7 @@ function kcMonth(){S.turn++;const k=S.origin.k;
  kcW(()=>{for(const v of liveRivals(true))stipend(v);rivalsMonth();servRanks();servMonth();oanMonth();restock();heirMonth();moodMonth();try{tdMonth()}catch(e){}return""});if(S.dead)return;
  /* suitors and the forced match */
  if(S.kc.ev.chieu&&!S.kc.mien){}
- else if(S.kap>=BAL.kc2.st.kc.moi&&S.kc.suit.length<2&&roll(BAL.kc2.kcCard.kcMonth_rb+S.kap/3)){const s=kcSuitor();S.kc.suit.push(s);pushDil(mkP("kcE",{e:"moi"}),"Bà mối đến nhà")}
+ else if(S.kap>=BAL.kc2.st.kc.moi&&S.kc.suit.length<2&&(kcSO=npcWhy("kcSuit",{},()=>roll(BAL.kc2.kcCard.kcMonth_rb+S.kap/3)))){const s=kcSuitor(kcSO.who.x);S.kc.suit.push(s);pushDil(mkP("kcE",{e:"moi"}),"Bà mối đến nhà")}
  else if(S.kap>=BAL.kc2.st.kc.dinh&&S.kc.suit.length&&!S.kc.forced){S.kc.forced=1;pushDil(mkP("kcE",{e:"dinhhon"}),"Cha định hôn")}
  /* chapters: the origin chapter (3 beats), on a fixed calendar */
  const beat={4:0,10:1,16:2}[S.turn];if(beat!=null&&!S.dead)pushDil(mkP("kcE",{e:"o"+beat}),KCO[k]?KCO[k].t:"Chuyện nhà");
@@ -327,8 +329,10 @@ function kcMonth(){S.turn++;const k=S.origin.k;
  S.month++;S.tuan=0;if(S.month>12){S.month=1;S.year++;S.age++;try{S.emp.age++;ageYear()}catch(e){}try{allKids().forEach(([kk])=>{if(kk.alive)kk.age++})}catch(e){}for(const m of S.kc.fam)m.age++}
  if(isKc()&&S.year===KC.ty&&S.month===KC.tm-1&&!S.kc.so)kcSoTuyen();
  if(S.suc<=0&&isKc())kcDie("Lao lực mà chết trước kỳ tuyển tú")}
-function kcSuitor(){const L=[["Thế tử hầu phủ","hau",80],["con trai Thượng thư bộ Hộ","quan",65],["Thám hoa khoa này","than",55],["đại thương Giang Nam","thuong",45],["lão Thị lang góa vợ","lao",30]];
- const f=L.filter(x=>x[2]<=S.kgt+35+R(20));const s=pick(f.length?f:L.slice(-2));return{n:s[0],k:s[1],q:s[2]}}
+const KCSUIT=[["Thế tử hầu phủ","hau",80],["con trai Thượng thư bộ Hộ","quan",65],["Thám hoa khoa này","than",55],["đại thương Giang Nam","thuong",45],["lão Thị lang góa vợ","lao",30]];let kcSO=null;
+function kcSuitReach(x){return x[2]<=S.kgt+BAL.ag.why.kcSuit.reach}
+/* npc-purpose G2: the house that seeks her = the highest one her standing reaches (its own ambition), not a die */
+function kcSuitor(s){const L=KCSUIT;if(!s){const f=L.filter(kcSuitReach);s=npwPick(f.length?f:L.slice(-2),x=>x[2])||L[L.length-1]}return{n:s[0],k:s[1],q:s[2]}}
 
 /* ---------- events (PEND; options show only costs; results show the numbers) ---------- */
 function kcO(n,cost,go,more){const c=cost||{};const s=fmt(c);/* r2: go is wrapped so the kit's source reader (j79 kitBranchFx) never shows an outcome
@@ -366,7 +370,7 @@ const KCE={
  bac:{t:"Huynh trưởng thua bạc",b:()=>{const h=kcR("huynh");return{who:kcFace(h),t:`<p>${h.name} thua bạc ở sòng phía Nam, nợ năm mươi lạng, lén xin ngươi giúp, đừng cho cha biết.</p>`,o:[
   kcO("Đưa bạc",{bac:-BAL.kc2.st.kc.bacHuynh},()=>kcDo("Thua bạc",()=>{kcAf(h,BAL.eff.jkc.o_12);h.me+=BAL.eff.jkc.meO;return"Huynh trưởng thề sẽ trả ơn."}),{dis:S.bac<BAL.kc2.st.kc.bacHuynh}),
   kcO("Mách cha",{},()=>kcDo("Thua bạc",()=>{kcAf(h,BAL.eff.jkc.o_13);h.oan+=BAL.eff.jkc.oanO_6;const c=kcR("cha");if(c)kcAf(c,BAL.eff.jkc.o_14);S.kgt-=BAL.eff.jkc.kgtO_4;return"Cha đánh huynh trưởng mười roi."})),
-  kcO("Từ chối, giữ kín",{},()=>kcDo("Thua bạc",()=>{kcAf(h,BAL.eff.jkc.o_15);if(roll(40)){S.kgt-=BAL.eff.jkc.kgtO_5;return"Chủ sòng đến tận cửa đòi nợ. Cả phố biết."}return"Huynh trưởng tự xoay xở được."}))]}}},
+  kcO("Từ chối, giữ kín",{},()=>kcDo("Thua bạc",()=>{kcAf(h,BAL.eff.jkc.o_15);/* he tries to raise it himself: fails at BAL.ag.why.kcDebt.fail odds → the creditor comes */if(roll(BAL.ag.why.kcDebt.fail)){S.kgt-=BAL.eff.jkc.kgtO_5;return"Chủ sòng đến tận cửa đòi nợ. Cả phố biết."}return"Huynh trưởng tự xoay xở được."}))]}}},
  tobenh:{t:"Tổ mẫu lâm bệnh",b:()=>{const t=kcR("to");S.kc.ev.tobenh=1;return{who:kcFace(t),t:`<p>Tổ mẫu lâm bệnh nặng. Cả nhà bàn ai sẽ hầu thuốc ngày đêm.</p>`,o:[
   kcO("Xin được hầu thuốc",{suc:-25},()=>kcDo("Hầu thuốc",()=>{kcAf(t,BAL.eff.jkc.o_16);apply({duc:4,kgt:2});return"Ngươi thức trắng nửa tháng. Tổ mẫu khỏi bệnh, nắm tay ngươi không buông."})),
   kcO("Để thứ muội hầu",{},()=>kcDo("Hầu thuốc",()=>{const m=kcR("muoi");if(m){m.danh+=2;kcAf(t,BAL.eff.jkc.o_17)}return"Thứ muội được khen hiếu thảo."}))]}}},
@@ -381,7 +385,7 @@ const KCE={
  hoa:{t:"Hội ngắm mẫu đơn",b:()=>({who:pMe(),t:`<p>Hầu phủ mời các nhà đến ngắm mẫu đơn. Các phu nhân đi xem mặt dâu.</p>`,o:[
   kcO("Đi, đánh đàn góp vui",{suc:-15},()=>kcFest("Ngắm hoa","cam")),kcO("Đi, chỉ ngắm hoa",{suc:-10},()=>kcDo("Ngắm hoa",()=>{S.danh+=1;S.kap+=BAL.eff.jkc.kapO_3;return"Có phu nhân hỏi tuổi ngươi."})),kcO("Ở nhà",{},()=>kcDo("Ngắm hoa",()=>""))]})},
  thuongnguyen:{t:"Tết Thượng nguyên",b:()=>({who:pMe(),t:`<p>Đêm rằm tháng giêng, cả kinh thành treo đèn. Khuê nữ được ra phố ngắm đèn, thắp đèn thi.</p>`,o:[
-  kcO("Ra phố thắp đèn thi",{suc:-15},()=>kcFest("Thượng nguyên","thi",()=>{const tm=kcTmMan();if(tm&&S.tm96&&roll(60)){S.tm96.h=Math.min(100,S.tm96.h+10);S.kld+=4;return `Dưới đèn hoa, ngươi gặp ${tm.name}. Hai người đứng cạnh nhau rất lâu.`}return""})),kcO("Ở nhà cùng mẫu thân",{},()=>kcDo("Thượng nguyên",()=>{const m=kcR("me")||kcR("di");if(m)kcAf(m,BAL.eff.jkc.o_20);return""}))]})},
+  kcO("Ra phố thắp đèn thi",{suc:-15},()=>kcFest("Thượng nguyên","thi",()=>{const tm=kcTmMan();if(tm&&S.tm96&&npcWhy("kcMeet",{tm},()=>roll(60))){S.tm96.h=Math.min(100,S.tm96.h+10);S.kld+=4;return `Dưới đèn hoa, ngươi gặp ${tm.name}. Hai người đứng cạnh nhau rất lâu.`}return""})),kcO("Ở nhà cùng mẫu thân",{},()=>kcDo("Thượng nguyên",()=>{const m=kcR("me")||kcR("di");if(m)kcAf(m,BAL.eff.jkc.o_20);return""}))]})},
  thattich:{t:"Đêm Thất tịch",b:()=>({who:pMe(),t:`<p>Đêm Thất tịch, các khuê nữ thi xâu kim dưới trăng, cầu khéo tay.</p>`,o:[kcO("Thi xâu kim",{suc:-10},()=>kcFest("Thất tịch","theu")),kcO("Ngồi xem",{},()=>kcDo("Thất tịch",()=>""))]})},
  trungduong:{t:"Tết Trùng dương",b:()=>({who:pMe(),t:`<p>Cả nhà lên núi ngắm cúc, uống rượu hoa cúc.</p>`,o:[kcO("Đi cùng cả nhà",{suc:-10},()=>kcDo("Trùng dương",()=>{for(const m of S.kc.fam.filter(x=>x.alive&&!/^ban/.test(x.r)))kcAf(m,BAL.eff.jkc.o_21);apply({suc:5});return"Một ngày yên ấm hiếm hoi."}))]})},
  tmrise:{t:"Người ấy đỗ đạt",b:()=>{const tm=kcTmMan();S.kc.ev.tmrise=1;S.tm96.rise=1;return{who:pMan(tm),t:`<p>${tm.name} ${TM96V[S.tm96.k]?TM96V[S.tm96.k].how:"thành danh"}. Tin bay khắp kinh thành.</p>`,o:[
@@ -504,12 +508,12 @@ function kcSoGo(bribe){const b=rsnap();if(kcSoOk(bribe)){S.kpTron=1;S.kc.soOk=1;
 function kcTuyen(early){if(S.kc.tt||S.dead)return;if(!early&&!S.kc.soOk)return;S.kc.tt={early:!!early,raw:5};if(early){S.kpTron=1}
  if(early){pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");return}pushDil(mkP("kcE",{e:"phuc"}),"Phúc tuyển")}
 function kcBestArt(){let b="cam",v=-1;for(const a of ARTS){if(a.k==="y")continue;const l=(S.arts||{})[a.k]||0;if(l>v){v=l;b=a.k}}return b}
-function kcPhucD(){const k=kcBestArt();const A=ARTS.find(a=>a.k===k);return{who:pMe(),t:`<p>Trữ Tú cung. Các tú nữ lần lượt dâng tài nghệ trước các ma ma và nữ quan. Ngươi chọn môn ${A.n} (bậc ${(S.arts||{})[k]||0}).</p>`,o:[
+function kcPhucD(){const k=kcBestArt();const A=ARTS.find(a=>a.k===k);return{who:pMe(),t:`<p>Nội vụ phủ. Các tú nữ lần lượt dâng tài nghệ trước các ma ma và nữ quan. Ngươi chọn môn ${A.n} (bậc ${(S.arts||{})[k]||0}).</p>`,o:[
  kcO(`Dâng ${A.n}`,{suc:-10},()=>kcPhucPlay(k,false)),kcO("Để tài nghệ quyết định",{suc:-10},()=>kcPhucPlay(k,true))]}}
 function kcPhucPlay(k,skip){if(!isKc()||!S.kc.tt||S.kc.tt.done)return;/* r2-r1: a stale Phúc tuyển card answered after the round never opens the mini-game */S.kc.tt.play=1;const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");try{showModal()}catch(e){}};
  if(skip||window.__bot||typeof playArt!=="function"){fin(skip?5:cl(3+R(6),0,10));return}/* fix: the ONE exam seam (jkc2 kc2Play contract) — kind = origin key, info.art = the art she offered, info.phuc = this is the tiểu thư Phúc tuyển */
  if(typeof window.kcEntryExam==="function"){try{window.kcEntryExam(S.origin&&S.origin.k,raw=>fin(raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"Điểm màn chơi cộng vào Điện tuyển",phuc:1});return}catch(e){console.error(e)}}
- try{playArt({art:k,occ:"tuyen",title:"Phúc tuyển",note:"Điểm màn chơi cộng vào Điện tuyển",onDone:(raw,o)=>fin(o&&o.skipped?5:raw)})}catch(e){console.error(e);fin(5)}}
+ try{playArt({art:k,occ:"tuyen",title:"Phúc tuyển",note:"Điểm màn chơi cộng vào Điện tuyển",quick:{n:"Để tài nghệ quyết định",sub:"tính 5/10, như người cùng bậc"},onDone:(raw,o)=>fin(o&&o.skipped?5:raw)})}catch(e){console.error(e);fin(5)}}
 function kcScore(st){/* st: {sac,tai,duc,danh,arts?} — the same rule for her and for the other girls */
  const W=BAL.entry.w.kc;/* ONE CORE (review/origin-intros): weights in BAL.entry.w.kc, unchanged */const arts=st.arts?Math.max(0,...Object.values(st.arts)):0;
  return st.sac*W.sac+st.tai*W.tai+st.duc*W.duc+Math.min(W.danhCap,st.danh)*W.danh+arts*W.arts+(st.raw||W.raw0)*W.raw+(st.le||0)*W.le+(st.pow||W.pow0)*W.pow+(st.th||0)*W.th+(st.ld||0)*W.ld+(st.bonus||0)}
@@ -613,7 +617,7 @@ function kcFamHTML(){const nha=kcFamList("nha"),ban=kcFamList("ban");const rest=
  const T=kitSubTabs("kcfam",[Object.assign({k:"nha",label:"Người nhà"},cnt(nha)),Object.assign({k:"ban",label:"Khuê hữu"},cnt(ban)),{k:"gia",label:"Gia thế",doable:rest.filter(([a])=>kcDoable(a)).length,total:rest.length}]);
  let h=T.html;
  if(T.cur==="gia")h+=kitRows([[kitInfo("Gia thanh"),S.kgt,S.kgt<BAL.kc2.st.kgtLow?"r":"t"],["Thế lực nhà",kcPow(),"t"],["Gia tư",S.kgtu,"t"],["Hồi môn cha mẹ hứa",kitChip("Bạc",S.khm,"n"),"t"],[kitInfo("Áp lực hôn sự"),S.kap,S.kap>=BAL.kc2.st.kc.hot?"r":"t"]])+kcCardsH(rest);
- else{const L=T.cur==="ban"?ban:nha;const key=T.cur==="ban"?"kcban":"kcfam";h=L.length?`<div class="pgwrap"><div class="kpinline">${T.html}</div>`+pager(key,L.map(m=>({f:kcFace(m),name:m.t==="Khuê hữu"?shortN(m.name):m.t})),i=>kcFamCard(L[i]))+`</div>`:T.html+kitEmpty("Gia tộc","Không còn ai.")}
+ else{const L=T.cur==="ban"?ban:nha;const key=T.cur==="ban"?"kcban":"kcfam";h=L.length?`<div class="pgwrap"><div class="kpinline">${T.html}</div>`+pager(key,L.map(m=>({sz:"xs",f:kcFace(m),name:m.t==="Khuê hữu"?shortN(m.name):m.t})),i=>kcFamCard(L[i]))+`</div>`:T.html+kitEmpty("Gia tộc","Không còn ai.")}
  return h}
 /* Dư đồ: sub-tabs Trong phủ · Kinh thành, one kit priced button per place (who is there; city = 1 khắc; why locked) */
 function kcMapHTML(){const B=(k)=>{const P=KCPL[k];const w=kcGoWhy(k);const ppl=kcHere(k).map(m=>m.t.toLowerCase());const tmh=S.kc.at.ftm===k&&kcTmMan()?["người ấy"]:[];const who=ppl.concat(tmh);
@@ -638,8 +642,7 @@ function kcStoryHTML(){const k=S.origin.k;const n=[4,10,16].filter(x=>S.turn>=x)
   groups:[["Tư chất",[["Sắc",S.sac,"t"],["Tài",S.tai,"t"],["Tâm cơ",S.tamco,"t"],["Đức",S.duc,"t"],["Sức",S.suc,"t"],["Bạc",kitChip("Bạc",S.bac,"n"),"t"],["Danh",S.danh,"t"]]],
    ["Nhà",[["Gia thanh",S.kgt,"t"],["Áp lực hôn sự",S.kap,S.kap>=BAL.kc2.st.kc.hot?"r":"t"],["Hồi môn",kitChip("Bạc",S.khm,"n"),"t"]]]].concat(typeof kcuHonorRows==="function"&&kcuHonorRows(1).length?[["Danh hiệu thi tài",kcuHonorRows(5)]]:[])})}})();
 /* the title screen slot line */
-(function(){const t0=showTitle;showTitle=function(){const r=t0.apply(this,arguments);try{document.querySelectorAll("#slots .slot").forEach(el=>{const b=el.querySelector("[data-load]");if(!b)return;const d=loadSlot(+b.dataset.load);
- if(d&&d.S&&d.S.kc&&!d.S.kc.inPal){const sp=el.querySelector(".past");if(sp)sp.textContent=sp.textContent.replace(/^[^·]*/,"Tiểu thư ngoài cung ")}})}catch(e){}return r}})();
+/* the Chọn sổ rows say who the sổ is through j74 slotWho (one place, kc lives included); the old #slots .slot text patch is gone with the old rows */
 
 /* ---------- co-op hook points (OUTSIDE_PLAN §13; no networking: single-player routes them to the log) ---------- */
 const KCHOOK=[];function kcHook(kind,payload){KCHOOK.push({kind,payload,t:S?S.turn:0});if(KCHOOK.length>50)KCHOOK.shift();try{if(typeof window.coopSend==="function")window.coopSend("kc:"+kind,payload)}catch(e){}}
@@ -655,7 +658,7 @@ function kcFigLoad(){try{fetch("img/FIGURES-kc.json",{cache:"no-cache"}).then(r=
  const n=Object.keys(X).length;const was=Object.keys(KCFX).length;KCFX=X;if(n!==was)try{if(isKc())render()}catch(e){}}).catch(()=>{})}catch(e){}}
 kcFigLoad();setInterval(kcFigLoad,300000);
 function kcDress(){return S&&S.origin&&(S.origin.k==="thd"||(S.origin.k==="td"&&!kcLore()))?"ngheo":"kc"}/* KC LORE: td is a Thị lang's daughter until the day she leaves home: khuê các dress; only thd is poor */
-const KC_AB=["a18","a26","a36","a51"];function kcBand(age){return ageBandIx(age)}
+const KC_AB=["a18","a26","a36","a51","a65"];function kcBand(age){return ageBandIx(age)}
 function kcDressRec(fid,tier,age){const X=fid&&KCFX[fid];const L=X&&X[tier];if(!L||!L.length)return null;const w=kcBand(age==null?18:age);/* the band of her age, else the nearest one */
  let b=null,bd=9;for(const f of L){const d=Math.abs(KC_AB.indexOf(f.ageBand||"a18")-w);if(d<bd){bd=d;b=f}}return b}
 function kcDressSrc(fid,kind,tier,age){const f=kcDressRec(fid,tier||kcDress(),age==null&&S?S.age:age);if(!f)return"";return figPath(kind==="por"?(f.por||f.file):f.file)}

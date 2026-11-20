@@ -106,6 +106,8 @@ function memAdd(h,a,d,o){if(off())return null;o=o||{};const hk=mk(h),ak=mk(a);co
  if(m){m.g=Math.min(100,Math.round(m.g+g*C.reinforce),Math.max(m.g,Math.round(((C.w||{})[d]||g)*C.reinforceMax)));m.g0=Math.max(m.g0||0,m.g);m.n=(m.n||1)+1;m.w=nowW();m.dt=dtNow();if(!m.L&&isLife(d,m.g,o))m.L=1}
  else{m={d,s:D[0],g,g0:g,k:D[1]||(o.keep?1:0),n:1,w:nowW(),dt:dtNow()};if(x)m.x=x;if(isLife(d,g,o))m.L=1;L.unshift(m)}
  if(o.c)m.c=String(o.c);if(o.y)m.y=o.y;
+ /* MOOD-MEM: where it happened (both people at one place) — a later visit there can wake the memory (jmoodknow mwTick) */
+ try{if(typeof mwPlaceOf==="function"){const pl=mwPlaceOf(hk,ak);if(pl)m.pl=pl}}catch(e){}
  /* cap: ordinary memories ≤ cap, lifelong ones ≤ lifeCap, each list keeps its strongest */
  const lf=L.filter(z=>z.L).sort((p,q)=>q.g-p.g).slice(0,C.lifeCap),nl=L.filter(z=>!z.L).sort((p,q)=>q.g-p.g).slice(0,C.cap);
  L.length=0;L.push(...lf.concat(nl).sort((p,q)=>q.g-p.g));if(!L.includes(m))return null;
@@ -147,11 +149,13 @@ function memFade(){if(off())return;memMig();const M=memS();if(M._mo===S.turn)ret
 function memDead(){try{const C=BH();for(const v of (typeof rivals!=="undefined"?rivals:[])){if(!v||v.coop||v.alive!==false)continue;if(v.mem)delete v.mem;
   if(v.cz&&typeof v.cz==="object"){const ks=Object.keys(v.cz);if(ks.length>C.czDeadMax){ks.sort((a,b)=>(v.cz[b].w-v.cz[a].w)||((v.cz[b].q||0)-(v.cz[a].q||0)));for(const k of ks.slice(C.czDeadMax))delete v.cz[k]}}}}catch(e){}}
 /* "Nhắc lại ân xưa": spend a good memory → the person owes her one ân (j72 ledger) */
-function memInvoke(v){const C=B();const m=memTop(v,S,1);if(!m||m.g<C.invokeMin)return"";m.g=Math.max(0,m.g-C.invokeCost);
- let owe=false;try{if(typeof q72A==="function"&&typeof q72DebtAdd==="function"){const A=q72A("rv",v.id);if(A){q72DebtAdd(A,1);owe=true}}}catch(e){}
- if(!owe)try{affAdd(v,S,C.invokeAff)}catch(e){}
+/* AG-ALL-2e: p = who invokes (default her); an NPC invoking another NPC's memory of her goes through the same rule (no q72 ledger between NPCs → the liking step) */
+function memInvoke(v,p){p=p||S;const C=B();const m=memTop(v,p,1);if(!m||m.g<C.invokeMin)return"";m.g=Math.max(0,m.g-C.invokeCost);
+ let owe=false;if(p===S)try{if(typeof q72A==="function"&&typeof q72DebtAdd==="function"){const A=q72A("rv",v.id);if(A){q72DebtAdd(A,1);owe=true}}}catch(e){}
+ if(!owe)try{affAdd(v,p,C.invokeAff)}catch(e){}
+ if(p!==S)return `${p.name} nhắc ${v.name} chuyện xưa: ${p.name} đã ${phrase(m,v.name)}; ${v.name} quý ${p.name} hơn`;
  return `Ngươi nhắc ${v.name} chuyện xưa: ngươi đã ${phrase(m,"nàng")}. ${v.name} cúi đầu: “Ơn ấy ta chưa trả.”${owe?" Nàng nợ ngươi một ân.":""}`}
-Object.assign(window,{memAdd,memList,memScore,memMod,memTop,memLine,memFade,memInvoke,memAgo,memKey:mk,memFadeK,memHolders,memPairs,memFadeWord});
+Object.assign(window,{memAdd,memList,memScore,memMod,memTop,memLine,memFade,memInvoke,memAgo,memKey:mk,memFadeK,memHolders,memPairs,memFadeWord,memPhrase:phrase,memName:mName,memPron:mPron,memNum:NUMW});/* MOOD-MEM mwWhy reuses these (one phrase / name / pronoun source) */
 
 /* ================= HOOK LEDGER ================= */
 const HK_KIND={promise:"Lời hứa",debt:"Ngươi nợ ân",favour:"Nợ ngươi một ân",secret:"Bí mật nắm được",threat:"Bị nắm thóp",proof:"Chứng cứ trong tay",vow:"Lời thề"};
@@ -349,11 +353,11 @@ if(typeof servAct==="function"){const v0=servAct;servAct=function(a,id){let s=nu
 if(typeof oanMonth==="function"){const o0=oanMonth;oanMonth=function(){const r=o0.apply(this,arguments);try{memFade();hookTick()}catch(e){console.error("mem",e)}return r}}
 
 /* ================= RECALL: odds, NPC minds, talk ================= */
-if(typeof oAlly==="function"){const a0=oAlly;oAlly=function(a,t){const o=a0.apply(this,arguments);try{return typeof o==="number"?cl(o+memMod(t,a),5,95):o}catch(e){return o}}}
+if(typeof oAlly==="function"){const a0=oAlly;oAlly=function(a,t){const o=a0.apply(this,arguments);try{return typeof o==="number"?oddsCl(o+memMod(t,a)):o}catch(e){return o}}}
 if(typeof hostility==="function"){const h0=hostility;hostility=function(v,t){const h=h0.apply(this,arguments);try{return h-memMod(v,t)}catch(e){return h}}}
 if(typeof talkOpts==="function"){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(off()||!p||!Array.isArray(A))return A;const v=p.ref;
  if(!(p.kind==="rival"||p.kind==="hh")||!v||v===S)return A;const md=memMod(v,S);
- if(md)A.forEach(a=>{if(a&&typeof a.o==="number"&&a.o>0&&a.o<100)a.o=cl(a.o+md,5,95)});
+ if(md)A.forEach(a=>{if(a&&typeof a.o==="number"&&a.o>0&&a.o<100)a.o=oddsCl(a.o+md)});
  const C=B();const good=memTop(v,S,1);
  if(good&&good.g>=C.invokeMin&&!A.some(a=>a&&a.n==="Nhắc lại ân xưa"))A.push({n:"Nhắc lại ân xưa",o:100,x:`nàng nợ ngươi một ân · kỷ niệm ${MEM_DEEDS[good.d]?"“"+phrase(good,"nàng")+"”":""} phai bớt`,run:()=>memInvoke(v)});
  const sec=hookQuery({k:"secret",by:"me",on:v,mir:false}).find(h=>h.str==="strong");

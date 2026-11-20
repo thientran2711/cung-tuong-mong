@@ -56,8 +56,63 @@ function k3court(){let R=[];try{R=typeof kitCourtRows==="function"?kitCourtRows(
   let att="";if(r.k==="th"||r.k==="hh"){const n=r.k==="th"?(S.th|0):(S.hh|0);const known=typeof window.kitCourtKnown!=="function"||window.kitCourtKnown(r.k)!==false;
    if(known)att=`<span class="k3v"><small>quý ngươi</small> <span class="ef ${n>0?"g":n<0?"r":"n"}">${n>0?"+":""}${n}</span></span>`}
   return `<button type="button" class="k3c kcrow" data-kc="${r.k}" title="${r.who} · chạm để xem thẻ">${mdH(r.f,"xs")}<span class="k3ct"><b>${r.who}</b>${moodTxt}${att}</span></button>`}).join("")}
-function k3maid(){const b=k3hc("maid");if(!b||!S.maid||(typeof isSrv==="function"&&isSrv()))return"";let f="";try{f=mdH(pMaid(),"xs")}catch(e){}
- const v=k3val(b),n=+v;return `<button type="button" class="k3c" data-k3go="staff" title="Cung nữ thân tín · chạm để xem">${f}<span class="k3ct"><b>${esc(S.maid.name)}</b><span class="k3v"><small>Lòng</small> <span class="ef ${n>=BAL.loy.close?"g":n<BAL.loy.warn?"r":"n"}">${esc(v)}</span></span></span></button>`}
+/* KIT PART kitGroupFold (owner 18/11 ~20:55Z, review/stage-rightcol; KIT_REQUESTS kitCrewPlaque renamed): ONE generic group accordion for the stage right column.
+   Closed = one kit row "Label · N ›" (no faces, same look as "Ân sủng ›"); tap = the group's person cards DROP DOWN in place ("Label · N ‹" folds), never another frame.
+   ONE group open at a time; the open key lives in window.__kgfOpen (kept for the whole session, not per place). kitGroupFold(key,label,n,itemsHTML) -> html. */
+function kitGroupFold(key,label,n,items){if(!n||!items||window.__kgfOpen!==key)return"";
+ return `<div class="k3p kgf kgfopen" data-kgfbox="${key}"><button type="button" class="k3h kgf-t" data-kgf="${key}" title="${esc(label)} · ${n} · chạm để thu lại"><span>${esc(label)} · ${n}</span><b>‹</b></button><div class="kgf-l">${items}</div></div>`}
+/* the two small group buttons (right column: top of #kshR on the stage and the iPad map): number over label, same square kit button as the rail; tap = drop list under them */
+function kitGroupBtns(){const d=[["cn","Cung nhân"],["ct","Chí tôn"]].map(([k,l])=>[k,l,kgfCount(k)]).filter(x=>x[2]>0);if(!d.length)return"";
+ return `<div class="kgfbtns">${d.map(([k,l,n])=>{const on=window.__kgfOpen===k;return `<button type="button" class="krailb krailt kgfbtn${on?" kopen":""}" data-kgf="${k}" aria-pressed="${on}" title="${l} · ${n} · chạm để ${on?"thu lại":"mở"}"><b>${n}</b><span>${l}</span></button>`}).join("")}</div>`}
+window.kitGroupFold=kitGroupFold;window.kitGroupBtns=kitGroupBtns;
+/* «Cung nhân» = her household: the personal maid + every maid / eunuch of S.staff (same person cards as the Cung nhân tab; tap = that tab) */
+function k3crewChip(f,name,loy,tip){const n=+loy;return `<button type="button" class="k3c" data-k3go="staff" title="${esc(tip)} · chạm để xem">${f}<span class="k3ct"><b>${esc(name)}</b><span class="k3v"><small>Lòng</small> <span class="ef ${n>=BAL.loy.close?"g":n<BAL.loy.warn?"r":"n"}">${esc(String(loy))}</span></span></span></button>`}
+function k3crewList(){if(!S||(typeof isSrv==="function"&&isSrv()))return"";let h="";
+ if(S.maid){let f="";try{f=mdH(pMaid(),"xs")}catch(e){}h+=k3crewChip(f,S.maid.name,S.maid.loyal|0,"Cung nữ thân tín")}
+ (S.staff||[]).forEach(s=>{if(!s||s===S.maid)return;let f="";try{f=mdH(pServ(s),"xs")}catch(e){}h+=k3crewChip(f,typeof shortN==="function"?shortN(s.name):s.name,s.loyal|0,s.role==="eunuch"?"Thái giám":"Cung nữ")});
+ return h}
+function k3crewN(){return kgfCount("cn")}
+function k3crew(){return kitGroupFold("cn","Cung nhân",kgfCount("cn"),k3crewList())}
+function k3chitonG(){let R=[];try{R=typeof kitCourtRows==="function"?kitCourtRows():[]}catch(e){}return kitGroupFold("ct","Chí tôn",R.length,k3court())}
+/* PHONE DƯ ĐỒ (owner 18/11 ~21:40Z): no full-width group bars. «Cung nhân» / «Chí tôn» = TWO small kit rail buttons (number over label) right under the book / scroll icons;
+   tap = that group's people list drops down in the empty left strip of the map under the buttons (#kgfdrop, one open at a time, tap again closes). */
+function kgfPhoneMap(){try{const m=kitSideHost();return !!m&&m.classList.contains("mapv")&&kitView().pages===1}catch(e){return false}}
+function kgfCount(k){try{if(!S||S.dead)return 0;if(k==="cn"){if(typeof isSrv==="function"&&isSrv())return 0;return(S.maid?1:0)+(S.staff||[]).filter(s=>s&&s!==S.maid).length}return(typeof kitCourtRows==="function"?kitCourtRows():[]).length}catch(e){return 0}}
+function kgfDrop(){try{let d=document.getElementById("kgfdrop");const k=window.__kgfOpen,mv=kitSideHost();
+ if(!k||!kgfPhoneMap()||!mv||!S||S.dead){if(d)d.remove();kgfTags(null);return}
+ const lab=k==="cn"?"Cung nhân":"Chí tôn",n=kgfCount(k);if(!n){if(d)d.remove();kgfTags(null);return}
+ const items=k==="cn"?k3crewList():k3court();
+ if(!d){d=document.createElement("div");d.id="kgfdrop";d.className="ksh kgfdrop"}if(d.parentNode!==mv)mv.appendChild(d);
+ const h=`<div class="k3p kgf kgfopen"><div class="k3h kgf-t" style="cursor:default"><span>${esc(lab)} · ${n}</span></div><div class="kgf-l">${items}</div></div>`;if(d.__h!==h){d.innerHTML=h;d.__h=h}
+ const rl=document.getElementById("krail"),m0=mv.getBoundingClientRect(),r0=rl?rl.getBoundingClientRect():null;d.style.top=Math.round((r0&&r0.height?r0.bottom-m0.top:52)+6)+"px";
+ const ar=document.querySelector("#kshR .kas,#kshR .k3py");const bot=ar?ar.getBoundingClientRect().top-m0.top-6:m0.height-8;d.style.maxHeight=Math.max(120,Math.round(bot-parseFloat(d.style.top)))+"px";kgfTags(d)}catch(e){console.error("kgfDrop",e)}}
+/* MAIN ROOT-57 (owner 21:40Z «must not cover the map's place tags more than needed»): while the list is open, a map place tag (.mspot) the list would cover steps right
+   just clear of the list (translate only, nothing else changes; data-kgft marks the ones moved); closing the list or panning the map puts every tag back / re-checks */
+function kgfTags(d){try{document.querySelectorAll(".mspot[data-kgft]").forEach(t=>{t.style.translate="";delete t.dataset.kgft});if(!d||!d.isConnected)return;
+ const sc=d.parentNode&&d.parentNode.querySelector(".mapsc")||document.querySelector(".game.maptab .mapsc,.mapv .mapsc");if(!sc)return;
+ const a=d.getBoundingClientRect(),m=sc.getBoundingClientRect(),T=[...sc.querySelectorAll(".mspot")].filter(t=>t.offsetParent).map(t=>({t,z:t.getBoundingClientRect()})).filter(o=>o.z.width>2);
+ const ov=(z,l,r)=>l<z.right&&r>z.left;const vis=z=>z.right>m.left&&z.left<m.right&&z.bottom>m.top&&z.top<m.bottom;
+ T.forEach(o=>{const z=o.z;if(!vis(z)||!ov(z,a.left,a.right+2)||z.bottom<=a.top||z.top>=a.bottom)return;
+  /* step right just clear of the list, then past any other tag it would land on (≤4 hops), only if it stays inside the map view */
+  let L=a.right+4;for(let k=0;k<4;k++){const w=z.right-z.left,R=L+w;const h=T.find(q=>q!==o&&!q.moved&&vis(q.z)&&ov(q.z,L,R)&&q.z.top<z.bottom&&q.z.bottom>z.top);if(!h)break;L=h.z.right+3}
+  let dx=Math.ceil(L-z.left);if(z.right+dx>m.right-2||L-a.right>z.right-z.left)dx=Math.ceil(a.right+4-z.left);/* no free gap near: just clear of the list (readable beats hidden) */
+  if(z.right+dx<=m.right-2){o.t.style.translate=dx+"px 0";o.t.dataset.kgft=dx;o.moved=1;o.z={left:z.left+dx,right:z.right+dx,top:z.top,bottom:z.bottom}}})}catch(e){console.error("kgfTags",e)}}
+/* the map re-draws (render) and pans (scroll of any map box): re-check while the list is open */
+(function(){let q=0;const go=()=>{cancelAnimationFrame(q);q=requestAnimationFrame(()=>{const d=document.getElementById("kgfdrop");if(d||document.querySelector(".mspot[data-kgft]"))kgfTags(d)})};
+ document.addEventListener("scroll",go,{capture:true,passive:true});addEventListener("resize",go);
+ /* the map can also be moved without a scroll event (centring / zoom moves the picture box): while the list is open only, a light re-check every 300 ms; idle otherwise */
+ setInterval(()=>{if(!document.hidden&&document.getElementById("kgfdrop"))go()},300);
+ if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{go();setTimeout(go,350)}catch(e){}return r}}})();
+function kgfRail(){try{if(kgfRail.done||typeof kitStageRail!=="object")return;kgfRail.done=1;
+ [["cn","Cung nhân",1],["ct","Chí tôn",2]].forEach(([k,lab,o])=>kitStageRail.add({id:"kgf-"+k,order:60+o,label:lab,title:lab+" · chạm để mở danh sách",count:()=>kgfCount(k),active:()=>window.__kgfOpen===k,when:()=>kgfPhoneMap()&&kgfCount(k)>0,onTap:()=>{window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();kgfDrop()}}))}catch(e){}}
+/* owner ruling via ROOT-56: an open group list closes with ONE tap anywhere outside it (map, tag, figure) — that tap only closes — and with Esc */
+function kgfClose(){if(!window.__kgfOpen)return false;window.__kgfOpen=null;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();try{kitStageRail.paint()}catch(e){}return true}
+document.addEventListener("click",e=>{if(!window.__kgfOpen)return;const t=e.target;if(t&&t.closest&&t.closest("#kgfdrop,#kshR .kgfopen,[data-kgf],#krail [data-rail^=kgf-]"))return;if(kgfClose()){e.stopPropagation();e.preventDefault()}},true);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&kgfClose())e.stopPropagation()},true);
+/* ROOT-56 flag: a figure's emotion face chip (.kemo seal) never sits under the right column — handled in the ONE kit part kitFigSeal (jfigseal: stage plaque columns are a
+   no-go zone, KIT_FIGSEAL.pad); here we only re-run the seal placement after the column changes (no private margin shifts, no polling) */
+function kgfClearEmo(){try{if(typeof kitFigSealAll==="function")kitFigSealAll()}catch(e){console.error("kgfClearEmo",e)}}
+window.kgfClearEmo=kgfClearEmo;
 /* Ân sủng chips (owner 11/15 04:05Z): Tai mắt + the Ân sủng facts under the court chips, same plaque card and column width, one value per line,
    labels never cut. Có thai / Lật thẻ on the chance scale (chanceLvl, j1: Rất thấp…Rất cao), never the act ladder. Bổng lộc lives only here. */
 function k3AsRows(){/* consort-only facts (Lật thẻ, Có thai, Bổng lộc…): none on the cung nữ road nor in lãnh cung (review/small-bugs-2) */if(!S||S.dead||(window.kitRoad&&kitRoad()))return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
@@ -74,6 +129,9 @@ function k3AsCrowded(st,R){try{const s=st.getBoundingClientRect(),r=R.getBoundin
  const hit=q=>Math.min(q.right,r.right)-Math.max(q.left,r.left)>1&&Math.min(q.bottom,r.bottom)-Math.max(q.top,r.top)>1;
  const figs=typeof kitFigRects==="function"?kitFigRects():[];if(figs.some(hit))return true;
  return [...st.querySelectorAll(".tok .nm, .tok .tag, .ftag")].some(e=>e.offsetParent&&!R.contains(e)&&hit(e.getBoundingClientRect()))}catch(e){return false}}
+document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest("#kshR [data-kgf]");if(!a)return;e.stopPropagation();
+ const k=a.dataset.kgf;window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();
+ const R2=$$("kshR");if(R2&&window.__kgfOpen){const o=R2.querySelector(".kgfopen");if(o)o.scrollIntoView({block:"nearest"})}},true);
 /* "Ân sủng ›" opens IN PLACE (owner 11/15 17:40Z + reference shot): the folded chip becomes the full Ân sủng card in the right column,
    column width, label left / value right — never a floating popover; its title "Ân sủng ‹" folds it again */
 document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest("#kshR [data-kas], #kshR [data-kasall], #kshR [data-kasfold]");if(!a)return;e.stopPropagation();
@@ -85,7 +143,7 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
  let L=$$("kshL"),R=$$("kshR");/* KIT 33.11 SIDE COLUMNS EVERYWHERE (owner 16/11 ~19:20Z via s22: "bất kỳ cái nào … dư đồ, màn hình cảnh phòng, nơi chốn … đều sẽ có những
     cái thông tin cột trái và cột phải y chang giống như cái phòng ngủ"): the SAME right column (#kshR) and left rail (#krail, jrail) as her room
     stand on every Dư đồ level too — kitSideHost() = the map leather (.mapv: plan + courtyard) on the Dư đồ tab, else the stage. */
- const mvh=kitSideHost(),mv=mvh!==st?mvh:null;st.classList.toggle("kplfs",!!(typeof window.kplAway==="function"&&window.kplAway()));
+ const mvh=kitSideHost(),mv=mvh!==st?mvh:null;st.classList.toggle("kplfs",!!(typeof window.k3Full==="function"&&window.k3Full()));
  const off=!S||S.dead||!stop||(gm&&gm.classList.contains("maptab")&&!mv);
  if(off){if(L)L.hidden=true;if(R)R.hidden=true;st.classList.remove("k3g");return}
  if(mv){if(L)L.hidden=true}else{if(!L){L=document.createElement("div");L.id="kshL";L.className="ksh kshL"}if(L.parentNode!==stop)stop.appendChild(L)}
@@ -103,7 +161,7 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
  if(L.dataset.h!==hL){L.innerHTML=hL;L.dataset.h=hL}
  /* right: court chips · servant · servant-road facts */
  let y="";K3_RIGHT.forEach(k=>{const b=k3hc(k);if(!b)return;y+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":b.classList.contains("ok")?"ok":"")});
- const hR0=`<div class="k3cs">${k3court()}${k3maid()}</div>`,hY=y?`<div class="k3p k3py">${y}</div>`:"";
+ const phoneMap=!!mv&&kgfPhoneMap();const hR0=phoneMap?"":kitGroupBtns()+k3crew()+k3chitonG(),hY=y?`<div class="k3p k3py">${y}</div>`:"";
  const full=hR0+k3AnSung(false)+hY;
  /* Ân sủng under the court chips; when the column would run past the stage floor or onto a figure / name tag -> ONE "Ân sủng ›" chip */
  if(R.dataset.full!==full||R.dataset.w!==String(st.clientWidth)+"x"+st.clientHeight){R.classList.remove("kasx");R.innerHTML=full;R.dataset.full=full;R.dataset.w=st.clientWidth+"x"+st.clientHeight;R.dataset.h=full;
@@ -114,12 +172,13 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
      vertical column at the stage's right edge — the tassel-fix two-column block (.k3c2) is gone; a column taller than the stage
      scrolls inside itself (.kasx) */}
  R.classList.add("kasx");
+ kgfRail();kgfDrop();kgfClearEmo();requestAnimationFrame(kgfClearEmo);
  k3Gut()}catch(e){console.error("k3Stage",e)}}
 function kitSideHost(){try{const gm=document.querySelector(".game");if(gm&&gm.classList.contains("maptab")){const m=document.querySelector("#panel .mapv");if(m&&m.getClientRects().length)return m}}catch(e){}return $$("stage")}
 window.kitSideHost=kitSideHost;window.k3Stage=k3Stage;window.k3row=k3row;/* the top-bar row builder, for modules that add a row (jtoil "Hôm nay: …") */
 /* name tags are one-line text now: re-run the stage layout once the tags have their final width (fonts, new labels), so neighbours that
    would touch drop to the second tag row (j59 crowd rule) */
-function k3Relay(){clearTimeout(window.__k3rl);window.__k3rl=setTimeout(()=>{try{window.j59lay&&j59lay()}catch(e){}},250)}
+function k3Relay(){clearTimeout(window.__k3rl);window.__k3rl=setTimeout(()=>{try{window.j59lay&&j59lay()}catch(e){}kgfClearEmo();setTimeout(kgfClearEmo,700);setTimeout(kgfClearEmo,1600)},250)}
 try{document.fonts&&document.fonts.ready.then(k3Relay)}catch(e){}
 if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){const r=r1.apply(this,arguments);k3Relay();return r}}
 /* gutter widths: from the stage width, then grown to the plaques' real width; j59 keeps the figures between them */
@@ -134,7 +193,7 @@ function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W
  const gl=Math.max(need(L),0),gr=Math.max(need(R),0);const ol=st.style.getPropertyValue("--kgl"),or=st.style.getPropertyValue("--kgr");
  st.style.setProperty("--kgl",gl+"px");st.style.setProperty("--kgr",gr+"px");
  if((ol!==gl+"px"||or!==gr+"px")&&typeof window.j59lay==="function"){try{window.j59lay()}catch(e){}}}
-document.addEventListener("click",e=>{const p=e.target.closest&&e.target.closest("#kshL [data-k3], #kshR [data-k3], #kshR [data-k3go], .k3p[data-k3sheet], #k3tt [data-k3]");if(!p)return;
+document.addEventListener("click",e=>{const p=e.target.closest&&e.target.closest("#kshL [data-k3], #kshR [data-k3], #kshR [data-k3go], #kgfdrop [data-k3go], .k3p[data-k3sheet], #k3tt [data-k3]");if(!p)return;
  if(p.classList.contains("kmwx"))return;e.stopPropagation();
  if(p.dataset.k3go){const b=document.querySelector(`[data-tab="${p.dataset.k3go}"]`);if(b)b.click();return}
  const k=p.dataset.k3,h=$$("hud2");if(!h)return;
@@ -243,7 +302,20 @@ html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-
 /* Ân sủng plaque under the court chips (owner 11/15 04:05Z) */
 .ksh .kas .k3r{column-gap:8px}.ksh .kas .k3r>b{color:var(--ink)}
 .ksh .kas .kasfold{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:baseline;width:100%;cursor:pointer;font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
-.kshR.kasx{max-height:calc(100% - 16px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin}
+/* kitGroupFold (stage right column): closed row like "Ân sủng ›"; open = header + the person cards stacked in place */
+.ksh .kgf.kgfopen{padding:3px 4px 4px}.ksh .kgf-t{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:baseline;width:100%;cursor:pointer;font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:3px;padding:1px 2px}
+.kgfbtns{display:flex;gap:6px;flex:none}.kgfbtns .kgfbtn.krailb{flex:1 1 0;width:auto;min-width:0;padding:2px}
+.ksh .kgf-l{display:flex;flex-direction:column;gap:3px}.ksh .kgf-l .k3c{flex:none;box-shadow:none;border-color:var(--k-hair,#e6d3ac)}
+.kshR>.kgf,.kshR>.kgfbtns,.kshR>.kas,.kshR>.k3py{flex:none}
+
+/* kitGroupFold on the phone Dư đồ: the drop list stands in the left strip of the map under the rail buttons */
+.kgfdrop{position:absolute;left:6px;width:var(--kgrw,140px);z-index:9;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;pointer-events:auto}
+
+.krailb.krailt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;line-height:1.05;color:var(--ink,#3a2418)}
+.krailb.krailt b{font-size:1.05rem;font-weight:800;color:var(--gold,#9a6b12)}
+.krailb.krailt span{font-size:.46rem;font-weight:700;white-space:nowrap;letter-spacing:0}
+.krailb.krailt.kopen{box-shadow:0 0 0 2px var(--gold,#b8892b),0 1px 4px #3a20101f}
+.kshR.kasx{max-height:calc(100% - 16px - var(--kgrb,0px));overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin}
 .ksh .kas1{padding:2px 6px}.ksh .kas-one .k3l{font-weight:700;color:var(--gold)}.ksh .kas-one>b{color:var(--gold)}
 `;document.head.appendChild(css);
 
@@ -269,8 +341,12 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§75",title:"kitBa
  html:()=>`<div class="kitpg-row" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="kbackb">${kitBackBtnHtml("room","Về phòng")}</span><span class="kbackb">${kitBackBtnHtml("room","Về Kính sự phòng")}</span><span class="kbackb">${kitBackBtnHtml("map","Dư đồ")}</span></div>`})}catch(e){}
 /* one-page view (KIT §0 kv1): the room home and the open tab are the two pages of the spread, shown one at a time */
 /* KIT 33.10 (jplfs): away from her own residence the place painting is the whole page on EVERY screen = the one-page shell */
-function k3Phone(){try{return kitView().pages===1||(typeof window.kplAway==="function"&&window.kplAway())}catch(e){return false}}
-function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;try{const hd0=document.querySelector("header.hud");if(hd0)document.documentElement.style.setProperty("--k3hb",Math.round(hd0.getBoundingClientRect().bottom)+"px");const nb0=document.querySelector("nav.bar");if(nb0)document.documentElement.style.setProperty("--k3nb",Math.round(innerHeight-nb0.getBoundingClientRect().top)+"px")}catch(e){}const on=k3Phone()&&!!S&&!S.dead;const alive=!!S&&!S.dead;gm.classList.toggle("k3ph",on);
+/* stage-here (owner OD 18/11 ~19:45Z (5)): the STAGE on Hành sự and EVERY tab = the place where she IS (S.place); the one-page full-screen
+   painting (KIT 33.10) is only the place PAGE itself (K3SH.home); any tab on a two-page screen = the normal spread, stage (her place) | panel */
+function k3Full(){try{return typeof window.kplAway==="function"&&window.kplAway()&&(kitView().pages===1||K3SH.home)}catch(e){return false}}
+window.k3Full=k3Full;
+function k3Phone(){try{return kitView().pages===1||k3Full()}catch(e){return false}}
+function k3Shell(){try{if(window.COOPW&&COOPW.ctx)return;/* co-op thin: the other seat's run on the host never drives the host's phone shell */const gm=document.querySelector(".game");if(!gm)return;try{const hd0=document.querySelector("header.hud");if(hd0)document.documentElement.style.setProperty("--k3hb",Math.round(hd0.getBoundingClientRect().bottom)+"px");const nb0=document.querySelector("nav.bar");if(nb0)document.documentElement.style.setProperty("--k3nb",Math.round(innerHeight-nb0.getBoundingClientRect().top)+"px")}catch(e){}const on=k3Phone()&&!!S&&!S.dead;const alive=!!S&&!S.dead;gm.classList.toggle("k3ph",on);
  const pw=$$("popw");const pop=!!(pw&&pw.children.length&&pw.textContent.trim());
  const wasPop=gm.classList.contains("k3pop");gm.classList.toggle("k3home",on&&K3SH.home&&!pop);gm.classList.toggle("k3pop",on&&pop);
  /* reviewer stage-pets-r1: the left rail (KIT 33.11) is re-drawn by renderStage while the card page still hides the stage, so closing a person card left the painting WITHOUT the rail (no way back to the map): re-draw it when the card page opens / closes */
@@ -286,7 +362,7 @@ window.k3Home=k3Home;
 /* owner 11/15 06:38Z: tapping the place she is AT on Dư đồ opens that place's stage (scene + the people there), like arriving — on the
    phone shell that is the room view, not the Hành sự panel; arriving from the map lands on the stage too. "‹ Phòng" says where she is
    ("‹ Kính sự phòng") and returns to that stage (her current place, not home). */
-function k3ShowPlace(){window.__k3quiet=1;clearTimeout(window.__k3qt);window.__k3qt=setTimeout(()=>{window.__k3quiet=0},450);K3SH.home=true;k3Home()}
+function k3ShowPlace(){if(window.COOPW&&COOPW.ctx)return;/* co-op thin: the other seat's run on the host never drives the host's phone shell */window.__k3quiet=1;clearTimeout(window.__k3qt);window.__k3qt=setTimeout(()=>{window.__k3quiet=0},450);K3SH.home=true;k3Home()}
 function k3PlaceName(){try{if(!S||!S.place||S.place==="home")return"Phòng";return typeof accName==="function"?accName(S.place):(placeOf(S.place).n||"Phòng")}catch(e){return"Phòng"}}
 (function(){if(typeof j77Tap==="function"){const t0=j77Tap;j77Tap=function(k){const here=!!(S&&!S.dead&&!Q.length&&k&&S.place===k);const r=t0.apply(this,arguments);
   if(here&&k3Phone())k3ShowPlace();return r}}
@@ -354,7 +430,7 @@ html body .stage #sc-t h2 .rmsg{font-size:.88rem!important;line-height:1.25;font
    line, the trailing note ("… đi vắng, đang ở …") wraps under it */
 html body .stage.k3g #sc-t{width:max-content!important;max-width:calc(var(--k3stw,100vw) - var(--kgr,0px) - 24px)!important}
 html body .stage.k3g #sc-t h2{white-space:normal!important}html body .stage.k3g #sc-t h2>*:not(:first-child),html body .stage.k3g #sc-t h2>*:not(:first-child) *{white-space:normal!important}
-html body .stage .tok .tag,html body .stage #j59metag .tag{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:nowrap!important;color:#2a1a12!important;font-weight:600;text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc}
+html body .stage .tok .tag,html body .stage #j59metag .tag{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:nowrap!important;color:#2a1a12!important;font-weight:600;text-shadow:var(--kts,0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc)}
 /* KIT 33.5 STAGE NAME CHIP (owner 11/15 iPad): TWO lines — rank / role on top (small), name below (bigger); both tinted by the person's
    rank colour (--tc from j59col = the kit rank palette RCOL / maid MRCOL / eunuch ERCOL / Emperor gold / Thái hậu amber), darkened for legibility */
 html body .stage .tok .tag,html body .stage #j59metag .tag{text-align:center!important}
@@ -454,8 +530,10 @@ html body .pc:has(>.pcr>.pcx){position:relative}
 html body #popw{z-index:41!important}
 html body .pc>.pcr>.pcx{position:absolute!important;top:6px;right:6px;margin:0!important;z-index:8;translate:0 var(--kpcxy,0px)}
 html body .pc:has(>.pcr>.pcx)>.pcl>.kpnm{padding-right:46px}
-/* KIT 32.10: the ✕ owns the card's top-right corner — the first act card starts under it, never under the ✕ */
-html body .pc>.pcr>.pcx+*{margin-top:42px!important}
+/* KIT 32.10: the ✕ owns the card's top-right corner — the first act card starts under it, never under the ✕.
+   person-dialog-restore (owner 18/11 06:10Z): ONLY when the ✕ is the first child. kitPcFix (jk2b) prepends the sticky info block (.kpstick) BEFORE the ✕, so
+   the old ".pcx+*" rule hit the act list under the sticky block and left a 42 px empty band between them (every person card, every result/tab state). */
+html body .pc>.pcr>.pcx:first-child+*{margin-top:42px!important}
 /* kit panels (report / story / info dialogs): the close row "Đã hiểu" is pinned at the dialog's bottom, the body scrolls under it */
 html body .dlg.kpanel>.mr{position:sticky;bottom:0;z-index:9;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 10px);padding-top:8px}
 `;document.head.appendChild(st)})();
@@ -533,7 +611,7 @@ small.kblf{display:block;margin-top:3px;font-size:.72rem;color:var(--dim,#7a6a58
    Per screen: a Q / kitModal item may set optLayout:'rows'|'grid'; otherwise it is read from the options' CONTENT: an option is LONG when it
    shows Cần / Được / Mất / Kèm rows, an odds word, or a text over 2 lines; SHORT = title + cost line. All short → grid, all long → rows,
    mixed → long ones full width, short ones in the grid. The identity card keeps its approved pinned pair. */
-function k3IsLong(b){if(b.querySelector(".kr-can,.kr-duoc,.kr-mat,.kr-kem,.kr-why,.kodds:not(:empty),.oc"))return true;const lh=parseFloat(getComputedStyle(b).lineHeight)||20;
+function k3IsLong(b){if(b.querySelector(".kr-can,.kr-duoc,.kr-mat,.kr-thanh,.kr-bai,.kr-kem,.kr-why,.kodds:not(:empty),.oc"))return true;const lh=parseFloat(getComputedStyle(b).lineHeight)||20;
  const t=b.querySelector(".kan");return !!(t&&t.getBoundingClientRect().height>lh*2.3)}
 function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:null;const want=m&&(m.optLayout||(m.kit&&m.kit.optLayout));
  document.querySelectorAll("#modal .opts:has(> button.ka), #modal .kpscopts").forEach(g=>{const dl=g.closest(".dlg");if(dl&&dl.querySelector(".kpid"))return;

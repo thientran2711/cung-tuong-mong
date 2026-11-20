@@ -55,12 +55,17 @@ function exPlan(p){const e=exS(p),to=e.to,tier=exTier(to);const ex=exExaminer(p,
  return{to,tier,rounds:exRounds(p,tier),ex,bar0:B.bar[tier],sh,bar:B.bar[tier]-sh,V,vir:(virLv(p,V[0])+virLv(p,V[1]))*B.wVir,virL:`${exVirN(V[0])} ${virLv(p,V[0])}, ${exVirN(V[1])} ${virLv(p,V[1])}`,art:A.v,artL:A.l}}
 function exScore(P,raws){const avg=raws.reduce((a,b)=>a+b,0)/Math.max(1,raws.length);const play=Math.round(avg*BAL.ex.wPlay);const total=play+P.vir+P.art;return{avg:Math.round(avg*10)/10,play,total,pass:total>=P.bar}}
 /* one round rolled by level: the j82 rule for every person (raw ≈ 4 + 0.4·bậc ± 4) */
-function exRaw(lv,rnd){const r=(rnd()+rnd()+rnd())/3;return cl(Math.round(kg82NpcMean(lv)+(r-.5)*8),0,10)}
-function exSim(p,rnd){rnd=rnd||Math.random;const P=exPlan(p);const raws=P.rounds.map(k=>exRaw(exLv(p,k),rnd));return Object.assign(exScore(P,raws),{P,raws})}
+function exRaw(lv,rnd,k,p,rank){if(typeof mg2On==="function"&&mg2On())return mgNpcRaw(k,p||S,{occ:"exam",rank,lv,rnd});/* AG-ALL-2b mg2: the exam board she gets (occ exam, rank = the target) */
+ const r=(rnd()+rnd()+rnd())/3;return cl(Math.round(kg82NpcMean(lv)+(r-.5)*8),0,10)}
+/* "Để tài nghệ quyết định" of one round (her skip, an aborted round): mg2 = her median on that board (jmgt mgSkipRaw), else the old level mean */
+function exSkipRaw(P,k){const lv=exLv(S,k);return typeof mg2On==="function"&&mg2On()?mgSkipRaw(mgNpcTier(k,S,{occ:"exam",rank:P.to,lv})):Math.round(kg82NpcMean(lv))}
+function exSim(p,rnd){rnd=rnd||Math.random;const P=exPlan(p);const raws=P.rounds.map(k=>exRaw(exLv(p,k),rnd,k,p,P.to));return Object.assign(exScore(P,raws),{P,raws})}
+/* ODDS CAP: an exam decided by the score draw alone (an NPC, or her auto run) keeps its pass inside the one cap (capRes); her own play is her skill */
+function exSimC(p){const r=exSim(p);try{const ok=capRes(r.pass,exChance(p));if(ok!==r.pass){r.pass=ok;r.total=ok?Math.max(r.total,r.P.bar):Math.min(r.total,r.P.bar-1)}}catch(e){console.error(e)}return r}
 function exRng(seed){let a=seed>>>0||1;return function(){a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296}}
 /* the honest chance shown on the card: the same draw, many times (stable between renders) */
 function exChance(p){const P=exPlan(p);const rnd=exRng(((p.id||7)*977+S.turn*131+P.to*17+P.vir*3+P.art)|0);const N=BAL.ex.mc;let ok=0;
- for(let i=0;i<N;i++){const raws=P.rounds.map(k=>exRaw(exLv(p,k),rnd));if(exScore(P,raws).pass)ok++}return Math.round(100*ok/N)}
+ for(let i=0;i<N;i++){const raws=P.rounds.map(k=>exRaw(exLv(p,k),rnd,k,p,P.to));if(exScore(P,raws).pass)ok++}return Math.round(100*ok/N)}
 /* the conditions before the exam: every promoReqP row except the seat rows (a seat is waited for after the exam); for the Hoàng hậu seat
    the wait since the last decree does not count (as candOK, j34) */
 const EX_SKIP=/^Ghế |Chờ ghế|Đang tranh ghế/;let exQ0=null;
@@ -89,7 +94,7 @@ function exRow(p){const e=exS(p),to=e.to,rk=exRk(to);if(e.pass)return[true,`Đã
    is a decree on the spot, no exam: one helper for every such road. Never past Hoàng quý phi (the Hoàng hậu seat keeps its own rules),
    never from lãnh cung. o.fx: jealousy + the promote feedback (the son's birth does its own). */
 function exDirectUp(p,why,o){o=o||{};const me=p===S;if(!p||rkOf(p)>=6||p.out)return"";if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(p.ex)p.ex={to:rkOf(p)+1};
- if(me){exDrop();if(o.fx){try{ghenAll(BAL.psk.ghen)}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}}
+ if(me){exDrop();if(o.fx){try{ghenAll(BAL.psk.ghen,"ngươi được tấn phong")}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}}
  return me?`<b class="g">Thánh chỉ: ${why}, tấn phong ${S.name} làm ${RANKS[S.rank].n}</b> (không qua khảo hạch). `:`${p.name} được tấn phong ${RANKS[p.rank].n} (${why}). `}
 function exSonUp(p){return exDirectUp(p,"mừng hoàng tử")}
 /* the ONE player text of these rules (j6 / jtabs help lines, the «Khảo hạch tấn phong» gloss): reads PROMO_SRC, never typed per place */
@@ -126,7 +131,7 @@ function promoFullSeat(p,src,o){const B=BAL.psk.seat,me=p===S,to=rkOf(p)+1,rk=RA
  if(!hieu)bac+=B.hieuBac;ap(p,{bac,danh:B.danh});parts.push(`Bạc +${bac}`);if(hieu)parts.push(`phong hiệu «${hieu}»`);
  for(let i=0;i<B.gifts;i++)try{bestow(p,"promo")}catch(e){}if(B.gifts)parts.push(`${B.gifts} món ngự ban`);
  try{const c=clanOf(p);if(c&&typeof tdPowAdd==="function"&&typeof CLANS!=="undefined"&&CLANS.includes(c))tdPowAdd(c,B.pow);if(me)S.dad=cl((S.dad||40)+B.dad,0,100)}catch(e){}parts.push("nhà ngoại được ân");
- let cost="";if(me){ghenAll(B.ghen);cost=`Lục cung ghen với ngươi (ghen +${ghenN(B.ghen)}). `}else{for(const v of consorts())if(v!==p&&!v.out)oanAdd(v,p,B.oan)}
+ let cost="";if(me){ghenAll(B.ghen,"ngươi được tấn phong");cost=`Lục cung ghen với ngươi (ghen +${ghenN(B.ghen)}). `}else{for(const v of consorts())if(v!==p&&!v.out)oanAdd(v,p,B.oan)}
  const t=me?`<b class="g">Ghế ${rk} đã đủ người</b>: Hoàng thượng ban hậu thưởng thay cho tấn phong: ${parts.join(", ")}. Muốn lên ${rk} vẫn phải qua khảo hạch như mọi người. ${cost}`
   :`${p.name} được hậu thưởng (ghế ${rk} đã đủ người). `;
  if(!me)try{newsAdd(p,"promo",t,true)}catch(e){}return t}
@@ -135,15 +140,17 @@ function promoMonth(){let ev="";try{const B=BAL.psk;
  const E=S.psErr;if(E&&!S.dead&&!S.out&&!S.thDead&&wk()>=E.at&&typeof q72CanOffer==="function"&&q72CanOffer()&&!(typeof evBusy==="function"&&evBusy())){
   /* a Thái hậu errand (j72 việc nhờ, requester Thái hậu): the first template of hers that can be built now */
   const A=typeof q72A==="function"?q72A("th"):null;const L=(typeof T72!=="undefined"?T72:[]).filter(T=>T.r==="th"&&!T.fu);let x=null;
-  for(const T of L.sort(()=>Math.random()-.5)){try{x=A&&q72Make(T,A)}catch(e){x=null}if(x)break}
+  /* npc-purpose G2: she asks for what she really needs now (a live trouble: illness, a feud, a spy) before festival copies, before plain wishes */
+  const W=BAL.ag.why.exTh;const need=T=>{let s=W.base;try{if(T.rf)s=T.rf()?s+W.need:0;else if(T.b)s+=W.tgt;if(s&&T.w)s+=W.fest}catch(e){s=0}return s};
+  const Lp=L.slice();while(Lp.length&&!x){const T=npwPick(Lp,need);if(!T)break;Lp.splice(Lp.indexOf(T),1);try{x=A&&q72Make(T,A)}catch(e){x=null}}
   if(x){q72Offer(x,"");E.n--;E.at=wk()+B.th.errGap;if(E.n<=0)S.psErr=null}}
- const k=S.psStrike;if(k&&!S.dead&&S.turn>=k.at&&!S.empDead){if(k.n>=B.quyen.max){S.psStrike=null}else if(roll(k.p)){k.n++;S.psStrike=null;
+ const k=S.psStrike;if(k&&!S.dead&&S.turn>=k.at&&!S.empDead){if(k.n>=B.quyen.max){S.psStrike=null}else if(npcWhy("psStrike",{p:S},()=>roll(k.p))){/* npc-purpose G2: the grown Emperor strikes only when his favour for her is low enough to remember */k.n++;S.psStrike=null;
   apply({sung:-B.quyen.hitSung,danh:-B.quyen.hitDanh});log(`<span class="r">Bệ hạ đã lớn, nhớ chuyện cũ nhà quyền thần tiến cử ngươi</span>: Sủng −${B.quyen.hitSung}, Danh −${B.quyen.hitDanh}.`)}}
  }catch(e){console.error("promoMonth",e)}return ev}
 (function(){if(typeof rivalsMonth!=="function")return;const r0=rivalsMonth;rivalsMonth=function(){const a=promoMonth();return a+(r0.apply(this,arguments)||"")}})();
 function exGrace(p,sex){const e=exS(p);e.grace=e.to;e.gw=sex==="f"?"f":"m";e.cd=0;e.lapse=0;const me=p===S;const why=exGw(e);
  return me?`${why[0].toUpperCase()+why.slice(1)}: Hoàng thượng ân cho ngươi dự khảo hạch tấn phong ${exRk(e.to)} ngay, không cần đủ điều kiện. `:`${p.name} được ân dự khảo hạch tấn phong ${exRk(e.to)} (${why}). `}
-function exGraceUp(p){const me=p===S;const why=exGw(p.ex);if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(me){try{ghenAll(BAL.psk.ghen)}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}
+function exGraceUp(p){const me=p===S;const why=exGw(p.ex);if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(me){try{ghenAll(BAL.psk.ghen,"ngươi được tấn phong")}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}
  const t=me?`<b class="g">Thánh chỉ: tấn phong ${S.name} làm ${RANKS[S.rank].n}.</b> Lý do: ân điển ${why}, đã đỗ khảo hạch. `:`${p.name} được tấn phong ${RANKS[p.rank].n}. Lý do: ân điển ${why}, đã đỗ khảo hạch. `;
  if(!me)try{newsAdd(p,"promo",t,true)}catch(e){}return t}
 
@@ -158,7 +165,7 @@ function exDone(p,r){const e=exS(p),to=e.to,rk=exRk(to),me=p===S;e.n=(e.n||0)+1;
  try{newsAdd(p,"exam",`${p.name} trượt khảo hạch tấn phong ${rk}.`,true)}catch(x){}return""}
 /* NPCs sit the exam when the month's decree would look at them (rivalsMonth → promoteP); a son's grace raises the rank once passed */
 (function(){if(typeof promoteP!=="function")return;const p0=promoteP;promoteP=function(p){
- try{if(exOn()&&p&&rkOf(p)<7&&!exSrv(p)){const e=exS(p);if(p!==S&&exCanSit(p))exDone(p,exSim(p));
+ try{if(exOn()&&p&&rkOf(p)<7&&!exSrv(p)){const e=exS(p);if(p!==S&&exCanSit(p))exDone(p,exSimC(p));
    if(e.pass&&e.grace===e.to&&rkOf(p)<6&&!p.out&&!p.confined&&(typeof seatFree!=="function"||seatFree(rkOf(p)+1)))return exGraceUp(p)/* seats still apply (owner 06:45Z): a full seat waits */}}catch(x){console.error("exam",x)}
  return p0.apply(this,arguments)}})();
 
@@ -173,7 +180,7 @@ function exTick(){if(!exOn()||S.dead||S.out||exSrv(S)||S.rank>=7)return;const e=
  if(e.cd>S.turn||!exElig(S))return;e.w0=w;e.w1=w+BAL.ex.win-1;e.lapse=0;const P=exPlan(S);
  log(`<b class="g">Được dự khảo hạch tấn phong ${exRk(e.to)}</b>: ${P.ex?P.ex.name:"Nội vụ phủ"} khảo, hạn đến hết ${exDateW(e.w1)}. Thẻ «Khảo hạch tấn phong» ở Hành sự.`);exAdd()}
 /* the act card: true cost, the honest chance (as one who plays at her own level), what a fail costs */
-function exCard(){const e=exS(S),P=exPlan(S),o=cl(exChance(S),5,95);const names=P.rounds.map(k=>KG82_KIND[k].n.toLowerCase()).join(", ");
+function exCard(){const e=exS(S),P=exPlan(S),o=oddsCl(exChance(S));const names=P.rounds.map(k=>KG82_KIND[k].n.toLowerCase()).join(", ");
  return{n:"Khảo hạch tấn phong",exam:1,t:`${P.ex?P.ex.name:"Quan Nội vụ phủ"} khảo ngươi trước khi sắc phong ${exRk(e.to)}: ${names}. Đỗ hay trượt tùy tài nghệ của ngươi; tự thi càng giỏi thì càng dễ đỗ.`,
   c:{suc:-BAL.ex.suc},k:BAL.ex.k,o,dom:"Khảo hạch",w:{},l:{},x:`thánh chỉ tấn phong ${exRk(e.to)}`,lock:!exElig(S),go:()=>exStart()}}
 function exAdd(){try{if(Array.isArray(deck)&&!deck.some(a=>a&&a.exam))deck.unshift(exCard())}catch(e){}}
@@ -193,16 +200,17 @@ try{KIT_ACT_CATS.unshift(["le-nghi",/khảo hạch tấn phong|khảo hạch n�
 /* ---------- the exam itself: the kit game frame (j82), one round after another, then the result ---------- */
 /* exRun(P, st, done): P = a plan (exPlan / exSrvPlan), st = the state holding .pend (survives a reload: exAbort* finish it at the same level),
    done(r) = the result. P.rk = the rank word, P.passTxt = the verdict line on a pass, P.cdN = months to wait on a fail. */
-function exFinish(P,pd){const raws=pd.raws.slice();while(raws.length<P.rounds.length)raws.push(Math.round(kg82NpcMean(exLv(S,P.rounds[raws.length]))));return Object.assign(exScore(P,raws),{P,raws})}
+function exFinish(P,pd){const raws=pd.raws.slice();while(raws.length<P.rounds.length)raws.push(exSkipRaw(P,P.rounds[raws.length]));return Object.assign(exScore(P,raws),{P,raws})}
 function exAbort(){const e=exS(S),pd=e.pend;if(!pd)return;exDone(S,exFinish(exPlan(S),pd))}
 function exStart(){const P=exPlan(S);P.rk=exRk(P.to);P.passTxt=P.to>=7?"Được dự chọn ngôi Hoàng hậu.":`Thánh chỉ tấn phong ${P.rk}.`;P.cdN=exCd(P.to);
- if(window.__exAuto||typeof kg82Open!=="function"||!document.getElementById("ov")){exDone(S,exSim(S));return}exRun(P,exS(S),r=>exDone(S,r))}
+ if(window.__exAuto||typeof kg82Open!=="function"||!document.getElementById("ov")){exDone(S,exSimC(S));return}exRun(P,exS(S),r=>exDone(S,r))}
 function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n=P.rounds.length;
  const round=()=>{const k=P.rounds[i],K=KG82_KIND[k];KG82.ctx="thi";const lv=exLv(S,k);mgSet(k,{occ:"exam",rank:P.to,lv});/* mg-balance: board ease from the tier; skip keeps her level */try{kg82Preload(k)}catch(x){}
   const d=kg82Open({art:"Khảo hạch",title:`Môn ${i+1}/${n} · ${K.n}`,how:K.how,round:"Môn",roundV:`${i+1}/${n}`,pic:kg82Pic(k)});if(!d){e.pend=null;done(exFinish(P,{raws}));return}
-  const box=kg82Box();const SK=Math.round(kg82NpcMean(lv));
+  const box=kg82Box();const SK=exSkipRaw(P,k);
   box.innerHTML=`<h4 class="kpst">Khảo hạch ${P.srv?"lên":"tấn phong"} ${P.rk}</h4>`+kg82Rows([["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",mgDiffTxt(KG82.tier,k),"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]])+
-   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button><button class="${kg82Btn(true)}" id="kg82skip">Để tài nghệ quyết định<small>môn này tính ${SK}/10, như người cùng bậc</small></button></div>`;
+   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`môn này tính ${SK}/10, như người cùng bậc`})}</div>`;
+  kgReady(box,{kind:k});/* KIT §13.7 */
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
  const after=(raw,sk)=>{raws.push(raw);i++;const last=i>=n;try{save()}catch(x){}
   kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`,raw>=5);
@@ -221,11 +229,11 @@ function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n
    tuần opens (card «Khảo hạch Nội vụ phủ» in Phận sự); pass = the rise at once (the old j42 rise: rank, merit 0, Chủ tin +5, «Thăng bậc»);
    fail / missed window = wait BAL.ex.srvCd[to] months. The choice «Ở lại làm ma ma» (age 25) is an exam the same way (target "mama").
    Rounds = the low-rank exam (lễ nghi + nữ công, exRounds tier 0); examiner = a ma ma of Nội vụ phủ; her mistress's trust (Chủ tin) moves
-   the bar like the examiner's liking (BAL.ex.attDiv). Bar BAL.ex.srvBar[to] (to 1..4, 5 = ma ma).
+   the bar like the examiner's liking (BAL.ex.attDiv). Bar BAL.ex.srvBar[to] (to 1..BAL.srvRk.nq, BAL.srvRk.mama = ma ma; maid-ladder-6).
    NPC servants (j14 servRanks, maids and eunuchs): the same exam, rolled at their rank as level (exRaw), seeded by servant + month so both
    co-op clients roll the same; fail = wait BAL.ex.srvCd months. State: S.srv.ex = {to, w0, w1, cd, lapse, pend, last, n}; NPC s.exCd. */
 function exSrvName(to){return to==="mama"?"Ma ma":SRK.maid[to]||"Cung nữ"}
-function exSrvIx(to){return to==="mama"?5:Math.max(1,Math.min(4,to|0))}
+function exSrvIx(to){const K=BAL.srvRk;return to==="mama"?K.mama:Math.max(1,Math.min(K.nq,to|0))}/* maid-ladder-6: rungs 1..BAL.srvRk.nq, ma ma BAL.srvRk.mama */
 function exSrvCdN(to){const c=BAL.ex.srvCd;return c[exSrvIx(to)]}
 function exSrvS(){if(!S||!S.srv)return{};let e=S.srv.ex;if(!e||typeof e!=="object")e=S.srv.ex={};return e}
 function exSrvPlan(to){const B=BAL.ex;const V=EX_VIR[0];const A=exArtPart(S,0);const tin=Math.round(S.tin||0);
@@ -235,7 +243,7 @@ function exSrvPlan(to){const B=BAL.ex;const V=EX_VIR[0];const A=exArtPart(S,0);c
   passTxt:to==="mama"?"Được ở lại cung làm ma ma.":`Được thăng ${exSrvName(to)}.`}}
 function exSrvBarTxt(P){return P.sh?`${P.bar} phần (mức ${P.bar0}, ${P.sh>0?"hạ":"nâng"} ${Math.abs(P.sh)} vì chủ nhân ${P.sh>0?"tin cậy":"không tin"} ngươi)`:`${P.bar} phần`}
 (function(){const b0=exBarTxt;exBarTxt=function(P){return P&&P.srv?exSrvBarTxt(P):b0.apply(this,arguments)}})();
-function exSrvSim(P,rnd){rnd=rnd||Math.random;const raws=P.rounds.map(k=>exRaw(exLv(S,k),rnd));return Object.assign(exScore(P,raws),{P,raws})}
+function exSrvSim(P,rnd){rnd=rnd||Math.random;const raws=P.rounds.map(k=>exRaw(exLv(S,k),rnd,k,S,P.to));return Object.assign(exScore(P,raws),{P,raws})}
 function exSrvChance(P){const rnd=exRng(((S.turn||0)*131+exSrvIx(P.to)*17+P.vir*3+P.art+P.sh)|0);let ok=0;const N=BAL.ex.mc;for(let i=0;i<N;i++)if(exSrvSim(P,rnd).pass)ok++;return Math.round(100*ok/N)}
 /* j42 srvMonth asks before a merit rise: true = the exam decides (window opened / waiting), false = give the rise as before */
 function exSrvGate(to){if(!exOn()||!isSrv())return false;const e=exSrvS();if(e.to==="mama"&&(e.w1!=null||e.pend))return true;if(e.to!==to){S.srv.ex={to};return exSrvOpen(to)}
@@ -252,7 +260,7 @@ function exSrvDone(r){const e=exSrvS(),to=e.to;e.n=(e.n||0)+1;e.last={s:r.total,
  e.cd=S.turn+exSrvCdN(to);log(`<span class="r">Trượt khảo hạch ${exSrvName(to)}</span> (${r.total} phần, mức đỗ ${r.P.bar}): chờ đến ${exDateT(e.cd)} mới được thi lại.`);
  if(to==="mama")log("Không được ở lại làm ma ma; đến tuổi thì xuất cung theo lệ.")}
 function exSrvStart(){const e=exSrvS();const P=exSrvPlan(e.to);if(window.__exAuto||typeof kg82Open!=="function"||!document.getElementById("ov")){exSrvDone(exSrvSim(P));return}exRun(P,e,exSrvDone)}
-function exSrvCard(){const e=exSrvS(),P=exSrvPlan(e.to),o=cl(exSrvChance(P),5,95);const names=P.rounds.map(k=>KG82_KIND[k].n.toLowerCase()).join(", ");
+function exSrvCard(){const e=exSrvS(),P=exSrvPlan(e.to),o=oddsCl(exSrvChance(P));const names=P.rounds.map(k=>KG82_KIND[k].n.toLowerCase()).join(", ");
  return{n:"Khảo hạch Nội vụ phủ",exam:2,exLbl:`Dự khảo hạch ${exSrvName(e.to)}.`,cdN:P.cdN,t:`Ma ma Nội vụ phủ khảo ngươi trước khi cho ${e.to==="mama"?"ở lại làm ma ma":"lên "+exSrvName(e.to)}: ${names}. Cơ may tính như người cùng bậc tài nghệ; tự thi giỏi thì dễ đỗ hơn.`,
   c:{suc:-BAL.ex.suc},k:BAL.ex.k,o,dom:"Khảo hạch",w:{},l:{},x:e.to==="mama"?"được ở lại cung làm ma ma":`thăng ${exSrvName(e.to)}`,go:()=>exSrvStart()}}
 function exSrvAdd(){try{if(Array.isArray(deck)&&!deck.some(a=>a&&a.exam===2))deck.unshift(exSrvCard())}catch(e){}}
@@ -264,10 +272,10 @@ function exSrvTick(){if(!exOn()||!isSrv()||S.dead)return;const e=exSrvS();if(e.p
 function exSrvMama(){if(!exOn()){S.srv.mama=1;log("Ngươi ở lại cung làm ma ma.");return}S.srv.ex={to:"mama"};exSrvOpen("mama")}
 /* NPC servants: one seeded roll per month at their rank as level; true = the rise is given */
 function exSrvNpc(s){try{if(!exOn())return true;if(s.coop)return true;if(s.exCd>S.turn)return false;const lv=srk(s);
- const rnd=exRng(((s.sid||1)*7919+(S.turn||0)*104729)|0);const raws=[0,1].map(()=>exRaw(lv,rnd));const avg=(raws[0]+raws[1])/2;const B=BAL.ex;
- const tot=Math.round(avg*B.wPlay)+Math.round((s.loyal||50)/25);const pass=tot>=B.srvBar[Math.max(1,Math.min(4,lv+1))];
+ const rnd=exRng(((s.sid||1)*7919+(S.turn||0)*104729)|0);const raws=[0,1].map(()=>exRaw(lv,rnd,null,s,Math.max(1,Math.min(BAL.srvRk.nq,lv+1))));/* mg2: their rank as level (servants keep no art levels), the target rank as the stake */const avg=(raws[0]+raws[1])/2;const B=BAL.ex;
+ const tot=Math.round(avg*B.wPlay)+Math.round((s.loyal||50)/25);const pass=tot>=B.srvBar[Math.max(1,Math.min(BAL.srvRk.nq,lv+1))];
  const N=window.__exN;N.npcSrvSit=(N.npcSrvSit||0)+1;if(pass){N.npcSrvPass=(N.npcSrvPass||0)+1;s.exCd=0;return true}
- s.exCd=S.turn+(B.srvCd||[1,1,1,2,2])[Math.max(1,Math.min(4,lv+1))];return false}catch(e){return true}}
+ s.exCd=S.turn+B.srvCd[Math.max(1,Math.min(BAL.srvRk.nq,lv+1))];return false}catch(e){return true}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(exOn()&&isSrv()&&S.srv.ex&&S.srv.ex.w1!=null)exSrvAdd()}catch(e){}return r}})();
 (function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{exSrvTick()}catch(e){console.error("srv exam tick",e)}return r}})();
 (function(){const r0=render;render=function(){try{exSrvTick()}catch(e){}return r0.apply(this,arguments)}})();

@@ -9,14 +9,14 @@ function bq(){return S.bqN||0}
 (function(){const o0=oanAdd;oanAdd=function(x,y,n){if(n>0&&x&&x!==S)x.slightAt=bq();return o0.apply(this,arguments)}})();
 function rashOf(v){const recent=v.slightAt!=null&&bq()-v.slightAt<=3;if(!recent)return 0;if(traitsOf(v).includes("Kiêu ngạo"))return 1;return roll(30)?1:0}
 /* a blunder: the act is done badly (lower odds); read inside odA for that doer only */
-(function(){const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);return a&&a.__err?cl(r-a.__err,5,95):r}})();
+(function(){const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);return a&&a.__err?oddsCl(r-a.__err):r}})();
 const BIG=["poison","kpoison","pond","pushp","musk","catswap","kframe","frame","plant"];
 const TELLS={musk:"lén mua xạ hương ở chợ ngoài cung",poison:"vào Thái y viện hỏi mua thạch tín, nói là để trừ chuột",kpoison:"hỏi mua thạch tín, nói là để trừ chuột",pond:"hay dẫn người ra hồ sen dò lối, hỏi giờ các hoàng tự đi chơi",
  pushp:"dò giờ người ta đi qua bậc đá trơn sau mưa",catswap:"cho một bà đỡ lạ ra vào cung mình",kframe:"mua vải vàng và kim bạc, đóng cửa may vá ban đêm",frame:"mua vải vàng và kim bạc, đóng cửa may vá ban đêm",plant:"lảng vảng quanh cung người khác lúc vắng người"};
 /* the choice: the band's menu weighted by traits; Tâm cơ tilts toward what works and away from what failed; low Tâm cơ repeats failed tricks */
 function mindMenu(v,t){const b=bandOf(danger(v,t));if(!b)return[];const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const O=[];const tc=witOf(v);v.fails=v.fails||{};
  const add=(k,w)=>{const a=ACT[k];if(!a||!allow.includes(k))return;let ok=false;try{ok=a.ok(v,t)}catch(e){}if(!ok)return;w*=persW(v,k);if(w<=0)return;
-  let o=null;try{o=a.o?a.o(v,t):null}catch(e){}if(o!=null&&tc>=BAL.wit.lo)w*=Math.pow(cl(o,5,95)/50,(tc-BAL.wit.lo)/BAL.wit.mid);/* wit: weigh the odds, more so the cleverer */
+  let o=null;try{o=a.o?a.o(v,t):null}catch(e){}if(o!=null&&tc>=BAL.wit.lo)w*=Math.pow(oddsCl(o)/50,(tc-BAL.wit.lo)/BAL.wit.mid);/* wit: weigh the odds, more so the cleverer */
   const f=v.fails[k]||0;if(f)w*=tc<BAL.wit.mid?1+.6*f:Math.pow(.5,f);/* the foolish repeat, the clever learn */
   O.push([k,w])};
  add("accuse",6);add("vp",3);add("musk",4);add("catswap",2);for(const k of ["kpoison","pond","kframe","ksab"])add(k,2);add("takeaway",2);add("pushp",1);add("trip",3);add("frame",2);add("poison",2);add("rumor",3);add("spy",3);add("bribe",2);add("block",t.nightLog&&t.nightLog.length?2:0);
@@ -34,7 +34,7 @@ function mindBelief(t,v,k){if(!t||t===S||!t.alive)return;const ev=(t.evm&&t.evm[
  if(roll(p)){oanAdd(t,v,BAL.eff.j40.mindBelief);return}
  const L=others(t).filter(x=>x!==v&&(x===S||x.alive&&!x.out));if(!L.length)return;const w=L.map(x=>[x,1+oan(t,x)+Math.max(0,-aff(t,x))]);let r=Math.random()*w.reduce((a,b)=>a+b[1],0),i=0;while(r>w[i][1]&&i<w.length-1){r-=w[i][1];i++}
  const s=w[i][0];oanAdd(t,s,BAL.eff.j40.mindBelief_2);mindLog(t,"_wrongBelief");t.blamed=t.blamed||{};t.blamed[key(s)]=(t.blamed[key(s)]||0)+1;
- if(s===S&&roll(BAL.odb.j40.rbMindBelief+(S.mat||0)*8))noteAdd(t.id,`Nghe nói ${t.name} ngờ ngươi đứng sau chuyện ${ACT[k]?ACT[k].n.toLowerCase():"vừa rồi"}, dù không phải ngươi`)}
+ if(s===S&&roll(BAL.odb.j40.rbMindBelief+eyes(S)*8))noteAdd(t.id,`Nghe nói ${t.name} ngờ ngươi đứng sau chuyện ${ACT[k]?ACT[k].n.toLowerCase():"vừa rồi"}, dù không phải ngươi`)}
 /* the mind's turn: replaces the plain weighted pick */
 npcAct=function(v,t){try{if(!v||!t)return"";const T=traitsOf(v);const tc=witOf(v);mindLog(v,"_decide");
   /* Nhu mì hesitates */
@@ -51,8 +51,8 @@ npcAct=function(v,t){try{if(!v||!t)return"";const T=traitsOf(v);const tc=witOf(v
   /* a big scheme is prepared first: it leaves a tell her people may catch */
   if(BIG.includes(k)&&!v.plan){const pat=tc>=BAL.wit.hi?2:tc>=BAL.wit.mid?1:0;v.plan={k,t:key(t),due:bq()+1+R(2)+pat,err};mindTell(v,t,k);return""}
   return mindRun(v,t,k,err)}catch(e){return""}};
-function mindTell(v,t,k){mindLog(v,"_tell");const tc=witOf(v);let c=12+(S.mat||0)*7+(S.staff||[]).filter(s=>netIs(s,"sharp")||netIs(s,"talk")).length*8+(tc<BAL.wit.mid?15:0)-(tc>=BAL.wit.top?8:0)+(t===S&&S.maid&&S.maid.loyal>=BAL.loy.trust?10:0);
- if(!roll(cl(c,5,80)))return;mindLog(v,"_tellSeen");const txt=`Người của ${v.name} ${TELLS[k]||"có động tĩnh lạ"}`;S.tells=S.tells||{};S.tells[v.id]={k,t:key(t),bq:bq()};
+function mindTell(v,t,k){mindLog(v,"_tell");const tc=witOf(v);let c=12+eyes(S)*7+(S.staff||[]).filter(s=>netIs(s,"sharp")||netIs(s,"talk")).length*8+(tc<BAL.wit.mid?15:0)-(tc>=BAL.wit.top?8:0)+(t===S&&S.maid&&S.maid.loyal>=BAL.loy.trust?10:0);
+ if(!roll(oddsCl(Math.min(c,80))))return;mindLog(v,"_tellSeen");const txt=`Người của ${v.name} ${TELLS[k]||"có động tĩnh lạ"}`;S.tells=S.tells||{};S.tells[v.id]={k,t:key(t),bq:bq()};
  try{newsAdd(v,k,txt,true)}catch(e){}noteAdd(v.id,`Tai mắt báo: ${TELLS[k]||"có động tĩnh lạ"}${t===S?" (có lẽ nhắm vào ngươi)":` (có lẽ nhắm vào ${NM(t)})`}`);
  if(t===S){S.onGuard=S.onGuard||{};S.onGuard[v.id]=k;if(!S.dead)Q.push({t:"Tai mắt báo tin",h:`<p>${txt}.</p><p>Có lẽ nàng đang nhắm vào ngươi. Ngươi đã đề phòng: vài buổi tới mưu của nàng khó thành hơn; dò la hoặc tố giác nàng thì càng chắc.</p>`,who:{w:["r",v.id]}})}
  else log(`Tai mắt báo: ${txt}.`)}

@@ -3,7 +3,7 @@
    whole game script); (2) here the RegExp constructor throws on any lookbehind, as old Safari does, so every pattern built at run time must
    go through kRx (j0) — the game must still boot with 0 page errors, the boot cover (kboot.js) must let go, the title must be up, VP.fix must
    give the same text as with native lookbehind; (3) a page whose game script did not finish (window.__ctmBuilt removed) must show the
-   failure card ("Cửa cung chưa mở được" + "Tải lại" + "Xóa bộ nhớ đệm rồi tải lại") instead of the skeleton.
+   failure card ("Cửa cung chưa mở được" + "Mở lại" + "Quét lối cũ rồi mở lại") instead of the skeleton.
    usage: node dev/test/webkit-boot.js <baseURL> [outdir]   (one browser, closed at the end; exit 1 on a failure) */
 const {chromium}=require('playwright');const fs=require('fs');
 const [,,BASE,OUT='/tmp']=process.argv;
@@ -27,5 +27,5 @@ const SAMPLE=["Nàng quý ngươi hơn","Bấm vào đây, lượt 3","T3/2 thư
  if(!(old.done&&!old.cover&&old.title&&!old.errors.length&&old.lb===false)){fails++;console.log("FAIL old-safari boot")}
  const diff=(nat.fix||[]).map((x,i)=>x===(old.fix||[])[i]?null:[SAMPLE[i],x,(old.fix||[])[i]]).filter(Boolean);
  if(!nat.fix||diff.length){fails++;console.log("FAIL VP.fix differs",JSON.stringify(diff))}else console.log("VP.fix same on",SAMPLE.length,"samples");
- if(!(brk.fail&&/Tải lại/.test(brk.failText)&&/Xóa bộ nhớ đệm/.test(brk.failText))){fails++;console.log("FAIL broken page shows no failure card")}
+ if(!(brk.fail&&/Mở lại/.test(brk.failText)&&/Quét lối cũ/.test(brk.failText))){fails++;console.log("FAIL broken page shows no failure card")}
  await b.close();console.log(fails?`FAIL ${fails}`:"PASS");process.exit(fails?1:0)})().catch(e=>{console.error(e);process.exit(1)});

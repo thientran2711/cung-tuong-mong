@@ -159,7 +159,7 @@ function mindW(p,tag){const T=TAG[tag];if(!T||!p)return 1;const B=BAL.mind;let w
 /* odds shift (in %) an NPC gets on an act that uses their strength */
 function mindOdds(p,tag){const T=TAG[tag];if(!T)return 0;const st=mindStr(p);return st&&T.str.includes(st)?BAL.mind.odds:0}
 /* the weighted pick: options [[x,w],...]; slip % of the time the NPC misjudges (takes a random option of the rest, weight-blind) */
-function mindPick(O,p){O=(O||[]).filter(o=>o&&o[1]>0);if(!O.length)return null;if(O.length>1&&roll(BAL.mind.slip)){return O[Math.floor(Math.random()*O.length)][0]}
+function mindPick(O,p){O=(O||[]).filter(o=>o&&o[1]>0);if(!O.length)return null;if(O.length>1&&roll(BAL.mind.slip)){/* NPC-PURPOSE G3: a slip is a misjudgement among HER OWN near-best options, never a random act */const o=npwPick(O,x=>x[1]);if(o)return o[0]}
  const t=BAL.mind.temp;const W=O.map(o=>Math.pow(o[1],t));const s=W.reduce((a,b)=>a+b,0);let r=Math.random()*s;for(let i=0;i<O.length;i++){r-=W[i];if(r<=0)return O[i][0]}return O[O.length-1][0]}
 /* a target pick by affinity/oán: score(t) = base + hostility... (sites pass their own score); never argmax */
 function mindPickBy(L,score,p){return mindPick((L||[]).map(x=>[x,Math.max(BAL.mind.pickMin,score(x))]),p)}
@@ -170,9 +170,11 @@ const MIND_SOC={help:"help",visit:"help",mediate:"help",apologise:"help",warn:"s
 window.MIND_SOC=MIND_SOC;
 /* j40 harm menu: the band's acts, weighted by traits + odds (j40), now also by THIS consort's strength, abilities and trọng; a slip = she misjudges */
 const MENU_TAG={accuse:"frame",vp:"frame",kframe:"frame",frame:"frame",plant:"frame",musk:"harm",catswap:"harm",kpoison:"harm",poison:"harm",pond:"harm",ksab:"harm",takeaway:"harm",
- pushp:"harm",trip:"harm",rumor:"scheme",spy:"spy",bribe:"bribe",block:"scheme"};
+ pushp:"harm",trip:"harm",rumor:"scheme",spy:"spy",bribe:"bribe",block:"scheme"};window.MIND_MENU=MENU_TAG;/* 2f3: read by mindSeen (outside this scope) */
 if(typeof mindMenu==="function"){const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(!O||!O.length)return O;
-  if(O.length>1&&roll(BAL.mind.slip))return O.map(o=>[o[0],1]);return O.map(([k,w])=>[k,w*mindW(v,MENU_TAG[k]||"scheme")])}catch(e){return O}}}
+  const W=O.map(([k,w])=>[k,w*mindW(v,MENU_TAG[k]||"scheme")]);
+  if(W.length>1&&roll(BAL.mind.slip)){/* G3: she misjudges between her near-best acts only: those within BAL.ag.why.near of the best weigh the same; the whole list is kept so callers' filters (j70 band, j40 rash) still find an act */
+   const b=Math.max(...W.map(x=>x[1]));if(b>0)return W.map(([k,w])=>[k,w>=b*BAL.ag.why.near?b:w])}return W}catch(e){return O}}}
 /* a stray man seen in the hậu cung: was a fixed rule per trait (no dice); now each answer is weighted, the old answer stays the most likely */
 if(typeof menDecide==="function"){const d0=menDecide;menDecide=function(w,c){const d=d0.apply(this,arguments);try{const h=c?hostility(w,c):0;const T=traitsOf(w);
   const M=BAL.mind.men;
@@ -180,3 +182,25 @@ if(typeof menDecide==="function"){const d0=menDecide;menDecide=function(w,c){con
   O.forEach(o=>{if(o[0]===d)o[1]+=M.keep});return mindPick(O,w)||d}catch(e){return d}}}
 
 })();
+/* ================= AG-ALL-2f3 — WHAT A SERVANT HAS SEEN HER MASTER DO, per chữ trọng (owner OD 17/11 ~17:20Z: "một người trung thành vẫn có thể bán
+   chủ khi mà chủ của họ làm một cái điều không đúng với cái chữ trọng của họ") — the same virtue tags as everything else (MIND_TAG tr above, jtrong DEED):
+   mindSeen(master, tag | null, tags) → every servant of that master who holds a virtue the deed touches records it (+1 honoured / −1 offended, capped
+   BAL.mind.seen.cap, fading ×BAL.mind.seen.fade per tuần; reset when the servant changes master). mindMoodSet(s, master, "gian" | "thuong") = today's
+   mood toward the master (this tuần only; an angry emotion (jemo) counts as "gian" too). mindTr(s, master) → {off:[[virtue,n]], hon:[[virtue,n]]} and
+   mindMood(s, master) are read by the ONE betray / sell / recruit odds core (jagknow btTerms). Same for her and for every NPC master (two-way).
+   Deeds recorded: acts (runAct key → MENU_TAG / MIND_SOC tag; any other dirty act = scheme), NPC social deeds (SOC, jtrong DEED tags), Thưởng / Phạt
+   own servant (servDo: reward / punish + mood), bribing someone (bribeServ: bribe). ================= */
+function mindSeenRec(s,m){const k=key(m);if(!s.trM||s.trM.k!==k)s.trM={k,o:{},w:wk()};const R=s.trM;const n=wk()-(R.w||0);
+ if(n>0){const f=Math.pow(BAL.mind.seen.fade,n);for(const v in R.o){R.o[v]=+(R.o[v]*f).toFixed(3);if(Math.abs(R.o[v])<.1)delete R.o[v]}R.w=wk()}return R}
+function mindSeen(m,tag,tags){try{if(!m||(typeof isSrv==="function"&&isSrv()&&m===S))return;const MT=window.MIND_TAG||{};const T=tags||(tag&&MT[tag]&&MT[tag].tr);if(!T)return;const C=BAL.mind.seen.cap;
+ for(const s of (m.staff||[])){if(!s||s.out||s.sid==null)continue;let R=null;for(const v of trongOf(s)){const t=T[v]||0;if(!t)continue;R=R||mindSeenRec(s,m);R.o[v]=cl((R.o[v]||0)+t,-C,C)}}}catch(e){}}
+function mindTr(s,m){const o={off:[],hon:[]};try{if(!s||!m||!s.trM||s.trM.k!==key(m))return o;const R=mindSeenRec(s,m);for(const v in R.o){const n=R.o[v];if(n<0)o.off.push([v,-n]);else if(n>0)o.hon.push([v,n])}}catch(e){}return o}
+function mindMoodSet(s,m,k){if(s&&m)s.mdM={k:key(m),w:wk(),v:k}}
+function mindMood(s,m){try{if(!s||!m)return"";const M=s.mdM;if(M&&M.k===key(m)&&M.w===wk())return M.v;if(s.emo&&typeof emoGet==="function"&&emoGet(s).k==="gian")return"gian"}catch(e){}return""}
+(function(){
+ if(typeof runAct==="function"){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{const g=(window.MIND_MENU||{})[k]||(window.MIND_SOC||{})[k]||(typeof DIRTY!=="undefined"&&DIRTY.includes(k)?"scheme":null);if(g)mindSeen(a,g)}catch(e){}return r}}
+ if(typeof SOC==="object"&&typeof DEED==="object")for(const k in SOC){const tg=DEED[k];if(!tg||!SOC[k]||typeof SOC[k].run!=="function")continue;const r0=SOC[k].run;SOC[k].run=function(v){const r=r0.apply(this,arguments);try{mindSeen(v,null,tg)}catch(e){}return r}}
+ if(typeof servDo==="function"){const d0=servDo;servDo=function(m,a,s){const had=m&&s&&(m.staff||[]).includes(s);const r=d0.apply(this,arguments);try{if(r&&had&&(a==="thuong"||a==="phat")){mindMoodSet(s,m,a==="thuong"?"thuong":"gian");mindSeen(m,a==="thuong"?"reward":"punish")}}catch(e){}return r}}
+ if(typeof bribeServ==="function"){const b0=bribeServ;bribeServ=function(a,s){const r=b0.apply(this,arguments);try{if(r)mindSeen(a,"bribe")}catch(e){}return r}}
+})();
+Object.assign(window,{mindSeen,mindTr,mindMood,mindMoodSet});

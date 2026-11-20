@@ -25,11 +25,22 @@ const PAT={
  four:/[^\w.]4\s*-\s*used\b/g,                                 /* day-khắc audit 17/11: a typed 4 for the buổi's khắc (one core: BAL.time.khac / j76left) */
  ofbuoi:/khắc còn lại của buổi/g                                   /* day-khắc audit 17/11: player words must say the DAY ("còn lại trong ngày") */,
  dayfit4:/function dayFit\([^)]*\)\{[^}]*<=\s*4\b/g,                 /* day-khắc r2: the ONE time gate never reads a typed 4 */
- thisbuoi:/thành: (được vào|vào được) buổi này/g                /* day-khắc r2: ask / sneak / lead may spill: say the arrival buổi (j77When), never a fixed "buổi này" */
+ thisbuoi:/thành: (được vào|vào được) buổi này/g,               /* day-khắc r2: ask / sneak / lead may spill: say the arrival buổi (j77When), never a fixed "buổi này" */
+ /* day-khắc land (20/11): the BAL forms of the same buổi-only gates, so new code written with BAL.time.khac instead of a typed 4 is caught too */
+ usedbal:/used\s*\+\s*[\w.()]+\s*(<=|>|<|>=)\s*BAL\.time\.khac\b/g,  /* used+N vs the buổi's khắc: fits THIS buổi only */
+ minbal:/Math\.min\(\s*[\w.]+\s*,\s*BAL\.time\.khac\s*-\s*used\s*\)/g, /* cost cut to the buổi's rest (no spill) */
+ kleft:/BAL\.time\.khac\s*-\s*used\)?\s*(<=|>=|<|>)\s*[\w.(]/g          /* the buổi's khắc left compared to a cost */
 };
 /* allowed occurrences: file -> pattern -> count, each with why */
 const ALLOW={
- 'j76.js':{khongkip:3} /* the time core: "không kịp xong trong <buổi>" only for acts tied to their buổi (a.b cards, sáng lesson).
+ /* day-khắc land (20/11) usedbal/minbal/kleft rows, each read by hand after the 2072-commit main merge:
+    j1 can() = base, wrapped by j76 day can · j15 whyTime = wrapped by j76 day words · j72 = text after the day can() already failed ·
+    j9 walkOk = "the walk fits THIS buổi" (plain walk; every spill path goes through walkSpill/walkLate) · j77 j77When = label "buổi này"
+    vs arrival buổi · jmen menKh / jtsb tsbKh = spill first (j76spills), the min only trims when the day itself is short ·
+    jrest = fallback when j76left is missing · j76 = the time core itself */
+ 'j1.js':{usedbal:1},'j15.js':{usedbal:1},'j72.js':{usedbal:1},'j9.js':{usedbal:1},'j77.js':{usedbal:1},
+ 'jmen.js':{minbal:1},'jtsb.js':{minbal:1},'jrest.js':{kleft:1},
+ 'j76.js':{khongkip:3,usedbal:7} /* the time core: "không kịp xong trong <buổi>" only for acts tied to their buổi (a.b cards, sáng lesson).
    day-khắc r2: every other entry (used4 in j1/j15/j9/j72/j76, j77 kh, jmen/jtsb trunc) had 0 hits and was dropped — dayFit reads BAL.time.khac */
 };
 const ST={};
@@ -56,7 +67,7 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
  const SEED=+process.env.SEED||7;console.log('seed '+SEED);
  await F.evaluate(sd=>{let x=sd;window.__tsgRnd=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648};Math.random=window.__tsgRnd},SEED);
  await F.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;const t=document.getElementById('title');if(t)t.hidden=true;/* a consort life (the flake: a random life could be a maid, isSrv, where the consort gate greeting does not apply) */window.__forceOrigin='thd';window.__nlInner=1;start();window.__forceOrigin=0;window.__nlInner=0;quiet=false;Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}});
- await p.waitForTimeout(800);
+ await F.waitForFunction(()=>typeof S!=='undefined'&&!!S&&!!S.name&&!document.querySelector('#modal:not([hidden])'),null,{timeout:30000});/* real condition (the life exists, no dialog up), not an 800 ms timer */
  const R=await F.evaluate(()=>{if(window.__tsgRnd)Math.random=window.__tsgRnd;const out={rows:[],bad:[]};const B4=typeof B4L==='number'?B4L:BUOI.length-1,CH=B4-1;
   const clr=()=>{Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true};
   const body=()=>{const M=document.getElementById('modal');if(!M||M.hidden)return null;return{t:(document.getElementById('mt')||{}).textContent||'',body:M.innerText.replace(/\s+/g,' '),opts:[...M.querySelectorAll('#mb .opts > button, #mb .opts button')].map(x=>({n:x.innerText.replace(/\s+/g,' ').trim(),dis:x.disabled}))}};
@@ -130,7 +141,10 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
      const pn=document.getElementById('panel');if(pn)pn.querySelectorAll('button[disabled]').forEach(b=>seen.push(b.outerHTML));
      try{window.__mapList=1;if(t==="go")render();if(pn)pn.querySelectorAll('button[disabled]').forEach(b=>seen.push(b.outerHTML))}catch(e){}window.__mapList=0}
     for(const k of places().map(x=>x.k)){if(k==="home")continue;base(bu,3);S.where.emp=k;try{courtMeet('emp');courtMeet('th')}catch(e){}}}}finally{pbtn=p0}
-   let n=0;for(const h of new Set(seen)){if(!dis(h))continue;n++;const m=(h.match(/<span class="kwhy">([^<]*)<\/span>/)||[])[1]||'';if(SPILL.test(m))row('disabled by a spill: '+txt(h).slice(0,80),false,m)}
+   let n=0;for(const h of new Set(seen)){if(!dis(h))continue;n++;const m=(h.match(/<span class="kwhy">([^<]*)<\/span>/)||[])[1]||'';if(SPILL.test(m))row('disabled by a spill: '+txt(h).slice(0,80),false,m);
+    /* day-khắc land (20/11, the sweep after the 2072-commit main merge): at sáng / chiều with 1 khắc left the DAY still holds 5+ khắc, so no
+       button may be greyed "hết khắc" or "không kịp" — except the sáng-only thỉnh an («không kịp xong trong buổi sáng», OD L852 (b)) */
+    if(/hết khắc|không kịp/.test(m)&&!/không kịp xong trong buổi sáng/.test(m))row('greyed for time while the day has khắc: '+txt(h).slice(0,80),false,m)}
    out.rows.push({id:'disabled buttons scanned',ok:true,info:n})}
   /* 12. words (review r1 FAIL 3): ask / sneak / lead lines say the arrival buổi when the walk spills, "buổi này" only when it fits */
   {base(CH,3);let wn=0;for(const k of places().map(x=>x.k)){if(k==="home")continue;const st=accState(k);if(!st.ask&&!st.kind)continue;const tc=st.tc||0;wn++;

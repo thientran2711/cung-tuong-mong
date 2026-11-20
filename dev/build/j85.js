@@ -84,22 +84,22 @@ function ducLine(v){vNorm(v);if(!ducKnown(v))return `Đức: <span class="ef n">
 (function(){const rc=rvCard;rvCard=function(v,i){let h=rc(v,i);try{if(v.alive)h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>${ducLine(v)}</span>`)}catch(e){}return h}})();
 /* ---- Đức in the rules everyone shares ---- */
 (function(){const d0=danger;danger=function(v,t){return d0.apply(this,arguments)+ducDanger(v)}})();
-(function(){const o0=oAccuse;oAccuse=function(a,t){return cl(o0.apply(this,arguments)+ducOdds(a)+virtueBonus(a,"ngon").odds,5,95)}})();
-(function(){const o0=oBribe;oBribe=function(a,t){return cl(o0.apply(this,arguments)+ducBetray(t),5,95)}})();
-(function(){const o0=oPlant;oPlant=function(a,t){return cl(o0.apply(this,arguments)+ducBetray(t),5,95)}})();
-(function(){const o0=oAlly;oAlly=function(a,t){return cl(o0.apply(this,arguments)+virtueBonus(a,"ngon").odds,5,95)}})();
+(function(){const o0=oAccuse;oAccuse=function(a,t){return oddsCl(o0.apply(this,arguments)+ducOdds(a)+virtueBonus(a,"ngon").odds)}})();
+(function(){const o0=oBribe;oBribe=function(a,t){return oddsCl(o0.apply(this,arguments)+ducBetray(t))}})();
+(function(){const o0=oPlant;oPlant=function(a,t){return oddsCl(o0.apply(this,arguments)+ducBetray(t))}})();
+(function(){const o0=oAlly;oAlly=function(a,t){return oddsCl(o0.apply(this,arguments)+virtueBonus(a,"ngon").odds)}})();
 /* frame / rumour against a target: the target's Đức is a shield (needs the target, so the act tells us who it is) */
 let DT85=null;
 function withT(t,f){const o=DT85;DT85=t;try{return f()}finally{DT85=o}}
-(function(){const sh=n=>{const f0=window[n];if(typeof f0!=="function")return;window[n]=function(a){a=a||S;const r=f0.apply(this,arguments);return cl(r-(DT85&&DT85!==a?ducShield(DT85):0)+artBonus(a,"ky").scheme,5,95)}};
+(function(){const sh=n=>{const f0=window[n];if(typeof f0!=="function")return;window[n]=function(a){a=a||S;const r=f0.apply(this,arguments);return oddsCl(r-(DT85&&DT85!==a?ducShield(DT85):0)+artBonus(a,"ky").scheme)}};
  ["oFrame","oKFrame","oRumor"].forEach(sh);
- ["oSpy","oPoison","oKSab","oKPoison","oBlock"].forEach(n=>{const f0=window[n];if(typeof f0!=="function")return;window[n]=function(a){a=a||S;return cl(f0.apply(this,arguments)+artBonus(a,"ky").scheme,5,95)}});
+ ["oSpy","oPoison","oKSab","oKPoison","oBlock"].forEach(n=>{const f0=window[n];if(typeof f0!=="function")return;window[n]=function(a){a=a||S;return oddsCl(f0.apply(this,arguments)+artBonus(a,"ky").scheme)}});
  for(const k of ["frame","kframe","rumor","lygian"]){const A2=ACT[k];if(!A2)continue;const f1=A2.f,o1=A2.o;A2.f=function(a,t){return withT(t,()=>f1.apply(this,arguments))};if(o1)A2.o=function(a,t){return withT(t,()=>o1.apply(this,arguments))}}})();
 /* the cards she draws: Dung helps banquets/ceremonies, Ngôn helps social acts */
 const DUNGRX=/yến|Yến|lễ|Lễ|thỉnh an|Thỉnh an|tiệc|Tiệc|hiến|Hiến/,NGONRX=/Thỉnh an|Kết giao|kết giao|Tặng|tặng|Lấy lòng|lấy lòng|Trò chuyện|trò chuyện|Xin |Tâng bốc|Nói thật/;
 function vOddsFor(a,p){p=p||S;let b=0;if(!a||a.o==null||a.o>=100)return 0;if(DUNGRX.test(a.n||""))b+=virtueBonus(p,"dung").odds;if(a.dom==="Giao thiệp"||NGONRX.test(a.n||""))b+=virtueBonus(p,"ngon").odds;return b}
-(function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{(deck||[]).forEach(a=>{const b=vOddsFor(a);if(b)a.o=cl(a.o+b,5,95)})}catch(e){}return r}})();
-(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{const sl=virtueBonus(S,"ngon").slip,od1=virtueBonus(S,"ngon").odds;(A||[]).forEach(a=>{if(a.o!=null&&a.o<100)a.o=cl(a.o+od1+(DUNGRX.test(a.n||"")?virtueBonus(S,"dung").odds:0),5,95);if(sl&&a.l)for(const k in a.l){if(a.l[k]<0)a.l[k]=Math.min(0,a.l[k]+sl)}})}catch(e){}return A}})();
+(function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{(deck||[]).forEach(a=>{const b=vOddsFor(a);if(b)a.o=oddsCl(a.o+b)})}catch(e){}return r}})();
+(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{const sl=virtueBonus(S,"ngon").slip,od1=virtueBonus(S,"ngon").odds;(A||[]).forEach(a=>{if(a.o!=null&&a.o<100)a.o=oddsCl(a.o+od1+(DUNGRX.test(a.n||"")?virtueBonus(S,"dung").odds:0));if(sl&&a.l)for(const k in a.l){if(a.l[k]<0)a.l[k]=Math.min(0,a.l[k]+sl)}})}catch(e){}return A}})();
 /* ---- learning (her): arts keep j23's three roads; the courses have two ---- */
 (function(){const a0=addArt;addArt=function(k,g){if((k==="theu"||k==="nau")&&virtueBonus(S,"cong").prog)g+=1;vNorm(S);const l0=S.arts[k];const r=a0.call(this,k,g);
  for(let l=l0+1;l<=S.arts[k];l++){const b=k==="theu"?ARTB85.theu:null;if(b&&b[l]){apply(b[l]);log(`${ARTS.find(a=>a.k===k).n} bậc ${l}: ${fmt(b[l])}.`)}}return r}})();
@@ -118,7 +118,8 @@ window.lessonVir=lessonVir;
 /* ONE act, two doors (danh-p1, owner P1 16/11): Tài nghệ · Tứ đức button (here) and the Hành sự card (jact adCharityCard);
    one lock S.charM (once a month), one effect body charityFx; numbers BAL.charity */
 function charityLocked(){return !S||S.charM===S.turn||S.bac<BAL.charity.bac}
-function charityFx(){const C=BAL.charity;S.charM=S.turn;withDeed("phát bạc cứu giúp cung nhân nghèo",()=>apply({bac:-C.bac,duc:C.duc,danh:C.danh}))}
+/* ONE function for her button and an NPC consort's choice (AG-ALL-2e cx3:charity, jagacts3) */
+function charityFx(p){p=p||S;const C=BAL.charity;p.charM=S.turn;const fx={bac:-C.bac,duc:C.duc,danh:C.danh};if(p===S)withDeed("phát bạc cứu giúp cung nhân nghèo",()=>apply(fx));else ap(p,fx)}
 function charity(){const C=BAL.charity;if(!S||S.dead||Q.length||!can(C.khac)||charityLocked())return;charityFx();spend(C.khac);save();render()}
 window.charity=charity;
 try{wrapR("lessonVir",(k,m)=>`${m==="self"?"Tự học":"Học"} ${(VIR.find(x=>x.k===k)||{}).n||""}`);wrapR("charity",()=>"Phát bạc cứu giúp cung nhân")}catch(e){}
@@ -128,11 +129,18 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-vlearn],[d
 function addArtP(p,k,g){if(p===S)return addArt(k,g);vNorm(p);const a=ARTS.find(x=>x.k===k);if(!a)return;if((k==="theu"||k==="nau")&&virtueBonus(p,"cong").prog)g+=1;p.artp[k]+=g;
  while(p.arts[k]<5&&p.artp[k]>=p.arts[k]+2){p.artp[k]-=p.arts[k]+2;p.arts[k]++;const l=p.arts[k];const f={[a.st]:2};if(l===3)f.danh=3;if(l===5)f.danh=6;const b=(ARTB85[k]||{})[l];if(b)for(const x in b)f[x]=(f[x]||0)+b[x];ap(p,f)}
  if(p.arts[k]>=5)p.artp[k]=0}
-function npcStudy(v){if(!v||!v.alive||v.out||!roll(40*(1+BAL.net.k.study*netQ(v,"study"))))return;vNorm(v);const T=traitsOf(v)||[];const W=[];
+function npcStudy(v){if(!v||!v.alive||v.out||(window.agDOn&&agDOn())||!roll(40*(1+BAL.net.k.study*netQ(v,"study"))))return;npcStudyDo(v)}
+/* the study itself (the player's Tự học / Học với thầy rule for an NPC); AG-ALL: the day plan calls it as her choice (jagacts cx:study) */
+function npcStudyDo(v){if(!v||!v.alive||v.out)return;vNorm(v);const T=traitsOf(v)||[];const W=[];
  const w=k=>{let x=1;if(/Ân cần|Khiêm nhường/.test(T.join()))x*=(k==="hanh"?3:k==="dung"||k==="cong"?2:1);if(T.includes("Xảo quyệt"))x*=(k==="ky"?3:k==="ngon"?2:k==="hanh"?.3:1);if(T.includes("Kiêu ngạo"))x*=(k==="vu"||k==="dung"?2:1);return x};
  ARTS.forEach(a=>{if(v.arts[a.k]<5)W.push(["a",a.k,w(a.k)])});VIR.forEach(x=>{if(v.vir[x.k]<5)W.push(["v",x.k,w(x.k)])});if(!W.length)return;
- let r=Math.random()*W.reduce((s,x)=>s+x[2],0),i=0;while(r>W[i][2]&&i<W.length-1){r-=W[i][2];i++}const [t,k]=W[i];const l=t==="a"?v.arts[k]:v.vir[k],cost=t==="a"?(typeof tchFeeOf==="function"?tchFeeOf(v):5+l*5):virCost(l,v);
- let g=1;if((v.bac||0)>=cost+40&&roll(50)){ap(v,{bac:-cost});g=2+R(2)}if(t==="a")addArtP(v,k,g);else addVir(v,k,g)}
+ const [t,k]=mindPick(W.map(x=>[x,x[2]]),v)||W[0];const l=t==="a"?v.arts[k]:v.vir[k],cost=t==="a"?(typeof tchFeeOf==="function"?tchFeeOf(v):5+l*5):virCost(l,v);
+ const SX=BAL.ag.par3.study;const paid=(v.bac||0)>=cost+SX.keep&&mindPick([["t",SX.teach],["s",SX.self]],v)==="t";let g=1;if(paid){ap(v,{bac:-cost});g=2+R(2)}
+ /* AG-ALL-2b mg2 (owner OD 17/11 ~15:25Z (3)): her lesson game for the NPC = one draw (jmgt mgNpcRaw, practice board occ hoc at the NPC's level) through HER
+    points rule: an art = j83 wkLessonPts (teacher or self, same value, as her art lessons); a virtue = jtd tdPoints (self / with a ma ma) */
+ if(typeof mg2On==="function"&&mg2On()&&BAL.ag.mg2.study){try{if(t==="a"&&typeof wkLessonPts==="function")g=wkLessonPts(kg82NpcRaw(v,kg82Kind(k,"",true),{occ:"hoc"}));
+  else if(t==="v"&&typeof tdPoints==="function"&&typeof TD_OF!=="undefined"&&TD_OF[k])g=tdPoints(paid?"master":"self",kg82NpcRaw(v,TD_OF[k],{occ:"hoc",lv:l}))}catch(e){}}
+ if(!g)return;if(t==="a")addArtP(v,k,g);else addVir(v,k,g)}
 /* ---- monthly effects (every consort alike) ---- */
 function v85Month(){if(!S||S.dead)return"";let ev="";const season=S.turn%3===0;
  for(const p of consorts()){if(!p||(p!==S&&(!p.alive||p.out)))continue;vNorm(p);const me=p===S,A=p.arts,f={};const add=(k,n)=>{if(n)f[k]=(f[k]||0)+n};
@@ -148,7 +156,7 @@ function v85Month(){if(!S||S.dead)return"";let ev="";const season=S.turn%3===0;
   const lf=d>=BAL.ducLv.staffUp?1:d<BAL.ducLv.staffDown?-1:0;if(lf){(p.staff||[]).forEach(s=>{if(s.loyal!=null)s.loyal=cl(s.loyal+lf,0,100)});if(p.maid&&p.maid.loyal!=null)p.maid.loyal=cl(p.maid.loyal+lf,0,100)}
   /* (her Thái hậu / Hoàng hậu drift by Đức is written once, with numbers, in the turn-change line of jlogsync — log-sync r1) */
   if(me&&lf)ev+=lf>0?`Đức ${d}: kẻ hầu thêm Lòng (+1). `:`Đức ${d}: kẻ hầu bớt Lòng (-1). `;
-  if(!me){npcStudy(p);if(d>=60&&d<85&&(p.bac||0)>=BAL.charity.bac*3&&roll(5))withDeed("phát bạc cứu giúp cung nhân nghèo",()=>ap(p,{bac:-BAL.charity.bac,duc:BAL.charity.duc,danh:BAL.charity.danh}))}}
+  if(!me){npcStudy(p);if(d>=60&&d<85&&(p.bac||0)>=BAL.charity.bac*3&&!(window.agDOn&&agDOn())&&roll(5))withDeed("phát bạc cứu giúp cung nhân nghèo",()=>ap(p,{bac:-BAL.charity.bac,duc:BAL.charity.duc,danh:BAL.charity.danh}))}}
  return ev}
 (function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);let e2="";try{if(!S.dead)e2=v85Month()}catch(e){}return typeof ev==="string"?ev+e2:ev}})();
 /* ---- the danger ladder card names the Đức term ---- */
@@ -171,15 +179,15 @@ artTabHTML=function(){vNormAll();const t2=whyTime(2);
  let h=`<div class="ph"><span>Mỗi buổi học tốn 2 khắc. Học với thầy tốn bạc, tiến nhanh; tự học không tốn bạc, tiến chậm. Phi tần khác cũng học theo cùng luật.</span>${S.master?`<span class="g">Danh sư còn dạy ${S.master} tháng</span>`:""}</div>`;
  h+=`<div class="ph"><span><b>Tứ đức</b> · bốn môn của nữ nhi trong cung, không phải thanh số: mỗi bậc đổ vào Sắc, Đức, phần thắng và phẩm đồ tự làm.</span><span>Đức ngươi: <b>${S.duc}</b> <button class="lnk ladi" data-v85tab="duc" title="Luật Đức" aria-label="Xem luật Đức">ⓘ luật Đức</button></span></div><div>`;
  h+=VIR.map(V=>{const l=S.vir[V.k],cost=virCost(l);const B=l>=5?[`<span class="ef g">Đã tinh thông</span>`]:[
-   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ một phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
-   pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Học với ma ma",`Chắc chắn · tốn: 2 khắc, Bạc -${cost}, Sức -10 · thành: tiến bộ hai ba phần`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
-  if(V.k==="hanh")B.push(pbtn(`data-charity="1"`,"Phát bạc cứu giúp cung nhân nghèo",`Chắc chắn · tốn: ${BAL.charity.khac} khắc, Bạc -${BAL.charity.bac} · thành: Đức +${BAL.charity.duc}, Danh +${BAL.charity.danh} (mỗi tháng một lần)`,whyTime(BAL.charity.khac)||(S.bac<BAL.charity.bac?`thiếu bạc (cần ${BAL.charity.bac})`:S.charM===S.turn?"tháng này đã làm":"")));
+   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`tốn: 2 khắc, Sức -15 · thành: tiến bộ một phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
+   pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Học với ma ma",`tốn: 2 khắc, Bạc -${cost}, Sức -10 · thành: tiến bộ hai ba phần`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
+  if(V.k==="hanh")B.push(pbtn(`data-charity="1"${capAt({k:BAL.charity.khac},BAL.charity.bac)}`,"Phát bạc cứu giúp cung nhân nghèo",`${capW()} · tốn: ${BAL.charity.khac} khắc, Bạc -${BAL.charity.bac} · thành: Đức +${BAL.charity.duc}, Danh +${BAL.charity.danh} (mỗi tháng một lần)`,whyTime(BAL.charity.khac)||(S.bac<BAL.charity.bac?`thiếu bạc (cần ${BAL.charity.bac})`:S.charM===S.turn?"tháng này đã làm":"")));
   return card(`${V.n} · ${V.full}`,"",l,S.virp[V.k],l+2,V.d,VIRFX[V.k],B,V.k)}).join("")+`</div>`;
  h+=`<div class="ph"><span><b>Tài nghệ</b> · cầm, kỳ, thi, họa, vũ, y, thêu, nấu.</span></div><div>`;
  h+=ARTS.map(a=>{const l=S.arts[a.k],need=l+2,cost=5+l*5;
-  const B=l>=5?[`<span class="ef g">Đã tinh thông</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
-   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`Chắc chắn · tốn: 2 khắc, Bạc -${cost}, Sức -10 · thành: tiến bộ hai ba phần, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
-   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`Chắc chắn · tốn: 2 khắc, Sức -10 · thành: tiến bộ một đến ba phần, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))];
+  const B=l>=5?[`<span class="ef g">Đã tinh thông</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: 2 khắc, Sức -15 · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
+   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Bạc -${cost}, Sức -10 · thành: tiến bộ hai ba phần, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
+   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: 2 khắc, Sức -10 · thành: tiến bộ một đến ba phần, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))];
   const extra=(a.k==="theu"||a.k==="nau")?` · phẩm đồ tự làm ${artBonus(S,a.k).q}/100, bậc phẩm ${artBonus(S,a.k).tier}`:"";
   return card(a.n,AIMG[a.k],l,S.artp[a.k],need,(ARTDO[a.k]||"")+extra,ARTFX[a.k]||[],B,a.k)}).join("")+`</div>`;
  return h};

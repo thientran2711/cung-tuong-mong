@@ -8,7 +8,7 @@ function srcW(o){return o&&o.face>=0&&AV.women&&AV.women[o.face]?AV.women[o.face
 function pv(v){const g=rkOfFace("consort",v);return{rk:g[0],rw:g[1],w:["r",v.id],src:fsrc(v.fc,srcW(v)),hue:0,ini:v.name.split(" ").pop()[0],col:RCOL[v.queen?7:v.rank]}}
 function pEmp(){return{rk:"emp",rw:"Hoàng thượng",w:["e"],src:fsrc(S.emp.fc,(AV.emperor||[])[S.emp.face]||""),hue:0,ini:"Đế",col:"#f0d070"}}
 function pTH(){return{rk:"th",rw:"Thái hậu",w:["t"],src:fsrc(S.thF,AV.empress_dowager||""),hue:0,ini:"Từ",col:"#c9a0e0"}}
-function pMaid(){const m=S.maid;return{rk:"sv2",rw:"Cung nữ thân tín",w:["m"],src:maidSrc(m),hue:0,ini:m.name.split(" ").pop()[0],col:"#b9a48a"}}
+function pMaid(){const m=S.maid;return{rk:"sv"+BAL.srvRk.dai,rw:kitMaidTitle(m),w:["m"],src:maidSrc(m),hue:0,ini:m.name.split(" ").pop()[0],col:"#b9a48a"}}
 /* faces by role and age band, fixed for life (saved): young maids img/face-maid-1..6; the elderly portrait only for an old nurse role (nhũ mẫu / ma ma, 45+) */
 function maidSrc(m){return fsrc(m.fc,m.old&&m.age>=45&&AV.maids&&AV.maids[1]?AV.maids[1]:"")}
 function eunBand(age){return age<28?0:age<40?1:age<52?2:3}
@@ -42,7 +42,9 @@ function showModal(){const M=$("modal");if(!Q.length){M.hidden=true;return}const
   kitFix(M);M.hidden=false;const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}
 function closeModal(){const m=Q.shift();if(m&&m.onClose){if(m.nl&&window.renderHold)renderHold(m.onClose,m,[],false);else m.onClose()}if(!S.dead||Q.length)showModal();if(m&&m.entI&&!m.onClose&&Q.length&&!S.dead)return;if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* an origin story panel (jentry/joi entI: text + picture, no effect, no onClose) followed by another card: the board did not change, no redraw *//* the life card (m.nl): its nlAccept chain renders once, here (jrbatch); another card follows: the board under it is drawn at the end of this task (jrbatch renderSoon) */
 function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;Q.shift();
-  const b0=snapReal(),s0=S.logSeq||0;apply(c.fx||{});if(c.go)c.go();try{logChoice(m,c,b0,s0)}catch(e){console.error(e)}showModal();if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* a card follows (result, next event): the board under it at the end of this task (jrbatch renderSoon) */
+  const b0=snapReal(),s0=S.logSeq||0;
+  /* ODDS CAP: a formerly-sure CHANCE option (cap = its khắc) rolls at the cap; a failure is the one soft failure (j63 oddsSoft), its go never runs */
+  if(c.cap!=null&&!roll(BAL.odds.hi)){if(c.cap&&can(c.cap))spend(c.cap);oddsSoft("",c.fx)}else{apply(c.fx||{});if(c.go)c.go()}try{logChoice(m,c,b0,s0)}catch(e){console.error(e)}showModal();if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* a card follows (result, next event): the board under it at the end of this task (jrbatch renderSoon) */
 /* the log keeps one line per choice: "<event>: <choice> → <what really happened>" (owner 11/15: bare "Mặc kệ." lines with no context).
    The lines the choice's own effects wrote are folded into it, and the real changes of her numbers are added (before → after). */
 function logChoice(m,c,b0,s0){const n=Math.max(0,Math.min((S.logSeq||0)-s0,S.logs.length));const L=S.logs.splice(0,n).reverse().map(x=>String(x).replace(/^<span class="ld">[^<]*<\/span>/,"").trim()).filter(Boolean);S.logSeq=s0;
@@ -62,28 +64,32 @@ function heirMonth(){if(S.heir&&S.heir.k.alive)return"";S.heir=null;
 function moodMonth(){const E=S.emp;let L=[[0,"Được mùa khắp nơi, Hoàng thượng vui vẻ."],[0,"Sứ thần các nước vào triều cống, ngài rất vui."],[1,""],[1,""],[2,"Lũ lụt ở Giang Nam, Hoàng thượng phiền muộn."],[2,"Hạn hán miền bắc, ngài ăn ngủ không yên."],[3,"Quan tham bị phát giác, Hoàng thượng nổi giận."],[3,"Biên ải có giặc cướp phá, ngài giận dữ."]];
   if(has("nongnay"))L=L.filter(x=>x[0]!==1);if([1,7,8].includes(S.month))L.push([0,"Ngày hội trong cung, ngài vui."],[0,"Ngày hội trong cung, ngài vui."]);
   const [m,t]=pick(L);E.mood=m;return t?`Tháng này: ${t} `:""}
-PEND.vase=()=>({who:pMaid(),t:`${S.maid.name} lỡ tay đánh vỡ chén ngọc Hoàng hậu ban. Thái giám Càn Ninh cung đến bắt người.`,o:[
+PEND.vase=p=>({who:pMaid(),t:`${S.maid.name} lỡ tay đánh vỡ chén ngọc Hoàng hậu ban. Thái giám Càn Ninh cung đến bắt người.${p&&p.y?`<br>Hoàng hậu ${p.y}, chẳng chịu bỏ qua.`:""}`,o:[
     {n:"Nhận tội thay nàng",fx:{hh:-5,danh:-3,maid:30}},{n:"Để nàng chịu đòn",fx:{maid:-30,duc:-3},x:"nàng bị đánh hai mươi trượng"}]});
-PEND.coldletter=p=>{const f=RV(p.f),v=p.v==null?null:RV(p.v);if(!f)return null;return{who:pv(f),t:`${f.name} từ lãnh cung lén gửi thư, xin chút bạc chạy thuốc.`,o:[
+PEND.coldletter=p=>{const f=RV(p.f),v=p.v==null?null:RV(p.v);if(!f)return null;return{who:pv(f),t:`${f.name} từ lãnh cung lén gửi thư, xin chút bạc chạy thuốc${p.y?` (nàng ${p.y})`:""}.`,o:[
     {n:"Giúp nàng",fx:{bac:-30,duc:5},x:v?`${v.name} nghe chuyện, mến ngươi hơn`:"",go:()=>{if(v)v.rel+=20}},{n:"Làm ngơ",fx:{duc:-2}}]}};
-PEND.embezzle=()=>{const q=rivals[0];return{who:pEunOf(q),t:`Một thái giám lén mang đến sổ sách chứng Hoàng hậu ${q.name} biển thủ bạc nội khố, đòi 80 lượng.`,o:[
+PEND.embezzle=p=>{const q=rivals[0];return{who:pEunOf(q),t:`Một thái giám lén mang đến sổ sách chứng Hoàng hậu ${q.name} biển thủ bạc nội khố, đòi 80 lượng.${p&&p.y?`<br>(Hoàng hậu ${p.y}.)`:""}`,o:[
     {n:"Mua lấy",fx:{bac:-80},x:`chứng cứ Hoàng hậu ${balSg(BAL.eff.j3.evGo)}`,go:()=>{evStory(q,BAL.eff.j3.evGo,"biển thủ bạc nội khố")}},{n:"Đuổi hắn đi",fx:{}}]}};
-PEND.tuyen=()=>({who:pEmp(),t:"Hoàng thượng hỏi ý ngươi: năm nay nên tuyển thêm tú nữ hay không.",o:[
+PEND.tuyen=p=>({who:pEmp(),t:"Hoàng thượng hỏi ý ngươi: năm nay nên tuyển thêm tú nữ hay không."+(p&&p.y?`<br>(Ngài thấy ${p.y}.)`:""),o:[
     {n:"Tâu nên tuyển ít",fx:{danh:4,sung:-3}},{n:"Tâu nên tuyển nhiều",fx:{sung:5,duc:-3},x:"tháng sau thêm một tú nữ",go:()=>{S.moreRivals=1}}]});
 PEND.thbenh=()=>({who:pTH(),t:"Thái hậu lâm bệnh, Đức Thọ cung đóng cửa không tiếp khách.",o:[
     {n:"Hầu bệnh cả tháng",fx:{suc:-25,th:15,duc:4}},{n:"Gửi lễ vật vấn an",fx:{bac:-30,th:4}}]});
-PEND.loveletter=p=>{const v=RV(p.v);if(!v)return null;return{who:pSpy(),t:`Tai mắt nhặt được thư tình ${v.name} viết cho một thị vệ.`,o:[
+PEND.loveletter=p=>{const v=RV(p.v);if(!v)return null;const m=p.m!=null&&typeof manById==="function"?manById(p.m):null;return{who:pSpy(),t:`Tai mắt nhặt được thư tình ${v.name} viết cho ${m?m.name:"một thị vệ"}.`,o:[
     {n:"Trình lên Hoàng thượng",fx:{},x:`${word(50)} · thành: ${v.name} thất thế · hỏng: Danh ${balSg(BAL.eff.j3.danhGo)}`,go:()=>{if(roll(50))fall(v,"bị bắt được thư tư tình với thị vệ");else{apply({danh:BAL.eff.j3.danhGo});log(`<span class="r">Hoàng thượng cho là thư giả, trách ngươi gây chuyện.</span> Danh -8.`)}}},
     {n:"Cất giữ làm con tin",fx:{},x:`chứng cứ ${v.name} ${balSg(BAL.eff.j3.evGo_2)}`,go:()=>{evStory(v,BAL.eff.j3.evGo_2,"viết thư tình cho một thị vệ")}}]}};
-function makeDil(){const pool=liveRivals(false),L=[];
-  if(qOn())L.push(()=>mkP("vase"));
-  if(rivals.some(v=>v.alive&&v.out))L.push(()=>{const f=pick(rivals.filter(v=>v.alive&&v.out));const v=pool.length?pick(pool):null;return mkP("coldletter",{f:f.id,v:v?v.id:null})});
-  if(qOn())L.push(()=>mkP("embezzle"));
-  L.push(()=>mkP("tuyen"));
-  if(!S.thDead)L.push(()=>mkP("thbenh"));
-  if(pool.length)L.push(()=>mkP("loveletter",{v:pick(pool).id}));
-  const F=freshEvents();for(const e of F)L.push(()=>mkEv(e.id));if(F.length)L.push(()=>mkEv(pick(F).id));
-  for(let t=0;t<4;t++){const d=pick(L)();if(d)return d}return null}
+/* npc-purpose G1 (owner OD 18/11 ~04:08Z): a weekly card comes only from a PERSON with a GOAL (kinds in jagwhy1, numbers BAL.ag.why.dil).
+   Every card's actor is asked why (npwAsk); the world / duty cards with no one scheming (festival, flood, the Emperor's question when the palace is
+   thin…) weigh BAL.ag.why.dil.world; npwPick chooses among the goal-valid top options. A card at most every BAL.ag.why.dil.gap tuần (no dice gate). */
+let DILX=null;
+const DIL_P={vase:"hhMe",coldletter:"coldAsk",embezzle:"hhGreed",tuyen:"empAsk",loveletter:"loveFound"};
+const DIL_PP={vase:X=>({y:X.why}),coldletter:X=>{const v=liveRivals(false).filter(x=>aff(x,X.who)>=BAL.ag.why.dil.coldFriend).sort((a,b)=>aff(b,X.who)-aff(a,X.who))[0];return{f:X.who.id,v:v?v.id:null,y:X.why}},
+ embezzle:X=>({y:X.why}),tuyen:X=>({y:X.why}),loveletter:X=>({v:X.who.id,m:X.tgt?X.tgt.id:null})};
+function makeDil(){if(!npwOn())return null;const D=BAL.ag.why.dil,O=[];
+  for(const id in DIL_P)for(const o of npwAsk(DIL_P[id],{id}))O.push({id,o,s:o.s});
+  if(!S.thDead)O.push({id:"thbenh",s:D.world});
+  for(const e of freshEvents()){const k=DIL_K[e.id];if(!k){O.push({id:e.id,s:D.world});continue}for(const o of npwAsk(k[0],{id:e.id,h:k[1]}))O.push({id:e.id,o,s:o.s})}
+  const x=npwPick(O,y=>y.s);if(!x)return null;if(x.o){npwStamp(x.o.kind,x.o.who);npwSt(x.o.kind,"fire")}
+  DILX=x.o||null;try{return EVI[x.id]?mkEv(x.id):mkP(x.id,x.o?DIL_PP[x.id](x.o):{})}finally{DILX=null}}
 
 /* the turn */
 function endTurn(){
@@ -94,7 +100,7 @@ function endTurn(){
   ev+=rivalsTurn();if(S.dead)return;
   if(S.suc<=0)return die("Bệnh nặng, không qua khỏi");
   if(S.tuan===2){ev+=monthTick();if(S.dead)return}else S.tuan++;
-  if(Q.length===qStart&&roll(22))pushDil(makeDil());
+  if(Q.length===qStart&&wk()>=(S.dilW||0)){const d=makeDil();if(d){pushDil(d);S.dilW=wk()+BAL.ag.why.dil.gap}}/* npc-purpose G1: no weekly die; a card when someone has a reason (makeDil → npwPick), at most every dil.gap tuần */
   rollWx();S.place="home";placeWhere();if(S.out)coldVisit();else S.visit={k:"home",people:homePeople(),talked:false};used=0;popIdx=null;popMsg="";
   flip();if(!S.dead)newLots();
   if(ev)Q.splice(qStart,0,{t:"Tin trong cung buổi này",kind:"news",h:`<p class="past">${when()}</p><p>${ev}</p>`});

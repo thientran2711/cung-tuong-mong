@@ -70,7 +70,7 @@ function pkPull(p,k){return 20+rkOf(p)*5+k.fond/4+(k.tal||40)/5+(k.heir?30:0)+(p
 function pkCands(p,k){const pl=pkPull(p,k);const F=qnPool().filter(q=>!q.taken).sort((a,b)=>qnQ(b)-qnQ(a));let C=F.filter(q=>qnQ(q)<=pl+15).slice(0,3);if(!C.length&&F.length)C=[F[F.length-1]];return C}
 function pkBack(k,q){return HT.back[q.tier]+(k.heir?HT.heirB:0)}
 function pkRivals(p,k){return pkSons().filter(([s,m])=>m!==p&&s!==k&&pkHome(s)&&!s.pB&&s.age>=BAL.age.betroth&&s.age<=BAL.age.matchMax&&h54Live(m)).map(([,m])=>m).filter((m,i,a)=>a.indexOf(m)===i)}
-function pkO(p,k,q){const R2=q.tier<=1?pkRivals(p,k).filter(m=>rkOf(m)>rkOf(p)):[];return cl(30+(p.sung||0)/3+k.fond/4+(k.heir?10:0)-(q.tier===0?10:0)-(R2.length?HT.rivalO:0),5,95)}
+function pkO(p,k,q){const R2=q.tier<=1?pkRivals(p,k).filter(m=>rkOf(m)>rkOf(p)):[];return oddsCl(30+(p.sung||0)/3+k.fond/4+(k.heir?10:0)-(q.tier===0?10:0)-(R2.length?HT.rivalO:0))}
 window.pkBackOf=k=>(k&&k.pW?k.pW.b||0:k&&k.pB?Math.round((k.pB.b||0)/2):0);
 function pkBetroth(k,p,q,by){const me=p===S;const b=by?Math.round(pkBack(k,q)/2):pkBack(k,q);p.hon=(p.hon||0)+b;q.taken=k.name;htKnow(q);k.pB={q:q.id,b,by:by||""};
  if(!by){consorts().filter(c=>c!==p&&clanOf(c)===q.house).forEach(c=>relAdd(p,c,HT.clanRel));if(q.tier<=1)pkRivals(p,k).forEach(m=>relAdd(p,m,HT.envy))}
@@ -90,10 +90,10 @@ function pkMark(p){if(p===S)S.pkc=S.turn;else p.pkc=S.turn}
 function htMonth(){let ev="";if(!S||S.dead)return ev;qnPoolUp();if(S.month===1)qnPool().forEach(q=>q.age++);
  for(const [k,p] of pkSons()){
   if(k.pB&&k.age>=BAL.age.wed&&pkHome(k)){const t=pkWed(k,p);if(t){if(p===S)ev+=`<span class="g">${t}</span> `;else log(t)}}
-  if(p!==S&&h54Live(p)&&pkHome(k)&&!k.pB&&k.age>=BAL.age.betroth&&pkCd(p)&&roll(20)){pkMark(p);const C=pkCands(p,k).filter(q=>(p.bac||0)>=HT.dow[q.tier]);
-   if(C.length){const q=C[0];ap(p,{bac:-HT.dow[q.tier]});if(roll(odA(p,pkO(p,k,q))))log(pkBetroth(k,p,q));else ap(p,HT.fail)}}
-  if(pkHome(k)&&!k.pB&&(k.age>=19||k.age>=BAL.age.wed&&!h54Live(p))&&roll(8)){const C=pkCands(p,k);if(C.length){const by=!S.thDead&&roll(40)?"Thái hậu":"Hoàng thượng";const t=pkBetroth(k,p,C[0],by);if(p===S)ev+=t+" ";else log(t)}}
-  if(k.pW&&k.heir&&k.pW.trac.length<1&&k.age>=20&&roll(HT.trac)){const t=pkTrac(k,p);if(t){if(p===S)ev+=t+" ";else log(t)}}}
+  if(p!==S&&h54Live(p)&&pkHome(k)&&!k.pB&&k.age>=BAL.age.betroth&&pkCd(p)&&npcWhy("h54Ban",{p,k},()=>roll(20))){/* npc-purpose G2: her own wish for her son's match */pkMark(p);const C=pkCands(p,k).filter(q=>(p.bac||0)>=HT.dow[q.tier]);
+   if(C.length){const q=npwPick(C,q=>g2bAmb(p)?1+qnQ(q):1+(C.length-C.indexOf(q)))||C[0];ap(p,{bac:-HT.dow[q.tier]});/* npc-purpose G2: an ambitious mother reaches for the grandest house, others for the surest fit */if(roll(odA(p,pkO(p,k,q))))log(pkBetroth(k,p,q));else ap(p,HT.fail)}}
+  if(pkHome(k)&&!k.pB&&(k.age>=19||k.age>=BAL.age.wed&&!h54Live(p))){const ow=npcWhy("hEmpWed",{p,k,son:1},()=>roll(8));const C=ow?pkCands(p,k):[];if(C.length){const by=ow.who===S.emp?"Hoàng thượng":"Thái hậu";/* npc-purpose G2: whoever of the two cares most (Thái hậu for the heir) */const t=pkBetroth(k,p,C[0],by);if(p===S)ev+=t+" ";else log(t)}}
+  if(k.pW&&k.heir&&k.pW.trac.length<1&&k.age>=20&&npcWhy("pkTrac",{k,p},()=>roll(HT.trac))){const t=pkTrac(k,p);if(t){if(p===S)ev+=t+" ";else log(t)}}}
  allKids().forEach(([k,v])=>{if(!k.alive&&k.pB&&!k.pBx){k.pBx=1;const p=v||S;p.hon=Math.max(0,(p.hon||0)-(k.pB.b||0));const q=qnById(k.pB.q);if(q)q.taken=null}});
  S.kids.forEach(k=>{if(pkHome(k)&&k.age>=BAL.age.betroth&&!k.p16){k.p16=1;ev+=`${k.name} tròn ${BAL.age.betroth} tuổi: từ nay bàn được hôn sự (Hoàng tự › Hôn sự; cưới khi tròn ${BAL.age.wed}). `}});
  return ev}
@@ -118,21 +118,22 @@ PEND.htban=pp=>{const k=S.kids.find(x=>x.name===pp.k&&pkHome(x));if(!k||k.pB)ret
  O.push({n:"Chưa bàn vội",fx:{},x:`con ở cạnh ngươi thêm · kèm: phi tần khác có thể hỏi trước các mối tốt`,go:()=>log(`Ngươi chưa vội bàn hôn sự cho ${k.name}.`)});
  return{who:kidFace(k),t:`Bàn hôn sự cho ${k.name}, ${k.age} tuổi${k.age<BAL.age.wed?" (hứa hôn trước, cưới khi tròn "+(BAL.age.wed)+")":""}. Các mối hỏi được (tùy phẩm vị ngươi, lòng thương của Hoàng thượng, tài của con${k.heir?", ngôi Thái tử":""}):<div class="h54cl">${rows||'<p class="past">Chưa có mối nào.</p>'}</div>`,o:O}};
 function pkBtn(k){const t2=whyTime(2);if(!k.alive||k.sex!=="m")return"";if(k.pW)return"";const q=k.pB&&qnById(k.pB.q);
- return pbtn(`data-ht="ban" data-kn="${k.name}"`,"Bàn hôn sự",`Chắc chắn · tốn: 2 khắc · thành: xem các mối, xin chỉ ban hôn cho con`,k.pB?`đã hứa hôn với ${q?q.name:"quý nữ"}`:k.age<BAL.age.betroth?"con chưa đủ "+(BAL.age.betroth)+" tuổi":t2||(S.pkBan!=null&&S.turn-S.pkBan<HT.cd?`vừa bàn xong (lại được sau ${HT.cd-(S.turn-S.pkBan)} tháng)`:""))}
-function askBtn(x,kind){if(htKn(x))return"";const t1=whyTime(1);return pbtn(`data-ht="ask" data-hk="${kind}" data-hid="${x.id}"`,"Dò hỏi gia thế",`Chắc chắn · tốn: 1 khắc, Bạc -${BAL.bacFee.htAsk} · thành: biết tên, mặt, Sắc, Tài của ${kind==="q"?"nàng":"chàng"}`,t1||(S.bac<BAL.bacFee.htAsk?"thiếu bạc (cần "+BAL.bacFee.htAsk+")":""))}
+ return pbtn(`data-ht="ban" data-kn="${k.name}"`,"Bàn hôn sự",`tốn: 2 khắc · thành: xem các mối, xin chỉ ban hôn cho con`,k.pB?`đã hứa hôn với ${q?q.name:"quý nữ"}`:k.age<BAL.age.betroth?"con chưa đủ "+(BAL.age.betroth)+" tuổi":t2||(S.pkBan!=null&&S.turn-S.pkBan<HT.cd?`vừa bàn xong (lại được sau ${HT.cd-(S.turn-S.pkBan)} tháng)`:""))}
+function askBtn(x,kind){if(htKn(x))return"";const t1=whyTime(1);return pbtn(`data-ht="ask" data-hk="${kind}" data-hid="${x.id}"${capAt(BAL.btn.htAsk,BAL.bacFee.htAsk)}`,"Dò hỏi gia thế",`${capW()} · tốn: ${BAL.btn.htAsk.k} khắc, Bạc -${BAL.bacFee.htAsk} · thành: biết tên, mặt, Sắc, Tài của ${kind==="q"?"nàng":"chàng"}`,t1||(S.bac<BAL.bacFee.htAsk?"thiếu bạc (cần "+BAL.bacFee.htAsk+")":""))}
 function htAct(a,b){if(!S||S.dead||Q.length)return;const r0=rsnap();
  if(a==="ban"){const k=S.kids.find(x=>x.name===b.dataset.kn&&pkHome(x));if(!k||k.pB||k.age<BAL.age.betroth||!can(2)||(S.pkBan!=null&&S.turn-S.pkBan<HT.cd))return;spend(2);S.pkBan=S.turn;qnPoolUp();
   pushDil(mkP("htban",{k:k.name,c:pkCands(S,k).map(q=>q.id)}),"Bàn hôn sự");render();return}
- if(a==="ask"){const x=b.dataset.hk==="q"?qnById(+b.dataset.hid):h54Son(+b.dataset.hid);if(!x||htKn(x)||!can(1)||S.bac<BAL.bacFee.htAsk)return;spend(1);apply({bac:-BAL.bacFee.htAsk});htKnow(x);
+ if(a==="ask"){const x=b.dataset.hk==="q"?qnById(+b.dataset.hid):h54Son(+b.dataset.hid);if(!x||htKn(x)||!can(BAL.btn.htAsk.k)||S.bac<BAL.bacFee.htAsk)return;spend(BAL.btn.htAsk.k);apply({bac:-BAL.bacFee.htAsk});htKnow(x);
   const n=bestSent&&bestSent(S);log(`${n?n.name+" dò hỏi":"Ngươi dò hỏi"} gia thế: ${b.dataset.hk==="q"?qLine(x):h54SonLine(x)}.`);resultShow("Dò hỏi gia thế",r0,"sure");render();return}
  if(a==="go"){tab=b.dataset.t;if(b.dataset.pi!=null)PG[tab]=+b.dataset.pi;render()}}
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ht]");if(b&&!b.disabled){e.preventDefault();e.stopPropagation();htAct(b.dataset.ht,b)}},true);
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ht]");if(b&&!b.disabled){e.preventDefault();e.stopPropagation();(window.htAct||htAct)(b.dataset.ht,b)}},true);
 /* the son's own card (Con của ngươi) gets the marriage button + state, like the daughters' */
 (function(){const kc=kidCard;kidCard=function(k){let h=kc.apply(this,arguments);try{if(k&&k.alive&&k.sex==="m"&&(k.age>=BAL.age.matchShow||k.pB||k.pW)){
   h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>Hôn sự: ${pkState(k)}</span>`);const bt=pkBtn(k);if(bt)h=h.replace('<div class="pcr">',`<div class="pcr"><h5>Hôn sự</h5><div class="pcb">${bt}</div>`)}}catch(e){}return h}})();
 function pkState(k){if(k.pW){const W=k.pW;return `chính phi ${W.chinh.name}, con gái ${W.chinh.off}${W.trac.length?` · trắc phi ${W.trac.map(x=>x.name).join(", ")}`:""}`}
  if(k.pB){const q=qnById(k.pB.q);return `đã hứa hôn với ${q?q.name+", con gái "+q.off:"quý nữ"}${k.age<BAL.age.wed?", cưới khi tròn "+(BAL.age.wed)+"":""}`}return k.age>=BAL.age.betroth?"chưa bàn hôn sự":"chưa đến tuổi bàn hôn sự (16)"}
 window.pkState=pkState;
+window.htAct=htAct;/* jerr (errand scene) wraps the "ask" errand: Dò hỏi gia thế */
 
 /* ---------- STRANGER RULE for children (owner 11/15): a child she has never met shows the grey child silhouette everywhere (strip, card,
    Kế vị, stage); the name is public (announced at birth, j61 k61Pub). Met = her own children (from birth), a palace visit to the mother,

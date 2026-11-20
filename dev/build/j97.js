@@ -26,7 +26,7 @@ function r97art(k){return (S.arts&&S.arts[k])||0}
 function r97srv(){return typeof isSrv==="function"&&isSrv()}
 function r97son(){try{return son67()}catch(e){return null}}
 function r97give(k,giver){if(!IT[k])return"";S.inv=S.inv||[];S.inv.push({k,from:"rare",own:"me",giver:giver||"Hoàng thượng",d:S.turn,nt:1});return itm(k).n}
-function r97srvRk(n){try{if(S.srv&&!S.srv.risen){const old=S.srv.rk||0;S.srv.rk=Math.max(old,Math.min(4,n));if(S.srv.rk>old)return `Ngươi được thăng ${SRK.maid[S.srv.rk]}.`}}catch(e){}return""}
+function r97srvRk(n){try{if(S.srv&&!S.srv.risen){const old=S.srv.rk||0;S.srv.rk=Math.max(old,Math.min(BAL.srvRk.nq,n));if(S.srv.rk>old)return `Ngươi được thăng ${SRK.maid[S.srv.rk]}.`}}catch(e){}return""}
 function r97rise(why){try{if(S.srv&&!S.srv.risen&&typeof srvRise==="function"){srvRise(why);return "Ngươi được phong Đáp ứng."}}catch(e){console.error(e)}return""}
 /* ---------- the catalogue: one rare ending per arc ----------
    a: arc · tag: tên kết · t: lời kể · w: ai hiện mặt · p: xác suất khi đủ điều kiện · n: lựa chọn ở hồi cuối · c: chi phí (chỉ chi phí được hiện)
@@ -102,24 +102,24 @@ const R97L=[
  path:["Hỏi thêm chi tiết","Lo hậu sự cho ma ma","Đem ngọc nhờ thợ cung","Nhờ người chép hồ sơ","Xin Hoàng thượng cho xem","Tiếp bà, cho bạc","Thử dò ý {v}","Giữ kín, theo dõi","Quyết nhận"],bad:["Từ chối gặp"],x:[()=>!S.thDead,"Thái hậu còn sống"],
  t:"Thái hậu vừa thấy miếng ngọc đã đứng bật dậy: đó là ngọc bà ban cho người bạn thuở thiếu thời, phu nhân họ Thẩm. Án cũ được lật, cha ngươi được truy phong, còn ngươi được ghi vào tông phả, phong Huyện chúa. Kẻ từng gọi ngươi là “con bé bưng trà” nay phải hành lễ trước.",
  rw:"nt_dongchau",ti:"Huyện chúa họ Thẩm"},
-/* ===== Công chúa Nam Chiếu ===== */
+/* ===== Công chúa Cao Ly (legacy ids nc_*) ===== */
 {a:"nc_gian",tag:"Hòa ước mang tên ngươi",w:"emp",n:"Viết một bức thư cho cả hai vua, đóng hai ấn",
  path:["Dâng thư lên Hoàng thượng","Đổi nàng về phe mình","sửa sai đi khi gửi","Biếu Tổng quản","Gửi một tin nhỏ vô hại","Báo cho Hoàng thượng chuẩn bị","Gửi tin giả"],bad:["Ghi nhớ một phần"],x:[()=>S.tamco>=AR("nc_gian").bar,`Tâm cơ từ ${AR("nc_gian").bar}`],
- t:"Bức thư hai ấn của ngươi đến tay cả phụ vương lẫn Hoàng thượng cùng một ngày. Hai nước dừng binh bên sông Lan Thương, ký hòa ước mười năm, và trong hòa ước có tên ngươi làm người bảo đảm. Từ đó sứ hai nước sang, đều qua cung ngươi trước.",
+ t:"Bức thư hai ấn của ngươi đến tay cả phụ vương lẫn Hoàng thượng cùng một ngày. Hai nước dừng binh bên sông Áp Lục, ký hòa ước mười năm, và trong hòa ước có tên ngươi làm người bảo đảm. Từ đó sứ hai nước sang, đều qua cung ngươi trước.",
  go:(_A,_ok,G)=>e67bien(G[0]),rw:"nt_haiduong",ti:"Người bảo đảm hòa ước"},
 {a:"nc_su",tag:"Chợ biên Vĩnh Hòa",w:"emp",n:"Dâng tấm bản đồ chợ biên tự tay ngươi vẽ",
- path:["Dạy hoàng huynh lễ nghi","Âm thầm thay bằng ngọc","Tra xem ai đánh tráo","Khuyên huynh đổi cống","Nói giúp với Hoàng thượng","Bồi thường riêng","Thưa: con của hai nước","Đứng ra mai mối"],bad:["Để sứ đoàn giữ lễ cố quốc"],x:[()=>S.tai>=AR("nc_su").bar,`Tài từ ${AR("nc_su").bar}`],
- t:"Hoàng thượng trải tấm bản đồ ra, nhìn rất lâu những con đường ngươi vẽ từ trí nhớ thuở nhỏ. Chợ biên Vĩnh Hòa được mở; bạc trà, ngựa, ngọc chảy qua hai nước. Ngài cho chợ mang phong hiệu của ngươi, và mỗi mùa thu, thuế chợ có một phần gửi về cung ngươi.",
+ path:["Dạy thế tử huynh lễ nghi","Âm thầm thay bằng sâm","Tra xem ai đánh tráo","Khuyên huynh đổi cống","Nói giúp với Hoàng thượng","Bồi thường riêng","Thưa: con của hai nước","Đứng ra mai mối"],bad:["Để sứ đoàn giữ lễ cố quốc"],x:[()=>S.tai>=AR("nc_su").bar,`Tài từ ${AR("nc_su").bar}`],
+ t:"Hoàng thượng trải tấm bản đồ ra, nhìn rất lâu những con đường ngươi vẽ từ trí nhớ thuở nhỏ. Chợ biên Vĩnh Hòa được mở; bạc trà, ngựa, sâm chảy qua hai nước. Ngài cho chợ mang phong hiệu của ngươi, và mỗi mùa thu, thuế chợ có một phần gửi về cung ngươi.",
  rw:"nt_nhuy",ti:"Vĩnh Hòa phu nhân"},
-{a:"nc_tuc",tag:"Chim công của Thái hậu",w:"th",n:"Múa cho Thái hậu xem trong áo lông công của mẹ",
- path:["Giải thích ý nghĩa chim công","Dâng một phần lên Thái hậu","Xin dâng thuốc quê nhà","Mời các phi tần cùng chơi","Viết thơ bằng chữ Nam Chiếu","Kể chuyện Phật giáo"],bad:["Đổi sang y phục Đại Hy","Thôi nấu","Không dám, sợ mang họa"],x:[()=>!S.thDead&&(r97art("vu")>=AR("nc_tuc").bar[0]||S.sac>=AR("nc_tuc").bar[1]),`Thái hậu còn sống; Vũ bậc ${AR("nc_tuc").bar[0]} hoặc Sắc từ ${AR("nc_tuc").bar[1]}`],
- t:"Điệu múa dứt, Thái hậu tự tay cài lên tóc ngươi cây trâm đông châu của chính bà: “Ai gia sống đến tuổi này mới biết, người ngoài là người chưa ai chịu hiểu.” Điệu chim công được ghi vào nhạc phủ, và từ đó ai chê y phục Nam Chiếu là chê Đức Thọ cung.",
- rw:"nt_dongchau",ti:"Chim công của Đức Thọ cung"},
-{a:"nc_vuong",tag:"Nữ vương Nam Chiếu",w:"emp",n:"Mở phong thư thứ ba, thư của các trưởng lão Nam Chiếu",
+{a:"nc_tuc",tag:"Hạc của Thái hậu",w:"th",n:"Múa cho Thái hậu xem trong áo thêu hạc của mẹ",
+ path:["Giải thích ý nghĩa con hạc","Dâng một phần lên Thái hậu","Xin dâng thuốc quê nhà","Mời các phi tần cùng chơi","Viết một khúc hương ca","Kể chuyện Phật giáo"],bad:["Đổi sang y phục Đại Hy","Thôi nấu","Không dám, sợ mang họa"],x:[()=>!S.thDead&&(r97art("vu")>=AR("nc_tuc").bar[0]||S.sac>=AR("nc_tuc").bar[1]),`Thái hậu còn sống; Vũ bậc ${AR("nc_tuc").bar[0]} hoặc Sắc từ ${AR("nc_tuc").bar[1]}`],
+ t:"Điệu múa dứt, Thái hậu tự tay cài lên tóc ngươi cây trâm đông châu của chính bà: “Ai gia sống đến tuổi này mới biết, người ngoài là người chưa ai chịu hiểu.” Điệu hạc vũ được ghi vào nhạc phủ, và từ đó ai chê y phục Cao Ly là chê Đức Thọ cung.",
+ rw:"nt_dongchau",ti:"Hạc của Đức Thọ cung"},
+{a:"nc_vuong",tag:"Nữ vương Cao Ly",w:"emp",n:"Mở phong thư thứ ba, thư của các trưởng lão Cao Ly",
  path:["Xin Hoàng thượng cho để tang","Đọc kỹ, dò xem ai được lòng dân","Trả lại","Vận động Lễ bộ","Quỳ xin Hoàng thượng cứu","Gửi bạc riêng giúp huynh","Nói thật những gì đã dò"],bad:["Nhận vàng","Vận động Binh bộ"],x:[()=>S.sung>=AR("nc_vuong").bar,`Sủng từ ${AR("nc_vuong").bar}`],
- t:"Phong thư thứ ba đóng dấu của mười hai trưởng lão: hoàng huynh và hoàng thúc đều đã mất lòng dân, họ xin rước ngươi về làm nữ vương. Hoàng thượng đọc xong, im lặng đến canh ba, rồi nói: “Đi hay ở, trẫm để {goi} chọn. Ở lại, Đại Hy phong {goi} làm Nam Chiếu trưởng công chúa.”",
- rw:"nt_dongchau",ti:"Nam Chiếu trưởng công chúa",
- exit:["Về cố quốc lên ngôi nữ vương","Ở lại bên Hoàng thượng","Nữ vương Nam Chiếu","{me} trở về Nam Chiếu trong đoàn xe cờ vàng của Đại Hy. Ngày lên ngôi, ngươi đặt quốc hiệu mới, ký hòa ước trăm năm với Đại Hy, và trị vì cố quốc đến bạc đầu. Sử Nam Chiếu chép ngươi là vị nữ vương hiền nhất.","Về cố quốc làm nữ vương"]},
+ t:"Phong thư thứ ba đóng dấu của mười hai trưởng lão: thế tử huynh và Vương thúc đều đã mất lòng dân, họ xin rước ngươi về làm nữ vương. Hoàng thượng đọc xong, im lặng đến canh ba, rồi nói: “Đi hay ở, trẫm để {goi} chọn. Ở lại, Đại Hy phong {goi} làm Cao Ly trưởng công chúa.”",
+ rw:"nt_dongchau",ti:"Cao Ly trưởng công chúa",
+ exit:["Về cố quốc lên ngôi nữ vương","Ở lại bên Hoàng thượng","Nữ vương Cao Ly","{me} trở về Cao Ly trong đoàn xe cờ vàng của Đại Hy. Ngày lên ngôi, ngươi đặt quốc hiệu mới, ký hòa ước trăm năm với Đại Hy, và trị vì cố quốc đến bạc đầu. Sử Cao Ly chép ngươi là vị nữ vương hiền nhất.","Về cố quốc làm nữ vương"]},
 /* ===== Con gái tội thần ===== */
 {a:"td_an",tag:"Nữ quan thảo chiếu",w:"emp",n:"Tự tay viết bản sớ lật án, không nhờ ai chấp bút",
  path:["Bỏ bạc nhờ ông chép","Bịa một quê quán","Giấu ông ở Tân Giả khố","Đưa ông ra khỏi kinh","Mua chuộc gia nhân","Nhờ người trong cung","Dồn sức lấy lòng","Lấy lòng Thái hậu","Cho người cứu hồ sơ"],bad:["Mặc kệ"],x:[()=>S.tai>=AR("td_an").bar,`Tài từ ${AR("td_an").bar}`],
@@ -175,11 +175,11 @@ const R97L=[
 {a:"cnv_chu",tag:"Chủ nhân nhận làm nghĩa muội",w:"mis",n:"Quỳ xin chủ nhân để nô tỳ gánh cùng",
  path:["Hỏi chủ có cần giúp","Quỳ xuống: nô tỳ không thấy gì","Lén lấy một ít đem hỏi","Từ chối, báo chủ","Lén đổ thuốc đi","Quỳ xin chủ đừng làm","Thưa khéo cho chủ","Một mình nhận hết"],bad:["Bán một tin vặt","Khai thật với Nội vụ phủ"],x:[()=>(S.tin||0)>=AR("cnv_chu").bar,`Chủ tin từ ${AR("cnv_chu").bar}`],
  t:"{mis} ôm lấy ngươi mà khóc: gói thuốc ấy là để tự hại mình, vì một nỗi oan không ai biết. Ngươi ở bên chủ suốt mùa đông, đến khi nàng đứng dậy được. Ngày xuân, nàng nhận ngươi làm nghĩa muội và tự mình tiến cử ngươi lên Hoàng thượng.",
- go:()=>r97rise("Chủ nhân nhận làm nghĩa muội và tiến cử")||r97srvRk(3),rw:"nt_nhuy",ti:"Nghĩa muội của chủ nhân"},
+ go:()=>r97rise("Chủ nhân nhận làm nghĩa muội và tiến cử")||r97srvRk(BAL.srvRk.cs),rw:"nt_nhuy",ti:"Nghĩa muội của chủ nhân"},
 {a:"cnv_ban",tag:"Hai chị em vào Thượng cung cục",w:"maid",n:"Đưa chiếc khăn có thêu tên Thu Cúc ra trước chưởng sự",
  path:["Đến xin cho nàng","Lặng lẽ dò xem ai lấy vòng","Rình bắt Thu Cúc","Nói thẳng với Thu Cúc","Lén mang thuốc","Bênh bạn","Lấy lại khăn","Báo trước với chưởng sự","Tìm người làm chứng"],bad:["Không dám","Thưa không rõ"],x:[()=>S.tai>=AR("cnv_ban").bar[0]||S.mat>=AR("cnv_ban").bar[1],`Tài từ ${AR("cnv_ban").bar[0]} hoặc Tai mắt từ ${AR("cnv_ban").bar[1]}`],
  t:"Chiếc khăn lật ngược cả phiên xử. Xuân Đào được minh oan, và chưởng sự Thượng cung cục, người ngồi nghe từ đầu, xin cả hai chị em về làm việc dưới trướng bà: một người coi kim chỉ, một người coi sổ sách. Từ cô gái giặt áo, ngươi thành người được cả lục cục kính nể.",
- go:()=>r97srvRk(4)||"",rw:"nt_nhuy",ti:"Nữ quan Thượng cung cục"},
+ go:()=>r97srvRk(BAL.srvRk.nq)||"",rw:"nt_nhuy",ti:"Nữ quan Thượng cung cục"},
 {a:"cnv_mat",tag:"Phá lệ phong Quý nhân",w:"emp",n:"Hát lại khúc hát nơi hậu viện, chỉ cho một người nghe",
  path:["nhìn ngài một khoảnh khắc","Xin chủ tiến cử","Pha trà ngài thích","Hát tiếp","Nhờ người báo cho Hoàng thượng","Thưa: nô tỳ chỉ làm phận sự"],bad:["Ngầm nhận lời","Tránh mặt"],x:[()=>(S.nt||0)>=AR("cnv_mat").bar,`Hoàng thượng để ý từ ${AR("cnv_mat").bar}`],
  t:"Khúc hát vừa dứt, Hoàng thượng đứng sau rặng trúc bước ra. Sáng hôm sau, thánh chỉ phá lệ: cung nữ {me} không qua Đáp ứng, Thường tại, phong thẳng Quý nhân, ban hiệu theo khúc hát. Cả Nội vụ phủ lật sổ ba đời cũng không tìm ra tiền lệ.",
@@ -187,7 +187,7 @@ const R97L=[
 {a:"cnv_ma",tag:"Kế nhiệm Lưu ma ma",w:"maid",n:"Xin ma ma cho học nốt bài cuối: cách giữ chìa khóa kho",
  path:["Tập đến khi được","Báo ma ma","Chăm bà","Gửi thuốc rồi về","Tìm người làm chứng","Không động đến","Giữ kín cho ma ma","Khuyên ma ma tự nhận"],bad:["Lén đổ bớt trà","Cất giùm vào tủ"],x:[()=>(S.tin||0)>=AR("cnv_ma").bar[0]||S.duc>=AR("cnv_ma").bar[1],`Chủ tin từ ${AR("cnv_ma").bar[0]} hoặc Đức từ ${AR("cnv_ma").bar[1]}`],
  t:"Lưu ma ma trao cho ngươi chùm chìa khóa đã đeo bên hông bà bốn mươi năm: “Kho này, sổ này, người này, từ nay là của con.” Ngươi thành chưởng sự cô cô trẻ nhất Nội vụ phủ từ trước đến nay; những kẻ từng ghen ngươi nay phải xin ngươi phân việc.",
- go:()=>r97srvRk(3)||"",rw:"nt_nhuy",ti:"Chưởng sự trẻ nhất Nội vụ phủ"},
+ go:()=>r97srvRk(BAL.srvRk.cs)||"",rw:"nt_nhuy",ti:"Chưởng sự trẻ nhất Nội vụ phủ"},
 /* ===== Tuyến chung ===== */
 {a:"s_than",tag:"Mẹ còn sống",w:"emp",n:"Hỏi hắn câu cuối: mẹ ta có hát ru bài gì",
  path:["Hỏi những chuyện chỉ người nhà biết","Đề phòng, theo dõi","Nhận","Phản đòn: hỏi ai đưa hắn vào","Đứng ra bảo lãnh","Tha thứ, cho hắn làm tai mắt"],bad:["Cho là trùng hợp"],x:[()=>S.mat>=AR("s_than").bar[0]||S.duc>=AR("s_than").bar[1],`Tai mắt từ ${AR("s_than").bar[0]} hoặc Đức từ ${AR("s_than").bar[1]}`],
@@ -251,7 +251,7 @@ function r97Note(A,o){const d=R97[A.a];if(!d||!o)return;const q=A.q97||(A.q97={p
  if(r97Hit(o.n,d.bad))q.b=1;else if(r97Hit(o.n,d.path))q.p++}
 function r97IsX(A,bid){const a=ARC67[A.a];return !!(a&&bid&&(a.p[3]||[]).includes(bid))}
 function r97Gate(A){if(!A||A.r97||!A.nb||!R97[A.a]||!r97IsX(A,A.nb))return;const d=R97[A.a];const c=r97Cond(A,d);
- const p=Math.min(.95,(d.p||.1)*(R97CFG.p||1));A.r97={c:c?1:0,ok:c&&rnd67()<p?1:0};
+ const p=(d.p||.1)*(R97CFG.p||1);A.r97={c:c?1:0,ok:c&&roll(p*100)?1:0};
  try{const st=S.r97s||(S.r97s={c:0,n:0,ok:0});st.n++;if(c)st.c++;if(A.r97.ok)st.ok++}catch(e){}}
 (function(){const f0=fireBeat67;fireBeat67=function(A){try{r97Gate(A)}catch(e){console.error(e)}return f0.apply(this,arguments)}})();
 /* record every choice of the arc against its rare path */

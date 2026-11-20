@@ -11,7 +11,7 @@
         and when loyalty is under leaveLoyal she may ask to serve a higher palace (card: raise her pay / demote her / let her go).
    3. NPC mistresses: same rules — the favour road when their purse is short; proud NPC servants leave for a higher palace with room.
    Co-op: s.coop servants skip pride/leave. Old saves: new fields (s.proud) are optional. Numbers in BAL.sp (one source). ================= */
-Object.assign(BAL,{sp:{favPerBac:.2,favRef:4,favMin:3,favMax:30,favKeep:10,head:{maid:3,eunuch:2},
+Object.assign(BAL,{sp:{favPerBac:.2,favRef:4,favMin:3,favMax:30,favKeep:10,head:{maid:4/* Chưởng sự cô cô (maid-ladder-6) */,eunuch:2},
  proud:{tham:45,lanh:30,chuyen:30,nhat:10,trung:5},proudAvg:24,proudMo:6,proudLoy:3,bully:1,leaveCh:15,leaveLoyal:60,envySenior:5,
  keepMul:.5,keepMin:5,keepGain:6,keepMo:3,demoteLoy:15,demoteOthers:2,letOthers:2,
  k:1/* khắc a đề bạt takes (either road) */}});
@@ -32,28 +32,47 @@ function spKemTxt(o,s){try{const B=BAL.sp;let t="";const sn=spSenior(o,s,srk(s))
  if(srk(s)+1>=B.head[s.role])t+=` · kèm: có thể sinh kiêu (${chanceW(spProudCh(s,true))}): ${B.proudMo} tháng lòng -${B.proudLoy} mỗi tháng, có khi xin đi`;return t}catch(e){return""}}
 function spAfter(o,s,r0){const B=BAL.sp;const me=o===S;const sn=spSenior(o,s,r0);
  if(sn){sn.loyal=cl(sn.loyal-B.envySenior,0,100);if(me)log(`${sn.name} hầu lâu hơn mà bị ${s.name} vượt mặt, trong lòng không phục (lòng -${B.envySenior}).`)}
- if(spHead(s)&&!s.coop&&roll(spProudCh(s))){s.proud=S.turn+B.proudMo;if(me)log(`${s.name} từ khi lên ${srkName(s)} ra vẻ bề trên với kẻ hầu khác.`)}}
+ if(spHead(s)&&!s.coop&&ag2Ch(s,spProudCh(s))){s.proud=S.turn+B.proudMo;if(me)log(`${s.name} từ khi lên ${srkName(s)} ra vẻ bề trên với kẻ hầu khác.`)}}
 /* the two-road card (KIT: tsPanel + tsOpt option cards with Cần / Tốn / Được / Mất / Kèm, the same as every dialog choice) */
 function spOpen(s){if(!S||!s||ownerOf(s)!==S)return;const nx=SRK[s.role][srk(s)+1];if(!nx)return;const c=dbCost(s),fv=spFav(S,s),od=dbOdds(S,s);
  const kem=[`kẻ hầu khác ghen tị (lòng -${BAL.dbEnvy})`];const both=spKemTxt(S,s).split(" · kèm: ").map(x=>x.trim()).filter(Boolean);/* shared Kèm of both roads: once, above the options (short option cards) */
- const duoc=[`${s.name} lên ${nx}`,`lòng +${BAL.dbGain}`];const go=road=>()=>{spend(BAL.sp.k);dbDo(S,s,road,true)};
+ const duoc=[`${s.name} lên ${nx}`,`lòng +${BAL.dbGain}`];const go=road=>()=>{const fz=dbOdds(S,s);/* read before the spend (j9 fzRun) */spend(BAL.sp.k);fzRun(fz,null,()=>dbDo(S,s,road,true))};
  tsPanel({t:`Đề bạt ${s.name}`,who:pServ(s),h:`<p>Muốn ${s.name} lên <b>${nx}</b> thì phải qua Nội vụ phủ. Có hai đường: lót tay bằng bạc, hoặc ${fv.how} (mất chút thể diện với người).</p>${both.length&&typeof tsRows==="function"?tsRows(both.map(x=>["Kèm",x,"r"])):""}`,
-  opts:[tsOpt({n:"Lót tay Nội vụ phủ",odds:od,fx:{bac:-c},need:[tsNeedBac(c)],duoc,mat:[`mất ${c} bạc`,`lòng -${BAL.dbFail}`],kem,go:go("bac")}),
+  opts:[tsOpt({n:"Lót tay Nội vụ phủ",odds:od,fx:{},need:[tsNeedBac(c)],duoc:duoc.concat([`Bạc -${c}`]),mat:["không mất bạc",`lòng -${BAL.dbFail}`],kem,go:go("bac")})/* bạc only when approved (dbDo) */,
    tsOpt({n:fv.k==="hh"?"Xin Hoàng hậu chuẩn":"Xin Thái hậu chuẩn",odds:od,fx:{[fv.k]:-fv.n},need:[{t:`${fv.lbl} ${fv.n} (có ${fv.val})`,ok:fv.ok}],duoc,mat:["lời xin mất",`lòng -${BAL.dbFail}`],kem,go:go("fav")})]});
  showModal()}
 /* moving a servant to another mistress (NPC side and "Cho đi"): a higher palace with room, else back to Nội vụ phủ */
 function spGoTo(o,s){const L=liveRivals(true).filter(v=>v!==o&&rkOf(v)>rkOf(o)&&!v.out&&(()=>{const c=capOf(v),h=hhHas(v),i=s.role==="maid"?0:1;return h[i]<c[i]})());
  return L.length?L.sort((a,b)=>rkOf(b)-rkOf(a))[0]:null}
 function spMove(o,s,v){const i=(o.staff||[]).indexOf(s);if(i>=0)o.staff.splice(i,1);s.proud=0;if(v){v.staff=v.staff||[];s.rk=Math.min(srk(s),srkMax(v,s));v.staff.push(s)}}
-function spLeaveCard(s){const B=BAL.sp,v=spGoTo(S,s);const keep=Math.max(B.keepMin,Math.round(dbCost({role:s.role,rk:srk(s)-1})*B.keepMul));const others=S.staff.filter(x=>x!==s);
+/* AG-ALL-2 G6 / G10 (ONE CORE): a servant asks her master o to let her go — the three answers, built once: the player consort's card (spLeaveCard),
+   an NPC master's choice (spAsk → mindPick, BAL.ag.stf2.lvW × her nết), and the maid player's own "Xin chủ cho đi hầu cung khác" (s = S). */
+function spLvS(s){return s===S?{role:"maid",rk:S.srv.rk}:s}
+function spLvLoy(s,n){if(s===S)apply({tin:n});else s.loyal=cl(s.loyal+n,0,100)}
+function spLeaveOpts(o,s){const B=BAL.sp,x=spLvS(s),v=spGoTo(o,x);const me=o===S,rk=srk(x);const keep=Math.max(B.keepMin,Math.round(dbCost({role:x.role,rk:rk-1})*B.keepMul));
+ const others=(o.staff||[]).filter(y=>y!==s);const nm=s===S?"ngươi":s.name;
+ return [
+  {id:"keep",n:"Tăng tiền thưởng, giữ lại",tag:"reward",keep,v,lock:(me?S.bac:(o.bac||0))<keep,go:()=>{if(me)apply({bac:-keep});else ap(o,{bac:-keep});spLvLoy(s,B.keepGain);
+    if(s===S){apply({bac:keep});return `${o.name} tăng tiền thưởng giữ ngươi lại: Bạc +${keep}, Chủ tin +${B.keepGain}.`}s.bac=(s.bac||0)+keep;s.proud=Math.max(s.proud||0,S.turn)+B.keepMo;return me?`Ngươi tăng tiền thưởng giữ ${s.name} lại.`:""}},
+  {id:"demote",n:"Giáng một bậc, giữ kỷ cương",tag:"punish",v,lock:rk<1,go:()=>{others.forEach(y=>y.loyal=cl(y.loyal+B.demoteOthers,0,100));spLvLoy(s,-B.demoteLoy);
+    if(s===S){S.srv.rk=Math.max(0,S.srv.rk-1);return `${o.name} không cho đi, giáng ngươi xuống ${SRK.maid[S.srv.rk]}. Chủ tin -${B.demoteLoy}.`}s.rk=rk-1;s.proud=0;return me?`Ngươi giáng ${s.name} xuống ${srkName(s)}.`:""}},
+  {id:"let",n:"Cho đi",tag:"work",v,go:()=>{others.forEach(y=>y.loyal=cl(y.loyal+B.letOthers,0,100));if(v&&typeof evA==="function")evA(v,o,BAL.ag.ev.one);
+    if(s===S){srvReassign(`${o.name} cho ngươi đi${v?"":"; Nội vụ phủ chia ngươi về cung khác"}.`,v||undefined);return""}spMove(o,s,v);return me?`${s.name} rời cung ngươi${v?`, sang hầu ${tsNm(v)}`:", về Nội vụ phủ"}.`:""}}]}
+/* s asks o: o = the player → her card; an NPC master → her own choice (loop on), else the old move (a higher palace with room, else nothing) */
+function spAsk(o,s){if(!o||!s)return"";if(s===S)S.srv.lvCd=S.turn+BAL.ag.stf2.leave.cd;else s.lvCd=S.turn+BAL.ag.stf2.leave.cd;
+ if(o===S){if(!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv()))spLeaveCard(s);return""}
+ if(!(window.agOn&&agOn()&&typeof mindPick==="function")&&s!==S){const v=spGoTo(o,s);if(v)spMove(o,s,v);return""}
+ const W=BAL.ag.stf2.lvW,O=spLeaveOpts(o,s).filter(x=>!x.lock);const mw=t=>{try{return typeof agMW==="function"?agMW(o,t):1}catch(e){return 1}};
+ const c=mindPick(O.map(x=>[x,(W[x.id]||0)*mw(x.tag)]),o)||O[O.length-1];try{const N=window.__stf2N=window.__stf2N||{};N["leave_"+c.id]=(N["leave_"+c.id]||0)+1}catch(e){}return c.go()||""}
+function spLeaveCard(s){const B=BAL.sp;const O=spLeaveOpts(S,s);const [K,D,L]=O;const v=K.v,keep=K.keep;
  tsPanel({t:"Kẻ hầu xin đi",who:pServ(s),h:`<p>${s.name} thưa rằng ${v?`bên ${tsNm(v)} muốn có ${s.role==="maid"?"nàng":"hắn"} sang hầu`:"muốn xin về Nội vụ phủ"}, xin ${tsGoi()} cho đi.</p>`,
-  opts:[tsOpt({n:"Tăng tiền thưởng, giữ lại",fx:{bac:-keep},need:[tsNeedBac(keep)],duoc:[`lòng +${B.keepGain}`,"giữ người, giữ chức"],kem:[`kiêu thêm ${B.keepMo} tháng`],go:()=>{s.loyal=cl(s.loyal+B.keepGain,0,100);s.proud=Math.max(s.proud||0,S.turn)+B.keepMo;log(`Ngươi tăng tiền thưởng giữ ${s.name} lại.`)}}),
-   tsOpt({n:"Giáng một bậc, giữ kỷ cương",duoc:["hết kiêu",`kẻ hầu khác lòng +${B.demoteOthers}`],mat:[`${s.name} xuống ${SRK[s.role][srk(s)-1]}`,`lòng -${B.demoteLoy}`],kem:[`lòng dưới ${balAb(BAL.loy.out)} thì có khi bán mình cho cung khác`],go:()=>{s.rk=srk(s)-1;s.proud=0;s.loyal=cl(s.loyal-B.demoteLoy,0,100);others.forEach(x=>x.loyal=cl(x.loyal+B.demoteOthers,0,100));log(`Ngươi giáng ${s.name} xuống ${srkName(s)}.`)}}),
-   tsOpt({n:"Cho đi",duoc:[`kẻ hầu khác lòng +${B.letOthers}`,"bớt một miệng ăn"],mat:[`mất ${s.name}`],kem:v?[`${s.name} mang chuyện cung ngươi sang bên ${tsNm(v)} (người ấy nắm thêm ${balAb(BAL.eff.jpromsv.evGo)} chứng cứ)`]:[],go:()=>{spMove(S,s,v);others.forEach(x=>x.loyal=cl(x.loyal+B.letOthers,0,100));if(v&&typeof evA==="function")evA(v,S,BAL.eff.jpromsv.evGo);log(`${s.name} rời cung ngươi${v?`, sang hầu ${tsNm(v)}`:", về Nội vụ phủ"}.`)}})]})}
+  opts:[tsOpt({n:K.n,fx:{},need:[tsNeedBac(keep)],duoc:[`lòng +${B.keepGain}`,"giữ người, giữ chức"],mat:[`mất ${keep} bạc`],kem:[`kiêu thêm ${B.keepMo} tháng`],go:()=>{const r=K.go();if(r)log(r)}}),
+   tsOpt({n:D.n,duoc:["hết kiêu",`kẻ hầu khác lòng +${B.demoteOthers}`],mat:[`${s.name} xuống ${SRK[s.role][srk(s)-1]}`,`lòng -${B.demoteLoy}`],kem:[`lòng dưới ${BAL.loy.out} thì có khi bán mình cho cung khác`],go:()=>{const r=D.go();if(r)log(r)}}),
+   tsOpt({n:L.n,duoc:[`kẻ hầu khác lòng +${B.letOthers}`,"bớt một miệng ăn"],mat:[`mất ${s.name}`],kem:v?[`${s.name} mang chuyện cung ngươi sang bên ${tsNm(v)} (người ấy nắm thêm ${balAb(BAL.ag.ev.one)} chứng cứ)`]:[],go:()=>{const r=L.go();if(r)log(r)}})]})}
 /* monthly: pride runs its course for every household (hers and the NPCs'), after the merit promotions */
 function spMonth(){let ev="";const B=BAL.sp;for(const o of consorts()){if(!o||o.dead||(o!==S&&!o.alive))continue;for(const s of (o.staff||[]).slice()){if(!s.proud||s.coop)continue;
  if(s.proud<=S.turn){s.proud=0;if(o===S)ev+=`${s.name} đã bớt kiêu. `;continue}
  s.loyal=cl(s.loyal-B.proudLoy,0,100);(o.staff||[]).forEach(x=>{if(x!==s)x.loyal=cl(x.loyal-B.bully,0,100)});
- if(s.loyal<B.leaveLoyal&&roll(B.leaveCh)){if(o===S){if(!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv()))spLeaveCard(s)}else{const v=spGoTo(o,s);if(v)spMove(o,s,v)}}}}return ev}
+ if(s.loyal<B.leaveLoyal&&ag2Ch(s,B.leaveCh*(window.agOn&&agOn()?1+(B.leaveLoyal-s.loyal)/B.leaveLoyal:1))){const r=spAsk(o,s);if(r&&o!==S&&typeof mlSee==="function"&&mlSee(o))ev+=r}}}return ev}
 (function(){if(typeof servRanks!=="function")return;const r0=servRanks;servRanks=function(){const ev=r0.apply(this,arguments);let e2="";try{e2=spMonth()}catch(e){console.error(e)}return (ev||"")+e2}})();
-window.spFav=spFav;window.spOpen=spOpen;window.spMonth=spMonth;window.spAfter=spAfter;window.spKemTxt=spKemTxt;window.spPayFav=spPayFav;window.spLeaveCard=spLeaveCard;
+window.spFav=spFav;window.spOpen=spOpen;window.spMonth=spMonth;window.spAfter=spAfter;window.spKemTxt=spKemTxt;window.spPayFav=spPayFav;window.spLeaveCard=spLeaveCard;window.spLeaveOpts=spLeaveOpts;window.spAsk=spAsk;

@@ -41,7 +41,7 @@ function amTeaG(m,g){return (g==null?amD().tea.g:g)+Math.round(amSt(m).sac/amD()
 /* the master sees him look at her: trust lost (0 = she did not see) */
 function amJealP(o){const J=amD().jeal;return cl(J.b+((o&&o.malice)||40)/J.d,0,100)}
 function amJealN(o){return nv(o,"misJealTin")}/* the trust she loses: ONE table BAL.net.n.misJealTin (show-why) */
-function amJealD(o){if(!o||!roll(amJealP(o)))return 0;return amJealN(o)}
+function amJealD(o){if(!o||!roll(agCap(amJealP(o))))return 0;return amJealN(o)}
 /* ---------- 2 an NPC maid's deed ---------- */
 function amMaids(){const L=[];for(const p of consorts()){if(!p||!p.staff)continue;if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.role==="maid"&&mlAgeOk(s))L.push([s,p])}return L}
 function amSeeking(s){return !!(s.seek&&s.seek.until>=(S.turn||0))}
@@ -50,10 +50,10 @@ function amMW(s){try{return typeof mindW==="function"?mindW(s,"social"):1}catch(
 function amDecide(s,p,night){const o=odA(s,amTeaO(s,night));const sm=s.seek&&s.seek.used?BAL.mline.useMul:1;
  const u=amNeed(s)*(amTeaG(s)/BAL.ag.unit)*(o/100)*sm*amMW(s);if(!(u>0))return null;
  if(mindPick([["keep",BAL.ag.routine/BAL.ag.unit],["do",u*BAL.ag.needW]],s)!=="do")return null;return amDo(s,p,night?"teaN":"tea",o)}
-function amDo(s,p,kd,o){AMN[kd]++;const ok=roll(o);let d=0;
- if(ok){amAdd(s,amTeaG(s));AMN.ok++;d=amJealD(p);if(d)s.loyal=cl((s.loyal||0)-d,0,100)}else s.loyal=cl((s.loyal||0)-amD().tea.fail,0,100);
+function amDo(s,p,kd,o){AMN[kd]++;const ok=agTry(o);let d=0;
+ if(ok){amAdd(s,amTeaG(s));AMN.ok++;d=amJealD(p);if(d)s.loyal=cl((s.loyal||0)-d,0,100)}else if(!agSoft(o))s.loyal=cl((s.loyal||0)-amD().tea.fail,0,100);
  empMet(s,kd,ok);
- const see=p===S||(S.mat||0)>=BAL.mline.seeMat;if(!see)return"";
+ const see=p===S||eyes(S)>=BAL.mline.seeMat;if(!see)return"";
  const W=kd==="teaN"?`bưng trà vào điện đêm Hoàng thượng ngự giá cung ${NM(p)}`:"quỳ dâng trà nơi Hoàng thượng đi qua";
  return `${p===S?"":"Tai mắt báo: "}${s.name}${p===S?"":`, người hầu của ${p.name},`} ${W}; ${ok?"ngài liếc nhìn nàng":"tay run, trà sóng ra khay"}${ok&&d?`; ${p===S?"ngươi":p.name} sa sầm nét mặt`:""}. `}
 /* each tuần (host): a seeking maid serves tea where he passes, or keeps her duties */
@@ -68,17 +68,27 @@ function amFind(k){if(k==="me")return isSrv()?{m:S,o:srvM()}:null;if(k&&k[0]==="
 /* ---------- 4 a maid's night ---------- */
 function amNightGain(m){const st=amSt(m);const q=Math.round(st.sac/20+R(4)-1);amAdd(m,amD().night.b+Math.max(0,Math.round(q/2)))}
 function amName(m){try{const used=namesInUse();const sur=freshName().split(" ")[0];const n=sur+" "+m.name;return used.includes(n)?freshName():n}catch(e){return m.name}}
+/* ROLE PARITY (OD 18/11 ~21:30Z, law 1 + law 4): ONE promotion rule for a maid raised to consort — the player (j42 srvRise) and an NPC maid
+   (amRise; j14 eye path) — so a promoted maid starts EXACTLY like a born Đáp ứng with the same gains: n = the new consort record (S for her),
+   m = the maid she was (S for her), o = her old master, loy0 = her loyalty measure if the caller read it before the change (hers = Chủ tin, an NPC's = lòng).
+   Numbers: BAL.ag.maid.rise (Sủng = b + his regard / d; Danh, Bạc gained; the old master's jealousy kept / turned), BAL.mline.riseLoy / riseRel.
+   Returns loy (true = she stays her old master's friend). */
+function riseLoyal(m){return (m===S?S.tin:m&&m.loyal)||0}
+function riseCore(n,m,o,loy0){const D=BAL.ag.maid.rise,B=BAL.mline;const loy=(loy0!=null?loy0:riseLoyal(m))>=B.riseLoy;const reg=amSung(m);
+ n.rank=0;n.queen=false;n.sung=D.b+Math.round(reg/D.d);if(n===S)apply({danh:D.danh,bac:D.bac});else ap(n,{danh:D.danh,bac:D.bac});
+ if(o&&o!==n&&o.alive!==false){relAdd(o,n,loy?B.riseRel:-B.riseRel);if(o!==S)ghenUp(o,loy?D.ghen[0]:D.ghen[1],"thấy cung nữ cũ của mình được nâng lên làm phi tần",n)}
+ return loy}
 function amRise(m,o,via){const B=BAL.mline,D=amD();const close=!!(o&&o.maid===m);
  if(close)o.maid=o===S?newMaid(pick(MAIDS.filter(x=>x!==m.name)),45):{name:pick(MAIDS.filter(x=>x!==m.name)),loyal:45};
  else if(o&&o.staff){const i=o.staff.indexOf(m);if(i>=0)o.staff.splice(i,1);try{if(typeof mlRose==="function")mlRose(o,m)}catch(e){}}
  const n=newRival(0);Object.assign(n,drawFace());try{f88Carry(n,m)}catch(e){}n.name=amName(m);/* her age: f88Carry */
- n.ag=Object.assign(n.ag||{},{o:"cn"});n.rel=0;n.sung=D.rise.b+Math.round((m.sung||0)/D.rise.d);n.fromMaidOf=o?key(o):null;
- const loy=(m.loyal||0)>=B.riseLoy;if(o)relAdd(o,n,loy?B.riseRel:-B.riseRel);rivals.push(n);
+ n.ag=Object.assign(n.ag||{},{o:"cn"});n.rel=0;n.fromMaidOf=o?key(o):null;
+ const loy=riseCore(n,m,o);rivals.push(n);
  try{n.nights=(n.nights||0)+1;(n.nightLog=n.nightLog||[]).push(wk());night(n)}catch(e){}
  AMN.rise++;if(via==="fav")AMN.favRise++;
  const how=via==="send"?"hầu thay":via==="fav"?"đã được sủng hạnh, nay hậu cung có chỗ":"được Hoàng thượng cho gọi đến hầu";
  return `Cung nữ ${m.name} của ${o?NM(o):"Nội vụ phủ"} ${how}, được phong ${RANKS[0].n} ${n.name}${loy?", vẫn nhớ ơn chủ cũ":", quay lưng với chủ cũ"}. `}
-function amFav(m,o,via){m.fav={w:wk(),n:((m.fav&&m.fav.n)||0)+1};AMN.fav++;const see=o===S||(S.mat||0)>=BAL.mline.seeMat;if(!see)return"";
+function amFav(m,o,via){m.fav={w:wk(),n:((m.fav&&m.fav.n)||0)+1};AMN.fav++;const see=o===S||eyes(S)>=BAL.mline.seeMat;if(!see)return"";
  return `${o===S?"":"Tai mắt báo: "}cung nữ ${m.name} của ${NM(o)} ${via==="send"?"hầu thay":"được Hoàng thượng cho gọi đến hầu"} một đêm, đã được sủng hạnh; hậu cung không còn chỗ phong, nàng vẫn ở lại hầu chủ. `}
 function amNight(m,o,via){amNightGain(m);if(m.sid!=null)empMet(m,"night",1);if(roomFor("consort"))return amRise(m,o,via);return amFav(m,o,via)}
 /* the player maid answers his summons */
@@ -88,7 +98,7 @@ function amMeNight(){const m=srvM();amNightGain(S);empMet(S,"night",1);const d=a
 PEND.amNight=()=>{if(!isSrv()||(S.age||0)<18)return null;const m=srvM();const room=roomFor("consort");const D=amD();
  const k=empMemK(S);const mem=EMPMEM[k]?`<p class="past">Ngài còn nhớ ${EMPMEM[k]} hôm trước của ngươi.</p>`:"";
  return{t:`<p>Tổng quản Càn Thanh cung đến truyền: đêm nay Hoàng thượng cho gọi ngươi đến Dưỡng Hòa điện hầu.</p>${mem}`,who:pEmp(),o:[
-  {n:"Tắm gội chờ giá",fx:{},x:`Nắm chắc · thành: được sủng hạnh${room?`, rồi được phong ${RANKS[0].n}`:"; hậu cung không còn chỗ phong, ngươi vẫn là cung nữ"}${m?` · kèm: chủ ghen, Chủ tin -${amJealN(m)}: ${chanceW(amJealP(m))}`:""}`,go:()=>amMeNight()},
+  {n:"Tắm gội chờ giá",fx:{},x:`thành: được sủng hạnh${room?`, rồi được phong ${RANKS[0].n}`:"; hậu cung không còn chỗ phong, ngươi vẫn là cung nữ"}${m?` · kèm: chủ ghen, Chủ tin -${amJealN(m)}: ${chanceW(amJealP(m))}`:""}`,go:()=>amMeNight()},
   {n:"Cáo bệnh",fx:{sung:-D.decline},x:`nhường đêm; Hoàng thượng để ý -${D.decline}`,go:()=>{AMN.decline++}}]}};
 /* the kit scene of the summons: the Kính sự phòng picture (jevban KIT_DLGMAP, the same as the consort's "ksp") */
 try{if(typeof KIT_DLGMAP==="object"&&KIT_DLGMAP.ksp&&!KIT_DLGMAP.amNight)KIT_DLGMAP.amNight=KIT_DLGMAP.ksp}catch(e){}
@@ -98,7 +108,7 @@ function amSendQ(v){if(!amOn())return false;try{const m=v&&v.maid;if(!m)return f
   const u=(N.rest*BAL.ag.restW+ill)*(1+((m.loyal||0)>=BAL.mline.riseLoy?N.ally:0))*BAL.ag.needW*amD().send*agMW(v,"scheme");if(!(u>0))return false;
   return mindPick([["keep",BAL.ag.routine/BAL.ag.unit],["send",u]],v)==="send"}catch(e){agErr("send",e);return false}}
 function amSendX(){const m=S.maid;if(!m)return"";const B=BAL.mline;
- return `Nắm chắc · thành: ${m.name} hầu thay đêm nay, được sủng hạnh${roomFor("consort")?`, rồi được phong ${RANKS[0].n}, ${(m.loyal||0)>=B.riseLoy?"vẫn là người của ngươi":"trở mặt với ngươi"} · kèm: mất ${m.name}, cung nữ mới lòng 45`:"; hậu cung không còn chỗ phong, nàng vẫn ở lại hầu ngươi"}`}
+ return `thành: ${m.name} hầu thay đêm nay, được sủng hạnh${roomFor("consort")?`, rồi được phong ${RANKS[0].n}, ${(m.loyal||0)>=B.riseLoy?"vẫn là người của ngươi":"trở mặt với ngươi"} · kèm: mất ${m.name}, cung nữ mới lòng 45`:"; hậu cung không còn chỗ phong, nàng vẫn ở lại hầu ngươi"}`}
 /* ---------- 6 wiring ---------- */
 /* the help line of "Hoàng thượng để ý" (j42 HX.nt) follows the rule in force: with the loop on there is no 45 gate */
 try{const h0=HX.nt;Object.defineProperty(HX,"nt",{get(){return amOn()?`Hoàng thượng để ý: ngài có nhớ mặt ngươi không (0-100). Mỗi việc ngươi làm gần ngài (dâng trà, chạy việc, rót rượu…) ngài nhớ ${BAL.ag.emp.met.keep} tuần; càng để ý, đêm ngài càng dễ cho gọi ngươi đến hầu.`:h0},configurable:true,enumerable:true})}catch(e){}

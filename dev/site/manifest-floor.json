@@ -1,4 +1,20 @@
 {
+ "ACTS.json": {
+  "by": {
+   "acts": 332,
+   "log": 836,
+   "prefix": 10
+  },
+  "n": 0
+ },
+ "EVENTS.json": {
+  "by": {
+   "categories": 75,
+   "events": 236,
+   "stories": 47
+  },
+  "n": 0
+ },
  "FIGURES-congtu.json": {
   "by": {
    "man|None": 80
@@ -15,17 +31,17 @@
   "by": {
    "consort|kc": 128,
    "consort|ngheo": 32,
-   "maid|kc": 208,
+   "maid|kc": 52,
    "maid|ngheo": 52
   },
-  "n": 420
+  "n": 264
  },
  "FIGURES-kids.json": {
   "by": {
-   "princess|None": 96,
-   "prince|None": 96
+   "princess|None": 168,
+   "prince|None": 168
   },
-  "n": 192
+  "n": 336
  },
  "FIGURES-others.json": {
   "by": {

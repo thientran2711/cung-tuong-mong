@@ -44,7 +44,7 @@ Object.assign(BAL,{bacTuan:[17,20,25,40,45,51,60,70],altK:{suc:1.2,pen:1.6,sucMa
 function bacK(bac,rk){const T=BAL.bacTuan;return Math.abs(bac||0)*16/T[Math.max(0,Math.min(T.length-1,rk==null?3:rk|0))]}
 function altCost(bac,rk,suc0,pen0){const k=bacK(bac,rk),K=BAL.altK;return{suc:Math.max(Math.abs(suc0),Math.min(K.sucMax,Math.round(k*K.suc))),pen:Math.max(pen0,Math.min(K.penMax,Math.round(k*K.pen)))}}
 function altOf67(A,bid,o){const base=typeof o.o==="function"?o.o:(o.o==null?80:o.o);const AC=altCost(o.c&&o.c.bac,S&&S.rank,BAL.alt67Suc,BAL.alt67Pen);
- return{n:"Nhờ người quen lo liệu, không dùng bạc",c:{suc:-AC.suc},o:A2=>{let x=typeof base==="function"?base(A2):base;return x-AC.pen+(S.mat||0)*4+(S.maid?((S.maid.loyal||0)-50)/5:0)},
+ return{n:"Nhờ người quen lo liệu, không dùng bạc",c:{suc:-AC.suc},o:A2=>{let x=typeof base==="function"?base(A2):base;return x-AC.pen+eyes(S)*4+(S.maid?((S.maid.loyal||0)-50)/5:0)},
   w:o.w,sc:o.sc,f:o.f,wx:o.wx,l:Object.assign({},o.l||{},{danh:((o.l||{}).danh||0)-2}),lx:[o.lx,"người được nhờ lỡ việc"].filter(Boolean).join(", "),
   rt:o.rt,rf:o.rf||"Người được nhờ làm hỏng việc.",e:o.e,to:o.to,tf:o.tf,go:o.go,need:o.need}}
 (function(){const o0=opts67;opts67=function(A,b){let L=o0.apply(this,arguments);try{if(!v267()||!A||!b||!Array.isArray(L))return L;
@@ -95,6 +95,7 @@ HX.pl67="Việc trong Mệnh truyện ngươi đã nhận lời lo liệu. Chạ
 /* kit page #kit sample of the K3_STATE hook (KIT 31.2): a module's state chip in the top-bar state row, drawn by jk3 k3row (review r6) */
 if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§31.2",title:"K3_STATE: chip trạng thái ở hàng đầu trang (hạn lo liệu)",html:()=>typeof k3row!=="function"?"":
  `<div class="k3tc"><span class="k3tt"><span class="kstl k3l1">${k3row("pl67","Hạn lo liệu","4 buổi","hot")} ${k3row("fake","Giả bệnh","","hot")}</span></span></div>`});
+if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§31.2b",title:"kitGroupFold: nút nhóm sổ xuống (Cung nhân · N, Chí tôn · N), đóng + mở",html:()=>{if(typeof kitGroupFold!=="function")return"";const c=n=>`<button type="button" class="k3c"><span class="k3ct"><b>${n}</b><span class="k3v"><small>Lòng</small> <span class="ef g">70</span></span></span></button>`;const o=window.__kgfOpen;window.__kgfOpen=null;const a=kitGroupFold("cn","Cung nhân",3,c("Thanh Trúc")+c("Bạch Lan")+c("Lâm Tử"));window.__kgfOpen="cn";const b=kitGroupFold("cn","Cung nhân",3,c("Thanh Trúc")+c("Bạch Lan")+c("Lâm Tử"));window.__kgfOpen=o;return `<div class="ksh" style="position:static;width:150px;display:flex;flex-direction:column;gap:4px">${a}${b}</div>`}});
 (function(){const h0=renderHud2;renderHud2=function(){const r=h0.apply(this,arguments);try{const P=pl67();const el=$("hud2");if(P&&el&&!el.querySelector('[data-hx="pl67"]')){const left=P.due-absB67();
   el.insertAdjacentHTML("beforeend",`<button class="hc hot" data-hx="pl67">Hạn lo liệu <b>${dlT67(left)}</b></button>`);if(typeof k3Stage==="function")k3Stage()}}catch(e){}return r}})();
 window.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest('[data-k3="pl67"],[data-hx="pl67"],[data-pl67]');if(!t)return;e.stopPropagation();e.preventDefault();pl67Open()},true);

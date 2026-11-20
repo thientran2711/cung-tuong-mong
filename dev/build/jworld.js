@@ -109,7 +109,7 @@ EVD.away={place:w=>"thu",
  tick(w){if(w.x.sub==="chinh"&&now()<w.t1-1){try{log(`Tin quân báo về: ngự giá ${pick(["đã tới biên ải","đóng quân bên sông","giao chiến với giặc","chờ lương thảo"])}.`)}catch(e){}}},
  end(w){const b=B().away,F=(w.x.f||[]).map(byPid).filter(p=>p&&(p===S||p.alive));for(const p of F)ap(p,{sung:b.folSung});let r=`${wName(w)} xong, ngự giá hồi cung.${F.length?` Người theo hầu được thêm ân sủng: ${nmList(F)}.`:""}`;
   if(w.x.sub==="chinh"){const T=T_();if(T){const DT=T.H["Đại tướng quân"];const c=b.chinh.win;const o=cl(Math.round(c[0]+(DT?DT.pow/c[1]+DT.sk/c[2]:0)),b.chinh.winClamp[0],b.chinh.winClamp[1]);
-    if(roll(o)){T.bien=cl(T.bien+b.chinh.winBien,0,100);moodSet(0);r+=` Đại thắng trở về, Biên cương +${b.chinh.winBien}.`;w.x.won=1}
+    if(roll(agOdd(o))){T.bien=cl(T.bien+b.chinh.winBien,0,100);moodSet(0);r+=` Đại thắng trở về, Biên cương +${b.chinh.winBien}.`;w.x.won=1}
     else{T.bien=cl(T.bien+b.chinh.loseBien,0,100);moodSet(3);r+=` Thua trận trở về, Biên cương ${b.chinh.loseBien}; ngài giận dữ.`}}}
   if(w.x.won)worldStart("xa","Thắng trận trở về, ban ân xá");return r},
  card(w){const me=(w.x.f||[]).includes("me");if(!me)return{t:wName(w),who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`};
@@ -119,14 +119,14 @@ EVD.away={place:w=>"thu",
       const C=liveR().filter(v=>!v.preg&&!v.confined&&!(w.x.f||[]).includes(v.id));if(C.length){const v=npcPick(null,C.map(v=>[v,Math.max(1,rawNight(v))*mW(v,"social")]));if(v){w.x.f.push(v.id);log(`${v.name} theo hầu thay ngươi.`)}}}}]}},
  night(w,p){return !(w.x.f||[]).includes(pid(p))},emp:1};
 /* 3 ĐẠI TUYỂN TÚ NỮ (row 2): every 3 years at the KC.ty clock (the player's own road already runs on it). Reuses newRival/drawFace/palFix
-   (as j3 moreRivals and j55 "tuyen"), roomFor/CAPC caps, jealousy via relAdd/affAdd (the same relation core). */
+   (as j3 moreRivals and j55 "tuyen"), roomFor caps (BAL.harem.cap), jealousy via relAdd/affAdd (the same relation core). */
 EVD.tuyen={place:w=>typeof qOn==="function"&&qOn()?"kn":"tn",
  start(w){const b=B().tuyen;const n=b.n[0]+R(b.n[1]-b.n[0]+1);const N=[];const old=cons();
-  for(let i=0;i<n;i++){try{if(typeof roomFor==="function"&&!roomFor("consort"))break;if(liveR().length+1>=(typeof CAPC==="number"?CAPC:16))break;
+  for(let i=0;i<n;i++){try{if(typeof roomFor==="function"&&!roomFor("consort"))break;
    const v=newRival(R(b.rankMax+1));Object.assign(v,drawFace());v.age=b.age[0]+R(b.age[1]);v.sung=cl((v.sung||0)+b.newSung,0,100);v.wNew=w.id;rivals.push(v);N.push(v)}catch(e){wErr("tuyen new",e)}}
   try{if(N.length&&typeof palFix==="function")palFix()}catch(e){}w.x.n=N.map(v=>v.id);
   for(const p of old)ap(p,{sung:-b.sungThin});
-  for(const v of old){if(v===S||!N.length)continue;const t=pick(N);const k=npcPick(v,[["welcome",mW(v,"help")],["ambush",mW(v,"harm")*(1+(v.ghen||0)/b.ghenDiv)],["ignore",1]]);
+  for(const v of old){if(v===S||!N.length)continue;/* NPC-PURPOSE G3: she sizes up the newcomer who counts most (Sủng + rank: the one worth winning or the one to cow), near-best */const t=npwPick(N,x=>1+(x.sung||0)+rkOf(x)*BAL.ag.why.g3.newRk);const k=npcPick(v,[["welcome",mW(v,"help")],["ambush",mW(v,"harm")*(1+(v.ghen||0)/b.ghenDiv)],["ignore",1]]);
    if(k==="welcome")affAdd(t,v,b.welcomeAff);else if(k==="ambush"){relAdd(v,t,b.ambushRel);if(typeof newsAdd==="function")newsAdd(v,"tuyen",`${v.name} ra oai với tú nữ mới ${t.name}.`)}}
   return N.length?`${N.length} tú nữ vào cung: ${N.map(v=>`${v.name} (${RANKS[v.rank].n})`).join(", ")}. Ân sủng cũ phải chia bớt.`:"Hậu cung đã đủ người, lần này không ai được giữ lại."},
  end(w){const N=(w.x.n||[]).map(byPid).filter(v=>v&&v.alive);return N.length?`Các tú nữ mới đã ổn định chỗ ở: ${nmList(N)}.`:""},
@@ -178,13 +178,13 @@ EVD.dich={place:w=>"tyv",
    (Cần Chính điện banquet), the j67 s_su / jrd_nc arcs stay as they are. Invited consorts (rank >= BAL) may show a talent. */
 EVD.su={place:w=>"thu",
  start(w){const b=B().su;moodSet(b.mood);const S1=[];for(const v of liveR()){if(rkOf(v)<b.rank)continue;const k=npcPick(v,[["show",mW(v,"art")],["quiet",1]]);
-   if(k==="show"){if(roll(odA(v,b.show[0]+(v.tai||0)/b.show[1]))){ap(v,{sung:b.showSung,danh:b.showDanh});S1.push(v)}else ap(v,{danh:b.failDanh})}}
+   if(k==="show"){const o=odA(v,b.show[0]+(v.tai||0)/b.show[1]);if(agTry(o)){ap(v,{sung:b.showSung,danh:b.showDanh});S1.push(v)}else if(!agSoft(o))ap(v,{danh:b.failDanh})}}
   return `Yến tiếp sứ ở Cần Chính điện; phi tần từ ${RANKS[b.rank].n} trở lên dự yến.${S1.length?` Được sứ thần khen tài: ${nmList(S1)}.`:""}`},
  end(w){return "Sứ đoàn đã lên đường về nước, mang theo quốc thư đáp lễ."},
  card(w){return{t:"Sứ đoàn vào triều",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
  scene(w){const b=B().su;const ok=meCons()&&rkOf(S)>=b.rank;const o=od(b.show[0]+(S.tai||0)/b.show[1]);
   return{t:"Yến tiếp sứ",who:pEmp(),h:`<p>Sứ thần dâng lễ vật lạ, bá quan ngồi kín hai bên.</p>${ok?"":`<p class="past">Phẩm của ngươi chưa được dự yến; chỉ đứng xa mà xem.</p>`}`,
-   opts:ok?[{n:"Dâng một khúc đàn trong yến",fx:{},x:`${word(o)} · thành: Sủng +${b.showSung}, Danh +${b.showDanh} · hỏng: Danh ${b.failDanh}`,go:()=>{if(roll(o))apply({sung:b.showSung,danh:b.showDanh});else apply({danh:b.failDanh})}},
+   opts:ok?[{n:"Dâng một khúc đàn trong yến",fx:{},x:`${word(o)} · thành: Sủng +${b.showSung}, Danh +${b.showDanh} · hỏng: Danh ${b.failDanh}`,go:()=>{if(agTry(o))apply({sung:b.showSung,danh:b.showDanh});else if(agSoft(o))agSoftTxt(S,"Dâng một khúc đàn trong yến");else apply({danh:b.failDanh})}},
     {n:"Ngồi yên giữ lễ",fx:{},x:"không được mất gì"}]:[{n:"Đứng xem rồi về",fx:{},x:"không được mất gì"}]}},
  night(w,p){return false}};
 /* 8 ĐẠI THỌ (row 3): the Emperor's 40/50/60… or Thái hậu's 60/70/80 birthday (j71 Tiết Vạn thọ / Thánh thọ days). Reuses FEST days,
@@ -198,7 +198,7 @@ EVD.tho={place:w=>w.x.who==="th"?"tn":"thu",
   return{t:wName(w),who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`,opts:meCons()?[
    {n:"Dâng lễ vật quý",fx:{bac:-b.big},x:`thành: Sủng +${b.sungBig}${th?`, Thái hậu +${b.thBig}`:""}`,go:()=>apply(th?{sung:b.sungBig,th:b.thBig}:{sung:b.sungBig})},
    {n:"Dâng lễ vật vừa phải",fx:{bac:-b.mid},x:`thành: Sủng +${b.sungMid}`,go:()=>apply({sung:b.sungMid})},
-   {n:"Tự tay làm lễ vật",fx:{suc:-b.makeSuc},x:`${word(o)} · thành: Sủng +${b.sungBig} · hỏng: không ai để ý`,go:()=>{if(roll(o))apply({sung:b.sungBig})}}]:undefined}},
+   {n:"Tự tay làm lễ vật",fx:{suc:-b.makeSuc},x:`${word(o)} · thành: Sủng +${b.sungBig} · hỏng: không ai để ý`,go:()=>{if(agTry(o))apply({sung:b.sungBig})}}]:undefined}},
  night(w,p){return false}};
 /* 9 THIÊN TƯỢNG (row 7): eclipse / comet read by Khâm Thiên giám. Reuses the j7 comet card (it names her or a rival) — it leaves the weekly
    random pool and comes only with this window (LUẬT SỬA CẢ NHÓM); j3 mood; no feasts for the window. */
@@ -212,7 +212,8 @@ EVD.sao={place:w=>"cnh",
    own way out j14 restore() ("chờ ân xá" is already on her cold-palace card), j8 "pardon" rule for NPCs (out=false, rank 0). */
 EVD.xa={place:w=>"lc",
  start(w){const b=B().xa;const F=[];if(S.confined&&!(typeof isSrv==="function"&&isSrv())){S.confined=0;F.push(S)}
-  for(const v of rivals){if(!v.alive)continue;if(v.confined){v.confined=0;F.push(v)}else if(v.out&&!v.coop&&roll(b.npcP)){v.out=false;v.rank=0;F.push(v)}}
+  for(const v of rivals){if(!v.alive)continue;if(v.confined){v.confined=0;F.push(v)}else if(v.out&&!v.coop&&roomFor("consort")&&roll(b.npcP)){v.out=false;v.rank=0;F.push(v)}}
+  try{if(F.length&&typeof palFix==="function")palFix()}catch(e){}
   const T=T_();if(T)T.kho=cl(T.kho-b.kho,0,100);
   return `Chiếu đại xá: miễn thuế một năm, người bị cấm túc được tha${F.length?`: ${nmList(F)}`:""}.`},
  card(w){if(S.out&&(S.turn-(S.coldTurn||0))>=B().xa.minM){try{restore(false,"Chiếu đại xá thiên hạ")}catch(e){wErr("restore",e)}return null}return{t:"Đại xá thiên hạ",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
@@ -276,7 +277,7 @@ function wCourt(){const T=T_(),M=S.wMM;if(!T||!M||M.done)return;M.done=1;const b
  if(M.k==="cong"&&T.bien>=b.su.bien)worldStart("su","Sứ thần các nước vào triều cống");
  if((M.k==="lut"||M.k==="han")&&M.fail&&T.kho<b.dis.kho)worldStart("dis",`${M.k==="lut"?"Lũ lụt ở Giang Nam":"Hạn hán miền bắc"}, cứu tế chậm trễ, kho lúa cạn`,{x:{sub:M.k}});
  if(M.k==="giac"&&M.fail&&T.bien<b.away.chinh.bien){const c=b.away.chinh;const z=wZ();const ok=(S.emp.age||0)<=c.age&&!(S.emp.ill&&S.emp.ill.st>=2)&&(z.last.away_chinh==null||now()-z.last.away_chinh>=c.gapY*36);
-  if(ok&&roll(c.p)&&worldStart("away","Giặc phá biên ải, Hoàng thượng quyết thân chinh",{len:b.away.len.chinh,x:{sub:"chinh"}}))z.last.away_chinh=now()}
+  if(ok&&roll(agCap(c.p))&&worldStart("away","Giặc phá biên ải, Hoàng thượng quyết thân chinh",{len:b.away.len.chinh,x:{sub:"chinh"}}))z.last.away_chinh=now()}
  const d=wZ().H&&wZ().H.find(h=>h.k==="dis");if(T.kho<b.dich.kho&&(worldWin("dis")||worldWin("trung")||(d&&now()-d.t1<b.dich.after))&&roll(b.dich.p))worldStart("dich","Đói kém kéo dài, dịch bệnh nổi lên");}
 function wCalendar(){const b=B(),T=T_(),z=wZ(),y=S.year,m=S.month,t=S.tuan||0,E=S.emp||{};const ill=!!(E.ill&&E.ill.st>=2);
  /* tuyển tú: the KC.ty clock, every 3 years after the player's own (her home road ends at KC.ty) */
@@ -284,10 +285,10 @@ function wCalendar(){const b=B(),T=T_(),z=wZ(),y=S.year,m=S.month,t=S.tuan||0,E=
  /* tế Giao every 3 years before Đông chí */
  if(m===b.away.te.month&&t===0&&y%b.away.te.every===0&&!ill)worldStart("away","Hoàng thượng ra đàn Nam Giao tế trời",{len:b.away.len.te,x:{sub:"te"},cd:0});
  /* thu săn: autumn, peace at the border, he is well; decided the tuần before (the jpet hunt gifts at the month's start read z.sanY) */
- {const c=b.away.san;const pm=c.month===1?12:c.month-1;if(m===pm&&t===2)z.sanY=!ill&&(!T||T.bien>=c.bien)&&(E.age||0)<=c.age&&roll(c.p)?(c.month===1?y+1:y):0;
+ {const c=b.away.san;const pm=c.month===1?12:c.month-1;if(m===pm&&t===2)z.sanY=!ill&&(!T||T.bien>=c.bien)&&(E.age||0)<=c.age&&roll(agCap(c.p))?(c.month===1?y+1:y):0;
   if(m===c.month&&t===0&&z.sanY===y)worldStart("away","Mùa thu, Hoàng thượng đi săn ở Mộc Lan",{len:b.away.len.san,x:{sub:"san"},cd:0})}
  /* tuần du: spring of a good year */
- {const c=b.away.tuan;if(m===c.month&&t===0&&!ill&&T&&T.kho>=c.kho&&T.bien>=c.bien&&(E.age||0)<=c.age&&(z.last.away_tuan==null||now()-z.last.away_tuan>=c.gapY*36)&&roll(c.p)){
+ {const c=b.away.tuan;if(m===c.month&&t===0&&!ill&&T&&T.kho>=c.kho&&T.bien>=c.bien&&(E.age||0)<=c.age&&(z.last.away_tuan==null||now()-z.last.away_tuan>=c.gapY*36)&&roll(agCap(c.p))){
   if(worldStart("away","Bốn bề yên ổn, Hoàng thượng tuần du phương nam",{len:b.away.len.tuan,x:{sub:"tuan"},cd:0}))z.last.away_tuan=now()}}
  /* đại thọ: milestone birthdays on the existing Vạn thọ / Thánh thọ days */
  {const c=b.tho;const f=(typeof FEST!=="undefined")?FEST:{};const vt=f.vantho,tt=f.thanhtho;
@@ -315,8 +316,8 @@ function worldTick(){if(!S||S.dead||!B().on)return;const z=wZ();if(host()){WW.in
 function startCard(w){const E=EVD[w.k];let m=null;try{m=E.card(w)}catch(e){wErr("card "+w.k,e)}
  if(m&&E.scene&&!(m.opts&&m.opts.length)&&!(typeof isSrv==="function"&&isSrv())){let sc=null;try{sc=E.scene(w)}catch(e){wErr("scene "+w.k,e)}
   if(sc&&sc.opts&&sc.opts.length){m.h=(m.h||"")+(sc.h||"");m.opts=sc.opts;if(!m.who&&sc.who)m.who=sc.who}}
- /* kit line format "word · tốn: … · thành: …" (j0 kitParse): a sure option leads with "Chắc chắn" (never shown) so its first label (thành / kèm) is read */
- if(m&&m.opts)for(const o of m.opts)if(o&&typeof o.x==="string"&&/^(thành|kèm|hỏng|không được)/.test(o.x))o.x="Chắc chắn · "+o.x;return m}
+ /* kit line format "word · tốn: … · thành: …" (j0 kitParse): a sure option has no odds word (ODDS CAP: the ladder has no "sure" word); kitParse reads its first label (thành / kèm) as is */
+ return m}
 function worldShow(){if(!S||S.dead)return;S.wwSeen=S.wwSeen||{};S.wwEnd=S.wwEnd||{};const A=worldWin(),z=wZ();
  for(const h of (z.H||[])){if(h.id==null||!h.end||S.wwEnd[h.id]||!S.wwSeen[h.id])continue;S.wwEnd[h.id]=1;Q.push({t:h.n||"Tin trong cung",who:pEmp(),h:`<p>${h.end}</p>`})}
  for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;const m=startCard(w);if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts;Q.push(m)}}

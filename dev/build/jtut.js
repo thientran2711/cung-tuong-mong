@@ -28,7 +28,7 @@ const T={rec:REC,on:false,step:-1,ask:false,tip:null,tipQ:[],replay:false,fresh:
 window.KTUT=T;
 function optOn(){try{return typeof OPT==="undefined"||OPT.tut!==false}catch(e){return true}}
 function testFlag(){try{return localStorage.getItem("hclh-tut-test")==="1"||/[?&]tut=1\b/.test(location.search)}catch(e){return false}}
-function botOff(){try{return !!window.__bot||(typeof quiet!=="undefined"&&quiet)}catch(e){return false}}
+function botOff(){try{return screenOff()}catch(e){return false}}
 function autoOk(){return !botOff()&&optOn()&&(!navigator.webdriver||testFlag())}
 function rm(){try{return typeof kmReduced==="function"?kmReduced():matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
 function vis(e){return !!e&&!e.hidden&&e.getClientRects().length>0&&getComputedStyle(e).visibility!=="hidden"&&getComputedStyle(e).display!=="none"}
@@ -260,7 +260,7 @@ const STEPS=[
   html:()=>say(`<p class="ktut-do">{X} chạm vào thẻ đang sáng để làm thử một việc thật.</p><p>Làm xong sẽ có thẻ kết quả.</p>`)},
  {id:"ketqua",title:"Thẻ kết quả",target:()=>resOn(),pad:4,skipIf:()=>!resOn(),
   prep(){try{clearTimeout(window.__rtT)}catch(e){}},
-  html:()=>say(`<p>Sau mỗi việc, thẻ kết quả đóng dấu <b>Thành</b> hay <b>Hỏng</b>, ghi đúng những gì được và mất.</p><p>Thẻ tự lui sau ít lâu; việc đã qua đều chép vào Sổ ghi.</p>`)},
+  html:()=>say(`<p>Sau mỗi việc, thẻ kết quả đóng dấu <b>Thành</b> hay <b>Bại</b>, ghi đúng những gì được và mất.</p><p>Thẻ tự lui sau ít lâu; việc đã qua đều chép vào Sổ ghi.</p>`)},
  {id:"dudo",title:"Dư đồ",when:()=>!!groupBtn("go"),target:()=>mapSpot(),pad:6,prep(){goTab("go")},marks:[()=>groupBtn("go")],
   html:()=>say(`<p>Dư đồ là bản đồ hậu cung. Mỗi nhãn ghi số bóng người ở đó và đường đi tốn mấy khắc; bóng người chưa cho biết là ai, đến nơi mới thấy mặt.</p><p>Chạm nhãn để đi. Nơi có dấu khóa thì phải xin yết kiến, hoặc lẻn vào và chịu hiểm.</p>`)},
  /* GROUP STEPS (tab layout may change: review/hau-cung-ui 06:00Z). Read from data attributes only: the tab keys (data-tab) and the
@@ -395,8 +395,10 @@ try{const oh=optHTML;optHTML=function(){const h=oh.apply(this,arguments);
 
 /* ---------- ☰ menu: "Xem lại lời dặn" (only with a kiếp in play) ---------- */
 function addReplay(){const m=document.querySelector("#modal.kpthome .kpmenu");if(!m||m.querySelector(".ktutb"))return;
- const cont=m.querySelector('[data-tgo="cont"]');if(!cont||typeof S==="undefined"||!S||S.dead||botOff())return;
+ const cont=m.querySelector('[data-tgo="slots"]');/* the home menu (j74 homeMenu): Tiếp tục / Bắt đầu is data-tgo="slots" */if(!cont||typeof S==="undefined"||!S||S.dead||botOff())return;
  const b=document.createElement("button");b.type="button";b.className="kbtn alt ktutb";b.dataset.ktutReplay="1";b.innerHTML=`Xem lại lời dặn<small>${MMN()} chỉ lối</small>`;m.appendChild(b)}
+/* a full-width row under the other home buttons (same rule as the co-op button, jcooplobby .kco) */
+try{const st=document.createElement("style");st.textContent=".kpmenu .kbtn.ktutb{grid-column:1/-1}";document.head.appendChild(st)}catch(e){}
 new MutationObserver(addReplay).observe(document.getElementById("modal"),{childList:true,subtree:true});
 document.getElementById("modal").addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ktut-replay]");if(!b)return;e.stopPropagation();e.preventDefault();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
