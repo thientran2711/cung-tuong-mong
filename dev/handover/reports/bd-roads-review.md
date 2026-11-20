@@ -110,3 +110,6 @@ Known flake (FOR MAIN, not a gate here): G4 50-coop-one-world seed 3 (R.evm rand
 
 ### VERDICT r2: PASS — review/bd-roads @ 4adea508 (FF on LIVE 377d5ce3)
 Open notes FOR E / MAIN (not blocking): GRAND_ENDINGS.md still names bd_tuyet/bd_hen GEs in steppe words (must follow cat.py); FOR C art lists in §BUILT are steppe scenes and must be redrawn for Ba Tư; map-stage presence of Vương hậu / Bạc Đồ / women guests (jworld item); «Tô Lận» kept (E14d check).
+
+### Re-merge 20/11 ~08:30Z: LIVE moved to 30e8714e (mg-score-same + fig-label, minigame files only)
+4adea508 + origin/main 30e8714e → **d76511d3** (index.html/sw.js only, rebuilt), pushed on review/bd-roads, FF on LIVE 30e8714e. Rerun on d76511d3: one-core-guard PASS · bd-batu-switch PASS · ge-engine 808/808 · quickcheck PASS (core gates PASS, old save ok; perf new/live buổi 1621/1085 ms is within quickcheck's own bound — one sample of 3, previous run was 946/3076, so noise). **PASS d76511d3.**
