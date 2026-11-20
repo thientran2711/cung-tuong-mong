@@ -43,7 +43,10 @@ F.gOn=lv=>gOn(lv);
 function line(t){try{if(typeof kitLine==="function")kitLine(t);else log(t)}catch(e){}}
 function sendF(p){COOP.send({t:"do",op:"f",args:p.msg,base:TH.view?TH.view.v:0,id:p.id});E.last=p.id;p.at=Date.now()}
 function intent(name,args){const R=F.R[name],t00=performance.now();
- if(F.pend){F.stat.busy++;return "busy"}
+ if(F.pend){/* review coop-ptime-reds r1: the pending one is her due-task tick (ptTickHer, asked by the game, not by her): her tap is HELD and sent
+    right after its answer (it was refused as busy = her tap lost, f4 swap D1); one held tap at most, a second tap is the ordinary double tap */
+  if(F.pend.n==="ptTickHer"&&name!=="ptTickHer"&&!F.next){F.next={name,args,snap:snapV};F.stat.held=(F.stat.held|0)+1;lg(["held",name]);return true}
+  F.stat.busy++;return "busy"}
  let a=null;try{a=R.enc(args)}catch(e){console.error("thin F enc",name,e)}if(a==null){F.stat.bad++;lg(["bad",name]);return "bad"}
  const V=TH.view;if(!V||!V.o){F.stat.bad++;return "bad"}
  if(R.snap&&typeof rsnap==="function")try{rsnap()}catch(e){}
@@ -57,7 +60,9 @@ function intent(name,args){const R=F.R[name],t00=performance.now();
  const t1=performance.now();try{CW.lockNext();render()}catch(e){}p.pr=Math.round(performance.now()-t1);return true}
 function answered(dr){const p=F.pend;if(!p||!dr||dr.id!==p.id)return;F.pend=null;F.stat.ans++;const ms=Date.now()-p.t0;F.stat.ms.push(ms);if(F.stat.ms.length>40)F.stat.ms.shift();
  lg(["ans",p.n,ms,dr.r&&dr.r.st]);F.lastAns={id:p.id,n:p.n,ms,r:dr.r/* the view's own object (main behaviour; the guest's name lens edits it in place) */,r0:dr.r?J(dr.r):null/* F2: the answer as sent */,pre:p.pre,pr:p.pr,tries:p.tries};
- back(p,dr.r);try{CW.lockNext();render()}catch(e){}cardLater(p,dr);}
+ back(p,dr.r);try{CW.lockNext();render()}catch(e){}cardLater(p,dr);nextGo();}
+/* the tap held behind her due-task tick: sent now (its own snapshot for the result card) */
+function nextGo(drop){const n=F.next;if(!n)return;F.next=null;if(drop||!on()||host())return;try{snapV=n.snap;intent(n.name,n.args)}catch(e){console.error("thin F held",e)}finally{snapV=null}}
 /* F2 (gap 2/3): what the host's run wrote OUTSIDE her person (her khắc `used`, the pop-up popIdx/popMsg, tab / __fromMap) comes back with
    the answer and is set here (only while she is still on the buổi the intent was made in: a buổi step resets them anyway); toasts her run
    raised on the host (srvToast / kitLine, no-ops there) play here; then the registration's after-hook (e.g. the place card of a walk that
@@ -69,7 +74,7 @@ function back(p,r){const R=F.R[p.n];if(!R||!r||r.st!=="ok")return;
 COOP.on("thinview",V=>{try{if(!host()&&V&&V.o)answered(V.o.dr)}catch(e){console.error("thin F view",e)}});
 COOP.on("error",m=>{try{const p=F.pend;if(!p||!m||m.id!==p.id||host())return;if(m.code==="nohost"||m.code==="nothin")p.at=0/* resend at the next tick */}catch(e){}});
 setInterval(()=>{const p=F.pend;if(!p||host())return;if(!on()||COOP.frozen)return;if(Date.now()-p.at<8000)return;
- if(p.tries>=3){F.pend=null;F.stat.give++;lg(["give",p.n,p.id]);line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}return}
+ if(p.tries>=3){F.pend=null;F.stat.give++;lg(["give",p.n,p.id]);line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}nextGo();return}
  p.tries++;F.stat.resend++;lg(["resend",p.n,p.id,p.tries]);sendF(p)},1000);
 /* F2 net loss (the whole intent family, F1 too): her socket can look open while dead (4G, sleep): the intent frame, or the host's answer,
    is lost, then COOP reconnects ("room"). Dropping the pending intent there lost her tap in silence (a P7 walk-spill red: the host ran the
@@ -80,7 +85,7 @@ setInterval(()=>{const p=F.pend;if(!p||host())return;if(!on()||COOP.frozen)retur
    `used`) belongs to the old buổi, so it is resent only once her reconnect view shows the SAME buổi (p.b0); another buổi → dropped with the
    same words. The check waits for her first view after the reconnect (p.rv), then the 1 s tick sends it (DONE dedupe on the host unchanged). */
 const stale=p=>p.room!==(COOP.state.room||"")||(COOP.state.week||0)!==p.w0;
-function dropP(p,why){F.pend=null;lg(["drop",p.n,p.id,why]);F.stat.drop=(F.stat.drop|0)+1;line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}}
+function dropP(p,why){F.pend=null;nextGo(1)/* stale room / buổi: the held tap goes with it (the same «not done» words below) */;lg(["drop",p.n,p.id,why]);F.stat.drop=(F.stat.drop|0)+1;line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}}
 COOP.on("room",()=>{const p=F.pend;if(!p)return;if(stale(p))return dropP(p,"room");
  p.rv=Date.now();p.at=Infinity/* held until her view after the reconnect (or 8 s: the check runs on what she has) */;F.stat.reNet=(F.stat.reNet|0)+1;lg(["reNet",p.n,p.id])});
 function reCheck(p){if(stale(p))return dropP(p,"room");if((S.buoi||0)!==p.b0)return dropP(p,"buoi");p.rv=0;p.at=0/* same buổi: sent again at the next tick */}
@@ -110,7 +115,7 @@ TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();don
   else{/* F2 r2 (review r1 item 1, every registration, F1 too): her tap runs as solo (TH.tapRun: quiet off → her cards into her Q = part D
       cards on her phone; her toasts / floaters / coin and item effects captured, played on HER phone with the answer; nothing on the host's screen) */
    if(R.noRes)NORES++;RSL=null;let T;try{T=TH.tapRun(()=>{if(R.pre)R.pre(args)/* F5: what the host does first in her run (the deferred cost, the host's own rolls) */;return PRE[a.n].apply(null,args)})}finally{if(R.noRes)NORES--}/* F3: a registered UI function's own wrapR card shows on her phone (cardLater), never here */
-   const r=T.r,ui=T.ui;F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
+   const r=T.r,ui=T.ui;if(a.n==="ptTickHer")F.stat.ptRun=(F.stat.ptRun|0)+1;else F.stat.run++;/* her due tasks landing (coop-ptime-reds) is not one of her acts: counted apart */if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
    if(typeof r==="boolean")out.rv=r;if(R.noRes&&RSL){out.rs=[String(RSL[0]==null?"":RSL[0]).replace(/<[^>]+>/g,"").slice(0,160),RSL[1]==null?null:!!RSL[1]];RSL=null}if(ui&&ui.length)out.ui=ui/* hostnull (c): all of them; BAL.coopUi paces them on her phone (was slice(0,4): a 5th effect was lost) */;
    if(R.back){const c={};for(const [n,g] of R.ctx||[])if(R.back.includes(n))try{const v=g();c[n]=v===undefined?null:J(v)}catch(e){}out.c=c}
    if(R.host)try{R.host(args,out)}catch(e){console.error("thin F host",e)}}}
@@ -193,6 +198,31 @@ for(const n of ["scout","invite"])F.reg(n,Object.assign({},W7,{host:null,mine:A=
 F.reg("srvGoTo",Object.assign({},W7,{ret:false,mine:A=>typeof A[0]==="string"&&!!S&&!S.dead&&!Q.length,enc:A=>({k:A[0]}),dec:a=>a&&typeof a.k==="string"?[a.k]:null}));
 F.reg("kcGo",Object.assign({},W7,{ret:false,mine:A=>typeof A[0]==="string"&&!!S&&!S.dead&&!Q.length,enc:A=>({k:A[0]}),dec:a=>a&&typeof a.k==="string"?[a.k]:null,
  done:(A,r)=>{if(r&&r.rv&&S&&S.place===A[0]){tab="act";try{render()}catch(e){}}}/* its tap handler switches to the act tab when it went (jkc :626) */}));
+/* PARALLEL TIME on the guest (coop-ptime-reds; jptime S.away): her sends created on the host (runAct gift / harm / plant …, scout, invite) or on
+   her phone land at their due khắc. The landing runs the act's own runner (roll, NPC answer, giveTo, runAct, ordered servant, late order =
+   Từ chối with its cost) = her act's effects, so it runs ONCE on the HOST in her context (her khắc clock `used` rides in ctx), never on her
+   phone (before: her phone landed it alone → NPC rolls / world writes made on her phone, then lost under the host's next view). Her phone only
+   decides that something is due (her clock is hers: spend stays on her phone) and asks; ptTick / «Đợi tin» (ptWait → spend → ptTick) both
+   end here (asked right after the tap, after the tap's own intent). A tick while another of her intents is pending is asked again by the 1 s check below (lands right after, never twice:
+   the host lands only what is still due in her stored person). Level 6 (F1: her runAct sends are host-made from there). */
+if(typeof ptTick==="function"&&typeof ptNow==="function"&&typeof ptZ==="function"){
+ const ptDue=()=>{try{if(!S||S.dead||typeof ptOn!=="function"||!ptOn())return false;const n=ptNow();
+  return ptZ().some(a=>a&&!a.back&&a.due<=n)||(Array.isArray(S.ordQ)&&S.ordQ.some(o=>o&&n>=o.due))}catch(e){return false}};
+ const t0=ptTick;let PTIN=0;
+ /* the ONE road her landings take: an intent run on the host in her context with HER clock (ctx used) */
+ window.ptTickHer=function(){PTIN++;try{return t0.apply(this,arguments)}finally{PTIN--}};
+ F.reg("ptTickHer",{lv:LV,ctx:[CX[0]],back:["used"],mine:()=>ptDue(),enc:()=>({}),dec:()=>[],ret:undefined});
+ ptTick=function(){
+  /* guest: her phone never lands; something due at her own tap moment → asked as the intent (a world step on her phone waits for the 1 s ask) */
+  /* asked AFTER the tap that moved her clock (setTimeout): sent in the same tick it would take the one pending slot and her act's own intent
+     (doAct: spend → runAct) would be refused as busy = her tap lost */
+  if(on()&&!host()){if(gOn()&&ptDue())setTimeout(ptAsk,0);return}
+  /* host inside her context but not her tick intent (her act run with the HOST's khắc clock, e.g. a spend inside runAct): her landings wait for her intent */
+  if(host()&&CW.ctx&&on()&&!PTIN)return;
+  return t0.apply(this,arguments)};
+ function ptAsk(){try{if(F.pend||host()||!on()||COOP.frozen||!gOn()||!ptDue())return;F.stat.ptAsk=(F.stat.ptAsk|0)+1;window.ptTickHer()}catch(e){}}
+ setInterval(ptAsk,1000);
+}
 /* gap 4: the "did she arrive?" callers (j77Tap, walkSpillTick) open the place card right after goTo; while her walk there is pending the
    card waits for the answer (placeCard) — never a card before the host has said, never a lost tap */
 if(typeof j77Card==="function"){const jc=j77Card;j77Card=function(k){const p=F.pend;if(p&&p.walk&&p.walk===k&&!host()&&on(L7)){p.card=1;return}return jc.apply(this,arguments)}}
