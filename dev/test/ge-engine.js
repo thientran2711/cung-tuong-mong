@@ -55,7 +55,7 @@ const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JS
    /* D3 r11 */BAL.ge.when='r11';S.ge=null;s=geS();S.st.ch.all=0;S.st.f14.ends=S.st.f14.ends||{};delete S.st.f14.ends[11];Q.length=0;geAsk();const a1=Q.some(m=>m.pid==='ge1');S.st.f14.ends[11]='win';geAsk();o.r11=!a1&&Q.some(m=>m.pid==='ge1');BAL.ge.when='ch14';Q.length=0;
    /* odds: more pull → higher, condition unmet → capped */S.ge=null;s=geS();const g0=geOdds(s,0);s.pull[0]=20;const g1=geOdds(s,0);o.oddsUp=g1>=g0&&g1<=BAL.ge.odds.max;
    /* law 5 (brief E35): one rank step lowers the odds by BAL.ge.odds.rank (inside the clamp), the same key on every branch */
-   {const r0=S.rank,O=BAL.ge.odds,nc=O.noCond;O.noCond=O.max;/* condition cap lifted so the rank term shows on every ending */s.pull[0]=3;const at=r=>{S.rank=r;return geOdds(s,0)};const L=[0,1,2,3,4,5,6,7].map(at);S.rank=r0;O.noCond=nc;
+   {const sv=typeof isSrv==='function'&&isSrv(),r0=sv?S.srv.rk:S.rank,O=BAL.ge.odds,nc=O.noCond;O.noCond=O.max;/* condition cap lifted so the rank term shows on every ending; a servant life (cnv) steps on the maid ladder S.srv.rk */s.pull[0]=3;const put=r=>{if(sv)S.srv.rk=r;else S.rank=r};const at=r=>{put(r);return geOdds(s,0)};const L=[0,1,2,3,4,5,6,7].map(at);put(r0);O.noCond=nc;
     const want=[0,1,2,3,4,5,6,7].map(r=>Math.round(Math.max(O.min,Math.min(O.max,O.base+3*O.per-r*O.rank))));
     o.rank=O.rank>0&&JSON.stringify(L)===JSON.stringify(want)&&L[7]<L[0]||JSON.stringify([L,want])}
    /* map + panels */const M=geMap(road);o.map=!!M&&M.spine.length>=12&&M.ends.length===4&&/Đại kết cục \d\/4/.test(M.count.txt);
