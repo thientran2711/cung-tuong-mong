@@ -15,6 +15,7 @@ let bad=0;const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!
  const src=['j82.js','j91.js'].map(f=>fs.readFileSync('dev/build/'+f,'utf8')).join('\n');
  ok(!/pr\*2\.05\*\(on\?1\.08:1\)/.test(src)&&!/HR\*\(on\?1\.35:1\.18\)/.test(src),'no private lit scale left in Múa / Khéo tay');
  ok(/kg82Spr\(g,"mua-mat".*ring:on/.test(src),'Múa lit cushion has the ring');
+ {const td=fs.readFileSync('dev/build/jtd.js','utf8');ok(!/fillRect\(dir<0/.test(td)&&/kg82FxRing\(g,W\/2\+dir/.test(td),'td_dung touch = kit ring/glow on the bowl, no half-screen yellow box');ok(!/rgba\(255,240,160,\.55\)/.test(src),'rhythm: no tall yellow column flash')}
  const kinds=await p.evaluate(()=>Object.keys(KG82_KIND));const T={};
  for(const k of kinds){if(SKIP.includes(k))continue;
   const r=await p.evaluate(async(k)=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const out={txt:[],dom:[]};
