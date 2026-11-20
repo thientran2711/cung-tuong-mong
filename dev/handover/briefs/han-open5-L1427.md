@@ -8,3 +8,6 @@ JOB: s62_t4_HAN_BAC_open5 (base t4 _open3) and s62_t{6,7,8}_HAN_BAC_open5 (base 
 3. Find and remove any other word that can make a horizontal piece across the chest (inner top edge, chest band, bib, etc.).
 Proof: keep_check --sidecar + --all PASS, Counter word diff, check_store FAIL set vs base. Write dev/art/seasons4/*_open5.txt + .keep, commit+push (pull --rebase), append report dev/handover/reports/DESIGN12.md, send_message Foreman C #9 session_01D3E3NZXhAofYrqBeAVwLCF.
 ROLLOVER: at START_CTX % + 25 % of the window (ceiling 60 %) write your handover in your report and tell #9.
+
+## ADD (owner Lượt 1428, verbatim): "Thêm nữa là lên hoàng quyết đi, cái tà áo nó rất là dài, trong em không có đủ chỗ để mà để cái tà áo dài như vậy đâu." + "Tức là cái chiều dài của Hoàng Quý Phi và cả Hoàng Hậu cũng đều đâu đó cỡ cái chiều dài của Quý Phi hiện tại thôi, cái chiều dài của cái tà áo á."
+4. t7 + t8: the khúc cư hem/wrap length = the SAME as the Quý phi t6 (_open4 t6 wording) — NOT 'LONGER spiral than the Quý phi's' / 'LONGEST spiral of all ranks'. Replace those ladder words with the t6 length words; hem ends at the floor, fits the picture, no trailing train. (Overrides the L1417 khúc cư length ladder for t7/t8. Fringe ladder stays.)
