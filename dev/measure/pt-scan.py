@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """pt-scan (review/phutang-road, E21; copy of bd-scan r2): law 6b + 6c family scan over Phù Tang's own roads (jrd_pt.js + jrd_pt2.js).
 6b: every pfMove/pfKill of a PFP person (scan stops at a told return = a later cast moving him back to kinh); then every LATER line of the same road naming that person (or {mh} for kd) — flagged
-    'UNGUARDED' unless the line (or its beat) reads the book (bdP / bdAlive / BDKD / bdWhere / a place-aware helper) or a told return exists.
-6c: every option whose name gives / buys / receives / sends / burns / hides a thing — flagged 'NO BOOK' unless its line sets bdO(...)
-    or moves a BDP person/animal (a person is in BDP, not in bdO). Goods used up at once (bạc, lương, áo bông, quà) are listed as 'used up'.
-usage: python3 dev/measure/bd-scan.py [files…]"""
+    'UNGUARDED' unless the line (or its beat) reads the book (pfP / pfAlive / pfWhere / a place-aware PF helper) or a told return exists.
+6c: every option whose name gives / buys / receives / sends / burns / hides a thing — flagged 'NO BOOK' unless its line sets pfO(...)
+    or moves a PFP person (a person is in PFP, not in pfO). Goods used up at once (bạc, lương, áo bông, quà) are listed as 'used up'.
+usage: python3 dev/measure/pt-scan.py [files…]   (r2: the static law-6 READ passes 6a / 6b-state / 6c-read are in dev/measure/pt-law6.js)"""
 import re,sys
 FILES=[a for a in sys.argv[1:] if not a.startswith('-')] or ['dev/build/jrd_pt.js','dev/build/jrd_pt2.js']
 NAME={'kimthanh':['Kim Thành','đại sứ','Đại sứ'],'trongla':['Trọng Lữ'],'tieungoc':['Tiểu Ngọc'],'thanlao':['Thân Lão'],'namlao':['Nham Lão'],'huuthanh':['Kim Hựu Thành','thương chủ','thương nhân Tân La'],'ocuu':['Ô Cửu'],'tinhvien':['Tịnh Viên'],'trivien':['Trí Viễn'],'mh':[r'\{mh\}']}
@@ -27,8 +27,8 @@ for f in FILES:
   rows=chapters(open(f,encoding='utf-8').read())
   for i,c,l in rows:
     if not c:continue
-    for m in re.finditer(r'pt(Move|Kill)\("(\w+)"(?:,"(\w+)")?\)',l):
-      if l.startswith(('const pt','const PT')):continue
+    for m in re.finditer(r'pf(Move|Kill)\("(\w+)"(?:,"(\w+)")?\)',l):
+      if l.startswith(('const pf','const PF')):continue
       moves.append((f,i,c,m.group(1),m.group(2),m.group(3) or 'dead'))
     for m in GIVE.finditer(l):
       seg=l[m.start():];seg=seg[:seg.find('}',seg.find('rt:'))+1] if 'rt:' in seg else seg
