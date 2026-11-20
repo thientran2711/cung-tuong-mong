@@ -1,0 +1,5 @@
+base: dev/art/dong_hientai/s62_t7_DONG_HIENTAI_cloak4.txt
+allow: a FLAT jewelled cloud collar edged with pearls and gold, lying flat ONLY   # owner Lượt 1472 (C #10, DESIGN13): soft vân kiên / soft Hoàng hậu; fur words byte-identical; cloak5
+allow: the cloud collar on the cloak's shoulders   # owner Lượt 1472 (C #10, DESIGN13): soft vân kiên / soft Hoàng hậu; fur words byte-identical; cloak5
+allow: Floor-length robe with slippers visible, no train   # boilerplate trim to fit 10 000 (said earlier in the prompt); cloak5
+allow: lying flat ONLY on the shoulders and upper back   # owner Lượt 1472 (C #10, DESIGN13): soft vân kiên (phrase split of the edited collar clause); cloak5
