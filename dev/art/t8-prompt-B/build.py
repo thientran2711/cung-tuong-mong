@@ -1092,7 +1092,8 @@ CAPE5_TWO="TWO layered embroidered SHORT shoulder capes, one over the other (upp
 CAPE5_V2=("TWO layered embroidered {main} SHORT shoulder capes, one over the other (the upper cape shorter, the lower cape a little longer, both resting on the shoulders), "
           "each cape richly embroidered in gold thread with small peonies, each edged with a row of small sewn-on pearls (exactly the old Quý phi capes) "
           "with a short fringe of tiny pearl drops dangling beneath each cape edge, a little richer than the Tần's pearl fringe and fewer than the Quý phi's drops, "
-          "never covering the neckline")   # owner Lượt 1321 (supersedes 1312/1314/1317)   # SWAP56: Phi now carries the Quý phi's old TWO-layer short capes (pearl edge NOT moved: pearls stay Quý phi)
+          "and over both capes an airy open net of small pearls and small jade beads lying flat (the same kind of beaded pearl net as the Tần's capelet), "
+          "never covering the neckline")   # owner Lượt 1321 + 1329 pearl net (supersedes 1312/1314/1317)   # SWAP56: Phi now carries the Quý phi's old TWO-layer short capes (pearl edge NOT moved: pearls stay Quý phi)
 # LOWV1/LOWV2[cNN][t] = (robe main colour word, hex, lining word, hex), MEASURED (W79, 18/11) from the LIVE v1/v2 pictures
 # img/_review/consort-tiers/<cNN>/b10/<cNN>_a18_t<t>_v<1|2>.png : median RGB of the dominant non-neutral k-means cluster of the central torso/skirt band
 # (alpha>200, gold and near-black hair pixels gated out), lining = next distinct cluster. Foreman ruling: --low v1/v2 never use royal yellow (only the t6 small touch).

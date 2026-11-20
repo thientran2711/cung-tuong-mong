@@ -1,0 +1,10 @@
+total 12410 err/held-err 360 changed 2890 {('4', 'None'): 730, ('4', 'dong'): 705, ('5', 'None'): 730, ('5', 'dong'): 725}
+bad 0 []
+new>10000 0 []
+leftover silk/brocade phrases in t4/t5 Outfit (top):
+1455 long trailing wide sleeves with deep brocade cuffs
+1455 a broad gold brocade girdle with two long jade pendants hanging on silk cords
+1435 an embroidered silk sash with jade belt pendants and tassels
+1435 and her ONE signature piece: a short round embroidered silk capelet (not cloud-shaped
+730 a sheer silk shawl
+725 a soft opaque silk shawl
