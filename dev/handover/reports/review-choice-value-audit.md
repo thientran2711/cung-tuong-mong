@@ -212,3 +212,20 @@ START_CTX ≈ 4 % of 1M (get_session reads 0; estimate) · depth 8 · finished �
 | Fold 755x1000@2 + iPad 1180x820@2 «Bạc lạ» (servant life, card built from PEND.cnvBribe: mkP is rightly blocked by j95b while the mistress is away), looked at 3× | 02e151e3 | three roads, each Tốn + Được (quiet: Tốn «không», Được «trả lại bạc, giữ hòa khí…, được lòng người»); no overflow, 0 page errors; iPad option pictures «Đang thỉnh tranh» (CDN load). Scratch only, nothing uploaded |
 ### VERDICT: LAND READY review/choice-value-audit 02e151e3 (FF of LIVE 2bda29a1; coopBribe delta reviewed)
 LANDER: delete `jbal.js` BAL.rk guard when balance-final lands; balance-final 40775131 conflicts with this branch (D #7 note 16:28Z) — whichever lands second re-merges.
+
+## «choice-value NEXT» FINAL-MERGE (same session, for Foreman D #9, 20/11) — SẴN SÀNG KIỂM ed583173
+Base 02e151e3 (coopBribe reviewer fix). Merges: LIVE 70bea3d3 → 65099734 · 90d57324 → b63da13b · fd682a8d → **ed583173** (pushed, FF of fd682a8d).
+1. **70bea3d3 real conflicts j24 / j25 / j3 / j7 / j71** (npc-purpose restructured the cards this branch revalued): kept LIVE's structure (j24 AP_MK per-kind builders + npcWhy, j25 npcWhy facAsk, rvY / p.y reasons, j7 ghost `go:v?`) and re-applied every branch value; a script listed branch `+` lines not present verbatim → only the 7 hand-merged lines. Meaning change: LIVE repays loans by `npcWhy("repay")`, so the borrow card says «nàng trả lại N lượng khi có bạc» (N = BAL.eff.j24.bacApproaches) and no longer prints chanceW(BAL.rk.loanBack); LIVE's typed `20` in that repay → the BAL key. Now unused: BAL.cv.glance.chance (LIVE dropped the roll), BAL.rk.loanBack (jbal.js guard is dead code — LANDER may delete it with balance-final).
+2. **Law-3 fix 777576f9 — j7 rvquarrel «Mách Hoàng hậu»** (pre-existing card, reached more often by LIVE's rvPair("rvFeud")): «cả hai Sủng -5» showed as HER cost and the card was cost-only when no Hoàng hậu reigns. Now ĐƯỢC «<a> và <b> bị răn, ân sủng mỗi người sút N phần»; numbers → `BAL.cv.quarrel {hh:5,duc:1,sung:5}`. Probe: both quarrellers −5 Sủng, hh 0 without a Hoàng hậu; Fold (with Hoàng hậu) + iPad (without) shots looked at: TỐN Đức −1, ĐƯỢC filled, no overflow, 0 page errors.
+3. **One-core fix ed583173 — j2 `lesson`**: LIVE fd682a8d typed `{suc:-10,bac:-cost}` twice (kgDefer path + fallback) → over this branch's shrunk baseline (4 → 5). Hoisted to one `const pay` (same behaviour). Plain LIVE passes only on its older, larger baseline.
+| gate | sha | result |
+|---|---|---|
+| one-core ×4, odds-cap | 777576f9, b63da13b, ed583173 | PASS |
+| choice-value-scan seeds 7 / 11 / 23 / 31 | 777576f9 | PASS 263 / 256 / 273 / 254 · 0 / 0 / 0 |
+| same, seeds 7 / 11 / 23 / 31 | b63da13b | PASS 270 / 212 / 265 / 256 · 0 / 0 / 0 |
+| seed 7 | ed583173 | PASS 272 |
+| --plant | 65099734 | 3/3 |
+| ptime / ptime2 / receiver-choice.test | 65099734 | ALL OK / ALL OK / ALL PASS |
+| role-parity.test | b63da13b vs plain LIVE 90d57324 | **2 FAIL on both, identical** (7 gaps: P-ONLY cx3:tell; N-ONLY + PROMO harm:accuse / banphe / uyhiep) → LIVE's, not this branch |
+| quickcheck --runs 6 | 777576f9, b63da13b, ed583173 | PASS · old save ok · core gates PASS |
+| coop-e2e | 777576f9, b63da13b | 68/68, 0 page errors |
