@@ -455,3 +455,5 @@ ROOT-68 Lượt 1076: OWNER verbatim (via ROOT-67) "Cung nữ nhà nghèo, nữ 
 - cal-p2: wk #3 JrsgDY7h (session_01Rc5AsJrsgDY7hAuWGR2XNq): PART 1 broken games huong kG / mua cue / banh lag on review/cal-p2b → 'SẴN SÀNG cal-p2b <sha>' → BIG opus rv (brief like briefs/cag29-rv-dauho.md) → LAND READY; PART 3 real-world standing section in reports/cal-p2.md. PART 2 (identity offset = target − rolling per-player b; spec brief cag27-cal-p2 CURRENT METHOD) MOVED to Foreman D (needs BAL.orig.art from mg-fair-ratio on main first).
 - Briefs: cag27-cal-p2 (canon, CURRENT METHOD = OD ~07:35Z + ~07:55Z/~08:00Z), cag28-mg-fair-ratio, cag28-mg-score-same, cag29-rv-dauho / -mg-fair-ratio / -mg-score-same. Reports: cal-p2, mg-fair-ratio, mg-score-same, rv-dauho, rv-mg-fair-ratio.
 - OPEN owner question (D/ROOT-75): share of real-skill gap kept in co-op (ROOT-74 rec 20–30 %), BAL knob default 0. Time-window proposal (mg-score-same report) HOLD (owner ~07:35Z: no retune).
+
+ROOT-68 note: ROOT-67 itself answered the owner as Lượt 1076 (same content; mine not pasted). Next free Lượt 1077.
