@@ -150,7 +150,7 @@ rdDef("tt_co",9,{t:"Tự cầm quân cờ",w:"dad",sj:"phe cánh riêng của ng
  c2:{h:"{v} cũng gây phe",w:"v",need:["v"],if:A=>TT_VHI(A),t:"{v} đang kéo những phi tần thấp phẩm về phía nàng, nói xấu ngươi là “con cờ của Tể tướng”.",o:[
   {n:"Kéo người về phía mình",wx:"có người trong hậu cung",lx:"tốn bạc mà không được",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Hai phi tần thấp phẩm đến thỉnh an ngươi mỗi sáng.",rf:"Họ nhận quà rồi vẫn theo {v}."},
   {n:"Bắt tay với {v}",wx:"bớt một đối thủ",lx:"{v} lợi dụng ngươi",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} nhận lời: “Hậu cung đủ rộng cho hai người.”",rf:"{v} nhận rồi đem chuyện ra cười."},
-  {n:"Mặc kệ",wx:"không tốn gì",lx:"phe {v} lớn dần, lời gièm bám tên ngươi",rt:"Ngươi không đáp lời gièm."}]},
+  {n:"Mặc kệ",wx:"giữ bạc, {v} không lợi dụng được ngươi",lx:"phe {v} lớn dần, lời gièm bám tên ngươi",rt:"Ngươi không đáp lời gièm."}]},
  t1:{h:"Cha biết",w:"dad",t:"{dad} biết ngươi đang gây phe riêng. Ông viết: “Con đi đường con, đừng trách cha không che chở.”",o:[
   {n:"Đáp: con vẫn là con của cha",wx:"cha nguôi",lx:"cha vẫn giận",go:(A,ok,G)=>{e67dad(ok?G[0]:G[1])},rt:"Cha gửi một hộp mứt quê, không kèm thư.",rf:"Cha không hồi âm."},
   {n:"Đáp: con đi đường con",f:"own",wx:"rõ ràng",lx:"mất chỗ dựa ở phủ, môn sinh của cha quay lưng",go:(_A,_ok,G)=>e67dad(G[0]),rt:"Từ đó thư nhà thưa hẳn."},
@@ -212,7 +212,7 @@ rdDef("tt_co",11,{t:"Kết ván cờ",w:"dad",sj:"ván cờ của phủ Tể tư
  c2:{h:"{v} nhắm vào phủ",w:"v",need:["v"],t:"Nhà {v} đã chuẩn bị sẵn một xấp sớ: hễ Tể tướng lui là họ hặc cả phủ.",o:[
   {n:"Chặn trước, nói với Hoàng thượng",wx:"sớ bị gác",lx:"Hoàng thượng chán chuyện bè phái",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Hoàng thượng dặn Ngự sử đài không nhận sớ hặc người đã cáo lão.",rf:"Hoàng thượng phẩy tay."},
   {n:"Gặp {v} dàn xếp",wx:"hai nhà tạm yên",lx:"{v} nắm thóp",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} nhận lời, cất sớ đi.",rf:"{v} nhận bạc rồi vẫn để nhà nàng dâng sớ."},
-  {n:"Để mặc",wx:"không tốn gì",lx:"phủ hứng sớ, tiếng nhà ngươi sứt mẻ",rt:"Ngươi không làm gì."}]},
+  {n:"Để mặc",wx:"không dính bè phái trước mặt Hoàng thượng, {v} không nắm thóp",lx:"phủ hứng sớ, tiếng nhà ngươi sứt mẻ",rt:"Ngươi không làm gì."}]},
  t1:{h:"Lời cuối của cha",w:"dad",t:"{dad} hỏi: “Cả đời cha dạy con đánh cờ. Giờ con muốn làm quân cờ, làm người đánh cờ, hay bỏ bàn cờ?”",o:[
   {n:"Làm người đánh cờ",f:"own",wx:"cha hiểu",lx:"gánh nặng trên vai, tiếng hiền mỏng đi",rt:"Cha gật đầu chậm rãi."},
   {n:"Làm con của cha",f:"obey",wx:"cha cười",lx:"vẫn trong ván cờ của ông, mưu tính phải theo cha",rt:"Cha đặt tay lên đầu ngươi như thuở nhỏ."},
@@ -266,7 +266,7 @@ rdDef("tt_oan",6,{t:"Nhân chứng ngân khố",w:"dad",sj:"người giữ kho b
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Triệu chịu gặp",w:"maid",if:RDW(1),t:"Có lời khai của tên thư lại, Triệu biết mình bị lộ. Hắn nhắn: muốn nói, nhưng phải có người che chở vợ con hắn.",o:[
   {n:"Đưa vợ con hắn về trang trại nhà ngươi",wx:"Triệu tin ngươi",lx:"tốn bạc, nhà ngươi gánh thêm rủi ro",rt:"Vợ con Triệu lên xe ngựa trong đêm."},
-  {n:"Hứa suông cho yên lòng",wx:"không tốn gì",lx:"hắn biết ngươi chỉ hứa",rt:"Triệu tạm tin.",rf:"Triệu bảo: lời hứa không che được ai."},
+  {n:"Hứa suông cho yên lòng",wx:"Triệu tạm im, nhà ngươi khỏi gánh rủi ro",lx:"hắn biết ngươi chỉ hứa",rt:"Triệu tạm tin.",rf:"Triệu bảo: lời hứa không che được ai."},
   {n:"Nhờ cha lo",f:"obey",wx:"phủ có người canh",lx:"phủ đang bị dòm, người ta nói nhà Tể tướng giấu nhân chứng",rt:"Cha cho gia đinh canh nhà Triệu."}]},
  s2:{h:"Triệu trốn tránh",w:"maid",if:RDW(0),t:"Manh mối dẫn đến Triệu, nhưng hắn đóng cửa không tiếp ai, nói mình bệnh.",o:[
   {n:"Gửi thái y đến xem bệnh",wx:"có cớ gặp hắn",lx:"lộ ý",rt:"Thái y mang về một lời nhắn của Triệu.",rf:"Triệu đuổi thái y về."},

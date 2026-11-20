@@ -425,22 +425,22 @@ PEND.j70def=pp=>{if(!S)return null;const L=ords70();const cur=L.length?`<p>Lện
  const free=[S.maid?"maid":null].concat((S.staff||[]).map(s=>s.sid)).filter(x=>x!=null&&!ordOf70(x)&&sv70(x));
  if(pp.s===1){const o=[];for(const k in ORD70){const O=ORD70[k];if(!free.length)break;const c=ch70(`Giao việc: ${O.n.toLowerCase()}`,{wt:[G70((k==="canh"?"giữ được cung: ":"")+O.d)],k:[R70(`mỗi tháng${O.bac?` Bạc -${O.bac}`:""}${O.lo?`, lòng kẻ hầu ${O.lo}`:""}${!O.bac&&!O.lo?" không tốn bạc":""}`),R70("kẻ hầu ấy bận, không sai đi việc khác được")]});c.go=()=>{Q.unshift(def70m({s:2,o:k}));};o.push(c)}
   for(const x of L.slice(0,3)){const c=ch70(`Bãi lệnh: ${ordLine70(x)}`,{wt:[G70(`${svN70(x.sid)} rảnh tay${ORD70[x.k].bac?`, đỡ ${ORD70[x.k].bac} lượng mỗi tháng`:""}`)],k:[R70(`mất tác dụng ${ORD70[x.k].n.toLowerCase()}`)],ok:()=>{L.splice(L.indexOf(x),1);return `Ngươi bãi lệnh ${ORD70[x.k].n.toLowerCase()} của ${svN70(x.sid)}.`}});o.push(c)}
-  o.push(ch70("Giữ nguyên",{wt:[G70("không tốn gì thêm")],k:[R70("phòng bị như cũ")],ok:()=>"Ngươi giữ nguyên các lệnh."}));
+  o.push(ch70("Giữ nguyên",{wt:[G70("kẻ hầu yên việc cũ, không thêm bạc mỗi tháng")],k:[R70("phòng bị như cũ")],ok:()=>"Ngươi giữ nguyên các lệnh."}));
   return{t:cur+`<p class="past">Mỗi kẻ hầu nhận một việc. Kẻ đã bị người khác mua chuộc thì giữ việc cũng như không, lại đem chuyện kể với chủ của hắn.${free.length?"":" Không còn kẻ hầu nào rảnh."}</p>`,o,who:S.maid?pMaid():null}}
  if(pp.s===2){const O=ORD70[pp.o];if(!O)return null;const o=free.slice(0,5).map(sid=>{const s=sv70(sid);const pw=pp.o==="canh"?cl(Math.round(4+(s.loyal||0)/10),4,14):null;
    const c=ch70(`${s.name} (lòng ${s.loyal||0})`,{wt:[G70(pw!=null?`giữ được cung: dễ bắt kẻ hại hơn +${pw}`:O.d)],k:[R70(`${s.name} bận việc này`)].concat(O.bac?[R70(`Bạc -${O.bac} mỗi tháng`)]:[]).concat((s.loyal||0)<BAL.loy.low?[R70("lòng thấp: dễ bị mua chuộc")]:[])});
    c.go=()=>{if(O.tgt){Q.unshift(def70m({s:3,o:pp.o,sid}));return}L.push({k:pp.o,sid,since:wk()});log(`Ngươi giao cho ${s.name} việc ${O.n.toLowerCase()}.`)};return c});
-  o.push(ch70("Thôi",{wt:[G70("không tốn gì")],k:[R70("chưa có thêm phòng bị")],ok:()=>"Ngươi gác lại."}));return{t:`<p>Giao cho ai việc <b>${O.n.toLowerCase()}</b>?</p><p class="past">${O.d}.</p>`,o,who:S.maid?pMaid():null}}
+  o.push(ch70("Thôi",{wt:[G70("kẻ hầu còn rảnh tay, không thêm bạc mỗi tháng")],k:[R70("chưa có thêm phòng bị")],ok:()=>"Ngươi gác lại."}));return{t:`<p>Giao cho ai việc <b>${O.n.toLowerCase()}</b>?</p><p class="past">${O.d}.</p>`,o,who:S.maid?pMaid():null}}
  if(pp.s===4){const s=sv70(pp.sid);if(!s)return null;const cur=ordOf70(pp.sid);const o=[];
   for(const k in ORD70){const O=ORD70[k];if(cur&&cur.k===k&&!O.tgt)continue;const pw=k==="canh"?cl(Math.round(4+(s.loyal||0)/10),4,14):null;
    const c=ch70(`${O.n}`,{wt:[G70(pw!=null?`dễ bắt kẻ hại hơn +${pw}; ${O.d}`:O.d)],k:[R70(`${s.name} bận việc này`)].concat(O.bac?[R70(`Bạc -${O.bac} mỗi tháng`)]:[]).concat(O.lo?[R70(`lòng ${s.name} ${O.lo} mỗi tháng`)]:[]).concat((s.loyal||0)<BAL.loy.low?[R70("lòng thấp: dễ bị mua chuộc")]:[])});
    c.go=()=>{if(cur)L.splice(L.indexOf(cur),1);if(O.tgt){Q.unshift(def70m({s:3,o:k,sid:pp.sid}));return}L.push({k,sid:pp.sid,since:wk()});log(`Ngươi giao cho ${s.name} việc ${O.n.toLowerCase()}.`)};o.push(c)}
   if(cur)o.push(ch70(`Bãi lệnh ${ORD70[cur.k].n.toLowerCase()}`,{wt:[G70(`${s.name} rảnh tay${ORD70[cur.k].bac?`, đỡ ${ORD70[cur.k].bac} lượng mỗi tháng`:""}`)],k:[R70("mất phòng bị này")],ok:()=>{L.splice(L.indexOf(cur),1);return `Ngươi bãi lệnh của ${s.name}.`}}));
-  o.push(ch70("Thôi",{wt:[G70("không tốn gì")],k:[R70("giữ như cũ")],ok:()=>"Ngươi giữ như cũ."}));
+  o.push(ch70("Thôi",{wt:[G70(`${s.name} vẫn làm việc cũ, không thêm bạc mỗi tháng`)],k:[R70("chưa đổi phòng bị")],ok:()=>"Ngươi giữ như cũ."}));
   return{t:`<p>Giao cho <b>${s.name}</b> (lòng ${s.loyal||0}) việc phòng bị nào?${cur?` Hiện đang: ${ORD70[cur.k].n.toLowerCase()}.`:""}</p><p class="past">Mỗi kẻ hầu một việc; kẻ đang giữ việc không sai đi việc khác được. Kẻ đã bị người khác mua chuộc thì giữ việc cũng như không.</p>`,o,who:pp.sid==="maid"?pMaid():(()=>{try{return pServ(s)}catch(e){return null}})()}}
  if(pp.s===3){const s=sv70(pp.sid);if(!s)return null;const T=liveRivals(true).filter(v=>!v.confined||true).slice().sort((a,b)=>danger(b,S)-danger(a,S)).slice(0,5);
   const o=T.map(v=>{const c=ch70(`Theo dõi ${title70(v)}`,{wt:[G70(`thấy mưu của nàng sớm hơn nhiều; mỗi tháng có thể thêm chứng cứ`)],k:[R70("Bạc -10 mỗi tháng"),R70(`nếu bị bắt gặp, ${v.name} oán ngươi`)]});c.go=()=>{L.push({k:"theodoi",sid:pp.sid,tgt:v.id,since:wk()});log(`Ngươi sai ${s.name} theo dõi ${title70(v)}.`)};return c});
-  o.push(ch70("Thôi",{wt:[G70("không tốn gì")],k:[R70("chưa theo dõi ai")],ok:()=>"Ngươi gác lại."}));return{t:`<p>${s.name} sẽ theo dõi ai?</p>`,o,who:(()=>{try{return pServ(s)}catch(e){return null}})()}}
+  o.push(ch70("Thôi",{wt:[G70("giữ bạc mỗi tháng, không ai oán vì bị theo dõi")],k:[R70("chưa theo dõi ai")],ok:()=>"Ngươi gác lại."}));return{t:`<p>${s.name} sẽ theo dõi ai?</p>`,o,who:(()=>{try{return pServ(s)}catch(e){return null}})()}}
  return null};
 /* ---------- every warning carries concrete answers ---------- */
 function thrOpts70(v){const o=[];const mat=eyes(S);
@@ -452,7 +452,7 @@ function thrOpts70(v){const o=[];const mat=eyes(S);
  if(al)o.push(ch70(`Nhờ ${title70(al)} để ý giúp`,{wt:[G70(`6 tuần: người của ${al.name} báo khi thấy mưu nhắm vào ngươi`)],k:[R70(`${al.name} thiện cảm ${balSg(BAL.eff.j70.ok_3)} (ngươi mắc nợ ân)`)],ok:()=>{j70().allyW={id:al.id,until:wk()+6};relAdd(S,al,BAL.eff.j70.ok_3);return `${al.name} hứa để mắt giúp ngươi.`}}));
  o.push(ch70(`Tránh mặt ${v.name}`,{c:{danh:-1},wt:[G70("6 tuần không ở chung chỗ: mưu tay đôi của nàng khó thành")],k:[R70("người ta bảo ngươi nhút nhát")],ok:()=>{const z=j70();z.avoid=z.avoid||{};z.avoid[v.id]=wk()+6;return `Ngươi tránh những chỗ ${v.name} hay lui tới.`}}));
  if(ACT.frame&&!(typeof sameHouse==="function"&&sameHouse(S,v)))o.push(Object.assign(ch70("Ra tay trước",{wt:[G70("mở mưu kế nhắm vào nàng (chọn cách ở bước sau)")],k:[R70("lộ thì nàng nắm chứng cứ về ngươi")]}),{go:()=>{Q.unshift(start70(v,"frame"))}}));
- o.push(ch70("Để sau",{wt:[G70("không tốn gì")],k:[R70("nàng vẫn rình rập")],ok:()=>"Ngươi tạm gác."}));return o}
+ o.push(ch70("Để sau",{wt:[G70("giữ yên mọi bề, không đắc tội thêm ai")],k:[R70("nàng vẫn rình rập")],ok:()=>"Ngươi tạm gác."}));return o}
 PEND.j70thr=pp=>{const v=RV(pp.v);if(!v||!S)return null;const b=bandOf(danger(v,S));const mo=motNow70(v);
  return{t:(pp.h||"")+`<p class="past">${title70(v)}: ${mo.t}; mức nguy hiểm với ngươi: ${BANDS[b][1]}. Chứng cứ ngươi có về nàng: ${evG(S,v)} (cần ${accNeed(v)} để tố giác).</p>`,o:thrOpts70(v),who:pp.m?pMaid():pv(v)}};
 /* avoiding her: tay-đôi acts need her near; plots from her are harder for those weeks */
@@ -539,7 +539,7 @@ PEND.j70scar=pp=>{const s=S&&S.scar;if(!s)return null;const sc=scarOf(S);const o
  if(!s.cure&&s.sev>=2)o.push(ch70("Mua Ngọc dung cao",{c:{bac:-120},wt:[G70("lành không để sẹo")],k:[R70("giá rất đắt")],ok:()=>{s.cure=1;return "Ngươi có được hộp Ngọc dung cao, vết thương sẽ lành không sẹo."}}));
  if(!s.cure&&s.sev>=2&&!S.thDead)o.push(ch70("Xin Thái hậu ban Tuyết liên",{p:oddsCl(20+(S.th||0)/2),wt:[G70("lành không để sẹo")],lt:[R70(`Thái hậu với ngươi ${balSg(BAL.eff.j70.thLotus)}`)],ok:()=>{s.cure=1;return "Thái hậu thương tình, ban cho một đóa Tuyết liên."},no:()=>{apply({th:BAL.eff.j70.thLotus});return "Thái hậu bảo Tuyết liên để dành cho việc lớn."}}));
  o.push(ch70(s.veil?"Bỏ mạng che mặt":"Che mạng khi ra ngoài",{wt:[G70(s.veil?"không còn vướng víu":`người ta ít thấy vết thương, phần Sắc mất còn ${Math.round(s.d*2/3)}`)],k:[R70(s.veil?`Sắc mất trở lại ${s.d}`:"Hoàng thượng thấy lạ, ít hứng thú hơn lúc không che")],ok:()=>{s.veil=s.veil?0:1;return s.veil?"Ngươi đeo mạng che mặt.":"Ngươi bỏ mạng che mặt."}}));
- o.push(ch70("Để tự lành",{wt:[G70("không tốn gì")],k:[R70(`còn ${sc.weeksLeft} tuần${SCAR70[s.sev].perm&&!s.cure?`, sẽ để lại sẹo (Sắc -${SCAR70[s.sev].perm})`:""}`)],ok:()=>"Ngươi để vết thương tự lành."}));
+ o.push(ch70("Để tự lành",{wt:[G70("giữ bạc trong rương, khỏi uống thuốc đắng hao sức")],k:[R70(`còn ${sc.weeksLeft} tuần${SCAR70[s.sev].perm&&!s.cure?`, sẽ để lại sẹo (Sắc -${SCAR70[s.sev].perm})`:""}`)],ok:()=>"Ngươi để vết thương tự lành."}));
  return{t:`<p>Mặt ngươi bị thương (${sc.name}): Sắc đang mất ${sc.sacLost}; còn ${sc.weeksLeft} tuần nữa mới lành.${SCAR70[s.sev].perm&&!s.cure?` Không có thuốc quý thì sẽ để lại sẹo (Sắc -${SCAR70[s.sev].perm}).`:""}</p>`,o}};
 /* the chip on person cards (kit chip) */
 (function(){const p0=pcard;pcard=function(o){try{if(S&&o&&o.name){const p=o.name===S.name?S:rivals.find(v=>v.name===o.name);const sc=p&&scarOf(p);if(sc&&(p===S||knows(p)))o=Object.assign({},o,{chips:(o.chips||[]).concat([chip(sc.chip,"hot")])})}}catch(e){}return p0.call(this,o)}})();
