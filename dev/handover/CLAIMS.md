@@ -492,3 +492,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN ROOT-81 | handover | ROOT-80 | session_01Rc5AsMW4846eL7xhTpzvjQ | RUNNING | 20/11 19:45Z |
 | kit-e-rows KIT KEEPER (sonnet; ROOT-80 order) | review/kit-e-rows; reports/kit-e-rows.md | MAIN ROOT-81 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM dd2e0fe1 | 20/11 |
 | names-unique-r3 (opus; role-parity maid accuse regression of names-unique-r2-r1 on LIVE 983a9436) | review/names-unique-r3 | B | session_01N1tNP4XVawZpybqzbWQyUT | RUNNING | 20/11 19:47Z |
+| coop-week-stall (opus; pre-existing LIVE: late room snapshot rolls seat back, week end not sent ~1/8–14 coop-e2e) | review/coop-week-stall | B | session_01N1tNP6if7E7NXcFKwJ6yR5 | RUNNING | 20/11 19:48Z |
