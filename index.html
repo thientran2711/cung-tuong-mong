@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"8d71fed7+","t":"2026-11-20T11:08Z","c":"rv names-unique r1: last literal person name — court Nội vụ phủ eunuch 'Tiểu Ngân Tử' (j10) now nmNew('eun'); it clashed with staff eunuchs…","b":"a7609093dd8a","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
+window.CTM_BI={"s":"c41d1c2c+","t":"2026-11-20T16:05Z","c":"rv names-unique r1: last literal person name — court Nội vụ phủ eunuch 'Tiểu Ngân Tử' (j10) now nmNew('eun'); it clashed with staff eunuchs…","b":"36429dc6077d","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3700,7 +3700,11 @@ let sidN=0;
 function capOf(p){const B=BAL.promo,C=B.cap;if(S&&p&&p===S.thO)return B.capTh.slice();if(p===S&&typeof isSrv==="function"&&isSrv())return C[0].map(()=>0);
  if(p===S&&S.succ&&S.succ.p==="c"&&B.capNd)return B.capNd.slice();
  return C[p&&p.out?0:Math.max(0,Math.min(C.length-1,rkOf(p)||0))].slice()}
-function hhHas(p){const L=(p&&p.staff)||[];return[L.filter(s=>s.role==="maid").length+1,L.filter(s=>s.role==="eunuch").length]}
+/* coop-staff-split: a co-op PLAYER serving as cung nữ is her coop entry in her mistress's staff on the OTHER seat only (on her own seat she is S),
+   and only while the world loops do not run (jcoopworld withoutFriend pulls her out); she is never one of the household's allotted servants
+   (as in solo, where the cung-nữ player is not in m.staff). Counted, she made the host trim a real servant at her arrival (that person
+   vanished) and every month the fill (her pulled) and the trim (her back) made and dropped one more — on the host only, so the two seats split. */
+function hhHas(p){const L=((p&&p.staff)||[]).filter(s=>s&&!s.coop);return[L.filter(s=>s.role==="maid").length+1,L.filter(s=>s.role==="eunuch").length]}
 function mkServ(role){const n=role==="maid"?(AV.maids||[]).length:0;
  const sa=servAge(role);return{fc:drawF(role==="maid"?"maid":"eunuch",sa.age),fk:bandKeys(role==="maid"?"maid":"eunuch",sa.age)[0],sid:++sidN,name:nmNew(role==="maid"?"maid":"eun"),role,face:allServ().filter(x=>x.role===role).length,hue:0,...sa,loyal:BAL.srvLoyal.base+R(BAL.srvLoyal.r),spyFor:null,lover:null,af:{}}}
 function allServ(){const L=[];for(const p of [S].concat(rivals))if(p&&p.staff)L.push(...p.staff);return L}
@@ -85118,7 +85122,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a7609093dd8a";window.CTM_BUILD=BUILD;
+const BUILD="36429dc6077d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
