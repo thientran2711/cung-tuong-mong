@@ -232,3 +232,4 @@ ROOT-64 Lượt 945 ~02:33Z: OWNER verbatim "Chuyên gia khuyến nghị sửa m
 ROOT-64 Lượt 946 ~02:34Z: OWNER verbatim "Nhớ là thu và đông không có nghĩa là màu đậm hơn đâu nha" → P3 told: seasons differ by hue/character, same depth across 4 seasons. Next Lượt 947.
 
 ROOT-64 Lượt 947–949 ~02:35Z: owner asked seals status (947) + "Đọc tin của chat chính về ấn chưa" (948: summarised MAIN 02:05Z feeling-seal tone-down; SEAL7 sample 810/405 waiting go). F3 ran s43+s45 on my GO before the HOLD arrived (276 cr, 1 try each); sheet quyenru_s43_45_F3.jpg LOOKED + sent Lượt 949. s44 waits P3 sec. Next Lượt 950.
+ROOT-64 Lượt 950 ~02:40Z: OWNER verbatim "Quyến rũ ok" on quyenru_s43_45_F3.jpg → s43 s45 new Quyến rũ faces OK; F3 switches FACE_CUTS/crops. s44 waits P3 sec. Next Lượt 951.
