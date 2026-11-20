@@ -471,6 +471,31 @@ VH_DONG_REC = ("Vĩnh Hòa cung Đông phối điện reception room, the small 
     + NOPE + P['NOSOFA'] + RECT + GUIDE_S + FR)
 OUT['vinh-hoa-cung-dong-phoi'] = dict(prompt=room9(VH_DONG_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3])
 
+# ---- PR17: owner L22 + ROOT-61 01:12Z verbatim "Mẫu D và E ok, thay đổi qua lại": the two-bed LAYOUT TEMPLATES are D = room 3 Cảnh Phúc
+#      đông bedroom Lw8MjWZswO (beds against the LEFT and RIGHT side walls, 3-wall, windows right) and E = room 5 Cảnh Phúc tây bedroom
+#      u5WZqYHQLD (two alcove beds in a back-wall partition, 3-wall, windows left); every NEW two-bed room alternates D, E, D, E …; image 3 =
+#      the template picture itself; palace card + colours stay per palace. TPL_D / TPL_E replace GUIDE_S in those rooms.
+TPL_D = (" Image 3 is the owner's LAYOUT TEMPLATE for every two-bed room (owner L22): copy its wall layout, camera distance, floor amount, "
+    "people scale AND its bed placement: one bed against the LEFT side wall and one against the RIGHT side wall, each square to its wall with its "
+    "long side along the wall, the middle of the back wall between them; NOT its colours, carvings, flowers or small objects: this room keeps its "
+    "own palace style and colours as written here.")
+TD, TE = 'Lw8MjWZswO', 'u5WZqYHQLD'
+# 23) Vĩnh Hòa ĐÔNG phối bedroom — template D; pair ĐĐ (same hall as room 24): whole room cream-ivory #EAE3D0. THREE walls, windows RIGHT
+#     (as template D). Centre of the back wall = the Vĩnh Hòa gourd doorway in a lozenge lattice with a shared dressing table + two stools
+#     before it (template D: moon gate + dressing table). + CARD_VH + BEDH4 + BEDW (owner L815/L823 bed size; room 3 was 'bed too small') + FG.
+VH_DONG_NGU = ("Vĩnh Hòa cung Đông phối điện bedroom, the cosy bedchamber SHARED by two lower-ranking imperial consorts (two Đáp ứng) living in "
+    "the east side hall of a palace in ancient China, a real room in daily use, " + W3R + ": wooden pillars, lattice windows in the RIGHT side "
+    "wall onto a sunny garden; TWO tall, WIDE, generous free-standing canopy frame beds of carved reddish-brown jichimu wood, together the large "
+    "clear main subject, one standing against the LEFT side wall and one against the RIGHT side wall, each square to its wall with its long side "
+    "along the wall and its bed step with slippers facing the middle of the room, each bed whole inside the picture; in the middle of the back "
+    "wall, seen straight on, a lattice partition of overlapping lozenges with the gourd-shaped doorway and, in front of it, a shared dressing "
+    "table with a bronze mirror and two stools; beside each bed a small clothes rack with a robe; hanging paper lanterns with tassels, pots of "
+    "camellias, a small embroidery basket. " + CARD_VH + pair1('cream-ivory', '#EAE3D0') + "the gauze curtains of BOTH beds, the window "
+    "curtains, the curtain of the doorway, the lantern tassels, the bedding and cushions of BOTH beds and the stool cushions, set off by the "
+    "reddish-brown wood; the two beds look alike. " + QN + " Exactly two beds; the only rank colour is cream-ivory." + NOPE + RECT + TPL_D
+    + BEDH4 + BEDW + FG)
+OUT['vinh-hoa-cung-dong-phoi-ngu'] = dict(prompt=room9(VH_DONG_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, TD])
+
 # GATE (as v9): common block present, method refs, no drift words, no phoenix/yellow below t7.
 for k, v in OUT.items():
     p = v['prompt']
