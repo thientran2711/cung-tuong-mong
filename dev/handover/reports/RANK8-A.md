@@ -33,3 +33,31 @@ build t1–t8 → check_store PASS ×8 → ledger --log → 8 gens → look full
 
 ## Handover
 Not needed (context ≈ low). Waiting for ROOT-68.
+
+## 5. DRAWN (owner GO via ROOT-68) — 8 gens × 135 cr = 1 080 cr
+Builder rows by RANK8-C (c51c37e / fbb5797). Prompts = `python3 dev/art/store-all/build_all.py s62 N` (a18) → dev/art/rank8-s62/s62_tN.txt, verbatim, no diff (A17: none).
+Gate: `check_store.py dev/art/rank8-s62/s62_tN.txt s62 --low N|--t7|(t8) v0 --spec5pose` → STORE CHECK PASS + approved_check PASS ×8; build_all --check no s62 error.
+Gen: gpt-2-6 1024x2304 2k seed 7172, no transparentBackground; refs t1–t5 = her face cut nVsrRMPYQD; t6–t8 + royal-yellow swatch TdwDfOyVNR. Ledger: 8 RANK8 lines.
+| t | rank | gen | item |
+|---|---|---|---|
+| 1 | Đáp ứng | mEZiZ8ShJQ | folded flower-paper letter |
+| 2 | Thường tại | 9ZHuqIGNYZ | embroidered sachet |
+| 3 | Quý nhân | vQARGIUa47 | tú cầu with bells |
+| 4 | Tần | SyhIap2Ub8 | silver-mounted book box |
+| 5 | Phi | xSBe8KVjfW | pipa |
+| 6 | Quý phi | 1ldDonjr4r | pearl-tasselled lantern |
+| 7 | Hoàng quý phi | nVsxSZNYQD | jade flute (no pet) |
+| 8 | Hoàng hậu | KLpVBAXkqp | gold phoenix hairpin |
+Sheet (A27 labels big on image): dev/handover/review-sheets/rank8-s62/s62_t1-t8_sheet.webp · singles s62_tN_a18.webp (opaque bg, no remove_bg).
+Credits: 83 922 before → 81 222 after (pool shared with RANK8-B/C running at the same time; mine = 1 080).
+
+## 6. Looked (full sheet + face crops) — notes only, NO redraw
+- All 8: face same girl, eyes straight, mouth closed, no teeth, no earrings, no forehead mark, one item each, ice blue + mint mist clear, ranks rise in luxury. No fruit, no pet.
+- t1/t2 hairpin pearl dangles hang near the ear — read as hairpin, not earrings, but close.
+- t3 square neckline came out soft; apron panel + jade pendants ok.
+- t4 capelet + pearl net ok; the book box is purple (contrast ok).
+- t5 cloud collar has two embroidered birds (motif, not a pet).
+- t6 hair flower is a blue peony (close to robe colour; F13 size ok). Yellow sash/panel visible.
+- t7 yellow areas larger than t6, crown phoenix ok, no flower. Frontal.
+- t8 yellow dominant, nine-phoenix crown; item hairpin held at chest.
+- "Place" label = "Hậu cung" (no per-rank palace name in the builder) — tell me if a palace name per rank is wanted.
