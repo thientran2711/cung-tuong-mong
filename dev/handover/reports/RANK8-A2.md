@@ -20,3 +20,10 @@ Looked full size (honest): both = open square neckline, neck + collarbones visib
 ## OPEN
 - Owner verdict on t5/t6 covuong3 sheet. If OK → builder t5/t6 neckline change (not done; builder untouched).
 - Context at end ≈ 9 % (well under roll line). No handover needed.
+
+## JOB 3 — G1 t6 Quý phi TWO-layer short shoulder capes (ROOT-69, owner) — builder, 0 cr
+- build.py low_outfit: for t==6, "an embroidered {main} pearl-edged cape/stole over the shoulders" → "TWO layered embroidered {main} SHORT shoulder capes, one over the other (the upper cape shorter, the lower cape a little longer, both resting on the shoulders, pearl-edged), never covering the neckline". Applies to every t6 built through low_outfit that carries that phrase (s/m/p/maids, and c rows such as c06).
+- Gate STORE CHECK PASS s62/m29 t6 (dev/art/rank8-s62/g1cape/). Lengths a18 s62 9 499, m29 9 050; a26/a36 < 10 000 (c06 a36 9 944). a51/a65 t6 FAIL LEN ~11 259 — PRE-EXISTING (was ~11 120 before), not caused by this change.
+- G1 owner verbatim NOT yet written into ART_RULES.md (edit errored) — to do.
+- s64 t6 test A prompt dev/art/rank8-s62/g1cape/s64_t6_test.txt (gate tp6 PASS, 9 867 chars); gen 1ldpG7Kr4r STARTED (135 cr), NOT yet looked at / no sheet. Version B (lower neckline) NOT started.
+- PAUSED: the user declined the wait call and said stop; waiting for instructions.

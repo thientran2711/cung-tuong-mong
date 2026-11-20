@@ -1069,7 +1069,13 @@ def low_outfit(c,t,v="v0"):
     else:
         o=OUTFIT_JOBS[f"{c}-t{t}"]
         if t==6 and "; more luxury than the rank below" not in o: o=o.replace("; COLOUR RULE:",YEL_T6,1)
+    if t==6: o=_re_cape6.sub(CAPE6_TWO,o,1)   # G1 (owner 20/11): Quý phi = TWO layered short shoulder capes
     return o
+# G1 (owner 20/11, verbatim: "Coi thử cái prompt của Quý Phi á, là cái áo choàng á, là áo choàng một lớp hay hai lớp? Tôi nhớ là tôi đã bắt buộc là phải là áo choàng hai lớp mà. Cái áo choàng ngắn trên vai á."):
+# the LAD3 one-layer "pearl-edged cape/stole" becomes TWO layered SHORT shoulder capes (Phi has one cloud collar).
+import re as _re6
+_re_cape6=_re6.compile(r"an embroidered ([^,]+?) pearl-edged cape/stole over the shoulders")
+CAPE6_TWO=r"TWO layered embroidered \1 SHORT shoulder capes, one over the other (the upper cape shorter, the lower cape a little longer, both resting on the shoulders, pearl-edged), never covering the neckline"
 # LOWV1/LOWV2[cNN][t] = (robe main colour word, hex, lining word, hex), MEASURED (W79, 18/11) from the LIVE v1/v2 pictures
 # img/_review/consort-tiers/<cNN>/b10/<cNN>_a18_t<t>_v<1|2>.png : median RGB of the dominant non-neutral k-means cluster of the central torso/skirt band
 # (alpha>200, gold and near-black hair pixels gated out), lining = next distinct cluster. Foreman ruling: --low v1/v2 never use royal yellow (only the t6 small touch).
