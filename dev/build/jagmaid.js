@@ -67,7 +67,7 @@ function amCh(m){const C=amD().ch,st=amSt(m);return cl(Math.round(amSung(m)/C.su
 function amFind(k){if(k==="me")return isSrv()?{m:S,o:srvM()}:null;if(k&&k[0]==="s"){const s=servById(+k.slice(1));return s&&s.role==="maid"?{m:s,o:ownerOf(s)}:null}return null}
 /* ---------- 4 a maid's night ---------- */
 function amNightGain(m){const st=amSt(m);const q=Math.round(st.sac/20+R(4)-1);amAdd(m,amD().night.b+Math.max(0,Math.round(q/2)))}
-function amName(m){try{const used=namesInUse();const sur=nmSurOf(freshName());const n=sur+" "+m.name;if(used.includes(n)||nmBad(n))return freshName();try{if(nmOwner()){const R0=nmReg();if(R0)R0[n]="f"}}catch(e){}return n}catch(e){return m.name}}/* one name core: maid's own name + a fresh surname, registered */
+function amName(m){try{const used=namesInUse();const sur=nmSurOf(freshName());const n=sur+" "+m.name;if(used.includes(n)||nmTaken().full.has(n)||nmBad(n))return freshName();try{if(nmOwner()){const R0=nmReg();if(R0)R0[n]="f"}}catch(e){}return n}catch(e){return m.name}}/* one name core: maid's own name + a fresh surname, registered */
 /* ROLE PARITY (OD 18/11 ~21:30Z, law 1 + law 4): ONE promotion rule for a maid raised to consort — the player (j42 srvRise) and an NPC maid
    (amRise; j14 eye path) — so a promoted maid starts EXACTLY like a born Đáp ứng with the same gains: n = the new consort record (S for her),
    m = the maid she was (S for her), o = her old master, loy0 = her loyalty measure if the caller read it before the change (hers = Chủ tin, an NPC's = lòng).

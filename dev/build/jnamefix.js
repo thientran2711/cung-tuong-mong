@@ -3,7 +3,7 @@
      - an excluded (Vietnamese-style) name or a name someone else already holds (living or dead, the player first) is renamed with nmNew;
        the player's own name is NEVER changed (an NPC who collides with her is renamed instead); her own family keeps her surname;
      - when the old name belonged to that one person only, every text of the save that names her (ledger, notes, relations, roads,
-       letters…) is rewritten to the new name; a shared old name stays with the person who keeps it (texts cannot tell them apart);
+       letters…) is rewritten to the new name; a shared old name stays with the person who keeps it (texts cannot tell them apart); when no one keeps it, its texts go to the first holder renamed;
      - every name now held is written to the registry S.nmReg (so a name is never given again, even after its holder dies).
    Runs after a save loads (the one-time migration, then a no-op), after start(), and at every month end (safety net for any place
    that might still make a name by itself). Co-op: only the world owner (host or solo) sweeps; a guest keeps the host's names. */
@@ -34,14 +34,18 @@ function nmFix(why){if(typeof S==="undefined"||!S||!nmOwner())return null;const 
   /* the storyline people kept as plain text (j4 S.st.guard / S.st.stu) and the fallen consort's name (j59 S.lcfPn) */
   const txt=[];try{if(S.st){if(S.st.guard)txt.push([S.st,"guard","m"]);if(S.st.stu)txt.push([S.st,"stu","m"])}if(S.lcfPn)txt.push([S,"lcfPn","f",{sur:"Tần"}])}catch(e){}
   for(const [o,f,kind,op] of txt){const b=nmBare(o[f]);const bad=nmBad(b)||(full.has(b)?"dup":"");if(bad)todo.push([{o,f,kind,txt:1,op},bad]);else full.add(b)}
-  const names=L.map(e=>String(e.o[e.f]));
+  const names=L.map(e=>String(e.o[e.f]));const shared=new Map();
   for(const [e,bad] of todo){const raw=String(e.o[e.f]);const b=nmBare(raw);const pre=raw.slice(0,raw.length-b.length);
    const keepSur=e.fam&&nmSurOf(b)&&!NM_BAN_SUR.includes(nmSurOf(b))?nmSurOf(b):e.fam&&meSur&&!NM_BAN_SUR.includes(meSur)&&e.kind!=="mo"?meSur:null;
    let nb=e.kind==="prince"||e.kind==="princess"?nmNew(e.kind):nmNew(e.kind,e.op||(keepSur?{sur:keepSur}:{}));
    e.o[e.f]=pre+nb;if(e.f==="pn"&&e.o.name===b)e.o.name=nb;
    if(e.o.eid&&typeof e.o.call==="string"){const oc=e.o.call;e.o.call=nmSurOf(nb)+" "+oc.split(" ").slice(-2).join(" ");if(held.get(b)===1&&oc!==e.o.call&&nmSurOf(b)!==nmSurOf(nb))nmRewrite(oc,e.o.call,names)}
-   let refs=0;if(bad!=="dup"&&held.get(b)===1)refs=nmRewrite(b,nb,names);
-   out.push({old:raw,neu:pre+nb,why:bad,kind:e.kind,refs})}
+   let refs=0;if(bad!=="dup"&&held.get(b)===1)refs=nmRewrite(b,nb,names);else if(bad!=="dup"&&!shared.has(b))shared.set(b,{nb,x:null});
+   const x={old:raw,neu:pre+nb,why:bad,kind:e.kind,refs};if(shared.has(b)&&!shared.get(b).x&&shared.get(b).nb===nb)shared.get(b).x=x;out.push(x)}
+  /* a name two people shared, and every holder was renamed (e.g. two maids "Thu Thủy"): texts and name keys (S.npw "Thu Thủy|maidSell")
+     cannot tell them apart, but they must not keep naming nobody (law 6b: a person named in any road really exists) -> they go to the
+     first holder renamed (the player's family / the friend's people / the world, in that order); if someone still holds it, they stay */
+  if(shared.size){const now=new Set(nmPeople().map(e=>nmBare(e.o[e.f])));for(const [b,v] of shared)if(!now.has(b)){const k=nmRewrite(b,v.nb,names.concat([...now]));if(v.x)v.x.refs=k}}
   /* "Phế phi họ X" label of the cold palace */
   try{const o="Phế phi họ Lý",n2="Phế phi họ Tần";if(S.lyF&&S.lyF.name===o)S.lyF.name=n2;const k=nmRewrite(o,n2,[]);if(k)out.push({old:o,neu:n2,why:"sur",kind:"lbl",refs:k})}catch(e){}
   const R=nmReg();for(const e of nmPeople())R[nmBare(e.o[e.f])]=R[nmBare(e.o[e.f])]||e.kind;

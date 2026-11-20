@@ -18,9 +18,10 @@ async function open(b,f){const p=await b.newPage();p.setDefaultTimeout(1800000);
    const L=nmPeople();const names=L.map(e=>nmBare(e.o[e.f]));const dups=[...new Set(names.filter((x,i)=>names.indexOf(x)!==i))];/* her own family keeps her surname (the player's name is hers, never changed) */const meSur=nmSurOf(nmBare(S.name));const banned=names.filter((x,i)=>!L[i].me&&nmBad(x)&&!(L[i].fam&&nmSurOf(x)===meSur)).map(x=>x+' (player '+S.name+')');
    const miss=names.filter((x,i)=>!L[i].me&&!(S.nmReg||{})[x]);const ren=NM_FIX.renamed.slice(n0);
    const txt=JSON.stringify(S);const where=(o,t,pth,seen,acc)=>{if(!o||typeof o!=='object'||seen.has(o)||acc.length>3)return;seen.add(o);for(const k in o){const v=o[k];if(k.includes(t))acc.push(pth+'.[key]'+k);if(typeof v==='string'&&v.includes(t))acc.push(pth+'.'+k+': '+v.slice(Math.max(0,v.indexOf(t)-30),v.indexOf(t)+t.length+10));else if(v&&typeof v==='object')where(v,t,pth+'.'+k,seen,acc)}};
-   /* another person's longer name that contains the old one ("Mộ Dung Uyển Thanh" vs a maid "Uyển Thanh") is not a stale reference */
+   /* (review r1: no refs>0 filter — a name shared by two people that every holder lost must not stay in any text either, law 6b) */
+  /* another person's longer name that contains the old one ("Mộ Dung Uyển Thanh" vs a maid "Uyển Thanh") is not a stale reference */
   const unl=o=>{let t=txt;names.filter(n=>n!==o&&n.indexOf(o)>=0).sort((a,b)=>b.length-a.length).forEach(n=>{t=t.split(n).join(' ')});return t};
-  const stale=ren.filter(x=>x.why!=='dup'&&x.refs>0&&!names.includes(nmBare(x.old))&&new RegExp('(?<![\\p{L}\\p{N}])'+nmEsc(nmBare(x.old))+'(?![\\p{L}\\p{N}])','u').test(unl(nmBare(x.old)))).map(x=>{const acc=[];where(S,nmBare(x.old),'S',new Set(),acc);return x.old+' @ '+acc.join(' | ')});
+  const stale=ren.filter(x=>x.why!=='dup'&&!names.includes(nmBare(x.old))&&new RegExp('(?<![\\p{L}\\p{N}])'+nmEsc(nmBare(x.old))+'(?![\\p{L}\\p{N}])','u').test(unl(nmBare(x.old)))).map(x=>{const acc=[];where(S,nmBare(x.old),'S',new Set(),acc);return x.old+' @ '+acc.join(' | ')});
    let turn=true;try{Q.length=0;S.mg=null;endTurn()}catch(e){turn=e.message}
    return{me:S.name===me,people:L.length,renamed:ren.length,byWhy:ren.reduce((a,x)=>(a[x.why]=(a[x.why]||0)+1,a),{}),refs:ren.reduce((s,x)=>s+x.refs,0),
     dups,banned,miss:miss.length,stale,turn,ex:ren.slice(0,6).map(x=>x.old+' -> '+x.neu+' ('+x.why+')')}},d);
