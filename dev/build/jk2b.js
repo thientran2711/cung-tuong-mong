@@ -252,6 +252,8 @@ function kitHintPhrase(p,sg,nm,lv){const who=nm||"\u0001";
   [/phi tần.*ghen|ghen.*phi tần/i,["chuốc lòng ghen","các phi tần ghen ghét","các phi tần ghen ghét"],["bớt người ghen","các phi tần bớt ghen","các phi tần bớt ghen"],"i"],
   [/ghen|oán|ghét/i,["kết thêm oán","có người ghen ghét",`${who} sinh oán`],["bớt người oán","có người nguôi giận",`${who} nguôi giận`],"i"],
   [/tình ý/i,["thêm tình riêng","người ấy thêm tình ý",`${who} thêm tình ý`],["dứt tình riêng","người ấy nguội lòng",`${who} nguội lòng`]],
+  [/thế lực nhà\s*[+−-]\s?\d/i,["nhà ngươi thêm vững thế","thế lực nhà ngươi thêm vững","thế lực nhà ngươi thêm vững"],["nhà ngươi sút thế","thế lực nhà ngươi sút giảm","thế lực nhà ngươi sút giảm"]],/* kit-e-rows «KR thế lực nhà» (E25b, E28): HER OWN house only — E28's wording is «thế lực nhà −N»; another house («nhà Hộ bộ thế lực +6», «nhà nàng thế lực −6», j55) has the name BEFORE «thế lực» and must never read as hers (law 6a) */
+  [/(^|[^\p{L}])thế lực\s*[+−-]\s?\d/iu,["thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay"],["thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay"]],/* another house (j55): named in the line, not hers — a neutral phrase, the sign is not hers to read */
   [/quý nhau/i,["hai bên thêm thân thiết","hai bên quý nhau hơn","hai bên quý nhau hơn"],["hai bên sinh xa cách","hai bên bớt quý nhau","hai bên bớt quý nhau"]],/* kit-cost-rows-home «quý nhau» (a decline that costs the liking of both sides) */
   [/Gia thanh/i,["thêm danh giá gia môn","gia môn thêm danh giá","gia môn thêm danh giá"],["tổn danh giá gia môn","gia môn sút danh giá","gia môn sút danh giá"]],
   [/Áp lực hôn sự/i,["thêm sức ép hôn sự","hôn sự bị thúc ép hơn","hôn sự bị thúc ép hơn"],["đỡ sức ép hôn sự","hôn sự bớt bị thúc ép","hôn sự bớt bị thúc ép"],"i"],
@@ -280,7 +282,7 @@ function kitHintWho(p,m){try{const L=(typeof liveRivals==="function"?liveRivals(
  for(const v of L)if(v&&v.name&&p.includes(v.name))return v.name;
  if(!/^(nàng|hắn|con nàng)\s/.test(p))return"";const w=m&&m.who;if(w&&w.w&&w.w[0]==="r"){const v=typeof RV==="function"?RV(w.w[1]):null;if(v)return v.name}if(w&&w.nm)return w.nm}catch(e){}return""}
 /* how big a change is, in words (from Tâm cơ 25): "(nhiều)" / "(chút ít)" against the usual size of that stat — never the number */
-const KIT_HINT_MAG=[[/Áp lực hôn sự|Lời đồn|Gia thanh/i,10],[/Hồi môn/i,40],[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,10],[/được ưa/i,3],[/Sủng/i,5],[/Danh|Đức|Ân tình/i,4],[/Bạc/i,40],[/Sức/i,10],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,2]];
+const KIT_HINT_MAG=[[/Áp lực hôn sự|Lời đồn|Gia thanh|thế lực nhà/i,10],[/Hồi môn/i,40],[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,10],[/được ưa/i,3],[/Sủng/i,5],[/Danh|Đức|Ân tình/i,4],[/Bạc/i,40],[/Sức/i,10],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,2]];
 function kitHintMag(p){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];if(!n)return"";const v=+n;for(const [re,big] of KIT_HINT_MAG)if(re.test(p))return v>=big*1.5?" (nhiều)":v<=Math.max(1,Math.floor(big/4))?" (chút ít)":"";return""}
 function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:""};
  if(o.hint){const h=typeof o.hint==="function"?o.hint(lv):String(o.hint);return{hint:h}}
