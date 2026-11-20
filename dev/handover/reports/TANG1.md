@@ -26,4 +26,6 @@ Open question: t6 open neck vs G25 (t6 always closed).
 
 ## Owner picked T (G29): final T prompts s62 t4/t5/t6 written (dev/art/tang1/s62_t{4,5,6}_TANG_final_xuan.txt, 9 265 / 9 061 / 9 714 chars), PHI BẠCH placement sentence added; gate t5/t6 PASS, t4 expected FAIL S13 CAPELET CUT (capelet removed). H dropped in plan_B. No gens.
 
+## Hạ Đường season prompts (G30/G31, 0 cr): dev/art/seasons4/s62_t{4,5,6}_ha_DUONG.txt = final Tang prompts with s62 HẠ pair (light peach orange #F8B287 + soft indigo-violet; palettes_season_deep A31 note 'CANNOT FIT' vs root ice blue) + CAPTION 'Mùa Hạ · Thiết kế thời Đường · Tần/Phi/Quý phi'. Lengths 9 503 / 9 292 / 9 956. Gate t5/t6 PASS, t4 expected FAIL S13 CAPELET CUT (capelet removed). For ChatGPT (owner runs), t6 needs face ref + royal-yellow swatch as image 1/2.
+
 Total credits: 675.
