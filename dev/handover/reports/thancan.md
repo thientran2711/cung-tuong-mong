@@ -48,3 +48,42 @@ https://ctm-img.victoria-tntt.workers.dev/img/_review/thancan/card-choose-755x10
 ## Open / for Foreman B
 - Art: empty slot until C paints; send C the key proposal above (C asked in FOREMAN_C_STATUS L578).
 - KIT: no new kit part (pbtn act card + pcard group). KIT.md not edited (kit keeper's file); if the keeper wants the look-key rule written in KIT figure section, one line: "thân cận look key maid-thancan-<master>-t<tier>, jtc thcLookKey".
+
+## REVIEW r1 (opus BIG, session_01N1tNP2SFmd1FjgGvLmvsRK) — PASS a128fb98 (review/thancan-r1)
+PRIORITY #1 CHECK: OD L2051 verbatim read | main 983a9436 (j95s q.close, j68g) | review/* review/thancan only | claims: this row; art THANCAN at Foreman C.
+Branch review/thancan-r1 = **a128fb98** = 6a9a01c0 + 2 fix commits; contains newest origin/main 983a9436 (re-fetched before verdict).
+
+### Design fidelity (owner OD 20/11 ~15:55Z, row by row)
+| owner's word | built | verdict |
+|---|---|---|
+| no thân cận from the start ("ngay từ đầu … không có") | start wrapper clears every thc; newRival marks thcV (T1) | OK |
+| any trusted maid tam/nhị/nhất đẳng, button «Chọn làm cung nữ thân cận» | kit pbtn act card on her personal maid + every staff maid; rungs BAL.thc.rk [1,3]; trust BAL.loy.trust; greyed with reason (T2/T3) | OK |
+| own uniform per master (7–8 chủ vị + Hoàng hậu + Thái hậu), same cut, embroidery by rank | look key maid-thancan-<p0..p7|hh|th>-t<rank+1> through kit figure (f88Best); unpainted → usual dress; uniform never worn by an ordinary maid (T7). A low consort living in a chủ vị's palace uses that palace's key (7–8 sets, owner's count) | OK (art = Foreman C) |
+| NPC masters do the same (law 1) | monthly thcNpcAll, same thcSet / same costs (T6: 10/10 consorts + Thái hậu) | OK |
+| gain and loss | choose: lòng +10 / Bạc -30 + others' envy -3; dismiss: others +2 / dismissed -15 (all BAL.thc) | OK |
+| old saves | personal maid kept as thân cận (she was q.close before; no regression for running lives); new lives none | OK (justified) |
+
+### Laws
+1 two-way OK (one thcSet for her and NPCs) · 2/3 OK (every option gain+loss; j68g bạc fair-priced by jbac law-2 machinery) · 4 OK (BAL.thc; one-core-guard 0 fails; namespace thc, BAL.tc = children's tâm cơ untouched) · 6b OK · 9 KIT OK (pbtn act card + pcard group, no private part; LOOKED) · 7 VANPHONG OK.
+Role-parity exemptions (2): JUSTIFIED — the NPC side is not a day-plan provider but the monthly world pass calling the SAME thcSet with the SAME BAL.thc numbers; the scanner only knows day-plan providers.
+q.close reuse: j95sClose replaces "kind mm = close" in one place; no second system. j68g event now raises through thcSet.
+
+### Faults found and fixed on review/thancan-r1 (c4e141d0)
+| # | fault | fix |
+|---|---|---|
+| R1 | thcSet stepped the CURRENT thân cận down (her lòng -15, others +2) BEFORE checking the new pick; an ineligible pick (co-op intent landing late, bạc/lòng moved since the card was drawn) left her with none | eligibility checked first; an ineligible pick changes nothing (test T9) |
+| R2 | j68g «Thăng làm người thân cận» charged Bạc -30 through thcSet that the event card never showed (hidden cost) | when she can raise the maid, the card shows the uniform Bạc (c, fair-priced by jbac) and thcSet runs with paid:1 (once); else the old loyalty-only reward (test T10) |
+Nit (not fixed, existing kit behaviour): the log line says «lòng» while the kit card parser shows servant lòng as «thiện cảm».
+
+### Tests on a128fb98 (index.html/sw.js rebuilt)
+| test | result |
+|---|---|
+| thancan.test.js (T1–T10) | PASS 3 lives |
+| coop-thancan.js (NEW: guest tap = intent thcPick run on host in her context; both seats same thc/bạc/lòng; cost once; host's own life untouched; dismiss) | 9/9 |
+| coop-e2e ×3 | 68/68 ×3 |
+| outside/coop-home | 51/51 |
+| live-servants.test | PASS |
+| role-parity.test | ALL PASS |
+| one-core-guard / undef-scan | PASS / PASS |
+| quickcheck (core gates, time-spill, old save from LIVE, perf vs live) | PASS · render 252/253 ms, tab 512/462, buổi 1451/3947, tasks>200ms 21/26 |
+LOOK: worker's 4 CDN shots (Fold 755x1000@2 + iPad 1180x820@2, choose + chosen) looked 3×: kit act cards, title «Cung nữ thân cận tam đẳng» on card + stage, no overflow. UI unchanged by r1 (j68g card gains a Bạc cost line through the existing event card).
