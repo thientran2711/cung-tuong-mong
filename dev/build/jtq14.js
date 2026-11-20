@@ -82,7 +82,7 @@ const INTRO={
   tap14:"{N} dặn: “Ở lâu trong cung mới biết, kẻ hầu sống nhờ đồng liêu. Kết lấy người, biếu chút quà, luyện tay nghề, thì mới có chỗ đứng.”"}};
 /* per-origin beat (OD:L1259 STORY FIRST, STORY_ROADS_PLAN phase 2): why THIS girl does the same quests, told from HER origin (one line per origin
    × chapter) and, in chapter 1, from her rolled road's own subject (ARC67[S.st.f14.road].sj: every road has one; a road whose subject still
-   holds a {placeholder} filled only when the road starts uses its title). Only words: deeds, rewards and numbers stay the quests' own (one core).
+   holds a {placeholder} filled only when the road starts tells that person unnamed, SJ0 below). Only words: deeds, rewards and numbers stay the quests' own (one core).
    {X}/{x} = how she is addressed (say()). */
 const BEAT={
  tt:{nhap14:"Cha {x} là Tể tướng, đưa {x} vào cung để có người của phủ bên long sàng. Việc đầu là ra mắt bề trên cho đủ lễ, thay y phục cho xứng danh phủ Tể tướng.",
@@ -115,8 +115,11 @@ const BEAT={
  cnv:{nhap14:"Ngươi mới vào làm kẻ hầu, chủ nhân nhìn việc tay chân trước tiên. Làm xong mấy việc hầu hạ, học lễ nghi, biết lối đi lối về thì khỏi bị mắng oan.",
   sung14:"Chủ nhân cần một món quà dâng lên bậc trên; ngươi chải chuốt, thêu khăn cho khéo, đi qua Ngự hoa viên lúc ngự giá hay dạo. Việc này làm tốt sẽ được tin cậy, nhưng kẻ bị giành mất cơ hội sẽ oán ngươi.",
   tap14:"Đồng liêu nâng nhau thì sống, dìm nhau thì chết. Nói chuyện, biếu quà một người, luyện thêu thùa cho giỏi."}};
-function roadSj(){try{const id=S.st.f14&&S.st.f14.road,a=id&&typeof ARC67!=="undefined"&&ARC67[id];if(!a)return "";const sj=a.sj||"";
- if(/\{[^}]*\}/.test(sj))return "";return sj.replace(/\bngươi\b/g,"{x}")}catch(e){return ""}}
+/* a road's person is cast only when the road starts (j67 newThread67 fill67), so a {v}/{foe}/{mis} subject is told without a name: the
+   person stays unnamed here and is named by the road itself (law 6b: nobody is made up); any other {tag} → no road line */
+const SJ0={v:"một phi tần",foe:"một phi tần",mis:"chủ nhân"};
+function roadSj(){try{const id=S.st.f14&&S.st.f14.road,a=id&&typeof ARC67!=="undefined"&&ARC67[id];if(!a)return "";
+ const sj=String(a.sj||"").replace(/\{(v|foe|mis)\}/g,(m,k)=>SJ0[k]);if(!sj||/\{[^}]*\}/.test(sj))return "";return sj.replace(/\bngươi\b/g,"{x}")}catch(e){return ""}}
 function beatLine(m){try{const o=S.origin&&S.origin.k,t=BEAT[o]&&BEAT[o][m.id];if(!t)return "";
  let r=say(t);if(m.id==="nhap14"){const sj=roadSj();if(sj)r+=" "+say("Điều {x} canh cánh trong lòng là "+sj+".")}return r}catch(e){return ""}}
 window.tq14Beat=beatLine;window.tq14Intro=m=>introCard(m);

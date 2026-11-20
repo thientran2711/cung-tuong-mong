@@ -20,6 +20,10 @@ console.log("| origin | road | ch1 | ch2 | ch3 |");
   const r=await p.evaluate(()=>({k:S.origin.k,road:S.st.f14&&S.st.f14.road,b:["nhap14","sung14","tap14"].map(id=>tq14Beat({id}))}));
   const ok=r.k===k&&r.b.every(x=>x&&x.length>40&&!/\{|%/.test(x));if(!ok)fail++;
   console.log(`| ${k} | ${r.road} | ${r.b.map(x=>(x||'NONE').slice(0,48)).join(' | ')} |${ok?'':' FAIL'}`)}
+ /* review: EVERY origin road (not only the rolled one) gives a chapter-1 road line, no {tag} left (a road cast later is told unnamed, jtq14 SJ0) */
+ const R=await p.evaluate(keys=>{const out=[],f=S.st.f14,r0=f.road;for(const id of Object.keys(ARC67).filter(id=>keys.includes(ARC67[id].o))){f.road=id;const t=tq14Beat({id:'nhap14'});out.push([id,t.split('canh cánh trong lòng là ')[1]||''])}f.road=r0;return out},keys);
+ let rf=0;for(const [id,t] of R){const ok=t.length>3&&!/\{|%/.test(t);if(!ok)rf++;if(process.env.TR_ALL||!ok)console.log(`${ok?'ok  ':'FAIL'} road ${id}: ${t}`)}
+ if(rf)fail++;console.log(rf?`FAIL ${rf}/${R.length} roads without a road line`:`PASS ${R.length}/${R.length} origin roads give a road line`);
  console.log(errs.length?'page errors: '+JSON.stringify(errs.slice(0,5)):'0 page errors');
  console.log(fail||errs.length?`FAIL ${fail} origin(s)`:`PASS ${keys.length}/${keys.length} origins`);
  await b.close();process.exit(fail||errs.length?1:0)})();
