@@ -170,6 +170,62 @@ ptReg("invite",a=>{const v=RV(a.a.v);const m=ptPerson(a.a);const nm=m?m.name:"Ng
  /* two-way: the guest answers with the SAME 4 answers as every receiver (receiver-choice jrcv rcvInviteGo, guarded) */if(typeof rcvInviteGo==="function"?rcvInviteGo(S,v):roll(a.a.o)){try{S.where[v.id]="home";seeLoc(v,"home");const R=S.roster;if(R&&R.P&&R.P["v"+v.id]&&typeof j95kh==="function"){for(let i=j95kh();i<R.P["v"+v.id].length;i++)R.P["v"+v.id][i]=[S.out?"lc":"home","visit","me","nhận lời mời sang chơi"];if(typeof j95sync==="function")j95sync()}}catch(e){ptErr("inviteLand",e)}
   log(`${v.name} nhận lời, sang cung ngươi.`);return{ok:true,t:`${nm} mời ${v.name} trở về`}}
  relAdd(S,v,BAL.eff.j21.top);log(`${v.name} từ chối lời mời.`);return{ok:false,t:`${nm} mời ${v.name} trở về`}});
+/* ---- 4b. HOST-ABSENT RULE (owner OD L1976, 19/11 ~22:00Z) — every invitation, every direction (law 1):
+   her invite (j21 / runner above), an NPC host inviting HER (AG cx3:invite2 → rcvAsk), NPC ↔ NPC (p3InvLand). ONE entry: rcvInvAt(h,g), the place
+   where every accepted guest is put at the host's place (jrcv). If the host is not there when the guest arrives:
+   (1) the guest WAITS at the host's place; never leaves in the khắc she arrives;
+   (2) from the NEXT khắc, once per khắc while the host is still away, the guest decides stay / leave AT that khắc (BAL.invite.wait; a host who walks in
+       on that same khắc meets her only if she stayed);
+   (3) leave → relation loss (BAL.invite.wait.loss), notice «<name> sang chơi không gặp, đã ra về» (kitNotice, via ptNote) when the host is her, and the guest's
+       roster rows show the walk back (law 6b);
+   (5) host back in time → the visit happens as before (nothing else changes).
+   SHE as the guest (an NPC host away): she is a player, she decides herself: she waits by staying there; walking off before the host is back = leaving
+   (same loss). ONE STATE S.invW = [{id, g, h, k, t (arrival khắc, null = she is still on the way), last (last decided khắc), b (buổi)}].
+   The draw is a hash of (task, khắc), not Math.random: co-op seats and reloads get the same answer, and no other roll moves. ---- */
+function iwZ(){if(!S)return[];if(!Array.isArray(S.invW))S.invW=[];return S.invW}
+function iwId(p){return p===S?"me":p&&p.id!=null?"v"+p.id:null}
+function iwP(id){if(id==="me")return S;try{return RV(+String(id).slice(1))}catch(e){return null}}
+let iwDest=null;/* while she walks (goTo spends the walk before S.place moves) she is already gone from where she was */
+function iwHere(p,k){if(!p)return false;if(p===S)return(S.out?"lc":iwDest!=null?iwDest:S.place)===k;try{const R=S.roster,i=ptNow()-bid()*ptKH(),e=R&&R.P&&R.P["v"+p.id];if(e&&e[i]&&e[i][0]!=null)return e[i][0]===k&&e[i][1]!=="back"}catch(e){}return !!(S.where&&S.where[p.id]===k)}
+/* the guest's odds of staying one more khắc (law 4: every number from BAL; law 7: shown only as a ladder word) */
+function iwStayO(g,h){const W=BAL.invite.wait;let n=0;try{n=tv(W.net,g,0)}catch(e){}return od(W.o+aff(g,h)/W.affD+(rkOf(h)-rkOf(g))*W.rk+n)}
+function iwDraw(w,K){const s=w.id+"|"+K;let x=2166136261;for(let i=0;i<s.length;i++){x^=s.charCodeAt(i);x=Math.imul(x,16777619)>>>0}return x%100}
+/* the guest's rows of this buổi: waiting at the host's place / walking back home */
+function iwRows(g,from,row,rest){try{const R=S.roster,e=R&&R.P&&R.P["v"+g.id];if(!e)return;const i0=Math.max(0,from-bid()*ptKH());for(let i=i0;i<e.length;i++)e[i]=i===i0?row:(rest||row);
+  const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){ptErr("iwRows",e)}}
+function iwAdd(h,g){if(!S||!h||!g||h===g)return null;const k=h===S?(S.out?"lc":"home"):palaceOf(h);
+ if(g!==S&&iwHere(h,k))return null;/* (5) the host is there: the visit happens as before */
+ /* arrival = the due khắc of the landing task (a 2-khắc walk of hers lands it one khắc late on her clock) */const now=Math.min(ptNow(),PT.iwDue!=null?PT.iwDue:1e9),gi=iwId(g),hi=iwId(h);const Z=iwZ();for(let i=Z.length-1;i>=0;i--)if(Z[i].g===gi)Z.splice(i,1);
+ const w={id:"iw"+now+"-"+gi+"-"+hi,g:gi,h:hi,k,t:g===S?null:now,last:now,b:bid()};Z.push(w);
+ if(g!==S&&h!==S)iwRows(g,now,[k,"visit",hi,"sang chơi, chờ chủ nhà về"]);return w}
+function iwLeave(w,K,why){const g=iwP(w.g),h=iwP(w.h);if(!g||!h)return;PT.stat.iwLast={g:w.g,h:w.h,t:w.t,K,why:why||"khac"};try{relAdd(h,g,BAL.invite.wait.loss)}catch(e){ptErr("iwLoss",e)}
+ if(g===S){log(`Ngươi sang cung ${h.name} chơi không gặp, đã ra về.`);return}
+ if(why!=="buoi")iwRows(g,K,[palaceOf(g),"back",null,"sang chơi không gặp chủ nhà, ra về"],[palaceOf(g),"stay",null,"về cung"]);
+ if(h===S){const line=`${g.name} sang chơi không gặp, đã ra về.`;log(line);ptNote({id:"iw:"+w.id,line})}
+ else try{if(typeof newsAdd==="function")newsAdd(g,"invite",`${g.name} sang cung ${h.name} chơi không gặp, đã ra về`,false)}catch(e){}}
+let iwBusy=false;
+function iwTick(){if(iwBusy||!S||S.dead||!Array.isArray(S.invW)||!S.invW.length)return;iwBusy=true;try{const now=ptNow(),b=bid();
+ for(const w of S.invW.slice()){const g=iwP(w.g),h=iwP(w.h);const drop=r=>{const i=S.invW.indexOf(w);if(i>=0)S.invW.splice(i,1);PT.stat.iwDrop=r||"?"};
+  if(!g||!h||g.alive===false||h.alive===false||g.out||(g!==S&&g.confined)){drop("gone");continue}
+  if(w.b!==b){/* the buổi ended and the host never came */if(w.t!=null)iwLeave(w,now,"buoi");drop("buoi");continue}
+  if(g===S){/* SHE is the guest: arrival when she stands there; host there = visit; walking off first = leaving */
+   const at=(S.out?"lc":S.place)===w.k;if(w.t==null){if(at){w.t=now;w.last=now}else continue}
+   if(at&&iwHere(h,w.k)){PT.stat.iwMet=(PT.stat.iwMet||0)+1;drop();continue}if(!at){iwLeave(w,now);drop("walked")}continue}
+  /* an NPC guest: one decision per khắc after the arrival khắc, taken AT that khắc */
+  /* the last khắc of the buổi is the last decision; the buổi end itself is handled above */const end=Math.min(now,b*ptKH()+ptKH()-1);let done=false;for(let K=w.last+1;K<=end&&!done;K++){w.last=K;
+   if(iwDraw(w,K)>=iwStayO(g,h)){iwLeave(w,K);drop();done=true;break}
+   if(K===end&&iwHere(h,w.k)){PT.stat.iwMet=(PT.stat.iwMet||0)+1;drop();done=true}}
+  if(!done&&w.last>=end&&iwHere(h,w.k)){PT.stat.iwMet=(PT.stat.iwMet||0)+1;drop()}}}
+ catch(e){ptErr("iwTick",e)}finally{iwBusy=false}}
+(function(){try{
+ if(typeof rcvInvAt==="function"){const a0=rcvInvAt;rcvInvAt=function(h,g){const r=a0.apply(this,arguments);try{iwAdd(h,g)}catch(e){ptErr("iwAdd",e)}return r};window.rcvInvAt=rcvInvAt}
+ const l1=ptLand;ptLand=function(a){const d0=PT.iwDue;PT.iwDue=a&&a.due;try{return l1.apply(this,arguments)}finally{PT.iwDue=d0}};
+ const sp1=spend;spend=function(){const r=sp1.apply(this,arguments);iwTick();return r};
+ const g1=goTo;goTo=function(k){const d0=iwDest;iwDest=k;let r;try{r=g1.apply(this,arguments)}finally{iwDest=d0}iwTick();return r};
+ if(typeof nextBuoi==="function"){const nb1=nextBuoi;nextBuoi=function(){iwTick();const old=iwZ().slice();const r=nb1.apply(this,arguments);/* a guest placed while the new buổi was drawn (j21 placeWhere) belongs to the new buổi */
+  try{const now=ptNow();for(const w of iwZ())if(!old.includes(w)){w.b=bid();w.last=now;if(w.t!=null)w.t=now}}catch(e){ptErr("iw buoi",e)}iwTick();return r}}
+}catch(e){ptErr("iw wire",e)}})();
+window.PTIME_IW={z:iwZ,tick:iwTick,stayO:iwStayO,draw:iwDraw,add:iwAdd};
 /* ---- 5. TWO-WAY: NPC senders obey the same rule (AG deeds through AGRUN: the NPC pays her deed's khắc, the person sent is away n khắc,
    the deed lands at the due khắc with the same function, odds and news as before) ---- */
 const PT_NPC={"cx2:maidSpy":{kind:"spy",who:v=>v&&v.maid&&v.maid.name?{id:"mm:"+v.id,nm:v.maid.name}:null,lbl:t=>`đi dò la ${t&&t.name?t.name:""}`.trim()}};
