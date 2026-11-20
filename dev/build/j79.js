@@ -11,6 +11,10 @@ const kpN=n=>(n>0?"+":n<0?"−":"")+Math.abs(Math.round(n*100)/100);
 /* ---------- people: title (rank word) + name coloured by rank, face ---------- */
 function kitTitle(p){try{if(!p)return"";if(p===S)return"";if(S&&p===S.emp)return"Hoàng thượng";if(S&&(p===S.thO||p.kind==="th"))return"Thái hậu";
  const f=kitFace(p);let rw=String(f&&f.rw||"").split("·")[0].trim();if(/^(Hoàng tử|Công chúa|Thái tử)/.test(p.name||""))return"";return rw}catch(e){return""}}
+/* fig-label (owner 20/11 "vừa cung nữ tam đẳng, vừa cung nữ thân tín … chọn một thứ một thôi"): ONE merged title for a role that carries a rank.
+   kitMaidTitle(m,lower) = role + rank said once, rank from SRK.maid (never typed): "Cung nữ thân tín tam đẳng"; a rank that is not a "Cung nữ ..." rung
+   keeps its own word + the role: "Chưởng sự cô cô thân tín". EVERY place that shows her role AND rank (stage figure caption, person card, home list, staff list) calls this. */
+function kitMaidTitle(m,lower){let t="Cung nữ thân tín";try{m=m||(S&&S.maid);if(m&&typeof SRK!=="undefined"&&typeof srk==="function"){const r=SRK.maid[srk(m)]||"";t=/^Cung nữ /.test(r)?"Cung nữ thân tín "+r.slice(8):r?r+" thân tín":t}}catch(e){}return lower?t.charAt(0).toLowerCase()+t.slice(1):t}
 /* KIT 48.1: the rank-title colour of a title (kitRankTone lives in jk4, later in the build; until then the CSS falls back to --rc) */
 function kitRtOf(t,col){try{return typeof kitRankTone==="function"?kitRankTone(t,col):""}catch(e){return""}}
 function kitPersonCol(p){try{if(typeof rivals!=="undefined"&&rivals.includes(p))return p.out?KIT_COLD_COL:RCOL[p.queen?7:cl(p.rank||0,0,7)];if(p===S)return S.out?KIT_COLD_COL:RCOL[cl(S.rank||0,0,7)];
@@ -560,7 +564,8 @@ window.kitGameMark=kitGameMark;window.kitGameMarkVal=kitGameMarkVal;
 function kitGameClock(v){document.querySelectorAll(".kgame .kgclk").forEach(e=>{const m=/^\s*(\d+)\s*giây\s*$/.exec(String(v==null?"":v));
  if(!m||typeof kitCoopClock!=="function"){e.hidden=true;e.innerHTML="";return}const n=+m[1]*1000,len=Math.max(+e.dataset.len||0,n);e.dataset.len=len;/* amber = the full-marks window of the time part (jmgt mgFast, ONE CORE) is passed; a new round starts with left back at len -> normal again */
  const c=typeof KG82!=="undefined"?KG82.cur:null,fw=c&&c.kind&&typeof mgFast==="function"?mgFast(c,c.kind):null,amber=fw!=null&&fw>0&&(len-n)>fw*len;
- e.classList.toggle("kgclk-amber",!!amber);e.innerHTML=kitCoopClock({left:n,len,tone:amber?"w":"n"});e.hidden=false})}
+ e.classList.toggle("kgclk-amber",!!amber);e.innerHTML=kitCoopClock({left:n,len,tone:amber?"w":"n"}).replace(/Còn\s*/,"").replace(/\s*giây/,"");e.hidden=false})}/* owner OD 20/11 ~05:10Z: in a game the clock chip is the kit clock ring + the number only, never «Còn … giây» */
+
 window.kitGameClock=kitGameClock;
 /* kitGameResult({raw, talent, prep, total, place:"Nhất", of:4, rivals:[{who:person, score}], gains:[["Sủng",3]], losses:[["Sức",-10]], note})
    -> result block: score rows (true numbers), standings with face + rank title, Được / Mất chips. */

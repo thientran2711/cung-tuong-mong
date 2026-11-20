@@ -438,7 +438,7 @@ if(typeof wrapR==="function"){wrapR("wdAutoUI",()=>"Tự chọn đồ");wrapR("w
 function wdGroomW(p){const tai=(p.tai||0)/WD.groomTai;let art=0;try{art=WD.groomArt*Math.max(kg82Lv(p,"hoa")||0,kg82Lv(p,"theu")||0)}catch(e){}
  return Math.min(WD.groomMax,WD.groomBase+tai+art+(wdMama(p)?WD.groomMama:0))}
 const KG92={last:null};window.KG92=KG92;
-function kg92Groom(box,env){const C=kg82Canvas(box,.62,320),{g,W,H}=C;const w=env.zw;const lo=.5-w/2,hi=.5+w/2;const STEPS=["Cài trâm","Chọn áo","Điểm trang"];
+function kg92Groom(box,env){const C=kg82Canvas(box,.62,320),{g,W,H}=C;const w=env.zw!=null?env.zw:wdGroomW(typeof S!=="undefined"&&S&&!S.dead?S:{});/* mg-env: generic kg82Play / Thử tay passes no zw → same ONE width the real round uses (wdGroomW, WD.groom* only) */const lo=.5-w/2,hi=.5+w/2;const STEPS=["Cài trâm","Chọn áo","Điểm trang"];
  let k=0,stop=false,raf=0,t0=performance.now(),T0=t0,marks=[];const pops=[];const LIM=WD.groomSec*1000;const x0=W*.08,x1=W*.92,by=H*.52;
  const pos=now=>{const sp=.0016+k*.0006;return .5+.5*Math.sin((now-t0)*sp+k*1.7)};
  function draw(now){kg82Silk(g,W,H,"#f6ead6","#ead6b4");const bw=x1-x0;
@@ -470,8 +470,11 @@ function wdGroomUI(){if(!S||S.dead||!can(1))return;const w=wdGroomW(S);const m=w
   const html=kg82Rows([["Trâm cài",wdItem(wdOf(S).tram)?wdItem(wdOf(S).tram).n:"không cài","t"],["Y phục",wdItem(wdOf(S).y)?wdItem(wdOf(S).y).n:"thường phục","t"],["Kim dừng",zone==="ok"?"vùng giữa":zone==="over"?"lệch về phía lộng lẫy":"lệch về phía giản dị","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg92ok">Đã hiểu</button></div>`;
   kg82ShowRes(html,zone==="ok");$("kg92ok").onclick=()=>{kg82Close();render()}};
  KG82.phase="intro";box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg92go">Bắt đầu</button>${kitQuick({id:"kg92skip",n:"Bỏ qua",sub:`tính như Tự chọn đồ`})}</div>`;
+ KG82.back=()=>render();/* KIT §13.9: nothing spent before «Sẵn sàng» (spend(1) only at the end) → back, nothing played */
  kgReady(box,{kind:"chai",how,go:"#kg92go",tutor:(b,env)=>kg92Groom(b,Object.assign(env,{zw:w}))});/* KIT §13.7: rules + «Sẵn sàng» / «Hướng dẫn» (the guided round never dresses her) */
- $("kg92go").onclick=()=>{box.innerHTML="";box.hidden=false;KG82.phase="play";let fin=false;const env=KG82.cur={kind:"chai",zw:w,hud:o=>{for(const k in o)kg82Set(k,o[k])},end:raw=>{if(fin)return;fin=true;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.phase="result";kg82Set("score","3/3");kg82Set("round","–");kg82Set("time","đã xong");done(KG92.last?KG92.last.zone:"ok")}};
+ $("kg92go").onclick=()=>{KG82.back=null;box.innerHTML="";box.hidden=false;KG82.phase="play";let fin=false;const env=KG82.cur={kind:"chai",zw:w,hud:o=>{for(const k in o)kg82Set(k,o[k])},end:raw=>{if(fin)return;fin=true;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.phase="result";kg82Set("score","3/3");kg82Set("round","–");kg82Set("time","đã xong");done(KG92.last?KG92.last.zone:"ok")}};
+  /* §13.9 given up during play = the timeout rule of this game: «hết giờ mà chưa chạm là quá giản dị» */
+  KG82.quit=()=>{if(fin)return;fin=true;KG82.quit=null;try{if(stop)stop()}catch(e){}KG82.run=null;KG82.peek=()=>null;KG82.phase="result";kg82Set("time","đã xong");done("under")};
   let stop=null;try{stop=kg92Groom(box,env)}catch(e){console.error(e);env.end(5);return}KG82.run={stop:()=>{if(stop)stop()}}};
  $("kg92skip").onclick=()=>{kg82Close();wdAutoUI()}}
 

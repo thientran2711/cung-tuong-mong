@@ -1,4 +1,4 @@
-/* kit-mark (review/kit-mark, owner OD 20/11 ~07:15Z, KIT §13.9) — node dev/test/kit-mark.js [dev/index.html] [WxH] [outdir]
+/* kit-mark (review/kit-mark, owner OD 20/11 ~07:15Z, KIT §13.10) — node dev/test/kit-mark.js [dev/index.html] [WxH] [outdir]
    1 EVERY kind (all KG82_KIND, via playArt / startContest): after «Sẵn sàng» the title line holds ONE small chip «n/10» (.kgmk, number only, no words, no %)
      beside the clock, the old PHẦN/HỒI/CÒN row stays hidden; before «Sẵn sàng» there is no chip
    2 the chip = the graded mark in hand: after the engine reports score s the chip equals s (the HUD score is already the graded mark, no second grading), and it still equals it
