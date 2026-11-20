@@ -150,3 +150,4 @@ Final t1/t2 = G17 square neckline. Files: dev/handover/review-sheets/skins-1120/
 - m29 | t2 Thường tại a18 (20/11) | gen BhNPVrToQR cut dt4ODkaXSL | dev/handover/review-sheets/skins-1120/m29_t2_a18_crossedcollar_cut.webp | replaced by G17 square neckline (old crossed collar)
 - m19 | t1 Đáp ứng a18 (20/11) | gen EbYGtmwuuO cut yiufJaxPW9 | dev/handover/review-sheets/skins-1120/m19_t1_a18_crossedcollar_cut.webp | replaced by G17 square neckline (old crossed collar)
 - m19 | t2 Thường tại a18 (20/11) | gen P3QCUdD42C cut 8ai9BNiIrU | dev/handover/review-sheets/skins-1120/m19_t2_a18_crossedcollar_cut.webp | replaced by G17 square neckline (old crossed collar)
+- m20 | t2 Thường tại a18 (20/11, OLD4) | gen If3NIDRtvE cut — | dev/handover/review-sheets/skins-1120/m20_t2_a18_G17v1_plainband.webp | replaced by G17 clarification (t2 = t1 square cut + 2-layer edge); this one has the first G17 plain band
