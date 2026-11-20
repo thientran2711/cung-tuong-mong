@@ -1,7 +1,13 @@
-base: dev/art/seasons4/han_bac_base/s62_t5_HAN_BAC_02cd263.txt
-allow: no cloud collar   # Luot 1263 owner: signature piece added
-allow: no shoulder piece   # Luot 1263 owner: signature piece added
-allow: smooth with a soft satin lustre and a faint woven self-pattern   # Luot 1275 owner: fabric matte, new m03_t4_VAI_DOAN text
-allow: The satin has real weight   # fabric: lead sentence shortened, redundant with new FABRIC text (length)
-allow: a little more than thin silk   # same
-allow: both resting on the shoulders   # Lượt 1280 owner: capes now sit LOW on the outer shoulders/upper arms, cut in a deep V (v4 text)
+base: dev/art/seasons4/han_bac_base/s62_t5_HAN_BAC_ed3e8fd.txt
+allow: a long straight-hem outer robe   # owner Lượt 1290/1291/1292: t5 Phi = khúc cư (curved spiral wrap), not trực cư
+allow: in light clear warm plum reaching the floor over an inner robe in bright blush pink   # owner Lượt 1290/1291/1292: same words kept, spiral clause inserted between
+allow: a deep embroidered border along the whole hem and front opening   # owner Lượt 1290/1291/1292: border now along the spiral wrap edge and hem
+allow: "Mùa Xuân · Thiết kế thời Hán · Phi · Trực cư đoạn   # owner Lượt 1290/1291/1292: caption outfit name -> Khúc cư (G31)
+# --- previous sidecar (DESIGN3/4, base 02cd263), kept for history; those cuts are already in the ed3e8fd base ---
+# base: dev/art/seasons4/han_bac_base/s62_t5_HAN_BAC_02cd263.txt
+# allow: no cloud collar   # Luot 1263 owner: signature piece added
+# allow: no shoulder piece   # Luot 1263 owner: signature piece added
+# allow: smooth with a soft satin lustre and a faint woven self-pattern   # Luot 1275 owner: fabric matte, new m03_t4_VAI_DOAN text
+# allow: The satin has real weight   # fabric: lead sentence shortened, redundant with new FABRIC text (length)
+# allow: a little more than thin silk   # same
+# allow: both resting on the shoulders   # Lượt 1280 owner: capes now sit LOW on the outer shoulders/upper arms, cut in a deep V (v4 text)

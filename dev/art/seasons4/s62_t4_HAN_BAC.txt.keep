@@ -1,20 +1,32 @@
-base: dev/art/seasons4/han_bac_base/s62_t4_HAN_BAC_02cd263.txt
-allow: no cloud collar   # Luot 1263 owner: signature piece added
-allow: no shoulder piece   # Luot 1263 owner: signature piece added
-allow: smooth with a soft satin lustre and a faint woven self-pattern   # Luot 1275 owner: fabric matte, new m03_t4_VAI_DOAN text
-allow: The satin has real weight   # fabric: lead sentence shortened, redundant with new FABRIC text (length)
-allow: a little more than thin silk   # same
-allow: her signature colour family light clear warm plum and bright blush pink stays the MAIN robe colour   # colour-family restatement, foreman OK
-allow: the robe itself is clearly light clear warm plum silk   # same
-allow: NOT a cream   # same
-allow: beige or all-gold robe   # same
-allow: never a pair   # hair-flower dup, length
-allow: her head inclined gently toward the hand that holds the item   # GRACE trim, foreman OK
-allow: her face still toward the viewer   # GRACE trim
-allow: never in profile   # boilerplate trim (length), head-turn sentence kept
-allow: every rank its own   # boilerplate: GRACE trim, foreman OK
-allow: Everyone beautiful at every age   # boilerplate, foreman OK
-allow: a jade clasp at the throat   # Lượt 1280 owner: open neck (v4 piece text, not in base)
-allow: over only the shoulders and upper chest   # Lượt 1280 owner: piece now sits LOW on the outer shoulders/upper arms (v4 text)
-allow: lying flat from the throat over the WHOLE capelet   # Lượt 1280 owner: yoke no longer starts at the throat (v4 text)
-allow: the robe closes only at the throat clasp   # Lượt 1280 owner: neck must stay open (S13 wording, ChatGPT test only; S13 exemption needed before Magnific)
+base: dev/art/seasons4/han_bac_base/s62_t4_HAN_BAC_ed3e8fd.txt
+allow: Full-body standing figure head to feet   # boilerplate dup (length ≤10 000; S18 smile + MASTER head-to-feet/skin sentences kept), DESIGN5
+allow: soft even light   # boilerplate dup (length ≤10 000; S18 smile + MASTER head-to-feet/skin sentences kept), DESIGN5
+allow: fair porcelain skin   # boilerplate dup (length ≤10 000; S18 smile + MASTER head-to-feet/skin sentences kept), DESIGN5
+allow: beautiful/handsome romantic-lead looks for everyone   # boilerplate dup (length ≤10 000; S18 smile + MASTER head-to-feet/skin sentences kept), DESIGN5
+allow: elegant, slim, clearly adult   # boilerplate dup (length ≤10 000; S18 smile + MASTER head-to-feet/skin sentences kept), DESIGN5
+allow: 3/4 or frontal view   # boilerplate dup (length ≤10 000; S18 smile + MASTER head-to-feet/skin sentences kept), DESIGN5
+allow: a long floor-length wrapped robe   # owner Lượt 1290/1291/1292: t4 Tần = khuê y đuôi én petal panels (quju moved to t5)
+allow: the hem winds once around the body in a curved spiral wrap   # owner Lượt 1290/1291/1292: t4 spiral wrap -> tiered lotus-petal panels + swallowtail + streamers
+allow: the same triple band on the spiral hem edge   # owner Lượt 1290/1291/1292: band now on the petal panel edges
+allow: "Mùa Xuân · Thiết kế thời Hán · Tần · Khúc cư đoạn   # owner Lượt 1290/1291/1292: caption outfit name -> Khuê y đuôi én (G31)
+# --- previous sidecar (DESIGN3/4, base 02cd263), kept for history; those cuts are already in the ed3e8fd base ---
+# base: dev/art/seasons4/han_bac_base/s62_t4_HAN_BAC_02cd263.txt
+# allow: no cloud collar   # Luot 1263 owner: signature piece added
+# allow: no shoulder piece   # Luot 1263 owner: signature piece added
+# allow: smooth with a soft satin lustre and a faint woven self-pattern   # Luot 1275 owner: fabric matte, new m03_t4_VAI_DOAN text
+# allow: The satin has real weight   # fabric: lead sentence shortened, redundant with new FABRIC text (length)
+# allow: a little more than thin silk   # same
+# allow: her signature colour family light clear warm plum and bright blush pink stays the MAIN robe colour   # colour-family restatement, foreman OK
+# allow: the robe itself is clearly light clear warm plum silk   # same
+# allow: NOT a cream   # same
+# allow: beige or all-gold robe   # same
+# allow: never a pair   # hair-flower dup, length
+# allow: her head inclined gently toward the hand that holds the item   # GRACE trim, foreman OK
+# allow: her face still toward the viewer   # GRACE trim
+# allow: never in profile   # boilerplate trim (length), head-turn sentence kept
+# allow: every rank its own   # boilerplate: GRACE trim, foreman OK
+# allow: Everyone beautiful at every age   # boilerplate, foreman OK
+# allow: a jade clasp at the throat   # Lượt 1280 owner: open neck (v4 piece text, not in base)
+# allow: over only the shoulders and upper chest   # Lượt 1280 owner: piece now sits LOW on the outer shoulders/upper arms (v4 text)
+# allow: lying flat from the throat over the WHOLE capelet   # Lượt 1280 owner: yoke no longer starts at the throat (v4 text)
+# allow: the robe closes only at the throat clasp   # Lượt 1280 owner: neck must stay open (S13 wording, ChatGPT test only; S13 exemption needed before Magnific)
