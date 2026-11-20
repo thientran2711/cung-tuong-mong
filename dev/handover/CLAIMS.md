@@ -410,3 +410,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW cal-p2b (BIG opus) of 45768ff8 (huong/mua/banh broken grading + 9 pace full-marks windows) | review/cal-p2b-rv; briefs/rv-root76-cal-p2b.md | MAIN ROOT-76 | session_01Rc5AsJGMmUL6NpNpYgiR6c | RUNNING | 20/11 08:45Z |
 | REVIEW home-chapters (BIG opus E25r) of 03c2cade | review/home-chapters; briefs/E25r-review-home-chapters.md | FOREMAN E #17 | session_01DgYSWpQvWQ5ka4h6t1ZQRC | RUNNING | 20/11 09:48Z |
 | REVIEW palace-life-gaps r1 (opus BIG) of 3af67a8e | review/palace-life-gaps-r1 | B | session_01N1tNP6rEmQko7Y5Qk716AK | RUNNING | 20/11 08:52Z |
+| REVIEW names-unique-r2 r1 (opus BIG; save migration) of bf9f80002 | review/names-unique-r2-r1 | B | session_01N1tNP6fWrZSFyTwWVjxNXT | RUNNING | 20/11 08:53Z |
