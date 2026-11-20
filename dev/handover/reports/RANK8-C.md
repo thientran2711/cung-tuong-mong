@@ -41,3 +41,6 @@ Sheet: `dev/art/rank8-s65/s65_8bac_sheet.jpg` (labels ON the image: tN · rank �
 Tool: images_remove_background on each gen (cuts tCR6YKWmZJ cpSsPhc0eP O6Ea5cAynm N2qQxpJ6D9 iG5HLXb3uK yiufKMxPW9 aFGZTUTfSh bxM0oig5Y2). Ledger: kind RANK8-CUT.
 Checked on a dark background, overview + 1:1 zooms: hair strands clean, gauze sleeves/shawl keep partial transparency (semi-alpha 0.6–4.8 % of pixels), kite string + crown tassels kept, no parchment halo.
 NEXT: when RANK8-A/B finish → one combined transparent image per rank of s62/s64/s65 side by side (labels).
+
+## 6. Combined per rank s62 | s64 | s65 (transparent) — 16 cuts × 3 cr = 48 cr
+`dev/art/rank8-trio/trio_t1_s62_s64_s65.png … trio_t8_…png`: 3072×2648 RGBA. Each girl stays at native 1024×2304, side by side. Labels: a big rank strip ("tN · rank · 3 người mới · chưa xếp cung") and one strip per girl ("sNN · group"). Cuts of the RANK8-A/B gens logged in the ledger (kind RANK8-CUT). Checked on a dark background: clean.
