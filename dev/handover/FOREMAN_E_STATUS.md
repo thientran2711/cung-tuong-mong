@@ -952,3 +952,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   KIT: kit-cost-rows-home 3332c63b KIT READY (in use); kit-e-rows dd2e0fe1 = kitColDot OK + «thế lực nhà» FAIL (MAIN kit keeper fixing). FOR MAIN open: no E ROOT STANDBY; CDN 401 on account E; flags: empty GHI CHÚ on «nói khéo», one-core kcIntel(1,2) kc_tt c2 + jkc.js:516 / jkc2.js:343; LIVE bug coop-together cnv+nc 25/26.
   Depth-8 sessions (E21r2, E22t, E26r, E25r) cannot roll themselves: when one reaches its roll point, YOU open its successor. SEATS 8 / 12 (E21r2, E22t, E22i, E26b, E26r, E25r, E30 + E #22).
   Own wake trig_01Lcace3xYxn5QAj5hwcmHVx → disabled by me at handover. Worktree /home/user/wt/ho (sparse).
+  → child FOREMAN E #22 = session_01DgYSWkbUPtieeBFfn8grWT (opus, depth 3; first attempt session_01DgYSWpvwJEo1haLLQzDjnT had no repo attached → archived). My wake trig_01Lcace3xYxn5QAj5hwcmHVx disabled. FOREMAN E #21 stops now.
