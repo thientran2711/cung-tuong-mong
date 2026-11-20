@@ -221,13 +221,11 @@ APPROVED = [{'id': 'W01', 'title': 'WINTER FUR Lông 1 t1-t3 (G26)', 'text': "WI
  {'id': 'S14',
   'title': 'HOÀNG QUÝ PHI LUXURY t7',
   'text': 'HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), pearl and jade trims along '
-  'text': 'HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), a layered pearl-and-gold necklace, pearl and jade trims along '
           'the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress.',
   'scope': 'tp7 pr7',
   'confirm': '',
   'ages': '',
   'luot': '486 (G12); A41 owner Lượt 1411 (no necklace for anyone): "a layered pearl-and-gold necklace, " removed (B26FAB4, Foreman C #8)',
-  'luot': '486 (G12)',
   'source': 'dev/art/store-all/build_all.py HQP_LUX',
   'proof': 'dev/art/approved/proof/c06_t7_a18.txt',
   'picture': 'HQP c20 pearls (skin) · gen 0eUXPSZTfW · cut xSBwv6vjfW · https://ctm-img.victoria-tntt.workers.dev/img/_keep/skins-1119/c20_hqp_pearls.png',
@@ -1048,7 +1046,6 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
         if e["id"] in ("S24", "S16", "S19"):   # B26 length exception: S24 repeats master M13 (cut 5); B26FAB4: S16 / S19 tails cut by LEN_CUTS2 N1 / N2 (same-prompt repeats), only when needed
             _made = [x[0] for x in master_common.doan_cuts_made(text,scope)]; _k = {"S24": master_common.DOAN_LEN_CUTS[4][0], "S16": master_common.LEN_CUTS2[0][0], "S19": master_common.LEN_CUTS2[2][0]}[e["id"]]
             if _k in _made: continue
-        if e["id"] == "S24" and len(master_common.doan_cuts_made(text,scope)) == len(master_common.DOAN_LEN_CUTS): continue   # B26 length exception: S24 repeats master M13 (cut last, only when needed)
         if skip_store and e.get("store") and not e.get("season"): continue   # already enforced by the STORE part (same prompt, store args)
         ages = (e.get("ages") or "all").split()
         if age and "all" not in ages and age not in ages: continue
