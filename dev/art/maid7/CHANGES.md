@@ -58,3 +58,14 @@ Colours m18: main powder blue #A7BAD2, secondary deep rose #CA7281 (her M_COLS, 
 - Hair: the builder's own a36+ words used at a18: "…over her hair, which is ALL pinned UP in a neat bun under the cap (nothing loose down her back);"
 - Gate: approved FAIL on exactly 2 lines (B12 "brocade in a maid prompt", M06 missing) = the owner's ordered change; if approved, rule B12 needs a nữ quan exception (foreman).
 ### ma ma (new outfit) + chưởng sự (new colour): NOT drawn (owner deciding uniform colours).
+
+# ROUND 3 (owner 20/11 ~15:35Z, brief maid7c.md; K19 uniform colours; new rules K22 hair always up, K23 no broom) — make3.py → test3_*.txt
+Uniform (K19) cung nữ = powder blue #A7BAD2 main + deep rose #CA7281 secondary (the round-1 ma ma pair). Her own accent colour: NOT added (owner proposal still open).
+HAIR sentence (copied from build_mama --oneref) added before "Pose:" in every round-3 prompt: "HAIR: ALL her hair is pinned UP in a neat bun: NO long loose hair down her back or over her shoulders, NO ribbons in the hair." (thô sử: without "NO ribbons", she has a cloth hair tie).
+- thô sử: sash → "ONE single clean narrow cloth sash at the waist (one even solid colour, no second band under or over it, never blotchy, mottled or patchy)".
+- tam đẳng: short top "made of the SAME fine silk brocade with a soft sheen as the outer jacket of the higher maids (never a plainer or duller cloth), its FRONT PANEL (vạt áo) one continuous piece clearly and fully visible from the collar down to its hem, never cut off or hidden behind the sleeve"; + "a narrow band of small embroidered flowers along the SKIRT HEM border".
+- nhị đẳng (base round-1 test_tm2): robe+skirt deep rose, half-sleeve brocade jacket powder blue; "narrow embroidered hem band, NO embroidery on the body of the skirt"; COLOUR RULE tail names both colours.
+- nhất đẳng (base round-2): "+ no extra jewellery" after the hairpins; hair sentence.
+- chưởng sự: plum purple → "eggplant purple (tím cà), a soft medium eggplant purple (clearly purple, not dark, not black, not grey)" (+ COLOUR RULE); a18 bun words (builder's own a36+ words); item broom → "a small cloth-bound palace ledger book"; + "She never holds a broom."
+- ma ma a36: NEW outfit (owner: round-1 ma ma outfit moved to nhất đẳng): "a long floor-length robe of fine silk with a crossed collar closing to the right, under a long-sleeved knee-length outer coat (beizi) worn open at the front with straight front edges, a broad embroidered border band along its front edges, hem and cuffs; a softly pleated skirt below; a narrow brocade belt with a small jade pendant; restrained embroidery of small clouds and plum blossoms ONLY on the border bands; … two plain silver hairpins …"; colour = jade blue-green (xanh lam ngọc bích leaning green) #4E8FA3 + soft ivory secondary (secondary my pick, owner gave none). Gate: approved FAIL only S32 "two front panels (hai tà)" = the old ma ma outfit (expected).
+- nữ quan: v2 kept (5jDomu5Kxe).
