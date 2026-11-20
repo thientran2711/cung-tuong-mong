@@ -1,0 +1,9 @@
+# rv-kit-signs-odds — reviewer verdict: PASS d002f7894c7d04359b379a4e871012807b3112ea (branch review/kit-signs-odds-rv = ac3e3b2f + LIVE 0aaf8152, index.html/sw.js rebuilt)
+PRIORITY #1 CHECK: OD mg-noword / mg-skip (odds word never a sign) | main j82.js kg82Signs, j79 KIT_ODDS/kitQuick | review/* kit-signs-odds only | claims keeper session_01Rc5AsMtjP4KTgBZVjENGLs
+18 laws touched: 7 (odds in words) OK, 9 KIT FIRST (kit part untouched, only the sign pass exempts it) OK, 11 whole group (one function, every kind) OK, 4/others n/a.
+Code: isOdds() = .kquick | #toilquick | id ending skip/quick | text holds a ladder word (KIT_ODDS, whole-word via \p{L} lookarounds). «Khóa» → ●, «Gợi ý» → ? verified; non-odds words still signs.
+Tests on merged branch: mg-skip Fold 755x1000@2 and iPad 1180x820@2 = 0 FAIL, PASS; mg-noword-kit PASS 31 kinds 0 words + odds probe PASS; mg-noword-b ALL OK. Same mg-skip on LIVE origin/main root index.html reproduces the FAIL (quick button = «●»), so the fix is the cause-fix.
+Shots LOOKED (makeup Fold+iPad, lesson Fold, Tu đức iPad): quick button shows «Điểm trang nhanh / Khó · thành: Đoan trang · hỏng: Vụng về», «Để trời định / Khó · thành…», «Học nhanh / Khó · …» — words + odds line present.
+## NOTE (not blocking, pre-existing on LIVE, same on branch) — for a follow-up kit order
+Makeup pre-play screen («Điểm trang: Trước gương đồng», Y PHỤC / GHI CHÚ): the red start button and the third button still show only «●» (Fold + iPad shots): the sign pass runs there although it is not play, so the player cannot read the start / back button. The odds button next to them is fine. Needs: kg82Signs must skip that makeup contest screen (like the #kg82ok / intro guard), or those buttons must be exempt.
+Not run: quickcheck/golive (diff = j82.js pass + test + rebuilt index/sw; core gates untouched; keeper ran QUICKCHECK PASS 225 s on ac3e3b2f).
