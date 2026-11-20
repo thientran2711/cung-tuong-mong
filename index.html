@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"794c6b77+","t":"2026-11-20T20:14Z","c":"SELF-MERGE LAND kit-e-rows: merge LIVE 27a7dcf5 (index.html/sw.js rebuilt)","b":"bcc362fad526","h":[{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"}]};
+window.CTM_BI={"s":"ef94ad20+","t":"2026-11-20T20:38Z","c":"mg11-thutay: index.html/sw.js rebuilt","b":"671cc9afd3bc","h":[{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -60804,10 +60804,12 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
    pay:Object.assign(()=>{if(S.bac<c||!can(BAL.servK))return false;spend(BAL.servK);return true},{chk:()=>S.bac>=c&&can(BAL.servK)}),run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=bribeServ(S,s)||""}finally{SG.mod=null}if(r)log(r);render()}}}
  return null}
 
+/* review r1 (MG11): the round time on the card follows the board (BAL.mgTier.lev.<g>.lim by her rank, law 5 / ONE CORE), not the typed seconds */
+function sgDur(G){const n=typeof mgPlaySec==="function"?mgPlaySec(G.g,"lim"):null;return n==null?G.dur:G.dur.replace(/\d+ giây/,n+" giây")}
 /* ---------- the choice: Tự ra tay (game) · Giao cho người làm (plain odds) · Thôi ---------- */
 PEND.sgpick=p=>{const J=sgJob(p);if(!J)return null;const G=J.G,p0=J.p0();
  const up=word(sgShift(p0,1)),dn=word(sgShift(p0,-1));const base=J.line(word(p0));
- const gl=base+` · (tự chơi ${G.dur}: khéo thì lên ${up}, vụng thì xuống ${dn})`;
+ const gl=base+` · (tự chơi ${sgDur(G)}: khéo thì lên ${up}, vụng thì xuống ${dn})`;
  const go=f=>()=>{const J2=sgJob(p);if(!J2)return;/* the odds she saw, read BEFORE the pay (spend); the run rolls them (+ the game's step), j9 fzRun */const fz=J2.p0();
   /* KIT §13.9: the pay (khắc / the visit's turn) is taken on «Sẵn sàng» or «Giao cho người làm» (kgDefer); the ✕ before it = free back. pay.chk = can she pay now */
   const dfr=typeof kgDefer==="function"&&typeof J2.pay.chk==="function";if(dfr){if(!J2.pay.chk()){try{render()}catch(e){}return}}else if(!J2.pay()){try{render()}catch(e){}return}
@@ -60840,7 +60842,7 @@ function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render
  const intro=()=>{KG82.phase="intro";box.innerHTML=kitRows(rows)+hint+`<div class="kg82act"><button class="${kg82Btn()}" id="sggo">Bắt đầu</button>${kitQuick({id:"sgskip",n:"Giao cho người làm",sub:`cơ may như hiện nay`})}</div>`;
   kgReady(box,{n:J.art,t:G.t,steps:(G.steps||[]).map((t,i)=>[`Bước ${i+1}`,t]),how:G.how,go:"#sggo",pic:"",v,tutor:(b,env)=>G.eng(b,Object.assign(env,{v,kind:G.g}))/* MG11: the guided round keeps its easiest board (env.lv), was lv 0 = no ease read */});
   $("sggo").onclick=()=>{kg82Seen(seenK,true);sgEng(G,v,(raw,o)=>finish(raw,o))};$("sgskip").onclick=()=>{kg82Close();J.run(null)}};
- const finish=(raw0,o)=>{KG82.phase="result";/* MG11 (Thử tay kinds nghe/truyen/mac/thoico): her play goes through the ONE result path of every kind: graded, her rolling hand b learns it, identity offset (jmgid mgIdRes via mgPlayRes); given up = 0, nothing learnt */const raw=o&&o.gaveUp?0:mgPlayRes(G.g,raw0);const st=sgStep(raw);const m={step:st};const p1=sgShift(p0,st);
+ const finish=(raw0,o)=>{KG82.phase="result";/* MG11 (Thử tay kinds nghe/truyen/mac/thoico): her play goes through the ONE result path of every kind: graded, her rolling hand b learns it, identity offset (jmgid mgIdRes via mgPlayRes); given up = 0, nothing learnt */const raw=o&&o.gaveUp?0:mgPlayLearn(G.g,raw0);/* review r1: hand b learns; the odds step reads the graded play (class "" ±0, law 2) */const st=sgStep(raw);const m={step:st};const p1=sgShift(p0,st);
   const parts=[["Phần chơi",`${kg82Word(raw)} · ${raw}/10`]];
   if(G.eng===sgNghe)parts.push(["Câu thật nghe được",`${o.hits||0} / ${o.NI||0}${o.wrong?` · lầm lời đồn ${o.wrong}`:""}`]);
   if(G.g==="mac")parts.push(["Mặc cả",o.deal?`nàng nhận lời ở hồi ${o.deal}${o.over?", nhưng giá quá hậu nên sinh nghi":""}`:"nàng chưa nhận lời"]);
@@ -81093,7 +81095,14 @@ function mgPlayLv(kind){try{return mgSet(kind,{occ:"hoc"}).ease}catch(e){return 
 function mgPlayEnv(kind,onEnd,more){let done=false;return Object.assign({kind,lv:mgPlayLv(kind),hud:()=>{},end:raw=>{if(done)return;done=true;onEnd(cl(+raw||0,0,10))}},more||{})}
 /* her raw play → the result: graded (mgGrade) → identity offset + her hand b learns (mgIdRes); the same as kg82Play end */
 function mgPlayRes(kind,raw){const g=mgGrade(raw,kind);try{return typeof mgIdRes==="function"?mgIdRes(kind,g):g}catch(e){return g}}
-Object.assign(window,{mgPlayLv,mgPlayEnv,mgPlayRes});
+/* review r1 (BIG review MG11): a SCHEME board (nghe / truyen / mac / thoico) feeds her hand b the same way, but the odds step reads the GRADED play,
+   not the recentred result: these kinds have no art behind them → identity class "" → owner OD 20/11 ~08:30Z "ordinary arts ±0". With gap 0 the offset
+   tgt[""] − b only recentres every hand to tgt[""] = 7.5 ≥ BAL.cut.sgStep.up, so «Tự ra tay» would lift the odds one step on almost every play whatever
+   her hand, while «Giao cho người làm» keeps them (law 2 equal value; regression of the acts' odds). b still learns (mgIdRes); the kit row is not shown. */
+function mgPlayLearn(kind,raw){const g=mgGrade(raw,kind);try{if(typeof mgIdRes==="function")mgIdRes(kind,g)}catch(e){}KG82.idNote=null;return g}
+/* the board time of a scheme round in whole seconds (the card line «tự chơi 3 hồi, mỗi hồi N giây» reads it; pure: mgTier, no KG82 side effect) */
+function mgPlaySec(kind,name){try{const v=mgLev({lv:mgTier(kind,{occ:"hoc"}).ease},kind,name);return v==null?null:Math.round(v/1000)}catch(e){return null}}
+Object.assign(window,{mgPlayLv,mgPlayEnv,mgPlayRes,mgPlayLearn,mgPlaySec});
 if(typeof KG82_KIND==="undefined"||typeof KG82_ENG==="undefined")return;
 /* ---- the kinds (n name, t subtitle, how = the same rule text the live screen shows) ---- */
 const sgK=g=>{try{return Object.values(SG.K).find(x=>x&&x.g===g)||null}catch(e){return null}};
@@ -85106,7 +85115,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bcc362fad526";window.CTM_BUILD=BUILD;
+const BUILD="671cc9afd3bc";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

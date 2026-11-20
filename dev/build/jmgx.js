@@ -19,7 +19,14 @@ function mgPlayLv(kind){try{return mgSet(kind,{occ:"hoc"}).ease}catch(e){return 
 function mgPlayEnv(kind,onEnd,more){let done=false;return Object.assign({kind,lv:mgPlayLv(kind),hud:()=>{},end:raw=>{if(done)return;done=true;onEnd(cl(+raw||0,0,10))}},more||{})}
 /* her raw play → the result: graded (mgGrade) → identity offset + her hand b learns (mgIdRes); the same as kg82Play end */
 function mgPlayRes(kind,raw){const g=mgGrade(raw,kind);try{return typeof mgIdRes==="function"?mgIdRes(kind,g):g}catch(e){return g}}
-Object.assign(window,{mgPlayLv,mgPlayEnv,mgPlayRes});
+/* review r1 (BIG review MG11): a SCHEME board (nghe / truyen / mac / thoico) feeds her hand b the same way, but the odds step reads the GRADED play,
+   not the recentred result: these kinds have no art behind them → identity class "" → owner OD 20/11 ~08:30Z "ordinary arts ±0". With gap 0 the offset
+   tgt[""] − b only recentres every hand to tgt[""] = 7.5 ≥ BAL.cut.sgStep.up, so «Tự ra tay» would lift the odds one step on almost every play whatever
+   her hand, while «Giao cho người làm» keeps them (law 2 equal value; regression of the acts' odds). b still learns (mgIdRes); the kit row is not shown. */
+function mgPlayLearn(kind,raw){const g=mgGrade(raw,kind);try{if(typeof mgIdRes==="function")mgIdRes(kind,g)}catch(e){}KG82.idNote=null;return g}
+/* the board time of a scheme round in whole seconds (the card line «tự chơi 3 hồi, mỗi hồi N giây» reads it; pure: mgTier, no KG82 side effect) */
+function mgPlaySec(kind,name){try{const v=mgLev({lv:mgTier(kind,{occ:"hoc"}).ease},kind,name);return v==null?null:Math.round(v/1000)}catch(e){return null}}
+Object.assign(window,{mgPlayLv,mgPlayEnv,mgPlayRes,mgPlayLearn,mgPlaySec});
 if(typeof KG82_KIND==="undefined"||typeof KG82_ENG==="undefined")return;
 /* ---- the kinds (n name, t subtitle, how = the same rule text the live screen shows) ---- */
 const sgK=g=>{try{return Object.values(SG.K).find(x=>x&&x.g===g)||null}catch(e){return null}};

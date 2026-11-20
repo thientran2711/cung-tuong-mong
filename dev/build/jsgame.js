@@ -252,10 +252,12 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
    pay:Object.assign(()=>{if(S.bac<c||!can(BAL.servK))return false;spend(BAL.servK);return true},{chk:()=>S.bac>=c&&can(BAL.servK)}),run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=bribeServ(S,s)||""}finally{SG.mod=null}if(r)log(r);render()}}}
  return null}
 
+/* review r1 (MG11): the round time on the card follows the board (BAL.mgTier.lev.<g>.lim by her rank, law 5 / ONE CORE), not the typed seconds */
+function sgDur(G){const n=typeof mgPlaySec==="function"?mgPlaySec(G.g,"lim"):null;return n==null?G.dur:G.dur.replace(/\d+ giây/,n+" giây")}
 /* ---------- the choice: Tự ra tay (game) · Giao cho người làm (plain odds) · Thôi ---------- */
 PEND.sgpick=p=>{const J=sgJob(p);if(!J)return null;const G=J.G,p0=J.p0();
  const up=word(sgShift(p0,1)),dn=word(sgShift(p0,-1));const base=J.line(word(p0));
- const gl=base+` · (tự chơi ${G.dur}: khéo thì lên ${up}, vụng thì xuống ${dn})`;
+ const gl=base+` · (tự chơi ${sgDur(G)}: khéo thì lên ${up}, vụng thì xuống ${dn})`;
  const go=f=>()=>{const J2=sgJob(p);if(!J2)return;/* the odds she saw, read BEFORE the pay (spend); the run rolls them (+ the game's step), j9 fzRun */const fz=J2.p0();
   /* KIT §13.9: the pay (khắc / the visit's turn) is taken on «Sẵn sàng» or «Giao cho người làm» (kgDefer); the ✕ before it = free back. pay.chk = can she pay now */
   const dfr=typeof kgDefer==="function"&&typeof J2.pay.chk==="function";if(dfr){if(!J2.pay.chk()){try{render()}catch(e){}return}}else if(!J2.pay()){try{render()}catch(e){}return}
@@ -288,7 +290,7 @@ function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render
  const intro=()=>{KG82.phase="intro";box.innerHTML=kitRows(rows)+hint+`<div class="kg82act"><button class="${kg82Btn()}" id="sggo">Bắt đầu</button>${kitQuick({id:"sgskip",n:"Giao cho người làm",sub:`cơ may như hiện nay`})}</div>`;
   kgReady(box,{n:J.art,t:G.t,steps:(G.steps||[]).map((t,i)=>[`Bước ${i+1}`,t]),how:G.how,go:"#sggo",pic:"",v,tutor:(b,env)=>G.eng(b,Object.assign(env,{v,kind:G.g}))/* MG11: the guided round keeps its easiest board (env.lv), was lv 0 = no ease read */});
   $("sggo").onclick=()=>{kg82Seen(seenK,true);sgEng(G,v,(raw,o)=>finish(raw,o))};$("sgskip").onclick=()=>{kg82Close();J.run(null)}};
- const finish=(raw0,o)=>{KG82.phase="result";/* MG11 (Thử tay kinds nghe/truyen/mac/thoico): her play goes through the ONE result path of every kind: graded, her rolling hand b learns it, identity offset (jmgid mgIdRes via mgPlayRes); given up = 0, nothing learnt */const raw=o&&o.gaveUp?0:mgPlayRes(G.g,raw0);const st=sgStep(raw);const m={step:st};const p1=sgShift(p0,st);
+ const finish=(raw0,o)=>{KG82.phase="result";/* MG11 (Thử tay kinds nghe/truyen/mac/thoico): her play goes through the ONE result path of every kind: graded, her rolling hand b learns it, identity offset (jmgid mgIdRes via mgPlayRes); given up = 0, nothing learnt */const raw=o&&o.gaveUp?0:mgPlayLearn(G.g,raw0);/* review r1: hand b learns; the odds step reads the graded play (class "" ±0, law 2) */const st=sgStep(raw);const m={step:st};const p1=sgShift(p0,st);
   const parts=[["Phần chơi",`${kg82Word(raw)} · ${raw}/10`]];
   if(G.eng===sgNghe)parts.push(["Câu thật nghe được",`${o.hits||0} / ${o.NI||0}${o.wrong?` · lầm lời đồn ${o.wrong}`:""}`]);
   if(G.g==="mac")parts.push(["Mặc cả",o.deal?`nàng nhận lời ở hồi ${o.deal}${o.over?", nhưng giá quá hậu nên sinh nghi":""}`:"nàng chưa nhận lời"]);

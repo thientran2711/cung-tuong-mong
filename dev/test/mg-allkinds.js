@@ -44,7 +44,10 @@ const HARD={nghe:['cross',-1],truyen:['lim',-1],mac:['lim',-1],thoico:['lim',-1]
   o.mid={};o.ladder={};for(const k of MG11){const L=(BAL.mgTier.lev||{})[k]||{};o.mid[k]={};for(const n in L)o.mid[k][n]=Math.round(mgLev({lv:BAL.mgTier.mid},k,n)*1000)/1000;
    const [n,dir]=HARD[k];const v=BAL.ag.mg2.cal.d.map(d=>mgLev({lv:mgTier(k,{occ:"hoc",lv:0,d}).ease},k,n));o.ladder[k]={n,v:v.map(x=>Math.round(x*1000)/1000),ok:v.every((x,i)=>!i||(dir>0?x>=v[i-1]:x<=v[i-1]))&&v[0]!==v[v.length-1]}}
   S.mgB={};const n0=0;mgSet("thu_choi",{occ:"hoc"});const r1=mgPlayRes("thu_choi",8);o.learn={r1,n:S.mgB.thu_choi&&S.mgB.thu_choi.n};
-  const src=f=>String(f);o.live={sgPlay:/mgPlayRes\(G\.g/.test(src(sgPlay)),sgEng:/mgPlayLv\(G\.g\)/.test(src(sgEng)),bath:/mgPlayRes\("thu_tam"/.test(src(petcBath)),play:/mgPlayRes\("thu_choi"/.test(src(petcPlay))};
+  /* 11 (review r1): a scheme play learns b but the odds step reads the GRADED play: a steady hand of 5 stays «giữ nguyên» (law 2 vs «Giao cho người làm») */
+  S.mgB={};mgSet("nghe",{occ:"hoc"});for(let i=0;i<20;i++)mgPlayLearn("nghe",5);const g5=mgPlayLearn("nghe",5),rec5=mgPlayRes("nghe",5);
+  o.law2={b:Math.round(mgIdB("nghe",S)*10)/10,g5,step:sgStep(g5),recentred:rec5,stepIfRecentred:sgStep(rec5),dur:sgDur(SG.K.rumor),lim:mgPlaySec("truyen","lim")};
+  const src=f=>String(f);o.live={sgPlay:/mgPlayLearn\(G\.g/.test(src(sgPlay)),sgEng:/mgPlayLv\(G\.g\)/.test(src(sgEng)),bath:/mgPlayRes\("thu_tam"/.test(src(petcBath)),play:/mgPlayRes\("thu_choi"/.test(src(petcPlay))};
   o.ends={};for(const k of MG11){const box=document.createElement("div");box.className="kgbox";document.body.appendChild(box);let raw=null;
    const env={kind:k,lv:mgSet(k,{occ:"hoc",lv:0,d:0}).ease,hud:()=>{},end:x=>{raw=x}};let stop=null;try{stop=KG82_ENG[KG82_KIND[k].e](box,env)}catch(e){o.ends[k]="throw "+e.message;continue}
    await sleep(150);
@@ -65,6 +68,7 @@ const HARD={nghe:['cross',-1],truyen:['lim',-1],mac:['lim',-1],thoico:['lim',-1]
  ok(r.mg11.in.length===MG11.length&&!r.mg11.feed&&!r.mg11.co.length,'7 the seven MG11 kinds are in Thử tay; Cho ăn / j5 Kỳ / envoy card are not kinds',r.mg11);
  ok(MG11.every(k=>Object.keys(OLD[k]).every(n=>Math.abs(r.mid[k][n]-OLD[k][n])<1e-6)),'8a the middle ease gives the old board of every MG11 kind',{mid:r.mid,old:OLD});
  ok(MG11.every(k=>r.ladder[k].ok),'8b the Thử tay ladder d −2 → +2 makes every MG11 board harder',r.ladder);
+ ok(r.law2.b<6&&r.law2.step===0&&r.law2.dur.includes(r.law2.lim+' giây'),'11 scheme odds step reads the graded play (steady hand 5 → step 0, not +1); card seconds = BAL board',r.law2);
  r.live.water=/mgPlayEnv\("tuoi"[^;]*mgPlayRes\("tuoi"/.test(src);ok(r.learn.n===1&&Object.values(r.live).every(Boolean),'9 live plays use the ONE result path (her hand b learns; sgPlay/sgEng/petcBath/petcPlay wired)',{learn:r.learn,live:r.live});
  ok(MG11.every(k=>r.ends[k]!=null&&!/^throw/.test(String(r.ends[k]))&&(r.ends[k]==="started"||(+r.ends[k]>=0&&+r.ends[k]<=10))),'10 every MG11 board starts from a generic env and the touch boards end with a 0..10 raw',r.ends);
  ok(errs.length===0,'6 no page errors',errs.slice(0,3));
