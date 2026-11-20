@@ -143,7 +143,11 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
     /* law 6b one place: on each seat her own name sits in no world list, the friend's name exactly once (her rivals entry or her coop entry in her mistress's staff) */
     for(const o of [A,B]){const r=await o.p.evaluate(()=>{const L=[];for(const v of rivals){L.push([v.name,!!v.coop,'R'+v.id]);for(const x of v.staff||[])L.push([x.name,!!x.coop,'staff of '+v.id])}const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);
       return{me:S.name,own:L.filter(x=>x[0]===S.name),fr:f&&f.name,frN:f?L.filter(x=>x[0]===f.name):[],srv:S.srv&&!S.srv.risen?S.srv.mid:null}});
-     ok(!r.own.length&&r.frN.length===1,tag+' '+o.name+': each player sits in exactly one place (own name in no list, friend once)',r.own.length||r.frN.length!==1?r:[r.me,r.srv,r.fr,r.frN[0]&&r.frN[0][2]])}}
+     /* r1 (reviewer): identity first — exactly one coop entry (the friend), never her own; a non-coop world person who only SHARES a full name with a
+        player is a different person (name clash, owner names-unique lane review/names-unique-r2-r1, not on main) and is reported as its own FAIL line */
+     const idOk=!r.own.some(x=>x[1])&&r.frN.filter(x=>x[1]).length===1,clash=r.own.filter(x=>!x[1]).concat(r.frN.filter(x=>!x[1]));
+     ok(idOk,tag+' '+o.name+': each player sits in exactly one place (one coop entry = the friend, none for herself)',idOk?[r.me,r.srv,r.fr,(r.frN.find(x=>x[1])||[])[2]]:r);
+     ok(!clash.length,tag+' '+o.name+': no world person shares a player\'s full name (names-unique lane)',clash.length?clash:undefined)}}
    /* art-wiring-1119: the Thái hậu is a pool face drawn by the host; both seats show the same picture (her own face's Thái hậu robe) */
    {const th=o=>o.p.evaluate(()=>({f:typeof figFor==='function'?figFor({kind:'th'},'fig'):'',fid:S.thO&&S.thO.fid||null}));let x,y;const t0=Date.now();
     while(Date.now()-t0<20000){x=await th(A);y=await th(B);if(x.f&&x.f===y.f)break;await sleep(400)}
