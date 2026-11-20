@@ -541,8 +541,6 @@ def _build_season(person,rank,age="a18",season=None):
     _m=b26_fit_ok(person,rank,age,season)
     if _m and len(S)>10000: S,notes=b26_fit(S,notes,angle=False,whole=_m=='whole',rank=_c2rank(rank))   # B26 length: winter_g28.season already dropped ANGLE
     if _m and len(S)>10000: S,notes=b26_fit(S,notes,angle=False,whole=_m=='whole')   # B26 length: winter_g28.season already dropped ANGLE
-    S0,S,add=build(person,rank,age); S,notes=winter_g28.season(S,rank,a36,season)
-    if rank in (4,5) and len(S)>10000: S,notes=b26_fit(S,notes,angle=False)   # B26 length: winter_g28.season already dropped ANGLE
     return S0,S,add+notes
 
 def _kc_drawn(person):   # B8 (BW3): same table + rule as build.py kc_drawn (dev/art/KC_REFS.json m09_ok yes + real face words)
@@ -575,7 +573,6 @@ def b26_fit_ok(person,rank,age,season):
     """-> 'while' (cut while > 10 000), 'whole' (cell over at HEAD, t4/t5: the JOB 1 all-or-nothing fit kept as it was, so nothing that fitted before goes over again), or False."""
     global _HEAD_OVER
     if not (isinstance(rank,int) and 1<=rank<=8): return False   # B26FAB3 (Foreman C #6, 20/11): t7/t8 too (F2 embroidery names), same cut-while step
-    if not (isinstance(rank,int) and 1<=rank<=6): return False
     if _HEAD_OVER is None:
         import json as _j; _HEAD_OVER=set(_j.load(open(os.path.join(ART,"b26","HEAD_OVER10K.json"),encoding="utf-8"))["cells"])
     if not ({f"{x}|{rank}|{age}|{season}" for x in (person,ALIAS.get(person,person))} & _HEAD_OVER): return 'while'
@@ -584,14 +581,6 @@ def b26_fit(S,add,angle,whole=False,rank=None):
 def b26_fit(S,add,angle,whole=False):
     """B26 length (owner Lượt 1283 đoạn sentence; JOB 2/3 growth): t1-t6, (1) drop the ANGLE sentence (owner ~15:39Z length rule, as winter_g28.season) when
     angle=True, (2) master_common.doan_fit master-repeat store clauses (Foreman C #5 decision (a)), each only while still > 10 000."""
-def build(person,rank,age="a18"):
-    S0,S,add=_build(person,rank,age); S=eyes(S)
-    if rank in (4,5) and len(S)>10000: S,add=b26_fit(S,add,angle=True)
-    return S0,S,add
-def b26_fit(S,add,angle):
-    """B26 length (owner Lượt 1283 đoạn sentence is ~250 chars longer): t4/t5 only, ALL-OR-NOTHING: (1) drop the ANGLE sentence (owner ~15:39Z length rule, as
-    winter_g28.season) when angle=True, (2) master_common.doan_fit master-repeat store clauses (Foreman C #5 decision (a)); kept only if the prompt then fits
-    <= 10 000, else the prompt is returned unchanged (cells already over 10 000 before B26 are not cut)."""
     sys.path.insert(0,ART); import winter_g28 as _W, master_common as _MC
     T=S; notes=[]
     m=_W.ANGLE_RX.search(T) if angle else None
@@ -621,8 +610,24 @@ def hqp_collar(person,S):
         T,_c=_MC.doan_fit(T,low=not whole); notes+=[f"B26 length cut (repeats {x})" for x in _c]
     if whole and len(T)>10000: return S,add   # JOB 1 all-or-nothing (cells already over at HEAD)
     return T,add+notes
-        T,_c=_MC.doan_fit(T); notes+=[f"B26 length cut (repeats {x})" for x in _c]
-    return (T,add+notes) if len(T)<=10000 else (S,add)
+# HQP COLLAR (owner Lượt 1384 via Foreman C #7, 20/11: "Áp dụng Hoàng Quý Phi cho cái trang phục hiện tại luôn"): t7 current outfit = the LAYERED NECKLINE block
+# of dev/art/thu_comoi/s62_t7_THU_COMOI.txt (make_thu_comoi.py layer() + OPEN, words verbatim) for every person, with her own main / secondary colour.
+# Only these two slots change; luxury, jewels, crown, pearls, embroidery untouched. SHORT = make_thu_comoi.py compact form (same meaning), used only when the long form
+# would push a cell that fitted over 10 000. Words: ONE copy in dev/art/check_store.py (hqp_layer / HQP_OPEN), shared with the gate (as G15).
+HQP_SHORT=False
+_HQP_CS=None
+def _hqp_cs():
+    global _HQP_CS
+    if _HQP_CS is None:
+        import importlib.util as _iu
+        _sp=_iu.spec_from_file_location("check_store",os.path.join(ART,"check_store.py")); _HQP_CS=_iu.module_from_spec(_sp); _sp.loader.exec_module(_HQP_CS)
+    return _HQP_CS
+def hqp_collar(person,S):
+    cs=_hqp_cs(); m=re.search(r"a near-empress ceremonial robe of ([^,]+?) silk, ",S); assert m,("HQP collar slot",person)
+    main=re.sub(r"^SATURATED ","",m.group(1)); sec=re.sub(r" like #[0-9A-Fa-f]{6}$","",secondary(person)[0])
+    S=S.replace(m.group(0),f"a near-empress ceremonial robe of {m.group(1)} silk with {cs.hqp_layer(main,sec,HQP_SHORT)}; the robe ",1)
+    assert S.count(cs.HQP_CAPE)==1,("HQP cape slot",person)
+    return S.replace(cs.HQP_CAPE,cs.HQP_CAPE+cs.HQP_OPEN+", ",1)
 def _build(person,rank,age="a18"):
     if not _kc_drawn(ALIAS.get(person,person)): raise NotDrawn(person)   # B8: people NOT drawn are refused (CLI exit 2, --check counts them HELD)
     person=ALIAS.get(person,person); S0=store(person,rank,age); S=S0
@@ -642,18 +647,8 @@ def _build(person,rank,age="a18"):
 def hairflower_named(a,person,rank):
     if not a.startswith(_F13): return a
     sp=LAST_G["hairflower_species"](ALIAS.get(person,person),rank)   # F2 (owner Lượt 1352): the F2 species of THIS rank
-    if rank in (4,5,6): add=[hairflower_named(a,person) for a in add]
-    if not g_pets_allowed(rank,age): S=LAST_G["_PETS"].depet(S)   # F17 PETS: no animal pose where pets are not allowed (only the animal words change)
-    return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
-# HAIR FLOWER SPECIES t4-t6 (Foreman C #5 decision 2, 20/11; species = F2 NEW TABLE owner DUYỆT Lượt 1352, build.py F2_FL via hairflower_species(person, rank)):
-# the F13 HAIR FLOWER SIZE sentence names the F2 species of this rank ('ONE fresh <species> in her hair'); size words unchanged.
-def hairflower_named(a,person,rank):
-    if not a.startswith(_F13): return a
-    sp=LAST_G["hairflower_species"](ALIAS.get(person,person),rank)   # F2 (owner Lượt 1352): the F2 species of THIS rank
     if not sp: return a
     return a.replace("ONE fresh flower in her hair","ONE fresh "+sp[0]+" in her hair",1)
-    if not g_pets_allowed(rank,age): S=LAST_G["_PETS"].depet(S)   # F17 PETS: no animal pose where pets are not allowed (only the animal words change)
-    return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
 
 # ---------------- THÁI HẬU (owner Lượt 618 + 624, ROOT-53 order: BASE = the 18/11 Thái hậu prompt the owner liked, VERBATIM) ----------------
 # BASE file dev/art/elder-copy/THAIHAU_1811_c04_a36_BASE.txt = Magnific prompt of gen CqnHqn1EEy (c04 a36, 18/11 22:28Z; a51 bxMrxpT5Y2 / a65 cpSDpJs0eP
