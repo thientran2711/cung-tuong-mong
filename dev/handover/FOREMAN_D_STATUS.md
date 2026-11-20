@@ -294,3 +294,4 @@ LESSONS: (1) grep the WHOLE STATUS each wake. (2) Every new rule code a worker a
 - (20/11 04:27Z) FROM MAIN ROOT-73: LIVE b3f5a05c (kit-gamevs K-PM-1) on 40e26887. ROLLBACK 40e26887. Final-merge b3f5a05c before LAND READY.
 - (20/11 04:35Z) FROM MAIN ROOT-73: LIVE dddb1f94 (owner mgcal, BAL only). ROLLBACK b3f5a05c. Final-merge dddb1f94 before LAND READY.
 - (20/11 04:44Z) FROM MAIN ROOT-73: LIVE a1aa8b19 (owner mgcal doden, BAL only). ROLLBACK dddb1f94. Final-merge a1aa8b19 before LAND READY.
+- (20/11 04:55Z) FROM MAIN: main rolls over ROOT-73 → ROOT-74 session_01Rc5AsLW7a12BUC5kZhtsTy. Send reports there.
