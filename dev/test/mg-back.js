@@ -80,16 +80,20 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  console.log(JSON.stringify(cal));
  /* 6 free back before «Sẵn sàng» (rv-mg-back fixes 1+2): ✕ = closed, no confirm, S + khắc exactly as before the act began; 7 jsgame result ✕ asks first */
  const pre=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const R={};
-  const AMB=['pcx','log','logs','logSeq','stat','emp','where','roster','tb','knw'];/* ambient (the living world ticks on timers): chatter memory, log lines, dialog counter, the Emperor's walk, who is where */
+  const AMB=['pcx','log','logs','logSeq','stat','emp','where','roster','tb','knw','visit','emoSeen'];/* ambient (the living world ticks on timers): chatter memory, log lines, dialog counter, the Emperor's walk, who is where */
   const SJ=()=>{const o=Object.assign({},S);AMB.forEach(k=>delete o[k]);return JSON.stringify([o,used])};/* S.pcx = ambient chatter memory; log lines aside */
   const pick=async(i)=>{await sleep(150);const m=Q[0];if(!m||!m.opts)return false;const ix=typeof i==='function'?m.opts.findIndex(i):i;if(ix<0)return false;chooseM(ix);await sleep(200);return true};
   /* the recipe picker (jwkr, KIT 28.13e) in front of the material dialog: tap the first open tile */
   const tile=async()=>{await sleep(200);const t=[...document.querySelectorAll('#modal [data-kwrgo]')].find(x=>!x.disabled);if(t){t.click();await sleep(250)}return !!t};
   const back=async()=>{const x=document.querySelector('#kg82 .kit-x[data-kitx=kgback]');if(!x)return 'noX';x.click();await sleep(300);return __cf()?'confirm':document.getElementById('kg82')?'open':'closed'};
-  const one=async(label,open,prep)=>{const r={};try{__clean();S.ap=9;S.suc=100;S.bac=999;used=0;Q.length=0;if(prep){prep();try{render()}catch(e){}await sleep(900)}await sleep(100);const s0=SJ();await open();await sleep(900);
-    r.frame=!!document.getElementById('kg82')&&!!(kg82Box()&&kg82Box().querySelector('.kgr-go'));r.paid=SJ()!==s0;r.x=await back();if(r.x==='confirm')__no();await sleep(200);
+  /* every S → living-person reference (law 6b): the same objects after the back, in the same places */
+  const REFS=()=>{const RV=new Set(rivals),out=[],seen=new Set();const walk=(o,d,pth)=>{if(!o||typeof o!=='object'||seen.has(o)||d>6)return;seen.add(o);if(RV.has(o)){out.push([pth,o]);return}for(const k in o)walk(o[k],d+1,pth+'.'+k)};for(const k in S)walk(S[k],1,k);return out};
+  const sp0=spend;let SPN=0;spend=function(){SPN++;return sp0.apply(this,arguments)};/* spend() moves the world (errands, NPC runners): it must not run before «Sẵn sàng» */
+  const one=async(label,open,prep)=>{const r={};try{__clean();S.ap=9;S.suc=100;S.bac=999;used=0;Q.length=0;if(prep){prep();try{render()}catch(e){}await sleep(900)}await sleep(100);const s0=SJ(),f0=REFS();SPN=0;await open();await sleep(900);
+    r.frame=!!document.getElementById('kg82')&&!!(kg82Box()&&kg82Box().querySelector('.kgr-go'));r.paid=SJ()!==s0;r.remembered=!!KG82.payOnGo;r.x=await back();if(r.x==='confirm')__no();await sleep(200);
+    r.spends=SPN;const f1=REFS();r.refs=f0.length+'/'+f1.length;r.refSame=f0.every(([p,o])=>f1.some(([q,x])=>q===p&&x===o));/* every reference held before is still the same living object (a visitor arriving meanwhile may add one) */
     r.same=SJ()===s0;if(!r.same){const [a,u0]=JSON.parse(s0);r.diff=Object.keys(S).filter(k=>!AMB.includes(k)&&JSON.stringify(S[k])!==JSON.stringify(a[k])).slice(0,6);r.used=[u0,used]}
-    r.mg=S.mg;r.pend=!!window.__aaPend;r.ok=r.frame&&r.x==='closed'&&r.same&&!S.mg&&!r.pend/* nothing left pending: the next act is not blocked */}catch(e){r.err=String(e.message||e)}R[label]=r};
+    r.mg=S.mg;r.pend=!!window.__aaPend;r.ok=r.frame&&r.x==='closed'&&r.same&&!S.mg&&!r.pend/* nothing left pending: the next act is not blocked */&&r.spends===0&&r.refSame}catch(e){r.err=String(e.message||e)}R[label]=r};
   await one('jtd Tu đức (self)',async()=>{TDS.busy=false;S.mg=null;tdPlay("cong","self")});
   await one('jtd Tu đức (thầy)',async()=>{TDS.busy=false;S.mg=null;tdPlay("dung","teacher")});
   await one('j83 Tự học (bậc 5, vật liệu tốt)',async()=>{wkPractice(ARTS[0].k);await tile();await pick(1)},()=>{S.arts[ARTS[0].k]=5});
@@ -98,8 +102,16 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   await one('jrcp thầy dạy lối mới (bậc 5)',async()=>{rcpMaster(window.__rk);await pick(0);await tile();await pick(0)},()=>{const k=window.__rk=ARTS[3].k;S.arts[k]=5});
   await one('j83 thẻ Tự học (Hành sự)',async()=>{const c=wkDeckCard();deck.push(c);window.__dc=c;window.__dcw={aaPend:!!window.__aaPend,mg:!!S.mg};act(deck.length-1)});
   R['j83 thẻ Tự học (Hành sự)'].why=window.__dcw;R['j83 thẻ Tự học (Hành sự)'].cardFree=window.__dc&&!window.__dc.done;R['j83 thẻ Tự học (Hành sự)'].ok=R['j83 thẻ Tự học (Hành sự)'].ok&&R['j83 thẻ Tự học (Hành sự)'].cardFree;
-  await one('jveil kết mạng (dây bạc)',async()=>{const m=1;if(VL.mat[m])S.bac-=VL.mat[m];vlCraftRun(m)});/* the dialog option's fx pays the material, then go */
+  await one('jveil kết mạng (dây bạc)',async()=>{const d=mkP("vlcraft",{});pushDil(d,"Kết mạng che mặt");showModal();await pick(o=>/dây bạc/i.test(o.n)||!!(o.fx&&o.fx.bac))});/* the real dialog: its option pays the material (jaudit holds it pending) */
   await one('jsgame mua chuộc (trả khắc)',async()=>{const sv=allServ().find(x=>{const o=ownerOf(x);return o&&o!==S});if(!sv)throw new Error('no servant');sgAsk({j:"serv",sid:sv.sid},"Mua chuộc");await pick(0)});
+  /* the remembered charge IS taken on «Sẵn sàng» (lesson: joins jaudit's pending cost, paid with its card; jsgame pay: spend now) */
+  try{__clean();S.suc=100;S.bac=999;used=0;Q.length=0;S.mg=null;window.__aaPend=null;const k=ARTS[1].k;S.arts[k]=1;await sleep(200);lessonMode(k,"self");const t=[...document.querySelectorAll('#modal [data-kwrgo]')].find(x=>!x.disabled);if(t){t.click();await sleep(250)}
+   await sleep(200);if(Q[0]&&Q[0].opts)chooseM(0);await sleep(900);R.goRemember=!!KG82.payOnGo&&!!(S.mg&&S.mg.pay);const p0=JSON.stringify(window.__aaPend||null);
+   document.querySelector('#kg82 .kgr-go').click();await sleep(400);const pd=window.__aaPend||(S.mg&&S.mg.cost)||{};R.goPaid=!KG82.payOnGo&&!(S.mg&&S.mg.pay)&&(pd.suc||0)<=-15&&(pd.khac||0)>=2;R.goPend=[p0,JSON.stringify(pd)]}catch(e){R.goErr=String(e.message||e)}
+  try{kg82Close()}catch(e){}S.mg=null;window.__aaPend=null;window.__aaTitle=null;
+  try{__clean();S.ap=9;S.suc=100;S.bac=999;used=0;Q.length=0;const sv=allServ().find(x=>{const o=ownerOf(x);return o&&o!==S});sgAsk({j:"serv",sid:sv.sid},"Mua chuộc");await pick(0);await sleep(900);SPN=0;const u0=used;
+   document.getElementById('sggo').click();await sleep(300);R.sgPaid=SPN>=1&&used>u0}catch(e){R.sgErr2=String(e.message||e)}
+  spend=sp0;
   /* jsgame result ✕ asks first */
   try{__clean();const v=liveRivals(true)[0];let ran=0;sgPlay({G:SG.K.rumor,art:"Mưu kế",v,p0:()=>50,run:()=>{ran++},cost:""});await sleep(900);
    KG82.giveUp=1;document.getElementById('sggo').click();KG82.giveUp=0;await sleep(600);R.sgRes=!!document.getElementById('sgdo');
@@ -135,7 +147,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(!cal.err&&XV(cal.list_x)&&cal.noThoi&&XV(cal.rules_x)&&cal.rules_back&&XV(cal.tut_x)&&cal.tut_back&&XV(cal.play_x)&&cal.playing&&cal.play_cf&&cal.play_back&&XV(cal.mid_x)&&cal.mid_nx&&cal.mid_back&&!cal.dan0&&!cal.dan1&&cal.list_close,'2 Thử tay: ✕ → kind list from rules / Hướng dẫn / play (confirm) / between rounds; kind not saved; ✕ closes the list',cal);
  {const L=Object.keys(pre).filter(k=>typeof pre[k]==='object'&&pre[k]&&'ok' in pre[k]);const B2=L.filter(k=>!pre[k].ok).map(k=>k+' '+JSON.stringify(pre[k]));
   ok(L.length>=9&&!B2.length,'6 before «Sẵn sàng»: ✕ = free back, no confirm, nothing spent (Sức, bạc, phí, khắc, vật liệu identical) — jtd, j83 (dialog + deck card), jrcp, jveil, jsgame pay',B2);
-  ok(L.filter(k=>!/jtd|thẻ/.test(k)).every(k=>pre[k].paid),'6 those callers charged (or hold pending) before the frame (the test sees it)',L.map(k=>k+':'+pre[k].paid));
+  ok(L.filter(k=>!/jtd|thẻ/.test(k)).every(k=>pre[k].remembered),'6b the charge is only REMEMBERED on the rules screen (nothing spent, spend() never ran, S→rivals refs identical)',L.map(k=>k+':'+pre[k].remembered+'/sp'+pre[k].spends+'/refs'+pre[k].refs));
+  ok(pre.goRemember&&pre.goPaid&&pre.sgPaid,'6c «Sẵn sàng» takes the remembered charge (lesson: Sức + 2 khắc join jaudit\'s pending cost; paid scheme: spend now)',{goRemember:pre.goRemember,goPaid:pre.goPaid,goPend:pre.goPend,sgPaid:pre.sgPaid,e:[pre.goErr,pre.sgErr2]});
   ok(pre.sgRes&&pre.sgAsk&&pre.sgRan0===0&&pre.sgStay&&pre.sgRan===1&&pre.sgClosed,'7 jsgame result: ✕ asks «Ra tay?» first («Ở lại» keeps the card, nothing runs; «Ra tay» runs once)',pre)}
  const hid=await p.evaluate(()=>window.__cfHidden||0);ok(!hid,'3/4 the kit confirm lies on top of the game (its button takes a real tap)',{covered:hid});
  ok(!errs.length,'5 no page errors',errs.slice(0,5));
