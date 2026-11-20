@@ -41,6 +41,17 @@ function mgWord(raw){const W=BAL.mgTier.word;return raw>=W[3]?"Xuất sắc":raw
 function mgFull(env,b){const e=env&&env.lv!=null?+env.lv:BAL.mgTier.fullAt,M=BAL.mgTier.fullAt;return Math.min(1,b+(1-b)*cl((M-e)/M,0,1))}
 /* the grade of a finished play: engines pass a FLOAT 0..10; the curve BAL.mgTier.gamma (>1 = stricter near the top) turns it into the 0..10 shown */
 function mgGrade(raw,kind){const g=(BAL.mgTier.kG||{})[kind]||BAL.mgTier.gamma;const x=cl(+raw||0,0,10)/10;return cl(Math.round(10*Math.pow(x,g)),0,10)}
+/* ===== ONE GRADING PATH for the board and the result (review/mg-score-same, owner bug 20/11 ~06:50Z: "lúc mà tôi vào … tôi chơi tôi thấy cái nào cũng
+   là kiểu như là đạt hết. Đến lúc tính điểm toàn 9 trên 10 không"). The board's score cell never shows a raw count again: every engine (31 kinds)
+   writes mgLive(env, x) = the MARK IN HER HAND = mgGrade(x, kind) — the very function kg82Play grades the result with — where x = the engine's raw
+   float if the rest of the play goes perfectly (points lost so far stay lost, rounds not played yet count whole; mgReach). A slow answer (mgPace time
+   part) or a miss lowers the mark the moment it happens; at the end x = the raw passed to env.end, so the last board mark = the result mark
+   (kg82Play also writes the given mark on the board when the play ends). */
+function mgReach(got,done,of){return cl((+got||0)+10*Math.max(0,(+of||0)-(+done||0))/Math.max(1,+of||1),0,10)}
+function mgLive(env,x){return `${mgGrade(x,env&&env.kind)}/10`}
+/* gold round pop (owner OD 20/11 ~07:15Z (c), review/mg-score-same-rv): a round whose score the time part cut (mgPace < 1) pops in the kit --gold tone instead of its own colour */
+function mgPaceCol(sp,col){return sp<1?kg82Col("--gold","#8f5f0c"):col}
+window.mgReach=mgReach;window.mgLive=mgLive;window.mgPaceCol=mgPaceCol;
 /* tolerance factor of a board (hit windows, trace width, heat zone, scent match, time): BAL.mgTier.tol[0] at ease 0 → tol[1] at ease 5 */
 function mgTol(env){const T=BAL.mgTier.tol,e=env&&env.lv!=null?+env.lv:5;return Math.max(T[2],T[0]+(T[1]-T[0])*cl(e/5,-1,1))}/* below ease 0 it keeps shrinking, floor tol[2] */
 /* extra pieces to remember (thêu pattern, múa steps): BAL.mgTier.more at ease 0, none at ease ≥ 5·(1 − 1/(more+1)) */
