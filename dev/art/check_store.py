@@ -210,8 +210,7 @@ APPROVED = [{'id': 'S01',
  {'id': 'S14',
   'title': 'HOÀNG QUÝ PHI LUXURY t7',
   'text': 'HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), a layered pearl-and-gold necklace, pearl and jade trims along '
-          'the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress.'
-          ' HQP JEWEL VISIBILITY (owner 20/11, like s65 t7): the pearls, gems and gold ornaments read CLEARLY at game size (distinct bright pearls and small coloured gems catching the light against the robe), a few gem-set gold clasps on the cape and sash, and the held item decorated with small gems and a gem tassel; a modest step up only, elegant, NOT a pile of jewels, still below the Empress.',
+          'the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress.',
   'scope': 'tp7 pr7',
   'confirm': '',
   'ages': '',

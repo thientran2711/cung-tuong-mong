@@ -213,7 +213,7 @@ def capelet_cut(person):
 def collar_cut(person):
     return ("COLLAR CUT (flowing): the collar's lower edge follows soft CURVES, never flat horizontal edges: "+CURVE_SHAPES[_pn(person)%len(CURVE_SHAPES)]+"; "
      "the front is NOT closed or buttoned from top to bottom: it opens gradually from the collar downward in a long soft V, flowing and graceful (uyển chuyển), never cramped or boxy.")
-HQP_LUX="HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), a layered pearl-and-gold necklace, pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress. HQP JEWEL VISIBILITY (owner 20/11, like s65 t7): the pearls, gems and gold ornaments read CLEARLY at game size (distinct bright pearls and small coloured gems catching the light against the robe), a few gem-set gold clasps on the cape and sash, and the held item decorated with small gems and a gem tassel; a modest step up only, elegant, NOT a pile of jewels, still below the Empress."
+HQP_LUX="HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), a layered pearl-and-gold necklace, pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress."
 def item_colour(person,rank,F):
     m=re.search(r" Pose: .*?(?:holding|holds|carrying|offering|raising|with) (an? [^,.]+?)(?: in | up | raised| held| forward| beside| at |,|\.)",F)
     main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
