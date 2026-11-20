@@ -32,3 +32,24 @@ Screenshots are in /home/user/wt/econ-tamco-shots/roadpick-*.jpg (not in git).
 
 ## Handover
 Rollover point reached. Next: (1) the kit keeper does the Tốn-row request, (2) wire it into PEND.roadpick, (3) run the bot re-measure (death / HH) with BAL.road, (4) final-merge current origin/main, rebuild, tier.js, gates, then SẴN SÀNG KIỂM. Worktree /home/user/wt/econ-tamco (sparse), server on port 8931.
+
+## ECON TAMCO #2 (session_01964izCzXkfovcY4kd6X4Mk) — 20/11
+PRIORITY #1 CHECK ('Tâm cơ|tamco|thuê người'): ECONOMY.md §5 | main none | review/econ-tamco e4727333 (#1, continued, law 13) | claims D #9 GAP OR21.
+Branch review/econ-tamco @ 6b705fb3a6a08cdc0c47fe2e02997802a65ba182 (final-merged origin/main 26f3bfa9).
+- BUG FIXED (one-core G1): jtamco.js wrote `BAL.road={...}`. That WIPED the origin-roads table BAL.road (jbalroad.js: first/last/finTier/cap/hp…). Knobs renamed to **BAL.tcroad** {rate 10, share .5, tcMin 1, up 12, npcP 50, npcKeep 30, npcTcMin 25}. After the fix: roadhp-unit PASS, roadhp-scan PASS, G1 PASS.
+- Merges: origin/main 716be762, then 26f3bfa9. assemble.py conflict: took main's list (adds jnwb.js) and kept jtamco.js after jecon.js. index.html/sw.js rebuilt.
+- Tests on 6b705fb3: econ-tamco.test.js PASS (Fold 755x1000@2 + iPad 1180x820@2; equal value for every scheme × rival; printed price = charged price, 0 mismatches; NPC roads e.g. 135 acts: tc 33 / hire 22 / plain 80). quickcheck: PASS 185 s, core gates PASS, old save ok. The first run failed on perf noise (tab 531 vs limit 505); the earlier runs read 459 and 408. rules-one-source / difficulty: OK. tier.js: TIER BIG (jwhy.js, jtamco.js, assemble.py).
+- paid-tiers.js lists 81–90 crafting rows («Vẽ tranh thủy mặc … bán thêm < trả thêm»). These are craft materials, outside this change, and the count moves between runs: pre-existing, not touched.
+
+### Bot re-measure (run5e.sh, 5 shards × 8, 9-origin rotation, HHSTOP; anx.py)
+| build | n | HH | early death | survived w/o HH | childbirth deaths | accusations on her /life (landed) | cold palace /life |
+|---|---|---|---|---|---|---|---|
+| before = LIVE main 716be762 | 33 (shard 2 crashed OOM after 1 life) | 36 % (12) | 36 % (12) | 27 % | 5 | 2.5 (2.3) | 5.1 |
+| after = econ-tamco 86f8a62a | 40 | 45 % (18) | 38 % (15) | 18 % | 9 | 2.5 (2.0) | 3.6 |
+Both changes are inside the noise at this n (one SE ≈ 8 points). The extra deaths are childbirth (9 vs 5), not schemes. NPC scheme acts on her are the same (blockf 7.2→6.0 tried; bribe/block land 0.2/0.2 → —/0.4). No BAL.tcroad tuning was needed (ECONOMY §5: tune only if the measure moves). Raw files: /home/user/wt/tamco-bal (not in git).
+
+### ⛔ KIT-BLOCKED (law 9, not hacked)
+Still open: the kit option card's «Tốn» row cannot show a Tâm cơ cost, or the scheme price on «Làm như thường», when fx does not pay it (same request as FOREMAN_B_STATUS ~L376 road-b2). For now the card prints it in the x line ("tốn: Tâm cơ -n"). Once the kit keeper adds an option field (e.g. `ton:{tamco:-n}` / `ton:{bac:-pr}`), PEND.roadpick in jtamco.js swaps the x text for it (2 lines).
+Follow-ups (unchanged): co-op thin guest runs the plain road; jsgame person-card and j70 plot chains keep their own roads.
+
+SẴN SÀNG KIỂM 6b705fb3a6a08cdc0c47fe2e02997802a65ba182 (KIT-BLOCKED: Tốn row Tâm cơ)
