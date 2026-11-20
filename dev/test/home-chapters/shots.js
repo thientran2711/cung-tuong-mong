@@ -30,5 +30,6 @@ const [URL,OUT]=process.argv.slice(2);fs.mkdirSync(OUT,{recursive:true});const s
   await dlg('pushDil(mkP("kcE",{e:"vhtrieu"}),"Thánh chỉ")');await shot('vh-trieu');
   await dlg('pushDil(mkP("kcE",{e:"xemmat"}),"Nhà trai thử dung mạo")');await shot('e15-xemmat');
   await life('tt');await dlg('pushDil(mkP("kcE",{e:"hac"}),"Cha bị hặc tội")');await shot('e28-hac');
+  await p.evaluate(()=>{const ar=S.kc.ar;ar.A=null;ar.plan=['kc_ke'];ar.i=0;ar.due=0;ar.done=[]});await dlg('kc3Fire()');await shot('chapter-ke');
   if(errs.length){bad++;rep.push({W,errs})}await c.close()}
  console.log(JSON.stringify({bad,rep}));await b.close();process.exit(bad?1:0)})();
