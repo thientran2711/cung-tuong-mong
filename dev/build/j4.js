@@ -42,22 +42,22 @@ cn:{t:"Từ nô tỳ thành chủ tử",n:3,goal:"Chủ cũ khinh ngươi, một
   if(st.step===1&&npcWhy("story",npw1Sc(st,"cn2"))){const o=od(BAL.odb.j4.odO_5+S.tamco/3);return setDil(mkP("cn2",{o}))}
   if(st.step===2&&S.rank>=4){apply({danh:BAL.eff.j4.danhMonth_8});st.step=3;stEnd(1,"Rửa sạch thân phận cung nữ");return `<b class="g">Ngươi đã là ${RANKS[S.rank].n}. Không ai còn dám gọi ngươi là nô tỳ.</b> Danh ${balSg(BAL.eff.j4.danhMonth_8)}. `}
   return""}},
-nc:{t:"Hòa thân",n:3,goal:"Phụ vương Nam Chiếu muốn ngươi làm tai mắt. Chọn cố quốc hay triều đình; chiến tranh sẽ phân xử.",
+nc:{t:"Hòa thân",n:3,goal:"Phụ vương Cao Ly muốn ngươi làm tai mắt. Chọn cố quốc hay triều đình; chiến tranh sẽ phân xử.",
  init(){S.st.m=0},
  hint:()=>S.st.step===0?"Mật sứ cố quốc sắp đến":S.year<4?"Chiến tranh nổ ra tháng 9 năm thứ 4":"Chiến tranh nổ ra tháng 9",
  month(){const st=S.st;
   if(st.step===0&&S.turn>=2&&npcWhy("story",npw1Sc(st,"nc1")))return setDil(mkP("nc1"));
   if(st.step>=1&&S.year>=4&&S.month===9){st.step=3;S.emp.mood=3;
-   if(st.path==="home"){const o=od(BAL.odb.j4.odO_6+st.m*15);if(roll(o)){apply({bac:BAL.eff.j4.bacMonth});stEnd(1,"Công thần của cố quốc");return `<b class="g">Nam Chiếu thắng trận nhờ tin ngươi gửi về. Đại Hy cầu hòa, cố quốc gửi vàng bạc tạ ơn.</b> Bạc ${balSg(BAL.eff.j4.bacMonth)}. `}
-    if(roll(od(BAL.odb.j4.odMonth+S.tamco/2))){apply({sung:BAL.eff.j4.sungMonth,danh:BAL.eff.j4.danhMonth_9});stEnd(-1,"Bị nghi làm gián điệp");return `<span class="r">Nam Chiếu thua trận. Cả triều nghi ngươi, nhưng không bắt được chứng cứ.</span> Sủng ${balSg(BAL.eff.j4.sungMonth)} · Danh ${balSg(BAL.eff.j4.danhMonth_9)}. `}
-    stEnd(-1,"Gián điệp bị bắt");deathSentence("Nam Chiếu thua trận, thư mật của ngươi bị tìm thấy");return""}
-   if(st.m>=2){apply({danh:BAL.eff.j4.danhMonth_5,th:BAL.eff.j4.thMonth});stEnd(1,"Đoạn tuyệt cố quốc, được triều đình tin");return `<b class="g">Chiến tranh với Nam Chiếu. Ngươi đứng hẳn về phía Đại Hy, cả triều kính phục.</b> Danh ${balSg(BAL.eff.j4.danhMonth_5)} · Thái hậu ${balSg(BAL.eff.j4.thMonth)}. `}
-   apply({sung:BAL.eff.j4.sungMonth_2,danh:BAL.eff.j4.danhMonth_10});stEnd(-1,"Bị nghi kỵ khi chiến tranh");return `<span class="r">Chiến tranh với Nam Chiếu. Triều thần nghi ngươi hai lòng.</span> Sủng ${balSg(BAL.eff.j4.sungMonth_2)} · Danh ${balSg(BAL.eff.j4.danhMonth_10)}. `}
+   if(st.path==="home"){const o=od(BAL.odb.j4.odO_6+st.m*15);if(roll(o)){apply({bac:BAL.eff.j4.bacMonth});stEnd(1,"Công thần của cố quốc");return `<b class="g">Cao Ly thắng trận nhờ tin ngươi gửi về. Đại Hy cầu hòa, cố quốc gửi vàng bạc tạ ơn.</b> Bạc ${balSg(BAL.eff.j4.bacMonth)}. `}
+    if(roll(od(BAL.odb.j4.odMonth+S.tamco/2))){apply({sung:BAL.eff.j4.sungMonth,danh:BAL.eff.j4.danhMonth_9});stEnd(-1,"Bị nghi làm gián điệp");return `<span class="r">Cao Ly thua trận. Cả triều nghi ngươi, nhưng không bắt được chứng cứ.</span> Sủng ${balSg(BAL.eff.j4.sungMonth)} · Danh ${balSg(BAL.eff.j4.danhMonth_9)}. `}
+    stEnd(-1,"Gián điệp bị bắt");deathSentence("Cao Ly thua trận, thư mật của ngươi bị tìm thấy");return""}
+   if(st.m>=2){apply({danh:BAL.eff.j4.danhMonth_5,th:BAL.eff.j4.thMonth});stEnd(1,"Đoạn tuyệt cố quốc, được triều đình tin");return `<b class="g">Chiến tranh với Cao Ly. Ngươi đứng hẳn về phía Đại Hy, cả triều kính phục.</b> Danh ${balSg(BAL.eff.j4.danhMonth_5)} · Thái hậu ${balSg(BAL.eff.j4.thMonth)}. `}
+   apply({sung:BAL.eff.j4.sungMonth_2,danh:BAL.eff.j4.danhMonth_10});stEnd(-1,"Bị nghi kỵ khi chiến tranh");return `<span class="r">Chiến tranh với Cao Ly. Triều thần nghi ngươi hai lòng.</span> Sủng ${balSg(BAL.eff.j4.sungMonth_2)} · Danh ${balSg(BAL.eff.j4.danhMonth_10)}. `}
   return""},
  acts(){const st=S.st;if(!st.path)return[];
-  if(st.path==="home")return[{n:"Gửi mật thư về Nam Chiếu",t:"Chép bố phòng, giấu trong hộp phấn gửi về.",c:{suc:-5},o:od(BAL.odb.j4.odO_7+S.tamco/4+eyes(S)*3-(DG()?6:0)),w:{bac:30},l:{danh:-5},x:`tin tình báo +1 (đã gửi ${st.m})`,go:()=>{st.m++;st.step=2},
-   fail:()=>{if(roll(40)){stEnd(-1,"Gián điệp bị bắt");deathSentence("Mật thư bị chặn, tra ra ngươi làm gián điệp cho Nam Chiếu")}else log("Mật thư bị chặn, may chưa tra ra ngươi.")}}];
-  return[{n:"Giảng giải phong tục Nam Chiếu",t:"Giúp Lễ bộ hiểu cố quốc, để triều đình tin ngươi.",c:{suc:-5},o:od(BAL.odb.j4.odO_8),w:{danh:3,th:3},l:{},x:`lòng tin +1 (${st.m})`,go:()=>{st.m++;st.step=2}}]}},
+  if(st.path==="home")return[{n:"Gửi mật thư về Cao Ly",t:"Chép bố phòng, giấu trong hộp phấn gửi về.",c:{suc:-5},o:od(BAL.odb.j4.odO_7+S.tamco/4+eyes(S)*3-(DG()?6:0)),w:{bac:30},l:{danh:-5},x:`tin tình báo +1 (đã gửi ${st.m})`,go:()=>{st.m++;st.step=2},
+   fail:()=>{if(roll(40)){stEnd(-1,"Gián điệp bị bắt");deathSentence("Mật thư bị chặn, tra ra ngươi làm gián điệp cho Cao Ly")}else log("Mật thư bị chặn, may chưa tra ra ngươi.")}}];
+  return[{n:"Giảng giải phong tục Cao Ly",t:"Giúp Lễ bộ hiểu cố quốc, để triều đình tin ngươi.",c:{suc:-5},o:od(BAL.odb.j4.odO_8),w:{danh:3,th:3},l:{},x:`lòng tin +1 (${st.m})`,go:()=>{st.m++;st.step=2}}]}},
 td:{t:"Báo thù cho nhà",n:5,goal:"Cả nhà ngươi bị vu mưu phản. Gom 3 chứng cứ, giữ được nhân chứng, lên bậc Tần rồi dâng sớ lật án.",
  init(){const e=rivals[1+R(4)];e.enemy=true;e.rel=-40;S.foe=e.name;S.foeDad="Thượng thư "+e.name.split(" ")[0];S.caseEv=0;S.st.wit=0},
  calc:()=>Math.min(S.caseEv,3)+(S.st.wit?1:0)+(S.avenged?1:0),
@@ -113,7 +113,7 @@ PEND.cn2=p=>{const st=S.st,m=st.mis,o=p.o;return {t:`${st.guard}, người từn
    {n:"Đút bạc bịt miệng",fx:{bac:-50},x:"chuyện chưa dứt hẳn",go:()=>{st.secret=1;st.step=2}},
    {n:"Diệt khẩu tên thái giám",fx:{duc:-8},x:`${word(o)} · thành: bịt được miệng, Tâm cơ ${balSg(BAL.eff.j4.tamcoGo)} · hỏng: lộ chuyện, Danh ${balSg(BAL.eff.j4.danhGo_2)}`,go:()=>{S.schemes++;st.step=2;if(roll(o)){st.secret=2;apply({tamco:BAL.eff.j4.tamcoGo});log("Tên thái giám chết đuối ở giếng sau.")}else{st.secret=1;apply({danh:BAL.eff.j4.danhGo_2});log(`<span class="r">Diệt khẩu hỏng, lời đồn đã lan.</span>`)}}},
    {n:"Xin cho hắn ra biên ải",fx:{bac:-20,duc:4},go:()=>{st.secret=2;st.step=2}}]}};
-PEND.nc1=p=>{const st=S.st;return {t:"Mật sứ Nam Chiếu trao thư của phụ vương: muốn ngươi dò bố phòng biên ải Đại Hy.",o:[
+PEND.nc1=p=>{const st=S.st;return {t:"Mật sứ Cao Ly trao thư của phụ vương: muốn ngươi dò bố phòng biên ải Đại Hy.",o:[
    {n:"Trung với cố quốc",fx:{},x:"nhận việc mật; lộ là chết",go:()=>{st.path="home";st.step=1}},
    {n:"Dâng thư lên Hoàng thượng",fx:{th:15,danh:5,sung:3},x:"đoạn tuyệt cố quốc",go:()=>{st.path="court";st.step=1}}]}};
 PEND.td1=p=>{const st=S.st;return {t:`Lão thái giám họ Vương, nhân chứng còn sống của vụ án nhà ngươi, đang bị người của ${S.foeDad} truy sát.`,o:[

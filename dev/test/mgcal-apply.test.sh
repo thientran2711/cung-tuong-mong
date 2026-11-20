@@ -13,5 +13,7 @@ echo "$L" | grep -q 'd:\[-2,-1,0,1,2\],up:1,dn:4' ; ok $? "3 the other cal keys 
 python3 "$D/dev/tools/mgcal_apply.py" "CTM-CAL dan:12/5@11/18/2026" >/dev/null 2>&1; [ $? -ne 0 ] && [ "$(line)" = "$L" ]; ok $? "4 a base out of 0..10 is refused, nothing written"
 python3 "$D/dev/tools/mgcal_apply.py" "hello" >/dev/null 2>&1; [ $? -ne 0 ]; ok $? "4 a non-CTM-CAL line is refused"
 node -e "global.window={};global.BAL={ag:{mg2:{}}};eval(require('fs').readFileSync('$T/b.js','utf8').match(/BAL\.ag\.mg2\.cal=\{[^;]*\};/)[0]);if(BAL.ag.mg2.cal.k.co.b!==5)process.exit(1)"; ok $? "5 the written line is valid JS"
+python3 "$D/dev/tools/mgcal_apply.py" "CTM-CAL td_cong:8/5@11/20/2026" >/dev/null; L=$(line)
+echo "$L" | grep -q 'td_cong:{b:8.0,n:5,at:"11/20/2026"}' ; ok $? "7 a kind id with an underscore (td_*) is accepted"
 grep -c . "$D/dev/build/jbal2.js" >/dev/null; git -C "$D" diff --quiet -- dev/build/jbal2.js 2>/dev/null; ok $? "6 the real jbal2.js is not touched by the test"
 rm -rf "$T"; exit $F
