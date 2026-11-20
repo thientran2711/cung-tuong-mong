@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay","b":"b29a7a753928","h":[{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"},{"s":"dddb1f94+","t":"2026-11-20T04:29Z","c":"Tay đối thủ ở Thắp đèn nay đo theo đúng tài của nàng"}]};
+window.CTM_BI={"s":"716be762+","t":"2026-11-20T08:08Z","c":"SELF-MERGE LAND mg-env: merge LIVE 30e8714e (index.html/sw.js rebuilt)","b":"9d18c115d0da","h":[{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -328,7 +328,7 @@ html.kv2 .game{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-r
 .tokens{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;align-items:flex-end;gap:8px;flex-wrap:wrap;padding:0 8px;z-index:1}
 .tok{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;cursor:pointer;min-width:60px;padding:2px;border-radius:8px}
 .tok:hover .md{transform:translateY(-2px)} .tok .md{transition:transform .15s}
-.tok .tag{font-size:.78rem;background:#fffaf0;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:1px 6px;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tok .tag{font-size:.78rem;background:var(--k-card,#fffaf0);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:1px 6px;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .empty{color:var(--dim);font-size:.85rem;margin:0;background:#fffaf0cc;border-radius:6px;padding:2px 8px}
 #tokens>.empty{display:none}/* an empty room already says so in the room's visit line (.rmsg: "Không gặp ai."); this second copy sat over the room title at 844x390 */
 .pop{position:absolute;left:8px;right:8px;bottom:8px;max-height:calc(100% - 16px);overflow:auto;background:linear-gradient(var(--panel2),var(--panel));border:1px solid var(--gold);border-radius:8px;padding:8px 10px;z-index:3;box-shadow:0 6px 20px #5a3a2055}
@@ -372,7 +372,7 @@ html.kv2 .game{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-r
 .gh{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--dim)}
 .gh .mini{flex:1;max-width:160px;height:5px}.gh .mini u{background:var(--bad)}
 .rbtn{display:flex;flex-wrap:wrap;gap:4px}
-.rbtn button,.btn{background:#fffaf0;border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:.8rem;cursor:pointer;text-align:left;min-height:40px}
+.rbtn button,.btn{background:var(--k-card,#fffaf0);border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:.8rem;cursor:pointer;text-align:left;min-height:40px}
 .rbtn button:hover:not(:disabled),.btn:hover:not(:disabled){border-color:var(--gold)}
 .rbtn button:disabled,.btn:disabled{opacity:.35;cursor:default}
 .rbtn small,.btn small{display:block;color:var(--dim);font-size:.7rem}
@@ -406,7 +406,7 @@ html.kv2 .game{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-r
 .modal.end .dlg{text-align:center}.modal.end .row{justify-content:center}
 @keyframes pop{from{transform:scale(.94);opacity:0}to{transform:none;opacity:1}}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
-.fly{position:fixed;z-index:40;pointer-events:none;font-weight:700;font-size:.95rem;white-space:nowrap;background:#fffaf0;border:1px solid var(--line);border-radius:10px;padding:0 6px;animation:fly 1.5s ease-out forwards;opacity:0}
+.fly{position:fixed;z-index:40;pointer-events:none;font-weight:700;font-size:.95rem;white-space:nowrap;background:var(--k-card,#fffaf0);border:1px solid var(--line);border-radius:10px;padding:0 6px;animation:fly 1.5s ease-out forwards;opacity:0}
 @keyframes fly{0%{opacity:0;transform:translateY(6px)}15%{opacity:1}100%{opacity:0;transform:translateY(-38px)}}
 .curtain{position:fixed;inset:0;background:#f5ecdc;display:grid;place-items:center;z-index:35;opacity:0;pointer-events:none;transition:opacity .3s;font-family:var(--display);color:var(--gold);font-size:1.4rem}
 .curtain.on{opacity:1}
@@ -495,7 +495,7 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .pface.on{border-color:var(--gold);background:var(--panel2)}.pface.on span{color:var(--ink);font-weight:600}
 .pface.dim{opacity:.45}
 .psep{flex:0 0 auto;font-size:.62rem;color:var(--gold);writing-mode:vertical-rl;transform:rotate(180deg);border-left:1px solid var(--line);padding:0 2px;max-height:42px;overflow:hidden}
-.parr{flex:0 0 auto;width:30px;min-height:44px;border:1px solid var(--line);border-radius:6px;background:#fffaf0;color:var(--gold);font-size:1.3rem;cursor:pointer;line-height:1}
+.parr{flex:0 0 auto;width:30px;min-height:44px;border:1px solid var(--line);border-radius:6px;background:var(--k-card,#fffaf0);color:var(--gold);font-size:1.3rem;cursor:pointer;line-height:1}
 .pcount{flex:0 0 auto;font-size:.7rem;color:var(--dim)}
 .pc{display:grid;grid-template-columns:clamp(120px,40%,196px) minmax(0,1fr);gap:8px;flex:1 1 auto;min-height:0;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:7px}
 .pcl{display:flex;flex-direction:column;gap:3px;min-height:0;overflow:auto;overscroll-behavior:contain}
@@ -513,7 +513,7 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .pcr h5{margin:4px 0 0;font-size:.74rem;color:var(--gold);font-weight:600;border-bottom:1px solid var(--line);padding-bottom:1px}
 .pcr h5:first-child{margin-top:0}
 .pcb{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:4px}
-.pcb button,.pcr .pcb .opt{display:block;width:100%;min-height:44px;background:#fffaf0;border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:.8rem;text-align:left;cursor:pointer;color:var(--ink);font-family:inherit}
+.pcb button,.pcr .pcb .opt{display:block;width:100%;min-height:44px;background:var(--k-card,#fffaf0);border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:.8rem;text-align:left;cursor:pointer;color:var(--ink);font-family:inherit}
 .pcb button:hover:not(:disabled){border-color:var(--gold)}
 .pcb button:disabled{opacity:.55;cursor:default;background:#efe6d6}
 .pcb button small{display:block;color:var(--dim);font-size:.68rem;line-height:1.25}
@@ -554,13 +554,13 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .stop .scene-t{position:static;pointer-events:auto}
 .hud2{pointer-events:auto;display:flex;flex-wrap:wrap;gap:3px;align-items:center;background:#fffaf0c8;border:1px solid var(--line);border-radius:8px;padding:4px 26px 4px 5px;position:relative;overflow:auto;min-height:0;scrollbar-width:none;backdrop-filter:blur(2px)}
 .hud2::-webkit-scrollbar{display:none}
-.hud2 .hc{display:inline-flex;align-items:center;gap:2px;font-size:.66rem;line-height:1.2;border:1px solid var(--line);border-radius:9px;padding:1px 6px;background:#fffaf0;color:var(--dim);cursor:pointer;min-height:20px;font-family:inherit;white-space:nowrap}
+.hud2 .hc{display:inline-flex;align-items:center;gap:2px;font-size:.66rem;line-height:1.2;border:1px solid var(--line);border-radius:9px;padding:1px 6px;background:var(--k-card,#fffaf0);color:var(--dim);cursor:pointer;min-height:20px;font-family:inherit;white-space:nowrap}
 .hud2 .hc b{color:var(--ink);font-weight:700}.hud2 .hc.hot{border-color:var(--red);color:var(--bad)}.hud2 .hc.ok{border-color:#4e7a4a;color:var(--good)}
 .hud2 .hc .ic{width:12px;height:12px}.hud2 .hc.flash{animation:hflash 1.2s ease}.hud2 .hc i{font-style:normal;font-weight:700;margin-left:2px}
-.hud2 .h2t{position:absolute;right:3px;top:3px;width:22px;height:22px;border:1px solid var(--line);border-radius:6px;background:#fffaf0;color:var(--gold);font-size:.8rem;line-height:1;cursor:pointer;padding:0}
+.hud2 .h2t{position:absolute;right:3px;top:3px;width:22px;height:22px;border:1px solid var(--line);border-radius:6px;background:var(--k-card,#fffaf0);color:var(--gold);font-size:.8rem;line-height:1;cursor:pointer;padding:0}
 .hud2.col .hc:not(.keep){display:none}
 /* kv: dropped @media (max-width:600px) (one page = spread page, KIT §0) */
-@keyframes hflash{0%{background:#ffe9a8;transform:scale(1.08)}100%{background:#fffaf0}}
+@keyframes hflash{0%{background:#ffe9a8;transform:scale(1.08)}100%{background:var(--k-card,#fffaf0)}}
 @media (prefers-reduced-motion:reduce){.hud2 .hc.flash{animation:none}}
 /* tab bar: every tab visible, never hidden behind Sang buổi */
 .tabs{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));overflow:visible!important;gap:3px!important}
@@ -584,7 +584,7 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .game{width:100%;max-width:100%}.game>*{min-width:0;max-width:100%}html,body{width:100%;max-width:100%;overflow-x:hidden}
 .fbook{display:flex;flex-direction:column;gap:2px;margin-top:4px}.fbrow{display:flex;align-items:center;gap:5px;flex-wrap:wrap;font-size:.8rem;border-bottom:1px dotted var(--line);padding:2px 0}
 .fbar{display:inline-block;width:38px;height:5px;background:#2a1a1222;border-radius:3px;overflow:hidden;vertical-align:middle;margin:0 4px}.fbar u{display:block;height:100%}.fbar u.g{background:var(--good)}.fbar u.r{background:var(--bad)}
-.relsel{display:flex;flex-wrap:wrap;gap:3px;align-items:center;margin-bottom:3px}.relsel button{display:inline-flex;align-items:center;gap:3px;font-size:.74rem;border:1px solid var(--line);border-radius:12px;padding:2px 7px 2px 3px;background:#fffaf0;cursor:pointer;min-height:30px}
+.relsel{display:flex;flex-wrap:wrap;gap:3px;align-items:center;margin-bottom:3px}.relsel button{display:inline-flex;align-items:center;gap:3px;font-size:.74rem;border:1px solid var(--line);border-radius:12px;padding:2px 7px 2px 3px;background:var(--k-card,#fffaf0);cursor:pointer;min-height:30px}
 .relsel button[aria-pressed=true]{border-color:var(--gold);background:var(--panel2);font-weight:600}.rleg{margin:0 0 4px;font-size:.72rem}
 .rrow2{display:grid;grid-template-columns:auto 1fr;gap:6px;align-items:start;padding:4px 0;border-bottom:1px solid var(--line);font-size:.78rem}.rl{line-height:1.5}.rlab{color:var(--dim);font-size:.72rem;margin-right:3px}
 /* kv: dropped @media (max-aspect-ratio:1/1) and (max-height:1000px) (one page = spread page, KIT §0) */
@@ -609,7 +609,7 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .stop{position:absolute}.h2pulse{font-size:.62rem;font-weight:700;color:var(--good);white-space:nowrap;animation:hflash 1.6s ease}
 
 .mchip{align-self:flex-start;font-size:.6rem;background:#2a1a12cc;color:#ffd9b0;border-radius:6px;padding:0 5px;margin-bottom:2px}
-.pctabs{display:flex;flex-wrap:wrap;gap:3px;margin:2px 0 4px}.pct{font-size:.72rem;border:1px solid var(--line);border-radius:12px;background:#fffaf0;padding:3px 9px;min-height:30px;cursor:pointer;color:var(--dim);font-family:inherit}.pct.on{background:var(--gold);color:#fff;border-color:var(--gold);font-weight:600}.pct i{font-style:normal;font-size:.64rem;opacity:.8}
+.pctabs{display:flex;flex-wrap:wrap;gap:3px;margin:2px 0 4px}.pct{font-size:.72rem;border:1px solid var(--line);border-radius:12px;background:var(--k-card,#fffaf0);padding:3px 9px;min-height:30px;cursor:pointer;color:var(--dim);font-family:inherit}.pct.on{background:var(--gold);color:#fff;border-color:var(--gold);font-weight:600}.pct i{font-style:normal;font-size:.64rem;opacity:.8}
 .pcg{display:none}.pcg.on{display:block}
 .rtoast.sure .seal{background:#b8650a}/* KIT 53 (owner 11/16 15:00Z 5.2): the plain KẾT QUẢ seal is amber-orange, never grey (grey reads negative / neutral) */.rtoast small{display:block}
 .stage.rp1 .scimg{filter:sepia(.25)}.stage.rp2 .scimg{filter:saturate(1.3) hue-rotate(-10deg)}.stage.rp3 .scimg{filter:saturate(1.4) brightness(1.05) sepia(.15)}
@@ -641,7 +641,7 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .kgrid{display:grid;grid-template-columns:auto 1fr;gap:1px 4px;font-size:.74rem;align-items:baseline}.kgrid>.kl{margin:0;text-align:right}
 .rbtn button small,.btn small,.opt small,.pcb button small{line-height:1.45}
 /* result toast */
-.rtoast{position:fixed;left:50%;bottom:72px;transform:translate(-50%,20px);z-index:45;display:flex;gap:10px;align-items:center;max-width:min(94vw,460px);background:#fffaf0;border:1px solid var(--line);border-radius:12px;padding:8px 12px;box-shadow:0 8px 24px #5a3a2055;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.rtoast{position:fixed;left:50%;bottom:72px;transform:translate(-50%,20px);z-index:45;display:flex;gap:10px;align-items:center;max-width:min(94vw,460px);background:var(--k-card,#fffaf0);border:1px solid var(--line);border-radius:12px;padding:8px 12px;box-shadow:0 8px 24px #5a3a2055;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
 .rtoast.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}.rtoast .seal{font-family:var(--display);font-size:1rem;color:#fff;border-radius:8px;padding:6px 8px;writing-mode:horizontal-tb;letter-spacing:.05em}
 .rtoast.ok .seal{background:var(--good)}.rtoast.bad .seal{background:var(--bad)}.rtoast .rt{display:flex;flex-direction:column;gap:1px;font-size:.82rem;min-width:0}.rtoast small{color:var(--dim);font-size:.74rem}
 .kcard .kwhy{font-size:.72rem;color:#b5482f;font-weight:600}
@@ -739,7 +739,7 @@ body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data
 .kcard .krow{flex:0 0 auto}
 .kcard .kgrid{font-size:var(--kfs);flex:1 1 auto;min-height:0;overflow:hidden;align-content:start}
 .kcard .kgrid>span:not(.kl){display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.kcard .kinfo{position:absolute;right:4px;top:4px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:#fffaf0;border:1px solid var(--line);color:var(--gold);font-size:.85rem;cursor:pointer;z-index:2}
+.kcard .kinfo{position:absolute;right:4px;top:4px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:var(--k-card,#fffaf0);border:1px solid var(--line);color:var(--gold);font-size:.85rem;cursor:pointer;z-index:2}
 .kfull .kgrid{font-size:.9rem}.kfull h4{font-family:var(--display);color:var(--gold);margin:0 0 4px}.kfull p{margin:4px 0}.kfull .kinfo{display:none}
 
 .pcb:not(.rows){grid-auto-rows:1fr}
@@ -8445,7 +8445,7 @@ setTimeout(tabsFit,0);
    not be tapped and "col" never changed anything there. Now one toggle at every width: a 36px kit button with icon + word as the
    panel's first item; collapsed keeps only the key chips, at every width. A wide screen with no saved choice starts open. */
 (function(){const H="html body #hud2.hud2";const st=document.createElement("style");st.textContent=
- H+" .h2t{display:inline-flex!important;position:static!important;order:-1;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;width:auto!important;min-width:36px;height:36px!important;min-height:36px;padding:0 10px!important;border:1px solid var(--trim,var(--line));border-radius:8px;background:#fffaf0;color:var(--gold);font-family:var(--body,inherit);font-size:.78rem!important;font-weight:600;white-space:nowrap;cursor:pointer;touch-action:manipulation;z-index:2}"+
+ H+" .h2t{display:inline-flex!important;position:static!important;order:-1;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;width:auto!important;min-width:36px;height:36px!important;min-height:36px;padding:0 10px!important;border:1px solid var(--trim,var(--line));border-radius:8px;background:var(--k-card,#fffaf0);color:var(--gold);font-family:var(--body,inherit);font-size:.78rem!important;font-weight:600;white-space:nowrap;cursor:pointer;touch-action:manipulation;z-index:2}"+
  H+" .h2t i{font-style:normal;font-size:.9rem;line-height:1}"+
  H+"{padding-right:5px!important}"+H+".col .hc:not(.keep){display:none!important}"+
  "";document.head.appendChild(st)})();
@@ -24868,7 +24868,7 @@ kaMO.observe(document.documentElement,{childList:true,subtree:true,attributes:tr
 (function(){const kf=kitFix;kitFix=function(root){kf.apply(this,arguments);kaNorm(root)}})();
 /* ---------- the look (scoped to .ka act cards / options) ---------- */
 (function(){const st=document.createElement("style");st.id="ka-css";st.textContent=`
-button.ka{display:flex!important;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:3px;text-align:left;background:#fffaf0;border:1px solid var(--line);border-radius:8px;padding:6px 9px 7px!important;color:var(--ink);font-family:inherit;font-size:.82rem;line-height:1.3;min-height:0;height:auto!important;max-height:none!important;overflow:visible!important;white-space:normal!important;box-shadow:inset 0 0 0 1px #fff8,0 1px 0 #d9c49a55}
+button.ka{display:flex!important;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:3px;text-align:left;background:var(--k-card,#fffaf0);border:1px solid var(--line);border-radius:8px;padding:6px 9px 7px!important;color:var(--ink);font-family:inherit;font-size:.82rem;line-height:1.3;min-height:0;height:auto!important;max-height:none!important;overflow:visible!important;white-space:normal!important;box-shadow:inset 0 0 0 1px #fff8,0 1px 0 #d9c49a55}
 button.ka:hover:not(:disabled){border-color:var(--gold)}
 button.ka .kat{display:flex;align-items:flex-start;gap:6px;justify-content:space-between;padding-bottom:3px;border-bottom:1px solid #e6d3ac}
 button.ka .kan{flex:1 1 auto;min-width:0;display:block;font-weight:700;color:var(--ink);overflow-wrap:anywhere}
@@ -25741,7 +25741,7 @@ html body .kbtn,html body .kbtn *{word-break:normal!important;overflow-wrap:norm
 .kodm{display:inline-flex;align-items:center;gap:5px;cursor:pointer;vertical-align:middle;line-height:1;white-space:nowrap}
 .kodm b{font-size:.72rem;font-weight:700;color:var(--oc)}
 .kseg{display:inline-flex;gap:1.5px;padding:2px;border-radius:4px;background:#efe3cc;border:1px solid #d9c49a}
-.kseg i{display:block;width:5px;height:9px;border-radius:1.5px;background:#fffaf0;box-shadow:inset 0 0 0 1px #d9c49a}
+.kseg i{display:block;width:5px;height:9px;border-radius:1.5px;background:var(--k-card,#fffaf0);box-shadow:inset 0 0 0 1px #d9c49a}
 .kodm.oc{background:none!important;border:0!important;padding:0!important;margin:0}
 button.ka .kodds .kodm{flex-direction:row}
 .hc.khc{display:inline-flex;align-items:center;gap:4px}.hc.khc .kodm b{font-size:.68rem}
@@ -25783,6 +25783,14 @@ KP_SEAL.week="TUẦN";
 .dawn .dbox.kpanel .kpb{padding:10px 14px 4px}.dawn .kpfoot{display:flex;justify-content:flex-end;padding:6px 14px 12px}
 /* kv3:.kv1 */:where(.kv1) .dawn .dbox.kpanel .kph{padding:8px 10px}:where(.kv1) .dawn .dbox.kpanel .kpb{padding:8px 10px 2px}:where(.kv1) .dawn .kpfoot{padding:6px 10px 10px}
 `;document.head.appendChild(st)})();
+
+/* KIT §0.3 BASE COLOUR SETS (review/kit-bgtone, owner OD 20/11 ~07:45Z "chỉnh cái màu nền ở trong game cho phù hợp với màu sắc" of the new rank-8 costume tone: powder-blue, mint, sage, peach, blush-pink, lilac + gold embroidery).
+   ONE token file for the game's ground / paper / panel fills / label colour; every kit part already reads these tokens. KIT_BG picks the set: "a" = Ngọc sương (jade mist: sage-cream paper),
+   "b" = Đào phấn (peach blush paper). One-line switch = change KIT_BG. Meaning colours (gold --gold/--trim, red --red/--bad/--k-seal, green --good, --ink, --dim, rank colours) are NOT touched. */
+const KIT_BG="a";
+(function(){try{document.documentElement.dataset.kbg=KIT_BG}catch(e){}const st=document.createElement("style");st.id="kbg-css";st.textContent=`
+html[data-kbg="a"]{--bg:#e4ebdc;--panel:#f6faee;--panel2:#e3ecd6;--line:#c9bf8e;--k-hair:#d3dab8;--k-card:#f6faee;--k-card2:#e3ecd6;--k-lab:#5f6b45}
+html[data-kbg="b"]{--bg:#f5e2dc;--panel:#fff4ef;--panel2:#f5dcd4;--line:#dcb7a0;--k-hair:#e8cbbd;--k-card:#fff4ef;--k-card2:#f5dcd4;--k-lab:#8a5f58}`;document.head.appendChild(st)})();
 
 /* ---------- MINI-GAME FRAME (for j82 and the lesson games): header + how-to + score/timer + game box + result rows ---------- */
 KP_SEAL.game="TÀI NGHỆ";
@@ -26290,7 +26298,7 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 #hud2.kgrp{flex-wrap:wrap}
 #hud2 .khg{position:fixed;z-index:40;left:var(--shL,8px);top:var(--shT,calc(40*var(--kvh,1vh)));width:var(--shW,calc(100vw - 16px));max-height:var(--shH,calc(50*var(--kvh,1vh)));overflow:auto;box-sizing:border-box;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-content:start;gap:6px 10px;padding:8px;background:var(--k-card,#fffaf0);border:1px solid var(--gold);border-radius:10px;box-shadow:0 8px 28px #3a201055}
 #hud2 .khsh{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;font-family:var(--display);color:var(--gold);border-bottom:1px solid var(--k-hair);padding-bottom:4px}
-#hud2 .khsh .khx{min-height:32px;padding:2px 12px;border:1px solid var(--line);border-radius:6px;background:#fffaf0;font:inherit;font-size:.8rem;color:var(--ink);cursor:pointer}
+#hud2 .khsh .khx{min-height:32px;padding:2px 12px;border:1px solid var(--line);border-radius:6px;background:var(--k-card,#fffaf0);font:inherit;font-size:.8rem;color:var(--ink);cursor:pointer}
 #hud2 .khc{display:flex;flex-direction:column;gap:2px;min-width:0;padding:4px 6px;border:1px solid var(--k-hair);border-radius:8px;background:#fffdf8}
 #hud2 .khc .hc[data-hx="date"]{display:none!important}
 #hud2 .khc .hc{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;justify-items:start;align-items:center;column-gap:5px;border:0!important;background:none!important;padding:1px 0!important;min-height:0!important;border-radius:0!important;text-align:left;white-space:normal;font-size:.76rem}
@@ -26450,12 +26458,12 @@ addEventListener("resize",()=>{clearTimeout(window.__kpkT);window.__kpkT=setTime
 .kpki{all:unset;box-sizing:border-box;position:relative;width:58px;display:grid;place-items:center;padding:3px;border-radius:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .kpki[hidden]{display:none!important}
 .kpki span.md.kmini.kmini{width:52px!important}
-.kpki:hover{background:#f6ead6}
+.kpki:hover{background:var(--k-card2,#f6ead6)}
 .kpki:focus-visible{outline:2px dashed var(--gold);outline-offset:1px}
 .kpki.on{background:#fff3c4}
 .kpki .kpkck{position:absolute;right:-3px;top:-3px;width:20px;height:20px;border-radius:50%;display:none;place-items:center;font-style:normal;font-size:.8rem;font-weight:800;color:#fff;background:var(--k-sel-ring,#a8740c);box-shadow:0 0 0 2px #fff,0 1px 3px #0006;z-index:3}
 .kpki.on .kpkck{display:grid}
-.kpkpg{min-height:44px;border:1px solid var(--line);border-radius:6px;background:#fffaf0;font-size:1.2rem;color:var(--gold);cursor:pointer;padding:0}
+.kpkpg{min-height:44px;border:1px solid var(--line);border-radius:6px;background:var(--k-card,#fffaf0);font-size:1.2rem;color:var(--gold);cursor:pointer;padding:0}
 .kpkpg:disabled{opacity:.35;cursor:default}.kpkpg[hidden]{visibility:hidden;display:block}
 .kpkpn{font-size:.72rem;color:var(--k-lab);text-align:center;min-height:1em}
 /* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
@@ -27756,7 +27764,7 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 /* event art beside each fact (j89 evArtOf): a small print pasted in the ledger */
 .kbk-ev{display:grid;grid-template-columns:minmax(0,1fr) 3em;gap:.55em;align-items:start;border-bottom:1px dashed #9a2c1c33}
 .kbk-ev>.kfacts .kfact{border-bottom:0}
-.kbk-evart{display:block;width:3em;height:4em;object-fit:cover;margin:.3em 0;padding:2px;background:#fffaf0;border:1px solid #9a2c1c88;box-shadow:0 1px 3px #3a210f55;transform:rotate(1.2deg)}
+.kbk-evart{display:block;width:3em;height:4em;object-fit:cover;margin:.3em 0;padding:2px;background:var(--k-card,#fffaf0);border:1px solid #9a2c1c88;box-shadow:0 1px 3px #3a210f55;transform:rotate(1.2deg)}
 .kbk-ev:nth-child(even) .kbk-evart{transform:rotate(-1deg)}
 body.kbk-open #rtoast,body:has(#dawn.kbkdawn:not([hidden])) #rtoast{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
 /* cover: indigo cloth, thread binding, title label */
@@ -35027,7 +35035,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmxt{position:relative;height:96px;width:70px;display:flex;justify-content:center;align-items:flex-end}
 .kmtube{height:96px;width:auto;transform-origin:50% 90%;animation:kmShake calc(.9s*var(--pace)) ease-in-out var(--kd,calc(0s*var(--pace))) both;position:relative;z-index:1}
 .kmstick{position:absolute;height:84px;width:auto;left:50%;bottom:18px;z-index:2;transform-origin:50% 100%;animation:kmStick calc(.7s*var(--pace)) var(--km-out) calc(var(--kd,calc(0s*var(--pace))) + calc(.85s*var(--pace))) both}
-.kmlot{display:flex;flex-direction:column;align-items:center;min-width:5.5rem;padding:4px 10px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:#fffaf0;animation:kmPop calc(.4s*var(--pace)) var(--km-ease) calc(var(--kd,calc(0s*var(--pace))) + calc(1.45s*var(--pace))) both}
+.kmlot{display:flex;flex-direction:column;align-items:center;min-width:5.5rem;padding:4px 10px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0);animation:kmPop calc(.4s*var(--pace)) var(--km-ease) calc(var(--kd,calc(0s*var(--pace))) + calc(1.45s*var(--pace))) both}
 .kmlot b{font-family:var(--display);font-size:1.15rem;color:var(--gold)}.kmlot small{font-size:.68rem;color:var(--dim)}.kmlot.g b{color:var(--good)}.kmlot.r b{color:var(--bad)}
 .kmlotsec{--kd:0s}.dawn .kmlotsec{--kd:calc(1.3s*var(--pace))}.dawn.km-nocal .kmlotsec{--kd:0s}.kmlotsec .krows,.kmlotsec .kfacts{animation:kmFade calc(.35s*var(--pace)) ease calc(var(--kd,calc(0s*var(--pace))) + calc(1.6s*var(--pace))) both}
 @keyframes kmShake{0%,100%{transform:rotate(0)}10%{transform:rotate(-9deg)}22%{transform:rotate(8deg)}34%{transform:rotate(-8deg)}46%{transform:rotate(7deg)}58%{transform:rotate(-6deg)}70%{transform:rotate(5deg)}82%{transform:rotate(-3deg)}}
@@ -35037,7 +35045,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmseal{position:absolute;right:6px;top:-18px;width:78px;height:auto;z-index:3;pointer-events:none;transform:rotate(-12deg);mix-blend-mode:multiply;animation:kmStamp calc(.5s*var(--pace)) cubic-bezier(.3,1.4,.5,1) calc(.1s*var(--pace)) both}
 .km-thump{animation:kmThump calc(.35s*var(--pace)) ease calc(.45s*var(--pace)) both!important}
 .kmfls{position:fixed;z-index:9050;pointer-events:none;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;width:max-content}
-.kmfl{position:relative;font-weight:800;font-size:1rem;white-space:nowrap;background:#fffaf0;border:1.5px solid currentColor;border-radius:12px;padding:1px 9px;box-shadow:0 4px 12px #5a3a2050;animation:kmFloat calc(1.5s*var(--pace)) var(--km-out) both}
+.kmfl{position:relative;font-weight:800;font-size:1rem;white-space:nowrap;background:var(--k-card,#fffaf0);border:1.5px solid currentColor;border-radius:12px;padding:1px 9px;box-shadow:0 4px 12px #5a3a2050;animation:kmFloat calc(1.5s*var(--pace)) var(--km-out) both}
 .kmfl.g{color:var(--good)}.kmfl.r{color:var(--bad)}
 .kmbar{display:block;height:4px;margin:2px 0 3px;border-radius:2px;background:#e6d3ac;overflow:hidden;max-width:220px}.kmbar b{display:block;height:100%;border-radius:2px;transition:width .9s var(--km-out) .35s}
 .kmbar.up b{background:var(--good)}.kmbar.down b{background:var(--bad)}
@@ -35057,7 +35065,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmfr-old{animation:kmFadeOut calc(.5s*var(--pace)) ease calc(1.55s*var(--pace)) forwards}
 /* §66.1 rank up: the light gold glow is PAINTED (KIT §68 glowburst + glow-gold light, see kitEdict); no CSS sweep */
 .kmchip-row{display:flex;align-items:center;gap:8px}.kmarrow{color:#f6e3b4;font-weight:700}
-.kmchip{font-size:.8rem;font-weight:700;padding:3px 10px;border-radius:12px;border:1px solid var(--line);background:#fffaf0;color:var(--dim)}
+.kmchip{font-size:.8rem;font-weight:700;padding:3px 10px;border-radius:12px;border:1px solid var(--line);background:var(--k-card,#fffaf0);color:var(--dim)}
 .kmchip-new{color:#3a1f10;border-color:var(--rc);background:linear-gradient(#fffaf0,color-mix(in srgb,var(--rc) 35%,#fffaf0));box-shadow:0 0 0 3px color-mix(in srgb,var(--rc) 35%,transparent);animation:kmPop calc(.45s*var(--pace)) var(--km-ease) calc(1.75s*var(--pace)) both}
 @keyframes kmScC{0%{opacity:0;transform:translate(-50%,-30%) scale(.7)}40%{opacity:1;transform:translate(-50%,-50%) scale(1)}70%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.04)}}
 @keyframes kmScO{from{clip-path:inset(0 50% 0 50%)}to{clip-path:inset(0 0 0 0)}}
@@ -48917,7 +48925,7 @@ function css(){if(document.getElementById("kchat-css"))return;const st=document.
 #kchatp .kchat-row .kinp .kctl-l{display:none}
 #kchatp .kchat-row .kinput{width:100%;box-sizing:border-box;min-height:44px;font-size:1rem}
 #kchatp .kchat-row .kbtn{flex:none;margin:0;min-height:44px}
-.kcm{max-width:84%;padding:6px 10px 7px;border:1px solid var(--k-hair,#e6d3ac);border-radius:12px;background:#fffaf0;color:var(--ink,#3a2418);font-family:var(--body);overflow-wrap:anywhere;white-space:pre-wrap}
+.kcm{max-width:84%;padding:6px 10px 7px;border:1px solid var(--k-hair,#e6d3ac);border-radius:12px;background:var(--k-card,#fffaf0);color:var(--ink,#3a2418);font-family:var(--body);overflow-wrap:anywhere;white-space:pre-wrap}
 .kcm.mine{align-self:flex-end;background:#f3e3bf;border-color:var(--gold,#c9a46a);border-bottom-right-radius:3px}
 .kcm.fr{align-self:flex-start;border-bottom-left-radius:3px}
 .kcm .kcm-h{display:flex;gap:8px;align-items:baseline;font-size:.72rem;color:var(--dim,#8a7355);white-space:normal}
@@ -55489,7 +55497,7 @@ window.kneNightTone=NT_TONE;
 /* ---------- CSS ---------- */
 const st=document.createElement("style");st.id="kne-css";st.textContent=`
 .kne{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;max-width:600px}
-.kne-pic{position:relative;width:100%;aspect-ratio:4/3;max-height:min(calc(62*var(--kvh,1dvh)),450px);border-radius:var(--k-rad,8px);overflow:hidden;border:1px solid var(--gold);box-shadow:0 0 0 3px #f6ead6,0 12px 30px #000a;background:#f6ead6;container-type:size}
+.kne-pic{position:relative;width:100%;aspect-ratio:4/3;max-height:min(calc(62*var(--kvh,1dvh)),450px);border-radius:var(--k-rad,8px);overflow:hidden;border:1px solid var(--gold);box-shadow:0 0 0 3px #f6ead6,0 12px 30px #000a;background:var(--k-card2,#f6ead6);container-type:size}
 .kne-lq,.kne-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--fx,50%) var(--fy,50%)}
 .kne-lq{filter:blur(10px);transform:scale(1.08)}
 .kne-img{opacity:0;transition:opacity .5s ease}.kne-img.ld{opacity:1;animation:kneZoom calc(6s*var(--pace)) ease-out both}
@@ -56608,7 +56616,7 @@ button.kmc-d{cursor:pointer;text-align:left;-webkit-tap-highlight-color:transpar
 .kmc-mo.p1{background:#3a2e24}.kmc-mo.p15{box-shadow:0 0 3px #f0d070}
 .kmc-mo.p8{background:linear-gradient(90deg,#3a2e24 50%,#fff6d8 50%)}.kmc-mo.p23{background:linear-gradient(90deg,#fff6d8 50%,#3a2e24 50%)}
 .kmc-d.cy::after{content:"";position:absolute;left:4px;top:18px;width:5px;height:5px;border-radius:50%;background:#c98a96;opacity:.75}
-.kmc-tg{position:relative;display:block;margin:0 2px 2px;border-radius:4px;background:#fffaf0;border:1px solid var(--k-hair);color:var(--ink);font-size:.62rem;font-weight:700;line-height:1.1;padding:1px;text-align:center;overflow-wrap:normal;word-break:keep-all}
+.kmc-tg{position:relative;display:block;margin:0 2px 2px;border-radius:4px;background:var(--k-card,#fffaf0);border:1px solid var(--k-hair);color:var(--ink);font-size:.62rem;font-weight:700;line-height:1.1;padding:1px;text-align:center;overflow-wrap:normal;word-break:keep-all}
 .kmc-tg.t-note{border-color:var(--gold);color:var(--gold)}.kmc-tg.t-due,.kmc-tg.t-exam{border-color:#e3a497;color:var(--bad)}
 .kmc-que{font-size:.6rem!important;white-space:nowrap}
 .kmc-hint{color:var(--dim);font-size:.78rem}
@@ -59606,7 +59614,7 @@ const KIT_OPT_CSS=(()=>{const T=KIT_OPT.tiers;let c="html body #modal,html body 
  for(const k in T)c+=`html body #modal .opts[data-kot="${k}"],html body .kitpg-opts[data-kot="${k}"]{--ko-pw:${T[k].pw}px;--ko-ph:${T[k].ph}px;--ko-h:${T[k].h}px}\n`;
  c+=`html body #modal#modal button.ka.kopt.kopt:not(.kart) :is(.kofold,small.kb>.kr-hint,small.kb>.kr-why){display:none!important}
 html body #modal#modal button.ka.kopt.kopt:not(.kart){min-height:var(--ko-h,104px)!important;position:relative;box-sizing:border-box;align-items:center}
-html body #modal#modal button.ka.kopt:not(.kart) .kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c)!important;background:#fffaf0!important;border:1px solid var(--gold,#8f5f0c)!important;cursor:help;z-index:2}
+html body #modal#modal button.ka.kopt:not(.kart) .kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c)!important;background:var(--k-card,#fffaf0)!important;border:1px solid var(--gold,#8f5f0c)!important;cursor:help;z-index:2}
 html body #modal#modal .opts[data-kol],html body .kitpg-opts[data-kol]{display:grid!important;grid-template-columns:repeat(var(--k3c,1),minmax(0,1fr))!important;gap:${KIT_OPT.gap}px;align-content:start}
 html body #modal#modal .opts[data-kol]>button.kopt:not(.kart){align-items:flex-start}
 html body #modal#modal .opts[data-kol]>button.kopt>.kaart{align-self:center}
@@ -59657,9 +59665,9 @@ document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.
 #modal .knum{display:none!important}
 #modal .kpmain:has(>.knbang),#modal .kpmain:has(.knbang){position:relative}
 #modal .kpmain:has(.knbang)>:is(p,.kfacts,.kfact,div):first-of-type{padding-right:30px}
-#modal .knbang{position:absolute;top:0;right:7px;z-index:2;margin:0;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:#fffaf0;border:1px solid var(--gold,#8f5f0c);cursor:help}
+#modal .knbang{position:absolute;top:0;right:7px;z-index:2;margin:0;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:var(--k-card,#fffaf0);border:1px solid var(--gold,#8f5f0c);cursor:help}
 #modal .knbang::after{content:"";position:absolute;inset:-9px}
-#kpinfo>.knumpop{width:min(560px,92vw);box-sizing:border-box;padding:12px 14px;background:#fffaf0;border:1px solid var(--gold,#8f5f0c);border-radius:10px;color:var(--ink,#2a1a12);cursor:zoom-out;font-size:.9rem}
+#kpinfo>.knumpop{width:min(560px,92vw);box-sizing:border-box;padding:12px 14px;background:var(--k-card,#fffaf0);border:1px solid var(--gold,#8f5f0c);border-radius:10px;color:var(--ink,#2a1a12);cursor:zoom-out;font-size:.9rem}
 #kpinfo>.knumpop p{margin:0 0 6px}`;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.id="kit-opt-final";const mk=O=>`${O}{--kaw:var(--ko-pw,66px)!important;--kah:var(--ko-ph,88px)!important;min-height:var(--ko-h,104px)!important;height:auto!important;align-items:center!important;box-sizing:border-box;position:relative;padding-top:6px!important;padding-bottom:6px!important}
 ${O}>.kaart{flex:0 0 var(--ko-pw,66px)!important;width:var(--ko-pw,66px)!important;height:var(--ko-ph,88px)!important;align-self:center!important}
@@ -59673,14 +59681,14 @@ ${O} small.kb>.kr>.krv>.ksep{display:inline!important;margin:0 4px!important;opa
 ${O} .kofold,${O} small.kb>.kr-hint,${O} small.kb>.kr-why{display:none!important}/* Gợi ý / Vì sao rows (a hide-out card adds them after the first fold pass) stay behind "!" */
 ${O} .kfill .ef{color:var(--dim,#9a8a78)!important;font-weight:400!important}
 ${O} .kfill .krl{opacity:.6}
-${O}>.kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:#fffaf0;border:1px solid var(--gold,#8f5f0c);cursor:help;z-index:2}
+${O}>.kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:var(--k-card,#fffaf0);border:1px solid var(--gold,#8f5f0c);cursor:help;z-index:2}
 ${O}>.kobang::after{content:"";position:absolute;inset:-9px}`;
  st.textContent=mk("html body #modal#modal button.ka.kart.kopt.kopt")+"\n"+mk("html body .kitpg-opts>button.ka.kart.kopt.kopt")+`
 /* KIT §6.2d TWO OPTION LAYOUTS + ONE SIZE PER BUTTON TIER (owner 18/11 ~16:05Z + 16:15Z): layout "1" = one long button per row, "2" = two-column grid, on phone AND iPad; tier S / M / L = ONE card size each (KIT_OPT.tiers) */
 ${KIT_OPT_CSS}
 #kpinfo{position:fixed;inset:0;z-index:100001;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
 #kpinfo[hidden]{display:none!important}
-#kpinfo>button.kopinfo{width:min(560px,92vw);max-height:calc(86*var(--kvh,1vh));overflow:auto;text-align:left;cursor:zoom-out;opacity:1!important;pointer-events:none;background:#fffaf0!important;color:var(--ink,#2a1a12)!important;filter:none!important}`;document.head.appendChild(st)})();
+#kpinfo>button.kopinfo{width:min(560px,92vw);max-height:calc(86*var(--kvh,1vh));overflow:auto;text-align:left;cursor:zoom-out;opacity:1!important;pointer-events:none;background:var(--k-card,#fffaf0)!important;color:var(--ink,#2a1a12)!important;filter:none!important}`;document.head.appendChild(st)})();
 /* kit sample page (§6.2): three options of "Hoàng hậu triệu kiến" through the real modal markup → kaNorm → kpOptArt */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Thẻ lựa chọn: tranh bên trái, thông tin bên phải (thẻ gọn)",html:()=>
  `<div class="opts kitpg-opts">`+
@@ -69121,7 +69129,7 @@ const KMSKYBG="var(--kmv-nt),radial-gradient(ellipse 30% 4.5% at 20% 5%,var(--cl
 html .game .kleather>.maptools{position:static!important;inset:auto!important;flex:none;order:-1;display:flex!important;align-items:center;justify-content:space-between;height:38px;padding:0 6px 0 8px;background:#f7efd6;border-bottom:1px solid #b79a5b99;z-index:5;pointer-events:auto}
 html .game .kleather>.maptools:not(:has(.kpm-back))::before{content:"Dư đồ";display:inline-flex;align-items:center;justify-content:center;width:92px;height:26px;background:url(https://ctm-img.victoria-tntt.workers.dev/img/kit/mapslip-cartouche.webp) 0 0/100% 100% no-repeat;font:600 14px/1 var(--display);letter-spacing:.14em;color:#4a2a14;text-indent:.14em;padding-bottom:1px}
 html .game .kleather>.maptools>span:last-child{position:static!important;display:flex;gap:4px}
-html .game .kleather>.maptools .mz{min-height:28px;padding:0 9px;font-size:.72rem;background:#fffaf0;border:1px solid #c9a35a;border-radius:6px;box-shadow:none}
+html .game .kleather>.maptools .mz{min-height:28px;padding:0 9px;font-size:.72rem;background:var(--k-card,#fffaf0);border:1px solid #c9a35a;border-radius:6px;box-shadow:none}
 .kleather:not(.kpmv)>.mapsc{flex:1;height:auto!important}
 .kleather>.mapsc{border-radius:0!important;box-shadow:none!important;outline:1px solid #b79a5bcc;outline-offset:-1px}
 .kleather:not(.kpmv)>.mapsc{-webkit-mask-image:linear-gradient(#0000,#000 14px,#000 calc(100% - 14px),#0000),linear-gradient(90deg,#0000,#000 14px,#000 calc(100% - 14px),#0000);-webkit-mask-composite:source-in;mask-image:linear-gradient(#0000,#000 14px,#000 calc(100% - 14px),#0000),linear-gradient(90deg,#0000,#000 14px,#000 calc(100% - 14px),#0000);mask-composite:intersect}
@@ -81974,7 +81982,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b29a7a753928";window.CTM_BUILD=BUILD;
+const BUILD="9d18c115d0da";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

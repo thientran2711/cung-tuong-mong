@@ -472,7 +472,7 @@ html body .kbtn,html body .kbtn *{word-break:normal!important;overflow-wrap:norm
 .kodm{display:inline-flex;align-items:center;gap:5px;cursor:pointer;vertical-align:middle;line-height:1;white-space:nowrap}
 .kodm b{font-size:.72rem;font-weight:700;color:var(--oc)}
 .kseg{display:inline-flex;gap:1.5px;padding:2px;border-radius:4px;background:#efe3cc;border:1px solid #d9c49a}
-.kseg i{display:block;width:5px;height:9px;border-radius:1.5px;background:#fffaf0;box-shadow:inset 0 0 0 1px #d9c49a}
+.kseg i{display:block;width:5px;height:9px;border-radius:1.5px;background:var(--k-card,#fffaf0);box-shadow:inset 0 0 0 1px #d9c49a}
 .kodm.oc{background:none!important;border:0!important;padding:0!important;margin:0}
 button.ka .kodds .kodm{flex-direction:row}
 .hc.khc{display:inline-flex;align-items:center;gap:4px}.hc.khc .kodm b{font-size:.68rem}
@@ -514,6 +514,14 @@ KP_SEAL.week="TUẦN";
 .dawn .dbox.kpanel .kpb{padding:10px 14px 4px}.dawn .kpfoot{display:flex;justify-content:flex-end;padding:6px 14px 12px}
 /* kv3:.kv1 */:where(.kv1) .dawn .dbox.kpanel .kph{padding:8px 10px}:where(.kv1) .dawn .dbox.kpanel .kpb{padding:8px 10px 2px}:where(.kv1) .dawn .kpfoot{padding:6px 10px 10px}
 `;document.head.appendChild(st)})();
+
+/* KIT §0.3 BASE COLOUR SETS (review/kit-bgtone, owner OD 20/11 ~07:45Z "chỉnh cái màu nền ở trong game cho phù hợp với màu sắc" of the new rank-8 costume tone: powder-blue, mint, sage, peach, blush-pink, lilac + gold embroidery).
+   ONE token file for the game's ground / paper / panel fills / label colour; every kit part already reads these tokens. KIT_BG picks the set: "a" = Ngọc sương (jade mist: sage-cream paper),
+   "b" = Đào phấn (peach blush paper). One-line switch = change KIT_BG. Meaning colours (gold --gold/--trim, red --red/--bad/--k-seal, green --good, --ink, --dim, rank colours) are NOT touched. */
+const KIT_BG="a";
+(function(){try{document.documentElement.dataset.kbg=KIT_BG}catch(e){}const st=document.createElement("style");st.id="kbg-css";st.textContent=`
+html[data-kbg="a"]{--bg:#e4ebdc;--panel:#f6faee;--panel2:#e3ecd6;--line:#c9bf8e;--k-hair:#d3dab8;--k-card:#f6faee;--k-card2:#e3ecd6;--k-lab:#5f6b45}
+html[data-kbg="b"]{--bg:#f5e2dc;--panel:#fff4ef;--panel2:#f5dcd4;--line:#dcb7a0;--k-hair:#e8cbbd;--k-card:#fff4ef;--k-card2:#f5dcd4;--k-lab:#8a5f58}`;document.head.appendChild(st)})();
 
 /* ---------- MINI-GAME FRAME (for j82 and the lesson games): header + how-to + score/timer + game box + result rows ---------- */
 KP_SEAL.game="TÀI NGHỆ";
@@ -1021,7 +1029,7 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 #hud2.kgrp{flex-wrap:wrap}
 #hud2 .khg{position:fixed;z-index:40;left:var(--shL,8px);top:var(--shT,calc(40*var(--kvh,1vh)));width:var(--shW,calc(100vw - 16px));max-height:var(--shH,calc(50*var(--kvh,1vh)));overflow:auto;box-sizing:border-box;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-content:start;gap:6px 10px;padding:8px;background:var(--k-card,#fffaf0);border:1px solid var(--gold);border-radius:10px;box-shadow:0 8px 28px #3a201055}
 #hud2 .khsh{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;font-family:var(--display);color:var(--gold);border-bottom:1px solid var(--k-hair);padding-bottom:4px}
-#hud2 .khsh .khx{min-height:32px;padding:2px 12px;border:1px solid var(--line);border-radius:6px;background:#fffaf0;font:inherit;font-size:.8rem;color:var(--ink);cursor:pointer}
+#hud2 .khsh .khx{min-height:32px;padding:2px 12px;border:1px solid var(--line);border-radius:6px;background:var(--k-card,#fffaf0);font:inherit;font-size:.8rem;color:var(--ink);cursor:pointer}
 #hud2 .khc{display:flex;flex-direction:column;gap:2px;min-width:0;padding:4px 6px;border:1px solid var(--k-hair);border-radius:8px;background:#fffdf8}
 #hud2 .khc .hc[data-hx="date"]{display:none!important}
 #hud2 .khc .hc{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;justify-items:start;align-items:center;column-gap:5px;border:0!important;background:none!important;padding:1px 0!important;min-height:0!important;border-radius:0!important;text-align:left;white-space:normal;font-size:.76rem}
@@ -1181,12 +1189,12 @@ addEventListener("resize",()=>{clearTimeout(window.__kpkT);window.__kpkT=setTime
 .kpki{all:unset;box-sizing:border-box;position:relative;width:58px;display:grid;place-items:center;padding:3px;border-radius:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .kpki[hidden]{display:none!important}
 .kpki span.md.kmini.kmini{width:52px!important}
-.kpki:hover{background:#f6ead6}
+.kpki:hover{background:var(--k-card2,#f6ead6)}
 .kpki:focus-visible{outline:2px dashed var(--gold);outline-offset:1px}
 .kpki.on{background:#fff3c4}
 .kpki .kpkck{position:absolute;right:-3px;top:-3px;width:20px;height:20px;border-radius:50%;display:none;place-items:center;font-style:normal;font-size:.8rem;font-weight:800;color:#fff;background:var(--k-sel-ring,#a8740c);box-shadow:0 0 0 2px #fff,0 1px 3px #0006;z-index:3}
 .kpki.on .kpkck{display:grid}
-.kpkpg{min-height:44px;border:1px solid var(--line);border-radius:6px;background:#fffaf0;font-size:1.2rem;color:var(--gold);cursor:pointer;padding:0}
+.kpkpg{min-height:44px;border:1px solid var(--line);border-radius:6px;background:var(--k-card,#fffaf0);font-size:1.2rem;color:var(--gold);cursor:pointer;padding:0}
 .kpkpg:disabled{opacity:.35;cursor:default}.kpkpg[hidden]{visibility:hidden;display:block}
 .kpkpn{font-size:.72rem;color:var(--k-lab);text-align:center;min-height:1em}
 /* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
