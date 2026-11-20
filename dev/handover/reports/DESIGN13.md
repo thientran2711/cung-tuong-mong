@@ -104,3 +104,27 @@ WORD DIFF _cloak5 → _cloak6, NON-FUR (final):
 - m02_t8: (unchanged)
 
 Proof: keep_check --sidecar ×7 PASS · --all 165 PASS · fur t4–t6 byte-identical vs _cloak4 · t7/t8 fur == s62_t6 fur (×4, script) · check_store s62 t7/t8 and m02 t7/t8: same FAIL count/set as _cloak5 (no new FAIL, no LEN).
+
+## _cloak7 — Hoàng hậu t8 only (owner Lượt 1498: "Hoàng hậu vẫn thô kìa", relayed by C #10)
+Files: dev/art/dong_hientai/{s62_t8,m02_t8}_DONG_HIENTAI_cloak7.txt + .keep (base _cloak6). Chars s62 9998 · m02 9949.
+
+### WHY she is still coarse (picture cloak6_t8_hoanghau_L1498 + prompt words)
+1. The CLOAK CLOTH: "the robe richly embroidered on the chest, shoulders and wide sleeves with LARGE phoenixes, incurved chrysanthemums and clouds … (finer and richer / far denser than any other rank)" + "FABRIC: … gold-embroidered silk BROCADE". In the picture the whole yellow cloak is covered in giant phoenixes and chrysanthemums, so it reads as heavy brocade.
+2. The SHAPE: nothing said how the cloak hangs, so the model spreads it like a bell to the floor (the sleeve law "very long, very wide" adds to the width).
+3. The SHOULDER PIECE: "richer than the Hoàng quý phi's" + "short pearl-and-gold DROP fringe (a little LONGER than the Hoàng quý phi's)" gives two tiers of pearl drops jutting past the shoulders.
+
+### Changes _cloak6 → _cloak7 (s62 + m02 t8)
+- Embroidery: "the outer robe embroidered ONLY in a border band along its edges and cuffs with SMALL phoenixes, incurved chrysanthemums and clouds …, the rest plain, ONE small phoenix roundel on the back, no large all-over motifs".
+- FABRIC: "soft light silk, not brocade, with a graceful, flowing drape".
+- Cloak shape (in the WINTER clause, BEFORE the fur words): "a slim cloak hanging close and narrow, never bell-wide,".
+- Shoulder piece: "richer than" → "finer than" the Hoàng quý phi's; fringe → "its very short fine pearl fringe" (no "longer than"). Two small tiers kept.
+- s62 only (length): GRACE "her neck long and elegant," dropped; "Each wide sleeve still hangs" → "hangs".
+- COLOUR CHOICE: royal golden yellow stays the CLOAK colour (COLOUR RULE unchanged: "DOMINANT colour of the robe, sleeves and skirt"). Why: yellow is the one rank sign of the Empress readable at a glance, and the COLOUR RULE / THREE-COLOUR RULE are rank law. The coarseness came from the giant all-over motifs and the brocade, not from the colour. Plain soft yellow silk with only a border band reads light. Kept: the nine-phoenix crown, the GRANDEST headdress wording, jewels, belt pendants, pearl strands, "The phoenix is the main embroidered motif".
+- Fur (Lông 2) words byte-identical (script, 2/2).
+
+### Word diff _cloak6 → _cloak7
+- s62_t8: "" → "outer"; "richly" → ""; "on the chest, shoulders" → "ONLY in a border band along its edges"; "wide sleeves" → "cuffs"; "large" → "small"; "thread (finer and richer than any other rank)," → "thread, the rest plain, ONE small phoenix roundel on the back, no large all-over motifs,"; "richer" → "finer"; "" → "very"; "pearl-and-gold drop" → "fine pearl"; "(a little longer than the Hoàng quý phi's)" → ""; "still" → ""; "supple gold-embroidered silk brocade" → "soft light silk, not brocade,"; "her neck long and elegant," → ""; "" → "a slim cloak hanging close and narrow, never bell-wide,"
+- m02_t8: "" → "outer"; "richly" → ""; "on the chest, shoulders" → "ONLY in a border band along its edges"; "wide sleeves" → "cuffs"; "large" → "small"; "thread (far denser than any other rank)," → "thread, the rest plain, ONE small phoenix roundel on the back, no large all-over motifs,"; "richer" → "finer"; "" → "very"; "pearl-and-gold drop" → "fine pearl"; "(a little longer than the Hoàng quý phi's)" → ""; "supple gold-embroidered silk brocade" → "soft light silk, not brocade,"; "" → "a slim cloak hanging close and narrow, never bell-wide,"
+Fur (Lông 2) words byte-identical _cloak6 → _cloak7: 2/2 (script).
+
+Proof: keep_check --sidecar ×2 PASS (the other 5 ranks unchanged at _cloak6; their sidecars still PASS in --all) · --all 169 PASS · check_store s62/m02 t8 FAIL set = _cloak6 (no new FAIL, no LEN).
