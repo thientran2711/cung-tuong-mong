@@ -28,3 +28,10 @@ s62 t8: duplicate 'Full-body standing figure head to feet, centered, plain light
 - t8 s62+m02 (outfit sentence): 'many long strands of pearls and jade across the chest' — on the m02 sheet HH t8 these read as long necklace strands.
 - t7 s62+m02 (outfit sentence): 'strands of pearls across the chest'.
 - crowns (not necklace, listed for completeness): t8 'a large central gold phoenix holding a pearl string in its beak'; t7 'with pearl strands' on the crown.
+
+## Job 2 — owner Lượt 1415: HH luxury = t7 HQP LUXURY copied, not richer (no necklace)
+- New: dev/art/thu_comoi/{s62,m02}_t8_THU_COMOI_v5.txt (+.keep, base v4). 9923 / 9912 chars.
+- Added (verbatim, placed before 'HELD ITEM COLOUR:'): "HOÀNG HẬU LUXURY: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), pearl and jade trims along the cloud-collar edges, and long jade-and-gold belt pendants with pearl tassels;"
+- Not copied from S14: 'richer than every lower rank', 'a layered pearl-and-gold necklace' (A41), 'still clearly simpler and less golden than the Empress'.
+- Trimmed for ≤ 10 000 (allow lines): duplicate 'her head turns together … never in profile.', 'gentle expression … mouth never open;', 'beautiful/handsome romantic-lead looks for everyone;'. (First try trimmed the forehead + item-contrast sentences → new FAIL S16/S34, so those were restored.)
+- keep_check PASS ×2; check_store tp8 a18: no new FAIL vs v4 (m02 0 FAIL; s62 S19 no longer fires → 0 FAIL).
