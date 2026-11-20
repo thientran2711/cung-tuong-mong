@@ -602,3 +602,4 @@ NEWACCT#3 ~16:07Z: FROM #2: owner ~19:20Z "Trang phục mùa đông cho mặc v�
 NEWACCT#3 ~16:08Z: FROM #2: owner ~19:22Z "Hqp và hh không đổi vải, vì là gấm rồi" → G28 = t1–t6 only; WINTER1 told.
 NEWACCT#3 ~16:09Z: FROM #2: owner CORRECTION ~19:24Z "Không phải dày ấm, mà là vải không xuyên thấu…" → G28 = opaque silk, same drape, NOT thick/padded; WINTER1 told.
 NEWACCT#3 ~16:10Z: FROM #2: owner ~19:26Z "Không đươnc uyển chuyển nữa" — AMBIGUOUS (worry opaque loses flow? or wants less flowy?). Asked owner Lượt 1213. G28 unchanged until answer.
+NEWACCT#3 ~16:11Z: owner answered "A" (via #2): opaque soft silk still flowing thướt tha; G28 final wording; WINTER1 told.
