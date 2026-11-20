@@ -50,3 +50,12 @@ Contains KIT READY 3332c63b (kit-cost-rows-home) + LIVE 983a9436. A rebuild of t
 | regression | smoke 6 origins × 2 lives errs [] fails [] · oldsave main→this errs [] · quickcheck alone PASS (old save ok; buổi 1541 vs live 1162 ms within the gate — watch it) |
 Notes, not gates: on «nói khéo» the kit shows an empty GHI CHÚ label (kit part, not this branch); kcIntel(1,2) is still typed in kc_tt c2.
 VERDICT: PASS 5853d71a4 · LAND READY 5853d71a4 (origin/main 983a9436 is its ancestor; FF verified 20/11).
+
+## HANDOVER (E25r → E25r2, 20/11 ~21:35Z, rollover on context)
+State: PASS 5853d71a4 (review/home-chapters-r1) but the LAND READY is STALE (LIVE moved: 415b9ca0, then 548dcd0d). FOREMAN E is now #23 session_01DgYSWm5qy3Y59fKkn6eSf7, and will give a GO after pm r4 + phutang land.
+On GO, do in this order:
+1. ONE re-merge of review/home-chapters-r1 onto the newest origin/main, in a sparse worktree with flock fetch. Conflicts so far were always index.html / sw.js (rebuild with bash dev/site/build_site.sh), KIT_REQUESTS.md (keep both) and the assemble.py list (union).
+2. If KIT READY «KR thế lực nhà» (kit r2) exists, merge it too.
+3. Run the gates: node dev/test/one-core-guard.js; dev/test/home-chapters/{laws,faces,smoke (--origin=tt,dtq,muoi,thd,ch,td --lives=2),costrows --list}.js <url>; dev/test/kit-cost-rows-home.js; dev/test/outside/oldsave.js main→this; bash dev/tools/quickcheck.sh run ALONE (watch the buổi time: 1541 vs live 1162 ms last run); shots.js Fold + iPad, LOOK at E28 / Kế mẫu / bà mối.
+4. NEW LAND GATE (owner 20/11 ~21:30Z, OD line "Co-op: helping/harming…" ≈L594, verbatim there): no LAND READY without coop-e2e PASS (dev/test/coop-e2e.js, two browsers against the LIVE Worker) PLUS the feature's own co-op check (both seats see/do it, two-way). Prepare it: find out how the home phase (S.kc, jkc/jkc2/jkc3) behaves in a co-op room — can a seat start at home (khuê các), do the home chapters / roster / E9/E15/E28 / early roads run for host AND guest, and do they sync. If co-op has no home phase at all, report that to FOREMAN E as a question (feature freeze: do not invent), do not build.
+5. Verdict PASS/FAIL into this report plus one line in FOREMAN_E_STATUS.md; on PASS write LAND READY <sha> with an FF check. Message FOREMAN E #23.
