@@ -509,3 +509,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW dresscode r1 (BIG opus E30r; brief briefs/E30r-review-dresscode.md) of 459a91bf | review/dresscode; reports/dresscode-review.md | FOREMAN E #22 | session_01DgYSWpTexpKL6eD2PDxGZS | RUNNING | 20/11 20:18Z |
 | B RE-GATE LANDER (opus; final-merge B PASS branches onto newest LIVE, LAND READY lines) | <branch>-land | B | session_01N1tNP4Whxd4Rssp5BqhJvD | RUNNING | 20/11 20:19Z |
 | GAP MG11 mg11-thutay (opus; ORDER MAIN ROOT-79 16:25Z; reuse mg-allkinds scan; jkc2 envoy chess, pet care, plant care, mưu kế → Thử tay hand b) | review/mg11-thutay; briefs/b-mg11.md | B | session_01N1tNP6gfoaarxkj8jTD5Aw | RUNNING | 20/11 20:28Z |
+| coop-thin G #8 (opus; successor of G #7 4hKBjqGr @67c18fc0; handover reports/coop-thin-g.md #7→#8) | review/coop-thin-g | B | session_01N1tNP2GuhdQbevDCFFiv1Q | RUNNING | 20/11 20:32Z |
+| coop-guest-agent (opus; agOn() false on co-op guest → guest's own servants skip agent month; found by G #7) | review/coop-guest-agent; briefs/b-coop-guest-agent.md | B | session_01N1tNP6ULPfAUKCrZASGHHM | RUNNING | 20/11 20:32Z |
