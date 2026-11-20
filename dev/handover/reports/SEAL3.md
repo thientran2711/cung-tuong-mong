@@ -68,3 +68,11 @@ If I finish (only upload + report left) this section is void; otherwise the succ
 2. python3 dev/site/cdn_sync.py img/_review/emo-anim-groups; report per group to ROOT-59 (session_01PEhRbxKh3jLw4atknQREnq): preview URL + sheets + credits + faults.
 3. bg-so OUT: ROOT-59 runs it (classifier blocked SEAL3); when the id comes, cut + sheet + rebuild the bg preview with bg-so.
 No new gens without ROOT-59; check account_balance first (stop < 60 000).
+
+## DONE 20/11 ~00:40Z — late clips cut, all uploaded (HANDOVER above is void: SEAL3 finished the tail)
+CDN …/img/_review/emo-anim-groups/: mm-set-preview.mp4 (10 seals), bt-set-preview.mp4 (10 seals), bg-set-preview.mp4 (9, no bg-so);
+sheets <G>-<k>-frames.jpg; stills still/<G>-<k>.webp. Re-cut OUT starts (free): mm-vui 0.87 s, mm-ghen 1.33 s, mm-tutin 0.93 s.
+mm faults (not redone): mm-muu BACK BROKEN (she shrinks to a tiny doll in a full-size disc frames ~12–36, hazy flash 37–38, hard pop to full size —
+I looked; needs a new clip if wanted) · mm-ghen BACK handkerchief falls off the bottom (7 fr), OUT tail touches bottom (3 fr) · mm-hanghai BACK fist
+touches the left edge (4 fr), OUT lunge size jump · mm-so OUT arms-wide flattened leap (size jump) · mm-an BACK disc ends a little darker grey.
+OPEN: bg-so OUT (waits for the seal gate, A24); nothing else. SEAL3 IDLE.
