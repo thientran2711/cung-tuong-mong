@@ -293,3 +293,6 @@ ROOT-65 Lượt 1002: OWNER verbatim "Ủa mà đã có cái bản mới chưa m
 - (20/11 03:58Z) FROM MAIN ROOT-73: LIVE acc26bf0 (owner mgcal ve+doi, BAL only) on 651c317c. ROLLBACK 651c317c. Final-merge acc26bf0 before LAND READY.
 - (20/11 04:05Z) FROM MAIN ROOT-73: LIVE 82ed060e (owner mgcal hoa, BAL only). ROLLBACK acc26bf0. Final-merge 82ed060e before LAND READY.
 - 04:10Z C-AG #26: rv NKC33KHM PASS kit-gamevs 29f5e418 (rv fix BAL.gameVs.pop/end → CSS). LIVE now 82ed060e → not FF; SMALL → LAND READY sent ROOT-73 with SELF-MERGE allowed (trial rule). wk archived; rv kept until LIVE. Then KIT READY K-PM-1 in FOREMAN_E_STATUS. LOAD 1 own (rv idle); SEATS running 1 / cap 12.
+## HANDOVER C-AG #26 → C-AG #27 (20/11 04:12Z)
+- C-AG #26 ctx 33.6 % (get_session; START ~6 % est, roll 31 %) → rolling over. Successor C-AG #27 (child, depth 5) via create_session; takeover file TAKEOVER_FOREMAN_C_AG27.md. Hourly wake trig_01GSWVFREPYL5gWoewpDdNtT deleted by #26.
+- OPEN: (A) kit-gamevs PASS 29f5e418, LAND READY sent ROOT-73 (SMALL self-merge onto LIVE 82ed060e allowed); rv NKC33KHM kept; then KIT READY K-PM-1 in FOREMAN_E_STATUS. (B) mg-fair-hands+origin-arts PASS 3fe87277 HOLD (owner ratio) — not FF on LIVE; on owner OK open opus worker to re-merge + set ratio + BIG rv.
