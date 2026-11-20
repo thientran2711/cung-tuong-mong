@@ -111,13 +111,17 @@ function kg82Set(k,v){if(k==="round"&&typeof v==="string"){let lab=null;const m=
   if(lab)document.querySelectorAll('[data-kg="round"]').forEach(e=>{const l=e.previousElementSibling;if(l&&l.tagName==="SMALL"&&l.textContent!==lab)l.textContent=lab})}
  kg82Set0(k,v)}
 function kg82Set0(k,v){if(typeof kitGameSet==="function")kitGameSet(k,v);else document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
-function kg82Open(o){kg82Close(true);const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
- const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;return d}
-function kg82Close(silent){if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";
+function kg82Open(o){const pb=KG82.preBack,pp=KG82.prePay||(typeof S!=='undefined'&&S&&S.mg&&S.mg.pay)||null;KG82.preBack=null;KG82.prePay=null;kg82Close(true);const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
+ const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;kg82BackX(d);
+ /* §13.9: a charge the caller only REMEMBERS (kgDefer) is taken on «Sẵn sàng» / the quick option / any outcome (kgPay); a lesson keeps it in S.mg.pay (a reload reopens the
+    same unpaid lesson, never a free one). Until then the ✕ is a free back: nothing was spent, nothing to undo. */
+ if(pp){KG82.payOnGo=pp;try{if(typeof pp==="object"&&S.mg&&S.mg.pay!==pp){S.mg.pay=pp;save()}}catch(e){}KG82.backPre=()=>{KG82.payOnGo=null;try{if(typeof pb==="function")pb()}catch(e){console.error(e)}try{if(S.mg)S.mg=null}catch(e){}}}
+ else if(typeof pb==="function")KG82.backPre=pb;return d}
+function kg82Close(silent){kgPay();/* closed by an outcome before «Sẵn sàng» (jsgame «Giao cho người làm»): the remembered charge is due */if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";KG82.back=null;KG82.backPre=null;KG82.payOnGo=null;KG82.backAsk=null;KG82.quit=null;KG82.quitAsk=null;KG82.xdo=null;KG82.giveUp=0;
  const d=kg82El();if(!d)return;const ov=$("ov");d.remove();[...ov.children].forEach(c=>{if(c.dataset.kg82h!=null){c.hidden=c.dataset.kg82h==="1";delete c.dataset.kg82h}});
  if(typeof mgDone==="undefined"||mgDone)ov.hidden=true}
 const kg82Box=()=>document.getElementById("kg82box");
-function kg82ShowRes(html){{const d=kg82El();if(d){d.classList.remove("kg-run");d.classList.add("kg-idle")}}const bx=kg82Box(),res=$("kg82box-res");if(res){bx.innerHTML="";bx.hidden=true;res.innerHTML=html;res.hidden=false}else bx.innerHTML=html}
+function kg82ShowRes(html){kgPay();KG82.backPre=null;{const d=kg82El();if(d){d.classList.remove("kg-run");d.classList.add("kg-idle")}}const bx=kg82Box(),res=$("kg82box-res");if(res){bx.innerHTML="";bx.hidden=true;res.innerHTML=html;res.hidden=false}else bx.innerHTML=html}
 
 /* ---------- canvas helper ---------- */
 function kg82Canvas(box,hRatio,hMax,hMin){const W=Math.max(240,Math.floor(box.clientWidth||300));const H=Math.round(Math.min(W*hRatio,hMax||520,Math.max(hMin||260,(innerHeight||800)*.56)));
@@ -383,13 +387,69 @@ function kg82Aim(box,env){const C=kg82Canvas(box,.95,420),{g,W,H}=C;const pot=en
 const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,pattern:kg82Pattern,steps:kg82Steps,aim:kg82Aim};
 
 /* ---------- running one game inside the frame ---------- */
-function kg82Play(kind,onEnd){const box=kg82Box();if(!box)return;box.classList.remove("kgintro");box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";{const d=kg82El();if(d){d.classList.add("kg-run");d.classList.remove("kg-idle")}}
- let done=false,dead=false,stop=null;const env={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:raw=>{if(done)return;done=true;clearTimeout(guard);const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.rawF=raw;const gm=mgGrade(raw,kind);kg82Set0("score",`${gm}/10`);/* review/mg-score-same: the board ends on the mark given */onEnd(gm)}};/* mg-balance: engines pass a float; graded by BAL.mgTier.gamma */
- const guard=setTimeout(()=>env.end(0),97500);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};
+function kg82Play(kind,onEnd){kgPay();const box=kg82Box();if(!box)return;box.classList.remove("kgintro");box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";{const d=kg82El();if(d){d.classList.add("kg-run");d.classList.remove("kg-idle")}}
+ let done=false,dead=false,stop=null;const env={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:raw=>{if(done)return;done=true;clearTimeout(guard);KG82.quit=null;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.rawF=raw;const gm=raw===0&&KG82.gaveUp?0:mgGrade(raw,kind);kg82Set0("score",`${gm}/10`);/* review/mg-score-same: the board ends on the mark given */onEnd(gm)}};/* mg-balance: engines pass a float; graded by BAL.mgTier.gamma */
+ let guard=0;KG82.gaveUp=0;if(KG82.giveUp){KG82.giveUp=0;KG82.gaveUp=1;env.end(0);return}/* KIT §13.9 kit ✕ «Quay lại» on the rules screen: given up before «Sẵn sàng» = the caller's own 0/10 result, no board, no clock */
+ guard=setTimeout(()=>env.end(0),97500);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};KG82.quit=()=>{KG82.gaveUp=1;env.end(0)};/* §13.9: given up during play */
  /* the board paintings load first (≤2.5 s), then the game starts */
  kg82Preload(kind).then(()=>{if(dead||done)return;try{stop=KG82_ENG[KG82_KIND[kind].e](box,env)}catch(e){console.error(e);env.end(5)}})}
 function kg82Word(raw){return mgWord(raw)}/* thresholds in BAL.mgTier.word (jmgt) */
 function kg82Norm(st){if(!st)return[];if(Array.isArray(st))return st.filter(x=>x&&x[1]);return Object.entries(st).filter(([k,v])=>v&&typeof v==="number").map(([k,v])=>[(typeof NAMES!=="undefined"&&NAMES[k])||k,v])}
+
+/* =============== KIT §13.9 · THE WAY BACK «Quay lại» on EVERY mini-game screen (owner 20/11 ~04:45Z, review/mg-back) ===============
+   Owner: "thêm cho tôi một cái option là cái chữ X hoặc là chữ go back, quay lại, để mà khi mà tôi vào một cái game mà tôi không có muốn thì tôi có thể
+   go back để tôi ra tôi chọn cái game lại." ONE kit ✕ (jk4 kitXHTML, label «Quay lại») in the header of the shared game frame (kg82Open), on the rules
+   screen, during «Hướng dẫn», during play and on the result screen. What it does, in this order:
+     0. KG82.backPre (before «Sẵn sàng» only; cleared by «Sẵn sàng», by any result screen, by kg82Close): a FREE back — the game closes, nothing played,
+        nothing spent. Callers that cost something only REMEMBER the charge until «Sẵn sàng» (kgDefer / kgPay below: lessons j23 + j2, practice j83,
+        jrcp teacher, jveil craft, jsgame paid choice), so the back has nothing to undo (no snapshot, no refund: spend() never ran); KG82.preBack = the
+        caller's own clean-up for that back (jaudit works deck card: the card untaken); a caller with nothing charged sets backPre itself (jtd: its own
+        «Thôi, để lúc khác · không tốn gì»); jaudit's pending cost for the unplayed game is dropped;
+     1. KG82.back (a caller with nothing at stake, set right after kg82Open — Thử tay: back to the kind list, the kind not saved): the game closes, back() runs;
+        KG82.backAsk = the confirm lines asked first while a board is live (Thử tay: the rounds played of this kind are not kept);
+     2. a result screen (jk4 kitOvBtn: #kg82ok / #kg92ok): presses it, the caller's own result applies (unchanged 32.10 behaviour); a screen whose
+        only way on is another button (jsgame «Ra tay», jtoil result, Nghiệm thân blood scene) names it in KG82.xdo — the ✕ runs it, no confirm;
+     3. otherwise = GIVE UP (laws 2/3: leaving is never a free escape from what the caller charged or staked): a kit confirm «Bỏ cuộc?», then
+        the caller's OWN lose path with 0/10 — during play KG82.quit() (kg82Play / sgEng / j92 / jroute / jtoil end their run with 0), on the rules
+        screen the «Sẵn sàng» button runs with KG82.giveUp set (the run ends at once with 0, no board, no clock); «Hướng dẫn» is put back first.
+   KG82.quitAsk = the caller's own confirm lines when its lose result is not «0/10» (jtoil: Để mộc). Callers never draw their own back button;
+   kg82Close clears back / backAsk / quit / quitAsk / xdo. Test: node dev/test/mg-back.js. */
+function kg82BackX(d){try{if(!d||typeof kitXHTML!=="function"||d.querySelector(".kit-x[data-kitx=kgback]"))return;const h=d.querySelector(".kph");
+ const html=kitXHTML('data-kitx="kgback"',"Quay lại");if(h){if(getComputedStyle(h).position==="static")h.style.position="relative";h.insertAdjacentHTML("beforeend",html)}
+ else{d.insertAdjacentHTML("afterbegin",html);d.firstElementChild.classList.add("kxabs")}
+ d.querySelector(".kit-x[data-kitx=kgback]").addEventListener("click",e=>{e.stopPropagation();e.preventDefault();kg82Back()})}catch(e){console.error("kg82BackX",e)}}
+/* the confirm is the kit's (j79 kitConfirm on #modal); body.kg82cf (showModal rewrites #modal's own class) lifts it over the game layer #ov while it is open */
+function kg82Ask(lines,yes,onYes,title,no){if(typeof kitConfirm!=="function"){onYes();return}const B=document.body.classList,off=()=>B.remove("kg82cf");
+ B.add("kg82cf");kitConfirm({title:title||(yes==="Bỏ cuộc"?"Bỏ cuộc?":"Quay lại?"),lines,yes,no:no||"Chơi tiếp",onYes:()=>{off();onYes()},onNo:off})}
+function kg82Back(){if(!kg82El())return;
+ if(typeof KG82.backPre==="function"&&KG82.phase!=="play"&&KG82.phase!=="result"){const f=KG82.backPre;KG82.backPre=null;KG82.payOnGo=null;kg82Close();try{f()}catch(e){console.error(e)}
+  /* jaudit (b)/(c): the cost it holds pending for this game is dropped — a game closed unplayed costs nothing — so the next act is not blocked */
+  window.__aaPend=null;window.__aaTitle=null;try{if(S&&S.mg&&S.mg.cost)S.mg=null;save();render()}catch(e){}return}
+ if(typeof KG82.back==="function"){const f=KG82.back,live=KG82.phase==="play"&&!KG82.tut&&KG82.run;
+  const go=()=>{kg82Close();try{f()}catch(e){console.error(e)}};if(live&&KG82.backAsk)kg82Ask(KG82.backAsk,"Quay lại",go);else go();return}
+ const ok=typeof kitOvBtn==="function"?kitOvBtn():null;if(ok){ok.click();return}
+ if(typeof KG82.xdo==="function"){const f=KG82.xdo;f();return}
+ const live=KG82.phase==="play"&&!KG82.tut&&typeof KG82.quit==="function";
+ kg82Ask(KG82.quitAsk||[live?"Ván đang chơi dừng lại, tính như thua: 0/10 phần.":"Chưa chơi mà rời đi thì tính như bỏ cuộc: 0/10 phần.","Thưởng phạt theo đúng luật của việc này."],"Bỏ cuộc",kg82GiveUp)}
+function kg82GiveUp(){const tb=document.getElementById("kgtback");if(KG82.tut&&tb)tb.click();
+ if(KG82.phase==="play"&&typeof KG82.quit==="function"){const q=KG82.quit;KG82.quit=null;q();return}
+ const box=kg82Box(),go=box&&(box.querySelector(".kgr-go")||(KG82.ready&&box.querySelector(KG82.ready.go)));
+ if(go){KG82.giveUp=1;go.click();KG82.giveUp=0;return}
+ if(typeof KG82.quit==="function"){const q=KG82.quit;KG82.quit=null;q();return}
+ console.warn("kg82GiveUp: no lose path on this screen")}
+/* §13.9 deferred charge (rv-mg-back r2: never spend and refund — spend() moves the world): kgDefer(cost, open) runs open() with the charge only remembered;
+   kg82Open picks it up (KG82.prePay) and kgPay() takes it on «Sẵn sàng» / the quick option / any result / an outcome close. cost = {suc, bac, th, khac, tch:art}
+   (numbers as apply() takes them) or a function (jsgame's own pay). No kg82 frame (bot, no #ov) or the game did not open → charged at once, as before. */
+function kgDefer(cost,open){const fr=!window.__bot&&typeof kg82Open==="function"&&!!document.getElementById("ov");if(!fr){kgPayNow(cost);return open()}
+ KG82.prePay=cost;let r;try{r=open()}finally{const p=KG82.prePay;KG82.prePay=null;if(p)kgPayNow(p)}return r}
+function kgPayNow(c){if(!c)return;if(typeof c==="function"){c();return}const f={};["suc","bac","th"].forEach(k=>{if(c[k])f[k]=c[k]});
+ /* jaudit holds this game's cost pending (paid with its one result card when the game reports): the charge joins it, so the card still shows the whole cost */
+ const pend=[window.__aaPend,S&&S.mg&&S.mg.cost].filter((x,i,a)=>x&&typeof x==="object"&&a.indexOf(x)===i);
+ if(pend.length){pend.forEach(o=>{for(const k in f)o[k]=(o[k]||0)+f[k];if(c.khac)o.khac=(o.khac||0)+c.khac})}else{if(Object.keys(f).length)apply(f);if(c.khac)spend(c.khac)}
+ if(c.tch!=null&&typeof tchPaid==="function")try{tchPaid(c.tch)}catch(e){console.error(e)}}
+function kgPay(){const p=KG82.payOnGo;if(!p)return;KG82.payOnGo=null;KG82.backPre=null;try{if(S&&S.mg&&S.mg.pay)delete S.mg.pay}catch(e){}try{kgPayNow(p)}catch(e){console.error("kgPay",e)}
+ try{save()}catch(e){}try{if(typeof renderHUD==="function")renderHUD()}catch(e){}}
+window.kg82Back=kg82Back;window.kg82GiveUp=kg82GiveUp;window.kgDefer=kgDefer;window.kgPay=kgPay;window.kgPayNow=kgPayNow;
 
 /* =============== startContest =============== */
 function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.onDone(null);return}
@@ -484,7 +544,7 @@ function kgReady(box,spec){box=box||kg82Box();if(!box)return false;const s=kgRea
  box.insertAdjacentHTML("afterbegin",html);box.classList.add("kgintro");
  const go=box.querySelector(s.go);
  if(go){if(!go.dataset.kgrLabel)go.dataset.kgrLabel=go.textContent;go.innerHTML=`Sẵn sàng<small>${s.timed?"từ lúc này mới tính giờ":"bắt đầu chơi"}</small>`;go.classList.add("kgr-go");
-  go.addEventListener("click",()=>{const d=kg82El();if(d)d.classList.remove("kg-ready");KG82.ready=null},{capture:true});
+  go.addEventListener("click",()=>{const d=kg82El();if(d)d.classList.remove("kg-ready");KG82.ready=null;KG82.backPre=null;kgPay()/* §13.9: «Sẵn sàng» takes the remembered charge; from here on the back is no longer free */},{capture:true});
   if(kgReadyCan(s)&&!box.querySelector("#kgrtut")){go.insertAdjacentHTML("afterend",`<button type="button" class="${kg82Btn(true)} kgr-tut" id="kgrtut">Hướng dẫn<small>chơi thử một hồi dễ, không tính phần, thử lại được</small></button>`);
    box.querySelector("#kgrtut").onclick=()=>kgTut(box,s)}}
  const d=kg82El();if(d)d.classList.add("kg-ready");return true}
@@ -539,6 +599,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 /* layout only (colours and chrome come from the kit) */
 (function(){const st=document.createElement("style");st.id="kg82-css";st.textContent=`
 #ov .mg.kg82{width:100%;max-width:560px}
+body.kg82cf #modal{z-index:40}
 .kg82cv{display:block;margin:0 auto;touch-action:none;user-select:none;-webkit-user-select:none;border-radius:var(--k-rad,8px);max-width:100%}
 #kg82,#kg82 canvas,#kg82 button{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;user-select:none}
 .kg82act{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 4px}.kg82act button{flex:1 1 200px;display:flex;flex-direction:column;align-items:center;justify-content:center}
