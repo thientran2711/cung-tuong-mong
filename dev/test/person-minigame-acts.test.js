@@ -1,0 +1,78 @@
+/* PERSON MINIGAME ACTS test (jpma, owner OD 19/11 ~23:55Z; plan dev/handover/reports/person-minigame-acts.md):
+   (1) her ask → an NPC receiver answers with the card's own answers (Cùng chơi: Nhận lời / Từ chối; Thách đấu: + Nhường when outranked), all drawn;
+   (2) HER card when an NPC asks her: every answer has a gain AND a cost (law 3), no % (law 7), odds only as a ladder word; saved (serQ → deserQ);
+   (3) the three stakes have the same value V = BAL.pm.stake.bac[R] (bạc V · items within V·(1±band) · Danh·val.danhBac = V) (law 2);
+   (4) a duel conserves bạc / Danh (what one loses the other gains), the item really moves (ledger S.il.log «pm»), memory remembers (jmem);
+   (5) the popup (j2 talkOpts) and the Hậu cung card (j15 rvCard «Gặp mặt») both carry «Cùng chơi» / «Thách đấu»; same palace allowed (foreman Q1);
+       a person she is not with → the button walks her there first (goSee), never remote;
+   (6) NPC → NPC and NPC → her over ≥ 10 game days (the day plan, cx3:pmPlay / cx3:pmDuel), no page error;
+   (7) co-op: the friend entry (coop:true) — both directions resolve through ACT.pmplay / ACT.pmduel inside the accepted ask (COOPW.inv), the ask text is
+       the act's own (jcoopworld askWhat), the ASK list holds both;
+   (8) old save: a save without S.pmM / S.pmGo / v.pmW loads and plays; (9) one core: no number typed in jpma.js outside BAL.pm, Emperor summons untouched.
+   usage: node dev/test/person-minigame-acts.test.js [dev/index.html]  → exit 1 on FAIL */
+const path=require('path');const fs=require('fs');const {execSync}=require('child_process');
+const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
+(async()=>{
+ const {chromium}=require('playwright');const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
+ const r=await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;
+  window.kitNotice=undefined;window.ptOn=()=>false;/* her cards as queued dialogs (the notice path only delays the same card) */
+  const out={};const V=liveRivals(true).filter(x=>x!==S&&!x.out&&!x.coop);const hi=V.filter(x=>rkOf(x)>rkOf(V[V.length-1]));const a=hi[0]||V[0],t=V.filter(x=>rkOf(x)<rkOf(a))[0]||V[1];
+  /* (1) NPC receivers */const H={play:{},duel:{}};for(let i=0;i<300;i++){t.suc=90;a.suc=90;t.bac=500;a.bac=500;t.rl=t.rl||{};t.rl[a.id]=(i%9-4)*10;t.oan=0;
+   const act=i%2?"duel":"play";const x=pmX(a,t,act,{s:"bac"});const rr=rcvAsk(act==="play"?"pmPlay":"pmDuel",a,t,x);const k=/từ chối/.test(rr)?"no":/nhường/.test(rr)?"yield":/thắng|chơi/.test(rr)?"yes":"?";H[act][k]=(H[act][k]||0)+1}out.H=H;
+  /* (2) her card */Q.length=0;const xd=pmX(a,S,"duel",{s:"bac"});S.bac=Math.max(S.bac,200);rcvAsk("pmDuel",a,S,xd);const c=Q[0];out.card=c?c.opts.map(o=>({n:o.n,x:o.x})):null;
+  const ser=serQ();const de=deserQ(JSON.parse(JSON.stringify(ser)));out.save={pid:ser[0]&&ser[0].pid,n:de[0]&&de[0].opts.length};Q.length=0;
+  rcvAsk("pmPlay",a,S,pmX(a,S,"play"));out.card2=Q[0]?Q[0].opts.map(o=>({n:o.n,x:o.x})):null;Q.length=0;
+  out.rankHi=rkOf(a)>rkOf(S);out.ladder=["Liều","Khó","Năm ăn năm thua","Khá chắc","Chắc","Rất chắc","Nắm chắc"];
+  /* (3) stakes */const R=pmR(S,a),Vv=BAL.pm.stake.bac[R];const st=pmStakes(S,a);out.st={V:Vv,bac:st[0].V,ia:st[1].ia?ilVal(st[1].ia):null,it:st[1].it?ilVal(st[1].it):null,danh:st[2].d*BAL.pm.val.danhBac,band:BAL.pm.stake.band};
+  /* (4) conservation + item + memory */const sum=k=>S[k]+liveRivals(true).filter(x=>x!==S).reduce((s,v)=>s+(v[k]||0),0);a.bac=500;t.bac=500;a.danh=60;t.danh=60;
+  const b0=sum("bac");for(let i=0;i<20;i++)pmDuelEnd(a,t,{a:"duel",kind:"dauho",n:"Đầu hồ",s:"bac"},i%2===0,"home");out.bacCons=sum("bac")===b0;
+  const d0=a.danh+t.danh;pmDuelEnd(a,t,{a:"duel",kind:"dauho",n:"Đầu hồ",s:"danh"},true,"home");out.danhMove=[d0,a.danh+t.danh,BAL.pm.duel];
+  const IK=Object.keys(IT).find(k=>IT[k].pr>=Vv*.8&&IT[k].pr<=Vv*1.2&&!IT[k].evi&&!IT[k].keep&&!IT[k].il);if(IK){a.inv=a.inv||[];t.inv=t.inv||[];a.inv.push({k:IK});t.inv.push({k:IK})}
+  const sti=pmStakeOf(a,t,"item");out.itemOk=!!(sti&&sti.ok);if(sti&&sti.ok){const e=sti.it,n0=(S.il&&S.il.log||[]).length;pmDuelEnd(a,t,{a:"duel",kind:"dauho",n:"Đầu hồ",s:"item"},true,"home");
+   out.itemMoved=a.inv.includes(e)&&!t.inv.includes(e);out.itemLog=(S.il.log||[]).slice(n0).some(z=>z[5]==="pm")}
+  pmPlayEnd(S,a,{a:"play",kind:"dauho",n:"Đầu hồ"},8,8);out.mem=typeof memTop==="function"?JSON.stringify(memTop(a,S)||[]):"?";
+  /* (5) popup + Hậu cung card */const same=V.find(x=>sameHouse(S,x));const rows=v=>talkOpts({kind:"rival",ref:v}).filter(o=>o.pm).map(o=>o.n);out.pop=rows(a);out.popSame=same?rows(same):["n/a"];
+  const i=rivals.indexOf(a);const h=rvCard(a,i);out.card3=(h.match(/data-pmgo="\d+" data-pma="(play|duel)"/g)||[]).length;out.walk=/đi đến chỗ nàng|chưa rõ nàng ở đâu/.test(h)||together(S,a);
+  /* (7) co-op friend entry */const f=Object.assign({},t,{id:9901,coop:true,name:"Hảo hữu",rl:{},ro:{},inv:[],bac:300,danh:50});rivals.push(f);window.COOPW=window.COOPW||{};const cw0=Object.assign({},window.COOPW);
+  window.COOPW.on=false;window.COOPW.inv=1;const xc=pmX(S,f,"duel",{s:"bac"});S.bac=Math.max(S.bac,200);const bS=S.bac+f.bac;const r1=ACT.pmduel.f(S,f,xc);const r2=ACT.pmplay.f(f,S,pmX(f,S,"play"));
+  out.coop={r1,r2,cons:S.bac+f.bac===bS,ask:typeof ACT_NOSEND!=="undefined"&&ACT_NOSEND.includes("pmplay")&&ACT_NOSEND.includes("pmduel")};Object.assign(window.COOPW,cw0);window.COOPW.inv=0;rivals.splice(rivals.indexOf(f),1);
+  /* (9) Emperor summons untouched (law 16): the functions still exist and run */out.ts=typeof tsSummonKind==="function"&&typeof tsSummonOdds==="function"&&typeof tsSummonGo==="function";
+  return out});
+ const L=r.ladder;const lad=x=>L.some(w=>x.startsWith(w+" ·")||x===w);
+ ok(r.H.play.yes>0&&r.H.play.no>0&&!r.H.play["?"],'NPC receiver of «Cùng chơi»: Nhận lời and Từ chối both drawn (rcvPick)',r.H.play);
+ ok(r.H.duel.yes>0&&r.H.duel.no>0&&r.H.duel.yield>0&&!r.H.duel["?"],'NPC receiver of «Thách đấu» (outranked): Nhận lời, Nhường, Từ chối all drawn',r.H.duel);
+ ok(r.card&&r.card.length>=2&&r.card.every(o=>/(được|thành):/.test(o.x)&&/(mất|hỏng):/.test(o.x)),'her duel card: every answer has a gain AND a cost (law 3)',r.card);
+ ok(r.card2&&r.card2.length===2&&r.card2.every(o=>/được:/.test(o.x)&&/mất:/.test(o.x)),'her pastime card: Nhận lời / Từ chối, each gain + cost',r.card2);
+ ok([...(r.card||[]),...(r.card2||[])].every(o=>!/%|phần trăm/.test(o.x)),'no % on any answer (law 7)');
+ ok(r.card&&lad(r.card[0].x),'the accept row shows her chance as a ladder word only',r.card&&r.card[0].x);
+ ok(r.save.pid==="rcvAsk"&&r.save.n>=2,'a pending pm card survives serQ → deserQ',r.save);
+ ok(r.st.bac===r.st.V&&r.st.danh>=r.st.V-r.st.V*r.st.band&&r.st.danh<=r.st.V+r.st.V*r.st.band&&(r.st.ia==null||Math.abs(r.st.ia-r.st.V)<=r.st.V*r.st.band)&&(r.st.it==null||Math.abs(r.st.it-r.st.V)<=r.st.V*r.st.band),'three stakes of equal value V (law 2)',r.st);
+ ok(r.bacCons,'duels conserve bạc (the stake moves, nothing is minted)');
+ ok(r.itemOk&&r.itemMoved&&r.itemLog,'an item stake really changes hands, written in the item ledger (law 6c)',{ok:r.itemOk,moved:r.itemMoved,log:r.itemLog});
+ ok(/cùng|chơi/.test(r.mem),'the pastime is remembered (jmem pmplay)',r.mem.slice(0,160));
+ ok(r.pop.length===2&&r.popSame.length===2,'popup rows «Cùng chơi» + «Thách đấu», also inside the same palace',{pop:r.pop,same:r.popSame});
+ ok(r.card3===2&&r.walk,'Hậu cung card: both buttons in «Gặp mặt», bound to walking to her (goSee) or her place unknown',{n:r.card3,walk:r.walk});
+ ok(/thắng|ván/.test(r.coop.r1)&&r.coop.cons&&r.coop.ask,'co-op friend: the accepted duel resolves by both hands, bạc conserved; both acts are ask acts',r.coop);
+ ok(r.ts,'Emperor summons (jts tsSummon*) still in place');
+ /* (6) NPC day plan over ≥ 10 days (fresh page) */
+ const p2=await b.newPage();p2.on('pageerror',e=>errs.push(e.message));await p2.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());await p2.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p2.waitForTimeout(2500);
+ const d=await p2.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;window.__bot=1;window.__agAll=1;quiet=false;Q.length=0;
+  const me=[];const rc0=rcvCard;rcvCard=function(pid,pp,title,p){if(pp&&/^pm/.test(pp.k||""))me.push(pp.k);return rc0.apply(this,arguments)};const t0=[S.year,S.month,S.tuan];let n=0;
+  for(let i=0;i<200&&!S.dead;i++){Q.length=0;S.mg=null;nextBuoi();n++}const sim={n,t0,t1:[S.year,S.month,S.tuan],by:{play:AG3.stat.by.pmPlay||0,duel:AG3.stat.by.pmDuel||0},me:me.slice()};
+  /* NPC → her through the SAME executor (the day plan aims at her rarely: one of her ~10 neighbours, the world's pace) */Q.length=0;const v=liveRivals(true).find(x=>x!==S&&!x.out&&!x.confined);v.pmW=null;S.pmMeW=null;
+  AGRUN["cx3:pmPlay"](v,S);v.pmW=null;S.pmMeW=null;S.bac=Math.max(S.bac,200);v.bac=Math.max(v.bac||0,200);AGRUN["cx3:pmDuel"](v,S);sim.exec=me.slice(sim.me.length);return sim});
+ ok(d.by.play+d.by.duel>=2,'NPC → NPC over ≥ 10 game days (day plan cx3:pmPlay / cx3:pmDuel land)',d);
+ ok(d.exec.includes("pmPlay")&&d.exec.includes("pmDuel"),'NPC → her: the day-plan deed reaches her as her answer card (both acts)',{exec:d.exec,simMe:d.me});
+ /* (8) old save */
+ const o=await p2.evaluate(()=>{try{Q.length=0;delete S.pmM;delete S.pmGo;delete S.pmMeW;delete S.pmMeN;for(const v of rivals)delete v.pmW;save();const d=loadSlot(SLOT);quiet=true;deser(d);quiet=false;render();
+  const v=liveRivals(true).find(x=>x!==S&&!x.out);return{ok:!!S&&!S.dead&&!!d,rows:talkOpts({kind:"rival",ref:v}).filter(z=>z.pm).length,st:pmStakes(S,v).length}}catch(e){return{err:e.message}}});
+ ok(o.ok&&o.rows===2,'an old save without the pm fields loads and offers the acts',o);
+ ok(!errs.length,'no page errors',errs.slice(0,3));
+ /* (9) one core: jpma.js types no number of its own (only 0 / 1 / indices / 100-odds / 7 the top rank / 2 halves) */
+ const src=fs.readFileSync(path.join(__dirname,'../build/jpma.js'),'utf8').replace(/\/\*[\s\S]*?\*\//g,'').replace(/`[^`]*`/g,m=>m.replace(/\$\{[^}]*\}/g,'')).replace(/"[^"]*"/g,'""');
+ const nums=(src.match(/(?<![\w.$])\d+(\.\d+)?(?![\w])/g)||[]).filter(n=>!["0","1","2","5","7","10","100","9901"].includes(n));
+ ok(nums.length===0,'one core: no stray number in jpma.js (all in BAL.pm)',nums);
+ let tsDiff="";try{tsDiff=execSync('git diff --stat origin/main -- dev/build/jts.js',{cwd:path.join(__dirname,'../..')}).toString().trim()}catch(e){tsDiff="(no origin/main)"}
+ ok(!tsDiff,'jts.js (Emperor summons) unchanged vs origin/main (law 16)',tsDiff);
+ await b.close();const fail=res.filter(x=>!x).length;console.log(fail?`FAIL ${fail}/${res.length}`:`PASS ${res.length}/${res.length}`);process.exit(fail?1:0)})();
