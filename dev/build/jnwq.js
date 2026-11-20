@@ -143,11 +143,11 @@ function nwqSeat(box,env){return nwqPlace(box,env,{ratio:1.0,hMax:480,veil:.2,ay
  build(r,tier,W,H){const B=BAL.nwq,N=B.n.thq[tier];let stars,year;
   if(tier<B.free){stars=kg82Shuf([1,2,3,4,5,6,7]).slice(0,N);year=stars.map(()=>0)}
   else{stars=[];while(stars.length<N)stars.push(1+Math.floor(Math.random()*5));year=kg82Shuf([1,2,3,4,5,6,7,8]).slice(0,N);}
-  const guests=stars.map((s,i)=>({s,y:year[i]})),ord=guests.slice().sort((a,b)=>b.s-a.s||a.y-b.y);guests.forEach(q=>q.k=ord.indexOf(q));
+  const guests=stars.map((s,i)=>({s,yr:year[i]})),ord=guests.slice().sort((a,b)=>b.s-a.s||a.yr-b.yr);/* yr, never y: the engine moves every item by it.x / it.y (pixels) — the old q.y made the label read «phong năm 209.8» */guests.forEach(q=>q.k=ord.indexOf(q));
   const cw=Math.min(W*.17,78),sw=Math.min((W-16-cw-6)/N,110),sh=Math.min(H*.25,sw*1.05),sy=H*.44,tw=sw*.92,th=sh*.92;
   const slots=ord.map((q,j)=>({x:8+cw+6+sw*(j+.5),y:sy,w:sw-4,h:sh,ok:it=>it.k===j,paint:(g,s,st)=>{nwqSlotRing(g,s,st);if(tier<B.free){g.fillStyle="#8a7350";g.font=k91F(700,12,1);g.textAlign="center";g.textBaseline="alphabetic";g.fillText(String(j+1),s.x,s.y+s.h/2+14)}}}));
   const items=kg82Shuf(guests).map((q,i,a)=>{q.size=tw;q.hx=(W-12)/N*(i+.5)+6;q.hy=H*.82;q.paint=(g,it,x,y,s,st)=>{const w=s,h=s*th/tw;g.save();if(st==="on"){g.shadowColor="#2a1a1288";g.shadowBlur=12;g.shadowOffsetY=4}k91Tile(g,x-w/2,y-h/2,w,h,"",st==="ok"||st==="bad"?st:st==="on"?"on":"n",12,"tho-slip");g.restore();
-    nwqPins(g,x-w/2,y-h/2,w,h*(tier>=B.free?.82:1),it.s,st);if(tier>=B.free){g.fillStyle=K91C.ink;g.font=k91F(700,Math.max(9,w*.17),1);g.textAlign="center";g.textBaseline="alphabetic";g.fillText(`◷ ${it.y}`,x,y+h*.4)}};return q});
+    nwqPins(g,x-w/2,y-h/2,w,h*(tier>=B.free?.82:1),it.s,st);if(tier>=B.free){g.fillStyle=K91C.ink;g.font=k91F(700,Math.max(9,w*.17),1);g.textAlign="center";g.textBaseline="alphabetic";g.fillText(`◷ ${it.yr}`,x,y+h*.4)}};return q});
   const P={items,slots,tipY:.275};P.draw=(g,P,now,o)=>{g.save();g.fillStyle="rgba(255,250,236,.5)";g.fillRect(0,H*.68,W,H*.32);g.restore();
    const cy=sy-sh/2-2;k91Tile(g,8,sy-sh/2,cw,sh,"","n",12,"tho-slip");g.fillStyle=K91C.ink;g.font=k91F(700,Math.min(13,cw/5.5),1);g.textAlign="center";g.textBaseline="middle";g.font=k91F(700,Math.min(26,cw/2.4),1);g.fillText("♛",8+cw/2,sy);
    g.textBaseline="alphabetic";
