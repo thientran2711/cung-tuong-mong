@@ -220,3 +220,65 @@ Left, in order:
 2. role-parity alone (expect the 2 LIVE FAILs only), perf `MONTH=1 CPU=4 node dev/test/coop-thin-g-perf.js <W> 13` (gate ≤ 40 %), `TRIP=1 WEEKS=36 node dev/test/coop-thin-g.js <W> 13`, `bash dev/tools/quickcheck.sh`.
 3. LOOK Fold 755x1000@2 + iPad 1180x820@2 at the week turn (e2e THIN13 with COOP_FOLD / SHOTS, scratch only, look at them).
 4. '## Done' (moved / retired rows 1–16, seat-guard 29 sites, tests table, perf, leftovers for H: giau = bot (fixed #6), role-parity = LIVE, item 2's L ≤ 12 note, the FOR B agent-layer gap, coop-host-lag item 3 is a separate family (told Foreman B 11/20)), CLAIMS 'SẴN SÀNG KIỂM <sha>', send_message Foreman B ROOT-2 "SẴN SÀNG KIỂM coop-thin-g <sha>". FOR MAIN: Worker THINMAX 13 deploy at landing.
+
+## #8 progress — worker session_01N1tNP2GuhdQbevDCFFiv1Q (opus); START_CTX ≈ 4 % of 1M (own estimate) → rollover ≈ 29 %, ceiling 60 %
+PRIORITY #1 CHECK ('coop-thin-g|confined forced deck|cycs giau som'): OD 0 new | ledger 0 | main 794c6b77 → 24dd2c62: no G | review/* none for G (coop-guest-agent = separate worker for the FOR B agent-layer gap, not touched here) | claims CLAIMS:512 (this worker).
+- 79ae079c merge origin/main **794c6b77** (kit-e-rows, kit-bgtone, kit-cost-rows-home, choice-value): only index.html / sw.js conflicted → rebuilt; undef-scan PASS.
+- **78583e92** coop-cyc (TEST BOT family): cycs THIN 13 red in 2 of 5 runs (lui 'halves her NEXT flip' {a:0,b:0,d:1}, som / giau 'host drew her (forced deck)' who null). Dump: her entry in the host's world had `confined 2` (cấm túc, set by a host-world event, from week 3) → j8 nightCh = 0 under the forced deck. Real game (one fact: the cấm túc lands on her store at the week via the conf delta); the test staged only `preg` of the four nightCh blockers. Fix (whole blocker family, test only): STG clears preg / block / confined / out on her store, and the same on her entry in the host's world. After: cycs 3/3 (73, 73, 74/74), cyc 73/73.
+- 7fcae66b merge origin/main **24dd2c62** (kit-dress-picker, person-minigame-acts r4, road-triggers r2): only index.html / sw.js conflicted → rebuilt; undef-scan PASS.
+
+## Done
+**What G is** (level 13, behind TH.on(13) = gW(); CAP 13, Worker THINMAX 13; levels 0–12 + solo unchanged except the one seat-guard helper, same value outside her week end): her whole week end and her personal month run ON THE HOST in her context (withSeat b) on the host's store of her = the ONE copy of her person; her phone only shows it. Module dev/build/jcoopthing.js + jcoopworld.js / Worker changes (see #1).
+
+**§0a rows 1–16 — moved / retired**
+| # | step | before (≤ 12) | G (13) |
+|---|---|---|---|
+| 1 | night go → her nextBuoi → endTurn | her phone | MOVED: host, CW.gNight → herWeek in withSeat b, before his own; her phone runs nothing at go |
+| 2 | endTurn body | her phone | MOVED: host, her context, worldOn() false (guest branch), world writes put back (wSnap / wRestore), standBack |
+| 3 | monthTick (her stipend, maids, preg, items, ill, servants, kids, heirs …) | her phone | MOVED: host, her context (row 2) |
+| 4 | 46 endTurn wrappers / seat guards | her phone | MOVED: every seat guard reads coopGuest() (= guest seat OR CW.gWk) → same branch as her phone took |
+| 5 | jcoopworld endTurn wrapper (pend / news / render) | her phone | MOVED: her context keeps the host's pend / news / inTurn |
+| 6 | sendEnd her C | her phone | RETIRED: guest sends no `end`; host's toCanon writes P.b = her store + his stand-in acts as DELTAS (G_NOADD) |
+| 7 | Worker merge3(base, sub-a, sub-b) | server | RETIRED at 13: host `end` ticks alone (tick(hostC)); guest `end` → error thinend |
+| 8 | fromCanon rebuild + drop of her store | both | guest = display of the host snapshot; host rebuild = no change |
+| 9 | reign ending (her heir / tuẫn táng) | her phone | MOVED: host, her context, in onWeek before his own (CW.gEmp) |
+| 10 | seatWeek seat caps | her phone | MOVED: host, her context, after his own endTurn; promoFullSeat = part-D card |
+| 11 | Tuần mới news (CW.mine) | her phone | her store keeps S.gMine; her phone reads it |
+| 12 | her death in the week end | her phone | host: flags only (S.dead + S.coopOver); her phone runs the real over() from the week |
+| 13 | colCheck (device ledger) | her phone | NOT run in her context on the host (G.stat.colSkip); her phone's render-time colCheck keeps it on her device |
+| 14 | other device ledgers | her phone | kept OFF the host's device (G.dev; keys seen: ctm-e68h, ctm-phucduyen) — FOR H: replay on her phone |
+| 15 | seat copies seat / seatd | her phone → server | RETIRED for the guest at 13 (local snap kept for reload: 39b1407d) |
+| 16 | syncRoom re-end / CW.restore | her phone | RETIRED for the guest at 13 (host snapshot = truth; local buổi restore before the host's go) |
+
+**Seat-guard family (LUẬT SỬA CẢ NHÓM)**: scan `seat!=="a"|seat==="b"|COOPW.seat` in non-co-op j*.js — before 29 direct seat tests (28 in 26 files + jchat guest()), after 0 (all → coopGuest(); kept: jcloud room bookkeeping, jmem id tag / jvisit myPid follow the context, jil / jsmg message senders).
+
+**Other families fixed on the way** (details in #2–#7): world windows' cards (28 EVD cards: host builds them in her context, pid «wwc»); her no-pid option cards (pid «live», D.LIVE); frIdent (her entry's identity from her store); mgOut / mgIn (TOIL.st / KG82.run per context); RDIFF solo order; her local buổi snap at 13 (reload keeps khắc); cyHostOwns in gWk; jptime ptNpcBack null target.
+
+**Tests @78583e92 (794c6b77 merged; local Worker THINMAX 13)** — rerun @7fcae66b (24dd2c62 merged) in the table's last column
+| suite | @78583e92 | @7fcae66b |
+|---|---|---|
+| g4 / g4s (G0–G7, swap) | 18/18 · 19/19 | 18/18 · 18/18 |
+| f3s / f4s / f5s | 38/38 · 19/19 · 30/30 | 37/37 · 18/18 · 30/30 |
+| timer THIN13 | 43/43 | 40/43 once (case 4 'her day ends by itself + week merges' with 7 cards in her Q, then case 5 reload clocks = knock-on of the late week), reruns 43/43 · 43/43 → intermittent |
+| e2e THIN13 | 68/68 (+ LOOK run 68/68) | 68/68 |
+| cyc / cycs THIN13 | 73/73 · 3/3 after 78583e92 | 73/73 · 74/74 |
+| night THIN13 | 105/105 | 105/105 |
+| role-parity (alone) | ALL PASS (the 2 earlier LIVE FAILs are gone on main) | — |
+| perf MONTH=1 CPU=4 | her week end in ctx b +29.8 % of his own (own 1712 ms, hers 510 ms) ≤ 40 % PASS | — |
+| TRIP=1 WEEKS=36 | run 1: 81/82 (below) · run 2: 83/83, no TRANSIENT | — |
+| quickcheck | PASS (core gates, time-spill, old save, perf) | PASS (render 213/237 ms, buổi 1006/1118 ms new/live) |
+| undef-scan / Worker thin tests | PASS | undef-scan PASS |
+Earlier (#6/#7, same code): ow seeds 1–10 PASS, gup 16/16, b/bs e/es f1/f1s f2/f2s f6/f6s f6b/f6bs hn PASS, a/as/c/cs level-only by design, d/ds 7 reds = same at L12 (pre-existing).
+
+**LOOK** (e2e THIN13, Fold 755x1000@2 host + iPad 1180x820@2 guest, scratch only, looked): the week turn = season cover «Bình minh mùa hạ · Tháng tư · ve kêu râm ran», clean on both. Note (not G, shared season cover): on iPad landscape the title wraps «Bình minh mùa / hạ» beside the picture.
+
+**Leftovers / FOR B / FOR H**
+- OPEN (intermittent, 1 week in 72): TRIP run 1 week 36 (last week) `suc` host store 83 vs her phone 77, not settled in 10 s; guest TRIP saw no guest-side writer → a host-side write in her store not yet patched to her phone at the end of the run. Run 2 (36 weeks) clean. Repro: `TRIP=1 WEEKS=36 node dev/test/coop-thin-g.js <W> 13`.
+- FOR B (pre-existing on LIVE, separate worker review/coop-guest-agent): agOn() false whenever coopGuest() → her own servants never get the AG agent month in co-op (wage / Sức, ban gả, age choice Xuất cung / ma ma / ở lại, betrayal), at every level.
+- FOR B: #4 item 2 — module state outside S (TOIL.st / KG82.run) may leak between contexts at levels 9–12 through F6b's per-intent CX12 (fixed at 13 only).
+- FOR B: coop-host-lag item 3 (week stall on a late room snapshot) = a separate family (told Foreman B 11/20).
+- giau 'host drew her' = test bot (fixed #6, amPool); cycs cấm túc = test staging (fixed #8). role-parity: green now.
+- FOR H: Tranh ghế Vòng 1 mini game in her context = dice (score intent on her phone); ONE contest board (G21); device-ledger replay on her phone (G.dev keys); «live» cards → real pids (G.liveK titles); world windows' tick/start effects on her entry ride his week as deltas (EVD.thi her house Danh) — confirm none lost.
+- FOR MAIN: deploy the Worker with THINMAX 13 at landing.
+
+**SẴN SÀNG KIỂM review/coop-thin-g @ 7fcae66b** (origin/main 24dd2c62 merged).
