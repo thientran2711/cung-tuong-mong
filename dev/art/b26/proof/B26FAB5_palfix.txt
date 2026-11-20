@@ -1,0 +1,43 @@
+a2: people whose root-season SECONDARY changed: 39 cells 1560
+  c02: warm coral rose -> warm ivory
+  c04: crimson -> rose-red
+  c05: crimson -> dusty rose
+  c10: jade green -> light jade teal
+  c11: deep teal -> soft rose
+  c14: blue-violet -> light blue-violet
+  c16: deep rose -> light plum rose
+  c26: jade green -> celadon green
+  c27: deep teal -> soft teal
+  c28: deep rose -> light rose-red
+  c31: crimson -> light rose-red
+  s08: deep rose -> pearl white
+  s10: jade green -> pale gold beige
+  s12: deep rose -> warm ivory
+  s14: warm coral rose -> pale silver blue
+  s15: crimson -> light teal
+  s17: deep teal -> champagne ivory
+  s20: deep rose -> warm ivory
+  s21: deep teal -> pale lilac lilac
+  s22: warm coral rose -> pearl white
+  s23: crimson -> pale jade
+  s24: jade green -> champagne beige
+  s25: deep rose -> silver white
+  s26: warm coral rose -> soft white
+  s28: warm coral rose -> light navy
+  s29: crimson -> light slate green
+  s30: warm coral rose -> pale ice blue
+  s32: warm coral rose -> pale silver blue
+  s34: jade green -> pale peach ivory
+  s35: deep teal -> pale blush
+  s36: jade green -> soft gold beige
+  s37: deep teal -> soft violet
+  s38: jade green -> soft rose brown
+  s40: warm coral rose -> pale apricot
+  s41: crimson -> pale gold beige
+  s43: deep rose -> pale lemon cream
+  s45: deep teal -> pale gold
+  s57: deep teal -> warm beige cream
+  s61: deep teal -> ivory
+c3 winter cells of B20 people with root != đông: {'ok': 2592, 'root word left in Outfit: soft moonlight white': 5}  not-đông: []
+c2 Nữ đế cells: 420 carry her own main colour: 420 | wine-crimson/black 2nd colour kept: 315
+a3 c06 cells: 85 with coral red/#D5745E/#BA5F49 left: 0 | 'and ivory' left: 0

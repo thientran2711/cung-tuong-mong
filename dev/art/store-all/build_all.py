@@ -19,7 +19,7 @@ at that rank is present in F; every law sentence present. Any miss -> prints FAI
 Usage:  build_all.py PERSON RANK [--age a18|a26|a36|a51|a65]     (PERSON c01..c32 m01..m52 p01..p03|bt|cl|pt ; RANK 1..8)
         build_all.py --check [--age aNN]        build_all.py --samples
 """
-import sys,os,re,io,contextlib
+import sys,os,re,io,contextlib,json
 HERE=os.path.dirname(os.path.abspath(__file__)); ART=os.path.dirname(HERE); STORE_DIR=os.path.join(ART,"t8-prompt-B"); STORE=os.path.join(STORE_DIR,"build.py")
 _SRC=open(STORE,encoding="utf-8").read(); _I=_SRC.index('if __name__=="__main__":')
 _PART1=compile(_SRC[:_I],STORE,"exec"); _MAIN=compile(_SRC[_I:].replace('if __name__=="__main__":',"if True:",1),STORE,"exec")
@@ -95,12 +95,13 @@ def store(person,rank,age="a18"):
     if NOSTYLE_FOR(rank): argv=argv+["--nostyle"]
     old=sys.argv; sys.argv=argv; g={"__name__":"build_store","__file__":STORE}
     try:
-        exec(_PART1,g); _inject(g); buf=io.StringIO()
+        exec(_PART1,g); _inject(g); b20_winter(g,person); buf=io.StringIO()   # PALFIX c3 (winter: B20 đông palette)
         with contextlib.redirect_stdout(buf): exec(_MAIN,g)
     finally: sys.argv=old
     global LAST_G; LAST_G=g
     out=buf.getvalue()
     if NOSTYLE_FOR(rank): out=re.sub(r"\b([Ii])mage 3\b",r"\1mage 2",out)   # renumber: with the style image gone the swatch is image 2
+    if g.get("_B20W"): out=b20_winter_words(out,g["_B20W"])   # PALFIX c3: root colour words left in the Outfit sentence (pre-written rows) -> đông words
     return out
 
 # ---------------- owner laws, added as extra sentences ----------------
@@ -160,9 +161,52 @@ FAMILY_CONTRAST={"green":["deep rose","crimson"],"pink":["jade green","deep teal
 import colorsys as _cs
 def _hexhs(h):
     r,g,b=(int(h[i:i+2],16)/255 for i in (1,3,5)); hh,ss,vv=_cs.rgb_to_hsv(r,g,b); return hh*360,ss
+# PALFIX a2 + c3 (owner L1419 via Foreman C #9, PALAUDIT1): B20 = dev/art/face-common/palettes_season.json (86 consorts). a2: a B20 person's secondary is her B20 secondary
+# as written (no FAMILY_CONTRAST swap). c3: --season dong uses her B20 ĐÔNG palette (main + secondary + hexes) instead of her root colours (G26 'only add fur' stays for the rest).
+B20=json.load(open(os.path.join(ART,"face-common","palettes_season.json"),encoding="utf-8"))
+SEASON_PAL=None   # "dong" while a winter cell is built (_build_season)
+def B20_SEASON(person):
+    d=B20.get(ALIAS.get(person,person)); return None if not isinstance(d,dict) or "root_season" not in d else (SEASON_PAL or d["root_season"])
+def b20(person):
+    s=B20_SEASON(person); return B20[ALIAS.get(person,person)].get(s) if s else None
+def b20_winter(g,person):
+    """c3: record her root -> B20 đông colour words for this store run (the store tables stay untouched, so the F2 flower swap never sees a đông colour name
+    such as 'pale orchid'); store() applies them to the printed text (b20_winter_words)."""
+    d=B20.get(person)
+    if not (SEASON_PAL=="dong" and isinstance(d,dict) and d.get("root_season")!="dong" and isinstance(d.get("dong"),dict) and person in g["DATA"]): return
+    w=d["dong"]; m,mh,s,sh=w["main"],w["main_hex"],w["sec"],w["sec_hex"]; pal=g["DATA"][person][0]
+    old=pal.split(" and ")[0]; _s0=pal.split(" and ")[-1] if " and " in pal else ""; low=g["LOWNAME"].get(person,(old,old))
+    ex=[(pal,f"{m} and {s}")]   # exact phrases, whole prompt
+    if person in g["ORIG1"]: o1=g["ORIG1"][person]; ex+=[(o1[0],f"{m} silk like {mh}"),(o1[1],f"{s} like {sh}")]
+    if person in g["M_COLS"]: mc=g["M_COLS"][person]; ex+=[(f"{mc[0]} like {mc[1]}",f"{m} like {mh}"),(f"{mc[2]} like {mc[3]}",f"{s} like {sh}")]
+    rs=d[d["root_season"]].get("sec","")
+    g["_B20W"]=(ex,[(low[0],m),(low[1],m),(old,m),(rs,s),(_s0,s)])
+def winter_pairs(person):
+    """check_store (STORE gate, winter prompt): the same root -> đông pairs the builder used, from the store tables (None = no swap for her)."""
+    global SEASON_PAL
+    person=ALIAS.get(person,person); g={"__name__":"build_store","__file__":STORE}; old=sys.argv; sys.argv=["build.py",person]
+    try:
+        exec(_PART1,g); _inject(g); SEASON_PAL,_o="dong",SEASON_PAL; b20_winter(g,person)
+    finally: sys.argv=old; SEASON_PAL=_o
+    return g.get("_B20W")
+def b20_winter_words(out,pairs):
+    """c3: exact palette phrases (DATA pair, ORIG1, M_COLS name+hex) everywhere; then inside the Outfit sentence her root main / secondary words -> đông words
+    (never after 'NOT ', longest words first)."""
+    ex,pairs=pairs
+    for a,b in sorted(ex,key=lambda x:-len(x[0])):
+        if a and a!=b: out=out.replace(a,b)
+    if "Outfit (" not in out: return out
+    i=out.index("Outfit ("); j=out.index(". ",i)+1; o=out[i:j]
+    seen=set()
+    for a,b in sorted(pairs,key=lambda x:-len(x[0])):
+        if not a or a==b or a in seen or a in ("gold","golden","silver","pearl","white"): continue   # metal / pearl words (DATA 'peacock teal and gold') are trims, never her colour
+        seen.add(a); o=re.sub(r"(?<!NOT )(?<![A-Za-z-])"+re.escape(a)+r"(?![A-Za-z-])",b,o)
+    return out[:i]+o+out[j:]
 def secondary(person):
     """(colour words, source) of her outfit SECONDARY colour."""
     g=LAST_G
+    _w=b20(person) if SEASON_PAL=="dong" else None
+    if _w and B20[ALIAS.get(person,person)]["root_season"]!="dong": return (f"{_w['sec']} like {_w['sec_hex']}" if person in g.get("M_COLS",{}) else _w["sec"]),"B20 đông palette (PALFIX c3)"
     if person in g.get("M_COLS",{}): _m=g["M_COLS"][person]; return f"{_m[2]} like {_m[3]}","owner table (m_colours_proposed.json / nc princess colours, Lượt 603/592)"   # BW4
     pal=g["DATA"][person][0]; main=pal.split(" and ")[0]; sec=pal.split(" and ")[-1] if " and " in pal else ""
     fm=family(main); fs=family(sec) if sec else "neutral"
@@ -174,9 +218,18 @@ def secondary(person):
             h2,s2=_hexhs(m.group(2)); h1,_=_hexhs(m1.group(0)); d=abs(h2-h1); d=min(d,360-d)
             w=re.sub(r"^(a|an) ","",m.group(1).strip())
             if s2>=0.15 and d>=40 and not (40<=h2<=70) and family(w) not in ("neutral","yellow",fm): return w+" like "+m.group(2).upper(),"live original (ORIG1 measured)"
+    _b=b20(person)
+    if _b: return _b["sec"],"B20 %s secondary as written (PALFIX a2, owner L1419)"%B20_SEASON(person)   # PALFIX a2: never FAMILY_CONTRAST for a B20 person
     c=FAMILY_CONTRAST[fm]; return c[_pn(person)%len(c)],"contrast (listed %s is neutral/metal/same family)"%(sec or "none")
+def main_name(person):
+    """DATA main name (no hex); PALFIX c3: winter = her B20 đông main."""
+    _w=b20(person) if SEASON_PAL=="dong" else None
+    if _w and B20[ALIAS.get(person,person)]["root_season"]!="dong": return _w["main"]
+    return LAST_G["DATA"][person][0].split(" and ")[0]
 def main_words(person):
     """MAIN colour words of the TWO/THREE-COLOUR sentence: owner-table people = name like #HEX (BW4, Lượt 603), others = DATA name."""
+    _w=b20(person) if SEASON_PAL=="dong" else None
+    if _w and B20[ALIAS.get(person,person)]["root_season"]!="dong": return f"{_w['main']} like {_w['main_hex']}" if person in LAST_G.get("M_COLS",{}) else _w["main"]   # PALFIX c3
     m=LAST_G.get("M_COLS",{}).get(person)
     return f"{m[0]} like {m[1]}" if m else LAST_G["DATA"][person][0].split(" and ")[0]
 def outfit_colours(person):
@@ -191,6 +244,12 @@ def phibach_colour(person,pal=None):
     # the main may itself be a neutral robe (ivory...) -> contrast comes from the neutral row
     col,why=secondary(person)   # Lượt 483: phi bạch = her outfit SECONDARY colour (never gold/yellow below t6)
     return main,sec,fm,col,why
+# G36 (owner L1446 'Phi bạch chỉ giữ cho mùa hạ và mùa thu ... mùa xuân và mùa đông sẽ không giữ'; extends G34 L1439): the builder's output is XUÂN (season None = the current
+# Hán set) or ĐÔNG -> no phi bạch sentence and no store shawl words ('a sheer silk shawl'); a future hạ/thu builder sets G36_PHIBACH=True. Negative 'no shawl' lines stay.
+G36_PHIBACH=False
+G36_RX=re.compile(r"(?:,|;) a sheer silk shawl(?=[;.,])")
+def g36(S):
+    return S if G36_PHIBACH else G36_RX.sub("",S)
 def phi_bach(person,has_shawl=True):
     main,sec,fm,col,why=phibach_colour(person)
     intro="the sheer shawl draped behind her back and over her arms" if has_shawl else "over her outfit she wears a sheer silk shawl (phi bạch) draped behind her back and over her arms; the shawl"
@@ -218,7 +277,7 @@ HQP_LUX="HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on th
 INNER_EMB="INNER LAYER EMBROIDERED (t7/t8): the inner robe and skirt layer is ALSO embroidered with fine silk-thread embroidery stitched into the fabric, the motifs smaller, lighter and sparser than on the outer robe."
 def item_colour(person,rank,F):
     m=re.search(r" Pose: .*?(?:holding|holds|carrying|offering|raising|with) (an? [^,.]+?)(?: in | up | raised| held| forward| beside| at |,|\.)",F)
-    main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
+    main=main_name(person); sec,_=secondary(person)
     return f"HELD ITEM COLOUR: the held item and any embroidery, painting or tassel on it are in a colour family clearly different from BOTH her robe colour {main} and her secondary colour {sec}."
 def outfit_colours3(person):
     """B17 (owner Lượt 583): t7/t8 = THREE colours: royal yellow #EFBD69 + her MAIN and SECONDARY colour with exactly the words of her t1-t6 TWO-COLOUR sentence
@@ -234,7 +293,7 @@ def extras(S0,person,rank):
         if rank==7: L.append(HQP_LUX)
         if rank in (7,8): L.append(INNER_EMB)   # G20 owner 20/11 ~08:02Z: "Ghi vào, Hoàng Quý Phi và Hoàng hậu lớp áo trong cũng phải theo nha."
     if isinstance(rank,int) and rank<=6:
-        L.append(phi_bach(person,"shawl" in S0))   # owner Lượt 397 via ROOT-47: phi bạch on EVERY thường phục rank t1-t6 (consorts and princesses), also where the store text has no shawl; never t7/t8/Nữ đế/triều phục
+        if G36_PHIBACH: L.append(phi_bach(person,"shawl" in S0))   # G36 (owner L1446): builder output = xuân (current Hán set) / đông -> no phi bạch; phi_bach() kept for hạ/thu builders   # owner Lượt 397 via ROOT-47: phi bạch on EVERY thường phục rank t1-t6 (consorts and princesses), also where the store text has no shawl; never t7/t8/Nữ đế/triều phục
         if "capelet" in S0 and rank==4: L.append(capelet_cut(person))   # Lượt 434: the curved/open-V cut is ONLY for the Tần t4 capelet; t5 (and every other rank) keeps the approved store collar (closed high collar covering the neck)
     return L
 def princess_sentences(k,t):
@@ -363,6 +422,16 @@ def plan(age="a18"):
             ok0=[o for o in allp if o not in up and (t>=4 or lively(o)) and not re.search(r"necklace",_pose_tpl(g,*o)) and not any(re.search(q,_pose_tpl(g,*o)) for q in _banned(t,age,prop)+([PET_RX] if (t>=7 and c in S_NEW_SET) else []))]
             ok=[o for o in ok0 if not (_keys(_pose_tpl(g,*o))&keys)] or ok0
             R=_random.Random(f"{c}-{t}-A41"); ok=list(ok); R.shuffle(ok); nz=min(ok,key=lambda o:cp[t][o]); cp[t][pz]-=1; cp[t][nz]+=1; P[(c,t)]=(a,nz,gr)
+    # G36 (owner L1446, B26FAB5): no phi bạch in the builder (xuân/đông) -> a cell whose plan pose rests a hand on the draped shawl (POSES_30 M8) gets another
+    # allowed pose the same way as A41, in a SECOND pass after it (so the A41 re-picks and every other cell keep exactly their pose).
+    for c in PEOPLE:
+        for t in range(1,9):
+            a,pz,gr=P[(c,t)]
+            if not re.search(r"draped shawl",_pose_tpl(g,*pz)): continue
+            up=[P[(c,u)][1] for u in range(1,9)]; prop=item(c,t); keys=set().union(*[_keys(_pose_tpl(g,*u)) for u in up if u!=pz])
+            ok0=[o for o in allp if o not in up and (t>=4 or lively(o)) and not re.search(r"necklace|shawl",_pose_tpl(g,*o)) and not any(re.search(q,_pose_tpl(g,*o)) for q in _banned(t,age,prop)+([PET_RX] if (t>=7 and c in S_NEW_SET) else []))]
+            ok=[o for o in ok0 if not (_keys(_pose_tpl(g,*o))&keys)] or ok0
+            R=_random.Random(f"{c}-{t}-G36"); ok=list(ok); R.shuffle(ok); nz=min(ok,key=lambda o:cp[t][o]); cp[t][pz]-=1; cp[t][nz]+=1; P[(c,t)]=(a,nz,gr)
     # E12 (owner Lượt 650/656, ROOT-54 ruling (b), BW6): inside each LOOK GROUP the angle and grace of THIS age are replaced by the group plan
     # (different angle sentence per person at one rank, <=2 per visual class, different grace line; E1 no repeat inside one person). Poses: untouched.
     for name,mem in g["look_groups"]().items():
@@ -518,7 +587,7 @@ def _t3_slot(person,rank,S):
     if rank!=3: return S
     import importlib.util as _iu
     _sp=_iu.spec_from_file_location("check_store",os.path.join(ART,"check_store.py")); _cs_mod=_iu.module_from_spec(_sp); _sp.loader.exec_module(_cs_mod)
-    main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
+    main=main_name(person); sec,_=secondary(person)
     return _cs_mod.g15_t3(S,main,sec,LAST_G.get("AGE","a18"))   # G21: crossed collar at a36/a51/a65
 class NotDrawn(Exception): pass
 # SEASON (owner 20/11 ~16:50Z: "áp dụng cái prompt mới … Đưa vào trong cái prompt chính vào cái máy duyệt prompt luôn đi"): đông = G25 (t1-t3 old crossed
@@ -533,7 +602,12 @@ def build_season(person,rank,age="a18",season=None):
         finally: HQP_SHORT=False
     return r
 def _build_season(person,rank,age="a18",season=None):
+    global SEASON_PAL
     if not season: return build(person,rank,age)
+    SEASON_PAL=season   # PALFIX c3: every store run of this winter cell (incl. the G25 a36 build) uses her B20 đông palette
+    try: return _build_season2(person,rank,age,season)
+    finally: SEASON_PAL=None
+def _build_season2(person,rank,age,season):
     assert isinstance(rank,int), "season: ranks 1-8 only"
     sys.path.insert(0,ART); import winter_g28
     a36=build(person,rank,"a36")[1] if rank<=3 else None
@@ -556,7 +630,7 @@ def eyes(S):
     m=re.search(r"Her face: [^.]*\. ",S); assert m,"EYES: face sentence"
     return S[:m.end()]+EYES_STRAIGHT+" "+S[m.end():]
 def build(person,rank,age="a18",_season=None):
-    S0,S,add=_build(person,rank,age); S=eyes(S)
+    S0,S,add=_build(person,rank,age); S=g36(eyes(S))   # G36 no phi bạch (xuân/đông)
     _m=b26_fit_ok(person,rank,age,_season)
     if _m and len(S)>10000: S,add=b26_fit(S,add,angle=True,whole=_m=='whole',rank=_c2rank(rank))
     return S0,S,add

@@ -28,7 +28,7 @@ DATA={
 "diamond face with high cheekbones, large round eyes, thin high-arched brows"
 ],
 "c06": [
-"vermilion and ivory",
+"vermilion and jade green",
 "face with a petite pointed chin, warm round-almond eyes, softly rounded brows"
 ],
 "c07": [
@@ -152,7 +152,7 @@ import pets as _PETS
 OLDITEM="--olditem" in sys.argv
 # item kind -> hand interaction key (HAND_LOW key, or one/two/box for hand7 via low_hand)
 _HK={"rfan":"rfan","ffan":"ffan","mirror":"mirror","ball":"dangle","slant":"lantern","flute":"flute","bfly":"dangle","fbask":"basket","sachet":"dangle",
-"hoop":"hoop","speony":"sprig","pipa":"two","parasol":"one","sceptre":"one","sealbox":"box","edict":"scroll","vase":"vase","pbook":"book","pscroll":"scroll",
+"hoop":"hoop","speony":"sprig","pipa":"two","parasol":"one","sceptre":"one","sealbox":"box","edict":"scroll","lamp":"lamp","pbook":"book","pscroll":"scroll",
 "combbox":"box","plant":"lantern","gobox":"box","pend":"dangle","ruyi":"ruyi","hot":"two","incbox":"box","casket":"box","hanky":"kerchief","orchid":"two",
 "powder":"box","hcomb":"one","beads":"dangle","censer":"one","jseal":"two","sutra":"book","warmer":"two","brush":"one","iball":"dangle","whisk":"one",
 "album":"book","pouch":"dangle","coral":"stand","staff":"one","plaque":"two","almanac":"book","pastebox":"box","pine":"scroll","hballs":"two","chrys":"sprig","bell":"dangle",
@@ -180,7 +180,7 @@ def age_item(c,tier,item,hk,pet=True):
 # Pick = for t1..t8 the first combination (depth-first, each rank trying its 5 age items from (n-1)%5) with 8 different kinds; Nữ đế = first of her 5 whose kind != t8.
 _E6_TIERS=["t%d"%t for t in range(1,9)]
 _E6_KINDS=[("box",r"\bbox\b|casket"),("censer",r"censer|incense"),("healthballs",r"health balls"),("fan",r"\bfan\b"),("mirror",r"mirror"),
- ("scroll",r"scroll"),("book",r"\bbook\b|almanac"),("lantern",r"lantern"),("flute",r"flute"),("vase",r"\bvase\b"),("basket",r"basket"),
+ ("scroll",r"scroll"),("book",r"\bbook\b|almanac"),("lantern",r"lantern"),("flute",r"flute"),("lamp",r"\blamp\b"),("basket",r"basket"),
  ("sachet",r"sachet"),("beads",r"beads?\b|bead string"),("pendant",r"pendant"),("hairpin",r"hairpin"),("comb",r"\bcomb\b"),
  ("handkerchief",r"handkerchief"),("hoop",r"\bhoop\b"),("ball",r"\bball\b|tú cầu"),("lute",r"\bpipa\b|\blute\b"),("parasol",r"parasol"),
  ("warmer",r"hand warmer|\bwarmer\b"),("seal",r"\bseal\b"),("staff",r"\bstaff\b"),("plaque",r"longevity plaque"),("cage",r"\bcage\b|birdcage"),
@@ -317,7 +317,7 @@ ORIG1={
 "c03":("muted olive green silk like #97946D","a deeper olive like #747250"),
 "c04":("mauve purple silk like #9B688D","a soft pink-lilac like #D7B0C2"),
 "c05":("muted teal silk like #697974","a grey-sage like #8F9486"),
-"c06":("coral red silk like #D5745E","a deeper coral red like #BA5F49"),
+"c06":("soft vermilion silk like #D28977","jade green like #6AAF98"),   # PALFIX a3 (owner L1419): B20 thu (root) colours; was coral red #D5745E / deeper coral red #BA5F49
 "c07":("soft rose pink silk like #E2B8B8","a dusty rose like #CDA2A6"),
 "c08":("soft cherry-blossom pink silk like #F0B9BB","a pale sage green like #A9B596"),
 "c10":("soft peach silk like #F2C6A5","a cream like #F3E2CC"),
@@ -377,7 +377,7 @@ ITEMS=[("a gold ruyi set with gems","one"),("an imperial phoenix-embroidered rou
 ("a calligraphy brush with a gold phoenix shaft and a white-jade cap","one"),
 ("a gold phoenix fly-whisk with a white-jade handle","one"),
 ("a string of pearl prayer beads with a gold phoenix tassel","one"),
-("a white-jade vase with gold phoenix mounts and peonies","two"),
+("a white-jade lotus lamp with gold phoenix mounts","two"),
 ("a phoenix-headed gold walking staff with pearl tassels","one"),
 ("a small potted orchid in a gold phoenix pot","two"),
 ("a carved imperial-jade lingzhi fungus on a gold stand","two")]
@@ -487,7 +487,7 @@ def build(c,v="v0",golden=False):
 # ---------- t7 Hoang quy phi variant (same method; colour slot: ORIGINAL t7 colour MAIN + royal yellow ONLY as parts) ----------
 ITEMS7=[("a gilded hand censer","c"),("an imperial round fan with a gold filigree frame and gems","two"),("a gold-filigree jewel casket set with gems","box"),
 ("a kingfisher-feather folding fan with gold ribs","two"),("a gold lotus-shaped incense box","box"),("a gold hand mirror set with gems","one"),
-("a gold-mounted jade vase with peonies","one"),("a gold-filigree palace lantern with gem tassels","two"),("a gold flower basket set with gems","box"),
+("a gold lotus lamp set with gems","one"),("a gold-filigree palace lantern with gem tassels","two"),("a gold flower basket set with gems","box"),
 ("a gold-and-coral bead string held as a hand ornament","one"),
 ("a gold-filigree butterfly hairpin with kingfisher-feather wings, held in the hand","one"),
 ("a kingfisher-feather silk ball (tú cầu) with gem tassels, a round stuffed ball held in the palm or by its cord, no handle","one"),
@@ -547,9 +547,9 @@ def build_t7(c,v="v0"):
 # ---------- t1..t6 variant (same recipe as t8 B; NO phoenix; sample c06 c25 only so far) ----------
 # ORIGINAL ladder outfit text of that rank (jobs.json N-cNN-tK 'Outfit for all four ...' segment, copied unchanged)
 OUTFIT_LOW={
-"c06-t4": "Outfit (rank-4 consort (Tần), clearly much richer and more splendid than the lower ranks): a NEW outfit, a layered silk robe of two or three visible layers with WIDE gold-thread embroidered borders of butterflies at collar, sleeves and hem, an embroidered cloud collar (yunjian) over the shoulders and an embroidered silk sash; elegant high chignon with gold and jade hairpins and small dangling gold bu yao tassel hairpins; her signature colour family vermilion and ivory stays the MAIN robe colour (vermilion, NOT green); the robe itself is clearly vermilion silk, gold only as embroidery accents, NOT a cream, beige or all-gold robe",
-"c06-t5": "Outfit (rank-5 consort (Phi), clearly much richer and more splendid than the lower ranks): a NEW outfit, a silk brocade robe richly embroidered in gold with phoenixes and peonies, long trailing wide sleeves, a gold-embroidered waistband with hanging jade belt pendants and tassels, a sheer silk shawl; high ornate chignon with a LARGER gold headdress with dangling gold tassels and jade pins; her signature colour family vermilion and ivory stays the MAIN robe colour (vermilion, NOT green); the robe itself is clearly vermilion silk, gold only as embroidery accents, NOT a cream, beige or all-gold robe",
-"c06-t6": "Outfit (rank-6 noble consort (Quý phi), clearly much richer and more splendid than the lower ranks): a NEW outfit, a HEAVY silk brocade robe in SATURATED vermilion silk, embroidered with phoenixes and butterflies in vermilion and gold thread along the borders, an embroidered vermilion pearl-edged cape/stole over the shoulders, gold-and-jade bracelets; tall chignon crowned by a BIG ornate gold headdress with pearls, gold flowers and many gold tassels; more luxury than the rank below: rich gold-thread embroidery covering much of the robe, a pearl-edged collar trim, a few strands of pearls across the chest, and a grander gold headdress with more gold ornaments, elegant, NOT a pile of jewels, still clearly less grand than the imperial noble consort; plus a clearly visible amount of royal yellow: a yellow inner robe panel, a yellow sash and narrow yellow borders, the royal yellow is exactly the colour of the flat colour swatch image (image 3, a honey-gold close to hex #F2BC61, 18K gold tone, not pale cream, not beige, not mustard); image 3 is only a colour reference, never copy anything but its colour; her own colour stays clearly the main robe colour, much less yellow than an imperial noble consort's robe; COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly vermilion silk (her signature colour family vermilion and ivory), with large areas of plain vermilion silk visible; ivory only as a small accent; gold only as thin accents on the borders; NOT cream, NOT beige, NOT ivory, NOT an all-gold robe, NOT green",
+"c06-t4": "Outfit (rank-4 consort (Tần), clearly much richer and more splendid than the lower ranks): a NEW outfit, a layered silk robe of two or three visible layers with WIDE gold-thread embroidered borders of butterflies at collar, sleeves and hem, an embroidered cloud collar (yunjian) over the shoulders and an embroidered silk sash; elegant high chignon with gold and jade hairpins and small dangling gold bu yao tassel hairpins; her signature colour family vermilion and jade green stays the MAIN robe colour (vermilion, NOT green); the robe itself is clearly vermilion silk, gold only as embroidery accents, NOT a cream, beige or all-gold robe",
+"c06-t5": "Outfit (rank-5 consort (Phi), clearly much richer and more splendid than the lower ranks): a NEW outfit, a silk brocade robe richly embroidered in gold with phoenixes and peonies, long trailing wide sleeves, a gold-embroidered waistband with hanging jade belt pendants and tassels, a sheer silk shawl; high ornate chignon with a LARGER gold headdress with dangling gold tassels and jade pins; her signature colour family vermilion and jade green stays the MAIN robe colour (vermilion, NOT green); the robe itself is clearly vermilion silk, gold only as embroidery accents, NOT a cream, beige or all-gold robe",
+"c06-t6": "Outfit (rank-6 noble consort (Quý phi), clearly much richer and more splendid than the lower ranks): a NEW outfit, a HEAVY silk brocade robe in SATURATED vermilion silk, embroidered with phoenixes and butterflies in vermilion and gold thread along the borders, an embroidered vermilion pearl-edged cape/stole over the shoulders, gold-and-jade bracelets; tall chignon crowned by a BIG ornate gold headdress with pearls, gold flowers and many gold tassels; more luxury than the rank below: rich gold-thread embroidery covering much of the robe, a pearl-edged collar trim, a few strands of pearls across the chest, and a grander gold headdress with more gold ornaments, elegant, NOT a pile of jewels, still clearly less grand than the imperial noble consort; plus a clearly visible amount of royal yellow: a yellow inner robe panel, a yellow sash and narrow yellow borders, the royal yellow is exactly the colour of the flat colour swatch image (image 3, a honey-gold close to hex #F2BC61, 18K gold tone, not pale cream, not beige, not mustard); image 3 is only a colour reference, never copy anything but its colour; her own colour stays clearly the main robe colour, much less yellow than an imperial noble consort's robe; COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly vermilion silk (her signature colour family vermilion and jade green), with large areas of plain vermilion silk visible; jade green only as a small accent; gold only as thin accents on the borders; NOT cream, NOT beige, NOT ivory, NOT an all-gold robe, NOT green",
 "c25-t4": "Outfit (rank-4 consort (Tần), clearly much richer and more splendid than the lower ranks): a NEW outfit, a layered silk robe of two or three visible layers with WIDE gold-thread embroidered borders of bamboo leaves at collar, sleeves and hem, an embroidered cloud collar (yunjian) over the shoulders and an embroidered silk sash; elegant high chignon with gold and jade hairpins and small dangling gold bu yao tassel hairpins; her signature colour family deep cherry red and black-gold stays the MAIN robe colour (deep cherry red, NOT green); the robe itself is clearly deep cherry red silk, gold only as embroidery accents, NOT a cream, beige or all-gold robe",
 "c25-t5": "Outfit (rank-5 consort (Phi), clearly much richer and more splendid than the lower ranks): a NEW outfit, a silk brocade robe richly embroidered in gold with phoenixes and peonies, long trailing wide sleeves, a gold-embroidered waistband with hanging jade belt pendants and tassels, a sheer silk shawl; high ornate chignon with a LARGER gold headdress with dangling gold tassels and jade pins; her signature colour family deep cherry red and black-gold stays the MAIN robe colour (deep cherry red, NOT green); the robe itself is clearly deep cherry red silk, gold only as embroidery accents, NOT a cream, beige or all-gold robe",
 "c25-t6": "Outfit (rank-6 noble consort (Quý phi), clearly much richer and more splendid than the lower ranks): a NEW outfit, a HEAVY silk brocade robe in SATURATED deep cherry red silk, embroidered with phoenixes and bamboo leaves in deep cherry red and gold thread along the borders, an embroidered deep cherry red pearl-edged cape/stole over the shoulders, gold-and-jade bracelets; tall chignon crowned by a BIG ornate gold headdress with pearls, gold flowers and many gold tassels; more luxury than the rank below: rich gold-thread embroidery covering much of the robe, a pearl-edged collar trim, a few strands of pearls across the chest, and a grander gold headdress with more gold ornaments, elegant, NOT a pile of jewels, still clearly less grand than the imperial noble consort; plus a clearly visible amount of royal yellow: a yellow inner robe panel, a yellow sash and narrow yellow borders, the royal yellow is exactly the colour of the flat colour swatch image (image 3, a honey-gold close to hex #F2BC61, 18K gold tone, not pale cream, not beige, not mustard); image 3 is only a colour reference, never copy anything but its colour; her own colour stays clearly the main robe colour, much less yellow than an imperial noble consort's robe; COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly deep cherry red silk (her signature colour family deep cherry red and black-gold), with large areas of plain deep cherry red silk visible; gold only as thin accents on the borders; NOT cream, NOT beige, NOT ivory, NOT an all-gold robe, NOT green"
@@ -842,7 +842,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a plain wooden hairpin carved with a flower, held in the hand","dangle"),
 ("a small painted scroll on plain paper with wooden rollers","scroll"),
 ("a small cloth pouch embroidered with a single flower","dangle"),
-("a small plain clay vase with a flower sprig","vase"),
+("a small plain clay lotus lamp","lamp"),
 ("a plain wooden name seal with a cotton tassel","one"),
 ("a carved bamboo needle case with a cotton tassel","dangle"),
 ("a small plain bronze hand bell with a cotton tassel","dangle"),
@@ -851,7 +851,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a fly-whisk of horsehair with a plain bamboo handle","one"),
 ("a small plain bamboo birdcage with its cloth cover drawn back","lantern"),
 ("a thread-bound almanac in a plain cloth cover","book")],
-2:[("a silk round fan with a lacquered handle and a small tassel","rfan"),("an embroidered silk sachet with a tassel","dangle"),("a painted paper folding fan","ffan"),("a poetry book with a silk cover","book"),("a small porcelain vase with a flower sprig","vase"),("an embroidery hoop with a fine silk scene","hoop"),("a jade-bead tassel ornament","dangle"),("a silk-covered lantern with a tassel","lantern"),("a small lacquered comb box","box"),("a bamboo flute with a silk tassel","flute"),
+2:[("a silk round fan with a lacquered handle and a small tassel","rfan"),("an embroidered silk sachet with a tassel","dangle"),("a painted paper folding fan","ffan"),("a poetry book with a silk cover","book"),("a small porcelain lotus lamp","lamp"),("an embroidery hoop with a fine silk scene","hoop"),("a jade-bead tassel ornament","dangle"),("a silk-covered lantern with a tassel","lantern"),("a small lacquered comb box","box"),("a bamboo flute with a silk tassel","flute"),
 ("a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat","one"),
 ("a small cricket cage of lacquered bamboo with a silk tassel","dangle"),
 ("a lacquered butterfly hairpin, held in the hand","dangle"),
@@ -882,7 +882,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a lacquered walking staff with a silk cord","one"),
 ("a small potted pine in a painted porcelain pot","two"),
 ("an agate pendant on a silk cord","dangle")],
-3:[("an embroidered silk round fan with a silk tassel","rfan"),("a small red-lacquered box","box"),("a painted scroll with wooden rollers","scroll"),("a painted silk folding fan with bone ribs","ffan"),("a small celadon vase with a flower sprig","vase"),("a silver hand mirror","mirror"),("an embroidered silk palace lantern","lantern"),("a silver-mounted thread-bound book","book"),("a carved peach-wood comb in a silk case","box"),("a small silver-wire flower basket","basket"),
+3:[("an embroidered silk round fan with a silk tassel","rfan"),("a small red-lacquered box","box"),("a painted scroll with wooden rollers","scroll"),("a painted silk folding fan with bone ribs","ffan"),("a small celadon lotus lamp","lamp"),("a silver hand mirror","mirror"),("an embroidered silk palace lantern","lantern"),("a silver-mounted thread-bound book","book"),("a carved peach-wood comb in a silk case","box"),("a small silver-wire flower basket","basket"),
 ("an embroidered silk ball (tú cầu) with small silver bells, a round stuffed ball, no handle, no stick","dangle"),
 ("a silver butterfly hairpin, held in the hand","dangle"),
 ("a small embroidered silk sachet with a silver bead","dangle"),
@@ -913,7 +913,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a string of red-agate prayer beads with a silver tassel","dangle"),
 ("a round red-agate longevity plaque carved with a round shou symbol","two"),
 ("a thread-bound almanac in a silver-thread cover","book")],
-4:[("a round fan with a carved jade handle and jade tassel","rfan"),("a sandalwood folding fan with carved ribs","ffan"),("a lacquered jewel box","box"),("a scroll with jade rollers","scroll"),("a jade disc pendant on a silk cord","dangle"),("a silver-and-enamel hand mirror","mirror"),("a small cloisonné vase with flowers","vase"),("a gauze palace lantern with a jade pendant","lantern"),("a silver-mounted book box","box"),("a small white-jade vase with blossoms","vase"),
+4:[("a round fan with a carved jade handle and jade tassel","rfan"),("a sandalwood folding fan with carved ribs","ffan"),("a lacquered jewel box","box"),("a scroll with jade rollers","scroll"),("a jade disc pendant on a silk cord","dangle"),("a silver-and-enamel hand mirror","mirror"),("a small cloisonné lotus lamp","lamp"),("a gauze palace lantern with a jade pendant","lantern"),("a silver-mounted book box","box"),("a small white-jade lotus lamp","lamp"),
 ("a jade butterfly hairpin, held in the hand","dangle"),
 ("a small cricket cage of jade-trimmed bamboo","dangle"),
 ("a jade flute with a jade tassel","flute"),
@@ -944,7 +944,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a sandalwood walking staff with a jade head","one"),
 ("a small potted orchid in a jade-green glazed pot","two"),
 ("a string of jade prayer beads","dangle")],
-5:[("a round fan with a gold-inlaid handle and gem tassel","rfan"),("a gilded lacquer box","box"),("a painted scroll with gold fittings","scroll"),("an ivory folding fan with gold leaf","ffan"),("a cloisonné enamel vase with flowers","vase"),("a gold-and-jade hand mirror","mirror"),("a gilded silver flower basket","basket"),("a silver-gilt palace lantern with pearl tassels","lantern"),("a coral-and-pearl bead tassel ornament","dangle"),("a gold-mounted embroidered silk book","book"),
+5:[("a round fan with a gold-inlaid handle and gem tassel","rfan"),("a gilded lacquer box","box"),("a painted scroll with gold fittings","scroll"),("an ivory folding fan with gold leaf","ffan"),("a cloisonné enamel lotus lamp with gilt petals","lamp"),("a gold-and-jade hand mirror","mirror"),("a gilded silver flower basket","basket"),("a silver-gilt palace lantern with pearl tassels","lantern"),("a coral-and-pearl bead tassel ornament","dangle"),("a gold-mounted embroidered silk book","book"),
 ("a gold butterfly hairpin with gem wings, held in the hand","dangle"),
 ("a gold-thread embroidered ball (tú cầu) with a gem tassel, a round stuffed ball, no handle, no stick","dangle"),
 ("a flute with gold bands and a gem tassel","flute"),
@@ -975,7 +975,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a small potted orchid in a cloisonné pot","two"),
 ("a thread-bound almanac with gold clasps","book"),
 ("a string of gold-and-jade prayer beads","dangle")],
-6:[("a white-jade ruyi","ruyi"),("a jewelled box","box"),("a round fan with a carved jade-and-gold handle and pearls","rfan"),("a gold-and-pearl hand mirror","mirror"),("a white-jade vase with gold mounts and flowers","vase"),("a pearl-embroidered silk folding fan with jade ribs","ffan"),("a carved jade incense box","box"),("a small coral branch on a gold stand","stand"),("a pearl-tasselled silk lantern with a jade top","lantern"),("a gold-mounted jade pendant on a silk cord","dangle"),
+6:[("a white-jade ruyi","ruyi"),("a jewelled box","box"),("a round fan with a carved jade-and-gold handle and pearls","rfan"),("a gold-and-pearl hand mirror","mirror"),("a white-jade lotus lamp with gold mounts","lamp"),("a pearl-embroidered silk folding fan with jade ribs","ffan"),("a carved jade incense box","box"),("a small coral branch on a gold stand","stand"),("a pearl-tasselled silk lantern with a jade top","lantern"),("a gold-mounted jade pendant on a silk cord","dangle"),
 ("a pearl-and-gold butterfly hairpin, held in the hand","dangle"),
 ("a small cricket cage of white jade and gold with a pearl tassel","dangle"),
 ("a white-jade flute with gold bands","flute"),
@@ -1018,7 +1018,7 @@ HAND_LOW={"rfan":"the round fan held up in one hand at chest height, gently turn
 "flute":"the flute held horizontally in both hands at chest height (not at the lips), fingers resting on its holes, body and face frontal, standing squarely facing the viewer, no turn",
 "lantern":"the lantern hanging from its handle in one hand beside her at hip height, the other hand steadying its tassel, body and face frontal, standing squarely facing the viewer, no turn",
 "dangle":"the ornament dangling from the fingers of one hand at chest height, the other hand cupped beneath it, body and face frontal, standing squarely facing the viewer, no turn",
-"vase":"the vase cradled in both hands at waist height, one hand under its base, body and face frontal, standing squarely facing the viewer, no turn, head tilted gently toward the viewer",
+"lamp":"the lamp cradled in both hands at waist height, one hand under its base, body and face frontal, standing squarely facing the viewer, no turn, head tilted gently toward the viewer",
 "box":"the box in both hands at waist height, one hand lifting its lid slightly, body and face frontal, standing squarely facing the viewer, no turn",
 "scroll":"the rolled scroll in one hand lowered at her side, the other hand lifting her sleeve slightly, body and face frontal, standing squarely facing the viewer, no turn",
 "mirror":"the hand mirror held in one hand at waist height with its back turned outward, the other hand touching a hairpin, body and face frontal, standing squarely facing the viewer, no turn",
@@ -1038,7 +1038,8 @@ def items3f(c):
         used.add(kind); out[t]=(it,kind)
     return out
 for _c in [f"c{i:02d}" for i in range(1,33)]+[f"m{i:02d}" for i in range(1,53)]: ITEMS_LOW[_c]=items3f(_c)   # N5d item 5: maids too (t1-t6 default pick; age_item overrides)
-LOWNAME={"c06":("vermilion","coral red"),"c25":("deep cherry red","brick rust red")}
+LOWNAME={"c06":("vermilion","soft vermilion"),   # PALFIX a3: was ("vermilion","coral red"); DATA c06 was "vermilion and ivory"
+ "c25":("deep cherry red","brick rust red")}
 # ---------- N5d item 5: MAID rows m01–m52 (data only; each maid keeps her own face = image 1, no face words exist for maids) ----------
 # PAL = signature palette (main dev/figwork/maidC/mjobs.py PAL, :22 and :31); MOT = motif list (mjobs.py MOT, index (n-1)%13); ORIG1 hex = the two dominant robe tones MEASURED from the live fig-maid-mNN-t1-a18.webp
 # (k-means on rows 32-93 percent of the figure, no hue filter: the maids' pale robes sit in the skin/gold hue band); the colour NAMES come from PAL (name()-style naming gave "silver grey" for pale sage). LOWNAME is auto-filled below from DATA+ORIG1.
@@ -1356,7 +1357,7 @@ IDENT=" From the identity reference keep ONLY her face, facial features and hair
 TH_ITEMS=[("a string of sandalwood prayer beads","one"),("a jade-headed dragon-head staff","one"),("a thread-bound sutra book with a gold-brocade cover","two"),("a small gilded bronze hand censer","two"),("a scroll of calligraphy on yellow silk","two"),("an ivory-handled silk fan","one"),("a small white-jade ruyi","two"),("an embroidered silk prayer-bead pouch","one"),("a carved sandalwood box","two"),("a hand mirror in a bronze-and-jade frame","one"),
 ("a dark-sandalwood folding fan with a long silk tassel","one"),
 ("an old-jade pendant carved with the longevity character on a silk cord","one"),
-("a small vase of old celadon with a single orchid","two"),
+("a small lotus lamp of old celadon","two"),
 ("a palace lantern of longevity-pattern brocade on a sandalwood frame","two"),
 ("a painting album bound in longevity-pattern brocade","two"),
 ("a small hand warmer of gilt bronze in a brocade cover","two"),
@@ -1968,8 +1969,10 @@ def nude3(o,c):
     def rep(a,b):
         nonlocal o; assert o.count(a)==1,("nude3 anchor",a[:60]); o=o.replace(a,b,1)
     if O["sec"]:                                                                                                   # colour slot
-        m=_re.search(r"golden yellow silk mixed with ([a-z\- ]+?),",o); assert m; rep(m.group(0),f"golden yellow silk mixed with {O['sec']},")
-        i=o.index("her ORIGINAL robe colour is kept exactly"); j=o.index("the royal golden yellow is the DOMINANT"); o=o[:i]+o[j:]
+        m=_re.search(r"golden yellow silk mixed with ([a-z\- ]+?),",o); assert m; rep(m.group(0),f"golden yellow silk mixed with {O['sec']} and her own {m.group(1)},")   # PALFIX c2 (owner L1419): + her own MAIN colour
+        i=o.index("her ORIGINAL robe colour is kept exactly"); j=o.index("the royal golden yellow is the DOMINANT")
+        _own=_re.search(r"\(her first reference\): (.+?), with ",o[i:j]); assert _own,"c2 own main colour"
+        o=o[:i]+f"her OWN main colour {_own.group(1).replace(' silk like',' like')} stays clearly visible in large areas (inner skirt, sleeve linings and a few panels); "+o[j:]   # PALFIX c2: wine-crimson 2nd colour stays, her own main colour ALSO carried clearly
         rep("her colour is the second colour",O["secrule"]+" is the second colour")
     t8item,t8hk=age_item(c,"t8",*ITEMS[item_for(c)]); nitem,nhk=age_item(c,"nude",*NUDE_ITEM[c])                  # item slot + hand clause
     rep(f"she holds {t8item} in a contrasting colour",f"she holds {nitem} in a contrasting colour")

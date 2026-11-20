@@ -33,7 +33,8 @@ APPROVED = [{'id': 'W01', 'title': 'WINTER FUR Lông 1 t1-t3 (G26)', 'text': "WI
   'luot': 'owner 20/11 ~16:50Z ("lông ba mới cho bậc hoàng hậu và hoàng quý phi")', 'source': 'dev/art/winter_g28.py FUR[3] = dev/art/seasons4/s62_t8_dong_LONG3moi.txt', 'proof': 'dev/art/winter1/g28/s62_t8_dong.txt', 'picture': 'owner ChatGPT run', 'vn': 'Đông: viền lông ngà rộng nhất, dày ~3,5 bàn tay (HQP, HH).'},
  {'id': 'W04', 'title': 'WINTER STORE FABRIC t1-t3 (G28, twin of S06)', 'text': 'Light, soft, flowing OPAQUE silk: the long sleeves, skirt and sash are supple and airy, drifting softly as in a gentle breeze, with soft natural folds, never see-through, never stiff, flat or board-like.', 'scope': 'tp1-3 pr1-3', 'confirm': '', 'ages': '', 'store': False, 'season': 'dong',
   'luot': 'owner 20/11 ~19:24Z answer A ("vải không xuyên thấu")', 'source': 'dev/art/winter_g28.py FABRIC[1]', 'proof': 'dev/art/winter1/g28/s62_t1_dong.txt', 'picture': '', 'vn': 'Đông: lụa mềm bay nhưng KHÔNG xuyên thấu (thay S06).'},
- {'id': 'W05', 'title': 'WINTER PHI BẠCH t1-t6 (G28, twin of S12)', 'text': 'PHI BẠCH (winter): the shawl draped behind her back and over her arms is a soft, light, flowing OPAQUE silk shawl in {sec} (her secondary colour, clearly different from her main robe colour {main}), never see-through, never stiff or bulky; it keeps its soft graceful drape.', 'scope': 'tp1-6 pr1-6', 'confirm': '', 'ages': '', 'store': False, 'season': 'dong',
+ # G34/G36 (owner L1439/L1446): winter has NO phi bạch -> W05 no longer required (was 'tp1-6 pr1-6')
+ {'id': 'W05', 'title': 'WINTER PHI BẠCH t1-t6 (G28, twin of S12)', 'text': 'PHI BẠCH (winter): the shawl draped behind her back and over her arms is a soft, light, flowing OPAQUE silk shawl in {sec} (her secondary colour, clearly different from her main robe colour {main}), never see-through, never stiff or bulky; it keeps its soft graceful drape.', 'scope': '-', 'confirm': '', 'ages': '', 'store': False, 'season': 'dong',
   'luot': 'owner 20/11 ~19:24Z answer A', 'source': 'dev/art/winter_g28.py PHI_WINTER', 'proof': 'dev/art/winter1/g28/s62_t1_dong.txt', 'picture': '', 'vn': 'Đông: khăn choàng lụa mềm KHÔNG xuyên thấu (thay S12).'},
  {'id': 'S01',
   'title': 'TWO-COLOUR RULE (hai màu)',
@@ -195,7 +196,7 @@ APPROVED = [{'id': 'W01', 'title': 'WINTER FUR Lông 1 t1-t3 (G26)', 'text': "WI
  {'id': 'S12',
   'title': 'PHI BẠCH (khăn choàng) t1-t6',
   'text': 'PHI BẠCH: {intro} is a very sheer, highly translucent gauze shawl in {colour} (her secondary colour, clearly different from her main robe colour {main}) — the robe, sleeves and arms are clearly visible through it, so it reads as a light airy veil of that hue, never an opaque solid band of colour; it keeps its soft graceful drape.',
-  'scope': 'tp1-6 pr1-6',
+  'scope': '-',   # G36 (owner L1446): phi bạch only hạ + thu; builder xuân (current Hán set) / đông have none -> no longer required (was 'tp1-6 pr1-6')
   'confirm': '',
   'ages': '',
   'luot': '397, 412, 434, 469, 483, 486 (G4); F12 Lượt 601 (BW4: very sheer, translucent)',
@@ -726,7 +727,7 @@ G15_T3_OPTB=("a structured, rich COURTLY palace consort dress (cung đình), nev
  "an ankle-length {main} silk court robe with a straight SQUARE NECKLINE framed by a wide stiff {sec} embroidered {motif} band; a wide stiff {sec} brocade girdle at the natural waist, "
  "from which hangs down the centre front an embroidered {sec} APRON PANEL (a long narrow ceremonial front panel, {motif} embroidery, gold-braid edge) reaching to the ankles; "
  "on each side of the apron hangs a long ceremonial jade pendant set down to the knees: small carved jade plaques linked by strings of pearls, ending in silk tassels; "
- "wide embroidered {motif} bands at the sleeve ends and the hem; a sheer silk shawl")
+ "wide embroidered {motif} bands at the sleeve ends and the hem")   # G36 (owner L1446): '; a sheer silk shawl' removed (no phi bạch in xuân/đông)
 # G21 (owner 20/11, ROOT-67 chat Lượt 1128: 'Cái cổ áo từ 36, 51 và 65 tuổi á, là phải là cái cổ xéo kín đáo ... copy cái cổ này qua cho bên quý nhân'):
 # at a36/a51/a65 the t3 option-B words keep everything except the collar: the square neckline becomes the same snug crossed collar as the old (pre-G17) Đáp ứng words.
 G21_AGES=("a36","a51","a65")
@@ -775,6 +776,10 @@ def store_check(pf, prompt, args):
         _a=[x for i,x in enumerate(args) if not (x=='--age' or (i and args[i-1]=='--age'))]+['--age','a36']
         _s36=subprocess.run(['python3','build.py']+_a,cwd=B,capture_output=True,text=True).stdout
         store=store.replace(winter_g28.outfit(store),winter_g28.outfit(_s36),1)
+    if winter_g28.is_winter(prompt) and args and not args[0].startswith("-"):   # PALFIX c3 (owner L1419, B26FAB5): winter colours = her B20 đông palette -> the same word swap on the store text
+        sys.path.insert(0,os.path.join(ART,"store-all")); import build_all as _ba
+        _wp=_ba.winter_pairs(args[0])
+        if _wp: store=_ba.b20_winter_words(store,_wp)
     m=G15_T3_OLD.search(store)
     if m:   # G15: the t3 design words must be option B (main/secondary = any words, motif = the store's motif), never the old t3 design
         _age='a36' if _w25 else (args[args.index('--age')+1] if '--age' in args else None)   # SEASON đông: t3 winter = G15 option B with the a36 crossed collar (G21/G25)
@@ -783,6 +788,7 @@ def store_check(pf, prompt, args):
         store=store[:m.start()]+store[m.end():]
         if not re.search(rx,prompt): return [(0,'G15 Quý nhân t3 option-B outfit words missing (dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt)')]
     store=hqp_store(store,prompt)   # HQP COLLAR (L1384)
+    store=re.sub(r"(?:,|;) a sheer silk shawl(?=[;.,])","",store)   # G36 (owner L1446): the store shawl words are optional (builder xuân/đông drop them)
     for _o,_n in master_common.doan_cuts_made(prompt,scope_from_store_args(args)):   # B26 length exception (Foreman C #5 (a)): the same master-repeat clauses cut from the store text (prefix + necessity rule)
         store=store.replace(_o,_n,1)
     sp=lambda s:[x.strip() for x in re.split(r'(?<=[.;])\s+',s) if len(x.strip())>12]

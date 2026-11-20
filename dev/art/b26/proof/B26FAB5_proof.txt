@@ -1,0 +1,28 @@
+cells 12410 changed 11074
+  t1 None: 730
+  t1 dong: 725
+  t2 None: 730
+  t2 dong: 725
+  t3 None: 730
+  t3 dong: 725
+  t4 None: 730
+  t4 dong: 705
+  t5 None: 730
+  t5 dong: 725
+  t6 None: 730
+  t6 dong: 725
+  t7 None: 730
+  t7 dong: 730
+  t8 None: 206
+  t8 dong: 383
+  tnude None: 315
+why: {'J1+J2': 636, 'J2': 4457, 'J1': 847, 'J3': 886, 'J1+J2+J3': 240, 'J2+J3': 3120, 'J1+J3': 567, 'J1+J4': 33, 'J2+J4': 147, 'J2+J4+J3': 110, 'J4': 9, 'J4+J3': 9, 'J1+J4+J3': 13}
+bad: 0 []
+  bad words: []
+PROOF cleavage left: 0 | décolletage/bust: 0
+PROOF phi bạch / PHI BẠCH sentence left: 0 | 'silk shawl' left: 0 | any 'shawl' left (negatives): [(' shawl or veil unless her outfit nam', 12050)]
+PROOF vase left: 0 []
+lamp cells: 321
+went over 10000: 1 [('m12|nude|a51|None', 55)]
+now fit: 756
+over 10000 total new: 3227 base: 3982

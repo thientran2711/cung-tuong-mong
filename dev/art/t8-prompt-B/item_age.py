@@ -69,7 +69,7 @@ k("sceptre","sceptre of {H}{D}","quyền trượng {H}{D}",("only",{"nude"}))
 # a26 — poised young woman
 k("sealbox","seal box of {H}{D}","hộp ấn {H}{D}",("only",{"t8"}))
 k("edict","imperial edict scroll of {S} on rollers of {H}","thánh chỉ {S}, trục {H}",("only",{"nude"}))
-k("vase","small vase of {H} with a flower sprig","bình hoa nhỏ {H} cắm một cành hoa")
+k("lamp","small lotus lamp of {H}","đèn hoa sen nhỏ {H}")   # owner L1436/L1438: no vase for anyone -> lotus lamp (same slot)
 k("pbook","poetry book bound in {S}, clasps of {H}","tập thơ bọc {S}, khóa {H}")
 k("pscroll","painted scroll of {S} on rollers of {H}","cuộn tranh {S}, trục {H}")
 k("combbox","small comb box of {H}{D}","hộp lược nhỏ {H}{D}")
@@ -189,7 +189,7 @@ k("p_hanky","{A} embroidered handkerchief","khăn tay thêu {A}")
 _LS=["rfan","ffan","mirror"]; _MS=["m_lant","m_robe","m_duster"]; _PS=["p_fan","p_comb","p_bundle"]
 POOL={"lady":{
  "a18":_LS+["sceptre","ball","slant","flute","bfly","fbask","sachet","hoop","speony","pipa","parasol"],
- "a26":_LS+["sealbox","edict","vase","pbook","pscroll","combbox","plant","gobox","pend"],
+ "a26":_LS+["sealbox","edict","lamp","pbook","pscroll","combbox","plant","gobox","pend"],
  "a36":_LS+["ruyi","hot","incbox","casket","hanky","orchid","powder","hcomb","beads"],
  "a51":_LS+["censer","jseal","sutra","warmer","brush","iball","whisk","album","pouch","coral"],
  "a65":_LS+["staff","plaque","almanac","pastebox","pine","hballs","chrys","bell"]},
@@ -333,7 +333,7 @@ AGE5={"ngheo":{"a18": ["p_pinwheel", "p_wbask", "p_hemp", "p_sprig", "p_hsach"],
 "tm4":{"a18": ["m_mirror", "m_fan", "m_pinbox", "m_letter", "m_tbask"], "a26": ["m_pot", "m_bolt", "m_flowers", "m_candle", "m_ptray"], "a36": ["m_bell", "m_brocade", "m_lant", "m_duster", "m_keys"], "a51": ["m_bcase", "m_scissors", "m_inv", "m_robe", "m_herbs"], "a65": ["m_chrys", "m_incst", "m_cane", "m_whisk", "m_fish"]},
 "mama":{"a18": ["m_broom", "m_cbox", "m_ribbon", "m_ttray", "m_fbask"], "a26": ["m_meds", "m_pattern", "m_sewbox", "m_hoop", "m_incbox"], "a36": ["m_ruler", "m_medbox", "m_umb", "m_slip", "m_food"], "a51": ["m_seal", "m_ledger", "m_warmer", "m_beads", "m_abacus"], "a65": ["m_almanac", "m_clapper", "m_pine", "m_herbbag", "m_sutra"]},
 "kc":{"a18": ["slant", "ball", "flute", "hoop", "fbask"], "a26": ["rfan", "combbox", "pend", "pbook", "plant"], "a36": ["powder", "casket", "hanky", "hcomb", "orchid"], "a51": ["sutra", "ffan", "whisk", "album", "pouch"], "a65": ["pine", "bell", "mirror", "plaque", "pastebox"]},
-"nc":{"a18": ["flute", "sachet", "speony", "fbask", "parasol"], "a26": ["rfan", "plant", "combbox", "vase", "pscroll"], "a36": ["incbox", "hanky", "casket", "beads", "orchid"], "a51": ["warmer", "album", "ffan", "iball", "pouch"], "a65": ["chrys", "pastebox", "bell", "staff", "almanac"]}}
+"nc":{"a18": ["flute", "sachet", "speony", "fbask", "parasol"], "a26": ["rfan", "plant", "combbox", "lamp", "pscroll"], "a36": ["incbox", "hanky", "casket", "beads", "orchid"], "a51": ["warmer", "album", "ffan", "iball", "pouch"], "a65": ["chrys", "pastebox", "bell", "staff", "almanac"]}}
 def age5_item(c,age,tier,vn=False):
     """E11 pick for the tiers in AGE5: person cNN (n) at age -> AGE5[tier][age][(n-1)%5] filled with the tier material."""
     n=int(c[1:]) if c[1:].isdigit() else sum(map(ord,c))

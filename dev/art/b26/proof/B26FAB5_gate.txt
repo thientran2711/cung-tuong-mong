@@ -1,0 +1,28 @@
+FAIL(pre-existing: same ids fail on base) c29|2|a51|dong 9769 ['FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): …ure colour family muted mauve-lilac and pale grey stays the MAIN robe…', 'APPROVED CHECK FAIL /tmp/tmp66c61qh2.txt scope tp2', 'STORE CHECK FAIL /tmp/tmp66c61qh2.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL(pre-existing: same ids fail on base) m43|5|a36|None 8968 ['FAIL X11 BANNED: teeth / open mouth: … the lips fully pressed together and covering the teeth completely, eyes fully open. …', 'APPROVED CHECK FAIL /tmp/tmp_g4m0uvv.txt scope tp5', 'STORE CHECK FAIL /tmp/tmp_g4m0uvv.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL(pre-existing: same ids fail on base) s61|5|a26|None 9539 ['FAIL F16 NOFRUIT: fruit in a held item (owner Lượt 1052/1054/1058: nobody holds fruit, any rank, any age): …a colour family clearly different from BOTH her robe colour persimmon and her secondary colour ivor…', 'APPROVED CHECK FAIL /tmp/tmpud10m2ly.txt scope tp5', 'STORE CHECK FAIL /tmp/tmpud10m2ly.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL(pre-existing: same ids fail on base) c09|6|a18|None 8570 ['FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): … along the borders, an embroidered pale silver grey-blue cloud collar (…', 'APPROVED CHECK FAIL /tmp/tmpz4beh4b4.txt scope tp6', 'STORE CHECK FAIL /tmp/tmpz4beh4b4.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL NEW ['F16'] s61|6|a36|dong 9707 ['FAIL F16 NOFRUIT: fruit in a held item (owner Lượt 1052/1054/1058: nobody holds fruit, any rank, any age): … her robe colour jade green and her secondary colour summer peach.…', 'APPROVED CHECK FAIL /tmp/tmpz2xc67wh.txt scope tp6', 'STORE CHECK FAIL /tmp/tmpz2xc67wh.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL(pre-existing: same ids fail on base) c10|6|a18|dong 8834 ['FAIL F16 NOFRUIT: fruit in a held item (owner Lượt 1052/1054/1058: nobody holds fruit, any rank, any age): …r robe colour cool aquamarine and her secondary colour soft persimmon.…', 'APPROVED CHECK FAIL /tmp/tmpya3rxype.txt scope tp6', 'STORE CHECK FAIL /tmp/tmpya3rxype.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL NEW ['X11'] m43|7|a26|dong 9953 ['FAIL X11 BANNED: teeth / open mouth: … the lips fully pressed together and covering the teeth completely, eyes fully open. …', 'APPROVED CHECK FAIL /tmp/tmpp769jd4t.txt scope tp7', 'STORE CHECK FAIL /tmp/tmpp769jd4t.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL(pre-existing: same ids fail on base) c11|8|a36|None 8593 ['FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): … in image 1 (her first reference): soft pink-grey silk like #D6BFC3, …', 'APPROVED CHECK FAIL /tmp/tmp7jp77ajl.txt scope tp8', 'STORE CHECK FAIL /tmp/tmp7jp77ajl.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL(pre-existing: same ids fail on base) s61|8|a36|dong 9936 ['FAIL F16 NOFRUIT: fruit in a held item (owner Lượt 1052/1054/1058: nobody holds fruit, any rank, any age): … her robe colour jade green and her secondary colour summer peach.…', 'APPROVED CHECK FAIL /tmp/tmp49a0yhox.txt scope tp8', 'STORE CHECK FAIL /tmp/tmp49a0yhox.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL(pre-existing: same ids fail on base) m33|nude|a65|None 9638 ['STORE CHECK FAIL /tmp/tmpmpom3v5h.txt — 2 store sentence(s) missing or rewritten:', '[0.44] STYLE LOCK (same drawing as her 36-year-old picture, the third reference): exactly the same soft painterly guofeng illustration rendering, the same smooth lumin', '[0.28] her age shows ONLY through the silver in her hair and a few soft painted lines, NEVER photographic, NEVER photo-realistic, no realistic skin texture, no pores,']
+FAIL(pre-existing: same ids fail on base) m06|nude|a65|None 9777 ['STORE CHECK FAIL /tmp/tmpvw67z113.txt — 2 store sentence(s) missing or rewritten:', '[0.44] STYLE LOCK (same drawing as her 36-year-old picture, the third reference): exactly the same soft painterly guofeng illustration rendering, the same smooth lumin', '[0.28] her age shows ONLY through the silver in her hair and a few soft painted lines, NEVER photographic, NEVER photo-realistic, no realistic skin texture, no pores,']
+t1 None {'PASS': 3}
+t1 dong {'PASS': 3}
+t2 None {'PASS': 3}
+t2 dong {'FAIL': 1, 'PASS': 2}
+t3 None {'PASS': 3}
+t3 dong {'PASS': 3}
+t4 None {'PASS': 3}
+t4 dong {'PASS': 3}
+t5 None {'FAIL': 2, 'PASS': 1}
+t5 dong {'PASS': 3}
+t6 None {'PASS': 2, 'FAIL': 1}
+t6 dong {'FAIL NEW': 1, 'PASS': 1, 'FAIL': 1}
+t7 None {'PASS': 3}
+t7 dong {'PASS': 2, 'FAIL NEW': 1}
+t8 None {'PASS': 2, 'FAIL': 1}
+t8 dong {'PASS': 2, 'FAIL': 1}
+tnude None {'FAIL': 2, 'PASS': 1}
