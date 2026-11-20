@@ -19,6 +19,21 @@
    "c09_hairtop.webp",
    308,
    11
+  ],
+  "hands": [
+   "c09_hands.webp",
+   189,
+   716
+  ],
+  "wcuffs": [
+   "c09_wcuffs.webp",
+   238,
+   718
+  ],
+  "skin": [
+   "c09_skin.png",
+   365,
+   102
   ]
  },
  "c11": {
@@ -41,6 +56,21 @@
    "c11_hairtop.webp",
    367,
    11
+  ],
+  "hands": [
+   "c11_hands.webp",
+   343,
+   570
+  ],
+  "wcuffs": [
+   "c11_wcuffs.webp",
+   650,
+   778
+  ],
+  "skin": [
+   "c11_skin.png",
+   405,
+   121
   ]
  },
  "c22": {
@@ -68,6 +98,21 @@
    "c22_hands.webp",
    378,
    786
+  ],
+  "wcuffs": [
+   "c22_wcuffs.webp",
+   418,
+   788
+  ],
+  "skin": [
+   "c22_skin.png",
+   416,
+   110
+  ],
+  "hairlong": [
+   "c22_hairlong.webp",
+   192,
+   360
   ]
  }
 }
