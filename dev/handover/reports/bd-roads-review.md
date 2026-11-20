@@ -116,3 +116,6 @@ Open notes FOR E / MAIN (not blocking): GRAND_ENDINGS.md still names bd_tuyet/bd
 
 ### Re-merge 20/11 ~14:05Z after ge-w3 LIVE 8730f431 (+ 43fd334f kit-signs-preplay, 5cd6d24a kit-rows-b)
 d76511d3 → 5c30f0dc (8730f431; assemble.py conflict: main list + jbalbd/jrd_bd/jrd_bd2) → 367ddcc7 (43fd334f) → **4403fbbd** (5cd6d24a); index/sw rebuilt each time; pushed on review/bd-roads, FF on LIVE 5cd6d24a. Gates: on 5c30f0dc one-core, bd-batu-switch, ge-engine 1160/1160, static 4 roads 0 dominated, ge-guard 6/6, bd-legacy-save, quickcheck all PASS; on 4403fbbd one-core, bd-batu-switch, quickcheck PASS. **PASS 4403fbbd.**
+
+### Re-merge 20/11 ~14:20Z: LIVE 7a35db20 (day-khac-audit)
+4403fbbd + 7a35db20 → **5ba7ff28** (index/sw only; jkc2.js auto-merged, main's one-line HUD change). one-core, bd-batu-switch, static 4 roads 0 dominated, quickcheck PASS. FF on LIVE 7a35db20. **PASS 5ba7ff28.**
