@@ -93,5 +93,9 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  const tut=await p.evaluate(()=>{const pk=KG82.peek&&KG82.peek();const h=document.querySelector('.kgt-hand');return{drag:!!(pk&&(pk.drag||Number.isFinite(pk.x))),isDrag:!!(pk&&pk.drag),hand:!!(h&&h.classList.contains('on')),m:h&&h.dataset.m}});
  ok(tut.drag&&tut.hand,'Hướng dẫn: the ghost hand guides the lantern along the path',tut);
  await p.evaluate(()=>{try{const bk=document.getElementById('kgtback');if(bk)bk.click();kg82Close()}catch(e){}});
+ /* law 11 group: every guide to follow / zone to keep uses the kit lit path (no private faint fill left) */
+ {const B=path.join(__dirname,'../build/');const src=f=>fs.readFileSync(B+f,'utf8');const use={'jts.js':/kg82FxLane\(/,'j91.js':/kg82FxLane\.path\(/,'j91.js ':/kg82FxLane\.zone\(/,'jtd.js':/kg82FxLane\.zone\(/,'jnwp.js':/kg82FxLane\.stroke\(/};
+  const miss=Object.entries(use).filter(([f,re])=>!re.test(src(f.trim()))).map(([f])=>f.trim());const faint=['j91.js','jtd.js','jnwp.js'].filter(f=>/#2d7a5244|rgba\(255,226,140,\.38\)|"#8a735044"/.test(src(f)));
+  const zv=await p.evaluate(()=>BAL.mgFx.zone);ok(!miss.length&&!faint.length&&zv>=.5,'law 11: den/duho/hát/nấu/Tu đức/thư pháp guides on the kit lit path (no old faint fill)',{miss,faint,zone:zv})}
  ok(!errs.length,'no page errors',errs.slice(0,3));
  await b.close();const n=res.filter(x=>!x).length;console.log(n?`mg-play2: ${n} FAIL`:`mg-play2: all ${res.length} ok`);process.exit(n?1:0)})();
