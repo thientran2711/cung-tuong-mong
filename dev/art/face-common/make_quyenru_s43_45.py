@@ -51,7 +51,7 @@ S761Q = [
              ("FULL plump lips with a soft curved bow", "softly full lips with a clear curved bow")],
  "half-up: two thin twists from the temples joined at the back of the head under one small gold hairpin pointing upward, the rest long and sleek",
  "a light open beizi of {m} silk satin with a soft sheen over a cross-collar {s} inner top and a {s} floor-length skirt of plain silk, small embroidered pomegranate flowers along the front edges, a {s} silk sash with a small carnelian pendant, long sleeves",
- "walking slowly and gracefully mid-step, a small red pomegranate held in one hand at her waist, the other sleeve trailing", "TR"),
+ "walking slowly and gracefully mid-step, a small cobalt-blue silk lucky-knot charm with a short tassel held in one hand at her waist, the other sleeve trailing", "TR"),
 ("s45", 17, [("large liquid-bright almond eyes", "very large liquid-bright almond eyes"),
              ("a small fine nose", "a straight nose with a gently arched bridge"),
              ("soft HEART-OVAL face", "soft TEARDROP-OVAL face")],

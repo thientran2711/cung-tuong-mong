@@ -36,7 +36,7 @@ PH = ("{ROOT_MAIN}", "{ROOT_MAIN_HEX}", "{ROOT_SEC}", "{ROOT_SEC_HEX}")
 #    pinwheel · xiao flute · painting scroll · poetry album · brush case · folding fan.
 #  NEW here: wide forehead + feathered brows · soft high cheekbones + wide-set eyes · round-almond double-lid eyes + straight brows ·
 #    softly broad cheekbones + long double-lid eyes + clear lip bow; side braid · half-up low loop · half-up pearl top-knot ·
-#    half-up neat loop (ROOT-66 F1: thiếu nữ = loose or half-up); brass wind chime · brown rabbit · golden loquats · sandalwood beads
+#    half-up neat loop (ROOT-66 F1: thiếu nữ = loose or half-up); brass wind chime · brown rabbit · amber jade cicada (was golden loquats, F16 NOFRUIT; drawn picture kept) · sandalwood beads
 #    (items used by no one, item colours outside both root families, B16); angles SR TL FF SL. ROOT-66 review fixes 1–7 applied.
 S_NEW = [
 ("s62", "Dịu dàng", 17,
@@ -58,7 +58,7 @@ S_NEW = [
   ("a small delicate nose", "a small nose with a softly rounded tip")],
  "half-up: a small rounded top-knot wrapped with tiny pearls, the rest long and loose, two soft side locks",
  "a high-waisted {m} silk skirt with a soft sheen tied above the chest with a long {s} silk ribbon bow, a {s} wide-sleeved short top of plain silk, small embroidered lily-of-the-valley sprays along the skirt hem and cuffs",
- "standing with her weight on one leg, a small cluster of ripe golden-orange loquats on a short bare twig held at her chest in one hand, the other hand resting at her sash", "FF"),
+ "standing with her weight on one leg, a small amber-yellow jade cicada on a short cord held at her chest in one hand, the other hand resting at her sash", "FF"),
 ("s65", "Đoan trang", 18,
  [("classic oval face with a smooth high forehead, evenly full cheeks", "classic oval face with a smooth high forehead, gently rounded, softly broad cheekbones"),
   ("calm LEVEL almond eyes of medium size", "calm LEVEL, slightly long almond eyes with clear double eyelids"),

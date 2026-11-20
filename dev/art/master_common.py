@@ -57,7 +57,8 @@ def high_scope(scope): return scope in HIGH_SCOPES
 # mọi người, tất cả các bậc, không có bỏ sót bất kỳ một người nữ nào, bất kỳ một cái bậc nào, không ai được đeo hoa tai."): earrings are a separate
 # dress-up layer (dev/art/earring-test, report EAR1) -> NO painted woman / girl of any rank or state wears earrings. Every FEMALE prompt carries EAR_SENT
 # exactly once (apply() puts it right after master M11 'Bare clean forehead…') and no earring word anywhere else. Men and boys: female=False, unchanged.
-EAR_SENT = "Bare earlobes: she wears NO earrings, nothing at the ears (earrings are added later as a separate layer)."
+EAR_SENT_OLD = "Bare earlobes: she wears NO earrings, nothing at the ears (earrings are added later as a separate layer)."   # NOEAR1 wording (20/11 06:50Z); shortened by FRUITPET1 (ROOT-67 job 5: 85 build_all prompts went over 10 000 chars), our words, not owner verbatim
+EAR_SENT = "Bare earlobes, no earrings."
 EAR_RX = re.compile(r"\bear(?:-| )?rings?\b|\bear(?:-| )?(?:drops?|pendants?|studs?|hoops?|cuffs?|jewel\w*)\b|\bjhumkas?\b|\b(?:hoa|bông|khuyên) tai\b"
                     r"|\b(?:jewel\w*|pearls?|jade|gold|silver|dangles?|tassels?|pendants?|drops?)\s+(?:at|on|from|in|hanging from) (?:the|her|both|each) ears?\b", re.I)
 M11_ID = "M11"
@@ -69,7 +70,8 @@ def male_scope(scope): return scope in MALE_SCOPES
 
 def strip_ear(text):
     """remove the earring words of the builders' old wording (the same edit was made in the builder sources; legacy() uses it so old gens still verify)."""
-    t = re.sub(r"Bare earlobes: she wears NO earrings, nothing at the ears\. ?(?! ?\(earrings are added)", "", text)   # the interim maker sentence (F4 make_new_s62_65 / make_c09_hand, 20/11) -> replaced by EAR_SENT
+    t = text.replace(" " + EAR_SENT_OLD, "").replace(EAR_SENT_OLD, "")   # the long NOEAR1 sentence (legacy() re-adds today's EAR_SENT)
+    t = re.sub(r"Bare earlobes: she wears NO earrings, nothing at the ears\. ?(?! ?\(earrings are added)", "", t)   # the interim maker sentence (F4 make_new_s62_65 / make_c09_hand, 20/11) -> replaced by EAR_SENT
     t = t.replace("gold-and-jade necklace, earrings and bracelets", "gold-and-jade necklace and bracelets")
     t = re.sub(r" and (?:[^,;.()\"]*? )?ear-?rings\b(?= as the only mark|[;.,)\"])", "", t)          # 'a fresh flower and slim silver tassel earrings;' -> 'a fresh flower;'
     t = re.sub(r",(?: with| she wears)? (?:[^,;.()\"]*? )?ear-?rings(?: with [^,;.()\"]*?drops)?(?=[;.,)\"])", "", t)   # ', gold earrings;' / ', with small earrings,' -> ''
