@@ -312,10 +312,12 @@ function toilHUD(o){{const d=document.getElementById("kg82");if(d)d.classList.re
 function toilAuto(){const occ=toilOcc(),F=Math.max(...occ.map(o=>o.F)),d=toilDress(S,F),sk=toilSkill();/* the same table as the NPCs (toilNpcPlay), seeded: no Math.random */
  const col=toilColFix(S.toilette&&S.toilette.col);const h0=wdHash(String(S.name||"")+":"+toilWk()),HD=typeof hdNpc==="function"?hdNpc(S,h0,sk.sk):null;const R=toilNpcPlay(sk.sk,h0,col,col.want||"",d.style,occ.map(o=>o.k),S.rank,HD?HD.q:null);
  S.toilette={day:toilWk()*10,wk:toilWk(),score:R.score,makeup:true,style:d.style,dv:d.v,F,occ:occ.map(o=>o.k),look:R.look,slip:R.slip,parts:R.parts,col,auto:1};if(HD)S.toilette.hd=HD;if(typeof lxSit==="function")lxSit(S,S.toilette)}
+/* KIT §13.8 (mg-back): the kit ✕ «Quay lại» on the mirror = leaving it as «Để mộc» (the existing lose choice), asked once; on the result it presses «Đã hiểu» */
+function toilBackX(){try{KG82.quitAsk=[`Rời gương lúc này thì tính như ${toilMkW("moc")}: không trang điểm.`];KG82.quit=()=>toilFinish(false)}catch(e){}}
 function toilOpen(){if(!S||S.dead)return;if(window.__bot){toilAuto();return}KG82.ctx="hoc";const occ=toilOcc();
  const d=kg82Open({art:"Điểm trang",title:"Trước gương đồng",how:"Hồi 1: chọn y phục theo dịp hôm nay. Hồi 2–4: tự tay kẻ mày lên đúng chân mày, đánh phấn hồng lên hai gò má, chấm son đúng chỗ khi vòng khép vừa môi. Có hoa điền thì chọn một chiếc, kéo vào giữa trán, nghiêng cho cân rồi dán. Không có đường chỉ: tay vụng thì mặt vụng."});
  if(!d)return;["chai-bg","chai-brow","chai-puff","chai-rouge"].forEach(n=>{try{kg82Img(n)}catch(e){}});try{KIT_VEIL.load()}catch(e){}
- TOIL.st={occ,F:Math.max(...occ.map(o=>o.F)),parts:{},dv:null,start:wdCur(S)};toilMkPre();toilHUD({score:"–",round:"1/4",time:"không hạn"});toilDressUI()}
+ TOIL.st={occ,F:Math.max(...occ.map(o=>o.F)),parts:{},dv:null,start:wdCur(S)};toilMkPre();toilBackX();toilHUD({score:"–",round:"1/4",time:"không hạn"});toilDressUI()}
 /* (a) CHỌN Y PHỤC — the bag (kitInvGrid, the same items as Tư trang) + the worn slots + her portrait in the chosen dress */
 const TOIL_SL=[["tram","Cài tóc","tramngoc"],["y","Y phục","luahang"],["wrist","Đeo tay","vongngoc"],["waist","Đeo eo","ngocboi"],["scent","Túi thơm","tuithom"]];
 function toilWorn(sl){if(sl==="tram"||sl==="y"){const e=wdOf(S)[sl],w=wdItem(e);return w?{src:w.icon,name:w.n,grade:w.g|0,lux:wdLux(w.k),tip:w.n}:null}
@@ -489,7 +491,7 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.r
  const eff=[];try{for(const h of ["th",qOn()?rivals[0]:null,"emp"].filter(Boolean)){if(h==="th"&&S.thDead)continue;const r=leAttire(S,"",h);const t=r.toil;if(!t||!t.aff)continue;
   eff.push(`${toilWho(h)}: ${h==="emp"?(t.aff>0?"Sủng +1":"Sủng -1"):`thiện cảm ${t.aff>0?"+":""}${t.aff}`} khi gặp hôm nay`)}}catch(e){}
  const html=`<div class="kgr">${kitRows(rows.concat([["Hôm nay",eff.length?eff:["không ai đổi cách nhìn ta"],"n"]]))}</div><div class="kg82act"><button class="${kg82Btn()}" id="toildone">Đã hiểu</button></div>`;
- toilHUD({score:made&&!quick?`${score}/100`:"–",round:"4/4",time:"đã xong"});const showRes=()=>{kg82ShowRes(html,tOk);const b=$("toildone");if(b)b.onclick=()=>{TOIL.st=null;kg82Close();render()}};
+ toilHUD({score:made&&!quick?`${score}/100`:"–",round:"4/4",time:"đã xong"});const showRes=()=>{kg82ShowRes(html,tOk);const b=$("toildone");if(b)b.onclick=()=>{TOIL.st=null;kg82Close();render()};KG82.quit=null;KG82.quitAsk=null;KG82.xdo=()=>{const x=$("toildone");if(x)x.click()}};
  try{toilReveal({look:mk,made,score,good,pre:made?toilPreName(S.toilette.col):"" },showRes)}catch(e){showRes()}
  try{save()}catch(e){}}
 (function(){const st=document.createElement("style");st.id="toil-css";st.textContent=`

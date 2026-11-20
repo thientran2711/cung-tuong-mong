@@ -112,8 +112,8 @@ function kg82Set(k,v){if(k==="round"&&typeof v==="string"){let lab=null;const m=
  kg82Set0(k,v)}
 function kg82Set0(k,v){if(typeof kitGameSet==="function")kitGameSet(k,v);else document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
 function kg82Open(o){kg82Close(true);const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
- const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;return d}
-function kg82Close(silent){if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";
+ const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;kg82BackX(d);return d}
+function kg82Close(silent){if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";KG82.back=null;KG82.backAsk=null;KG82.quit=null;KG82.quitAsk=null;KG82.xdo=null;KG82.giveUp=0;
  const d=kg82El();if(!d)return;const ov=$("ov");d.remove();[...ov.children].forEach(c=>{if(c.dataset.kg82h!=null){c.hidden=c.dataset.kg82h==="1";delete c.dataset.kg82h}});
  if(typeof mgDone==="undefined"||mgDone)ov.hidden=true}
 const kg82Box=()=>document.getElementById("kg82box");
@@ -340,12 +340,48 @@ const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,pattern:kg82Pattern,steps:kg82Steps,
 
 /* ---------- running one game inside the frame ---------- */
 function kg82Play(kind,onEnd){const box=kg82Box();if(!box)return;box.classList.remove("kgintro");box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";{const d=kg82El();if(d){d.classList.add("kg-run");d.classList.remove("kg-idle")}}
- let done=false,dead=false,stop=null;const env={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:raw=>{if(done)return;done=true;clearTimeout(guard);const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.rawF=raw;onEnd(mgGrade(raw,kind))}};/* mg-balance: engines pass a float; graded by BAL.mgTier.gamma */
- const guard=setTimeout(()=>env.end(0),97500);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};
+ let done=false,dead=false,stop=null;const env={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:raw=>{if(done)return;done=true;clearTimeout(guard);KG82.quit=null;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.rawF=raw;onEnd(raw===0&&KG82.gaveUp?0:mgGrade(raw,kind))}};/* mg-balance: engines pass a float; graded by BAL.mgTier.gamma */
+ let guard=0;KG82.gaveUp=0;if(KG82.giveUp){KG82.giveUp=0;KG82.gaveUp=1;env.end(0);return}/* KIT §13.8 kit ✕ «Quay lại» on the rules screen: given up before «Sẵn sàng» = the caller's own 0/10 result, no board, no clock */
+ guard=setTimeout(()=>env.end(0),97500);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};KG82.quit=()=>{KG82.gaveUp=1;env.end(0)};/* §13.8: given up during play */
  /* the board paintings load first (≤2.5 s), then the game starts */
  kg82Preload(kind).then(()=>{if(dead||done)return;try{stop=KG82_ENG[KG82_KIND[kind].e](box,env)}catch(e){console.error(e);env.end(5)}})}
 function kg82Word(raw){return mgWord(raw)}/* thresholds in BAL.mgTier.word (jmgt) */
 function kg82Norm(st){if(!st)return[];if(Array.isArray(st))return st.filter(x=>x&&x[1]);return Object.entries(st).filter(([k,v])=>v&&typeof v==="number").map(([k,v])=>[(typeof NAMES!=="undefined"&&NAMES[k])||k,v])}
+
+/* =============== KIT §13.8 · THE WAY BACK «Quay lại» on EVERY mini-game screen (owner 20/11 ~04:45Z, review/mg-back) ===============
+   Owner: "thêm cho tôi một cái option là cái chữ X hoặc là chữ go back, quay lại, để mà khi mà tôi vào một cái game mà tôi không có muốn thì tôi có thể
+   go back để tôi ra tôi chọn cái game lại." ONE kit ✕ (jk4 kitXHTML, label «Quay lại») in the header of the shared game frame (kg82Open), on the rules
+   screen, during «Hướng dẫn», during play and on the result screen. What it does, in this order:
+     1. KG82.back (a caller with nothing at stake, set right after kg82Open — Thử tay: back to the kind list, the kind not saved): the game closes, back() runs;
+        KG82.backAsk = the confirm lines asked first while a board is live (Thử tay: the rounds played of this kind are not kept);
+     2. a result screen (jk4 kitOvBtn: #kg82ok / #kg92ok): presses it, the caller's own result applies (unchanged 32.10 behaviour); a screen whose
+        only way on is another button (jsgame «Ra tay», jtoil result, Nghiệm thân blood scene) names it in KG82.xdo — the ✕ runs it, no confirm;
+     3. otherwise = GIVE UP (laws 2/3: leaving is never a free escape from what the caller charged or staked): a kit confirm «Bỏ cuộc?», then
+        the caller's OWN lose path with 0/10 — during play KG82.quit() (kg82Play / sgEng / j92 / jroute / jtoil end their run with 0), on the rules
+        screen the «Sẵn sàng» button runs with KG82.giveUp set (the run ends at once with 0, no board, no clock); «Hướng dẫn» is put back first.
+   KG82.quitAsk = the caller's own confirm lines when its lose result is not «0/10» (jtoil: Để mộc). Callers never draw their own back button;
+   kg82Close clears back / backAsk / quit / quitAsk / xdo. Test: node dev/test/mg-back.js. */
+function kg82BackX(d){try{if(!d||typeof kitXHTML!=="function"||d.querySelector(".kit-x[data-kitx=kgback]"))return;const h=d.querySelector(".kph");
+ const html=kitXHTML('data-kitx="kgback"',"Quay lại");if(h){if(getComputedStyle(h).position==="static")h.style.position="relative";h.insertAdjacentHTML("beforeend",html)}
+ else{d.insertAdjacentHTML("afterbegin",html);d.firstElementChild.classList.add("kxabs")}
+ d.querySelector(".kit-x[data-kitx=kgback]").addEventListener("click",e=>{e.stopPropagation();e.preventDefault();kg82Back()})}catch(e){console.error("kg82BackX",e)}}
+/* the confirm is the kit's (j79 kitConfirm on #modal); body.kg82cf (showModal rewrites #modal's own class) lifts it over the game layer #ov while it is open */
+function kg82Ask(lines,yes,onYes){if(typeof kitConfirm!=="function"){onYes();return}const B=document.body.classList,off=()=>B.remove("kg82cf");
+ B.add("kg82cf");kitConfirm({title:yes==="Bỏ cuộc"?"Bỏ cuộc?":"Quay lại?",lines,yes,no:"Chơi tiếp",onYes:()=>{off();onYes()},onNo:off})}
+function kg82Back(){if(!kg82El())return;
+ if(typeof KG82.back==="function"){const f=KG82.back,live=KG82.phase==="play"&&!KG82.tut&&KG82.run;
+  const go=()=>{kg82Close();try{f()}catch(e){console.error(e)}};if(live&&KG82.backAsk)kg82Ask(KG82.backAsk,"Quay lại",go);else go();return}
+ const ok=typeof kitOvBtn==="function"?kitOvBtn():null;if(ok){ok.click();return}
+ if(typeof KG82.xdo==="function"){const f=KG82.xdo;f();return}
+ const live=KG82.phase==="play"&&!KG82.tut&&typeof KG82.quit==="function";
+ kg82Ask(KG82.quitAsk||[live?"Ván đang chơi dừng lại, tính như thua: 0/10 phần.":"Chưa chơi mà rời đi thì tính như bỏ cuộc: 0/10 phần.","Thưởng phạt theo đúng luật của việc này."],"Bỏ cuộc",kg82GiveUp)}
+function kg82GiveUp(){const tb=document.getElementById("kgtback");if(KG82.tut&&tb)tb.click();
+ if(KG82.phase==="play"&&typeof KG82.quit==="function"){const q=KG82.quit;KG82.quit=null;q();return}
+ const box=kg82Box(),go=box&&(box.querySelector(".kgr-go")||(KG82.ready&&box.querySelector(KG82.ready.go)));
+ if(go){KG82.giveUp=1;go.click();KG82.giveUp=0;return}
+ if(typeof KG82.quit==="function"){const q=KG82.quit;KG82.quit=null;q();return}
+ console.warn("kg82GiveUp: no lose path on this screen")}
+window.kg82Back=kg82Back;window.kg82GiveUp=kg82GiveUp;
 
 /* =============== startContest =============== */
 function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.onDone(null);return}
@@ -494,6 +530,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 /* layout only (colours and chrome come from the kit) */
 (function(){const st=document.createElement("style");st.id="kg82-css";st.textContent=`
 #ov .mg.kg82{width:100%;max-width:560px}
+body.kg82cf #modal{z-index:40}
 .kg82cv{display:block;margin:0 auto;touch-action:none;user-select:none;-webkit-user-select:none;border-radius:var(--k-rad,8px);max-width:100%}
 .kg82act{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 4px}.kg82act button{flex:1 1 200px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .kg82act button small{display:block;font-weight:400;font-family:var(--body);font-size:.72rem;opacity:.9}
