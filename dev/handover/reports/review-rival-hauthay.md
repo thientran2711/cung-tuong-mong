@@ -35,3 +35,7 @@ dev/test/one-core-baseline.json is byte-identical on review/rival-hauthay and re
 
 ## CO-OP LAND GATE
 coop-e2e PASS 68/68 + feature co-op check coop-hauthay 12/12 on both seats (2 players) + solo rival-hauthay 11/11 — to be re-run on the final merge for LAND READY.
+
+## For the final merge (D #12, 21/11 ~00:35Z)
+- G1 root cause per chain #5: nf-r3 73a09248 carries the list of LIVE 983a9436 (4212); LIVE 548dcd0d shrank it to 3930; fixed by nf-r3's LIVE merge fc480ca8 (guard 3740 ≤ 3930). This branch adds 0 (verified: baseline file byte-identical to its base).
+- MAIN ROOT-82 UNPARK: night-final-r3 runs the NEW night in co-op on both seats (flip choice + giữ chân). At the final merge re-run coop-hauthay against the unparked co-op night (add a case if needed: host NPC hầu-thay must look the same on the guest under the new flow), plus all gates above. Worker DuRCG31a archived → FAIL needing code: tell D, D opens a fixer.
