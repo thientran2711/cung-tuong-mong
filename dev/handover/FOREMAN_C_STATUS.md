@@ -553,3 +553,4 @@ NEWACCT-ROOT ~16:15Z: MAID7 round 3 DONE 9c519901 (810 cr), sheet sent Lượt 1
 NEWACCT-ROOT HANDOVER ~16:20Z: depth 0, ctx 41 % (START ~8 % + 25 % passed). TAKEOVER_FOREMAN_C_NEWACCT2.md written; opening child successor.
 NEWACCT-ROOT ~16:22Z: successor #2 session_01D3E3NZjsQSKDvCk39HnE5m opened; 5 workers told to report there. NEWACCT-ROOT stops.
 NEWACCT-ROOT ~16:25Z: OWNER: chưởng sự sleeves = nhất đẳng width, no narrow sleeves (rule added, MAID8 told). Successor #2 please confirm with MAID8.
+NEWACCT-ROOT ~16:30Z: forwarded to #2: ITEMFIX DONE 68f27adf (LEN open s31 t4/s33 t6), CDN-T78 DONE 61235f12 (150 on CDN img/fig-cut/rank8/), nhất đẳng v3 needs redo per K24 (waiting owner yes).
