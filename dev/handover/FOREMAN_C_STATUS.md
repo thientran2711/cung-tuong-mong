@@ -242,3 +242,4 @@ ROOT-64 Lượt 957 ~03:05Z: OWNER "Rồi hình phòng vẽ tới đâu rồi? N
 ROOT-64 Lượt 958 ~03:08Z: OWNER verbatim "Thì mày vẽ hình đi, trời ơi, tao chờ nãy giờ." → PR18 GO room 30 sample (1 gen ~135 cr). Next Lượt 959.
 ROOT-64 Lượt 959 ~03:10Z: F3 s44 Quyến rũ (gen kse0GTu16B, cut DoOgxICpcl, 138 cr, F3 total 414) LOOKED + sent; fault: red drop earrings not in prompt. Next Lượt 960.
 ROOT-64 Lượt 960–961 ~03:15Z: season-colour-classes v2 (9683ce4, Hạ cam/vàng; roots X28 H9 T8 Đ41) LOOKED + sent 960 (scaled to 8000px). OWNER: "Ok, quyến rũ mới ok." → s44 OK, F3 switches. OWNER: room 30 composite with 2 ĐẬM + 2 CŨ girls in it → PR18 (0 cr) after the gen. Next Lượt 962.
+ROOT-64 Lượt 962 ~03:17Z: OWNER verbatim "bỏ những cái tông màu nâu, màu già, tức là cái màu của người già ra khỏi cái bảng màu." → P3 removes brown/old-person tones, youthful replacements same depth. Next Lượt 963.
