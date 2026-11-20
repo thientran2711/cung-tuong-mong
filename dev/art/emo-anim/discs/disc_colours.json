@@ -1,0 +1,233 @@
+{
+ "_about": "A26 seal disc colour codes (owner 20/11: one code per emotion, the same for every person). Built by SEAL8 from the measured Thái hậu discs (approved set) except hanghai = Hoàng hậu coral and act-ghen = PROPOSED (needs OK). Builders + seal_gate read this file. Measured values: measured_20-11.json (disc_measure.py).",
+ "colours": {
+  "vui": {
+   "hex": "#FCC750",
+   "vi": "vàng nắng ấm",
+   "en": "warm sunny yellow",
+   "source": "th"
+  },
+  "buon": {
+   "hex": "#9CB3C7",
+   "vi": "xanh lam nhạt",
+   "en": "pale blue",
+   "source": "th"
+  },
+  "so": {
+   "hex": "#B97BB9",
+   "vi": "tím oải hương",
+   "en": "lavender purple",
+   "source": "th"
+  },
+  "an": {
+   "hex": "#A69690",
+   "vi": "xám sương",
+   "en": "misty grey",
+   "source": "th"
+  },
+  "binh": {
+   "hex": "#A0A56E",
+   "vi": "xanh lá xô thơm",
+   "en": "soft sage green",
+   "source": "th"
+  },
+  "ghen": {
+   "hex": "#C3B23F",
+   "vi": "vàng chanh ngả xanh",
+   "en": "yellow-green",
+   "source": "th"
+  },
+  "gian": {
+   "hex": "#E35F61",
+   "vi": "đỏ giận",
+   "en": "red",
+   "source": "th"
+  },
+  "lo": {
+   "hex": "#FA7F37",
+   "vi": "cam",
+   "en": "orange",
+   "source": "th"
+  },
+  "muu": {
+   "hex": "#208B77",
+   "vi": "xanh mòng két",
+   "en": "teal",
+   "source": "th"
+  },
+  "tutin": {
+   "hex": "#F09427",
+   "vi": "vàng hổ phách",
+   "en": "warm amber-gold",
+   "source": "th"
+  },
+  "hanghai": {
+   "hex": "#F77156",
+   "vi": "đỏ san hô tươi",
+   "en": "bright coral",
+   "source": "hh (th still is the old spring green)"
+  },
+  "dau": {
+   "hex": "#334987",
+   "vi": "xanh lam đậm",
+   "en": "deep blue",
+   "source": "th"
+  },
+  "tinhtu": {
+   "hex": "#EA8B8D",
+   "vi": "hồng phấn",
+   "en": "soft rose pink",
+   "source": "th"
+  },
+  "chuyentam": {
+   "hex": "#F8D1A5",
+   "vi": "kem be",
+   "en": "warm cream-beige",
+   "source": "th"
+  },
+  "hungkhoi": {
+   "hex": "#DA507A",
+   "vi": "hồng tím phong lan",
+   "en": "warm orchid magenta-pink",
+   "source": "th"
+  },
+  "tinhnghich": {
+   "hex": "#FAA570",
+   "vi": "cam đào",
+   "en": "warm peach-apricot",
+   "source": "th"
+  },
+  "hothen": {
+   "hex": "#D3656F",
+   "vi": "hồng tím trầm (mauve)",
+   "en": "dusky mauve-pink",
+   "source": "th"
+  },
+  "chan": {
+   "hex": "#A98673",
+   "vi": "nâu xám",
+   "en": "dull grey-taupe",
+   "source": "th"
+  },
+  "khochiu": {
+   "hex": "#BC8C46",
+   "vi": "vàng mù tạt",
+   "en": "murky mustard-khaki",
+   "source": "th"
+  },
+  "choang": {
+   "hex": "#707289",
+   "vi": "xám xanh đá",
+   "en": "dusky slate grey-blue",
+   "source": "th"
+  },
+  "hon": {
+   "hex": "#954856",
+   "vi": "đỏ mận rượu",
+   "en": "dusty plum-wine",
+   "source": "th"
+  },
+  "act-buon": {
+   "hex": "#94B7D9",
+   "vi": "xanh lam nhạt (act)",
+   "en": "light blue",
+   "source": "th"
+  },
+  "act-chan": {
+   "hex": "#9B715E",
+   "vi": "nâu xám (act)",
+   "en": "dull grey-taupe brown",
+   "source": "th"
+  },
+  "act-choang": {
+   "hex": "#696F7C",
+   "vi": "xám xanh đá (act)",
+   "en": "dusky slate grey-blue",
+   "source": "th"
+  },
+  "act-chuyentam": {
+   "hex": "#F8D0A3",
+   "vi": "kem be giấy (act)",
+   "en": "warm soft cream-beige parchment",
+   "source": "th"
+  },
+  "act-ghen": {
+   "hex": "#1E6B5C",
+   "vi": "xanh ngọc bích đậm (act) — PROPOSED, th still is amber",
+   "en": "deep jade-teal",
+   "source": "proposed (th-act-ghen still = #E7903B amber, wrong)"
+  },
+  "act-gian": {
+   "hex": "#A41717",
+   "vi": "đỏ đậm (act)",
+   "en": "strong red",
+   "source": "th"
+  },
+  "act-hanghai": {
+   "hex": "#F87056",
+   "vi": "đỏ san hô (act)",
+   "en": "bright coral",
+   "source": "th"
+  },
+  "act-hon": {
+   "hex": "#933E54",
+   "vi": "đỏ mận rượu (act)",
+   "en": "dusty plum-wine",
+   "source": "th"
+  },
+  "act-hothen": {
+   "hex": "#C77375",
+   "vi": "hồng mauve (act)",
+   "en": "dusky muted mauve-pink",
+   "source": "th"
+  },
+  "act-hungkhoi": {
+   "hex": "#D36175",
+   "vi": "hồng phong lan (act)",
+   "en": "warm orchid magenta-pink",
+   "source": "th"
+  },
+  "act-khochiu": {
+   "hex": "#B2883C",
+   "vi": "vàng mù tạt (act)",
+   "en": "murky mustard-khaki",
+   "source": "th"
+  },
+  "act-lo": {
+   "hex": "#DA6114",
+   "vi": "cam hổ phách chiều (act)",
+   "en": "deep evening orange-amber",
+   "source": "th"
+  },
+  "act-so": {
+   "hex": "#9F5582",
+   "vi": "tím lavender đậm (act)",
+   "en": "dark lavender purple",
+   "source": "th"
+  },
+  "act-tinhnghich": {
+   "hex": "#F9A270",
+   "vi": "cam đào (act)",
+   "en": "warm peach-apricot",
+   "source": "th"
+  },
+  "act-tinhtu": {
+   "hex": "#EB8B8D",
+   "vi": "hồng phấn (act)",
+   "en": "soft rose pink",
+   "source": "th"
+  },
+  "act-tutin": {
+   "hex": "#D87B1A",
+   "vi": "vàng hổ phách đậm (act)",
+   "en": "warm deep amber-gold ochre",
+   "source": "th"
+  },
+  "act-vui": {
+   "hex": "#FCC74C",
+   "vi": "vàng ấm tươi (act)",
+   "en": "bright warm yellow",
+   "source": "th"
+  }
+ }
+}

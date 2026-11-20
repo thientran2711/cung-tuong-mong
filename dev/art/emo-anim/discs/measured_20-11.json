@@ -1,0 +1,209 @@
+{
+"an": {
+"bg": "#AE9793",
+"bt": "#A9A39C",
+"hh": "#A79EA0",
+"ht": "#9C9293",
+"htg": "#AAA0A7",
+"mm": "#9D9290",
+"tg": "#A0A09D",
+"th": "#A69690",
+"tv": "#A19592"
+},
+"binh": {
+"bg": "#B0AF7E",
+"bt": "#ACAB74",
+"hh": "#9C9A69",
+"ht": "#A0A075",
+"htg": "#A1A170",
+"mm": "#A8A87B",
+"tg": "#A1A177",
+"th": "#A0A56E",
+"tv": "#A1A075"
+},
+"buon": {
+"bg": "#A5C9E9",
+"bt": "#A2BCCC",
+"hh": "#9BB6D3",
+"ht": "#97BED6",
+"htg": "#86B6D7",
+"mm": "#A1C1D0",
+"tg": "#97C2E9",
+"th": "#9CB3C7",
+"tv": "#8FBAE9"
+},
+"ghen": {
+"bg": "#D5C243",
+"bt": "#D2C43E",
+"hh": "#CDBF3D",
+"ht": "#C1BC3E",
+"htg": "#CBCB38",
+"mm": "#D1CE3B",
+"tg": "#C5C04A",
+"th": "#C3B23F",
+"tv": "#C8C23A"
+},
+"gian": {
+"bg": "#EE6767",
+"bt": "#F06765",
+"hh": "#E86161",
+"ht": "#E75F62",
+"htg": "#EC6465",
+"mm": "#EE696E",
+"pt": "#E9666B",
+"ptl": "#E16368",
+"tg": "#E66865",
+"th": "#E35F61",
+"tv": "#EB5E62"
+},
+"hanghai": {
+"bg": "#FC7261",
+"bt": "#144FC0",
+"hh": "#F77156",
+"ht": "#FA6B53",
+"htg": "#FD685F",
+"mm": "#1B45DB",
+"tg": "#FD6B50",
+"th": "#8DC423",
+"tv": "#FD6252"
+},
+"lo": {
+"bg": "#FC802B",
+"bt": "#FD8327",
+"hh": "#F77118",
+"ht": "#F77E34",
+"htg": "#FB7920",
+"mm": "#F78B4B",
+"tg": "#FB802C",
+"th": "#FA7F37",
+"tv": "#F98432"
+},
+"muu": {
+"bg": "#3D8F8F",
+"bt": "#3C9291",
+"hh": "#1D7D7D",
+"ht": "#326A6C",
+"htg": "#247878",
+"mm": "#328A89",
+"tg": "#3C8787",
+"th": "#208B77",
+"tv": "#2A7A7A"
+},
+"so": {
+"bg": "#C681C4",
+"bt": "#C37EC5",
+"hh": "#B676B8",
+"ht": "#B17FB5",
+"htg": "#B277BC",
+"mm": "#BF7ED6",
+"tg": "#BB76C0",
+"th": "#B97BB9",
+"tv": "#C67FD0"
+},
+"tutin": {
+"bg": "#F59E3B",
+"bt": "#F7A635",
+"hh": "#F2962A",
+"ht": "#E09636",
+"htg": "#E9A540",
+"mm": "#EDA84B",
+"tg": "#F5A034",
+"th": "#F09427",
+"tv": "#F8A030"
+},
+"vui": {
+"bg": "#FCC956",
+"bt": "#FECE43",
+"hh": "#FAC44C",
+"ht": "#FBC941",
+"htg": "#FFCF3B",
+"mm": "#FCD250",
+"tg": "#FEC83B",
+"th": "#FCC750",
+"tv": "#FECE40"
+},
+"act-buon": {
+"th": "#94B7D9"
+},
+"act-chan": {
+"th": "#9B715E"
+},
+"act-choang": {
+"th": "#696F7C"
+},
+"act-chuyentam": {
+"th": "#F8D0A3"
+},
+"act-ghen": {
+"th": "#E7903B"
+},
+"act-gian": {
+"th": "#A41717"
+},
+"act-hanghai": {
+"th": "#F87056"
+},
+"act-hon": {
+"th": "#933E54"
+},
+"act-hothen": {
+"th": "#C77375"
+},
+"act-hungkhoi": {
+"th": "#D36175"
+},
+"act-khochiu": {
+"th": "#B2883C"
+},
+"act-lo": {
+"th": "#DA6114"
+},
+"act-so": {
+"th": "#9F5582"
+},
+"act-tinhnghich": {
+"th": "#F9A270"
+},
+"act-tinhtu": {
+"th": "#EB8B8D"
+},
+"act-tutin": {
+"th": "#D87B1A"
+},
+"act-vui": {
+"th": "#FCC74C"
+},
+"chan": {
+"th": "#A98673"
+},
+"choang": {
+"th": "#707289"
+},
+"chuyentam": {
+"th": "#F8D1A5"
+},
+"dau": {
+"th": "#334987"
+},
+"dau2": {
+"th": "#37437C"
+},
+"hon": {
+"th": "#954856"
+},
+"hothen": {
+"th": "#D3656F"
+},
+"hungkhoi": {
+"th": "#DA507A"
+},
+"khochiu": {
+"th": "#BC8C46"
+},
+"tinhnghich": {
+"th": "#FAA570"
+},
+"tinhtu": {
+"th": "#EA8B8D"
+}
+}

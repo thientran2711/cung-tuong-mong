@@ -54,3 +54,29 @@ Looked, NOT broken (stay on the fault list): htg-an BACK (gradual shrink), hh-mu
 CDN …/img/_review/emo-anim-groups/: <g>-ghen-out/.webp/-back, <g>-ghen-frames.jpg, <g>-set-preview.mp4 for ht htg tg tv bt mm (rebuilt),
 male-ghen-preview.mp4 (5 groups), seal-fix-preview.mp4 (mm-muu th-chan th-muu ht-gian htg-an); th-chan/th-muu/ht-gian/htg-an/mm-muu frames.jpg.
 Old files kept in scratchpad only. Credits mine: 5 × 135 + 21 × 940 = 20 415. Balance 93 226 after (shared pool, 141 189 before).
+
+## (4) A — DISC COLOUR CODES (A26) 20/11 ~01:25Z — 0 credits
+Table (builders + seal_gate read it): dev/art/emo-anim/discs/disc_colours.json — key → {hex, vi, en (prompt words), source}.
+Official = the MEASURED Thái hậu disc of each key (approved set), except hanghai = Hoàng hậu coral #F77156 (th still is the old spring
+green) and act-ghen = PROPOSED #1E6B5C deep jade-teal (th-act-ghen still is AMBER #E7903B — prompt said jade-teal; needs OK; note it is
+close to mưu teal #208B77).
+Tools: discs/disc_measure.py (disc hex of a still: dominant colour of the ring 0.78–0.88 R), discs/measured_20-11.json (129 stills),
+discs/audit_20-11.json (ΔE CIE76 vs official: >15 MISMATCH, 8–15 slight), discs/disc_sheet.py → CDN …/emo-anim-groups/disc-audit-sheet.jpg
+(one row per emotion: official swatch + every group's still + measured swatch + ΔE).
+MISMATCH (hue wrong): hanghai bt #144FC0 cobalt, mm #1B45DB cobalt, th #8DC423 spring green; act-ghen th amber.
+MISMATCH (same hue, shade off ΔE 15–22): muu ht #326A6C (dark), htg, tv; ghen mm, htg (lighter/greener); buon tv (brighter); tutin mm.
+slight (ΔE 8–15): 23 — mostly muu (all groups bluer-teal than th) + vui/tutin/lo shades. List in audit_20-11.json.
+Clips' B frames not measured (figure covers the ring); BACK ends on the still, OUT starts on it.
+
+## (5) B — FIX PLAN (NOT APPLIED — waits for ROOT-60)
+Digital tool: discs/disc_recolour.py SRC DST KEY --measured HEX [--tol hue°]: hue mask (± tol° of the measured disc, chroma/lightness
+gated), keeps only the big connected region (= the disc), shifts it in Lab to the official colour keeping the brush texture.
+Demo (scratchpad, nothing replaced): CDN …/disc-recolour-demo.jpg — top: before/after bt-hanghai, mm-hanghai, th-act-ghen, th-hanghai;
+bottom: bt-hanghai LOOP frames recoloured.
+- WORKS: hanghai bt / mm (cobalt → coral; blue/teal collars untouched), th (green → coral), and bt LOOP frames (small blue rim bits left
+  under the arms in a few frames → raise tol or accept). → apply to still + out/loop/back webp of bt-, mm-, th-hanghai: 0 cr.
+- FAILS: th-act-ghen amber → jade: the gold crown, fan and robe share the amber hue and turn teal. → REDRAW needed: A + B + 3 clips
+  = 3 090 cr (after the owner OKs the act-ghen colour; jade-teal vs mưu teal too close?).
+- Shade mismatches (same hue): digital with tight tol possible but risky where the robe shares the hue (tutin/vui amber-yellow vs
+  royal yellow robes); recommend: muu ht/htg/tv + ghen mm/htg + buon tv digital (review each), tutin mm leave. 0 cr.
+Also tell the builders: prompts should carry the hex from disc_colours.json (e.g. "yellow-green (#C3B23F)") — not done (A18: needs OK).
