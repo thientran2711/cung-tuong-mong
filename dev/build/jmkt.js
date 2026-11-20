@@ -163,7 +163,7 @@ function tsMkSit(th,m,done){const w=tsMkWant(th,m);if(toilToday(S)){done();retur
   S.toilette={day:toilWk()*10,wk:toilWk(),score:R.score,makeup:true,style:d.style,dv:d.v,F:2,occ:["fest"],look:R.look,slip:R.slip,parts:R.parts,col,auto:1};if(HD)S.toilette.hd=HD;setTimeout(done,0);return}
  KG82.ctx="hoc";const d=kg82Open({art:"Điểm trang",title:`Trước gương đồng · ${TS_THEME[th].n}`,how:`Trước khi ra mắt: chọn son phấn hợp đề, rồi kẻ mày, đánh phấn, chấm son, dán hoa điền nếu có. Không có đường chỉ: tay vụng thì mặt vụng.`});
  if(!d){setTimeout(done,0);return}["chai-bg","chai-brow","chai-puff","chai-rouge"].forEach(n=>{try{kg82Img(n)}catch(e){}});try{KIT_VEIL.load()}catch(e){}
- TOIL.st={occ,F:2,parts:{},dv:null,start:wdCur(S),hoi:{th,want:w,key:w.key}};TOIL.after=done;try{toilMkPre()}catch(e){}toilHUD({score:"–",round:"2/4",time:"không hạn"});toilColUI()}
+ TOIL.st={occ,F:2,parts:{},dv:null,start:wdCur(S),hoi:{th,want:w,key:w.key}};TOIL.after=done;try{toilMkPre()}catch(e){}try{toilBackX()}catch(e){}toilHUD({score:"–",round:"2/4",time:"không hạn"});toilColUI()}
 /* leaving the mirror any way (Đã hiểu after the reveal, ✕, Esc) hands the contest back: exactly once */
 (function(){if(typeof kg82Close!=="function")return;const c0=kg82Close;kg82Close=function(){const a=TOIL.after;TOIL.after=null;const r=c0.apply(this,arguments);if(a)setTimeout(a,0);return r}})();
 /* contest end: the want is told to everyone present (she remembers it for this đề and season: past contests) */
