@@ -1,47 +1,68 @@
-# TANG1 — Plan B (Option 2): a NEW Tang-style outfit system for t4 Tần / t5 Phi / t6 Quý phi (PLAN ONLY, no gens)
+# TANG1 — Plan B v2 (Option 2): Tang outfit for t4 Tần / t5 Phi / t6 Quý phi, rank read from ONE BIG BLOCK (PLAN ONLY, no gens)
 
-Owner ask (20/11 ~17:45Z): "một cái sự lựa chọn khác, làm sao để phân biệt được tầng phi và quý phi … mày đưa tao cái kế hoạch dự án trước."
-Option 1 (Job A) keeps the old rank collar/cape and only opens the neckline. Option 2 = rank is shown by **Tang features**, not by the old capelet / cloud collar / two capes.
+v1 (shawl length / half-sleeve banbi / train / huadian) is WITHDRAWN. The owner rejected it on 20/11 (relayed by Foreman C #2):
+- no shawl-length ladder (PHI BẠCH already exists), no short-sleeve outer jacket, no train (skirt length stays as now);
+- embroidery/gold stays as the current outfits; no added forehead mark;
+- a garment-LENGTH ladder is only for the 3 low ranks;
+- rank must show through ONE BIG BLOCK that tells the rank at a glance, the way the current collar/cape does ("nhìn vô cái cổ áo thôi là biết ngay … một cái mảng to").
 
-## 1. Shared base (same for t4, t5, t6 — so they read as one family)
-- Tang high-waisted skirt (qixiong ruqun) tied ABOVE the bust as a strapless tube-top inner layer, ribbon bow at the chest; bare neck + collarbones; modest, no cleavage.
-- Light sheer outer jacket / robe with a wide open low neckline, long wide sleeves to the ankles (sleeve law kept).
-- Her season pair (B20): main = robe/jacket, secondary = skirt/chest-wrap + pibo shawl (PHI BẠCH sentence kept, it already IS a Tang pibo).
-- Hair all up (rank law), ONE hair flower (size ladder kept), no earrings, nothing on the forehead (current master lines kept; see §4 about huadian).
-- Everything outside the outfit (face, master block, pose/angle tables, held item) unchanged → store gate keeps passing except the swapped outfit sentence.
+## 0. Shared base (identical for t4, t5, t6)
+- Tang high-waisted skirt tied above the bust (tube-top inner layer) + light sheer outer robe with an open low neckline + long wide sleeves to the ankles (the sleeve law is kept). This is the Job A neckline sentence.
+- Skirt length as now, no train. Embroidery density and gold as the current t4/t5/t6 outfits (G22 large flowers at t4 kept). PHI BẠCH kept as now. Season colour pair (B20).
+- Forehead and earrings: the master lines are unchanged.
+- Hair: Tang styles, ALL hair up (rank law), ONE fresh flower (the existing size ladder is kept). The worker decides the hair; the owner said not to ask:
+  - t4 Tần: two neat looped buns on top (song hoàn kế), 2–3 gold pins;
+  - t5 Phi: one high single bun (cao kế), gold comb + bu yao tassel pins;
+  - t6 Quý phi: tall upswept bun (kinh hồng / high Tang court bun) with a gold crown ornament and long gold bu yao.
 
-## 2. The 3-step ladder (each step adds ONE clearly visible thing + more gold)
-| Feature | t4 Tần | t5 Phi | t6 Quý phi |
+The hair also rises with rank, but it is a support only. The big block below carries the rank.
+
+## A. RECOMMENDED: the Tang chest band (hezi 诃子) is the big block
+The wide band at the top of the high skirt, straight across the chest just under the open neckline. It sits exactly where the eye looks first, where the old collar was. It is a large flat area, so it reads at game size.
+
+| | t4 Tần | t5 Phi | t6 Quý phi |
 |---|---|---|---|
-| Pibo shawl (phi bạch) | short, narrow, plain sheer gauze, over the arms only | long, wider, gauze with a gold-printed hem, trails to the knees | longest + widest, gold-thread embroidered gauze, trails to the floor behind her |
-| Banbi half-sleeve jacket over the jacket | none | short banbi in the secondary colour with a gold brocade edge | banbi in brocade, pearl-edged, small embroidered medallions |
-| Skirt | floor length, 6 panels, plain with an embroidered hem border | floor length + short train, 8 panels, embroidered border + scattered flowers | longer train, 12 panels, dense embroidery to the knee + royal-yellow panel (as now) |
-| Chest-wrap edge / waist ribbon | one gold-embroidered band, one ribbon bow | wider band with small flowers, double ribbon + one jade pendant | richest band with seed pearls, long double ribbons + two jade pendants (as now) |
-| Embroidery density / gold | a few LARGE flowers (G22 kept) | richly embroidered, peonies + small birds (as now) | gold-thread embroidery over much of the robe (as now) |
-| Hair ornaments | 2 gold hairpins + small bu yao | 4 pins + a LARGER headdress with tassels (as now) | BIG ornate headdress, many tassels + pearls (as now) |
-| Jewellery | jade bangle | gold necklace | gold-and-jade necklace + pearl strands (as now) |
+| Band height | about one palm high | about one and a half palms | deepest: from the bust line to just below the collarbones' shadow |
+| Material / colour | plain secondary-colour silk | main-colour silk FULLY covered in gold-thread flowers | heavy gold brocade, royal-yellow ground (as the current t6 yellow amount) |
+| Edge | one embroidered border line top + bottom | double gold border | pearl edging top + bottom |
+| Centre | a simple ribbon bow | a large jewelled flower-shaped centre ornament (gold + jade) + bow | a big jewelled medallion + short hanging pearl strands across the band |
 
-At a glance: **shawl length + banbi + train** = the three things a player sees first at game size; t4 has none of banbi/train, t5 has a short train + simple banbi, t6 has the long train + jewelled banbi.
+Glance read: plain band → gold-flower band with jewel → gold-yellow band with pearls. Three clearly different blocks of the same shape.
+Rank cape/collar: removed for t4–t6 in this option, so the band is never covered.
+Prompt words: about 300 characters per rank. They replace the old capelet / cloud-collar / two-cape words, so the length goes DOWN (t4 is no longer at the 10 000 limit).
 
-## 3. Fit with ranks below and above
-- t1–t3 (Đáp ứng / Thường tại / Quý nhân): stay as they are (square neck / crossed collar per G17/G21/G25). No pibo beyond the current PHI BẠCH, no banbi, no train → Tần is the first rank with the "Tang look", so t4 already reads higher.
-- t7 Hoàng quý phi / t8 Hoàng hậu: keep their crossed collar + jewelled cloud-collar cape at all seasons (G25: t6–t8 always closed). NOTE the conflict: G25 says t6 always wears its current closed collar; Option 2 (and Job A) give t6 an open Tang neck. The owner must confirm t6 is now in the open-neck group for xuân/hạ.
-- Winter (WINTER1 fur): the identical fur sentence can go on the jacket edge/hem; for thu/đông t4–t6 would need either the crossed-collar version or a closed Tang jacket — owner decision.
+## B. Alternative 1: Tang jewelled collar necklace (yingluo 瓔珞) as the big block
+A large jewelled necklace lying on the open neck and collarbones. It sits in the same spot as the old collar, so it is the closest to the owner's "nhìn vô cổ áo là biết".
+- t4 Tần: a slim gold neck ring with ONE jade pendant.
+- t5 Phi: a wide two-tier gold-and-jade collar necklace covering the collarbones, small pendants.
+- t6 Quý phi: a large three-tier jewelled collar spreading to the shoulders, pearl strands draping onto the chest band.
 
-## 4. Open questions for the owner
-1. Huadian (forehead flower mark) is the strongest Tang sign, but the master lines forbid any forehead mark ("NOTHING on the forehead"). Keep forbidden (default) or allow it only for t4–t6 Tang outfits?
-2. Is t6 Quý phi now open-necked in spring/summer (changes G25)?
-3. Does the Tang system replace the old t4–t6 outfits for xuân/hạ only (old outfits = thu/đông), or become a skin?
+Risk: jewels can blur at small size, and t7 (HQP) is defined by "more jewels" (G12), so t6 must stay clearly below t7. The hezi band (A) avoids that clash.
 
-## 5. Cost of a later test
-3 gens (s62 a18 xuân, t4/t5/t6, gpt-2-6 2k, one try each) × 135 = **405 credits**. Prompt work: new outfit sentence per rank in a test copy (builder untouched), gate --scope tp4/5/6; t4 needs ~400 chars trimmed (prompt at the 10 000 limit; 2-reference prompts (t6) must stay under ~9 760 because the gen tool counts ~230 extra chars).
+## C. Alternative 2: a Tang shoulder wrap as the big block
+A short gauze shoulder wrap over the robe (a Tang variant of today's capes).
+- t4: one round plain wrap.
+- t5: a petal-edged wrap embroidered in gold.
+- t6: two layered pearl-edged wraps.
+
+This reads well, because it is the current system in Tang cloth. But it is close to Option 1 (Job A), and it covers the open neck again. It is listed only for completeness.
+
+## Fit with the other ranks
+- t1–t3 keep their current outfits; the low-rank length ladder may be used there later.
+- t7/t8 keep their crossed collar + jewelled cloud-collar cape.
+- Owner decision needed: G25 says t6 always wears its closed collar, but this option gives t6 an open Tang neck in xuân/hạ.
+
+## Cost of a later test
+3 gens (s62 a18 xuân, t4/t5/t6, gpt-2-6 2k, one try each) × 135 = 405 credits per option. Recommended: test A only first (405 cr).
 
 ## Tóm tắt cho chủ (tiếng Việt)
-- Phương án 2: bỏ áo choàng/cổ mây cũ ở Tần–Phi–Quý phi, phân bậc bằng chi tiết thời Đường.
-- Chung cả 3 bậc: váy cao ngực buộc trên ngực (yếm ống), áo ngoài mỏng cổ hở, tay áo dài tới mắt cá, khăn phi bạch.
-- Tần: phi bạch ngắn, không áo bán tí, váy 6 vạt không đuôi, ít hoa lớn, 2 trâm.
-- Phi: phi bạch dài tới gối, áo bán tí ngắn viền gấm, váy 8 vạt có đuôi ngắn, thêu nhiều, mũ vàng lớn.
-- Quý phi: phi bạch thêu vàng dài chạm đất, áo bán tí gấm viền ngọc trai, váy 12 vạt đuôi dài + mảng vàng hoàng gia, mũ lớn nhiều tua.
-- Nhìn nhanh: độ dài khăn + áo bán tí + đuôi váy là 3 dấu hiệu phân bậc.
-- Cần chủ quyết: có cho vẽ hoa điền trên trán không (luật hiện tại cấm); Quý phi có được mặc cổ hở mùa xuân/hạ không (luật G25 đang nói luôn cổ chéo).
-- Thử sau: 3 hình × 135 = 405 credit.
+1. Bỏ hết ý cũ (độ dài khăn, áo tay lửng, tà váy, hoa trán). Váy dài như hiện tại, thêu/chỉ vàng như hiện tại.
+2. Chung 3 bậc: váy cao ngực kiểu Đường, áo ngoài mỏng cổ hở, tay dài; tóc búi cao kiểu Đường + 1 bông hoa.
+3. Tóc: Tần búi đôi, Phi búi cao một, Quý phi búi cao lớn có mão vàng và bộ diêu.
+4. ĐỀ XUẤT A: nhìn bậc bằng MẢNG NGỰC (dải yếm ngang ngực, ngay dưới cổ). Đây là một mảng to, nhìn vô là biết bậc.
+5. Tần: dải lụa trơn màu phụ, viền thêu, nơ đơn giản.
+6. Phi: dải rộng hơn, thêu kín hoa vàng, giữa có đóa hoa ngọc lớn.
+7. Quý phi: dải sâu nhất, gấm vàng nền vàng hoàng gia, viền ngọc trai, chuỗi ngọc rủ xuống.
+8. Phương án khác: B = vòng cổ anh lạc to dần (đúng chỗ cổ áo cũ); C = khăn choàng vai kiểu Đường (gần giống hiện tại).
+9. Cần chủ chọn: Quý phi có được cổ hở mùa xuân/hạ không (luật hiện tại: luôn cổ kín).
+10. Thử A: 3 hình × 135 = 405 credit.

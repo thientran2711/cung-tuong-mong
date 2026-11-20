@@ -19,7 +19,7 @@ Looked (honest):
 - Dangles next to the face on t5/t6 look like headdress tassels, not earrings; please check at full size.
 - Colours: xuân pair (pink/ivory), so the sheet compares against her ice-blue current pictures — the colour change is the season swap, not part of the neckline test.
 
-## JOB B — plan only: dev/handover/reports/TANG1_plan_B.md (EN + VN summary). Later test = 3 gens = 405 cr.
-Open questions: huadian forehead mark (master forbids), t6 open neck vs G25 (t6 always closed), Tang = xuân/hạ replacement or skin.
+## JOB B — plan only (v2 after owner feedback): dev/handover/reports/TANG1_plan_B.md — big block = Tang chest band (hezi) ladder recommended; alternatives yingluo collar necklace, Tang shoulder wrap; Tang hair per rank decided; later test 405 cr per option.
+Open question: t6 open neck vs G25 (t6 always closed).
 
 Total credits: 405.
