@@ -1,3 +1,4 @@
+"""MARKFIX: full pictures by default; --cuts DIR for the CDN cut-outs; --heal-only s57,s59,s60 = remove only."""
 # MARKFIX batch (0 credits): remove wrong/extra beauty marks (inpaint with surrounding skin)
 # and place the mark (painted pixels lifted from a real mark) at the measured spot under the
 # picture-RIGHT eye's outer corner. Originals untouched; output -> fixed/.
@@ -32,12 +33,34 @@ J=[ # name, status, remove[(x,y)], add (x,y) or None, source (picture,x,y)
  ('s60_t7','MISSING',[],(582,334),('s58_t7',606,301)),
  ('s60_t8','MISSING',[],(575,330),('s58_t8',596,350)),
 ]
-log=[]
-for n,st,rem,add,src in J:
-  img=load(n);orig=img.copy()
-  if src: ratio,w=lift(load(src[0]),src[1],src[2])
-  for x,y in rem: img=remove(img,x,y)
-  if add: img=paste(img,add[0],add[1],ratio,w)
-  cv2.imwrite(R+'fixed/'+n+'_a18.webp',img,[cv2.IMWRITE_WEBP_QUALITY,100])
-  log.append(dict(id=n,status=st,old=rem,new=add,src=src,changed_px=int((np.abs(img.astype(int)-orig).sum(2)>0).sum())))
-json.dump(log,open(R+'fixed/markfix_log.json','w'),indent=1);print(json.dumps(log))
+import argparse,hashlib
+ap=argparse.ArgumentParser(description=__doc__)
+ap.add_argument('--cuts',help='folder with the CDN cut-outs <id>-<t>-a18.png: apply the same ops (RGB only, alpha untouched) -> img/fig-cut/rank8/<id>-<t>-a18-mf.png')
+ap.add_argument('--heal-only',default='',help='comma ids (e.g. s57,s59,s60): only remove marks, place none (owner: no mark)')
+A=ap.parse_args();HEAL=set(x for x in A.heal_only.split(',') if x)
+def run(load_fn,save_fn):
+  log=[]
+  for n,st,rem,add,src in J:
+    img=load_fn(n);orig=img.copy()
+    if n.split('_')[0] in HEAL: add=None
+    if add: ratio,w=lift(load_fn(src[0]),src[1],src[2])
+    for x,y in rem: img=remove(img,x,y)
+    if add: img=paste(img,add[0],add[1],ratio,w)
+    save_fn(n,img)
+    log.append(dict(id=n,status=st,old=rem,new=add,src=src if add else None,changed_px=int((np.abs(img.astype(int)-orig).sum(2)>0).sum())))
+  return log
+if not A.cuts:
+  log=run(load,lambda n,img:cv2.imwrite(R+'fixed/'+n+'_a18.webp',img,[cv2.IMWRITE_WEBP_QUALITY,100]))
+  json.dump(log,open(R+'fixed/markfix_log.json','w'),indent=1);print(json.dumps(log))
+else:
+  RGBA={}
+  def lc(n):
+    k=n.replace('_','-')
+    if k not in RGBA: RGBA[k]=cv2.imread(os.path.join(A.cuts,k+'-a18.png'),cv2.IMREAD_UNCHANGED)
+    return np.ascontiguousarray(RGBA[k][...,:3])
+  os.makedirs('img/fig-cut/rank8',exist_ok=True);out={}
+  def sc(n,img):
+    k=n.replace('_','-');o=RGBA[k].copy();o[...,:3]=img;p='img/fig-cut/rank8/'+k+'-a18-mf.png';cv2.imwrite(p,o)
+    assert (cv2.imread(p,cv2.IMREAD_UNCHANGED)[...,3]==RGBA[k][...,3]).all();out[k]=p
+  log=run(lc,sc)
+  for e in log: print(e['id'],e['old'],e['new'],e['changed_px'],out[e['id'].replace('_','-')],hashlib.md5(open(out[e['id'].replace('_','-')],'rb').read()).hexdigest())
