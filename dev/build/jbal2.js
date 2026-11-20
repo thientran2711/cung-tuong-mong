@@ -1627,11 +1627,11 @@ BAL.tdCourt={giftAf:20,backs:40};
    oddsN = draws behind her ladder word (no %, law 7). */
 Object.assign(BAL.mgTier.occ,{pm:[1,.5]});
 BAL.pm={kc:1,luck:30,minLv:1,
- play:{cut:[4,7],aff:[2,3,5],suc:4,xp:1,fade:1},
- stake:{bac:[6,8,10,12,15,18,22,26],band:.4},
+ play:{cut:[4,7],aff:[2,3,5],suc:6,xp:1,fade:1},
+ stake:{bac:[6,8,10,12,15,18,22,26],band:.3},
  val:{danhBac:5,affBac:2,oanBac:1,khacBac:6,sucBac:1},eqTol:8,
- duel:{pubDanh:2,shame:1,shameMax:3,oan:4,yieldK:1,yieldOan:3},
- refuse:{up:3},
+ duel:{pubDanh:2,shame:1,shameMax:3,oan:4,yieldK:.7,yieldOan:2},
+ refuse:{up:1},
  pub:["vuon","kn","tn"],
  mem:{pmplay:6,pmwin:10,pmyield:10},
  npc:{gapW:2,me:1,g:{play:{ally:4},duel:{spite:4,danh:1.5}},minAff:0,spite:3},

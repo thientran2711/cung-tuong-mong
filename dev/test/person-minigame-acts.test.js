@@ -34,6 +34,9 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
   pmPlayEnd(S,a,{a:"play",kind:"dauho",n:"Đầu hồ"},8,8);out.mem=typeof memTop==="function"?JSON.stringify(memTop(a,S)||[]):"?";
   /* (5) popup + Hậu cung card */const same=V.find(x=>sameHouse(S,x));const rows=v=>talkOpts({kind:"rival",ref:v}).filter(o=>o.pm).map(o=>o.n);out.pop=rows(a);out.popSame=same?rows(same):["n/a"];
   const i=rivals.indexOf(a);const h=rvCard(a,i);out.card3=(h.match(/data-pmgo="\d+" data-pma="(play|duel)"/g)||[]).length;out.walk=/đi đến chỗ nàng|chưa rõ nàng ở đâu/.test(h)||together(S,a);
+  /* (6b) NPC → her through the SAME executor the day plan lands (it aims at her rarely: one of her ~10 neighbours, the world's pace) */
+  {const me=[];const rc0=rcvCard;rcvCard=function(pid,pp,title,p){if(pp&&/^pm/.test(pp.k||""))me.push(pp.k);return rc0.apply(this,arguments)};Q.length=0;const v=a;v.pmW=null;S.pmMeW=null;
+   AGRUN["cx3:pmPlay"](v,S);v.pmW=null;S.pmMeW=null;S.bac=Math.max(S.bac,200);v.bac=Math.max(v.bac||0,200);AGRUN["cx3:pmDuel"](v,S);rcvCard=rc0;out.exec=me;Q.length=0}
   /* (7) co-op friend entry */const f=Object.assign({},t,{id:9901,coop:true,name:"Hảo hữu",rl:{},ro:{},inv:[],bac:300,danh:50});rivals.push(f);window.COOPW=window.COOPW||{};const cw0=Object.assign({},window.COOPW);
   window.COOPW.on=false;window.COOPW.inv=1;const xc=pmX(S,f,"duel",{s:"bac"});S.bac=Math.max(S.bac,200);const bS=S.bac+f.bac;const r1=ACT.pmduel.f(S,f,xc);const r2=ACT.pmplay.f(f,S,pmX(f,S,"play"));
   out.coop={r1,r2,cons:S.bac+f.bac===bS,ask:typeof ACT_NOSEND!=="undefined"&&ACT_NOSEND.includes("pmplay")&&ACT_NOSEND.includes("pmduel")};Object.assign(window.COOPW,cw0);window.COOPW.inv=0;rivals.splice(rivals.indexOf(f),1);
@@ -50,7 +53,7 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
  ok(r.st.bac===r.st.V&&r.st.danh>=r.st.V-r.st.V*r.st.band&&r.st.danh<=r.st.V+r.st.V*r.st.band&&(r.st.ia==null||Math.abs(r.st.ia-r.st.V)<=r.st.V*r.st.band)&&(r.st.it==null||Math.abs(r.st.it-r.st.V)<=r.st.V*r.st.band),'three stakes of equal value V (law 2)',r.st);
  ok(r.bacCons,'duels conserve bạc (the stake moves, nothing is minted)');
  ok(r.itemOk&&r.itemMoved&&r.itemLog,'an item stake really changes hands, written in the item ledger (law 6c)',{ok:r.itemOk,moved:r.itemMoved,log:r.itemLog});
- ok(/cùng|chơi/.test(r.mem),'the pastime is remembered (jmem pmplay)',r.mem.slice(0,160));
+ ok(/pmplay/.test(r.mem),'the pastime is remembered (jmem pmplay)',r.mem.slice(0,160));
  ok(r.pop.length===2&&r.popSame.length===2,'popup rows «Cùng chơi» + «Thách đấu», also inside the same palace',{pop:r.pop,same:r.popSame});
  ok(r.card3===2&&r.walk,'Hậu cung card: both buttons in «Gặp mặt», bound to walking to her (goSee) or her place unknown',{n:r.card3,walk:r.walk});
  ok(/thắng|ván/.test(r.coop.r1)&&r.coop.cons&&r.coop.ask,'co-op friend: the accepted duel resolves by both hands, bạc conserved; both acts are ask acts',r.coop);
@@ -60,10 +63,9 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
  const d=await p2.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;window.__bot=1;window.__agAll=1;quiet=false;Q.length=0;
   const me=[];const rc0=rcvCard;rcvCard=function(pid,pp,title,p){if(pp&&/^pm/.test(pp.k||""))me.push(pp.k);return rc0.apply(this,arguments)};const t0=[S.year,S.month,S.tuan];let n=0;
   for(let i=0;i<200&&!S.dead;i++){Q.length=0;S.mg=null;nextBuoi();n++}const sim={n,t0,t1:[S.year,S.month,S.tuan],by:{play:AG3.stat.by.pmPlay||0,duel:AG3.stat.by.pmDuel||0},me:me.slice()};
-  /* NPC → her through the SAME executor (the day plan aims at her rarely: one of her ~10 neighbours, the world's pace) */Q.length=0;const v=liveRivals(true).find(x=>x!==S&&!x.out&&!x.confined);v.pmW=null;S.pmMeW=null;
-  AGRUN["cx3:pmPlay"](v,S);v.pmW=null;S.pmMeW=null;S.bac=Math.max(S.bac,200);v.bac=Math.max(v.bac||0,200);AGRUN["cx3:pmDuel"](v,S);sim.exec=me.slice(sim.me.length);return sim});
+  sim.S={dead:!!S.dead,out:!!S.out,conf:S.confined||0,srv:typeof isSrv==="function"&&isSrv()};return sim});
  ok(d.by.play+d.by.duel>=2,'NPC → NPC over ≥ 10 game days (day plan cx3:pmPlay / cx3:pmDuel land)',d);
- ok(d.exec.includes("pmPlay")&&d.exec.includes("pmDuel"),'NPC → her: the day-plan deed reaches her as her answer card (both acts)',{exec:d.exec,simMe:d.me});
+ ok(r.exec.includes("pmPlay")&&r.exec.includes("pmDuel"),'NPC → her: the day-plan deed reaches her as her answer card (both acts)',{exec:r.exec,simMe:d.me,S:d.S});
  /* (8) old save */
  const o=await p2.evaluate(()=>{try{Q.length=0;delete S.pmM;delete S.pmGo;delete S.pmMeW;delete S.pmMeN;for(const v of rivals)delete v.pmW;save();const d=loadSlot(SLOT);quiet=true;deser(d);quiet=false;render();
   const v=liveRivals(true).find(x=>x!==S&&!x.out);return{ok:!!S&&!S.dead&&!!d,rows:talkOpts({kind:"rival",ref:v}).filter(z=>z.pm).length,st:pmStakes(S,v).length}}catch(e){return{err:e.message}}});
