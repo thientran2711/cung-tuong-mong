@@ -546,3 +546,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW jtq14-addr r1 E34r (sonnet) of 685b71fb | review/jtq14-addr-r1; reports/jtq14-addr-review.md | FOREMAN E #23 | session_01DgYSWnxMa5aqrzNNQQsPe9 | PASS 685b71fb (LAND READY) | 20/11 22:06Z |
 | kc-coop-select E36 (opus; LIVE co-op bug coop-together «B went through the selection card» S.selx null; ORDER MAIN ROOT-81 22:10Z; briefs/E36-kc-coop-select.md) | review/kc-coop-select | FOREMAN E #23 | session_01DgYSWoSJpeRXR9xq73dhRZ | RUNNING | 20/11 22:10Z |
 | ge-phutang (Phù Tang grand endings; E35 rolled at setup, review/ge-phutang 76be3f59, handover reports/ge-phutang.md) | review/ge-phutang | FOREMAN E #23 | session_01DgYSWmtReE6rpy19ACp49C (E35b) | RUNNING | 20/11 22:15Z |
+| GAP j75 rivalNight hầu-thay two-way (law 1; MAIN ROOT-81 20:40Z «yours, whole job»; opus) | review/rival-hauthay (base review/night-final-r3) | Foreman D #12 | (opening) | RUNNING | 20/11 22:20Z |
