@@ -151,8 +151,15 @@ function frIdent(){const IDK=["name","age"];const st=TH.seatOf(other()),s=st&&st
  for(const k of IDK)if(s[k]!=null&&f[k]!==s[k]){f[k]=s[k];n++}
  const pv=s.preg&&!s.hidden?s.preg:0,fk=pv&&s.fake?s.fake:0;if((f.preg||0)!==pv){if(pv)f.preg=pv;else delete f.preg;n++}if((f.fake||0)!==fk){if(fk)f.fake=fk;else delete f.fake;n++}
  if(n){G.stat.ident=(G.stat.ident|0)+n;lg(["ident",wkR(),f.name])}}
-{const ws=TH.withSeat;TH.withSeat=function(seat){let outer=false;try{outer=on()&&host()&&!CW.ctx&&seat===other()}catch(e){}
-  try{return ws.apply(this,arguments)}finally{if(outer&&!CW.ctx)try{frIdent()}catch(e){console.error("thin G ident",e)}}}}
+/* the mini-game module state outside S (jtoil TOIL.st = the toilette in progress, j82 KG82.run = the running game): ONE copy per page. Her week
+   end / her cards / her world windows on the host (any run in her context) could start or end HER toilette there and overwrite or clear the
+   HOST's own open game (coop-cyc L13: the host's «Điểm trang» board stayed on screen with TOIL.st gone, "Để mặt mộc" did nothing, his week
+   never ended). Each run in her context now sees her own copy (G.mgB) and the host's copy is put back after (audit §4: state outside S). */
+const mgOut=()=>({st:typeof TOIL==="object"?TOIL.st:undefined,run:typeof KG82==="object"?KG82.run:undefined});
+const mgIn=o=>{if(!o)return;if(typeof TOIL==="object")TOIL.st=o.st||null;if(typeof KG82==="object")KG82.run=o.run||null};
+{const ws=TH.withSeat;TH.withSeat=function(seat){let outer=false,hm=null;try{outer=on()&&host()&&!CW.ctx&&seat===other()}catch(e){}
+  if(outer)try{hm=mgOut();mgIn(G.mgB||{st:null,run:null})}catch(e){console.error("thin G mg",e)}
+  try{return ws.apply(this,arguments)}finally{if(outer){try{const o=mgOut();if(G.mgB?o.st!==G.mgB.st:!!o.st){G.stat.mgHer=(G.stat.mgHer|0)+1;lg(["mg-her",wkR(),!!o.st,!!(hm&&hm.st)])}G.mgB=o;mgIn(hm)}catch(e){console.error("thin G mg",e)}if(!CW.ctx)try{frIdent()}catch(e){console.error("thin G ident",e)}}}}}
 /* her entry can also be rebuilt from the last week's blob mid-week (jcoopworld placeFriend from CW.base.P.b when it is missing): the host's
    draw (flip) and every repaint read it after the same copy */
 function idNow(){try{if(on()&&host()&&!CW.ctx&&CW.on)frIdent()}catch(e){console.error("thin G ident",e)}}
