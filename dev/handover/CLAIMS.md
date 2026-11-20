@@ -368,3 +368,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | person-minigame-acts ROUND C (opus E22e; successor of E22d @9577102; -c ae8fc09: re-merge r2+LIVE, Q-C2 live co-op board, role-parity rows on -c, quickcheck, shots) | review/person-minigame-acts-c | FOREMAN E #16 | session_01DgYSWoxPaoLTFrGsw5ZTPE | RUNNING | 20/11 06:38Z |
 | rv-dauho (BIG opus reviewer of review/cal-p2 b218d1d2, Đầu hồ owner bug; lands alone) | review/cal-p2-rv; briefs/cag29-rv-dauho.md; reports/rv-dauho.md | C-AG #29 for ROOT-74 | session_01Rc5AsKzsQh875fpMyv46vr | RUNNING | 20/11 06:43Z |
 | MAIN ROOT-75 (opus; child of ROOT-74, depth 4) | handover HANDOVER_SESSION9 | ROOT-74 | session_01Rc5AsKTznPCBPujNFrdVVF | RUNNING | 20/11 06:47Z |
+| REVIEW mg-noword-kit (SMALL sonnet) of 6b6f1c52 | review/mg-noword-kit(-rv); briefs/rv-root75-mg-noword-kit.md | MAIN ROOT-75 | session_01Rc5AsM2JGiVZGesoFRmmkP | RUNNING | 20/11 06:50Z |
+| REVIEW kit-mark (SMALL sonnet) of 1c134a6f | review/kit-mark(-rv); briefs/rv-root75-kit-mark.md | MAIN ROOT-75 | session_01Rc5AsMhE5ZpVRnMT4NDeXv | RUNNING | 20/11 06:50Z |
