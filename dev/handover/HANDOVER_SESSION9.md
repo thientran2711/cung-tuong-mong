@@ -1323,3 +1323,4 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - B ROOT-7 / D: no new STATUS lines since 19/11 — check on wake.
 - WAKE: ROOT-73 trig_01FcY3CyFdxHaMJoL1gJC4SE (minute 32) → ROOT-74 disables it after creating its own. Brief template briefs/root73-common.md (copy to root74-common.md with new LIVE + main id).
 - (20/11 04:55Z) ROOT-73 opened child MAIN ROOT-74 = session_01Rc5AsLW7a12BUC5kZhtsTy (depth 3). ROOT-73 stops; ROOT-74 disables trig_01FcY3CyFdxHaMJoL1gJC4SE.
+- (20/11 04:55Z) (ROOT-73 relay) PENDING MGCAL BATCH now: "CTM-CAL tat:4.9/5@11/19/2026 ne:4.1/5@11/19/2026 mua:6.3/5@11/19/2026 banh:6.1/5@11/19/2026 huong:4.5/5@11/19/2026".
