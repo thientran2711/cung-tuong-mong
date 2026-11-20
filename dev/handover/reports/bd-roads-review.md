@@ -113,3 +113,6 @@ Open notes FOR E / MAIN (not blocking): GRAND_ENDINGS.md still names bd_tuyet/bd
 
 ### Re-merge 20/11 ~08:30Z: LIVE moved to 30e8714e (mg-score-same + fig-label, minigame files only)
 4adea508 + origin/main 30e8714e → **d76511d3** (index.html/sw.js only, rebuilt), pushed on review/bd-roads, FF on LIVE 30e8714e. Rerun on d76511d3: one-core-guard PASS · bd-batu-switch PASS · ge-engine 808/808 · quickcheck PASS (core gates PASS, old save ok; perf new/live buổi 1621/1085 ms is within quickcheck's own bound — one sample of 3, previous run was 946/3076, so noise). **PASS d76511d3.**
+
+### Re-merge 20/11 ~14:05Z after ge-w3 LIVE 8730f431 (+ 43fd334f kit-signs-preplay, 5cd6d24a kit-rows-b)
+d76511d3 → 5c30f0dc (8730f431; assemble.py conflict: main list + jbalbd/jrd_bd/jrd_bd2) → 367ddcc7 (43fd334f) → **4403fbbd** (5cd6d24a); index/sw rebuilt each time; pushed on review/bd-roads, FF on LIVE 5cd6d24a. Gates: on 5c30f0dc one-core, bd-batu-switch, ge-engine 1160/1160, static 4 roads 0 dominated, ge-guard 6/6, bd-legacy-save, quickcheck all PASS; on 4403fbbd one-core, bd-batu-switch, quickcheck PASS. **PASS 4403fbbd.**
