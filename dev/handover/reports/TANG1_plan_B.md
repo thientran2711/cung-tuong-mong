@@ -77,3 +77,15 @@ Per option: 3 gens (s62 a18 xuân, t4/t5/t6, gpt-2-6 2k, one try each) × 135 = 
 8. Giữ nguyên: mặt, tay áo dài, khăn phi bạch, màu theo mùa, độ thêu như hiện tại, không đuôi váy, không vẽ trán.
 9. Cần chủ quyết: Quý phi có được mặc cổ hở mùa xuân/hạ không (luật hiện tại: luôn cổ kín).
 10. Thử: mỗi phương án 3 hình = 405 credit; cả hai = 810 credit.
+(Cập nhật: chủ đã chọn kiểu ĐƯỜNG, bỏ kiểu Hán; khăn phi bạch vắt sau lưng, vòng qua cẳng tay như hiện tại, không choàng vai. Đã viết sẵn prompt Tần/Phi/Quý phi, chờ chủ đồng ý mới vẽ: 3 hình = 405 credit.)
+
+## v4 — OWNER PICKED T (rule G29, ~16:15Z): "Chọn áo kiểu đường, phi bạch là kiểu vắt sau lưng như thiết kế hiện tại, không phải choàng vai"
+- Option H is DROPPED (kept above only as history).
+- PHI BẠCH in the Tang look = the CURRENT design: a sheer shawl hanging behind the back and looped over the forearms/elbows, NEVER over or around the shoulders. The test fHzM1ekCDY wrapped the shoulders, which is the fault to avoid. Every prompt adds: "PHI BẠCH PLACEMENT: the shawl hangs behind her back and loops over her forearms/elbows, NEVER over or around her shoulders, never like a cape."
+- Final T prompts for s62 a18 xuân (no gens until the owner says yes): dev/art/tang1/s62_t{4,5,6}_TANG_final_xuan.txt.
+  - t4 Tần (9 265 chars): Tang robe + chest band of ivory white silk embroidered with a few LARGE plum blossoms in gold (today's Tần density), gold border, ribbon bow with jade clasp, jade belt pendants; two looped Tang buns; capelet + CAPELET CUT removed.
+  - t5 Phi (9 061): band of pink silk fully covered in gold flowers, double gold border, big jewelled gold-and-jade flower ornament; one high Tang bun; LARGER gold headdress.
+  - t6 Quý phi (9 714, 2 refs): deepest band of gold brocade on royal yellow, pearl edging, jewelled medallion, short pearl strands; necklace + bracelets; tall Tang court bun; BIG headdress; royal yellow = band + sash + borders.
+  - All three: "no cape, no cloud collar, no shoulder piece"; embroidery as today per rank; everything outside the Outfit sentence is unchanged, apart from the stole sentence and t6's duplicate trims.
+- Gate (--scope tpN --age a18): t5 PASS, t6 PASS. t4 = the expected FAIL "S13 MISSING: CAPELET CUT t4 Tần": the t4 approved table requires the capelet-cut sentence, and the Tang look removes the capelet. The foreman/owner must OK this or set a new approved table for the Tang t4.
+- Still open: scope (which seasons / ranks wear it; t6 vs G25 "always closed"). A 3-gen test would cost 405 cr.

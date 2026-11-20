@@ -24,4 +24,6 @@ Open question: t6 open neck vs G25 (t6 always closed).
 
 ## Phi test T vs H (owner GO ~19:10Z): 2 gens 270 cr — T fHzM1ekCDY, H hu205pSvqL; gate tp5 PASS (8 899 / 8 734 chars); sheet dev/handover/review-sheets/tang1/s62_t5_DUONG_vs_HAN.webp (new only). Looked: faces fine, no earrings, lips closed. T = open neck + strong chest-band block; H = crossed V modest depth, collar stack thinner. plan_B fixed: Tần starts at today's embroidery density.
 
+## Owner picked T (G29): final T prompts s62 t4/t5/t6 written (dev/art/tang1/s62_t{4,5,6}_TANG_final_xuan.txt, 9 265 / 9 061 / 9 714 chars), PHI BẠCH placement sentence added; gate t5/t6 PASS, t4 expected FAIL S13 CAPELET CUT (capelet removed). H dropped in plan_B. No gens.
+
 Total credits: 675.
