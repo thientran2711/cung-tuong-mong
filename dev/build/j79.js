@@ -515,6 +515,76 @@ KP_SEAL.week="TUẦN";
 /* kv3:.kv1 */:where(.kv1) .dawn .dbox.kpanel .kph{padding:8px 10px}:where(.kv1) .dawn .dbox.kpanel .kpb{padding:8px 10px 2px}:where(.kv1) .dawn .kpfoot{padding:6px 10px 10px}
 `;document.head.appendChild(st)})();
 
+/* KIT §21.2 kitBranchMap (K-GE-1, review/kit-ge; owner OD:L1623 (1), design GRAND_ENDINGS §2.10): the «Sơ đồ nhánh» node chart of ONE branch, drawn from the data of geMap(branch) (jge.js):
+   kitBranchMap(m, o) -> HTML; kitBranchMapMount(el, m) draws it into el and keeps m for the node cards (tap a node = the existing kit info card kitModal, kitBranchMapOpen).
+   m = {n, spine[{id,at,n,seen,past,here}], rare[{at,id,n,seen}], ends[{i,n,st:"o"|"f"|"c",ch,slots[{sh:"t"|"a",ti}],fail{n},card{r1,r2,cw,lives}|{txt}}], count{g,t,k,txt}}.
+   Spine (vertical, top -> bottom): Nhập cung · .4 … .11 · ch12 · ch13 · ch14 · Hồi kết nhánh; node = seen (its name) or unseen «?»; chapters behind her this life SOLID (rail + dot), ahead DOTTED;
+   her face chip (kitFaceH) on the chapter she is in; the 2 kỳ ngộ hang off the .4 / .11 nodes. Below, the 4 Đại kết cục (2 columns on a phone / Fold, 4 on html.kv2), each with its state word
+   this life (Còn mở lit · Chỉ còn đường thua cracked · Đã khép dim «Đã khép · chương n»), the 2 title slots (thiện / ác plates of K-GE-2, or «?») and its fail node. Kit tokens only. */
+function kbmEsc(x){return String(x==null?"":x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function kbmName(n,seen){return seen===false||n==="?"||n==null||n===""?`<i class="kbm-q">?</i>`:kbmEsc(n)}
+function kitBranchMap(m,o){o=o||{};if(!m)return"";const sw=typeof geStateWord==="function"?geStateWord:((st,ch)=>st==="o"?"Còn mở":st==="f"?"Chỉ còn đường thua":`Đã khép${ch?" · chương "+ch:""}`);
+ const face=(()=>{try{const f=typeof kitFace==="function"&&typeof S!=="undefined"?kitFace(S):null;if(!f)return"";return f.src?`<img src="${kbmEsc(f.src)}" alt="" draggable="false" onerror="this.remove()">`:`<b>${kbmEsc(f.ini||"")}</b>`}catch(e){return""}})();
+ const rare=(m.rare||[]).filter(x=>x&&x.id!=null||x&&x.at!=null);
+ const spine=(m.spine||[]).map((x,i,a)=>{const st=x.here?"here":x.past?"past":"ahead",un=x.seen===false||x.n==="?";const rr=x.at!=null?rare.filter(r=>r.at===x.at):[];
+  return `<li class="kbm-n ${st}${un?" unk":""}" data-kbm="s:${kbmEsc(x.id)}"><i class="kbm-d" aria-hidden="true"></i><span class="kbm-t">${kbmName(x.n,!un)}</span>${x.here?`<span class="kbm-me" title="Ngươi đang ở đây">${face}</span>`:""}`+
+   rr.map(r=>`<span class="kbm-r${r.seen?"":" unk"}" data-kbm="r:${kbmEsc(r.id)}"><i class="kbm-rd" aria-hidden="true"></i>${kbmName(r.n,r.seen)}<small>kỳ ngộ</small></span>`).join("")+`</li>`}).join("");
+ const ends=(m.ends||[]).map(e=>{const un=e.n==="?",stc=e.st==="o"?"open":e.st==="f"?"crack":"shut";
+  return `<button type="button" class="kbm-e ${stc}${un?" unk":""}" data-kbm="e:${e.i}"><span class="kbm-en">${kbmName(e.n,!un)}</span><span class="kbm-es">${kbmEsc(sw(e.st,e.ch))}</span>`+
+   `<span class="kbm-sl">${(e.slots||[]).map(x=>x.ti==="?"||x.ti==null?`<span class="kbm-slq" data-sh="${x.sh}"><i class="kbm-q">?</i></span>`:(typeof kitTitlePlate==="function"?kitTitlePlate({id:"kbm_"+e.i+x.sh,name:x.ti,tier:8,sh:x.sh},{id:false}):kbmEsc(x.ti))).join("")}</span>`+
+   `<span class="kbm-f${e.st==="f"?" lit":""}">${kbmName(e.fail&&e.fail.n,e.fail&&e.fail.n!=="?")}<small>thua</small></span></button>`}).join("");
+ return `<div class="kbm" data-kbm-root="${kbmEsc(m.b||"")}">${o.noCount||!m.count?"":`<div class="kbm-c">${kbmEsc(m.count.txt)}</div>`}<ol class="kbm-sp">${spine}</ol><div class="kbm-eh">Bốn ngả kết cục</div><div class="kbm-es4">${ends}</div></div>`}
+function kitBranchMapMount(el,m,o){if(!el)return;el.innerHTML=kitBranchMap(m,o);el.__kbm=m;return el}
+function kitBranchMapOpen(m,key){try{if(!m||typeof kitModal!=="function")return;const k=String(key||"").split(":"),t=k[0],id=k.slice(1).join(":");
+ const sw=typeof geStateWord==="function"?geStateWord:()=>"";
+ if(t==="e"){const e=(m.ends||[]).find(x=>String(x.i)===id);if(!e)return;const c=e.card||{};
+  if(e.n==="?"||!c.r1){kitModal({kind:"info",title:"?",sub:"Đại kết cục chưa ai biết",sections:[{h:"",rows:[["Ngả này",c.txt||"Chưa ai biết ngả này dẫn tới đâu."],["Kiếp này",sw(e.st,e.ch)]]}],btn:"Đã hiểu"});return}
+  const pl=(e.slots||[]).map(x=>x.ti==="?"?`<i class="kbm-q">?</i>`:kitTitlePlate({id:"kbm_c"+e.i+x.sh,name:x.ti,tier:8,sh:x.sh},{id:false})).join(" ");
+  kitModal({kind:"info",title:e.n,sub:"Đại kết cục",sections:[{h:"",rows:[["Hai ngả rẽ",`${kbmEsc(c.r1)} · ${kbmEsc(c.r2)}`],["Điều cần",kbmEsc(c.cw)],["Kiếp này",sw(e.st,e.ch)],["Danh hiệu",[pl]],(c.lives&&c.lives.length)?["Ngươi từng đạt","kiếp "+c.lives.join(", ")]:null].filter(Boolean)}],btn:"Đã hiểu"});return}
+ const x=t==="s"?(m.spine||[]).find(v=>v.id===id):(m.rare||[]).find(v=>v.id===id);if(!x)return;
+ kitModal({kind:"info",title:x.seen===false||x.n==="?"?"?":x.n,sub:t==="s"?"Chặng của nhánh":"Kỳ ngộ",sections:[{h:"",rows:[["Ngả này",x.seen===false||x.n==="?"?"Chưa ai biết ngả này dẫn tới đâu.":kbmEsc(x.n)],t==="s"?["Kiếp này",x.here?"ngươi đang ở đây":x.past?"đã đi qua":"chưa tới"]:null].filter(Boolean)}],btn:"Đã hiểu"})}catch(e){console.error("kbm",e)}}
+document.addEventListener("click",e=>{const n=e.target&&e.target.closest&&e.target.closest(".kbm [data-kbm]");if(!n)return;const r=n.closest(".kbm");const host=r&&r.parentElement;const m=host&&host.__kbm;if(m)kitBranchMapOpen(m,n.dataset.kbm)});
+window.kitBranchMap=kitBranchMap;window.kitBranchMapMount=kitBranchMapMount;window.kitBranchMapOpen=kitBranchMapOpen;
+(function(){const st=document.createElement("style");st.id="kbm-css";st.textContent=`
+.kbm{display:flex;flex-direction:column;gap:8px;color:var(--ink);font-size:.84rem}
+.kbm-c{align-self:flex-start;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--k-card2);color:var(--k-lab);font-weight:700;font-size:.76rem}
+.kbm-sp{list-style:none;margin:0;padding:0 0 0 14px;position:relative}
+.kbm-n{position:relative;display:flex;align-items:center;flex-wrap:wrap;gap:4px 10px;min-height:34px;padding:2px 0 2px 22px;cursor:pointer}
+.kbm-n::before{content:"";position:absolute;left:6px;top:0;bottom:0;border-left:2px solid var(--gold)}
+.kbm-n:first-child::before{top:50%}.kbm-n:last-child::before{bottom:50%}
+.kbm-n.ahead::before{border-left:2px dotted var(--line)}
+.kbm-d{position:absolute;left:0;top:50%;width:14px;height:14px;margin-top:-7px;box-sizing:border-box;border-radius:50%;border:2px solid var(--gold);background:var(--gold)}
+.kbm-n.ahead .kbm-d{background:var(--k-card);border-color:var(--line)}
+.kbm-n.here .kbm-d{box-shadow:0 0 0 3px var(--k-sel,#fff3c4),0 0 0 4px var(--k-sel-ring,#a8740c)}
+.kbm-n.here .kbm-t{font-weight:700}
+.kbm-n.unk .kbm-d{border-style:dashed}
+.kbm-t{min-width:0;overflow-wrap:anywhere}
+.kbm-me{display:inline-flex;align-items:center;justify-content:center;flex:none;width:30px;height:30px;box-sizing:border-box;border-radius:50%;overflow:hidden;border:2px solid var(--gold);box-shadow:0 0 0 2px var(--k-sel,#fff3c4);background:var(--k-card2);font-weight:700;color:var(--gold)}
+.kbm-me img{width:100%;height:100%;object-fit:cover;object-position:50% 14%;display:block}
+.kbm-q{display:inline-block;min-width:1.4em;padding:0 .35em;border:1px dashed var(--line);border-radius:6px;background:var(--k-card2);color:var(--k-lab);font-style:normal;font-weight:700;text-align:center}
+.kbm-r{display:inline-flex;align-items:center;gap:5px;margin-left:auto;padding:1px 8px 1px 6px;border:1px solid var(--line);border-radius:999px;background:var(--k-card2);font-size:.78rem}
+.kbm-r small{color:var(--k-lab);font-size:.68rem}
+.kbm-rd{width:7px;height:7px;transform:rotate(45deg);background:var(--trim);display:inline-block}
+.kbm-r.unk .kbm-rd{background:transparent;border:1px solid var(--line)}
+.kbm-eh{font-family:var(--display,"Noto Serif",Georgia,serif);font-weight:700;color:var(--gold);border-top:1px solid var(--k-hair);padding-top:6px}
+.kbm-es4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+html:where(.kv2) .kbm-es4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.kbm-e{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:5px;padding:7px 8px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card);cursor:pointer;min-width:0}
+.kbm-en{font-family:var(--display,"Noto Serif",Georgia,serif);font-weight:700;overflow-wrap:anywhere}
+.kbm-es{font-size:.74rem;color:var(--k-lab);font-weight:700}
+.kbm-e.open{border-color:var(--gold);box-shadow:0 0 0 2px var(--k-sel,#fff3c4)}
+.kbm-e.open .kbm-es{color:var(--good)}
+.kbm-e.crack{border-style:dashed;border-color:var(--bad);background:linear-gradient(135deg,var(--k-card) 60%,var(--k-card2))}
+.kbm-e.crack .kbm-es{color:var(--bad)}
+.kbm-e.shut{opacity:.62;background:var(--k-card2)}
+.kbm-sl{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}
+.kbm-sl .kdh{max-width:100%}
+.kbm-slq{display:inline-flex}
+.kbm-f{display:flex;align-items:baseline;gap:5px;font-size:.76rem;color:var(--dim);border-top:1px dashed var(--k-hair);padding-top:4px}
+.kbm-f small{font-size:.66rem;color:var(--k-lab)}
+.kbm-f.lit{color:var(--bad);font-weight:700}
+`;document.head.appendChild(st)})();
+
 /* ---------- MINI-GAME FRAME (for j82 and the lesson games): header + how-to + score/timer + game box + result rows ---------- */
 KP_SEAL.game="TÀI NGHỆ";
 /* OWNER 17/11 (OD "Điểm trang … clutter"): the PHẦN / HỒI / CÒN chip row is NOT shown in ANY mini-game (it pushed the play area down and forced scrolling);
@@ -590,6 +660,9 @@ function kitGameResult(r){r=r||{};const rows=[];
 .kgc small{font-size:.66rem;color:var(--k-lab);text-transform:uppercase;font-weight:700}.kgc b{font-family:var(--display);font-size:1.05rem;color:var(--ink)}
 .kgbox{margin:8px 14px;min-height:120px}.kgres{padding:0 14px 10px}
 .kgrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.kgrow>b{flex:none;white-space:nowrap}.kgr .kpkb .krl{white-space:normal;max-width:9rem}
+/* K-GE-3 (review/kit-ge): a row whose LABEL is a title plate (.kdh, a wide nowrap pill) puts the plate on its own line above the value, at every width (same rule as the kt3 plate block of the title popups) */
+.kpkb .kr:has(>.krl>.kdh)>.krl{grid-column:1/-1;max-width:none;padding:.3rem 0 0;text-transform:none;letter-spacing:normal}
+.kpkb .kr:has(>.krl>.kdh)>.krv{grid-column:1/-1;min-width:0}
 .kgbox .btn,.kgbtn{font-family:inherit;font-weight:600;background:var(--k-card);color:var(--ink);border:1px solid var(--line);border-radius:var(--k-rad);min-height:40px;padding:6px 12px;cursor:pointer}.kgbox .btn:hover,.kgbtn:hover{border-color:var(--gold)}.kgbtn.on,.kgbox .btn.on{background:#f0d07055;border-color:var(--gold)}.kgpl{color:var(--k-lab)}
 #ov .mg.kpanel{padding:0;max-width:560px;background:var(--k-card);box-shadow:0 0 0 3px #f6ead6,0 0 0 4px #c9a46a,0 14px 40px #2a1a1260}
 #ov .mg.kpanel .kph{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 14px 9px;background:linear-gradient(#f6ead6e6,#fffaf0f0),url(img/kit/bg-default.webp) center/240px repeat;border-bottom:1px solid var(--line)}
