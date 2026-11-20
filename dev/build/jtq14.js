@@ -119,7 +119,7 @@ function roadSj(){try{const id=S.st.f14&&S.st.f14.road,a=id&&typeof ARC67!=="und
  if(/\{[^}]*\}/.test(sj))return "";return sj.replace(/\bngươi\b/g,"{x}")}catch(e){return ""}}
 function beatLine(m){try{const o=S.origin&&S.origin.k,t=BEAT[o]&&BEAT[o][m.id];if(!t)return "";
  let r=say(t);if(m.id==="nhap14"){const sj=roadSj();if(sj)r+=" "+say("Điều {x} canh cánh trong lòng là "+sj+".")}return r}catch(e){return ""}}
-window.tq14Beat=beatLine;
+window.tq14Beat=beatLine;window.tq14Intro=m=>introCard(m);
 function variant(){return srvNow()?"s":"c"}
 function defOf(v,ch,id){return ((TQ[v]||{})[ch]||[]).find(q=>q.id===id)||null}
 function need(id){const N=QB().need||{};return N[id]||1}
