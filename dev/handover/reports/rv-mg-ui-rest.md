@@ -22,3 +22,7 @@ PRIORITY #1 CHECK: unchanged (see above).
 - quickcheck on 2859b245 PASS: render 297/273, tab 540/637, buoi 1294/1461, old save ok, core gates PASS.
 - mg-ready-guide PASS 9/9; ag-mgcal ok; care-oldsave ok (pets=2, no banner/overlap, 0 errors); mk-oldsave-pets needs other args (skipped; quickcheck old-save ok).
 - origin/main 66bd36cd is an ancestor of 2859b245 (FF-able).
+
+# Round 3 — LAND READY 86a8125993900dfdf60b58bbcd608b532fc55b36
+Final-merge of LIVE 90b7e797 (mg-back + noword-kit + kit-ge) into review/mg-ui-rest-rv. Real conflict in dev/build/j82.js resolved keeping BOTH intents: kgReady «Sẵn sàng» click = `kg82El()||box.closest(".kgame")` + `KG82.backPre=null;kgPay()`; CSS = LIVE `.kg82 .kghow{display:none}` + my `.kgame.kg-ready/.kg-tut .kghow{display:none}` + `#kpcare.kg-open` fold. index.html/sw.js rebuilt.
+Tests on the merged tree: mg-ui-rest 39/39 (Fold, iPad 1180, 1366); mg-back 12/12; mg-noword-kit PASS 31 kinds 0 words; mg-ready-guide 9/9; quickcheck PASS on rerun (first run: core gate g4 coop-one-world flaked "guest week changes the world", passes on rerun; perf ok).
