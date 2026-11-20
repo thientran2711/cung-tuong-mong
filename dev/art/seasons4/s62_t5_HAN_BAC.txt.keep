@@ -11,3 +11,10 @@ allow: "Mùa Xuân · Thiết kế thời Hán · Phi · Trực cư đoạn   # 
 # allow: The satin has real weight   # fabric: lead sentence shortened, redundant with new FABRIC text (length)
 # allow: a little more than thin silk   # same
 # allow: both resting on the shoulders   # Lượt 1280 owner: capes now sit LOW on the outer shoulders/upper arms, cut in a deep V (v4 text)
+allow: TWO layered embroidered satin SHORT shoulder capes   # owner Lượt 1327 via Foreman C #5: Phi capes = her main colour, gold peonies, pearl edge + tiny pearl drops (b26/s62_t5_v2 text)
+allow: Full-body standing figure head to feet   # boilerplate dup, length, DESIGN5 v7
+allow: soft even light   # same
+allow: fair porcelain skin   # same
+allow: beautiful/handsome romantic-lead looks for everyone   # same
+allow: Everyone beautiful at every age   # same
+allow: clearly much richer and more splendid than the lower ranks   # same

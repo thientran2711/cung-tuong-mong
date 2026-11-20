@@ -39,9 +39,9 @@ Edit script (for audit): every replacement is an exact one-time swap; listed bel
 | rank | base ed3e8fd | new |
 |---|---|---|
 | t4 | 9994 | 9958 |
-| t5 | 9868 | 9975 |
-| t6 | 9966 | 9985 (v6) |
-| t8 | 9997 | 9987 (v6) |
+| t5 | 9868 | 9980 (v7) |
+| t6 | 9966 | 9955 (v7) |
+| t8 | 9997 | 9991 (v7) |
 
 ## Every cut (boilerplate only, to stay ≤ 10 000; all listed as allow lines)
 From the duplicated line `Full-body standing figure head to feet, soft even light; fair porcelain skin; gentle expression … mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; 3/4 or frontal view.` (its content is repeated by the MASTER head-to-feet/skin/proportion sentences and the ANGLE line; S18 smile clause kept verbatim):
@@ -84,3 +84,10 @@ Removed `, with a long train BEHIND her` and the v3 sentence `Exception: her own
 **GATE CONFLICT (new, NOT decided):** `FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.` is approved sentence S07 plus master rule B12 (owner Lượt 364/781: t6+ = this BROCADE sentence exactly once). Replacing it FAILS S07 + B12, so it stays verbatim in t6/t7/t8 and now contradicts the light-fabric text. Needs an owner exemption or rewrite of S07/B12 for the Hán t7/t8 (and t6) prompts. Also the MASTER M07 sentence `The silk has real weight` stays (master).
 Cuts to fit (boilerplate dups only; allow lines added): t7 `Full-body standing … skin;`, `beautiful/handsome …`, `elegant, slim, clearly adult;`, `; 3/4 or frontal view`, ` clearly much richer and more splendid than the lower ranks`, `(one single visible sleeve layer, every inner sleeve hidden inside)` (the ONE SINGLE SLEEVE LAYER rule is kept). t8: `; 3/4 or frontal view`, the same two rank/sleeve dups, `; gold only as thin accents on the borders` (THREE-COLOUR RULE gold accents kept), plus my own words `, zhijin sha`, ` (no added width)`, `the SAME four layers as the Hoàng quý phi` → `the Hoàng quý phi's four`. No face, outfit, jewellery, embroidery or hair detail cut.
 Counts: t6 9985, t7 9926, t8 9987. check_store: t7/t8 PASS, t6 M07+S12 (unchanged). keep_check --all PASS (24).
+
+## v7 (Foreman C #5: owner Lượt 1325 overrides S07 for Hán t7/t8; owner Lượt 1327 jewellery)
+- **t7 + t8:** `FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.` → `FABRIC: light gold-woven gauze over thin supple Song brocade, with a graceful, flowing drape.` check_store now FAILS S07 + B12 on t7/t8 (expected). Logged as conflict 18 in dev/art/ART_RULES_CONFLICTS.md: **S07/B12 Hán exemption needed before Magnific.** t6 keeps S07 (gấm). t8 length fix (my own words): `light, thin, airy silk gauze` → `thin, airy silk gauze`, `soft drape close to the body` → `soft close drape`.
+- **t5 Phi capes** (reference b26/s62_t5_v2.txt): `TWO layered embroidered satin SHORT shoulder capes, one over the other (the upper cape shorter, the lower cape a little longer, pearl-edged), both set LOW` → `TWO layered embroidered light clear warm plum satin SHORT shoulder capes, one over the other (the upper cape shorter, the lower cape a little longer), each cape richly embroidered in gold thread with small peonies, each edged with a row of small sewn-on pearls with a short fringe of tiny pearl drops dangling beneath each cape edge, a little richer than the Tần's pearl fringe and fewer than the Quý phi's drops, both set LOW`. The LOW / deep V / neck-visible wording is kept. Colour: the reference says "ice blue", but the Hán files use her Hán main colour **light clear warm plum** (the DESIGN2 colour swap), so I used that.
+- **t6 Quý phi vân kiên** (reference swap56/s62_t6_v2.txt): added `with small jade and pearl drops dangling beneath it, fewer and smaller than the Hoàng quý phi's` after the gold-tassel fringe.
+- Cuts (boilerplate dups only; allow lines added). t5: `Full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin;` (the MASTER full-body/background/skin sentences stay), ` beautiful/handsome romantic-lead looks for everyone;`, ` Everyone beautiful at every age.`, ` clearly much richer and more splendid than the lower ranks`. t6: `(one single visible sleeve layer, every inner sleeve hidden inside)` (the ONE SINGLE SLEEVE LAYER rule is kept) and ` clearly much richer and more splendid than the lower ranks`.
+- Counts: t5 9980, t6 9955, t7 9949, t8 9991. check_store: t5/t6 M07+S12 (unchanged); t7/t8 S07+B12 (expected, see conflict 18). keep_check --all PASS (24).

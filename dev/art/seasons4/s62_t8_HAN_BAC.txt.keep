@@ -33,3 +33,4 @@ allow: heavy gold-thread brocade   # owner Lượt 1325 (Foreman C #5 proposal L
 allow: gấm kim tuyến   # owner Lượt 1325 (Foreman C #5 proposal L1324): light fabric, sa dệt kim outer + Tống cẩm inner
 allow: richer than the Hoàng quý phi's brocade   # owner Lượt 1325 (Foreman C #5 proposal L1324): light fabric, sa dệt kim outer + Tống cẩm inner: now 'woven gold DENSER, royal yellow larger than the HQP'
 allow: "Mùa Xuân · Thiết kế thời Hán · Hoàng hậu · Lễ phục gấm kim tuyến   # owner Lượt 1325 (Foreman C #5 proposal L1324): light fabric, sa dệt kim outer + Tống cẩm inner: caption fabric
+allow: thick gold-embroidered brocade with a graceful   # owner Lượt 1325 overrides S07 for Hán t7/t8 (Foreman C #5); S07/B12 exemption needed before Magnific
