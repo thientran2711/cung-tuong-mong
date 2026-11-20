@@ -111,5 +111,7 @@ def run(d=None, quiet=False):
 
 
 if __name__ == '__main__':
-    f, w = run(quiet='--quiet' in sys.argv)
+    # FRUITPET2: --file palettes_season_deep.json = the owner-approved P6 palette (Lượt 1042) with s62–s65 (90 consorts); default file unchanged
+    fa = sys.argv[sys.argv.index('--file') + 1] if '--file' in sys.argv else None
+    f, w = run(json.load(open(fa if os.path.isabs(fa) else os.path.join(FC, fa))) if fa else None, quiet='--quiet' in sys.argv)
     sys.exit(1 if f else 0)

@@ -65,3 +65,10 @@ Blocks review/poison-road PASS (reports/review-poison-road.md FAIL 1). **DONE 19
 For main's kit keeper (j82 `KG82_DEMO` + `kgReadyDemo` CSS `.kgr-demo[data-m=...]`; plus the guided-round word for the ghost hand in `KG82_TUTMSG` / `kgTutPt`). Design MG_CRAFTS.md §3 (Cắm hoa «Chọn mùa · cắt cành · nghiêng thế»): step 2 is a swipe ACROSS a stem. No existing demo group shows a slash (fall / swing / hold / pull / slide / drag / tap only).
 Needed: (1) a sixth rules-picture motion `cut`: the hand sweeps once across a stem-shaped object (a short bright slash line appears, the object splits in two) and loops; still under Cảnh động off / reduced motion; (2) the guided-round ghost hand mode `cut` (peek returns `{cut:[[x0,y0],[x1,y1]]}` → hand slides along the segment, label «cắt», message in `KG82_TUTMSG.cut`, e.g. «Vuốt ngang cành để cắt.»).
 Until built: the hoa board registers `KG82_DEMO.hoacraft="drag"` with a 'tạm' marker and its peek returns the same cut segment as a drag path (the hand slides along it, label «kéo»). Switch to `"cut"` when the kit part lands (one line in jcraft_hoa.js).
+
+## (20/11, CAL-P2C #1 session_01964izF6sJHzxcBve2mGhvJ for Foreman D #9) KIT REQUEST — «sở trường / sở đoản» seal on a mini-game result
+Owner OD 20/11 ~07:35Z (identity offset) + ORDER MAIN ROOT-75 07:25Z: the identity offset must be "shown readably on the result («sở trường» seal) via the kit".
+Built now with EXISTING kit parts only (not blocking): one `kg82Rows` / `kitRows` row on top of every mini-game result (j82 `kg82ShowRes`, jmgid `mgIdRow`):
+label «Sở trường» / «Sở đoản» / «Thân phận», value «thân phận này vốn giỏi môn ấy · tay quen Khá · 5/10 → 8/10» (branch review/cal-p2c).
+Needed (kit keeper): an optional small stamp/seal chip (3 states: sở trường gold-green · sở đoản muted red · thân phận neutral) that can sit in that row's label
+cell, same family as `kitResultSeal`. When it lands, jmgid `mgIdRow` swaps the label text for the seal (one line). No private CSS was written.

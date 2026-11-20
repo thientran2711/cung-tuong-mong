@@ -63,3 +63,32 @@ FRUITPET1's candidate (a) is still open. It cuts the ANGLE tail "; her head turn
 ## Files
 dev/art/t8-prompt-B/pets.py (KID_AGES, KA, KIDS, kid_pet, kid_check; check() = ranks + kids) · t8-prompt-B/build_npc.py (kid() hook) · check_store.py (girl/boy scopes, regex, self samples, doc line) · ART_RULES.md + _HISTORY (F17) · palettes3/add_s62_65.py (new) · face-common/palettes_season_deep.json (+s62–s65) · this report.
 Commit: (see the push message / git log "FRUITPET2")
+
+# ROUND 2 — ROOT-69 "BEFORE MASS" blockers (0 gens)
+## (a) s62/s63/s64/s65 added to OWNER_GROUPS_L686.json (139 → 143): done
+- Groups come from LOOK_GROUPS.md Lượt 1046 (F4): s62, s63 and s64 = Dịu dàng, s65 = Đoan trang. s63 is included because the owner put her in the group; she has no rank pictures and stays HELD by B8.
+- Side effect found and fixed:
+  - Adding members made build_all re-plan the E12 ANGLE grid of the whole group (group_angles backtracks over every member). That would have changed the angles of 79 prompts of 13 existing people (m19, m20, m29 …).
+  - Fix in build_all.plan(): the old members are planned exactly as before. The newcomers (S_NEW_SET) are fitted into the free slots by the new group_angles_add() under the same E1/E12 caps.
+- Proof: a before/after snapshot of every Dịu dàng + Đoan trang member × t1–t8 × 5 ages (640 prompts). The **24 existing members are byte-identical**. Only s62, s64 and s65 change.
+- One cell cannot be fitted under the caps: Dịu dàng a26. The 11 old members leave 15 usable slots, but s62 and s64 need 16. The fix lets the newcomer repeat one sentence as few times as possible: **1 repeat, s64 t8 a26** (sentence cap 1 → 2 there; listed in `build_all.ANGLE_ADD_DUPS`). The other option was to re-plan the old members' angles; I did not do that because it changes approved prompts (A18).
+- IMPORTANT for the foreman: **s62, s64 and s65 are already drawn at 8 ranks (a18, RANK8)**. Their builder a18 prompts now follow the group plan, so they no longer match the drawn pictures:
+  - item/pose differs at 7/8/5 ranks (s62/s64/s65)
+  - angle differs at 6–7 ranks per person
+  - grace line differs at most ranks
+  The drawn pictures and ledger records stay as they are (no redraw, A20/A21).
+- Why the old picks broke the rule: their drawn items repeated a group member's item at 12 rank cells (s62 = m19 at 6 ranks + m08 t3, s64 = m14 t2 + m02 t6, s65 = m05 t2 + m04 t4 + m16 t6). The new plan gives s64 the same items as m02 (8 ranks). That is the colour-class pigeonhole: 14 members over 8 classes, so a cap of 2 per item, allowed by E12.
+- Other readers of OWNER_GROUPS:
+  - check_unique.py now expects 90 consorts. On the approved P6 file (`python3 dev/art/palettes3/check_unique.py --file palettes_season_deep.json`, new option): 90/90 present, **0 FAIL**, 219 WARN.
+  - The CLI default (old palettes_season.json, no s62–s65) now reports 4 "consort missing" lines. This is expected; the default file was not changed.
+  - palette86.py, face_map_L703.py and make_season_sheets_by_season.py also read the file. I did not run them; they now see 90 people.
+
+## (b) kc_refs_build.py: fixed
+- Fix 1: it crashed on ledger lines whose `refs` are plain strings → it now takes `r.get("id")` for a dict and the string itself otherwise.
+- Fix 2: it had no s-rows and set c06 to NOT drawn, so a rebuild would drop s62, s64 and s65 and undo REDRAW3's c06 row. Now every drawn row (m09_ok yes) in the existing KC_REFS.json that the script cannot produce is kept verbatim. The script prints which ones: `c06 s62 s64 s65`.
+- Proof: after a rebuild, KC_REFS.json is **content- and order-identical** to before. KC_REFS.md was stale (said ok 55 / total 93); after the rebuild it shows ok 59 / total 96 with the c06/s62/s64/s65 rows.
+
+## (c) build_all a18 invariant FAILs (m04/m42 t7, m01/m30 t8): builder-check bug, fixed
+- Cause: FRUITPET1's F17 step `pets.depet` (at t7/t8 the old "butterfly on her raised finger" pose becomes "gazing at her lightly raised hand") runs in build() but not in check()'s rebuild of the store text. So the invariant compared the de-petted prompt against a reference that still had the butterfly. It only showed for people whose picked pose is one of the 3 old animal poses.
+- Fix: check() applies the same depet step. No prompt wording changes; build() output is untouched.
+- Re-run result: see "build_all --check after round 2" below.
