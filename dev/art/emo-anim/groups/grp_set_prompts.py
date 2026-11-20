@@ -8,6 +8,7 @@ usage: python3 grp_set_prompts.py bg|bt|mm [keys…]  → JSON {key: {A,B,out,lo
 import json, re, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import th_prompts as T
+import ghen_male  # A25: males never hold the handkerchief → T.S['ghen-m']
 from grp_gian_prompts import G
 KEYS = ["vui", "buon", "so", "an", "binh", "ghen", "lo", "muu", "tutin", "hanghai"]
 REF_A = {"bg": "gOmeqmUSXO", "bt": "hu24MALvqL", "mm": "w4aBKCf7EI"}
@@ -37,7 +38,8 @@ def swap(k, g, s):
         s = re.sub(r"\bher\b", "his", s); s = re.sub(r"\bHer\b", "His", s)
     return s
 def prompts(g, k):
-    return {p: swap(k, g, v) for p, v in T.prompts(k).items()}
+    kk = "ghen-m" if (k == "ghen" and G[g]["P"][0] == "he") else k   # A25: bt (male) ghen without handkerchief
+    return {p: swap(k, g, v) for p, v in T.prompts(kk).items()}
 BAD = ["dowager", "phoenix", "plum", "wrinkl", "seventy", "pearl", "spring green", " old ", "crown jewels"]
 if __name__ == "__main__":
     import os as _os; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen

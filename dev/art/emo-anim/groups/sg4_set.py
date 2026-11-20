@@ -9,6 +9,7 @@ usage: python3 sg4_set.py ht [vui buon ...]  -> JSON {key: {A,B,out,loop,back}} 
 import json, re, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import th_prompts as T
+import ghen_male  # A25: males never hold the handkerchief → T.S['ghen-m']
 from sg4_prompts import G
 KEYS = ["vui", "buon", "so", "an", "binh", "ghen", "lo", "muu", "tutin", "hanghai"]
 REF_A = {"ht": "xSBTuOKjfW", "htg": "YMlKNB4WeC", "tg": "xSBTuP1jfW", "tv": "jUoVQNALD0"}
@@ -21,7 +22,7 @@ SKIN = " His skin keeps its natural colour the whole time, never purple, never t
 def person(g, k):
     who, same, sl, face, hg, short, lhg, endface, top = G[g]
     head, item, oface = HG[g]
-    p = T.prompts(k)
+    p = T.prompts("ghen-m" if k == "ghen" else k)   # all sg4 groups are male (A25)
     out = {}
     for part, s in p.items():
         s = s.replace(T.WHO, who).replace(T.SAME, same).replace(T.OLD, short)
