@@ -26,7 +26,7 @@ const RCVX={poison:"bỏ độc (lén)",plant:"giấu bùa (lén)",taint:"hạ t
 /* JUDGE a THIRD person is asked to decide about the target (xin Hoàng hậu giáng, trình Hoàng hậu / Thái hậu): the judge is the receiver (judge probe below)
    EVERY act key is classified HERE (review FAIL 6 #4: no hand list may send an unlisted act to DONE). The key list itself comes from the live act tables
    (TW / ACT / AGRUN, in the page); a reached inter-person act whose key is in no list is kind NEW → verdict NEW = a gap, the test fails until it is classified. */
-const KINDS={REQ:"help facJoin blockf bribel bribe bribeSrv rougeBorrow illAlly rougeBeg",PROP:"ally facFound invite2 call mediate manHail manFlirt manToken manTryst",ORDER_SRV:"illMaid",ORDER:"summon visit",
+const KINDS={REQ:"help facJoin blockf bribel bribe bribeSrv rougeBorrow illAlly rougeBeg",PROP:"ally facFound invite2 call mediate manHail manFlirt manToken manTryst pmplay pmduel pmPlay pmDuel",ORDER_SRV:"illMaid",ORDER:"summon visit",
  JUDGE:"xinhh trinhhh trinhth takeaway",
  /* staffUp «Tiến cử»: a request to Nội vụ phủ (an office; recommend() is one rule for her and every NPC) and the servant only gains (law 3) → GIFT (reviewer 88de83c5f) */
  /* doctor «Mời làm thái y tâm phúc» (surfaced by the UNREACHED / no-self-skip check, round 4): a paid service of an office (Thái y viện; the thái y is the court seat
