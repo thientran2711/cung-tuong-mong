@@ -1,0 +1,16 @@
+# F3 — Quyến rũ s43 s44 s45 (new base pictures) — BLOCKED at the store gate, 0 gens
+START_CTX ≈4 % of 1M (estimate; get_session read 0) · depth 7 (limit 8) · worker of ROOT-63 (session_01PEhRbvZfdPoYPcwQjYD5EG)
+
+## Built
+- dev/art/face-common/make_quyenru_s43_45.py = make_quyenru_L761.py copied unchanged (Quyến rũ T7 face + r2 expression + V5B + EYES_STRAIGHT + strong mouth + FG.final master block); only the person rows and ROOTS differ.
+- Colours = root_drawn (owner L27 "Giữ lại bảng áo đậm màu", ROOT-63 message): s43 soft sapphire blue #385A9F + pale lemon cream #EAE5CD; s44 soft burnt sienna #A6593F + sage grey #9EB39E; s45 soft aubergine purple #7C4587 + pale gold #DACEA9.
+- Each keeps her own hair, outfit, item, angle from make_sacsao_L737.py (s43 SL scroll, s44 TR pomegranate, s45 SR sachet). Beauty mark = approved Quyến rũ wording (below outer corner of her own LEFT eye) — D17 OK.
+- DIFF vs approved Quyến rũ s56–s61 (A17): only per-person rows. Face swaps carry her own trait softly: s43 "short, nearly straight, softly curved brows" + "softly sculpted cheeks"; s44 "soft DIAMOND-OVAL face, widest at the gently high cheekbones," + "softly full lips with a clear curved bow"; s45 "soft TEARDROP-OVAL face" + "very large … almond eyes" + "a straight nose with a gently arched bridge". Pose verbs in Quyến rũ wording ("standing with her weight on one leg and her head softly tilted" / "walking slowly and gracefully mid-step … the other sleeve trailing"); s43 "as if checking a record" dropped (Sắc sảo flavour, eyes would go down to the scroll).
+- Draft prompts (gate run with the root_drawn pair swapped in, nothing else): dev/handover/reports/F3-drafts/s4N.qr.DRAFT.txt (~6.1k chars each).
+
+## Gate (check_store --scope face via FG.final) — FAIL, so NO gens
+1. B20 ROOT HEX (all 3): check_store.root_pair() reads s_root_colours.json main_hex = the SOFT codes (#81A0D9/#D18C74/#B98BC3), so the L27 deep root_drawn hexes FAIL. The gate needs updating for L27 (foreman's job, I do not change the gate). With root_drawn swapped in: s43 PASS, s45 PASS.
+2. B19 NO GREY (s44): "sage grey" is her root sec colour, but B19 fails grey outfit colours. Her approved Sắc sảo prompt s44.v5.FULL.txt fails the same check today. Owner/foreman choice: allow sage grey for s44 (her drawn colour) or rename (e.g. "sage green") — rename = colour change, needs the owner.
+3. Note (not a gate fail): the FG.final master COLOUR RULE says "medium-light tone … never heavy" while L27 deep hexes (#385A9F, #A6593F, #7C4587) are medium-dark. May pull the robes lighter. Unchanged (LAW #0).
+
+## Credits: 0 used. Commit: see git log ("F3 …").
