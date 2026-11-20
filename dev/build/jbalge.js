@@ -7,7 +7,7 @@
      D5 BAL.ge.title.carry "prev" (recommended: only the previous life's grand title is wearable next life, cosmetic) · alt "any" (any title ever earned)
      D7 BAL.ge.showOdds   false  (recommended: the two last choices show no odds) · alt true (the ladder word on the pair that points to an open ending)
      D8 BAL.ge.quietLoss  false  (recommended: a pair that points at no ending lands on a fail outcome with NO loss) · alt true (with its loss)
-   KIT gates: BAL.ge.mapOn false until the kit keeper ships kitBranchMap (K-GE-1); the Sơ đồ nhánh data API geMap() works either way. */
+   KIT gates: BAL.ge.mapOn = the Sơ đồ nhánh page (kitBranchMap, K-GE-1, landed); the Sơ đồ nhánh data API geMap() works either way. */
 BAL.ge={
  on:true,              /* the engine runs for branches with full data (GE_DATA) only; other branches keep today's game */
  n:{grand:4,rare:2},   /* fixed counts per branch (owner L1623 (1)); no normal endings */
@@ -15,7 +15,7 @@ BAL.ge={
  after:"rec",          /* D4 */
  showOdds:false,       /* D7 */
  quietLoss:false,      /* D8 */
- mapOn:false,          /* K-GE-1 kitBranchMap not in the kit yet */
+ mapOn:true,           /* K-GE-1 kitBranchMap landed (90b7e797): the Sơ đồ nhánh page in Sổ luân hồi is on */
  pull:{step:1,push:1}, /* a Chuỗi option adds step to its ending's pull; a push option takes push away (never below 0) */
  /* odds of the open ending her pair points to: base + pull × per, clamped [min, max]; its condition not met → capped at noCond */
  odds:{base:22,per:9,min:5,max:88,noCond:12},
