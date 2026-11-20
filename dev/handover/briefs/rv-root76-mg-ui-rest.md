@@ -1,0 +1,7 @@
+PRIORITY #1 CHECK: OD L1981, L2008, L2036 | main kgReady/kitGameFrame/kg82Frame | review/mg-ui-rest b5253eeb (worker HdrZN7mz) | claims mg-ui-rest
+# REVIEW mg-ui-rest (SMALL, sonnet) — MAIN ROOT-76
+Read briefs/root76-common.md first (all), START_REVIEWER.md, dev/rules/topic/kit-ui.md, KIT.md mini-game sections.
+Target review/mg-ui-rest = b5253eeb (brief briefs/root76-mg-ui-rest.md, report reports/mg-ui-rest.md). FIRST merge newest origin/main into review/mg-ui-rest-rv (index/sw rebuild; combine real conflicts).
+CHECK: MG12 pet care (feed/bath/play) + plant care (water) open on the SAME kit rules screen as KG82 kinds (kgReady, «Hướng dẫn» + «Sẵn sàng»), khắc spent only on «Sẵn sàng», guided round unscored, bath fix real; KP05 seal word = kit-frame parameter, every caller passes or defaults (scan table honest, no per-screen variant), scheme games show MƯU; Điểm trang untouched (OD L2036); MG04 skipped because mg-noword-b holds it (agree/disagree). KIT FIRST + VANPHONG for every new word. Fold 755x1000 + iPad 1180x820 shots of each screen, LOOKED. Tests: mg-ui-rest.js, mg-ready-guide 9/9, ag-mgcal, quickcheck (`timeout 590 bash dev/tools/golive.sh <sha>` checks, or dev/tools/quickcheck.sh <sha>; never --yes), oldsave.
+If PASS: final sha on review/mg-ui-rest-rv merged with newest origin/main, tests rerun, FF-check, push.
+VERDICT: reports/rv-mg-ui-rest.md; CLAIMS row; send_message MAIN ROOT-76 session_01Rc5AsN56DP1NgSYAwWFJ8o "PASS <final sha>" or "FAIL <sha> <n fixes>" (fixes to worker session_01Rc5AsHdrZN7mzQfdLCDDAN).
