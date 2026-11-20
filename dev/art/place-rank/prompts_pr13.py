@@ -142,6 +142,63 @@ KT_DONG_REC = ("Khải Tường cung Đông phối điện reception room, the s
     "lantern tassels, the seat cushions and the table runner. " + QN + " The only rank colour is soft blue." + NOPE + P['NOSOFA'] + RECT + GUIDE_S + FR)
 OUT['khai-tuong-cung-dong-phoi'] = dict(prompt=room9(KT_DONG_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3])
 
+# PR14 room 8+: BEDH2 still gave crowns at ~17 % H (level with the heads) → BEDH3: crown near the top edge (about one twentieth), taller than the women.
+BEDH3 = BEDH + (" Each bed is clearly taller than the standing women: its four posts and its carved canopy crown rise almost to the top edge of "
+    "the picture, the crown at about one twentieth of the picture height, the hanging lanterns in front of it; its gauze curtains hang from that "
+    "crown; free-standing four-poster frame beds, never beds set into a wall alcove.")
+# 8) Khải Tường TÂY phối bedroom — pair Đáp ứng + Đáp ứng (ĐĐ): whole room cream-ivory #EAE3D0. THREE walls, windows LEFT (image 3 1ldYySkr4r).
+#    Own layout: beds at the LEFT and RIGHT ENDS of the back wall, in the middle of the back wall a vase doorway with a shared dressing table +
+#    round mirror in front; left window wall: small tea table + 2 stools; right wall: tall wardrobe cabinet. + CARD_KT + BEDH3 + FG.
+KT_TAY_NGU = ("Khải Tường cung Tây phối điện bedroom, the cosy bedchamber SHARED by two lower-ranking imperial consorts (two Đáp ứng) living in the "
+    "west side hall of a palace in ancient China, a real room in daily use, " + WL3 + ": wooden pillars, lattice windows in the LEFT side wall onto a "
+    "sunny garden; against the back wall, square to it and seen straight on, TWO tall free-standing canopy frame beds of carved honey-brown nanmu "
+    "wood, one at the LEFT end and one at the RIGHT end of the back wall, each bed whole inside the picture, together the large clear main subject; "
+    "in the middle of the back wall a hexagonal lattice partition with a vase-shaped doorway, and in front of it a shared dressing table with a "
+    "round bronze mirror and a stool; each bed with a low bed step and slippers; along the left window wall a small tea table with two stools; "
+    "against the right side wall a tall wardrobe cabinet; hanging paper lanterns with tassels, a bowl of lotus, a small embroidery basket. " + CARD_KT
+    + pair1('cream-ivory', '#EAE3D0') + "the gauze curtains of BOTH beds, the window curtains, the lantern tassels, the bedding and cushions of BOTH "
+    "beds and the stool cushions, set off by the honey-brown wood; the two beds look alike. " + QN + " Exactly two beds; the only rank colour is "
+    "cream-ivory." + NOPE + RECT + GUIDE_S + BEDH3 + FG)
+OUT['khai-tuong-cung-tay-phoi-ngu'] = dict(prompt=room9(KT_TAY_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3X])
+# 9) Khải Tường TÂY phối reception — ĐĐ cream-ivory. TWO walls, windows RIGHT (image 3 4RFIyNR9Aa). Own layout: luohan daybed + kang table in
+#    the RIGHT third of the back wall between two tall lattice cabinets; vase doorway in the LEFT third; round table with four drum stools in
+#    front of the left part. + CARD_KT + FR.
+KT_TAY_REC = ("Khải Tường cung Tây phối điện reception room, the small sitting room where two lower-ranking imperial consorts (two Đáp ứng) living "
+    "in the west side hall of a palace in ancient China receive their guests, a real room in daily use, no bed anywhere, " + W2R + ": wooden "
+    "pillars, lattice windows in the RIGHT side wall onto a sunny garden; against the back wall in its RIGHT third, square to it and seen straight "
+    "on, the host seat, the large clear main subject: a luohan daybed (a wide low carved honey-brown nanmu daybed with a three-sided carved panel "
+    "back, a small low kang table with a tea set in its middle, flat silk cushions) between two tall lattice cabinets with porcelain and books; in "
+    "the LEFT third of the back wall a hexagonal lattice partition with a vase-shaped doorway onto a small inner room; in front of the left part, "
+    "back near the wall, a small round table with four drum stools and a bowl of lotus; hanging paper lanterns with tassels, an incense burner, "
+    "potted plants by the windows. " + CARD_KT + pair1('cream-ivory', '#EAE3D0') + "the sheer window curtains tied back, the curtain of the doorway, "
+    "the lantern tassels, the daybed cushions, the drum stool cushions and the table runner, set off by the honey-brown wood. " + QN
+    + " The only rank colour is cream-ivory." + NOPE + P['NOSOFA'] + RECT + GUIDE_S + FR)
+OUT['khai-tuong-cung-tay-phoi'] = dict(prompt=room9(KT_TAY_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M2])
+
+# PR14 room 10+: BEDH2/BEDH3 still gave crowns at ~16-17 % H (the model stops the bed under the lanterns) → BEDH4: posts + crown run OUT of the
+#    top edge like the walls and pillars; lanterns only beside the beds, never in front of them.
+BEDH4 = BEDH + (" Each bed is clearly taller than the standing women: its four posts and its carved canopy crown run out of the top edge of the "
+    "picture, like the walls and pillars, so the top of the bed is cut by the top edge; its gauze curtains hang from high up; the hanging lanterns "
+    "hang only beside the beds, never in front of them; free-standing four-poster frame beds, never beds set into a wall alcove.")
+# Chung Tú style card (new, PR14) — reused in every later Chung Tú room.
+CARD_CT = ("Chung Tú cung signature style, the same in every room of this palace: plum blossoms (hoa mai) are its flower, painted on the screens, "
+    "embroidered on the silks and in the vases; motifs of magpies on plum branches carved in the beams and furniture; dark red sandalwood with small "
+    "cloisonné enamel plaques; low-backed rose chairs; a rectangular doorway with rounded corners in a cracked-ice lattice partition. ")
+# 10) Chung Tú ĐÔNG phối bedroom — pair Đáp ứng (t1) + Thường tại (t2), colours swapped vs room 1: curtains soft green, fabrics cream-ivory.
+#     THREE walls, windows RIGHT (image 3 cpS5YIl0eP). Own layout: both beds side by side in the LEFT two thirds of the back wall on ONE long shared
+#     low platform, a cracked-ice lattice doorway between them; right third: dressing table + stool under the right windows, tall clothes cabinet
+#     at the back right. + CARD_CT + BEDH4 + FG.
+CT_DONG_NGU = ("Chung Tú cung Đông phối điện bedroom, the cosy bedchamber SHARED by two lower-ranking imperial consorts (a Đáp ứng and a Thường tại) "
+    "living in the east side hall of a palace in ancient China, a real room in daily use, " + P['W3'].replace(' (owner Lượt 613: two walls read wider)', '')
+    + ": wooden pillars, lattice windows in the RIGHT side wall onto a sunny garden; against the back wall in its LEFT two thirds, square to it and "
+    "seen straight on, TWO tall free-standing canopy frame beds of carved dark red sandalwood standing side by side on ONE long shared low platform "
+    "step, with a cracked-ice lattice partition and its rounded doorway between them, each bed whole in width inside the picture, together the large "
+    "clear main subject; slippers on the platform step; in the RIGHT third of the room a tall clothes cabinet at the back and, under the right "
+    "windows, a small dressing table with a bronze mirror and a stool; hanging paper lanterns with tassels, vases of plum blossoms, a small "
+    "embroidery basket. " + CARD_CT + pair_cols(2, 1) + QN + " Exactly two beds; only the two colours soft green (curtains) and cream-ivory (fabrics)."
+    + NOPE + RECT + GUIDE_S + BEDH4 + FG)
+OUT['chung-tu-cung-dong-phoi-ngu'] = dict(prompt=room9(CT_DONG_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3])
+
 # GATE (as v9): common block present, method refs, no drift words, no phoenix/yellow below t7.
 for k, v in OUT.items():
     p = v['prompt']
