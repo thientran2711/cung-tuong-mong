@@ -15,7 +15,7 @@ const {chromium}=require('playwright');const fs=require('fs'),path=require('path
 const {serve,BASE}=require('../coop-serve.js');
 const OUT=path.resolve(process.argv[2]&&!process.argv[2].startsWith('--')?process.argv[2]:path.join(__dirname,'../../shots/coop-together'));fs.mkdirSync(OUT,{recursive:true});
 const WURL=(process.argv[3]&&!process.argv[3].startsWith('--'))?process.argv[3]:'https://ctm-coop.victoria-tntt.workers.dev';
-const arg=k=>{const a=process.argv.find(x=>x.startsWith('--'+k+'='));return a?a.split('=')[1]:null};const OA=arg('a')||'cnv',OB=arg('b')||'nc';
+const arg=k=>{const a=process.argv.find(x=>x.startsWith('--'+k+'='));return a?a.split('=')[1]:null};const OA=arg('a')||'cnv',OB=arg('b')||'nc';const THIN=arg('thin');/* review/kc-coop-select: --thin=n = the host asks the room for thin level n (dev flag ctm-thin, jcoopthin): the guest's life is built on the host */
 const ROOT=path.resolve(__dirname,'../../..');
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
@@ -47,7 +47,7 @@ async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms)
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()=>{/* review/entry-exam-r1: the entry exam frame (jentry, kg82): not playing = "Để tài nghệ quyết định", then the result's ✕ (KIT kitOvSync
       turns #kg82ok into the header ✕ .kit-x[data-kitx=ov]) */
    {const g=document.getElementById('kg82skip');if(g&&g.getClientRects().length&&!g.disabled){g.click();return'x'}
-    const x=document.querySelector('#kg82 .kit-x[data-kitx=ov]');if(x&&x.getClientRects().length&&document.getElementById('kg82ok')){x.click();return'x'}}
+    const x=document.querySelector('#kg82 .kit-x[data-kitx=ov],#kg82 .kit-x[data-kitx=kgback]');/* kc-coop-select: the game frame's own ✕ «Quay lại» (j82 kg82BackX) presses #kg82ok on a result screen; jk4 adds the ov ✕ only where it is missing */if(x&&x.getClientRects().length&&document.getElementById('kg82ok')){x.click();return'x'}}
    const c=__co();if(c.frozen||c.waiting)return'coop';
    const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.parentElement&&x.closest('[class^=km],[class*=" km"]')&&/^(Nhận|Đã hiểu|Tạ ơn|Lĩnh chỉ|Tuân chỉ)$/.test(x.textContent.trim()));if(ov){ov.click();return'x'}
   const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
@@ -78,7 +78,7 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
 (async()=>{const b=await chromium.launch();
  const A=await mk(b,'fold',[755,1000,2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
  const auto=o=>`window.__forceOrigin='${o}';window.kcEntryExam=(k,done)=>done(5);/* the selection round = the exam hook (Foreman D's mini-game later) */try{localStorage.setItem('ctm-bgpause','1')}catch(e){}setInterval(()=>{try{document.querySelectorAll('.krskip').forEach(b=>b.click());const ro=document.getElementById('kroul');if(ro){const s=[...ro.querySelectorAll('button')].find(x=>/Bỏ qua/.test(x.textContent));if(s)s.click()}if(window.__pickHome){const b=document.querySelector('#modal:not([hidden]) [data-kcp="nha"]:not(.ksel):not([disabled])');if(b&&!(typeof S!=='undefined'&&S&&S.kc))b.click()}}catch(e){}},200)`;
- await A.ctx.addInitScript(new Function('window.__pickHome=1;'+auto(OA)));
+ await A.ctx.addInitScript(new Function('window.__pickHome=1;'+(THIN?`try{localStorage.setItem('ctm-thin','${+THIN|0}')}catch(e){}`:'')+auto(OA)));
  /* B: records her card, then takes "Vào cung ngay" herself */
  await B.ctx.addInitScript(new Function(auto(OB)+';window.__cardSeen=null;setInterval(()=>{try{if(!window.__cardSeen&&document.querySelector("#modal:not([hidden]) [data-kcp]")){window.__cardSeen=[...document.querySelectorAll("#modal [data-kcp]")].map(b=>({k:b.dataset.kcp,dis:b.disabled,sel:b.classList.contains("ksel"),t:b.innerText.slice(0,160)}));const c=document.querySelector("#modal [data-kcp=cung]");if(c&&!c.classList.contains("ksel"))c.click()}}catch(e){}},150)'));
  await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);
