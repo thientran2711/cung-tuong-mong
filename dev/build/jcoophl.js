@@ -71,8 +71,13 @@ HL.diff=diff;HL.canon=canon;
 let shared=null,tmr=0,nmQ=[];
 /* the friend's own face (her pid, a pool identity) is reserved in the ONE world face list on the host too: before, only her seat held it
    (pidEnforce on her side), the merge kept the host's list (arrays without ids: host wins), and the host could give her face to an NPC */
-function reserveFriend(){try{if(!CW.on||!host()||!S)return;const P=CW.base&&CW.base.P&&CW.base.P.b;const pid=P&&P.S&&P.S.pid;
-  if(pid&&typeof pid==="string"&&typeof figUsed==="function"){const U=figUsed();if(!U.includes(pid))U.push(pid)}}catch(e){}}
+/* ... and every face her OWN people hold (her maid, her staff, her children: her P, drawn on her seat): before, only her list held them
+   (e2e W10 after a rejoin: S.fidUsed held maid:m18 / maid:m15 on her seat only), so the host could give one of those faces to a world person */
+const POOLF=/^(consort|maid|mama|eunuch|man|kid|thaihau|th)[:-]/;
+function pFids(o,out,d){if(!o||typeof o!=="object"||d>6)return out;if(Array.isArray(o)){for(const x of o)pFids(x,out,d+1);return out}
+ for(const k in o){const v=o[k];if((k==="fid"||k==="pid")&&typeof v==="string"&&POOLF.test(v))out.add(v);else if(v&&typeof v==="object"&&k!=="fidUsed"&&k!=="fidDead"&&k!=="usedFaces")pFids(v,out,d+1)}return out}
+function reserveFriend(){try{if(!CW.on||!host()||!S||typeof figUsed!=="function")return;const P=CW.base&&CW.base.P&&CW.base.P.b;if(!P||!P.S)return;
+  const U=figUsed();const F=pFids({pid:P.S.pid,maid:P.S.maid,staff:P.S.staff,kids:P.S.kids},new Set(),0);for(const f of F)if(!U.includes(f)){U.push(f);HL.stat.resv=(HL.stat.resv||0)+1}}catch(e){}}
 function check(why){if(!live()||!host())return;HL.stat.checks++;const t0=performance.now();let ops=[];reserveFriend();
  if(why!=="pick"&&why!=="nm")try{figFill()}catch(e){}/* a world person still without a face gets the host's now (not at its next render) */
  try{const now=canon();if(shared)ops=diff(shared,now);shared=now}catch(e){console.error("hl check",e);return}
@@ -190,6 +195,10 @@ function nmText(x){try{if(typeof nmRewrite!=="function"||!x[2])return;const b=ty
 function nmAgain(){if(!live()||host())return;const w=COOP.state.week||0;HL.nm=HL.nm.filter(x=>w-x.w<=2);const q=quiet;quiet=true;CW.inFC=(CW.inFC||0)+1;try{for(const x of HL.nm)nmText([x.o,x.n,x.r])}finally{quiet=q;CW.inFC--}}
 HL.apply=apply;
 COOP.on("act",m=>{if(!m||m.k!==K||!CW.on||m.from===CW.seat)return;try{if(m.ask){if(host()&&CW.base)baseFrom(CW.base,"ask");return}apply(m)}catch(e){console.error("hl apply",e)}});
-/* the guest (re)opened the room (reload / rejoin / first join): she was rebuilt from the room's C; she asks for the host's writes since */
-COOP.on("start",()=>setTimeout(()=>{try{if(live()&&!host())COOP.send({t:"act",k:K,ask:1,id:K+"q"+Date.now().toString(36)})}catch(e){}},400));
+/* the guest (re)opened the room (reload / rejoin / first join): she was rebuilt from the room's C; she asks for the host's writes since.
+   A FIRST join has no world of hers at "start" (she waits for the host's world, then picks her person: "state" -> newLife): the host's
+   writes sent before that were dropped (no S) and nobody asked again (e2e W10: no Thái hậu face on her seat for the whole first week) */
+function ask(){try{if(live()&&!host())COOP.send({t:"act",k:K,ask:1,id:K+"q"+Date.now().toString(36)})}catch(e){}}
+COOP.on("start",()=>setTimeout(ask,400));
+COOP.on("state",()=>{if(!host())setTimeout(ask,400)});
 }catch(e){console.error("jcoophl",e)}})();

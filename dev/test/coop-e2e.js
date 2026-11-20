@@ -138,9 +138,10 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
       NPC's mood was last re-summed from her mk list + that sum: re-summed on every read, so the shown mood comes from mk, which is equal);
       S.wx = the weather of THIS seat's khắc, moved by jwxk wxkSync from the one world day S.wxDay (equal on both seats) */
    const DERIVED=/(^|\.)__|^S\.wx\./;
-   /* lazy values a screen stores on its first READ (jtrong trongOf, jnet netOf: drawn from a fixed hash of the person, the same on both seats):
+   /* lazy values a screen stores on its first READ (jtrong trongOf, jnet netOf: drawn from a fixed hash of the person; jkh khInit: from her
+      children count; the same on both seats):
       one seat that drew a person's card holds them, the other not yet; both seats read every world person first, so a difference left is real */
-   if(tag!=='start'){const wc=o=>o.p.evaluate(()=>{try{for(const v of rivals||[]){if(!v||v.coop)continue;for(const p of [v,...(v.staff||[]).filter(x=>x&&!x.coop),...(v.kids||[])]){try{if(typeof trongOf==='function')trongOf(p)}catch(e){}try{if(typeof netOf==='function')netOf(p)}catch(e){}}}
+   if(tag!=='start'){const wc=o=>o.p.evaluate(()=>{try{for(const v of rivals||[]){if(!v||v.coop)continue;for(const p of [v,...(v.staff||[]).filter(x=>x&&!x.coop),...(v.kids||[])]){try{if(typeof trongOf==='function')trongOf(p)}catch(e){}try{if(typeof netOf==='function')netOf(p)}catch(e){}try{if(typeof khInit==='function')khInit(p)}catch(e){}}}
       for(const p of [S.thO,...((S.thO&&S.thO.staff)||[]),...(S.men||[])]){if(!p)continue;try{if(typeof trongOf==='function')trongOf(p)}catch(e){}try{if(typeof netOf==='function')netOf(p)}catch(e){}}}catch(e){}
       const X=COOPW.X,J=X.J;const d=ser();const sS=d.S;const pid=((COOPW.base&&COOPW.base.P&&COOPW.base.P[COOP.state.you])||{}).pid;
       const W={};for(const k of X.W_KEYS)if(k in sS){const v=J(sS[k]);if(k==='cm'&&v)for(const f of X.CM_P)delete v[f];if(k==='men'&&Array.isArray(v))for(const x of v)if(x)for(const f of X.MEN_P)delete x[f];W[k]=v}
