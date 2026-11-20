@@ -10,7 +10,7 @@ const {chromium}=require('playwright');
 const fs=require('fs'),path=require('path');
 function staticLaw4(){const D=path.join(__dirname,'..','..','build'),F=[];
  const RX=[[/Object\.assign\(BAL\.kc3\.fx/,'arc numbers typed in a content file'],[/\bR\(\d+\)/,'R(n)'],[/\broll\(\d+\)/,'roll(n)'],[/kcRare\("kcR\d",\s*\.?\d/,'rare odds'],
-  [/[,{]k:\d/,'card k:n'],[/Math\.(min|max)\((?!0,)\d/,'Math.min|max(n'],[/(>=|<=|<|>)\s*(?!0\b|1\b|100\b)\d+(\.\d+)?\b/,'comparison with a typed number'],[/k61Know\([^;]*,\s*\d\)/,'k61Know level'],
+  [/[,{]k:\d/,'card k:n'],[/Math\.(min|max)\((?!0,)\d/,'Math.min|max(n'],[/(>=|<=|<|>)\s*(?!0\b|1\b|100\b)\d+(\.\d+)?\b/,'comparison with a typed number'],[/k61Know\([^;]*,\s*\d\)/,'k61Know level'],[/\b[a-zA-Z_$][\w$]*\((?:[^()]*,\s*)?(?!0\b|1\b|100\b)\d+(\.\d+)?\s*[,)]/,'a typed number passed to a call (0 / 1 / 100 flags and bounds allowed)'],
   [/S\.tm96\.h>=/,'second copy of the kcR1 gate']];
  for(const f of ['jkc3.js','jkc3a.js','jkc3b.js']){const src=fs.readFileSync(path.join(D,f),'utf8').replace(/\/\*[\s\S]*?\*\//g,m=>m.replace(/[^\n]/g,' '));
   src.split('\n').forEach((l,i)=>{const code=l.replace(/"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*`/g,'""');for(const [re,w] of RX)if(re.test(code))F.push(`${f}:${i+1} law 4: ${w}`)})}
