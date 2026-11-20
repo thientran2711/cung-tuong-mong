@@ -538,4 +538,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW coop-guest-agent r1 (opus BIG) of 60ff8f11 | review/coop-guest-agent-r1 | B | session_01N1tNP34YLAbVuMi631JPUN | RUNNING | 20/11 22:03Z |
 | REVIEW ge-rank r1 E35r (opus BIG) of c5ebab9a | review/ge-rank-r1; reports/ge-rank-review.md | FOREMAN E #23 | session_01DgYSWp7SnXwAmHQzVR8omH | RUNNING | 20/11 22:05Z |
 | coop-guest-agent (opus; agOn() false on co-op guest → guest's own servants skip agent month; found by G #7) | review/coop-guest-agent; briefs/b-coop-guest-agent.md | B | session_01N1tNP6ULPfAUKCrZASGHHM | RUNNING | 20/11 20:32Z |
+| coop-guest-agent (opus; agOn() false on co-op guest → guest's own servants skip agent month; found by G #7) | review/coop-guest-agent; briefs/b-coop-guest-agent.md | B | session_01N1tNP6ULPfAUKCrZASGHHM | SẴN SÀNG KIỂM b7648b65 (reports/coop-guest-agent.md) | 20/11 22:10Z |
 | REVIEW mg11-thutay r1 (opus BIG) of ef94ad20 | review/mg11-thutay-r1 | B | session_01N1tNP4zyqBbxbsY5JQ3jjJ | RUNNING | 20/11 20:58Z |

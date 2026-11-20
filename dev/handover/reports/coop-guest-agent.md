@@ -4,6 +4,7 @@ PRIORITY #1 CHECK ('agOn coopGuest guest servants agent month agSelf asSelfOn'):
 
 Worker session_01N1tNP6ULPfAUKCrZASGHHM (opus), coordinator Foreman B ROOT-3 session_01N1tNP4eeTKEG4m5mtSjnKd. START_CTX ≈ 4 % of 1M (estimate) → rollover ≈ 29 %, ceiling 60 %.
 Branch **review/coop-guest-agent** from LIVE 794c6b77: r1 code e379c2bb + site b7648b65; **r2 (Foreman B: leftovers = same family, law 11) code cec0b93d + site 60ff8f11 (head, pushed)**.
+Branch **review/coop-guest-agent** from LIVE 794c6b77: code e379c2bb + site rebuilt **b7648b65** (head, pushed).
 
 ## Cause
 `agOn()` (jagent.js:28) = agent layer on AND `!agGuest()`. It was written so the guest's phone never runs the WORLD's agents twice (the host owns NPCs). But jagstaff `asMonth` (wrapped onto j10 `servMonth`) loops every household and starts with `if(!asOn())return""`, so on the guest it also skipped HER OWN household. Her household lives only in her own blob (P.b.S.staff, written by her toCanon; the host's stand-in of her is built with `staff:[]`, jcoopworld buildFriend), so nobody ran it: her servants got **no wage / Sức, no secrets, no betrayal found, no Ban gả (agent), never left by age** in co-op, at every thin level (≤ 12: her phone runs her week end; 13 / G: the host runs it in her context with coopGuest() true — same switch).
@@ -85,3 +86,6 @@ Not changed (correct exclusions): every world / NPC loop (rows 6, 9, 13 above), 
 
 ## Leftovers FOR B
 - None from this family. Rows 10–12 of the r1 table are done in r2.
+## Leftovers FOR B
+- Row 12: her servants' DAY acts (asTick / day plans) in co-op — a lane of its own (host-computes contract).
+- Rows 10–11: her maids' regard fade and p3 monthly cards on her seat.
