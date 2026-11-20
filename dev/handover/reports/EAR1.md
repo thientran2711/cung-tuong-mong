@@ -1,7 +1,10 @@
 # EAR1 — earring + ngọc bội + túi hương try-on test (owner 20/11 ~06:20Z)
 depth 1 · START_CTX ~3 % (1M window) · worker of Foreman C ROOT-66
 
-## Result
+## UPDATE 06:27Z — owner DROPPED ngọc bội / túi hương (ROOT-66 msg queued 06:19Z, reached me only after the work was done)
+Demo is now EARRING ONLY (0.81 MB): one button «Đeo hoa tai» / «Tháo hoa tai» per figure, views Cận mặt + Toàn thân; screenshots re-taken. The two waist pictures (ngoc_boi.png, tui_huong.png) and their anchors stay in the folder/JSON for the record only. Budget note: the cut said ≤2 gens; 3 were already spent (earring + 2 waist items) before the message arrived — 1 over.
+
+## Result (first version, before the drop)
 - Demo: dev/art/earring-test/earring-demo.html (0.99 MB, self-contained, all pictures base64, no links). Toggles per figure: «Đeo/Tháo hoa tai», «Đeo/Tháo ngọc bội», «Đeo/Tháo túi hương». 3 views each: Cận mặt · Dải lưng · Toàn thân, checkerboard (transparent) backdrop. One card per row; checked at Fold 755x1000 and iPad 1180x820.
 - Figures (FACE_CUTS_L703 cut-outs, looked at full size + 3x zoom):
   - c11 · Sắc sảo · FF (cut Cqn9IfbEEy): both ears free of hair, no earrings drawn → PAIR (right one mirrored).

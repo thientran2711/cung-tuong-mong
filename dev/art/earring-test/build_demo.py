@@ -6,6 +6,7 @@ A=json.load(open(os.path.join(D,'anchors.json')))
 def uri(f):
     mt='image/webp' if f.endswith('.webp') else 'image/png'
     return f'data:{mt};base64,'+base64.b64encode(open(os.path.join(D,f),'rb').read()).decode()
+A['items']={'earring':A['items']['earring']}  # owner dropped ngọc bội / túi hương (ROOT-66 06:19Z)
 IMG={k:uri(v['file']) for k,v in A['items'].items()}
 FIG={k:uri(k+'_cut.webp') for k in A['figures']}
 html=open(os.path.join(D,'demo.src.html'),encoding='utf-8').read()

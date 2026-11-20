@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Thử trang sức</title>
+<title>Thử hoa tai</title>
 <style>
 :root{--bg:#f4f0ee;--ink:#3a2a2a;--accent:#a8324a;--card:#fffaf7;--line:#e2d6d0}
 *{box-sizing:border-box}
@@ -30,8 +30,8 @@ button.on{background:var(--accent);color:#fff}
 </style>
 </head>
 <body>
-<h1>Thử trang sức: hoa tai · ngọc bội · túi hương</h1>
-<p class="sub">Mặt chính diện (FF) đeo đôi hoa tai; mặt nghiêng 3/4 chỉ đeo một chiếc ở tai nhìn thấy. Ngọc bội và túi hương treo ở dải lưng.</p>
+<h1>Thử hoa tai</h1>
+<p class="sub">Mặt chính diện (FF) đeo đôi hoa tai; mặt nghiêng 3/4 chỉ đeo một chiếc ở tai nhìn thấy.</p>
 <div class="wrap" id="wrap"></div>
 <script>
 /*DATA*/
@@ -54,7 +54,6 @@ function makeView(id,f,box,label){
   const fig=new Image();fig.src=FIG[id];fig.style.left='0';fig.style.top='0';fig.style.width='1024px';fig.style.height='2304px';st.appendChild(fig);
   if(f.angle==='FF'){addItem(st,'earring',f.ear_R_img_left,false);addItem(st,'earring',f.ear_L_img_right,true);}
   else addItem(st,'earring',f.ear_visible_img_left,false);
-  addItem(st,'ngoc_boi',f.waist_ngoc_boi,false);addItem(st,'tui_huong',f.waist_tui_huong,false);
   vw.appendChild(st);stages.push({vw,st,box});return vw;
 }
 function fit(){for(const s of stages){const k=s.vw.clientWidth/s.box[2];s.st.style.transform=`scale(${k}) translate(${-s.box[0]}px,${-s.box[1]}px)`;}}
@@ -63,11 +62,11 @@ for(const [id,f] of Object.entries(A.figures)){
   c.innerHTML=`<div class="cap">${id} · ${f.group} · góc ${ANG[f.angle]}<small>${f.angle==='FF'?'Đeo đôi hoa tai (hai tai)':'Đeo một chiếc hoa tai (tai nhìn thấy)'}</small></div>`;
   const b=document.createElement('div');b.className='btns';c.appendChild(b);
   const v=document.createElement('div');v.className='views';c.appendChild(v);
-  const h=makeView(id,f,f.head_view,'Cận mặt'),wv=makeView(id,f,f.waist_view,'Dải lưng'),full=makeView(id,f,[0,0,1024,2304],'Toàn thân');v.appendChild(h);v.appendChild(wv);v.appendChild(full);
-  for(const k of ['earring','ngoc_boi','tui_huong']){
+  const h=makeView(id,f,f.head_view,'Cận mặt'),full=makeView(id,f,[0,0,1024,2304],'Toàn thân');v.appendChild(h);v.appendChild(full);
+  for(const k of ['earring']){
     const bt=document.createElement('button');bt.textContent=NAMES[k][0];bt.dataset.k=k;
     bt.onclick=()=>{const on=!bt.classList.contains('on');bt.classList.toggle('on',on);bt.textContent=NAMES[k][on?1:0];
-      for(const s of [h,wv,full])s.querySelector('.stage').classList.toggle('w-'+k,on);};
+      for(const s of [h,full])s.querySelector('.stage').classList.toggle('w-'+k,on);};
     b.appendChild(bt);
   }
   document.getElementById('wrap').appendChild(c);
