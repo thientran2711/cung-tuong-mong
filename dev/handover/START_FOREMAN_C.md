@@ -18,6 +18,9 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
 CHECK get_session context_usage.used_tokens OFTEN (estimates overshoot). Keep image reads few (each costs a lot).
 
+## NO HOURLY SCHEDULED TASKS (owner 20/11 ~20:09Z, angry: "Khi mà quản đốc mở phiên mới cho chính mình phải tắt cái lịch cũ ... tại sao mà cứ phải làm phiền tôi đi vô tắt")
+Foremen do NOT create hourly check-in scheduled tasks any more (workers report by send_message). If one exists: the foreman that OWNS it disables it (update_trigger enabled=false) BEFORE opening its successor. Never leave a schedule for the owner to turn off. Every takeover prompt repeats this line.
+
 ## Live workers (at ROOT-58 start; check FOREMAN_C_STATUS.md for newer lines)
 WORKERS (ROOT-57's children; all report to you now):
 - P2 session_01PEhRbuWh1d14YneeXYEvpZ — season palette for the 86 (solve: unique pair per person per season, all seasons same soft tone Lượt 769, root CODES may change Lượt 770, roots_drawn kept). Deliver 6 sheets → LOOK → send owner. (Owner asked progress at Lượt 790.)
