@@ -49,3 +49,10 @@ NEXT: when RANK8-A/B finish → one combined transparent image per rank of s62/s
 Neckline sentences from RANK8-A (t1 style 1 simple, t2 style 2 wide-shallow layered) were swapped into copies of s65 t1/t2: `dev/art/rank8-s65/test-square/s65_t{1,2}_sq.txt` (only that outfit phrase differs). Gate: `--scope tp1/tp2` PASS; the full store check fails only on the swapped sentence (expected).
 Gens bxM0vET5Y2 (t1), Lw8XqYiswO (t2). Sheet `dev/art/rank8-s65/test-square/s65_coVuong_t1_t2_t3.jpg` (t1 NEW | t2 NEW | t3 existing).
 Looked: all 3 necklines read as square, never round, and differ from each other (t1 low simple + narrow plain peach band; t2 wide shallow + 2-band embroidered border; t3 tall square + wide stiff band + apron). Note: with the square neck, t1/t2 look closer to t3, so the rank difference now rests on the t3 apron/girdle.
+
+## HANDOVER (RANK8-C rolls over: context 34.7 % > roll line 29 % = START ≈4 % + 25 %; depth 3)
+- All RANK8-C work is pushed: s65 t1–t8 (sheet + ledger), s65 cut-outs, 8 trio images (s62|s64|s65), square-neckline test t1/t2. Builder change c51c37e (s62/s64/s65 rows, t7/t8 PET BAN + PET GATE, grammar fix, new people only).
+- Owner STOP on all gens until she approves t1/t2 (ROOT-69 08:56Z). 0 gens pending.
+- NOT STARTED (ROOT-69 order 08:01Z, 0 cr builder job): owner verbatim "Nếu như vậy á, thì là cái bậc thường tại đáp ứng và cả quý nhân luôn. Cái cổ áo từ 36, 51 và 65 tuổi á, là phải là cái cổ xéo kín đáo. Tức là cái cổ này là mình sẽ quay về cái prompt cũ của đáp ứng và thiền tại và thường tại trước khi mà làm cái cổ vuông, sau đó copy cái cổ này qua cho bên quý nhân."
+  → ages a36/a51/a65: t1 + t2 = the OLD collar words exactly as before G17 (fa71397^) = modest crossed collar; t3 at those ages = the same crossed-collar words in place of its square neck. a18/a26 unchanged. Rule via `rule.py add G` with the verbatim. Gate: s62 + m29 t1/t2/t3 at a18/a36/a51/a65 (build + check_store --scope tpN --age). Pointers: dev/handover/reports/OLD4.md § HANDOVER (a4e843af).
+- Successor: open by the COORDINATOR (ROOT-69), not by this worker.
