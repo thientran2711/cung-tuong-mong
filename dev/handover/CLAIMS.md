@@ -497,7 +497,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-e-rows KIT KEEPER (sonnet; ROOT-80 order) | review/kit-e-rows; reports/kit-e-rows.md | MAIN ROOT-81 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM dd2e0fe1 | 20/11 |
 | names-unique-r3 (opus; role-parity maid accuse regression of names-unique-r2-r1 on LIVE 983a9436) | review/names-unique-r3 | B | session_01N1tNP4XVawZpybqzbWQyUT | RUNNING | 20/11 19:47Z |
 | coop-week-stall (opus; pre-existing LIVE: late room snapshot rolls seat back, week end not sent ~1/8–14 coop-e2e) | review/coop-week-stall | B | session_01N1tNP6if7E7NXcFKwJ6yR5 | RUNNING | 20/11 19:48Z |
-| rv-kit-e-rows REVIEWER (sonnet; small kit) | review/kit-e-rows-rv (none pushed); reports/rv-kit-e-rows.md | MAIN ROOT-81 | rv-signs session | DONE FAIL dd2e0fe1 | 20/11 19:47Z |
+| rv-kit-e-rows REVIEWER (sonnet; small kit) | review/kit-e-rows-rv (none pushed); reports/rv-kit-e-rows.md | MAIN ROOT-81 | rv-signs session | DONE r1 PASS 7d0cc7a8ae7c33f06a138d753f4375027330f892 | 20/11 19:47Z |
 | FOREMAN E #22 (opus; child of E #21, depth 3) | handover FOREMAN_E_STATUS | FOREMAN E #21 | session_01DgYSWkbUPtieeBFfn8grWT | RUNNING | 20/11 19:49Z |
 | REVIEW phutang-road r3 gates (BIG opus E21r3; successor of E21r2 @8880b092) of e744d428 | review/phutang-road | FOREMAN E #21 | session_01DgYSWpKX4nyEMXAD8mxYaS | RUNNING | 20/11 19:53Z |
 | FOREMAN E #21 (opus; child of E #20, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #20 | session_01DgYSWpNbcJyCoGaB1FhLFq | RUNNING | 20/11 18:55Z |

@@ -1,4 +1,4 @@
-# rv-kit-e-rows — reviewer verdict: FAIL dd2e0fe1 (kitColDot part is good; the «thế lực» word-mode phrase misreads other houses)
+# rv-kit-e-rows — reviewer verdict: r1 PASS 7d0cc7a8ae7c33f06a138d753f4375027330f892 (review/kit-e-rows-rv = keeper 1e558d26 + LIVE f6866eb8); r0 was FAIL dd2e0fe1 (kept below)
 PRIORITY #1 CHECK: ROOT-81 order · KIT §60.1 / §13.15 · main none (LIVE 983a9436) · review/kit-e-rows dd2e0fe1 on kit-cost-rows-home 3332c63b (PASSed) · claims keeper
 Branch merges clean on LIVE 983a9436 (FF-able). Tests: kit-e-rows.js 22/22 PASS, kit-cost-rows-home.js 15/15 PASS (both re-run by me, Fold + iPad). QUICKCHECK not re-run for a FAIL (keeper: PASS 197 s).
 
@@ -14,3 +14,8 @@ Rule added: `[/thế lực/i, ["nhà ngươi thêm vững thế","thế lực nh
 | `thành: nhà Đại tướng quân thế lực +6` | «nhà ngươi thêm vững thế» | the general's house, not hers |
 Before this branch these lines were an «unknown stat line» (silently dropped from the hint); now they print a FALSE statement — breaks law 6(a) (the hint must be true now) and the kit-hint rule «read from the option's OWN data». Tests miss it: kit-e-rows.js only feeds the exact form «thế lực nhà ±n».
 Fix (kit only, jk2b): scope the regex to her own house — e.g. `/thế lực nhà (ngươi|ta|mình)|nhà (ngươi|ta|mình|mẹ đẻ|cha) thế lực/` (E28's exact string is on a branch I cannot see: keeper please use E28's own wording) — and leave other houses unmatched (as before) or give them their own triple with the sign read from the line; add 3 negative checks to kit-e-rows.js (the three lines above must NOT say «nhà ngươi»). Re-run kit-e-rows + kit-cost-rows-home + core gates, then I re-verify.
+
+## r1 RE-VERIFY — PASS 7d0cc7a8ae7c33f06a138d753f4375027330f892
+Keeper 1e558d26 scoped the phrase: own house = /thế lực nhà\s*[+−-]\s?\d/ (E28 wording «thế lực nhà −N», also the j67 lines «(thế lực nhà -10)»), KIT_HINT_MAG scoped the same; any other house (name before «thế lực») = ONE neutral phrase «thế các nhà quyền thần đổi thay», no sign read. Branch merged with LIVE f6866eb8 (index/sw rebuilt, FF of main).
+My probe again: «nhà nàng thế lực -6 · nàng mất chỗ dựa» → «thế các nhà quyền thần đổi thay, nàng mất chỗ dựa»; «nhà Lễ bộ thế lực +3» and «nhà Đại tướng quân thế lực +6» → the same neutral phrase; no line says «nhà ngươi» for another house any more. Tests: kit-e-rows.js 26/26, kit-cost-rows-home.js 15/15, QUICKCHECK PASS 227 s (core gates PASS, old save ok; buổi 1379/2999 = live side noisy, ours lower). Other real forms checked: j67 «(thế lực nhà -N)» = her own house OK; jpq:69 «thế lực nhà ${c} -N» is a result paragraph (not an option hint); jkc:739 is words only.
+Note (non-blocking): a made-up «thế lực nhà ngươi ±n» (name AFTER «nhà») is not matched by either regex and reads «không được mất gì» — no such line exists in the game today; keep E28 / new data in the «thế lực nhà −N» form.

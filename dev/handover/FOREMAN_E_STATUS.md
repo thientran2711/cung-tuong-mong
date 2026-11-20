@@ -960,3 +960,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (20/11 19:56Z) E #22: id sent to E21r3, E22t, E22i, E26b, E26r, E25r, E30 (all delivered; E25r told WAIT for GO after phutang/pm r4 land). E21r2 ARCHIVED (rolled → E21r3). Own hourly wake trig_014SbztqCUjBiYh3o2Eaf8pK (minute 47). SEATS 8 / 12 (E21r3, E22t, E22i, E26b, E26r, E25r, E30 + E #22).
 - (20/11 19:57Z) E22i: LIVE 415b9ca0 merged into review/person-minigame-acts-c → 439e5072 (index.html/sw.js rebuilt); full suite restarted (~80 min) + 2 shots → SSK to E #22 (then → E22t). On 608f845b already: mg-noword-kit 32 kinds 0 words, pm-wordmode ALL PASS, kit-cost-rows-home 15/15.
 - (20/11 20:12Z) FROM MAIN ROOT-81: LIVE now 27a7dcf5 (kit-cost-rows-home + kit-bgtone «Đào phấn» landed). Merge it before LAND READY.
+- (20/11 20:14Z) RV kit-e-rows r1: PASS 7d0cc7a8ae7c33f06a138d753f4375027330f892 (thế lực scoped, other houses neutral; 26/26, quickcheck PASS).
