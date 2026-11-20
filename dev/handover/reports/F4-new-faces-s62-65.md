@@ -120,3 +120,18 @@ Credits used: 0.
   4. s65 hair: one gold pin visible (prompt: a pair); top looks like a small bun more than a loop.
   5. s64 lilac reads clearly lilac (more colour than "smoke lilac" #ECE2FE suggests).
 - FACE_CUTS / FACE_MAP NOT wired (owner OK pending).
+
+## s62–s65 APPROVED + WIRED (~07:25Z, foreman ROOT-67)
+- Owner: "Tiếp đến là 4 gương mặt mới duyệt … Ok, mọi thứ ổn. Ừm, Màu sắc cũng ổn." · first "no animals/fruit", then "Nên đi, cứ để đi, không ảnh hưởng gì mấy đâu" → s63 rabbit + s64 loquats kept as drawn.
+- Wired exactly like c09: FACE_CUTS_L703.json + FACE_MAP_L703.json (kind NEWFACE-F4, ver v5, groups Dịu dàng ×3 / Đoan trang) · face crops face_page/faces/s62–s65.jpg (crop.py, looked) ·
+  ledger OWNER-OK · LOOK_GROUPS.md line. FACE_MAP visible count: Sắc sảo 15 · Quyến rũ 18 · Lạnh lùng 15 · Kiêu kỳ 15 · Đoan trang 13 · Dịu dàng 14 = 90. 0 gens.
+- "Picker": the in-game face picker (dev/build/j88 facePool) reads only the live FIGIX consort c01–c32 + maid m01–m52 manifest; s-faces are not in it
+  (F3's s44 + F2's s56–s61 weren't either) → not touched (live game = K18 hands-off). Old face_page ASSETS_L703.json/face_tick.html also not rebuilt (as for s44).
+
+## HANDOVER (F4 rolls over: context 37 % ≥ START_CTX 4 % + 25 %)
+depth 1. F4's work is DONE. Nothing open on my side. Open items for the foreman:
+- EAR1: dev/art/earring-test/anchors.json still uses c09's old cut xSBWFuTjfW → refit to UPvIb4owny.
+- Faults on record (owner OK'd as drawn): s62/s63/s64 faces alike; s64 loquat leaves; s63 rabbit ≈ robe colour; s65 one pin; s64 strong lilac.
+- s62–s65 have only ONE season pair (the root, in s_root_colours.json); the other 3 seasons (A31/A32) still need picking by the palette worker.
+- c09.v3h + make_new_s62_65.py carry the no-earring sentence; drop it once NOEAR1's master block has it (the builders already skip it then).
+Credits F4 total: 690 (c09 138 + s62–s65 552).

@@ -371,3 +371,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW mg-noword-kit (SMALL sonnet) of 6b6f1c52 | review/mg-noword-kit(-rv); briefs/rv-root75-mg-noword-kit.md | MAIN ROOT-75 | session_01Rc5AsM2JGiVZGesoFRmmkP | RUNNING | 20/11 06:50Z |
 | REVIEW kit-mark (SMALL sonnet) of 1c134a6f | review/kit-mark(-rv); briefs/rv-root75-kit-mark.md | MAIN ROOT-75 | session_01Rc5AsMhE5ZpVRnMT4NDeXv | RUNNING | 20/11 06:50Z |
 | FOREMAN E #17 (opus; child of E #16, depth 7 = LAST) | handover FOREMAN_E_STATUS | FOREMAN E #16 | session_01DgYSWoFXvbLeCE3SVSWgDG | RUNNING | 20/11 07:18Z | PICKUP 07:30Z, ctx roll at real START+25 % |
+| mg-craft-design E24 (opus; MAIN ROOT-74 order 06:06Z / owner OD ~L2030: Vẽ/Thêu/Cắm hoa/Khéo tay own mechanics, tracing only Chép kinh; STEP 1 expert + designs, owner sees first) | review/mg-craft-design; briefs/E24-mg-craft-design.md | FOREMAN E #17 | session_01DgYSWpoMdWjXUGXw7cXUdd | RUNNING | 20/11 07:35Z |

@@ -1388,5 +1388,45 @@
   "ver": "v5",
   "prompt_file": "dev/art/face-common/s60.v5.FULL.txt",
   "kind": "NEWFACE-761"
+ },
+ "s62": {
+  "group": "Dịu dàng",
+  "hidden": false,
+  "ts": "2026-11-20T07:25:00Z",
+  "cut": "nVsrRMPYQD",
+  "gen": "ov6PVaf829",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s62.v5.FULL.txt",
+  "kind": "NEWFACE-F4"
+ },
+ "s63": {
+  "group": "Dịu dàng",
+  "hidden": false,
+  "ts": "2026-11-20T07:25:00Z",
+  "cut": "kseVFSr16B",
+  "gen": "s7IX5y2l8e",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s63.v5.FULL.txt",
+  "kind": "NEWFACE-F4"
+ },
+ "s64": {
+  "group": "Dịu dàng",
+  "hidden": false,
+  "ts": "2026-11-20T07:25:00Z",
+  "cut": "JNChlRROq4",
+  "gen": "s7IX54Gl8e",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s64.v5.FULL.txt",
+  "kind": "NEWFACE-F4"
+ },
+ "s65": {
+  "group": "Đoan trang",
+  "hidden": false,
+  "ts": "2026-11-20T07:25:00Z",
+  "cut": "jUoe5yJLD0",
+  "gen": "jUoeq99LD0",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s65.v5.FULL.txt",
+  "kind": "NEWFACE-F4"
  }
 }
