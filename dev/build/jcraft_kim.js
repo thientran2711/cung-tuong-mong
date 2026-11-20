@@ -60,13 +60,13 @@ function crkPaper(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.1
   /* the cutter tray (pictures only) */
   P.tray.forEach(s=>{const on=drag&&drag.c&&drag.new&&drag.c.sh===s.sh;crArt(g,"kim-cut-"+s.sh,s.x,s.y,P.z*R*3,P.z*R*3,{},()=>{g.save();g.fillStyle="#fff8ea";g.strokeStyle="#8f5f0c";g.lineWidth=1.5;
     k91RR(g,s.x-P.z*R*1.6,s.y-P.z*R*1.6,P.z*R*3.2,P.z*R*3.2,6);g.fill();g.stroke();g.fillStyle=RED;crkShape(g,s.sh,s.x,s.y,-Math.PI/2,P.z*R*(on?BAL.mgFx.pop:1));g.restore()})});
-  kg82DrawPops(g,pops,now);crHud(env,pts,r,NR,phase==="play"&&P.ph==="cut"?LIM-(now-P.start):null);
+  kg82DrawPops(g,pops,now);crHud(env,phase==="play"&&P.ph==="cut"?mgReach(pts+10/NR*mgPace(env,K,now-P.start,LIM),r+1,NR):mgReach(pts,Math.min(NR,r+1),NR),r,NR,phase==="play"&&P.ph==="cut"?LIM-(now-P.start):null);
   if(phase==="play"&&P.ph==="cut"&&now-P.start>LIM)open(now)}
  function open(now){if(!P||P.ph!=="cut")return;P.ph="open";P.open=now;okb.disabled=true;drag=null;const el=now-P.start;
   /* greedy match: each hole of the sample takes the nearest unused cut of its shape within the tolerance */
   const used=new Set();let m=0;P.T.forEach(t=>{t.ok=false;let bi=-1,bd=TOL;P.cuts.forEach((c,i)=>{if(used.has(i)||c.sh!==t.sh)return;const d=dist(c,t);if(d<=bd){bd=d;bi=i}});if(bi>=0){used.add(bi);P.cuts[bi].ok=true;t.ok=true;m++}});
-  const extra=P.cuts.length-used.size;const s=Math.max(0,(m-EX*extra)/P.T.length);const got=10/NR*s*mgPace(env,K,el,LIM);pts+=got;
-  crLater(()=>{if(!P)return;P.res={m,extra};kg82Pluck(2,s>=.6);kg82Pop(pops,W/2,H*.1+10,s>=.85?"★★★":s>=.55?"★★":s>=.3?"★":"✗",s>=.55?K91C.good():K91C.red())},900);
+  const extra=P.cuts.length-used.size;const s=Math.max(0,(m-EX*extra)/P.T.length),sp=mgPace(env,K,el,LIM);const got=10/NR*s*sp;pts+=got;
+  crLater(()=>{if(!P)return;P.res={m,extra};kg82Pluck(2,s>=.6);kg82Pop(pops,W/2,H*.1+10,crStars(s),crCol(s,sp))},900);
   phase="judge";crLater(()=>{if(done)return;phase="play";next()},2300)}
  okb.onclick=()=>{if(phase==="play"&&P&&P.ph==="cut")open(crNow())};
  k91Pointer(C,{down:(x,y)=>{if(phase!=="play"||!P||P.ph!=="cut")return;

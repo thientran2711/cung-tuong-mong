@@ -31,8 +31,12 @@ function crArt(g,name,x,y,w,h,o,stand){if(CR_HAVE.has(name)&&kg82Spr(g,name,x,y,
 function crLoop(fn){let stop=false,raf=0;const L=()=>{if(stop)return;fn(crNow());if(!stop)raf=requestAnimationFrame(L)};raf=requestAnimationFrame(L);return()=>{stop=true;cancelAnimationFrame(raf)}}
 /* a timeout on the craft clock */
 function crLater(f,ms){return setTimeout(f,Math.max(0,ms/(CRAFT.speed||1)))}
-/* the HUD of a round-based craft board (numbers only, kit chips) */
-function crHud(env,pts,r,NR,left){env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:left!=null?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})}
+/* the HUD of a round-based craft board (kit chips). x = the raw float if the rest of the play goes perfectly (mgReach + the open round's reach): the score
+   cell shows the ONE grade mgLive(env, x) like every other mini-game (review/mg-score-same, owner bug 20/11 ~06:50Z; dev/test/mg-score-same-scan.py) */
+function crHud(env,x,r,NR,left){env.hud({score:mgLive(env,x),round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:left!=null?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})}
+/* the pop colour of a judged round (one rule for the family, review/mg-score-same C-AG #29): good work the time part cut shows gold, not green */
+function crCol(q,sp){return q>=.55?(sp<.995?K91C.gold():K91C.good()):q>=.3?K91C.gold():K91C.red()}
+const crStars=q=>q>=.85?"★★★":q>=.55?"★★":q>=.3?"★":"✗";
 /* colour helpers (stand-in drawing) */
 function crMix(a,b,t){return a.map((x,i)=>Math.round(x+(b[i]-x)*t))}
 const crRGB=c=>`rgb(${c.join(",")})`;

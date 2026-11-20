@@ -5,7 +5,7 @@ Static scan of every mini-game engine file: the HUD "score" cell must come from 
 usage: python3 dev/test/mg-score-same-scan.py   (exit 1 on a hit)"""
 import re,sys,os
 D=os.path.join(os.path.dirname(__file__),'..','build')
-FILES=['j82.js','j91.js','j92.js','jlant.js','jnwp.js','jnwq.js','jtd.js','jts.js','jslap.js','jhd.js','jwkg.js','jwkr.js']
+FILES=['j82.js','j91.js','j92.js','jlant.js','jnwp.js','jnwq.js','jtd.js','jts.js','jslap.js','jhd.js','jwkg.js','jwkr.js','jcraft.js','jcraft_theu.js','jcraft_kim.js','jcraft_ve.js','jcraft_hoa.js']
 bad=[];ok=0
 for f in FILES:
     for i,l in enumerate(open(os.path.join(D,f)),1):

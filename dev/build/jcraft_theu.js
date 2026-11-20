@@ -53,11 +53,15 @@ function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.
     g.fillStyle="#b88a3a";g.fillRect(-s.r*.95,-s.r*1.15,s.r*1.9,s.r*.3);g.fillRect(-s.r*.95,s.r*.85,s.r*1.9,s.r*.3);g.fillStyle=crRGB(s.c);g.fillRect(-s.r*.8,-s.r*.85,s.r*1.6,s.r*1.7);
     g.globalAlpha=.22;g.strokeStyle="#000";g.lineWidth=1;for(let k=-3;k<=3;k++){g.beginPath();g.moveTo(-s.r*.8,k*s.r*.24);g.lineTo(s.r*.8,k*s.r*.24+2);g.stroke()}g.restore()});
    if(P.pk===i)kg82FxRing(g,s.x,s.y,s.r*1.2,P.litAt,now)});
-  kg82DrawPops(g,pops,now);crHud(env,pts,pi,NP,phase==="play"?LIM-(now-t0):null);
+  kg82DrawPops(g,pops,now);crHud(env,reach(now),pi,NP,phase==="play"?LIM-(now-t0):null);
   if(phase==="play"&&P.ph!=="end"&&now-P.start>LIM)endPiece(now)}
+ /* the raw float if the rest goes perfectly: pieces done + the open piece's reach (wrong spools / loose stitches so far stay lost, its time part now) + pieces to come */
+ function reach(now){if(!P||phase!=="play"||P.ph==="end")return mgReach(pts,Math.min(NP,pi+1),NP);const picked=P.band+(P.ph==="stitch"?1:0),cR=(P.ok+P.n-picked)/P.n;
+  const sq=P.q.reduce((a,b)=>a+b,0),left=P.n*ST-P.q.filter(q=>q>0).length,sR=(sq+left)/Math.max(P.q.length+left,P.n*ST);
+  return mgReach(pts+10/NP*(wC*cR+wS*sR)*mgPace(env,K,now-P.start,LIM),pi+1,NP)}
  function bandDone(){if(!P||P.ph!=="stitch")return;P.band++;P.k=0;if(P.band>=P.n)return endPiece(crNow());P.ph="pick"}
  function endPiece(now){if(P.ph==="end")return;P.ph="end";const cShare=P.ok/P.n,sQ=P.q.reduce((a,b)=>a+b,0)/Math.max(P.q.length,P.n*ST);
-  const got=10/NP*(wC*cShare+wS*sQ)*mgPace(env,K,now-P.start,LIM);pts+=Math.max(0,got);const f=got/(10/NP);kg82Pop(pops,W/2,H*.08+12,f>=.85?"★★★":f>=.55?"★★":f>=.3?"★":"✗",f>=.55?K91C.good():f>=.3?K91C.gold():K91C.red());
+  const f=wC*cShare+wS*sQ,sp=mgPace(env,K,now-P.start,LIM),got=10/NP*f*sp;pts+=Math.max(0,got);kg82Pop(pops,W/2,H*.08+12,crStars(f),crCol(f,sp));
   phase="judge";crLater(piece,1200)}
  function tapAt(x,y){if(phase!=="play"||!P)return;const now=crNow();
   if(P.ph==="pick"){const i=P.sp.findIndex(s=>k91Dist(x,y,s.x,s.y)<s.r*1.35);if(i<0)return;const s=P.sp[i];P.pk=i;P.litAt=now;const right=s.b===P.band;
