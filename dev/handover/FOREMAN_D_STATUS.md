@@ -483,3 +483,4 @@ Hourly wake: D #11's send_later trig_01B4Qtz99jDbmqYCNDyu3h8G (~20:37Z) fires in
   5. EMO BALANCE (EM01) FYgpKE1Q: OFF n=145 vs ON n=109 (HH 37/39 %, early death 43/41 %, NPC harm +11 % = tune target) → SSK ~07:00Z → reviewer → **LAND READY ~10:00Z**.
   6. ECON TAMCO (OR21) c45265d6: **BLOCKED on MAIN kit keeper** (KIT_REQUESTS L85 «Tốn» row). Misses 20:00Z unless KIT READY by ~12:00Z.
   Load: working = JW #4, chain #5, emo, review rival-hauthay; idle-waiting = lander EaTxKjoN, reviewers GMDXZAV9 / E9Hd8tHX / CjH2dKcm, workers DuRCG31a (rival FAILs) / CzXkfovc (econ). Context D #12 ≈ 19 % (est.) < 32 %. Next wake ~00:24Z.
+- (21/11 ~00:35Z) FROM MAIN ROOT-82: LIVE now b1033eb0 (jtq14-addr + ge-rank). Merge before LAND READY.
