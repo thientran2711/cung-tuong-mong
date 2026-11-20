@@ -1813,7 +1813,7 @@
 "status": "LIVE-OFF",
 "group": "G2",
 "event": "mind slips; heir plot; crisis night; study/charity",
-"fp": "ut||(window.agDOn&&agDOn())||!roll(40*(1+BAL.net.k.study*netQ(v,\"study"
+"fp": "ut||(window.agDOn&&agDOn())||!roll(BAL.start.npc.study*(1+BAL.net.k.study*netQ(v,\"study"
 },
 {
 "f": "j85.js",
