@@ -42,3 +42,4 @@ Looked full size (honest): both = open square neckline, neck + collarbones visib
 - Sheet dev/handover/review-sheets/rank8-s62/m20_m19_THU_t6_doikham.webp (.jpg).
 - Looked: both = clear parallel đối khâm bands from neck to hem, open over inner robe, two tiered pearl-edged short capes on the shoulders, not covering the bands; collarbones visible, no chest emphasis. "sexy" made almost NO visible difference (m19 just slightly more knowing smile; outfit equally modest). m20 sash sits a bit above the natural waist. Faces ok, lips closed, eyes aligned.
 - Earlier interrupted m20 gen call never created a picture (checked history; 0 cr).
+- JOB 6: skins s64 A, s65 B (owner), m20/m19 đối khâm (G24); s62 t5/t6 tests already in skins (JOB 2).
