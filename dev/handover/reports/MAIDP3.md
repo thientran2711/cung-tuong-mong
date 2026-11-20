@@ -45,3 +45,9 @@ Gates: keep_check --sidecar PASS ×6, --all 195 PASS. check_store --scope mama: 
 4. NHẤT tà ngắn (nhat_gpt_v5 + nhat_thancan_v2): NHAT_TA_NGAN2 — short wide panel from the sash at the CENTRE FRONT, overlapping the inner edges of both long panels, ending at mid-thigh (~half length), CONTRASTING colour (normal: powder blue on rose panels; thân cận: rose on blue panels), own gold-edged border, never hidden behind the item, hands or sash bow. Colour placement now gives the short panel the contrasting colour.
 5. NHẤT thân cận: + "The inner robe's crossed collar showing inside the square collar opening is deep rose (PINK), never blue."
 Files: nhat_gpt_v5 (9 534 ch), tamdang_thancan_gpt_v2 (8 536), nhi_thancan_gpt_v2 (8 063), nhat_thancan_gpt_v2 (9 897; built as nhat_v5 + the same thân cận transform + 3 and 5). keep_check --sidecar PASS ×4, --all 207 PASS. Word diff LOST: nhat_v5 {front, centre, SHORTER} (old tà sentence reworded); tam_tc_v2 {right, angle} (now "RIGHT ANGLE"); nhi_tc_v2 {}; nhat_tc_v2 {centre, SHORTER}.
+
+## L1553 (C #13) — builder jobs `nhat6 tamdang_tc3 nhi_tc3 nhat_tc3`. 0 gens.
+(a) `nhat_gpt_v6.txt` (9 594 ch) = v5 + "a wide **powder blue** silk sash" + colour placement "+ The wide silk sash at the waist is powder blue." Nothing lost.
+(b) `tamdang_thancan_gpt_v3` (8 168), `nhi_thancan_gpt_v3` (7 695), `nhat_thancan_gpt_v3` (9 556) = v2 minus ONLY the L1545 extra outer layer (TC_EXTRA_VEST / TC_EXTRA_NHAT clause). Colour flip, square collar (tam strong words), nhất short tà + pink inner collar all kept.
+(c) K28 updated with rule.py set (--luot "L1542 + L1553"): "+ ONE EXTRA LAYER" dropped, L1553 owner verbatim cited.
+keep_check --sidecar PASS ×4; --all 212 PASS.

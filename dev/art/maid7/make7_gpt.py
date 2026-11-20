@@ -681,6 +681,35 @@ def nhat_tc2():
     return out
 
 
+
+# ===== MAIDP3: owner L1553 (C #13) — nhất sash blue; thân cận: NO extra outer layer =====
+def nhat6():
+    base = D + 'nhat_gpt_v5.txt'
+    t = open(base, encoding='utf-8').read()
+    t = swap(t, 'a wide silk sash tied in a bow at the waist,', 'a wide powder blue silk sash tied in a bow at the waist,')
+    t = swap(t, NHAT_PLACE_NEW, NHAT_PLACE_NEW + ' The wide silk sash at the waist is powder blue.')
+    out = D + 'nhat_gpt_v6.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [('a wide silk sash tied in a bow at the waist', 'owner Lượt 1553: sash colour = powder blue (words kept, colour added)')])
+    return out
+
+
+def tc3(name, extra):
+    base = D + name + '_v2.txt'
+    t = open(base, encoding='utf-8').read()
+    t = swap(t, extra, '')
+    out = D + name + '_v3.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    al = [(f.strip(), 'owner Lượt 1553: thân cận has NO extra outer layer') for f in re.split(r'[;,():]', extra) if len(f.split()) >= 3]
+    keep(out, base, al)
+    return out
+
+
+def tamdang_tc3(): return tc3('tamdang_thancan_gpt', TC_EXTRA_VEST % 'deep rose like #CA7281')
+def nhi_tc3(): return tc3('nhi_thancan_gpt', TC_EXTRA_VEST % 'deep rose like #CA7281')
+def nhat_tc3(): return tc3('nhat_thancan_gpt', TC_EXTRA_NHAT % 'deep rose like #CA7281')
+
+
 if __name__ == '__main__':
     # NOTE: mama51/mama65 (v2) and chuongsu (v2) are NOT in the default list: mama v2 was hand-edited by Foreman C (L1473).
     jobs = sys.argv[1:] or ['nhat', 'thancan', 'tamdang', 'nhat3', 'thancan3', 'chuongsu3', 'mama3_51', 'mama3_65', 'mama4_51', 'mama4_65']
