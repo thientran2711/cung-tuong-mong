@@ -78,7 +78,7 @@ const HTML=process.argv[2]||'dev/index.html';
  ok(r.vs.mono&&r.vs.end===7&&r.vs.max<=7&&r.vs.calls>0&&r.vsRound>=4,'split board: the drawn raw shows along the clock, never above itself, ends at itself (K-PM-1 hook called)',r.vs);
  /* ---- NPC ladder challenges land over ≥ 10 game days ---- */
  const d=await p.evaluate(()=>{let n=0,me=0;const L0=JSON.stringify(S.pmL||{});const rc0=rcvAsk;window.rcvAsk=function(k,a,t,x){if(k==="pmDuel"&&x&&pmLadFor(a,t,x)){n++;if(t===S)me++}return rc0.apply(this,arguments)};
-  for(let i=0;i<200&&!S.dead;i++){try{Q.length=0;S.mg=null;nextBuoi()}catch(e){}if(S.dead||S.out||isSrv())break}window.rcvAsk=rc0;return{n,me,moved:JSON.stringify(S.pmL||{})!==L0,dead:!!S.dead}}).catch(e=>({err:e.message}));
- ok(d.n>=1,'NPC ladder challenges land in the day plan over 200 buổi (a move happens only when the lower one wins — unit-tested above)',d);
+  for(let i=0;i<400&&!S.dead;i++){try{Q.length=0;S.mg=null;nextBuoi()}catch(e){}if(S.dead||S.out||isSrv())break}window.rcvAsk=rc0;return{n,me,moved:JSON.stringify(S.pmL||{})!==L0,dead:!!S.dead}}).catch(e=>({err:e.message}));
+ ok(d.n>=1,'NPC ladder challenges land in the day plan over 400 buổi (E22h nit N1: 200 landed 0–4) (a move happens only when the lower one wins — unit-tested above)',d);
  ok(errs.length===0,'no page errors',errs.slice(0,3));
  const nb=res.filter(x=>!x).length;console.log(nb?`FAIL ${nb}/${res.length}`:`ALL PASS ${res.length}`);await b.close();process.exit(nb?1:0)})();
