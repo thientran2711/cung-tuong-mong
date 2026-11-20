@@ -75,6 +75,9 @@ window.kcuHonorRows=function(n){const H=(typeof S!=="undefined"&&S&&S.honors)||[
 
 `;document.head.appendChild(st)})();
 
+/* KIT §13.10 sample: the game mark chip «n/10» beside the clock; the clock normal and amber (review/kit-mark) */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.10",title:"kitGameMark + kitGameClock · chip «n/10» và đồng hồ hổ phách",where:"MỌI trò tài nghệ: một chip điểm nhỏ cạnh đồng hồ trên dòng tên; đồng hồ ngả hổ phách khi qua thời gian đủ điểm",html:()=>{try{const f=a=>`<div class="mg kpanel kgame kg82" style="position:relative;max-width:760px;margin:0 auto 10px"><div class="kph"><b class="kpseal">TÀI NGHỆ</b><span class="kpht"><span class="kptitle">Cờ: Thế cờ</span></span><span class="kgmk">${kitChips([`<span class="kchip n kgmk-c"><b>${a[0]}/10</b></span>`])}</span><span class="kgclk${a[2]?" kgclk-amber":""}">${kitCoopClock({left:a[1]*1000,len:20000,tone:a[2]?"w":"n"})}</span></div></div>`;return f([9,16,0])+f([7,5,1])}catch(e){return ""}}})}catch(e){}
+
 /* KIT §82.1 + §21.2 samples (review/kit-ge): the «Thiên mệnh» plate in two tones, a plate-label row, and the Sơ đồ nhánh node chart */
 window.KBM_SAMPLE={b:"sample",n:"Cung nữ · Đường vào cung",count:{txt:"Đại kết cục 1/4 · Danh hiệu 1/8 · Kỳ ngộ 1/2"},
  spine:[{id:"nhap",n:"Nhập cung",seen:true,past:true},{id:"a4",at:4,n:"Mới vào cung",seen:true,past:true},{id:"a5",at:5,n:"Lần đầu yết kiến",seen:true,past:true},{id:"a6",at:6,n:"?",seen:false,past:true},{id:"a7",at:7,n:"Đêm mưa hành lang",seen:true,here:true},{id:"a8",at:8,n:"?",seen:false},{id:"a9",at:9,n:"?",seen:false},{id:"a10",at:10,n:"?",seen:false},{id:"a11",at:11,n:"?",seen:false},{id:"ch12",at:12,n:"Chương 12"},{id:"hau14",at:13,n:"Chương 13"},{id:"ke14",at:14,n:"Chương 14"},{id:"hkn",n:"Hồi kết nhánh"}],
