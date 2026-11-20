@@ -555,3 +555,4 @@ NEWACCT-ROOT ~16:22Z: successor #2 session_01D3E3NZjsQSKDvCk39HnE5m opened; 5 wo
 NEWACCT-ROOT ~16:25Z: OWNER: chưởng sự sleeves = nhất đẳng width, no narrow sleeves (rule added, MAID8 told). Successor #2 please confirm with MAID8.
 NEWACCT-ROOT ~16:30Z: forwarded to #2: ITEMFIX DONE 68f27adf (LEN open s31 t4/s33 t6), CDN-T78 DONE 61235f12 (150 on CDN img/fig-cut/rank8/), nhất đẳng v3 needs redo per K24 (waiting owner yes).
 NEWACCT-ROOT ~16:33Z: OWNER: HOLD chưởng sự/ma ma variants (MAID8 told STOP); send old sample first, batch her edits, redraw once (rule added). Old sample crop review-sheets/maid7/chuongsu_mama_mau_cu.webp sent.
+NEWACCT-ROOT ~16:36Z: MARKFIX DONE 947595c4 forwarded to #2 (8 fixed; cut-outs on CDN still need the same fix; s57/s59/s60 faces have no mark → ask owner). NEWACCT-ROOT STOPS.
