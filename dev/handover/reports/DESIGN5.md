@@ -6,12 +6,12 @@ Base: the current files (DESIGN4 ed3e8fd + #4 t4 throat-clasp fix d04ed67) copie
 Edit script (for audit): every replacement is an exact one-time swap; listed below word for word.
 
 ## Per-rank changes (shape words only; t6 also fabric)
-**t4 Tần → khuê y đuôi én (petal/lotus tiered panels, swallowtail, streamers; han_t6_quyphi_L1290 look). Fabric đoạn unchanged.**
-- `a long floor-length wrapped robe (quju)` → `a long floor-length layered guiyi robe (khuê y)`
-- `the hem winds once around the body in a curved spiral wrap;` → `its skirt is TIERS of long pointed lotus-petal panels, each tier overlapping the one below, ending in a ring of swallowtail points (yanwei) to the shins, with floating silk ribbon streamers, fresh and lively;`
-- `the same triple band on the spiral hem edge` → `… on the petal panel edges`
-- Caption: `Tần · Khúc cư đoạn, cổ ba lớp + choàng ngắn lưới ngọc trai` → `Tần · Khuê y đuôi én đoạn, cổ ba lớp + choàng ngắn lưới ngọc trai`
-- Capelet, beaded yoke, open neck, belt, zupei, colours, embroidery, hair, CAPELET CUT: all kept.
+**t4 Tần → khúc cư vạt ngắn (short simple wrap). v2 per owner Lượt 1300 (relayed by Foreman C #5): NO petal/lotus panels, NO swallowtail — same Hán wrap family as Phi/Quý phi. Fabric đoạn unchanged.**
+- `the hem winds once around the body in a curved spiral wrap;` → `the front panel wraps across ONCE to the side and ends in a smooth, softly curved hem edge (a short simple wrap, simpler than the Phi's full spiral, never petal panels, never swallowtail points);`
+- `the same triple band on the spiral hem edge` → `… on the curved wrap edge`
+- Caption: `Tần · Khúc cư đoạn, …` → `Tần · Khúc cư vạt ngắn đoạn, cổ ba lớp + choàng ngắn lưới ngọc trai`
+- Why this reads BELOW Phi: same khúc cư family, but Tần's wrap crosses only once and stops at the side (Phi: full spiral from waist to hem with a deep border along it); Tần keeps medium-size flowers vs Phi's LARGE; Phi has two layered capes vs Tần's one capelet; Quý phi steps up to three straight-hem gấm robes. So Tần < Phi < Quý phi in wrap length, layers and embroidery.
+- (v1 petal/swallowtail text removed entirely; `quju` wording of the base kept.) Capelet, beaded yoke, open neck, belt, zupei, colours, embroidery, hair, CAPELET CUT: all kept.
 
 **t5 Phi → khúc cư (Hán A, curved spiral wrap). Fabric đoạn unchanged.**
 - `a long straight-hem outer robe (zhiju) in light clear warm plum reaching the floor over an inner robe…` → `a long curved-hem wrapped outer robe (quju, khúc cư) in light clear warm plum reaching the floor, its front panel wound in a curved spiral around the body from the waist down to the hem, over an inner robe…`
@@ -38,7 +38,7 @@ Edit script (for audit): every replacement is an exact one-time swap; listed bel
 ## Char counts (Python chars; gate limit 10 000)
 | rank | base ed3e8fd | new |
 |---|---|---|
-| t4 | 9994 | 9978 |
+| t4 | 9994 | 9958 |
 | t5 | 9868 | 9975 |
 | t6 | 9966 | 9965 |
 | t8 | 9997 | 9962 |
@@ -53,7 +53,7 @@ No outfit / embroidery / jewellery / hair words cut. Every removed shape phrase 
 
 ## Checks
 - `python3 dev/art/keep_check.py --all` → 11 sidecars PASS (new .keep: base `_ed3e8fd`; old DESIGN3/4 sidecar kept below as `#` comments for history).
-- `check_store --scope tpN --age a18`: t4 M06+M07+S12+S13, t5 M06+M07+S12, t6 M07+S12, t7/t8 PASS = exactly the same FAIL set as before DESIGN5 (no new FAIL).
+- `check_store --scope tpN --age a18` (after v2 pull): t4 M07+S12+S13 (M06 no longer reported), t5 M06+M07+S12, t6 M07+S12, t7/t8 PASS = exactly the same FAIL set as before DESIGN5 (no new FAIL).
 
 ## Gate conflicts — NOT decided (for the foreman/owner)
 1. **S12 PHI BẠCH vs G32** (t4–t6): store wants the phi bạch shawl, G32/DESIGN2 removed it ("no shawl"). Unchanged.
