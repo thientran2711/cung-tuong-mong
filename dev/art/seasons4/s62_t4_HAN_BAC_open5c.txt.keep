@@ -1,0 +1,10 @@
+base: dev/art/seasons4/s62_t4_HAN_BAC_open5.txt
+allow: in light clear warm plum over an inner robe in bright blush pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: peach blossoms and small swallows in gold and bright blush pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: light clear warm plum and bright blush pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: outer band light clear warm plum embroidered in gold   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: inner two bright blush pink with gold edges   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: light clear warm plum silk like #DF9ED9 is the main colour of the robe   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: with bright blush pink in the inner robe and linings   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: the MAIN colour light clear warm plum and the SECONDARY colour bright blush pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour light clear warm plum and her secondary colour bright blush pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)

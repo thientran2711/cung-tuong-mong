@@ -1,0 +1,6 @@
+base: dev/art/thu_comoi/m02_t8_THU_COMOI_v6.txt
+allow: the Empress's imperial phoenix ceremonial robe of golden yellow silk mixed with moss green   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: a fitted moss green INNER top   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: moss green silk like #A8C379   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: the MAIN colour moss green like #A8C379 and the SECONDARY colour coral rose like #CF8377   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour moss green and her secondary colour coral rose like #CF8377   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)

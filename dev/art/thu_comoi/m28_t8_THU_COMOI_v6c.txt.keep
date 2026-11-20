@@ -1,0 +1,7 @@
+base: dev/art/thu_comoi/m28_t8_THU_COMOI_v6.txt
+allow: the Empress's imperial phoenix ceremonial robe of golden yellow silk mixed with coral pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: a fitted coral pink INNER top   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: coral pink silk like #D9998C   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: with indigo blue like #4E5D97 in the inner robe and linings   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: the MAIN colour coral pink like #D9998C and the SECONDARY colour indigo blue like #4E5D97   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour coral pink and her secondary colour indigo blue like #4E5D97   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)

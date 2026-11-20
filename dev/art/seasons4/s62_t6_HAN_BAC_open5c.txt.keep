@@ -1,0 +1,13 @@
+base: dev/art/seasons4/s62_t6_HAN_BAC_open5.txt
+allow: light clear warm plum   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: bright blush pink and royal yellow   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: in light clear warm plum   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: over an inner robe in bright blush pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: cape and train are all clearly light clear warm plum silk   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: her signature colour family light clear warm plum and bright blush pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: with large areas of plain light clear warm plum silk visible   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: bright blush pink only as a small accent   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: light clear warm plum silk like #DF9ED9 is the main colour of the robe   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: with bright blush pink in the inner robe and linings   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: the MAIN colour light clear warm plum and the SECONDARY colour bright blush pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour light clear warm plum and her secondary colour bright blush pink   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
