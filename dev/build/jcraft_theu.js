@@ -71,8 +71,8 @@ function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.
  KG82.peek=()=>{if(phase!=="play"||!P)return null;const now=crNow();
   if(P.ph==="pick"){const i=P.sp.findIndex(s=>s.b===P.band);if(i<0)return null;const s=P.sp[i];const c=C.client(s.x,s.y);
    const al=P.sp.filter(t=>t!==s&&t.b<0&&Math.abs(t.c[0]-s.c[0])+Math.abs(t.c[1]-s.c[1])+Math.abs(t.c[2]-s.c[2])<90).map(t=>C.client(t.x,t.y));return Object.assign(c,{alike:al,hidden:now-P.start>PEEK})}
-  /* stitch: the next free dip once it is near (≤ 300 ms); at = its moment on the craft clock (crNow), so a bot taps on the beat, not on the call */
-  if(P.ph==="stitch"&&P.k<ST){let di=Math.ceil((now-WIN*.25-P.dip0)/BEAT);if(di<=P.used)di=P.used+1;if(di<0)di=0;if(dipAt(di)-now>300)return null;const d=dots(P.band,hx(now),HY)[P.k];return d?Object.assign(C.client(d[0],d[1]),{at:dipAt(di)}):null}return null};
+  /* stitch: the next free dip once it is near (≤ 300 ms); at = ms until that moment (the jslap convention read by dev/measure/mg-bots.js), so a bot taps on the beat, not on the call */
+  if(P.ph==="stitch"&&P.k<ST){let di=Math.ceil((now-WIN*.25-P.dip0)/BEAT);if(di<=P.used)di=P.used+1;if(di<0)di=0;if(dipAt(di)-now>300)return null;const d=dots(P.band,hx(now),HY)[P.k];return d?Object.assign(C.client(d[0],d[1]),{at:dipAt(di)-now}):null}return null};
  KG82.hint=()=>{if(phase!=="play"||!P||P.ph!=="stitch"||P.k>=ST)return null;const now=crNow();let di=Math.ceil((now-WIN*.25-P.dip0)/BEAT);if(di<=P.used)di=P.used+1;if(di<0)di=0;
   const d=dots(P.band,hx(now),HY)[P.k];if(!d)return null;const c=C.client(d[0],d[1]);return{x:c.x,y:c.y,soon:dipAt(di)-now<BAL.mgTier.tut.lead}};
  piece();stop=crLoop(draw);return()=>{done=true;KG82.hint=null;if(stop)stop()}}

@@ -56,7 +56,7 @@ const SRC0=k=>k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}
      const lx=L[L.length-1][0]+ex,ly=L[L.length-1][1]+ey;fire('pointerup',lx,ly);await sleep(200)}
     else if(pk.x!=null){let x=pk.x,y=pk.y;/* memory slip: the sample is covered and a look-alike spool / shape is near: picks it now and then */
      if(o.slip&&pk.hidden&&pk.alike&&pk.alike.length&&Math.random()<o.slip*pk.alike.length){const a=pk.alike[Math.floor(Math.random()*pk.alike.length)];x=a.x;y=a.y}
-     if(pk.at!=null){/* a timed tap: aim at the moment (+ the hand's spread), on the craft clock */const aim=pk.at+(o.ms0||0)+gauss()*(o.msS||0);let w;while((w=aim-crNow())>0)await sleep(Math.min(4,w/(CRAFT.speed||1)))}
+     if(pk.at!=null){/* a timed tap: aim at the moment (+ the hand's spread), on the craft clock */const aim=crNow()+pk.at+(o.ms0||0)+gauss()*(o.msS||0);let w;while((w=aim-crNow())>0)await sleep(Math.min(4,w/(CRAFT.speed||1)))}
      fire('pointerdown',x,y);fire('pointerup',x,y);await sleep(pk.at!=null?20:120)}
     busy=false}
    return acts};

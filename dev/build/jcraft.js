@@ -12,8 +12,8 @@
    No words in play (OD 20/11 ~05:10Z): every cue is a picture; signs only (★ ✗ ✓). Pictures: crArt draws the painted sprite when Foreman C has delivered it
    (name listed in CR_HAVE), else the canvas stand-in and the name is recorded once in CTM_MISSING_PICS (kitPhNote "mg") = the «tạm» marker of the kit. */
 const CRAFT={speed:1};/* tests only: CRAFT.speed > 1 runs the craft boards' clocks faster (crNow); the game never changes it */
-let CR_T0=null;
-function crNow(){const n=performance.now();if(CRAFT.speed===1)return n;if(CR_T0==null)CR_T0=n;return CR_T0+(n-CR_T0)*CRAFT.speed}
+const CR_B={r:null,g:0,s:1};/* the craft clock: continuous when CRAFT.speed changes (tests only) */
+function crNow(){const n=performance.now();if(CR_B.r==null){CR_B.r=n;CR_B.g=n;CR_B.s=CRAFT.speed}if(CRAFT.speed!==CR_B.s){CR_B.g+=(n-CR_B.r)*CR_B.s;CR_B.r=n;CR_B.s=CRAFT.speed}return CR_B.g+(n-CR_B.r)*CR_B.s}
 /* register an engine; switch the kind to it from KG82_CRAFT (rules text, move picture, lesson label) */
 function crReg(kind,eng,fn){KG82_ENG[eng]=fn;const D=(typeof KG82_CRAFT!=="undefined"&&KG82_CRAFT[kind])||null;const K=KG82_KIND[kind];if(!D||D.e!==eng||!K)return;
  K.e=eng;K.t=D.t;K.how=D.how;if(D.n)K.n=D.n;if(D.demo)KG82_DEMO[eng]=D.demo;
