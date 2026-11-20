@@ -29,10 +29,13 @@ jobs:
       - name: Build the site (same script as release)
         run: bash dev/site/build_site.sh
       - name: Load + memory + bytes (perf.js; fold = 755x1000, pixelLand = mid phone)
+        shell: bash  # explicit shell = bash -eo pipefail, so a failing test is not masked by | tee
         run: node dev/test/perf.js --devices fold,pixelLand --out perf-load.json | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Play time - tap latency, long tasks, fps, soak (play-perf.js)
+        shell: bash  # explicit shell = bash -eo pipefail, so a failing test is not masked by | tee
         run: node dev/test/play-perf.js --devices fold,pixelLand --minutes 2 --out perf-play.json | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Frame time with weather FX on vs off (perf-fx-gate.js)
+        shell: bash  # explicit shell = bash -eo pipefail, so a failing test is not masked by | tee
         run: |
           node dev/test/perf-fx-gate.js --kind rain --vp 755x1000 --out fx-fold.json | tee -a "$GITHUB_STEP_SUMMARY"
           node dev/test/perf-fx-gate.js --kind rain --vp 915x412 --out fx-pixel.json | tee -a "$GITHUB_STEP_SUMMARY"
