@@ -40,8 +40,8 @@ Edit script (for audit): every replacement is an exact one-time swap; listed bel
 |---|---|---|
 | t4 | 9994 | 9958 |
 | t5 | 9868 | 9975 |
-| t6 | 9966 | 9965 |
-| t8 | 9997 | 9898 (v4) |
+| t6 | 9966 | 9991 (v5) |
+| t8 | 9997 | 9958 (v5) |
 
 ## Every cut (boilerplate only, to stay ≤ 10 000; all listed as allow lines)
 From the duplicated line `Full-body standing figure head to feet, soft even light; fair porcelain skin; gentle expression … mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; 3/4 or frontal view.` (its content is repeated by the MASTER head-to-feet/skin/proportion sentences and the ANGLE line; S18 smile clause kept verbatim):
@@ -68,3 +68,11 @@ Done; nothing left but this report + push. No successor needed.
 
 ## v4 (owner Lượt 1305, via Foreman C #5): t8 NO train
 Removed `, with a long train BEHIND her` and the v3 sentence `Exception: her own long train behind her.`. S19 "no train" is verbatim and is now the only train mention in t8, so conflict 4 is gone. 9898 chars; check_store tp8 PASS; keep_check --all PASS (14). Everything else is kept: 4 layers, straight close over-robe, flat collar with 1 pearl tier.
+
+## v5 (owner Lượt 1309, via Foreman C #5): neck still closed in her t6/t8 pictures (han_t6_L1309 / han_t8_L1309: lapels cross high at the throat)
+**t8:** cloud collar RESTORED word for word from ed3e8fd: `a wide jewelled gold-brocade and pearl cloud collar with layered pearl fringes, set LOW …` (the v1 "FLAT, compact … ONE single tier" text is gone). Only the 4-layer change stays (no mantle, no train). To open the neck I added after `all collars WIDE to the shoulders`: `: the lapels sweep out toward the edge of the SHOULDERS and meet low at the chest in a broad V, never a tight high crossing at the throat` (the same sweep wording t4/t5 use). 9958 chars; check_store PASS.
+**t6:** applied the t7 opening mechanism. t7 has an OPEN-FRONT outer robe over WIDE collars, and t6's trực cư outer robe was closed:
+- `collars WIDE to the shoulders:` → `all collars WIDE to the shoulders: the lapels sweep out toward the edge of the SHOULDERS and meet low at the chest in a broad V, never a tight high crossing at the throat:`
+- `a long light clear warm plum straight-hem outer robe falling STRAIGHT to the floor in clean vertical lines,` → `a long open-front light clear warm plum straight-hem outer robe worn OPEN, falling STRAIGHT to the floor,`
+- Length trims: my own words `in clean vertical lines`, `one above the other`, `level` (in "front edges and level hem"); boilerplate `elegant, slim, clearly adult;`, `; 3/4 or frontal view`, and `, never copy anything but its colour` (the same trim as t7/t8). Allow lines added.
+- 9991 chars; check_store: M07+S12 only (same as before); keep_check --all PASS (20).
