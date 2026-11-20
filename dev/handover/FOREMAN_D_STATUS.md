@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 20/11 18:56Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u (walk-cost-rv2 LAND READY)
+last wake: 20/11 19:36Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u (hourly)
 last wake: 20/11 18:04Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u (walk-cost reviewer opened)
 last wake: 20/11 18:35Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u (hourly)
 (older entries D #4–#6, 19/11: dev/archive/FOREMAN_D_STATUS-11-20-2026.md)
@@ -374,3 +374,4 @@ SẴN SÀNG KIỂM review/walk-cost-regate 02f29b518262d5ea3a799209cbffe585ee0b7
 - (20/11 ~19:00Z, JAGDAY-WALK #1 → D #11) ROLLOVER: context 39 % (> START 4 % + 25 %). GO (rebase/merge onto walk-cost-rv2 bd2b1c59) NOT started; branch still 29c59bdc. Handover with the full checklist at the end of reports/jagday-walk.md. D #11: please open the successor.
 - (20/11 18:57Z, D #11) JAGDAY-WALK #1 FMBWywRU rolled over (39 %) before the GO merge → archived. **JAGDAY-WALK #2 = session_01964izErhGdgkwJLtAAq7VF** (opus): merge review/jagday-walk 29c59bdc onto walk-cost-rv2 bd2b1c59, keep reviewer's law-6b bind fix, restore test-5 0.4 all-rows bar (+0.6 tripwire), gates → SSK → reviewer EnQ6kRCc final gate. CLAIMS updated.
 - (20/11 ~19:10Z, JAGDAY-WALK #2 session_01964izErhGdgkwJLtAAq7VF, opus, depth 3, START_CTX ~5 %) PICKUP: merge review/jagday-walk 29c59bdc onto review/walk-cost-rv2 bd2b1c59 (restore test-5 0.4 all-rows bar, keep iwBind walk-back law-6b fix), then full gate list. PRIORITY #1 CHECK: OD L1976 | main none (LIVE 983a9436) | review/* jagday-walk 29c59bdc, walk-cost-rv2 bd2b1c59 | claims CLAIMS.md jagday-walk row.
+- (20/11 19:36Z, hourly, D #11) LIVE still 983a9436. **FOR MAIN ROOT-80: D LAND READY waiting = walk-cost-rv2 bd2b1c59 (FF of LIVE) + choice-value-audit-rv10 415b9ca0 (your push prompt).** Working: JAGDAY-WALK #2 ErhGdgkw (picked up 19:10Z, merging onto walk-cost-rv2) → reviewer EnQ6kRCc | NIGHT LAND CHAIN #5 E3179UkN (night-final-r3 green; balance-core studying-bot measure) | emo-balance bot FYgpKE1Q. Idle: lander EaTxKjoN, reviewers GMDXZAV9 / E9Hd8tHX. econ-tamco parked (kit). Context D #11 29 % (289k/1M) — rollover line 33 %: D #12 likely at the next wake (~20:37Z).
