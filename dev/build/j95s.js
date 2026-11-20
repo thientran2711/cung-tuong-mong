@@ -229,7 +229,7 @@ Object.assign(window,{j95here,j95whereId});
    j95sNpcPick. Off in co-op (j95on false: the record is off there) and for a servant start (isSrv) / a home life (isKc). */
 function j95sMine(){const R=S.roster;if(!R||R.key!==j95key())return[];const kh=j95kh();const L=[];
  const add=(id,s,role,close)=>{const e=R.P[id];if(!e)return;const x=e[kh];L.push({id,s,name:s.name,role,close,x,free:j95sFree(x,"home")})};
- if(S.maid&&S.maid.name)add("mm:me",S.maid,"Cung nữ thân tín",true);
+ if(S.maid&&S.maid.name)add("mm:me",S.maid,kitMaidTitle(),true);
  for(const s of S.staff||[])if(s&&!s.out&&s.sid!=null)add("s"+s.sid,s,s.role==="eunuch"?"Thái giám":"Cung nữ",false);
  return L}
 const J95S_ENT_T=["Hôm nay ra khỏi cung, ngươi dẫn ai theo? Chọn bao nhiêu người cũng được, trong những người đang ở cung và rảnh. Đã đi rồi thì hôm nay không gọi thêm người được nữa.","Người theo hầu thấy những gì ngươi thấy, có thêm tai mắt cho ngươi; nhưng họ cũng biết việc ngươi làm và có thể kể lại với người khác. Người ở lại trông cung."];
