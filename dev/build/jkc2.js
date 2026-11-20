@@ -249,17 +249,17 @@ function kc2CardsNc(){const X=[];const L=kc2L();const cha=kcR("cha"),me=kcR("me"
 const KC2CD={d_benh:10,d_ghe:12,d_lai:6,d_lu:12,d_thue:12,d_bac:12,n_hoi:12,n_benh:14,n_yen:10,n_le:99,n_muoi:99,n_thich:99,d_xd:99,d_moi:99};
 function kc2Week(){if(Q.length>2)return;const E=[];const K=S.kc;K.evT=K.evT||{};const ok=e=>K.evT[e]==null||S.turn-K.evT[e]>=(KC2CD[e]||99);const add=(e,w)=>{if(w>0&&KCE[e]&&ok(e))E.push([e,w])};
  if(K.kd==="dan"){const me=kcR("me"),ly=kcR("ly"),xd=kcR("xd"),hu=kcR("huynh");
-  if(me)add("d_benh",.8);if(ly)add("d_ghe",.6);if(xd)add("d_xd",.6);add("d_lai",.5);if(hu&&hasT(hu,"Ham vui"))add("d_bac",.8);
+  if(me)add("d_benh",.8);if(ly)add("d_ghe",.6*BAL.kcSch/100);if(xd)add("d_xd",.6);add("d_lai",.5);if(hu&&hasT(hu,"Ham vui"))add("d_bac",.8);
   if(S.month>=6&&S.month<=9)add("d_lu",1.4);if(S.month>=10)add("d_thue",1);if(S.kap>=BAL.kc2.st.dan.moi)add("d_moi",1)}
  else{const th=kcR("thuc"),mu=kcR("muoi"),cha=kcR("cha");
-  if(K.sx&&S.month===6)add("n_hoi",3);if(mu&&K.sx)add("n_muoi",(tv({"Kiêu ngạo":1.2,"Tham vọng":1.4},mu)||.4));if(cha)add("n_benh",.35);
-  if(K.sx&&S.month>=5&&S.month<=8)add("n_le",1.2);if(K.sx&&S.kap>=BAL.kc2.st.nc.thich)add("n_thich",.5+S.kap/100);if(th)add("n_yen",.6)}
+  if(K.sx&&S.month===6)add("n_hoi",3);if(mu&&K.sx)add("n_muoi",(tv({"Kiêu ngạo":1.2,"Tham vọng":1.4},mu)||.4)*BAL.kcSch/100);if(cha)add("n_benh",.35);
+  if(K.sx&&S.month>=5&&S.month<=8)add("n_le",1.2);if(K.sx&&S.kap>=BAL.kc2.st.nc.thich)add("n_thich",(.5+S.kap/100)*BAL.kcSch/100);if(th)add("n_yen",.6*BAL.kcSch/100)}
  const o=npcWhy("kcWeek",{E},()=>roll(KC.ev));if(!o)return;/* npc-purpose G2: the strongest motive acts */const e=o.who.e;const d=mkP("kcE",{e});if(d){K.evT[e]=S.turn;pushDil(d,KCE[e].t)}}
 (function(){const m0=kcMonth;kcMonth=function(){if(!S||!S.kc||!S.kc.kd)return m0.apply(this,arguments);return kc2Month()}})();
 function kc2Month(){S.turn++;const K=S.kc;const d=K.kd;
- if(d==="dan"){S.kap+=BAL.eff.jkc2.kapKc2Month;if(S.kap>=BAL.kc2.st.dan.siet&&!K.ev.d_siet){K.ev.d_siet=1;pushDil(mkP("kcE",{e:"d_siet"}),"Chủ nợ đến nhà")}apply({bac:BAL.kc2.kc2Month_o_bac})}
- else{S.kap+=BAL.kc2.st.nc.month+(kcR("thuc")?BAL.kc2.st.nc.monthThuc:0);apply({bac:BAL.kc2.kc2Month_o_bac2});if(S.kap>=BAL.kc2.st.nc.pha&&!K.ev.n_pha){K.ev.n_pha=1;pushDil(mkP("kcE",{e:"n_pha"}),"Phe chủ chiến ra tay")}}
- S.kld=Math.max(0,S.kld-2);for(const m of K.fam){if(!m.alive)continue;m.oan=Math.max(0,(m.oan||0)-BAL.eff.jkc2.oanKc2Month)}
+ if(d==="dan"){S.kap+=Math.round(BAL.eff.jkc2.kapKc2Month*BAL.kcMatch/100);if(S.kap>=BAL.kc2.st.dan.siet&&!K.ev.d_siet){K.ev.d_siet=1;pushDil(mkP("kcE",{e:"d_siet"}),"Chủ nợ đến nhà")}apply({bac:BAL.kc2.kc2Month_o_bac})}
+ else{S.kap+=Math.round((BAL.kc2.st.nc.month+(kcR("thuc")?BAL.kc2.st.nc.monthThuc:0))*BAL.kcMatch/100);apply({bac:BAL.kc2.kc2Month_o_bac2});if(S.kap>=BAL.kc2.st.nc.pha&&!K.ev.n_pha){K.ev.n_pha=1;pushDil(mkP("kcE",{e:"n_pha"}),"Phe chủ chiến ra tay")}}
+ S.kld=Math.max(0,S.kld-BAL.kcRumFade);for(const m of K.fam){if(!m.alive)continue;m.oan=Math.max(0,(m.oan||0)-BAL.eff.jkc2.oanKc2Month)}
  /* the palace runs on: the same monthly world calls as jkc / the servant road (j42), with her outside */
  kcW(()=>{for(const v of liveRivals(true))stipend(v);rivalsMonth();servRanks();servMonth();oanMonth();restock();heirMonth();moodMonth();try{tdMonth()}catch(e){}return""});if(S.dead)return;
  /* chapters on a fixed calendar, then the sending event */
