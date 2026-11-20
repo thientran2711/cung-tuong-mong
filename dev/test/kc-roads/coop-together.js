@@ -76,7 +76,8 @@ async function buoiBoth(A,B,shotWait){const k0=await A.p.evaluate(()=>__co().wee
 async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='number'?B4N:3);/* buổi per week: 4 since jtime4 */for(let k=0;k<n;k++)await buoiBoth(A,B,w===0&&k===0?'06-waiting-friend':null)}
 
 (async()=>{const b=await chromium.launch();
- const A=await mk(b,'fold',[755,1000,2]),B=await mk(b,'ipad',[1180,820,2]);ALL.push(A,B);
+ const FV=[755,1000,2],IV=[1180,820,2],SW=!!process.env.CT_SWAPVP;/* CT_SWAPVP=1: the guest on the Fold, the host on the iPad (review shots of both seats on both devices) */
+ const A=await mk(b,SW?'ipad':'fold',SW?IV:FV),B=await mk(b,SW?'fold':'ipad',SW?FV:IV);ALL.push(A,B);
  const auto=o=>`window.__forceOrigin='${o}';window.kcEntryExam=(k,done)=>done(5);/* the selection round = the exam hook (Foreman D's mini-game later) */try{localStorage.setItem('ctm-bgpause','1')}catch(e){}setInterval(()=>{try{document.querySelectorAll('.krskip').forEach(b=>b.click());const ro=document.getElementById('kroul');if(ro){const s=[...ro.querySelectorAll('button')].find(x=>/Bỏ qua/.test(x.textContent));if(s)s.click()}if(window.__pickHome){const b=document.querySelector('#modal:not([hidden]) [data-kcp="nha"]:not(.ksel):not([disabled])');if(b&&!(typeof S!=='undefined'&&S&&S.kc))b.click()}}catch(e){}},200)`;
  /* every seat records her identity card as first shown; the home seat (__pickHome) then takes the home road, the other "Vào cung ngay" */
  const rec=';window.__cardSeen=null;setInterval(()=>{try{if(!window.__cardSeen&&document.querySelector("#modal:not([hidden]) [data-kcp]")){window.__cardSeen=[...document.querySelectorAll("#modal [data-kcp]")].map(b=>({k:b.dataset.kcp,dis:b.disabled,sel:b.classList.contains("ksel"),t:b.innerText.slice(0,160)}));if(!window.__pickHome){const c=document.querySelector("#modal [data-kcp=cung]");if(c&&!c.classList.contains("ksel"))c.click()}}}catch(e){}},150)';
@@ -98,7 +99,7 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
   if(cd.A&&rA)ok(cd.A.length===2&&cd.A.every(x=>!x.dis),'A card: both roads open',cd.A);await shot(B,'01-card-free')}
  {const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);const a=await A.p.evaluate(()=>__co().world),c=await B.p.evaluate(()=>__co().world);if(a&&c)break;await sleep(500)}}
  const st=async o=>o.p.evaluate(()=>{const f=rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null;return{o:S.origin.k,sel:S.selx?S.selx.tier:null,kd:S.kc&&S.kc.kd,kc:typeof isKc==='function'&&isKc(),inPal:!!(S.kc&&S.kc.inPal),gate:!!(S.kc&&S.kc.gate),wIn:S.kc&&S.kc.wIn,due:S.kc&&S.kc.due,end:S.kc&&S.kc.end,name:S.name,d:[S.year,S.month,S.tuan],turn:S.turn,week:__co().week,fr:f&&f.name,srv:!!(S.srv&&!S.srv.risen),rank:S.rank,entV:S.entV||0,oiV:S.oiV||0,kpR0:S.kpR0,rk:!!S.rkSeed,diff:S.diff||null}});
- {for(let i=0;i<20;i++){await clear(P);const q=await P.p.evaluate(()=>Q.length&&Q[0].pid==='kc2Sel');if(!q)break;await P.p.evaluate(()=>chooseM(Q[0].opts.length-1));await sleep(300)}
+ {for(let i=0;i<20;i++){await clear(P);const q=await P.p.evaluate(()=>Q.length&&Q[0].pid==='kc2Sel');if(!q)break;if(i===0)await shot(P,'01b-selection');await P.p.evaluate(()=>chooseM(Q[0].opts.length-1));await sleep(300)}
   for(let i=0;i<20;i++){await clear(P);if(await P.p.evaluate(()=>!!(S.selx&&S.selx.tier!=null)))break;await sleep(300)}
   const a=await st(H),c=await st(P);ok(a.kc&&a.o===OH,hn+' at home',a);ok(!c.kc&&!c.inPal&&c.o===OP,pn+' in the palace (Vào cung ngay)',c);ok(c.sel!=null,pn+' went through the selection card',c.sel);
   /* the same new-life steps as solo on both seats (jentry / joi / jkiep / jrank / jdiff marks; thin guest = built on the host) */
