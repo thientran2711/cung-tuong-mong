@@ -23,9 +23,9 @@ R = {  # t: (VN, EN, robe colour words, hex, ornaments, flower)
  6: ("Quý phi", "noble consort rank (Quý phi)", "warm orange apricot", "#E3A25B",
      "a BIG ornate gold headdress with pearls, small gold blossoms and many gold tassels", "exactly ONE very large fresh orange peony, the grandest hair flower"),
  7: ("Hoàng quý phi", "imperial noble consort rank (Hoàng quý phi), just below the empress", "coral red", "#D46A64",
-     "a BIG Hoàng quý phi phoenix crown as large as a Quý phi's big ornate gold headdress: one gold phoenix with spread wings on an ornate gold crown band set with rubies, sapphires, pearls and jade, with many gold tassels and pearl-and-gold dangles (as big as a Quý phi's headdress, but never larger or grander than an empress's large crown with its spread-wing phoenixes)", None),  # owner 20/11 ~01:01Z (A28): big like Quý phi, never larger than Hoàng hậu
+     "a Hoàng quý phi phoenix crown like an empress's crown but a little smaller and simpler: a gold phoenix with wide spread wings rising from a gold crown band, with swags of pearl strings and red jewels (never larger or grander than the empress's crown)", None),  # owner ~01:13Z SWITCH: the old Hoàng hậu crown, a little smaller/simpler (A28)
  8: ("Hoàng hậu", "highest rank, the EMPRESS (Hoàng hậu), first lady of the palace", "royal yellow", "#EFBD69",
-     "a LARGE ornate gold phoenix crown with spread phoenix wings, pearl strings and red jewels", None),
+     "a LARGE ornate gold phoenix crown, the grandest crown in the palace: a wide ornate gold crown band with one gold phoenix with spread wings, set with rubies, sapphires, pearls and jade, with many gold tassels and pearl-and-gold dangles", None),  # owner ~01:13Z SWITCH: the crown of Hoàng quý phi v2 (3zKu15AREY)
 }
 
 def who(t, old):

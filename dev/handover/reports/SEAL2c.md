@@ -38,3 +38,9 @@ t7 ornament wording changed (A17 diff: only this): "a BIG Hoàng quý phi phoeni
 New: t7y 3zKu15AREY, t7o DoOlPOlpcl (gate PASS, 270 cr). Sheet QP | HQP CŨ | HQP MỚI | HH, labels big on the picture (A27):
 https://ctm-img.victoria-tntt.workers.dev/img/_review/emo-anim-groups/rank-gian-hqp-v2-sheet.jpg
 Look: the crown is now as big as the Quý phi headdress ✓; a single phoenix whose wings are smaller than the Empress's ✓. Faults (list only): its band is about as wide as the Empress's and carries MORE hanging tassels, so at a glance it can read as grand as Hoàng hậu; the medallion is drawn a bit larger than its neighbours; young and older crowns differ slightly in gem colours.
+
+## CROWN SWAP Hoàng hậu ↔ Hoàng quý phi (owner ~01:13Z: "Hoàng quí phi còn to hơn hoàng hậu, đổi mũ…") — DONE, 4 gens 540 cr
+t8 now = the HQP v2 crown ("LARGE ornate gold phoenix crown, the grandest crown in the palace: wide band, one spread-wing phoenix, rubies/sapphires/pearls/jade, many gold tassels + pearl-and-gold dangles").
+t7 now = the old Hoàng hậu crown, a little smaller and simpler ("phoenix crown like an empress's but a little smaller and simpler: spread-wing phoenix on a gold band, pearl-string swags, red jewels; never larger or grander than the empress's crown"). Gate PASS (S9 A28, S12).
+New: t7y iG5ELKJ3uK, t7o 3zKusr2REY, t8y xSBVvtwjfW, t8o tCRPYzFmZJ. Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/emo-anim-groups/rank-gian-crown-swap-sheet.jpg
+Look: HQP MỚI crown clearly smaller and simpler than HH MỚI ✓; HH MỚI widest, with the most tassels ✓; young = older crowns ✓ (small gem differences). Faults: HH MỚI young crown is a little narrower than the HQP v2 crown it copies; the HQP MỚI phoenix is about the same height as the old HH phoenix.
