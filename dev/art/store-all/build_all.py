@@ -460,7 +460,7 @@ def _t3_slot(person,rank,S):
     import importlib.util as _iu
     _sp=_iu.spec_from_file_location("check_store",os.path.join(ART,"check_store.py")); _cs_mod=_iu.module_from_spec(_sp); _sp.loader.exec_module(_cs_mod)
     main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
-    return _cs_mod.g15_t3(S,main,sec)
+    return _cs_mod.g15_t3(S,main,sec,LAST_G.get("AGE","a18"))   # G19: crossed collar at a36/a51/a65
 class NotDrawn(Exception): pass
 def _kc_drawn(person):   # B8 (BW3): same table + rule as build.py kc_drawn (dev/art/KC_REFS.json m09_ok yes + real face words)
     import json as _j
