@@ -429,7 +429,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | facfound-parity E29 (opus; LIVE law-1 regression «Lập phe» in role-parity-drift2-play, found by E23r) | review/facfound-parity; briefs/E29-facfound-parity.md | FOREMAN E #17 | session_01DgYSWmngcUnfqKR9MvpkS1 | READY 5f46f023 (game change: NPC→her Lập phe / Xin vào phe + probe fix) | 20/11 10:58Z |
 | GAP IT03 wear-slots Hoa tai + Giày (opus; ORDER MAIN ROOT-77 10:20Z; brief briefs/b-wear-slots.md) | review/wear-slots | B | session_01N1tNP54h4MaGv7EfQy7u43 | SẴN SÀNG KIỂM 56f00454 (report reports/wear-slots.md; KIT REQUEST iPad 1180 wear column OPEN) | 20/11 ~11:30Z |
 | GAP kc-fail-effects J3c (opus; home cards hide fail effects, whole group) | review/kc-fail-effects | B | session_01N1tNP6BY715rYe4KHs14ko | SẴN SÀNG KIỂM 43d8d0cb (SMALL; scan 320/480 wrong → 0; coop-kcco 68/68, coop-e2e 68/68; contains LIVE 90b7e797) | 20/11 ~11:30Z |
-| REVIEW ge-batu (BIG opus E28r) of e0424d54 | review/ge-batu | FOREMAN E #17 | session_01DgYSWokELeSAzf9p9MFqAS | RUNNING | 20/11 11:26Z |
+| REVIEW ge-batu (BIG opus E28r) of e0424d54 | review/ge-batu | FOREMAN E #17 | session_01DgYSWokELeSAzf9p9MFqAS | r1 FAIL; r2 PASS 1ca835da → LAND READY a99673e8; ARCHIVED | 20/11 11:26Z |
 | GAP GE03 ge-map «Sơ đồ nhánh» page (sonnet; on kitBranchMap 90b7e797) | review/ge-map; briefs/root77-ge-map.md | MAIN ROOT-77 | session_01Rc5AsNQDQXeYG8Yk7ugFpA | SẴN SÀNG KIỂM 8e2efbea | 20/11 10:36Z |
 | FOREMAN E #18 (opus; child of E #17, depth 8 = LAST) | handover FOREMAN_E_STATUS | FOREMAN E #17 | session_01DgYSWnmvkdgnzELwSixER7 | DONE → E #19 session_01DgYSWky5RC6FxdEKQrycwt (12:50Z) | 20/11 11:42Z |
 | REVIEW wear-slots r1 (opus BIG) of 56f00454 | review/wear-slots-r1 | B | session_01N1tNP5gHxMtpFZ6rmVrtsc | PASS e71918c0 (contains LIVE 713d96dc; report reports/wear-slots.md REVIEW r1) | 20/11 12:20Z |
@@ -461,7 +461,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW podium-wire r1 (opus BIG) of 02db04af | review/podium-wire-r1 | B | session_01N1tNP2KN32mTra7iVBwtPR | PASS d6868a02 (lv[0] 20->11; owner flags: sister on her house kcPow, grudge foul on her) | 20/11 |
 | MAIN ROOT-79 (opus; child of ROOT-78, depth 8 LAST) | handover HANDOVER_SESSION9 | ROOT-78 | session_01Rc5AsMT6GWGyV9SHc2vgNi | RUNNING | 20/11 14:06Z |
 | REVIEW ge-npc r1 (opus BIG) of a28b107f | review/ge-npc-r1 | B | session_01N1tNP6UyqC6o8nnNuZC3Sj | RUNNING | 20/11 14:04Z |
-| ge-batu r2 fixes (opus E28b; E28r FAIL e0424d54, FIX LIST 1–9) | review/ge-batu; briefs/E28b-ge-batu-r2.md | FOREMAN E #19 | session_01DgYSWq3hb2D3NEYyra3aF3 | SẴN SÀNG KIỂM 1ca835da (report ge-batu.md ## ROUND 2) | 20/11 15:20Z |
+| ge-batu r2 fixes (opus E28b; E28r FAIL e0424d54, FIX LIST 1–9) | review/ge-batu; briefs/E28b-ge-batu-r2.md | FOREMAN E #19 | session_01DgYSWq3hb2D3NEYyra3aF3 | PASS 1ca835da (E28r r2) → LAND READY a99673e8; ARCHIVED | 20/11 15:20Z |
 | kit-opt-text KIT KEEPER (sonnet; KP14) | review/kit-opt-text; reports/kit-opt-text.md | MAIN ROOT-79 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 39faf7c0 | 20/11 |
 | REVIEW kit-opt-text (sonnet small, KP14) of 39faf7c0 | review/kit-opt-text-rv; briefs/rv-root79-kit-opt-text.md | MAIN ROOT-79 | session_01Rc5AsMSxpxbsAMRSE5oWrq | PASS 9f673ab2 → LIVE eb11e2ad | 20/11 14:58Z |
 | kit-fig2-left KIT KEEPER (sonnet; KP22 check, no code) | reports/kit-fig2-left.md | MAIN ROOT-79 | session_01Rc5AsMtjP4KTgBZVjENGLs | DONE (report only) | 20/11 |

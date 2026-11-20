@@ -59,3 +59,14 @@ BEFORE / AFTER (same bot, 5 runs × 16 buổi; far = travel ≥ 2, no «on the w
 | all | 33 / 121 | 8 / 116 | 0 / 125–151 |
 Gates on b25e42cc (one at a time): walk-cost ALL OK (1–11 incl. errand class + unit) · ag-walk 10/10 · ptime ALL OK · ptime2 ALL OK · invite-host-away 9/9 · time-spill-guard PASS (static + runtime) · coop-e2e 68/68 · QUICKCHECK PASS (old save from live ok, core gates PASS, perf new/live render 263/312, buổi 1474/1859 ms). Still stacked on review/walk-cost-rv ffd22ea6 (not in main 5cd6d24a at push).
 SẴN SÀNG KIỂM review/jagday-walk b25e42cc60f8469a662273112ab36366f17bbe78 (TIER BIG, round 1)
+
+## ROUND 2 FIX (REVIEW FAIL 2 @b25e42cc: invite-host-away C 6/10)
+- Cause (as the reviewer found): jwalk's «move decided in the khắc now» rule rewrote the leaving guest's «back» row into a why-less «go».
+- (a) Whole group, jwalk: every row jwalk turns into «on the way» keeps its own target and why (`walkRoadWhy`: "<why> · đang trên đường"); leave-earlier rows carry the arrival's target + why.
+- Same family found while testing (A/B 1/10): the guest's ARRIVAL row («visit», jptime iwAdd) got the same rewrite. The invite / errand ledger rows already hold the walk (task due = after the road), so the khắc-now rule now skips timed-ledger rows: «visit», «back», and anyone with a jptime task (ptAwayOf). With this, C keeps its original «back» row → test C's row assert is unchanged.
+- (b) invite-host-away.test: only one change — `r.note` reads 8 log lines instead of 4 (C failed 1/10 because witness / encounter cards on her walk home logged 3–4 lines after the «… sang chơi không gặp, đã ra về» notice; the row, loss and notice were all right). Debug run with 12 lines: 20/20 C.
+- Also fixed: my r2 helper was first named `walkWhy` = a second top-level copy of j9's walkWhy (her walk reason text); quickcheck G1 one-core-guard caught it → renamed `walkRoadWhy`, every gate re-run after the rename.
+- invite-host-away on the final code, 10 runs: A 10/10, B 10/10, C 10/10, D/F/G/H 10/10, **E 9/10** (the walk-cost E flake, base 1/10 too; WALK-COST #3's job).
+  Seen in earlier rounds of mine: A/B fail when her palace has ONLY palaces as near places (test helper `nearK` → `walk(r2)` answers the palace-entry card with its no-khắc option = turns back; her walk never starts) — test setup of walk-cost r3, not NPC rows; left to WALK-COST #3 who edits this test.
+- Gates on 29c59bdc (one at a time): walk-cost ALL OK · ag-walk 10/10 · invite-host-away ×10 (above) · ptime ALL OK · ptime2 ALL OK · time-spill-guard PASS · coop-e2e 68/68 · QUICKCHECK PASS (old save ok, core gates PASS; one earlier run had G4 coop-one-world seed 3 FAIL «R.evm 1» — re-run 5× incl. seed 3 ×3: 5/5 PASS, random) · far-jump bot: every class 0.
+SẴN SÀNG KIỂM review/jagday-walk 29c59bdc58de2f6acb9f90807fbb2f102883dba7 (TIER BIG, round 2)
