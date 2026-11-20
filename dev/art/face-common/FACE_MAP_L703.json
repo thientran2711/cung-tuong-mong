@@ -1210,14 +1210,14 @@
   "kind": "QUYENRU-MOVE-F3"
  },
  "s44": {
-  "group": "Sắc sảo",
+  "group": "Quyến rũ",
   "hidden": false,
-  "ts": "2026-11-19T23:00:00Z",
-  "cut": "79foGbpJAL",
-  "gen": "WDgkI1rcXe",
-  "ver": "v5",
-  "prompt_file": "dev/art/face-common/s44.v5.FULL.txt",
-  "kind": "NEWFACE-737"
+  "ts": "2026-11-20T02:41:00Z",
+  "cut": "DoOgxICpcl",
+  "gen": "kse0GTu16B",
+  "ver": "qr",
+  "prompt_file": "dev/art/face-common/s44.qr.FULL.txt",
+  "kind": "QUYENRU-MOVE-F3"
  },
  "s45": {
   "group": "Quyến rũ",
