@@ -320,3 +320,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW phutang-road (opus BIG E21r) of 30d8ee51 (stacked on bd-roads 0308cbcc) | review/phutang-road; briefs/E21r-review-phutang-road.md | FOREMAN E #13 | session_01DgYSWnvWgySKFx7y6JDi4D | RUNNING | 19/11 23:28Z |
 | person-minigame-acts lead (PARKING_LOT #8, OD 19/11 ~23:55Z; opus E22) | review/person-minigame-acts; briefs/E22-person-minigame-acts.md | FOREMAN E #13 | session_01DgYSWpAKRbAKG2EVDQLKeL | RUNNING | 19/11 23:49Z |
 | mg-ready-guide (opus; OWNER bug fast lane OD 20/11 ~00:20Z: every mini-game rules screen, clock starts on «Sẵn sàng», «Hướng dẫn» tutorial round; whole group 31 kinds) | review/mg-ready-guide; briefs/root72-mg-ready-guide.md | MAIN ROOT-72 | session_01Rc5AsMmYHY9za4sMP3PYzV | RUNNING | 20/11 00:13Z |
+| coop-thin G #2 (opus; successor of 4tAZPWV3 at 58d7ccb3) | review/coop-thin-g | B | session_01N1tNP64cNhXeETmhKekESy | RUNNING | 20/11 00:17Z |
