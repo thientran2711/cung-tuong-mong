@@ -1,6 +1,6 @@
 /* review/econ-tamco (ECONOMY §5, GAP OR21): Tâm cơ as its own cost + buying safety with bạc.
    usage: node dev/test/sw-serve.js <port> <repo root> (other shell); node dev/test/econ-tamco.test.js http://127.0.0.1:<port>/ <outdir> [WxH@dpr,...]
-   Checks: equal value (hire = tc × BAL.road.rate for every priced scheme × rank pair), the road card (3 roads + ✕, odds words, no %),
+   Checks: equal value (hire = tc × BAL.tcroad.rate for every priced scheme × rank pair), the road card (3 roads + ✕, odds words, no %),
    each road charges exactly what it prints and rolls the odds it prints, NPC roads (law 1) pay the same and get the same +up, no page errors. */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
@@ -13,7 +13,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   const r=await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;
    for(let i=0;i<400;i++){KMQ.length=0;start();if(!isSrv())break}
    try{KMQ.length=0;document.querySelectorAll('.kmov').forEach(o=>o.remove());kmBusy=false}catch(e){}Q.length=0;
-   const out={eq:[],keys:[]};const R=BAL.road;
+   const out={eq:[],keys:[]};const R=BAL.tcroad;
    /* 1. equal value over every priced scheme × every live rival */
    const priced=Object.keys(ACT).filter(k=>ACT[k].__c0);out.keys=priced;
    for(const k of priced)for(const v of liveRivals(true)){const c=econRoadCost(k,S,v);if(c.hire!==c.tc*R.rate||c.tc<R.tcMin)out.eq.push([k,v.name,c])}
@@ -51,7 +51,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   if(pay){const t=pay.tc,h=pay.hire;if(t.seen!==t.p)F(sz,`tc road rolled ${t.seen} vs shown ${t.p}`);if(h.seen!==h.p)F(sz,`hire road rolled ${h.seen} vs shown ${h.p}`);
    if(t.dTc>-t.tc||t.dTc<-t.tc-3)F(sz,`tc road Tâm cơ change ${t.dTc} vs ${-t.tc}`);}
   /* 4. NPC roads (law 1): same price, same bonus */
-  const npc=await p.evaluate(()=>{const R=BAL.road;const L=liveRivals(true);const res={n:0,tc:0,hire:0,plain:0,bad:[]};
+  const npc=await p.evaluate(()=>{const R=BAL.tcroad;const L=liveRivals(true);const res={n:0,tc:0,hire:0,plain:0,bad:[]};
    for(let i=0;i<300;i++){const a=L[i%L.length],t=L[(i+1)%L.length];if(a===t||sameHouse(a,t))continue;const k=["rumor","bribe","block","frame"][i%4];if(!ACT[k]||!ACT[k].__c0)continue;
     a.bac=1000;a.tamco=70;const c=econRoadCost(k,a,t);const b0=a.bac,t0=a.tamco;let bon=null;const o0=aOdd;
     aOdd=function(o,x){const z=o0.apply(this,arguments);if(x===a&&bon==null)bon=z-o;return z};
@@ -59,9 +59,9 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
     res.n++;const dT=a.tamco-t0;if(dT<=-c.tc)res.tc++;else if(b0-a.bac>=c.pr+c.hire)res.hire++;else res.plain++;t.block=0}
    return res});
   /* 5. one core: the plain road charges exactly the printed price (every priced scheme, NPC actor, success forced) */
-  const pc=await p.evaluate(()=>{const L=liveRivals(true);const bad=[];const np=BAL.road.npcP;BAL.road.npcP=0;const rnd=Math.random;Math.random=()=>0;
+  const pc=await p.evaluate(()=>{const L=liveRivals(true);const bad=[];const np=BAL.tcroad.npcP;BAL.tcroad.npcP=0;const rnd=Math.random;Math.random=()=>0;
    try{for(const k of Object.keys(ACT).filter(k=>ACT[k].__c0)){const a=L[0],t=L[1];if(!a||!t)break;a.bac=1000;a.tamco=70;if(!ACT[k].ok(a,t))continue;const pr=econSchemePrice(k,a,t);const b0=a.bac;
-     ACTX=actCtx(a,t,k);try{ACT[k].f(a,t)}catch(e){}finally{ACTX={a:null,pen:0}}const d=b0-a.bac;if(d!==pr&&d!==0)bad.push([k,pr,d])}}finally{BAL.road.npcP=np;Math.random=rnd}return bad});
+     ACTX=actCtx(a,t,k);try{ACT[k].f(a,t)}catch(e){}finally{ACTX={a:null,pen:0}}const d=b0-a.bac;if(d!==pr&&d!==0)bad.push([k,pr,d])}}finally{BAL.tcroad.npcP=np;Math.random=rnd}return bad});
   console.log(sz,"price scan (k, printed, charged):",JSON.stringify(pc));if(pc.length)F(sz,`price ≠ charge: ${JSON.stringify(pc)}`);
   console.log(sz,"npc roads",JSON.stringify(npc));if(npc.bad.length)F(sz,`npc errors ${npc.bad[0]}`);if(!(npc.tc>0&&npc.hire>0))F(sz,"NPCs never take a road");
   if(errs.length)F(sz,`page errors: ${errs.slice(0,3).join(" | ")}`);first=false;await ctx.close()}
