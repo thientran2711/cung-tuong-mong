@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e379c2bb","t":"2026-11-20T20:44Z","c":"coop-guest-agent: a co-op guest's own servants live the agent month once (agSelf / asSelfOn), friend-maid stand-in skipped on the host","b":"4627a09fcf85","h":[{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"}]};
+window.CTM_BI={"s":"cec0b93d","t":"2026-11-20T21:27Z","c":"coop-guest-agent r2: her servants' day acts, her maids' regard fade and p3 monthly cards on her seat, once","b":"35e20048dbd9","h":[{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3621,7 +3621,7 @@ function servById(id){return allServ().find(s=>s.sid===id)||null}
 function staffInit(){sidN=Math.max(sidN,...allServ().map(s=>s.sid),0);capSweep();for(const p of consorts()){if(!p.staff)p.staff=[];fillStaff(p,true)}
  if(!S.court)S.court={tq:{name:"Tổng quản Lý Liên Anh",n:"Tổng quản thái giám Càn Thanh cung",af:{},age:56+R(6)},ksp:{name:"Thái giám Kính sự phòng Kính Sự",n:"Giữ thẻ bài",af:{},age:40+R(10)},ped:{name:"Tiểu Ngân Tử",n:"Thái giám Nội vụ phủ lo mua đồ",af:{},age:20+R(7)},ty:{name:"Thái y Trương",n:"Thái y viện",af:{},age:50+R(8)}};
  const L=allServ();if(!L.some(s=>s.af&&Object.keys(s.af).length))for(const s of L){const o=pick(L.filter(x=>ownerOf(x)!==ownerOf(s)));if(o){s.af[o.sid]=30;o.af[s.sid]=30}
-  if(s.role==="eunuch"&&!(typeof asOn==="function"&&asOn())&&roll(20)){/* AG-ALL B: đối thực is chosen ("Hẹn ước", jagstaff) */const m=pick(L.filter(x=>x.role==="maid"&&!x.lover&&ownerOf(x)!==ownerOf(s)));if(m){s.lover=m.sid;m.lover=s.sid}}}}
+  if(s.role==="eunuch"&&!(typeof asSelfOn==="function"&&asSelfOn(ownerOf(s)))&&roll(20)){/* AG-ALL B: đối thực is chosen ("Hẹn ước", jagstaff) */const m=pick(L.filter(x=>x.role==="maid"&&!x.lover&&ownerOf(x)!==ownerOf(s)));if(m){s.lover=m.sid;m.lover=s.sid}}}}
 function fillStaff(p,free){const [cm,ce]=capOf(p);let [m,e]=hhHas(p);
  while(m<cm&&roomFor("maid")&&(free||p.bac>=BAL.house.hireBac)){p.staff.push(mkServ("maid"));m++;if(!free)ap(p,{bac:-BAL.house.hireBac})}while(e<ce&&roomFor("eunuch")&&(free||p.bac>=BAL.house.hireBac)){p.staff.push(mkServ("eunuch"));e++;if(!free)ap(p,{bac:-BAL.house.hireBac})}}
 /* OVER THE TABLE (old saves, a demotion, the cold palace; review/staff-root; review/staff-cap-fix owner 18/11): Nội vụ phủ takes the extra servants back
@@ -3679,8 +3679,8 @@ function servMonth(){let ev="";capSweep();for(const p of consorts()){if(!p.staff
   const G=p!==S&&typeof mlGuest==="function"&&mlGuest();
   const d=(p.schemes||0)-(p.schLast||0);p.schLast=p.schemes||0;
   for(const s of p.staff.slice()){if(!netIs(s,"loyal")&&!G)s.loyal=cl(s.loyal-BAL.eff.j10.loyalServMonth,0,100);
-   if(s.spyFor&&!(G&&byKey(s.spyFor)!==S)){const m=byKey(s.spyFor);if(m&&(m===S||m.alive)){if(d>0&&!(typeof asOn==="function"&&asOn())&&roll(60)){/* AG-ALL B: the spy's own "Lén báo tin" (jagstaff) *//*evok: her schemes counter rose this week*/evA(m,p,BAL.ag.ev.one);if(m===S)ev+=`Tai mắt ${s.name} trong cung ${p.name} báo: nàng đang bày mưu. ${evSg(BAL.ag.ev.one,1)}. `}}else s.spyFor=null}
-   if(d>0&&!(typeof asOn==="function"&&asOn()))for(const fid in s.af){/* AG-ALL B: told in her chosen "Trò chuyện" */if(s.af[fid]<20)continue;const f=servById(+fid),o=f&&ownerOf(f);if(o&&o!==p&&(!G||o===S)&&roll((nv(s,"tellRoll"))+srk(s)*5)){/*evok: same (d>0)*/evA(o,p,BAL.ag.ev.one);if(o===S)ev+=`${f.name} nghe bạn là ${s.name} kể chuyện cung ${NM(p)}: ${evSg(BAL.ag.ev.one)}. `}}}
+   if(s.spyFor&&!(G&&byKey(s.spyFor)!==S)){const m=byKey(s.spyFor);if(m&&(m===S||m.alive)){if(d>0&&!(typeof asSelfOn==="function"&&asSelfOn(p))&&roll(60)){/* AG-ALL B: the spy's own "Lén báo tin" (jagstaff) *//*evok: her schemes counter rose this week*/evA(m,p,BAL.ag.ev.one);if(m===S)ev+=`Tai mắt ${s.name} trong cung ${p.name} báo: nàng đang bày mưu. ${evSg(BAL.ag.ev.one,1)}. `}}else s.spyFor=null}
+   if(d>0&&!(typeof asSelfOn==="function"&&asSelfOn(p)))for(const fid in s.af){/* AG-ALL B: told in her chosen "Trò chuyện" */if(s.af[fid]<20)continue;const f=servById(+fid),o=f&&ownerOf(f);if(o&&o!==p&&(!G||o===S)&&roll((nv(s,"tellRoll"))+srk(s)*5)){/*evok: same (d>0)*/evA(o,p,BAL.ag.ev.one);if(o===S)ev+=`${f.name} nghe bạn là ${s.name} kể chuyện cung ${NM(p)}: ${evSg(BAL.ag.ev.one)}. `}}}
   const AGP=window.agDOn&&agDOn();/* AG-ALL-2: Mua chuộc / Cài người are her day-plan options (jagacts2) */
   if(p!==S&&!AGP&&roll(10)){const t=pickTarget(p);if(t&&t.staff&&t.staff.length&&p.bac>=60){const s=pick(t.staff);const r=bribeServ(p,s);if(t===S&&r&&s.spyFor===key(p)&&eyes(S)>=3)ev+=`Có tin: ${r}`}}
   if(p!==S&&!AGP&&roll(2)){const t=pickTarget(p);if(t)plantServ(p,t)}
@@ -4190,7 +4190,7 @@ function servRanks(){let ev="";for(const p of consorts()){/* co-op guest: NPC st
   {const t=srkTier(srk(s),s.role);if(t>=2)ap(p,{bac:-Math.floor(t/2)})}
   /* the Emperor's eye: any maid rank, chance by rank / her seeking / the master's favour (jmline mlEye, BAL.mline; was srk>=2 at 1.2 %) */
   if(s.role==="maid"&&(typeof mlEye==="function"?mlEye(p,s):srk(s)>=BAL.mline.offRank&&roll(BAL.mline.offEye))&&roomFor("consort")){if(typeof mlRose==="function")mlRose(p,s);p.staff.splice(p.staff.indexOf(s),1);const n=newRival(0);Object.assign(n,drawFace());n.fromMaidOf=key(p);if(typeof riseCore==="function")riseCore(n,s,p);else relAdd(p,n,s.loyal>=BAL.mline.riseLoy?BAL.mline.riseRel:-BAL.mline.riseRel);rivals.push(n);ev+=`${s.name}, ${srkName(s).toLowerCase()} của ${NM(p)}, lọt mắt xanh Hoàng thượng, được phong ${RANKS[0].n} ${n.name}${s.loyal>=BAL.mline.riseLoy?", vẫn nhớ ơn chủ cũ":", quay lưng với chủ cũ"}. `;continue}
-  /* AG-ALL B: the sale dice go while staff are agents (fillStaff = the buyer's "Nội vụ phủ: thêm cung nữ") */if(srkTier(srk(s),s.role)>=2&&!(typeof asOn==="function"&&asOn())&&roll(1.5)){const ci=s.role==="maid"?0:1;const big=consorts().find(x=>x!==p&&rkOf(x)>rkOf(p)+1&&(x.bac||0)>=60&&hhHas(x)[ci]<capOf(x)[ci]);if(big){p.staff.splice(p.staff.indexOf(s),1);big.staff.push(s);s.loyal=50;ap(big,{bac:-40});if(p===S||big===S)ev+=`${s.name} bị ${NM(big)} mua về cung mình. `}}}}
+  /* AG-ALL B: the sale dice go while staff are agents (fillStaff = the buyer's "Nội vụ phủ: thêm cung nữ") */if(srkTier(srk(s),s.role)>=2&&!(typeof asSelfOn==="function"&&asSelfOn(p))&&roll(1.5)){const ci=s.role==="maid"?0:1;const big=consorts().find(x=>x!==p&&rkOf(x)>rkOf(p)+1&&(x.bac||0)>=60&&hhHas(x)[ci]<capOf(x)[ci]);if(big){p.staff.splice(p.staff.indexOf(s),1);big.staff.push(s);s.loyal=50;ap(big,{bac:-40});if(p===S||big===S)ev+=`${s.name} bị ${NM(big)} mua về cung mình. `}}}}
  return ev}
 /* AG-ALL-2e2: m = the master (default her); an NPC master runs the same (cx3:staffUp) */
 function recommend(id,m){m=m||S;const H=BAL.house;const s=servById(id);if(!s||ownerOf(s)!==m||(m.bac||0)<H.upBac)return"";if(m===S)apply({bac:-H.upBac,danh:-H.upDanh});else ap(m,{bac:-H.upBac,danh:-H.upDanh});servMerit(s,BAL.ag.par3.house.merit);
@@ -7471,12 +7471,11 @@ function srvAffairCaught(m,how){if(!isSrv())return;const mis=srvM();const scheme
 /* Đức Thọ cung errands earn the Thái hậu's eye (a grant may come from her) */
 (function(){const e0=srvErrandDone;srvErrandDone=function(){const sn=S.srv.sent;const r=e0.apply(this,arguments);if(sn&&sn.k==="tn"&&!S.thDead)S.srv.thf=(S.srv.thf||0)+1;return r}})();
 /* NPC maids: the same road (love a palace man, caught or married off) */
-function maidLoveMonth(){let ev="";if((typeof asOn==="function"&&asOn()))return"";/* AG-ALL B: love acts + grant are her choices (jagstaff) */try{const M=srvMen();if(!M.length)return"";const L=allServ().filter(s=>s.role==="maid"&&(s.age||20)>=18);
+function maidLoveMonth(){let ev="";if((typeof asOn==="function"&&asOn()))return"";/* AG-ALL B: love acts + grant are her choices (jagstaff) */try{const M=srvMen();if(!M.length)return"";const L=allServ().filter(s=>s.role==="maid"&&(s.age||20)>=18&&!(typeof asSelfOn==="function"&&asSelfOn(ownerOf(s))));/* coop-guest-agent r2: a co-op guest's own maids love / are granted by their agent acts + month (jagstaff), never also by these dice */
  if(L.length&&roll(25)){const s=pick(L.filter(x=>!x.manLove));if(s){const m=pick(M.filter(x=>x.rw!=="vương gia"));if(m)s.manLove=m.id}}
  for(const s of L.filter(x=>x.manLove)){const m=manById(s.manLove);const o=ownerOf(s);if(!m||!o){s.manLove=null;continue}
   const mine=isSrv()&&(o===srvM()||(S.srv.af[s.sid]||0)>=30);
   if(roll(4)){o.staff.splice(o.staff.indexOf(s),1);const t=roll(30)?`bị đuổi khỏi cung`:`bị đày xuống Tân Giả khố`;if(m.rw!=="vương gia"&&roll(35)){m.alive=false}const line=`${s.name}, cung nữ của ${NM(o)}, tư tình với ${m.name} bị lộ: ${t}${m.alive?"":"; hắn bị đày ra biên ải"}. `;log(line);if(mine)ev+=line;continue}
-  if(typeof asSelfOn==="function"&&asSelfOn(o))continue;/* coop-guest-agent: a co-op guest's own maids are granted in her agent month (jagstaff asMonth Ban gả), never twice */
   if(roll(3)){o.staff.splice(o.staff.indexOf(s),1);const line=`${s.name}, cung nữ của ${NM(o)}, được chủ ban gả cho ${m.name}. `;log(line);if(mine)ev+=line}}}catch(e){console.error(e)}return ev}
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(!S.dead&&!isSrv())maidLoveMonth()}catch(e){}return ev}})();
 /* the choice cards */
@@ -69800,11 +69799,11 @@ function mlRose(p,s){mlC("rose");if(s.seek)mlC("roseSeek");if(s.seek&&s.seek.use
 /* 2. seeking his notice */
 function mlSeek(p){const B=mlB();let ev="";for(const s of (p.staff||[]).slice()){if(s.role!=="maid"||!mlAgeOk(s))continue;const T=S.turn||0;
   if(s.seek&&s.seek.until<T){s.seek=null;s.seekCd=T+B.seekCd}/* review/servant-mline-r2: a cooldown before the same maid seeks again */
-  if(!s.seek){if((typeof asOn==="function"&&asOn()))continue;/* AG-ALL B: she seeks by choosing "Quỳ dâng trà" */if(s.age>B.seekAge||(s.seekCd||0)>T)continue;const m=qv(B.seekTr,s,1);if(!roll(B.seekStart*m))continue;s.seek={from:T,until:T+B.seekMonths,used:0};mlC("seek");
+  if(!s.seek){if((typeof asSelfOn==="function"&&asSelfOn(p)))continue;/* AG-ALL B: she seeks by choosing "Quỳ dâng trà" */if(s.age>B.seekAge||(s.seekCd||0)>T)continue;const m=qv(B.seekTr,s,1);if(!roll(B.seekStart*m))continue;s.seek={from:T,until:T+B.seekMonths,used:0};mlC("seek");
    if(mlMine(p))ev+=`${s.name} dạo này hay xin đi dâng trà, đứng chờ nơi Hoàng thượng đi qua. `;else if(mlSee(p)&&eyes(S)>=B.seeMat)ev+=`Tai mắt báo: ${s.name}, người hầu của ${p.name}, tìm cách lọt vào mắt Hoàng thượng. `;continue}
   if(mlMine(p)||s.seek.seen)continue;/* she decides about her own maids herself (her acts); an NPC master reacts once */
   if(!roll(B.seeNotice))continue;s.seek.seen=1;const tr=typeof traitsOf==="function"?traitsOf(p):[p.trait];const harsh=tr.some(x=>x==="Xảo quyệt"||x==="Kiêu ngạo"||x==="Kín đáo");
-  const AC=(typeof asOn==="function"&&asOn())?asSeekReact(p,s,harsh):null;/* AG-ALL B: the master's choice */
+  const AC=(typeof asSelfOn==="function"&&asSelfOn(p))?asSeekReact(p,s,harsh):null;/* AG-ALL B: the master's choice */
   if(AC?AC==="punish"||AC==="punOut":harsh&&roll(B.punish)){s.loyal=cl((s.loyal||0)-B.punLoy,0,100);mlFx(typeof slapGive==="function"?slapGive:null,s,p,"bị chủ đánh vì dám lọt mắt Hoàng thượng");s.seek=null;s.seekCd=T+B.seekCd;mlC("punish");
    if(AC?AC==="punOut":roll(B.punOut)){p.staff.splice(p.staff.indexOf(s),1);mlC("punOut");if(mlSee(p))ev+=`${p.name} bắt gặp ${s.name} tìm cách lọt mắt Hoàng thượng, sai đánh rồi đuổi xuống Tân Giả khố. `}
    else if(mlSee(p))ev+=`${p.name} bắt gặp ${s.name} tìm cách lọt mắt Hoàng thượng, sai vả miệng, cấm ra khỏi cung. `}
@@ -69827,7 +69826,7 @@ function mlCaught(p,t,k,w,x,ord,own){const B=mlB();mlC("caught_"+k);if(own&&p!==
  deedAdd(p,"ml"+k,t,w,x);ap(p,{duc:-B.caughtDuc*w,danh:-B.caughtDanh});oanAdd(t,p,B.caughtOan*w);const d=evA(t,p,B.evN*w);mlC("ev",d);if(t===S)mlC("evMe",d);return d}
 /* 3. maids of hostile palaces harm each other */
 function mlFeud(p){const B=mlB();let ev="";const G=mlGuest();if(G&&p===S)return"";/* co-op guest: her maid's harm to an NPC maid is world state (host) */
- if((typeof asOn==="function"&&asOn()))return"";/* AG-ALL B: a maid harms a colleague only by her chosen "Tố lỗi với chủ" (jagstaff) */const M=(p.staff||[]).filter(s=>s.role==="maid");if(!M.length||!roll(B.feud))return"";
+ if((typeof asSelfOn==="function"&&asSelfOn(p)))return"";/* AG-ALL B: a maid harms a colleague only by her chosen "Tố lỗi với chủ" (jagstaff) */const M=(p.staff||[]).filter(s=>s.role==="maid");if(!M.length||!roll(B.feud))return"";
  const foes=others(p).filter(t=>t&&(!G||t===S)&&(t.staff||[]).some(x=>x.role==="maid")&&hostility(p,t)>=B.feudHost);if(!foes.length)return"";
  const t=pick(foes),a=pick(M),b=pick(t.staff.filter(x=>x.role==="maid"));if(!a||!b)return"";{const g=typeof cmGuard==="function"?cmGuard(t,p):"";if(g)return g}/* jcmaid: a martial close maid (dtq) stands in the way */const see=mlSee(p,t);const k=roll(B.feudPoison)?"poison":roll(B.feudFrame)?"frame":"fight";mlC("feud_"+k);
  if(k==="fight"){a.loyal=cl(a.loyal+B.fightLoy,0,100);b.loyal=cl(b.loyal+B.fightLoy,0,100);const l=roll(B.fightLose)?a:b;/* the loser of the scuffle is slapped: either side */mlFx(typeof slapGive==="function"?slapGive:null,l,l===a?t:p,"cãi nhau giành việc");
@@ -71209,11 +71208,15 @@ setTimeout(()=>{try{IEV_PID.ilback=pp=>{const x=ilFind(pp&&pp.u);return x?{e:x.e
    Perf: window.__agMs (last tick), __agN (agents), agPerf() → p95 over the last BAL.ag.perf.n ticks; budget BAL.ag.perf.p95 ms.
    Off switch for measuring: BAL.ag.on=0 or window.__agOff=1 (old drips). Loaded last (after j95/j95b/j95c, jtwoway, jmind, j75, jcoopworld).
    ===================================================================================================================== */
-const AG={inTick:0,errs:[],ms:[],bt:[],q:null,tm:{needs:0,opts:0,sync:0,land:0},stat:{tick:0,slice:0,qdrop:0,acts:0,by:{},wit:0,witNpc:0,land:0,drop:0,mute:0}};
+const AG={self:0,inTick:0,errs:[],ms:[],bt:[],q:null,tm:{needs:0,opts:0,sync:0,land:0},stat:{tick:0,slice:0,qdrop:0,acts:0,by:{},wit:0,witNpc:0,land:0,drop:0,mute:0}};
 function agErr(w,e){try{AG.errs.push(w+": "+(e&&e.message||e));if(AG.errs.length>40)AG.errs.shift();console.error("jagent",w,e)}catch(x){}}
 function agGuest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}catch(e){return false}}
 function agLive(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&BAL.ag&&BAL.ag.on&&!window.__agOff)}catch(e){return false}}
-function agOn(){try{return agLive()&&!agGuest()}catch(e){return false}}
+function agOn(){try{return agLive()&&(!agGuest()||AG.self>0)}catch(e){return false}}
+/* coop-guest-agent r2: agMine() = this seat may run ONLY her own household: a co-op guest's phone, or the host inside her context (TH.withSeat).
+   agSelfRun(f): run f as solo would (agOn() true inside) — every loop inside must keep to her own people (asStaff / amMaids / consorts filters). */
+function agMine(){try{const c=window.COOPW;return agGuest()||!!(c&&c.on&&c.ctx&&c.ctx!==c.seat)}catch(e){return false}}
+function agSelfRun(f){AG.self=(AG.self||0)+1;try{return f()}finally{AG.self--}}
 /* coop-guest-agent (law 1 + 6b, co-op parity): agSelf(p) = the agent layer decides for p's OWN household on THIS seat. Host / solo = agOn().
    A co-op GUEST: only her own seat (p===S): her servants live the same agent month as solo (asMonth: wage, Sức, secrets, betrayal found,
    ban gả, the age choice), on the seat that runs her week end (her phone ≤ 12; the host in her context at 13). EXACTLY ONCE: the host's
@@ -71499,7 +71502,7 @@ function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;
  /* labels of the ledger activities (dev table, tai mắt lines) */
  try{for(const k in AGSELF)ACT95["ag_"+k]=AGSELF[k].act;for(const k in AGACTW)ACT95["ag_"+k]=AGACTW[k];ACT95.ag_effort="tìm cách được Hoàng thượng để mắt"}catch(e){}
 })();
-Object.assign(window,{agSelf,agLive,agLater,agDrain,agQShow,AGL,agK1,agHearOf,agTick,agFlush,agOn,agNeeds,agOpts,agOrg,agZ,agPlan,agWatch,AG});
+Object.assign(window,{agSelf,agLive,agMine,agSelfRun,agLater,agDrain,agQShow,AGL,agK1,agHearOf,agTick,agFlush,agOn,agNeeds,agOpts,agOrg,agZ,agPlan,agWatch,AG});
 /* ================= jagemp: AG2 — THE EMPEROR IS AN AGENT: his night is his own choice (npc-agent §3.2, §5 AG2) =================
    Owner OD:L1386 (every NPC, the Emperor too, plays like a player, by his needs / traits / the existing relation values; no invented bar,
    gate or flat roll for NPC outcomes) + OD 16/11 18:10Z (the Emperor picks WHO; the odds that he calls someone stay 90 %, 65 % when busy
@@ -71718,7 +71721,7 @@ function amJealP(o){const J=amD().jeal;return cl(J.b+((o&&o.malice)||40)/J.d,0,1
 function amJealN(o){return nv(o,"misJealTin")}/* the trust she loses: ONE table BAL.net.n.misJealTin (show-why) */
 function amJealD(o){if(!o||!roll(agCap(amJealP(o))))return 0;return amJealN(o)}
 /* ---------- 2 an NPC maid's deed ---------- */
-function amMaids(){const L=[];for(const p of consorts()){if(!p||!p.staff)continue;if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.role==="maid"&&mlAgeOk(s))L.push([s,p])}return L}
+function amMaids(){const L=[];const mine=typeof agMine==="function"&&agMine();for(const p of consorts()){if(!p||!p.staff||(mine&&p!==S))continue;/* coop-guest-agent r2: her own maids only on her seat */if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.role==="maid"&&mlAgeOk(s))L.push([s,p])}return L}
 function amSeeking(s){return !!(s.seek&&s.seek.until>=(S.turn||0))}
 function amNeed(s){const G=BAL.ag.goal,W=BAL.ag.road.cn||BAL.ag.road._;return cl((G.sung-(s.sung||0))/G.sung,0,1)*W.sung}
 function amMW(s){try{return typeof mindW==="function"?mindW(s,"social"):1}catch(e){return 1}}
@@ -71815,10 +71818,11 @@ Object.assign(EMPMEM,{tea:"chén trà",teaN:"chén trà",meet:"chén trà",erran
   if(roomFor("consort")){AMN.sendRise++;return amRise(m,a,"send")}return amFav(m,a,"send")||""};
  const k0=PEND.ksp;PEND.ksp=function(){const d=k0.apply(this,arguments);try{if(amOn()&&d&&d.o&&d.o[1])d.o[1].x=amSendX()}catch(e){}return d};
  /* the month: his regard fades (the player's: j42), a free seat goes to a favoured maid first */
- const sv0=servMonth;servMonth=function(){let r=sv0.apply(this,arguments)||"";if(!amOn())return r;try{const D=amD();
+ const amMonth=()=>{let r="";const D=amD();const mine=typeof agMine==="function"&&agMine();
    for(const [s] of amMaids())if(s.sung>0)s.sung=Math.max(0,s.sung-D.decay);
-   for(const [s,p] of amMaids())if(s.fav&&roomFor("consort"))r+=amRise(s,p,"fav");
-   for(const p of consorts())if(p&&p.maid&&p.maid.fav&&(p===S||p.alive&&!p.out)&&roomFor("consort"))r+=amRise(p.maid,p,"fav")}catch(e){console.error("jagmaid month",e)}return r};
+   for(const [s,p] of amMaids())if(s.fav&&roomFor("consort"))r+=amRise(s,p,"fav");/* her maid's rise on her seat = newRival → the guest→host request (jcoopask), as mlEye */
+   for(const p of consorts())if(p&&(!mine||p===S)&&p.maid&&p.maid.fav&&(p===S||p.alive&&!p.out)&&roomFor("consort"))r+=amRise(p.maid,p,"fav");return r};
+ const sv0=servMonth;servMonth=function(){let r=sv0.apply(this,arguments)||"";try{if(amOn())r+=amMonth();else if(typeof agMine==="function"&&agMine()&&typeof agSelf==="function"&&agSelf(S)&&BAL.ag.maid)r+=agSelfRun(()=>amOn()?amMonth():"")/* coop-guest-agent r2: her own maids' regard fades on her seat, once */}catch(e){console.error("jagmaid month",e)}return r};
  const sM0=srvMonth;srvMonth=function(){const r=sM0.apply(this,arguments);try{if(amOn()&&isSrv()&&!S.dead&&S.srv.fav&&!(S.srv.lau>0)&&roomFor("consort"))srvRise("Nội vụ phủ dâng tên cung nữ đã được sủng hạnh, Hoàng thượng phong")}catch(e){console.error(e)}return r};
 })();
 Object.assign(window,{amOn,amAlias,amTeaO,amTeaG,amJealD,amJealP,amWeek,amPool,amCh,amNight,amRise,amSendQ,amSendX,amMeNight,amDecide});
@@ -75213,7 +75217,7 @@ function asEmpTea(s){const m=ownerOf(s);asC(s,"empTea");const T=S.turn||0;if(!s.
 /* ---------- the choice: needs × traits (mindPick with jmind's slip) against keeping her routine ---------- */
 function asDecide(s,N){N=N||asNeeds(s);const O=asOpts(s,N);if(!O.length)return null;const mw=(()=>{try{return typeof mindW==="function"?mindW(s,"social"):1}catch(e){return 1}})();
  const c=mindPick([["keep",BAL.ag.routine/BAL.ag.unit]].concat(O.map(o=>[o,o.u*BAL.ag.needW*mw])),s);return c==="keep"?null:c}
-function asStaff(){const L=[];for(const p of consorts()){if(!p||!p.staff)continue;if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.sid!=null&&!s.out&&!s.coop)L.push(s)}return L}/* s.coop = a co-op friend who plays a maid: she decides on her own phone (coop-guest-agent) */
+function asStaff(){const L=[];const mine=typeof agMine==="function"&&agMine();for(const p of consorts()){if(!p||!p.staff||(mine&&p!==S))continue;/* r2: her own household only on her seat */if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.sid!=null&&!s.out&&!s.coop)L.push(s)}return L}/* s.coop = a co-op friend who plays a maid: she decides on her own phone (coop-guest-agent) */
 /* ---------- 5 DAY PLAN (OD 17/11 ~13:40Z): at the first buổi of each day every staff draws 4 slots {k, t, pl} by her needs (asDecide at
    plan time); each buổi she carries out her slot — the option is rebuilt with today's odds (same k and target); gone → she keeps her duties
    that buổi. Saved in S.agS (lazy; old saves load). Part A's jagday draws the consorts / Emperor / Thái hậu; staff plans are drawn here,
@@ -75225,13 +75229,21 @@ function asPlanDraw(){const D=S.agS={d:wk(),P:{}};const t0=performance.now();let
 function asDo(s,sl){if(!sl||!sl.k)return"";const N=asNeeds(s);const O=asOpts(s,N);const c=O.find(o=>o.k===sl.k&&asSlot(o).t===sl.t)||O.find(o=>o.k===sl.k&&!sl.t);
  if(!c){ASN.miss=(ASN.miss||0)+1;return""}return c.run(s)||""}
 function asPlanned(){try{return typeof agDrawReg==="function"&&typeof agDOn==="function"&&agDOn()}catch(e){return false}}
-function asTick(){if(!asOn()||asPlanned())return"";const key=agKey();if(ASN.key===key)return"";ASN.key=key;ASN.tick++;const t0=performance.now();let ev="";
+/* coop-guest-agent r2: her OWN staff's day acts on the seat that steps her buổi (her phone at level < 5 / her week end; the host in her context
+   at level >= 5, jcoopthine E): one tick per buổi key kept in HER person (S.asK travels with her blob), solo rules inside agSelfRun; the world part
+   of a deed follows that seat's contract (her phone: part C lens; host context: E put-back), her household's part stays. */
+function asTickMine(){if(!asSelfOn(S))return"";const key=agKey();if(S.asK===key)return"";S.asK=key;let ev="";
+ try{ev=agSelfRun(()=>{let e="";if(!S.agS||S.agS.d!==wk())asPlanDraw();const b=Math.min(3,S.buoi||0);const P=S.agS.P;
+  for(const s of asStaff()){let L=P[s.sid];if(!L){L=P[s.sid]=[0,1,2,3].map(()=>asSlot(asDecide(s)))}e+=asDo(s,L[b])}return e})}catch(e){console.error("jagstaff tickMine",e)}
+ ASN.mine=(ASN.mine||0)+1;if(ev)try{log(ev)}catch(e){}return ev}
+function asTick(){if(typeof agMine==="function"&&agMine())return asTickMine();if(!asOn()||asPlanned())return"";const key=agKey();if(ASN.key===key)return"";ASN.key=key;ASN.tick++;const t0=performance.now();let ev="";
  try{if(!S.agS||S.agS.d!==wk())asPlanDraw();const b=Math.min(3,S.buoi||0);const P=S.agS.P;
   for(const s of asStaff()){let L=P[s.sid];if(!L){L=P[s.sid]=[0,1,2,3].map(()=>asSlot(asDecide(s)))}ev+=asDo(s,L[b])}}catch(e){console.error("jagstaff tick",e)}ASN.ms+=performance.now()-t0;
  if(ev)try{log(ev)}catch(e){}return ev}
 /* ---------- the month: wage, secrets, betrayal found, grant, age (the player maid's rules) ---------- */
-function asMonth(){if(!asSelfOn(S))return"";let ev="";const B=asB();
- for(const p of consorts()){if(!p||!p.staff||!asSelfOn(p))continue;/* coop-guest-agent: a co-op guest runs her OWN household only (the host runs the world's) */const sch=(p.schemes||0)>(p.schLast||0);
+function asMonth(){if(!asSelfOn(S))return""; const mine=typeof agMine==="function"&&agMine();if(mine)return agSelfRun(()=>asMonth0(mine));return asMonth0(false)}
+function asMonth0(mine){let ev="";const B=asB();
+ for(const p of consorts()){if(!p||!p.staff||!asSelfOn(p)||(mine&&p!==S))continue;/* coop-guest-agent: a co-op guest runs her OWN household only (the host runs the world's) */const sch=(p.schemes||0)>(p.schLast||0);
   for(const s of p.staff.slice()){if(s.sid==null||s.coop)continue;/* s.coop: a co-op friend playing a maid lives her own month on her phone */asSt(s);asAp(s,{bac:CNV_WAGE[Math.min(CNV_WAGE.length-1,srk(s))]||1,suc:B.monthSuc});
    if(sch&&roll(B.secSee))s.sec=(s.sec||0)+1;/* she sees her master's schemes at home (the player maid's "Biết chuyện của chủ") */
    if(s.betray&&roll(agCap(nv(p,"betrayFind")))){s.betray=null;if(roll(SRVA.betray.kill)){asOut(s,"dead");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo chuyện trong cung, sai đánh chết. `}else{asOut(s,"tgk");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo, đày xuống Tân Giả khố. `}continue}
@@ -75272,7 +75284,9 @@ try{if(typeof agReg==="function"){agReg("maid","staff",(p,N)=>asOpts(p,N));agReg
 (function(){
  const pw0=placeWhere;placeWhere=function(){const r=pw0.apply(this,arguments);try{asTick()}catch(e){console.error("jagstaff pw",e)}return r};
  const sv0=servMonth;servMonth=function(){let r=sv0.apply(this,arguments)||"";try{r+=asMonth()}catch(e){console.error("jagstaff month",e)}return r};
- const aw0=amWeek;amWeek=function(){if(asOn())return"";return aw0.apply(this,arguments)};
+ /* r2: the host steps her buổi in her context (jcoopthine E, placeWhere does not run there): her staff's day acts tick after her step */
+ if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const r=nb0.apply(this,arguments);try{const c=window.COOPW;if(c&&c.on&&c.ctx&&c.ctx!==c.seat)asTick()}catch(e){console.error("jagstaff her step",e)}return r}}
+ const aw0=amWeek;amWeek=function(){if(asOn()||(typeof agMine==="function"&&agMine()&&asSelfOn(S)))return"";/* r2: her maids seek by their day acts on her seat */return aw0.apply(this,arguments)};
 })();
 Object.assign(window,{asSelfOn,asPlanDraw,asDo,asOn,asNeeds,asOpts,asDecide,asRun,asTick,asMonth,asSt,asSeekReact,asHitPick,asStaff,asGrp});
 /* ================= j95s LIVE SERVANTS + REASONED RECORD (owner OD 18/11 ~19:30Z, OD L1901 points 2 + 3; brief live-servants) =================
@@ -77548,7 +77562,7 @@ function p3MaidMonth(){if(!p3On()||!stf2On())return"";let ev="";const X=BAL.ag.p
   if(fest){const x=p3Cnv(s,cnvFestOpts(s,p),"fest");if(x&&asSee(p))ev+=x+". "}
   for(const v of lovers){if(v===p||(s.knowAff||[]).includes(v.id)||!(s.trSaw||[]).includes(v.id))continue;s.trSaw=s.trSaw.filter(x=>x!==v.id);if(!roll(BAL.ag.why.p3.see))continue;/* npc-purpose: she learns it only when she was really at the tryst's place at its khắc (recorded by j95secApply from the day record: s.trSaw); noticing = p3.see odds */s.knowAff=(s.knowAff||[]).concat([v.id]);const x=p3Cnv(s,cnvAffOpts(s,v,p),"aff");if(x&&asSee(p))ev+=x+". ";break}}
  return ev}
-(function(){if(typeof asMonth!=="function")return;const m0=asMonth;asMonth=function(){let ev=m0.apply(this,arguments)||"";try{ev+=p3MaidMonth()}catch(e){agdErr("par3:maidMonth",e)}return ev}})();
+(function(){if(typeof asMonth!=="function")return;const m0=asMonth;asMonth=function(){let ev=m0.apply(this,arguments)||"";try{ev+=(typeof agMine==="function"&&agMine()&&!agOn())?(typeof asSelfOn==="function"&&asSelfOn(S)?agSelfRun(p3MaidMonth):""):p3MaidMonth()/* coop-guest-agent r2: her own maids' monthly cards on her seat (amMaids keeps to her household) */}catch(e){agdErr("par3:maidMonth",e)}return ev}})();
 Object.assign(AGC3BTN,{cnvScold:"Khóc lóc xin tha",cnvFest:"Rót rượu gần ngự tọa",cnvBlack:"Đút bạc bịt miệng",cnvAff:"Dọa tố chuyện tư tình"});
 Object.assign(window,{p3MaidMonth});
 /* ================= 2e4: the "same button, different code" pairs → ONE function for her button and the NPC (ag-all-parity.md DIFF list) =================
@@ -85046,7 +85060,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4627a09fcf85";window.CTM_BUILD=BUILD;
+const BUILD="35e20048dbd9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
