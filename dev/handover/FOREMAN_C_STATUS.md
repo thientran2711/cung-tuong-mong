@@ -402,3 +402,4 @@ ROOT-66 Lượt 1043–1044: c09 hand redraw (w4atqqr7EI, 138 cr) sent; OWNER "D
 - 06:46Z C-AG #29: (A1) SẴN SÀNG dauho b218d1d2 (cal.k.dauho removed) → BIG opus rv-dauho = session_01Rc5AsKzsQh875fpMyv46vr (my child). (A2) OWNER CANON OVERWRITE OD ~07:35Z (via ROOT-74 06:42Z): no board retune — only broken games fixed; identity offset = target(trường 9 / thường 7.5 / đoản 6) − her b; brief cag27-cal-p2 canon-overwritten in place (old 08:30Z/expert/07:05Z/07:15Z/07:20Z sections replaced by CURRENT METHOD); wk #2 told. SEATS running 5 / cap 12.
 ROOT-66 Lượt 1045: OWNER "Vẽ" → F4 GO s62–s65 (4 gens ~552 cr).
 - (20/11 06:47Z) FROM MAIN: main rolls over ROOT-74 → ROOT-75 session_01Rc5AsKTznPCBPujNFrdVVF. Send reports there.
+ROOT-66 Lượt 1046: OWNER: player character = random among the 90; hair-swap option DROPPED ("Thôi option tóc bỏ đi, quay lại cái option gắn trăm đi") — angles differ per figure. Hairpin/flower slots (EAR1) continue.
