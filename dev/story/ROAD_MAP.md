@@ -328,15 +328,15 @@ Rule learnt from the pilot: `.4` already closes its own first conflict (its 3–
 - pf = the THIRD country branch of the one hòa thân origin nc (no 10th origin; j1 ORIGIN_BR.pf, par "nc"; rolled with the origin by BAL.orig.br.nc.pf),
   same jkc2 / KC2LAND home frame (.1–.3 in Phù Tang: KC2LAND.pf, place keys np_*), land-token row NCL.pf ({land} {pv} {mh} {quan} {pa} {pb} {canh} {laq} {nden}),
   own STORY.pf / QUEST67.pf, own family letter (j72 fam_pf rows). New pf lives roll one of 4 roads: `pt_hai`, `pt_su` (lead), `pt_tang`, `pt_dang` (writer 2)
-  (.4 premise arc ARC67.<id> o:"pf" + .5–.11 rdDef + j97 rare at .4 (PT97 → R97L) + RD97L rare at .11). No legacy: pf is new (no old saves to migrate).
+  (.4 premise arc ARC67.<id> o:"pf" + .5–.11 rdDef + j97 rare at .4 (PF97 → R97L) + RD97L rare at .11). No legacy: pf is new (no old saves to migrate).
 - Era words (Foreman E rulings): Tang-like world; NO Wokou word → «hải tặc / giặc biển Đông Hải»; sea traders = «thương nhân Tân La»; dress = Tang-style
   jacket + pleated skirt (never «thập nhị đơn», which is later); «Thiên hoàng» only inside Phù Tang scenes, Đại Hy calls him «Quốc chủ Phù Tang».
 - Files: `dev/build/jkc2_pf.js` (after jkc2.js: ORIGIN_BR.pf, STORY.pf, QUEST67.pf, KC2LAND.pf + KCPL np_*), `dev/build/jrd_pt.js` (lead: NCL.pf + TOK67 wrap,
-  PTP people book + ptMan, PTO object book, pt_hai, pt_su), `dev/build/jrd_pt2.js` (writer 2: pt_tang, pt_dang), numbers `dev/build/jbalpt.js` after jbalbd.js.
-- People (law 6b): one book PTP in jrd_pt.js (id, name, role, where hb «trên biển» / tn «Phù Tang» / cang «Minh Châu» / kinh / nguc, alive, met);
-  every man who is in the capital stands in S.men on the jmen schedule (ptMan, the bd pattern) and leaves it when he sails, is jailed or dies.
-  A moved / dead person never acts again: every later line reads ptP/ptAlive (scan dev/measure/pt-scan.py, 0 unguarded).
-- Objects (law 6c): one book PTO (fb "pt.o.<thing>" = holder): quốc thư, rương cống, gương đồng của mẫu hậu, thanh đao Phù Tang, hộp kinh, nhật ký hải trình,
+  PFP people book + pfMan, PFO object book, pt_hai, pt_su), `dev/build/jrd_pt2.js` (writer 2: pt_tang, pt_dang), numbers `dev/build/jbalpt.js` after jbalbd.js.
+- People (law 6b): one book PFP in jrd_pt.js (id, name, role, where hb «trên biển» / tn «Phù Tang» / cang «Minh Châu» / kinh / nguc, alive, met);
+  every man who is in the capital stands in S.men on the jmen schedule (pfMan, the bd pattern) and leaves it when he sails, is jailed or dies.
+  A moved / dead person never acts again: every later line reads pfP/pfAlive (scan dev/measure/pt-scan.py, 0 unguarded).
+- Objects (law 6c): one book PFO (fb "pt.o.<thing>" = holder): quốc thư, rương cống, gương đồng của mẫu hậu, thanh đao Phù Tang, hộp kinh, nhật ký hải trình,
   danh sách sứ đoàn, hải đồ, giấy thông hành Thị bạc, hạt giống trà, ngọc trai chuộc người … set on every give/buy/receive/lose/burn/hide (scan: 0 unbooked).
 **pt_hai · Vượt bể** (Sinh tồn · Trung nghĩa; GE hooks: ge1 Người đếm tên kẻ chết đuối · ge2 Chủ thuyền Đông Hải · ge3 Đổ tội cho biển · ge4 Thuyền về Nan Ba)
 - .4 Thuyền thứ tư chưa tới — four ships sailed; hers reached Minh Châu, the fourth (her nurse-maid Tiểu Ngọc, the tribute chest, the ship log) is missing;
