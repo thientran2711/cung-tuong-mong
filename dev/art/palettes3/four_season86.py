@@ -81,6 +81,9 @@ THU_V2 = [
 ]
 FAM['thu'] = [{'name': n, 'sw': sw} for n, sw in THU_V2]
 
+# owner (via ROOT-65): "Xuân hơi đậm · Hạ giữ nguyên · Thu hơi đậm + ra mùa thu · Đông nhạt (lạnh lẽo)" -> depth index offset per season
+OFF = {'xuan': 0.4, 'ha': 0.0, 'thu': 0.4, 'dong': -0.5}
+KEEP = [x for x in os.environ.get('KEEP', '').split(',') if x]      # seasons copied unchanged from the committed file
 TMAX = {'xuan': 2.6, 'thu': 2.6, 'dong': 2.6, 'ha': 2.5}
 
 def t_of(L):
@@ -161,7 +164,10 @@ def ident(h, f):
 def solve(seed=0, verbose=False):
     rnd = random.Random(seed)
     out = {k: {} for k in IDS}
-    for s in SE:
+    for s in sorted(SE, key=lambda x: x not in KEEP):
+        if s in KEEP:
+            for k in IDS: out[k][s] = OLD[k][s]
+            continue
         placed = []                                   # (id, pal)
         for k in IDS:
             if people[k]['root_season'] == s:
@@ -172,7 +178,7 @@ def solve(seed=0, verbose=False):
         rnd.shuffle(todo)
         for k in todo:
             P = people[k]; r = P['root']
-            tm, ts = t_of(oklch(r['main_hex'])[0]), t_of(oklch(r['sec_hex'])[0])
+            tm, ts = max(0.0, t_of(oklch(r['main_hex'])[0]) + OFF[s]), max(0.0, t_of(oklch(r['sec_hex'])[0]) + OFF[s])
             cands = []
             for fm, fs in itertools.permutations(FAM[s], 2):
                 sc = pair_score(s, fm, fs, tm, ts)
@@ -197,7 +203,7 @@ def solve(seed=0, verbose=False):
                         pal = {'main': nm(tm2, fm), 'main_hex': mh, 'sec': nm(ts2, fs), 'sec_hex': sh}
                         if mfree: pal['main_depth_moved'] = f't {tm:.1f} -> {tm2:.1f}'
                         if free: pal['sec_depth_moved'] = f't {ts:.1f} -> {ts2:.1f} (no free {VN[s]} pair at her own secondary depth)'
-                        if s == 'thu' and 'ha' in out[k] and max(de2000(mh, out[k]['ha']['main_hex']), de2000(sh, out[k]['ha']['sec_hex'])) < 14: continue   # her Thu must not look like her Hạ
+                        if any(max(de2000(mh, q['main_hex']), de2000(sh, q['sec_hex'])) < 14 for q in out[k].values()): continue   # her 4 seasons must not look alike
                         vs = [pair_verdict(pal, q)[0] for _, q in placed]
                         if 'FAIL' not in vs and not (strict and 'WARN' in vs): return (pal, fm, fs)
                 return None
@@ -251,11 +257,12 @@ def main():
         if out: break
     if not out: solve(0, verbose=True); sys.exit('no solution')
     only = os.environ.get('ONLY')
-    if only:
+    if KEEP: only = 'v3'
+    if only and not KEEP:
         for k in IDS:
             for ss in SE:
                 if ss != only: out[k][ss] = OLD[k][ss]
-    D = {'_note': __doc__ + f'\nseed {seed}' + ('\nTHU v2 autumn families (owner: "Cái bảng màu của mùa thu nó chưa có ra mùa thu nha"): ' + ', '.join(n for n, _ in THU_V2) + '. Xuân/Hạ/Đông unchanged from commit 44715a2a6.' if only else ''),
+    D = {'_note': __doc__ + f'\nseed {seed}' + ('\nTHU v2 autumn families (owner: "Cái bảng màu của mùa thu nó chưa có ra mùa thu nha"): ' + ', '.join(n for n, _ in THU_V2) + '. Xuân/Hạ/Đông unchanged from commit 44715a2a6.' + ('' if not KEEP else ' v3 (owner via ROOT-65): depth offset per season ' + str(OFF) + ' (Xuân hơi đậm · Hạ giữ nguyên · Thu hơi đậm · Đông nhạt); kept unchanged: ' + ','.join(KEEP) + '; roots never move.') if only else ''),
          '_thu_families_v2': {n: [lch2hex(*x) for x in sw] for n, sw in THU_V2}, 'status': 'PROPOSAL (P4) — 4 pairs per person, owner verdict pending',
          '_flags': {'s44_brown_root': people['s44']['flag'],
                     'root_changed_CU_MOI': [k for k in IDS if people[k]['changed']]}}
