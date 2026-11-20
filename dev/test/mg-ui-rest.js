@@ -23,12 +23,15 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  await p.evaluate(()=>{try{kg82Close();TDS.busy=false}catch(e){}});
  /* 2 pet care */
  const khac=()=>p.evaluate(()=>used);
+ /* law 10 (rv FAIL 9137759f): every kgReady screen inside a figure-left dialog shows «Sẵn sàng», «Hướng dẫn» and «Để trời định» fully inside the visible dialog column */
+ const fit=(sel)=>p.evaluate(sel=>{const q=s=>document.querySelector(s);const col=q('#modal .k3right')||q('#modal .dlg');const cb=col.getBoundingClientRect().bottom;const r={};for(const [n,s2] of [['go',sel+' .kgr-go'],['tut',sel+' #kgrtut'],['quick',sel.replace('game','quick')]]){const e=q(s2);if(e){const b=e.getBoundingClientRect();r[n]=Math.round(b.bottom)+'/'+Math.round(cb);r[n+'ok']=b.bottom<=cb+1&&b.top>=0}else r[n+'ok']=n==='quick'}return r},sel);
  for(const kind of ['feed','bath','play']){
   await p.evaluate(()=>{S.pets=[];petAdd(S,'meo','x','buy');S.petOn=0;Q.length=0;document.getElementById('modal').hidden=true;petcOpen(0)});await sleep(500);
   const u0=await khac();const pet0=await p.evaluate(()=>JSON.stringify(tsbPets(S)[0]));
   await p.evaluate(k=>document.querySelector(`[data-petc="${k}"]`).click(),kind);await sleep(500);
   const r=await p.evaluate(()=>{const bx=document.getElementById('kpcgame');return bx?{rules:!!bx.querySelector('.kgr .kgr-demo'),go:(bx.querySelector('.kgr-go')||{}).textContent,tut:!!bx.querySelector('#kgrtut'),food:!!bx.querySelector('[data-food]'),ball:!!bx.querySelector('[data-ball]')}:null});
   ok(r&&r.rules&&r.tut&&/Sẵn sàng/.test(r.go||"")&&!r.food&&!r.ball,`pet ${kind}: rules screen (Luật chơi + Hướng dẫn + Sẵn sàng), game not started`,r);
+  {const f=await fit('#kpcgame');ok(f.gook&&f.tutok&&f.quickok,`pet ${kind}: Sẵn sàng / Hướng dẫn / Để trời định inside the visible dialog`,f)}
   ok(await khac()===u0,`pet ${kind}: no khắc spent on the rules screen`,{u0,u:await khac()});await shot('pet-'+kind+'-rules');
   await p.evaluate(()=>document.getElementById('kgrtut').click());await sleep(800);
   let hand=false;for(let i=0;i<10&&!hand;i++){hand=await p.evaluate(()=>!!document.querySelector('.kgt-hand.on'));if(!hand)await sleep(300)}
@@ -49,6 +52,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   await p.evaluate(()=>document.querySelector('[data-shc="water"]').click());await sleep(500);
   const r=await p.evaluate(()=>{const bx=document.getElementById('kshpgame');return bx?{rules:!!bx.querySelector('.kgr .kgr-demo'),go:(bx.querySelector('.kgr-go')||{}).textContent,tut:!!bx.querySelector('#kgrtut'),game:!!bx.querySelector('[data-shw]')}:null});
   ok(r&&r.rules&&r.tut&&/Sẵn sàng/.test(r.go||"")&&!r.game,'plant water: rules screen (Luật chơi + Hướng dẫn + Sẵn sàng), game not started',r);
+  {const f=await fit('#kshpgame');ok(f.gook&&f.tutok&&f.quickok,'plant water: Sẵn sàng / Hướng dẫn / Để trời định inside the visible dialog',f)}
   ok(await khac()===u0,'plant water: no khắc spent on the rules screen');await shot('plant-rules');
   await p.evaluate(()=>document.getElementById('kgrtut').click());await sleep(800);
   let hand=false;for(let i=0;i<12&&!hand;i++){hand=await p.evaluate(()=>!!document.querySelector('.kgt-hand.on'));if(!hand)await sleep(300)}

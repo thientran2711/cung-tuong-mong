@@ -548,6 +548,9 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 .kg82quiz .kb{font-size:1rem}.kg82quiz .kpnote{min-height:1.3em;margin-top:8px}.kg82 .kfact small{display:block}.kg82 .kgrow>b{flex:none;white-space:nowrap;padding-left:6px}
 /* KIT §13.7 rules screen + guided round (mg-ready-guide); colours from the kit tokens only */
 .kgame.kg-ready .kghow,.kgame.kg-tut .kghow{display:none}
+/* KIT §13.7 (law 10): a rules / guided / playing screen inside a figure-left dialog (.k3right is overflow:clip) must fit, so the care info above the game frame (bars, rows, act buttons) folds away while the frame is open; petcDraw / shelfPlantDraw bring it back */
+#kpcare:has(#kpcgw .kgame)>:not(#kpcgw),#kshp:has(#kshpgw .kgame)>:not(#kshpgw){display:none!important}
+#kpcgw .kgpic,#kshpgw .kgpic{display:none}#kpcgw .kgr-demo,#kshpgw .kgr-demo{max-width:110px;margin:4px auto 0}#kpcgw .kgr .kpst,#kshpgw .kgr .kpst{display:none}#kpcgw .kgr-st,#kshpgw .kgr-st{height:38px}#kpcgw .kgr-note,#kshpgw .kgr-note{display:none}
 .kgr{margin:0 0 6px}.kgr .kpst{margin-top:0}.kgr-note{margin:8px 0 2px}
 .kgr-demo{margin:8px auto 2px;max-width:340px}
 .kgr-st{position:relative;height:118px;border:1px solid var(--k-hair);border-radius:var(--k-rad,8px);overflow:hidden;background:var(--k-card) center/cover no-repeat}
