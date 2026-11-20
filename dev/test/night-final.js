@@ -72,10 +72,10 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   await new Promise(z=>setTimeout(z,1300));a.me=S.nfX&&S.nfX.me;a.gone=!Q.some(m=>m.pid==="nfch");a.st=S.nfX&&S.nfX.st;BAL.steal.choice.ms=ms;window.__bot=1;un();return a});
  ok("7 the scene first, then the choice; 10 s countdown (kit §69 chip), timeout = Thôi",r.scene&&!r.qBefore&&r.dlg&&r.chip&&/giây/.test(r.txt||"")&&r.txt!==r.txt2&&r.me===null&&r.gone&&r.st==="done",r);
  /* 8. his own visit (jvisit, main) rolls AFTER the choice is resolved, never between the flip and the choice (night-final #4) */
- r=await p.evaluate(()=>{const L=T.fresh();const un=T.noNpc();T.toEvening();const V=BAL.visit;BAL.visit.cap=100;const k=[V.base,V.gap];V.base=1000;S.visW=null;if(S.emp)S.emp.visit=null;S.sung=60;
+ r=await p.evaluate(()=>{const L=T.fresh();const un=T.noNpc();T.toEvening();const V=BAL.visit;BAL.visit.cap=100;/* the DAILY roll is the path this case checks: main AG-ALL-2 turns it off while the agent loop runs (his visits then come from his own evening plan, before the flip) */const ag0=window.agDOn;window.agDOn=()=>false;const k=[V.base,V.gap];V.base=1000;S.visW=null;if(S.emp)S.emp.visit=null;S.sung=60;
   const ord=[];const vr=window.visRoll;window.visRoll=function(){ord.push("visit:"+(S.nfX&&S.nfX.st));return vr.apply(this,arguments)};
   const u2=T.only(L[0]);const d=wk();S.toMorning=0;used=4;S.buoi=B4L;nextBuoi();u2();const a={choiceFirst:Q.findIndex(m=>m.pid==="nfch")===0,visQ0:Q.some(m=>m.pid==="empnight")};
-  T.ch="Thôi";const sn=T.drain();a.seen=sn.indexOf("empnight")>sn.indexOf("nfch");a.ord=ord.slice();/* "visit:wait" = the call inside the flip, only marked (S.nfVd); the roll itself runs at "done" */window.visRoll=vr;V.base=k[0];BAL.visit.cap=0;un();return a});
+  T.ch="Thôi";const sn=T.drain();a.seen=sn.indexOf("empnight")>sn.indexOf("nfch");a.ord=ord.slice();/* "visit:wait" = the call inside the flip, only marked (S.nfVd); the roll itself runs at "done" */window.visRoll=vr;window.agDOn=ag0;V.base=k[0];BAL.visit.cap=0;un();return a});
  ok("8 his visit rolls after the choice is resolved",r.choiceFirst&&!r.visQ0&&r.ord.includes("visit:done")&&r.seen,r);
  /* 9. the "THỊ TẨM" seal: not in the flip scene (the choice is still to come); stamped after the resolve when she keeps the night (main s26 23:39Z) */
  r=await p.evaluate(async()=>{const L=T.fresh();try{kmReset()}catch(e){}const un=T.noNpc();T.toEvening();window.__bot=0;const ms=BAL.steal.choice.ms;BAL.steal.choice.ms=60000;
