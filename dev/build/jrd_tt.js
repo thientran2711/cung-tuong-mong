@@ -212,7 +212,7 @@ rdDef("tt_co",11,{t:"Kết ván cờ",w:"dad",sj:"ván cờ của phủ Tể tư
  c2:{h:"{v} nhắm vào phủ",w:"v",need:["v"],t:"Nhà {v} đã chuẩn bị sẵn một xấp sớ: hễ Tể tướng lui là họ hặc cả phủ.",o:[
   {n:"Chặn trước, nói với Hoàng thượng",wx:"sớ bị gác",lx:"Hoàng thượng chán chuyện bè phái",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Hoàng thượng dặn Ngự sử đài không nhận sớ hặc người đã cáo lão.",rf:"Hoàng thượng phẩy tay."},
   {n:"Gặp {v} dàn xếp",wx:"hai nhà tạm yên",lx:"{v} nắm thóp",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} nhận lời, cất sớ đi.",rf:"{v} nhận bạc rồi vẫn để nhà nàng dâng sớ."},
-  {n:"Để mặc",wx:"không dính bè phái trước mặt Hoàng thượng, {v} không nắm thóp",lx:"phủ hứng sớ, tiếng nhà ngươi sứt mẻ",rt:"Ngươi không làm gì."}]},
+  {n:"Để mặc",wx:"đứng ngoài bè phái trước mặt Hoàng thượng, {v} chẳng nắm thóp được",lx:"phủ hứng sớ, tiếng nhà ngươi sứt mẻ",rt:"Ngươi không làm gì."}]},
  t1:{h:"Lời cuối của cha",w:"dad",t:"{dad} hỏi: “Cả đời cha dạy con đánh cờ. Giờ con muốn làm quân cờ, làm người đánh cờ, hay bỏ bàn cờ?”",o:[
   {n:"Làm người đánh cờ",f:"own",wx:"cha hiểu",lx:"gánh nặng trên vai, tiếng hiền mỏng đi",rt:"Cha gật đầu chậm rãi."},
   {n:"Làm con của cha",f:"obey",wx:"cha cười",lx:"vẫn trong ván cờ của ông, mưu tính phải theo cha",rt:"Cha đặt tay lên đầu ngươi như thuở nhỏ."},

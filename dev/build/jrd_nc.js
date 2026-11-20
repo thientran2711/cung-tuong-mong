@@ -484,7 +484,7 @@ rdDef("nc_su",11,{t:"Chiếc cầu hai nước",w:"emp",sj:"quốc thư của {l
  c2:{h:"{v} tâu ngươi thiên vị cố quốc",w:"v",need:["v"],t:"{v} nói giữa buổi thỉnh an: “Năm nay sứ {land} được lợi đủ đường. Ai cũng biết vì ai.”",o:[
   {n:"Kể từng điều Đại Hy được lợi",wx:"lời {v} rỗng",lx:"cãi nhau giữa buổi thỉnh an",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"Ngươi kể ngựa, da, thuế chợ. Các phi tần gật đầu.",rf:"Cả điện thấy hai người cãi nhau, không ai đứng về phía nào."},
   {n:"Gửi lễ hòa giải",wx:"hai cung tạm yên",lx:"{v} nắm thóp",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} nhận lễ, thôi nói.",rf:"{v} nhận lễ, rồi vẫn nói."},
-  {n:"Mặc kệ",wx:"không cãi nhau giữa buổi thỉnh an, chẳng ai nắm thóp ngươi",lx:"lời ấy ở lại",rt:"Ngươi không đáp."}]},
+  {n:"Mặc kệ",wx:"êm chuyện ở buổi thỉnh an, chẳng ai nắm thóp ngươi",lx:"lời ấy ở lại",rt:"Ngươi không đáp."}]},
  t1:{h:"Dòng thư về ngươi",w:"emp",t:"Hoàng thượng hỏi: “Cha nàng nhắc đến nàng. Nàng muốn trẫm hồi đáp dòng ấy thế nào?”",o:[
   {n:"Xin ngài viết: nàng là cầu của hai nước",f:"bridge",wx:"tên ngươi đứng trong quốc thư",lx:"có người cho là ngươi tham danh",rt:"Hoàng thượng gật đầu, ghi lại.",rf:"Hoàng thượng bảo: “Quốc thư không viết tên phi tần.”"},
   {n:"Xin ngài viết: nàng là phi của trẫm",f:"law",wx:"ngài vui",lx:"{land} đọc thấy ngươi đã thuộc về Đại Hy",rt:"Hoàng thượng cười: “Đúng thế.”"},
