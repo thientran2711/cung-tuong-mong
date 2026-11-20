@@ -118,3 +118,4 @@ Scope found (grep "tier" in thu_comoi + dong_hientai): only the HH t8 files say 
 ## Job 6 update (C #12: DESIGN16 cloak9 files free)
 - t8 s62/m02 cloak9 → cloak10: C #12 already made these (4d89050) with my exact G37 swap; checked: keep PASS, both ≤ 10 000. Nothing for me to add. My m02_t8 cloak8 (from cloak7) is now SUPERSEDED by cloak10. Don't use it.
 - t7 s62/m02 cloak9: already "ONE small single-tier SOFT jewelled cloud collar". G37 wants one tier, soft for everyone except HH, so they already comply. No cloak10 made.
+- CORRECTION (after 1b993ae): C #12 dropped the duplicate cloak10. CURRENT t8 đông = s62/m02 _cloak9 (DESIGN16 b19845e, with my G37 swap word for word; keep PASS, 9993 / 9904 chars, --all 203 PASS). m02_t8 cloak8 is superseded.
