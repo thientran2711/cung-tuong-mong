@@ -33,7 +33,7 @@ TRANSP_RX = re.compile(r'background is (?:completely |fully )?transparent|transp
 SLOT_RX = re.compile(r'\{[^{}]{0,40}\}|\bNone\b')
 NEG = re.compile(r"\b(no|not|never|without|nothing|none|nor)\b", re.I)
 B24 = {1: "#EAE3D0", 2: "#7FB394", 3: "#7E9CCB", 4: "#E3A3B8", 5: "#A88BCB", 6: "#E3A25B", 7: "#D46A64", 8: "#EFBD69"}
-DEAD = {"#5FA8A6": "old t4 jade-teal (option B)", "#4F86A8": "old t6 kingfisher blue (option B)", "#C65A4C": "old t8 trim (build.py TRIEU)"}
+DEAD = {"#5FA8A6": "old t4 jade-teal (option B)", "#4F86A8": "old t6 kingfisher blue (option B)", "#C65A4C": "old t8 trim (option B; now #B04E3A measured on 79fMiEWJAL)"}
 RANK_RX = [(7, r"Hoàng quý phi|imperial noble consort"), (8, r"Hoàng hậu|Khôn Ninh|\bEmpress\b"), (6, r"(?<!Hoàng )Quý phi"),
            (5, r"\bPhi\b"), (4, r"\bTần\b"), (3, r"Quý nhân"), (2, r"Thường tại"), (1, r"Đáp ứng")]
 VIEW_RX = re.compile(r"\boblique\b|góc xéo|\bangled (?:view|camera|version)|three[- ]quarter (?:view|angle)|\bdiagonal (?:view|camera)|seen from a corner|corner view", re.I)

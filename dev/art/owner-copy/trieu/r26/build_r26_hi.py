@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""triều phục r26 t6-t8 (ROOT-52 -> BW5 (a), owner option B Lượt 595/598): latest approved texts word for word
+"""MG4 20/11: rank colours moved to B24 (t4 #E3A3B8, t6 #E3A25B, t7 #D46A64) and t8 crimson #B04E3A measured on approved cut 79fMiEWJAL; option-B codes are dead.
+triều phục r26 t6-t8 (ROOT-52 -> BW5 (a), owner option B Lượt 595/598): latest approved texts word for word
 (t6 = r21, t7/t8 = r18) + option-B rank colours (t6 kingfisher blue #4F86A8, words from build.py TRIEU[6];
 t7 honey-amber #E3A25B, words from build.py TRIEU[7] / make.py; t8 crimson hex -> #C65A4C, royal yellow #EFBD69 already there)
 + ONLY the gate sentences they miss, copied verbatim from check_store APPROVED (S31 t6, S17+S28 t7/t8, S34 all),
@@ -13,11 +14,11 @@ S34 = " NOTHING on the forehead (no hoa điền, no dot, no mark, nothing)."
 END = " No text, no labels."
 SRC = {6: 'r21', 7: 'r18', 8: 'r18'}
 SW = {6: [("vermilion-rose red (clearly lighter and rosier than the brick-crimson main so the trims read, a medium-saturation, medium-lightness lustrous red, with a thin gold edge on every trim) like #D2574A",
-           "kingfisher blue, a soft medium kingfisher blue (with a thin gold edge on every trim) like #4F86A8", 1),
-          ("a deep rich vermilion red like #C8321F", "a deep rich kingfisher blue like #4F86A8", 2)],
-      7: [("warm amber-gold like #DE9448", "honey-amber (a medium-saturation, medium-lightness warm honey-amber) like #E3A25B", 1),
-          ("saturated amber-gold like #D9820F", "saturated honey-amber like #E3A25B", 1)],
-      8: [("like #A8201E", "like #C65A4C", 1)]}
+           "warm orange (cam), a medium-saturation, medium-lightness soft orange with a small royal-yellow touch (with a thin gold edge on every trim) like #E3A25B", 1),
+          ("a deep rich vermilion red like #C8321F", "a deep rich warm orange like #E3A25B", 2)],
+      7: [("warm amber-gold like #DE9448", "red (đỏ), a medium-saturation, medium-lightness soft coral red like #D46A64", 1),
+          ("saturated amber-gold like #D9820F", "saturated soft coral red like #D46A64", 1)],
+      8: [("like #A8201E", "like #B04E3A", 1)]}
 ADD = {6: [S31], 7: [S17, S28], 8: [S17, S28]}
 HOT = " the whole face fully visible. Her hands and body:"
 

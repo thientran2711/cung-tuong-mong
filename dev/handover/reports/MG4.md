@@ -57,3 +57,9 @@ Prompt dev/handover/review-sheets/thai-hau-sample/v624/m05_thaihau_a51.MG4.promp
 Length 10 252 → 9 925. check_store --scope tp8 --age a51: only S33 (documented Thái hậu exemption, = MG3 a65). ledger_guard PASS (owner_ok Lượt 842). Refs/settings = MG3's a65 (KLpSlnEkqp + TdwDfOyVNR + a36 cut rgXTysqxtc).
 Result gen 4RFvfMg9Aa → cut eIPSwPRdqL. Looked (face crop + full): soft painted guofeng, not near-3D; mouth closed, no teeth, eyes open; silver streaks visible; rosy cheeks, not pale-withered; sleeves to the floor; 3 colours; jade dragon staff contrasts. Consistent with NEW a36/a65.
 Sheets (transparent bg, full size): https://ctm-img.victoria-tntt.workers.dev/img/_review/mg4-thaihau-a51/thaihau_m05_a51_OLD-NEW.webp · …/thaihau_m05_a36-a51-a65_NEW.webp
+
+## ROOT-60: t8 trim + live triều builder r26 → B24 (prompt-only, 0 gens)
+- t8 crimson: MEASURED on the owner-approved Hoàng hậu triều phục cut **79fMiEWJAL** (r18 final, kept Lượt 437): red trim/sleeve/panel pixels (23 % of the figure) median **#B04E3A** (p25 #A13D2D, p75 #C05D46). Dead #C65A4C → #B04E3A in build.py TRIEU[8] (note: build_trieu8 does not print that field) and in r26 t8.
+- Found: the LIVE triều builder is dev/art/owner-copy/trieu/r26 (build_r26.py t1–t5, build_r26_hi.py t6–t8, never drawn yet) — it still had option-B codes. Swapped in the t*_c06_RAN.txt files (edited in place, because SL1 5986c3ec1 hand-edited them; a builder re-run would drop SL1) AND in the builders' target words: t4 jade-teal #5FA8A6 → powder pink #E3A3B8 (3×), t6 kingfisher #4F86A8 → warm orange #E3A25B + royal-yellow touch (3×), t7 honey-amber #E3A25B → soft coral red #D46A64 (2×), t8 #C65A4C → #B04E3A.
+- check_store --scope trieuN on r26: B24 RANK/DEAD FAILs gone (t4/t6/t7). STILL FAIL before and after (not mine): every r26 file misses the MASTER block M01–M09 (+ t6 B12 brocade sentence) → r26 is NOT drawable until the master block is added (owner B25).
+- room_gate DEAD note for #C65A4C updated.
