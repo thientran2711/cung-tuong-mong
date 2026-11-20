@@ -108,6 +108,38 @@ CW.gEmp=function(){if(!on()||!host()||CW.ctx||!CW.base||!CW.base.P||!CW.base.P[o
   catch(e){G.stat.err++;console.error("thin G emp",e)}
   finally{CW.gWk=false;CW.mine=m0;try{E.wRestore(snap)}catch(e){console.error("thin G restore",e)}}});
  if(ch)try{const b=CW.gBlob();if(b){const P=CW.base.P[seat];b.pid=P.pid||b.pid;CW.base.P[seat]=b}}catch(e){console.error(e)}};
+/* ---------- world windows' cards (Lễ Phật đản, Vạn thọ, quyên bạc cứu đói … jworld EVD.<k>.card): built on the host in HER context ----------
+   Until level 13 her phone built them itself (jworld render hook → worldShow) and her answer ran on her phone's S, which reached the room
+   through her `end`. At level 13 her phone sends no week: that answer was a LOCAL write the host never saw (coop-thin-g #2: Cúng dường
+   hậu hĩnh = her phone −40 bạc, Thái hậu +5; Dâng lễ vật vừa phải = −20 bạc, Sủng +3; both undone by the next week's snapshot = her choice
+   lost). Now: her phone builds none (wwGuestOff); the host runs worldShow in her context whenever the world has a window (or an end
+   note) her store has not seen; a card with options goes out as the pid card "wwc" (jworld PEND.wwc, rebuilt from the window id at her
+   pick, run in her context: fx / go / her rows through part D's patch), a note as a part-D note. Solo and levels ≤ 12: unchanged. */
+window.wwPid=()=>on()&&!!CW.ctx&&host();
+window.wwGuestOff=()=>on()&&CW.on&&!host()&&!CW.ctx;
+let wwAsk=false;
+function wwHers(){if(!on()||!host()||CW.ctx||!CW.on||wwAsk||typeof worldWin!=="function"||typeof worldShow!=="function")return;const seat=other();let st=null;try{st=TH.seatOf(seat)}catch(e){}
+ if(!st||!st.S||st.S.dead||(TH.held&&TH.held(seat)))return;const seen=st.S.wwSeen||{},ended=st.S.wwEnd||{};let need=false;
+ try{for(const w of worldWin())if(w&&!seen[w.id]){need=true;break}const z=S.wwin;if(!need&&z&&Array.isArray(z.H))for(const h of z.H)if(h&&h.id!=null&&h.end&&seen[h.id]&&!ended[h.id]){need=true;break}}catch(e){return}
+ if(!need)return;wwAsk=true;G.stat.ww=(G.stat.ww|0)+1;
+ D.later(seat,()=>{wwAsk=false;if(!S||S.dead||S.mg)return;try{worldShow()}catch(e){console.error("thin G world cards",e)}})}
+{const r0=render;render=function(){const r=r0.apply(this,arguments);try{wwHers()}catch(e){console.error("thin G ww",e)}return r}}
+/* ---------- her cards with options and no pid (the whole family; worker #2) ----------
+   Part D keeps a card only as a pid (rebuilt at her pick) or as a note: a card with handlers and no pid raised in her context was DROPPED
+   (D.bad; seen in her week end on the host: «Hội phối đồ: báo đề» jts tsPanel, «Một ánh mắt» j24 manPoem …). Until level 13 her phone
+   raised them in her own week end and she answered them there; at level 13 that week end runs on the host, so dropping = her choice lost.
+   Level 13, in her context on the host: such a card gets the pid "live" and stays in the host's memory by its id (D.LIVE) until she picks;
+   her pick runs it in her context as any part-D card. Its look on her phone is the native card's (the stand-in drops the pid / pp).
+   Her store lives until her answer: the host's `end` waits while she has an open card (CW.gHold → herFree), so the card's own references
+   are still her store's. A host reload loses the memory: the card is then stale (pick-stale, removed), logged in D.liveLost.
+   FOR H: give each of these a real pid (list: G.liveK, the titles seen). Solo and levels ≤ 12: unchanged. */
+const LIVE=D.LIVE=new Map();let lN=0;G.liveK={};D.liveLost=0;
+PEND.live=pp=>{const m=pp&&LIVE.get(pp.lid);if(!m){D.liveLost++;return null}return {t:m.h,o:m.opts,who:m.who,cls:m.cls}};
+{const tq=D.takeQ;D.takeQ=function(){try{if(on()&&host()&&CW.ctx&&Array.isArray(Q))for(const m of Q){if(!m||m.pid||!m.opts||!m.opts.length||(typeof isMenuCard==="function"&&isMenuCard(m)))continue;
+   const lid="L"+wkR()+"-"+(lN++);LIVE.set(lid,m);m.pid="live";m.pp={lid};const k=String(m.t||"?");G.liveK[k]=(G.liveK[k]||0)+1}}catch(e){console.error("thin G live",e)}
+  return tq.apply(this,arguments)}}
+{const vo=D.vOf;D.vOf=function(m){const v=vo.apply(this,arguments);if(v&&v.pid==="live"){delete v.pid;delete v.pp}return v}}
+{const so=TH.seatDrop;if(typeof so==="function")TH.seatDrop=function(seat){try{if(LIVE.size>40){const ks=[...LIVE.keys()];for(const k of ks.slice(0,ks.length-40))LIVE.delete(k)}}catch(e){}return so.apply(this,arguments)}}
 COOP.on("week",()=>{const k=wkR();for(const x of Object.keys(G.done))if(+x<k-2)delete G.done[x]});
 /* the guest: a room that reaches level 13 mid-week has no `end` of hers pending: drop any (the server refuses it: thinend) */
 COOP.on("error",m=>{if(m&&m.code==="thinend"){lg(["thinend",m.week]);}});

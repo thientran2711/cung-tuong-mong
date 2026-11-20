@@ -63,6 +63,20 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   ok(JSON.stringify(st)===JSON.stringify(p),'G4 the host store at level 13 = P.b of the last merged level-12 week (items / kids / servants / bạc)',[p,st]);}
  await H.p.evaluate(()=>{window.__drops=[];const d=COOPW.thin.seatDrop;COOPW.thin.seatDrop=function(x){window.__drops.push([COOP.state.week,x,(new Error().stack||'').split('\n').slice(2,5).join(' | ').replace(/http:\/\/ctm.local\/[^ ]*?([a-z0-9]+\.js)/g,'$1').slice(0,300)]);return d.apply(this,arguments)}});
  const W=+(process.env.WEEKS||4);const rows=[];let pass=0;const t0=Date.now();
+ /* G6 (worker #2): a world window's card (jworld EVD card, here Lễ Phật đản) is built on the host in HER context and travels as a part-D card;
+    her pick runs on the host in her context (her store), her phone shows the result through the patch: no local card, no local write */
+ if(!UP&&!process.env.NOG6){await G.p.evaluate(()=>{for(let i=Q.length-1;i>=0;i--)if(!Q[i].thin)Q.splice(i,1)});
+  await G.p.evaluate(()=>{S.bac=Math.max(S.bac||0,200)});await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');if(B&&B.S){B.S.bac=Math.max(B.S.bac||0,200);B.S.thDead=0}worldQueue('phat','Thử lễ Phật',{len:2});worldTick();Q.length=0;render()});
+  const got=await until(G,()=>Q.some(q=>q.thin&&/Lễ Phật|trai đàn/i.test(q.t||'')&&q.opts&&q.opts.length),null,30000);
+  const loc=await G.p.evaluate(()=>Q.filter(q=>!q.thin&&/Lễ Phật|trai đàn/i.test(q.t||'')).length);
+  ok(got&&loc===0,'G6 world card: built on the host in her context, arrives as a part-D card with its options; her phone built none',{got,loc,Q:await G.p.evaluate(()=>Q.map(q=>[q.t,!!q.thin,q.opts&&q.opts.length])),host:await H.p.evaluate(()=>{const s=COOPW.thin.seatOf('b').S;return {ww:COOPW.thin.G.stat.ww,win:worldWin().map(w=>[w.id,w.k]),seen:s.wwSeen,thq:(s.thq||[]).map(c=>[c.pid,c.t]),bad:COOPW.thin.D.bad.slice(-3),log:COOPW.thin.D.log.slice(-4),mc:(function(){try{return COOPW.thin.withSeat?null:null}catch(e){}})()}})});
+  if(got){const b0=await H.p.evaluate(()=>{const s=COOPW.thin.seatOf('b').S;return {bac:s.bac,th:s.th||0}});
+   await G.p.evaluate(()=>{const i=Q.findIndex(q=>q.thin&&/Lễ Phật|trai đàn/i.test(q.t||''));const m=Q.splice(i,1)[0];Q.unshift(m);showModal()});await sleep(400);
+   const tapped=await G.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal button')].find(b=>/Cúng dường/.test(b.textContent));if(b){b.click();return true}return false});
+   const land=await until(H,b=>{const s=COOPW.thin.seatOf('b').S;return s.bac===b.bac-BAL.world.phat.big.bac},b0,30000);
+   const b1=await H.p.evaluate(()=>{const s=COOPW.thin.seatOf('b').S;return {bac:s.bac,th:s.th||0}});
+   await until(G,b=>S.bac===b.bac&&(S.th||0)===b.th,b1,20000);const g1=await G.p.evaluate(()=>({bac:S.bac,th:S.th||0}));
+   ok(tapped&&land&&b1.th-b0.th===await H.p.evaluate(()=>BAL.world.phat.big.th)&&g1.bac===b1.bac&&g1.th===b1.th,'G6 her pick «Cúng dường hậu hĩnh» ran on the host in her context (bạc −40, Thái hậu +5 in her store) and her phone == store',{tapped,land,b0,b1,g1,sent:await G.p.evaluate(()=>window.__sent.slice(-5)),hl:await H.p.evaluate(()=>[COOPW.thin.D.log.slice(-5),COOPW.thin.seatOf('b').S.thq.map(c=>[c.pid,c.t]),COOPW.thin.D.bad.slice(-3)]),gq:await G.p.evaluate(()=>Q.map(q=>[q.t,!!q.thin]))})}}
  for(let k=0;k<W;k++){const a=await her();const g0=await G.p.evaluate(()=>({et:window.__et,end:window.__sent.filter(x=>x==='end').length}));const hs0=await H.p.evaluate(()=>COOPW.thin.G?COOPW.thin.G.stat.week:0);
   await week(H,G,'G1 week '+(k+1));for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}
   let b=await her();const d0=diff(b.h,b.g);for(let t=0;t<20&&diff(b.h,b.g).length;t++){await sleep(500);b=await her()}if(d0.length&&process.env.TRIP)console.log('TRIP',JSON.stringify(await G.p.evaluate(()=>{const t=window.__trip&&window.__trip();return t?(t.top||[]).filter(x=>/bac|th\b|danh|sung|suc|duc/.test(JSON.stringify(x))).slice(0,15):null})));if(d0.length)console.log('TRANSIENT week '+(k+1),JSON.stringify(d0),'settled',JSON.stringify(diff(b.h,b.g)),'to',JSON.stringify(d0.map(([x])=>[x,b.h[x],b.g[x]])));const g1=await G.p.evaluate(()=>({et:window.__et,end:window.__sent.filter(x=>x==='end').length,w:COOP.state.week}));const hs=await H.p.evaluate(()=>({w:COOPW.thin.G.stat.week,ms:COOPW.thin.G.ms.slice(-1)[0],G:COOPW.thin.G.stat,dev:COOPW.thin.G.devKeys,miss:COOPW.thin.uiMiss}));
@@ -98,5 +112,6 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const dd=B2.err?[['err',B2.err]]:diff(pr.A,Object.fromEntries(Object.entries(B2).filter(([x])=>x!=='month')));
  ok(!B2.err&&dd.length===0,'G2 her month on the host = the solo rules, same dice (personal keys)',dd);
  await So.close();
+ {const d=await H.p.evaluate(()=>({bad:COOPW.thin.D.bad.slice(),live:COOPW.thin.G.liveK,lost:COOPW.thin.D.liveLost,stale:COOPW.thin.D.log.filter(x=>x[0]==='pick-stale').length}));ok(!d.bad.length&&!d.lost,'G7 no card of hers dropped on the host (a card with options and no pid travels as a live card; none lost)',d)}
  const errs=[...H.errs,...G.errs];ok(!errs.length,'no page errors',errs.slice(0,6));
  const n=res.filter(r=>r[0]).length;console.log(`coop-thin-g ${n}/${res.length}`);await b.close();process.exit(n===res.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});

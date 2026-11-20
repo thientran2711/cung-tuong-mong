@@ -320,13 +320,16 @@ function startCard(w){const E=EVD[w.k];let m=null;try{m=E.card(w)}catch(e){wErr(
  return m}
 function worldShow(){if(!S||S.dead)return;S.wwSeen=S.wwSeen||{};S.wwEnd=S.wwEnd||{};const A=worldWin(),z=wZ();
  for(const h of (z.H||[])){if(h.id==null||!h.end||S.wwEnd[h.id]||!S.wwSeen[h.id])continue;S.wwEnd[h.id]=1;Q.push({t:h.n||"Tin trong cung",who:pEmp(),h:`<p>${h.end}</p>`})}
- for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;const m=startCard(w);if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts;Q.push(m)}}
+ for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;const m=startCard(w);if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts;
+  /* co-op thin G (level 13): built on the host in HER context, a card with options travels as a pid card (part D: rebuilt from the window id at her pick, run in her context) */
+  Q.push(m.opts&&typeof window.wwPid==="function"&&window.wwPid()?Object.assign(m,{pid:"wwc",pp:{id:w.id}}):m)}}
  const lo=z.seq-20;for(const k in S.wwSeen)if(+k<lo)delete S.wwSeen[k];for(const k in S.wwEnd)if(+k<lo)delete S.wwEnd[k]}
 {const e0=endTurn;endTurn=function(){const t0=S?now():0;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&now()!==t0){worldTick();if(Q.length&&$("modal").hidden)showModal()}}catch(e){wErr("tick",e)}return r}}
 /* co-op guest: cards of windows the host opened */
-{const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(S&&!S.dead&&!host()&&!Q.length&&!S.mg){const n=Q.length;worldShow();if(Q.length>n&&$("modal").hidden)showModal()}}catch(e){}return r}}
+{const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(S&&!S.dead&&!host()&&!Q.length&&!S.mg&&!(typeof window.wwGuestOff==="function"&&window.wwGuestOff())/* co-op thin G: her cards come from the host */){const n=Q.length;worldShow();if(Q.length>n&&$("modal").hidden)showModal()}}catch(e){}return r}}
 try{const K=window.COOPW&&COOPW.X&&COOPW.X.W_KEYS;if(Array.isArray(K)&&!K.includes("wwin"))K.push("wwin")}catch(e){}
 /* the batch-2 module (jworld2.js) adds its events into the same EVD / WN / BAL.world and reuses these helpers (one layer, no second copy) */
 window.WORLD_X={B,now,T_,wZ,wErr,wName,WN,TANG_NO,EVD,XH,liveR,cons,moodFloor,moodSet,nmList,npcPick,mW,monthsWord,meCons,pid,byPid,wNow0,wPresent,rawNight,wGroup,isEmpP,isThP};
-Object.assign(window,{worldQueue,worldWin,worldPlanW,worldStart,worldEnd,worldTick,worldName:wName,WORLD_EVD:EVD,worldNightBlocked:nightBlocked});
+PEND.wwc=pp=>{const w=pp&&worldWin().find(x=>x&&x.id===pp.id);if(!w)return null;const m=startCard(w);if(!m||!m.opts||!m.opts.length)return null;return {t:m.h,o:m.opts,who:m.who||pEmp(),cls:m.cls}};/* co-op thin G: a world card with options as a pid card (only built when wwPid(): solo never) */
+Object.assign(window,{worldShow,worldQueue,worldWin,worldPlanW,worldStart,worldEnd,worldTick,worldName:wName,WORLD_EVD:EVD,worldNightBlocked:nightBlocked});
 })();
