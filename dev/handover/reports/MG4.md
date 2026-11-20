@@ -48,3 +48,12 @@ Tool: dev/handover/reports/MG4-l826/nd_sheet_transparent.py. (d) S12 disc table 
 t8-prompt-B/build.py TRIEU secondary colours: t4 jade-teal #5FA8A6 → hồng phấn soft powder pink #E3A3B8 · t6 kingfisher #4F86A8 → cam warm orange #E3A25B + small royal-yellow touch · t7 honey-amber #E3A25B → đỏ soft coral red #D46A64. Nothing else changed (A17).
 check_store --scope trieuN (m13): B24 FAILs gone for t4/t6/t7 (old: RANK HEX + DEAD HEX). Other FAILs unchanged old = new (pre-existing, not mine): t4/t5/t6 9 FAIL (S04/S05 rewritten, S25–S31 TRIỀU PHỤC sentences missing), t7/t8 2 FAIL (S28 brocade, S30 hair) → build.py --trieu does not carry the approved triều-phục block; whoever draws triều must use the current triều builder or add those sentences.
 Open: t8 trim "brick-crimson #C65A4C" (option-B code, not in check_store's dead list; my room_gate treats it as dead) — keep or change? → ROOT-60/owner.
+
+## Thái hậu a51 redraw (owner OK Lượt 842 via ROOT-60: "chỉnh sao mày chỉnh") — ONE gen, 138 cr (balance before 123 849)
+Prompt dev/handover/review-sheets/thai-hau-sample/v624/m05_thaihau_a51.MG4.prompt.txt = MG3's L781 file with 3 cuts/edits only (A17):
+1. a51 colour bridge "…(e.g. pink becomes deep rose-plum, blue becomes deep navy…, red becomes deep burgundy; the royal yellow becomes a deep antique gold); dignified and rich, never bright." → "…rich mature shade (the royal yellow becomes a deep antique gold), dignified and rich, never bright." (her colours are coral/teal/gold, the list was unused). M05 KEPT (master + C5 Lượt 779/784 require it).
+2. Cut the duplicate a51 sentence "Her hands and body: the item held in one hand at chest height below the chin, the other hand resting lightly on her sash."
+3. Owner L835 'mặt trắng héo': "never haggard or plain." → "never haggard, plain, pale or withered: healthy softly rosy cheeks."
+Length 10 252 → 9 925. check_store --scope tp8 --age a51: only S33 (documented Thái hậu exemption, = MG3 a65). ledger_guard PASS (owner_ok Lượt 842). Refs/settings = MG3's a65 (KLpSlnEkqp + TdwDfOyVNR + a36 cut rgXTysqxtc).
+Result gen 4RFvfMg9Aa → cut eIPSwPRdqL. Looked (face crop + full): soft painted guofeng, not near-3D; mouth closed, no teeth, eyes open; silver streaks visible; rosy cheeks, not pale-withered; sleeves to the floor; 3 colours; jade dragon staff contrasts. Consistent with NEW a36/a65.
+Sheets (transparent bg, full size): https://ctm-img.victoria-tntt.workers.dev/img/_review/mg4-thaihau-a51/thaihau_m05_a51_OLD-NEW.webp · …/thaihau_m05_a36-a51-a65_NEW.webp
