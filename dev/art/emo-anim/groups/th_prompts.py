@@ -100,6 +100,17 @@ for _k, _v in _load("w-act").items(): W["act-" + _k] = _v
 for _k, _c in (("hanghai", "bright coral"), ("act-hanghai", "bright coral"), ("act-ghen", "deep jade-teal")):
     W[_k] = (_c,) + tuple(W[_k][1:])
 W["act-tinhtu"] = tuple(x.replace("INVITING THE EMPEROR", "INVITING AN HONOURED GUEST TO HER TEA") for x in W["act-tinhtu"])
+# SEAL6 20/11 (ROOT-58 brief): act-ghen disc = warm amber (replaces deep jade-teal above).
+W["act-ghen"] = ("warm amber",) + tuple(W["act-ghen"][1:])
+# SEAL6 20/11: the th-dau redraw sample was made as key "dau2" with hh_prompts.DAU wording (plum cuffs) and the OLD WHO line — kept for
+# the record only (DAU2 below, not used by prompts()); S["dau"] above (SEAL5 wording) stays the store version.
+DAU2 = ("deep blue",
+  "Her face is HEARTACHED: brows tilted up in quiet sorrow, eyes glistening and looking down, lips pressed together trembling, exactly ONE single tear on one cheek, one hand pressed flat over her heart",
+  "HEARTACHED in quiet pain",
+  "one hand pressed flat over her heart, the other resting limp on the gold rim, wide royal yellow sleeves with plum cuffs visible; brows tilted up in quiet sorrow, glistening eyes looking down, lips pressed together, exactly one single tear on one cheek, no crying out, mouth closed; one small cracked pale-blue heart floating beside her",
+  "feels a sharp ache in her heart: she slowly leans forward and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out, one hand presses flat over her heart, the other rests on the rim, her eyes glisten and one single tear rolls down, a small cracked pale-blue heart appears beside her; mouth stays closed, no wailing",
+  "aches quietly in a slow loop: she presses her hand to her heart, closes her eyes for a moment and breathes in sadly, her lips tremble, the one tear glistens on her cheek, the small cracked heart pulses softly; mouth closed, no wailing",
+  "gives one last quiet sigh, the cracked heart fades away, she lowers her hand from her heart", "a quietly hurt old face with one tear and the large phoenix crown")
 def _strip(face): return face[5:] if face.startswith("same ") else face
 def wprompts(k):
     col, face, B, out, loop, back, endface = W[k]
