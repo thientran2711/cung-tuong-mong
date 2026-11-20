@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"78f11921","t":"2026-11-20T06:12Z","c":"mg-fair-ratio: NPC hand ratio per skill group (careful 65/20/15, artistic 40/25/35, reflex 30/25/45 worse/equal/better than her; untested k…","b":"271a8ba9180f","h":[{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"},{"s":"dddb1f94+","t":"2026-11-20T04:29Z","c":"Tay đối thủ ở Thắp đèn nay đo theo đúng tài của nàng"},{"s":"b3f5a05c+","t":"2026-11-20T04:20Z","c":"Tay đối thủ ở Bắn cung, Đầu hồ và Kim chỉ nay đo theo đúng tài của nàng"},{"s":"29f5e418+","t":"2026-11-20T04:01Z","c":"Kit mới: bảng thi đấu đối mặt cho «Thách đấu» (chuẩn bị, chưa mở trong game)"},{"s":"b74e84cb+","t":"2026-11-20T04:06Z","c":"Tay đối thủ ở Thêu nay đo theo đúng tài của nàng"},{"s":"82ed060e+","t":"2026-11-20T03:59Z","c":"Tay đối thủ ở Hát và Thơ nay đo theo đúng tài của nàng"},{"s":"acc26bf0+","t":"2026-11-20T03:53Z","c":"Tay đối thủ ở Cắm hoa nay đo theo đúng tài của nàng"}]};
+window.CTM_BI={"s":"10919436","t":"2026-11-20T06:23Z","c":"mg-fair-ratio: BELL CURVE NPC hands (owner OD 20/11 ~06:40Z, OK ~07:15Z) replace the thirds / group split","b":"9e00c0bcbf05","h":[{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"},{"s":"dddb1f94+","t":"2026-11-20T04:29Z","c":"Tay đối thủ ở Thắp đèn nay đo theo đúng tài của nàng"},{"s":"b3f5a05c+","t":"2026-11-20T04:20Z","c":"Tay đối thủ ở Bắn cung, Đầu hồ và Kim chỉ nay đo theo đúng tài của nàng"},{"s":"29f5e418+","t":"2026-11-20T04:01Z","c":"Kit mới: bảng thi đấu đối mặt cho «Thách đấu» (chuẩn bị, chưa mở trong game)"},{"s":"b74e84cb+","t":"2026-11-20T04:06Z","c":"Tay đối thủ ở Thêu nay đo theo đúng tài của nàng"},{"s":"82ed060e+","t":"2026-11-20T03:59Z","c":"Tay đối thủ ở Hát và Thơ nay đo theo đúng tài của nàng"},{"s":"acc26bf0+","t":"2026-11-20T03:53Z","c":"Tay đối thủ ở Cắm hoa nay đo theo đúng tài của nàng"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29353,12 +29353,11 @@ function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||M
    sau đó là mới được cộng thêm dựa theo cái tài, cái phẩm ... mỗi game mỗi người sẽ có một cái mức trần khác nhau ... Có người chơi giỏi, người chơi dở").
    FAIR SPREAD (owner OD 20/11 ~01:10Z, verbatim: "Không phải, tôi nói test tay xong, rồi đa số npc chơi dở hơn tôi, tôi thấy không fair" → "Duyệt cả 3 ý,
    làm luôn đi"): (1) every NPC has a hidden HAND per minigame kind = the best graded play her hands reach on a matching board, drawn ONCE per NPC per kind
-   in the band of jmgcal mgCalBand(kind) = centred on HER calibrated play (BAL.ag.mg2.cal.k[kind].b; a kind she has not tested: the skilled human median
-   mgMedD(0)): centre c = base + w/2 (an NPC's average play is hand − w/2). THIRDS (owner OD 20/11 ~01:18Z, verbatim: "Sao không chia 1/3 ngang, 1/3 hơn,
-   1/3 kém" — adopted, overwrites the ±2.5 half/half): a hashed draw t puts each person in one third — about equal to her (hand within c ± eq),
-   better (c + eq … c + far) or worse (c − far … c − eq) — by the shares [worse, equal, better] of the kind's skill group (RATIO, owner OD 20/11 ~06:20Z:
-   "chỉnh cái tỷ lệ của những người giỏi hơn tôi, những người bằng tôi và những người dở hơn tôi … cho nó giống với đời thật"; Bd.split = jmgcal mgCalSplit,
-   BAL.ag.mg2.hand split / grp; 1/3 each for a kind she has not tested) — bell-shaped inside each third (mean of two hashed draws); eq / far = BAL.ag.mg2.hand.
+   on the CURVE of jmgcal mgCalBand(kind) — BELL CURVE (owner OD 20/11 ~06:40Z, verbatim: "ở ngoài đời mình có thật sự là mình sẽ gặp 1/3 những người
+   mình gặp là sẽ là những người giỏi, hoặc là 1/3 người mình gặp là những người bình thường, hoặc 1/3 người gặp là những người dở hay không á" → OWNER OK
+   ~07:15Z; overwrites the thirds of ~01:18Z): the average play (hand − w/2) of the real adult population = Normal(ctr, sd) per kind (BAL.ag.mg2.hand ctr / sd
+   / grp), hand = c + sd·z, c = ctr + w/2, z = mgZ (one standard-normal draw hashed on person + kind, ±3). NOT centred on her: her calibrated b only places
+   her on the curve (mgCalShare), so better / equal / worse fall out of her real standing in each kind.
    (2) ART: mgHandEff adds BAL.ag.mg2.hand.art per art level of that kind above
    the player's own level (kg82LvFor; minus below): a trained NPC clearly beats her, an untrained one is weak. (3) UPBRINGING (owner OD 20/11 ~01:50Z,
    verbatim: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà nghèo mới yếu"; OD ~02:05Z: the per-identity start-arts
@@ -29371,15 +29370,14 @@ function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||M
    rolls below its ceiling most of the time. Saved on the person (p.mgH[kind]); the draw is hashed on the person + kind, so an old save (no p.mgH) and a
    co-op guest roll the very same hand lazily. Off: BAL.ag.mg2.hand.on = 0 (one skilled-bot curve for everyone, as part 2b). */
 function mgHashU(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}h^=h>>>13;h=Math.imul(h,0x5bd1e995);h^=h>>>15;return (h>>>0)/4294967296}
-function mgBand(kind){const H=BAL.ag.mg2.hand;if(typeof mgCalBand==="function")return mgCalBand(kind);const c=mgMedD(0)+H.w/2,sp=(H.split||{})[""]||[1,1,1];return{lo:c-H.far,hi:c+H.far,c,split:sp,sig:"t/"+(c-H.far)+"/"+(c+H.far)+"/"+sp.join(":")}}
-/* the offset of a person's hand from the band centre: her third (t: worse / equal / better), then a bell inside it (b = mean of two draws) */
-function mgThird(id,H,P){const t=mgHashU(id+"|t"),b=(mgHashU(id+"|a")+mgHashU(id+"|b"))/2;P=Array.isArray(P)?P:[1,1,1];const n=(P[0]+P[1]+P[2])||1;
- if(t<P[0]/n)return -(H.eq+(H.far-H.eq)*b);if(t<(P[0]+P[1])/n)return H.eq*(2*b-1);return H.eq+(H.far-H.eq)*b}
+function mgBand(kind){const H=BAL.ag.mg2.hand;if(typeof mgCalBand==="function")return mgCalBand(kind);const m=mgMedD(0),sd=1.5,c=m+H.w/2;return{c,m,sd,lo:c-3*sd,hi:c+3*sd,far:2*sd,sig:"n/"+m+"/"+sd}}
+/* the offset of a person's hand from the curve centre, in sd: one standard-normal draw hashed on the person + kind (Box–Muller of two hashes), clamped ±3 */
+function mgZ(id){const u=Math.max(1e-9,mgHashU(id+"|a")),v=mgHashU(id+"|b");return cl(Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v),-3,3)}
 function mgHand(kind,p){const H=BAL.ag.mg2.hand,Bd=mgBand(kind);if(!p||typeof p!=="object")return Bd.c;let M=p.mgH;if(!M||typeof M!=="object")M=p.mgH={};
  /* AG-ALL-2d2: p.mgHv[kind] = the band it was rolled in — a changed band re-rolls the SAME hash draw inside the new band (old saves rolled in the old
     skewed / half-half bands carry another sig and re-roll here) */
  let V=p.mgHv;if(!V||typeof V!=="object")V=p.mgHv={};
- if(M[kind]==null||V[kind]!==Bd.sig){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;M[kind]=Math.round((Bd.c+mgThird(id,H,Bd.split))*100)/100;V[kind]=Bd.sig;MGX.hand=(MGX.hand||0)+1}
+ if(M[kind]==null||V[kind]!==Bd.sig){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;M[kind]=Math.round((Bd.c+Bd.sd*mgZ(id))*100)/100;V[kind]=Bd.sig;MGX.hand=(MGX.hand||0)+1}
  return M[kind]}
 /* the player the art / rank lift is measured against: seat a (S; on a co-op guest the host's person, so both seats agree) */
 function mgRefP(){try{if(typeof agGuest==="function"&&agGuest()&&typeof consorts==="function"){const h=consorts().find(x=>x&&x.coop);if(h)return h}}catch(e){}return S}
@@ -32236,25 +32234,28 @@ Object.assign(BAL.ag.kh2.rd,{see:1,go:1,cap:6,qMax:40});Object.assign(BAL.ag.kh2
 Object.assign(BAL.ag,{mg2:{on:1,med:[[-2,8.9],[0,7.5],[2,5.8]],w:8,tat:{e:[0,2,5],w:[[32,54,15],[18,58,24],[2,50,49]]},study:1}});
 /* AG-ALL-2d hand ceiling (owner OD 17/11 ~16:00Z L1640; jmgt mgHand) — FAIR SPREAD (owner OD 20/11 ~01:10Z: "đa số npc chơi dở hơn tôi, tôi thấy không
    fair" → "Duyệt cả 3 ý, làm luôn đi"): w = how far under her ceiling a play falls (mean of 3 draws; average play = hand − w/2);
-   THIRDS round her calibrated play (owner OD 20/11 ~01:18Z: "Sao không chia 1/3 ngang, 1/3 hơn, 1/3 kém" — the mechanism; jmgcal mgCalBand: centre = b + w/2,
-        or the skilled human median mgMedD(0) + w/2 for a kind she has not tested; jmgt mgThird): the NPC hands fall about equal to her (centre ± eq),
-        better (centre + eq … + far) or worse (centre − far … − eq) by the shares of split below, bell-shaped inside each third (mean of 2 hashed draws);
-   RATIO per skill group (owner OD 20/11 ~06:20Z, verbatim: "chỉnh cái tỷ lệ của những người giỏi hơn tôi, những người bằng tôi và những người dở hơn tôi
-        như thế nào nữa, cho nó giống với đời thật"; MAIN ROOT-74 proposal by her real-world standing, before the upbringing shift — HOLD until her OK):
-   grp   = the skill group of every mini-game kind (KG82_KIND): c careful / strategy (fine hand, patience, memory, logic), a artistic (timing, taste, craft),
-           r reflex (anticipation, aim, balance); a kind in no group reads split[""];
-   split = per group the shares [worse, equal, better] than HER (weights): c 65 / 20 / 15, a 40 / 25 / 35, r 30 / 25 / 45; "" 1:1:1 = a kind she has
-           not tested (its band sits on the skilled human median, not on her, so no standing applies) or a kind in no group (jmgcal mgCalSplit);
+   BELL CURVE (owner OD 20/11 ~06:40Z, verbatim: "ở ngoài đời mình có thật sự là mình sẽ gặp 1/3 những người mình gặp là sẽ là những người giỏi, hoặc là 1/3
+        người mình gặp là những người bình thường, hoặc 1/3 người gặp là những người dở hay không á. Cái tỷ lệ này đã đúng hay chưa?" → MAIN ROOT-74 bell-curve
+        proposal; OWNER OK OD ~07:15Z "Ok, làm theo mấy cái ý mà bạn nói ở trên đi"; overwrites the thirds of OD ~01:18Z): every NPC's average play in a kind
+        (her hand − w/2) is one hashed draw of Normal(ctr, sd) (clamped ±3 sd; jmgt mgZ / mgHand, jmgcal mgCalBand) — the real adult population, NOT centred on her;
+   ctr  = the average ADULT play on the fitted board, per kind (key = kind; "" = every kind not listed): 7 (OD ~07:20Z via MAIN: cal-p2 fits each board so the
+          average adult scores ≈ 7);
+   sd   = the spread of adult play per skill group (grp): c careful / strategy 1.4, a artistic 1.5, r reflex 1.7 (reaction / timing varies most between adults);
+          "" = a kind in no group;
+   eqZ  = the "about equal to her" band, ± eqZ·sd round HER calibrated play (BAL.ag.mg2.cal.k b) — only for reading her place: better / equal / worse FALL OUT
+          of where her b sits on the curve (her at the top 15 % → ≈ 7 / 20 / 73 %, at the median → ≈ 37 / 33 / 30 %; jmgcal mgCalShare);
+   grp  = the skill group of every mini-game kind (KG82_KIND): c fine hand, patience, memory, logic · a timing, taste, craft · r anticipation, aim, balance;
    art  = hand points per art level of that kind above / below the player's own level (a trained NPC clearly beats her, an untrained one is weak);
-        UPBRINGING (owner OD 20/11 ~01:50Z: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà nghèo mới yếu"; OD ~02:05Z per-identity table):
-        a person's art level for this lift = max(her own, the start bậc of her identity (origin × road) in BAL.orig.art, jbal.js) (jmgt mgOrgLv); the bậc are tuned there.
+        UPBRINGING / palace shift of the curve per NPC (owner OD 20/11 ~01:50Z: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà
+        nghèo mới yếu"; OD ~02:05Z per-identity table): a person's art level for this lift (and her board) = max(her own, the start bậc of her identity
+        (origin × road) in BAL.orig.art, jbal.js) (jmgt mgOrgLv); the bậc are tuned there.
         Rank gives NO skill: law 5 comes from her harder board as she climbs and from who she meets. */
-BAL.ag.mg2.hand={on:1,w:4,eq:.5,far:2.5,art:.2,split:{c:[65,20,15],a:[40,25,35],r:[30,25,45],"":[1,1,1]},
+BAL.ag.mg2.hand={on:1,w:4,art:.2,ctr:{"":7},sd:{c:1.4,a:1.5,r:1.7,"":1.5},eqZ:.43,
  grp:{c:["co","tho","doi","doden","ve","theu","kim","kinh","may","hoadien","td_cong","td_hanh","le","tc","xa","thq"],a:["dan","hat","hoa","mua","banh","huong"],r:["dauho","ban","tat","ne","td_ngon","td_dung","chai","duho","den"]}};
 /* AG-ALL-2d2 OWNER CALIBRATION (owner OD 17/11 ~16:20Z (f) + ~16:40Z option 1: "chỉ có tôi test và cái số của tôi dùng chung cho mọi người"; jmgcal):
    d  = the board gaps of the test rounds, easy → hard (one round each; 5 rounds, rising difficulty)
    k  = her calibrated base per mini-game kind {b: her graded play on a matching board, n: rounds, at: mm/dd/yyyy}, written from her «CTM-CAL …» code by
-        dev/tools/mgcal_apply.py — ONE base for every player; the NPC hand thirds of that kind are centred on b (BAL.ag.mg2.hand eq / far / w above) */
+        dev/tools/mgcal_apply.py — ONE base for every player; it places HER on that kind's adult bell curve (BAL.ag.mg2.hand ctr / sd / eqZ above) */
 BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],k:{dan:{b:8.3,n:5,at:"11/19/2026"},co:{b:9.7,n:5,at:"11/19/2026"},ve:{b:9.5,n:5,at:"11/19/2026"},doi:{b:9.1,n:5,at:"11/19/2026"},hoa:{b:7.9,n:5,at:"11/19/2026"},hat:{b:8.1,n:5,at:"11/19/2026"},tho:{b:8.7,n:5,at:"11/19/2026"},theu:{b:9.7,n:5,at:"11/19/2026"},ban:{b:9.1,n:5,at:"11/19/2026"},dauho:{b:1.1,n:5,at:"11/19/2026"},kim:{b:7.7,n:5,at:"11/19/2026"},doden:{b:9.9,n:5,at:"11/19/2026"},tat:{b:4.9,n:5,at:"11/19/2026"},ne:{b:4.1,n:5,at:"11/19/2026"},mua:{b:6.3,n:5,at:"11/19/2026"},banh:{b:6.1,n:5,at:"11/19/2026"},huong:{b:4.5,n:5,at:"11/19/2026"},td_cong:{b:10.0,n:5,at:"11/20/2026"},td_ngon:{b:6.7,n:5,at:"11/20/2026"},td_hanh:{b:9.3,n:5,at:"11/20/2026"},le:{b:9.9,n:5,at:"11/20/2026"},tc:{b:9.5,n:5,at:"11/20/2026"},xa:{b:9.5,n:5,at:"11/20/2026"},thq:{b:8.5,n:5,at:"11/20/2026"},duho:{b:7.9,n:5,at:"11/20/2026"},kinh:{b:9.9,n:5,at:"11/20/2026"},may:{b:10.0,n:5,at:"11/20/2026"}}};
 /* j71 odds words under mg2: the same draw (mgNpcRaw, seeded by the plan) for every entrant, her included, on this contest's board (j71 mgX7) */
 (function(){if(typeof cOdds7!=="function"||typeof fxOdds7!=="function")return;const c0=cOdds7,f0=fxOdds7;
@@ -56341,9 +56342,9 @@ window.slapNpcTier=slapNpcTier;
 function slapNpcDraw(a){const T=BAL.ag.mg2.tat,E=T.e,e=cl(mgTier("tat",{occ:"tat",p:a}).ease,E[0],E[E.length-1]);let i=0;while(i<E.length-2&&e>E[i+1])i++;
  const f=(e-E[i])/(E[i+1]-E[i]),w=T.w[i].map((x,j)=>x+(T.w[i+1][j]-x)*f);
  /* AG-ALL-2d hand ceiling (OD L1640, jmgt mgHand) — fair spread (OD 20/11 ~01:10Z): the table is the skilled human bot = the middle hand of the band;
-    f = where her "tat" hand (+ art / upbringing lift, mgHandEff) sits from the band centre, −1 … +1 (BAL.ag.mg2.hand.far): a weaker hand lands the heavy blow less
+    f = where her "tat" hand (+ art / upbringing lift, mgHandEff) sits from the band centre, −1 … +1 at ± 2 sd of the curve (mgBand far): a weaker hand lands the heavy blow less
     (what she misses falls to nhẹ), a stronger hand lands it more (taken from nhẹ) — symmetric */
- {const H=BAL.ag.mg2.hand;if(H&&H.on&&a&&a!==S&&typeof mgHandEff==="function"){const Bd=mgBand("tat"),f=cl((mgHandEff("tat",a)-Bd.c)/Math.max(.01,H.far),-1,1);
+ {const H=BAL.ag.mg2.hand;if(H&&H.on&&a&&a!==S&&typeof mgHandEff==="function"){const Bd=mgBand("tat"),f=cl((mgHandEff("tat",a)-Bd.c)/Math.max(.01,Bd.far),-1,1);
   if(f<0){w[0]+=w[2]*-f;w[2]*=1+f}else{const m=w[0]*f;w[0]-=m;w[2]+=m}}}
  let r=Math.random()*(w[0]+w[1]+w[2]);for(let j=0;j<3;j++){if(r<w[j])return j+1;r-=w[j]}return 1}
 function slapNeOdds(t,a){const D=BAL.slap.dodgeOdds;return D[mgTier("ne",{occ:"ne",p:t,rank:typeof rkOf==="function"?rkOf(a):0}).tier]}
@@ -75895,10 +75896,9 @@ npwReg("frameMe",{grp:"consort",who:c=>[c.a],why(a){return npw1Mot(a,S,"frame",n
    frame / rows / buttons the exam uses (jexam exRun pattern: kg82Open + kg82Rows + kg82Btn + kg82ShowRes + kg82Play). Nothing else is drawn here.
    HER BASE per kind  b = mean over rounds of (raw_i − (mgMedD(d_i) − mgMedD(0)))  = her graded play brought back to a MATCHING board (the same board
    shift the NPC side uses), clamped 0..10 — mgCalBase(raws, ds).
-   NPC HAND BAND per kind (jmgt mgHand reads mgCalBand; owner OD 20/11 ~01:10Z + ~01:18Z thirds): centre c = b + w/2, lo = c − far, hi = c + far
-   (BAL.ag.mg2.hand w / eq / far) — an NPC's average play is (hand − w/2): the hands fall within c ± eq (about equal to her), above or below by the
-   shares of the kind's skill group (mgCalSplit: BAL.ag.mg2.hand split / grp, owner OD 20/11 ~06:20Z ratio).
-   No calibration for a kind yet → the same centred band round the skilled human median mgMedD(0) (BAL.ag.mg2.med at the matching board).
+   NPC HAND CURVE per kind (jmgt mgHand reads mgCalBand; owner OD 20/11 ~06:40Z bell curve, OK ~07:15Z): the real adult population — average play
+   Normal(ctr, sd) per kind (BAL.ag.mg2.hand ctr / sd / grp), NOT centred on her. Her base b only places her on it (mgCalShare: better / about equal
+   (± eqZ·sd) / worse than her FALL OUT of the curve).
    WHERE HER NUMBERS LIVE: one core — BAL.ag.mg2.cal.k[kind] = {b, n, at} in jbal2.js, the SAME for every player (no test for anyone else). Her device
    keeps the raw record (localStorage "ctm-mgcal") and shows a short code line «CTM-CAL …» with a copy button; the coordinator writes it into BAL with
    dev/tools/mgcal_apply.py "<code>". Her device does NOT apply its local record (co-op and every other player must roll the same hands).
@@ -75914,13 +75914,17 @@ function C(){return (BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.cal)||{on:0,d:[0],k:{}}}
 function mgCalBase(raws,ds){const n=Math.min(raws.length,ds.length);if(!n)return null;let s=0;for(let i=0;i<n;i++)s+=(+raws[i]||0)-(mgMedD(ds[i])-mgMedD(0));
  return Math.round(cl(s/n,0,10)*10)/10}
 /* the NPC hand band of a kind: {lo, hi, sig} (sig changes when the band changes, so a cached hand is re-rolled from the same hash) */
-/* the shares [worse, equal, better] of a kind (owner OD 20/11 ~06:20Z ratio, BAL.ag.mg2.hand split / grp): her standing in the kind's skill group when the
-   kind is calibrated (the band sits on HER play); split[""] when it is not (the band sits on the skilled human median) or the kind is in no group */
+/* the NPC hand curve of a kind (owner OD 20/11 ~06:40Z bell curve, OK ~07:15Z; BAL.ag.mg2.hand ctr / sd / grp): the average adult play m = ctr (per kind, "" default),
+   spread sd of the kind's skill group; hands = m + w/2 + sd·z. c = the hand centre, lo / hi = ± 3 sd, far = 2 sd (the scale jslap reads); sig changes when
+   the curve changes, so a cached hand is re-rolled from the same hash. Her calibrated b does NOT move the curve — it only places her on it (mgCalShare). */
 function mgCalGrp(kind){const G=BAL.ag.mg2.hand.grp||{};for(const g in G)if((G[g]||[]).includes(kind))return g;return""}
-function mgCalSplit(kind){const H=BAL.ag.mg2.hand,S0=H.split||{},c=C(),e=c.on&&c.k&&c.k[kind],d=S0[""]||[1,1,1];
- if(!(e&&isFinite(+e.b)))return d;return S0[mgCalGrp(kind)]||d}
-function mgCalBand(kind){const H=BAL.ag.mg2.hand,c=C(),e=c.on&&c.k&&c.k[kind];const base=e&&isFinite(+e.b)?+e.b:mgMedD(0);
- const r=x=>Math.round(x*100)/100,m=r(base+H.w/2),lo=r(m-H.far),hi=r(m+H.far),sp=mgCalSplit(kind);return{lo,hi,c:m,split:sp,sig:"t/"+lo+"/"+hi+"/"+sp.join(":")}}
+function mgCalBand(kind){const H=BAL.ag.mg2.hand,r=x=>Math.round(x*100)/100,T=H.ctr||{},D=H.sd||{};
+ const m=+(T[kind]!=null?T[kind]:T[""]!=null?T[""]:mgMedD(0)),sd=+(D[mgCalGrp(kind)]!=null?D[mgCalGrp(kind)]:D[""]!=null?D[""]:1.5),c=r(m+H.w/2);
+ return{c,m:r(m),sd,lo:r(c-3*sd),hi:r(c+3*sd),far:r(2*sd),sig:"n/"+r(m)+"/"+sd}}
+/* where HER calibrated play b sits on that curve: the shares of NPCs (before art / upbringing lifts) better / about equal (± eqZ·sd) / worse than her */
+function mgCalShare(kind){const H=BAL.ag.mg2.hand,c=C(),e=c.on&&c.k&&c.k[kind];if(!(e&&isFinite(+e.b)))return null;const Bd=mgCalBand(kind),z=(+e.b-Bd.m)/Bd.sd,q=H.eqZ||0;
+ const P=x=>.5*(1+erf(x/Math.SQRT2)),r=x=>Math.round(x*1000)/1000;return{b:+e.b,z:r(z),better:r(1-P(z+q)),equal:r(P(z+q)-P(z-q)),worse:r(P(z-q))}}
+function erf(x){const t=1/(1+.3275911*Math.abs(x)),y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-.284496736)*t+.254829592)*t*Math.exp(-x*x);return x<0?-y:y}
 /* the kinds she can test: every KG82 kind whose engine is in the game */
 function mgCalKinds(){try{return Object.keys(KG82_KIND).filter(k=>{const K=KG82_KIND[k];return K&&K.n&&typeof KG82_ENG!=="undefined"&&typeof KG82_ENG[K.e]==="function"})}catch(e){return[]}}
 function rec(){try{return JSON.parse(LS.get(KEY)||"{}")||{}}catch(e){return{}}}
@@ -75975,7 +75979,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  const go=()=>{let n=0;const t=setInterval(()=>{const T=$("title");if((!T||T.hidden)||++n>40){clearInterval(t);pick()}},250)};
  if(typeof kitMenuResume==="function"&&kitMenuResume()){go();return}
  const x=document.querySelector("#modal .kph button, #modal #mclose");if(x)x.click();go()},true);
-Object.assign(window,{mgCalBase,mgCalBand,mgCalSplit,mgCalGrp,mgCalKinds,mgCalCode,mgCalOwner,mgCalOpen:pick,mgCalRun:run});
+Object.assign(window,{mgCalBase,mgCalBand,mgCalShare,mgCalGrp,mgCalKinds,mgCalCode,mgCalOwner,mgCalOpen:pick,mgCalRun:run});
 }catch(e){console.error(e)}})();
 /* KIT §13.8 kitGameVs (K-PM-1, owner OD 20/11 ~01:00Z item 1, review/kit-gamevs): ONE shared live head-to-head «Thách đấu» split board for EVERY person-minigame art
    (đàn, cờ, hát, múa, thư pháp, họa, thêu, hương … any KG82 / person game): her board + the opponent's live score and clock side by side. Pure display: NO game logic,
@@ -81990,7 +81994,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="271a8ba9180f";window.CTM_BUILD=BUILD;
+const BUILD="9e00c0bcbf05";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
