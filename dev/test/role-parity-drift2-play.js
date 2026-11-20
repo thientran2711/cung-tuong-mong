@@ -1,6 +1,7 @@
 /* role-parity-drift-2 PLAY CHECK (law 1 TWO-WAY): the four act families behind the 12 rows that 98f9f0f1 (monthly-allotment) turned red are played
    as the player AND as an NPC, through the game's own functions (the button's handler for her, the agent option + AGRUN for an NPC):
-   A. Lập phe cùng (cx3:facFound) — her Phe phái button at Hoàng hậu rank (facHTML → facAct "lap") and an NPC consort's agent option + run.
+   A. Lập phe cùng (cx3:facFound) — her Phe phái button at Hoàng hậu rank (facHTML → facAct "lap") and an NPC consort's agent option + run;
+      the receiver's answer is her own choice (jrcv), so A reads it and plays «yes» (whole family both ways: dev/test/fac-parity-play.js).
    B. Trò chuyện với cung nữ (cx2:maidTalk) — the risen maid's card (jact) → maidTalkDo, and the risen NPC's agent option + AGRUN.
    C. Lén giữ đồ Nội vụ phủ phát (maid:pil) — the maid player's card (j42 srvCards, eitPilMaidOk → eitPilTake) and an NPC maid on her master's
       monthly goods (stipGoods → eitPilfer).
@@ -16,23 +17,30 @@ async function page(b,maid){const p=await b.newPage({viewport:{width:755,height:
 (async()=>{const b=await chromium.launch();
  /* ---- consort life: A (her) + A (NPC) + D ---- */
  {const {p,errs}=await page(b,false);
-  const r=await p.evaluate(()=>{const o={};S.rank=7;S.queen=true;for(const x of rivals)if(x!==S)x.queen=false;S.kh=0;try{used=0}catch(e){}
+  /* facfound-parity: re-seed here — timers between the two page.evaluate calls used to eat a run-dependent number of draws, so the receiver's
+     answer (a REAL choice, jrcv rcvPick: yes / qua loa / no / mách) flipped run to run; the rows now read that answer and play «yes» itself */
+  const r=await p.evaluate(()=>{let sd=20261120;Math.random=()=>{sd=(sd*16807)%2147483647;return (sd-1)/2147483646};
+   const RP=window.rcvPick;let REC=[];window.rcvPick=function(t,a){const c=RP.apply(this,arguments);REC.push({t,a,id:c&&c.id});return c};
+   const o={};S.rank=7;S.queen=true;for(const x of rivals)if(x!==S)x.queen=false;S.kh=0;try{used=0}catch(e){}
    const t=liveRivals(true).find(v=>v!==S&&!v.out&&!facOf(v)&&!sameHouse(S,v));const K=k61S();if(K)K[kOf61(t)]=3;affAdd(t,S,40);
    const h=facHTML();o.btn=new RegExp('data-fa="lap" data-fv="'+t.id+'"[^>]*>[\\s\\S]*?Lập phe cùng '+t.name).test(h);o.dis=/data-fa="lap"[^>]*disabled/.test(h);
-   facAct("lap",{fv:String(t.id)});Q.length=0;const f=facOf(S);o.joined=!!(f&&facMembers(f).includes(t));o.name=f&&f.name;
+   REC=[];facAct("lap",{fv:String(t.id)});Q.length=0;const f=facOf(S);o.joined=!!(f&&facMembers(f).includes(t));o.name=f&&f.name;
+   o.ans=REC.filter(x=>x.t===t&&x.a===S).map(x=>x.id);o.lapOk=o.ans.length===1&&o.joined===(o.ans[0]==="full");
+   if(!o.joined){S.facs=[];RCVK.facFound.opts(S,t)[0].go()}o.yes=!!(facOf(S)&&facMembers(facOf(S)).includes(t));
    /* NPC consort: the same deed through her agent option (jagacts3 par3fac) and AGRUN */
    const v=liveRivals(true).find(x=>x!==S&&x!==t&&!x.out&&!facOf(x))||null;
    if(v){const y=liveRivals(true).find(x=>x!==S&&x!==t&&x!==v&&!x.out&&!facOf(x)&&!sameHouse(v,x));affAdd(v,y,60);v.p3FacM=-1;
     const N={};for(const k of Object.keys(agNeedsC(v)))N[k]=100;const opt=(AGREG.consort.par3fac(v,N,null)||[]).find(z=>z.k==="cx3:facFound");o.npcOpt=!!opt;
-    if(opt){const tg=opt.t||y;AGRUN["cx3:facFound"](v,tg);const g=facOf(v);o.npcJoined=!!(g&&facMembers(g).length>=2)}}
+    if(opt){const tg=opt.t||y;REC=[];AGRUN["cx3:facFound"](v,tg);const g=facOf(v);o.npcJoined=!!(g&&facMembers(g).includes(tg));o.npcAns=REC.filter(x=>x.t===tg&&x.a===v).map(x=>x.id);
+     o.npcOk=o.npcAns.length===1&&o.npcJoined===(o.npcAns[0]==="full");if(!o.npcJoined)RCVK.facFound.opts(v,tg)[0].go();o.npcYes=!!(facOf(v)&&facMembers(facOf(v)).includes(tg))}}
    /* D: the evidence chip only opens the panel */
    const e=liveRivals(true).find(x=>x!==S&&!x.out);e.ev=2;const card=rvCard(e,rivals.indexOf(e));o.chip=/<button class="chip hot kchipb" data-kev="\d+"[^>]*>[\s\S]*?Chứng cứ 2 ›<\/button>/.test(card);
    const snap=JSON.stringify({ev:e.ev,kh:S.kh,bac:S.bac,danh:S.danh});let opened=0;const P0=window.kitEvidencePanel;window.kitEvidencePanel=x=>{opened=x===e?1:0};
    const d=document.createElement('div');d.innerHTML=`<button class="chip hot kchipb" data-kev="${e.id}">Chứng cứ 2 ›</button>`;document.body.appendChild(d);d.firstChild.click();d.remove();window.kitEvidencePanel=P0;
-   o.opened=opened;o.same=snap===JSON.stringify({ev:e.ev,kh:S.kh,bac:S.bac,danh:S.danh});return o});
+   o.opened=opened;o.same=snap===JSON.stringify({ev:e.ev,kh:S.kh,bac:S.bac,danh:S.danh});window.rcvPick=RP;return o});
   ok(r.btn&&!r.dis,'A her: Hoàng hậu sees «Lập phe cùng» for a consort she knows who likes her (facHTML)',r);
-  ok(r.joined,'A her: tapping it founds the faction (facAct "lap" → found)',r.name);
-  ok(r.npcOpt&&r.npcJoined,'A NPC: a consort weighs cx3:facFound (par3fac) and founding works through AGRUN',{opt:r.npcOpt,joined:r.npcJoined});
+  ok(r.lapOk&&r.yes,'A her: tapping it asks the consort (facAct "lap" → rcvAsk); she answers one of the 4, the faction exists only on yes; «Nhận lời lập phe» founds it',{ans:r.ans,joined:r.joined,yes:r.yes,name:r.name});
+  ok(r.npcOpt&&r.npcOk&&r.npcYes,'A NPC: a consort weighs cx3:facFound (par3fac); AGRUN asks, the friend answers one of the 4; «Nhận lời» founds it',{opt:r.npcOpt,ans:r.npcAns,joined:r.npcJoined,yes:r.npcYes});
   ok(r.chip&&r.opened&&r.same,'D: «Chứng cứ 2 ›» is the kit chip that only opens the evidence panel (no state change)',{chip:r.chip,opened:r.opened,same:r.same});
   ok(!errs.length,'no page errors (consort life)',errs.slice(0,3));await p.close()}
  /* ---- maid life: B (her + NPC) + C (her + NPC) ---- */

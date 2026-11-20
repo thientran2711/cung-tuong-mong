@@ -39,13 +39,22 @@ const boot=`localStorage.clear();SLOT=4;document.getElementById('title').hidden=
  if(r.need>1)ok(s3.at==="home"&&!s3.w,'3 she is home in the new buổi',s3);
  ok(r.forced.cost===0&&r.forced.at==="home",'4 forced move home charges nothing',r.forced);
  /* 5 NPCs */
- const scan=async off=>{await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);return p.evaluate(([boot,off])=>{eval(boot);if(off)BAL.walk.npc=0;const o={far:0,bad:0};
-  for(let s=0;s<16;s++){Q.length=0;S.mg=0;for(let u=0;u<4;u++){used=u;try{j95sync()}catch(e){}}const R=S.roster;if(R&&R.P)for(const id in R.P){if(id==="me")continue;const row=R.P[id];if(!Array.isArray(row))continue;
+ const scan=async off=>{await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);return p.evaluate(([boot,off])=>{eval(boot);if(off)BAL.walk.npc=0;const o={far:0,bad:0,kfar:0,kbad:0};
+  for(let s=0;s<48;s++){/* 48 buổi */Q.length=0;S.mg=0;for(let u=0;u<4;u++){used=u;try{j95sync()}catch(e){}}const R=S.roster;if(R&&R.P)for(const id in R.P){if(id==="me")continue;const row=R.P[id];if(!Array.isArray(row))continue;
     for(let j=1;j<row.length;j++){const x=row[j];if(!x||x[0]==null||x[1]==="go"||(x[1]==="follow"&&x[2]==="me"))continue;let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&row[q][1]==="go"){g++;q--}
-     if(q<0||!row[q]||row[q][0]==null||row[q][0]===x[0])continue;const t=travel(row[q][0],x[0]);if(t<2)continue;o.far++;if(g<t-1)o.bad++}}
+     if(q<0||!row[q]||row[q][0]==null||row[q][0]===x[0])continue;const t=travel(row[q][0],x[0]);if(t<2)continue;o.far++;const kp=walkKeepRow(row[q])||walkKeepRow(x)||/^(errand|follow)$/.test(row[q][1])||/^(errand|follow)$/.test(x[1]);if(kp)o.kfar++;if(g<t-1){o.bad++;if(kp)o.kbad++}}}
    try{nextBuoi()}catch(e){}}o.errs=JWALK.errs;return o},[boot,off])};
  const off=await scan(true),on=await scan(false);
- ok(on.far>0&&on.bad/on.far<off.bad/Math.max(1,off.far)&&on.bad/on.far<=0.4,'5 NPC far moves without «on the way» khắc: on '+on.bad+'/'+on.far+' vs off '+off.bad+'/'+off.far);
+ /* WALK-COST #4 root cause of the 0.42 tail (probe = this scan; ffd22ea6 and this branch alike): EVERY bare far jump left with jwalk on
+    touches (1) a KEPT row (ag_* deed, tryst, meet, called… j95sKeep — jwalk never rewrites kept rows, by design), or (2) an errand-ledger row
+    (jptime ptLedger / jerr errLedger, written after the pass), or (3) a maid «follow» row whose mistress jumped (follows a deed / a move decided
+    in the khắc now). All three are the deed→deed walk job review/jagday-walk (stacked on this branch: deed 18→0, errand 0, follow 0), which
+    should put the 0.4 bar back on ALL rows. Moves outside those families (sleep, eat, clean, visit, nightw, shift…) had 0 bare jumps over
+    6 runs × 96 buổi → their bar is 0.1 (stricter than the old 0.4). Old all-rows numbers: 0.15–0.39 here, 0.19–0.37 on walk-cost-rv. */
+ const fr=o=>({far:o.far-o.kfar,bad:o.bad-o.kbad});const onF=fr(on),offF=fr(off);
+ /* review walk-cost r4: a tripwire on ALL rows until jagday-walk puts the 0.4 bar back (seen here 0.19–0.45, off ≈ 0.97) */ok(on.far>0&&on.bad/on.far<off.bad/Math.max(1,off.far)&&on.bad/on.far<=0.6,'5 NPC far moves without «on the way» khắc (all rows, tripwire 0.6): on '+on.bad+'/'+on.far+' < off '+off.bad+'/'+off.far+' (deed/errand/follow jumps on '+on.kbad+'/'+on.kfar+' = jagday-walk job)');
+ /* review/jagday-walk (deed / errand / follow families now walk too): the 0.4 bar is back on ALL rows; the 0.6 tripwire above stays */ok(on.far>0&&on.bad/on.far<=0.4,'5 NPC far moves without «on the way» khắc (ALL rows, bar 0.4): on '+on.bad+'/'+on.far+' (deed/errand/follow on '+on.kbad+'/'+on.kfar+')');
+ ok(onF.far>0&&onF.bad/onF.far<offF.bad/Math.max(1,offF.far)&&onF.bad/onF.far<=0.1,'5 NPC far moves jwalk owns (no deed/errand/follow row) without «on the way» khắc: on '+onF.bad+'/'+onF.far+' vs off '+offF.bad+'/'+offF.far+' (bar 0.1)');
  ok(!on.errs.length,'5 jwalk pass no errors',on.errs);
  /* 7–10 (walk-cost r3) */
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
