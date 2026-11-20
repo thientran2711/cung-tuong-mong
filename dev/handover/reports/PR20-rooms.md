@@ -48,3 +48,8 @@ STATUS 20/11 ~05:20Z: depth 1 (limit 8), START_CTX ~3 % (get_session used_tokens
 - Strip v2 = pink:4 ivory:1 jade:1, same exact hexes (strip C* 18.6 → 21.7) → CDN pr20/tone-swatch-tan-t4-v2.png; upload (0 cr) only on OK; builder holds SWATCH_V2_TBD.
 - v1 prompt texts of the 7 gens are in git at 0d74203 (prompts_pr20_tone_*.txt now hold v2).
 - Arch doorway: NOT a fault (owner). Removed from PR20 + PR19 fault lists. No rule (rule.py find arch / vòm) and no room_gate check bans arches.
+
+## OWNER STOP (ROOT-67 07:13Z) — all room work stopped, 0 gens
+- Owner verbatim: "Khoan, là mấy cái phòng tiếp đi nha, sao mấy cái phòng tao thấy nó cứ bị nâu nâu á, không đúng ý tao. Mai tao ngủ dậy rồi tính tiếp, bây giờ bé này ngưng đi."
+- OPEN TOPIC FOR TOMORROW: owner finds the rooms too BROWN ("nâu nâu", not what she wants). Related data in this file: under the shared tone, the palace woods all read as a similar reddish brown, wood + glossy brown floors take much of every picture, and TONE v1 was measured paler.
+- State: TONE v2 sentence + strip v2 prepared (NOT uploaded, SWATCH_V2_TBD); no builder changes after the STOP; no gens pending. Session total 945 cr (rooms 33/34 270 + batch 2 675).
