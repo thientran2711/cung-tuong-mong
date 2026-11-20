@@ -107,7 +107,8 @@ if(typeof kitShop==="function"){const ks0=kitShop;kitShop=function(o){try{const 
  return ks0.apply(this,arguments)}}
 /* ---------- 6. place icons (kit icon set) + happening mark ---------- */
 const KIT_PLACE_IC={nvp:"bac",tyv:"y-thuat",vuon:"place-vuon",thu:"sung",dtd:"sung",tn:"duc",kn:"danh",
- ksp:"place-ksp",lc:"place-lc",home:"place-cung",cnh:"place-cnh",tgk:"place-tgk",ttp:"place-ttp",acs:"place-acs",dc:"place-dc"};
+ ksp:"place-ksp",lc:"place-lc",home:"place-cung",cnh:"place-cnh",tgk:"place-tgk",ttp:"place-ttp",acs:"place-acs",dc:"place-dc",
+ nth:"suc",pd:"duc"}; /* nth/pd: STAND-IN glyphs (suc = health/food, duc = virtue, as Đức Thọ) until KIT REQUEST place-nth / place-pd is painted (dev/kit/KIT_REQUESTS.md 20/11 map-places) */
 /* every place has a glyph (D56): the consort palaces r<N> (and her own home) share the palace-roof glyph */
 function kitPlaceIcon(k,s){const n=KIT_PLACE_IC[k]||(/^r\d+$/.test(k||"")?"place-cung":"");return n&&typeof ic==="function"?ic(n,s||14).replace('class="ic"','class="ic kplic"'):""}
 /* the ONE yellow round «!» markup (KIT §78.x); kitHapMark = a place with business this buổi, kitHapHtml(title) = any other «!» (a returned errand person, §90): same element, same class .khap */
