@@ -346,4 +346,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | mg-noword-b (sonnet; OWNER rule OD 20/11 ~05:10Z no text in mini-game play; kinds group b) | review/mg-noword-b; briefs/root73-mg-noword-b.md | MAIN ROOT-73 | session_01Rc5AsJzUL1xc6n5B1bzUVs | RUNNING | 20/11 04:53Z |
 | MAIN ROOT-74 (opus; child of ROOT-73, depth 3) | handover HANDOVER_SESSION9 | ROOT-73 | session_01Rc5AsLW7a12BUC5kZhtsTy | RUNNING | 20/11 04:55Z |
 | FOREMAN E #16 (opus; child of E #15, depth 6) | handover FOREMAN_E_STATUS | FOREMAN E #15 | session_01DgYSWnBz5jJxoLHrf1deug | RUNNING | 20/11 04:58Z | PICKUP 05:12Z START_CTX ~13 %, wake trig_0185QD8tDryHn1HXWKXxhKbu :47 |
-| REVIEW mg-back (BIG opus) of 883aaa7a | review/mg-back(-rv); briefs/rv-root74-mg-back.md | MAIN ROOT-74 | (opening) | RUNNING | 20/11 05:28Z |
+| REVIEW mg-back (BIG opus) of 883aaa7a | review/mg-back(-rv); briefs/rv-root74-mg-back.md | MAIN ROOT-74 | session_01Rc5AsJgLB4y1dGfnpRG8qm | RUNNING | 20/11 05:28Z |
