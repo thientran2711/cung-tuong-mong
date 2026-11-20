@@ -25,13 +25,13 @@ tho 8.7/7.1 · theu 9.7/9.9 · ban 9.1/9.3 · dauho 1.1/1.7 · tat 4.9/6.1 · ne
 MARKS (her first tries): ≥ 8 = OK, KEEP as is (co 9.7, theu 9.7, doden 9.9, ve 9.5, doi 9.1, ban 9.1, tho 8.7, dan 8.3, hat 8.1); 7–8 = OK, light look only (hoa 7.9, kim 7.7); < 7 = TOO HARD → FIX (ne 4.1, huong 4.5, tat 4.9, banh 6.1, mua 6.3; dauho 1.1 = ROOT-74 fast lane). Kingston's numbers = side note only. The 14 untested kinds follow the same marks later.
 
 ## JOB
-For each FIX kind (ne, huong, tat, banh, mua; dauho analysed only):
+After the dauho piece, for each FIX kind (ne, huong, tat, banh, mua):
 (1) SKILL TYPE from the engine (reflex/timing, fine hand, pattern/memory, strategy/knowledge, patience) = the WHY of the fix (incl. age: an adult's slower reflex weighs on reflex/timing kinds; brief research with sources, law 8).
 (2) NOISE of one 5-round try (bot sim, dev/measure/mg-bots.js).
 (3) PROPOSED BAL knob change (before/after numbers; law 4 one core; law 5 still harder as she climbs) that should let her land ≈ 8 on a re-test (re-test of fixed kinds allowed: old board was too hard) — bot-checked against her current level.
 For hoa/kim: a short "light look" note (keep unless something is clearly off). For ≥ 8 kinds: confirm keep, no change.
-Đầu hồ (dauho): ROOT-74 runs a separate fast-lane fix for "unplayable". Do NOT propose or touch dauho aim knobs; note any overlap for C-AG #27 → ROOT-74.
-Write it all to dev/handover/reports/cal-p2.md (handover branch). PROPOSAL ONLY: nothing lands without the owner's OK (via MAIN ROOT-74). No new features (law 18).
+★ FIRST, URGENT — OWNER BUG Đầu hồ (ROOT-74 order 05:04Z, owner-bug fast lane; OD:L1229 same knobs → same worker, ROOT-74 opens NO second worker). Owner words (verbatim): "quá khó... chơi mấy bữa không có vô bình nổi". Engine "aim" is SHARED with Bắn cung. BUILD on review/cal-p2: per-kind aim tuning in BAL (dauho its own knobs, Bắn cung untouched unless the evidence says so) so an adult lands the pot regularly and she would score ≈ 8 on a re-test; law 5 (harder as she climbs) kept; bot-checked; test for both kinds. Bắn cung judged objectively (skill type + evidence, OD ~05:45Z). This piece LANDS ALONE: SẴN SÀNG dauho → BIG opus review → LAND READY to ROOT-74; final-merge newest LIVE before SẴN SÀNG (LIVE d74f86a5 at 05:04Z; FREEZE for caoly still on). The other < 7 kinds remain PROPOSAL ONLY.
+Write it all to dev/handover/reports/cal-p2.md (handover branch). Except the dauho piece, PROPOSAL ONLY: nothing lands without the owner's OK (via MAIN ROOT-74). No new features (law 18).
 
 ## RULES
 - Push only to review/cal-p2; never main; no PR. Commit messages English, with the attribution lines your system gives.
