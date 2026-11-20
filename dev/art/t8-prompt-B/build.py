@@ -2031,13 +2031,6 @@ def flower_outfit(o,c,t):
     _tok=[]   # protect words already = her species (the t1–t3 hair-flower clause, F2 names holding 'lotus'/'peony' …) from a second swap
     def _prot(m): _tok.append(m.group(0)); return f"\x00{len(_tok)-1}\x00"
     seg=re.sub(r"fresh flower \([^)]*\)|"+"|".join(re.escape(x) for x in (sp[1],sp[0])),_prot,seg)
-def hairflower_species(c):
-    return HAIRFL.get(MOTIF_LOW.get(c,(None,None))[1])
-def flower_outfit(o,c):
-    sp=hairflower_species(c)
-    if not sp or "Outfit (" not in o: return o
-    i=o.index("Outfit ("); j=o.find(". ",i); j=len(o) if j<0 else j
-    seg=o[i:j]
     def rep(m):
         w=m.group(1)
         return sp[1] if w in FLOWER_PL else sp[0]
@@ -2169,7 +2162,6 @@ if __name__=="__main__":
         if _DOAN: _o=doan_outfit(_o)
         if (not _HIGH or LOWN==6) and not STATE and TRIEUN is None and not BDQ and "--low" in sys.argv and LOWN in (1,2,3,4,5,6): _o=flower_outfit(_o,a[0],LOWN)
         if not STATE and TRIEUN is None and not BDQ and "--low" not in sys.argv and not any(x.startswith("--nude") for x in sys.argv): _o=flower_outfit(_o,a[0],7 if "--t7" in sys.argv else 8)   # owner Lượt 1342: t7/t8 embroidery = her t6 F2 species (no hair flower)   # owner Lượt 1303: embroidery flower = her hair flower, t1–t6
-        if (not _HIGH or LOWN==6) and not STATE and TRIEUN is None and not BDQ and "--low" in sys.argv and LOWN in (1,2,3,4,5,6): _o=flower_outfit(_o,a[0])   # owner Lượt 1303: embroidery flower = her hair flower, t1–t6
         _o=_MC.apply(_o,high=_HIGH,doan=_DOAN)
     print(_o,end="")
     _lg=[x for x in _RAW if x not in ("--log","--refs")]
