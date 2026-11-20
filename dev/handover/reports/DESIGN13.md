@@ -41,3 +41,8 @@ keep_check --sidecar PASS ×7 · keep_check --all 153 sidecars PASS · fur text 
 - Robe-body stiff words left alone: t5 "deep brocade cuffs, broad gold brocade girdle"; t6 "HEAVY silk brocade robe"; t6/t7 "FABRIC: thick gold-embroidered brocade".
 - s62_t4 and s62_t5 still carry the orphan empty CAPTION line (harmless; t6 trimmed).
 - s62_t8 is at exactly 10 000 chars: any later addition needs a trim first.
+
+## Follow-up (C #10 asked to apply the recommendation, in place in _cloak5)
+- s62_t7: "with stately grace, the robe falling still and straight" → "with gentle grace, the hem swaying softly".
+- m02_t7: "upright, feet together, a folded letter" → "standing softly, weight on one leg, a folded letter"; "held level at her waist with both hands, with stately grace, the robe falling still and straight" → "held gently at her waist with both hands, her head softly inclined, with gentle grace, the hem swaying softly".
+- Chars s62_t7 9973, m02_t7 9980. .keep allow lines added. keep_check --sidecar ×7 PASS, --all 155 PASS, fur byte-identical ×7, check_store t7 FAIL set = _cloak4. (The first "Open" item above is now DONE.)
