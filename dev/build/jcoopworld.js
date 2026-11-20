@@ -625,7 +625,7 @@ function begin(d){T("begin");CW.on=true;CW.cyHold=null;CW.cyK="";CW.seat=d.you||
  const s=COOP.state;
  if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);CW.fWasHome=friendHome(C.P[fs()]);/* a fresh page (came back by link / reload) has no hand of cards yet: deal it, as loading a sổ does */if(!deck||!deck.length)try{deal()}catch(e){console.error(e)}if(s.ended&&s.ended[CW.seat])CW.sent=wk();
   /* rejoin / reload (owner 16/11: "khắc và việc đã làm bị mất"): her own week as it stood (snapLoad), never the week start again */
-  if(CW.sent!==wk()&&!gG()/* part G: her week is the host's */){const o=snapLoad(C);if(o&&CW.restore(o)){T("restored "+o.week+"."+o.buoi+" u"+o.used);return}}try{$("title").hidden=true}catch(e){}syncRoom(CW.roomMsg);showModal();render();lockNext();return}
+  if(CW.sent!==wk()/* part G #5: at level 13 too (her local copy only: no seat copy is written at 13) */){const o=snapLoad(C);if(o&&CW.restore(o)){T("restored "+o.week+"."+o.buoi+" u"+o.used);return}}try{$("title").hidden=true}catch(e){}syncRoom(CW.roomMsg);showModal();render();lockNext();return}
  if(!C&&!host()){CW.waitWorld=true;/* the lobby keeps the title backdrop up with a kit panel "Đợi bạn chọn thân phận" (no empty game frame) */try{COOP_LOBBY.hostPick(true)}catch(e){console.error(e)}return}
  newLife()}
 COOP.on("start",begin);
@@ -877,7 +877,10 @@ CW.forceBend=()=>{if(eW())return CW.eForce?CW.eForce():false;if(!CW.on||!S||S.de
    least as new); else the server copy when its version is newer than the last version this device saw, else the local one. */
 const SNK="ctm-coop-wk",SEAT_MS=3000;let svT=0,seatT=0,seatAt=0,seatLast="";
 const DEV=(()=>{try{let d=localStorage.getItem("ctm-coop-dev");if(!d){d=Math.random().toString(36).slice(2,12)+Date.now().toString(36);localStorage.setItem("ctm-coop-dev",d)}return d}catch(e){return "x"+Math.random().toString(36).slice(2,10)}})();
-function snapSave(now){svT=0;if(gG())return;/* part G: her week lives on the host */try{const o=CW.snap&&CW.snap();if(o){o.dev=DEV;o.sv=CW.ssv||0;localStorage.setItem(SNK,JSON.stringify(o));seatPush(o,now)}}catch(e){}}
+function snapSave(now){svT=0;try{const o=CW.snap&&CW.snap();if(o){o.dev=DEV;o.sv=CW.ssv||0;localStorage.setItem(SNK,JSON.stringify(o));if(!gG())seatPush(o,now)}}catch(e){}}
+/* part G #5 (owner 16/11 "khắc và việc đã làm bị mất"): her phone keeps its LOCAL copy of the buổi at level 13 too (her khắc `used` is seat-local:
+   it rides each intent's ctx, the host never sends it back; a person diff not yet sent waits for her Sẵn sàng): a reload in the same week, before
+   the host's go (CW.sent), puts it back. Only the server SEAT copy stays retired at 13 (her week end and her person live on the host). */
 function snapSoon(){if(CW.on&&!svT)svT=setTimeout(snapSave,1000)}
 /* review/lag-play-2: the seat copy is ~40 KB; when the server can (room reply caps "seatd") only the PARTS that changed since the copy
    the server confirmed (seatok) are sent: {t:"seatd",sv,set,del}. The server applies them on top of exactly version sv, else answers

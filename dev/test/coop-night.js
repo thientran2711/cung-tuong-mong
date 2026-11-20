@@ -73,6 +73,10 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  async function merged(tag,w0,ms=60000){const t0=Date.now();while(Date.now()-t0<ms){await clear(A);await clear(B);
    const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0&&!a.pend&&!c.pend)break;await sleep(400)}
   await sleep(800);const a=await D(A),c=await D(B);ok(a.w===w0+1&&c.w===w0+1,tag+': both in the next week (exactly one step)',[w0,a.w,c.w]);
+  if(!(a.w===w0+1&&c.w===w0+1))console.log('dbg '+tag,JSON.stringify(await A.p.evaluate(()=>{const G=COOPW.thin&&COOPW.thin.G;let st=null;try{st=COOPW.thin.seatOf('b')}catch(e){}
+   return {gOn:!!(G&&G.on()),done:G&&G.done,stat:G&&G.stat,log:G&&G.log.slice(-6),thq:st&&st.S&&Array.isArray(st.S.thq)?st.S.thq.map(x=>x&&(x.t||x.k||x.kind)):null,frPz:!!(COOPW.frPz&&COOPW.frPz()),
+    hold:!!(COOPW.gHold&&COOPW.gHold()),sent:COOPW.sent,pend:COOPW.pend,ngo:COOPW.ngo,tr:(COOPW.tr||[]).slice(-10)}}).catch(e=>e.message)),
+   JSON.stringify(await B.p.evaluate(()=>{const m=document.getElementById('modal');return {Q:Q.length,mt:m&&!m.hidden?(document.getElementById('mt')||{}).textContent:'',btn:m&&!m.hidden?[...m.querySelectorAll('button')].filter(x=>x.offsetParent!==null).map(x=>x.textContent.trim().slice(0,30)):[],ov:!!(document.getElementById('ov')&&!document.getElementById('ov').hidden),mg:!!S.mg,tr:(COOPW.tr||[]).slice(-8)}}).catch(e=>e.message)));
   ok(a.date===c.date&&a.b===c.b&&a.b===0,tag+': same date, both at buổi sáng',[a.date,c.date,a.b,c.b])}
  /* one seat ready at tối: it must stay in tối, the other untouched */
  async function readyOnly(X,Y,tag){const x0=await D(X),y0=await D(Y);
@@ -119,6 +123,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   for(let i=0;i<3;i++){await clear(B);await sleep(300)}
   const c=await D(B);if(c.b>=LAST&&!c.ready){await clear(B);await press(B)}
   await clear(A);ok(await isRd(A)||await press(A),'5: host presses');await merged('5',w0)}
+ if(process.env.NIGHT_UPTO==='5'){const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed (NIGHT_UPTO 5)`);await b.close();process.exit(bad.length?1:0)}
  /* 6-8 reconnect (owner 16/11): one leaves mid-buổi, the other sees the wait; she comes back → the one who stayed recovers by itself */
  const Ok=o=>o.p.evaluate(()=>{const n=document.getElementById('next');const fz=document.getElementById('coopfz');const h=document.getElementById('kctmh');
    return {fz:!!fz,hold:!!h,frozen:!!COOP.frozen,dis:n.disabled,next:n.textContent,k:COOPW.tm.myKey(),rk:COOPW.tm.roomKey(),v:COOPW.tm.view(),Q:Q.length,bend:COOPW.bend,pb:!!COOPW.pendBuoi,wk:COOPW.whereKey,tr:(COOPW.tr||[]).slice(-8)}});
