@@ -1,0 +1,18 @@
+# B26 FABRIC in the main builder (Foreman C #5, owner Lượt 1283 + correction 1284)
+Worker name B26FAB. Model OPUS. 0 credits (text only, NO gens).
+Read dev/art/START_ART_WORKER.md first. Do not read big files whole (wc -c, grep, sed -n).
+JOB: put rule B26 (dev/art/ART_RULES.md line ~73, `python3 dev/art/rule.py find B26`) into the live builder (the same files SWAP56 just edited — see dev/handover/reports/SWAP56.md for where: build.py / build_all / build_season, normal AND dong):
+- t4 Tần + t5 Phi = MATTE silk satin đoạn. Fabric wording = the FABRIC sentence of dev/art/seasons4/m11_t4_VAI_DOAN.txt (owner-approved matte text Lượt 1275; diff it vs m03_t4_VAI_DOAN.txt to see which words are the fabric).
+- t6 Quý phi KEEPS brocade (gấm). t1–t3 thin silk unchanged. t7–t8 gấm unchanged.
+- ONLY fabric words change. NEVER cut outfit details (signature capes/collar, embroidery, jewellery, sleeves, girdle, pendants, headdress). If a prompt goes over 10 000 chars, trim only boilerplate and list every cut.
+- Store gate: update check_store APPROVED sentences / tables if they hold the old t4/t5 fabric sentence; M06/M07 vs đoạn conflict → write it in ART_RULES_CONFLICTS.md, do not decide.
+- PROOF: in-process dump HEAD vs patched for ALL people x t1–t8+nude x 5 ages x normal/dong (like SWAP56). Changed cells must be t4/t5 only. 0 new >10 000.
+- A38: make .keep sidecars for the 2 sample files below; `python3 dev/art/keep_check.py --all` must PASS.
+- SAMPLE for the owner: build s62 a18 t4 and t5 (normal) with G31 CAPTION (LARGE bold, top-left) "Bậc Tần · Vải đoạn mờ" / "Bậc Phi · Vải đoạn mờ" → dev/art/b26/s62_t4.txt, s62_t5.txt. Do NOT send to the owner.
+Report: dev/handover/reports/B26FAB.md (commit hashes, changed counts, any cuts). Push HEAD:claude/cung-tuong-mong-handover-hj0h8w (git pull --rebase first). When done: send_message to Foreman C #5 session_01D3E3NZREEZJgYHBspQQs8q (or "@parent").
+
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
