@@ -364,3 +364,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-mark KIT KEEPER (sonnet; owner OK OD 20/11 ~07:15Z: «n/10» chip + amber clock, for mg-score-same) | review/kit-mark; briefs/root74-kit-mark.md | MAIN ROOT-74 | session_01Rc5AsMtjP4KTgBZVjENGLs | RUNNING | 20/11 06:40Z |
 | mg-play2 #2 (opus successor of LZkqCJgR @9ca5bac9) | review/mg-play2; briefs/root74-mg-play2.md | MAIN ROOT-74 | session_01Rc5AsKPc7jyATmC8vq6dep | RUNNING | 20/11 06:48Z |
 | REVIEW fig-label (SMALL sonnet) of e9f34064 | review/fig-label(-rv); briefs/rv-root74-fig-label.md | MAIN ROOT-74 | session_01Rc5AsLCtEJsoif8pCu9pX3 | PASS fb2e9908 | 20/11 06:58Z |
+| rv-mg-fair-ratio (BIG opus reviewer of review/mg-fair-ratio 996b17d0) | review/mg-fair-ratio-rv; briefs/cag29-rv-mg-fair-ratio.md; reports/rv-mg-fair-ratio.md | C-AG #29 for ROOT-74 | session_01Rc5AsJK6yD7rWjkFjs3So6 | RUNNING | 20/11 06:36Z |
