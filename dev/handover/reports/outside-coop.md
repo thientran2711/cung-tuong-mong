@@ -35,3 +35,46 @@ Transport (ONE path): route(seat, op, m) — host runs its own seat directly and
 - Letters use the existing item «thunha» (named "Thư nhà"); no new item (feature freeze).
 - Join's two-way mirror = the palace side's accept (she asks for the friend); no extra "nói giúp ở tuyển tú" act was added (not designed).
 SẴN SÀNG KIỂM outside-coop 2c904461 → BIG review (rules-numbers + UI + co-op).
+
+## REVIEW r1 — BIG (opus), session_01N1tNP2SCHwhuKDqSe6NWh8, 20/11
+PRIORITY #1 CHECK ('kcco|kcSendToPal|palRecvFromKc|ctm-kc|thin lvl'): OD/coop.md L96 L594 (every feature in co-op, one world) | main: no kcco; jcoopthin* (TH.D.later / F intents / pDiff) reused | review/*: outside-gaps-r1 52f0638e (base fixes, merged here), coop-thin-g (no jkc* overlap with jkcco) | claims: this row. START_CTX ~3 % (1M window).
+**Verdict: PASS review/outside-coop-r1 @ da0c7397** (contains origin/main dbddaed2 + review/outside-gaps-r1 52f0638e). Lands AFTER outside-gaps(-r1).
+
+### Thin-level co-op (the MUST-DO): room level 9 = LIVE Worker THINMAX (both seats read TH.lvl 9)
+- `coop-kcco.js` got a `THIN=<n>` lane (host asks `ctm-thin`), waits for the host's part-D patch instead of reading at once, and new checks: B→A gift **returned** (item back once), **guest phone == host's stored copy of her** after a merged week (Danh, chest, tình hảo hữu, kcco log), both phones read the same house power, join roll forced on the host too (at level ≥ 4 her card's choice runs on the host).
+- NEW `dev/test/outside/coop-kcco-ui.js` — roles SWAPPED (guest at HOME on Fold, host in the PALACE on iPad), every act through the **real buttons**: host taps Tư trang › Hảo hữu ở nhà › Viết thư (price once), guest reads the card on her phone (part D) and keeps the letter, guest plays her «Thư từ» deck cards (Gửi quà → kit pick dialog → host takes it; Thuê người tung tin → chê a consort → host world Danh −3 once, guest reads the same; sớ hặc → house power down once, same on both), then one buổi (her `do erd`) → **guest phone == host copy of B** (Danh, Bạc, Lời đồn, chest, log).
+- What the worker could not see at level 0 and is now proven: at level 9 the receiver's card runs on the host in her context (D.later) and its roll is the host's; the guest's own sender act runs on her phone like every deck card at level 9 (F1 moves only runAct) and its person diff reaches the host with her ready — no duplicate, no lost item, no double charge.
+- Found at thin, not fixed (nit, no player effect): a guest-sent message's `out[].ans` stays empty when the answer is applied on the host's copy before her diff arrives (only her log line «… đã nhận thư của ngươi» shows it; `ans` is read nowhere).
+
+### Fixes made here (review/outside-coop-r1)
+| # | law | before | after |
+|---|---|---|---|
+| 1 | 2 equal value | letter card: «Đọc xong đốt đi» = intel only, strictly worse than «Đọc thư, cất» (intel + item + bond) | burn gives Tâm cơ +BAL.kcco.letter.burn |
+| 2 | 3 / 6 | sớ tiến cử «Đội ơn»: "mất: bị coi là cùng phe" was words only (no loss) | real Đức −BAL.kcco.so.beDuc |
+| 3 | 3 / 7 | home «Thư từ» cards showed **Bại: Tốn công, không được gì** while a fail took Lời đồn / Danh | `failL(k)` → card `l` (runOpt applies it, the card prints it); failOf keeps only the non-stat part (father's liking) |
+| 4 | 6b real people | join card / result said «Hoàng hậu chuẩn tấu» even with no Hoàng hậu or when she is the Hoàng hậu | `grantBy()` = queenP(): the living Hoàng hậu, else Hoàng thượng; the word travels in the answer |
+| 5 | design §13 | sớ hặc hit the top-ranked other house | the friend's ENEMY's clan first (consort whose row toward the friend `rl[pid]` is lowest), then rank |
+| 6 | 6c real objects | a gift reaching a dead receiver vanished | returns to the sender once («gone», deduped) |
+| 7 | 4 one core | khắc costs typed (kh:1 / kh:2), fallback power 40 typed | BAL.kcco.*.kh, fallback BAL.kcco.so.mid |
+| 8 | UI (kit price line) | palace pane: Sức / Bạc price fell into GHI CHÚ («tốn: 1 khắc · Sức 10») | «tốn: 1 khắc, Sức -10» = the j25/j54 kit form (now TỐN 1 khắc · Sức -10) |
+| 9 | KIT FIRST | gift pick listed 6 items + Thôi = 7 options → kit T3 frame 307 px on Fold, each item name ONE LETTER PER LINE (pre-existing kit fault, same on LIVE) | KIT_REQUESTS 20/11 filed (kit keeper via Foreman B); interim BAL.kcco.gift.pickMax 3, newest first (4 options = the normal 562 px frame, item pictures) |
+
+### Laws / design (rows of OUTSIDE_PLAN §13)
+- Law 1 two-way: letter / gift / sớ up / sớ hặc / rumour both directions ✔ (tested both ways, both role layouts); join = home→palace entry + the palace friend's «Xin ban nàng về ở cung mình» ✔.
+- Law 2/3: every card option now has a real gain; Bạc / Sức rumour roads equal (12 / 12) ✔. Law 4: one-core guard **0 fails**, one-core-text PASS, every number in BAL.kcco ✔. Law 5: n/a (no mini-game). Law 6a n/a; 6b fixed (#4), letter sender never on the stage ✔; 6c gift = the sender's real chest item, item ledger both sides, return / gone paths ✔.
+- Fog OD:L165 «Hảo hữu của ta» on every pane/card ✔ (both devices). KIT: kcCard, pbtn, kitRows, h4.kpst, PEND kit dialogs only ✔; VANPHONG odds words, no % ✔.
+- Same family, NOT this branch (FOR B): the base «Thư nhà» pbtn (jkcg) and these palace acts roll with raw `roll()` (no agTry odds cap / soft fail) — consistent with each other, differs from deck cards; and older jkc home cards keep fail effects in `fail:` closures so their Bại column says «không mất gì» (e.g. Lời đồn +8) — a whole-group fix for the jkc owner.
+
+### Tests (final build da0c7397)
+| test | result |
+|---|---|
+| coop-kcco.js THIN=9 (LIVE level) | 68/68 |
+| coop-kcco.js level 0 (relay path) | 65/65 (pre-final build, same jkcco) |
+| coop-kcco-ui.js THIN=9 (swapped roles, real buttons) | 32/32 |
+| coop-e2e.js | 68/68 |
+| outside/coop-home.js | 51/51 |
+| outside/gaps.js Fold + iPad | fail [] / errs [] |
+| outside/oldsave.js (LIVE → this) | same: true, errs [] |
+| one-core-guard / one-core-text / undef-scan | 0 fails / PASS / PASS |
+| coop-cyc.js THIN=9 | 69/73 — LIVE main fd682a8d gives 70/73 on the same lane (giau + mixed-old-guest cases, jcycle; not touched here) = pre-existing, FOR B |
+Shots looked at (scratch, not uploaded): Fold «Thư từ» cards + gift pick dialog (before: letters stacked; after: 3 items with pictures), iPad Tư trang › Hảo hữu ở nhà (price line before/after), card dialogs both devices. Worker's CDN folder img/_review/outside-coop wiped with this verdict.

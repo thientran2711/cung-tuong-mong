@@ -422,7 +422,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | person-minigame-acts ROUND C (opus E22g; successor of E22f @90f464f5; r3 42dba2ac with E22r) | review/person-minigame-acts-c | FOREMAN E #17 | session_01DgYSWpbhufsng6okRiVwYE | RUNNING | 20/11 10:28Z |
 | kit-ge KIT KEEPER (sonnet; K-GE-1 kitBranchMap + K-GE-2 two-tone Thiên mệnh plate + K-GE-3 plate-label rows) | review/kit-ge; reports/kit-ge.md | MAIN ROOT-76 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5bbdf1ea | 20/11 09:10Z |
 | REVIEW kit-ge (SMALL kit sonnet) of 5bbdf1ea (K-GE-1/2/3) | review/kit-ge-rv; briefs/rv-root76-kit-ge.md | MAIN ROOT-76 | session_01Rc5AsMf18e5QE71CKAndhz | PASS 5bbdf1ea | 20/11 09:28Z |
-| REVIEW outside-coop r1 (opus BIG; must run thin-level co-op) of 2c904461 | review/outside-coop-r1 | B | session_01N1tNP2SCHwhuKDqSe6NWh8 | RUNNING | 20/11 09:30Z |
+| REVIEW outside-coop r1 (opus BIG; must run thin-level co-op) of 2c904461 | review/outside-coop-r1 | B | session_01N1tNP2SCHwhuKDqSe6NWh8 | PASS review/outside-coop-r1 da0c7397 (contains origin/main dbddaed2 + outside-gaps-r1 52f0638e; thin 9 both role layouts; 9 fixes; KIT_REQUEST T3 5+ options; report reports/outside-coop.md ## REVIEW r1) | 20/11 |
 | MAIN ROOT-77 (opus; child of ROOT-76, depth 6) | handover HANDOVER_SESSION9 | ROOT-76 | session_01Rc5AsKMDkP7nYjtmjLP5tq | RUNNING | 20/11 09:34Z |
 | REVIEW road-triggers (BIG opus E26r) of 72a9b918 (OR16+OR18) | review/road-triggers | FOREMAN E #17 | session_01DgYSWoJrr5AsLcXZYn2jsC | RUNNING | 20/11 10:48Z |
 | REVIEW tut-road (BIG opus E27r) of def9eaf0 (OR15 + LIVE kitShopBuy fix) | review/tut-road | FOREMAN E #17 | session_01DgYSWnb1B52Kz7WKbuAye1 | RUNNING | 20/11 10:50Z |
