@@ -25,7 +25,7 @@ Rules (seal only; source in brackets):
               out: bursts out of the round frame · loop: settles back to exactly the starting pose ·
               back: slides back inside the round medallion + exactly like the end frame (recipe §1–3)
   S8 CLIP     out/loop/back: 'static camera' + 'no camera move, no new objects' (recipe §3)
-  S9 CROWN    A/B: Hoàng hậu / EMPRESS (not dowager) = LARGE phoenix crown; Hoàng quý phi = SMALL phoenix crown (owner 19/11 ~17:00Z)
+  S9 CROWN    A/B: Hoàng hậu / EMPRESS (not dowager) = LARGE phoenix crown; Hoàng quý phi = phoenix crown with ornaments as BIG as Quý phi's, never larger/grander than the Empress's, never 'small' (owner 20/11 ~01:01Z overrides 19/11 'small')
   S10 MALE    a male seal (he/his/him, man, emperor, eunuch, official…) must not hold a handkerchief: handkerchief / kerchief / hanky / khăn
               words FAIL unless negated (A25(1), owner 20/11: 'Đàn ông con trai mà cầm khăn.')
   S11 CONSORT a consort seal (phi tần, any rank t1–t8 incl. Hoàng hậu; NOT Thái hậu) wears plain BROCADE: silk / gauze / sheer / translucent /
@@ -95,8 +95,12 @@ def check(text, kind):
         if re.search(r"Hoàng hậu|\bEMPRESS\b(?! DOWAGER)", t) and not re.search(r"dowager|Thái hậu", t, re.I):
             if not re.search(r"\bLARGE\b[^.;]{0,40}phoenix crown|phoenix crown[^.;]{0,20}\blarge\b", t, re.I):
                 f.append(("S9 CROWN", "Hoàng hậu seal without a LARGE phoenix crown (owner 19/11 ~17:00Z)"))
-        if re.search(r"Hoàng quý phi|imperial noble consort", t, re.I) and not re.search(r"\bsmall\b[^.;]{0,40}phoenix crown", t, re.I):
-            f.append(("S9 CROWN", "Hoàng quý phi seal without a SMALL phoenix crown (owner 19/11 ~17:00Z)"))
+        if re.search(r"Hoàng quý phi|imperial noble consort", t, re.I):
+            # owner 20/11 ~01:01Z: "trâm cài to như của quí phi, nhưng là mũ phượng bậc hoàng quý phi, không to hơn hoàng hậu"
+            if not crown or not re.search(r"(never|not|no)\b[^.;]{0,30}(larger|bigger|grander)[^.;]{0,40}(empress|Hoàng hậu)", t, re.I):
+                f.append(("S9 CROWN", "Hoàng quý phi seal needs a phoenix crown + 'never larger/grander than the empress' (owner 20/11 ~01:01Z)"))
+            if re.search(r"\bsmall\b[^.;]{0,40}phoenix crown", t, re.I):
+                f.append(("S9 CROWN", "Hoàng quý phi crown must not be 'small' — as big as Quý phi's (owner 20/11 ~01:01Z)"))
     if is_male(t):
         for m in KERCHIEF_RX.finditer(t):
             if not negated(t, m.start(), m.end()): f.append(("S10 MALE", f"male seal with '{m.group(0)}' (A25: men never hold a handkerchief)")); break
