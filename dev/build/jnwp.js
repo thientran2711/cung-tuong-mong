@@ -60,8 +60,8 @@ function nwCalli(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const T=BAL.nw
   for(const q of U){let bj=-1,bd=tol*tol;for(let j=Math.max(0,idx);j<Math.min(G.length,Math.max(idx,0)+look);j++){const d=(G[j][0]-q[0])**2+(G[j][1]-q[1])**2;if(d<=bd){bd=d;bj=j}}
    if(bj>=0){hit++;if(bj>idx)idx=bj}else miss++}
   const first=k91Dist(U[0][0],U[0][1],G[0][0],G[0][1])<=tol*2.6;const prog=(idx+1)/G.length,acc=hit/Math.max(1,hit+miss);return Math.max(0,Math.min(1,prog*Math.pow(acc,T.accPow)*(first?1:.7)))}
- function endGlyph(){phase="judge";while(sc.length<F.ns)sc.push(0);/* review/mg-tune: × the time part (jmgt mgPace, ONE CORE) */const s=Math.max(0,sc.reduce((a,b)=>a+b,0)/F.ns-cost)*mgPace(env,"tho",performance.now()-t0,LIM);sum+=s;const w=s>=.85?"Nét thần!":s>=.65?"Nét vững":s>=.4?"Tạm được":"Nét run";
-  F.say=[`${F.n}: ${w}`,s>=.65?K91C.good():s>=.4?K91C.gold():K91C.red()];setTimeout(next,1300)}
+ function endGlyph(){phase="judge";while(sc.length<F.ns)sc.push(0);/* review/mg-tune: × the time part (jmgt mgPace, ONE CORE) */const sp=mgPace(env,"tho",performance.now()-t0,LIM),s=Math.max(0,sc.reduce((a,b)=>a+b,0)/F.ns-cost)*sp;sum+=s;const w=s>=.85?"Nét thần!":s>=.65?"Nét vững":s>=.4?"Tạm được":"Nét run";
+  F.say=[`${F.n}: ${w}`,s>=.65?(sp<.995?K91C.gold():K91C.good())/* review/mg-score-same-rv: gold when the time part cut the glyph, as the other 8 mgPace kinds */:s>=.4?K91C.gold():K91C.red()];setTimeout(next,1300)}
  function hint(auto){if(phase!=="play"||(dm&&dm.on)||si>=F.ns)return;const now=performance.now();glow=now+(auto?5000:6500);tAct=now;if(!auto){cost+=T.hintCost;tip={t:`Nét ${si+1}: bắt đầu ở chấm xanh, đi theo nét mờ`,c:K91C.gold(),until:now+3200}}}
  hb.querySelector("#nwhint").onclick=()=>hint(false);
  const stop=k91Loop(now=>{if(!F)return;if(dm&&dm.on){kg82Bg(g,W,H,"tho",.5,.7);dm.draw(g,W,H,now);env.hud({score:"0/10",round:`Hồi 1/${NR}`,time:"–"});return}
