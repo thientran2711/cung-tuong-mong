@@ -19,7 +19,7 @@ ids.sort(key=lambda k: (GORDER.index(d[k]['group']) if d[k]['group'] in GORDER e
 
 
 def row_h(k):
-    extra = any(d[k][s].get('changed') or d[k][s].get('flag') for s in SE)
+    extra = any(d[k][s].get('changed') or d[k][s].get('flag') or d[k][s].get('A31') for s in SE)
     return 236 + (74 if extra else 0)
 
 
@@ -48,6 +48,7 @@ def cell(dr, x, y, p, s, h):
     if p.get('sec_depth_moved') or p.get('main_depth_moved'):
         tag += '  ~đậm: ' + ('chính ' if p.get('main_depth_moved') else '') + ('phụ' if p.get('sec_depth_moved') else '')
     if p.get('sec_borrowed'): tag += '  phụ mượn'
+    if p.get('sec_accent'): tag += '  phụ điểm'
     dr.text((mx, my + 184), tag, font=f_h, fill=SUB)
     yy = my + 212
     if p.get('changed'):
@@ -57,6 +58,9 @@ def cell(dr, x, y, p, s, h):
         dr.text((mx + 98, yy + 2), 'CŨ → MỚI', font=f_tag, fill=RED)
         why = '; '.join(p['changed']['why'])
         dr.text((mx + 98, yy + 30), fit(dr, why, f_h, CW - 130), font=f_h, fill=RED)
+    if p.get('A31') and not p.get('changed'):
+        dr.text((mx, yy + 4), 'A31 CHƯA ĐẠT: trùng họ màu', font=f_tag, fill=RED)
+        dr.text((mx, yy + 32), fit(dr, p['A31'].replace('CANNOT FIT: ', ''), f_h, CW - 40), font=f_h, fill=RED)
     if p.get('flag'):
         dr.text((mx, yy + 4), 'NÂU — nét vẽ F3 giữ nguyên, chờ quản đốc', font=f_tag, fill=RED)
         pr = p['proposal']
@@ -78,7 +82,7 @@ def page(n, rows, N):
         'Mỗi mùa lấy từ HỌ MÀU của mùa: Xuân hồng/đỏ/xanh lá xuân · Hạ CAM/VÀNG · THU lá phong đỏ, quả hồng, bí ngô, hổ phách, lá bạch quả, mận, rêu (bản mới) · Đông lạnh',
         'Theo độ đậm của từng người (đậm thì đậm, nhạt thì nhạt), rồi: XUÂN hơi đậm · HẠ giữ nguyên · THU hơi đậm · ĐÔNG nhạt (★ GỐC giữ như tranh)',
         'Không xám · không nâu/màu già · không vàng hoàng gia · mỗi cặp riêng mỗi mùa (cổng 0 TRÙNG)',
-        'Hạ: màu CHÍNH luôn cam/vàng; "phụ mượn" = Hạ hết chỗ, màu phụ mượn san hô / xanh lá tươi · "~đậm" = đổi độ đậm 1 màu cho khỏi trùng']):
+        'A31: 8 màu của 1 người không trùng họ màu, ΔE ≥ 20 · "phụ điểm" = màu phụ là điểm nhấn lạnh của mùa (tử đằng, trời xuân, ngọc biển, lam công, chàm) · "phụ mượn" · "~đậm"']):
         dr.text((PAD + 6, 92 + 40 * i), t, font=f_s, fill=RED if i >= 3 else SUB)
     y = HEAD
     for j, s in enumerate(SE):
