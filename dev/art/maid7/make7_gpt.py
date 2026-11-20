@@ -217,8 +217,61 @@ def thancan3():
     return out
 
 
+# owner L1478: chưởng sự embroidery only on edges (sleeve cuffs, borders, hems), plain body
+CS_EMB_OLD = ("RICH embroidery, clearly MORE and denser than a first-rank maid's (nhất đẳng): broad bands of dense peony and "
+              "plum-blossom embroidery on the collar band, along both front-edge borders, on wide embroidered cuff bands and along "
+              "the coat hem and the skirt hem, plus embroidered flower sprays scattered over the whole coat body, the sleeves and "
+              "the front of the inner skirt, in lighter tones of purple and deep rose with fine gold thread (embroidery, never brocade);")
+CS_EMB_NEW = ("RICH border embroidery, clearly richer than a first-rank maid's (nhất đẳng) borders, but ONLY on the edges: broad bands "
+              "of dense peony and plum-blossom embroidery on the collar band, along both front-edge borders, on wide embroidered cuff "
+              "bands of the sleeves and along the coat hem border and the skirt hem, in lighter tones of purple and deep rose with "
+              "fine gold thread (embroidery, never brocade); the coat body, the middle of the sleeves and the middle of the skirt stay "
+              "PLAIN with NO embroidery in the middle of the cloth (never flower sprays scattered over the body, never like a consort's robe);")
+
+
+def chuongsu3():
+    # built from the CURRENT chuongsu_gpt_v2.txt on disk
+    base = D + 'chuongsu_gpt_v2.txt'
+    t = open(base, encoding='utf-8').read()
+    t = swap(t, CS_EMB_OLD, CS_EMB_NEW)
+    out = D + 'chuongsu_gpt_v3.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [("RICH embroidery", 'owner Lượt 1478: -> RICH border embroidery, edges only'),
+                     ("clearly MORE and denser than a first-rank maid's", 'owner Lượt 1478: thêu nhiều quá như phi tần'),
+                     ('on wide embroidered cuff bands and along the coat hem and the skirt hem', 'owner Lượt 1478: kept as cuff bands of the sleeves + coat hem border + skirt hem'),
+                     ('plus embroidered flower sprays scattered over the whole coat body', 'owner Lượt 1478: không thêu trên thân áo'),
+                     ('the sleeves and the front of the inner skirt', 'owner Lượt 1478: không thêu giữa vải')])
+    return out
+
+
+# owner L1479: ma ma collar = the round-2 nhất collar; L1480: only vest + long robe, NO short/half-sleeve layer
+MM_TWO = (" Exactly two garments: a sleeveless vest over a long robe with long sleeves; NO short-sleeved or half-sleeved layer, "
+          "no extra jacket.")
+
+
+def mama3(age):
+    # built from the CURRENT mama_gpt_v2_<age>.txt on disk (it carries Foreman C's L1473 no-near-3D fix) - never rebuild v2
+    base = D + 'mama_gpt_v2_%s.txt' % age
+    t = open(base, encoding='utf-8').read()
+    t = swap(t, TC_COLLAR_OLD, NHAT_R2_COLLAR)
+    t = swap(t, 'wide layered sleeves hanging softly, each with a broad embroidered cuff band',
+             'the long robe\'s own wide long sleeves hanging softly in ONE single layer, each with a broad embroidered cuff band')
+    t = swap(t, "(never a consort's long trailing sleeves). COLOUR RULE",
+             "(never a consort's long trailing sleeves)." + MM_TWO + " COLOUR RULE")
+    out = D + 'mama_gpt_v3_%s.txt' % age
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [('a sleeveless embroidered over-vest with a stand collar closed by a small knot button', 'owner Lượt 1479: ma ma collar = round-2 nhất collar'),
+                     ('wide layered sleeves hanging softly', 'owner Lượt 1480: "layered" invites an extra short-sleeve layer -> one single layer')])
+    return out
+
+
+def mama3_51(): return mama3('a51')
+def mama3_65(): return mama3('a65')
+
+
 if __name__ == '__main__':
-    jobs = sys.argv[1:] or ['nhat', 'chuongsu', 'thancan', 'mama51', 'mama65', 'tamdang', 'nhat3', 'thancan3']
+    # NOTE: mama51/mama65 (v2) and chuongsu (v2) are NOT in the default list: mama v2 was hand-edited by Foreman C (L1473).
+    jobs = sys.argv[1:] or ['nhat', 'thancan', 'tamdang', 'nhat3', 'thancan3', 'chuongsu3', 'mama3_51', 'mama3_65']
     for j in jobs:
         p = globals()[j]()
         print(p, len(open(p, encoding='utf-8').read()))
