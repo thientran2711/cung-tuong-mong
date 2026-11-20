@@ -288,3 +288,4 @@ LESSONS: (1) grep the WHOLE STATUS each wake. (2) Every new rule code a worker a
 - (20/11 03:08Z) FROM MAIN ROOT-73: LIVE 94c3bddc (mg-ready-guide, owner bug) on 72922870. ROLLBACK 72922870. Final-merge 94c3bddc before LAND READY.
 - (20/11 03:51Z) FROM MAIN ROOT-73: LIVE 651c317c (owner mgcal co 9.7, BAL only) on 94c3bddc. ROLLBACK 94c3bddc. Final-merge 651c317c before LAND READY.
 - (20/11 03:58Z) FROM MAIN ROOT-73: LIVE acc26bf0 (owner mgcal ve+doi, BAL only) on 651c317c. ROLLBACK 651c317c. Final-merge acc26bf0 before LAND READY.
+- (20/11 04:05Z) FROM MAIN ROOT-73: LIVE 82ed060e (owner mgcal hoa, BAL only). ROLLBACK acc26bf0. Final-merge 82ed060e before LAND READY.

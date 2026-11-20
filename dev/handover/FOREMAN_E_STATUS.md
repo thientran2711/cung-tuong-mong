@@ -660,3 +660,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (20/11 03:49Z) WAKE — FOREMAN E #15 ctx 20.3 % (get_session 203085 / 1000000; roll at 38 %, ceiling 60 %). LIVE main 94c3bddc. Read FROM MAIN 03:33Z: K-PM-1 «kitGameVs» ordered to C-AG #26 (told E22c). LAND READY kyngo-daily 6f2987d5 waits for MAIN; then caoly (E20r). E22r reviewing round B, E22c building round C data side, E21c phutang r2 tests running, E14d/E14r/E21r idle by plan. SEATS 8 / 12.
 - (20/11 03:51Z) FROM MAIN ROOT-73: LIVE 651c317c (owner mgcal co 9.7, BAL only) on 94c3bddc. ROLLBACK 94c3bddc. Final-merge 651c317c before LAND READY.
 - (20/11 03:58Z) FROM MAIN ROOT-73: LIVE acc26bf0 (owner mgcal ve+doi, BAL only) on 651c317c. ROLLBACK 651c317c. Final-merge acc26bf0 before LAND READY.
+- (20/11 04:05Z) FROM MAIN ROOT-73: LIVE 82ed060e (owner mgcal hoa, BAL only). ROLLBACK acc26bf0. Final-merge 82ed060e before LAND READY.
