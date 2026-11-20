@@ -1,6 +1,6 @@
 # ge-npc — GAP J4 (GE08, GE09, GE10, OR19) — review/ge-npc @ f9045383 (base LIVE 30e8714e)
 PRIORITY #1 CHECK: OD L1288 (NPC origins = player pool), GRAND_ENDINGS §2.5(1), §2.9, STORY_ROADS_PLAN §3.0 | main: BAL.ge.npc {on:false} (jbalge.js:121), BAL.ge.help.rw "not live" (jbalge.js:120), S.geSeat only "me" (jge.js:106), nrOrigin clan-only (jnroad.js:33), news = log() only (jge.js:113) | review/*: none for ge-npc; foreign-princess-samples = art only (not touched); ge-writers-w3 / bd-roads touch jbalge.js / jnroad.js on other lines (no overlap) | claims: CLAIMS row 395 (this session).
-STATUS: WORK DONE, partly tested — NOT yet SẴN SÀNG KIỂM (see HANDOVER: 4 suites still to run). START_CTX ~6 % (own estimate; get_session reads 0); stopped at ~40 % by Foreman B wake 11:18Z.
+STATUS: SẴN SÀNG KIỂM review/ge-npc @ a28b107f (J4 #2 session_01N1tNP2HPE2wxkW8ADNGHw1, base LIVE 8cf6b7d7). #1 START_CTX ~6 %; #2 START_CTX ~10 % (own estimate), ended ~30 %.
 
 ## What (all numbers in BAL; kit only)
 - **jgenpc.js** (new; assemble.py after jnroadhp.js). GE09 NPC parity: an NPC consort whose road v.nr.r is a live GE branch gets `v.ge` (same shape as S.ge). Each chapter she plays off-screen (nrPlay wrap): per stage of the chapter's path she picks ONE option weighted by her nature (jmind `mindPick`: her lean side `BAL.ge.npc.w.lean`, endings her nature points to `w.pull`, shies from closing them `w.close`) → same pull/push/close/doom/lean rules as the player + `@<chapter>=<ending key>` (jnroad nrEnd now stores `nrEnd.k`). Road closes → Hồi kết: Ngã rẽ 1/2 from `BAL.ge.npc.nat` (trait weights) × (1 + pull of the open ending owning the pair × `pw`); «Theo người ấy» only with a real bond (BAL.ge.bond.sis). Same odds (BAL.ge.odds), shading (BAL.ge.var), fail/quiet rule.
@@ -13,18 +13,19 @@ STATUS: WORK DONE, partly tested — NOT yet SẴN SÀNG KIỂM (see HANDOVER: 4
 ## Tests
 - dev/test/ge-npc-unit.js — **ALL OK 31/31** (3 runs) on this build: state, chapter feed, resolve, title, Kim sách, Bảng, pop-up once, no %, seat locks both ways, HH crown, leave, help/betray/rival/reward once/no reward after betrayal, princess share/house/origin/cap/faces/house daughter, off switch, old save month.
 - Spread probe (400 NPC roads, 24 branches): grand 14 %, quiet 21 %, fail 65 %; open endings at road end median 2; thiện 38 / ác 19.
-- Bots dev/measure/ge-npc-bots.js, 30 lives × 15 y (n=50 rerun RUNNING, output /home/user/wt/ge-npc-tmp/bots2.txt — lost with this container):
+- Bots dev/measure/ge-npc-bots.js, **50 lives × 15 y** (#2, 1073 s, page errors 0):
 
-| style | her death | NPC roads | ended | on GE branch | Hồi kết | grand | fail | quiet | thiện/ác | seats | left | NPC HH end | princesses | NPC deaths | errs |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| off (LIVE) | 0.57 | 10.2 | 9.4 | 0 | 0 | 0 | 0 | 0 | – | 0 | 0 | 0.60 | 0 | 5.1 | 0 |
-| on | 0.30 | 11.1 | 10.6 | 8.0 | 6.5 | 1.2 | 3.5 | 1.8 | 22/14 | 0.10 | 0.30 | 0.40 | 0.47 | 6.1 | 0 |
-  Summits reached (on): FREE 11, REV 5, PEACE 3, SIS 2, THH 2, JUST 2, OFFICE 2, FAME 2, CLAN/GENERAL/NUN/MERCY/FOLLOW/KING/NDE 1. Her-death gap 0.57 vs 0.30 is likely noise at n=30 (no code path touches her mortality) — the n=50 rerun must confirm. FREE dominates NPC unlocks (0.3 NPCs/life leave the palace) — reviewer may want BAL.ge.npc.leave or nat weights tuned.
-- Shots (kit result panel + Bảng, Fold 755x1000@2 + iPad 1180x820@2, looked): CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/ge-npc/ge-npc-news-fold.webp, -news-ipad.webp, -board-fold.webp, -board-ipad.webp. Shot script dev/test/ge-npc-shots.js.
+| style | her death | NPC roads | ended | on GE branch | Hồi kết | grand | fail | quiet | thiện/ác | seats | left | NPC HH by GE | NPC HH end | princesses | NPC deaths | errs |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| off (LIVE) | 0.50 | 10.42 | 9.54 | 0 | 0 | 0 | 0 | 0 | – | 0 | 0 | 0 | 0.58 | 0 | 4.50 | 0 |
+| on | 0.38 | 10.16 | 9.58 | 7.22 | 5.66 | 1.14 | 3.42 | 1.10 | 43/14 | 0 | 0.30 | 0.02 | 0.48 | 0.52 | 5.08 | 0 |
+  Summits (on): FREE 10, CLAN 8, FOLLOW 7, TRADE 4, SIS 4, MERCY 4, FAME 3, GENERAL/POWER/SACRIFICE/ADV/HH/REV 2, KING/JUST/RELIEF/NUN/CHILD 1. Her death .50 vs .38 = noise (SE of the gap ≈ .10; no code path touches her mortality). FREE no longer dominates as much (10 of 59).
+- Shots (#2, retaken on the merged build; kit result panel «Thiên hạ truyền tin» + Bảng Thiên mệnh, Fold 755x1000@2 + iPad 1180x820@2, looked 3×: no cut text, no overflow, page errors 0): CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/ge-npc/ge-npc-news-fold.webp, -news-ipad.webp, -board-fold.webp, -board-ipad.webp. Shot script dev/test/ge-npc-shots.js.
 
-## HANDOVER (successor: finish, then SẴN SÀNG KIỂM)
-1. Worktree: `git worktree add /home/user/wt/ge-npc -B review/ge-npc origin/review/ge-npc` (sparse per PREAMBLE), `bash dev/site/build_site.sh`, serve `python3 -m http.server 8741`.
-2. Run and record: `node dev/test/ge-engine.js <url>` — on this branch it ran > 40 min under load and was killed twice: FIRST run it on LIVE main to see whether it is just slow or my wraps (nrPlay/endTurn/start) hang it; `ge-guard.js <url>`; `nroadhp-unit.js <url>`; `npc-roads.js <url> 4 60`; `npc-roads-saves.js`; co-op `coop-e2e.js` (live Worker) — co-op is a PASS criterion.
-3. Re-run bots n≥50 (`node dev/measure/ge-npc-bots.js <url> 50 15 off,on`) and replace the table; check her death off vs on.
-4. Merge newest origin/main, rebuild, re-run ge-npc-unit, push, SẴN SÀNG KIỂM → BIG review.
+## #2 RESULTS (20/11, all on review/ge-npc after merging LIVE 8cf6b7d7)
+- Merge: f2b4fa86 (only conflict assemble.py: LIVE list + jgenpc.js after jnroadhp.js; index.html/sw.js rebuilt). kit-ge (kitBranchMap, Thiên mệnh plate) merged clean, no overlap with jgenpc.
+- Fix a28b107f: one-core-guard flagged `nt:1` in jgenpc.js (Kim sách item flag, read as the stat nt) → `nt:true`; guard PASS.
+- ge-npc-unit 31/31 (twice: merged build + final build) · ge-engine 104/104 in 17 s on branch (LIVE 12 s): the old >40 min was machine load, not the nrPlay/endTurn/start wraps · ge-guard 6/6 · nroadhp-unit 40/40 · npc-roads 4×60 38/38 (2616 s; first run was cut by my cap under load at 3/4 lives, no fails) · npc-roads-saves 6/6 (LIVE save → branch) · coop-e2e 68/68 (live Worker) · undef-scan PASS · quickcheck: open ok, old LIVE save loads + plays a buổi, perf median new/live render 242/281 ms, tab 642/618, buổi 2069/1661 (noise band), tasks>200ms 25/25; core gates PASS after the fix.
+
+## Known limits (say so in review)
 Known limits (not built, say so in review): NPC maids on cnv roads have no grand ending (consorts only); the co-op FRIEND's own unlock is not news for the other player and her S.geSeat does not lock the friend (coop-thin lane); NPC fail outcome text is not shown to the player (news line only on a public fall, per design).
