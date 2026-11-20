@@ -154,8 +154,17 @@ function kg82Bg(g,W,H,kind,veil,ay){const n=kg82BgName(kind),im=kg82Img(n);
  g.drawImage(c,0,0,W,H)}
 /* a sprite centred at (x,y); w = drawn width (h from the picture's aspect unless given); o = {rot, alpha, glow, ax, ay (anchor 0..1)} */
 function kg82Spr(g,n,x,y,w,h,o){const im=kg82Img(n);if(!(im.complete&&im.naturalWidth))return false;o=o||{};const r=im.naturalHeight/im.naturalWidth;if(w==null)w=h/r;if(h==null)h=w*r;
- g.save();g.translate(x,y);if(o.rot)g.rotate(o.rot);if(o.alpha!=null)g.globalAlpha*=o.alpha;if(o.glow){g.shadowColor=o.glow;g.shadowBlur=o.blur||18}
- g.drawImage(im,-w*(o.ax==null?.5:o.ax),-h*(o.ay==null?.5:o.ay),w,h);g.restore();return true}
+ g.save();g.translate(x,y);if(o.rot)g.rotate(o.rot);if(o.alpha!=null)g.globalAlpha*=o.alpha;
+ const X=-w*(o.ax==null?.5:o.ax),Y=-h*(o.ay==null?.5:o.ay);
+ if(typeof o.glow==="string"&&o.glow){/* mg-visual: ONE strong lit cue (BAL.mgFx): a bright ring round the target + the glow stacked over several passes */
+  const F=BAL.mgFx;if(o.ring){g.save();g.shadowColor=o.glow;g.shadowBlur=F.blur;g.strokeStyle=F.ring;g.lineWidth=Math.max(3,w*F.ringW);g.beginPath();g.arc(X+w/2,Y+h/2,Math.max(w,h)*.5,0,Math.PI*2);g.stroke();g.restore()}
+  g.shadowColor=o.glow;g.shadowBlur=Math.max(o.blur||0,F.blur);for(let k=1;k<F.pass;k++)g.drawImage(im,X,Y,w,h)}
+ g.drawImage(im,X,Y,w,h);g.restore();return true}
+/* mg-visual: scale of a pressed / lit target on the pop curve BAL.mgFx (since = ms when it was pressed; since null = lit and held → full pop) */
+function kg82FxPop(since,now){const F=BAL.mgFx;if(since==null)return F.pop;const e=(now==null?performance.now():now)-since;if(e<0||e>=F.ms)return 1;const k=e<F.ms*.5?1:1-(e-F.ms*.5)/(F.ms*.5);return 1+(F.pop-1)*Math.min(1,(e+30)/50)*k}
+/* the press ring: a bright ring that blooms and fades over BAL.mgFx.ms round a target pressed at "since" */
+function kg82FxRing(g,x,y,r,since,now){const F=BAL.mgFx,e=(now==null?performance.now():now)-since;if(!since||e<0||e>=F.ms)return;const k=e/F.ms;g.save();g.globalAlpha=1-k*k;g.shadowColor=F.glow;g.shadowBlur=F.blur;g.strokeStyle=F.ring;g.lineWidth=Math.max(3,r*F.ringW*1.6);g.beginPath();g.arc(x,y,r*(1+.5*k),0,Math.PI*2);g.stroke();g.restore()}
+window.kg82FxPop=kg82FxPop;window.kg82FxRing=kg82FxRing;
 function kg82SprR(n){const im=kg82Img(n);return im.naturalWidth?im.naturalHeight/im.naturalWidth:1}
 /* label on a painting: light halo (or dark halo on night boards) so text always reads */
 function kg82Lbl(g,t,x,y,maxW,dark){g.save();g.lineJoin="round";g.lineWidth=3.5;g.strokeStyle=dark?"rgba(20,16,30,.85)":"rgba(255,250,238,.92)";
@@ -184,10 +193,10 @@ function kg82Rhythm(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const L=
  const pc=kg82Col("--peony","#e48aa4"),red=kg82Col("--red","#c23b22"),gold=kg82Col("--gold","#8f5f0c");
  const sc=()=>10*Math.max(0,credit)/N;/* mg-balance: float; kg82Play grades + rounds */
  function draw(now){const tt=now-t0;kg82Bg(g,W,H,env.kind,.08,1);const bw=Math.min(46,lw*.42);
-  for(let i=0;i<4;i++){const x=lw*(i+.5);if(flash[i]>now){g.fillStyle="#fff3c855";g.fillRect(lw*i,0,lw,H)}
+  for(let i=0;i<4;i++){const x=lw*(i+.5);const fa=flash[i]&&now-flash[i]<BAL.mgFx.ms;
    /* the silk string (live mark) and its painted bridge */
    g.strokeStyle="#5a3a0c";g.lineWidth=2.6+i*.5;g.beginPath();g.moveTo(x,0);g.lineTo(x,H);g.stroke();g.strokeStyle="#f3dfa8";g.lineWidth=1.4+i*.5;g.beginPath();g.moveTo(x,0);g.lineTo(x,H);g.stroke();
-   kg82Spr(g,"dan-bridge",x,HIT+4,bw,null,{ay:0})}
+   kg82Spr(g,"dan-bridge",x,HIT+4,bw*(fa?kg82FxPop(flash[i],now):1),null,fa?{ay:0,glow:BAL.mgFx.glow}:{ay:0});if(fa)kg82FxRing(g,x,HIT,bw*.8,flash[i],now)}
   g.fillStyle=red;g.fillRect(0,HIT-2,W,4);g.fillStyle="#f0d070";g.fillRect(0,HIT-3,W,1);
   const br=Math.min(22,lw*.27);for(const n of notes){if(n.st)continue;const y=(tt-(n.t-fall))/fall*HIT;if(y<-20||y>H+20)continue;if(!kg82Spr(g,"dan-blossom",lw*(n.l+.5),y,br*2,null,{rot:(y/90)%6.28}))kg82Blossom(g,lw*(n.l+.5),y,br*.8,pc,true)}
   g.fillStyle="#5a3a0c";g.font=`700 ${Math.max(12,Math.min(16,lw*.15))}px ${kg82Col("--display","serif")}`;g.textAlign="center";L.forEach((n,i)=>kg82Lbl(g,n,lw*(i+.5),H-10));
@@ -197,7 +206,7 @@ function kg82Rhythm(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const L=
   const done=notes.filter(n=>n.st).length;env.hud({score:`${sc()}/10`,round:`Hồi ${Math.min(N,done+1)}/${N}`,time:`${Math.max(0,Math.ceil((end-tt)/1000))} giây`});
   draw(now);if(tt>end){stop=true;return env.end(sc())}raf=requestAnimationFrame(frame)}
  function tap(l){if(stop)return;const tt=performance.now()-t0;let best=null,bd=1e9;for(const n of notes){if(n.st||n.l!==l)continue;const d=Math.abs(n.t-tt);if(d<bd){bd=d;best=n}}
-  flash[l]=performance.now()+120;
+  flash[l]=performance.now();
   if(best&&bd<=WIN){best.st=1;const q=bd<=100*mgTol(env)?1:.6;credit+=q;kg82Pop(pops,lw*(l+.5),HIT-24,q===1?"Tuyệt!":"Được",q===1?kg82Col("--good","#2d7a52"):gold);kg82Pluck(l,true)}
   else{credit-=.3;kg82Pop(pops,lw*(l+.5),HIT-24,"Lệch",red);kg82Pluck(l,false)}}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();const [x]=C.at(e);tap(cl(Math.floor(x/lw),0,3))});
@@ -231,7 +240,7 @@ function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Ma
  const hb=document.createElement("div");hb.className="kg82act";hb.innerHTML=`<button class="kgbtn" id="kg82gohint">Gợi ý<small>chỉ chỗ ăn, bớt một ít phần</small></button>`;box.appendChild(hb);
  const doHint=()=>{if(phase!=="play"||stop||!P)return;if(!hinted){hinted=true;kg82Pop(pops,px(P.L),py(P.L)-s*.6,"Quân trắng chỉ còn một khí ở đây",kg82Col("--gold","#8f5f0c"))}hintAt=performance.now()};hb.querySelector("button").onclick=doHint;
  function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}P=kg82GoGen(n,R0[round],MORE)||kg82GoGen(n,R0[round])||kg82GoGen(n,1);mark=null;fade=null;phase="play";t0=tAct=performance.now();hintAt=0;hinted=false}
- function stone(x,y,c,a){if(kg82Spr(g,c===1?"co-black":"co-white",x,y,s*.92,s*.92,{alpha:a==null?1:a}))return;g.save();g.globalAlpha=a==null?1:a;const r=s*.44;const gr=g.createRadialGradient(x-r*.35,y-r*.35,r*.1,x,y,r);
+ function stone(x,y,c,a,z){z=z||1;if(kg82Spr(g,c===1?"co-black":"co-white",x,y,s*.92*z,s*.92*z,{alpha:a==null?1:a}))return;g.save();g.globalAlpha=a==null?1:a;const r=s*.44;const gr=g.createRadialGradient(x-r*.35,y-r*.35,r*.1,x,y,r);
   if(c===1){gr.addColorStop(0,"#666");gr.addColorStop(1,"#111")}else{gr.addColorStop(0,"#fff");gr.addColorStop(1,"#cfc8bc")}g.fillStyle=gr;g.shadowColor="#0006";g.shadowBlur=3;g.shadowOffsetY=1.5;g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.fill();g.restore()}
  function draw(now){kg82Bg(g,W,H,"co",0,1);const bx=ox+m-s*.55,by=(H-S0)/2+m-s*.55,bs=(n-1)*s+s*1.1;
   /* the painted board (its carved rim sits outside the 7×7 lines) */
@@ -241,23 +250,23 @@ function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Ma
   if(P){P.B.forEach((v,i)=>{if(!v)return;let a=1;if(fade&&fade.s.includes(i))a=Math.max(0,1-(now-fade.a)/500);if(a>0)stone(px(i),py(i),v,a)});
    if(phase==="play"&&tier<2){g.save();g.strokeStyle="#e0a526";g.lineWidth=2.5;g.setLineDash([4,4]);g.globalAlpha=.8;P.cap.forEach(i=>{g.beginPath();g.arc(px(i),py(i),s*.5,0,Math.PI*2);g.stroke()});g.restore()}
    if(phase==="play"&&hintAt){g.save();g.strokeStyle=kg82Col("--good","#2d7a52");g.lineWidth=3;g.globalAlpha=.55+.45*Math.sin(now/160);g.beginPath();g.arc(px(P.L),py(P.L),s*.4+Math.sin(now/160)*2,0,Math.PI*2);g.stroke();g.restore()}
-   if(mark){if(mark.ok){stone(px(mark.i),py(mark.i),1)}else{if(!mark.miss){g.strokeStyle=kg82Col("--red","#c23b22");g.lineWidth=3;const x=px(mark.i),y=py(mark.i),d=s*.25;g.beginPath();g.moveTo(x-d,y-d);g.lineTo(x+d,y+d);g.moveTo(x+d,y-d);g.lineTo(x-d,y+d);g.stroke()}
+   if(mark){if(mark.ok){stone(px(mark.i),py(mark.i),1,1,kg82FxPop(mark.a,now));kg82FxRing(g,px(mark.i),py(mark.i),s*.5,mark.a,now)}else{if(!mark.miss){g.strokeStyle=kg82Col("--red","#c23b22");g.lineWidth=3;const x=px(mark.i),y=py(mark.i),d=s*.25;g.beginPath();g.moveTo(x-d,y-d);g.lineTo(x+d,y+d);g.moveTo(x+d,y-d);g.lineTo(x-d,y+d);g.stroke()}
      g.strokeStyle=kg82Col("--good","#2d7a52");g.beginPath();g.arc(px(P.L),py(P.L),s*.42+Math.sin(now/90)*2,0,Math.PI*2);g.stroke()}}}
   kg82DrawPops(g,pops,now)}
  function frame(now){if(stop&&!fade)return;if(phase==="play"){const left=LIM-(now-t0);if(IDLE&&!hintAt&&now-tAct>IDLE)doHint();if(left<=0){phase="wait";kg82Pop(pops,px(P.L),py(P.L)-s*.6,"Hết giờ","#8a7350");mark={i:P.L,ok:false,miss:1};round++;setTimeout(next,900)}
    env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(round+1,5)}/5`,time:`${Math.max(0,Math.ceil(left/1000))} giây`})}else env.hud({score:`${Math.round(pts)}/10`,time:"–"});
   draw(now);raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();if(phase!=="play"||stop)return;tAct=performance.now();const [x,y]=C.at(e);let bi=-1,bd=1e9;for(let i=0;i<n*n;i++){const d=Math.hypot(px(i)-x,py(i)-y);if(d<bd){bd=d;bi=i}}
-  if(bd>s*.6||P.B[bi])return;phase="wait";if(bi===P.L){const sp=mgPace(env,"co",performance.now()-t0,LIM);pts+=(hinted?1.4:2)*sp;/* a slow capture earns less (review/mg-tune: the ONE time part jmgt mgPace) */mark={i:bi,ok:true};fade={s:P.cap,a:performance.now()};kg82Pop(pops,px(bi),py(bi)-s*.6,`Ăn ${P.cap.length} quân!`,kg82Col("--good","#2d7a52"));kg82Pluck(2,true)}
+  if(bd>s*.6||P.B[bi])return;phase="wait";if(bi===P.L){const sp=mgPace(env,"co",performance.now()-t0,LIM);pts+=(hinted?1.4:2)*sp;/* a slow capture earns less (review/mg-tune: the ONE time part jmgt mgPace) */mark={i:bi,ok:true,a:performance.now()};fade={s:P.cap,a:performance.now()};kg82Pop(pops,px(bi),py(bi)-s*.6,`Ăn ${P.cap.length} quân!`,kg82Col("--good","#2d7a52"));kg82Pluck(2,true)}
   else{mark={i:bi,ok:false};kg82Pop(pops,px(bi),py(bi)-s*.6,"Chưa ăn được",kg82Col("--red","#c23b22"));kg82Pluck(0,false)}round++;setTimeout(next,950)});
  /* think = how long a player needs to find the spot: more white groups to read, no gold ring at Khó (dev/measure/mg-bots.js) */
  KG82.peek=()=>phase==="play"&&P?Object.assign(C.client(px(P.L),py(P.L)),{think:(1+.45*Math.max(0,(P.wg||1)-1))*(tier>=2?1.5:tier?1.15:1)*(hintAt?.5:1)}):null;next();raf=requestAnimationFrame(frame);return()=>{stop=true;fade=null;cancelAnimationFrame(raf)}}
 
 /* 4. PATTERN (vẽ, cắm hoa, thêu, khéo tay): remember which cells were painted */
 function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const S0=Math.min(W,H)-8,ox=(W-S0)/2,oy=(H-S0)/2,c=S0/n;const mot=KG82_KIND[env.kind].m;
- const R0=[3,4,4,5,6].map(n=>n+mgMore(env));let round=0,pts=0,pat=[],tapped=[],phase="",t0=0,stop=false,raf=0;const pops=[];const LIM=9000,SHOW=2300+(env.lv||0)*160;
+ const R0=[3,4,4,5,6].map(n=>n+mgMore(env));let round=0,pts=0,pat=[],tapped=[],phase="",t0=0,stop=false,raf=0;const pops=[],press={};const LIM=9000,SHOW=2300+(env.lv||0)*160;
  const cx=i=>ox+(i%n+.5)*c,cy=i=>oy+(Math.floor(i/n)+.5)*c;
- function motif(i,a,ghost){g.save();g.globalAlpha=a;const x=cx(i),y=cy(i),r=c*.34;
+ function motif(i,a,ghost){g.save();g.globalAlpha=a;const x=cx(i),y=cy(i),r=c*.34*(ghost?1:kg82FxPop(press[i],performance.now()));if(!ghost&&press[i])kg82FxRing(g,x,y,c*.4,press[i],performance.now());
   if(ghost){g.strokeStyle=kg82Col("--good","#2d7a52");g.setLineDash([5,4]);g.lineWidth=2;g.strokeRect(x-r,y-r,r*2,r*2);g.restore();return}
   if(kg82Spr(g,["theu-peony","theu-butterfly","theu-crane","theu-cloud"][i%4],x,y,r*2.3,r*2.3)){g.restore();return}
   if(mot==="ink"){/* three bamboo leaves in one brush stroke each, tapered, ink wash */
@@ -283,7 +292,7 @@ function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const 
   if(phase==="play"){left=LIM-(now-t0);if(left<=0)judge()}
   env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(round+1,5)}/5`,time:phase==="show"?"nhìn kỹ":phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"});draw(now);raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();if(phase!=="play")return;const [x,y]=C.at(e);const cc=Math.floor((x-ox)/c),rr=Math.floor((y-oy)/c);if(cc<0||rr<0||cc>=n||rr>=n)return;const i=rr*n+cc;if(tapped.includes(i))return;
-  tapped.push(i);kg82Pluck(tapped.length,pat.includes(i));if(tapped.length>=pat.length)judge()});
+  tapped.push(i);press[i]=performance.now();kg82Pluck(tapped.length,pat.includes(i));if(tapped.length>=pat.length)judge()});
  KG82.peek=()=>{if(phase!=="play")return null;const i=pat.find(k=>!tapped.includes(k));return i==null?null:C.client(cx(i),cy(i))};
  next();raf=requestAnimationFrame(frame);return()=>{stop=true;phase="";cancelAnimationFrame(raf)}}
 
@@ -296,9 +305,9 @@ function kg82Steps(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const V=[["�
  function endRound(ok){phase="judge";const got=2*ok/seq.length;pts+=got;kg82Pop(pops,mx,my-8,ok===seq.length?"Đẹp lắm!":`Đúng ${ok}/${seq.length} bước`,ok===seq.length?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"));round++;setTimeout(next,1100)}
  function draw(now){kg82Bg(g,W,H,"mua",0,.55);kg82Spr(g,"mua-fan",mx,my-D*.06,D*.5,null,{alpha:.95});
   let showI=-1;if(phase==="show"){const k=now-t0;if(k>=0){const i=Math.floor(k/SP);if(i>=seq.length){phase="play";lastTap=now}else if(k-i*SP<SP*.72)showI=seq[i]}}
-  pos.forEach(([x,y],i)=>{const on=i===showI||(i===lit&&now<litUntil);g.save();
+  pos.forEach(([x,y],i)=>{const on=i===showI||(i===lit&&now<litUntil),pz=on?kg82FxPop(i===showI?null:litUntil-BAL.mgFx.ms,now):1;g.save();
    /* the painted dance cushion; lit = golden glow and a small lift */
-   if(!kg82Spr(g,"mua-mat",x,y-(on?3:0),pr*2.05*(on?1.08:1),null,{glow:on?"#ffe08a":null,blur:30})){g.fillStyle=on?pc:"#ecd9b4";g.beginPath();g.arc(x,y,pr,0,Math.PI*2);g.fill()}
+   if(!kg82Spr(g,"mua-mat",x,y-(on?3:0),pr*2.05*pz,null,{glow:on?BAL.mgFx.glow:null,ring:on})){g.fillStyle=on?pc:"#ecd9b4";g.beginPath();g.arc(x,y,pr,0,Math.PI*2);g.fill()}
    g.fillStyle=on?"#fff6dc":"#fff3e0";g.textAlign="center";g.textBaseline="alphabetic";g.font=`700 ${pr*.62}px serif`;g.save();g.shadowColor="#5a1208";g.shadowBlur=6;g.fillText(V[i][0],x,y+pr*.12);g.restore();
    g.font=`700 ${Math.max(11,Math.min(14,pr*.24))}px ${kg82Col("--body","sans-serif")}`;g.fillStyle="#fff3d6";kg82Lbl(g,V[i][1],x,y+pr*.6,pr*1.6,true);g.restore()});
   if(phase==="play"){g.fillStyle="#3a1a0c";g.font=`700 13px ${kg82Col("--body","sans-serif")}`;g.textAlign="center";kg82Lbl(g,`bước ${inp+1} trên ${seq.length}`,mx,my+D*.36)}
@@ -306,7 +315,7 @@ function kg82Steps(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const V=[["�
  function frame(now){if(stop&&phase!=="judge")return;if(phase==="play"&&now-lastTap>IDLE)endRound(inp);
   env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(round+1,5)}/5`,time:phase==="show"?"xem bước":phase==="play"?`${Math.max(0,Math.ceil((IDLE-(now-lastTap))/1000))} giây`:"–"});draw(now);raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();if(phase!=="play")return;const [x,y]=C.at(e);let bi=-1,bd=1e9;pos.forEach(([px,py],i)=>{const d=Math.hypot(px-x,py-y);if(d<bd){bd=d;bi=i}});if(bd>pr*1.5)return;
-  lit=bi;litUntil=performance.now()+180;lastTap=performance.now();if(bi===seq[inp]){kg82Pluck(bi,true);inp++;if(inp>=seq.length)endRound(inp)}else if(rtl>0){rtl--;kg82Pluck(0,false);kg82Pop(pops,mx,my-8,"Lỡ một bước, chạm lại",kg82Col("--gold","#8f5f0c"))}else{kg82Pluck(0,false);endRound(inp)}});
+  lit=bi;litUntil=performance.now()+BAL.mgFx.ms;lastTap=performance.now();if(bi===seq[inp]){kg82Pluck(bi,true);inp++;if(inp>=seq.length)endRound(inp)}else if(rtl>0){rtl--;kg82Pluck(0,false);kg82Pop(pops,mx,my-8,"Lỡ một bước, chạm lại",kg82Col("--gold","#8f5f0c"))}else{kg82Pluck(0,false);endRound(inp)}});
  KG82.peek=()=>phase==="play"?C.client(...pos[seq[inp]]):null;next();raf=requestAnimationFrame(frame);return()=>{stop=true;phase="";cancelAnimationFrame(raf)}}
 
 /* 6. AIM (bắn cung, đầu hồ): the marker swings, tap when it is over the centre */
@@ -324,7 +333,7 @@ function kg82Aim(box,env){const C=kg82Canvas(box,.95,420),{g,W,H}=C;const pot=en
   g.restore();
   const my=pot?ty-50*kz:ty;const an=pot?"dauho-arrow":"ban-arrow";shots.forEach(s=>{if(!kg82Spr(g,an,s.x,my,44*kz,null,{rot:-Math.PI/2+.25,ax:1,ay:.5})){g.strokeStyle="#4a3010";g.lineWidth=2;g.beginPath();g.moveTo(s.x,my);g.lineTo(s.x-6,my-30);g.stroke()}});
   g.strokeStyle="#d2b071";g.lineWidth=2;g.beginPath();g.moveTo(cx-A,H*.16);g.lineTo(cx+A,H*.16);g.stroke();g.fillStyle=kg82Col("--good","#2d7a52");g.fillRect(cx-A*.08,H*.16-3,A*.16,6);
-  const x=lock?flyX:pos(now);g.fillStyle="#8a2a1e";g.beginPath();g.moveTo(x,H*.16+4);g.lineTo(x-9,H*.16-12);g.lineTo(x+9,H*.16-12);g.closePath();g.fill();
+  const x=lock?flyX:pos(now);{const pz=lock?kg82FxPop(flyAt,now):1;g.save();g.translate(x,H*.16);g.scale(pz,pz);g.fillStyle="#8a2a1e";if(pz>1){g.shadowColor=BAL.mgFx.glow;g.shadowBlur=BAL.mgFx.blur}g.beginPath();g.moveTo(0,4);g.lineTo(-9,-12);g.lineTo(9,-12);g.closePath();g.fill();g.restore();if(lock)kg82FxRing(g,x,H*.16-4,16,flyAt,now)}
   if(lock&&now<flyAt+350){const kk=(now-flyAt)/350;const yy=H*.16+((pot?ty-50*kz:ty)-H*.16)*kk;if(!kg82Spr(g,an,flyX,yy,46*kz,null,{rot:Math.PI/2,ax:1,ay:.5})){g.strokeStyle="#4a3010";g.lineWidth=2;g.beginPath();g.moveTo(flyX,yy-20);g.lineTo(flyX,yy);g.stroke()}}
   kg82DrawPops(g,pops,now)}
  function frame(now){if(stop)return;env.hud({score:`${Math.round(10*pts/N)}/10`,round:`Hồi ${Math.min(k+1,N)}/${N}`,time:`${N-k} ${pot?"tên":"phát"}`});draw(now);raf=requestAnimationFrame(frame)}
@@ -495,6 +504,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 (function(){const st=document.createElement("style");st.id="kg82-css";st.textContent=`
 #ov .mg.kg82{width:100%;max-width:560px}
 .kg82cv{display:block;margin:0 auto;touch-action:none;user-select:none;-webkit-user-select:none;border-radius:var(--k-rad,8px);max-width:100%}
+#kg82,#kg82 canvas,#kg82 button{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;user-select:none}
 .kg82act{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 4px}.kg82act button{flex:1 1 200px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .kg82act button small{display:block;font-weight:400;font-family:var(--body);font-size:.72rem;opacity:.9}
 .kg82opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}.kg82opts button{min-height:48px;text-align:center;justify-content:center}
