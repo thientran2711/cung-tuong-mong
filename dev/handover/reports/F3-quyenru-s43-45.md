@@ -30,3 +30,4 @@ START_CTX ≈4 % of 1M (estimate; get_session read 0) · depth 7 (limit 8) · wo
   2. s43 NEW: a small drop earring (not in the prompt).
   3. s45 OLD (Sắc sảo, already approved) already shows a dark dot under her eye, so the beauty mark doesn't set NEW apart from OLD.
   4. s43 blue reads lighter/softer than #385A9F (the master "medium-light" sentence), close to the OLD picture.
+- NOTE: ROOT-64 sent HOLD at 02:26:59Z (owner "Khoan, phải phân loại màu theo mùa đã"). It reached F3 only at 02:30Z, after the s43/s45 gens (~02:27–02:28Z) had run on the earlier GO. Told the foreman. Now HOLDING all (s44 too) until a new GO. If the season sort changes their colours, s43/s45 can be dropped (not in FACE_CUTS).
