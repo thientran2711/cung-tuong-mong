@@ -393,7 +393,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | GAP OD06 names-unique-r2 (sonnet; re-merge names-unique-r1 dcb2ea96 + new pools; J2) | review/names-unique-r2 | B | session_01N1tNP3uzAn8LvJLqxfmtDm | RUNNING | 20/11 08:21Z |
 | GAP OR01+OR06+OR08+OR13+OR14 outside-gaps (opus; check outside-art(-r1) first; J3) | review/outside-gaps | B | session_01N1tNP4VKcnA6UqaKXZanu1 | RUNNING | 20/11 08:21Z |
 | GAP GE08+GE09+GE10+OR19 ge-npc (opus; J4) | review/ge-npc | B | session_01N1tNP2MH8QedckaarkWVc2 | RUNNING | 20/11 08:21Z |
-| GAP IT05+KP03 palace-life-gaps (opus; J5) | review/palace-life-gaps | B | session_01N1tNP2d78pGcErwtE8UsCK | RUNNING | 20/11 08:21Z |
+| GAP IT05+KP03 palace-life-gaps (opus; J5) | review/palace-life-gaps | B | session_01N1tNP2d78pGcErwtE8UsCK | SSK 3af67a8e (reports/palace-life-gaps.md) | 20/11 08:21Z |
 | GAP KP02 map-places (sonnet; check review/places + places-port-r1 first; J6) | review/map-places | B | session_01N1tNP5RC6vRXez3u71oULJ | SẴN SÀNG KIỂM 6883c4feb (reports/map-places.md) | 20/11 |
 | GAP AP04 perf-ci (sonnet; J7) | review/perf-ci | B | session_01N1tNP2QsvPWxKEJb8JqVwa | DONE (SẴN SÀNG KIỂM 56d4c0a6) | 20/11 08:21Z |
 | GAP OD05+OD01+OD02+OD03 night land chain (opus; balance-core-r3 → night-final-r3 + giữ chân + môn ưa) | review/balance-core-r3, review/night-final-r3; briefs/D9-gap-jobs.md JOB 1 | D #9 for ROOT-76 | session_01964izFUQc1YiGuMjw5qYC7 | RUNNING | 20/11 08:24Z |
