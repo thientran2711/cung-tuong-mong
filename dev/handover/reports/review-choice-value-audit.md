@@ -229,3 +229,42 @@ Base 02e151e3 (coopBribe reviewer fix). Merges: LIVE 70bea3d3 → 65099734 · 90
 | role-parity.test | b63da13b vs plain LIVE 90d57324 | **2 FAIL on both, identical** (7 gaps: P-ONLY cx3:tell; N-ONLY + PROMO harm:accuse / banphe / uyhiep) → LIVE's, not this branch |
 | quickcheck --runs 6 | 777576f9, b63da13b, ed583173 | PASS · old save ok · core gates PASS |
 | coop-e2e | 777576f9, b63da13b | 68/68, 0 page errors |
+
+## RE-GATE (BIG, opus, reviewer session_01964izE9Hd8tHXKPw8ZCAif, for Foreman D #9 → D #10) — reviewed review/choice-value-audit @ed5831735676a394fef0b9c3fbe09d10a6603e00
+PRIORITY #1 CHECK ('choice-value'): owner laws 2+3 (START_CORE 18 LAWS) + ORDER ROOT-52 15:56Z choice-value-audit | main npc-purpose (LIVE) | review/choice-value-audit ed583173 | claims choice-value-audit LAND READY 02e151e3 (stale) → re-gate.
+START_CTX ≈ 5 % of 1M (estimate) · finished ≈ 15 %. Base = LIVE fd682a8d (origin/main when I started; it has since moved to 8cf6b7d7 — not re-merged, verdict is FAIL anyway). Laws checked: 2, 3, 4, 7, 11, 12.
+
+### VERDICT: FAIL 1 @ed583173 (reviewer fix pushed: review/choice-value-audit-rv9 0c7e21b6919a037699b9e26af01ab9c1cf9bfb21)
+(`review/choice-value-audit-rv` on origin is an old re-check #2 WIP ca3d43a3 — left untouched; my fix branch is **-rv9**.)
+
+#### FAIL list (for the worker)
+1. **LAW 3 + LAW 11 — gate red: choice-value-scan seed 11 = COST-ONLY 1** (`turn53 | Trúng độc | Nằm nghỉ chờ khỏi | tốn: còn 4 tuần | được: —`). Card `dev/build/jface.js:139` PEND.pzcard «Nằm nghỉ chờ khỏi»: its only green word is «không tốn gì», which the scan rightly reads as *no cost*, not a gain (scan line 97), and its red line «còn N tuần» is the cost → cost-only. Not new code (byte-identical on fd682a8d and 02e151e3); LIVE's path change reaches it now. Seeds 7 / 23 / 31 PASS.
+   Fix proposal (same pattern as the accepted «giữ lại N lượng» = sibling price): Được `G70(\`giữ lại ${FXF.docMed} lượng bạc, không hao sức\`)` (siblings cost bạc −FXF.docMed / Sức −3).
+   **Whole group (law 11)** — same «không tốn gì» as the ONLY gain beside a red line, check each and give a real word gain or confirm it is a menu cancel the scan never reads as a choice:
+   - `j70.js:542` «Để tự lành» (scar; «còn N tuần, sẽ để lại sẹo») — same shape as jface, needs a gain;
+   - `j70.js:433 / 439 / 443` «Thôi», `:455` «Để sau» (servant-order menus) — likely cancel rows; decide;
+   - `wx:"không tốn gì"` roads with an `lx` loss: `j67.js:266`, `jrd_muoi.js:636 / 795`, `jrd_nc.js:54 / 185 / 245 / 487`, `jrd_tt.js:153 / 215 / 269` — check how the kit shows wx/lx (if «không tốn gì» lands under Được alone it is the same fault).
+   Then re-run seeds 7 / 11 / 23 / 31 (+ --plant), one-core ×4, odds-cap.
+
+#### Merge check (the main focus) — PASS
+- My own diff: every `+` line of the branch side (02e151e3 vs 2bda29a1) and of LIVE (fd682a8d vs 2bda29a1) in dev/build, dev/tools, dev/test, grep'd verbatim in ed583173 → 7 branch lines / 8 LIVE lines not verbatim = exactly the hand-merged j24 ×4 (borrow, svAsk, manPoem, loans), j25 facAsk, j7 spy + ghost, j2 lesson. Read each: LIVE structure kept (AP_MK kinds, npcWhy facAsk/repay, rvY reasons), every branch value back (BAL.cv.servAsk, BAL.cv.glance.warm/cold, BAL.cv.facAsk = 20 = LIVE's typed roll, BAL.cv.spy, BAL.cv.ghost.watch, the «thành:» gains). LIVE's typed `20` in repay → BAL.eff.j24.bacApproaches (= 20, same behaviour).
+- **Dead keys (law 4) → removed (reviewer fix 0c7e21b6):** BAL.cv.glance.chance (no reader: LIVE fires «Một ánh mắt» by npcWhy manPoem) and the jbal.js `if(!BAL.rk)BAL.rk={loanBack:40};` guard + its LANDER comment (no reader of BAL.rk anywhere on the branch). balance-final defines its own BAL.rk, so the LANDER note «delete the guard» is now void.
+- j24 borrow card: «Cho mượn» TỐN Bạc −20 · ĐƯỢC được lòng người, có thêm bạc (repay); «Từ chối» TỐN mất lòng người · ĐƯỢC giữ lại bạc — both gain + loss, law 2 ok. Card text «trả lại N lượng khi có bạc» matches npwReg("repay") (v.bac ≥ BAL.ag.why.ap.repay and liking ≥ 0) — accurate.
+- j7 «Mách Hoàng hậu» (BAL.cv.quarrel): TỐN Đức −1 «mang tiếng ác» · ĐƯỢC «<a> và <b> bị răn, ân sủng mỗi người sút 5 phần» — law 3 fixed, numbers from BAL. Note (not FAIL, pre-existing LIVE lines, not rewritten): siblings «Đứng ra can ngăn» / «Đứng về phía» still type `+5 / +15 / -15` (law-4 backlog); stray «·» before the first Tốn word (known kit hint-reader nit).
+- j2 lesson `const pay={suc:-10,bac:-cost}` hoist: same behaviour, one copy (the typed −10 is LIVE's; backlog).
+
+#### Gates (built 0c7e21b6 = ed583173 + dead-key fix; one at a time unless noted)
+| gate | result |
+|---|---|
+| one-core-guard / -text / -bind / -text-rule | PASS ×4 |
+| odds-cap | PASS |
+| choice-value-scan 100 turns seeds 7 / 11 / 23 / 31 (parallel) | 7 PASS 271 · **11 FAIL 264 · COST-ONLY 1** (FAIL 1) · 23 PASS 285 · 31 PASS 267 · HINT-NO-GAIN 0 · DOMINATED 0 · 0 page errors |
+| --plant | PLANT OK 3/3 |
+| ptime / ptime2 / receiver-choice.test | ALL OK / ALL OK / ALL PASS |
+| role-parity.test | branch 2 FAIL · **plain origin/main fd682a8d 2 FAIL, FAIL lines byte-identical** (cx3:tell P-ONLY; harm:accuse/banphe/uyhiep N-ONLY + promo) → LIVE's, confirmed |
+| quickcheck --runs 6 (HEAD vs live) | PASS · old save ok · core gates PASS · render 205/179 ms, tab 438/358, buổi 1130/973 |
+| coop-e2e vs live Worker | 68/68 |
+| Fold 755x1000@2 + iPad 1180x820@2, looked at | borrow card both devices; «Mách Hoàng hậu» iPad (Fold shot of it: worker's, my staging hit the Nhập cung card) — every road Tốn + Được, no overflow, 0 page errors. Scratch only, nothing uploaded |
+
+#### Next round (short)
+Worker: base on **review/choice-value-audit-rv9 0c7e21b6**, fix FAIL 1 (whole group), final-merge current origin/main (8cf6b7d7 or newer), re-run the gate table above.
