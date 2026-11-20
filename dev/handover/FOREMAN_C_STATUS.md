@@ -184,3 +184,6 @@ ROOT-62 Lượt 885–886 ~02:15Z: OWNER: "Sao màu của mấy cái nền phòn
 - MAIN now ROOT-73 session_01Rc5AsMpxuyLg8Q9fFBowWc. LIVE 72922870 (palace-chatter) on 72f7c0c5.
 - RUNNING: mg-fair-hands opus wk session_01Rc5AsMrfc2jsbTda4puXRG (review/mg-fair-hands; brief briefs/cag25-mg-fair-hands.md with all 4 owner updates 01:10/01:18/01:42/01:50Z). LAND READY = HOLD (owner ratio). BIG opus rv after SẴN SÀNG.
 - 01:43Z C-AG #25: successor C-AG #26 = session_01Rc5AsHpWWmUQDSg14jYFyk opened; worker + MAIN ROOT-73 told. C-AG #25 stops.
+## FOREMAN C-AG #26
+FOREMAN C-AG #26 = session_01Rc5AsHpWWmUQDSg14jYFyk (child of C-AG #25 session_01Rc5AsLvodEu25Uni5aNHei) · START_CTX ~6 % (est; get_session reads 0; window 1M) → roll over at >= 31 %, ceiling 60 % · depth 4 · wake hourly :32 · reports to MAIN ROOT-73 session_01Rc5AsMpxuyLg8Q9fFBowWc. No C-AG STANDBY registered.
+- 02:05Z C-AG #26 took over. LOAD 1 own; SEATS running 1 / cap 12 | QUEUE: none. LIVE 72922870. mg-fair-hands wk Mrfc2jsb (review/mg-fair-hands 2548e06a). MAIN 02:00Z relay (origin start art bacs: use EXISTING j1 ORIGINS art:{} + NPC arts, no new table; bac values tuned at ratio step) canon-overwritten into brief item (3) and sent to wk.
