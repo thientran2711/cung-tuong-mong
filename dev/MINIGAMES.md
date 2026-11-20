@@ -62,7 +62,7 @@ Every number below is in `BAL.mgTier.lev[kind]` = [value at ease 0, value at eas
 | Cờ `co` | `lim` (time per position), `fast` (a capture within it earns full 2, slower down to 60 %), `extra` (more stones = more groups to read) | hard boards are busier and reward a quick read |
 | Múa `mua` | `beat` (each step must be tapped within the beat), `sp` (show speed), `retry` (wrong steps forgiven per round on easy boards) | Khó: keep the beat; Dễ: one slip forgiven |
 | Làm phúc `td_hanh` | `lim` (round time, auto «Phát xong»), `short` (portions short in rounds 1–2) | short rounds need thought under time |
-| Đầu hồ `dauho` | `aid` (seconds of flight shown by the aim dots), `mouth` (pot mouth size) | longer aim dots = finer throws |
+| Đầu hồ `dauho` | `aid` (seconds of flight shown by the aim dots), `mouth` (pot mouth size), `pull` (drag gain; the drag cap grows by 1/pull so the strongest throw is unchanged) | longer aim dots = finer throws; cal-p2 owner-bug fix 20/11: aid [.6,2], mouth [1.3,2.1], pull [.8,.6] (was aid [.14,.45], mouth [.8,1.3], no pull: the dots stopped long before the pot, her first try 1.1/10) |
 | Đi đứng `td_dung` | `band` (safe band), `kick` (step sway) | bigger sway, narrower band at low ease |
 | Ngôn `td_ngon` | `band`, `win` (reply window ms), `rate` (voice rise per s), `fade` | see below |
 
