@@ -636,3 +636,4 @@ NEWACCT#3 ~18:30Z: DESIGN1 5 ladder prompts 2be4223a (MINH t5/t6/t7, HAN t6/t7) 
 NEWACCT#3 HANDOVER ~18:40Z: depth 2, ctx 29 % (START 4 % + 25 %). Last owner order (layered neckline JOB A t1–t3 fix + JOB B spring t4–t7) → DESIGN1. TAKEOVER_FOREMAN_C_NEWACCT4.md written; opening child #4. Next Lượt 1251.
 NEWACCT#3 ~18:45Z: child #4 opened session_01D3E3NZPt7cysxtbybnExBK. #3 stops.
 NEWACCT#4 ~16:59Z: depth 3, START_CTX ~4 % (used_tokens read 0; estimate) → roll at 29 %. Took over from #3; workers DESIGN1 ITEMFIX2 WINTER1 TANG1 MAID8 told to report to #4.
+NEWACCT#4 ~17:00Z: OWNER Lượt 1252: "Chưa chốt kế hoạch 4 mùa được đâu." → season plan (Lượt 1248) NOT confirmed, stays open; do not apply it anywhere (no fur→Minh move, no builder change).
