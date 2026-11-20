@@ -1,6 +1,6 @@
 /* ================= jcraft_hoa: CẮM HOA «Chọn mùa · cắt cành · nghiêng thế» (mg-craft-hoa; design dev/design/MG_CRAFTS.md §3; owner OD 20/11 ~08:15Z:
    each craft its own mechanic, no tracing) =================
-   Kind key `hoa` (kG / kAdj / cal key unchanged), engine `hoacraft`: eng(box, env{kind,lv,hud,end(raw 0..10)}) → stop, KG82.peek oracle.
+   Kind key `hoa` (kG / kAdj / cal key unchanged), engine `ikebana`: eng(box, env{kind,lv,hud,end(raw 0..10)}) → stop, KG82.peek oracle.
    Three vases (stems BAL.mgTier.hoa.n + mgMore). Per vase:
      1 CHỌN  tap the season's main flower in a tray of 6 (the window shows the season; an off-season look-alike wilts, season share falls)
      2 CẮT   one stem at a time lies on the cloth; SWIPE across it to cut: Thiên ≈ 1.5 × vase height, Nhân ≈ ¾ Thiên, Địa ≈ ¾ Nhân (the vase is the ruler)
@@ -124,7 +124,5 @@ function kcHoa(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;C.cv.dataset.
   const a=C.client(HX+s.L*.5,TY),b=C.client(MX,MY+hv*.02);return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2-hv*.3],[b.x,b.y]]}};
  next();return()=>{done=true;stop()}}
 
-/* wiring: kind `hoa` plays the new board; the rules picture reuses the "drag" demo until the kit's "cut" motion exists (KIT_REQUESTS.md, mg-craft-hoa) */
-KG82_ENG.hoacraft=kcHoa;KG82_DEMO.hoacraft="drag";/* tạm: → "cut" when the kit part lands */
-Object.assign(KG82_KIND.hoa,{e:"hoacraft",t:"Chọn mùa · cắt cành · nghiêng thế",
- how:"Chạm đúng loài hoa của mùa trong cửa sổ (đông mai, hạ sen, thu cúc, xuân đào); hoa trái mùa sẽ héo. Vuốt ngang cành nằm trên khăn để cắt cho dài đúng so với bình: Thiên cao nhất, Nhân kém ba phần tư, Địa lại kém ba phần tư nữa. Kéo cành đã cắt vào miệng bình, rồi kéo ngọn cho nghiêng đúng thế. 3 bình."});
+/* wiring: the ONE table KG82_CRAFT (j91 re-wire block) names this engine + its rules text; the rules picture uses the "drag" demo until the kit's "cut" motion exists (KIT_REQUESTS.md, mg-craft-hoa; tạm → "cut" in KG82_CRAFT.hoa.demo) */
+crReg("hoa","ikebana",kcHoa);

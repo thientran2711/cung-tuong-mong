@@ -340,6 +340,6 @@ const KG82_CRAFT={
  ve:{e:"inkwash",t:"Thủy mặc",demo:"drag",mgl:"Họa: thủy mặc",
   how:"Bức mẫu của thầy ghim ở góc. Kéo núi, nước, thuyền, tùng đặt lên cuộn lụa đúng chỗ như mẫu: càng cao càng xa, càng nhỏ và nhạt. Rồi giữ bút trên nghiên cho mực đậm dần, buông đúng sắc mực của lớp đang sáng và quệt lên lớp ấy. Mực lan vào chỗ trống thì thành vết. 3 bức."},
  hoa:{e:"ikebana",t:"Chọn mùa · cắt cành · nghiêng thế",demo:"drag",
-  how:"Ngoài song là mùa nào thì chọn hoa của mùa ấy. Vuốt ngang cành để cắt: Thiên dài chừng rưỡi thân bình, Nhân ba phần tư Thiên, Địa ba phần tư Nhân. Kéo cành vào miệng bình rồi xoay cho nghiêng: Thiên gần đứng, Nhân nghiêng vừa, Địa nghiêng nhiều. 3 bình."}};
+  how:"Chạm đúng loài hoa của mùa trong cửa sổ (đông mai, hạ sen, thu cúc, xuân đào); hoa trái mùa sẽ héo. Vuốt ngang cành nằm trên khăn để cắt cho dài đúng so với bình: Thiên cao nhất, Nhân kém ba phần tư, Địa lại kém ba phần tư nữa. Kéo cành đã cắt vào miệng bình, rồi kéo ngọn cho nghiêng đúng thế. 3 bình."}};
 /* jreg: engines is read when asked, so engines of later modules (jnwp, jwkg…) are listed */
 window.K91={get engines(){return Object.keys(KG82_ENG)},kinds:()=>Object.fromEntries(Object.entries(KG82_KIND).map(([k,v])=>[k,v.e]))};

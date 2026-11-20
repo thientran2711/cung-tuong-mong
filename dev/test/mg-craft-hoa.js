@@ -1,6 +1,6 @@
 /* mg-craft-hoa — node dev/test/mg-craft-hoa.js [dev/index.html] [WxH] [shotsDir]
    Cắm hoa «Chọn mùa · cắt cành · nghiêng thế» (jcraft_hoa.js, MG_CRAFTS §3):
-   1 kind hoa runs the new engine (hoacraft) from playArt; the rules screen shows (.kgr), «Sẵn sàng» starts it
+   1 kind hoa runs the new engine (ikebana) from playArt; the rules screen shows (.kgr), «Sẵn sàng» starts it
    2 no text node in the play area (canvas only + the ✓ sign button); no page errors
    3 the oracle (KG82.peek) plays a whole round: raw 0–10, ≥ 9 at ease 5 (law 5: the same play scores lower at ease 0 through pace / tolerances: printed)
    4 a wrong flower wilts (season share falls); a swipe cuts, the stem seats and leans; ✓ judges; ✕ closes the board
@@ -27,7 +27,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 1 the rules screen from the contest caller (the plain art key "hoa" is Vẽ in playArt), then «Hướng dẫn» (ghost hand), then «Sẵn sàng» */
  await p.evaluate(()=>{try{kg82Close()}catch(e){}startContest({art:'hoa',title:'Hội thi',onDone:()=>{}})});await p.waitForTimeout(1200);
  const r1=await p.evaluate(()=>{const b=kg82Box();return{rules:!!b.querySelector('.kgr .kpst'),go:(b.querySelector('.kgr-go')||{}).textContent,demo:!!b.querySelector('.kgr-demo'),eng:KG82_KIND.hoa.e,tut:!!b.querySelector('#kgrtut'),run:!!KG82.run,cv:!!b.querySelector('canvas'),luat:(b.querySelector('.kgr')||{}).textContent}});
- ok(r1.rules&&r1.demo&&/Sẵn sàng/.test(r1.go||'')&&r1.eng==='hoacraft'&&r1.tut&&!r1.cv&&!/%/.test(r1.luat),'rules screen first (contest caller), engine hoacraft, hướng dẫn button, no %',{eng:r1.eng,go:r1.go});
+ ok(r1.rules&&r1.demo&&/Sẵn sàng/.test(r1.go||'')&&r1.eng==='ikebana'&&r1.tut&&!r1.cv&&!/%/.test(r1.luat),'rules screen first (contest caller), engine ikebana, hướng dẫn button, no %',{eng:r1.eng,go:r1.go});
  if(SH)await p.screenshot({path:SH+'/hoa-rules-'+VW+'.png'});
  await p.evaluate(()=>document.getElementById('kgrtut').click());await p.waitForTimeout(2500);
  const r2=await p.evaluate(()=>({hand:!!document.querySelector('.kgt-hand.on'),tut:!!KG82.tut,cv:!!kg82Box().querySelector('canvas')}));
