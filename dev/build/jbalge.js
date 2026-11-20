@@ -59,9 +59,9 @@ BAL.ge={
  td_song_1:{danh:40,sung:45},td_song_2:{tamco:50,mat:4},td_song_3:{duc:35,maid:45},td_song_4:{duc:45,th:30},
  td_tha_1:{duc:45,sung:40},td_tha_2:{tamco:45,mat:3},td_tha_3:{duc:40,th:30},td_tha_4:{danh:30,duc:40},
  /* Ba Tư wave (brief E28, jgedata_bd.js): bd_san bd_soi bd_tuyet bd_hen (same scales and sizes as the pilots) */
- bd_san_1:{tai:50,danh:35},bd_san_2:{sung:50,duc:35},bd_san_3:{tamco:45,mat:3},bd_san_4:{duc:35,suc:40},
- bd_soi_1:{tamco:45,danh:45},bd_soi_2:{sung:45,duc:40},bd_soi_3:{mat:4,tamco:45},bd_soi_4:{sung:45},
- bd_tuyet_1:{duc:45,danh:35},bd_tuyet_2:{tamco:40,danh:40},bd_tuyet_3:{mat:3,tamco:45},bd_tuyet_4:{tai:55},
+ bd_san_1:{tai:50,danh:35},bd_san_2:{sung:50,duc:35},bd_san_3:{tamco:45,mat:2},bd_san_4:{duc:35,suc:40},
+ bd_soi_1:{tamco:45,danh:45},bd_soi_2:{sung:45,duc:40},bd_soi_3:{mat:2,tamco:45},bd_soi_4:{sung:45},
+ bd_tuyet_1:{duc:45,danh:35},bd_tuyet_2:{tamco:40,danh:40},bd_tuyet_3:{mat:2,tamco:45},bd_tuyet_4:{tai:55},
  bd_hen_1:{duc:40},bd_hen_2:{sung:55,tamco:40},bd_hen_3:{duc:40,danh:35},bd_hen_4:{tamco:45}},
  /* fail-outcome losses (her pair pointed at the ending and missed; none in the quiet form unless quietLoss) */
  fail:{
