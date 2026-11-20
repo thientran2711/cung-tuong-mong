@@ -48,3 +48,4 @@ Rule G15 (owner Lượt 559) = option B v2, commit **fe9c7daa** (BW3 job 2). Cur
 - m07 / m13: 0 gens.
 - TOTAL OLD4 spend: 1 644 cr. Balance read 77 457 (account shared with other workers).
 - STATUS: idle, waiting for ROOT-69.
+- **m29 t7 redraw** (owner via ROOT-69: eyes looked crossed): builder t7 is the same as what was drawn, plus one owner sentence "EYES (owner): both eyes level…", check_store PASS; gen If36aN1tvE, 135 cr. Sheet `dev/art/rank8-old4/m29_t7_OLD_NEW.jpg`. Looked: eyes level, both looking straight at the viewer, same face. OLD4 total: 1 779 cr.
