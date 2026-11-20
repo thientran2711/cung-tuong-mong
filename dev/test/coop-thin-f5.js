@@ -135,7 +135,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const AK=await pick(`const a=ARTS.find(x=>WDEF[x.k]&&wkKindsOf(x.k).length&&x.k!=='y');return a?a.k:null`);
  const lst=`S.arts[${JSON.stringify(AK)}]=1;S.artp[${JSON.stringify(AK)}]=0;S.suc=80;S.bac=Math.max(S.bac,3000);S.mg=null;S.master=0;`;
  const lpre=mode=>`lessonMode(${JSON.stringify(AK)},'${mode}');if(!Q.length)return 'no picker';const t=document.querySelector('#modal [data-kwrgo]:not([disabled])');if(t){t.click();if(!Q.length)return 'no material card'}chooseM(0);if(!document.getElementById('kg82go'))return 'no game: '+JSON.stringify({mg:S.mg,Q:Q.map(q=>q.t),wp:typeof wkPend!=='undefined'?wkPend:'-'});${KGO}`;
- const ltw=(raw,sk)=>`const m=S.mg;aaPayMG({title:'t',skip:${sk?1:0},ok:${raw>=5},raw:${sk?'null':raw}});wkLessonEnd(${JSON.stringify(AK)},m,${raw},{skipped:${!!sk}})`;
+ /* main mg-back r3 (KIT §13.9 kgDefer): a lesson's charge is only remembered until «Sẵn sàng» / the quick option (kgPay): the solo twin of a
+    quick end takes it as solo's quick option does (on the copy, numbers only: the real pending objects are never touched) */
+ const KGTW="{const pp=(typeof KG82!=='undefined'&&KG82.payOnGo)||null;if(pp&&typeof pp==='object'){if(pp.suc)S.suc+=pp.suc;if(pp.bac)S.bac+=pp.bac;if(pp.th)S.th+=pp.th;if(pp.khac)spend(pp.khac)}}";
+ const ltw=(raw,sk)=>KGTW+`const m=S.mg;aaPayMG({title:'t',skip:${sk?1:0},ok:${raw>=5},raw:${sk?'null':raw}});wkLessonEnd(${JSON.stringify(AK)},m,${raw},{skipped:${!!sk}})`;
  const lchk=x=>x.aaPaid===1&&x.aaCard===1&&x.aaN===1&&x.g1.mg===null&&x.g1.suc-x.g0.suc===-15&&x.g1.used-x.g0.used===2;
  await act('L1 Tự học, max play (raw 10): cost once, the work made, same as solo',KOK,{stage:lst,pre:lpre('self'),raw:10,wait:900,twin:ltw(10),chk:x=>lchk(x)&&x.g1.nwk===x.g0.nwk+1,shot:'lesson'});
  await act('L2 Tự học, zero play (raw 0): same as solo',KOK,{stage:lst,pre:lpre('self'),raw:0,wait:900,twin:ltw(0),chk:lchk});
@@ -144,7 +147,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await act('L5 Học với thầy (the teacher picker, then the work picker): cost once, same as solo',KOK,{stage:lst,pre:`lessonMode(${JSON.stringify(AK)},'teacher');if(!Q.length)return 'no teacher card';chooseM(0);if(!Q.length)return 'no picker';const t=document.querySelector('#modal [data-kwrgo]:not([disabled])');if(t){t.click();if(!Q.length)return 'no material card'}chooseM(0);if(!document.getElementById('kg82go'))return 'no game';${KGO}`,raw:8,wait:900,hr:0.99,twin:ltw(8),chk:x=>x.aaPaid===1&&x.aaN===1&&x.g1.mg===null&&x.g1.bac<x.g0.bac});
  /* ---- W / M: bậc 5 practice (Tự học, làm tác phẩm) and Học lối mới với thầy ---- */
  const wst=`S.arts[${JSON.stringify(AK)}]=5;S.suc=80;S.bac=Math.max(S.bac,3000);S.mg=null;`;
- const ptw=(raw,sk)=>`const m=S.mg;aaPayMG({title:'t',skip:${sk?1:0},ok:${raw>=5},raw:${sk?'null':raw}});wkLessonEnd(${JSON.stringify(AK)},m,${raw},{skipped:${!!sk}})`;
+ const ptw=(raw,sk)=>KGTW+`const m=S.mg;aaPayMG({title:'t',skip:${sk?1:0},ok:${raw>=5},raw:${sk?'null':raw}});wkLessonEnd(${JSON.stringify(AK)},m,${raw},{skipped:${!!sk}})`;
  await act('W1 Tự học, làm tác phẩm (raw 7): the work made, cost once, same as solo',KOK,{stage:wst,pre:`wkPractice(${JSON.stringify(AK)});if(!Q.length)return 'no picker';const t=document.querySelector('#modal [data-kwrgo]:not([disabled])');if(t){t.click();if(!Q.length)return 'no material card'}chooseM(0);if(!document.getElementById('kg82go'))return 'no game';${KGO}`,raw:7,wait:900,twin:ptw(7),chk:x=>x.aaPaid===1&&x.g1.nwk===x.g0.nwk+1&&x.g1.mg===null});
  await act('W2 Học nhanh at bậc 5: no work, cost once',KSK,{stage:wst,pre:`wkPractice(${JSON.stringify(AK)});const t=document.querySelector('#modal [data-kwrgo]:not([disabled])');if(t){t.click();if(!Q.length)return 'no material card'}chooseM(0)`,twin:ptw(0,1),chk:x=>x.skip===1&&x.aaPaid===1&&x.g1.nwk===x.g0.nwk&&x.g1.mg===null});
  {const ok5=await pick(`return typeof rcpNewSt==='function'&&rcpNewSt(${JSON.stringify(AK)})`);

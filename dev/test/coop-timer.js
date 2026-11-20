@@ -102,8 +102,11 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   /* A plays on: its own dialogs are cleared by the test, it does not press */
   const t0=Date.now();let aEnd=false;while(Date.now()-t0<30000){await clear(A);if(await A.p.evaluate(()=>COOPW.pend||COOPW.sent===(COOP.state.week||0))){aEnd=true;break}await sleep(400)}
   ok(aEnd,'4: time out → A (AFK at tối) ends its day');
-  ok(await until(B,()=>Q.length===1&&Q[0].t==='Việc thử',null,15000),'4: B: the info dialog was read for her, the choice is still open',await K(B));
-  await sleep(2500);const b1=await B.p.evaluate(()=>({q:Q.length,t:Q[0]&&Q[0].t,pick:__pick,pend:COOPW.pend,week:COOP.state.week}));
+  /* coop-thin G (level 13): the host's go runs her week end on the host at once (her open dialogs that block it are HER STORE's cards, thq:
+     a dialog pushed only on her phone, as this test does, is unknown to the host), so her week-end cards join her Q: only the test's two dialogs are judged */
+  const G13=(+process.env.THIN||0)>=13;
+  ok(await until(B,g=>{const L=Q.filter(m=>m&&(m.t==='Tin thử'||m.t==='Việc thử'));return g?L.length===1&&L[0].t==='Việc thử':Q.length===1&&Q[0].t==='Việc thử'},G13,15000),'4: B: the info dialog was read for her, the choice is still open',[await K(B),await B.p.evaluate(()=>Q.map(m=>m&&m.t))]);
+  await sleep(2500);const b1=await B.p.evaluate(g=>{const L=g?Q.filter(m=>m&&(m.t==='Tin thử'||m.t==='Việc thử')):Q;return {q:L.length,t:L[0]&&L[0].t,pick:__pick,pend:COOPW.pend,week:COOP.state.week}},G13);
   ok(b1.q===1&&b1.t==='Việc thử'&&b1.pick===0&&!b1.pend&&b1.week===w0,'4: no choice made for her, her day waits',b1);
   await B.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(x=>/Nhận lời/.test(x.textContent));b.click()});
   const t1=Date.now();let merged=false;while(Date.now()-t1<45000){await clear(A);await clear(B);if(await A.p.evaluate(w=>COOP.state.week>w,w0)&&await B.p.evaluate(w=>COOP.state.week>w,w0)){merged=true;break}await sleep(400)}
