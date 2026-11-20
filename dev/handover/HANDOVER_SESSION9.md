@@ -1495,3 +1495,22 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - (20/11 11:21Z) SELF-MERGE LAND mg-noword-b 8cf6b7d7 (= LAND READY 0e1f272b + LIVE f43efc71; index/sw only; mg-noword-b ALL OK, noword-kit PASS; golive PASS 190 s; FF). Closes MG03 group b + MG04 td_dung guided. CDN wiped. Archived rv Moh1gadi.
 - (20/11 11:31Z) SELF-MERGE LAND kit-mark 0aaf8152 (= PASS 34969fb6 + LIVE 8cf6b7d7; index/sw only; KIT-MARK PASS, noword-b ok; golive PASS 183 s; FF). LIVE 0aaf8152, ROLLBACK 8cf6b7d7. Closes MG01/MG08 chip.
 - (20/11 11:32Z) mg-ui-rest LAND READY 86a81259 → REAL conflict j79 kitGameFrame (g.seal vs kgmk span) → rv M53iAEvG final-merge 0aaf8152. D lander: invite-host-away-rv bd1c39c6, LAND READY line pending.
+
+## ROOT-77 → NEXT MAIN HANDOVER (20/11 11:35Z) (ROOT-77 ctx ~31 % real-ish of 1M; get_session read 26.8 % at 10:59Z; START was ~9 %)
+- LIVE main = 0aaf8152 (kit-mark) ← 8cf6b7d7 (mg-noword-b) ← f43efc71 (cal-p2b) ← 90b7e797 (kit-ge) ← 315950c2 (tooling) ← dbddaed2 (mg-noword-kit) ← fd682a8d (mg-back) ← 66bd36cd. ROLLBACK 8cf6b7d7.
+- LANDING RECIPE: same as ROOT-76 block (worktree /home/user/wt/live; golive.sh FOREGROUND timeout 590; FF under flock checking parent). SMALL self-merge: index/sw/KIT.md-doc conflicts OK (union docs, --theirs index/sw, assemble + build_site, branch tests, golive, FF); REAL code conflict → back to reviewer. Handover push helper: scratch hpush.sh (union-resolve rebase) — recreate: fetch, rebase, on conflict strip markers (keep both), continue, push. NOTE: never `git pull` in the detached ho worktree (hangs).
+- LAND QUEUE (in order):
+  1. D invite-host-away (BIG, owner bug): D RE-GATE LANDER EaTxKjoN re-merging (bd1c39c6) → LAND READY line in FOREMAN_D_STATUS → golive + FF. (D cannot send_message to main; read STATUS.)
+  2. mg-ui-rest (SMALL): rv M53iAEvG final-merging 0aaf8152 (j79 kitGameFrame: keep g.seal + kgmk) → LAND READY → land. Then archive rv + wk HdrZN7mz.
+  3. E ge-writers-w3 (BIG): b2b7373c on 315950c2 → after #1, write in FOREMAN_E_STATUS "your turn, LIVE <sha>" → E re-merges → land.
+  4. D day-khac-audit (BIG) d889d505 → D lander re-merges after #3.
+  5. ge-map (SMALL): rv MyyPVJTY reviewing 8e2efbea (wk NQDQXeYG) → land → wipe CDN img/_review/ge-map.
+  6. kit-modal-spin (SMALL kit): rv LfxAK1Hq reviewing 5a3cc86a → land → wipe CDN.
+  7. kit-signs-odds (SMALL kit, URGENT regression: mg-skip FAIL, kg82Signs turns makeup quick-button odds word into «●», live since dbddaed2): keeper MtjP4KTg doing it next → open SMALL rv (brief template briefs/rv-root77-kit-modal-spin.md) → land FIRST among smalls.
+- KEEPER queue after that: G2 kit-item-big (IT01 frameless big kitItem + kitItemBigSrc + call sites), G3 kit-podium-gate (OR09 + KP07 kitEntryGate), KP12–22 rows, KP20. kit-bgtone 9f636249 waits owner A/B.
+- ORDERS out: B = IT03 wear slots (Hoa tai + Giày, opus, BIG). D = GO jagday follow-up after walk-cost.
+- WAITS ON OWNER (MORNING REPORT when she writes): (a) kit-bgtone palette A «Ngọc sương» / B «Đào phấn» (sheets https://ctm-img.victoria-tntt.workers.dev/img/_review/kit-bgtone/sheet-{fold,ipad}-{home,act,haucung,soghi,tainghe,rules}.jpg); (b) skill-gap share knob (rec 20–30 %); (c) re-test list: Đầu hồ, Hoa điền, Hoa đăng, Chải chuốt, Đặt hoa (td_dung), score chip, Điều hương/Múa/Nấu bánh (her cal.k there was dropped → re-test counts), 9 pace kinds; (d) known: mg-ready-guide.js hangs on LIVE (pre-existing).
+- LANDED BY ROOT-77 (morning report list): mg-back fd682a8d (free ✕ before «Sẵn sàng»), mg-noword-kit dbddaed2 (no words on boards), tooling 315950c2, kit-ge 90b7e797 (branch map part, two-tone plate), cal-p2b f43efc71 (hương/múa/bánh grading, 9 pace windows), mg-noword-b 8cf6b7d7 (group b + Đặt hoa guide), kit-mark 0aaf8152 (number chip + amber clock).
+- SESSIONS main owns: keeper MtjP4KTg, rv mg-ui-rest M53iAEvG, wk mg-ui-rest HdrZN7mz, wk ge-map NQDQXeYG, rv ge-map MyyPVJTY, rv kit-modal-spin LfxAK1Hq. Archived this session: rv/wk mg-back, rv/wk noword-kit, wk mg-allkinds, rv kit-ge, rv kit-mark, rv/wk cal-p2b, rv noword-b. NEVER archive Đại Hy sessions.
+- WAKE: ROOT-77 trig_0123heVgypzBZz7iBk5VKdv8 (minute 32) → next main creates its own and disables this one. Brief common: briefs/root77-common.md (copy to root78-common.md with new id + LIVE).
+- STANDBY: MAIN ROOT STANDBY session_01Rc5AsNA483VGFgtAtqERSa (TAKE OVER NOW only if create_session refused).
