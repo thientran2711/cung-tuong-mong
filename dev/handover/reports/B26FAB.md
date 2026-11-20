@@ -96,3 +96,4 @@ s62 (n=62 -> column 2) table:
   t7 Hoàng quý phi: hair = none (t7/t8) | embroidery = incurved chrysanthemums (cúc đại đóa) | 9158 chars | 1 allow
   t8 Hoàng hậu: hair = none (t7/t8) | embroidery = incurved chrysanthemums (cúc đại đóa) | 9150 chars | 1 allow
 - Rolling over: near my context line. Remaining = nothing for this job; the open decisions are the 177 over-10 000 cells (t5 cape length, t8 a36 đông 2).
+- HANDOVER item (C #6 18:57Z: "cut only master-duplicate store clauses" for the t5 a51/a65 cells): already exhausted. All 175 still-over t5 cells have ANGLE + all 5 DOAN_LEN_CUTS used (checked by script). Next step for a successor, if C #6 wants it: find NEW store clauses that repeat a master sentence word for word, add them to master_common.DOAN_LEN_CUTS (prefix order) + the check_store exception, then re-proof (proof/dump.py + cmp5.py). Need ≈ 500 chars (max overshoot +486, t5 a65 đông). Cape wording: never cut.
