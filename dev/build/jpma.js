@@ -261,16 +261,22 @@ function pmLadMonth(){const T=B().lad.top,out=[];for(const k of B().lad.arts){co
  return out.length?`Bảng tài nghệ hậu cung — ${out.join(" · ")}.`:""}
 if(typeof monthPay==="function"){const m0=monthPay;monthPay=function(){let r=m0.apply(this,arguments);try{if(S&&!S.dead&&S.pmL){const t=pmLadMonth();if(t){log(t);}}}catch(e){console.error(e)}return r};window.monthPay=monthPay}
 /* ---------- C1 split board data ---------- */
-function pmVsGo(rows,o,kind){const vs={me:0,f:0,t0:0,kind,opp:(rows||[]).map(r=>({who:r.p||o,raw:r.raw!=null?r.raw:5,shown:0}))};KG82.vs=vs;let sig="";
+function pmVsGo(rows,o,kind){const vs={me:0,f:0,t0:0,kind,opp:(rows||[]).map(r=>({who:r.p||o,raw:r.raw!=null?r.raw:5,shown:0}))};KG82.vs=vs;
  KG82.onHud=h=>{const m=/^(\d+)\s*\/\s*10/.exec(String(h.score==null?"":h.score));if(m)vs.me=mgGrade(+m[1]*1,kind);
   const r=/(\d+)\s*\/\s*(\d+)/.exec(String(h.round==null?"":h.round));if(r&&+r[2]>0)vs.f=Math.max(vs.f,Math.min(1,(+r[1]-1)/+r[2]));
-  const tm=/(\d+)\s*giây/.exec(String(h.time==null?"":h.time));if(tm){const n=+tm[1];if(!vs.t0||n>vs.t0)vs.t0=n;vs.f=Math.max(vs.f,Math.min(1,1-n/vs.t0))}
-  for(const p of vs.opp)p.shown=Math.min(p.raw,Math.round(p.raw*vs.f));const s2=[vs.me,...vs.opp.map(p=>p.shown)].join(",");if(s2===sig)return;sig=s2;
-  if(typeof kitGameVs==="function")try{kitGameVs(vs)}catch(e){console.error(e)}}}
+  const tm=/(\d+)\s*giây/.exec(String(h.time==null?"":h.time));if(tm){const n=+tm[1];if(!vs.t0||n>vs.t0)vs.t0=n;vs.left=n;vs.f=Math.max(vs.f,Math.min(1,1-n/vs.t0))}
+  for(const p of vs.opp)p.shown=Math.min(p.raw,Math.round(p.raw*vs.f));pmVsShow(vs,o,h)}}
+/* the LOOK = the kit plate K-PM-1 kitGameVs (KIT §13.8, LIVE b3f5a05c): mounted at the top of the kg82 board box once the board is drawn (kgReady came first);
+   re-mounted if an engine redraws its box. Her line = her running «N/10» (graded as the board grades it), the rival's = the drawn raw revealed along the clock. */
+function pmVsUI(vs,o){const bx=typeof kg82Box==="function"?kg82Box():null;if(!bx||typeof kitGameVs!=="function")return null;if(vs.ui&&bx.contains(vs.ui.el))return vs.ui;
+ try{vs.ui=kitGameVs({box:bx,me:{p:S,name:"Ngươi"},opp:{p:o,name:o.name},unit:"phần",round:"",total:vs.t0||undefined})}catch(e){console.error(e);vs.ui=null}return vs.ui}
+function pmVsShow(vs,o,h){const u=pmVsUI(vs,o);if(!u)return;u.setScore("me",vs.me);u.setScore("opp",vs.opp.length?vs.opp[0].shown:0);
+ if(h&&h.round!=null)u.setRound(String(h.round));if(vs.left!=null){u.setClock("me",vs.left);u.setClock("opp",vs.left)}
+ if(vs.turn!==undefined)u.setTurn(vs.turn)}
 /* ---------- C2 the real 7×7 Cờ ---------- */
 const PM_KY={e:"gomoku",n:"Cờ",t:"Năm quân liền hàng",timed:false,how:"Bàn 7×7. Ngươi cầm quân đen đi trước, đối thủ cầm quân trắng; mỗi bên lần lượt đặt một quân vào ô trống. Ai có năm quân liền một hàng (ngang, dọc hay chéo) trước là thắng; kín bàn mà chưa ai đủ năm là hòa."};
 function pmKyNoise(o,me,R){const K=B().ky;return Math.round(cl(K.base-K.k*(pmScore(o,"co",R)-pmTal(me,"co"))-K.rankN*R,K.min,K.max))}
-function kgGomoku(b,env){const K=BAL.pm.ky,n=7,B0=Array(n*n).fill(0);let over=false,maxRun=0,lock=false,mv=0;
+function kgGomoku(b,env){const K=BAL.pm.ky,n=7,B0=Array(n*n).fill(0);let over=false,maxRun=0,oppRun=0,lock=false,mv=0;
  const A=K.ai,noise=KG82.phase==="tut"?K.tut:(KG82.kyNoise!=null?KG82.kyNoise:(5-(env.lv||0))*A.lvN+A.lvN0);KG82.kyOut=null;
  b.innerHTML=`<div class="goban">${B0.map((_,i)=>`<button data-i="${i}" aria-label="Hàng ${Math.floor(i/n)+1}, cột ${i%n+1}"></button>`).join("")}</div><p class="mgsc" id="kgkysc">Đến lượt ngươi.</p>`;
  const cells=b.querySelectorAll(".goban button"),D=[[0,1],[1,0],[1,1],[1,-1]],W=A.w,sc=b.querySelector("#kgkysc");
@@ -279,11 +285,11 @@ function kgGomoku(b,env){const K=BAL.pm.ky,n=7,B0=Array(n*n).fill(0);let over=fa
  const pick=(me,nz)=>{let best=-1,bi=-1;for(let i=0;i<B0.length;i++)if(!B0[i]){const s=val(i,me)+Math.random()*nz;if(s>best){best=s;bi=i}}return bi};
  const put=(i,p)=>{B0[i]=p;cells[i].textContent=p===1?"●":"○";cells[i].classList.add(p===1?"bk":"wh");cells[i].disabled=true;return run(i,p)};
  const fin=(out,raw,msg,ms)=>{over=true;KG82.kyOut=out;KG82.peek=()=>null;sc.textContent=msg;setTimeout(()=>env.end(raw),ms)};
- const hud=()=>env.hud({score:`${Math.min(10,maxRun*2)}/10`,round:`Nước ${mv}`,time:"không hạn"});hud();
+ const hud=()=>{env.hud({score:`${Math.min(10,maxRun*2)}/10`,round:`Nước ${mv}`,time:"không hạn"});if(KG82.onVs)try{KG82.onVs({me:Math.min(10,maxRun*2),opp:Math.min(10,oppRun*2),turn:over?null:lock?"opp":"me",round:`Nước ${mv}`})}catch(e){console.error(e)}};hud();
  KG82.peek=()=>over||lock?null:{sel:`#kg82 .goban button[data-i="${pick(1,0)}"]`};
  cells.forEach(c=>c.onclick=()=>{if(over||lock)return;const i=+c.dataset.i;if(B0[i])return;mv++;const r=put(i,1);maxRun=Math.max(maxRun,r);hud();
   if(r>=5)return fin("win",K.win,"Ngươi thắng!",A.endMs);if(B0.every(x=>x))return fin("draw",K.draw,"Hòa cờ.",A.endMs);
-  lock=true;sc.textContent="Đối thủ đang nghĩ…";setTimeout(()=>{if(over)return;lock=false;const w=put(pick(2,noise),2);
+  lock=true;sc.textContent="Đối thủ đang nghĩ…";hud();setTimeout(()=>{if(over)return;lock=false;const w=put(pick(2,noise),2);oppRun=Math.max(oppRun,w);hud();
    if(w>=5)return fin("lose",K.lose[Math.min(5,maxRun)],"Quân trắng thắng.",A.loseMs);if(B0.every(x=>x))return fin("draw",K.draw,"Hòa cờ.",A.endMs);sc.textContent="Đến lượt ngươi."},A.think)});
  try{cells[A.mid*n+A.mid].focus({preventScroll:true})}catch(e){}return()=>{over=true}}
 if(typeof KG82_ENG==="object")KG82_ENG.gomoku=kgGomoku;
@@ -293,9 +299,11 @@ function pmKyRun(a,t,x,me,o,R,place,title){const duel=x.a==="duel",st=duel?pmSta
  const out=(raw,sk)=>{if(sk){const iw=pmScore(me,"co",R,SK)>pmScore(o,"co",R);return iw?"win":"lose"}return KG82.kyOut||(raw>=K0().win?"win":"lose")};
  let res=null;
  playArt({art:"co",eng:PM_KY,title,occ:"pm",rank:R,rowsHead:"Ván cờ",rows,go:"Bắt đầu",quick:{n:"Để tài nghệ quyết định",sub:`tính như người cùng bậc (${SK}/10)`},
-  onGo:()=>{KG82.kyNoise=pmKyNoise(o,me,R);KG82.guardMs=B().ky.guard},
+  onGo:()=>{KG82.kyNoise=pmKyNoise(o,me,R);KG82.guardMs=B().ky.guard;
+   /* the kit plate K-PM-1 on the Cờ board: each side's longest run (×2 = phần of 10) and whose turn it is (duel only: «Cùng chơi» has no win / lose) */
+   if(duel){const vs={me:0,f:1,opp:[{who:o,raw:0,shown:0}],ui:null};KG82.onVs=v=>{vs.me=v.me;vs.opp[0].shown=v.opp;vs.turn=v.turn;pmVsShow(vs,o,{round:v.round})}}},
   resRows:(raw,sk)=>{const w=out(raw,sk);res={w,raw:sk?SK:raw};return[["Ván cờ",w==="win"?"Ngươi thắng":w==="draw"?"Hòa cờ":`${o.name} thắng`,"t"]]},
-  onDone:raw=>{const w=res?res.w:out(raw,false),r0=res?res.raw:raw;KG82.kyNoise=null;KG82.kyOut=null;let r;
+  onDone:raw=>{const w=res?res.w:out(raw,false),r0=res?res.raw:raw;KG82.kyNoise=null;KG82.kyOut=null;KG82.onVs=null;let r;
    if(!duel){const ro=pmRaw(o,"co",R);r=(me===a?pmPlayEnd(a,t,x,r0,ro):pmPlayEnd(a,t,x,ro,r0)).r}
    else if(w==="draw"){pmMark(a,t);r=`Hai bên hòa ván cờ; món cược ai về nấy`}
    else{const iWin=w==="win";r=pmDuelEnd(a,t,x,me===a?iWin:!iWin,place).r}
@@ -318,5 +326,5 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 try{if(window.MEM_DEEDS){Object.assign(MEM_DEEDS,{pmplay:[1,0,"cùng {o} chơi {x}"],pmwin:[-1,0,"thắng {o} một ván {x}, lấy mất món cược"],pmyield:[1,0,"nhường {o} một ván {x}"],pmsaw:[0,0,"xem {o} thắng một ván {x}"],pmlad:[-1,0,"bị {o} giành ngôi trên bảng {x}"]})}
  if(BAL.mem&&BAL.mem.w)Object.assign(BAL.mem.w,B().mem)}catch(e){}
 try{if(typeof MGT_OCCN==="object")MGT_OCCN.pm="so tài"}catch(e){}
-Object.assign(window,{pmLadHTML,pmLadLine,pmLadBtn,pmLadAim,pmEyes,pmEyeFx,pmLad,pmLadPos,pmLadWin,pmLadDrop,pmLadFor,pmLadMonth,pmVsGo,pmKyNoise,pmKyRun,PM_KY,pmCoopYield,pmCoopX,pmCoopCard,pmArts,pmR,pmV,pmStakes,pmStakeOf,pmOdds,pmRun,pmAuto,pmX,pmPlayEnd,pmDuelEnd,pmYield,pmYieldAff,pmBtns,pmRows,pmPlayOpts,pmDuelOpts,pmScore,pmItem,pmGoTap});
+Object.assign(window,{pmVsShow,pmVsUI,pmLadHTML,pmLadLine,pmLadBtn,pmLadAim,pmEyes,pmEyeFx,pmLad,pmLadPos,pmLadWin,pmLadDrop,pmLadFor,pmLadMonth,pmVsGo,pmKyNoise,pmKyRun,PM_KY,pmCoopYield,pmCoopX,pmCoopCard,pmArts,pmR,pmV,pmStakes,pmStakeOf,pmOdds,pmRun,pmAuto,pmX,pmPlayEnd,pmDuelEnd,pmYield,pmYieldAff,pmBtns,pmRows,pmPlayOpts,pmDuelOpts,pmScore,pmItem,pmGoTap});
 })();

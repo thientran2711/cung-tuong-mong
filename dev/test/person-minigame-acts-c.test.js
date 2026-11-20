@@ -19,14 +19,15 @@ const HTML=process.argv[2]||'dev/index.html';
  /* ---- C2: the board itself (DOM) ---- */
  const g=await p.evaluate(async()=>{const out={};let raw=null;KG82.kyNoise=0;
   playArt({art:"co",eng:PM_KY,title:"thử",occ:"pm",rank:0,quick:{n:"Để tài nghệ quyết định",sub:"5/10"},onDone:r=>{raw=r}});
-  out.rules=(document.querySelector("#kg82 .kgr")||{}).textContent||"";out.tut=!!document.querySelector("#kgrtut");document.getElementById("kg82go").click();
+  out.rules=(document.querySelector("#kg82 .kgr")||{}).textContent||"";out.tut=!!document.querySelector("#kgrtut");document.getElementById("kg82go").click();const vsO={me:0,f:1,opp:[{raw:0,shown:0}],ui:null},vsSeen=[];const oo=liveRivals(true).find(v=>v!==S);KG82.onVs=v=>{vsSeen.push(v);vsO.me=v.me;vsO.opp[0].shown=v.opp;vsO.turn=v.turn;pmVsShow(vsO,oo,{round:v.round})};
   await new Promise(r=>setTimeout(r,2800));const cells=()=>[...document.querySelectorAll("#kg82 .goban button")];out.cells=cells().length;
   const pk=KG82.peek&&KG82.peek();out.peek=!!(pk&&pk.sel&&document.querySelector(pk.sel)&&!document.querySelector(pk.sel).disabled);
   /* she plays row 0; the AI (noise 0) must block a four */for(const i of [0,1,2]){const c=cells()[i];if(c&&!c.disabled)c.click();await new Promise(r=>setTimeout(r,BAL.pm.ky.ai.think+120))}
-  out.blocked=[1,2,3,4].some(i=>cells()[i].classList.contains("wh"))||!!KG82.kyOut;
+  {const pl=document.querySelector("#kg82box .kgvs");out.kyPlate={on:!!pl,seen:vsSeen.length,turns:[...new Set(vsSeen.map(v=>v.turn))],opp:pl&&pl.querySelector('.kgvs-opp [data-vs="sc"]').textContent,board:!!(pl&&pl.parentNode.querySelector('.goban'))}}out.blocked=[1,2,3,4].some(i=>cells()[i].classList.contains("wh"))||!!KG82.kyOut;
   /* play on until the board ends (any free cell, prefer peek) */for(let k=0;k<40&&!KG82.kyOut;k++){const q=KG82.peek&&KG82.peek();const el=q&&q.sel?document.querySelector(q.sel):cells().find(c=>!c.disabled);if(el)el.click();await new Promise(r=>setTimeout(r,BAL.pm.ky.ai.think+120))}
   out.outcome=KG82.kyOut;await new Promise(r=>setTimeout(r,1200));const okb=document.getElementById("kg82ok");if(okb)okb.click();out.raw=raw;
   out.noise=[0,3,7].map(R=>{const o=liveRivals(true).find(v=>v!==S);return pmKyNoise(o,S,R)});return out});
+ ok(g.kyPlate&&g.kyPlate.on&&g.kyPlate.board&&g.kyPlate.turns.includes('me')&&g.kyPlate.turns.includes('opp')&&+g.kyPlate.opp>0,'Cờ board: the kit plate kitGameVs shows each side\'s run and whose turn it is',g.kyPlate);
  ok(/Năm quân liền hàng/.test(g.rules)&&g.tut,'7×7 Cờ opens in the kg82 frame with the rules screen + «Hướng dẫn» (KIT §13.7)',{tut:g.tut});
  ok(g.cells===49&&g.peek,'the board has 49 cells and KG82.peek points at a free legal cell',{cells:g.cells,peek:g.peek});
  ok(g.blocked,'the AI (noise 0) answers her line on row 1 (blocks it)',g.blocked);
@@ -55,8 +56,9 @@ const HTML=process.argv[2]||'dev/index.html';
   /* aim: someone below her in an art she plays aims at the place right above */let aim=null;for(const v of V){const A=window.pmLadAim?pmLadAim(v):null;if(A){aim={v:v.id,p:A.p===S?"me":A.p.id,kind:A.kind,ok:pmLadPos(A.p,A.kind)<pmLadPos(v,A.kind)&&pmLadPos(v,A.kind)-pmLadPos(A.p,A.kind)<=BAL.pm.lad.reach};break}}out.aim=aim;
   /* C4 look: kit option card per art + standings rows; her «Tài nghệ» tab carries «Bảng tài nghệ hậu cung» (a view, not a person act) */
   {const c=PEND.pmLad({v:a.id});out.ladOpts=c.o.length;out.ladArts=BAL.pm.lad.arts.length;const h=pmLadHTML("dan");out.ladRows=(h.match(/kgpl/g)||[]).length;out.ladN=pmLad("dan").length;out.ladCard=/data-pmlad=/.test(artTabHTML())&&!/data-pmlad=/.test(rvCard(a,rivals.indexOf(a)));out.ladPct=/%/.test((h+c.t+c.o.map(o=>o.x).join("")).replace(/<[^>]*>/g,""))}
-  /* C1 split board data */let vsCalls=0;const kv0=window.kitGameVs;window.kitGameVs=()=>{vsCalls++};KG82.onHud=null;
+  /* C1 split board data */let vsCalls=0;const kv0=window.kitGameVs;window.kitGameVs=function(){vsCalls++;return kv0.apply(this,arguments)};KG82.onHud=null;let bx0=document.getElementById("kg82box"),mk=!bx0;if(mk){bx0=document.createElement("div");bx0.id="kg82box";document.body.appendChild(bx0)}bx0.innerHTML="<div>board</div>";
   pmVsGo([{p:a,raw:7}],a,"dan");const vs=KG82.vs;const sh=[];for(let n=30;n>=0;n-=5){KG82.onHud({score:`${Math.round((30-n)/6)}/10`,time:`${n} giây`});sh.push(vs.opp[0].shown)}
+  const pl=bx0.querySelector(".kgvs");out.plate={on:!!pl,first:bx0.firstChild===pl,opp:pl&&pl.querySelector('.kgvs-opp [data-vs="sc"]').textContent,me:pl&&pl.querySelector('.kgvs-me [data-vs="sc"]').textContent,clk:pl&&pl.querySelector('.kgvs-me [data-vs="clk"]').textContent,unit:pl&&/phần/.test(pl.textContent)};if(mk)bx0.remove();else bx0.innerHTML="";
   out.vs={sh,me:vs.me,calls:vsCalls,mono:sh.every((v,i)=>i===0||v>=sh[i-1]),end:sh[sh.length-1],max:Math.max(...sh)};window.kitGameVs=kv0;KG82.onHud=null;KG82.vs=null;
   pmVsGo([{p:a,raw:6}],a,"mua");for(let i=1;i<=5;i++)KG82.onHud({score:`${i*2}/10`,round:`Hồi ${i}/5`});out.vsRound=KG82.vs.opp[0].shown;KG82.onHud=null;KG82.vs=null;
   return out});
@@ -72,6 +74,7 @@ const HTML=process.argv[2]||'dev/index.html';
  ok(r.month&&r.old,'places 1..n earn Danh in the month pay; an old save gets a ladder on demand',{month:r.month,old:r.old});
  ok(r.aim&&r.aim.ok,'an NPC aims at the place right above her, within reach (law 1: her too)',r.aim);
  ok(r.ladOpts===r.ladArts+1&&r.ladRows===r.ladN&&r.ladCard&&!r.ladPct,'ladder look: one option per art (+ Thôi), one standings row per person, her «Tài nghệ» tab carries «Bảng tài nghệ hậu cung» (a view, not a person act), no % (law 7)',{o:r.ladOpts,rows:r.ladRows,n:r.ladN,card:r.ladCard});
+ ok(r.plate.on&&r.plate.first&&r.plate.opp==="7"&&r.plate.me===String(r.vs.me)&&/còn 0 giây/.test(r.plate.clk)&&r.plate.unit,'split board LOOK: the kit plate kitGameVs (K-PM-1) mounts on top of the board, rival line ends at the drawn raw, her line = her running score, clock shown',r.plate);
  ok(r.vs.mono&&r.vs.end===7&&r.vs.max<=7&&r.vs.calls>0&&r.vsRound>=4,'split board: the drawn raw shows along the clock, never above itself, ends at itself (K-PM-1 hook called)',r.vs);
  /* ---- NPC ladder challenges land over ≥ 10 game days ---- */
  const d=await p.evaluate(()=>{let n=0,me=0;const L0=JSON.stringify(S.pmL||{});const rc0=rcvAsk;window.rcvAsk=function(k,a,t,x){if(k==="pmDuel"&&x&&pmLadFor(a,t,x)){n++;if(t===S)me++}return rc0.apply(this,arguments)};
