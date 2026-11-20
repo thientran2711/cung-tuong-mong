@@ -398,3 +398,4 @@ ROOT-66 Lượt 1041: P6 toned palette (ff2e3a4) LOOKED (sheet 1 top) + 4 sheets
 ROOT-66 Lượt 1042: OWNER verbatim "Bản màu ổn rồi đó." → P6 toned A32 palette (ff2e3a4) APPROVED by owner. s62–s65: asked for draw word (Lượt 1019 hold).
 - 06:42Z C-AG #29: (A) wk #2 sent (via #28) 'SẴN SÀNG cal-p2 7779940e PROPOSAL' = OUTDATED (band 7.0–8.0, pre-OK) → re-steered: build for real per OD ~07:15Z/~07:20Z (avg adult ≈7, her strong 8.5–9.5, bậc-shrinking identity modifier); dauho needs cal.k.dauho removal first.
 - (20/11 07:14Z) FROM MAIN ROOT-74: LIVE 70bea3d3 (SELF-MERGE LAND mg-visual: BAL.mgFx cue/pop all engines, Nấu ăn pictures, no screen-covering touch flash) on eb056f7b. ROLLBACK eb056f7b. Final-merge 70bea3d3 before LAND READY.
+ROOT-66 Lượt 1043–1044: c09 hand redraw (w4atqqr7EI, 138 cr) sent; OWNER "Duyệt" → F4 wires c09 new cut UPvIb4owny. s62–s65 HOLD (owner word pending).
