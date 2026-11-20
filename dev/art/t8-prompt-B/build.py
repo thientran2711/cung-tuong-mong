@@ -148,6 +148,7 @@ AGE="a18"
 # every age of one person a different KIND, Nữ đế kind != her t8 kind. --olditem = the old per-rank pick (reproduces earlier outputs).
 import os as _os
 sys.path.insert(0,_os.path.dirname(_os.path.abspath(__file__))); import item_age as _IA
+import pets as _PETS
 OLDITEM="--olditem" in sys.argv
 # item kind -> hand interaction key (HAND_LOW key, or one/two/box for hand7 via low_hand)
 _HK={"rfan":"rfan","ffan":"ffan","mirror":"mirror","ball":"dangle","slant":"lantern","flute":"flute","bfly":"dangle","fbask":"basket","sachet":"dangle",
@@ -157,7 +158,11 @@ _HK={"rfan":"rfan","ffan":"ffan","mirror":"mirror","ball":"dangle","slant":"lant
 "album":"book","pouch":"dangle","coral":"stand","staff":"one","plaque":"two","almanac":"book","pastebox":"box","pine":"scroll","hballs":"two","chrys":"sprig","bell":"dangle",
 "p_sprig":"sprig","p_plum":"sprig","p_wbask":"basket","p_flute":"flute","p_lant":"lantern","p_hsach":"dangle","p_mulb":"basket","p_sutra":"book","p_beads":"dangle",
 "m_lant":"lantern","m_fbask":"basket","m_beads":"dangle","m_sutra":"book","m_ledger":"book"}
-def age_item(c,tier,item,hk):
+def age_item(c,tier,item,hk,pet=True):
+    # PETS (owner Lượt 1057/1059, rule F17, pets.py): a18/a26, kc + t1–t6 only, 3+ people per rank x age; the pet (in contact, never beside) REPLACES the held item
+    if pet and not OLDITEM:
+        _p=_PETS.pet(c,tier,AGE)
+        if _p: return _p
     # E7 (Lượt 529): an age outside the status ages gets the nearest age's cell but its OWN unused kind (item_age.pick_kind pass 2); was: the nearest age's item (repeat)
     if OLDITEM: return item,hk
     # E11 (owner Lượt 583/585; IT1 lists, BW5 wiring 19/11): every tier with a 25-item age-split list picks LIST[AGE_DICT[AGE][(n-1)%5]]
@@ -1362,7 +1367,7 @@ def build_ty_cold(c,state):
         s+=" "+COLD_OUTFIT.replace(TYC_COLD_HAIR_OLD,TYC_COLD_HAIR,1)+" COLOUR RULE: the linen stays the same undyed pale natural white at every age (not beige, tan, khaki or cream), never dyed, never deeper, no other colour anywhere; this replaces the colour examples above."+COLD_FAB
     else:
         N=int(state[2:]); col=TY_COLOUR[N]
-        item,hk=age_item(c,"t%d"%N,"an embroidered handkerchief","one")
+        item,hk=age_item(c,"t%d"%N,"an embroidered handkerchief","one",pet=False)   # trung y: no pet (rank outfit only)
         s+=f" Outfit (her trung y, the plain inner robe worn alone, no outer garment): a plain {col} silk trung y inner robe (simple crossed collar, tied sash, long skirt, no embroidery, no outer layer), {col}, matte soft silk with gentle folds, no gloss."+TYC_TY_HAIR
         if AGE=="a51": s+=f" COLOUR RULE: the whole trung y is a deeper, more muted shade of the same {col}, same hue family (rich and dignified, never bright, never pastel, never black or brown)"+TYC_HUE.format(col=_tyhue(col))+"; no other colour anywhere; this replaces the colour examples above."
         elif AGE=="a65": s+=f" COLOUR RULE: the whole trung y is an even deeper, more muted shade of the same {col} than at 51 (DEEPER than her 51-year-old trung y, never lighter or paler, at least as deep as at 51 {_A51EX}), same hue family (rich and dignified, never bright, never pastel, never black or brown)"+TYC_HUE.format(col=_tyhue(col))+"; no other colour anywhere; this replaces the colour examples above."
@@ -1392,20 +1397,16 @@ MAMA_IMG3=" Image 3 is only a costume reference for the cut, layers, embroidery 
 # Only change vs that file: the two "walking STRAIGHT TOWARD the viewer" angles (3 and 10) are written as a frontal stance with the weight on one foot (the pose text of the rank already carries the action, and ranks t6+/a51+ never walk or swirl).
 # Head turns WITH the body (HEAD-BODY law); every angle is frontal or three-quarter, never back-turned, never profile.
 # E12 (BW6): entries 8 and 12 were word-identical to 5 and 1 -> rewritten with approved words: 'body turned slightly three-quarters to the {s}' (_TA_NF, approved HH words) + 'the whole face clearly visible and towards the viewer' (MAMA_ANGLE, approved Nữ đế A picture).
-ANG14=["FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn",
-"a SLIGHT shoulder turn to the LEFT (about 15 degrees), body almost frontal, face toward the viewer",
-"a clear THREE-QUARTER view, NOT frontal: her whole body, shoulders, hips and face turned about 45 degrees toward the viewer's RIGHT, her left shoulder nearer the viewer, face fully visible",
-"FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, her weight resting on her RIGHT foot",
-"a clear THREE-QUARTER view toward the LEFT, NOT frontal: her whole body, hips and face turned about 45 degrees to the left, her right shoulder nearer the viewer, face fully visible (never side view)",
-"a SLIGHT shoulder turn to the RIGHT (about 15 degrees), body almost frontal, face toward the viewer",
-"a SLIGHT turn to the LEFT (about 15 degrees), body almost frontal, face toward the viewer",
-"FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn, mirrored: her weight and the item on her LEFT side",
-"a SLIGHT turn: her body turned slightly three-quarters to the RIGHT, the whole face clearly visible and towards the viewer",
-"a clear THREE-QUARTER view, NOT frontal: her whole body, shoulders, hips and face turned about 45 degrees toward the viewer's LEFT, her right shoulder nearer the viewer, face fully visible",
-"FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, her weight resting on her LEFT foot",
-"a clear THREE-QUARTER view toward the RIGHT, NOT frontal: her whole body, hips and face turned about 45 degrees to the right, her left shoulder nearer the viewer, face fully visible (never side view)",
-"a SLIGHT turn: her body turned slightly three-quarters to the LEFT, the whole face clearly visible and towards the viewer",
-"a SLIGHT turn to the RIGHT (about 15 degrees), body almost frontal, face toward the viewer"]
+# ROOT-68 / owner 20/11 ~07:50Z ("không có thấy ai đứng nghiêng về bên trái cả"), RANK8-B: LEFT/RIGHT were read in HER frame by some sentences and the viewer's by others
+# (idx 2 and 9 even said "viewer's RIGHT" + "her left shoulder nearer" = contradictory) -> the model drew almost everyone turned the same way. Now EVERY side word = the PICTURE's side
+# (where her chest and face point) + which shoulder (by picture side) is nearer. Same 14 slots, same visual class per index (ang_class unchanged -> E1/E12 plans unchanged). Next gens only.
+ANG14=['FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn', "a SLIGHT turn toward the LEFT side of the picture (about 15 degrees): her chest and face point a little toward the left edge of the picture, the shoulder on the picture's right side slightly nearer the viewer, body almost frontal, face toward the viewer",
+"a clear THREE-QUARTER view toward the RIGHT side of the picture, NOT frontal: her whole body, shoulders, hips and face turned about 45 degrees so that her chest and face point toward the right edge of the picture, the shoulder on the picture's left side nearer the viewer, face fully visible", 'FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, her weight resting on her RIGHT foot', "a clear THREE-QUARTER view toward the LEFT side of the picture, NOT frontal: her whole body, shoulders, hips and face turned about 45 degrees so that her chest and face point toward the left edge of the picture, the shoulder on the picture's right side nearer the viewer, face fully visible (never side view)",
+"a SLIGHT turn toward the RIGHT side of the picture (about 15 degrees): her chest and face point a little toward the right edge of the picture, the shoulder on the picture's left side slightly nearer the viewer, body almost frontal, face toward the viewer",
+"a SLIGHT turn toward the LEFT side of the picture (about 15 degrees): her chest and face point a little toward the left edge of the picture, the shoulder on the picture's right side slightly nearer the viewer, body almost frontal, the whole face toward the viewer", 'FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn, mirrored: her weight and the item on the LEFT side of the picture', "a SLIGHT turn toward the RIGHT side of the picture (about 15 degrees): her chest and face point a little toward the right edge of the picture, the shoulder on the picture's left side slightly nearer the viewer, the whole face clearly visible and towards the viewer",
+"a clear THREE-QUARTER view toward the LEFT side of the picture, NOT frontal: her whole body, shoulders, hips and face turned about 45 degrees so that her chest and face point toward the left edge of the picture, the shoulder on the picture's right side nearer the viewer, face fully visible", 'FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, her weight resting on her LEFT foot', "a clear THREE-QUARTER view toward the RIGHT side of the picture, NOT frontal: her whole body, shoulders, hips and face turned about 45 degrees so that her chest and face point toward the right edge of the picture, the shoulder on the picture's left side nearer the viewer, face fully visible (never side view)",
+"a SLIGHT turn toward the LEFT side of the picture (about 15 degrees): her chest and face point a little toward the left edge of the picture, the shoulder on the picture's right side slightly nearer the viewer, the whole face clearly visible and towards the viewer",
+"a SLIGHT turn toward the RIGHT side of the picture (about 15 degrees): her chest and face point a little toward the right edge of the picture, the shoulder on the picture's left side slightly nearer the viewer, body almost frontal, the whole face toward the viewer"]
 def ang_for(c,t):
     n=int(re.sub(r"\D","",c) or 0); return ANG14[(t-1+(n-1))%14]
 MAMA_DRAWN={"m01"}   # ma ma pictures already drawn/approved: no ANGLE sentence, output byte-identical
@@ -1971,6 +1972,7 @@ if __name__=="__main__":
     if "--spec5pose" in sys.argv:
         _t=LOWN if "--low" in sys.argv else 7 if "--t7" in sys.argv else int(STATE[2:]) if STATE and STATE[:2]=="ty" else max(1,int(STATE[2])) if STATE and re.fullmatch(r"tm[0-4]",STATE) else 1 if STATE=="cold" else 8   # N5d item 4: trung y tN poses at rank N, cold at the lowest
         _o=spec5pose(_o,a[0],_t)
+    if "--golden" not in sys.argv and __name__=="__main__" and not ((("--low" in sys.argv and not STATE and not TRIEUN) or STATE=="kc") and AGE in _PETS.AGES): _o=_PETS.depet(_o)   # F17 PETS (owner Lượt 1057/1059): animal pose words only at a18/a26, ranks 1–6 / khuê các
     if STATE and re.fullmatch(r"ty[1-8]|cold",STATE): assert _o.count(TYC_PIN_RULE)==1; _o=_o.replace(TYC_PIN_RULE,"",1)   # TY0 fix2: her own (often horizontal) pin from image 2 stays
     if "--nostyle" in sys.argv:   # owner 18/11 ~22:30Z: only her own identity image is a reference, no style image -> drop ONLY the style-reference sentence
         _st=" The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose."

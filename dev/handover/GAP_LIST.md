@@ -1,15 +1,44 @@
-# GAP LIST v1 — designed/ruled items NOT built, half built, or broken on LIVE main
+# GAP LIST v2 — designed/ruled items NOT built, half built, or broken on LIVE main
 PRIORITY #1 CHECK: no central gap list existed (PARKING_LOT 22 lines, SESSION8_QUEUE old) | main 377d5ce3 (dev/build/j*.js + BAL) | review/* 1458 branches matched BY NAME only (not fetched) | claims gap-audit session_01Rc5AsLymU7eumr5TcMGb2s (MAIN ROOT-75)
 
-**SUMMARY (v1, 20/11 ~08:45Z):** 90 rows: 41 missing, 37 half, 12 broken.
+**SUMMARY (v2, 20/11 ~09:05Z):** 90 rows: 41 missing, 37 half, 12 broken.
 By type: UI 33 · rules-numbers 29 · art 16 · content 12. By size: S 33 · M 42 · L 15.
 By suggested owner: MAIN UI 26 · B build 22 · C art 16 · E roads 13 · D rules 13. 52 rows already have a matching review/* branch (state unknown: merged-pending, failed or stale). 38 rows have no branch.
+v2: 23 branch rows in LAND FIRST below — about 25 gap rows close by landing/reviewing work that already exists (PASS: mg-noword-b, mg-score-same, mg-env, coop-thin-f5, ge-writers-w3; waiting a reviewer: night-final, night-ledger, day-khac-audit, looks-2, mg-allkinds). Do those before opening new workers.
 Biggest holes: mini-game fairness/identity numbers + no-word group b + back button (A); final night rule + 10-night ledger (B, KP01); 11 grand-ending branches + foreign-princess roads + NPC grand-ending parity (D); outside-route home chapters (C); ~20 open kit requests (H).
 About 345 checked items are DONE on live and are not listed (e.g. MEN_PLAN, MOTION, poison road jpq, demotion confiscation jdemo, calendar, cycle, titles, NPC roads).
 
 How it was made: 8 read-only audit passes, one per design source, each with file:line evidence on LIVE 377d5ce3 (or "no hit for grep" after ≥2 patterns). Conflicting findings between passes were checked by hand (jdemo = done, jpq = done, so neither is listed). Rows marked "(verify)" or "not browser-checked" need a look before work starts. Review-branch column = name match only; check the branch before reusing it (PRIORITY #1).
 Sources: MINIGAMES.md, ITEMS.md, ITEMS_EARNED.md, EMOTION_PLAN.md, MEN_PLAN.md, MOTION.md, RARE_ENDINGS.md, design/GRAND_ENDINGS.md, OUTSIDE_PLAN.md, ECONOMY.md, STORY_ROADS_PLAN.md, EVENTS/INTRIGUE/MERIT_PROGRESS, 72 PROGRESS_*.md open sections, dev/kit/KIT_REQUESTS.md, OWNER_DECISIONS.md L1–2049, OWNER_LEDGER.md. OD line numbers = handover-branch OWNER_DECISIONS.md.
 Not countable from git (CDN art backlog): see KP23.
+
+## LAND FIRST — rows a finished branch already closes (v2: from reports/*.md + CLAIMS; sha = last verdict seen, re-check on origin before landing)
+| branch | verdict seen | closes rows | note |
+|---|---|---|---|
+| review/mg-noword-b-rv | PASS 790818cd (rv-mg-noword-b.md) | MG03 (group b part) | mg-noword-kit still RUNNING for the kit half |
+| review/mg-score-same-rv | PASS 10f1dc0e (rv-mg-score-same.md) | MG08 | then review/kit-mark PASS 5e8c7ad0 (re-run its chip assert after) |
+| review/mg-env-rv | PASS 6c45e65b (rv-mg-env.md) | MG02 | |
+| review/mg-fair-hands | PASS 3fe8727 **HOLD** (rv-mg-fair-hands.md) | MG15, MG16 | held until owner calibration + ratio OK; review/mg-fair-ratio review running (c214eadd) |
+| review/coop-thin-f5 | PASS 9b46e1ad (coop-thin-f5.md) | OD04 (F5 part) | F6/G/H still to come (coop-thin-g RUNNING) |
+| review/ge-writers-w3 | PASS r3 b79930bf, re-merged LIVE 0de74d9e (CLAIMS) | GE01 | check it covers all 11 missing branches |
+| review/names-unique-r1 | PASS dcb2ea96 (16/11, never landed; stale base c1e1bbd1) | OD06 | needs re-merge on LIVE + re-test |
+| review/reign-road-r1 | PASS 0a311183 | (template 1 only; OR18 stays open for 3 templates) | check if already live (jreign.js is live) |
+| review/person-minigame-acts-c | APPROVED with answers 3c1b9c8f (FOREMAN E status) | MG13 (+ part of MG14) | round C running |
+| review/night-final | SẴN SÀNG KIỂM f7c54202 (night-final.md) | OD01 (+ OD02?) | needs reviewer |
+| review/night-ledger | SẴN SÀNG KIỂM 55141158 (night-ledger.md) | KP01 | needs reviewer; NPC Ân drift flagged → balance pass |
+| review/day-khac-audit | SẴN SÀNG KIỂM 9e7ddc14 | OD07 | needs reviewer |
+| review/looks-2-2 | SẴN SÀNG KIỂM cfd4a681 (looks-2.md) | KP09 (check: body-fit box) | needs reviewer |
+| review/tut-followups | SẴN SÀNG KIỂM aa391edf (base tut-quests-r1 PASS, not on main) | OR15 (partly) | stale base, re-merge |
+| review/mg-play2 | ready 209f34df, review running | MG05, MG06 | |
+| review/mg-allkinds | worker tests PASS 7/7 @5b07ad6e | MG11 | needs reviewer |
+| review/bd-roads (+ -w2) | worker tests PASS, RUNNING | GE02 (KP04 seal not covered) | |
+| review/kit-option-rows | part 1 ready 3dabd1f7 | KP21 (part) | successor for part 2 |
+| review/presentation-wiring | PARTIAL (origin frames / entry animation NOT done, art request) | AP01, KP07 | not a fix for those rows |
+| review/item-big | PARTIAL, blocked on KIT REQUEST | IT01 | |
+| review/balance-core | core gate FAIL (jgrey.js) | OD05 | fix gate then review |
+| review/hoa-dien-art | art READY waiting Foreman C OK | IT04, MG05 (anchors) | |
+| review/foreign-princess-samples | samples only, generation paused | — | art only |
+Rows not in this table have no finished branch: they need a new worker.
 
 ## A. Mini-games (MINIGAMES.md + OD L1978–2049)
 
@@ -42,9 +71,9 @@ Not countable from git (CDN art backlog): see KP23.
 | OD02 | Defence "Giữ chân Hoàng thượng" for the flipped consort + rebalance Tranh sủng vs Chặn ngự giá | OD:L1481 | missing | only on sample page jkitpage.js:160 | M | rules-numbers | review/night-final | D rules |
 | OD03 | Emperor's monthly favoured/disfavoured art changes flip-scene odds | OD:L1483 | missing | no 'favArt\|empArt\|môn ưa\|ưa thích' | M | rules-numbers | none | D rules |
 | OD04 | Co-op thin-guest migration A→H (owner: co-op top priority) | OD:L1446, L1488, L1493 | half | jcoopthin.js:25 TH.CAP = A–E, F1–F4; F5, F6, G, H not live | L | rules-numbers | review/coop-thin-f5, -f6, -f6b, review/coop-thin-g (running) | B build |
-| OD05 | Balance pass on start stats + growth by origin (talents start ~75, hit 100 too fast; §7 approved) | OD:L1482, L1484, L1601 | half (verify) | no 'balance-core' tag in j*.js; numbers not confirmed | M | rules-numbers | review/balance-core, review/balance-core-r2 | D rules |
+| OD05 | Balance pass on start stats + growth by origin (talents start ~75, hit 100 too fast; §7 approved) | OD:L1482, L1484, L1601 | half | branch not landed: reports/balance-core.md core gate G1 one-core-guard FAIL (jgrey.js 5 inline numbers); no balance-core tag on main | M | rules-numbers | review/balance-core, review/balance-core-r2 | D rules |
 | OD06 | Unique ancient-Chinese names, one shared registry, no Vietnamese-reading surnames | OD:L1444 | half | j1.js:191 freshName only avoids living consorts/kids; banned "Bùi" (j22.js:5), "Đặng" (j59.js:358) still in pools; no name registry | M | content | review/names-unique, review/names-unique-r1 | B build |
-| OD07 | Every "can it still be done" check uses khắc left in the DAY with spill (sweep + guard) | OD:L1472, L1654 | half (verify) | 34 "không kịp" hits; j76.js:9,25,35,67 gate per buổi | M | rules-numbers | review/day-khac-audit, review/khac-day | D rules |
+| OD07 | Every "can it still be done" check uses khắc left in the DAY with spill (sweep + guard) | OD:L1472, L1654 | half | 34 "không kịp" hits; j76.js:9,25,35,67 gate per buổi; review/day-khac-audit SẴN SÀNG KIỂM 9e7ddc14 not landed | M | rules-numbers | review/day-khac-audit, review/khac-day | D rules |
 
 ## C. Outside route, economy, story roads, events (OUTSIDE_PLAN, ECONOMY, STORY_ROADS_PLAN, EVENTS_PROGRESS)
 
