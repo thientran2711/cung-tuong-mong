@@ -1696,10 +1696,11 @@ BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share
           wcol maps the j92 one-word colour for a person with no painted identity (fallback only).
    season: a robe's season = its fabric (Qing 換季: gauze in summer, fur in winter, announced by the court); fab = the seasons as letters of k (x Xuân · h Hạ · t Thu · đ = d Đông). Cost per tuần worn off-season, by rank 0..7 (law 5),
           the same for every consort (law 1); npcMiss = % (per consort, per season, hashed) that an NPC forgets to change.
-   fest: per festival (FEST key): need = the two families of the day, ky = taboo robe colours, gate 1 = turned away at the door when she shows none of the need (or a taboo robe with none).
+   fest: per festival (FEST key): need = the two families of the day, ky = taboo robe colours, gate 1 = turned away at the door when she shows NONE of the need (the only turn-away rule).
+   kyOn: a taboo robe counts as one more missing colour ONLY when the robe colour can be changed (PARKING 11c recolour); 0 until then — the robe is her painting (review r1 fix 4).
    needN by rank: how many of the two she must show (Đáp ứng–Quý nhân 1, Tần and up 2; law 5). cut = per missing colour (a taboo robe counts as one more): phần off her festival-contest score, Danh off.
    bor: borrow an accessory (slot list sl; only pieces shown on her: owner 11b) from a consort whose thiện cảm toward her ≥ fav; it costs khac khắc and use thiện cảm of the lender; she lends back the same way (thanks). max lenders offered.
-   chg: change to her own trâm of a needed colour (khac khắc). stay: excuse herself at a strict festival (Sức gain; the festival's events are missed). */
+   chg: change to her own trâm of a needed colour (khac khắc; max pieces offered). Borrowing is offered only for a needed colour her own chest cannot cover (law 2). buy: the third road for her AND NPCs — the cheapest trâm of a missing colour at or under her phẩm from Nội vụ phủ (its j92 price in Bạc + khac khắc). stay: excuse herself at a strict festival (Sức gain; the festival's events are missed). */
 BAL.dc={on:1,
  fam:{hong:{n:"Hồng",hex:"#e48aa4"},cam:{n:"Cam",hex:"#e0904a"},do:{n:"Đỏ",hex:"#c8372d"},vang:{n:"Vàng",hex:"#e7b93e"},luc:{n:"Lục",hex:"#5f9a5f"},
   lam:{n:"Lam",hex:"#4f74a8"},tim:{n:"Tím",hex:"#8a5fa8"},trang:{n:"Trắng",hex:"#f4efe4"},den:{n:"Đen",hex:"#2a2420"},nau:{n:"Nâu",hex:"#8a5a3a"}},
@@ -1734,4 +1735,4 @@ BAL.dc={on:1,
   dongchi:{need:["lam","den"],ky:[],gate:0},lapbat:{need:["nau","vang"],ky:[],gate:0},giaothua:{need:["do","vang"],ky:["trang"],gate:0}},
  needN:[1,1,1,2,2,2,2,2],
  cut:{phan:[3,3,4,5,6,7,8,9],danh:[1,1,1,2,2,2,3,3]},
- bor:{sl:["tram"],fav:20,use:6,thanks:5,khac:1,max:2},chg:{khac:1},stay:{suc:8}};
+ bor:{sl:["tram"],fav:20,use:6,thanks:5,khac:1,max:2},chg:{khac:1,max:2},buy:{khac:1},stay:{suc:8},kyOn:0};
