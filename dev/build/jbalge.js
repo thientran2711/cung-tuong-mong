@@ -57,7 +57,12 @@ BAL.ge={
  td_an_1:{danh:40,th:35},td_an_2:{tamco:45,sung:50},td_an_3:{tai:55,danh:35},td_an_4:{duc:35,sung:35},
  td_ke_1:{mat:4,tamco:45},td_ke_2:{duc:45,danh:35},td_ke_3:{mat:4,maid:50},td_ke_4:{tamco:35,duc:30},
  td_song_1:{danh:40,sung:45},td_song_2:{tamco:50,mat:4},td_song_3:{duc:35,maid:45},td_song_4:{duc:45,th:30},
- td_tha_1:{duc:45,sung:40},td_tha_2:{tamco:45,mat:3},td_tha_3:{duc:40,th:30},td_tha_4:{danh:30,duc:40}},
+ td_tha_1:{duc:45,sung:40},td_tha_2:{tamco:45,mat:3},td_tha_3:{duc:40,th:30},td_tha_4:{danh:30,duc:40},
+ /* Ba Tư wave (brief E28, jgedata_bd.js): bd_san bd_soi bd_tuyet bd_hen (same scales and sizes as the pilots) */
+ bd_san_1:{tai:50,danh:35},bd_san_2:{sung:50,duc:35},bd_san_3:{tamco:45,mat:3},bd_san_4:{duc:35,suc:40},
+ bd_soi_1:{tamco:45,danh:45},bd_soi_2:{sung:45,duc:40},bd_soi_3:{mat:4,tamco:45},bd_soi_4:{sung:45},
+ bd_tuyet_1:{duc:45,danh:35},bd_tuyet_2:{tamco:40,danh:40},bd_tuyet_3:{mat:3,tamco:45},bd_tuyet_4:{tai:55},
+ bd_hen_1:{duc:40},bd_hen_2:{sung:55,tamco:40},bd_hen_3:{duc:40,danh:35},bd_hen_4:{tamco:45}},
  /* fail-outcome losses (her pair pointed at the ending and missed; none in the quiet form unless quietLoss) */
  fail:{
   tt_co_1:{rank:-1,danh:-12},tt_co_2:{sung:-8,danh:-4},tt_co_3:{sung:-8,danh:-6},tt_co_4:{danh:-10,duc:-6},
@@ -86,7 +91,12 @@ BAL.ge={
  td_an_1:{danh:-10},td_an_2:{danh:-8,duc:-4},td_an_3:{danh:-6},td_an_4:{sung:-6},
  td_ke_1:{danh:-10,mat:-2},td_ke_2:{sung:-8},td_ke_3:{mat:-3},td_ke_4:{sung:-8,danh:-4},
  td_song_1:{danh:-8},td_song_2:{rank:-1,danh:-12},td_song_3:{sung:-6},td_song_4:{rank:-1,sung:-8},
- td_tha_1:{danh:-6},td_tha_2:{sung:-8,danh:-6},td_tha_3:{danh:-6},td_tha_4:{danh:-10}},
+ td_tha_1:{danh:-6},td_tha_2:{sung:-8,danh:-6},td_tha_3:{danh:-6},td_tha_4:{danh:-10},
+ /* Ba Tư wave (brief E28, jgedata_bd.js): bd_san bd_soi bd_tuyet bd_hen (same scales and sizes as the pilots) */
+ bd_san_1:{danh:-8,tai:-4},bd_san_2:{sung:-8,danh:-4},bd_san_3:{danh:-10,duc:-4},bd_san_4:{sung:-8,danh:-6},
+ bd_soi_1:{rank:-1,danh:-12},bd_soi_2:{danh:-10,sung:-4},bd_soi_3:{sung:-10,danh:-6},bd_soi_4:{danh:-8,sung:-6},
+ bd_tuyet_1:{danh:-8,duc:-4},bd_tuyet_2:{danh:-8,sung:-4},bd_tuyet_3:{rank:-1,danh:-10},bd_tuyet_4:{danh:-6},
+ bd_hen_1:{sung:-10,danh:-6},bd_hen_2:{danh:-10,sung:-6},bd_hen_3:{danh:-8},bd_hen_4:{danh:-8,sung:-4}},
  /* rewards: the same SIZE for both shadings (fair: no "right" morality); only the sign of everyone's attitude differs (rel thiện → thiện cảm +, ác → oán +).
     rw.mul × the road's RD97L rare fx ≈ the size (start 3×); rank = steps (never above the seat rules: Hoàng hậu only by seat "HH"); mis = the named NPC's attitude */
  rw:{mul:3,
@@ -116,7 +126,12 @@ BAL.ge={
  td_an_1:{danh:36,duc:10,rel:8},td_an_2:{rank:1,danh:30,tamco:10,rel:8},td_an_3:{danh:30,tai:10,rel:8},td_an_4:{danh:20,duc:12,rel:6},
  td_ke_1:{rank:1,danh:30,mat:2,rel:8},td_ke_2:{danh:24,duc:12,rel:8},td_ke_3:{danh:24,mat:3,rel:8},td_ke_4:{danh:18,duc:10,rel:6},
  td_song_1:{rank:1,danh:30,sung:15,rel:8},td_song_2:{danh:36,sung:18,rel:8},td_song_3:{danh:20,duc:12,bac:300,rel:6},td_song_4:{danh:24,duc:15,rel:8},
- td_tha_1:{danh:24,duc:12,rel:8},td_tha_2:{rank:1,danh:30,tamco:10,rel:8},td_tha_3:{danh:20,duc:15,rel:6},td_tha_4:{danh:20,duc:12,rel:6}},
+ td_tha_1:{danh:24,duc:12,rel:8},td_tha_2:{rank:1,danh:30,tamco:10,rel:8},td_tha_3:{danh:20,duc:15,rel:6},td_tha_4:{danh:20,duc:12,rel:6},
+ /* Ba Tư wave (brief E28, jgedata_bd.js): bd_san bd_soi bd_tuyet bd_hen (same scales and sizes as the pilots) */
+ bd_san_1:{rank:1,danh:30,tai:10,rel:8},bd_san_2:{rank:1,sung:30,danh:18,rel:6},bd_san_3:{danh:30,tamco:10,mat:2,rel:8},bd_san_4:{danh:20,duc:12,bac:300,rel:6},
+ bd_soi_1:{danh:36,sung:18,rel:8},bd_soi_2:{rank:1,danh:30,duc:8,bac:300,rel:8},bd_soi_3:{rank:1,danh:30,tamco:10,rel:8},bd_soi_4:{seat:"TM",danh:30,sung:15,rel:8},
+ bd_tuyet_1:{danh:36,duc:12,rel:8},bd_tuyet_2:{rank:1,danh:30,bac:300,rel:8},bd_tuyet_3:{danh:30,mat:2,tamco:10,rel:8},bd_tuyet_4:{danh:30,tai:10,rel:8},
+ bd_hen_1:{danh:20,duc:12,rel:6},bd_hen_2:{rank:1,sung:24,danh:24,rel:8},bd_hen_3:{danh:24,duc:12,rel:8},bd_hen_4:{danh:30,tamco:10,rel:8}},
  help:{rw:{danh:6,duc:3}},   /* her help to an NPC who then unlocks (NPC parity, build step 5 — not live in this pass) */
  npc:{on:false},             /* NPC grand endings wait for NPC roads (OD:L1243, unit D) */
  /* measured bands (dev/measure/ge-measure.js): an in-character bot that follows one ending's road reaches a grand ending in about one life of two or three;
