@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4aa7dc66+","t":"2026-11-20T09:49Z","c":"ptime.test check 5: pin the guest's own answer (jrcv rcvInviteGo) for the timing check (was a ~1/3 flake)","b":"4276635061c7","h":[{"s":"f6e84391+","t":"2026-11-20T08:44Z","c":"review mg-back-rv: one core (law 4) — j83 practice + jrcp teacher name their charge once (pc), no duplicated suc:-10; index/sw rebuilt"},{"s":"9b6e9395+","t":"2026-11-20T08:46Z","c":"rv mg-play2: keep only the vetted face points — the 70 changed kc rows from the live img/mk-fit (no new v1/v2 rows: anchor-table gate flags…"},{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."}]};
+window.CTM_BI={"s":"a33529da+","t":"2026-11-20T10:13Z","c":"ptime.test de-flake checks 4 and 11 (foreman D #9): 4 reads «Đợi tin» after the random card is closed; 11 counts only the tested order (a n…","b":"dd66cd1df091","h":[{"s":"8c8b6fd7","t":"2026-11-20T09:45Z","c":"Trò chơi không chữ: khung trò dùng chung bộ khung chuẩn"},{"s":"f6e84391+","t":"2026-11-20T08:44Z","c":"review mg-back-rv: one core (law 4) — j83 practice + jrcp teacher name their charge once (pc), no duplicated suc:-10; index/sw rebuilt"},{"s":"9b6e9395+","t":"2026-11-20T08:46Z","c":"rv mg-play2: keep only the vetted face points — the 70 changed kc rows from the live img/mk-fit (no new v1/v2 rows: anchor-table gate flags…"},{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -25844,7 +25844,7 @@ function kitGameSet(k,v){document.querySelectorAll(`[data-kg="${k}"]`).forEach(e
 /* owner 17/11 + main s29: a game with a REAL time limit shows the EXISTING kit clock chip (kitCoopClock, "Còn N giây", KIT §69.4) in the frame's title line;
    only the HUD value "<n> giây" is a time limit ("nhìn kỹ", "–", "5 tên", "đã hết", "không hạn" are not) -> the chip is hidden. No new part, no chip row. */
 function kitGameClock(v){document.querySelectorAll(".kgame .kgclk").forEach(e=>{const m=/^\s*(\d+)\s*giây\s*$/.exec(String(v==null?"":v));
- if(!m||typeof kitCoopClock!=="function"){e.hidden=true;e.innerHTML="";return}const n=+m[1]*1000,len=Math.max(+e.dataset.len||0,n);e.dataset.len=len;e.innerHTML=kitCoopClock({left:n,len});e.hidden=false})}
+ if(!m||typeof kitCoopClock!=="function"){e.hidden=true;e.innerHTML="";return}const n=+m[1]*1000,len=Math.max(+e.dataset.len||0,n);e.dataset.len=len;e.innerHTML=kitCoopClock({left:n,len}).replace(/Còn\s*/,"").replace(/\s*giây/,"");e.hidden=false})}/* owner OD 20/11 ~05:10Z: in a game the clock chip is the kit clock ring + the number only, never «Còn … giây» */
 window.kitGameClock=kitGameClock;
 /* kitGameResult({raw, talent, prep, total, place:"Nhất", of:4, rivals:[{who:person, score}], gains:[["Sủng",3]], losses:[["Sức",-10]], note})
    -> result block: score rows (true numbers), standings with face + rank title, Được / Mất chips. */
@@ -29008,7 +29008,7 @@ body.kg82cf #modal{z-index:40}
 .kg82opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}.kg82opts button{min-height:48px;text-align:center;justify-content:center}
 .kg82quiz .kb{font-size:1rem}.kg82quiz .kpnote{min-height:1.3em;margin-top:8px}.kg82 .kfact small{display:block}.kg82 .kgrow>b{flex:none;white-space:nowrap;padding-left:6px}
 /* KIT §13.7 rules screen + guided round (mg-ready-guide); colours from the kit tokens only */
-.kg82.kg-ready .kghow,.kg82.kg-tut .kghow{display:none}
+.kg82 .kghow{display:none}/* owner OD 20/11 ~05:10Z: no text in play — the rules sentence lives on the rules screen (.kgr) and in «Hướng dẫn»; never above the board */
 .kgr{margin:0 0 6px}.kgr .kpst{margin-top:0}.kgr-note{margin:8px 0 2px}
 .kgr-demo{margin:8px auto 2px;max-width:340px}
 .kgr-st{position:relative;height:118px;border:1px solid var(--k-hair);border-radius:var(--k-rad,8px);overflow:hidden;background:var(--k-card) center/cover no-repeat}
@@ -29081,6 +29081,20 @@ const KG82_MGL={theu:["Thêu: nhớ mẫu thêu","theu"],nau:["Nấu nướng: c
 function kg82Lesson(k){const [t,kind]=KG82_MGL[k];return[t,KG82_KIND[kind].how,(b,lv,end)=>{b.innerHTML="";let stop=null,dead=false;KG82.ctx="hoc";const T=mgSet(kind,{occ:"hoc",lv}),L=BAL.mgTier.lesson;const env={kind,lv:T.ease,hud:()=>{},end:raw=>{KG82.peek=()=>null;raw=mgGrade(raw,kind);end(raw>=L[1]?3:raw>=L[0]?2:1)}};
  kg82Preload(kind).then(()=>{if(dead)return;try{stop=KG82_ENG[KG82_KIND[kind].e](b,env)}catch(e){console.error(e);end(1)}});return()=>{dead=true;if(stop)stop()}}]}
 (function(){if(typeof openMG!=="function"||typeof MG==="undefined")return;const o0=openMG;openMG=function(k){try{if(KG82_MGL[k])MG[k]=kg82Lesson(k)}catch(e){}return o0.apply(this,arguments)}})();
+
+/* KIT §13.x NO TEXT IN PLAY (owner OD 20/11 ~05:10Z: "không có một cái mini game nào mà có chữ hết trơn"): ONE kit pass over the live game frame, for every kind and caller.
+   Inside the play area (#kg82box and .kg82act; never the rules block .kgr, the guided bar .kgt-bar, the result .kgres) a button shows a SIGN (? hint, ✓ done, ↶ ↷ tilt, ♨ fan, ● other)
+   with its word kept only in the tooltip / aria-label, a `small` line is hidden, and a kit row (.krl label + sentence) is hidden when it holds no number, else only its number stays. */
+(function(){const SIGN=[[/Gợi ý/,"?"],[/Nghiêng trái/,"↶"],[/Nghiêng phải/,"↷"],[/Quạt/,"♨"],[/xong|Xong|Dâng|Dán|Nộp|Chấm/,"✓"]];
+ const inPlay=e=>e.closest("#kg82box,.kg82act")&&!e.closest(".kgr,.kgt-bar,.kgres");
+ function pass(){try{if(KG82.ready||KG82.phase==="tut"||KG82.tut||KG82.phase==="result"||KG82.phase==="intro"||document.querySelector("#kg82ok,#mgcal-copy,#mgcal-seq,#mgcal-x"))return;/* review fix: a result / intro / Thử tay screen is not play: its buttons keep their words */document.querySelectorAll(".kg82 button,#kg82box button,.kg82act button").forEach(b=>{if(!inPlay(b)||b.dataset.kgsign||/kgr|kgt/.test(b.id+" "+b.className)||b.id==="kg82go"||b.dataset.kgrLabel||b.closest(".kgr-bt,.kgr-acts,.kgrb"))return;const t=b.textContent.replace(/\s+/g," ").trim();if(!/\p{L}/u.test(t))return;
+   let s="●";for(const [re,g] of SIGN)if(re.test(t)){s=g;break}b.dataset.kgsign=s;if(!b.title)b.title=t;b.setAttribute("aria-label",t);b.textContent=s});
+  document.querySelectorAll("#kg82box small,.kg82act small").forEach(e=>{if(inPlay(e))e.hidden=true});
+  document.querySelectorAll("#kg82box .krl").forEach(l=>{if(!inPlay(l))return;const row=l.parentElement;if(!row||row.dataset.kgrow)return;row.dataset.kgrow=1;
+   const rest=row.textContent.replace(l.textContent,"");if(!/\d/.test(rest)){row.hidden=true;return}l.hidden=true;
+   const w=document.createTreeWalker(row,NodeFilter.SHOW_TEXT);const ns=[];let n;while(n=w.nextNode())if(!l.contains(n))ns.push(n);ns.forEach(x=>{if(!x.parentElement.closest("b")&&/\p{L}/u.test(x.nodeValue))x.nodeValue=x.nodeValue.replace(/[^\d\s\/]+/gu,"")})})}catch(e){}}
+ let q=0;try{new MutationObserver(()=>{if(q)return;q=setTimeout(()=>{q=0;pass()},30)}).observe(document.body,{childList:true,subtree:true})}catch(e){}
+ window.kg82Signs=pass})();
 /* ================= j91 MỖI MÔN MỘT TRÒ (owner 11/14: "5 câu hỏi chọn đáp án không phải minigame") =================
    Every contest kind of j82 / j71 (and every lesson art) now has its OWN mechanic; no two kinds share one.
    Table (dev/MINIGAMES.md):  dan rhythm · hat hold (giữ hơi theo giai điệu) · co go · dauho fling (kéo thả ném tên) · ban aim ·
@@ -82267,7 +82281,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4276635061c7";window.CTM_BUILD=BUILD;
+const BUILD="dd66cd1df091";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
