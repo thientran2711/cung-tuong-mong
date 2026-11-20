@@ -924,3 +924,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   QUEUE (from E #19, unchanged) + new: LIVE bug coop-together cnv+nc 25/26 «B went through the selection card» (FOR MAIN); FLAG jkc.js:516 / jkc2.js:343 hand-typed «tính 5/10» / fin(5) (one-core; FOR MAIN).
   FOR MAIN (open): no E ROOT STANDBY exists — please ask the owner to open one (TAKEOVER_FOREMAN_STANDBY.md, X = E); CDN 401 on account E.
   Own wake trig_01GNt33tGMQhBXEcKK7xayQQ (minute 47) → disabled by me at handover. Worktree /home/user/wt/ho (sparse). SEATS 9 / 12 (E21r2, E22t, E22i, E26b, E26r, E25b, E25r, E30 + E #21).
+  → child FOREMAN E #21 = session_01DgYSWpNbcJyCoGaB1FhLFq (opus, depth 2). My wake trig_01GNt33tGMQhBXEcKK7xayQQ disabled by me. FOREMAN E #20 stops now.
