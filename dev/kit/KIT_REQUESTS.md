@@ -124,3 +124,9 @@ Group b play areas now use plain inline SVG / glyph signs from dev/build/jnwb.js
 - icon-hint (lamp / «?» seal), icon-done (check seal), icon-voice (td_ngon Thưa hold button), icon-rotl / icon-rotr (hoa điền tilt), icon-shield (duho Hộ giá),
 - icon-bowl (Hạnh pool), person signs elder / child / sick / adult (td_hanh row), pips (filled / empty dot) — all in the kit stroke style.
 Rule sentences stay on the rules screen only; the frame «Cách chơi» row is hidden while a game runs (#kg82.kg-run .kghow).
+
+## 20/11 kit-cost-rows-home (MAIN ROOT-80 order; E25 «KR home-stat rows», E22t «quý nhau»)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | E25b home-chapters | **KR home-stat rows** — Gia thanh (kgt), Áp lực hôn sự (kap), Hồi môn (khm), Lời đồn (kld) in the act/option card rows Tốn / Được / Thành / Bại and in word mode | every home card (jkc kcCard, jkc2, jkc3 kc3/kcE) | kit keeper | **KIT READY** review/kit-cost-rows-home (KIT §13.14) |
+| 20/11 | E22t | **«quý nhau» in the word/hint map** (jk2b) — the decline row of a receiver choice (jrcv rcvNoO «mất: hai bên quý nhau −F») showed «Tốn: không» | jrcv, every «quý nhau» line | kit keeper | **KIT READY** review/kit-cost-rows-home (KIT §13.14) |

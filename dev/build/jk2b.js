@@ -195,7 +195,7 @@ kitFigRects=function(){const st=$("stage");if(!st)return[];const out=[];st.query
    option with no cost has NO Tốn row (owner 13:25Z: never "Tốn: không"). Under it the kit HINT row (6b). The result card afterwards shows the true numbers. Active acts keep everything.
    Use (data only): a Q / kitModal item with `hideOut:true` (every option) or an option with `hideOut:true`; any priced button may also carry
    `data-khide="1"`. Which items are events: `kitIsEventChoice` below. ---------- */
-const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b/i;
+const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b|Hồi môn/i;/* kit-cost-rows-home: a dowry spent is a price like bạc */
 /* ---------- 6b. KIT HINT + ODDS METER (owner 11/15 15:05Z / 15:10Z, 19/11 ~01:48Z, KIT 28.6 — shared kit parts kitHint / kitHintRow / kitOptOdds) ----------
    kitHint(o, m, lv) → {hint}: read from the option's OWN data (fx + its x / j67 text: the odds, people and state of THIS moment), so it is
    true now and changes with the context (no fixed answer to learn). Words only: stat numbers never appear (a count in a story phrase is
@@ -229,9 +229,11 @@ function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):typeof dil
  return M}
 /* her side of a phrase: +1 good for her, -1 bad, 0 neutral (the kit colour rule kcls/kaSent + story words) */
 function kitHintSign(p,l){if(/^(không (mất|được|tốn)[^,]*gì|không được không mất)/i.test(p))return 0;
+ if(/^(Áp lực hôn sự|Lời đồn)\s*\+\s?\d/.test(p))return -1;if(/^(Áp lực hôn sự|Lời đồn)\s*[-−]\s?\d/.test(p))return 1;/* kit-cost-rows-home: less pressure / rumour is good */
+
  if(l==="kèm"&&!/\+\s?\d/.test(p)&&!/bớt (ghen|oán)/.test(p))return -1;/* a side effect is a risk unless it is a plain gain */
  if(/(^|\s)(phật ý|hận|sa sút|không thể|đoạn tuyệt|bẽ mặt|nhạt|lạt lẽo|lạnh nhạt|chán|trách|giận|ghét|tang vật|lộ là|bị đánh|chịu đòn|thất sủng|bị phạt)(\s|$|,)/i.test(p)&&!/^(nàng|con nàng|của nàng|hắn) /i.test(p))return -1;
- if(/(thân|thiện cảm|quý ngươi|quý ta|tình ý|(^|\s|\()lòng)\s*[-−]\s?\d/i.test(p))return -1;if(/(thân|thiện cảm|quý ngươi|quý ta|tình ý|(^|\s|\()lòng)\s*\+\s?\d/i.test(p))return 1;
+ if(/(thân|thiện cảm|quý ngươi|quý ta|quý nhau|tình ý|(^|\s|\()lòng)\s*[-−]\s?\d/i.test(p))return -1;if(/(thân|thiện cảm|quý ngươi|quý ta|quý nhau|tình ý|(^|\s|\()lòng)\s*\+\s?\d/i.test(p))return 1;
  let c="n";try{c=kaSent(p,"n")}catch(e){}if(c==="g")return 1;if(c==="r")return -1;
  if(/(^|\s)(hài lòng|thoát nạn|vui|hợp ý|thương|tin cậy|giữ được|được giữ|được dời|dọn sang|tạ ơn)(\s|$|,)/i.test(p))return 1;return l==="hỏng"?-1:l==="kèm"?-1:1}
 const KIT_DEADLY=/(tru di|ban chết|mất mạng|lộ là chết|là chết|bị chết|xử tử|xử trảm|\bchết\b)/i;
@@ -250,6 +252,11 @@ function kitHintPhrase(p,sg,nm,lv){const who=nm||"\u0001";
   [/phi tần.*ghen|ghen.*phi tần/i,["chuốc lòng ghen","các phi tần ghen ghét","các phi tần ghen ghét"],["bớt người ghen","các phi tần bớt ghen","các phi tần bớt ghen"],"i"],
   [/ghen|oán|ghét/i,["kết thêm oán","có người ghen ghét",`${who} sinh oán`],["bớt người oán","có người nguôi giận",`${who} nguôi giận`],"i"],
   [/tình ý/i,["thêm tình riêng","người ấy thêm tình ý",`${who} thêm tình ý`],["dứt tình riêng","người ấy nguội lòng",`${who} nguội lòng`]],
+  [/quý nhau/i,["hai bên thêm thân thiết","hai bên quý nhau hơn","hai bên quý nhau hơn"],["hai bên sinh xa cách","hai bên bớt quý nhau","hai bên bớt quý nhau"]],/* kit-cost-rows-home «quý nhau» (a decline that costs the liking of both sides) */
+  [/Gia thanh/i,["thêm danh giá gia môn","gia môn thêm danh giá","gia môn thêm danh giá"],["tổn danh giá gia môn","gia môn sút danh giá","gia môn sút danh giá"]],
+  [/Áp lực hôn sự/i,["thêm sức ép hôn sự","hôn sự bị thúc ép hơn","hôn sự bị thúc ép hơn"],["đỡ sức ép hôn sự","hôn sự bớt bị thúc ép","hôn sự bớt bị thúc ép"],"i"],
+  [/Lời đồn/i,["thêm lời ra tiếng vào","người ngoài xì xào thêm","người ngoài xì xào thêm"],["lời đồn lắng xuống","người ngoài bớt xì xào","người ngoài bớt xì xào"],"i"],
+  [/Hồi môn/i,["thêm của hồi môn","thêm của hồi môn","thêm của hồi môn"],["hao của hồi môn","hao của hồi môn","hao của hồi môn"]],
   [/thân\b|thiện cảm|quý ngươi|quý ta/i,["được lòng người","người ấy có thiện cảm hơn",`${who} có thiện cảm với ta hơn`],["mất lòng người","người ấy mất thiện cảm",`${who} mất thiện cảm với ta`]],
   [/(^|\s|\()(lòng|Lòng)\s/,["được lòng kẻ hầu","kẻ hầu một lòng theo ta",`${who} một lòng theo ta`],["mất lòng kẻ hầu","kẻ hầu sinh oán",`${who} sinh oán`]],
   [/thương con|hoàng tử|công chúa|các con/i,["có lợi cho con","con được thương","Hoàng thượng thương con hơn"],["con thiệt","con bị lạnh nhạt","con bị lạnh nhạt"]],
@@ -273,7 +280,7 @@ function kitHintWho(p,m){try{const L=(typeof liveRivals==="function"?liveRivals(
  for(const v of L)if(v&&v.name&&p.includes(v.name))return v.name;
  if(!/^(nàng|hắn|con nàng)\s/.test(p))return"";const w=m&&m.who;if(w&&w.w&&w.w[0]==="r"){const v=typeof RV==="function"?RV(w.w[1]):null;if(v)return v.name}if(w&&w.nm)return w.nm}catch(e){}return""}
 /* how big a change is, in words (from Tâm cơ 25): "(nhiều)" / "(chút ít)" against the usual size of that stat — never the number */
-const KIT_HINT_MAG=[[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,10],[/được ưa/i,3],[/Sủng/i,5],[/Danh|Đức|Ân tình/i,4],[/Bạc/i,40],[/Sức/i,10],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,2]];
+const KIT_HINT_MAG=[[/Áp lực hôn sự|Lời đồn|Gia thanh/i,10],[/Hồi môn/i,40],[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,10],[/được ưa/i,3],[/Sủng/i,5],[/Danh|Đức|Ân tình/i,4],[/Bạc/i,40],[/Sức/i,10],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,2]];
 function kitHintMag(p){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];if(!n)return"";const v=+n;for(const [re,big] of KIT_HINT_MAG)if(re.test(p))return v>=big*1.5?" (nhiều)":v<=Math.max(1,Math.floor(big/4))?" (chút ít)":"";return""}
 function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:""};
  if(o.hint){const h=typeof o.hint==="function"?o.hint(lv):String(o.hint);return{hint:h}}
