@@ -18,7 +18,11 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
 /* per-kind extra checks (in-page source, returns {ok, info}); builders add theirs */
 const KIND_CASES={/* ve (mg-craft-ve): the Thủy mặc levers exist and get harder toward ease 0; the stand-in motifs are listed as missing pictures (the «tạm» marker) */
  ve:`(()=>{const L=BAL.mgTier.lev.ve,need=["place","tones","ramp","dry","peek","bleed","lim","limBase"];const m=(window.CTM_MISSING_PICS&&JSON.stringify(window.CTM_MISSING_PICS))||"";
-  return{ok:typeof k91Ve==="function"&&need.every(k=>Array.isArray(L[k]))&&L.place[0]<L.place[1]&&L.tones[0]>L.tones[1]&&L.ramp[0]<L.ramp[1]&&L.dry[0]<L.dry[1]&&L.peek[0]<L.peek[1],info:{lev:Object.keys(L),missing:m.slice(0,80)}}})()`};
+  return{ok:typeof k91Ve==="function"&&need.every(k=>Array.isArray(L[k]))&&L.place[0]<L.place[1]&&L.tones[0]>L.tones[1]&&L.ramp[0]<L.ramp[1]&&L.dry[0]<L.dry[1]&&L.peek[0]<L.peek[1],info:{lev:Object.keys(L),missing:m.slice(0,80)}}})()`,
+ /* hoa (review/mg-craft-hoa): every lever the engine reads sits in the lead's BAL.mgTier.lev.hoa block as [ease0, ease5] (ONE CORE), the score weights add to 1, the tray has 6 slots;
+    the wrong-flower / cut / lean play checks live in dev/test/mg-craft-hoa.js */
+ hoa:()=>{const L=BAL.mgTier.lev.hoa,H=BAL.mgTier.hoa,need=["ghost","cutTol","angTol","alike","sway","limStem"],miss=need.filter(n=>!Array.isArray(L[n])||L[n].length!==2);
+  const ws=Object.values(H.w).reduce((a,b)=>a+b,0);return{ok:!miss.length&&Math.abs(ws-1)<1e-9&&H.n.length===3&&L.alike[0]<=3&&L.alike[0]+1<=6&&L.limStem[0]<L.limStem[1],miss,ws,n:H.n}}};
 /* the engine names the kinds must reach (mirror of KG82_CRAFT; a mismatch = the wiring moved) */
 const KG82_CRAFT_E={theu:"stitch",kim:"papercut",ve:"inkwash",hoa:"ikebana"};
 /* the plain play of a kind: playArt (Cắm hoa has no plain art key — the plain "hoa" is Họa/Vẽ — so it opens by startContest) */
