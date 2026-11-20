@@ -55,3 +55,8 @@ READY = review/kyngo-daily-rv @ face71dd: a2ae3ac2 + LIVE main edb2e724 (already
 | 9 tests | unit 22/22 |
 Gates on face71dd: kyngo-eq PASS · one-core-guard PASS · kyngo-unit 22/22 · kyngo-shots 12/12 on both devices (LOOKED 3×) · QUICKCHECK PASS (open 1416 ms, old save from live ok + buổi, core gates PASS incl. coop-one-world, TIME-SPILL PASS, perf new/live render 205/198, tab 423/417, buổi 978/1011 ms).
 Shots: scratch only, deleted after the verdict.
+
+## FINAL MERGES (E18r)
+- 19/11: LIVE 1a4df595 → READY cc29a89a (assemble.py conflict: main's jptime.js + jbalky/jky kept).
+- 20/11: LIVE 72922870 (palace-chatter) → READY ba7280e3 (assemble.py + KIT_REQUESTS.md both sides kept); kyngo-unit 14 made robust (a random cung-nữ start = band 0; test-only fix).
+- 20/11: LIVE 94c3bddc (mg-ready-guide) → **READY 6f2987d** (only generated files conflicted; rebuilt). kyngo-eq PASS · one-core-guard PASS · kyngo-unit PASS · QUICKCHECK PASS (open 1590 ms, old save from live ok, core gates PASS, perf new/live render 222/224, buổi 1118/1333 ms). Fast-forward of origin/main checked.
