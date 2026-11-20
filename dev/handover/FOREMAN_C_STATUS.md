@@ -810,3 +810,4 @@ NEWACCT#10 ~21:10Z 20/11: depth 0 (ROOT), START_CTX ~8 % (82k/1M) → roll at ~3
 NEWACCT#9 ~23:22Z: OWNER L1450: cloak test — shoulder pieces (vân kiên/capes) too big, bulky, became a cape; open old prompts, find why, make small/neat → DESIGN12 brief dong-compact-L1450.md (*_cloak2). Next Lượt 1451.
 NEWACCT#10 ~21:12Z: #9 relayed L1450 (owner, #9 chat) → DESIGN12 on dong-compact-L1450.md (*_cloak2 + WHY list), reports to #10. Lượt clash: #10 also used 1450 (takeover msg). Next Lượt 1451.
 NEWACCT#9 ~23:30Z: OWNER L1452 (still in #9 chat): resend maid GPT prompts → resent maid7/gpt/{nhat,thancan,chuongsu,mama}_gpt.txt (L1355 set). Next Lượt 1453 (#10 please continue from there).
+NEWACCT#10 ~21:12Z: #9 relayed L1452: #9 resent owner the 4 maid GPT prompts (maid7/gpt nhat/thancan/chuongsu/mama, L1355 set); open notes reports/MAIDP1.md. Next Lượt 1453.
