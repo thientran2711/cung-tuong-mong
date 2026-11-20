@@ -313,3 +313,31 @@ Branch review/phutang-road @ cddb913f (pushed). ALL 7 fixes are DONE and committ
 2. Still to run after those: npc-roads ORG=pf over http (`ORG=pf node dev/test/npc-roads.js http://127.0.0.1:8765/index.html 1 120`), ge-guard (`node dev/test/ge-guard.js http://127.0.0.1:8765/index.html` — NOT dev/index.html, see FOR E), one-core-text / one-core-bind / one-core-text-rule (one-core-guard already PASS in quickcheck).
 3. Fill the results into the table above (bots per road: lose/mid/win/win2, errors; road-full chapter lists), verify the sha on origin, then send_message to FOREMAN E #14 session_01DgYSWondh7NL1nHBy3F1eH: «SẴN SÀNG KIỂM phutang-road <sha> r2» + one-line results.
 Do not touch BAL values (law 2/3/4/5 passed; the 26 pfS→pfR conversions + 9 new ác/law-1 options were measured: STATIC spread ≤ 6, dominance 0). Scans to re-run on the final sha: python3 dev/measure/pt-clash.py · node dev/measure/pt-law6.js · python3 dev/measure/pt-scan.py · python3 dev/test/pt-vp.py.
+
+### §ROUND 2 — final re-tests (E21c, depth 5; 20/11)
+PRIORITY #1 CHECK ('phutang-road|ptX|jgecat'): OD 0 | ledger 0 | claims 8 | main 15 | review/* 2 | archive 4 — REUSED review/phutang-road cddb913f (7 fixes untouched), E21b HANDOVER, every pt-* scan/test. No game code changed in this pass; BAL untouched.
+**Merges (only conflicts: assemble.py module list + generated index.html/sw.js, rebuilt by build_site.sh):** f5a5a0f9 = cddb913f + LIVE 72922870 (main's jchatl/jchat kept beside the pt modules) → f122f986 = + review/bd-roads r2 9c96112d + LIVE 70bea3d3 → **b868bbce = + review/bd-roads 4adea508 (bd-roads PASS = 17034d70 + LIVE 377d5ce3)**. f122f986→b868bbce changes in dev/build only j91.js + jbal2.js (mini-game Đầu hồ pull / mg2.cal), nothing a pt road reads.
+
+| test | on | result |
+|---|---|---|
+| assemble + node --check all.js | each merge | OK (built 12795812 on b868bbce) |
+| pt-clash.py | b868bbce | 36 names · clashes 0 · stale 0 · PASS |
+| pt-law6.js | b868bbce | 6a SURE-VS-V 0 · 6b state UNGUARDED 0 · 6c read UNGUARDED 0 · PASS |
+| pt-scan.py | b868bbce | 6b 0 unguarded moves · 6c 101 options, 58 booked, 43 used up, NO BOOK 0 |
+| pt-vp.py | b868bbce | PASS 3802 strings |
+| one-core-guard · -text · -bind · -text-rule | b868bbce | PASS ×4 |
+| ge_guard gen_js.py + check.py | b868bbce | jgecat.js = generated (no diff) · ERRORS 0 |
+| quickcheck.sh | b868bbce | QUICKCHECK PASS · core gates PASS · open 1587 ms · old save ok · perf new/live render 205/205 · tab 447/410 · buổi 1029/3331 · tasks>200ms 20/21 |
+| quickcheck.sh | f122f986 | QUICKCHECK PASS · core gates PASS |
+| ge-guard.js (http) | f122f986 / f5a5a0f9 | 6/6 / 6/6 |
+| kc-roads direct.js ORIGINS=pf,nc,bd | f122f986 / f5a5a0f9 | fail [] errs [] ×3 / same |
+| kc-roads route.js --origin=pf | f122f986 / f5a5a0f9 | fail [] · «Vương muội» 0 («Hoàng muội» ×2) / same |
+| kc-roads coop-together.js --a=cnv --b=pf | f122f986 / f5a5a0f9 | 26/26 / 26/26 |
+| bot smoke pt-roads-bal 3 lives/road | f122f986 | 12/12 reach .11, 0 errors, 0 page errors |
+| pt-roads-bal STATIC (each run) | f5a5a0f9 | no-loss 0 · spread > 6: 0 · not harder at rank 0 · digits/% 0 · unknown tokens none |
+| **bots 20 valid lives/road** (fresh page per life, random options) | f5a5a0f9 | pt_hai 20/20: lose 4 · mid 10 · win 4 · win2 2 · pt_su 20/20: lose 4 · mid 11 · win 2 · win2 3 · pt_tang 20/20: lose 1 · mid 10 · win 5 · win2 4 · pt_dang 20/20: lose 7 · mid 7 · win 2 · win2 4 — 0 game errors, 0 page errors (1 pt_dang life lost to a renderer OOM, not counted, re-run) |
+| road-full.js, 1 life each, full frame | f5a5a0f9 | pt_hai 14/14 «Người đếm tên kẻ chết đuối» · pt_su 14/14 «Thuyền đi không chiếu» · pt_tang 14/14 «Thầy sang bể» (9/9 checks) · pt_dang 14/14 «Luật bị bỏ dở» (9/9) — chapters 1–3 tutorial, 4 premise, 5–11 road, 12–14 endgame |
+| npc-roads ORG=pf (http) | f5a5a0f9 | 1 life × 120 months, pf player road pt_dang: NPC roads 10 · 14/14 pass (no page errors over http) |
+
+Box notes (not this branch): (1) one Chromium renderer now grows to 5–7.6 GB over a long life → a 2nd road-full life in the same process, and npc-roads 2×240 months, were OOM-killed (memory cgroup) — each road-full road ran in its own process, npc ran 1×120; FOR E: the per-page memory growth may be worth a look on LIVE (jchat/jchatl landed since r1). (2) quickcheck G4 50-coop-one-world FAILed once on f5a5a0f9 (seed 3: guest week changes R.evm) — flaky on LIVE main 72922870 too (same seed: 1 PASS 1 FAIL), this branch 3/3 PASS on re-run, and PASS in both later quickchecks — FOR E.
+**READY: review/phutang-road @ b868bbce r2.** LIVE main moved on to 66bd36cd after this; bd-roads 4adea508 is not on main yet, so the coordinator's land merge resolves.
