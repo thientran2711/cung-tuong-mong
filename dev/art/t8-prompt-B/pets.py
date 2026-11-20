@@ -80,8 +80,67 @@ def check():
     for k, (en, hk, vn) in A.items():
         if any(w in en for w in ("beside", "at her feet", "next to her", "by her side")): bad.append(f"PET-BESIDE {k}")
     return bad
+# ---- KIDS (owner verbatim Lượt 1076, ROOT-68 relay 20/11 ~07:20Z: "Cung nữ nhà nghèo, nữ đế là không ôm thú cưng, công chúa trẻ con thì có ôm thú cưng." ; FRUITPET2)
+# Công chúa kid-f01–f24 at every drawn age (a4 a9 a14 a20; figwork/kids/kjobs.json lineups) + trẻ con = Hoàng tử kid-p01–p24 at the CHILD ages a4 a9 a14
+# (kid-p a20 = a grown man, not a child -> no pet). Same rules as above: in contact only, the pet REPLACES the held item (build_npc.kid()),
+# >= 3 children per group x age, no species twice inside one group (all its ages together), a child at most one pet; small child-suitable animals.
+# Maids (tm*, ma ma), nhà nghèo / lãnh cung, Nữ đế: NO pets (owner, same quote) -> not in RANKS / KID_AGES, gate PET_SCOPES excludes them.
+KID_AGES = {"kf": ["a4", "a9", "a14", "a20"], "kp": ["a4", "a9", "a14"]}
+# (en clause with {p} = her/his, vn)
+KA = {
+ "k_rabbit":   ("hugging a small white rabbit in {p} arms", "ôm thỏ trắng nhỏ trong tay"),
+ "k_chick":    ("a fluffy yellow chick cupped gently in {p} small hands", "chú gà con vàng nâng trong hai bàn tay"),
+ "k_kitten":   ("hugging a little tabby kitten against {p} chest", "ôm mèo con mướp trước ngực"),
+ "k_bfly":     ("a small butterfly resting on {p} raised fingertip", "bướm đậu trên đầu ngón tay"),
+ "k_puppy":    ("hugging a small fluffy white puppy in {p} arms", "ôm chó con lông trắng trong tay"),
+ "k_dove":     ("a small white dove perched on {p} hand", "bồ câu trắng nhỏ đậu trên tay"),
+ "k_canary":   ("a little yellow canary perched on {p} finger", "chim hoàng yến đậu trên ngón tay"),
+ "k_turtle":   ("a tiny turtle resting on {p} open palm", "rùa con trên lòng bàn tay"),
+ "k_whiteeye": ("a tiny white-eye bird perched on {p} lightly raised finger", "chim vành khuyên đậu trên ngón tay khẽ nâng"),
+ "k_lovebird": ("a pair of tiny lovebirds perched on {p} hand", "đôi chim yến phụng đậu trên tay"),
+ "k_oriole":   ("a little golden oriole perched on {p} finger", "chim hoàng anh đậu trên ngón tay"),
+ "k_parrot":   ("a small green parrot perched on {p} wrist", "vẹt xanh nhỏ đậu trên cổ tay"),
+ "k_duckling": ("a fluffy yellow duckling cupped gently in {p} small hands", "vịt con vàng nâng trong hai bàn tay"),
+ "k_sparrow":  ("a little brown sparrow perched on {p} raised fingertip", "chim sẻ đậu trên đầu ngón tay"),
+ "k_myna":     ("a small black myna bird perched on {p} wrist", "chim sáo đen nhỏ đậu trên cổ tay"),
+}
+KSPECIES = {k: k for k in KA}   # every key is its own species (kitten = the only cat, one dove, one butterfly per group)
+# group -> age -> [(child, animal)]; animal colour chosen against the child's palette (build_npc FP/PP: no white pet on a white robe, no yellow on yellow)
+KIDS = {
+ "kf": {"a4":  [("f01", "k_rabbit"), ("f02", "k_chick"), ("f03", "k_kitten")],
+        "a9":  [("f04", "k_bfly"), ("f05", "k_puppy"), ("f06", "k_dove")],
+        "a14": [("f07", "k_canary"), ("f08", "k_turtle"), ("f09", "k_whiteeye")],
+        "a20": [("f10", "k_lovebird"), ("f11", "k_oriole"), ("f12", "k_parrot")]},
+ "kp": {"a4":  [("p01", "k_puppy"), ("p02", "k_duckling"), ("p03", "k_rabbit")],
+        "a9":  [("p04", "k_sparrow"), ("p05", "k_turtle"), ("p06", "k_kitten")],
+        "a14": [("p07", "k_myna"), ("p08", "k_canary"), ("p09", "k_dove")]},
+}
+def kid_pet(jid, age):
+    """jid 'f01' / 'p07' -> en pet clause (replaces the held-item clause of build_npc.kid) or None."""
+    g = "kf" if jid[0] == "f" else "kp"
+    for c, k in KIDS[g].get(age, []):
+        if c == jid: return KA[k][0].format(p="her" if g == "kf" else "his")
+    return None
+def kid_check():
+    bad = []
+    for g, ages in KIDS.items():
+        if list(ages) != KID_AGES[g]: bad.append(f"KIDPET-AGES {g} {list(ages)}")
+        sp = []
+        for a, L in ages.items():
+            if len({c for c, _ in L}) < 3: bad.append(f"KIDPET-COUNT {g} {a}")
+            sp += [KSPECIES[k] for _, k in L]
+        if len(sp) != len(set(sp)): bad.append(f"KIDPET-REPEAT {g} {sp}")
+        ch = [c for L in ages.values() for c, _ in L]
+        if len(ch) != len(set(ch)): bad.append(f"KIDPET-CHILD-TWICE {g}")
+    for k, (en, vn) in KA.items():
+        if any(w in en for w in ("beside", "at her feet", "at his feet", "next to", "by her side", "by his side")): bad.append(f"KIDPET-BESIDE {k}")
+    return bad
+_check_ranks = check
+def check(): return _check_ranks() + kid_check()
 if __name__ == "__main__":
     import sys
     if sys.argv[1:2] == ["check"]: b = check(); print("\n".join(b)); print("bad", len(b)); sys.exit(1 if b else 0)
     print("| Bậc | Tuổi | Người → thú cưng (tiếp xúc) |\n|---|---|---|")
     for (r, a), L in table().items(): print(f"| {r} | {a} | " + " · ".join(f"{p} → {A[k][2]}" for p, k in L) + " |")
+    for g, ages in KIDS.items():
+        for a, L in ages.items(): print(f"| {'Công chúa kid-f' if g == 'kf' else 'Hoàng tử kid-p'} | {a} | " + " · ".join(f"{g[1]}{c[1:]} → {KA[k][1]}" for c, k in L) + " |")

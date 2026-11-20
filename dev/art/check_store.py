@@ -13,7 +13,7 @@ Usage
   scope face = thiếu nữ face prompts (face-common mNN/cNN/sNN .FULL.txt, or a maker's stdout via prompt_file "-")
   --pid sNN (scope face): B20 root-hex check, her root pair only (MG3 L784 #6); every scope: prompt > 10 000 chars = FAIL (gen tool limit)
 MASTER BLOCK (owner B25, Lượt 745/766, MG1): in EVERY scope every sentence of dev/art/MASTER_COMMON.txt must be present verbatim exactly once
-PETS (owner Lượt 1057/1059, rule F17): a pet in a hold sentence only at --age a18/a26 (or none), scope tp1-6/pr1-6/state:kc/face; never beside her = else FAIL; table + >=3 count: t8-prompt-B/pets.py check
+PETS (owner Lượt 1057/1059, rule F17): a pet in a hold sentence only at --age a18/a26 (or none), scope tp1-6/pr1-6/state:kc/face; never beside her = else FAIL; + kids (owner 20/11): --scope girl (Công chúa kid-f) a4/a9/a14/a20, --scope boy (Hoàng tử kid-p) a4/a9/a14; maids / nhà nghèo / Nữ đế none; table + >=3 count: t8-prompt-B/pets.py check
 NOFRUIT (owner Lượt 1052/1054, 20/11, rule F16): in EVERY scope a fruit word in a hold sentence (holding/held/cradling/carrying…) = FAIL; no exemption (drawn s44/s64 records in face-common/legacy_fruit/ FAIL if reused)
 NOEAR (owner Lượt 1037, 20/11, rule F15): in EVERY woman/girl scope (all but --scope emperor|men) master_common.EAR_SENT exactly once + NO earring word (earring, ear drop/pendant/stud, jewels at the ears, hoa tai…) = else FAIL
   (dev/art/master_common.py); missing / edited / doubled = FAIL "MASTER ...".
@@ -849,10 +849,13 @@ def fruit_fails(text, scope=None, pid=None):
 # PETS (owner Lượt 1057/1059, 20/11, rule F17; table dev/art/t8-prompt-B/pets.py): a pet only at ages 18/26, only kc (thiếu nữ) / face and ranks 1–6;
 # none at t7 HQP, t8 HH, Thái hậu, triều phục, Nữ đế, maids/states, ages 36+; the animal only IN CONTACT, never beside her / at her feet.
 PET_RX = re.compile(r"\b(?:rabbits?|bunn(?:y|ies)|kittens?|cats?|pupp(?:y|ies)|dogs?|sparrows?|butterfl(?:y|ies)|doves?|canar(?:y|ies)|lovebirds?|parrots?|nightingales?"
-                    r"|orioles?|white-eye|kingfishers?|swallows?|songbirds?|birds?|cranes?|peacocks?|carps?|goldfish|fish|squirrels?|turtles?|deer|fawns?)\b(?! cage| shaped|-shaped| motif| pattern|[- ]blue|[- ]feathers?|[- ]inlay|[- ]green|-and-|[- ]silk|[- ]wings?| \(mõ\)|[- ]hairpin)", re.I)
-PET_SENT_RX = re.compile(r"\bPose:|\bshe holds\b|\bholding\b|\bperched\b|\bcradl\w*|\bin her arms\b|\bbeside her\b|\bat her feet\b", re.I)
-PET_BESIDE_RX = re.compile(r"\b(?:beside her(?! cheek| face| ear| chin| hair| temple| shoulder)|at her feet|next to her|by her side|by (?:the|her) chair|at her side on the ground|sitting beside|standing beside)\b", re.I)
+                    r"|orioles?|white-eye|kingfishers?|swallows?|songbirds?|birds?|cranes?|peacocks?|carps?|goldfish|fish|squirrels?|turtles?|deer|fawns?|chicks?|ducklings?|mynas?)\b(?! cage| shaped|-shaped|[- ]toys?| motif| pattern|[- ]blue|[- ]feathers?|[- ]inlay|[- ]green|-and-|[- ]silk|[- ]wings?| \(mõ\)|[- ]hairpin)", re.I)
+PET_SENT_RX = re.compile(r"\bPose:|\b(?:she|he) holds\b|\bholding\b|\bhugging\b|\bcupped\b|\bperched\b|\bcradl\w*|\bin (?:her|his) arms\b|\bbeside (?:her|him)\b|\bat (?:her|his) feet\b", re.I)
+PET_BESIDE_RX = re.compile(r"\b(?:beside (?:her|him)(?! cheek| face| ear| chin| hair| temple| shoulder)|at (?:her|his) feet|next to (?:her|him)|by (?:her|his) side|by (?:the|her) chair|at her side on the ground|sitting beside|standing beside)\b", re.I)
 PET_SCOPES = {f"tp{i}" for i in range(1, 7)} | {f"pr{i}" for i in range(1, 7)} | {"state:kc", "face"}
+# + kids (owner Lượt 1076, 20/11 ~07:20Z via ROOT-68: "Cung nữ nhà nghèo, nữ đế là không ôm thú cưng, công chúa trẻ con thì có ôm thú cưng."; FRUITPET2):
+#   --scope girl = Công chúa kid-f at her drawn ages a4 a9 a14 a20; --scope boy = Hoàng tử kid-p at the child ages a4 a9 a14 (a20 = grown man: none). Maids, nhà nghèo, Nữ đế: none.
+KID_PET_AGES = {"girl": ("a4", "a9", "a14", "a20"), "boy": ("a4", "a9", "a14")}
 def pet_fails(text, scope=None, age=None):
     out = []
     for sent in re.split(r"(?<=[.;])\s+", text):
@@ -860,8 +863,10 @@ def pet_fails(text, scope=None, age=None):
         m = PET_RX.search(sent)
         if not m or NEG.search(sent[max(0, m.start() - 30):m.start()]) or re.search(r"\b(?:embroider\w*|motifs?|pattern|painted|carved|woven|jade|gold|silver|toy|scroll|painting|wooden|sandalwood|kite|lantern|fan|hairpin)\b[^,;]{0,40}$", sent[:m.start()], re.I): continue
         ctx = sent[max(0, m.start() - 60):m.end() + 40]
-        if scope not in PET_SCOPES: out.append(("F17", "PET RANK", f"pet in a rank/state without pets (owner Lượt 1059: only thiếu nữ + ranks 1–6): …{ctx}…")); break
-        if age and age not in ("a18", "a26"): out.append(("F17", "PET AGE", f"pet at age {age} (owner Lượt 1059: only 18–26): …{ctx}…")); break
+        if scope in KID_PET_AGES:
+            if age not in KID_PET_AGES[scope]: out.append(("F17", "PET AGE", f"kid pet at age {age} (owner 20/11: công chúa {'/'.join(KID_PET_AGES['girl'])}, trẻ con {'/'.join(KID_PET_AGES['boy'])}; --age required): …{ctx}…")); break
+        elif scope not in PET_SCOPES: out.append(("F17", "PET RANK", f"pet in a rank/state without pets (owner Lượt 1059: only thiếu nữ + ranks 1–6 + công chúa / trẻ con): …{ctx}…")); break
+        elif age and age not in ("a18", "a26"): out.append(("F17", "PET AGE", f"pet at age {age} (owner Lượt 1059: only 18–26): …{ctx}…")); break
         if PET_BESIDE_RX.search(sent): out.append(("F17", "PET BESIDE", f"pet beside her, not in contact (owner Lượt 1057): …{ctx}…")); break
     return out
 DEEP_COLOUR_RX = re.compile(r"\b(?:deep|dark|darker|deeper|dusky)[- ](?:blue|violet|blue-violet|purple|green|red|pink|rose|plum|teal|jade|navy|burgundy|crimson|wine|aubergine|lilac|lavender|aqua|aquamarine|turquoise|coral|peach|gold|yellow|orange|mint|periwinkle|emerald|sapphire|indigo|magenta|mauve|ochre|cyan|celadon|olive|maroon|scarlet|ruby|amber)\b", re.I)
@@ -1020,7 +1025,11 @@ def selftest():
     for b in _PETS.check(): print("PETS TABLE", b); bad += 1
     for t, sc, ag, want in [("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a18", 0), ("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a36", 1),
                             ("Pose: holding a small songbird perched on her lightly raised finger.", "tp7", "a18", 1), ("Pose: a Persian cat sitting beside her, one hand holding a fan.", "tp4", "a18", 1),
-                            ("Pose: holding a fan embroidered with butterflies and cranes.", "tp8", "a51", 0), ("Pose: holding a small woven-grass cricket cage.", "tp8", "a51", 0)]:   # F17 PETS
+                            ("Pose: holding a fan embroidered with butterflies and cranes.", "tp8", "a51", 0), ("Pose: holding a small woven-grass cricket cage.", "tp8", "a51", 0),
+                            ("about 4 years old, a sweet toddler girl, hugging a small white rabbit in her arms.", "girl", "a4", 0), ("about 14 years old, a handsome young boy, a small black myna bird perched on his wrist.", "boy", "a14", 0),
+                            ("about 20 years old, a handsome young man, a little yellow canary perched on his finger.", "boy", "a20", 1), ("a toddler, hugging a small fluffy white puppy in her arms.", "mama", "a18", 1),
+                            ("a sweet toddler girl, hugging a little cloth rabbit toy.", "girl", "a4", 0), ("a little girl, holding a butterfly toy on a stick.", "girl", "a9", 0),
+                            ("a little boy, a small puppy sitting beside him.", "boy", "a9", 1)]:   # F17 PETS (+ kids, FRUITPET2)
         if bool(pet_fails(norm(t), sc, ag)) != bool(want): print("PETS SELFTEST", want, sc, ag, t); bad += 1
     if fruit_fails(norm(open(os.path.join(ART, "face-common", "s64.v5.FULL.txt"), encoding="utf-8").read()), "face", "s64"): print("NOFRUIT s64 store still has fruit"); bad += 1
     if not fruit_fails(norm(open(os.path.join(ART, "face-common", "legacy_fruit", "s64.v5.FULL.txt"), encoding="utf-8").read()), "face", "s64"): print("NOFRUIT legacy s64 record passes"); bad += 1
