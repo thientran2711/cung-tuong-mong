@@ -27,3 +27,6 @@ Shots (scratch only, not in git): Fold 755x1000 + iPad 1180x820 Dư đồ with h
 
 ## For the worker (round 3)
 Fix 1–4, update/plan test B for item 5 (coordinate with invite-host-away landing order), file item 6, final-merge current origin/main (dbddaed2 or later), re-run the gates, SẴN SÀNG KIỂM.
+
+## Perf re-measure on round 2 b9da8074 (asked by D #9: buổi 1537 vs 1033 ms in one run)
+`quickcheck.sh --runs 5` on b9da8074 vs live: QUICKCHECK PASS · median of 5 new/live: render 259/259 ms, tab 561/566 ms, **buổi 1382/1501 ms**, tasks>200ms 23/23, old save ok, core gates PASS. Earlier 3-run on 85be2440: buổi 1258/1079. Box noise is about ±20 %; no real perf drop from jwalk (it runs per khắc on rows from the current khắc on). Not a FAIL item. Verdict unchanged: FAIL (items 1–6) for b9da8074.
