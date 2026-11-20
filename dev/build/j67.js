@@ -140,7 +140,7 @@ function res67(tk,bid,i,odds){const A=th67(tk);if(!A||A.cur!==bid)return;const a
  A.hist.push(`${fill67(b.l||b.h||"",A)}: ${fill67(o.n,A)}${sure?"":ok?" (thành)":" (hỏng)"}`);A.used.push(bid);A.cur=null;A.i++;
  const end=o.e?(Array.isArray(o.e)?(ok?o.e[0]:o.e[1]):o.e):null;
  if(end){end67(A,end);return}
- A.force=ok?o.to||null:o.tf||null;A.due=S.turn+2+rI67(3);if(!pickNext67(A)){end67(A,scEnd67(A))}syncMain67()}
+ A.force=ok?o.to||null:o.tf||null;A.due=S.turn+BAL.arc.trig.fb[0]+rI67(BAL.arc.trig.fb[1]);if(!pickNext67(A)){end67(A,scEnd67(A))}syncMain67()}
 function scEnd67(A){const a=ARC67[A.a];return A.sc>=3&&a.E.win?"win":A.sc>=1&&a.E.mid?"mid":Object.keys(a.E).find(k=>a.E[k].k<0)||Object.keys(a.E)[0]}
 /* cards and rows through the shared kit (j79 kitPanel / kitRows) when present; plain kit rows otherwise */
 function rows67(R){R=R.filter(r=>r&&r[1]);if(typeof kitRows==="function")return kitRows(R.map(r=>[r[0],r[1],r[2]||""]));return `<div class="pcb rows">${R.map(r=>`<div class="pcrow"><span>${r[0]}</span><span class="${r[2]||""}">${r[1]}</span></div>`).join("")}</div>`}
@@ -1724,7 +1724,7 @@ function a67init(k){S.st={step:0,done:0,tag:"",v2:3,M:null,X:[],bm:-9,nx:999,nos
  const pool=arcIds67(k).filter(id=>arcOk67(ARC67[id]));
  const plan=["ms:nhap",k==="cnv"?null:"ms:sung"].filter(Boolean).concat(pool.map(()=>"o"),["fin",k==="cnv"?"ms:len":null,"s","s","s","st:st_the","st:st_con","st:st_dong","ms:hau","ms:ke"]);
  plan.splice(0,plan.length,...plan.filter(Boolean));S.st.ch={n:0,max:plan.filter(x=>x!=="fin").length,na:pool.length,past:[],pool,k,plan,i:-1,usedS:[]};chAdvance67(null)}
-function chStartArc67(B,E){const c=S.st.ch;c.n++;B.chap=c.n;B.sc=E&&E.k>0?1:0;B.due=S.turn+(c.n<=3?1:3+rI67(3));B.dl=B.due+B.seq.length*4+3;pickNext67(B);S.st.M=B;S.st.ms=null;const ab=ARC67[B.a];
+function chStartArc67(B,E){const c=S.st.ch;c.n++;B.chap=c.n;B.sc=E&&E.k>0?1:0;B.due=S.turn+(c.n<=BAL.arc.trig.st[0]?BAL.arc.trig.st[1]:BAL.arc.trig.st[2]+rI67(BAL.arc.trig.st[3]));B.dl=B.due+B.seq.length*4+3;pickNext67(B);S.st.M=B;S.st.ms=null;const ab=ARC67[B.a];
  log(`<b>Chương ${c.n}: ${ab.t}.</b> ${fill67(ab.g,B)} Hạn: ${B.dl-S.turn} tháng.`);
  card67("info",`Chương ${c.n}: ${ab.t}`,[["Mục tiêu",fill67(ab.g,B)],["Số hồi",`${B.seq.length} hồi, mỗi hồi một lựa chọn`],["Cách đi",isSrv67()?"Các hồi tự đến khi tới lúc.":"Mở từng hồi bằng thẻ «Mệnh truyện» ở mục Hành sự."],["Hạn",`${B.dl-S.turn} tháng; quá hạn chương tự khép ở kết cục xấu`],["Mang theo",B.sc?"Lợi thế +1 (chương trước thắng)":""],["Phần thưởng","thắng: đồ quý theo truyện; vừa: đồ thường; thua: không"]],who67(ab.w,B),Q0n67())}
 function isSrv67(){return typeof isSrv==="function"&&isSrv()}
@@ -1769,7 +1769,7 @@ function a67Month(){if(!v267()||S.dead)return"";const st=S.st;try{msCheck67()}ca
  if(A&&!A.done&&!A.cur&&A.nb&&S.turn>=A.due&&isSrv67())return fireBeat67(A)||"";
  return""}
 /* after a beat she must wait a little before the next card shows */
-(function(){const r0=res67;res67=function(tk,bid,i,odds){const A=th67(tk);const r=r0.apply(this,arguments);try{if(A&&A===S.st.M&&!A.done)A.due=S.turn+2+rI67(2)}catch(e){}return r}})();
+(function(){const r0=res67;res67=function(tk,bid,i,odds){const A=th67(tk);const r=r0.apply(this,arguments);try{if(A&&A===S.st.M&&!A.done)A.due=S.turn+BAL.arc.trig.fr[0]+rI67(BAL.arc.trig.fr[1])}catch(e){}return r}})();
 function hint67(A){if(!A)return"";if(A.done)return A.tag;const b=A.cur?beatDef67(A,A.cur):beatDef67(A,A.nb);if(!b)return"";
  if(A.cur)return `Đang chờ ngươi quyết: ${fill67(b.h||"",A)}`;const dm=Math.max(0,A.due-S.turn);
  if(A.dl!=null&&!isSrv67())return dm?`Hồi kế tiếp «${fill67(b.h||"",A)}» mở được sau ${dm} tháng`:`Chơi thẻ «Mệnh truyện: ${fill67(b.h||"",A)}» ở mục Hành sự`;
