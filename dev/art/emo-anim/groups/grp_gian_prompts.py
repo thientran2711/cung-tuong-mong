@@ -8,7 +8,7 @@ mm = the approved ma ma two-colour pair coral red #D4897D + teal #499597 (D16 fr
 import json, sys
 G = {
  "bg": dict(
-  who="a LITTLE PRINCESS of the Qing-style inner palace: a small girl about seven years old, clearly a young CHILD (not a teenager, not a woman), "
+  who="a LITTLE PRINCESS of the inner palace: a small girl about seven years old, clearly a young CHILD (not a teenager, not a woman), "
       "round chubby baby face with big round eyes, a tiny button nose and small mouth, short soft black hair in two small round buns on top of her head "
       "with a tiny gold hairpin and one small pink flower (no crown, no long hair), a royal yellow (#EFBD69) silk robe with a soft peach-pink (#F2A7A0) collar "
       "and a little gold embroidery at the shoulders",
@@ -18,7 +18,7 @@ G = {
   shake="the small pink flower and the hairpin tassel bounce", jewels="hair buns bobbing", old="little child face",
   P=("she", "her", "her")),
  "bt": dict(
-  who="a LITTLE PRINCE of the Qing-style inner palace: a small boy about seven years old, clearly a young CHILD (not a teenager, not a man), "
+  who="a LITTLE PRINCE of the inner palace: a small boy about seven years old, clearly a young CHILD (not a teenager, not a man), "
       "round chubby baby face with big round eyes, a tiny button nose and small mouth, short black hair gathered into one small topknot on top of his head "
       "held by a small gold crown ring (no big crown, no long hair, no beard), a royal yellow (#EFBD69) silk robe with a deep blue (#3F6E9A) collar "
       "and a little gold dragon embroidery at the chest",
@@ -28,7 +28,7 @@ G = {
   shake="his topknot bobs", jewels="topknot bobbing", old="little child face",
   P=("he", "his", "him")),
  "mm": dict(
-  who="a senior palace MA MA (head maid, an older lady-in-waiting) of the Qing-style inner palace: a woman about fifty-five, firm round face with a few soft lines "
+  who="a senior palace MA MA (head maid, an older lady-in-waiting) of the inner palace: a woman about fifty-five, firm round face with a few soft lines "
       "at the eyes and mouth, dark hair with silver streaks pinned UP in a neat bun with two plain silver hairpins (no crown, no phoenix, no flowers, no loose hair), "
       "small earrings, a coral red (#D4897D) brocade over-vest with a teal (#499597) stand collar and teal inner robe, thin gold trim",
   same="Same palace ma ma, same soft hand-painted storybook style, same neat silver-streaked bun with two plain silver hairpins, "
@@ -38,7 +38,7 @@ G = {
   P=("she", "her", "her")),
  # --- CANCELLED (ROOT-57, owner Lượt 800 misread): cn/nt/nl were a mistaken order (Lượt 796); kept only so the ledger prompt refs resolve. DO NOT USE. ---
  "cn": dict(
-  who="a YOUNG PALACE MAID (cung nữ) of the Qing-style inner palace: a girl about eighteen, sweet round face with big round eyes, "
+  who="a YOUNG PALACE MAID (cung nữ) of the inner palace: a girl about eighteen, sweet round face with big round eyes, "
       "black hair pinned UP in a simple neat bun with ONE plain silver hairpin with a tiny tassel (no flowers, no crown, no phoenix, nothing grand, no loose hair), "
       "a plain maid's pale blue-green (#A9CFC4) silk jacket with a narrow ivory (#EAD7BF) collar, simple and modest, clearly a servant, not a consort",
   same="Same young palace maid, same soft hand-painted storybook style, same simple neat bun with one plain silver hairpin, "
@@ -47,7 +47,7 @@ G = {
   shake="her little hairpin tassel swings", jewels="hairpin tassel swinging", old="young face",
   P=("she", "her", "her")),
  "nt": dict(
-  who="a YOUNG PRINCE of the Qing-style palace: a young man about twenty, handsome smooth face with no beard and no moustache, clear bright eyes, "
+  who="a YOUNG PRINCE of the palace: a young man about twenty, handsome smooth face with no beard and no moustache, clear bright eyes, "
       "black hair gathered into a neat topknot on top of his head held by a small gold crown ring (no big crown), "
       "a scholar-prince's deep teal-blue (#4A7C8C) silk robe with a royal yellow (#EFBD69) collar and a little gold embroidery",
   same="Same young prince, a young man about twenty with no beard, same soft hand-painted storybook style, same neat topknot with the small gold crown ring, "
@@ -56,7 +56,7 @@ G = {
   shake="his topknot bobs", jewels="topknot bobbing", old="young face",
   P=("he", "his", "him")),
  "nl": dict(
-  who="an OLDER COURT OFFICIAL of the Qing-style palace: a man about fifty, firm face with a few lines at the eyes and brow, a short neat greying beard and moustache, "
+  who="an OLDER COURT OFFICIAL of the palace: a man about fifty, firm face with a few lines at the eyes and brow, a short neat greying beard and moustache, "
       "a round official's hat with a red silk tassel fringe and a small round button on top, "
       "a dark navy (#2F3E5C) official's robe with a square embroidered rank badge on the chest and a string of court beads",
   same="Same older court official, same soft hand-painted storybook style, same short greying beard and moustache, same round official's hat with red tassel fringe and top button, "
