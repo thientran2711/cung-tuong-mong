@@ -165,6 +165,33 @@ function kg82FxPop(since,now){const F=BAL.mgFx;if(since==null)return F.pop;const
 /* the press ring: a bright ring that blooms and fades over BAL.mgFx.ms round a target pressed at "since" */
 function kg82FxRing(g,x,y,r,since,now){const F=BAL.mgFx,e=(now==null?performance.now():now)-since;if(!since||e<0||e>=F.ms)return;const k=e/F.ms;g.save();g.globalAlpha=1-k*k;g.shadowColor=F.glow;g.shadowBlur=F.blur;g.strokeStyle=F.ring;g.lineWidth=Math.max(3,r*F.ringW*1.6);g.beginPath();g.arc(x,y,r*(1+.5*k),0,Math.PI*2);g.stroke();g.restore()}
 window.kg82FxPop=kg82FxPop;window.kg82FxRing=kg82FxRing;
+/* mg-play2 (kit, BAL.mgFx): THE lit path to follow — the board OUTSIDE [x0,x1] is darkened by laneDim, the path gets a bright core (glow colour × lane) and two bright
+   glowing edges (ring colour), so it reads at a glance on every painting; vertical band, full height unless y0/y1 given */
+function kg82FxLane(g,x0,x1,y0,y1,W){const F=BAL.mgFx;if(y0==null)y0=0;if(W==null)W=g.canvas.width;g.save();
+ g.fillStyle=`rgba(10,6,20,${F.laneDim})`;if(x0>0)g.fillRect(0,y0,x0,y1-y0);if(x1<W)g.fillRect(x1,y0,W-x1,y1-y0);
+ const gr=g.createLinearGradient(x0,0,x1,0),c=F.glow,h=x=>Math.round(x*255).toString(16).padStart(2,"0");gr.addColorStop(0,c+h(F.lane*.55));gr.addColorStop(.5,c+h(F.lane));gr.addColorStop(1,c+h(F.lane*.55));
+ g.fillStyle=gr;g.fillRect(x0,y0,x1-x0,y1-y0);g.shadowColor=F.glow;g.shadowBlur=F.blur*.4;g.strokeStyle=F.ring;g.lineWidth=F.laneEdge;g.beginPath();g.moveTo(x0,y0);g.lineTo(x0,y1);g.moveTo(x1,y0);g.lineTo(x1,y1);g.stroke();g.restore()}
+/* mg-play2 (kit, BAL.mgFx): THE «avoid this» look — a red (kit --bad) danger ring with a small ✕ round a thing the player must NOT touch; hitAt = when it was hit
+   → a red burst that blooms and fades over badMs (the hit cue). Returns the shake offset (px) to give the hit thing / the player's piece. */
+function kg82FxBad(g,x,y,r,now,hitAt){const F=BAL.mgFx,red=kg82Col("--bad",kg82Col("--red","#c23b22"));g.save();g.strokeStyle=red;g.lineWidth=Math.max(2.5,r*2*F.bad);g.shadowColor="rgba(0,0,0,.35)";g.shadowBlur=4;
+ g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.stroke();const k=r*.3,bx=x+r*.72,by=y-r*.72;g.fillStyle=red;g.beginPath();g.arc(bx,by,k*1.15,0,Math.PI*2);g.fill();
+ g.strokeStyle="#fff";g.lineWidth=Math.max(2,k*.42);g.beginPath();g.moveTo(bx-k*.5,by-k*.5);g.lineTo(bx+k*.5,by+k*.5);g.moveTo(bx+k*.5,by-k*.5);g.lineTo(bx-k*.5,by+k*.5);g.stroke();g.restore();
+ if(!hitAt)return 0;const e=now-hitAt;if(e<0||e>=F.badMs)return 0;const q=e/F.badMs;g.save();g.globalAlpha=1-q;g.strokeStyle=red;g.shadowColor=red;g.shadowBlur=F.blur*.5;g.lineWidth=Math.max(4,r*.3*(1-q));
+ g.beginPath();g.arc(x,y,r*(1+q),0,Math.PI*2);g.stroke();g.restore();return Math.sin(e/26)*F.badShake*(1-q)}
+kg82FxBad.shake=(now,hitAt)=>{const F=BAL.mgFx,e=now-hitAt;return e<0||e>=F.badMs?0:Math.sin(e/26)*F.badShake*(1-e/F.badMs)};
+/* mg-play2 (law 11): the SAME lit path when the path curves (hát melody ribbon …): top / bot = [[x,y]…] edge points left→right; board outside darkened laneDim,
+   bright core (glow × lane), two glowing edges — same numbers, same look as the straight kg82FxLane */
+kg82FxLane.path=(g,top,bot)=>{const F=BAL.mgFx,W=g.canvas.width,H=g.canvas.height;if(!top.length)return;const poly=()=>{g.moveTo(top[0][0],top[0][1]);for(const p of top)g.lineTo(p[0],p[1]);for(let i=bot.length-1;i>=0;i--)g.lineTo(bot[i][0],bot[i][1]);g.closePath()};
+ const h=x=>Math.round(x*255).toString(16).padStart(2,"0");g.save();g.beginPath();g.rect(0,0,W,H);poly();g.fillStyle=`rgba(10,6,20,${F.laneDim})`;g.fill("evenodd");
+ g.beginPath();poly();g.fillStyle=F.glow+h(F.lane);g.fill();g.shadowColor=F.glow;g.shadowBlur=F.blur*.4;g.strokeStyle=F.ring;g.lineWidth=F.laneEdge;
+ for(const L of [top,bot]){g.beginPath();L.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.stroke()}g.restore()};
+/* mg-play2 (law 11): the SAME lit path along a stroke to trace (thư pháp …): P = [[x,y]…], w = the path width — glow core × lane + glowing ring edge */
+kg82FxLane.stroke=(g,P,w)=>{const F=BAL.mgFx,h=x=>Math.round(x*255).toString(16).padStart(2,"0");if(!P.length)return;const go=()=>{g.beginPath();P.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.stroke()};
+ g.save();g.lineCap="round";g.lineJoin="round";g.shadowColor=F.glow;g.shadowBlur=F.blur*.4;g.strokeStyle=F.ring;g.lineWidth=w+2*F.laneEdge;go();g.shadowBlur=0;g.strokeStyle=F.glow;g.lineWidth=w;go();g.restore()};
+/* mg-play2 (law 11): the «keep it here» zone of a gauge (nấu / Tu đức level …): kit --good × BAL.mgFx.zone + glowing ring edges, one look for every gauge */
+kg82FxLane.zone=(g,x,y,w,h)=>{const F=BAL.mgFx;g.save();g.globalAlpha=F.zone;g.fillStyle=kg82Col("--good","#2d7a52");g.fillRect(x,y,w,h);g.globalAlpha=1;g.shadowColor=F.glow;g.shadowBlur=F.blur*.3;g.strokeStyle=F.ring;g.lineWidth=F.laneEdge*.7;
+ g.beginPath();g.moveTo(x,y);g.lineTo(x+w,y);g.moveTo(x,y+h);g.lineTo(x+w,y+h);g.stroke();g.restore()};
+window.kg82FxLane=kg82FxLane;window.kg82FxBad=kg82FxBad;
 function kg82SprR(n){const im=kg82Img(n);return im.naturalWidth?im.naturalHeight/im.naturalWidth:1}
 /* label on a painting: light halo (or dark halo on night boards) so text always reads */
 function kg82Lbl(g,t,x,y,maxW,dark){g.save();g.lineJoin="round";g.lineWidth=3.5;g.strokeStyle=dark?"rgba(20,16,30,.85)":"rgba(255,250,238,.92)";
@@ -431,7 +458,8 @@ window.startContest=startContest;window.playArt=playArt;
    jslap/jtd/jhd/j92 engines, the scheme games jsgame, Nghiệm thân jroute):
    kgReady(box, spec) dresses the game's FIRST screen (the intro the caller already drew, nothing runs yet, no clock):
      · a rules block on top: «Luật chơi · <name>», kit rows Môn / Luật (the kind's `how`) or the caller's own step rows, and a small looping picture of the move
-       (.kgr-demo, one of five motions by engine group: fall / swing / hold / drag / tap; still under Cảnh động off / reduced motion);
+       (.kgr-demo, one of six motions by engine group: fall / swing / hold / drag / tap / dodge; still under Cảnh động off / reduced motion;
+      dodge = mg-play2, owner OD 20/11 ~08:05Z: a lit path, a thing with the kit danger ring ✕ comes down it, the hand drags the player's piece aside and back);
      · the caller's start button (spec.go, default #kg82go; its own onclick kept) becomes «Sẵn sàng» — the clock and the board start ONLY on that tap;
      · «Hướng dẫn» beside it = kgTut: a quick guided round of the same engine on the EASIEST board (BAL.mgTier.tut + the lowest gap of BAL.ag.mg2.cal.d),
        a ghost hand (.kgt-hand) shows each move from the engine's own hint hook KG82.peek (point / drag path / button sel / hold-release), unscored, nothing
@@ -439,7 +467,7 @@ window.startContest=startContest;window.playArt=playArt;
        and puts the SAME first screen back (its buttons and handlers kept), repeatable.
    spec: kind (KG82_KIND key) | n, t, how, e (own game), steps:[[label,text]] (rows instead of Luật), go (selector), timed (false = no clock in the game),
          tutor(box, env) → stop (a game with its own engine), v (the person an engine reads as env.v), lv (tutorial board ease). Returns true when dressed. */
-const KG82_DEMO={rhythm:"fall",aim:"swing",slapbar:"swing",groom:"swing",tspluck:"swing",tssteer:"swing",hold:"hold",tdwalk:"hold",cook:"hold",tdtalk:"hold",
+const KG82_DEMO={rhythm:"fall",aim:"swing",slapbar:"swing",groom:"swing",tspluck:"swing",tssteer:"dodge",hold:"hold",tdwalk:"hold",cook:"hold",tdtalk:"hold",
  fling:"pull",calli:"drag",trace:"drag",arrange:"drag",untangle:"drag",tdthread:"drag",blend:"slide",sort:"drag",hoadien:"drag",kinh:"drag",may:"drag"};
 const KG82_HAND=`<svg viewBox="0 0 48 56" aria-hidden="true"><path d="M20 4a4 4 0 0 1 8 0v20l2.5-.6a4 4 0 0 1 4.6 2.8l.4-.1a4 4 0 0 1 4.8 2.6 4 4 0 0 1 4.7 3.3l1 7.5c.9 7-3.4 13.5-10.2 15.3l-3.3.9c-5.6 1.5-11.5-.7-14.8-5.5L8.4 38.6a3.8 3.8 0 0 1 5.9-4.8L20 39z" fill="#fff8ea" stroke="#5a3a0c" stroke-width="2.2" stroke-linejoin="round"/><path d="M28 24v9M35 27v7M41 31v5" stroke="#5a3a0c" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>`;
 function kgReadySpec(s){s=typeof s==="string"?{kind:s}:Object.assign({},s||{});const K=(s.kind&&KG82_KIND[s.kind])||{};
@@ -553,6 +581,16 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 .kgr-demo[data-m=tap] .kgr-obj{opacity:.25;top:calc(50% - 11px);left:calc(25% - 11px);animation:kgrGlow 2.4s step-end infinite}
 .kgr-demo[data-m=tap] .kgr-o2{left:calc(50% - 11px);animation-delay:.8s}.kgr-demo[data-m=tap] .kgr-o3{left:calc(75% - 11px);animation-delay:1.6s}
 .kgr-demo[data-m=tap] .kgr-hand{animation:kgrTap3 2.4s ease-in-out infinite}
+.kgr-demo[data-m=dodge] .kgr-line{opacity:1;top:0;bottom:0;height:auto;left:36%;right:36%;border-radius:0;background:var(--gold);opacity:.5;box-shadow:0 0 14px var(--gold);border-left:3px solid var(--k-card);border-right:3px solid var(--k-card)}
+.kgr-demo[data-m=dodge] .kgr-obj{opacity:1;left:calc(50% - 13px);width:26px;height:26px;background:var(--k-card);box-shadow:none;border:3px solid var(--bad,#c23b22);animation:kgrDrop 2.4s linear infinite}
+.kgr-demo[data-m=dodge] .kgr-obj::after{content:"✕";position:absolute;right:-9px;top:-9px;width:14px;height:14px;border-radius:50%;background:var(--bad,#c23b22);color:var(--k-card);font:700 10px/14px var(--body);text-align:center}
+.kgr-demo[data-m=dodge] .kgr-o2{top:auto;bottom:16%;width:20px;height:20px;background:var(--gold);border:0;box-shadow:0 0 10px var(--gold);animation:kgrDodge 2.4s ease-in-out infinite}
+.kgr-demo[data-m=dodge] .kgr-o2::after{content:none}
+.kgr-demo[data-m=dodge] .kgr-o3{display:none}
+.kgr-demo[data-m=dodge] .kgr-hand{top:auto;bottom:-22%;animation:kgrDodgeH 2.4s ease-in-out infinite}
+@keyframes kgrDrop{0%{top:-24%}100%{top:112%}}
+@keyframes kgrDodge{0%,40%{left:calc(50% - 10px)}54%,86%{left:calc(22% - 10px)}97%,100%{left:calc(50% - 10px)}}
+@keyframes kgrDodgeH{0%,40%{left:50%}54%,86%{left:22%}97%,100%{left:50%}}
 @keyframes kgrFall{0%{top:-12%;opacity:1}62%{top:calc(74% - 11px);opacity:1}70%{top:calc(74% - 11px);opacity:0}100%{opacity:0}}
 @keyframes kgrTapAt{0%,52%{transform:translate(-48%,10%)}62%{transform:translate(-48%,-6%) scale(.92)}74%,100%{transform:translate(-48%,10%)}}
 @keyframes kgrRing{0%,60%{opacity:0;transform:scale(.6)}64%{opacity:1}80%,100%{opacity:0;transform:scale(1.8)}}
