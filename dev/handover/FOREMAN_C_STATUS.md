@@ -458,3 +458,4 @@ ROOT-68 Lượt 1076: OWNER verbatim (via ROOT-67) "Cung nữ nhà nghèo, nữ 
 
 ROOT-68 note: ROOT-67 itself answered the owner as Lượt 1076 (same content; mine not pasted). Next free Lượt 1077.
 ROOT-68: OWNER verbatim (via ROOT-67, ~07:21Z) "Thôi tao ngủ đây, cái việc phòng ốc nhân vật mai tính tiếp." → asleep; rooms + characters wait to tomorrow; no gens tonight. ROOT-67 used Lượt 1077 → next free 1078.
+ROOT-68 Lượt 1078: OWNER ORDER (verbatim via ROOT-67 ~07:22Z) 8 ranks × 3 new people, new palette, 3 workers → brief briefs/rank8-L1078.md; s62/s64/s65; ~3 300 cr (credits 84 462).
