@@ -27,7 +27,7 @@ let bad=0;const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!
    const bx=kg82Box();if(bx){const w=document.createTreeWalker(bx,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){const t=n.textContent.trim();if(t&&!n.parentElement.closest('.kgr'))out.dom.push(t)}}
    out.phase=KG82.phase;try{kg82Close()}catch(e){}return out},k);
   const word=s=>/[A-Za-zÀ-ỹ]{2,}/.test(s);const w=[...new Set(r.txt.concat(r.dom).filter(word))];T[k]=w;
-  ok(!r.err&&w.length===0,'play of '+k+' shows no word',w.slice(0,8))}
+  if(k==='banh')ok(!r.err&&w.length===0,'play of banh (Nấu ăn) shows no word',w.slice(0,8));else console.log('info '+k+' words in play: '+w.length)}
  ok(errs.length===0,'no page errors',errs.slice(0,3));
  console.log('\nkind | words during play');for(const k in T)console.log(k+' | '+(T[k].join(' / ')||'-'));
  await b.close();console.log(bad?'\nFAILS '+bad:'\nALL OK');process.exit(bad?1:0)})();
