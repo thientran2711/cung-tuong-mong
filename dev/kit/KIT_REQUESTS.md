@@ -72,3 +72,8 @@ Built now with EXISTING kit parts only (not blocking): one `kg82Rows` / `kitRows
 label «Sở trường» / «Sở đoản» / «Thân phận», value «thân phận này vốn giỏi môn ấy · tay quen Khá · 5/10 → 8/10» (branch review/cal-p2c).
 Needed (kit keeper): an optional small stamp/seal chip (3 states: sở trường gold-green · sở đoản muted red · thân phận neutral) that can sit in that row's label
 cell, same family as `kitResultSeal`. When it lands, jmgid `mgIdRow` swaps the label text for the seal (one line). No private CSS was written.
+
+## 20/11 map-places (KP02) — place glyphs
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | wk map-places | **place-nth** (Ngự thiện phòng: cooking pot / chopsticks over a bowl) and **place-pd** (Phật đường: lotus + incense) kit glyphs, 128 px webp, same style as place-ttp | KIT_PLACE_IC (jact.js) nth/pd; today stand-ins `suc` / `duc` | Foreman C art / kit keeper | OPEN |
