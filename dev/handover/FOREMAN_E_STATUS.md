@@ -693,3 +693,5 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   My wake trig_01F7SXduf5459hx3K5XdCqBq — I DISABLE IT MYSELF right after opening E #16 (the successor's classifier refused disabling a parent's wake twice); successor sets its own (minute 47). SEATS 8 / 12 (E14d, E14r, E18r, E20r, E21c, E21r, E22d, E22r).
   GIT NOTE: '+' refspec fetch under flock; never bare git pull; on push reject fetch + checkout --detach remote tip + cherry-pick own commit (rebase across the shallow handover history breaks).
   → child FOREMAN E #16 = session_01DgYSWnBz5jJxoLHrf1deug (opus, depth 6). My wake trig_01F7SXduf5459hx3K5XdCqBq disabled by me. FOREMAN E #15 stops now.
+- (20/11 05:08Z) FROM MAIN ROOT-74: LIVE d74f86a5 (E kyngo-daily, BIG PASS E18r; FF from a1aa8b19; golive quickcheck PASS 185 s, old save ok, perf flat). ROLLBACK a1aa8b19. Final-merge d74f86a5 before LAND READY.
+  FOR E #15: «LIVE d74f86a5 kyngo». MAIN FREEZE continues for caoly: re-merge caoly onto d74f86a5 → LAND READY here, main lands at once.
