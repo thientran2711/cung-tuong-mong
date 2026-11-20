@@ -1,0 +1,13 @@
+PASS s62|7|a18|None 9912 same-as-proof (before: PASS)
+PASS s62|7|a18|dong 9905 same-as-proof (before: PASS)
+PASS c01|7|a18|None 9376 same-as-proof (before: PASS)
+PASS m11|7|a26|None 9577 same-as-proof (before: PASS)
+PASS p02|7|a18|dong 9928 same-as-proof (before: PASS)
+PASS c08|7|a36|dong 9747 same-as-proof (before: PASS)
+FAIL s45|7|a51|None 12027 same-as-proof (before: FAIL)
+    FAIL LEN TOO LONG: prompt is 12027 characters, the gen tool refuses more than 10000 | APPROVED CHECK FAIL /tmp/tmp3ao9m4m9.txt scope tp7 | STORE CHECK FAIL /tmp/tmp3ao9m4m9.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate
+FAIL m20|7|a65|dong 11402 same-as-proof (before: FAIL)
+    FAIL LEN TOO LONG: prompt is 11402 characters, the gen tool refuses more than 10000 | APPROVED CHECK FAIL /tmp/tmptueu5hz1.txt scope tp7 | STORE CHECK FAIL /tmp/tmptueu5hz1.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate
+PASS s07|7|a18|dong 9998 same-as-proof (before: PASS)
+PASS s09|7|a18|dong 9984 same-as-proof (before: PASS)
+PASS s22|7|a18|dong 9970 same-as-proof (before: PASS)

@@ -739,6 +739,30 @@ def g15_t3(text,main,sec,age=None):
     """old t3 design -> option B (exactly one occurrence required); G21: crossed collar at a36/a51/a65."""
     m=G15_T3_OLD.search(text); assert m and len(G15_T3_OLD.findall(text))==1,"G15 t3 outfit slot"
     return text[:m.start()]+g15_t3_words(age).format(main=main,sec=sec,motif=m.group(1))+text[m.end():]
+# HQP COLLAR (owner Lượt 1384 via Foreman C #7, 20/11): t7 current outfit LAYERED NECKLINE = dev/art/thu_comoi/s62_t7_THU_COMOI.txt words (make_thu_comoi.py layer() + OPEN);
+# ONE copy here, used by store-all/build_all.hqp_collar. Store gate: a t7 prompt holding the block (long or SHORT form, her own colour words) is compared with the
+# store text carrying the same block; prompts without it are checked as before.
+HQP_NO="never a round collar, never a V, NO crossed wrap collar"
+HQP_OPEN="OPEN at the front (its lobes resting on the shoulders and back, never covering the neck or the square inner neckline)"
+HQP_CAPE="a jewelled cloud-collar cape edged with pearls and gold over the shoulders, "
+def hqp_layer(main,sec,short=False):
+    edge="a broad royal-yellow brocade band studded with pearls (the Hoàng quý phi edge, her broad yellow collar)"; oe="a slim gold-and-pearl band"; outer=f"the {main} outer robe"
+    if short: return (f"a LAYERED NECKLINE: a {sec} inner top with a low straight SQUARE neckline edged by {edge}, under {outer} worn OPEN at the front, "
+                      f"its two front edges ({oe}) falling from both shoulders, neck and collarbones visible; NO crossed wrap collar")
+    return (f"a LAYERED NECKLINE (two-garment look): a fitted {sec} INNER top (like a tube-top bodice) with a low straight SQUARE neckline across the upper chest, "
+            f"showing her neck and collarbones, that square neckline edged by {edge}; OVER it {outer} worn OPEN at the front, its two straight front edges ({oe}) "
+            f"running from behind the neck over BOTH shoulders and straight down each side of the chest, framing the bordered square neckline; {HQP_NO}")
+HQP_SLOT=re.compile(r"a near-empress ceremonial robe of ([^,]+?) silk, ")
+def hqp_store(store,prompt):
+    """-> store with the prompt's HQP block when the prompt holds a valid one (template, any colour words), else store unchanged."""
+    m=HQP_SLOT.search(store)
+    if not m: return store
+    for short in (False,True):
+        rx=re.escape(f"a near-empress ceremonial robe of {m.group(1)} silk with "+hqp_layer("\x00","\x01",short)+"; the robe ").replace(re.escape("\x00"),"([^,;()]+?)").replace(re.escape("\x01"),"([^,;()]+?)")
+        pm=re.search(rx,prompt)
+        if pm and HQP_CAPE+HQP_OPEN+", " in prompt and store.count(HQP_CAPE)==1:
+            return store.replace(m.group(0),pm.group(0),1).replace(HQP_CAPE,HQP_CAPE+HQP_OPEN+", ",1)
+    return store
 def store_check(pf, prompt, args):
     """STORE GATE (owner Lượt 371/373/375), unchanged logic: -> list of (best, sentence) missing/rewritten."""
     B=os.path.join(ART,'t8-prompt-B')
@@ -756,8 +780,8 @@ def store_check(pf, prompt, args):
         rx=re.escape(_g15).replace(re.escape('{main}'),'(.+?)').replace(re.escape('{sec}'),'(.+?)').replace(re.escape('{motif}'),re.escape(m.group(1)))
         store=store[:m.start()]+store[m.end():]
         if not re.search(rx,prompt): return [(0,'G15 Quý nhân t3 option-B outfit words missing (dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt)')]
+    store=hqp_store(store,prompt)   # HQP COLLAR (L1384)
     for _o,_n in master_common.doan_cuts_made(prompt,scope_from_store_args(args)):   # B26 length exception (Foreman C #5 (a)): the same master-repeat clauses cut from the store text (prefix + necessity rule)
-    for _o,_n in master_common.doan_cuts_made(prompt):   # B26 length exception (Foreman C #5 (a)): the same master-repeat clauses cut from the store text (prefix + necessity rule)
         store=store.replace(_o,_n,1)
     sp=lambda s:[x.strip() for x in re.split(r'(?<=[.;])\s+',s) if len(x.strip())>12]
     P=sp(prompt); bad=[]
@@ -1014,7 +1038,6 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
         if e.get("season") and not _winter: continue   # SEASON: winter-only sentence (W01-W05)
         if e.get("not_season") and _winter: continue   # SEASON: replaced in winter by its W twin
         if e["id"] == "S24" and len(master_common.doan_cuts_made(text,scope)) == len(master_common.DOAN_LEN_CUTS): continue   # B26 length exception: S24 repeats master M13 (cut last, only when needed)
-        if e["id"] == "S24" and len(master_common.doan_cuts_made(text)) == len(master_common.DOAN_LEN_CUTS): continue   # B26 length exception: S24 repeats master M13 (cut last, only when needed)
         if skip_store and e.get("store") and not e.get("season"): continue   # already enforced by the STORE part (same prompt, store args)
         ages = (e.get("ages") or "all").split()
         if age and "all" not in ages and age not in ages: continue
