@@ -7,9 +7,10 @@
    Hoàng hậu when the hồi needs her) has a reason to move now — and the two-way side (law 1): whether SHE has one against them:
      grudge  hostility (j9) of that person toward her, or her own oán toward that person ≥ BAL.arc.trig.gr
      debt    the j72 nợ ân book between them (she owes → they come to collect; they owe → they come to repay)
-     faction jreign sides: that person's side (rgSideOf) against / with hers (rgSideNow)
+     faction jreign sides: that person's side (rgSideOf) against / with hers (rgSideNow), worded as that standing state
      goal    that person's own road (jnroad v.nr) names HER as its rival
-     event   that person acted on her within the last BAL.arc.trig.ev entries of the people ledger (S.roster.acts, j95)
+     event   that person acted on her — or SHE on that person — within the last BAL.arc.trig.ev entries of the people ledger (S.roster.acts,
+             j95), worded by the kind of deed (hostile «ra tay», gift, visit, kết giao, cleared misunderstanding; rtKind)
    The strongest reason (npcWhy pick, BAL.ag.why) opens the hồi NOW (A.due = this month) and the hồi says why (Cớ sự: …) on the Mệnh truyện
    card, in the hồi text and in the Sổ ghi line. No reason → the timer opens it as before. One person moves a hồi at most once every
    BAL.ag.why.cd.hoi67 tuần. Numbers: BAL.arc.trig (jbalarc.js) + BAL.ag.why (jbal2.js). Off: BAL.arc.trig.on = 0 (bot ON/OFF measure).
@@ -22,21 +23,40 @@ function rtCast(A){const L=[];const add=v=>{if(v&&v!==S&&rvOk67(v)&&!L.includes(
   const t=b?String(typeof b.t==="function"?"":b.t||"")+String(b.h||""):"";if(/\{foe\}/.test(t)||A.act&&A.act.foe!=null)add(foe67());
   if(b&&(b.w==="hh"||(b.need||[]).includes("hh"))&&qOn())add(rivals[0])}catch(e){}return L}
 /* the j72 nợ ân book between her and v (>0: v owes her, <0: she owes v) */
-function rtDebt(v){try{if(typeof q72Debt!=="function"||typeof q72A!=="function")return 0;const a=q72A(v.queen?"hh":"rv",v.id)||q72A("rv",v.id);return a?q72Debt(a):0}catch(e){return 0}}
-/* a recent act of v on her (or of her on v) in the people ledger */
-function rtEvent(v){try{const L=(S.roster&&S.roster.acts)||[];const id="v"+v.id;const n=RTB().ev;for(let i=L.length-1;i>=0&&i>=L.length-n;i--){const x=L[i];if(!x||!x.ok)continue;if(x.id===id&&x.t==="me")return 1;if(x.id==="me"&&x.t===id)return -1}}catch(e){}return 0}
+function rtDebt(v){try{if(typeof q72Debt!=="function"||typeof q72A!=="function")return 0;/* r2 N3: a Hoàng hậu may hold a debt under "hh" AND under "rv:<id>": both books count */
+ const L=[];for(const a of [v.queen?q72A("hh",v.id):null,q72A("rv",v.id)])if(a&&!L.some(b=>q72Key(b)===q72Key(a)))L.push(a);return L.reduce((d,a)=>d+q72Debt(a),0)}catch(e){return 0}}
+/* a recent act of v on her (or of HER on v) in the people ledger (S.roster.acts), read by its KIND (r2 fix 1, law 6: the line must say what
+   really happened). Hostile kinds (H95, j95.js:73 — incl. rumor / expose / giahoa of the j95b rows) → «ra tay»; friendly kinds (F95: gift /
+   visit / ally / tieuhuy + the "Giao thiệp" group) → their own true line; «cleared» (j95b: the misunderstanding is over) → its own line.
+   No reason from: present / chosen (j95b event roles: standing in an event, her own pick), warn (dropped false warnings), misbelief (a person
+   who BELIEVES a rumour about her did nothing), ag:* rows (jagent / jagday PLANS of the day — they may still be dropped, so not yet a deed).
+   Her side (r2 fix 2, law 1): her own deeds on a consort are written into the same ledger where they resolve (runAct wrap below). */
+function rtKind(k){try{if(!k||typeof k!=="string"||/^ag:/.test(k))return null;if(k==="cleared")return"c";if(typeof F95!=="undefined"&&F95.has(k))return"f";
+ if(typeof H95!=="undefined"&&H95.has(k))return"h"}catch(e){}return null}
+function rtEvent(v){try{const L=(S.roster&&S.roster.acts)||[];const id="v"+v.id;const n=RTB().ev;for(let i=L.length-1;i>=0&&i>=L.length-n;i--){const x=L[i];if(!x||!x.ok)continue;
+  const c=rtKind(x.k);if(!c)continue;if(x.id===id&&x.t==="me")return{d:1,c,k:x.k};if(x.id==="me"&&x.t===id&&c!=="c")return{d:-1,c,k:x.k}}}catch(e){}return null}
+function rtEvLine(e,nm){if(e.c==="h")return e.d>0?`${nm} vừa ra tay với ngươi`:`ngươi vừa ra tay với ${nm}`;if(e.c==="c")return`${nm} đã hết hiểu lầm ngươi`;
+ if(e.k==="gift")return e.d>0?`${nm} vừa gửi lễ vật cho ngươi`:`ngươi vừa gửi lễ vật cho ${nm}`;if(e.k==="visit")return e.d>0?`${nm} vừa sang thăm ngươi`:`ngươi vừa sang thăm ${nm}`;
+ return e.d>0?`${nm} vừa tìm đến kết giao với ngươi`:`ngươi vừa tìm đến kết giao với ${nm}`}
+window.rtKind=rtKind;window.rtEvent=rtEvent;
 /* every reason one person has right now; the strongest is kept (s ≥ BAL.ag.why.min fires) */
 function rtWhyAll(v){const T=RTB(),m=npwB().min;const R=[];const nm=npwNm(v);
  try{const h=hostility(v,S);if(h>=T.gr)R.push({s:m*h/T.gr,k:"grudge",r:`${nm} ${npw1Gr(v,S)}`})}catch(e){}
  try{const o=oan(S,v);if(o>=T.gr)R.push({s:m*o/T.gr,k:"grudge",r:`ngươi còn mối oán với ${nm}`})}catch(e){}
  const d=rtDebt(v);if(d)R.push({s:m*(1+Math.abs(d)*T.debtK),k:"debt",r:d<0?`${nm} tìm đến đòi ngươi trả ân`:`${nm} muốn trả ân cho ngươi`});
- try{if(typeof rgSideOf==="function"&&typeof rgSideNow==="function"&&S.reign){const a=rgSideOf(v),b=rgSideNow();if(a&&b)R.push(a!==b?{s:m*T.fac,k:"faction",r:`phe ${rgSideN(a)} của ${nm} lấn tới`}:{s:m*T.facAlly,k:"faction",r:`${nm} cùng phe ${rgSideN(a)} cần ngươi`})}}catch(e){}
+ try{if(typeof rgSideOf==="function"&&typeof rgSideNow==="function"&&S.reign){const a=rgSideOf(v),b=rgSideNow();if(a&&b)R.push(a!==b?{s:m*T.fac,k:"faction",r:`${nm} thuộc phe ${rgSideN(a)}, đối nghịch với ngươi`}:{s:m*T.facAlly,k:"faction",r:`${nm} cùng phe ${rgSideN(a)} với ngươi`})/* r2 N1: worded as the standing state it is, not as a move */}}catch(e){}
  try{if(v.nr&&!v.nr.x&&v.nr.c==="me")R.push({s:m*T.goal,k:"goal",r:`đường riêng của ${nm} vướng phải ngươi`})}catch(e){}
- const e=rtEvent(v);if(e)R.push({s:m*T.evK,k:"event",r:e>0?`${nm} vừa ra tay với ngươi`:`ngươi vừa ra tay với ${nm}`});
+ const e=rtEvent(v);if(e)R.push({s:m*(e.c==="h"?T.evK:T.evF),k:"event",r:rtEvLine(e,nm)});
  return R.sort((a,b)=>b.s-a.s)}
 function rtWhy(v){return rtWhyAll(v)[0]||null}
 window.rtWhyAll=rtWhyAll;
 npwReg("hoi67",{grp:"story",who:c=>c&&c.A?rtCast(c.A):[],why(v){const r=rtWhy(v);return r?{s:r.s,t:S,r:r.r,flag:r.k}:null}});
+/* r2 fix 2 (law 1 two-way): HER deed on a consort, written into the people ledger where it resolves (runAct, j9 — her doAct, the gift /
+   plant picks, j70 plots by her, a sent servant's deed landing): the existing writer j95actLog with her as the actor ("me"). Only kinds the
+   ledger knows (H95 / F95) and only when the deed went through — the same "it failed" words j95b.js reads for her harm record. (j95b's
+   S.j95b.harm was checked first: it keeps her HOSTILE deeds only, one per target, so it cannot carry the friendly side.) */
+(function(){if(typeof runAct!=="function")return;const ra=runAct;runAct=function(a,t,k){const r=ra.apply(this,arguments);try{
+ if(a===S&&t&&t!==S&&t.rel!=null&&r&&typeof j95actLog==="function"&&rtKind(k)&&!/không ai tin|bị bắt|bị lộ|phát giác|chặn kịp|từ chối|không thành/.test(r))j95actLog(S,t,k,{ok:true,why:"việc ngươi làm"})}catch(e){}return r}})();
 /* the hồi's reason, kept on the chapter until that hồi is played */
 function rtTry(A){if(!rtOn()||!A||A!==S.st.M||A.done||A.cur||!A.nb||S.turn>=A.due)return null;const lt=A.lt!=null?A.lt:A.st0!=null?A.st0:null;if(lt!=null&&S.turn<lt+RTB().min)return null;
  /* the first month after a hồi only a strong reason (≥ BAL.arc.trig.early × min) moves it; from the next month any real reason does */

@@ -171,6 +171,6 @@ Object.assign(BAL,{arc:{
    st[1] month, else st[2] + rI67(st[3]) (was 1 / 3 + rI67(3)). Reason triggers: on = 0 switches them off; min = months after the last hồi
    before a reason may open the next one (the first of those months needs a strong reason: score ≥ early × BAL.ag.why.min); gr = grudge
    (j9 hostility / her oán) that counts as a reason, its score = min × grudge / gr; debtK = score per nợ ân above min; fac / facAlly = score
-   (× min) of an opposed / own jreign side; goal = that person's own road names her as rival; evK = she / they acted on the other within the
-   last ev entries of the people ledger (S.roster.acts). */
-BAL.arc.trig={on:1,fb:[2,3],fr:[2,2],st:[3,1,3,3],min:1,early:2,gr:30,debtK:.5,fac:1,facAlly:1,goal:1.2,evK:1.5,ev:12};
+   (× min) of an opposed / own jreign side; goal = that person's own road names her as rival; evK = she / they did a HOSTILE deed to the other within the
+   last ev entries of the people ledger (S.roster.acts); evF = the same for a friendly deed (gift / visit / kết giao) or a cleared misunderstanding (r2). */
+BAL.arc.trig={on:1,fb:[2,3],fr:[2,2],st:[3,1,3,3],min:1,early:2,gr:30,debtK:.5,fac:1,facAlly:1,goal:1.2,evK:1.5,evF:1,ev:12};
