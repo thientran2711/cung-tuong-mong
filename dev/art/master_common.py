@@ -41,6 +41,50 @@ DOAN_SCOPES = {"tp4", "tp5", "pr4", "pr5"}
 def doan_scope(scope): return scope in DOAN_SCOPES
 
 
+# B26 LENGTH (Foreman C #5 decision (a), 20/11 ~18:07Z, for the t4/t5 cells the longer đoạn sentence pushes over 10 000 chars): store clauses that only REPEAT a master
+# sentence are cut, in this order, one at a time, only while the prompt is still > LIMIT (after build_all's ANGLE drop). Narrow gate exception (check_store.store_check +
+# S24): a missing clause is accepted only in a t4/t5 prompt holding DOAN, only when the missing clauses are a PREFIX of this list and the last one was needed (restoring it
+# would go over LIMIT). Logged in ART_RULES_CONFLICTS.md item 17 + dev/handover/reports/B26FAB.md.
+LIMIT = 10000
+DOAN_LEN_CUTS = [   # (exact store words, what stays, master sentence it repeats)
+ ("Full-body standing figure head to feet, centered, plain light parchment background, soft even light; ", "", "M03"),
+ ("fair porcelain skin; ", "", "M01"),
+ ("closed-lip smile, lips closed, no teeth, mouth never open;", "closed-lip smile;", "M10"),
+ ("for everyone; face clearly visible, 3/4 or frontal view.", "for everyone; 3/4 or frontal view.", "M10"),
+ (" Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side.", "", "M13 (approved S24)"),
+]
+
+
+def _norm1(s): return re.sub(r"\s+", " ", s).strip()
+
+
+def doan_fit(text):
+    """-> (text, list of cut ids). Only for a t4/t5 DOAN prompt over LIMIT; cuts in order, each only while still over LIMIT."""
+    cuts = []
+    if DOAN not in text: return text, cuts
+    for old, new, mid in DOAN_LEN_CUTS:
+        if len(text) <= LIMIT: break
+        if old in text: text = text.replace(old, new, 1); cuts.append(mid)
+    return text, cuts
+
+
+def doan_cuts_made(text):
+    """-> the (old, new) pairs of DOAN_LEN_CUTS this prompt shows cut, when allowed (t4/t5 DOAN prompt, prefix rule, last cut needed), else []."""
+    t = _norm1(text)
+    if DOAN not in t: return []
+    made = []
+    for old, new, _ in DOAN_LEN_CUTS:
+        o, n = _norm1(old), _norm1(new)
+        if o in t: break
+        if n and n not in t: break
+        made.append((old, new))
+    if not made: return []
+    for old, new, _ in DOAN_LEN_CUTS[len(made):]:
+        if _norm1(old) not in t: return []   # a later clause missing too = not a prefix
+    if len(t) + len(_norm1(made[-1][0])) - len(_norm1(made[-1][1])) <= LIMIT: return []   # the last cut was not needed
+    return made
+
+
 HIGH_SCOPES = {"tp6", "tp7", "tp8", "pr7", "pr8", "trieu6", "trieu7", "trieu8", "nude", "thaihau", "state:thaihau", "emperor"}
 
 

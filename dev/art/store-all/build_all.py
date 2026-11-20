@@ -517,7 +517,9 @@ def build_season(person,rank,age="a18",season=None):
     assert isinstance(rank,int), "season: ranks 1-8 only"
     sys.path.insert(0,ART); import winter_g28
     a36=build(person,rank,"a36")[1] if rank<=3 else None
-    S0,S,add=build(person,rank,age); S,notes=winter_g28.season(S,rank,a36,season); return S0,S,add+notes
+    S0,S,add=build(person,rank,age); S,notes=winter_g28.season(S,rank,a36,season)
+    if rank in (4,5) and len(S)>10000: S,notes=b26_fit(S,notes,angle=False)   # B26 length: winter_g28.season already dropped ANGLE
+    return S0,S,add+notes
 
 def _kc_drawn(person):   # B8 (BW3): same table + rule as build.py kc_drawn (dev/art/KC_REFS.json m09_ok yes + real face words)
     import json as _j
@@ -533,11 +535,19 @@ def eyes(S):
     return S[:m.end()]+EYES_STRAIGHT+" "+S[m.end():]
 def build(person,rank,age="a18"):
     S0,S,add=_build(person,rank,age); S=eyes(S)
-    if rank in (4,5) and len(S)>10000:   # B26 (owner Lượt 1283): the longer t4/t5 đoạn fabric sentence -> same length rule as winter_g28.season (owner ~15:39Z: OK to cut the ANGLE sentence when too long); store text untouched (B2)
-        sys.path.insert(0,ART); import winter_g28 as _W
-        m=_W.ANGLE_RX.search(S)
-        if m: S=S.replace(m.group(0)+" ","",1); add=add+["ANGLE dropped (length, B26)"]
+    if rank in (4,5) and len(S)>10000: S,add=b26_fit(S,add,angle=True)
     return S0,S,add
+def b26_fit(S,add,angle):
+    """B26 length (owner Lượt 1283 đoạn sentence is ~250 chars longer): t4/t5 only, ALL-OR-NOTHING: (1) drop the ANGLE sentence (owner ~15:39Z length rule, as
+    winter_g28.season) when angle=True, (2) master_common.doan_fit master-repeat store clauses (Foreman C #5 decision (a)); kept only if the prompt then fits
+    <= 10 000, else the prompt is returned unchanged (cells already over 10 000 before B26 are not cut)."""
+    sys.path.insert(0,ART); import winter_g28 as _W, master_common as _MC
+    T=S; notes=[]
+    m=_W.ANGLE_RX.search(T) if angle else None
+    if m: T=T.replace(m.group(0)+" ","",1); notes.append("ANGLE dropped (length, B26)")
+    if len(T)>10000:
+        T,_c=_MC.doan_fit(T); notes+=[f"B26 length cut (repeats {x})" for x in _c]
+    return (T,add+notes) if len(T)<=10000 else (S,add)
 def _build(person,rank,age="a18"):
     if not _kc_drawn(ALIAS.get(person,person)): raise NotDrawn(person)   # B8: people NOT drawn are refused (CLI exit 2, --check counts them HELD)
     person=ALIAS.get(person,person); S0=store(person,rank,age); S=S0
