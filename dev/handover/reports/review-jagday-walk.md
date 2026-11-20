@@ -186,3 +186,27 @@ The build is its own: rebuilt, only CTM_BI differs.
 Everything else PASSES. Once item 1 is fixed, re-run ag-walk ×16 + the probe + a quick walk-cost; then LAND READY.
 
 STATUS: FAIL review/jagday-walk-rv 1dab9933. Round-4 jumps are fixed (0 / 411). The one item is the ag-walk «4 carry NEAR» flake (main 8/8, branch 7/8; a carried news item is lost after knCarryOut). All other gates green, co-op seat check equal.
+
+## HANDOVER (reviewer session_01964izCAkPLwbFgegsZ7v5u → next reviewer; 20/11 ~22:50Z)
+Context 28.2 % of 1M (START_CTX 4 % → line 29 %), so I roll over. D #12 opens the next reviewer.
+TODO = ROUND 6 re-gate after JAGDAY-WALK #4 fixes ROUND 5 item 1 (ag-walk «4 carry NEAR» flake):
+1. Read the fix diff. It must fix the cause (no carried tin báo item lost, law 6b), not loosen the test.
+2. Final-merge the newest origin/main into review/jagday-walk-rv (index.html / sw.js conflicts → take theirs, then assemble.py + build_site.sh).
+3. Gates, one at a time:
+   - ag-walk ×16 (must be 16/16; main is 8/8)
+   - the probe dev/handover/reports/probes/rv-jw-agwalk-carry.js ≥ 50 NEAR carries, 0 lost (copy it into dev/test/ to run, it reads ./coop-serve-free paths only; delete after)
+   - walk-cost (incl. 12)
+   - ptime, ptime2
+   - invite-host-away ×10
+   - time-spill-guard
+   - coop-e2e
+   - quickcheck --cpu 4
+   - far-jump scan: dev/handover/reports/probes/rv-jw-jumps.js <index.html> 1 10 16, all classes 0
+   - co-op seat check: the record is off in co-op (j95.js:28 j95on false when COOPW.on). Re-check that it is still off, or, if it is now on, compare S.roster NPC rows host vs guest with a two-client probe built from the coop-thin-f2 setup lines 9–53.
+4. PASS → «LAND READY review/jagday-walk-rv <sha> (covers walk-cost-rv2 bd2b1c59), coop-e2e PASS + co-op check» in FOREMAN_D_STATUS.md + ROUND 6 here; send_message D #12 session_01964izBwRw7YgvQWHVn4wG2. FAIL → numbered list, tell D #12.
+Already green on 1dab9933 (ROUND 5): everything except ag-walk. If the fix only touches the carry path, the walk-cost / scan results need only a quick recheck.
+Rollover rules (verbatim):
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
