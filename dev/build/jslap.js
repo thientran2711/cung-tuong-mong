@@ -130,7 +130,7 @@ window.slapNpcTier=slapNpcTier;
 function slapNpcDraw(a){const T=BAL.ag.mg2.tat,E=T.e,e=cl(mgTier("tat",{occ:"tat",p:a}).ease,E[0],E[E.length-1]);let i=0;while(i<E.length-2&&e>E[i+1])i++;
  const f=(e-E[i])/(E[i+1]-E[i]),w=T.w[i].map((x,j)=>x+(T.w[i+1][j]-x)*f);
  /* AG-ALL-2d hand ceiling (OD L1640, jmgt mgHand) — fair spread (OD 20/11 ~01:10Z): the table is the skilled human bot = the middle hand of the band;
-    f = where her "tat" hand (+ art / rank lift, mgHandEff) sits from the band centre, −1 … +1 (BAL.ag.mg2.hand.far): a weaker hand lands the heavy blow less
+    f = where her "tat" hand (+ art / upbringing lift, mgHandEff) sits from the band centre, −1 … +1 (BAL.ag.mg2.hand.far): a weaker hand lands the heavy blow less
     (what she misses falls to nhẹ), a stronger hand lands it more (taken from nhẹ) — symmetric */
  {const H=BAL.ag.mg2.hand;if(H&&H.on&&a&&a!==S&&typeof mgHandEff==="function"){const Bd=mgBand("tat"),f=cl((mgHandEff("tat",a)-Bd.c)/Math.max(.01,H.far),-1,1);
   if(f<0){w[0]+=w[2]*-f;w[2]*=1+f}else{const m=w[0]*f;w[0]-=m;w[2]+=m}}}

@@ -69,7 +69,7 @@ function hdLvF(lv){try{const v=mgLev({lv},"hoadien","tol");if(v!=null)return v}c
 /* NPC / bot: her best hoa điền for her phẩm (Kiêu ngạo / Tham vọng reach one above), q from her hand (hashed per day: no Math.random) */
 function hdNpc(v,h,sk){try{const L=hdOwned(v);if(!L.length)return null;let cap=Math.min(8,wdPOf(v));try{if(v!==S&&wdNpcBias(v)>0)cap++}catch(e){}
   const e=L.find(x=>WD_ITEMS[x.k].P<=cap)||L[L.length-1];const B=BAL.hd;
-  let c=B.npc.q0+B.npc.qSk*(sk||0);try{const H=BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.hand;if(v!==S&&H&&H.on&&typeof mgHandEff==="function")c=(mgHandEff("hoadien",v)-H.w/2)/10}/* fair spread (OD 20/11): her average play (hand + art / rank lift − w/2) */catch(x){}
+  let c=B.npc.q0+B.npc.qSk*(sk||0);try{const H=BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.hand;if(v!==S&&H&&H.on&&typeof mgHandEff==="function")c=(mgHandEff("hoadien",v)-H.w/2)/10}/* fair spread (OD 20/11): her average play (hand + art / upbringing lift − w/2) */catch(x){}
   const r=i=>(wdHash(String(h)+":hd"+i)%1000)/1000;const q=Math.max(0,Math.min(B.npcCap,c+(r(1)+r(2)-1)*B.npc.spread));return{k:e.k,q:+q.toFixed(3)}}catch(x){return null}}
 
 /* ---------- forehead anchor (canvas coords) of a face drawn at img {x,y,w,h} ---------- */

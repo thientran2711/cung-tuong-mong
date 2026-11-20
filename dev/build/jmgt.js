@@ -71,7 +71,7 @@ function mgWith(o,f){const k=MGX.o;MGX.o=o;try{return f()}finally{MGX.o=k}}
 function mgMedD(d){const P=BAL.ag.mg2.med;d=+d||0;let i=0;while(i<P.length-2&&d>P[i+1][0])i++;const [a,ma]=P[i],[b,mb]=P[i+1];return cl(ma+(mb-ma)*(d-a)/(b-a),0,10)}
 function mgNpcTier(kind,p,o){o=o||{};return mgTier(kind,{occ:o.occ,big:!!o.big,rank:o.rank!=null?o.rank:mgRankOf(p),lv:o.lv,p})}
 function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||Math.random,u=(r()+r()+r())/3;MGX.n++;const d=o.d!=null?o.d:mgNpcTier(kind,p,o).d;
- const H=BAL.ag.mg2.hand;if(H&&H.on&&p!==S){/* AG-ALL-2d HAND CEILING: a roll under her own ceiling (her hand + her art / rank lift, mgHandEff), then the board's ease (the same gap shift the player's board gives) */
+ const H=BAL.ag.mg2.hand;if(H&&H.on&&p!==S){/* AG-ALL-2d HAND CEILING: a roll under her own ceiling (her hand + her art / upbringing lift, mgHandEff), then the board's ease (the same gap shift the player's board gives) */
   const c=mgHandEff(kind,p,o);return cl(Math.round(c-(1-u)*H.w+(mgMedD(d)-mgMedD(0))),0,10)}
  return cl(Math.round(mgMedD(d)+(u-.5)*BAL.ag.mg2.w),0,10)}/* o.d: a known gap (no person: the matching level 0) */
 /* ===== AG-ALL-2d · MINIGAME HAND CEILING (owner OD 17/11 ~16:00Z L1640, verbatim key words: "tất cả NPC đều phải có một cái mức trần chơi game, rồi
@@ -80,12 +80,15 @@ function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||M
    làm luôn đi"): (1) every NPC has a hidden HAND per minigame kind = the best graded play her hands reach on a matching board, drawn ONCE per NPC per kind
    in the band of jmgcal mgCalBand(kind) = centred on HER calibrated play (BAL.ag.mg2.cal.k[kind].b; a kind she has not tested: the skilled human median
    mgMedD(0)): centre c = base + w/2 (an NPC's average play is hand − w/2). THIRDS (owner OD 20/11 ~01:18Z, verbatim: "Sao không chia 1/3 ngang, 1/3 hơn,
-   1/3 kém" — adopted, overwrites the ±2.5 half/half): a hashed draw t puts each person in one third — 1/3 about equal to her (hand within c ± eq), 1/3
+   1/3 kém" — adopted, overwrites the ±2.5 half/half): a hashed draw t puts each person in one third (shares BAL.ag.mg2.hand.split [worse, equal, better], default 1/3 each) — 1/3 about equal to her (hand within c ± eq), 1/3
    better (c + eq … c + far), 1/3 worse (c − far … c − eq) — bell-shaped inside each third (mean of two hashed draws); eq / far = BAL.ag.mg2.hand.
    (2) ART: mgHandEff adds BAL.ag.mg2.hand.art per art level of that kind above
-   the player's own level (kg82LvFor; minus below): a trained NPC clearly beats her, an untrained one is weak. (3) RANK (law 5): + BAL.ag.mg2.hand.rank per
-   rank step above hers: higher-rank opponents lean stronger as she climbs. Art / rank are read live (never saved), measured against the player of seat a
-   (mgRefP: S; a co-op guest reads the host's person) so both co-op seats roll the same play.
+   the player's own level (kg82LvFor; minus below): a trained NPC clearly beats her, an untrained one is weak. (3) UPBRINGING (owner OD 20/11 ~01:50Z,
+   verbatim: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà nghèo mới yếu"): + BAL.ag.mg2.hand.up[origin] − up[her origin]
+   (mgOrgOf: j1 ORIGINS key of a consort — S.origin, v.nr.o / v.ag.o, jagent agOrg; a servant = "srv"; unknown "_"): noble-born trained from childhood
+   are strong on entry, poor-born weak, rising only through the palace art level. Rank itself gives NO skill — law 5 comes from who she meets higher up
+   (mostly noble-born, more trained). Art / upbringing are read live (never saved), measured against the player of seat a (mgRefP: S; a co-op guest reads
+   the host's person) so both co-op seats roll the same play.
    Her play = a roll UNDER that ceiling (c − (1 − u)·w, u = mean of 3 draws), THEN the same board ease the player gets from her own art level / rank /
    occasion (mgMedD(d) − mgMedD(0): the skilled bot's measured shift between an easy / matching / hard board). Never a perfect player: even the best hand
    rolls below its ceiling most of the time. Saved on the person (p.mgH[kind]); the draw is hashed on the person + kind, so an old save (no p.mgH) and a
@@ -93,7 +96,8 @@ function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||M
 function mgHashU(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}h^=h>>>13;h=Math.imul(h,0x5bd1e995);h^=h>>>15;return (h>>>0)/4294967296}
 function mgBand(kind){const H=BAL.ag.mg2.hand;if(typeof mgCalBand==="function")return mgCalBand(kind);const c=mgMedD(0)+H.w/2;return{lo:c-H.far,hi:c+H.far,c,sig:"t/"+(c-H.far)+"/"+(c+H.far)}}
 /* the offset of a person's hand from the band centre: her third (t: worse / equal / better), then a bell inside it (b = mean of two draws) */
-function mgThird(id,H){const t=mgHashU(id+"|t"),b=(mgHashU(id+"|a")+mgHashU(id+"|b"))/2;if(t<1/3)return -(H.eq+(H.far-H.eq)*b);if(t<2/3)return H.eq*(2*b-1);return H.eq+(H.far-H.eq)*b}
+function mgThird(id,H){const t=mgHashU(id+"|t"),b=(mgHashU(id+"|a")+mgHashU(id+"|b"))/2,P=H.split||[1,1,1],n=(P[0]+P[1]+P[2])||1;
+ if(t<P[0]/n)return -(H.eq+(H.far-H.eq)*b);if(t<(P[0]+P[1])/n)return H.eq*(2*b-1);return H.eq+(H.far-H.eq)*b}
 function mgHand(kind,p){const H=BAL.ag.mg2.hand,Bd=mgBand(kind);if(!p||typeof p!=="object")return Bd.c;let M=p.mgH;if(!M||typeof M!=="object")M=p.mgH={};
  /* AG-ALL-2d2: p.mgHv[kind] = the band it was rolled in — a changed band re-rolls the SAME hash draw inside the new band (old saves rolled in the old
     skewed / half-half bands carry another sig and re-roll here) */
@@ -102,11 +106,16 @@ function mgHand(kind,p){const H=BAL.ag.mg2.hand,Bd=mgBand(kind);if(!p||typeof p!
  return M[kind]}
 /* the player the art / rank lift is measured against: seat a (S; on a co-op guest the host's person, so both seats agree) */
 function mgRefP(){try{if(typeof agGuest==="function"&&agGuest()&&typeof consorts==="function"){const h=consorts().find(x=>x&&x.coop);if(h)return h}}catch(e){}return S}
-/* (2) + (3): the hand an NPC plays with now = her hand + art lift + rank lift (o.lv: the level the caller already knows for this kind) */
+/* the upbringing key of a person (j1 ORIGINS key; "srv" a servant from ORIGINS_S; "_" unknown). A consort without a road yet gets one from jagent agOrg
+   (saved on her, host / solo only — a co-op guest reads what the host saved) */
+function mgOrgOf(p){try{if(!p||typeof p!=="object")return"_";if(p===S)return(S.origin&&S.origin.k)||"_";if(p.nr&&p.nr.o)return p.nr.o;if(p.ag&&p.ag.o)return p.ag.o;
+ if(typeof p.org==="string")return"srv";if(p.rank!=null&&typeof agOrg==="function"&&!(typeof agGuest==="function"&&agGuest())&&typeof consorts==="function"&&consorts().includes(p)){const o=agOrg(p);if(o)return o}}catch(e){}return"_"}
+function mgUp(p){const U=BAL.ag.mg2.hand.up||{},k=mgOrgOf(p);return U[k]!=null?U[k]:(U._||0)}
+/* (2) + (3): the hand an NPC plays with now = her hand + art lift + upbringing lift (o.lv: the level the caller already knows for this kind) */
 function mgHandEff(kind,p,o){const h=mgHand(kind,p);if(!p||typeof p!=="object")return h;const H=BAL.ag.mg2.hand,R=mgRefP();if(!R||p===R)return h;
  const lv=x=>{try{return kg82LvFor(x,kind)}catch(e){return 0}};const lp=o&&o.lv!=null&&isFinite(+o.lv)?cl(+o.lv,0,5):lv(p);
- return Math.round((h+(H.art||0)*(lp-lv(R))+(H.rank||0)*(mgRankOf(p)-mgRankOf(R)))*100)/100}
-window.mgHandEff=mgHandEff;window.mgBand=mgBand;window.mgRefP=mgRefP;
+ return Math.round((h+(H.art||0)*(lp-lv(R))+mgUp(p)-mgUp(R))*100)/100}
+window.mgHandEff=mgHandEff;window.mgBand=mgBand;window.mgRefP=mgRefP;window.mgOrgOf=mgOrgOf;window.mgUp=mgUp;
 window.mgHand=mgHand;
 function mgSkipRaw(t){return cl(Math.round(mgMedD(t&&t.d!=null?t.d:0)),0,10)}
 window.mg2On=mg2On;window.mgWith=mgWith;window.mgMedD=mgMedD;window.mgNpcTier=mgNpcTier;window.mgNpcRaw=mgNpcRaw;window.mgSkipRaw=mgSkipRaw;window.MGX=MGX;

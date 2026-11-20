@@ -17,7 +17,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   o.distinct=new Set(hands.map(h=>h.toFixed(1))).size;const v=L[0];o.saved=!!(v.mgH&&v.mgH.dan!=null);const h1=mgHand("dan",v);o.stable=[0,1,2].every(()=>mgHand("dan",v)===h1);
   const keep=v.mgH;delete v.mgH;o.oldSave=mgHand("dan",v)===h1;v.mgH=keep;
   /* 2 under the ceiling at a matching board — a person equal to her in art and rank (no art / rank lift, fair spread OD 20/11) whose "co" hand sits mid-band */
-  const eq=[];for(let i=0;i<60;i++)eq.push({name:"Eq"+i,id:64000+i,rank:S.rank,arts:Object.assign({},S.arts),alive:true});const w=eq.map(x=>[x,Math.abs(mgHandEff("co",x)-8.5)]).sort((a,b)=>a[1]-b[1])[0][0];
+  const eq=[];for(let i=0;i<60;i++)eq.push({name:"Eq"+i,id:64000+i,rank:S.rank,arts:Object.assign({},S.arts),alive:true,ag:{o:(S.origin&&S.origin.k)||"_"}});const w=eq.map(x=>[x,Math.abs(mgHandEff("co",x)-8.5)]).sort((a,b)=>a[1]-b[1])[0][0];
   const hE=mgHandEff("co",w);o.hE=hE;let over=0,at=0;const N=400;for(let i=0;i<N;i++){const x=mgNpcRaw("co",w,{d:0});if(x>Math.round(hE))over++;if(x>=Math.round(hE))at++}o.over=over;o.atCeil=at/N;
   /* 3 board ease */
   const mean=(pp,d,kind)=>{let s=0;for(let i=0;i<N;i++)s+=mgNpcRaw(kind||"dan",pp,{d});return s/N};o.mE=mean(w,-2,"co");o.m0=mean(w,0,"co");o.mH=mean(w,2,"co");o.shiftE=mgMedD(-2)-mgMedD(0);o.shiftH=mgMedD(2)-mgMedD(0);
