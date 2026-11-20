@@ -69,7 +69,12 @@ BAL.ge={
  thd_hoc_1:{tai:50,sung:40},thd_hoc_2:{tamco:50,mat:3},thd_hoc_3:{duc:40,tai:35},thd_hoc_4:{duc:40,sung:40},
  cnv_chu_1:{tamco:45,mat:2},cnv_chu_2:{mis:20},cnv_chu_3:{duc:35,tamco:35},cnv_chu_4:{duc:40,mat:2},
  cnv_ban_1:{duc:40},cnv_ban_2:{tamco:45,danh:30},cnv_ban_3:{tai:45,danh:30},cnv_ban_4:{duc:30,sac:40},
- cnv_ma_1:{tai:45,danh:35},cnv_ma_2:{tamco:45,mat:3},cnv_ma_3:{duc:40,danh:30},cnv_ma_4:{duc:40,sung:35}},
+ cnv_ma_1:{tai:45,danh:35},cnv_ma_2:{tamco:45,mat:3},cnv_ma_3:{duc:40,danh:30},cnv_ma_4:{duc:40,sung:35},
+ /* Ba Tư wave (brief E28, jgedata_bd.js): bd_san bd_soi bd_tuyet bd_hen (same scales and sizes as the pilots) */
+ bd_san_1:{tai:50,danh:35},bd_san_2:{sung:50,duc:35},bd_san_3:{tamco:45,mat:2},bd_san_4:{duc:35,suc:40},
+ bd_soi_1:{tamco:45,danh:45},bd_soi_2:{sung:45,duc:40},bd_soi_3:{mat:2,tamco:45},bd_soi_4:{sung:45},
+ bd_tuyet_1:{duc:45,danh:35},bd_tuyet_2:{tamco:40,danh:40},bd_tuyet_3:{mat:2,tamco:45},bd_tuyet_4:{tai:55},
+ bd_hen_1:{duc:40},bd_hen_2:{sung:55,tamco:40},bd_hen_3:{duc:40,danh:35},bd_hen_4:{tamco:45}},
  /* fail-outcome losses (her pair pointed at the ending and missed; none in the quiet form unless quietLoss) */
  fail:{
   tt_co_1:{rank:-1,danh:-12},tt_co_2:{sung:-8,danh:-4},tt_co_3:{sung:-8,danh:-6},tt_co_4:{danh:-10,duc:-6},
@@ -110,7 +115,12 @@ BAL.ge={
  thd_hoc_1:{danh:-8,sung:-6},thd_hoc_2:{rank:-1,danh:-10},thd_hoc_3:{sung:-6,danh:-6},thd_hoc_4:{sung:-8,danh:-6},
  cnv_chu_1:{danh:-8,mis:-15},cnv_chu_2:{mis:-15,danh:-6},cnv_chu_3:{sung:-6,danh:-6},cnv_chu_4:{danh:-10,duc:-4},
  cnv_ban_1:{sung:-6,danh:-6},cnv_ban_2:{danh:-10,duc:-6},cnv_ban_3:{danh:-8,tai:-4},cnv_ban_4:{sung:-8,danh:-4},
- cnv_ma_1:{danh:-8,sung:-6},cnv_ma_2:{danh:-10,duc:-6},cnv_ma_3:{sung:-6,danh:-6},cnv_ma_4:{danh:-8,sung:-6}},
+ cnv_ma_1:{danh:-8,sung:-6},cnv_ma_2:{danh:-10,duc:-6},cnv_ma_3:{sung:-6,danh:-6},cnv_ma_4:{danh:-8,sung:-6},
+ /* Ba Tư wave (brief E28, jgedata_bd.js): bd_san bd_soi bd_tuyet bd_hen (same scales and sizes as the pilots) */
+ bd_san_1:{danh:-8,tai:-4},bd_san_2:{sung:-8,danh:-4},bd_san_3:{danh:-10,duc:-4},bd_san_4:{sung:-8,danh:-6},
+ bd_soi_1:{rank:-1,danh:-12},bd_soi_2:{danh:-10,sung:-4},bd_soi_3:{sung:-10,danh:-6},bd_soi_4:{danh:-8,sung:-6},
+ bd_tuyet_1:{danh:-8,duc:-4},bd_tuyet_2:{danh:-8,sung:-4},bd_tuyet_3:{rank:-1,danh:-10},bd_tuyet_4:{danh:-6},
+ bd_hen_1:{sung:-10,danh:-6},bd_hen_2:{danh:-10,sung:-6},bd_hen_3:{danh:-8},bd_hen_4:{danh:-8,sung:-4}},
  /* rewards: the same SIZE for both shadings (fair: no "right" morality); only the sign of everyone's attitude differs (rel thiện → thiện cảm +, ác → oán +).
     rw.mul × the road's RD97L rare fx ≈ the size (start 3×); rank = steps (never above the seat rules: Hoàng hậu only by seat "HH"); mis = the named NPC's attitude */
  rw:{mul:3,
@@ -152,7 +162,12 @@ BAL.ge={
  thd_hoc_1:{rank:1,danh:30,tai:10,rel:8},thd_hoc_2:{danh:36,tamco:10,mat:2,rel:10},thd_hoc_3:{danh:24,duc:12,bac:300,rel:6},thd_hoc_4:{rank:1,danh:24,sung:15,duc:6,rel:6},
  cnv_chu_1:{rank:1,danh:30,mat:2,tamco:10,rel:8},cnv_chu_2:{rank:1,danh:24,sung:15,mis:20,rel:6},cnv_chu_3:{danh:20,duc:12,bac:300,rel:6},cnv_chu_4:{rank:1,danh:30,duc:10,rel:8},
  cnv_ban_1:{danh:20,duc:12,bac:300,rel:6},cnv_ban_2:{rank:1,danh:30,tamco:10,rel:8},cnv_ban_3:{rank:1,danh:30,tai:10,rel:8},cnv_ban_4:{danh:24,duc:12,bac:300,rel:6},
- cnv_ma_1:{rank:1,danh:30,tai:10,rel:8},cnv_ma_2:{rank:1,danh:30,mat:2,tamco:10,rel:8},cnv_ma_3:{danh:20,duc:12,bac:300,rel:6},cnv_ma_4:{rank:1,danh:30,duc:10,sung:12,rel:8}},
+ cnv_ma_1:{rank:1,danh:30,tai:10,rel:8},cnv_ma_2:{rank:1,danh:30,mat:2,tamco:10,rel:8},cnv_ma_3:{danh:20,duc:12,bac:300,rel:6},cnv_ma_4:{rank:1,danh:30,duc:10,sung:12,rel:8},
+ /* Ba Tư wave (brief E28, jgedata_bd.js): bd_san bd_soi bd_tuyet bd_hen (same scales and sizes as the pilots) */
+ bd_san_1:{rank:1,danh:30,tai:10,rel:8},bd_san_2:{rank:1,sung:30,danh:18,rel:6},bd_san_3:{danh:30,tamco:10,mat:2,rel:8},bd_san_4:{danh:20,duc:12,bac:300,rel:6},
+ bd_soi_1:{danh:36,sung:18,rel:8},bd_soi_2:{rank:1,danh:30,duc:10,rel:8},bd_soi_3:{rank:1,danh:30,tamco:10,rel:8},bd_soi_4:{seat:"TM",danh:30,sung:15,rel:8},
+ bd_tuyet_1:{danh:36,duc:12,rel:8},bd_tuyet_2:{rank:1,danh:30,tamco:10,rel:8},bd_tuyet_3:{danh:30,mat:2,tamco:10,rel:8},bd_tuyet_4:{danh:30,tai:10,rel:8},
+ bd_hen_1:{danh:20,duc:12,rel:6},bd_hen_2:{rank:1,sung:24,danh:24,rel:8},bd_hen_3:{danh:24,duc:12,rel:8},bd_hen_4:{danh:30,tamco:10,rel:8}},
  /* GE10 (design §2.9 "Helping"): her help on an NPC's road (the jnroad help hồi) moves that NPC's grand ending — help = +pull on the ending
     the NPC leans toward most (it stays open), a betrayal = −push on it (at 0 pull it turns fail-only: sabotage can close one); the rival she
     told gets the same +pull (two-way, laws 1–2, like BAL.nroad.help). rw = her reward when an NPC she helped (no betrayal) then unlocks. */
