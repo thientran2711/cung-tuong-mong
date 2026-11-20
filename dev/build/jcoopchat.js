@@ -30,7 +30,7 @@ function css(){if(document.getElementById("kchat-css"))return;const st=document.
 #kchatp .kchat-row .kinp .kctl-l{display:none}
 #kchatp .kchat-row .kinput{width:100%;box-sizing:border-box;min-height:44px;font-size:1rem}
 #kchatp .kchat-row .kbtn{flex:none;margin:0;min-height:44px}
-.kcm{max-width:84%;padding:6px 10px 7px;border:1px solid var(--k-hair,#e6d3ac);border-radius:12px;background:#fffaf0;color:var(--ink,#3a2418);font-family:var(--body);overflow-wrap:anywhere;white-space:pre-wrap}
+.kcm{max-width:84%;padding:6px 10px 7px;border:1px solid var(--k-hair,#e6d3ac);border-radius:12px;background:var(--k-card,#fffaf0);color:var(--ink,#3a2418);font-family:var(--body);overflow-wrap:anywhere;white-space:pre-wrap}
 .kcm.mine{align-self:flex-end;background:#f3e3bf;border-color:var(--gold,#c9a46a);border-bottom-right-radius:3px}
 .kcm.fr{align-self:flex-start;border-bottom-left-radius:3px}
 .kcm .kcm-h{display:flex;gap:8px;align-items:baseline;font-size:.72rem;color:var(--dim,#8a7355);white-space:normal}

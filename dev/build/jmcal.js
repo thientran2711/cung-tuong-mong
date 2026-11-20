@@ -264,7 +264,7 @@ button.kmc-d{cursor:pointer;text-align:left;-webkit-tap-highlight-color:transpar
 .kmc-mo.p1{background:#3a2e24}.kmc-mo.p15{box-shadow:0 0 3px #f0d070}
 .kmc-mo.p8{background:linear-gradient(90deg,#3a2e24 50%,#fff6d8 50%)}.kmc-mo.p23{background:linear-gradient(90deg,#fff6d8 50%,#3a2e24 50%)}
 .kmc-d.cy::after{content:"";position:absolute;left:4px;top:18px;width:5px;height:5px;border-radius:50%;background:#c98a96;opacity:.75}
-.kmc-tg{position:relative;display:block;margin:0 2px 2px;border-radius:4px;background:#fffaf0;border:1px solid var(--k-hair);color:var(--ink);font-size:.62rem;font-weight:700;line-height:1.1;padding:1px;text-align:center;overflow-wrap:normal;word-break:keep-all}
+.kmc-tg{position:relative;display:block;margin:0 2px 2px;border-radius:4px;background:var(--k-card,#fffaf0);border:1px solid var(--k-hair);color:var(--ink);font-size:.62rem;font-weight:700;line-height:1.1;padding:1px;text-align:center;overflow-wrap:normal;word-break:keep-all}
 .kmc-tg.t-note{border-color:var(--gold);color:var(--gold)}.kmc-tg.t-due,.kmc-tg.t-exam{border-color:#e3a497;color:var(--bad)}
 .kmc-que{font-size:.6rem!important;white-space:nowrap}
 .kmc-hint{color:var(--dim);font-size:.78rem}
