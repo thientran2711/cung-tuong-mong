@@ -382,3 +382,4 @@ RUNNING (all report to the newest Foreman D; tell each ONCE «Foreman D = <id>»
 Briefs: briefs/D9-invite-host-away.md, D9-cal-p2c.md, D9-gap-jobs.md (JOB 1–6). Reviewer prompt pattern = see the reviewer seats above (PRIORITY line + START_CORE/WORKER/REVIEWER + OD rows + brief + report; verdict in reports/review-<job>.md + LAND READY line here).
 OPEN FOR MAIN: send_message from this account to MAIN (ROOT-75/76/77) returns «not found» → report only through FOR MAIN / LAND READY lines here. Test debt: ptime checks 4/11 flaky on main; walk-spill.js 2 stale cases; role-parity 2 FAIL on LIVE (cx3:tell, harm:accuse/banphe/uyhiep). GAP rows MG07/MG15 = C-AG. Hourly wake trigger trig_01TEZerZLKCpNuKVVXKL6z93 (D #9) is DELETED at handover; D #10 makes its own.
 
+- (20/11 10:24Z, D #9) ROLLED OVER → **FOREMAN D #10 = session_01964izDrx83qqXTF9t1BYy7** (child of D #9, depth 1). D #9 hourly trigger deleted; D #9 stops. Seats: report to D #10.
