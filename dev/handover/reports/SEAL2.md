@@ -74,3 +74,26 @@ Unit 1 = 8 × 135 + 12 × 940 = 12 360 cr. Session total so far: 9 270 + 6 180 +
 - Disc colour never near chroma green (SEAL5's hăng hái fix).
 - pt / ptl: NOTHING until the owner OKs v2 (sent to her Lượt 812).
 - Report credits per batch to ROOT-58; stop if balance < 50 k (426.6 k shared at 23:52Z).
+
+## SEAL2b (session_01PEhRbwQheXvLfp1Q5duFap, depth 2, START_CTX ≈ 4 %) — 20/11
+### pt / ptl «giận» v3 (owner Lượt 820 via ROOT-58) — SENT ~00:25Z (CDN names pt-gian*, ptl-gian*, v2 overwritten; preview pt-ptl-v3-preview.mp4)
+| seal | A | B (used = flattened) | OUT | LOOP | BACK |
+|---|---|---|---|---|---|
+| pt-gian v3 | VX7Ltc8MMU | aFG61wrfSh (= Lw8D4V1swO) | KLpW7ALkqp (0.93 s) | hu29K3evqL | rgXTyenxtc |
+| ptl-gian v3 | TdwjIcsVNR | aFG617xfSh (= lJteNetgv9) | ov6JFNq829 (0.33 s) | 0eUxtS9TfW | s7IpNIWl8e |
+sg2_prompts.py pt/ptl who+same: no phoenix, ONE flower (pt medium pink / ptl large purple), pins + pearl drops, thin flowing silk+gauze (B12).
+Faults: gauze sleeves see-through (green shows); pt BACK grey cloud bank ~1 s; ptl OUT 2-step; ptl LOOP smoke trail + jump; ptl BACK grey shards 2–3 frames; ptl B sleeve near edge.
+### Hoàng hậu UNIT 2 (binh ghen lo muu tutin hanghai; Thái hậu prompts word for word, hanghai disc 'bright coral') — SENT ~00:42Z
+| seal | A | B | OUT | LOOP | BACK |
+|---|---|---|---|---|---|
+| hh-binh | YMlkpYvWeC (= kseclkc16B flattened) | MBJsIaGDCm | mEZ45nPhJQ (1.3 s) | xSBVPQEjfW | rgXTyQ2xtc |
+| hh-ghen | lJteyUigv9 | JNCI3zUOq4 | WDg1832cXe (1.2 s) | BLOCKED (s7IpN5tl8e) | BLOCKED (N2qfVi36D9) |
+| hh-lo | fHzibQLCDY | Lw8DOiLswO | hu29rQlvqL (1.8 s) | ov6JbaZ829 | cpSrhda0eP |
+| hh-muu | 9ZHaAYdNYZ | 8aiOEkvIrU | 0eUxvmETfW | WDg1mttcXe | jUoM6NuLD0 |
+| hh-tutin | gOmdPiGSXO | u5WZ1w0QLD | lJteRncgv9 | ov6Jbxe829 | 6AbCMoCiJO |
+| hh-hanghai | hu29HaSvqL (= ksecgOI16B flattened) | jUoMJ2JLD0 | eIPSQlcdqL (1.8 s) | EbYRl3iuuO | 79f8z8RJAL |
+CDN hh-<k>-out/.webp/-back, still/, -frames.jpg, hh-u2-preview.mp4. preview_vi.py now skips a missing part.
+Faults: ghen LOOP+BACK blocked by Seedance moderation (handkerchief-biting?) — no redo without OK; muu BACK she throws both arms up over her head ~1 s before sliding in;
+tutin OUT ~0.5 s she rises tall above the medallion top; hanghai OUT sleeves swing out wide like wings ~0.3 s, LOOP energy lines grow into big yellow bursts.
+Credits: unit 2 = 12×135 + 16×940 = 16 660; pt/ptl v3 = 6 180. Balance 219 764 (shared) at 00:22Z.
+NEXT: nothing — đau/tĩnh tu/… and act-* wait for ROOT-58 GO.
