@@ -352,6 +352,87 @@ def mama4_51(): return mama4('a51')
 def mama4_65(): return mama4('a65')
 
 
+# ===== MAIDP3: owner L1518 (C #11 22:39Z) =====
+# (c) nhị collar: square -> crossed (cổ xéo). Neither test5_nhi nor tamdang_gpt names a collar in words; tam's crossed collar
+#     is written from the tam picture aFGdKgifSh (sheet_L1512).
+NHI_CROSSED = ("with a CROSSED collar (cổ xéo, jiaoling) exactly like a tam đẳng maid's jacket: the jacket's two front edges "
+               "cross over the chest in one clean diagonal wrap, the left front over the right, forming a y-shape at the neck, "
+               "with the inner robe's crossed collar showing as a thin line inside it; never a square, straight-down or upright "
+               "stand collar")
+# (b) nhị: only ONE sleeve layer (her round-5 picture gOm5NnCSXO had two stacked half-sleeve tiers)
+NHI_ONE_SLEEVE = ("its half-sleeves ONLY ONE single layer (one short half-sleeve over the inner robe's long sleeve, never two or "
+                  "more stacked, tiered or ruffled half-sleeve layers)")
+# (d) thân cận collar -> nhị's current SQUARE collar. test5_nhi has no collar words either; written from the nhị picture
+#     gOm5NnCSXO (sheet_L1512).
+TC_SQUARE_COLLAR = ("a sleeveless embroidered over-vest with a SQUARE collar (cổ vuông, fangling): a flat embroidered collar band "
+                    "that runs straight down from each side of the neck and turns at a right angle, framing a square opening at "
+                    "the upper chest, inside which the inner robe's crossed collar in her own colour shows; below the square "
+                    "opening the vest's two front edges meet edge to edge, closed with one small knot button, never a tall "
+                    "upright stand collar, with a band of gold-edged trim down the front, worn over a crossed-collar inner robe")
+# (e) nhất: + ONE shorter front panel on top of the two long ones
+NHAT_TA_NGAN = (" and ON TOP of these two long front panels ONE more SHORTER front panel (tà ngắn): a single short embroidered "
+                "panel with a gold-edged border hanging at the centre front from the waist sash, about half as long as the long "
+                "panels, so TWO layers of front panels are clearly visible at the front (the short top panel over the two long ones),")
+
+
+def nhi():
+    base = 'dev/art/maid7/test5_nhi.txt'
+    t = open(base, encoding='utf-8').read()
+    # (a) unify fabric + rose words with tam/nhất (tam đẳng's words verbatim: same jacket family)
+    t = swap(t, 'a fine silk ruqun in powder blue, with narrow embroidered',
+             'a fine silk ruqun, the long inner robe and skirt in powder blue like #A7BAD2, with narrow embroidered')
+    t = swap(t, 'a layered half-sleeve brocade jacket (bijia) on top in deep rose like #CA7281,',
+             'a half-sleeve brocade jacket (bijia) on top in deep rose like #CA7281, '
+             'made of the SAME fine silk brocade with a soft sheen as the outer jacket of the higher maids (never a plainer or '
+             'duller cloth), ' + NHI_ONE_SLEEVE + ', ' + NHI_CROSSED + '; so the main and the secondary colour are both clearly visible;')
+    t = swap(t, 'her main colour powder blue like #A7BAD2 on the ruqun (the long skirt, the inner robe and its long sleeves), '
+                'her secondary colour deep rose like #CA7281 on the whole half-sleeve outer jacket (bijia), both clearly visible.',
+             'her main colour powder blue on the inner robe and skirt, her secondary colour deep rose clearly visible on the outer jacket.')
+    t = k27(t, '(a little more embroidery than a tam đẳng maid),', 'the collar, cuffs, jacket and skirt hem band')
+    t = HDR_M18 + t.rstrip()
+    t = fixcap(t, 'Cung nữ nhị đẳng')
+    out = D + 'nhi_gpt.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [('a fine silk ruqun in powder blue', 'owner Lượt 1518: fabric/colour words = tam đẳng (one common text)'),
+                     ('a layered half-sleeve brocade jacket (bijia) on top in deep rose like #CA7281', 'owner Lượt 1518: ONE sleeve layer only (no "layered")'),
+                     ('her main colour powder blue like #A7BAD2 on the ruqun', 'owner Lượt 1518: rose/colour words = tam đẳng verbatim'),
+                     ('the long skirt', 'owner Lượt 1518: -> tam words "on the inner robe and skirt"'),
+                     ('the inner robe and its long sleeves', 'owner Lượt 1518'),
+                     ('her secondary colour deep rose like #CA7281 on the whole half-sleeve outer jacket', 'owner Lượt 1518: -> tam words'),
+                     ('both clearly visible', 'owner Lượt 1518: -> tam words "so the main and the secondary colour are both clearly visible"')])
+    return out
+
+
+def thancan4():
+    base = D + 'thancan_gpt_v3.txt'
+    t = open(base, encoding='utf-8').read()
+    t = swap(t, TC_R2_COLLAR, TC_SQUARE_COLLAR)
+    t = swap(t, "and the thin edge of the inner robe's collar showing at the vest's collar is deep rose.",
+             "and the inner robe's crossed collar showing inside the square collar opening is deep rose.")
+    out = D + 'thancan_gpt_v4.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [('a sleeveless embroidered over-vest with a TALL upright stand', 'owner Lượt 1518: square collar'),
+                     ('with a TALL upright stand (mandarin) collar that wraps closely around the neck and is fastened at the throat with ONE small knot button', 'owner Lượt 1518: thân cận collar -> nhị\'s square collar'),
+                     ("from the button the vest's two front edges MEET EDGE TO EDGE and stay closed all the way down to the waist sash", 'owner Lượt 1518'),
+                     ('one smooth closed front like a straight upright standing-collar robe', 'owner Lượt 1518'),
+                     ('with NO gap', 'owner Lượt 1518'), ('NO slit', 'owner Lượt 1518'), ('NO V-opening and NO inner robe visible on the chest', 'owner Lượt 1518: square opening shows the inner collar'),
+                     ("the inner robe's collar in her own colour shows ONLY as a thin line just above the stand collar at the neck", 'owner Lượt 1518'),
+                     ("and the thin edge of the inner robe's collar showing at the vest's collar is deep rose", 'owner Lượt 1518: same deep rose, now inside the square opening')])
+    return out
+
+
+def nhat4():
+    base = D + 'nhat_gpt_v3.txt'
+    t = open(base, encoding='utf-8').read()
+    t = swap(t, 'the centre front of the skirt showing between them,', 'the centre front of the skirt showing between them,' + NHAT_TA_NGAN)
+    t = swap(t, 'the sleeveless over-vest and its two front panels are deep rose.',
+             'the sleeveless over-vest, its two long front panels and the short top front panel are deep rose.')
+    out = D + 'nhat_gpt_v4.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [('the sleeveless over-vest and its two front panels are deep rose', 'owner Lượt 1518: + short top panel (tà ngắn), also deep rose')])
+    return out
+
+
 if __name__ == '__main__':
     # NOTE: mama51/mama65 (v2) and chuongsu (v2) are NOT in the default list: mama v2 was hand-edited by Foreman C (L1473).
     jobs = sys.argv[1:] or ['nhat', 'thancan', 'tamdang', 'nhat3', 'thancan3', 'chuongsu3', 'mama3_51', 'mama3_65', 'mama4_51', 'mama4_65']

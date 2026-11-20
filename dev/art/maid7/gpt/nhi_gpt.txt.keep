@@ -1,0 +1,8 @@
+base: dev/art/maid7/test5_nhi.txt
+allow: a fine silk ruqun in powder blue   # owner Lượt 1518: fabric/colour words = tam đẳng (one common text)
+allow: a layered half-sleeve brocade jacket (bijia) on top in deep rose like #CA7281   # owner Lượt 1518: ONE sleeve layer only (no "layered")
+allow: her main colour powder blue like #A7BAD2 on the ruqun   # owner Lượt 1518: rose/colour words = tam đẳng verbatim
+allow: the long skirt   # owner Lượt 1518: -> tam words "on the inner robe and skirt"
+allow: the inner robe and its long sleeves   # owner Lượt 1518
+allow: her secondary colour deep rose like #CA7281 on the whole half-sleeve outer jacket   # owner Lượt 1518: -> tam words
+allow: both clearly visible   # owner Lượt 1518: -> tam words "so the main and the secondary colour are both clearly visible"
