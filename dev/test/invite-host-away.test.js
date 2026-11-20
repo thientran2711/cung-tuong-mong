@@ -50,6 +50,12 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   toB0();S.invW=[];{const L=free();const h=L[0],g=L[1];const e=S.roster&&S.roster.P["v"+h.id];const kh=j95kh();if(e)for(let i=kh;i<e.length;i++)e[i]=["vuon","stay",null,"dạo vườn"];
    const a0=aff(g,h);rcvInvAt(h,g);o.F={wait:S.invW.length,row:(S.roster.P["v"+g.id]||[])[kh]};const now0=ptNow();iwDraw=()=>99;spend(1);iwDraw=d0;
    o.F.left=S.invW.length===0;o.F.dRel=aff(g,h)-a0;o.F.row2=(S.roster.P["v"+g.id]||[])[j95kh()];o.F.now=[now0,ptNow()]}
+  /* I co-op friend seat (rival coop:true): never rolled, never charged, no notice — as guest (her invite) and as host (an NPC comes to her palace) */
+  toB0();S.invW=[];{const L=free();const f=L[0],n=L[1];const c0=f.coop;f.coop=true;LOSS.length=0;PT.stat.iwLast=null;
+   S.place="vuon";rcvInvAt(S,f);const a1=S.invW.length;iwDraw=()=>99;spend(1);iwDraw=d0;S.place="home";
+   const e=S.roster&&S.roster.P["v"+f.id];const kh=j95kh();if(e)for(let i=kh;i<e.length;i++)e[i]=["vuon","stay",null,"dạo vườn"];
+   rcvInvAt(f,n);const a2=S.invW.length;iwDraw=()=>99;spend(1);iwDraw=d0;
+   o.I={guest:a1,host:a2,loss:LOSS.length,last:PT.stat.iwLast};f.coop=c0}
   /* G determinism + one core */
   {const w={id:"iwX"};o.G={d1:W.draw(w,7),d2:W.draw(w,7)};const v=free()[0];o.G.o=W.stayO(v,S);o.G.word=word(o.G.o);o.G.loss=BAL.invite.wait.loss}
   o.err=PT.stat.errs.slice();return o});
@@ -61,5 +67,6 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r.E.reg===1&&r.E.there&&r.E.wait===1&&r.E.t!=null&&r.E.left&&r.E.dRel===loss&&r.E.meet,"E two-way: NPC host away when she comes → she waits; walking off = leaving with loss; host there = visit",r.E);
  ok(r.F.wait===1&&r.F.row&&r.F.row[1]==="visit"&&r.F.left&&r.F.dRel===loss&&r.F.row2&&r.F.row2[1]==="back","F NPC ↔ NPC: guest waits, leaves at the next khắc, loss, walks back",r.F);
  ok(r.G.d1===r.G.d2&&typeof r.G.o==="number"&&!/%/.test(r.G.word),"G hash draw same on every seat, odds from BAL, ladder word",r.G);
+ ok(r.I&&r.I.guest===0&&r.I.host===0&&r.I.loss===0&&!r.I.last,"I co-op friend seat as guest and as host: no wait, no roll, no loss, no notice (a player decides by being there)",r.I);
  ok(!errs.length&&!r.err.length,"H no page errors",{errs:errs.slice(0,3),pt:r.err});
  await b.close();const n=res.filter(x=>x).length;console.log(`INVITE-HOST-AWAY ${n}/${res.length} ${n===res.length?'PASS':'FAIL'}`);process.exit(n===res.length?0:1)})();

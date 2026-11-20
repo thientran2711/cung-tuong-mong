@@ -193,7 +193,9 @@ function iwDraw(w,K){const s=w.id+"|"+K;let x=2166136261;for(let i=0;i<s.length;
 /* the guest's rows of this buổi: waiting at the host's place / walking back home */
 function iwRows(g,from,row,rest){try{const R=S.roster,e=R&&R.P&&R.P["v"+g.id];if(!e)return;const i0=Math.max(0,from-bid()*ptKH());for(let i=i0;i<e.length;i++)e[i]=i===i0?row:(rest||row);
   const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){ptErr("iwRows",e)}}
-function iwAdd(h,g){if(!S||!h||!g||h===g)return null;const k=h===S?(S.out?"lc":"home"):palaceOf(h);
+/* a co-op friend seat (rival entry coop:true, jcoopworld) is a PLAYER, never rolled as an NPC: on her side of the visit the rule does not run (review FAIL 1) */
+function iwCoop(p){return !!(p&&p!==S&&p.coop)}
+function iwAdd(h,g){if(!S||!h||!g||h===g||iwCoop(h)||iwCoop(g))return null;const k=h===S?(S.out?"lc":"home"):palaceOf(h);
  if(g!==S&&iwHere(h,k))return null;/* (5) the host is there: the visit happens as before */
  /* arrival = the due khắc of the landing task (a 2-khắc walk of hers lands it one khắc late on her clock) */const now=Math.min(ptNow(),PT.iwDue!=null?PT.iwDue:1e9),gi=iwId(g),hi=iwId(h);const Z=iwZ();for(let i=Z.length-1;i>=0;i--)if(Z[i].g===gi)Z.splice(i,1);
  const w={id:"iw"+now+"-"+gi+"-"+hi,g:gi,h:hi,k,t:g===S?null:now,last:now,b:bid()};Z.push(w);
@@ -206,7 +208,7 @@ function iwLeave(w,K,why){const g=iwP(w.g),h=iwP(w.h);if(!g||!h)return;PT.stat.i
 let iwBusy=false;
 function iwTick(){if(iwBusy||!S||S.dead||!Array.isArray(S.invW)||!S.invW.length)return;iwBusy=true;try{const now=ptNow(),b=bid();
  for(const w of S.invW.slice()){const g=iwP(w.g),h=iwP(w.h);const drop=r=>{const i=S.invW.indexOf(w);if(i>=0)S.invW.splice(i,1);PT.stat.iwDrop=r||"?"};
-  if(!g||!h||g.alive===false||h.alive===false||g.out||(g!==S&&g.confined)){drop("gone");continue}
+  if(!g||!h||iwCoop(g)||iwCoop(h)||g.alive===false||h.alive===false||g.out||(g!==S&&g.confined)){drop("gone");continue}
   if(w.b!==b){/* the buổi ended and the host never came */if(w.t!=null)iwLeave(w,now,"buoi");drop("buoi");continue}
   if(g===S){/* SHE is the guest: arrival when she stands there; host there = visit; walking off first = leaving */
    const at=(S.out?"lc":S.place)===w.k;if(w.t==null){if(at){w.t=now;w.last=now}else continue}
