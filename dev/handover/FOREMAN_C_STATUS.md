@@ -813,3 +813,4 @@ NEWACCT#9 ~23:30Z: OWNER L1452 (still in #9 chat): resend maid GPT prompts → r
 NEWACCT#10 ~21:12Z: #9 relayed L1452: #9 resent owner the 4 maid GPT prompts (maid7/gpt nhat/thancan/chuongsu/mama, L1355 set); open notes reports/MAIDP1.md. Next Lượt 1453.
 NEWACCT#10 ~21:13Z: #9 relayed OWNER L1453: fur trim stays exactly as *_cloak (no thinner fur); only shrink shoulder pieces → DESIGN12 told by #9. Next Lượt 1454.
 NEWACCT#9 ~23:33Z: OWNER L1453: fur stays as is (no thinner) → DESIGN12 + #10 told. Next Lượt 1454.
+NEWACCT#10 ~21:14Z: DESIGN12 3fd437aa _cloak2 changed fur width/lapels too → violates OWNER L1453/L1454 (only vân kiên size). #10 ordered REDO from _cloak, only shoulder-piece size words, fur byte-identical, diff in report. Next Lượt 1455.
