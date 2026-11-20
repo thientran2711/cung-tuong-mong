@@ -15,7 +15,7 @@
 var NRASK=window.NRASK||(window.NRASK={});
 (function(){
  /* the stock option order of each help kind (jnroad.js nr_* templates: which option is the Sức one and which the bạc one) */
- const ORD={emp:["suc","bac"],th:["suc","bac"],hh:["suc","bac"],che:["suc","bac"],thu:["bac","suc"],do:["bac","suc"],y:["bac","suc"]};
+ const ORD={emp:["suc","bac"],th:["suc","bac"],hh:["suc","bac"],che:["suc","bac"],thu:["bac","suc"],do:["bac","suc"],y:["bac","suc"]};window.NRASK_ORD=ORD;/* r2 (road-triggers fix 3): the Emperor's asks (jnroade.js) build on the same stock order */
  const M={};
  /* ids: the chapter ids of the template (jnroad nrAskId: "<template id>_<chapter>"), one per row, in chapter order */
  /* each call adds ONE more ask to every chapter of the road: NRASK[id] is the list [first ask, second ask] (Q1a engine: one ask or a list) */
