@@ -97,3 +97,9 @@ with dev/site/build_site.sh; jbal2 conflicts only next to BAL.ag.mg2.cal — kee
 ag-mgcal, ag-mgh, quickcheck → SẴN SÀNG KIỂM <sha> here + at the end of FOREMAN_D_STATUS.md + send_message FOREMAN D #9.
 
 Branch head: review/cal-p2c f8784c91716f24eb7cb7f98caf9ad8b188439aec (PROGRESS; waits for mg-fair-ratio in LIVE, then final-merge → SẴN SÀNG KIỂM).
+
+## UPDATE (20/11 ~08:55Z) — merged LIVE 30e8714e (mg-score-same 892e5bb0 + fig-label) into review/cal-p2c → d465937b8e02ea617779280072701e143f48324f
+- One conflict, j82 kg82Play end: mg-score-same's rule "the board ends on the mark given" kept — the board now ends on the identity-adjusted mark (the mark actually given);
+  the identity kit row on the result says why it differs from the live graded mark. mg-score-same-scan.py: 35 cells via the ONE grade, 0 raw, kg82Play ends on the given mark.
+- Re-run: cal-p2c.js ALL PASS (12, old save from LIVE 30e8714e) · ag-mgcal ok · ag-mgh ok · quickcheck PASS (core gates PASS, old save ok, perf ≈ live).
+- Branch now = review/mg-fair-ratio-rv c214ead + LIVE 30e8714e + cal-p2c. Still waiting only for mg-fair-ratio to land in LIVE (then one more merge of origin/main, rebuild, gates → SẴN SÀNG KIỂM).
