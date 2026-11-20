@@ -466,7 +466,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW kit-opt-text (sonnet small, KP14) of 39faf7c0 | review/kit-opt-text-rv; briefs/rv-root79-kit-opt-text.md | MAIN ROOT-79 | session_01Rc5AsMSxpxbsAMRSE5oWrq | PASS 9f673ab2 → LIVE eb11e2ad | 20/11 14:58Z |
 | kit-fig2-left KIT KEEPER (sonnet; KP22 check, no code) | reports/kit-fig2-left.md | MAIN ROOT-79 | session_01Rc5AsMtjP4KTgBZVjENGLs | DONE (report only) | 20/11 |
 | rv-kit-opt-text REVIEWER (sonnet; small kit KP14) | review/kit-opt-text-rv; reports/rv-kit-opt-text.md | MAIN ROOT-79 | rv-signs session | DONE PASS 9f673ab2 | 20/11 14:41Z |
-| KP22 rel-men-servants (opus; ORDER MAIN ROOT-79 14:45Z; men + servants real pairwise relations → relGrp/GR groups) | review/rel-men-servants | B | session_01N1tNP6Ndqa9P3vKrpqp9M7 | RUNNING | 20/11 15:19Z |
+| KP22 rel-men-servants (opus; ORDER MAIN ROOT-79 14:45Z; men + servants real pairwise relations → relGrp/GR groups) | review/rel-men-servants | B | session_01N1tNP6Ndqa9P3vKrpqp9M7 | READY ab189e51 (reports/rel-men-servants.md) | 20/11 16:55Z |
 | FOREMAN E #20 (opus; child of E #19, depth 1) | handover FOREMAN_E_STATUS | FOREMAN E #19 | session_01DgYSWktqRepcrRpV9LRJV2 | RUNNING | 20/11 15:49Z |
 | coop-thin G #7 (opus; successor of G #6 5sNDT7i8 @fcaebe77) | review/coop-thin-g | B | session_01N1tNP4hKBjqGrnmw98Dz3q | RUNNING | 20/11 15:57Z |
 | REVIEW coop-host-lag r1 (opus BIG) of 3d73134b | review/coop-host-lag-r1 | B | session_01N1tNP6RAQ5d4gTSNa3cYiK | RUNNING | 20/11 15:59Z |
