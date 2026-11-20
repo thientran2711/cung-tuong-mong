@@ -451,3 +451,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-rows-b KIT KEEPER (sonnet; KP12/13/15/17/19/20/21 + K-PM-1; KP14, KP22 open) | review/kit-rows-b; reports/kit-rows-b.md | MAIN ROOT-78 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM (see message) | 20/11 |
 | REVIEW coop-staff-split r1 (opus BIG) of 797982a5 | review/coop-staff-split-r1 | B | session_01N1tNP57zWUL3xM4EWuAwtL | RUNNING | 20/11 12:26Z |
 | coop-host-lag (opus; host-only world writes reach guest a week late: figThPick + names sweep + rebirth flake; stacked on names-unique-r2-r1) | review/coop-host-lag | B | session_01N1tNP6rvC3RLvQMFGeo8UB | RUNNING | 20/11 12:27Z |
+jagday-walk (GAP follow-up, MAIN GO) | review/jagday-walk | session_01964izFMBWywRUbAg2MV1QH | RUNNING | 20/11 12:35Z | Foreman D #10
