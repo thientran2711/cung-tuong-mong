@@ -1,27 +1,43 @@
-# RANK8-C — s65 (Đoan trang, jade + peach cream) — PREP ONLY, 0 cr (ROOT-68 HOLD)
+# RANK8-C — s65 (Đoan trang, jade + peach cream) — 8 RANKS DRAWN
 depth 3 · START_CTX ≈ 4 % (context_usage read 0; own estimate) · worker for Foreman C ROOT-68 (session_01PEhRbv5MJBsBwzuyDQxpDD)
 
-## 1. No rank pictures for s65 (checked)
-- gen_ledger.jsonl: s65 appears only in NEWFACE-F4 (face gen jUoeq99LD0 → cut jUoe5yJLD0), ROOM-COMPOSITE and OWNER-OK (Lượt 1046). No rank gen.
-- No s-id has ever been rank-built: build_all.py PEOPLE = c01–c32, m01–m52, p01–p03; the store build.py has no s65 row (`build.py s65 v0 --low 1` → KeyError 's65'); KC_REFS.json has no s65 entry (B8 refuses).
+## 1. Check: no rank pictures for s65 before this
+The ledger only had the face (gen jUoeq99LD0 → cut jUoe5yJLD0) and its OWNER-OK (Lượt 1046). No s-id was in the rank builder, the store or KC_REFS.
 
-## 2. Unblock = DATA ROWS ONLY (patch NOT applied; needs ROOT-68 OK)
-`dev/art/rank8-s65/s65_store_rows.patch` (`git apply --check` clean), modelled on the princess N8b data rows:
-- t8-prompt-B/build.py: `S_NEW_ROWS={"s65":("chrysanthemums",)}` loop after PRINCESS_ROWS. Palette/hex = face-common/s_root_colours.json (jade #4EA989 / peach cream #FBDAC1). Motif = from her approved face outfit (chrysanthemum roundels). Hair flower = maid rule MAID_FLOWER[65%6] = a camellia. ITEMS_LOW = items3f. OUTFIT_JOBS t4–t6 = _g3 outfit (same as maids/princesses). SPEC5_IDS = maid index rule → thamvong list, slot 11. KC_ID regex + `s\d\d`. No store sentence touched.
-- store-all/build_all.py: `PEOPLE+=["s65"]` appended LAST, so everyone else's plan is unchanged (verified: m04 t3, m52 t8, p02 t5 byte-identical before/after).
-- KC_REFS.json: s65 entry, m09_ok yes, ref_id jUoe5yJLD0 (FACE_MAP s65.cut), face_words = "Her face: …" + "Expression: …" VERBATIM from s65.v5.FULL.txt.
-- RANK8-A (s62) and RANK8-B (s64) are blocked the same way: add "s62"/"s64" to S_NEW_ROWS + PEOPLE + KC_REFS with the same method. One coordinated commit avoids a 3-way conflict in build.py.
+## 2. Builder change (commit c51c37e, owner GO via ROOT-68) — new people s62 s64 s65, DATA ROWS ONLY
+- t8-prompt-B/build.py: `S_NEW_ROWS` loop, done the same way as the princess N8b rows. Colours = face-common/s_root_colours.json. Motif = from each person's approved face outfit (s62 plum blossoms, s64 lilies of the valley, s65 chrysanthemums). Hair flower = maid rule MAID_FLOWER[n%6]. ITEMS_LOW = items3f; OUTFIT_JOBS t4–t6 = _g3. SPEC5_IDS = maid index rule. KC_ID regex now also takes `s\d\d`. No store sentence touched.
+- store-all/build_all.py:
+  - `S_NEW` appended LAST to PEOPLE, so everyone else's plan is unchanged (m04 t3, m52 t8, p02 t5 byte-identical).
+  - PET BAN (owner rule: no pet at t7 HQP / t8 HH): `PET_RX` added to the t7/t8 pose filter for the new people, and a PET GATE in `gate()` (exit 1).
+  - Grammar fix "held in the hand in one/both hand(s)" → "held in …", new people only.
+- KC_REFS.json: s62 s64 s65 entries (ref = FACE_MAP cut; face_words = "Her face"+"Expression" VERBATIM from sNN.v5.FULL.txt).
+- Check: all 24 prompts (3 people × 8) STORE CHECK PASS + build_all.check() 0 errors; no pet at t7/t8.
 
-## 3. 8 prompts built + gated (with the patch applied in the working tree)
-dev/art/rank8-s65/s65_t1..t8.txt = `build_all.py s65 N` output. check_store: STORE CHECK PASS (approved_check PASS) t1–t8; build_all.check() 0 errors t1–t8. Image 1 = jUoe5yJLD0. Jade #4EA989 + peach cream at every rank. "Bare earlobes, no earrings" (F15). No fruit (F16).
-Poses/items: t1 swallow kite · t2 pipa · t3 painted scroll · t4 jade butterfly hairpin · t5 gilded silver flower basket · t6 pearl-silk poetry book · t7 songbird on finger + tú cầu · t8 gold phoenix seal box.
+## 3. Gens — s65 t1–t8, 1 try each, gate PASS right before (A19)
+gpt-2-6 1024x2304 2k seed 7172. Refs: t1–t5 jUoe5yJLD0; t6–t8 + royal swatch TdwDfOyVNR. All logged in the ledger (kind RANK8).
+| t | rank | gen | item |
+|---|---|---|---|
+| 1 | Đáp ứng | u5Wzn36QLD | swallow kite |
+| 2 | Thường tại | iG5Hb2f3uK | pipa |
+| 3 | Quý nhân | 9ZHuFupNYZ | painted scroll |
+| 4 | Tần | N2qQqAg6D9 | jade butterfly hairpin |
+| 5 | Phi | xSBeBpdjfW | gilded flower basket |
+| 6 | Quý phi | kseMdjO16B | pearl-silk poetry book |
+| 7 | Hoàng quý phi | xSBeoMDjfW | tú cầu silk ball (NO pet) |
+| 8 | Hoàng hậu | aFGZnE6fSh | gold phoenix seal box |
+Credits: 8 × 135 = **1 080 cr**. Balance 84 462 → ≈83 382.
+Sheet: `dev/art/rank8-s65/s65_8bac_sheet.jpg` (labels ON the image: tN · rank · s65 · Đoan trang · place). The place line says "chưa xếp cung" because no palace is assigned to her yet.
 
-## 4. Faults (notes only, nothing changed — A18)
-1. **t7 songbird = a pet at HQP t7** (brief: no pets for HQP t7 / HH t8). This is builder-wide and pre-existing: plan() also gives c02 t8 and c13 t7 a songbird pose. The gate does not catch it. Needs a builder ban (`_banned` t≥7 bird/pet) — foreman call.
-2. Đoan trang ("never playful") gets lively t1–t3 poses (curious kite lean, mid-step) and t5 "just finished a small twirl". The builder trait comes from the maid index rule (thamvong), not her look group. Option: map s65 to a calm list (hienlanh/thanhnha).
-3. t4 store adaptation text reads "held in the hand in both hands" (grammar, store SPEC5_ADAPT).
+## 4. Looked at full size (A11/A22) — notes only, NO redraw (A20/A21)
+- OK: same face at all 8 ranks; mouth closed, no teeth, no earrings, eyes level; jade + peach cream at every rank; royal yellow grows t6 → t8 (t8 yellow dominant); one hair flower t1–t6 growing in size, none at t7/t8; hair loose t1–t3, up t4–t8; no pet; no fruit.
+- (n1) The camellia reads like a peony (pink / peach big bloom).
+- (n2) t4 and t5: one gold hairpin points sideways (rule: upward/backward).
+- (n3) t1 kite floats free on its string from the reel (fine); t7 is a "dance step, twirling one long sleeve" at HQP — calm but lively for t7.
+- (b, left as is per ROOT-68) Đoan trang gets lively t1–t3 poses, from the maid index trait (thamvong).
+- c02 t8 and c13 t7 still get a songbird pose (old people; pet ban not applied to them) — note for ROOT-68.
 
-## 5. Cost
-~138 cr/picture × 8 = **≈1 104 cr**. Balance now 84 462 cr → ≈83 358 after (> 60 000 stop line). Used so far: 0 cr, 0 gens.
-
-## 6. Waiting for ROOT-68 GO (apply the patch? fix fault 1 first?). No gens until then.
+## 5. Transparent cut-outs (owner URGENT via ROOT-68) — 8 × 3 cr = 24 cr
+`dev/art/rank8-s65/cut/s65_t1_cut.png … s65_t8_cut.png`: RGBA. The figure stays at native 1024×2304 with no rescale; a 220 px label band is added on top (canvas 1024×2524, strip "tN · rank · s65 · Đoan trang · chưa xếp cung").
+Tool: images_remove_background on each gen (cuts tCR6YKWmZJ cpSsPhc0eP O6Ea5cAynm N2qQxpJ6D9 iG5HLXb3uK yiufKMxPW9 aFGZTUTfSh bxM0oig5Y2). Ledger: kind RANK8-CUT.
+Checked on a dark background, overview + 1:1 zooms: hair strands clean, gauze sleeves/shawl keep partial transparency (semi-alpha 0.6–4.8 % of pixels), kite string + crown tassels kept, no parchment halo.
+NEXT: when RANK8-A/B finish → one combined transparent image per rank of s62/s64/s65 side by side (labels).
