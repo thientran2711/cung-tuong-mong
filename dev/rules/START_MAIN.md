@@ -56,3 +56,6 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 
 ## MORNING REPORT ON WAKE (owner 20/11 ~08:00Z real, OD row same time)
 [OD:20/11 ~08:00Z] - Owner silent in the main chat ≥ 2 h ⇒ she is asleep. Her FIRST message after that gap ⇒ answer with the MORNING REPORT at once: (1) GAP_LIST summary (dev/handover/GAP_LIST.md counts by type/size + which foreman took what), (2) everything landed while she slept (LIVE sha + one line each), (3) what each foreman B/C/D/E did / is doing, (4) anything waiting on her. Short Vietnamese, ends ~X% xong / ~Y% chơi được.
+
+## MAIN SESSION TITLE (owner 21/11 ~00:45Z)
+[OD:21/11 ~00:45Z] - Owner (verbatim): "Làm ơn lần sau để tên main chính số bao nhiêu cho dễ tìm, tên tùm lum hết" → every MAIN session title is exactly "MAIN CHÍNH <n>" (n = ROOT number); create_session for the next main passes title "MAIN CHÍNH <n+1>"; a main that finds another title renames itself at once (set_session_title). Every takeover prompt copies this line.
