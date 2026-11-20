@@ -448,3 +448,4 @@ ROOT-67 HANDOVER ~07:18Z: depth 1, ctx ~32 % (≥ START ~5 % + 25 %). TAKEOVER_F
 ROOT-68 ~07:20Z: depth 2, START_CTX ~5 % (est.; used_tokens reads 0). Took over from ROOT-67. Workers FRUITPET1/PR20/EAR2/F4/NOEAR1 + ROOT-58..67 told. Own hourly check created. Owner asleep; overnight only GO'd 0-cr work (FRUITPET1). Next Lượt 1075.
 ROOT-68: hourly check trigger = trig_01Lnn2hqBfW5iGzzo3ijc2fu (delete on handover). ROOT-58..67 + workers told.
 ROOT-68 07:20Z: ROOT-67 used Lượt 1075 (handover notice in its chat) → next free Lượt 1076. EAR2 holding at roll line (2f4d3ac); flower GO goes to its successor.
+ROOT-68 Lượt 1076: OWNER verbatim (via ROOT-67) "Cung nữ nhà nghèo, nữ đế là không ôm thú cưng, công chúa trẻ con thì có ôm thú cưng." → NO pets maids/nhà nghèo/Nữ đế; YES công chúa + trẻ con → FRUITPET1 builders+gate (0 gens). Next Lượt 1077.
