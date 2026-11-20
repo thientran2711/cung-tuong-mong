@@ -162,11 +162,12 @@ function kccoActs(){const C=K(),f=fName(),out=[],so=soOdds(),sl=soLock(),ru=odds
   out.push({k:"ru_"+r,n:nm,t:mySide()==="h"?"Lời ra tiếng vào ở trà lâu, phố chợ; chọn khen hay chê ai.":"Lời ra tiếng vào giữa các cung; chọn khen hay chê ai.",kh:C.rumour.kh,c,o:ru,x:`người được nói tới ${mySide()==="h"?"Danh":"Danh / Lời đồn"} ±${C.rumour.n}`,l:`lộ ra là ngươi, Danh ${balSg(-C.rumour.lost)}`,lock:usedNow("rumour")?"tháng này đã tung tin":""});
  return out}
 window.kccoActs=kccoActs;
-/* failL: the stat part of a failure as an effect (home cards: runOpt applies a.l and the card's «Bại» column prints it); failOf(k, noStat) the rest */
-function failL(k){const C=K();if(k==="letter")return mySide()==="h"?{kld:C.letter.lost}:{danh:-C.letter.lost};if(/^ru_/.test(k))return{danh:-C.rumour.lost};if((k==="soUp"||k==="soDn")&&mySide()!=="h")return{danh:-C.so.lost};return{}}
-function failOf(k,noStat){const C=K();if(!noStat){const l=failL(k);if(l.kld)S.kld=(S.kld||0)+l.kld;if(l.danh)S.danh=Math.max(0,(S.danh||0)+l.danh)}
+/* failL: the stat part of a failure as an effect (home cards: runOpt applies a.l and the card's «Bại» column prints it); failLf: the home part as kcCard lf (Lời đồn under the fog rule, the father's liking); failOf(k, noStat) runs both when not a card, then the rest */
+function failL(k){const C=K();if(k==="letter")return mySide()==="h"?{}:{danh:-C.letter.lost};if(/^ru_/.test(k))return{danh:-C.rumour.lost};if((k==="soUp"||k==="soDn")&&mySide()!=="h")return{danh:-C.so.lost};return{}}
+function failLf(k){const C=K();if(mySide()!=="h")return[];if(k==="letter")return[["ld",C.letter.lost]];if(k==="soUp"||k==="soDn")return[["af",kcR("cha"),-C.so.af]];return[]}
+function failOf(k,noStat){const C=K();if(!noStat){const l=failL(k);if(l.danh)S.danh=Math.max(0,(S.danh||0)+l.danh);kcLfRun(failLf(k).filter(Boolean))}
  if(k==="letter"){kccoS().last.letter=S.turn;return"Thư thất lạc giữa đường."}
- if(k==="soUp"||k==="soDn"){kccoS().last.so=S.turn;if(mySide()==="h"){const c=kcR("cha");if(c)kcAf(c,-C.so.af)}return"Cha không chịu dâng sớ."}
+ if(k==="soUp"||k==="soDn"){kccoS().last.so=S.turn;return"Cha không chịu dâng sớ."}
  if(/^ru_/.test(k)){kccoS().last.rumour=S.turn;return"Người ta lần ra lời đồn từ chỗ ngươi."}return""}
 /* the choices inside gift / rumour (kit dialog) */
 PEND.kccoPick=p=>{if(!kccoOn())return null;const C=K();
@@ -181,7 +182,7 @@ function kccoStart(a){/* after the price and the roll: what the act does */
  if(/^ru_/.test(a.k)){kccoS().last.rumour=S.turn;pushDil(mkP("kccoPick",{k:"ru"}),"Tung tin");return""}return""}
 /* ---------- home side: kc cards in «Thư từ» (j2 act → runOpt: price, roll, go / fail) ---------- */
 function kccoCards(have){const X=[];if(!kccoOn()||mySide()!=="h")return X;for(const a of kccoActs()){if(a.lock||(have&&have.has(a.k)))continue;
-  X.push(kcCard({g:"mail",n:a.n,t:a.t,k:a.kh,c:a.c,o:a.o>=100?100:od(a.o),w:{},l:failL(a.k),x:a.x,kcco:a.k,go:()=>{const r=kccoStart(a);if(r)log(r)},fail:()=>{const r=failOf(a.k,true);if(r)log(r)}}))}return X}
+  X.push(kcCard({g:"mail",n:a.n,t:a.t,k:a.kh,c:a.c,o:a.o>=100?100:od(a.o),w:{},l:failL(a.k),lf:failLf(a.k),x:a.x,kcco:a.k,go:()=>{const r=kccoStart(a);if(r)log(r)},fail:()=>{const r=failOf(a.k,true);if(r)log(r)}}))}return X}
 (function(){if(typeof kcCards!=="function")return;const k0=kcCards;kcCards=function(){const X=k0.apply(this,arguments);try{X.push(...kccoCards())}catch(e){console.error("kcco cards",e)}return X}})();
 /* the room became ready (or the friend changed side) after this week's hand was dealt: the co-op cards join the END of the hand (the
    indices of the cards already dealt never move); played ones (done) stay as they are */
