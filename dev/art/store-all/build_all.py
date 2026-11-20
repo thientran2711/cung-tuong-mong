@@ -532,7 +532,12 @@ def eyes(S):
     m=re.search(r"Her face: [^.]*\. ",S); assert m,"EYES: face sentence"
     return S[:m.end()]+EYES_STRAIGHT+" "+S[m.end():]
 def build(person,rank,age="a18"):
-    S0,S,add=_build(person,rank,age); return S0,eyes(S),add
+    S0,S,add=_build(person,rank,age); S=eyes(S)
+    if rank in (4,5) and len(S)>10000:   # B26 (owner Lượt 1283): the longer t4/t5 đoạn fabric sentence -> same length rule as winter_g28.season (owner ~15:39Z: OK to cut the ANGLE sentence when too long); store text untouched (B2)
+        sys.path.insert(0,ART); import winter_g28 as _W
+        m=_W.ANGLE_RX.search(S)
+        if m: S=S.replace(m.group(0)+" ","",1); add=add+["ANGLE dropped (length, B26)"]
+    return S0,S,add
 def _build(person,rank,age="a18"):
     if not _kc_drawn(ALIAS.get(person,person)): raise NotDrawn(person)   # B8: people NOT drawn are refused (CLI exit 2, --check counts them HELD)
     person=ALIAS.get(person,person); S0=store(person,rank,age); S=S0

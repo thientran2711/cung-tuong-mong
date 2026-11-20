@@ -1,0 +1,26 @@
+# REPORT B26FAB (child of Foreman C #5, depth 5, START_CTX ~15%) — B26 matte đoạn t4/t5 in the main builder (+ JOB 2 flower embroidery)
+Text only, 0 credits, no gens.
+
+## JOB 1 — B26 FABRIC ĐOẠN MỜ (owner Lượt 1283 + correction 1284)
+What changed (one place each, covers build.py / build_all / build_season, normal AND đông):
+- dev/art/master_common.py: `DOAN` = the FABRIC sentence of seasons4/m11_t4_VAI_DOAN.txt VERBATIM (487 chars). Scopes tp4 tp5 pr4 pr5 get DOAN IN PLACE OF master M06 (thin silk + gauze); t1–t3 keep M06, t6+ keep BROCADE (B12, Quý phi keeps gấm per L1284). apply()/check() take `doan=`; check FAILs M06 in t4/t5 and DOAN anywhere else.
+- dev/art/t8-prompt-B/build.py: `_DOAN` = thường phục --low 4/5 (not state / triều / bdq); `doan_outfit()` changes ONLY the robe's cloth word, as in the m11 file: t4 `a layered silk robe of two or three visible layers` -> `a layered satin (đoạn) robe …`; t5 `a layered silk brocade court robe …` -> `a layered satin (đoạn) court robe …`; both `the robe itself is clearly <main> silk` -> `<main> satin`. Every detail kept word for word (capelet + beaded yoke, 2 capes, embroidery, sash, pendants, shawl, headdress). Judgement call: t5 `deep brocade cuffs` + `broad gold brocade girdle` KEPT (details/trims; brief says never cut cuffs/girdle) — owner may want them satin too.
+- Princesses (Ba Tư/Cao Ly/Phù Tang) at t4/t5 also get đoạn (B26 names no exception; B12's princess-t6 exception is about brocade only). Say if they should stay thin silk.
+- dev/art/winter_g28.py: SHEER_OK += 'clearly thicker and more opaque than thin silk gauze' (the đoạn sentence's own "not gauze" words); winter keeps the đoạn sentence as is (already opaque).
+- dev/art/check_store.py: master check gets doan=scope tp4/tp5/pr4/pr5. APPROVED tables / APPROVED_SENTENCES.md hold no t4/t5 fabric sentence -> nothing else to edit. NOTE: old side-script t4/t5 prompts made with M06 now FAIL the gate (as they should).
+- dev/art/store-all/build_all.py build(): t4/t5 only, if > 10 000 chars -> drop the ANGLE sentence (the same owner length rule winter_g28.season already uses, owner ~15:39Z). Store text untouched (B2).
+- ART_RULES_CONFLICTS.md item 17: (a) m11 test has NO M07 'The silk has real weight' — builder keeps M07 (master); (b) G28 winter BANNED 'heavier folds' vs the đoạn sentence's 'heavier folds' — đoạn kept verbatim in winter. Not decided.
+
+PROOF (in-process dump build_all.build_season, ALL 146 people x t1–t8+nude x a18/a26/a36/a51/a65 x normal/đông = 12 410 cells, HEAD 7007acc vs patched; 360 ERR cells identical):
+- changed 2 890 = t4 730 normal + 705 đông, t5 730 + 725. Other ranks 0 diffs. bad 0 (every changed t4/t5 cell has DOAN, none has both).
+- leftover silk/brocade words in t4/t5 Outfit = only details: brocade cuffs, gold brocade girdle, embroidered silk sash/capelet, silk shawl.
+- NEW > 10 000 before the length rule: 229 (+214..258 chars). After the ANGLE drop: **121 still new > 10 000 = 5 normal (t5 a51) + 116 đông** (t4 a18 10, a26 10, a36 15; t5 a51 31, a65 50; overshoot ≤ 239). The đông ones have no ANGLE left (winter already dropped it). Every other cut I found is STORE text (Everyone beautiful…, the store 'Full-body standing figure …; gentle expression …; beautiful/handsome romantic-lead looks for everyone' sentence) or a gate-required approved sentence -> check_store FAILs it (tested) and B2 forbids it. **OPEN for foreman/owner** — pick one: (a) allow cutting the store duplicate clauses that repeat master M01/M03/M10 (~250 chars: 'Full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; ', ', lips closed, no teeth, mouth never open', '; beautiful/handsome romantic-lead looks for everyone', ' Everyone beautiful at every age.') + a check_store exception; (b) a shorter đoạn sentence (owner words); (c) accept these 121 over 10 000.
+SAMPLES (not sent): dev/art/b26/s62_t4.txt "Bậc Tần · Vải đoạn mờ" (9 742), s62_t5.txt "Bậc Phi · Vải đoạn mờ" (8 905); .keep + base (HEAD builder output) -> keep_check PASS, check_store PASS both.
+
+## JOB 2 — EMBROIDERY FLOWER = HER HAIR FLOWER (owner Lượt 1303) — proof running, see below when done
+- Hair flower source: build.py MOTIF_LOW[person][1] (the t1–t3 hair flower), 146/146 people. 17 people have 'a pink silk flower' = NO species -> embroidery unchanged (listed in the proof section).
+- build.py flower_outfit(): thường phục t1–t6 only; inside the Outfit sentence every flower species word (peonies, plum blossoms, orchids, lotus flowers, chrysanthemums, camellias, magnolias, begonias, osmanthus, wisteria, peach/pear blossoms, pomegranate flowers, lilies of the valley, 'peony medallions/scrolls' …) -> her species; birds/butterflies/clouds/leaves/fruit, generic 'gold flower' words, colour names (orchid purple, lotus pink, wisteria lilac, rose …) and the hair flower stay; a doubled 'X and X' -> 'X'. t7/t8 untouched.
+- SAMPLES (not sent): dev/art/flower/s62_t1..t6.txt "Bậc <rank> · Thêu hoa mai" (s62 motif already plum blossom: only t5 'peonies'->'plum blossoms', 'peony medallions'->'plum blossom medallions', t6 'peonies and plum blossoms'->'plum blossoms' change); .keep PASS x6, check_store PASS x6.
+
+## Commits
+762183d (JOB 1 WIP), dc965bb (JOB 2 WIP); final hashes below.
