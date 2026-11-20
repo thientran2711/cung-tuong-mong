@@ -513,6 +513,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | rv-kit-e-rows REVIEWER (sonnet; small kit) | review/kit-e-rows-rv (none pushed); reports/rv-kit-e-rows.md | MAIN ROOT-81 | rv-signs session | DONE FAIL dd2e0fe1 | 20/11 19:47Z |
 | FOREMAN E #22 (opus; child of E #21, depth 3) | handover FOREMAN_E_STATUS | FOREMAN E #21 | session_01DgYSWkbUPtieeBFfn8grWT | DONE → E #23 session_01DgYSWm5qy3Y59fKkn6eSf7 | 20/11 19:49Z |
 | FOREMAN E #22 (opus; child of E #21, depth 3) | handover FOREMAN_E_STATUS | FOREMAN E #21 | session_01DgYSWkbUPtieeBFfn8grWT | RUNNING | 20/11 19:49Z |
+| FOREMAN E #22 (opus; child of E #21, depth 3) | handover FOREMAN_E_STATUS | FOREMAN E #21 | session_01DgYSWkbUPtieeBFfn8grWT | DONE → E #23 session_PENDING_E23 | 20/11 19:49Z |
 | REVIEW phutang-road r3 gates (BIG opus E21r3; successor of E21r2 @8880b092) of e744d428 | review/phutang-road | FOREMAN E #21 | session_01DgYSWpKX4nyEMXAD8mxYaS | RUNNING | 20/11 19:53Z |
 | FOREMAN E #21 (opus; child of E #20, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #20 | session_01DgYSWpNbcJyCoGaB1FhLFq | RUNNING | 20/11 18:55Z |
 | kit-cost-rows-home KIT KEEPER (sonnet; ROOT-80 order) | review/kit-cost-rows-home; reports/kit-cost-rows-home.md | MAIN ROOT-80 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 3332c63b | 20/11 |
@@ -540,3 +541,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-guest-agent (opus; agOn() false on co-op guest → guest's own servants skip agent month; found by G #7) | review/coop-guest-agent; briefs/b-coop-guest-agent.md | B | session_01N1tNP6ULPfAUKCrZASGHHM | RUNNING | 20/11 20:32Z |
 | coop-guest-agent (opus; agOn() false on co-op guest → guest's own servants skip agent month; found by G #7) | review/coop-guest-agent; briefs/b-coop-guest-agent.md | B | session_01N1tNP6ULPfAUKCrZASGHHM | SẴN SÀNG KIỂM b7648b65 (reports/coop-guest-agent.md) | 20/11 22:10Z |
 | REVIEW mg11-thutay r1 (opus BIG) of ef94ad20 | review/mg11-thutay-r1 | B | session_01N1tNP4zyqBbxbsY5JQ3jjJ | RUNNING | 20/11 20:58Z |
+| FOREMAN E #23 (opus; child of E #22, depth 4) | handover FOREMAN_E_STATUS | FOREMAN E #22 | session_PENDING_E23 | RUNNING | 20/11 21:28Z |
