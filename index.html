@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"655083cf+","t":"2026-11-20T08:07Z","c":"kit-mark: hand-merge j82 env line (KG82.cur= on LIVE 892e5bb0 version); all.js/index/sw rebuilt","b":"5d19507bd266","h":[{"s":"8c8b6fd7","t":"2026-11-20T09:45Z","c":"Trò chơi không chữ: khung trò dùng chung bộ khung chuẩn"},{"s":"f6e84391+","t":"2026-11-20T08:44Z","c":"review mg-back-rv: one core (law 4) — j83 practice + jrcp teacher name their charge once (pc), no duplicated suc:-10; index/sw rebuilt"},{"s":"9b6e9395+","t":"2026-11-20T08:46Z","c":"rv mg-play2: keep only the vetted face points — the 70 changed kc rows from the live img/mk-fit (no new v1/v2 rows: anchor-table gate flags…"},{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."}]};
+window.CTM_BI={"s":"372e2a18+","t":"2026-11-20T10:24Z","c":"kit-mark: hand-merge j82 env line (KG82.cur= on LIVE 892e5bb0 version); all.js/index/sw rebuilt","b":"84d4e533041f","h":[{"s":"d5b8c01b","t":"2026-11-20T10:25Z","c":"Khung chung: sơ đồ nhánh, biển Thiên mệnh hai sắc (trang còn tắt)"},{"s":"8c8b6fd7","t":"2026-11-20T09:45Z","c":"Trò chơi không chữ: khung trò dùng chung bộ khung chuẩn"},{"s":"f6e84391+","t":"2026-11-20T08:44Z","c":"review mg-back-rv: one core (law 4) — j83 practice + jrcp teacher name their charge once (pc), no duplicated suc:-10; index/sw rebuilt"},{"s":"9b6e9395+","t":"2026-11-20T08:46Z","c":"rv mg-play2: keep only the vetted face points — the 70 changed kc rows from the live img/mk-fit (no new v1/v2 rows: anchor-table gate flags…"},{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -25808,6 +25808,76 @@ KP_SEAL.week="TUẦN";
 /* kv3:.kv1 */:where(.kv1) .dawn .dbox.kpanel .kph{padding:8px 10px}:where(.kv1) .dawn .dbox.kpanel .kpb{padding:8px 10px 2px}:where(.kv1) .dawn .kpfoot{padding:6px 10px 10px}
 `;document.head.appendChild(st)})();
 
+/* KIT §21.2 kitBranchMap (K-GE-1, review/kit-ge; owner OD:L1623 (1), design GRAND_ENDINGS §2.10): the «Sơ đồ nhánh» node chart of ONE branch, drawn from the data of geMap(branch) (jge.js):
+   kitBranchMap(m, o) -> HTML; kitBranchMapMount(el, m) draws it into el and keeps m for the node cards (tap a node = the existing kit info card kitModal, kitBranchMapOpen).
+   m = {n, spine[{id,at,n,seen,past,here}], rare[{at,id,n,seen}], ends[{i,n,st:"o"|"f"|"c",ch,slots[{sh:"t"|"a",ti}],fail{n},card{r1,r2,cw,lives}|{txt}}], count{g,t,k,txt}}.
+   Spine (vertical, top -> bottom): Nhập cung · .4 … .11 · ch12 · ch13 · ch14 · Hồi kết nhánh; node = seen (its name) or unseen «?»; chapters behind her this life SOLID (rail + dot), ahead DOTTED;
+   her face chip (kitFaceH) on the chapter she is in; the 2 kỳ ngộ hang off the .4 / .11 nodes. Below, the 4 Đại kết cục (2 columns on a phone / Fold, 4 on html.kv2), each with its state word
+   this life (Còn mở lit · Chỉ còn đường thua cracked · Đã khép dim «Đã khép · chương n»), the 2 title slots (thiện / ác plates of K-GE-2, or «?») and its fail node. Kit tokens only. */
+function kbmEsc(x){return String(x==null?"":x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function kbmName(n,seen){return seen===false||n==="?"||n==null||n===""?`<i class="kbm-q">?</i>`:kbmEsc(n)}
+function kitBranchMap(m,o){o=o||{};if(!m)return"";const sw=typeof geStateWord==="function"?geStateWord:((st,ch)=>st==="o"?"Còn mở":st==="f"?"Chỉ còn đường thua":`Đã khép${ch?" · chương "+ch:""}`);
+ const face=(()=>{try{const f=typeof kitFace==="function"&&typeof S!=="undefined"?kitFace(S):null;if(!f)return"";return f.src?`<img src="${kbmEsc(f.src)}" alt="" draggable="false" onerror="this.remove()">`:`<b>${kbmEsc(f.ini||"")}</b>`}catch(e){return""}})();
+ const rare=(m.rare||[]).filter(x=>x&&x.id!=null||x&&x.at!=null);
+ const spine=(m.spine||[]).map((x,i,a)=>{const st=x.here?"here":x.past?"past":"ahead",un=x.seen===false||x.n==="?";const rr=x.at!=null?rare.filter(r=>r.at===x.at):[];
+  return `<li class="kbm-n ${st}${un?" unk":""}" data-kbm="s:${kbmEsc(x.id)}"><i class="kbm-d" aria-hidden="true"></i><span class="kbm-t">${kbmName(x.n,!un)}</span>${x.here?`<span class="kbm-me" title="Ngươi đang ở đây">${face}</span>`:""}`+
+   rr.map(r=>`<span class="kbm-r${r.seen?"":" unk"}" data-kbm="r:${kbmEsc(r.id)}"><i class="kbm-rd" aria-hidden="true"></i>${kbmName(r.n,r.seen)}<small>kỳ ngộ</small></span>`).join("")+`</li>`}).join("");
+ const ends=(m.ends||[]).map(e=>{const un=e.n==="?",stc=e.st==="o"?"open":e.st==="f"?"crack":"shut";
+  return `<button type="button" class="kbm-e ${stc}${un?" unk":""}" data-kbm="e:${e.i}"><span class="kbm-en">${kbmName(e.n,!un)}</span><span class="kbm-es">${kbmEsc(sw(e.st,e.ch))}</span>`+
+   `<span class="kbm-sl">${(e.slots||[]).map(x=>x.ti==="?"||x.ti==null?`<span class="kbm-slq" data-sh="${x.sh}"><i class="kbm-q">?</i></span>`:(typeof kitTitlePlate==="function"?kitTitlePlate({id:"kbm_"+e.i+x.sh,name:x.ti,tier:8,sh:x.sh},{id:false}):kbmEsc(x.ti))).join("")}</span>`+
+   `<span class="kbm-f${e.st==="f"?" lit":""}">${kbmName(e.fail&&e.fail.n,e.fail&&e.fail.n!=="?")}<small>thua</small></span></button>`}).join("");
+ return `<div class="kbm" data-kbm-root="${kbmEsc(m.b||"")}">${o.noCount||!m.count?"":`<div class="kbm-c">${kbmEsc(m.count.txt)}</div>`}<ol class="kbm-sp">${spine}</ol><div class="kbm-eh">Bốn ngả kết cục</div><div class="kbm-es4">${ends}</div></div>`}
+function kitBranchMapMount(el,m,o){if(!el)return;el.innerHTML=kitBranchMap(m,o);el.__kbm=m;return el}
+function kitBranchMapOpen(m,key){try{if(!m||typeof kitModal!=="function")return;const k=String(key||"").split(":"),t=k[0],id=k.slice(1).join(":");
+ const sw=typeof geStateWord==="function"?geStateWord:()=>"";
+ if(t==="e"){const e=(m.ends||[]).find(x=>String(x.i)===id);if(!e)return;const c=e.card||{};
+  if(e.n==="?"||!c.r1){kitModal({kind:"info",title:"?",sub:"Đại kết cục chưa ai biết",sections:[{h:"",rows:[["Ngả này",c.txt||"Chưa ai biết ngả này dẫn tới đâu."],["Kiếp này",sw(e.st,e.ch)]]}],btn:"Đã hiểu"});return}
+  const pl=(e.slots||[]).map(x=>x.ti==="?"?`<i class="kbm-q">?</i>`:kitTitlePlate({id:"kbm_c"+e.i+x.sh,name:x.ti,tier:8,sh:x.sh},{id:false})).join(" ");
+  kitModal({kind:"info",title:e.n,sub:"Đại kết cục",sections:[{h:"",rows:[["Hai ngả rẽ",`${kbmEsc(c.r1)} · ${kbmEsc(c.r2)}`],["Điều cần",kbmEsc(c.cw)],["Kiếp này",sw(e.st,e.ch)],["Danh hiệu",[pl]],(c.lives&&c.lives.length)?["Ngươi từng đạt","kiếp "+c.lives.join(", ")]:null].filter(Boolean)}],btn:"Đã hiểu"});return}
+ const x=t==="s"?(m.spine||[]).find(v=>v.id===id):(m.rare||[]).find(v=>v.id===id);if(!x)return;
+ kitModal({kind:"info",title:x.seen===false||x.n==="?"?"?":x.n,sub:t==="s"?"Chặng của nhánh":"Kỳ ngộ",sections:[{h:"",rows:[["Ngả này",x.seen===false||x.n==="?"?"Chưa ai biết ngả này dẫn tới đâu.":kbmEsc(x.n)],t==="s"?["Kiếp này",x.here?"ngươi đang ở đây":x.past?"đã đi qua":"chưa tới"]:null].filter(Boolean)}],btn:"Đã hiểu"})}catch(e){console.error("kbm",e)}}
+document.addEventListener("click",e=>{const n=e.target&&e.target.closest&&e.target.closest(".kbm [data-kbm]");if(!n)return;const r=n.closest(".kbm");const host=r&&r.parentElement;const m=host&&host.__kbm;if(m)kitBranchMapOpen(m,n.dataset.kbm)});
+window.kitBranchMap=kitBranchMap;window.kitBranchMapMount=kitBranchMapMount;window.kitBranchMapOpen=kitBranchMapOpen;
+(function(){const st=document.createElement("style");st.id="kbm-css";st.textContent=`
+.kbm{display:flex;flex-direction:column;gap:8px;color:var(--ink);font-size:.84rem}
+.kbm-c{align-self:flex-start;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--k-card2);color:var(--k-lab);font-weight:700;font-size:.76rem}
+.kbm-sp{list-style:none;margin:0;padding:0 0 0 14px;position:relative}
+.kbm-n{position:relative;display:flex;align-items:center;flex-wrap:wrap;gap:4px 10px;min-height:34px;padding:2px 0 2px 22px;cursor:pointer}
+.kbm-n::before{content:"";position:absolute;left:6px;top:0;bottom:0;border-left:2px solid var(--gold)}
+.kbm-n:first-child::before{top:50%}.kbm-n:last-child::before{bottom:50%}
+.kbm-n.ahead::before{border-left:2px dotted var(--line)}
+.kbm-d{position:absolute;left:0;top:50%;width:14px;height:14px;margin-top:-7px;box-sizing:border-box;border-radius:50%;border:2px solid var(--gold);background:var(--gold)}
+.kbm-n.ahead .kbm-d{background:var(--k-card);border-color:var(--line)}
+.kbm-n.here .kbm-d{box-shadow:0 0 0 3px var(--k-sel,#fff3c4),0 0 0 4px var(--k-sel-ring,#a8740c)}
+.kbm-n.here .kbm-t{font-weight:700}
+.kbm-n.unk .kbm-d{border-style:dashed}
+.kbm-t{min-width:0;overflow-wrap:anywhere}
+.kbm-me{display:inline-flex;align-items:center;justify-content:center;flex:none;width:30px;height:30px;box-sizing:border-box;border-radius:50%;overflow:hidden;border:2px solid var(--gold);box-shadow:0 0 0 2px var(--k-sel,#fff3c4);background:var(--k-card2);font-weight:700;color:var(--gold)}
+.kbm-me img{width:100%;height:100%;object-fit:cover;object-position:50% 14%;display:block}
+.kbm-q{display:inline-block;min-width:1.4em;padding:0 .35em;border:1px dashed var(--line);border-radius:6px;background:var(--k-card2);color:var(--k-lab);font-style:normal;font-weight:700;text-align:center}
+.kbm-r{display:inline-flex;align-items:center;gap:5px;margin-left:auto;padding:1px 8px 1px 6px;border:1px solid var(--line);border-radius:999px;background:var(--k-card2);font-size:.78rem}
+.kbm-r small{color:var(--k-lab);font-size:.68rem}
+.kbm-rd{width:7px;height:7px;transform:rotate(45deg);background:var(--trim);display:inline-block}
+.kbm-r.unk .kbm-rd{background:transparent;border:1px solid var(--line)}
+.kbm-eh{font-family:var(--display,"Noto Serif",Georgia,serif);font-weight:700;color:var(--gold);border-top:1px solid var(--k-hair);padding-top:6px}
+.kbm-es4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+html:where(.kv2) .kbm-es4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.kbm-e{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:5px;padding:7px 8px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card);cursor:pointer;min-width:0}
+.kbm-en{font-family:var(--display,"Noto Serif",Georgia,serif);font-weight:700;overflow-wrap:anywhere}
+.kbm-es{font-size:.74rem;color:var(--k-lab);font-weight:700}
+.kbm-e.open{border-color:var(--gold);box-shadow:0 0 0 2px var(--k-sel,#fff3c4)}
+.kbm-e.open .kbm-es{color:var(--good)}
+.kbm-e.crack{border-style:dashed;border-color:var(--bad);background:linear-gradient(135deg,var(--k-card) 60%,var(--k-card2))}
+.kbm-e.crack .kbm-es{color:var(--bad)}
+.kbm-e.shut{opacity:.62;background:var(--k-card2)}
+.kbm-sl{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}
+.kbm-sl .kdh{max-width:100%}
+.kbm-slq{display:inline-flex}
+.kbm-f{display:flex;align-items:baseline;gap:5px;font-size:.76rem;color:var(--dim);border-top:1px dashed var(--k-hair);padding-top:4px}
+.kbm-f small{font-size:.66rem;color:var(--k-lab)}
+.kbm-f.lit{color:var(--bad);font-weight:700}
+`;document.head.appendChild(st)})();
+
 /* ---------- MINI-GAME FRAME (for j82 and the lesson games): header + how-to + score/timer + game box + result rows ---------- */
 KP_SEAL.game="TÀI NGHỆ";
 /* OWNER 17/11 (OD "Điểm trang … clutter"): the PHẦN / HỒI / CÒN chip row is NOT shown in ANY mini-game (it pushed the play area down and forced scrolling);
@@ -25897,6 +25967,9 @@ function kitGameResult(r){r=r||{};const rows=[];
 .kgc small{font-size:.66rem;color:var(--k-lab);text-transform:uppercase;font-weight:700}.kgc b{font-family:var(--display);font-size:1.05rem;color:var(--ink)}
 .kgbox{margin:8px 14px;min-height:120px}.kgres{padding:0 14px 10px}
 .kgrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.kgrow>b{flex:none;white-space:nowrap}.kgr .kpkb .krl{white-space:normal;max-width:9rem}
+/* K-GE-3 (review/kit-ge): a row whose LABEL is a title plate (.kdh, a wide nowrap pill) puts the plate on its own line above the value, at every width (same rule as the kt3 plate block of the title popups) */
+.kpkb .kr:has(>.krl>.kdh)>.krl{grid-column:1/-1;max-width:none;padding:.3rem 0 0;text-transform:none;letter-spacing:normal}
+.kpkb .kr:has(>.krl>.kdh)>.krv{grid-column:1/-1;min-width:0}
 .kgbox .btn,.kgbtn{font-family:inherit;font-weight:600;background:var(--k-card);color:var(--ink);border:1px solid var(--line);border-radius:var(--k-rad);min-height:40px;padding:6px 12px;cursor:pointer}.kgbox .btn:hover,.kgbtn:hover{border-color:var(--gold)}.kgbtn.on,.kgbox .btn.on{background:#f0d07055;border-color:var(--gold)}.kgpl{color:var(--k-lab)}
 #ov .mg.kpanel{padding:0;max-width:560px;background:var(--k-card);box-shadow:0 0 0 3px #f6ead6,0 0 0 4px #c9a46a,0 14px 40px #2a1a1260}
 #ov .mg.kpanel .kph{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 14px 9px;background:linear-gradient(#f6ead6e6,#fffaf0f0),url(https://ctm-img.victoria-tntt.workers.dev/img/kit/bg-default.webp) center/240px repeat;border-bottom:1px solid var(--line)}
@@ -48750,9 +48823,12 @@ function kitHieuJoin(r,p){try{const h=p===S?S.hieu:p&&p.hieu;if(!h||!r||/^Hoàng
 window.kitHieuJoin=kitHieuJoin;
 const KDH_ART={};
 function kdhArt(t){if(KDH_ART[t]===undefined){KDH_ART[t]=false;const im=new Image();im.onload=()=>{KDH_ART[t]=true};im.onerror=()=>{};im.src="https://ctm-img.victoria-tntt.workers.dev/img/kit/title-plate-"+t+".webp"}return KDH_ART[t]===true}
-function kitTitlePlate(t,o){o=o||{};t=kitTitleDef(t);if(!t)return"";const tier=Math.max(1,Math.min(8,t.tier|0||1)),col=RCOL[tier-1],still=typeof kfStill==="function"&&kfStill();
+/* K-GE-2 (review/kit-ge): the «Thiên mệnh» plate (tier 8) in TWO tones, same shape: sh "t" = thiện (gold-white), "a" = ác (gold-crimson). The tone comes from o.sh, the title's .sh,
+   or the grand-ending key suffix (id "ge_<branch>_<n>t|a"); a title without a tone draws the plain tier plate. */
+function kdhTone(t,o){const s=(o&&o.sh)||t.sh||([t.key,String(t.id||"").replace(/^dh-/,"").split("@")[0]].map(k=>(/^ge_.+_\d+([ta])$/.exec(String(k||""))||[])[1]).find(Boolean));return s==="t"||s==="a"?s:""}
+function kitTitlePlate(t,o){o=o||{};t=kitTitleDef(t);if(!t)return"";const tier=Math.max(1,Math.min(8,t.tier|0||1)),col=RCOL[tier-1],still=typeof kfStill==="function"&&kfStill(),tone=kdhTone(t,o);
  const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
- return `<span class="kdh kdh-t${tier}${kdhArt(tier)?" kdh-art":""}${still?" kdh-still":""}${o.cls?" "+o.cls:""}" style="--dh:${col}${kdhArt(tier)?`;--kdh-art:url(https://ctm-img.victoria-tntt.workers.dev/img/kit/title-plate-${tier}.webp)`:""}"${o.id!==false?` data-kdh="${esc(t.id)}"`:""}><i class="kdh-s" aria-hidden="true"></i><b>${esc(t.name)}</b></span>`}
+ return `<span class="kdh kdh-t${tier}${tone?" kdh-sh"+tone.toUpperCase():""}${kdhArt(tier)&&!tone?" kdh-art":""}${still?" kdh-still":""}${o.cls?" "+o.cls:""}" style="--dh:${col}${kdhArt(tier)&&!tone?`;--kdh-art:url(https://ctm-img.victoria-tntt.workers.dev/img/kit/title-plate-${tier}.webp)`:""}"${o.id!==false?` data-kdh="${esc(t.id)}"`:""}><i class="kdh-s" aria-hidden="true"></i><b>${esc(t.name)}</b></span>`}
 window.kitTitlePlate=kitTitlePlate;
 function kitTitleTag3(p,rank,name,col,me){const pl=kitTitlePlate(kitTitleWorn(p),{cls:"kdh-cap"});return `<div class="kt3">${pl}${typeof kitNameRank==="function"?kitNameRank(rank,name,col,me):""}</div>`}
 function kitTitleOpen(t){t=kitTitleDef(t);if(!t||typeof kitModal!=="function")return;const worn=kitTitleWorn(S)&&kitTitleWorn(S).id===t.id;
@@ -48774,6 +48850,10 @@ document.addEventListener("click",e=>{const x=e.target&&e.target.closest&&e.targ
 .kdh-t7::before,.kdh-t8::before,.kdh-t8::after{content:"✦";position:absolute;color:#fff6c8;font-size:.7rem;text-shadow:0 0 4px #ffe07a,0 0 8px var(--dh);pointer-events:none;animation:kdhst 1.8s ease-in-out infinite;z-index:2}
 .kdh-t7::before,.kdh-t8::before{left:-5px;top:-6px}.kdh-t8::after{right:-5px;bottom:-6px;animation-delay:.9s}
 .kdh-t8{animation:kdhpl 2.6s ease-in-out infinite}
+/* K-GE-2 tones (same shape, size, sparkle as tier 8): thiện = gold-white with dark-gold text, ác = gold-crimson with cream text */
+.kdh.kdh-shT{--dh:#d9a93a;color:#4a2f02;background:linear-gradient(135deg,#fffef4,#f9e9a8 38%,#e8c25a 72%,#bf902a);border-color:#fff7cf;box-shadow:0 0 0 1px #8a6a1a66,0 0 8px #ffe9a0,0 0 14px #fff3c8aa}
+.kdh.kdh-shT>b{text-shadow:0 1px 0 #fffbe8;color:#4a2f02}
+.kdh.kdh-shA{--dh:#b3262a;color:#fff6e0;background:linear-gradient(135deg,#f2c866 0%,#c43a2e 24%,#8f1522 70%,#5c0c18);border-color:#f0c86a;box-shadow:0 0 0 1px #00000055,0 0 8px #d84a3a,0 0 14px #b3262aaa}
 .kdh-still,.kdh-still .kdh-s,.kdh-still::before,.kdh-still::after{animation:none!important}
 @keyframes kdhsw{0%{background-position:-150% 0}60%,100%{background-position:250% 0}}
 @keyframes kdhst{0%,100%{opacity:.25;transform:scale(.6)}50%{opacity:1;transform:scale(1.1)}}
@@ -60467,6 +60547,16 @@ window.kcuHonorRows=function(n){const H=(typeof S!=="undefined"&&S&&S.honors)||[
 
 `;document.head.appendChild(st)})();
 
+/* KIT §82.1 + §21.2 samples (review/kit-ge): the «Thiên mệnh» plate in two tones, a plate-label row, and the Sơ đồ nhánh node chart */
+window.KBM_SAMPLE={b:"sample",n:"Cung nữ · Đường vào cung",count:{txt:"Đại kết cục 1/4 · Danh hiệu 1/8 · Kỳ ngộ 1/2"},
+ spine:[{id:"nhap",n:"Nhập cung",seen:true,past:true},{id:"a4",at:4,n:"Mới vào cung",seen:true,past:true},{id:"a5",at:5,n:"Lần đầu yết kiến",seen:true,past:true},{id:"a6",at:6,n:"?",seen:false,past:true},{id:"a7",at:7,n:"Đêm mưa hành lang",seen:true,here:true},{id:"a8",at:8,n:"?",seen:false},{id:"a9",at:9,n:"?",seen:false},{id:"a10",at:10,n:"?",seen:false},{id:"a11",at:11,n:"?",seen:false},{id:"ch12",at:12,n:"Chương 12"},{id:"hau14",at:13,n:"Chương 13"},{id:"ke14",at:14,n:"Chương 14"},{id:"hkn",n:"Hồi kết nhánh"}],
+ rare:[{at:4,id:"r4",seen:true,n:"Gặp cố nhân"},{at:11,id:"r11",seen:false,n:"?"}],
+ ends:[{i:0,n:"Giữ trọn phận mình",st:"o",ch:0,slots:[{sh:"t",ti:"Phận an nhiên"},{sh:"a",ti:"?"}],fail:{n:"Bị lãng quên"},card:{r1:"Ở lại, giữ trọn phận mình",r2:"Lấy ân mà đối đãi",cw:"cần Tai mắt rộng và sổ môn sinh trong tay",lives:[2]}},
+  {i:1,n:"?",st:"f",ch:0,slots:[{sh:"t",ti:"?"},{sh:"a",ti:"?"}],fail:{n:"Thất thế"},card:{txt:"Chưa ai biết ngả này dẫn tới đâu."}},
+  {i:2,n:"?",st:"c",ch:8,slots:[{sh:"t",ti:"?"},{sh:"a",ti:"?"}],fail:{n:"?"},card:{txt:"Chưa ai biết ngả này dẫn tới đâu."}},
+  {i:3,n:"?",st:"o",ch:0,slots:[{sh:"t",ti:"?"},{sh:"a",ti:"?"}],fail:{n:"?"},card:{txt:"Chưa ai biết ngả này dẫn tới đâu."}}]};
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§82.1",title:"kitTitlePlate «Thiên mệnh» hai sắc · hàng có nhãn là danh hiệu",where:"mọi chỗ danh hiệu Thiên mệnh (thẻ trên sân khấu, tab Danh hiệu, Bảng Thiên mệnh, Sổ luân hồi); hàng có nhãn là bảng danh hiệu xếp bảng trên, giá trị dưới",html:()=>{try{const a=kitTitlePlate({id:"ge_x_1t",name:"Phượng triều thiên hạ",tier:8,sh:"t"},{id:false}),b=kitTitlePlate({id:"ge_x_1a",name:"Phượng triều thiên hạ",tier:8,sh:"a"},{id:false}),c=kitTitlePlate({id:"s8",name:"Phượng minh thiên hạ",tier:8},{id:false});return `<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">${a}${b}${c}</div><div class="kpb">${kitRows([[a,["Đạt được khi nàng ngồi vững ngôi Hoàng hậu"],"t"],["Trên đầu","chưa mang danh hiệu nào"]])}</div>`}catch(e){return ""}}})}catch(e){}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§21.2",title:"kitBranchMap · Sơ đồ nhánh",where:"Sổ luân hồi (trang Sơ đồ nhánh): một sơ đồ cho mỗi nhánh; chạm một nút để xem thẻ",html:()=>{try{const id="kbmsample";setTimeout(()=>{const el=document.getElementById(id);if(el)kitBranchMapMount(el,window.KBM_SAMPLE)},0);return `<div id="${id}" style="max-width:760px;margin:0 auto"></div>`}catch(e){return ""}}})}catch(e){}
 /* KIT §13.10 sample: the game mark chip «n/10» beside the clock; the clock normal and amber (review/kit-mark) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.10",title:"kitGameMark + kitGameClock · chip «n/10» và đồng hồ hổ phách",where:"MỌI trò tài nghệ: một chip điểm nhỏ cạnh đồng hồ trên dòng tên; đồng hồ ngả hổ phách khi qua thời gian đủ điểm",html:()=>{try{const f=a=>`<div class="mg kpanel kgame kg82" style="position:relative;max-width:760px;margin:0 auto 10px"><div class="kph"><b class="kpseal">TÀI NGHỆ</b><span class="kpht"><span class="kptitle">Cờ: Thế cờ</span></span><span class="kgmk">${kitChips([`<span class="kchip n kgmk-c"><b>${a[0]}/10</b></span>`])}</span><span class="kgclk${a[2]?" kgclk-amber":""}">${kitCoopClock({left:a[1]*1000,len:20000,tone:a[2]?"w":"n"})}</span></div></div>`;return f([9,16,0])+f([7,5,1])}catch(e){return ""}}})}catch(e){}
 /* KIT §13.4 sample: the tài nghệ frame with her live figure (wide) — on the Fold (html.kv1) the column is not drawn */
@@ -82275,7 +82365,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5d19507bd266";window.CTM_BUILD=BUILD;
+const BUILD="84d4e533041f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
