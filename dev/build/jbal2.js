@@ -1694,7 +1694,7 @@ BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share
           old looks: dev/figwork/jobs.json signature colour). tier: t7 (Hoàng quý phi) adds gold as the secondary, t8 (Hoàng hậu) is gold first (Foreman C t7/t8 colour rule); cold = the undyed lãnh cung linen.
    piece= [main, secondary] of every trâm / hoa điền (from the piece's name and its j92 colour word); a robe's colours are the colours of the PAINTING the wearer shows (owner 11b: screen = rule),
           wcol maps the j92 one-word colour for a person with no painted identity (fallback only).
-   season: a robe's season = its fabric (Qing 換季: gauze in summer, fur in winter, announced by the court); s = season index Xuân 0 · Hạ 1 · Thu 2 · Đông 3. Cost per tuần worn off-season, by rank 0..7 (law 5),
+   season: a robe's season = its fabric (Qing 換季: gauze in summer, fur in winter, announced by the court); fab = the seasons as letters of k (x Xuân · h Hạ · t Thu · đ = d Đông). Cost per tuần worn off-season, by rank 0..7 (law 5),
           the same for every consort (law 1); npcMiss = % (per consort, per season, hashed) that an NPC forgets to change.
    fest: per festival (FEST key): need = the two families of the day, ky = taboo robe colours, gate 1 = turned away at the door when she shows none of the need (or a taboo robe with none).
    needN by rank: how many of the two she must show (Đáp ứng–Quý nhân 1, Tần and up 2; law 5). cut = per missing colour (a taboo robe counts as one more): phần off her festival-contest score, Danh off.
@@ -1722,7 +1722,7 @@ BAL.dc={on:1,
   hd_mai:["trang","vang"],hd_dao:["hong","vang"],hoadien_bac:["lam","trang"],hd_diep:["lam","vang"],hd_lan:["luc","vang"],hd_sen:["hong","do"],hd_maudon:["do","lam"],hd_phuong:["vang","do"]},
  wcol:{nau:"nau",vang:"vang",xanh:"luc",hong:"hong",trang:"trang",lam:"lam",do:"do",tim:"tim"},
  season:{n:["Xuân","Hạ","Thu","Đông"],
-  fab:{vai:[0,1,2,3],lua:[0,1,2],sa:[1],the:[1],gam:[0,2,3],cat:[0,1,2,3],trieu:[0,1,2,3],long:[3]},
+  k:"xhtd",fab:{vai:"xhtd",lua:"xht",sa:"h",the:"h",gam:"xtd",cat:"xhtd",trieu:"xhtd",long:"d"},
   fabN:{vai:"vải",lua:"lụa",sa:"sa mỏng",the:"the mỏng",gam:"gấm dày",cat:"cát phục (may theo mùa)",trieu:"triều phục (may theo mùa)",long:"lông thú"},
   y:{y_cungnu:"vai",y_luamoc:"lua",y_chuongsu:"vai",y_nuquan:"vai",y_mama:"vai",y_hoanho:"lua",y_saxanh:"sa",y_maimai:"gam",y_vanthuy:"lua",y_lan:"the",y_tramnep:"lua",
    y_haiduong:"gam",y_chimen:"lua",y_maudon:"gam",y_hac:"cat",y_kimtuyen:"cat",y_vancam:"gam",y_trieutim:"trieu",y_bachdieu:"gam",y_minhhoang:"trieu",y_phuongbao:"trieu",

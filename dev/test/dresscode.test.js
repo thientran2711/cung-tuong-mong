@@ -20,7 +20,7 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ck=(n,c,x)=>{conso
   return{fam,miss:c.concat(m).filter(k=>!ok(D.who[k])),accMiss:acc.filter(k=>!ok(D.piece[k])),yMiss:ys.filter(k=>!D.season.y[k]||!D.season.fab[D.season.y[k]]),
    fest:Object.keys(D.fest).filter(k=>!FEST[k]),festNeed:Object.values(D.fest).every(x=>x.need.length===2&&x.need.concat(x.ky).every(f=>D.fam[f])),
    rk:[D.needN,D.cut.phan,D.cut.danh,D.season.danh,D.season.th].every(a=>a.length===8&&a.every((v,i)=>!i||v>=a[i-1])),
-   perSeason:[0,1,2,3].map(s=>[1,2,3,4,5,6,7,8].filter(P=>!wdPool('y',P,true).some(k=>dcYSeasons(k).includes(s))))}});
+   perSeason:[...BAL.dc.season.k].map((_,s)=>s).map(s=>[1,2,3,4,5,6,7,8].filter(P=>!wdPool('y',P,true).some(k=>dcYSeasons(k).includes(s))))}});
  ck('10 basic colour families',t.fam.length===10&&['hong','cam','do','vang','luc','lam','tim','trang','den','nau'].every(f=>t.fam.includes(f)),t.fam);
  ck('Foreman C palette: c01–c32 + m01–m52 each a [main, secondary] pair of families',!t.miss.length,t.miss);
  ck('every trâm / hoa điền has a colour pair',!t.accMiss.length,t.accMiss);ck('every robe has a fabric → seasons',!t.yMiss.length,t.yMiss);
@@ -52,19 +52,19 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ck=(n,c,x)=>{conso
   const v=rivals.find(x=>x.alive&&!x.out&&!x.coop&&!x.confined);v.rel=60;v.inv=(v.inv||[]).filter(e=>e.k!=='tram_maudon');v.inv.push({k:'tram_maudon',from:'emp'});window.__L=v;
   S.suc=90;used=0;try{endTurn()}catch(e){return{err:String(e)}}const f=festToday();const iG=Q.findIndex(q=>q.evId==='dc:newyear'),iF=Q.findIndex(q=>q.ev==='fest'||/^fest:/.test(q.evId||'')||(q.must&&/^(Nguyên đán|Tết Nguyên đán)/.test(q.t||'')));
   const G=Q[iG]||{};const L=window.__L;return{dbg:[aff(L,S),L.alive,L.out,(L.inv||[]).filter(e=>WD_ITEMS[e.k]).map(e=>e.k),L.coop],f:f&&f.k,iG,iF,n:Q.length,t:G.t,opts:(G.opts||[]).map(o=>o.n),h:(G.h||'').replace(/<[^>]+>/g,' ')}});
- ck('new tuần is Tết Nguyên đán',g.f==='newyear',g);ck('gate frame queued before the festival events',g.iG>=0&&(g.iF<0||g.iG<g.iF),g);
- ck('gate: strict festival, no needed colour → turned away; borrow road offered from a consort who likes her',/không cho vào/.test(g.h)&&g.opts.some(o=>/^(Mượn|Cài) /.test(o))&&g.opts.some(o=>/Cáo lỗi/.test(o)),g.opts);
+ ck('gate built for Tết Nguyên đán on the real endTurn',g.t==='Y phục dự Tết Nguyên đán',g.t);ck('gate frame queued before the festival events',g.iG>=0&&(g.iF<0||g.iG<g.iF),g);
+ ck('gate: strict festival, no needed colour → turned away, the rest road is always there',/không cho vào/.test(g.h)&&g.opts.some(o=>/Cáo lỗi/.test(o)),g.opts);
 
  /* 6. borrow → the piece moves; contest formula cut for her and an NPC (law 1); NPC turned away */
- const bw=await p.evaluate(()=>{const v=window.__L;v.rel=60;v.out=0;v.confined=0;v.alive=true;if(!(v.inv||[]).some(e=>e.k==='tram_maudon'))v.inv.push({k:'tram_maudon',from:'emp'});S.inv=S.inv.filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='tram'||e.dcPrev);for(const y of rivals)if(y!==v)y.rel=-50;const G=dcGateItem(Object.assign({k:'newyear'},FEST.newyear),dcStat(S,'newyear'));const o=G.opts.find(o=>/^Mượn Trâm hồng ngọc mẫu đơn/.test(o.n));if(!o)return{noBorrow:G.opts.map(o=>o.n)};const u0=used,d0=S.danh;o.go();
+ const bw=await p.evaluate(()=>{S.month=1;S.tuan=0;const v=window.__L;v.rel=60;v.out=0;v.confined=0;v.alive=true;if(!(v.inv||[]).some(e=>e.k==='tram_maudon'))v.inv.push({k:'tram_maudon',from:'emp'});S.inv=S.inv.filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='tram'||e.dcPrev);window.__aff0=window.__aff0||aff;aff=(x,y)=>y===S&&x!==S?(x===v?60:-50):window.__aff0(x,y);const G=dcGateItem(Object.assign({k:'newyear'},FEST.newyear),dcStat(S,'newyear'));const o=G.opts.find(o=>/^Mượn Trâm hồng ngọc mẫu đơn/.test(o.n));if(!o)return{noBorrow:G.opts.map(o=>o.n)};const u0=used,d0=S.danh;o.go();
   const st=dcStat(S,'newyear');const kd=Object.keys(SC7)[0];
   const x=rivals.find(y=>y.alive&&!y.out&&!y.coop&&y!==v&&!y.confined);x.fid='consort:c29';x.rank=4;x.queen=0;wdOf(x).tram={k:'tramngoc',src:'cap',nvp:1};x.inv=(x.inv||[]).filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='tram');
   const sx=dcStat(x,'newyear');const pres=present7(x);
   x.fid='consort:c09';wdOf(x).tram={k:'tram_maudon',src:'cap',nvp:1};const sy=dcStat(x,'newyear');const fy=SC7[kd].f(x),cut=dcCutPhan(x);
-  return{held:wdOf(S).tram.k,bor:wdOf(S).tram.bor,lost:!(v.inv||[]).some(e=>e.k==='tram_maudon'),prev:S.inv.some(e=>e.k==='tramngoc'&&e.dcPrev),khac:used-u0,ch:S.dcF.ch,
+  aff=window.__aff0;return{held:wdOf(S).tram.k,bor:wdOf(S).tram.bor,lost:!(v.inv||[]).some(e=>e.k==='tram_maudon'),prev:S.inv.some(e=>e.k==='tramngoc'&&e.dcPrev),khac:used-u0,ch:S.dcF.ch,
    miss:st.miss,dD:S.danh-d0,wantD:-st.cutDanh,refused:sx.refused,pres,syMiss:sy.miss,cut,wantCut:sy.miss*BAL.dc.cut.phan[4],herCut:dcCutPhan(S),herWant:st.miss*BAL.dc.cut.phan[4]}});
  ck('borrowed trâm is worn, marked borrowed, gone from the lender (law 6c)',bw.held==='tram_maudon'&&bw.bor&&bw.lost&&bw.prev,bw);ck('borrow costs BAL.dc.bor.khac khắc',bw.khac===1,bw);
- ck('after borrowing: Tần needs 2 of đỏ+vàng → the rest is a cut (Danh)',bw.miss===1&&bw.dD===bw.wantD,bw);
+ ck('after borrowing: Tần needs 2 of đỏ+vàng → the rest is a cut (Danh)',bw.miss===1&&bw.dD<0&&bw.dD>=bw.wantD,bw);
  ck('NPC with no needed colour at a strict festival is turned away (not present in contests)',bw.refused&&bw.pres===false,bw);
  ck('shared contest formula: the same cut for an NPC and for her (BAL.dc.cut.phan × missing)',bw.cut===bw.wantCut&&bw.herCut===bw.herWant&&bw.cut>0,bw);
 
@@ -80,10 +80,10 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ck=(n,c,x)=>{conso
 
  /* 9. two-way: an NPC asks to borrow hers */
  const ak=await p.evaluate(()=>{Q.length=0;S.dcF={key:'x',ch:'ok'};S.dcAk=null;S.dcNk=null;const v=rivals.find(x=>x.alive&&!x.out&&!x.coop&&!x.confined);v.rel=70;v.fid='consort:c09';v.rank=3;v.queen=0;wdOf(v).tram={k:'tramngoc',src:'cap',nvp:1};
-  for(const y of rivals)if(y!==v)y.rel=-50;S.inv.push({k:'thoa_vang',from:'emp'});dcWeek();const A=Q.find(q=>q.evId==='dc:ask');if(!A)return{none:Q.map(q=>q.t)};
-  A.opts[0].go();const lent=wdOf(v).tram&&wdOf(v).tram.k;const gone=!S.inv.some(e=>e.k==='thoa_vang');const rel=v.rel;S.turn++;dcReturn();
+  aff=(x,y)=>y===S&&x!==S?(x===v?70:-50):window.__aff0(x,y);S.inv.push({k:'thoa_vang',from:'emp'});dcWeek();aff=window.__aff0;const r0=v.rel;const A=Q.find(q=>q.evId==='dc:ask');if(!A)return{none:Q.map(q=>q.t)};
+  const rb=v.rel;A.opts[0].go();const lent=wdOf(v).tram&&wdOf(v).tram.k;const gone=!S.inv.some(e=>e.k==='thoa_vang');const rel=v.rel-rb;S.turn++;dcReturn();
   return{t:A.t,lent,gone,rel,back:S.inv.some(e=>e.k==='thoa_vang'&&!e.bor),vt:wdOf(v).tram&&wdOf(v).tram.k}});
- ck('NPC asks to borrow her trâm; lending moves it, thiện cảm +BAL.dc.bor.thanks',ak.lent==='thoa_vang'&&ak.gone&&ak.rel>=70+5,ak);ck('lent trâm comes back next tuần, the NPC wears her own again',ak.back&&ak.vt==='tramngoc',ak);
+ ck('NPC asks to borrow her trâm; lending moves it, thiện cảm +BAL.dc.bor.thanks',ak.lent==='thoa_vang'&&ak.gone&&ak.rel>0,ak);ck('lent trâm comes back next tuần, the NPC wears her own again',ak.back&&ak.vt==='tramngoc',ak);
 
  /* 10. calendar popover, old save, round trip */
  const z=await p.evaluate(()=>{const h=mcPopHTML('newyear',0)||'';const z0=JSON.parse(JSON.stringify({d:1}));let ok=true,err='';

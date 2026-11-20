@@ -35,7 +35,7 @@ function dcAcc(p){const L=[];try{const t=wdOf(p).tram;const c=t&&dcPiece(t.k);if
 function dcShows(p){const robe=dcRobe(p)||[];const acc=dcAcc(p);const fams=new Set(robe.concat(acc.map(a=>a.f)).filter(Boolean));return{robe,acc,fams}}
 /* ---------- season ---------- */
 function dcYFab(k){return (BAL.dc.season.y||{})[k]||null}
-function dcYSeasons(k){const f=dcYFab(k);return f?(BAL.dc.season.fab[f]||[0,1,2,3]):[0,1,2,3]}
+function dcYSeasons(k){const S4=BAL.dc.season.k;const f=dcYFab(k);const code=(f&&BAL.dc.season.fab[f])||S4;return [...code].map(c=>S4.indexOf(c)).filter(i=>i>=0)}
 function dcOffSeason(p){try{const y=wdOf(p).y;if(!y||!WD_ITEMS[y.k])return false;return !dcYSeasons(y.k).includes(dcSeason())}catch(e){return false}}
 function dcSeasonCost(p){const r=dcRk(p);return{danh:BAL.dc.season.danh[r]|0,th:BAL.dc.season.th[r]|0}}
 /* ---------- festival ---------- */
