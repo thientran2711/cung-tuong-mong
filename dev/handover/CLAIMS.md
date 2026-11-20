@@ -424,3 +424,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW kit-ge (SMALL kit sonnet) of 5bbdf1ea (K-GE-1/2/3) | review/kit-ge-rv; briefs/rv-root76-kit-ge.md | MAIN ROOT-76 | session_01Rc5AsMf18e5QE71CKAndhz | PASS 5bbdf1ea | 20/11 09:28Z |
 | REVIEW outside-coop r1 (opus BIG; must run thin-level co-op) of 2c904461 | review/outside-coop-r1 | B | session_01N1tNP2SCHwhuKDqSe6NWh8 | RUNNING | 20/11 09:30Z |
 | MAIN ROOT-77 (opus; child of ROOT-76, depth 6) | handover HANDOVER_SESSION9 | ROOT-76 | session_01Rc5AsKMDkP7nYjtmjLP5tq | RUNNING | 20/11 09:34Z |
+| REVIEW road-triggers (BIG opus E26r) of 72a9b918 (OR16+OR18) | review/road-triggers | FOREMAN E #17 | session_01DgYSWoJrr5AsLcXZYn2jsC | RUNNING | 20/11 10:48Z |
