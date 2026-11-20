@@ -972,16 +972,18 @@ function cyFe(){const L=CW.pulled;return (L&&(L.find(x=>x[0]>=0)||[])[1])||frien
 function cyFree(){if(CW.cyHold==null||!CW.on||!S)return;if(!S.dead&&cyWait(cyFe()))return;T("cyFree "+CW.cyHold);CW.cyHold=null;if(S.dead)return;
  const c=S.cyb||{},g=window.cyWk();/* her own maid card still open: its answer runs the flip */if(!(c.df===g&&c.rk!==g))try{flip()}catch(e){console.error(e)}
  try{render()}catch(e){}soonEnd()}
-/* review/coop-week-stall (thin E, level >= 5, HER phone): her maid's Kỳ nguyệt sự card is asked BY THE HOST, in her context, when HIS week
-   draw runs (E-fix cyAsk on host). Her own night ran on her phone at the same go and her week end went out at once: the card then came to
-   a seat that was already "waiting" (#next "Chờ hảo hữu…"), while the host's end waited for her answer (cyHold) — a modal open, the week
-   end never sent (coop-bot THIN=9). A real choice is never made for her (jcooptimer), so the order is fixed instead: in her cycle tuần,
-   with this week's answer not in, her week end waits until the host's week end is out (his end goes only once his draw ran: cyHold) or
-   her answer is in (S.cyb.rk, the host's patch). The card reaches her while her end is still hers to send; she answers; his draw runs,
-   his end goes; then hers. (The host's end never waits for hers, so this wait cannot turn around.) */
-function cyHer(){if(!eW()||host()||CW.ctx||!S||S.dead||S.out||typeof window.cycOn!=="function"||typeof window.cyWk!=="function")return false;
- let on=false;try{on=!!window.cycOn(S)}catch(e){}if(!on)return false;const g=window.cyWk(),c=S.cyb||{};if(c.rk===g)return false;
- const e=COOP.state.ended||{};if(e[fs()])return false;if(CW.cyHerT!==g){CW.cyHerT=g;T("cyHer "+g)}return true}
+/* review/coop-week-stall (thin E, level >= 5, HER phone): at his week end the HOST asks things in her context (her maid's Kỳ nguyệt sự
+   card: E-fix cyAsk on host, CW.herCy from his draw; any part-D card his endTurn queues for her). Her own night ran on her phone at the
+   same go and her week end went out at once, so such a card reached a seat that was already "waiting" (#next "Chờ hảo hữu…") while his
+   end waited for her answer (cyHold): a modal open, the week end never sent (coop-bot THIN=9: 2 of 4 runs on main). A real choice is
+   never made for her (jcooptimer), so the order is fixed instead: at level >= 5 her week end goes only once the HOST'S end is out
+   (room ended[host]); his end never waits for hers, so this cannot turn around. A card he asks reaches her while her end is still hers to
+   send: she answers, his draw runs, his end goes, then hers (one presence later). Not when his seat is empty or his person is dead (his
+   end does not come then). (First try r1 held only in her cycle tuần: her phone reads the cycle on the old date at that point — the host
+   owns the date — so it missed: pF2 b8.) */
+function cyHer(){if(!eW()||host()||CW.ctx||!S||S.dead)return false;const e=COOP.state.ended||{};if(e[fs()])return false;
+ if(nOtherGone())return false;const fP=CW.base&&CW.base.P&&CW.base.P[fs()];if(!fP||fP.dead)return false;
+ const k=wk();if(CW.cyHerT!==k){CW.cyHerT=k;T("hostEnd wait "+k)}return true}
 CW.cyHer=()=>cyHer();
 {const go=()=>{if(CW.on&&CW.pend&&CW.cyHerT!=null&&!host())soonEnd()};COOP.on("thinview",go);COOP.on("presence",go)}
 CW.cyFree=()=>cyFree();/* thin E: jcoopthine's `do cyb` (her answer, written into her stored person) frees the draw */
