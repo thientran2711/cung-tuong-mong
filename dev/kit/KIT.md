@@ -654,6 +654,13 @@ ONE shared live board for EVERY person-minigame art (đàn, cờ, hát, múa, th
 - Words (VANPHONG): «phần» (never điểm / %), «khắc/giây», «Đến phiên», «Nàng thắng / Nàng thua / Hòa nhau».
 - Mount rule: a person minigame calls `kgReady` first, then `kitGameVs`; never a private scoreboard. Kit page sample «§13.8» (fake opponent ticking). Test: `node dev/test/kit-gamevs.js` (API, words, stacked / side-by-side, Fold + iPad + 390x844 + 1510x2000 shots).
 
+### 13.9 THE WAY BACK «Quay lại» on EVERY mini-game screen · kg82BackX / kg82Back (owner 20/11 ~04:45Z, ROOT-73, review/mg-back) — `dev/build/j82.js`
+Owner: "thêm cho tôi một cái option là cái chữ X hoặc là chữ go back, quay lại, để mà khi mà tôi vào một cái game mà tôi không có muốn thì tôi có thể go back để tôi ra tôi chọn cái game lại."
+- ONE kit ✕ (`kitXHTML('data-kitx="kgback"',"Quay lại")`, the 32.10 ✕, no new look) put by `kg82Open` in the frame header (`.kph`, top right): rules screen, «Hướng dẫn», play and result. Never two ✕: jk4 `kitOvSync` adds none when it is there.
+- Order: (1) `KG82.back` (caller with nothing at stake, set right after kg82Open: Thử tay → the kind list, the kind not saved; Chải chuốt rules screen → back) — `KG82.backAsk` = confirm lines while a board is live; (2) a result button `kitOvBtn` (#kg82ok / #kg92ok) is pressed (old 32.10 behaviour); (3) `KG82.xdo` = the only way on of a screen (jsgame «Ra tay», jtoil result, Nghiệm thân blood scene); (4) otherwise GIVE UP (laws 2/3: never a free escape): kit `kitConfirm` «Bỏ cuộc?» («Bỏ cuộc» / «Chơi tiếp»), lifted over #ov by `body.kg82cf`, then the caller's OWN lose path with 0/10 — during play `KG82.quit()`, on the rules screen the «Sẵn sàng» button runs with `KG82.giveUp` (kg82Play / sgEng / jroute end at once with 0, no board, no clock). `KG82.quitAsk` = the caller's own confirm lines when its lose result is not 0/10 (jtoil: Để mộc).
+- `kg82Close` clears back / backAsk / quit / quitAsk / xdo. Callers never draw their own back button.
+- Test: `node dev/test/mg-back.js [page] [WxH] [shotdir]` (every caller × every screen, scan table).
+
 ## 14. SCENE PANEL (j79) — identity card, opening story, title screen
 - Compact translucent kit frame (`rgba(255,250,240,.90)` + blur) to one side in landscape (max 440 px / 44vw, vertically centred, right) and in the
   lower part in portrait; the background art stays visible. Fits ONE screen, no scrolling, buttons always visible (tested at the 4 sizes).

@@ -1,4 +1,4 @@
-/* mg-back (owner 20/11 ~04:45Z, KIT §13.8) — node dev/test/mg-back.js [dev/index.html] [WxH] [shotdir]
+/* mg-back (owner 20/11 ~04:45Z, KIT §13.9) — node dev/test/mg-back.js [dev/index.html] [WxH] [shotdir]
    Owner: "thêm cho tôi một cái option là cái chữ X hoặc là chữ go back, quay lại, để mà khi mà tôi vào một cái game mà tôi không có muốn thì tôi có thể
    go back để tôi ra tôi chọn cái game lại."
    1 every caller: ONE kit ✕ «Quay lại» (.kit-x[data-kitx=kgback], in the frame header, visible, inside the screen) on the rules screen, during «Hướng dẫn»,

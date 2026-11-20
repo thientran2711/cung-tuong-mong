@@ -433,7 +433,7 @@ function rtNgSleight(kind,n,cb){const o=rtMgO(n);if(!rtMgOn()){cb(roll(o));retur
   KG82.peek=()=>lock?null:(upd((performance.now()-t0)/1000),cones.some(c=>c.on)?null:{sel:"#kg82tap"});/* the hint hook (guided round): «Ra tay» while no gaze touches the bowl */
   raf=requestAnimationFrame(frame);return()=>{dead=1;cancelAnimationFrame(raf);KG82.peek=()=>null}};
  kgReady(box,{n:"Nghiệm thân",t:`Lén ${what}`,how:`Ánh mắt của ${n} người quét qua lại trong điện. Chạm «Ra tay» lúc không ánh mắt nào chạm vào bát. Ba hồi, cần thành hai.`,e:"swing",pic:"",tutor:(b,env)=>play(b,()=>env.end(),env)});
- $("kg82go").onclick=()=>{if(KG82.giveUp){KG82.giveUp=0;done(false);return}/* KIT §13.8: given up = «bị nhìn thấy» (the lose result) */
+ $("kg82go").onclick=()=>{if(KG82.giveUp){KG82.giveUp=0;done(false);return}/* KIT §13.9: given up = «bị nhìn thấy» (the lose result) */
   box.innerHTML="";KG82.phase="play";const st=play(box,ok=>{KG82.quit=null;done(ok)});KG82.run={stop:st};KG82.quit=()=>{try{st()}catch(e){}KG82.run=null;done(false)}}}
 function rtNgScene(shown,kn,cb){if(!rtMgOn()){cb();return}
  const d=kg82Open({art:"Nghiệm thân",title:"Giọt máu trong bát nước",how:`Một giọt máu của Hoàng thượng, một giọt máu của ${kn}.`});if(!d){cb();return}
@@ -447,6 +447,6 @@ function rtNgScene(shown,kn,cb){if(!rtMgOn()){cb();return}
   if(t>=T)try{kg82Lbl(g,shown?"Hai giọt máu hòa làm một":"Hai giọt máu tách rời",W/2,H*.12,W*.9,false)}catch(e){}};
  const end=()=>{kg82Set("time","đã hết");const res=typeof kitGameResult==="function"?kitGameResult({parts:[["Giọt máu",shown?"hòa làm một":"tách rời"]],note:shown?`${kn} là cốt nhục hoàng gia.`:"Cả điện lặng ngắt."}):"";
   const r=document.createElement("div");r.innerHTML=res+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;box.appendChild(r);$("kg82ok").onclick=()=>{kg82Close();cb()}};
- KG82.xdo=()=>{const b=$("kg82ok");if(b){b.click();return}cancelAnimationFrame(raf);draw(T);end()};/* §13.8: ✕ while the drops fall = straight to the result (it only shows, nothing is played) */
+ KG82.xdo=()=>{const b=$("kg82ok");if(b){b.click();return}cancelAnimationFrame(raf);draw(T);end()};/* §13.9: ✕ while the drops fall = straight to the result (it only shows, nothing is played) */
  if(red){draw(T);const bi=rtMgBowl();if(!bi.complete)bi.addEventListener("load",()=>{try{draw(T)}catch(e){}},{once:true});end();return}
  const fr=now=>{const t=(now-t0)/1000;draw(Math.min(t,T));if(t<T)raf=requestAnimationFrame(fr);else end()};KG82.run={stop:()=>cancelAnimationFrame(raf)};raf=requestAnimationFrame(fr)}
