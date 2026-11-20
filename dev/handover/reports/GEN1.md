@@ -45,3 +45,15 @@ First try of open9 (old file, 10080 chars) refused by Magnific: "prompt must not
 | Hoàng hậu Thu (v9) | dev/art/thu_comoi/s62_t8_THU_COMOI_v9.txt | 9ZHgmnpNYZ | https://www.magnific.com/app/creation/9ZHgmnpNYZ |
 Sheet: dev/handover/review-sheets/hh_bell_L1536/sheet.webp (labels, model+cr under each, Tổng: 30 cr ON the image per A44); singles han.webp, thu.webp.
 Faults (1024 preview, notes only): Hán — caption wraps to 5 lines top-left, near the crown; robe is wide at the bottom (flares out at the hem, not slim/close as the prompt says); skirt hem slightly pooled at floor corners; spiral quju not clearly visible. Thu — caption 3 lines, fine; sleeves very wide and the robe flares bell-like toward the hem despite "slim, hanging close, never bell-wide"; hairpin held up in right hand OK; mint panel + yellow borders clear.
+
+# JOB L1542 — maid drafts, GPT 2.5 low (A43/A44)
+gpt-2-mini, quality low (extraSettings), 1k 9:16 (752x1344), seed 7172, ref s7IPw0Ll8e only. 15 cr each exact, total 75 cr. Prompts exactly as files (first "[ChatGPT: …]" line dropped), dev/art/maid7/gpt/.
+| picture | prompt | creation |
+|---|---|---|
+| Tam đẳng thân cận | tamdang_thancan_gpt | kseCcK016B |
+| Nhị đẳng thân cận | nhi_thancan_gpt | bxMvnbO5Y2 |
+| Nhất đẳng thân cận | nhat_thancan_gpt | 3zK7u34REY |
+| Chưởng sự | chuongsu_gpt_v4 | rgXuVjFxtc |
+| Ma ma a51 | mama_gpt_v5_a51 | 3zK7Q2NREY |
+Webs: https://www.magnific.com/app/creation/<id>. Files + sheet: dev/handover/review-sheets/maid_L1542/ (sheet.jpg, new_*.webp). Ma ma came out with a transparent background (the prompt asks for it); I put white behind it on the sheet.
+Look: colours are flipped as asked (rose skirt + blue jacket/vest). Square collar is clear on tam/nhi (flat band + V of inner collar); on nhất it reads more like a V/sailor opening than a true square; chưởng sự and ma ma show a squarish opening. Tam's blue jacket is a little long (to hip) and blue sash not as obvious; nhị has no two short flaps clearly, and its half-sleeve is one layer (good); nhất has two long panels but the extra short top panel is hard to see. Chưởng sự: purple + rose clear, keys held. Ma ma: coral/teal, silver hair, abacus in hands, 3/4 turn.
