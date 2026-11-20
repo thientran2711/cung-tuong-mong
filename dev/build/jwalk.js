@@ -21,7 +21,7 @@ function walkErrRow(e,b0,a,i,place,x){if(!walkNpcOn()||!a||!x||!place)return x;t
 function walkNpcOn(){try{return BAL.walk.npc!==0}catch(e){return false}}
 const JWALK={stat:{fix:0,late:0,miss:0,now:0},errs:[],seen:null};
 /* review/jagday-walk r2: a row turned into «on the way» keeps its own why and target (a guest's leave reason, whom a follower follows) */
-function walkWhy(w,pre){const s=w&&!/^\s*$/.test(w)?String(w):(pre||"");if(/đang trên đường/.test(s))return s;return s?s+" · đang trên đường":"đang trên đường"}
+function walkRoadWhy(w,pre){const s=w&&!/^\s*$/.test(w)?String(w):(pre||"");if(/đang trên đường/.test(s))return s;return s?s+" · đang trên đường":"đang trên đường"}
 function walkTimed(id,x){if(x&&(x[1]==="visit"||x[1]==="back"))return true;try{return typeof ptAwayOf==="function"&&!!ptAwayOf(id)}catch(e){return false}}
 const walkSig=x=>x?x[0]+"|"+x[1]+"|"+(x[2]||""):"";
 function walkKeepRow(x,id,q,R){if(!x)return true;const a=x[1]||"";
@@ -43,9 +43,9 @@ function walkNpcPass(R,kh){if(!walkNpcOn()||!R||!R.P)return 0;let n=0;const K=(t
    let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&row[q][1]==="go"){g++;q--}if(q<0||!row[q]||!real(row[q][0])||row[q][0]===x[0])continue;
    let t=0;try{t=travel(row[q][0],x[0],walkWho(id))}catch(e){t=0}let need=t-1-g;if(need<=0)continue;
    /* leave earlier: the free khắc right before the walk (never the current khắc, never a kept row) */
-   while(need>0&&q>kh&&!walkKeepRow(row[q],id,q,R)){row[q]=[x[0],"go",x[2]==null?null:x[2],walkWhy(x[3])];need--;n++;JWALK.stat.fix++;q--}
+   while(need>0&&q>kh&&!walkKeepRow(row[q],id,q,R)){row[q]=[x[0],"go",x[2]==null?null:x[2],walkRoadWhy(x[3])];need--;n++;JWALK.stat.fix++;q--}
    /* else arrive later: the arrival khắc (and on) become «on the way», when free */
-   let a=j;while(need>0&&a<K&&!walkKeepRow(row[a],id,a,R)&&row[a][0]===x[0]){const y=row[a];row[a]=[x[0],"go",y[2]==null?null:y[2],walkWhy(y[3],y[1]==="follow"?"đi theo hầu":"")];need--;n++;JWALK.stat[a===kh?"now":"late"]++;a++}/* a follower keeps whom she follows (j95s retinue) */
+   let a=j;while(need>0&&a<K&&!walkKeepRow(row[a],id,a,R)&&row[a][0]===x[0]){const y=row[a];row[a]=[x[0],"go",y[2]==null?null:y[2],walkRoadWhy(y[3],y[1]==="follow"?"đi theo hầu":"")];need--;n++;JWALK.stat[a===kh?"now":"late"]++;a++}/* a follower keeps whom she follows (j95s retinue) */
    if(need>0)JWALK.stat.miss++;}}
  {const P={};for(const id in R.P){const row=R.P[id];if(Array.isArray(row))P[id]=row.map(walkSig)}JWALK.seen={key:R.key,kh,P}}
  return n}
