@@ -35,3 +35,8 @@ Keep 150/arm. Early stop allowed: once ON ≥ 75 lives, if every key metric's OF
 - OFF so far: run5b shards seeds 501/502/503/505 = 14/19/17/27, seed 504 = 6 (OOM) → 83 lives.
 - OFF top-up round 1: seeds 601–604 × 8 lives (14:05Z). Round 2 planned: 605–608 × 9.
 - ON plan (same shape): run5b-like first part is not repeated; ON = seeds 501–505 and 601–608 via run4c in the same per-seed counts as OFF.
+
+## 18:00Z — OFF arm done (n=145; foreman D #11 now)
+OFF (LIVE 30e8714e, whole emotion layer off; seeds 501–505 run5b + 601–608 run4c): n=145  HH 37 % ±4 (per-seed files 11–62)  early death 43 % ±4 (24–67)  childbirth deaths 28 % ±4  NPC harm acts/yr 141  kind acts/yr 271. (±= binomial SE; tool dev/measure/emocmp.py on review/emo-balance.)
+"Early death" = anemo.py definition (counts nun / sent home / Tuổi trời rows too) — same rule both arms.
+ON arm started 18:00Z: run4c seeds 601–604 × 10, then 605–608 × 10; early-stop check at ≥75 (D #10 rule).
