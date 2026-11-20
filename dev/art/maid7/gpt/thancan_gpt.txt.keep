@@ -1,0 +1,13 @@
+base: dev/art/maid7/test_mama.txt
+allow: A palace ma ma   # owner Lượt 1352: ma ma -> cung nữ thân cận
+allow: a senior woman of the palace staff   # owner Lượt 1352: who = thân cận
+allow: gracious and still beautiful   # owner Lượt 1352: who = thân cận (kept "gracious ... beautiful")
+allow: about 36 but looking young for her age   # owner Lượt 1352: young thân cận (age a18 text "about 22")
+allow: trẻ trước tuổi   # owner Lượt 1352: ma ma age words out
+allow: still youthful and very beautiful   # owner Lượt 1352: ma ma age words out
+allow: only a touch more mature and poised than her young self   # owner Lượt 1352: ma ma age words out
+allow: no visible lines   # owner Lượt 1352: ma ma age words out
+allow: never an older face   # owner Lượt 1352: ma ma age words out
+allow: the ma ma costume   # owner Lượt 1352: -> the cung nữ thân cận uniform
+allow: ALL her hair pinned UP in a neat bun   # brief L1352: maid buns, no matron chignon (still ALL pinned UP)
+allow: a palace ma ma's sleeves   # owner Lượt 1352: -> a palace maid's sleeves
