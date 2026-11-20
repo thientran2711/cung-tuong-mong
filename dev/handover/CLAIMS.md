@@ -363,4 +363,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | mg-score-same (opus; OWNER BUG OD 20/11 ~06:50Z: board shows raw, result graded + hidden time cut; whole family 31 kinds; lands ALONE, BIG rv) | review/mg-score-same; briefs/cag28-mg-score-same.md; reports/mg-score-same.md | C-AG #28 for ROOT-74 | session_01Rc5AsMwgUZdbs4boL9VMtH | RUNNING | 20/11 06:12Z |
 | kit-mark KIT KEEPER (sonnet; owner OK OD 20/11 ~07:15Z: «n/10» chip + amber clock, for mg-score-same) | review/kit-mark; briefs/root74-kit-mark.md | MAIN ROOT-74 | session_01Rc5AsMtjP4KTgBZVjENGLs | RUNNING | 20/11 06:40Z |
 | mg-play2 #2 (opus successor of LZkqCJgR @9ca5bac9) | review/mg-play2; briefs/root74-mg-play2.md | MAIN ROOT-74 | session_01Rc5AsKPc7jyATmC8vq6dep | RUNNING | 20/11 06:48Z |
-| REVIEW fig-label (SMALL sonnet) of e9f34064 | review/fig-label(-rv); briefs/rv-root74-fig-label.md | MAIN ROOT-74 | session_01Rc5AsLCtEJsoif8pCu9pX3 | RUNNING | 20/11 06:58Z |
+| REVIEW fig-label (SMALL sonnet) of e9f34064 | review/fig-label(-rv); briefs/rv-root74-fig-label.md | MAIN ROOT-74 | session_01Rc5AsLCtEJsoif8pCu9pX3 | PASS fb2e9908 | 20/11 06:58Z |
