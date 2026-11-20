@@ -19,7 +19,9 @@ for head, spec in zip(rest[0::2], rest[1::2]):
     for cx, i in zip([168, 421, 654, 888], it):
         s = 54
         while d.textlength(i[1], font=font(s)) > 440 and s > 28: s -= 2
-        d.text((cx * 2, 46), i[1], font=font(s), fill=(40, 28, 20), anchor='mm'); d.text((cx * 2, 100), i[2], font=font(32, False), fill=(90, 70, 50), anchor='mm')
+        d.text((cx * 2, 46), i[1], font=font(s), fill=(40, 28, 20), anchor='mm'); s2 = 32
+        while d.textlength(i[2], font=font(s2, False)) > 450 and s2 > 16: s2 -= 1
+        d.text((cx * 2, 100), i[2], font=font(s2, False), fill=(90, 70, 50), anchor='mm')
         for k, (lab, pair) in enumerate(zip(i[6::2], i[7::2])):   # swatch rows: label | #main+#sec
             y = 128 + k * 52; x = cx * 2 - 215
             d.text((x, y + 22), lab, font=font(26), fill=(40, 28, 20), anchor='lm')
