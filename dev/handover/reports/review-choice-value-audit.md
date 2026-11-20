@@ -268,3 +268,32 @@ START_CTX ≈ 5 % of 1M (estimate) · finished ≈ 15 %. Base = LIVE fd682a8d (o
 
 #### Next round (short)
 Worker: base on **review/choice-value-audit-rv9 0c7e21b6**, fix FAIL 1 (whole group), final-merge current origin/main (8cf6b7d7 or newer), re-run the gate table above.
+
+## RE-CHECK after FAIL 1 (opus, reviewer session_01964izE9Hd8tHXKPw8ZCAif, for Foreman D #10 → D #11) — reviewed review/choice-value-audit @32614524 (worker CHOICE-VALUE #2)
+PRIORITY #1 CHECK ('choice-value'): owner laws 2+3 | main LIVE (moved 4e8cbaeb → 8730f431 → 0667403a → eb11e2ad → a99673e8 → 983a9436 during this re-check) | review/choice-value-audit 32614524 | claims choice-value (this job).
+Laws checked: 2, 3, 4, 7, 11, 12.
+
+### VERDICT: PASS 415b9ca0d0919fe874ef2cab5fe76587792c62eb (review/choice-value-audit-rv10, FF of LIVE 983a9436)
+
+#### FAIL 1 re-check — fixed, whole group
+- Worker commits eb7e68db / da40997d / bfc00562 (merges excluded): 17 «không tốn gì»-only options + j24 apSorry «Lạnh lùng» now name a word gain. I read each against its sibling options: every kept-resource gain is real (jface «giữ lại FXF.docMed lượng bạc và sức lực» vs Thái y Bạc −FXF.docMed / Tự sắc Sức −3; j70 scar «giữ bạc trong rương, khỏi uống thuốc đắng hao sức» vs Thái y Bạc −30 + Sức; j70 order menus «giữ bạc mỗi tháng» vs order rows Bạc −O.bac / −10 mỗi tháng; jrd «bạc còn nguyên / giữ lại bạc lót tay» vs the paying siblings; «chẳng ai nắm thóp / không lợi dụng được» vs the siblings that expose her). No new number typed (jface prints FXF.docMed); law 2 kept (no new dominance: scans DOMINATED 0).
+- Notes (not FAIL, pre-existing kit reading): on the Trúng độc card the kit summarises the jface word gain as «có thêm bạc»; «Uống thuốc giải» (disabled without the item) shows TỐN «· thân thể bị hại» (stray «·» = known hint-reader nit).
+
+#### Watch item: ptime FAIL 11 (cnvOrd) — LIVE's flake
+5 runs each, alternated, on 8730f431-merged branch vs plain LIVE 8730f431: FAIL 11 **4/5 branch vs 4/5 LIVE**; FAIL 5 (invite) 1/5 vs 2/5. The branch diff touches no cnvOrd / accGrant code. Same rate → test-side (walk-cost-rv de-flake), not this branch.
+
+#### Gates
+| gate | sha | result |
+|---|---|---|
+| one-core ×4, odds-cap | bc197b8d, 8c099330, d523dd02, 95df70b8, 415b9ca0 | PASS each |
+| choice-value-scan 100 turns seeds 7 / 11 / 23 / 31 | bc197b8d | PASS 265 / 231 / 284 / 256 · 0 / 0 / 0 · 0 page errors |
+| same | 8c099330 (+ cal-p2c, jrd_bd roads) | PASS 261 / 268 / 263 / 280 · 0 / 0 / 0 |
+| seed 7 | d523dd02, 95df70b8, 415b9ca0 | PASS 275 / 268 / 267 |
+| --plant | bc197b8d, 8c099330 | 3/3 |
+| ptime2 / receiver-choice | bc197b8d, 8c099330 | ALL OK / ALL PASS |
+| role-parity.test | bc197b8d (+ plain LIVE 8730f431), 8c099330 | **ALL PASS** (LIVE fixed its 2 old FAILs) |
+| quickcheck | bc197b8d (6), 8c099330 (6), d523dd02 (3), 95df70b8 (3), 415b9ca0 (3) | PASS · old save ok · core gates PASS (415b9ca0: render 236/268 ms, tab 518/452, buổi 1112/1317) |
+| coop-e2e vs live Worker | bc197b8d, 8c099330 | 68/68, 68/68 (later deltas touch no co-op code) |
+| kit-opt-text (new on eb11e2ad) | d523dd02 vs plain LIVE eb11e2ad | branch 3/5, LIVE 4/6 — every FAIL is «no narrow modal showed within 60 turns» (seeded turn loop path), the layout asserts pass whenever it shows → test-side flake on LIVE too (note for its owner: raise the 60-turn loop or stage the modal) |
+| ge-guard | 95df70b8 | 8/8 |
+| Fold 755x1000@2 + iPad 1180x820@2 «Trúng độc» (jface), looked at | bc197b8d | four roads each Tốn + Được, no overflow, 0 page errors; scratch only |
