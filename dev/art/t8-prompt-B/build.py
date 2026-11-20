@@ -1083,14 +1083,15 @@ def low_outfit(c,t,v="v0"):
 # the LAD3 one-layer "pearl-edged cape/stole" becomes TWO layered SHORT shoulder capes (Phi has one cloud collar).
 import re as _re6
 _re_cape6=_re6.compile(r"an embroidered ([^,]+?) pearl-edged cape/stole over the shoulders")
-CAPE6_TWO=r"an embroidered \1 cloud collar (yunjian) over the shoulders with a scalloped gold-thread edge and a fringe of small gold tassels, pearl-edged, never covering the neckline"   # SWAP56 (owner 20/11 L1266): Quý phi now carries the Phi's old cloud collar (yunjian); pearl edge stays with Quý phi
+CAPE6_TWO=r"an embroidered \1 cloud collar (yunjian) over the shoulders with a scalloped gold-thread edge and a fringe of small gold tassels, pearl-edged, with small jade and pearl drops dangling beneath it, fewer and smaller than the imperial noble consort's, never covering the neckline"   # JOB 3 owner Lượt 1317: t6 collar drops added (reference dev/art/swap56/s62_t6_v2.txt)
+# SWAP56 (owner 20/11 L1266): Quý phi now carries the Phi's old cloud collar (yunjian); pearl edge stays with Quý phi
 CAPE5_TWO="TWO layered embroidered SHORT shoulder capes, one over the other (upper shorter, lower longer), never covering the neckline"
-# JOB 3 (owner Lượt 1312 + correction 1314 via Foreman C #5, reference dev/art/b26/s62_t5_v2.txt): Phi capes v2 = her main colour + gold-thread flower embroidery + the OLD
-# Phi cloud-collar trim (scalloped gold-thread edge + small gold tassels hanging from every scallop), NO pearls on the capes. 'peonies' -> her hair-flower species via
+# JOB 3 (owner Lượt 1312/1314, FINAL Lượt 1317 via Foreman C #5, reference dev/art/b26/s62_t5_v2.txt): Phi capes v2 = her main colour + gold-thread flower embroidery +
+# a row of small sewn-on pearls on each cape edge (the old Quý phi capes), no dangling tassels. 'peonies' -> her hair-flower species via
 # flower_outfit (owner Lượt 1303); people with no species keep peonies (Foreman rule).
 CAPE5_V2=("TWO layered embroidered {main} SHORT shoulder capes, one over the other (the upper cape shorter, the lower cape a little longer, both resting on the shoulders), "
-          "each cape richly embroidered in gold thread with small peonies, with a scalloped gold-thread edge and a fringe of small gold tassels hanging down from every scallop "
-          "(exactly the old Phi cloud-collar trim), no pearls on the capes, never covering the neckline")   # SWAP56: Phi now carries the Quý phi's old TWO-layer short capes (pearl edge NOT moved: pearls stay Quý phi)
+          "each cape richly embroidered in gold thread with small peonies, each edged with a row of small sewn-on pearls (exactly the old Quý phi capes), no dangling tassels, "
+          "never covering the neckline")   # FINAL wording owner Lượt 1317 (supersedes 1312/1314)   # SWAP56: Phi now carries the Quý phi's old TWO-layer short capes (pearl edge NOT moved: pearls stay Quý phi)
 # LOWV1/LOWV2[cNN][t] = (robe main colour word, hex, lining word, hex), MEASURED (W79, 18/11) from the LIVE v1/v2 pictures
 # img/_review/consort-tiers/<cNN>/b10/<cNN>_a18_t<t>_v<1|2>.png : median RGB of the dominant non-neutral k-means cluster of the central torso/skirt band
 # (alpha>200, gold and near-black hair pixels gated out), lining = next distinct cluster. Foreman ruling: --low v1/v2 never use royal yellow (only the t6 small touch).
