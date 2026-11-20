@@ -22,14 +22,14 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 3 */
   /* steps 3–4 run on kinds the owner has NOT calibrated (BAL.ag.mg2.cal.k), picked at run time: a landed owner code must not break them */
   const UNC=mgCalKinds().filter(k=>!(C.k||{})[k]);const K=UNC[0],K2=UNC[1];o.K=K;o.K2=K2;
-  const L=liveRivals(true).filter(v=>v.alive);o.def=mgCalBand(K);o.defMed=(H.ctr[K]!=null?H.ctr[K]:H.ctr[""])+H.w/2;const before=L.map(v=>mgHand(K,v));
+  const L=liveRivals(true).filter(v=>v.alive);o.def=mgCalBand(K);const def2=mgCalBand(K2).sig;/* K2 keeps ITS OWN default band (K and K2 may sit in different hand groups, review/cal-p2b-rv) */o.defMed=(H.ctr[K]!=null?H.ctr[K]:H.ctr[""])+H.w/2;const before=L.map(v=>mgHand(K,v));
   const v=L[0];const keep=v.mgH,keepV=v.mgHv;delete v.mgH;delete v.mgHv;o.oldSave=mgHand(K,v)===before[0];v.mgH=keep;v.mgHv=keepV;
   C.k[K]={b:7,n:5,at:"11/17/2026"};const Bd=mgCalBand(K);o.band=Bd;o.same=Bd.sig===o.def.sig;o.share=mgCalShare(K);o.share0=mgCalShare(K2);
   const after=L.map(v=>mgHand(K,v));o.inBand=after.every(h=>h>=Bd.lo-1e-9&&h<=Bd.hi+1e-9);
-  const ord=a=>a.map((h,i)=>[h,i]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]).join(",");o.order=ord(before)===ord(after)&&after.every((h,i)=>h===before[i]);o.otherKind=mgCalBand(K2).sig===o.def.sig;
+  const ord=a=>a.map((h,i)=>[h,i]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]).join(",");o.order=ord(before)===ord(after)&&after.every((h,i)=>h===before[i]);o.otherKind=mgCalBand(K2).sig===def2;
   /* 4 */
-  const plays=[];for(let i=0;i<600;i++){const q={name:"T"+i,id:9000+i,rank:S.rank,arts:Object.assign({},S.arts),ag:{o:(S.origin&&S.origin.k)||"_"}};/* equal to her in art and upbringing: no lift */for(let j=0;j<3;j++)plays.push(mgNpcRaw(K,q,{d:0}))}plays.sort((a,b)=>a-b);
-  o.reach=plays.filter(x=>x>=7).length/plays.length;o.med=plays[plays.length>>1];o.max=plays[plays.length-1];
+  const ID=BAL.orig.id,npc0=ID&&ID.npc;if(ID)ID.npc=0;/* cal-p2c: the bare curve (the identity class shift, the same for her and the NPC, is checked in dev/test/cal-p2c.js) */const plays=[];for(let i=0;i<600;i++){const q={name:"T"+i,id:9000+i,rank:S.rank,arts:Object.assign({},S.arts),ag:{o:(S.origin&&S.origin.k)||"_"}};/* equal to her in art and upbringing: no lift */for(let j=0;j<3;j++)plays.push(mgNpcRaw(K,q,{d:0}))}plays.sort((a,b)=>a-b);
+  if(ID)ID.npc=npc0;o.reach=plays.filter(x=>x>=7).length/plays.length;o.med=plays[plays.length>>1];o.max=plays[plays.length-1];
   const hs=[];for(let i=0;i<600;i++)hs.push(mgHand(K,{name:"T"+i,id:9000+i})-H.w/2-7);o.up=hs.filter(x=>x>1).length;o.dn=hs.filter(x=>x<-1).length;o.loPlay=Math.min(...hs)+7;
   delete C.k[K];o.back=mgCalBand(K).sig===o.def.sig&&mgHand(K,v)===before[0];
   return o});

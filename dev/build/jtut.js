@@ -225,7 +225,7 @@ const INTRO=[
    ["Nhà và con","nhà mẹ đẻ có vinh có nhục theo {x}; con được trọng thì mẫu thân được nể"],
    ["Mệnh truyện","truyện riêng của thân phận, mở từng chương; cuộn chiếu Mục tiêu ở cột nút bên trái màn luôn cho biết chương này cần gì"],
    ["Kết cục","mỗi kiếp khép lại bằng một kết: kết hay, kết dở, và những kết hiếm khó gặp"]])},
- {t:"Chơi thế nào",p:()=>ia("Hành sự"),h:()=>rows([["Buổi · khắc","mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi tháng ba tuần; mỗi buổi "+(BAL.time.khac)+" khắc, việc nào cũng tốn khắc"],
+ {t:"Chơi thế nào",p:()=>ia("Hành sự"),h:()=>rows([["Buổi · khắc","mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi tháng ba tuần; mỗi buổi "+(BAL.time.khac)+" khắc, việc nào cũng tốn khắc; làm được hay không là tính theo tổng số khắc còn lại trong ngày, việc dài hơn buổi thì kéo sang buổi sau"],
    [srv()?"Phận sự":"Hành sự","chọn việc mà làm; thẻ ghi cơ may, cái giá, cái được"],["Dư đồ","đi tới các nơi trong cung, gặp người"],
    srv()?["Đồng liêu","người làm cùng: kết bạn, đề phòng kẻ vu cáo"]:["Hậu cung · Giao tình","người trong cung; ai thương, ai ghen, ai oán {x}"],
    srv()?null:["Tài nghệ","học cầm kỳ thi họa, nữ công; mỗi bài là một trò nhỏ"],
@@ -251,7 +251,7 @@ const STEPS=[
   html:()=>srv()?say(`<p>Tám ô trên cùng là căn cơ của {x}: Sắc, Tài, Tâm cơ, Đức là tư chất; Bạc để chi tiêu, Sức để làm việc, Chủ tin là chủ nhân tin {x} bao nhiêu, Danh là tiếng tăm.</p><p>Chạm vào ô nào cũng có lời giải.</p>`)
    :say(`<p>Tám ô trên cùng là căn cơ của {x}:</p>${kitRows([R("Tư chất","Sắc · Tài · Tâm cơ · Đức"),R("Bạc","tiền riêng để chi tiêu"),R("Sức","để làm việc; dưới 20 thì không làm được việc nặng"),R("Sủng","Hoàng thượng thương {x} bao nhiêu"),R("Danh","tiếng tăm trong cung")].map(x=>[x[0],say(x[1]),x[2]]))}<p>Chạm vào ô nào cũng có lời giải.</p>`)},
  {id:"khac",title:"Buổi · khắc · quẻ tuần",target:"#k3tt",prep(){goRoom()},
-  html:()=>say(`<p>Mỗi buổi có ${BAL.time.khac} khắc, chấm tròn đầy là khắc còn lại. Việc nào cũng tốn khắc; hết khắc thì qua buổi.</p><p>Đầu mỗi tuần rút một quẻ: quẻ tốt thì loại việc ghi trong ngoặc dễ thành hơn suốt tuần, quẻ xấu thì khó hơn; gặp quẻ Hung thì nên giữ mình. Bên cạnh là thời tiết hôm nay.</p>`)},
+  html:()=>say(`<p>Mỗi buổi có ${BAL.time.khac} khắc, chấm tròn đầy là số khắc buổi này còn. Việc nào cũng tốn khắc. Làm được hay không là tính theo tổng số khắc còn lại trong ngày: việc dài hơn số khắc còn trong buổi thì kéo sang buổi sau; riêng buổi tối không kéo qua đêm.</p><p>Đầu mỗi tuần rút một quẻ: quẻ tốt thì loại việc ghi trong ngoặc dễ thành hơn suốt tuần, quẻ xấu thì khó hơn; gặp quẻ Hung thì nên giữ mình. Bên cạnh là thời tiết hôm nay.</p>`)},
  {id:"the",title:"Đọc một thẻ việc",when:()=>!!groupBtn("act"),target:()=>pickAct(),pad:4,
   prep(re){goTab("act");setTimeout(()=>{allCat();const c=pickAct();if(c&&!re)scrollTo(c)},420)},
   html:()=>say(`<p>Mỗi việc là một thẻ. Chữ bên phải là cơ may: Liều, Khó, Năm ăn năm thua, Khá chắc, Chắc, Rất chắc, Nắm chắc; việc chắc thì không ghi.</p>${kitRows([R("Cần","điều kiện: ✓ đã đủ, ✗ còn thiếu"),R("Tốn","khắc và thứ phải bỏ ra"),R("Được","lợi khi thành, chữ xanh","g"),R("Mất","thiệt khi hỏng, chữ đỏ","r"),R("Kèm","hệ lụy có thể đến dù thành","r")])}<p>Dòng Quẻ dưới cơ may cho biết quẻ tuần làm việc ấy dễ hay khó hơn; "có thai: Liều" trong Được là cơ may riêng của điều ấy.</p>`)},
