@@ -25,7 +25,7 @@ const SRC0=k=>k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}
    await p.evaluate(async()=>{const sl=t=>new Promise(r=>setTimeout(r,t));const end=performance.now()+5000;
     const fire=(ty,x,y)=>{const cv=document.querySelector('#kg82box canvas');if(cv)cv.dispatchEvent(new PointerEvent(ty,{clientX:x,clientY:y,pointerId:1,pointerType:'touch',isPrimary:true,bubbles:true}))};
     while(performance.now()<end){await sl(10);const pk=KG82.peek&&KG82.peek();if(!pk)continue;if(pk.sel)continue;
-     if(pk.drag){const L=pk.drag;fire('pointerdown',L[0][0],L[0][1]);for(let i=1;i<=6;i++){fire('pointermove',L[0][0]+(L[2][0]-L[0][0])*i/6,L[0][1]+(L[2][1]-L[0][1])*i/6);await sl(15)}fire('pointerup',L[2][0],L[2][1]);await sl(250)}
+     if(pk.drag){const L=pk.drag,Z=L[L.length-1];/* a cut is a 2-point drag */fire('pointerdown',L[0][0],L[0][1]);for(let i=1;i<=6;i++){fire('pointermove',L[0][0]+(Z[0]-L[0][0])*i/6,L[0][1]+(Z[1]-L[0][1])*i/6);await sl(15)}fire('pointerup',Z[0],Z[1]);await sl(250)}
      else if(pk.x!=null){if(pk.at!=null){const t=crNow()+pk.at;while(crNow()<t)await sl(2)}fire('pointerdown',pk.x,pk.y);await sl(80)}}});
    await shot('3play');
    /* to the end quickly: the bot at high speed */
@@ -33,7 +33,7 @@ const SRC0=k=>k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}
     const fire=(ty,x,y)=>{const cv=document.querySelector('#kg82box canvas');if(cv)cv.dispatchEvent(new PointerEvent(ty,{clientX:x,clientY:y,pointerId:1,pointerType:'touch',isPrimary:true,bubbles:true}))};
     while(performance.now()<end&&KG82.phase==='play'&&KG82.run){await sl(6);const pk=KG82.peek&&KG82.peek();if(!pk)continue;
      if(pk.sel){const e=document.querySelector(pk.sel);if(e&&!e.disabled)e.click();await sl(200)}
-     else if(pk.drag){const L=pk.drag;fire('pointerdown',L[0][0],L[0][1]);fire('pointermove',L[2][0],L[2][1]);fire('pointerup',L[2][0],L[2][1]);await sl(120)}
+     else if(pk.drag){const L=pk.drag,Z=L[L.length-1];/* a cut is a 2-point drag */fire('pointerdown',L[0][0],L[0][1]);fire('pointermove',Z[0],Z[1]);fire('pointerup',Z[0],Z[1]);await sl(120)}
      else if(pk.x!=null){if(pk.at!=null){const t=crNow()+pk.at;while(crNow()<t)await sl(1)}fire('pointerdown',pk.x,pk.y);await sl(30)}}CRAFT.speed=1});
    await p.waitForTimeout(1500);await shot('4result');await p.evaluate(()=>{try{kg82Close()}catch(e){}})}
   if(errs.length)console.log(dn,'page errors',errs.slice(0,3));await p.close()}
