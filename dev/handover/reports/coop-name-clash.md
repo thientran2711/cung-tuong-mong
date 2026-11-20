@@ -54,3 +54,33 @@ Laws: 6b (one living person = one full name across both seats; texts follow), 1 
 3. Without coop-host-lag a host rename of a world person reaches the guest one merged week later (same family); with it, same week.
 
 SẴN SÀNG KIỂM coop-name-clash c2353df6 (review/coop-name-clash).
+
+## REVIEW r1 (BIG, opus) — session_01N1tNP3dftEE3NNrkg7qe5S, depth 3, START_CTX ~4 % — **PASS 44cf5202** (review/coop-name-clash-r1)
+PRIORITY #1 CHECK ('name clash coop'): OD 0 | ledger 0 | claims 1 (this item) | main 0 | review/* 1 (review/coop-name-clash; + coop-host-lag-r1 fe7297f6 used for the merged check) | archive 0.
+Branch review/coop-name-clash-r1 @ 44cf5202 = c2353df6 + 2 reviewer fixes + merge of newest LIVE origin/main f6866eb8 (contains it).
+
+Code read (jname / jnamefix / jcoopworld delta): host decides, guest reads the same — confirmed. nmPeople marks the coop STAFF entry as the friend; nmFrPeople adds her own people from the room P; nmOrder/nmOrdApply/nmOrdPrune; nmBirth in attach; nmFix("join") in onState; nmReg/nmOrd W_KEYS + HOST_ONLY; nmRewrite never touches nmReg/nmOrd; solo: COOPW off → nmOrd dropped, nmFrBlob null.
+
+Reviewer fixes:
+| # | finding | fix | proof |
+|---|---|---|---|
+| R1 | her coop entry's kids are a COPY (kidsCopy drops dead children) so an order path "kids.i" can point at another child in her real S → host nmOrdPrune dropped the order as "done" before her seat applied it (then re-ordered with a new name each sweep) | 8c59e781 nmOrdPrune keeps an order while ANY of her people still holds the old name (same name fallback nmOrdApply already uses); family scan: only kids are copied with shifted indices (her staff on the entry = [], nmFrPeople uses real paths) | dev/test/coop-name-ordprune.js: before {keptWhilePending:false}, after {keptWhilePending:true, droppedWhenDone:true} |
+| R2 | role-parity FAIL maid:N-ONLY:maid:accuse (on names-unique base too, LIVE passes) is NOT a game gap: the player maid holds «Tố cáo <mistress> trước Hoàng hậu» (j42 srvTalk sk:"hh") on both builds (probe). names-unique re-draws the scan's seeded world (mistress Doãn Doanh Nguyệt rk3 vs LIVE Mộ Dung Lăng Vân rk1) and no visited place holds the Hoàng hậu that khắc | 75413e37 dev/tools/role-parity-scan.js asks the Hoàng hậu directly for a player maid (visit person {kind:"srv",sk:"hh",ref}); role-parity-open.json trimmed of 3 closed entries (hh cx2:chest, hh cx4:rougeSteal, maid errand) | role-parity: branch PASS, LIVE 983a9436 PASS (scan fix) — clears Foreman B's LAND HOLD reason for names-unique-r2-r1 |
+
+Tests (reviewer's own runs):
+| test | result |
+|---|---|
+| coop-name-scan | 86 sites, 0 open, 0 unclassified |
+| forced clash COOP_NC_FORCE e2e | 17 runs on 8c59e781 + 3 on 44cf5202 = 20 forced runs (iPad host 11, Fold host 9): F1 20/20, F2 20/20, F3 20/20; "one name list over both seats" 0 FAIL in all |
+| coop-e2e unforced | 3 runs: 2 × 92/92; 1 × 2 FAIL "week 1 advanced" = host held by the «Tuyển chọn: Môn thi · Đàn» minigame modal (shot 06), test-bot timing, not names. Forced run 8: 2 FAIL "same Thái hậu picture" = known host-lag lane V3-3 (fixed by coop-host-lag) |
+| final 44cf5202 | e2e 94/94 ×3 (Fold host ×2, iPad host ×1), quickcheck PASS, role-parity PASS, undef-scan PASS, one-core-guard PASS, coop-name-scan 0 open |
+| quickcheck | ×3 PASS (c2353df6 render 251/219; 75413e37 274/254; 44cf5202 233/222 ms, buổi 1150/1039, old save ok) — perf within noise |
+| names-oldsave LIVE 983a9436 → branch (8 y × 4 lives) | PASS |
+| coop-home | 51/51 |
+| merged with review/coop-host-lag-r1 fe7297f6 (conflicts: jkc2 = equal, kept this side's no-extra-draw form; coop-e2e 4 hunks = both sets of checks kept; built files rebuilt) | 3 runs NC force: 102/102, 108/108 (+COOP_HL_FORCE), 102/102 — not pushed (test only) |
+Test note: COOP_SWAP=0 still swaps (string "0" is truthy) — use unset for the Fold host.
+No UI change → no shots needed (VANPHONG: no new player words; KIT: none).
+
+Minor (not blocking): nmBirth may rename the new player's own drawn name; she sees it first after attach (freshName is drawn after the identity pick), so no shown name changes.
+
+**LAND ORDER:** names-unique-r2-r1 → coop-staff-split-r1 → **coop-name-clash-r1 44cf5202** (contains both + LIVE f6866eb8; landing it lands all three; the role-parity fix 75413e37 is inside) → coop-host-lag-r1 (re-merge: assemble.py list + jkc2 + coop-e2e hunks, as resolved above).
