@@ -82,3 +82,28 @@ These use a scratch copy of the ge-shots flow on road bd_hen with ends[10]=lose,
   - On the iPad each line fits on one row; on the Fold they wrap cleanly with no clipping.
   - The text shows fixes 5 and 6 (the evidence and the coffin timing) live on screen.
 - The fork screens (Ngã rẽ 1/2, «Cuối con đường «Lời thề trước lửa thánh»») render correctly with the odds ladder and the TỐN/ĐƯỢC rows.
+
+## ROUND 2 — review/ge-batu 1ca835da (E28b) → **PASS**; final-merged on LIVE → **LAND READY a99673e8**
+PRIORITY #1 CHECK: I read E28b's «## ROUND 2» in dev/handover/reports/ge-batu.md and the diff e0424d54..1ca835da (only jgedata_bd.js, jbalge.js rw and the new dev/test/ge-bd-scan.js beyond the main merge). bd-roads is LIVE (494b386a, in eb11e2ad).
+
+### Fixes, checked line by line against the road canon (jrd_bd/jrd_bd2 bdO, bdKill)
+| # | fix | r2 state | verdict |
+|---|---|---|---|
+| 1 | bd_hen_1 ring | no ring in t/a/ft; t needs the living Mật Hồ Đạt and is gated by fo e10 lose; ft «Con đường về tây đóng lại…» names no dead man | OK |
+| 2 | bd_hen_2 ring | ring-free: she stands before the fire and thanks the old love; «đốt được cả quá khứ» is a figure, not an object | OK |
+| 3 | bd_tuyet_4 song | option (b): the ending itself has her compose a NEW song at next spring's feast, true in every khuc state; cw reworded | OK |
+| 4 | bd_soi_3 letters | evidence is made by the ending (she arrests the uncle's men; their confessions); the threat letters are gone | OK |
+| 5 | bd_hen_4 evidence | t/a now cite the night of the alarm gong in the Đại Lý tự prison, which is the canon of its own cond (bd_hen ch10 lose, jrd_bd2.js:536) | OK |
+| 6 | bd_hen_4 coffin | «theo con đường sứ đoàn đã đưa linh cữu… về tây»: she follows after the coffin | OK |
+| 7 | law 2 rw | bd_soi_2 {rank:1,danh:30,duc:10,rel:8}, bd_tuyet_2 {rank:1,danh:30,tamco:10,rel:8}: bạc dropped, same shape as bd_soi_3 | OK |
+| 8 | death-fo ft | bd_hen_3 ft no longer names Mật Hồ Đạt; bd_hen_1 and bd_soi_2 ft are also clean | OK |
+| 9 | family scan | ge-bd-scan.js lists 34 hits (object, evidence and dead-able person × field, with fo/cond); I read all 16 endings' cw/t/a/ft: 0 faults. Extra fixes are canon: Ngọc Câu is the white horse (jrd_bd), Kim Quang môn exists (jrd_bd ×42); the mật=2 reason is in the worker report | OK |
+
+### Gates (mine)
+- On 1ca835da: ge-guard 8/8; ge-engine 1288/1288 (the first run gave 1269 with no false keys in the output and two reruns gave 1288, so it is a timing flake and I note it); one-core PASS; quickcheck alone PASS (old save ok, perf ≈ live).
+  - One life each, bd_hen (aimed ge4) and bd_soi (aimed ge3): 0 page errors; both fail on their design conditions (e10 lose; mật 1/2), as in round 1.
+- **Final merge onto LIVE eb11e2ad → a99673e8.** The only real conflict was the assemble.py module list: I took main's list (+ jmgid.js) and put jgedata_bd.js after jgedata_w3.js. index.html and sw.js were rebuilt.
+  - On a99673e8: ge-guard 8/8, ge-engine 1288/1288, one-core PASS, QUICKCHECK PASS (old save ok; perf new/live render 265/245, tab 548/466 ms).
+  - Hooks coop-one-world, mk-layer-scan (12960 pictures, 0 bad), manifest-guard, npc-purpose-scan and odds-cap all PASS. The first quickcheck pass flagged coop and mk-layer only because my sparse worktree lacked coop/ and dev/art/.
+
+**LAND READY review/ge-batu a99673e8** (queues after pm r3 and phutang in the E order). Main untouched by me.
