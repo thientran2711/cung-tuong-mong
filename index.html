@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2e990172+","t":"2026-11-20T16:33Z","c":"coop-name-clash: new-life check also keeps short forms of living people free (no join-sweep rename of a world consort for a 'like' clash: b…","b":"e23687dd01da","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
+window.CTM_BI={"s":"c0ea123c+","t":"2026-11-20T16:34Z","c":"coop-name-clash: guest applies a host order relayed inside the week at her next render (as a sync); site rebuilt","b":"ce200a958869","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -83513,7 +83513,7 @@ function nmRewrite(old,neu,protect){if(!old||old===neu)return 0;const re=new Reg
  const rk=new RegExp("(?<![\\p{L}])"+nmEsc(old)+"(?![\\p{L}\\p{N}])","u");/* keys like S.rcpK "v12<name>" */const P=(protect||[]).filter(p=>p&&p!==old&&p.indexOf(old)>=0&&nmBare(p)!==old)/* review r1: never protect the renamed person's own titled name ("Thị vệ X", "Công chúa X"), else her titled texts were never rewritten */.sort((a,b)=>b.length-a.length);let n=0;const seen=new Set();
  const fix=s=>{if(s.indexOf(old)<0)return s;let t=s;P.forEach((p,i)=>{t=t.split(p).join("\u0001"+i+"\u0001")});const u=t.replace(re,()=>{n++;return neu});
   return P.length?u.replace(/\u0001(\d+)\u0001/g,(m,i)=>P[+i]):u};
- const walk=o=>{if(!o||typeof o!=="object"||seen.has(o)||o===S.nmReg)return;seen.add(o);/* the registry keeps old names: never rewritten */
+ const walk=o=>{if(!o||typeof o!=="object"||seen.has(o)||o===S.nmReg||o===S.nmOrd)return;seen.add(o);/* the registry keeps old names: never rewritten; nor the host's rename orders (coop-name-clash: her seat rewrote its own copy of an order, o became n) */
   if(Array.isArray(o)){for(let i=0;i<o.length;i++){const v=o[i];if(typeof v==="string")o[i]=fix(v);else walk(v)}return}
   for(const k of Object.keys(o)){const v=o[k];if(typeof v==="string")o[k]=fix(v);else if(v&&typeof v==="object")walk(v);
    if(k.indexOf(old)>=0){const k2=k.replace(rk,neu);if(k2!==k){if(!(k2 in o)){o[k2]=o[k];delete o[k]}else if(typeof o[k]==="number"&&typeof o[k2]==="number"){o[k2]=Math.max(o[k2],o[k]);delete o[k]}}}}};/* keys too (S.rcpK "v12<name>") */
@@ -83573,12 +83573,14 @@ function nmOrder(e){const pid=nmPidF();if(!pid||!e.fp)return;S.nmOrd=S.nmOrd&&ty
 function nmOrdPrune(){try{const O=S.nmOrd;if(!O||typeof O!=="object")return;const W=window.COOPW;if(!W||!W.on){delete S.nmOrd;return}const P=nmFrBlob(),pid=String(nmPidF());
  for(const k of Object.keys(O)){if(k!==pid||!P){delete O[k];continue}/* done (her blob shows the new name), or her person is gone (rebirth): dropped */
   O[k]=(Array.isArray(O[k])?O[k]:[]).filter(z=>{const o=nmAt(P.S,z.p);return !!(o&&nmBare(o.name)===z.o)});if(!O[k].length)delete O[k]}}catch(e){}}
+/* the other player's own people from the room's P (on the guest too: the host at home is not on her stage, yet she holds her name) */
+function nmOtherHeld(b){try{const W=window.COOPW;const P=W&&W.on&&W.base&&W.base.P&&W.base.P[W.seat==="a"?"b":"a"];return P&&P.S&&!P.dead?nmPers(P.S).filter(e=>nmBare(e.o.name)===b).length:0}catch(e){return 0}}
 /* GUEST: apply the host's orders for her own people (idempotent: a person already renamed is skipped) */
 const NM_ORD={applied:0,last:null};
 function nmOrdApply(why){try{const O=S&&S.nmOrd;const L=O&&O[nmPidMe()];if(!Array.isArray(L)||!L.length)return 0;let n=0;const mine=nmPers(S);
-  for(const z of L){let o=nmAt(S,z.p);if(!o||nmBare(o.name)!==z.o){const e=mine.find(m=>nmBare(m.o.name)===z.o);o=e?e.o:null}if(!o)continue;
+  for(const z of L){if(!z||!z.o||z.o===z.n)continue;let o=nmAt(S,z.p);if(!o||nmBare(o.name)!==z.o){const e=mine.find(m=>nmBare(m.o.name)===z.o);o=e?e.o:null}if(!o)continue;
    const raw=String(o.name),b=nmBare(raw),pre=raw.slice(0,raw.length-b.length);o.name=pre+z.n;n++;
-   const held=nmPeople().filter(e=>nmBare(e.o[e.f])===z.o).length;if(!held)nmRewrite(z.o,z.n,nmPeople().map(e=>String(e.o[e.f])))/* her texts follow when no one else here holds the old name */}
+   const held=nmPeople().filter(e=>nmBare(e.o[e.f])===z.o).length+nmOtherHeld(z.o);if(!held)nmRewrite(z.o,z.n,nmPeople().map(e=>String(e.o[e.f])))/* her texts follow when no one else here holds the old name */}
   if(n){NM_ORD.applied+=n;NM_ORD.last={why:why||"",n}}return n}catch(e){console.error("nmOrdApply",e);return 0}}
 /* a NEW LIFE (first character, rebirth, either seat) is a draft until it enters the room: every person of it whose full name is already
    held in the room's world C (NPCs, their servants and children, court, men, the other player and her people, every name ever given:
@@ -85187,7 +85189,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e23687dd01da";window.CTM_BUILD=BUILD;
+const BUILD="ce200a958869";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

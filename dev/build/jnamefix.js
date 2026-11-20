@@ -13,7 +13,7 @@ function nmRewrite(old,neu,protect){if(!old||old===neu)return 0;const re=new Reg
  const rk=new RegExp("(?<![\\p{L}])"+nmEsc(old)+"(?![\\p{L}\\p{N}])","u");/* keys like S.rcpK "v12<name>" */const P=(protect||[]).filter(p=>p&&p!==old&&p.indexOf(old)>=0&&nmBare(p)!==old)/* review r1: never protect the renamed person's own titled name ("Thị vệ X", "Công chúa X"), else her titled texts were never rewritten */.sort((a,b)=>b.length-a.length);let n=0;const seen=new Set();
  const fix=s=>{if(s.indexOf(old)<0)return s;let t=s;P.forEach((p,i)=>{t=t.split(p).join("\u0001"+i+"\u0001")});const u=t.replace(re,()=>{n++;return neu});
   return P.length?u.replace(/\u0001(\d+)\u0001/g,(m,i)=>P[+i]):u};
- const walk=o=>{if(!o||typeof o!=="object"||seen.has(o)||o===S.nmReg)return;seen.add(o);/* the registry keeps old names: never rewritten */
+ const walk=o=>{if(!o||typeof o!=="object"||seen.has(o)||o===S.nmReg||o===S.nmOrd)return;seen.add(o);/* the registry keeps old names: never rewritten; nor the host's rename orders (coop-name-clash: her seat rewrote its own copy of an order, o became n) */
   if(Array.isArray(o)){for(let i=0;i<o.length;i++){const v=o[i];if(typeof v==="string")o[i]=fix(v);else walk(v)}return}
   for(const k of Object.keys(o)){const v=o[k];if(typeof v==="string")o[k]=fix(v);else if(v&&typeof v==="object")walk(v);
    if(k.indexOf(old)>=0){const k2=k.replace(rk,neu);if(k2!==k){if(!(k2 in o)){o[k2]=o[k];delete o[k]}else if(typeof o[k]==="number"&&typeof o[k2]==="number"){o[k2]=Math.max(o[k2],o[k]);delete o[k]}}}}};/* keys too (S.rcpK "v12<name>") */
@@ -73,12 +73,14 @@ function nmOrder(e){const pid=nmPidF();if(!pid||!e.fp)return;S.nmOrd=S.nmOrd&&ty
 function nmOrdPrune(){try{const O=S.nmOrd;if(!O||typeof O!=="object")return;const W=window.COOPW;if(!W||!W.on){delete S.nmOrd;return}const P=nmFrBlob(),pid=String(nmPidF());
  for(const k of Object.keys(O)){if(k!==pid||!P){delete O[k];continue}/* done (her blob shows the new name), or her person is gone (rebirth): dropped */
   O[k]=(Array.isArray(O[k])?O[k]:[]).filter(z=>{const o=nmAt(P.S,z.p);return !!(o&&nmBare(o.name)===z.o)});if(!O[k].length)delete O[k]}}catch(e){}}
+/* the other player's own people from the room's P (on the guest too: the host at home is not on her stage, yet she holds her name) */
+function nmOtherHeld(b){try{const W=window.COOPW;const P=W&&W.on&&W.base&&W.base.P&&W.base.P[W.seat==="a"?"b":"a"];return P&&P.S&&!P.dead?nmPers(P.S).filter(e=>nmBare(e.o.name)===b).length:0}catch(e){return 0}}
 /* GUEST: apply the host's orders for her own people (idempotent: a person already renamed is skipped) */
 const NM_ORD={applied:0,last:null};
 function nmOrdApply(why){try{const O=S&&S.nmOrd;const L=O&&O[nmPidMe()];if(!Array.isArray(L)||!L.length)return 0;let n=0;const mine=nmPers(S);
-  for(const z of L){let o=nmAt(S,z.p);if(!o||nmBare(o.name)!==z.o){const e=mine.find(m=>nmBare(m.o.name)===z.o);o=e?e.o:null}if(!o)continue;
+  for(const z of L){if(!z||!z.o||z.o===z.n)continue;let o=nmAt(S,z.p);if(!o||nmBare(o.name)!==z.o){const e=mine.find(m=>nmBare(m.o.name)===z.o);o=e?e.o:null}if(!o)continue;
    const raw=String(o.name),b=nmBare(raw),pre=raw.slice(0,raw.length-b.length);o.name=pre+z.n;n++;
-   const held=nmPeople().filter(e=>nmBare(e.o[e.f])===z.o).length;if(!held)nmRewrite(z.o,z.n,nmPeople().map(e=>String(e.o[e.f])))/* her texts follow when no one else here holds the old name */}
+   const held=nmPeople().filter(e=>nmBare(e.o[e.f])===z.o).length+nmOtherHeld(z.o);if(!held)nmRewrite(z.o,z.n,nmPeople().map(e=>String(e.o[e.f])))/* her texts follow when no one else here holds the old name */}
   if(n){NM_ORD.applied+=n;NM_ORD.last={why:why||"",n}}return n}catch(e){console.error("nmOrdApply",e);return 0}}
 /* a NEW LIFE (first character, rebirth, either seat) is a draft until it enters the room: every person of it whose full name is already
    held in the room's world C (NPCs, their servants and children, court, men, the other player and her people, every name ever given:
