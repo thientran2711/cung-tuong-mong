@@ -102,13 +102,13 @@ function hdBoard(o){const B=BAL.hd,{C,G}=o,{g,W,H}=C;let stop=false,raf=0;const 
  C.cv.addEventListener("pointerdown",down);C.cv.addEventListener("pointermove",move);C.cv.addEventListener("pointerup",up);C.cv.addEventListener("pointercancel",up);
  function result(){const d=A?Math.hypot(pos[0]-A.x,pos[1]-A.y)/A.ed:9;let a=((ang-(A?A.ang:0))%360+540)%360-180;const q=hdQ(d,a,o.sk,o.lvF);
   return{q,info:{k:o.k,dx:A?+((pos[0]-A.x)/A.ed).toFixed(3):0,dy:A?+((pos[1]-A.y)/A.ed).toFixed(3):0,a:+a.toFixed(1)}}}
- function commit(){if(stop)return;const R=result();const vung=hdVung(R.q);const t=R.q>=B.pop[0]?"Hoa điền ngay ngắn giữa trán!":vung?"Dán vụng mất rồi":"Hơi lệch một chút";
+ function commit(){if(stop)return;const R=result();const vung=hdVung(R.q);const t=R.q>=B.pop[0]?NWB.POP.s3:vung?NWB.POP.bad:NWB.POP.s1;
   kg82Pop(pops,A?A.x:W/2,(A?A.y:H*.3)-G.fws*.12,t,vung?kg82Col("--red","#c23b22"):kg82Col("--good","#2d7a52"));
   /* r2 (owner OD 17/11 ~21:03Z "tôi gắn sao kệ tôi, nhưng mà kết quả cuối cùng thì nó vẫn sẽ là theo cái vị trí mà tôi muốn"): the result snaps to the
      forehead anchor; straight when good, the fixed vụng tilt when low — the same look every view then draws (hdFaceLayer) */
   if(A){pos=[A.x,A.y];ang=A.ang+(vung?B.vungA:0)}
   const a=o.box.querySelector(".kg82act");if(a)a.remove();setTimeout(()=>{stop=true;cancelAnimationFrame(raf);o.onEnd(R.q,R.info)},900)}
- const act=`<div class="kg82act"><button class="${kg82Btn(true)}" id="hdl">Nghiêng trái</button><button class="${kg82Btn(true)}" id="hdr">Nghiêng phải</button><button class="${kg82Btn()}" id="hdok">Dán</button></div>`;
+ const act=`<div class="kg82act">${NWB.btn("hdl","rotl",{label:"Nghiêng trái"})}${NWB.btn("hdr","rotr",{label:"Nghiêng phải"})}${NWB.btn("hdok","check",{alt:false,label:"Dán"})}</div>`;
  const old=o.box.querySelector(".kg82act");if(old)old.remove();o.box.insertAdjacentHTML("beforeend",act);
  $("hdl").onclick=()=>{ang-=B.rot};$("hdr").onclick=()=>{ang+=B.rot};$("hdok").onclick=commit;
  raf=requestAnimationFrame(frame);
@@ -173,7 +173,7 @@ function kgHoaDien(box,env){const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style
  function paint(gg){gg.fillStyle="#efe0c6";gg.fillRect(0,0,W,H);const bg=kg82Img("chai-bg");if(bg.complete&&bg.naturalWidth)gg.drawImage(bg,G.bg.x,G.bg.y,G.bg.s,G.bg.s);
   gg.save();gg.beginPath();gg.ellipse(G.mx,G.my,G.rx,G.ry,0,0,Math.PI*2);gg.clip();gg.fillStyle="#d9c7a3";gg.fillRect(G.mx-G.rx,G.my-G.ry,G.rx*2,G.ry*2);
   if(face.complete&&face.naturalWidth)gg.drawImage(face,G.img.x,G.img.y,G.img.w,G.img.h);gg.restore();
-  gg.font=`700 15px ${kg82Col("--display","serif")}`;gg.textAlign="center";gg.fillStyle=kg82Col("--ink","#2a1a12");kg82Lbl(gg,run?"Kéo hoa điền vào giữa trán, nghiêng cho cân":"Đang soi gương…",W/2,22,W-20)}
+  }
  /* wait for THIS face's points (like the makeup board), then the board; no points after BAL.toil.meshWait → the face-box anchor */
  function wait(now){if(stop)return;let m=null;try{m=MK_FIT.get(file)}catch(e){}if(m||now-t0>BAL.toil.meshWait){let sk=0;try{sk=toilSkill().sk}catch(e){}
    run=hdBoard({C,G,file,box,k,sk,lvF:hdLvF(env.lv),seed:wdHash(k+":"+Date.now()),paint,onEnd:q=>{if(!stop){stop=true;env.end(Math.round(q*100)/10)}}});return}

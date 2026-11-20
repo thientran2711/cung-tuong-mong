@@ -26,6 +26,8 @@ function nwTier(kind,env){/* review/mg-train: one helper for the whole no-word f
 const nwP=(a,t)=>a[Math.min(t,a.length-1)];
 const NWC={ink:"#2a1a12",paper:"#fffdf6"};
 function nwBtn(box,id,text,sub){return k91Btns(box,[[id,text,sub]])}
+/* mg-noword-b: the hint button is an icon (no word in play); same box (.kg82act) + id as before */
+function nwHintBtn(box){const d=document.createElement("div");d.className="kg82act";d.innerHTML=NWB.btn("nwhint","hint",{cls:"kgbtn",label:"Gợi ý: chỉ chỗ đúng, bớt một ít phần"});box.appendChild(d);return d}
 
 /* ================= 1. CALLI (Thơ → thư pháp): trace numbered brush strokes in order ================= */
 /* glyph = [name, strokes]; stroke = 2 points (straight) or 3 points (quadratic curve); unit square */
@@ -44,7 +46,7 @@ function nwCalli(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const T=BAL.nw
  const toC=([u,v])=>[ox+u*S0,oy+v*S0];
  const bez=(P,t)=>P.length===2?[P[0][0]+(P[1][0]-P[0][0])*t,P[0][1]+(P[1][1]-P[0][1])*t]:[(1-t)*(1-t)*P[0][0]+2*(1-t)*t*P[1][0]+t*t*P[2][0],(1-t)*(1-t)*P[0][1]+2*(1-t)*t*P[1][1]+t*t*P[2][1]];
  const sample=P=>{const out=[];let pr=null;for(let k=0;k<=400;k++){const p=toC(bez(P,k/400));if(!pr||k91Dist(p[0],p[1],pr[0],pr[1])>=4||k===400){out.push(p);pr=p}}return out};
- const hb=nwBtn(box,"nwhint","Gợi ý","chỉ nét cần làm, bớt một ít phần");
+ const hb=nwHintBtn(box);
  const dm=k91DemoCard(box,"nwcalli",{title:"CÁCH CHƠI: ĐỒ NÉT THƯ PHÁP",done:()=>{hb.hidden=false;t0=tAct=performance.now()},
   lines:["Đặt ngón tay ở chấm xanh có số, kéo theo nét mờ đến hết nét rồi nhấc tay.","Làm lần lượt nét 1, nét 2, nét 3… như người viết chữ. Giữ bút trong vệt mờ thì nét đẹp và đều.","Chưa thấy nét nào thì chạm Gợi ý, chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const x0=W/2-70,y0=82,x1=W/2+70,y1=82;g.save();g.lineCap="round";g.strokeStyle="#8a735040";g.lineWidth=18;g.beginPath();g.moveTo(x0,y0);g.quadraticCurveTo(W/2,y0-18,x1,y1);g.stroke();
@@ -60,15 +62,15 @@ function nwCalli(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const T=BAL.nw
   for(const q of U){let bj=-1,bd=tol*tol;for(let j=Math.max(0,idx);j<Math.min(G.length,Math.max(idx,0)+look);j++){const d=(G[j][0]-q[0])**2+(G[j][1]-q[1])**2;if(d<=bd){bd=d;bj=j}}
    if(bj>=0){hit++;if(bj>idx)idx=bj}else miss++}
   const first=k91Dist(U[0][0],U[0][1],G[0][0],G[0][1])<=tol*2.6;const prog=(idx+1)/G.length,acc=hit/Math.max(1,hit+miss);return Math.max(0,Math.min(1,prog*Math.pow(acc,T.accPow)*(first?1:.7)))}
- function endGlyph(){phase="judge";while(sc.length<F.ns)sc.push(0);/* review/mg-tune: × the time part (jmgt mgPace, ONE CORE) */const s=Math.max(0,sc.reduce((a,b)=>a+b,0)/F.ns-cost)*mgPace(env,"tho",performance.now()-t0,LIM);sum+=s;const w=s>=.85?"Nét thần!":s>=.65?"Nét vững":s>=.4?"Tạm được":"Nét run";
-  F.say=[`${F.n}: ${w}`,s>=.65?K91C.good():s>=.4?K91C.gold():K91C.red()];setTimeout(next,1300)}
- function hint(auto){if(phase!=="play"||(dm&&dm.on)||si>=F.ns)return;const now=performance.now();glow=now+(auto?5000:6500);tAct=now;if(!auto){cost+=T.hintCost;tip={t:`Nét ${si+1}: bắt đầu ở chấm xanh, đi theo nét mờ`,c:K91C.gold(),until:now+3200}}}
+ function endGlyph(){phase="judge";while(sc.length<F.ns)sc.push(0);/* review/mg-tune: × the time part (jmgt mgPace, ONE CORE) */const s=Math.max(0,sc.reduce((a,b)=>a+b,0)/F.ns-cost)*mgPace(env,"tho",performance.now()-t0,LIM);sum+=s;const w=s>=.85?NWB.POP.s3:s>=.65?NWB.POP.s2:s>=.4?NWB.POP.s1:NWB.POP.bad;
+  F.say=[w,s>=.65?K91C.good():s>=.4?K91C.gold():K91C.red()];setTimeout(next,1300)}
+ function hint(auto){if(phase!=="play"||(dm&&dm.on)||si>=F.ns)return;const now=performance.now();glow=now+(auto?5000:6500);tAct=now;if(!auto){cost+=T.hintCost}}
  hb.querySelector("#nwhint").onclick=()=>hint(false);
  const stop=k91Loop(now=>{if(!F)return;if(dm&&dm.on){kg82Bg(g,W,H,"tho",.5,.7);dm.draw(g,W,H,now);env.hud({score:"0/10",round:`Hồi 1/${NR}`,time:"–"});return}
   const left=LIM-(now-t0);if(phase==="play"){if(left<=0)endGlyph();else if(nwP(T.idle,tier)&&now-tAct>nwP(T.idle,tier))hint(true)}
   kg82Bg(g,W,H,"tho",.5,.7);g.fillStyle="rgba(255,252,242,.66)";k91RR(g,ox-6,oy-6,S0+12,S0+12,8);g.fill();
   kg82Spr(g,"ve-inkstone",ox+S0-S0*.07,oy+S0-S0*.05,S0*.16,null,{alpha:.95});
-  if(phase==="judge"&&F.say)k91Say(g,F.say[0],F.say[1],ox,oy-12,W-ox-8,"left");else if(tip&&now<tip.until)k91Say(g,tip.t,tip.c,ox,oy-12,W-ox-8,"left");else{g.fillStyle="#3a2a1e";g.font=k91F(700,12,1);g.textAlign="left";g.textBaseline="alphabetic";kg82Lbl(g,(F.n+" · "+F.ns+" nét").toUpperCase(),ox,oy-12)}
+  if(phase==="judge"&&F.say)k91Say(g,F.say[0],F.say[1],ox,oy-12,W-ox-8,"left");else if(tip&&now<tip.until)k91Say(g,tip.t,tip.c,ox,oy-12,W-ox-8,"left");else{for(let q=0;q<F.ns;q++){g.fillStyle=q<si?K91C.good():"#8a735077";g.beginPath();g.arc(ox+7+q*18,oy-17,6,0,Math.PI*2);g.fill()}}
   /* the glyph: pale lane + dashed centre line, current stroke stronger; ghost bead (tier 0) or the hint glow runs along the current stroke */
   F.S.forEach((P,k)=>{g.save();g.lineCap="round";g.lineJoin="round";g.strokeStyle=k<si?"#8a735018":k===si?"#8a735044":"#8a735022";g.lineWidth=tol*2;g.beginPath();P.forEach(p=>g.lineTo(p[0],p[1]));g.stroke();
    g.strokeStyle=k===si?"#8a7350bb":"#8a735066";g.lineWidth=1.2;g.setLineDash([3,5]);g.beginPath();P.forEach(p=>g.lineTo(p[0],p[1]));g.stroke();g.restore();
@@ -100,7 +102,7 @@ function nwMark(g,type,cx,cy,s,mir,col,alpha){const P=nwDense(type).map(([x,y,w]
 function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.nw.doi,tier=nwTier("doi",env);
  const wide=W>=H*1.45,WL=wide?W*.6:W;const R=T.rows[Math.min(tier,T.rows.length-1)];const ND=nwP(T.decoy,tier);
  let r=-1,pts=0,tot=0,P=null,phase="",t0=0,drag=null,sel=null,done=false,tAct=0,tip=null;const pops=[];
- const hb=nwBtn(box,"nwhint","Gợi ý","chỉ nét cần đặt, bớt một ít phần");
+ const hb=nwHintBtn(box);
  const dm=k91DemoCard(box,"nwdoi",{title:"CÁCH CHƠI: ĐỐI NÉT BÚT",done:()=>{hb.hidden=false;t0=tAct=performance.now()},
   lines:["Hai bức liễn treo đối nhau: bức trái có nét bút, bức phải phải là hình lật gương của nét ấy, cùng hàng.","Kéo nét trong khay vào ô bên phải (hoặc chạm nét rồi chạm ô). Nét lật gương đúng thì ở lại, sai thì tự quay về.","Chưa thấy nét nào thì chạm Gợi ý, chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const cx=W/2,y=84,s=13;g.save();g.strokeStyle=K91C.hair;g.setLineDash([4,4]);g.beginPath();g.moveTo(cx,y-30);g.lineTo(cx,y+30);g.stroke();g.setLineDash([]);
@@ -122,18 +124,18 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
  function bounce(t){t.bk={x:t.x,y:t.y,a:performance.now()};t.at=null;t.x=t.hx;t.y=t.hy}
  const okFor=(t,i)=>t.mir&&t.type===P.rows[i];
  function place(t,i){const now=performance.now();tAct=now;if(P.fill[i]){bounce(t);return}
-  if(!okFor(t,i)){P.miss++;P.glow=null;tip={t:t.mir?"Chưa đối, nét này khác nét bên trái":"Chưa đối, nét này chưa lật gương",c:K91C.red(),until:now+2300};kg82Pluck(0,false);bounce(t);return}
+  if(!okFor(t,i)){P.miss++;P.glow=null;kg82Pop(pops,P.slots[i].x+P.slots[i].w/2,P.slots[i].y+P.slots[i].h/2,NWB.POP.bad,K91C.red());kg82Pluck(0,false);bounce(t);return}
   t.at=i;t.locked=true;P.fill[i]=t;t.x=P.slots[i].x;t.y=P.slots[i].y;P.glow=null;kg82Pluck(i,true);if(P.rows.every((_,k)=>P.fill[k]))setTimeout(()=>{if(phase==="play")judge()},350)}
- function hint(auto){if(phase!=="play"||(dm&&dm.on))return;const i=P.rows.findIndex((_,k)=>!P.fill[k]);if(i<0)return;const now=performance.now();P.glow={i,until:now+(auto?5000:6500)};tAct=now;if(!auto){P.cost+=T.hintCost;tip={t:"Nét đang sáng là hình lật gương của nét bên trái",c:K91C.gold(),until:now+3200}}}
+ function hint(auto){if(phase!=="play"||(dm&&dm.on))return;const i=P.rows.findIndex((_,k)=>!P.fill[k]);if(i<0)return;const now=performance.now();P.glow={i,until:now+(auto?5000:6500)};tAct=now;if(!auto){P.cost+=T.hintCost}}
  hb.querySelector("#nwhint").onclick=()=>hint(false);
  function judge(){phase="judge";const ok=P.rows.filter((_,k)=>P.fill[k]).length,nb=P.n;pts+=Math.max(0,ok-P.miss*T.miss-P.cost)*mgPace(env,"doi",performance.now()-t0,R[r]*nwP(T.sec,tier)*1000);/* review/mg-tune: time part */tot+=nb;
-  P.say=[ok===nb?(P.miss||P.cost?"Đối chỉnh!":"Đối chỉnh, không sai nét!"):`Đối được ${ok}/${nb} nét`,ok===nb?K91C.good():K91C.gold()];setTimeout(next,1500)}
+  P.say=[ok===nb?(P.miss||P.cost?NWB.POP.s2:NWB.POP.s3):`${ok}/${nb}`,ok===nb?K91C.good():K91C.gold()];setTimeout(next,1500)}
  function frame(g,x,y,w,h,st){k91Tile(g,x,y,w,h,"",st,14,"tho-slip")}
  const stop=k91Loop(now=>{if(!P)return;kg82Bg(g,W,H,"doi",.14,1);
   if(dm&&dm.on){dm.draw(g,W,H,now);env.hud({score:"0/10",round:`Hồi 1/${R.length}`,time:"–"});return}
   const left=R[Math.min(r,R.length-1)]*nwP(T.sec,tier)*1000-(now-t0);if(phase==="play"){if(left<=0)judge();else if(nwP(T.idle,tier)&&now-tAct>nwP(T.idle,tier))hint(true)}
   if(P.glow&&now>P.glow.until)P.glow=null;if(tip&&now>tip.until)tip=null;
-  g.textAlign="center";g.textBaseline="alphabetic";g.fillStyle="#5a3a0c";g.font=k91F(700,11,1);kg82Lbl(g,"VẾ RA",P.lx+P.ts/2,17);kg82Lbl(g,"VẾ ĐỐI",P.rx+P.ts/2,17);
+  g.textAlign="center";g.textBaseline="alphabetic";
   /* the two scrolls (paper strips) and the mirror axis between them */
   [P.lx,P.rx].forEach(x=>{g.save();g.fillStyle="rgba(255,252,242,.55)";k91RR(g,x-8,22,P.ts+16,P.n*P.rh+6,8);g.fill();g.strokeStyle=K91C.hair;g.lineWidth=1.4;g.stroke();g.restore()});
   g.save();g.strokeStyle="#c23b22aa";g.lineWidth=1.6;g.setLineDash([5,5]);g.beginPath();g.moveTo(P.axis,24);g.lineTo(P.axis,26+P.n*P.rh);g.stroke();g.restore();
@@ -141,7 +143,7 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
    if(!P.fill[i]){frame(g,s.x,s.y,s.w,s.h,"blank");if(nwP(T.ghost,tier)&&phase==="play")nwMark(g,t,s.x+s.w/2,s.y+s.h/2,s.w*.36,true,"#8a7350",.3)}
    if(P.glow&&P.glow.i===i&&phase==="play")k91Glow(g,s.x,s.y,s.w,s.h,now)});
   if(phase==="judge"&&P.say)k91Say(g,P.say[0],P.say[1],wide?WL/2:W/2,wide?H-8:P.trayY-10,(wide?WL:W)-16);else if(tip)k91Say(g,tip.t,tip.c,wide?WL/2:W/2,wide?H-8:P.trayY-10,(wide?WL:W)-16);
-  else{g.fillStyle="#5a3a0c";g.font=k91F(700,12,1);g.textAlign="center";kg82Lbl(g,"KHAY NÉT BÚT",wide?(WL+W)/2:W/2,wide?18:P.trayY-10,W-16)}
+  
   const pos=t=>{if(!t.bk)return[t.x,t.y];const k=Math.min(1,(now-t.bk.a)/280),e=1-Math.pow(1-k,3);if(k>=1){delete t.bk;return[t.x,t.y]}return[t.bk.x+(t.x-t.bk.x)*e,t.bk.y+(t.y-t.bk.y)*e]};
   const drawT=(t,x,y,st)=>{frame(g,x,y,t.w0,t.h0,st);nwMark(g,t.type,x+t.w0/2,y+t.h0/2,t.w0*.36,t.mir,NWC.ink)};
   P.tiles.forEach(t=>{if(t===drag)return;const [tx,ty]=pos(t);drawT(t,tx,ty,t.locked?"ok":t===sel?"on":"n");
