@@ -53,3 +53,6 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [HANDOVER.md:L89] - Think WITH the owner: for every idea she gives, weigh it and propose how (or whether) to do it; don't just obey blindly.
 [HANDOVER.md:L15] Owner: Victoria ("sếp"). Reply to her in Vietnamese only, as "em", short, no questions unless truly needed; she reads on a Samsung Galaxy Z Fold (inner ~1510x2000 portrait, cover ~904x2316). This is her standalone game, NOT Đại Hy (Đại Hy has its own main session; send any Đại Hy word of hers to MAIN 495 session_01Rc5AsLpa5TYV5oV2gBycQy via send_message).
 [OD:19/11 ~03:50Z] - Whenever the owner asks to SEE an animation, the main chat sends a REAL VIDEO (mp4 screen recording, Fold 755x1000 + iPad 1180x820), never still pictures, sheets or strips; main extracts and LOOKS at its frames first.
+
+## MORNING REPORT ON WAKE (owner 20/11 ~08:00Z real, OD row same time)
+[OD:20/11 ~08:00Z] - Owner silent in the main chat ≥ 2 h ⇒ she is asleep. Her FIRST message after that gap ⇒ answer with the MORNING REPORT at once: (1) GAP_LIST summary (dev/handover/GAP_LIST.md counts by type/size + which foreman took what), (2) everything landed while she slept (LIVE sha + one line each), (3) what each foreman B/C/D/E did / is doing, (4) anything waiting on her. Short Vietnamese, ends ~X% xong / ~Y% chơi được.
