@@ -62,7 +62,7 @@ for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on(
     if(rm&&rm[1][1]!=="follow"&&!["sleep","shift","nightw","errand","visit"].includes(rm[1][1])&&!/^ag_/.test(rm[1][1]))bad.push("T2 free close maid does not go first: "+rm[1].join(" | "));if(rm&&rm[1][1]!=="follow")note.push("T2b close maid not free in her own day: "+rm[1][1])}}
   else note.push("T2 skipped: no consort with a close maid + servants");
   /* T3: the player's picker (3 servants + close maid) */
-  S.rank=Math.max(S.rank,5);S.staff=S.staff||[];while(S.staff.length<3)S.staff.push(mkServ(S.staff.length%2?"eunuch":"maid"));try{j95sync(false,false)}catch(e){}
+  S.rank=Math.max(S.rank,5);/* jtc: the close one = her chosen thân cận (none at the start of a life); the test makes her personal maid it */S.thc="m:"+S.maid.name;S.staff=S.staff||[];while(S.staff.length<3)S.staff.push(mkServ(S.staff.length%2?"eunuch":"maid"));try{j95sync(false,false)}catch(e){}
   {const kh=j95kh();const ids=["mm:me"].concat(S.staff.map(s=>"s"+s.sid));const keep={};for(const id of ids)if(R.P[id])keep[id]=R.P[id].map(x=>x.slice());
    const opm=R.P.me.map(x=>x.slice());const pl0=S.place;S.place="home";for(let i=0;i<4;i++)R.P.me[i]=["home","rest",null,"ở cung"];
    /* her people: the close maid free, s0 free, s1 out on an errand, s2 asleep */
