@@ -1,4 +1,4 @@
-# NOEAR1 — no painted earrings on any woman (Foreman C ROOT-66, owner Lượt 1037, 20/11)
+# NOEAR1 — no painted earrings on any woman (Foreman C ROOT-66 → ROOT-67 session_01PEhRbxwtuTAkw2Fc6e7Enp, owner Lượt 1037, 20/11)
 depth 1 · START_CTX ≈ 3 % (get_session used_tokens read 0; own estimate) · 0 gens · 0 credits
 
 Owner (verbatim, 20/11 ~06:50Z): "Rồi, hoa tai ổn, ok nha. Vậy tiến hành làm hoa tai, bỏ hết, kiểm tra tất cả các cái prompt của tất cả mọi người, tất cả các bậc, không có bỏ sót bất kỳ một người nữ nào, bất kỳ một cái bậc nào, không ai được đeo hoa tai."
@@ -12,7 +12,8 @@ Owner (verbatim, 20/11 ~06:50Z): "Rồi, hoa tai ổn, ok nha. Vậy tiến hàn
 - Builders (earring words removed at the source, nothing else):
   - `t8-prompt-B/build.py` 75 → 0 earring words (t7/t8 head table ×32 "…jade pins, gold earrings;" → "…jade pins;", ×35 "necklace, earrings and bracelets" → "necklace and bracelets", ma ma/nữ quan tm3/tm4 pearl/jade earrings, foreign princesses tassel earrings, thiếu nữ hair "with small earrings", nhà nghèo "small pearl earrings"). `_legacy_master` returns "not the same" on an unknown old earring wording instead of crashing.
   - `store-all/build_all.py` 4 → 0 (Ba Tư veil sentences t1–t8 "teardrop pearl earrings").
-  - `t8-prompt-B/build_npc.py`: `female = gender(i) == "f"` (NPC Thái hậu h1–h3, girls kid-f01–f24 get it; eunuchs, officials, men, boys kid-p unchanged); its ledger verify passes the same flag.
+  - face-common/make_new_s62_65.py + make_c09_hand.py (F4, merged in while I worked) had an interim 'Bare earlobes … nothing at the ears.' line: now off (master_common.apply adds EAR_SENT); s62–s65 v5 + c09.v3h FULL re-made → STORE CHECK PASS; strip_ear also removes the interim line.
+- `t8-prompt-B/build_npc.py`: `female = gender(i) == "f"` (NPC Thái hậu h1–h3, girls kid-f01–f24 get it; eunuchs, officials, men, boys kid-p unchanged); its ledger verify passes the same flag.
   - `emperor-B/build.py`: `female=False` (Hoàng thượng unchanged).
   - nude-B/mk.py (Nữ đế), face-common face_gate (thiếu nữ faces), pastel maker: call `apply()` → inherit it, no code change.
 - Stored female prompts (master-era files used as the store): 285 files got EAR_SENT after M11 (face-common *.FULL/.txt 241 incl. pastel_L867 + season-tryon, nude-B/prompts 40, template-B 3, approved/proof m05_t8_a18_SL1 1). Word diff = only that sentence (none of them had earring words).
@@ -51,7 +52,7 @@ SNAPSHOT_RESULTS
 - `check_store.py --self`: 38 sentences, 20 banned, 0 problems (unchanged).
 
 ## Already drawn WITH earrings — NOT redrawn (owner decides)
-Checked the 107 local face crops (dev/art/face-common/face_page/faces, 300×340, the FACE_CUTS_L703 / 86-face picker faces) on 5 contact sheets. Rank figures (t1–t8, triều phục, states, Nữ đế, maids at rank) have no local copies → not looked at (would need a download; ask if wanted).
+Checked the 107 local face crops (dev/art/face-common/face_page/faces, 300×340, the FACE_CUTS_L703 / 86-face picker faces) on 5 contact sheets: dev/handover/review-sheets/noear1/faces_ears_0..4.jpg. Rank figures (t1–t8, triều phục, states, Nữ đế, maids at rank) have no local copies → not looked at (would need a download; ask if wanted).
 | id | picture | earring visible? |
 |---|---|---|
 | c07 c13 c18 c21 c30 | thiếu nữ face (v3 consort) | YES, clear drop earrings |
