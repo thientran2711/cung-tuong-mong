@@ -356,7 +356,11 @@ def plan(age="a18"):
     for name,mem in g["look_groups"]().items():
         mem=[c for c in mem if c in PEOPLE]
         if not mem: continue
-        A=group_angles(name,mem,age,[ang_class(x) for x in g["ANG14"]]); Gr=group_grace(name,mem,age)
+        cls=[ang_class(x) for x in g["ANG14"]]
+        old=[c for c in mem if c not in S_NEW_SET]   # FRUITPET2 (ROOT-69 BEFORE MASS (a)): s62/s64/s65 joined their owner groups (OWNER_GROUPS_L686) -> the people already in the group keep
+        A=group_angles(name,old,age,cls)              # EXACTLY their old angle plan; the newcomers are fitted into the free slots under the same E1/E12 caps (group_angles_add)
+        if len(old)<len(mem): A=group_angles_add(name,mem,old,age,cls,A)
+        Gr=group_grace(name,mem,age)
         for c in mem:
             for t in range(1,9):
                 a,pz,gr=P[(c,t)]; P[(c,t)]=(A[(c,t)],pz,Gr.get((c,t),gr))
@@ -423,6 +427,40 @@ def group_angles(name,mem,age,cls):
         return False
     assert go(0),("E12 angle plan not found",name,age,len(mem))
     return A
+def group_angles_add(name,mem,old,age,cls,A):
+    """FRUITPET2: extend the angle plan A of the old members by the newcomers (mem minus old) without touching A:
+    each newcomer 8 different (E1); each rank: each sentence / class within e12_caps of the FULL group (n = len(mem)). Seeded backtracking, deterministic."""
+    A0=dict(A); new=[c for c in mem if c not in old]; _,ca,cc=e12_caps(len(mem),cls)
+    cells=[(c,t) for c in new for t in range(1,9)]
+    # when the old plan leaves too few free slots (Dịu dàng a26: 15 usable for 16), a newcomer may repeat a sentence already used at that rank,
+    # as FEW times as possible (dup budget 0, 1, 2, ...); the old members never move. Such cells are listed in ANGLE_ADD_DUPS (report / E12 audit).
+    for dupmax in range(0,len(cells)+1):
+        A=dict(A0); nodes=[0]; dups=[]
+        def ok(c,t,v):
+            if any(A.get((c,u))==v for u in range(1,9)): return False
+            col=[A[(d,t)] for d in mem if (d,t) in A]
+            if sum(cls[x]==cls[v] for x in col)>=cc: return False
+            return col.count(v)<ca or (col.count(v)<ca+1 and len(dups)<dupmax)
+        def go(i):
+            if i==len(cells): return True
+            nodes[0]+=1
+            if nodes[0]>200000: return False
+            c,t=cells[i]; vals=list(range(len(cls))); _random.Random(f"E12-angle-add-{name}-{age}-{c}-{t}").shuffle(vals)
+            vals.sort(key=lambda v:[A[(d,t)] for d in mem if (d,t) in A].count(v))   # free sentences first
+            for v in vals:
+                if ok(c,t,v):
+                    d=[A[(x,t)] for x in mem if (x,t) in A].count(v)>=ca
+                    A[(c,t)]=v
+                    if d: dups.append((c,t))
+                    if go(i+1): return True
+                    del A[(c,t)]
+                    if d: dups.pop()
+            return False
+        if go(0):
+            if dups: ANGLE_ADD_DUPS[(name,age)]=list(dups)
+            return A
+    raise AssertionError(("E12 angle add not found",name,age,new))
+ANGLE_ADD_DUPS={}
 def group_grace(name,mem,age,K=8):
     """E12: Latin square over members (sorted) x 8 ranks: every person 8 different lines; member i uses row i % 8 -> every rank each line at most ceil(n/8) times."""
     R=_random.Random(f"E12-grace-{name}-{age}"); rp=list(range(K)); cp=list(range(K)); sp=list(range(K)); R.shuffle(rp); R.shuffle(cp); R.shuffle(sp)
@@ -573,6 +611,7 @@ def check(person,rank,age="a18",ref=None):
     if "Her face: . " in S:
         face=FACE_M.get(ALIAS.get(person,person),FACE_REF); S=S.replace("Her face: . ","Her face: "+face+(". " if not face.endswith(".") else " "),1)
     S=_clean_pose(S); S=apply_dedupe(ALIAS.get(person,person),rank,age,S); store(ALIAS.get(person,person),rank,age); S=_sec_slot(ALIAS.get(person,person),rank,S)   # Lượt 469: the pose slot may be re-picked (spec5 verbatim); Lượt 483 secondary slot
+    if not g_pets_allowed(rank,age): S=LAST_G["_PETS"].depet(S)   # FRUITPET2 (ROOT-69 (c)): the same F17 depet step as build(); without it the invariant FAILed wherever the picked pose was an old animal pose (m04/m42 t7, m01/m30 t8 a18)
     if stripped!=S: errs.append("F minus added sentences != store output (pose slot dedupe applied)")
     for x in add:
         if x not in F: errs.append("law sentence missing: "+x[:50])
