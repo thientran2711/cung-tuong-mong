@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3af6358e","t":"2026-11-20T02:05Z","c":"origin-arts: per-identity start arts (origin x story road) in BAL.orig.art; new game + mg upbringing read it","b":"a0d80fab4f9e","h":[{"s":"b7633b66+","t":"2026-11-19T23:50Z","c":"palace-chatter: CHAT_L topic hh-me (12 lines, Hoàng hậu to her; warm/cool/cold + season tags) — the only -me pair kind with no bank, so a H…"},{"s":"2f328213+","t":"2026-11-19T23:11Z","c":"coop-ptime-reds r1 (review): merge main 7bc73251 (B24 rank palette, colour only); index/sw/assets rebuilt by build_site.sh"},{"s":"66a26121+","t":"2026-11-19T22:49Z","c":"coop-ptime-reds r1 (review): her tap while her due-task tick (ptTickHer) is pending is HELD and sent after its answer (was refused busy = l…"},{"s":"2dd36abf+","t":"2026-11-19T22:36Z","c":"B24 fix: rank text on paintings / night panels uses the RCOL base (one accessor kitRankTone ground), paper keeps derived tone; rebuilt inde…"},{"s":"868c682c+","t":"2026-11-19T17:43Z","c":"runact-sv-fix: j29 hoist textually identical to review/coop-thin-f6-r1 (merges clean)"},{"s":"c8af1135+","t":"2026-11-19T14:36Z","c":"npc-purpose G1 #14: build line"},{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"}]};
+window.CTM_BI={"s":"4ef9d044","t":"2026-11-20T02:18Z","c":"origin-arts: cnv roads equal in training points (law 2); measure script; test checks equal points","b":"24717f876c0a","h":[{"s":"b7633b66+","t":"2026-11-19T23:50Z","c":"palace-chatter: CHAT_L topic hh-me (12 lines, Hoàng hậu to her; warm/cool/cold + season tags) — the only -me pair kind with no bank, so a H…"},{"s":"2f328213+","t":"2026-11-19T23:11Z","c":"coop-ptime-reds r1 (review): merge main 7bc73251 (B24 rank palette, colour only); index/sw/assets rebuilt by build_site.sh"},{"s":"66a26121+","t":"2026-11-19T22:49Z","c":"coop-ptime-reds r1 (review): her tap while her due-task tick (ptTickHer) is pending is HELD and sent after its answer (was refused busy = l…"},{"s":"2dd36abf+","t":"2026-11-19T22:36Z","c":"B24 fix: rank text on paintings / night panels uses the RCOL base (one accessor kitRankTone ground), paper keeps derived tone; rebuilt inde…"},{"s":"868c682c+","t":"2026-11-19T17:43Z","c":"runact-sv-fix: j29 hoist textually identical to review/coop-thin-f6-r1 (merges clean)"},{"s":"c8af1135+","t":"2026-11-19T14:36Z","c":"npc-purpose G1 #14: build line"},{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5950,7 +5950,7 @@ Object.assign(BAL,{orig:{ /* jorigins.js: Bac Dich (bd) origin numbers */
    its road (the j67 premise arc id, S.st.f14.road / an NPC's v.nr.r) → {art: bậc}. Keys: ARTS cam ky thi hoa vu y theu nau (S.arts) + tứ đức VIR cong dung
    ngon hanh (S.vir). "" = the origin's own row, used when the road is not known (an old save, an NPC without a road, F14 off) = the old one-art
    ORIGINS art (moved here, law 14). Read by j1 originArts → j2 start (her start arts) and jmgt mgOrgLv (the upbringing shift of an NPC of that identity).
-   Totals per origin (every road of one origin the same, law 2): tt nc bd 7 · ch dtq td 6 · muoi cn thd 5 · cnv 4. Reasons per art per road:
+   Totals per origin (every road of one origin the same bậc AND the same training points, law 2): tt nc bd 7 · ch dtq td 6 · muoi cn thd 5 · cnv 4. Reasons per art per road:
    dev/handover/reports/mg-fair-hands.md (handover branch), item (O). */
 Object.assign(BAL.orig,{art:{
  tt:{"":{cam:1},tt_co:{ky:2,cam:2,thi:2,dung:1},tt_oan:{thi:2,cam:2,ngon:2,hanh:1},tt_tranh:{cam:2,ky:2,hoa:2,ngon:1},tt_mat:{cam:2,dung:2,ngon:2,hoa:1}},
@@ -5962,7 +5962,7 @@ Object.assign(BAL.orig,{art:{
  td:{"":{thi:1},td_an:{thi:2,ngon:2,cam:1,ky:1},td_ke:{ky:2,hoa:2,thi:1,cam:1},td_song:{theu:2,hanh:2,thi:1,y:1},td_tha:{cam:2,hanh:2,thi:1,dung:1}},
  ch:{"":{dung:1},ch_co:{dung:2,ky:2,ngon:1,cam:1},ch_benh:{y:2,hanh:2,nau:1,dung:1},ch_ho:{vu:2,cam:2,dung:1,hoa:1},ch_bi:{thi:2,dung:2,ky:1,ngon:1}},
  thd:{"":{thi:1},thd_tho:{thi:2,hoa:1,cong:1,ngon:1},thd_sach:{thi:2,ky:1,hanh:1,cong:1},thd_tro:{thi:2,ngon:1,ky:1,nau:1},thd_hoc:{thi:2,ngon:1,hoa:1,hanh:1}},
- cnv:{"":{cong:1},cnv_chu:{cong:1,nau:1,y:1,ngon:1},cnv_ban:{theu:2,cong:1,hanh:1},cnv_mat:{cong:1,vu:1,dung:1,theu:1},cnv_ma:{cong:2,nau:1,dung:1}}}});
+ cnv:{"":{cong:1},cnv_chu:{cong:1,nau:1,y:1,ngon:1},cnv_ban:{theu:1,cong:1,hanh:1,nau:1},cnv_mat:{cong:1,vu:1,dung:1,theu:1},cnv_ma:{cong:1,nau:1,dung:1,hanh:1}}}});
 /* ONE CORE (OD:L1267): her household on the room stage (jhouse.js), Tứ đức works (jtds.js), Tứ đức lessons (jtd.js). Same values as before. */
 Object.assign(BAL,{
  house:{ /* jhouse.js: acts on a household servant's stage card */
@@ -81435,7 +81435,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a0d80fab4f9e";window.CTM_BUILD=BUILD;
+const BUILD="24717f876c0a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
