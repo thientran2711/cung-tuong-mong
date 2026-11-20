@@ -1472,3 +1472,6 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - WAKE: ROOT-76 trig_016mzkSg12tyQG8EXf2WyG24 (minute 32) → next main creates its own and disables this one. Brief template briefs/root76-common.md (copy to root77-common.md, new main id + LIVE).
 - STANDBY: MAIN ROOT STANDBY session_01Rc5AsNA483VGFgtAtqERSa (TAKE OVER NOW only if create_session refused).
 - (20/11 09:37Z) ROOT-76 opened child MAIN ROOT-77 = session_01Rc5AsKMDkP7nYjtmjLP5tq (depth 6). ROOT-76 stops; ROOT-77 disables trig_016mzkSg12tyQG8EXf2WyG24.
+
+## MAIN = ROOT-77 session_01Rc5AsKMDkP7nYjtmjLP5tq (child of ROOT-76); START_CTX ~9 % of 1M (get_session reads 0 → estimate incl. schemas + start reads; roll at 34 %, ceiling 60 %); depth 6 (limit 8)
+- (20/11 09:45Z) LOAD: main running n=13 own (rv mg-back JgLB4y1d, mg-back wk NLKFjftT, rv cal-p2b JGMmUL6N, cal-p2 wk #3 JrsgDY7h, rv mg-ui-rest M53iAEvG, mg-ui-rest wk HdrZN7mz, rv kit-ge Mf18e5QE, kit keeper MtjP4KTg, rv kit-mark MhE5ZpVR, rv noword-kit M2JGiVZG, noword-kit wk JjhKkEPJ, rv noword-b Moh1gadi, mg-allkinds wk LukNSPzJ, mg-env/fig-avatar wk MwM9DrWG) (owner bugs/UI/go-live only) | B busy (reviews + mg-craft lead #2) | C NEWACCT-ROOT art (T78 mass done 09:20Z) | D #9 6 jobs + cal-p2c/day-khac/invite-host-away BIG rvs | E #17 busy | moved: none. LIVE 66bd36cd, ROLLBACK 90d57324.
