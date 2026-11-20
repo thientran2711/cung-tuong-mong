@@ -383,7 +383,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | cal-p2c identity offset + rolling hand b (opus; ORDER ROOT-75 20/11 07:25Z; moved from C-AG #29 PART 2) | review/cal-p2c; briefs/D9-cal-p2c.md; reports/cal-p2c.md | D #9 for ROOT-75 | session_01964izF6sJHzxcBve2mGhvJ | RUNNING | 20/11 07:20Z |
 | gap-audit (opus; MAIN ROOT-75 brief briefs/root75-gap-audit.md; read-only; output dev/handover/GAP_LIST.md) | handover GAP_LIST.md | MAIN ROOT-75 | session_01Rc5AsLymU7eumr5TcMGb2s | DONE — GAP_LIST v2 (90 rows + LAND FIRST table) | 20/11 08:10Z |
 | mg-craft-hoa #2 (sonnet; successor of 5RwFKrAT at e8b6e7f9; merge scaffold 01114e27 + full tests) | review/mg-craft-hoa | B | session_01N1tNP5dR4zbum2tbzNH3qG | SẴN SÀNG KIỂM c0f9fbbc (report reports/mg-craft-hoa.md) | 20/11 08:50Z |
-| MAIN ROOT-76 (opus; child of ROOT-75, depth 5) | handover HANDOVER_SESSION9 | ROOT-75 | session_01Rc5AsN56DP1NgSYAwWFJ8o | RUNNING — PICKUP 07:50Z | 20/11 07:49Z |
+| MAIN ROOT-76 (opus; child of ROOT-75, depth 5) | handover HANDOVER_SESSION9 | ROOT-75 | session_01Rc5AsN56DP1NgSYAwWFJ8o | DONE → ROOT-77 session_01Rc5AsKMDkP7nYjtmjLP5tq | 20/11 07:49Z |
 | GAP OR03+OR04+OR05+OR07+OR10 home-chapters E25 (opus; MAIN ROOT-75 GAP order 07:47Z) | review/home-chapters; briefs/E25-home-chapters.md | FOREMAN E #17 | session_01DgYSWp2gHoP3TfWHtR31ES | SẴN SÀNG KIỂM 03c2cade (reports/home-chapters.md) | 20/11 08:44Z |
 | GAP OR16+OR18+OR20 road-triggers E26 (opus; MAIN ROOT-75 GAP order 07:47Z) | review/road-triggers; briefs/E26-road-triggers.md | FOREMAN E #17 | session_01DgYSWozJuxu58UajA1xzLD | RUNNING | 20/11 08:55Z |
 | GAP OR15 tut-road E27 (sonnet; finish review/tut-followups aa391edf; MAIN ROOT-75 GAP order 07:47Z) | review/tut-followups; briefs/E27-tut-road.md | FOREMAN E #17 | session_01DgYSWkVoq36pPMmqqz6m1u | RUNNING | 20/11 08:55Z |
@@ -423,3 +423,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-ge KIT KEEPER (sonnet; K-GE-1 kitBranchMap + K-GE-2 two-tone Thiên mệnh plate + K-GE-3 plate-label rows) | review/kit-ge; reports/kit-ge.md | MAIN ROOT-76 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5bbdf1ea | 20/11 09:10Z |
 | REVIEW kit-ge (SMALL kit sonnet) of 5bbdf1ea (K-GE-1/2/3) | review/kit-ge-rv; briefs/rv-root76-kit-ge.md | MAIN ROOT-76 | session_01Rc5AsMf18e5QE71CKAndhz | RUNNING | 20/11 09:28Z |
 | REVIEW outside-coop r1 (opus BIG; must run thin-level co-op) of 2c904461 | review/outside-coop-r1 | B | session_01N1tNP2SCHwhuKDqSe6NWh8 | RUNNING | 20/11 09:30Z |
+| MAIN ROOT-77 (opus; child of ROOT-76, depth 6) | handover HANDOVER_SESSION9 | ROOT-76 | session_01Rc5AsKMDkP7nYjtmjLP5tq | RUNNING | 20/11 09:34Z |
