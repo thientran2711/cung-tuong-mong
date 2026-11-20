@@ -607,7 +607,7 @@ body.kg82cf #modal{z-index:40}
 .kg82opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}.kg82opts button{min-height:48px;text-align:center;justify-content:center}
 .kg82quiz .kb{font-size:1rem}.kg82quiz .kpnote{min-height:1.3em;margin-top:8px}.kg82 .kfact small{display:block}.kg82 .kgrow>b{flex:none;white-space:nowrap;padding-left:6px}
 /* KIT §13.7 rules screen + guided round (mg-ready-guide); colours from the kit tokens only */
-.kg82.kg-ready .kghow,.kg82.kg-tut .kghow{display:none}
+.kg82 .kghow{display:none}/* owner OD 20/11 ~05:10Z: no text in play — the rules sentence lives on the rules screen (.kgr) and in «Hướng dẫn»; never above the board */
 .kgr{margin:0 0 6px}.kgr .kpst{margin-top:0}.kgr-note{margin:8px 0 2px}
 .kgr-demo{margin:8px auto 2px;max-width:340px}
 .kgr-st{position:relative;height:118px;border:1px solid var(--k-hair);border-radius:var(--k-rad,8px);overflow:hidden;background:var(--k-card) center/cover no-repeat}
@@ -680,3 +680,17 @@ const KG82_MGL={theu:["Thêu: nhớ mẫu thêu","theu"],nau:["Nấu nướng: c
 function kg82Lesson(k){const [t,kind]=KG82_MGL[k];return[t,KG82_KIND[kind].how,(b,lv,end)=>{b.innerHTML="";let stop=null,dead=false;KG82.ctx="hoc";const T=mgSet(kind,{occ:"hoc",lv}),L=BAL.mgTier.lesson;const env={kind,lv:T.ease,hud:()=>{},end:raw=>{KG82.peek=()=>null;raw=mgGrade(raw,kind);if(typeof mgIdRes==="function"){raw=mgIdRes(kind,raw);KG82.idNote=null}end(raw>=L[1]?3:raw>=L[0]?2:1)}};/* cal-p2c: a lesson is a real play too (identity offset + hand b, jmgid) */
  kg82Preload(kind).then(()=>{if(dead)return;try{stop=KG82_ENG[KG82_KIND[kind].e](b,env)}catch(e){console.error(e);end(1)}});return()=>{dead=true;if(stop)stop()}}]}
 (function(){if(typeof openMG!=="function"||typeof MG==="undefined")return;const o0=openMG;openMG=function(k){try{if(KG82_MGL[k])MG[k]=kg82Lesson(k)}catch(e){}return o0.apply(this,arguments)}})();
+
+/* KIT §13.x NO TEXT IN PLAY (owner OD 20/11 ~05:10Z: "không có một cái mini game nào mà có chữ hết trơn"): ONE kit pass over the live game frame, for every kind and caller.
+   Inside the play area (#kg82box and .kg82act; never the rules block .kgr, the guided bar .kgt-bar, the result .kgres) a button shows a SIGN (? hint, ✓ done, ↶ ↷ tilt, ♨ fan, ● other)
+   with its word kept only in the tooltip / aria-label, a `small` line is hidden, and a kit row (.krl label + sentence) is hidden when it holds no number, else only its number stays. */
+(function(){const SIGN=[[/Gợi ý/,"?"],[/Nghiêng trái/,"↶"],[/Nghiêng phải/,"↷"],[/Quạt/,"♨"],[/xong|Xong|Dâng|Dán|Nộp|Chấm/,"✓"]];
+ const inPlay=e=>e.closest("#kg82box,.kg82act")&&!e.closest(".kgr,.kgt-bar,.kgres");
+ function pass(){try{if(KG82.ready||KG82.phase==="tut"||KG82.tut||KG82.phase==="result"||KG82.phase==="intro"||document.querySelector("#kg82ok,#mgcal-copy,#mgcal-seq,#mgcal-x"))return;/* review fix: a result / intro / Thử tay screen is not play: its buttons keep their words */document.querySelectorAll(".kg82 button,#kg82box button,.kg82act button").forEach(b=>{if(!inPlay(b)||b.dataset.kgsign||/kgr|kgt/.test(b.id+" "+b.className)||b.id==="kg82go"||b.dataset.kgrLabel||b.closest(".kgr-bt,.kgr-acts,.kgrb"))return;const t=b.textContent.replace(/\s+/g," ").trim();if(!/\p{L}/u.test(t))return;
+   let s="●";for(const [re,g] of SIGN)if(re.test(t)){s=g;break}b.dataset.kgsign=s;if(!b.title)b.title=t;b.setAttribute("aria-label",t);b.textContent=s});
+  document.querySelectorAll("#kg82box small,.kg82act small").forEach(e=>{if(inPlay(e))e.hidden=true});
+  document.querySelectorAll("#kg82box .krl").forEach(l=>{if(!inPlay(l))return;const row=l.parentElement;if(!row||row.dataset.kgrow)return;row.dataset.kgrow=1;
+   const rest=row.textContent.replace(l.textContent,"");if(!/\d/.test(rest)){row.hidden=true;return}l.hidden=true;
+   const w=document.createTreeWalker(row,NodeFilter.SHOW_TEXT);const ns=[];let n;while(n=w.nextNode())if(!l.contains(n))ns.push(n);ns.forEach(x=>{if(!x.parentElement.closest("b")&&/\p{L}/u.test(x.nodeValue))x.nodeValue=x.nodeValue.replace(/[^\d\s\/]+/gu,"")})})}catch(e){}}
+ let q=0;try{new MutationObserver(()=>{if(q)return;q=setTimeout(()=>{q=0;pass()},30)}).observe(document.body,{childList:true,subtree:true})}catch(e){}
+ window.kg82Signs=pass})();
