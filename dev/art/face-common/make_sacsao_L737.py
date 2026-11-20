@@ -51,7 +51,7 @@ S737 = [
  "half-up: two thin twists from the temples joined at the back of the head under one small gold hairpin pointing upward, the rest long and sleek",
  "a light open beizi of soft burnt-sienna silk satin with a soft sheen over a cross-collar sage-grey inner top and a sage-grey floor-length skirt of plain silk, small embroidered pomegranate flowers along the front edges, a sage-grey silk sash with a small carnelian pendant, long sleeves",
  C("soft burnt sienna", 15, .45, .45), C("sage grey", 120, .66, .12),
- "walking with poise mid-step, a small red pomegranate held in one hand at her waist, the other sleeve flowing", "TR"),
+ "walking with poise mid-step, a small cobalt-blue silk lucky-knot charm with a short tassel held in one hand at her waist, the other sleeve flowing", "TR"),
 ("s45", 17, [("CRISP long almond eyes", "CRISP large almond eyes"),
              ("a slim straight nose with a fine high bridge", "a straight nose with a slightly arched high bridge"),
              ("clearly DEFINED OVAL face", "clearly DEFINED TEARDROP-OVAL face")],

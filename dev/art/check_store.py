@@ -13,7 +13,7 @@ Usage
   scope face = thiếu nữ face prompts (face-common mNN/cNN/sNN .FULL.txt, or a maker's stdout via prompt_file "-")
   --pid sNN (scope face): B20 root-hex check, her root pair only (MG3 L784 #6); every scope: prompt > 10 000 chars = FAIL (gen tool limit)
 MASTER BLOCK (owner B25, Lượt 745/766, MG1): in EVERY scope every sentence of dev/art/MASTER_COMMON.txt must be present verbatim exactly once
-NOFRUIT (owner Lượt 1052/1054, 20/11, rule F16): in EVERY scope a fruit word in a hold sentence (holding/held/cradling/carrying…) = FAIL; frozen: scope face --pid s44 (pomegranate) / s64 (loquats)
+NOFRUIT (owner Lượt 1052/1054, 20/11, rule F16): in EVERY scope a fruit word in a hold sentence (holding/held/cradling/carrying…) = FAIL; no exemption (drawn s44/s64 records in face-common/legacy_fruit/ FAIL if reused)
 NOEAR (owner Lượt 1037, 20/11, rule F15): in EVERY woman/girl scope (all but --scope emperor|men) master_common.EAR_SENT exactly once + NO earring word (earring, ear drop/pendant/stud, jewels at the ears, hoa tai…) = else FAIL
   (dev/art/master_common.py); missing / edited / doubled = FAIL "MASTER ...".
   python3 dev/art/check_store.py --self | --audit | --registry-md
@@ -829,20 +829,20 @@ HEX_RX = re.compile(r"#[0-9A-Fa-f]{6}\b")
 # trái cây ở bậc thiếu nữ rồi thì thôi kệ, đừng có vẽ lại, nhưng mà trong cái prompt mình nên sửa lại ở những bậc sau, cái đồ mà họ cầm tay là phải thay đổi."
 # Every scope: a fruit word in a HOLD sentence (holding / holds / held / cradling / carrying / hugging / in her hand) = FAIL. Colour words
 # (peach pink, apricot, orange…), blossoms (peach / plum / pear blossom), peach-wood, pomegranate flowers (embroidery) and face shapes are not fruit.
-# Frozen exception (already drawn, owner: keep, no redraw): the thiếu nữ face prompts of FRUIT_FROZEN (scope face + --pid).
+# Owner correction (Lượt 1058): "Không cầm trái cây là cho tất cả mọi người, tất cả mọi độ tuổi, chứ không phải là chỉ có độ tuổi 36 trở lên." -> NO exemption in any
+# prompt for a future gen. Already-drawn pictures stay (no redraw); their drawn prompts are kept as records in face-common/legacy_fruit/ (FRUIT_FROZEN) and FAIL if reused.
 FRUIT_FROZEN = {"s44": "small red pomegranate (s44.v5 Sắc sảo 79foGbpJAL + s44.qr Quyến rũ DoOgxICpcl)", "s64": "golden-orange loquats (s64.v5 JNChlRROq4, Lượt 1046)"}
 FRUIT_RX = re.compile(r"\b(?:fruits?|peach(?:es)?|pomegranates?|persimmons?|loquats?|lychees?|litchis?|longans?|grapes?|jujubes?|kumquats?|tangerines?|mandarin oranges?"
                       r"|citrons?|buddha'?s[- ]hands?|apples?|pears?|plums|cherries|melons?|gourds?|figs|dates|bananas?|mangoes|mangos?|trái cây|hoa quả|quả)\b"
                       r"(?![- ]?(?:blossoms?|flowers?|wood|pink|orange|cream|ivory|silk|colou?r|tone|tint|shade|coral|salmon|beige|gold|shaped|cheeks?|red|rose|blush|sorbet|ribbons?|sash|skirt|robe|top|trim|cord|tassels?|thread|satin|brocade|cotton|lining|border|hem|bow|apricot|doorway|door|window|arch))", re.I)
 HOLD_RX = re.compile(r"\bPose:|\b(?:hold(?:s|ing)?|held|cradl(?:es|ing)|carr(?:y|ies|ying)|hugg?(?:s|ing)|grips?|gripping|rais(?:es|ing)|lift(?:s|ing)|offer(?:s|ing)|present(?:s|ing)|show(?:s|ing)|tw(?:irl|irling|irls)|clasp(?:s|ing)?|(?:in|with) (?:her|his|one|both|each) hands?|in her palm|cầm|ôm|bưng)\b", re.I)
 def fruit_fails(text, scope=None, pid=None):
-    if scope == "face" and pid in FRUIT_FROZEN: return []
     out = []
     for sent in re.split(r"(?<=[.;])\s+", text):
         if not HOLD_RX.search(sent): continue
         for m in FRUIT_RX.finditer(sent):
             if NEG.search(sent[max(0, m.start() - 30):m.start()]): continue   # 'no fruit', 'never a peach' (a later 'never …' in the clause does not excuse it)
-            out.append(("F16", "NOFRUIT", f"fruit in a held item (owner Lượt 1052/1054: no fruit to hold, frozen only {', '.join(sorted(FRUIT_FROZEN))}): …{sent[max(0, m.start()-60):m.end()+30]}…")); break
+            out.append(("F16", "NOFRUIT", f"fruit in a held item (owner Lượt 1052/1054/1058: nobody holds fruit, any rank, any age): …{sent[max(0, m.start()-60):m.end()+30]}…")); break
         if out: break
     return out
 DEEP_COLOUR_RX = re.compile(r"\b(?:deep|dark|darker|deeper|dusky)[- ](?:blue|violet|blue-violet|purple|green|red|pink|rose|plum|teal|jade|navy|burgundy|crimson|wine|aubergine|lilac|lavender|aqua|aquamarine|turquoise|coral|peach|gold|yellow|orange|mint|periwinkle|emerald|sapphire|indigo|magenta|mauve|ochre|cyan|celadon|olive|maroon|scarlet|ruby|amber)\b", re.I)
@@ -996,7 +996,8 @@ def selftest():
                     ("Pose: holding a sprig of pink peach blossom; a round fan in soft peach pink silk; a carved peach-wood comb.", 0),
                     ("Pose: she holds a round jade longevity plaque carved with a round shou symbol.", 0), ("She holds nothing, no fruit in her hands.", 0)]:   # F16 NOFRUIT
         if bool(fruit_fails(norm(t))) != bool(want): print("NOFRUIT SELFTEST", want, t); bad += 1
-    if fruit_fails(norm(open(os.path.join(ART, "face-common", "s64.v5.FULL.txt"), encoding="utf-8").read()), "face", "s64"): print("NOFRUIT FROZEN s64 fails"); bad += 1
+    if fruit_fails(norm(open(os.path.join(ART, "face-common", "s64.v5.FULL.txt"), encoding="utf-8").read()), "face", "s64"): print("NOFRUIT s64 store still has fruit"); bad += 1
+    if not fruit_fails(norm(open(os.path.join(ART, "face-common", "legacy_fruit", "s64.v5.FULL.txt"), encoding="utf-8").read()), "face", "s64"): print("NOFRUIT legacy s64 record passes"); bad += 1
     print(f"registry self-test: {len(S)} sentences, {len(X)} banned, {bad} problem(s)"); return 1 if bad else 0
 
 
