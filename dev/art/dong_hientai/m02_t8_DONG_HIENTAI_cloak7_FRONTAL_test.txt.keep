@@ -4,3 +4,4 @@ allow: never side view   # frontal test, the 3/4 guard no longer applies
 allow: a clear THREE-QUARTER view toward the LEFT side of the picture   # frontal test
 allow: hips and face turned about 45 degrees so that her chest and face point toward the left edge of the picture   # frontal test
 allow: the shoulder on the picture's right side nearer the viewer   # frontal test
+allow: her whole body   # frontal test
