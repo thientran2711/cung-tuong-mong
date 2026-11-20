@@ -34,8 +34,9 @@ def keep(path, base, allows):
 def nhat():
     base = D + 'nhat_gpt.txt'
     t = open(base, encoding='utf-8').read()
+    # family fix (Foreman C 21:43Z, owner L1476): soft shoulder sentence instead of job-4 VEST_SHOULDER
     t = swap(t, 'with a band of gold-edged trim down the front, worn over the inner robe',
-             'with a band of gold-edged trim down the front, worn over the inner robe' + VEST_SHOULDER)
+             'with a band of gold-edged trim down the front, worn over the inner robe' + TC_SOFT_SHOULDER)
     t = t.rstrip() + CAP.format('Cung nữ nhất đẳng · Áo ghi lê cổ đứng + hai tà')
     out = D + 'nhat_gpt_v2.txt'
     open(out, 'w', encoding='utf-8').write(t)
@@ -193,7 +194,9 @@ def thancan3():
     base = D + 'thancan_gpt_v2.txt'
     t = open(base, encoding='utf-8').read()
     t = swap(t, TC_COLLAR_NEW, TC_R2_COLLAR + TC_SOFT_SHOULDER)
-    t = swap(t, 'the long sleeveless over-vest with its two front', 'the sleeveless over-vest with its two front')
+    t = swap(t, 'the long sleeveless over-vest with its two front panels (hai tà) and the WHOLE wide sleeves, blue all the way down, are',
+             'the sleeveless over-vest, the TWO separate soft front panels (hai tà) hanging from the waist and the wide LAYERED sleeves '
+             '(every soft layer of each sleeve, all the way down) are')
     out = D + 'thancan_gpt_v3.txt'
     open(out, 'w', encoding='utf-8').write(t)
     keep(out, base, [('a LONG sleeveless embroidered over-vest with a straight upright standing collar', 'owner L1475 round-2 collar; L1476 "LONG" made it a stiff coat'),
@@ -208,7 +211,9 @@ def thancan3():
                      ('slightly structured shoulders that keep a clean straight shoulder line and sit a little away from her shoulders', 'owner L1476'),
                      ('never clinging to or hugging the shoulder', 'owner L1476: -> not clinging to or hugging the shoulder'),
                      ('never padded or boxy', 'owner L1476: -> never stiff, padded, flat or board-like'),
-                     ('the long sleeveless over-vest with its two front panels', 'owner L1476: no LONG coat-like vest (round-1 words)')])
+                     ('the long sleeveless over-vest with its two front panels', 'owner L1476/L1477: no LONG coat-like vest, separate tà'),
+                     ('and the WHOLE wide sleeves', 'owner L1477: layered sleeves, not one solid sleeve (still all blue)'),
+                     ('blue all the way down', 'owner L1477: -> every soft layer of each sleeve, all the way down')])
     return out
 
 
