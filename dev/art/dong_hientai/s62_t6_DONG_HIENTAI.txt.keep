@@ -10,3 +10,7 @@ allow: sleeves and arms are clearly visible through it  # G28 winter fabric: opa
 allow: so it reads as a light airy veil of that hue  # G28 winter fabric: opaque shawl (W05) (owner L1421)
 allow: never an opaque solid band of colour  # G28 winter fabric: opaque shawl (W05) (owner L1421)
 allow: "Mùa Thu · Thiết kế hiện tại · Quý phi · Vân kiên cổ cuộn mây + cổ mở"  # season word Thu→Đông in caption (owner L1421)
+allow: PHI BẠCH (winter)  # owner L1439: 'Ok, quyết định là xóa phi bạch đi.' (winter only)
+allow: the shawl draped behind her back and over her arms  # same
+allow: no sheer floating scarf, stole, shawl or veil unless her outfit names one  # same
+allow: clearly different from her main robe colour ice blue  # part of removed PHI BẠCH sentence (owner L1439)
