@@ -299,6 +299,38 @@ HA_DONG_NGU = ("Hàm An cung Đông phối điện bedroom, the cosy bedchamber 
     + " Exactly two beds; only the two colours cream-ivory (curtains) and soft blue (fabrics)." + NOPE + RECT + GUIDE_S + BEDH4 + BEDW + FG)
 OUT['ham-an-cung-dong-phoi-ngu'] = dict(prompt=room9(HA_DONG_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M2X])
 
+# 16) Hàm An ĐÔNG phối reception — same pair as room 15 (ĐQ swapped: curtains cream-ivory, fabrics soft blue). THREE walls (room 15 = 2w),
+#     windows RIGHT (image 3 cpS5YIl0eP). Own layout: the begonia doorway at the LEFT end of the back wall; host seat = a luohan daybed with a
+#     kang table in the middle of the back wall's RIGHT two thirds before a large painted orchid-and-butterfly wall panel, a pair of yoke-rail
+#     armchairs at its two ends; left side wall = tall bookcase with scrolls; right windows = orchid stands + small writing desk. + CARD_HA + FR.
+HA_DONG_REC = ("Hàm An cung Đông phối điện reception room, the small sitting room where two lower-ranking imperial consorts (a Đáp ứng and a "
+    "Quý nhân) living in the east side hall of a palace in ancient China receive their guests, a real room in daily use, no bed anywhere, " + W3R
+    + ": wooden pillars, lattice windows in the RIGHT side wall onto a sunny garden; at the LEFT end of the back wall a key-fret lattice partition "
+    "with a four-lobed begonia-shaped doorway onto an inner room; in the middle of the RIGHT two thirds of the back wall, square to it and seen "
+    "straight on, the host seat, the large clear main subject: a luohan daybed of walnut-brown elm wood (a wide low carved daybed with a "
+    "three-sided panel back, a small low kang table with a tea set in its middle, flat silk cushions) before a large painted wall panel of orchids "
+    "and butterflies, with one armchair with a curved yoke-shaped top rail at each end of the daybed; against the left side wall a tall bookcase "
+    "with scrolls and books; along the right window wall a small writing desk with brushes and two tall stands with potted orchids; hanging paper "
+    "lanterns with tassels, a small incense burner. " + CARD_HA + "COLOURS BY OBJECT TYPE (owner Lượt 491, 766): ALL the curtains of the room are "
+    "cream-ivory like #EAE3D0 (the sheer window curtains tied back, the curtain of the doorway, the lantern tassels), and ALL the furniture fabrics "
+    "are soft blue like #7E9CCB (the daybed cushions, the chair cushions, the table runner). " + QN
+    + " Only the two colours cream-ivory (curtains) and soft blue (fabrics)." + NOPE + P['NOSOFA'] + RECT + GUIDE_S + FR)
+OUT['ham-an-cung-dong-phoi'] = dict(prompt=room9(HA_DONG_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3])
+
+# 17) Hàm An TÂY phối bedroom — pair Thường tại (t2) + Quý nhân (t3) swapped vs room 13: curtains soft green, fabrics soft blue. TWO walls,
+#     windows LEFT (room 16 = 3w right; image 3 8aiwqQTIrU). Own layout (owner L816 frontal, beds both ends; room 15 = doorway centre): centre of
+#     the back wall = a large round painted orchid panel above a dressing table with a round mirror and two stools; a tall cabinet beside it.
+#     + CARD_HA + BEDH4 + BEDW + FG.
+HA_TAY_NGU = ("Hàm An cung Tây phối điện bedroom, the cosy bedchamber SHARED by two lower-ranking imperial consorts (a Thường tại and a Quý nhân) "
+    "living in the west side hall of a palace in ancient China, a real room in daily use, " + WL2 + ": wooden pillars, lattice windows in the LEFT "
+    "side wall onto a sunny garden; against the back wall, square to it and seen straight on, TWO tall, WIDE, generous free-standing canopy frame beds "
+    "of carved walnut-brown elm wood, one at the LEFT end and one at the RIGHT end of the back wall, each on its own low bed step with slippers, each "
+    "bed whole in width inside the picture, together the large clear main subject; in the middle of the back wall between them a large round painted "
+    "panel of orchids and butterflies above a dressing table with a round bronze mirror and two low stools, and a tall slim lattice cabinet with "
+    "porcelain beside it; hanging paper lanterns with tassels, pots of orchids, a small embroidery basket. " + CARD_HA + pair_cols(2, 3) + QN
+    + " Exactly two beds; only the two colours soft green (curtains) and soft blue (fabrics)." + NOPE + RECT + GUIDE_S + BEDH4 + BEDW + FG)
+OUT['ham-an-cung-tay-phoi-ngu'] = dict(prompt=room9(HA_TAY_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M2X])
+
 # GATE (as v9): common block present, method refs, no drift words, no phoenix/yellow below t7.
 for k, v in OUT.items():
     p = v['prompt']
