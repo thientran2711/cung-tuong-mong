@@ -145,6 +145,15 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   ["m-plain",a=>{a.sac=10;a.tai=10;a.duc=10}],
   ["m-secret",a=>{const m=MST(a);if(!m)return;const v=liveRivals(true).find(x=>x!==m&&!x.out&&!x.queen);const X=SV(a);X.sec=Math.max(2,SRVA.accuse.sec||0);X.intel=v?[v.id]:[];if(v){oanAdd(v,m,60)}
     /* G1 #14: «Bẩm tin dò được» is told to the master face to face (jagstaff asOpts home): the news world has her at home, for both doers */mHome(a)}],
+  /* person-minigame-acts round B (20/11, the role-parity-drift-2 way): the palace men and the Hoàng hậu stand in the garden all day — her srvTalk «Chào hỏi
+     đúng lễ» / «Liếc mắt đưa tình» (a man where she is, j42 srvVisitOf ← S.menW) and «Tố cáo … trước Hoàng hậu» (sk hh) needed them at the place she
+     probes; before, they met her only by the seeded day plan (main: the Thái y viện), so any new NPC option (jpma) moved them away (N-ONLY maid:hail /
+     flirt / accuse). The same world for an NPC maid (her road to them is the agent plan). Restored by mSnap / mRest. */
+  ["m-meet",a=>{const X="vuon";S.where=S.where||{};S.menW=S.menW||{};const P=S.roster&&S.roster.P;const put=id=>{const e=P&&P[id];if(e)for(const x of e)if(Array.isArray(x))x[0]=X};
+    try{menInit()}catch(e){}for(const m of S.men||[])if(m.alive){S.menW[m.id]=X;put(m.id)}const q=queenP();if(q&&q!==S&&q!==MST(a)){S.where[q.id]=X;put("v"+q.id);
+     /* the Hoàng hậu has no roster rel: goTo re-places her by S.where (back to her palace, where a maid of another palace is not let in), so the
+        player side of this world reads the card she gets when the Hoàng hậu stands before her (the srvVisitOf person entry, sk "hh") — playerOnce */
+     window.__rpMeetHH=q;UNDO.push(()=>{window.__rpMeetHH=null})}}],
   ["m-emp",a=>{S.where=S.where||{};S.where.emp="vuon";const e=S.roster&&S.roster.P&&S.roster.P.emp;if(e)for(const x of e)if(Array.isArray(x))x[0]="vuon"}],
   ["m-lonely",a=>{if(a===S)S.srv.af={};else a.af={}}],
   /* role-parity-drift-2: a sour servant (her lòng with her master under BAL.eit.pil.loyal: S.tin for the player maid, loyal for an NPC maid) — the state
@@ -213,6 +222,8 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   for(const k of PLS()){richK(S);Q.length=0;const e0=S.ent;try{S.place="home";if(typeof j95sDay==="function")S.ent={d:j95sDay(),ids:[],at:k};goTo(k);Q.length=0}catch(e){E("goTo "+k,e)}finally{if(e0===undefined)delete S.ent;else S.ent=e0}
    for(const pp of (S.visit&&S.visit.people)||[]){try{for(const a of talkOpts(pp)||[])addP(role,a.n,"talk:"+pp.kind)}catch(e){E("talk "+pp.kind,e)}}}
   S.place="home";Q.length=0;
+  /* m-meet world: the Hoàng hậu before her (the same person entry j42 srvVisitOf builds: kind srv, sk hh) */
+  if(isSrv()&&window.__rpMeetHH){const q=window.__rpMeetHH;try{for(const a of talkOpts({kind:"srv",sk:"hh",ref:q,name:"Hoàng hậu "+q.name,ini:q.name.split(" ").pop()[0]})||[])addP(role,a.n,"talk:hh")}catch(e){E("talk hh",e)}}
   if(!isSrv()){for(let i=0;i<rivals.length;i++){const v=rivals[i];if(v===S)continue;try{for(const n of lab(rvCard(v,i)))addP(role,n,"rv")}catch(e){E("rv",e)}try{for(const a of topicOpts(v)||[])addP(role,a.n,"topic")}catch(e){E("topic",e)}}
    for(const f of ["staffTabHTML","staffHTML","facHTML","artTabHTML","invHTML","wkTabHTML","petPanelHTML","kidTabHTML"])try{for(const h of tabAll(f))for(const n of lab(h))addP(role,n,f)}catch(e){E(f,e)}
    /* B3: the item-detail menu (jinv kinvOpen: Dùng / Bán / Nghiệm độc / Tặng …) opens per item in a kit modal — read each item's buttons */
