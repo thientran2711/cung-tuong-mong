@@ -4,7 +4,7 @@
    (2) e68Cands: in lãnh cung only s.life==="cold" templates, as a servant only s.life==="srv"; those two families never fire elsewhere;
        s.life==="hh" only when she is Hoàng hậu (S.rank ≥ BAL.voice.hq) and not in lãnh cung. Palace follow-ups wait until she is back.
    (3) Every amount from BAL.eff.j68q (one core). Every option gains AND costs (law 3); the three options of a card trade different things (law 2).
-   (4) Real people only (law 6b): fallen consorts (rivals in lãnh cung), the one who framed her (S.framedBy), her kept staff and S.maid,
+   (4) Real people only (law 6b): fallen consorts (rivals in lãnh cung), the one who framed her (S.framedBy), S.maid (the one the lãnh cung household cap keeps),
        the Tổng quản (S.court.tq), her mistress (srvM) and the maids of that palace, consorts, Thái hậu, the court doctor.
    (5) Two-way (law 1): a fallen consort takes her rice ⇄ she can take a fallen consort's; the framer gloats over her in lãnh cung ⇄ she can
        visit a consort SHE sent there; a fellow maid takes her credit ⇄ she can take that maid's; she judges consorts as Hoàng hậu ⇄ a consort
@@ -26,7 +26,6 @@ function q6st(){const e=e68();e.q6=e.q6||{bias:[],skim:0};return e.q6}
 /* actors */
 function q6fallen(f){const L=rivals.filter(v=>v.alive&&v.out&&(!f||f(v)));return L.length?pick(L).id:null}
 function q6framer(){const k=S.framedBy;if(k==null||k==="me"||k==="emp"||k==="th")return null;const v=RV(k);return v&&v.alive&&!v.out?v.id:null}
-function q6kept(){const L=(S.staff||[]).filter(s=>s&&s.sid!=null);return L.length?pick(L).sid:null}
 function q6mate(){const m=q6srv()?srvM():null;const L=m?(m.staff||[]).filter(s=>s&&s.sid!=null&&s.role==="maid"):[];return L.length?pick(L).sid:null}
 function q6two(){const L=liveRivals(true).filter(v=>!v.confined);if(L.length<2)return null;const a=pick(L);const M=L.filter(v=>v!==a);const b=M.slice().sort((x,y)=>aff(y,a)-aff(x,a)).pop();return b?[a.id,b.id]:null}
 /* real proof for the queen's accuser: a biased ruling (the consort ruled against) or skimmed lục cung accounts */
@@ -58,7 +57,7 @@ EV6("q6coldGloat","visit",{life:"cold",cd:Q6().cd,a:["rv"],pp:()=>{const a=q6col
  o:X=>{const E=Q6();return[c6("Nhẫn nhục, dụ nàng lỡ lời",{c:{suc:-E.suc.s},p:q6od(E.od.gloat+S.tamco/E.dv),wt:[G6(evSg(E.ev,1))],lt:[R6("nàng kín miệng, chỉ cười")],l:{danh:-E.st.s},ok:()=>`${X.A.n} đắc ý lỡ lời về vụ án năm ấy.`+q6evAdd()}),
   c6("Mắng trả cho hả giận",{w:{suc:E.suc.s,sac:E.st.s},wt:[G6("hả giận")],r:[[X.A,-E.rel.l]],k:[R6("nàng oán thêm, còn ở ngoài kia")]}),
   c6("Quỳ xin nàng nương tay",{w:{suc:E.suc.m},r:[[X.A,E.rel.m]],k:[R6(`Danh -${E.st.m}`)],ok:()=>{apply({danh:-E.st.m});return `${X.A.n} hả hê bỏ đi.`}})]}});
-EV6("q6coldLetter","serv",{life:"cold",cd:Q6().cd,a:["sv"],pp:()=>{const a=q6cold()?q6kept():null;return a==null?null:{a0:a}},w:C=>Q6().w.mid,
+EV6("q6coldLetter","serv",{life:"cold",cd:Q6().cd,a:["maid"],pp:()=>q6cold()&&S.maid?{a0:0}:null,w:C=>Q6().w.mid,
  v:["{A} — người còn ở lại với ngươi — xin liều mang thư của ngươi ra ngoài.","{A} quen một thị vệ gác cổng; hắn chịu đưa tin, nhưng đòi bạc.","{A} lén nhặt được thuốc trị phong hàn rơi ở cổng sau, hỏi ngươi có dám dùng."],
  o:X=>{const E=Q6();return[c6("Nhờ đưa thư lên Hoàng thượng",{c:{bac:-E.bac.s},p:q6od(E.od.letter+(S.an||0)/E.dv),w:{sung:E.st.m,an:E.st.s},r:[[X.A,E.loy.s]],l:{suc:-E.suc.s},lr:[[X.A,-E.loy.m]],lt:[R6("thư bị lính gác thu")]}),
   c6("Giữ người ấy lại, không cho liều",{w:{suc:E.suc.s},r:[[X.A,E.loy.m]],k:[R6("bỏ lỡ dịp đưa tin")]}),

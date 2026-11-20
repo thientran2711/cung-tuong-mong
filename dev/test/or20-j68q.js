@@ -16,7 +16,7 @@ const {chromium}=require('playwright');const [,,URL,MON]=process.argv;const MONT
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}const t=document.getElementById('title');if(t)t.hidden=true;
   const m0=e68Make;e68Make=function(s){const d=m0.apply(this,arguments);if(d&&window.__F)window.__F.push([s.id,q6life(),S.rank]);return d};
   window.__setup=(kind)=>{quiet=true;window.__forceOrigin=kind==='srv'?'cnv':'tt';start();quiet=false;Q.length=0;
-   if(kind==='cold'){S.rank=5;cold("Bị vu thông dâm");S.coldRank=5;const v=liveRivals(false)[0];if(v)S.framedBy=v.id;const w=liveRivals(false)[1];if(w){w.out=true}}
+   if(kind==='cold'){S.rank=5;(S.staff||[]).forEach(x=>x.loyal=Math.max(x.loyal||0,BAL.loy.trust+10));cold("Bị vu thông dâm");S.coldRank=5;const v=liveRivals(false)[0];if(v)S.framedBy=v.id;const w=liveRivals(false)[1];if(w){w.out=true}}
    if(kind==='hh'){for(const v of rivals)v.queen=false;S.rank=BAL.voice.hq}
    if(kind==='pal'){S.rank=1}};
   window.__keep=(kind)=>{if(S.dead){S.dead=false;S.suc=60}if((S.age||0)>40)S.age=40;S.suc=Math.max(S.suc,40);
