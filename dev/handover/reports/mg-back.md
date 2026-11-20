@@ -41,3 +41,43 @@ hội thi give-up (ceremony then result) https://ctm-img.victoria-tntt.workers.d
 - While the give-up confirm is open the board keeps running (clock not paused); «Chơi tiếp» returns to the live board. Pausing would need an engine pause hook per family — left out to land fast.
 - j5 old lesson panel (openMG fallback, not the kg82 frame) not changed.
 - Free return (no give-up) is used only where nothing is charged before the end (Thử tay, Chải chuốt rules); every other caller gives up with its own lose result, per brief item 3.
+
+# r2 — reviewer FAIL 883aaa7a fixes (rv-mg-back.md @86ad3dfb; order MAIN ROOT-74)
+Branch **review/mg-back** = **7f7d467a** (r2 a0a98e66 + merge origin/main eb056f7b, clean).
+1. **jtd Tu đức**: rules ✕ = its own «Thôi, để lúc khác · không tốn gì» (`KG82.backPre=cancel`); nothing charged, no tdFinish.
+2. **Pre-charged callers → FREE back before «Sẵn sàng»** (KIT §13.9 step 0): `KG82.preBack` (set by the caller right before the frame opens) → `kg82Open` turns it into `KG82.backPre`, cleared by «Sẵn sàng» / any result / kg82Close. Undo = `kgSnap()` (S top-level fields that changed + khắc `used` put back exactly) + what the dialog option paid (material). Wired in: j83 wkAsk + **jwkr wkrMat (the live recipe picker overrides wkAsk — same go pattern, whole group)**, both reached by lessons (self / thầy / Thái hậu), practice and jrcp rcpMaster; jveil vlCraftRun; jsgame sgpick pay. **Found while testing:** jaudit already defers lesson costs (`__aaPend` / `S.mg.cost`, paid when the game reports) — a free back now drops that pending cost (jaudit rule (c) "closed unplayed costs nothing"), else every later lesson / act stayed blocked (`busy()`). jaudit works deck card («Tự học …» in Hành sự, cost only pending): back = card untaken, S.mg cleared.
+3. **jsgame result**: ✕ asks kit confirm «Ra tay?» («Ra tay» / «Ở lại»), never silent; «Ở lại» keeps the card, nothing runs.
+- Stake callers unchanged (give-up). jtoil/jmkt: khắc is spent entering the mirror; ✕ = its own existing «Để mộc» button (reviewer OK). jsmg: give-up = its free «Thôi» result (reviewer OK). j92 rules free back (unchanged).
+
+## r2 tests (merged build 7f7d467a)
+- `node dev/test/mg-back.js dev/index.html 755x1000` **PASS 11/11**, `1180x820` **PASS 11/11** (new: 6 free back per pre-charged caller — S + khắc identical, nothing left pending; 6b those callers really charged/held pending; 7 jsgame «Ra tay?»).
+- `mg-ready-guide.js` PASS 9/9; `ag-mgcal.js` all ok; no page errors.
+
+### Free-back scan (caller | charged/held before the frame? | rules ✕ | S + khắc after | pending left)
+| caller | charged before frame | rules ✕ | state | pending |
+|---|---|---|---|---|
+| jtd Tu đức (self) | no (pending/none) | free back: closed, no confirm | identical | none |
+| jtd Tu đức (thầy) | no (pending/none) | free back: closed, no confirm | identical | none |
+| j83 Tự học (bậc 5, vật liệu tốt) | yes | free back: closed, no confirm | identical | none |
+| j83 học: tự học | yes | free back: closed, no confirm | identical | none |
+| jrcp học với thầy | yes | free back: closed, no confirm | identical | none |
+| jrcp thầy dạy lối mới (bậc 5) | yes | free back: closed, no confirm | identical | none |
+| j83 thẻ Tự học (Hành sự) | yes | free back: closed, no confirm | identical | none |
+| jveil kết mạng (dây bạc) | yes | free back: closed, no confirm | identical | none |
+| jsgame mua chuộc (trả khắc) | yes | free back: closed, no confirm | identical | none |
+
+### Full scan table r2 (755x1000)
+| caller | rules ✕ | Hướng dẫn ✕ | play ✕ | result ✕ | rules ✕ goes to | play ✕ goes to | cost/stake effect |
+| startContest (hội thi) | ✕ | ✕ | ✕ | ✕ | confirm → own result: Màn thiVụng 0/10 → +0Tài 64+19Cầm bậc 1+9Tổng28 ph | confirm → own result: Màn thiVụng 0/10 → +0Tài 64+19Cầm bậc 1+9Tổng28 ph | contest stake / place prizes → give up → last-place result (0/10 màn thi) |
+| playArt (học, tự học, tác phẩm) | ✕ | ✕ | ✕ | ✕ | confirm → own result: Màn chơi0/10 · VụngĐã hiểu | confirm → own result: Màn chơi0/10 · VụngĐã hiểu | callers that pre-charge (j83, jrcp, jveil) pass their undo → rules: free back with the charge undone (or give up when no undo); play: give up → «Màn chơi 0/10» |
+| jexam khảo hạch | ✕ | ✕ | ✕ | ✕ | confirm → own result: Môn 10/10 · VụngMôn kế tiếp | confirm → own result: Môn 10/10 · VụngMôn kế tiếp | exam subject → give up → this subject 0/10, exam goes on |
+| jentry tuyển chọn | ✕ | ✕ | ✕ | ✕ | confirm → own result: Màn chơi0/10 · VụngKết quảtính cùng Sắc, Tài, ĐứcĐ | confirm → own result: Màn chơi0/10 · VụngKết quảtính cùng Sắc, Tài, ĐứcĐ | entry exam → give up → 0/10 |
+| jslap Tát / Né | ✕ | ✕ | ✕ | ✕ | confirm → own result: Kết quảTay nhẹĐã hiểu | confirm → own result: Kết quảTay nhẹĐã hiểu | slap stake → give up → 0/10 lose result |
+| jtd Tu đức | ✕ | ✕ | ✕ | ✕ | closed (back) | confirm → own result: Màn chơi0/10 · VụngMục đíchĐường kim đều và đúng m | nothing before tdFinish → rules: free back = its «Thôi, để lúc khác»; play: give up → 0/10 |
+| jts Hoàng thượng triệu | ✕ | ✕ | ✕ | ✕ | confirm → own result: Màn chơi0/10 · VụngĐã hiểu | confirm → own result: Màn chơi0/10 · VụngĐã hiểu | the summons → give up → 0/10 lose |
+| jsgame mưu kế | ✕ | ✕ | ✕ | ✕ | confirm → own result: Phần chơiVụng · 0/10Vụng về: cơ may xuống một bậc. | confirm → own result: Phần chơiVụng · 0/10Vụng về: cơ may xuống một bậc. | pay (khắc / bạc) at the choice → rules: free back, pay undone (sgpick); play: give up → 0/10 odds; result ✕ asks «Ra tay?» |
+| jroute Nghiệm thân | ✕ | ✕ | ✕ | ✕ | confirm → own result: Ra taybị nhìn thấyNgười canh3 ngườiCó người đã thấ | confirm → own result: Ra taybị nhìn thấyNgười canh3 ngườiCó người đã thấ | the trick → give up → «bị nhìn thấy» |
+| j92 Chải chuốt | ✕ | ✕ | ✕ | ✕ | closed (back) | confirm → own result: Trâm càiTrâm ngọc bíchY phụcVáy sa xanh ngọcKim dừ | spend(1) only at the end → rules: straight back (nothing spent); play: give up → «quá giản dị» (the timeout rule) |
+| Thử tay (mgcal) | ✕ | ✕ | ✕ | ✕ | kind list, no confirm | confirm → kind list | nothing at stake; kind not saved |
+
+Shots (looked): «Ra tay?» https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/scheme-raytay-755x1000.webp · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/scheme-raytay-1180x820.webp (earlier r1 shots still in the same folder).
