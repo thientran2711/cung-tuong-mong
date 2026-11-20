@@ -1087,11 +1087,12 @@ CAPE6_TWO=r"an embroidered \1 cloud collar (yunjian) over the shoulders with a s
 # SWAP56 (owner 20/11 L1266): Quý phi now carries the Phi's old cloud collar (yunjian); pearl edge stays with Quý phi
 CAPE5_TWO="TWO layered embroidered SHORT shoulder capes, one over the other (upper shorter, lower longer), never covering the neckline"
 # JOB 3 (owner Lượt 1312/1314, FINAL Lượt 1317 via Foreman C #5, reference dev/art/b26/s62_t5_v2.txt): Phi capes v2 = her main colour + gold-thread flower embroidery +
-# a row of small sewn-on pearls on each cape edge (the old Quý phi capes), no dangling tassels. 'peonies' -> her hair-flower species via
+# a row of small sewn-on pearls on each cape edge (the old Quý phi capes) + a short fringe of tiny pearl drops (Lượt 1321). 'peonies' -> her hair-flower species via
 # flower_outfit (owner Lượt 1303); people with no species keep peonies (Foreman rule).
 CAPE5_V2=("TWO layered embroidered {main} SHORT shoulder capes, one over the other (the upper cape shorter, the lower cape a little longer, both resting on the shoulders), "
-          "each cape richly embroidered in gold thread with small peonies, each edged with a row of small sewn-on pearls (exactly the old Quý phi capes), no dangling tassels, "
-          "never covering the neckline")   # FINAL wording owner Lượt 1317 (supersedes 1312/1314)   # SWAP56: Phi now carries the Quý phi's old TWO-layer short capes (pearl edge NOT moved: pearls stay Quý phi)
+          "each cape richly embroidered in gold thread with small peonies, each edged with a row of small sewn-on pearls (exactly the old Quý phi capes) "
+          "with a short fringe of tiny pearl drops dangling beneath each cape edge, a little richer than the Tần's pearl fringe and fewer than the Quý phi's drops, "
+          "never covering the neckline")   # owner Lượt 1321 (supersedes 1312/1314/1317)   # SWAP56: Phi now carries the Quý phi's old TWO-layer short capes (pearl edge NOT moved: pearls stay Quý phi)
 # LOWV1/LOWV2[cNN][t] = (robe main colour word, hex, lining word, hex), MEASURED (W79, 18/11) from the LIVE v1/v2 pictures
 # img/_review/consort-tiers/<cNN>/b10/<cNN>_a18_t<t>_v<1|2>.png : median RGB of the dominant non-neutral k-means cluster of the central torso/skirt band
 # (alpha>200, gold and near-black hair pixels gated out), lining = next distinct cluster. Foreman ruling: --low v1/v2 never use royal yellow (only the t6 small touch).
