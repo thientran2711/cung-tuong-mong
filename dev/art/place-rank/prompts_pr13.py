@@ -496,6 +496,90 @@ VH_DONG_NGU = ("Vĩnh Hòa cung Đông phối điện bedroom, the cosy bedchamb
     + BEDH4 + BEDW + FG)
 OUT['vinh-hoa-cung-dong-phoi-ngu'] = dict(prompt=room9(VH_DONG_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, TD])
 
+# ---- PR17 batch 6 (ROOT-62 01:16Z): (a) template-E rooms keep the alcove beds of room 5 (owner L24 'Mẫu D và E ok' approves E as drawn):
+#      BEDH4E = BEDH4 without its 'never beds set into a wall alcove' clause; the no-alcove clause stays for D rooms. (b) fixes asked by ROOT-62
+#      for NEW rooms (owner faults on 22/23/24): TAGZONE (no props on the name-tag strip), BEDSHOW (D beds not hidden behind the women),
+#      CAMELLIA (Vĩnh Hòa flowers read as peonies).
+BEDH4E = BEDH + (" Each bed is clearly taller than the standing women: its carved canopy crown runs out of the top edge of the picture, like the "
+    "walls and pillars; its gauze curtains hang from high up; the hanging lanterns hang only beside the beds, never in front of them; the two beds "
+    "are alcove canopy beds built into the carved back-wall partition, exactly as in image 3.")
+TPL_E = (" Image 3 is the owner's LAYOUT TEMPLATE for every two-bed room (owner L22, L24): copy its wall layout, camera distance, floor amount, "
+    "people scale AND its bed placement: the back wall seen straight on is a carved partition holding TWO alcove canopy beds, one in its left part "
+    "and one in its right part, with an opening in the middle between them; NOT its colours, carvings, flowers or small objects: this room keeps "
+    "its own palace style and colours as written here.")
+TAGZONE = (" NAME-TAG STRIP: the bottom eighth of the picture, across the whole width and in the bottom-left corner too, is bare floor only: no "
+    "basket, box, stool, pot, incense burner, slippers or any other object stands there.")
+BEDSHOW = (" Each bed stands deep along its side wall towards the back corner, so most of each bed shows beside the women standing in front, "
+    "never hidden behind them.")
+CAMELLIA = (" The camellias are true camellias: round flat flowers with neat overlapping petals around a small yellow centre, among glossy "
+    "dark-green leaves, never peonies, never roses.")
+CARD_TX = P['CARD_TX']
+# 25) Vĩnh Hòa TÂY phối bedroom — TEMPLATE E (image 3 = room 5 u5WZqYHQLD): 3-wall, windows LEFT; the back wall = a carved jichimu partition
+#     holding two alcove beds, a gourd doorway between them. Pair ĐT (all pairs used 4×; ĐT split): curtains cream-ivory, fabrics soft green.
+VH_TAY_NGU = ("Vĩnh Hòa cung Tây phối điện bedroom, the cosy bedchamber SHARED by two lower-ranking imperial consorts (a Đáp ứng and a Thường tại) "
+    "living in the west side hall of a palace in ancient China, a real room in daily use, " + WL3 + ": wooden pillars, lattice windows in the LEFT "
+    "side wall onto a sunny garden; the back wall, seen straight on, is a carved reddish-brown jichimu partition holding TWO tall, WIDE alcove canopy "
+    "beds (alcove fronts carved with orioles on bamboo, with gauze curtains), one in its left part and one in its right part, both square to the back "
+    "wall and whole inside the picture, together the large clear main subject; between the two beds, in the middle of the back wall, the "
+    "gourd-shaped doorway in a lattice of overlapping lozenges onto a small inner dressing room; in front of each bed a low bed step with slippers; "
+    "along the left window wall a small dressing table with a bronze mirror and a stool; against the right wall a clothes rack with a robe and a "
+    "small cabinet; hanging paper lanterns with tassels, pots of camellias. " + CARD_VH + pair_cols(1, 2) + QN + " Exactly two beds; only the two "
+    "colours cream-ivory (curtains) and soft green (fabrics)." + CAMELLIA + NOPE + RECT + TPL_E + BEDH4E + BEDW + FG + TAGZONE)
+OUT['vinh-hoa-cung-tay-phoi-ngu'] = dict(prompt=room9(VH_TAY_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, TE])
+# 26) Vĩnh Hòa TÂY phối reception — ĐT as room 25 (curtains cream-ivory, fabrics soft green). TWO walls, windows LEFT (M2X; receptions
+#     alternate 24 = 3w right → 26 = 2w left). Own layout (study corner never used): LEFT half of the back wall = a tall bookcase wall with a
+#     writing desk + one armchair before it; RIGHT half = host pair of official's-hat chairs + tea table before a carved camellia relief panel;
+#     gourd doorway at the RIGHT end. + CARD_VH + CAMELLIA + FR + TAGZONE.
+VH_TAY_REC = ("Vĩnh Hòa cung Tây phối điện reception room, the small sitting room where two lower-ranking imperial consorts (a Đáp ứng and a "
+    "Thường tại) living in the west side hall of a palace in ancient China receive their guests, a real room in daily use, no bed anywhere, " + WL2
+    + ": wooden pillars, lattice windows in the LEFT side wall onto a sunny garden; against the back wall, square to it and seen straight on: in "
+    "its RIGHT half the host seats, the large clear main subject, a pair of official's-hat armchairs of reddish-brown jichimu wood with a small tea "
+    "table and a tea set between them, before a large carved and painted wall panel of camellias and orioles; in its LEFT half a tall bookcase "
+    "of books, scroll boxes and porcelain with a writing desk and one armchair before it; at the RIGHT end of the back wall a lattice partition of "
+    "overlapping lozenges with the gourd-shaped doorway onto an inner room; along the left window wall a flower stand with potted camellias; "
+    "hanging paper lanterns with tassels. " + CARD_VH + pair_cols(1, 2).replace('the gauze curtains of BOTH beds, ', '').replace(
+    'the bedding and cushions of BOTH beds, ', '').replace('; the two beds look alike in colour, never one bed cream-ivory and the other soft green', '')
+    + QN + " Only the two colours cream-ivory (curtains) and soft green (fabrics)." + CAMELLIA + NOPE + P['NOSOFA'] + RECT + GUIDE_S + FR + TAGZONE)
+OUT['vinh-hoa-cung-tay-phoi'] = dict(prompt=room9(VH_TAY_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M2X])
+# 27) Trường Xuân ĐÔNG phối bedroom — TEMPLATE D (Lw8MjWZswO): 3-wall, windows RIGHT, beds against the LEFT and RIGHT side walls; centre = the
+#     TX tall vase-shaped doorway in an openwork partition + shared dressing table + two stools. Pair TQ: curtains soft green, fabrics soft blue.
+TX_DONG_NGU = ("Trường Xuân cung Đông phối điện bedroom, the cosy bedchamber SHARED by two lower-ranking imperial consorts (a Thường tại and a "
+    "Quý nhân) living in the east side hall of a palace in ancient China, a real room in daily use, " + W3R + ": wooden pillars, lattice windows in "
+    "the RIGHT side wall onto a sunny garden; TWO tall, WIDE, generous free-standing canopy frame beds of carved dark zitan wood, together the large "
+    "clear main subject, one standing against the LEFT side wall and one against the RIGHT side wall, each square to its wall with its long side "
+    "along the wall and its bed step facing the middle of the room, each bed whole inside the picture; in the middle of the back wall, seen "
+    "straight on, a carved openwork partition with the tall vase-shaped doorway and, in front of it, a shared dressing table with a bronze mirror "
+    "and two stools; beside each bed a small clothes rack with a robe; hanging paper lanterns with tassels, vases of white magnolias. " + CARD_TX
+    + pair_cols(2, 3) + QN + " Exactly two beds; only the two colours soft green (curtains) and soft blue (fabrics)." + NOPE + RECT + TPL_D
+    + BEDH4 + BEDW + BEDSHOW + FG + TAGZONE)
+OUT['truong-xuan-cung-dong-phoi-ngu'] = dict(prompt=room9(TX_DONG_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, TD])
+# 28) Trường Xuân ĐÔNG phối reception — TQ as room 27. THREE walls, windows RIGHT (M3). Own layout: host seats = square-backed zitan armchair
+#     pair + tea table in the LEFT half before a kingfisher-feather inlaid screen; vase doorway at the RIGHT end; centre-right = a long
+#     side table with a magnolia vase under a scroll; left wall = curio cabinet. + CARD_TX + FR + TAGZONE.
+TX_DONG_REC = ("Trường Xuân cung Đông phối điện reception room, the small sitting room where two lower-ranking imperial consorts (a Thường tại and "
+    "a Quý nhân) living in the east side hall of a palace in ancient China receive their guests, a real room in daily use, no bed anywhere, " + W3R
+    + ": wooden pillars, lattice windows in the RIGHT side wall onto a sunny garden; against the back wall in its LEFT half, square to it and seen "
+    "straight on, the host seats, the large clear main subject: a pair of square-backed zitan armchairs with a square tea table and a tea set "
+    "between them, before a standing screen with kingfisher-blue feather inlay of magnolias; right of the middle of the back wall a long narrow "
+    "side table with a vase of white magnolias under a hanging scroll; at the RIGHT end of the back wall a carved openwork partition with the tall "
+    "vase-shaped doorway onto an inner room; against the left side wall a tall curio cabinet with porcelain; along the right window wall a small "
+    "flower stand; hanging paper lanterns with tassels. " + CARD_TX + pair_cols(2, 3).replace('the gauze curtains of BOTH beds, ', '').replace(
+    'the bedding and cushions of BOTH beds, ', '').replace('; the two beds look alike in colour, never one bed soft green and the other soft blue', '')
+    + QN + " Only the two colours soft green (curtains) and soft blue (fabrics)." + NOPE + P['NOSOFA'] + RECT + GUIDE_S + FR + TAGZONE)
+OUT['truong-xuan-cung-dong-phoi'] = dict(prompt=room9(TX_DONG_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3])
+# 29) Trường Xuân TÂY phối bedroom — TEMPLATE E (u5WZqYHQLD): 3-wall, windows LEFT; back wall = carved zitan partition holding two alcove beds,
+#     the vase-shaped doorway between them. Pair ĐQ: curtains soft blue, fabrics cream-ivory.
+TX_TAY_NGU = ("Trường Xuân cung Tây phối điện bedroom, the cosy bedchamber SHARED by two lower-ranking imperial consorts (a Đáp ứng and a Quý nhân) "
+    "living in the west side hall of a palace in ancient China, a real room in daily use, " + WL3 + ": wooden pillars, lattice windows in the LEFT "
+    "side wall onto a sunny garden; the back wall, seen straight on, is a carved dark zitan openwork partition holding TWO tall, WIDE alcove canopy "
+    "beds (alcove fronts carved with the endless swastika fret, with gauze curtains), one in its left part and one in its right part, both square "
+    "to the back wall and whole inside the picture, together the large clear main subject; between the two beds, in the middle of the back wall, "
+    "the tall vase-shaped doorway onto a small inner dressing room; in front of each bed a low bed step with slippers; along the left window wall a "
+    "small dressing table with a bronze mirror and a stool; against the right wall a clothes rack with a robe and a small cabinet; hanging paper "
+    "lanterns with tassels, vases of white magnolias. " + CARD_TX + pair_cols(3, 1) + QN + " Exactly two beds; only the two colours soft blue "
+    "(curtains) and cream-ivory (fabrics)." + NOPE + RECT + TPL_E + BEDH4E + BEDW + FG + TAGZONE)
+OUT['truong-xuan-cung-tay-phoi-ngu'] = dict(prompt=room9(TX_TAY_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, TE])
+
 # GATE (as v9): common block present, method refs, no drift words, no phoenix/yellow below t7.
 for k, v in OUT.items():
     p = v['prompt']
