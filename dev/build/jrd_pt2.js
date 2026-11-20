@@ -13,9 +13,10 @@
    ===================================================================================================================================== */
 const PFTVK=()=>pfAlive("trivien")&&pfP("trivien","w")==="kinh";/* the master is in the capital and can act there */
 const PFTNK=()=>pfAlive("tinhvien")&&pfP("tinhvien","w")==="kinh";/* Tịnh Viên is free in the capital */
+const PFMAT=()=>pfP("trivien","mat")==="mot";/* law 6b: Trí Viễn's sight, set by the .7 ending: "mot" one eye still sees light (.7 win) · "mu" blind (win2 / mid / lose) */
 const PFKINH=()=>({ta:"Hộp kinh khóa đồng vẫn nằm trong rương của ngươi.",tinhvien:"Hộp kinh khóa đồng vẫn trong tay Tịnh Viên.",chua:"Hộp kinh khóa đồng đặt trên án chùa Pháp Vân.",kho:"Hộp kinh khóa đồng nằm trong kho Nội vụ phủ, có niêm phong."})[pfO("hopkinh")]||"";
 RTHEME67.pt_tang="court";
-ARC67.pt_tang=pfArc("pt_tang",{o:"pf",t:"Lời thỉnh bên kia bể",w:"emp",sj:"lời thỉnh thầy sang {land}",cast(A){pfMeet("tinhvien");if(!pfO("hopkinh"))pfO("hopkinh","tinhvien");return rdCast(A,["v"])},
+ARC67.pt_tang=pfArc("pt_tang",{o:"pf",t:"Lời thỉnh bên kia bể",w:"emp",sj:"lời thỉnh thầy sang {land}",cast(A){pfMeet("tinhvien");if(!pfO("hopkinh"))pfO("hopkinh","tinhvien");if(!pfO("dodiep"))pfO("dodiep","tinhvien");return rdCast(A,["v"])},
  g:"Tăng sư Tịnh Viên theo sứ đoàn {land} sang học đạo đã mười năm. Nay y xin gặp ngươi: {pv} nhờ y thỉnh một bậc thầy giới luật về truyền giới bên kia bể. Người y chọn là Pháp sư Trí Viễn ở chùa Pháp Vân, mà phép Đại Hy cấm tăng nhân tự ý vượt biển.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Tăng sư ngoài cửa cung",w:"maid",t:"{maid} vào báo: một tăng sư {land} đứng chờ ngoài cửa cung đã ba ngày, tay ôm hộp kinh khóa đồng, không chịu nói với ai ngoài ngươi.",o:[
@@ -28,8 +29,9 @@ ARC67.pt_tang=pfArc("pt_tang",{o:"pf",t:"Lời thỉnh bên kia bể",w:"emp",sj
   {n:"Cất thư, lặng lẽ hỏi về Pháp sư Trí Viễn",f:"tu",wx:"biết người trước khi xin",lx:"chậm một mùa gió",rt:"{maid} dò được: thầy giữ giới rất nghiêm, đã từng từ chối chức Tăng chính."}]},
  c1:{h:"{v} nói về tăng lạ",w:"v",need:["v"],t:"Trong buổi thỉnh an, {v} nói như vô tình: “Nghe đâu cung công chúa {land} có tăng lạ ra vào. Chẳng biết là tăng, hay là người dò đường của bể.”",o:[
   {n:"Mời {v} cùng nghe Tịnh Viên giảng kinh",wx:"{v} không còn cớ nói mập mờ",lx:"{v} nghe được việc của ngươi",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"{v} ngồi nghe trọn một quyển, ra về không nói gì nữa.",rf:"{v} ngáp giữa buổi giảng, ra về kể là tăng ấy nói tiếng lạ."},
-  {n:"Đáp: y có độ điệp của Từ bộ, ai cũng xem được",wx:"lời đồn dừng lại",lx:"độ điệp phải đưa ra",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return pfO("dodiep","tinhvien")},rt:"{v} mím môi. Độ điệp của Tịnh Viên có ấn Từ bộ rõ ràng."},
-  {n:"Cười: cung {v} cũng có đạo sĩ ra vào đấy thôi",wx:"trả lại đúng lời ấy",lx:"{v} ghi thêm một mối",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Cả điện cười khẽ. {v} đỏ mặt, đổi sang chuyện hoa."}]},
+  {n:"Đáp: y có độ điệp của Từ bộ, ai cũng xem được",wx:"lời đồn dừng lại",lx:"độ điệp phải đưa ra",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:()=>pfO("dodiep")==="tinhvien"?"{v} mím môi. Tịnh Viên đưa độ điệp ra: ấn Từ bộ rõ ràng.":"{v} mím môi. Độ điệp có ấn Từ bộ rõ ràng.",rf:"{v} hỏi vặn: “Độ điệp cho trú học, có cho ra vào nội cung không?”"},
+  {n:"Cười: cung {v} cũng có đạo sĩ ra vào đấy thôi",wx:"trả lại đúng lời ấy",lx:"{v} ghi thêm một mối",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Cả điện cười khẽ. {v} đỏ mặt, đổi sang chuyện hoa.",rf:"{v} cười lại: “Đạo sĩ cung ta có sắc của Thái Thanh quán, còn tăng của nàng có sắc của ai?”"},
+  {n:"Sai người lén đặt một lá bùa của Đạo quán dưới gối cung nữ của {v}, rồi xin khám",wx:"{v} phải lo chuyện cung mình",lx:"nếu lộ, ngươi là kẻ vu người",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Cung chính ty khám ra lá bùa. Hậu cung quay sang bàn chuyện cung {v} nuôi bùa ngải.",rf:"Cung nữ của {v} bắt được người của ngươi ngoài hiên, lá bùa còn trong tay áo."}]},
  c2:{h:"Viên quan Từ bộ",w:"emp",t:"Viên quan Từ bộ coi việc tăng ni sai người đến hỏi: độ điệp của Tịnh Viên chỉ cho trú học, mùa gió tới là hết hạn.",o:[
   {n:"Bỏ bạc lo gia hạn độ điệp",wx:"Tịnh Viên ở lại được",lx:"bạc ra",rt:"Độ điệp có thêm một dấu son.",go:()=>pfO("dodiep","tinhvien")},
   {n:"Nhờ sứ thần {land} viết thư bảo lãnh",wx:"giấy tờ đàng hoàng",lx:"sứ đoàn biết ngươi lo việc chùa",rt:"Thư bảo lãnh đến Từ bộ trước mùa gió.",rf:"Thư đi mà Từ bộ chưa trả lời.",go:()=>pfO("dodiep","tinhvien")},
@@ -68,19 +70,20 @@ rdDef("pt_tang",5,{t:"Một khoang thuyền",w:"emp",sj:"khoang thuyền dành c
   {n:"Chọn quà theo ý mình",f:"tu",wx:"việc xong nhanh",lx:"thầy không được hỏi",rt:"Ngươi chọn kinh chép tay và mấy bức thư nhà."}]},
  c1:{h:"Nhà {v} xin khoang thuyền",w:"v",need:["v"],t:"{v} cho người đến nói khéo: nhà nàng ta có hai mươi xấp lụa muốn gửi sang {land} bán, chỉ cần nửa khoang thuyền của ngươi.",o:[
   {n:"Nhường nửa khoang cho lụa nhà {v}",/* pt6c: ship space, not an object; the silk is {v}'s house goods and sails with the envoy ship */wx:"{v} nợ ngươi một lần",lx:"kinh sách bớt chỗ",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} gửi sang một hộp trà sen cảm ơn."},
-  {n:"Từ chối: khoang thuyền là ân của Hoàng thượng, không để buôn",wx:"không ai nói ngươi buôn bán",lx:"{v} mất một mối lời",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Người nhà {v} ra về không chào."},
-  {n:"Chỉ nhà {v} sang thuê thuyền buôn Tân La",wx:"cả hai cùng xong việc",lx:"mất công lo hộ",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Nhà {v} thuê được thuyền Tân La, còn rẻ hơn.",rf:"Thuyền Tân La đòi giá cao, nhà {v} cho là ngươi chỉ sai chỗ."}]},
+  {n:"Từ chối: khoang thuyền là ân của Hoàng thượng, không để buôn",wx:"không ai nói ngươi buôn bán",lx:"{v} mất một mối lời",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Người nhà {v} ra về không chào.",rf:"Người nhà {v} đi kể khắp nơi: công chúa {land} giữ khoang thuyền của vua làm của riêng."},
+  {n:"Chỉ nhà {v} sang thuê thuyền buôn Tân La",wx:"cả hai cùng xong việc",lx:"mất công lo hộ",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Nhà {v} thuê được thuyền Tân La, còn rẻ hơn.",rf:"Thuyền Tân La đòi giá cao, nhà {v} cho là ngươi chỉ sai chỗ."},
+  {n:"Nhận lụa nhà {v} lên thuyền, rồi ngầm báo Nội vụ phủ khám ra hàng lậu",/* pt6c: {v}'s silk is her house goods; it stays theirs, only a line in the store book changes */wx:"nhà {v} mang tiếng buôn lậu",lx:"nếu lộ, ngươi là kẻ gài bẫy",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Nội vụ phủ khám khoang, ghi tên nhà {v} vào sổ hàng lậu, trả lụa về nhà {v}. {v} không biết ai đã báo.",rf:"Quan coi kho nể nhà {v}, cho lụa qua, rồi kể với {v} ai đã báo."}]},
  c2:{h:"Nội vụ phủ kiểm hàng",w:"emp",t:"Nội vụ phủ đến kiểm khoang thuyền. Quan coi kho nói: kinh sách của Đại Hy là của quý, mang ra khỏi nước phải có chỉ.",o:[
   {n:"Xin Hoàng thượng một tờ chỉ cho kinh sách",wx:"giấy tờ đủ",lx:"ngài thấy ngươi đòi nhiều",rt:"Ngài phê: “Kinh là để người đọc.”",rf:"Ngài nói: “Đợi qua mùa.”"},
   {n:"Bỏ bạc nhờ quan coi kho làm sổ cho nhanh",wx:"hàng xuống thuyền đúng hẹn",lx:"bạc ra, lại có người nắm thóp",rt:"Sổ ghi rõ: kinh chép tay, không phải bản gốc."},
-  {n:"Để lại hộp kinh khóa đồng trong kho làm tin",wx:"Nội vụ phủ yên lòng",lx:"hộp kinh nằm trong kho",rt:"Hộp kinh khóa đồng được niêm phong trong kho Nội vụ phủ.",go:()=>pfO("hopkinh","kho")}]},
+  {n:()=>pfO("hopkinh")==="ta"?"Để lại hộp kinh khóa đồng trong kho làm tin":"Xin Tịnh Viên gửi hộp kinh khóa đồng vào kho làm tin",wx:"Nội vụ phủ yên lòng",lx:"hộp kinh nằm trong kho",rt:()=>(pfO("hopkinh")==="tinhvien"?"Tịnh Viên trao hộp kinh khóa đồng tận tay quan coi kho. ":"")+"Hộp kinh khóa đồng được niêm phong trong kho Nội vụ phủ.",go:()=>pfO("hopkinh","kho")}]},
  t1:{h:"Hoàng thượng hỏi khoang thuyền",w:"emp",t:"Đêm ấy Hoàng thượng hỏi: “Khoang thuyền trẫm cho, nàng định gửi gì về cho {pv}?”",o:[
   {n:"Thưa: gửi kinh, để {land} có giới đàn",f:"phap",wx:"ngài thấy ngươi không lo riêng",lx:"ngài nghĩ ngươi lo cho bên kia nhiều hơn",rt:"Ngài cười: “Nàng gửi kinh của trẫm đi làm quà cho cha nàng.”",rf:"Ngài im lặng: “Nàng nhớ bên ấy lắm.”"},
   {n:"Thưa: gửi hạt giống, để bên ấy trồng được trà",f:"le",wx:"ngài thấy món quà nhỏ mà lâu dài",lx:"ngài cho là việc vặt",rt:"Ngài gật: “Cây sống lâu hơn sách.”"},
   {n:"Xin ngài chọn giúp",f:"tu",wx:"ngài vui vì được hỏi",lx:"việc theo ý ngài",rt:"Ngài chọn kinh, rồi thêm một bức thư của chính ngài."}]},
  x1:{h:"Ngày thuyền nhổ neo",w:"emp",t:"Thuyền sắp nhổ neo. Danh mục khoang thuyền phải trình lên Nội vụ phủ trước giờ Thìn. Thầy Trí Viễn, Tịnh Viên và người nhà {v} đều chờ ở cửa cung.",o:[
   {n:"Trình danh mục: cả khoang là kinh sách",e:["win","lose"],rt:"Mười rương kinh xuống thuyền. Thầy Trí Viễn chắp tay về phía cung ngươi.",rf:"Nội vụ phủ giữ lại sáu rương vì thiếu chỉ. Thuyền đi với bốn rương."},
-  {n:"Trình danh mục: nửa kinh, nửa hạt giống trà",e:["win2","mid"],rt:"Kinh và trà cùng xuống thuyền. Tịnh Viên viết thư dặn bên kia gieo hạt ở núi có sương.",rf:"Hạt giống bị ẩm, Tịnh Viên phải giữ lại một nửa.",go:(A,ok)=>{if(ok)pfO("hatgiong","tn");return""}},
+  {n:"Trình danh mục: nửa kinh, nửa hạt giống trà",e:["win2","mid"],rt:()=>(pfO("hatgiong")==="ta"?"Hạt trà trong chậu sứ dưới hiên được gói lại, cùng kinh xuống thuyền.":"Kinh và trà cùng xuống thuyền.")+" Tịnh Viên viết thư dặn bên kia gieo hạt ở núi có sương.",rf:()=>pfO("hatgiong")==="ta"?"Hạt giống bị ẩm, ngươi phải giữ lại một nửa trong cung.":"Hạt giống bị ẩm, Tịnh Viên phải giữ lại một nửa.",go:(A,ok)=>{if(ok)pfO("hatgiong","tn");return""}},
   {n:"Nhường khoang cho hàng của triều",/* pt6c: ship space; the court goods stay the Nội vụ phủ's */e:"mid",lx:"thầy không gửi được gì",rt:"Khoang thuyền chở lụa và đồ sứ của Nội vụ phủ."}]}},
  E:{win:{tag:"Kinh qua bể",w:"emp",t:"Kinh sách Đại Hy sang {land} trước thầy. {mh} viết thư: chùa nào cũng xin chép lại."},
   win2:{tag:"Kinh và trà",w:"emp",t:"Thuyền chở cả kinh lẫn hạt trà. Thầy Trí Viễn nói: “Có trà thì người tu không ngủ gục.”"},
@@ -88,28 +91,28 @@ rdDef("pt_tang",5,{t:"Một khoang thuyền",w:"emp",sj:"khoang thuyền dành c
   lose:{tag:"Kinh bị giữ lại",w:"v",t:"Sáu rương kinh nằm lại kho Nội vụ phủ. {v} nói ngươi định lén mang của quý Đại Hy ra nước ngoài."}}});
 
 rdDef("pt_tang",6,{t:"Chuyến vượt biển bị chặn",w:"emp",sj:"chuyến đi lén của thầy Trí Viễn",cast(A){if(pfP("trivien","w")==="kinh"){pfMove("trivien","cang");pfMove("tinhvien","cang")}return rdCast(A,["v"])},
- g:"Không đợi chỉ, thầy Trí Viễn cùng Tịnh Viên lặng lẽ xuống bến Minh Châu, thuê một thuyền buôn ra bể. Đêm trước ngày đi, một đệ tử nhỏ sợ thầy chết đuối, chạy đi báo quan. Minh Châu thứ sử giữ thuyền, giam thầy trong chùa bến. Tin về kinh trong ba ngày.",
+ g:"Từ trước khi Tịnh Viên sang, thầy đã hai lần định ra bể mà không thành: một lần bão đánh dạt thuyền, một lần đệ tử can. Lần này không đợi chỉ, thầy Trí Viễn cùng Tịnh Viên lặng lẽ xuống bến Minh Châu, thuê một thuyền buôn ra bể. Đêm trước ngày đi, một đệ tử nhỏ sợ thầy chết đuối, chạy đi báo quan. Minh Châu thứ sử giữ thuyền, giam thầy trong chùa bến. Tin về kinh trong ba ngày.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Thư của Tịnh Viên",w:"maid",if:RDW(1),t:"Thư Tịnh Viên viết vội từ chùa bến: “Thầy không trách ai. Thầy chỉ nói: lần này không được thì lần sau.” Dưới thư có dấu tay của thầy.",o:[
-  {n:"Gửi thuốc và áo ấm xuống chùa bến",f:"phap",wx:"thầy biết ngươi không bỏ",lx:"người ta biết ngươi dính vào",rt:"Áo ấm đến chùa bến trước đợt gió lạnh."},
-  {n:"Tâu ngay với Hoàng thượng",f:"le",wx:"ngài nghe từ ngươi trước",lx:"ngài giận vì việc lén",rt:"Ngài nghe hết, chỉ hỏi: “Thầy có sao không?”",rf:"Ngài đập tay xuống án: “Trẫm đã hứa, sao còn đi lén?”"},
-  {n:"Sai {maid} dò xem ai đã báo quan",f:"tu",wx:"biết kẻ trong chùa",lx:"việc dò người dễ lộ",rt:"{maid} dò ra: đệ tử nhỏ ấy là cháu một viên quan Từ bộ."}]},
+  {n:"Gửi thuốc và áo ấm xuống chùa bến",f:"phap",wx:"thầy biết ngươi không bỏ",lx:"người ta biết ngươi dính vào",rt:"Áo ấm đến chùa bến trước đợt gió lạnh.",go:()=>pfO("thutv","ta")},
+  {n:"Tâu ngay với Hoàng thượng",f:"le",wx:"ngài nghe từ ngươi trước",lx:"ngài giận vì việc lén",rt:"Ngài nghe hết, chỉ hỏi: “Thầy có sao không?”",rf:()=>rdEnd(4)==="win"?"Ngài đập tay xuống án: “Trẫm đã hứa, sao còn đi lén?”":"Ngài đập tay xuống án: “Phép nước cấm tăng nhân xuất cảnh, sao còn đi lén?”",go:()=>pfO("thutv","ta")},
+  {n:"Sai {maid} dò xem ai đã báo quan",f:"tu",wx:"biết kẻ trong chùa",lx:"việc dò người dễ lộ",rt:"{maid} dò ra: đệ tử nhỏ ấy là cháu một viên quan Từ bộ.",go:()=>{RD_FL("pt.f.tubo",1);return pfO("thutv","ta")}}]},
  s2:{h:"Tin dữ từ bến",w:"maid",if:RDW(0),t:"Người đưa tin nói: thầy Trí Viễn bị giữ, Tịnh Viên bị trói ở cửa chùa bến như kẻ dụ dỗ người Đại Hy ra nước ngoài.",o:[
   {n:"Gửi bạc xuống bến lo cho Tịnh Viên",f:"phap",wx:"Tịnh Viên được cởi trói",lx:"bạc ra",rt:"Thứ sử nhận bạc, cho Tịnh Viên ngồi trong chùa với thầy."},
   {n:"Xin Từ bộ cho người xuống xét",f:"le",wx:"việc theo phép",lx:"chậm",rt:"Từ bộ cử một viên chủ sự xuống Minh Châu."},
   {n:"Viết thư cho thứ sử bằng lời công chúa",f:"tu",wx:"thứ sử phải nể",lx:"thư thành chứng ngươi dính vào",rt:"Thứ sử trả lời: sẽ hậu đãi hai vị tăng.",rf:"Thứ sử giữ thư lại, không trả lời."}]},
  c1:{h:"Đệ tử nhỏ",w:"maid",t:"Đệ tử nhỏ báo quan quỳ khóc ở cổng chùa Pháp Vân. Nó nói nó chỉ sợ thầy chết, không muốn hại thầy.",o:[
   {n:"Cho người đón nó về chùa, không trách",wx:"chùa yên, thầy vui",lx:"kẻ báo quan không bị phạt",rt:"Đệ tử nhỏ quét sân chùa từ sáng đến tối, không dám ngẩng đầu."},
-  {n:"Bắt nó khai ai xui nó báo quan",wx:"biết kẻ đứng sau",lx:"nó sợ, nói lung tung",rt:"Nó khai: một viên quan Từ bộ hứa cho nó độ điệp.",rf:"Nó khóc quá, không nói được gì."},
+  {n:"Bắt nó khai ai xui nó báo quan",wx:"biết kẻ đứng sau",lx:"nó sợ, nói lung tung",rt:"Nó khai: một viên quan Từ bộ hứa cho nó độ điệp.",rf:"Nó khóc quá, không nói được gì.",go:(A,ok)=>{if(ok)RD_FL("pt.f.tubo",1);return""}},
   {n:"Đưa nó vào cung làm tiểu thái giám, xa chùa",/* pt6c: a person, not an object — an unnamed novice who becomes a servant of her palace (servant pool, fb pt_tang.detu) */wx:"không còn ai nhắc chuyện",lx:"người ta nói ngươi giấu người làm chứng",rt:"Đệ tử nhỏ theo {maid} vào cung, từ đó hầu ở cung ngươi.",go:()=>{RD_FL("pt_tang.detu","cung");return""}}]},
- c2:{h:"{v} dâng lời",w:"v",need:["v"],t:"{v} tâu với Hoàng hậu: công chúa {land} dụ một cao tăng Đại Hy bỏ nước. Lén xuất cảnh là tội, kẻ đứng sau còn nặng hơn.",o:[
-  {n:"Xin Hoàng hậu cho đối chất ngay",wx:"không để lời đồn đi trước",lx:"phải đứng trước mặt {v}",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Ngươi đưa thư của thầy ra: thầy tự đi, không ai dụ.",rf:"Hoàng hậu nói: “Thư ấy ai viết cũng được.”"},
+ c2:{h:"{v} dâng lời",w:"v",need:["v","hh"],t:"{v} tâu với Hoàng hậu: công chúa {land} dụ một cao tăng Đại Hy bỏ nước. Lén xuất cảnh là tội, kẻ đứng sau còn nặng hơn.",o:[
+  {n:"Xin Hoàng hậu cho đối chất ngay",wx:"không để lời đồn đi trước",lx:"phải đứng trước mặt {v}",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:()=>pfO("thutv")==="ta"?"Ngươi đưa thư của Tịnh Viên ra, có dấu tay thầy: thầy tự đi, không ai dụ.":"Ngươi xin gọi người chùa bến lên làm chứng: thầy tự đi, không ai dụ.",rf:()=>pfO("thutv")==="ta"?"Hoàng hậu nói: “Thư ấy ai viết cũng được.”":"Hoàng hậu nói: “Người chùa bến thì bênh thầy chùa bến.”"},
   {n:"Im lặng, để Hoàng thượng phán",wx:"không cãi nhau trong hậu cung",lx:"{v} nói được nhiều hơn",rt:"Hoàng hậu không xét thêm, chờ ý ngài."},
   {n:"Cho người khơi chuyện nhà {v} từng buôn lụa lậu qua bể",wx:"{v} phải lo cho nhà mình",lx:"ngươi dùng cách của {v}",go:(A,ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Hậu cung quay sang bàn chuyện lụa nhà {v}.",rf:"Không ai tin chuyện lụa lậu."}]},
  t1:{h:"Hoàng thượng hỏi tội",w:"emp",t:"Hoàng thượng gọi ngươi đến Ngự thư phòng. Tấu của Minh Châu thứ sử đặt trên án: “Tăng nhân Trí Viễn lén xuất cảnh, đồng đảng là tăng {land} Tịnh Viên.”",o:[
   {n:"Thưa: thầy đi vì lời nguyện, không vì ai",f:"phap",wx:"ngài thấy lòng thầy",lx:"ngài thấy ngươi bênh thầy",rt:"Ngài đọc lại tấu, rồi nói: “Lời nguyện của tăng, triều không xử được.”",rf:"Ngài nói: “Nguyện thì nguyện, phép nước thì phép nước.”"},
   {n:"Thưa: thiếp có lỗi không giữ được thầy",f:"le",wx:"ngài thấy ngươi nhận phần mình",lx:"tội chia về ngươi",rt:"Ngài nhìn ngươi lâu rồi nói: “Nàng nhận lỗi, trẫm còn phạt ai?”"},
-  {n:"Thưa: có người trong Từ bộ cố tình ép thầy phải đi lén",f:"tu",wx:"ngài nghi Từ bộ",lx:"phải có chứng",rt:"Ngài cho gọi viên quan Từ bộ đến hỏi.",rf:"Ngài hỏi: “Chứng đâu?”"}]},
+  {n:()=>RD_FL("pt.f.tubo")?"Thưa: có người trong Từ bộ cố tình ép thầy phải đi lén":"Thưa: xin ngài xét xem vì sao thầy phải đi lén",f:"tu",wx:"ngài nghi Từ bộ",lx:"phải có chứng",rt:()=>RD_FL("pt.f.tubo")?"Ngươi kể chuyện đệ tử nhỏ và viên quan Từ bộ. Ngài cho gọi viên quan ấy đến hỏi.":"Ngài cho gọi viên quan Từ bộ đến hỏi.",rf:()=>RD_FL("pt.f.tubo")?"Viên quan Từ bộ chối: cháu y nói bừa. Ngài hỏi: “Chứng đâu?”":"Ngài hỏi: “Nàng nghi ai?”"}]},
  x1:{h:"Chiếu về Minh Châu",w:"emp",t:"Trước khi chiếu về Minh Châu được viết, Hoàng thượng cho ngươi nói một lời.",o:[
   {n:"Xin cho thầy và Tịnh Viên về lại chùa Pháp Vân, không truy tội",e:["win","lose"],rt:"Chiếu viết: “Cao tăng tuổi già, lòng cầu đạo, tha.” Hai vị tăng được đưa về kinh.",rf:"Ngài nói: “Thầy thì tha. Tăng {land} phải giữ lại để răn.”"},
   {n:"Xin ngài cấp giấy cho thầy đi chuyến sau, đúng phép",e:["win2","mid"],rt:"Ngài cho Từ bộ làm giấy xuất cảnh, đợi mùa gió năm sau.",rf:"Ngài nói: “Về đã, rồi xét.”"},
@@ -137,8 +140,8 @@ rdDef("pt_tang",7,{t:"Mắt thầy",w:"maid",sj:"đôi mắt của thầy Trí V
   {n:"Bỏ bạc mời một thầy thuốc dân gian xem cả hai phép",wx:"có người phân xử",lx:"bạc ra",rt:"Thầy thuốc dân gian nói: lá thì chườm, thuốc thì uống."}]},
  c2:{h:"Lời đồn Phật phạt",w:"v",need:["v"],t:"Người cung {v} đi khắp nơi nói: thầy Trí Viễn bỏ nước nên mù, ai dính vào việc đưa thầy sang bể cũng mang họa.",o:[
   {n:"Mời {v} cùng đi lễ chùa cầu cho thầy",wx:"{v} khó nói xấu nữa",lx:"phải đi cùng {v}",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"{v} quỳ cạnh ngươi trước tượng, không nói gì.",rf:"{v} cáo bệnh, không đi."},
-  {n:"Bắt kẻ tung tin, nộp Cung chính ty",wx:"lời đồn dừng",lx:"{v} biết ngươi đánh người của nàng",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Hai cung nữ bị phạt quỳ ở Cung chính ty."},
-  {n:"Cho tung lại lời: kẻ nói Phật phạt mới mang khẩu nghiệp",wx:"lời đồn quay đầu",lx:"ngươi dùng đúng cách của {v}",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Cung nữ cung {v} không dám nhắc chuyện ấy nữa."}]},
+  {n:"Bắt kẻ tung tin, nộp Cung chính ty",wx:"lời đồn dừng",lx:"{v} biết ngươi đánh người của nàng",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Hai cung nữ bị phạt quỳ ở Cung chính ty.",rf:"Hai cung nữ khóc lóc chối, Cung chính ty thả về. {v} nói ngươi đánh người vô cớ."},
+  {n:"Cho tung lại lời: kẻ nói Phật phạt mới mang khẩu nghiệp",wx:"lời đồn quay đầu",lx:"ngươi dùng đúng cách của {v}",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Cung nữ cung {v} không dám nhắc chuyện ấy nữa.",rf:"Lời đồn quay về chính cung ngươi: người ta nói công chúa {land} trù ếm kẻ nói thật."}]},
  t1:{h:"Thầy xin một việc",w:"maid",t:"Thầy gọi ngươi lại gần: “Mắt này có lẽ không giữ được. Ta chỉ xin một việc: đừng vì ta mà người ta bỏ việc thỉnh giới.”",o:[
   {n:"Hứa với thầy: việc thỉnh giới không dừng",f:"phap",wx:"thầy vững lòng",lx:"một lời hứa nặng",rt:"Thầy cười, lần đầu từ ngày bệnh."},
   {n:"Thưa: xin thầy lo mắt trước, việc sau tính",f:"le",wx:"thầy chịu chữa",lx:"thầy lo việc bị chậm",rt:"Thầy gật đầu, uống hết bát thuốc."},
@@ -147,10 +150,10 @@ rdDef("pt_tang",7,{t:"Mắt thầy",w:"maid",sj:"đôi mắt của thầy Trí V
   {n:"Để ngự y chích máu ngay",e:["win","lose"],rt:"Sáng ra thầy mở mắt, thấy được bóng ngọn đèn. Một mắt còn giữ được.",rf:"Máu ra nhiều, thầy lả đi. Sáng ra, cả hai mắt chỉ còn màn sương."},
   {n:"Ngồi đọc kinh cho thầy đến sáng, chờ cơn sốt qua",e:["win2","mid"],rt:"Cơn sốt lui lúc gà gáy. Mắt thầy không sáng lại, nhưng lòng thầy sáng: “Đường bể không cần mắt.”",rf:"Cơn sốt lui, nhưng thầy lặng im cả ngày."},
   {n:"Giao thầy cho chùa tự lo",e:"mid",lx:"ngươi không ở bên thầy đêm ấy",rt:"Các tăng thay nhau canh. Sáng ra thầy qua cơn sốt."}]}},
- E:{win:{tag:"Một mắt còn sáng",w:"emp",t:"Thầy còn thấy được bóng đèn. Ngự y được thưởng, và cả kinh thành biết ai đã xin ngự y đến chùa."},
-  win2:{tag:"Đường bể không cần mắt",w:"emp",t:"Thầy mù hẳn, mà ngày nào cũng tụng kinh như cũ. Tịnh Viên nói: thầy giờ nhìn bằng tai, và nghe thấy cả tiếng sóng."},
-  mid:{tag:"Thầy qua cơn bệnh",t:"Thầy qua cơn bệnh, mắt mờ hẳn. Việc thỉnh giới chậm lại một mùa."},
-  lose:{tag:"Mất cả hai mắt",w:"v",t:"Thầy mù hẳn. Người cung {v} nói: ngự y chích máu là do công chúa {land} giục, hại thầy để thầy khỏi đi."}}});
+ E:{win:{tag:"Một mắt còn sáng",w:"emp",t:"Thầy còn thấy được bóng đèn. Ngự y được thưởng, và cả kinh thành biết ai đã xin ngự y đến chùa.",go:()=>{pfP("trivien","mat","mot");return""}},
+  win2:{tag:"Đường bể không cần mắt",w:"emp",t:"Thầy mù hẳn, mà ngày nào cũng tụng kinh như cũ. Tịnh Viên nói: thầy giờ nhìn bằng tai, và nghe thấy cả tiếng sóng.",go:()=>{pfP("trivien","mat","mu");return""}},
+  mid:{tag:"Thầy qua cơn bệnh",t:"Thầy qua cơn bệnh, mắt mờ hẳn. Việc thỉnh giới chậm lại một mùa.",go:()=>{pfP("trivien","mat","mu");return""}},
+  lose:{tag:"Mất cả hai mắt",w:"v",t:"Thầy mù hẳn. Người cung {v} nói: ngự y chích máu là do công chúa {land} giục, hại thầy để thầy khỏi đi.",go:()=>{pfP("trivien","mat","mu");return""}}}});
 
 rdDef("pt_tang",8,{t:"Phe Phật, phe Đạo",w:"emp",sj:"cuộc tranh giữa chùa và quán trong triều",cast(A){if(!pfO("dodiep"))pfO("dodiep","tinhvien");return rdCast(A,["v"])},
  g:"Quán chủ Thái Thanh quán dâng sớ: tăng ni hao kho, tăng ngoại quốc ăn lộc Đại Hy mà không đóng thuế, xin thu độ điệp của mọi tăng ngoại quốc. Người đầu tiên bị gọi tên là Tịnh Viên. Hoàng thượng cho mở một buổi luận đạo trước triều.",
@@ -163,13 +166,13 @@ rdDef("pt_tang",8,{t:"Phe Phật, phe Đạo",w:"emp",sj:"cuộc tranh giữa ch
   {n:"Bảo Tịnh Viên nộp độ điệp đúng hạn",f:"le",wx:"không ai bắt được lỗi",lx:"độ điệp ra khỏi tay y",rt:"Độ điệp nằm trên án Từ bộ.",go:()=>pfO("dodiep","kho")},
   {n:"Giữ độ điệp trong cung ngươi, xin hoãn",f:"tu",wx:"độ điệp an toàn",lx:"Từ bộ nói ngươi che chở",rt:"Độ điệp được cất trong rương của ngươi.",go:()=>pfO("dodiep","ta")},
   {n:"Xin Hoàng thượng cho Tịnh Viên trình độ điệp ngay trước triều",f:"phap",wx:"việc ra giữa ánh sáng",lx:"y phải đứng trước bá quan",rt:"Ngài chuẩn: độ điệp sẽ được xem trong buổi luận đạo."}]},
- c1:{h:"{v} đứng về phía quán",w:"v",need:["v"],t:"Nhà {v} xưa nay cúng Thái Thanh quán. {v} xin Hoàng hậu cho các phi tần cùng đến nghe luận đạo, và nói trước: “Phật là đạo của người ngoài.”",o:[
+ c1:{h:"{v} đứng về phía quán",w:"v",need:["v","hh"],t:"Nhà {v} xưa nay cúng Thái Thanh quán. {v} xin Hoàng hậu cho các phi tần cùng đến nghe luận đạo, và nói trước: “Phật là đạo của người ngoài.”",o:[
   {n:"Đáp: Phật hay Đạo đều dạy người hiền",wx:"không ai thấy ngươi gây chuyện",lx:"{v} cho là ngươi yếu thế",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"Hoàng hậu gật đầu khen câu ấy."},
   {n:"Nhắc trước điện: chính nhà {v} vừa cúng tượng Phật ở chùa Bảo Ninh",wx:"{v} hết lời",lx:"{v} mất mặt, thêm oán",go:(A,ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} tái mặt. Ai cũng biết chuyện tượng Phật ấy.",rf:"{v} nói: “Cúng tượng là việc của mẫu thân, không phải của ta.”"},
   {n:"Mời {v} ngồi cạnh trong buổi luận",wx:"giữ {v} trong tầm mắt",lx:"phải nghe {v} nói suốt buổi",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} ngồi cạnh ngươi, cười mà không nói."}]},
  c2:{h:"Hộp đan của quán",w:"maid",t:"{maid} nghe được: Quán chủ dâng đan cho nhiều cung, có cung nữ uống vào thì nôn ra máu. Không ai dám nói vì Quán chủ được Hoàng thượng tin.",o:[
   {n:"Tìm cung nữ ấy, xin lời khai",wx:"có người chứng thật",lx:"cung nữ sợ bị trả thù",rt:"Cung nữ khai: đan là của Thái Thanh quán, uống ba viên thì nôn.",rf:"Cung nữ chối, nói chỉ bị cảm."},
-  {n:"Sai người tráo đan độc vào hộp quà Quán chủ dâng, rồi tố",wx:"Quán chủ khó chối",lx:"nếu lộ thì tội nặng nhất là ngươi",rt:"Hộp đan có thêm ba viên trộn thạch tín. Chỉ {maid} biết.",rf:"Người tráo đan làm rơi một viên ngoài hiên.",go:()=>{RD_FL("pt_tang.trao",1);return""}},
+  {n:"Sai người tráo đan độc vào hộp quà Quán chủ dâng, rồi tố",wx:"Quán chủ khó chối",lx:"nếu lộ thì tội nặng nhất là ngươi",rt:"Hộp đan có thêm ba viên trộn thạch tín. Chỉ {maid} biết.",rf:"Người tráo đan làm rơi một viên ngoài hiên.",go:(A,ok)=>{if(ok)RD_FL("pt_tang.trao",1);return""}},
   {n:"Để yên, chờ Quán chủ tự sai",wx:"không dính vào",lx:"người uống đan vẫn uống",rt:"Ngươi không nói gì. Hộp đan vẫn đi khắp các cung."}]},
  t1:{h:"Buổi luận đạo",w:"emp",t:"Điện Tập Hiền chật người. Quán chủ nói trước, rồi Hoàng thượng quay sang ngươi: “Nàng là người bên kia bể, nàng nói xem Phật có ích gì cho nước?”",o:[
   {n:"Thưa: Phật dạy người bỏ ác, nước nào cũng cần",f:"phap",wx:"bá quan gật đầu",lx:"Quán chủ ghi hận",rt:"Cả điện im. Hoàng thượng gõ nhẹ lên tay ngai.",rf:"Quán chủ hỏi vặn: “Bỏ ác thì sao bên ấy còn giặc biển?”"},
@@ -177,49 +180,50 @@ rdDef("pt_tang",8,{t:"Phe Phật, phe Đạo",w:"emp",sj:"cuộc tranh giữa ch
   {n:"Thưa: xin ngài xem đan của quán trước khi xem độ điệp của chùa",f:"tu",if:()=>pfO("hopdan")==="thaiy"||RD_FL("pt_tang.trao"),wx:"mũi dùi quay sang Quán chủ",lx:"phải có chứng",rt:"Ngài cho gọi Thái y viện mang đan đến.",rf:"Thái y viện chưa kịp đến, buổi luận đã tan."},
   {n:"Thưa: xin ngài hỏi những người đã uống đan của quán",f:"tu",if:()=>pfO("hopdan")!=="thaiy"&&!RD_FL("pt_tang.trao"),wx:"mũi dùi quay sang Quán chủ",lx:"không có chứng trong tay",rt:"Ngài cho gọi cung nữ đã uống đan.",rf:"Không ai dám đứng ra."}]},
  x1:{h:"Chiếu về tăng ngoại quốc",w:"emp",t:"Cuối buổi, Hoàng thượng hỏi ngươi lần chót: thu hay không thu độ điệp của tăng ngoại quốc?",o:[
-  {n:"Xin cho Tịnh Viên và thầy đối luận với Quán chủ ngay trước ngự tọa",e:["win","lose"],rt:"Thầy Trí Viễn mù mà đọc thuộc từng điều giới. Quán chủ cứng lời. Ngài phán: độ điệp giữ nguyên.",rf:"Quán chủ hỏi một câu về thuế, thầy không đáp được. Ngài cho thu độ điệp."},
+  {n:"Xin cho Tịnh Viên và thầy đối luận với Quán chủ ngay trước ngự tọa",e:["win","lose"],rt:()=>(PFMAT()?"Thầy Trí Viễn, một mắt chỉ còn thấy bóng đèn, vẫn đọc thuộc từng điều giới.":"Thầy Trí Viễn mù mà đọc thuộc từng điều giới.")+" Quán chủ cứng lời. Ngài phán: "+(({kho:"độ điệp trả về cho Tịnh Viên, giữ nguyên.",ta:"độ điệp trong rương của ngươi trả về cho Tịnh Viên, giữ nguyên."})[pfO("dodiep")]||"độ điệp giữ nguyên."),rf:"Quán chủ hỏi một câu về thuế, thầy không đáp được. Ngài cho thu độ điệp."},
   {n:"Xin ngài để tăng ngoại quốc ở lại dưới sổ Từ bộ, mỗi mùa trình một lần",e:["win2","mid"],rt:"Ngài chuẩn. Tịnh Viên được ở lại, mỗi mùa ghi tên ở Từ bộ.",rf:"Ngài nói: “Để Từ bộ làm lệ.”"},
   {n:"Thưa: thiếp theo ý Hoàng thượng",e:"mid",lx:"chùa và quán vẫn giằng co",rt:"Ngài cho hoãn việc xét, để qua năm."}]}},
  E:{win:{tag:"Chùa thắng một ván",w:"emp",t:()=>"Độ điệp của Tịnh Viên được đóng thêm ấn son. "+(RD_FL("pt_tang.trao")?"Hộp đan tráo được Thái y viện thử ra thạch tín; Quán chủ bị đuổi về núi. Chỉ ngươi và {maid} biết thật giả.":"Quán chủ về quán, không dâng đan cho cung nào nữa."),go:()=>{if(pfO("dodiep")==="kho")pfO("dodiep","tinhvien");if(RD_FL("pt_tang.trao"))pfO("hopdan","thaiy");return""}},
   win2:{tag:"Sổ Từ bộ",w:"emp",t:"Tăng ngoại quốc ở lại, tên ghi trong sổ Từ bộ. Không ai thắng, nhưng chùa còn đứng.",go:()=>{if(pfO("dodiep")==="kho")pfO("dodiep","tinhvien");return""}},
-  mid:{tag:"Hoãn sang năm",t:"Việc xét độ điệp hoãn sang năm. Quán chủ vẫn đến các cung, và vẫn mang theo đan."},
-  lose:{tag:"Độ điệp bị thu",w:"v",t:"Độ điệp của Tịnh Viên bị Từ bộ thu và đốt trước cổng chùa. Y vẫn ở trong chùa, nhưng chỉ như một người khách.",go:()=>pfO("dodiep","chay")}}});
+  mid:{tag:"Hoãn sang năm",t:()=>(({kho:"Độ điệp của Tịnh Viên còn nằm ở Từ bộ; việc xét hoãn sang năm.",ta:"Độ điệp của Tịnh Viên còn nằm trong rương của ngươi; việc xét hoãn sang năm."})[pfO("dodiep")]||"Việc xét độ điệp hoãn sang năm.")+" Quán chủ vẫn đến các cung, và vẫn mang theo đan."},
+  lose:{tag:"Độ điệp bị thu",w:"v",t:()=>(pfO("dodiep")==="ta"?"Từ bộ sai người đến cung ngươi đòi độ điệp. ":"")+"Độ điệp của Tịnh Viên bị Từ bộ thu và đốt trước cổng chùa. Y vẫn ở trong chùa, nhưng chỉ như một người khách.",go:()=>pfO("dodiep","chay")}}});
 
-const PFXL=()=>pfO("xaloi");/* the relic grains: v (taken by {v}'s people at .9 cast) · chua (back in the Pháp Vân stupa) · v (taken by {v}'s people) · ta · vua · trivien */
+/* xaloi holders: the relic grains: v (taken by {v}'s people at .9 cast) · chua (back in the Pháp Vân stupa) · v (taken by {v}'s people) · ta · vua · trivien */
 rdDef("pt_tang",9,{t:"Xá lợi",w:"emp",sj:"ba hạt xá lợi của tháp Pháp Vân",cast(A){if(!pfO("xaloi"))pfO("xaloi","v");return rdCast(A,["v"])},
  g:"Thầy Trí Viễn xin mang theo ba hạt xá lợi trong tháp chùa Pháp Vân sang {land}, để giới đàn bên ấy có gốc. Nội đạo tràng trong cung nói xá lợi là của triều. Đêm trước lễ rước, người giữ tháp thấy bình lưu ly vẫn còn, mà bên trong là ba hạt sỏi trắng.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Người giữ tháp",w:"maid",if:RDW(1),t:"Người giữ tháp chạy đến cung ngươi lúc nửa đêm, run rẩy: chiều qua có một thái giám mang lệnh bài Nội đạo tràng lên tháp xem bình, không ai dám cản.",o:[
   {n:"Giữ người giữ tháp lại trong cung làm chứng",f:"le",wx:"có người chứng an toàn",lx:"người ta nói ngươi giấu người",rt:"Người giữ tháp ở lại phòng sau, kể đi kể lại hình dạng thái giám ấy."},
-  {n:"Sai {maid} xem sổ ra vào Nội đạo tràng",f:"tu",wx:"biết lệnh bài của ai",lx:"đụng đến sổ của cung",rt:"Sổ ghi: lệnh bài mượn từ cung {v}.",rf:"Trang sổ chiều qua đã bị xé."},
+  {n:"Sai {maid} xem sổ ra vào Nội đạo tràng",f:"tu",wx:"biết lệnh bài của ai",lx:"đụng đến sổ của cung",rt:"Sổ ghi: lệnh bài mượn từ cung {v}.",rf:"Trang sổ chiều qua đã bị xé.",go:(A,ok)=>{if(ok)RD_FL("pt.f.traoxl",1);return""}},
   {n:"Lên tháp ngay, tự tay xem bình",f:"phap",wx:"thấy tận mắt",lx:"đêm khuya ra chùa",rt:"Dưới đáy bình còn một vệt sáp đỏ, loại sáp chỉ cung phi dùng niêm thư."}]},
  s2:{h:"Tin đồn tháp rỗng",w:"maid",if:RDW(0),t:"Sáng ra cả kinh thành đồn: tháp Pháp Vân rỗng, xá lợi đã bị tăng {land} lấy trộm để mang sang bể.",o:[
   {n:"Mời Từ bộ đến niêm phong tháp ngay",f:"le",wx:"giữ hiện trường",lx:"Từ bộ nắm việc",rt:"Tháp được niêm phong, bình lưu ly để nguyên."},
   {n:"Cho Tịnh Viên đóng cửa phòng, không ra ngoài",f:"tu",wx:"không ai đổ thêm cho y",lx:"trông như có tật giật mình",rt:"Tịnh Viên ngồi trong phòng tụng kinh, cửa khép."},
   {n:"Ra chùa nói trước dân chúng: xá lợi sẽ được tìm ra",f:"phap",wx:"dân chúng bớt giận",lx:"một lời hứa trước đông người",rt:"Dân chúng dạt ra cho ngươi đi.",rf:"Có người ném đá vào cổng chùa."}]},
  c1:{h:"Thái giám cầm lệnh bài",w:"v",need:["v"],t:"Thái giám mang lệnh bài lên tháp là người hầu cung {v}. Hắn nói hắn chỉ đi xem bình theo lệnh Nội đạo tràng.",o:[
-  {n:"Xin Hoàng hậu cho khám phòng hắn",wx:"có thể tìm ra xá lợi",lx:"{v} biết ngươi nhắm vào nàng",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);if(ok)pfO("xaloi","ta");return""},rt:"Trong gối của hắn có một túi gấm nhỏ, ba hạt xá lợi còn nguyên.",rf:"Phòng hắn sạch trơn. {v} nói ngươi vu cho người vô tội."},
+  {n:()=>qOn()?"Xin Hoàng hậu cho khám phòng hắn":"Xin Cung chính ty cho khám phòng hắn",wx:"có thể tìm ra xá lợi",lx:"{v} biết ngươi nhắm vào nàng",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);if(ok){RD_FL("pt.f.traoxl",1);if(pfO("xaloi")==="v")pfO("xaloi","ta")}return""},rt:"Trong gối của hắn có một túi gấm nhỏ, ba hạt xá lợi còn nguyên.",rf:"Phòng hắn sạch trơn. {v} nói ngươi vu cho người vô tội."},
   {n:"Gặp riêng {v}, đổi xá lợi lấy im lặng",wx:"xá lợi về mà không ồn ào",lx:"{v} nắm được ngươi một việc",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);pfO("xaloi","ta");return""},rt:"{v} cho người mang túi gấm sang. Hai người không nói thêm một lời."},
-  {n:"Để Từ bộ xét hắn",wx:"việc theo phép",lx:"xá lợi chưa về",rt:"Từ bộ đưa hắn đi. Túi gấm chưa thấy đâu."}]},
+  {n:"Để Từ bộ xét hắn",wx:"việc theo phép",lx:"xá lợi chưa về",rt:"Từ bộ đưa hắn đi. Túi gấm chưa thấy đâu."},
+  {n:"Sai người bắt thái giám ấy tra khảo ngay trong đêm",wx:"có thể moi ra xá lợi",lx:"dùng hình trong cung là tội",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);if(ok){RD_FL("pt.f.traoxl",1);if(pfO("xaloi")==="v")pfO("xaloi","ta")}return""},rt:"Gần sáng hắn khai, chỉ chỗ túi gấm giấu trong gối. Ba hạt xá lợi về tay ngươi.",rf:"Hắn cắn răng không khai. Sáng ra cả cung biết ngươi dùng hình với người hầu cung {v}."}]},
  c2:{h:"Ba hạt sỏi trắng",w:"maid",t:"Tịnh Viên nói: ba hạt sỏi trong bình là sỏi bãi biển Minh Châu, loại chỉ có ở chùa bến. Kẻ tráo đã chuẩn bị từ chuyến đi lén.",o:[
-  {n:"Giữ ba hạt sỏi làm chứng",wx:"có chứng vật",lx:"chứng vật nhỏ, dễ bị nói là bịa",rt:"Ba hạt sỏi gói trong khăn lụa, cất cùng thư của thầy.",go:()=>pfO("soi","ta")},
+  {n:"Giữ ba hạt sỏi làm chứng",wx:"có chứng vật",lx:"chứng vật nhỏ, dễ bị nói là bịa",rt:()=>pfO("thuthay")==="ta"?"Ba hạt sỏi gói trong khăn lụa, cất cùng thư nguyện của thầy.":"Ba hạt sỏi gói trong khăn lụa, cất trong hộp gỗ của ngươi.",go:()=>pfO("soi","ta")},
   {n:"Sai người xuống chùa bến hỏi ai đã nhặt sỏi",wx:"lần đến tận gốc",lx:"chậm, tốn bạc",rt:"Một chú tiểu chùa bến nhớ có người lạ đến nhặt sỏi.",rf:"Không ai nhớ gì."},
   {n:"Bảo Tịnh Viên đừng nói chuyện sỏi với ai",wx:"kẻ tráo không biết ngươi đã biết",lx:"mất một manh mối",rt:"Tịnh Viên gật đầu."}]},
- t1:{h:"Hoàng thượng hỏi xá lợi",w:"emp",t:()=>"Hoàng thượng cho gọi ngươi: “Lễ rước định vào ngày mồng tám. Xá lợi ở đâu?” "+(PFXL()==="ta"?"Túi gấm đang nằm trong tay áo ngươi.":"Ngươi chưa có xá lợi trong tay."),o:[
+ t1:{h:"Hoàng thượng hỏi xá lợi",w:"emp",t:()=>"Hoàng thượng cho gọi ngươi: “Lễ rước định vào ngày mồng tám. Xá lợi ở đâu?” "+(pfO("xaloi")==="ta"?"Túi gấm đang nằm trong tay áo ngươi.":"Ngươi chưa có xá lợi trong tay."),o:[
   {n:"Thưa: xá lợi phải về tay thầy, mới đúng lời nguyện",f:"phap",wx:"ngài thấy lòng thầy",lx:"ngài nghĩ ngươi chỉ lo cho bên kia",rt:"Ngài gật đầu: “Nếu thầy đi, xá lợi đi theo thầy.”",rf:"Ngài nói: “Xá lợi của tháp Đại Hy, ở lại Đại Hy.”"},
-  {n:"Thưa: xin ngài giữ xá lợi trong Nội đạo tràng cho yên",f:"le",wx:"không ai tráo được nữa",lx:"thầy không mang được",rt:"Ngài cho dựng một khám vàng trong Nội đạo tràng.",go:()=>{if(PFXL()==="ta")pfO("xaloi","vua");return""}},
+  {n:"Thưa: xin ngài giữ xá lợi trong Nội đạo tràng cho yên",f:"le",wx:"không ai tráo được nữa",lx:"thầy không mang được",rt:"Ngài cho dựng một khám vàng trong Nội đạo tràng.",go:()=>{if(pfO("xaloi")==="ta")pfO("xaloi","vua");return""}},
   {n:"Thưa: xin ngài cho thiếp ba ngày",f:"tu",wx:"có thời gian lần kẻ tráo",lx:"ngài chờ kết quả",rt:"Ngài nói: “Ba ngày.”"}]},
- x1:{h:"Ngày lễ rước",w:"emp",t:()=>"Mồng tám, đoàn rước đã đứng chật sân chùa Pháp Vân. "+({ta:"Xá lợi thật nằm trong tay ngươi.",vua:"Xá lợi thật nằm trong khám vàng của Nội đạo tràng.",v:"Xá lợi vẫn trong tay người cung {v}."})[PFXL()]+" Bình lưu ly trên kiệu vẫn còn sỏi.",o:[
-  {n:"Trình xá lợi thật trước Hoàng thượng, chỉ mặt kẻ tráo",if:()=>PFXL()==="ta",e:["win","lose"],rt:"Ba hạt xá lợi sáng lên dưới nắng. Thái giám cung {v} quỳ xuống, khai người sai. Ngài sai đặt xá lợi vào tay thầy.",rf:"Thái giám khai lung tung, đổ cho người giữ tháp. Ngài cho dừng lễ.",go:(A,ok)=>{if(ok)pfO("xaloi","trivien");return""}},
-  {n:"Tâu xin khám cung kẻ tráo ngay trong ngày lễ",if:()=>PFXL()!=="ta",e:["win","lose"],rt:()=>PFXL()==="v"?"Túi gấm được tìm thấy trong cung {v}. Ngài sai đặt xá lợi vào tay thầy.":"Ngài sai mở khám vàng, tự tay trao xá lợi cho thầy.",rf:"Ngài nói: “Ngày lễ mà khám cung, không ra thể thống.”",go:(A,ok)=>{if(ok)pfO("xaloi","trivien");return""}},
-  {n:"Lặng lẽ đổi lại xá lợi vào bình, không truy kẻ tráo",e:["win2","mid"],rt:()=>({v:"Đêm trước, {v} lặng lẽ cho người trả túi gấm. Ngươi tự tay đặt lại vào bình. Lễ rước đi đúng giờ.",vua:"Ngươi xin Nội đạo tràng mở khám vàng, tự tay đặt lại ba hạt xá lợi vào bình. Lễ rước đi đúng giờ."})[PFXL()]||"Ngươi tự tay đặt lại ba hạt xá lợi vào bình. Lễ rước đi đúng giờ.",rf:"Kiệu đi rồi mới đặt lại kịp, người ta thấy ngươi lúng túng.",go:(A,ok)=>{if(ok)pfO("xaloi","chua");return""}},
+ x1:{h:"Ngày lễ rước",w:"emp",t:()=>"Mồng tám, đoàn rước đã đứng chật sân chùa Pháp Vân. "+({ta:"Xá lợi thật nằm trong tay ngươi.",vua:"Xá lợi thật nằm trong khám vàng của Nội đạo tràng.",v:"Xá lợi vẫn trong tay người cung {v}."})[pfO("xaloi")]+" Bình lưu ly trên kiệu vẫn còn sỏi.",o:[
+  {n:"Trình xá lợi thật trước Hoàng thượng, chỉ mặt kẻ tráo",if:()=>pfO("xaloi")==="ta",e:["win","lose"],rt:"Ba hạt xá lợi sáng lên dưới nắng. Thái giám cung {v} quỳ xuống, khai người sai. Ngài sai đặt xá lợi vào tay thầy.",rf:"Thái giám khai lung tung, đổ cho người giữ tháp. Ngài cho dừng lễ.",go:(A,ok)=>{if(ok)pfO("xaloi","trivien");return""}},
+  {n:"Tâu xin khám cung kẻ tráo ngay trong ngày lễ",if:()=>pfO("xaloi")!=="ta",e:["win","lose"],rt:()=>pfO("xaloi")==="v"?"Túi gấm được tìm thấy trong cung {v}. Ngài sai đặt xá lợi vào tay thầy.":"Ngài sai mở khám vàng, tự tay trao xá lợi cho thầy.",rf:"Ngài nói: “Ngày lễ mà khám cung, không ra thể thống.”",go:(A,ok)=>{if(ok)pfO("xaloi","trivien");return""}},
+  {n:"Lặng lẽ đổi lại xá lợi vào bình, không truy kẻ tráo",e:["win2","mid"],rt:()=>({v:"Đêm trước, {v} lặng lẽ cho người trả túi gấm. Ngươi tự tay đặt lại vào bình. Lễ rước đi đúng giờ.",vua:"Ngươi xin Nội đạo tràng mở khám vàng, tự tay đặt lại ba hạt xá lợi vào bình. Lễ rước đi đúng giờ."})[pfO("xaloi")]||"Ngươi tự tay đặt lại ba hạt xá lợi vào bình. Lễ rước đi đúng giờ.",rf:"Kiệu đi rồi mới đặt lại kịp, người ta thấy ngươi lúng túng.",go:(A,ok)=>{if(ok)pfO("xaloi","chua");return""}},
   {n:"Thưa: xá lợi thật giả, chỉ Phật biết",e:"mid",lx:"xá lợi không về tay thầy",rt:"Lễ rước đi với bình lưu ly. Không ai mở ra xem."}]}},
- E:{win:{tag:"Xá lợi về tay thầy",w:"emp",t:"Thầy Trí Viễn chắp tay đón ba hạt xá lợi, sờ từng hạt. Cả kinh thành biết kẻ tráo là ai.",go:(A,G)=>{rdOan(A,"v",G[0]);return""}},
-  win2:{tag:"Lễ rước yên lành",w:"emp",t:"Lễ rước yên lành. Xá lợi ở lại tháp chờ ngày thầy đi. Kẻ tráo không bị gọi tên, nhưng nợ ngươi một lần."},
+ E:{win:{tag:"Xá lợi về tay thầy",w:"emp",t:()=>(pfO("xaloi")==="trivien"?"Thầy Trí Viễn chắp tay đón ba hạt xá lợi, sờ từng hạt.":"Lễ rước đi trọn.")+" Cả kinh thành biết kẻ tráo là ai.",go:(A,G)=>{RD_FL("pt.f.traoxl",1);rdOan(A,"v",G[0]);return""}},
+  win2:{tag:"Lễ rước yên lành",w:"emp",t:()=>"Lễ rước yên lành. "+(pfO("xaloi")==="chua"?"Xá lợi ở lại tháp chờ ngày thầy đi.":"Bình lưu ly về lại tháp.")+" Kẻ tráo không bị gọi tên, nhưng nợ ngươi một lần."},
   mid:{tag:"Bình lưu ly",t:"Lễ rước đi qua. Bình lưu ly vẫn đặt trên tháp, chỉ vài người biết bên trong là gì."},
   lose:{tag:"Lễ rước dở dang",w:"v",t:"Lễ rước dừng giữa chừng. Cả kinh thành nói: tăng {land} mang họa đến chùa Pháp Vân."}}});
 
-const PFDK=()=>pfO("daotang")==="kho"?"Nội vụ phủ mở hộp gỗ, trả thanh đao cho ngươi mang đi. ":"";/* .10: the sword comes out of the store before it is offered */
+const PFDK=h=>({kho:"Nội vụ phủ mở hộp gỗ, trả thanh đao cho ngươi mang đi. ",vua:"Hoàng thượng sai trả thanh đao ngài giữ hộ cho ngươi mang đi. "})[h]||"";/* .10: the sword comes out of the store before it is offered */
 rdDef("pt_tang",10,{t:"Thanh đao dâng chùa",w:"maid",sj:"thanh đao hồi môn của {pv}",cast(A){if(!pfO("daotang"))pfO("daotang","ta");return rdCast(A,["v"])},
  g:"Theo lệ {land}, người muốn cầu yên cho chuyến vượt biển phải dâng một vật quý nhất mình có. Vật quý nhất của ngươi là thanh đao {pv} trao lúc lên thuyền, lưỡi sáng như nước. Nhưng ở Đại Hy, phi tần giữ đao trong cung đã là chuyện để người ta nói.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
@@ -231,9 +235,9 @@ rdDef("pt_tang",10,{t:"Thanh đao dâng chùa",w:"maid",sj:"thanh đao hồi mô
   {n:"Đưa đao cho người ấy xem, nói rõ là vật hồi môn",f:"le",wx:"không ai nói ngươi giấu",lx:"cấm quân biết đao ở đâu",rt:"Người ấy xem đao, khen, rồi về."},
   {n:"Đáp: đao đã định dâng chùa",f:"phap",wx:"đao có danh phận",lx:"phải dâng thật",rt:"Người ấy cúi đầu: “Dâng chùa thì không ai dám hỏi.”"},
   {n:"Đáp: không có đao nào",f:"tu",wx:"việc dừng ở đây",lx:"nếu lộ thì là nói dối",rt:"Người ấy về, không hỏi thêm.",rf:"Người ấy nói: “Có người thấy rồi.”"}]},
- c1:{h:"{v} tâu chuyện đao",w:"v",need:["v"],t:"{v} tâu với Hoàng hậu: công chúa {land} giữ đao trong nội cung, không biết để làm gì.",o:[
+ c1:{h:"{v} tâu chuyện đao",w:"v",need:["v","hh"],t:"{v} tâu với Hoàng hậu: công chúa {land} giữ đao trong nội cung, không biết để làm gì.",o:[
   {n:"Mời Hoàng hậu xem đao và thư của {pv}",wx:"Hoàng hậu thấy là vật hồi môn",lx:"đao phải đưa ra trước mọi người",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Hoàng hậu đọc thư của {pv}, gật đầu cho giữ.",rf:"Hoàng hậu nói: “Hồi môn thì cất vào kho.”"},
-  {n:"Hỏi lại: trong cung {v} có cung tên của nhà nàng, sao không ai tâu?",wx:"đổi mũi dùi",lx:"{v} thêm oán",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Hoàng hậu cho thôi bàn chuyện binh khí."},
+  {n:"Hỏi lại: trong cung {v} có cung tên của nhà nàng, sao không ai tâu?",wx:"đổi mũi dùi",lx:"{v} thêm oán",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Hoàng hậu cho thôi bàn chuyện binh khí.",rf:"{v} đáp: “Cung tên nhà ta có sổ của Binh bộ. Đao của nàng có sổ của ai?”"},
   {n:"Gửi đao vào kho Nội vụ phủ cho yên",wx:"không còn ai tâu",lx:"đao nằm trong kho",rt:"Thanh đao được niêm trong hộp gỗ, cất vào kho.",go:()=>pfO("daotang","kho")}]},
  c2:{h:"Thầy Trí Viễn hỏi ngươi",w:"maid",if:()=>PFTVK(),t:"Thầy hỏi: “Con dâng đao, là cầu cho ta, hay cầu cho con?”",o:[
   {n:"Thưa: cầu cho thầy qua bể bình an",wx:"thầy cảm động",lx:"lời nguyện ràng buộc",rt:"Thầy đặt tay lên đầu ngươi, im lặng rất lâu."},
@@ -241,41 +245,41 @@ rdDef("pt_tang",10,{t:"Thanh đao dâng chùa",w:"maid",sj:"thanh đao hồi mô
   {n:"Thưa: cầu cho con được về thăm mẹ",wx:"thầy thấy ngươi thật lòng",lx:"lộ lòng nhớ nhà",rt:"Thầy cười: “Thế mới là lời nguyện.”"}]},
  t1:{h:"Hoàng thượng thấy đao",w:"emp",t:()=>"Hoàng thượng đến cung ngươi, "+({ta:"thấy thanh đao đặt trên giá. Ngài cầm lên, ướm thử: “Đao này nặng hơn đao Đại Hy.”",kho:"nghe chuyện thanh đao đã vào kho. Ngài hỏi: “Đao của cha nàng, sao để kho giữ?”"})[pfO("daotang")||"ta"],o:[
   {n:"Thưa: thiếp muốn dâng đao lên chùa cầu yên cho thầy",f:"phap",wx:"ngài thấy lòng ngươi",lx:"ngài tiếc thanh đao",rt:"Ngài đặt đao xuống: “Đao chém sắt mà dâng chùa, chỉ người bên kia bể mới nghĩ ra.”"},
-  {n:"Thưa: xin dâng đao lên ngài",f:"le",wx:"ngài vui",lx:"đao rời khỏi tay ngươi",rt:"Ngài cười: “Trẫm giữ hộ, khi nào nàng cần thì lấy.”"},
+  {n:"Thưa: xin dâng đao lên ngài",f:"le",wx:"ngài vui",lx:"đao rời khỏi tay ngươi",rt:()=>(pfO("daotang")==="kho"?"Ngài sai Nội vụ phủ mang hộp gỗ sang cung ngài. ":"")+"Ngài cười: “Trẫm giữ hộ, khi nào nàng cần thì lấy.”",go:()=>pfO("daotang","vua")},
   {n:"Thưa: đao là của {pv}, thiếp chỉ giữ",f:"tu",wx:"ngài hiểu lòng con gái",lx:"ngài thấy ngươi không chịu rời",rt:"Ngài gật đầu, không hỏi thêm."}]},
  x1:{h:"Ngày rằm",w:"emp",t:"Ngày rằm, chùa Pháp Vân đông người. Thầy Trí Viễn ngồi trên pháp tòa. Cả chùa chờ xem công chúa {land} dâng gì.",o:[
-  {n:"Dâng thanh đao lên chùa Pháp Vân làm lễ nguyện",e:["win","lose"],rt:()=>PFDK()+"Thầy nhận đao, sai treo trong chánh điện, lưỡi quay vào trong. Cả chùa niệm Phật.",rf:"Từ bộ ngăn lại: chùa không giữ binh khí. Thanh đao bị đưa vào kho.",go:(A,ok)=>pfO("daotang",ok?"chua":"kho")},
-  {n:"Dâng thanh đao lên Hoàng thượng, xin ngài thay ngươi nguyện",e:["win2","mid"],rt:()=>PFDK()+"Ngài nhận đao, sai khắc lên chuôi bốn chữ “Bể lặng thuyền yên”.",rf:"Ngài nhận đao mà không nói gì về lời nguyện.",go:()=>pfO("daotang","vua")},
-  {n:"Giữ đao, chỉ dâng hương",e:"mid",lx:"lời nguyện nhỏ hơn",rt:()=>pfO("daotang")==="kho"?"Ngươi dâng ba nén hương. Thanh đao vẫn nằm trong kho Nội vụ phủ.":"Ngươi dâng ba nén hương. Thanh đao vẫn nằm trong rương."}]}},
- E:{win:{tag:"Thanh đao trong chánh điện",w:"emp",t:"Thanh đao của {pv} treo trong chánh điện chùa Pháp Vân. Người ta gọi đó là “đao cầu bể”."},
-  win2:{tag:"Bể lặng thuyền yên",w:"emp",t:"Thanh đao nằm trong cung Hoàng thượng, chuôi khắc bốn chữ. Ai cũng biết đó là lời nguyện của ngươi."},
-  mid:{tag:"Ba nén hương",t:"Lời nguyện chỉ có ba nén hương. Thanh đao vẫn ở chỗ cũ."},
-  lose:{tag:"Đao vào kho",w:"v",t:"Thanh đao của {pv} nằm trong kho Nội vụ phủ. {v} nói: binh khí bên kia bể suýt vào đến chánh điện."}}});
+  {n:"Dâng thanh đao lên chùa Pháp Vân làm lễ nguyện",e:["win","lose"],rt:()=>PFDK(pfO("daotang"))+"Thầy nhận đao, sai treo trong chánh điện, lưỡi quay vào trong. Cả chùa niệm Phật.",rf:"Từ bộ ngăn lại: chùa không giữ binh khí. Thanh đao bị đưa vào kho.",go:(A,ok)=>pfO("daotang",ok?"chua":"kho")},
+  {n:"Dâng thanh đao lên Hoàng thượng, xin ngài thay ngươi nguyện",e:["win2","mid"],rt:()=>(pfO("daotang")==="vua"?"Thanh đao ngài giữ hộ, nay ngài nhận hẳn làm vật nguyện; ":PFDK(pfO("daotang"))+"Ngài nhận đao, ")+"sai khắc lên chuôi bốn chữ “Bể lặng thuyền yên”.",rf:"Ngài nhận đao mà không nói gì về lời nguyện.",go:()=>pfO("daotang","vua")},
+  {n:"Giữ đao, chỉ dâng hương",e:"mid",lx:"lời nguyện nhỏ hơn",rt:()=>"Ngươi dâng ba nén hương. "+(({kho:"Thanh đao vẫn nằm trong kho Nội vụ phủ.",vua:"Thanh đao vẫn ở chỗ Hoàng thượng giữ hộ."})[pfO("daotang")]||"Thanh đao vẫn nằm trong rương.")}]}},
+ E:{win:{tag:"Thanh đao trong chánh điện",w:"emp",t:()=>pfO("daotang")==="chua"?"Thanh đao của {pv} treo trong chánh điện chùa Pháp Vân. Người ta gọi đó là “đao cầu bể”.":"Lời nguyện của ngươi thành. Người ta gọi đó là “lễ cầu bể”."},
+  win2:{tag:"Bể lặng thuyền yên",w:"emp",t:()=>(pfO("daotang")==="vua"?"Thanh đao nằm trong cung Hoàng thượng, chuôi khắc bốn chữ.":"Bốn chữ “Bể lặng thuyền yên” được ghi vào sổ lễ.")+" Ai cũng biết đó là lời nguyện của ngươi."},
+  mid:{tag:"Ba nén hương",t:()=>"Lời nguyện chỉ có ba nén hương. "+(({kho:"Thanh đao vẫn nằm trong kho Nội vụ phủ.",vua:"Thanh đao vẫn ở chỗ Hoàng thượng giữ hộ.",ta:"Thanh đao vẫn nằm trong rương của ngươi."})[pfO("daotang")]||"")},
+  lose:{tag:"Đao vào kho",w:"v",t:()=>(pfO("daotang")==="kho"?"Thanh đao của {pv} nằm trong kho Nội vụ phủ.":"Lễ dâng đao không thành.")+" {v} nói: binh khí bên kia bể suýt vào đến chánh điện."}}});
 
-const PFSAIL=()=>{pfMove("trivien","hb");if(PFTNK()&&pfO("dodiep")!=="chay")pfMove("tinhvien","hb");for(const k of ["xaloi","hopkinh"])if(["ta","chua","tinhvien"].includes(pfO(k)))pfO(k,"trivien");return""};/* .11 win: the master sails, the relics and the sutra case go with him */
-rdDef("pt_tang",11,{t:"Thầy đi hay ở",w:"emp",sj:"chuyến thuyền cuối của thầy Trí Viễn",cast(A){return rdCast(A,["v"])},
- g:()=>"Gió mùa đông bắc đã về. Thuyền sứ {land} neo ở bến Minh Châu, mười ngày nữa nhổ neo. Thầy Trí Viễn đã mù, đã già, mà vẫn xin đi. "+PFKINH()+" Lần này, lời của ngươi là lời cuối cùng Hoàng thượng nghe trước khi phê.",
+const PFSAIL=()=>{pfMove("trivien","hb");if(PFTNK()&&pfO("dodiep")==="tinhvien"&&!RD_FL("pt.f.tnolai"))pfMove("tinhvien","hb");for(const k of ["xaloi","hopkinh"])if(["ta","chua","tinhvien"].includes(pfO(k)))pfO(k,"trivien");return""};/* .11 win: the master sails, the relics and the sutra case go with him; Tịnh Viên sails too unless she told him to stay (c2/c3 opt 3) or he has no paper */
+rdDef("pt_tang",11,{t:"Thầy đi hay ở",w:"emp",sj:"chuyến thuyền cuối của thầy Trí Viễn",cast(A){if(pfO("dodiep")==="ta"&&PFTNK()){pfO("dodiep","tinhvien");RD_FL("pt.f.ddtra",1)}return rdCast(A,["v"])},
+ g:()=>"Gió mùa đông bắc đã về. Thuyền sứ {land} neo ở bến Minh Châu, mười ngày nữa nhổ neo. "+(PFMAT()?"Mắt thầy Trí Viễn chỉ còn một bên thấy bóng đèn, thầy đã già":"Thầy Trí Viễn đã mù, đã già")+", mà vẫn xin đi. "+(RD_FL("pt.f.ddtra")&&pfO("dodiep")==="tinhvien"?"Ngươi trả lại tờ độ điệp cất trong rương cho Tịnh Viên. ":"")+PFKINH()+" Lần này, lời của ngươi là lời cuối cùng Hoàng thượng nghe trước khi phê.",
  p:[["s1","s2"],["c1","c2","c3"],["t1"],["x1"]],
  B:{s1:{h:"Thầy gọi ngươi",w:"maid",if:RDW(1),t:"Thầy cho gọi ngươi đến chùa, đưa tay lần lên mặt ngươi như để nhớ: “Lần này ta đi. Con đừng xin cho ta ở lại.”",o:[
   {n:"Hứa với thầy: sẽ xin cho thầy đi",f:"phap",wx:"thầy yên lòng",lx:"một lời hứa trước triều",rt:"Thầy gật đầu, lần tràng hạt."},
   {n:"Thưa: xin thầy để con xin cả đường lui",f:"le",wx:"có đường cho cả hai",lx:"thầy e ngươi giữ chân",rt:"Thầy cười: “Đường lui của tăng là chùa nào cũng được.”"},
   {n:"Ngồi im bên thầy, không hứa gì",f:"tu",wx:"thầy hiểu lòng ngươi",lx:"không có lời nào để giữ",rt:"Hai người ngồi đến khi chuông chiều đổ."}]},
- s2:{h:"Từ bộ tâu",w:"emp",if:RDW(0),t:"Từ bộ tâu: thầy Trí Viễn mù, đi bể là đi tìm cái chết; triều cho đi là mang tiếng bỏ một cao tăng.",o:[
+ s2:{h:"Từ bộ tâu",w:"emp",if:RDW(0),t:()=>"Từ bộ tâu: "+(PFMAT()?"mắt thầy Trí Viễn chỉ còn thấy bóng":"thầy Trí Viễn mù")+", đi bể là đi tìm cái chết; triều cho đi là mang tiếng bỏ một cao tăng.",o:[
   {n:"Xin vào chầu, nói thay thầy",f:"phap",wx:"ngài nghe lời thầy qua miệng ngươi",lx:"bá quan thấy ngươi cãi Từ bộ",rt:"Ngài nghe hết, rồi nói: “Để trẫm nghĩ.”",rf:"Ngài nói: “Từ bộ nói có lý.”"},
   {n:"Đồng ý với Từ bộ: xin cho thầy an dưỡng",f:"le",wx:"Từ bộ không làm khó ngươi",lx:"thầy buồn",rt:"Từ bộ khen ngươi biết điều."},
   {n:"Lặng lẽ gửi thư cho sứ đoàn chuẩn bị chỗ cho thầy",f:"tu",wx:"thuyền có sẵn chỗ",lx:"việc làm sau lưng triều",rt:"Sứ đoàn dành một khoang ấm ở đuôi thuyền."}]},
- c1:{h:"{v} nước cờ cuối",w:"v",need:["v"],t:"{v} tâu: thầy Trí Viễn sang bể là mang theo kinh sách, xá lợi và cả lòng dân Đại Hy; nước khác được thầy, Đại Hy được gì?",o:[
+ c1:{h:"{v} nước cờ cuối",w:"v",need:["v"],t:()=>"{v} tâu: thầy Trí Viễn sang bể là mang theo kinh sách, "+(["trivien","chua"].includes(pfO("xaloi"))?"xá lợi ":"")+"và cả lòng dân Đại Hy; nước khác được thầy, Đại Hy được gì?",o:[
   {n:"Đáp: Đại Hy được tiếng là nước có thầy cho người khác học",wx:"bá quan thấy lý",lx:"{v} ghi hận",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Hoàng thượng gật đầu. {v} lùi lại.",rf:"Có quan tán thành {v}: “Tiếng thì không ăn được.”"},
   {n:"Gặp riêng {v}, hứa để nhà nàng chở lụa theo thuyền sứ năm sau",wx:"{v} thôi cản",lx:"một món nợ với nhà {v}",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} không tâu thêm."},
-  {n:"Đưa ra chuyện xá lợi bị tráo bởi người cung {v}",wx:"{v} không còn lời",lx:"thù hai nhà sâu thêm",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} tái mặt, cáo lui."}]},
- c2:{h:"Tịnh Viên xin một việc",w:"maid",if:()=>PFTNK()&&pfO("dodiep")!=="chay",t:"Tịnh Viên xin ngươi: nếu thầy đi, y xin được ngồi cạnh thầy suốt chuyến, không về khoang của sứ đoàn.",o:[
+  {n:()=>RD_FL("pt.f.traoxl")?"Đưa ra chuyện xá lợi bị tráo bởi người cung {v}":"Hỏi lại {v}: kẻ tráo xá lợi tháp Pháp Vân, sao đến nay chưa ai tìm ra",wx:"{v} không còn lời",lx:"thù hai nhà sâu thêm",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:()=>RD_FL("pt.f.traoxl")?"Ngươi nhắc sổ lệnh bài và thái giám cung {v}. {v} tái mặt, cáo lui.":"Cả điện im. {v} tái mặt, cáo lui.",rf:()=>RD_FL("pt.f.traoxl")?"{v} nói: “Một tên thái giám làm càn, sao đổ cho cả cung ta?”":"{v} cười: “Nàng hỏi ta, ta biết hỏi ai?”"}]},
+ c2:{h:"Tịnh Viên xin một việc",w:"maid",if:()=>PFTNK()&&pfO("dodiep")==="tinhvien",t:"Tịnh Viên xin ngươi: nếu thầy đi, y xin được ngồi cạnh thầy suốt chuyến, không về khoang của sứ đoàn.",o:[
   {n:"Xin sứ đoàn cho y ngồi cạnh thầy",wx:"thầy có người dắt suốt chuyến",lx:"phải nhờ sứ đoàn",rt:"Sứ đoàn dành cho hai thầy trò một góc ở đuôi thuyền.",rf:"Sứ đoàn nói khoang đã chật."},
   {n:"Bỏ bạc cho y theo thuyền buôn Tân La đi trước",wx:"y tới bên kia chờ thầy",lx:"bạc ra, đường riêng",rt:"Tịnh Viên lạy ngươi, theo thuyền Tân La ra bể trước.",go:()=>pfMove("tinhvien","hb")},
-  {n:"Bảo y ở lại chùa, giữ hương đèn",wx:"chùa Pháp Vân có người",lx:"thầy đi không có người quen",rt:"Tịnh Viên cúi đầu nhận lời."}]},
- c3:{h:"Tịnh Viên không có độ điệp",w:"maid",if:()=>PFTNK()&&pfO("dodiep")==="chay",t:"Độ điệp của Tịnh Viên đã bị đốt. Không có độ điệp, y không được lên thuyền sứ, mà thầy không thể đi bể nếu không có y dắt.",o:[
-  {n:"Xin Từ bộ cấp lại độ điệp cho y",wx:"y đi cùng thầy đúng phép",lx:"phải nhờ Từ bộ",rt:"Tờ độ điệp mới có dấu son.",rf:"Giấy chưa xong khi thuyền sắp đi.",go:(A,ok)=>{if(ok)pfO("dodiep","tinhvien");return""}},
+  {n:"Bảo y ở lại chùa, giữ hương đèn",wx:"chùa Pháp Vân có người",lx:"thầy đi không có người quen",rt:"Tịnh Viên cúi đầu nhận lời.",go:()=>{RD_FL("pt.f.tnolai",1);return""}}]},
+ c3:{h:"Tịnh Viên không có độ điệp",w:"maid",if:()=>PFTNK()&&pfO("dodiep")!=="tinhvien",t:()=>(pfO("dodiep")==="kho"?"Độ điệp của Tịnh Viên còn nằm ở Từ bộ.":"Độ điệp của Tịnh Viên đã bị đốt.")+" Không có độ điệp, y không được lên thuyền sứ, mà thầy không thể đi bể nếu không có y dắt.",o:[
+  {n:()=>pfO("dodiep")==="kho"?"Xin Từ bộ trả độ điệp cho y":"Xin Từ bộ cấp lại độ điệp cho y",wx:"y đi cùng thầy đúng phép",lx:"phải nhờ Từ bộ",rt:()=>pfO("dodiep")==="kho"?"Từ bộ trả tờ độ điệp cũ, đóng thêm dấu son.":"Tờ độ điệp mới có dấu son.",rf:"Giấy chưa xong khi thuyền sắp đi.",go:(A,ok)=>{if(ok)pfO("dodiep","tinhvien");return""}},
   {n:"Bỏ bạc cho y theo thuyền buôn Tân La đi trước",wx:"y tới bên kia chờ thầy",lx:"bạc ra, đường riêng",rt:"Tịnh Viên lạy ngươi, theo thuyền Tân La ra bể trước.",go:()=>pfMove("tinhvien","hb")},
-  {n:"Bảo y ở lại chùa, giữ hương đèn",wx:"chùa Pháp Vân có người",lx:"thầy đi không có người quen",rt:"Tịnh Viên cúi đầu nhận lời."}]},
+  {n:"Bảo y ở lại chùa, giữ hương đèn",wx:"chùa Pháp Vân có người",lx:"thầy đi không có người quen",rt:"Tịnh Viên cúi đầu nhận lời.",go:()=>{RD_FL("pt.f.tnolai",1);return""}}]},
  t1:{h:"Hoàng thượng hỏi",w:"emp",t:"Đêm ấy Hoàng thượng đến, cầm tờ tấu của Từ bộ: “Nếu trẫm cho thầy đi, nàng có muốn theo thuyền về thăm {land} không?”",o:[
   {n:"Thưa: thiếp ở lại, chỉ xin thầy được đi",f:"phap",wx:"ngài thấy ngươi không vì mình",lx:"ngươi không về",rt:"Ngài nắm tay ngươi: “Nàng ở lại, trẫm cho thầy đi.”",rf:"Ngài nói: “Nàng ở lại, mà lòng đã đi.”"},
   {n:"Thưa: thiếp xin dựng giới đàn ở kinh, để người {land} sang đây",f:"le",wx:"ngài thấy một cách giữ thầy mà không cản",lx:"thầy có thể buồn",rt:"Ngài gật: “Thế thì Đại Hy là nơi người ta qua bể mà đến.”"},
@@ -283,14 +287,14 @@ rdDef("pt_tang",11,{t:"Thầy đi hay ở",w:"emp",sj:"chuyến thuyền cuối 
  x1:{h:"Tờ chiếu cuối",w:"emp",t:"Sáng hôm sau, tờ chiếu nằm trên án, chỉ còn thiếu một nét son. Hoàng thượng nhìn ngươi.",o:[
   {n:"Xin ngài cho thầy sang bể theo thuyền sứ",e:["win","lose"],rt:"Nét son hạ xuống. Mười ngày sau, thầy Trí Viễn được dắt lên thuyền ở bến Minh Châu, mặt hướng ra bể.",rf:"Từ bộ quỳ can. Ngài gác bút: “Thầy ở lại.”"},
   {n:"Xin ngài dựng giới đàn ở chùa Pháp Vân, để người {land} sang thụ giới",e:["win2","mid"],rt:()=>"Ngài chuẩn. Giới đàn dựng trong một tháng; người {land} đầu tiên thụ giới là "+(PFTNK()?"Tịnh Viên.":"một tăng {land} vừa theo thuyền sứ sang."),rf:"Ngài nói: “Dựng thì dựng, nhưng không lớn.”"},
-  {n:"Thưa: thầy đã mù, xin để thầy an dưỡng",e:"mid",lx:"lời thỉnh của {pv} không thành",rt:"Thầy ở lại chùa Pháp Vân. Thuyền sứ đi không có thầy."}]}},
- E:{win:{tag:"Thầy sang bể",w:"emp",t:"Thầy Trí Viễn sang bể. Một năm sau, thư {mh} đến: bên ấy đã có giới đàn, người ta gọi thầy là “vị thầy mù từ bên kia sóng”, và nhắc tên ngươi trong mỗi lời nguyện.",go:(_A,G)=>{PFSAIL();return e67bien(G[0])}},
-  win2:{tag:"Giới đàn ở kinh",w:"emp",t:"Giới đàn chùa Pháp Vân mở cửa cho người {land} sang thụ giới. Thầy ở lại, mà đạo thì qua bể.",go:()=>{if(PFTNK()&&pfO("dodiep")!=="chay")pfMove("tinhvien","hb");return""}},
+  {n:()=>PFMAT()?"Thưa: mắt thầy đã yếu, xin để thầy an dưỡng":"Thưa: thầy đã mù, xin để thầy an dưỡng",e:"mid",lx:"lời thỉnh của {pv} không thành",rt:"Thầy ở lại chùa Pháp Vân. Thuyền sứ đi không có thầy."}]}},
+ E:{win:{tag:"Thầy sang bể",w:"emp",t:()=>"Thầy Trí Viễn sang bể. Một năm sau, thư {mh} đến: bên ấy đã có giới đàn, người ta gọi thầy là “"+(PFMAT()?"vị thầy một mắt":"vị thầy mù")+" từ bên kia sóng”, và nhắc tên ngươi trong mỗi lời nguyện.",go:(_A,G)=>{PFSAIL();return e67bien(G[0])}},
+  win2:{tag:"Giới đàn ở kinh",w:"emp",t:"Giới đàn chùa Pháp Vân mở cửa cho người {land} sang thụ giới. Thầy ở lại, mà đạo thì qua bể."},
   mid:{tag:"Thầy ở lại",t:"Thầy ở lại chùa Pháp Vân, ngày ngày ngồi bên cửa sổ hướng ra bể. Lời thỉnh của {pv} thành một chuyện người ta kể."},
   lose:{tag:"Thuyền đi không có thầy",w:"v",t:"Thuyền sứ nhổ neo không có thầy. Bên kia bể, {pv} gửi thư hỏi vì sao; triều Đại Hy không trả lời.",go:(_A,G)=>e67bien(G[0])}}});
 RD97L.push(rdRare({a:"pt_tang_11",tag:"Giới đàn bên kia bể",w:"emp",n:"Xin theo xa giá ra tận bến, tự tay dắt thầy lên thuyền",
  path:["Nhận lời thầy","Cho y mang hạt giống","Gửi thuốc và áo ấm","Ngồi lại đọc kinh","Thưa: Phật dạy người","Lên tháp ngay","Dâng thanh đao lên chùa","Hứa với thầy","Xin ngài cho thầy sang bể"],
- bad:["Giao thầy cho chùa","Thưa: thầy đã mù","Sai người tráo đan"],x:[()=>S.duc>=RR("pt_tang_11").bar,"Đức từ "+RR("pt_tang_11").bar],
+ bad:["Giao thầy cho chùa","Thưa: thầy đã mù","Thưa: mắt thầy đã yếu","Sai người tráo đan"],x:[()=>S.duc>=RR("pt_tang_11").bar,"Đức từ "+RR("pt_tang_11").bar],
  t:"Ngươi xin theo xa giá ra bến Minh Châu, tự tay dắt thầy Trí Viễn lên ván thuyền. Thầy dừng ở đầu ván, quay về phía ngươi mà chắp tay. Hoàng thượng đứng trên bến, sai Từ bộ ghi vào sử: cao tăng Đại Hy sang bể truyền giới, có công chúa {land} tiễn chân. Bên kia bể, giới đàn đầu tiên khắc tên hai nước.",
  go:(_A,G)=>{PFSAIL();return e67bien(G[0])},rw:"ngocboi",ti:"Người tiễn thầy qua bể"}));
 
@@ -305,6 +309,7 @@ RD97L.push(rdRare({a:"pt_tang_11",tag:"Giới đàn bên kia bể",w:"emp",n:"Xi
 const PFHT=()=>pfAlive("huuthanh")&&pfP("huuthanh","w")==="kinh";/* the merchant is in the capital and can act there */
 const PFOC=()=>pfAlive("ocuu")?pfP("ocuu","w"):"chet";/* where Ô Cửu is: hb at sea · nguc · cang (pardoned, guarding the port) · chet */
 const PFBAC=()=>({ocuu:"Rương bạc hồi môn vẫn nằm trong tay Ô Cửu.",ta:"Rương bạc hồi môn đã về đến cung ngươi.",kho:"Rương bạc hồi môn đã nộp kho Hộ bộ.",huuthanh:"Rương bạc hồi môn đang trong khoang thuyền Kim Hựu Thành."})[pfO("ruongbac")]||"";
+const PFHD=h=>({ta:"trong cung ngươi",tbs:"ở kho bến Thị bạc ty",huuthanh:"trong khoang thuyền Kim Hựu Thành",kho:"trong kho",vua:"trong kho ngự"})[h]||"";/* where the six crates are (called with pfO("hangdao")) */
 RTHEME67.pt_dang="court";
 ARC67.pt_dang=pfArc("pt_dang",{o:"pf",t:"Thuyền hồi môn",w:"emp",sj:"chiếc thuyền chở của hồi môn",cast(A){if(pfP("huuthanh","w")==="cang")pfMove("huuthanh","kinh");pfMeet("huuthanh");
   if(!pfO("ruongbac"))pfO("ruongbac","ocuu");if(!pfO("hangdao"))pfO("hangdao","huuthanh");if(!pfO("thugiac"))pfO("thugiac","huuthanh");return rdCast(A,["v"])},
@@ -321,7 +326,7 @@ ARC67.pt_dang=pfArc("pt_dang",{o:"pf",t:"Thuyền hồi môn",w:"emp",sj:"chiế
  c1:{h:"{v} nói chuyện đao",w:"v",need:["v"],t:"{v} nói trong buổi thỉnh an: “Của hồi môn gì mà chở đao cả hòm? Phi tần buôn binh khí, chẳng phải chuyện nhỏ.”",o:[
   {n:"Đáp: đao là quà {pv} gửi Hoàng thượng",wx:"lời đồn mất cớ",lx:"đao thành quà phải dâng",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Cả điện gật gù. {v} im lặng.",rf:"{v} hỏi: “Quà sao không có trong quốc thư?”"},
   {n:"Mời {v} xem sổ hàng của thuyền",wx:"{v} thấy không có gì giấu",lx:"việc của ngươi ra trước mắt {v}",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} xem xong, nói nhạt: “Thì ra chỉ là đao.”"},
-  {n:"Hỏi lại: nhà {v} chở muối lậu qua sông thì gọi là gì?",wx:"trả đúng miếng",lx:"{v} thêm oán",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} đỏ mặt, cáo lui sớm."}]},
+  {n:"Hỏi lại: nhà {v} chở muối lậu qua sông thì gọi là gì?",wx:"trả đúng miếng",lx:"{v} thêm oán",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} đỏ mặt, cáo lui sớm.",rf:"{v} cười: “Muối nhà ta có giấy của Diêm ty. Đao của nàng có giấy của ai?”"}]},
  c2:{h:"Thị bạc sứ đòi thuế",w:"emp",t:"Thị bạc sứ ở Minh Châu gửi công văn: hòm đao vào bến phải nộp thuế một phần mười như hàng buôn, không thì giữ lại.",o:[
   {n:"Bỏ bạc nộp thuế cho xong",wx:"hòm đao được thả",lx:"bạc ra",rt:"Hòm đao được đóng dấu Thị bạc ty."},
   {n:"Tâu rằng đó là của hồi môn, không phải hàng buôn",wx:"giữ được lệ của hòa thân",lx:"Thị bạc sứ ghi nhớ ngươi",rt:"Hộ bộ phê: hồi môn không đánh thuế.",rf:"Hộ bộ chưa phê, hòm đao còn nằm ở bến."},
@@ -346,41 +351,41 @@ PF97.push({a:"pt_dang",tag:"Chén rượu gửi giặc",w:"emp",n:"Gửi Ô Cử
 rdDef("pt_dang",5,{t:"Hàng đao và bạc",w:"emp",sj:"sáu hòm đao {land} ở bến",cast(A){if(PFHT())pfMeet("huuthanh");return rdCast(A,["v"])},
  g:()=>"Sáu hòm đao {land} đã lên bờ. Binh bộ nói: đao tư không được vào kinh, phải nộp kho. Hộ bộ đòi thuế. Kim Hựu Thành đòi công cứu hàng. "+PFBAC()+" Ai giữ sáu hòm đao ấy, người đó có tiếng nói ở bến Minh Châu.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Quan Binh bộ đến",w:"emp",if:RDW(1),t:"Một viên quan Binh bộ đến tận cung ngươi, rút một thanh trong hòm ra xem, rồi nói: “Đao thế này, cấm quân còn chưa có.”",o:[
-  {n:"Mời quan Binh bộ thử đao trước mặt ngươi",f:"phep",wx:"Binh bộ thấy đao là quà, không phải hàng lậu",lx:"Binh bộ thèm đao",rt:"Lưỡi đao chém đứt một cây giáo gỗ như chém cỏ."},
-  {n:"Tặng y một thanh, xin y bớt lời",f:"muu",wx:"Binh bộ nợ ngươi",lx:"một thanh đao rời hòm",rt:"Viên quan nhận đao, cười: “Hòm này của hồi môn, không ai bàn.”",go:()=>pfO("dao_bb","binhbo")},
-  {n:"Thưa: đao chờ Hoàng thượng phân xử",f:"bien",wx:"không ai lấy được đao trước ngài",lx:"Binh bộ không vui",rt:"Viên quan lui ra, mặt lạnh."}]},
+ B:{s1:{h:"Quan Binh bộ đến",w:"emp",if:RDW(1),t:()=>(pfO("hangdao")==="huuthanh"?"Kim Hựu Thành cho khiêng sáu hòm đao vào cung ngươi gửi tạm, chờ triều phân xử. ":"")+"Một viên quan Binh bộ đến tận cung ngươi, rút một thanh trong hòm ra xem, rồi nói: “Đao thế này, cấm quân còn chưa có.”",o:[
+  {n:"Mời quan Binh bộ thử đao trước mặt ngươi",f:"phep",wx:"Binh bộ thấy đao là quà, không phải hàng lậu",lx:"Binh bộ thèm đao",rt:"Lưỡi đao chém đứt một cây giáo gỗ như chém cỏ.",go:()=>{if(pfO("hangdao")==="huuthanh")pfO("hangdao","ta");return""}},
+  {n:"Tặng y một thanh, xin y bớt lời",f:"muu",wx:"Binh bộ nợ ngươi",lx:"một thanh đao rời hòm",rt:"Viên quan nhận đao, cười: “Hòm này của hồi môn, không ai bàn.”",go:()=>{if(pfO("hangdao")==="huuthanh")pfO("hangdao","ta");return pfO("dao_bb","binhbo")}},
+  {n:"Thưa: đao chờ Hoàng thượng phân xử",f:"bien",wx:"không ai lấy được đao trước ngài",lx:"Binh bộ không vui",rt:"Viên quan lui ra, mặt lạnh.",go:()=>{if(pfO("hangdao")==="huuthanh")pfO("hangdao","ta");return""}}]},
  s2:{h:"Hòm đao bị giữ ở bến",w:"maid",if:RDW(0),t:"Thị bạc ty giữ sáu hòm đao ở kho bến, nói chờ chỉ. Mỗi ngày nằm kho là một ngày tiền canh.",o:[
-  {n:"Bỏ bạc trả tiền canh kho",f:"bien",wx:"hòm đao được canh cẩn thận",lx:"bạc ra",rt:"Kho bến cử hai người canh riêng."},
-  {n:"Xin Hộ bộ một tờ phê thả hòm",f:"phep",wx:"giấy tờ đàng hoàng",lx:"chậm",rt:"Hộ bộ phê thả sau mười ngày.",rf:"Hộ bộ nói: “Chờ Binh bộ.”"},
-  {n:"Nhờ Kim Hựu Thành chở lén hòm đao lên kinh",f:"muu",if:()=>PFHT(),wx:"hòm đao về nhanh",lx:"nếu lộ là chở đao lậu",rt:"Sáu hòm đao nằm dưới khoang muối của thuyền Tân La.",rf:"Lính bến khám thuyền, thấy hòm đao."},
-  {n:"Sai {maid} xuống bến trông hòm đao",f:"muu",if:()=>!PFHT(),wx:"có người của ngươi ở kho",lx:"cung thiếu người",rt:"{maid} ngồi trong kho bến đếm từng hòm."}]},
+  {n:"Bỏ bạc trả tiền canh kho",f:"bien",wx:"hòm đao được canh cẩn thận",lx:"bạc ra",rt:"Kho bến cử hai người canh riêng.",go:()=>pfO("hangdao","tbs")},
+  {n:"Xin Hộ bộ một tờ phê thả hòm",f:"phep",wx:"giấy tờ đàng hoàng",lx:"chậm",rt:"Hộ bộ phê thả sau mười ngày; sáu hòm đao về lại khoang thuyền Kim Hựu Thành.",rf:"Hộ bộ nói: “Chờ Binh bộ.”",go:(A,ok)=>pfO("hangdao",ok?"huuthanh":"tbs")},
+  {n:"Nhờ Kim Hựu Thành chở lén hòm đao lên kinh",f:"muu",if:()=>PFHT(),wx:"hòm đao về nhanh",lx:"nếu lộ là chở đao lậu",rt:"Sáu hòm đao nằm dưới khoang muối của thuyền Tân La.",rf:"Lính bến khám thuyền, thấy hòm đao, khiêng về kho bến.",go:(A,ok)=>pfO("hangdao",ok?"huuthanh":"tbs")},
+  {n:"Sai {maid} xuống bến trông hòm đao",f:"muu",if:()=>!PFHT(),wx:"có người của ngươi ở kho",lx:"cung thiếu người",rt:"{maid} ngồi trong kho bến đếm từng hòm.",go:()=>pfO("hangdao","tbs")}]},
  c1:{h:"Kim Hựu Thành đòi công",w:"maid",if:()=>PFHT(),t:"Kim Hựu Thành xin gặp: “Cứu sáu hòm đao, thuyền ta mất một cánh buồm và ba người. Công chúa trả công bằng gì?”",o:[
   {n:"Trả công y bằng bạc",wx:"không nợ ai",lx:"bạc ra nhiều",rt:"Kim Hựu Thành nhận bạc, cúi đầu cảm tạ."},
   {n:"Hứa xin cho y một tờ giấy buôn ở Minh Châu",wx:"y nợ ngươi một lần",lx:"một lời hứa với lái buôn",rt:"Y cười: “Lời công chúa, ta ghi vào sổ.”",rf:"Y lắc đầu: “Lời hứa không trả được tiền buồm.”"},
   {n:"Cho y chọn một thanh đao đẹp nhất làm công",wx:"y được thứ y thích",lx:"đao vào tay lái buôn",rt:"Kim Hựu Thành lật từng thanh, chọn thanh có vân như sóng.",go:()=>pfO("dao_ht","huuthanh")}]},
- c2:{h:"{v} mua đao",w:"v",need:["v"],t:"Người nhà {v} đến hỏi mua một hòm đao cho anh trai nàng ta đang làm phó tướng ở biên ải.",o:[
+ c2:{h:"{v} mua đao",w:"v",need:["v"],t:()=>"Người nhà {v} đến hỏi mua một hòm đao cho anh trai nàng ta đang làm phó tướng ở biên ải."+(pfO("hangdao")==="ta"?"":" Sáu hòm đao đang nằm "+PFHD(pfO("hangdao"))+", nhưng ai cũng biết đó là của ngươi."),o:[
   {n:"Tặng nhà {v} một thanh, không bán",wx:"{v} nợ ngươi",lx:"đao rời hòm",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return pfO("dao_v","v")},rt:"{v} gửi lời cảm ơn, giọng khác hẳn mọi khi."},
-  {n:"Từ chối: đao là hồi môn, không bán",wx:"giữ đủ hòm",lx:"{v} phật lòng",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Người nhà {v} ra về không chào."},
-  {n:"Bán cho họ một thanh, ghi vào sổ, có người làm chứng",wx:"được bạc mà không ai bắt lỗi",lx:"{v} có đao của ngươi trong tay",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return pfO("dao_v","v")},rt:"Giấy bán có ấn của ngươi và của nhà {v}.",rf:"Nhà {v} trả giá thấp, rồi kể là ngươi bán đao."}]},
+  {n:"Từ chối: đao là hồi môn, không bán",wx:"giữ đủ hòm",lx:"{v} phật lòng",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Người nhà {v} ra về không chào.",rf:"Người nhà {v} kể khắp nơi: công chúa {land} giữ đao mà không dám cho ai xem."},
+  {n:"Bán cho họ một thanh, ghi vào sổ, có người làm chứng",wx:"được bạc mà không ai bắt lỗi",lx:"{v} có đao của ngươi trong tay",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);RD_FL("pt.f.daoban",1);return pfO("dao_v","v")},rt:"Giấy bán có ấn của ngươi và của nhà {v}.",rf:"Nhà {v} trả giá thấp, rồi kể là ngươi bán đao."}]},
  t1:{h:"Hoàng thượng hỏi đao",w:"emp",t:"Hoàng thượng hỏi: “Sáu hòm đao của cha nàng, nàng định làm gì?”",o:[
   {n:"Thưa: xin dâng cả lên ngài",f:"phep",wx:"ngài vui",lx:"đao rời tay ngươi",rt:"Ngài cười: “Trẫm nhận một thanh, còn lại nàng giữ.”",go:()=>pfO("dao_vua","vua")},
   {n:"Thưa: thiếp muốn dùng đao đổi lấy bạc bị giặc giữ",f:"bien",wx:"ngài thấy ngươi tính xa",lx:"ngài nghi ngươi thương lượng với giặc",rt:"Ngài nhìn ngươi lâu: “Nàng nghĩ giặc thích đao hơn bạc?”",rf:"Ngài nói: “Đem đao cho giặc là nuôi giặc.”"},
   {n:"Thưa: thiếp chưa nghĩ, xin ngài dạy",f:"muu",wx:"ngài vui vì được hỏi",lx:"việc theo ý ngài",rt:"Ngài nói: “Cứ giữ. Đao trong tay mình thì người khác phải hỏi mình.”"}]},
- x1:{h:"Sáu hòm đao về đâu",w:"emp",t:"Cuối tháng, Binh bộ, Hộ bộ và Kim Hựu Thành đều chờ một lời của ngươi trước khi Hoàng thượng phê.",o:[
-  {n:"Dâng cả sáu hòm lên Hoàng thượng làm quà của {pv}",e:["win","lose"],rt:"Ngài nhận, sai Binh bộ cất vào kho ngự, ghi tên {pv} trên sổ.",rf:"Binh bộ tâu đao lạ chưa thử, ngài cho cất vào kho Binh bộ.",go:(A,ok)=>pfO("hangdao",ok?"vua":"kho")},
-  {n:"Bán sáu hòm cho Kim Hựu Thành, lấy bạc nộp thuế và trả công",if:()=>PFHT(),e:["win2","mid"],rt:"Kim Hựu Thành mua cả, trả bằng bạc Tân La. Thuế đóng đủ, công trả xong.",rf:"Hộ bộ nói: bán đao cho lái buôn ngoại quốc, phải xét.",go:(A,ok)=>{if(ok)pfO("hangdao","huuthanh");return""}},
-  {n:"Gửi sáu hòm vào kho Nội vụ phủ dưới tên ngươi",if:()=>!PFHT(),e:["win2","mid"],rt:"Nội vụ phủ ghi sổ: hồi môn của công chúa {land}, sáu hòm đao.",rf:"Nội vụ phủ nhận mà không ghi tên ngươi.",go:()=>pfO("hangdao","kho")},
-  {n:"Để Binh bộ giữ, chờ chỉ",e:"mid",lx:"đao không còn là của ngươi",rt:"Sáu hòm đao nằm trong kho Binh bộ.",go:()=>pfO("hangdao","kho")}]}},
- E:{win:{tag:"Quà của {pv}",w:"emp",t:"Sáu hòm đao {land} nằm trong kho ngự. Binh bộ nhắc đến chúng, là nhắc đến ngươi."},
+ x1:{h:"Sáu hòm đao về đâu",w:"emp",t:()=>"Cuối tháng, sáu hòm đao vẫn nằm "+PFHD(pfO("hangdao"))+". Binh bộ, Hộ bộ và Kim Hựu Thành đều chờ một lời của ngươi trước khi Hoàng thượng phê.",o:[
+  {n:"Dâng cả sáu hòm lên Hoàng thượng làm quà của {pv}",e:["win","lose"],rt:()=>(pfO("hangdao")==="ta"?"":"Sáu hòm đao được khiêng từ chỗ cũ lên kinh. ")+"Ngài nhận, sai Binh bộ cất vào kho ngự, ghi tên {pv} trên sổ.",rf:"Binh bộ tâu đao lạ chưa thử, ngài cho cất vào kho Binh bộ.",go:(A,ok)=>pfO("hangdao",ok?"vua":"kho")},
+  {n:"Bán sáu hòm cho Kim Hựu Thành, lấy bạc nộp thuế và trả công",if:()=>PFHT(),e:["win2","mid"],rt:()=>(pfO("hangdao")==="huuthanh"?"Kim Hựu Thành giữ luôn sáu hòm trong khoang, trả bằng bạc Tân La.":"Kim Hựu Thành mua cả, trả bằng bạc Tân La.")+" Thuế đóng đủ, công trả xong.",rf:"Hộ bộ nói: bán đao cho lái buôn ngoại quốc, phải xét.",go:(A,ok)=>{if(ok)pfO("hangdao","huuthanh");return""}},
+  {n:"Gửi sáu hòm vào kho Nội vụ phủ dưới tên ngươi",if:()=>!PFHT(),e:["win2","mid"],rt:()=>(pfO("hangdao")==="ta"?"":"Sáu hòm đao được khiêng vào kho. ")+"Nội vụ phủ ghi sổ: hồi môn của công chúa {land}, sáu hòm đao.",rf:"Nội vụ phủ nhận mà không ghi tên ngươi.",go:()=>pfO("hangdao","kho")},
+  {n:"Để Binh bộ giữ, chờ chỉ",e:"mid",lx:"đao không còn là của ngươi",rt:()=>(pfO("hangdao")==="kho"?"":"Binh bộ cho khiêng sáu hòm đao đi. ")+"Sáu hòm đao nằm trong kho Binh bộ.",go:()=>pfO("hangdao","kho")}]}},
+ E:{win:{tag:"Quà của {pv}",w:"emp",t:()=>(pfO("hangdao")==="vua"?"Sáu hòm đao {land} nằm trong kho ngự.":"Tên {pv} được ghi vào sổ quà của triều.")+" Binh bộ nhắc đến chúng, là nhắc đến ngươi."},
   win2:{tag:"Bạc Tân La",w:"emp",t:"Kim Hựu Thành mang đao đi, để lại bạc và một lời: “Bến Minh Châu nhớ công chúa.”"},
-  mid:{tag:"Đao vào kho",t:"Sáu hòm đao vào kho. Ngươi còn tên trên sổ, nhưng chìa khóa không ở trong tay ngươi."},
+  mid:{tag:"Đao vào kho",t:()=>({kho:"Sáu hòm đao vào kho. Ngươi còn tên trên sổ, nhưng chìa khóa không ở trong tay ngươi.",huuthanh:"Sáu hòm đao vẫn trong khoang thuyền Kim Hựu Thành, chờ Hộ bộ xét.",tbs:"Sáu hòm đao vẫn nằm ở kho bến Thị bạc ty, chờ Hộ bộ xét.",ta:"Sáu hòm đao vẫn nằm trong cung ngươi, chờ Hộ bộ xét."})[pfO("hangdao")]||"Sáu hòm đao chờ Hộ bộ xét."},
   lose:{tag:"Đao lạ trong kho Binh bộ",w:"v",t:"{v} nói: đao của công chúa {land} sắc hơn đao Đại Hy, chẳng biết bên ấy gửi sang để làm gì."}}});
 
 rdDef("pt_dang",6,{t:"Thuyền giặc",w:"emp",sj:"thuyền giặc ngoài cửa bến Minh Châu",cast(A){return rdCast(A,["v"])},
  g:"Ba chiếc thuyền buồm đen thả neo ngoài cửa bến Minh Châu, cờ không có chữ. Ô Cửu cho người chèo xuồng vào bến, nhắn: y giữ cả người Tân La lẫn người {land}, muốn nói chuyện với người có quyền. Minh Châu thứ sử muốn đánh để lập công; Kim Hựu Thành xin đừng đánh khi người còn trên thuyền giặc.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Thủy quân đã sẵn",w:"emp",if:RDW(1),t:"Thủy quân Minh Châu đã sửa xong thuyền theo lệnh tháng trước. Thứ sử tâu về: chỉ chờ một chữ là ra bể.",o:[
+ B:{s1:{h:"Thủy quân đã sẵn",w:"emp",if:RDW(1),t:()=>(rdEnd(4)==="win"?"Thủy quân Minh Châu đã sửa xong thuyền theo lệnh ngài ban từ trước.":"Thủy quân Minh Châu vừa sửa xong mấy chiến thuyền tuần bến.")+" Thứ sử tâu về: chỉ chờ một chữ là ra bể.",o:[
   {n:"Xin ngài cho thủy quân vây mà chưa đánh",f:"phep",wx:"giặc biết triều có quân",lx:"tốn lương thủy quân",rt:"Mười chiến thuyền dàn ngang cửa bến."},
   {n:"Nhắn thứ sử chờ ngươi nói chuyện với giặc trước",f:"bien",wx:"người trên thuyền giặc còn sống",lx:"thứ sử thấy ngươi giành công",rt:"Thứ sử trả lời: chờ mười ngày."},
   {n:"Cho thủy quân đánh úp ban đêm",f:"muu",wx:"giặc bị bất ngờ",lx:"người trên thuyền giặc có thể chết",rt:"Một chiếc thuyền giặc bị đốt; hai chiếc kia chạy ra xa.",rf:"Giặc đã biết trước, thủy quân đánh vào khoảng không."}]},
@@ -393,10 +398,10 @@ rdDef("pt_dang",6,{t:"Thuyền giặc",w:"emp",sj:"thuyền giặc ngoài cửa 
   {n:"Cho người mang gạo và thuốc ra thuyền giặc cho người bị giữ",wx:"người bị giữ không đói",lx:"giặc cũng ăn gạo của ngươi",rt:"Xuồng giặc chở gạo về thuyền. Ô Cửu gửi lại một lời cảm ơn."},
   {n:"Giữ người chèo xuồng lại làm tin",wx:"có một người của giặc trong tay",lx:"giặc giận",rt:"Thứ sử giam hắn trong kho bến.",rf:"Hắn nhảy xuống nước trốn mất."},
   {n:"Dò hắn xem sào huyệt giặc ở đâu",wx:"biết đường đến hang giặc",lx:"hắn nói dối được",rt:"Hắn vẽ ra một tấm hải đồ các đảo đá, có đánh dấu một vịnh kín.",rf:"Hắn vẽ bừa một tấm hải đồ, không ai tin.",go:(A,ok)=>{if(ok)pfO("haido","ta");return""}}]},
- c2:{h:"{v} nói chuyện giặc",w:"v",need:["v"],t:"{v} tâu với Hoàng hậu: giặc biển đến tận cửa bến là vì bạc của công chúa {land}; người {land} mang họa theo thuyền.",o:[
+ c2:{h:"{v} nói chuyện giặc",w:"v",need:["v","hh"],t:"{v} tâu với Hoàng hậu: giặc biển đến tận cửa bến là vì bạc của công chúa {land}; người {land} mang họa theo thuyền.",o:[
   {n:"Đáp: giặc đến vì bến giàu, không vì một người",wx:"bá quan thấy lý",lx:"{v} ghi hận",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Hoàng hậu gật đầu.",rf:"Hoàng hậu nói: “Giặc đến khi bạc đến, thì cũng là vì bạc.”"},
   {n:"Im lặng, xin Hoàng hậu cho lo việc bến",wx:"không cãi nhau",lx:"{v} nói được nhiều hơn",rt:"Hoàng hậu không xét thêm."},
-  {n:"Nhắc trước điện: anh trai {v} vừa mua đao của giặc ở chợ biên",wx:"{v} phải lo cho nhà mình",lx:"phải có chứng",go:(A,ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Hoàng hậu cho người hỏi nhà {v}.",rf:"Nhà {v} đưa ra giấy mua đao của ngươi."}]},
+  {n:()=>pfO("dao_v")==="v"?"Nhắc trước điện: anh trai {v} cũng đang giữ một thanh đao {land} ở biên ải":"Hỏi lại: giặc năm nào cũng đến bến, sao năm nay mới đổ cho người {land}?",wx:"{v} phải lo cho nhà mình",lx:"phải có chứng",go:(A,ok,G)=>{rdOan(A,"v",G[0]);return""},rt:()=>pfO("dao_v")==="v"?"Hoàng hậu cho người hỏi nhà {v}: đao ấy từ đâu mà có.":"Hoàng hậu cho tra sổ bến: thuyền giặc đến từ trước khi ngươi sang.",rf:()=>pfO("dao_v")!=="v"?"{v} nói: “Năm nay giặc mới đòi bạc của một công chúa.”":RD_FL("pt.f.daoban")?"Nhà {v} đưa ra giấy mua đao có ấn của ngươi.":"Nhà {v} nói: đao ấy là quà của chính ngươi, cả cung đều biết."}]},
  t1:{h:"Hoàng thượng hỏi",w:"emp",t:"Hoàng thượng hỏi: “Giặc muốn nói chuyện với người có quyền. Trẫm sai ai?”",o:[
   {n:"Thưa: xin ngài sai thứ sử, có chỉ trong tay",f:"phep",wx:"việc đúng phép",lx:"thứ sử muốn đánh hơn muốn nói",rt:"Ngài viết chỉ cho thứ sử."},
   {n:"Thưa: xin cho thiếp viết thư, nhờ Kim Hựu Thành mang ra",f:"bien",if:()=>PFHT(),wx:"giặc nghe lời người họ cần",lx:"ngài thấy ngươi dính vào giặc",rt:"Ngài gật: “Thư của nàng, chỉ của trẫm.”",rf:"Ngài nói: “Phi tần viết thư cho giặc?”"},
@@ -406,13 +411,13 @@ rdDef("pt_dang",6,{t:"Thuyền giặc",w:"emp",sj:"thuyền giặc ngoài cửa 
   {n:"Xin chỉ cho thủy quân vây chặt, buộc giặc thả người",e:["win","lose"],rt:"Thủy quân khép vòng. Ô Cửu thả người Tân La xuống xuồng, rồi giương buồm chạy ra khơi.",rf:"Giặc phá vòng vây, bắt thêm một thuyền cá chạy theo."},
   {n:"Hẹn Ô Cửu: thả người trước, rồi bàn chuyện bạc",e:["win2","mid"],rt:"Ô Cửu thả người {land} trước. Y nhắn: “Bạc thì chờ người có quyền.”",rf:"Ô Cửu không thả ai, chỉ nhắn: “Chờ.”"},
   {n:"Để thủy quân giữ cửa bến, không ra bể",e:"mid",lx:"người vẫn trên thuyền giặc",rt:"Thuyền giặc chờ đến sáng, rồi chạy về phía các đảo đá."}]}},
- E:{win:{tag:"Giặc thả người",w:"emp",t:"Người Tân La về đến bến, quỳ trước Thị bạc ty mà khóc. Kim Hựu Thành nói: “Ơn này, thuyền Tân La nhớ.”",go:()=>{RD_FL("pt_dang.tanla",1);return""}},
-  win2:{tag:"Người {land} về bến",w:"emp",t:"Người {land} về bến. Ô Cửu giữ lại người Tân La và rương bạc, chờ một cuộc nói chuyện.",go:()=>{RD_FL("pt_dang.phutang",1);return""}},
+ E:{win:{tag:"Giặc thả người",w:"emp",t:()=>"Người Tân La về đến bến, quỳ trước Thị bạc ty mà khóc. "+(PFHT()?"Ở kinh, Kim Hựu Thành nghe tin, vào cung ngươi nói: “Ơn này, thuyền Tân La nhớ.”":pfAlive("huuthanh")?"Kim Hựu Thành nhắn lời: “Ơn này, thuyền Tân La nhớ.”":"Thuyền Tân La ở bến treo cờ cảm tạ."),go:()=>{RD_FL("pt_dang.tanla",1);return""}},
+  win2:{tag:"Người {land} về bến",w:"emp",t:()=>"Người {land} về bến. Ô Cửu giữ lại người Tân La"+(pfO("ruongbac")==="ocuu"?" và rương bạc":"")+", chờ một cuộc nói chuyện.",go:()=>{RD_FL("pt_dang.phutang",1);return""}},
   mid:{tag:"Thuyền giặc đi",t:"Thuyền giặc chạy về các đảo đá, mang theo người và bạc."},
   lose:{tag:"Giặc phá vòng vây",w:"v",t:"Giặc phá vòng vây, bắt thêm một thuyền cá. Cả bến Minh Châu nói: việc của công chúa {land} làm khổ dân bến.",go:()=>{RD_FL("pt_dang.thuyenca",1);return""}}}});
 
 rdDef("pt_dang",7,{t:"Tiền chuộc",w:"maid",sj:"tiền chuộc người trên thuyền giặc",cast(A){if(!pfO("ngoctrai"))pfO("ngoctrai","ta");return rdCast(A,["v"])},
- g:()=>"Thư Ô Cửu đến lần thứ hai: "+(RD_FL("pt_dang.tanla")?"người Tân La đã về, nhưng y còn giữ người {land} và rương bạc":RD_FL("pt_dang.phutang")?"người {land} đã về, nhưng y còn giữ người Tân La, có cả cháu trai Kim Hựu Thành":"y còn giữ cả người {land} lẫn người Tân La")+(RD_FL("pt_dang.thuyenca")?", thêm mười dân chài":"")+". Y đòi chuộc bằng ngọc trai, không lấy bạc: “Bạc thì ta đã có.”",
+ g:()=>"Thư Ô Cửu đến lần thứ hai: "+(RD_FL("pt_dang.tanla")?"người Tân La đã về, nhưng y còn giữ người {land}"+(pfO("ruongbac")==="ocuu"?" và rương bạc":""):RD_FL("pt_dang.phutang")?"người {land} đã về, nhưng y còn giữ người Tân La, có cả cháu trai Kim Hựu Thành":"y còn giữ cả người {land} lẫn người Tân La")+(RD_FL("pt_dang.thuyenca")?", thêm mười dân chài":"")+". Y đòi chuộc bằng ngọc trai, không lấy bạc: "+(pfO("ruongbac")==="ocuu"?"“Bạc thì ta đã có.”":"“Bạc của công chúa đã về, ta không đòi bạc nữa.”"),
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Hộp ngọc trai của {mh}",w:"maid",if:RDW(1),t:"Trong rương hồi môn của ngươi có một hộp ngọc trai {mh} trao lúc ra bến. {maid} mở hộp, ngọc sáng như trăng.",o:[
   {n:"Quyết đem ngọc chuộc người",f:"bien",wx:"người bị giữ có đường về",lx:"mất vật của {mh}",rt:"Ngươi đếm ngọc, đủ chuộc bốn mươi người."},
@@ -429,7 +434,8 @@ rdDef("pt_dang",7,{t:"Tiền chuộc",w:"maid",sj:"tiền chuộc người trên
  c2:{h:"{v} hỏi chuyện ngọc",w:"v",need:["v"],t:"{v} hỏi khéo: “Nghe nói công chúa có hộp ngọc của mẫu hậu. Chuộc giặc bằng ngọc của hoàng gia bên kia, không biết có phải phép không?”",o:[
   {n:"Đáp: ngọc là của {mh}, chuộc người là ý của {mh}",wx:"{v} hết cớ",lx:"việc ngọc thành chuyện cả cung",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"{v} cười nhạt, không hỏi thêm.",rf:"{v} nói: “Thì ra bên ấy chuộc giặc quen rồi.”"},
   {n:"Mời {v} góp một phần chuộc dân chài",wx:"{v} được tiếng nhân từ",lx:"{v} chia công",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} gửi sang một túi bạc, sai người kể khắp cung."},
-  {n:"Để {v} nói, không đáp",wx:"không thêm chuyện",lx:"lời của {v} đi xa",rt:"Ngươi uống trà, nhìn ra hiên."}]},
+  {n:"Để {v} nói, không đáp",wx:"không thêm chuyện",lx:"lời của {v} đi xa",rt:"Ngươi uống trà, nhìn ra hiên."},
+  {n:"Cho người đồn lại: {v} nhắc ngọc vì nhà nàng muốn mua rẻ hộp ngọc ấy",wx:"lời đồn quay về phía {v}",lx:"nếu lộ, ngươi là kẻ đặt chuyện",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Các cung bàn tán: nhà {v} đã hỏi giá ngọc trai ở chợ Đông. {v} thôi nhắc chuyện ngọc.",rf:"Lời đồn lần ra người của ngươi. {v} cười: “Thì ra bên ấy quen đặt chuyện.”"}]},
  t1:{h:"Hoàng thượng hỏi",w:"emp",t:"Hoàng thượng hỏi: “Chuộc giặc là nuôi giặc. Không chuộc thì dân chết. Nàng chọn gì?”",o:[
   {n:"Thưa: chuộc người trước, đánh giặc sau",f:"bien",wx:"ngài thấy ngươi thương dân",lx:"ngài lo giặc được thể",rt:"Ngài gật: “Người sống mới đánh được giặc.”"},
   {n:"Thưa: theo phép, triều không chuộc",f:"phep",wx:"ngài thấy ngươi giữ phép",lx:"người bị giữ chờ thêm",rt:"Ngài nói: “Thế thì phải đánh cho nhanh.”",rf:"Ngài im lặng: “Nàng nói như quan Hộ bộ.”"},
@@ -448,7 +454,7 @@ rdDef("pt_dang",8,{t:"Thị bạc ty",w:"emp",sj:"sổ thu của Thị bạc ty 
  g:()=>(PFHT()?"Kim Hựu Thành tìm đến ngươi, mặt tái: ":"Thư Kim Hựu Thành từ bến gửi lên: ")+"Thị bạc sứ ở Minh Châu bắt thuyền Tân La nộp thuế hai lần, lần sau vào túi riêng. Người trong ty còn kể: Thị bạc sứ bán giấy thông hành cho cả thuyền giặc. Cuốn sổ thu thật nằm trong rương của y.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Một thư lại trong ty",w:"maid",if:RDW(1),t:"Một thư lại của Thị bạc ty, vợ con từng bị giặc bắt mà được ngươi chuộc, lén nhắn: y chép được mấy trang sổ thu thật.",o:[
-  {n:"Bảo y chép tiếp, giấu kỹ",f:"muu",wx:"có bản chép trong tay",lx:"y có thể bị phát hiện",rt:"Mỗi tuần một trang chép về đến cung ngươi.",rf:"Thị bạc sứ đổi rương khóa, y không chép được nữa."},
+  {n:"Bảo y chép tiếp, giấu kỹ",f:"muu",wx:"có bản chép trong tay",lx:"y có thể bị phát hiện",rt:"Mười ngày một trang chép về đến cung ngươi.",rf:"Thị bạc sứ đổi rương khóa, y không chép được nữa."},
   {n:"Đưa y vào kinh làm người chứng",f:"phep",wx:"người chứng an toàn",lx:"Thị bạc sứ biết mất người",rt:"Thư lại về kinh, ở nhà khách Hồng Lư tự."},
   {n:"Cho y bạc, bảo y đừng dính vào",f:"bien",wx:"y không gặp nạn",lx:"mất một người chứng",rt:"Thư lại cúi lạy, về quê."}]},
  s2:{h:"Thị bạc sứ gửi quà",w:"maid",if:RDW(0),t:"Thị bạc sứ gửi vào cung ngươi một hộp trầm hương, kèm lời: “Việc bến cảng, công chúa đừng bận lòng.”",o:[
@@ -460,26 +466,26 @@ rdDef("pt_dang",8,{t:"Thị bạc ty",w:"emp",sj:"sổ thu của Thị bạc ty 
   {n:"Bảo y chịu thêm một mùa, chờ chứng",wx:"không đánh động",lx:"thuyền Tân La thiệt",rt:"Kim Hựu Thành thở dài, nhận lời."},
   {n:"Bỏ bạc trả bớt phần thuế thứ hai cho y",wx:"y đỡ thiệt",lx:"bạc ra",rt:"Kim Hựu Thành cảm tạ, ghi ơn vào sổ Tân La."}]},
  c2:{h:"Nhà {v} và Thị bạc sứ",w:"v",need:["v"],t:"{maid} nghe được: Thị bạc sứ là anh họ bên ngoại của {v}. Mỗi năm nhà {v} nhận một rương quà từ bến.",o:[
-  {n:"Cho người dò rương quà nhà {v}",wx:"biết của từ đâu",lx:"{v} biết bị dò",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Rương quà năm nay có cả bạc Tân La.",rf:"Người dò bị bắt gặp ở cửa nhà {v}."},
-  {n:"Gặp {v}, khuyên nàng tránh xa việc bến",wx:"{v} có đường lui",lx:"{v} biết ngươi biết",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} im lặng rất lâu, rồi gật đầu."},
-  {n:"Giữ chuyện này, chờ lúc cần",/* pt6c: a secret kept, not an object */wx:"có một con bài",lx:"việc bến chưa xong",rt:"Ngươi ghi một dòng vào sổ riêng."}]},
+  {n:"Cho người dò rương quà nhà {v}",wx:"biết của từ đâu",lx:"{v} biết bị dò",rt:"Rương quà năm nay có cả bạc Tân La.",rf:"Người dò bị bắt gặp ở cửa nhà {v}.",go:(A,ok,G)=>{RD_FL("pt.f.anhho",1);rdOan(A,"v",ok?G[0]:G[1]);return""}},
+  {n:"Gặp {v}, khuyên nàng tránh xa việc bến",wx:"{v} có đường lui",lx:"{v} biết ngươi biết",go:(A,_ok,G)=>{RD_FL("pt.f.anhho",1);rdRel(A,"v",G[0]);return""},rt:"{v} im lặng rất lâu, rồi gật đầu."},
+  {n:"Giữ chuyện này, chờ lúc cần",/* pt6c: a secret kept, not an object */wx:"có một con bài",lx:"việc bến chưa xong",rt:"Ngươi ghi một dòng vào sổ riêng.",go:()=>{RD_FL("pt.f.anhho",1);return""}}]},
  t1:{h:"Cuốn sổ thật",w:"maid",t:"Đêm ấy, người của ngươi lấy được cuốn sổ thu thật từ rương Thị bạc sứ, thay vào một cuốn sổ trắng. Trang cuối ghi: ba giấy thông hành bán cho thuyền buồm đen.",o:[
   {n:"Giữ sổ trong cung, chưa nói với ai",f:"muu",wx:"sổ an toàn",lx:"giữ sổ ăn cắp là tội",rt:"Cuốn sổ nằm dưới đáy rương áo.",go:()=>pfO("sothibac","ta")},
   {n:"Đưa sổ cho Hộ bộ ngay",f:"phep",wx:"việc theo phép",lx:"Hộ bộ có người của Thị bạc sứ",rt:"Hộ bộ nhận sổ, niêm phong.",rf:"Hộ bộ nhận sổ, rồi nói sổ bị nước làm nhòe.",go:()=>pfO("sothibac","kho")},
   {n:"Gửi Kim Hựu Thành giữ bản chép, ngươi giữ bản thật",f:"bien",if:()=>PFHT(),wx:"hai nơi giữ, khó mất",lx:"Kim Hựu Thành biết hết",rt:"Kim Hựu Thành cất bản chép trong khoang thuyền.",go:()=>pfO("sothibac","ta")},
   {n:"Cho {maid} chép một bản, ngươi giữ bản thật",f:"bien",if:()=>!PFHT(),wx:"hai bản, khó mất",lx:"{maid} biết hết",rt:"{maid} chép suốt đêm.",go:()=>pfO("sothibac","ta")}]},
  x1:{h:"Thị bạc sứ vào kinh",w:"emp",t:()=>"Thị bạc sứ được gọi vào kinh trình sổ. Y mang theo cuốn sổ đẹp đẽ, mặt không đổi sắc. "+(pfO("sothibac")==="ta"?"Cuốn sổ thật nằm trong tay ngươi.":pfO("sothibac")==="kho"?"Cuốn sổ thật nằm trong kho Hộ bộ.":"Cuốn sổ thật vẫn ở trong rương của y."),o:[
-  {n:"Dâng sổ thật lên Hoàng thượng, xin xét Thị bạc sứ",e:["win","lose"],rt:"Ngài so hai cuốn sổ, ném cuốn đẹp xuống đất. Thị bạc sứ bị lột mũ, giải đi.",rf:"Thị bạc sứ nói sổ của ngươi là sổ giả. Ngài cho Hộ bộ xét lại, việc kéo dài.",go:(A,ok)=>{if(pfO("sothibac")==="ta")pfO("sothibac","vua");return""}},
+  {n:()=>pfO("sothibac")==="kho"?"Xin Hoàng thượng đòi sổ thật từ kho Hộ bộ, xét Thị bạc sứ":"Dâng sổ thật lên Hoàng thượng, xin xét Thị bạc sứ",e:["win","lose"],rt:()=>(pfO("sothibac")==="kho"?"Ngài sai Hộ bộ mang cuốn sổ thật lên. ":"")+"Ngài so hai cuốn sổ, ném cuốn đẹp xuống đất. Thị bạc sứ bị lột mũ, giải đi.",rf:()=>(pfO("sothibac")==="kho"?"Hộ bộ trình sổ chậm nửa ngày. ":"")+"Thị bạc sứ nói sổ của ngươi là sổ giả. Ngài cho Hộ bộ xét lại, việc kéo dài.",go:(A,ok)=>{if(["ta","kho"].includes(pfO("sothibac")))pfO("sothibac",ok?"vua":"kho");return""}},
   {n:"Gặp riêng Thị bạc sứ, buộc y nghe lời ngươi từ nay",e:["win2","mid"],rt:"Thị bạc sứ quỳ xuống: từ nay thuyền nào vào bến Minh Châu, ngươi nói một câu là xong.",rf:"Thị bạc sứ không sợ, nói: “Công chúa cũng ăn trộm sổ.”"},
-  {n:"Trả sổ lại, chỉ xin bớt thuế cho thuyền Tân La",e:"mid",lx:"Thị bạc sứ vẫn ngồi ghế",rt:"Thuyền Tân La được nộp một lần. Thị bạc sứ cúi đầu cảm ơn ngươi.",go:()=>{if(pfO("sothibac")==="ta")pfO("sothibac","tbs");return""}}]}},
+  {n:()=>pfO("sothibac")==="kho"?"Xin Hộ bộ trả sổ cho Thị bạc sứ, chỉ xin bớt thuế cho thuyền Tân La":"Trả sổ lại, chỉ xin bớt thuế cho thuyền Tân La",e:"mid",lx:"Thị bạc sứ vẫn ngồi ghế",rt:"Thuyền Tân La được nộp một lần. Thị bạc sứ cúi đầu cảm ơn ngươi.",go:()=>{if(["ta","kho"].includes(pfO("sothibac")))pfO("sothibac","tbs");return""}}]}},
  E:{win:{tag:"Thị bạc sứ bị giải",w:"emp",t:"Thị bạc sứ bị giải về Hình bộ. Bến Minh Châu có người mới ngồi ghế, và người ấy chào ngươi trước."},
   win2:{tag:"Thị bạc sứ nghe lời",w:"emp",t:()=>pfO("sothibac")==="ta"?"Thị bạc sứ vẫn ngồi ghế, nhưng cuốn sổ thật nằm trong tay ngươi. Bến Minh Châu nghe lời ngươi mà không ai biết vì sao.":"Thị bạc sứ vẫn ngồi ghế, nhưng biết ngươi nắm được việc của y. Bến Minh Châu nghe lời ngươi mà không ai biết vì sao."},
   mid:{tag:"Thuế một lần",t:"Thuyền Tân La nộp thuế một lần. Những giấy thông hành cho thuyền buồm đen thì không ai hỏi đến."},
   lose:{tag:"Sổ bị nói là giả",w:"v",t:"Thị bạc sứ còn ngồi ghế. Người nhà {v} kể khắp kinh: công chúa {land} sai người trộm sổ của quan."}}});
 
-const PFDC=()=>pfO("daochem");/* the iron-cutting sword: it lies in the six crates (holder = hangdao's holder) until .9 takes it out */
-rdDef("pt_dang",9,{t:"Thanh đao chém sắt",w:"emp",sj:"thanh đao chém sắt trong sáu hòm đao",cast(A){if(!pfO("daochem"))pfO("daochem",pfO("hangdao")||"kho");return rdCast(A,["v"])},
- g:()=>"Binh bộ mở hội thử binh khí. Trong sáu hòm đao {land} có một thanh khắc dấu thợ rèn bên kia bể, chém đứt một lưỡi đao Đại Hy làm hai. "+({vua:"Thanh đao ấy nằm trong kho ngự.",kho:"Thanh đao ấy nằm trong kho.",huuthanh:"Thanh đao ấy Kim Hựu Thành mang theo, chưa bán."})[PFDC()]+" Ngay hôm sau, {v} tâu: thanh đao ấy vốn được rèn để bán cho giặc.",
+/* daochem: the iron-cutting sword: it lies in the six crates (holder = hangdao's holder) until .9 takes it out */
+rdDef("pt_dang",9,{t:"Thanh đao chém sắt",w:"emp",sj:"thanh đao chém sắt trong sáu hòm đao",cast(A){if(!pfO("daochem"))pfO("daochem",pfO("hangdao")||"kho");/* the sword is in the crates: its holder = the crates' holder */return rdCast(A,["v"])},
+ g:()=>"Binh bộ mở hội thử binh khí. Trong sáu hòm đao {land} có một thanh khắc dấu thợ rèn bên kia bể, chém đứt một lưỡi đao Đại Hy làm hai. "+({vua:"Thanh đao ấy nằm trong kho ngự.",kho:"Thanh đao ấy nằm trong kho.",huuthanh:"Thanh đao ấy Kim Hựu Thành mang theo, chưa bán.",ta:"Thanh đao ấy nằm trong cung ngươi.",tbs:"Thanh đao ấy còn nằm ở kho bến Thị bạc ty."})[pfO("daochem")]+" Ngay hôm sau, {v} tâu: thanh đao ấy vốn được rèn để bán cho giặc.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Binh bộ hỏi thợ rèn",w:"emp",if:RDW(1),t:"Quan Binh bộ hỏi ngươi: thợ rèn thanh đao ấy là ai, có thể mời sang Đại Hy dạy nghề không.",o:[
   {n:"Viết thư cho {pv} xin gửi thợ rèn sang",f:"phep",wx:"hai nước có thêm một mối",lx:"bên kia có thể không muốn lộ nghề",rt:"Thư đi theo thuyền Tân La.",rf:"Thư đi mà không có hồi âm."},
@@ -489,32 +495,32 @@ rdDef("pt_dang",9,{t:"Thanh đao chém sắt",w:"emp",sj:"thanh đao chém sắt
   {n:"Mời cấm quân thử đao với giáp Đại Hy",f:"phep",wx:"thấy rõ đao chém được gì",lx:"đao càng bị sợ",rt:"Lưỡi đao rạch qua giáp, không mẻ."},
   {n:"Nói rõ đao đến từ thuyền hồi môn, có sổ",f:"bien",wx:"đao có gốc",lx:"phải đưa sổ ra",rt:"Cấm quân xem sổ hàng, gật đầu."},
   {n:"Cho người nói khẽ: đao giặc có là do Thị bạc ty bán giấy",f:"muu",wx:"mũi dùi quay sang chỗ khác",lx:"phải có chứng",rt:"Cấm quân bàn tán về Thị bạc ty.",rf:"Không ai tin."}]},
- c1:{h:"{v} tâu chuyện đao",w:"v",need:["v"],t:"{v} tâu với Hoàng hậu: có người thấy thuyền buồm đen chở đao {land} ở các đảo đá. Đao của công chúa, sao lại ở trong tay giặc?",o:[
-  {n:"Xin Hoàng hậu cho đếm lại sáu hòm đao",wx:"đếm là biết thiếu hay đủ",lx:"phải mở hòm trước mọi người",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:()=>"Hòm đếm đủ, chỉ thiếu những thanh có giấy: "+(pfO("dao_vua")?"một thanh dâng Hoàng thượng, ":"")+(pfO("dao_v")?"một thanh ở nhà {v}, ":"")+(pfO("dao_ht")?"một thanh ở chỗ Kim Hựu Thành, ":"")+(pfO("dao_bb")?"một thanh ở Binh bộ, ":"")+"còn lại không sót thanh nào.",rf:"Hòm đếm đủ, nhưng {v} nói: “Đếm đủ thì đao giặc ở đâu ra?”"},
-  {n:"Hỏi lại: đao ở nhà {v} có giấy, còn đao giặc thì giấy ở đâu?",if:()=>pfO("dao_v")==="v",wx:"{v} câm lời",lx:"thù hai nhà sâu thêm",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} tái mặt. Thanh đao nhà nàng có ấn của ngươi."},
-  {n:"Hỏi lại: người thấy thuyền giặc là ai, sao không báo thủy quân?",if:()=>pfO("dao_v")!=="v",wx:"{v} lúng túng",lx:"{v} thêm oán",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} không nói được tên người ấy."},
+ c1:{h:"{v} tâu chuyện đao",w:"v",need:["v","hh"],t:"{v} tâu với Hoàng hậu: có người thấy thuyền buồm đen chở đao {land} ở các đảo đá. Đao của công chúa, sao lại ở trong tay giặc?",o:[
+  {n:"Xin Hoàng hậu cho đếm lại sáu hòm đao",if:()=>pfO("hangdao")!=="huuthanh",wx:"đếm là biết thiếu hay đủ",lx:"phải mở hòm trước mọi người",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:()=>"Hòm đếm đủ, chỉ thiếu những thanh có giấy: "+(pfO("dao_vua")?"một thanh dâng Hoàng thượng, ":"")+(pfO("dao_v")?"một thanh ở nhà {v}, ":"")+(pfO("dao_ht")?"một thanh ở chỗ Kim Hựu Thành, ":"")+(pfO("dao_bb")?"một thanh ở Binh bộ, ":"")+"còn lại không sót thanh nào.",rf:"Hòm đếm đủ, nhưng {v} nói: “Đếm đủ thì đao giặc ở đâu ra?”"},
+  {n:"Hỏi lại: đao ở nhà {v} có giấy, còn đao giặc thì giấy ở đâu?",if:()=>pfO("dao_v")==="v",wx:"{v} câm lời",lx:"thù hai nhà sâu thêm",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:()=>RD_FL("pt.f.daoban")?"{v} tái mặt. Giấy bán thanh đao nhà nàng có ấn của ngươi và của nhà nàng.":"{v} tái mặt. Thanh đao nhà nàng là quà của ngươi, cả cung đều biết.",rf:"{v} đáp: “Đao nhà ta là đao của nàng. Thế đao giặc là đao của ai?”"},
+  {n:"Hỏi lại: người thấy thuyền giặc là ai, sao không báo thủy quân?",if:()=>pfO("dao_v")!=="v",wx:"{v} lúng túng",lx:"{v} thêm oán",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} không nói được tên người ấy.",rf:"{v} đáp: “Người ấy là dân chài, sợ giặc nên chỉ dám kể với ta.”"},
   {n:"Im lặng, xin Hoàng thượng xét",wx:"không cãi nhau",lx:"{v} nói trước",rt:"Hoàng hậu cho đợi ý ngài."}]},
  c2:{h:"Thư của giặc làm chứng",w:"maid",t:()=>({ta:"Lá thư của Ô Cửu vẫn trong hộp gỗ của ngươi.",vua:"Lá thư của Ô Cửu nằm trong Ngự thư phòng.",huuthanh:"Lá thư của Ô Cửu vẫn ở chỗ Kim Hựu Thành."})[pfO("thugiac")]+" Trong thư, giặc đòi bạc, không đòi đao.",o:[
   {n:"Đem thư ra làm chứng",wx:"có chứng giặc không cần đao",lx:"phải nói rõ vì sao có thư giặc",rt:"Lá thư được đặt cạnh sổ hàng.",rf:"Người ta hỏi: sao công chúa giữ thư giặc lâu thế?"},
   {n:"Giữ thư, không đem ra",wx:"không ai hỏi chuyện thư",lx:"mất một chứng",rt:"Lá thư nằm yên."},
   {n:"Bỏ bạc mời thầy đồ đọc chữ giặc trước triều",wx:"người đọc là người ngoài",lx:"bạc ra",rt:"Thầy đồ đọc từng chữ: bạc, bến, không đao."}]},
- t1:{h:"Hoàng thượng cầm đao",w:"emp",t:"Hoàng thượng cầm thanh đao lên, nhìn lưỡi rất lâu: “Đao này nàng muốn ai giữ?”",o:[
+ t1:{h:"Hoàng thượng cầm đao",w:"emp",t:()=>(pfO("daochem")==="vua"?"":({kho:"Hoàng thượng cho lấy thanh đao từ kho. ",huuthanh:"Hoàng thượng cho đòi thanh đao từ thuyền Kim Hựu Thành, trả bạc cho y. ",ta:"Ngươi dâng thanh đao lên. ",tbs:"Hoàng thượng cho lấy thanh đao từ kho bến. "})[pfO("daochem")]||"")+"Hoàng thượng cầm thanh đao lên, nhìn lưỡi rất lâu: “Đao này nàng muốn ai giữ?”",o:[
   {n:"Thưa: xin ngài giữ",f:"phep",wx:"đao trong tay ngài thì không ai nói",lx:"đao rời tay ngươi",rt:"Ngài treo đao trong Ngự thư phòng.",go:()=>pfO("daochem","vua")},
   {n:"Thưa: xin trả đao về cho thợ rèn bên kia bể",f:"bien",wx:"bí quyết ở lại bên ấy",lx:"Binh bộ tiếc",rt:"Ngài gật: “Đao về nhà, thì không ai nói nó là đao giặc.”",go:()=>pfO("daochem","tn")},
   {n:"Thưa: xin tặng Thống lĩnh thủy quân Minh Châu để đánh giặc",f:"muu",wx:"thủy quân nợ ngươi",lx:"đao vào tay người khác",rt:"Ngài cười: “Lấy đao người ta sợ đi đánh người ta.”",go:()=>pfO("daochem","thuyquan")}]},
- x1:{h:"Phiên xét thanh đao",w:"emp",t:"Binh bộ mở phiên xét. Thanh đao đặt trên án, {v} đứng một bên, ngươi đứng một bên.",o:[
+ x1:{h:"Phiên xét thanh đao",w:"emp",t:()=>"Binh bộ mở phiên xét. "+(({tn:"Thanh đao đã theo thuyền về {land}; trên án chỉ còn sổ hàng.",thuyquan:"Thống lĩnh thủy quân Minh Châu cho mang thanh đao về, đặt trên án.",vua:"Thanh đao từ Ngự thư phòng được mang đến, đặt trên án."})[pfO("daochem")]||"Thanh đao đặt trên án.")+" {v} đứng một bên, ngươi đứng một bên.",o:[
   {n:"Trình thư của giặc và sổ hàng: giặc đòi bạc, không đòi đao",if:()=>["ta","vua","huuthanh"].includes(pfO("thugiac")),e:["win","lose"],rt:"Binh bộ đọc thư, so sổ, rồi phán: đao không phải đao giặc. {v} lui ra trước.",rf:"Binh bộ nói thư giặc ai cũng viết được.",go:()=>{if(pfO("thugiac")==="huuthanh")pfO("thugiac","vua");return""}},
   {n:"Xin Binh bộ mở sổ hàng của thuyền hồi môn ra đối chứng",if:()=>!["ta","vua","huuthanh"].includes(pfO("thugiac")),e:["win","lose"],rt:"Sổ hàng ghi đủ sáu hòm. Binh bộ phán: đao không phải đao giặc.",rf:"Binh bộ nói sổ hàng do người nhà công chúa ghi."},
   {n:"Xin Hoàng thượng phán, thiếp không cãi",e:["win2","mid"],rt:"Ngài phán: đao của {pv}, không phải đao giặc. Ai nói nữa thì xét người nói.",rf:"Ngài nói: “Để Binh bộ xét.”"},
-  {n:"Nhận lỗi giữ đao trái phép, xin nộp cả sáu hòm vào kho",e:"mid",lx:"đao không còn là của ngươi",rt:"Sáu hòm đao vào kho Binh bộ. Không ai nói thêm.",go:()=>{if(["ta","vua"].includes(pfO("hangdao")))pfO("hangdao","kho");return""}}]}},
- E:{win:{tag:"Đao không phải đao giặc",w:"emp",t:"Phiên xét khép lại. Thanh đao chém sắt được gọi là “đao hồi môn”, và kẻ nói nó là đao giặc phải im.",go:(A,G)=>{rdOan(A,"v",G[0]);return""}},
+  {n:"Nhận lỗi giữ đao trái phép, xin nộp cả sáu hòm vào kho",e:"mid",lx:"đao không còn là của ngươi",rt:"Sáu hòm đao vào kho Binh bộ. Không ai nói thêm.",go:()=>{if(["ta","vua","tbs"].includes(pfO("hangdao")))pfO("hangdao","kho");return""}}]}},
+ E:{win:{tag:"Đao không phải đao giặc",w:"emp",t:()=>"Phiên xét khép lại. "+(pfO("daochem")==="tn"?"Thanh đao chém sắt, nay đã về {land}, được gọi là “đao hồi môn”,":"Thanh đao chém sắt được gọi là “đao hồi môn”,")+" và kẻ nói nó là đao giặc phải im.",go:(A,G)=>{rdOan(A,"v",G[0]);return""}},
   win2:{tag:"Lời của Hoàng thượng",w:"emp",t:"Ngài nói một lời, cả triều thôi bàn. Nhưng ai cũng biết: lời ấy là ngài che cho ngươi."},
   mid:{tag:"Đao vào kho",t:"Đao vào kho, chuyện đao thôi bàn. Ngươi mất đao mà giữ được yên."},
   lose:{tag:"Đao giặc",w:"v",t:"Phiên xét không kết. {v} kể khắp nơi: đao của công chúa {land} và đao của giặc rèn cùng một lò."}}});
 
 rdDef("pt_dang",10,{t:"Bến cảng",w:"emp",sj:"số phận Ô Cửu ở bến Minh Châu",cast(A){if(pfAlive("ocuu")&&pfP("ocuu","w")==="hb"){pfMove("ocuu","nguc");RD_FL("pt_dang.bat",pfO("haido")==="ta"?"hd":"hang")}
   if(pfO("ruongbac")==="ocuu")pfO("ruongbac","thusu");return rdCast(A,["v"])},
- g:()=>(RD_FL("pt_dang.bat")==="hd"?"Thủy quân Minh Châu theo tấm hải đồ vây vịnh kín, bắt sống Ô Cửu. ":"Sau một trận bão, thuyền buồm đen vỡ mạn; Ô Cửu tự chèo xuồng vào bến xin hàng. ")+"Y bị giam trong ngục Minh Châu, rương bạc hồi môn nằm trong kho của thứ sử. Thứ sử muốn chém để răn, Kim Hựu Thành xin một phường cho thuyền Tân La, còn dân bến thì chờ xem triều xử kẻ biển ra sao.",
+ g:()=>(RD_FL("pt_dang.bat")==="hd"?"Thủy quân Minh Châu theo tấm hải đồ vây vịnh kín, bắt sống Ô Cửu. ":"Sau một trận bão, thuyền buồm đen vỡ mạn; Ô Cửu tự chèo xuồng vào bến xin hàng. ")+"Y bị giam trong ngục Minh Châu"+(pfO("ruongbac")==="thusu"?", rương bạc hồi môn nằm trong kho của thứ sử":"")+". Thứ sử muốn chém để răn, Kim Hựu Thành xin một phường cho thuyền Tân La, còn dân bến thì chờ xem triều xử kẻ biển ra sao.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Ô Cửu xin gặp",w:"maid",if:()=>RDW(1)()&&PFOC()==="nguc",t:"Ngục tốt Minh Châu gửi thư lên: Ô Cửu xin được nói với công chúa một lời, qua người của nàng.",o:[
   {n:"Sai {maid} xuống ngục nghe y nói",f:"bien",wx:"biết y muốn gì",lx:"người ta nói ngươi qua lại với giặc",rt:"Ô Cửu nói: “Ta cướp vì không có bến. Cho ta một bến, ta giữ bến cho các người.”"},
@@ -528,10 +534,10 @@ rdDef("pt_dang",10,{t:"Bến cảng",w:"emp",sj:"số phận Ô Cửu ở bến 
   {n:"Hứa tâu giúp y",wx:"Kim Hựu Thành thành người của ngươi ở bến",lx:"thứ sử không vui",rt:"Kim Hựu Thành cúi lạy: “Phường Tân La sẽ mang ơn công chúa.”"},
   {n:"Khuyên y xin qua Hồng Lư tự",wx:"việc đúng đường",lx:"y thấy ngươi không giúp hết lòng",rt:"Kim Hựu Thành viết đơn gửi Hồng Lư tự."},
   {n:"Đòi y một phần lời của phường mỗi năm",wx:"có một nguồn bạc ở bến",lx:"người ta nói ngươi ăn chia với lái buôn",rt:"Kim Hựu Thành nhìn ngươi lâu, rồi gật đầu."}]},
- c2:{h:"{v} và lời khai",w:"v",need:["v"],t:()=>RD_FL("pt_dang.khaiv")?"Lời khai của Ô Cửu về nhà {v} đã đến tai {v}. Nàng ta đến cung ngươi, mặt trắng bệch.":"{v} nói với Hoàng hậu: chém ngay tên giặc ấy đi, kẻo y khai bừa hại người trong cung.",o:[
+ c2:{h:"{v} và lời khai",w:"v",need:["v","hh"],t:()=>RD_FL("pt_dang.khaiv")?"Lời khai của Ô Cửu về nhà {v} đã đến tai {v}. Nàng ta đến cung ngươi, mặt trắng bệch.":"{v} nói với Hoàng hậu: chém ngay tên giặc ấy đi, kẻo y khai bừa hại người trong cung.",o:[
   {n:"Đốt lời khai trước mặt {v}, đổi lấy một lời hứa",if:()=>RD_FL("pt_dang.khaiv"),wx:"{v} nợ ngươi cả nhà",lx:"mất một chứng",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} nhìn tờ giấy cháy, gật đầu: từ nay không động đến ngươi."},
   {n:"Dâng lời khai lên Hoàng hậu",if:()=>RD_FL("pt_dang.khaiv"),wx:"nhà {v} bị xét",lx:"lời khai ép có thể bị lật",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Hoàng hậu cho xét nhà {v}.",rf:"Ô Cửu bị hỏi lại, khai rằng bị ép."},
-  {n:"Đáp: y khai gì thì cứ để triều nghe",if:()=>!RD_FL("pt_dang.khaiv"),wx:"không ai nói ngươi che giặc",lx:"{v} lo",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} im lặng."},
+  {n:"Đáp: y khai gì thì cứ để triều nghe",if:()=>!RD_FL("pt_dang.khaiv"),wx:"không ai nói ngươi che giặc",lx:"{v} lo",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} im lặng.",rf:"{v} nói: “Triều nghe lời giặc thì ai còn yên?” Có người gật theo."},
   {n:"Đồng ý với {v}: việc giặc nên xong nhanh",if:()=>!RD_FL("pt_dang.khaiv"),wx:"{v} thấy ngươi cùng ý",lx:"Ô Cửu gần cái chết hơn",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} cười, lần đầu cười thật với ngươi."},
   {n:"Không đáp",wx:"không thêm chuyện",lx:"{v} nói nhiều hơn",rt:"Ngươi uống trà."}]},
  t1:{h:"Hoàng thượng hỏi",w:"emp",t:"Hoàng thượng hỏi: “Tên giặc ấy cướp của nàng. Nàng muốn trẫm xử y thế nào?”",o:[
@@ -539,11 +545,11 @@ rdDef("pt_dang",10,{t:"Bến cảng",w:"emp",sj:"số phận Ô Cửu ở bến 
   {n:"Thưa: theo luật mà xử",f:"phep",wx:"ngài thấy ngươi không thiên vị",lx:"Ô Cửu gần cái chết",rt:"Ngài gật: “Luật là luật.”"},
   {n:"Thưa: giữ y sống, để y khai hết bọn mua đồ cướp",f:"muu",wx:"ngài thấy một mối lợi",lx:"y sống thì còn chuyện",rt:"Ngài cười: “Nàng muốn dùng giặc bắt kẻ mua của giặc.”"}]},
  x1:{h:"Tờ phán ở cửa bến",w:"emp",t:()=>"Tờ phán sắp gửi xuống Minh Châu. "+PFBAC()+" Hoàng thượng chờ lời cuối của ngươi.",o:[
-  {n:"Xin tha Ô Cửu, cho y và người của y giữ bến làm thủy binh",e:["win","lose"],rt:"Ô Cửu ra khỏi ngục, quỳ ở cửa bến nhận cờ thủy binh. Rương bạc được trả về cho ngươi.",rf:"Thứ sử can, ngài cho giam Ô Cửu thêm một năm.",go:(A,ok)=>{if(ok){pfMove("ocuu","cang");if(pfO("ruongbac")==="thusu")pfO("ruongbac","ta")}return""}},
-  {n:"Xin giam Ô Cửu chờ xét, trả bạc về cho chủ",e:["win2","mid"],rt:"Ô Cửu ở lại ngục. Rương bạc hồi môn về đến cung ngươi, niêm phong còn nguyên.",rf:"Ô Cửu ở lại ngục. Rương bạc nộp kho Hộ bộ.",go:(A,ok)=>{if(pfO("ruongbac")==="thusu")pfO("ruongbac",ok?"ta":"kho");return""}},
-  {n:"Để thứ sử chém theo luật",e:"mid",lx:"bể mất một người biết đường",rt:"Ô Cửu bị chém ở cửa bến. Rương bạc nộp kho Hộ bộ.",go:()=>{pfKill("ocuu");if(pfO("ruongbac")==="thusu")pfO("ruongbac","kho");return""}}]}},
+  {n:"Xin tha Ô Cửu, cho y và người của y giữ bến làm thủy binh",e:["win","lose"],rt:()=>"Ô Cửu ra khỏi ngục, quỳ ở cửa bến nhận cờ thủy binh."+(pfO("ruongbac")==="thusu"?" Rương bạc được trả về cho ngươi.":""),rf:"Thứ sử can, ngài cho giam Ô Cửu thêm một năm.",go:(A,ok)=>{if(ok){pfMove("ocuu","cang");if(pfO("ruongbac")==="thusu")pfO("ruongbac","ta")}return""}},
+  {n:"Xin giam Ô Cửu chờ xét, trả bạc về cho chủ",e:["win2","mid"],rt:()=>"Ô Cửu ở lại ngục."+(pfO("ruongbac")==="thusu"?" Rương bạc hồi môn về đến cung ngươi, niêm phong còn nguyên.":" Bạc của ngươi đã về từ trước; ngươi chỉ xin xét cho đúng."),rf:()=>"Ô Cửu ở lại ngục."+(pfO("ruongbac")==="thusu"?" Rương bạc nộp kho Hộ bộ.":""),go:(A,ok)=>{if(pfO("ruongbac")==="thusu")pfO("ruongbac",ok?"ta":"kho");return""}},
+  {n:"Để thứ sử chém theo luật",e:"mid",lx:"bể mất một người biết đường",rt:()=>"Ô Cửu bị chém ở cửa bến."+(pfO("ruongbac")==="thusu"?" Rương bạc nộp kho Hộ bộ.":""),go:()=>{pfKill("ocuu");if(pfO("ruongbac")==="thusu")pfO("ruongbac","kho");return""}}]}},
  E:{win:{tag:"Giặc giữ bến",w:"emp",t:"Ô Cửu đứng ở cửa bến Minh Châu với lá cờ thủy binh. Dân bến nói: từ nay giặc biết mặt nhau, không ai dám vào."},
-  win2:{tag:"Bạc về chủ",w:"emp",t:"Rương bạc hồi môn về đến cung ngươi. Ô Cửu ngồi trong ngục, chờ một ngày xét."},
+  win2:{tag:"Bạc về chủ",w:"emp",t:()=>(pfO("ruongbac")==="ta"?"Rương bạc hồi môn nằm trong cung ngươi.":"Việc bạc hồi môn khép lại.")+" Ô Cửu ngồi trong ngục, chờ một ngày xét."},
   mid:{tag:"Một tờ phán",t:()=>pfAlive("ocuu")?"Ô Cửu ngồi trong ngục. Bến Minh Châu yên, nhưng chưa ai biết yên được bao lâu.":"Đầu Ô Cửu treo ở cửa bến ba ngày. Bến Minh Châu yên, nhưng người của y còn trên các đảo đá."},
   lose:{tag:"Tha mà không được",w:"v",t:"Lời xin tha giặc của ngươi bị bác. {v} kể khắp nơi: công chúa {land} xin tha cho kẻ đã cướp chính mình, chắc có chuyện gì."}}});
 
@@ -573,7 +579,7 @@ rdDef("pt_dang",11,{t:"Luật biển",w:"emp",sj:"luật biển cho bến Minh C
  c4:{h:"{v} nước cờ cuối",w:"v",need:["v"],t:"{v} tâu: luật biển do phi tần ngoại quốc soạn, chẳng khác gì mở cửa bể cho người nước ngoài.",o:[
   {n:"Đáp: luật để thuyền Đại Hy cũng được che khi gặp nạn ở bể người",wx:"bá quan thấy lý",lx:"{v} ghi hận",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Hoàng thượng gật đầu.",rf:"Có quan tán thành {v}."},
   {n:"Mời nhà {v} góp một điều vào luật",wx:"{v} có phần, thôi cản",lx:"luật có một điều của nhà {v}",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"Nhà {v} góp điều thuế muối, {v} thôi tâu."},
-  {n:"Nhắc chuyện anh họ {v} từng làm Thị bạc sứ",wx:"{v} câm lời",lx:"thù hai nhà sâu thêm",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} tái mặt, lui ra."}]},
+  {n:()=>!RD_FL("pt.f.anhho")?"Đáp: luật do Hoàng thượng ban, người soạn chỉ là người cầm bút":rdEnd(8)==="win"?"Nhắc chuyện anh họ {v} từng làm Thị bạc sứ, đã bị giải về Hình bộ":"Nhắc chuyện anh họ {v} đang làm Thị bạc sứ ở Minh Châu",wx:"{v} câm lời",lx:"thù hai nhà sâu thêm",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:()=>RD_FL("pt.f.anhho")?"{v} tái mặt, lui ra.":"Hoàng thượng gật đầu. {v} lui ra.",rf:()=>RD_FL("pt.f.anhho")?"{v} đáp: “Anh họ ta có lỗi, luật của nàng sửa được lỗi ấy sao?”":"{v} đáp: “Cầm bút là cầm luật.”"}]},
  t1:{h:"Hoàng thượng hỏi",w:"emp",t:"Đêm ấy Hoàng thượng hỏi: “Luật biển này, nàng muốn nó che ai?”",o:[
   {n:"Thưa: che người đi bể, của nước nào cũng vậy",f:"bien",wx:"ngài thấy lòng ngươi rộng",lx:"ngài lo Đại Hy thiệt",rt:"Ngài nói: “Bể không có biên giới, luật cũng thế.”",rf:"Ngài nói: “Che người nước khác, ai che người nước mình?”"},
   {n:"Thưa: che bến của Đại Hy",f:"phep",wx:"ngài yên lòng",lx:"người {land} thấy ngươi đứng hẳn về một bên",rt:"Ngài gật: “Bến của trẫm.”"},
