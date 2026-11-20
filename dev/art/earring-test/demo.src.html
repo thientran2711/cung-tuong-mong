@@ -31,7 +31,7 @@ button:disabled{opacity:.35;cursor:default}
 .stage img{position:absolute;display:block;max-width:none}
 .stage .orn img{filter:drop-shadow(0 2px 2px rgba(50,25,25,.38))}
 .stage .item{display:none}
-.stage.w-earring .earring,.stage.w-ngoc_boi .ngoc_boi,.stage.w-tui_huong .tui_huong{display:block}
+.stage.w-vong_co .vong_co,.stage.w-earring .earring,.stage.w-ngoc_boi .ngoc_boi,.stage.w-tui_huong .tui_huong{display:block}
 .cmp{display:flex;gap:8px;align-items:flex-start}
 .cmp>div{flex:1}
 .cmp img.rank{width:100%;display:block;border-radius:10px;border:1px solid var(--line)}
@@ -41,13 +41,13 @@ button:disabled{opacity:.35;cursor:default}
 <body>
 <h1>Thử trang sức: hoa tai · trâm · hoa cài · ngọc bội · túi hương</h1>
 <p class="sub">Tách lớp như Photoshop: mỗi món nằm giữa đúng hai lớp của người, chỗ nào bị mặt, tóc hay tay đè lên thì tự khuất. Trâm và hoa chỉ cài vào chỗ đẹp có sẵn (2–3 chỗ); bấm món là tự vào chỗ trống kế tiếp, bấm lại là tháo.</p>
-<div class="legend"><b>Lớp (dưới → trên):</b> người (tóc sau, áo) → hoa tai tai xa → <b>mặt</b> → hoa tai tai gần → <b>tóc trước</b> → thân trâm → <b>tóc</b> → đầu trâm / hoa → ngọc bội, túi hương → <b>tay</b></div>
+<div class="legend"><b>Lớp (dưới → trên):</b> người (tóc sau, áo) → vòng cổ → tóc hai bên cổ → hoa tai tai xa → <b>mặt</b> → hoa tai tai gần → <b>tóc trước</b> → thân trâm → <b>tóc</b> → đầu trâm / hoa → ngọc bội, túi hương → <b>tay</b></div>
 <div class="wrap" id="wrap"></div>
 <script>
 /*DATA*/
-const NAMES={earring:['Đeo hoa tai','Tháo hoa tai'],ngoc_boi:['Đeo ngọc bội','Tháo ngọc bội'],tui_huong:['Đeo túi hương','Tháo túi hương']};
+const NAMES={earring:['Đeo hoa tai','Tháo hoa tai'],vong_co:['Đeo vòng cổ','Tháo vòng cổ'],ngoc_boi:['Đeo ngọc bội','Tháo ngọc bội'],tui_huong:['Đeo túi hương','Tháo túi hương']};
 const ANG={FF:'FF (chính diện)','3/4':'3/4 (nghiêng)'};
-const ORDER=['back','L:face','ear','L:fronthair','shaft','L:hairtop','orn','waist','L:hands'];
+const ORDER=['neck','L:hairneck','back','L:face','ear','L:fronthair','shaft','L:hairtop','orn','waist','L:hands'];
 function el(tag,cls){const e=document.createElement(tag);if(cls)e.className=cls;return e}
 function addItem(g,p){
   const it=A.items[p.item],im=new Image();im.src=IMG[p.item];im.className='item '+p.item;
@@ -96,7 +96,7 @@ function card(id){
   const v=el('div','views');c.appendChild(v);
   const vs=[makeView(id,f.head_view,'Cận mặt'),makeView(id,f.waist_view,'Dải lưng'),makeView(id,[0,0,1024,2304],'Toàn thân')];
   vs.forEach(s=>v.appendChild(s.vw));
-  for(const k of ['earring','ngoc_boi','tui_huong']){
+  for(const k of ['earring','vong_co','ngoc_boi','tui_huong']){
     const bt=el('button');bt.textContent=NAMES[k][0];bt.dataset.k=k;
     bt.onclick=()=>{const on=!bt.classList.contains('on');bt.classList.toggle('on',on);bt.textContent=NAMES[k][on?1:0];vs.forEach(s=>s.st.classList.toggle('w-'+k,on));};
     b1.appendChild(bt);

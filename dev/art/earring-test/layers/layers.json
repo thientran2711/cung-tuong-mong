@@ -10,6 +10,11 @@
    363,
    102
   ],
+  "hairneck": [
+   "c09_hairneck.webp",
+   222,
+   286
+  ],
   "hairtop": [
    "c09_hairtop.webp",
    308,
@@ -27,6 +32,11 @@
    402,
    118
   ],
+  "hairneck": [
+   "c11_hairneck.webp",
+   205,
+   266
+  ],
   "hairtop": [
    "c11_hairtop.webp",
    367,
@@ -43,6 +53,11 @@
    "c22_fronthair.webp",
    414,
    109
+  ],
+  "hairneck": [
+   "c22_hairneck.webp",
+   266,
+   271
   ],
   "hairtop": [
    "c22_hairtop.webp",
