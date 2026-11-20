@@ -156,9 +156,9 @@ html.kv2 .game{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-r
 .lbtns,.simon{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
 .simon small,.memo small{display:block;font-size:.66rem;color:inherit;opacity:.8}
 .goban{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;max-width:322px;margin:0 auto;background:#7a5a2a;padding:2px;border-radius:4px}
-#mgb .goban button{aspect-ratio:1;min-height:0;padding:0;font-size:1.3rem;line-height:1;background:#e8cf98;border:0;border-radius:2px;color:#111}
-#mgb .goban button.wh{color:#fff;text-shadow:0 0 2px #000}
-#mgb .goban button:disabled{cursor:default}
+#mgb .goban button,#kg82 .goban button{aspect-ratio:1;min-height:0;padding:0;font-size:1.3rem;line-height:1;background:#e8cf98;border:0;border-radius:2px;color:#111}
+#mgb .goban button.wh,#kg82 .goban button.wh{color:#fff;text-shadow:0 0 2px #000}
+#mgb .goban button:disabled,#kg82 .goban button:disabled{cursor:default}
 .memo{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-width:330px;margin:0 auto}
 #mgb .memo button{aspect-ratio:1;min-height:0;font-family:var(--display);font-size:1.4rem;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .mgopts{display:flex;flex-direction:column;gap:6px}

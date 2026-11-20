@@ -38,7 +38,7 @@ const HTML=process.argv[2]||'dev/index.html';
   const sc0=window.startContest;window.startContest=o=>{used="contest:"+o.art};S.place=whereOf(a);try{pmRun(a,S,{a:"play",kind:"co",ak:"ky",n:"Cờ"})}catch(e){used="err:"+e.message}
   out.coPlay=used;used=null;a.bac=Math.max(a.bac||0,300);S.bac=Math.max(S.bac,300);try{pmRun(S,a,{a:"duel",kind:"co",ak:"ky",n:"Cờ",s:"bac"})}catch(e){used="err:"+e.message}out.coDuel=used;
   used=null;try{pmRun(S,a,{a:"duel",kind:"dauho",ak:null,n:"Đầu hồ",s:"bac"})}catch(e){used="err"}out.other=used;window.playArt=pa0;window.startContest=sc0;try{kg82Close(true)}catch(e){}
-  /* C3 onlookers */S.where=S.where||{};const pub=BAL.pm.pub[0];S.where[a.id]=pub;S.where[t.id]=pub;S.where[w1.id]=pub;S.where[w2.id]=pub;S.place="home";
+  /* C3 onlookers */S.where=S.where||{};const pub="vuon";S.where[a.id]=pub;S.where[t.id]=pub;S.where[w1.id]=pub;S.where[w2.id]=pub;S.place="home";
   const E=pmEyes(a,t,pub);out.eyes=E.map(x=>x.id).sort();out.eyesWant=liveRivals(true).filter(v=>v!==a&&v!==t&&!v.confined&&(S.where[v.id]||palaceOf(v))===pub).map(v=>v.id).slice(0,BAL.pm.eye.max).sort();const nE=E.length;
   S.where[w2.id]=palaceOf(w2);out.eyesReal=pmEyes(a,t,pub).map(x=>x.id);out.nE=nE;const nq=V.find(v=>!v.queen);out.priv=pmEyes(a,t,palaceOf(nq)).length+pmEyes(a,t,"home").length;S.where[w2.id]=pub;
   a.danh=50;t.danh=50;w1.rl=w1.rl||{};w1.rl[a.id]=BAL.pm.eye.likeMin+5;const af0=aff(w1,a);const d0=a.danh+t.danh;
@@ -48,10 +48,13 @@ const HTML=process.argv[2]||'dev/index.html';
   const L=pmLad("dan");const lo=L[L.length-1],hi=L[0];const m=pmLadWin(lo,hi,"dan");out.swap=pmLadPos(lo,"dan")===1&&pmLadPos(hi,"dan")===2&&!!m;
   const L2=pmLad("dan");const x2=L2[2],y2=L2[1];out.noUp=pmLadWin(y2,x2,"dan")===""&&pmLadPos(y2,"dan")===2;
   const a3=L2[3],t3=L2[2];out.lfor=pmLadFor(a3,t3,{a:"duel",kind:"dan"})&&!pmLadFor(t3,a3,{a:"duel",kind:"dan"})&&!pmLadFor(a3,t3,{a:"play",kind:"dan"});
-  /* refusal of a ladder challenge: preview + drop */if(a3!==S&&t3!==S){const O=pmDuelOpts(a3,t3,{a:"duel",kind:"dan",n:"Đàn",s:"bac"});const no=O.find(o=>o.id==="no");out.refPrev=!!no&&/tụt/.test(no.x);const p0=pmLadPos(t3,"dan");no.go();out.refDrop=pmLadPos(t3,"dan")-p0}
+  /* refusal of a ladder challenge: preview + drop */if(a3!==S&&t3!==S){const O=pmDuelOpts(a3,t3,{a:"duel",kind:"dan",n:"Đàn",s:"bac"});const no=O.find(o=>o.id==="no");out.refPrev=!!no&&/tụt/.test(no.x)===BAL.pm.lad.refuseDrop>0;const p0=pmLadPos(t3,"dan");no.go();out.refDrop=pmLadPos(t3,"dan")-p0;out.refWant=BAL.pm.lad.refuseDrop;
+   const yo=O.find(o=>o.id==="half");out.yPlace=yo?/\+(\d+)/.exec(yo.x)[1]-pmYieldAff(a3,t3):null}
   /* month pay */const top=pmLad("dan")[0];const td=top===S?S.danh:top.danh;const mt=pmLadMonth();out.month=(top===S?S.danh:top.danh)-td>=BAL.pm.lad.top[0];
   /* old save: no S.pmL → seeded on demand, nothing breaks */delete S.pmL;out.old=pmLadPos(S,"co")>0;
   /* aim: someone below her in an art she plays aims at the place right above */let aim=null;for(const v of V){const A=window.pmLadAim?pmLadAim(v):null;if(A){aim={v:v.id,p:A.p===S?"me":A.p.id,kind:A.kind,ok:pmLadPos(A.p,A.kind)<pmLadPos(v,A.kind)&&pmLadPos(v,A.kind)-pmLadPos(A.p,A.kind)<=BAL.pm.lad.reach};break}}out.aim=aim;
+  /* C4 look: kit option card per art + standings rows; the Hậu cung card carries «Bảng tài nghệ» */
+  {const c=PEND.pmLad({v:a.id});out.ladOpts=c.o.length;out.ladArts=BAL.pm.lad.arts.length;const h=pmLadHTML("dan");out.ladRows=(h.match(/kgpl/g)||[]).length;out.ladN=pmLad("dan").length;out.ladCard=/data-pmlad="\d+"/.test(rvCard(a,rivals.indexOf(a)));out.ladPct=/%/.test((h+c.t+c.o.map(o=>o.x).join("")).replace(/<[^>]*>/g,""))}
   /* C1 split board data */let vsCalls=0;const kv0=window.kitGameVs;window.kitGameVs=()=>{vsCalls++};KG82.onHud=null;
   pmVsGo([{p:a,raw:7}],a,"dan");const vs=KG82.vs;const sh=[];for(let n=30;n>=0;n-=5){KG82.onHud({score:`${Math.round((30-n)/6)}/10`,time:`${n} giây`});sh.push(vs.opp[0].shown)}
   out.vs={sh,me:vs.me,calls:vsCalls,mono:sh.every((v,i)=>i===0||v>=sh[i-1]),end:sh[sh.length-1],max:Math.max(...sh)};window.kitGameVs=kv0;KG82.onHud=null;KG82.vs=null;
@@ -64,9 +67,11 @@ const HTML=process.argv[2]||'dev/index.html';
  ok(r.seed&&r.n>3,'ladder seeded from talent (best first) on a save without S.pmL',{n:r.n});
  ok(r.swap&&r.noUp,'a lower winner takes the loser\'s place (others shift down); a higher winner stays',{swap:r.swap,noUp:r.noUp});
  ok(r.lfor,'a ladder challenge = a duel from below within reach (not a pastime, not from above)',r.lfor);
- ok(r.refPrev===undefined||(r.refPrev&&r.refDrop===1),'refusing a ladder challenge: the preview says «tụt», she drops refuseDrop place',{prev:r.refPrev,drop:r.refDrop});
+ ok(r.refPrev===undefined||(r.refPrev&&r.refDrop===r.refWant),'refusing a ladder challenge drops BAL.pm.lad.refuseDrop places (0 by law 2) and the preview says so only when it does',{prev:r.refPrev,drop:r.refDrop,want:r.refWant});
+ ok(r.yPlace==null||r.yPlace>0,'«Nhường» a ladder place: the superior\'s favour includes one place (law 2)',{extra:r.yPlace});
  ok(r.month&&r.old,'places 1..n earn Danh in the month pay; an old save gets a ladder on demand',{month:r.month,old:r.old});
  ok(r.aim&&r.aim.ok,'an NPC aims at the place right above her, within reach (law 1: her too)',r.aim);
+ ok(r.ladOpts===r.ladArts+1&&r.ladRows===r.ladN&&r.ladCard&&!r.ladPct,'ladder look: one option per art (+ Thôi), one standings row per person, the Hậu cung card carries «Bảng tài nghệ», no % (law 7)',{o:r.ladOpts,rows:r.ladRows,n:r.ladN,card:r.ladCard});
  ok(r.vs.mono&&r.vs.end===7&&r.vs.max<=7&&r.vs.calls>0&&r.vsRound>=4,'split board: the drawn raw shows along the clock, never above itself, ends at itself (K-PM-1 hook called)',r.vs);
  /* ---- NPC ladder challenges land over ≥ 10 game days ---- */
  const d=await p.evaluate(()=>{let n=0,me=0;const L0=JSON.stringify(S.pmL||{});const rc0=rcvAsk;window.rcvAsk=function(k,a,t,x){if(k==="pmDuel"&&x&&pmLadFor(a,t,x)){n++;if(t===S)me++}return rc0.apply(this,arguments)};
