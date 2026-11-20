@@ -416,7 +416,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | GAP OR13 co-op half outside-coop (opus; J3b) | review/outside-coop; reports/outside-coop.md | B | session_01N1tNP4iVdUXvnLhmBA3k9Y | SẴN SÀNG KIỂM 2c904461 (coop-kcco 63/63, coop-e2e 68/68, coop-home 51/51) | 20/11 ~10:20Z |
 | mg-craft lead #2 (opus; STEP 4 integrate VE f1ef0106 + HOA c0f9fbbc (+ g1 review fixes) onto review/mg-craft) | review/mg-craft | B | session_01N1tNP3Whw8X1PLZAsT5ChZ | SẴN SÀNG KIỂM (integrated) 8e74ddfa (report reports/mg-craft.md) | 20/11 09:06Z |
 | REVIEW phutang-road r2 (BIG opus E21r2; successor of E21r @0448dc8c) of b868bbce | review/phutang-road | FOREMAN E #17 | session_01DgYSWod6Dw7HtUXCQisjD1 | RUNNING | 20/11 10:14Z |
-| home-chapters r2 fixes (opus E25b; successor of E25 @b6b5b99d5; E25r FAIL @a3cc98226) | review/home-chapters-r1 | FOREMAN E #17 | session_01DgYSWob7AScwYwurseKupN | SẴN SÀNG KIỂM r2 7882ea5d7 (kit part pending) | 20/11 10:18Z |
+| home-chapters r2 fixes (opus E25b; successor of E25 @b6b5b99d5; E25r FAIL @a3cc98226) | review/home-chapters-r1 | FOREMAN E #17 | session_01DgYSWob7AScwYwurseKupN | SẴN SÀNG KIỂM 5853d71a4 → E25r PASS, LAND READY; ARCHIVED | 20/11 10:18Z |
 | REVIEW role-parity-drift-kyngo (SMALL sonnet E23r; probe-only) of 41d620a5 | review/role-parity-drift-kyngo | FOREMAN E #17 | session_01DgYSWmgey4KqSWQJLrpZR5 | PASS 9a6eaa38; ARCHIVED | 20/11 10:20Z |
 | walk-cost «về nhà» khắc + every goTo/walk cost (opus; ORDER ROOT-76 08:36Z; OD L1976) | review/walk-cost; briefs/D9-gap-jobs.md JOB 6 | D #9 for ROOT-76 | session_01964izFHhRVYPrhTSWWe8Qc (#4; #2 DFHWrShB, #3 CtSP7ALH archived) | SẴN SÀNG KIỂM 02f29b51 (20/11 19:10Z) | 20/11 09:21Z | | RE-OPENED 13:44Z test E flake → WALK-COST #3 session_01964izCtSP7ALHkr35JH5Gr
 | person-minigame-acts ROUND C (opus E22g; successor of E22f @90f464f5; r3 42dba2ac with E22r) | review/person-minigame-acts-c | FOREMAN E #17 | session_01DgYSWpbhufsng6okRiVwYE | ROLLED → E22h @8cfb79f0; ARCHIVED | 20/11 10:28Z |
@@ -482,7 +482,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW coop-name-clash r1 (opus BIG) of c2353df6 | review/coop-name-clash-r1 | B | session_01N1tNP3dftEE3NNrkg7qe5S | RUNNING | 20/11 18:01Z |
 | KIT kit-cost-rows-home (sonnet; KR home-stat rows + «quý nhau», E blockers of home-chapters / person-minigame) | review/kit-cost-rows-home | MAIN ROOT-80 | session_01Rc5AsMtjP4KTgBZVjENGLs | RUNNING | 20/11 18:50Z |
 | PARKING #11 dresscode SEASON + COLOUR DRESS CODE (opus E30; ORDER MAIN 19:05Z; expert pass first OD:L1327) | review/dresscode; reports/dresscode.md | FOREMAN E #20 | session_01DgYSWnviLqLryPXMXj3CnP | RUNNING | 20/11 19:10Z |
-| FOREMAN E #21 (opus; child of E #20, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #20 | session_01DgYSWpNbcJyCoGaB1FhLFq | RUNNING | 20/11 18:55Z |
+| FOREMAN E #21 (opus; child of E #20, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #20 | session_01DgYSWpNbcJyCoGaB1FhLFq | DONE → E #22 session_PENDING_E22 | 20/11 18:55Z |
 | kit-cost-rows-home KIT KEEPER (sonnet; ROOT-80 order) | review/kit-cost-rows-home; reports/kit-cost-rows-home.md | MAIN ROOT-80 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 3332c63b | 20/11 |
 | kit-bgtone B «Đào phấn» final KIT KEEPER (owner pick) | review/kit-bgtone; reports/kit-bgtone.md | MAIN ROOT-80 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM fe6432c0 | 20/11 |
 | rv-kit-cost-rows-home REVIEWER (sonnet; small kit) | review/kit-cost-rows-home-rv; reports/rv-kit-cost-rows-home.md | MAIN ROOT-80 | rv-signs session | DONE PASS 3332c63b | 20/11 19:10Z |
@@ -494,3 +494,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | names-unique-r3 (opus; role-parity maid accuse regression of names-unique-r2-r1 on LIVE 983a9436) | review/names-unique-r3 | B | session_01N1tNP4XVawZpybqzbWQyUT | RUNNING | 20/11 19:47Z |
 | coop-week-stall (opus; pre-existing LIVE: late room snapshot rolls seat back, week end not sent ~1/8–14 coop-e2e) | review/coop-week-stall | B | session_01N1tNP6if7E7NXcFKwJ6yR5 | RUNNING | 20/11 19:48Z |
 | rv-kit-e-rows REVIEWER (sonnet; small kit) | review/kit-e-rows-rv (none pushed); reports/rv-kit-e-rows.md | MAIN ROOT-81 | rv-signs session | DONE FAIL dd2e0fe1 | 20/11 19:47Z |
+| FOREMAN E #22 (opus; child of E #21, depth 3) | handover FOREMAN_E_STATUS | FOREMAN E #21 | session_PENDING_E22 | RUNNING | 20/11 19:49Z |
