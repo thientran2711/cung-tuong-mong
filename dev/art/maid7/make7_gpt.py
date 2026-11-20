@@ -307,6 +307,10 @@ def mama4(age):
     body = master_block() + body[len(b_open):]
     body = swap(body, MM_STYLELOCK_OLD, MM_AGE_NEW)
     body = swap(body, ', with small earrings;', ';')   # master "Bare earlobes, no earrings" (NOEAR)
+    # owner L1503 / K27: below Tần only SMALL fine embroidered flowers
+    body = swap(body, 'delicate cream-and-blush peony and plum-blossom embroidery over the vest, sleeves, panel and hem;',
+                'delicate cream-and-blush peony and plum-blossom embroidery over the vest, sleeves, panel and hem; all embroidered '
+                'flowers and motifs (on the robe, vest, panels, hem band and cuffs) are SMALL and fine, never large flowers;')
     t = HDR_MM4 + body
     out = D + 'mama_gpt_v4_%s.txt' % age
     open(out, 'w', encoding='utf-8').write(t)
