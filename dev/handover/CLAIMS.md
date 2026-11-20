@@ -487,3 +487,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-bgtone B «Đào phấn» final KIT KEEPER (owner pick) | review/kit-bgtone; reports/kit-bgtone.md | MAIN ROOT-80 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM fe6432c0 | 20/11 |
 | rv-kit-cost-rows-home REVIEWER (sonnet; small kit) | review/kit-cost-rows-home-rv; reports/rv-kit-cost-rows-home.md | MAIN ROOT-80 | rv-signs session | DONE PASS 3332c63b | 20/11 19:10Z |
 | rv-kit-bgtone REVIEWER (sonnet; small kit) | review/kit-bgtone-rv; reports/rv-kit-bgtone.md | MAIN ROOT-80 | rv-signs session | DONE PASS fe6432c0 | 20/11 19:27Z |
+| PARKING #11 dresscode SEASON + COLOUR DRESS CODE (opus E30; ORDER MAIN 19:05Z; expert pass first OD:L1327) | review/dresscode; reports/dresscode.md | FOREMAN E #20 | session_PENDING_E30 | RUNNING | 20/11 19:10Z |
