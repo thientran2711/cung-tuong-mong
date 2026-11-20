@@ -243,7 +243,7 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - vn: Mọi người cười mỉm tươi, môi khép, không hở răng, không mở miệng.
 
 ### S19 · SKIN / FOREHEAD / FEET tail
-- text: `Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe with slippers visible, no train, no cup, nothing covering the face.`
+- text: `Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe, only slipper toe tips peeking under the hem, no train, no cup, nothing covering the face.`
 - scope: all
 - confirm: -
 - ages: all
