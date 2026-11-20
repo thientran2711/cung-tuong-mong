@@ -34,13 +34,24 @@ function showFor(now){const t=S.tonight&&S.tonight!=="me"?S.tonight:null,mine=S.
  if(mine)for(let i=Q.length-1;i>=0;i--)if(Q[i]&&Q[i].pid==="ksp")Q.splice(i,1);
  const d=mkP("empnight",{v:t&&t.id!=null?t.id:null,mine:mine?1:0});if(d){pushDil(d,"Ngự giá lâm cung");/* he is at her door tonight: never held / dropped by the event pacing gate (j68 evGate) */const m=Q.find(x=>x&&x.pid==="empnight"&&!x.must);if(m)m.must=1;if(now)try{if($("modal").hidden)showModal()}catch(e){}}}
 window.visCh=visCh;
-window.visRoll=function(){if(!host()||!empOk())return"";const L=[];if(meOk())L.push(S);
+/* AG-ALL-2: one visit = visGo(p) for her, the co-op friend AND an NPC consort; WHO and WHETHER is the Emperor's own evening plan (jagacts2 emp:visit)
+   while the loop runs (agDOn); the daily roll below is the old path (loop off) */
+window.visOk=function(p){if(!host()||!p)return false;if(p===S)return empOk()&&meOk();if(p.alive===false||p.out)return false;if(p.coop)return empOk();
+ /* an NPC consort: his own health, her state, her own gap (p.visW); a night already taken by someone other than the tablet's pick stops him */
+ const V=B();if(!S||S.dead||S.mg)return false;const i=S.emp&&S.emp.ill;if(i&&(i.st||0)>=V.illSt)return false;if(p.confined||p.preg)return false;
+ if(p.visW!=null&&day()-p.visW<V.gap)return false;return !ntOther()};
+window.visGo=function(p){const w=day();
+ if(p===S||p.coop){if(S.emp)S.emp.visit={w,pid:p===S?(myPid()||"me"):p.id,nm:p===S?(S.name||""):(p.name||"")};
+  S.visN=(S.visN||0)+1;if(p===S){showFor();return"me"}S.visW=w;log(`Đêm nay Hoàng thượng ngự giá đến cung ${p.name}, nghỉ lại đến sáng.`);return"friend"}
+ /* an NPC consort: the tablet's night is hers (the one flip / resolveTonight → rivalNight path), plus the visit's own Sủng / Danh (BAL.visit, as hers) */
+ const V=B();const lost=S.tonight&&S.tonight!=="me"&&S.tonight!==p?S.tonight:null;if(S.tonight==="me")return"";p.visW=w;S.tonight=p;S.visNpc={w,id:p.id};ap(p,{sung:V.sung,danh:V.danh});
+ if(lost&&lost.alive){ghenUp(lost,V.lostGhen,`mất đêm thẻ bài vì Hoàng thượng ngự giá đến cung ${p.name}`,p);relAdd(p,lost,-V.lostRel)}
+ log(`Đêm nay Hoàng thượng ngự giá đến cung ${p.name}, nghỉ lại đến sáng.`);return"npc"};
+window.visRoll=function(){if(!host()||!empOk())return"";if(window.agDOn&&agDOn())return"";const L=[];if(meOk())L.push(S);
  if(cw()){const f=(rivals||[]).find(v=>v&&v.coop&&v.alive!==false&&!v.out);if(f)L.push(f)}
- L.sort(()=>Math.random()-.5);for(const p of L){if(!roll(visCh(p)))continue;const w=day();
-  if(S.emp)S.emp.visit={w,pid:p===S?(myPid()||"me"):p.id,nm:p===S?(S.name||""):(p.name||"")};
-  S.visN=(S.visN||0)+1;if(p===S){showFor();return"me"}S.visW=w;log(`Đêm nay Hoàng thượng ngự giá đến cung ${p.name}, nghỉ lại đến sáng.`);return"friend"}return""};
+ L.sort(()=>Math.random()-.5);for(const p of L){if(!roll(visCh(p)))continue;return visGo(p)}return""};
 /* after the tablet flip of each day (j8 flip, wrapped by j55 / j75) */
-(function(){const f0=flip;flip=function(){const r=f0.apply(this,arguments);try{if(S&&!S.dead)visRoll()}catch(e){console.error("visit",e)}return r}})();
+(function(){const f0=flip;flip=function(){const r=f0.apply(this,arguments);try{const n=S&&S.visNpc;if(n&&n.w===day()&&S.tonight!=="me"){const v=(rivals||[]).find(x=>x&&x.id===n.id&&x.alive&&!x.out);if(v)S.tonight=v}}catch(e){}try{if(S&&!S.dead)visRoll()}catch(e){console.error("visit",e)}return r}})();
 /* co-op: the seat the host chose plays its card when the merged world arrives; the other seat reads the news */
 function coopSeen(){if(!cw()||host()||!S||S.dead||Q.length||S.mg)return;const v=S.emp&&S.emp.visit;if(!v||S.visSeen===v.w)return;S.visSeen=v.w;
  if(v.pid===myPid()){if(meOk())showFor(1)}else log(`Đêm qua Hoàng thượng ngự giá đến cung ${v.nm||"hảo hữu"}, nghỉ lại đến sáng.`)}
@@ -48,8 +59,8 @@ function coopSeen(){if(!cw()||host()||!S||S.dead||Q.length||S.mg)return;const v=
 /* the card: same event, same words; the night road now really is a visit */
 const p0=PEND.empnight;
 function thDispl(){const V=B();if(S.thDead||!S.thO)return{p:0,loss:0};let neg=0;try{neg=thArch().neg||0}catch(e){}
- let m=1;try{m=trongMul("th",DEED.empvisit)}catch(e){}return{p:Math.max(0,Math.min(95,V.thP+neg*V.thNeg)),loss:Math.max(1,Math.round(V.thLoss*(2-m)))}}
-PEND.empnight=function(p){p=p||{};const V=B(),d=p0.call(this,Object.assign({o:od(V.show.o+bestArt().w*V.show.w+mm())},p));if(!d||!d.o)return d;
+ let m=1;try{m=trongMul("th",DEED.empvisit)}catch(e){}return{p:Math.max(0,V.thP+neg*V.thNeg),loss:Math.max(1,Math.round(V.thLoss*(2-m)))}}
+PEND.empnight=function(p){p=p||{};const V=B(),d=p0.call(this,Object.assign({o:od(V.show.o+artOE(S,bestArt().k)+mm())},p));if(!d||!d.o)return d;
  const lost=p.v!=null?(rivals||[]).find(x=>x&&x.id===p.v&&x.alive):null,T=thDispl(),q=typeof queenP==="function"?queenP():null;
  if(lost)d.t+=`<br>Thẻ bài đêm nay lật tên ${lost.name}, vậy mà ngài lại đến đây.`;
  const mine=!!p.mine&&S.tonight==="me";if(mine)d.t+="<br>Thẻ bài đêm nay lật tên ngươi; chưa đợi kiệu đến đón, ngài đã tự tìm đến.";
@@ -72,12 +83,14 @@ PEND.vnight=function(p){const d=PEND.night1({q:(p&&p.q)||B().q,vp:0});if(!d)retu
 /* the visit's extras, once, right after the night itself (nightFx) */
 (function(){const n0=nightFx;nightFx=function(s){const vis=S&&S.visNight!=null&&day()-S.visNight<=1;const r=n0.apply(this,arguments);
  if(vis)try{S.visNight=null;visAfter()}catch(e){console.error("visit after",e)}return r}})();
-function visAfter(){const V=B();const L=[`Sủng +${V.sung}`,`Danh +${V.danh}`];apply({sung:V.sung,danh:V.danh});ghenAll(V.ghen);const P=[`Hậu cung hay tin ngài nghỉ lại cung ngươi: phi tần ghen +${ghenN(V.ghen)}.`];
+function visAfter(){const V=B();const L=[`Sủng +${V.sung}`,`Danh +${V.danh}`];apply({sung:V.sung,danh:V.danh});ghenAll(V.ghen,"Hoàng thượng ngự giá đến cung ngươi");const P=[`Hậu cung hay tin ngài nghỉ lại cung ngươi: phi tần ghen +${ghenN(V.ghen)}.`];
  const lost=S.visLost!=null?(rivals||[]).find(x=>x&&x.id===S.visLost&&x.alive):null;S.visLost=null;
- if(lost){lost.ghen=cl((lost.ghen||0)+V.lostGhen,0,100);relAdd(S,lost,-V.lostRel);P.push(`${lost.name} mất đêm thẻ bài đã lật: ghen +${V.lostGhen}, quý ngươi -${V.lostRel}.`)}
+ if(lost){ghenUp(lost,V.lostGhen,"mất đêm thẻ bài vì Hoàng thượng ngự giá đến cung ngươi",S);relAdd(S,lost,-V.lostRel);P.push(`${lost.name} mất đêm thẻ bài đã lật: ghen +${V.lostGhen}, quý ngươi -${V.lostRel}.`)}
  if(S.visQ){S.visQ=0;apply({hh:-V.hh});P.push(`Hoàng hậu phật ý: quý ngươi -${V.hh}.`)}
- const T=thDispl();if(T.p&&roll(T.p)){apply({th:-T.loss});P.push(`Thái hậu nghe tin, phật ý vì ngài bỏ lệ Kính sự phòng: Thái hậu quý ngươi -${T.loss}.`);try{trongLearn("th",DEED.empvisit,"Ngự giá lâm cung")}catch(e){}}
- else if(T.p)P.push("Thái hậu nghe tin, không nói gì.");
+ const T=thDispl();/* NPC-PURPOSE G3: the news reaches her through someone — the one who lost the night or another who resents the player (npcTell); nobody → she does not hear */
+  const tl=T.p?npcTell(S,{from:(lost?[lost]:[]).concat(liveRivals(true).filter(x=>x!==lost)),to:S.thO||{}}):null;
+  if(tl&&roll(T.p)){apply({th:-T.loss});P.push(`Thái hậu nghe ${npwNm(tl.who)} kể, phật ý vì ngài bỏ lệ Kính sự phòng: Thái hậu quý ngươi -${T.loss}.`);try{trongLearn("th",DEED.empvisit,"Ngự giá lâm cung")}catch(e){}}
+ else if(tl)P.push(`Thái hậu nghe ${npwNm(tl.who)} kể, không nói gì.`);
  log(`Ngự giá lâm cung: ${L.join(" · ")}. ${P.join(" ")}`);
  /* review r1: no second card. The night's own closing card (jne kitNightEnd, KIT §62 + §81 kit button) already shows the whole night
     before → after (Được / Mất / Kèm rows, real numbers incl. these extras, applied inside nightFx); it gets the visit's caption. */

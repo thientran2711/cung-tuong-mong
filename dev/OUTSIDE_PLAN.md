@@ -94,7 +94,7 @@ Monthly, also run automatically: allowance (tiền tháng 5–25 bạc by Gia t�
 |---|---|---|---|
 | Phụ thân | tt Tể tướng · dtq Đại tướng quân · muoi đại thương muối · thd thầy đồ · ch quốc cữu (anh/em Thái hậu) · td quan Thị lang sắp bị vu án | officials/men pool (FIGURES-others), 51+ | career moves monthly (j55 pow); uses her as a pawn; wants a match or the palace |
 | Mẫu thân (chính thất) | alive (60%) or died → kế mẫu | new portrait (36–50) | protects her, Hồi môn, warns of di nương |
-| Kế mẫu / Di nương (1–2) | traits from TRAITS (Hiểm độc / Tham vọng / Hiền lành…) | new portraits (26–35, 36–50) | schemes for her own daughter: gossip, tamper outfit, poison in rare cases, push a bad match |
+| Kế mẫu / Di nương (1–2) | traits from TRAITS (Xảo quyệt / Tham vọng / Hiền lành…) | new portraits (26–35, 36–50) | schemes for her own daughter: gossip, tamper outfit, poison in rare cases, push a bad match |
 | Tổ mẫu (lão phu nhân) | head of the inner house | new portrait (51+) | judge of family disputes, Gia thanh guardian |
 | Huynh trưởng (đích/thứ) | thi cử / quân ngũ / buôn bán by origin | men pool 18–25/26–35 | career events (đỗ đạt, thua bạc, đánh nhau); ally or burden; can carry letters |
 | Thứ muội (cùng năm, 18) | di nương's daughter | **consort pool face (c01–c32)** so she has consort art if selected | rival for tuyển tú and suitors; enters palace as rival or ally |

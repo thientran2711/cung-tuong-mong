@@ -6,7 +6,7 @@
    Anti-repetition: per-life cooldown per template and per variant; cross-life history in localStorage 'ctm-e68h' (last 6 lives) lowers the weight of what was seen.
    Hook for other storyline modules: e68Busy() is true if j68 fired a big beat this month; j68 honours storyBusy() if defined. */
 const E68=[],E68I={},Q68=[],Q68I={};
-const E68CFG={p:.25,swap:.15,cd:54};
+const E68CFG={cd:54}; /* npc-purpose: the weekly p / visit-swap rolls are gone: BAL.ag.why.e68.gap; a j68 visit only when no stock visitor has a reason */
 const G6=t=>`<span class="g">${t}</span>`,R6=t=>`<span class="r">${t}</span>`;
 function e68(){if(!S)return null;const e=S.e68=S.e68||{};e.cd=e.cd||{};e.vu=e.vu||{};e.fu=e.fu||[];e.q=e.q||[];e.qcd=e.qcd||{};e.ch=e.ch||{};e.n=e.n||0;e.qn=e.qn||0;e.cong=e.cong||0;e.qdone=e.qdone||0;e.qfail=e.qfail||0;e.npcq=e.npcq||[];
  if(!e.lid){e.lid=Date.now().toString(36)+R(1000);try{const H=JSON.parse(localStorage.getItem("ctm-e68h")||"{}");H.L=[[]].concat(H.L||[]).slice(0,6);H.cur=e.lid;localStorage.setItem("ctm-e68h",JSON.stringify(H))}catch(x){}}return e}
@@ -20,8 +20,8 @@ function e68On(){return !!(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSr
 /* ---------- actors ---------- */
 const NM6=p=>p?p.name:"";
 function tr6(v){try{return traitsOf(v)}catch(x){return[v&&v.trait]}}
-function rv6(f,wf){const L=liveRivals(true).filter(v=>!v.confined&&(!f||f(v)));if(!L.length)return null;if(!wf)return pick(L).id;const w=L.map(v=>Math.max(.01,wf(v)));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<L.length-1){r-=w[i];i++}return L[i].id}
-function sv6(f){const L=(S.staff||[]).filter(s=>s&&s.sid!=null&&(!f||f(s)));return L.length?pick(L).sid:null}
+function rv6(f,wf){const L=liveRivals(true).filter(v=>!v.confined&&(!f||f(v)));const v=npwPick(L,v=>wf?Math.max(.01,wf(v)):npwB().min+Math.abs(aff(v,S))+hostility(v,S)/2);return v?v.id:null} /* npc-purpose: the one whose tie / goal fits the template most (never a random consort) */
+function sv6(f,wf){const L=(S.staff||[]).filter(s=>s&&s.sid!=null&&(!f||f(s)));const s=npwPick(L,s=>wf?Math.max(.01,wf(s)):npwB().min+Math.abs((s.loyal||50)-50)+(netIs(s,"greed")?BAL.ag.why.e68.greed:0));return s?s.sid:null}
 function kid6(f){const L=(S.kids||[]).filter(k=>k.alive&&(!f||f(k)));return L.length?pick(L).name:null}
 function man6(rw){const L=(S.men||[]).filter(m=>m.alive!==false&&(!rw||m.rw===rw));return L.length?pick(L).id:null}
 function A6(kind,id){try{
@@ -48,16 +48,21 @@ function relTok(a,n){if(!a||!n)return"";const nm=a.k==="th"?"Thái hậu với n
 function relDo(a,n){if(!a||!n)return;try{
  if(a.k==="rv")relAdd(S,a.o,n);else if(a.k==="sv"||a.k==="maid")a.o.loyal=cl((a.o.loyal||0)+n,0,100);else if(a.k==="kid")a.o.fond=cl((a.o.fond||0)+n,0,100);
  else if(a.k==="man")a.o.af=(a.o.af||0)+Math.round(n/2);else if(a.k==="th")apply({th:n});else if(a.k==="emp")apply({sung:n});else if((a.k==="doc"||a.k==="eun")&&a.o){a.o.af=a.o.af||{};if(typeof a.o.af==="object")a.o.af.me=(a.o.af.me||0)+n}}catch(x){}}
-function fx6(o){return Object.entries(o||{}).filter(([k,v])=>v&&(NAMES[k]||k==="an")).map(([k,v])=>{const n=k==="an"?"Ân tình":NAMES[k];const vv=k==="sung"?sg(v):v;return (vv>0?G6:R6)(`${n} ${vv>0?"+":""}${vv}`)})}
+function fx6(o){return Object.entries(o||{}).filter(([k,v])=>v&&(NAMES[k]||k==="an")).map(([k,v])=>{const n=k==="an"?"Ân tình":NAMES[k];const vv=k==="sung"?sg(v):v;return (vv>0?G6:R6)(statTxt(k,vv,n))})}
 function ap6(o){o=Object.assign({},o||{});if(o.an){S.an=cl((S.an||0)+o.an,0,100);delete o.an}apply(o)}
 /* one choice. s: {c immediate fx, p odds, w/l fx on success/fail, r/lr [[actor,n]] relation on success/fail, wt/lt/k extra tokens, ok/no callbacks, wl/ll log lines} */
-function c6(n,s){s=s||{};const wt=fx6(s.w).concat((s.r||[]).map(([a,v])=>relTok(a,v)),s.wt||[]).filter(Boolean),lt=fx6(s.l).concat((s.lr||[]).map(([a,v])=>relTok(a,v)),s.lt||[]).filter(Boolean);
- const p=s.p==null?null:cl(Math.round(s.p),5,95);let x;
+function c6(n,s){s=s||{};if(s.pw&&s.c&&s.c.bac<0){/* review ag-all-2 r2 A5: pw = the bạc buys a person's word, paid only on success; she must hold it; failure costs no bạc */
+  const P=-s.c.bac,c0=Object.assign({},s.c),l0=Object.assign({},s.l||{});delete c0.bac;delete l0.bac;
+  s=Object.assign({},s,{c:c0,w:Object.assign({},s.w||{},{bac:-P}),l:l0,lt:(s.lt||[]).concat(["không mất bạc"]),need:(s.need||[]).concat([{t:`cần ${P} bạc`,ok:(S.bac||0)>=P}])})}
+ const wt=fx6(s.w).concat((s.r||[]).map(([a,v])=>relTok(a,v)),s.wt||[]).filter(Boolean),lt=fx6(s.l).concat((s.lr||[]).map(([a,v])=>relTok(a,v)),s.lt||[]).filter(Boolean);
+ const p=s.p==null?null:oddsCl(Math.round(s.p));let x;
  if(p!=null)x=`${word(p)} · thành: ${wt.join(", ")||G6("êm chuyện")} · hỏng: ${lt.join(", ")||"không mất gì"}`;else x=wt.join(", ");
  if(s.k&&s.k.length)x+=(x?" · ":"")+"kèm: "+s.k.join(", ");
- const c={n,fx:s.c||{},x,go:()=>{let ok=true;if(p!=null)ok=Math.random()*100<p;
+ /* review/odds-meter-back: a certain option (no p) carries no roll in its own code, so the kit reads it as certain («Nắm chắc»), never an unknown odds word */
+ const fin=ok=>{
    if(ok){ap6(s.w);(s.r||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.ok?s.ok():""}catch(e){}log(t||s.wl||"Mọi việc êm xuôi.")}
-   else{ap6(s.l);(s.lr||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.no?s.no():""}catch(e){}log(`<span class="r">Không thành:</span> ${t||s.ll||n+"."}`)}}};
+   else{ap6(s.l);(s.lr||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.no?s.no():""}catch(e){}log(`<span class="r">Không thành:</span> ${t||s.ll||n+"."}`)}};
+ const c={n,fx:s.c||{},x,go:p!=null?()=>fin(roll(oddsCl(p))):()=>fin(true)};
  if(s.c&&s.c.suc&&S.suc+s.c.suc<5)c.n+=" (mệt)";if(s.need&&typeof kitOffNeed==="function")kitOffNeed(c,s.need);return c}
 /* ---------- events ---------- */
 /* EV6(id, fam, spec): spec = {big, w(ctx)->weight, pp()->params|null (actor ids), v:[texts with {A} {B} {M} {S} {W} {P}], o(X)->choices, t title} */
@@ -72,24 +77,24 @@ function e68Cands(fams,big){const e=e68(),C=e68Ctx(),now=wk(),out=[];const story
  for(const s of E68){if(fams&&!fams.includes(s.fam))continue;if(s.fam==="plot"||s.fu)continue;if(big===false&&s.big)continue;if(s.big&&story)continue;
   const last=e.cd[s.id];if(last!=null&&now-last<(s.cd||E68CFG.cd))continue;let w=0;try{w=s.w?s.w(C):1}catch(x){w=0}if(!(w>0))continue;
   w*=Math.pow(.5,e68Past(s.id,true));out.push([s,w])}return out}
-function e68Pick(L){const t=L.reduce((a,x)=>a+x[1],0);let r=Math.random()*t,i=0;while(i<L.length-1&&r>L[i][1]){r-=L[i][1];i++}return L[i]}
+function e68Pick(L){return npwPick(L,x=>x[1],{all:true})} /* npc-purpose: weighted among the situations whose people / state fit (every fitting one may come; top-only made whole families vanish: Tin đồn 28→0) */
 /* params + a variant she has not seen lately (this life first, then the last five lives) */
 function e68Make(s){const e=e68();let p=null;try{p=s.pp?s.pp():{}}catch(x){p=null}if(!p)return null;const V=s.v||[""];
  let all=[...V.keys()];if(s.vf){let ok=null;try{ok=s.vf(p)}catch(x){}if(ok&&ok.length)all=all.filter(i=>ok.includes(i));else if(ok)return null}const used=e.vu[s.id]||[];let pool=all.filter(i=>!used.includes(i));if(!pool.length){pool=all.slice();e.vu[s.id]=(e.vu[s.id]||[]).filter(i=>!all.includes(i))}
  const fresh=pool.filter(i=>!e68Past(s.id+":"+i));p.vi=pick(fresh.length?fresh:pool);
  const d=mkP("e68"+s.id,p);if(!d)return null;e.cd[s.id]=wk();(e.vu[s.id]=e.vu[s.id]||[]).push(p.vi);e.n++;if(s.big)e.bigM=S.turn;e68Mark(s.id+":"+p.vi);return d}
-function e68Fire(fams){const L=e68Cands(fams);for(let t=0;t<4&&L.length;t++){const x=e68Pick(L);L.splice(L.indexOf(x),1);const d=e68Make(x[0]);if(d)return [d,x[0]]}return null}
+function e68Fire(fams,pk){const L=e68Cands(fams);for(let t=0;t<4&&L.length;t++){const x=(pk||e68Pick)(L);if(!x)break;L.splice(L.indexOf(x),1);const d=e68Make(x[0]);if(d)return [d,x[0]]}return null}
 function e68Push(d,s,front){const m={t:s.t||FAM6[s.fam]||"Chuyện trong cung",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp};if(front)Q.unshift(m);else Q.push(m);return m}
 /* follow-ups: a template flagged fu fires on its due tuần (params carried) */
 function fu6(id,dt,p){const e=e68();e.fu.push({id,at:wk()+dt,p:p||{}})}
 function e68FuTick(){const e=e68(),now=wk();for(const f of e.fu.slice()){if(f.at>now)continue;e.fu.splice(e.fu.indexOf(f),1);const s=E68I[f.id];if(!s)continue;const p=Object.assign({},f.p);if(p.vi==null)p.vi=R((s.v||[""]).length);const d=mkP("e68"+s.id,p);if(d){e68Push(d,s);return true}}return false}
-/* the stock visit is sometimes swapped for a j68 event (same number of modals) */
-(function(){const a0=approachOne;approachOne=function(){try{if(e68On()&&!window.__e68off&&roll(E68CFG.swap*100)){const r=e68Fire(["visit","day","serv","rumor","kid","emp"]);if(r){const[d,s]=r;return{t:s.t||FAM6[s.fam],h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}}catch(x){console.error(x)}return a0.apply(this,arguments)}})();
+/* the stock visit slot: a due j68 situation first (same number of modals) */
+(function(){const a0=approachOne;approachOne=function(){try{const e=e68();if(e68On()&&!window.__e68off&&e&&wk()>=(e.vx||0)){const r=e68Fire(["visit","day","serv","rumor","kid","emp"],e68Pick);if(r){e.vx=wk()+BAL.ag.why.e68.visitGap;const[d,s]=r;return{t:s.t||FAM6[s.fam],h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}}catch(x){console.error(x)}return a0.apply(this,arguments)}})();/* G1 #7: a due j68 situation (its own people: a visitor with an errand, a rumour with a teller) takes the slot before the stock visit, as the old swap did; visitGap paces it (fill-in-only made Tin đồn 30→5, j68 visits 79→11) */
 /* the tuần tick */
 function e68Tick(){const e=e68();if(!e)return;e.tick=(e.tick||0)+1;let added=0;
  if(Q.length>2)return;
  try{if(e68FuTick()){evBusyMark();return}}catch(x){console.error(x)}
- if(evBusy()||!roll(E68CFG.p*100))return;const r=e68Fire(null);if(r){e68Push(r[0],r[1]);if(r[1].big)evBusyMark()}}
+ if(evBusy()||wk()<(e.nx||0))return;const r=e68Fire(null,e68Pick);if(r){e.nx=wk()+BAL.ag.why.e68.gap;e68Push(r[0],r[1]);if(r[1].big)evBusyMark()}}
 (function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(e68On()&&!window.__e68off&&w0!=null&&wk()!==w0){e68Tick();if(Q.length&&$("modal").hidden)showModal()}}catch(x){console.error(x)}return r}})();
 /* ---------- debugging / testing helpers (in-page) ---------- */
 window.e68Test=function(id,p){const s=E68I[id];if(!s)return null;const d=e68Make(s);if(d){e68Push(d,s,true).must=1;showModal()}return !!d};
@@ -136,7 +141,7 @@ function evNames(t){let x=t;try{(rivals||[]).forEach(r=>{x=x.split(r.name).join(
 function evKeys(m){const t=evTxt(m);const tpl=m.pid?"p:"+m.pid.replace(/^e68/,"e:"):"t:"+(m.t||"")+"|"+evNames(t).slice(0,26);return{tpl,key:tpl+"|"+evActorKey(m)+"|"+t.slice(0,40)}}
 function evS(){const e=e68();e.sch=e.sch||{tpl:{},key:{},last:"",bk:"",day:-1,dn:0};return e.sch}
 function bk6(){return wk()*B4N+(S.buoi||0)}
-let EVHOLD=[],EVLAST=null;
+let EVHOLD=[],EVLAST=null;lifeStore("EVHOLD held events",()=>{EVHOLD=[];EVLAST=null});/* was reset by start() only: a slot load released the OLD life's held events into the loaded one */
 function evDropInfo(m){if(!m.opts&&m.h){try{log(evTxt(m).slice(0,200))}catch(e){}}}
 /* dry=1 (D13 jspread, during a buổi change): hold / drop the optional cards exactly as at a real show, but mark nothing as shown */
 function evGate(dry){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=evS();const b=bk6(),day=wk();if(sc.day!==day){sc.day=day;sc.dn=0}

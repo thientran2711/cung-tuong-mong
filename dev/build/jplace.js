@@ -27,7 +27,7 @@ function kitPlaceHost(k){try{if(!S||!k||k==="home"||typeof relPerson!=="function
  if(k!=="kn"&&k[0]!=="r")return null;const h=typeof accHost==="function"?accHost(k):null;
  if(!h||h===S||!h.alive||h.out||(typeof whereOf==="function"&&whereOf(h)!==k))return null;return relPerson(h.id)}catch(e){return null}}
 window.kitPlaceHost=kitPlaceHost;
-function kitPlaceDress(m,k){if(!m||!k||m.placeK)return;m.placeK=k;const a=kitPlaceArt(k);if(a)m.headArt=a;m.h=kitPlaceInfo(k,m.h);if(m.opts)m.optLayout=undefined}
+function kitPlaceDress(m,k){if(!m||!k||m.placeK)return;m.placeK=k;m.stage=[];/* ONE look: a place card never carries a person column (OD 18/11 map-tap-go; she is in the people list / her card) */const a=kitPlaceArt(k);if(a)m.headArt=a;m.h=kitPlaceInfo(k,m.h);if(m.opts)m.optLayout=undefined}
 /* KIT §8.2: the place card carries .kplace only as a tag for tests; it has no layout of its own */
 function kitPlaceSil(){try{const m=Q[0];const d=document.querySelector("#modal .dlg");if(d)d.classList.toggle("kplace",!!(m&&m.placeK))}catch(e){}}
 /* tag the cards: each builder's own card (after all its wrappers) is dressed once, then shown again */
@@ -55,7 +55,7 @@ function kitOptCramped(g){return [...g.querySelectorAll(":scope > button.ka:not(
 (function(){const c0=k3OptCols;k3OptCols=function(){try{document.querySelectorAll("#modal .opts:has(> button.ka), #modal .kpscopts").forEach(g=>{const dl=g.closest(".dlg");if(dl&&dl.querySelector(".kpid"))return;
   const B=[...g.querySelectorAll(":scope > button.ka")];const R=kitOptLayout(B);g.classList.toggle("kbackrow",R.mode==="rows"&&B.some(b=>b.classList.contains("kback")))})}catch(e){}
  const r=c0.apply(this,arguments);
- try{document.querySelectorAll("#modal .opts.k3grid, #modal .kpscopts.k3grid").forEach(g=>{if(!g.classList.contains("kbackrow")&&!kitOptCramped(g))return;g.classList.remove("k3grid","k3g3");g.classList.add("k3rows");
+ try{document.querySelectorAll("#modal .opts.k3grid, #modal .kpscopts.k3grid").forEach(g=>{if(!g.classList.contains("kbackrow")&&g.clientWidth>=540&&!kitOptCramped(g))return;g.classList.remove("k3grid","k3g3");g.classList.add("k3rows");
    g.querySelectorAll(":scope > button.ka").forEach(b=>b.classList.remove("k3long","k3odd"))})}catch(e){}return r}})();
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitPlaceSil();requestAnimationFrame(()=>{kitPlaceSil();try{kitDlgFit()}catch(e){}})}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.id="k-place";st.textContent=`

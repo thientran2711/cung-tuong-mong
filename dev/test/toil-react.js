@@ -6,7 +6,7 @@ fs.mkdirSync(DIR,{recursive:true});const fails=[];const chk=(c,msg)=>{if(!c)fail
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:DPR,serviceWorkers:'block'});await ctx.route(u=>/ctmload=1|x-ctm-load/.test(String(u)),r=>r.abort());const p=await ctx.newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(60000);const out={vp:VP};
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
- await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;new MutationObserver(()=>document.querySelectorAll('.kroul,#kload,.kmov.kcf').forEach(e=>e.remove())).observe(document.body,{childList:true})});
+ await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;new MutationObserver(()=>document.querySelectorAll('.kroul,#kload,#klife,.kmov.kcf').forEach(e=>e.remove())).observe(document.body,{childList:true})});
  for(let i=0;i<20;i++){await p.evaluate(()=>{window.S0=typeof S!=='undefined'?S:null;try{store.set(NL_KEY,null)}catch(e){}start()});
   await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S!==window.S0&&S.origin,null,{timeout:30000});
   const ok=await p.evaluate(()=>S.origin.k!=='cnv'&&!isSrv()&&!S.out&&qOn()&&S.rank<7&&rivals.some(v=>!v.queen&&!v.out));if(ok)break}
@@ -19,7 +19,7 @@ fs.mkdirSync(DIR,{recursive:true});const fails=[];const chk=(c,msg)=>{if(!c)fail
   chk(r.open,t+': modal open');chk(r.onTop,t+': modal is on top');chk(!r.hs,t+': horizontal overflow');chk(!r.bad,t+': truncated option');out['modal_'+t]=r;await p.screenshot({path:`${DIR}/toilr-${tag}-${t}.jpg`,quality:60})};
  /* 1. a slight from a consort whose face is better than hers: Ghi hận · Mách · Hỏi bí quyết next to the old three */
  await p.evaluate(()=>{window.np0=toilNpc;toilNpc=()=>({makeup:true,score:95,dv:'hopdip',npc:1});react('rival-jealous',-2)});await p.waitForTimeout(300);
- out.bad=await names();for(const n of['Xin lỗi','Cười trừ','Đáp lại','Ghi hận','Mách Hoàng hậu','Hỏi bí quyết'])chk(out.bad.includes(n),'bad has '+n);chk(!out.bad.some(n=>/^Tặng lại/.test(n)),'bad has no Tặng lại');
+ out.bad=await names();for(const n of['Cười cho qua','Đáp lại khéo','Đáp trả gay gắt','Im lặng lui đi','Ghi hận','Mách Hoàng hậu','Hỏi bí quyết'])chk(out.bad.includes(n),'bad has '+n);chk(!out.bad.includes('Xin lỗi'),'mocked by a consort: no Xin lỗi (owner 17/11 06:30Z)');chk(!out.bad.some(n=>/^Tặng lại/.test(n)),'bad has no Tặng lại');
  await modalOk('bad');
  /* Ghi hận */
  const g0=await p.evaluate(()=>({oan:oan(S,V),duc:S.duc,ro:S.ro[V.id]||0}));await pick('Ghi hận');await p.waitForTimeout(200);

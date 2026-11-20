@@ -49,7 +49,7 @@ const endBtn=async()=>{await p.waitForSelector('#kg82ok',{timeout:12000,state:'a
  C.marks=R.marks[0].cls.length===0&&[1,2,3].every(s=>R.marks[s].cls.includes('kslap s'+s))&&R.marks[3].swell&&!R.marks[2].swell&&!R.marks[1].swell&&R.marks.every(m=>!m.unknown)&&R.marks.slice(1).every(m=>m.loaded.length&&m.loaded.every(Boolean));
  await shot('5-marks');await p.evaluate(()=>{const e=document.getElementById('slapstrip');e&&e.remove()});
  /* 6. costs per tier from the real act */
- R.costs=await p.evaluate(()=>{const v=window.__v,o=[];for(const s of [1,2,3]){v.slap=null;SLAP.next=s;const d0=S.duc;const rel0=aff(v,S);const r=runAct(S,v,'tat');o.push({s,duc:S.duc-d0,wks:v.slap?v.slap.until-wk():0,sev:v.slap&&v.slap.sev,rel:aff(v,S)-rel0});v.slap=null}return o});
+ R.costs=await p.evaluate(()=>{const v=window.__v,o=[];/* AG-ALL-2b mg2: an NPC target may dodge (jslap slapNeOdds); pinned to no dodge here to read each tier's costs */const ne0=window.slapNeOdds;if(ne0)slapNeOdds=()=>0;for(const s of [1,2,3]){v.slap=null;SLAP.next=s;const d0=S.duc;const rel0=aff(v,S);const r=runAct(S,v,'tat');o.push({s,duc:S.duc-d0,wks:v.slap?v.slap.until-wk():0,sev:v.slap&&v.slap.sev,rel:aff(v,S)-rel0});v.slap=null}if(ne0)slapNeOdds=ne0;return o});
  C.costs=R.costs.every(c=>c.sev===c.s);
  /* 7. Gọn: no pops, the result is a still line */
  await p.evaluate(i=>{OPT.fxon=false;used=0;Q.length=0;document.getElementById('modal').hidden=true;window.__v.slap=null;SLAPG.busy=0;doAct(i,'tat')},idx);await p.waitForSelector('#kg82go');await p.click('#kg82go');await p.waitForFunction(()=>!!window.__slapTap,null,{timeout:6000}).catch(()=>{});await p.waitForTimeout(700);R.gonDemo=await p.evaluate(()=>!!document.getElementById('k91demo'));

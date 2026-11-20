@@ -18,7 +18,7 @@ Rule: a new kit part gets its number HERE first (ask the coordinator); a worker 
 | 50 | kitEventDp | main | done |
 | 51 | KIT TABLE (kitRows / kitReqRows) | main | done |
 | 52 | kitRelTable / kitRelRows / kitRelDelta (+ 52.1 kitImgSync) | main, jkrel.js | done |
-| 53 | event-choice parts (kitHint, kitRisk, kitHintRow, kitKemRow, kitResultSeal) | main | done |
+| 53 | event-choice parts (kitHint, kitOptOdds, kitHintRow, kitKemRow, kitResultSeal) | main | done |
 | 54 | item reveal · grade chip · kitLose | main, jkrev.js | done |
 | 55 | KHẢO HẠCH TẤN PHONG (promotion exam) | main, jexam.js | done |
 | 56 | SCENE LIGHT (KIT_LIGHT, .kown/.kwet) | main, jsl.js | done |
@@ -66,3 +66,7 @@ Why this order: face-sharp (§71) and tutorial (§72) were already registered by
 - (16/11, kit keeper 2) §81 = SCENE-END BUTTON (kitSceneEnd / kitSceneEndLabel, j93, review/kit-keeper-2). Next free: §82.
 - (16/11, title-tag) §82 = TITLE SYSTEM PARTS (jtitle.js, review/title-tag, on main).
 - (16/11, anim-pace-r1) §83 = ONE ANIMATION PACE (BAL.pace / kitPace / --pace, review/anim-pace; renumbered from a clash with title-tag's §82). Next free: §84.
+- (17/11, scenes-3) §86 = kitLearn (jlevel.js, review/scenes-3); demotion tray is §66.3 (no new number). Next free: §87.
+- (17/11, kit-ico-rank) §87 = THE RANKED LIST (kitRankList / kitRankRow / kitRankHead / kitRankFoot, jkrank.js, review/kit-ico-rank; renumbered by review kit-ico-rank-r1 from a clash with review/scenes-3 kitLearn §86). Next free: §88.
+- (17/11, kit-thanh-bai) §88 = THÀNH / BẠI blocks on every act / option card (review/kit-thanh-bai → r4c).
+- (17/11, kit-display-room) §89 = kitDisplayRoom · Đa Bảo Các (jdisp.js, review/kit-display-room; renumbered by batch s36a from a clash with kit-ico-rank §87; §88 = kit-thanh-bai). Next free: §90.

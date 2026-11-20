@@ -11,7 +11,6 @@ function ageInit(){if(!S)return;[S].concat(rivals||[]).forEach(o=>{if(o)delete o
  if(typeof allServ==="function")allServ().forEach(s=>{if(!(s.age>0))Object.assign(s,servAge(s.role));if(s.role!=="maid"&&!(s.fe>=0))s.fe=eunBand(s.age)});faceInit()}
 function ageYear(){(S.men||[]).forEach(m=>m.age++);if(S.maid)S.maid.age=(S.maid.age||18)+1;S.thAge=(S.thAge||51)+1;if(S.thO)S.thO.age=S.thAge;(rivals||[]).forEach(v=>{if(v.alive)v.age=(v.age||20)+1});
  for(const k in (S.court||{}))S.court[k].age=(S.court[k].age||40)+1;if(typeof allServ==="function")allServ().forEach(s=>s.age=(s.age||20)+1)}
-function tuoi(n){return n>0?`Tuổi <b>${n}</b>`:""}
 /* children: a variant at birth, the face band follows the age (initials if the file is missing) */
 function kidBand(a){return a<=2?"baby":a<=6?"small":a<=12?"child":"teen"}
 function kidFace(k){const mom=allKids().find(([x])=>x===k);const mr=mom?(mom[1]?(mom[1].queen?7:mom[1].rank):S.rank):S.rank;return Object.assign(kidFace0(k),{rk:"kid c"+mr,rw:k.sex==="m"?"Hoàng tử":"Công chúa"})}
@@ -39,7 +38,9 @@ function bandKeys(kind,age){if(kind==="consort")return age<=35?["consort","womid
  if(kind==="official"||kind==="man")return age>50&&kind==="man"?["manold","off2","off1","off0"]:near("off",age<=35?0:age<=50?1:2,3);
  return [kind]}
 const FAV={};
-(function probe(){const all=[].concat(...Object.values(FPOOL));for(const f of all){try{const im=new Image();im.onload=()=>{FAV[f]=1};im.onerror=()=>{FAV[f]=0};im.src="img/"+f+".webp"}catch(e){}}})();
+/* jreg: pools added by later modules (man, ct1–5…) are probed too */
+/* "@W<n>" (j25 CW) = AVATARS.women[n], an inline face, not a file: it is available at once (never probed as img/@W<n>.webp: 33× 404, review/life-preload) */
+regEach(FPOOL,(k,L)=>{for(const f of (L||[])){try{if(f[0]==="@"){FAV[f]=(f[1]==="W"&&(AV.women||[])[+f.slice(2)])?1:0;continue}const im=new Image();im.onload=()=>{FAV[f]=1};im.onerror=()=>{FAV[f]=0};im.src="img/"+f+".webp"}catch(e){}}},"FPOOL probe");
 function fsrc(fc,fb){if(!fc||FAV[fc]===0)return fb||"";return "img/"+fc+".webp"}
 function poolOf(role){const pre={eunuch:"eun",emperor:"emp",thaihau:"th",official:"off"}[role];return pre?Object.keys(FPOOL).filter(k=>k.startsWith(pre)&&/\d$/.test(k)).flatMap(k=>FPOOL[k]):FPOOL[role]||[]}
 function facesPresent(){const U=new Set();if(!S)return U;const add=o=>{if(o&&o.fc)U.add(o.fc)};add(S);add(S.maid);add(S.emp);if(S.thF)U.add(S.thF);(S.men||[]).forEach(m=>{if(m.alive)add(m)});
@@ -49,9 +50,24 @@ function drawF(kind,age){if(!S)return"";const keys=Array.isArray(kind)?kind:band
  return""}
 /* a person keeps a face while in one age band; on entering a new band they get a new face from that band's pool */
 function faceFor(o,kind,age){const k=bandKeys(kind,age)[0];if(o.fc==null||o.fk!==k){o.fc="";o.fc=drawF(kind,age);o.fk=k}}
-/* how many of a role may exist at once = the pool size (a consort pool counts the inline fallback portraits too) */
-function roomFor(role){if(!S)return true;const n=poolOf(role).filter(f=>FAV[f]!==0).length;const cap=role==="consort"?Math.max(n,(AV.women||[]).length):n;
- const cnt=role==="consort"?1+(rivals||[]).filter(v=>v.alive).length:role==="maid"?1+(typeof allServ==="function"?allServ().filter(s=>s.role==="maid").length:0):role==="eunuch"?(typeof allServ==="function"?allServ().filter(s=>s.role!=="maid").length:0)+3:0;
+/* how many of a role may exist at once (review/staff-cap-apply, owner OD 18/11 ~02:10Z: faces 52 / 30 / 8):
+   servants = the FIGURE identity pool (FIGIX, j39): women servants (cung nữ, ma ma) <= maid + mama identities, young cung nữ <= maid identities,
+   in both cases minus the maid / mama identities consorts wear (j88: a raised maid keeps hers); eunuchs (household + the court eunuchs) <= eunuch identities.
+   Before the manifests load, the face lists (FPOOL) stand in; never the old face-*.webp load probe (FAV), so missing old files never stop hiring.
+   Consorts: unchanged, the face pool as before (the consort ceiling is BAL.harem.cap through roomFor, j27). */
+function roomFor(role){if(!S)return true;
+ if(role==="maid"||role==="eunuch"){const IX=typeof FIGIX!=="undefined"&&FIGIX?FIGIX:{};const K=r=>Object.keys(IX[r]||{}).filter(k=>IX[r][k]&&IX[r][k].length);
+  const SV=typeof allServ==="function"?allServ():[];
+  if(role==="eunuch"){const pool=K("eunuch").length||poolOf("eunuch").length;const C=S.court||{};
+   const cnt=SV.filter(s=>s&&s.role!=="maid").length+["tq","ksp","ped"].filter(k=>C[k]).length;return cnt<pool}
+  const km=K("maid"),kk=K("mama");const own=new Set(km.concat(kk));
+  const worn=new Set();[S].concat((rivals||[]).filter(v=>v&&v.alive!==false)).forEach(v=>{if(!v)return;for(const f of [v.fid,v===S?S.pid:null])if(f&&own.has(f))worn.add(f)});
+  const wm=[...worn].filter(f=>/^maid:/.test(f)).length;
+  const W=SV.filter(s=>s&&s.role==="maid");const all=1+W.length,young=1+W.filter(s=>(s.age||18)<36&&!s.old).length;
+  if(!km.length)return all<(poolOf("maid").length+poolOf("mama").length);
+  return all<own.size-worn.size&&young<km.length-wm}
+ const n=poolOf(role).filter(f=>FAV[f]!==0).length;const cap=role==="consort"?Math.max(n,(AV.women||[]).length):n;
+ const cnt=role==="consort"?1+(rivals||[]).filter(v=>v.alive).length:0;
  return cnt<cap}
 function kidVar(k){const used=new Set(allKids().map(([x])=>x).filter(x=>x!==k&&x.alive&&x.sex===k.sex&&x.fv).map(x=>x.fv));const c=[1,2,3,4].filter(v=>!used.has(v));return c.length?pick(c):0}
 /* give every present person a face once; old saves get theirs here too */
@@ -62,24 +78,34 @@ function faceInit(){if(!S)return;faceFor(S,"consort",S.age);(rivals||[]).forEach
 /* under cấm túc a consort's palace is watched: no crimes can be set in motion (every consort alike) */
 const CRIME=["poison","kpoison","kframe","pond","musk","catswap","frame","plant"];
 CRIME.forEach(k=>{const A2=ACT[k];if(!A2)return;const o=A2.ok;A2.ok=(a,t)=>!a.confined&&o(a,t)});
-/* ===== EVERY CHOICE SHOWS: an odds word ('Chắc chắn' when nothing is rolled), 'thành: …', 'hỏng: …' for rolled ones, and known risks ===== */
-const ODDW=/(Chắc chắn|Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)/;
-const CAUGHT="có thể bị người của nàng phát giác: nàng nắm 2 chứng cứ";
-const AOUT={spy:["chứng cứ +1, Tâm cơ +2","bị lộ, nàng thù -8"],ally:["thiện cảm +25, nàng bớt ghen 10","bị lạnh nhạt, thiện cảm -5"],rumor:["Danh nàng -8","không ai tin; nàng nắm 1 chứng cứ, thù -5"],
- frame:["nàng mất Danh và Sủng -10; Danh +3","bị lộ: Danh -15, Sủng -8, thù -30, bị phạt"],poison:["nàng trúng độc, có thể chết","bị tra ra: ban chết"],accuse:["nàng bị phế hoặc giáng; Danh +6","Danh -8, thù -20, chứng cứ bị hủy"],
- bribe:["moi được mưu kế (chứng cứ +2) hoặc trộm bạc của nàng","cung nữ báo chủ: nàng nắm 1 chứng cứ"],block:["2 tuần nàng không được lật thẻ","tổng quản kể lại: nàng nắm 1 chứng cứ"],
- musk:["nàng sảy thai","—"],catswap:["tráo hài nhi khi nàng sinh","—"],ksab:["con nàng Tài -15; Tâm cơ +2","bị lộ: Danh -10, thù -20, bị phạt"],kpoison:["con nàng trúng độc, có thể chết","bị tra ra: ban chết"],
- pond:["con nàng rơi xuống hồ, có thể chết đuối","bị bắt: Danh -10, bị phạt"],kframe:["con nàng mất sủng, có thể bị phế Thái tử","bị lần ra: ban chết"],takeaway:["bế con nàng về nuôi; nàng thù -30","chưa được chuẩn; nàng thù -10"],
- vp:["đồ của nàng bị tịch thu, Danh nàng -8, nàng bị phạt","Danh -3, nàng thù -10"],plant:["món đồ nằm trong rương nàng","kẻ cài bị bắt: nàng nắm 2 chứng cứ, thù -20"],steal:["đoạt đêm nay · kèm: nàng ghen +25, quý ngươi -15, oán ngươi +9","Sủng -3"],road:["đoạt đêm nay · kèm: nàng ghen +25, quý ngươi -15, oán ngươi +9","Sủng -3"],gift:["thiện cảm thêm theo món quà",""]};
+/* ===== EVERY CHOICE SHOWS: an odds word (none when nothing is rolled; ODDS CAP: a formerly-sure act shows the cap word, Nắm chắc), 'thành: …', 'hỏng: …' for rolled ones, and known risks ===== */
+const ODDW=/(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)/;
+function caughtW(){/* previews: caught */return `có thể bị người của nàng phát giác: nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`}/* the caught() line of a scheme (j8 caught: evA(t,a,BAL.eff.j8.evCaught)); a function, not a const: j17 loads before BAL.eff (review/one-core-dup3 r1) */
+/* aoLz(a,b): an AOUT outcome pair whose function items are read lazily (array-element getters): j17 loads before BAL.eff (jbaleff), so a preview that
+   prints the amount its j8 rule reads (ONE CORE OD:L1267) builds the words when shown. Still a plain array (jaudit §13 wraps it like the others). */
+function aoLz(...L){const r=[];L.forEach((x,i)=>{if(typeof x==="function")Object.defineProperty(r,i,{enumerable:true,configurable:true,get:x});else r[i]=x});return r}
+const AOUT={spy:aoLz(()=>`chứng cứ ${balSg(BAL.eff.jtruth.evN)}, Tâm cơ +2`,()=>`bị lộ, nàng thù ${balSg(BAL.eff.j8.f)}`),ally:["nàng nhận lời kết giao (thiện cảm lên, nàng bớt ghen) hoặc nhận lễ mà giữ khoảng cách","nàng trả lễ từ chối, hoặc đem chuyện đi mách (jrcv RCVK.ally)"],rumor:aoLz("Danh nàng -8",()=>`không ai tin; nàng nắm ${balAb(BAL.eff.j8.evF)} chứng cứ, thù ${balSg(BAL.eff.j8.f_4)}`),
+ frame:aoLz("nàng mất Danh và Sủng -10; Danh +3",()=>`bị lộ: Danh -15, Sủng -8, thù ${balSg(BAL.eff.j8.f_5)}, bị phạt`),poison:["nàng trúng độc, có thể chết","bị tra ra: ban chết"],accuse:aoLz("nàng bị phế hoặc giáng; Danh +6",()=>`Danh -8, thù ${balSg(BAL.eff.j8.f_6)}, chứng cứ bị hủy`),
+ bribe:aoLz(()=>`moi được mưu kế (chứng cứ ${balSg(BAL.eff.j8.evF_3)}) hoặc cung nữ ấy thành tai mắt`,()=>`cung nữ báo chủ: nàng nắm ${balAb(BAL.ag.ev.one)} chứng cứ`),block:aoLz("2 tuần nàng không được lật thẻ",()=>`tổng quản kể lại: nàng nắm ${balAb(BAL.eff.j8.evF_5)} chứng cứ`),
+ musk:["nàng sảy thai","—"],catswap:["tráo hài nhi khi nàng sinh","—"],ksab:aoLz("con nàng Tài -15; Tâm cơ +2",()=>`bị lộ: Danh -10, thù ${balSg(BAL.eff.j8.f_7)}, bị phạt`),kpoison:["con nàng trúng độc, có thể chết","bị tra ra: ban chết"],
+ pond:["con nàng rơi xuống hồ, có thể chết đuối","bị bắt: Danh -10, bị phạt"],kframe:["con nàng mất sủng, có thể bị phế Thái tử","bị lần ra: ban chết"],takeaway:aoLz(()=>`bế con nàng về nuôi; nàng thù ${balSg(BAL.eff.j8.f_9)}`,()=>`chưa được chuẩn; nàng thù ${balSg(BAL.eff.j8.f_8)}`),
+ vp:aoLz("đồ của nàng bị tịch thu, Danh nàng -8, nàng bị phạt",()=>`Danh -3, nàng thù ${balSg(BAL.eff.j8.vpAccuse_2)}`),plant:aoLz("món đồ nằm trong rương nàng",()=>`kẻ cài bị bắt: nàng nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ, thù ${balSg(BAL.eff.j8.plantItem)}`),steal:aoLz(()=>`đoạt đêm nay · kèm: nàng ghen ${balSg(BAL.steal.ghen)}, quý ngươi ${balSg(-BAL.steal.rel)}, oán ngươi +${balOan(-BAL.steal.rel,"hurt")}`,()=>`Sủng ${balSg(-BAL.steal.failSung)}`),road:aoLz(()=>`đoạt đêm nay · kèm: nàng ghen ${balSg(BAL.steal.ghen)}, quý ngươi ${balSg(-BAL.steal.rel)}, oán ngươi +${balOan(-BAL.steal.rel,"hurt")}`,()=>`Sủng ${balSg(-BAL.steal.failSung)}`),gift:["thiện cảm thêm theo món quà",""]};
 const ACAUGHT=["rumor","frame","poison","block","musk","ksab","kpoison","pond","kframe"];
 /* the small line of a scheme button */
-function actLine(k,oddsWord,costHtml){const w=AOUT[k]||["",""];const rolled=oddsWord!=="Chắc chắn";const L=[oddsWord,costHtml?"tốn: "+costHtml:"",w[0]?"thành: "+w[0]:"",rolled?"hỏng: "+(w[1]&&w[1]!=="—"?w[1]:"không mất gì"):"",ACAUGHT.includes(k)?CAUGHT:""];return L.filter(Boolean).join(" · ")}
+function actLine(k,oddsWord,costHtml){const w=AOUT[k]||["",""];const rolled=!!oddsWord;const L=[oddsWord,costHtml?"tốn: "+costHtml:"",w[0]?"thành: "+w[0]:"",rolled?"hỏng: "+(typeof ECON_WIN!=="undefined"&&ECON_WIN.includes(k)?[w[1]&&w[1]!=="—"?w[1]:"","không mất bạc"].filter(Boolean).join(", "):w[1]&&w[1]!=="—"?w[1]:"không mất gì"):""/* bạc paid only on success (econPayWin) */,ACAUGHT.includes(k)?caughtW():""];return L.filter(Boolean).join(" · ")}
 /* the small line of any option object {o, c, w, l, x, lock} */
-function optLine(a){const o=a.o==null?100:a.o;const rolled=o<100&&!a.lock;const gain=[fmt(a.w||{}),a.x].filter(Boolean).join(" · ");
- return [rolled?word(o):"Chắc chắn",a.c&&fmt(a.c)?"tốn: "+fmt(a.c):"",gain?"thành: "+gain:"",rolled?"hỏng: "+(fmt(a.l||{})||"không mất gì"):""].filter(Boolean).join(" · ")}
+function optLine(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const gain=[fmt(a.w||{}),a.x].filter(Boolean).join(" · ");
+ return [rolled?word(o):"",a.c&&fmt(a.c)?"tốn: "+fmt(a.c):"",gain?"thành: "+gain:"",rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,fmt(a.l||{}))||"không mất gì"):""].filter(Boolean).join(" · ")}
 /* a dilemma option {n, fx, x, go}: x usually already holds 'word · thành · hỏng'; fill what is missing */
-function dilLine(c){const fx=fmt(c.fx||{}),x=c.x||"";const src=String(c.go||"")+String(c.fail||"");let s=x;
- if(!ODDW.test(x)&&!CHW.test(x)){if(/roll\(/.test(src))s="Khó lường · "+x;else{if(!fx&&!x)return /^Thôi|^Im lặng|^Để /.test(c.n||"")?"Chắc chắn · không được mất gì":c.go||c.open?"Chắc chắn · chọn rồi xem kết quả ở bước sau":"Chắc chắn · không được mất gì";return ["Chắc chắn",fx?"ngay: "+fx:"",x?"thành: "+x:""].filter(Boolean).join(" · ")}}
+/* the option's OWN code (review/odds-meter-back): a go that is a reference to a global scene / step function (go:nightScene) opens the next
+   step — the rolls inside that function belong to the next step's own options, not to this option */
+function dilSrc(c){const own=f=>typeof f==="function"&&!(f.name&&typeof window!=="undefined"&&window[f.name]===f)?String(f):f&&typeof f!=="function"?String(f):"";return own(c&&c.go)+own(c&&c.fail)}
+/* ONE ODDS RULE (review/odds-no-unknown, law 4 + law 7): a rolled option names the odds of its roll as `p` (the SAME number its go rolls);
+   a card line with no ladder word gets word(p) first, so the meter shows the real odds. No "unknown" odds word exists any more. */
+function oddsLead(c,s){s=String(s||"");if(!c||typeof c.p!=="number"||!isFinite(c.p)||ODDW.test(s))return s;
+ const body=s?(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|kèm|được|mất)\s*:/i.test(s)?s:"thành: "+s):"";return [word(oddsCl(Math.round(c.p))),body].filter(Boolean).join(" · ")}
+function dilLine(c){const fx=fmt(c.fx||{}),x=oddsLead(c,c.x);const src=dilSrc(c);let s=x;
+ if(!ODDW.test(x)&&!CHW.test(x)){if(/roll\(/.test(src))s=x;/* a roll with no p and no word: j79 reads a literal / global roll(expr); the scan dev/test/odds-unknown-scan.js keeps this at zero */else{if(!fx&&!x)return /^Thôi|^Im lặng|^Để /.test(c.n||"")?"không được mất gì":c.go||c.open?"chọn rồi xem kết quả ở bước sau":"không được mất gì";return [fx?"ngay: "+fx:"",x?(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|kèm|được|mất)\s*:/i.test(x)?x:"thành: "+x):""].filter(Boolean)/* kit-option-rows s34: a sure option whose x already leads with a label keeps it (was "thành: thành: …" -> literal "thành:" under ĐƯỢC) */.join(" · ")}}
  if(!/hỏng/.test(s))s+=" · hỏng: không mất gì";return [fx?"ngay: "+fx:"",s].filter(Boolean).join(" · ")}
 const dilLineRaw=dilLine;/* the raw kit line of a dialog option (before kitParse), read by the kit hint (jk2b kitHint) */
 /* the real speaker of an event: a named eunuch of that palace or of the court, a spy of hers; no speaker -> the place art */

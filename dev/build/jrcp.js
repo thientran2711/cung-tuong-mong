@@ -17,7 +17,7 @@
       a favour: her thiện cảm −BAL.rcp.tFavor, no chân tình gift to her for BAL.gift.askW weeks). ================= */
 Object.assign(BAL,{rcp:{likeV:2,neutral:.6,hateV:3,fatW:8,fat:[1,.6,.3,0],bored:{emp:1,th:2,rel:3},hateP:70,alP:35,alSuc:15,
  accP:55,accKnew:30,defB:45,defTy:25,tFeeK:.08,tFeeMin:3,tFavor:4,tRel:25,bookPr:[0,18,30,45],bookAdd:[0,12,20,30],mamaK:.15,mamaMin:12,sheetPr:8,shopN:2,gossipP:25,
- tyFeeK:.05,spyO:60,giftRel:40,giftP:6,thGiftP:4}});
+ tyFeeK:.05,spyO:60,alEv:30,giftRel:40,giftP:6,thGiftP:4}});
 /* sub-styles per kind: [id, name, recipes] — the first is known from the start; every kind has exactly 4 (owner 15/11 ~21:50Z) */
 const RCP_ST={
 mon:[["s1","Cơm canh món mặn",["r01","r02","r05"]],["s2","Bánh trái, chè ngọt",["r03","r06","r08"]],["s3","Hấp, tần bổ dưỡng",["r04","r07","r10"]],["s4","Món chua ngọt",["r09"]]],
@@ -61,7 +61,8 @@ function rcpKnows(p,kind,sid){return p===S?rcpKnown()[kind].includes(sid):rcpNpc
 function rcpGrant(kind,sid,how){const L=rcpKnown()[kind];if(!L||L.includes(sid)||!rcpSt(kind,sid))return"";L.push(sid);const s=rcpSt(kind,sid);
  const n=s[2].map(r=>wkrOf(kind,r)).filter(Boolean).map(r=>r.n).join(", ");return `Học được ${rcpStN(kind,sid)}${how?" ("+how+")":""}: ${n}.`}
 /* each sub-style's first recipe is open at bậc 0, so a teacher can open any sub-style from the start; the rest keep their level */
-for(const kind in RCP_ST)for(const s of RCP_ST[kind]){const r=wkrOf(kind,s[2][0]);if(r)r.lv=0}
+/* jreg: also the kinds later modules add (jtds kimchi/phanson/thuchuc/phucthien; it no longer copies this pass) */
+regEach(RCP_ST,kind=>{for(const s of RCP_ST[kind]){const r=wkrOf(kind,s[2][0]);if(r)r.lv=0}},"RCP first recipe");
 /* recipes she can make: art level AND a learnt sub-style */
 (function(){const o0=wkrOpen;wkrOpen=function(p,kind){const L=o0.apply(this,arguments);if(!RCP_ST[kind])return L;return (WKR[kind]||[]).filter(r=>rcpOpenR(p,kind,r))}})();
 /* ---------- art level-up: one new recipe of that art (owner 15/11 ~21:20Z), the same for every person ----------
@@ -84,9 +85,9 @@ function rcpLvTxt(g){const s=rcpStOf(g.kind,g.r.id);return `<span class="g">Họ
 (function(){if(typeof npcMonthly!=="function")return;const m0=npcMonthly;npcMonthly=function(v){try{rcpLvInit(v)}catch(e){}const r=m0.apply(this,arguments);try{rcpLvSync(v)}catch(e){}return r}})();
 /* ---------- persons ---------- */
 function rcpPK(r){return r==="emp"||r==="th"?r:r&&typeof r==="object"?(r===S?"me":"v"+r.id+(r.name||"")):""}
-function rcpWho(r){return r==="emp"?"Hoàng thượng":r==="th"?"Thái hậu":r&&r.name?`${rkName(r)} ${r.name}`:""}
-function rcpThey(r){return r==="emp"?"bệ hạ":r==="th"?"Thái hậu":"nàng ta"}
-const RCP_PC={};
+function rcpWho(r){return r===S?"Ta":r==="emp"?"Hoàng thượng":r==="th"?"Thái hậu":r&&r.name?`${rkName(r)} ${r.name}`:""}
+function rcpThey(r){return r===S?"ta":r==="emp"?"bệ hạ":r==="th"?"Thái hậu":"nàng ta"}
+const RCP_PC={};lifeStore("RCP_PC",()=>{for(const k in RCP_PC)delete RCP_PC[k]});
 function rcpProf(r){const pk=rcpPK(r);if(!pk)return null;const seed=rcpSeed();const ck=seed+pk;if(RCP_PC[ck])return RCP_PC[ck];const f={},h={};
  for(const kind in RCP_ST){const L=RCP_ST[kind],x=rcpH(seed+":"+pk+":"+kind);f[kind]=L[x%L.length][0];
   if((x>>>8)%100<BAL.rcp.hateP){const O=L.filter(s=>s[0]!==f[kind]);h[kind]=O[(x>>>16)%O.length][0]}}
@@ -145,35 +146,54 @@ function rcpAdjust(ev,a,w,r){if(!ev||!ev.ok||r==="maid"||r===S||!r)return ev;con
 /* chân tình: "made for this person" = their favourite sub-style too */
 (function(){if(typeof gfFor!=="function")return;const f0=gfFor;gfFor=function(a,w,r){if(f0.apply(this,arguments))return true;try{if(w&&w.r&&r&&r!=="maid"&&r!==S){const s=rcpStOf(w.kind,w.r),P=rcpProf(r);return !!(s&&P&&P.f[w.kind]===s[0]&&(a!==S||rcpKn(r,"f:"+w.kind)))}}catch(x){}return false}})();
 /* ---------- allergy: illness and the accusation ---------- */
+function rcpCare(r){const B=BAL.ag.why.g2rcp;if(r==="emp")return B.emp;if(r==="th")return B.th;return 1+Math.max(0,hostility(r,S))+Math.max(0,aff(S,r))}
 function rcpAccuser(r,a){const q=queenP();if(q&&q!==a&&q!==r)return q;const L=liveRivals(true).filter(v=>v!==a&&v!==r&&v.alive&&!v.out);if(!L.length)return null;
  return L.sort((x,y)=>hostility(y,a)-hostility(x,a))[0]}
 function rcpAllergy(a,r,w,al){const who=rcpWho(r),by=a===S?"ta":`${rkName(a)} ${a.name}`;let t=`<span class="r">${who} dùng ${w.n} của ${by} thì nổi mẩn, khó thở: ${who} kiêng ${RCP_ALN[al]}.</span>`;
- if(r&&typeof r==="object"){ap(r,{suc:-BAL.rcp.alSuc});t+=` ${r.name} Sức -${BAL.rcp.alSuc}.`}
+ if(r&&typeof r==="object"){ap(r,{suc:-BAL.rcp.alSuc});t+=` ${r.name} Sức -${BAL.rcp.alSuc}.`;rcpRash(r,al,a)}
  if(a===S){const knew=rcpKn(r,"a");const L=rcpLearn(r,"a","phát bệnh trước mắt");if(L)t+=" "+L;
-  const p=(r==="emp"||r==="th"?BAL.rcp.accP:cl(25+Math.round(hostility(r,S)/2),5,90))+(knew?BAL.rcp.accKnew:0);
-  if(roll(cl(p,5,95))){const acc=r&&typeof r==="object"?r:rcpAccuser(r,S);pushDil(mkP("rcpacc",{t:rcpPK(r)==="emp"||rcpPK(r)==="th"?r:"v"+r.id,acc:acc?key(acc):null,wn:w.n,al,knew:knew?1:0}),"Bị tố mưu hại")}
+  const p=(r==="emp"||r==="th"?BAL.rcp.accP:oddsCl(Math.min(25+Math.round(hostility(r,S)/2),90)))+(knew?BAL.rcp.accKnew:0);
+  {const acc=r&&typeof r==="object"?r:rcpAccuser(r,S);if((acc?npcWhy("rcpAcc",{p:acc,a:S,v:r},()=>roll(oddsCl(p))):roll(oddsCl(p))))pushDil(mkP("rcpacc",{t:rcpPK(r)==="emp"||rcpPK(r)==="th"?r:"v"+r.id,acc:acc?key(acc):null,wn:w.n,al,knew:knew?1:0}),"Bị tố mưu hại")}/* npc-purpose G2c: the accuser = the one harmed, or one with a grudge (Hoàng hậu keeps order) */
   return t}
- if(r&&typeof r==="object"){if(roll(cl(30+Math.round(hostility(r,a)/2),5,90))){evA(r,a,1);newsAdd(a,"illicit",`${r.name} tố ${a.name} tặng đồ làm nàng phát bệnh.`)}}
- else{const q=rcpAccuser(r,a);if(q&&roll(BAL.rcp.accP))evA(q,a,1);newsAdd(a,"illicit",`${who} phát bệnh sau khi dùng đồ ${a.name} dâng.`)}
+ if(r&&typeof r==="object"){if(npcWhy("rcpAcc",{p:r,a,v:r},()=>roll(oddsCl(Math.min(BAL.rcp.alEv+Math.round(hostility(r,a)/2),90))))){evA(r,a,BAL.eff.jrcp.evRcpAllergy);newsAdd(a,"illicit",`${r.name} tố ${a.name} tặng đồ làm nàng phát bệnh.`)}}
+ else{const q=rcpAccuser(r,a);if(q&&npcWhy("rcpAcc",{p:q,a,v:r},()=>roll(BAL.rcp.accP)))evA(q,a,BAL.eff.jrcp.evRcpAllergy_2);newsAdd(a,"illicit",`${who} phát bệnh sau khi dùng đồ ${a.name} dâng.`)}
  return""}
+/* the allergy rash (jrash, the one face condition for everyone) */
+function rcpRash(p,al,by){try{if(typeof rashGive==="function")return rashGive(p,rashPick(RASH.sevW),`kiêng ${RCP_ALN[al]}`,by)||""}catch(e){console.error("rcp rash",e)}return""}
+/* HER allergy (two-way): a gifted work holding her allergen makes HER ill the same way (Sức -alSuc, rash); she learns it; like an NPC
+   receiver, she may hold evidence against the giver (same roll as rcpAllergy's NPC branch). Hooked on every way a gift reaches her chest. */
+function rcpMeAl(w){try{const P=rcpProf(S);return P&&P.a&&rcpAlOf(w).includes(P.a)?P.a:null}catch(e){return null}}
+function rcpAllergyMe(f,w,al){const by=f?`${rkName(f)} ${f.name}`:"";ap(S,{suc:-BAL.rcp.alSuc});
+ let t=`<span class="r">Ta dùng ${w.n}${by?" của "+by:""} thì nổi mẩn, khó thở: ta kiêng ${RCP_ALN[al]}.</span> Sức -${BAL.rcp.alSuc}.`;
+ rcpRash(S,al,f);const L=rcpLearn(S,"a","phát bệnh trước mắt");if(L)t+=" "+L;
+ if(f&&typeof f==="object"&&f!==S){let h=0;try{h=hostility(S,f)||0}catch(e){}if(roll(oddsCl(Math.min(BAL.rcp.alEv+Math.round(h/2),90)))){evA(S,f,BAL.eff.jrcp.evRcpAllergy);t+=` Ta nắm ${BAL.eff.jrcp.evRcpAllergy} chứng cứ của ${f.name}.`}}
+ return t}
+function rcpInWrap(d,p){try{const e=p&&p.e,w=e&&e.wk;if(!d||!d.o||d.rcpMe||!w)return d;const al=rcpMeAl(w);if(!al)return d;d.rcpMe=1;
+  const f=p.f!=null?byKey(p.f):null,kn=rcpKn(S,"a");
+  if(kn)d.t=(d.t||"")+`<p class="past">Ta kiêng ${RCP_ALN[al]}: ${w.n} có thứ ấy.</p>`;
+  for(const o of d.o){if(!o||typeof o.go!=="function")continue;if(kn&&/^Nhận/.test(o.n||""))o.x=(o.x||"")+` · kèm: ta kiêng ${RCP_ALN[al]}, nhận về dùng phải là nổi mẩn`;
+   const g=o.go;o.go=function(){const n0=(S.inv||[]).length;const r=g.apply(this,arguments);try{const x=S.inv[S.inv.length-1];if(S.inv.length>n0&&x&&x.wk&&x.wk.n===w.n)log(rcpAllergyMe(f,w,al))}catch(z){console.error("rcp me",z)}return r}}}
+ catch(x){console.error("rcp in",x)}return d}
+for(const k of ["giftin","pgin"])(function(k){const g0=PEND[k];if(!g0)return;PEND[k]=function(p){return rcpInWrap(g0.apply(this,arguments),p)}})(k);
 function rcpTgt(t){return t==="emp"||t==="th"?t:RV(+String(t).replace(/^v/,""))}
 function rcpPayTy(){return Math.max(BAL.rcp.tFeeMin,Math.round((BAL.pay?BAL.pay[Math.min(7,S.rank|0)]:40)*BAL.rcp.tyFeeK))}
 PEND.rcpacc=pp=>{const r=rcpTgt(pp.t);if(!r)return null;const acc=pp.acc!=null?byKey(pp.acc):null;const who=rcpWho(r),A=RCP_ALN[pp.al]||"";
- const big=r==="emp"||r==="th",sev=big?2:1;const base=BAL.rcp.defB+Math.round((S.duc||0)/3)+(S.mat||0)*4-(pp.knew?35:0);
+ const big=r==="emp"||r==="th",sev=big?2:1;const base=BAL.rcp.defB+Math.round((S.duc||0)/3)+eyes(S)*4-(pp.knew?35:0);
  const o1=od(base),o2=od(base+BAL.rcp.defTy),fee=rcpPayTy();const accN=acc?(acc===S?"":`${rkName(acc)} ${acc.name}`):"";
- const fail=`bị phạt vì mưu hại ${who}, Danh -4${acc&&acc!==r?`, ${accN} nắm 1 chứng cứ của ta`:""}`;
- const lose=()=>{apply({danh:-4});if(acc&&acc!==S)evA(acc,S,1);punish(S,`dâng đồ làm ${who} phát bệnh`,sev)};
- const win=()=>{apply({danh:1});if(acc&&acc!==S&&acc!==r){relAdd(S,acc,-3)}log(`Ta được minh oan: ${who} vốn kiêng ${A}, ta không cố ý.`)};
+ const fail=`bị phạt vì mưu hại ${who}, Danh -4${acc&&acc!==r?`, ${accN} nắm ${balAb(BAL.eff.jrcp.evLose)} chứng cứ của ta`:""}`;
+ const lose=()=>{apply({danh:-4});if(acc&&acc!==S)evA(acc,S,BAL.eff.jrcp.evLose);punish(S,`dâng đồ làm ${who} phát bệnh`,sev)};
+ const win=()=>{apply({danh:1});if(acc&&acc!==S&&acc!==r){relAdd(S,acc,BAL.eff.jrcp.win)}log(`Ta được minh oan: ${who} vốn kiêng ${A}, ta không cố ý.`)};
  const O=[{n:`Kêu oan: ta không biết ${rcpThey(r)} kiêng ${A}`,fx:{},x:`${word(o1)} · thành: được minh oan, Danh +1 · hỏng: ${fail}`,go:()=>{if(roll(o1))win();else lose()}},
   {n:"Mời thái y làm chứng: chỉ là kiêng kỵ",fx:{bac:-fee},x:`${word(o2)} · thành: được minh oan, Danh +1 · hỏng: ${fail}`,go:()=>{if(roll(o2))win();else lose()}}];
- if(S.maid)O.push({n:`Để ${S.maid.name} nhận lỗi thay`,fx:{danh:-2},x:`thành: ta không bị phạt · kèm: ${S.maid.name} bị đánh, Lòng -30`,go:()=>{S.maid.loyal=cl((S.maid.loyal||0)-30,0,100);log(`${S.maid.name} quỳ nhận đã lỡ tay bỏ ${A} vào, bị đánh hai mươi trượng.`)}});
- O.push({n:"Nhận lỗi vô ý, xin chịu phạt nhẹ",fx:big?(r==="emp"?{sung:-3,danh:-2}:{th:-5,danh:-2}):{danh:-2},x:big?"":`thành: không bị phạt · kèm: ${r.name} oán ta thêm`,go:()=>{if(!big)relAdd(S,r,-5)}});
+ if(S.maid)O.push({n:`Để ${S.maid.name} nhận lỗi thay`,fx:{danh:-2},x:`thành: ta không bị phạt · kèm: ${S.maid.name} bị đánh, Lòng -${balAb(BAL.eff.jrcp.loyalGo)}`,go:()=>{S.maid.loyal=cl((S.maid.loyal||0)-BAL.eff.jrcp.loyalGo,0,100);log(`${S.maid.name} quỳ nhận đã lỡ tay bỏ ${A} vào, bị đánh hai mươi trượng.`)}});
+ O.push({n:"Nhận lỗi vô ý, xin chịu phạt nhẹ",fx:big?(r==="emp"?{sung:-3,danh:-2}:{th:-5,danh:-2}):{danh:-2},x:big?"":`thành: không bị phạt · kèm: ${r.name} oán ta thêm`,go:()=>{if(!big)relAdd(S,r,BAL.eff.jrcp.go)}});
  return{who:acc&&acc!==S?(typeof pv==="function"?pv(acc):undefined):undefined,
   t:`<p>${who} dùng ${pp.wn} ta ${big?"dâng":"tặng"} thì nổi mẩn đỏ, khó thở; thái y nói ${rcpThey(r)} vốn kiêng ${A}.</p><p>${acc===r?`${who} cho rằng ta cố ý mưu hại nàng ta`:`${accN?accN+" tâu":"Có kẻ tâu"} rằng ta cố ý mưu hại ${who}`}.</p>${pp.knew?`<p class="past">Ta vốn biết ${rcpThey(r)} kiêng ${A}: khó chối.</p>`:""}`,o:O}};
 /* ---------- books and hand-copied sheets (real items) ---------- */
 function rcpBookK(kind,sid,copy){return `${copy?"wkp":"wkb"}_${kind}_${sid}`}
-for(const kind in RCP_ST)RCP_ST[kind].forEach((s,i)=>{if(!i)return;for(const copy of [0,1]){const k=rcpBookK(kind,s[0],copy);
- IT[k]={n:copy?`Bản chép tay ${RCP_BK[kind].toLowerCase()} «${s[1]}»`:`${RCP_BK[kind]} «${s[1]}»`,kd:"Sách phổ",d:`Đọc: học ${rcpStN(kind,s[0])}`,pr:copy?BAL.rcp.sheetPr:BAL.rcp.bookPr[Math.min(3,i)],rk:0,tg:["rv"],bk:{kind,sid:s[0]}}}});
+/* jreg: books of the kinds later modules add (jtds) too */
+regEach(RCP_ST,kind=>RCP_ST[kind].forEach((s,i)=>{if(!i)return;for(const copy of [0,1]){const k=rcpBookK(kind,s[0],copy);
+ IT[k]={n:copy?`Bản chép tay ${RCP_BK[kind].toLowerCase()} «${s[1]}»`:`${RCP_BK[kind]} «${s[1]}»`,kd:"Sách phổ",d:`Đọc: học ${rcpStN(kind,s[0])}`,pr:copy?BAL.rcp.sheetPr:BAL.rcp.bookPr[Math.min(3,i)],rk:0,tg:["rv"],bk:{kind,sid:s[0]}}}}),"RCP books");
 /* book price follows her bổng (owner balance rule 15/11 20:30Z): the palace teacher's fee + a step per sub-style (BAL.rcp.bookAdd) */
 function rcpBookPr(i){return tchFeeOf(S)+BAL.rcp.bookAdd[Math.min(3,i)]}
 function rcpBookPrices(){if(!S)return;for(const kind in RCP_ST)RCP_ST[kind].forEach((s,i)=>{if(i){const it=IT[rcpBookK(kind,s[0],0)];if(it)it.pr=rcpBookPr(i)}})}
@@ -185,13 +205,13 @@ function rcpBk(k){const it=IT[k];return it&&it.bk?it.bk:null}
 function rcpShopBooks(){const L=[];for(const kind in RCP_ST){const K=rcpKnown()[kind];RCP_ST[kind].forEach((s,i)=>{if(i&&!K.includes(s[0]))L.push(rcpBookK(kind,s[0],0))})}return shuf(L).slice(0,BAL.rcp.shopN)}
 (function(){const r0=restock;restock=function(){const x=r0.apply(this,arguments);try{S.shop=(S.shop||[]).concat(rcpShopBooks())}catch(e){}return x}})();
 function rcpRead(ix){const e=S.inv[ix],b=e&&rcpBk(e.k);if(!b||S.dead||Q.length||!can(1))return;if(rcpKnows(S,b.kind,b.sid)){log(`Ta đã học ${rcpStN(b.kind,b.sid)} rồi.`);return}
- spend(1);log(rcpGrant(b.kind,b.sid,`đọc ${IT[e.k].n}`));save();render()}
+ spend(1);log(rcpGrant(b.kind,b.sid,`đọc ${itm(e.k).n}`));save();render()}
 function rcpBookRows(k){const b=rcpBk(k),a=itemArt(k),gr=KIT_GRADE[a?a.grade|0:0];const s=rcpSt(b.kind,b.sid),kn=rcpKnows(S,b.kind,b.sid);
  const R=s[2].map(r=>wkrOf(b.kind,r)).filter(Boolean).map(r=>`${r.n} (${r.lv?`${ARTS.find(x=>x.k===WK[b.kind].a).n} bậc ${r.lv}`:"mọi bậc"})`);
  return kitRows([["Phẩm",`<span class="ef n" style="color:${gr.c};font-weight:700">${gr.n}</span>`],["Được",[`đọc: học ${rcpStN(b.kind,b.sid)}`].concat(R),"g"],["Ghi chú",[kn?"ta đã học lối này":"ta chưa học lối này","đem tặng được, bán được"],"n"]])}
 (function(){const r0=kitItemRows;kitItemRows=function(k){if(rcpBk(k))return rcpBookRows(k);return r0.apply(this,arguments)}})();
 (function(){if(typeof kitShopEff!=="function")return;const e0=kitShopEff;kitShopEff=function(k){const b=rcpBk(k);if(b)return `đọc: học lối này${rcpKnows(S,b.kind,b.sid)?" (đã học)":""}`;return e0.apply(this,arguments)}})();
-(function(){if(typeof kinvOpen!=="function")return;const o0=kinvOpen;kinvOpen=function(x){const g=x&&x.g;const b=g&&!g.wk&&rcpBk(g.k);if(!b)return o0.apply(this,arguments);const it=IT[g.k],i=g.i;
+(function(){if(typeof kinvOpen!=="function")return;const o0=kinvOpen;kinvOpen=function(x){const g=x&&x.g;const b=g&&!g.wk&&rcpBk(g.k);if(!b)return o0.apply(this,arguments);const it=itm(g.k),i=g.i;
  const kn=rcpKnows(S,b.kind,b.sid);const B=[pbtn(`data-rcpread="${i}"`,"Đọc, học lối này",`tốn: 1 khắc · thành: học ${rcpStN(b.kind,b.sid)}`,kn?"đã học lối này":whyTime(1)),
   pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng","tốn: 2 khắc · thành: chọn người nhận",whyTime(2)),pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor((it.pr||0)/2)}`,"")];
  const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);const fr=kinvFrom(g.from);if(fr)F.push(fr+".");
@@ -229,8 +249,8 @@ function rcpTchCons(k){const l=S.arts[k]||0;return liveRivals(true).filter(v=>v.
 tchFee=function(k){return RCPT.k===k&&rcpTchV()?0:rcpFeeNq()};
 tchPaid=function(k){try{const v=RCPT.k===k?rcpTchV():null;if(v){relAdd(S,v,-BAL.rcp.tFavor);S.askAt=S.askAt||{};S.askAt[v.id]=wk();log(`${rkName(v)} ${v.name} dạy ta ${ARTS.find(a=>a.k===k).n}: ta nợ nàng ta một ân (thiện cảm -${BAL.rcp.tFavor}).`)}}catch(e){}RCPT.started=1;RCPT.k=null;RCPT.t=null};
 function rcpTchAsk(k,then){const a=ARTS.find(x=>x.k===k),fee=rcpFeeNq(),O=[];const t2=whyTime(2);
- O.push(kitOffBac({n:rcpTchName(k),fx:{},x:`Nắm chắc · tốn: 2 khắc, Sức -10, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối`,go:()=>{RCPT.k=k;RCPT.t="nq";then()}},fee));
- for(const v of rcpTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${a.n} bậc ${v.arts[k]})`,fx:{},x:`Nắm chắc · tốn: 2 khắc, Sức -10 · thành: tiến bộ +2..3, dạy các lối nàng ta biết · kèm: nợ nàng ta một ân, thiện cảm -${BAL.rcp.tFavor}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,go:()=>{RCPT.k=k;RCPT.t=String(v.id);then()}});
+ O.push(kitOffBac({n:rcpTchName(k),fx:{},x:`tốn: 2 khắc, Sức -10, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối`,go:()=>{RCPT.k=k;RCPT.t="nq";then()}},fee));
+ for(const v of rcpTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${a.n} bậc ${v.arts[k]})`,fx:{},x:`tốn: 2 khắc, Sức -10 · thành: tiến bộ +2..3, dạy các lối nàng ta biết · kèm: nợ nàng ta một ân, thiện cảm -${BAL.rcp.tFavor}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,go:()=>{RCPT.k=k;RCPT.t=String(v.id);then()}});
  if(O.length===0){log(`Chưa có ai dạy: nữ quan cần ${fee} bạc, chưa có phi tần giỏi ${a.n} quý ta (thiện cảm ${BAL.rcp.tRel}).`);return}
  O.push({n:"Thôi",fx:{}});
  Q.push({act:1,t:`Học ${a.n}: ai dạy?`,who:pMe(),h:`<p>Thầy dạy giỏi hơn tự học, và chỉ thầy mới mở được lối mới (tự học chỉ lên bậc).</p><p class="past">${rcpTchName(k)} nhận bạc theo bổng của ta (${fee} bạc${S.bac<fee?", ta chưa đủ":""}). Phi tần giỏi nghề dạy không lấy bạc, nhưng ta nợ nàng ta một ân.${t2?" "+t2:""}</p>`,opts:O});showModal();render()}
@@ -239,55 +259,62 @@ function rcpTchAsk(k,then){const a=ARTS.find(x=>x.k===k),fee=rcpFeeNq(),O=[];con
 (function(){const o0=wkLessonOK;wkLessonOK=function(k,mode){if(mode==="teacher"&&!RCPT.go&&RCPT.k!==k){if(!S||S.dead||Q.length||S.mg||(S.arts[k]||0)>=5)return false;return can(2)&&S.suc>=10}return o0.apply(this,arguments)}})();
 /* bậc 5: the teacher still teaches new sub-styles (a practice session that ends with a work in that sub-style) */
 function rcpNewSt(k){return wkKindsOf(k).filter(x=>RCP_ST[x]).some(x=>RCP_ST[x].some(s=>!rcpKnows(S,x,s[0])))}
-function rcpMaster(k){if(!S||S.dead||Q.length||S.mg||(S.arts[k]||0)<5||!can(2)||S.suc<10)return;
- rcpTchAsk(k,()=>{wkAsk(k,"teacher",()=>{if(!can(2)||S.suc<10)return;const fee=tchFee(k);if(S.bac<fee)return;apply({suc:-10,bac:-fee});tchPaid(k);spend(2);
+function rcpMaster(k){if(!S||S.dead||Q.length||S.mg||(S.arts[k]||0)<5||!can(2)||S.suc<BAL.sucNeed.rcp)return;
+ rcpTchAsk(k,()=>{wkAsk(k,"teacher",()=>{if(!can(2)||S.suc<BAL.sucNeed.rcp)return;const fee=tchFee(k);if(S.bac<fee)return;apply({suc:-10,bac:-fee});tchPaid(k);spend(2);
   const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;S.mg={k,l:5,mode:"prac",wk:pick,pa:1};
-  try{playArt({art:k,title:`Học ${an} với thầy`,onDone:(raw,o)=>{S.mg=null;if(o&&o.skipped)log("Học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,cl(Math.round(raw),0,10),"học với thầy");render()}})}catch(x){S.mg=null}})})}
+  try{playArt({art:k,title:`Học ${an} với thầy`,quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},onDone:(raw,o)=>{S.mg=null;if(o&&o.skipped)log("Học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,cl(Math.round(raw),0,10),"học với thầy");render()}})}catch(x){S.mg=null}})})}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-rcpmt],[data-rcpls],[data-rcpq]");if(!b||b.disabled)return;ev.stopPropagation();
  if(b.dataset.rcpmt)rcpMaster(b.dataset.rcpmt);else if(b.dataset.rcpls)rcpListOpen(b.dataset.rcpls);else rcpAskQ(b.dataset.rcpq)},true);
 /* Tài nghệ cards: the teacher button with its real cost, the new-sub-style teacher at bậc 5, the learnt sub-styles */
 (function(){if(typeof ktArtSkills!=="function")return;const s0=ktArtSkills;ktArtSkills=function(){const L=s0.apply(this,arguments);try{const t2=whyTime(2);for(const s of L){if(s.kind!=="art")continue;const k=s.k,l=S.arts[k]||0;
-  s.acts=s.acts.map(h=>/data-mode="teacher"/.test(h)?pbtn(`data-learn="${k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Sức -10, Bạc -${rcpFeeNq()} (nữ quan) hoặc nợ một ân (phi tần giỏi nghề) · thành: tiến bộ +2..3, luôn hơn tự học 1, mở được lối mới`,t2||(S.suc<10?"Sức dưới 10":"")):h);
-  if(l>=5&&rcpNewSt(k))s.acts.push(pbtn(`data-rcpmt="${k}"`,"Học lối mới với thầy",`tốn: 2 khắc, Sức -10, Bạc -${rcpFeeNq()} hoặc nợ một ân · thành: mở một lối mới, ra một tác phẩm lối ấy`,t2||(S.suc<10?"Sức dưới 10":"")));
+  s.acts=s.acts.map(h=>/data-mode="teacher"/.test(h)?pbtn(`data-learn="${k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Sức -10, Bạc -${rcpFeeNq()} (nữ quan) hoặc nợ một ân (phi tần giỏi nghề) · thành: tiến bộ +2..3, luôn hơn tự học 1, mở được lối mới`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")):h);
+  if(l>=5&&rcpNewSt(k))s.acts.push(pbtn(`data-rcpmt="${k}"`,"Học lối mới với thầy",`tốn: 2 khắc, Sức -10, Bạc -${rcpFeeNq()} hoặc nợ một ân · thành: mở một lối mới, ra một tác phẩm lối ấy`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")));
   if(wkKindsOf(k).some(x=>RCP_ST[x]))s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học, lối chưa học và cách học`,""))}}catch(e){console.error("rcp skills",e)}return L}})();
 function rcpListOpen(k){const a=ARTS.find(x=>x.k===k);const R=[];for(const kind of wkKindsOf(k).filter(x=>RCP_ST[x]))RCP_ST[kind].forEach((s,i)=>{const kn=rcpKnows(S,kind,s[0]);
   const rs=s[2].map(r=>wkrOf(kind,r)).filter(Boolean).map(r=>!kn&&rcpHasR(S,kind,r.id)?`${r.n} (đã học món này)`:r.n).join(", ");
   R.push([`${WK[kind].n}: ${s[1]}`,[kn?"đã học":`chưa học: học với thầy, hoặc đọc ${RCP_BK[kind].toLowerCase()} «${s[1]}» (Nội vụ phủ, ${rcpBookPr(i)} bạc)`,rs],kn?"g":"n"])});
  kitModal({kind:"info",title:`${a.n}: các lối`,sub:"Lối đã học, lối chưa học",html:`<div class="kinvrows">${kitRows(R)}</div>${kitFacts(["Mỗi lối mở vài món; món còn cần đủ bậc tài nghệ.","Mỗi người thích một lối, có người chê một lối: quà đúng lối người ấy thích mới được trọn."])}`})}
 /* ---------- Tác phẩm tab: tastes known so far + the two ways to ask ---------- */
-function rcpTasteRows(){return rcpPeople().map(r=>{const P=rcpProf(r),K=rcpK(rcpPK(r));const F=[],H=[];let al="";
+function rcpTasteRows(){return [rcpMeRow()].concat(rcpPeople().map(r=>{const P=rcpProf(r),K=rcpK(rcpPK(r));const F=[],H=[];let al="";
   for(const k in RCP_ST){if(K.includes("f:"+k))F.push(`${WK[k].n.toLowerCase()}: ${rcpSt(k,P.f[k])[1]}`);if(K.includes("h:"+k)&&P.h[k])H.push(`${WK[k].n.toLowerCase()}: ${rcpSt(k,P.h[k])[1]}`)}
   if(K.includes("a"))al=P.a?`kiêng ${RCP_ALN[P.a]}`:"không kiêng gì";const n=rcpUnknown(r).length;
   const L=[];if(F.length)L.push("thích "+F.join(", "));if(H.length)L.push("chê "+H.join(", "));if(al)L.push(al);L.push(n?`còn ${n} điều chưa rõ`:"đã rõ hết");
-  return[rcpWho(r),L,F.length||al?"g":"n"]})}
-function rcpAskQ(how){if(S.dead||Q.length)return;const ty=how==="ty",k=ty?1:2,fee=rcpPayTy();if(!can(k))return;if(ty&&S.bac<fee)return;if(!ty&&!S.maid)return;
- const O=rcpPeople().filter(r=>ty?!rcpKn(r,"a"):rcpUnknown(r).length).map(r=>({n:rcpWho(r),fx:ty?{bac:-fee}:{},x:ty?"thành: biết người ấy kiêng gì":`${word(rcpSpyO())} · thành: biết thêm một điều người ấy thích, chê hay kiêng · hỏng: Lòng ${S.maid.name} -3`,
-  go:()=>{spend(k);if(ty){log(rcpLearn(r,"a","thái y kể"))}else if(roll(rcpSpyO())){const u=rcpUnknown(r);log(rcpLearn(r,pick(u),`${S.maid.name} dò la`))}else{S.maid.loyal=cl((S.maid.loyal||0)-3,0,100);log(`${S.maid.name} dò la không ra gì, còn bị mắng.`)}}}));
+  return[rcpWho(r),L,F.length||al?"g":"n"]}))}
+/* her own allergy (owner 15/11 recipes "dị ứng", S4-allergy / D39): the same rcpProf allergen as everyone, learnt the same ways (thái y, or the first rash) */
+function rcpMeRow(){const P=rcpProf(S),kn=rcpKn(S,"a");return["Ta",[kn?(P.a?`kiêng ${RCP_ALN[P.a]}: nhận về dùng phải là nổi mẩn`:"không kiêng thứ gì"):"chưa rõ ta có kiêng thứ gì (hỏi thái y)"],kn?(P.a?"r":"g"):"n"]}
+function rcpAskQ(how){if(S.dead||Q.length)return;const pk=!(how==="ty")&&typeof ptOn==="function"&&ptOn();const ty=how==="ty",k=ty?1:pk?ptRow("spy").o:2,fee=rcpPayTy();if(!can(k))return;if(ty&&S.bac<fee)return;if(!ty&&!S.maid)return;if(pk&&ptBusy("mm:me"))return;
+ const O=(ty?[S].concat(rcpPeople()):rcpPeople()).filter(r=>ty?!rcpKn(r,"a"):rcpUnknown(r).length).map(r=>({n:rcpWho(r),fx:ty?{bac:-fee}:{},x:ty?(r===S?"thành: biết ta có kiêng thứ gì":"thành: biết người ấy kiêng gì"):`${word(rcpSpyO())} · thành: biết thêm một điều người ấy thích, chê hay kiêng · hỏng: Lòng ${S.maid.name} -${balAb(BAL.eff.jrcp.loyalGo_2)}`,
+  go:()=>rcpAskGo(how,r)}));
  if(!O.length){log("Ta đã rõ hết những điều ấy.");return}O.push({n:"Thôi",fx:{}});
- Q.push({act:1,t:ty?"Hỏi thái y: ai kiêng thứ gì?":`Sai ${S.maid.name} dò la khẩu vị`,who:pMe(),h:ty?`<p>Thái y viện chép bệnh án cả cung: ai kiêng thứ gì, dùng phải là phát bệnh. Tốn 1 khắc, ${fee} bạc.</p>`:`<p>${S.maid.name} đi hỏi cung nhân hầu người ấy: thích lối nào, chê lối nào, kiêng thứ gì. Tốn 2 khắc.</p>`,opts:O});showModal();render()}
-function rcpSpyO(){return cl(Math.round(BAL.rcp.spyO+((S.maid&&S.maid.loyal)||0)/5-20),5,95)}
+ Q.push({act:1,t:ty?"Hỏi thái y: ai kiêng thứ gì?":`Sai ${S.maid.name} dò la khẩu vị`,who:pMe(),h:ty?`<p>Thái y viện chép bệnh án cả cung: ai kiêng thứ gì, dùng phải là phát bệnh. Tốn 1 khắc, ${fee} bạc.</p>`:`<p>${S.maid.name} đi hỏi cung nhân hầu người ấy: thích lối nào, chê lối nào, kiêng thứ gì. Tốn ${k} khắc${pk?", "+ptWaitTxt("spy"):""}.</p>`,opts:O});showModal();render()}
+/* the choice of rcpAskQ (one engine: co-op thin F4 registers it); r = her (S) or a person.
+   parallel time (jptime): the maid goes, what she learns comes at the due khắc (review parallel-time #4 merge: the send moved here with main's rcpAskGo) */
+function rcpAskGo(how,r){const pk=!(how==="ty")&&typeof ptOn==="function"&&ptOn();const ty=how==="ty",k=ty?1:pk?ptRow("spy").o:2;if(!r||(!ty&&!S.maid))return;if(pk&&ptBusy("mm:me"))return;const o=ty?100:rcpSpyO();/* odds read before the spend (shown-odds r2) */
+ if(pk){ptSend({who:"mm:me",nm:S.maid.name,kind:"spy",place:"cnh",a:{rid:ledgerId(r),o,run:"taste"},lbl:"đi dò la khẩu vị"});spend(k);return}
+ spend(k);if(ty){log(rcpLearn(r,"a","thái y kể"))}else if(roll(o)){const u=rcpUnknown(r);log(rcpLearn(r,pick(u),`${S.maid.name} dò la`))}else{S.maid.loyal=cl((S.maid.loyal||0)-BAL.eff.jrcp.loyalGo_2,0,100);log(`${S.maid.name} dò la không ra gì, còn bị mắng.`)}}
+function rcpSpyO(){return oddsCl(Math.round(BAL.rcp.spyO+((S.maid&&S.maid.loyal)||0)/5-20))}
 (function(){if(typeof ktWorksHTML!=="function")return;const w0=ktWorksHTML;ktWorksHTML=function(){let h=w0.apply(this,arguments);try{
   for(const a of ARTS){const ks=wkKindsOf(a.k).filter(x=>RCP_ST[x]);if(!ks.length)continue;const n=ks.reduce((t,x)=>t+rcpKnown()[x].length,0),m=ks.reduce((t,x)=>t+RCP_ST[x].length,0);
    h=h.replace(new RegExp(`(data-skill="wk-${a.k}"[\\s\\S]*?<div class="kskdo">)`),`$1<span class="kchip n">lối đã học ${n}/${m}</span> `)}
   const fee=rcpPayTy(),acts=[pbtn(`data-rcpq="ty"`,"Hỏi thái y kiêng kỵ",`tốn: 1 khắc, Bạc -${fee} · thành: biết một người kiêng thứ gì`,whyTime(1)||(S.bac<fee?`thiếu bạc (cần ${fee})`:"")),
-   pbtn(`data-rcpq="maid"`,"Sai cung nữ dò la khẩu vị",`${S.maid?word(rcpSpyO()):"Khó"} · tốn: 2 khắc · thành: biết thêm một điều một người thích, chê hay kiêng · hỏng: Lòng cung nữ -3`,whyTime(2)||(!S.maid?"chưa có cung nữ thân tín":""))];
+   pbtn(`data-rcpq="maid"`,"Sai cung nữ dò la khẩu vị",`${word(rcpSpyO())} · tốn: ${typeof ptK==="function"?ptK("spy",2):2} khắc${typeof ptOn==="function"&&ptOn()?", "+ptWaitTxt("spy"):""} · thành: biết thêm một điều một người thích, chê hay kiêng · hỏng: Lòng cung nữ -3`,whyTime(typeof ptK==="function"?ptK("spy",2):2)||(!S.maid?"chưa có cung nữ thân tín":"")||(typeof ptLockWhy==="function"?ptLockWhy("mm:me"):""))];
   h+=kitSkillCard({kind:"wk",k:"taste",name:"Khẩu vị, kiêng kỵ",max:0,img:"",desc:`<div class="kinvrows">${kitRows(rcpTasteRows())}</div>`,acts,can:true})}catch(e){console.error("rcp works",e)}return h}})();
 /* ---------- learning tastes by the old roads ---------- */
 (function(){const d0=discover;discover=function(){const r=d0.apply(this,arguments);try{if(!r||roll(40)){const u=rcpUnknown("emp");if(u.length){log(rcpLearn("emp",pick(u)));return true}}}catch(e){}return r}})();
 (function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{if(S&&!S.dead&&!S.out){
-  if(S.maid&&roll(BAL.rcp.gossipP)){const P=rcpPeople().filter(r=>rcpUnknown(r).length);if(P.length){const r=pick(P);const t=rcpLearn(r,pick(rcpUnknown(r)),`${S.maid.name} nghe cung nhân kể`);if(t)log(t)}}
+  if(S.maid&&npcWhy("rcpGos",{p:S.maid},()=>roll(BAL.rcp.gossipP))){const P=rcpPeople().filter(r=>rcpUnknown(r).length);const r=npwPick(P,rcpCare);if(r){const t=rcpLearn(r,npwPick(rcpUnknown(r),()=>1),`${S.maid.name} nghe cung nhân kể`);if(t)log(t)}}/* npc-purpose G2c: a loyal maid asks about the people her mistress most needs to please */
   /* a friendly consort sends a copied sheet of a sub-style she knows and her friend does not; Thái hậu gives a sutra or embroidery copy */
-  for(const v of liveRivals(true)){if(!v.alive||v.out||(rel(v,S)||0)<BAL.rcp.giftRel||!roll(BAL.rcp.giftP))continue;const L=[];
-   for(const kind in RCP_ST)if(WK[kind].a===wkBestArt(v)||roll(30))RCP_ST[kind].forEach((s,i)=>{if(i&&rcpNpcKnows(v,kind,s[0])&&!rcpKnows(S,kind,s[0]))L.push(rcpBookK(kind,s[0],1))});
-   if(L.length){pushDil(mkP("giftin",{f:key(v),e:{k:pick(L),from:key(v)}}),"Quà tặng");break}}
-  if(!S.thDead&&(S.th||0)>=60&&roll(BAL.rcp.thGiftP)){const L=[];for(const kind of ["kinh","theu"])RCP_ST[kind].forEach((s,i)=>{if(i&&!rcpKnows(S,kind,s[0]))L.push(rcpBookK(kind,s[0],1))});
-   if(L.length){const k=pick(L);S.inv.push({k,from:"th"});log(`<span class="g">Thái hậu ban ta ${IT[k].n}.</span> Cất vào rương.`)}}}}catch(e){console.error("rcp month",e)}return ev}})();
+  for(const v of liveRivals(true)){if(!v.alive||v.out||(rel(v,S)||0)<BAL.rcp.giftRel)continue;const L=[];
+   for(const kind in RCP_ST){const sc=WK[kind].a===wkBestArt(v)?BAL.ag.why.g2rcp.best:BAL.ag.why.g2rcp.other;RCP_ST[kind].forEach((s,i)=>{if(i&&rcpNpcKnows(v,kind,s[0])&&!rcpKnows(S,kind,s[0]))L.push({k:rcpBookK(kind,s[0],1),s:sc})})}
+   if(L.length&&npcWhy("rcpGift",{p:v},()=>roll(BAL.rcp.giftP))){const g=npwPick(L,x=>x.s);pushDil(mkP("giftin",{f:key(v),e:{k:g.k,from:key(v)}}),"Quà tặng");break}}/* npc-purpose G2c: a friend shares what she knows best */
+  if(!S.thDead&&(S.th||0)>=60&&npcWhy("rcpTh",{},()=>roll(BAL.rcp.thGiftP))){const L=[];for(const kind of ["kinh","theu"])RCP_ST[kind].forEach((s,i)=>{if(i&&!rcpKnows(S,kind,s[0]))L.push({k:rcpBookK(kind,s[0],1),s:kind==="kinh"?BAL.ag.why.g2rcp.thKinh:BAL.ag.why.g2rcp.thTheu})});
+   if(L.length){const k=npwPick(L,x=>x.s).k;/* npc-purpose G2c: Thái hậu gives from her regard; a sutra first */S.inv.push({k,from:"th"});log(`<span class="g">Thái hậu ban ta ${itm(k).n}.</span> Cất vào rương.`)}}}}catch(e){console.error("rcp month",e)}return ev}})();
 /* a ma ma of the imperial kitchen / workshops offers to copy out a sub-style (a small story reward with two roads: bạc or Sức) */
 if(typeof ev==="function")ev("rcpMama",()=>S.rank>=0&&!S.out&&["mon","huong","theu","ao"].some(k=>RCP_ST[k].some(s=>!rcpKnows(S,k,s[0]))),
  ()=>{const k=pick(["mon","huong","theu","ao"].filter(k=>RCP_ST[k].some(s=>!rcpKnows(S,k,s[0]))));const s=pick(RCP_ST[k].filter(s=>!rcpKnows(S,k,s[0])));return{k,s:s[0]}},
  p=>{const s=rcpSt(p.k,p.s);if(!s)return null;const fee=Math.max(BAL.rcp.mamaMin,Math.round((BAL.pay?BAL.pay[Math.min(7,S.rank|0)]:40)*BAL.rcp.mamaK)),nm=p.k==="mon"?"Thượng thực cục":"Thượng công cục";return{
  t:`Một ma ma già ở ${nm} sang thỉnh an, kể rằng thuở trẻ từng hầu một vị nương nương rất giỏi ${rcpStN(p.k,p.s)}, còn nhớ cả phổ.<br>“Nếu ${kSay({srv:"f"},S,"{goi}")} muốn, nô tỳ chép lại cho.”`,o:[
- {n:"Biếu ma ma ít bạc, xin chép phổ",fx:{bac:-fee},x:`thành: có ${IT[rcpBookK(p.k,p.s,1)].n}`,go:()=>{S.inv.push({k:rcpBookK(p.k,p.s,1),from:"me"});log(`Ma ma chép lại ${IT[rcpBookK(p.k,p.s,1)].n}, ta cất vào rương.`)}},
+ {n:"Biếu ma ma ít bạc, xin chép phổ",fx:{bac:-fee},x:`thành: có ${itm(rcpBookK(p.k,p.s,1)).n}`,go:()=>{S.inv.push({k:rcpBookK(p.k,p.s,1),from:"me"});log(`Ma ma chép lại ${itm(rcpBookK(p.k,p.s,1)).n}, ta cất vào rương.`)}},
  {n:"Phụ ma ma một buổi bếp núc, học tận tay",fx:{suc:-15},x:`thành: học ngay ${rcpStN(p.k,p.s)}`,go:()=>{const t=rcpGrant(p.k,p.s,"ma ma dạy tận tay");if(t)log(t)}},
  {n:"Cảm tạ, không cần",fx:{}}]}});
 /* Hoàng thượng's performances: playing / dancing in the sub-style he loves (when she knows it and has learnt it) pleases more */

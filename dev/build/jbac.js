@@ -12,12 +12,12 @@ BAL.bacVal={danh:4.2,duc:8,sung:4,rel:.33,stat:2,an:.33,tok:3};
 BAL.bacFair={lo:.5,hi:3,gMax:3,band:.15};
 /* a gain or cost written only in words (wt / lt / k tokens: "biết sự thật", "lộ ra bị trách trái lệnh") = BAL.bacVal.tok khắc each */
 function bacTok(L,cls){return (L||[]).filter(t=>typeof t==="string"&&t.indexOf(`class="${cls}"`)>=0).length*BAL.bacVal.tok}
-function bacV1(k){const V=BAL.bacVal;if(k==="suc")return (BAL.restLatK||1)/(BAL.restLatSuc||6);if(k==="bac")return 16/BAL.bacTuan[Math.max(0,Math.min(7,(S&&S.rank)|0))];
+function bacV1(k){const V=BAL.bacVal;if(k==="suc")return (BAL.restLatK)/(BAL.restLatSuc);if(k==="bac")return 16/BAL.bacTuan[Math.max(0,Math.min(7,(S&&S.rank)|0))];
  if(k==="danh"||k==="duc"||k==="sung"||k==="an")return V[k];if(/^(sac|tai|tamco|mat)$/.test(k))return V.stat;if(/^(th|hh|maid|loyal|tin)$/.test(k))return V.rel;return 0}
 function bacFx(o){let v=0;for(const [k,x] of Object.entries(o||{}))if(typeof x==="number")v+=x*bacV1(k);return v}
 function bacRel(L){let v=0;for(const [a,x] of (L||[]))v+=x*(a&&a.k==="emp"?BAL.bacVal.sung:BAL.bacVal.rel);return v}
 /* E of one c6 spec (khắc), and its parts */
-function bacE(s){const c=s.c||{};const p=s.p==null?1:Math.max(5,Math.min(95,Math.round(s.p)))/100;
+function bacE(s){const c=s.c||{};const p=s.p==null?1:oddsCl(Math.round(s.p))/100;
  const gain=bacFx(s.w)+bacRel(s.r)+(c.suc>0?c.suc*bacV1("suc"):0)+bacTok(s.wt,"g")+bacTok(s.k,"g"),loss=-(bacFx(s.l)+bacRel(s.lr))+bacTok(s.lt,"r");
  let cost=bacTok(s.k,"r");for(const [k,x] of Object.entries(c))if(typeof x==="number"&&x<0)cost-=x*bacV1(k);return{p,gain,loss,cost,e:p*gain-(1-p)*loss-cost}}
 function bacRound(b){return b>=10?Math.round(b/5)*5:Math.max(1,Math.round(b))}

@@ -25,7 +25,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
  const C=R.chest;if(C.tram!=='tramngoc'||C.tramFrom!=='kc')F('chest: Cài tóc');if(!C.y||C.yFrom!=='kc')F('chest: Y phục');if(C.wrist!=='vongbackc')F('chest: Đeo tay');if(C.waist!=='ngocboikc')F('chest: Đeo eo');if(C.scent!=='tuithom')F('chest: Túi thơm');
  if(!R.box)F('chest: no "Rương đồ khuê các" box shown');if(!C.pic)F('chest: ngocboikc has no painting');
  /* 2 stale home dialogs at entry; then the girlhood things are still hers */
- R.entry=await p.evaluate(()=>{for(let i=0;i<30&&Q.length;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}try{const o=document.getElementById('kg82');if(o)kg82Close(true)}catch(e){}
+ R.entry=await p.evaluate(()=>{for(let i=0;i<30&&Q.length;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}try{const o=document.getElementById('kg82');if(o)kg82Close(true)}catch(e){}
    S.kc.soOk=1;S.kc.tt={early:false,raw:5};pushDil(mkP('kcE',{e:'phuc'}),'Phúc tuyển');pushDil(mkP('kcE',{e:'theu'}),'x');const stale=Q.find(m=>m.pp&&m.pp.e==='phuc');
    kcEnter(0);const left=Q.filter(m=>m.pid==='kcE').map(m=>m.pp.e);let mg=false;try{stale.opts[0].go()}catch(e){}mg=!!document.getElementById('kg82');
    const w=wdOf(S);return{isKc:isKc(),left,mg,tram:w.tram&&w.tram.k,inv:S.inv.filter(x=>['vongbackc','ngocboikc','tuithom'].includes(x.k)).length,lux:luxOf(S)}});
@@ -33,7 +33,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
  /* 1 endings */
  const paths={marry:"kcMarry(kcSuitor())",tu:"kcEnd('tu')",rare:"kcEnd('kcR1')",kcDie:"kcDie('Thử')",bareDie:"die('Bị hại')",suc:"(S.suc=0,kcMonth())"};
  R.end={};
- for(const [k,js] of Object.entries(paths)){await home();const r=await p.evaluate(js=>{for(let i=0;i<30&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}
+ for(const [k,js] of Object.entries(paths)){await home();const r=await p.evaluate(js=>{for(let i=0;i<30&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}
     const S0=S;if(S.dead)return{pre:'died before the path'};try{eval(js)}catch(e){return{err:e.message}}const end=S0.kc&&S0.kc.end,dead=!!S0.dead;
     /* the end card → a new life */
     let guard='';try{const m=Q.find(x=>x.cls==='end');if(m){Q.length=0;Q.push(m);closeModal()}}catch(e){guard='end card: '+e.message}

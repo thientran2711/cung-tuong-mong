@@ -21,26 +21,26 @@ function m43odds(v,t,k){try{const a=ACT[k];return a&&a.o?a.o(v,t):null}catch(e){
    if(drop){mindLog(v,"_wait");if(!keep.length){const sp=O.find(x=>x[0]==="spy");return sp?[sp]:[]}}O=keep}/* the clever wait out poor odds and dig for evidence meanwhile */
  }catch(e){}return O}})();
 /* the push-down roads read Tâm cơ through odT: a blunder lowers them too */
-(function(){const o0=odT;odT=function(a,b){const r=o0.apply(this,arguments);return a&&a.__err?cl(r-a.__err,5,95):r}})();
+(function(){const o0=odT;odT=function(a,b){const r=o0.apply(this,arguments);return a&&a.__err?oddsCl(r-a.__err):r}})();
 /* belief book */
 function m43sev(k){for(let i=1;i<BANDS.length;i++)if(BANDS[i][2].includes(k))return [0,6,12,20][i];return 6}
 function belOf(t,x){t.bel=t.bel||{};const k=key(x);return t.bel[k]=t.bel[k]||{r:0,w:0}}
 mindBelief=function(t,v,k){if(!t||t===S||!t.alive||t.out||!v)return;const kv=key(v);const ev=(t.evm&&t.evm[kv])||0;
  let p=35+witOf(t)/2+(ev>0?25:0)-witOf(v)/4;let seen=false;try{seen=together(v,t)}catch(e){}if(seen)p+=40;
- const spy=((v===S?S.staff:v.staff)||[]).some(s=>s&&s.spyFor===key(t));if(spy)p+=30;p=cl(p,10,95);mindLog(t,"_belief");
+ const spy=((v===S?S.staff:v.staff)||[]).some(s=>s&&s.spyFor===key(t));if(spy)p+=30;p=oddsCl(p);mindLog(t,"_belief");
  const n=m43sev(k);if(roll(p)){oanAdd(t,v,n);belOf(t,v).r+=n;return}
  const L=others(t).filter(x=>x!==v&&(x===S||x.alive&&!x.out));
  if(!L.length||roll(30)){mindLog(t,"_dark");return}/* kept in the dark: she knows a blow fell, not whose */
  const w=L.map(x=>[x,1+oan(t,x)+Math.max(0,-aff(t,x))+15*((t.evm&&t.evm[key(x)])||0)]);let r=Math.random()*w.reduce((a,b)=>a+b[1],0),i=0;while(r>w[i][1]&&i<w.length-1){r-=w[i][1];i++}
  const s=w[i][0];oanAdd(t,s,n);belOf(t,s).w+=n;mindLog(t,"_wrongBelief");t.blamed=t.blamed||{};t.blamed[key(s)]=(t.blamed[key(s)]||0)+1;
- if(s===S&&roll(30+(S.mat||0)*8))noteAdd(t.id,`Nghe nói ${t.name} ngờ ngươi đứng sau chuyện ${ACT[k]?ACT[k].n.toLowerCase():"vừa rồi"}, dù không phải ngươi`)};
+ if(s===S&&roll(BAL.odb.j43.rbTop+eyes(S)*8))noteAdd(t.id,`Nghe nói ${t.name} ngờ ngươi đứng sau chuyện ${ACT[k]?ACT[k].n.toLowerCase():"vừa rồi"}, dù không phải ngươi`)};
 /* the belief book fades with the grudges, month by month */
-(function(){const o0=oanMonth;oanMonth=function(){const r=o0.apply(this,arguments);try{for(const v of rivals){if(!v.bel)continue;for(const k in v.bel){const b=v.bel[k];b.r=Math.floor(b.r*.8);b.w=Math.floor(b.w*.8);if(!b.r&&!b.w)delete v.bel[k]}}}catch(e){}return r}})();
+(function(){const o0=oanMonth;oanMonth=function(){const r=o0.apply(this,arguments);try{for(const v of rivals){if(!v.bel)continue;for(const k in v.bel){const b=v.bel[k];b.r=Math.floor(b.r*.8);b.w=Math.floor(b.w*.8);if(!b.r&&!b.w)delete v.bel[k]}let e=true;for(const k in v.bel){e=false;break}if(e)delete v.bel/* no empty {} left behind (co-op merge3 keeps no empty object: merged ≠ host, quickcheck G4 coop-one-world seed 3); belOf makes it again */}}catch(e){}return r}})();
 /* her own hidden blows are guessed by the victim the same way */
 const M43HARM=new Set(BANDS.slice(1).flatMap(x=>x[2]).concat(PUSHK));
 (function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&t&&t!==S&&t.alive&&M43HARM.has(k)&&k!=="accuse"&&k!=="vp"&&k!=="xx"&&k!=="tocao"&&r&&!FAILRX.test(r))mindBelief(t,S,k)}catch(e){}return r}})();
 /* wit: every head can slip; acts on a belief she holds wrongly are counted */
-(function(){const r0=mindRun;mindRun=function(v,t,k,err){err=err||0;try{const tc=witOf(v);if(!err&&roll(tc>=60?12:tc>=30?18:20)){err=10;mindLog(v,"_mistake");mindLog(v,"_slip")}
+(function(){const r0=mindRun;mindRun=function(v,t,k,err){err=err||0;try{const tc=witOf(v);if(!err&&roll(tc>=BAL.wit.hi?12:tc>=BAL.wit.lo?18:20)){err=10;mindLog(v,"_mistake");mindLog(v,"_slip")}
   mindLog(v,"_act");const b=v.bel&&t&&v.bel[key(t)];if(b&&(b.w||b.r))mindLog(v,"_actBelief");if(b&&b.w>0&&b.w>=b.r)mindLog(v,"_actWrong")}catch(e){}
  const r=r0.call(this,v,t,k,err);try{if(r&&FAILRX.test(r))mindLog(v,"_fail")}catch(e){}return r}})();
 /* a bad week: punished, demoted or fallen makes a head rash for about three weeks */
@@ -51,10 +51,10 @@ function m43bad(p){if(p&&typeof p==="object"&&p!==S)p.badWk=bq()}
 (function(){const r0=rashOf;rashOf=function(v){const r=r0.apply(this,arguments);if(r)return r;if(v&&v.badWk!=null&&bq()-v.badWk<=9&&roll(25)){mindLog(v,"_badWeek");return 1}return 0}})();
 /* tells: the same chance as before, now carried by a named servant of hers; a servant who spies for the schemer keeps it back */
 function m43reporter(){const L=[];const seen=new Set();for(const s of [S.maid].concat(S.staff||[])){if(!s||seen.has(s))continue;seen.add(s);L.push(s)}if(!L.length)return null;
- const w=L.map(s=>(s.tr==="lanh"||s.tr==="chuyen"?3:s.tr==="trung"?2:1)*(s.loyal>=60?1.5:1));let r=Math.random()*w.reduce((a,b)=>a+b,0),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}return L[i]}
-mindTell=function(v,t,k){mindLog(v,"_tell");try{if(v.plan&&v.plan.due>bq()+3)v.plan.due=bq()+3}catch(e){}/* a tell comes 1-3 buổi before the blow */const tc=witOf(v);let c=12+(S.mat||0)*7+(S.staff||[]).filter(s=>s.tr==="lanh"||s.tr==="chuyen").length*8+(tc<35?15:0)-(tc>=70?8:0)+(t===S&&S.maid&&S.maid.loyal>=70?10:0);
- if(!roll(cl(c,5,80)))return;const s=m43reporter();
- if(s&&s.spyFor&&s.spyFor!=="me"&&(s.spyFor===key(v)||roll(50))){mindLog(v,"_tellWithheld");return}
+ /* NPC-PURPOSE G3: the one whose nết makes her the eyes of the house and who is closest to her mistress carries it (near-best) */return npwPick(L,s=>(nv(s,"agentW"))*(s.loyal>=BAL.loy.close?1.5:1))||L[0]}
+mindTell=function(v,t,k){mindLog(v,"_tell");try{if(v.plan&&v.plan.due>bq()+3)v.plan.due=bq()+3}catch(e){}/* a tell comes 1-3 buổi before the blow */const tc=witOf(v);let c=12+eyes(S)*7+(S.staff||[]).filter(s=>netIs(s,"sharp")||netIs(s,"talk")).length*8+(tc<BAL.wit.mid?15:0)-(tc>=BAL.wit.top?8:0)+(t===S&&S.maid&&S.maid.loyal>=BAL.loy.trust?10:0)-nq(v,"hide",BAL.net.k.hide);
+ if(!roll(oddsCl(Math.min(c,80))))return;const s=m43reporter();
+ if(s&&s.spyFor&&s.spyFor!=="me"&&(s.spyFor===key(v)||npwPick(["keep","tell"],x=>x==="keep"?100-(s.loyal||0):(s.loyal||0))==="keep")){/* G3: a servant who spies for another keeps it back unless her loyalty to her mistress wins */mindLog(v,"_tellWithheld");return}
  mindLog(v,"_tellSeen");const what=TELLS[k]||"có động tĩnh lạ";const txt=`${s?s.name+" về báo: n":"N"}gười của ${v.name} ${what}`;S.tells=S.tells||{};S.tells[v.id]={k,t:key(t),bq:bq()};
  try{newsAdd(v,k,txt,true)}catch(e){}noteAdd(v.id,`${s?s.name:"Tai mắt"} báo: ${what}${t===S?" (có lẽ nhắm vào ngươi)":` (có lẽ nhắm vào ${NM(t)})`}`);
  if(t===S){S.onGuard=S.onGuard||{};S.onGuard[v.id]=k;if(!S.dead)Q.push({t:"Tai mắt báo tin",h:`<p>${txt}.</p><p>Có lẽ nàng đang nhắm vào ngươi. Ngươi đã đề phòng: vài buổi tới mưu của nàng khó thành hơn; dò la hoặc tố giác nàng thì càng chắc.</p>`,who:{w:["r",v.id]}})}

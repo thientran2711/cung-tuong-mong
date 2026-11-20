@@ -75,7 +75,7 @@ thỉnh an no longer flat +8 (depends on the target's personality/virtues, her s
   1000x755, 1180x820, 1366x1024, 844x390, 390x844: no page error, no horizontal overflow, "Trọng" / "Tính nết" kit chips present.
 
 ## Owner questions
-1. Her own nết is now given from her name (8 nết, no Hiểm độc). Should she instead CHOOSE it at the start of a life?
+1. Her own nết is now given from her name (8 nết, no Xảo quyệt). Should she instead CHOOSE it at the start of a life?
 2. Thái hậu archetype names (Từ ái / Nghiêm khắc / Đa nghi / Quyền uy / Sùng Phật) and whether it is shown after the first thỉnh an (now) or only after more contact.
 3. Thiếu lễ at thỉnh an (−3 ×1.5 strict hosts) now outweighs a routine greeting when she is under-dressed; keep?
 

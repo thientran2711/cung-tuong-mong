@@ -55,7 +55,7 @@ Sổ luân hồi: localStorage `ctm-succ-book` → "Kết cục kế vị đã g
 
 ## 5. Two-way rule (NPC dowager)
 When the heir's birth mother is a living NPC consort and the new emperor is under 16, she takes the curtain by the same
-conditions (Danh ≥ 50, Tâm cơ ≥ 35, or trait Tham vọng/Hiểm độc/Kiêu ngạo). Then: the player's pardon roll is 12 harder
+conditions (Danh ≥ 50, Tâm cơ ≥ 35, or trait Tham vọng/Xảo quyệt/Kiêu ngạo). Then: the player's pardon roll is 12 harder
 (she now holds the court) and the ending text says Tân Thái hậu X buông rèm nhiếp chính; if the player is đích mẫu (Hoàng hậu)
 she keeps the title Mẫu hậu Hoàng thái hậu but only "hư vị". If the NPC does not claim and the player is đích mẫu, the card is hers.
 

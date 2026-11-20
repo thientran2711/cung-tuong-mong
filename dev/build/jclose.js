@@ -18,7 +18,7 @@ function cbGreetTodo(k){try{if(!S||S.dead||!k||S.place!==k||S.out||S.confined)re
 function cbGreetMark(k){S.acGreet=S.acGreet||{};S.acGreet[k]=bkey();if(S.j76carry&&(S.buoi||0)<B4L){S.acGreetNx=S.acGreetNx||{};S.acGreetNx[k]=wk()+"-"+((S.buoi||0)+1)}}
 function cbGreetCard(k){const h=cbGreetTodo(k);if(!h)return false;const C=ACC_ETQ,nm=accName(k),hn=`${accRkName(h)} ${h.name}`,sh=h.name.split(" ").pop(),left=Math.max(0,BAL.time.khac-used);
  const L=[`<p>${hn} là chủ vị ${nm}, đang ở cung. Ngươi đang ở đây mà chưa bái kiến trong ${String(BUOI[S.buoi||0]).toLowerCase()}.</p>`];const opts=[];
- if(dayFit(C.khac))opts.push({n:`Bái kiến ${accRkName(h)}`,fx:{},x:`Chắc chắn · tốn: ${C.khac} khắc · thành: ${sh}: ${typeof pvRel==="function"?pvRel(h,C.okAff):"quý ngươi +"+C.okAff}`,go:()=>setTimeout(()=>cbGreetGo(k),0)});
+ if(dayFit(C.khac))opts.push({n:`Bái kiến ${accRkName(h)}`,fx:{},x:`tốn: ${C.khac} khắc · thành: ${sh}: ${typeof pvRel==="function"?pvRel(h,C.okAff):"quý ngươi +"+C.okAff}`,go:()=>setTimeout(()=>cbGreetGo(k),0)});
  else L.push(`<p class="past">Bái kiến: ${j77Bound(C.khac)}.</p>`);
  opts.push({n:"Thôi",fx:{},x:"",go:()=>setTimeout(()=>{S.acSeen=S.acSeen||{};S.acSeen[k]=bkey();window.__fromMap=1;tab="act";render()},0)});
  Q.push({t:nm,h:L.join(""),opts});const m=Q[Q.length-1];try{if(typeof kitPlaceDress==="function")kitPlaceDress(m,k)}catch(e){}showModal();return true}
@@ -58,7 +58,15 @@ const WX_BUOI={
  "tuyết nhẹ":[["tuyết nhẹ","tuyetnhe"],["tuyết nhẹ","tuyetnhe"],["tuyết nhẹ","tuyetnhe"],["tuyết nhẹ","tuyetnhe"]],
  "tuyết dày":[["tuyết dày","tuyetday"],["tuyết dày","tuyetday"],["tuyết dày","tuyetday"],["tuyết dày","tuyetday"]],
  "sương giá":[["sương giá","suonggia"],["trời giá lạnh","suonggia"],["chiều giá lạnh","suonggia"],["đêm sương giá","suonggia"]],
- "mai nở trong tuyết":[["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"]]};
+ "mai nở trong tuyết":[["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"],["mai nở trong tuyết","maino"]],
+ /* weather-khac in-season day states (j12 WX_KH); icons reuse the nearest painted ones until Foreman C paints mo-wx-amu / mo-wx-muarao (KIT_REQUESTS) */
+ "trời âm u":[["trời âm u","suongsom"],["trời âm u","suongsom"],["chiều âm u","suongsom"],["đêm u ám","suongsom"]],
+ "mưa rào":[["mưa rào","muaphun"],["mưa rào","muaphun"],["mưa rào","muaphun"],["mưa rào","muaphun"]],
+ "mưa thu":[["mưa thu","muaphun"],["mưa thu","muaphun"],["mưa thu","muaphun"],["mưa thu","muaphun"]],
+ /* weather-khac-2: wind gusts + fog mornings (icons: nearest painted ones, KIT_REQUESTS) */
+ "gió lớn":[["gió lớn","gioheomay"],["gió lớn","gioheomay"],["gió lớn","gioheomay"],["đêm gió lớn","gioheomay"]],
+ "gió bấc":[["gió bấc","gioheomay"],["gió bấc","gioheomay"],["gió bấc","gioheomay"],["đêm gió bấc","gioheomay"]],
+ "sương mù":[["sương mù","suongsom"],["sương mù","suongsom"],["chiều sương mù","suongsom"],["đêm sương mù","suongsom"]]};
 function wxAt(base,b){const R=WX_BUOI[base];return R?R[Math.max(0,Math.min(3,b|0))]:[base,null]}
 function wxSync(){try{if(!S||!S.wx)return;if(!S.wx.b||!WX_BUOI[S.wx.b])S.wx.b=WX_BUOI[S.wx.n]?S.wx.n:(S.wx.b||S.wx.n);const [n]=wxAt(S.wx.b,S.buoi||0);S.wx.n=n}catch(e){}}
 /* icons for the buổi words (KM_WX is keyed by the shown words) */
@@ -84,12 +92,75 @@ function kitLinePos(el){try{const nx=document.getElementById("next");let bot=inn
  if(bar){const r=bar.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)bot=r.top}
  /* a dialog is open: the pill sits just above the dialog box (or under it), never on its title or buttons */
  const M=document.getElementById("modal"),d=M&&!M.hidden?M.querySelector(".dlg"):null;if(d){const r=d.getBoundingClientRect();if(r.top>=44){el.style.bottom="auto";el.style.top=Math.round(r.top-38)+"px";return}if(innerHeight-r.bottom>=44)bot=Math.min(bot,innerHeight-2)}
- el.style.top="auto";el.style.bottom=Math.round(innerHeight-bot+10)+"px"}catch(e){}}
+ el.style.top="auto";el.style.bottom=Math.round(innerHeight-bot+10)+"px";kitToastPlace(el,"up")}catch(e){}}
+/* KEEP-CLEAR (MAIN ROOT-55 20:08Z + ROOT-56 20:49Z, review/stage-here r2): every one-line toast (§42.2 kitLine #kupdline, §87 kitLineToast
+   #ktbtoast) is placed where it covers NOTHING that must read or be tapped. Generic, not a hand list: every tappable thing (buttons, group
+   buttons, chips, tabs, links, inputs), every kit plaque/box (.k3p: right-column groups, Ân sủng box), the place name, figure name tags,
+   headings; a big tappable card counts by its HEAD BAND (title + first line, top 64 px). On a two-page screen the toast stays inside the
+   column it belongs to (the stage column) and never crosses the split; on one page the column = between the top bar and the bottom bar.
+   Search: widths (column − 16, ×.8, ×.65) × rows (6 px) × left/centre/right; top toast = the highest free spot, bottom pill = the lowest;
+   nothing free → the toast waits hidden (refit every 300 ms shows it again when there is room; never placed over a kept thing). */
+const KIT_TOAST_KEEP='header.hud,#tabs,.pctabs,.ktsub,.kpbar,[role="tablist"],#kpname,#sc-t,.tok .tag,.j59n,.kpod-plq,.dlg h2,.dlg .dlgt,button,a[href],[role="button"],[role="tab"],[data-tab],input,select,.kchip,.chip,.kmchip,.kwhy,.kodds,.k3p,.kat,.kan,.kr,.krl,.krv,.kr2b,.kname,.knr,.krt,[class*="name"],h1,h2,h3,h4,.card,.kcard,.mspot,.mlab,[data-ak],[onclick],[tabindex]:not([tabindex="-1"])';
+/* PEOPLE (MAIN ROOT-56 LOOK of 1f33d3c + ROOT-57 BACK 21:58Z): a toast never covers ANY part of a person. Stage figures by their WHOLE
+   box (head to feet, robe included), face chips (.tok, .pface), name labels, portrait frames (.kfr/.kpor/.pframe/.kpf) and card scene-art
+   frames (.ksart, people painted in them): the whole box, whatever their size. */
+const KIT_TOAST_PEOPLE='#mefig,.figimg,.tok.fig,.kfig,.tok,.pface,.kfr,.kpor,.pframe,.kpf,.ksart';
+function kitToastPeopleRects(el){const H=innerHeight,out=[];
+ for(const e of document.querySelectorAll(KIT_TOAST_PEOPLE)){if(el&&(el===e||el.contains(e)))continue;if(e.closest("#ktbtoast,#kupdline,#krail"))continue;if(!e.getClientRects().length)continue;
+  const r=e.getBoundingClientRect();if(r.width<2||r.height<2||r.bottom<0||r.top>H)continue;const cs=getComputedStyle(e);if(cs.visibility==="hidden"||+cs.opacity===0)continue;
+  out.push({left:r.left,right:r.right,top:r.top,bottom:r.bottom,person:1})}
+ return out}
+function kitToastKeepRects(el,relax){const H=innerHeight,W=innerWidth,out=kitToastPeopleRects(el);
+ if(relax){for(const e of document.querySelectorAll('header.hud,#tabs,#krail')){if(!e.getClientRects().length)continue;const r=e.getBoundingClientRect();out.push({left:r.left,right:r.right,top:r.top,bottom:r.bottom})}return out}
+ for(const e of document.querySelectorAll(KIT_TOAST_KEEP)){if(el&&(el===e||el.contains(e)))continue;if(e.closest("#ktbtoast,#kupdline"))continue;if(!e.getClientRects().length)continue;
+  const r=e.getBoundingClientRect();if(r.width<2||r.height<2||r.bottom<0||r.top>H)continue;
+  /* a big box: an action card / tappable row counts WHOLE (ROOT-57: never over an action card); a big non-tappable box (panel, list) does not */
+  if(r.height>H*.4||r.width*r.height>W*H*.15){if(e.matches('button,[role="button"],.card,.kcard,a[href],[onclick]'))out.push({left:r.left,right:r.right,top:Math.max(r.top,0),bottom:Math.min(r.bottom,H)});continue}
+  if(getComputedStyle(e).visibility==="hidden")continue;out.push({left:r.left,right:r.right,top:r.top,bottom:r.bottom})}
+ return out}
+function kitToastCol(){const H=innerHeight,W=innerWidth;try{const st=document.getElementById("stage");const two=typeof kitView==="function"&&kitView().pages===2;
+ if(two&&st&&st.getClientRects().length){const r=st.getBoundingClientRect();if(r.width>120&&r.height>120&&r.right>0&&r.left<W&&getComputedStyle(st).visibility!=="hidden")return{left:r.left,right:r.right,top:r.top,bottom:r.bottom}}}catch(e){}
+ let top=0,bot=H;try{const h=document.querySelector("header.hud");if(h&&h.getClientRects().length)top=h.getBoundingClientRect().bottom}catch(e){}
+ try{const t=document.getElementById("tabs");if(t&&t.getClientRects().length){const r=t.getBoundingClientRect();if(r.top>H*.5)bot=r.top}}catch(e){}
+ return{left:0,right:W,top,bottom:bot}}
+function kitToastPlace(el,dir,relax){try{const C=kitToastCol(),R=kitToastKeepRects(el,relax),cw=C.right-C.left;if(cw<60)return false;
+ const ov=(x,y,w,h)=>{let a=0;for(const r of R){const ix=Math.min(x+w,r.right)-Math.max(x,r.left),iy=Math.min(y+h,r.bottom)-Math.max(y,r.top);if(ix>0&&iy>0)a+=ix*iy}return a};
+ /* style px ≠ screen px on a scaled design canvas (KIT §0): calibrate screen = A + s·style */
+ el.style.bottom="auto";el.style.width="max-content";el.style.left="0px";el.style.top="0px";const c0=el.getBoundingClientRect();el.style.left="100px";el.style.top="100px";const c1=el.getBoundingClientRect();
+ const s=(c1.top-c0.top)/100||1;let best=null,least=null;
+ for(const f of [1,.8,.65,.5,.42,.36]){const mw=Math.max(120,Math.floor((cw-16)*f));el.style.maxWidth=Math.floor(mw/s)+"px";el.style.left="0px";el.style.top="0px";
+  const b=el.getBoundingClientRect(),w=b.width,h=b.height,A=b.left,B=b.top;if(h+12>C.bottom-C.top)continue;
+  const xs=[C.left+(cw-w)/2,C.left+8,C.right-8-w];const ys=[];for(let y=C.top+6;y+h<=C.bottom-6;y+=6)ys.push(y);if(dir!=="down")ys.reverse();
+  let hit=null;
+  scan:for(const y of ys)for(const x of xs){const a=ov(x,y,w,h);if(!a){hit={x,y,w,h,mw,A,B};break scan}}
+  if(hit&&(!best||(dir==="down"?hit.y<best.y:hit.y>best.y)))best=hit}
+ const c=best;if(!c){el.style.visibility="hidden";if(!relax)kitToastCollapse(el);return false}el.style.maxWidth=Math.floor(c.mw/s)+"px";el.style.left=((c.x-c.A)/s).toFixed(1)+"px";el.style.top=((c.y-c.B)/s).toFixed(1)+"px";
+ /* no free spot on this screen (a map full of hotspots, a dense list): the toast waits hidden and comes back when a refit finds room (the "!" icon shows it again) */
+ el.style.visibility="";if(el.id==="ktbtoast"&&kitToastPend.t===el.textContent)kitToastPendSet("");return true}catch(e){return false}}
+/* NO FREE SPOT (owner rule via ROOT-56): the alert does not float. It collapses into the stage rail «!» (KIT §77 kitStageRail, glyph mode +
+   kbusy + kbadge, the same button family as the closing alert §77.2); tapping it shows the same line as the toast if a free spot exists now, else
+   as a kit dialog card «Tin báo» (never floated over a person or a card). While the closing alert «!» is up, that button carries it (one «!»).
+   On a screen without a stage (Fold panel tabs) the rail's alert items stand in the rail's fixed corner dock above the tab bar (`dock:true`, §77). */
+function kitToastPend(){return kitToastPend.t||""}
+function kitToastPendSet(t){if(kitToastPend.t===t)return;kitToastPend.t=t;try{if(window.kitStageRail)kitStageRail.paint()}catch(e){}}
+function kitToastCollapse(el){}/* stage-here r4: no rail «!» item — every notice is a kitNotice (jnotice, KIT §42.2): no free top spot → the top-bar box alone */
+function kitToastTap(t){try{if(!t)return;kitToastPendSet("");const el=typeof kitLineToast==="function"?kitLineToast(t):null;
+ if(el&&getComputedStyle(el).visibility!=="hidden")return;/* a free spot now: the line shows as the toast */
+ if(el)el.remove();if(typeof Q!=="undefined"&&typeof showModal==="function"){Q.push({t:"Tin báo",h:`<p>${typeof esc==="function"?esc(t):t}</p>`});showModal()}}catch(e){}}
+window.kitToastPend=kitToastPend;window.kitToastTap=kitToastTap;window.kitToastPeopleRects=kitToastPeopleRects;window.KIT_TOAST_PEOPLE=KIT_TOAST_PEOPLE;
+function kitToastClear(el,dir){return kitToastPlace(el,dir)}/* old name kept for callers */
+window.kitToastClear=kitToastClear;window.kitToastPlace=kitToastPlace;window.kitToastKeepRects=kitToastKeepRects;window.kitToastCol=kitToastCol;window.kitLinePos=kitLinePos;window.KIT_TOAST_KEEP=KIT_TOAST_KEEP;
+/* refit after a screen change (tab switch, shell swap) */
+function kitToastRefit(){try{const a=document.getElementById("ktbtoast");if(a)kitToastPlace(a,"down");const b=document.getElementById("kupdline");if(b)kitLinePos(b)}catch(e){}}
+window.kitToastRefit=kitToastRefit;
+/* while a toast is up it re-checks every 300 ms (tab switches that skip render, sticky bars that move with scroll); stops when it is gone */
+function kitToastWatch(){try{if(kitToastWatch.t)return;kitToastWatch.t=setInterval(()=>{if(!document.getElementById("ktbtoast")&&!document.getElementById("kupdline")){clearInterval(kitToastWatch.t);kitToastWatch.t=0;return}kitToastRefit()},300)}catch(e){}}
+window.kitToastWatch=kitToastWatch;
 function kitLineCss(){if(document.getElementById("kit-line"))return;const st=document.createElement("style");st.id="kit-line";st.textContent=`
 .kupdline{position:fixed;left:50%;transform:translateX(-50%);z-index:9750;max-width:calc(100vw - 24px);margin:0;padding:5px 14px;border-radius:14px;border:1px solid var(--gold,#b8892b);background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .82rem/1.3 var(--body,inherit);box-shadow:0 4px 14px #0004;text-align:center;pointer-events:none;transition:opacity .5s}
 .kupdline.out{opacity:0}`;document.head.appendChild(st)}
 function kitLine(text,ms){kitLineCss();try{if(typeof kShort==="function")text=kShort(text)}catch(e){}let el=document.getElementById("kupdline");if(!el){el=document.createElement("div");el.id="kupdline";el.className="kupdline";el.setAttribute("role","status");document.body.appendChild(el)}
- el.textContent=text;el.classList.remove("out");kitLinePos(el);clearTimeout(kitLine.t);if(ms)kitLine.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},600)},ms);return el}
+ el.textContent=text;el.classList.remove("out");kitLinePos(el);kitToastWatch();clearTimeout(kitLine.t);if(ms)kitLine.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},600)},ms);return el}
 window.kitLine=kitLine;
 
 /* ---------- 5. ONE Sức NEED PER CARD (owner 17:12Z: "Múa trong yến tiệc": "cần Sức trên 20 (có 17)" AND "Sức ≥5 (có 17)") ----------

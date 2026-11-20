@@ -9,7 +9,7 @@ const {chromium}=require('playwright');const [,,BASE,NEW,OLD]=process.argv;const
 const VP=[[755,1000,2],[1000,755,2],[1180,820,2],[1366,1024,2],[844,390,2],[390,844,3]];
 const PLAY=`(async function(n){const shownK={},bad=[];let forced0=SP13.stat.forced;const cap=BAL.spread.cap;
  const ans=()=>{for(let k=0;k<40&&Q.length;k++){if(document.getElementById('modal').hidden)bad.push('modal hidden with '+Q.length+' cards');const m=Q[0];
-   if(!m.__e2e){m.__e2e=1;if(m.__sp13){const k=SP13.now();shownK[k]=(shownK[k]||0)+1}}if(m.opts&&m.opts.length){const i=m.opts.findIndex(o=>!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0));chooseM(i<0?0:i)}else closeModal()}
+   if(!m.__e2e){m.__e2e=1;if(m.__sp13){const k=SP13.now();shownK[k]=(shownK[k]||0)+1}}if(m.opts&&m.opts.length){const i=m.opts.findIndex(o=>!o.off&&!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0));chooseM(i<0?0:i)}else closeModal()}
   try{const ov=document.getElementById('ov');if(ov&&!ov.hidden){const k=document.querySelector('#kg82skip')||document.querySelector('#mgskip')||document.querySelector('#mgok');if(k)k.click()}}catch(e){}};
  for(let i=0;i<n&&!S.dead;i++){ans();used=4;nextBuoi();await new Promise(r=>setTimeout(r,30));
   const k=SP13.now();if((shownK[k]||0)>cap&&SP13.stat.forced===forced0)bad.push('buoi '+k+' shown '+shownK[k]);forced0=SP13.stat.forced;
@@ -25,8 +25,8 @@ const NEWLIFE=`(function(){localStorage.removeItem('hclh-opt');SLOT=3;document.g
   const r=await p.evaluate(PLAY+'(12)');const ow=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);r.hOverflow=ow;r.pageErrors=pe.slice(0,3);out['A '+vp.join('x')]=r;if(r.bad.length||pe.length)fail++;await c.close()}
  /* B */
  {const {c,p,pe}=await page([755,1000,2]);await p.goto(BASE+'/'+OLD);await sleep(2500);
-  const save=await p.evaluate(async(NL)=>{localStorage.clear();eval(NL);for(let i=0;i<8;i++){for(let k=0;k<30&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}used=4;nextBuoi()}
-   for(let k=0;k<30&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}save();const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);o[k]=localStorage.getItem(k)}return{o,had:typeof SP13!=='undefined'}},NEWLIFE);
+  const save=await p.evaluate(async(NL)=>{localStorage.clear();eval(NL);for(let i=0;i<8;i++){for(let k=0;k<30&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}used=4;nextBuoi()}
+   for(let k=0;k<30&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}save();const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);o[k]=localStorage.getItem(k)}return{o,had:typeof SP13!=='undefined'}},NEWLIFE);
   await c.close();out.B_old={hadSpread:save.had,errs:pe.slice(0,3)};
   for(const vp of [[755,1000,2],[1180,820,2]]){const x=await page(vp,[o=>{if(!sessionStorage.getItem('x')){sessionStorage.setItem('x',1);localStorage.clear();for(const k in o)localStorage.setItem(k,o[k])}},save.o]);
    await x.p.goto(BASE+'/'+NEW);await sleep(2500);
@@ -35,7 +35,7 @@ const NEWLIFE=`(function(){localStorage.removeItem('hclh-opt');SLOT=3;document.g
  /* C */
  {const {c,p,pe}=await page([755,1000,2]);await p.goto(BASE+'/'+NEW);await sleep(2500);await p.evaluate(()=>localStorage.clear());await p.evaluate(NEWLIFE);
   const s=await p.evaluate(async()=>{/* play until a data card waits while no code card waits (a save is possible), then save */
-   for(let i=0;i<120&&!S.dead;i++){for(let k=0;k<40&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length){const j=m.opts.findIndex(o=>!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0));chooseM(j<0?0:j)}else closeModal()}
+   for(let i=0;i<120&&!S.dead;i++){for(let k=0;k<40&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length){const j=m.opts.findIndex(o=>!o.off&&!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0));chooseM(j<0?0:j)}else closeModal()}
     if(SP13.L.length&&!SP13.L.some(x=>x.code)&&!Q.length)break;used=4;nextBuoi()}
    const w=SP13.L.map(x=>String(x.m.t||'')+'@'+x.due);save();const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);o[k]=localStorage.getItem(k)}return{o,w,now:SP13.now(),dbg:{quiet,dead:!!S.dead,held:SP13.held,jq:typeof JQ!=='undefined'?JQ.held:null,Q:Q.length,codeW:SP13.L.filter(x=>x.code).length,keys:Object.keys(o)}}});console.log('C save',JSON.stringify(s.dbg),s.w);
   await c.close();

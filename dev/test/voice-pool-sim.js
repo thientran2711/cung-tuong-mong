@@ -10,7 +10,7 @@ const {chromium}=require('playwright');const [,,URL,TS]=process.argv;const T=+TS
   const txt=h=>{const d=document.createElement('div');d.innerHTML=String(h||'');return d.textContent.replace(/\s+/g,' ').trim()};
   const v=rivals.find(x=>!x.queen&&x.alive);const SIT={};
   const add=(k,f)=>{SIT[k]=f};
-  const looks=[["moc","hoppham"],["diem","hoppham"],["vua","giandi"],["vua","photruong"],["dep","hoppham"]];
+  const looks=[["moc","hoppham"],["tuyet","diem"],["vua","giandi"],["vua","photruong"],["dep","hoppham"]];
   for(const k of ["th-scold","th-praise","hh-scold","hh-praise","emp-like","emp-dislike","rival-jealous","rival-tease","rival-praise"])
    for(const [mk,dress] of looks){const host=k.startsWith("th")?"th":k.startsWith("emp")?"emp":k.startsWith("hh")?(rivals.find(x=>x.queen)||"hh"):v;
     add(`toil ${k} ${mk}/${dress}`,()=>toilSay(k,{mk,dress,host}))}
@@ -20,7 +20,7 @@ const {chromium}=require('playwright');const [,,URL,TS]=process.argv;const T=+TS
   add('dress remark under',()=>{const R0=Math.random;Math.random=()=>0;try{return txt(wdRemark(v,"under"))}catch(x){return null}finally{Math.random=R0}});
   if(typeof kOutcome==='function')for(const k of ["th","hh","emp","rival"])for(const ok of [1,0])add(`talk outcome ${k} ${ok?"ok":"fail"}`,()=>kOutcome(k,!!ok));
   const out={};const W=5;/* the same window for every build: BAL.voice.noRepeat */
-  for(const k in SIT){const L=[];S.turn=0;S.tuan=0;S.vl={};for(let i=0;i<T;i++){if(/cycle/.test(k)&&i%3)continue;/* the cycle comes once a month */S.tuan=i%3;S.turn=Math.floor(i/3);let x=null;try{x=SIT[k]()}catch(e){x=null}if(x)L.push([i,String(x).replace(/\d+/g,'#')])}
+  for(const k in SIT){const L=[];S.turn=0;S.tuan=0;S.vmem={};for(let i=0;i<T;i++){if(/cycle/.test(k)&&i%3)continue;/* the cycle comes once a month */S.tuan=i%3;S.turn=Math.floor(i/3);let x=null;try{x=SIT[k]()}catch(e){x=null}if(x)L.push([i,String(x).replace(/\d+/g,'#')])}
    let rep=0;const last={};for(const [i,x] of L){if(last[x]!=null&&i-last[x]<W)rep++;last[x]=i}
    out[k]={n:L.length,distinct:new Set(L.map(x=>x[1])).size,rep6:rep,ex:L.slice(0,3).map(x=>x[1])}}
   return out},T);

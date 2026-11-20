@@ -17,7 +17,7 @@ Chạy: `GAME=<bản dựng có meta charset> INP=inpage6.js node dev/measure/ru
 - HQP: cung riêng, một mình. HH: một mình ở Càn Ninh; residents("kn") chỉ còn HH; palaceOf bỏ ngoại lệ "dưới HH = kn".
 - Quý nhân trở xuống: v.resHead = chủ vị; hết chỗ thì v.pal + v.palLone=1 (một mình một cung trống, nhường khi chủ vị cần).
 - Tần chưa có cung trống: v.palWait=1, tạm ở thiên điện một chủ vị; có chỗ thì dời sang, ghi log.
-- PALN 13 cung: 8 phía đông + 5 phía tây (Vĩnh Thọ, Dực Khôn, Trữ Tú, Hàm Phúc, Thái Cực điện); img/map-hotspots.json có slot 9-13.
+- PALN 10 cung (owner 18/11 ~19:45Z trim): 8 phía đông + 2 phía tây (Vĩnh Thọ, Dực Khôn) from the one table PAL_WEST in jpal.js; Trữ Tú, Hàm Phúc, Thái Cực điện dropped (old saves re-housed by palFix).
 - Vị trí: houseOf(p) → key chủ vị; palaceOf(p) → "kn" | "home" | "r<id>"; palSlot(k) → chỉ số PALN.
 
 ## Cân bằng v9 (11/14 tối) — xem dev/measure/BALANCE_REPORT.md

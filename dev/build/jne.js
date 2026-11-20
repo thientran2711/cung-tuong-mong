@@ -13,9 +13,9 @@
    Save state: only S.neMorn (the morning-after follow-up, §4 below; absent in old saves → nothing). */
 Object.assign(BAL,{nightEnd:{
  /* tier points = s (the night's own score from j8 night1: prep q + talk fit + his mood [+1,0,−1,−2] + luck 0..2, −2 if an over-rank
-    piece was confiscated) + her toilette today (jtoil makeup: tuyệt/đẹp +1, vụng/diêm dúa −1) + talk (−2 when the pillow talk lost her
+    piece was confiscated) + her toilette today (jtoil makeup: sign of the level's beauty points BAL.toil.lv[level].dep − BAL.toil.lvBase — Khuynh thành / Kiều diễm +1, Đoan trang 0, Vụng về −1, bare face 0; makeup-lux) + talk (−2 when the pillow talk lost her
     Sủng or Ân tình) + illness (−2 when she is ill). warm ≥ warm, normal ≥ normal, else cold. */
- warm:6,normal:3,toil:{tuyet:1,dep:1,vua:0,moc:0,vung:-1,diem:-1},talkBad:-2,ill:-2,
+ warm:6,normal:3,talkBad:-2,ill:-2,
  /* his mood after the night (S.emp.mood 0 vui … 3 giận dữ): warm → one step better; cold → one step worse (never to giận dữ) */
  mood:{warm:-1,normal:0,cold:1},moodCap:2,
  /* lonely beat + dawn picture timings (ms); night card list shows after `list` */
@@ -109,7 +109,7 @@ const nightOn=()=>{try{return !!(N&&N.t&&S&&S.tonight==="me"&&Date.now()-N.t<15*
 {const fb0=window.feedback;if(typeof fb0==="function"){window.feedback=function(k){if(window.__kneHold&&(k==="night"||k==="favour"||k==="coin"))return;return fb0.apply(this,arguments)};feedback=window.feedback}}
 const nf0=nightFx;nightFx=function(s){if(!N)N={m0:S.emp.mood,inv:S.inv.length,t:Date.now()};N.s=s;const a0=S.sung,b0=S.an||0;window.__kneHold=1;const r=nf0.apply(this,arguments);N.sung=S.sung;N.an=S.an||0;N.g=S.sung-a0;return r};
 function tierOf(){const P=N||{};let pts=P.s||0;const why=[`đêm ${pts}`];
- try{const t=typeof toilToday==="function"?toilToday(S):null;const v=t?NE.toil[t.makeup]||0:0;if(v){pts+=v;why.push(`điểm trang ${v>0?"+":""}${v}`)}}catch(e){}
+ try{const t=typeof toilToday==="function"?toilToday(S):null;const v=t&&t.makeup?Math.sign(toilLv(toilMk(t)).dep-BAL.toil.lvBase):0;/* makeup-lux: the level's one beauty number (the old NE.toil[t.makeup] read a boolean key: never counted) */if(v){pts+=v;why.push(`điểm trang ${v>0?"+":""}${v}`)}}catch(e){}
  if(P.sung!=null&&((S.sung<P.sung)||((S.an||0)<P.an))){pts+=NE.talkBad;why.push(`lời gối đầu ${NE.talkBad}`)}
  try{if(typeof illOf==="function"&&illOf(S)){pts+=NE.ill;why.push(`đang bệnh ${NE.ill}`)}}catch(e){}
  return{tier:pts>=NE.warm?"warm":pts>=NE.normal?"normal":"cold",pts,why}}
@@ -175,7 +175,7 @@ function kitNewDay(o){const host=o.host;const beats=[];const sea=o.sea||seaNow()
  host.onclick=e=>{e.stopPropagation();if(host.querySelector(":scope > .kmend"))return;T.forEach(clearTimeout);T.length=0;if(i<beats.length-1){i=beats.length-1;show(i)}showEnd()};
  Promise.all(beats.map(b=>preload(b.src,NE.wait))).then(()=>{if(end)return;show(0);T.push(setTimeout(next,beats[0].ms))});return{finish}}
 const dw0=dawn;dawn=function(){const p=PREV;PREV=null;const args=arguments,self=this;
- try{if(S&&!S.dead&&p&&!p.bedded&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)){let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
+ try{if(S&&!S.dead&&p&&!p.bedded&&!screenOff()){let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
   const night=lonelyOf(p),day=dawnOf();window.kneLastDay={night:night&&night.k,day:day.k};
   kitNewDay({host:w,night,day,wx:S.wx,then:()=>{w.classList.remove("on");dw0.apply(self,args)}});return}}catch(e){console.error(e)}
  return dw0.apply(this,arguments)};
@@ -207,8 +207,8 @@ function morningAfter(){const M=S&&S.neMorn;if(!M||S.dead)return;if(M.d===wk())r
   Q.push({t:"Lời ra tiếng vào",who,art:"img/ev-toil-rival-tease.webp",hideOut:true,h:`<p>${nm.charAt(0).toUpperCase()+nm.slice(1)} che miệng cười khi gặp ngươi lúc thỉnh an: “Nghe nói đêm qua ${v?kSay(v,S,"{goi}",{m:"cool"}):"muội muội"} hầu giá, mà Hoàng thượng chẳng mấy vui lòng?”</p><p>Mấy phi tần khác liếc nhau, khẽ cười.</p><p class="past">Danh ${A.coldDanh}.</p>`,
    opts:[{n:"Nhẫn nhịn",fx:{duc:A.bearDuc,danh:A.bearDanh},hideOut:true,hint:"giữ tiếng hiền đức, nhưng người ta cho là ngươi yếu thế",risk:"an toàn",go:()=>{log("Ta nhẫn nhịn, không đáp một lời.")}},
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
-    {n:"Đáp lại",fx:{suc:A.replySuc},hideOut:true,hint:"đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì nàng ta càng ghét",risk:"có rủi ro",
-     go:()=>{if(roll(BAL.toil?BAL.toil.replyWin:50)){apply({danh:BAL.toil?BAL.toil.replyDanh:2});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{if(v){try{relAdd(S,v,-3)}catch(e){}v.ghen=cl((v.ghen||0)+2,0,100)}log("Ta đáp lại, không khí càng gượng.")}}}]})}}
+    {n:"Đáp lại",fx:{suc:A.replySuc},p:BAL.toil.replyWin,hideOut:true,hint:"đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì nàng ta càng ghét",risk:"có rủi ro",
+     go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{if(v){try{relAdd(S,v,BAL.eff.jne.go)}catch(e){}ghenUp(v,2,"bị ngươi đáp lời không nể",S)}log("Ta đáp lại, không khí càng gượng.")}}}]})}}
 {const et1=endTurn;endTurn=function(){const r=et1.apply(this,arguments);try{morningAfter()}catch(e){console.error(e)}return r}}
 window.kneMorningAfter=morningAfter;
 
@@ -222,7 +222,7 @@ window.kneMorningAfter=morningAfter;
             Both warm/tender pictures were drawn by review/pic-dupes (night_gens.txt ksDhGD716B / jUXCWBYLD0).
      night-end card (this file)                 → ne-night-<warm|normal|cold> by the card tier.
    Same thresholds as the j8 text (6 / 3), so picture and words always agree. */
-const NT_TONE=s=>s>=6?"warm":s>=3?"normal":"cold";
+const NT_TONE=s=>s>=BAL.nightEnd.warm?"warm":s>=BAL.nightEnd.normal?"normal":"cold";
 /* pictures drawn by review/pic-dupes (reuse first): warm = he draws her close (ev-night2-warm), normal = hand in hand (ev-night2-tender) */
 const NT_PIC={warm:"ev-night2-warm",normal:"ev-night2-tender"};
 if(typeof kitEvBanner==="function"){const eb0=kitEvBanner;kitEvBanner=function(m){try{if(m&&m.pid==="night2"&&m.pp&&typeof m.pp.s==="number"){const tn=NT_TONE(m.pp.s);

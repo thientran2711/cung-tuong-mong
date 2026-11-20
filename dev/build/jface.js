@@ -101,7 +101,7 @@ KIT_FACEFX.add({id:"ill",z:10,ready:true,                  /* owner approved (pi
   if(i&&i.k!=="docman"&&(i.k!=="longthe"||kd==="emp"))return{lvl:cl(i.st|0,1,3),ill:i};                      /* long thể bất an is the Emperor's own illness */
   if((p.sick||0)>0)return{lvl:2};
   if(kd==="kid"&&typeof p.hp==="number"&&p.hp<FXF.kidHp[0])return{lvl:p.hp<FXF.kidHp[1]?2:1,kid:true};     /* a child worn down (the same hp<35 the Hoàng tự list calls "ốm") */
-  if(typeof p.suc==="number"&&p.suc<FXF.weakSuc&&!(p.pz&&p.pz.until>wk()))return{lvl:1,weak:true};return null},
+  if(typeof p.suc==="number"&&(p.suc<FXF.weakSuc||typeof khB==="function"&&khB()&&khOf(p)<khB().faceLo)&&!(p.pz&&p.pz.until>wk()))return{lvl:1,weak:true};return null},
  seen:(p,st)=>p===S||(st.ill?fxIllSeen(p)&&fxSeen(p):fxSeen(p)),
  sac:(p,st)=>FXF.ill[st.lvl],
  chip:(p,st)=>st.ill?(["consort","player"].includes(KIT_FACEFX.kind(p))?null:[fxIllName(st.ill),"hot"]):[st.weak?"Sắc mặt nhợt nhạt":"Người ốm yếu, xanh xao","hot"],   /* a consort's illness already has its own chip (j13 illName) */
@@ -116,7 +116,7 @@ function pzGive(p,sev,how,by,weeks){if(!p||!fxLive(p))return;sev=cl(sev|0,1,2);c
  p.pz={sev,until:u,how:how||"",by:fxKey(by),at:wk(),dx:0,nt:0}}
 function pzOf(p){if(!p||!fxLive(p))return null;if(p.pz&&p.pz.until>wk())return p.pz;const i=typeof illOf==="function"?illOf(p):null;if(i&&i.k==="docman")return{sev:i.st>=2?2:1,ill:1};return null}
 function fxTogether(p){try{return typeof together!=="function"||!!together(S,p)}catch(e){return false}}
-function fxObservant(){try{return (S.mat||0)>=3||((S.arts&&S.arts.y)||0)>=2||!!S.doctor}catch(e){return false}}
+function fxObservant(){try{return eyes(S)>=3||((S.arts&&S.arts.y)||0)>=2||!!S.doctor}catch(e){return false}}
 KIT_FACEFX.add({id:"doc",z:12,ready:true,                  /* owner approved (pilot 2) */
  state:p=>pzOf(p),
  seen:(p,st)=>fxSeen(p),                                /* the face itself shows to anyone who sees her; what it MEANS needs an eye (chip) */
@@ -130,12 +130,12 @@ KIT_FACEFX.add({id:"doc",z:12,ready:true,                  /* owner approved (pi
 function pzWeek(p){const z=p&&p.pz;if(!z)return;if(z.until<=wk()){p.pz=null;fxLog(p,p===S?"Môi ngươi đã hồng trở lại, độc tan hết.":`${fxName(p)} đã khỏe lại, sắc môi hồng như cũ.`);return}
  if(p!==S&&(roll(FXF.docNpcHeal)||((p.arts&&p.arts.y)||0)>=2))z.until--;
  if(p!==S&&!z.nt&&fxObservant()&&fxSeen(p)&&(fxTogether(p)||roll(40))){z.nt=1;let t=`Ngươi để ý môi ${fxName(p)} tím tái, sắc mặt xám, giống người trúng độc.`;
-  const by=z.by&&typeof byKey==="function"?byKey(z.by):null;if(by&&by!==S&&roll(FXF.docNotice+(S.doctor?20:0))){evA(S,by,1);t+=` Ngươi lần theo thang thuốc, ra dấu vết người của ${by.name}: Chứng cứ về ${by.name} +1.`}try{log(t)}catch(e){}}}
+  const by=z.by&&typeof byKey==="function"?byKey(z.by):null;if(by&&by!==S&&roll(FXF.docNotice+(S.doctor?20:0))){evA(S,by,BAL.eff.jface.evPzWeek);t+=` Ngươi lần theo thang thuốc, ra dấu vết người của ${by.name}: Chứng cứ về ${by.name} ${balSg(BAL.eff.jface.evPzWeek)}.`}try{log(t)}catch(e){}}}
 PEND.pzcard=pp=>{const z=S&&S.pz;if(!z||z.until<=wk())return null;const o=[];const y=(S.arts&&S.arts.y)||0;
  o.push(ch70("Mời thái y bắt mạch, giải độc",{c:{bac:-FXF.docMed},wt:[G70("rõ là độc gì, mau tan")],ok:()=>{z.dx=1;z.until=Math.max(wk()+1,z.until-2);let t="Thái y bắt mạch, nói ngươi trúng độc, kê thang giải độc.";
-  const by=z.by&&typeof byKey==="function"?byKey(z.by):null;if(by&&by!==S&&roll(40+(S.doctor?20:0))){evA(S,by,1);t+=` Thái y nhận ra vị độc, lần ra người của ${by.name} từng mua: Chứng cứ về ${by.name} +1.`}return t}}));
+  const by=z.by&&typeof byKey==="function"?byKey(z.by):null;if(by&&by!==S&&roll(BAL.odb.jface.rbOk+(S.doctor?20:0))){evA(S,by,BAL.eff.jface.evOk);t+=` Thái y nhận ra vị độc, lần ra người của ${by.name} từng mua: Chứng cứ về ${by.name} ${balSg(BAL.eff.jface.evOk)}.`}return t}}));
  o.push(ch70("Uống thuốc giải trong rương",{need:[{t:kitWhyItem("thuốc giải"),ok:(S.inv||[]).some(e=>e.k==="giaidoc"&&!e.h),w:kitWhenItem()}],wt:[G70("độc tan ngay")],k:[R70("dùng hết 1 thuốc giải")],ok:()=>{takeItem(S,"giaidoc");S.pz=null;return "Ngươi uống thuốc giải, môi hồng trở lại."}}));
- o.push(ch70("Tự sắc thuốc giải độc",{p:cl(30+y*15,5,95),c:{suc:-3},wt:[G70("độc tan sớm hơn")],lt:[R70("uống sai vị, lâu khỏi hơn")],ok:()=>{z.until=Math.max(wk()+1,z.until-1);return "Ngươi tự sắc cam thảo, lục đậu giải độc."},no:()=>{z.until++;return "Thuốc không hợp, độc lâu tan hơn."}}));
+ o.push(ch70("Tự sắc thuốc giải độc",{p:oddsCl(30+y*15),c:{suc:-3},wt:[G70("độc tan sớm hơn")],lt:[R70("uống sai vị, lâu khỏi hơn")],ok:()=>{z.until=Math.max(wk()+1,z.until-1);return "Ngươi tự sắc cam thảo, lục đậu giải độc."},no:()=>{z.until++;return "Thuốc không hợp, độc lâu tan hơn."}}));
  o.push(ch70("Nằm nghỉ chờ khỏi",{wt:[G70("không tốn gì")],k:[R70(`còn ${fxLeft(z.until)} tuần`)],ok:()=>"Ngươi nằm nghỉ, uống nước cháo loãng."}));
  return{who:pMe(),t:`<p>Môi ngươi tím tái, da xám đi${z.dx?" — thái y nói là trúng độc":", người lả đi không rõ vì sao"}: Sắc đang mất ${FXF.doc[z.sev]}; còn chừng ${fxLeft(z.until)} tuần.</p>`,o}};
 
@@ -158,11 +158,11 @@ KIT_FACEFX.add({id:"phat",z:90,ready:true,                 /* no picture: chip a
  seen:(p,st)=>fxSeen(p),
  chip:(p,st)=>[`${PEN_N[st.k]||PEN_N.quy} · đi chậm · còn ${fxLeft(st.until)} tuần`,"hot"]});
 (function(){const t0=travel;travel=function(a,b){const r=t0.apply(this,arguments);try{if(r>0&&S&&S.pen&&S.pen.until>wk())return r+1}catch(e){}return r}})();
-(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(v&&v.pen&&v.pen.until>wk()&&roll(50))return[]}catch(e){}return O}})();
+(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(v&&v.pen&&v.pen.until>wk()&&npwPick(["go","low"],k=>fxPenW(v,t,k))==="low")return[]}/* npc-purpose G2c: while punished she lies low unless her grudge outweighs her fear */catch(e){}return O}})();
 
 /* ---------- causes for slap + punishment ---------- */
 /* maid path (j42): talking back to the mistress, refusing her order, the beating */
-(function(){try{const s0=PEND.cnvScold;if(s0)PEND.cnvScold=function(){const d=s0.apply(this,arguments);try{const op=d&&d.o&&d.o.find(x=>x.n==="Cãi lại");const m=typeof srvM==="function"?srvM():null;if(op&&op.go){const g=op.go;op.go=function(){const q0=S.suc;const r=g.apply(this,arguments);try{if(S.suc<q0)penGive(S,"quy","cãi lại chủ");else if(roll(BAL.slap.scold))slapGive(S,m,"cãi lại")}catch(e){}return r}}}catch(e){}return d}}catch(e){}})();
+(function(){try{const s0=PEND.cnvScold;if(s0)PEND.cnvScold=function(){const d=s0.apply(this,arguments);try{const op=d&&d.o&&d.o.find(x=>x.n==="Cãi lại");const m=typeof srvM==="function"?srvM():null;if(op&&op.go){const g=op.go;op.go=function(){const q0=S.suc;const r=g.apply(this,arguments);try{if(S.suc<q0)penGive(S,"quy","cãi lại chủ");else if(m&&npcWhy("fxSlapBack",{p:m},()=>roll(BAL.slap.scold)))slapGive(S,m,"cãi lại")/* npc-purpose G2c: a mistress angered by the answer */}catch(e){}return r}}}catch(e){}return d}}catch(e){}})();
 (function(){try{const s0=PEND.cnvOrd;if(s0)PEND.cnvOrd=function(){const d=s0.apply(this,arguments);try{const op=d&&d.o&&d.o.find(x=>x.n==="Từ chối");if(op&&op.go){const g=op.go;op.go=function(){const q0=S.suc;const r=g.apply(this,arguments);try{if(S.suc<q0&&!S.dead)penGive(S,"quy","từ chối lệnh chủ")}catch(e){}return r}}}catch(e){}return d}}catch(e){}})();
 (function(){if(typeof srvMoodEvent!=="function")return;const s0=srvMoodEvent;srvMoodEvent=function(){const n=Q.length;const r=s0.apply(this,arguments);try{if(Q.length>n&&Q[Q.length-1]&&Q[Q.length-1].t==="Bị đánh đòn"&&!S.dead)penGive(S,"truong","bị chủ sai đánh")}catch(e){}return r}})();
 /* the acts, two-way (same rules for her and every consort): Tát (higher rank, same place) and Phạt quỳ (Hoàng hậu, or three ranks above) */
@@ -171,9 +171,9 @@ function fxAuth(a,t){try{return !!a&&!!t&&a!==t&&(a.queen||(a===S&&S.rank>=7)||r
    SLAP.next = the tier chosen for the very next tat (consumed here). A harder slap costs more Đức, leaves a deeper grudge and a darker mark that others can report. */
 const SLAP={next:0};window.SLAP=SLAP;
 function slapEvidence(a,t,sev){try{const B=BAL.slap;let r="";if(a!==S&&a.alive===false)return r;
- if(B.evT[sev]&&roll(B.evT[sev])&&t!==a){evA(t,a,1);r+=`${NMc(t)} ghi nhớ cái tát này (chứng cứ về ${NM(a)} +1). `}
+ if(B.evT[sev]&&roll(B.evT[sev])&&t!==a){evA(t,a,BAL.eff.jface.evSlapEvidence);r+=`${NMc(t)} ghi nhớ cái tát này (chứng cứ về ${NM(a)} ${balSg(BAL.eff.jface.evSlapEvidence)}). `}
  const W=(typeof liveRivals==="function"?liveRivals(true):[]).filter(x=>x!==a&&x!==t);
- if(B.evW[sev]&&W.length&&roll(B.evW[sev])){const w=W[Math.floor(Math.random()*W.length)];evA(w,a,1);if(a===S)r+="Có kẻ trông thấy, ghi lại chuyện này. "}return r}catch(e){return""}}
+ if(B.evW[sev]&&W.length&&roll(B.evW[sev])){const w=W[Math.floor(Math.random()*W.length)];evA(w,a,BAL.eff.jface.evSlapEvidence_2);if(a===S)r+="Có kẻ trông thấy, ghi lại chuyện này. "}return r}catch(e){return""}}
 A("tat","Tát",{c:{},ok:(a,t)=>together(a,t)&&rkOf(a)>rkOf(t)&&!(t.slap&&t.slap.until>wk()),o:()=>100,x:"đánh nhẹ, vừa hay nặng tùy tay: nàng in dấu tay trên má, Sắc giảm vài tuần · Đức ngươi giảm theo độ nặng · nàng oán ngươi",f:(a,t)=>{
  const B=BAL.slap;let sev=cl(SLAP.next|0||B.def,1,3);SLAP.next=0;const dc=B.duc[sev];
  if(typeof ducAdd==="function")ducAdd(a,dc,"tát người");else ap(a,{duc:dc});relAdd(t,a,B.rel[sev]);if(B.oan[sev])oanAdd(t,a,B.oan[sev]);slapGive(t,a,"",sev);let r=`${NMc(a)} giáng một cái tát ${B.nm[sev]} lên má ${NM(t)}. `;
@@ -235,8 +235,8 @@ function fxIllMonth(p){if(!p||!KIT_FACEFX.live(p))return;const kd=KIT_FACEFX.kin
   if(roll(base+(L.length?3:0))){const k=L.length&&roll(70)?pick(L)[0]:pick(["lao","matngu","phonghan"]);if(k==="longthe"||k==="docman"||k==="hausan"||k==="daumua")return;p.ill={k,st:1,known:fxSeen(p)};if(fxSeen(p))log(`${nm} mắc ${ILL[k].n.toLowerCase()}.`)}
   else{const o=KIT_FACEFX.owner(p),mates=KIT_FACEFX.everyone().filter(x=>x!==p&&KIT_FACEFX.owner(x)===o);const near=mates.find(x=>illOf(x)&&ILL[x.ill.k].cont);if(near&&roll(8)){p.ill={k:near.ill.k,st:1,known:fxSeen(p)};if(fxSeen(p))log(`${nm} nhiễm ${ILL[near.ill.k].n.toLowerCase()}.`)}}return}
  const d=ILL[i.k];if(kd==="kid"&&typeof p.hp==="number")p.hp-=5*i.st;const c=careOdds(p);
- if(roll(30+c-(d.slow?15:0))){p.ill=null;if(fxSeen(p))log(`${nm} đã khỏi ${d.n.toLowerCase()}.`);return}
- if(i.st<3&&roll(35-c/2)){i.st++;if(fxSeen(p))log(`${nm}: ${d.n.toLowerCase()} trở ${STG[i.st]}.`);return}
+ if(roll(BAL.odb.jface.rbFxIllMonth+c-(d.slow?15:0))){p.ill=null;if(fxSeen(p))log(`${nm} đã khỏi ${d.n.toLowerCase()}.`);return}
+ if(i.st<3&&roll(BAL.odb.jface.rbFxIllMonth_2-c/2)){i.st++;if(fxSeen(p))log(`${nm}: ${d.n.toLowerCase()} trở ${STG[i.st]}.`);return}
  if(i.st===3&&d.die&&roll(25*d.die)){
   if(kd==="kid"){if(typeof kidDie==="function"){const mom=KIT_FACEFX.owner(p);const t=kidDie(p,"mất vì "+d.n.toLowerCase(),mom===S);if(t)log(t)}}
   else if(p!==S.maid&&!(S.court&&Object.values(S.court).includes(p))){const ow=typeof ownerOf==="function"?ownerOf(p):null;if(ow&&ow.staff){ow.staff.splice(ow.staff.indexOf(p),1);if(fxSeen(p))log(`${nm} mất vì ${d.n.toLowerCase()}.`)}}}}
@@ -247,17 +247,18 @@ function fxServants(){const L=[];for(const p of [S].concat(rivals||[]))for(const
 function fxHarm(by,t,how){const kind=pick(["tat","rash","doc"]);const bn=fxName(by);
  if(kind==="tat")slapGive(t,by,how);else if(kind==="rash")rashGive(t,1,"phấn lạ",by===S?null:by);else{pzGive(t,1,"độc ngấm dần",by,FXF.docWk[1]);
   if(fxSeen(t)&&fxObservant())log(`${fxName(t)} môi tím tái, sắc mặt xám: có người ra tay.`)}}
-function fxServMonth(){const all=fxServants();for(const s of all){if(!KIT_FACEFX.live(s))continue;const bad=s.grudge||(s.loyal!=null&&s.loyal<30);if(!bad||!roll(8))continue;
-  const o=KIT_FACEFX.owner(s);const mates=all.filter(x=>x!==s&&KIT_FACEFX.owner(x)===o&&KIT_FACEFX.live(x));if(!mates.length)continue;fxHarm(s,pick(mates),"ghen ghét trong cung")}
+function fxPenW(v,t,k){const B=BAL.ag.why.fxSrv;if(k==="go")return t?Math.max(0,hostility(v,t)):0;return B.penLow+Math.max(0,netQ(v,"timid"))*B.timid}
+function fxServMonth(){const all=fxServants();for(const s of all){if(!KIT_FACEFX.live(s))continue;const o=KIT_FACEFX.owner(s);const mates=all.filter(x=>x!==s&&KIT_FACEFX.owner(x)===o&&KIT_FACEFX.live(x));if(!mates.length)continue;
+  const w=npcWhy("fxSrvHarm",{p:s,mates},o=>!!o.tgt&&roll(BAL.ag.why.fxSrv.p));if(!w)continue;fxHarm(s,w.tgt,w.why)}/* npc-purpose G2c: a servant with a grudge strikes the mate she is jealous of */
  for(const v of liveRivals(true)){let hot=0;try{hot=typeof hostility==="function"?hostility(v,S):0}catch(e){}
-  if(hot>=40&&roll(6)){const t=pick((S.staff||[]).concat(S.maid&&typeof S.maid==="object"?[S.maid]:[]));if(t&&KIT_FACEFX.live(t)){fxHarm(v,t,"");if(roll(40)){try{evA(S,v,1);if(fxSeen(t))log(`Ngươi lần ra dấu vết: người của ${v.name} ra tay với ${fxName(t)}: Chứng cứ về ${v.name} +1.`)}catch(e){}}}}
-  const v2=pick(liveRivals(true).filter(x=>x!==v&&(x.staff||[]).length));if(v2&&roll(2+(typeof hostility==="function"?(()=>{try{return hostility(v,v2)>=40?3:0}catch(e){return 0}})():0))){const t=pick(v2.staff);if(t&&KIT_FACEFX.live(t))fxHarm(v,t,"")}}}
+  const mw=npcWhy("fxRivSrv",{p:v},()=>roll(BAL.ag.why.fxSrv.rivP));if(mw){const t=mw.tgt;/* npc-purpose G2c: her grudge against the player picks the servant most loyal to her */if(t&&KIT_FACEFX.live(t)){fxHarm(v,t,"");if(roll(40)){try{evA(S,v,BAL.eff.jface.evFxServMonth);if(fxSeen(t))log(`Ngươi lần ra dấu vết: người của ${v.name} ra tay với ${fxName(t)}: Chứng cứ về ${v.name} ${balSg(BAL.eff.jface.evFxServMonth)}.`)}catch(e){}}}}
+  const m2=npcWhy("fxRivSrv2",{p:v},o=>!!o.tgt&&roll(BAL.odb.jface.rbFxServMonth+(hostility(v,o.tgt)>=BAL.ag.why.fxSrv.hot?BAL.ag.why.fxSrv.hostAdd:0)));const v2=m2&&m2.tgt;if(v2){const t=npwPick(v2.staff||[],x=>KIT_FACEFX.live(x)?1+Math.max(0,x.loyal||0):0);if(t)fxHarm(v,t,m2.why)}}}/* npc-purpose G2c: only at a consort she bears a grudge against */
 (function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead)fxServMonth()}catch(e){console.error(e)}return r}})();
 /* a mark still on the cheek (vừa / nặng) may be seen and reported: one witness keeps evidence against whoever slapped, once per mark */
 function slapReport(p){const z=p&&p.slap;if(!z||z.rep||z.until<=wk())return;const c=BAL.slap.rep[slapSev(p)];if(!c||!roll(c))return;
  const who=z.by==="me"?S:(rivals||[]).find(v=>v.id===z.by);if(!who||who===p)return;
- const W=(liveRivals(true)||[]).filter(x=>x!==who&&x!==p);if(!W.length)return;z.rep=1;const w=W[Math.floor(Math.random()*W.length)];evA(w,who,1);
- if(who===S)log("Dấu tay trên má "+fxWho(p)+" lọt vào mắt người ngoài: có kẻ ghi nhớ chuyện ngươi ra tay (chứng cứ về ngươi +1).")}
+ const W=npcWit(whereOf(KIT_FACEFX.owner(p)||p),null,{pool:liveRivals(true)||[],not:[who,p],vs:who}).filter(x=>x.s>0);if(!W.length)return;z.rep=1;const w=W[0].p;evA(w,who,BAL.eff.jface.evSlapReport);/* npc-purpose G2c: the witness is someone really there, the keenest eye / deepest grudge first */
+ if(who===S)log("Dấu tay trên má "+fxWho(p)+` lọt vào mắt người ngoài: có kẻ ghi nhớ chuyện ngươi ra tay (chứng cứ về ngươi ${balSg(BAL.eff.jface.evSlapReport)}).`)}
 /* ---------- weekly pass, the same for everyone ---------- */
 (function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&w0!=null&&wk()!==w0){
   for(const p of KIT_FACEFX.everyone()){if(!p)continue;if(p.pz)pzWeek(p);try{slapReport(p)}catch(e){}if(p.ill&&p.ill.until!=null&&p!==S&&p.ill.until<=wk()){p.ill=null;fxLog(p,`${fxName(p)} đã khỏi bệnh.`)}if(p.slap&&p.slap.until<=wk()){p.slap=null;if(p===S)log("Dấu tay trên má ngươi đã lặn.")}if(p.pen&&p.pen.until<=wk())p.pen=null;if(p.expr&&p.expr.until<=wk())p.expr=null}

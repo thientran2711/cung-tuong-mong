@@ -8,7 +8,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=
  const ctx=await b.newContext({serviceWorkers:'block',ignoreHTTPSErrors:true});const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.addInitScript(()=>{window.__nlInner=1});await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(2500);
  const r=await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.querySelectorAll('.krbox').forEach(e=>e.remove());
-  SLOT=2;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){start();if(!isSrv())break}
+  SLOT=2;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}
   Q.length=0;S.rank=3;S.inv.push({k:'tramngoc',w:1},{k:'nhansam'});
   if(typeof tsbPetAdd==='function'){tsbPetAdd(S,'cho','Hoàng thượng ban');tsbPetAdd(S,'hoami','nhờ thái giám mua');S.pets[1].care=25}
   else{S.pets=[{t:'cho',care:70,at:0,src:'emp',from:'Hoàng thượng ban'},{t:'hoami',care:25,at:0,src:'buy',from:'nhờ thái giám mua'},{t:'linhquy',care:60,at:0,src:'emp'}];S.petOn=0}

@@ -72,7 +72,7 @@ function kitFloorFit(){try{const st=$("stage"),im=$("scimg");if(!st||!im)return;
  const ftA=KIT_FLOOR[scene]!=null?KIT_FLOOR[scene]:ft;const fs=A.feet!=null?A.feet:ftA+.9*(1-ftA);let feet=Math.min(H*.97,y0+fs*dh);
  const old=st.__kfa;st.__kfa={feet:Math.round(feet),ax:Math.round(x0+A.x*dw),scene};
  if(!old||old.feet!==st.__kfa.feet||old.ax!==st.__kfa.ax){clearTimeout(st.__kfaT);st.__kfaT=setTimeout(()=>{try{window.j59lay&&window.j59lay()}catch(e){}},0)}const kfb=Math.max(H*.03,24,H-feet);st.style.setProperty("--kfb",kfb.toFixed(0)+"px");st.style.setProperty("--kfh",Math.max(H*.45,H-kfb-H*.03).toFixed(0)+"px");st.dataset.kfloor=name}catch(e){}}
-(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitFloorFit();return r};
+(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);(window.renderAfter||((k,f)=>f()))("kitFloorFit",kitFloorFit)/* oi-render: reads the stage size — once at the end of a render (jlag2) */;return r};
  try{let ro=null;const hook=()=>{const st=$("stage");if(!st||ro)return;ro=new ResizeObserver(()=>kitFloorFit());ro.observe(st)};if(document.readyState!=="loading")hook();else addEventListener("DOMContentLoaded",hook)}catch(e){}
  const st=document.createElement("style");st.id="k2b-floor";st.textContent=`
 .stage[data-kfloor] .scimg{transition:background-position .2s}
@@ -143,9 +143,9 @@ function kitStageEdge(){try{const st=$("stage");if(!st)return;const sr=st.getBou
    window.kitCourtKnown(who) -> bool (default: the Emperor's mood is public; Thái hậu / Hoàng hậu moods are "chưa rõ" until a module says). ---------- */
 function kitCourtRows(){const out=[];if(!S||S.dead)return out;const mood=w=>{try{if(typeof window.kitCourtMood==="function"){const r=window.kitCourtMood(w);if(r!=null)return r}}catch(e){}
   if(w==="emp"){const m=MOODS[S.emp&&S.emp.mood];return m?[m[0],m[1]]:null}return null};
- const att=(n)=>typeof affW==="function"?[affW(n),n>10?"g":n<-10?"r":""]:[String(n),""];
+ const att=(n)=>typeof affW==="function"?[affW(n),n>BAL.quyLv[2]?"g":n<BAL.quyLv[1]?"r":""]:[String(n),""];
  const known=w=>{try{if(typeof window.kitCourtKnown==="function"){const r=window.kitCourtKnown(w);if(r!=null)return r}}catch(e){}return true};
- out.push({k:"emp",who:"Hoàng thượng",f:pEmp(),mood:mood("emp"),att:known("emp")?[S.sung>=60?"Sủng ái":S.sung>=30?"Để mắt":S.sung>=10?"Biết mặt":"Chưa để ý",S.sung>=30?"g":""]:null});
+ out.push({k:"emp",who:"Hoàng thượng",f:pEmp(),mood:mood("emp"),att:known("emp")?[S.sung>=BAL.sungLv.card[2]?"Sủng ái":S.sung>=BAL.sungLv.card[1]?"Để mắt":S.sung>=BAL.sungLv.card[0]?"Biết mặt":"Chưa để ý",S.sung>=BAL.sungLv.card[1]?"g":""]:null});
  if(!S.thDead)out.push({k:"th",who:"Thái hậu",f:pTH(),mood:mood("th"),att:known("th")?att(S.th|0):null});
  const q=typeof queenP==="function"?queenP():null;if(q&&q!==S)out.push({k:"hh",who:"Hoàng hậu",f:pv(q),mood:mood("hh"),att:known("hh")?att(S.hh|0):null,ref:q});
  return out}
@@ -191,33 +191,34 @@ kitFigRects=function(){const st=$("stage");if(!st)return[];const out=[];st.query
 
 /* ---------- 6. OPTION MODE "cost" — hidden outcomes for EVENT choices (owner 11/14, 11/15 14:30Z, KIT 28.6) ----------
    Every event choice (main / side stories, weekly events, festivals, NPC visits, dilemmas…): the option shows ONLY what it costs (Sức, khắc,
-   Bạc) and its Cần — no Được / Mất / Kèm, no odds word. An option with no cost has NO Tốn row (owner 13:25Z: never "Tốn: không"). Under it the
-   kit HINT row and in its head the kit RISK chip (6b). The result card afterwards shows the true numbers. Active acts keep everything.
+   Bạc), its Cần and the kit ODDS METER of its real odds (owner 19/11 ~01:48Z; a certain option shows «Nắm chắc») — no Được / Mất / Kèm. An
+   option with no cost has NO Tốn row (owner 13:25Z: never "Tốn: không"). Under it the kit HINT row (6b). The result card afterwards shows the true numbers. Active acts keep everything.
    Use (data only): a Q / kitModal item with `hideOut:true` (every option) or an option with `hideOut:true`; any priced button may also carry
    `data-khide="1"`. Which items are events: `kitIsEventChoice` below. ---------- */
 const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b/i;
-/* ---------- 6b. KIT HINT + KIT RISK (owner 11/15 15:05Z / 15:10Z, KIT 28.6 — shared kit parts kitHint / kitHintRow / kitRisk) ----------
-   kitHint(o, m, lv) → {hint, risk}: read from the option's OWN data (fx + its x / j67 text: the odds, people and state of THIS moment), so it is
+/* ---------- 6b. KIT HINT + ODDS METER (owner 11/15 15:05Z / 15:10Z, 19/11 ~01:48Z, KIT 28.6 — shared kit parts kitHint / kitHintRow / kitOptOdds) ----------
+   kitHint(o, m, lv) → {hint}: read from the option's OWN data (fx + its x / j67 text: the odds, people and state of THIS moment), so it is
    true now and changes with the context (no fixed answer to learn). Words only: stat numbers never appear (a count in a story phrase is
    written in words: "hai mươi trượng"). It names the main gain FIRST, then the price beyond Tốn, then what a failure brings.
    Clarity lv (kitHintLevel: her Tâm cơ / Tai mắt, BAL.hint*):
      0 vague — generic people ("bề trên", "đối thủ"), no chance word; a deadly failure is always said ("hỏng thì mất mạng").
      1 plain — the roles (Thái hậu, Hoàng hậu, Hoàng thượng), a rough chance (dễ thành / thành bại khó đoán / khó thành) and the failure.
      2 sharp — names (the rival by name) and the reading of the moment the data carries ("ngài trọng tài, rất hợp").
-   Risk: none / sure → "an toàn"; Khó / Liều or a deadly failure / side risk → "liều"; any other odds, "Khó lường" or a side risk → "có rủi ro".
-   An option may carry its own `hint` (string or fn(lv)) and `risk`; hints may never lie (an override must match the data). */
-const KIT_HINT_LADDER=/(Liều|Khó lường|Khó|Năm ăn năm thua|Khá chắc|Rất chắc|Nắm chắc|Chắc chắn|Chắc)/;
-function kitHintLevel(){try{const t=S.tamco||0,m=S.mat||0;const B=typeof BAL==="object"?BAL:{};if(t>=(B.hintSharp||45)||m>=(B.hintMat||3))return 2;if(t>=(B.hintMid||25))return 1}catch(e){}return 0}
+   ODDS (owner 19/11 ~01:48Z, canon overwrite of the 14/11 15:05Z «an toàn / có rủi ro / liều» risk chip, kitRisk RETIRED): the card shows the
+   kit odds meter kitOdds (7 segments red → green + the ladder word) of the option's REAL odds; a certain option (no roll) shows «Nắm chắc».
+   An option may carry its own `hint` (string or fn(lv)); hints may never lie (an override must match the data). */
+const KIT_HINT_LADDER=/(Liều|Khó|Năm ăn năm thua|Khá chắc|Rất chắc|Nắm chắc|Chắc)/;
+function kitHintLevel(){try{const t=S.tamco||0,m=eyes(S);const B=typeof BAL==="object"?BAL:{};if(t>=(B.hintSharp)||m>=(B.hintMat))return 2;if(t>=(B.hintMid))return 1}catch(e){}return 0}
 /* a count inside a story phrase in words (1..999): "20 trượng" → "hai mươi trượng" */
 function kitNumVi(n){const D=["không","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];n=Math.round(+n);if(!(n>=0&&n<1000))return String(n);
  const two=x=>{if(x<10)return D[x];const t=Math.floor(x/10),u=x%10;const a=t===1?"mười":D[t]+" mươi";return u===0?a:a+" "+(u===1&&t>1?"mốt":u===5?"lăm":u===4&&t>1?"tư":D[u])};
  if(n<100)return two(n);const h=Math.floor(n/100),r=n%100;return D[h]+" trăm"+(r===0?"":r<10?" lẻ "+D[r]:" "+two(r))}
 /* the option's raw kit line (the same text its act card would read), split into labelled items */
-function kitOptModel(o){let raw="";try{raw=o&&o.j67?String(o.j67):typeof dilLineRaw==="function"?dilLineRaw(o):String(o&&o.x||"")}catch(e){raw=String(o&&o.x||"")}
+function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):typeof dilLineRaw==="function"?dilLineRaw(o):String(o&&o.x||"")}catch(e){raw=String(o&&o.x||"")}
  raw=raw.replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ta +${n}`);
  const M={odds:"",items:[],notes:[]};let lab="";
  for(const s0 of raw.split(/ · (?![^<]*>)/)){const s=kaPlain(s0);if(!s)continue;
-  const od=s.match(/^(Chắc chắn|Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó lường|Khó|Liều)$/);if(od&&!M.odds){M.odds=od[1];continue}
+  const od=s.match(/^(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)$/);if(od&&!M.odds){M.odds=od[1];continue}
   if(/^Quẻ: /.test(s))continue;
   const ml=s.match(/^(được ngay|ngay|tốn|thành|thắng|được|hỏng|mất|kèm)\s*:\s*/i);let body=s,cont=true;
   if(ml){lab=ml[1].toLowerCase();if(lab==="thắng"||lab==="được")lab="thành";if(lab==="mất")lab="hỏng";if(lab==="được ngay")lab="ngay";body=s.slice(ml[0].length);cont=false}
@@ -274,16 +275,15 @@ function kitHintWho(p,m){try{const L=(typeof liveRivals==="function"?liveRivals(
 /* how big a change is, in words (from Tâm cơ 25): "(nhiều)" / "(chút ít)" against the usual size of that stat — never the number */
 const KIT_HINT_MAG=[[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,10],[/được ưa/i,3],[/Sủng/i,5],[/Danh|Đức|Ân tình/i,4],[/Bạc/i,40],[/Sức/i,10],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,2]];
 function kitHintMag(p){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];if(!n)return"";const v=+n;for(const [re,big] of KIT_HINT_MAG)if(re.test(p))return v>=big*1.5?" (nhiều)":v<=Math.max(1,Math.floor(big/4))?" (chút ít)":"";return""}
-function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:"",risk:"an toàn"};
- if(o.hint){const h=typeof o.hint==="function"?o.hint(lv):String(o.hint);return{hint:h,risk:o.risk||"có rủi ro"}}
- const M=kitOptModel(o);const od=M.odds&&M.odds!=="Chắc chắn"?M.odds:"";const uniq=a=>[...new Set(a.filter(Boolean))];
- const sure=[],win=[],fail=[],side=[];let deadly=false,sideRisk=false;
+function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:""};
+ if(o.hint){const h=typeof o.hint==="function"?o.hint(lv):String(o.hint);return{hint:h}}
+ const M=kitOptModel(o);const od=M.odds||"";const uniq=a=>[...new Set(a.filter(Boolean))];
+ const sure=[],win=[],fail=[],side=[];let deadly=false;
  for(const it of M.items){const sg=kitHintSign(it.p,it.l);if(!sg)continue;const ph=kitHintPhrase(it.p,sg,lv===2?kitHintWho(it.p,m):"",lv);if(!ph)continue;const w=ph[lv]+(lv>=1&&!KIT_DEADLY.test(it.p)?kitHintMag(it.p):"");
   const isFail=it.l==="hỏng";if(KIT_DEADLY.test(it.p)&&(isFail||it.l==="kèm"||sg<0))deadly=true;
-  if(it.l==="kèm"){side.push([w,sg]);if(sg<0&&/(khả năng|có thể|nếu|dễ |có khi|bị lộ|phát giác)/i.test(it.p))sideRisk=true;continue}
-  if(isFail&&M.odds==="Chắc chắn"){if(sg<0)sure.push([w,sg]);continue}/* a CERTAIN option cannot fail: its "Mất:" is a sure price ("nhưng …"), never "hỏng thì …" (review pets-fix r6) */
+  if(it.l==="kèm"){side.push([w,sg]);continue}
+  if(isFail&&!M.odds){if(sg<0)sure.push([w,sg]);continue}/* a CERTAIN option cannot fail: its "Mất:" is a sure price ("nhưng …"), never "hỏng thì …" (review pets-fix r6) */
   if(isFail){if(sg<0)fail.push(w);continue}
-  if(/(nếu bị|bị lục|tang vật|lộ là|có thể bị|phát giác)/i.test(it.p))sideRisk=true;
   (od?win:sure).push([w,sg])}
  const good=uniq(sure.concat(win).filter(x=>x[1]>0).map(x=>x[0])).slice(0,2),bad=uniq(sure.concat(side).filter(x=>x[1]<0).map(x=>x[0])).slice(0,2),sideGood=uniq(side.filter(x=>x[1]>0).map(x=>x[0])).slice(0,1);
  const parts=[];parts.push(good.length?good.concat(sideGood).join(", "):sideGood.length?sideGood.join(", "):bad.length||fail.length?"chẳng được gì":"không được mất gì");
@@ -291,29 +291,32 @@ function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:"",risk
  if(bad.length)parts.push("nhưng "+bad.join(", "));
  const fl=uniq(fail).slice(0,2);if(fl.length&&(lv>=1||deadly))parts.push("hỏng thì "+(lv===0?(deadly?"mất mạng":fl[0]):fl.join(", ")));
  if(lv===2&&M.notes.length){const n=uniq(M.notes.filter(x=>!/^an toàn$/i.test(x))).slice(0,1);if(n.length)parts.push(n[0])}
- const risk=o.risk||(deadly||/^(Khó|Liều)$/.test(od)?"liều":od||sideRisk?"có rủi ro":"an toàn");
- return{hint:parts.join("; "),risk}}
+ return{hint:parts.join("; ")}}
 /* the DOM fallback (a hidden-outcome button with no option object): its rows as a pseudo option */
 function kitHintOf(b,o){if(o)return kitHint(o,typeof Q!=="undefined"?Q[0]:null);const rows={};b.querySelectorAll(".kb .kr").forEach(r=>{const l=((r.querySelector(".krl")||{}).textContent||"").trim();const v=r.querySelector(".krv");if(v)(rows[l]=rows[l]||[]).push(...[...v.querySelectorAll(".ef")].map(e=>e.textContent.trim()))});
  const odd=((b.querySelector(":scope > .kat > .kodds, :scope > .kabody > .kat > .kodds")||{}).textContent||"").match(KIT_HINT_LADDER);
- const j67=[odd?odd[1]:"",rows["Được"]&&"thành: "+rows["Được"].join(", "),rows["Mất"]&&"hỏng: "+rows["Mất"].join(", "),rows["Kèm"]&&"kèm: "+rows["Kèm"].join(", ")].filter(Boolean).join(" · ");
+ const j67=[odd?odd[1]:"",(rows["Được"]||rows["Thành"])&&"thành: "+(rows["Được"]||rows["Thành"]).join(", "),(rows["Mất"]||rows["Bại"])&&"hỏng: "+(rows["Mất"]||rows["Bại"]).join(", "),rows["Kèm"]&&"kèm: "+rows["Kèm"].join(", ")].filter(Boolean).join(" · ");
  return kitHint({j67},null)}
-/* KIT PARTS (KIT 28.6, kit sample page): the hint row and the risk chip — every hidden-outcome option uses these, nothing private */
+/* KIT PARTS (KIT 28.6, kit sample page): the hint row + the kit odds meter — every hidden-outcome option uses these, nothing private */
 function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.fix)text=VP.fix(text)}catch(e){}return `<span class="kr kr-hint"><span class="krl">Gợi ý</span><span class="krv"><span class="ef i">${text}</span></span></span>`}
-const KIT_RISK={"an toàn":["g","việc này không hỏng được"],"có rủi ro":["w","có thể hỏng"],"liều":["r","dễ hỏng, hỏng thì nặng"]};
-function kitRisk(word){const r=KIT_RISK[word]||KIT_RISK["có rủi ro"];return `<span class="kchip ${r[0]} krisk" title="${r[1]}">${KIT_RISK[word]?word:"có rủi ro"}</span>`}
+/* the odds meter of an option card: the card's own .kodds (kaNorm → kaOdds → oddsChip → kitOdds, read from the option's line = the odds the
+   roll uses, law 4) stays; a card with no odds (a certain outcome, nothing rolled) gets the same meter at «Nắm chắc» (owner 19/11 ~01:48Z). */
+function kitOptOdds(b){try{const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");if(!kat||kat.querySelector(".kodds"))return;
+ kat.insertAdjacentHTML("beforeend",`<span class="kodds" data-ksure="1">${oddsChip(KIT_ODDS[KIT_ODDS.length-1])}</span>`)}catch(e){console.error("kitOptOdds",e)}}
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;b.dataset.khid="1";b.classList.add("khideout");
- /* the hint + risk chip, read from the option's data before its outcome rows go */
+ /* the hint, read from the option's data before its outcome rows go */
  let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}
- const od=b.querySelector(":scope > .kat > .kodds, :scope > .kabody > .kat > .kodds");if(od&&b.dataset.kodds!=="1")od.remove();b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});
+ b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});b.querySelectorAll(".kb .kbh").forEach(h=>h.remove());/* kit-thanh-bai r3: the THÀNH / BẠI heads go with their rows (a head with no row under it was left behind) */
  let ton=b.querySelector(".kr-ton");if(ton){const v=ton.querySelector(".krv");[...v.children].forEach(e=>{if(e.classList.contains("ksep"))return;if(!KIT_COSTRE.test(e.textContent))e.remove()});
   [...v.children].forEach((e,i,a)=>{if(e.classList.contains("ksep")&&(!e.previousElementSibling||e.previousElementSibling.classList.contains("ksep")||!e.nextElementSibling))e.remove()});
   if(!v.querySelector(".ef"))ton.remove()}/* owner 13:25Z: no cost → no Tốn row at all (never "Tốn: không") */
  let kb=b.querySelector(".kb");if(!kb){b.insertAdjacentHTML("beforeend",`<small class="kb"></small>`);kb=b.querySelector(".kb")}
- if(H){if(H.hint)kb.insertAdjacentHTML("beforeend",kitHintRow(H.hint));
-  const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");/* review/opt-pics: an option card with its picture holds .kat inside .kabody (KIT 6.2) */if(kat&&!kat.querySelector(".krisk"))kat.insertAdjacentHTML("beforeend",kitRisk(H.risk))}}catch(e){console.error("kitHideOut",e)}}
+ if(H&&H.hint)kb.insertAdjacentHTML("beforeend",kitHintRow(H.hint));
+ kitOptOdds(b)/* review/opt-pics: an option card with its picture holds .kat inside .kabody (KIT 6.2) */
+ /* the KIT 6.2 final card form is computed AFTER hiding (it may have run first, from kpOptArt): the hint's «nhưng …» = the sure loss stands in Tốn (law 3) */
+ if(typeof kitOptFinal==="function"&&b.dataset.kofin==="1")kitOptFinal(b)}catch(e){console.error("kitHideOut",e)}}
 (function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}return r}})();
-/* the kit sample page for this section (kitRisk, kitHintRow, an event option in cost mode, kitResultSeal, kitKemRow) is ONE page: jkitpage.js
+/* the kit sample page for this section (kit odds meter, kitHintRow, an event option in cost mode, kitResultSeal, kitKemRow) is ONE page: jkitpage.js
    (#kit, KIT §47), samples "§53" (reviewer opt-render r7 dropped the duplicate ?kit / kitSample() page). */
 /* WHICH dialogs are EVENT choices (owner 14:30Z: every event — main / side stories, festivals, NPC visits, toilette reactions…): ON BY DEFAULT
    for (a) every item made from a PEND entry by pushDil / pushFront / mkP (it carries pid / pp: j68 weekly events, j67 chapters, j70, j96/j97…)
@@ -326,9 +329,9 @@ const KIT_ACT_PIDS=new Set(["giftpick","plantpick","taintpick","evpick","itarget
 function kitIsEventChoice(m){if(!m||!m.opts||!m.opts.length||m.showOut||m.act||m.shop)return false;if(m.pid&&KIT_ACT_PIDS.has(m.pid))return false;
  return !!(m.hideOut||m.ev||("pid" in m)||("pp" in m)||(m.kit&&(m.kit.kind==="choice"||m.kit.hideOut)))}
 (function(){const s0=showModal;showModal=function(){const m=Q[0];if(kitIsEventChoice(m))m.hideOut=true;const r=s0.apply(this,arguments);try{if(m&&m.opts&&(m.hideOut||m.opts.some(o=>o&&o.hideOut))){
-  document.querySelectorAll("#modal .opts > button[data-m], #modal .opts button.opt").forEach(b=>{const o=m.opts[+b.dataset.m];if(o&&o.showOut)return;if(m.hideOut||(o&&o.hideOut)){if(o&&o.showOdds)b.dataset.kodds="1";b.dataset.khide="1";if(b.classList.contains("ka"))kitHideOut(b)}})}}catch(e){console.error("hideOut",e)}return r}})();
-/* ACT-LIKE OPTIONS inside a dialog (kit owner #2): an option may carry showOdds:true — it keeps its odds word (Liều … Nắm chắc) beside the
-   cost while the dialog's other outcomes stay hidden — or showOut:true — the full act card (Được / Mất / odds), e.g. "Xin ban", "Mua lén". */
+  document.querySelectorAll("#modal .opts > button[data-m], #modal .opts button.opt").forEach(b=>{const o=m.opts[+b.dataset.m];if(o&&o.showOut)return;if(m.hideOut||(o&&o.hideOut)){b.dataset.khide="1";if(b.classList.contains("ka"))kitHideOut(b)}})}}catch(e){console.error("hideOut",e)}return r}})();
+/* ACT-LIKE OPTIONS inside a dialog (kit owner #2): every hidden-outcome option keeps its odds meter (owner 19/11 ~01:48Z; the old showOdds
+   flag is now the default for all) — an option may carry showOut:true — the full act card (Được / Mất / odds), e.g. "Xin ban", "Mua lén". */
 
 /* KIT_VEIL / KIT_SCAR asset data (from review/wardrobe j92 e4a8a72, image data only; the wardrobe LOGIC comes via review/balance).
    A later j92 that defines them again simply replaces these. */
@@ -351,7 +354,7 @@ window.KIT_VEIL={tiers:["t1","t2","t3","t4","t5","t6","t7","t8","silk-ivory","si
  src:function(t){if(t==="silk")t=this.silk;t=this.band[t]!=null?t:"t5";return `img/veil-${t}.png`},
  on:function(p){try{return !!(p&&p.scar&&p.scar.veil)}catch(e){return false}},
  tierOf:function(p){try{if(!p)return "t5";const rr=typeof personRoleRank==="function"?personRoleRank(p):null;
-   if(rr){if(rr.role==="cold")return "silk-ivory";if(rr.role==="mama")return "silk-pink";if(rr.role==="maid")return (rr.rank|0)>=2?"silk-pink":"silk-ivory";if(rr.role==="player"||rr.role==="consort")return "t"+(Math.max(0,Math.min(7,rr.rank|0))+1);if(rr.role==="thaihau")return "t8"}
+   if(rr){if(rr.role==="cold")return "silk-ivory";if(rr.role==="mama")return "silk-pink";if(rr.role==="maid")return srkTier(rr.rank|0)>=2?"silk-pink":"silk-ivory";/* rung → tier (maid-ladder-6) */if(rr.role==="player"||rr.role==="consort")return "t"+(Math.max(0,Math.min(7,rr.rank|0))+1);if(rr.role==="thaihau")return "t8"}
    if(p.cold||p.lanh)return KIT_VEIL.silk;const r=typeof rkOf==="function"?rkOf(p):p.rank;return r!=null?"t"+(Math.max(0,Math.min(7,r|0))+1):"t5"}catch(e){return "t5"}},
  rect:function(file,tier){const n=String(file||"").split("/").pop();const r=this.fit&&this.fit[n];if(!r)return null;const b=this.band[tier]!=null?this.band[tier]:this.band.t5;
    const bandY=r[1]+this.B0*r[3],h=r[3]*(1-this.B0)/(1-b);return [r[0],+(bandY-b*h).toFixed(2),r[2],+h.toFixed(2),r[4],b]},
@@ -368,36 +371,63 @@ window.KIT_SCAR={src:function(sev){return `img/scar-${Math.max(1,Math.min(3,sev|
  on:function(p){try{if(!p||!p.scar)return false;return (typeof S!=="undefined"&&p===S)||(typeof knows==="function"&&!!knows(p))}catch(e){return false}},
  of:function(p){if(!this.on(p))return null;const sev=p.scar.sev|0;return{sev,src:this.src(sev),label:`Hủy dung (${this.names[sev]||""})`}},
  rect:function(file){const n=String(file||"").split("/").pop();return this.fit&&this.fit[n]||null},
- style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg);transform-origin:${this.origin}`},
+ style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg) scaleX(-1);transform-origin:${this.origin}`},
  load:function(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.fitUrl).then(r=>r.ok?r.json():null).then(j=>{if(j)KIT_SCAR.fit=j}).catch(()=>{})}catch(e){}}};
 try{KIT_SCAR.load()}catch(e){}
 }
 /* ---------- 7. VEIL + SCAR OVERLAYS (review/wardrobe j92: KIT_VEIL / KIT_SCAR, placed per picture from img/veil-fit.json / scar-fit.json) ----------
    Layer order everywhere: portrait < scar strokes < veil < frame. The scar shows ONLY when the player knows (KIT_SCAR.on: herself, or j70 knows(p),
    or p.scar.known); a veil is worn in public, so it shows to everyone who sees the face (never on the grey "Người lạ" silhouette).
-   Places: tall frame (.kin > .kfxc clip = photo window; inner box = the por picture 384x506, 9 % lower like .kpor), small frame (.kmini > .kfxc),
-   stage figures (.kfxf box laid exactly over the figure image). A picture without fit data gets nothing (never a guessed position). ---------- */
+   Places: stage figures (.kfxf box laid exactly over the figure image) + the mirror close-up. AVATAR frames (tall, small, kfc, lists, cards) get the same stack through KIT_AV (18/11, owner ~03:20Z; supersedes the baked ID-card image of 17/11). A picture without fit data gets nothing (never a guessed position). ---------- */
 kitVeiled=function(){return false};
 function kitVeilOn(p){try{if(!p)return false;if(window.KIT_VEIL&&typeof KIT_VEIL.on==="function"&&KIT_VEIL.on(p))return true;if(typeof scarOf==="function"){const s=scarOf(p);return !!(s&&s.veil)}}catch(e){}return false}
 function kitScarOf(p){try{if(!p||!p.scar||!window.KIT_SCAR)return null;const on=KIT_SCAR.on(p)||!!p.scar.known;if(!on)return null;const sev=Math.max(1,Math.min(3,p.scar.sev|0||1));return{sev,src:KIT_SCAR.src(sev)}}catch(e){return null}}
+/* TONE (owner 18/11 pick, BAL.looks.tone[id] = strength 0..1): opacity x strength + a lighter, less saturated colour (CSS stand-in for "pulled toward skin"; the ladder sheets used the per-pixel pull) */
+function kitToneCss(id,base){try{const k=BAL.looks.tone[id];if(!(k>0)||k>=1)return base==null?"":`;opacity:${base}`;const d=1-k;return `;opacity:${((base==null?1:base)*k).toFixed(3)};filter:saturate(${(1-d*.6).toFixed(3)}) brightness(${(1+d*.5).toFixed(3)})`}catch(e){return base==null?"":`;opacity:${base}`}}
 const kitFxVars=st=>st.replace(/(^|;)\s*(left|top|width|height|transform|transform-origin):/g,(m,a,k)=>`${a}--f${k.replace('transform-origin','to').replace('transform','tf')}:`);
-function kitFxLayers(p,file){if(!p||!file)return"";let h="";const sc=kitScarOf(p);if(sc&&window.KIT_SCAR){const st=KIT_SCAR.style(file);if(st)h+=`<img class="kscar" src="${sc.src}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}
+function kitFxLayers(p,file){if(!p||!file)return"";let h="";const sc=kitScarOf(p);if(sc&&window.KIT_SCAR){const px=/fx-pox-scar/.test(sc.src);/* sẹo rỗ (đậu mùa) is a face-square final, never the cheek scratch box */const st=px?(typeof lkSquare==="function"?lkSquare(file):""):KIT_SCAR.style(file);if(st)h+=`<img class="${px?"kpox":"kscar"}" src="${sc.src}" alt="" aria-hidden="true" style="${kitFxVars(st)}${px?(typeof lkKeepCss==="function"?lkKeepCss(file):""):kitToneCss("cao",.85)}" onerror="this.remove()">`}
  if(kitVeilOn(p)&&window.KIT_VEIL&&KIT_VEIL.style){const t=KIT_VEIL.tierOf(p);const st=KIT_VEIL.style(file,t);if(st)h+=`<img class="kveil2" src="${KIT_VEIL.src(t)}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}return h}
 const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
+/* ---------- AVATAR = ID CARD (owner 17/11 ~18:10Z, OD "Avatar … cái thẻ nhân viên"; review/kit-fx-register) ----------
+   EVERY avatar-class frame (pcp tall, span.md / kmini / kfc, list rows, cards, pickers: everything made by pcPort / mdH) shows the BASE PORTRAIT +
+   EVERY face layer at mirror strength (owner 18/11 ~03:20Z: marks, scratch, ink, soot, pox, dust, sweat, scar, veil, makeup incl. Khuynh thành sparkle, smudge) = the ONE kitFxLayers stack, laid
+   over the portrait by KIT_AV (below) through kitFxPut / kfxGeom, same CSS + eye/lip keep-out mask as the mirror and the stage. ---------- */
+/* KIT_AV: the avatar hook. pcPort / mdH stamp the portrait <img> with data-kav="<n>" (n -> the person); kitAvSweep then lays the SAME kitFxLayers stack over it through kitFxPut
+   (one .kfxf box, kfxGeom follows the picture: object-fit, clip, transform), so every avatar frame (top bar md, kmini / kfc side cards, tab + list rows, tall pcPort, mdH everywhere) shows the
+   marks + scratch + veil + makeup incl. Khuynh thành sparkle exactly like the mirror: same CSS, tone, keep-out mask (lkKeepCss), LOD step 0 (toilStageEl). A person / picture without fit data gets nothing. */
+const KIT_AV={n:0,P:new Map(),max:900,
+ stamp:function(p){const n=++this.n;this.P.set(n,p);if(this.P.size>this.max)this.P.delete(this.P.keys().next().value);return n},
+ sweep:function(root){try{(root||document).querySelectorAll("img[data-kav]").forEach(im=>{const p=KIT_AV.P.get(+im.dataset.kav);const file=kitFile(im.currentSrc||im.getAttribute("src")||im.src);const o=im.__kav;
+   if(!p||!file||/face-|unknown/.test(file)||!im.isConnected){if(o)KIT_AV.drop(im);return}
+   if(im.__kavf===file&&im.__kavp===p&&(!o||o.isConnected))return;if(o)KIT_AV.drop(im);im.__kavf=file;im.__kavp=p;
+   const host=im.parentElement;if(!host)return;kitFxPut(im,p,host);const s=host.lastElementChild;if(s&&s.__img===im){s.setAttribute("data-kav","1");s.__file=file;im.__kav=s}else im.__kav=null})}catch(e){}},
+ drop:function(im){const o=im.__kav;if(o){KFX_L.delete(o);o.remove()}im.__kav=null;im.classList.remove("kfxon")}};
+window.KIT_AV=KIT_AV;
 (function(){const p0=pcPort;pcPort=function(f){let h=p0.apply(this,arguments);try{const p=f&&f.__kp;if(!p||!/class="kpor"/.test(h))return h;const m=/<img class="kpor" src="([^"]+)"/.exec(h);if(!m||/face-|unknown/.test(m[1]))return h;
-  const fx=kitFxLayers(p,kitFile(m[1]));if(fx)h=h.replace(/(<img class="kfr")/,`<span class="kfxc"><span class="kfx">${fx}</span></span>$1`)}catch(e){}return h}})();
-(function(){const m0=mdH;mdH=function(p){let h=m0.apply(this,arguments);try{const q=p&&p.__kp;if(!q)return h;const m=/<img[^>]*src="([^"]*por-[^"]+)"/.exec(h);if(!m)return h;const fx=kitFxLayers(q,kitFile(m[1]));
-  if(fx)h=h.replace(/<i class="kmf"/,`<span class="kfxc kfxm"><span class="kfx">${fx}</span></span><i class="kmf"`)}catch(e){}return h}})();
+  h=h.replace(m[0],`<img class="kpor" data-kav="${KIT_AV.stamp(p)}" src="${m[1]}"`);kitAvKick()}catch(e){}return h}})();
+(function(){const m0=mdH;mdH=function(p){let h=m0.apply(this,arguments);try{const q=p&&p.__kp;if(!q)return h;const m=/<img([^>]*?)src="([^"]*por-[^"]+)"/.exec(h);if(!m)return h;
+  h=h.replace(m[0],`<img${m[1]}data-kav="${KIT_AV.stamp(q)}" src="${m[2]}"`);kitAvKick()}catch(e){}return h}})();
+let kavRaf=0;function kitAvKick(){if(kavRaf)return;kavRaf=requestAnimationFrame(()=>{kavRaf=0;KIT_AV.sweep(document)})}
+(function(){if(!window.MutationObserver)return;const go=()=>{if(!document.body)return setTimeout(go,50);new MutationObserver(ms=>{if(ms.some(r=>r.type==="attributes"||[...r.addedNodes].some(n=>n.nodeType===1&&!(n.classList&&n.classList.contains("kfxf")))))kitAvKick()}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src"]})};go()})();
 /* kitFxPut(img,p,host): lay the face layers of person p over the DRAWN picture img inside host (room stage, podium, any figure) */
 function kitFxPut(img,p,host){{if(!img||!p||(typeof kitIsKnown==="function"&&!kitIsKnown(p)))return;const fx=kitFxLayers(p,kitFile(img.currentSrc||img.src));if(!fx)return;const s=document.createElement("span");s.className="kfxf";s.innerHTML=fx;
-  /* lay the box over the DRAWN picture: object-fit contain/cover + object-position, and the image's own transform (kit owner #2: the veil sat beside the face) */
-  const cs=getComputedStyle(img);const L0=img.offsetLeft,T0=img.offsetTop,bw=img.offsetWidth,bh=img.offsetHeight;let L=L0,T=T0,w=bw,h=bh;const nw=img.naturalWidth,nh=img.naturalHeight;
+  s.__img=img;s.style.cssText="position:absolute;pointer-events:none;z-index:2";kfxGeom(s);img.classList.add("kfxon");host.appendChild(s);KFX_L.add(s)}}
+/* ROOT FIX (owner 17/11 03:58Z, toil-reveal-fix): the face layer follows ITS OWN picture, never the stage. It is laid over the DRAWN picture (object-fit contain/cover + object-position,
+   the image's own transform AND its translate / rotate / scale properties: j59 slides the figures with `translate`, the touch kit presses with `scale`) and re-laid every frame while
+   the picture moves (transition / animation / class / style change on the stage); it is hidden whenever its picture is not shown (slot off, another person's place). */
+const KFX_L=new Set();let kfxT=0,kfxRaf=0;
+function kfxGeom(s){const img=s.__img;if(!img||!img.isConnected){s.style.display="none";return}const cs=getComputedStyle(img);if(cs.display==="none"||cs.visibility==="hidden"||!img.offsetParent&&cs.position!=="fixed"||!img.offsetWidth){s.style.display="none";return}
+  s.style.display="";const L0=img.offsetLeft,T0=img.offsetTop,bw=img.offsetWidth,bh=img.offsetHeight;let L=L0,T=T0,w=bw,h=bh;const nw=img.naturalWidth,nh=img.naturalHeight;
   if(nw&&nh&&/contain|cover|scale-down/.test(cs.objectFit)){const k=cs.objectFit==="cover"?Math.max(bw/nw,bh/nh):Math.min(bw/nw,bh/nh,cs.objectFit==="scale-down"?1:99);w=nw*k;h=nh*k;
    const op=(cs.objectPosition||"50% 50%").split(/\s+/);const f=(v,free)=>/%$/.test(v)?free*parseFloat(v)/100:/px$/.test(v)?parseFloat(v):/left|top/.test(v)?0:/right|bottom/.test(v)?free:free/2;
    L+=f(op[0]||"50%",bw-w);T+=f(op[1]||"50%",bh-h)}
   const to=(cs.transformOrigin||"").split(/\s+/).map(parseFloat);const tor=to.length>=2&&!isNaN(to[0])?`${to[0]-(L-L0)}px ${to[1]-(T-T0)}px`:"50% 50%";
-  s.style.cssText=`position:absolute;pointer-events:none;z-index:2;left:${L}px;top:${T}px;width:${w}px;height:${h}px;transform:${cs.transform};transform-origin:${tor}`;img.classList.add("kfxon");host.appendChild(s)}}
-function kitFigFx(){try{const st=$("stage");if(!st)return;st.querySelectorAll(".kfxf").forEach(e=>e.remove());const ppl=typeof curPeople==="function"?curPeople():[];const put=kitFxPut;
+  const st=s.style;st.left=L+"px";st.top=T+"px";st.width=w+"px";st.height=h+"px";st.transform=cs.transform;st.transformOrigin=tor;st.translate=cs.translate||"none";st.rotate=cs.rotate||"none";st.scale=cs.scale||"none";st.opacity=cs.opacity;/* cloth-hd: the cloth layer REPLACES the picture (it hides under clip-path, which also hides the picture's own filter: cut-out edge url(#kfa), floor shadow, halo / glow of her stage figure); the layer wears the same filter so lv0 and lv1-3 look the same */{const k=s.querySelector("img.kclo");if(k){const fl=cs.filter==="none"?"":cs.filter;if(k.style.filter!==fl)k.style.filter=fl}}}
+function kfxSyncAll(){KFX_L.forEach(s=>{if(!s.isConnected){KFX_L.delete(s);return}kfxGeom(s)})}
+function kfxKick(){kfxT=performance.now()+900;if(kfxRaf||!KFX_L.size)return;const f=()=>{kfxSyncAll();if(performance.now()<kfxT)kfxRaf=requestAnimationFrame(f);else kfxRaf=0};kfxRaf=requestAnimationFrame(f)}
+["transitionrun","transitionend","animationstart","animationend"].forEach(e=>document.addEventListener(e,kfxKick,true));addEventListener("resize",kfxKick);
+window.kfxKick=kfxKick;window.kfxSyncAll=kfxSyncAll;
+function kitFigFx(){try{const st=$("stage");if(!st)return;st.querySelectorAll(".kfxf").forEach(e=>{KFX_L.delete(e);e.remove()});if(!st.__kfxmo&&window.MutationObserver){st.__kfxmo=new MutationObserver(ms=>{if(ms.some(r=>!r.target.closest(".kfxf")))kfxKick()});st.__kfxmo.observe(st,{attributes:true,subtree:true,attributeFilter:["class","style","hidden"]})}const ppl=typeof curPeople==="function"?curPeople():[];const put=kitFxPut;
  /* the person of a place token: its ref, or (Hoàng thượng, Thái hậu, cung nữ thân tín, thái y) the one KIT_FACEFX person lookup */
  st.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];put(b.querySelector("img.figimg"),p&&(p.ref||(window.KIT_FACEFX?KIT_FACEFX.person(p):null)),b)});
  const me=$("mefig");if(me&&typeof S!=="undefined")put(me,S,me.parentElement)}catch(e){}}
@@ -405,11 +435,7 @@ function kitFigFx(){try{const st=$("stage");if(!st)return;st.querySelectorAll(".
 /* the fit tables load asynchronously: redraw once both are in */
 (function(){let n=0;const chk=()=>{if(window.KIT_VEIL&&KIT_VEIL.fit&&window.KIT_SCAR&&KIT_SCAR.fit){try{if(typeof S!=="undefined"&&S&&!S.dead&&typeof render==="function"&&!Q.length)render()}catch(e){}return}if(++n<40)setTimeout(chk,250)};setTimeout(chk,300)})();
 (function(){const st=document.createElement("style");st.id="k2b-fx";st.textContent=`
-.pcp.kit .kin>.kfxc{position:absolute;left:14.655%;top:20.289%;width:70.691%;height:49.373%;overflow:hidden;pointer-events:none;z-index:1}
-span.md.kmini.kmini>.kfxc{position:absolute;left:9.66%;top:11.75%;width:80.67%;height:80.3%;overflow:hidden;pointer-events:none;z-index:1}
-.kfxc>.kfx{position:absolute;left:0;top:9%;width:100%;height:100%}
-span.md.kmini.kmini>.kfxc>.kfx{top:8.4%}
-.kfx>img,.kfxf>img,.pcp.kit .kin .kfx>img,span.md.kmini.kmini .kfx>img{position:absolute!important;inset:auto!important;display:block!important;left:var(--fleft)!important;top:var(--ftop)!important;width:var(--fwidth)!important;height:var(--fheight)!important;transform:var(--ftf,none)!important;transform-origin:var(--fto,50% 50%)!important;max-width:none!important;max-height:none!important;min-width:0!important;object-fit:fill!important;border-radius:0!important;pointer-events:none;mask-image:none!important;-webkit-mask-image:none!important}
+.kfx>img,.kfxf>img,.pcp .kfxf>img,.md .kfxf>img,.pcp.kit .kin .kfx>img,span.md.kmini.kmini .kfx>img{position:absolute!important;inset:auto!important;display:block!important;left:var(--fleft)!important;top:var(--ftop)!important;width:var(--fwidth)!important;height:var(--fheight)!important;transform:var(--ftf,none)!important;transform-origin:var(--fto,50% 50%)!important;max-width:none!important;max-height:none!important;min-width:0!important;object-fit:fill!important;border-radius:0!important;pointer-events:none;mask-image:none!important;-webkit-mask-image:none!important}
 .kfx>img.kscar,.kfxf>img.kscar{opacity:.85}
 img.figimg.kfxon,#mefig.kfxon{animation:none!important}
 `;document.head.appendChild(st)})();
@@ -450,7 +476,6 @@ window.KIT_CREST={ar:{"consort-0":.329,"consort-1":.337,"consort-2":.538,"consor
 (function(){const st=document.createElement("style");st.id="k2b-frame";st.textContent=`
 /* C1: tighter portrait in every frame (por art only; old face-* art keeps its oval) */
 .kin>img.kpor:not([src*="face-"]):not([src*="unknown"]),.pcp.kit .kin>img.kpor:not([src*="face-"]):not([src*="unknown"]){left:9.707%!important;top:17.475%!important;width:80.588%!important;height:56.285%!important;clip-path:inset(5% 6.14% 7.28% 6.14%);border-radius:0!important}
-.kfxc>.kfx,span.md .kfxc>.kfx{left:-7%!important;top:-5.7%!important;width:114%!important;height:114%!important}
 /* crest on the top bar */
 .kin>img.kcrest,.pcp.kit .kin>img.kcrest:not(.kfr):not(.kgem):not(.kemb):not(.kpor){position:absolute!important;inset:auto!important;left:var(--cl)!important;top:var(--ct)!important;width:var(--cw)!important;height:var(--ch)!important;max-width:none!important;object-fit:fill!important;border-radius:0!important;z-index:3;pointer-events:none;filter:drop-shadow(0 1px 1px #0004)}
 /* the small frame cell (mdH): same layers as .pcp.kit, cell = the whole canvas y 0–1037 (pendant + tassel whole, owner 15/11 06:35Z) */
@@ -463,7 +488,7 @@ span.md.kfc.kfc.kit,span.md.kfc.kfc.kit.xs,span.md.kfc.kfc.kit.sm,span.md.kfc.kf
 span.md.kfc.kfc.xs,button.ka .kan span.md.kfc.kfc.xs{width:26px!important;height:auto!important;position:relative!important;display:inline-block!important}span.md.kfc.kfc.sm{width:38px!important}span.md.kfc.kfc.big{width:84px!important}
 span.md.kfc>.kin{position:absolute!important;left:0!important;top:0!important;width:100%!important;height:100%!important;transform:none!important;display:block!important;isolation:isolate}
 span.md.kfc .kin>.kbg{position:absolute;left:14.655%;top:20.289%;width:70.691%;height:49.373%;background:#5a1e16 center/cover no-repeat;z-index:-1}
-span.md.kfc .kin>img{position:absolute!important;right:auto!important;bottom:auto!important;max-width:none!important;max-height:none!important;border-radius:0!important;box-shadow:none!important;animation:none!important}
+span.md.kfc .kin>img:not(.kemo){position:absolute!important;right:auto!important;bottom:auto!important;max-width:none!important;max-height:none!important;border-radius:0!important;box-shadow:none!important;animation:none!important}
 span.md.kfc .kin>img.kpor{left:14.655%!important;top:24.733%!important;width:70.691%!important;height:44.930%!important;object-fit:cover!important;object-position:50% 0!important}
 span.md.kfc .kin>img.kpor:not([src*="face-"]):not([src*="unknown"]){left:9.707%!important;top:17.475%!important;width:80.588%!important;height:56.285%!important;clip-path:inset(5% 6.14% 7.28% 6.14%)}
 span.md.kfc .kin>img.kcrest{left:var(--cl)!important;top:var(--ct)!important;width:var(--cw)!important;height:var(--ch)!important;object-fit:fill!important;z-index:3}
@@ -471,7 +496,6 @@ span.md.kfc .kin>img.kpor[src*="face-"],span.md.kfc .kin>img.kpor[src*="unknown"
 span.md.kfc .kin>img.kfr{left:0!important;top:0!important;width:100%!important;height:100%!important;object-fit:fill!important;z-index:2}
 span.md.kfc .kin>img.kgem{left:73.564%!important;top:64.609%!important;width:18.327%!important;height:auto!important;aspect-ratio:1;z-index:3}
 span.md.kfc .kin>img.kemb,span.md.kfc .kin>.klab{display:none!important}
-span.md.kfc .kin>.kfxc{position:absolute;left:14.655%;top:20.289%;width:70.691%;height:49.373%;overflow:hidden;z-index:1}
 span.md.kfc.xs .kin>img.kgem,span.md.kfc.sm .kin>img.kgem{display:none!important}
 `;document.head.appendChild(st)})();
 
@@ -577,9 +601,9 @@ function kitOriginArt(k){return `img/bg-origin-${k}.webp`}
 function kitOriginWide(k){return `img/origin-wide-${k}.webp`}
 /* o.size "thumb" = small square tile (28.19) */
 function kitSceneArt(src,label,o){o=o||{};const sh=o.shape==="tall"?"tall":"wide";const fb=o.fb?String(o.fb).replace(/'/g,""):"";
- const err=fb?`if(this.dataset.fb!=='1'){this.dataset.fb='1';this.src='${fb}'}else this.remove()`:"this.remove()";const lab=label?String(label).replace(/"/g,"&quot;"):"";
- return `<figure class="ksart ksart-${sh}${o.size==="thumb"?" ksart-thumb":""}${o.col?" ksart-cat":""}${o.cls?" "+o.cls:""}"${lab?` title="${lab}"`:""}${o.col?` style="--kcc:${o.col}"`:""}>`+
-  (lab?`<span class="ksart-ph">${label}</span>`:"")+(src?`<img src="${src}" alt="" loading="lazy" onerror="${err}">`:"")+
+ const err=fb?`if(this.dataset.fb!=='1'){this.dataset.fb='1';this.src='${fb}'}else{this.parentNode.classList.remove('ksart-ld');this.remove()}`:"this.parentNode.classList.remove('ksart-ld');this.remove()";const ok="this.parentNode.classList.remove('ksart-ld');this.parentNode.classList.add('kok')";const lab=label?String(label).replace(/"/g,"&quot;"):"";
+ return `<figure class="ksart ksart-${sh}${src?" ksart-ld":""}${o.size==="thumb"?" ksart-thumb":""}${o.col?" ksart-cat":""}${o.cls?" "+o.cls:""}"${lab?` title="${lab}"`:""}${o.col?` style="--kcc:${o.col}"`:""}>`+
+  (lab?`<span class="ksart-ph">${label}</span>`:"")+(src?`<img src="${src}" alt="" loading="lazy" onload="${ok}" onerror="${err}">`:"")+
   (label&&o.cap!==false?(o.col?`<em class="ksart-chip">${label}</em>`:`<figcaption>${label}</figcaption>`):"")+
   (o.mark?`<i class="ksart-mark" role="img" aria-label="${o.markAlt?String(o.markAlt).replace(/"/g,"&quot;"):""}" style="background-image:url('${String(o.mark).replace(/["'()]/g,"")}')"></i>`:"")+`</figure>`}
 (function(){const st=document.createElement("style");st.id="k-sceneart";st.textContent=`
@@ -599,6 +623,13 @@ function kitSceneArt(src,label,o){o=o||{};const sh=o.shape==="tall"?"tall":"wide
 .ksart>img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;display:block;border-radius:2px;max-width:none}
 .ksart-ph{position:absolute;inset:3px;display:grid;place-items:center;text-align:center;padding:6px;font:700 .8rem/1.25 var(--display,serif);color:#fff3d8;
  background:linear-gradient(#5a3a1acc,#2a1a12cc),url(img/kit/bg-default.webp) center/cover;border-radius:2px}
+/* ui-fixes-1 (KIT loading look, owner-found 17/11): while the picture is still arriving (.ksart-ld) the frame shows the kit shimmer on card paper (soft gold sweep) and the label in dark ink
+   instead of a dark brown box; the picture covers it on load (.kok hides the label layer so a see-through webp never shows it). No picture at all (or it failed) = the old label plate. */
+@keyframes kitShim{0%{background-position:-160% 0}100%{background-position:260% 0}}
+.ksart.ksart-ld{background:linear-gradient(100deg,#efe4cf 30%,#fbf3e0 48%,#efe4cf 66%) 0 0/250% 100%;animation:kitShim 1.6s linear infinite}
+.ksart.ksart-ld>.ksart-ph{color:#7a5a2c;font-weight:600;background:none}
+.ksart.kok>.ksart-ph{display:none}
+@media (prefers-reduced-motion:reduce){.ksart.ksart-ld{animation:none}}
 .ksart-cat{border-color:var(--kcc);box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3px var(--kcc)}
 .ksart-chip{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);z-index:2;font-style:normal;font-size:.66rem;font-weight:700;color:#fff;
  background:var(--kcc);padding:1px 8px;border-radius:9px;white-space:nowrap;box-shadow:0 1px 3px #0006}
@@ -633,9 +664,9 @@ button.ka.kdis .kaart>.ksart{filter:grayscale(.7);opacity:.8}
    4) "Tiếp" → the revealed picture flies into the identity card's art frame while the card slides in. "Bỏ qua" (always there) ends at once.
    prefers-reduced-motion / Cảnh động off: same steps, no motion (instant flips, no shuffle travel). API:
    kitRoulette({items:[{k,src,wide,name,rare}], target:k, toEl:()=>element, done:fn}). Test state: window.__kroulStep (0 up · 1 shuffling · 2 pick · 3 shown). ---------- */
-const KIT_OW=(typeof OW69!=="undefined")?OW69:{nc:6,bd:7,thd:9,cn:13,dtq:17,muoi:17,ch:13,td:9,tt:8,cnv:8};
+const KIT_OW=BAL.orig.ow;/* ONE CORE: the j69 roulette weights (no private copy) */
 const KIT_CARDBACK="img/kit/card-back.webp";
-function kitRare(k){try{if(typeof ow69Rare==="function")return ow69Rare(k)}catch(e){}const w=KIT_OW[k]||10;return w<=6?"Rất hiếm":w<=9?"Hiếm":"Thường gặp"}
+function kitRare(k){try{if(typeof ow69Rare==="function")return ow69Rare(k)}catch(e){}const w=KIT_OW[k]||10;return w<=BAL.rareLv[0]?"Rất hiếm":w<=BAL.rareLv[1]?"Hiếm":"Thường gặp"}
 /* ONE origin card face (front): art frame + name + rarity chip pinned to the bottom (kit rule: chips of a row share one baseline) */
 function kitOriginFace(it){return `<div class="kra">${kitSceneArt(it.wide||it.src,"",{shape:"wide",fb:it.src})}</div><span class="krn">${it.name}</span><span class="krr">${typeof kitChip==="function"?kitChip(it.rare,"n"):it.rare}</span>`}
 /* ONE FIT for every origin / identity card grid (owner 16/11 s23: "to ra, trải dài hết cái màn nền"): the cards grow to span the background width
@@ -698,22 +729,24 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
  go.addEventListener("click",e=>{e.stopPropagation();if(step===0)shuffle();else if(step===3)fly()});
  try{go.focus({preventScroll:true})}catch(e){}}
 /* owner 11/15 (review): the cards are never shown blank — the origin pictures (wide + fallback) and the card back are fetched first.
-   Cached pictures: no wait at all. Otherwise, after 150 ms, a kit wait on the roulette backdrop ("Đang bày các thân phận…"); at most 8 s. */
+   Cached pictures: no wait at all. Otherwise, after 150 ms, a kit wait on the roulette backdrop ("Tranh luân hồi đang trải các thân phận…"); at most 8 s. */
 (function(){const r0=kitRoulette;kitRoulette=function(o){if(!o||!o.items||!o.items.length)return r0.apply(this,arguments);const args=arguments,self=this;
  const urls=[...new Set(o.items.map(it=>it.wide||it.src).concat([KIT_CARDBACK]).filter(Boolean))];let fired=false,w=null;
  const go=()=>{if(fired)return;fired=true;clearTimeout(tw);clearTimeout(tm);if(w)w.remove();r0.apply(self,args)};
  const tw=setTimeout(()=>{if(fired)return;w=document.createElement("div");w.id="kroulw";w.className="kroul";try{kitBackdrop(w,"roulette")}catch(e){}
-  w.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small class="krsub">Đang bày các thân phận…</small></div></div>`;document.body.appendChild(w)},150);
+  w.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small class="krsub">${CTM_WAIT.rebirth}</small></div></div>`;document.body.appendChild(w)},150);
  const tm=setTimeout(go,8000);let n=0;
  urls.forEach(u=>{const im=new Image();im.decoding="async";const ok=()=>{n++;if(n>=urls.length)(im.decode?im.decode().catch(()=>{}):Promise.resolve()).then(go)};im.onload=ok;im.onerror=ok;im.src=u})}})();
 (function(){if(typeof nlCard!=="function")return;const c0=nlCard;nlCard=function(){const r=c0.apply(this,arguments);try{const o=S&&S.origin;if(!o)return r;const key=(S.name||"")+"|"+o.k+"|"+(typeof NLP!=="undefined"&&NLP?NLP.seed:"");
   if(window.__kroulKey===key)return r;window.__kroulKey=key;
-  const items=ORIGINS.filter(x=>KIT_OW[x.k]!=null||x.k===o.k).map(x=>({k:x.k,src:kitOriginArt(x.k),wide:kitOriginWide(x.k),name:x.n,rare:kitRare(x.k)}));
-  kitRoulette({items,target:o.k,toEl:()=>document.querySelector("#modal .kpidart .ksart")||document.querySelector("#modal .kpidart")})}catch(e){console.error("kitRoulette",e)}return r}})();
+  /* ONE card per origin: a country branch (hòa thân · Bắc Địch) lands on its origin's card, named by the origin (on) */
+  const ok=typeof originRoot==="function"?originRoot(o.k):o.k;
+  const items=ORIGINS.filter(x=>KIT_OW[x.k]!=null||x.k===ok).map(x=>({k:x.k,src:kitOriginArt(x.k),wide:kitOriginWide(x.k),name:x.on||x.n,rare:kitRare(x.k)}));
+  kitRoulette({items,target:ok,toEl:()=>document.querySelector("#modal .kpidart .ksart")||document.querySelector("#modal .kpidart")})}catch(e){console.error("kitRoulette",e)}return r}})();
 /* kit sample page (§28.12b, review/kit-fit-r3): the origin card grid at a fixed card width (--krw); the live fit is kitRouFit */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.12b",title:"Thẻ thân phận (Luân hồi): thẻ to trải rộng theo màn nền, một khoảng cách đều giữa các thẻ",html:()=>
  `<div class="kroul" style="position:relative;inset:auto;z-index:auto;background:none;overflow:visible;--krw:150px;--krgap:12px;--krside:0px;--krpad:6px"><div class="krbox"><div class="krgrid">`+
- [["tt","Con gái Tể tướng"],["dtq","Con gái Đại tướng quân"],["muoi","Con gái nhà buôn muối"],["nc","Công chúa nước Nam Chiếu hòa thân"]].map(([k,n])=>`<div class="krt" data-k="${k}"><div class="krc"><div class="krf">${kitOriginFace({k,src:typeof kitOriginArt==="function"?kitOriginArt(k):"",wide:typeof kitOriginWide==="function"?kitOriginWide(k):"",name:n,rare:kitRare(k)})}</div></div></div>`).join("")+`</div></div></div>`})}catch(e){}
+ [["tt","Con gái Tể tướng"],["dtq","Con gái Đại tướng quân"],["muoi","Con gái nhà buôn muối"],["nc","Công chúa hòa thân"]].map(([k,n])=>`<div class="krt" data-k="${k}"><div class="krc"><div class="krf">${kitOriginFace({k,src:typeof kitOriginArt==="function"?kitOriginArt(k):"",wide:typeof kitOriginWide==="function"?kitOriginWide(k):"",name:n,rare:kitRare(k)})}</div></div></div>`).join("")+`</div></div></div>`})}catch(e){}
 (function(){const st=document.createElement("style");st.id="k2b-roulette";st.textContent=`
 .kroul{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#e9dcc8 center/cover no-repeat;transition:opacity .35s;overflow:hidden}
 .kroul.krfade .krt:not(.pick),.kroul.krfade .krhead,.kroul.krfade .krbar{opacity:0;transition:opacity .4s}
@@ -906,7 +939,7 @@ kitPcFix=function(pc){try{if(!pc||pc.dataset.k2==="1")return;const L=pc.querySel
   Rr.querySelectorAll(".pcb button.ka").forEach(b=>{if(b.querySelector(".kr-note"))return;const kb=b.querySelector(".kb");if(kb&&/sai|nhờ|gửi/i.test(b.textContent))kb.insertAdjacentHTML("beforeend",`<span class="kr kr-note"><span class="krl">Ghi chú</span><span class="krv"><span class="ef n">${tx}</span></span></span>`)});nt.remove()}}
  /* right: one opaque sticky block = (info) + note + act-group tabs */
  const stick=document.createElement("div");stick.className="kpstick";
- const note=Rr.querySelector(":scope > .pcn");if(note&&!note.classList.contains("kpres"))stick.appendChild(note);const tabs=Rr.querySelector(":scope > .pctabs");if(tabs)stick.appendChild(tabs);
+ const note=Rr.querySelector(":scope > .pcn");if(note&&!note.classList.contains("kpres"))stick.appendChild(note);const pcfx=Rr.querySelector(":scope > .pcf:not(.pcm2)");if(pcfx)stick.appendChild(pcfx);const tabs=Rr.querySelector(":scope > .pctabs");if(tabs)stick.appendChild(tabs);
  if(stick.children.length)Rr.prepend(stick);if(note&&note.classList.contains("kpres")){if(stick.parentNode)stick.after(note);else Rr.prepend(note)}
  /* wear slots (K1) under the portrait */
  try{const p=kitPersonByName(name);pc.querySelectorAll(".chip").forEach(c=>{if(/^(Trâm|Y phục):/.test(c.textContent.trim())||(p&&typeof wdSlots==="function"&&/^(Đúng phẩm|Vượt phẩm|Quá giản dị|Phạm tang)$/.test(c.textContent.trim())))c.remove()});
@@ -918,7 +951,7 @@ document.addEventListener("click",e=>{const pp=e.target.closest&&e.target.closes
  try{const pc=pp.closest(".pc");const nm=(pc.querySelector(".pcname")||{}).textContent||"";const parts=[...pc.querySelectorAll(":scope > .pcl > .kwear, :scope > .pcl > .kpfacts")].map(x=>x.outerHTML).join("");
   Q.unshift({t:nm,h:`<div class="kpsheetb">${parts}</div>`});showModal()}catch(x){console.error(x)}},true);
 function kitPcWide(pc){const c=(pc&&pc.closest&&pc.closest("#panel,#stage,#modal .dlg"))||document.getElementById("panel");/* tassel-fix: width without the scrollbar's share, so a card that grows tall enough to scroll keeps the same portrait size (no-shrink rule) */
- let w=c&&c.clientWidth;try{if(w){const cs=getComputedStyle(c);const sb=c.offsetWidth-c.clientWidth-(parseFloat(cs.borderLeftWidth)||0)-(parseFloat(cs.borderRightWidth)||0);if(sb>0)w+=sb}}catch(e){}if(pc&&w)pc.style.setProperty("--kpcw",Math.round(Math.max(150,Math.min(240,w*.36)))+"px");
+ let w=c&&c.clientWidth;try{if(w){const cs=getComputedStyle(c);const sb=c.offsetWidth-c.clientWidth-(parseFloat(cs.borderLeftWidth)||0)-(parseFloat(cs.borderRightWidth)||0);if(sb>0)w+=sb}}catch(e){}if(pc&&w){const kw=Math.round(Math.max(150,Math.min(240,w*.36)));pc.dataset.kpcw0=kw;pc.style.setProperty("--kpcw",kw+"px");pc.style.setProperty("--kpcl",Math.max(kw,172)+"px")}
  /* KIT §0: no short-landscape card any more — every screen shows the 1180x820 spread or the 590x820 page (design-scale p3) */
  return w?w>=440:true}/* owner 11/14: Fold uses EXACTLY the iPad card (one component) */
 addEventListener("resize",()=>{const w=kitPcWide();if(window.__kpcW!==undefined&&window.__kpcW!==w){try{render()}catch(e){}}window.__kpcW=w});window.__kpcW=kitPcWide();
@@ -942,7 +975,7 @@ function kitPcSize(){try{const P=$("panel");if(!P)return;const cs=getComputedSty
      the room from the strip's bottom to the panel's bottom */
   const strip=P.querySelector(".pstrip");const stripH=strip&&strip.offsetParent?strip.getBoundingClientRect().height+6:0;
   const h=narrow?full-stripH:(rest<Math.min(320,full)?full:rest);
-  pc.style.setProperty("--kpcmax",Math.max(200,Math.round(h))+"px");pc.classList.toggle("kpcfull",h===full);
+  pc.style.setProperty("--kpcmax",Math.max(200,Math.round(h))+"px");pc.classList.toggle("kpcfull",h===full);try{kitPcKeyFit(pc)}catch(e){}
   const nm=(pc.querySelector(".pcname")||{}).textContent||"";if(P.__kpcN!==nm||narrow||!P.__kpcUser){const fresh=P.__kpcN!==nm;P.__kpcN=nm;if(!fresh&&P.__kpcUser)return;const fit=()=>{try{const q=P.querySelector(".pc[data-k2]");if(!q)return;const a=P.getBoundingClientRect(),c=q.getBoundingClientRect();const sub2=P.querySelector(".ksub");
    const kb2=P.querySelector(":scope>.kpbar");const sb=kb2&&kb2.offsetParent?kb2.getBoundingClientRect().bottom+(parseFloat(getComputedStyle(kb2).marginBottom)||0):sub2&&sub2.offsetParent?sub2.getBoundingClientRect().bottom:a.top+pt;
    if(narrow){const st2=P.querySelector(".pstrip");const tgt=st2&&st2.offsetParent?st2.getBoundingClientRect().top:c.top;const d=tgt-sb;if(Math.abs(d)>1)P.scrollTop+=d}
@@ -1036,6 +1069,30 @@ html body #panel .ksub{top:0!important;z-index:7!important;box-shadow:0 -9px 0 0
    (kit `.kpgrid > .kpgr > .kpc`), next to the portrait on the Fold/phones and under it on iPad. Rows: relation (Thiện cảm N ▮ · Oán N ▮ ·
    Nàng với ngươi · Ghen) · stats (Sủng · Danh · Đức · Sắc · Tài · Tâm cơ) · small facts (Tuổi · Tính nết · Muốn hại ngươi · status chips).
    Unknown = "?" (dim); the long wording ("chưa rõ (xem sổ thị tẩm)", "Bình thường") lives in the chip's tooltip (tap = kpPop). ---------- */
+/* ---------- 20a. PERSON CARD KEY BLOCK (owner 17/11 ~04:26Z + ~04:40Z, option 1 compact; review/person-leftcol) ----------
+   The LEFT column keeps the live key info under the portrait, always in view while the acts scroll: the acquaintance chip (k61StChip,
+   moved here from the chips), the compact two-way relation block (jpcf pcfKey: kitRelTable compact) and the Thích / Ghét lines once
+   they are known (moved from the right info panel, unknown ones are dropped). No Tâm trạng chip (the mood is on the portrait frame).
+   kitPcKeyFit gives the portrait back as much height as the key block needs (the one place that sizes the figure: the portrait is shrunk
+   only when the card is too short for portrait + key block, never below 112 px wide). */
+function kitPcKey(pc){const L=pc&&pc.querySelector(":scope > .pcl"),key=L&&L.querySelector(":scope > .kpkey");if(!key||key.dataset.k==="1")return;key.dataset.k="1";
+ const T=e=>String(e||"").replace(/\s+/g," ").trim();
+ const W=typeof K61STW!=="undefined"?K61STW:["Người lạ","Mới thấy mặt","Biết tên","Đã quen"];
+ const ch=[...L.querySelectorAll(".chips .chip")].find(c=>W.some(w=>T(c.textContent).replace(/ⓘ/g,"").trim()===w));
+ if(ch){const w=document.createElement("div");w.className="kpk-st";w.appendChild(ch);key.prepend(w)}
+ const lines=[];pc.querySelectorAll(":scope > .pcr .pcf .kr").forEach(r=>{const l=T((r.querySelector(".krl")||{}).textContent);const m=/^(?:Nàng |Ngài |Hắn )?(thích|ghét)$/i.exec(l);if(!m)return;
+  const v=r.querySelector(".krv .ef"),kv=r.querySelector(".krv");if(v&&v.classList.contains("t"))lines.push([m[1][0].toUpperCase()+m[1].slice(1).toLowerCase(),kv.innerHTML]);/* pcard-facts: keep every fact + its tap (kitFactTap), not the first item's plain text */r.remove()});
+ /* an empty "Sở trọng" panel section loses its heading */
+ pc.querySelectorAll(":scope > .pcr .pcf .kpsec").forEach(sec=>{if(sec.querySelector(".kpst")&&!sec.querySelector(".kr,.kpnote,.kchips,button"))sec.remove()});
+ if(lines.length){const d=document.createElement("div");d.className="kpkl";d.innerHTML=lines.map(([a,b])=>`<div><span class="kpkl-l">${a}</span> ${b}</div>`).join("");key.appendChild(d)}}
+function kitPcKeyFit(pc){try{const L=pc.querySelector(":scope > .pcl"),key=L&&L.querySelector(":scope > .kpkey"),pcp=L&&L.querySelector(":scope > .pcp");if(!key||!pcp||!pc.classList.contains("kpwide"))return;
+ const max=parseFloat(pc.style.getPropertyValue("--kpcmax"))||0,nat=+pc.dataset.kpcw0||0;if(!max||!nat)return;
+ for(let i=0;i<4;i++){const cw=parseFloat(pc.style.getPropertyValue("--kpcw"))||nat;const gap=6;
+  const wear=L.querySelector(":scope > .kwear"),wh=wear&&wear.offsetHeight?wear.offsetHeight+gap:0; /* r1: the outfit thumbnail row sits under the key block, it must not be pushed out of view either (Fold) — counted only while the figure stays >= 160 px wide */
+  const mk=x=>{const need=pcp.offsetTop+pcp.offsetHeight+gap+key.offsetHeight+8+x,over=need-max;return{over,w:Math.max(112,Math.min(nat,Math.floor((pcp.offsetHeight-over)*550/1037)))}};
+  let r=mk(wh);if(wh&&r.w<160)r=mk(0);const over=r.over,w=r.w;
+  if(Math.abs(over)<2||(over<0&&cw>=nat))break;
+  if(Math.abs(w-cw)<1)break;pc.style.setProperty("--kpcw",w+"px")}}catch(e){}}
 function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc.querySelector(":scope > .pcl");if(!L)return;
  const T=e=>String(e||"").replace(/\s+/g," ").trim();const unk=v=>/^(chưa rõ|\?|không rõ)/i.test(v);
  const chip=(lab,val,full,extra)=>{lab=String(lab||"");lab=lab.charAt(0).toUpperCase()+lab.slice(1);const u=unk(val);const w=document.createElement("span");
@@ -1068,7 +1125,7 @@ function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc
    [[SJ+" quý ngươi","Quý"],[SJ+" oán ngươi","Oán"],["Ngươi quý "+OB,"Quý"],["Ngươi oán "+OB,"Oán"],["Ghen","Ghen"]].forEach(([l,g])=>{if(!have(l))rowA.push(chip(RG(g,l),"?",l+": chưa rõ"))})}}catch(e){}
  const ORD=[SJ+" quý ngươi",SJ+" oán ngươi","Ngươi quý "+OB,"Ngươi oán "+OB,"Ghen"],oi=c=>{const l=(c.querySelector("small")||{}).textContent||"";const i=ORD.indexOf(l.trim());return i<0?99:i};rowA.sort((x,y)=>oi(x)-oi(y));
  const SORD=["Sủng","Đức","Danh","Sắc","Tài","Tâm cơ"],si=c=>{const l=((c.querySelector("small")||{}).textContent||"").trim().toLowerCase();const i=SORD.findIndex(x=>x.toLowerCase()===l);return i<0?99:i};rowB.sort((x,y)=>si(x)-si(y));
- const g=document.createElement("div");g.className="kpgrid";[rowA,rowB,rowC].forEach((R,i)=>{if(!R.length)return;const d=document.createElement("div");d.className="kpgr kpgr"+i;R.forEach(c=>d.appendChild(c));g.appendChild(d)});
+ const g=document.createElement("div");g.className="kpgrid";[pc.querySelector(":scope > .pcl > .kpkey")?[]:rowA,rowB,rowC].forEach((R,i)=>{if(!R.length)return;const d=document.createElement("div");d.className="kpgr kpgr"+i;R.forEach(c=>d.appendChild(c));g.appendChild(d)});
  if(!g.children.length)return;
  if(bars){bars.replaceWith(g)}else{const pp=L.querySelector(":scope > .kwear")||L.querySelector(":scope > .pcp");if(pp)pp.after(g);else L.appendChild(g)}
  if(tiles)tiles.remove();pc.querySelectorAll(".kpfacts").forEach(f=>{if(info&&!info.children.length)info.remove();if(!T(f.textContent)&&!f.querySelector("button,img"))f.remove()});
@@ -1077,9 +1134,25 @@ function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc
  }catch(e){console.error("kitPcGrid",e)}}
 /* the ONE person-info component: every person card / sheet on every device goes through kitPcFix → kitPersonChips */
 window.kitPersonChips=kitPcGrid;
-(function(){const f0=kitPcFix;kitPcFix=function(pc){const r=f0.apply(this,arguments);try{kitPcGrid(pc)}catch(e){}try{kitPcSize()}catch(e){}return r}})();
+(function(){const f0=kitPcFix;kitPcFix=function(pc){const r=f0.apply(this,arguments);try{kitPcKey(pc)}catch(e){console.error("kitPcKey",e)}try{kitPcGrid(pc)}catch(e){}try{kitPcSize()}catch(e){}return r}})();
 document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".kpgrid .kst-chip");if(!c||e.target.closest("button"))return;try{if(typeof kpPop==="function"){kpPop(c,`<div class="kpopt">${c.title}</div>`);e.stopPropagation()}}catch(x){}},true);
 (function(){const st=document.createElement("style");st.id="k2b-pcgrid";st.textContent=`
+/* KIT 20a person card key block (left column): sits right under the portrait, before the wear slots and stat chips */
+.pc .kpkey{display:flex;flex-direction:column;gap:4px;margin:0 0 6px;font-size:.78rem;min-width:0}
+.pc .kpkey .kpk-st{display:flex;flex-wrap:wrap;gap:4px}
+.pc .kpkl{display:flex;flex-direction:column;gap:1px;line-height:1.3;color:var(--ink)}.pc .kpkl-l{font-weight:700;color:var(--k-lab,#8a7350)}
+.pc.kpwide[data-k2]{grid-template-columns:var(--kpcl,var(--kpcw)) minmax(0,1fr)!important}
+html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;margin-left:auto!important;margin-right:auto!important}/* beats jk3 (width 100%): the figure is --kpcw wide, kitPcKeyFit may shrink it so the key block fits */
+.pc.kpwide[data-k2]>.pcl>.kpkey{order:1!important}
+.pc.kpwide[data-k2]>.pcl>.kwear,.pc.kpwide[data-k2]>.pcl>.kpgrid,.pc.kpwide[data-k2]>.pcl>.kpfacts{order:2!important}
+.pc.kpwide[data-k2]>.pcl>.kwear{width:auto}
+.pc.kpnar[data-k2]>.pcl>.kpkey{grid-area:key;margin:6px 0 0;flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 12px}
+.pc.kpnar[data-k2]>.pcl>.kpkey .kr2-cp{flex:1 1 220px}
+.pc[data-k2] .kpstick .pcf{margin:0 0 5px;max-height:calc(34*var(--kvh));overflow-y:auto;overscroll-behavior:contain}
+.pc[data-k2] .kpstick .pcf .kpsec{margin:0 0 2px;display:grid;grid-template-columns:4.4rem minmax(0,1fr);column-gap:6px;align-items:start}
+.pc[data-k2] .kpstick .pcf .kpst{margin:2px 0 0;font-size:.66rem;line-height:1.2;border:0;padding:0}
+.pc[data-k2] .kpstick .pcf .kpsec>:not(.kpst){grid-column:2;min-width:0}
+.pc[data-k2] .kpstick .pcf .krv{overflow-wrap:anywhere}/* pcard-facts: the fact is shown whole, never cut with "…" (details sit behind the tap) */
 .kpgrid{display:flex;flex-direction:column;gap:4px;margin:4px 0 6px}
 .kpgr{display:flex;flex-wrap:wrap;gap:4px}
 .kst-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border:1px solid var(--k-hair,#e6d3ac);border-radius:7px;background:var(--k-card,#fffaf0);font-size:.76rem;line-height:1.25;white-space:nowrap;cursor:help}

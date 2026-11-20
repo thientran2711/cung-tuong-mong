@@ -31,7 +31,7 @@ const MEASURE=()=>{const R=e=>{if(!e)return null;const r=e.getBoundingClientRect
   const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));await p.goto(URL,{waitUntil:'commit'});
   let fr;for(let i=0;i<180;i++){fr=p.frames().find(x=>x.url().includes('krot=1'))||p.mainFrame();try{if(await fr.evaluate(()=>typeof start==='function'))break}catch(e){}await sleep(1000)}
   await fr.waitForFunction(()=>!document.getElementById('kload')||(window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)),null,{timeout:180000}).catch(()=>{});await sleep(1500);
-  await fr.evaluate((MODE)=>{try{localStorage.clear()}catch(e){}OPT.fxon=false;SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<200;i++){start();if(MODE==='srv'?isSrv():!isSrv())break}if(MODE==='srv'&&!isSrv()){S.origin=S.origin||{};S.origin.k='cnv';quiet=true;srvInit();quiet=false;try{deal()}catch(e){}render()}},MODE);
+  await fr.evaluate((MODE)=>{try{localStorage.clear()}catch(e){}OPT.fxon=false;SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<200;i++){try{nlNew()}catch(e){}start();if(MODE==='srv'?isSrv():!isSrv())break}if(MODE==='srv'&&!isSrv()){S.origin=S.origin||{};S.origin.k='cnv';quiet=true;srvInit();quiet=false;try{deal()}catch(e){}render()}},MODE);
   for(let i=0;i<5;i++){await sleep(900);await fr.evaluate(CLEAN)}
   const out={home:await fr.evaluate(MEASURE)};await p.screenshot({path:`${OUT}/${tag}-home.png`});
   await fr.evaluate(CLEAN);await fr.evaluate(()=>{const b=document.querySelector('#tabs [data-kg="hc"]')||document.querySelector('#tabs [data-tab="rv"]');b&&b.click()});await sleep(1500);

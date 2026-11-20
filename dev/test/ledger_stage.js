@@ -10,7 +10,7 @@ const OUT=process.argv[2]||'/tmp/ledger_stage';const DEV=process.argv.slice(3).l
   /* the first-visit download cover (kload): skip like dev/test/stage-counts.js */
   for(let i=0;i<240;i++){const s=await g.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"], #kload [data-kl="web"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''}).catch(()=>'');if(s)break;await p.waitForTimeout(500)}
   const r=await g.evaluate(async o=>{const W=t=>new Promise(r=>setTimeout(r,t));localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__forceOrigin=o;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;try{deal()}catch(e){}render();await W(600);
-   const clear=()=>{let n=0;while(Q.length&&n++<30){const m=Q[0];if(m.opts&&m.opts.length){try{chooseM(m.opts.length-1)}catch(e){Q.shift()}}else{try{closeModal()}catch(e){Q.shift()}}}};clear();
+   const clear=()=>{let n=0;while(Q.length&&n++<30){const m=Q[0];if(m.opts&&m.opts.length){try{chooseM((L=>L.length?L[L.length-1]:0)(m.opts.map((c,i)=>c.off?-1:i).filter(i=>i>=0)))}catch(e){Q.shift()}}else{try{closeModal()}catch(e){Q.shift()}}}};clear();
    const R=S.roster,kh=j95kh();const LK=j95lk;const cnt={};for(const id in R.P){const k=LK(R.P[id][kh][0]);if(id!=="me")cnt[k]=(cnt[k]||0)+1}
    const here=LK(S.place);const L=Object.entries(cnt).filter(([k])=>k!==J95OUT_&&k!=="ngoai").sort((a,b)=>b[1]-a[1]);let tgt=null;
    for(const [k] of L){if(k===here){tgt=k;break}if(isSrv()&&k===LK("home")){tgt="home";break}try{if(places().some(x=>x.k===k)&&accessOf(S,k).ok){tgt=k;break}}catch(e){}}
@@ -19,7 +19,7 @@ const OUT=process.argv[2]||'/tmp/ledger_stage';const DEV=process.argv.slice(3).l
    const st=kitHereCount();const figs=document.querySelectorAll('#stage .fig, #stage [data-pi]').length;const de=document.documentElement;
    return{place:S.place,cnt:L.slice(0,4),rec,stage:st,figs,pager:!!document.querySelector('#stage .j59pg, #stage [data-j59pg], .j59pager'),over:de.scrollWidth>de.clientWidth+1,kinds:S.visit.people.map(p=>p.kind+(p.sk?":"+p.sk:"")).join(",")}},o);
   /* full-screen moments (j93 kmhint "Chạm để bỏ qua": card flip, news beats): tap them away before the shot */
-  for(let i=0,quiet=0;i<40&&quiet<3;i++){const n=await g.evaluate(()=>{let q=0;while(Q.length&&q++<30){const m=Q[0];if(m.opts&&m.opts.length){try{chooseM(m.opts.length-1)}catch(e){Q.shift()}}else{try{closeModal()}catch(e){Q.shift()}}}
+  for(let i=0,quiet=0;i<40&&quiet<3;i++){const n=await g.evaluate(()=>{let q=0;while(Q.length&&q++<30){const m=Q[0];if(m.opts&&m.opts.length){try{chooseM((L=>L.length?L[L.length-1]:0)(m.opts.map((c,i)=>c.off?-1:i).filter(i=>i>=0)))}catch(e){Q.shift()}}else{try{closeModal()}catch(e){Q.shift()}}}
     const md=document.getElementById('modal');if(md&&!md.hidden){const x=md.querySelector('button');if(x){x.click();q++}}const h=[...document.querySelectorAll('.kmhint')].filter(x=>x.offsetParent);for(const x of h)(x.parentElement||x).click();
     const ok=[...document.querySelectorAll('button')].filter(x=>x.offsetParent&&/^(Ta biết rồi|Nhận)$/.test(x.textContent.trim()));
     for(const x of document.querySelectorAll('body *'))if(x.children.length===0&&x.offsetParent&&/^Chạm để mở$/.test((x.textContent||'').trim())){(x.closest('[role=dialog]')||x.parentElement||x).click();ok.push(x)}for(const x of ok)x.click();h.push(...ok);if(q)h.push(1);

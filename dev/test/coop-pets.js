@@ -32,7 +32,7 @@ async function clear(o,n=25){for(let i=0;i<n;i++){const st=await o.p.evaluate(()
    const bk=[...document.querySelectorAll('.kbk-bar button')].find(x=>x.offsetParent!==null&&/^Lui$/.test(x.textContent.trim()));if(bk){bk.click();return'x'}
    const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';
    try{const t=(m.querySelector('h2,h3,.kmt,.kmtitle')||{}).textContent||'';(window.__seen=window.__seen||[]).push(t.trim()+' | '+m.textContent.replace(/\s+/g,' ').slice(0,300))}catch(e){}
-   const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled])');if(b){b.click();return'x'}return'stuck'});
+   const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'});
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 /* r1 fix 6: a seat that already pressed for this step (buổi ended = bend, night-ready by the night gate or its night with the Emperor, week end out) counts as pressed */
@@ -93,7 +93,12 @@ async function waitFr(o,fn,ms=15000){const t0=Date.now();while(Date.now()-t0<ms)
   ok(await waitFr(B,()=>/Hảo hữu tìm đến/.test(JSON.stringify(Q)+((document.getElementById('modal')||{}).textContent||''))),'B gets the gift invite card');
   {const t0=Date.now();while(Date.now()-t0<20000){await clear(B);if(await B.p.evaluate(n=>(S.inv||[]).filter(e=>e.k==='tramngoc').length>n,n0))break;await sleep(400)}}
   ok(await B.p.evaluate(n=>(S.inv||[]).filter(e=>e.k==='tramngoc').length===n+1,n0),'B: the hairpin is in her own bag (Quà tặng dialog kept it)',await B.p.evaluate(()=>(window.__seen||[]).slice(-3)));
-  ok(await A.p.evaluate(()=>!S.inv.some(e=>e.k==='tramngoc')),'A: the hairpin left her bag');await clear(A)}
+  ok(await A.p.evaluate(()=>!S.inv.some(e=>e.k==='tramngoc')),'A: the hairpin left her bag');
+  /* item ledger (review/item-ledger-solo): the live path carries the gift; A's ledger only records it — one gift = one item, never also in A's store */
+  if(await A.p.evaluate(()=>typeof ilS==='function')){const L=await A.p.evaluate(()=>{try{ilCensus()}catch(e){}const I=ilS();return{box:I.box.filter(x=>x.e&&x.e.k==='tramngoc').length,sent:I.log.some(l=>l[2]==='tramngoc'&&/hảo hữu/.test(l[5])),net:I.net}});
+   ok(L.box===0&&L.sent&&L.net===0,'A ledger: gift logged "sang hảo hữu", not in her box, no net (one gift = one item)',L);
+   ok(await B.p.evaluate(n=>{let c=(S.inv||[]).filter(e=>e.k==='tramngoc').length;try{c+=ilS().box.filter(x=>x.e&&x.e.k==='tramngoc').length}catch(e){}return c===n+1},n0),'B: exactly one hairpin arrived (chest + store)')}
+  await clear(A)}
  /* 2 harm (forced success): B loses her best pet (petTarget), the follow bonus leaves once */
  const sb0=await B.p.evaluate(()=>({pets:(S.pets||[]).map(P=>P.t),on:S.petOn,b:S.petB,bn:S.petBn,stats:{sac:S.sac,tai:S.tai,tamco:S.tamco,duc:S.duc,danh:S.danh,th:S.th}}));
  const tgt=await A.p.evaluate(()=>{const f=COOPW.friend();return f.pets[petTarget(f)].t});

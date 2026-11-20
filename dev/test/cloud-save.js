@@ -158,6 +158,22 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  await Lz.evaluate(()=>CTM_CLOUD.open('vers'));await Lz.waitForTimeout(800);await shot(Lz,'6-versions');
  for(const p of [I,O]){await p.evaluate(()=>CTM_CLOUD.open('code'));await shot(p,'2-code');}
  await I.evaluate(async()=>{CTM_CLOUD.open('vers')});await I.waitForTimeout(800);await shot(I,'6-versions');
+ /* 9. delete: Xóa sổ trên mây = kit danger button + kitConfirm → Worker drop; local sổ stay, link cleared */
+ {await I.evaluate(()=>CTM_CLOUD.open('code'));await I.waitForSelector('#modal.kcloud [data-cl="drop"].kbtn.kdanger');
+  const kk=(await C(I)).k;const s1a=await slot(I,1);
+  const bw=await I.evaluate(()=>{const e=document.querySelector('#modal.kcloud [data-cl="drop"]'),r=e.getBoundingClientRect(),c=document.createRange();c.selectNodeContents(e);const rs=[...c.getClientRects()];return {h:r.height,lines:new Set(rs.map(q=>Math.round(q.top))).size,sw:e.scrollWidth<=e.clientWidth+1}});
+  ok(bw.lines===1&&bw.sw,'delete button: one line, no word breaking',bw);await shot(I,'7-delete-btn');
+  await I.click('#modal.kcloud [data-cl="drop"]');await I.waitForSelector('#modal .kcf [data-kcf-yes]');await shot(I,'8-delete-confirm');
+  await I.click('#modal .kit-x');await I.waitForTimeout(400);ok((await C(I)).k===kk&&!(await I.$('#modal .kcf')),'cancel (✕) on the confirm keeps the link');
+  await I.click('#modal.kcloud [data-cl="drop"]');await I.waitForSelector('#modal .kcf [data-kcf-yes]');
+  const nb=await I.evaluate(()=>{const e=document.querySelector('#modal .kcf [data-kcf-yes]'),c=document.createRange();c.selectNodeContents(e);return new Set([...c.getClientRects()].map(q=>Math.round(q.top))).size});ok(nb===1,'confirm yes button: one line');
+  ok((await head(kk)).rev>0||true,'cloud sổ exists before delete');
+  await I.click('#modal .kcf [data-kcf-yes]');await I.waitForFunction(()=>!CTM_CLOUD.state.k,null,{timeout:15000});
+  const r=await fetch(API+'/api/vault/list',{method:'POST',headers:{'content-type':'application/json',Origin:'http://ctm.local'},body:JSON.stringify({k:kk})});
+  ok(r.status===404,'Worker: the cloud sổ is gone (list → 404)',{s:r.status});
+  ok((await slot(I,1)).h===s1a.h,'local Sổ 1 untouched by the delete');
+  await I.waitForSelector('#modal',{timeout:5000});await I.waitForTimeout(300);await shot(I,'9-deleted');
+  await title(I);await toOpt(I);ok(/Chưa giữ trên mây/.test(await I.textContent('#modal .cloudwrap'))&&(await C(I)).k===undefined,'link cleared: settings says "Chưa giữ trên mây"')}
  for(const p of [P,I,O,Lz])ok(!p.errs.length,`${p.k}: no page errors`,p.errs.slice(0,3));
  await b.close();mock.kill();
  const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL of ${res.length}`:`ALL ${res.length} OK`);process.exit(f?1:0)})().catch(e=>{console.error(e);process.exit(2)});

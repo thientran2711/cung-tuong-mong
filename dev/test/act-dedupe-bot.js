@@ -10,7 +10,7 @@ const {chromium}=require('playwright');const [,,URL,NL,NW]=process.argv;const LI
  const out=[];
  for(let life=0;life<LIVES;life++){
   await p.evaluate(()=>{try{localStorage.clear()}catch(e){}const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;SLOT=3;
-   for(let i=0;i<60;i++){start();if(!(typeof isSrv==='function'&&isSrv())&&!S.out)break}document.querySelectorAll('.kroul').forEach(e=>e.remove());
+   for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv())&&!S.out)break}document.querySelectorAll('.kroul').forEach(e=>e.remove());
    window.save=()=>{};/* fast like dev/measure/inpage4.js: no drawing, dialogs still go through Q; the map HTML is still built once per buổi */
    popNum=()=>{};curtain=()=>{};fx=()=>{};renderHUD=()=>{};renderStage=()=>{};renderPanel=()=>{};render=function(){if(!S)return;if(Q.length&&document.getElementById('modal').hidden)showModal()};window.__B={dead:[],dbl:[],hap:{},acts:0,walks:0,talks:0,shop:0,steps:0,buoi:0,cards:{}};
    const q=s=>document.querySelector(s);
@@ -18,7 +18,7 @@ const {chromium}=require('playwright');const [,,URL,NL,NW]=process.argv;const LI
     if(S.dead)return"dead";
     const ov=q('#ov');if(ov&&!ov.hidden){const k=q('#kg82skip')||q('#ov .kg82act button:not(#kg82go)')||q('#kg82ok')||q('#mgok')||q('#mgskip')||q('#ov .kit-x')||q('#ov button.kbtn');if(k){k.click();return"ov"}ov.hidden=true;return"ov"}
     if(S.mg){try{S.mg=null}catch(e){}}
-    if(Q.length){const m=Q[0];if(m.opts&&m.opts.length){const ok=m.opts.map((c,i)=>[c,i]).filter(([c])=>!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)&&!(typeof c.lk==="function"&&c.lk()));if(!ok.length){closeModal();return"m0"}chooseM(ok[Math.floor(Math.random()*ok.length)][1]);return"m"}closeModal();return"m"}
+    if(Q.length){const m=Q[0];if(m.opts&&m.opts.length){const ok=m.opts.map((c,i)=>[c,i]).filter(([c])=>!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)&&!(typeof c.lk==="function"&&c.lk()));if(!ok.length){closeModal();return"m0"}chooseM(ok[Math.floor(Math.random()*ok.length)][1]);return"m"}closeModal();return"m"}
     const sh=q('.kshop');if(sh){const x=q('#ov .kit-x,.kshop ~ .kit-x,[data-kshopx]');try{document.getElementById('ov').hidden=true}catch(e){}}
     const C=[];const dayDone={};
     deck.forEach((a,i)=>{if(!a.done&&!a.lock&&canPay(a)&&can(cardCost(a))&&!(a.b!=null&&(S.buoi||0)!==a.b))C.push(["card",()=>{const n=a.n;act(i);if(a.done){B.acts++;B.cards[n]=(B.cards[n]||0)+1}}])});

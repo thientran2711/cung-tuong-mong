@@ -43,20 +43,26 @@ function kitRelSign(d){return d>0?"+"+d:d<0?"−"+Math.abs(d):"0"}
 function kitRelCls(d,kind){return !d?"n":(kind==="bad"?d<0:d>0)?"g":"r"}
 const kr2Num=r=>r.now==null?"—":r.now<0?"−"+Math.abs(r.now):String(r.now);
 /* the number's colour = its meaning (no bars): thiện cảm > 10 green / < −10 red; oán, ghen ≥ 20 red; sủng, ân tình green when > 0; else dim ink */
-const kr2Cls=r=>{const v=r.now;if(v==null)return"n";if(r.kind==="bad")return v>=20?"r":"n";if(r.kind==="pos")return v>0?"g":"n";return v>10?"g":v<-10?"r":"n"};
+const kr2Cls=r=>{const v=r.now;if(v==null)return"n";if(r.kind==="bad")return v>=20?"r":"n";if(r.kind==="pos")return v>0?"g":"n";return v>BAL.quyLv[2]?"g":v<BAL.quyLv[1]?"r":"n"};
 /* KIT §52 kitRel2 — THE relation component, used by EVERY screen (owner 11/16 15:00Z 4.6 / 4.7 / 4.8): TWO column boxes, LEFT = that person → me ("Nàng → ta"),
    RIGHT = me → that person ("Ta → nàng"); a header tab on each box; rows are SHORT words only (Thiện cảm / Oán / Ghen / Sủng / Tin cậy), the number in its meaning colour, NO bars;
    o.week → inside each box the "Hiện nay" and "Tuần này" columns are aligned. cols = [{head, dir:"them"|"me"|"x", rows:[{w, now, d, kind:"good"|"bad"|"pos", gloss?, unk?}]}] (one or two boxes). */
-function kitRel2(cols,o){o=o||{};const wk=!!o.week;cols=(cols||[]).filter(c=>c&&c.rows&&c.rows.length);if(!cols.length)return"";
+function kitRel2(cols,o){o=o||{};const wk=!!o.week;cols=(cols||[]).filter(c=>c&&c.rows&&c.rows.length);if(!cols.length)return"";if(o.compact)return kitRelCompact(cols);
  const box=c=>{const known=c.rows.some(r=>r.unk==null);const hd=wk&&known?`<span class="kr2-c"></span><span class="kr2-c kr2-n">Hiện nay</span><span class="kr2-c kr2-n">Tuần này</span>`:"";
   return `<div class="kr2b kr2-${c.dir||"x"}"><div class="kr2h" data-vp-skip>${c.head}</div><div class="kr2g${wk&&known?" kr2k":""}" role="table">${hd}`+c.rows.map(r=>{
     const g=r.gloss!==false&&typeof kitGloss==="function"&&typeof KIT_GLOSS==="object"&&KIT_GLOSS[r.gloss||r.w]?kitGloss(r.gloss||r.w,r.w):r.w;
     return `<span class="kr2-l" role="cell" data-vp-skip>${g}</span>`+(r.unk!=null?`<span class="kr2-u" role="cell">${r.unk}</span>`:`<span class="kr2-v ${kr2Cls(r)}" role="cell">${kr2Num(r)}</span>`+(wk?`<span class="kr2-d ${kitRelCls(r.d,r.kind)}" role="cell">${r.d?kitRelSign(r.d):"—"}</span>`:""))}).join("")+`</div></div>`};
- return `<div class="kr2w"><div class="kr2 kr2-n${cols.length}">${cols.map(box).join("")}</div></div>`}
+ return `<div class="kr2w${o.paper?" kr2-paper":""}"><div class="kr2 kr2-n${cols.length}">${cols.map(box).join("")}</div></div>`}
+/* KIT §52 COMPACT (owner 17/11 ~04:40Z, person dialog left column, "option 1 compact"): the same two directions, ONE line each — no box, no header band —
+   "Nàng → ta  Thiện cảm 12 · Oán 3 · Ghen 8" / "Ta → nàng  Thiện cảm 20". A word + its number never split; the line wraps only between pairs.
+   Numbers keep the §52 meaning colours (kr2Cls). Used by the person card's left key block (jpcf pcfKey); data-krk = direction|word so a change can glow. */
+function kitRelCompact(cols){return `<div class="kr2w kr2-cp">`+cols.map(c=>`<div class="kr2cl kr2-${c.dir||"x"}"><span class="kr2ch" data-vp-skip>${c.head}</span>`+c.rows.map(r=>{
+  const g=r.gloss!==false&&typeof kitGloss==="function"&&typeof KIT_GLOSS==="object"&&KIT_GLOSS[r.gloss||r.w]?kitGloss(r.gloss||r.w,r.w):r.w;
+  return `<span class="kr2ci"><span class="kr2-l" data-vp-skip>${g}</span> `+(r.unk!=null?`<span class="kr2-u">${r.unk}</span>`:`<b class="kr2-v ${kr2Cls(r)}">${kr2Num(r)}</b>`)+`</span>`}).join("")+`</div>`).join("")+`</div>`}
 /* rows from kitRelRows(p,snap) → the two columns */
 function kitRelTable(rows,o){o=o||{};if(!rows||!rows.length)return"";const L=rows.filter(r=>r.dir!=="me"),M=rows.filter(r=>r.dir==="me");const f=rows[0],sj=f.sj||"Nàng",ob=f.ob||"nàng";
  const wk=o.head!==false&&rows.some(r=>r.unk==null&&r.d!==undefined);
- return kitRel2([{head:`${sj} → ta`,dir:"them",rows:L},{head:`Ta → ${ob}`,dir:"me",rows:M}],{week:wk})}
+ return kitRel2([{head:`${sj} → ta`,dir:"them",rows:L},{head:`Ta → ${ob}`,dir:"me",rows:M}],{week:wk,paper:!!o.paper,compact:!!o.compact})}
 function kitRelDelta(label,dir,d,kind){d=KRT_INT(d)||0;return `<span class="krd">${label?(dir==="none"?`<span class="krd-l" data-vp-skip>${label}</span>`:kitRelLab(dir||"them",label))+" ":""}<b class="${kitRelCls(d,kind)}">${kitRelSign(d)}</b></span>`}
 /* week snapshot: also "ta → nàng" and every servant (so their row shows the week's change) */
 (function(){if(typeof wkSnap!=="function")return;const s0=wkSnap;wkSnap=function(){const s=s0.apply(this,arguments);try{
@@ -74,11 +80,25 @@ window.kitRelRows=kitRelRows;window.kitRelTable=kitRelTable;window.kitRel2=kitRe
 .kr2g.kr2k{grid-template-columns:minmax(0,1fr) max-content max-content}
 .kr2-c{font-size:.62em;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--k-lab,#8a7350);padding-bottom:.1em;border-bottom:1px solid var(--k-hair,#e6d3ac)}
 .kr2-n,.kr2-v,.kr2-d{text-align:right;white-space:nowrap}
-.kr2-l{min-width:0;overflow-wrap:anywhere;font-weight:600;color:var(--ink,#2a1a12)}
+.kr2-l{min-width:min-content;overflow-wrap:normal;word-break:normal;hyphens:none;font-weight:600;color:var(--ink,#2a1a12)}   /* a word never breaks inside (kit button/label rule) */
 .kr2-v{font-weight:700}.kr2-v.g,.kr2-d.g{color:var(--good,#2d7a52)}.kr2-v.r,.kr2-d.r{color:var(--bad,#c23b22)}.kr2-v.n{color:var(--ink,#2a1a12)}
 .kr2-d{font-weight:700}.kr2-d.n{color:var(--k-lab,#8a7350);font-weight:400}
 .kr2-u{grid-column:1 / -1;min-width:0;white-space:normal;overflow-wrap:anywhere;color:var(--k-lab,#8a7350);font-style:italic}
 @container (max-width:260px){.kr2-n2,.kr2-n1{grid-template-columns:minmax(0,1fr)}.kr2g{font-size:.82em}}
+/* KIT 52 'on paper' (owner 17/11 03:26Z, every book page): no purple header band, no white card — the table sits straight on the paper; header = a coloured line of text over a hair rule; boxes stack when the text frame is narrower than two boxes; a lone box takes the whole frame */
+.kr2-paper .kr2b{background:none;border:0;border-radius:0;overflow:visible}
+.kr2-paper .kr2h{background:none;padding:.2em 0;border-bottom:1px solid color-mix(in srgb,var(--krc) 45%,transparent);color:color-mix(in srgb,var(--krc) 85%,#000);font-size:.82em}
+.kr2-paper .kr2g{padding:.3em 0 .2em}
+.kr2-paper .kr2-c{color:#6a5236;border-bottom-color:color-mix(in srgb,#6a5236 35%,transparent)}
+.kr2-paper .kr2-d.n{color:#6a5236}
+.kr2-paper .kr2-n1{grid-template-columns:minmax(0,1fr)}
+@container (max-width:430px){.kr2-paper .kr2-n2{grid-template-columns:minmax(0,1fr)}}
+/* KIT 52 compact (owner 17/11): one line per direction, pairs never split */
+.kr2-cp{margin:0;display:flex;flex-direction:column;gap:3px;font-size:.82em;line-height:1.3;font-variant-numeric:tabular-nums}
+.kr2cl{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .7em;min-width:0}
+.kr2ch{flex:0 0 100%;font-size:.86em;font-weight:700;letter-spacing:.02em;color:var(--krc);color:color-mix(in srgb,var(--krc,#6a5040) 90%,#000)}
+.kr2cl.kr2-them{--krc:#7a4fa0}.kr2cl.kr2-me{--krc:#3f62a8}
+.kr2ci{white-space:nowrap}.kr2ci .kr2-v{margin-left:.15em}
 .krd{white-space:nowrap;font-weight:600}.krd .krel{font-weight:600}.krd b.g{color:var(--good,#2f7a46)}.krd b.r{color:var(--bad,#b0332a)}.krd b.n{color:var(--ink,#3a2a1a)}
 `;document.head.appendChild(st)})();
 /* KIT SAMPLE PAGE §47 (jkitpage loads later in the same script): §52 relation table + inline deltas, §57 number deltas */
@@ -87,6 +107,7 @@ function kitRelSamples(){const R=(dir,label,now,d,kind)=>{const sj=/^Hoàng thư
   "Hoàng thượng":[R("them","Hoàng thượng → ta: sủng",42,5)],"Thái hậu":[R("them","Thái hậu → ta: thiện cảm",18,-2)],
   "Kẻ hầu":[R("them","Hắn → ta: thiện cảm",64,1),R("me","Ta tin cậy",52,null)],"Người lạ":[{dir:"them",label:"Nàng → ta: thiện cảm",w:"Thiện cảm",sj:"Nàng",ob:"nàng",unk:"chưa rõ nàng nghĩ gì"}]};
  return [{id:"§52",title:"kitRelTable · phi tần · Hoàng thượng · Thái hậu · kẻ hầu · người lạ",html:()=>Object.values(rows).map(r=>kitRelTable(r)).join("")},
+  {id:"§52",title:"kitRelTable · trên trang giấy (paper:true, mọi trang sổ Tuần lục)",html:()=>`<div style="background:#f0dfb4;padding:10px 12px;max-width:420px">${kitRelTable(rows["Thái hậu"],{paper:true})}${kitRelTable(rows["Phi tần"],{paper:true})}</div>`},
   {id:"§52",title:"kitRelTable · cột hẹp (< 240px)",html:()=>`<div style="max-width:220px">${kitRelTable(rows["Phi tần"])}</div>`},
   {id:"§52",title:"kitRelDelta · trong dòng sự việc",html:()=>`<p>Phi Tống Phương Hoa nhờ người đưa thư. ${kitRelDelta("Nàng oán ta","them",2,"bad")}, ${kitRelDelta("Nàng → ta: thiện cảm","them",-15)}; hai người khác: ${kitRelDelta("thiện cảm","none",7)}.</p>`},
   {id:"§57",title:"kitNumDelta / kitDeltaAuto · số không phải quan hệ",html:()=>`<p>Tháng này: Được mùa khắp nơi, ${kitNumDelta("Kho lúa",12)}; nhà Hộ bộ ${kitNumDelta("thế lực",6)}; ${kitNumDelta("Sủng",-3)}; ${kitDeltaAuto("nàng oán ngươi",4)}.</p><p>Phi Tống Phương Hoa nhờ người đưa thư. ${kitDeltaAuto("Nàng oán ta",2)}, ${kitDeltaAuto("thân",-2,"Nàng oán ta +2, ")} (một chữ “thân” trơn ngay sau nàng → ta: người làm được ghi rõ).</p>`}]}

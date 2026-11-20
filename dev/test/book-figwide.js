@@ -1,4 +1,4 @@
-/* book-figwide.js — Tuần lục person pages with WIDE figures (KIT §56.3; review r8 FAIL 1+3).
+/* book-figwide.js — SUPERSEDED 17/11 by book-col-scan.js (narrow figure column, KIT 56.3). Old wide-figure checks, kept for reference only. (KIT §56.3; review r8 FAIL 1+3).
    usage: node dev/test/book-figwide.js <build url | page.html> <outdir>   (env FIGS=a.webp,b.webp  N=14 facts  SZ=[[W,H],…]  SHOTS=1)
    Per size × figure, over EVERY page of the person: text cut (fact or heading below its box), text column width (≥ 220 px, or ≥ a normal figure's text width where the page is too small for 220), words broken
    across lines, facts per page (≥ 2 except the last), figure height / picture height (≥ 0.85), figure scaled (must not), page-1 heading

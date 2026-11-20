@@ -6,6 +6,13 @@ chơi bằng thao tác thật (kéo, chạm, vẽ, nhớ, canh nhịp).
 Mã: `dev/build/j82.js` (khung thi, chấm điểm, 5 trò cũ) + `dev/build/j91.js` (10 trò mới, gắn lại bảng môn). Mọi nơi gọi trò đều đi qua j82:
 `startContest` (hội thi j71, thi tài trong Tranh ghế), `playArt` (tác phẩm j83, tự luyện), `openMG` (học trong tab Tài nghệ: mỗi tài nghệ chơi đúng trò của môn mình).
 
+## RULE: every new minigame ships with its «Thử tay» entry (owner 17/11 ~17:10Z, AG-ALL-2d2)
+The owner-only calibration (dev/build/jmgcal.js, Thiết lập «Thử tay tài nghệ», flag `?hieuchuan=1`) sets every NPC's hand per kind from HER play (BAL.ag.mg2.cal.k).
+A NEW minigame must: (1) register in KG82_KIND with `n` (name), `t`, `how` and an engine in KG82_ENG — then mgCalKinds() lists it automatically in the one 30+-kind run
+(«Thử hết cả N môn» / «Thử tiếp các môn còn lại», resumes at the next kind not done) and the per-kind list; (2) read the board ease (env.lv / mgTier) so the 5 rounds d −2…+2 really get harder;
+(3) pass `node dev/test/ag-mgcal.js` (§5b starts every kind's real board from the test). Until she has played it, NPCs use the default band (BAL.ag.mg2.hand).
+Applying her code: dev/handover/reports/ag-all.md §23.2 (python3 dev/tools/mgcal_apply.py "CTM-CAL …", merges).
+
 ## Bảng môn → cơ chế
 
 | Môn (khóa) | Trò | Thao tác | Cách chấm (0–10 phần màn thi) | Bậc tài nghệ làm dễ hơn |
@@ -55,7 +62,7 @@ Every number below is in `BAL.mgTier.lev[kind]` = [value at ease 0, value at eas
 | Cờ `co` | `lim` (time per position), `fast` (a capture within it earns full 2, slower down to 60 %), `extra` (more stones = more groups to read) | hard boards are busier and reward a quick read |
 | Múa `mua` | `beat` (each step must be tapped within the beat), `sp` (show speed), `retry` (wrong steps forgiven per round on easy boards) | Khó: keep the beat; Dễ: one slip forgiven |
 | Làm phúc `td_hanh` | `lim` (round time, auto «Phát xong»), `short` (portions short in rounds 1–2) | short rounds need thought under time |
-| Đầu hồ `dauho` | `aid` (seconds of flight shown by the aim dots), `mouth` (pot mouth size) | longer aim dots = finer throws |
+| Đầu hồ `dauho` | `aid` (seconds of flight shown by the aim dots), `mouth` (pot mouth size), `pull` (drag gain; the drag cap grows by 1/pull so the strongest throw is unchanged) | longer aim dots = finer throws; cal-p2 owner-bug fix 20/11: aid [.6,2], mouth [1.3,2.1], pull [.8,.6] (was aid [.14,.45], mouth [.8,1.3], no pull: the dots stopped long before the pot, her first try 1.1/10) |
 | Đi đứng `td_dung` | `band` (safe band), `kick` (step sway) | bigger sway, narrower band at low ease |
 | Ngôn `td_ngon` | `band`, `win` (reply window ms), `rate` (voice rise per s), `fade` | see below |
 
@@ -73,3 +80,8 @@ The four promotion-exam kinds that were question banks are now skill games of th
 | thq Thái hậu hỏi | Xếp chỗ ngồi yến (`seat`) | drag each guest to a seat: more jade pins = higher rank = nearer Thái hậu | same as lay | 4 guests, seats numbered |
 Tier 2 (free placement judged on «Xong», model hides after BAL.nwq.peek s) · every tier: Gợi ý button, first-time demo card, quiet auto-hint when she stalls (tier 0/1).
 Tier comes from `mgTier(kind, occasion)` (review/mg-balance) when it exists, else `kg82Tier(lv) + BAL.nwq.shift`. The old Tài nghệ lesson «Y thuật & điều hương» (j5 `MG.y` quiz) now plays the pha-hương game.
+
+## Quick option on every game (mg-skip-all, owner 18/11 ~05:45Z + ~05:55Z)
+Every mini-game offers ONE quick choice through the kit part `kitQuick` (KIT §13.6) with ONE odds key `BAL.skip.od` (40 → "Khó"). A quick result never beats a good own play:
+lessons won = tiến bộ một phần, lost = 0 · works / crafts = no product · makeup won = Đoan trang, lost = Vụng về (Để mặt mộc stays) · care games won = `BAL.skip.care` of the gain, lost = nothing.
+Contests / exams keep "Để tài nghệ quyết định" (the mark of a girl of her level); court acts keep their own odds. Audit: `dev/test/mg-skip-audit.js`.

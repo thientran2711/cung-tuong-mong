@@ -28,7 +28,7 @@ Read each tuần from real changes (rank, lãnh cung, cấm túc, children born/
 `oanAdd` (a slight ≥ 5 → "slight" aimed at the doer), `affAdd` (kindness ≥ 8 → "gift"), `kidDie`, `punish`.
 Default = `[emotion, strength]`; a trait replaces the emotion and multiplies strength (two traits multiply).
 
-| event | default | Kiêu ngạo | Nhu mì | Tham vọng | Hiểm độc | Hiền lành | Đa nghi | Ghen tuông / Thù dai |
+| event | default | Kiêu ngạo | Nhu mì | Tham vọng | Xảo quyệt | Hiền lành | Đa nghi | Ghen tuông / Thù dai |
 |---|---|---|---|---|---|---|---|---|
 | a rival is promoted (aff < 25) | Ghen 30 | Giận ×1.4 | Buồn ×1 | Toan tính ×1.3 | Toan tính ×1.2 | Vui ×.5 | Lo âu ×1 | Ghen ×1.6 / – |
 | a friend is promoted (aff ≥ 40) | Vui 20 | | | | | | | Trọng nghĩa ×1.4 |
@@ -55,7 +55,7 @@ Same feeling again adds half its strength; a stronger different feeling replaces
 ## 3. Decay (points per tuần)
 Vui 9 · Sợ 9 · Giận 8 · Buồn 6 · Ghen 6 · Lo âu 6 · Toan tính 5 · Đau khổ 3.
 Trait multipliers: Thù dai Giận ×.4, Toan tính ×.6 · Hiền lành Giận/Ghen ×1.6, Toan tính ×1.5 · Nhu mì Buồn ×.7, Sợ ×.8 · Kiêu ngạo Giận ×.8 ·
-Ghen tuông Ghen ×.6 · Hiểm độc Toan tính ×.6 · Trọng nghĩa Đau khổ ×.7. A child's death therefore weighs ~5 months; a slight ~1 month.
+Ghen tuông Ghen ×.6 · Xảo quyệt Toan tính ×.6 · Trọng nghĩa Đau khổ ×.7. A child's death therefore weighs ~5 months; a slight ~1 month.
 
 ## 4. Effects (one rule for everyone, her included)
 All effects scale by v/100.
@@ -71,14 +71,14 @@ All effects scale by v/100.
 | Toan tính | frame/plant/bribe/ally ×1.5, feign ×1.6, provoke ×.7 | | | 0 | |
 
 - **Đức + personality brake** (EMO_BRAKE). Effective Đức = Đức + trait offset (Hiền lành +15, Nhu mì +8, Trọng nghĩa +8, Hiếu thảo +5,
-  Hiểm độc −10, Tham vọng −5, Thù dai −5). Share `f` of the emotional harm boost that becomes harm:
+  Xảo quyệt −10, Tham vọng −5, Thù dai −5). Share `f` of the emotional harm boost that becomes harm:
 
   | effective Đức | f | anger at someone becomes… |
   |---|---|---|
   | ≥ 70 | 0 (harm ×.9; idle ×1.4) | withdrawing, cold words, complaints; no harm unless oán ≥ 60 toward the target (then f = .5) |
   | 40–69 | .5 | some harm |
   | < 40 | 1 | harm as the table |
-  | < 40 and Hiểm độc / Tham vọng | 1.5 | strongly more harm |
+  | < 40 and Xảo quyệt / Tham vọng | 1.5 | strongly more harm |
 - **Danger toward the target** of Giận/Ghen/Toan tính: + min(8, v/8 × f).
 - **Motive gate (j95 `motiveOK`, wrapped lazily when the module is present)**: harm with "động cơ yếu" passes only when the feeling is aimed at that person,
   v ≥ 50 and f ≥ 1; the recorded reason reads "vì đang giận / ghen với / toan tính hạ <tên> (<cause>)". Passing harm gets the same phrase appended.

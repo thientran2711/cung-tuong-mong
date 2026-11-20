@@ -12,6 +12,7 @@ const BIG = 200000;             // send gzip binary above this many chars
 const STALE = 45000;            // ms of silence before a socket counts as gone
 const IDLE_DAYS = 30;
 const SEATMAX = 3000000;        // chars of one seat's week copy
+const SNAPMAX = 6000000, DOMAX = 20000, THINMAX = 9;   // thin guest (review/coop-thin-a): host snapshot cap, one intent cap, highest part level
 
 const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET,POST,OPTIONS", "Access-Control-Allow-Headers": "content-type" };
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "content-type": "application/json", ...CORS } });
@@ -50,6 +51,12 @@ export default {
     return json({ error: "not found" }, 404);
   }
 };
+
+/* thin guest delta paths: "a.b.3.c" on plain objects / arrays; a missing level is made as an object */
+function pathPut(o, path, v, del) { const k = String(path).split("."); let x = o;
+  for (let i = 0; i < k.length - 1; i++) { if (!x[k[i]] || typeof x[k[i]] !== "object") { if (del) return; x[k[i]] = {}; } x = x[k[i]]; }
+  if (del) delete x[k[k.length - 1]]; else x[k[k.length - 1]] = v; }   /* arrays travel whole (the client diff never goes inside one) */
+export { pathPut };
 
 async function gzipText(s) {
   const cs = new CompressionStream("gzip"); const w = cs.writable.getWriter(); w.write(new TextEncoder().encode(s)); w.close();
@@ -140,7 +147,8 @@ export class Room {
       s2.serializeAttachment({ seat, last: Date.now() });
       const C = await this.loadC();
       const mine = await this.seatCopy(seat);
-      await this.send(s2, { t: "room", code: m.code, you: seat, seats: this.seatsView(), week: m.week, ended: this.endedView(), state: C, chat: await this.chatLoad(), ...this.buoiView(), mine, msv: (m.sv && m.sv[seat]) || 0, caps: ["seatd"] });
+      await this.send(s2, { t: "room", code: m.code, you: seat, seats: this.seatsView(), week: m.week, ended: this.endedView(), state: C, chat: await this.chatLoad(), ...this.buoiView(), mine, msv: (m.sv && m.sv[seat]) || 0, caps: ["seatd", "thin"], thin: m.thin || 0 });
+      if (seat === "b" && m.thin && m.hv) await this.snapTo(s2);   /* thin guest: her view = the host's latest snapshot */
       await this.presence();
       await this.ctx.storage.setAlarm(Date.now() + 20000);
       return new Response(null, { status: 101, webSocket: c2 });
@@ -203,6 +211,27 @@ export class Room {
       await this.putBig("seat-" + seat, o); await this.saveMeta();
       return this.send(ws, { t: "seatok", sv: m.sv[seat] });
     }
+    /* ---- thin guest, part A (review/coop-thin-a; audit reports/coop-thin-guest-audit.md §2-3). Old clients never send these. ----
+       thin   {cap, v, want}: what this seat's build supports (cap), its build id (v), and (host only) the level the host asks for. Room level
+              m.thin = min(want, cap a, cap b), 0 while a seat has not said it or the two builds differ (build-match, as swreg's hold).
+       snap   {v, o}: host only. The host's full state = the room's latest save, stored with version m.hv = v; relayed to the guest only.
+       delta  {v, base, set:{path:val}, del:[path]}: host only, applied on the stored snapshot when base === m.hv (else "snapresync" to the
+              host: send a full snap); relayed to the guest only. A path is dot-separated keys of plain objects / array indexes.
+       snapreq: the guest missed a version (gap) → the stored full snapshot again.
+       do     {op, args, base, id}: guest only, relayed to the host only with the room's sequence n (one order); no host online → "nohost". */
+    if (t === "thin") return this.thinIn(seat, msg, m);
+    if (t === "snap" || t === "delta") return this.snapIn(ws, seat, msg, m);
+    if (t === "snapreq") { if (seat === "b") return this.snapTo(ws); return; }
+    if (t === "do") {
+      if (seat !== "b") return this.send(ws, { t: "error", code: "notyours", msg: "chỉ hảo hữu" });
+      if (!m.thin) return this.send(ws, { t: "error", code: "nothin", id: msg.id });
+      if (JSON.stringify(msg).length > DOMAX || typeof msg.op !== "string") return this.send(ws, { t: "error", code: "bado", id: msg.id });
+      const hs = this.socks("a"); if (!hs.length) return this.send(ws, { t: "error", code: "nohost", id: msg.id });
+      m.dn = (m.dn || 0) + 1; await this.saveMeta();
+      const o = { t: "do", from: "b", n: m.dn, op: msg.op.slice(0, 40), args: msg.args === undefined ? null : msg.args, base: msg.base | 0, id: String(msg.id || "").slice(0, 64) };
+      for (const h of hs) await this.send(h, o);
+      return;
+    }
     if (t === "say") { const text = String(msg.text || "").slice(0, 200); return this.bcast({ t: "said", from: seat, text }, ws); }
     if (t === "init") {
       if (seat !== "a") return this.send(ws, { t: "error", code: "notyours", msg: "chỉ chủ phòng" });
@@ -261,6 +290,43 @@ export class Room {
     await this.ctx.storage.put("chat", list); await this.saveMeta();
     return this.bcast({ t: "chat", m: one });          // to BOTH seats, the sender too: one order, one id
   }
+
+  /* ---- thin guest (part A) ---- */
+  thinLevel() { const m = this.meta, c = m.tcap || {}; const a = c.a, b = c.b;
+    if (!a || !b || a.v !== b.v) return 0;
+    return Math.max(0, Math.min(THINMAX, a.want | 0, a.cap | 0, b.cap | 0)); }
+  async thinIn(seat, msg, m) {
+    m.tcap = m.tcap || {}; const n = x => Math.max(0, Math.min(THINMAX, x | 0));
+    m.tcap[seat] = { cap: n(msg.cap), v: String(msg.v || "").slice(0, 40), want: seat === "a" ? n(msg.want) : 0 };
+    const was = m.thin || 0; m.thin = this.thinLevel(); await this.saveMeta();
+    await this.bcast({ t: "thin", lvl: m.thin, was, cap: { a: m.tcap.a ? m.tcap.a.cap : null, b: m.tcap.b ? m.tcap.b.cap : null } });
+    if (m.thin && !was && m.hv) for (const g of this.socks("b")) await this.snapTo(g);
+  }
+  async snapIn(ws, seat, msg, m) {
+    if (seat !== "a") return this.send(ws, { t: "error", code: "notyours", msg: "chỉ chủ phòng" });
+    if (!m.thin) return this.send(ws, { t: "error", code: "nothin" });
+    const v = msg.v | 0;
+    if (msg.t === "snap") {
+      if (!msg.o || typeof msg.o !== "object" || v < 1) return this.send(ws, { t: "error", code: "badsnap" });
+      if (JSON.stringify(msg.o).length > SNAPMAX) return this.send(ws, { t: "error", code: "snapbig" });
+      await this.putBig("hsnap", msg.o); m.hv = v; await this.saveMeta();
+      await this.send(ws, { t: "snapok", v });
+      for (const g of this.socks("b")) await this.send(g, { t: "snap", v, o: msg.o });
+      return;
+    }
+    const cur = m.hv || 0; const o = cur ? await this.getBig("hsnap") : null;
+    if (!o || (msg.base | 0) !== cur || v !== cur + 1 || !msg.set || typeof msg.set !== "object") return this.send(ws, { t: "error", code: "snapresync", v: cur });
+    const bad = p => typeof p !== "string" || !p || /(^|\.)(__proto__|constructor|prototype)(\.|$)/.test(p);
+    const del = Array.isArray(msg.del) ? msg.del : [];
+    for (const p of Object.keys(msg.set).concat(del)) if (bad(p)) return this.send(ws, { t: "error", code: "snapresync", v: cur });
+    for (const p in msg.set) pathPut(o, p, msg.set[p], false);
+    for (const p of del) pathPut(o, p, null, true);
+    if (JSON.stringify(o).length > SNAPMAX) return this.send(ws, { t: "error", code: "snapbig" });
+    await this.putBig("hsnap", o); m.hv = v; await this.saveMeta();
+    await this.send(ws, { t: "snapok", v });
+    for (const g of this.socks("b")) await this.send(g, { t: "delta", v, base: cur, set: msg.set, del });
+  }
+  async snapTo(ws) { const m = this.meta; if (!m.thin || !m.hv) return; const o = await this.getBig("hsnap"); if (o) await this.send(ws, { t: "snap", v: m.hv, o }); }
 
   async putBig(key, obj) {
     const s = JSON.stringify(obj); const put = {}; let n = 0;

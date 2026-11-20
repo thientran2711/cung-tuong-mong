@@ -10,6 +10,8 @@
    usage: NODE_PATH=$(npm root -g) node dev/test/tut-quests.js <built root url> [shots dir] */
 const {chromium}=require('playwright');const {autoDismissRoulette,dismissRoulette}=require('./lib/roulette');
 const [,,URL,SHOTS]=process.argv;
+/* TQ_ORIGIN=<consort origin> runs part A with that origin (tut-followups: bd, the origin registered after j67, plays ch 1–3 too) */
+const AO=process.env.TQ_ORIGIN||'tt';
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);console.log(c?'PASS':'FAIL',n,c?'':JSON.stringify(x).slice(0,700))};
  const boot=async(vw)=>{const ctx=await b.newContext({viewport:vw||{width:1180,height:820},serviceWorkers:'block'});await autoDismissRoulette(ctx);const p=await ctx.newPage();p.setDefaultTimeout(30000);
   p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.goto(URL+(URL.includes('?')?'&':'?')+'khost=0',{waitUntil:'domcontentloaded',timeout:0});
@@ -35,7 +37,7 @@ const [,,URL,SHOTS]=process.argv;
  const st=p=>p.evaluate(()=>__st());const bac=p=>p.evaluate(()=>S.bac);
  const Q=await (async()=>{const p=await boot();await p.evaluate(()=>0);const q=await p.evaluate(()=>BAL.st14.q);await p.context().close();return q})();
  /* ================= A) consort (tt) ================= */
- {const p=await boot();await life(p,'tt');const R={};
+ {const p=await boot();await life(p,AO);const R={};
   let s=await st(p);R.c1=s;chk('A consort ch1 opens with 3 quests (an, di, trang) as steps',s.id==='nhap14'&&s.q&&s.q.join()==='an-,di-,trang-',s);
   let C=await p.evaluate(()=>__cards.slice());
   /* chapter-open card is the narrator's (shown when the life began, before this hook: check the Q / log text instead) */
@@ -83,6 +85,8 @@ const [,,URL,SHOTS]=process.argv;
   await p.evaluate(()=>{const v=liveRivals(true)[1]||liveRivals(true)[0];relAdd(S,v,BAL.st14.goal.rel+40);for(const k in S.arts)S.arts[k]=Math.max(S.arts[k],0);const k0=Object.keys(S.arts)[0];S.arts[k0]=Math.max(S.arts[k0],BAL.st14.goal.art)});
   e=await p.evaluate(()=>__month());const pa=await p.evaluate(()=>S.st.ch.past.slice(-1)[0]);s=await st(p);
   chk('A chapter 3 closes «Xong», the road chapter 4 opens',pa&&pa.ms==='tap14'&&pa.tag==='Xong'&&s.id===null&&s.M,[e,pa,s]);
+  const rd=await p.evaluate(()=>({o:S.origin.k,road:S.st.f14&&S.st.f14.road,a:S.st.M&&S.st.M.a,ao:S.st.M&&ARC67[S.st.M.a]&&ARC67[S.st.M.a].o}));
+  chk('A chapter 4 is the road of HER origin ('+AO+')',rd.o===AO&&rd.a&&rd.ao===AO&&rd.a===rd.road,rd);
   chk('A chapter detail: quests are steps, every line must be done, open quests are the "Việc nên làm"',det.steps.length>=4&&det.any===false,det);
   await p.context().close()}
  /* ================= B) cung nữ (cnv) ================= */

@@ -4,7 +4,7 @@
    Nhận thân phận -> home life: every home tab rendered (no page error, no horizontal overflow, no clipped text, no '???'/undefined/NaN) ->
    ~3 months of random play by tapping cards / options -> jump to the tuyển tú (calendar moved to the month before Sơ tuyển) -> answer
    Sơ tuyển / Phúc tuyển / Điện tuyển (the court's keep roll forced to "kept" with __kcKeep) -> she is a consort: isKc() false, rank 0..2,
-   in consorts(), palace tabs back, her figure is no longer the home dress, carry-over (Danh ≤ 30, Bạc ≤ 400, maid, intel) -> 4 palace
+   in consorts(), palace tabs back, her figure is no longer the home dress, carry-over (Danh ≤ entry cap 30 + the origin's BAL.kcv carry row, Bạc ≤ 400 + BAL.kcv carry (+200 slack), maid, intel) -> 4 palace
    buổi -> save + reload the slot -> still the same palace life. Prints one JSON report; exit 1 on any fail. */
 const {chromium}=require('playwright');const fs=require('fs');
 const A=process.argv.slice(2);const URL=A[0];const OUT=A[1]||'.';fs.mkdirSync(OUT,{recursive:true});
@@ -58,25 +58,25 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
      nextBuoi();return'next'}catch(e){return'ERR '+e.message}});steps.push(r);if(/^Q:/.test(r))titles.add(r.slice(2));if(r==='dead'||/^ERR/.test(r))return r;if(await p.evaluate(stopIf))return'stop'}return'n'};
   R.play1=await play(500,()=>S.turn>=3||!isKc());R.after3=await p.evaluate(()=>({turn:S.turn,ym:S.year+'/'+S.month,kc:isKc(),dead:!!S.dead}));
   /* jump to the month before Sơ tuyển (the palace world keeps its own calendar values; only the date moves) */
-  if(!R.after3.dead&&R.after3.kc){R.endedAt3=await p.evaluate(()=>{/* r2-r1 FAIL 4: never press an end card here (its close starts a NEW life without S.kc) */for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}return S.dead?(S.kc&&S.kc.end)||'NOEND':''});
+  if(!R.after3.dead&&R.after3.kc){R.endedAt3=await p.evaluate(()=>{/* r2-r1 FAIL 4: never press an end card here (its close starts a NEW life without S.kc) */for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}return S.dead?(S.kc&&S.kc.end)||'NOEND':''});
    if(R.endedAt3){if(R.endedAt3==='NOEND')F('home life ended without S.kc.end');R.note='life ended at home while answering: '+R.endedAt3}}
   if(!R.after3.dead&&R.after3.kc&&!R.endedAt3){await p.evaluate(()=>{
     S.year=KC.ty;S.month=KC.tm-1;S.tuan=2;S.turn=Math.max(S.turn,20);S.kc.ev.chieu=1;S.kc.suit=[];S.kc.forced=0;S.kc.mien=0;
     Object.assign(S,{sac:Math.max(S.sac,70),suc:90,duc:Math.max(S.duc,50),danh:Math.max(S.danh,30),kld:0,kgt:Math.max(S.kgt,50)});window.__kcKeep=1;render()});
    R.play2=await play(300,()=>!isKc()||S.dead);await sleep(500)}
   R.titles=[...titles];R.foreign=R.titles.filter(t=>/^\[ngoài\]/.test(t));if(R.foreign.some(t=>/Kính sự phòng|thị tẩm|lật thẻ|Thái hậu triệu|Hoàng thượng đến/i.test(t)))F('palace event at home: '+R.foreign);R.errSteps=steps.filter(x=>/^ERR/.test(x)).slice(0,5);if(R.errSteps.length)F('step errors');
-  R.pal=await p.evaluate(()=>{for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}render();
-   return{isKc:isKc(),dead:!!S.dead,end:S.kc&&S.kc.end,inPal:!!(S.kc&&S.kc.inPal),rank:S.rank,rankN:RANKS[S.rank].n,inCons:consorts().includes(S),age:S.age,danh:S.danh,bac:S.bac,maid:S.maid&&S.maid.name,
+  R.pal=await p.evaluate(()=>{for(let i=0;i<20&&Q.length&&!S.dead;i++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}render();
+   return{isKc:isKc(),dead:!!S.dead,end:S.kc&&S.kc.end,inPal:!!(S.kc&&S.kc.inPal),rank:S.rank,rankN:RANKS[S.rank].n,inCons:consorts().includes(S),age:S.age,danh:S.danh,bac:S.bac,lim:(()=>{const c=S.kc&&S.kc.carry,B=c&&BAL.kcv[c.kind];if(!B)return{danh:30,bac:400};const f=c.f||1,n=x=>Math.round(x*f);return{danh:Math.min(100,30+n(B.dn)),bac:400+n(B.bac)}})(),maid:S.maid&&S.maid.name,
     intel:S.kc&&S.kc.intel.length,fig:figFor(S),tabs:[...document.querySelectorAll('#tabs button')].filter(b=>b.offsetParent).map(b=>b.textContent.trim()),title:(document.getElementById('me-r')||{}).textContent}});
   if(R.pal.dead||R.pal.end)R.note='life ended at home: '+(R.pal.end||'dead');
   else{if(R.pal.isKc||!R.pal.inPal)F('did not enter the palace');if(!(R.pal.rank>=0&&R.pal.rank<=2))F('entry rank '+R.pal.rank);if(!R.pal.inCons)F('not in consorts()');
-   if(/-(kc|ngheo)-a18/.test(R.pal.fig||''))F('home dress in the palace');if(R.pal.danh>30)F('Danh carry-over '+R.pal.danh);if(R.pal.bac>400+200)F('Bạc carry-over '+R.pal.bac);
+   if(/-(kc|ngheo)-a18/.test(R.pal.fig||''))F('home dress in the palace');if(R.pal.danh>R.pal.lim.danh)F('Danh carry-over '+R.pal.danh+' > '+R.pal.lim.danh);if(R.pal.bac>R.pal.lim.bac+200)F('Bạc carry-over '+R.pal.bac+' > '+R.pal.lim.bac);
    if(!R.pal.tabs.some(t=>/Hậu cung/.test(t)))F('palace tabs not back: '+R.pal.tabs);
    for(let i=0;i<4;i++){if(!await p.evaluate(()=>document.body.classList.contains('kbk-open')))break;await p.keyboard.press('Escape');await sleep(600)}/* Tuần lục of the first palace week */
    await p.evaluate(()=>{tab='act';render()});await sleep(1500);
    await shot('4-palace',true);R.m4=await meas();
-   for(let i=0;i<4;i++){await p.evaluate(()=>{for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}try{nextBuoi()}catch(e){}});await sleep(300)}
-   R.reload=await p.evaluate(()=>{for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(0);else closeModal()}save();const s=SLOT;const n=S.name;deser(loadSlot(s));render();return{same:S.name===n,isKc:isKc(),inPal:!!(S.kc&&S.kc.inPal),rank:S.rank}});
+   for(let i=0;i<4;i++){await p.evaluate(()=>{for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}try{nextBuoi()}catch(e){}});await sleep(300)}
+   R.reload=await p.evaluate(()=>{for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}save();const s=SLOT;const n=S.name;deser(loadSlot(s));render();return{same:S.name===n,isKc:isKc(),inPal:!!(S.kc&&S.kc.inPal),rank:S.rank}});
    if(!R.reload.same||R.reload.isKc)F('reload '+JSON.stringify(R.reload))}
   R.errs=errs.slice(0,10);if(errs.length)F('page errors');rep.push(R);if(R.fail.length)bad++;await c.close()}
  console.log(JSON.stringify(rep,null,1));await b.close();process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(1)});

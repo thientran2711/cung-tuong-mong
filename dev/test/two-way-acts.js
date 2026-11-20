@@ -6,7 +6,7 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
  const errs=[];page.on('pageerror',e=>errs.push(e.message));await page.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());
  await page.goto('file://'+GAME);await page.waitForTimeout(600);await page.evaluate(()=>localStorage.clear());await page.reload();await page.waitForTimeout(600);
  await page.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await page.waitForTimeout(1200);
- const R=await page.evaluate(()=>{const out=[];const T=(n,ok,d)=>out.push({n,ok:!!ok,d:d||""});
+ const R=await page.evaluate(()=>{/* the NPC agent loop (jagent) owns WHEN an NPC does these deeds and mutes other NPC callers; this test checks the deeds' own cost / odds rules, so it runs them with the loop switched off (BAL.ag.on=0, the measuring switch) */try{if(BAL.ag)BAL.ag.on=0}catch(e){}const out=[];const T=(n,ok,d)=>out.push({n,ok:!!ok,d:d||""});
   const v=liveRivals(true).filter(x=>!x.queen)[0],w=liveRivals(true).filter(x=>!x.queen)[1];const fresh=p=>{p.bac=500;p.suc=80;p.danh=50;p.duc=50};
   const snap=p=>({bac:p.bac,suc:p.suc,danh:p.danh,duc:p.duc});const diff=(a,b2)=>{const d={};for(const k in a)if(b2[k]!==a[k])d[k]=b2[k]-a[k];return d};
   const same=(d,c)=>Object.keys(c).every(k=>d[k]===c[k]);

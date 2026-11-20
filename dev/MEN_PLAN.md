@@ -17,8 +17,8 @@ giấu giúp, núp nghe lén… Cùng luật cho phi tần NPC (ngươi cũng c�
 1. **Nam nhân theo buổi** (thay cách rải 55% của j22, chỉ đường phi tần; đường cung nữ giữ j42):
    thị vệ trực cổng Ngự thư phòng / Dưỡng Tâm điện / Kính sự phòng (tối tuần tra); 4 thị vệ có tên (2 dáng tranh thive-1/2 dùng chung, theo lệnh điều phối);
    Thái y ở Thái y viện, vào cung phi tần CHỈ khi có lệnh truyền (nàng có thai / ốm / Sức thấp); Vương gia: lễ tết ở Ngự hoa viên, thỉnh an Thái hậu;
-   Nhạc sư, Họa sư = thợ Nội vụ phủ có lệnh làm việc (vườn, cung phi tần); Sứ thần: Ngự thư phòng buổi sáng, yến lễ tết;
-   quan (j55): Ngự thư phòng buổi sáng (chầu), Ngự hoa viên khi có yến lễ tết. Mỗi người một lý do (`S.menWhy`). Tranh: chỉ tranh nam có sẵn.
+   Nhạc sư, Họa sư = thợ Nội vụ phủ có lệnh làm việc (vườn, cung phi tần); Sứ thần: Ngự thư phòng buổi sáng (no festival banquet in the hậu cung, review/men-forbidden);
+   quan (j55): Ngự thư phòng buổi sáng (chầu); festival banquet = OUTER court only (S.minF, on no stage; owner OD:L168 + 18/11: men may not enter the hậu cung). Mỗi người một lý do (`S.menWhy`). Tranh: chỉ tranh nam có sẵn.
 2. **Vùng** (`MEN_ZONE` + `zones` trong img/map-hotspots.json): Hậu cung (vườn, các cung, Từ Ninh, Khôn Ninh, lãnh cung) cấm nam nhân trừ
    Hoàng thượng, thái giám, thái y/thợ có lệnh; Nội đình (Dưỡng Tâm điện, Ngự thư phòng) có thị vệ trực, quan chầu; Nha sở (Thái y viện, Kính sự phòng);
    Ngoại triều (ô xám trên dư đồ, cổng phía nam) cấm nữ quyến.
@@ -47,7 +47,7 @@ Thẻ bắt gặp: lựa chọn là thẻ việc đầy đủ của kit (Tốn �
 ## 15/11 (lượt 4) — KẾ HOẠCH, KHÔNG XÚC XẮC (lệnh chủ: "rolls decide… — that's still luck")
 Ai vào hậu cung, lúc nào, ở đâu, và ngươi có thấy không: không còn tung xúc xắc. (Chỉ kết quả của VIỆC ngươi làm — Báo, Giấu, Nghe lén, Uy hiếp — còn may rủi như mọi thẻ Hành sự.)
 - **Lịch trực, lệnh làm việc theo lịch**: thị vệ trực 2/3 buổi, trạm đổi theo tuần (`menDuty`); thợ Nội vụ phủ có lệnh mỗi hai tuần, theo lượt các cung từ phẩm cao xuống (`menOrder`);
-  thái y vào cung phi tần đang ốm/có thai buổi chiều; vương gia thỉnh an Thái hậu mỗi 4 tuần, dự lễ tết; sứ thần, quan vào chầu theo lượt.
+  thái y vào cung phi tần đang ốm/có thai buổi chiều; vương gia thỉnh an Thái hậu mỗi 4 tuần (no festival presence in Ngự hoa viên); sứ thần, quan vào chầu theo lượt.
 - **Kế hoạch lưu trong thế giới** (`S.menPlans`, lập đầu mỗi tuần cho tuần sau: ai, tuần, buổi, khắc, nơi, đường đến, độ kín):
   1. Đôi tư tình (j22): mỗi 2–3 tuần theo nết hắn, đúng đêm lịch trực của hắn để trống; nơi theo nết nàng (đa nghi / hắn cẩn trọng → lãnh cung; kiêu ngạo → cung nàng; khác → vườn).
   2. Thư lén: phi tần có cớ (cấm túc / toan mưu / giấu thai / thất sủng ghen nặng), mỗi mùa một lần khi cớ còn; thị vệ dễ mua nhất (lòng trung thấp nhất) theo ca trực của hắn; tối đa một lá mỗi tuần.
@@ -56,6 +56,8 @@ Ai vào hậu cung, lúc nào, ở đâu, và ngươi có thấy không: không 
 - **Ngươi thấy khi và chỉ khi ở đó**: có mặt ở nơi ấy trong khắc của kế hoạch (h−1 … h+1), hoặc đi ngang nơi kề bên lúc hắn đang đi vào (`menWatch`, gọi khi đến nơi, sau mỗi việc tốn khắc, và cuối buổi).
 - **Hiểu ra hay không**: Tai mắt ×8 + Tâm cơ/3 so với độ kín (tư tình 30 + Tâm cơ nàng/3, thư 20 + …, để ý 15, nán lại 10). Không đủ → chỉ thoáng thấy hắn và một bóng áo phi tần lánh đi (Núp nghe lén mới lộ ra ai).
 - **Tai mắt báo trước**: khi lập kế hoạch, Tai mắt đủ sâu (≥ độ kín + 40) → "Tai mắt báo: nghe nói tuần tới, buổi tối, có nam nhân sẽ lẻn vào …" (thật, có khi nói cả là ai) để ngươi tự sắp xếp có mặt.
-- **NPC cũng vậy**: phi tần đứng đúng nơi ấy trong buổi ấy và mắt đủ sâu thì thấy; chọn theo nết + oán (Hiểm độc/Kiêu ngạo/oán > 45 → báo; Tham vọng → giấu lấy chứng cứ; Đa nghi → nghe lén; Hiền/Nhu → làm ngơ hay giấu nếu ghét). Ngươi nói chuyện riêng với nam nhân ở hậu cung mà có phi tần mắt ≥ 20 đứng đó → bị thấy.
+- **NPC cũng vậy**: phi tần đứng đúng nơi ấy trong buổi ấy và mắt đủ sâu thì thấy; chọn theo nết + oán (Xảo quyệt/Kiêu ngạo/oán > 45 → báo; Tham vọng → giấu lấy chứng cứ; Đa nghi → nghe lén; Hiền/Nhu → làm ngơ hay giấu nếu ghét). Ngươi nói chuyện riêng với nam nhân ở hậu cung mà có phi tần mắt ≥ 20 đứng đó → bị thấy.
 - Đo (sens, đi dạo đầu mỗi buổi, 37,9 năm): kẻ lạc 7,1/năm (để ý 3,9 · tư tình 1,35 · thư 1,3 · nán lại 0,6); ngươi gặp 0,95/năm với 32,8 lần đi → 0,029 mỗi lần đi ≈ 3 lần/năm nếu đi mỗi buổi;
   tai mắt báo trước 3,7/năm; NPC thấy 4,3/năm, báo 1,3/năm. 0 crash, 0 lỗi trang, ghi/nạp sạch.
+
+- review/men-forbidden (18/11): ONE rule `menLawful(m,k,why)` in jmen.js: on the schedule a man stands in the hậu cung only as a summoned thái y, a craftsman with a work order, a prince visiting Thái hậu at tn, or a stray (→ 'Nam nhân nơi cấm địa' card). Test: `node dev/test/men-forbidden.js <url>`.

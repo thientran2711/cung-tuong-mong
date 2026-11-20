@@ -55,15 +55,15 @@ function kg82SlapBar(box,env){KG82.slapHint=false;KG82.slapEnd=null;KG82.slapDem
   if(!kg82Spr(g,"tat-hand",x,by-bh/2-4,null,bh*1.25,{ay:1})){g.fillStyle="#3a2412";g.beginPath();g.moveTo(x,by-bh/2-2);g.lineTo(x-9,by-bh/2-18);g.lineTo(x+9,by-bh/2-18);g.closePath();g.fill()}
   g.fillStyle="#3a2412";g.fillRect(x-1.5,by-bh/2-2,3,bh+4);
   g.font=`700 13px ${kg82Col("--display","serif")}`;g.textAlign="center";g.fillStyle=ink;
-  kg82Lbl(g,idle?(dodge?"Vùng xanh đang sáng: chạm khi kim vào đó":"Giữa thước đang sáng: chạm khi kim lướt qua vùng đỏ"):(dodge?"Chạm khi kim vào vùng xanh":"Chạm khi kim lướt qua giữa vùng đỏ"),W/2,H*.2,W-24);
-  if(resT){g.font=`700 16px ${kg82Col("--display","serif")}`;g.fillStyle=resT[1];kg82Lbl(g,resT[0],W/2,H*.82)}else kg82DrawPops(g,pops,now);
+  
+  if(resT){g.font=`700 16px ${kg82Col("--display","serif")}`;g.fillStyle=resT[1];kg82Lbl(g,kg82Sym(resT[0]),W/2,H*.82)}else kg82DrawPops(g,pops,now);
   if(dm&&dm.on)dm.draw(g,W,H,now)}
- function end(raw,txt,col){if(stop)return;lock=true;KG82.slapEnd={still,txt};if(still)resT=[txt,col];else kg82Pop(pops,W/2,H*.82,txt,col);draw(performance.now());stop=true;setTimeout(()=>env.end(raw),B.endMs)}
+ function end(raw,txt,col){if(stop)return;lock=true;env.hud({score:mgLive(env,raw)});/* review/mg-score-same: the mark given, on the board at the tap */KG82.slapEnd={still,txt};if(still)resT=[txt,col];else kg82Pop(pops,W/2,H*.82,txt,col);draw(performance.now());stop=true;setTimeout(()=>env.end(raw),B.endMs)}
  function tap(){if(lock||stop||(dm&&dm.on))return;const now=performance.now();hitX=pos(now);const raw=zoneOf(hitX);lock=true;
   if(dodge)end(raw,raw?"Né kịp!":"Không kịp",raw?good:red);else{const s=slapTierOf(raw);end(raw,["","Nhẹ tay","Vừa tay","Nặng tay!"][s],[ink,ink,gold,red][s])}}
  function frame(now){if(stop)return;if(lock||(dm&&dm.on)){draw(now);raf=requestAnimationFrame(frame);return}const tt=now-t0;
   if(tt>D.ms){lock=true;hitX=pos(now);end(dodge?0:R[0],dodge?"Không kịp":"Chậm quá, tay nhẹ",red);return}
-  env.hud({score:"–/10",round:"Hồi 1/1",time:`${Math.max(0,Math.ceil((D.ms-tt)/1000))} giây`});draw(now);raf=requestAnimationFrame(frame)}
+  env.hud({score:mgLive(env,10),round:"Hồi 1/1",time:`${Math.max(0,Math.ceil((D.ms-tt)/1000))} giây`});draw(now);raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();tap()});const kd=e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();tap()}};document.addEventListener("keydown",kd);
  /* test/measure oracle: {x,y} = the zone centre on screen, at = ms until the needle next crosses it (≥ BAL.slap.see ms ahead: a person sees it coming) */
  KG82.peek=()=>{if(lock||stop||(dm&&dm.on))return null;const now=performance.now(),th=ph+(now-t0)*w,P=2*Math.PI,s0=Math.asin(cl(zs,-1,1));let best=1e9;
@@ -77,10 +77,11 @@ KG82_ENG.slapbar=kg82SlapBar;
 function slapGame(o){const kind=o.dodge?"ne":"tat",skipRes={raw:0,skipped:true};
  if(typeof window.__bot!=="undefined"||typeof kg82Open!=="function"){setTimeout(()=>o.onDone(skipRes),0);return}
  KG82.ctx="hoc";const t=slapMg(o.dodge,o.by);KG82.tier=t;KG82.lv=t.ease;KG82.occ=t.occ;const K=KG82_KIND[kind];
- const d=kg82Open({art:o.dodge?"Né":"Tát",title:o.title,how:K.how,pic:typeof kg82Pic==="function"?kg82Pic(kind):""});if(!d){o.onDone(skipRes);return}const box=kg82Box();
+ const d=kg82Open({art:o.art||(o.dodge?"Né":"Tát"),title:o.title,how:K.how,pic:typeof kg82Pic==="function"?kg82Pic(kind):""});if(!d){o.onDone(skipRes);return}const box=kg82Box();
  kg82Preload(kind).then(()=>{try{if(typeof kitPhNote==="function")[kg82BgName(kind)].concat(KG82_SPR[kind]).forEach(n=>{if(!kg82Ok(n))kitPhNote("mg",n,"light",K.t)})}catch(e){}});
  const diff=typeof mgDiffTxt==="function"?mgDiffTxt(t):`${t.word} · ${t.occName}`;
- KG82.phase="intro";box.innerHTML=tsRows([["Độ khó",diff,""]].concat(o.rows))+`<div class="kg82act"><button class="kbtn" id="kg82go">${o.go}</button><button class="kbtn alt" id="kg82skip">${o.skip}<small>${o.skipSub}</small></button></div>`;
+ KG82.phase="intro";box.innerHTML=tsRows([["Độ khó",diff,""]].concat(o.rows))+`<div class="kg82act"><button class="kbtn" id="kg82go">${o.go}</button>${kitQuick({id:"kg82skip",n:`${o.skip}`,sub:`${o.skipSub}`})}</div>`;
+ kgReady(box,{kind});/* KIT §13.7 */
  /* r3 (reviewer, owner OD:L1261 "every scene ends with ONE button"; same as every j82 game, playArt "Đã hiểu"): the game no longer closes by itself —
     the result row stays with ONE button; only it closes the game and the act's own card follows */
  $("kg82go").onclick=()=>kg82Play(kind,raw=>{KG82.phase="result";const R3=BAL.slap.raw,s=slapTierOf(raw);
@@ -100,7 +101,7 @@ window.slapGame=slapGame;
   ["Ngoài vùng",`tay nhẹ: Đức ${B.duc[1]}, dấu tay mờ ${B.wk[1]} tuần`,"r"]],
   onDone:res=>{SLAPG.busy=0;SLAP.next=res.skipped?B.def:slapTierOf(res.raw);try{d0.apply(self,args)}finally{SLAP.next=0}}})}})();
 /* ---------- an NPC slaps her: tier rolled, she may dodge ---------- */
-function slapNpcTier(a){const gap=Math.max(1,(typeof rkOf==="function"?rkOf(a)-rkOf(S):1)),w=BAL.slap.npc[Math.min(gap,3)-1];let r=Math.random()*(w[1]+w[2]+w[3]);for(let i=1;i<=3;i++){if(r<w[i])return i;r-=w[i]}return 1}
+function slapNpcTier(a){if(typeof mg2On==="function"&&mg2On())return slapNpcDraw(a);/* AG-ALL-2b mg2: her game, one draw */const gap=Math.max(1,(typeof rkOf==="function"?rkOf(a)-rkOf(S):1)),w=BAL.slap.npc[Math.min(gap,3)-1];let r=Math.random()*(w[1]+w[2]+w[3]);for(let i=1;i<=3;i++){if(r<w[i])return i;r-=w[i]}return 1}
 window.slapNpcTier=slapNpcTier;
 (function(){const r0=runAct;runAct=function(a,t,k,extra){
  if(k!=="tat"||t!==S||!a||a===S||SLAPG.npcDone)return r0.apply(this,arguments);
@@ -122,3 +123,22 @@ window.slapNpcTier=slapNpcTier;
  COOP.send=function(m){try{if(m&&m.t==="res"&&m.k==="tat"&&window.__slapLast)m.slap=window.__slapLast}catch(e){}return s0.apply(this,arguments)};
  COOP.on("res",m=>{try{const W=window.COOPW;if(!W||!W.on||m.from===W.seat||m.k!=="tat"||!m.slap||!S||S.dead)return;slapGive(S,null,"",m.slap)}catch(e){console.error(e)}})}catch(e){}})();
 (function(){const f=ACT.tat.f;ACT.tat.f=function(a,t){const r=f.apply(this,arguments);try{window.__slapLast=t&&t.slap?t.slap.sev:null}catch(e){}return r}})();
+/* ---------- AG-ALL-2b mg2 (owner OD 17/11 ~15:25Z (3) "lúc nào tôi có thì NPC cũng phải có … đổ xí ngầu cho nó … công bằng với tôi") ----------
+   An NPC's slap = ONE draw from her power-bar game as measured (BAL.ag.mg2.tat: [nhẹ, vừa, nặng] % of the skilled bot by board ease), on the board she would
+   get in that seat (mgTier "tat": the slapper's rank and Vũ / Sức — slapMg for her). Whoever is slapped by her or by an NPC dodges as she can: one roll
+   of BAL.slap.dodgeOdds[tier of the "ne" board: the target's Vũ, the slapper's rank] (her own card odds); a dodge lowers the tier by one, a dodged nhẹ misses.
+   Off (agOn false) = the old BAL.slap.npc weights, NPC targets never dodge, an NPC's slap on an NPC is nhẹ (B.def). */
+function slapNpcDraw(a){const T=BAL.ag.mg2.tat,E=T.e,e=cl(mgTier("tat",{occ:"tat",p:a}).ease,E[0],E[E.length-1]);let i=0;while(i<E.length-2&&e>E[i+1])i++;
+ const f=(e-E[i])/(E[i+1]-E[i]),w=T.w[i].map((x,j)=>x+(T.w[i+1][j]-x)*f);
+ /* AG-ALL-2d hand ceiling (OD L1640, jmgt mgHand): the table is the skilled human bot = the best hand; a weaker hand lands the heavy blow less (what
+    she misses falls to nhẹ) — q = where her "tat" hand sits between BAL.ag.mg2.hand.lo and .hi */
+ {const H=BAL.ag.mg2.hand;if(H&&H.on&&a&&a!==S&&typeof mgHand==="function"){const Bd=typeof mgCalBand==="function"?mgCalBand("tat"):H;/* AG-ALL-2d2: the band of the owner calibration when set */const q=cl((mgHand("tat",a)-Bd.lo)/Math.max(.01,Bd.hi-Bd.lo),0,1);w[0]+=w[2]*(1-q);w[2]*=q}}
+ let r=Math.random()*(w[0]+w[1]+w[2]);for(let j=0;j<3;j++){if(r<w[j])return j+1;r-=w[j]}return 1}
+function slapNeOdds(t,a){const D=BAL.slap.dodgeOdds;return D[mgTier("ne",{occ:"ne",p:t,rank:typeof rkOf==="function"?rkOf(a):0}).tier]}
+window.slapNpcDraw=slapNpcDraw;window.slapNeOdds=slapNeOdds;
+(function(){const r0=runAct;runAct=function(a,t,k,extra){
+ if(k!=="tat"||!a||!t||t===S||t.coop||a.coop||SLAPG.npcDone||!(typeof mg2On==="function"&&mg2On()))return r0.apply(this,arguments);
+ const B=BAL.slap;let sev=a===S?cl(SLAP.next|0||B.def,1,3):slapNpcTier(a);
+ if(roll(slapNeOdds(t,a))){sev--;if(sev<=0){if(typeof ducAdd==="function")ducAdd(a,B.duc[1],"tát hụt");relAdd(t,a,B.missRel);SLAP.next=0;
+  const m=`${NMc(a)} giơ tay tát ${NM(t)} nhưng ${NM(t)} né kịp, cái tát hụt.`;return a===S?`<span class="r">${m}</span> `:m+" "}}
+ SLAP.next=sev;try{return r0.apply(this,arguments)}finally{SLAP.next=0}}})();

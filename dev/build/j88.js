@@ -1,6 +1,6 @@
 /* ================= j88: FACE POOL OF 84 WOMEN (owner 11/14: cung nữ có thể lên phi tần) — LOGIC + DATA ONLY =================
    No CSS, no markup: the portrait chooser UI is a kit component (review/kit-2); it reads this module's API.
-   Pool = 32 consort identities (FIGIX.consort "consort:c01".."c32") + 52 maid identities (FIGIX.maid "maid:m01".."m52").
+   Pool = the 84 painted women of «90 nhân vật nữ» (internal ids FIGIX.consort "consort:c01".."c32" + FIGIX.maid "maid:m01".."m52").
    - Dress tiers: anyone in consort dress (her as a consort, every NPC consort) wears the consort tier of her identity
      (j66 figTierOf: t1..t8 by rank, "cold" in lãnh cung). Maid identities read Part C records (role "maid", tier "t1".."t8"/"cold")
      from img/FIGURES-servants.json as soon as they appear (j39 re-reads every manifest every 5 min); a missing tier falls back to
@@ -27,17 +27,25 @@ function f88Pick(L,tier,age,base,mrank){if(!L||!L.length)return null;const T=L.f
   /* the plain maid art (tier null) is the dress of maid rank 1 (there is no "m1" file for maid faces); m0, m2..m4 are their own ranks */
   let md=1e9;const d=f=>Math.abs((f.tier==null||f.tier===""?1:(parseInt(String(f.tier).replace(/\D/g,""),10)||0))-(mrank||0));
   for(const f of B)md=Math.min(md,d(f));return figBest(B.filter(f=>d(f)===md),null,age)}
- if(!base&&tier!=null&&T.length){let md=1e9;for(const f of T)md=Math.min(md,Math.abs(f88TNum(f)-tier));return figBest(T.filter(f=>Math.abs(f88TNum(f)-tier)===md),tier,age)}
+ /* review/fig-rank-match (owner 17/11: "Hoàng hậu ... chưa đúng phẩm"): dress tier = rank tier EXACTLY. The exact tier if it is drawn,
+    else the nearest tier ABOVE (reported in dev/handover/reports/fig-rank-match.md), NEVER a lower rank's dress, never maid art on a
+    consort. Nothing to show -> null (figFor returns "" and the frame shows its own placeholder). (Old rule: nearest tier either way, so a
+    Hoàng hậu (t8) wore t4 and a promoted maid wore maid clothes.) */
+ if(!base&&tier!=null){return figBestRank(T,tier,age)}
  if(!base&&T.length&&tier==null)return figBest(T,null,age);
  if(B.length){const N=B.filter(f=>f.tier==null||f.tier==="");return figBest(N.length?N:B,null,age)}
  return figBest(L,tier,age)}
+/* strict rank pick inside one identity's consort-dress records T: exact tier, else the nearest tier above, else null (never lower) */
+function figBestRank(T,tier,age){try{if(!T||!T.length)return null;const C=T.filter(f88IsCT);if(tier==null)return C.length?figBest(C,null,age):null;
+ let md=1e9;for(const f of C){const d=f88TNum(f)-tier;if(d>=0&&d<md)md=d}if(md===1e9)return null;
+ return figBest(C.filter(f=>f88TNum(f)-tier===md),tier,age)}catch(e){return null}}
 /* who wears consort dress */
 function f88Wear(who){try{if(who===S)return !(typeof isSrv==="function"&&isSrv());return (rivals||[]).includes(who)}catch(e){return false}}
 /* her maid dress rank on the cung nữ road (review/player-dress): Tân Giả khố = m0, Ma ma = m4 (the highest maid dress; the mama
-   pictures are other women), else her rank 0..4 (Cung nữ thô sử m0 · Cung nữ m1 · Đại cung nữ m2 · Chưởng sự cô cô m3 · Nữ quan m4) */
-function f88SrvRk(){try{const v=S&&S.srv;if(!v)return 1;if(v.lau>0)return 0;if(v.mama)return 4;return Math.max(0,Math.min(4,v.rk==null?1:v.rk|0))}catch(e){return 1}}
+   pictures are other women), else the dress tier of her rung (BAL.srvRk.tier, maid-ladder-6: thô sử m0 · tam/nhị đẳng m1 · nhất đẳng = Đại cung nữ m2 · Chưởng sự cô cô m3 · Nữ quan m4) */
+function f88SrvRk(){try{const v=S&&S.srv;if(!v)return 1;if(v.lau>0)return 0;if(v.mama)return 4;return Math.max(0,Math.min(4,srkTier(v.rk==null?1:v.rk|0)))}catch(e){return 1}}
 function f88Best(L,who,kind){const Lp=kind==="por"?L.filter(f=>f.por):L;const W=f88Wear(who);
- const mr=(!W&&who===S)?f88SrvRk():(!W&&who&&who!==S&&who.role==="maid"&&typeof srk==="function")?(()=>{try{return srk(who)}catch(e){return null}})():null;
+ const mr=(!W&&who===S)?f88SrvRk():(!W&&who&&who!==S&&who.role==="maid"&&typeof srk==="function")?(()=>{try{return srkTier(srk(who))}catch(e){return null}})():null;
  return f88Pick(Lp.length?Lp:L,figTierOf(who),figAgeOf(who),!W,mr)}
 /* j39 figFor with the tier-aware choice */
 figFor=function(p,kind){try{if(!FIGS.length||!p||!S)return"";const who=figWho(p);if(!who)return"";const k=figPick(who);if(!k)return"";
@@ -83,8 +91,8 @@ function faceImg(id,who,kind){try{who=who||S;kind=kind||"por";const L=f88List(id
    → [{id:"maid:m05", src:"maid"|"consort", n:5, por:"img/…", fig:"img/…", mine:bool, tiers:[1,2,…]}] in c01..c32, m01..m52 order */
 function facePool(filter,who){who=who||S;return f88Keys(filter||"all").map(id=>({id,src:f88Src(id),n:f88Num(id),por:faceImg(id,who,"por"),fig:faceImg(id,who,"fig"),
  mine:!!(S&&S.pid===id),tiers:[...new Set(f88List(id).filter(f88IsCT).map(f88TNum))].sort((a,b)=>a-b)}))}
-/* WHICH FACE SET she may pick from (owner 16/11 s23: NO tabs; the game decides): a cung nữ life (palace maid: isSrv, or origin cnv) → "maid" = the 52 maid faces only;
-   every other life (phi tần) → "all" = 84 (32 consort + 52 maid; every maid identity has consort dress art, F88_NEED_C). Used by the ONE kit face picker (j86 fpHTML), solo and co-op alike. */
+/* WHICH FACE SET she may pick from (owner 16/11 s23: NO tabs; the game decides): a cung nữ life (palace maid: isSrv, or origin cnv) → "maid" = faces m01–m52 only;
+   every other life → "all" = the whole pool of 84 painted women (every id has rank-ladder art, F88_NEED_C). Used by the ONE kit face picker (j86 fpHTML), solo and co-op alike. */
 function kitFaceScope(){try{if((typeof isSrv==="function"&&isSrv())||(S&&S.origin&&S.origin.k==="cnv"))return"maid"}catch(e){}return"all"}
 /* she may choose now: the identity card is open (new life rolled, not yet accepted) */
 function faceOn(){try{return !!(typeof NLP!=="undefined"&&NLP&&S&&S.pid&&f88List(S.pid).length)}catch(e){return false}}
