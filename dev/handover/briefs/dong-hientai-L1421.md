@@ -1,0 +1,12 @@
+# DESIGN11 job — ĐÔNG (winter) = copy of the CURRENT outfit, closed crossed collar + fur (owner Lượt 1421, via #8 chat)
+Owner verbatim: "Tiếp đến, trang phục mùa đông là mình sẽ copy y chang cái trang phục hiện tại làm trang phục mùa đông, nhưng mà sẽ không còn để cái cổ hở nữa mà sẽ là cái áo vạt chéo để mà che cái cổ lại, cũng thêm lông này nọ vô luôn. Tất cả các cái bật, các cái cổ áo hay là các cái áo choàng giữ y chang giống như là cái bật mà mình đang có hiện tại vậy đó, hiểu không? Sau đó rồi mày gửi tao cái prompt để tao run cho mấy người này của bật mùa đông."
+Read dev/art/START_ART_WORKER.md first; do not read big files whole.
+BASES (newest current-outfit file per rank, A39 start from it): s62 t4/t5/t6 = dev/art/thu_comoi/s62_t{4,5,6}_THU_COMOI.txt, t7 = s62_t7_THU_COMOI_nn.txt, t8 = s62_t8_THU_COMOI_v5.txt; m02 t7 = m02_t7_THU_builder_nn.txt, t8 = m02_t8_THU_COMOI_v5.txt. (7 files.)
+OUTPUT: dev/art/dong_hientai/{s62_t4..t8, m02_t7, m02_t8}_DONG_HIENTAI.txt + .keep each (base + allowed changes).
+CHANGES ONLY:
+1. Neckline: the open/square/low neckline → a CLOSED crossed wrap collar (áo vạt chéo, right over left) that covers the neck/chest; remove every open-neck/square-neckline/cleavage (A42) word. Rank collars / cloud collars / capes / mantles / fringes / jewellery / headdress stay EXACTLY as in the base (lie over the closed collar).
+2. Fur: the G26 fur sentence by rank ladder (rule.py find WINTER FUR: t1–t3 v2 width, t4–t6 the newer wider one, t7/t8 clearly bigger), plain ivory, before 'Pose:'.
+3. Fabric: G28 — t4–t6 replace sheer/gauze/translucent words with opaque soft flowing silk (still thướt tha, never thick/padded); t7/t8 fabric unchanged.
+4. Colours: the person's B20 ĐÔNG palette (dev/art/face-common/palettes_season.json, key 'dong'; find s62's key) replaces the Thu main/secondary everywhere (owner L1419 c3); royal yellow t6–t8 unchanged; season word Thu→Đông/winter in caption/scene.
+A41 no necklaces. Nothing else changes. Proof: keep_check --sidecar each + --all PASS, your own Counter word diff, check_store on each (report FAIL set vs base). 0 gens. Commit+push HEAD:claude/cung-tuong-mong-handover-hj0h8w (pull --rebase), report dev/handover/reports/DESIGN11.md (append), send_message Foreman C #9 session_01D3E3NZXhAofYrqBeAVwLCF.
+ROLLOVER: at START_CTX % + 25 % of the window (ceiling 60 %) write your handover in your report and tell #9 (no successor possible at depth 8).
