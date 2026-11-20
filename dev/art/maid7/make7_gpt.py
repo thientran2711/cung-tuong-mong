@@ -467,6 +467,135 @@ def nhi2():
     return out
 
 
+
+# ===== MAIDP3: owner L1542 (C #12) — chưởng sự + ma ma wear the CURRENT thân cận outfit; thân cận = each grade, colours swapped + square collar =====
+def tc_outfit():
+    """Garment words of thancan_gpt_v4 (from the robe to the small-flower clause), verbatim."""
+    t = open(D + 'thancan_gpt_v4.txt', encoding='utf-8').read()
+    a = t.index('a long robe of fine embroidered silk brocade')
+    b = t.index('never large flowers;', a) + len('never large flowers;')
+    return t[a:b]
+
+
+def chuongsu4():
+    base = D + 'chuongsu_gpt_v3.txt'
+    t = open(base, encoding='utf-8').read()
+    a = t.index('a knee-length outer coat')
+    b = t.index('never like a consort\'s robe);', a) + len('never like a consort\'s robe);')
+    old = t[a:b]
+    t = t[:a] + tc_outfit() + t[b:]
+    t = swap(t, 'Outfit (the palace mistress of servants, design D):', 'Outfit (the palace mistress of servants):')
+    out = D + 'chuongsu_gpt_v4.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    allows = [('design D', 'owner Lượt 1542: coat design D replaced by the thân cận outfit')]
+    for frag in re.split(r'[;,()]', old):
+        frag = frag.strip()
+        if len(frag.split()) >= 3:
+            allows.append((frag, 'owner Lượt 1542: chưởng sự wears the current thân cận outfit (old coat words)'))
+    keep(out, base, allows)
+    return out
+
+
+def mama5(age):
+    base = D + 'mama_gpt_v4_%s.txt' % age
+    t = open(base, encoding='utf-8').read()
+    a = t.index('a long robe of fine embroidered silk brocade')
+    b = t.index('never large flowers;', a) + len('never large flowers;')
+    old = t[a:b]
+    t = t[:a] + tc_outfit() + t[b:]
+    out = D + 'mama_gpt_v5_%s.txt' % age
+    open(out, 'w', encoding='utf-8').write(t)
+    allows = []
+    for frag in re.split(r'[;,()]', old):
+        frag = frag.strip()
+        if len(frag.split()) >= 3 and frag not in tc_outfit():
+            allows.append((frag, 'owner Lượt 1542: ma ma wears the current thân cận outfit'))
+    keep(out, base, allows)
+    return out
+
+
+def mama5_51(): return mama5('a51')
+def mama5_65(): return mama5('a65')
+
+
+def swapcol(t):
+    """Swap MAIN <-> SECONDARY colours (powder blue #A7BAD2 <-> deep rose #CA7281)."""
+    for a, b in [('powder blue', '\0PB'), ('deep rose', '\0DR'), ('#A7BAD2', '\0HA'), ('#CA7281', '\0HC')]:
+        t = t.replace(a, b)
+    for a, b in [('\0PB', 'deep rose'), ('\0DR', 'powder blue'), ('\0HA', '#CA7281'), ('\0HC', '#A7BAD2')]:
+        t = t.replace(a, b)
+    return t
+
+
+# thancan_gpt_v4 square-collar words, said of the grade's own outer garment
+def sq_collar(garment):
+    return ("a SQUARE collar (cổ vuông, fangling): a flat embroidered collar band that runs straight down from each side of the "
+            "neck and turns at a right angle, framing a square opening at the upper chest, inside which the inner robe's crossed "
+            "collar shows; below the square opening the %s's two front edges meet edge to edge, closed with one small knot button, "
+            "never a tall upright stand collar" % garment)
+
+
+def tc_cap(t, rank):
+    return fixcap(t, rank + ' · thân cận')
+
+
+def tamdang_tc():
+    base = D + 'tamdang_gpt.txt'
+    t = swapcol(open(base, encoding='utf-8').read())
+    t = swap(t, 'ending just below the waist, in',
+             'ending just below the waist, with ' + sq_collar('jacket') + ', in')
+    t = tc_cap(t, 'Cung nữ tam đẳng')
+    out = D + 'tamdang_thancan_gpt.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [('the long inner robe and skirt in powder blue like #A7BAD2', 'owner Lượt 1542: thân cận = colours swapped'),
+                     ('in deep rose like #CA7281', 'owner Lượt 1542: colours swapped'),
+                     ('her main colour powder blue on the inner robe and skirt', 'owner Lượt 1542: colours swapped'),
+                     ('her secondary colour deep rose clearly visible on the short outer top', 'owner Lượt 1542: colours swapped'),
+                     ('Cung nữ tam đẳng', 'caption + · thân cận')])
+    return out
+
+
+def nhi_tc():
+    base = D + 'nhi_gpt_v2.txt'
+    t = swapcol(open(base, encoding='utf-8').read())
+    t = swap(t, NHI2_CROSSED, 'with ' + sq_collar('jacket'))
+    t = tc_cap(t, 'Cung nữ nhị đẳng')
+    out = D + 'nhi_thancan_gpt.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    al = [('the long inner robe and skirt in powder blue like #A7BAD2', 'owner Lượt 1542: colours swapped'),
+          ('a half-sleeve brocade jacket (bijia) on top in deep rose like #CA7281', 'owner Lượt 1542: colours swapped'),
+          ('on top in deep rose like #CA7281', 'owner Lượt 1542: colours swapped'),
+          ('her main colour powder blue like #A7BAD2 on the ruqun', 'owner Lượt 1542: colours swapped'),
+          ('her secondary colour deep rose like #CA7281 on the whole half-sleeve outer jacket', 'owner Lượt 1542: colours swapped'),
+          ('Cung nữ nhị đẳng', 'caption + · thân cận')]
+    al += [(f.strip(), 'owner Lượt 1542: crossed collar -> square collar') for f in re.split(r'[;,():]', NHI2_CROSSED) if len(f.split()) >= 3]
+    keep(out, base, al)
+    return out
+
+
+def nhat_tc():
+    base = D + 'nhat_gpt_v4.txt'
+    t = swapcol(open(base, encoding='utf-8').read())
+    t = swap(t, NHAT_R2_COLLAR, 'a sleeveless embroidered over-vest with ' + sq_collar('vest') +
+             ', with a band of gold-edged trim down the front, worn over a crossed-collar inner robe')
+    t = swap(t, "(a touch deeper than a lower maid's blue), the sleeves blue all the way down",
+             "(a touch deeper than a lower maid's rose), the sleeves rose all the way down")
+    t = tc_cap(t, 'Cung nữ nhất đẳng')
+    out = D + 'nhat_thancan_gpt.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    al = [('RECOLOUR the whole costume to her colour powder blue', 'owner Lượt 1542: colours swapped'),
+          ('the MAIN colour powder blue like #A7BAD2 and the SECONDARY colour deep rose like #CA7281', 'owner Lượt 1542: colours swapped'),
+          ('the long SKIRT and the WHOLE SLEEVES are powder blue', 'owner Lượt 1542: colours swapped'),
+          ("a touch deeper than a lower maid's blue", 'owner Lượt 1542: colours swapped'),
+          ('the sleeves blue all the way down', 'owner Lượt 1542: colours swapped'),
+          ('only their embroidered cuff band may carry deep rose embroidery', 'owner Lượt 1542: colours swapped'),
+          ('the short top front panel are deep rose', 'owner Lượt 1542: colours swapped'),
+          ('Cung nữ nhất đẳng', 'caption + · thân cận')]
+    al += [(f.strip(), 'owner Lượt 1542: stand collar -> square collar') for f in re.split(r'[;,():]', NHAT_R2_COLLAR) if len(f.split()) >= 3]
+    keep(out, base, al)
+    return out
+
+
 if __name__ == '__main__':
     # NOTE: mama51/mama65 (v2) and chuongsu (v2) are NOT in the default list: mama v2 was hand-edited by Foreman C (L1473).
     jobs = sys.argv[1:] or ['nhat', 'thancan', 'tamdang', 'nhat3', 'thancan3', 'chuongsu3', 'mama3_51', 'mama3_65', 'mama4_51', 'mama4_65']
