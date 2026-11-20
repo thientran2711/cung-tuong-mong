@@ -272,6 +272,58 @@ Rule learnt from the pilot: `.4` already closes its own first conflict (its 3–
 - .10 Lời quyết — the losing side asks to split {land}; the Emperor will follow her one word [emp, v, maid]
 - .11 Ngai vàng sau cùng — both missions meet at Hồng Lô tự. Endings: Cố quốc một lòng / Cố quốc chia đôi / Cố quốc thành nước thù; rare: Hai nhà thề hòa bằng rượu của ngươi [emp, v]
 
+### 4.5b bd — Công chúa hòa thân · Bắc Địch — OWN 4 ROADS (owner OD 18/11 ~22:05Z, GE D2 = (a); PLAN review/bd-roads, E14)
+- bd stays a COUNTRY BRANCH of hòa thân (no 10th origin, same jkc2 / KC2LAND frame, same land tokens {land} {pv} {mh} {quan} {pa} {pb} of jrd_nc NCL.bd), but
+  new bd lives roll one of 4 roads of their own: `bd_san`, `bd_soi`, `bd_tuyet`, `bd_hen` (.4 premise arc + .5–.11 + j97 rare at .4 + RD97L rare at .11).
+- Files: `dev/build/jrd_bd.js` (lead E14: shared bd helpers, legacy block, bd_san + bd_soi), `dev/build/jrd_bd2.js` (writer 2: bd_tuyet + bd_hen),
+  both right after jrd_nc.js in assemble.py. Numbers: `dev/build/jbalbd.js` right after jbalroad.js (ONE CORE): `BAL.arc.fx.<road>` (.4),
+  `BAL.arc.rare.<road>` (.4 rare), `BAL.road.fx.<road>_<n>` (.5–.11), `BAL.road.rare.<road>_11`, `BAL.road.bd` (chapter constants); one block per writer.
+- LEGACY (law 6c, old saves): the old premises bd_hoa / bd_ngua / bd_tuc / bd_hoang (jorigins.js) and their alias chapters (= nc_su / nc_gian /
+  nc_tuc / nc_vuong under bd ids; the loop moves VERBATIM from the end of jrd_nc.js into jrd_bd.js) stay registered, so a saved life that already rolled
+  one keeps playing to its .11. They are marked `old:1` and are no longer dealt to NEW lives (arcIds67 wrapper in jrd_bd.js drops old:1 premises).
+- People (law 6b): the steppe people are real people of the branch, kept in one book `BDP` (jrd_bd.js): id, name, role, where (steppe / border /
+  capital), alive, met; chapter go: closures move them (S.st.f14.fb "bd.p.<id>.*"), text reads them by token. Rows in §5.4.
+- Objects (law 6c): every object a bd chapter hands over is a real item or a fb-tracked thing with an owner (the border map copy, the cut girth,
+  the uncle's letters, her mare Tuyết Câu in the Thượng tứ viện stable, the oath stone …): given / burnt / kept / seized, never vanished.
+**bd_san · Mùa thu săn** (Tài nghệ · Tình yêu; GE ge1 Thống lĩnh ngự mã · ge2 Tri kỷ lưng ngựa · ge3 Mũi tên trường săn · ge4 Về với thảo nguyên)
+- .4 Mùa thu săn — the autumn hunt at the Bắc Uyển hunting ground; she rides her mare Tuyết Câu among Đại Hy men; one arrow decides who notices her [emp, v]. Ends: win (the Emperor calls her to ride beside him) / win2 (Thượng tứ viện asks her about the steppe horses) / mid / lose ({v} says she shot near the Emperor's horse). j97 rare «Một tên hai nhạn».
+- .5 Chuồng ngựa Thượng tứ viện — the new Bắc Địch horses arrive; Ba Đồ the groom and the Thượng tứ viện chief both want the stable's say; who holds it [emp, maid, v]
+- .6 Đai yên bị cắt — before the ride with the Emperor her saddle girth is found cut; the girth, the groom who saw, {v}'s eunuch [v, maid, emp]
+- .7 Cưỡi ngựa cùng vua — the Emperor rides out of the city with her; a censor memorialises "a consort on horseback" [emp, v]
+- .8 Dịch ngựa — sickness in the Thượng tứ viện stable, the border warhorses fall; steppe cure or the horse doctor; Binh bộ waits [emp, maid]
+- .9 Hội bắn mùa xuân — spring archery for princes and guards; teach, compete, or let {v}'s kinsman win [emp, v]
+- .10 Tiếng gọi thảo nguyên — a Bắc Địch herd at the border market; Ba Đồ keeps a saddled horse at the west gate for her [maid, emp]
+- .11 Vi trường năm sau — the next autumn hunt; an arrow flies at the royal party. Chapter results: Nữ kỵ bên ngự giá / Ngựa về chuồng, người về cung / Mũi tên lạc; rare RD97L «Hoàng thượng trao cương ngựa ngự» [emp, v, maid]
+**bd_soi · Sói đầu đàn** (Quyền lực · Gia tộc; GE ge1 Nữ Khả hãn · ge2 Lập em làm hãn · ge3 Sói già phải chết · ge4 Con trai hai cõi; design GRAND_ENDINGS §4.2)
+- .4 Sói đầu đàn — {pv} falls from his horse; thúc phụ Hô Diên Liệt's envoy asks Đại Hy to recognise him; em trai Ô Lặc writes for help; the Emperor asks her [emp]. Ends win / win2 / mid / lose. j97 rare «Phụ hãn tỉnh lại».
+- .5 Hai phong thư — uncle and brother both write; the uncle asks for the border map (a real copy in the Binh bộ archive) [emp, maid]
+- .6 Sứ giả mang dao — Thát Mộc, a guard of the uncle's embassy, carries a knife for Ô Lặc's envoy (or for her) [emp, maid, v]
+- .7 Chợ ngựa đóng cửa — the uncle shuts the horse market; Binh bộ hawks (backed by {v}'s house) want war [emp, v]
+- .8 Khả đôn vào kinh — {mh} flees to the capital; sheltering her risks war; {v} calls her a spy [emp, v, maid]
+- .9 Hội đua ngựa mùa hạ — the succession race on the steppe; a champion, the brother, or her own name [emp, maid]
+- .10 Đêm tuyết Âm Sơn — Đại Hy troops at the border: send, hold, or bargain for the tribes' oath [emp, v]
+- .11 Chủ nhân kim trướng — who sits in the golden tent. Chapter results: Em trai lên ngôi hãn / Thảo nguyên chia đôi / Thúc phụ thắng, mối hòa lung lay; rare RD97L «Kim trướng gọi ngươi là Khả đôn» [emp, v]
+**bd_tuyet · Năm tuyết trắng** (Thiên hạ; GE ge1 Mẹ của thảo nguyên · ge2 Lương thảo đổi hòa · ge3 Mở cửa ải bắc · ge4 Khúc ca tuyết trắng) — writer 2, outline (writer may refine, keep the people and objects)
+- .4 Năm tuyết trắng — a white winter kills the herds; A Sử Na Cát, old chief of the border tribe, begs grain at the pass [emp]. j97 rare «Tuyết tan giữa đông».
+- .5 Kho Thường Bình — Hộ bộ's ever-normal granary: ask, buy, or pledge her dowry [emp, v]
+- .6 Chợ lương đổi ngựa — grain for horses at the pass market; the price and who sets it [emp, maid]
+- .7 Cướp biên — a starving band raids a Đại Hy village; Binh bộ wants punishment [emp, v]
+- .8 Người lánh nạn ở Nhạn Môn — refugees at the gate; the old border general asks the court [emp, maid]
+- .9 Sốt trong trại — fever in the refugee camp; thái y, steppe healers or quarantine [emp, maid, v]
+- .10 Mở cửa ải — the gate: open for people, open for the tribe, or hold [emp, v]
+- .11 Khúc ca mùa xuân — the thaw; who is remembered. Chapter results (writer names); rare RD97L (writer names) — her winter song (ge4) must be written in a chapter option.
+**bd_hen · Lời thề bên đống đá** (Tình yêu · Tự do; GE ge1 Lời thề trọn vẹn · ge2 Chôn lời thề cũ · ge3 Nghĩa huynh biên ải · ge4 Đòi máu cho chàng) — writer 2, outline
+- .4 Lời thề bên đống đá — her betrothed Thác Bạt Phong rides in with the embassy guard; the oath they swore at the ovoo stone [emp, v]. j97 rare «Hòn đá thề trở về».
+- .5 Hòn đá trong tay áo — he sends her the oath stone through Hội Đồng quán; keep, return, or show the Emperor [maid, emp]
+- .6 Kết nghĩa — a sworn brotherhood before the court turns the old oath into something speakable [emp, v]
+- .7 Trận đấu vật — {v}'s house sets a trap at the wrestling before the Emperor; a man dies [emp, v]
+- .8 Lá thư bị chặn — a letter in steppe script is seized at the gate [emp, v, maid]
+- .9 Ngục Đại Lý tự — Phong is jailed; the hearing day [emp, maid, v]
+- .10 Đêm trước phiên xử — plead, prove, or open the cell [emp, v]
+- .11 Lời thề sau cùng — the embassy leaves; with him, without him, or for him. Chapter results + rare RD97L (writer names).
+- Grand-ending reach (both writers): each road's options must carry ge1–ge4 Chuỗi (pull) and Khóa (close) intents from GRAND_ENDINGS §3/§4.2 by RAW
+  option name, with enough thiện- AND ác-leaning options on every Chuỗi so both shadings are reachable (the GE data wave lists them by name later).
+
 ### 4.6 td — Con gái tội thần — BUILT (review/road-b2, dev/build/jrd_td.js; all .5–.11 + one rare finale per road)
 **td_an · Lật lại án cũ**
 - .4 Lật lại án cũ — the family accused of treason by {foed}; his daughter {foe} is in the palace [foe, foed]
@@ -523,6 +575,15 @@ OD:L1327 history/drama questions → expert check (marked "HISTORY CHECK" in §4
 | ma ma giáo tập of Đức Thọ cung | nc_tuc .5, .9 | teaches her palace rites (unnamed) | mama |
 | {v}'s cousin (Thị lang Lễ bộ, later Phó tướng) | nc_vuong .5–.9 | rival's relative, never named | official |
 | old border general | nc_vuong .8 | the other choice of commander (unnamed) | S.men |
+| Ba Đồ | bd_san .4–.11 (the {land} groom of Thượng tứ viện, now named) | Bắc Địch groom, keeps her mare | eunuch |
+| Tổng quản Thượng tứ viện | bd_san .5–.11 | chief of the imperial stables (unnamed) | eunuch |
+| Tuyết Câu (mare) | bd_san .4–.11 | her white mare, lives in the Thượng tứ viện stable (an animal, law 6c) | none |
+| Hô Diên Liệt (thúc phụ) | bd_soi .4–.11 | {pv}'s brother, claims the golden tent; steppe → border | S.men envoy face |
+| Ô Lặc (em trai) | bd_soi .4–.11 | her young brother, heir; steppe | S.men |
+| Thát Mộc | bd_soi .6–.11 | guard of the uncle's embassy, the knife | S.men |
+| A Sử Na Cát | bd_tuyet .4–.11 | old chief of the border tribe | elder servant |
+| Hộ bộ Lang trung | bd_tuyet .5–.6 | keeps the Thường Bình granary (unnamed) | official |
+| Thác Bạt Phong | bd_hen .4–.11 | her betrothed from the steppe, captain of the embassy guard | S.men |
 | Giang Nam abbot (sư trụ trì) | td_an .6 | keeps lão thái giám Vương's written deposition | elder servant |
 | seal carver Lý | td_an .10 | carved the forged Binh bộ seal | merchant |
 | Nội các archive eunuch | td_an .5 | keeper of the archive | eunuch |
@@ -582,6 +643,8 @@ Each helper builds on the engine branch, one origin per review branch `review/ro
 - 11/16/2026 B3: thd + cnv built (56 chapters, §4.8/§4.9 rewritten to the built chapters); endgame noi14/hau14/ke14 (jend14.js); §8.4 decided; §5.4 rows added.
 
 - 11/16/2026 B1 built dtq / muoi / cn (84 chapters + 12 rare finales, review/road-b1); §4.2–4.4 rewritten to the built chapters.
+
+- 11/18/2026 E14 PLAN: §4.5b bd's own 4 roads (bd_san, bd_soi, bd_tuyet, bd_hen), legacy bd aliases kept for old saves, §5.4 rows.
 
 ## 8. Open questions for Foreman B / main (not for the owner unless main decides so)
 1. DONE: Thanh mai trúc mã is a side story in full-road lives (jroad.js; BAL.road.tm).
