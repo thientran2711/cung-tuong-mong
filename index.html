@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"00b253fe+","t":"2026-11-20T13:25Z","c":"night-final-r3: flip choice before any queued dialog — her summons leaves Q at the flip (realFlip, x.ksp) so it cannot be answered before t…","b":"5670946d4410","h":[{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"},{"s":"39228682+","t":"2026-11-20T10:45Z","c":"Phi tần khác cũng rủ nàng lập phe, vào phe của nàng (luật hai chiều)"},{"s":"d39e3d2c+","t":"2026-11-20T12:07Z","c":"Nút «Mua» ở tiệm chơi một mình chạy lại; lời dẫn từng xuất thân chương 1–3"},{"s":"bf7cc4de+","t":"2026-11-20T11:56Z","c":"Mời khách khi chủ vắng nhà: khách chờ đúng luật"},{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"},{"s":"f6f4a69c+","t":"2026-11-20T11:10Z","c":"Sổ luân hồi thêm trang «Sơ đồ nhánh»"},{"s":"d941502e","t":"2026-11-20T11:16Z","c":"Chip điểm và đồng hồ trò chơi: chỉ còn con số, đồng hồ hổ phách khi gấp"},{"s":"c12231a1","t":"2026-11-20T11:05Z","c":"Trò chơi không chữ nhóm b: Đặt hoa có hình chỉ dẫn, bỏ chữ trên bàn chơi"}]};
+window.CTM_BI={"s":"6877eec3+","t":"2026-11-20T13:26Z","c":"night-final-r3: steal-mg-nf runs before the night ledger lands (BAL.nt guard)","b":"03fa98d0d61e","h":[{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"},{"s":"39228682+","t":"2026-11-20T10:45Z","c":"Phi tần khác cũng rủ nàng lập phe, vào phe của nàng (luật hai chiều)"},{"s":"d39e3d2c+","t":"2026-11-20T12:07Z","c":"Nút «Mua» ở tiệm chơi một mình chạy lại; lời dẫn từng xuất thân chương 1–3"},{"s":"bf7cc4de+","t":"2026-11-20T11:56Z","c":"Mời khách khi chủ vắng nhà: khách chờ đúng luật"},{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"},{"s":"f6f4a69c+","t":"2026-11-20T11:10Z","c":"Sổ luân hồi thêm trang «Sơ đồ nhánh»"},{"s":"d941502e","t":"2026-11-20T11:16Z","c":"Chip điểm và đồng hồ trò chơi: chỉ còn con số, đồng hồ hổ phách khi gấp"},{"s":"c12231a1","t":"2026-11-20T11:05Z","c":"Trò chơi không chữ nhóm b: Đặt hoa có hình chỉ dẫn, bỏ chữ trên bàn chơi"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -69609,7 +69609,9 @@ function amRise(m,o,via){const B=BAL.mline,D=amD();const close=!!(o&&o.maid===m)
  const n=newRival(0);Object.assign(n,drawFace());try{f88Carry(n,m)}catch(e){}n.name=amName(m);/* her age: f88Carry */
  n.ag=Object.assign(n.ag||{},{o:"cn"});n.rel=0;n.fromMaidOf=o?key(o):null;
  const loy=riseCore(n,m,o);rivals.push(n);
- try{n.nights=(n.nights||0)+1;(n.nightLog=n.nightLog||[]).push(wk());night(n)}catch(e){}
+ /* the Kính sự phòng book keeps her night on its REAL day (law 6a, one night a day): a favoured maid raised at the month served in her
+    favoured week (m.fav.w), not today — today's night belongs to whoever the flip gives it */
+ try{const nw=via==="fav"&&m.fav&&m.fav.w!=null?m.fav.w:wk();n.nights=(n.nights||0)+1;(n.nightLog=n.nightLog||[]).push(nw);night(n)}catch(e){}
  AMN.rise++;if(via==="fav")AMN.favRise++;
  const how=via==="send"?"hầu thay":via==="fav"?"đã được sủng hạnh, nay hậu cung có chỗ":"được Hoàng thượng cho gọi đến hầu";
  return `Cung nữ ${m.name} của ${o?NM(o):"Nội vụ phủ"} ${how}, được phong ${RANKS[0].n} ${n.name}${loy?", vẫn nhớ ơn chủ cũ":", quay lưng với chủ cũ"}. `}
@@ -69661,7 +69663,11 @@ Object.assign(EMPMEM,{tea:"chén trà",teaN:"chén trà",meet:"chén trà",erran
  const rn0=rivalNight;rivalNight=function(v){const r=rn0.apply(this,arguments);let x="";try{x=amNightTea(v)}catch(e){}return (r||"")+x};
  const rw0=rivalsTurn;rivalsTurn=function(){const r=rw0.apply(this,arguments);let x="";try{x=amWeek()}catch(e){}return (r||"")+x};
  /* rows 6, 7, 12: Tiến cử */
- const sm0=sendMaid;sendMaid=function(a){if(!amOn()||!a||!a.maid)return sm0.apply(this,arguments);const m=a.maid;if(a===S)S.tonight=null;AMN.send++;amNightGain(m);
+ const sm0=sendMaid;sendMaid=function(a){if(!amOn()||!a||!a.maid)return sm0.apply(this,arguments);const m=a.maid;if(a===S)S.tonight=null;
+  /* law 1 (her own «Tiến cử hầu thay» gives up her night): an NPC who sends her maid from her own night (rivalNight → sendMaid) gives up
+     the night record too — the maid served, the book holds ONE night for the day */
+  else{const L=a.nightLog;if(Array.isArray(L)&&L.length&&L[L.length-1]===wk()){L.pop();a.nights=Math.max(0,(a.nights||1)-1)}}
+  AMN.send++;amNightGain(m);
   if(roomFor("consort")){AMN.sendRise++;return amRise(m,a,"send")}return amFav(m,a,"send")||""};
  const k0=PEND.ksp;PEND.ksp=function(){const d=k0.apply(this,arguments);try{if(amOn()&&d&&d.o&&d.o[1])d.o[1].x=amSendX()}catch(e){}return d};
  /* the month: his regard fades (the player's: j42), a free seat goes to a favoured maid first */
@@ -83309,7 +83315,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5670946d4410";window.CTM_BUILD=BUILD;
+const BUILD="03fa98d0d61e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

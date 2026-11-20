@@ -84,7 +84,9 @@ function amRise(m,o,via){const B=BAL.mline,D=amD();const close=!!(o&&o.maid===m)
  const n=newRival(0);Object.assign(n,drawFace());try{f88Carry(n,m)}catch(e){}n.name=amName(m);/* her age: f88Carry */
  n.ag=Object.assign(n.ag||{},{o:"cn"});n.rel=0;n.fromMaidOf=o?key(o):null;
  const loy=riseCore(n,m,o);rivals.push(n);
- try{n.nights=(n.nights||0)+1;(n.nightLog=n.nightLog||[]).push(wk());night(n)}catch(e){}
+ /* the Kính sự phòng book keeps her night on its REAL day (law 6a, one night a day): a favoured maid raised at the month served in her
+    favoured week (m.fav.w), not today — today's night belongs to whoever the flip gives it */
+ try{const nw=via==="fav"&&m.fav&&m.fav.w!=null?m.fav.w:wk();n.nights=(n.nights||0)+1;(n.nightLog=n.nightLog||[]).push(nw);night(n)}catch(e){}
  AMN.rise++;if(via==="fav")AMN.favRise++;
  const how=via==="send"?"hầu thay":via==="fav"?"đã được sủng hạnh, nay hậu cung có chỗ":"được Hoàng thượng cho gọi đến hầu";
  return `Cung nữ ${m.name} của ${o?NM(o):"Nội vụ phủ"} ${how}, được phong ${RANKS[0].n} ${n.name}${loy?", vẫn nhớ ơn chủ cũ":", quay lưng với chủ cũ"}. `}
@@ -136,7 +138,11 @@ Object.assign(EMPMEM,{tea:"chén trà",teaN:"chén trà",meet:"chén trà",erran
  const rn0=rivalNight;rivalNight=function(v){const r=rn0.apply(this,arguments);let x="";try{x=amNightTea(v)}catch(e){}return (r||"")+x};
  const rw0=rivalsTurn;rivalsTurn=function(){const r=rw0.apply(this,arguments);let x="";try{x=amWeek()}catch(e){}return (r||"")+x};
  /* rows 6, 7, 12: Tiến cử */
- const sm0=sendMaid;sendMaid=function(a){if(!amOn()||!a||!a.maid)return sm0.apply(this,arguments);const m=a.maid;if(a===S)S.tonight=null;AMN.send++;amNightGain(m);
+ const sm0=sendMaid;sendMaid=function(a){if(!amOn()||!a||!a.maid)return sm0.apply(this,arguments);const m=a.maid;if(a===S)S.tonight=null;
+  /* law 1 (her own «Tiến cử hầu thay» gives up her night): an NPC who sends her maid from her own night (rivalNight → sendMaid) gives up
+     the night record too — the maid served, the book holds ONE night for the day */
+  else{const L=a.nightLog;if(Array.isArray(L)&&L.length&&L[L.length-1]===wk()){L.pop();a.nights=Math.max(0,(a.nights||1)-1)}}
+  AMN.send++;amNightGain(m);
   if(roomFor("consort")){AMN.sendRise++;return amRise(m,a,"send")}return amFav(m,a,"send")||""};
  const k0=PEND.ksp;PEND.ksp=function(){const d=k0.apply(this,arguments);try{if(amOn()&&d&&d.o&&d.o[1])d.o[1].x=amSendX()}catch(e){}return d};
  /* the month: his regard fades (the player's: j42), a free seat goes to a favoured maid first */
