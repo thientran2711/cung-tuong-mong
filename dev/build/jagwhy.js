@@ -46,6 +46,11 @@ function npwStamp(kind,p){S.npw=S.npw||{};S.npw[npwCk(kind,p)]=wk()+npwCdN(kind,
 function npwPick(L,score,o){const B=npwB();const R=(L||[]).map(x=>[x,+score(x)||0]).filter(r=>r[1]>0).sort((a,b)=>b[1]-a[1]);if(!R.length)return null;
  const all=!!(o&&o.all);const top=all?R:R.filter(r=>r[1]>=R[0][1]*B.near).slice(0,Math.max(1,B.top));if(top.length===1)return top[0][0];const pw=all?1:B.pow;
  const w=top.map(r=>Math.pow(r[1],pw));let x=Math.random()*w.reduce((a,b)=>a+b,0);for(let i=0;i<top.length;i++){x-=w[i];if(x<=0)return top[i][0]}return top[top.length-1][0]}
+/* npwShare (review/errand-bal, law 4 + 7): the true chance (0..100) that npwPick(L,score) returns x — the same near / top / pow cut, so a card
+   that prints the odds of a purpose pick shows what the pick really does (never a typed number) */
+function npwShare(L,score,x,o){const B=npwB();const R=(L||[]).map(y=>[y,+score(y)||0]).filter(r=>r[1]>0).sort((a,b)=>b[1]-a[1]);if(!R.length)return 0;
+ const all=!!(o&&o.all);const top=all?R:R.filter(r=>r[1]>=R[0][1]*B.near).slice(0,Math.max(1,B.top));const pw=all?1:B.pow;const i=top.findIndex(r=>r[0]===x);if(i<0)return 0;if(top.length===1)return 100;
+ const w=top.map(r=>Math.pow(r[1],pw));return Math.round(100*w[i]/w.reduce((a,b)=>a+b,0))}
 function npwAsk(kind,ctx){const d=NPW.reg[kind];if(!d)throw new Error("npcWhy: unknown kind "+kind);const B=npwB();const O=[];let cd=0;
  const lim=typeof d.lim==="function"?d.lim(ctx||{}):(d.lim||0);let n=0;
  for(const p of (d.who(ctx||{})||[])){if(!p)continue;if(lim){if(!npwCdOk(kind,p)){cd++;continue}if(n>=lim)break;n++}let r=null;try{r=d.why(p,ctx||{})}catch(e){console.error("npcWhy "+kind,e);r=null}
