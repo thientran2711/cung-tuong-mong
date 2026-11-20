@@ -69,9 +69,11 @@ function j95sOid(o){return o===S?"me":o==="th"?"th":"v"+o.id}
 /* perf (outcome-identical): j95sv(id) scans every household's staff per call; one sid → servant table per call, built in j95sv's own order (first match wins) */
 function j95sSvTab(){const M=new Map();try{for(const p of [S].concat(rivals,(S.thO?[S.thO]:[])))for(const s of (p&&p.staff)||[])if(s&&!M.has(s.sid))M.set(s.sid,s)}catch(e){}return M}
 function j95sHouses(ppl){const H=new Map();const add=(o,q)=>{let h=H.get(o);if(!h){h=[];H.set(o,h)}h.push(q)};let SV=null;const sv=id=>{if(!SV)SV=j95sSvTab();const s=SV.get(+String(id).slice(1));return s===undefined?null:s};
- for(const p of ppl){if(p.kind==="mm"||p.kind==="st"){const o=p.ref;if(!o)continue;if(o!==S&&(!o.alive))continue;add(o,{id:p.id,kind:p.kind,close:p.kind==="mm",sv:p.kind==="st"?sv(p.id):null,name:p.name,home:p.home})}
-  else if(p.kind==="el"&&p.ref&&!p.ref.eid&&p.home==="tn"&&!S.thDead)add("th",{id:p.id,kind:"el",close:false,sv:p.ref,name:p.name,home:"tn"})}
+ for(const p of ppl){if(p.kind==="mm"||p.kind==="st"){const o=p.ref;if(!o)continue;if(o!==S&&(!o.alive))continue;add(o,{id:p.id,kind:p.kind,close:j95sClose(o,p,sv),sv:p.kind==="st"?sv(p.id):null,name:p.name,home:p.home})}
+  else if(p.kind==="el"&&p.ref&&!p.ref.eid&&p.home==="tn"&&!S.thDead)add("th",{id:p.id,kind:"el",close:!!(S.thO&&typeof tcOf==="function"&&tcOf(S.thO)===p.ref),sv:p.ref,name:p.name,home:"tn"})}
  return H}
+/* q.close = her cung nữ thân cận (jtc, owner OD 20/11 ~15:55Z): the maid her master CHOSE (master.tc), no longer simply the personal maid (kind mm) */
+function j95sClose(o,p,sv){try{if(typeof tcOf!=="function")return p.kind==="mm";const c=tcOf(o);if(!c)return false;return p.kind==="mm"?c===o.maid:c===sv(p.id)}catch(e){return false}}
 /* ---------- her own day (per khắc, deterministic per buổi) ---------- */
 function j95sErrand(o,r){const B=BAL.slv.err;const L=[];let ill=false;try{ill=o!=="th"&&o!==S?!!(illOf(o)||o.preg):!!(o===S&&(illOf(S)||S.preg))}catch(e){}
  for(const k in B){if(k==="nvp"&&!j95nvp())continue;L.push([k,B[k]*(k==="tyv"&&ill?BAL.slv.illTyv:1)])}const k=j95sPw(r,L);const ow=j95sOw(o);

@@ -53,7 +53,7 @@ for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on(
   note.push(`T1 NPC trials ${t1}, followers/household ${JSON.stringify(dist)}`);
   /* T2: a consort with a close maid and at least one servant */
   const v=liveRivals(true).filter(x=>x.alive&&!x.out&&x.maid&&(x.staff||[]).length>=1).sort((a,b)=>(b.staff||[]).length-(a.staff||[]).length)[0];
-  if(v){const mm="mm:"+v.id;delete S.entN.P["v"+v.id];const t=trial(v,"dtd",H=>{if(R.P[mm])for(let i=0;i<4;i++)R.P[mm][i]=["tyv","ag_thu",null,"việc riêng của nàng"]});
+  if(v){const mm="mm:"+v.id;/* jtc (review/thancan, owner OD 20/11 ~15:55Z): the close one is the maid her master CHOSE; this test makes the personal maid her thân cận */v.tc="m:"+v.maid.name;delete S.entN.P["v"+v.id];const t=trial(v,"dtd",H=>{if(R.P[mm])for(let i=0;i<4;i++)R.P[mm][i]=["tyv","ag_thu",null,"việc riêng của nàng"]});
    if(!t)bad.push("T2 no trial");else{if(t.fol.includes(mm))bad.push("T2 busy close maid still follows");const fb=t.rows.filter(([id,x])=>x[1]==="follow");
     if(t.free>0&&!fb.length)bad.push("T2 nobody follows when the close maid is busy");for(const [id,x] of fb)if(!/cung nữ thân cận .*không rảnh/.test(x[3]))bad.push("T2 fallback reason: "+x[3]);
     const rm=t.rows.find(([id])=>id===mm);if(rm&&rm[1][1]!=="ag_thu")bad.push("T2 the busy close maid lost her deed: "+rm[1][1])}
