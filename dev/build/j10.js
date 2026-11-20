@@ -160,7 +160,7 @@ function facMonth(){let ev="";S.facs=(S.facs||[]).filter(f=>facMembers(f).length
  /* AG-ALL-2e2: with the day plan on, an NPC founds / asks to join / leaves / sells out / divides through her own options (jagacts3 cx3:fac*, the same functions as facAct) */
  if(!p3FacOn())for(const v of liveRivals(true)){if(facOf(v))continue;
   const fr=others(v).filter(x=>(x===S||x.alive)&&!sameHouse(v,x)&&(aff(v,x)>=35||clanOf(v)===clanOf(x)&&aff(v,x)>=15||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=30&&oan(x,e)>=30)));
-  const x=mindPickBy(fr.filter(y=>y!==S),y=>BAL.mind.pick.j10fr.base+Math.max(0,aff(v,y)),v);/* npc-mind: was FIRST */if(x&&roll(25)){const g=facOf(x);/* RECEIVER CHOICE (jrcv): the leader / the friend answers */const r=g?askJoin(v,g):rcvAsk("facFound",v,x);ev+=eyes(S)>=2||g&&facOf(S)===g?r:""}}
+  const x=mindPickBy(fr,y=>BAL.mind.pick.j10fr.base+Math.max(0,aff(v,y)),v);/* npc-mind: was FIRST; facfound-parity: she is in fr too (law 1, her answer = jrcv card) */if(x&&roll(25)){const g=facOf(x);/* RECEIVER CHOICE (jrcv): the leader / the friend answers */const r=g?askJoin(v,g):rcvAsk("facFound",v,x);ev+=eyes(S)>=2||g&&facOf(S)===g?r:""}}
  const mine=facOf(S);for(const f of S.facs){if(f===mine)continue;const l=facLeader(f);const oa=l&&l!==S&&!facOf(S)&&aff(l,S)>=35?npcWhy("facAsk",{p:l,minAff:35},()=>roll(10)):null;if(oa)rcvAsk("facInvite",l,S)/* npc-purpose G2 reason + her card: the 4 answers (jrcv) */}
  if(mine){const od=npcWhy("facDiv",{mine});const l=od&&od.who;if(l&&l!==S&&roll(5)){const r=divide(l,mine);if(r)ev+=r}}/* npc-purpose G2: a rival leader who bears her a grudge divides her faction */
  return ev}
