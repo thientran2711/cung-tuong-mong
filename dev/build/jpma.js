@@ -289,7 +289,8 @@ function pmVsShow(vs,o,h){const u=pmVsUI(vs,o);if(!u)return;u.setScore("me",vs.m
  if(vs.turn!==undefined)u.setTurn(vs.turn)}
 /* ---------- C2 the real 7×7 Cờ ---------- */
 const PM_KY={e:"gomoku",n:"Cờ",t:"Năm quân liền hàng",timed:false,how:"Bàn 7×7. Ngươi cầm quân đen đi trước, đối thủ cầm quân trắng; mỗi bên lần lượt đặt một quân vào ô trống. Ai có năm quân liền một hàng (ngang, dọc hay chéo) trước là thắng; kín bàn mà chưa ai đủ năm là hòa."};
-function pmKyNoise(o,me,R){const K=B().ky;return Math.round(cl(K.base-K.k*(pmScore(o,"co",R,pmMed(o,"co",R))-pmTal(me,"co"))-K.rankN*R,K.min,K.max))}
+/* his median on the base tier: rank pressure comes from rankN*R only (the tier-R median falls with R and would weaken him as she climbs, against law 5) */
+function pmKyNoise(o,me,R){const K=B().ky;return Math.round(cl(K.base-K.k*(pmScore(o,"co",R,pmMed(o,"co",0))-pmTal(me,"co"))-K.rankN*R,K.min,K.max))}
 /* KG82.kyNet (Q-C2, co-op live board): {side: 1 black (the asker, first) | 2 white, send(i,n) = her move to the friend, q = friend moves already come,
    on = set here, mvWait = ms of friend silence on his turn before the AI takes his side with HIS hand (offline fallback)}; absent = the AI opponent as before */
 function kgGomoku(b,env){const K=BAL.pm.ky,n=7,B0=Array(n*n).fill(0);let over=false,maxRun=0,oppRun=0,lock=false,mv=0,wt=0;
