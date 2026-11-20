@@ -1041,6 +1041,15 @@ for _i,(_c,(_m,_s,_h1,_h2,_mo,_fl)) in enumerate(PRINCESS_ROWS.items()):
     _pal=f"{_m} and {_s}"; DATA[_c]=(_pal,""); ORIG1[_c]=(f"{_m} silk like {_h1}",f"{_s} like {_h2}"); MOTIF_LOW[_c]=(_mo,_fl); LOWNAME[_c]=(_m,_m)
     ITEMS_LOW[_c]=items3f(_c)
     for _t in (4,5,6): OUTFIT_JOBS[f"{_c}-t{_t}"]=_g3["outfit"](_t,_pal,_mo).replace("Outfit for all four (","Outfit (",1).replace("(Tan)","(Tần)").replace("(Quy phi)","(Quý phi)")
+# RANK8 (owner ~07:22Z 20/11 + GO via ROOT-68, worker RANK8-C): NEW people s62 s64 s65 (faces owner OK Lượt 1046) = DATA ROWS ONLY, added exactly like the princesses above
+# (palette = root pair from face-common/s_root_colours.json, motif = the motif of her approved face outfit, hair flower = the maid index rule MAID_FLOWER[n%6]; no store sentence touched).
+S_NEW_ROWS={"s62":("plum blossoms",),"s64":("lilies of the valley",),"s65":("chrysanthemums",)}
+_SRC_S=_json.load(open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)),"..","face-common","s_root_colours.json"),encoding="utf-8"))
+for _c,(_mo,) in S_NEW_ROWS.items():
+    _r=_SRC_S[_c]; _m,_s,_h1,_h2=_r["main"],_r["sec"],_r["main_hex"],_r["sec_hex"]; _n=int(_c[1:]); _fl=MAID_FLOWER[_n%6]
+    _pal=f"{_m} and {_s}"; DATA[_c]=(_pal,""); ORIG1[_c]=(f"{_m} silk like {_h1}",f"{_s} like {_h2}"); MOTIF_LOW[_c]=(_mo,_fl); LOWNAME[_c]=(_m,_m)
+    ITEMS_LOW[_c]=items3f(_c)
+    for _t in (4,5,6): OUTFIT_JOBS[f"{_c}-t{_t}"]=_g3["outfit"](_t,_pal,_mo).replace("Outfit for all four (","Outfit (",1).replace("(Tan)","(Tần)").replace("(Quy phi)","(Quý phi)")
 def low_outfit(c,t,v="v0"):
     if f"{c}-t{t}" in OUTFIT_LOW: o=OUTFIT_LOW[f"{c}-t{t}"]
     else:
@@ -1713,6 +1722,7 @@ SPEC5_IDS={"c%02d"%n:(t,m) for t,rng in (("kieungao",range(1,7)),("numi",range(7
 _SP5_ORDER=["kieungao","numi","hienlanh","dangi","thamvong","thanhnha"]
 SPEC5_IDS.update({"m%02d"%n:(_SP5_ORDER[(n-1)%6],(n-1)//6+1) for n in range(1,53)})
 for _i,_c in enumerate(PRINCESS_ROWS): SPEC5_IDS[_c]=("kieungao",_i+1)   # N8b: princess rows (see PRINCESS_ROWS)
+for _c in S_NEW_ROWS: _n=int(_c[1:]); SPEC5_IDS[_c]=(_SP5_ORDER[(_n-1)%6],(_n-1)//6+1)   # RANK8: new s-people = the maid index rule
 def spec5pose(o,c,t,force=None):
     m=re.search(r" Pose: calm standing pose; she holds (.+?) in a contrasting colour",o); assert m,"pose paragraph not found"
     prop=m.group(1); tr,mi=SPEC5_IDS[c]; i=mi-1
@@ -1929,7 +1939,7 @@ for _c in list(DATA):
     if kc_drawn(_c):
         _fw=KC_PEOPLE[_c]["face_words"]; assert _fw.endswith("."),_c
         DATA[_c]=(DATA[_c][0],_fw[len("Her face: "):-1])
-KC_ID=re.compile(r"(?:c|m|p)\d\d|nc\d|bd\d")
+KC_ID=re.compile(r"(?:c|m|p|s)\d\d|nc\d|bd\d")
 if __name__=="__main__":
     if "--verify" in sys.argv:
         i=sys.argv.index("--verify"); _since=sys.argv[sys.argv.index("--since")+1] if "--since" in sys.argv else None

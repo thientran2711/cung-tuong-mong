@@ -1121,6 +1121,36 @@
    "m09_ok": "NO",
    "ref_id": null,
    "note": "princess Bắc Địch: COMMON_v2 samples only; Bắc Địch styles DROPPED by owner Lượt 283"
+  },
+  "s62": {
+   "id": "s62",
+   "m09_ok": "yes",
+   "set": "NEW face F4 (owner OK Lượt 1046)",
+   "ref_id": "nVsrRMPYQD",
+   "gen_id": "ov6PVaf829",
+   "prompt_file": "dev/art/face-common/s62.v5.FULL.txt",
+   "face_words": "Her face: a SOFT gentle oval face, a smooth wide forehead, smooth rounded cheeks and a small soft chin, no sharp angles anywhere; large TENDER almond eyes with gently LOWERED outer corners and a soft warm look, fully open, the gaze soft and kind; softly feathered, gently curved brows that slope gently DOWN at the tails; a small delicate nose; a small soft mouth with gently rounded lips; a kind, caring, gentle-hearted girl; never sharp, never proud, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A TENDER, kind, caring look, the head inclined slightly to one side, the soft eyes warm and full of gentle affection, a small sweet closed-lip smile, eyes fully open, never a stretched grin.",
+   "note": "RANK8-C: added for rank builds (B8), cut = FACE_MAP_L703 s62.cut"
+  },
+  "s64": {
+   "id": "s64",
+   "m09_ok": "yes",
+   "set": "NEW face F4 (owner OK Lượt 1046)",
+   "ref_id": "JNChlRROq4",
+   "gen_id": "s7IX54Gl8e",
+   "prompt_file": "dev/art/face-common/s64.v5.FULL.txt",
+   "face_words": "Her face: a SOFT gentle oval face with smooth rounded cheeks and a small soft chin, no sharp angles anywhere; large TENDER round-almond eyes, soft double eyelids, gently LOWERED outer corners and a soft warm look, fully open, the gaze soft and kind; soft, slightly fuller straight brows that slope gently DOWN at the tails; a small nose with a softly rounded tip; a small soft mouth with gently rounded lips; a kind, caring, gentle-hearted girl; never sharp, never proud, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A TENDER, kind, caring look, the head inclined slightly to one side, the soft eyes warm and full of gentle affection, a small sweet closed-lip smile, eyes fully open, never a stretched grin.",
+   "note": "RANK8-C: added for rank builds (B8), cut = FACE_MAP_L703 s64.cut"
+  },
+  "s65": {
+   "id": "s65",
+   "m09_ok": "yes",
+   "set": "NEW face F4 (owner OK Lượt 1046)",
+   "ref_id": "jUoe5yJLD0",
+   "gen_id": "jUoeq99LD0",
+   "prompt_file": "dev/art/face-common/s65.v5.FULL.txt",
+   "face_words": "Her face: a BALANCED, perfectly symmetrical classic oval face with a smooth high forehead, gently rounded, softly broad cheekbones and a gently rounded chin; calm LEVEL, slightly long almond eyes with clear double eyelids, perfectly even, with a steady serene gaze, fully open; long smooth evenly arched brows; a straight well-proportioned nose; a medium mouth with evenly shaped lips and a clearly defined lip bow; a dignified, upright, virtuous lady of good upbringing; never playful, never flirtatious, never haughty. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A calm, serene, DIGNIFIED composure, a steady level gaze straight at the viewer, the face poised and still, a small modest refined closed-lip smile, the head held perfectly straight and level, eyes fully open, never a stretched grin.",
+   "note": "RANK8-C proposal: added for rank builds (B8), cut = FACE_MAP_L703 s65.cut"
   }
  }
 }
