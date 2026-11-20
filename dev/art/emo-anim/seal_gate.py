@@ -26,6 +26,10 @@ Rules (seal only; source in brackets):
               back: slides back inside the round medallion + exactly like the end frame (recipe §1–3)
   S8 CLIP     out/loop/back: 'static camera' + 'no camera move, no new objects' (recipe §3)
   S9 CROWN    A/B: Hoàng hậu / EMPRESS (not dowager) = LARGE phoenix crown; Hoàng quý phi = SMALL phoenix crown (owner 19/11 ~17:00Z)
+  S10 MALE    a male seal (he/his/him, man, emperor, eunuch, official…) must not hold a handkerchief: handkerchief / kerchief / hanky / khăn
+              words FAIL unless negated (A25(1), owner 20/11: 'Đàn ông con trai mà cầm khăn.')
+  S11 CONSORT a consort seal (phi tần, any rank t1–t8 incl. Hoàng hậu; NOT Thái hậu) wears plain BROCADE: silk / gauze / sheer / translucent /
+              see-through / chiffon / organza / tulle words on clothing FAIL unless negated (A25(3), owner 20/11: 'cứ cho nó mặc gấm bình thường')
 """
 import json, os, re, subprocess, sys
 
@@ -53,6 +57,25 @@ for _k in ("out", "loop", "back"):
                 ("S8 CLIP", r"no camera move, no new objects", "no camera move, no new objects")]
 
 
+MALE_RX = re.compile(r"\b(?:he|his|him|himself)\b|\b(?:young |old |older )?man\b|\bemperor\b|\beunuch\b|\bofficial\b|\bprince\b|Hoàng thượng|thái giám|\bboy\b", re.I)
+FEM_RX = re.compile(r"\b(?:she|her|herself)\b|\bwoman\b|\bgirl\b|\bempress\b|\bconsort\b|\bprincess\b|\bmaid\b", re.I)
+KERCHIEF_RX = re.compile(r"handkerchief|kerchief|\bhanky\b|\bkhăn\b", re.I)
+CONSORT_RX = re.compile(r"\bconsort\b|phi tần|Đáp ứng|Thường tại|Quý nhân|\bTần\b|(?<!Hoàng )(?<!Quý )\bPhi\b|Quý phi|Hoàng quý phi|Hoàng hậu|\bEMPRESS\b(?! DOWAGER)", re.I)
+NOT_CONSORT_RX = re.compile(r"dowager|Thái hậu|PALACE MAID|\(cung nữ\)|MA MA|head maid|PRINCESS|PRINCE\b")  # subject is not a consort (case-sensitive caps = the WHO noun)
+CLOTH = r"(?:robes?|sleeves?|dress|gown|shawl|scarf|veil|skirt|sash|hanfu|cloth|fabric|outfit|garment|collar|cuffs?|over-?vest|jacket|cape|ribbons?)"
+SHEER_RX = re.compile(r"\b(?:silk(?:en)?|gauze|gauzy|sheer|translucent|see-through|transparent|chiffon|organza|tulle)\b(?:[\w\s(),#-]{0,30}?)\b" + CLOTH + r"\b|\b" + CLOTH + r"\b of (?:[a-z]+,? ){0,5}(?:silk|gauze|chiffon|organza|tulle)\b", re.I)
+NEG_RX = re.compile(r"\b(no|not|never|without|nothing|none|nor|instead of)\b", re.I)
+
+
+def negated(text, a, b):
+    lo = max(text.rfind(c, 0, a) for c in ".;:(),"); hi = [text.find(c, b) for c in ".;:(),"]; hi = min([h for h in hi if h >= 0] or [len(text)])
+    return bool(NEG_RX.search(text[lo + 1:hi]))
+
+
+def is_male(t):
+    return len(MALE_RX.findall(t)) > len(FEM_RX.findall(t))
+
+
 def kind_of(key):
     return KINDS.get(str(key).lower())
 
@@ -74,6 +97,12 @@ def check(text, kind):
                 f.append(("S9 CROWN", "Hoàng hậu seal without a LARGE phoenix crown (owner 19/11 ~17:00Z)"))
         if re.search(r"Hoàng quý phi|imperial noble consort", t, re.I) and not re.search(r"\bsmall\b[^.;]{0,40}phoenix crown", t, re.I):
             f.append(("S9 CROWN", "Hoàng quý phi seal without a SMALL phoenix crown (owner 19/11 ~17:00Z)"))
+    if is_male(t):
+        for m in KERCHIEF_RX.finditer(t):
+            if not negated(t, m.start(), m.end()): f.append(("S10 MALE", f"male seal with '{m.group(0)}' (A25: men never hold a handkerchief)")); break
+    if CONSORT_RX.search(t) and not NOT_CONSORT_RX.search(t):
+        for m in SHEER_RX.finditer(t):
+            if not negated(t, m.start(), m.end()): f.append(("S11 CONSORT", f"consort seal in silk/gauze: '{m.group(0)}' (A25: plain brocade)")); break
     return f
 
 
@@ -160,7 +189,12 @@ def selftest():
            ("B", good["B"] + " not a liangbatou", "S2 F14"), ("out", good["out"].replace("static camera, ", ""), "S8 CLIP"),
            ("A", good["A"] + " x" * 6000, "S1 LEN"), ("B", good["B"] + " {FACE}", "S4 SLOT"), ("A", good["A"] + " transparent background", "S3 TRANSP"),
            ("A", good["A"] + " the person is the EMPRESS (Hoàng hậu) with a small phoenix crown.", "S9 CROWN"),
-           ("back", good["back"].replace("exactly like the end frame", "like before"), "S7 FRAME")]
+           ("back", good["back"].replace("exactly like the end frame", "like before"), "S7 FRAME"),
+           ("B", good["B"].replace("she bursts", "he bursts") + " He is a young EMPEROR; his hands tug a pink silk handkerchief.", "S10 MALE"),
+           ("A", good["A"] + " The person is a consort (Quý nhân) in a pale blue silk robe with sheer gauze sleeves.", "S11 CONSORT")]
+    for k, t in (("B", good["B"] + " He is a young emperor, his hands raised, no handkerchief."), ("A", good["A"] + " A consort (Tần) in a plain brocade robe, no silk."),
+                 ("A", good["A"] + " The elderly empress dowager in a royal yellow silk robe."), ("B", good["B"] + " A maid girl in a pale silk robe tugs a pink silk handkerchief.")):
+        if check(t, k): print("SELF BAD good2", k, check(t, k)); n += 1
     n = 0
     for k, t in good.items():
         if check(t, k): print("SELF BAD good", k, check(t, k)); n += 1

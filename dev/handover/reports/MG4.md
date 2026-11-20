@@ -32,3 +32,9 @@ Options for owner (A18 — no rule changed by me): (a) keep B9 and add a free au
 
 ## Job 4 — relayed to ROOT-60 (no action): a51 store prompts 236 FAIL LEN (10 002–11 154 ch); build.py TRIEU dead hexes t4 #5FA8A6 / t6 #4F86A8 / t7 #E3A25B / t8 #C65A4C; game RCOL old palette (UI).
 STATUS: jobs 1–4 done (1962903b0 · 498c7f1f1 · 204855068). Context ≈ 15 %, depth 4. Waiting for ROOT-60.
+
+## Queue 2 (a) — seal gate S10 / S11 (rule A25, owner 20/11)
+S10 MALE: male seal (he/his/him, man, emperor, prince, eunuch, official… outnumber female words) + handkerchief/kerchief/hanky/khăn not negated → FAIL.
+S11 CONSORT: consort seal (consort / phi tần / any rank name incl. Hoàng hậu; NOT Thái hậu, maid, ma ma, prince/princess) + silk/gauze/sheer/translucent/see-through/chiffon/organza/tulle on clothing (robe, sleeves, shawl, sash, collar…) not negated → FAIL. Silk flowers / silk tassels / a maid's or girl's silk are not hit.
+--self: 11 bad + 4 extra good samples (man with "no handkerchief", Tần "plain brocade, no silk", dowager in silk, maid with silk handkerchief) → 0 problems.
+--all hits (8 of 1 165): grp_set bt ghen B/out/loop/back (little prince tugs a pink silk handkerchief) · sg2 pt A+B and ptl A+B ("robe of thin, light, flowing silk and gauze") → those builders now refuse until reworded (grp_set bt: ask keys without ghen, e.g. `grp_set_prompts.py bt vui buon`, to get the others).
