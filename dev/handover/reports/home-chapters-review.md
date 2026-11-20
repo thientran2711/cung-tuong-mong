@@ -25,3 +25,14 @@ OR03 yes (6 origin arcs, j67 format, 3 endings, seeds into f14.road). OR04 yes (
 
 Not failing: law 1 (kc_ke schemes both ways, E28 hit back), law 2 (no dominant sure+free option found besides j67-standard sure-mid climax), law 5 n/a (home, no rank), law 7 (odds words only, no %), kit (all parts are kit cards/pagers/kitSkillCard/kitRows).
 VERDICT: FAIL 03c2cade (LIVE merge 468499b6d on review/home-chapters-r1).
+
+## r2 — E25r, 20/11 — PARTIAL OK items 2–4 on 7882ea5d7 (review/home-chapters-r1); item 1 still OPEN
+PRIORITY #1 CHECK ('kc_ke|kc_hon|tm96z|nhũ mẫu|Thái hậu triệu|home chapter|vi hành|kc_tt3'): OD 1 | ledger 1 | claims 2 | main 15 | review/* 0 | archive 1
+| check | result |
+|---|---|
+| item 2 faces | faces.js PASS: 0 without a face / 0 palace faces in 24 lives, r1 saves repaired 24/24, no face used twice. Fold teachers shot: all 5 teachers show faces |
+| item 3 one core | BAL.kc3.fx now in jbalkc3.js (assembled after jbal2, before jkc*); values moved unchanged (ages, sxAge, k, leMax 5, rare r1 {80,60,55,.6}, r4 .6, r6 .8, dtqSuc 90, muoiTc 60); kcR1Ok() is the only kcR1 gate (jkc.js tmtron + jkc3b). My own digit scan of jkc3*.js: only structure left (odds 100 = sure, slot/tier indices, clamp 0–100). Note, not a gate: kcIntel(1,2) in kc_tt c2 is still typed in. one-core-guard + laws.js static law 4 PASS |
+| item 4 banner | kc_ch letter picture (Fold), kc_ke scheming picture (iPad): the kit event slot is filled, not an empty frame |
+| regression | smoke 6 origins × 2 lives errs [] fails [] (7 enter the palace) · oldsave main→this errs [] · shots.js 20 screens bad 0 |
+| item 1 data side | costrows.js reproduces BEFORE: 380 choices, 109 hide a number, 11 «Tốn: không», page errors 0. The data is ready; the kit part is still missing |
+Final PASS needs: KIT READY «KR home-stat rows» wired, costrows.js 0/0, re-shoot E28 + kc_ke s1 + bà mối on Fold + iPad, final merge of LIVE (main is at fd682a8d, not an ancestor of 7882ea5d).
