@@ -40,3 +40,11 @@ DRIFT the owner may not want: the colour softness she loves came from greyed hex
 
 ## 4. t3 Quý nhân redraw — HOLD
 Rule G15 (owner Lượt 559) = option B v2, commit **fe9c7daa** (BW3 job 2). Current t3 prompts PASS check_store (m07/m29/m13/m20). 0 gens so far. Waiting for ROOT-68: redraw with the current colours (root pair, new secondary) or keep each person's OLD colours (needs a foreman slot change, B6).
+
+## 5. Redraw (owner A + all 8 ranks via ROOT-68; then m07/m13 cancelled; then STOP by ROOT-69 for the owner)
+- Prompts: `dev/art/rank8-old4/<p>_tN.txt` = build_all @64b798f6 (ANG14), all 32 check_store PASS. m20 rebuilt after G17 (t1/t2 square neckline), PASS.
+- **m29 t1–t8 DONE**: 8 gens (6AbFJeJiJO BhNPVrToQR 4RFEwch9Aa bxM0EOE5Y2 DoOwcvYpcl p8y70uxehw kseMqUH16B jUodk9yLD0) + 8 cut-outs = 1 104 cr. Sheet `dev/art/rank8-old4/m29_8bac_sheet.jpg`, cut-outs `dev/art/rank8-old4/cut/m29_tN_cut.png`. Looked at full size: OK. m29 t1/t2 were drawn BEFORE G17 → crossed collar (not square).
+- **m20 STOPPED at t4**: t1 5jDT5v0Kxe, t2 If3NIDRtvE, t3 EbYzQB5uuO, t4 gOmIUxkSXO = 540 cr (raw `dev/art/rank8-old4/raw/m20_t1..t4.png`). No cut-outs, no sheet. t5–t8 not drawn.
+- m07 / m13: 0 gens.
+- TOTAL OLD4 spend: 1 644 cr. Balance read 77 457 (account shared with other workers).
+- STATUS: idle, waiting for ROOT-69.
