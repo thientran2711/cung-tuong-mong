@@ -24,3 +24,4 @@ OPEN WITH THE OWNER:
 - Notice picture «nơi sắp đóng cửa» not drawn (offered 135 cr), no answer.
 Log: FOREMAN_C_STATUS.md lines "ROOT-58 …".
 - OWNER Lượt 821: 'phi tần lớn tuổi … cứ làm theo cái luật mà tôi đưa ra thôi, đừng có hỏi.' → ptl v3 per rules (t5 Phi purple, no phoenix, 1 flower, thin silk) as already ordered; do not ask her about ptl again. Next free Lượt 822.
+- (00:08Z) SEAL3 mm: 20 keyframes done (2 700 cr); its 30 clips (28 200 cr, dev/handover/reports/SEAL3-mm-clip-calls.json 9dd0365) were blocked by the parallel video-job limit, then by SEAL3's own permission check. ROOT-58 approved them (owner Lượt 812 GO) and told SEAL3 to run them one after another and report to ROOT-59. If SEAL3 is still blocked, ask the owner how to proceed. mm hăng hái keeps its cobalt disc (made before the coral switch).
