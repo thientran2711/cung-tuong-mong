@@ -30,6 +30,14 @@ let ODB=null;try{const a0=jb.indexOf(MK),a1=jb.indexOf('\n}});',a0)+5;ODB=Functi
 if(!/Object\.assign\(BAL,\{errand:\{[^}]*\boffer:\d+/.test(jb))F('BAL.errand.offer missing');
 if(!/BAL\.entry\.bot=\{min:\d+,r:\d+,max:\d+\}/.test(jb))F('BAL.entry.bot missing');
 if(!/pun:\{[^}]*lauWk:\d+[^}]*tin:\d+[^}]*spyPay:\d+/.test(jb))F('BAL.ag.why.srv.pun lauWk / tin / spyPay missing');
+/* 5 (reviewer r1, law 1 + 4): the servant-road punishment family — Tân Giả khố weeks / Chủ tin after are BAL.ag.why.srv.pun keys, never typed;
+   caught betraying = the SAME npwPick(kill vs lau) for her (j42) and an NPC servant (jagstaff asMonth), and her card prints that share */
+{const s=src['j42.js'].replace(/\/\*[\s\S]*?\*\//g,'');for(const m of s.matchAll(/srvLaundry\(`[^`]*`,\s*(\d+)\)/g))F(`j42: typed Tân Giả khố weeks srvLaundry(…,${m[1]})`);
+ for(const m of s.matchAll(/S\.tin=(\d+)\s*[;}]/g))if(m[1]!=='40')F(`j42: typed Chủ tin after punishment S.tin=${m[1]}`);
+ if(/betray\.kill|kill:30/.test(s))F('j42: the old betray kill:30 number is back');
+ if(!/Mật báo chuyện[^\n]*npwShare\(\["kill","lau"\]/.test(s))F('j42: the betray card does not print the true kill share (npwShare)');
+ const ag=fs.readFileSync(path.join(B,'jagstaff.js'),'utf8');if(!/s\.betray&&[^\n]*npwPick\(\["kill","lau"\],k=>srvPunW\(p,k\)\)/.test(ag)||/SRVA\.betray\.kill/.test(ag))F('jagstaff: an NPC servant caught betraying is not judged by the same npwPick(srvPunW) as her');}
+if(!/pun:\{[^}]*betrayWk:\d+[^}]*spyOutWk:\d+[^}]*orderWk:\d+[^}]*orderTin:\d+[^}]*stealWk:\d+[^}]*stealTin:\d+/.test(jb))F('BAL.ag.why.srv.pun betrayWk / spyOutWk / orderWk / orderTin / stealWk / stealTin missing');
 if(ODB)for(const f of FILES)for(const m of src[f].matchAll(/BAL\.odb\.(\w+)\.(\w+)/g)){const v=(ODB[m[1]]||{})[m[2]];if(typeof v!=='number')F(`${f}: BAL.odb.${m[1]}.${m[2]} missing`)}
 console.log(JSON.stringify({files:FILES.length,fails:fails.length}));for(const x of fails)console.log('FAIL',x);
 console.log(fails.length?'FAIL: errand-bal':'PASS: errand-bal (one BAL key per errand / servant / exam odds)');process.exit(fails.length?1:0);
