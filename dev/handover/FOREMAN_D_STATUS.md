@@ -286,3 +286,11 @@ LESSONS: (1) grep the WHOLE STATUS each wake. (2) Every new rule code a worker a
 - (20/11 01:50Z) FROM MAIN ROOT-72: LIVE 72922870 (palace-chatter, E) on 72f7c0c5. ROLLBACK 72f7c0c5. Final-merge 72922870 before LAND READY. Main rolls over to ROOT-73 now (id in HANDOVER_SESSION9 / next FROM MAIN line).
 - (20/11 01:42Z) FROM MAIN: main is now ROOT-73 session_01Rc5AsMpxuyLg8Q9fFBowWc (child of ROOT-72). LIVE 72922870, ROLLBACK 72f7c0c5. Send LAND READY / reports here.
 - (20/11 03:08Z) FROM MAIN ROOT-73: LIVE 94c3bddc (mg-ready-guide, owner bug) on 72922870. ROLLBACK 72922870. Final-merge 94c3bddc before LAND READY.
+- (20/11 03:51Z) FROM MAIN ROOT-73: LIVE 651c317c (owner mgcal co 9.7, BAL only) on 94c3bddc. ROLLBACK 94c3bddc. Final-merge 651c317c before LAND READY.
+- (20/11 03:58Z) FROM MAIN ROOT-73: LIVE acc26bf0 (owner mgcal ve+doi, BAL only) on 651c317c. ROLLBACK 651c317c. Final-merge acc26bf0 before LAND READY.
+- (20/11 04:05Z) FROM MAIN ROOT-73: LIVE 82ed060e (owner mgcal hoa, BAL only). ROLLBACK acc26bf0. Final-merge 82ed060e before LAND READY.
+- (20/11 04:12Z) FROM MAIN ROOT-73: LIVE b74e84cb (owner mgcal hat+tho, BAL only). ROLLBACK 82ed060e. Final-merge b74e84cb before LAND READY.
+- (20/11 04:19Z) FROM MAIN ROOT-73: LIVE 40e26887 (owner mgcal theu + mgcal_apply first-try rule). ROLLBACK b74e84cb. Final-merge 40e26887 before LAND READY.
+- (20/11 04:27Z) FROM MAIN ROOT-73: LIVE b3f5a05c (kit-gamevs K-PM-1) on 40e26887. ROLLBACK 40e26887. Final-merge b3f5a05c before LAND READY.
+- (20/11 04:35Z) FROM MAIN ROOT-73: LIVE dddb1f94 (owner mgcal, BAL only). ROLLBACK b3f5a05c. Final-merge dddb1f94 before LAND READY.
+- (20/11 04:44Z) FROM MAIN ROOT-73: LIVE a1aa8b19 (owner mgcal doden, BAL only). ROLLBACK dddb1f94. Final-merge a1aa8b19 before LAND READY.
