@@ -31,3 +31,13 @@ Files: dev/build/jbal2.js (BAL.dc — every number/table), dev/build/jdc0.js (en
 - Palette source: BAL.dc.who is a copy of Foreman C's handover files (game cannot read the handover branch). If C changes a palette, update BAL.dc.who.
 - CDN upload: 401 on this account → shots stay in /home/user/wt/e30-shots (not uploaded).
 - Parking (law 18, not built): "đụng màu" with a superior at a gathering.
+
+## Gates (head 459a91bf94870fb83e3d764d59d4b7272225da9d, review/dresscode)
+- node dev/test/dresscode.test.js dev/index.html: ALL PASS (36 checks; 6 runs in a row after the test was made deterministic).
+- one-core-guard: PASS (fails 0; the first draft's [0,1,2,3] season table was caught and moved to letters "xhtd").
+- role-parity.test.js ×2: 10/10 ok both runs (no new gap, open list 18).
+- quickcheck.sh: PASS (383 s; old save ok; perf new/live render 232/239 ms, tab 416/438, buổi 1083/1110; CORE GATES PASS incl. rules-one-source, kit-conform, coop-one-world).
+- Co-op: coop-one-world via quickcheck G5 PASS; no co-op module touched (personal S keys; NPC loops behind worldOn()).
+- Shots Fold 755x1000@2 + iPad 1180x820@2 (looked at each): gate frame, trâm card (Màu row), robe card (Màu + Hợp mùa), "Áo trái mùa" frame, calendar popover. Kept in /home/user/wt/e30-shots (CDN upload 401 on this account, not uploaded). Seen and noted: a sure event option shows the kit's "Nắm chắc" chip and "Được: không" (existing kit behaviour of event choices, not changed here); the robe card says Lục/Tím while the robe ICON may be pink — the art gap above (colour = her painting).
+
+SẴN SÀNG KIỂM dresscode 459a91bf94870fb83e3d764d59d4b7272225da9d
