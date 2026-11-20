@@ -430,7 +430,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | GAP IT03 wear-slots Hoa tai + Giày (opus; ORDER MAIN ROOT-77 10:20Z; brief briefs/b-wear-slots.md) | review/wear-slots | B | session_01N1tNP54h4MaGv7EfQy7u43 | SẴN SÀNG KIỂM 56f00454 (report reports/wear-slots.md; KIT REQUEST iPad 1180 wear column OPEN) | 20/11 ~11:30Z |
 | GAP kc-fail-effects J3c (opus; home cards hide fail effects, whole group) | review/kc-fail-effects | B | session_01N1tNP6BY715rYe4KHs14ko | RUNNING | 20/11 10:20Z |
 | REVIEW ge-batu (BIG opus E28r) of e0424d54 | review/ge-batu | FOREMAN E #17 | session_01DgYSWokELeSAzf9p9MFqAS | RUNNING | 20/11 11:26Z |
-| GAP GE03 ge-map «Sơ đồ nhánh» page (sonnet; on kitBranchMap 90b7e797) | review/ge-map; briefs/root77-ge-map.md | MAIN ROOT-77 | session_01Rc5AsNQDQXeYG8Yk7ugFpA | RUNNING | 20/11 10:36Z |
+| GAP GE03 ge-map «Sơ đồ nhánh» page (sonnet; on kitBranchMap 90b7e797) | review/ge-map; briefs/root77-ge-map.md | MAIN ROOT-77 | session_01Rc5AsNQDQXeYG8Yk7ugFpA | SẴN SÀNG KIỂM 8e2efbea | 20/11 10:36Z |
 | FOREMAN E #18 (opus; child of E #17, depth 8 = LAST) | handover FOREMAN_E_STATUS | FOREMAN E #17 | session_01DgYSWnmvkdgnzELwSixER7 | RUNNING | 20/11 11:42Z |
 | REVIEW wear-slots r1 (opus BIG) of 56f00454 | review/wear-slots-r1 | B | session_01N1tNP5gHxMtpFZ6rmVrtsc | RUNNING | 20/11 10:42Z |
 | REVIEW mg-craft group-2 (opus BIG; all 4 kinds) of 8e74ddfa | review/mg-craft-r2 | B | session_01N1tNP4RbteU7EGALP3kLAP | RUNNING | 20/11 10:53Z |
