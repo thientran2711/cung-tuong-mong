@@ -70,13 +70,18 @@ function wxClrName(){const c=S&&S.wx&&S.wx.clr;return c!=null&&typeof BUOI!=="un
 /* OUTDOOR ACTS (owner correction 15/11: walking costs nothing extra; the risk belongs to what she DOES outside in that weather).
    An act is outdoors when its name says so (dạo / ngắm / hái / vườn / hồ sen / săn / chặn ngự giá / quỳ, đứng ngoài…) or it is done in the
    garden (S.place "vuon"). Deck cards and dilemma options alike: the card gets a Mất line + "Vì sao", the risk rolls when she does it. */
-const WX_OUT=/dạo|ngắm|hái|vườn|hoa viên|hồ sen|săn|ngự giá|quỳ ngoài|quỳ trước|đứng ngoài|ngoài sân|ngoài điện|thả diều|đạp thanh|câu cá|tuyết|đón gió/i;
+/* WHOLE WORDS ONLY, names left out (night-final #2, 20/11): a bare substring test made «hái» match inside «Thái hậu / Thái y» (260 indoor options
+   counted as outdoor) and «tuyết» match a consort called «… Tuyết Dao» in «Tranh sủng (Tối nay thẻ bài của … được lật)». wxActName drops the
+   «(…)» context tail and every capitalised word after the first (people and places: Thái hậu, Dưỡng Tâm điện, Tuyết Dao); wxRe matches whole syllables. */
+const wxRe=w=>new RegExp(`(?<![\\p{L}])(?:${w})(?![\\p{L}])`,"iu");
+function wxActName(n){return String(n||"").replace(/\s*\([^)]*\)/g,"").replace(/(?<=\S)(\s+)\p{Lu}[^\s,.;:!?·]*/gu,"$1")}
+const WX_OUT=wxRe("dạo|ngắm|hái|vườn|hoa viên|hồ sen|săn|ngự giá|quỳ ngoài|quỳ trước|đứng ngoài|ngoài sân|ngoài điện|thả diều|đạp thanh|câu cá|tuyết|đón gió");
 /* acts that are indoor work even when she stands in the garden (the place fallback skips them) */
-const WX_IN=/điểm trang|nghỉ ngơi|ngủ|tắm|học|luyện|đọc|thêu|viết|chép|đàn|vẽ|nấu|sổ sách|thuốc|dưỡng|thiền|tụng|cầu phúc|trang điểm/i;
+const WX_IN=wxRe("điểm trang|nghỉ ngơi|ngủ|tắm|học|luyện|đọc|thêu|viết|chép|đàn|vẽ|nấu|sổ sách|thuốc|dưỡng|thiền|tụng|cầu phúc|trang điểm");
 /* wxOutActAny: is this act OUTDOORS, whatever the weather (jlooks reads it for every weather kind); wxOutAct = outdoors AND bad weather */
 function wxOutAct(o){return !!o&&!!wxSev()&&wxOutActAny(o)}
 function wxOutActAny(o){if(!o)return false;const n=String(o.n||"");if(/Thôi|Đợi|ở lại|trong phòng|^Về |về phòng|về cung|hồi cung|quay về|chờ tạnh|lui về|đứng ngoài nhìn|đứng ngoài,? giữ mình|đứng ngoài$/i.test(n)&&!/quỳ/i.test(n))return false;
- return WX_OUT.test(n)||(S&&S.place==="vuon"&&!o.indoor&&!WX_IN.test(n))}
+ const w=wxActName(n);return WX_OUT.test(w)||(S&&S.place==="vuon"&&!o.indoor&&!WX_IN.test(w))}
 /* kit price-line format (kitParse): "kèm: a, b (note)" -> red Kèm row + the trailing note in Ghi chú; no commas / nested brackets inside the note */
 function wxMat(R){const pg=S&&S.preg&&!S.fake;return `kèm: cảm lạnh: ${wxRiskWord(R.cold)}, trơn ngã: ${wxRiskWord(R.slip)}${pg?", ngã có thể sảy thai":""} · (vì sao: ${R.why.join(" / ")})`}
 function wxAfter(){try{if(!S||S.dead)return;const R=wxRisk(S);if(R.kieu)ap(S,{bac:-BAL.wx.kieuBac});const t=wxHit(S,R);if(t){log(t);Q.push({t:"Gió lạnh, đường trơn",who:typeof pMe==="function"?pMe():null,h:`<p>${t}</p><p class="past">Vì sao: ${R.why.join(" · ")}.</p>`});showModal()}}catch(e){console.error("wx",e)}}

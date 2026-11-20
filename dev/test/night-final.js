@@ -24,7 +24,9 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   T.noNpc=()=>{const sw=window.stealWant;window.stealWant=()=>({u:0,p:0,mode:null});const kp=BAL.steal.keep.npcP;BAL.steal.keep.npcP=0;return()=>{window.stealWant=sw;BAL.steal.keep.npcP=kp}};
   /* the flip of tonight only (the choice opens at once in bot mode); `who` gets the card */
   T.flipTo=who=>{const un=T.only(who);const d=wk();S.toMorning=0;used=4;S.buoi=B4L;nextBuoi();un();return wk()===d};
-  T.seq=a=>{const mr=Math.random;let i=0;Math.random=()=>i<a.length?a[i++]:.5;return()=>{Math.random=mr}};
+  /* the given values feed ONLY the night's own rolls (the keep roll in resolveAll, each try in nfResolve); any other draw before them
+     (weather/looks on an option whose name holds «Tuyết», a figure pick on render…) stays random and cannot eat them (night-final #2, 20/11) */
+  T.seq=a=>{const mr=Math.random;let i=0;Math.random=()=>/\b(nfResolve|resolveAll)\b/.test(new Error().stack||"")?(i<a.length?a[i++]:.5):mr();return()=>{Math.random=mr}};
  });
  const R={};const ok=(k,c,info)=>{R[k]={pass:!!c,info}};
  /* 0. the two acts are in no list: deck, person menu group, NPC harm bands, ACT.ok */
