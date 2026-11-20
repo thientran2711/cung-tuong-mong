@@ -942,3 +942,4 @@ NEWACCT#13 ~01:33Z: OWNER L1565 on xuân Hán t1–t3 drafts: collar too open (o
 NEWACCT#13 ~01:36Z: DESIGN16 ROLLED (30 %, handover 5ab92d8, L1565 not started) → DESIGN17 session_01D3E3NZUBaqq5Ftt8r6uVSH (Opus, my child) on L1565.
 NEWACCT#13 ~01:40Z: OWNER L1566: Quý nhân (t3) hairpins look like a hedgehog — prompt fault → DESIGN17 rewrites t3 hairpin words in xuân t3 v2 + lists every file/builder with the same wording.
 NEWACCT#13 ~01:43Z: OWNER L1567 (angry): prompts must be complete + built from the common/master/standard prompt (B25), so a duyệt draft prompt is copied unchanged to production; hand-written prompts waste credits. → DESIGN17: build t1–t3 v2 from master + store text via make script, only approved deltas; report non-verbatim sentences. ALL future season prompts: same rule.
+NEWACCT#13 ~01:45Z: OWNER L1568: fix Quý nhân hairpin in the COMMON prompt for everyone → DESIGN17: source text + gate + builders + current t3 files + rule.
