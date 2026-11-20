@@ -136,3 +136,4 @@ Owner "Vẫn bị": the nhất vest still split into a V below the knot button. 
 Word diff vs previous commit: only the slim-V words (narrow, opening, slim, v, side by side, close together, layered crossed collars…). keep_check ×4 PASS, --all 158 PASS; check_store nhất v3 / thân cận v3 PASS (ma ma: same upstream-gate fails as before).
 | gpt/chuongsu_gpt_v2.txt (7529 c) | gpt/chuongsu_gpt.txt | hairpin swap, + caption | PASS (1 allowed) | FAIL S32 "ma ma hai tà" only — same as v1 (chưởng sự has no hai tà; scope mismatch, pre-existing) |
 Own Counter word diff (LOST words, base − new): nhat v2: none. chuongsu v2: "one", "hairpin" (singular; now "hairpins") — the hairpin swap only. keep_check --all: 135 sidecars PASS.
+Own Counter word diff (LOST words, base − new): nhat v2: none. chuongsu v2: "one", "hairpin" (hairpin swap) + powder×5, blue×5, #a7bad2×2 (K26 swap) — nothing else. keep_check --all: 135 sidecars PASS.

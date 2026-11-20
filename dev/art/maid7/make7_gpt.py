@@ -289,7 +289,11 @@ if __name__ == '__main__':
     out = D + 'chuongsu_gpt_v2.txt'
     open(out, 'w', encoding='utf-8').write(t)
     keep(out, base, [('with one plain jade hairpin in the bun',
-                      'owner Lượt 1456: chưởng sự hairpins not fewer than the young maids')])
+                      'owner Lượt 1456: chưởng sự hairpins not fewer than the young maids'),
+                     ('with broad powder blue front-edge borders and a powder blue lining showing at the hem', 'K26 owner L1461: secondary = her deep rose'),
+                     ('over a long inner robe and skirt in powder blue like #A7BAD2', 'K26 owner L1461'),
+                     ('in lighter tones of purple and powder blue with fine gold thread', 'K26 owner L1461'),
+                     ('the MAIN colour eggplant purple and the SECONDARY colour powder blue like #A7BAD2', 'K26 owner L1461')])
     return out
 
 
