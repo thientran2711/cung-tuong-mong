@@ -542,3 +542,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-guest-agent (opus; agOn() false on co-op guest → guest's own servants skip agent month; found by G #7) | review/coop-guest-agent; briefs/b-coop-guest-agent.md | B | session_01N1tNP6ULPfAUKCrZASGHHM | SẴN SÀNG KIỂM b7648b65 (reports/coop-guest-agent.md) | 20/11 22:10Z |
 | REVIEW mg11-thutay r1 (opus BIG) of ef94ad20 | review/mg11-thutay-r1 | B | session_01N1tNP4zyqBbxbsY5JQ3jjJ | RUNNING | 20/11 20:58Z |
 | FOREMAN E #23 (opus; child of E #22, depth 4) | handover FOREMAN_E_STATUS | FOREMAN E #22 | session_01DgYSWm5qy3Y59fKkn6eSf7 | RUNNING | 20/11 21:28Z |
+| KIT dress-picker (owner UI ~21:45Z; figure live-preview left, every dress picker) | review/kit-dress-picker | keeper MtjP4KTg (ordered by MAIN ROOT-81) | session_01Rc5AsMtjP4KTgBZVjENGLs | RUNNING | 20/11 22:12Z |
