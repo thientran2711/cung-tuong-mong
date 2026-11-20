@@ -61,6 +61,21 @@ function kitSceneEnd(ov,label,onClick){if(!ov)return null;ov.querySelectorAll(".
  if(!b){b=document.createElement("button");b.type="button";b.className="kbtn kmend";ov.appendChild(b)}ov.classList.add("km-endon");kitSceneFit(ov);b.textContent=label||"Tiếp theo";if(onClick)b.onclick=e=>{e.stopPropagation();onClick()};return b}
 window.kitSceneEnd=kitSceneEnd;
 
+/* ---------- KIT §81.1 kitEntryGate (K-OI-1 / KP07, review/kit-podium-gate; OD:L1244 + L1261): the ENTRY animation «palace gate → selection hall» ----------
+   kitEntryGate({kind, origin, road, to}) — kind "consort" (sedan: tt dtq muoi ch thd td) · "bride" (bridal sedan + envoy: nc bd) · "maid" (cnv: maids behind a mama) · "corridor" (cn: the Càn Thanh corridor);
+   to = the name of the selection she is about to enter (joi.js oiGate passes oiSel().head). A kmStage scene (queued with kmPush, one at a time): a painted gate whose two leaves swing open while the picture
+   pushes in, the caption «<cap> · Vào <to>», then ONE kit button (KIT §81, label by kind) — an outside tap only skips to the final frame. Gọn / reduced motion = the final frame at once.
+   ART SLOTS (Foreman C paints, nothing is drawn in code): img/kit/entry-gate-bg-<kind>.webp (the scene, 4:3), entry-gate-door-l.webp / entry-gate-door-r.webp (the two leaves, transparent, hinged at the outer edge).
+   A slot not on the CDN yet is listed once for painting (kitPhNote "entry") and the scene stays complete without it: dark gate ground, two plain kit-paper leaves (kind colour), the caption. */
+const KEG={consort:{cap:"Cổng cung",end:"Vào điện",col:"#8f1d1d"},bride:{cap:"Kiệu hoa đến cổng cung",end:"Vào điện",col:"#8f1d1d"},maid:{cap:"Cổng bên của cung nữ",end:"Theo ma ma",col:"#6a4a2a"},corridor:{cap:"Hành lang Càn Thanh",end:"Tiếp theo",col:"#1f2d4a"}};
+function kegPic(n){const s=`${KM_DIR}${n}.webp`;try{if(typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&!KIT_CDNHAVE.has(s)){if(typeof kitPhNote==="function")kitPhNote("entry",n,"light","Cổng cung · "+n);return""}}catch(e){}return s}
+function kitEntryGate(o){o=o||{};const kind=KEG[o.kind]?o.kind:"consort",K=KEG[kind];const bg=kegPic("entry-gate-bg-"+kind),dl=kind==="corridor"?"":kegPic("entry-gate-door-l"),dr=kind==="corridor"?"":kegPic("entry-gate-door-r");
+ const rm=`onerror="this.remove()"`;const to=o.to?kmEsc(String(o.to).replace(/<[^>]+>/g,"").trim()):"";
+ const door=(side,src)=>kind==="corridor"?"":src?`<img class="kmeg-d kmeg-d${side}" src="${src}" alt="" draggable="false" ${rm}>`:`<span class="kmeg-d kmeg-d${side} kmeg-dp" aria-hidden="true"></span>`;
+ const html=`<div class="kmeg kmeg-${kind}${bg?" kmeg-art":""}" style="--keg:${K.col}">${bg?`<img class="kmeg-bg" src="${bg}" alt="" draggable="false" ${rm}>`:""}<span class="kmeg-glow" aria-hidden="true"></span><div class="kmeg-gate">${door("l",dl)}${door("r",dr)}</div>`+
+  `<div class="kmeg-cap"><small>${K.cap}</small><b>${to?"Vào "+to:"Nhập cung"}</b></div></div>`;
+ kmPush(done=>{kmStage("km-gate km-gate-"+kind,html,{dur:3800,end:o.end||K.end,onEnd:done})})}
+window.kitEntryGate=kitEntryGate;
 /* ---------- stage overlay ---------- */
 function kmStage(cls,html,o){o=o||{};const red=kmReduced();const ov=document.createElement("div");ov.className="kmov "+cls+(red?" km-red km-skip":"");
  ov.setAttribute("role","dialog");ov.innerHTML=`<div class="kmst">${html}</div>${o.manual?"":`<div class="kmhint">${o.hint||"Chạm để bỏ qua"}</div>`}`;document.body.appendChild(ov);
@@ -293,6 +308,25 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
  padding:max(12px,env(safe-area-inset-top)) 16px max(12px,env(safe-area-inset-bottom));user-select:none;-webkit-user-select:none;cursor:pointer;overflow:hidden}
 .kmov.km-out{animation:kmFadeOut .24s ease forwards}
 .kmst{position:relative;width:100%;max-width:760px;max-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.km-gate{background:radial-gradient(ellipse at 50% 38%,#3a2418,#150c08 80%)}
+.kmeg{position:relative;width:min(92vw,560px,calc((100dvh - 190px)*4/3));aspect-ratio:4/3;overflow:hidden;border:1px solid var(--gold);border-radius:var(--k-rad,8px);box-shadow:0 0 0 3px #f6ead655,0 14px 40px #000a;background:linear-gradient(#2a1a12,#120a07 70%);perspective:900px;margin:0 auto}
+.kmeg-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kmegPush calc(3.4s*var(--pace,1)) ease-out both}
+.kmeg-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 52%,#ffe7a8cc 0,#f0b64f66 28%,transparent 62%);opacity:0;animation:kmegGlow calc(1.8s*var(--pace,1)) ease-out calc(.6s*var(--pace,1)) both}
+.kmeg-gate{position:absolute;left:14%;right:14%;top:12%;bottom:12%;display:flex;transform-style:preserve-3d}
+.kmeg-maid .kmeg-gate{left:24%;right:24%;top:18%}
+.kmeg-d{flex:1 1 50%;min-width:0;height:100%;object-fit:contain;display:block;box-sizing:border-box}
+.kmeg-dl{transform-origin:0 50%;animation:kmegOpenL calc(1.7s*var(--pace,1)) cubic-bezier(.4,.1,.2,1) calc(.5s*var(--pace,1)) both}
+.kmeg-dr{transform-origin:100% 50%;animation:kmegOpenR calc(1.7s*var(--pace,1)) cubic-bezier(.4,.1,.2,1) calc(.5s*var(--pace,1)) both}
+.kmeg-dp{background:linear-gradient(90deg,color-mix(in srgb,var(--keg) 80%,#000),var(--keg) 40%,color-mix(in srgb,var(--keg) 70%,#000));border:2px solid var(--trim,#d9b25f);box-shadow:inset 0 0 0 3px #00000040}
+.kmeg-dl.kmeg-dp{border-radius:6px 0 0 6px}.kmeg-dr.kmeg-dp{border-radius:0 6px 6px 0}
+.kmeg-corridor .kmeg-glow{background:radial-gradient(ellipse at 50% 55%,#b9c8ff55 0,#6e86c444 32%,transparent 66%)}
+.kmeg-cap{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 10px;text-align:center;background:linear-gradient(transparent,#0009 60%);color:#fffaf0;animation:kmFade calc(.8s*var(--pace,1)) ease-out calc(1.4s*var(--pace,1)) both}
+.kmeg-cap small{display:block;font-size:.76rem;letter-spacing:.06em;color:#f6ead6c0}.kmeg-cap b{font-family:var(--display);font-size:1.2rem;text-shadow:0 1px 3px #000}
+@keyframes kmegPush{from{transform:scale(1)}to{transform:scale(1.12)}}
+@keyframes kmegGlow{from{opacity:0}to{opacity:1}}
+@keyframes kmegOpenL{from{transform:rotateY(0)}to{transform:rotateY(-84deg)}}
+@keyframes kmegOpenR{from{transform:rotateY(0)}to{transform:rotateY(84deg)}}
+@media (prefers-reduced-motion:reduce){.kmeg *{animation:none!important}.kmeg-dl{transform:rotateY(-84deg)}.kmeg-dr{transform:rotateY(84deg)}.kmeg-glow,.kmeg-cap{opacity:1}.kmeg-bg{transform:scale(1.12)}}
 .kmov{--kmend-room:calc(68px + env(safe-area-inset-bottom,0px))}
 .kmov.km-endon{box-sizing:border-box;padding-bottom:var(--kmend-room)}
 /* KIT 81b (owner 17/11 toil-reveal bug): a FULL-BLEED scene (its own backdrop fills the screen: .km-full) has NO padding top or bottom, so the backdrop runs edge to edge
