@@ -80,27 +80,45 @@ const INTRO={
  s:{nhap14:"{N} ghi tên ngươi vào sổ cung nữ, nghiêm giọng: “Đã vào làm kẻ hầu thì phải biết việc, biết lễ, biết đường. Mấy việc này làm trước, sai một là bị phạt.”",
   sung14:"{N} liếc nhìn ngươi: “Kẻ hầu cũng có ngày được Hoàng thượng để mắt, nhưng phải tự lo cho mình: mặt mũi gọn gàng, biết chỗ ngự giá hay qua, có chút bạc riêng.”",
   tap14:"{N} dặn: “Ở lâu trong cung mới biết, kẻ hầu sống nhờ đồng liêu. Kết lấy người, biếu chút quà, luyện tay nghề, thì mới có chỗ đứng.”"}};
-/* per-origin beat (OD:L1259 STORY FIRST, STORY_ROADS_PLAN phase 2): why THIS girl does the same quests, told from her origin and her rolled road
-   (S.st.f14.road → {R} = the road's title). Only words: the deeds, rewards and numbers stay the quests' own (one core). Group → chapter → line. */
-const ORG={tt:"court",dtq:"court",ch:"court",muoi:"poor",thd:"poor",td:"fall",nc:"fore",bd:"fore",cn:"maid",cnv:"maid"};
+/* per-origin beat (OD:L1259 STORY FIRST, STORY_ROADS_PLAN phase 2): why THIS girl does the same quests, told from HER origin (one line per origin
+   × chapter) and, in chapter 1, from her rolled road's own subject (ARC67[S.st.f14.road].sj: every road has one; a road whose subject still
+   holds a {placeholder} filled only when the road starts uses its title). Only words: deeds, rewards and numbers stay the quests' own (one core).
+   {X}/{x} = how she is addressed (say()). */
 const BEAT={
- court:{nhap14:"Thư nhà gửi vào: việc «{R}» đã có người dòm ngó nhà {x}. Việc đầu là ra mắt bề trên cho vững chân, để người nhà ngoài kia còn có chỗ nhờ.",
-  sung14:"Nhà đang cần bạc để yên lòng kẻ đang dò xét. Rương mang theo, món nào không dùng thì đổi bạc, dung nhan chỉnh tề để được ngự giá để mắt.",
-  tap14:"Người con gái của kẻ đối đầu với nhà {x} đã được sủng ái. Phải có chị em qua lại và một nghề trong tay thì «{R}» mới khỏi đè lên đầu {x}."},
- poor:{nhap14:"Bổng lộc còn thiếu mà buổi họp mặt đầu đã có kẻ chê áo xiêm sơ sài. Thay y phục cho phải phép thì trước mặt mọi người mới ngẩng đầu được.",
-  sung14:"Muốn lo quà cáp thì phải có bạc. Nhờ thái giám Nội vụ phủ mua giúp một món, người ấy về sau còn dùng đến cho «{R}»; bạc tiêu đi tháng sau sẽ thấy tiếc.",
-  tap14:"Tay không thân thế, chỉ có tài mới đứng được. Kết một người trong Hậu cung, học thêm một môn, rồi «{R}» mới có chỗ để tựa."},
- fall:{nhap14:"Người quản gia cũ của nhà gửi lời từ ngoài cung nhắn phải dò xem ai gác cửa hông. Ra mắt bề trên cho đủ lễ, rồi đi một vòng xem nơi nào ra vào được.",
-  sung14:"Muốn có manh mối vụ hãm hại nhà {x} thì phải có bạc mua tin và có dung nhan để được ngự giá nhớ mặt. Đi hỏi mua đồ, kẻ gác cổng cũng sẽ nhớ mặt {x}.",
-  tap14:"Một người trong Hậu cung nói được lời đỡ, một nghề trong tay giữ được thể diện. «{R}» còn dài, một mình {x} không lần ra được."},
- fore:{nhap14:"Lễ bộ muốn thấy {x} giữ đúng quy củ cung đình. Thỉnh an cho đủ lễ, biết lối đi lối về; sứ thần cùng đi sẽ khó chịu nếu {x} cúi đầu quá thấp.",
-  sung14:"Thái hậu đã để mắt sơ qua, nhưng muốn được ngự giá nhớ thì phải có bạc lo việc và dung nhan chỉnh tề. Biết chỗ mua đồ thì «{R}» mới không bị bỏ lỡ.",
-  tap14:"Xứ lạ thì cần người quen. Kết chị em trong Hậu cung, học một môn tài nghệ, rồi mới có chỗ dựa cho «{R}»."},
- maid:{nhap14:"Chủ nhân dặn kẻ hầu mới phải biết việc, biết lễ, biết đường. Làm xong mấy việc này thì khỏi lỡ chuyện lớn, kể cả phần việc của «{R}».",
-  sung14:"Chủ nhân cần một món quà dâng lên bậc trên, kẻ khác cũng muốn nhận việc này. Làm chu toàn có thể được lòng tin, nhưng người bị giành mất cơ hội sẽ oán.",
-  tap14:"Một người đồng liêu sẽ nâng đỡ khi gặp chuyện, và nghề tay giữ được chỗ đứng. Việc nhờ sắp tới trong «{R}» cũng đến từ chỗ này."}};
-function beatLine(m){try{const o=S.origin&&S.origin.k,g=ORG[o],R=S.st.f14&&S.st.f14.road&&typeof ARC67!=="undefined"&&ARC67[S.st.f14.road]?ARC67[S.st.f14.road].t:"";
- const t=g&&BEAT[g]&&BEAT[g][m.id];if(!t||(!R&&/\{R\}/.test(t)&&!(R="đường đời nàng")))return "";return say(t.replace(/\{R\}/g,R))}catch(e){return ""}}
+ tt:{nhap14:"Cha {x} là Tể tướng, đưa {x} vào cung để có người của phủ bên long sàng. Việc đầu là ra mắt bề trên cho đủ lễ, thay y phục cho xứng danh phủ Tể tướng.",
+  sung14:"Phủ Tể tướng gửi thư hỏi {x} đã được ngự giá nhớ mặt chưa. Đổi bớt đồ trong rương lấy bạc, điểm trang chỉnh tề, nhờ thái giám Nội vụ phủ mua giúp một món để dâng lên.",
+  tap14:"Người trong phủ dặn: một mình thì khó đứng, phải có chị em và một nghề trong tay. Kết một phi tần, học thêm một buổi tài nghệ, thân cận với cung nữ."},
+ dtq:{nhap14:"Cha {x} nắm binh quyền ngoài biên ải, trong cung ai cũng dè chừng. Ra mắt bề trên cho đủ lễ, biết lối đi lối về, ăn vận không để ai chê nhà võ thô lỗ.",
+  sung14:"Nhà võ chỉ biết giữ nước, ít biết lo quà cáp chốn cung đình. Bán bớt đồ trong rương lấy bạc, điểm trang cho tươm tất, nhờ thái giám Nội vụ phủ mua giúp một món.",
+  tap14:"Cha ở xa, trong cung {x} chỉ có một mình. Phải có chị em qua lại, một nghề trong tay, một cung nữ biết giữ lời."},
+ ch:{nhap14:"Thái hậu là cô mẫu, nhưng vào cung rồi {x} vẫn phải tự đứng vững. Ra mắt Thái hậu và Hoàng hậu cho đủ lễ, biết lối đi, ăn vận cho xứng cháu ngoại tộc của Thái hậu.",
+  sung14:"Có Thái hậu chống lưng nhưng muốn được ngự giá nhớ vẫn phải tự lo. Đổi đồ trong rương lấy bạc, điểm trang, nhờ thái giám Nội vụ phủ mua một món dâng lên.",
+  tap14:"Thái hậu dặn: đừng chỉ dựa vào cô mẫu. Kết chị em trong Hậu cung, học một môn tài nghệ, giữ cung nữ thân cận cho chắc."},
+ muoi:{nhap14:"Bổng lộc còn thiếu, mà buổi họp mặt đầu đã có kẻ chê áo xiêm của nhà buôn muối. Ra mắt bề trên, thay y phục cho phải phép để khỏi ai cười.",
+  sung14:"Nhà buôn biết giá từng món. Muốn lo quà cáp thì cần bạc: bán đồ trong rương, nhờ thái giám Nội vụ phủ mua giúp một món, người ấy về sau còn dùng đến. Bạc tiêu đi, tháng sau sẽ tiếc.",
+  tap14:"Không có thân thế đỡ lưng, {x} chỉ có tay nghề và tính toán. Kết một phi tần, học thêm một buổi tài nghệ, giữ lòng cung nữ."},
+ thd:{nhap14:"Nhà nghèo, chữ nghĩa là của hồi môn duy nhất. Ra mắt bề trên cho đủ lễ, thay y phục chỉnh tề, kẻo bị cười là nữ nhi nhà nghèo vào cung.",
+  sung14:"Một nữ nhân nhà nho khó có bạc dư. Bán bớt đồ trong rương, điểm trang tươm tất, nhờ thái giám Nội vụ phủ mua giúp một món cần dùng.",
+  tap14:"Chữ nghĩa chỉ có giá khi có người đọc. Kết một phi tần, học thêm tài nghệ, giữ cung nữ thân cận."},
+ td:{nhap14:"Người quản gia cũ của nhà gửi lời từ ngoài cung, nhắn {x} dò xem ai gác cửa hông. Ra mắt bề trên cho đủ lễ, rồi đi một vòng xem nơi nào ra vào được.",
+  sung14:"Muốn lần ra manh mối thì cần bạc mua tin và dung nhan để ngự giá nhớ mặt. Bán đồ trong rương, điểm trang, nhờ thái giám Nội vụ phủ mua giúp một món. Kẻ gác cổng cũng sẽ nhớ mặt {x}.",
+  tap14:"Một người trong Hậu cung nói được lời đỡ, một nghề trong tay giữ được thể diện. Một mình {x} không lần ra được."},
+ nc:{nhap14:"Lễ bộ muốn thấy {x} giữ đúng quy củ cung đình. Thỉnh an cho đủ lễ, biết lối đi lối về; sứ thần theo hầu sẽ khó chịu nếu {x} cúi đầu quá thấp.",
+  sung14:"Thái hậu đã để mắt sơ qua, nhưng muốn được ngự giá nhớ thì phải có bạc lo việc và dung nhan chỉnh tề. Bán đồ mang theo, nhờ thái giám Nội vụ phủ mua giúp một món.",
+  tap14:"Xứ lạ thì cần người quen. Kết chị em trong Hậu cung, học một môn tài nghệ, giữ cung nữ biết tiếng của {x}."},
+ bd:{nhap14:"Khả hãn gửi {x} sang làm người hòa thân, Lễ bộ nhìn xem có giữ quy củ không. Ra mắt bề trên cho đủ lễ, thay y phục theo phép cung đình, đừng để ai bảo người thảo nguyên thô lỗ.",
+  sung14:"Mang theo của hồi môn từ thảo nguyên, món nào không dùng thì đổi bạc. Điểm trang, nhờ thái giám Nội vụ phủ mua giúp một món để lo cho ngự giá.",
+  tap14:"Xa quê thì phải có người quen. Kết chị em trong Hậu cung, học một môn tài nghệ, giữ cung nữ thân cận."},
+ cn:{nhap14:"Nay đã là chủ tử, nhưng vài cung nữ cũ vẫn nhớ {x} từng bưng trà. Ra mắt bề trên cho đủ lễ, thay y phục cho đúng phẩm cấp, để không ai bảo {x} chưa quen vị trí.",
+  sung14:"Không có nhà sau lưng nên mọi thứ phải tự lo. Bán đồ trong rương, điểm trang, nhờ thái giám Nội vụ phủ mua giúp một món; vài kẻ đồng liêu cũ sẽ nhìn xem {x} chi tiêu ra sao.",
+  tap14:"Người cũ biết rõ {x}, người mới còn dò xét. Kết một phi tần, học thêm tài nghệ, thân cận với cung nữ."},
+ cnv:{nhap14:"Ngươi mới vào làm kẻ hầu, chủ nhân nhìn việc tay chân trước tiên. Làm xong mấy việc hầu hạ, học lễ nghi, biết lối đi lối về thì khỏi bị mắng oan.",
+  sung14:"Chủ nhân cần một món quà dâng lên bậc trên; ngươi chải chuốt, thêu khăn cho khéo, đi qua Ngự hoa viên lúc ngự giá hay dạo. Việc này làm tốt sẽ được tin cậy, nhưng kẻ bị giành mất cơ hội sẽ oán ngươi.",
+  tap14:"Đồng liêu nâng nhau thì sống, dìm nhau thì chết. Nói chuyện, biếu quà một người, luyện thêu thùa cho giỏi."}};
+function roadSj(){try{const id=S.st.f14&&S.st.f14.road,a=id&&typeof ARC67!=="undefined"&&ARC67[id];if(!a)return "";const sj=a.sj||"";
+ if(/\{[^}]*\}/.test(sj))return "";return sj.replace(/\bngươi\b/g,"{x}")}catch(e){return ""}}
+function beatLine(m){try{const o=S.origin&&S.origin.k,t=BEAT[o]&&BEAT[o][m.id];if(!t)return "";
+ let r=say(t);if(m.id==="nhap14"){const sj=roadSj();if(sj)r+=" "+say("Điều {x} canh cánh trong lòng là "+sj+".")}return r}catch(e){return ""}}
 window.tq14Beat=beatLine;
 function variant(){return srvNow()?"s":"c"}
 function defOf(v,ch,id){return ((TQ[v]||{})[ch]||[]).find(q=>q.id===id)||null}
