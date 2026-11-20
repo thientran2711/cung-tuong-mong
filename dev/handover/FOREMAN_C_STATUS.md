@@ -395,3 +395,4 @@ ROOT-66 Lượt 1037: OWNER verbatim "Rồi, hoa tai ổn, ok nha. Vậy tiến 
 
 - (20/11) kit-mark KIT READY 1c134a6f on review/kit-mark: kitGameMark «n/10» chip + amber kitGameClock for all 31 kinds (KIT §13.9, test kit-mark PASS); for C-AG #29: merge it with mg-score-same (chip reads mgLive when it exists). Report reports/kit-mark.md.
 ROOT-66 Lượt 1041: P6 toned palette (ff2e3a4) LOOKED (sheet 1 top) + 4 sheets sent. Mains C* mean 54→39, max 46, gate 0 FAIL, A31 78/86 (8 cannot fit). s62–s65 still wait owner word (Lượt 1019). Owner asked hair-swap with pin set (Lượt 1042 answer).
+ROOT-66 Lượt 1042: OWNER verbatim "Bản màu ổn rồi đó." → P6 toned A32 palette (ff2e3a4) APPROVED by owner. s62–s65: asked for draw word (Lượt 1019 hold).
