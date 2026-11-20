@@ -90,7 +90,7 @@ def main():
         except Exception:
             continue
         if j.get("gen_id"):
-            REFS[j["gen_id"]] = [r.get("id") for r in (j.get("refs") or [])]
+            REFS[j["gen_id"]] = [(r.get("id") if isinstance(r, dict) else r) for r in (j.get("refs") or [])]
     mass = ledger_mass()
     rows = {}
     for n in range(1, 53):
@@ -120,6 +120,17 @@ def main():
         }
     for pid, why in OTHERS.items():
         rows[pid] = {"id": pid, "m09_ok": "NO", "ref_id": None, "note": why}
+    # FRUITPET2 (ROOT-69 BEFORE MASS (b)): rows added to KC_REFS.json by later workers (RANK8-C s62/s64/s65, REDRAW3 c06 commit 2931181, ...)
+    # have no source in this script. A rebuild KEEPS every existing drawn row (m09_ok yes) that this script would drop or mark NOT drawn, verbatim.
+    kept = []
+    try:
+        old_people = json.load(open(os.path.join(ART, "KC_REFS.json"), encoding="utf-8")).get("people", {})
+    except Exception:
+        old_people = {}
+    for pid, r in old_people.items():
+        if r.get("m09_ok") == "yes" and rows.get(pid, {}).get("m09_ok") != "yes":
+            rows[pid] = r; kept.append(pid)
+    if kept: print("kept from the existing KC_REFS.json (no source in this script):", " ".join(sorted(kept)))
     data = {
         "rule": "ART_RULES B8 (owner Lượt 543/551): ONE identity ref = ref_id (Magnific remove_bg cut, pass directly as type image). Face words copied VERBATIM from face_words/person_line. m09_ok NO -> NOT drawn. NEVER img/_review/kc2k (REJECTED) or img/fig-*/hd t1.",
         "m09": M09, "royal_swatch_t6plus": "TdwDfOyVNR",
@@ -137,10 +148,10 @@ def main():
           "Counts: ok %d · NOT drawn %d · total %d" % (len(ok), len(no), len(rows)), "",
           "| id | ok | ref (cut) | gen | prompt file | pick | face words |", "|---|---|---|---|---|---|---|"]
     for r in ok:
-        md.append("| %s | yes | %s | %s | %s | %s | %s |" % (r["id"], r["ref_id"], r["gen_id"], r["prompt_file"].split("/")[-1], r["pick_why"], r["face_words"].replace("|", "/")))
+        md.append("| %s | yes | %s | %s | %s | %s | %s |" % (r["id"], r.get("ref_id"), r.get("gen_id"), (r.get("prompt_file") or "").split("/")[-1], r.get("pick_why") or r.get("note") or "", (r.get("face_words") or "").replace("|", "/")))
     md += ["", "## NOT drawn (no v3 thiếu nữ picture)", "", "| id | why |", "|---|---|"]
     for r in no:
-        md.append("| %s | %s |" % (r["id"], r["note"]))
+        md.append("| %s | %s |" % (r["id"], r.get("note")))
     open(os.path.join(ART, "KC_REFS.md"), "w", encoding="utf-8").write("\n".join(md) + "\n")
     print("ok", len(ok), "not", len(no))
 
