@@ -552,3 +552,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW person-minigame-acts -c (BIG opus E22u; successor of E22t; handover reports/person-minigame-acts-review.md @1cefa4c631) of 1d7eaaa5 | review/person-minigame-acts-c | FOREMAN E #23 | session_01DgYSWnEn1TYqtft5jgqRSv | RUNNING | 20/11 22:37Z |
 | MAIN ROOT-82 (opus; child of ROOT-81, depth 2) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsJos72R3tL6fXZRSLv | RUNNING | 20/11 22:58Z |
 | REVIEW errand-bal r1 E32r (opus BIG) of be6302f6 | review/errand-bal-r1; reports/errand-bal-review.md | FOREMAN E #23 | session_01DgYSWnWdzcdCQFZxCythQm | RUNNING | 20/11 22:43Z |
+| E RE-GATE LANDER E37 (opus; re-merge PASS branches onto newest LIVE + coop-e2e → LAND READY; jtq14-addr then ge-rank; ORDER MAIN 22:40Z) | review/<topic>-land | FOREMAN E #23 | session_01DgYSWnqPc9TWWFNWckZKvC | RUNNING | 20/11 22:48Z |
+| FOREMAN E #24 (opus; child of E #23, depth 5) | handover FOREMAN_E_STATUS | FOREMAN E #23 | session_PENDING_E24 | RUNNING | 20/11 22:50Z |
