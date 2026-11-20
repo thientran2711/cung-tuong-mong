@@ -185,7 +185,7 @@ if(typeof render==="function"){const r0=render;render=function(){const r=r0.appl
 /* ---------- co-op: the friend gets the ask card (jcoopworld ASK); on «Nhận» both sides play by their own hand ---------- */
 if(typeof ACT==="object"&&typeof ACT_NOSEND!=="undefined"){
  const mk=(k,n,act)=>{ACT[k]={k,n,c:{},ok:(a,t)=>okPair(a,t),x:act==="play"?"hai bên quý nhau thêm":"hai bên đặt cược ngang giá",
-  f:(a,t,x)=>{x=x&&typeof x==="object"?x:pmX(a,t,act);if(!x)return"";if(t.coop&&window.COOPW&&COOPW.inv)return COOPW.yd&&act==="duel"&&rk(a)>rk(t)?pmYield(a,t,x):pmAuto(a,t,x);return rcvAsk(act==="play"?"pmPlay":"pmDuel",a,t,x)}};if(!ACT_NOSEND.includes(k))ACT_NOSEND.push(k)};
+  f:(a,t,x)=>{x=x&&typeof x==="object"?x:pmX(a,t,act);if(!x)return"";if(t.coop&&window.COOPW&&COOPW.inv)return COOPW.yd&&act==="duel"&&rk(a)>rk(t)?pmYield(a,t,x):x.live?pmLiveRes(a,t,x):pmAuto(a,t,x);return rcvAsk(act==="play"?"pmPlay":"pmDuel",a,t,x)}};if(!ACT_NOSEND.includes(k))ACT_NOSEND.push(k)};
  mk("pmplay","Cùng chơi","play");mk("pmduel","Thách đấu","duel")}
 /* ---------- NPCs: the day plan (host only, jagday agReg / agRunReg) ---------- */
 /* where the deed happens: at the other consort (she walks there); toward HER the asker stays where she is and sends word (her card walks her over) */
@@ -262,10 +262,11 @@ function pmLadMonth(){const T=B().lad.top,out=[];for(const k of B().lad.arts){co
 if(typeof monthPay==="function"){const m0=monthPay;monthPay=function(){let r=m0.apply(this,arguments);try{if(S&&!S.dead&&S.pmL){const t=pmLadMonth();if(t){log(t);}}}catch(e){console.error(e)}return r};window.monthPay=monthPay}
 /* ---------- C1 split board data ---------- */
 function pmVsGo(rows,o,kind){const vs={me:0,f:0,t0:0,kind,opp:(rows||[]).map(r=>({who:r.p||o,raw:r.raw!=null?r.raw:5,shown:0}))};KG82.vs=vs;
- KG82.onHud=h=>{const m=/^(\d+)\s*\/\s*10/.exec(String(h.score==null?"":h.score));if(m)vs.me=mgGrade(+m[1]*1,kind);
+ KG82.onHud=h=>{pmHud(vs,h,kind);for(const p of vs.opp)p.shown=Math.min(p.raw,Math.round(p.raw*vs.f));pmVsShow(vs,o,h)}}
+/* one reader of the engines' own hud (her running «N/10» graded as the board grades it, the Hồi «n/m», the clock «N giây»): the NPC board and the co-op live board */
+function pmHud(vs,h,kind){const m=/^(\d+)\s*\/\s*10/.exec(String(h.score==null?"":h.score));if(m)vs.me=mgGrade(+m[1]*1,kind);
   const r=/(\d+)\s*\/\s*(\d+)/.exec(String(h.round==null?"":h.round));if(r&&+r[2]>0)vs.f=Math.max(vs.f,Math.min(1,(+r[1]-1)/+r[2]));
-  const tm=/(\d+)\s*giây/.exec(String(h.time==null?"":h.time));if(tm){const n=+tm[1];if(!vs.t0||n>vs.t0)vs.t0=n;vs.left=n;vs.f=Math.max(vs.f,Math.min(1,1-n/vs.t0))}
-  for(const p of vs.opp)p.shown=Math.min(p.raw,Math.round(p.raw*vs.f));pmVsShow(vs,o,h)}}
+  const tm=/(\d+)\s*giây/.exec(String(h.time==null?"":h.time));if(tm){const n=+tm[1];if(!vs.t0||n>vs.t0)vs.t0=n;vs.left=n;vs.f=Math.max(vs.f,Math.min(1,1-n/vs.t0))}}
 /* the LOOK = the kit plate K-PM-1 kitGameVs (KIT §13.8, LIVE b3f5a05c): mounted at the top of the kg82 board box once the board is drawn (kgReady came first);
    re-mounted if an engine redraws its box. Her line = her running «N/10» (graded as the board grades it), the rival's = the drawn raw revealed along the clock. */
 function pmVsUI(vs,o){const bx=typeof kg82Box==="function"?kg82Box():null;if(!bx||typeof kitGameVs!=="function")return null;if(vs.ui&&bx.contains(vs.ui.el))return vs.ui;
@@ -276,22 +277,31 @@ function pmVsShow(vs,o,h){const u=pmVsUI(vs,o);if(!u)return;u.setScore("me",vs.m
 /* ---------- C2 the real 7×7 Cờ ---------- */
 const PM_KY={e:"gomoku",n:"Cờ",t:"Năm quân liền hàng",timed:false,how:"Bàn 7×7. Ngươi cầm quân đen đi trước, đối thủ cầm quân trắng; mỗi bên lần lượt đặt một quân vào ô trống. Ai có năm quân liền một hàng (ngang, dọc hay chéo) trước là thắng; kín bàn mà chưa ai đủ năm là hòa."};
 function pmKyNoise(o,me,R){const K=B().ky;return Math.round(cl(K.base-K.k*(pmScore(o,"co",R)-pmTal(me,"co"))-K.rankN*R,K.min,K.max))}
-function kgGomoku(b,env){const K=BAL.pm.ky,n=7,B0=Array(n*n).fill(0);let over=false,maxRun=0,oppRun=0,lock=false,mv=0;
+/* KG82.kyNet (Q-C2, co-op live board): {side: 1 black (the asker, first) | 2 white, send(i,n) = her move to the friend, q = friend moves already come,
+   on = set here, mvWait = ms of friend silence on his turn before the AI takes his side with HIS hand (offline fallback)}; absent = the AI opponent as before */
+function kgGomoku(b,env){const K=BAL.pm.ky,n=7,B0=Array(n*n).fill(0);let over=false,maxRun=0,oppRun=0,lock=false,mv=0,wt=0;
  const A=K.ai,noise=KG82.phase==="tut"?K.tut:(KG82.kyNoise!=null?KG82.kyNoise:(5-(env.lv||0))*A.lvN+A.lvN0);KG82.kyOut=null;
+ const N=KG82.phase==="tut"?null:KG82.kyNet||null,ME=N&&N.side===2?2:1,OP=ME===1?2:1;
  b.innerHTML=`<div class="goban">${B0.map((_,i)=>`<button data-i="${i}" aria-label="Hàng ${Math.floor(i/n)+1}, cột ${i%n+1}"></button>`).join("")}</div><p class="mgsc" id="kgkysc">Đến lượt ngươi.</p>`;
  const cells=b.querySelectorAll(".goban button"),D=[[0,1],[1,0],[1,1],[1,-1]],W=A.w,sc=b.querySelector("#kgkysc");
  const run=(i,p)=>{const r=Math.floor(i/n),c=i%n;let best=0;for(const[dr,dc]of D){let k=1;for(const s of[1,-1]){let rr=r+dr*s,cc=c+dc*s;while(rr>=0&&rr<n&&cc>=0&&cc<n&&B0[rr*n+cc]===p){k++;rr+=dr*s;cc+=dc*s}}best=Math.max(best,k)}return best};
  const val=(i,me)=>{const op=me===2?1:2;B0[i]=me;const a=run(i,me);B0[i]=op;const d=run(i,op);B0[i]=0;const r=Math.floor(i/n),c=i%n;return W[Math.min(a,5)]*A.atk+W[Math.min(d,5)]+(A.midW-Math.abs(r-A.mid)-Math.abs(c-A.mid))};
  const pick=(me,nz)=>{let best=-1,bi=-1;for(let i=0;i<B0.length;i++)if(!B0[i]){const s=val(i,me)+Math.random()*nz;if(s>best){best=s;bi=i}}return bi};
  const put=(i,p)=>{B0[i]=p;cells[i].textContent=p===1?"●":"○";cells[i].classList.add(p===1?"bk":"wh");cells[i].disabled=true;return run(i,p)};
- const fin=(out,raw,msg,ms)=>{over=true;KG82.kyOut=out;KG82.peek=()=>null;sc.textContent=msg;setTimeout(()=>env.end(raw),ms)};
- const hud=()=>{env.hud({score:`${Math.min(10,maxRun*2)}/10`,round:`Nước ${mv}`,time:"không hạn"});if(KG82.onVs)try{KG82.onVs({me:Math.min(10,maxRun*2),opp:Math.min(10,oppRun*2),turn:over?null:lock?"opp":"me",round:`Nước ${mv}`})}catch(e){console.error(e)}};hud();
- KG82.peek=()=>over||lock?null:{sel:`#kg82 .goban button[data-i="${pick(1,0)}"]`};
- cells.forEach(c=>c.onclick=()=>{if(over||lock)return;const i=+c.dataset.i;if(B0[i])return;mv++;const r=put(i,1);maxRun=Math.max(maxRun,r);hud();
-  if(r>=5)return fin("win",K.win,"Ngươi thắng!",A.endMs);if(B0.every(x=>x))return fin("draw",K.draw,"Hòa cờ.",A.endMs);
-  lock=true;sc.textContent="Đối thủ đang nghĩ…";hud();setTimeout(()=>{if(over)return;lock=false;const w=put(pick(2,noise),2);oppRun=Math.max(oppRun,w);hud();
-   if(w>=5)return fin("lose",K.lose[Math.min(5,maxRun)],"Quân trắng thắng.",A.loseMs);if(B0.every(x=>x))return fin("draw",K.draw,"Hòa cờ.",A.endMs);sc.textContent="Đến lượt ngươi."},A.think)});
- try{cells[A.mid*n+A.mid].focus({preventScroll:true})}catch(e){}return()=>{over=true}}
+ const fin=(out,raw,msg,ms)=>{over=true;clearTimeout(wt);KG82.kyOut=out;KG82.peek=()=>null;sc.textContent=msg;setTimeout(()=>env.end(raw),ms)};
+ const hud=()=>{env.hud({score:`${Math.min(10,maxRun*2)}/10`,round:`Nước ${mv}`,time:"không hạn"});if(KG82.onVs)try{KG82.onVs({me:Math.min(10,maxRun*2),opp:Math.min(10,oppRun*2),turn:over?null:lock?"opp":"me",round:`Nước ${mv}`})}catch(e){console.error(e)}};
+ const full=()=>B0.every(x=>x);
+ const oppPut=i=>{if(over||!lock||!(i>=0&&i<B0.length)||B0[i])return;clearTimeout(wt);lock=false;mv++;const w=put(i,OP);oppRun=Math.max(oppRun,w);hud();
+  if(w>=5)return fin("lose",K.lose[Math.min(5,maxRun)],ME===1?"Quân trắng thắng.":"Quân đen thắng.",A.loseMs);if(full())return fin("draw",K.draw,"Hòa cờ.",A.endMs);sc.textContent="Đến lượt ngươi."};
+ const ai=()=>{if(!over&&lock)oppPut(pick(OP,noise))};
+ const oppTurn=()=>{lock=true;sc.textContent=N&&N.live!==false?"Đợi hảo hữu đi nước…":"Đối thủ đang nghĩ…";hud();
+  if(N&&N.live!==false){if(N.q&&N.q.length)return oppPut(N.q.shift());wt=setTimeout(()=>{N.live=false;sc.textContent="Hảo hữu chưa đi; ván tiếp theo tài cờ của nàng…";ai()},N.mvWait)}else setTimeout(ai,A.think)};
+ if(N){N.q=N.q||[];N.on=i=>{if(N.live===false)return;if(lock&&!over)oppPut(i);else N.q.push(i)}}
+ KG82.peek=()=>over||lock?null:{sel:`#kg82 .goban button[data-i="${pick(ME,0)}"]`};
+ cells.forEach(c=>c.onclick=()=>{if(over||lock)return;const i=+c.dataset.i;if(B0[i])return;mv++;const r=put(i,ME);maxRun=Math.max(maxRun,r);if(N&&N.send&&N.live!==false)try{N.send(i,mv)}catch(e){console.error(e)}hud();
+  if(r>=5)return fin("win",K.win,"Ngươi thắng!",A.endMs);if(full())return fin("draw",K.draw,"Hòa cờ.",A.endMs);oppTurn()});
+ if(ME===2)oppTurn();else hud();
+ try{cells[A.mid*n+A.mid].focus({preventScroll:true})}catch(e){}return()=>{over=true;clearTimeout(wt)}}
 if(typeof KG82_ENG==="object")KG82_ENG.gomoku=kgGomoku;
 function pmKyRun(a,t,x,me,o,R,place,title){const duel=x.a==="duel",st=duel?pmStakeOf(a,t,x.s):null,E=pmEyes(a,t,place);
  const rows=[["Đối thủ",`${o.name} cầm quân trắng · ${pmWord(pmOdds(me,o,"co"))}`,"t"]].concat(st?[["Cược",st.s==="item"?`${nm(a)} đặt ${st.wa}, ${nm(t)} đặt ${st.wt}`:`${st.what} mỗi bên`,"t"]]:[],E.length?[["Người xem",pmEyeTxt(E),"t"]]:[]);
@@ -309,6 +319,68 @@ function pmKyRun(a,t,x,me,o,R,place,title){const duel=x.a==="duel",st=duel?pmSta
    else{const iWin=w==="win";r=pmDuelEnd(a,t,x,me===a?iWin:!iWin,place).r}
    r=pmEnd(r);log(r+".");pushModal({t:title,who:pv(o),h:`<p>${r}.</p>`});try{showModal();render()}catch(e){}}});return""}
 const K0=()=>B().ky;
+/* the same board for the friend who holds white (Q-C2 live board: the asker holds black and goes first) */
+const PM_KYW=Object.assign({},PM_KY,{how:"Bàn 7×7. Hảo hữu cầm quân đen đi trước, ngươi cầm quân trắng; mỗi bên lần lượt đặt một quân vào ô trống. Ai có năm quân liền một hàng (ngang, dọc hay chéo) trước là thắng; kín bàn mà chưa ai đủ năm là hòa."});
+/* ---------- Q-C2 the co-op LIVE board (FOREMAN E #16 ruling, 20/11): the two humans play the same game at once on their own devices.
+   Messages = state only (perf rule: never graphics): COOP act k "pm-live", g = one game, mode go / rdy / no / sc (her running score, ≤ every BAL.pm.live.tx ms) /
+   mv (Cờ: one move per message, turn-based) / end (her final raw; Cờ: who won).
+   The device that runs the answer card ("card device") starts it after «Nhận lời»: sends go, the friend's device answers rdy and opens the board, then
+   the card device opens its own. When both ends are in (or the friend is silent BAL.pm.live.wait ms) the card device sends the answer WITH the two raws
+   (lv {ra asker, rt reader, w Cờ winner a / t / d}); the act runs once where it always ran (invRun / invHer → ACT.pmplay / pmduel → pmLiveRes), so the
+   stake moves once. Offline fallback = the round-B own-hand path: the friend never answers go → plain «Nhận» (pmAuto, both hands drawn); she drops
+   mid-game → her missing raw is drawn from her own hand (pmRaw); on the Cờ board the AI takes her side with HER hand after BAL.pm.live.mv s of silence.
+   Part D: a card pick runs on the host; inside the friend's context (COOPW.ctx) the host is the ASKER (the card was on the friend's phone). */
+const PML={};
+const pmFr=()=>{try{return window.COOPW&&COOPW.friend?COOPW.friend():null}catch(e){return null}};
+function pmLvOn(){try{return !!(window.COOPW&&COOPW.on&&typeof COOP==="object"&&COOP.send&&pmFr())}catch(e){return false}}
+function pmLvSay(g,mode,o){try{return COOP.send(Object.assign({t:"act",k:"pm-live",mode,g,id:`pml:${g}:${mode}:${pmLvId()}`},o||{}))}catch(e){return false}}
+function pmLvN(v){return typeof v==="number"&&isFinite(v)?Math.max(0,Math.min(10,Math.round(v))):null}
+function pmLvSan(lv){if(!lv||typeof lv!=="object")return null;const o={},a=pmLvN(lv.ra),t=pmLvN(lv.rt);if(a!=null)o.ra=a;if(t!=null)o.rt=t;if(["a","t","d"].includes(lv.w))o.w=lv.w;return Object.keys(o).length?o:null}
+const pmLvId=()=>`${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`;/* a message / game id (radix, not a number of the game) */
+const pmLvOt=r=>r==="a"?"t":"a";
+/* the card's «Nhận» (jcoopworld askCard): send(ok, lv) is the relay answer; anything but a plain yes, or no room, answers at once */
+function pmLiveAns(k,x0,ok,send){const x=pmCoopX(k,x0);if(ok!==true||!x||!pmLvOn()||S.dead){send(ok);return}
+ const role=window.COOPW&&COOPW.ctx?"a":"t",g=pmLvId();
+ setTimeout(()=>{const L=PML[g]={g,x,role,send,me:null,op:null,opSc:0,w:null};pmLvSay(g,"go",{x,role:pmLvOt(role)});L.tm=setTimeout(()=>pmLvFall(L),B().live.wait)},0)}
+function pmLvFall(L){if(L.fin||L.board)return;L.fin=true;delete PML[L.g];log("Hảo hữu chưa vào ván; hai bên theo tài nghệ của mình.");L.send(true)}
+function pmLvSend(L){if(L.fin)return;L.fin=true;clearTimeout(L.tm);delete PML[L.g];const lv={};if(L.me!=null)lv["r"+L.role]=L.me;if(L.op!=null)lv["r"+pmLvOt(L.role)]=L.op;if(L.w)lv.w=L.w;L.send(true,pmLvSan(lv)||undefined)}
+function pmLvMine(L,raw,lo){L.me=pmLvN(raw);if(lo)L.w=lo==="draw"?"d":lo==="win"?L.role:pmLvOt(L.role);pmLvSay(L.g,"end",{raw:L.me,w:L.w||null});
+ if(L.remote){delete PML[L.g];log("Ván đã xong; đợi hảo hữu báo kết quả.");return}
+ if(L.op!=null)pmLvSend(L);else{clearTimeout(L.tm);L.tm=setTimeout(()=>pmLvSend(L),B().live.wait)}}
+function pmLvMsg(m){const L=PML[m.g];
+ if(m.mode==="go"){if(L)return;const x=pmCoopX(m.x&&m.x.a==="play"?"pmplay":"pmduel",m.x);
+  if(!x||S.dead||!pmLvOn()||(typeof KG82==="object"&&KG82.phase)){pmLvSay(m.g,"no");return}
+  const N=PML[m.g]={g:m.g,x,role:m.role==="a"?"a":"t",me:null,op:null,opSc:0,w:null,remote:1};pmLvSay(m.g,"rdy");pmLvBoard(N);return}
+ if(!L)return;
+ if(m.mode==="rdy"){if(!L.remote&&!L.board&&!L.fin){clearTimeout(L.tm);pmLvBoard(L)}return}
+ if(m.mode==="no"){if(!L.remote&&!L.board){clearTimeout(L.tm);pmLvFall(L)}return}
+ if(m.mode==="sc"){const v=pmLvN(m.raw);if(v!=null){L.opSc=v;if(L.vsRe)L.vsRe()}return}
+ if(m.mode==="mv"){const i=+m.i;if(L.net&&Number.isInteger(i)&&i>=0)L.net.on?L.net.on(i):L.net.q.push(i);return}
+ if(m.mode==="end"){L.op=pmLvN(m.raw);if(!L.remote&&L.me!=null)pmLvSend(L)}}
+if(typeof COOP==="object"&&COOP.on)COOP.on("act",m=>{try{if(m&&m.k==="pm-live"&&window.COOPW&&COOPW.on&&m.from!==COOPW.seat)pmLvMsg(m)}catch(e){console.error(e)}});
+/* both devices: the same board as an NPC game (kit frame, kgReady rules, the kit plate K-PM-1 on a duel); the friend's line = her messages */
+function pmLvBoard(L){const f=pmFr();if(!f){if(!L.remote)pmLvFall(L);return}L.board=1;const x=L.x,duel=x.a==="duel",R=pmR(S,f),A=L.role==="a"?S:f,T=L.role==="a"?f:S;
+ const title=`${duel?"Thách đấu":"Cùng chơi"} với ${f.name}`,st=duel?pmStakeOf(A,T,x.s):null;
+ const stRow=st?[["Cược",st.s==="item"?`${nm(A)} đặt ${st.wa}, ${nm(T)} đặt ${st.wt}`:`${st.what} mỗi bên`,"t"]]:[];
+ if(x.kind==="co"&&typeof KG82_ENG==="object"&&KG82_ENG.gomoku){let SK=5;try{SK=mgSkipRaw(mgTier("co",{occ:"pm",rank:R}))}catch(e){}let res=null;
+  const out=(raw,sk)=>sk?(pmScore(S,"co",R,SK)>pmScore(f,"co",R)?"win":"lose"):KG82.kyOut||(raw>=K0().win?"win":"lose");
+  playArt({art:"co",eng:L.role==="a"?PM_KY:PM_KYW,title,occ:"pm",rank:R,rowsHead:"Ván cờ",rows:[["Đối thủ",`${f.name} (hảo hữu) cầm quân ${L.role==="a"?"trắng, đi sau":"đen, đi trước"}`,"t"]].concat(stRow),go:"Bắt đầu",
+   quick:{n:"Để tài nghệ quyết định",sub:`tính như người cùng bậc (${SK}/10)`},
+   onGo:()=>{KG82.kyNoise=pmKyNoise(f,S,R);KG82.guardMs=K0().guard;L.net=KG82.kyNet={side:L.role==="a"?1:2,q:(L.net&&L.net.q)||[],mvWait:B().live.mv,send:(i,n)=>pmLvSay(L.g,"mv",{i,n})};
+    if(duel){const vs={me:0,f:1,opp:[{who:f,raw:0,shown:0}],ui:null};KG82.onVs=v=>{vs.me=v.me;vs.opp[0].shown=v.opp;vs.turn=v.turn;pmVsShow(vs,f,{round:v.round})}}},
+   resRows:(raw,sk)=>{const w=out(raw,sk);res={w,raw:sk?SK:raw};return[["Ván cờ",w==="win"?"Ngươi thắng":w==="draw"?"Hòa cờ":`${f.name} thắng`,"t"]]},
+   onDone:raw=>{const w=res?res.w:out(raw,false),r0=res?res.raw:raw;KG82.kyNoise=KG82.kyOut=KG82.onVs=KG82.kyNet=null;pmLvMine(L,r0,w)}});
+  if(!L.net)L.net={q:[]};return}
+ playArt({art:x.kind,title,occ:"pm",rank:R,rowsHead:duel?"Ván so tài":"Cùng chơi",rows:[["Cùng chơi với",`${f.name} (hảo hữu) · hai bên chơi cùng lúc`,"t"]].concat(stRow),go:"Bắt đầu",quick:{n:"Để tài nghệ quyết định",sub:"tính 5/10"},
+  onGo:()=>{if(!duel)return;const vs={me:0,f:0,t0:0,kind:x.kind,opp:[{who:f,raw:0,shown:0}],ui:null};KG82.vs=vs;L.tx=0;
+   L.vsRe=()=>{if(KG82.vs!==vs)return;vs.opp[0].shown=L.opSc;pmVsShow(vs,f,null)};
+   KG82.onHud=h=>{pmHud(vs,h,x.kind);vs.opp[0].shown=L.opSc;const t=Date.now();if(t-L.tx>=B().live.tx){L.tx=t;pmLvSay(L.g,"sc",{raw:vs.me})}pmVsShow(vs,f,h)}},
+  onDone:raw=>{L.vsRe=null;pmLvMine(L,raw,null)}})}
+/* the act itself with the two live raws (ACT.pmplay / pmduel f, co-op path): Cờ = the board's winner, other arts = the duel score (talent + her raw), the same rule as pmAuto */
+function pmLiveRes(a,t,x){const lv=pmLvSan(x.live)||{},R=pmR(a,t),place=whereOf(a),ra=lv.ra!=null?lv.ra:pmRaw(a,x.kind,R),rt=lv.rt!=null?lv.rt:pmRaw(t,x.kind,R);
+ if(x.a==="play")return pmPlayEnd(a,t,x,ra,rt).r;
+ if(x.kind==="co"&&lv.w){if(lv.w==="d"){pmMark(a,t);return "Hai bên hòa ván cờ; món cược ai về nấy"}return pmDuelEnd(a,t,x,lv.w==="a",place).r}
+ return pmDuelEnd(a,t,x,pmScore(a,x.kind,R,ra)>pmScore(t,x.kind,R,rt),place).r}
 /* ---------- C4 the ladder LOOK (kit only: the option card + the «Bảng định thứ» standings rows of startContest, kg82Facts / kg82Name) ---------- */
 function pmLadLine(p){const L=[];for(const k of B().lad.arts){const q=pmLadPos(p,k);if(q&&q<=B().lad.top.length)L.push(`${pmKindN(k)} thứ ${q}`)}return L.join(", ")}
 function pmLadHTML(kind){const L=pmLad(kind),T=B().lad.top;
@@ -326,5 +398,5 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 try{if(window.MEM_DEEDS){Object.assign(MEM_DEEDS,{pmplay:[1,0,"cùng {o} chơi {x}"],pmwin:[-1,0,"thắng {o} một ván {x}, lấy mất món cược"],pmyield:[1,0,"nhường {o} một ván {x}"],pmsaw:[0,0,"xem {o} thắng một ván {x}"],pmlad:[-1,0,"bị {o} giành ngôi trên bảng {x}"]})}
  if(BAL.mem&&BAL.mem.w)Object.assign(BAL.mem.w,B().mem)}catch(e){}
 try{if(typeof MGT_OCCN==="object")MGT_OCCN.pm="so tài"}catch(e){}
-Object.assign(window,{pmVsShow,pmVsUI,pmLadHTML,pmLadLine,pmLadBtn,pmLadAim,pmEyes,pmEyeFx,pmLad,pmLadPos,pmLadWin,pmLadDrop,pmLadFor,pmLadMonth,pmVsGo,pmKyNoise,pmKyRun,PM_KY,pmCoopYield,pmCoopX,pmCoopCard,pmArts,pmR,pmV,pmStakes,pmStakeOf,pmOdds,pmRun,pmAuto,pmX,pmPlayEnd,pmDuelEnd,pmYield,pmYieldAff,pmBtns,pmRows,pmPlayOpts,pmDuelOpts,pmScore,pmItem,pmGoTap});
+Object.assign(window,{pmLiveAns,pmLvSan,pmLiveRes,pmLvMsg,PML,pmHud,pmVsShow,pmVsUI,pmLadHTML,pmLadLine,pmLadBtn,pmLadAim,pmEyes,pmEyeFx,pmLad,pmLadPos,pmLadWin,pmLadDrop,pmLadFor,pmLadMonth,pmVsGo,pmKyNoise,pmKyRun,PM_KY,pmCoopYield,pmCoopX,pmCoopCard,pmArts,pmR,pmV,pmStakes,pmStakeOf,pmOdds,pmRun,pmAuto,pmX,pmPlayEnd,pmDuelEnd,pmYield,pmYieldAff,pmBtns,pmRows,pmPlayOpts,pmDuelOpts,pmScore,pmItem,pmGoTap});
 })();

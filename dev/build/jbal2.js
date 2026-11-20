@@ -1648,7 +1648,8 @@ BAL.pm={kc:1,luck:30,minLv:1,
 BAL.pm.rcvOff=[3];/* receiver answer slots a pm ask does NOT have: slot 3 («mách lẻo»); Nhận · Nhường · Từ chối keep the help weights */
 BAL.rcv.k.pm=BAL.rcv.k.help.map((w,i)=>BAL.pm.rcvOff.includes(i)?0:w);
 /* ROUND C (owner OD 20/11 ~01:00Z "Làm cả 4 luôn đi"; review/person-minigame-acts-c, jpma §C):
-   live = split board: tx = ms between two co-op live sends, wait = s the friend has to start before the own-hand path;
+   live = the co-op live board (Q-C2): tx = ms between two running-score sends, wait = ms the friend has to open the board / send her end before the
+     own-hand path, mv = ms of her silence on her Cờ turn before the AI takes her side with her own hand;
    ky = the real 7×7 Cờ board (j5 gKy rules) in a person act: the white AI's noise = base − k·(opponent's duel score − her talent) − rankN·R, clamped
      min..max (less noise = fewer blunders); tut = the noise of the guided round; guard = ms before an unfinished board ends; win / draw / lose[her longest
      run] = her raw (0–10) for the result card and «Cùng chơi»;
@@ -1657,7 +1658,7 @@ BAL.rcv.k.pm=BAL.rcv.k.help.map((w,i)=>BAL.pm.rcvOff.includes(i)?0:w);
    lad = the per-art palace ladder: arts on the ladder, top = Danh each month for places 1..n, reach = how many places above an NPC may challenge,
      gapW = weeks between two ladder challenges of one NPC, refuseDrop = places a refused ladder challenge costs (0: pm-equal law 2 — a drop made «Từ chối» worth
      13 bạc less than «Nhận lời»), g = day-plan weight (need danh). One place is worth mean(top) Danh a month (pmPlaceBac); «Nhường» a place earns that much liking. */
-Object.assign(BAL.pm,{live:{tx:700,wait:45},
+Object.assign(BAL.pm,{live:{tx:700,wait:45000,mv:90000},
  ky:{base:120,k:3,min:10,max:220,rankN:8,tut:220,guard:1800000,win:10,draw:5,lose:[0,0,1,2,3,4],
   ai:{w:[0,1,8,60,600,9000],atk:1.1,mid:3,midW:6,lvN:35,lvN0:10,think:420,endMs:600,loseMs:800}},/* ai = j5 gKy's own scoring (run weights, attack ×, centre pull) and pacing (ms), kept */
  eye:{max:6,danh:1,danhMax:4,kinh:1,likeMin:20,ghen:3,oan:2,spite:3},
