@@ -30,7 +30,7 @@ G = {
  "mm": dict(
   who="a senior palace MA MA (head maid, an older lady-in-waiting) of the inner palace: a woman about fifty-five, firm round face with a few soft lines "
       "at the eyes and mouth, dark hair with silver streaks pinned UP in a neat bun with two plain silver hairpins (no crown, no phoenix, no flowers, no loose hair), "
-      "small earrings, a coral red (#D4897D) brocade over-vest with a teal (#499597) stand collar and teal inner robe, thin gold trim",
+      "a coral red (#D4897D) brocade over-vest with a teal (#499597) stand collar and teal inner robe, thin gold trim",
   same="Same palace ma ma, same soft hand-painted storybook style, same neat silver-streaked bun with two plain silver hairpins, "
        "same coral red (#D4897D) brocade over-vest with teal (#499597) collar",
   short="ma ma with the neat bun", sl="teal sleeves with coral red cuffs", head="her bun",
@@ -75,5 +75,5 @@ def prompts(k):
      "back": f"Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The furious {sh} leaning out of the round gold medallion gives one last angry huff, the steam fades away, {s} lowers {p} fist, lets go of the gold rim, pulls {p} arms back and slowly slides back inside the round medallion, shrinking back into it, until {s} is again only an angry {g["old"]} with {g['head']} inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects.",
     }
 if __name__ == "__main__":
-    import os as _os; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
-    print(json.dumps(_SG.guard({k: prompts(k) for k in (sys.argv[1:] or list(G))}, "grp_gian"), ensure_ascii=False, indent=1))
+    import os as _os; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG; import seal_ear as _SE  # F15 NOEAR (owner Lượt 1037): women seals = no earrings + bare-earlobes sentence  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
+    print(json.dumps(_SG.guard(_SE.ear({k: prompts(k) for k in (sys.argv[1:] or list(G))}), "grp_gian"), ensure_ascii=False, indent=1))

@@ -17,7 +17,7 @@ assert v.count(ANCHOR) == 1
 v = v.replace(ANCHOR, ANCHOR + HAND)
 # gate B20 DEEP COLOUR (Lượt 769) refuses the adjective "deep" on a colour word; the colour stays the same code #C16776 (word only)
 assert v.count("deep rose") == 4; v = v.replace("deep rose", "rose")
-v = v.replace("No text, no labels.", EAR + "No text, no labels.") if "NO earrings" not in v else v
+pass   # NOEAR1: the bare-earlobes sentence now comes from master_common.apply (EAR_SENT, rule F15); was: v = v.replace("No text, no labels.", EAR + "No text, no labels.") if "NO earrings" not in v else v
 v = FG.final(v, "c09.v3h.FULL")
 open(os.path.join(D, "c09.v3h.FULL.txt"), "w", encoding="utf-8").write(v)
 print("== c09.v3h.FULL", len(v))

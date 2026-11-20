@@ -85,7 +85,7 @@ for sid, grp, age, sw, hair, outfit, pose, ak in S_NEW:
 fails = []
 for k, v in out.items():
     if k.endswith('.FULL'):
-        v = v.replace("No text, no labels.", EAR + "No text, no labels.") if "NO earrings" not in v else v
+        pass   # NOEAR1: the bare-earlobes sentence now comes from master_common.apply (EAR_SENT, rule F15); was: v = v.replace("No text, no labels.", EAR + "No text, no labels.") if "NO earrings" not in v else v
         try: v = FG.final(v, k)
         except Exception as e: fails.append(k); print(f"GATE FAIL {k}: {e}"); continue
     _open(os.path.join(D, f'{k}.txt'), 'w').write(v)

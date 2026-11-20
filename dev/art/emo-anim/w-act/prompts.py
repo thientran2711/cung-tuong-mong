@@ -102,5 +102,5 @@ def prompts(k):
     }
 ALL = {k: prompts(k) for k in S}
 if __name__ == "__main__":
-    import os as _os, sys; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
-    print(json.dumps(_SG.guard(ALL, "w-act"), ensure_ascii=False, indent=1))
+    import os as _os, sys; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG; import seal_ear as _SE  # F15 NOEAR (owner Lượt 1037): women seals = no earrings + bare-earlobes sentence  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
+    print(json.dumps(_SG.guard(_SE.ear(ALL), "w-act"), ensure_ascii=False, indent=1))

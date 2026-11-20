@@ -13,6 +13,7 @@ Usage
   scope face = thiếu nữ face prompts (face-common mNN/cNN/sNN .FULL.txt, or a maker's stdout via prompt_file "-")
   --pid sNN (scope face): B20 root-hex check, her root pair only (MG3 L784 #6); every scope: prompt > 10 000 chars = FAIL (gen tool limit)
 MASTER BLOCK (owner B25, Lượt 745/766, MG1): in EVERY scope every sentence of dev/art/MASTER_COMMON.txt must be present verbatim exactly once
+NOEAR (owner Lượt 1037, 20/11, rule F15): in EVERY woman/girl scope (all but --scope emperor|men) master_common.EAR_SENT exactly once + NO earring word (earring, ear drop/pendant/stud, jewels at the ears, hoa tai…) = else FAIL
   (dev/art/master_common.py); missing / edited / doubled = FAIL "MASTER ...".
   python3 dev/art/check_store.py --self | --audit | --registry-md
 Exit 1 = FAIL -> do NOT generate. Ledger lines carry "store_check":"PASS" and "approved_check":"PASS"."""
@@ -910,7 +911,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
         for m in DEEP_COLOUR_RX.finditer(text):
             if negated(text, m.start(), m.end()): continue
             fails.append(("B20", "DEEP COLOUR", f"'deep/dark' adjective on a colour word (all seasons light and fresh, Lượt 769): …{text[max(0,m.start()-30):m.end()+20]}…")); break
-    for k, kind, d in master_common.check(text, high=master_common.high_scope(scope)):   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
+    for k, kind, d in master_common.check(text, high=master_common.high_scope(scope), female=not master_common.male_scope(scope)):   # + NOEAR (owner Lượt 1037): every woman / girl scope = bare-earlobes sentence once + no earring word; men / boys (--scope emperor|men) unchanged   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
         fails.append((k, "MASTER " + kind, d))
     for k, kind, d in master_common.check_elder(text, scope, age):   # C5 (owner Lượt 779/784): elder colours win over M05 at a51/a65, never in Nữ đế
         fails.append((k, kind, d))
