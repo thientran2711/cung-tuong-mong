@@ -27,8 +27,9 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 5 slap */
   const heavy=(a)=>{let n=0;for(let i=0;i<600;i++)if(slapNpcDraw(a)===3)n++;return n/600};const sl=L.map(x=>[x,mgHandEff("tat",x)]).sort((a,b)=>a[1]-b[1]);
   o.slap={lo:[sl[0][1],heavy(sl[0][0])],hi:[sl[sl.length-1][1],heavy(sl[sl.length-1][0])]};
-  /* 7 owner OD 20/11 ~01:10Z fair spread: an untested kind (co) is centred on the skilled human median (7.5 at the matching board), symmetric */
-  {const C=[];for(let i=0;i<1000;i++)C.push(mgHand("co",{name:"T"+i,id:9000+i}));C.sort((a,b)=>a-b);o.medHand=C[500];o.medPlay=C[500]-H.w/2;o.skilled=mgMedD(0);o.above=C.filter(c=>c-H.w/2>=o.skilled).length/1000}
+  /* 7 owner OD 20/11 ~01:10Z fair spread: an untested kind (the first kind not in BAL.ag.mg2.cal.k, picked at run time — her landed codes must not break it)
+     is centred on the skilled human median (7.5 at the matching board), symmetric */
+  {const U=mgCalKinds().find(k=>!(BAL.ag.mg2.cal.k||{})[k]);o.U=U;const C=[];for(let i=0;i<1000;i++)C.push(mgHand(U,{name:"T"+i,id:9000+i}));C.sort((a,b)=>a-b);o.medHand=C[500];o.medPlay=C[500]-H.w/2;o.skilled=mgMedD(0);o.above=C.filter(c=>c-H.w/2>=o.skilled).length/1000}
   /* 6 off */
   H.on=0;o.off=mean(v,0);H.on=1;o.offMed=mgMedD(0);return o});
  console.log(JSON.stringify(r));

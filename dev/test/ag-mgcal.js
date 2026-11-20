@@ -22,6 +22,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 3 */
   /* steps 3–4 run on kinds the owner has NOT calibrated (BAL.ag.mg2.cal.k), picked at run time: a landed owner code must not break them */
   const UNC=mgCalKinds().filter(k=>!(C.k||{})[k]);const K=UNC[0],K2=UNC[1];o.K=K;o.K2=K2;
+  /* steps 3–4 test the band move alone: the group split of K is held at the untested 1:1:1 here (the ratio per skill group is checked in mg-fair-hands.js) */
+  const G0=mgCalGrp(K),SP0=H.split[G0];if(G0)H.split[G0]=H.split[""];
   const L=liveRivals(true).filter(v=>v.alive);o.def=mgCalBand(K);o.defMed=mgMedD(0)+H.w/2;const before=L.map(v=>mgHand(K,v));
   const v=L[0];const keep=v.mgH,keepV=v.mgHv;delete v.mgH;delete v.mgHv;o.oldSave=mgHand(K,v)===before[0];v.mgH=keep;v.mgHv=keepV;
   C.k[K]={b:7,n:5,at:"11/17/2026"};const Bd=mgCalBand(K);o.band=Bd;o.bandX={hi:7+H.w/2+H.far,lo:7+H.w/2-H.far};
@@ -32,6 +34,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   o.reach=plays.filter(x=>x>=7).length/plays.length;o.med=plays[plays.length>>1];o.max=plays[plays.length-1];
   const hs=[];for(let i=0;i<600;i++)hs.push(mgHand(K,{name:"T"+i,id:9000+i})-H.w/2-7);o.up=hs.filter(x=>x>1).length;o.dn=hs.filter(x=>x<-1).length;o.loPlay=Math.min(...hs)+7;
   delete C.k[K];o.back=mgCalBand(K).sig===o.def.sig&&mgHand(K,v)===before[0];
+  if(G0)H.split[G0]=SP0;
   return o});
  console.log(JSON.stringify(r));
  ok(!r.row0&&r.row1===1&&r.kctl,'1 owner flag only: no row without it; one kit .kctl row with it',{row0:r.row0,row1:r.row1,kctl:r.kctl});
