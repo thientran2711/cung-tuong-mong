@@ -385,3 +385,4 @@ ROOT-66 Lượt 1022–1024 ~06:20Z: earrings — no rule bans them (A21: earrin
 - 06:20Z C-AG #29: MAIN 06:17Z: fitted boards ARE covered by her OK → cal-p2 builds everything (Đầu hồ first alone; then boards + bậc modifier) → BIG rv → LAND READY; table to MAIN as info. Brief + wk updated.
 - (20/11 06:56Z) FROM MAIN ROOT-74: LIVE eb056f7b (SELF-MERGE LAND mg-noword-a: no words in play 15 kinds + demo motions pull/slide, KIT.md) on 37e4a68f. ROLLBACK 37e4a68f. Final-merge eb056f7b before LAND READY.
 ROOT-66 Lượt 1027: parked #9 khoảnh khắc chân dung + #10 hương riêng (PARKING_LOT). Owner wants nhuộm vải by code tested (no bleed onto skin?). Ánh nến/ánh trăng light filters missing (weather overlays exist). Owner: fashion/makeup focus; ROOT-66 ideas judged not new.
+ROOT-66 Lượt 1028: EAR1 demo 533d548 LOOKED + sent (ipad c11 FF pair, c09 3/4 single, + ngọc bội/túi hương — painted before the drop message reached EAR1), 249 cr (credits 87 520). Waiting owner verdict.
