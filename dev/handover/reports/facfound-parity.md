@@ -36,3 +36,22 @@ No UI/kit change (same card, same buttons) → no device shots.
 ## 4. Notes
 - Even re-seeded, the act evaluate is not fully deterministic across runs (state touched by timers between evaluates; j10 found() ids use Date.now). Rows no longer depend on it.
 - `maid:P-ONLY:maid:errand` still reads closed (note from E23, owned by E22e).
+
+## REVIEW (E22s, BIG, depth 7) — review/facfound-parity 5f46f023 — VERDICT: PASS
+PRIORITY #1 CHECK ('facFound|Lập phe|drift2-play|facAct'): OD 0 | ledger 0 | claims 8 | main 15 | review/* 1 (this branch) | archive 3 — same hits as the worker; no other branch on it.
+LIVE merge: review/facfound-parity-r1 = 5f46f023 + merge of origin/main 90b7e797 @ 39228682 (conflicts index.html / sw.js only → rebuilt by build_site.sh); fast-forward on origin/main.
+
+| check | result |
+|---|---|
+| law 1 both ways | p3FacFr keeps S (NPC may rủ her) and p3FacJoin keeps a faction she leads (l!==v; the block runs only when v has no faction, so it is the same as «any other leader»); j10 off-plan loop no longer drops S. askJoin → rcvAsk(facJoin,a,S) → her card; rcvAsk(facFound,v,S) → rcvCard (jrcv:94). fac-parity-play 17 rows ALL PASS on the merge (her→NPC, NPC→her, NPC→NPC for Lập phe / Xin / Mời; Rời / Bán đứng / Ly gián both sides) |
+| law 6b real choice | the receiver's answer is the real jrcv pick (4 answers); the probe now reads it instead of assuming «yes» — honest, no exempt |
+| law 4 | no new number: the filters read BAL.ag.par3.fac; one-core-guard PASS (fails 0) |
+| law 6b / 9 / 7 kit + wording | her card = the existing RCVK.facFound / facJoin 4-answer card; no new UI, no new player text → no device shots needed |
+| law 2 / 3 | answers unchanged (pre-existing card) |
+| flood check | 60 turns, all rivals +30 liking toward her: 0 faction asks to her (no card spam) |
+| role-parity ×2 | ALL PASS, outputs byte-identical (md5 ac2ae5a1…) |
+| role-parity-drift2-play | ALL PASS ×4 |
+| quickcheck | PASS (open 1609 ms, old save ok, perf new/live render 228/218, tab 476/450, buổi 1314/1516, tasks>200 20/20). The core gate G4 mk-layer-scan first failed only because my sparse checkout lacked dev/art; re-run with it: 12960 pictures, 0 bad |
+
+Follow-up (not caused by this branch, not a FAIL): in lãnh cung (S.out=1) she is still a faction target (p3FacFr `x===S||…`, same as facMembers/consorts which always hold S), and her own Phe phái acts have no S.out gate (facAct), while an NPC in lãnh cung can neither ask nor be asked (liveRivals drops out). Proof: probe cold() → p3FacFr(v) includes S, rcvAsk("facFound",v,S) sends her the card. Whole family if the foreman wants it closed: one «present» rule (her: !S.out; NPC: alive && !out) in RCVK.facFound/facJoin/facInvite ok() and her facHTML/facAct.
+VERDICT: **PASS review/facfound-parity-r1 @ 392286825ebd5595a576d92d67eb2d18fb2272b0**.
