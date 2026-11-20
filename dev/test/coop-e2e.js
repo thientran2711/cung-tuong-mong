@@ -18,6 +18,10 @@ async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0]
   await ctx.addInitScript(()=>{const W0=window.WebSocket,t0=Date.now();window.__wsLog=[];window.WebSocket=function(u,p){const w=p===undefined?new W0(u):new W0(u,p);/* COOP_RECONNECT: a sleeping phone's socket looks open but hears nothing (frames dropped while __wsDeaf) */Object.defineProperty(w,'onmessage',{configurable:true,set(f){w.addEventListener('message',e=>{if(!window.__wsDeaf)f.call(w,e)})}});const L=window.__wsLog,i=L.length,tag=String(u).replace(/^.*\/room\//,'').replace(/&name=.*$/,'');
     L.push([Date.now()-t0,'new',tag]);w.addEventListener('open',()=>L.push([Date.now()-t0,'open',i]));w.addEventListener('close',e=>L.push([Date.now()-t0,'close',i,e.code]));return w};
    window.WebSocket.prototype=W0.prototype;Object.assign(window.WebSocket,{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3})});
+  if(process.env.COOP_EMOTRACE)await ctx.addInitScript(()=>{/* debug: who writes a world person's feeling cause / name on this seat (stack) */
+    const t=setInterval(()=>{if(window.__ctmBuilt!==1||typeof emoSet!=='function')return;clearInterval(t);window.__emoTr=[];
+     Error.stackTraceLimit=40;const W=(n,f)=>function(p){try{if(window.COOPW&&COOPW.on&&p&&typeof p==='object'&&p!==S){window.__emoTr.push({f:n,who:p.name,wk:COOP.state.week,fc:COOPW.inFC||0,a:[].slice.call(arguments,1,4).map(x=>typeof x==='object'?'obj':String(x).slice(0,60)),st:(new Error().stack||'').split('\n').slice(2,30).map(x=>x.trim().slice(0,90))});if(window.__emoTr.length>60)window.__emoTr.shift()}}catch(e){}return f.apply(this,arguments)};
+     emoSet=W('emoSet',emoSet);window.emoSet=emoSet},200)});
   await ctx.addInitScript(()=>{/* merge-train-4: the card-flip scene waits for its kit end button (KIT 81); hide it like main's tests do */document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='.kcf,#kroul{display:none!important}';document.head.appendChild(s)})});await ctx.addInitScript(u=>{window.COOP_URL=u;
     /* one view of the co-op hooks, whatever the client module names them */
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const you=c.seat||s.you||null;const ended=c.ended||s.ended||{};
@@ -137,7 +141,7 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
   out.meA=a.me;out.meB=b.me;out.slA=await A.p.evaluate(()=>window.__sl||null);out.slB=await B.p.evaluate(()=>window.__sl||null);out.trA=a.tr;out.trB=b.tr;console.log('STAFFDIFF '+JSON.stringify(out));try{fs.writeFileSync(OUT+'/staffdiff-'+tag.replace(/\W+/g,'_')+'.json',JSON.stringify(out,null,1))}catch(e){}};
  const same=async tag=>{const a=await A.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join(),N:rivals.filter(v=>!v.coop).flatMap(v=>[v.name,...(v.staff||[]).filter(x=>!x.coop).map(x=>x.name),.../* coop-staff-split: a player who serves as cung nữ is the coop entry in her mistress's staff on the OTHER seat and herself (S) on her own seat: one person, one place, written as the last staff names (sorted) on both seats */(v.staff||[]).filter(x=>x.coop).map(x=>x.name).concat(S.srv&&!S.srv.risen&&S.srv.mid===v.id?[S.name]:[]).sort()/* both players may serve the same mistress */,...(v.kids||[]).map(k=>k.name)]).concat(Object.values(S.court||{}).map(c=>c&&(c.pn||c.name))).join('|')}));
    const c=await B.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join(),N:rivals.filter(v=>!v.coop).flatMap(v=>[v.name,...(v.staff||[]).filter(x=>!x.coop).map(x=>x.name),.../* coop-staff-split: a player who serves as cung nữ is the coop entry in her mistress's staff on the OTHER seat and herself (S) on her own seat: one person, one place, written as the last staff names (sorted) on both seats */(v.staff||[]).filter(x=>x.coop).map(x=>x.name).concat(S.srv&&!S.srv.risen&&S.srv.mid===v.id?[S.name]:[]).sort()/* both players may serve the same mistress */,...(v.kids||[]).map(k=>k.name)]).concat(Object.values(S.court||{}).map(c=>c&&(c.pn||c.name))).join('|')}));
-   ok(a.era===c.era&&a.R===c.R,tag+': same Emperor and same consorts',[a.era,c.era]);ok(String(a.d)===String(c.d),tag+': same date',[a.d,c.d]);if(tag!=='start'){ok(a.N===c.N,tag+': same names of the world people (consorts, their staff and kids, court) on both seats',a.N===c.N?a.N.split('|').length:[a.N.slice(0,300),c.N.slice(0,300)]);if(a.N!==c.N)await staffDiff(tag);
+   ok(a.era===c.era&&a.R===c.R,tag+': same Emperor and same consorts',[a.era,c.era]);ok(String(a.d)===String(c.d),tag+': same date',[a.d,c.d]);if(tag!=='start'){ok(a.N===c.N,tag+': same names of the world people (consorts, their staff and kids, court) on both seats',a.N===c.N?a.N.split('|').length:(()=>{const x=a.N.split('|'),y=c.N.split('|');return{Aonly:x.filter(n=>!y.includes(n)),Bonly:y.filter(n=>!x.includes(n)),order:x.length===y.length,me:[a.me,c.me]}})());if(a.N!==c.N)await staffDiff(tag);
     if(+process.env.COOP_STAFFLOG){const h=await A.p.evaluate(()=>{const sg=R=>R.filter(v=>!v.coop).map(v=>v.id+':'+(v.staff||[]).filter(x=>!x.coop).map(x=>x.sid+x.name).join(',')).join(';');const a=sg(rivals),b=sg(COOPW.base.W.R);
       return a===b?null:{only:a.split(';').filter(x=>!b.split(';').includes(x)),base:b.split(';').filter(x=>!a.split(';').includes(x)),sl:(window.__sl||[]).slice(-12)}});console.log('HOSTDRIFT '+tag+' '+(h?JSON.stringify(h):'none'))}
     /* law 6b one place: on each seat her own name sits in no world list, the friend's name exactly once (her rivals entry or her coop entry in her mistress's staff) */
@@ -148,10 +152,46 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
      const idOk=!r.own.some(x=>x[1])&&r.frN.filter(x=>x[1]).length===1,clash=r.own.filter(x=>!x[1]).concat(r.frN.filter(x=>!x[1]));
      ok(idOk,tag+' '+o.name+': each player sits in exactly one place (one coop entry = the friend, none for herself)',idOk?[r.me,r.srv,r.fr,(r.frN.find(x=>x[1])||[])[2]]:r);
      ok(!clash.length,tag+' '+o.name+': no world person shares a player\'s full name (names-unique lane)',clash.length?clash:undefined)}}
+   /* coop-host-lag (law 11 family "a HOST-only world write reaches the guest one merged week late"): the canonical world (W of C, the
+      viewer-relative rows dropped) is the same on both seats once a merged week is shown; every differing path is a host-only (or
+      guest-only) world write outside the merge */
+   /* derived per-seat caches, not world writes (coop-host-lag report table): "__" module stamps (jmoodknow __mkAt / __mkL = the khắc the
+      NPC's mood was last re-summed from her mk list + that sum: re-summed on every read, so the shown mood comes from mk, which is equal);
+      S.wx = the weather of THIS seat's khắc, moved by jwxk wxkSync from the one world day S.wxDay (equal on both seats) */
+   const DERIVED=/(^|\.)__|^S\.wx\./;
+   /* lazy values a screen stores on its first READ (jtrong trongOf, jnet netOf: drawn from a fixed hash of the person; jkh khInit: from her
+      children count; the same on both seats):
+      one seat that drew a person's card holds them, the other not yet; both seats read every world person first, so a difference left is real */
+   if(tag!=='start'){const wc=o=>o.p.evaluate(()=>{try{for(const v of rivals||[]){if(!v||v.coop)continue;for(const p of [v,...(v.staff||[]).filter(x=>x&&!x.coop),...(v.kids||[])]){try{if(typeof trongOf==='function')trongOf(p)}catch(e){}try{if(typeof netOf==='function')netOf(p)}catch(e){}try{if(typeof khInit==='function')khInit(p)}catch(e){}}}
+      for(const p of [S.thO,...((S.thO&&S.thO.staff)||[]),...(S.men||[])]){if(!p)continue;try{if(typeof trongOf==='function')trongOf(p)}catch(e){}try{if(typeof netOf==='function')netOf(p)}catch(e){}}}catch(e){}
+      const X=COOPW.X,J=X.J;const d=ser();const sS=d.S;const pid=((COOPW.base&&COOPW.base.P&&COOPW.base.P[COOP.state.you])||{}).pid;
+      const W={};for(const k of X.W_KEYS)if(k in sS){const v=J(sS[k]);if(k==='cm'&&v)for(const f of X.CM_P)delete v[f];if(k==='men'&&Array.isArray(v))for(const x of v)if(x)for(const f of X.MEN_P)delete x[f];W[k]=v}
+      if(W.emp)delete W.emp.known;delete W.tn;
+      const R=d.R.filter(r=>!r.coop).map(r=>{for(const f of ['rel','oan','ghen','ev','rl','ro','gp','ep','evm'])delete r[f];if(r.staff)r.staff=r.staff.filter(s=>!s.coop);return X.mapMe(r,true,pid)});
+      X.mapMe(W,true,pid);const out={};const fl=(v,p)=>{if(v&&typeof v==='object'){const ks=Object.keys(v);if(!ks.length)out[p]=Array.isArray(v)?'[]':'{}';for(const k of ks)fl(v[k],p+'.'+(Array.isArray(v)&&v[k]&&(v[k].id!=null||v[k].sid!=null)?'#'+(v[k].id!=null?v[k].id:'s'+v[k].sid):k))}else out[p]=v};
+      fl(W,'S');R.forEach(r=>fl(r,'R#'+r.id));return out});
+    const t0=Date.now();let dif=[];while(Date.now()-t0<8000){const wa=await wc(A),wb=await wc(B);dif=[...new Set(Object.keys(wa).concat(Object.keys(wb)))].filter(k=>!DERIVED.test(k)&&JSON.stringify(wa[k])!==JSON.stringify(wb[k])).map(k=>k+' A='+JSON.stringify(wa[k])+' B='+JSON.stringify(wb[k]));if(!dif.length)break;await sleep(500)}
+    if(process.env.COOP_WDIFF)fs.appendFileSync(OUT+'/wdiff.txt',tag+' '+dif.length+'\n'+dif.slice(0,80).join('\n')+'\n');
+    if(process.env.COOP_EMOTRACE&&dif.length){const ids=[...new Set(dif.map(x=>(x.match(/^R#(\d+)\.(emoH|emo|mk)/)||[])[1]).filter(Boolean))].slice(0,3).map(Number);
+     for(const o of [A,B])fs.appendFileSync(OUT+'/wdiff.txt','EMOH '+o.name+' '+JSON.stringify(await o.p.evaluate(ids=>ids.map(id=>{const v=rivals.find(x=>x.id===id);const b=COOPW.base&&COOPW.base.W&&(COOPW.base.W.R||[]).find(x=>x.id===id);
+       const f=h=>(h||[]).map(e=>e.w+':'+e.k+':'+String(e.why).slice(0,40));return{id,name:v&&v.name,live:f(v&&v.emoH),base:f(b&&b.emoH),week:COOP.state.week,hl:COOPW.hl&&COOPW.hl.stat,hlog:COOPW.hl&&COOPW.hl.log.slice(-8)}}),ids))+'\n')}
+    if(process.env.COOP_EMOTRACE&&dif.length)for(const o of [A,B])fs.appendFileSync(OUT+'/wdiff.txt','TRACE '+o.name+' '+JSON.stringify(await o.p.evaluate(()=>(window.__emoTr||[]).splice(0))).slice(0,60000)+'\n');
+    /* another family, not a host-only write (follow-up ticket in reports/coop-host-lag.md): the NPC feeling memory (jmoodknow mkSync) is
+       re-read on EACH seat (both write mk[].s / emo from __mkL); printed, not gated here */
+    const FEEL=/\.(mk\.\d+|emo)(\.|$)/;const feel=dif.filter(s=>FEEL.test(s.split(' ')[0]));dif=dif.filter(s=>!FEEL.test(s.split(' ')[0]));if(feel.length)console.log('   info '+tag+': feeling memory differs (other family) '+feel.length+' '+feel.slice(0,3).join(' ; ').slice(0,240));
+    /* m3 adds the two seats' moves of a NUMBER (a + (b - base)): a person id two seats both moved (resHead: host 2, guest 3, base 1 -> 4)
+       would name a third person on BOTH seats (equal, so the parity check above cannot see it): every id a world record points to is real */
+    const badRef=await A.p.evaluate(()=>{const ids=new Set((rivals||[]).map(v=>v&&v.id));const L=[];for(const v of rivals||[]){if(!v||v.coop)continue;
+      const x=v.resHead;if(typeof x==='number'&&x<900&&!ids.has(x))L.push('R#'+v.id+'.resHead='+x);
+      for(const s of v.staff||[]){const y=s&&s.spyFor;if(typeof y==='number'&&y<900&&!ids.has(y))L.push('R#'+v.id+'.staff.s'+s.sid+'.spyFor='+y)}}return L});
+    ok(!badRef.length,tag+': every person a world record points to (house head, spy master) exists',badRef.length?badRef.slice(0,8):undefined);
+    ok(!dif.length,tag+': the same world on both seats (canonical W; coop-host-lag family)',dif.length?{n:dif.length,d:dif.slice(0,12).map(s=>s.slice(0,160))}:undefined)}
    /* art-wiring-1119: the Thái hậu is a pool face drawn by the host; both seats show the same picture (her own face's Thái hậu robe) */
    {const th=o=>o.p.evaluate(()=>({f:typeof figFor==='function'?figFor({kind:'th'},'fig'):'',fid:S.thO&&S.thO.fid||null}));let x,y;const t0=Date.now();
     while(Date.now()-t0<20000){x=await th(A);y=await th(B);if(x.f&&x.f===y.f)break;await sleep(400)}
-    ok(!!x.f&&x.f===y.f&&/^(consort|maid|mama):/.test(x.fid||''),tag+': both seats show the same Thái hậu picture (a pool face)',[x,y])}
+    ok(!!x.f&&x.f===y.f&&/^(consort|maid|mama):/.test(x.fid||''),tag+': both seats show the same Thái hậu picture (a pool face)',[x,y]);
+    /* one person, one face for life (law 6c): the face the host showed at the start is the face every later week shows (rejoin / rebirth too) */
+    if(x.fid){if(!same.th0&&!process.env.COOP_HL_FORCE)same.th0=x.fid;else if(same.th0)ok(x.fid===same.th0,tag+': the Thái hậu keeps the face she had at the start',[same.th0,x.fid])}}
    const okS=a.fr===c.me&&c.fr===a.me;ok(okS,tag+': each sees the other as a person',okS?[a.me,a.fr,c.me,c.fr]:{n:[a.me,a.fr,c.me,c.fr],trA:await A.p.evaluate(()=>COOPW.tr.slice(-14)),wsA:await A.p.evaluate(()=>window.__wsLog),trB:await B.p.evaluate(()=>COOPW.tr.slice(-8))});return[a,c]};
  /* "world" = each seat has its base; the friend's character (her `me` → the room's state) reaches the other seat a moment later: wait for it, as a player would see her appear */
  {const fr=o=>o.p.evaluate(()=>{const f=rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop);return[S.name,f?f.name:null]});const t0=Date.now();
@@ -169,13 +209,45 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
    window.__mlHit=0;window.__mlCalls=[];const mm0=mlMonth;mlMonth=function(){window.__mlCalls.push([S.month,(S.staff||[]).filter(x=>x.role==='maid').length,!!(S.srv&&!S.srv.risen),consorts().includes(S),S.rank,S.place]);return mm0.apply(this,arguments)};const f0=mlFx;mlFx=function(g,s){if((S.staff||[]).includes(s))window.__mlHit++;return f0.apply(this,arguments)};
    const d0={};rivals.filter(v=>!v.coop).forEach(v=>d0[v.id]=v.duc||0);return{ev:rivals.filter(v=>!v.coop).reduce((a,v)=>a+(v.ev||0),0),d0,maids:S.staff.filter(x=>x.role==='maid').length,srv:!!(S.srv&&!S.srv.risen),inC:consorts().includes(S),rank:S.rank}});
   mlA0=await A.p.evaluate(()=>{window.__mlN={};const d0={};rivals.filter(v=>!v.coop).forEach(v=>d0[v.id]=v.duc||0);return{ev:rivals.filter(v=>!v.coop).reduce((a,v)=>a+(v.ev||0),0),d0}})}
+ /* COOP_HL_FORCE=1 (review/coop-host-lag, regression for its family): the FIRST merged week reaches both seats with (a) no Thái hậu face
+    (S.thO.fid dropped: only the host's lazy pick at render can give it) and (b) one world servant under an excluded (Vietnamese-style)
+    name that the host's name sweep (jnamefix nmFix "load") must rename, while a text of the GUEST's own save names her. Same merged week:
+    the guest shows the host's face, the servant's new name, and her own text names the new name (law 6b), before any next merge. */
+ const HLF=+process.env.COOP_HL_FORCE||0;
+ if(HLF){for(const o of [A,B])await o.p.evaluate(()=>{const r0=COOP.rxWrap;let done=0;window.__hlF=null;
+   COOP.rxWrap=(fn,m)=>{try{if(!done&&m&&m.t==='week'&&m.state&&m.state.W){done=1;const W=m.state.W;if(W.S&&W.S.thO)delete W.S.thO.fid;
+     const v=(W.R||[]).find(r=>!r.coop&&r.alive!==false&&(r.staff||[]).some(s=>!s.coop&&s.sid!=null));
+     if(v){const s=v.staff.find(x=>!x.coop&&x.sid!=null);window.__hlF={id:v.id,sid:s.sid,old:'Nguyễn Thị Hoa',was:s.name};s.name='Nguyễn Thị Hoa'}
+     const P=m.state.P&&m.state.P.b;if(P&&P.S)P.S.hlTxt='Hôm trước gặp Nguyễn Thị Hoa ở ngự hoa viên.';
+     /* (c) housing: a low consort's house head = herself (no house): the host's palFix re-houses her (the guest's palFix leaves world housing as it is)
+        (d) trust: a man's Chủ tin unset: the host's first read stores it (the guest's read only shows it) */
+     const h=(W.R||[]).find(r=>!r.coop&&r.alive!==false&&!r.out&&!r.queen&&(r.rank||0)<3&&r.pal==null);if(h){h.resHead=h.id;window.__hlF=Object.assign(window.__hlF||{},{hid:h.id})}
+     const mn=(W.S&&W.S.men||[]).find(x=>x&&x.alive);if(mn){delete mn.tin;window.__hlF=Object.assign(window.__hlF||{},{mid:mn.id})}
+     const r=r0?r0(fn,m):fn();
+     /* (e) feeling history: a world person's feeling cause written by the HOST in the merge path (a deser hook): reaches her the same week */
+     if(h)window.__hlF.emo='hl force: bị tranh phần';if(COOPW.seat==='a'&&h){const v2=rivals.find(x=>x.id===h.id);if(v2&&typeof emoSet==='function')emoSet(v2,'gian',40,'hl force: bị tranh phần')}
+     return r}}catch(e){console.error('hl force',e)}return r0?r0(fn,m):fn()}})}
  /* 3 three weeks */
  const agB0=await B.p.evaluate(()=>window.AG?AG.stat.tick:-1);
  /* COOP_WEEKS=n (coop-staff-split probe): play n weeks here instead of 3 (more month ends) */
  for(let w=0;w<(+process.env.COOP_WEEKS||3);w++){const wk=(await C(A)).week;
   await weekBoth(A,B,w);
   for(const o of [A,B]){const r=await untilC(o,x=>__co().week===x+1,wk,90000);ok(r,`week ${w+1}: ${o.name} advanced`,r?undefined:await o.p.evaluate(()=>({co:__co(),sent:COOPW.sent,pend:COOPW.pend,pendBuoi:!!COOPW.pendBuoi,bend:COOPW.bend,buoi:S.buoi,Q:Q.map(m=>(m.pid||'')+':'+String(m.t||'').slice(0,30)),mg:!!S.mg,tm:S.toMorning,stale:window.__nightStale,modal:(document.getElementById('modal')||{}).hidden,tr:COOPW.tr.slice(-20)})))}
-  await clear(A);await clear(B);await same('after week '+(w+1))}
+  await clear(A);await clear(B);await same('after week '+(w+1))
+  if(HLF&&w===0){const g=o=>o.p.evaluate(()=>{const F=window.__hlF;const v=F&&rivals.find(x=>x.id===F.id);const s=v&&(v.staff||[]).find(x=>x.sid===F.sid);
+     const h=F&&F.hid!=null&&rivals.find(x=>x.id===F.hid);const mn=F&&F.mid&&(S.men||[]).find(x=>x.id===F.mid);if(mn&&typeof tinOf==='function')tinOf(mn);/* her screen reads it */
+     return{wk:__co().week,fid:S.thO&&S.thO.fid||null,name:s&&s.name,txt:S.hlTxt||null,house:h?[h.resHead===h.id?'self':h.resHead,h.resHall||null,h.pal==null?null:h.pal]:null,
+      tin:mn?(mn.tin==null?null:mn.tin):'-',emo:h&&F.emo?((h.emoH||[]).some(e=>e&&e.why===F.emo)?1:0):'-',hl:COOPW.hl&&COOPW.hl.stat}});let x,y;const t0=Date.now();
+   const done=()=>x.fid&&x.fid===y.fid&&x.name&&x.name===y.name&&x.name!=='Nguyễn Thị Hoa'&&y.txt&&y.txt.includes(y.name)&&JSON.stringify(x.house)===JSON.stringify(y.house)&&x.tin===y.tin&&x.emo===y.emo;
+   while(Date.now()-t0<20000){x=await g(A);y=await g(B);if(done())break;await sleep(400)}
+   if(x.house)ok(same1(x,y)&&x.house[0]!=='self'&&JSON.stringify(x.house)===JSON.stringify(y.house),'hl force (c): the host\'s re-housing of a world consort reaches the guest in the same merged week',[x.house,y.house]);
+   if(x.tin!=='-')ok(same1(x,y)&&x.tin!=null&&x.tin===y.tin,'hl force (d): a world man\'s trust stored by the host reaches the guest in the same merged week',[x.tin,y.tin]);
+   if(x.emo!=='-')ok(same1(x,y)&&x.emo===1&&y.emo===1,'hl force (e): a world feeling cause the host wrote in the merge path reaches the guest in the same merged week',[x.emo,y.emo])
+   function same1(a,b){return a.wk===b.wk&&b.wk===wk+1}
+   ok(same1(x,y)&&!!x.fid&&x.fid===y.fid,'hl force (a): the host\'s lazy Thái hậu face reaches the guest in the same merged week',[x.fid,y.fid,x.wk,y.wk]);
+   ok(same1(x,y)&&!!x.name&&x.name!=='Nguyễn Thị Hoa'&&x.name===y.name,'hl force (b): the host\'s renamed world servant reaches the guest in the same merged week',[x.name,y.name]);
+   ok(!!y.txt&&y.txt.includes(y.name)&&!y.txt.includes('Nguyễn Thị Hoa'),'hl force (b): the guest\'s own text names the new name',[y.txt,x.hl,y.hl])}
+  }
  /* NPC agent loop (jagent AG1, host-only): the host runs one tick per buổi, the guest never runs it (the world is the host's) */
  {const g=o=>o.p.evaluate(()=>({has:typeof agOn==='function',on:typeof agOn==='function'&&agOn(),tick:window.AG?AG.stat.tick:-1}));const ha=await g(A),hb=await g(B);
   ok(ha.has&&ha.tick>0,'agent loop: the host ticks',ha);ok(hb.has&&!hb.on&&hb.tick===agB0,'agent loop: the guest never runs agTick',{...hb,before:agB0})}
@@ -204,16 +276,18 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  const before=await B.p.evaluate(()=>({n:S.name,era:S.emp.era}));
  if(RECON){await netDown(A);await sleep(300)}/* her rebirth's `state` broadcast reaches nobody on the host: it must catch up from the room snapshot */
  await B.p.evaluate(()=>die('Thử: trúng gió'));await B.p.waitForTimeout(600);await shot(B,'10-death');
- for(let i=0;i<12;i++){const st=await B.p.evaluate(()=>S&&!S.dead&&S.name);if(st&&st!==before.n)break;
+ /* coop-host-lag (c): the 1-in-20 "B reborn … FAIL (name unchanged)" = the rebirth outran 12 fixed tries (~11 s) on a loaded machine
+    (in each case "A sees the reborn friend by her new name" passed: she WAS reborn, later). Now: a time budget (45 s), not a try count */
+ const rbT0=Date.now();for(let i=0;Date.now()-rbT0<45000;i++){const st=await B.p.evaluate(()=>S&&!S.dead&&S.name);if(st&&st!==before.n)break;
   const m=await B.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal:not([hidden]) button:not([disabled]), #title:not([hidden]) button:not([disabled]), .kroul button:not([disabled]), [data-coop-reborn]')].filter(x=>x.offsetParent!==null);
     const pref=b.find(x=>/Đầu thai|Luân hồi|Nhận thân phận|Tiến cung|Vào cung|Ở nhà|Nhập cung|Lật|Chọn/.test(x.textContent))||b[0];if(pref){const t=pref.textContent.trim();pref.click();return t}return''});
   if(i===1)await shot(B,'11-rebirth-choice');await B.p.waitForTimeout(900)}
- const after=await B.p.evaluate(()=>({n:S.name,dead:S.dead,era:S.emp.era}));
+ const after=await B.p.evaluate(()=>({n:S.name,dead:S.dead,era:S.emp.era,inLife:COOPW.inLife,modal:(()=>{const m=document.getElementById('modal');return m&&!m.hidden?m.textContent.slice(0,140):''})(),btn:[...document.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null).map(x=>x.textContent.trim().slice(0,24)).slice(0,10),tr:COOPW.tr.slice(-10)}));console.log('   rebirth took',Math.round((Date.now()-rbT0)/100)/10,'s');
  /* her new life's throwaway world must not leak into the shared one (review/coop-stable: 10 temp-id ghost consorts + 10 new-consort requests) */
  {const ri=await B.p.evaluate(()=>({srv:S.srv&&!S.srv.risen?{mid:S.srv.mid,here:!!RV(S.srv.mid)}:null,tmp:rivals.filter(v=>!v.coop&&v.id>=1000).map(v=>v.id),ask:(S.coopAsk||[]).length,ids:rivals.filter(v=>!v.coop).map(v=>v.id).sort((a,b)=>a-b).join(','),base:((COOPW.base&&COOPW.base.W&&COOPW.base.W.R)||[]).map(r=>r.id).sort((a,b)=>a-b).join(',')}));
   ok(!ri.tmp.length&&!ri.ask&&ri.ids===ri.base&&(!ri.srv||ri.srv.here),'reborn guest: same consorts as the room world, no ghost (temp-id) consorts, no requests, a real mistress',ri)}
  if(RECON){await sleep(3500);ok(await netUp(A),'reconnect: host back online after the friend was reborn')}
- ok(!after.dead&&after.n!==before.n&&after.era===before.era,'B reborn as a new person in the same world',[before,after]);
+ ok(!after.dead&&after.n!==before.n&&after.era===before.era,'B reborn as a new person in the same world',!after.dead&&after.n!==before.n&&after.era===before.era?[before.n,after.n]:[before,after]);
  {let seen=false;const t0=Date.now();while(Date.now()-t0<40000){await clear(A);await clear(B);seen=await A.p.evaluate(n=>!!(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop))&&(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null).name===n,after.n);if(seen)break;await sleep(700)}
   ok(seen,'A sees the reborn friend by her new name',seen?undefined:await A.p.evaluate(()=>({P:(()=>{const P=COOPW.base&&COOPW.base.P&&COOPW.base.P[COOP.other()];const v=P&&P.S&&P.S.srv;return P&&{name:P.name,dead:P.dead,rank:P.rank,home:COOPW.friendHome(P),srv:v&&{mid:v.mid,risen:v.risen,mOk:!!(typeof RV==='function'&&RV(v.mid))}}})(),n:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name,inLife:COOPW.inLife,tr:COOPW.tr.slice(-16),ws:window.__wsLog})));}
  {const r=await A.p.evaluate(()=>{const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);return{ok:!!f&&(k61St(f)===0||f.id==null/* servant-origin friend (random life): same acceptance as the start check, test-flaky-sure */),srv:f&&f.id==null,st:f&&k61St(f),here:f&&f.id!=null&&whereOf(f),me:S.place,tr:COOPW.tr.slice(-12)}});
