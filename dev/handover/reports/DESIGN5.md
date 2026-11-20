@@ -29,7 +29,7 @@ Edit script (for audit): every replacement is an exact one-time swap; listed bel
 
 **t8 Hoàng hậu → EXACTLY 4 layers = HQP's 4 (owner Lượt 1293), less bulk.**
 - `in FIVE visible layers` → `in EXACTLY FOUR visible layers, the SAME four layers as the Hoàng quý phi (never a fifth)`
-- Layers: inner pink robe, plum zhiju, swallowtail guiyi (`a DOUBLE ring of…` → `swallowtail points and many ribbon streamers`), and `the Hoàng quý phi's long open-front over-robe, at her rank in royal golden yellow gold-thread brocade, falling STRAIGHT and CLOSE to the body to the floor (no added width), with a long train trailing on the floor BEHIND her, with very wide sleeves (…) and broad light clear warm plum borders edged with pearls`. The 5th "grand mantle" layer is gone.
+- Layers: inner pink robe, plum zhiju, swallowtail guiyi (`a DOUBLE ring of…` → `swallowtail points and many ribbon streamers`), and `the Hoàng quý phi's long open-front over-robe, at her rank in royal golden yellow gold-thread brocade, falling STRAIGHT and CLOSE to the body to the floor (no added width), with very wide sleeves (…) and broad light clear warm plum borders edged with pearls`. The 5th "grand mantle" layer is gone.
 - `mantle` → `over-robe` in the embroidery clause; colour rule `DOMINANT colour of the robe, mantle, sleeves and skirt` → `of the over-robe, sleeves and skirt` (yellow still dominant).
 - Cloud collar: `a wide jewelled gold-brocade and pearl cloud collar with layered pearl fringes` → `a FLAT, compact jewelled gold-brocade and pearl cloud collar lying close on the shoulders (never wide or standing out) with ONE single tier of pearl fringe`.
 - Kept: gấm kim tuyến, SIX collar bands, densest/largest embroidery, yellow shou + jade rings, belt, two zupei, pearl/jade strands, nine-phoenix crown, slim tall silhouette.
@@ -41,7 +41,7 @@ Edit script (for audit): every replacement is an exact one-time swap; listed bel
 | t4 | 9994 | 9958 |
 | t5 | 9868 | 9975 |
 | t6 | 9966 | 9965 |
-| t8 | 9997 | 9970 (v3) |
+| t8 | 9997 | 9898 (v4) |
 
 ## Every cut (boilerplate only, to stay ≤ 10 000; all listed as allow lines)
 From the duplicated line `Full-body standing figure head to feet, soft even light; fair porcelain skin; gentle expression … mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; 3/4 or frontal view.` (its content is repeated by the MASTER head-to-feet/skin/proportion sentences and the ANGLE line; S18 smile clause kept verbatim):
@@ -65,3 +65,6 @@ No outfit / embroidery / jewellery / hair words cut. Every removed shape phrase 
 
 ## Handover
 Done; nothing left but this report + push. No successor needed.
+
+## v4 (owner Lượt 1305, via Foreman C #5): t8 NO train
+Removed `, with a long train BEHIND her` and the v3 sentence `Exception: her own long train behind her.`. S19 "no train" is verbatim and is now the only train mention in t8, so conflict 4 is gone. 9898 chars; check_store tp8 PASS; keep_check --all PASS (14). Everything else is kept: 4 layers, straight close over-robe, flat collar with 1 pearl tier.
