@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"0ad4d4ed","t":"2026-11-20T13:06Z","c":"jagday-walk: tin báo bearer walks her own road (agWalk/knWalkTo pass the servant, j9 per walker)","b":"7b17ffc51edd","h":[{"s":"bf7cc4de+","t":"2026-11-20T11:56Z","c":"Mời khách khi chủ vắng nhà: khách chờ đúng luật"},{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"},{"s":"f6f4a69c+","t":"2026-11-20T11:10Z","c":"Sổ luân hồi thêm trang «Sơ đồ nhánh»"},{"s":"d941502e","t":"2026-11-20T11:16Z","c":"Chip điểm và đồng hồ trò chơi: chỉ còn con số, đồng hồ hổ phách khi gấp"},{"s":"c12231a1","t":"2026-11-20T11:05Z","c":"Trò chơi không chữ nhóm b: Đặt hoa có hình chỉ dẫn, bỏ chữ trên bàn chơi"},{"s":"62e3c9f1+","t":"2026-11-20T09:47Z","c":"cal-p2b-rv: tests follow the review fixes (cal-p2b C reads FAN/COOL; ag-mgcal 3 compares K2 with its own group band)"},{"s":"d5b8c01b","t":"2026-11-20T10:25Z","c":"Khung chung: sơ đồ nhánh, biển Thiên mệnh hai sắc (trang còn tắt)"},{"s":"8c8b6fd7","t":"2026-11-20T09:45Z","c":"Trò chơi không chữ: khung trò dùng chung bộ khung chuẩn"}]};
+window.CTM_BI={"s":"18f7921c","t":"2026-11-20T13:46Z","c":"jagday-walk r1: errand ledger roads — an NPC-sent errand's window holds the road there / back (jwalk walkErrRow, jptime ptLedger), due unch…","b":"3f1138d86fe1","h":[{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"},{"s":"39228682+","t":"2026-11-20T10:45Z","c":"Phi tần khác cũng rủ nàng lập phe, vào phe của nàng (luật hai chiều)"},{"s":"d39e3d2c+","t":"2026-11-20T12:07Z","c":"Nút «Mua» ở tiệm chơi một mình chạy lại; lời dẫn từng xuất thân chương 1–3"},{"s":"bf7cc4de+","t":"2026-11-20T11:56Z","c":"Mời khách khi chủ vắng nhà: khách chờ đúng luật"},{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -75667,8 +75667,9 @@ function ptLedger(){if(!S||typeof j95on!=="function"||!j95on())return false;cons
      "errand" — the stage keeps her token (hidden + the kit chip «đang đi …») so she is SEEN walking off and back (OD 18/11 ~20:05Z); she is still busy
      (j95sBusy "errand"), never followed nor sent again, and the target stays in the row. NPC senders keep the target place (their stage is not hers). */
   const mine=a.by==="me";
-  for(let i=0;i<e.length;i++){const K=b0+i;if(K>=a.t0&&K<a.due){const why=`${mine?"ngươi":a.byNm||"chủ"} sai ${a.lbl||"đi việc"}`;const x=[mine?((e[i]&&e[i][0])||J95OUT_):(a.place||e[i][0]),"errand",a.tgt||null,why];
-    if(!e[i]||e[i][0]!==x[0]||e[i][1]!=="errand"){e[i]=x;ch=true}}}}
+  for(let i=0;i<e.length;i++){const K=b0+i;if(K>=a.t0&&K<a.due){const why=`${mine?"ngươi":a.byNm||"chủ"} sai ${a.lbl||"đi việc"}`;let x=[mine?((e[i]&&e[i][0])||J95OUT_):(a.place||e[i][0]),"errand",a.tgt||null,why];
+    /* NPC senders: her road there / back inside the window (jwalk walkErrRow, review/jagday-walk; n includes the walk, OD 18/11 ~20:00Z) */if(!mine&&typeof walkErrRow==="function")x=walkErrRow(e,b0,a,i,x[0],x);
+    if(!e[i]||e[i][0]!==x[0]||e[i][1]!==x[1]||e[i][3]!==x[3]){e[i]=x;ch=true}}}}
  if(ch)try{const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){ptErr("view",e)}
  return ch}
 /* ---------- wiring: the clock ---------- */
@@ -81139,6 +81140,16 @@ KY.stat.npc=()=>({hit:Object.assign({},KY.stat.npcHit),buoi:Object.assign({},KY.
    BAL.walk.npc = 0 turns the NPC part off (tests / rollback). */
 /* the walker of a record row (her penalty never lengthens an NPC's road; theirs does — law 1) */
 function walkWho(id){try{const c=String(id)[0];if(c==="v")return (typeof RV==="function"&&RV(+String(id).slice(1)))||null;if(c==="s"&&typeof j95sv==="function")return j95sv(id)||null}catch(e){}return null}
+/* ERRAND LEDGER ROADS (review/jagday-walk r1, owner OD 18/11 ~20:00Z: an errand's n khắc INCLUDE the walk; ~20:05Z: seen walking off and back):
+   inside the away window [t0, due) of a person sent on an errand, the first travel(from, place)−1 khắc are her road there and the last
+   travel(place, from)−1 khắc her road back («go» rows with a why = busy, j95sKeep); the khắc between stay "errand" at the place. due and the
+   cost never change: when n is shorter than both roads the window is split by the roads (no khắc added). from = where she stood before t0
+   (kept on the task: a.wfr). Walker = the person sent (j9 travel per walker). BAL.walk.npc = 0 → the old rows. */
+function walkErrRow(e,b0,a,i,place,x){if(!walkNpcOn()||!a||!x||!place)return x;try{const OUT=typeof J95OUT_!=="undefined"?J95OUT_:"__out";const real=k=>!!k&&typeof k==="string"&&k!==OUT&&k!=="ngoai";
+  if(a.wfr==null){const q=a.t0-b0-1;const y=q>=0&&q<e.length?e[q]:null;a.wfr=y&&real(y[0])?y[0]:""}
+  const fr=a.wfr;if(!real(place))return x;const D=a.due-b0,y=D>=0&&D<e.length?e[D]:null;const bk=y&&real(y[0])&&y[1]!=="errand"?y[0]:fr;/* back = where her day goes on at due (this buổi), else where she came from */
+  const w=walkWho(a.who),n=Math.max(0,a.due-a.t0);let tO=0,tB=0;try{if(real(fr)&&fr!==place)tO=travel(fr,place,w);if(real(bk)&&bk!==place)tB=travel(place,bk,w)}catch(z){}if(!tO&&!tB)return x;const gO=Math.min(Math.max(0,tO-1),n),gB=Math.min(Math.max(0,tB-1),n-gO);
+  const K=b0+i,why=x[3]||"đi việc";if(K-a.t0<gO)return[place,"go",x[2],why+" · đang trên đường"];if(K>=a.due-gB)return[bk,"go",x[2],why+" · đang trên đường về"];return x}catch(z){return x}}
 function walkNpcOn(){try{return BAL.walk.npc!==0}catch(e){return false}}
 const JWALK={stat:{fix:0,late:0,miss:0,now:0},errs:[],seen:null};
 const walkSig=x=>x?x[0]+"|"+x[1]+"|"+(x[2]||""):"";
@@ -82745,7 +82756,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7b17ffc51edd";window.CTM_BUILD=BUILD;
+const BUILD="3f1138d86fe1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
