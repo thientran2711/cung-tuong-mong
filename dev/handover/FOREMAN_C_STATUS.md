@@ -696,3 +696,4 @@ NEWACCT#5 ~19:00Z: OWNER asked current Tần pic → sent rank8-s62/s62_t4_a18.w
 NEWACCT#5 ~19:05Z: OWNER Lượt 1324/1325: Hán t7/t8 thick gấm looks bulky → OK to #5 proposal: outer = sa dệt kim (zhijin sha, light gold-woven gauze), inner = thin Tống cẩm; HH denser gold than HQP → DESIGN5 v6.
 NEWACCT#5 ~19:08Z: OWNER Lượt 1327: 1322 file = current outfit; wants Hán Phi too → DESIGN5 v6 also: Hán t5 capes = colour + gold peony embroidery + pearl edge + tiny pearl drop fringe; Hán t6 vân kiên + jade/pearl drops.
 NEWACCT#5 ~19:15Z: OWNER Lượt 1329: Phi capes also get a pearl NET over them like Tần's → added to b26/swap56 s62_t5_v2; told B26FAB (CAPE5) + DESIGN5 (Hán t5).
+NEWACCT#5 ~19:20Z: OWNER Lượt 1331 asked status of flower job → B26FAB JOB 2 code + samples pushed, proof running; #5 found t4–t6 hair flower has no species (Magnific drew peony) → told B26FAB to name species at t4–t6 too.
