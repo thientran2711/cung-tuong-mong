@@ -11,7 +11,7 @@ function kitGameVs(o){o=o||{};const B=BAL.gameVs||{pop:320,warn:.2,end:900};cons
   return `<section class="kgvs-pane kgvs-${k}" data-side="${k}"><header class="kgvs-hd"><span class="kgvs-face">${face}</span><b class="kgvs-nm">${d.name||(d.p&&d.p.name)||""}</b><i class="kgvs-turn" hidden>Đến phiên</i></header>`+
    `<div class="kgvs-st"><span class="kchip kgvs-sc"><b data-vs="sc">0</b> <small>${unit}</small></span><span class="kchip kgvs-clk" data-vs="clk" hidden></span></div>`+
    (k==="me"||o.oppBoard?`<div class="kgvs-bd"></div>`:"")+`</section>`};
- const el=document.createElement("div");el.className="kgvs";el.dataset.turn="";el.innerHTML=side("opp",o.opp)+`<div class="kgvs-mid"><b data-vs="round">${o.round||""}</b><span class="kgvs-res" hidden></span></div>`+side("me",o.me);
+ const el=document.createElement("div");el.className="kgvs";el.style.setProperty("--kgvs-pop",B.pop+"ms");el.style.setProperty("--kgvs-end",B.end+"ms");el.dataset.turn="";el.innerHTML=side("opp",o.opp)+`<div class="kgvs-mid"><b data-vs="round">${o.round||""}</b><span class="kgvs-res" hidden></span></div>`+side("me",o.me);
  box.insertBefore(el,box.firstChild);
  const q=(s,k)=>el.querySelector(`.kgvs-${s} [data-vs="${k}"]`),full=o.full||{};let over=false;
  const api={el,me:el.querySelector(".kgvs-me .kgvs-bd"),opp:el.querySelector(".kgvs-opp .kgvs-bd"),
@@ -37,12 +37,12 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.8",title:"kit
 .kgvs-hd{display:flex;align-items:center;gap:8px}.kgvs-nm{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .kgvs-turn{flex:none;font-style:normal;font-size:.78rem;color:var(--gold)}
 .kgvs-st{display:flex;gap:6px;flex-wrap:wrap}.kgvs-sc b{font-size:1.15rem}.kgvs-warn{color:var(--bad,#c23b22)}
-.kgvs-pop{animation:kgvsPop 320ms ease-out}@keyframes kgvsPop{50%{transform:scale(1.18)}}
+.kgvs-pop{animation:kgvsPop var(--kgvs-pop) ease-out}@keyframes kgvsPop{50%{transform:scale(1.18)}}
 .kgvs[data-turn=me] .kgvs-me,.kgvs[data-turn=opp] .kgvs-opp{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold)}
 .kgvs-mid{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px;order:0}
 .kgvs-opp{order:-1}.kgvs-me{order:1}.kgvs-mid{order:0}
 .kgvs-bd{min-height:80px}.kgvs-win{border-color:var(--good,#2d7a52);box-shadow:0 0 0 2px var(--good,#2d7a52)}
 .kgvs[data-end=opp] .kgvs-me{border-color:var(--bad,#c23b22)}
-.kgvs-res{font-weight:700}
+.kgvs-res{font-weight:700;animation:kgvsEnd var(--kgvs-end) ease-out}@keyframes kgvsEnd{from{opacity:0;transform:translateY(4px)}}
 html.kv2 .kgvs{grid-template-columns:1fr auto 1fr}html.kv2 .kgvs-me{order:0}html.kv2 .kgvs-opp{order:2}html.kv2 .kgvs-mid{order:1;min-width:84px}
-@media (prefers-reduced-motion:reduce){.kgvs-pop{animation:none}}`;document.head.appendChild(st)})();
+@media (prefers-reduced-motion:reduce){.kgvs-pop,.kgvs-res{animation:none}}`;document.head.appendChild(st)})();
