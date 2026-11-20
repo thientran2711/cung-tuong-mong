@@ -28,7 +28,7 @@ function j59title(p){try{if(!p)return"";if(p===S)return j59srv()?SRK.maid[S.srv.
  if(k==="ty")return"Thái y";const w=typeof figWho==="function"?figWho(p):(p.ref||p);if(!w)return"";
  if((typeof rivals!=="undefined"&&rivals||[]).includes(w))return rkOfFace("consort",w)[1];
  const C=S.court||{};if(w===C.ty)return"Thái y";
- if(w.role&&SRK[w.role])return srkName(w);if(w===S.maid)return SRK.maid[srk(w)]||"Cung nữ";
+ if(w===S.maid)return kitMaidTitle(w);if(w.role&&SRK[w.role])return srkName(w);
  if(w===C.tq)return"Tổng quản thái giám";if(w===C.ksp||w===C.ped)return"Thái giám";
  if((S.men||[]).includes(w)){if(w.rw==="thái y")return"Thái y";return w.role||w.rw||""}
  return w.role&&typeof w.role==="string"&&w.role.length<28?w.role:""}catch(e){return""}}
@@ -50,11 +50,13 @@ function j59tagHTML(p,name){let t=j59title(p);const kn=j59known(p),c=j59col(p);c
 const J59U={};function j59unkSrc(g){const u=`img/kit/unknown-fig-${g}.webp`;if(J59U[g]===undefined){J59U[g]=null;const im=new Image();im.onload=()=>{J59U[g]=u;j59sched()};im.onerror=()=>{J59U[g]=false};im.src=u}return J59U[g]}
 function j59unk(b,p,im){const s0=im.getAttribute("src")||"";const m=/fig-(emperor|eunuch|official|physician|man)-|unknown-fig-m\./.test(s0)||p.kind==="emp";const u=j59unkSrc(/unknown-fig-k\./.test(s0)?"k":m?"m":"f");
  if(u){b.classList.remove("j59unk");if(im.getAttribute("src")!==u)im.src=u}else b.classList.add("j59unk")}
+/* fig-label: the kit's ONE shrink rule for a stage title line — it is one line, never wraps to a 3rd line; a long merged title ("Cung nữ thân tín tam đẳng") steps its font down until it fits the tag width (floor 9 px) */
+function kitFitTitle(L){try{L.forEach(g=>{const t=g.querySelector(".j59t");if(!t||!t.offsetParent)return;t.style.removeProperty("font-size");let fs=parseFloat(getComputedStyle(t).fontSize);const f0=fs;while(t.scrollWidth>t.clientWidth+1&&fs>9){fs-=.5;t.style.setProperty("font-size",fs+"px","important")}})}catch(e){}}
 function j59tags(st,tk){const ppl=typeof curPeople==="function"?curPeople():[];const TT=[];
  if(tk)tk.querySelectorAll(".tok").forEach(b=>{const g=b.querySelector(".tag"),p=ppl[+b.dataset.p];if(!g||!p)return;const h=j59tagHTML(p,p.name);if(g.dataset.j59!==h){g.innerHTML=h;g.dataset.j59=h}g.style.setProperty("--tc",j59col(p));g.classList.toggle("j59u",!j59known(p));g.classList.toggle("j59mine",p===S);TT.push(g);const im=b.querySelector(".figimg");if(im){if(!j59known(p))j59unk(b,p,im);else b.classList.remove("j59unk")}});
  /* lag-play: the tooltips read innerText (a layout read) AFTER all the writes: one layout instead of one per person */
  /* oi-render: and inside a render, at its end (jlag2 renderAfter: one layout for every part fit, not one more here) */
- (window.renderAfter||((k,f)=>f()))("j59tt",()=>{const L=TT.filter(g=>g.isConnected);const V=L.map(g=>g.innerText.replace(/\n/g," · "));L.forEach((g,i)=>{if(g.title!==V[i])g.title=V[i]})});
+ (window.renderAfter||((k,f)=>f()))("j59tt",()=>{const L=TT.filter(g=>g.isConnected);kitFitTitle(L);const V=L.map(g=>g.innerText.replace(/\n/g," · "));L.forEach((g,i)=>{if(g.title!==V[i])g.title=V[i]})});
  const me=document.getElementById("mefig");let mt=document.getElementById("j59metag");
  if(!me){if(mt)mt.remove();return null}
  if(!mt){mt=document.createElement("div");mt.id="j59metag";mt.className="tok j59me";mt.style.visibility="hidden";mt.innerHTML='<span class="tag"></span>';st.appendChild(mt)}
@@ -332,6 +334,7 @@ html body #stage.j59slot #tokens{display:block!important;overflow:visible!import
 html body #stage.j59slot #tokens>.tok{position:absolute!important;margin:0!important;padding:0!important;pointer-events:auto;min-width:0!important;max-width:none!important;flex:none!important;translate:none!important}
 html body #stage.j59slot #tokens>.tok.fig{display:block;line-height:0}
 html body #stage.j59slot #tokens>.tok.fig .figimg{display:block;transform:none!important}
+html body #stage .tok .tag .j59t,html body #stage #j59metag .tag .j59t{white-space:nowrap;overflow:hidden}
 html body #stage.j59slot #tokens>.tok .tag,html body #stage.j59slot #j59metag .tag{width:max-content!important;max-width:var(--j59sw,200px)!important;white-space:normal!important;overflow-wrap:break-word;line-height:1.2!important;translate:none!important}
 html body #stage.j59slot #tokens>.tok.fig .tag{top:100%!important;margin-top:3px!important}
 html body #stage.j59slot #j59metag{translate:none!important}

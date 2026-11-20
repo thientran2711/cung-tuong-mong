@@ -176,7 +176,7 @@ function kgHoaDien(box,env){const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style
   gg.font=`700 15px ${kg82Col("--display","serif")}`;gg.textAlign="center";gg.fillStyle=kg82Col("--ink","#2a1a12");kg82Lbl(gg,run?"Kéo hoa điền vào giữa trán, nghiêng cho cân":"Đang soi gương…",W/2,22,W-20)}
  /* wait for THIS face's points (like the makeup board), then the board; no points after BAL.toil.meshWait → the face-box anchor */
  function wait(now){if(stop)return;let m=null;try{m=MK_FIT.get(file)}catch(e){}if(m||now-t0>BAL.toil.meshWait){let sk=0;try{sk=toilSkill().sk}catch(e){}
-   run=hdBoard({C,G,file,box,k,sk,lvF:hdLvF(env.lv),seed:wdHash(k+":"+Date.now()),paint,onEnd:q=>{if(!stop){stop=true;env.end(Math.round(q*100)/10)}}});return}
+   run=hdBoard({C,G,file,box,k,sk,lvF:hdLvF(env.lv),seed:wdHash(k+":"+Date.now()),paint,onEnd:q=>{if(!stop){stop=true;env.hud({score:mgLive(env,Math.round(q*100)/10)});/* review/mg-score-same: one placement, its mark on the board = the mark given */env.end(Math.round(q*100)/10)}}});return}
   paint(g);raf=requestAnimationFrame(wait)}
  raf=requestAnimationFrame(wait);
  return()=>{stop=true;cancelAnimationFrame(raf);if(run)run.stop()}}
