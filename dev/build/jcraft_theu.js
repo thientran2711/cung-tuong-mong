@@ -9,7 +9,8 @@
 const CRT_PCS=[/* [petals, base bands, dark rgb, light rgb] mai (pink) · mẫu đơn (rose) · phượng (gold) */[5,3,[150,28,58],[255,214,224]],[8,4,[128,18,40],[255,206,206]],[6,5,[150,78,8],[255,234,170]]];
 function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.22:.98,500),{g,W,H}=C;const K="theu",L=n=>crLev(env,K,n);
  const NP=CRT_PCS.length,BEAT=L("beat"),WIN=L("win"),NEAR=L("near"),ALIKE=Math.round(L("alike")),SWAY=L("sway"),PEEK=L("peek"),ST=Math.max(1,Math.round(L("st"))),LIM=L("lim"),wC=L("wC"),wS=L("wS");
- const R0=Math.min(W*.34,H*.3),HX=W*.5,HY=H*.4,SY=H*.83;const pops=[];
+ /* the hoop above, the spool rows below it (two rows when crowded), never overlapping */
+ const R0=Math.min(W*.34,H*.27),HX=W*.5,HY=H*.36,SY=H*.85;const pops=[];
  let pi=-1,P=null,phase="",pts=0,done=false,t0=0,stop=null;
  const hx=now=>HX+SWAY*W*Math.sin(now/1100);
  function piece(){if(done)return;pi++;if(pi>=NP){done=true;phase="end";return crLater(()=>env.end(pts),300)}
@@ -19,7 +20,7 @@ function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.
   P={pet,n,col,sp:kg82Shuf(sp),band:0,ph:"pick",cols:[],q:[],k:0,used:-1,ok:0,start:crNow(),pk:null,dip0:0};phase="play";t0=P.start;layout()}
  /* spool places: one row (two rows when crowded) under the hoop */
  function layout(){const m=P.sp.length,rows=m>6?2:1,per=Math.ceil(m/rows),sx=W/(per+1),r=Math.min(sx*.36,24,H*.05);
-  P.sp.forEach((s,i)=>{const row=Math.floor(i/per),j=i%per,cnt=row<rows-1?per:m-per*(rows-1);s.x=W/2+(j-(cnt-1)/2)*sx;s.y=SY+(rows>1?(row-.5)*r*2.6:0);s.r=r})}
+  P.sp.forEach((s,i)=>{const row=Math.floor(i/per),j=i%per,cnt=row<rows-1?per:m-per*(rows-1);s.x=W/2+(j-(cnt-1)/2)*sx;s.y=SY+(rows>1?(row-.5)*r*2.7:0);s.r=r})}
  /* band i of the flower: scale from the rim (i = 0) to the heart */
  const sc=i=>1-i/(P.n+.6);
  function petals(x,y,R,s,fill,stroke,lw){g.save();g.translate(x,y);g.beginPath();for(let k=0;k<P.pet;k++){const a=k/P.pet*Math.PI*2-Math.PI/2;

@@ -12,6 +12,8 @@ const SRC0=k=>k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
   await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.suc=100;S.bac=999;try{render()}catch(e){}});
   await p.waitForTimeout(2500);
+  /* the welcome chest / reward stage of a new game is not part of these shots */
+  await p.evaluate(()=>{try{kitReward=()=>{};kmPush=()=>{}}catch(e){}document.querySelectorAll('#kmrew').forEach(e=>{const o=e.closest('.kmstage')||e;o.remove()});document.querySelectorAll('.kmstage,.km-stage').forEach(e=>e.remove())});
   const kinds=await p.evaluate(()=>Object.keys(KG82_CRAFT).filter(k=>crOn(k)));
   for(const k of kinds){if(kk&&!kk.split(',').includes(k))continue;
    const shot=async n=>{await p.screenshot({path:`${out}/${k}-${dn}-${n}.png`});console.log(`${out}/${k}-${dn}-${n}.png`)};

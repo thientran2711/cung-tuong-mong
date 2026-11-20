@@ -19,8 +19,8 @@ function crkPaper(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.1
  const F=Math.max(2,Math.pow(2,Math.round(Math.log2(Math.max(2,L("folds")))))),FOLDS=[2,Math.max(2,F/2),F],NR=FOLDS.length;
  const HOLES=Math.max(1,Math.round(L("holes")))+mgMore(env),SIZE=L("size"),TOL=L("place"),PEEK=L("peek"),ALIKE=Math.max(0,Math.round(L("alike"))),LIM=L("lim"),EX=L("extra");
  const side=W>=H*1.05;/* sample left / wedge right (wide); sample above / wedge below (narrow) */
- const SX=side?W*.23:W*.5,SY=side?H*.42:H*.2,RS=side?Math.min(W*.2,H*.36):Math.min(W*.3,H*.17);
- const AX=side?W*.66:W*.5,AY=side?H*.74:H*.76,R=side?Math.min(W*.3,H*.6):Math.min(W*.42,H*.42);
+ const SX=side?W*.2:W*.5,SY=side?H*.42:H*.2,RS=side?Math.min(W*.17,H*.34):Math.min(W*.3,H*.17);
+ const AX=side?W*.7:W*.5,AY=side?H*.72:H*.74,R=side?Math.min(W*.27,H*.55):Math.min(W*.42,H*.4);
  const TY=H*.92,RED="#c0282d",PAPER="#fbf1dc";const pops=[];let r=-1,P=null,phase="",pts=0,done=false,drag=null,stop=null;
  const bt=k91Btns(box,[["crkok","✓","","Mở giấy: xem hoa cắt"]]);const okb=bt.querySelector("#crkok");
  /* wedge-plane point (rr share of R, ph radians from the wedge's left fold) → board px */
