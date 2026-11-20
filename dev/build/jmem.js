@@ -331,7 +331,7 @@ if(typeof q72End==="function"){const q0=q72End;q72End=function(x,res,X){let A=nu
 /* 5. a big relation swing inside an event (no specific deed above) = a generic memory named after the event (cause: that event) */
 if(typeof chooseM==="function"){const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.t)CTX={t:plainT(m.t).replace(/[.:]\s*$/,"").slice(0,40),at:Date.now()}}catch(e){}return c0.apply(this,arguments)}}
 if(typeof relAdd==="function"){const l0=relAdd;relAdd=function(x,y,n){const r=l0.apply(this,arguments);
- try{if(!off()&&!SUP&&n&&Math.abs(n)>=B().relMin&&CTX&&Date.now()-CTX.at<6000&&(x===S||y===S)){const o=x===S?y:x;if(o&&o!==S&&o.id!=null&&o.alive){const d=n>0?"good":"bad";
+ try{if(!off()&&!SUP&&n&&Math.abs(n)>=B().relMin&&CTX&&Date.now()-CTX.at<6000&&(x===S||y===S)){const o=x===S?y:x;if(o&&o!==S&&o.id!=null&&o.alive&&!(typeof relMS==="function"&&relMS(o))){/* rel-men-servants: memories are the consorts' (men / servants keep the bars only) */const d=n>0?"good":"bad";
    const c=causeAdd(S,o,"event",{s:n>0?1:-1,y:{k:"su",x:CTX.t},n:"trong chuyện",d,x:CTX.t});memAdd(o,S,d,{g:Math.min(B().relCap,Math.abs(n)),x:CTX.t,c,life:Math.abs(n)>=B().lifeRel})}}}catch(e){}return r}}
 /* secrets she sees are already written as notes (j21 noteAdd): an affair, a pregnancy that matches no night → a strong "secret" hook */
 if(typeof noteAdd==="function"){const n0=noteAdd;noteAdd=function(id,t){const r=n0.apply(this,arguments);
