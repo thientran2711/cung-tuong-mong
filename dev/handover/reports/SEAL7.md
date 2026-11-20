@@ -99,7 +99,8 @@ the rest stays word for word (A17 diff listed when made). Gate + label as usual.
 ## HANDOVER (SEAL7 at ≈ 26 % context, roll line ≈ 29.5 %) — for the successor; the COORDINATOR (ROOT-62) opens it
 - Seal HOLD on (owner "Khoan vẽ tiếp ấn" ~01:30Z): no gens until ROOT-62 relays her word.
 - Waiting work: (1) the feeling-seal sample above (810 cr) if she says go; (2) L870 fix list (ROOT-62 msg ~01:28Z): th tình tứ 3 hands,
-  dau2 clips (A O6Et0g2ynm / B hu29sg9vqL, B not looked at yet), th chán fan cut at bottom, HĐ ghen / hổ thẹn / lo / tình tứ / vui redo as clear
-  deeds with an object (est. 20–24.5k) — only when HOLD lifts.
+  dau2 clips (A O6Et0g2ynm / B hu29sg9vqL, B not looked at yet), th chán fan cut at bottom — only when HOLD lifts.
+  OWNER CLARIFIED (~02:10Z via ROOT-62): ALL HĐ (act-*) seals of every group are OK — NEVER redo them (the HĐ ghen / hổ thẹn / lo / tình tứ / vui
+  redo is DROPPED). Work only on NON-HĐ feeling seals (tone down: face + light posture); the th tình tứ / đau lòng / chán faults go inside that redo.
 - Recipe: SEAL1 / SEAL5 handovers + this file. img/ is gitignored and empty in a fresh checkout: curl the needed webps from the CDN first.
   Captions/labels: groups/th_names.py (A27), th_sheet.py / th_preview.py draw them. Gate: seal_gate.py before every call.
