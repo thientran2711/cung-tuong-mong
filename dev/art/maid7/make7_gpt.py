@@ -166,15 +166,10 @@ NHAT_V2_COLLAR = ('a sleeveless embroidered over-vest with a straight upright st
                   'the way from the collar down to the waist, with NO knot button at the throat, NO gap, NO V-opening and NO slit '
                   'below the collar, so it fully covers the inner robe at the neck and chest (none of the inner robe shows at the '
                   'neck or chest), with a band of gold-edged trim down the front, worn over the inner robe')
+# owner L1486 (supersedes the L1474 slim-V text): closed edge to edge below the knot button.
 # owner L1474: the collar of nhất đẳng round 2 (Lw8auqkswO, test2_nhat). Its prompt words = the round-5 words, so the look is
 # written out from the picture: tall stand collar + one knot button, vest edges close together, narrow slim-V of layered inner collars.
-NHAT_R2_COLLAR = ('a sleeveless embroidered over-vest with a TALL upright stand (mandarin) collar that wraps closely around the neck '
-                  'and is fastened at the throat with ONE small knot button; below the button the two straight front edges of the '
-                  'vest run down side by side, CLOSE together, leaving only a NARROW straight opening down to the sash (never a '
-                  'wide gap, never a wide V), and inside that narrow opening the neat layered crossed collars of the inner robe '
-                  '(with a thin light inner edge) show as a slim V just under the button, the inner robe\'s crossed collar also '
-                  'rising neatly inside the stand collar at the neck, with a band of gold-edged trim down the front, worn over a '
-                  'crossed-collar inner robe')
+NHAT_R2_COLLAR = ("a sleeveless embroidered over-vest with a TALL upright stand (mandarin) collar that wraps closely around the neck and is fastened at the throat with ONE small knot button; from the button the vest's two front edges MEET EDGE TO EDGE and stay closed all the way down to the waist sash, one smooth closed front like a straight upright standing-collar robe, with NO gap, NO slit, NO V-opening and NO inner robe visible on the chest; the inner robe's collar shows ONLY as a thin line just above the stand collar at the neck, with a band of gold-edged trim down the front, worn over a crossed-collar inner robe")
 
 
 def nhat3():
@@ -196,13 +191,7 @@ def nhat3():
 
 
 # owner L1475 (round-2 collar for thân cận too) + L1476 (v2 fabric not soft like round 1)
-TC_R2_COLLAR = ('a sleeveless embroidered over-vest with a TALL upright stand (mandarin) collar that wraps closely around the neck '
-                'and is fastened at the throat with ONE small knot button; below the button the two straight front edges of the '
-                'vest run down side by side, CLOSE together, leaving only a NARROW straight opening down to the sash (never a '
-                'wide gap, never a wide V), and inside that narrow opening the neat layered crossed collars of the inner robe in '
-                'her own colour (with a thin light inner edge) show as a slim V just under the button, the inner robe\'s crossed '
-                'collar also rising neatly inside the stand collar at the neck, with a band of gold-edged trim down the front, '
-                'worn over a crossed-collar inner robe')
+TC_R2_COLLAR = ("a sleeveless embroidered over-vest with a TALL upright stand (mandarin) collar that wraps closely around the neck and is fastened at the throat with ONE small knot button; from the button the vest's two front edges MEET EDGE TO EDGE and stay closed all the way down to the waist sash, one smooth closed front like a straight upright standing-collar robe, with NO gap, NO slit, NO V-opening and NO inner robe visible on the chest; the inner robe's collar in her own colour shows ONLY as a thin line just above the stand collar at the neck, with a band of gold-edged trim down the front, worn over a crossed-collar inner robe")
 TC_SOFT_SHOULDER = (', the vest only slightly crisp and neat right AT the shoulder line (not clinging to or hugging the shoulder), '
                     'while the rest of the vest, its two front panels and the sleeves stay the same soft, thin, light, flowing silk '
                     'as the rest of the outfit, draping, swaying and trailing softly (thướt tha), never stiff, padded, flat or board-like')
