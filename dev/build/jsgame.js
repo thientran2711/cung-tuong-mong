@@ -281,8 +281,10 @@ function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render
  if(G.g==="mac"){const m=v.maid||{};rows.push(["Cung nữ",`tính ${sgTemper(m)[0]}, lòng trung với chủ ${sgLoyW(m.loyal==null?50:m.loyal)}`]);
   rows.push(["Tốn",`${J.cost} · như thẻ việc, mặc cả chỉ đổi cơ may`])}
  /* mg-easy: a one-screen how-to card the first time (S.mgSeen), then only the Gợi ý button + a quiet nudge when she stalls */
- const first=!kg82Seen(seenK);const how=first?`<h4 class="kpst">Cách chơi, lần đầu</h4>`+kitRows(G.steps.map((t,i)=>[`Bước ${i+1}`,t]))+`<div class="kpnote">Chưa rõ thì chạm «Gợi ý» (bớt một ít phần), hoặc để ma ma tự nhắc khi ngươi dừng lâu.</div>`:"";
- const intro=()=>{KG82.phase="intro";box.innerHTML=how+kitRows(rows)+`<div class="kg82act"><button class="${kg82Btn()}" id="sggo">${first?"Đã hiểu, bắt đầu":"Bắt đầu"}</button>${kitQuick({id:"sgskip",n:"Giao cho người làm",sub:`cơ may như hiện nay`})}</div>`;
+ /* KIT §13.7 (mg-ready-guide): the step rules sit in the shared rules block EVERY time (was: first time only) + «Sẵn sàng» / «Hướng dẫn» (guided round of the same engine) */
+ const hint=`<div class="kpnote">Chưa rõ thì chạm «Gợi ý» (bớt một ít phần), hoặc để ma ma tự nhắc khi ngươi dừng lâu.</div>`;
+ const intro=()=>{KG82.phase="intro";box.innerHTML=kitRows(rows)+hint+`<div class="kg82act"><button class="${kg82Btn()}" id="sggo">Bắt đầu</button>${kitQuick({id:"sgskip",n:"Giao cho người làm",sub:`cơ may như hiện nay`})}</div>`;
+  kgReady(box,{n:J.art,t:G.t,steps:(G.steps||[]).map((t,i)=>[`Bước ${i+1}`,t]),how:G.how,go:"#sggo",pic:"",v,tutor:(b,env)=>G.eng(b,Object.assign(env,{v,lv:0}))});
   $("sggo").onclick=()=>{kg82Seen(seenK,true);sgEng(G,v,(raw,o)=>finish(raw,o))};$("sgskip").onclick=()=>{kg82Close();J.run(null)}};
  const finish=(raw,o)=>{KG82.phase="result";const st=sgStep(raw);const m={step:st};const p1=sgShift(p0,st);
   const parts=[["Phần chơi",`${kg82Word(raw)} · ${raw}/10`]];

@@ -59,11 +59,14 @@ function run(kind,seq){const K=KG82_KIND[kind],ds=C().d.slice(),n=ds.length,raws
   const d=kg82Open({art:"Thử tay",title:`${K.n} · hồi ${i+1}/${n}`,how:K.how,round:"Hồi",roundV:`${i+1}/${n}`,pic:kg82Pic(kind)});if(!d)return;
   const box=kg82Box();box.innerHTML=`<h4 class="kpst">Thử tay · ${K.n}</h4>`+kg82Rows([["Môn",`${K.n} · ${K.t}`,"t"],["Hồi",`${i+1}/${n}`,"t"],["Độ khó",mgDiffTxt(t,kind),"n"]])+
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button></div>`;
+  kgReady(box,{kind});/* KIT §13.7 rules screen; mgcal numbers unchanged (rounds, gaps) */
   $("kg82go").onclick=()=>kg82Play(kind,raw=>after(raw))};
- const after=raw=>{raws.push(raw);i++;const last=i>=n;
+ let L=null;/* owner bug 20/11 (ROOT-72): the kind is saved the moment the LAST round's raw arrives, before any button — leaving after round n keeps it;
+    an unfinished kind is never saved (raws stay local until round n), so the code never carries a partial kind */
+ const after=raw=>{raws.push(raw);i++;const last=i>=n;if(last)L=recSet(kind,raws.slice(),ds);
   kg82ShowRes(kg82Rows([[`Hồi ${i}`,`${raw}/10 · ${kg82Word(raw)}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem mức tay":"Hồi kế tiếp"}</button></div>`,raw>=5);
   kg82Set("score",`${raw}/10`);$("kg82ok").onclick=()=>{if(last)done();else round()}};
- const done=()=>{const L=recSet(kind,raws,ds);const nx=seq?nextOf(kind,seq):null;
+ const done=()=>{if(!L)L=recSet(kind,raws.slice(),ds);const nx=seq?nextOf(kind,seq):null;
   kg82Open({art:"Thử tay",title:`Mức tay · ${K.n}`,how:"Mức này thành chuẩn tay nghề của mọi người trong cung khi được ghi vào sổ chung.",round:"Hồi",roundV:`${n}/${n}`,pic:kg82Pic(kind)});
   kg82ShowRes(kg82Rows(raws.map((x,j)=>[`Hồi ${j+1}`,`${x}/10 · ${kg82Word(x)}`,"t"]).concat([["Mức tay của người",kg82Word(Math.round(L.b)),"t"],["Mã",mgCalCode(),"n"]]))+
    (seq&&nx?`<div class="kg82act"><button class="${kg82Btn()}" id="mgcal-next">Môn kế tiếp<small>${nm(nx)}</small></button></div>`:"")+

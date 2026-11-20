@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7dc99127+","t":"2026-11-20T00:42Z","c":"coop-thin G #2: index.html / sw.js rebuilt by build_site.sh after the merge","b":"f3c75f986028","h":[{"s":"2f328213+","t":"2026-11-19T23:11Z","c":"coop-ptime-reds r1 (review): merge main 7bc73251 (B24 rank palette, colour only); index/sw/assets rebuilt by build_site.sh"},{"s":"66a26121+","t":"2026-11-19T22:49Z","c":"coop-ptime-reds r1 (review): her tap while her due-task tick (ptTickHer) is pending is HELD and sent after its answer (was refused busy = l…"},{"s":"2dd36abf+","t":"2026-11-19T22:36Z","c":"B24 fix: rank text on paintings / night panels uses the RCOL base (one accessor kitRankTone ground), paper keeps derived tone; rebuilt inde…"},{"s":"868c682c+","t":"2026-11-19T17:43Z","c":"runact-sv-fix: j29 hoist textually identical to review/coop-thin-f6-r1 (merges clean)"},{"s":"c8af1135+","t":"2026-11-19T14:36Z","c":"npc-purpose G1 #14: build line"},{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"}]};
+window.CTM_BI={"s":"9d68dea2+","t":"2026-11-20T03:21Z","c":"coop-thin G #2: jptime ptNpcBack drops a deed with no target (threw whereOf(null)); coop-thin-g test: the bot finishes a mini game opened o…","b":"0bcf01368336","h":[{"s":"6acc0133","t":"2026-11-20T01:44Z","c":"Mini-game: màn luật chơi trước, bấm «Sẵn sàng» mới tính giờ; thêm «Hướng dẫn» chơi thử"},{"s":"b7633b66+","t":"2026-11-19T23:50Z","c":"palace-chatter: CHAT_L topic hh-me (12 lines, Hoàng hậu to her; warm/cool/cold + season tags) — the only -me pair kind with no bank, so a H…"},{"s":"2f328213+","t":"2026-11-19T23:11Z","c":"coop-ptime-reds r1 (review): merge main 7bc73251 (B24 rank palette, colour only); index/sw/assets rebuilt by build_site.sh"},{"s":"66a26121+","t":"2026-11-19T22:49Z","c":"coop-ptime-reds r1 (review): her tap while her due-task tick (ptTickHer) is pending is HELD and sent after its answer (was refused busy = l…"},{"s":"2dd36abf+","t":"2026-11-19T22:36Z","c":"B24 fix: rank text on paintings / night panels uses the RCOL base (one accessor kitRankTone ground), paper keeps derived tone; rebuilt inde…"},{"s":"868c682c+","t":"2026-11-19T17:43Z","c":"runact-sv-fix: j29 hoist textually identical to review/coop-thin-f6-r1 (merges clean)"},{"s":"c8af1135+","t":"2026-11-19T14:36Z","c":"npc-purpose G1 #14: build line"},{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1693,7 +1693,12 @@ function openMG(k,lv,cb){const [t,h,fn]=MG[k];$("mgt").textContent=t;$("mgh").te
   $("mgb").innerHTML=`<p class="mgres">${skip?(pts?"May mắn":"Không vào"):["","Tạm được","Khá","Xuất sắc"][pts]}</p><p style="text-align:center">Tiến bộ +${g}${S.master&&pts?" (danh sư dạy, gấp đôi)":""}</p><div style="display:flex;justify-content:center"><button class="main" id="mgok">Xong</button></div>`;
   $("mgok").onclick=()=>{$("ov").hidden=true;$("mgb").innerHTML="";cb(g)};/* the used result button is removed: no stale "Xong" with an old callback stays in #ov */$("mgok").focus()};
  sk.onclick=()=>fin(kitQuickRoll()?1:0,true);
- mgStop=fn($("mgb"),lv,p=>fin(p,false))}
+ /* KIT §13.7 (mg-ready-guide, owner OD 20/11 ~00:20Z): the lesson board starts only on «Sẵn sàng» (rules read first, no clock); this j5 path is the
+    fallback (j83 routes every lesson with S.mg to playArt, which has the full rules screen + «Hướng dẫn»); its old engines have no hint hook, so no guided round here */
+ const mb=$("mgb"),run=()=>{mb.innerHTML="";mgStop=fn(mb,lv,p=>fin(p,false))};
+ if(typeof kgReady!=="function"){run();return}
+ mb.innerHTML=`<div class="kg82act"><button type="button" class="kbtn" id="mgready">Bắt đầu</button></div>`;kgReady(mb,{n:String(t).split(":")[0],t:String(t).split(":").slice(1).join(":").trim(),how:h,go:"#mgready",pic:""});
+ $("mgready").onclick=run}
 function gCam(b,lv,end){const L=["Cung","Thương","Giốc","Chủy"],N=16,fall=Math.max(1100,2200-lv*220),gap=Math.max(450,800-lv*60);
  b.innerHTML=`<div class="lanes" id="lanes">${L.map((n,i)=>`<div class="lane" data-l="${i}"></div>`).join("")}<div class="hitline" id="hitl"></div></div><div class="lbtns">${L.map((n,i)=>`<button data-l="${i}">${n}</button>`).join("")}</div><p class="mgsc" id="mgsc">Trúng 0/${N}</p>`;
  const H=$("lanes").clientHeight,HIT=Math.round(H*.83);$("hitl").style.top=HIT+"px";
@@ -6622,7 +6627,8 @@ function sbar(lbl,v,cls){v=Math.round(v||0);return `<span class="sbar ${cls||""}
 function bondBars(s){return sbar("Lòng",s.loyal,"lo")+sbar("Chủ tin",tinOf(s),"ti")}
 /* entrusting: a scheme order needs Chủ tin 40, guarding a tryst 60 (same for every mistress) */
 (function(){const b0=bestSent;bestSent=function(p){const L=(p.staff||[]).filter(s=>!s.spyFor&&tinOf(s)>=40);if(!L.length)return null;const sc=s=>s.loyal+tinOf(s)/2+nq(s,"sharp",BAL.net.k.spySharp);if(p!==S&&typeof mindPickBy==="function")return mindPickBy(L,s=>Math.pow(Math.max(BAL.mind.pick.tin.floor,sc(s)),BAL.mind.pick.tin.pow)*mindW(s,"spy"),p);/* npc-mind: an NPC mistress picks by trust, not always the best; her own pick stays the best (shown odds) */return L.slice().sort((a,b)=>sc(b)-sc(a))[0]}})();
-watcher=function(){const s=(S.staff||[]).filter(x=>x.loyal>=BAL.loy.close&&tinOf(x)>=BAL.tinLv.watch).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return{name:s.name,loyal:s.loyal,s};if(S.maid&&S.maid.loyal>=BAL.loy.close&&tinOf(S.maid)>=BAL.tinLv.watch)return{name:S.maid.name,loyal:S.maid.loyal};return null};
+/* p = the woman whose watcher this is (her by default; an NPC consort: j22 lộRisk(k,p) / manTryst, jchat eavesdrop partner) — keeps j22's watcher(p) signature (was: always S) */
+watcher=function(p){p=p||S;const s=(p.staff||[]).filter(x=>x&&x.loyal>=BAL.loy.close&&tinOf(x)>=BAL.tinLv.watch).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return{name:s.name,loyal:s.loyal,s};if(p.maid&&p.maid.loyal>=BAL.loy.close&&tinOf(p.maid)>=BAL.tinLv.watch)return{name:p.maid.name,loyal:p.maid.loyal};return null};
 /* trust moves: a task done well raises it, a servant caught lowers it; being trusted slowly warms the servant's heart */
 (function(){const m0=servMerit;servMerit=function(s,n){const r=m0.apply(this,arguments);tinAdd(s,(n||1)*1.5);return r}})();
 (function(){const c0=servCaught;servCaught=function(p,s){if(s)tinAdd(s,-12);return c0.apply(this,arguments)}})();
@@ -28491,7 +28497,7 @@ function kg82Set(k,v){if(k==="round"&&typeof v==="string"){let lab=null;const m=
 function kg82Set0(k,v){if(typeof kitGameSet==="function")kitGameSet(k,v);else document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
 function kg82Open(o){kg82Close(true);const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
  const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;return d}
-function kg82Close(silent){if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.phase="";
+function kg82Close(silent){if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";
  const d=kg82El();if(!d)return;const ov=$("ov");d.remove();[...ov.children].forEach(c=>{if(c.dataset.kg82h!=null){c.hidden=c.dataset.kg82h==="1";delete c.dataset.kg82h}});
  if(typeof mgDone==="undefined"||mgDone)ov.hidden=true}
 const kg82Box=()=>document.getElementById("kg82box");
@@ -28581,6 +28587,8 @@ function kg82Rhythm(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const L=
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();const [x]=C.at(e);tap(cl(Math.floor(x/lw),0,3))});
  const keys={d:0,f:1,j:2,k:3,"1":0,"2":1,"3":2,"4":3};const kd=e=>{if(e.key in keys){e.preventDefault();tap(keys[e.key])}};document.addEventListener("keydown",kd);
  KG82.peek=()=>{const tt=performance.now()-t0;const n=notes.find(n=>!n.st&&Math.abs(n.t-tt)<90);return n?C.client(lw*(n.l+.5),HIT):null};
+ /* hint hook (KIT §13.7 guided round): the next blossom's string at the vermilion line; soon = it lands within a reaction time */
+ KG82.hint=()=>{if(stop)return null;const tt=performance.now()-t0;const n=notes.find(n=>!n.st&&n.t-tt>-90);if(!n)return null;const c=C.client(lw*(n.l+.5),HIT);return{x:c.x,y:c.y,soon:n.t-tt<BAL.mgTier.tut.lead}};
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf);document.removeEventListener("keydown",kd)}}
 
 /* 2. GO (cờ): find the move that captures the white group in atari */
@@ -28709,6 +28717,8 @@ function kg82Aim(box,env){const C=kg82Canvas(box,.95,420),{g,W,H}=C;const pot=en
    k++;if(k>=N){stop=true;draw(performance.now());return setTimeout(()=>env.end((10*pts/N)),600)}setTimeout(()=>{lock=false;t0=performance.now()-Math.random()*1500},450)},360)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();shoot()});const kd=e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();shoot()}};document.addEventListener("keydown",kd);
  KG82.peek=()=>{if(lock||stop)return null;const x=pos(performance.now());return Math.abs(x-cx)/A<.04?C.client(W/2,H*.8):null};
+ /* hint hook (KIT §13.7 guided round): tap anywhere on the board; soon = the marker reaches the centre within a reaction time */
+ KG82.hint=()=>{if(lock||stop)return null;const now=performance.now(),w=.0021+k*.00028,th=((now-t0)*w)%Math.PI,c=C.client(W/2,H*.8);return{x:c.x,y:c.y,soon:(Math.PI-th)/w<BAL.mgTier.tut.lead||th/w<40}};
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf);document.removeEventListener("keydown",kd)}}
 const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,pattern:kg82Pattern,steps:kg82Steps,aim:kg82Aim};
 
@@ -28736,6 +28746,7 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
  const intro=()=>{KG82.phase="intro";box.classList.add("kgintro");box.innerHTML=`<h4 class="kpst">Phần của ngươi</h4>`+kg82Rows([["Màn thi",`tự chơi 0–10 phần, quy ra 0–${luck} (đối thủ thi theo tài nghệ cùng luật)`,"t"],["Độ khó",mgDiffTxt(KG82.tier,kind),"n"]].concat(tRows,prep?[["Chuẩn bị",kg82Chip("cộng",prep,"g")]]:[]))+
   (rows.length?`<h4 class="kpst">Đối thủ</h4><div class="kgrv">`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t}${r.pr?` + chuẩn bị ${r.pr}`:""} + màn thi chưa rõ (0–${luck})</small>`})))+`</div>`:"")+
   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`màn thi tính ${SK}/10 phần (+${Math.round(SK/10*luck)}), như người cùng bậc tài nghệ`})}</div>`;
+  kgReady(box,{kind});/* KIT §13.7: rules + «Sẵn sàng» / «Hướng dẫn»; the clock starts only on «Sẵn sàng» */
   $("kg82go").onclick=()=>kg82Play(kind,raw=>finish(raw,false));$("kg82skip").onclick=()=>finish(SK,true)};
  const finish=(raw,skipped)=>{KG82.phase="result";const skill=Math.round(raw/10*luck),score=talent+prep+skill;
   const all=rows.map(r=>({who:r.p||r.face,p:r.p,id:r.id,name:r.name,score:r.score,sub:`tài nghệ ${r.t}${r.pr?` + chuẩn bị ${r.pr}`:""} + màn thi ${r.lk}`}));
@@ -28777,8 +28788,92 @@ function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),K=KG82_KIN
   $("kg82ok").onclick=()=>{kg82Close();try{if(o.onDone)o.onDone(raw,{skipped,ok})}catch(e){console.error(e)}}};
  KG82.phase="intro";if(o.rows)box.classList.add("kgintro");
  box.innerHTML=(o.rows?`<h4 class="kpst">${o.rowsHead||"Phần của ngươi"}</h4>`+kg82Rows(o.rows):"")+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">${o.go||"Bắt đầu"}</button>${kitQuick(QK)}</div>`;
+ kgReady(box,{kind});/* KIT §13.7 */
  $("kg82go").onclick=()=>kg82Play(kind,raw=>done(raw,false));$("kg82skip").onclick=()=>QK.roll?done(0,true,kitQuickRoll()):done(o.quick&&o.quick.sub==null?0:5,true)}
 window.startContest=startContest;window.playArt=playArt;
+
+/* =============== KIT §13.7 RULES SCREEN «Sẵn sàng» + GUIDED TUTORIAL «Hướng dẫn» (owner OD 20/11 ~00:20Z, review/mg-ready-guide) ===============
+   Owner: "Vừa mới vào game các bạn đã bắt đầu trừ giờ của tôi là không có được ... cho tôi đọc ... khi nào tôi ready thì tôi bấm sẵn sàng rồi bắt đầu mới trừ giờ
+   ... thêm cả cho tôi có option là hướng dẫn ... một màn hướng dẫn chơi nhanh." ONE shared part for EVERY mini-game screen (j82 kinds, j91/jnwp/jnwq/jlant/jts/
+   jslap/jtd/jhd/j92 engines, the scheme games jsgame, Nghiệm thân jroute):
+   kgReady(box, spec) dresses the game's FIRST screen (the intro the caller already drew, nothing runs yet, no clock):
+     · a rules block on top: «Luật chơi · <name>», kit rows Môn / Luật (the kind's `how`) or the caller's own step rows, and a small looping picture of the move
+       (.kgr-demo, one of five motions by engine group: fall / swing / hold / drag / tap; still under Cảnh động off / reduced motion);
+     · the caller's start button (spec.go, default #kg82go; its own onclick kept) becomes «Sẵn sàng» — the clock and the board start ONLY on that tap;
+     · «Hướng dẫn» beside it = kgTut: a quick guided round of the same engine on the EASIEST board (BAL.mgTier.tut + the lowest gap of BAL.ag.mg2.cal.d),
+       a ghost hand (.kgt-hand) shows each move from the engine's own hint hook KG82.peek (point / drag path / button sel / hold-release), unscored, nothing
+       saved (S untouched, demo flags off, no khắc / bạc / stat), ends by itself after a short part of the rounds (BAL.mgTier.tut.part) or on «Về luật chơi»,
+       and puts the SAME first screen back (its buttons and handlers kept), repeatable.
+   spec: kind (KG82_KIND key) | n, t, how, e (own game), steps:[[label,text]] (rows instead of Luật), go (selector), timed (false = no clock in the game),
+         tutor(box, env) → stop (a game with its own engine), v (the person an engine reads as env.v), lv (tutorial board ease). Returns true when dressed. */
+const KG82_DEMO={rhythm:"fall",aim:"swing",slapbar:"swing",groom:"swing",tspluck:"swing",tssteer:"swing",hold:"hold",tdwalk:"hold",cook:"hold",tdtalk:"hold",
+ fling:"drag",calli:"drag",trace:"drag",arrange:"drag",untangle:"drag",tdthread:"drag",blend:"drag",sort:"drag",hoadien:"drag",kinh:"drag",may:"drag"};
+const KG82_HAND=`<svg viewBox="0 0 48 56" aria-hidden="true"><path d="M20 4a4 4 0 0 1 8 0v20l2.5-.6a4 4 0 0 1 4.6 2.8l.4-.1a4 4 0 0 1 4.8 2.6 4 4 0 0 1 4.7 3.3l1 7.5c.9 7-3.4 13.5-10.2 15.3l-3.3.9c-5.6 1.5-11.5-.7-14.8-5.5L8.4 38.6a3.8 3.8 0 0 1 5.9-4.8L20 39z" fill="#fff8ea" stroke="#5a3a0c" stroke-width="2.2" stroke-linejoin="round"/><path d="M28 24v9M35 27v7M41 31v5" stroke="#5a3a0c" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>`;
+function kgReadySpec(s){s=typeof s==="string"?{kind:s}:Object.assign({},s||{});const K=(s.kind&&KG82_KIND[s.kind])||{};
+ s.n=s.n||K.n||"";s.t=s.t||K.t||"";s.how=s.how!=null?s.how:(K.how||"");s.e=s.e||K.e||"";s.go=s.go||"#kg82go";s.timed=s.timed!==false;return s}
+function kgReadyDemo(m,pic){const st=pic?` style="background-image:url('${pic}')"`:"";let still=false;try{still=typeof reducedMotion==="function"&&!!reducedMotion()}catch(e){}
+ return `<div class="kgr-demo" data-m="${m}" aria-hidden="true"><div class="kgr-st${still?" kgr-still":""}"${st}><i class="kgr-path"></i><i class="kgr-obj"></i><i class="kgr-obj kgr-o2"></i><i class="kgr-obj kgr-o3"></i><i class="kgr-line"></i><span class="kgr-hand">${KG82_HAND}<b class="kgr-ring"></b></span></div></div>`}
+function kgReadyCan(s){return !!(s.tutor||(s.kind&&KG82_KIND[s.kind]&&typeof KG82_ENG[KG82_KIND[s.kind].e]==="function"))}
+function kgReady(box,spec){box=box||kg82Box();if(!box)return false;const s=kgReadySpec(spec);KG82.ready=s;
+ const old=box.querySelector(".kgr");if(old)old.remove();
+ const rows=[["Môn",s.t?`${s.n} · ${s.t}`:s.n,"t"]].concat(s.steps&&s.steps.length?s.steps.map(r=>[r[0],r[1],r[2]||"t"]):s.how?[["Luật",s.how,"t"]]:[]);
+ let pic="";try{pic=s.pic!=null?s.pic:(s.kind&&!["duho","den","may"].includes(s.kind)?`https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-${kg82BgName(s.kind)}.webp`:"")}catch(e){}/* the board painting under the picture of the move (no painting: plain card) */
+ const html=`<div class="kgr"><h4 class="kpst">Luật chơi · ${s.n}</h4>${kg82Rows(rows)}${kgReadyDemo(KG82_DEMO[s.e]||"tap",pic)}`+
+  `<p class="kpnote kgr-note">${s.timed?"Đọc kỹ luật, xem hình mẫu; chưa tính giờ. Chạm «Sẵn sàng» thì ván mới bắt đầu và mới tính giờ.":"Đọc kỹ luật, xem hình mẫu. Chạm «Sẵn sàng» thì ván mới bắt đầu."}</p></div>`;
+ box.insertAdjacentHTML("afterbegin",html);box.classList.add("kgintro");
+ const go=box.querySelector(s.go);
+ if(go){if(!go.dataset.kgrLabel)go.dataset.kgrLabel=go.textContent;go.innerHTML=`Sẵn sàng<small>${s.timed?"từ lúc này mới tính giờ":"bắt đầu chơi"}</small>`;go.classList.add("kgr-go");
+  go.addEventListener("click",()=>{const d=kg82El();if(d)d.classList.remove("kg-ready");KG82.ready=null},{capture:true});
+  if(kgReadyCan(s)&&!box.querySelector("#kgrtut")){go.insertAdjacentHTML("afterend",`<button type="button" class="${kg82Btn(true)} kgr-tut" id="kgrtut">Hướng dẫn<small>chơi thử một hồi dễ, không tính phần, thử lại được</small></button>`);
+   box.querySelector("#kgrtut").onclick=()=>kgTut(box,s)}}
+ const d=kg82El();if(d)d.classList.add("kg-ready");return true}
+/* the guided round */
+function kgTutPt(p,now){if(!p)return null;
+ if(p.drag&&p.drag.length){const L=p.drag;if(L.length<2)return{x:L[0][0],y:L[0][1],m:"drag"};const seg=[];let tot=0;for(let i=1;i<L.length;i++){const l=Math.hypot(L[i][0]-L[i-1][0],L[i][1]-L[i-1][1]);seg.push(l);tot+=l}
+  let k=((now%1600)/1600)*tot;for(let i=0;i<seg.length;i++){if(k<=seg[i]||i===seg.length-1){const f=seg[i]?Math.min(1,k/seg[i]):0;return{x:L[i][0]+(L[i+1][0]-L[i][0])*f,y:L[i][1]+(L[i+1][1]-L[i][1])*f,m:"drag"}}k-=seg[i]}}
+ const sel=p.sel||p.hsel;if(sel){const el=document.querySelector(sel);if(!el)return null;const r=el.getBoundingClientRect();if(!r.width)return null;return{x:r.left+r.width/2,y:r.top+r.height/2,m:p.hsel?(p.hold===false?"up":"hold"):"tap"}}
+ if(p.x!=null&&p.y!=null)return{x:p.x,y:p.y,m:p.hold===true?"hold":p.hold===false?"up":"tap"};
+ if(p.hold===false)return{m:"up"};return null}
+const KG82_TUTMSG={tap:"Chạm ngay chỗ bàn tay chỉ.",drag:"Đặt ngón tay rồi kéo theo bàn tay.",hold:"Giữ ngón tay ở chỗ bàn tay chỉ.",up:"Thả tay ra.",wait:"Xem kỹ, chờ bàn tay chỉ rồi làm theo."};
+function kgTut(box,spec){if(KG82.tut||!box)return;const s=kgReadySpec(spec);const d=kg82El();if(!d)return;
+ const T=BAL.mgTier.tut,frag=document.createDocumentFragment();while(box.firstChild)frag.appendChild(box.firstChild);
+ const keep={tier:KG82.tier,lv:KG82.lv,occ:KG82.occ,ctx:KG82.ctx,noDemo:KG82.noDemo,phase:KG82.phase,peek:KG82.peek,hint:KG82.hint,last:KG82.last,rawF:KG82.rawF,run:KG82.run,rlock:KG82.rlock};
+ let ease=5;try{const cd=((BAL.ag||{}).mg2||{}).cal;const dMin=cd&&cd.d&&cd.d.length?Math.min(...cd.d):0;if(s.kind&&KG82_KIND[s.kind])ease=mgSet(s.kind,{occ:"hoc",d:dMin}).ease}catch(e){}if(s.lv!=null)ease=s.lv;
+ KG82.noDemo=true;KG82.phase="tut";KG82.hint=null;d.classList.add("kg-tut");d.classList.remove("kg-ready");
+ const bar=document.createElement("div");bar.className="kgt-bar";bar.innerHTML=`<b>Hướng dẫn · ${s.n}</b><span class="kgt-msg">${KG82_TUTMSG.wait}</span><small>Chơi thử trên bàn dễ nhất: không tính phần, không mất gì, thử lại được.</small>`;
+ box.parentNode.insertBefore(bar,box);const msg=bar.querySelector(".kgt-msg");
+ const back=document.createElement("div");back.className="kg82act kgt-back";back.innerHTML=`<button type="button" class="${kg82Btn(true)}" id="kgtback">Về luật chơi</button>`;box.parentNode.insertBefore(back,box.nextSibling);
+ const hand=document.createElement("div");hand.className="kgt-hand";hand.setAttribute("aria-hidden","true");hand.innerHTML=KG82_HAND+`<b class="kgr-ring"></b><em></em>`;document.body.appendChild(hand);
+ let stop=null,dead=false,over=false,raf=0,last=null,lastAt=0,guard=0,steps=0;box.hidden=false;box.innerHTML="";
+ const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}
+ const cleanup=()=>{dead=true;cancelAnimationFrame(raf);clearTimeout(guard);if(stop){try{stop()}catch(e){}}stop=null;hand.remove();bar.remove();back.remove();
+  Object.assign(KG82,keep);KG82.tut=null;d.classList.remove("kg-tut")};
+ const restore=(doneOk)=>{if(KG82.tut!==TU)return;cleanup();box.innerHTML="";box.hidden=false;box.appendChild(frag);d.classList.add("kg-ready");
+  const n=box.querySelector(".kgr-note");if(n&&doneOk)n.textContent=`Đã chơi thử xong ${s.n}. Chạm «Hướng dẫn» để thử lại, hay «Sẵn sàng» khi đã quen tay.`;
+  try{const g=box.querySelector(".kgr-go");if(g)g.focus({preventScroll:true})}catch(e){}};
+ const finish=()=>{if(over)return;over=true;KG82.peek=()=>null;if(stop){try{stop()}catch(e){}stop=null}msg.textContent=`Xong hồi hướng dẫn. Trở lại luật chơi…`;hand.classList.remove("on");
+  setTimeout(()=>restore(true),T.back)};
+ const env={kind:s.kind,lv:ease,tut:1,v:s.v,zw:s.zw,
+  hud:o=>{if(!o||o.round==null)return;const m=/(\d+)\s*\/\s*(\d+)/.exec(String(o.round));if(!m)return;const a=+m[1],b=+m[2];if(b>0&&a-1>=Math.max(1,Math.ceil(b*T.part)))setTimeout(finish,500)},
+  end:()=>finish()};
+ const TU={stop:()=>cleanup()};KG82.tut=TU;KG82.run={stop:()=>cleanup()};/* ✕ / Esc while the guided round runs: kg82Close stops it and nothing is kept */
+ back.querySelector("button").onclick=()=>{over=true;restore(false)};
+ guard=setTimeout(finish,T.ms);
+ const loop=now=>{if(dead)return;let p=null,h=null;try{h=KG82.hint?KG82.hint():null;p=h?null:kgTutPt(KG82.peek&&KG82.peek(),now)}catch(e){}
+  if(h&&h.x!=null){last={x:h.x,y:h.y,m:"tap"};lastAt=now}/* timing games: the hand waits on the spot, says «chạm» a reaction time before the moment */
+  else if(p&&p.x!=null){last=p;lastAt=now}else if(p&&p.m==="up"&&last){last=Object.assign({},last,{m:"up"});lastAt=now}
+  const live=!!last&&(h&&h.x!=null?!!h.soon:now-lastAt<650);if(last&&now-lastAt<2400){hand.style.transform=`translate(${Math.round(last.x)}px,${Math.round(last.y)}px)`;hand.classList.add("on");hand.classList.toggle("dim",!live);hand.dataset.m=last.m;
+   hand.querySelector("em").textContent=live?{tap:"chạm",drag:"kéo",hold:"giữ",up:"thả"}[last.m]||"":""}else hand.classList.remove("on");
+  if(!over){const t=live?KG82_TUTMSG[last.m]||KG82_TUTMSG.tap:KG82_TUTMSG.wait;if(msg.textContent!==t)msg.textContent=t;if(live&&last.m!==hand.dataset.pm){hand.dataset.pm=last.m;steps++}}
+  raf=requestAnimationFrame(loop)};
+ const go=()=>{if(dead)return;try{stop=s.tutor?s.tutor(box,env):KG82_ENG[KG82_KIND[s.kind].e](box,env)}catch(e){console.error(e);finish();return}KG82.run={stop:()=>cleanup()};raf=requestAnimationFrame(loop)};
+ if(s.kind&&KG82_KIND[s.kind])kg82Preload(s.kind).then(go);else go();
+ KG82.tutSteps=()=>steps}
+window.kgReady=kgReady;window.kgTut=kgTut;window.KG82_DEMO=KG82_DEMO;
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgReady · màn Luật chơi (Sẵn sàng / Hướng dẫn) trước MỌI trò tài nghệ",where:"mọi trò tài nghệ, mọi chỗ mở (thi, học, Thử tay, khảo hạch, tuyển chọn, Tát, Tu đức, Hoàng thượng triệu, Chải chuốt, mưu kế, Nghiệm thân); chưa chạm «Sẵn sàng» thì chưa tính giờ",
+ html:()=>{try{return ["dan","ban","co"].map(k=>{const b=document.createElement("div");b.className="kgbox";b.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${typeof kitQuick==="function"?kitQuick({n:"Để trời định",sub:"tính 5/10"}):""}</div>`;
+  kgReady(b,{kind:k});b.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));return `<div class="mg kpanel kgame kg82" style="position:relative;max-width:560px;margin:0 auto 12px"><div class="kgame"><div class="kgbody"><div class="kginfo">${b.outerHTML}</div></div></div></div>`}).join("")}catch(e){return ""}}})}catch(e){}
+/* person mini-games (Foreman E person-minigame-acts E22) and any new caller: draw the intro, then kgReady(kg82Box(), {kind}) — never a private rules screen */
 
 /* layout only (colours and chrome come from the kit) */
 (function(){const st=document.createElement("style");st.id="kg82-css";st.textContent=`
@@ -28788,6 +28883,54 @@ window.startContest=startContest;window.playArt=playArt;
 .kg82act button small{display:block;font-weight:400;font-family:var(--body);font-size:.72rem;opacity:.9}
 .kg82opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}.kg82opts button{min-height:48px;text-align:center;justify-content:center}
 .kg82quiz .kb{font-size:1rem}.kg82quiz .kpnote{min-height:1.3em;margin-top:8px}.kg82 .kfact small{display:block}.kg82 .kgrow>b{flex:none;white-space:nowrap;padding-left:6px}
+/* KIT §13.7 rules screen + guided round (mg-ready-guide); colours from the kit tokens only */
+.kg82.kg-ready .kghow,.kg82.kg-tut .kghow{display:none}
+.kgr{margin:0 0 6px}.kgr .kpst{margin-top:0}.kgr-note{margin:8px 0 2px}
+.kgr-demo{margin:8px auto 2px;max-width:340px}
+.kgr-st{position:relative;height:118px;border:1px solid var(--k-hair);border-radius:var(--k-rad,8px);overflow:hidden;background:var(--k-card) center/cover no-repeat}
+.kgr-st::before{content:"";position:absolute;inset:0;background:rgba(255,250,238,.55)}
+.kgr-st>i,.kgr-st>span{position:absolute;display:block}
+.kgr-obj{width:22px;height:22px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);left:30%;top:40%;opacity:0}
+.kgr-line{left:8%;right:8%;top:74%;height:4px;border-radius:2px;background:var(--bad,#c23b22);opacity:0}
+.kgr-path{left:14%;right:14%;top:52%;height:0;border-top:3px dashed var(--line);opacity:0}
+.kgr-hand{width:38px;height:44px;left:50%;top:50%;transform:translate(-48%,-6%);filter:drop-shadow(0 2px 3px rgba(60,30,10,.35))}
+.kgr-hand svg,.kgt-hand svg{width:100%;height:100%;display:block}
+.kgr-ring{position:absolute;left:28%;top:-14%;width:20px;height:20px;margin:-2px 0 0 -2px;border:3px solid var(--good,#2d7a52);border-radius:50%;opacity:0}
+.kgr-demo[data-m=fall] .kgr-line{opacity:1}.kgr-demo[data-m=fall] .kgr-obj{left:calc(50% - 11px);animation:kgrFall 2.4s linear infinite}
+.kgr-demo[data-m=fall] .kgr-hand{top:74%;animation:kgrTapAt 2.4s ease-in-out infinite}.kgr-demo[data-m=fall] .kgr-ring{animation:kgrRing 2.4s ease-out infinite}
+.kgr-demo[data-m=swing] .kgr-path{opacity:1;top:28%}.kgr-demo[data-m=swing] .kgr-line{top:calc(28% - 6px);left:calc(50% - 16px);right:auto;width:32px;height:14px;background:var(--good,#2d7a52);opacity:.85}
+.kgr-demo[data-m=swing] .kgr-obj{top:calc(28% - 11px);border-radius:3px;width:14px;background:var(--bad,#c23b22);box-shadow:none;opacity:1;animation:kgrSwing 2.4s ease-in-out infinite}
+.kgr-demo[data-m=swing] .kgr-hand{top:52%;animation:kgrTapAt 2.4s ease-in-out infinite}.kgr-demo[data-m=swing] .kgr-ring{animation:kgrRing 2.4s ease-out infinite}
+.kgr-demo[data-m=hold] .kgr-path{opacity:1;top:auto;bottom:14%;border-top:8px solid var(--k-hair);left:20%;right:20%}
+.kgr-demo[data-m=hold] .kgr-line{opacity:1;top:auto;bottom:14%;left:20%;right:auto;height:8px;background:var(--good,#2d7a52);animation:kgrFill 2.4s linear infinite}
+.kgr-demo[data-m=hold] .kgr-hand{top:28%;animation:kgrHold 2.4s ease-in-out infinite}.kgr-demo[data-m=hold] .kgr-ring{animation:kgrHoldR 2.4s ease-out infinite}
+.kgr-demo[data-m=drag] .kgr-path{opacity:1;transform:rotate(-8deg);transform-origin:left center}.kgr-demo[data-m=drag] .kgr-hand{animation:kgrDrag 2.4s ease-in-out infinite}
+.kgr-demo[data-m=drag] .kgr-line{top:calc(52% - 1px);left:14%;right:auto;width:0;background:var(--ink);height:4px;transform:rotate(-8deg);transform-origin:left;opacity:1;animation:kgrInk 2.4s ease-in-out infinite}
+.kgr-demo[data-m=tap] .kgr-obj{opacity:.25;top:calc(50% - 11px);left:calc(25% - 11px);animation:kgrGlow 2.4s step-end infinite}
+.kgr-demo[data-m=tap] .kgr-o2{left:calc(50% - 11px);animation-delay:.8s}.kgr-demo[data-m=tap] .kgr-o3{left:calc(75% - 11px);animation-delay:1.6s}
+.kgr-demo[data-m=tap] .kgr-hand{animation:kgrTap3 2.4s ease-in-out infinite}
+@keyframes kgrFall{0%{top:-12%;opacity:1}62%{top:calc(74% - 11px);opacity:1}70%{top:calc(74% - 11px);opacity:0}100%{opacity:0}}
+@keyframes kgrTapAt{0%,52%{transform:translate(-48%,10%)}62%{transform:translate(-48%,-6%) scale(.92)}74%,100%{transform:translate(-48%,10%)}}
+@keyframes kgrRing{0%,60%{opacity:0;transform:scale(.6)}64%{opacity:1}80%,100%{opacity:0;transform:scale(1.8)}}
+@keyframes kgrSwing{0%{left:14%}50%{left:calc(86% - 14px)}100%{left:14%}}
+@keyframes kgrFill{0%,18%{width:0}70%{width:60%}100%{width:60%}}
+@keyframes kgrHold{0%,12%{transform:translate(-48%,8%)}20%,72%{transform:translate(-48%,-6%) scale(.92)}82%,100%{transform:translate(-48%,8%)}}
+@keyframes kgrHoldR{0%,18%{opacity:0;transform:scale(.6)}24%,70%{opacity:1;transform:scale(1.3)}80%,100%{opacity:0;transform:scale(1.8)}}
+@keyframes kgrDrag{0%,8%{left:14%;top:52%}70%{left:84%;top:30%}80%,100%{left:84%;top:30%;opacity:1}}
+@keyframes kgrInk{0%,8%{width:0}70%,100%{width:72%}}
+@keyframes kgrGlow{0%{opacity:1}33%{opacity:.25}}
+@keyframes kgrTap3{0%{left:25%}30%{left:25%}36%{left:50%}63%{left:50%}69%{left:75%}96%{left:75%}100%{left:25%}}
+.kgr-st.kgr-still *{animation:none!important}
+@media (prefers-reduced-motion:reduce){.kgr-st *{animation:none!important}}
+.kgt-bar{display:flex;flex-direction:column;gap:2px;margin:0 0 8px;padding:6px 10px;border:1px solid var(--k-hair);border-left:4px solid var(--good,#2d7a52);border-radius:var(--k-rad,8px);background:var(--k-card)}
+.kgt-bar b{font-family:var(--display);color:var(--ink)}.kgt-msg{font-weight:600;color:var(--ink)}.kgt-bar small{color:var(--dim);font-size:.74rem}
+.kgt-hand{position:fixed;left:0;top:0;width:44px;height:50px;margin:-3px 0 0 -21px;z-index:2147480000;pointer-events:none;opacity:0;transition:opacity .2s;filter:drop-shadow(0 2px 4px rgba(60,30,10,.45))}
+.kgt-hand.on{opacity:1}.kgt-hand.on.dim{opacity:.45}
+.kgt-hand .kgr-ring{left:44%;top:0;margin:-11px 0 0 -11px;width:22px;height:22px;opacity:0}
+.kgt-hand.on:not(.dim) .kgr-ring{animation:kgrRing2 .9s ease-out infinite}
+.kgt-hand em{position:absolute;left:36px;top:-6px;font:700 .78rem var(--body);font-style:normal;color:var(--ink);background:var(--k-card);border:1px solid var(--k-hair);border-radius:6px;padding:0 5px;white-space:nowrap}
+.kgt-hand em:empty{display:none}
+@keyframes kgrRing2{0%{opacity:1;transform:scale(.6)}100%{opacity:0;transform:scale(1.9)}}
 `;document.head.appendChild(st)})();
 
 /* lesson games (Tài nghệ tab, openMG) for the j85 arts: Thêu = the stitch-pattern game, Nấu nướng = the cooking game (j91 cook, no word games); same engines, 1–3 lesson points */
@@ -30312,8 +30455,10 @@ function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);
   kg82ShowRes(kg82Rows([skipped?["Để trời định",qok?"thành: tiến bộ một phần":"hỏng: không tiến bộ","t"]:["Màn chơi",`${raw}/10 · ${kg82Word(raw)}`,"t"],["Mục đích",TD_GOAL[k],"n"],["Tiến bộ",kg82Chip(`${V.n} tiến bộ`,gain,"g")]].concat(k==="cong"?[["Đồ thủ công",`phẩm +${q} (luyện tay ${raw>=5?"khéo":"còn vụng"})`,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,raw>=5);/* merge-train-4: result sound like j82 lessons (raw>=5 = win) */
   kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped,gain};
   $("kg82ok").onclick=()=>{kg82Close();TDS.busy=false;tdFinish(k,mode,raw,skipped)}};
- KG82.phase="intro";const first=!tdSeen(k),HOWL=["Chơi dễ: ở bậc thấp có Gợi ý và chỉ dẫn hiện sẵn; bậc càng cao càng rộng tay."];
- box.innerHTML=`<h4 class="kpst">Cách chơi${first?" · lần đầu":""}</h4>`+kg82Rows(first?TD_RULES[k].map(([n,t])=>[`Bước ${n}`,t,"t"]).concat([["Ví dụ",TD_EX[k],"n"]]):[["Luật",K.how,"t"]])+kg82Rows([["Gợi ý",HOWL[0],"n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${kitQuick({n:"Để trời định",win:"tiến bộ một phần",lose:"không tiến bộ"})}<button class="${kg82Btn(true)}" id="tdcancel">Thôi, để lúc khác<small>không tốn gì</small></button></div>`;
+ KG82.phase="intro";const HOWL=["Chơi dễ: ở bậc thấp có Gợi ý và chỉ dẫn hiện sẵn; bậc càng cao càng rộng tay."];
+ /* KIT §13.7 (mg-ready-guide): the step rules + example now sit in the shared rules block EVERY time (was: first time only), «Sẵn sàng» / «Hướng dẫn» */
+ box.innerHTML=kg82Rows([["Gợi ý",HOWL[0],"n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${kitQuick({n:"Để trời định",win:"tiến bộ một phần",lose:"không tiến bộ"})}<button class="${kg82Btn(true)}" id="tdcancel">Thôi, để lúc khác<small>không tốn gì</small></button></div>`;
+ kgReady(box,{kind,steps:TD_RULES[k].map(([n,t])=>[`Bước ${n}`,t,"t"]).concat([["Ví dụ",TD_EX[k],"n"]])});
  $("kg82go").onclick=()=>{tdSeen(k,1);kg82Play(kind,raw=>result(raw,false))};$("kg82skip").onclick=()=>{const ok=kitQuickRoll();result(ok?BAL.skip.raw:0,true,ok)};$("tdcancel").onclick=cancel}
 function tdFinish(k,mode,raw,skipped){if(!S||S.dead)return;vNorm(S);const l=S.vir[k],cost=virCost(l),V=VIR.find(x=>x.k===k);if(!V||l>=5)return;
  if(mode==="self"){if(!can(BAL.td.k)||S.suc<BAL.td.selfMin)return}else if(!can(BAL.td.k)||S.bac<cost)return;
@@ -31230,6 +31375,10 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
  kG:{td_cong:1.3,td_ngon:2,ban:.8,dan:2.8,den:.8,hat:.85,duho:1.5,hoa:2.3,huong:3.65,kim:1.8,kinh:.9,may:.82,ve:.9,mua:1.25,theu:5.5,co:3},/* review/mg-balance-2-r1 re-trim on pooled raws (co n=120, td_ngon n=60 float): co 4→3, td_ngon 1.6→2; review/mg-snap re-trim after the trace fix (her line scored, BAL.mgTier.trace.acc 1) and the wider Hoa đăng channel: td_cong 1.6→1.3, ve 1.7→.9, kinh 1.5→.9, may 1.5→.82, den 1.05→.8 */
  trace:{acc:1},/* review/mg-snap: weight of her line lying on the guide in the ONE trace score mgTraceScore (was a typed .5) */
  pace:{fast:[.2,.4],keep:[.5,.8]},word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,npc:[4,.4],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15],cong:[3,2]}}});
+/* mg-ready-guide (owner OD 20/11 ~00:20Z «Sẵn sàng» + «Hướng dẫn», KIT §13.7): the guided tutorial round, played on the EASIEST board = the lowest gap of the
+   calibration ladder BAL.ag.mg2.cal.d (read at play time, no second number here); part = it ends once this share of the engine's rounds is done
+   (round a/b: a−1 ≥ max(1, ceil(b·part))) or when the engine ends; ms = the longest it may run; back = the pause on «Xong» before the rules screen returns. */
+BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timing game's right moment that the hand says «chạm» (KG82.hint: rhythm, aim), a reaction time */
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
    condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
@@ -32589,6 +32738,13 @@ BAL.ag.min={on:1,gT:[["Tham vọng","quyen"],["Vì gia tộc","nha"],["Vì mình
 /* TRIỀU ĐÌNH gift deed (j55 tdGift, her and every NPC consort, house heads and the censor alike): giftAf = regard a received gift adds;
    backs = regard from which an official stands behind / spares that consort (tdBacks). Were typed in j55 (+20, 40) — ONE CORE (review minister-agents r1). */
 BAL.tdCourt={giftAf:20,backs:40};
+/* PALACE CHATTER (PL#6 bubble talk, jchat.js; owner OD:L1627 (5) "every 1–2 min NPCs chat"): gap = seconds between two chatter ticks (real time),
+   retry = seconds to look again when the stage is busy (dialog / hidden page), maxBub = bubbles on one stage at once, turnGap = ms between two lines of
+   one exchange, say = how long a line stays (ms: base + ch per letter, clamped min..max), noRepeat = exchanges / greetings said before one may come back,
+   mem = remembered keys (ring), greet = arrival greeting (delay ms, wait ms per retry while a dialog is open, tries), w = pick weights (hap = chance a
+   happening pair talks first, 1 = always while the deed is on (owner OD:L1627 (5)), idle topics only after its pool is spent; srv / friend / rival / base pair weights; solo = one person speaking to her). on:0 turns the whole feature off. */
+BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400,ch:55,min:2600,max:6000},noRepeat:60,mem:400,
+ greet:{delay:900,wait:1500,tries:20},w:{hap:1,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
 /* ================= jbalge: ONE CORE (OD:L1267) rulebook of the GRAND ENDINGS (Đại kết cục, jge.js; design dev/design/GRAND_ENDINGS.md §2.14, r3) =================
    Every number the grand-ending engine uses or a text prints lives here; jge.js / jgedata.js hold words, option names and logic only.
    Loads after jbal2.js (BAL exists), before jgedata.js / jge.js. Set by measurement: dev/measure/ge-measure.js (bands BAL.ge.target).
@@ -33803,6 +33959,7 @@ function wdGroomUI(){if(!S||S.dead||!can(1))return;const w=wdGroomW(S);const m=w
  const d=kg82Open({art:"Chải chuốt",title:"Điểm trang trước gương",how});if(!d){wdAutoUI();return}const box=kg82Box();
  const done=zone=>wdGroomEnd(zone);
  KG82.phase="intro";box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg92go">Bắt đầu</button>${kitQuick({id:"kg92skip",n:"Bỏ qua",sub:`tính như Tự chọn đồ`})}</div>`;
+ kgReady(box,{kind:"chai",how,go:"#kg92go",tutor:(b,env)=>kg92Groom(b,Object.assign(env,{zw:w}))});/* KIT §13.7: rules + «Sẵn sàng» / «Hướng dẫn» (the guided round never dresses her) */
  $("kg92go").onclick=()=>{box.innerHTML="";box.hidden=false;KG82.phase="play";let fin=false;const env={kind:"chai",zw:w,hud:o=>{for(const k in o)kg82Set(k,o[k])},end:raw=>{if(fin)return;fin=true;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.phase="result";kg82Set("score","3/3");kg82Set("round","–");kg82Set("time","đã xong");done(KG92.last?KG92.last.zone:"ok")}};
   let stop=null;try{stop=kg92Groom(box,env)}catch(e){console.error(e);env.end(5);return}KG82.run={stop:()=>{if(stop)stop()}}};
  $("kg92skip").onclick=()=>{kg82Close();wdAutoUI()}}
@@ -41834,17 +41991,21 @@ function rtNgSleight(kind,n,cb){const o=rtMgO(n);if(!rtMgOn()){cb(roll(o));retur
  const done=ok=>{const res=typeof kitGameResult==="function"?kitGameResult({parts:[["Ra tay",ok?"không ai thấy":"bị nhìn thấy"],["Người canh",`${n} người`]],note:ok?"Bát nước đã như ý ngươi.":"Có người đã thấy tay ngươi động vào bát."}):"";
   kg82ShowRes(res+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,!!ok);$("kg82ok").onclick=()=>{kg82Close();cb(ok)}};/* merge-train-4: result sound (result-sfx) */
  $("kg82skip").onclick=()=>{rtStat("mg_skip");done(roll(o))};
- $("kg82go").onclick=()=>{box.innerHTML="";const C=kg82Canvas(box,.75,440);const {g,W,H}=C;const red=typeof kmReduced==="function"&&kmReduced();
+ /* KIT §13.7 (mg-ready-guide): one play function for the real round and the guided round (env.tut: no HUD, no clock, env.end instead of the result) */
+ const play=(box,fin,env)=>{const tut=!!(env&&env.tut);const set=(k,v)=>{if(!tut)kg82Set(k,v)};const C=kg82Canvas(box,.75,440);const {g,W,H}=C;const red=typeof kmReduced==="function"&&kmReduced();
   const sp=(.75+n*.18-S.tamco/220)*(1+rtDf().h-1),wd=(.2+n*.02-eyes(S)*.012);
   const cones=Array.from({length:n},(_,i)=>({x:W*(i+1)/(n+1),y:H*.2,ph:Math.random()*6,sp:sp*(.8+Math.random()*.4),w:Math.max(.12,wd),a:0,on:false}));
-  let hoi=1,win=0,t0=performance.now(),raf=0,lock=0;const BX=W/2,BY=H*.72;
+  let hoi=1,win=0,t0=performance.now(),raf=0,lock=0,dead=0;const BX=W/2,BY=H*.72;
   const upd=t=>{for(const c of cones){const tt=red?Math.floor(t*2)/2:t;c.a=Math.sin(tt*c.sp+c.ph)*.9;const ang=Math.atan2(-(BX-c.x),BY-c.y);c.on=Math.abs(c.a-ang)<c.w}};
-  const frame=now=>{const t=(now-t0)/1000;upd(t);rtMgDraw(g,W,H,t,cones);kg82Set("time",`${Math.max(0,Math.ceil(6-t))} giây`);if(t>=6&&!lock){step(false);return}raf=requestAnimationFrame(frame)};
-  const step=ok=>{lock=1;cancelAnimationFrame(raf);if(ok)win++;rtMgDraw(g,W,H,0,cones,0,ok?"rgba(60,140,80,.18)":"rgba(170,40,30,.22)");kg82Set("score",`${Math.min(win,2)}/2`);
-   if(win>=2||hoi-win>=2||hoi>=3){setTimeout(()=>done(win>=2),500);return}hoi++;kg82Set("round",`${hoi}/3`);setTimeout(()=>{lock=0;t0=performance.now();raf=requestAnimationFrame(frame)},600)};
+  const frame=now=>{if(dead)return;const t=(now-t0)/1000;upd(t);rtMgDraw(g,W,H,t,cones);set("time",`${Math.max(0,Math.ceil(6-t))} giây`);if(t>=6&&!lock){step(false);return}raf=requestAnimationFrame(frame)};
+  const step=ok=>{lock=1;cancelAnimationFrame(raf);if(ok)win++;rtMgDraw(g,W,H,0,cones,0,ok?"rgba(60,140,80,.18)":"rgba(170,40,30,.22)");set("score",`${Math.min(win,2)}/2`);
+   if(win>=2||hoi-win>=2||hoi>=3){setTimeout(()=>{if(!dead)fin(win>=2)},500);return}hoi++;set("round",`${hoi}/3`);setTimeout(()=>{lock=0;t0=performance.now();raf=requestAnimationFrame(frame)},600)};
   const act=document.createElement("div");act.className="kg82act";act.innerHTML=`<button class="${kg82Btn()}" id="kg82tap">Ra tay</button>`;box.appendChild(act);
-  $("kg82tap").onclick=()=>{if(lock)return;upd((performance.now()-t0)/1000);step(!cones.some(c=>c.on))};
-  KG82.run={stop:()=>cancelAnimationFrame(raf)};raf=requestAnimationFrame(frame)}}
+  act.querySelector("#kg82tap").onclick=()=>{if(lock)return;upd((performance.now()-t0)/1000);step(!cones.some(c=>c.on))};
+  KG82.peek=()=>lock?null:(upd((performance.now()-t0)/1000),cones.some(c=>c.on)?null:{sel:"#kg82tap"});/* the hint hook (guided round): «Ra tay» while no gaze touches the bowl */
+  raf=requestAnimationFrame(frame);return()=>{dead=1;cancelAnimationFrame(raf);KG82.peek=()=>null}};
+ kgReady(box,{n:"Nghiệm thân",t:`Lén ${what}`,how:`Ánh mắt của ${n} người quét qua lại trong điện. Chạm «Ra tay» lúc không ánh mắt nào chạm vào bát. Ba hồi, cần thành hai.`,e:"swing",pic:"",tutor:(b,env)=>play(b,()=>env.end(),env)});
+ $("kg82go").onclick=()=>{box.innerHTML="";const st=play(box,done);KG82.run={stop:st}}}
 function rtNgScene(shown,kn,cb){if(!rtMgOn()){cb();return}
  const d=kg82Open({art:"Nghiệm thân",title:"Giọt máu trong bát nước",how:`Một giọt máu của Hoàng thượng, một giọt máu của ${kn}.`});if(!d){cb();return}
  kg82Set("score","–");kg82Set("round","–");kg82Set("time","–");const box=kg82Box();const C=kg82Canvas(box,.75,440);const {g,W,H}=C;const red=typeof kmReduced==="function"&&kmReduced();
@@ -48079,6 +48240,7 @@ function exRun(P,e,done){e.pend={raws:[],sk:[]};const raws=e.pend.raws,sks=e.pen
   const box=kg82Box();const SK=exSkipRaw(P,k);
   box.innerHTML=`<h4 class="kpst">Khảo hạch ${P.srv?"lên":"tấn phong"} ${P.rk}</h4>`+kg82Rows([["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",mgDiffTxt(KG82.tier,k),"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]])+
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`môn này tính ${SK}/10, như người cùng bậc`})}</div>`;
+  kgReady(box,{kind:k});/* KIT §13.7 */
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
  const after=(raw,sk)=>{raws.push(raw);sks.push(!!sk);i++;const last=i>=n;try{save()}catch(x){}
   kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`,raw>=5);
@@ -52200,6 +52362,10 @@ function hdBoard(o){const B=BAL.hd,{C,G}=o,{g,W,H}=C;let stop=false,raf=0;const 
  raf=requestAnimationFrame(frame);
  /* test oracle (like KG82.peek): where the anchor and the sticker are, in client px */
  HD.peek=()=>A?{anchor:C.client(A.x,A.y),at:C.client(pos[0],pos[1]),ang,ideal:A.ang,ed:A.ed*(C.cv.getBoundingClientRect().width/W),mesh:A.mesh}:null;
+ /* hint hook (KIT §13.7 guided round, mg-ready-guide): drag the sticker onto the forehead, then tilt, then «Dán» */
+ KG82.peek=()=>{if(stop||!A||drag)return null;if(!o.box.querySelector("#hdok"))return null;const d=Math.hypot(pos[0]-A.x,pos[1]-A.y);
+  if(d>A.ed*.12){const a=C.client(pos[0],pos[1]),b=C.client(A.x,A.y);return{drag:[[a.x,a.y],[b.x,b.y]]}}
+  const a=((ang-A.ang)%360+540)%360-180;if(Math.abs(a)>B.rot/2)return{sel:a>0?"#hdl":"#hdr"};return{sel:"#hdok"}};
  return{stop:()=>{stop=true;cancelAnimationFrame(raf)},result}}
 const HD={peek:()=>null};window.HD=HD;
 
@@ -55552,6 +55718,7 @@ function tsGame(o){const odds=oddsCl(Math.round(o.odds||50));const skipRes=()=>t
   kg82ShowRes(tsRows(rows)+`<div class="kg82act"><button class="kbtn" id="kg82ok">Đã hiểu</button></div>`,r.skipped?!!r.ok:r.raw>=5);kg82Set("score",`${r.raw}/10`);kg82Set("time","đã hết");
   $("kg82ok").onclick=()=>{kg82Close();try{o.onDone(r)}catch(e){console.error(e)}}};
  KG82.phase="intro";box.innerHTML=(o.intro?tsRows(o.intro):"")+`<div class="kg82act"><button class="kbtn" id="kg82go">Bắt đầu</button>${kitQuick({id:"kg82skip",n:"Bỏ qua",sub:`tính theo cơ may thường: ${word(odds)}`})}</div>`;
+ kgReady(box,{kind:o.kind});/* KIT §13.7 */
  $("kg82go").onclick=()=>kg82Play(o.kind,raw=>fin({raw,skipped:false,guard:o.risk?(KG82.tsGuard?1:0):null}));$("kg82skip").onclick=()=>fin(skipRes())}
 window.tsGame=tsGame;
 
@@ -56150,6 +56317,7 @@ function slapGame(o){const kind=o.dodge?"ne":"tat",skipRes={raw:0,skipped:true};
  kg82Preload(kind).then(()=>{try{if(typeof kitPhNote==="function")[kg82BgName(kind)].concat(KG82_SPR[kind]).forEach(n=>{if(!kg82Ok(n))kitPhNote("mg",n,"light",K.t)})}catch(e){}});
  const diff=typeof mgDiffTxt==="function"?mgDiffTxt(t):`${t.word} · ${t.occName}`;
  KG82.phase="intro";box.innerHTML=tsRows([["Độ khó",diff,""]].concat(o.rows))+`<div class="kg82act"><button class="kbtn" id="kg82go">${o.go}</button>${kitQuick({id:"kg82skip",n:`${o.skip}`,sub:`${o.skipSub}`})}</div>`;
+ kgReady(box,{kind});/* KIT §13.7 */
  /* r3 (reviewer, owner OD:L1261 "every scene ends with ONE button"; same as every j82 game, playArt "Đã hiểu"): the game no longer closes by itself —
     the result row stays with ONE button; only it closes the game and the act's own card follows */
  $("kg82go").onclick=()=>kg82Play(kind,raw=>{KG82.phase="result";const R3=BAL.slap.raw,s=slapTierOf(raw);
@@ -58470,8 +58638,10 @@ function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render
  if(G.g==="mac"){const m=v.maid||{};rows.push(["Cung nữ",`tính ${sgTemper(m)[0]}, lòng trung với chủ ${sgLoyW(m.loyal==null?50:m.loyal)}`]);
   rows.push(["Tốn",`${J.cost} · như thẻ việc, mặc cả chỉ đổi cơ may`])}
  /* mg-easy: a one-screen how-to card the first time (S.mgSeen), then only the Gợi ý button + a quiet nudge when she stalls */
- const first=!kg82Seen(seenK);const how=first?`<h4 class="kpst">Cách chơi, lần đầu</h4>`+kitRows(G.steps.map((t,i)=>[`Bước ${i+1}`,t]))+`<div class="kpnote">Chưa rõ thì chạm «Gợi ý» (bớt một ít phần), hoặc để ma ma tự nhắc khi ngươi dừng lâu.</div>`:"";
- const intro=()=>{KG82.phase="intro";box.innerHTML=how+kitRows(rows)+`<div class="kg82act"><button class="${kg82Btn()}" id="sggo">${first?"Đã hiểu, bắt đầu":"Bắt đầu"}</button>${kitQuick({id:"sgskip",n:"Giao cho người làm",sub:`cơ may như hiện nay`})}</div>`;
+ /* KIT §13.7 (mg-ready-guide): the step rules sit in the shared rules block EVERY time (was: first time only) + «Sẵn sàng» / «Hướng dẫn» (guided round of the same engine) */
+ const hint=`<div class="kpnote">Chưa rõ thì chạm «Gợi ý» (bớt một ít phần), hoặc để ma ma tự nhắc khi ngươi dừng lâu.</div>`;
+ const intro=()=>{KG82.phase="intro";box.innerHTML=kitRows(rows)+hint+`<div class="kg82act"><button class="${kg82Btn()}" id="sggo">Bắt đầu</button>${kitQuick({id:"sgskip",n:"Giao cho người làm",sub:`cơ may như hiện nay`})}</div>`;
+  kgReady(box,{n:J.art,t:G.t,steps:(G.steps||[]).map((t,i)=>[`Bước ${i+1}`,t]),how:G.how,go:"#sggo",pic:"",v,tutor:(b,env)=>G.eng(b,Object.assign(env,{v,lv:0}))});
   $("sggo").onclick=()=>{kg82Seen(seenK,true);sgEng(G,v,(raw,o)=>finish(raw,o))};$("sgskip").onclick=()=>{kg82Close();J.run(null)}};
  const finish=(raw,o)=>{KG82.phase="result";const st=sgStep(raw);const m={step:st};const p1=sgShift(p0,st);
   const parts=[["Phần chơi",`${kg82Word(raw)} · ${raw}/10`]];
@@ -70911,6 +71081,7 @@ function entExam(o,fin){o=o||{};let art=o.art||"";let k=entKind(art);if(!k||entW
  const after=(raw,sk)=>{KG82.phase="result";kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");
   kg82ShowRes(kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"],["Kết quả",o.note||"tính cùng Sắc, Tài, Đức","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
   $("kg82ok").onclick=()=>{kg82Close();end(raw)}};
+ kgReady(box,{kind:k});/* KIT §13.7 */
  $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)}
 /* the ONE seam (contract set by review/kc-roads-cn-nc-r1 at jkc2 kc2Play): kcEntryExam(kind, done(raw 0..10), info{art,origin,title,note}) */
 window.kcEntryExam=function(kind,fin,info){if(kind&&typeof kind==="object"){const o=kind;kind=null;info=o}info=info||{};entExam(Object.assign({},info,{kind}),fin)};
@@ -74607,7 +74778,7 @@ const RCVK={};
 function rcvAsk(k,p,t,x){const D=RCVK[k];if(!D||!p||!t||p===t)return"";if(D.ok&&!D.ok(p,t,x))return"";
  if(t===S){rcvCard("rcvAsk",{k,a:key(p),x:x||null},D.t,p);return `${p.name} sai người sang ${D.act} ngươi. `}
  const O=D.opts(p,t,x);let c=null;
- if(typeof coopAccepted==="function"&&coopAccepted(t)){/* co-op (law 1 two-way, hostnull e, merged here by review r1; coop-ptime-reds' t.coop&&COOPW.inv → O[0] is the same rule, this one also skips a locked road): the other PLAYER already said «Nhận» on the
+ if((typeof coopAccepted==="function"&&coopAccepted(t))||(t.coop&&window.COOPW&&COOPW.inv)){/* + coop-ptime-reds (main): inside her accepted offer (COOPW.inv) *//* co-op (law 1 two-way, hostnull e, merged here by review r1): the other PLAYER already said «Nhận» on the
    co-op ask card (jcoopworld ASK → CW.inv): the yes road (full; half when her Sức is short), never an NPC pick that refuses or tells (mách) after it */
   const ok=O.filter(o=>o&&!(typeof o.lk==="function"&&o.lk()));c=ok.find(o=>o.id==="full")||ok.find(o=>o.id==="half")||ok.find(o=>o.id==="no")||null}
  else c=rcvPick(t,p,O,D.kind||"help");if(!c)return"";const r=c.go();const s=r&&typeof r==="object"?r.r:r;return s?String(s).replace(/([^.!?])$/,"$1. "):""}
@@ -75316,7 +75487,7 @@ function npwPick(L,score,o){const B=npwB();const R=(L||[]).map(x=>[x,+score(x)||
  const w=top.map(r=>Math.pow(r[1],pw));let x=Math.random()*w.reduce((a,b)=>a+b,0);for(let i=0;i<top.length;i++){x-=w[i];if(x<=0)return top[i][0]}return top[top.length-1][0]}
 function npwAsk(kind,ctx){const d=NPW.reg[kind];if(!d)throw new Error("npcWhy: unknown kind "+kind);const B=npwB();const O=[];let cd=0;
  const lim=typeof d.lim==="function"?d.lim(ctx||{}):(d.lim||0);let n=0;
- for(const p of (d.who(ctx||{})||[])){if(!p)continue;if(lim){if(!npwCdOk(kind,p)){cd++;continue}if(n>=lim)break;n++}let r=null;try{r=d.why(p,ctx||{})}catch(e){console.error("npcWhy "+kind,e);r=null}
+ for(const p of (d.who(ctx||{})||[])){if(!p||p.coop)continue;/* review coop-thin-f6b r1 (law 1, the whole npc-purpose family): the co-op friend entry (jcoopworld {coop:true}: a consort or a servant) is a PLAYER, never an NPC actor of a kind (loTake / dhTake kept a stolen piece in his stand-in → bridged to him as her «Quà tặng»; arson, omen, mock … acted in his name). seekEmp / cmScorn / cmLand already excluded him one by one */if(lim){if(!npwCdOk(kind,p)){cd++;continue}if(n>=lim)break;n++}let r=null;try{r=d.why(p,ctx||{})}catch(e){console.error("npcWhy "+kind,e);r=null}
   if(!r||!(r.s>=B.min))continue;if(!npwCdOk(kind,p)){cd++;continue}O.push({kind,who:p,tgt:r.t||null,why:r.r||"",place:r.k||null,flag:r.flag||null,s:r.s})}
  if(cd)npwSt(kind,"cd");return O}
 function npwOnFire(kind,o,ctx){const d=NPW.reg[kind];if(d&&typeof d.on==="function")try{d.on(o,ctx||{})}catch(e){console.error("npcWhy on "+kind,e)}}
@@ -75808,11 +75979,14 @@ function run(kind,seq){const K=KG82_KIND[kind],ds=C().d.slice(),n=ds.length,raws
   const d=kg82Open({art:"Thử tay",title:`${K.n} · hồi ${i+1}/${n}`,how:K.how,round:"Hồi",roundV:`${i+1}/${n}`,pic:kg82Pic(kind)});if(!d)return;
   const box=kg82Box();box.innerHTML=`<h4 class="kpst">Thử tay · ${K.n}</h4>`+kg82Rows([["Môn",`${K.n} · ${K.t}`,"t"],["Hồi",`${i+1}/${n}`,"t"],["Độ khó",mgDiffTxt(t,kind),"n"]])+
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button></div>`;
+  kgReady(box,{kind});/* KIT §13.7 rules screen; mgcal numbers unchanged (rounds, gaps) */
   $("kg82go").onclick=()=>kg82Play(kind,raw=>after(raw))};
- const after=raw=>{raws.push(raw);i++;const last=i>=n;
+ let L=null;/* owner bug 20/11 (ROOT-72): the kind is saved the moment the LAST round's raw arrives, before any button — leaving after round n keeps it;
+    an unfinished kind is never saved (raws stay local until round n), so the code never carries a partial kind */
+ const after=raw=>{raws.push(raw);i++;const last=i>=n;if(last)L=recSet(kind,raws.slice(),ds);
   kg82ShowRes(kg82Rows([[`Hồi ${i}`,`${raw}/10 · ${kg82Word(raw)}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem mức tay":"Hồi kế tiếp"}</button></div>`,raw>=5);
   kg82Set("score",`${raw}/10`);$("kg82ok").onclick=()=>{if(last)done();else round()}};
- const done=()=>{const L=recSet(kind,raws,ds);const nx=seq?nextOf(kind,seq):null;
+ const done=()=>{if(!L)L=recSet(kind,raws.slice(),ds);const nx=seq?nextOf(kind,seq):null;
   kg82Open({art:"Thử tay",title:`Mức tay · ${K.n}`,how:"Mức này thành chuẩn tay nghề của mọi người trong cung khi được ghi vào sổ chung.",round:"Hồi",roundV:`${n}/${n}`,pic:kg82Pic(kind)});
   kg82ShowRes(kg82Rows(raws.map((x,j)=>[`Hồi ${j+1}`,`${x}/10 · ${kg82Word(x)}`,"t"]).concat([["Mức tay của người",kg82Word(Math.round(L.b)),"t"],["Mã",mgCalCode(),"n"]]))+
    (seq&&nx?`<div class="kg82act"><button class="${kg82Btn()}" id="mgcal-next">Môn kế tiếp<small>${nm(nx)}</small></button></div>`:"")+
@@ -79454,6 +79628,344 @@ if(typeof j59lay==="function"){const j0=j59lay;j59lay=function(){const r=j0.appl
 /* jht "Dò hỏi gia thế" (htAct is exposed on window by jht.js) */
 if(typeof window.htAct==="function"){const f0=window.htAct;window.htAct=function(a,b){return a==="ask"?errRun(f0,this,arguments,{k:"kin"}):f0.apply(this,arguments)}}
 })();
+/* PALACE CHATTER line banks (E17b writer; PL#6 bubble talk, owner OD:L1627 (5)). DATA ONLY: window.CHAT_L (greet, topics, hap, eav) + CHAT_HAPK.
+   SPEECH only, cổ trang (VANPHONG §2), no digit / %, address words only via jvoice tokens {goi}/{Goi} {xung}/{Xung}; third people only via {p} (topic need) / {A} {B};
+   {pl} {mua} {fest} {pl2} {t} {man} {it} {h} {tr} read from the live world; a line whose slot cannot be filled is skipped (law 6).
+   Exchange = array of "A: …"/"B: …"; a '-me' topic exchange is ONE string "A: …". Optional tag "[#tag,tag] " at the start of a greet line / first string. */
+window.CHAT_L={
+greet:[
+"{Goi} về rồi!",
+"Chào mừng {goi} hồi cung.",
+"{Goi} vất vả rồi, mời vào nghỉ chân.",
+"Trong điện vẫn như {goi} đã dặn, mời {goi} xem qua.",
+"{Xung} đã dọn dẹp xong, chỉ chờ {goi} về.",
+"{Goi} đã trở về, thật tốt quá.",
+"Mời {goi} vào, {xung} rót trà ngay.",
+"{Goi} đi đường xa, xin nghỉ một lát.",
+"Hồi cung rồi, {xung} đã chuẩn bị nước ấm cho {goi}.",
+"Chào {goi}, trong điện mọi sự vẫn yên.",
+"{Goi} cuối cùng cũng về, {xung} đợi mãi.",
+"Mời {goi} an tọa, trà đã pha sẵn.",
+"Cửa vừa mở, {xung} đã nghe tiếng chân {goi}.",
+"{Goi} về rồi, trong điện ấm áp hẳn lên.",
+"Hồi cung bình an, {xung} mừng lắm.",
+"[#xuan] Xuân sang hoa nở, {goi} về đúng lúc lắm.",
+"[#xuan] Hoa ngoài sân vừa hé, mời {goi} ngắm.",
+"[#xuan] Gió xuân còn se, {goi} mau vào trong cho ấm.",
+"[#xuan] Chào {goi}, mùa xuân này điện nhà thêm tươi.",
+"[#ha] Trời hạ oi bức, {goi} về là có chén chè mát ngay.",
+"[#ha] Mời {goi} vào, trong điện đã có quạt sẵn.",
+"[#ha] Nắng hạ gắt quá, {goi} mau vào tránh nóng.",
+"[#ha] {Goi} về rồi, {xung} vừa ướp lạnh bát canh đậu.",
+"[#thu] Thu về lá rụng, {goi} hồi cung đúng lúc.",
+"[#thu] Gió thu đã lạnh, mời {goi} khoác thêm áo.",
+"[#thu] Trà thu mới hái, {xung} pha sẵn cho {goi}.",
+"[#thu] Chào {goi}, hoa cúc ngoài sân vừa nở.",
+"[#dong] Trời đông giá rét, {goi} về là có lò sưởi sẵn.",
+"[#dong] Mời {goi} vào hơ tay, than đã đượm.",
+"[#dong] {Goi} về rồi, {xung} vừa nấu bát canh nóng.",
+"[#dong] Đông lạnh thế này, {goi} mau ngồi gần lò.",
+"[#sang] Chào {goi} buổi sớm, bữa điểm tâm sắp dọn lên.",
+"[#sang] {Goi} về sớm vậy, sương còn chưa tan hết.",
+"[#sang] Mời {goi} vào, trà sớm vừa pha.",
+"[#chieu] Nắng chiều đẹp thế này, {goi} về đúng lúc.",
+"[#chieu] Chào {goi}, bữa chiều {xung} đã dặn bếp lo.",
+"[#chieu] {Goi} về rồi, mời dùng chút trà bánh.",
+"[#toi] Đêm xuống rồi, {goi} mau vào nghỉ ngơi.",
+"[#toi] {Xung} đã thắp đèn, mời {goi} vào.",
+"[#toi] Muộn thế này {goi} mới về, {xung} lo lắm.",
+"[#toi] Mời {goi} vào, chăn gối đã ấm sẵn.",
+"[#wet] Ngoài trời mưa, {goi} có ướt không? Mời vào lau khô.",
+"[#wet] Trời mưa ướt áo, {goi} mau thay kẻo cảm.",
+"[#wet] {Goi} về giữa cơn mưa, {xung} đã nấu trà gừng.",
+"[#snow] Tuyết rơi dày, {goi} mau vào sưởi cho ấm.",
+"[#snow] Ngoài kia tuyết trắng cả sân, mời {goi} vào.",
+"[#snow] {Goi} đạp tuyết về, {xung} lo cho đôi chân của {goi}.",
+"[#heat] Nắng nóng thế này, {goi} mau vào uống nước.",
+"[#heat] {Goi} về rồi, {xung} đã dặn mang đá mát lên.",
+"[#storm] Gió bão ngoài kia dữ quá, {goi} về được là may.",
+"[#storm] Sấm chớp thế này, mời {goi} vào cho yên.",
+"[#fest] Hôm nay là {fest}, {goi} về là vui nhất.",
+"[#fest] Mừng {fest}, chúc {goi} bình an hồi cung.",
+"[#fest] {Goi} về đúng ngày {fest}, thật là phúc.",
+"[#lo] {Goi} về rồi, {xung} lúc nào cũng chờ.",
+"[#lo] Mời {goi} vào, mọi thứ đã sắp đặt chu đáo.",
+"[#mid] Chào mừng {goi} hồi cung, cung nhân đều đã chờ.",
+"[#mid] {Goi} về rồi, trong điện ai nấy đều mừng.",
+"[#hi] Cung nghênh {goi} hồi điện.",
+"[#hi] {Goi} hồi cung, cả điện đều ra đón.",
+"[#hq] Cung nghênh {goi} hồi điện, vạn sự bình an.",
+"[#hq] Cả điện cung kính chào mừng {goi} hồi cung."
+],
+topics:[
+{"k": "srv-srv-chore", "pair": ["srv-srv"], "x": [["A: {Goi} ơi, sáng nay hoa trong điện đã tưới chưa?", "B: Tưới rồi, {xung} còn nhặt cả lá úa.", "A: Tốt lắm, chủ nhân thấy sạch sẽ sẽ vui."], ["A: Nước giặt hôm nay đục quá, {goi} có thấy không?", "B: Phải, {xung} vừa thay hai lần nước rồi."], ["A: {Goi} đã lau hết án thư chưa?", "B: Chưa đâu, còn mấy chỗ mực dính khó chùi.", "A: Để {xung} giúp, mau lên."], ["A: Đèn lồng ngoài hiên hỏng một chiếc rồi.", "B: Vậy phải báo nội vụ phủ thay thôi.", "A: Phải, kẻo đêm xuống tối om."], ["A: Mùa này chăn nệm cần phơi, {goi} nhớ nhắc.", "B: {Xung} nhớ, trưa nắng đẹp sẽ đem ra sân."], ["A: {Goi} thêu xong chiếc khăn chưa?", "B: Còn nửa cánh hoa nữa thôi.", "A: Đẹp thế này chắc được khen."], ["A: Bếp nhỏ hôm nay thiếu củi, {goi} đi xin giúp.", "B: Được, {xung} đi liền, kẻo lỡ bữa."], ["A: {Goi} giữ cái chổi cho cẩn thận, hôm qua mất một cái.", "B: Mất thật sao? Để {xung} tìm lại."], ["A: Sàn gỗ đã đánh bóng chưa?", "B: Rồi, trơn đến mức {xung} suýt ngã.", "A: Nhẹ tay thôi, ngã đau lắm."], ["A: {Goi} biết gấp áo kiểu mới không?", "B: Biết, để {xung} chỉ cho {goi} một lần."]]},
+{"k": "srv-srv-weather", "pair": ["srv-srv"], "x": [["A: [#wet] Mưa mãi không dứt, quần áo phơi không khô.", "B: Phải, đành hong bên lò vậy."], ["A: [#wet] {Goi} cẩn thận, hành lang trơn lắm.", "B: {Xung} biết rồi, vừa suýt trượt đây."], ["A: [#snow] Tuyết dày thế này, quét sân mỏi cả tay.", "B: Cố thêm chút nữa, quét xong là được nghỉ."], ["A: [#heat] Nóng thế này, uống chén chè đậu xanh đi.", "B: Đa tạ {goi}, đang khát khô cổ."], ["A: [#storm] Gió lớn quá, mau đóng cửa sổ lại.", "B: Đóng rồi, nghe tiếng mái ngói rung mà sợ."], ["A: [#xuan] Xuân này hoa nở sớm, sân vườn đẹp quá.", "B: Phải, nhặt hoa rụng cũng thấy vui."], ["A: [#ha] Hạ về muỗi nhiều, nhớ xông thêm ngải cứu.", "B: {Xung} đã xông từ chiều rồi."], ["A: [#thu] Lá thu rụng đầy sân, quét mãi không hết.", "B: Cứ để đó, gió thổi lại đẹp."], ["A: [#dong] Đông về, than sưởi phải xin thêm sớm.", "B: {Xung} đã báo rồi, mai sẽ có."], ["A: Trời hôm nay dễ chịu, đem đồ ra phơi một thể nhé.", "B: Hay lắm, để {xung} lấy sào."]]},
+{"k": "srv-srv-place", "pair": ["srv-srv"], "x": [["A: [#out] Ra ngoài này, {goi} nhớ giữ lễ, đừng nói to.", "B: {Xung} biết, ở {pl} phải cẩn thận lời ăn tiếng nói."], ["A: [#out] Cảnh ở {pl} đẹp thật, {goi} thấy không?", "B: Đẹp lắm, ngắm mãi không chán."], ["A: [#out] {Goi} đến {pl} lần đầu hay sao mà ngó quanh mãi?", "B: Không, chỉ là {xung} thích nơi này."], ["A: [#home] Điện bên này sạch sẽ thế là nhờ {goi} cả.", "B: {Goi} quá khen, ai cũng góp sức mà."], ["A: [#home] Bàn ghế trong điện cũ rồi, nên xin đổi chăng?", "B: Đợi chủ nhân hỏi tới rồi hãy báo."], ["A: [#out] Đứng ở {pl} lâu thế, chân {goi} có mỏi không?", "B: Hơi mỏi, nhưng cảnh đẹp nên quên mất."]]},
+{"k": "srv-srv-food", "pair": ["srv-srv"], "x": [["A: Bánh hôm nay bếp làm thơm quá, {goi} nếm chưa?", "B: Chưa, để dành lát nữa chia nhau."], ["A: Nước trà này pha đúng độ chưa?", "B: Hơi đậm, {goi} thêm chút nước nhé."], ["A: {Goi} biết món canh hôm nay nấu thế nào không?", "B: Nghe nói hầm xương với củ, rất bổ."], ["A: Bữa tối nay chuẩn bị mấy món vậy?", "B: Đủ mấy món thường, thêm đĩa rau theo mùa."], ["A: Đừng làm rơi chén, sứ ấy quý lắm.", "B: {Xung} bưng cẩn thận, {goi} yên tâm."]]},
+{"k": "srv-srv-gossip", "pair": ["srv-srv"], "x": [["A: {Goi} nghe chuyện gì chưa? Nói nhỏ thôi.", "B: Chuyện gì? Đừng nói to kẻo ma ma nghe."], ["A: Trong cung dạo này tin đồn nhiều quá.", "B: Đừng tin hết, nhiều lời không đáng."], ["A: {Goi} có để ý cách người ta liếc nhau không?", "B: Thấy, nhưng kẻ hầu chớ xen vào chuyện người trên."], ["A: Nghe đâu nội vụ phủ sắp phát vải mới.", "B: Thật không? Mong sao phần của kẻ hầu không bị bớt."], ["A: Lời đồn hôm qua {goi} nghe ở đâu?", "B: Nghe lỏm ngoài hiên, chắc không đáng tin.", "A: Vậy thì đừng truyền đi."], ["A: {Goi} giữ miệng cho kỹ, tường có tai đấy.", "B: {Xung} biết, chỉ nói riêng với {goi} thôi."]]},
+{"k": "srv-srv-ma", "pair": ["srv-srv"], "x": [["A: Ma ma dặn việc hôm nay {goi} nhớ chưa?", "B: Nhớ rồi, làm xong sớm sẽ khỏi bị mắng."], ["A: Sáng mai phải dậy sớm, {goi} đừng ngủ quên.", "B: Biết rồi, {goi} nhớ gọi {xung} nhé."], ["A: Lỡ tay làm vỡ đồ thì phải thưa ngay, đừng giấu.", "B: {Xung} hiểu, giấu càng thêm tội."], ["A: Việc của người trên, kẻ hầu như {xung} và {goi} đừng bàn tán.", "B: Phải, việc nào ra việc nấy thôi."]]},
+{"k": "srv-srv-warm", "pair": ["srv-srv"], "x": [["A: {Goi} đỡ mệt chưa? Để {xung} làm giúp phần việc này.", "B: Đa tạ {goi}, nhờ {goi} mà {xung} nhẹ gánh."], ["A: Hôm nay {goi} trông xanh xao, có ốm không?", "B: Chỉ là thức khuya thôi, nghỉ chút là ổn."], ["A: {Goi} giữ giúp {xung} bọc bánh này, nhớ ăn cho no.", "B: Đa tạ, {goi} thật chu đáo."]]},
+{"k": "srv-srv-sung", "pair": ["srv-srv"], "need": "sungtop", "x": [["A: Dạo này {p} được sủng ái nhiều, cung nào cũng bàn.", "B: Phải, nhưng đừng nhiều lời, họa từ miệng mà ra."], ["A: Nghe nói {p} lại được triệu rồi, {goi} có hay?", "B: Hay chứ, kẻ dưới cũng được thơm lây."], ["A: {p} được nhiều ân sủng, người hầu bên ấy chắc nở mày nở mặt.", "B: Chắc vậy, nhưng cũng nhiều việc hơn."]]},
+{"k": "srv-srv-preg", "pair": ["srv-srv"], "need": "preg", "x": [["A: Nghe nói {p} có hỉ rồi, cả cung đều mừng.", "B: Phúc lớn thật, mong mẹ tròn con vuông."], ["A: {p} có tin vui, phải cẩn thận mọi thứ quanh nàng.", "B: Phải, cung nào cũng ra vào nhẹ tay thôi."], ["A: Thái y vừa tới thăm {p}, chắc long thai ổn định.", "B: Cầu cho nàng bình an."]]},
+{"k": "srv-srv-ill", "pair": ["srv-srv"], "need": "ill", "x": [["A: {p} ốm nặng, nghe nói thuốc uống mãi chưa khỏi.", "B: Tội nghiệp, mong nàng sớm bình phục."], ["A: Nghe nói {p} bệnh, trong cung đừng đến gần nhiều.", "B: Hiểu rồi, chỉ đi qua cửa chào một tiếng thôi."], ["A: Thái y ra vào chỗ {p} suốt, chắc bệnh không nhẹ.", "B: Cầu trời phù hộ cho nàng."]]},
+{"k": "srv-srv-queen", "pair": ["srv-srv"], "need": "queen", "x": [["A: {p} gần đây quản việc lục cung rất chặt.", "B: Phải, mọi người đều phải giữ phép tắc."], ["A: {p} là chủ lục cung, kẻ dưới nào dám thất lễ.", "B: {Goi} nói phải, ai cũng phải khép nép."], ["A: Việc của {p}, đến cả ma ma cũng kiêng dè.", "B: Cũng là điều dễ hiểu."]]},
+{"k": "srv-srv-cold", "pair": ["srv-srv"], "need": "cold", "x": [["A: {p} bị đưa vào lãnh cung rồi, nghe mà thương.", "B: Đừng nhắc nhiều, kẻo rước họa."], ["A: Người ở lãnh cung như {p}, cuộc sống chắc khổ lắm.", "B: Cầu cho nàng sớm được ân xá."], ["A: Có ai còn đem cơm đến cho {p} ở lãnh cung chăng?", "B: Chỉ vài người thôi, mà cũng phải lén."]]},
+{"k": "srv-srv-kid", "pair": ["srv-srv"], "need": "kid", "x": [["A: Tiểu hoàng tự {p} hôm nay ngoan lắm.", "B: Phải, mới sáng đã thấy cười."], ["A: {p} lớn nhanh quá, áo cũ chắc phải đổi.", "B: Để {xung} xin vải may thêm cho {p}."], ["A: Nhớ chăm {p} chu đáo, người nhỏ dễ cảm hàn.", "B: {Xung} biết, đã chuẩn bị sẵn thuốc."]]},
+{"k": "srv-srv-any", "pair": ["srv-srv"], "need": "any", "x": [["A: {Goi} có thấy {p} hôm nay đi ngang không?", "B: Thấy, trông nàng thần sắc rất tốt."], ["A: {p} vừa đi qua, phải nép sang bên chào.", "B: Nhớ rồi, chớ để sơ suất lễ nghi."], ["A: Nghe nói {p} dạo này hay đi dạo vườn.", "B: Chắc để ngắm hoa cho khuây khỏa."], ["A: Áo của {p} hôm nay đẹp thật, {goi} thấy không?", "B: Thêu tinh xảo lắm, nhìn mãi không chán."]]},
+{"k": "srv-srv-emp", "pair": ["srv-srv"], "need": "emp", "x": [["A: Nghe nói {p} gần đây rất bận việc triều chính.", "B: Phải, bên thái giám đều nói vậy."], ["A: Có lệnh gì từ {p} thì nội vụ phủ báo ngay.", "B: Hy vọng toàn là tin tốt."]]},
+{"k": "srv-srv-th", "pair": ["srv-srv"], "need": "th", "x": [["A: {p} hôm nay lễ Phật, trong cung phải yên tĩnh.", "B: Hiểu rồi, đi lại nhẹ chân thôi."], ["A: Bên cung của {p} có việc, {goi} nghe thấy chưa?", "B: Nghe loáng thoáng, chắc lát nữa sẽ rõ."]]},
+{"k": "srv-srv-fest", "pair": ["srv-srv"], "x": [["A: [#fest] Hôm nay {fest}, trong cung nhộn nhịp quá.", "B: Phải, nhưng việc cũng nhiều gấp đôi."], ["A: [#fest] Ngày {fest} phải dọn dẹp thật sạch.", "B: Biết rồi, {xung} đang lau lại mấy chỗ nữa."], ["A: [#fest] {Goi} ơi, đồ lễ {fest} đã chuẩn bị xong chưa?", "B: Xong cả rồi, chỉ chờ giờ lành."]]},
+{"k": "srv-eun", "pair": ["srv-eun"], "x": [["A: Hôm nay sao {goi} đi qua điện này vội thế?", "B: Có việc gấp thôi, {goi} đừng giữ {xung} lâu."], ["A: {Goi} từ chỗ nội vụ phủ tới sao?", "B: Đúng vậy, mang chút đồ cho các điện."], ["A: Có tin gì mới không, {goi}?", "B: Không có gì đáng kể, vẫn bình thường cả."], ["A: {Goi} dạo này trông gầy đi nhiều.", "B: Việc nặng quá, ăn uống chẳng ra bữa."], ["A: Có lệnh gì cho điện bên này không?", "B: Chưa có, nếu có {xung} báo ngay."], ["A: {Goi} nhờ {xung} một việc nhỏ được không?", "B: Việc gì? Nếu trong khả năng {xung} sẽ giúp."], ["A: Cống phẩm đến chưa, {goi}?", "B: Còn trên đường, chắc chiều mai tới."], ["A: [#wet] Mưa thế này {goi} đi lại vất vả quá.", "B: Quen rồi, chỉ sợ ướt hàng hóa."], ["A: [#snow] Tuyết dày thế, {goi} cẩn thận trượt chân.", "B: Đa tạ nhắc nhở, {xung} đi chậm thôi."], ["A: {Goi} trực đêm qua có mệt không?", "B: Hơi mệt, nhưng đêm qua yên tĩnh."], ["A: Nghe nói bên này có việc, {goi} biết gì không?", "B: {Xung} chỉ nghe sơ sơ, không dám nói bừa."], ["A: Cho {xung} xin chén nước nhé, {goi}.", "B: Mời {goi}, trà vừa pha xong."], ["A: {Goi} ơi, sổ sách phát đồ ghi sai rồi.", "B: Để {xung} sửa lại ngay."], ["A: Trong cung gần đây quy củ nghiêm hơn hẳn.", "B: Phải, ai cũng phải cẩn trọng."], ["A: {Goi} có quen ai ở ngự thiện phòng không?", "B: Có chứ, cần gì cứ nói."]]},
+{"k": "srv-me", "pair": ["srv-me"], "x": [["A: {Goi} có cần {xung} pha thêm chén trà không?"], ["A: Y phục của {goi} {xung} đã là phẳng, mời {goi} thay."], ["A: {Goi} nhớ nghỉ ngơi, đừng thức khuya quá."], ["A: Hôm nay {goi} trông có thần sắc lắm."], ["A: {Goi} cần gì cứ sai bảo, {xung} làm ngay."], ["A: {Xung} đã sắp xếp lại tủ áo, {goi} xem có vừa ý không."], ["A: Trong điện mọi việc {xung} lo cả, {goi} cứ an tâm."], ["A: {Goi} đừng lo, kẻ hầu trong điện đều tận tụy."], ["A: Nếu {goi} thấy mệt, {xung} xin đỡ {goi} ra nghỉ."], ["A: Phấn son {goi} dùng hôm nay thật hợp với sắc mặt."], ["A: {Goi} có muốn {xung} chải lại tóc không?"], ["A: Trà này {xung} pha theo ý {goi}, xin {goi} nếm thử."], ["A: {Goi} xem, hoa trong bình {xung} vừa cắm mới."], ["A: Có việc gì {goi} lo nghĩ, {xung} xin chia sẻ một phần."], ["A: {Goi} hôm nay đi đứng nhiều, chân có mỏi không?"], ["A: {Xung} thấy {goi} dạo này gầy đi, nên bồi bổ thêm."], ["[#xuan] A: Xuân sang, {goi} nên đổi sang áo mỏng cho thoải mái."], ["[#ha] A: Hạ nóng, {xung} đã dặn bếp làm chè giải nhiệt cho {goi}."], ["[#thu] A: Thu hanh, {goi} nhớ uống nhiều nước ấm."], ["[#dong] A: Đông rét, {xung} đã thêm lớp lót vào áo khoác của {goi}."], ["[#sang] A: Sáng sớm sương lạnh, {goi} nhớ khoác thêm áo."], ["[#chieu] A: Chiều rồi, {goi} có muốn dạo vườn một vòng cho khuây khỏa không?"], ["[#toi] A: Muộn rồi, {goi} nghỉ sớm cho khỏe nhé."], ["[#wet] A: Trời mưa, {goi} đừng ra ngoài, kẻo nhiễm lạnh."], ["[#snow] A: Tuyết dày lắm, {goi} muốn ra ngoài phải mang giày chắc."], ["[#heat] A: Nắng quá, {xung} che dù cho {goi} nhé."], ["[#storm] A: Ngoài kia gió bão, {goi} chớ ra khỏi điện."], ["[#fest] A: Hôm nay {fest}, {goi} có muốn mặc áo đẹp một chút không?"], ["[#lo] A: {Goi} cứ yên tâm, {xung} sẽ không để {goi} thiếu thứ gì."], ["[#mid] A: {Goi} ngày càng được trọng vọng, {xung} cũng thấy vinh dự."], ["[#hi] A: Nhờ phúc {goi} mà cả điện đều được nể trọng."], ["[#hq] A: Trên dưới trong điện đều mong {goi} luôn an khang."], ["A: Tin tức bên ngoài {xung} đều nghe ngóng, {goi} cần cứ hỏi."], ["A: Đồ trang sức của {goi} {xung} đã lau sáng lại rồi."], ["A: Nếu {goi} muốn ra vườn, {xung} xin đi theo cầm quạt."], ["A: Bữa ăn hôm nay {xung} đã dặn nấu nhạt, hợp với {goi}."]]},
+{"k": "eun-me", "pair": ["eun-me"], "x": [["A: {Goi}, nội vụ phủ vừa chuyển đồ đến, mời {goi} xem."], ["A: Có tin từ ngoài cung, {goi} cần nghe không?"], ["A: {Xung} vừa đi ngang ngự hoa viên, hoa nở rực lắm."], ["A: {Goi} cần sai việc gì, {xung} xin đi ngay."], ["A: Đường trong cung gần đây nhiều người qua lại, {goi} đi cẩn thận."], ["A: {Goi} muốn nhắn gì tới bên ngoài, {xung} xin chuyển giúp."], ["A: Cổng cung chiều nay khóa sớm, {goi} nhớ giờ."], ["A: {Xung} nghe hạ nhân bàn rằng trong cung dạo này quy củ nghiêm hơn."], ["[#wet] A: Mưa to, {goi} đi lại phải mang dù."], ["[#snow] A: Tuyết rơi dày, {goi} chớ đi nhanh kẻo trượt."], ["[#xuan] A: Xuân sang, các vườn đều đẹp, {goi} nên đi ngắm."], ["[#thu] A: Thu đến, trong cung nhiều quả chín, {goi} nên nếm thử."], ["A: {Goi} an tâm, thái giám trong cung đều giữ miệng kín."], ["A: {Xung} xin chúc {goi} một ngày bình an."], ["A: Có gì cần chuyển lời, {goi} cứ dặn {xung}."], ["A: Việc của {goi} {xung} không dám chậm trễ."]]},
+{"k": "con-con-warm", "pair": ["con-con"], "x": [["[#warm] A: {Goi} hôm nay trông thật tươi tắn.", "B: Nhờ {goi} khen, {xung} mới thấy vui.", "A: Mời {goi} ngồi uống chén trà nhé?"], ["[#warm] A: Hoa trong vườn nở đẹp, {goi} đi ngắm cùng {xung} không?", "B: Hay lắm, {xung} đang muốn tìm chốn thanh tịnh."], ["[#warm] A: {Goi} có nghe {xung} kể chuyện hôm qua chưa?", "B: Chưa, kể mau, {xung} nghe đây.", "A: Chuyện khá buồn cười, ngồi xuống nào."], ["[#warm] A: Món này {xung} mới học, mời {goi} nếm thử.", "B: Ngon quá, {goi} khéo tay thật."], ["[#warm] A: {Goi} ơi, chiếc trâm này {xung} thấy hợp với {goi}.", "B: Đa tạ {goi}, quý hóa quá, {xung} xin nhận."], ["[#warm] A: Dạo này {goi} có mệt không? {Xung} thấy {goi} gầy đi.", "B: Không sao, có {goi} lo cho, {xung} đỡ nhiều rồi."], ["[#warm] A: Cả cung này {xung} chỉ tin có {goi}.", "B: {Goi} nói vậy {xung} thấy ấm lòng lắm."], ["[#warm] A: Ngày mai {goi} có rảnh, đến chỗ {xung} đánh cờ nhé.", "B: Được chứ, {xung} nhất định đến."], ["[#warm] A: {Goi} thấy đàn hôm qua thế nào?", "B: Tiếng đàn của {goi} nghe tựa suối chảy.", "A: Quá khen rồi."], ["[#warm] A: Trời lạnh, {goi} nhớ mặc thêm áo.", "B: {Goi} cũng vậy, đừng để nhiễm hàn."], ["[#warm] A: Trà này {goi} tặng, {xung} cất kỹ lắm.", "B: Thích thì lần sau {xung} mang thêm."]]},
+{"k": "con-con-cool", "pair": ["con-con"], "x": [["[#cool] A: {Goi} vẫn khỏe chứ?", "B: Khỏe, đa tạ {goi} hỏi han.", "A: Vậy thì tốt."], ["[#cool] A: Thời tiết hôm nay không tệ nhỉ.", "B: Cũng tạm, chỉ sợ chiều lại đổi gió."], ["[#cool] A: {Goi} hôm nay đi dạo sao?", "B: Phải, trong điện ngột ngạt nên ra ngoài chút."], ["[#cool] A: Y phục của {goi} vẫn giản dị như mọi khi.", "B: {Goi} cũng vậy, vẫn nhã nhặn như xưa."], ["[#cool] A: Nghe nói {goi} dạo này bận lắm.", "B: Việc thường nhật thôi, có gì đáng kể."], ["[#cool] A: Chúc {goi} một ngày bình an.", "B: Đa tạ, {goi} cũng thế."], ["[#cool] A: Bên điện của {goi} dạo này yên ắng quá.", "B: Yên ắng thì tốt, ai cũng được nhàn."], ["[#cool] A: {Goi} có ra vườn không? Hôm nay vắng người.", "B: Có lẽ {xung} đi một lát rồi về."], ["[#cool] A: Cung này lắm quy củ, {goi} đã quen chưa?", "B: Cũng dần quen, đa tạ {goi} quan tâm."], ["[#cool] A: Hoa trong điện {goi} nở đẹp thật.", "B: Chỉ là hoa thường thôi, {goi} quá khen."], ["[#cool] A: {Goi} đã dùng bữa chưa?", "B: Rồi, đa tạ {goi}.", "A: Vậy {xung} không quấy rầy nữa."]]},
+{"k": "con-con-cold", "pair": ["con-con"], "x": [["[#cold] A: {Goi} đắc ý lắm nhỉ, mấy hôm nay được nhiều người nhắc.", "B: {Goi} cũng đừng vội cười, bánh xe đời đâu đứng yên."], ["[#cold] A: Áo của {goi} đẹp thật, chắc tốn nhiều bạc.", "B: {Goi} thích thì cứ mặc thử, tiếc là không hợp dáng."], ["[#cold] A: Chà, hôm nay {goi} cũng ra vườn, nơi này đông thật.", "B: Vườn rộng, không ai cấm {goi} cả."], ["[#cold] A: {Goi} nói lời nên cẩn thận, kẻo có người nghe.", "B: {Goi} mới nên cẩn thận, kẻo chính {goi} vấp ngã."], ["[#cold] A: Trâm của {goi} có vẻ cũ rồi nhỉ?", "B: Cũ mà hợp, còn hơn mới mà không xứng."], ["[#cold] A: {Goi} có biết người ta bàn tán về {goi} thế nào không?", "B: {Goi} lo thân {goi} đi, {xung} không cần."], ["[#cold] A: Nghe nói {goi} thích đàn, tiếc là tiếng đàn không đến tai ai.", "B: Còn hơn tiếng cười không ai muốn nghe."], ["[#cold] A: {Goi} đứng đó làm gì, chắn đường {xung} đấy.", "B: Đường rộng thế, {goi} đi vòng cũng được."], ["[#cold] A: Mong là {goi} giữ được phúc phận lâu dài.", "B: Mong là {goi} cũng thế, đừng tự mãn."], ["[#cold] A: Điện của {goi} gần đây vắng khách nhỉ?", "B: Khách nào đến, {xung} cũng không cần {goi} đếm hộ."]]},
+{"k": "con-con-plain", "pair": ["con-con"], "x": [["A: {Goi} đã nghe tin trong cung chưa?", "B: Tin gì? {Xung} đang rảnh, kể nghe thử.", "A: Nói nhỏ thôi, chuyện không nên lộ."], ["A: Hôm nay trời đẹp, đi dạo cùng {xung} nhé?", "B: Cũng được, {xung} đang buồn chán."], ["A: {Goi} thấy vải năm nay nội vụ phủ phát thế nào?", "B: Cũng tạm, chỉ là màu hơi nhạt."], ["A: {Goi} đọc được sách gì mới chăng?", "B: Chỉ là quyển thơ cũ, nhưng đọc kỹ thấy hay."], ["A: Mùa này nên ăn gì cho bổ, {goi} biết không?", "B: Hạt sen hầm đường phèn, rất tốt cho da."], ["A: Nghe nói vườn đã thay vài loại hoa mới.", "B: Phải, {xung} định lát nữa ghé xem."], ["A: {Goi} thấy cung nhân dạo này lười biếng không?", "B: Có chút, cần quản chặt hơn."], ["A: Đèn đêm qua sáng rực, {goi} có thấy không?", "B: Thấy, chắc có việc gì trong cung."]]},
+{"k": "con-sung", "pair": ["con-con"], "need": "sungtop", "x": [["[#warm] A: Nghe nói {p} được sủng ái nhiều, {goi} có hay?", "B: Hay chứ, mừng cho nàng, cầu mong nàng giữ được phúc.", "A: Phải, hy vọng nàng đừng quên những người cùng cảnh."], ["[#cool] A: {p} dạo này được Hoàng thượng để mắt nhiều lắm.", "B: Phải, thật là phúc phận hiếm có.", "A: Phúc ai nấy hưởng thôi."], ["[#cold] A: {p} chẳng qua gặp may, được mấy hôm sủng ái thôi.", "B: Nhưng nàng được thật, còn {goi} thì sao?", "A: Đừng nói lời khó nghe như vậy."], ["[#warm] A: Nếu {p} thành phi tử đắc sủng, cả cung cũng được nhờ.", "B: Phải, miễn nàng là người biết ơn."], ["[#cool] A: {p} hôm nay mặc áo mới, chắc muốn khoe với Hoàng thượng.", "B: Cũng là lẽ thường thôi."], ["[#cold] A: Sủng ái của {p} nhất thời, đừng ghen tị nhé.", "B: Ai ghen tị? Chính {goi} mới nên lo."]]},
+{"k": "con-preg", "pair": ["con-con"], "need": "preg", "x": [["[#warm] A: {p} có hỉ rồi, nên cùng nhau đến chúc mừng.", "B: Phải, mang chút bổ phẩm đến cho nàng."], ["[#cool] A: Nghe nói {p} có long thai, cả cung đều mừng.", "B: Phúc lớn, mong nàng bình an."], ["[#cold] A: {p} có thai thì sao, sinh được hay không còn chưa biết.", "B: Lời này {goi} nên giữ lại, kẻo mang tội."], ["[#warm] A: Đứa trẻ của {p} chắc đáng yêu lắm.", "B: Chắc chắn rồi, mẹ đẹp thì con cũng đẹp."], ["[#cool] A: {p} dưỡng thai kỹ, chắc ít ra ngoài.", "B: Phải, tránh lạnh tránh gió mới tốt."], ["[#cold] A: Cả cung xoay quanh {p}, thật khiến người ta mỏi mắt.", "B: Ai có phúc thì được thế, {goi} ghen cũng vô ích."]]},
+{"k": "con-ill", "pair": ["con-con"], "need": "ill", "x": [["[#warm] A: {p} ốm đã lâu, {goi} có muốn cùng {xung} đến thăm không?", "B: Được, mang chút thuốc bổ theo."], ["[#cool] A: Nghe nói {p} bệnh nặng, thái y túc trực suốt.", "B: Mong nàng mau khỏe, trong cung ai cũng lo."], ["[#cold] A: {p} cứ ốm đau mãi, e rằng khó giữ được ân sủng.", "B: Nói vậy thật không có lòng thương người."], ["[#warm] A: Thuốc của {p} nên đổi phương thuốc khác.", "B: Để {xung} hỏi thái y giúp."], ["[#cool] A: {p} ốm, chắc phải nghỉ ngơi dài ngày.", "B: Tĩnh dưỡng mới là cách tốt nhất."], ["[#cold] A: Bệnh của {p} biết đâu chỉ là cớ để tránh việc.", "B: Lời đó {goi} giữ lấy, đừng nói trước mặt người khác."]]},
+{"k": "con-queen", "pair": ["con-con"], "need": "queen", "x": [["[#warm] A: {p} gần đây thân thể thế nào?", "B: Nghe nói vẫn khang kiện, thật đáng yên lòng."], ["[#cool] A: {p} quản lục cung nghiêm lắm.", "B: Phải, phép tắc có nghiêm mới yên được."], ["[#cold] A: {p} chẳng qua giữ danh thôi, thật sự chưa chắc có sủng.", "B: Lời này đừng để người ngoài nghe, rước họa."], ["[#warm] A: Ngày mai cùng đến thỉnh an {p} nhé.", "B: Được, {xung} cũng đang định như vậy."], ["[#cool] A: {p} dạo này hay triệu các cung đến.", "B: Chắc có việc cần dặn dò."], ["[#cold] A: {p} hiền hậu thật, chỉ khi có lợi mới thế.", "B: Cẩn thận lời nói, bức tường cũng có tai."]]},
+{"k": "con-cold", "pair": ["con-con"], "need": "cold", "x": [["[#warm] A: {p} ở lãnh cung chắc khổ lắm, {xung} thật thương.", "B: Mong sau này có dịp giúp nàng."], ["[#cool] A: {p} bị đày vào lãnh cung, cũng là số phận.", "B: Phải, cung đình thế đấy."], ["[#cold] A: {p} vào lãnh cung là đáng đời, ai bảo kiêu ngạo.", "B: Thương hại còn chẳng có, nói thế làm gì."], ["[#warm] A: Thỉnh thoảng nên gửi chút đồ ăn cho {p} ở lãnh cung.", "B: {Goi} thật nhân hậu, {xung} cũng muốn góp phần."], ["[#cool] A: Chuyện của {p} làm cung bao người đồn thổi.", "B: Đồn thổi rồi sẽ nguôi, chỉ có nàng chịu khổ."], ["[#cold] A: Người từng được sủng như {p}, nay thảm hại thế này.", "B: Hôm nay nàng, ngày khác chưa biết đến ai."]]},
+{"k": "con-any", "pair": ["con-con"], "need": "any", "x": [["[#warm] A: Hôm nay {goi} có gặp {p} không? Trông nàng rất đẹp.", "B: Thấy, ai nhìn cũng phải khen."], ["[#cool] A: {p} hôm nay ra vườn, chắc là có hẹn.", "B: Không rõ, chuyện của nàng đâu liên quan {xung}."], ["[#cold] A: {p} hôm nay cười nhiều lắm, chắc có chuyện vui.", "B: Cười nhiều chưa chắc là thật lòng."], ["[#warm] A: Nếu {goi} muốn kết giao với {p}, {xung} có thể giới thiệu.", "B: Đa tạ {goi}, nhưng để {xung} tự thử xem sao."], ["[#cool] A: {p} và {goi} có hay qua lại không?", "B: Cũng ít, chỉ gặp nhau những dịp đông người."], ["[#cold] A: {p} ngày càng kiêu, {goi} có thấy vậy không?", "B: Thấy chứ, nhưng nói ra chẳng ích gì."]]},
+{"k": "con-emp", "pair": ["con-con"], "need": "emp", "x": [["[#warm] A: Hoàng thượng có hỏi thăm {goi} không?", "B: Chưa, nhưng nghe nói người sắp qua điện nào đó.", "A: Mong sao sớm tới lượt {goi}."], ["[#cool] A: {p} dạo này nghe nói rất bận.", "B: Chuyện của người, ai biết được."], ["[#cold] A: {p} chẳng hề nhớ đến {goi} nhỉ?", "B: {Goi} cũng chẳng hơn gì, đâu cần nói móc."]]},
+{"k": "con-me", "pair": ["con-me"], "x": [["[#warm] A: {Goi} hôm nay khí sắc thật tốt, {xung} nhìn mà vui lây."], ["[#warm] A: {Goi} ghé qua điện của {xung} một chút nhé, có chén trà mới."], ["[#warm] A: Có chuyện gì cứ tìm {xung}, đừng ngại."], ["[#warm] A: {Goi} nhớ giữ gìn sức khỏe, {xung} lo lắm."], ["[#warm] A: Trâm này hợp với {goi} lắm, để {xung} cài thử cho."], ["[#warm] A: Ngày mai {xung} đến thăm {goi}, nhớ chuẩn bị chén trà ngon."], ["[#warm] A: Thấy {goi} là {xung} thấy nhẹ lòng."], ["[#warm] A: Có điều gì ấm ức {goi} cứ nói, {xung} nghe."], ["[#cool] A: {Goi} cũng đi dạo hôm nay sao?"], ["[#cool] A: Trời tốt, {goi} nên ra ngoài nhiều hơn."], ["[#cool] A: Chào {goi}, {xung} đang bận, xin phép đi trước."], ["[#cool] A: {Goi} khỏe chứ? Dạo này ít gặp."], ["[#cool] A: Hoa ở đây đẹp, {goi} có thấy không?"], ["[#cool] A: Xin chào {goi}, mong {goi} vạn sự bình an."], ["[#cool] A: Cung này rộng, thật khó gặp {goi} mấy khi."], ["[#cool] A: {Goi} đi đường cẩn thận."], ["[#cold] A: {Goi} đi đâu mà vội vậy, mong là không tới chỗ không nên tới."], ["[#cold] A: Cẩn thận bước chân, kẻo trượt ngã cũng chẳng ai đỡ."], ["[#cold] A: {Goi} có vẻ đắc ý nhỉ, chớ vui quá sớm."], ["[#cold] A: Trong cung này, {goi} đừng tưởng chỉ có {goi} là đáng kể."], ["[#cold] A: Mong {goi} giữ phúc phận được lâu."], ["[#cold] A: {Goi} đã nghe lời đồn chưa? Hay chính {goi} là người tung ra?"], ["[#cold] A: Đường hẹp thế này, {goi} nhường {xung} đi trước nhé."], ["[#cold] A: Gặp {goi} ở đây thật chẳng ngờ."], ["A: {Goi} vừa từ đâu tới, trông có vẻ vui."], ["A: {Goi} có muốn cùng {xung} ngắm cảnh một lát không?"], ["A: Cung này nhiều chuyện, {goi} cẩn thận thì tốt."], ["A: {Goi} đến lúc này, chắc có việc cần?"]]},
+{"k": "hh-con", "pair": ["hh-con"], "x": [["A: Bữa ăn hôm nay {goi} dùng ngon miệng chứ?", "B: Bẩm, {xung} đã dùng, đa tạ {goi} quan tâm."], ["A: Trong cung dạo này quy củ phải giữ cho nghiêm.", "B: {Goi} yên tâm, {xung} sẽ nhắc nhở người trong điện."], ["A: {Goi} thỉnh an muộn quá, lần sau chớ vậy.", "B: {Xung} biết lỗi, lần sau xin đến sớm hơn."], ["A: Hôm nay trời đẹp, {goi} đi cùng {xung} ngắm vườn nhé.", "B: {Xung} xin tuân, đa tạ {goi} ban ân."], ["A: [#warm] {Goi} đức hạnh đoan trang, {xung} rất mến.", "B: {Goi} quá khen, {xung} không dám nhận."], ["A: [#cold] {Goi} cũng nên nhớ thân phận, đừng quá kiêu căng.", "B: {Xung} ghi nhớ lời dạy của {goi}."], ["A: [#cool] Việc trong điện của {goi} vẫn yên ổn chứ?", "B: Bẩm, vẫn ổn, chỉ nhờ {goi} che chở."], ["A: {Goi} dạo này sức khỏe có tốt không?", "B: Bẩm, {xung} vẫn khỏe, không dám phiền lòng {goi}."], ["A: Lục cung phải hòa thuận, {goi} hiểu chứ?", "B: {Xung} hiểu, sẽ giữ gìn hòa khí."], ["A: [#wet] Mưa thế này mà {goi} vẫn đến thỉnh an, thật có lòng.", "B: Đó là bổn phận của {xung}."], ["A: [#thu] Thu đến, {goi} nhớ giữ ấm, đừng để nhiễm hàn.", "B: Đa tạ {goi} nhắc nhở."], ["A: [#xuan] Xuân sang, trong cung phải chăm lo cho đầy đủ lễ nghi.", "B: {Xung} xin theo lời dạy."]]},
+{"k": "hh-me", "pair": ["hh-me"], "x": [["[#warm] A: Gặp {goi} ở đây, {xung} cũng vui lòng."], ["[#warm] A: {Goi} còn trẻ, có điều gì chưa rõ cứ đến hỏi {xung}."], ["[#warm] A: {Xung} nghe nói {goi} dạo này chăm chép kinh, thật đáng khen."], ["[#warm] A: Hầu hạ Hoàng thượng cho chu đáo, {goi} cũng phải tự giữ sức."], ["[#warm,cool] A: Hoa trong vườn đang đẹp, {goi} cũng ra ngắm sao?"], ["[#cool] A: Hậu cung yên ổn là nhờ các {goi} biết giữ lễ."], ["[#cool] A: {Goi} dạo này ít đến thỉnh an, {xung} có phần nhớ."], ["[#cool,cold] A: Trong cung tai vách mạch rừng, {goi} ăn nói nên cẩn trọng."], ["[#cold] A: Cây cao thì đón gió, {goi} nên nhớ lấy."], ["[#cold] A: Hòa thuận trong hậu cung là phúc của Hoàng thượng, {goi} hiểu chứ?"], ["[#dong] A: Trời rét, {goi} nhớ mặc thêm áo kẻo nhiễm lạnh."], ["[#ha] A: Nắng gắt, {goi} đừng đứng lâu ngoài trời."]]},
+{"k": "th-con", "pair": ["th-con"], "x": [["A: {Goi} gần đây có chăm chỉ lễ Phật không?", "B: Bẩm {goi}, {xung} vẫn chép kinh mỗi ngày."], ["A: Trong cung phải giữ hòa khí, {goi} nhớ lấy.", "B: {Xung} xin ghi nhớ lời {goi} dạy."], ["A: {Goi} trông gầy đi, phải bồi bổ thêm.", "B: Đa tạ {goi} quan tâm."], ["A: Việc hậu cung đừng làm quá lố, rước họa vào thân.", "B: {Xung} đã hiểu."], ["A: [#warm] {Goi} là đứa ngoan, {xung} rất thương.", "B: {Goi} quá khen, {xung} không dám."], ["A: [#cold] {Goi} phải biết giữ phận, đừng gây thêm chuyện.", "B: {Xung} xin chừa."]]},
+{"k": "th-me", "pair": ["th-me"], "x": [["A: {Goi} đến rồi à, ngồi xuống đây cho {xung} xem."], ["A: {Goi} có điều gì cần thưa với {xung} không?"], ["A: Hậu cung này phải biết giữ chừng mực."], ["A: {Goi} thân thể có khỏe không?"], ["A: {Goi} nên chăm chỉ lễ Phật, tâm sẽ yên."], ["A: Bên ngoài có tin gì, {xung} đều nghe cả."], ["A: {Goi} nhớ phải hòa thuận với các cung nhân trong cung."], ["A: Việc của {goi} {xung} đã biết, chớ phải lo."], ["[#wet] A: Mưa thế này {goi} còn đến, thật có lòng."], ["[#xuan] A: Xuân sang, {goi} nên ra vườn một chút."], ["[#dong] A: Đông lạnh, {goi} nhớ mặc ấm."], ["[#lo] A: {Goi} còn trẻ, phải học nhiều quy củ."], ["[#hi] A: {Goi} xử việc khá chín chắn, {xung} tin tưởng."]]},
+{"k": "emp-me", "pair": ["emp-me"], "x": [["A: {Goi} đến rồi."], ["A: {Xung} đang bận, ngồi xuống đi."], ["A: {Goi} vẫn bình an chứ?"], ["A: Trời hôm nay đẹp, đi dạo cùng {xung} nhé."], ["A: {Goi} nhớ giữ gìn sức khỏe."], ["A: Gần đây {goi} có gì vui chăng?"], ["[#toi] A: Muộn rồi, {goi} nghỉ sớm đi."], ["[#xuan] A: Xuân đến, hoa nở rực."], ["[#dong] A: Trời lạnh, {goi} giữ ấm."], ["[#fest] A: Hôm nay {fest}, {goi} vui chứ?"]]},
+{"k": "emp-con", "pair": ["emp-con"], "x": [["A: {Goi} dạo này sao?", "B: Bẩm, {xung} vẫn bình an."], ["A: Ngồi xuống đi.", "B: {Xung} tạ ơn."], ["A: Trong cung có gì mới?", "B: Bẩm, mọi việc vẫn yên."], ["A: [#cold] Hôm nay {xung} bận.", "B: {Xung} xin cáo lui."]]},
+{"k": "kid-me", "pair": ["kid-me"], "x": [["A: {Goi} ơi, {goi} về rồi à!"], ["A: {Goi} đến chơi với {xung} đi."], ["A: Hôm nay {xung} học được chữ mới, {goi} xem này."], ["A: {Goi} có mệt không? {Xung} đấm lưng cho."], ["A: {Goi} kể chuyện cho {xung} nghe nhé."], ["A: {Xung} nhớ {goi} lắm."], ["A: {Goi} xem hoa này, {xung} vừa nhặt."], ["[#wet] A: Trời mưa, {goi} đừng đi đâu nhé."], ["[#snow] A: Tuyết trắng quá, {goi} ra ngắm cùng {xung}."], ["[#toi] A: Tối rồi, {goi} ngủ cùng {xung} nhé."]]},
+{"k": "srv-kid", "pair": ["srv-kid"], "x": [["A: {Goi} phải ăn hết bát cháo mới được ra chơi.", "B: {Xung} ăn rồi mà, xem này."], ["A: Đừng chạy nhanh, kẻo ngã đau.", "B: Vâng, {xung} đi chậm thôi."], ["A: {Goi} học chữ xong chưa?", "B: Xong rồi, {goi} xem nét chữ của {xung}."], ["A: Mặc thêm áo đi, trời lạnh lắm.", "B: Vâng, {goi} giúp {xung} khoác lên."], ["A: [#wet] Mưa to, {goi} đừng chạy ra sân.", "B: Vâng, {xung} ngồi đây nghe mưa rơi."], ["A: Kể cho {goi} nghe chuyện hôm qua đi.", "B: Hay quá, {xung} thích nghe lắm."]]},
+{"k": "off-me", "pair": ["off-me"], "x": [["A: {Goi} cần chăm sóc thân thể, đừng để khí huyết suy yếu."], ["A: Mạch của {goi} ổn định, chỉ cần tĩnh dưỡng thêm."], ["A: {Xung} xin dặn {goi} nên dùng đồ ấm, tránh gió lạnh."], ["A: {Goi} uống thuốc đúng giờ, đừng bỏ bữa."], ["A: {Xung} thấy sắc mặt {goi} hơi nhợt, nên nghỉ ngơi nhiều."], ["[#dong] A: Đông lạnh dễ sinh bệnh, {xung} xin {goi} giữ ấm."], ["A: Nếu {goi} thấy khó chịu, cứ cho gọi {xung} ngay."]]}
+],
+hap:{
+"gift":[["A: Món quà nhỏ này, mong {goi} vui lòng nhận lấy.", "B: Đa tạ {goi}, thật là quý hóa."], ["A: {Xung} chọn món này cả buổi, hy vọng hợp ý {goi}.", "B: Hợp lắm, {xung} sẽ cất giữ cẩn thận.", "A: Nhận được là {xung} mừng rồi."], ["A: Không dám so với lễ vật quý, chỉ là chút lòng thành.", "B: Tấm lòng của {goi} còn quý hơn vật."], ["A: {Goi} đừng chê, đây là chút quà mọn.", "B: Sao dám chê, {xung} xin cảm tạ."], ["A: Mời {goi} nhận lấy món này, coi như lời chào hỏi.", "B: Vậy {xung} không khách sáo nữa, đa tạ."], ["A: [#cold] Quà này {xung} gửi, mong {goi} nhận cho tròn lễ.", "B: Đã tặng thì {xung} nhận, nhưng đừng mong gì thêm."], ["A: [#warm] {Goi} xem này, {xung} tìm được món rất hợp với {goi}.", "B: Thật sao? Đẹp quá, {xung} thích lắm."]],
+"visit":[["A: {Goi} đến thăm {xung}, thật là vinh hạnh.", "B: Rảnh rỗi nên ghé qua, {goi} đừng khách sáo."], ["A: Mời {goi} ngồi, trà vừa pha xong.", "B: Đa tạ, trà thơm quá.", "A: Nếu thích, lần sau {xung} lại pha."], ["A: Hôm nay {xung} đến thăm {goi}, không biết có làm phiền không.", "B: Đâu có, {goi} đến là {xung} mừng."], ["A: Lâu rồi chưa ngồi chuyện trò với {goi}.", "B: Phải, nhớ lúc trước cùng ngắm hoa."], ["A: {Goi} gần đây có điều gì phiền lòng chăng?", "B: Cũng có chút, nhưng nói ra với {goi} thấy nhẹ hơn."], ["A: [#cold] {Goi} đến đây có việc gì?", "B: Chỉ ghé qua thôi, {goi} đừng đề phòng như vậy."], ["A: [#warm] Có {goi} đến, điện của {xung} sáng hẳn lên.", "B: {Goi} lại khéo nói rồi."]],
+"study":[["A: Nét chữ này {goi} viết thật đẹp, {xung} học mãi không được.", "B: Chỉ cần kiên nhẫn, {goi} sẽ viết được."], ["A: Đoạn này đàn phải nhẹ tay, {goi} thử lại xem.", "B: Như thế này phải không? Nghe êm hơn nhiều.", "A: Đúng rồi, cứ giữ nhịp ấy."], ["A: {Goi} chỉ giúp {xung} cách thêu cánh hoa này với.", "B: Cầm kim thế này, kéo chỉ đều tay là đẹp."], ["A: Bài thơ này ý rất sâu, {goi} hiểu thế nào?", "B: {Xung} nghĩ là nói về nỗi nhớ quê."], ["A: Hôm nay học nhịp múa mới, {goi} chuẩn bị chưa?", "B: Xong rồi, mời {goi} chỉ dạy."], ["A: {Goi} vẽ cành mai khéo quá, dạy {xung} với.", "B: Mai phải nét mạnh mà thanh, thử vẽ xem."]],
+"pray":[["A: Hương thắp rồi, {goi} cùng {xung} tụng kinh nhé.", "B: Được, cầu cho cung điện yên ổn."], ["A: Lòng thành thì Phật mới chứng, {goi} đừng vội.", "B: {Xung} hiểu, chỉ mong bình an."], ["A: {Goi} cầu điều gì vậy?", "B: Chỉ mong người thân khỏe mạnh, thế là đủ.", "A: Lời nguyện chân thành ắt linh ứng."], ["A: Chép kinh xong rồi, để {xung} dâng lên cho {goi} xem.", "B: Nét chữ đoan trang, chắc Phật cũng hoan hỉ."], ["A: Đến giờ lễ, mời {goi} theo {xung}.", "B: Vâng, {xung} xin theo sau."], ["A: Tâm có tĩnh thì việc mới thành.", "B: Phải, {xung} thấy nhẹ lòng hẳn."]],
+"care":[["A: {Goi} ốm đã đỡ chưa?", "B: Đỡ nhiều rồi, đa tạ {goi} lo lắng."], ["A: Thuốc này phải uống nóng mới có tác dụng.", "B: Để {xung} uống ngay, {goi} đừng lo."], ["A: Đừng thức khuya nữa, thân thể quan trọng hơn.", "B: {Xung} nghe lời {goi}, hôm nay đi nghỉ sớm.", "A: Thế mới đúng."], ["A: {Goi} nên đắp thêm chăn, kẻo nhiễm lạnh.", "B: Ấm hơn rồi, đa tạ {goi}."], ["A: Để {xung} sắc thuốc giúp {goi} nhé.", "B: Phiền {goi}, mấy hôm nay {xung} thấy mỏi."], ["A: Hoa này trồng cần tưới đều, {goi} chớ để khô.", "B: Biết rồi, {xung} sẽ chăm kỹ."]],
+"quarrel":[["A: {Goi} dám nói lời ấy với {xung} sao?", "B: Lời nói thật, {goi} không nghe cũng phải nghe."], ["A: {Goi} đừng ỷ vào ân sủng mà lên mặt.", "B: {Xung} đâu có ỷ, chỉ là {goi} ghen tị thôi."], ["A: Chuyện hôm qua {goi} giải thích thế nào?", "B: Không có gì để giải thích, {goi} muốn nghĩ sao thì nghĩ."], ["A: Hôm nay {xung} nhất định phải nói rõ.", "B: Nói thì nói, {xung} không sợ.", "A: Vậy thì đừng trách {xung} thẳng thắn."], ["A: {Goi} đừng tưởng {xung} dễ bắt nạt.", "B: Ai bắt nạt ai, {goi} tự hiểu lấy."], ["A: Đủ rồi, {goi} bớt lời đi.", "B: Hừ, {xung} không thèm cãi nữa."], ["A: Nể mặt chung cung, {xung} bỏ qua lần này.", "B: Vậy lần sau {goi} liệu hồn."]],
+"walk":[["A: Trời đẹp thế này, đi dạo một vòng nhé?", "B: Được, {xung} đi cùng {goi}."], ["A: Hoa bên kia nở đẹp quá, {goi} xem kìa.", "B: Thật, đứng ngắm mãi không chán."], ["A: {Goi} đi chậm chút, đường còn trơn.", "B: Đa tạ {goi} nhắc, {xung} đi cẩn thận."], ["A: Gió ở đây mát, hợp để đi dạo.", "B: Phải, đỡ ngột ngạt hơn trong điện.", "A: Mai lại đến nhé."], ["A: {Goi} thích ngắm hồ hay ngắm hoa hơn?", "B: {Xung} thích ngắm hồ, thấy lòng yên tĩnh."], ["A: Đi thêm đoạn nữa thì tới đình nghỉ chân.", "B: Tốt quá, chân {xung} cũng mỏi rồi."]],
+"any":[["A: {Goi} cũng ở đây sao?", "B: Phải, tình cờ gặp {goi}."], ["A: Có việc gì mà {goi} vội thế?", "B: Không có gì, chỉ là đi ngang thôi."], ["A: Hôm nay trong cung thật nhộn nhịp.", "B: Phải, chắc có việc gì đó."], ["A: {Goi} xem ai kia đang tới.", "B: Để {xung} tránh sang một bên."], ["A: Trời hôm nay đổi gió rồi.", "B: Quả thật, {xung} cảm thấy hơi lạnh.", "A: Vậy mau vào trong thôi."], ["A: {Goi} nhớ giữ lời nhé.", "B: {Xung} đã hứa thì không quên."]]
+},
+eav:{
+"plan":[["A: Việc với {t}, phải làm thật kín kẽ.", "B: Vâng, {xung} đã dặn người thân tín chuẩn bị.", "A: Khẽ thôi, đừng để ai nghe."], ["A: {t} sắp có lúc sơ hở, {xung} đang chờ.", "B: Cẩn thận, đừng nóng vội kẻo hỏng việc."], ["A: Kế này nhắm vào {t}, {goi} chớ hé lời.", "B: Môi {xung} khóa chặt rồi, xin yên tâm."], ["A: Chuẩn bị tới đâu rồi? Việc về {t} đừng chậm.", "B: Đã có người lo, chỉ chờ thời cơ.", "A: Tốt, nhỏ tiếng thôi."], ["A: Khi {t} lơ là, chính là lúc ra tay.", "B: Vâng, {xung} sẽ theo dõi sát."], ["A: Đừng nhắc đến {t} ngoài này, tường có tai.", "B: Dạ, {xung} hiểu."]],
+"evme":[["A: Có kẻ cứ dò hỏi chuyện của {xung}, phải đề phòng.", "B: {Goi} yên tâm, {xung} đã dặn người canh chừng."], ["A: Gần đây thấy có người lảng vảng quanh điện.", "B: Thật sao? {Xung} sẽ để ý kỹ hơn.", "A: Nói khẽ thôi."], ["A: Dường như có kẻ đang để mắt tới {xung} đấy.", "B: Vậy phải giấu kỹ mọi thứ."], ["A: Người kia xem ra không đơn giản, đừng khinh suất.", "B: Vâng, {xung} xin cẩn thận."], ["A: Có ai nghe lỏm chăng? Nhìn quanh xem.", "B: Không thấy ai, nhưng vẫn nên nói nhỏ."], ["A: Việc của {xung} bị lộ một chút rồi.", "B: Vậy phải đổi cách làm thôi."]],
+"affair":[["A: Chuyện với {man}, tuyệt đối đừng để ai biết.", "B: Vâng, {xung} sẽ giữ kín như bưng."], ["A: Lần sau gặp {man}, phải chọn nơi vắng người.", "B: Để {xung} sắp xếp, {goi} cứ yên tâm."], ["A: {man} nhắn lời hẹn, nhớ báo kín đáo.", "B: Dạ, {xung} đã rõ.", "A: Khẽ thôi, kẻo có người nghe."], ["A: Nếu chuyện với {man} lộ ra thì mất cả đầu.", "B: Nên {xung} mới lo đến nỗi không ngủ nổi."], ["A: Đừng nhắc tới {man} khi có người ngoài.", "B: Dạ, {xung} sẽ không nói."], ["A: Gặp {man} xong, nhớ xóa dấu vết cho sạch.", "B: Biết rồi, {goi} yên lòng."]],
+"preg":[["A: Thái y báo {xung} có hỉ, tạm thời đừng nói ai.", "B: Vâng, {xung} sẽ giữ kín, chờ đúng lúc rồi tâu.", "A: Khẽ thôi."], ["A: Trong bụng {xung} đã có hài nhi, phải giữ cho an toàn.", "B: Vâng, từ nay đồ ăn thức uống {xung} kiểm kỹ."], ["A: Đừng để người khác biết {xung} có thai quá sớm.", "B: Dạ, {xung} xin giữ miệng."], ["A: Từ nay phải tránh những kẻ có ý xấu.", "B: Vâng, {xung} sẽ canh chừng cẩn thận."], ["A: Tin này chỉ có {goi} biết, đừng hé nửa lời.", "B: Môi {xung} đã khóa rồi."], ["A: Thai nhi còn yếu, nhớ dặn bếp nấu đồ nhẹ.", "B: Dạ, {xung} đã dặn."]],
+"items":[["A: {it} giấu kỹ rồi, đừng để ai thấy.", "B: Vâng, {xung} cất ở chỗ khó ai ngờ."], ["A: Cái {it} đó nguy hiểm, nhớ cẩn thận khi dùng.", "B: Dạ, {xung} biết rồi."], ["A: Phải giữ {it} thật kín, lộ ra là chết.", "B: Dạ, {xung} xin giữ gìn.", "A: Nhỏ tiếng thôi."], ["A: {it} dùng xong phải hủy ngay, đừng để lại.", "B: Vâng, {xung} sẽ làm sạch dấu vết."], ["A: Ai hỏi về {it} thì cứ bảo không biết.", "B: Dạ, {xung} sẽ giả ngơ."], ["A: Hàng này, {it}, đừng đem ra ngoài điện.", "B: {Xung} hiểu, sẽ cất trong hộp kín."]],
+"deed":[["A: Việc đã làm xong rồi, đừng nhắc lại nữa.", "B: Vâng, {xung} coi như chưa từng nghe."], ["A: Chuyện hôm trước nếu lộ ra thì phiền lắm.", "B: Vâng, {xung} sẽ cẩn thận."], ["A: Người của {xung} đã giải quyết êm thấm.", "B: Vậy là tốt, nhỏ tiếng thôi."], ["A: Cứ coi như không có gì xảy ra.", "B: Vâng, {xung} đã rõ rồi.", "A: Tốt, đừng hé lời."], ["A: Việc ấy không ai thấy, cứ yên tâm.", "B: Dạ, {goi} nói vậy {xung} mới yên lòng."], ["A: Đã lỡ làm, giờ chỉ cầu trời đừng có ai biết.", "B: Dạ, {xung} cũng cầu như thế."]],
+"hate":[["A: {Xung} hận {h} thấu xương, sớm muộn gì cũng trả.", "B: Xin {goi} nhịn đã, chưa phải lúc."], ["A: Mỗi lần thấy {h}, {xung} lại thấy lòng bứt rứt.", "B: {Goi} cố nhẫn nại, thời cơ sẽ tới."], ["A: {h} làm bao chuyện thất đức, {xung} nhớ rõ từng việc.", "B: Vâng, rồi sẽ có ngày thanh toán."], ["A: Đừng để {h} biết {xung} ghét nàng.", "B: Dạ, {xung} giữ miệng kỹ."], ["A: Nhìn mặt {h} là {xung} thấy bực.", "B: Nhỏ tiếng thôi, kẻo người nghe."], ["A: Mối thù với {h}, {xung} nhất định không quên.", "B: Vâng, {xung} sẽ ghi nhớ."]],
+"ally":[["A: Trong cung này, chỉ có {h} là đáng tin.", "B: Phải, {h} luôn hết lòng với {goi}."], ["A: {h} vừa giúp {xung} một việc lớn, phải nhớ ơn.", "B: Vâng, sau này nhất định báo đáp."], ["A: Có {h} bên cạnh, {xung} yên tâm hơn nhiều.", "B: Hai người thân thiết thế, ai cũng nể."], ["A: Đừng để người ngoài biết {xung} thân với {h}.", "B: Dạ, {xung} giữ kín."], ["A: {h} là chỗ dựa của {xung}, không thể thiếu.", "B: Dạ, {xung} hiểu rồi.", "A: Khẽ thôi kẻo có người nghe."], ["A: Nếu có chuyện gì, cứ tìm {h} trước.", "B: Dạ, {xung} nhớ rồi."]],
+"trait":[["A: Ai cũng bảo {xung} {tr}, nhưng đó chỉ là vẻ ngoài thôi.", "B: Dạ, {goi} còn nhiều điều người khác không thấy."], ["A: Tính {tr} của {xung} đôi khi hại chính {xung}.", "B: Vâng, {goi} nên chú ý hơn."], ["A: Kẻ ngoài nói {xung} {tr}, cũng chẳng sai.", "B: Đó cũng là điều thật của {goi} mà."], ["A: Đã {tr} thì khó mà sửa, {goi} đừng khuyên nữa.", "B: Dạ, {xung} xin nghe lời."], ["A: Nhờ {tr} mà {xung} giữ được chỗ đứng đến nay.", "B: Phải, đúng như vậy."], ["A: Đừng để người khác lợi dụng tính {tr} của {xung}.", "B: Dạ, {xung} sẽ để ý."]],
+"where":[["A: Lát nữa {xung} sẽ đến {pl2}, {goi} nhớ đi cùng.", "B: Dạ, {xung} đã hiểu.", "A: Nhớ nhỏ tiếng."], ["A: Gặp ở {pl2} nhé, đừng để ai theo.", "B: Vâng, {xung} sẽ đi đường vòng."], ["A: Ở {pl2} vắng người, tiện bàn chuyện kín.", "B: Vâng, {xung} sẽ chờ sẵn."], ["A: Hẹn {goi} ở {pl2}, nhớ đi một thân một mình thôi.", "B: Vâng, {xung} nhớ kỹ rồi."], ["A: Đừng để ai thấy {xung} đến {pl2}.", "B: Dạ, {xung} sẽ canh gác."], ["A: Chuyện bàn xong ở {pl2}, {goi} về trước.", "B: Vâng, {xung} xin cáo lui."]],
+"sung":[["A: Hoàng thượng đang ưu ái {xung}, phải giữ cho vững.", "B: Dạ, {goi} nên khiêm nhường, đừng để người ganh ghét."], ["A: Dạo này {xung} được sủng ái, nhiều kẻ ghen lắm.", "B: Vâng, {goi} cẩn thận từng lời."], ["A: Ân sủng này không thể mất, phải liệu cách giữ.", "B: Dạ, {xung} sẽ giúp {goi} hết sức.", "A: Nói khẽ chút nào."], ["A: Có người đang nhìn {xung} chằm chằm, phải đề phòng.", "B: Dạ, {xung} đã để ý."], ["A: Hôm nay Hoàng thượng khen {xung} đấy.", "B: Thật vinh hạnh, nhưng đừng phô trương."], ["A: Muốn giữ sủng thì phải biết cách, {goi} giúp {xung} nhé.", "B: Vâng, cứ để {xung} lo."]],
+"any":[["A: Đây là chuyện riêng, {goi} đừng nói ai.", "B: Vâng, {xung} xin giữ kín."], ["A: Nhỏ tiếng thôi, ngoài kia có người.", "B: Dạ, {xung} sẽ nói khẽ."], ["A: Việc này chỉ hai người biết, phải giữ kín.", "B: Dạ, tuyệt đối không để lộ.", "A: Tốt lắm."], ["A: Có chuyện này {xung} muốn bàn riêng với {goi}.", "B: Dạ, {goi} cứ nói."], ["A: Dạo này trong cung không yên, phải cẩn thận.", "B: Vâng, {xung} sẽ để ý."], ["A: Lời hôm nay đừng truyền ra ngoài.", "B: Vâng, {xung} hiểu rồi."]]
+}};
+window.CHAT_HAPK={gift:/gift|give|tang/i,visit:/visit|talk|chat|meet|tea|greet|thTH|thHH/i,study:/study|learn|lesson|craft|art/i,pray:/pray|rite|kinh/i,care:/ill|cure|care|treat|fert|med/i,quarrel:/provoke|quarrel|vent|slap|scold|flat/i,walk:/walk|stroll|garden|go/i};
+/* ================= jchat: PALACE CHATTER — bubble talk over NPC heads (PL#6; owner OD:L1627 (5), OD 19/11 ~02:40Z/~03:05Z/~03:50Z) =================
+   Owner words (verbatim source: dev/OWNER_DECISIONS.md L1627 (5)): speech bubbles over NPC heads (manga style); the maid greets when she enters
+   ("chủ tử về rồi", "chào mừng chủ tử hồi cung"); every 1–2 min NPCs chat about palace life; people in one happening stand together in one frame
+   and talk back and forth; eavesdropping shows their exact lines; SPEECH only, no thought bubbles; big varied line banks, no repetition.
+   WRAPS, edits no caller. Numbers: BAL.chat (jbal2, one core). Lines: CHAT_L (jchatl.js). Address words: jvoice kSay / kAddr (one address core).
+   HOOKS
+   (a) arrival home → her OWN maid (really on the stage, not away on an errand) greets her (CHAT_L.greet, once per arrival);
+   (b) idle timer, every BAL.chat.gap.min..max s while the stage is on screen (no dialog, page visible): two (or one) people REALLY standing there
+       talk — an exchange of CHAT_L.topics fitting their kinds, its needs read from the live world (a real summoned / pregnant / ill consort …);
+   (c) the people of ONE happening at her place (jagday agPlanned: doer + target, place = here) stand next to each other on the stage (S.visit.people
+       re-ordered once per visit) and are picked first; they talk about that deed (CHAT_L.hap);
+   (d) eavesdrop (j9 overhear, j78 maid dò la): the result quotes the exchange word for word (CHAT_L.eav by the TRUE fact kind j78 learnt).
+   LOOK: KIT ONLY. Every line is shown by the kit part kitSay (KIT §78.z "say" state + §78.y, K-HEAD-SAY, jmark.js): the white speech bubble
+   holding the line, its own stage layer .ksay-lay (works in co-op / servant-road lives too), bottom on the speaker's sex line, never over a head,
+   inside the stage, no overlap. No layer / CSS / placement of ours. A person with a notice (yellow bubble, jerr) never gets a chatter bubble.
+   NO REPEAT: an exchange / greeting is not used again until BAL.chat.noRepeat others were said (memory S.pcx, lazy; a guest seat keeps it in the page).
+   CO-OP: display only, writes no shared state, syncs nothing. PERF: one setTimeout chain, work only at a tick; paused while hidden.
+   ===================================================================================================================== */
+(function(){
+const C=()=>(typeof BAL!=="undefined"&&BAL.chat)||null;
+const CH={t:0,run:0,seq:0,visit:null,prev:undefined,stat:{tick:0,said:0,greet:0,hap:0,eav:0,skip:0,lines:0},log:[],errs:[],pm:{}};
+window.CHAT=CH;
+function err(w,e){try{CH.errs.push(w+": "+(e&&e.message||e));if(CH.errs.length>30)CH.errs.shift()}catch(x){}}
+function guest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat==="b")}catch(e){return false}}
+function on(){try{const c=C();return !!(c&&c.on&&typeof S!=="undefined"&&S&&!S.dead&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet))}catch(e){return false}}
+function R(a,b){return a+Math.random()*(b-a)}
+function pick(L){return L[Math.floor(Math.random()*L.length)]}
+/* ---------- who is who ---------- */
+const SRVF=new Set(["maid","elder","srv","mama","cn"]);const SRVM=new Set(["eun","eunuch","ksp","tq"]);
+function kindOf(p){if(!p)return"";const k=p.kind;if(k==="chest"||k==="info")return"";
+ if(k==="rival"||k==="fallen")return p.ref?(p.ref.queen?"hh":"con"):"";if(k==="hh")return"hh";if(k==="emp")return"emp";if(k==="th")return"th";if(k==="kid")return"kid";
+ if(k==="ty"||k==="off"||k==="man")return"off";if(SRVM.has(k)||(p.ref&&p.ref.role==="eunuch"))return"eun";if(SRVF.has(k)||p.ref&&p.ref.role)return"srv";return""}
+/* the kAddr speaker of a stage person */
+function spk(p){const k=kindOf(p);if(!k)return null;if(k==="con"||k==="hh")return p.ref||"hh";if(k==="emp")return"emp";if(k==="th")return"th";
+ if(k==="kid")return{kid:1,name:p.name};if(k==="off")return{role:"x",rw:"quan",name:p.name};if(k==="eun")return{srv:"m",name:p.name};return{srv:"f",name:p.name}}
+function ent(p){try{if(!p)return null;if(p.kind==="maid")return S.maid;return p.ref||null}catch(e){return null}}
+/* the name she may hear: a person she knows by name (j61) is named, a stranger by what she sees (rank by dress) */
+function nameOf(e,p){try{if(e===S)return S.name;if(e&&typeof k61Named==="function"&&!k61Named(e)){const s=typeof k61Short==="function"?k61Short(e):"";return s?"vị "+s.charAt(0).toLowerCase()+s.slice(1):"vị ấy"}
+ return (p&&p.name)||(e&&e.name)||"vị ấy"}catch(x){return (p&&p.name)||"vị ấy"}}
+function lid(e){try{return typeof ledgerId==="function"&&e?ledgerId(e):null}catch(x){return null}}
+/* ---------- tags: "[#xuan,toi]" at the start of a line / exchange (all must hold) ---------- */
+const TAG=/^\[#([a-z0-9_,:-]+)\]\s*/;
+function ctx(A,B){const c={};try{c.season=({"Xuân":"xuan","Hạ":"ha","Thu":"thu","Đông":"dong"})[SEASON[(S.month||1)-1]]||"xuan";/* the one season table (j1 SEASON) */c.buoi=["sang","chieu","toi"][S.buoi|0]||"sang";
+ const w=S.wx||{};c.wet=w.f===1||w.k==="rain";c.snow=/^snow/.test(w.k||"");c.heat=w.f===2;c.storm=w.f===3;c.fest=typeof festToday==="function"?festToday():null;c.place=S.place||"home";
+ c.band=typeof kBand==="function"?kBand(S):"lo";c.m=A&&B&&typeof kAddr==="function"?kAddr(A.sp,B.sp).m:"cool"}catch(e){err("ctx",e)}return c}
+function tagOk(t,c){for(const x of t.split(",")){if(!x)continue;if(x==="xuan"||x==="ha"||x==="thu"||x==="dong"){if(c.season!==x)return false}
+ else if(x==="sang"||x==="chieu"||x==="toi"){if(c.buoi!==x)return false}else if(x==="wet"||x==="snow"||x==="heat"||x==="storm"){if(!c[x])return false}
+ else if(x==="dry"){if(c.wet||c.snow||c.storm)return false}else if(x==="fest"){if(!c.fest)return false}else if(x==="nofest"){if(c.fest)return false}
+ else if(x==="lo"||x==="mid"||x==="hi"||x==="hq"){/* a band list: any of the band tags present must hold */if(!t.split(",").filter(y=>/^(lo|mid|hi|hq)$/.test(y)).includes(c.band))return false}
+ else if(x==="warm"||x==="cool"||x==="cold"){if(!t.split(",").filter(y=>/^(warm|cool|cold)$/.test(y)).includes(c.m))return false}
+ else if(x.slice(0,3)==="pl:"){if(!x.slice(3).split(":").includes(c.place))return false}else if(x==="home"){if(c.place!=="home")return false}else if(x==="out"){if(c.place==="home")return false}}
+ return true}
+/* a tag may also follow the speaker mark: "A: [#out] …" */
+const TAGS2=/^([AB]:\s*)\[#([a-z0-9_,:-]+)\]\s*/;
+function tagOf(s){s=String(s);const m=TAG.exec(s);if(m)return m[1];const n=TAGS2.exec(s);return n?n[2]:""}
+function untag(s){return String(s).replace(TAG,"").replace(TAGS2,"$1")}
+/* ---------- real slots (law 6b/6c): a slot that cannot be filled with a real thing drops the line ---------- */
+function lr(){try{return (typeof liveRivals==="function"?liveRivals(true):[]).filter(v=>v&&v.alive&&!v.out)}catch(e){return[]}}
+const NEED={
+ sungtop:(x)=>{const L=lr().filter(v=>!x.has(v));if(!L.length)return null;const v=L.slice().sort((a,b)=>(b.sung||0)-(a.sung||0))[0];return (v.sung||0)>0?v:null},
+ preg:(x)=>{const L=lr().filter(v=>v.preg&&!v.hidden&&!x.has(v));return L.length?pick(L):null},
+ ill:(x)=>{const L=lr().filter(v=>v.ill&&v.ill.known&&!x.has(v));return L.length?pick(L):null},
+ queen:(x)=>{const v=lr().find(v=>v.queen);return v&&!x.has(v)?v:null},
+ any:(x)=>{const L=lr().filter(v=>!x.has(v));return L.length?pick(L):null},
+ cold:(x)=>{try{const L=(rivals||[]).filter(v=>v.alive&&v.out&&!x.has(v));return L.length?pick(L):null}catch(e){return null}},
+ kid:()=>{try{const L=(S.kids||[]).filter(k=>k.alive);return L.length?pick(L):null}catch(e){return null}},
+ emp:()=>S.emp?"emp":null,th:()=>S.thDead?null:"th",fest:()=>{const f=typeof festToday==="function"&&festToday();return f||null}};
+function slotName(v){if(v&&v.queen&&!v.out)return"Hoàng hậu";if(v==="emp")return"Hoàng thượng";if(v==="th")return"Thái hậu";if(v&&v.name&&v.m!=null&&v.t)return v.name;/* a festival */return nameOf(v)}
+function fill(s,A,B,X){try{let t=String(s);
+ const sp=t.charAt(0)==="B"?B:A,ls=sp===A?B:A;t=t.replace(/^[AB]:\s*/,"");
+ t=t.replace(/\{A\}/g,A?nameOf(A.e,A.p):"").replace(/\{B\}/g,B?nameOf(B.e,B.p):"");
+ if(/\{p\}/.test(t)){if(!X.p)return null;t=t.replace(/\{p\}/g,slotName(X.p))}
+ if(/\{pl\}/.test(t)){try{t=t.replace(/\{pl\}/g,typeof placeName==="function"?placeName(S.place||"home"):"")}catch(e){return null}}
+ if(/\{mua\}/.test(t))t=t.replace(/\{mua\}/g,{xuan:"xuân",ha:"hạ",thu:"thu",dong:"đông"}[X.c.season]);
+ if(/\{wx\}/.test(t)){if(!S.wx||!S.wx.n)return null;t=t.replace(/\{wx\}/g,S.wx.n)}
+ if(/\{fest\}/.test(t)){if(!X.c.fest)return null;t=t.replace(/\{fest\}/g,X.c.fest.name||"")}
+ if(/\{me\}/.test(t))t=t.replace(/\{me\}/g,S.name);
+ for(const k in X.v||{})t=t.split("{"+k+"}").join(X.v[k]);
+ if(/\{[a-z]+\}/.test(t.replace(/\{(?:[Gg]oi|[Xx]ung|[Tt]en)\}/g,"")))return null;/* an unknown slot: never print a raw token */
+ if(typeof kSay==="function")t=kSay(sp?sp.sp:null,ls?ls.sp:S,t,ls?{}:{own:A&&A.p&&A.p.kind==="maid"});
+ if(!/\S/.test(t)||/\{|\}/.test(t))return null;return{who:sp,txt:t}}catch(e){err("fill",e);return null}}
+/* ---------- memory (no repeat) ---------- */
+function mem(){const c=C();let M;try{if(!guest()){S.pcx=S.pcx&&typeof S.pcx==="object"?S.pcx:{n:0,u:{}};M=S.pcx}}catch(e){}if(!M){CH.pm.u=CH.pm.u||{};CH.pm.n=CH.pm.n||0;M=CH.pm}
+ if(!M.u)M.u={};const lim=(c&&c.mem)||400;const ks=Object.keys(M.u);if(ks.length>lim){ks.sort((a,b)=>M.u[a]-M.u[b]);for(const k of ks.slice(0,ks.length-lim))delete M.u[k]}return M}
+function hk(x){const s=Array.isArray(x)?x.join("|"):String(x);let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return (h>>>0).toString(36)}
+function fresh(x){const M=mem(),k=hk(x),g=(C().noRepeat|0)||60;return M.u[k]==null||M.n-M.u[k]>=g}
+function used(x){const M=mem();M.n=(M.n|0)+1;M.u[hk(x)]=M.n}
+/* choose from a list of candidates [item, weight] the freshest one (least recently used when all are spent) */
+const kx=o=>o&&typeof o==="object"&&!Array.isArray(o)&&o.x!=null?o.x:o;/* a candidate object is remembered by its exchange */
+function choose(L,strict){if(!L.length)return null;const F=L.filter(x=>fresh(kx(x[0])));if(!F.length&&strict)return null;/* chatter: silence rather than a line said lately */if(F.length){let s=0;for(const x of F)s+=x[1];let r=Math.random()*s;for(const x of F){r-=x[1];if(r<=0)return x[0]}return F[F.length-1][0]}
+ const M=mem();return L.slice().sort((a,b)=>(M.u[hk(kx(a[0]))]||0)-(M.u[hk(kx(b[0]))]||0))[0][0]}
+/* ---------- the stage ---------- */
+function stage(){return document.getElementById("stage")}
+function busy(){try{if(document.hidden)return"hidden";const md=document.getElementById("modal");if(md&&!md.hidden)return"modal";if(typeof Q!=="undefined"&&Q&&Q.length)return"queue";
+ const st=stage();if(!st||!st.offsetParent||!st.getClientRects().length)return"nostage";if(typeof tab!=="undefined"&&tab&&tab!=="act")return"tab";return""}catch(e){return"err"}}
+/* people REALLY on the stage, in view, with their figure picture */
+function present(){const st=stage();if(!st)return[];const ppl=typeof curPeople==="function"?curPeople():[];const sr=st.getBoundingClientRect();const L=[];
+ for(const tok of st.querySelectorAll("#tokens .tok.fig")){const i=+tok.dataset.p;const p=ppl[i];if(!p)continue;const img=tok.querySelector("img.figimg");if(!img||!img.naturalWidth||tok.style.visibility==="hidden")continue;
+  if(tok.classList.contains("j59off")||tok.closest(".j59off")||tok.style.display==="none")continue;const r=img.getBoundingClientRect();if(r.right<sr.left+4||r.left>sr.right-4||r.width<8)continue;
+  const sp=spk(p);if(!sp)continue;const e=ent(p);if(e&&(e.dead||e.alive===false))continue;
+  try{if(window.ERR&&ERR.awayOf&&p.kind==="maid"&&ERR.awayOf("mm:me"))continue}catch(x){}
+  L.push({p,i,img,tok,sp,e,k:kindOf(p),id:lid(e)})}return L}
+function noticeOn(P){try{const st=stage();for(const b of st.querySelectorAll(".kmerr-bang")){const r=b.getBoundingClientRect(),q=P.img.getBoundingClientRect();if(r.left+r.width/2>=q.left&&r.left+r.width/2<=q.right)return true}}catch(e){}return false}
+/* ---------- the bubble (KIT §78.z "say" + §78.y = K-HEAD-SAY, kitSay) ---------- */
+function clearB(){try{kitSayClear(stage())}catch(e){}}
+/* the bubble = the kit part kitSay (KIT §78.z "say" + §78.y, K-HEAD-SAY): its own stage layer, placement, pop in/out; no layer / CSS / placement of ours */
+function show(P,txt,ms,tag){const st=stage();if(!st||!P.img.isConnected)return false;if(noticeOn(P))return false;const c=C();
+ const lim=Math.max(1,c.maxBub|0||2);CH.bub=(CH.bub||[]).filter(h=>h&&!h.closed&&h.el.isConnected);while(CH.bub.length>=lim)CH.bub.shift().close();
+ const mk=()=>typeof kitSay==="function"?kitSay(st,P.img,txt,{ms,title:`${nameOf(P.e,P.p)}: ${txt}`}):null;let h=mk();if(!h&&CH.bub.length){CH.bub.shift().close(true);h=mk()}/* no room beside the other bubble (narrow stage, seal + plaque): take turns, the older line leaves */if(!h){CH.stat.noRoom=(CH.stat.noRoom|0)+1;return false}CH.bub.push(h);
+ CH.stat.lines++;CH.log.push({t:Date.now(),who:P.p.name,txt,kit:true,tag:tag||""});if(CH.log.length>60)CH.log.shift();return true}
+function dur(t){const c=C().say||{};return Math.round(Math.max(c.min||2600,Math.min(c.max||6000,(c.base||1400)+String(t).length*(c.ch||55))))}
+/* play the turns one after another; a turn whose speaker left the stage ends the exchange */
+function play(T,tag){if(!T||!T.length)return false;CH.run=++CH.seq;const id=CH.run;let i=0;CH.stat.said++;
+ const step=()=>{if(CH.run!==id)return;if(i>=T.length){CH.run=0;return}if(busy()){CH.run=0;return}const t=T[i++];const P=present().find(x=>x.p===t.who.p)||null;
+  if(!P||!show(P,t.txt,dur(t.txt),tag)){CH.run=0;return}setTimeout(step,dur(t.txt)+((C().turnGap)|0))};step();return true}
+/* ---------- build an exchange ---------- */
+function pairKey(a,b){return a.k+"-"+b.k}
+function topicsFor(A,B){const T=(window.CHAT_L&&CHAT_L.topics)||[];const k1=B?pairKey(A,B):A.k+"-me",k2=B?pairKey(B,A):null;const out=[];
+ for(const t of T){if(t.pair.includes(k1))out.push([t,0]);else if(k2&&t.pair.includes(k2))out.push([t,1])}return out}
+function build(A,B,topicList,c){const c0=c||ctx(A,B);const X={c:c0,v:{}};const used0=new Set([A.e,B&&B.e].filter(Boolean));const cand=[];
+ for(const [t,sw] of topicList){let p=null;if(t.need){const f=NEED[t.need];p=f?f(used0):null;if(!p)continue}
+  for(const x of t.x){const tg=Array.isArray(x)?tagOf(x[0]):tagOf(x);if(tg&&!tagOk(tg,c0))continue;cand.push([{t,sw,x,p},t.w||1])}}
+ for(let n=0;n<6&&cand.length;n++){const o=choose(cand,true);if(!o)return null;const i=cand.findIndex(z=>z[0]===o);cand.splice(i,1);
+  const a=o.sw?B:A,b=o.sw?A:B;X.p=o.p;const L=(Array.isArray(o.x)?o.x:[o.x]).map(untag);const T=[];let ok=true;
+  for(const s of L){const r=fill(s,a,b,X);if(!r||(!b&&s.charAt(0)==="B")){ok=false;break}T.push(r)}if(!ok||!T.length)continue;used(o.x);return T}return null}
+/* the people of a happening here this khắc (jagday deeds: doer + target at this place) */
+function hapPairs(L){const out=[];try{if(typeof agPlanned!=="function")return out;const kh=typeof agKh==="function"?agKh():null;
+ for(const d of agPlanned()){if(d.pl!==S.place)continue;if(kh!=null&&d.kh!=null&&d.kh>kh)continue;const a=L.find(x=>x.id===d.who);if(!a)continue;
+  const b=d.t?L.find(x=>x.id===d.t||x.id===String(d.t)||(x.e&&x.e.id===d.t)):null;out.push({a,b,k:d.k})}}catch(e){err("hap",e)}return out}
+function hapTopic(k){const H=(window.CHAT_L&&CHAT_L.hap)||{};const s=String(k||"");for(const g in H){if(g==="any")continue;const re=(window.CHAT_HAPK||{})[g];if(re&&re.test(s))return g}return"any"}
+function tick(){CH.t=0;if(!on())return arm();CH.stat.tick++;const b=busy();if(b||CH.run){CH.stat.skip++;return arm(true)}
+ try{const L=present();if(!L.length){CH.stat.skip++;return arm()}let T=null;
+  /* (c) a happening here first */
+  const H=hapPairs(L);let hap=false;if(H.length&&Math.random()<((C().w||{}).hap!=null?C().w.hap:1)){const h=pick(H);const g=hapTopic(h.k);const pool=(CHAT_L.hap||{})[g]||(CHAT_L.hap||{}).any||[];
+   if(h.b){T=build(h.a,h.b,[[{pair:[],x:pool,w:1},0]]);if(T){CH.stat.hap++;hap=true}}}
+  /* (b) idle chatter: a pair (or one person to her) */
+  if(!T){const pairs=[];for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){const tp=topicsFor(L[i],L[j]);if(tp.length)pairs.push([[L[i],L[j],tp],wPair(L[i],L[j])])}
+   for(const a of L){const tp=topicsFor(a,null);if(tp.length)pairs.push([[a,null,tp],((C().w||{}).solo)||.6])}
+   for(let n=0;n<6&&pairs.length&&!T;n++){const z=wpick(pairs);T=build(z[0],z[1],z[2]);const kk=z[0].k+"-"+(z[1]?z[1].k:"me");const K=CH.stat.kind=CH.stat.kind||{};K[kk]=K[kk]||[0,0];K[kk][T?0:1]++;if(!T)pairs.splice(pairs.findIndex(q=>q[0]===z),1)}}
+  if(T)play(T,hap?"hap":"idle");else CH.stat.skip++}catch(e){err("tick",e)}arm()}
+function wPair(a,b){const W=C().w||{};if(a.k==="srv"&&b.k==="srv"||a.k==="srv"&&b.k==="eun"||a.k==="eun"&&b.k==="srv")return W.srv||1.2;
+ try{if(a.e&&b.e&&typeof aff==="function"){const f=aff(a.e,b.e);if(f>=(BAL.voice&&BAL.voice.warm||40))return W.friend||1.5;if(f<=(BAL.voice&&BAL.voice.cold||-25))return W.rival||1.3}}catch(e){}return W.base||1}
+function wpick(L){let s=0;for(const x of L)s+=x[1];let r=Math.random()*s;for(const x of L){r-=x[1];if(r<=0)return x[0]}return L[L.length-1][0]}
+function arm(short){if(CH.t)clearTimeout(CH.t);const c=C();if(!c||!c.on)return;const g=c.gap||{};const s=short?(c.retry||20):R(g.min||60,g.max||120);CH.t=setTimeout(tick,s*1000)}
+/* ---------- (a) greeting on arrival home ---------- */
+function greet(){if(!on())return;CH.gt=[];const run=(n)=>{const b=busy();CH.gt.push(n+":"+(b||"-"));if(b==="modal"||b==="queue"){if(n<((C().greet||{}).tries||6))return setTimeout(()=>run(n+1),((C().greet||{}).wait||1500));return}
+  if(b&&b!=="nostage")return;const L=b?[]:present();const M=L.find(x=>x.p.kind==="maid");if(!M){/* her figure picture may still be loading */if(n<((C().greet||{}).tries||6)&&S.place==="home")return setTimeout(()=>run(n+1),((C().greet||{}).wait||1500));return}const pool=(window.CHAT_L&&CHAT_L.greet)||[];const c=ctx(M,null);
+  const cand=pool.filter(s=>{const t=tagOf(s);return !t||tagOk(t,c)}).map(s=>[s,1]);const s=choose(cand);if(!s)return;const r=fill("A:"+untag(s),M,null,{c,v:{}});if(!r)return;used(s);
+  CH.run=0;clearB();if(play([r],"greet"))CH.stat.greet++};setTimeout(()=>run(0),((C().greet||{}).delay||900))}
+/* ---------- (c) the people of one happening stand together (once per visit) ---------- */
+function hapPeople(P){const idOf=p=>lid(ent(p));const pairs=[];if(typeof agPlanned!=="function")return pairs;
+ for(const d of agPlanned()){if(d.pl!==S.place||!d.t)continue;const a=P.find(p=>idOf(p)===d.who),b=P.find(p=>{const id=idOf(p);return id===d.t||id===String(d.t)});if(a&&b&&a!==b&&!pairs.some(q=>q.includes(a)||q.includes(b)))pairs.push([a,b])}return pairs}
+/* the stage pages (j59: page 0 = her + first tokens, every later page = N tokens): a pair is put on ONE page, so both stand in one frame */
+function align(){try{const V=S.visit,st=stage();if(!V||!st||V.__chg2)return false;V.__chg2=1;const pg=(st.dataset.j59pg||"").split(",").map(Number);if(pg.length<5||pg[0]!==0)return false;
+ const first=pg[3],M=pg[4],N=first+(document.getElementById("mefig")?1:0);const P=V.people;if(P.length!==M)return false;const pairs=hapPeople(P);if(!pairs.length)return false;
+ const slot=new Array(M).fill(null);let k=first;for(const pr of pairs){if(k%N!==first%N)k+=N-((k-first)%N);if(k+1>=M)break;slot[k]=pr[0];slot[k+1]=pr[1];k+=2}
+ const rest=P.filter(p=>!slot.includes(p));for(let i=0;i<M;i++)if(!slot[i])slot[i]=rest.shift();if(slot.every((p,i)=>p===P[i]))return false;P.length=0;slot.forEach(p=>P.push(p));return true}catch(e){err("align",e);return false}}
+function group(){try{const V=S.visit;if(!V||!Array.isArray(V.people)||V.__chg)return;V.__chg=1;const P=V.people;
+ const pairs=hapPeople(P);
+ if(!pairs.length)return;const out=[];const put=p=>{if(!out.includes(p))out.push(p)};
+ for(const p of P){if(out.includes(p))continue;const pr=pairs.find(q=>q[0]===p||q[1]===p);if(pr){put(pr[0]);put(pr[1])}else put(p)}
+ if(out.length===P.length&&out.some((p,i)=>p!==P[i])){P.length=0;out.forEach(p=>P.push(p));try{if(typeof popIdx!=="undefined")popIdx=null}catch(e){}}}catch(e){err("group",e)}}
+/* at home her maid stands next to her (first in the stage order, so in her frame on every device): she is the one who greets her (owner OD:L1627 (5)).
+   curPeople is the ONE stage list (the home staff are added by its wrappers), so the order is set there — every index user reads the same list. */
+if(typeof curPeople==="function"){const c0=curPeople;curPeople=function(){const L=c0.apply(this,arguments);try{if(on()&&S.place==="home"&&Array.isArray(L)){const i=L.findIndex(p=>p&&p.kind==="maid");if(i>0){const M=L.slice();M.unshift(M.splice(i,1)[0]);return M}}}catch(e){err("cp",e)}return L}}
+/* renderStage wrapper: arrival detection + grouping; never changes what it draws */
+if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){try{if(on()&&S.visit&&S.visit!==CH.visit){group()}}catch(e){err("rs0",e)}let r=r0.apply(this,arguments);
+ try{if(on()&&S.visit&&S.visit!==CH.visit&&align())r=r0.apply(this,arguments)}catch(e){err("al",e)}
+ try{if(S&&S.visit!==CH.visit){const pl=S.place||"home";const was=CH.prev;CH.visit=S.visit;CH.prev=pl;CH.run=0;clearB();if(pl==="home"&&was!==undefined&&was!=="home")greet()}if(!CH.t)arm()}catch(e){err("rs1",e)}return r}}
+/* ---------- (d) eavesdrop → the exact lines ---------- */
+/* the exchange the target and her confidant really said, from the TRUE facts j78 just learnt (S.intel newest first) */
+function eavLines(v,n){try{const E=(window.CHAT_L&&CHAT_L.eav)||{};const I=(S.intel&&S.intel[v.id])||[];const now=typeof bkey==="function"?bkey():null;const F=I.filter(x=>x.bk===now).slice(0,n||1);if(!F.length)return"";
+ const A={e:v,p:{name:v.name},sp:v,k:v.queen?"hh":"con"};
+ /* her confidant = HER REAL servant (law 6b): by name — watcher(v) first (j22/jtin: her trusted door-keeper), else (a confidant who only TALKS needs no Chủ tin
+    bar; E17r r2: at a new game 0/10 consorts pass it, so no quote at all) her most loyal living servant of v.staff at lòng BAL.loy.close+ (j22's own bar), else her maid at that bar. No real servant → nobody to talk to → no quoted exchange for this fact (the j78 fact itself is unchanged). */
+ let B=null;try{let w=typeof watcher==="function"?watcher(v):null;if(!w||!w.name){const st=(v.staff||[]).filter(x=>x&&x.name&&!x.dead&&x.alive!==false&&(x.loyal||0)>=BAL.loy.close).sort((a,b)=>(b.loyal||0)-(a.loyal||0))[0]||(v.maid&&v.maid.name&&!v.maid.dead&&(v.maid.loyal||0)>=BAL.loy.close?v.maid:null);w=st?{name:st.name,s:st}:null}if(w&&w.name){const eun=!!(w.s&&w.s.role==="eunuch");B={e:null,p:{name:w.name},sp:{srv:eun?"m":"f",name:w.name},k:eun?"eun":"srv",real:w.s||v.maid||null}}}catch(e){err("eavB",e)}
+ if(!B){CH.stat.eavNoSrv=(CH.stat.eavNoSrv|0)+1;return""}
+ const out=[];for(const f of F){const kind=String(f.k||f.kind||"").split(":")[0];const pool=E[kind]||E[f.kind]||E.any||[];if(!pool.length)continue;
+  const X={c:ctx(A,B),v:eavSlots(v,f,kind)};const cand=pool.filter(x=>{const tg=tagOf(Array.isArray(x)?x[0]:x);return !tg||tagOk(tg,X.c)}).map(x=>[x,1]);
+  for(let t=0;t<4&&cand.length;t++){const x=choose(cand);const ex=(Array.isArray(x)?x:[x]).map(untag);const T=[];let ok=true;
+   for(const s of ex){const r=fill(s,A,B,X);if(!r){ok=false;break}T.push(r)}
+   if(ok&&T.length){used(x);out.push(T.map(r=>`${nameOf(r.who.e,r.who.p)}: “${r.txt}”`).join(" — "));break}cand.splice(cand.findIndex(z=>z[0]===x),1)}}
+ if(out.length)CH.stat.eav++;return out.length?" Ngươi nghe rõ từng lời — "+out.join(" · ")+".":""}catch(e){err("eav",e);return""}}
+function eavSlots(v,f,kind){const o={};try{
+ if(kind==="plan"&&v.plan){const t=typeof byKey==="function"?byKey(v.plan.t):null;if(t)o.t=t===S?S.name:nameOf(t)}
+ if(kind==="affair"){const m=typeof manById==="function"&&v.affair?manById(v.affair):null;if(m)o.man=m.name}
+ if(kind==="items"){const bad=(v.inv||[]).filter(e=>e.t||(IT[e.k]&&(itm(e.k).il||itm(e.k).mat)));if(bad.length&&typeof iname==="function"){const n=iname(bad[0]);if(n)o.it=n}}/* no real name → the {it} line is skipped, never a blank */
+ if(kind==="hate"||kind==="ally"){const m=/để bụng (.+?) nhất|thân với (.+?) nhất/.exec(f.txt||"");if(m)o.h=(m[1]||m[2]||"").trim()}
+ if(kind==="trait"){const m=/có nết (.+?)\./.exec(f.txt||"");if(m)o.tr=m[1].toLowerCase()}
+ if(kind==="where"){try{o.pl2=placeName(whereOf(v))}catch(e){}}}catch(e){err("eavS",e)}return o}
+CH.eavLines=eavLines;
+/* j9 overhear (wrapped by j78) and j78 maid dò la: append the quoted exchange to the result / Sổ ghi line */
+if(typeof overhear==="function"){const o0=overhear;overhear=function(k){const n0=snap();const r=o0.apply(this,arguments);try{if(!on())return r;const v=newest(n0);if(v){const q=eavLines(v,1);if(q){if(typeof r==="string"&&r)return r+q;try{if(S.logs&&S.logs.length)S.logs[0]=S.logs[0]+q}catch(e){}}}}catch(e){err("oh",e)}return r}}
+if(typeof j78maidSpy==="function"){const m0=j78maidSpy;j78maidSpy=function(){const n0=snap();const r=m0.apply(this,arguments);try{if(!on())return r;const v=newest(n0);if(v){const q=eavLines(v,2);if(q&&S.logs&&S.logs.length)S.logs[0]=S.logs[0]+q}}catch(e){err("ms",e)}return r}}
+function snap(){const m={};try{for(const id in S.intel||{})m[id]=(S.intel[id][0]||{}).bk+"|"+(S.intel[id][0]||{}).k+"|"+(S.intel[id][0]||{}).txt}catch(e){}return m}
+function newest(n0){try{for(const id in S.intel||{}){const x=S.intel[id][0];if(!x)continue;if(n0[id]!==x.bk+"|"+x.k+"|"+x.txt){const v=typeof RV==="function"?RV(+id):null;if(v)return v}}}catch(e){}return null}
+/* a new life / loaded save: chatter restarts clean (no bubble, no exchange in flight) */
+CH.reset=()=>{CH.run=0;CH.visit=null;CH.prev=undefined;clearB();arm()};
+document.addEventListener("visibilitychange",()=>{if(document.hidden){CH.run=0;clearB()}});
+CH.tick=tick;CH.greet=greet;CH.present=present;CH.build=build;CH.topicsFor=topicsFor;CH.ctx=ctx;CH.fill=fill;CH.tagOk=tagOk;CH.play=play;CH.arm=arm;CH.group=group;CH.hapPairs=hapPairs;
+})();
 /* ================= jmapz: SECOND LEVEL OF CÀN NINH / ĐỨC THỌ + HER PEOPLE WHERE THEY REALLY ARE (KIT §85.10) =================
    Owner OD 18/11 ~19:25Z (4)(5) + ~19:45Z (verbatim in dev/OWNER_DECISIONS.md). The Dư đồ ZONES of 19:25Z (1)(2) were CANCELLED by the owner
    at ~19:45Z ("Thêm một tầng nữa mất công một lần bấm nó rối"): consort palaces keep their own tags; the zone/zoom/fog code is in git history
@@ -79778,7 +80290,7 @@ TH.NOOP.push("resultShow");
    gates read screenOff() (j1: true inside COOPW.ctx), so nothing of hers draws on the host's screen; her floaters / numbers / item and coin
    effects called in her run are captured here (UICAP, plain arguments only) and play on HER phone once, with the answer (TH.uiPlay).
    E's buổi step, B's life, C's world frame and D's deferred work stay quiet (turns that are not her tap). */
-const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitNotice"/* review coop-ptime-reds r1 (whole family: her notices raised by her run on the host — jptime pt:go / pt:back / pt:ord, jrcv rcv:, jerr errand:, jstagehere close: — showed on the HOST's screen, her report text included, and never on hers): captured, shown on HER phone (uiPlay gives the «go» back) */,"kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */,
+const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitNotice"/* review coop-ptime-reds r1 (main): her notices raised by her run on the host (jptime pt:go / pt:back / pt:ord, jrcv rcv:, jerr errand:, jstagehere close:) shown on HER phone (uiPlay gives the «go» back: noteGo) */,"kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */,
  "kpmPlay"/* hostnull (d): her act's figure move on the stage (jpres kpmGo: slap / drag / thread …), played on HER stage */,"cfShow"/* hostnull (d): her night card-flip scene (jflip) */,
  "krvFlip"/* hostnull (b): her face reveal (jreveal krvFlip, raised by k61Know / k61Meet in her run) plays on HER phone, never on the host (below) */]);
 for(const n of UICAP)if(!TH.NOOP.includes(n)&&n!=="kpmPlay")TH.NOOP.push(n);/* kpmPlay: defined below (her stage replays it); in any context its kpmGo is already captured / a no-op, so it needs no wrapper (coop-thin-b NOOP check) */
@@ -79815,8 +80327,14 @@ function noteGo(sp){try{if(!sp||typeof sp!=="object"||!sp.goLabel)return sp;cons
 /* hostnull (c): ONE cap rule (BAL.coopUi, one core): at most BAL.coopUi.batch effects play at once; the rest wait in order and play
    BAL.coopUi.gapMs later, batch by batch — an effect is never dropped (the old answer kept only 4, the run 12). Returns the number queued. */
 const UIQ=[];let uiT=0;
+/* a captured notice loses its «go» (a function never travels): given back by its id on her phone, the same go its maker set (a notice had a go iff it has a goLabel) */
+function noteGo(sp){try{if(!sp||typeof sp!=="object"||!sp.goLabel)return sp;const id=String(sp.id||"");let go=null;
+ if(/^pt:ord:/.test(id)&&typeof ptOrdQ==="function"&&typeof ptOrdOpen==="function"){const k=id.slice(7);go=()=>{const o=ptOrdQ().find(z=>String(z.id)===k);if(o)setTimeout(()=>ptOrdOpen(o),0)}}
+ else if(/^pt:/.test(id)&&typeof ptOpenTin==="function")go=ptOpenTin;else if(/^errand:/.test(id)&&typeof errOpen==="function")go=errOpen;
+ else if(/^rcv:/.test(id)&&typeof rcvOpen==="function")go=()=>rcvOpen(id);
+ return go?Object.assign({},sp,{go}):Object.assign({},sp,{goLabel:""})}catch(e){return sp}}
 function uiPump(){uiT=0;const B=BAL.coopUi/* one core (law 4): no typed fallback */;let n=0;
- while(UIQ.length&&n<Math.max(1,B.batch|0)){const [f,a]=UIQ.shift();try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}
+ while(UIQ.length&&n<Math.max(1,B.batch|0)){const [f,a]=UIQ.shift();if(f==="kitNotice"&&Array.isArray(a))a[0]=noteGo(a[0])/* ptime-reds (main): the notice's «go» given back */;try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}
  TH.uiN=(TH.uiN|0)+n;if(UIQ.length)uiT=setTimeout(uiPump,Math.max(0,B.gapMs|0))}
 TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;if(f==="kitNotice"&&Array.isArray(a))a[0]=noteGo(a[0]);UIQ.push([f,a]);n++}
  if(n&&!uiT)uiT=setTimeout(uiPump,0)/* after every listener of the same view (her patch + render): an effect reads the state it shows */;return n};
@@ -81739,7 +82257,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f3c75f986028";window.CTM_BUILD=BUILD;
+const BUILD="0bcf01368336";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

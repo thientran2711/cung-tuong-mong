@@ -93,7 +93,7 @@ const RCVK={};
 function rcvAsk(k,p,t,x){const D=RCVK[k];if(!D||!p||!t||p===t)return"";if(D.ok&&!D.ok(p,t,x))return"";
  if(t===S){rcvCard("rcvAsk",{k,a:key(p),x:x||null},D.t,p);return `${p.name} sai người sang ${D.act} ngươi. `}
  const O=D.opts(p,t,x);let c=null;
- if(typeof coopAccepted==="function"&&coopAccepted(t)){/* co-op (law 1 two-way, hostnull e, merged here by review r1; coop-ptime-reds' t.coop&&COOPW.inv → O[0] is the same rule, this one also skips a locked road): the other PLAYER already said «Nhận» on the
+ if((typeof coopAccepted==="function"&&coopAccepted(t))||(t.coop&&window.COOPW&&COOPW.inv)){/* + coop-ptime-reds (main): inside her accepted offer (COOPW.inv) *//* co-op (law 1 two-way, hostnull e, merged here by review r1): the other PLAYER already said «Nhận» on the
    co-op ask card (jcoopworld ASK → CW.inv): the yes road (full; half when her Sức is short), never an NPC pick that refuses or tells (mách) after it */
   const ok=O.filter(o=>o&&!(typeof o.lk==="function"&&o.lk()));c=ok.find(o=>o.id==="full")||ok.find(o=>o.id==="half")||ok.find(o=>o.id==="no")||null}
  else c=rcvPick(t,p,O,D.kind||"help");if(!c)return"";const r=c.go();const s=r&&typeof r==="object"?r.r:r;return s?String(s).replace(/([^.!?])$/,"$1. "):""}
