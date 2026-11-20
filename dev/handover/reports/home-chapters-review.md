@@ -36,3 +36,17 @@ PRIORITY #1 CHECK ('kc_ke|kc_hon|tm96z|nhũ mẫu|Thái hậu triệu|home chapt
 | regression | smoke 6 origins × 2 lives errs [] fails [] (7 enter the palace) · oldsave main→this errs [] · shots.js 20 screens bad 0 |
 | item 1 data side | costrows.js reproduces BEFORE: 380 choices, 109 hide a number, 11 «Tốn: không», page errors 0. The data is ready; the kit part is still missing |
 Final PASS needs: KIT READY «KR home-stat rows» wired, costrows.js 0/0, re-shoot E28 + kc_ke s1 + bà mối on Fold + iPad, final merge of LIVE (main is at fd682a8d, not an ancestor of 7882ea5d).
+
+## r2 final — E25r, 20/11 — PASS 5853d71a4 (review/home-chapters-r1) · LAND READY 5853d71a4 (FF on LIVE 983a9436)
+PRIORITY #1 CHECK ('kc_ke|kc_hon|tm96z|nhũ mẫu|Thái hậu triệu|home chapter|vi hành|kc_tt3'): OD 1 | ledger 1 | claims 2 | main 15 | review/* 0 | archive 1
+Contains KIT READY 3332c63b (kit-cost-rows-home) + LIVE 983a9436. A rebuild of the site from source differs only in the build line (CTM_BI).
+| check | result |
+|---|---|
+| item 1 (home-stat rows) | costrows.js --list: arc options 0/366 hide a number, 0 «Tốn: không»; events 3/14 hide only «thế lực nhà ±n» (E28 hac, three options). kit-cost-rows-home.js PASS 15 |
+| shots looked at (Fold 755x1000@2 + iPad 1180x820@2; 20 screens, bad 0) | E28 (Fold): «Dâng phần hồi môn» TỐN Hồi môn −40 · ĐƯỢC được lòng người; «Khuyên cha…» TỐN tổn danh giá gia môn, mất lòng người · ĐƯỢC tiếng hiền, giữ được nhà; «Trả đòn» TỐN Sức −15 · ĐƯỢC sớ hặc quay về… Kế mẫu s1 (iPad): «gia môn sút danh giá (chút ít)» now shown. Bà mối (Fold): «Áp lực hôn sự −8 · bà mối thiện cảm +4» |
+| law 3 | every option shows a real gain AND a real cost or loss. The «thế lực nhà» numbers are part of an option that already shows other true lines |
+| KR «thế lực nhà» | a tracked kit gap, NOT blocking: the worker stopped and filed it (KIT FIRST, no private part), and no card lies or turns cost-free. The kit keeper builds it; afterwards costrows.js must reach 0/0 for events too |
+| law 4 / 6b / banner | one-core-guard PASS · laws.js (static law 4) PASS · faces.js PASS |
+| regression | smoke 6 origins × 2 lives errs [] fails [] · oldsave main→this errs [] · quickcheck alone PASS (old save ok; buổi 1541 vs live 1162 ms within the gate — watch it) |
+Notes, not gates: on «nói khéo» the kit shows an empty GHI CHÚ label (kit part, not this branch); kcIntel(1,2) is still typed in kc_tt c2.
+VERDICT: PASS 5853d71a4 · LAND READY 5853d71a4 (origin/main 983a9436 is its ancestor; FF verified 20/11).
