@@ -350,3 +350,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | mg-env (sonnet; OWNER bug OD 20/11 ~06:55Z Chải chuốt no green zone; whole group engine env defaults) | review/mg-env; briefs/root74-mg-env.md | MAIN ROOT-74 | session_01Rc5AsMwM9DrWGScmHGEFvQ | RUNNING | 20/11 05:36Z |
 | REVIEW mg-noword-a (SMALL sonnet) of ab5e4f68 | review/mg-noword-a(-rv); briefs/rv-root74-mg-noword-a.md | MAIN ROOT-74 | session_01Rc5AsK5AbeBQUR9bnWpJ4q | RUNNING | 20/11 05:38Z |
 | FOREMAN C-AG #28 (npc-agent + whole jobs from MAIN; child of C-AG #27, depth 6) | handover FOREMAN_C_STATUS | C-AG #27 | session_01Rc5AsLarKgavDpQSsAHHYB | RUNNING | 20/11 05:35Z |
+| ge-writers-w3 re-merge LIVE 0de74d9e (opus E11r-w3, unarchived; was PASS r3 b79930bf, stale) | review/ge-writers-w3 | FOREMAN E #16 | session_01DgYSWn2u8M4jdAipxwpiJf | RUNNING | 20/11 05:50Z |
+- (20/11 05:50Z, E #16) caoly-road LIVE 0de74d9e; REVIEW caoly-road E20r session_01DgYSWq4WTWY2p7LTCaMp3M ARCHIVED.
