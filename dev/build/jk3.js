@@ -615,8 +615,8 @@ function k3IsLong(b){if(b.querySelector(".kr-can,.kr-duoc,.kr-mat,.kr-thanh,.kr-
  const t=b.querySelector(".kan");return !!(t&&t.getBoundingClientRect().height>lh*2.3)}
 function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:null;const want=m&&(m.optLayout||(m.kit&&m.kit.optLayout));
  document.querySelectorAll("#modal .opts:has(> button.ka), #modal .kpscopts").forEach(g=>{const dl=g.closest(".dlg");if(dl&&dl.querySelector(".kpid"))return;
-  const B=[...g.querySelectorAll(":scope > button.ka")];g.classList.remove("k3rows","k3grid","k3g3","k3tight");B.forEach(x=>x.classList.remove("k3long"));
-  if(g.clientWidth>0&&g.clientWidth<540){g.classList.add("k3rows");if(g.clientWidth<340)g.classList.add("k3tight");/* kit-opt-text KP14: a narrow option column gives its width to the TEXT, the card picture shrinks */return}/* two columns need >= 270 px per card (a 304 px right column made 149 px cards: one word per line) */
+  const B=[...g.querySelectorAll(":scope > button.ka")];g.classList.remove("k3rows","k3grid","k3g3","k3tight");B.forEach(x=>{x.classList.remove("k3long");const a=x.querySelector(":scope>.kaart");if(a&&a.dataset.k3t){a.style.removeProperty("flex");a.style.removeProperty("width");a.style.removeProperty("height");delete a.dataset.k3t}});
+  if(g.clientWidth>0&&g.clientWidth<540){g.classList.add("k3rows");if(g.clientWidth<340){g.classList.add("k3tight");B.forEach(x=>{const a=x.matches(".kart")&&x.querySelector(":scope>.kaart");if(a){a.style.setProperty("flex","0 0 62px","important");a.style.setProperty("width","62px","important");a.style.setProperty("height","84px","important");a.dataset.k3t="1"}})}/* kit-opt-text KP14: a narrow option column gives its width to the TEXT, the card picture shrinks */return}/* two columns need >= 270 px per card (a 304 px right column made 149 px cards: one word per line) */
   if(want==="rows"){g.classList.add("k3rows");return}if(want==="grid"){g.classList.add("k3grid");if(W>=1000&&B.length>=3)g.classList.add("k3g3");return}
   g.classList.add("k3rows");const L=B.map(k3IsLong);if(L.every(Boolean))return;g.classList.remove("k3rows");g.classList.add("k3grid");if(W>=1000&&B.filter((x,i)=>!L[i]).length>=3)g.classList.add("k3g3");
   B.forEach((x,i)=>{if(L[i])x.classList.add("k3long")});
@@ -630,7 +630,7 @@ function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:
  const st=document.createElement("style");st.id="k3-opts";st.textContent=`
 html body #modal .opts.k3rows:has(> button.ka),html body #modal .kpscopts.k3rows{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto!important}
 html body #modal .opts.k3rows>button.ka,html body #modal .kpscopts.k3rows>button.ka{min-height:0!important}
-html body #modal .opts.k3tight>button.ka,html body #modal .kpscopts.k3tight>button.ka{--kaw:76px;--kah:114px}
+html body #modal .opts.opts.opts.opts.k3tight>button.ka.kart>.kaart.kaart,html body #modal .kpscopts.kpscopts.kpscopts.k3tight>button.ka.kart>.kaart.kaart{flex:0 0 62px!important;width:62px!important;height:84px!important}html body #modal .opts.k3tight>button.ka.kart,html body #modal .kpscopts.k3tight>button.ka.kart{gap:7px!important}
 html body #modal .opts.k3grid:has(> button.ka),html body #modal .kpscopts.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:auto!important;align-items:stretch!important}
 html body #modal .opts.k3grid.k3g3:has(> button.ka),html body #modal .kpscopts.k3grid.k3g3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 html body #modal .k3grid>button.ka.k3long{grid-column:1/-1;order:1}html body #modal .k3grid>button.ka.k3odd{grid-column:1/-1}
