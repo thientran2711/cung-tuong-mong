@@ -28,6 +28,8 @@ Rules (seal only; source in brackets):
   S9 CROWN    A/B: Hoàng hậu / EMPRESS (not dowager) = LARGE phoenix crown; Hoàng quý phi = phoenix crown with ornaments as BIG as Quý phi's, never larger/grander than the Empress's, never 'small' (owner 20/11 ~01:01Z overrides 19/11 'small')
   S10 MALE    a male seal (he/his/him, man, emperor, eunuch, official…) must not hold a handkerchief: handkerchief / kerchief / hanky / khăn
               words FAIL unless negated (A25(1), owner 20/11: 'Đàn ông con trai mà cầm khăn.')
+  S13 NOEAR   a WOMAN's seal (not S10-male, has a female word): any earring word = FAIL (every kind); keyframes A/B must carry
+              master_common.EAR_SENT exactly once (rule F15, owner Lượt 1037: "... không ai được đeo hoa tai."; builders add it via emo-anim/seal_ear.py)
   S12 DISC    A/B: the disc (medallion) colour of the emotion = discs/disc_colours.json (rule A26, SEAL8): its 'en' words must be in the prompt and any
               hex in a medallion/disc sentence must be the table hex; 'PROPOSED' entries (act-ghen) only warn
   S11 CONSORT a consort seal (phi tần, any rank t1–t8 incl. Hoàng hậu; NOT Thái hậu) wears plain BROCADE: silk / gauze / sheer / translucent /
@@ -72,6 +74,11 @@ NEG_RX = re.compile(r"\b(no|not|never|without|nothing|none|nor|instead of)\b", r
 def negated(text, a, b):
     lo = max(text.rfind(c, 0, a) for c in ".;:(),"); hi = [text.find(c, b) for c in ".;:(),"]; hi = min([h for h in hi if h >= 0] or [len(text)])
     return bool(NEG_RX.search(text[lo + 1:hi]))
+
+
+def _mc():   # S13: the ONE earring source (dev/art/master_common.py EAR_SENT / EAR_RX), not a copy
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import master_common
+    return master_common
 
 
 def is_male(t):
@@ -131,6 +138,10 @@ def check(text, kind, key=None):
     if is_male(t):
         for m in KERCHIEF_RX.finditer(t):
             if not negated(t, m.start(), m.end()): f.append(("S10 MALE", f"male seal with '{m.group(0)}' (A25: men never hold a handkerchief)")); break
+    if not is_male(t) and FEM_RX.search(t):   # S13 NOEAR (rule F15, owner Lượt 1037): no woman wears painted earrings
+        _M = _mc(); m = _M.EAR_RX.search(t.replace(_M.EAR_SENT, " "))
+        if m: f.append(("S13 NOEAR", f"earring word '{m.group(0)}' in a woman's seal (F15: earrings are a separate layer)"))
+        if kind in ("A", "B") and t.count(_M.EAR_SENT) != 1: f.append(("S13 NOEAR", f"bare-earlobes sentence {t.count(_M.EAR_SENT)} times (must be 1): '{_M.EAR_SENT}'"))
     if CONSORT_RX.search(t) and not NOT_CONSORT_RX.search(t):
         for m in SHEER_RX.finditer(t):
             if not negated(t, m.start(), m.end()): f.append(("S11 CONSORT", f"consort seal in silk/gauze: '{m.group(0)}' (A25: plain brocade)")); break
@@ -213,7 +224,7 @@ def gate_all(quiet=True):
 
 def selftest():
     good = {"A": "Same style, same round gold-rimmed red medallion. Everything kept INSIDE the round medallion. Whole picture on a flat pure chroma green (#00FF00) background outside the medallion, nothing else, no text.",
-            "B": "NEW: she bursts OUT of the round medallion toward the viewer. The medallion stays round and centred. Whole picture on a flat pure chroma green (#00FF00) background, nothing else, no text.",
+            "B": "NEW: she bursts OUT of the round medallion toward the viewer. The medallion stays round and centred. " + _mc().EAR_SENT + " Whole picture on a flat pure chroma green (#00FF00) background, nothing else, no text.",
             "out": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. She bursts out of the round frame. No camera move, no new objects.",
             "loop": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green. Then she settles back to exactly the starting pose. no camera move, no new objects.",
             "back": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green. She slowly slides back inside the round medallion, exactly like the end frame. no camera move, no new objects."}
@@ -223,11 +234,14 @@ def selftest():
            ("A", good["A"] + " the person is the EMPRESS (Hoàng hậu) with a small phoenix crown.", "S9 CROWN"),
            ("back", good["back"].replace("exactly like the end frame", "like before"), "S7 FRAME"),
            ("B", good["B"].replace("she bursts", "he bursts") + " He is a young EMPEROR; his hands tug a pink silk handkerchief.", "S10 MALE"),
-           ("A", good["A"] + " The person is a consort (Quý nhân) in a pale blue silk robe with sheer gauze sleeves.", "S11 CONSORT")]
-    for k, t in (("B", good["B"] + " He is a young emperor, his hands raised, no handkerchief."), ("A", good["A"] + " A consort (Tần) in a plain brocade robe, no silk."),
-                 ("A", good["A"] + " The elderly empress dowager in a royal yellow silk robe."), ("B", good["B"] + " A maid girl in a pale silk robe tugs a pink silk handkerchief.")):
-        if check(t, k): print("SELF BAD good2", k, check(t, k)); n += 1
-    n = 0
+           ("A", good["A"] + " The person is a consort (Quý nhân) in a pale blue silk robe with sheer gauze sleeves.", "S11 CONSORT"),
+           ("A", good["A"] + " A consort in a brocade robe, pearl earrings. " + _mc().EAR_SENT, "S13 NOEAR"),   # F15: earring word in a woman's seal
+           ("B", good["B"].replace(_mc().EAR_SENT + " ", ""), "S13 NOEAR")]   # F15: woman's keyframe without the bare-earlobes sentence
+    n2 = 0
+    for k, t in (("B", good["B"] + " He is a young emperor, his hands raised, no handkerchief."), ("A", good["A"] + " A consort (Tần) in a plain brocade robe, no silk. " + _mc().EAR_SENT),
+                 ("A", good["A"] + " The elderly empress dowager in a royal yellow silk robe. " + _mc().EAR_SENT), ("B", good["B"] + " A maid girl in a pale silk robe tugs a pink silk handkerchief.")):
+        if check(t, k): print("SELF BAD good2", k, check(t, k)); n2 += 1
+    n = n2
     for k, t in good.items():
         if check(t, k): print("SELF BAD good", k, check(t, k)); n += 1
     for k, t, want in bad:

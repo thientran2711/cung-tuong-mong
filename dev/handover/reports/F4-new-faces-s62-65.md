@@ -99,3 +99,39 @@ Credits used: 0.
   "Công chúa (Tinh nghịch)") · face crop face_page/faces/c09.jpg (crop.py on the new cut, looked) · ledger OWNER-OK line · LOOK_GROUPS.md line. No CDN step (F3's s44 had none).
 - NOT touched: dev/art/earring-test/anchors.json + EAR1.md still use the old cut xSBWFuTjfW (c09, one ear picture-left) → EAR1 refits. The new picture
   also shows one ear on the picture's left, bare. face_page/ASSETS_L703.json + face_tick.html (old L703 page) also still list the old cut, same as s44 (F3 didn't update them).
+
+## s62–s65 DRAWN (owner GO "Vẽ" Lượt 1045) ~07:15Z
+- Roots now marked "chosen-in-band … owner GO Lượt 1045" in s_root_colours.json (no longer placeholder). Gate PASS ×4. gpt-2-6 1024x2304 2k seed 7172, ref eIyOFEidqL, 1 try each.
+  | id | gen | cut | credits |
+  |---|---|---|---|
+  | s62 Dịu dàng | ov6PVaf829 | nVsrRMPYQD | 138 |
+  | s63 Dịu dàng | s7IX5y2l8e | kseVFSr16B | 138 |
+  | s64 Dịu dàng | s7IX54Gl8e | JNChlRROq4 | 138 |
+  | s65 Đoan trang | jUoeq99LD0 | jUoe5yJLD0 | 138 |
+  4 × 138 = 552 cr. F4 total 690 (with c09).
+- Sheet: dev/handover/review-sheets/new-faces-v4/new_s62_65_F4.jpg (make_sheet_new_s62_65.py): big labels "sNN · group · MẶT MỚI · thử khuôn", full figure + face zoom + root swatches.
+- LOOKED (full figure, face zooms, hand zooms): eyes level, mouths closed, no teeth, no forehead mark, ears covered by hair → no earring visible on any,
+  hands 5 fingers, no Qing headdress, outfit = the two root colours on all 4; s62 braid + ONE jasmine flower, wind chime brass bells + red cord in one hand;
+  s63 half-up loop + jade pin, brown rabbit cradled; s64 half-up pearl-wrapped top-knot, loquats held; s65 half-up neat loop + gold pearl pin, prayer beads.
+- Faults (not fixed, L777):
+  1. s62, s63, s64 faces look much alike (same seed 7172 + ref; the Dịu dàng block wording is shared) — the face swaps are subtle.
+  2. s64 loquats carry green LEAVES (prompt: "short bare twig") → small third colour.
+  3. s63 amber reads warm tan-brown; the brown rabbit nearly merges with the robe (flagged before).
+  4. s65 hair: one gold pin visible (prompt: a pair); top looks like a small bun more than a loop.
+  5. s64 lilac reads clearly lilac (more colour than "smoke lilac" #ECE2FE suggests).
+- FACE_CUTS / FACE_MAP NOT wired (owner OK pending).
+
+## s62–s65 APPROVED + WIRED (~07:25Z, foreman ROOT-67)
+- Owner: "Tiếp đến là 4 gương mặt mới duyệt … Ok, mọi thứ ổn. Ừm, Màu sắc cũng ổn." · first "no animals/fruit", then "Nên đi, cứ để đi, không ảnh hưởng gì mấy đâu" → s63 rabbit + s64 loquats kept as drawn.
+- Wired exactly like c09: FACE_CUTS_L703.json + FACE_MAP_L703.json (kind NEWFACE-F4, ver v5, groups Dịu dàng ×3 / Đoan trang) · face crops face_page/faces/s62–s65.jpg (crop.py, looked) ·
+  ledger OWNER-OK · LOOK_GROUPS.md line. FACE_MAP visible count: Sắc sảo 15 · Quyến rũ 18 · Lạnh lùng 15 · Kiêu kỳ 15 · Đoan trang 13 · Dịu dàng 14 = 90. 0 gens.
+- "Picker": the in-game face picker (dev/build/j88 facePool) reads only the live FIGIX consort c01–c32 + maid m01–m52 manifest; s-faces are not in it
+  (F3's s44 + F2's s56–s61 weren't either) → not touched (live game = K18 hands-off). Old face_page ASSETS_L703.json/face_tick.html also not rebuilt (as for s44).
+
+## HANDOVER (F4 rolls over: context 37 % ≥ START_CTX 4 % + 25 %)
+depth 1. F4's work is DONE. Nothing open on my side. Open items for the foreman:
+- EAR1: dev/art/earring-test/anchors.json still uses c09's old cut xSBWFuTjfW → refit to UPvIb4owny.
+- Faults on record (owner OK'd as drawn): s62/s63/s64 faces alike; s64 loquat leaves; s63 rabbit ≈ robe colour; s65 one pin; s64 strong lilac.
+- s62–s65 have only ONE season pair (the root, in s_root_colours.json); the other 3 seasons (A31/A32) still need picking by the palette worker.
+- c09.v3h + make_new_s62_65.py carry the no-earring sentence; drop it once NOEAR1's master block has it (the builders already skip it then).
+Credits F4 total: 690 (c09 138 + s62–s65 552).

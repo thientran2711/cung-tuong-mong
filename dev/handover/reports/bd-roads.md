@@ -362,3 +362,17 @@ bd_soi meets the ≥2-win bar, so no retune of bd_soi_11. Writer 2's 12-life cra
 ### Still open, FOR E / E19 successor (from E14c)
 - dev/GRAND_ENDINGS.md still uses steppe words for bd_tuyet / bd_hen.
 - The FOR C art lists (§FOR C above) need redoing for Ba Tư (fire temple, Tô Lận, Ba Tư dress), not steppe.
+### FINAL — merge of LIVE main 0de74d9e (caoly-road landed) → review/bd-roads @9c96112d
+- Conflicts: assemble.py only, plus index.html/sw.js. assemble.py takes main's list (jrcv, jptime, jagwhy*, jgamevs, jchat*, jbalky, jky) and adds jbalbd.js after jbalroad.js and jrd_bd.js/jrd_bd2.js after jrd_nc.js. index.html/sw.js taken from main and rebuilt with build_site.sh. jgecat.js regenerated: ge-guard 6/6, check.py 0 errors. NIT-1 (nrKhaOf) and NIT-2 (jgedata.js:119) came through unchanged.
+- Gates on the 9c96112d build:
+  - static, all 4 roads: 0 faults;
+  - bd-scan: 0 UNGUARDED, 6c 130 options / 0 NO BOOK;
+  - one-core-guard PASS (inline 3837 / baseline 4212);
+  - bd-batu-switch PASS incl. case 4 (Cao Ly {kha} Phác, 0 faults);
+  - caoly-oldsave 14/14 (main build 72f7c0c5, before Cao Ly, as the old one);
+  - bd-legacy-save PASS; road-rare ALL PASS; ge-engine 808/808; tokscan 0 bad;
+  - kc-roads direct bd,nc 0 fail; coop-together 26/26;
+  - road-full 1 life × 4 roads, 9/9 each;
+  - quickcheck: QUICKCHECK PASS, core gates PASS, old save ok, perf equal to live.
+- G4 manifest-guard now PASSes, so the CDN floor is fixed.
+- G4 50-coop-one-world: the first quickcheck had seed 3 FAIL (R.evm changed by the guest week). It passed 5 standalone runs on seed 3, it passed on main's build, and the second full quickcheck passed. So it is flaky and not tied to this branch (R.evm is written in j29.js with a random roll; bd-roads does not touch it). Recorded FOR MAIN as a flaky gate.

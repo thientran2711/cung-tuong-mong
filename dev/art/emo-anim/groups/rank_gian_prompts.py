@@ -41,7 +41,7 @@ def who(t, old):
                 if t <= 3 else "glossy black hair swept up into an elegant high bun (her own hair, no hat, no headdress board)")
         person = f"a YOUNG IMPERIAL CONSORT of the {en}: a pretty young woman about eighteen, soft round youthful face, {hair}"
         same = ""
-    return (f"{person} decorated with {deco}{same}, small pearl earrings, a {col} ({hx}) robe of plain thick brocade with a gold-embroidered collar"
+    return (f"{person} decorated with {deco}{same}, a {col} ({hx}) robe of plain thick brocade with a gold-embroidered collar"
             f" (brocade only, no thin silk, no gauze, nothing sheer).{nophx}")
 
 def prompt(t, old):
@@ -54,6 +54,6 @@ KEYS = [f"t{t}{a}" for t in range(1, 9) for a in "yo"]
 LABEL = {f"t{t}{a}": f"{R[t][0]} {'trẻ' if a == 'y' else 'lớn tuổi'}" for t in range(1, 9) for a in "yo"}
 
 if __name__ == "__main__":
-    import os as _os; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG  # A24
+    import os as _os; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG; import seal_ear as _SE  # F15 NOEAR (owner Lượt 1037): women seals = no earrings + bare-earlobes sentence  # A24
     ks = sys.argv[1:] or KEYS
-    print(json.dumps(_SG.guard({k: {"A": prompt(int(k[1]), k[2] == "o")} for k in ks}, "rank-gian"), ensure_ascii=False, indent=1))
+    print(json.dumps(_SG.guard(_SE.ear({k: {"A": prompt(int(k[1]), k[2] == "o")} for k in ks}), "rank-gian"), ensure_ascii=False, indent=1))

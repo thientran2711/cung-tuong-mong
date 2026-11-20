@@ -61,3 +61,13 @@ New buttons: «Đeo/Tháo vòng tay», «Đeo/Tháo dây chuyền», «Đeo/Thá
 ## Open
 - Owner verdict: bangle/necklace look; phi bạch A vs B.
 - If B is chosen: one edit per figure × outfit (~80 cr each, plus the owner OK per picture).
+
+## Merge note (parallel EAR1)
+- EAR1 kept working in parallel (its UPDATE 4, 3fddf54) and painted its own vòng cổ / vòng tay / phi bạch sprites (vong_co.png, vong_tay.png, phi_bach.png, ~319 cr). It also refit c09 on the same new cut.
+- The two runs overlapped. On merge, the demo files (anchors, demo.src, html, masks, screenshots) keep the EAR2 side, which covers EAR1's whole TODO:
+  - bangle fit with a cuffs layer;
+  - phi bạch A and B;
+  - necklace clipped to skin, so it never crosses c11's fan;
+  - pendant checked at 3x.
+- EAR1's sprites and hairneck layers stay in the folder unused, as a record.
+- Necklace approach differs: EAR1 = over the collar (drama way); EAR2 = under both collar edges, as the brief asked. The owner can pick; EAR1's vong_co.png is ready for the over-collar version.

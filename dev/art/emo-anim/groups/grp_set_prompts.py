@@ -42,10 +42,10 @@ def prompts(g, k):
     return {p: swap(k, g, v) for p, v in T.prompts(kk).items()}
 BAD = ["dowager", "phoenix", "plum", "wrinkl", "seventy", "pearl", "spring green", " old ", "crown jewels"]
 if __name__ == "__main__":
-    import os as _os; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
+    import os as _os; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG; import seal_ear as _SE  # F15 NOEAR (owner Lượt 1037): women seals = no earrings + bare-earlobes sentence  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
     g = sys.argv[1]; ks = sys.argv[2:] or KEYS
     out = {k: prompts(g, k) for k in ks}
     left = [(k, p, b) for k in out for p, v in out[k].items() for b in BAD if b in v]
     if g == "bt": left += [(k, p, "she/her") for k in out for p, v in out[k].items() if re.search(r"\b([Ss]he|[Hh]er)\b", v)]
     if left: print("LEFTOVER", left, file=sys.stderr)
-    print(json.dumps(_SG.guard(out, "grp_set"), ensure_ascii=False, indent=1))
+    print(json.dumps(_SG.guard(_SE.ear(out), "grp_set"), ensure_ascii=False, indent=1))
