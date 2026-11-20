@@ -24,3 +24,9 @@ Owner order 07:45Z 20/11: redraw the 10 people in the new tone. ROOT-68 changed 
 
 ## c06 — BLOCKED (not drawn)
 `build_all.py c06 N` → "REFUSED c06: NOT drawn (ART_RULES B8)". In KC_REFS.json, people.c06 has m09_ok NO, ref_id null and no face_words. FACE_MAP_L703 has c06 v5 (Sắc sảo, cut hu24KgZvqL / gen p8ylaCXehw). A KC_REFS row is needed first, done the same way RANK8-C did it for s62/s64/s65. I asked ROOT-68 for a GO.
+
+## Update ~08:00Z — STOP (ROOT-69, owner)
+- ROOT-69 gave GO for the c06 data row. I added it to KC_REFS.json (commit 2931181, data only). The builder now builds c06 t1–t8.
+- Then ROOT-69 said STOP. The owner is still finalising t1 Đáp ứng / t2 Thường tại. **0 c06 gens ran.** I am idle until ROOT-69 says otherwise.
+- m19 t1/t2 were drawn on the OLD neckline (builder at baaf55f, before the RANK8-A square neckline). Whether to redraw them is the owner's call; nothing was redrawn.
+- c06 colour question still open: the builder gives ORIG1 coral red #D5745E (old tone); the root pair is #D28977 + #6AAF98.
