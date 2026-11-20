@@ -10,7 +10,7 @@
 function nmEsc(s){return String(s).replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}
 /* rewrite old -> neu in every string of the save, whole words only; other people's longer names that contain old are protected */
 function nmRewrite(old,neu,protect){if(!old||old===neu)return 0;const re=new RegExp("(?<![\\p{L}\\p{N}])"+nmEsc(old)+"(?![\\p{L}\\p{N}])","gu");
- const rk=new RegExp("(?<![\\p{L}])"+nmEsc(old)+"(?![\\p{L}\\p{N}])","u");/* keys like S.rcpK "v12<name>" */const P=(protect||[]).filter(p=>p&&p!==old&&p.indexOf(old)>=0).sort((a,b)=>b.length-a.length);let n=0;const seen=new Set();
+ const rk=new RegExp("(?<![\\p{L}])"+nmEsc(old)+"(?![\\p{L}\\p{N}])","u");/* keys like S.rcpK "v12<name>" */const P=(protect||[]).filter(p=>p&&p!==old&&p.indexOf(old)>=0&&nmBare(p)!==old)/* review r1: never protect the renamed person's own titled name ("Thị vệ X", "Công chúa X"), else her titled texts were never rewritten */.sort((a,b)=>b.length-a.length);let n=0;const seen=new Set();
  const fix=s=>{if(s.indexOf(old)<0)return s;let t=s;P.forEach((p,i)=>{t=t.split(p).join("\u0001"+i+"\u0001")});const u=t.replace(re,()=>{n++;return neu});
   return P.length?u.replace(/\u0001(\d+)\u0001/g,(m,i)=>P[+i]):u};
  const walk=o=>{if(!o||typeof o!=="object"||seen.has(o))return;seen.add(o);

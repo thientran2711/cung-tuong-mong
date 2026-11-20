@@ -63,7 +63,9 @@ function nmOwner(){try{if(typeof worldOn==="function")return !!worldOn()}catch(e
 /* taken = every name ever given in this save (registry) + every name held now; vars = short forms of the LIVING (no "Uyển Nhi" beside "Thẩm Uyển Nhi") */
 function nmTaken(){const full=new Set(),vars=new Set(),sur=new Set();const R=nmReg();if(R)for(const k in R)full.add(k);
  for(const e of nmPeople()){const b=nmBare(e.o[e.f]);full.add(b);if(nmAlive(e)){nmVars(b).forEach(v=>vars.add(v));const s=nmSurOf(b);if(s)sur.add(s)}}
- try{if(S&&S.st){if(S.st.guard)full.add(nmBare(S.st.guard));if(S.st.stu)full.add(nmBare(S.st.stu))}}catch(e){}return{full,vars,sur}}
+ try{if(S&&S.st){if(S.st.guard)full.add(nmBare(S.st.guard));if(S.st.stu)full.add(nmBare(S.st.stu))}}catch(e){}
+ /* the fallen consort of Trường Môn viện (j59 S.lcfPn) lives outside nmPeople: her given name stays taken, living or dead, as LIVE j59 kept it (j61 mask, review r1) */
+ try{if(S&&S.lcfPn){const b=nmBare(S.lcfPn);full.add(b);nmVars(b).forEach(v=>vars.add(v))}}catch(e){}return{full,vars,sur}}
 /* no word twice in one name ("Kiều Kiều Ân", "Lục Lục Trường") */
 function nmTwice(n){const w=String(n).split(" ");return new Set(w).size===w.length}
 function nmPickA(a){return a[Math.floor(Math.random()*a.length)]}
