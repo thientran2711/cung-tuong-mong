@@ -1,0 +1,7 @@
+base: dev/art/seasons4/s62_t8_HAN_BAC_open5.txt
+allow: the same length as the Quý phi's   # owner Lượt 1506 (C #11, DESIGN14): t8 HH length = Quý phi t6 + khúc cư cut = HQP t7; open6
+allow: the hem ending at the floor   # owner Lượt 1506 (C #11, DESIGN14): t8 HH length = Quý phi t6 + khúc cư cut = HQP t7; open6
+allow: no trailing train   # owner Lượt 1506 (C #11, DESIGN14): t8 HH length = Quý phi t6 + khúc cư cut = HQP t7; open6
+allow: soft close drape   # owner Lượt 1506 (C #11, DESIGN14): t8 HH length = Quý phi t6 + khúc cư cut = HQP t7; open6 (HQP wording "soft drape close to the body")
+allow: with very wide sleeves and broad light clear warm plum borders edged with pearls along the wrap edge and hem   # owner Lượt 1506 (C #11, DESIGN14): t8 HH length = Quý phi t6 + khúc cư cut = HQP t7; open6 (HQP wording "two broad … borders along the wrap edge edged with pearls")
+allow: eyes open, lips closed   # boilerplate duplicate of the MOUTH FULLY CLOSED / eyes fully open sentence, trimmed to fit 10 000; open6

@@ -1,0 +1,4 @@
+base: dev/art/seasons4/s62_t7_HAN_BAC_open5.txt
+allow: the same length as the Quý phi's   # owner Lượt 1506 (C #11, DESIGN14): t7 HQP khúc cư length = Quý phi t6, no long trailing/pooled train; open6
+allow: the hem ending at the floor   # owner Lượt 1506 (C #11, DESIGN14): t7 HQP khúc cư length = Quý phi t6, no long trailing/pooled train; open6
+allow: no trailing train   # owner Lượt 1506 (C #11, DESIGN14): t7 HQP khúc cư length = Quý phi t6, no long trailing/pooled train; open6
