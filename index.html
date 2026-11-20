@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"30fd0b2f","t":"2026-11-20T14:36Z","c":"jagday-walk r2: jwalk road rows keep the row's own why + target; the khắc-now rule skips timed-ledger rows (invite visit/back, jptime away)…","b":"003f4e8acc24","h":[{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"},{"s":"39228682+","t":"2026-11-20T10:45Z","c":"Phi tần khác cũng rủ nàng lập phe, vào phe của nàng (luật hai chiều)"},{"s":"d39e3d2c+","t":"2026-11-20T12:07Z","c":"Nút «Mua» ở tiệm chơi một mình chạy lại; lời dẫn từng xuất thân chương 1–3"},{"s":"bf7cc4de+","t":"2026-11-20T11:56Z","c":"Mời khách khi chủ vắng nhà: khách chờ đúng luật"},{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"}]};
+window.CTM_BI={"s":"2203b135","t":"2026-11-20T14:50Z","c":"jagday-walk r2: rename jwalk walkWhy → walkRoadWhy (one-core-guard: j9 already has walkWhy)","b":"95e09398ee3e","h":[{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"},{"s":"39228682+","t":"2026-11-20T10:45Z","c":"Phi tần khác cũng rủ nàng lập phe, vào phe của nàng (luật hai chiều)"},{"s":"d39e3d2c+","t":"2026-11-20T12:07Z","c":"Nút «Mua» ở tiệm chơi một mình chạy lại; lời dẫn từng xuất thân chương 1–3"},{"s":"bf7cc4de+","t":"2026-11-20T11:56Z","c":"Mời khách khi chủ vắng nhà: khách chờ đúng luật"},{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -81153,7 +81153,7 @@ function walkErrRow(e,b0,a,i,place,x){if(!walkNpcOn()||!a||!x||!place)return x;t
 function walkNpcOn(){try{return BAL.walk.npc!==0}catch(e){return false}}
 const JWALK={stat:{fix:0,late:0,miss:0,now:0},errs:[],seen:null};
 /* review/jagday-walk r2: a row turned into «on the way» keeps its own why and target (a guest's leave reason, whom a follower follows) */
-function walkWhy(w,pre){const s=w&&!/^\s*$/.test(w)?String(w):(pre||"");if(/đang trên đường/.test(s))return s;return s?s+" · đang trên đường":"đang trên đường"}
+function walkRoadWhy(w,pre){const s=w&&!/^\s*$/.test(w)?String(w):(pre||"");if(/đang trên đường/.test(s))return s;return s?s+" · đang trên đường":"đang trên đường"}
 function walkTimed(id,x){if(x&&(x[1]==="visit"||x[1]==="back"))return true;try{return typeof ptAwayOf==="function"&&!!ptAwayOf(id)}catch(e){return false}}
 const walkSig=x=>x?x[0]+"|"+x[1]+"|"+(x[2]||""):"";
 function walkKeepRow(x,id,q,R){if(!x)return true;const a=x[1]||"";
@@ -81175,9 +81175,9 @@ function walkNpcPass(R,kh){if(!walkNpcOn()||!R||!R.P)return 0;let n=0;const K=(t
    let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&row[q][1]==="go"){g++;q--}if(q<0||!row[q]||!real(row[q][0])||row[q][0]===x[0])continue;
    let t=0;try{t=travel(row[q][0],x[0],walkWho(id))}catch(e){t=0}let need=t-1-g;if(need<=0)continue;
    /* leave earlier: the free khắc right before the walk (never the current khắc, never a kept row) */
-   while(need>0&&q>kh&&!walkKeepRow(row[q],id,q,R)){row[q]=[x[0],"go",x[2]==null?null:x[2],walkWhy(x[3])];need--;n++;JWALK.stat.fix++;q--}
+   while(need>0&&q>kh&&!walkKeepRow(row[q],id,q,R)){row[q]=[x[0],"go",x[2]==null?null:x[2],walkRoadWhy(x[3])];need--;n++;JWALK.stat.fix++;q--}
    /* else arrive later: the arrival khắc (and on) become «on the way», when free */
-   let a=j;while(need>0&&a<K&&!walkKeepRow(row[a],id,a,R)&&row[a][0]===x[0]){const y=row[a];row[a]=[x[0],"go",y[2]==null?null:y[2],walkWhy(y[3],y[1]==="follow"?"đi theo hầu":"")];need--;n++;JWALK.stat[a===kh?"now":"late"]++;a++}/* a follower keeps whom she follows (j95s retinue) */
+   let a=j;while(need>0&&a<K&&!walkKeepRow(row[a],id,a,R)&&row[a][0]===x[0]){const y=row[a];row[a]=[x[0],"go",y[2]==null?null:y[2],walkRoadWhy(y[3],y[1]==="follow"?"đi theo hầu":"")];need--;n++;JWALK.stat[a===kh?"now":"late"]++;a++}/* a follower keeps whom she follows (j95s retinue) */
    if(need>0)JWALK.stat.miss++;}}
  {const P={};for(const id in R.P){const row=R.P[id];if(Array.isArray(row))P[id]=row.map(walkSig)}JWALK.seen={key:R.key,kh,P}}
  return n}
@@ -82761,7 +82761,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="003f4e8acc24";window.CTM_BUILD=BUILD;
+const BUILD="95e09398ee3e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
