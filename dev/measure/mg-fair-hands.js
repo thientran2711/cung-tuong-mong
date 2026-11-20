@@ -13,9 +13,15 @@ const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.ht
      let m=0;for(let j=0;j<R;j++){const a=her(),x=mgNpcRaw(kind,q,{occ:"hoi"});w+=a>x?1:a===x?.5:0;n++;m+=x}if(m/R>=her()-0)atAbove++}
     rows.push({dRank:dr,dArt:da,herWin:Math.round(1000*w/n)/10})}
    const hands=[];for(let i=0;i<2000;i++)hands.push(mgHand(kind,{name:"G"+kind+i,id:80000+i}));hands.sort((a,b)=>a-b);const Bd=mgBand(kind);
-   out[kind]={base,band:Bd,medHandPlay:Math.round((hands[1000]-H.w/2)*100)/100,shareAtOrAbove:Math.round(1000*hands.filter(h=>h-H.w/2>=base).length/2000)/10,rows};
+   /* THIRDS (OD 20/11 ~01:18Z): an average untrained NPC set (art 0 like her here at 0, her rank) — share of hands per third and her win share vs each third */
+   S.arts[st]=0;const th={worse:[0,0,0],equal:[0,0,0],better:[0,0,0]};const her0=()=>{const u=(Math.random()+Math.random()+Math.random())/3;return cl(Math.round(base+(mgMedD(mgTier(kind,{occ:"hoi",rank:RK,lv:0}).d)-mgMedD(0))+H.w*(u-.5)),0,10)};
+   for(let i=0;i<1500;i++){const q={name:"U"+kind+i,id:90000+i,rank:RK,arts:{[st]:0},alive:true};const h=mgHandEff(kind,q),g=h>Bd.c+H.eq+1e-9?"better":h<Bd.c-H.eq-1e-9?"worse":"equal";th[g][0]++;
+    for(let j=0;j<6;j++){const a=her0(),x=mgNpcRaw(kind,q,{occ:"hoi"});th[g][1]+=a>x?1:a===x?.5:0;th[g][2]++}}
+   const thirds=Object.keys(th).map(g=>({g,share:Math.round(1000*th[g][0]/1500)/10,herWin:Math.round(1000*th[g][1]/Math.max(1,th[g][2]))/10}));S.arts[st]=LV;
+   out[kind]={thirds,base,band:Bd,medHandPlay:Math.round((hands[1000]-H.w/2)*100)/100,shareAtOrAbove:Math.round(1000*hands.filter(h=>h-H.w/2>=base).length/2000)/10,rows};
    S.arts=keepA;S.rank=keepR}
   return out});
  for(const k in T){const t=T[k];console.log(`\n${k}: base ${t.base} · band ${t.band.lo}..${t.band.hi} (centre ${t.band.c}) · middle NPC plays ${t.medHandPlay} · NPC hands at/above her ${t.shareAtOrAbove}%`);
+  console.log('untrained set (art 0 = hers, same rank): third | share of NPCs % | her win share %');for(const x of t.thirds)console.log(`${x.g} | ${x.share} | ${x.herWin}`);
   console.log('opp rank step | art −2 | art −1 | art 0 | art +1 | art +2   (her win share %)');for(const dr of [-2,0,2]){const r=t.rows.filter(x=>x.dRank===dr);console.log(`${dr>0?'+':''}${dr} | ${r.map(x=>x.herWin).join(' | ')}`)}}
  await b.close()})().catch(e=>{console.error(e);process.exit(1)});

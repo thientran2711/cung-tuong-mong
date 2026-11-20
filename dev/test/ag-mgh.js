@@ -22,10 +22,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 3 board ease */
   const mean=(pp,d,kind)=>{let s=0;for(let i=0;i<N;i++)s+=mgNpcRaw(kind||"dan",pp,{d});return s/N};o.mE=mean(w,-2,"co");o.m0=mean(w,0,"co");o.mH=mean(w,2,"co");o.shiftE=mgMedD(-2)-mgMedD(0);o.shiftH=mgMedD(2)-mgMedD(0);
   /* 4 good vs bad hands */
-  const pairs=L.map(x=>[x,mgHand("ve",x)]).sort((a,b)=>a[1]-b[1]);const lo=pairs[0],hi=pairs[pairs.length-1];o.lo=[lo[1],mean(lo[0],0,"ve")];o.hi=[hi[1],mean(hi[0],0,"ve")];
+  const pairs=L.map(x=>[x,mgHandEff("ve",x)]).sort((a,b)=>a[1]-b[1]);const lo=pairs[0],hi=pairs[pairs.length-1];o.lo=[lo[1],mean(lo[0],0,"ve")];o.hi=[hi[1],mean(hi[0],0,"ve")];
   o.meNoHand=(()=>{const had=S.mgH;mgNpcRaw("dan",S,{d:0});return !S.mgH&&!had})();
   /* 5 slap */
-  const heavy=(a)=>{let n=0;for(let i=0;i<600;i++)if(slapNpcDraw(a)===3)n++;return n/600};const sl=L.map(x=>[x,mgHand("tat",x)]).sort((a,b)=>a[1]-b[1]);
+  const heavy=(a)=>{let n=0;for(let i=0;i<600;i++)if(slapNpcDraw(a)===3)n++;return n/600};const sl=L.map(x=>[x,mgHandEff("tat",x)]).sort((a,b)=>a[1]-b[1]);
   o.slap={lo:[sl[0][1],heavy(sl[0][0])],hi:[sl[sl.length-1][1],heavy(sl[sl.length-1][0])]};
   /* 7 owner OD 20/11 ~01:10Z fair spread: an untested kind (co) is centred on the skilled human median (7.5 at the matching board), symmetric */
   {const C=[];for(let i=0;i<1000;i++)C.push(mgHand("co",{name:"T"+i,id:9000+i}));C.sort((a,b)=>a-b);o.medHand=C[500];o.medPlay=C[500]-H.w/2;o.skilled=mgMedD(0);o.above=C.filter(c=>c-H.w/2>=o.skilled).length/1000}

@@ -2,10 +2,10 @@
    1 owner flag only: no flag → no «Thử tay tài nghệ» row in Thiết lập; flag (?hieuchuan=1 / localStorage ctm-owner-cal) → one kit .kctl row
    2 mgCalBase: her rounds brought back to a matching board (raw − (mgMedD(d) − mgMedD(0))), mean, 0..10
    3 bands (owner OD 20/11 ~01:10Z fair spread): no calibration → centred on the skilled human median (old saves roll the same); a calibrated kind →
-     centre b + w/2, lo / hi = centre ∓ sp;
+     centre b + w/2, lo / hi = centre ∓ far (thirds, OD 20/11 ~01:18Z);
      hands re-roll inside the new band from the SAME draw (order of people kept)
    4 fairness with her base b (fair spread): the middle NPC plays like her, about half the NPC plays at or above her on a matching board, symmetric:
-     as many hands sp above her as sp below; never above 10
+     as many hands above her as below; never above 10
    5 the test itself (kit game frame): 5 rounds easy → hard (Dễ … Khó words), result rows, record + «CTM-CAL» code on her device; her device does NOT
      change the shared band (one core: only BAL.ag.mg2.cal.k does)
    6 no page errors */
@@ -22,11 +22,11 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 3 */
   const L=liveRivals(true).filter(v=>v.alive);o.def=mgCalBand("co");o.defMed=mgMedD(0)+H.w/2;const dan0=C.k.dan,sig0=mgCalBand("dan").sig;const before=L.map(v=>mgHand("dan",v));
   const v=L[0];const keep=v.mgH,keepV=v.mgHv;delete v.mgH;delete v.mgHv;o.oldSave=mgHand("dan",v)===before[0];v.mgH=keep;v.mgHv=keepV;
-  C.k.dan={b:7,n:5,at:"11/17/2026"};const Bd=mgCalBand("dan");o.band=Bd;o.bandX={hi:7+H.w/2+H.sp,lo:7+H.w/2-H.sp};
+  C.k.dan={b:7,n:5,at:"11/17/2026"};const Bd=mgCalBand("dan");o.band=Bd;o.bandX={hi:7+H.w/2+H.far,lo:7+H.w/2-H.far};
   const after=L.map(v=>mgHand("dan",v));o.inBand=after.every(h=>h>=Bd.lo-1e-9&&h<=Bd.hi+1e-9);
   const ord=a=>a.map((h,i)=>[h,i]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]).join(",");o.order=ord(before)===ord(after);o.otherKind=mgCalBand("co").sig===o.def.sig;
   /* 4 */
-  const plays=[];for(let i=0;i<600;i++){const q={name:"T"+i,id:9000+i};for(let j=0;j<3;j++)plays.push(mgNpcRaw("dan",q,{d:0}))}plays.sort((a,b)=>a-b);
+  const plays=[];for(let i=0;i<600;i++){const q={name:"T"+i,id:9000+i,rank:S.rank,arts:Object.assign({},S.arts)};/* equal to her in art and rank: no lift */for(let j=0;j<3;j++)plays.push(mgNpcRaw("dan",q,{d:0}))}plays.sort((a,b)=>a-b);
   o.reach=plays.filter(x=>x>=7).length/plays.length;o.med=plays[plays.length>>1];o.max=plays[plays.length-1];
   const hs=[];for(let i=0;i<600;i++)hs.push(mgHand("dan",{name:"T"+i,id:9000+i})-H.w/2-7);o.up=hs.filter(x=>x>1).length;o.dn=hs.filter(x=>x<-1).length;o.loPlay=Math.min(...hs)+7;
   if(dan0)C.k.dan=dan0;else delete C.k.dan;o.back=mgCalBand("dan").sig===sig0&&mgHand("dan",v)===before[0];
@@ -44,7 +44,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   o.btns=document.querySelectorAll("[data-mgcal-k]").length;document.querySelector('[data-mgcal-k="dan"]').click();
   for(let i=0;i<5;i++){await sleep(150);o.tiers.push(KG82.tier&&KG82.tier.word);const g=document.getElementById("kg82go");if(!g){o.noGo=i;break}g.click();await sleep(150);document.getElementById("kg82ok").click()}
   await sleep(200);const txt=(document.getElementById("kg82")||{}).textContent||"";o.res=/Mức tay của người/.test(txt);o.code=/CTM-CAL dan:/.test(txt);
-  const R=JSON.parse(localStorage.getItem("ctm-mgcal")||"{}");o.rec=R.dan&&R.dan.raws;o.b=R.dan&&R.dan.b;o.shared=mgCalBand("dan").sig===(()=>{const e=BAL.ag.mg2.cal.k.dan,c=Math.round(((e?e.b:mgMedD(0))+BAL.ag.mg2.hand.w/2)*100)/100,r=x=>Math.round(x*100)/100;return "f/"+r(c-BAL.ag.mg2.hand.sp)+"/"+r(c+BAL.ag.mg2.hand.sp)})();
+  const R=JSON.parse(localStorage.getItem("ctm-mgcal")||"{}");o.rec=R.dan&&R.dan.raws;o.b=R.dan&&R.dan.b;o.shared=mgCalBand("dan").sig===(()=>{const e=BAL.ag.mg2.cal.k.dan,c=Math.round(((e?e.b:mgMedD(0))+BAL.ag.mg2.hand.w/2)*100)/100,r=x=>Math.round(x*100)/100;return "t/"+r(c-BAL.ag.mg2.hand.far)+"/"+r(c+BAL.ag.mg2.hand.far)})();
   o.only=mgCalCode().split(" ").length===2;o.pct=/%/.test(txt);document.getElementById("kg82ok").click();await sleep(150);o.back=document.querySelectorAll("[data-mgcal-k]").length;{const t2=(document.getElementById("kg82")||{}).textContent||"";o.rows=/Đã thử 1\/\d+ môn/.test(t2)&&/Chưa thử/.test(t2)}kg82Close();try{kg82Play=k0}catch(e){}return o});
  console.log(JSON.stringify(u));
  ok(u.frame&&u.btns===u.kinds.length&&u.kinds.length>=10,'5 the kit game frame opens with one button per mini-game kind',{btns:u.btns,kinds:u.kinds.length});

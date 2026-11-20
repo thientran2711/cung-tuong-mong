@@ -79,8 +79,10 @@ function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||M
    FAIR SPREAD (owner OD 20/11 ~01:10Z, verbatim: "Không phải, tôi nói test tay xong, rồi đa số npc chơi dở hơn tôi, tôi thấy không fair" → "Duyệt cả 3 ý,
    làm luôn đi"): (1) every NPC has a hidden HAND per minigame kind = the best graded play her hands reach on a matching board, drawn ONCE per NPC per kind
    in the band of jmgcal mgCalBand(kind) = centred on HER calibrated play (BAL.ag.mg2.cal.k[kind].b; a kind she has not tested: the skilled human median
-   mgMedD(0)): centre c = base + w/2 (an NPC's average play is hand − w/2), hand = c + sp·(2·b − 1), b = mean of two hashed draws — a SYMMETRIC draw, about
-   half the hands at or above her, half below, spread ±BAL.ag.mg2.hand.sp. (2) ART: mgHandEff adds BAL.ag.mg2.hand.art per art level of that kind above
+   mgMedD(0)): centre c = base + w/2 (an NPC's average play is hand − w/2). THIRDS (owner OD 20/11 ~01:18Z, verbatim: "Sao không chia 1/3 ngang, 1/3 hơn,
+   1/3 kém" — adopted, overwrites the ±2.5 half/half): a hashed draw t puts each person in one third — 1/3 about equal to her (hand within c ± eq), 1/3
+   better (c + eq … c + far), 1/3 worse (c − far … c − eq) — bell-shaped inside each third (mean of two hashed draws); eq / far = BAL.ag.mg2.hand.
+   (2) ART: mgHandEff adds BAL.ag.mg2.hand.art per art level of that kind above
    the player's own level (kg82LvFor; minus below): a trained NPC clearly beats her, an untrained one is weak. (3) RANK (law 5): + BAL.ag.mg2.hand.rank per
    rank step above hers: higher-rank opponents lean stronger as she climbs. Art / rank are read live (never saved), measured against the player of seat a
    (mgRefP: S; a co-op guest reads the host's person) so both co-op seats roll the same play.
@@ -89,12 +91,14 @@ function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||M
    rolls below its ceiling most of the time. Saved on the person (p.mgH[kind]); the draw is hashed on the person + kind, so an old save (no p.mgH) and a
    co-op guest roll the very same hand lazily. Off: BAL.ag.mg2.hand.on = 0 (one skilled-bot curve for everyone, as part 2b). */
 function mgHashU(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}h^=h>>>13;h=Math.imul(h,0x5bd1e995);h^=h>>>15;return (h>>>0)/4294967296}
-function mgBand(kind){const H=BAL.ag.mg2.hand;if(typeof mgCalBand==="function")return mgCalBand(kind);const c=mgMedD(0)+H.w/2;return{lo:c-H.sp,hi:c+H.sp,c,sig:"f/"+(c-H.sp)+"/"+(c+H.sp)}}
+function mgBand(kind){const H=BAL.ag.mg2.hand;if(typeof mgCalBand==="function")return mgCalBand(kind);const c=mgMedD(0)+H.w/2;return{lo:c-H.far,hi:c+H.far,c,sig:"t/"+(c-H.far)+"/"+(c+H.far)}}
+/* the offset of a person's hand from the band centre: her third (t: worse / equal / better), then a bell inside it (b = mean of two draws) */
+function mgThird(id,H){const t=mgHashU(id+"|t"),b=(mgHashU(id+"|a")+mgHashU(id+"|b"))/2;if(t<1/3)return -(H.eq+(H.far-H.eq)*b);if(t<2/3)return H.eq*(2*b-1);return H.eq+(H.far-H.eq)*b}
 function mgHand(kind,p){const H=BAL.ag.mg2.hand,Bd=mgBand(kind);if(!p||typeof p!=="object")return Bd.c;let M=p.mgH;if(!M||typeof M!=="object")M=p.mgH={};
  /* AG-ALL-2d2: p.mgHv[kind] = the band it was rolled in — a changed band re-rolls the SAME hash draw inside the new band (old saves rolled in the old
-    skewed bands carry another sig and re-roll here) */
+    skewed / half-half bands carry another sig and re-roll here) */
  let V=p.mgHv;if(!V||typeof V!=="object")V=p.mgHv={};
- if(M[kind]==null||V[kind]!==Bd.sig){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;const b=(mgHashU(id+"|a")+mgHashU(id+"|b"))/2;M[kind]=Math.round((Bd.lo+(Bd.hi-Bd.lo)*b)*100)/100;V[kind]=Bd.sig;MGX.hand=(MGX.hand||0)+1}
+ if(M[kind]==null||V[kind]!==Bd.sig){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;M[kind]=Math.round((Bd.c+mgThird(id,H))*100)/100;V[kind]=Bd.sig;MGX.hand=(MGX.hand||0)+1}
  return M[kind]}
 /* the player the art / rank lift is measured against: seat a (S; on a co-op guest the host's person, so both seats agree) */
 function mgRefP(){try{if(typeof agGuest==="function"&&agGuest()&&typeof consorts==="function"){const h=consorts().find(x=>x&&x.coop);if(h)return h}}catch(e){}return S}

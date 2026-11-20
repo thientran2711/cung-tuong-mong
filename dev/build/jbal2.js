@@ -1082,16 +1082,17 @@ Object.assign(BAL.ag.kh2.rd,{see:1,go:1,cap:6,qMax:40});Object.assign(BAL.ag.kh2
 Object.assign(BAL.ag,{mg2:{on:1,med:[[-2,8.9],[0,7.5],[2,5.8]],w:8,tat:{e:[0,2,5],w:[[32,54,15],[18,58,24],[2,50,49]]},study:1}});
 /* AG-ALL-2d hand ceiling (owner OD 17/11 ~16:00Z L1640; jmgt mgHand) — FAIR SPREAD (owner OD 20/11 ~01:10Z: "đa số npc chơi dở hơn tôi, tôi thấy không
    fair" → "Duyệt cả 3 ý, làm luôn đi"): w = how far under her ceiling a play falls (mean of 3 draws; average play = hand − w/2);
-   sp = half-width of the SYMMETRIC hand band round her calibrated play (jmgcal mgCalBand: centre = b + w/2, or the skilled human median mgMedD(0) + w/2 for
-        a kind she has not tested), hand = centre + sp·(2·b − 1), b = mean of 2 hashed draws: about half the NPC hands at or above her, half below;
+   THIRDS round her calibrated play (owner OD 20/11 ~01:18Z: "Sao không chia 1/3 ngang, 1/3 hơn, 1/3 kém" — adopted; jmgcal mgCalBand: centre = b + w/2,
+        or the skilled human median mgMedD(0) + w/2 for a kind she has not tested; jmgt mgThird): 1/3 of the NPC hands about equal to her (centre ± eq),
+        1/3 better (centre + eq … + far), 1/3 worse (centre − far … − eq), bell-shaped inside each third (mean of 2 hashed draws);
    art  = hand points per art level of that kind above / below the player's own level (a trained NPC clearly beats her, an untrained one is weak);
    rank = hand points per rank step above / below hers (law 5: higher-rank opponents lean stronger; the board of a higher rank is harder by
           BAL.mgTier.occ perRank, so the net lift per rank ≈ rank − perRank·0.8) */
-BAL.ag.mg2.hand={on:1,w:4,sp:2.5,art:.2,rank:.8};
+BAL.ag.mg2.hand={on:1,w:4,eq:.5,far:2.5,art:.2,rank:.8};
 /* AG-ALL-2d2 OWNER CALIBRATION (owner OD 17/11 ~16:20Z (f) + ~16:40Z option 1: "chỉ có tôi test và cái số của tôi dùng chung cho mọi người"; jmgcal):
    d  = the board gaps of the test rounds, easy → hard (one round each; 5 rounds, rising difficulty)
    k  = her calibrated base per mini-game kind {b: her graded play on a matching board, n: rounds, at: mm/dd/yyyy}, written from her «CTM-CAL …» code by
-        dev/tools/mgcal_apply.py — ONE base for every player; the NPC hand band of that kind is centred on b (BAL.ag.mg2.hand sp / w above) */
+        dev/tools/mgcal_apply.py — ONE base for every player; the NPC hand thirds of that kind are centred on b (BAL.ag.mg2.hand eq / far / w above) */
 BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],k:{dan:{b:8.3,n:5,at:"11/19/2026"}}};
 /* j71 odds words under mg2: the same draw (mgNpcRaw, seeded by the plan) for every entrant, her included, on this contest's board (j71 mgX7) */
 (function(){if(typeof cOdds7!=="function"||typeof fxOdds7!=="function")return;const c0=cOdds7,f0=fxOdds7;
