@@ -43,7 +43,7 @@ function knMemo(){const k=agKey();if(!KN.m||KN.m.key!==k)KN.m={key:k,x:{},t:{},a
    where she saw it to where her master stands — knWalkTo. knRelay = the LONGEST such walk (BAL.walk.far; 0 = relay off), used only to bound the
    buổi-end carry. */
 function knRelay(){try{const B=BAL.ag.kh2.rd;return agRdOn()&&((B.see||0)+(B.go||0))?Math.max(BAL.walk.near||1,BAL.walk.far||1):0}catch(e){return 0}}
-function knWalkTo(from,id,kh){if(!knRelay())return 0;let to=null;try{to=knAt(id,Math.max(0,Math.min(kh,J95.KH-1)))}catch(e){}return agWalk(from,to||"home")}
+function knWalkTo(from,id,kh,who){if(!knRelay())return 0;let to=null;try{to=knAt(id,Math.max(0,Math.min(kh,J95.KH-1)))}catch(e){}return agWalk(from,to||"home",who)}/* who = the bearer when known (her own road, j9 per walker); a passer-by / messenger: null */
 function knSrvFrom(s,how,h){if(how==="listen"){const k=s&&s.sid!=null?knSlotK(s):"";const pl=String(k||"").split(":")[0];if(pl&&pl!=="listen")return pl}return h.k}
 function knFirst(id,h,w){for(let kh=w[0];kh<=w[1];kh++)if(knAt(id,kh)===h.k)return kh;return -1}
 function knId(x){return x===S?"me":x&&x.sid!=null?"s"+x.sid:x&&x.id!=null?"v"+x.id:""}
@@ -93,7 +93,7 @@ function knFor(x,h,noFriend){if(!x)return null;const hid=knHid(h);const M=knMemo
  const now=agKh(),D=knRelay();
  if(!r){for(const s of knStaff(x)){const how=knSrvKnows(s,x,h,w,hid);if(!how)continue;const q=Math.max(how==="here"&&s.sid!=null?knFirst("s"+s.sid,h,w):w[0],w[0]);
    /* the confidant maid walks with her mistress (one khắc to step aside and tell); any other servant walks from where she saw / heard it */
-   const at=q+(s.sid==null&&!knwMid(s,x)?Math.min(1,D):knWalkTo(knSrvFrom(s,how,h),id,q));if(at>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s,at};break}}}
+   const at=q+(s.sid==null&&!knwMid(s,x)?Math.min(1,D):knWalkTo(knSrvFrom(s,how,h),id,q,s&&s.sid!=null?s:null));if(at>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s,at};break}}}
  if(!r){let o=0;try{o=oSee(x,false)*knB().eye/100}catch(e){}if(knHit("e"+id+"|"+hid,o)){const at=w[0]+knWalkTo(h.k,id,w[0]);/* her Tai mắt / a passer-by walks from the place to her */if(at<=now){r=knEye(x,h,hid);if(r)r.at=at}}}
  if(!r&&!noFriend){const F=knB().friend;for(const v of liveRivals(true)){if(v===x||!v.alive||v.out)continue;const a=aff(v,x);if(a<F)continue;/* the news travels when they meet (same place this khắc), or a close friend sends word (aff ≥ close) */const meet=(()=>{const nw=agKh();return knAt(id,nw)!=null&&knAt("v"+v.id,nw)===knAt(id,nw)})();if(a<knB().close&&!meet)continue;const k=knFor(v,h,true);if(!k||k.by==="le"||k.how==="self")continue;
    let fa=now;if(!meet&&D>0){const ka=M.at["v"+v.id+"|"+hid+"|n"];if(ka==null)continue;fa=ka+knWalkTo(knAt("v"+v.id,ka),id,ka);if(fa>now)continue}/* sending word: her messenger's real walk from where she was when she knew to x (AG-ALL-2d4) */
