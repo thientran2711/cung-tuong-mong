@@ -59,11 +59,12 @@ const HTML=process.argv[2]||'dev/index.html';const sleep=ms=>new Promise(r=>setT
  await until(async()=>!!(await A.evaluate(()=>!!document.getElementById('kg82go')))&&!!(await B.evaluate(()=>!!document.getElementById('kg82go'))),8000);
  await go(A);await go(B);
  /* both play: tap the engine's peek target when it has one */
- let pl2=null;const t0=Date.now();
+ let pl2=null,n6=-1;const t0=Date.now();
  while(Date.now()-t0<150000){const fin=await A.evaluate(()=>!!document.getElementById('kg82ok'))&&await B.evaluate(()=>!!document.getElementById('kg82ok'));if(fin)break;
   for(const p of [A,B])await p.evaluate(()=>{const q=KG82.peek&&KG82.peek();const el=q&&q.sel&&document.querySelector(q.sel);if(el)el.click()});
-  if(Date.now()-t0>6000&&!pl2)await A.evaluate(()=>{if(!window.__g0){window.__g0=mgGrade;mgGrade=()=>6}});/* her running score (graded) = 6 from here: what the friend's plate must show */
-  const q=await B.evaluate(()=>({x:document.querySelector('#kg82box .kgvs')?1:0}));if(q.x){const last=sent.a.filter(m=>m.mode==='sc').pop();const pb=await plate(B);if(pb&&last&&last.raw>0&&!pl2){pl2=Object.assign(pb,{aSent:last.raw})}}await sleep(300)}
+  if(Date.now()-t0>6000&&!pl2&&n6<0){await A.evaluate(()=>{if(!window.__g0){window.__g0=mgGrade;mgGrade=()=>6}});n6=sent.a.filter(m=>m.mode==='sc').length}/* her running score (graded) = 6 from here: what the friend's plate must show */
+  /* E22g: since main mg-score-same the board's mark starts at what she can still reach (10) and falls, so the plate is read only from sc messages sent AFTER the 6 */
+  const q=await B.evaluate(()=>({x:document.querySelector('#kg82box .kgvs')?1:0}));if(q.x&&n6>=0){const L=sent.a.filter(m=>m.mode==='sc');const last=L.length>n6+1?L.pop():null;const pb=await plate(B);if(pb&&last&&last.raw>0&&!pl2){pl2=Object.assign(pb,{aSent:last.raw})}}await sleep(300)}
  const sc=sent.a.filter(m=>m.mode==='sc');let gap=1e9;
  ok(sc.length>0,'timed duel: her running score rides as sc messages',{n:sc.length});
  const plB=pl2||await plate(B);

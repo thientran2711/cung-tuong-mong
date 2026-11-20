@@ -271,7 +271,7 @@ if(typeof monthPay==="function"){const m0=monthPay;monthPay=function(){let r=m0.
 function pmVsGo(rows,o,kind){const vs={me:0,f:0,t0:0,kind,opp:(rows||[]).map(r=>({who:r.p||o,raw:r.raw!=null?r.raw:5,shown:0}))};KG82.vs=vs;
  KG82.onHud=h=>{pmHud(vs,h,kind);for(const p of vs.opp)p.shown=Math.min(p.raw,Math.round(p.raw*vs.f));pmVsShow(vs,o,h)}}
 /* one reader of the engines' own hud (her running «N/10» graded as the board grades it, the Hồi «n/m», the clock «N giây»): the NPC board and the co-op live board */
-function pmHud(vs,h,kind){const m=/^(\d+)\s*\/\s*10/.exec(String(h.score==null?"":h.score));if(m)vs.me=mgGrade(+m[1]*1,kind);
+function pmHud(vs,h,kind){const m=/^(\d+)\s*\/\s*10/.exec(String(h.score==null?"":h.score));if(m)vs.me=+m[1];/* E22g: the board hud is already the ONE graded mark (main mg-score-same: jmgt mgLive = mgGrade); graded again it read 10 for a 6 */
   const r=/(\d+)\s*\/\s*(\d+)/.exec(String(h.round==null?"":h.round));if(r&&+r[2]>0)vs.f=Math.max(vs.f,Math.min(1,(+r[1]-1)/+r[2]));
   const tm=/(\d+)\s*giây/.exec(String(h.time==null?"":h.time));if(tm){const n=+tm[1];if(!vs.t0||n>vs.t0)vs.t0=n;vs.left=n;vs.f=Math.max(vs.f,Math.min(1,1-n/vs.t0))}}
 /* the LOOK = the kit plate K-PM-1 kitGameVs (KIT §13.8, LIVE b3f5a05c): mounted at the top of the kg82 board box once the board is drawn (kgReady came first);
