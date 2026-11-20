@@ -72,4 +72,5 @@ def prompts(k):
     }
 ALL = {k: prompts(k) for k in S}
 if __name__ == "__main__":
-    print(json.dumps(ALL if len(sys.argv) < 2 else ALL[sys.argv[1]], ensure_ascii=False, indent=1))
+    import os as _os; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
+    print(json.dumps(_SG.guard(ALL if len(sys.argv) < 2 else ALL[sys.argv[1]], "m-new"), ensure_ascii=False, indent=1))

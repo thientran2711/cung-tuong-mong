@@ -75,4 +75,5 @@ def prompts(k):
      "back": f"Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The furious {sh} leaning out of the round gold medallion gives one last angry huff, the steam fades away, {s} lowers {p} fist, lets go of the gold rim, pulls {p} arms back and slowly slides back inside the round medallion, shrinking back into it, until {s} is again only an angry {g["old"]} with {g['head']} inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects.",
     }
 if __name__ == "__main__":
-    print(json.dumps({k: prompts(k) for k in (sys.argv[1:] or list(G))}, ensure_ascii=False, indent=1))
+    import os as _os; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
+    print(json.dumps(_SG.guard({k: prompts(k) for k in (sys.argv[1:] or list(G))}, "grp_gian"), ensure_ascii=False, indent=1))

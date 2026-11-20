@@ -102,4 +102,5 @@ def prompts(k):
     }
 ALL = {k: prompts(k) for k in S}
 if __name__ == "__main__":
-    json.dump(ALL, open("prompts.json","w"), ensure_ascii=False, indent=1); print(len(ALL))
+    import os as _os, sys; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
+    json.dump(_SG.guard(ALL, "mo-act"), open("prompts.json","w"), ensure_ascii=False, indent=1); print(len(ALL))

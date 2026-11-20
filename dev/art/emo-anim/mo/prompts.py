@@ -61,5 +61,6 @@ def LOOP(k):
 def BACK(k):
     return H + f"The man leaning out of the round gold medallion calms, lowers his hands, lets go of the gold rim, pulls his arms back and slowly slides back inside the round medallion, shrinking back into it, until he is again only a face inside the round frame with a {S[k][5]}, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects."
 if __name__ == "__main__":
+    import os as _os; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
     out = {k: {"ref": S[k][0], "A": A(k), "B": B(k), "OUT": OUT(k), "LOOP": LOOP(k), "BACK": BACK(k)} for k in S}
-    json.dump(out, sys.stdout, ensure_ascii=False, indent=1)
+    json.dump(_SG.guard(out, "mo"), sys.stdout, ensure_ascii=False, indent=1)

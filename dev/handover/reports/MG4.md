@@ -1,0 +1,12 @@
+# MG4 — art gate builder (child of ROOT-60 session_01PEhRbxsHLiHaB6yGGXAQRY)
+depth 4 · START_CTX ≈ 4 % of the 1M window (get_session reads 0 → own estimate) · roll line ≈ 29 %, ceiling 60 %. NO gens.
+
+## Job 1 — SEAL GATE (A24, owner 20/11: "Bây giờ làm một cái cổng riêng cho cái ấn đi. Không có làm cái cổng chung với nhân vật, nó không nó bị confused.")
+File: `dev/art/emo-anim/seal_gate.py` — seal rules ONLY; check_store.py untouched (stays the figure gate).
+Usage: `python3 dev/art/emo-anim/seal_gate.py --kind A|B|out|loop|back FILE` (one prompt) · `--json FILE` · `--builder groups/th_prompts.py [keys]` · `--all` (every seal builder) · `--self`. Exit 1 = FAIL = no gen.
+Rules: S1 LEN > 10 000 · S2 F14 Qing words even negated (regex copied from check_store F14; `--self` fails if the two drift) · S3 transparent-background words (B9) · S4 unfilled {slot}/None · S5 chroma green sentence (A/B: "flat pure chroma green (#00FF00)"; clips: "…stays perfectly flat green") · S6 "no text" (A/B) · S7 frame words per kind (A inside the medallion; B out of the medallion / over the gold rim + "stays round and centred"; out = out of the round frame; loop = settles back to exactly the starting pose; back = slides back inside + exactly like the end frame) · S8 clips: static camera + "no camera move, no new objects" · S9 Hoàng hậu = LARGE phoenix crown, Hoàng quý phi = SMALL (owner 19/11 ~17:00Z).
+Wired into all 14 seal builders (w-new w-act m m-new m-act mo mo-new mo-act, groups/grp_gian grp_set hh th sg4 sg2): on FAIL the builder prints the gate report to stderr, exits 1 and prints NO prompts. Prompts themselves unchanged (A18). `SEAL_GATE_OFF=1` is used only by seal_gate --all/--builder internally.
+`--self`: 5 good / 9 bad samples, 0 problems; bad Qing dict → guard exit 1.
+Results `--all` now: 16 runs, **1 165 prompts, 0 FAIL** (the "Qing-style inner palace" WHO sentences are already gone from grp_gian/grp_set/sg4 — removed in ddd3ff0b7). Calibration: my first S7 wording ("bursts out") failed 131 legit prompts (feeling verbs: droops/peeks out…) → loosened to "out of/over the round frame|medallion / over the gold rim".
+Historical: gen_ledger SEAL-GROUP lines (644) store only prompt_file, not prompt text → the already-drawn Qing seals stay as MG3 listed (≈68 gens, grp_gian bg/bt/mm/cn/nt/nl, grp_set mm, sg4 ht/htg/tg/tv) — list only, no redraw (A20).
+Note (pre-existing, info): grp_set_prompts.py mm prints its own "LEFTOVER … phoenix" warning for all 10 A prompts — it is the negated "no crown, no phoenix" maid sentence, not a leak.
