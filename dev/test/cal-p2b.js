@@ -5,6 +5,8 @@
       frame by frame, with every step forced onto the same cushion), and each shown step pops from its own start.
    C. Nấu ăn (banh): a gust never pushes the fire past BAL.mgTier.lev.banh.reach of what the hand can answer (source + a copy of the fire physics
       fed from the real BAL); an ideal hand holds the fire at every ease, and harder boards stay harder (law 5).
+   E. full-marks window (ROOT-75 07:36Z, owner «đạt hết mà toàn 9/10»): in the 9 mgPace kinds a careful normal-speed round keeps the whole score —
+      skilled-bot time share p75 at ease 2 and p50 at ease 1 (reports/mg-score-same.md) → mgPace = 1; law 5: fast at ease 0 ≤ at ease 5.
    D. shots of the three boards in play (look at them; written OUTSIDE the repo) + no page errors. */
 const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
 const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
@@ -52,6 +54,11 @@ const src=['j82.js','j91.js'].map(f=>fs.readFileSync(path.join(__dirname,'../bui
  ok([0,1,2,3,5].every(e=>T['after'+e][1]===0),'C no gust beyond the hand\'s reach at any ease',T);
  ok(T.after0[0]>=.4&&T.before0[0]<.2,'C ideal hand at the hardest board: before cannot hold the fire, after can (still hard)',[T.before0[0],T.after0[0]]);
  ok(T.after0[0]<=T.after1[0]&&T.after1[0]<=T.after2[0]&&T.after2[0]<=T.after5[0]+.001,'C law 5: harder board = less time in the zone',[0,1,2,5].map(e=>T['after'+e][0]));
+ // E — full-marks window of the mgPace kinds
+ const E=await p.evaluate(()=>{const U={co:[.39,.47],tho:[.20,.21],doi:[.38,.41],doden:[.28,.37],kim:[.21,.26],le:[.32,.33],tc:[.33,.34],xa:[.21,.26],thq:[.49,.56]},R={};
+  for(const k in U){const L=BAL.mgTier.lev[k];R[k]={p50e1:mgPace({lv:1},k,U[k][0]*1000,1000),p75e2:mgPace({lv:2},k,U[k][1]*1000,1000),law5:L.fast[0]<=L.fast[1],fast:L.fast}}return R});
+ ok(Object.values(E).every(r=>r.p50e1===1&&r.p75e2===1),'E a careful normal-speed round keeps full marks in all 9 mgPace kinds',E);
+ ok(Object.values(E).every(r=>r.law5),'E law 5: the window shrinks as the board hardens');
  // D — shots in play
  if(SHOT){fs.mkdirSync(SHOT,{recursive:true});for(const [k,ms] of [['huong',2500],['mua',1300],['banh',4500]]){
   await p.evaluate(async(k)=>{const sleep=t=>new Promise(r=>setTimeout(r,t));try{kg82Close()}catch(e){}Q.length=0;playArt({art:k,title:'t',onDone(){}});await sleep(900);const go=kg82Box()&&kg82Box().querySelector('.kgr-go');if(go)go.click()},k);
