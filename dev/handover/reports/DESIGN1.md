@@ -155,7 +155,7 @@ Fix (owner: inner chest neckline came out bare): the INNER top's square neckline
 | seasons4/s62_t5_XUAN_COMOI.txt | wide gold-embroidered band | cloud collar kept, open at the front, lobes on shoulders/back | 9294 | PASS |
 | seasons4/s62_t6_XUAN_COMOI.txt | pearl-edged gold band (compact wording, length limit) | two short capes kept, open at the front | 9988 | PASS |
 | seasons4/s62_t7_XUAN_COMOI.txt | broad royal-yellow brocade band with pearls | jewelled cloud-collar cape kept, open at the front | 9959 | PASS |
-Phi bạch kept (spring = silk). Captions: t1–t3 "<bậc> · Cổ áo mới v2 (viền cổ vuông giữ nguyên)"; t4–t7 "Mùa Xuân · Cổ áo mới · <bậc>".
+Phi bạch kept (spring = silk). Captions (G31 updated ~18:40Z: LARGE bold + outfit name): e.g. "Mùa Xuân · Thiết kế hiện tại · Tần · Áo choàng nhỏ + cổ mở", t1–t3 "<bậc> · Áo trong cổ vuông … + áo ngoài mở".
 
 ---
 # HANDOVER (DESIGN1, depth 1, START_CTX ≈ 3 %, now ≈ 28–30 % → at the START+25 % rollover line)
