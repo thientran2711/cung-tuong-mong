@@ -14,3 +14,11 @@ The pet dialog is the figure-left layout (.ksz3); its `.k3right` is `overflow:cl
 | iPad 1366x1024 | 898 / 786 CUT | 910 / 783 CUT | 910 / 783 CUT |
 Her own shots (worker's, pet-*-rules-*) show the same: the button row is below the dialog edge. She cannot press «Sẵn sàng» → pet care unplayable. (Worker's "open nit" was this.) Law 10 (frame→layout→button: no scroll-hidden primary button).
 Fix (kit, whole group): on the pet rules screen the dialog must fit: e.g. while .kg-ready is on, collapse the pet info block above (picture/stat/«Lớn tiếp») or make the figure-left dialog's right column scrollable; then re-scan every kgReady-in-dialog place (pet 3 kinds, plant) at Fold/iPad/1366 with a measured test (add assert: kgr-go and kgrtut bottoms <= visible bottom of their dialog column, all three devices) + LOOKED shots.
+
+# Round 2 — PASS 2859b245
+PRIORITY #1 CHECK: unchanged (see above).
+- Worker fix 24e15807 (care info folds while the game frame is open): measured assert 39/39 on Fold 755x1000 (3 runs, no flake), iPad 1180x820, 1366x1024; shots looked (buttons inside dialog).
+- NEW reviewer fix 2859b245: quickcheck FAILED perf on 24e15807 twice (render 377/255, 368/240 ms; tab 728/540, 710/513 vs live) while 9137759f passed -> culprit = the `#kpcare:has(...)` CSS. Replaced by a `.kg-open` class set in petcGameBox / water open and removed in petcDraw / shelfPlantDraw / quick-roll clear. mg-ui-rest re-run 39/39 (Fold x3, 1180, 1366).
+- quickcheck on 2859b245 PASS: render 297/273, tab 540/637, buoi 1294/1461, old save ok, core gates PASS.
+- mg-ready-guide PASS 9/9; ag-mgcal ok; care-oldsave ok (pets=2, no banner/overlap, 0 errors); mk-oldsave-pets needs other args (skipped; quickcheck old-save ok).
+- origin/main 66bd36cd is an ancestor of 2859b245 (FF-able).
