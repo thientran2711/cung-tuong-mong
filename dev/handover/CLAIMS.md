@@ -461,4 +461,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW podium-wire r1 (opus BIG) of 02db04af | review/podium-wire-r1 | B | session_01N1tNP2KN32mTra7iVBwtPR | RUNNING | 20/11 13:58Z |
 | MAIN ROOT-79 (opus; child of ROOT-78, depth 8 LAST) | handover HANDOVER_SESSION9 | ROOT-78 | session_01Rc5AsMT6GWGyV9SHc2vgNi | RUNNING | 20/11 14:06Z |
 | REVIEW ge-npc r1 (opus BIG) of a28b107f | review/ge-npc-r1 | B | session_01N1tNP6UyqC6o8nnNuZC3Sj | RUNNING | 20/11 14:04Z |
-| ge-batu r2 fixes (opus E28b; E28r FAIL e0424d54, FIX LIST 1–9) | review/ge-batu; briefs/E28b-ge-batu-r2.md | FOREMAN E #19 | session_PENDING_E28b | RUNNING | 20/11 14:05Z |
+| ge-batu r2 fixes (opus E28b; E28r FAIL e0424d54, FIX LIST 1–9) | review/ge-batu; briefs/E28b-ge-batu-r2.md | FOREMAN E #19 | session_01DgYSWq3hb2D3NEYyra3aF3 | RUNNING | 20/11 14:05Z |
