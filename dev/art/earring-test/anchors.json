@@ -30,17 +30,6 @@
     0.0
    ],
    "h": 270
-  },
-  "vong_co": {
-   "file": "sprites/vong_co.png",
-   "gen": "8ai4pTeIrU",
-   "cut": "lJtBrMOgv9",
-   "anchor": [
-    0.5,
-    0.0
-   ],
-   "h": 190,
-   "note": "worn OVER the cross-collar (like a longevity lock in dramas); z 'neck' = under the hair-beside-neck layer and under the face/neck layer, so the upper chain disappears behind the neck and the hair"
   }
  },
  "head_items": {
@@ -139,14 +128,6 @@
       776
      ],
      "z": "waist"
-    },
-    {
-     "item": "vong_co",
-     "pt": [
-      520,
-      330
-     ],
-     "z": "neck"
     }
    ],
    "slots": [
@@ -177,25 +158,58 @@
     330,
     0,
     370,
-    400
+    430
    ],
    "waist_view": [
     280,
     660,
     440,
     640
-   ]
+   ],
+   "wrists": [
+    {
+     "pt": [
+      376,
+      706
+     ],
+     "rot": 24,
+     "w": 80,
+     "squash": 0.5
+    },
+    {
+     "pt": [
+      650,
+      833
+     ],
+     "rot": 90,
+     "w": 70,
+     "squash": 0.45
+    }
+   ],
+   "wrist_view": [
+    300,
+    560,
+    440,
+    360
+   ],
+   "neck": {
+    "cx": 530,
+    "top": 338,
+    "w": 135,
+    "h": 60,
+    "pk": 1.3
+   }
   },
   "c09": {
    "cut": "UPvIb4owny",
    "group": "Tinh nghịch",
    "angle": "3/4",
-   "sub": "Tai gần đeo đủ; tai xa nhỏ hơn, nằm DƯỚI lớp mặt nên tự khuất. 3 chỗ cài.",
+   "sub": "Ảnh MỚI (sửa tay, chủ đã duyệt). Tai gần đeo đủ; tai xa nhỏ hơn, nằm DƯỚI lớp mặt. Vòng tay ở cổ tay trái (tay buông); tay cầm đèn chỉ lộ chút cổ tay sát mép tay áo. 3 chỗ cài.",
    "place": [
     {
      "item": "earring",
      "pt": [
-      403,
+      399,
       276
      ],
      "z": "ear"
@@ -203,8 +217,8 @@
     {
      "item": "earring",
      "pt": [
-      577,
-      250
+      585,
+      236
      ],
      "mirror": true,
      "scale": 0.8,
@@ -213,34 +227,26 @@
     {
      "item": "ngoc_boi",
      "pt": [
-      590,
-      718
+      480,
+      750
      ],
      "z": "waist"
     },
     {
      "item": "tui_huong",
      "pt": [
-      466,
-      718
+      600,
+      748
      ],
      "z": "waist"
-    },
-    {
-     "item": "vong_co",
-     "pt": [
-      488,
-      330
-     ],
-     "z": "neck"
     }
    ],
    "slots": [
     {
      "name": "bên trái (phía gần), trên thái dương",
      "pt": [
-      395,
-      88
+      384,
+      84
      ],
      "shaft": -105,
      "len": 0.6,
@@ -250,8 +256,8 @@
     {
      "name": "đỉnh búi, phía sau",
      "pt": [
-      510,
-      56
+      486,
+      66
      ],
      "shaft": 95,
      "len": 0.5,
@@ -261,8 +267,8 @@
     {
      "name": "bên phải (phía xa)",
      "pt": [
-      566,
-      106
+      568,
+      118
      ],
      "shaft": 105,
      "len": 0.5,
@@ -271,18 +277,43 @@
     }
    ],
    "head_view": [
-    265,
+    285,
     0,
     370,
-    400
+    430
    ],
    "waist_view": [
     280,
-    590,
+    610,
     440,
     640
    ],
-   "cut_note": "new picture (owner-approved hand fix, gen w4atqqr7EI); old xSBWFuTjfW retired"
+   "gen": "w4atqqr7EI",
+   "retired_cut": "xSBWFuTjfW",
+   "wrists": [
+    {
+     "pt": [
+      269,
+      1079
+     ],
+     "rot": 36,
+     "w": 56,
+     "squash": 0.5
+    }
+   ],
+   "wrist_view": [
+    150,
+    960,
+    300,
+    260
+   ],
+   "neck": {
+    "cx": 520,
+    "top": 335,
+    "w": 130,
+    "h": 60,
+    "pk": 1.3
+   }
   },
   "c22": {
    "cut": "rgXY1yHxtc",
@@ -322,14 +353,6 @@
       880
      ],
      "z": "waist"
-    },
-    {
-     "item": "vong_co",
-     "pt": [
-      507,
-      320
-     ],
-     "z": "neck"
     }
    ],
    "slots": [
@@ -371,14 +394,62 @@
     335,
     0,
     350,
-    380
+    420
    ],
    "waist_view": [
     340,
     660,
     440,
     640
-   ]
+   ],
+   "wrists": [
+    {
+     "pt": [
+      503,
+      850
+     ],
+     "rot": 95,
+     "w": 76,
+     "squash": 0.45,
+     "flip": true
+    },
+    {
+     "pt": [
+      662,
+      880
+     ],
+     "rot": 80,
+     "w": 72,
+     "squash": 0.45
+    }
+   ],
+   "wrist_view": [
+    400,
+    760,
+    360,
+    220
+   ],
+   "neck": {
+    "cx": 538,
+    "top": 336,
+    "w": 135,
+    "h": 60,
+    "pk": 1.3
+   },
+   "phibach": {
+    "x": 107,
+    "y": 335,
+    "w": 827,
+    "h": 1680,
+    "gen": "Lw8dko8swO",
+    "B": {
+     "file": "c22_phibach_B.webp",
+     "gen": "EbYAamsuuO",
+     "try1": "c22_phibach_B_try1.webp",
+     "try1_gen": "dt4JMSbXSL"
+    },
+    "ref": "c11 (lilac shawl painted in)"
+   }
   }
  },
  "compare": {
@@ -394,5 +465,16 @@
    "0": "pin_plum"
   },
   "fig2_label": "c11 · trâm vẽ sẵn (trái) | trâm ghép lớp (phải)"
+ },
+ "_note_ear2": "EAR2: wrists = bangle placements {pt: centre, rot: long-axis angle (deg, perpendicular to the forearm), w: long axis px, squash: short/long (edge-on wrist ~0.4), flip: swap which arc is in front}; back arc under L:hands, front arc above, L:wcuffs over its end. neck = necklace box {cx, top, w, h} (sprite stretched to it), clipped to the neck-skin mask. phibach (c22 only) = sprite box {x,y,w,h}: back piece under the whole figure, swag under the hands, sides over the sleeves, long hair over the sides.",
+ "jewelry": {
+  "bangle": {
+   "gen": "bxMcu0g5Y2",
+   "cut": "tCRNogAmZJ"
+  },
+  "necklace": {
+   "gen": "Lw8dkBzswO",
+   "cut": "cpSLnHG0eP"
+  }
  }
 }

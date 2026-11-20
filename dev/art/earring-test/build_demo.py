@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Build earring-demo.html (self-contained, base64) from anchors.json + layers/layers.json + sprites/."""
 import json, base64, os
+from PIL import Image
+
 D = os.path.dirname(os.path.abspath(__file__))
 A = json.load(open(os.path.join(D, 'anchors.json'), encoding='utf-8'))
 LAY = json.load(open(os.path.join(D, 'layers', 'layers.json')))
@@ -14,7 +16,8 @@ def uri(f):
 
 IMG = {k: uri(v['file']) for k, v in A['items'].items()}
 FIG = {k: uri(k + '_cut.webp') for k in A['figures']}
-LAYERS = {fid: {ln: [uri('layers/' + v[0]), v[1], v[2]] for ln, v in d.items()} for fid, d in LAY.items()}
+LAYERS = {fid: {ln: [uri('layers/' + v[0]), v[1], v[2]] + ([list(Image.open(os.path.join(D, 'layers', v[0])).size)] if ln == 'skin' else []) for ln, v in d.items()} for fid, d in LAY.items()}
+
 HEAD = {}
 for k, v in A['head_items'].items():
     if v['kind'] == 'pin':
@@ -23,7 +26,13 @@ for k, v in A['head_items'].items():
     else:
         HEAD[k] = {'img': uri('sprites/' + v['sprite'])}
 RANK = uri(A['compare']['rank_head'])
-data = {'A': A, 'IMG': IMG, 'FIG': FIG, 'LAYERS': LAYERS, 'HEAD': HEAD, 'RANK': RANK}
+JEW = {k: uri('sprites/' + f) for k, f in [('bangle_back', 'bangle_back.webp'), ('bangle_front', 'bangle_front.webp'),
+       ('necklace', 'necklace.webp'), ('pendant', 'necklace_pendant.webp'), ('pb_back', 'phibach_back.webp'), ('pb_sides', 'phibach_sides.webp'), ('pb_swag', 'phibach_swag.webp')]}
+JEW['pbB'] = uri(A['figures']['c22']['phibach']['B']['file']); JEW['pbB1'] = uri(A['figures']['c22']['phibach']['B']['try1'])
+
+for k in ('bangle_back', 'necklace'):
+    f = 'sprites/' + ('bangle_back.webp' if k == 'bangle_back' else 'necklace.webp'); im = Image.open(os.path.join(D, f)); JEW[k + '_wh'] = im.size
+data = {'A': A, 'IMG': IMG, 'FIG': FIG, 'LAYERS': LAYERS, 'HEAD': HEAD, 'RANK': RANK, 'JEW': JEW}
 js = ''.join(f'const {k}={json.dumps(v, ensure_ascii=False)};' for k, v in data.items())
 html = open(os.path.join(D, 'demo.src.html'), encoding='utf-8').read().replace('/*DATA*/', js)
 open(os.path.join(D, 'earring-demo.html'), 'w', encoding='utf-8').write(html)

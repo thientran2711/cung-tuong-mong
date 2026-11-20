@@ -1,4 +1,4 @@
-// node shots.js -> screenshots/ : each figure off / on (earrings + waist items + 1 pin + 1 flower; c22 also a 3rd item), compare card; Fold 755x1000 + iPad 1180x820
+// node shots.js -> screenshots/ : each figure off / on (ALL wear buttons: earrings, bangle, necklace, phi bach on c22, waist items + pins/flowers), compare card, phi bach A|B card; Fold 755x1000 + iPad 1180x820
 const {chromium} = require('playwright');
 const path = require('path');
 const ON = {c11: ['pin_plum', 'fl_peach'], c09: ['fl_peony', 'pin_butterfly', 'fl_jasmine'], c22: ['pin_dangle', 'fl_orchid', 'pin_floralfork']};
@@ -19,6 +19,7 @@ const ON = {c11: ['pin_plum', 'fl_peach'], c09: ['fl_peony', 'pin_butterfly', 'f
       await c.screenshot({path: `screenshots/${dev}_${id}_on.png`});
     }
     await (await p.$('#card-compare')).screenshot({path: `screenshots/${dev}_compare.png`});
+    await (await p.$('#card-phibach')).screenshot({path: `screenshots/${dev}_phibach_AB.png`});
     await p.close();
   }
   await b.close();
