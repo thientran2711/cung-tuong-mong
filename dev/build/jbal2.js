@@ -1646,8 +1646,8 @@ BAL.pm={kc:1,luck:30,minLv:1,
  npc:{gapW:2,me:1,meShare:.4,meGap:6,g:{play:{ally:10},duel:{spite:10,danh:3.75}},minAff:0,spite:3},
  oddsN:120};
 /* receiver weights for a pastime / duel ask (jrcv rcvPick): no «mách lẻo» slot */
-BAL.pm.rcvOn=[1,1,1,0];/* which receiver answer slots a pm ask has (1 = on): Nhận · Nhường · Từ chối on, slot 3 («mách lẻo») off */
-BAL.rcv.k.pm=BAL.rcv.k.help.map((w,i)=>w*BAL.pm.rcvOn[i]);
+BAL.pm.rcvOff=[3];/* receiver answer slots a pm ask does NOT have: slot 3 («mách lẻo»); Nhận · Nhường · Từ chối keep the help weights */
+BAL.rcv.k.pm=BAL.rcv.k.help.map((w,i)=>BAL.pm.rcvOff.includes(i)?0:w);
 /* PALACE CHATTER (PL#6 bubble talk, jchat.js; owner OD:L1627 (5) "every 1–2 min NPCs chat"): gap = seconds between two chatter ticks (real time),
    retry = seconds to look again when the stage is busy (dialog / hidden page), maxBub = bubbles on one stage at once, turnGap = ms between two lines of
    one exchange, say = how long a line stays (ms: base + ch per letter, clamped min..max), noRepeat = exchanges / greetings said before one may come back,
