@@ -851,3 +851,4 @@ NEWACCT#10 ~23:08Z: OWNER L1486 'Vẫn bị' + circled pic owner_L1476/nhat_owne
 NEWACCT#10 ~23:12Z: MAIDP2 eead8d6 closed-front collar (no slit) in nhất/thân cận/ma ma v3; keep PASS ×4, no 'slim V' left. Sent L1487. Next Lượt 1488.
 NEWACCT#10 ~23:15Z: OWNER L1488 on _cloak5 tests (pics review-sheets/owner_L1488/): Tần OK soft; Phi 2 layers → coarse; QP OK; HH coarse; HQP so-so; m02 t7/t8 neat, not bulky like s62 → DESIGN13 _cloak6: diff m02 vs s62, apply m02 neatness to s62 t5/t7/t8. Next Lượt 1489.
 NEWACCT#10 ~23:22Z: OWNER L1490: HQP + HH fur = Lông 2 (the t4–t6 fur) to test if less bulky → added to DESIGN13 _cloak6 (s62+m02 t7/t8 fur = s62_t6 cloak5 fur words). Next Lượt 1491.
+NEWACCT#10 ~23:35Z: DESIGN13 b9f0efc+a937b09 _cloak6 (Phi thin like Tần; s62 t7/t8 m02 wording; t7/t8 fur = Lông 2 = t6 fur verbatim ×4; s62 t7 angle idx8 15°R, t8 idx2 ¾R; compact hold). keep PASS ×7, --all 165 PASS. Sent L1492. Hán set resent L1491. Next Lượt 1493.
