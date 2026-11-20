@@ -1,0 +1,101 @@
+<title>Sắc sảo · Hoàng quý phi &amp; Hoàng hậu</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@500;700&family=Be+Vietnam+Pro:wght@400;600;700&display=swap">
+<style>
+/* Layout: person strip on top, one person's two ranks side by side below, prev/next bar; checker ground shows the transparency */
+:root{
+  --bg:#f3f0ea; --panel:#fbf9f5; --ink:#2b2420; --muted:#6f645b; --line:#ddd4c8;
+  --jade:#2f6f5e; --gold:#b8892f; --onjade:#ffffff;
+  --ck1:#e9e4dc; --ck2:#d9d2c6;
+  --display:"Noto Serif",Georgia,serif; --body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#171513; --panel:#211e1b; --ink:#f1ebe3; --muted:#b3a89c; --line:#3a342e;
+  --jade:#6fc2a8; --gold:#e0b55c; --onjade:#10201b; --ck1:#2a2622; --ck2:#35302b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#171513; --panel:#211e1b; --ink:#f1ebe3; --muted:#b3a89c; --line:#3a342e;
+  --jade:#6fc2a8; --gold:#e0b55c; --onjade:#10201b; --ck1:#2a2622; --ck2:#35302b; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px 28px}
+main{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1{font:700 clamp(24px,4vw,34px)/1.15 var(--display);margin:4px 0 0;text-wrap:balance}
+.sub{color:var(--muted);margin:0}
+.strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.pick{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 6px 8px;border:2px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);font:600 15px var(--body);cursor:pointer;min-width:84px}
+.pick img{width:70px;height:110px;object-fit:cover;object-position:top;display:block}
+.pick[aria-current="true"]{border-color:var(--jade);box-shadow:0 0 0 2px var(--jade) inset}
+.pick:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.who{font:700 clamp(22px,3.4vw,30px)/1.2 var(--display)}
+.who small{display:block;font:600 15px var(--body);color:var(--muted)}
+.nav{display:flex;gap:8px;flex-wrap:wrap}
+button.b{font:700 17px var(--body);padding:12px 18px;min-height:48px;border-radius:10px;border:2px solid var(--jade);background:var(--panel);color:var(--ink);cursor:pointer}
+button.b.main{background:var(--jade);color:var(--onjade)}
+.grounds{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:14px}
+.grounds button{font:600 14px var(--body);padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;min-height:40px}
+.grounds button[aria-pressed="true"]{border-color:var(--jade);color:var(--jade)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.pair{grid-template-columns:1fr}}
+figure{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font:700 19px var(--display)}
+figcaption span{font:600 13px var(--body);color:var(--muted)}
+.frame{border-radius:12px;border:1px solid var(--line);overflow:hidden;cursor:zoom-in}
+.frame img{display:block;width:100%;height:auto;aspect-ratio:1024/2304}
+.g-check{background:repeating-conic-gradient(var(--ck1) 0 25%,var(--ck2) 0 50%) 0 0/24px 24px}
+.g-light{background:#ffffff}.g-dark{background:#1b1b1d}.g-red{background:#7d2c2a}
+.big{position:fixed;inset:0;z-index:20;overflow:auto;padding:max(12px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) 12px max(12px,env(safe-area-inset-left,0px))}
+.big img{display:block;margin:0 auto;width:1024px;max-width:none;height:auto}
+.big.fit img{width:auto;max-width:100%;max-height:calc(100vh - 80px)}
+.bigbar{position:sticky;top:0;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px;z-index:1}
+.note{color:var(--muted);font-size:14px;margin:0}
+</style>
+<main>
+  <header>
+    <h1>Nhóm Sắc sảo · Hoàng quý phi &amp; Hoàng hậu</h1>
+    <p class="sub">Tuổi 18 · nền trong suốt · bấm vào hình để xem to (1024 × 2304, đúng cỡ gốc).</p>
+  </header>
+  <nav class="strip" id="strip" aria-label="Chọn người"></nav>
+  <div class="bar">
+    <div class="who" id="who"></div>
+    <div class="nav">
+      <button class="b" id="prev">‹ Người trước</button>
+      <button class="b main" id="next">Người tiếp theo ›</button>
+    </div>
+  </div>
+  <div class="grounds" role="group" aria-label="Nền xem">Nền:
+    <button data-g="check" aria-pressed="true">Ô caro</button><button data-g="light" aria-pressed="false">Trắng</button><button data-g="dark" aria-pressed="false">Tối</button><button data-g="red" aria-pressed="false">Đỏ son</button>
+  </div>
+  <section class="pair" id="pair"></section>
+  <p class="note">Ô caro = phần trong suốt. Phím ← → cũng chuyển người.</p>
+</main>
+<div class="big g-check fit" id="big" hidden>
+  <div class="bigbar"><button class="b" id="zoom">Xem 100%</button><button class="b" id="bigprev">‹ Trước</button><button class="b" id="bignext">Tiếp ›</button><button class="b main" id="close">Đóng</button></div>
+  <img id="bigimg" alt="">
+</div>
+<script>
+const PEOPLE=__PEOPLE__;
+const RANKS=[["t7","Hoàng quý phi"],["t8","Hoàng hậu"]];
+let i=0,g="check",bigRank=0;
+const $=id=>document.getElementById(id);
+const strip=$("strip");
+PEOPLE.forEach((p,k)=>{const b=document.createElement("button");b.className="pick";b.innerHTML=`<img src="cut/${p.id}_t7.png" alt="" loading="lazy">${p.id}`;b.onclick=()=>show(k);strip.appendChild(b);});
+function show(k){i=(k+PEOPLE.length)%PEOPLE.length;const p=PEOPLE[i];
+  [...strip.children].forEach((b,n)=>b.setAttribute("aria-current",n===i));strip.children[i].scrollIntoView({block:"nearest",inline:"center"});
+  $("who").innerHTML=`${p.id}<small>${i+1} / ${PEOPLE.length} · nhóm Sắc sảo</small>`;
+  $("pair").innerHTML=RANKS.map(([t,n],r)=>`<figure><figcaption>${n}<span>${t} · ${p.id}</span></figcaption><div class="frame g-${g}" data-r="${r}"><img src="cut/${p.id}_${t}.png" alt="${p.id} ${n}"></div></figure>`).join("");
+  document.querySelectorAll(".frame").forEach(f=>f.onclick=()=>openBig(+f.dataset.r));
+  if(location.hash!=="#"+p.id)history.replaceState(null,"","#"+p.id);
+  if(!$("big").hidden)openBig(bigRank);}
+function setG(x){g=x;document.querySelectorAll(".grounds button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.g===g));
+  document.querySelectorAll(".frame").forEach(f=>f.className="frame g-"+g);$("big").className="big g-"+g+($("big").classList.contains("fit")?" fit":"");}
+document.querySelectorAll(".grounds button").forEach(b=>b.onclick=()=>setG(b.dataset.g));
+function openBig(r){bigRank=r;const p=PEOPLE[i],[t,n]=RANKS[r];const im=$("bigimg");im.src=`cut/${p.id}_${t}.png`;im.alt=`${p.id} ${n}`;$("big").hidden=false;}
+$("close").onclick=()=>$("big").hidden=true;
+$("zoom").onclick=()=>{const fit=$("big").classList.toggle("fit");$("zoom").textContent=fit?"Xem 100%":"Vừa màn hình";};
+$("bignext").onclick=()=>{if(bigRank===0)openBig(1);else{bigRank=0;show(i+1);}};
+$("bigprev").onclick=()=>{if(bigRank===1)openBig(0);else{bigRank=1;show(i-1);}};
+$("prev").onclick=()=>show(i-1);$("next").onclick=()=>show(i+1);
+addEventListener("keydown",e=>{if(e.key==="ArrowRight")($("big").hidden?$("next"):$("bignext")).click();if(e.key==="ArrowLeft")($("big").hidden?$("prev"):$("bigprev")).click();if(e.key==="Escape")$("big").hidden=true;});
+const start=PEOPLE.findIndex(p=>"#"+p.id===location.hash);show(start<0?0:start);
+</script>
