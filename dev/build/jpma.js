@@ -296,8 +296,11 @@ function pmKyNoise(o,me,R){const K=B().ky;return Math.round(cl(K.base-K.k*(pmSco
 function kgGomoku(b,env){const K=BAL.pm.ky,n=7,B0=Array(n*n).fill(0);let over=false,maxRun=0,oppRun=0,lock=false,mv=0,wt=0;
  const A=K.ai,noise=KG82.phase==="tut"?K.tut:(KG82.kyNoise!=null?KG82.kyNoise:(5-(env.lv||0))*A.lvN+A.lvN0);KG82.kyOut=null;
  const N=KG82.phase==="tut"?null:KG82.kyNet||null,ME=N&&N.side===2?2:1,OP=ME===1?2:1;
- b.innerHTML=`<div class="goban">${B0.map((_,i)=>`<button data-i="${i}" aria-label="Hàng ${Math.floor(i/n)+1}, cột ${i%n+1}"></button>`).join("")}</div><p class="mgsc" id="kgkysc">Đến lượt ngươi.</p>`;
- const cells=b.querySelectorAll(".goban button"),D=[[0,1],[1,0],[1,1],[1,-1]],W=A.w,sc=b.querySelector("#kgkysc");
+ b.innerHTML=`<div class="goban">${B0.map((_,i)=>`<button data-i="${i}" aria-label="Hàng ${Math.floor(i/n)+1}, cột ${i%n+1}"></button>`).join("")}</div><p class="mgsc" id="kgkysc"></p>`;
+ const cells=b.querySelectorAll(".goban button"),D=[[0,1],[1,0],[1,1],[1,-1]],W=A.w,sc0=b.querySelector("#kgkysc");
+ /* NO TEXT in play (owner OD 20/11 ~05:10Z, KIT §13.x kit signs of j82 kg82Sym): the status line shows a SIGN only — the stone whose turn it is (● black / ○ white,
+    «…» = waiting for the other side), ★★★ win · ★★ draw · ✗ loss; the sentence stays in title / aria-label (screen readers, tooltip) */
+ const say=(w,g)=>{sc0.textContent=g;sc0.title=w;sc0.setAttribute("aria-label",w)},STN=p=>p===1?"●":"○",sc={set textContent(w){say(w,/thắng!$/.test(w)?"★★★":/^Hòa/.test(w)?"★★":/^Quân (trắng|đen) thắng/.test(w)?"✗":/^Đến lượt ngươi/.test(w)?STN(ME):STN(OP)+" …")}};
  const run=(i,p)=>{const r=Math.floor(i/n),c=i%n;let best=0;for(const[dr,dc]of D){let k=1;for(const s of[1,-1]){let rr=r+dr*s,cc=c+dc*s;while(rr>=0&&rr<n&&cc>=0&&cc<n&&B0[rr*n+cc]===p){k++;rr+=dr*s;cc+=dc*s}}best=Math.max(best,k)}return best};
  const val=(i,me)=>{const op=me===2?1:2;B0[i]=me;const a=run(i,me);B0[i]=op;const d=run(i,op);B0[i]=0;const r=Math.floor(i/n),c=i%n;return W[Math.min(a,5)]*A.atk+W[Math.min(d,5)]+(A.midW-Math.abs(r-A.mid)-Math.abs(c-A.mid))};
  const pick=(me,nz)=>{let best=-1,bi=-1;for(let i=0;i<B0.length;i++)if(!B0[i]){const s=val(i,me)+Math.random()*nz;if(s>best){best=s;bi=i}}return bi};
@@ -314,7 +317,7 @@ function kgGomoku(b,env){const K=BAL.pm.ky,n=7,B0=Array(n*n).fill(0);let over=fa
  KG82.peek=()=>over||lock?null:{sel:`#kg82 .goban button[data-i="${pick(ME,0)}"]`};
  cells.forEach(c=>c.onclick=()=>{if(over||lock)return;const i=+c.dataset.i;if(B0[i])return;mv++;const r=put(i,ME);maxRun=Math.max(maxRun,r);if(N&&N.send&&N.live!==false)try{N.send(i,mv)}catch(e){console.error(e)}hud();
   if(r>=5)return fin("win",K.win,"Ngươi thắng!",A.endMs);if(full())return fin("draw",K.draw,"Hòa cờ.",A.endMs);oppTurn()});
- if(ME===2)oppTurn();else hud();
+ if(ME===2)oppTurn();else{sc.textContent="Đến lượt ngươi.";hud()}
  try{cells[A.mid*n+A.mid].focus({preventScroll:true})}catch(e){}return()=>{over=true;clearTimeout(wt)}}
 if(typeof KG82_ENG==="object")KG82_ENG.gomoku=kgGomoku;
 /* fix 3 (owner OD 20/11 ~08:40Z guard, mg-allkinds): the 7×7 board is a mini-game she plays → its own KG82 kind, so Thử tay (jmgcal mgCalKinds / mgCalRun) lists it.
