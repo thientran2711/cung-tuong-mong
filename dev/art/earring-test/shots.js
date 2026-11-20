@@ -9,7 +9,7 @@ const path = require('path');
     await p.goto(url);
     await p.waitForTimeout(500);
     await p.screenshot({path: `screenshots/${dev}_page_off.png`});
-    for (const id of ['c11', 'c09']) {
+    for (const id of ['c11', 'c09', 'c22']) {
       const c = await p.$('#card-' + id);
       await c.screenshot({path: `screenshots/${dev}_${id}_off.png`});
       for (const bt of await c.$$('button')) await bt.click();

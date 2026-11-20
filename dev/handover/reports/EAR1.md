@@ -1,6 +1,13 @@
 # EAR1 — earring + ngọc bội + túi hương try-on test (owner 20/11 ~06:20Z)
 depth 1 · START_CTX ~3 % (1M window) · worker of Foreman C ROOT-66
 
+## UPDATE 2 ~06:45Z — owner feedback: c09 far ear + hands over belly; waist items back in (0 cr)
+- Demo dev/art/earring-test/earring-demo.html (1.73 MB): 3 figures, buttons «Đeo/Tháo hoa tai», «Đeo/Tháo ngọc bội», «Đeo/Tháo túi hương»; views Cận mặt · Dải lưng · Toàn thân.
+- c09 (3/4): far ear now wears an earring too — anchor (584,258), 0.8x size (perspective), HALF behind the cheek, hair strands across it (occluder c09_occ_cheek.png). Checked at 3x.
+- NEW c22 · Đoan trang · FF (cut rgXY1yHxtc): both ears clean, no earrings drawn, both hands clasped over the belly just under the sash. Layer order figure → items → occluder (c22_occ_hands.png = her own hands + both sleeve cuffs cut from the picture). Ngọc bội (548,880) + túi hương (622,880): cords run under the fingers, pendant/sachet + tassels hang below the hands, the sachet's edge goes behind the right cuff. Earring pair (443,261)/(608,247).
+- Method: occluder = piece of the SAME figure placed exactly on top, so it is invisible except where it covers an item. Masks: skin-colour threshold (hands, cheek) + darkness-weighted hair alpha + hand-placed polygons along the cuff inner edges. Script make_occ.py (no segmentation calls, 0 cr).
+- Screenshots: screenshots/{fold,ipad}_{c11,c09,c22}_{off,on}.png + {fold,ipad}_page_off.png.
+
 ## UPDATE 06:27Z — owner DROPPED ngọc bội / túi hương (ROOT-66 msg queued 06:19Z, reached me only after the work was done)
 Demo is now EARRING ONLY (0.81 MB): one button «Đeo hoa tai» / «Tháo hoa tai» per figure, views Cận mặt + Toàn thân; screenshots re-taken. The two waist pictures (ngoc_boi.png, tui_huong.png) and their anchors stay in the folder/JSON for the record only. Budget note: the cut said ≤2 gens; 3 were already spent (earring + 2 waist items) before the message arrived — 1 over.
 
