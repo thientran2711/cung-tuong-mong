@@ -881,3 +881,4 @@ NEWACCT#11 ~23:00Z: OWNER L1512 'Tam đẳng ok, run magnific tam, nhị nhất,
 NEWACCT#11 ~23:05Z: OWNER L1515 on Hán _open6 tests (pics owner_L1515/): 'Copy toàn bộ trang phục của hqp qua cho hoàng hậu, khiên vân y chang luôn' → DESIGN14 _open7 t8 = HQP t7 _open6 outfit + vân kiên verbatim; HH colours (royal yellow), crown, item, face, pose kept. Next Lượt 1516.
 NEWACCT#11 ~23:10Z: DESIGN14 7a903a3 Hán t8 _open7 (HQP t7 _open6 outfit + vân kiên verbatim; HH colours/crown/item/face kept; 6 collar bands). #11 changed 'near-empress' → 'empress' (.keep allow); keep --all 176 PASS. Sent L1516. Next Lượt 1517.
 - (20/11 22:40Z) FROM MAIN ROOT-81: LIVE now 463d3d70 (E person-minigame-acts r4).
+NEWACCT#11 ~23:15Z: GEN1 98ff064 4 maid gens (tam aFGdKgifSh, nhị gOm5NnCSXO, nhất N2qSYXL6D9, chưởng sự hu2pbShvqL; 540 cr). #11 LOOKED at sheet: tam sash visible over jacket, small flowers OK. Sent sheet L1517. GEN1 idle. Next Lượt 1518.
