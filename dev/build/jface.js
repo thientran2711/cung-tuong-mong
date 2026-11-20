@@ -136,7 +136,7 @@ PEND.pzcard=pp=>{const z=S&&S.pz;if(!z||z.until<=wk())return null;const o=[];con
   const by=z.by&&typeof byKey==="function"?byKey(z.by):null;if(by&&by!==S&&roll(BAL.odb.jface.rbOk+(S.doctor?20:0))){evA(S,by,BAL.eff.jface.evOk);t+=` Thái y nhận ra vị độc, lần ra người của ${by.name} từng mua: Chứng cứ về ${by.name} ${balSg(BAL.eff.jface.evOk)}.`}return t}}));
  o.push(ch70("Uống thuốc giải trong rương",{need:[{t:kitWhyItem("thuốc giải"),ok:(S.inv||[]).some(e=>e.k==="giaidoc"&&!e.h),w:kitWhenItem()}],wt:[G70("độc tan ngay")],k:[R70("dùng hết 1 thuốc giải")],ok:()=>{takeItem(S,"giaidoc");S.pz=null;return "Ngươi uống thuốc giải, môi hồng trở lại."}}));
  o.push(ch70("Tự sắc thuốc giải độc",{p:oddsCl(30+y*15),c:{suc:-3},wt:[G70("độc tan sớm hơn")],lt:[R70("uống sai vị, lâu khỏi hơn")],ok:()=>{z.until=Math.max(wk()+1,z.until-1);return "Ngươi tự sắc cam thảo, lục đậu giải độc."},no:()=>{z.until++;return "Thuốc không hợp, độc lâu tan hơn."}}));
- o.push(ch70("Nằm nghỉ chờ khỏi",{wt:[G70("không tốn gì")],k:[R70(`còn ${fxLeft(z.until)} tuần`)],ok:()=>"Ngươi nằm nghỉ, uống nước cháo loãng."}));
+ o.push(ch70("Nằm nghỉ chờ khỏi",{wt:[G70(`giữ lại ${FXF.docMed} lượng bạc và sức lực`)],k:[R70(`còn ${fxLeft(z.until)} tuần`)],ok:()=>"Ngươi nằm nghỉ, uống nước cháo loãng."}));
  return{who:pMe(),t:`<p>Môi ngươi tím tái, da xám đi${z.dx?" — thái y nói là trúng độc":", người lả đi không rõ vì sao"}: Sắc đang mất ${FXF.doc[z.sev]}; còn chừng ${fxLeft(z.until)} tuần.</p>`,o}};
 
 /* ---------- 3. BỊ TÁT: a faint soft handprint on the cheek for a few tuần (img/fx-slap.png on the scar-fit cheek box) ---------- */

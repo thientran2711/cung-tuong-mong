@@ -68,7 +68,7 @@ function scanFn(view){
     if(v==='rboard'){window.__rb=1;T('rv');return 1}
     if(v==='court1'){PG.court=1;T('court');return 1}
     if(v==='emp'){showEmp();return 1}
-    if(v==='dlg'){const R=liveRivals(true);const a=R[0],c=R[1]||R[0];Q.push({t:"Có người đến",stage:[a,c],who:pv(a),h:`<p>${a.name} sang thăm.</p>`,opts:[{n:"Tiếp",fx:{},x:"thân +3",go:()=>{}},{n:"Từ chối",fx:{},x:"thân -3",go:()=>{}}]});showModal();return 1}
+    if(v==='dlg'){const R=liveRivals(true);const a=R[0],c=R[1]||R[0];Q.push({t:"Có người đến",stage:[a,c],who:pv(a),h:`<p>${a.name} sang thăm.</p>`,opts:[{n:"Tiếp",fx:{suc:-3},x:"thân +3",go:()=>{}},{n:"Từ chối",fx:{suc:3},x:"thân -3",go:()=>{}}]});showModal();return 1}
     if(v==='gift'){let ix=S.inv.findIndex(e=>!e.h);if(ix<0){S.inv.push({k:'nhansam'});ix=S.inv.length-1}const d=mkP('giftpick',{ix});if(!d)return 0;pushDil(d,"Tặng quà");render();return 1}
     if(/^book/.test(v)){Q.length=0;dawn();return 1}
     if(v==='ident'){Q.push({t:'Thân phận',nl:1,h:'<p>x</p>',opts:[{n:'Nhận',fx:{},go:()=>{}}]});showModal();return 1}
