@@ -76,3 +76,9 @@ Looked: both square, open, no round, no V, no cross collar. t1 = deep, low squar
 - Rule G17 added (rule.py add, owner verbatim).
 - Note: this changes t1/t2 prompts for ALL people (c/m/p/s) at their next gen; already-drawn pictures untouched (no redraw).
 - Note: s62 t1/t3/t4 builder output also differs from my drawn prompts in the ANGLE sentence — that is an upstream commit (not mine).
+
+## 9. G17 clarification + 1 new t2 test (owner GO) — 1 gen, 135 cr
+- build.py TIER_LOW t2: "OPEN SQUARE NECKLINE (style 1 cut, Thường tại edge): the SAME low, simple, narrow straight-edged square opening as the lowest rank (NOT wide, NOT stretched toward the shoulders) … its edge a LAYERED border of two stacked narrow bands, a thin {sec} piping inside and a narrow band of small embroidered {motif} outside …". t1 unchanged (plain band). G17 updated with the owner's clarification verbatim.
+- Gate STORE CHECK PASS s62/s64/s65 t2 (dev/art/rank8-s62/g17/).
+- Gen 8ai9BR2IrU. Sheet dev/handover/review-sheets/rank8-s62/s62_THU_covuong2_t1-t2.webp (t1 đã OK | t2 THỬ MỚI).
+- Looked: t2 square is the same narrow size as t1 (not wide), edge = thin mint piping + plum-blossom band; rest of t2 outfit as before. Face ok, mouth closed, no earrings.
