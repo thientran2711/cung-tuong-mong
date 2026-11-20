@@ -55,3 +55,57 @@ Commits on review/ge-batu: ffd3d07b data/BAL · ge-guard checks · da7224d7 mat 
 1. Law 5 for grand endings: GE odds/gates do not read rank in any wave (W1–W3 «n/a»). If E wants it, it is ONE engine key for all 40 branches (e.g. BAL.ge.odds.rank per rank step) — a D-rules / engine decision, not a writer wave.
 2. bd_tuyet ge4 «Khúc ca Nô Nhụ» assumes the song was written (.11 t1 «Viết khúc ca…»); a life that never meets t1 can still pull ge4 through yến xuân options. Engine has no object-flag term; if wanted, a term ["fb","bd.o.khuc"] is an engine addition.
 3. ROAD_MAP.md §4.5b (B's file, game branch) still has the steppe outline lines (titles, Ô Lặc, Thác Bạt Phong…) though the code is Ba Tư — FOR B, law 14.
+
+## ROUND 2 (E28b, opus, FOREMAN E #19) — fixes for E28r FAIL e0424d54 (reports/ge-batu-review.md FIX LIST 1–9)
+PRIORITY #1 CHECK ('ge-batu|jgedata_bd|bd_hen|bd_soi|bd_tuyet|bd_san'): work exists = review/ge-batu e0424d54 + FAIL report @de90832c; claims row E28b (this session). Reused, nothing rebuilt. Engine terms on main (jge.js geTerm): s / e / seat / seatT / mis / misD / son — **no object-flag term**, so fix 3 = option (b).
+Base: review/ge-batu e0424d54 + merge origin/main 7a35db20 (W3 landed: jgedata_w3.js + jnwb.js; bd rows placed after the W3 rows in BAL.ge.gate/fail/rw; assemble.py = main list + jbalbd/jrd_bd/jrd_bd2 + `'jgedata_w3.js', 'jgedata_bd.js'`). bd-roads is NOT on main yet (review/bd-roads 4403fbbd) → ge-batu must not final-land before it. START_CTX ≈ 3 %.
+READY sha: **1ca835da**.
+
+### Fix list → what changed
+| # | ending (field) | before | after |
+|---|---|---|---|
+| 1 | bd_hen_1 t | Mật Hồ Đạt «đặt lại chiếc nhẫn … vào tay ngươi» (false if da = ta / chon / vua) | he «nhắc lại lời thề năm xưa» — no ring; true in every da state |
+| 1+8 | bd_hen_1 ft (fo .10 lose = he is dead) | «Mật Hồ Đạt bị trục xuất về tây … chiếc nhẫn bị Thận hình ty niêm lại» | «Con đường về tây đóng lại với ngươi, và ngươi bị cấm túc một mùa trong cung» — no ring, true dead or alive |
+| 2 | bd_hen_2 t / a | she burns «chiếc nhẫn» (false if da = tra / vua) | she stands before the sacred fire at đền Hỏa Tiên and swears the old oath dead — no ring; true in every da state (so the tra/vua options in pull stay) |
+| 3 | bd_tuyet_4 cw / t / a / ht / ha / ft | assumes the .11 song exists, shading from lean | the ending itself writes it: «Tết xuân phân năm sau, ngươi soạn một khúc ca (Nô Nhụ) mới …»; cw «… để khúc ca ngươi soạn được nhạc phường chép lại»; ft «Khúc ca mới ngươi soạn …» — true for khuc = thien / oan / 0. (a) engine term not built: FOR E Q2 |
+| 4 | bd_soi_3 t | «trình đủ những bức thư dọa của vương thúc» (thuluc can be burnt / given / 0) | «cho bắt những kẻ vương thúc cài vào kinh, để chính lời khai của họ nằm trên ngự án» — evidence made by the ending |
+| 5 | bd_hen_4 cw / t / a | «chứng cứ ngươi đã giữ» | cw «buộc hai nước xét lại đêm ấy»; a «kể đêm chiêng báo động trong ngục Đại Lý tự» (the .10 lose event, always true here: cond .10 lose); t «xin hai nước cùng mở lại án đêm chàng chết trong ngục» |
+| 6 | bd_hen_4 t / a / ht / ha | «rời cung theo linh cữu» (coffin already left at .11 s3) | «rời cung, theo con đường sứ đoàn đã đưa linh cữu Mật Hồ Đạt về tây» / «theo đường linh cữu chàng» |
+| 7 | BAL.ge.rw bd_soi_2, bd_tuyet_2 | rank:1 + bac:300 (only such rows) | bd_soi_2 {rank:1,danh:30,duc:10,rel:8}, bd_tuyet_2 {rank:1,danh:30,tamco:10,rel:8} = the W3 shape (cnv_chu_4 / ch_co_2). Check: 0 rows with rank+bac in all 160 |
+| 8 | bd_hen_3 ft (fo .10 lose) | «Mật Hồ Đạt về tây không một lời» | «Lễ kết nghĩa bị gác lại mãi rồi không ai nhắc nữa. Lời thề cũ chưa thành nghĩa, …» |
+| 8 scan | every death-fo ft (bdKill points: phong bd_hen .10, olac bd_soi .11, thatmoc bd_soi .7, asnc bd_tuyet .6) | bd_hen_1 ✗, bd_hen_3 ✗, **bd_soi_2 ✗** («Nê Niết Sư phải lùi về phủ cũ» — .11 lose can kill him) | all three true for a dead man; bd_soi_2 ft «Chiếu của Đại Hy không giữ được ngai cho em ngươi. Các đại tộc đã chọn bên khác. …» |
+| 9 scan | bd_tuyet_3 cw / a / t / ft (lenhbai = 0 / tra / ta / asnc) | «Lệnh bài cửa ải ở trong tay ngươi», «Lệnh bài trở về tay quan trấn thủ», ft «Lệnh bài bị tìm thấy trong hộp trầm» | no tally: «Ngươi buộc Ngọc Môn quan mở theo ý mình», «tự viết sớ nhận lỗi đã xen vào việc cửa ải», ft «Binh bộ dâng sớ hặc ngươi tội xen vào việc cửa ải» |
+| 9 scan | bd_san_4 a (nguatay = chuong / bado→chuong at .11 cast / cua / 0) | «con ngựa chờ ở Kim Quang môn cũng đã có người cưỡi» | «Ngươi ra Kim Quang môn trong đêm, theo đoàn lạc đà …» |
+| 9 scan | bd_san_2 t (nguao can be {v}'s) | «một con ô, một con trắng» | «ngự mã đi trước, Ngọc Câu trắng đi sau» |
+
+### Family scan (law 11) — `node dev/test/ge-bd-scan.js [file]` (new): every object/evidence word (nhẫn, khúc ca, thư, chén, sợi đai, con dao, sổ, bản đồ, gói tro, lệnh bài, ngựa ô, linh cữu, chứng cứ, Kim Quang môn) and every killable person in cw/t/a/ht/ha/ft of the 16 endings, with cond/fo
+- before (e0424d54): 47 hits → **13 faults** (the 9 of the FIX LIST + bd_soi_2 ft, bd_tuyet_3 ×4, bd_san_4 a, bd_san_2 t).
+- after: 34 hits → **0 faults**. The 34 left, each checked:
+  - bd_san_1 a «sổ cỏ khô», bd_hen_1 a «sổ phi tần», bd_hen_2 «sổ của cả hậu cung», bd_tuyet_2 ft «sổ thâm hụt»: office books, not the bd_san «so» object.
+  - bd_san_3 ×5 (đai, dao, chứng cứ): fo .6 lose — accepted by E28r.
+  - bd_san_4 / bd_soi_3 «Kim Quang môn»: the gate as a place.
+  - bd_soi_2 t/a «thư», «Nê Niết Sư»: the success needs fo .11 ≠ lose (alive); the letters are new letters of the ending.
+  - bd_tuyet_4 ×5 «khúc ca»: written by the ending (fix 3).
+  - bd_hen_1/3 t/ha «Mật Hồ Đạt»: success only when fo .10 lose is false (alive).
+  - bd_hen_4 ×6: cond .10 lose = he is dead, the texts speak of a dead man; coffin = the road the envoy took.
+- Fail texts with a death fo, now: bd_hen_1, bd_hen_3, bd_soi_2 — each true dead or alive. Other fo (bd_san_3 .6, bd_tuyet_2 .6, bd_soi_4 seatT) kill no one.
+
+### Mật gate 3/4 → 2 (one-line reason, asked by fix 9)
+The bd roads give far fewer spy beats than the palace roads, and every bot life ended at mật 0–2 (bd lives and a td_ke control). 2 is the value 14 W1–W3 rows already use; the change moves no measured number.
+
+### Tests (sha 1ca835da)
+- `node dev/test/ge-guard.js`: **8/8 PASS**, ERRORS 0, 40 live branches incl. bd_san/bd_soi/bd_tuyet/bd_hen; `python3 dev/test/ge_guard/check.py` ok.
+- `node dev/test/ge-engine.js - all`: **1288/1288 pass** (all 40 branches, W3 included after the main merge).
+- `node dev/test/one-core-guard.js`: **PASS** (inline 3835 ≤ 4212, fails 0). BAL.ge rw: 0 rows with rank+bac.
+- `node dev/test/ge-bd-scan.js`: 47 hits / 13 faults → 34 hits / 0 faults (see above).
+- `bash dev/tools/quickcheck.sh` (run alone): **QUICKCHECK PASS** 400 s · core gates PASS · time-spill PASS · open 1578 ms · **old save ok** («Mộ Dung Hàm Hương», 0 errors) · perf median new/live render 262/202, tab 422/436, buổi 1078/1022 ms, tasks>200ms 20/21.
+- Measure, ONE life per road (`MAXJ=1 ge-measure.js - 1 1 <out> <road> sens`, each road in its own process, aimed bot «in» at ge1): bd_san won ge1 (thiện, odds Nắm chắc), open11 2 · bd_soi won ge1 (thiện), open11 3 · bd_tuyet won ge1 (thiện), open11 3 · bd_hen won ge1 (thiện), open11 1, ge4 fail-only (he lives). 4/4 lives ok, 0 page errors. The end mật was 0–1 again. inChar is 1 on one life, which is not a rate (E28r already noted the saturation).
+- Shots (Fold 755x1000@2 + iPad 1180x820@2, a scratch copy of the ge-shots flow on road bd_hen with ends[10]=lose; 10/10 checks: words on screen, no horizontal overflow, 0 page errors; I looked at all 4):
+  - A «Đại kết cục · Đòi máu cho chàng» (bd_hen_4 ác): the new lines «theo con đường sứ đoàn đã đưa linh cữu Mật Hồ Đạt về tây» and «đêm chiêng báo động trong ngục Đại Lý tự» are on screen; the kit card is clean on both devices.
+  - B «Kết cục · Nghĩa chưa thành nghĩa» (bd_hen_3 fail on its death fo): the new ft is on screen; it no longer says he goes west.
+  - **CDN refused (cdn_sync.py → HTTP 401 Authentication error)**: nothing uploaded to img/_review/ge-batu/ and no image committed.
+
+### FOR E (open, nothing built)
+- Q1 law 5 for grand endings: ONE engine key for all 40 branches (e.g. BAL.ge.odds.rank per rank step). This is an engine decision, not a writer wave.
+- Q2 (fix 3a) an object-flag term `["fb","bd.o.khuc","thien"]` in geTerm would let bd_tuyet_4 read the .11 song. It would be a new engine term (feature freeze), so I did not build it; fix 3 is done by (b).
+- Q3 the steppe outline words in ROAD_MAP.md §4.5b are in B's file → FOR B (law 14).
