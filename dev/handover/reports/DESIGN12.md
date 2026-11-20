@@ -68,3 +68,23 @@ Change (A39, only the winter/fur wording):
 - Cloak colour/cloth = her outer robe (main colour; t8 golden yellow as her outer robe; fabric per rank stays). Outfit/shoulder-piece sentences untouched.
 Trims to fit 10 000 (allow lines): s62_t7 + m02_t8 duplicate "Full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; " (the earlier full-body/skin sentence stays); s62_t8 " Floor-length robe with slippers visible, no train." → " No train." (outfit already says floor-length robe with slippers visible) and pose tail "the whole face fully visible with the head up toward the viewer" → "her head up toward the viewer".
 Chars: t4 9835, t5 9763, t6 9869, t7 9935, t8 9983, m02_t7 9861, m02_t8 9955. keep_check --sidecar PASS ×7, --all 119 PASS. check_store FAIL set IDENTICAL to each _vk base (no new FAIL; W03 REWRITTEN on t7/t8/m02 t7/t8 still from the fur change).
+
+# DESIGN12 job 5 — winter shoulder pieces too BIG (owner Lượt 1450, brief dong-compact-L1450.md). 0 gens. Context ~25 % of 1M.
+## WHY the shoulder piece reads huge in *_cloak (size words per rank; [C] = added by the cloak edit L1445, [F] = fur ladder G26 v3 20/11, [O] = from the outfit/older prompts)
+- ALL ranks [C]: "her outer robe is worn as an open-front FUR CLOAK … the <piece> on the cloak's shoulders" (the piece is read as the cloak's own shoulder cape → drawn cape-sized); "fur … from the neck to the floor … with fur lapels beside the <piece>" (fur climbs to the neck and frames/inflates the piece).
+- ALL ranks [O]: the outfit already has an outer robe "running from behind the neck over BOTH shoulders" (t5/t7/t8/m02) → one more shoulder layer under the piece.
+- t4–t6 [F]: "a VERY WIDE, luxurious band of thick … fur trim, wider than at the lower ranks, about two and a half hands wide".
+- t7/t8 + m02 [F]: "the WIDEST, THICKEST and most luxurious band of deep, dense, plush … fur, far wider and fuller than at any lower rank, about three and a half hands wide and visibly thick and lush … softly rounded and full".
+- t4 Tần [O]: "capelet … over only the shoulders AND the outer upper chest", "beaded yoke … over the WHOLE capelet", "rounded petal-like lobes along the lower edge".
+- t5 Phi [O]: "TWO layered … SHORT shoulder capes, the lower cape a little longer", pearl fringe beneath EACH cape + pearl net over both.
+- t6 Quý phi [O]: cloud collar + "fringe of small gold tassels" + "jade and pearl drops dangling beneath it".
+- t7 HQP [O]: the word "cloud-collar CAPE" (though "small, neat and flat" since L1437).
+- t8 HH [O]: "two tiers of scalloped cloud-shaped lobes", "the LONGEST fringe of all ranks … longer than the Hoàng quý phi's", "not bigger than the Hoàng quý phi's CAPE".
+- Old frozen builder 882738ff (18/11) HH: "a WIDE jewelled … cloud collar with LAYERED pearl fringes" + "a long silk MANTLE from the shoulders to the floor" — mantle+collar = the same cape look.
+## *_cloak2 (base = *_cloak, A39; only the WINTER sentence changed) — dong_hientai/{s62_t4..t8, m02_t7, m02_t8}_DONG_HIENTAI_cloak2.txt
+- "the <piece> on the cloak's shoulders;" → "the <piece> [t8: (two small tiers)] on the cloak's shoulders, kept SMALL, NEAT and FLAT, lying close on the shoulders like a collar-piece [t8: phrase dropped for length], never a big or bulky cape;"
+- "along the cloak's front edges from the neck to the floor, its hem and cuffs, with fur lapels beside the <piece>," → "along the cloak's front edges from just below the <piece> to the floor, its hem and cuffs, no fur lapels, no fur on the shoulders or neck,"
+- fur width t4–t6: "a VERY WIDE … about two and a half hands wide," → "a NARROW, FLAT band of soft plain ivory-white fur trim, about a hand's width, never wider," (G26 v2 width).
+- fur width t7/t8: "the WIDEST, THICKEST … about three and a half hands wide and visibly thick and lush," → "a NARROW, FLAT band of soft plain ivory-white fur trim, about a hand's width, never wider [t8: dropped], a little plusher than the lower ranks,"; "rich, warm and sumptuous, softly rounded and full, yet neat and elegant" → "rich yet slim [t8: slim], neat and elegant, never puffy or bulky".
+- Outfit / shoulder-piece outfit sentences NOT touched (owner L1449 "nothing else changes"); if still big, next step = the [O] words above (t4 "outer upper chest", t5 lower-cape length, t8 tiers/LONGEST fringe).
+Chars: t4 9922, t5 9850, t6 9956, t7 9970, t8 9994, m02_t7 9896, m02_t8 9966. keep_check --sidecar PASS ×7, --all 126 PASS. check_store vs _cloak: t4–t6 same; t7/t8/m02 W03 REWRITTEN → W03 MISSING (same rule, fur sentence now far from the approved t7/t8 Lông 3 — expected from the owner's narrower-fur ask; W03 needs a foreman update).
