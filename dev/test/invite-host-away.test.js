@@ -60,8 +60,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    o.E.back.met=(PT.stat.iwMet||0)-m1;o.E.back.loss=LOSS.filter(x=>x[0]===h.id&&x[1]==="me").length;o.E.back.home=S.place==="home";o.E.back.hostBack=iwHere(h,k);}
   /* F NPC ↔ NPC */
   toB0();S.invW=[];{const L=free();const h=L[0],g=L[1];const e=S.roster&&S.roster.P["v"+h.id];const kh=j95kh();if(e)for(let i=kh;i<e.length;i++)e[i]=["vuon","stay",null,"dạo vườn"];
-   const a0=aff(g,h);rcvInvAt(h,g);o.F={wait:S.invW.length,row:(S.roster.P["v"+g.id]||[])[kh]};const now0=ptNow();iwDraw=()=>99;spend(1);iwDraw=d0;
-   o.F.left=S.invW.length===0;o.F.dRel=aff(g,h)-a0;o.F.row2=(S.roster.P["v"+g.id]||[])[j95kh()];o.F.now=[now0,ptNow()]}
+   const a0=aff(g,h);rcvInvAt(h,g);o.F={wait:S.invW.length,row:(S.roster.P["v"+g.id]||[])[kh]};const RK=()=>S.roster.key,gid="v"+g.id;o.F.bWait=agBound(gid,kh,RK());const now0=ptNow();iwDraw=()=>99;spend(1);iwDraw=d0;
+   o.F.left=S.invW.length===0;o.F.dRel=aff(g,h)-a0;o.F.row2=(S.roster.P["v"+g.id]||[])[j95kh()];o.F.now=[now0,ptNow()];/* review walk-cost r4: bound only while the invitation holds (law 6b): the walk-back khắc yes, the rest of the buổi free again */o.F.bBack=agBound(gid,j95kh(),RK());o.F.bAfter=[];for(let i=j95kh()+1;i<J95.KH;i++)o.F.bAfter.push(agBound(gid,i,RK()))}
   /* I co-op friend seat (rival coop:true): never rolled, never charged, no notice — as guest (her invite) and as host (an NPC comes to her palace) */
   toB0();S.invW=[];{const L=free();const f=L[0],n=L[1];const c0=f.coop;f.coop=true;LOSS.length=0;PT.stat.iwLast=null;
    S.place="vuon";rcvInvAt(S,f);const a1=S.invW.length;iwDraw=()=>99;spend(1);iwDraw=d0;S.place="home";
@@ -77,7 +77,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r.C.left&&r.C.last&&r.C.last.t===r.C.last.K-1&&r.C.th===BAL_NEAR&&r.C.t3===r.C.t2+r.C.th&&r.C.whereHome!=="home"&&!r.C.atHome&&r.C.lossMe===1&&r.C.row&&r.C.row[1]==="back"&&/sang chơi không gặp, đã ra về/.test(r.C.note),"C guest decided LEAVE at khắc 4 → nobody home, loss, notice, walk back row",Object.assign({},r.C,{note:r.C.note,wl:r.wlC}));
  ok(r.D.wait===0&&r.D.where==="home","D host home at the arrival khắc → no wait, visit as before",r.D);
  ok(r.E.reg===1&&r.E.there&&r.E.wait===1&&r.E.t!=null&&r.E.left&&r.E.K===r.E.tap&&r.E.dRel===loss&&r.E.meet&&r.E.back.arr&&r.E.back.fit&&r.E.back.home&&r.E.back.hostBack&&r.E.back.met===0&&r.E.back.loss===1,"E two-way: NPC host away when she comes → she waits; walking off = leaving with loss AT the tap khắc; host there = visit",r.E);
- ok(r.F.wait===1&&r.F.row&&r.F.row[1]==="visit"&&r.F.left&&r.F.dRel===loss&&r.F.row2&&r.F.row2[1]==="back","F NPC ↔ NPC: guest waits, leaves at the next khắc, loss, walks back",r.F);
+ ok(r.F.wait===1&&r.F.row&&r.F.row[1]==="visit"&&r.F.left&&r.F.dRel===loss&&r.F.row2&&r.F.row2[1]==="back"&&r.F.bWait===true&&r.F.bBack===true&&!r.F.bAfter.some(x=>x),"F NPC ↔ NPC: guest waits (bound), leaves at the next khắc, loss, walks back (bound); rest of the buổi free again",r.F);
  ok(r.G.d1===r.G.d2&&typeof r.G.o==="number"&&!/%/.test(r.G.word),"G hash draw same on every seat, odds from BAL, ladder word",r.G);
  ok(r.I&&r.I.guest===0&&r.I.host===0&&r.I.loss===0&&!r.I.last,"I co-op friend seat as guest and as host: no wait, no roll, no loss, no notice (a player decides by being there)",r.I);
  ok(!errs.length&&!r.err.length,"H no page errors",{errs:errs.slice(0,3),pt:r.err});

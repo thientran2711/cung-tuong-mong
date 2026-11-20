@@ -49,7 +49,7 @@ const boot=`localStorage.clear();SLOT=4;document.getElementById('title').hidden=
     should put the 0.4 bar back on ALL rows. Moves outside those families (sleep, eat, clean, visit, nightw, shift…) had 0 bare jumps over
     6 runs × 96 buổi → their bar is 0.1 (stricter than the old 0.4). Old all-rows numbers: 0.15–0.39 here, 0.19–0.37 on walk-cost-rv. */
  const fr=o=>({far:o.far-o.kfar,bad:o.bad-o.kbad});const onF=fr(on),offF=fr(off);
- ok(on.far>0&&on.bad/on.far<off.bad/Math.max(1,off.far),'5 NPC far moves without «on the way» khắc (all rows): on '+on.bad+'/'+on.far+' < off '+off.bad+'/'+off.far+' (deed/errand/follow jumps on '+on.kbad+'/'+on.kfar+' = jagday-walk job)');
+ /* review walk-cost r4: a tripwire on ALL rows until jagday-walk puts the 0.4 bar back (seen here 0.19–0.45, off ≈ 0.97) */ok(on.far>0&&on.bad/on.far<off.bad/Math.max(1,off.far)&&on.bad/on.far<=0.6,'5 NPC far moves without «on the way» khắc (all rows, tripwire 0.6): on '+on.bad+'/'+on.far+' < off '+off.bad+'/'+off.far+' (deed/errand/follow jumps on '+on.kbad+'/'+on.kfar+' = jagday-walk job)');
  ok(onF.far>0&&onF.bad/onF.far<offF.bad/Math.max(1,offF.far)&&onF.bad/onF.far<=0.1,'5 NPC far moves jwalk owns (no deed/errand/follow row) without «on the way» khắc: on '+onF.bad+'/'+onF.far+' vs off '+offF.bad+'/'+offF.far+' (bar 0.1)');
  ok(!on.errs.length,'5 jwalk pass no errors',on.errs);
  /* 7–10 (walk-cost r3) */

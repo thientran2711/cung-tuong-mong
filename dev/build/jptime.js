@@ -200,11 +200,14 @@ function iwDraw(w,K){const s=w.id+"|"+K;let x=2166136261;for(let i=0;i<s.length;
    the deed's place while S.invW / the roster has her at the host's palace (WALK-COST #4: «cx2:fert» re-applied over a waiting guest → seen at
    Thái y viện). Own list (not J95B.bind: j95b counts its text binds there). */
 const IWB=[];
-function iwBind(id,from){try{const R=S.roster,e=R&&R.P&&R.P[id];if(!e)return;for(let i=Math.max(0,from);i<e.length;i++)IWB.push(id+"|"+i+"|"+R.key);if(IWB.length>200)IWB.splice(0,IWB.length-200)}catch(e){ptErr("iwBind",e)}}
+function iwBind(id,from,to){try{const R=S.roster,e=R&&R.P&&R.P[id];if(!e)return;const t=to==null?e.length-1:Math.min(to,e.length-1);for(let i=Math.max(0,from);i<=t;i++){const b=id+"|"+i+"|"+R.key;if(IWB.indexOf(b)<0)IWB.push(b)}if(IWB.length>200)IWB.splice(0,IWB.length-200)}catch(e){ptErr("iwBind",e)}}
+/* review walk-cost r4: the bind lasts only while the invitation holds — when the guest leaves, only her walk-back khắc stays bound; the rest of the
+   buổi is hers again (a deed may be planned / re-applied there), never a «stay» row nobody can move */
+function iwUnbind(id,from){try{const R=S.roster;if(!R)return;for(let j=IWB.length-1;j>=0;j--){const x=IWB[j].split("|");if(x[0]===id&&x[2]===String(R.key)&&+x[1]>=from)IWB.splice(j,1)}}catch(e){ptErr("iwUnbind",e)}}
 (function(){if(typeof start==="function"){const st0=start;start=function(){IWB.length=0;return st0.apply(this,arguments)}}/* a new life starts with no binds (as J95B.bind) */
 if(typeof agBound!=="function")return;const f0=agBound;agBound=function(id,kh,key){return f0.apply(this,arguments)||IWB.indexOf(id+"|"+kh+"|"+key)>=0}})();
 /* the guest's rows of this buổi: waiting at the host's place / walking back home */
-function iwRows(g,from,row,rest){try{const R=S.roster,e=R&&R.P&&R.P["v"+g.id];if(!e)return;const i0=Math.max(0,from-bid()*ptKH());for(let i=i0;i<e.length;i++)e[i]=i===i0?row:(rest||row);iwBind("v"+g.id,i0);
+function iwRows(g,from,row,rest){try{const R=S.roster,e=R&&R.P&&R.P["v"+g.id];if(!e)return;const i0=Math.max(0,from-bid()*ptKH());for(let i=i0;i<e.length;i++)e[i]=i===i0?row:(rest||row);if(rest){iwUnbind("v"+g.id,i0);iwBind("v"+g.id,i0,i0)}else iwBind("v"+g.id,i0);
   const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){ptErr("iwRows",e)}}
 /* a co-op friend seat (rival entry coop:true, jcoopworld) is a PLAYER, never rolled as an NPC: on her side of the visit the rule does not run (review FAIL 1) */
 function iwCoop(p){return !!(p&&p!==S&&p.coop)}
