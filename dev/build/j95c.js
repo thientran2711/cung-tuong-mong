@@ -77,7 +77,7 @@ function j95cStrip(why,list){const w=String(why||"").slice(0,60);if(!w)return 0;
  for(const m of list||Q){if(!m||typeof m.h!=="string")continue;const j=m.h.indexOf(w);if(j<0)continue;const re=/[.!?…](\s|<|$)/g;re.lastIndex=j+w.length-1;const mm=re.exec(m.h);const e=mm?mm.index+1:m.h.length;m.h=m.h.slice(0,j)+m.h.slice(e).replace(/^\s+/,"");n++;J95C.stat.unsay=(J95C.stat.unsay||0)+1}return n}
 function j95cNext(){const P=J95B.next;if(!P||!P.length)return;J95B.next=[];if(!j95cCur())return;const R=S.roster;const used={};let n=0;
  for(const x of P){const e=R.P[x.id];if(!e){J95C.later.push(x.why);continue}if(x.id[0]==="v"){const v=RV(+x.id.slice(1));if(!v||!v.alive||v.out||v.confined){J95C.later.push(x.why);continue}}
-  let kh=used[x.id]||0;/* the first khắc of the coming buổi (endTurn resets the khắc count only after planning) */while(kh<4&&(e[kh][1]==="tryst"||e[kh][1]==="meet"))kh++;if(kh>=4){J95C.later.push(x.why);continue}used[x.id]=kh+1;
+  let kh=used[x.id]||0;/* the first khắc of the coming buổi (endTurn resets the khắc count only after planning) */while(kh<J95.KH&&(e[kh][1]==="tryst"||e[kh][1]==="meet"))kh++;if(kh>=J95.KH){J95C.later.push(x.why);continue}used[x.id]=kh+1;
   e[kh]=[x.k,x.act||"here",x.k==="home"?"me":null,x.why];J95B.bind.push({id:x.id,k:x.k,kh,key:R.key,wk:R.wk,b:R.b,past:1,next:1,src:x.src,why:x.why});if(J95B.bind.length>400)J95B.bind.splice(0,100);n++}
  if(n){J95C.stat.next+=n;j95sync()}}
 /* a second turn-of-buổi act for her, decided after the new buổi was planned (the month report after the week report): the first act

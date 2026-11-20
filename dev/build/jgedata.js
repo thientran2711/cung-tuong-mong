@@ -116,7 +116,7 @@ const GE_DATA={
    close:["Gặp riêng {v}, cho nàng một lối lui","Để nàng mặc, ngươi nhường","Gặp {v}, hỏi thẳng nàng muốn gì"],
    cond:[["s","tamco"],["s","mat"]],fo:[],
    cw:"cần Tâm cơ sâu và Tai mắt khắp cung",
-   a:"Từng người đã gọi ngươi là kẻ bắt chước, từng kẻ đã treo tấm da trước cửa cung ngươi, lần lượt rời cung, kẻ vào lãnh cung, kẻ về quê không một lời từ biệt. Không ai còn dám nhắc đến cố hương của ngươi; người ta chỉ nhắc đến ngươi bằng giọng thật khẽ.",
+   a:"Từng người đã gọi ngươi là kẻ bắt chước, từng kẻ đã cười lễ nghi cố quốc của ngươi, lần lượt rời cung, kẻ vào lãnh cung, kẻ về quê không một lời từ biệt. Không ai còn dám nhắc đến cố hương của ngươi; người ta chỉ nhắc đến ngươi bằng giọng thật khẽ.",
    t:"Ngươi giữ đủ chứng cứ để những kẻ từng làm nhục ngươi rời cung. Nhưng ngươi trình lên Hoàng thượng rồi xin tha cho họ. Từ đó, không ai trong cung dám nói chữ “bắt chước”, vì ai cũng biết ngươi đã có thể và đã không.",
    ha:"trả lại từng lần bị làm nhục cho đến khi không ai dám nhắc cố hương của ngươi",ht:"nắm đủ chứng cứ mà tha, để cả cung thôi gọi ngươi là người ngoài",
    fail:"Oán thù dội lại",ft:"Những kẻ ngươi nhắm đến hợp sức lại trước. Lời đồn tà thuật bùng lên lần nữa, Danh ngươi tụt dốc, Hoàng thượng tránh mặt một mùa."},
