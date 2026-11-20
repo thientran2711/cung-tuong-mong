@@ -83,3 +83,8 @@ cell, same family as `kitResultSeal`. When it lands, jmgid `mgIdRow` swaps the l
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
 | 20/11 | ECON TAMCO #2 (FOREMAN D #10) | **option card «Tốn» row takes a cost the fx does not pay** (`ton:{tamco:-n}` / `ton:{bac:-pr}`): show Tâm cơ cost and the scheme price on the «Làm như thường» road (same as FOREMAN_B_STATUS ~L376 road-b2) | jtamco PEND.roadpick (2-line swap after kit), 13 bạc schemes × 3 roads | MAIN ROOT-78 kit keeper | OPEN — review/econ-tamco c45265d6 is KIT-BLOCKED on it |
+
+## 20/11 rel-men-servants (KP22) — §52 kitRelRows rows for men + servants must read the one relation model (j9)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | REVIEW rel-men-servants r1 (session_01N1tNP3Y82Jb8SEkEn2qJTD) | **KIT §52 `kitRelRows(p)` (jkrel.js 25–42)**: a man and a servant fall into the `typeof p.loyal==="number"` branch → «Hắn/Nàng → ta: Thiện cảm» = p.loyal and «Ta tin cậy» = tinOf(p). With review/rel-men-servants the same pair also has a j9 Thiện cảm (aff: m.af / s.af.me) shown in Ân oán + the man card → ONE pair, TWO «Thiện cảm» numbers (law 4 / 11 / 14, OD:L55). Asked: men → «Hắn → ta: Thiện cảm» aff(p,S), «Hắn oán ta» oan(p,S), «Ta → hắn: Thiện cảm» aff(S,p) (no Tin cậy); servants / court officials (relMSAll) → Thiện cảm + Oán from aff/oan, and for HER own servants (S.maid, ownerOf(p)===S) p.loyal under the word «Lòng» (as j15 bondBars + Ân oán) + «Ta tin cậy»; strangers (relMSMet false) → «chưa rõ». KR2_W gains /lòng/ → «Lòng». | person card left key (jpcf pcfKey), Tuần lục person pages (j87), man card (j22 manCard), Cung nhân cards | KIT KEEPER via Foreman B | OPEN |
