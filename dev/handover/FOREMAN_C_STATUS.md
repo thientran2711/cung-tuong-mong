@@ -573,3 +573,4 @@ NEWACCT-ROOT ~17:15Z: OWNER ORDER winter fur: winter = same prompts + one identi
 NEWACCT#2 ~17:32Z: OWNER (via ROOT ~17:15Z) WINTER fur order → WINTER1 session_01D3E3Naf1jXaZL5A6VSYtr5 opened (briefs/winter1.md; 1 new face × t1–t8 a18, đông pair + one identical fur sentence, ~1 080 cr, A37 sheet). Next Lượt 1175.
 NEWACCT#2 ~17:35Z: OWNER (via ROOT ~17:20Z) SEASON NECKLINE rule (thu+đông: t1–t3 old crossed collar; xuân+hạ: open square; t6–t8 always crossed; t4/t5 later) → sent to WINTER1 before firing (t1–t3 crossed + fur).
 NEWACCT-ROOT ~17:20Z: OWNER season neckline rule (G) added + forwarded to #2 (winter test t1–t3 crossed collar).
+NEWACCT#2 ~17:40Z: DESIGN1 DONE d51534d5 (540 cr; 4 thân cận ideas m05/m08/m10/m16 + ma ma text ideas) sheet LOOKED + sent Lượt 1177. Next Lượt 1178.
