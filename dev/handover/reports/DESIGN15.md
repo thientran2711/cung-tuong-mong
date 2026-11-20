@@ -1,3 +1,38 @@
+# DESIGN15 — PHẦN 2 (owner L1534, B28): bảng vải có hình + kiểm tra GẤM
+Sheet hình (0 gen, ảnh có sẵn): dev/handover/review-sheets/fabric_L1534/ S_cung_nu.jpg · A_t1_t3.jpg · B_tan_phi.jpg · C_quyphi_hh.jpg
+
+## KIỂM TRA GẤM — Quý phi / HQP / HH (B28: MỘT gấm nhẹ cho mọi mùa)
+| Mùa | t6 Quý phi | t7 Hoàng quý phi | t8 Hoàng hậu |
+|---|---|---|---|
+| Xuân · Hán | open5: **gấm nhẹ nhất Tống cẩm** (câu FABRIC) ✔ | open7: không câu FABRIC; áo = **sa dệt kim + lót Tống cẩm** ✔(nhẹ) | open8: như t7 + "FABRIC the richest of all, yet still light" ✔(nhẹ) |
+| Xuân · cổ mới | XUAN_COMOI: **gấm dày (S07)** + "HEAVY silk brocade robe" ✘ | XUAN_COMOI: **gấm dày (S07)** ✘ | — (không có file) |
+| Hạ · Đường | ha_DUONG: **gấm dày (S07)** + "HEAVY silk brocade robe" + "heavy gold brocade" (dải ngực) ✘ | — chưa có | — chưa có |
+| Thu | THU_COMOI: **gấm dày (S07)** + "HEAVY silk brocade robe" ✘ | THU_COMOI_v8: **gấm dày (S07)** ✘ | THU_COMOI_v8: **gấm dày (S07)** ✘ |
+| Đông | DONG_HIENTAI_cloak6: **gấm dày (S07)** + "HEAVY silk brocade robe" ✘ | cloak7: **"lụa mềm, không gấm"** ✘ (không phải gấm) | cloak7: **"lụa mềm, không gấm"** ✘ · cloak6: KHÔNG có câu vải ✘ |
+| Đông cũ (winter1, LONG3moi) | gấm dày ✘ | gấm dày ✘ | gấm dày ✘ |
+
+Khác nhau = **4 loại**: (1) gấm nhẹ Tống cẩm (Hán t6), (2) sa dệt kim + Tống cẩm (Hán t7/t8), (3) gấm dày S07 (+ "HEAVY silk brocade robe" trong câu Outfit t6), (4) lụa mềm không gấm (đông cloak7 t7/t8).
+Đề xuất MỘT câu cho cả nhóm, mọi mùa = câu Hán t6 (gấm nhẹ nhất Tống cẩm), bỏ vế "lighter than … of the higher ranks"; xoá chữ "HEAVY" trong "HEAVY silk brocade robe" (t6 xuân/hạ/thu/đông) và "heavy gold brocade" dải ngực hạ t6; câu S07 thay bằng câu này. t7/t8 Hán: hỏi chị có giữ sa dệt kim (đẹp, đã duyệt) hay đổi về cùng gấm nhẹ Tống cẩm.
+
+## BẢNG VẢI THEO NHÓM — file + người dùng NGAY BÂY GIỜ (ảnh trong sheet)
+| Nhóm | NHẸ (hạ + thu) | NẶNG HƠN XÍU (xuân + đông) |
+|---|---|---|
+| Tam đẳng | maid7/gpt/tamdang_gpt.txt · lụa+sa (M06) · ảnh aFGdKgifSh | chưa có (cung nữ 1 bộ cho mọi mùa) |
+| Nhị đẳng | maid7/gpt/nhi_gpt_v2.txt · M06 · ảnh gOm5NnCSXO (test5_nhi) | chưa có |
+| Nhất đẳng | maid7/gpt/nhat_gpt_v4.txt · M06 · ảnh N2qSYXL6D9 (v3) | chưa có |
+| Thân cận | maid7/gpt/thancan_gpt_v4.txt · M06 · ảnh thử L1476 (v2) | chưa có |
+| Chưởng sự | maid7/gpt/chuongsu_gpt_v3.txt · M06 · ảnh hu2pbShvqL | chưa có |
+| Ma ma | maid7/gpt/mama_gpt_v4_a51/_a65.txt · M06 · ảnh thang v5 (test5_mama) | chưa có |
+| t1–t3 | kho t8-prompt-B/build.py --low (M06 + S06) · ảnh thu cổ vuông s62 | winter1/s62_t1..t3_dong.txt · **vẫn M06 lụa+sa** (chưa đục G28) ✘ |
+| Công chúa | = t1–t3 (B28) | = t1–t3 |
+| t4 Tần | ha_DUONG = M06 · thu_comoi/s62_t4_THU_COMOI = đoạn | Hán open5 = đoạn · dong cloak8 = đoạn · winter1 t4 = M06 ✘ |
+| t5 Phi | ha_DUONG / thu_HAN = M06 · thu_comoi/s62_t5_THU_COMOI = đoạn | Hán open3 = đoạn · dong cloak6 = đoạn · XUAN_COMOI/xuan_TONG = M06 ✘ |
+| t6–t8 | xem bảng GẤM ở trên (B28: không chia mùa) | |
+
+Ghi chú: ảnh là ảnh có sẵn gần nhất; khi ảnh là bản cũ hơn file, sheet ghi "(cùng câu vải)" hoặc "(bản cũ)". Thu t4/t5 trong sheet là ảnh cũ lụa+sa (chưa có ảnh đoạn thu).
+
+---
+
 # DESIGN15 — bảng vải chung B27 (owner L1524) — ĐỀ XUẤT, chưa sửa prompt, 0 gen
 depth 2 · START_CTX ~3 % (get_session đọc 0 → tự ước) · worker of Foreman C #11
 
