@@ -926,9 +926,13 @@
   },
   "c06": {
    "id": "c06",
-   "m09_ok": "NO",
-   "ref_id": null,
-   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+   "m09_ok": "yes",
+   "set": "c06 v5 face (FACE_MAP_L703, Sắc sảo, REDRAW-737 kept, owner Lượt 737)",
+   "ref_id": "hu24KgZvqL",
+   "gen_id": "p8ylaCXehw",
+   "prompt_file": "dev/art/face-common/c06.v5.FULL.txt",
+   "face_words": "Her face: an ADULT, clearly DEFINED, slightly SHORT OVAL face with HIGH sculpted cheekbones that are clearly visible, a slim crisply shaped jawline and a neat POINTED chin, no baby fat at all; CRISP long almond eyes with sharply LIFTED outer corners and a clean sharp upper lid line, fully open, with a PIERCING, keen, intelligent gaze that looks straight into the viewer as if reading the viewer's thoughts; STRAIGHT, sharp, clearly defined brows with a slight angled lift at the tail; a slim straight nose with a fine high bridge and a neat tip; well-defined lips with a crisp clear cupid's bow; a quick-witted, clever, alert young woman; never a baby face, never round or chubby, never sleepy, dreamy or sweet. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A sharp, clever, PIERCING look straight at the viewer, the gaze keen, alert and knowing, as if she has already seen through everything; a small confident closed-lip smile lifted at ONE corner, eyes fully open, never a stretched grin.",
+   "note": "REDRAW3 for ROOT-69 GO 20/11 ~07:50Z (owner order: redraw c06 8 ranks new tone): added for rank builds (B8), same method as RANK8-C s62–s65; cut = FACE_MAP_L703 c06.cut; face_words = 'Her face' + 'Expression' VERBATIM from c06.v5.FULL.txt"
   },
   "c07": {
    "id": "c07",
