@@ -21,7 +21,7 @@ WIDE = ("crossed collar{s} open{v} WIDE: the lapels sweep out toward the edge of
         "fully but modestly (never narrow near the neck, never a tight high crossing)")
 SLV = "(one single visible sleeve layer, every inner sleeve hidden inside)"
 NOC = "no shawl; "
-OPEN = ", worn open at the front so the wide crossed collar and the V below it stay fully visible"
+OPEN = ", worn open at the front so the wide collar and V stay visible"
 SIG = {
  4: "her ONE signature piece: a short round embroidered satin capelet (not cloud-shaped, scalloped or pointed) over only the shoulders and upper chest" + OPEN + ", a jade clasp at the throat, with a beaded yoke over it: an airy open net of sparse pearls and small jade beads with tiny gold flower studs, lying flat from the throat over the WHOLE capelet, its short pearl fringe at its lower edge, never only half of it; ",
  5: "her ONE signature piece: TWO layered embroidered satin SHORT shoulder capes, one over the other (the upper cape shorter, the lower cape a little longer, both resting on the shoulders, pearl-edged)" + OPEN + ", never covering the neckline; ",
@@ -35,11 +35,11 @@ RX = {4: re.compile(r"a NEW outfit, a layered silk robe of two or three visible 
       7: re.compile(r"a near-empress ceremonial robe of .*?only slipper toe tips peeking under the hem; "),
       8: re.compile(r"the Empress's imperial phoenix ceremonial robe .*?slim tall silhouette; ")}
 TRIM = {  # DESIGN3: only duplicated boilerplate (each also stated elsewhere in the prompt), never outfit/embroidery/jewellery/signature piece
- 4: [r" Hair: her own hair colour, ALL her hair swept UP.*?rich like her rank\.", r" GRACE \(pose variety.*?toward the viewer\.", " Everyone beautiful at every age.",
+ 4: [", never back-turned", ", never in profile", ", never copy anything but its colour", r" GRACE \(pose variety.*?toward the viewer\.", " Everyone beautiful at every age.",
      r"; her signature colour family .*? robe(?=\. COLOUR RULE)"],
- 6: [r" Hair: her own hair colour, ALL her hair swept UP.*?rich like her rank\.", r" GRACE \(pose variety.*?\.(?= TWO-COLOUR| HELD| Pose)", " Everyone beautiful at every age."],
- 7: [r" INNER LAYER EMBROIDERED \(t7/t8\):.*?\.(?= [A-Z])", " Everyone beautiful at every age."],
- 8: [r" INNER LAYER EMBROIDERED \(t7/t8\):.*?\.(?= [A-Z])"],
+ 6: [", never back-turned", ", never in profile", ", never copy anything but its colour", r" GRACE \(pose variety.*?\.(?= TWO-COLOUR| HELD| Pose)", " Everyone beautiful at every age."],
+ 7: [", never back-turned", ", never in profile", ", never a single flat colour all over", ", never copy anything but its colour", r" GRACE \(pose variety.*?wrists relaxed\.", " Everyone beautiful at every age."],
+ 8: [", never back-turned", ", never in profile", ", never a single flat colour all over", ", never copy anything but its colour", r" GRACE \(pose variety.*?(?= THREE-COLOUR)"],
 }
 FAB_DOAN = open(os.path.join(D, "m03_t4_VAI_DOAN.txt"), encoding="utf-8").read()
 FAB_DOAN = re.search(r" The FABRIC is medium-weight silk SATIN \(đoạn\).*?fine gold thread\.", FAB_DOAN).group(0)
@@ -93,11 +93,11 @@ for n, (cap, body) in OUT.items():
     if n == 8: s = sw(s, " The phoenix is the main embroidered motif, larger and more prominent than the flowers.", "")
     # DESIGN3 trims: ONLY duplicated boilerplate (logged in reports/DESIGN3.md), never outfit/embroidery/jewellery/signature piece
     for _t in TRIM.get(n, []):
-        s, _k = re.subn(_t, "", s, count=1); print("trim", n, _k, _t[:40]) if _k != 1 else None
+        s, _k = re.subn(_t, "", s, count=1)
     s = s.rstrip("\n") + "\n" + CAP.format(cap)
     low = s.lower()
     assert "shawl;" not in low.replace("no shawl;", "") and "phi bạch" not in low and "qing" not in low, n
     assert ("image 2" in low) == (n >= 6), (n, "image 2 only t6-t8")
-    assert len(s) <= 10000, (n, len(s)) #, (n, len(s))
+    assert len(s) <= 10000, (n, len(s)) #, (n, len(s)) #, (n, len(s)) #, (n, len(s))
     out = f"s62_t{n}_HAN_BAC.txt"
     open(os.path.join(D, out), "w", encoding="utf-8").write(s); print(out, len(s))
