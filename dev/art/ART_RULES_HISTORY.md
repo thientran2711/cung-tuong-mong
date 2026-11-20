@@ -79,3 +79,72 @@
 - 2026-11-19 · replaced by Lượt 780 · B9 | GEN METHOD: Magnific gpt-2-6, 2K pixel sizes (single 1024x2304, lineup 2048x1024; never 1k sizes), WITHOUT transparentBackground, plain light parchment bg, then images_remove_background. | Lượt 222, 242-244, 274 | FG 586, 620, 711
 - 2026-11-19 · replaced by Lượt 781 · B12 | FABRIC words: the store fabric sentences stand; HQP/HH = prompt B "FABRIC: thick gold-embroidered brocade …"; brocade stays brocade — grace only from cut and drape, NO gauze/sheer/voile outer layer unless the costume really has one. | Lượt 364, 353, 283 | FG 909, 897, 755 | over: 18/11 "no soft/flowing words" (FG 107-109), Lượt 279 gauze sentence
 - 2026-11-19 · replaced by Lượt 807 · L21 | BED HEIGHT + FIX-ALL (owner Lượt 804/805): a palace bed is a tall canopy frame bed (~2.4 m): canopy top clearly ABOVE the head of a standing woman, far below the high ceiling, never a low box. Any prompt fix made because of a fault applies to EVERY room already drawn of that kind: those rooms are redrawn with only that fix (A17). | Lượt 805 (19/11) | FG -
+
+
+## 'over:' tails moved out of ART_RULES.md (CLEAN1, owner Lượt 810 dọn kho, 2026-11-19) — rule ID | older rules it replaced
+- A18 | over: Lượt 503 (19/11)
+- A1 | over: Lượt 229b, 234
+- A2 | over: Lượt 234, 339; Lượt 229b hard stop
+- A4 | over: 18/11 one-sheet-per-person (FG 206), Lượt ~220 sheet size (FG 583b)
+- A14 | over: Lượt 377
+- A19 | over: Lượt 500, 504 (19/11)
+- A20 | over: Lượt 517 auto-redraw (19/11) | over: Lượt 517 (19/11)
+- A21 | over: Lượt 644 (19/11) | over: Lượt 644 (19/11)
+- B2 | over: Lượt 333 m19 templates
+- B8 | over: Lượt 543 (19/11); Lượt 482 (19/11); Lượt 434, 414, 416, 359; style3_girls, style2 portraits, "STYLE IMAGE ALWAYS" (FG 533, 548, 566)
+- B9 | over: Lượt 222, 242-244, 274
+- B10 | over: Lượt 241 edit-in-place
+- B11 | over: Lượt 283, 291, 306
+- B12 | over: Lượt 364, 353, 283 | over: Lượt 364, 353, 283; 18/11 "no soft/flowing words" (FG 107-109), Lượt 279 gauze sentence
+- B15 | over: Lượt 489 (19/11); Lượt 483 (19/11); Lượt 303; Lượt 301 "2–3 colours"
+- B16 | over: Lượt 306; 18/11 08:00Z
+- B20 | over: Lượt 766 (19/11); Lượt 616 (19/11); Lượt 614 (19/11)
+- B21 | over: Lượt 619 (19/11); Lượt 616 (19/11)
+- B24 | over: Lượt 726 (19/11)
+- B25 | over: Lượt 745 (19/11)
+- D3 | over: Lượt 286, 288, 291
+- D8 | over: Lượt 689 (19/11); Lượt 292, 293, 299; Lượt 289 expression = personality
+- D9 | over: 18/11 23:25Z; OD:L10
+- D13 | over: Lượt 623 (19/11); Lượt 623 (19/11); Lượt 583 (19/11)
+- D14 | over: Lượt 652 (19/11); Lượt 651 (19/11)
+- D15 | over: Lượt 694 (19/11); Lượt 692 (19/11)
+- E1 | over: Lượt 229, 289, 295, 308, 321, 3d2 frontal-only (FG 138)
+- E4 | over: Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11); Lượt 486 (19/11); 18/11 22:20Z, 23:25Z
+- E7 | over: 18/11 16:50Z, 17:15Z; 19/11 00:45Z
+- E10 | over: Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11)
+- E11 | over: Lượt 583 (19/11)
+- F1 | over: 18/11 "hair same at every rank" (FG 248), Lượt 268
+- F3 | over: Lượt 307 t6 colours
+- F4 | over: Lượt 323
+- F7 | over: Lượt 397; 18/11 04:00Z, 23:33Z
+- F10 | over: Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11)
+- G1 | over: Lượt 257, 259 Tần collar A, 19/11 01:20Z Tần⇄Phi swap
+- G4 | over: Lượt 486 (19/11); Lượt 469, 434, 412, 397, 273; Lượt 255 (t1–t7, matching colour), 274
+- G5 | over: Lượt 355, 351, 458; Lượt 348, 331 (see conflicts on 351 vs 355)
+- G8 | over: Lượt 250, 252, 266 densities
+- G12 | over: Lượt 331, 364, 253, 301
+- G13 | over: Lượt 293, 306
+- G15 | over: Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11)
+- H3 | over: Lượt 456 over-unified; Lượt 443 (triều phục sleeves per v2 Lượt 351)
+- H5 | over: Lượt 452, 411
+- H6 | over: Lượt 468, 471; Lượt 452 "Phi/Quý phi whole sleeve"
+- H11 | over: Lượt 540 (19/11)
+- I1 | over: Lượt 446, 450; 18/11 23:30Z t6 note
+- I2 | over: 18/11 23:36Z; Lượt 301, 359
+- I4 | over: Lượt 616 (19/11); Lượt 607 (19/11); 18/11 04:05Z
+- J2 | over: Lượt 620 (19/11); Lượt 397; 18/11 21:06Z, 22:50Z
+- J6 | over: Lượt 520 (19/11)
+- K1 | over: 19/11 01:40Z NPC brown colours (FG 526)
+- K7 | over: Lượt 275b, 276, 277, 277b country lists
+- K13 | over: OD:L392; 19/11 01:10Z
+- K16 | over: Lượt 535 (19/11)
+- K17 | over: Lượt 562 (19/11)
+- L1 | over: Lượt 446, 437, 442
+- L5 | over: Lượt 473, 477
+- L6 | over: Lượt 406
+- L7 | over: Lượt 491 (19/11); Lượt 461, 465, 457, 473
+- L13 | over: Lượt 563 (19/11)
+- L14 | over: Lượt 672 (19/11); Lượt 635 (19/11); Lượt 622 (19/11); Lượt 613 (19/11); Lượt 584 (19/11)
+- L17 | over: Lượt 723 (19/11); Lượt 722 (19/11); Lượt 610 (19/11); Lượt 607 (19/11); Lượt 605 (19/11)
+- L20 | over: Lượt 718 (19/11)
+- L21 | over: Lượt 805 (19/11)

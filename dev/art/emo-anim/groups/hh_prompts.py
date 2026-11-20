@@ -14,7 +14,8 @@ SWAP = [(T.WHO, HH["who"]), (T.SAME, HH["same"]),
         ("plum cuffs", "crimson red cuffs"),
         ("INVITING AN HONOURED GUEST TO HER TEA", "INVITING THE EMPEROR"),   # Hoàng hậu may invite the emperor (w-act original)
         ("the old face", "her face"), ("old face", "face"), ("wrinkled cheek", "cheek"), ("old empress dowager", "empress"),
-        ("elderly empress dowager", "empress")]
+        ("elderly empress dowager", "empress"),
+        ("bright spring green", "bright coral")]   # disc never near chroma green (foreman 23:52Z, as SEAL5 th-hanghai / SEAL4)
 DAU = ("deep blue",
   "Her face is HEARTACHED: brows tilted up in quiet sorrow, eyes glistening and looking down, lips pressed together trembling, exactly ONE single tear on one cheek, one hand pressed flat over her heart",
   "HEARTACHED in quiet pain",
