@@ -275,6 +275,13 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
    pop = scale of the lit / pressed target (was 1.08 / 1.14: hard to see) · ms = how long the pop + lit ring stay · glow/ring = colours · blur = glow size px ·
    pass = glow passes (shadow stacks) · ringW = ring width as a share of the target's width · dim = darkening of the UNLIT painting under a lit cue (contrast) */
 BAL.mgFx={pop:1.24,ms:300,glow:"#fff0a0",ring:"#ffffff",blur:44,pass:3,ringW:.07,dim:.18};
+/* mg-play2 (owner OD 20/11 ~08:05Z Hoa đăng «luồng ánh sáng màu vàng này quá nhạt … không có thấy đường» + «cứ tưởng là phải hứng mấy cái hoa sen»): two more
+   parts of the SAME cue kit (j82 kg82FxLane / kg82FxBad), for every board that has a path to follow or a thing to AVOID:
+   lane = opacity of the lit path's core (was a .32 gradient: hard to see) · laneEdge = width px of its two bright edges · laneDim = darkening of the board OUTSIDE
+   the path (the path reads by contrast) · laneMin = the least luminance gap (0..255) the lit path must keep over the board beside it (test mg-play2) ·
+   bad = width share of the danger ring round a thing to avoid (colour = kit --bad) · badMs = how long the hit burst stays · badShake = px the hit thing / the player's
+   piece shakes on a hit */
+Object.assign(BAL.mgFx,{lane:.62,laneEdge:3,laneDim:.34,laneMin:40,bad:.09,badMs:520,badShake:5,zone:.62});/* zone: gauge «keep it here» band alpha (kg82FxLane.zone) */
 BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timing game's right moment that the hand says «chạm» (KG82.hint: rhythm, aim), a reaction time */
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
    condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
