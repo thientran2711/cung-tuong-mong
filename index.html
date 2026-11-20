@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6b9b5490+","t":"2026-11-20T09:10Z","c":"review mg-craft-r1: craft boards join the ONE grading path (crHud writes mgLive(env, reach), law 4/11, mg-score-same) + good work the time …","b":"cf572c34aca2","h":[{"s":"9b6e9395+","t":"2026-11-20T08:46Z","c":"rv mg-play2: keep only the vetted face points — the 70 changed kc rows from the live img/mk-fit (no new v1/v2 rows: anchor-table gate flags…"},{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."}]};
+window.CTM_BI={"s":"8ff8f068+","t":"2026-11-20T09:10Z","c":"review mg-craft-r1: craft boards join the ONE grading path (crHud writes mgLive(env, reach), law 4/11, mg-score-same) + good work the time …","b":"07c99411b1b8","h":[{"s":"9b6e9395+","t":"2026-11-20T08:46Z","c":"rv mg-play2: keep only the vetted face points — the 70 changed kc rows from the live img/mk-fit (no new v1/v2 rows: anchor-table gate flags…"},{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29723,7 +29723,7 @@ function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
  function inkStart(now){assign();phase="ink";bd.disabled=true;P.li=0;fl={mode:"idle",loadAt:0,loadedAt:0,tone:0,down:null};peekAt=now}
  function paintEnd(now,ended){/* one painting is done: score it, show the stars, go on */
   phase="judge";bd.disabled=true;const n=P.M.length,pl=P.tp.reduce((a,b)=>a+b,0)/n,tn=P.lay.reduce((a,l)=>a+l.ts,0)/n,cn=cl(1-P.bl*.5,0,1);
-  const el=Math.min(LIM,now-t0),got=10/NR*(WP*pl+WT*tn+WC*cn)*mgPace(env,"ve",el,LIM);pts+=got;P.stars=got/(10/NR);kg82Pluck(2,P.stars>.5);crLater(next,1500)}
+  const el=Math.min(LIM,now-t0),q=WP*pl+WT*tn+WC*cn,sp=mgPace(env,"ve",el,LIM),got=10/NR*q*sp;pts+=got;P.stars=q;P.sp=sp;kg82Pluck(2,q*sp>.5);crLater(next,1500)}
  const stop=crLoop(now=>{if(!P)return;const left=LIM-(now-t0);
   if(phase==="place"&&left<=0)inkStart(now);else if(phase==="ink"&&left<=0)paintEnd(now,true);
   kg82Bg(g,W,H,"ve",0,.7);
@@ -29752,8 +29752,9 @@ function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
    if(fl&&(fl.mode==="load"||fl.mode==="loaded")){const tn=fl.mode==="load"?Math.floor(lvl):Math.max(0,fl.tone-Math.floor((now-fl.loadedAt)/DRY)),bx=ST.x+ST.w*.5,by=ST.y+ST.h*.35;
     if(!kg82Spr(g,"ve-brush",bx,by,UN*1.6,null,{ax:.06,ay:.95,glow:fl.mode==="load"?BAL.mgFx.glow:null})){g.strokeStyle="#6b4a2a";g.lineWidth=5;g.lineCap="round";g.beginPath();g.moveTo(bx+UN*.9,by-UN*.9);g.lineTo(bx,by);g.stroke()}
     g.fillStyle=k91VeInk(tn/(T-1));g.beginPath();g.arc(bx,by,UN*.14,0,Math.PI*2);g.fill()}g.restore()}
-  if(phase==="judge"&&P.stars!=null)k91Say(g,P.stars>=.8?"★★★":P.stars>=.55?"★★☆":"★☆☆",P.stars>=.8?K91C.good():P.stars>=.55?K91C.gold():K91C.red(),W/2,H*.915,W-16);
-  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="place"||phase==="ink"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
+  if(phase==="judge"&&P.stars!=null)k91Say(g,crStars(P.stars),crCol(P.stars,P.sp),W/2,H*.915,W-16);/* the family star rule (crStars / crCol, review/mg-craft-r1) */
+  kg82DrawPops(g,pops,now);const on=phase==="place"||phase==="ink";/* the ONE live grade (crHud → mgLive): done paintings + the open one's time part + paintings to come */
+  crHud(env,on?mgReach(pts+10/NR*mgPace(env,"ve",Math.min(LIM,now-t0),LIM),r+1,NR):mgReach(pts,Math.min(NR,r+1),NR),r,NR,on?left:null)});
  const onStone=(x,y)=>x>=ST.x-6&&x<=ST.x+ST.w+6&&y>=ST.y-6&&y<=ST.y+ST.h+ST.h*.3+6;
  const nearStamp=(x,y)=>{let b=null,bd=1e9;P.S.forEach(s=>{if(!s.placed)return;const d=k91Dist(x,y,s.x,s.y);if(d<bd&&d<UN*sc(s.y)*1.1){bd=d;b=s}});return b};
  function flick(x,y,now){const l=P.lay[P.li],s=l.s,R=UN*sc(s.y),d=k91Dist(x,y,s.x,s.y),bl=BLEED*SW;
@@ -29845,7 +29846,7 @@ function kcHoa(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;C.cv.dataset.
   const pl=S.filter(s=>s.seated);const cen=(arr,f)=>arr.reduce((a,s)=>a+s.Lc*Math.sin(f(s)),0)/(arr.reduce((a,s)=>a+s.Lc,0)||1);
   const b=pl.length?Math.max(0,1-Math.abs(cen(pl.map(s=>({Lc:s.L,s})),o=>o.s.a)-cen(S.map(s=>({Lc:s.Lt,s})),o=>rad(o.s.at)))/B.balTol):0;
   const sea=P.picked?Math.max(0,1-P.wrong*B.wrong):0;return{sea,len:ln/n,ang:an/n,bal:b*(pl.length/n),s:B.w.sea*sea+B.w.len*ln/n+B.w.ang*an/n+B.w.bal*b*(pl.length/n)}}
- function judge(){if(phase==="judge")return;const el=performance.now()-P.t0;phase="judge";bd.disabled=true;gest=null;const sc=score(),pace=mgPace(env,"hoa",el,P.lim),v=10/NR*sc.s*pace;sum+=v;P.verdict=sc.s*pace;P.v=v;
+ function judge(){if(phase==="judge")return;const el=performance.now()-P.t0;phase="judge";bd.disabled=true;gest=null;const sc=score(),pace=mgPace(env,"hoa",el,P.lim),v=10/NR*sc.s*pace;sum+=v;P.verdict=sc.s;P.sp=pace;P.v=v;
   setTimeout(()=>{if(!done)next()},B.judgeMs)}
  const stop=k91Loop(now=>{if(!P)return;const left=P.lim-(now-P.t0);if((phase==="pick"||phase==="play")&&left<=0)judge();
   kg82Bg(g,W,H,"hoa",.28,.6);
@@ -29875,13 +29876,14 @@ function kcHoa(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;C.cv.dataset.
     else{kchStem(g,gest.x,gest.y,s.L,0,FF,rB,{glow:true})}
     if(P.last&&!P.last.leaned&&ghost>.02){g.save();g.globalAlpha=Math.min(1,ghost)*.5;g.setLineDash([5,5]);g.strokeStyle=K91C.good();g.lineWidth=2;const q=P.last,a=rad(q.at);g.beginPath();g.moveTo(MX,MY);g.lineTo(MX+q.L*Math.sin(a),MY-q.L*Math.cos(a));g.stroke();g.restore()}}
    if(phase==="judge"){/* the master's own set, faint, and the stars */g.save();g.globalAlpha=.55;g.setLineDash([4,4]);g.strokeStyle=K91C.good();g.lineWidth=2;S.forEach(q=>{const a=rad(q.at);g.beginPath();g.arc(MX+q.Lt*Math.sin(a),MY-q.Lt*Math.cos(a),rB*.7,0,7);g.stroke()});g.restore();
-    const v=P.verdict;g.fillStyle=v>=.85?K91C.good():v>=.55?K91C.gold():K91C.red();g.font=k91F(700,22,1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,v>=.85?"★★★":v>=.55?"★★☆":"★☆☆",W/2,TY,W-16)}}
+    const v=P.verdict;g.fillStyle=crCol(v,P.sp);g.font=k91F(700,22,1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,crStars(v),W/2,TY,W-16)}}
   /* falling cut-offs + the slash */
   for(let i=falls.length-1;i>=0;i--){const q=falls[i],k=(now-q.a)/600;if(k>=1){falls.splice(i,1);continue}g.save();g.globalAlpha=1-k;g.strokeStyle="#4f7f4a";g.lineWidth=Math.max(3,rB*.34);g.lineCap="round";g.translate(0,k*k*hv*.5);g.rotate(k*.3);g.beginPath();g.moveTo(q.x,TY);g.lineTo(q.x+q.len,TY);g.stroke();g.restore()}
   if(slash&&now-slash.a<BAL.mgFx.ms){g.save();g.globalAlpha=1-(now-slash.a)/BAL.mgFx.ms;g.strokeStyle=BAL.mgFx.ring;g.lineWidth=4;g.shadowColor=BAL.mgFx.glow;g.shadowBlur=BAL.mgFx.blur*.5;g.beginPath();g.moveTo(slash.x0,slash.y0);g.lineTo(slash.x1,slash.y1);g.stroke();g.restore()}
   if(gest&&gest.type==="cut"){g.save();g.strokeStyle="rgba(255,255,255,.9)";g.lineWidth=3;g.beginPath();g.moveTo(gest.x0,gest.y0);g.lineTo(gest.x1,gest.y1);g.stroke();g.restore()}
   kg82DrawPops(g,pops,now);
-  env.hud({score:`${Math.round(Math.min(10,sum))}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="pick"||phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
+  const on=phase==="pick"||phase==="play";/* the ONE live grade (crHud → mgLive): done vases + the open one's time part + vases to come */
+  crHud(env,on?mgReach(sum+10/NR*mgPace(env,"hoa",now-P.t0,P.lim),r+1,NR):mgReach(sum,Math.min(NR,r+1),NR),r,NR,on?left:null)});
  const segD=(px,py,ax,ay,bx,by)=>{const dx=bx-ax,dy=by-ay,t=Math.max(0,Math.min(1,((px-ax)*dx+(py-ay)*dy)/(dx*dx+dy*dy||1)));return Math.hypot(px-(ax+dx*t),py-(ay+dy*t))};
  const aimOf=(x,y)=>Math.max(-rad(80),Math.min(rad(80),Math.atan2(x-MX,MY-y)));
  k91Pointer(C,{
@@ -82599,7 +82601,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="cf572c34aca2";window.CTM_BUILD=BUILD;
+const BUILD="07c99411b1b8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

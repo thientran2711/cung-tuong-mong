@@ -54,7 +54,7 @@ function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
  function inkStart(now){assign();phase="ink";bd.disabled=true;P.li=0;fl={mode:"idle",loadAt:0,loadedAt:0,tone:0,down:null};peekAt=now}
  function paintEnd(now,ended){/* one painting is done: score it, show the stars, go on */
   phase="judge";bd.disabled=true;const n=P.M.length,pl=P.tp.reduce((a,b)=>a+b,0)/n,tn=P.lay.reduce((a,l)=>a+l.ts,0)/n,cn=cl(1-P.bl*.5,0,1);
-  const el=Math.min(LIM,now-t0),got=10/NR*(WP*pl+WT*tn+WC*cn)*mgPace(env,"ve",el,LIM);pts+=got;P.stars=got/(10/NR);kg82Pluck(2,P.stars>.5);crLater(next,1500)}
+  const el=Math.min(LIM,now-t0),q=WP*pl+WT*tn+WC*cn,sp=mgPace(env,"ve",el,LIM),got=10/NR*q*sp;pts+=got;P.stars=q;P.sp=sp;kg82Pluck(2,q*sp>.5);crLater(next,1500)}
  const stop=crLoop(now=>{if(!P)return;const left=LIM-(now-t0);
   if(phase==="place"&&left<=0)inkStart(now);else if(phase==="ink"&&left<=0)paintEnd(now,true);
   kg82Bg(g,W,H,"ve",0,.7);
@@ -83,8 +83,9 @@ function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
    if(fl&&(fl.mode==="load"||fl.mode==="loaded")){const tn=fl.mode==="load"?Math.floor(lvl):Math.max(0,fl.tone-Math.floor((now-fl.loadedAt)/DRY)),bx=ST.x+ST.w*.5,by=ST.y+ST.h*.35;
     if(!kg82Spr(g,"ve-brush",bx,by,UN*1.6,null,{ax:.06,ay:.95,glow:fl.mode==="load"?BAL.mgFx.glow:null})){g.strokeStyle="#6b4a2a";g.lineWidth=5;g.lineCap="round";g.beginPath();g.moveTo(bx+UN*.9,by-UN*.9);g.lineTo(bx,by);g.stroke()}
     g.fillStyle=k91VeInk(tn/(T-1));g.beginPath();g.arc(bx,by,UN*.14,0,Math.PI*2);g.fill()}g.restore()}
-  if(phase==="judge"&&P.stars!=null)k91Say(g,P.stars>=.8?"★★★":P.stars>=.55?"★★☆":"★☆☆",P.stars>=.8?K91C.good():P.stars>=.55?K91C.gold():K91C.red(),W/2,H*.915,W-16);
-  kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="place"||phase==="ink"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
+  if(phase==="judge"&&P.stars!=null)k91Say(g,crStars(P.stars),crCol(P.stars,P.sp),W/2,H*.915,W-16);/* the family star rule (crStars / crCol, review/mg-craft-r1) */
+  kg82DrawPops(g,pops,now);const on=phase==="place"||phase==="ink";/* the ONE live grade (crHud → mgLive): done paintings + the open one's time part + paintings to come */
+  crHud(env,on?mgReach(pts+10/NR*mgPace(env,"ve",Math.min(LIM,now-t0),LIM),r+1,NR):mgReach(pts,Math.min(NR,r+1),NR),r,NR,on?left:null)});
  const onStone=(x,y)=>x>=ST.x-6&&x<=ST.x+ST.w+6&&y>=ST.y-6&&y<=ST.y+ST.h+ST.h*.3+6;
  const nearStamp=(x,y)=>{let b=null,bd=1e9;P.S.forEach(s=>{if(!s.placed)return;const d=k91Dist(x,y,s.x,s.y);if(d<bd&&d<UN*sc(s.y)*1.1){bd=d;b=s}});return b};
  function flick(x,y,now){const l=P.lay[P.li],s=l.s,R=UN*sc(s.y),d=k91Dist(x,y,s.x,s.y),bl=BLEED*SW;

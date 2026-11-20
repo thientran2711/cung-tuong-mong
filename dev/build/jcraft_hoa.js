@@ -59,7 +59,7 @@ function kcHoa(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;C.cv.dataset.
   const pl=S.filter(s=>s.seated);const cen=(arr,f)=>arr.reduce((a,s)=>a+s.Lc*Math.sin(f(s)),0)/(arr.reduce((a,s)=>a+s.Lc,0)||1);
   const b=pl.length?Math.max(0,1-Math.abs(cen(pl.map(s=>({Lc:s.L,s})),o=>o.s.a)-cen(S.map(s=>({Lc:s.Lt,s})),o=>rad(o.s.at)))/B.balTol):0;
   const sea=P.picked?Math.max(0,1-P.wrong*B.wrong):0;return{sea,len:ln/n,ang:an/n,bal:b*(pl.length/n),s:B.w.sea*sea+B.w.len*ln/n+B.w.ang*an/n+B.w.bal*b*(pl.length/n)}}
- function judge(){if(phase==="judge")return;const el=performance.now()-P.t0;phase="judge";bd.disabled=true;gest=null;const sc=score(),pace=mgPace(env,"hoa",el,P.lim),v=10/NR*sc.s*pace;sum+=v;P.verdict=sc.s*pace;P.v=v;
+ function judge(){if(phase==="judge")return;const el=performance.now()-P.t0;phase="judge";bd.disabled=true;gest=null;const sc=score(),pace=mgPace(env,"hoa",el,P.lim),v=10/NR*sc.s*pace;sum+=v;P.verdict=sc.s;P.sp=pace;P.v=v;
   setTimeout(()=>{if(!done)next()},B.judgeMs)}
  const stop=k91Loop(now=>{if(!P)return;const left=P.lim-(now-P.t0);if((phase==="pick"||phase==="play")&&left<=0)judge();
   kg82Bg(g,W,H,"hoa",.28,.6);
@@ -89,13 +89,14 @@ function kcHoa(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;C.cv.dataset.
     else{kchStem(g,gest.x,gest.y,s.L,0,FF,rB,{glow:true})}
     if(P.last&&!P.last.leaned&&ghost>.02){g.save();g.globalAlpha=Math.min(1,ghost)*.5;g.setLineDash([5,5]);g.strokeStyle=K91C.good();g.lineWidth=2;const q=P.last,a=rad(q.at);g.beginPath();g.moveTo(MX,MY);g.lineTo(MX+q.L*Math.sin(a),MY-q.L*Math.cos(a));g.stroke();g.restore()}}
    if(phase==="judge"){/* the master's own set, faint, and the stars */g.save();g.globalAlpha=.55;g.setLineDash([4,4]);g.strokeStyle=K91C.good();g.lineWidth=2;S.forEach(q=>{const a=rad(q.at);g.beginPath();g.arc(MX+q.Lt*Math.sin(a),MY-q.Lt*Math.cos(a),rB*.7,0,7);g.stroke()});g.restore();
-    const v=P.verdict;g.fillStyle=v>=.85?K91C.good():v>=.55?K91C.gold():K91C.red();g.font=k91F(700,22,1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,v>=.85?"★★★":v>=.55?"★★☆":"★☆☆",W/2,TY,W-16)}}
+    const v=P.verdict;g.fillStyle=crCol(v,P.sp);g.font=k91F(700,22,1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,crStars(v),W/2,TY,W-16)}}
   /* falling cut-offs + the slash */
   for(let i=falls.length-1;i>=0;i--){const q=falls[i],k=(now-q.a)/600;if(k>=1){falls.splice(i,1);continue}g.save();g.globalAlpha=1-k;g.strokeStyle="#4f7f4a";g.lineWidth=Math.max(3,rB*.34);g.lineCap="round";g.translate(0,k*k*hv*.5);g.rotate(k*.3);g.beginPath();g.moveTo(q.x,TY);g.lineTo(q.x+q.len,TY);g.stroke();g.restore()}
   if(slash&&now-slash.a<BAL.mgFx.ms){g.save();g.globalAlpha=1-(now-slash.a)/BAL.mgFx.ms;g.strokeStyle=BAL.mgFx.ring;g.lineWidth=4;g.shadowColor=BAL.mgFx.glow;g.shadowBlur=BAL.mgFx.blur*.5;g.beginPath();g.moveTo(slash.x0,slash.y0);g.lineTo(slash.x1,slash.y1);g.stroke();g.restore()}
   if(gest&&gest.type==="cut"){g.save();g.strokeStyle="rgba(255,255,255,.9)";g.lineWidth=3;g.beginPath();g.moveTo(gest.x0,gest.y0);g.lineTo(gest.x1,gest.y1);g.stroke();g.restore()}
   kg82DrawPops(g,pops,now);
-  env.hud({score:`${Math.round(Math.min(10,sum))}/10`,round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:phase==="pick"||phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})});
+  const on=phase==="pick"||phase==="play";/* the ONE live grade (crHud → mgLive): done vases + the open one's time part + vases to come */
+  crHud(env,on?mgReach(sum+10/NR*mgPace(env,"hoa",now-P.t0,P.lim),r+1,NR):mgReach(sum,Math.min(NR,r+1),NR),r,NR,on?left:null)});
  const segD=(px,py,ax,ay,bx,by)=>{const dx=bx-ax,dy=by-ay,t=Math.max(0,Math.min(1,((px-ax)*dx+(py-ay)*dy)/(dx*dx+dy*dy||1)));return Math.hypot(px-(ax+dx*t),py-(ay+dy*t))};
  const aimOf=(x,y)=>Math.max(-rad(80),Math.min(rad(80),Math.atan2(x-MX,MY-y)));
  k91Pointer(C,{
