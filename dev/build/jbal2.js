@@ -1080,18 +1080,19 @@ Object.assign(BAL.ag.kh2.rd,{see:1,go:1,cap:6,qMax:40});Object.assign(BAL.ag.kh2
         an NPC's slap tier = one draw from it at the NPC's own board (mgTier "tat", her/his rank and Vũ); an NPC dodges a slap at BAL.slap.dodgeOdds[tier]
    study  1 = an NPC's lesson gains the player's points from one draw (lessonPts / tdPoints, j85 npcStudyDo); 0 = the old flat 1 / 2–3 */
 Object.assign(BAL.ag,{mg2:{on:1,med:[[-2,8.9],[0,7.5],[2,5.8]],w:8,tat:{e:[0,2,5],w:[[32,54,15],[18,58,24],[2,50,49]]},study:1}});
-/* AG-ALL-2d hand ceiling (owner OD 17/11 ~16:00Z L1640; jmgt mgHand): lo / hi = the clumsiest / best hand (graded play reached on a matching board;
-   hi − w/2 = 7.5 = the skilled human bot's median at the matching board, dev/PROGRESS_mg-balance.md); w = how far under her ceiling a play falls (mean of 3 draws) */
-/* skew (owner ~16:20Z (f): strong NPC hands RARE, weak hands clearly WORSE than her): hand = lo + (hi − lo)·b^skew, b = mean of 2 draws — median hand ≈ 5
-   (plays ≈ 3 on a matching board vs the skilled human 7.5), about 2 % of hands reach 8.5+. Interim mg-bots bands until the owner-only calibration writes them. */
-BAL.ag.mg2.hand={on:1,lo:3,hi:9.5,w:4,skew:1.6};
+/* AG-ALL-2d hand ceiling (owner OD 17/11 ~16:00Z L1640; jmgt mgHand) — FAIR SPREAD (owner OD 20/11 ~01:10Z: "đa số npc chơi dở hơn tôi, tôi thấy không
+   fair" → "Duyệt cả 3 ý, làm luôn đi"): w = how far under her ceiling a play falls (mean of 3 draws; average play = hand − w/2);
+   sp = half-width of the SYMMETRIC hand band round her calibrated play (jmgcal mgCalBand: centre = b + w/2, or the skilled human median mgMedD(0) + w/2 for
+        a kind she has not tested), hand = centre + sp·(2·b − 1), b = mean of 2 hashed draws: about half the NPC hands at or above her, half below;
+   art  = hand points per art level of that kind above / below the player's own level (a trained NPC clearly beats her, an untrained one is weak);
+   rank = hand points per rank step above / below hers (law 5: higher-rank opponents lean stronger; the board of a higher rank is harder by
+          BAL.mgTier.occ perRank, so the net lift per rank ≈ rank − perRank·0.8) */
+BAL.ag.mg2.hand={on:1,w:4,sp:2.5,art:.2,rank:.8};
 /* AG-ALL-2d2 OWNER CALIBRATION (owner OD 17/11 ~16:20Z (f) + ~16:40Z option 1: "chỉ có tôi test và cái số của tôi dùng chung cho mọi người"; jmgcal):
    d  = the board gaps of the test rounds, easy → hard (one round each; 5 rounds, rising difficulty)
-   up / dn = how far above / below HER play the best / clumsiest NPC hand plays on a matching board (hand band hi = b + w/2 + up, lo = b + w/2 − dn);
-   min / max = hand floor / ceiling (max = the interim hand hi: never a perfect player)
    k  = her calibrated base per mini-game kind {b: her graded play on a matching board, n: rounds, at: mm/dd/yyyy}, written from her «CTM-CAL …» code by
-        dev/tools/mgcal_apply.py — ONE base for every player; a kind not in k keeps the default band above */
-BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],up:1,dn:4,min:1,max:9.5,k:{dan:{b:8.3,n:5,at:"11/19/2026"}}};
+        dev/tools/mgcal_apply.py — ONE base for every player; the NPC hand band of that kind is centred on b (BAL.ag.mg2.hand sp / w above) */
+BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],k:{dan:{b:8.3,n:5,at:"11/19/2026"}}};
 /* j71 odds words under mg2: the same draw (mgNpcRaw, seeded by the plan) for every entrant, her included, on this contest's board (j71 mgX7) */
 (function(){if(typeof cOdds7!=="function"||typeof fxOdds7!=="function")return;const c0=cOdds7,f0=fxOdds7;
  const win=(E,base,kindAt,mi,r)=>{let w=0;const N=500;for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+mgNpcRaw(kindAt(i),E[i],{rnd:r})/10*J71.luck;if(x>b){b=x;bi=i}}if(bi===mi)w++}return oddsCl(Math.round(100*w/N))};

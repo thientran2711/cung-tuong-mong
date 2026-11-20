@@ -71,25 +71,38 @@ function mgWith(o,f){const k=MGX.o;MGX.o=o;try{return f()}finally{MGX.o=k}}
 function mgMedD(d){const P=BAL.ag.mg2.med;d=+d||0;let i=0;while(i<P.length-2&&d>P[i+1][0])i++;const [a,ma]=P[i],[b,mb]=P[i+1];return cl(ma+(mb-ma)*(d-a)/(b-a),0,10)}
 function mgNpcTier(kind,p,o){o=o||{};return mgTier(kind,{occ:o.occ,big:!!o.big,rank:o.rank!=null?o.rank:mgRankOf(p),lv:o.lv,p})}
 function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||Math.random,u=(r()+r()+r())/3;MGX.n++;const d=o.d!=null?o.d:mgNpcTier(kind,p,o).d;
- const H=BAL.ag.mg2.hand;if(H&&H.on&&p!==S){/* AG-ALL-2d HAND CEILING: a roll under her own ceiling, then the board's ease (the same gap shift the player's board gives) */
-  const c=mgHand(kind,p);return cl(Math.round(c-(1-u)*H.w+(mgMedD(d)-mgMedD(0))),0,10)}
+ const H=BAL.ag.mg2.hand;if(H&&H.on&&p!==S){/* AG-ALL-2d HAND CEILING: a roll under her own ceiling (her hand + her art / rank lift, mgHandEff), then the board's ease (the same gap shift the player's board gives) */
+  const c=mgHandEff(kind,p,o);return cl(Math.round(c-(1-u)*H.w+(mgMedD(d)-mgMedD(0))),0,10)}
  return cl(Math.round(mgMedD(d)+(u-.5)*BAL.ag.mg2.w),0,10)}/* o.d: a known gap (no person: the matching level 0) */
 /* ===== AG-ALL-2d · MINIGAME HAND CEILING (owner OD 17/11 ~16:00Z L1640, verbatim key words: "tất cả NPC đều phải có một cái mức trần chơi game, rồi
    sau đó là mới được cộng thêm dựa theo cái tài, cái phẩm ... mỗi game mỗi người sẽ có một cái mức trần khác nhau ... Có người chơi giỏi, người chơi dở").
-   Her Tài never adds points: her art level only eases the BOARD (mgTier gap d). So every NPC has a hidden HAND per minigame kind = the best graded play her
-   hands reach on a matching board, drawn ONCE per NPC per kind between BAL.ag.mg2.hand.lo (a clumsy hand) and .hi (the measured skilled human bot of
-   dev/measure/mg-bots.js: median 7.5 at the matching board ⇒ hi − w/2 = 7.5), mean of two draws raised to BAL.ag.mg2.hand.skew (most hands weak-to-middling, strong hands rare — owner ~16:20Z (f)).
+   FAIR SPREAD (owner OD 20/11 ~01:10Z, verbatim: "Không phải, tôi nói test tay xong, rồi đa số npc chơi dở hơn tôi, tôi thấy không fair" → "Duyệt cả 3 ý,
+   làm luôn đi"): (1) every NPC has a hidden HAND per minigame kind = the best graded play her hands reach on a matching board, drawn ONCE per NPC per kind
+   in the band of jmgcal mgCalBand(kind) = centred on HER calibrated play (BAL.ag.mg2.cal.k[kind].b; a kind she has not tested: the skilled human median
+   mgMedD(0)): centre c = base + w/2 (an NPC's average play is hand − w/2), hand = c + sp·(2·b − 1), b = mean of two hashed draws — a SYMMETRIC draw, about
+   half the hands at or above her, half below, spread ±BAL.ag.mg2.hand.sp. (2) ART: mgHandEff adds BAL.ag.mg2.hand.art per art level of that kind above
+   the player's own level (kg82LvFor; minus below): a trained NPC clearly beats her, an untrained one is weak. (3) RANK (law 5): + BAL.ag.mg2.hand.rank per
+   rank step above hers: higher-rank opponents lean stronger as she climbs. Art / rank are read live (never saved), measured against the player of seat a
+   (mgRefP: S; a co-op guest reads the host's person) so both co-op seats roll the same play.
    Her play = a roll UNDER that ceiling (c − (1 − u)·w, u = mean of 3 draws), THEN the same board ease the player gets from her own art level / rank /
    occasion (mgMedD(d) − mgMedD(0): the skilled bot's measured shift between an easy / matching / hard board). Never a perfect player: even the best hand
    rolls below its ceiling most of the time. Saved on the person (p.mgH[kind]); the draw is hashed on the person + kind, so an old save (no p.mgH) and a
    co-op guest roll the very same hand lazily. Off: BAL.ag.mg2.hand.on = 0 (one skilled-bot curve for everyone, as part 2b). */
 function mgHashU(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}h^=h>>>13;h=Math.imul(h,0x5bd1e995);h^=h>>>15;return (h>>>0)/4294967296}
-function mgHand(kind,p){const H=BAL.ag.mg2.hand;if(!p||typeof p!=="object"){const Bd=typeof mgCalBand==="function"?mgCalBand(kind):H;return Bd.lo+(Bd.hi-Bd.lo)*Math.pow(.5,H.skew||1)}let M=p.mgH;if(!M||typeof M!=="object")M=p.mgH={};
- /* AG-ALL-2d2: the band per kind comes from the owner's calibration (jmgcal mgCalBand: BAL.ag.mg2.cal.k) or the BAL default; p.mgHv[kind] = the band it was
-    rolled in — a changed band re-rolls the SAME hash draw inside the new band (old saves without p.mgHv re-roll identically under the default band) */
- const Bd=typeof mgCalBand==="function"?mgCalBand(kind):{lo:H.lo,hi:H.hi,sig:H.lo+"/"+H.hi};let V=p.mgHv;if(!V||typeof V!=="object")V=p.mgHv={};
- if(M[kind]==null||V[kind]!==Bd.sig){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;const b=(mgHashU(id+"|a")+mgHashU(id+"|b"))/2;M[kind]=Math.round((Bd.lo+(Bd.hi-Bd.lo)*Math.pow(b,H.skew||1))*100)/100;V[kind]=Bd.sig;MGX.hand=(MGX.hand||0)+1}
+function mgBand(kind){const H=BAL.ag.mg2.hand;if(typeof mgCalBand==="function")return mgCalBand(kind);const c=mgMedD(0)+H.w/2;return{lo:c-H.sp,hi:c+H.sp,c,sig:"f/"+(c-H.sp)+"/"+(c+H.sp)}}
+function mgHand(kind,p){const H=BAL.ag.mg2.hand,Bd=mgBand(kind);if(!p||typeof p!=="object")return Bd.c;let M=p.mgH;if(!M||typeof M!=="object")M=p.mgH={};
+ /* AG-ALL-2d2: p.mgHv[kind] = the band it was rolled in — a changed band re-rolls the SAME hash draw inside the new band (old saves rolled in the old
+    skewed bands carry another sig and re-roll here) */
+ let V=p.mgHv;if(!V||typeof V!=="object")V=p.mgHv={};
+ if(M[kind]==null||V[kind]!==Bd.sig){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;const b=(mgHashU(id+"|a")+mgHashU(id+"|b"))/2;M[kind]=Math.round((Bd.lo+(Bd.hi-Bd.lo)*b)*100)/100;V[kind]=Bd.sig;MGX.hand=(MGX.hand||0)+1}
  return M[kind]}
+/* the player the art / rank lift is measured against: seat a (S; on a co-op guest the host's person, so both seats agree) */
+function mgRefP(){try{if(typeof agGuest==="function"&&agGuest()&&typeof consorts==="function"){const h=consorts().find(x=>x&&x.coop);if(h)return h}}catch(e){}return S}
+/* (2) + (3): the hand an NPC plays with now = her hand + art lift + rank lift (o.lv: the level the caller already knows for this kind) */
+function mgHandEff(kind,p,o){const h=mgHand(kind,p);if(!p||typeof p!=="object")return h;const H=BAL.ag.mg2.hand,R=mgRefP();if(!R||p===R)return h;
+ const lv=x=>{try{return kg82LvFor(x,kind)}catch(e){return 0}};const lp=o&&o.lv!=null&&isFinite(+o.lv)?cl(+o.lv,0,5):lv(p);
+ return Math.round((h+(H.art||0)*(lp-lv(R))+(H.rank||0)*(mgRankOf(p)-mgRankOf(R)))*100)/100}
+window.mgHandEff=mgHandEff;window.mgBand=mgBand;window.mgRefP=mgRefP;
 window.mgHand=mgHand;
 function mgSkipRaw(t){return cl(Math.round(mgMedD(t&&t.d!=null?t.d:0)),0,10)}
 window.mg2On=mg2On;window.mgWith=mgWith;window.mgMedD=mgMedD;window.mgNpcTier=mgNpcTier;window.mgNpcRaw=mgNpcRaw;window.mgSkipRaw=mgSkipRaw;window.MGX=MGX;

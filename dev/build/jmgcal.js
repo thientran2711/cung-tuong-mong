@@ -6,9 +6,9 @@
    frame / rows / buttons the exam uses (jexam exRun pattern: kg82Open + kg82Rows + kg82Btn + kg82ShowRes + kg82Play). Nothing else is drawn here.
    HER BASE per kind  b = mean over rounds of (raw_i − (mgMedD(d_i) − mgMedD(0)))  = her graded play brought back to a MATCHING board (the same board
    shift the NPC side uses), clamped 0..10 — mgCalBase(raws, ds).
-   NPC HAND BAND per kind (jmgt mgHand reads mgCalBand): hi = min(cal.max, b + w/2 + cal.up), lo = max(cal.min, b + w/2 − cal.dn) — an NPC's average
-   play is (hand − w/2), so the best hands play about cal.up above her (rare: skew), the clumsy ones cal.dn below her, the middle hand clearly below.
-   No calibration for a kind yet → the BAL default band (BAL.ag.mg2.hand lo / hi, interim mg-bots).
+   NPC HAND BAND per kind (jmgt mgHand reads mgCalBand; owner OD 20/11 ~01:10Z fair spread): centre c = b + w/2, lo = c − sp, hi = c + sp
+   (BAL.ag.mg2.hand w / sp) — an NPC's average play is (hand − w/2), so the middle NPC plays like her, about half the hands at or above her, half below.
+   No calibration for a kind yet → the same centred band round the skilled human median mgMedD(0) (BAL.ag.mg2.med at the matching board).
    WHERE HER NUMBERS LIVE: one core — BAL.ag.mg2.cal.k[kind] = {b, n, at} in jbal2.js, the SAME for every player (no test for anyone else). Her device
    keeps the raw record (localStorage "ctm-mgcal") and shows a short code line «CTM-CAL …» with a copy button; the coordinator writes it into BAL with
    dev/tools/mgcal_apply.py "<code>". Her device does NOT apply its local record (co-op and every other player must roll the same hands).
@@ -19,15 +19,13 @@ const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k
 const KEY="ctm-mgcal",FLAG="ctm-owner-cal";
 (function(){try{const q=new URLSearchParams(location.search).get("hieuchuan");if(q==="1")LS.set(FLAG,"1");else if(q==="0")LS.del(FLAG)}catch(e){}})();
 function mgCalOwner(){return LS.get(FLAG)==="1"}
-function C(){return (BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.cal)||{on:0,d:[0],up:1,dn:4,min:1,max:9.5,k:{}}}
+function C(){return (BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.cal)||{on:0,d:[0],k:{}}}
 /* her base on a matching board from the rounds she played (raws[i] at gap ds[i]) */
 function mgCalBase(raws,ds){const n=Math.min(raws.length,ds.length);if(!n)return null;let s=0;for(let i=0;i<n;i++)s+=(+raws[i]||0)-(mgMedD(ds[i])-mgMedD(0));
  return Math.round(cl(s/n,0,10)*10)/10}
 /* the NPC hand band of a kind: {lo, hi, sig} (sig changes when the band changes, so a cached hand is re-rolled from the same hash) */
-function mgCalBand(kind){const H=BAL.ag.mg2.hand,c=C(),e=c.on&&c.k&&c.k[kind];
- if(!e||!isFinite(+e.b))return{lo:H.lo,hi:H.hi,sig:H.lo+"/"+H.hi};
- const w2=H.w/2;let hi=Math.min(c.max!=null?c.max:H.hi,+e.b+w2+c.up),lo=Math.max(c.min,+e.b+w2-c.dn);if(lo>hi-.5)lo=Math.max(0,hi-.5);
- lo=Math.round(lo*100)/100;hi=Math.round(hi*100)/100;return{lo,hi,sig:lo+"/"+hi}}
+function mgCalBand(kind){const H=BAL.ag.mg2.hand,c=C(),e=c.on&&c.k&&c.k[kind];const base=e&&isFinite(+e.b)?+e.b:mgMedD(0);
+ const r=x=>Math.round(x*100)/100,m=r(base+H.w/2),lo=r(m-H.sp),hi=r(m+H.sp);return{lo,hi,c:m,sig:"f/"+lo+"/"+hi}}
 /* the kinds she can test: every KG82 kind whose engine is in the game */
 function mgCalKinds(){try{return Object.keys(KG82_KIND).filter(k=>{const K=KG82_KIND[k];return K&&K.n&&typeof KG82_ENG!=="undefined"&&typeof KG82_ENG[K.e]==="function"})}catch(e){return[]}}
 function rec(){try{return JSON.parse(LS.get(KEY)||"{}")||{}}catch(e){return{}}}
