@@ -50,3 +50,12 @@ Need to remove ≥ 194 chars from `dev/art/winter1/s62_t4_dong.txt` (10 193). Ev
 Prompt `dev/art/winter1/s62_t4_dong_noangle.txt` = s62_t4_dong.txt minus the whole ANGLE sentence (9 786 chars), STORE + APPROVED PASS. Builder untouched.
 Gen **cpSPN2P0eP** (135 cr, one try). Look: square neckline + pearl-net capelet kept; ivory fur at capelet edge/collar, front edges, hem and cuffs; face OK (closed mouth, eyes straight). She stands almost frontal (no angle sentence). The sheet's t4 cell is filled ("Đông · có lông · không câu góc nghiêng").
 **Total WINTER1: 8 gens × 135 = 1 080 cr.**
+
+## Fur v2 — wider (owner ~15:45Z relay: "chưa đủ ấm áp … không muốn dày cui lên, muốn nó to hơn xíu nữa … phong cách đã giống ý tao rồi")
+G26 updated (still TEST) to the v2 sentence, which is the same for every rank (343 chars, was 202):
+`WINTER: a WIDE band of soft plain ivory-white fur trim, about a hand's width, along her collar, the front edges and hem of her outer garment, and her cuffs, visibly warm and cosy, yet lying smooth and close, never puffy or bulky; the same ivory fur at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape.`
+Test: s62 t4 = noangle prompt with only the fur sentence swapped → `dev/art/winter1/s62_t4_dong_fur2.txt` (9 927 chars, STORE + APPROVED PASS). Neckline untouched.
+Gen **VX7Nn0OMMU** (135 cr). Look: the fur band is clearly wider (about twice v1) along the collar, front edges, hem and cuffs, smooth and not puffy; the square neckline and capelet are kept; face OK. The collar fur sits around the lower neck/throat but the face is free.
+Sheet: `dev/handover/review-sheets/winter1/s62_t4_dong_long2.webp` (new v2 big · v1 cpSPN2P0eP · current).
+Length note for the rollout: v2 adds 141 chars more than v1. The s62 builder prompts + v2 fit ≤10 000 at every rank except t4 (which needs the ANGLE sentence cut).
+**WINTER1 total: 9 gens = 1 215 cr.**
