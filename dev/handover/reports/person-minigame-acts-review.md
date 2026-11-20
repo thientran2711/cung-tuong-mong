@@ -1,4 +1,4 @@
-# person-minigame-acts — BIG REVIEW E22r (opus) — VERDICT r1: FAIL (6 fixes) · r2: FAIL (2 fixes, see ROUND 2 at the end)
+# person-minigame-acts — BIG REVIEW E22r (opus) — VERDICT r1: FAIL (6 fixes) · r2: FAIL (2 fixes) · r3: PASS 5bf16c29 (see ROUND 3 at the end)
 
 depth 6 · START_CTX ~3 % of 1M window (roll at ~28 %, ceiling 60 %) · session_01DgYSWkkEFYdpG7opFYFx8H · reviewer for FOREMAN E #15 session_01DgYSWqC1epTFkkxGoFxqYW
 PRIORITY #1 CHECK ('person-minigame-acts|E22r|pm-rank'): OD 2 | ledger 0 | claims 8 | main 1 | review/* 1 (review/person-minigame-acts = under review) | archive 0 (brief line; re-checked: no other branch builds pm acts; reuse of j82 startContest/playArt, jmgt occ, jrcv RCVK/rcvPick, jagacts3 agReg/p3O, jcoopworld ASK, jmem, goSee/actMove confirmed in the diff).
@@ -59,3 +59,20 @@ B. THE CO-OP FRIEND NEVER GETS THE PRACTICE OF «CÙNG CHƠI» (law 1; I missed 
 
 Shots r2 (Fold 755x1000@2 + iPad 1180x820@2, looked 3×, scratch only): Hậu cung cards, art pick, stake pick, duel rules screen (mg-ready-guide), her challenge card, her invite card with walk (fold-7 = fix A), the friend's duel card (ipad-8). No page errors, no overflow.
 Role-parity ×2 ALL PASS, outputs byte-identical (md5 b9bbde2a…). QUICKCHECK PASS · open 1360 ms · old save ok · perf new/live render 225/212, tab 449/458, buổi 992/1221 ms, tasks>200 19/18 · core gates PASS. All suites green; FAIL is on fixes A + B only.
+
+## ROUND 3 (r3) — review/person-minigame-acts 42dba2ac — VERDICT: see last line
+E22r, depth 6, same session; FOREMAN E #17 session_01DgYSWoFXvbLeCE3SVSWgDG; worker E22f. PRIORITY #1 CHECK ('person-minigame-acts|pmWalkLine|pmArtIn'): OD 2 | ledger 0 | claims 8 | main 1 | review/* 1 (this branch) | archive 0.
+LIVE merge: review/person-minigame-acts-r3 = 42dba2ac + merge of origin/main 66bd36cd @ 5bf16c29 (conflicts index.html / sw.js only → rebuilt by build_site.sh).
+
+| r2 fix | r3 | check |
+|---|---|---|
+| A walk cost on her card | DONE | jpma pmWalkTx = plain «N khắc»; place + «tới nơi buổi sau» in the card line (pmWalkLine). My r2 repro re-run on the rendered card (new game, default word mode, she at home, asker in another palace, travel 2): duel TỐN «2 khắc», line «Nhận lời thì ngươi đi sang chỗ nàng (đi đường 2 khắc) rồi thi ngay», no invented stat words. New dev/test/pm-wordmode.test.js scans every pm option family through the kit word mode |
+| B co-op friend's practice | DONE | pmXp on the friend entry queues the art (WeakMap) → famDiff adds res.fam {op:"art",ak} → famApply → pmArtIn = her own addArt(ak, BAL.pm.play.xp) (ak checked against ARTS); host-in-her-context case via D.after. pm-coop-d.js both directions |
+
+Suites on the LIVE merge 5bf16c29:
+- person-minigame-acts.test: 1st run 1 FAIL (the 200-buổi sim stopped at buổi 124 because she went to lãnh cung; me 7, NPC 13 already ≥ 4) → re-run ×2 PASS 31/31 (buổi 200: me 6/7, NPC 14/17). Flaky test, not a game fault: the sim should keep counting (or reseed) when she is sent out — test-only follow-up.
+- pm-wordmode.test ALL PASS · pm-coop-d 28/28 · pm-equal ALL WITHIN TOLERANCE · pm-rank stake rises, board falls (chance vs real NPCs noisy, ruling (1)) · one-core-guard PASS · ag-mgcal PASS · mg-ready-guide 9/9 · QUICKCHECK PASS (open 1432 ms, old save ok, perf new/live render 222/214, tab 447/335, buổi 1005/1005, tasks>200 19/20, core gates PASS).
+- receiver-choice: 1st run 2 FAIL (gift answers sample, Kết giao foe 12 vs 13) → re-run ×3 ALL PASS on the branch; plain LIVE 66bd36cd ×2 ALL PASS. Flaky sampling, no pm key.
+- role-parity ×2: 1 FAIL, outputs byte-identical (md5 90382f47…): new rows t1 P-ONLY harm:phonghoa · maid P-ONLY maid:errand · hh N-ONLY ml:beat · hh N-ONLY ml:frame. Plain LIVE 66bd36cd run by me: 2 FAIL, 7 other rows (up cx3:tell, up harm:accuse/banphe/uyhiep, promoted maid onlyRisen ×3). No pm key in either list → the seeded probe-world drift LIVE already has (E23 owns it). The hh ml:* rows exist only because r2 widened the asHitPick probe to the Hoàng hậu (honest); they held in r2 on LIVE 70bea3d3.
+
+VERDICT r3: PASS for person-minigame-acts — review/person-minigame-acts-r3 @ 5bf16c29 (= 42dba2ac + LIVE 66bd36cd, fast-forward on origin/main). Landing note for the foreman: role-parity is red on LIVE itself; land after / together with E23's drift fix, and re-run role-parity on the landed tip.
