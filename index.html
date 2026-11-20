@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà","b":"ad13d6b9f6be","h":[{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"}]};
+window.CTM_BI={"s":"e379c2bb","t":"2026-11-20T20:44Z","c":"coop-guest-agent: a co-op guest's own servants live the agent month once (agSelf / asSelfOn), friend-maid stand-in skipped on the host","b":"4627a09fcf85","h":[{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -7476,6 +7476,7 @@ function maidLoveMonth(){let ev="";if((typeof asOn==="function"&&asOn()))return"
  for(const s of L.filter(x=>x.manLove)){const m=manById(s.manLove);const o=ownerOf(s);if(!m||!o){s.manLove=null;continue}
   const mine=isSrv()&&(o===srvM()||(S.srv.af[s.sid]||0)>=30);
   if(roll(4)){o.staff.splice(o.staff.indexOf(s),1);const t=roll(30)?`bị đuổi khỏi cung`:`bị đày xuống Tân Giả khố`;if(m.rw!=="vương gia"&&roll(35)){m.alive=false}const line=`${s.name}, cung nữ của ${NM(o)}, tư tình với ${m.name} bị lộ: ${t}${m.alive?"":"; hắn bị đày ra biên ải"}. `;log(line);if(mine)ev+=line;continue}
+  if(typeof asSelfOn==="function"&&asSelfOn(o))continue;/* coop-guest-agent: a co-op guest's own maids are granted in her agent month (jagstaff asMonth Ban gả), never twice */
   if(roll(3)){o.staff.splice(o.staff.indexOf(s),1);const line=`${s.name}, cung nữ của ${NM(o)}, được chủ ban gả cho ${m.name}. `;log(line);if(mine)ev+=line}}}catch(e){console.error(e)}return ev}
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(!S.dead&&!isSrv())maidLoveMonth()}catch(e){}return ev}})();
 /* the choice cards */
@@ -69990,7 +69991,7 @@ function cmGuard(t,p){try{if(t!==S||cmOff()||!S.maid||S.maid.src!=="home"||!S.or
    and not, weighted by the same % (talSpy / secOut) × her lòng (ag2Ch, as the other servant inclinations of AG-ALL-2): a loyal maid listens for her mistress more and leaks less, a disloyal one the
    other way (BAL.ag.stf2.cm: spy × lòng / talLoy, leak × (100 − lòng) / (100 − secTrust)). A secret affair FOUND by Cung Chính ti (lover)
    is not her choice: it stays the old witness roll. Loop off → the old rolls. */
-function cmCh(m,w){if(!(window.agOn&&agOn()&&typeof ag2Ch==="function"))return null;return !!ag2Ch(m,cl(w,0,100))}/* a weighted draw of her inclination (j8 ag2Ch), no jmind slip: a slip would bend a rare monthly rate (3 %) several times over */
+function cmCh(m,w){if(!(window.agSelf&&agSelf(m&&S&&m===S.maid?S:null)&&typeof ag2Ch==="function"))return null;/* coop-guest-agent: her own chief maid on a co-op guest's seat = the same agent odds as solo */return !!ag2Ch(m,cl(w,0,100))}/* a weighted draw of her inclination (j8 ag2Ch), no jmind slip: a slip would bend a rare monthly rate (3 %) several times over */
 function cmSpyCh(m){const B=cmB(),K=BAL.ag.stf2.cm;const c=cmCh(m,B.talSpy*K.spy*(m.loyal||0)/B.talLoy);return c==null?(!!npcWhy("cmSpy",{p:m},()=>roll(B.talSpy))):c}/* npc-purpose G2a: she listens for her mistress out of loyalty */
 function cmLeakCh(m,s){const B=cmB(),K=BAL.ag.stf2.cm;if(!s||s.k==="lover")return !!npwPick(liveRivals(true).filter(v=>v!==S&&eyes(v)>0),v=>hostility(v,S)-BAL.ag.why.tell.host)&&roll(B.secOut);/* npc-purpose G2a: Cung Chính ti hears of it only from a rival with tai mắt and a grudge against her mistress */const c=cmCh(m,B.secOut*K.leak*(100-(m.loyal||0))/Math.max(1,100-B.secTrust));return c==null?(!!npcWhy("cmLeak",{p:m,s},()=>roll(B.secOut))):c}
 /* ---------- the month ---------- */
@@ -70224,7 +70225,7 @@ function spLeaveCard(s){const B=BAL.sp;const O=spLeaveOpts(S,s);const [K,D,L]=O;
 function spMonth(){let ev="";const B=BAL.sp;for(const o of consorts()){if(!o||o.dead||(o!==S&&!o.alive))continue;for(const s of (o.staff||[]).slice()){if(!s.proud||s.coop)continue;
  if(s.proud<=S.turn){s.proud=0;if(o===S)ev+=`${s.name} đã bớt kiêu. `;continue}
  s.loyal=cl(s.loyal-B.proudLoy,0,100);(o.staff||[]).forEach(x=>{if(x!==s)x.loyal=cl(x.loyal-B.bully,0,100)});
- if(s.loyal<B.leaveLoyal&&ag2Ch(s,B.leaveCh*(window.agOn&&agOn()?1+(B.leaveLoyal-s.loyal)/B.leaveLoyal:1))){const r=spAsk(o,s);if(r&&o!==S&&typeof mlSee==="function"&&mlSee(o))ev+=r}}}return ev}
+ if(s.loyal<B.leaveLoyal&&ag2Ch(s,B.leaveCh*(window.agSelf&&agSelf(o)?1+(B.leaveLoyal-s.loyal)/B.leaveLoyal:1))){const r=spAsk(o,s);if(r&&o!==S&&typeof mlSee==="function"&&mlSee(o))ev+=r}}}return ev}
 (function(){if(typeof servRanks!=="function")return;const r0=servRanks;servRanks=function(){const ev=r0.apply(this,arguments);let e2="";try{e2=spMonth()}catch(e){console.error(e)}return (ev||"")+e2}})();
 window.spFav=spFav;window.spOpen=spOpen;window.spMonth=spMonth;window.spAfter=spAfter;window.spKemTxt=spKemTxt;window.spPayFav=spPayFav;window.spLeaveCard=spLeaveCard;window.spLeaveOpts=spLeaveOpts;window.spAsk=spAsk;
 /* ================= jmem: KỶ NIỆM (memories) + ÂN OÁN CHƯA DỨT (hook ledger) — item D26, review/memories =================
@@ -71211,7 +71212,14 @@ setTimeout(()=>{try{IEV_PID.ilback=pp=>{const x=ilFind(pp&&pp.u);return x?{e:x.e
 const AG={inTick:0,errs:[],ms:[],bt:[],q:null,tm:{needs:0,opts:0,sync:0,land:0},stat:{tick:0,slice:0,qdrop:0,acts:0,by:{},wit:0,witNpc:0,land:0,drop:0,mute:0}};
 function agErr(w,e){try{AG.errs.push(w+": "+(e&&e.message||e));if(AG.errs.length>40)AG.errs.shift();console.error("jagent",w,e)}catch(x){}}
 function agGuest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}catch(e){return false}}
-function agOn(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&BAL.ag&&BAL.ag.on&&!window.__agOff&&!agGuest())}catch(e){return false}}
+function agLive(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&BAL.ag&&BAL.ag.on&&!window.__agOff)}catch(e){return false}}
+function agOn(){try{return agLive()&&!agGuest()}catch(e){return false}}
+/* coop-guest-agent (law 1 + 6b, co-op parity): agSelf(p) = the agent layer decides for p's OWN household on THIS seat. Host / solo = agOn().
+   A co-op GUEST: only her own seat (p===S): her servants live the same agent month as solo (asMonth: wage, Sức, secrets, betrayal found,
+   ban gả, the age choice), on the seat that runs her week end (her phone ≤ 12; the host in her context at 13). EXACTLY ONCE: the host's
+   stand-in of her has no staff (jcoopworld buildFriend staff:[]), a guest who is a maid (s.coop stand-in in an NPC's staff) is skipped by
+   asStaff / asMonth, and her toCanon is the only writer of her S.staff (toCanon drops s.coop and the host never writes P.b.S.staff). */
+function agSelf(p){try{return agOn()||(!!p&&p===S&&agGuest()&&agLive())}catch(e){return false}}
 function agOwn(k){return !!(BAL.ag&&BAL.ag.own.includes(k))}
 /* AG-ALL-2d2 · NOTHING IS EVER 100 % (owner 17/11 ~17:00Z, global): every odds of an act (her or an NPC: success, being caught, persuading) is clamped
    to BAL.odds.lo..hi (the j13 ladI pattern); a chance / frequency roll (a rare gift, a re-plan, an illness) is only capped at BAL.odds.hi (never sure;
@@ -71491,7 +71499,7 @@ function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;
  /* labels of the ledger activities (dev table, tai mắt lines) */
  try{for(const k in AGSELF)ACT95["ag_"+k]=AGSELF[k].act;for(const k in AGACTW)ACT95["ag_"+k]=AGACTW[k];ACT95.ag_effort="tìm cách được Hoàng thượng để mắt"}catch(e){}
 })();
-Object.assign(window,{agLater,agDrain,agQShow,AGL,agK1,agHearOf,agTick,agFlush,agOn,agNeeds,agOpts,agOrg,agZ,agPlan,agWatch,AG});
+Object.assign(window,{agSelf,agLive,agLater,agDrain,agQShow,AGL,agK1,agHearOf,agTick,agFlush,agOn,agNeeds,agOpts,agOrg,agZ,agPlan,agWatch,AG});
 /* ================= jagemp: AG2 — THE EMPEROR IS AN AGENT: his night is his own choice (npc-agent §3.2, §5 AG2) =================
    Owner OD:L1386 (every NPC, the Emperor too, plays like a player, by his needs / traits / the existing relation values; no invented bar,
    gate or flat roll for NPC outcomes) + OD 16/11 18:10Z (the Emperor picks WHO; the odds that he calls someone stay 90 %, 65 % when busy
@@ -75077,6 +75085,8 @@ window.hhAct=hhAct;
    ======================================================================================================================================== */
 const ASN=window.__asN={maid:{},srv:{},n:0,ms:0,tick:0};
 function asOn(){try{return !!(typeof agOn==="function"&&agOn()&&BAL.ag.staff&&!window.__asOff)}catch(e){return false}}
+/* coop-guest-agent: asOn for p's OWN household on this seat (jagent agSelf): host / solo = asOn(); a co-op guest = her own staff only */
+function asSelfOn(p){try{return !!(typeof agSelf==="function"&&agSelf(p)&&BAL.ag.staff&&!window.__asOff)}catch(e){return false}}
 function asB(){return BAL.ag.staff}
 function asGrp(s){return s&&s.role==="maid"?"maid":"srv"}
 function asC(s,k){const G=ASN[asGrp(s)];G[k]=(G[k]||0)+1;ASN.n++}
@@ -75203,7 +75213,7 @@ function asEmpTea(s){const m=ownerOf(s);asC(s,"empTea");const T=S.turn||0;if(!s.
 /* ---------- the choice: needs × traits (mindPick with jmind's slip) against keeping her routine ---------- */
 function asDecide(s,N){N=N||asNeeds(s);const O=asOpts(s,N);if(!O.length)return null;const mw=(()=>{try{return typeof mindW==="function"?mindW(s,"social"):1}catch(e){return 1}})();
  const c=mindPick([["keep",BAL.ag.routine/BAL.ag.unit]].concat(O.map(o=>[o,o.u*BAL.ag.needW*mw])),s);return c==="keep"?null:c}
-function asStaff(){const L=[];for(const p of consorts()){if(!p||!p.staff)continue;if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.sid!=null&&!s.out)L.push(s)}return L}
+function asStaff(){const L=[];for(const p of consorts()){if(!p||!p.staff)continue;if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.sid!=null&&!s.out&&!s.coop)L.push(s)}return L}/* s.coop = a co-op friend who plays a maid: she decides on her own phone (coop-guest-agent) */
 /* ---------- 5 DAY PLAN (OD 17/11 ~13:40Z): at the first buổi of each day every staff draws 4 slots {k, t, pl} by her needs (asDecide at
    plan time); each buổi she carries out her slot — the option is rebuilt with today's odds (same k and target); gone → she keeps her duties
    that buổi. Saved in S.agS (lazy; old saves load). Part A's jagday draws the consorts / Emperor / Thái hậu; staff plans are drawn here,
@@ -75220,9 +75230,9 @@ function asTick(){if(!asOn()||asPlanned())return"";const key=agKey();if(ASN.key=
   for(const s of asStaff()){let L=P[s.sid];if(!L){L=P[s.sid]=[0,1,2,3].map(()=>asSlot(asDecide(s)))}ev+=asDo(s,L[b])}}catch(e){console.error("jagstaff tick",e)}ASN.ms+=performance.now()-t0;
  if(ev)try{log(ev)}catch(e){}return ev}
 /* ---------- the month: wage, secrets, betrayal found, grant, age (the player maid's rules) ---------- */
-function asMonth(){if(!asOn())return"";let ev="";const B=asB();
- for(const p of consorts()){if(!p||!p.staff)continue;const sch=(p.schemes||0)>(p.schLast||0);
-  for(const s of p.staff.slice()){if(s.sid==null)continue;asSt(s);asAp(s,{bac:CNV_WAGE[Math.min(CNV_WAGE.length-1,srk(s))]||1,suc:B.monthSuc});
+function asMonth(){if(!asSelfOn(S))return"";let ev="";const B=asB();
+ for(const p of consorts()){if(!p||!p.staff||!asSelfOn(p))continue;/* coop-guest-agent: a co-op guest runs her OWN household only (the host runs the world's) */const sch=(p.schemes||0)>(p.schLast||0);
+  for(const s of p.staff.slice()){if(s.sid==null||s.coop)continue;/* s.coop: a co-op friend playing a maid lives her own month on her phone */asSt(s);asAp(s,{bac:CNV_WAGE[Math.min(CNV_WAGE.length-1,srk(s))]||1,suc:B.monthSuc});
    if(sch&&roll(B.secSee))s.sec=(s.sec||0)+1;/* she sees her master's schemes at home (the player maid's "Biết chuyện của chủ") */
    if(s.betray&&roll(agCap(nv(p,"betrayFind")))){s.betray=null;if(roll(SRVA.betray.kill)){asOut(s,"dead");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo chuyện trong cung, sai đánh chết. `}else{asOut(s,"tgk");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo, đày xuống Tân Giả khố. `}continue}
    /* Ban gả (j42 cnvGrant: the same trigger as the player maid's), then her own choice: Tạ ơn, xuất giá / Xin ở lại */
@@ -75264,7 +75274,7 @@ try{if(typeof agReg==="function"){agReg("maid","staff",(p,N)=>asOpts(p,N));agReg
  const sv0=servMonth;servMonth=function(){let r=sv0.apply(this,arguments)||"";try{r+=asMonth()}catch(e){console.error("jagstaff month",e)}return r};
  const aw0=amWeek;amWeek=function(){if(asOn())return"";return aw0.apply(this,arguments)};
 })();
-Object.assign(window,{asPlanDraw,asDo,asOn,asNeeds,asOpts,asDecide,asRun,asTick,asMonth,asSt,asSeekReact,asHitPick,asStaff,asGrp});
+Object.assign(window,{asSelfOn,asPlanDraw,asDo,asOn,asNeeds,asOpts,asDecide,asRun,asTick,asMonth,asSt,asSeekReact,asHitPick,asStaff,asGrp});
 /* ================= j95s LIVE SERVANTS + REASONED RECORD (owner OD 18/11 ~19:30Z, OD L1901 points 2 + 3; brief live-servants) =================
    (2) Every maid / eunuch — HERS and everyone's (consorts, Hoàng hậu, Thái hậu's household) — lives her own day: a per-khắc plan of duties,
        meals, breaks, errands, visits to a friend, her daily rest turn and sleep (the night watch by turns), each with its cause (law 6b real people).
@@ -85036,7 +85046,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ad13d6b9f6be";window.CTM_BUILD=BUILD;
+const BUILD="4627a09fcf85";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
