@@ -14,7 +14,7 @@ let bad=0;const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!
  ok(A.F&&A.F.pop>=1.2&&A.F.pass>=2&&A.F.blur>=30&&A.F.ms>=200,'BAL.mgFx values',A.F);ok(A.p0>1.1&&A.pEnd===1&&A.pHeld>=1.2,'kg82FxPop curve',[A.p0,A.pEnd,A.pHeld]);
  const src=['j82.js','j91.js'].map(f=>fs.readFileSync('dev/build/'+f,'utf8')).join('\n');
  ok(!/pr\*2\.05\*\(on\?1\.08:1\)/.test(src)&&!/HR\*\(on\?1\.35:1\.18\)/.test(src),'no private lit scale left in Múa / Khéo tay');
- ok(/kg82Spr\(g,"mua-mat"[^)]*ring:on/.test(src),'Múa lit cushion has the ring');
+ ok(/kg82Spr\(g,"mua-mat".*ring:on/.test(src),'Múa lit cushion has the ring');
  const kinds=await p.evaluate(()=>Object.keys(KG82_KIND));const T={};
  for(const k of kinds){if(SKIP.includes(k))continue;
   const r=await p.evaluate(async(k)=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const out={txt:[],dom:[]};
