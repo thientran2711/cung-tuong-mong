@@ -50,6 +50,14 @@ window.nrEmpOn=nrEmpOn;window.nrEmpInit=nrEmpInit;
  return {n:n0,t:nrFill(plain(nrS(A.t,A)),p),tag,k,rc:"",me,hit}}})();
 /* he asks her (her help = one hồi): only when she has his favour, never in her learning chapters, never as a servant (nrMenAsk rules) */
 (function(){const a0=nrMenAsk;nrMenAsk=function(e){if(!e||e.g!=="emp")return a0.apply(this,arguments);try{return !isSrv()&&!S.out&&!nrLearn()&&!S.cold&&(S.sung||0)>=NRE().askSung}catch(x){return false}}})();
+/* r2 fix 3: his help hồi names his REAL rival as {B} — on em_cai the strongest old house (nrMenRival → a house id), the same "off" asker the
+   house heads use (q72A("off", house) = its head by name); biên ải / kế vị have none, so {B} asks and «do» are never drawn there */
+(function(){if(typeof nrMenOffer!=="function")return;const o0=nrMenOffer;nrMenOffer=function(e){if(!e||e.g!=="emp")return o0.apply(this,arguments);
+ const N=e.p.nr,A=nrCh(N.r,N.n);if(!A||!e.a||typeof q72!=="function")return false;const q=q72();if(!q)return false;
+ const [rk,ri]=e.a;if(q.ch.concat(q.a).some(c=>nrSameA(c,rk,ri)&&/^nr_/.test(c.tid)))return false;
+ const riv=nrMenRival(e);const bk=riv&&typeof q72A==="function"&&q72A("off",riv)?"off":null,bi=bk?riv:null;
+ const K=typeof nrAskPick==="function"?nrAskPick(N,A,e.k,!!bk):{hk:nrKind(A),av:-1},hk=K.hk;if(!T72I["nr_"+hk])return false;
+ q.ch.push({tid:"nr_"+hk,at:wk(),rk,ri,bk,bi,p:{nr:N.r,nn:N.n,av:K.av}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}})();
 /* he never asks her to plead before himself (kind emp) */
 try{NRSELF.emp=["emp"]}catch(e){}
 /* his voice in the help hồi: trẫm, and he calls her as the Emperor does (jvoice kAddr) */
