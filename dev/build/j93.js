@@ -203,13 +203,15 @@ function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=K
   <div class="kmshelf"></div><div class="kmtap km-loop">Chạm để mở</div><div class="kmlist">${rows}<button class="kbtn kmtake" data-km-close>Nhận</button></div></div>`;
  kmPush(done=>{const st=kmStage("km-reward",html,{manual:true,dur:60000,onEnd:done});const root=st.ov.querySelector(".kmrew");st.ov.id="kmrew";let step=0;
   const spot=root.querySelector(".kmspot"),shelf=root.querySelector(".kmshelf");const T=[];const later=(ms,f)=>T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms));
-  const fin=()=>{T.forEach(clearTimeout);T.length=0;step=2;spot.innerHTML="";shelf.innerHTML=seq.map(tile).join("");root.classList.add("km-done","km-fast");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}};
+  /* kit-rows-b KP15: the shelf shows at most KMCAP icons + one «+N» chip (22 items = 3 rows of icons covered the list and the Nhận button); the full list below holds every item */const KMCAP=8,more=n=>`<span class="kmsh kmsh-more" style="--i:${KMCAP}">+${n}</span>`;const shelfAll=()=>seq.slice(0,seq.length>KMCAP+1?KMCAP:seq.length).map(tile).join("")+(seq.length>KMCAP+1?more(seq.length-KMCAP):"");
+  const shelfAdd=(x,i)=>{if(seq.length<=KMCAP+1)return shelf.insertAdjacentHTML("beforeend",tile(x,i));if(i<KMCAP)shelf.insertAdjacentHTML("beforeend",tile(x,i));else{const m=shelf.querySelector(".kmsh-more");if(m)m.textContent="+"+(seq.length-KMCAP);else shelf.insertAdjacentHTML("beforeend",more(i+1-KMCAP))}};
+  const fin=()=>{T.forEach(clearTimeout);T.length=0;step=2;spot.innerHTML="";shelf.innerHTML=shelfAll();root.classList.add("km-done","km-fast");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}};
   const one=i=>{if(step!==1)return;if(i>=seq.length){later(RV.list||350,()=>{step=2;root.classList.add("km-done");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}});return}
    const x=seq[i];spot.innerHTML=kitRevealHTML(info(x),{noSub:true});root.dataset.kmi=String(i);
    try{if(typeof kitSfx==="function")kitSfx(x.coin?"coinBounce":x.g>=3?"itemRare":"itemPop",{rate:1+Math.min(i,5)*.05});else if(typeof sfx==="function")sfx(x.coin?"sfx-coin":"sfx-open")}catch(e){}
    if(x.g>=2){const r=spot.getBoundingClientRect();later((RV.rise||550)*.7,()=>kmSpark(st.ov,r.left+r.width/2,r.top+r.height*.4,x.g>=4?34:x.g>=3?26:16,x.g>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4",KG[x.g].c,"#f6ead6"],x.g>=3?170:130))}
    later((RV.rise||550)+(RV.hold||1300),()=>{const p=spot.firstElementChild;if(p)p.classList.add("krev-out");
-    later(RV.shelf||380,()=>{spot.innerHTML="";shelf.insertAdjacentHTML("beforeend",tile(x,i));one(i+1)})})};
+    later(RV.shelf||380,()=>{spot.innerHTML="";shelfAdd(x,i);one(i+1)})})};
   const open=()=>{if(step)return;step=1;if(kmReduced()){root.classList.add("km-open");fin();return}root.classList.add("km-shake");
    later(RV.shake||420,()=>{root.classList.remove("km-shake");root.classList.add("km-open");
     const b=root.querySelector(".kmbox").getBoundingClientRect();const best=seq.length?Math.max(...seq.map(x=>x.g)):0;kmSpark(st.ov,b.left+b.width/2,b.top+b.height*.45,best>=4?40:24,best>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4","#f6ead6","#e0c080"],best>=3?190:140);
@@ -364,7 +366,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmxt{position:relative;height:96px;width:70px;display:flex;justify-content:center;align-items:flex-end}
 .kmtube{height:96px;width:auto;transform-origin:50% 90%;animation:kmShake calc(.9s*var(--pace)) ease-in-out var(--kd,calc(0s*var(--pace))) both;position:relative;z-index:1}
 .kmstick{position:absolute;height:84px;width:auto;left:50%;bottom:18px;z-index:2;transform-origin:50% 100%;animation:kmStick calc(.7s*var(--pace)) var(--km-out) calc(var(--kd,calc(0s*var(--pace))) + calc(.85s*var(--pace))) both}
-.kmlot{display:flex;flex-direction:column;align-items:center;min-width:5.5rem;padding:4px 10px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:#fffaf0;animation:kmPop calc(.4s*var(--pace)) var(--km-ease) calc(var(--kd,calc(0s*var(--pace))) + calc(1.45s*var(--pace))) both}
+.kmlot{display:flex;flex-direction:column;align-items:center;min-width:5.5rem;padding:4px 10px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0);animation:kmPop calc(.4s*var(--pace)) var(--km-ease) calc(var(--kd,calc(0s*var(--pace))) + calc(1.45s*var(--pace))) both}
 .kmlot b{font-family:var(--display);font-size:1.15rem;color:var(--gold)}.kmlot small{font-size:.68rem;color:var(--dim)}.kmlot.g b{color:var(--good)}.kmlot.r b{color:var(--bad)}
 .kmlotsec{--kd:0s}.dawn .kmlotsec{--kd:calc(1.3s*var(--pace))}.dawn.km-nocal .kmlotsec{--kd:0s}.kmlotsec .krows,.kmlotsec .kfacts{animation:kmFade calc(.35s*var(--pace)) ease calc(var(--kd,calc(0s*var(--pace))) + calc(1.6s*var(--pace))) both}
 @keyframes kmShake{0%,100%{transform:rotate(0)}10%{transform:rotate(-9deg)}22%{transform:rotate(8deg)}34%{transform:rotate(-8deg)}46%{transform:rotate(7deg)}58%{transform:rotate(-6deg)}70%{transform:rotate(5deg)}82%{transform:rotate(-3deg)}}
@@ -374,7 +376,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmseal{position:absolute;right:6px;top:-18px;width:78px;height:auto;z-index:3;pointer-events:none;transform:rotate(-12deg);mix-blend-mode:multiply;animation:kmStamp calc(.5s*var(--pace)) cubic-bezier(.3,1.4,.5,1) calc(.1s*var(--pace)) both}
 .km-thump{animation:kmThump calc(.35s*var(--pace)) ease calc(.45s*var(--pace)) both!important}
 .kmfls{position:fixed;z-index:9050;pointer-events:none;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;width:max-content}
-.kmfl{position:relative;font-weight:800;font-size:1rem;white-space:nowrap;background:#fffaf0;border:1.5px solid currentColor;border-radius:12px;padding:1px 9px;box-shadow:0 4px 12px #5a3a2050;animation:kmFloat calc(1.5s*var(--pace)) var(--km-out) both}
+.kmfl{position:relative;font-weight:800;font-size:1rem;white-space:nowrap;background:var(--k-card,#fffaf0);border:1.5px solid currentColor;border-radius:12px;padding:1px 9px;box-shadow:0 4px 12px #5a3a2050;animation:kmFloat calc(1.5s*var(--pace)) var(--km-out) both}
 .kmfl.g{color:var(--good)}.kmfl.r{color:var(--bad)}
 .kmbar{display:block;height:4px;margin:2px 0 3px;border-radius:2px;background:#e6d3ac;overflow:hidden;max-width:220px}.kmbar b{display:block;height:100%;border-radius:2px;transition:width .9s var(--km-out) .35s}
 .kmbar.up b{background:var(--good)}.kmbar.down b{background:var(--bad)}
@@ -394,7 +396,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmfr-old{animation:kmFadeOut calc(.5s*var(--pace)) ease calc(1.55s*var(--pace)) forwards}
 /* §66.1 rank up: the light gold glow is PAINTED (KIT §68 glowburst + glow-gold light, see kitEdict); no CSS sweep */
 .kmchip-row{display:flex;align-items:center;gap:8px}.kmarrow{color:#f6e3b4;font-weight:700}
-.kmchip{font-size:.8rem;font-weight:700;padding:3px 10px;border-radius:12px;border:1px solid var(--line);background:#fffaf0;color:var(--dim)}
+.kmchip{font-size:.8rem;font-weight:700;padding:3px 10px;border-radius:12px;border:1px solid var(--line);background:var(--k-card,#fffaf0);color:var(--dim)}
 .kmchip-new{color:#3a1f10;border-color:var(--rc);background:linear-gradient(#fffaf0,color-mix(in srgb,var(--rc) 35%,#fffaf0));box-shadow:0 0 0 3px color-mix(in srgb,var(--rc) 35%,transparent);animation:kmPop calc(.45s*var(--pace)) var(--km-ease) calc(1.75s*var(--pace)) both}
 @keyframes kmScC{0%{opacity:0;transform:translate(-50%,-30%) scale(.7)}40%{opacity:1;transform:translate(-50%,-50%) scale(1)}70%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.04)}}
 @keyframes kmScO{from{clip-path:inset(0 50% 0 50%)}to{clip-path:inset(0 0 0 0)}}
@@ -485,6 +487,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmspot{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:6;pointer-events:none;width:max-content;max-width:92vw}
 .kmshelf{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;min-height:0;max-width:min(92vw,520px)}
 .km-open .kmshelf{min-height:56px}
+.kmsh-more{align-self:center;min-width:44px;text-align:center;font:700 15px/1 var(--kit-font,inherit);color:var(--kit-mut,#8a6a40);padding:10px 8px;border:1px dashed currentColor;border-radius:999px}
 .kmsh{display:inline-block;animation:kmPop calc(.32s*var(--pace)) var(--km-ease) both}.km-fast .kmsh{animation-delay:calc(var(--i) * 40ms)}
 .kmbox{transition:width .3s ease,opacity .3s}.km-done .kmbox{width:min(30vw,150px);opacity:.6}
 .km-done .kmlist{max-height:calc(100dvh - 120px);overflow:auto}
