@@ -233,7 +233,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | ge-writers-w2 remerge #6 main fd6118cd (sonnet E11w2m4) | review/ge-writers-w2 | E ROOT #8 | session_01DgYSWpk2DjqqfEB5ZQCeg7 | DONE 7fb7c104 | 19/11 04:50Z |
 | hist-kyngo (Kỳ ngộ thường ngày step 1, history expert, sonnet E16; MAIN ORDER 03:31Z) | handover reports/hist-kyngo.md | E ROOT #8 | session_01DgYSWo26476tX9sf2PverF | DONE 018d29b8 | 19/11 04:50Z |
 | palace-chatter (PL#6 bubble talk, opus lead E17; MAIN ORDER 04:06Z) | review/palace-chatter | E ROOT #8 | session_01DgYSWoCjG7erCEJGy1Y514 | RUNNING | 19/11 04:50Z |
-| ge-writers-w3 BIG review (opus E11r-w3; cb72b507) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWn2u8M4jdAipxwpiJf | DONE PASS r3 → READY 76af583a (re-merged LIVE 30e8714e 20/11; was 2f314519, dadbf622, 2cd929e7, b79930bf) (FAIL r1 cb72b507, FAIL r2 c13b7748; reports/ge-writers-w3-review.md) | 19/11 |
+| ge-writers-w3 BIG review (opus E11r-w3; cb72b507) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWn2u8M4jdAipxwpiJf | DONE PASS r3 → READY e5de81c4 (re-merged LIVE 90d57324 20/11; was 76af583a, 2f314519, dadbf622, 2cd929e7, b79930bf) (FAIL r1 cb72b507, FAIL r2 c13b7748; reports/ge-writers-w3-review.md) | 19/11 |
 | kyngo-daily (Kỳ ngộ thường ngày design + build, opus E18) | review/kyngo-daily | E ROOT #8 | session_01DgYSWnqwrFPkcU8D76tS79 | SẴN SÀNG KIỂM 8cb39e38 (archived 11:00Z; review E18r) | 19/11 04:53Z |
 | palace-chatter line banks (sonnet E17b, under E17) | review/palace-chatter-lines | E ROOT #8 | session_01DgYSWnyBgE1MomXSwtCiXz | DONE a171292 | 19/11 04:58Z |
 | seal-lean-2 big slow lean-in + real video (sonnet; OD 05:05Z) | review/seal-lean-2 | ROOT-63 → ROOT-64 | session_01Rc5AsHrbnHixrk74QyLYuV | DONE — LIVE 5400c87b | 19/11 04:58Z |
@@ -391,7 +391,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW mg-noword-kit (SMALL sonnet) of 6b6f1c52 | review/mg-noword-kit-rv; reports/rv-mg-noword-kit.md | MAIN ROOT-75 | session_01Rc5AsM2JGiVZGesoFRmmkP | PASS b2a8e480 (2 fixes; clash with kit-mark on kitGameClock j79) | 20/11 07:15Z |
 | GAP OD01+KP01 night-rule (opus; finish review/night-final f7c54202 + review/night-ledger 55141158 on one branch; brief briefs/b-gap-1.md J1) | review/night-rule | B | session_01N1tNP4WihwjC1KpbcQwX9A | PAUSED (handover 86399b81; KP01 reopens only if D night chain / balance-final does not close it; reports/night-rule.md) | 20/11 08:21Z |
 | GAP OD06 names-unique-r2 (sonnet; re-merge names-unique-r1 dcb2ea96 + new pools; J2) | review/names-unique-r2 | B | session_01N1tNP3uzAn8LvJLqxfmtDm | READY bf9f80002 (names-unique-r2.md) | 20/11 08:21Z |
-| GAP OR01+OR06+OR08+OR13+OR14 outside-gaps (opus; check outside-art(-r1) first; J3) | review/outside-gaps | B | session_01N1tNP4VKcnA6UqaKXZanu1 | RUNNING | 20/11 08:21Z |
+| GAP OR01+OR06+OR08+OR13+OR14 outside-gaps (opus; check outside-art(-r1) first; J3) | review/outside-gaps; reports/outside-gaps.md | B | session_01N1tNP4VKcnA6UqaKXZanu1 | SẴN SÀNG KIỂM 70f3c853 (OR01/06/08/14 + OR13 single-player hook; OR13 co-op half NOT done → new worker) | 20/11 08:21Z |
 | GAP GE08+GE09+GE10+OR19 ge-npc (opus; J4) | review/ge-npc | B | session_01N1tNP2MH8QedckaarkWVc2 | RUNNING | 20/11 08:21Z |
 | GAP IT05+KP03 palace-life-gaps (opus; J5) | review/palace-life-gaps | B | session_01N1tNP2d78pGcErwtE8UsCK | SSK 3af67a8e (reports/palace-life-gaps.md) | 20/11 08:21Z |
 | GAP KP02 map-places (sonnet; check review/places + places-port-r1 first; J6) | review/map-places | B | session_01N1tNP5RC6vRXez3u71oULJ | SẴN SÀNG KIỂM 6883c4feb (reports/map-places.md) | 20/11 |
@@ -410,3 +410,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW cal-p2b (BIG opus) of 45768ff8 (huong/mua/banh broken grading + 9 pace full-marks windows) | review/cal-p2b-rv; briefs/rv-root76-cal-p2b.md | MAIN ROOT-76 | session_01Rc5AsJGMmUL6NpNpYgiR6c | RUNNING | 20/11 08:45Z |
 | REVIEW home-chapters (BIG opus E25r) of 03c2cade | review/home-chapters; briefs/E25r-review-home-chapters.md | FOREMAN E #17 | session_01DgYSWpQvWQ5ka4h6t1ZQRC | RUNNING | 20/11 09:48Z |
 | REVIEW palace-life-gaps r1 (opus BIG) of 3af67a8e | review/palace-life-gaps-r1 | B | session_01N1tNP6rEmQko7Y5Qk716AK | RUNNING | 20/11 08:52Z |
+| REVIEW names-unique-r2 r1 (opus BIG; save migration) of bf9f80002 | review/names-unique-r2-r1 | B | session_01N1tNP6fWrZSFyTwWVjxNXT | RUNNING | 20/11 08:53Z |
+| REVIEW mg-ui-rest (SMALL sonnet) of b5253eeb | review/mg-ui-rest-rv; briefs/rv-root76-mg-ui-rest.md | MAIN ROOT-76 | session_01Rc5AsM53iAEvG6q2NjA1iN | FAIL 9137759f (1 fix) | 20/11 08:57Z |
+| REVIEW outside-gaps r1 (opus BIG) of 70f3c853 | review/outside-gaps-r1 | B | session_01N1tNP3qXHKuMuUrxD5QGRQ | RUNNING | 20/11 08:59Z |
+| GAP OR13 co-op half outside-coop (opus; J3b) | review/outside-coop | B | session_01N1tNP4iVdUXvnLhmBA3k9Y | RUNNING | 20/11 08:59Z |
