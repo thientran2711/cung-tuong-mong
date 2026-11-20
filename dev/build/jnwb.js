@@ -74,7 +74,7 @@ const NWB={
 .nd-hanh .nd-who{left:50%;top:14%;margin-left:-22px}.nd-hanh .nd-who .nwb-i{width:2.6em;height:2.6em}
 .nd-hanh .nd-need{left:50%;top:62%;transform:translateX(-50%);display:flex;gap:7px}.nd-hanh .nd-need .nwb-pip{width:16px;height:16px}
 .nd-hanh .nd-need .nwb-pip.on{opacity:0}.nd-hanh .nd-f1{animation:ndF1 6s infinite}.nd-hanh .nd-f2{animation:ndF2 6s infinite}
-.nd-hanh .nd-need .nwb-pip:nth-child(3){margin-left:-23px}.nd-hanh .nd-need .nwb-pip:nth-child(4){margin-left:-23px}
+.nd-hanh .nd-need .nwb-pip:nth-child(3){margin-left:-46px}.nd-hanh .nd-need .nwb-pip:nth-child(4){margin-left:0}
 .nd-hanh .nd-hand.h1{right:7%;top:44%;animation:ndTap 6s infinite}.nd-hanh .nd-ok{animation:ndOk 6s infinite}
 @keyframes ndF1{0%,18%{opacity:0}22%,100%{opacity:1}}@keyframes ndF2{0%,42%{opacity:0}46%,100%{opacity:1}}
 @keyframes ndTap{0%,8%{opacity:0;transform:translateY(8px)}12%,70%{opacity:1;transform:translateY(0)}18%{transform:translateY(6px)}40%{transform:translateY(0)}44%{transform:translateY(6px)}50%{transform:translateY(0)}78%,100%{opacity:0}}
