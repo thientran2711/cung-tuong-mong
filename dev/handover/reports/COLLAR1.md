@@ -3,7 +3,7 @@ depth 4 · START_CTX ≈3 % · parent ROOT-69 (session_01PEhRbtpihbwZzz96xrzhyb)
 
 OWNER verbatim (ROOT-67 chat, Lượt 1128): "Nếu như vậy á, thì là cái bậc thường tại đáp ứng và cả quý nhân luôn. Cái cổ áo từ 36, 51 và 65 tuổi á, là phải là cái cổ xéo kín đáo. Tức là cái cổ này là mình sẽ quay về cái prompt cũ của đáp ứng và thiền tại và thường tại trước khi mà làm cái cổ vuông, sau đó copy cái cổ này qua cho bên quý nhân."
 
-## What changed (rule G19)
+## What changed (rule G21)
 - dev/art/t8-prompt-B/build.py: `CROSSED_AGES` + `TIER_LOW_CROSSED`; `outfit_low123` uses them when AGE ∈ a36/a51/a65 and t ∈ {1,2}. Words = the pre-G17 TIER_LOW robe words (`git show aef86d9^:dev/art/t8-prompt-B/build.py`), copied exactly (grep-verified).
 - dev/art/check_store.py: `G19_AGES`, `G19_T3_COLLAR`, `g15_t3_words(age)`; `g15_t3(text,main,sec,age)`; store_check's G15 gate reads `--age` and accepts the crossed-collar t3 at a36+.
 - dev/art/store-all/build_all.py `_t3_slot`: passes the store AGE to g15_t3.
@@ -19,4 +19,4 @@ OWNER verbatim (ROOT-67 chat, Lượt 1128): "Nếu như vậy á, thì là cái
 - FAIL — LEN only (prompt > 10 000 chars; no other FAIL line): s62 t1/t2/t3 a51 + a65 (10 033–10 868), m29 t1 a51 (10 086), m29 t3 a51 (10 482), m29 t3 a65 (10 304).
   PRE-EXISTING: before this change the same prompts were already longer (s62 t1 a51 10 694 → now 10 448; s62 t3 a51 10 881; s62 t1 a65 10 593; m29 t1 a51 10 332; m29 t3 a65 10 317). The collar change does not cause it. Not fixed here (A18: no word changes the owner did not ask for). OPEN QUESTION for ROOT-69: a51/a65 t1–t3 prompts need a length cut (owner/foreman decision) before any gen at those ages.
 
-Commit: see git log (COLLAR1).
+Rule id G21 (G19/G20 were taken upstream by SKINS + INNER LAYER while this ran; renumbered at merge).

@@ -214,6 +214,7 @@ def collar_cut(person):
     return ("COLLAR CUT (flowing): the collar's lower edge follows soft CURVES, never flat horizontal edges: "+CURVE_SHAPES[_pn(person)%len(CURVE_SHAPES)]+"; "
      "the front is NOT closed or buttoned from top to bottom: it opens gradually from the collar downward in a long soft V, flowing and graceful (uyển chuyển), never cramped or boxy.")
 HQP_LUX="HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), a layered pearl-and-gold necklace, pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress."
+INNER_EMB="INNER LAYER EMBROIDERED (t7/t8): the inner robe and skirt layer is ALSO embroidered with fine silk-thread embroidery stitched into the fabric, the motifs smaller, lighter and sparser than on the outer robe."
 def item_colour(person,rank,F):
     m=re.search(r" Pose: .*?(?:holding|holds|carrying|offering|raising|with) (an? [^,.]+?)(?: in | up | raised| held| forward| beside| at |,|\.)",F)
     main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
@@ -230,6 +231,7 @@ def extras(S0,person,rank):
         L.append(outfit_colours(person) if rank<=6 else outfit_colours3(person))   # B15 two-colour sentence verbatim: t1-t6 (Lượt 489/499) + t7 HQP / t8 HH (G14, owner Lượt 529: the secondary disappeared at t7/t8)
         L.append(item_colour(person,rank,S0))
         if rank==7: L.append(HQP_LUX)
+        if rank in (7,8): L.append(INNER_EMB)   # G20 owner 20/11 ~08:02Z: "Ghi vào, Hoàng Quý Phi và Hoàng hậu lớp áo trong cũng phải theo nha."
     if isinstance(rank,int) and rank<=6:
         L.append(phi_bach(person,"shawl" in S0))   # owner Lượt 397 via ROOT-47: phi bạch on EVERY thường phục rank t1-t6 (consorts and princesses), also where the store text has no shawl; never t7/t8/Nữ đế/triều phục
         if "capelet" in S0 and rank==4: L.append(capelet_cut(person))   # Lượt 434: the curved/open-V cut is ONLY for the Tần t4 capelet; t5 (and every other rank) keeps the approved store collar (closed high collar covering the neck)
@@ -460,7 +462,7 @@ def _t3_slot(person,rank,S):
     import importlib.util as _iu
     _sp=_iu.spec_from_file_location("check_store",os.path.join(ART,"check_store.py")); _cs_mod=_iu.module_from_spec(_sp); _sp.loader.exec_module(_cs_mod)
     main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
-    return _cs_mod.g15_t3(S,main,sec,LAST_G.get("AGE","a18"))   # G19: crossed collar at a36/a51/a65
+    return _cs_mod.g15_t3(S,main,sec,LAST_G.get("AGE","a18"))   # G21: crossed collar at a36/a51/a65
 class NotDrawn(Exception): pass
 def _kc_drawn(person):   # B8 (BW3): same table + rule as build.py kc_drawn (dev/art/KC_REFS.json m09_ok yes + real face words)
     import json as _j

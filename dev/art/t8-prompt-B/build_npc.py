@@ -30,6 +30,7 @@ def _load(name, path):
     finally: sys.argv = argv
     return m
 B = _load("ctm_build", os.path.join(HERE, "build.py"))
+_PETS = _load("ctm_pets", os.path.join(HERE, "pets.py"))   # F17 pets table (kids: pets.KIDS)
 E = _load("ctm_emperor", os.path.join(HERE, "..", "emperor-B", "build.py"))
 
 PRE, END = B.PRE, B.END                      # build.py PRE (frontal, 3d2) / END, byte-identical
@@ -234,6 +235,10 @@ def kid(sx, n, age):
     i = n - 1; jid = f"{sx}{n:02d}"
     cl = _kid_clause(sx, i, age)
     if jid in KOVR and KOVR[jid][0] == age and cl.endswith(KOVR[jid][1]): cl = cl[:-len(KOVR[jid][1])] + KOVR[jid][2]
+    pet = _PETS.kid_pet(jid, age)   # F17 kids (owner Lượt 1076 "công chúa trẻ con thì có ôm thú cưng"; FRUITPET2): the pet REPLACES the held-item clause, in contact only
+    if pet:
+        item = next(x for x in ({"p": [P4, P9, P14, P20], "f": [Q4, Q9, Q14, Q20]}[sx][KAGES.index(age)]) if cl.endswith(", " + x))
+        cl = cl[:-len(item)] + pet
     who = "imperial Chinese prince" if sx == "p" else "imperial Chinese princess"
     pal = (PP if sx == "p" else FP)[i]
     tail = (" Calm composed upright standing pose, still, no motion, robes hanging straight; dignified, serene. Full-length modest robes. NOT pink, NOT purple." if sx == "p"

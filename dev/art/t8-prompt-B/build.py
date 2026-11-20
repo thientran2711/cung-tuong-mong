@@ -687,16 +687,16 @@ TIER_LOW={   # G17 (owner 20/11, RANK8-A test s62 xSBeugTjfW 'kiểu một ok'):
 2:("rank-2 consort (Thường tại), a little more ornate than the lowest rank","a fine silk robe with an OPEN SQUARE NECKLINE (style 1 cut, Thường tại edge): the SAME low, simple, narrow straight-edged square opening as the lowest rank (NOT wide, NOT stretched toward the shoulders), showing her neck and collarbones, its edge a LAYERED border of two stacked narrow bands, a thin {sec} piping inside and a narrow band of small embroidered {motif} outside; never a round collar, never a V, NO crossed wrap collar; delicate embroidered {motif} at the sleeves and hem and a soft silk sash","silver and pearl hairpins and a fresh flower ({flower})","little gold"),
 3:("rank-3 consort (Quý nhân), richer than the ranks below","a fine silk robe with wide embroidered {motif} bands at the collar, sleeves and hem, long trailing wide sleeves, a silk waistband with hanging jade belt pendants and tassels, a sheer silk shawl","pearl-tipped hairpins, small silk flowers and a fresh flower ({flower})","a little gold thread only at the borders")}
 FAB_LOW="Light, soft, thin flowing silk: the long sleeves, skirt and sash are supple and airy, drifting softly as in a gentle breeze, with soft natural folds, never stiff, flat or board-like."
-# G19 (owner 20/11, ROOT-67 chat Lượt 1128, verbatim: 'Nếu như vậy á, thì là cái bậc thường tại đáp ứng và cả quý nhân luôn. Cái cổ áo từ 36, 51 và 65 tuổi á, là phải là cái cổ xéo kín đáo. ...'):
+# G21 (owner 20/11, ROOT-67 chat Lượt 1128, verbatim: 'Nếu như vậy á, thì là cái bậc thường tại đáp ứng và cả quý nhân luôn. Cái cổ áo từ 36, 51 và 65 tuổi á, là phải là cái cổ xéo kín đáo. ...'):
 # at a36/a51/a65 t1 Đáp ứng + t2 Thường tại = the OLD robe words from before G17 (git show aef86d9^:dev/art/t8-prompt-B/build.py, copied exactly) = modest crossed collar;
-# t3 Quý nhân at those ages = G15 option B with the same crossed collar (check_store.py G19_T3_COLLAR). a18/a26 unchanged (G17 square neckline).
+# t3 Quý nhân at those ages = G15 option B with the same crossed collar (check_store.py G21_T3_COLLAR). a18/a26 unchanged (G17 square neckline).
 CROSSED_AGES=("a36","a51","a65")
 TIER_LOW_CROSSED={
 1:"a Tang-style TWO-PIECE ruqun: a snug crossed-collar upper garment with long wide flowing sleeves and wide embroidered cuffs showing a sheer thin undersleeve, over a long softly pleated skirt tied high above the waist at the chest with a broad ribbon band whose two long ribbons fall down the front, the skirt in a lighter tone of the same colour with a wide embroidered {motif} hem band, small sprays of embroidered {motif} on the upper garment",
 2:"a fine silk robe with delicate embroidered {motif} at the collar, sleeves and hem and a soft silk sash"}
 def outfit_low123(c,t,pal,main):
     rk,robe,hair,gold=TIER_LOW[t]; mo,fl=MOTIF_LOW[c]
-    if AGE in CROSSED_AGES and t in TIER_LOW_CROSSED: robe=TIER_LOW_CROSSED[t]   # G19: crossed collar at a36/a51/a65
+    if AGE in CROSSED_AGES and t in TIER_LOW_CROSSED: robe=TIER_LOW_CROSSED[t]   # G21: crossed collar at a36/a51/a65
     return f"Outfit ({rk}): a NEW outfit, {robe.format(motif=mo,sec=pal.split(" and ")[-1])}; {hair.format(flower=fl)}; her signature colour family {pal} stays the MAIN robe colour ({main}, NOT green); the robe itself is clearly {main} silk, {gold}, NOT a cream, beige or all-gold robe"
 ITEMS_LOW={"c06":{1:("a plain silk round fan with a bamboo handle","two"),2:("an embroidered silk sachet with a tassel","one"),3:("an embroidered silk round fan with a silk tassel","two"),
  4:("a round fan with a carved jade handle and jade tassel","two"),5:("a round fan with a gold-inlaid handle and gem tassel","two"),6:("a white-jade ruyi","one")},
