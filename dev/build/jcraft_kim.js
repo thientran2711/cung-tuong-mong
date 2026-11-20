@@ -12,7 +12,7 @@ function crkShape(g,sh,x,y,a,z){/* a cutter / hole shape centred (x,y), symmetri
  if(sh==="moon"){g.arc(0,0,z,0,Math.PI*2);g.closePath();g.save();g.clip();g.beginPath();g.arc(0,0,z,0,Math.PI*2);g.arc(0,-z*.55,z*.82,0,Math.PI*2,true);g.fill("evenodd");g.restore();g.restore();return}
  if(sh==="half"){g.arc(0,z*.25,z,Math.PI,Math.PI*2);g.closePath()}
  else if(sh==="tri"){g.moveTo(0,z*1.05);g.lineTo(-z*.95,-z*.75);g.lineTo(z*.95,-z*.75);g.closePath()}
- else if(sh==="drop"){g.arc(0,z*.3,z*.72,Math.PI*.15,Math.PI*.85,true);g.lineTo(0,-z*1.15);g.closePath()}
+ else if(sh==="drop"){/* round end inward, tip outward: the arc between the two tangent points from the tip (0, −1.15z) */g.arc(0,z*.3,z*.72,-Math.PI*.166,-Math.PI*.834,false);g.lineTo(0,-z*1.15);g.closePath()}
  else if(sh==="dia"){g.moveTo(0,-z*1.1);g.lineTo(z*.62,0);g.lineTo(0,z*1.1);g.lineTo(-z*.62,0);g.closePath()}
  g.fill();g.restore()}
 function crkPaper(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.15:.8,470),{g,W,H}=C;const K="kim",L=n=>crLev(env,K,n);
