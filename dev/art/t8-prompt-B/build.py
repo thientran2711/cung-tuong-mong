@@ -1971,6 +1971,36 @@ for _c in list(DATA):
         _fw=KC_PEOPLE[_c]["face_words"]; assert _fw.endswith("."),_c
         DATA[_c]=(DATA[_c][0],_fw[len("Her face: "):-1])
 KC_ID=re.compile(r"(?:c|m|p|s)\d\d|nc\d|bd\d")
+# FLOWER EMBROIDERY = HER HAIR FLOWER (owner Lượt 1303, B26FAB JOB 2): t1 Đáp ứng … t6 Quý phi (thường phục) – every FLOWER species word in the Outfit sentence's embroidery
+# becomes her OWN hair-flower species (MOTIF_LOW[c][1], the flower she wears at t1–t3). Birds, butterflies, clouds, leaves, fruit and other non-flower motifs stay; generic
+# 'flower' words (gold flower studs, gold flowers in the headdress) stay; the hair flower itself is not touched. t7/t8 untouched. People whose hair flower names no species
+# ('a pink silk flower') keep their embroidery (HAIRFL_NONE). Words only; nothing is added or cut except a doubled 'X and X' after the swap -> 'X'.
+HAIRFL={"an orchid":("orchid","orchids","lan"),"a white jasmine sprig":("jasmine","jasmine blossoms","nhài"),"a plum blossom":("plum blossom","plum blossoms","mai"),
+ "a white plum blossom":("plum blossom","plum blossoms","mai"),"a peach blossom":("peach blossom","peach blossoms","đào"),"a camellia":("camellia","camellias","trà"),
+ "a red camellia":("camellia","camellias","trà"),"a pink peony":("peony","peonies","mẫu đơn"),"a lotus":("lotus","lotus flowers","sen"),
+ "a pale magnolia":("magnolia","magnolias","mộc lan"),"a begonia":("begonia","begonias","hải đường"),"a red rose":("rose","roses","hồng"),
+ "a purple wisteria sprig":("wisteria","wisteria","tử đằng")}
+HAIRFL_NONE=("a pink silk flower",)
+# flower species words as they occur in the t1–t6 outfits (plural forms first, then the adjective/singular form used in 'peony medallions', 'lotus scrolls' …)
+FLOWER_PL=["snowflake plum blossoms","pomegranate flowers","lilies of the valley","lotus flowers","plum blossoms","peach blossoms","pear blossoms","jasmine blossoms",
+ "chrysanthemums","peonies","orchids","camellias","magnolias","begonias","roses","osmanthus","wisteria"]
+FLOWER_SG=["plum blossom","peach blossom","pear blossom","chrysanthemum","peony","orchid","camellia","magnolia","begonia","lotus"]   # 'rose' never as a source: it is a colour word (rose pink, dusty rose)
+_FL_RX=re.compile(r"(?<![-\w])("+"|".join(re.escape(w) for w in FLOWER_PL+FLOWER_SG)+r")\b(?! leaves| purple| pink| lilac| red|-)")   # colour names (orchid purple, lotus pink, wisteria lilac) and leaves stay
+def hairflower_species(c):
+    return HAIRFL.get(MOTIF_LOW.get(c,(None,None))[1])
+def flower_outfit(o,c):
+    sp=hairflower_species(c)
+    if not sp or "Outfit (" not in o: return o
+    i=o.index("Outfit ("); j=o.find(". ",i); j=len(o) if j<0 else j
+    seg=o[i:j]
+    def rep(m):
+        w=m.group(1)
+        return sp[1] if w in FLOWER_PL else sp[0]
+    new=_FL_RX.sub(rep,seg)
+    for f in (sp[1],):   # 'plum blossoms and plum blossoms' -> 'plum blossoms'
+        new=new.replace(f+" and "+f,f).replace(f+", "+f+",",f+",")
+    return o[:i]+new+o[j:]
+
 # B26 FABRIC ĐOẠN MỜ (owner Lượt 1283 + CORRECTION 1284; words = owner-approved m11 test dev/art/seasons4/m11_t4_VAI_DOAN.txt, Lượt 1275): t4 Tần / t5 Phi robe = satin (đoạn).
 # ONLY the robe's fabric word changes (as in the m11 file: 'a layered satin (đoạn) robe', 'the robe itself is clearly <main> satin'); every detail (capelet, capes,
 # embroidery, cuffs, girdle, pendants, shawl, headdress) is kept word for word; brocade cuffs / gold brocade girdle trims stay (details). Master M06 -> DOAN in master_common.
@@ -2091,6 +2121,7 @@ if __name__=="__main__":
             assert _o.count(" Pose:")==1,"B12 pose anchor"; _o=_o.replace(" Pose:"," "+_MC.BROCADE+" Pose:",1)
         _DOAN=(not _HIGH) and not STATE and TRIEUN is None and not BDQ and "--low" in sys.argv and LOWN in (4,5)   # B26 (owner Lượt 1283/1284): t4 Tần + t5 Phi = matte satin đoạn
         if _DOAN: _o=doan_outfit(_o)
+        if (not _HIGH or LOWN==6) and not STATE and TRIEUN is None and not BDQ and "--low" in sys.argv and LOWN in (1,2,3,4,5,6): _o=flower_outfit(_o,a[0])   # owner Lượt 1303: embroidery flower = her hair flower, t1–t6
         _o=_MC.apply(_o,high=_HIGH,doan=_DOAN)
     print(_o,end="")
     _lg=[x for x in _RAW if x not in ("--log","--refs")]
