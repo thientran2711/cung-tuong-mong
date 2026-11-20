@@ -1,0 +1,8 @@
+base: dev/art/seasons4/s62_t8_HAN_BAC_open9.txt
+# owner L1548: HH khúc cư wraps round like bánh tét, must look like HQP: copy HQP open6 ANGLE (45° three-quarter) + walking pose (item kept: casket); outfit words already identical
+allow: ANGLE: a SLIGHT turn toward the LEFT side of the picture (about 15 degrees)
+allow: body almost frontal, face toward the viewer
+allow: Pose: weight on one leg, a gold lidded jewel casket with a phoenix and pearls raised and admired, the other hand beneath it, with stately grace, the robe falling still and straight
+allow: her chest and face point a little toward the left edge of the picture
+allow: the shoulder on the picture's right side slightly nearer the viewer
+allow: peonies  # DESIGN14 L1536: one flower per person = her own (incurved chrysanthemums)
