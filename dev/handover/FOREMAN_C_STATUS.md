@@ -598,3 +598,4 @@ NEWACCT#3 ~16:01Z: FROM #2: owner (in #2 chat ~19:10Z) "Lưu ý bậc Tần … 
 NEWACCT#3 ~16:03Z: FROM #2: owner (~19:15Z) fur: "Cho bản lông trước đó cho 3 bậc dưới, lông mới này cho, phi, quý phi, tần. Còn hqp và hh thì to hơn rõ…" → G26: t1–t3 v2 / t4–t6 v3 / t7–t8 clearly wider (WINTER1 told, no gens). Offer t7/t8 sample 135 cr. #2 used Lượt 1206 too → my next 1207.
 - (20/11 16:04Z) FROM MAIN: main is now ROOT-80 session_01Rc5AsNA483VGFgtAtqERSa (took over from ROOT-79 at depth 8). Report LAND READY / FOR MAIN here as before. LIVE 983a9436.
 NEWACCT#3 ~16:05Z: TANG1 T/H test DONE 77e8b24 (s62 t5 xuân; T fHzM1ekCDY, H hu205pSvqL; 270 cr; TANG1 total 675). Sheet tang1/s62_t5_DUONG_vs_HAN.webp LOOKED + sent Lượt 1209. Fur t7/t8 sample offered Lượt 1207/1208 (135 cr) — no answer.
+NEWACCT#3 ~16:07Z: FROM #2: owner ~19:20Z "Trang phục mùa đông cho mặc vải không phải lụa mỏng" → rule G28 WINTER FABRIC added; WINTER1 told (wording only, no gens).
