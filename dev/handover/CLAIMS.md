@@ -528,7 +528,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin G #8 (opus; successor of G #7 4hKBjqGr @67c18fc0; handover reports/coop-thin-g.md #7→#8) | review/coop-thin-g | B | session_01N1tNP2GuhdQbevDCFFiv1Q | RUNNING | 20/11 20:32Z |
 | coop-guest-agent (opus; agOn() false on co-op guest → guest's own servants skip agent month; found by G #7) | review/coop-guest-agent; briefs/b-coop-guest-agent.md | B | session_01N1tNP6ULPfAUKCrZASGHHM | SẴN SÀNG KIỂM 60ff8f11 r2 (reports/coop-guest-agent.md) | 20/11 23:10Z |
 | REVIEW mg11-thutay r1 (opus BIG) of ef94ad20 | review/mg11-thutay-r1 | B | session_01N1tNP4zyqBbxbsY5JQ3jjJ | PASS 07c91580 (fixed law-2 scheme odds recentring + typed seconds; Thử tay list overlap = kit FOR MAIN) | 20/11 20:58Z |
-| FOREMAN E #23 (opus; child of E #22, depth 4) | handover FOREMAN_E_STATUS | FOREMAN E #22 | session_01DgYSWm5qy3Y59fKkn6eSf7 | RUNNING | 20/11 21:28Z |
+| FOREMAN E #23 (opus; child of E #22, depth 4) | handover FOREMAN_E_STATUS | FOREMAN E #22 | session_01DgYSWm5qy3Y59fKkn6eSf7 | DONE → E #24 session_01DgYSWkpuYY1nYuAMVGQJVm | 20/11 21:28Z |
 | GAP OR20 or20-j68q E31 (opus; j68 life in lãnh cung / servant / Hoàng hậu duty; briefs/E31-or20-j68q.md) | review/or20-j68q | FOREMAN E #23 | session_01DgYSWnmREuzk7Lkargpxp7 | RUNNING | 20/11 21:45Z |
 | errand-bal E32 (opus; law 4 one BAL key errand odds + jkc hand-typed numbers; briefs/E32-errand-bal.md) | review/errand-bal | FOREMAN E #23 | session_01DgYSWorKhgaqhMCCFzyuKs | SSK be6302f6 (quickcheck PASS, role-parity ×2 identical, coop-e2e 68/68, coop-errand 16/16; reports/errand-bal.md) | 20/11 22:45Z |
 | cold-faction E33 (opus; faction acts while she is in lãnh cung; briefs/E33-cold-faction.md) | review/cold-faction | FOREMAN E #23 | session_01DgYSWntLTqn83CRYF8pg1G | RUNNING | 20/11 21:45Z |
@@ -541,7 +541,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-guest-agent (opus; agOn() false on co-op guest → guest's own servants skip agent month; found by G #7) | review/coop-guest-agent; briefs/b-coop-guest-agent.md | B | session_01N1tNP6ULPfAUKCrZASGHHM | RUNNING | 20/11 20:32Z |
 | coop-guest-agent (opus; agOn() false on co-op guest → guest's own servants skip agent month; found by G #7) | review/coop-guest-agent; briefs/b-coop-guest-agent.md | B | session_01N1tNP6ULPfAUKCrZASGHHM | SẴN SÀNG KIỂM b7648b65 (reports/coop-guest-agent.md) | 20/11 22:10Z |
 | REVIEW mg11-thutay r1 (opus BIG) of ef94ad20 | review/mg11-thutay-r1 | B | session_01N1tNP4zyqBbxbsY5JQ3jjJ | PASS 07c91580 (fixed law-2 scheme odds recentring + typed seconds; Thử tay list overlap = kit FOR MAIN) | 20/11 20:58Z |
-| FOREMAN E #23 (opus; child of E #22, depth 4) | handover FOREMAN_E_STATUS | FOREMAN E #22 | session_01DgYSWm5qy3Y59fKkn6eSf7 | RUNNING | 20/11 21:28Z |
+| FOREMAN E #23 (opus; child of E #22, depth 4) | handover FOREMAN_E_STATUS | FOREMAN E #22 | session_01DgYSWm5qy3Y59fKkn6eSf7 | DONE → E #24 session_01DgYSWkpuYY1nYuAMVGQJVm | 20/11 21:28Z |
 | KIT dress-picker (owner UI ~21:45Z; figure live-preview left, every dress picker) | review/kit-dress-picker | keeper MtjP4KTg (ordered by MAIN ROOT-81) | session_01Rc5AsMtjP4KTgBZVjENGLs | RUNNING | 20/11 22:12Z |
 | REVIEW jtq14-addr r1 E34r (sonnet) of 685b71fb | review/jtq14-addr-r1; reports/jtq14-addr-review.md | FOREMAN E #23 | session_01DgYSWnxMa5aqrzNNQQsPe9 | PASS 685b71fb (LAND READY) | 20/11 22:06Z |
 | kc-coop-select E36 (opus; LIVE co-op bug coop-together «B went through the selection card» S.selx null; ORDER MAIN ROOT-81 22:10Z; briefs/E36-kc-coop-select.md) | review/kc-coop-select | FOREMAN E #23 | session_01DgYSWoSJpeRXR9xq73dhRZ | RUNNING | 20/11 22:10Z |
@@ -553,4 +553,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN ROOT-82 (opus; child of ROOT-81, depth 2) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsJos72R3tL6fXZRSLv | RUNNING | 20/11 22:58Z |
 | REVIEW errand-bal r1 E32r (opus BIG) of be6302f6 | review/errand-bal-r1; reports/errand-bal-review.md | FOREMAN E #23 | session_01DgYSWnWdzcdCQFZxCythQm | RUNNING | 20/11 22:43Z |
 | E RE-GATE LANDER E37 (opus; re-merge PASS branches onto newest LIVE + coop-e2e → LAND READY; jtq14-addr then ge-rank; ORDER MAIN 22:40Z) | review/<topic>-land | FOREMAN E #23 | session_01DgYSWnqPc9TWWFNWckZKvC | RUNNING | 20/11 22:48Z |
-| FOREMAN E #24 (opus; child of E #23, depth 5) | handover FOREMAN_E_STATUS | FOREMAN E #23 | session_PENDING_E24 | RUNNING | 20/11 22:50Z |
+| FOREMAN E #24 (opus; child of E #23, depth 5) | handover FOREMAN_E_STATUS | FOREMAN E #23 | session_01DgYSWkpuYY1nYuAMVGQJVm | RUNNING | 20/11 22:50Z |
