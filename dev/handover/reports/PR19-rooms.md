@@ -11,3 +11,9 @@ STATUS 20/11 ~02:55Z: depth 8 (limit 8), START_CTX ~3 % (get_session used_tokens
 - LOOK: wood floor back, light cleaner/whiter than room 28, layout as written. Faults (note only, no redraw): floor still glossy with reflections (L10), dense gold carving, armchair pair fairly big at left (as PR18's).
 - Sheets (0 cr, CDN img/_review/place-rank/pr19/): room30-ai-vs-go-trang-vs-28-lbl.jpg (AI rejected | NEW wood+white | room 28 OLD); room30-go-trang-dam-cu-lbl.jpg (ĐẬM s07 s28 | CŨ s47 s56, cut-outs gOmpzsdSXO kseYX7y16B 1ldcY3kr4r rgX0qMZxtc, sheet_row.py).
 - Context ~6 %. Idle after this: no more gens until the owner's verdict.
+
+## Room 30 APPROVED (owner "Ok, chọn đậm", Lượt 971 via ROOT-64) — 0 cr
+- DoOgSWcpcl now at img/_review/place-rank/pr13/truong-xuan-cung-tay-phoi-ha-sang.webp (CDN etag 7d28ae05…, = pr19 raw); rejected AI 8aiywnbIrU kept at pr18/truong-xuan-cung-tay-phoi-ai-rejected-ha-sang.webp. Robes = ĐẬM (L27).
+- Live img/<key>-ha-sang.webp NOT swapped: rooms 24–29 are not live either (live room 28 md5 ≠ pr13 copy) — going live is MAIN's wiring step.
+- Recipe for next rooms = prompts_pr19_room30.py (rooms 25–29 recipe + L25 white-light sentence, wood floor), NOT PR18's L25 stone builder.
+- Queue estimate (PR17 NEXT line): chính điện rooms Tần/Phi/Quý phi of the 7 palaces (~14: reception + bedroom each) + Từ Ninh (~2) + ~35 live place scenes ≈ 51 gens. 135 cr/gen → batch of 5 = 675 cr; rooms only (~16) ≈ 2 160 cr; all ≈ 6 900 cr. Balance 88 855.
