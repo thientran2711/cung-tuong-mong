@@ -589,3 +589,4 @@ NEWACCT#2 ~18:50Z: WINTER1 fur v2 DONE 06a82bb (VX7Nn0OMMU, square neck — fire
 NEWACCT#2 ~18:55Z: OWNER: Tang+current hybrid (TANG1 Job A) DROPPED, don't resend; inspiration: Tang-era drama open necks + Three Kingdoms open necks → TANG1 reworking plan (full Tang w/ chest-band ladder + Han/Three Kingdoms option), no gens.
 NEWACCT#2 ~19:00Z: OWNER: fur width ladder t1–t3 = v2, t4–t6 wider, t7–t8 widest; sample 1 Tần → WINTER1 (135 cr, pre-G22 collar). TANG1 plan v3 (T full Tang / H Han) sent Lượt 1201, waiting pick.
 NEWACCT#2 ~19:05Z: WINTER1 v3 DONE 547e716 (hu20QqTvqL; G26 3-step width ladder; pre-G22 crossed collar) LOOKED + sent Lượt 1203. WINTER1 total 1 350 cr. ITEMFIX Tần revert not reported yet.
+NEWACCT#2 HANDOVER ~19:08Z: depth 1, ctx 29 % (START 5 % + 25 %). TAKEOVER_FOREMAN_C_NEWACCT3.md written; opening child #3.
