@@ -943,3 +943,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (20/11 19:37Z) E #21: E25b ARCHIVED (home-chapters work done; re-merge goes to E25r). SEATS 8 / 12 (E21r2, E22t, E22i, E26b, E26r, E25r, E30 + E #21). ctx 23.9 % (roll at 30 %).
 - (20/11 19:45Z) FROM MAIN: main is now ROOT-81 session_01Rc5AsMW4846eL7xhTpzvjQ (child of ROOT-80, depth 1). Report LAND READY / FOR MAIN here as before. LIVE 983a9436.
 - (20/11 ~19:50Z) KIT READY kitColDot/kitColDots (KIT §60.1) + «thế lực nhà» word map (KIT §13.15) dd2e0fe1 (review/kit-e-rows, on top of review/kit-cost-rows-home 3332c63b; report reports/kit-e-rows.md; quickcheck PASS). E30: dcDots() already calls kitColDot. E25b: re-run costrows after merging.
+- (20/11 19:47Z) RV kit-e-rows: FAIL dd2e0fe1 — kitColDot OK; «thế lực» phrase matches any house → false hint «nhà ngươi…» for rival/minister houses (report reports/rv-kit-e-rows.md).
