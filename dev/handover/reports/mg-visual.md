@@ -1,4 +1,4 @@
-# mg-visual — SẴN SÀNG KIỂM (branch review/mg-visual 9bf30e23)
+# mg-visual — SẴN SÀNG KIỂM (branch review/mg-visual d9800e60, main d74f86a5 merged)
 PRIORITY #1 CHECK: OD:L1264 + OD 20/11 ~05:10Z | main none (no BAL.mgFx) | review/* none | claims none.
 Scope (MAIN ROOT-73/74): A lit cue + press pop on every engine from BAL.mgFx; B Nấu ăn pictures. Word removal in other kinds = mg-noword-a/b (untouched).
 
@@ -23,3 +23,14 @@ Not changed (other engines: hold/fling/trace/arrange/untangle/blend and tdwalk e
 ## Tests
 dev/test/mg-visual.js ALL OK (BAL values, pop curve, no private scale, Múa ring, banh 0 words; other kinds informational — word table in the earlier scan). mg-ready-guide PASS 9/9. quickcheck PASS (165 s; first run FAIL on buổi 2747 vs live 876 = perf noise, rerun 1054/908 PASS). Site rebuilt and committed (index.html/sw.js).
 Shots (scratch, looked): Múa lit cushion Fold 755x1000 = clear gold glow + ring; Nấu ăn iPad 1180x820 = recipe pictures. Other 8 shots in /home/user/wt/shots (not in git, not uploaded to CDN).
+
+## Added by ROOT-74: touch highlight (td_dung "yellow boxes")
+Cause: NOT the browser tap highlight (html,body,* already transparent in jclose) — td_dung drew its OWN half-screen yellow rect (rgba 255,224,138,.22 over half the board x 70 % height) while a half was held. Same class: rhythm column flash (tall yellow column per tap, mine from the first pass).
+| kind | highlight before -> after |
+|---|---|
+| td_dung | half-screen yellow box while held -> kit ring + glow + pop on the bowl only (BAL.mgFx) |
+| dan, hat (rhythm) | tall 55 % yellow column flash -> bridge pop + glow + ring only |
+| all others | no screen-covering touch rect found (scan of fillRect on touch in all engines; static trays are not touch feedback) |
+Also added `-webkit-tap-highlight-color:transparent; user-select:none` for #kg82 canvas/buttons (j82 CSS).
+Left as is: td_dung full-board cream flash when the bowl spills (stag) — a state flash, not a touch; say if the owner means that too.
+Tests after: mg-visual ALL OK (new checks for td_dung + rhythm), mg-ready-guide 9/9, quickcheck PASS (166 s). Shots looked: td_dung Fold 755x1000 + iPad 1180x820 while holding the left half = ring + glow on bowl, no yellow box (scratch /home/user/wt/shots/dung-*.png).
