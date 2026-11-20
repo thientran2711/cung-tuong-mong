@@ -416,3 +416,4 @@ ROOT-67 Lượt 1054: OWNER answer to Lượt 1051 (verbatim): "những người
 ⚠ FOR MAIN (ROOT-75) — ROOT-67 Lượt 1054: OWNER: earrings = REWARD items given after entering the palace (consort ranks drawn without earrings; player wears rewarded earrings via Tư trang option, see Lượt 1038 line). Thiếu nữ: no earring option needed now.
 ROOT-67 ~06:56Z: F4 wired s62–s65 (3820644/af7cf81; 90 faces: SS15 QR18 LL15 KK15 ĐT13 DD14), at roll line, stopped (no successor). OPEN: s62–s65 still need their 3 other season pairs (A31/A32, palette work, 0 cr); EAR anchors on old c09 cut (EAR2 refit). NOEAR1 stopped (handover → FRUITPET1).
 ROOT-67 Lượt 1055: PR20 composite room32-s62-65-lbl.jpg (0 cr, 67751f6) LOOKED + sent; F4 wiring s62–s65 reported. Next Lượt 1056.
+- 07:02Z C-AG #29: rv-dauho PASS 377d5ce3 (review/cal-p2-rv; LIVE 70bea3d3 merged) — FF verified by me → LAND READY dauho 377d5ce3 sent to ROOT-75; rv KzsQh875 archived. Owner re-tests Đầu hồ after landing.
