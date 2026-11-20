@@ -28,6 +28,11 @@ const lvl3=()=>{try{return typeof thinW==="function"&&thinW()}catch(e){return fa
 const live=()=>!!(CW.on&&CW.seat&&S&&!lvl3());
 const pidOf=seat=>seat==="a"?901:902;
 const NOADD=new Set(["mood","rank","buoi","tuan","month","year","turn","age","era","face","hue","fid","fc","fk","id","sid","rid","week","life","step","done","pal","used","lastPromo","vacSince","pregWk","preg","srk","pid","v","seatBan","until","at","wx"]);
+/* world housing (jpal palFix: who heads which house, who lives in whose side hall) is DERIVED from the world; at level < 3 the HOST alone
+   authors it: the guest's own palFix (deser / render / month) leaves every world person's housing as it was (her own S housing is hers), her
+   week end carries the room base's housing (so m3 never adds two seats' resHead ids: R#11.resHead A=2 B=3 → 4 = a third consort), and the
+   host sends its housing writes at once (numbers included: the guest never moves them, nothing is counted twice) */
+const HOUSE=["resHead","resHall","pal","palLone","palWait"],HSET=new Set(HOUSE);
 const VIEW=new Set(["rel","oan","ghen","ev","rl","ro","gp","ep","evm"]);/* viewer rows: per player, never a world fact */
 const plain=o=>!!o&&typeof o==="object"&&!Array.isArray(o);
 const isNum=x=>typeof x==="number"&&isFinite(x);
@@ -49,7 +54,7 @@ function eq(a,b){return a===b||JSON.stringify(a)===JSON.stringify(b)}
 function diff(b,n){const ops=[];let skip=0;
  const walk=(bv,nv,path,key)=>{if(eq(bv,nv))return;if(typeof key==="string"&&key.slice(0,2)==="__")return;
   if(nv===undefined){ops.push(["d",path]);return}
-  if(isNum(bv)&&isNum(nv)&&!NOADD.has(key)){skip++;return}
+  if(isNum(bv)&&isNum(nv)&&!NOADD.has(key)&&!HSET.has(key)){skip++;return}
   if(plain(bv)&&plain(nv)){for(const k of new Set(Object.keys(bv).concat(Object.keys(nv))))walk(bv[k],nv[k],path.concat([k]),k);return}
   if(idArr(bv)&&idArr(nv)){const bm=new Map(bv.map(e=>[idOf(e),e])),nm=new Map(nv.map(e=>[idOf(e),e]));
    for(const [i,e] of nm){const st=[i[0],i[0]==="i"?e.id:e.sid];if(bm.has(i))walk(bm.get(i),e,path.concat([st]),key);else ops.push(["a",path,e])}
@@ -100,6 +105,12 @@ if(typeof figPick==="function"){const p0=figPick;figPick=function(who){try{if(CW
    const U=figUsed(),n=U.length,f0=who.fid;const k=seeded(hash((who.id!=null?who.id:"")+"|"+(who.sid!=null?who.sid:"")+"|"+(who.name||"")),()=>p0.call(this,who));
    who.fid=f0;U.length=n;HL.stat.gPick=(HL.stat.gPick||0)+1;return k}}catch(e){console.error("hl gpick",e)}
   const a=who&&who.fid;const r=p0.apply(this,arguments);try{if(CW.on&&host()&&who&&who.fid&&who.fid!==a)soon("pick")}catch(e){}return r};window.figPick=figPick}
+/* the same rule for a world person's trust (jtin tinOf: a lazy first value stored on READ, from loyal at that moment): a guest's read (her
+   visit shows a man / a consort's servant) stored a value the host never had (S.men is host-only: never merged) and froze it at her
+   moment's loyal; on her seat the first value is shown, not stored; the host stores it and sends it (a value whose base is unset) */
+if(typeof tinOf==="function"){const t0=tinOf;tinOf=function(s){try{if(CW.on&&!host()&&!lvl3()&&s&&typeof s==="object"&&s.tin==null&&!s.coop&&!mine(s)){
+   const v=t0.call(this,s);delete s.tin;HL.stat.gTin=(HL.stat.gTin||0)+1;return v}}catch(e){}
+  const a=s&&s.tin;const r=t0.apply(this,arguments);try{if(CW.on&&host()&&s&&a==null&&s.tin!=null)soon("tin")}catch(e){}return r};window.tinOf=tinOf}
 /* host week end: every world person without a face gets one before the end goes out (so the merged C carries it) */
 function worldPeople(){const L=[];try{if(S.thO&&!S.thDead)L.push(S.thO);for(const v of rivals||[]){if(!v||v.coop)continue;L.push(v);if(v.maid)L.push(v.maid);
   for(const s of v.staff||[])if(s&&!s.coop)L.push(s);for(const k of v.kids||[])if(k)L.push(k)}
@@ -109,6 +120,21 @@ function figFill(){if(!CW.on||!host()||!S||S.dead||typeof figPick!=="function")r
  HL.stat.fill=(HL.stat.fill||0)+n;return n}
 HL.figFill=figFill;
 if(typeof endTurn==="function"){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(CW.on&&host()&&!CW.ctx)figFill()}catch(e){console.error("hl fill",e)}return r}}
+
+/* ---------- GUEST: world housing is the host's ---------- */
+function npcList(){return (rivals||[]).filter(v=>plain(v)&&!v.coop)}
+if(typeof palFix==="function"){const pf0=palFix;const hsig=()=>JSON.stringify(npcList().map(v=>HOUSE.map(f=>v[f])));
+ palFix=function(){if(!live())return pf0.apply(this,arguments);
+  if(host()){const a=hsig();const r=pf0.apply(this,arguments);try{if(hsig()!==a)soon("house")}catch(e){}return r}/* a host move mid-week reaches her at once */
+  const snap=new Map(npcList().map(v=>[v,HOUSE.map(f=>[f in v,v[f]])]));const l0=typeof log==="function"?log:null;
+  /* a move of a world person is not hers to make (and not logged on her seat): the host's move reaches her as an op; her own lines stay */
+  if(l0)log=function(t){if(typeof t==="string"&&!/^Ngươi/.test(t)){HL.stat.hLog=(HL.stat.hLog||0)+1;return}return l0.apply(this,arguments)};
+  let r;try{r=pf0.apply(this,arguments)}finally{if(l0)log=l0;let n=0;for(const [v,a] of snap)HOUSE.forEach((f,i)=>{if(a[i][0]){if(v[f]!==a[i][1]){v[f]=a[i][1];n++}}else if(f in v){delete v[f];n++}});if(n)HL.stat.hKeep=(HL.stat.hKeep||0)+n}
+  return r};window.palFix=palFix}
+/* her week end: every world person's housing = the room base's (whatever else wrote it on her seat) */
+{const cw0=CW.cW;CW.cW=function(out){out=cw0?cw0(out):out;try{if(live()&&!host()&&out&&out.W&&Array.isArray(out.W.R)&&CW.base&&CW.base.W){
+  const bm=new Map((CW.base.W.R||[]).filter(plain).map(r=>[String(r.id),r]));for(const r of out.W.R){const b=bm.get(String(r.id));if(!b||!plain(r))continue;
+   for(const f of HOUSE){if(f in b)r[f]=J(b[f]);else delete r[f]}}}}catch(e){console.error("hl house",e)}return out}}
 
 /* ---------- GUEST: apply the host's writes in place ---------- */
 function fixRefs(o){if(!o||typeof o!=="object")return o;if(o.$r!=null&&Object.keys(o).length===1)return (rivals||[]).find(v=>v.id===o.$r)||null;
