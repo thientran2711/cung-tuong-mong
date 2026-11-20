@@ -99,3 +99,7 @@ NEXT for the successor (only on ROOT-60's word):
 Scan tool for broken clips: scratchpad scan2.py is not in the repo — the method: per frame count opaque pixels NOT of the disc colour
 (mode colour ±70); ratio min/min(first,last) < ~0.75 → look. (Copy into discs/ if needed again.)
 Credits: balance 93 226 at 01:10Z (shared). Stop under 60 000.
+ADD 01:12Z: foreman is now ROOT-61 (session_01PEhRbxPG7XXXVSg4KgDLkW). New owner rule ('LABEL ON THE PICTURE'): every preview/sheet sent
+to the owner must carry the group/rank name written big ON the image — my previews/sheets (male-ghen-preview, seal-fix-preview, set
+previews, disc-audit-sheet) do NOT have it yet → successor adds labels (0 cr) before they go to the owner.
+Checked: CDN mm-muu-back.webp = 33 frames = the NEW clip s7IpB3ml8e (clean); old was 42. No LOOP back-turn redo without owner yes (ROOT-60).
