@@ -33,37 +33,38 @@ PH = ("{ROOT_MAIN}", "{ROOT_MAIN_HEX}", "{ROOT_SEC}", "{ROOT_SEC_HEX}")
 #  items used (DD): folding fan · round fan · pink lotus · pear blossom · painting scroll · bird cage · peach blossom · pouch ·
 #    morning glory · white lotus bud · China rose.  (DT): plum sprig ×2 · silk ball · book scroll · rabbit lantern · hand mirror ·
 #    pinwheel · xiao flute · painting scroll · poetry album · brush case · folding fan.
-#  NEW here: short oval / feathered brows · soft high cheekbones + wide-set eyes · round-almond double-lid eyes + straight brows ·
-#    egg-shaped classic face + long double-lid eyes + clear lip bow; side braid · low looped nape bun · high crown bun with pearls ·
-#    double-loop chignon; embroidery hoop · white rabbit · porcelain vase · sandalwood prayer beads; angles SR TL FF SL.
+#  NEW here: wide forehead + feathered brows · soft high cheekbones + wide-set eyes · round-almond double-lid eyes + straight brows ·
+#    softly broad cheekbones + long double-lid eyes + clear lip bow; side braid · half-up low loop · half-up pearl top-knot ·
+#    half-up neat loop (ROOT-66 F1: thiếu nữ = loose or half-up); brass wind chime · brown rabbit · golden loquats · sandalwood beads
+#    (items used by no one, item colours outside both root families, B16); angles SR TL FF SL. ROOT-66 review fixes 1–7 applied.
 S_NEW = [
 ("s62", "Dịu dàng", 17,
- [("a SOFT gentle oval face", "a SOFT gentle, slightly SHORT oval face with a smooth wide forehead"),
+ [("a SOFT gentle oval face with smooth rounded cheeks", "a SOFT gentle oval face, a smooth wide forehead, smooth rounded cheeks"),
   ("thin long softly curved brows", "softly feathered, gently curved brows")],
- "one long soft loose braid falling over the front of her right shoulder, tied at the end with a small pearl clasp, a few small white jasmine flowers tucked along the braid, soft short wisps at the temples",
+ "one long soft loose braid falling over the front of her right shoulder, tied at the end with a small pearl clasp, one small white jasmine flower clasp at the top of the braid, soft short wisps at the temples",
  "a cross-collar ruqun of {m} silk with a soft sheen and a {s} floor-length pleated skirt of plain silk, small embroidered plum blossoms at the collar and hem, a {s} silk sash with a small white jade pendant, long sleeves",
- "standing with her weight on one leg and her head inclined slightly to one side, a small round embroidery hoop with a half-stitched white orchid held in both hands at her waist", "SR"),
+ "standing with her weight on one leg, a small wind chime of little brass bells on a red silk cord held up by its cord in one hand at chest height, the other hand resting at her sash", "SR"),
 ("s63", "Dịu dàng", 18,
  [("smooth rounded cheeks", "softly rounded, gently high cheekbones"),
   ("large TENDER almond eyes", "large, slightly wide-set TENDER almond eyes"),
   ("a small soft mouth with gently rounded lips", "a small soft mouth with a softly full lower lip")],
- "low and soft: all the hair gathered loosely at the nape into one soft low looped bun held by one plain jade hairpin pointing upward, a few soft loose strands framing the face",
+ "half-up: the top hair in a small soft low loop at the back held by one plain jade hairpin, the rest long and loose",
  "a short half-sleeved {m} silk jacket with a soft sheen over a cross-collar {s} inner top and a {m} floor-length skirt of plain silk, small embroidered osmanthus sprigs along the jacket edges and hem, a {s} silk sash with a small amber pendant, long inner sleeves",
- "standing with her weight on one leg, cradling a small white rabbit in the crook of one arm at her chest, the other hand gently stroking its back", "TL"),
+ "standing with her weight on one leg, cradling a small chocolate-brown rabbit in the crook of one arm at her chest, the other hand gently stroking its back", "TL"),
 ("s64", "Dịu dàng", 17,
- [("large TENDER almond eyes", "large TENDER round-almond eyes with soft double eyelids"),
+ [("large TENDER almond eyes with gently LOWERED", "large TENDER round-almond eyes, soft double eyelids, gently LOWERED"),
   ("thin long softly curved brows that slope gently DOWN at the tails", "soft, slightly fuller straight brows that slope gently DOWN at the tails"),
   ("a small delicate nose", "a small nose with a softly rounded tip")],
- "fully up: one soft high rounded bun at the crown wrapped by a thin string of tiny pearls, one small silver hairpin pointing upward, two soft side locks falling in front of the ears",
+ "half-up: a small rounded top-knot wrapped with tiny pearls, the rest long and loose, two soft side locks",
  "a high-waisted {m} silk skirt with a soft sheen tied above the chest with a long {s} silk ribbon bow, a {s} wide-sleeved short top of plain silk, small embroidered lily-of-the-valley sprays along the skirt hem and cuffs",
- "standing with her weight on one leg, a small blue-and-white porcelain vase with one sprig of pink apricot blossom held at her chest in both hands", "FF"),
+ "standing with her weight on one leg, a small cluster of ripe golden-orange loquats on a short bare twig held at her chest in one hand, the other hand resting at her sash", "FF"),
 ("s65", "Đoan trang", 18,
- [("classic oval face", "classic EGG-shaped oval face"),
+ [("classic oval face with a smooth high forehead, evenly full cheeks", "classic oval face with a smooth high forehead, gently rounded, softly broad cheekbones"),
   ("calm LEVEL almond eyes of medium size", "calm LEVEL, slightly long almond eyes with clear double eyelids"),
   ("a medium mouth with evenly shaped lips", "a medium mouth with evenly shaped lips and a clearly defined lip bow")],
- "fully up: a smooth neat double-loop chignon at the back of the head held by a pair of gold hairpins with small pearl heads pointing upward, the hair drawn back smoothly from the face",
+ "half-up: the top hair drawn back smoothly into one small neat loop held by a pair of gold pearl-head pins pointing upward, the rest long and straight down her back",
  "a cross-collar ruqun of {m} silk satin with a soft sheen, a long {s} silk overvest with a straight collar falling to the knees, a {m} floor-length skirt of plain silk, small embroidered chrysanthemum roundels along the vest edges and hem, a {s} silk sash with a small jade disc pendant, long sleeves",
- "standing upright and composed with her weight on one leg, a long string of dark sandalwood prayer beads looped over the fingers of one hand at her waist, the other hand resting at her sash", "SL"),
+ "standing upright and composed with her weight on one leg, a long string of brown sandalwood prayer beads looped over the fingers of one hand at her waist, the other hand resting at her sash", "SL"),
 ]
 assert [x[0] for x in S_NEW] == IDS and len({x[6] for x in S_NEW}) == 4   # 4 different angles
 out = {}

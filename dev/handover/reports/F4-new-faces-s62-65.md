@@ -8,34 +8,50 @@ After: Dịu dàng 11 → 14 · Đoan trang 12 → 13 · total 86 → 90.
   line(), T7 block of her group UNCHANGED (TYPES5 "Dịu dàng" / "Đoan trang" face + expr), EYES_STRAIGHT, strong closed mouth
   (OLD_MOUTH → NEW_MOUTH), FG.final (master block + D9 + face gate). Only the per-person rows are new (A17 diff = the rows below).
 - Prompts: dev/art/face-common/s62.v5.FULL.txt … s65.v5.FULL.txt (~5.3k chars each).
-- Gate: check_store --scope face --pid sNN → PASS ×4 (B20 root hex really checked: a 1-digit hex change FAILs).
+- Gate: `python3 dev/art/check_store.py dev/art/face-common/sNN.v5.FULL.txt --scope face --pid sNN` → PASS ×4 (B20 root hex really checked: a 1-digit hex change FAILs).
 
-| id | group | age | face swaps (vs T7 block) | hair | item | angle |
+| id | group | age | face swaps (vs T7 block) | hair | item (colour) | angle |
 |---|---|---|---|---|---|---|
-| s62 | Dịu dàng | 17 | slightly SHORT oval + smooth wide forehead · softly feathered curved brows | one long loose braid over the right shoulder, pearl clasp, small jasmine flowers | round embroidery hoop, half-stitched white orchid, both hands | SR |
-| s63 | Dịu dàng | 18 | softly rounded gently high cheekbones · slightly wide-set eyes · softly full lower lip | soft low looped nape bun, one plain jade pin | small white rabbit cradled in one arm | TL |
-| s64 | Dịu dàng | 17 | round-almond eyes, soft double lids · slightly fuller straight brows sloping down · softly rounded nose tip | high rounded crown bun wrapped in tiny pearls, silver pin, two side locks | small blue-and-white porcelain vase with one apricot-blossom sprig | FF |
-| s65 | Đoan trang | 18 | classic EGG-shaped oval · slightly long level eyes, clear double lids · clearly defined lip bow | smooth double-loop chignon, pair of gold pearl-head pins | long string of sandalwood prayer beads | SL |
+| s62 | Dịu dàng | 17 | smooth wide forehead · softly feathered curved brows | one long loose braid over the right shoulder, pearl clasp, ONE small white jasmine flower clasp | small wind chime of brass bells on a red silk cord | SR |
+| s63 | Dịu dàng | 18 | softly rounded gently high cheekbones · slightly wide-set eyes · softly full lower lip | half-up: small soft low loop, one plain jade pin, rest long and loose | small chocolate-brown rabbit cradled in one arm | TL |
+| s64 | Dịu dàng | 17 | round-almond eyes, soft double eyelids · slightly fuller straight brows sloping down · softly rounded nose tip | half-up: small rounded top-knot wrapped with tiny pearls, rest loose, two side locks | ripe golden-orange loquats on a short bare twig | FF |
+| s65 | Đoan trang | 18 | gently rounded, softly broad cheekbones · slightly long level eyes, clear double lids · clearly defined lip bow | half-up: one small neat loop, pair of gold pearl-head pins, rest long and straight | brown sandalwood prayer beads | SL |
 
 None of these faces / hair styles / items / angle mixes is used by the 11 Dịu dàng or 12 Đoan trang (their v3 prompts checked) or by each other.
+Items "wind chime" and "loquat" appear in no other prompt in face-common; a live rabbit and prayer beads are held by no one (m16 holds a rabbit LANTERN; c24/m28 have rabbits embroidered).
 Outfits: s62 ruqun + pleated skirt · s63 short half-sleeved jacket over inner top · s64 high-waisted chest-tied skirt + short top · s65 ruqun + knee-long overvest.
+
+## ROOT-66 review fixes (06:11Z) — all applied, 0 gens
+1. F1 hair (thiếu nữ = loose or half-up): s63, s64, s65 → half-up (wording from ROOT-66); s65 "double-loop" dropped (F14).
+2. F13 one flower: s62 → "one small white jasmine flower clasp".
+3. Items: s62 hoop (echo m03) → brass wind chime; s64 vase + sprig (echo m44) → golden loquats on a bare twig. Both are used by no one.
+4. B16 item colour stated and outside both root families: wind chime brass + red cord (ice blue/blush) · rabbit chocolate-brown (peach orange/ivory) ·
+   loquats golden-orange, bare twig (peony pink/smoke lilac) · sandalwood brown (leaf green/blush). The gate refuses "dark" on a colour word (B20 DEEP COLOUR),
+   so it reads "red silk cord" and "brown sandalwood". RE-CHECK at GO against P6's roots.
+5. Grammar: comma-joined swaps (s62 "oval face, a smooth wide forehead, smooth rounded cheeks…"; s64 "round-almond eyes, soft double eyelids, gently LOWERED…");
+   s62 head tilt only once (in the block's Expression; removed from the pose).
+6. s65 face: EGG-shaped (m08/m30) → "gently rounded, softly broad cheekbones" (no one uses it; "softly squared" would echo c28 "softly ROUNDED SQUARE").
+   s62 "slightly SHORT oval" also dropped (c06/c01/c25 use "short oval").
+7. Colours: still PLACEHOLDER (src says "NEVER GEN WITH THIS"); s64 moved off green (m02 moss) → peony pink; s65 → L* 61 (c06 CŨ lightness).
+8. Gate command (exact): `python3 dev/art/check_store.py dev/art/face-common/sNN.v5.FULL.txt --scope face --pid sNN` → PASS ×4.
+NOTE: the Dịu dàng / Đoan trang v5 blocks (TYPES5 in make_nf4) have NEVER been drawn (TYPES_v5.md l.6, Lượt 689: no new people for these groups
+then) → the first sheet is also a test of the blocks themselves.
 
 ## Colours — PLACEHOLDER toned picks (to be replaced by P6's A32 roots at GO)
 Written to s_root_colours.json (src = "F4 PLACEHOLDER …") so the B20 gate checks them. Chosen inside P5/P6's own A32 bands
 (four_season86_a32.BAND, OKLCH: Dịu dàng main L .72–.84 C .07–.12 + light neutral phụ L .93; Đoan trang main L .61–.74 C .08–.13 + light neutral L .91),
 season family from MAINF, phụ from NEUT. Checked with check_unique.pair_verdict (ΔE2000): no FAIL/WARN against any of the 86 root pairs
-nor any same-season pair in palettes_season.json; B19 no grey; the 4 new mains ≥ 32 ΔE2000 from each other (closest s63–s64 32.4).
+nor any same-season pair in palettes_season.json; B19 no grey; the 4 new mains ≥ 24 ΔE2000 from each other (closest s63–s64 24.0).
 | id | root season | main | phụ | CIELab C* / L* of main |
 |---|---|---|---|---|
 | s62 | Đông | ice blue #70B8DD | blush pink #FFDEE7 | 28 / 71 |
 | s63 | Hạ | peach orange #FEB894 | ivory #F3E7CE | 35 / 80 |
-| s64 | Xuân | young bud green #9FBC83 | orchid mist #FEDCF5 | 32 / 72 |
-| s65 | Thu | plum #AB6E9E | ivory #ECE0C8 | 35 / 54 |
+| s64 | Xuân | peony pink #F8B3D3 | smoke lilac #ECE2FE | 30 / 80 |
+| s65 | Xuân | spring leaf green #71A166 | blush pink #FCD6E0 | 37 / 61 |
 
 OPEN POINT (for the foreman): "ΔE ≥ 20 from every other person's root" cannot be met for the MAIN colour inside the toned bands. The
 best in-band candidate is only ≈12 ΔE2000 from its nearest of the 86 root mains (86 soft roots fill the space). The picks are distinct as
-PAIRS (pair_verdict clean) and from each other; nearest root mains: s62 8.3 (s52), s63 7.0 (s59), s64 ≈4–5 (m02 moss green, but its
-pair is moss + coral rose), s65 6.5 (s18). If P6 gives roots, they replace these.
+PAIRS (pair_verdict clean) and from each other; nearest root mains: s62 8.3 (s52), s63 7.0 (s59), s64 5.8 (s54), s65 10.3 (s41). If P6 gives roots, they replace these.
 
 ## Notes (not changed, LAW #0)
 - The shared Colour tone sentence (make_nf4 LOW_TONE "ONE medium tone level … coral-red / brick-red") + the MG1 COLOUR RULE "medium-light"
