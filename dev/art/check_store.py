@@ -860,6 +860,19 @@ def b24_fails(text, scope):
     dead = sorted(f"{h} ({w})" for h, w in B24_DEAD.items() if h in have)
     if dead: out.append(("B24", "DEAD HEX", f"triều t{n}: dead rank code(s): {', '.join(dead)}"))
     return out
+# MG3 (owner Lượt 806 angle audit, E1 Lượt 469/476/440): an "ANGLE: …;" sentence must be one of the 14 store angles (build.py ANG14) or the
+# triều phục angle words (build.py _TA_NF/_TA_TQ/_TA_MID left/right) — invented / dead angle words (e.g. "walking STRAIGHT TOWARD the viewer") = FAIL.
+def _angles():
+    import ast
+    src = open(os.path.join(ART, "t8-prompt-B", "build.py"), encoding="utf-8").read(); v = {}
+    for n in ast.parse(src).body:
+        if isinstance(n, ast.Assign) and len(n.targets) == 1 and getattr(n.targets[0], "id", "") in ("ANG14", "_TA_NF", "_TA_TQ", "_TA_MID"):
+            v[n.targets[0].id] = ast.literal_eval(n.value)
+    return set(v["ANG14"]) | {v[k].format(s=x) for k in ("_TA_NF", "_TA_TQ", "_TA_MID") for x in ("left", "right")}
+ANGLES_OK = _angles()
+ANGLE_RX = re.compile(r"\bANGLE: (.+?);")
+def angle_fails(text):
+    return [("E1", "ANGLE", f"angle words not in the 14-angle table (E1): '{m.group(1)[:90]}'") for m in ANGLE_RX.finditer(text) if m.group(1).strip() not in ANGLES_OK][:1]
 # K18 LIVE GAME HANDS-OFF (owner Lượt 591, BW4): a live game picture path (img/fig-*, img/hd/*, any img/ path outside img/_review and img/_keep) in the prompt or --refs = FAIL.
 K18_LIVE = re.compile(r"(?:^|[/\s\"'(,])(img/(?!_review/|_keep/)[\w./-]+|fig-[\w-]+\.(?:webp|png|jpg))")
 FLOOR_SLEEVE_RX = re.compile(r"(?:SLEEVE LENGTH|SLEEVES:)[^.]*(?:touch(?:es|ing)? the floor|sweep(?:s|ing)? the floor|reach(?:es|ing)? the floor|to the floor)", re.I)   # SL1: floor-length sleeve sentence (any wording)
@@ -872,6 +885,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     if len(text.strip()) > PROMPT_MAX: fails.append(("LEN", "TOO LONG", f"prompt is {len(text.strip())} characters, the gen tool refuses more than {PROMPT_MAX}"))
     text = norm(text)
     fails += b24_fails(text, scope)   # MG3 L784 item 7 (B24)
+    fails += angle_fails(text)   # MG3 L806 (E1)
     if scope == "face":   # MG3 L784 item 6 (B20 / Lượt 763/769/770)
         fails += root_hex_fails(text, pid)
         for m in DEEP_COLOUR_RX.finditer(text):
