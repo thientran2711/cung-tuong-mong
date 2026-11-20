@@ -1,13 +1,57 @@
-# ge-phutang (E35 → successor, FOREMAN E #23) — Phù Tang grand endings (JOB 2 of briefs/E35-ge-rank.md)
-PRIORITY #1 CHECK ('phutang|phù tang|pt_|grand ending'): OD 3 (19/11 ~06:40Z/~06:42Z/~06:50Z, road only) | main: none for pt GE | review/*: review/phutang-road c50ef1ba (the road, LAND READY pending E21r3), review/ge-batu (format model, landed: jgedata_bd.js) | claims: E35 row.
+# ge-phutang (E35 → E35b, FOREMAN E #23) — Phù Tang grand endings (JOB 2 of briefs/E35-ge-rank.md)
+PRIORITY #1 CHECK ('phutang|phù tang|pt_|grand ending|ge-phutang'): OD 8 (19/11 ~06:40Z/~06:42Z/~06:50Z, road only) | main: none for pt GE | review/*: review/ge-phutang 76be3f59 (E35 setup = review/phutang-road c50ef1ba + review/ge-rank c5ebab9a), review/ge-batu (format model, landed: jgedata_bd.js) | claims: E35 row → E35b (this session). REUSED: jgedata_bd.js shape, jbalge.js wave blocks, cat.py / gen_js.py, ge-guard / ge-engine / ge-bd-scan / ge-rank-scan / ge-shots, the road's people / object books (PFP / PFO) and its GE hook names (jrd_pt.js:62–66, :350; jrd_pt2.js:11, :307). Nothing rebuilt. (E35's setup handover of 20/11 22:15Z is done and replaced by this report.)
+★ 18 LAWS read first. Touches 1, 2, 3, 4, 5, 6abc, 7, 8, 11, 13, 14.
+Branch **review/ge-phutang** (base 76be3f59). phutang-road is NOT on LIVE yet → merge origin/main when FOREMAN E says it landed (expected clean: GE files only + one jge.js helper).
 
-## HANDOVER (E35 rolled over at ~24 % of the window before starting the writing; nothing of JOB 2 written yet)
-State:
-- Branch **review/ge-phutang @ 76be3f59** = review/phutang-road c50ef1ba + merge review/ge-rank c5ebab9a (index.html/sw.js rebuilt by build_site.sh; ge-guard 8/8 on it). Worktree /home/user/wt/ge-phutang (sparse) may be reused or re-made.
-- Foreman order (E #23, 22:05Z): start now from phutang-road; when phutang lands on LIVE, merge origin/main (should be clean). Answer E35r (ge-rank BIG reviewer session_01DgYSWp7SnXwAmHQzVR8omH) fix requests on review/ge-rank FIRST.
-Facts found (read before writing):
-- Roads: pt_hai, pt_su (jrd_pt.js, E21), pt_tang, pt_dang (jrd_pt2.js, writer 2); numbers jbalpt.js (BAL.road.pt, BAL.arc.fx.pt_*, BAL.road.fx.pt_*); people book PFP/PTP, objects book PFO/PTO (fb "pt.o.<thing>") in jrd_pt.js — the law-6b/6c scan must use these (copy dev/test/ge-bd-scan.js → ge-pt-scan.js).
-- Road design text: dev/story/ROAD_MAP.md §4.5c (on the road branch). Road report: handover reports/phutang-road.md (+ -review.md), its table lists ác-leaning options per chapter (use for lean.m) — check whether it holds ending/history material; if not, history pass first (law 8, OD:L1327).
-- **ENGINE CHECK FIRST:** jge.js geBranch() makes a branch live only if `rd.split("_")[0]===S.origin.k`. The road ids start "pt_" while the catalogue label row added by E21 is "pf" (dev/test/ge_guard/cat.py ID, jgecat.js) and the branch is rolled inside nc. Verify what S.origin.k is on a Phù Tang life and that GE_DATA/GE_CAT keys = the road ids (pt_hai …); if the prefix ≠ origin key, the GE stays dark — fix in the catalogue/ids (cat.py GE_ID), not by a special case.
-- Format to copy exactly: ge-batu (reports/ge-batu.md + round 2): jgedata_pt.js (4 branches × 4 endings: pull/push/close/doom/fo/cond/lean, texts cw t a ht ha ft), BAL.ge gate/fail/rw rows after the bd rows (rw W3 shape, no rank+bac), GRAND_ENDINGS.md section fixed in place, cat.py GE_ID in place, assemble.py add 'jgedata_pt.js' after 'jgedata_bd.js'. Law 5 is now the engine key BAL.ge.odds.rank (nothing per branch).
-- Gates: ge-guard, ge-engine - pt_hai,pt_su,pt_tang,pt_dang (+ rank check), ge-pt-scan 0 faults, one-core-guard, quickcheck alone, COOP_GE=1 coop-e2e + a co-op look at the Hồi kết nhánh (both seats), shots Fold 755x1000@2 + iPad 1180x820@2 (CDN 401 last time → local only, say so). SSK ≤ 21/11 ~12:00Z.
+## FIRST CHECK (E35): the prefix / origin family — FIXED in the engine, whole family
+- Fault: `geBranch()` opened a branch only if `rd.split("_")[0] === S.origin.k`. Phù Tang roads are `pt_*`, the origin key is `pf` → all four pt branches stayed dark on every Phù Tang life (and GE_ID / Sơ đồ nhánh tabs looked up `GE_ID.pt` = nothing).
+- Fix (one rule, no special case): `geOrig(b)` in jge.js = the road's own declared origin `ARC67[b].o` (prefix only as fallback; `o:"rd"` chapter ids ignored). Used by geBranch, the 3 GE_ID lookups, geMapIds / geMapRoads / geMapPick and the map click handler (10 prefix reads → 0). GE_ID keeps the origin key `pf` (cat.py unchanged there, law 14).
+- Family scan (all 11 origins × their roads): tt, dtq, muoi, cn, nc, bd, td, ch, thd, cnv: prefix = origin, live before and after; **pf: prefix pt ≠ pf, dark before, live after**. Same fault in the test harness: ge-engine `__life` forced origin = prefix → now geOrig (road-full.js already read ARC67 o).
+- New ge-guard check: every live branch's identity (geOrig) = its ARC67 o and a GE_ID key.
+
+## What
+- `dev/build/jgedata_pt.js` (new; assemble.py right after `jgedata_bd.js`): GE_DATA pt_hai, pt_su, pt_tang, pt_dang = 16 endings, bd shape (pull / close / cond / fo / cw / t / a / ht / ha / fail / ft, lean p / m). Every option name is a raw option of that road (.4–.11) or an `@<chapter>=<end>` (ge-guard checks). Chuỗi 13–16 per ending, Khóa 2–4, lean 12–16 each side.
+- `dev/build/jbalge.js`: one «Phù Tang wave» block in each of BAL.ge.gate / fail / rw after the bd rows (16 rows each, pilot scales and sizes: stay endings rank 1 + danh 30 + side + rel; exits (Rời cung) no rank, bạc 300 only on two of them; no rank+bạc row). Law 5 = the engine key BAL.ge.odds.rank (nothing per branch).
+- `dev/test/ge_guard/cat.py`: 4 pt rows + 16 OTHER titles (jgecat.js regenerated by gen_js.py: 44 branches, 176 grand, ERRORS 0).
+- `dev/build/jge.js`: geOrig (above). `dev/test/ge-engine.js`: __life uses geOrig. `dev/test/ge-guard.js`: +2 checks. `dev/test/ge-pt-scan.js` (new, strict).
+- Handover branch: `dev/design/GRAND_ENDINGS.md` fixed IN PLACE (law 14): §1.2 pf row, §2.13b Phù Tang (roads, identity rule, history), §3 «176» + pf catalogue (generated from cat.py), §7 step 4b.
+
+## History note (law 8; short — the material is in reports/foreign-princess-3-history.md §B/§C.3 by E19, so no new expert job)
+Kentōshi (khiển Đường sứ) crossings lost a third to a half of those who sailed (→ pt_hai «Mực son tế biển»: the roll of the drowned read at a sea altar; «Đổ tội cho biển»: the sea blamed to keep the peace). The 607 «Nhật xuất xứ thiên tử» letter angered Sui; envoys argued seats (the 753 Silla seat dispute) and rites (→ pt_su «Sứ giả hai trời», «Bẻ gãy sứ đoàn»); Abe no Nakamaro stayed as a Tang official (pt_su texts keep the scholar unnamed: he may have sailed). Giám Chân reached Japan blind after many attempts and founded the ordination platform where the court took the precepts (→ pt_tang «Người dựng giới đàn» here; «Thầy sang bể»: she crosses with the master and is the first to take the precepts at his new platform). Silla merchants ran the East Sea trade; Thị bạc ty = customs (→ pt_dang «Chủ bến Minh Châu», «Luật biển bốn phương»). Era rulings kept: no Wokou word, no thập nhị đơn (ge-guard checks), «Thiên hoàng» not used.
+
+## The 16 endings (catalogue order; titles thiện / ác)
+| branch | ge | node | pair | condition (BAL.ge.gate) · fail-only | fail outcome |
+|---|---|---|---|---|---|
+| pt_hai | 1 | Mực son tế biển / Sổ tử đòi nợ | Ở·giữ phận + ân | duc, danh | Sổ son không ai đọc |
+| | 2 | Hải lộ thái bình / Chủ thuyền Đông Hải | Ở·nắm quyền + uy | tamco, mat | Đường bể ngoài tay |
+| | 3 | Giấu đau giữ hòa / Đổ tội cho biển | Ở·giữ phận + buông | sung, tamco | Biển không gánh nổi |
+| | 4 | Thuyền về Nan Ba / Lén thuyền về nước | Rời cung + ân | suc, danh | Gió mùa không đổi |
+| pt_su | 1 | Sứ giả hai trời / Nắm cả hai trời | Ở·giữ phận + ân | danh, duc | Hai trời không nghe |
+| | 2 | Người dịch quốc thư / Dịch chữ đổi lòng | Ở·nắm quyền + ân | tai, danh | Bản dịch bị gác |
+| | 3 | Bẻ mưu hại sứ / Bẻ gãy sứ đoàn | Ở·nắm quyền + uy | mat, tamco | Lệnh giả thành thật |
+| | 4 | Hồi thư bằng máu / Thư máu ép vua | Rời cung + uy | tamco, danh | Thư máu bị niêm |
+| pt_tang | 1 | Người dựng giới đàn / Giới đàn trong tay | Ở·giữ phận + ân | duc, danh | Giới đàn chưa dựng |
+| | 2 | Đôi mắt của thầy / Mượn danh thầy | Ở·giữ phận + buông | duc, sung · fo .11 win (the master sailed) | Lời hứa dang dở |
+| | 3 | Lấy kinh trừ đan / Kinh đổi lấy quyền | Ở·nắm quyền + uy | mat, tamco | Phe Đạo trở lại |
+| | 4 | Thầy sang bể / Mượn thuyền thầy trốn | Rời cung + ân | .11 win + duc · fo .11 win2/mid/lose | Thuyền đi không người |
+| pt_dang | 1 | Chủ bến Minh Châu / Nuốt bến Minh Châu | Ở·nắm quyền + ân | tamco, danh | Bến về tay quan |
+| | 2 | Lời hứa kẻ biển / Giặc biển trong tay | Ở·giữ phận + ân | .10 win (Ô Cửu pardoned) + duc · fo .10 mid (beheaded) | Lời hứa chìm |
+| | 3 | Sổ thật trị gian / Mượn dao giặc | Ở·nắm quyền + uy | mat, sung | Dao quay về tay |
+| | 4 | Luật biển bốn phương / Luật biển một chủ | Rời cung + buông | duc, tai | Luật nằm trong kho |
+Variety: 4 groups per branch (≥3), each branch has an ác-natural ending, a stay and a leave; 4 distinct pairs and summits per branch; no seat summit (no seat rule needed).
+
+## Laws
+- 1 two-way: every ending has a thiện and an ác shading reached by her own options (lean p / m per road, 12–16 each); her schemes on rivals ({v}'s house, the Thị bạc sứ, the Đạo faction) are Chuỗi of the ác-natural endings, and the same tools used by law are Chuỗi of their thiện shading.
+- 2 equal value / 3 gain-and-loss: pilot sizes (see What); every fail outcome has a BAL.ge.fail loss; quiet form unchanged.
+- 4 one core: all numbers in jbalge.js; one-core-guard PASS. 5: BAL.ge.odds.rank (engine key; ge-rank-scan 176/176).
+- 6 real world (dev/test/ge-pt-scan.js, strict: every person who can die / move and every object word must be in an allow table with its reason, else FAULT → 85 hits, **0 faults**):
+  6b people: Tiểu Ngọc, Thân Lão, Nham Lão, Tá Bá Kim Thành, Cát Thành Trọng Lữ, Tịnh Viên never named; Ô Cửu only in pt_dang_2 behind cond .10 win / fo .10 mid (ft names no one); Trí Viễn only where his place is fixed (pt_tang_2 fo .11 win — PFSAIL is his only sea move; pt_tang_4 cond .11 win); his sight differs by life (one eye / blind) → «mắt thầy đã yếu»; Kim Hựu Thành (never dies) with no place claimed.
+  6c objects — scan fixes made during the write (before → after): pt_hai_2 a/ft «hải đồ ngươi giữ» (haido can be ta / kho / 0) → «đường ngươi vạch», ft names no chart; pt_su_3 a/t/ft traced «nét ấn trên tờ lệnh» (lenh can be chay = burnt) → follows the people who carried / wrote it; pt_dang_3 t «sổ thật và lời khai của giặc được trình» (sothibac ta / kho / tbs; the testimony can be burnt at .10 c2) → she asks the Emperor to call the true book; a / ha / ft name no testimony.
+- 7 VANPHONG: no digit, no % (ge-guard); cổ trang words; no {token} in narration (wholly Phù Tang lives).
+- 8 history: above. 14 canon overwrite: GRAND_ENDINGS.md fixed in place.
+
+## Tests (review/ge-phutang)
+- `node dev/test/ge-guard.js`: **10/10** (catalogue ERRORS 0; all 16 option lists real; pt live; identity family; no era word).
+- `node dev/test/ge-engine.js - pt_hai,pt_su,pt_tang,pt_dang`: **140/140**; `… - all`: **1460/1460** (44 branches).
+- `node dev/test/ge-rank-scan.js`: PASS, law 5 on **176/176** endings. `node dev/test/ge-pt-scan.js`: 0 faults. `node dev/test/ge-bd-scan.js`: unchanged (34 hits). `node dev/test/one-core-guard.js`: PASS.
+- PENDING (filled below when run): quickcheck alone + old save, coop-e2e COOP_GE=1 + two-seat GE look, shots Fold 755x1000@2 + iPad 1180x820@2.
