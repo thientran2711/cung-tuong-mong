@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9137759f+","t":"2026-11-20T08:58Z","c":"mg-ui-rest: care games (pet feed/bath/play, plant water) open on the kit rules screen (kgReady: Hướng dẫn + Sẵn sàng), khắc spent only on S…","b":"fc21619b9aba","h":[{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"}]};
+window.CTM_BI={"s":"24e15807+","t":"2026-11-20T09:19Z","c":"mg-ui-rest r2 (rv FAIL 9137759f): while a care game frame is open the pet/plant info above folds away and the rules picture is compact, so …","b":"e77f7c9a74c9","h":[{"s":"9b6e9395+","t":"2026-11-20T08:46Z","c":"rv mg-play2: keep only the vetted face points — the 70 changed kc rows from the live img/mk-fit (no new v1/v2 rows: anchor-table gate flags…"},{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -28950,7 +28950,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 /* KIT §13.7 rules screen + guided round (mg-ready-guide); colours from the kit tokens only */
 .kgame.kg-ready .kghow,.kgame.kg-tut .kghow{display:none}
 /* KIT §13.7 (law 10): a rules / guided / playing screen inside a figure-left dialog (.k3right is overflow:clip) must fit, so the care info above the game frame (bars, rows, act buttons) folds away while the frame is open; petcDraw / shelfPlantDraw bring it back */
-#kpcare:has(#kpcgw .kgame)>:not(#kpcgw),#kshp:has(#kshpgw .kgame)>:not(#kshpgw){display:none!important}
+#kpcare.kg-open>:not(#kpcgw),#kshp.kg-open>:not(#kshpgw){display:none!important}
 #kpcgw .kgpic,#kshpgw .kgpic{display:none}#kpcgw .kgr-demo,#kshpgw .kgr-demo{max-width:110px;margin:4px auto 0}#kpcgw .kgr .kpst,#kshpgw .kgr .kpst{display:none}#kpcgw .kgr-st,#kshpgw .kgr-st{height:38px}#kpcgw .kgr-note,#kshpgw .kgr-note{display:none}
 .kgr{margin:0 0 6px}.kgr .kpst{margin-top:0}.kgr-note{margin:8px 0 2px}
 .kgr-demo{margin:8px auto 2px;max-width:340px}
@@ -45687,9 +45687,9 @@ function petcBody(P,msg){const T=petT(P);const t1=whyTime(BAL.pet.khac);const m=
  return petcBars(P)+kitRows([["Công dụng",petcEffects(P).length?petcEffects(P):["làm cung thêm vui"],"g"],["Lớn tiếp",[petcNextTxt(P)],"n"]].concat(msg?[["Vừa rồi",[msg],"n"]]:[]))+
   `<div id="kpcgw"></div><div class="rbtn">${g("feed","Cho ăn",`thành: No tăng, Tình cảm tăng · chọn đúng món ${T.n.toLowerCase()} ăn, kéo vào nó`)}${g("bath","Tắm, chải lông","thành: Sạch tăng · vuốt dọc lông nó 5 lần, đều tay")}${g("play","Chơi","thành: Vui tăng, Sức +1 · chạm đúng quả cầu đang sáng (3 lần)")}`+
   (m?pbtn(`data-petc="maid"`,`Giao ${m.name} chăm`,`thành: ${BAL.pet.maidW} tuần, mỗi tuần đỡ một nửa phần hao · kèm: không thêm tình cảm`,P.maidW>tsbWk()?`${m.name} đang chăm`:""):"")+`</div>`}
-function petcDraw(msg){const box=document.getElementById("kpcare");const P=tsbPets(S)[PETC.i];if(!box||!P){petcClose();return}kgTutDrop();PETC.game=null;box.innerHTML=petcBody(P,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(e){}}
+function petcDraw(msg){const box=document.getElementById("kpcare");const P=tsbPets(S)[PETC.i];if(!box||!P){petcClose();return}kgTutDrop();PETC.game=null;box.classList.remove("kg-open");box.innerHTML=petcBody(P,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(e){}}
 /* the game area: the kit mini-game frame inside the dialog; returns its box */
-function petcGameBox(title,how){const w=document.getElementById("kpcgw");if(!w)return null;w.innerHTML=kitGameFrame({art:"Chăm",title,how,id:"kpcgame"})+
+function petcGameBox(title,how){const w=document.getElementById("kpcgw");if(!w)return null;{const c=document.getElementById("kpcare");if(c)c.classList.add("kg-open")}/* care info folds away while the frame is open (class, not :has: perf) */w.innerHTML=kitGameFrame({art:"Chăm",title,how,id:"kpcgame"})+
   /* mg-skip-all (KIT §13.6): the quick option of every care game: won = BAL.skip.care of the gain (a middling hand), lost = nothing */
   `<div class="kg82act">${kitQuick({id:"kpcquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;
  try{w.scrollIntoView({block:"nearest"})}catch(e){}return document.getElementById("kpcgame")}
@@ -78074,13 +78074,13 @@ function shelfPlantGain(score){const e=shelfOf(S).g[SHPC.g];if(!e)return;const G
  const msg=`Tươi tốt +${Math.round(e.pc-p0)}${score>=BAL.shelf.plant.word[1]?" · rất khéo tay":score<BAL.shelf.plant.word[0]?" · chưa khéo":""}.`;log(`Ngươi tự tay chăm ${shelfNm(e).toLowerCase()} (${msg})`);
  shelfPlantDraw(msg)}
 /* the open plant screen redrawn (one function: co-op thin F4 replays it on her phone after the host's answer) */
-function shelfPlantDraw(msg){kgTutDrop();const e=shelfOf(S).g[SHPC.g];const box=document.getElementById("kshp");if(box&&e){box.innerHTML=shelfPlantBody(e,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(x){}}}
+function shelfPlantDraw(msg){kgTutDrop();const e=shelfOf(S).g[SHPC.g];const box=document.getElementById("kshp");if(box&&e){box.classList.remove("kg-open");box.innerHTML=shelfPlantBody(e,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(x){}}}
 /* "Để trời định" (the quick roll of the care game): one engine */
 function shelfPlantQuick(){if(!shelfOf(S).g[SHPC.g])return;if(kitQuickRoll()){shelfPlantGain(BAL.skip.care);return}const msg="Để trời định: chưa thành, không thêm gì.";log(msg);shelfPlantDraw(msg)}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-shc]");if(!b||b.disabled)return;ev.stopPropagation();const k=b.dataset.shc;
  if(k==="pet"){try{closeModal()}catch(x){}petcOpen(+b.dataset.i);return}
  if(k==="plant"){shelfPlantOpen(b.dataset.g);return}
- if(k==="water"){if(SHPC.game||!SHPC.g)return;const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;const w=document.getElementById("kshpgw");if(!w)return;
+ if(k==="water"){if(SHPC.game||!SHPC.g)return;const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;const w=document.getElementById("kshpgw");if(!w)return;{const c=document.getElementById("kshp");if(c)c.classList.add("kg-open")}
   /* KIT §13.7 (mg-ui-rest, owner OD:L1981): the tap opens the RULES screen (kgReady: luật + «Hướng dẫn» + «Sẵn sàng»); the khắc are spent and the game starts only on «Sẵn sàng» */
   const W=shelfWord(shelfOf(S).g[SHPC.g]);w.innerHTML=kitGameFrame({art:"Chăm",title:W.act,how:W.how,id:"kshpgame"})+`<div class="kg82act">${kitQuick({id:"kshpquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;SHPC.game="rules";SHPC.rdy=0;
   const box=document.getElementById("kshpgame");box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="kshpgo">Bắt đầu</button></div>`;
@@ -78092,7 +78092,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 /* mg-skip-all (KIT §13.6): the quick option of the care game: won = BAL.skip.care of the gain, lost = nothing; the game in the frame stops */
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("#kshpquick");if(!b)return;ev.preventDefault();ev.stopPropagation();if(SHPC.game!=="water"&&SHPC.game!=="rules")return;
  if(!SHPC.rdy){const c=BAL.shelf.plant.khacSelf;if(c&&!can(c))return;if(c)spend(c)}/* «Để trời định» from the rules screen is a play-through too: same khắc */
- kgTutDrop();try{if(SHPC.stop)SHPC.stop()}catch(x){}SHPC.stop=null;SHPC.game=null;SHPC.rdy=0;const w=document.getElementById("kshpgw");if(w)w.innerHTML="";
+ kgTutDrop();try{if(SHPC.stop)SHPC.stop()}catch(x){}SHPC.stop=null;SHPC.game=null;SHPC.rdy=0;const w=document.getElementById("kshpgw");if(w)w.innerHTML="";{const c=document.getElementById("kshp");if(c)c.classList.remove("kg-open")}
  shelfPlantQuick()},true);
 /* Thử tay (calibration, OD 17/11 ~17:10Z (3)): every new minigame registers its entry; the calibration page lists window.MG_CAL */
 (window.MG_CAL=window.MG_CAL||[]).push({k:"chamcay",n:"Chăm cây (tưới, tỉa lá)",run:box=>new Promise(res=>shelfWaterGame(box,res))});
@@ -82198,7 +82198,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fc21619b9aba";window.CTM_BUILD=BUILD;
+const BUILD="e77f7c9a74c9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

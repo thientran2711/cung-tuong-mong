@@ -84,9 +84,9 @@ function petcBody(P,msg){const T=petT(P);const t1=whyTime(BAL.pet.khac);const m=
  return petcBars(P)+kitRows([["Công dụng",petcEffects(P).length?petcEffects(P):["làm cung thêm vui"],"g"],["Lớn tiếp",[petcNextTxt(P)],"n"]].concat(msg?[["Vừa rồi",[msg],"n"]]:[]))+
   `<div id="kpcgw"></div><div class="rbtn">${g("feed","Cho ăn",`thành: No tăng, Tình cảm tăng · chọn đúng món ${T.n.toLowerCase()} ăn, kéo vào nó`)}${g("bath","Tắm, chải lông","thành: Sạch tăng · vuốt dọc lông nó 5 lần, đều tay")}${g("play","Chơi","thành: Vui tăng, Sức +1 · chạm đúng quả cầu đang sáng (3 lần)")}`+
   (m?pbtn(`data-petc="maid"`,`Giao ${m.name} chăm`,`thành: ${BAL.pet.maidW} tuần, mỗi tuần đỡ một nửa phần hao · kèm: không thêm tình cảm`,P.maidW>tsbWk()?`${m.name} đang chăm`:""):"")+`</div>`}
-function petcDraw(msg){const box=document.getElementById("kpcare");const P=tsbPets(S)[PETC.i];if(!box||!P){petcClose();return}kgTutDrop();PETC.game=null;box.innerHTML=petcBody(P,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(e){}}
+function petcDraw(msg){const box=document.getElementById("kpcare");const P=tsbPets(S)[PETC.i];if(!box||!P){petcClose();return}kgTutDrop();PETC.game=null;box.classList.remove("kg-open");box.innerHTML=petcBody(P,msg);try{if(typeof kitFix==="function")kitFix(box)}catch(e){}}
 /* the game area: the kit mini-game frame inside the dialog; returns its box */
-function petcGameBox(title,how){const w=document.getElementById("kpcgw");if(!w)return null;w.innerHTML=kitGameFrame({art:"Chăm",title,how,id:"kpcgame"})+
+function petcGameBox(title,how){const w=document.getElementById("kpcgw");if(!w)return null;{const c=document.getElementById("kpcare");if(c)c.classList.add("kg-open")}/* care info folds away while the frame is open (class, not :has: perf) */w.innerHTML=kitGameFrame({art:"Chăm",title,how,id:"kpcgame"})+
   /* mg-skip-all (KIT §13.6): the quick option of every care game: won = BAL.skip.care of the gain (a middling hand), lost = nothing */
   `<div class="kg82act">${kitQuick({id:"kpcquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;
  try{w.scrollIntoView({block:"nearest"})}catch(e){}return document.getElementById("kpcgame")}
