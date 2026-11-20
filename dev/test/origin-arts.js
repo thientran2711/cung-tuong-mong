@@ -5,7 +5,7 @@
      (ARC67 premise arcs, nrRoads) + "" (the origin's own row); prints the true identity count
    2 one core (law 4): every key is a real art (ARTS) or virtue (VIR), every bậc an integer 1..5; no ORIGINS / ORIGIN_BR entry keeps an art:{} (law 14)
    3 variety: no two identities share the same set (keys + bậc); ~4 arts each (3..4)
-   4 noble > poor, law 2: every road of one origin has the same total bậc; tt/nc/bd > muoi/cn/thd > cnv; each road row holds the origin row's art
+   4 noble > poor, law 2: every road of one origin has the same total bậc and the same training points (bậc L = L(L+3)/2, j85 addArtP); tt/nc/bd > muoi/cn/thd > cnv; each road row holds the origin row's art
    5 new game: for every origin (forced) her S.arts / S.vir = the row of the road STORY init rolled (S.st.f14.road), every other art 0;
      F14 off (no road) → the origin's own row
    6 old saves keep their arts: a save serialised with other arts loads with the same S.arts / S.vir
@@ -31,7 +31,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   for(const k of origins)for(const rd of keysOf(k)){const s=sig(T[k][rd]);if(seen[s])o.dup.push(seen[s]+"="+rd);seen[s]=rd;o.nArts.push(Object.keys(T[k][rd]).length)}
   /* 4 */
   const tot=R=>Object.values(R).reduce((a,x)=>a+x,0);o.tot={};o.eqRoad=[];o.core=[];
-  for(const k of origins){const L=keysOf(k).map(rd=>tot(T[k][rd]));o.tot[k]=L[0];if(L.some(x=>x!==L[0]))o.eqRoad.push(k);
+  for(const k of origins){const L=keysOf(k).map(rd=>tot(T[k][rd])),P=keysOf(k).map(rd=>Object.values(T[k][rd]).reduce((a,x)=>a+x*(x+3)/2,0));o.tot[k]=L[0];if(L.some(x=>x!==L[0])||P.some(x=>x!==P[0]))o.eqRoad.push(k);
    const own=T[k][""];for(const rd of keysOf(k))for(const a in own)if(!((T[k][rd][a]||0)>=own[a]))o.core.push(k+"/"+rd+"/"+a)}
   /* 5 */
   o.ng=[];const zero=R=>{const x={};for(const a of AK)x[a]=0;for(const v of VK)x[v]=0;return x};
@@ -47,16 +47,16 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 7 */
   {const v=(nr,ag)=>({name:"Np",id:71000,rank:2,arts:{},alive:true,nr,ag});
    o.npc={tranhDan:mgOrgLv(v({o:"tt",r:"tt_tranh"}),"dan"),tranhVe:mgOrgLv(v({o:"tt",r:"tt_tranh"}),"ve"),ttNoRoad:mgOrgLv(v({o:"tt"}),"dan"),agTt:mgOrgLv(v(undefined,{o:"tt"}),"dan"),
-    maCong:mgOrgLv(v({o:"cnv",r:"cnv_ma"}),"td_cong"),ngua:mgOrgLv(v({o:"bd",r:"bd_ngua"}),"huong"),srv:mgOrgLv({name:"m",sid:3,org:"x",arts:{}},"dan"),me:mgOrgLv(S,"dan")};
+    hoaDung:mgOrgLv(v({o:"bd",r:"bd_hoa"}),"td_dung"),ngua:mgOrgLv(v({o:"bd",r:"bd_ngua"}),"huong"),srv:mgOrgLv({name:"m",sid:3,org:"x",arts:{}},"dan"),me:mgOrgLv(S,"dan")};
    const q=v({o:"tt",r:"tt_tranh"});o.lift=+(mgHandEff("dan",q)-mgHandEff("dan",v({o:"cnv",r:"cnv_ma"}))).toFixed(3)}
   return o});
  console.log(JSON.stringify({ids:r.ids,tot:r.tot}));
  ok(r.survey.every(x=>x.match&&x.own&&x.roads===4)&&!r.extra.length,`1 every origin has a row per real story road + its own row (${r.survey.length} origins incl. branches, ${r.ids} identities)`,r.survey.filter(x=>!x.match||!x.own||x.roads!==4).concat(r.extra));
  ok(!r.bad.length&&!r.oldArt.length&&!r.startSrc,'2 one core: real art / virtue keys, bậc 1..5 in BAL; no ORIGINS art:{} left; start() reads no o.art',{bad:r.bad,oldArt:r.oldArt,startSrc:r.startSrc});
  ok(!r.dup.length&&r.nArts.every(n=>n>=3&&n<=4),'3 variety: no two identities share a set; 3..4 arts each',{dup:r.dup,n:[Math.min(...r.nArts),Math.max(...r.nArts)]});
- const t=r.tot;ok(!r.eqRoad.length&&!r.core.length&&Math.min(t.tt,t.nc,t.bd)>Math.max(t.muoi,t.cn,t.thd)&&Math.min(t.muoi,t.cn,t.thd)>t.cnv,'4 law 2: equal total per road of an origin; noble > middle > poor; each road keeps the origin art',{eqRoad:r.eqRoad,core:r.core,tot:t});
+ const t=r.tot;ok(!r.eqRoad.length&&!r.core.length&&Math.min(t.tt,t.nc,t.bd)>Math.max(t.muoi,t.cn,t.thd)&&Math.min(t.muoi,t.cn,t.thd)>t.cnv,'4 law 2: equal total bậc + training points per road of an origin; noble > middle > poor; each road keeps the origin art',{eqRoad:r.eqRoad,core:r.core,tot:t});
  ok(r.ng.every(x=>x.ok)&&r.noRoad,'5 new game: her arts / tứ đức = the row of her rolled road (every origin, 3 lives); F14 off → the origin row',{bad:r.ng.filter(x=>!x.ok),noRoad:r.noRoad});
  ok(r.oldSave,'6 old saves keep their arts (save / load: same S.arts, S.vir)');
- const n=r.npc;ok(n.tranhDan===2&&n.tranhVe===2&&n.ttNoRoad===1&&n.agTt===1&&n.maCong===2&&n.ngua===2&&n.srv===0&&n.me===0&&r.lift>0,'7 NPC upbringing reads her identity row (road row; no road → origin row; td_ → virtue); servant / herself 0',Object.assign({lift:r.lift},n));
+ const n=r.npc;ok(n.tranhDan===2&&n.tranhVe===2&&n.ttNoRoad===1&&n.agTt===1&&n.hoaDung===2&&n.ngua===2&&n.srv===0&&n.me===0&&r.lift>0,'7 NPC upbringing reads her identity row (road row; no road → origin row; td_ → virtue); servant / herself 0',Object.assign({lift:r.lift},n));
  ok(!errs.length,'8 no page errors',errs.slice(0,5));
  await b.close();process.exit(res.every(x=>x)?0:1)})().catch(e=>{console.error(e);process.exit(1)});
