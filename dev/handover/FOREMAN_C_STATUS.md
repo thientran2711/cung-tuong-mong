@@ -654,3 +654,4 @@ NEWACCT#4 ~17:16Z: OWNER Lượt 1267 reminded MODEL RULE (Sonnet default for ar
 NEWACCT#4 ~17:17Z: OWNER Lượt 1268 asked if Hán t4–t8 prompts keep rank signatures → NO → DESIGN3 (Sonnet) brief briefs/design3-han-signature.md (with t5/t6 swap).
 NEWACCT#4 ~17:17Z: ITEMFIX3 done 5df451d (m11 t4 đoạn cpS9Ezv0eP, 135 cr); #4 LOOKED, sent Lượt 1270 (notes: scalloped capelet edge, book + bird = 2 items?, weak 3/4). ITEMFIX3 archived (Opus).
 NEWACCT#4 ~17:20Z: OWNER Lượt 1271: 'Ok, nếu mà thiết kế thì cho Opus làm.' → design invention workers = Opus; copy/swap edits + gens = Sonnet (START_FOREMAN_C MODEL RULE updated). DESIGN3 (adding existing signature wording) stays Sonnet.
+NEWACCT#4 ~17:21Z: DESIGN3 f2e12fe added signatures but CUT outfit details (ribbon streamers, cuffs, pearls, zupei, hem bands) → sent back to restore, trim only boilerplate. Not sent to owner yet.
