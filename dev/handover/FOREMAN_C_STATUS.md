@@ -861,3 +861,4 @@ FOR MAIN (Foreman C #10, 22:15Z 20/11): STALE REPLAY #4 at ~22:06Z on the handov
 NEWACCT#10 ~23:55Z: B26FAB5 861132b DONE: G35 cleavage 0, G36 no phi bạch in xuân/đông, palfix a2 (39 people incl. 9 unlisted c-people → asked owner), a3, c2, c3; vase → lotus lamp per rank (list to owner L1496); gate files repaired. Next Lượt 1496.
 NEWACCT#10 HANDOVER ~00:00Z: depth 0, ctx 33 % (START 8 % + 25 %) → roll. TAKEOVER_FOREMAN_C_NEWACCT11.md written; opening #11 as my child. No schedules created. Next Lượt 1496.
 NEWACCT#10 ~00:02Z: opened #11 session_01D3E3NbE9HePpcjX4M7PhSe. #10 stops.
+NEWACCT#11 ~22:20Z 20/11: depth 1 (child of #10), START_CTX ~5 % (est; get_session reads 0) → roll at ~30 %, ceiling 60 %. Took over; MAIDP2 DESIGN13 B26FAB5 told to report to #11. No schedules (list_triggers empty). Parse OK ×3, keep --all 167 PASS. Next Lượt 1496.
