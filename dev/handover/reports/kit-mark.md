@@ -19,3 +19,9 @@ Branch `review/kit-mark` @ 1c134a6f (from origin/main 37e4a68f; build files rebu
 - After mg-score-same lands, re-run kit-mark: the "chip = graded last score" assert becomes "chip = mgLive" with no change to the kit.
 - Not done (outside the brief): gold round pop when time-cut.
 KIT READY kit-mark 1c134a6f
+
+## RE-REVIEW round (LIVE dbddaed2 noword-kit merged) — branch review/kit-mark @ 372e2a18
+- Merged origin/main dbddaed2 (mg-score-same 892e5bb0 + mg-back + noword-kit). Hand-merged: kitGameClock keeps the amber body (window only when mgFast > 0, tone w/n) AND the number-only `.replace(/Còn\s*/,"").replace(/\s*giây/,"")` (owner 20/11 ~05:10Z); j82 kg82Play / j92 / jsgame env lines take main's version + `KG82.cur=`; KIT §13.9 on main is now «Quay lại» (mg-back), so this part is renumbered KIT §13.10 (+ kit page sample «§13.10»).
+- Chip reads the HUD mark only (already graded by mgLive) — no second grading (the Cờ 8 → 5 double-grade is gone).
+- Tests (all on 372e2a18): kit-mark PASS Fold 755x1000 + iPad 1180x820 (31 kinds); mg-ready-guide 9/9; mg-noword-kit PASS 31 kinds 0 words (the chip is digits only); mg-score-same-scan 35 cells via the ONE grade, 0 raw; QUICKCHECK PASS 232 s (core gates PASS, old save ok, perf render 244/236, tab 571/483, buổi 1845/1592, tasks>200ms 23/22). golive.sh not run (auto-mode refused; quickcheck.sh is its check).
+- Shots: not retaken after this merge (code identical for the chip/clock; the earlier Fold/iPad shots stand).
