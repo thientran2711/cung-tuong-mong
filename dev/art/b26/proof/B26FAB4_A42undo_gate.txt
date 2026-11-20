@@ -1,0 +1,108 @@
+FAIL c09|4|a18|None cuts= len=9073 ['  FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): … in image 1 (her first reference): pale silver grey-blue silk like #CAC…', 'APPROVED CHECK FAIL /tmp/tmpxp_s7pfk.txt scope tp4', 'STORE CHECK FAIL /tmp/tmpxp_s7pfk.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS s17|4|a18|None cuts= len=9667 
+FAIL c09|4|a18|dong cuts= len=9377 ['  FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): … in image 1 (her first reference): pale silver grey-blue silk like #CAC…', 'APPROVED CHECK FAIL /tmp/tmpn5dn4k93.txt scope tp4', 'STORE CHECK FAIL /tmp/tmpn5dn4k93.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS s17|4|a18|dong cuts= len=9971 
+PASS m24|4|a26|None cuts= len=9396 
+FAIL c32|4|a26|None cuts= len=8858 ['  FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): …our ivory and the SECONDARY colour soft grey-blue, the secondary clea…', 'APPROVED CHECK FAIL /tmp/tmp9uqrqqjr.txt scope tp4', 'STORE CHECK FAIL /tmp/tmp9uqrqqjr.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL c32|4|a26|dong cuts= len=9162 ['  FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): …our ivory and the SECONDARY colour soft grey-blue, the secondary clea…', 'APPROVED CHECK FAIL /tmp/tmpgyngzu0q.txt scope tp4', 'STORE CHECK FAIL /tmp/tmpgyngzu0q.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS s58|4|a26|dong cuts= len=9944 
+FAIL c09|4|a36|None cuts= len=9123 ['  FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): … in image 1 (her first reference): pale silver grey-blue silk like #CAC…', 'APPROVED CHECK FAIL /tmp/tmpfnuu6b05.txt scope tp4', 'STORE CHECK FAIL /tmp/tmpfnuu6b05.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS m41|4|a36|None cuts= len=9337 
+PASS m41|4|a36|dong cuts= len=9641 
+FAIL c09|4|a36|dong cuts= len=9427 ['  FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): … in image 1 (her first reference): pale silver grey-blue silk like #CAC…', 'APPROVED CHECK FAIL /tmp/tmp4bpg_2o5.txt scope tp4', 'STORE CHECK FAIL /tmp/tmp4bpg_2o5.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL c26|4|a51|None cuts= len=10779 ['FAIL LEN TOO LONG: prompt is 10779 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmprlwo94wq.txt scope tp4', 'STORE CHECK FAIL /tmp/tmprlwo94wq.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL m24|4|a51|None cuts= len=10971 ['FAIL LEN TOO LONG: prompt is 10971 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpy7rurubw.txt scope tp4', 'STORE CHECK FAIL /tmp/tmpy7rurubw.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL m24|4|a51|dong cuts= len=10885 ['FAIL LEN TOO LONG: prompt is 10885 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmp90ef4_y1.txt scope tp4', 'STORE CHECK FAIL /tmp/tmp90ef4_y1.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL c26|4|a51|dong cuts= len=10676 ['FAIL LEN TOO LONG: prompt is 10676 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpest_vpfc.txt scope tp4', 'STORE CHECK FAIL /tmp/tmpest_vpfc.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL c12|4|a65|None cuts= len=9894 ['FAIL F16 NOFRUIT: fruit in a held item (owner Lượt 1052/1054/1058: nobody holds fruit, any rank, any age): …visible layers with WIDE gold-thread embroidered borders of pomegranates at collar, sleeves and hem, a…', 'APPROVED CHECK FAIL /tmp/tmp_uggasgt.txt scope tp4', 'STORE CHECK FAIL /tmp/tmp_uggasgt.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL s41|4|a65|None cuts= len=11543 ['FAIL LEN TOO LONG: prompt is 11543 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpd_53hltg.txt scope tp4', 'STORE CHECK FAIL /tmp/tmpd_53hltg.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL s14|4|a65|None cuts= len=11222 ['FAIL LEN TOO LONG: prompt is 11222 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmp3ppx2dag.txt scope tp4', 'STORE CHECK FAIL /tmp/tmp3ppx2dag.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL c12|4|a65|dong cuts= len=10198 ['  FAIL F16 NOFRUIT: fruit in a held item (owner Lượt 1052/1054/1058: nobody holds fruit, any rank, any age): …visible layers with WIDE gold-thread embroidered borders of pomegranates at collar, sleeves and hem, a…', 'APPROVED CHECK FAIL /tmp/tmp0kb7_lw6.txt scope tp4', 'STORE CHECK FAIL /tmp/tmp0kb7_lw6.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL s14|4|a65|dong cuts= len=11164 ['FAIL LEN TOO LONG: prompt is 11164 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpfd_tw505.txt scope tp4', 'STORE CHECK FAIL /tmp/tmpfd_tw505.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS m26|5|a18|None cuts= len=9069 
+PASS m07|5|a18|None cuts= len=9141 
+PASS m07|5|a18|dong cuts= len=9451 
+PASS m26|5|a18|dong cuts= len=9379 
+PASS m51|5|a26|None cuts= len=9203 
+PASS c03|5|a26|None cuts= len=9034 
+PASS c03|5|a26|dong cuts= len=9344 
+PASS m51|5|a26|dong cuts= len=9513 
+PASS s24|5|a36|None cuts= len=9880 
+PASS m49|5|a36|None cuts= len=9291 
+PASS s24|5|a36|dong cuts= len=9828 
+PASS c03|5|a36|dong cuts= len=9482 
+FAIL m50|5|a51|None cuts= len=10969 ['FAIL LEN TOO LONG: prompt is 10969 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpaicqh7p9.txt scope tp5', 'STORE CHECK FAIL /tmp/tmpaicqh7p9.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL s37|5|a51|None cuts= len=11504 ['FAIL LEN TOO LONG: prompt is 11504 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpp_ea7qwc.txt scope tp5', 'STORE CHECK FAIL /tmp/tmpp_ea7qwc.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS c03|5|a51|None cuts=ITEM len=9993 
+PASS c03|5|a51|dong cuts= len=9968 
+FAIL m50|5|a51|dong cuts= len=10917 ['FAIL LEN TOO LONG: prompt is 10917 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpo93bzy_k.txt scope tp5', 'STORE CHECK FAIL /tmp/tmpo93bzy_k.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL s37|5|a51|dong cuts= len=11406 ['FAIL LEN TOO LONG: prompt is 11406 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmphyjxkihc.txt scope tp5', 'STORE CHECK FAIL /tmp/tmphyjxkihc.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS c04|5|a65|None cuts= len=9955 
+FAIL s39|5|a65|None cuts= len=11496 ['FAIL LEN TOO LONG: prompt is 11496 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpxn6awpev.txt scope tp5', 'STORE CHECK FAIL /tmp/tmpxn6awpev.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL p01|5|a65|None cuts= len=11020 ['FAIL LEN TOO LONG: prompt is 11020 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpqym6wa90.txt scope pr5', 'STORE CHECK FAIL /tmp/tmpqym6wa90.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL s39|5|a65|dong cuts= len=11443 ['FAIL LEN TOO LONG: prompt is 11443 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpbo1yprcx.txt scope tp5', 'STORE CHECK FAIL /tmp/tmpbo1yprcx.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS c04|5|a65|dong cuts=E1 len=9930 
+PASS s25|6|a18|None cuts= len=9509 
+PASS m42|6|a18|None cuts= len=9130 
+PASS s28|6|a18|dong cuts= len=9718 
+PASS s33|6|a18|dong cuts= len=9890 
+PASS m10|6|a26|None cuts= len=9181 
+PASS m28|6|a26|None cuts= len=9226 
+PASS m47|6|a26|dong cuts= len=9266 
+PASS m35|6|a26|dong cuts= len=9341 
+PASS c12|6|a36|None cuts= len=9155 
+PASS c21|6|a36|None cuts= len=9011 
+FAIL s38|6|a36|None cuts= len=10156 ['FAIL LEN TOO LONG: prompt is 10156 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmp6dqr0htk.txt scope tp6', 'STORE CHECK FAIL /tmp/tmp6dqr0htk.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL s43|6|a36|None cuts= len=10151 ['FAIL LEN TOO LONG: prompt is 10151 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpcjv4hday.txt scope tp6', 'STORE CHECK FAIL /tmp/tmpcjv4hday.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS m40|6|a36|dong cuts= len=9389 
+PASS s50|6|a36|dong cuts= len=9759 
+FAIL s53|6|a51|None cuts= len=11420 ['FAIL LEN TOO LONG: prompt is 11420 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmp46ysi3bs.txt scope tp6', 'STORE CHECK FAIL /tmp/tmp46ysi3bs.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL s37|6|a51|None cuts= len=11484 ['FAIL LEN TOO LONG: prompt is 11484 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpc0gfvala.txt scope tp6', 'STORE CHECK FAIL /tmp/tmpc0gfvala.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL s64|6|a51|dong cuts= len=11134 ['FAIL LEN TOO LONG: prompt is 11134 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpuesg9hwn.txt scope tp6', 'STORE CHECK FAIL /tmp/tmpuesg9hwn.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL m06|6|a51|dong cuts= len=10827 ['FAIL LEN TOO LONG: prompt is 10827 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmp8_8jrrr9.txt scope tp6', 'STORE CHECK FAIL /tmp/tmp8_8jrrr9.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL m19|6|a65|None cuts= len=10810 ['FAIL LEN TOO LONG: prompt is 10810 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpjd0wmjd5.txt scope tp6', 'STORE CHECK FAIL /tmp/tmpjd0wmjd5.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL c18|6|a65|None cuts= len=10479 ['FAIL LEN TOO LONG: prompt is 10479 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmptibps49q.txt scope tp6', 'STORE CHECK FAIL /tmp/tmptibps49q.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL s23|6|a65|dong cuts= len=11141 ['FAIL LEN TOO LONG: prompt is 11141 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmp78gkkda_.txt scope tp6', 'STORE CHECK FAIL /tmp/tmp78gkkda_.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL m20|6|a65|dong cuts= len=10708 ['FAIL LEN TOO LONG: prompt is 10708 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpmfpkouug.txt scope tp6', 'STORE CHECK FAIL /tmp/tmpmfpkouug.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS s29|7|a18|None cuts= len=9956 
+PASS m39|7|a18|None cuts= len=9650 
+PASS m16|7|a18|dong cuts= len=9718 
+PASS s08|7|a18|dong cuts= len=9941 
+PASS s28|7|a26|None cuts= len=9620 
+PASS m51|7|a26|None cuts= len=9554 
+PASS s59|7|a26|dong cuts= len=9945 
+PASS m19|7|a26|dong cuts= len=9720 
+PASS m51|7|a36|None cuts= len=9751 
+PASS c26|7|a36|None cuts= len=9570 
+PASS c16|7|a36|dong cuts= len=9649 
+PASS m27|7|a36|dong cuts= len=9912 
+FAIL s61|7|a36|dong cuts=ITEM len=9999 ['FAIL F16 NOFRUIT: fruit in a held item (owner Lượt 1052/1054/1058: nobody holds fruit, any rank, any age): …a colour family clearly different from BOTH her robe colour persimmon and her secondary colour deep…', 'APPROVED CHECK FAIL /tmp/tmp2zeayz6n.txt scope tp7', 'STORE CHECK FAIL /tmp/tmp2zeayz6n.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL m29|7|a51|None cuts= len=11352 ['FAIL LEN TOO LONG: prompt is 11352 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmp1g_aletn.txt scope tp7', 'STORE CHECK FAIL /tmp/tmp1g_aletn.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL c32|7|a51|None cuts= len=11156 ['  FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): …our ivory and the SECONDARY colour soft grey-blue, the secondary clea…', 'APPROVED CHECK FAIL /tmp/tmpc0o38f3z.txt scope tp7', 'STORE CHECK FAIL /tmp/tmpc0o38f3z.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL p01|7|a51|dong cuts= len=11704 ['FAIL LEN TOO LONG: prompt is 11704 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmptmt8_w6z.txt scope pr7', 'STORE CHECK FAIL /tmp/tmptmt8_w6z.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL m14|7|a51|dong cuts= len=11487 ['FAIL LEN TOO LONG: prompt is 11487 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmplr92r_mk.txt scope tp7', 'STORE CHECK FAIL /tmp/tmplr92r_mk.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL m43|7|a65|None cuts= len=11101 ['  FAIL X11 BANNED: teeth / open mouth: … the lips fully pressed together and covering the teeth completely, eyes fully open. …', 'APPROVED CHECK FAIL /tmp/tmpw82xr0j9.txt scope tp7', 'STORE CHECK FAIL /tmp/tmpw82xr0j9.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL s34|7|a65|None cuts= len=11780 ['FAIL LEN TOO LONG: prompt is 11780 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpdh9kc1mf.txt scope tp7', 'STORE CHECK FAIL /tmp/tmpdh9kc1mf.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL c07|7|a65|dong cuts= len=11079 ['FAIL LEN TOO LONG: prompt is 11079 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpnnfhkau5.txt scope tp7', 'STORE CHECK FAIL /tmp/tmpnnfhkau5.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL c11|7|a65|dong cuts= len=11090 ['  FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): … in image 1 (her first reference): soft pink-grey silk like #D6BFC3 i…', 'APPROVED CHECK FAIL /tmp/tmp_rxbyv84.txt scope tp7', 'STORE CHECK FAIL /tmp/tmp_rxbyv84.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+PASS m32|8|a18|None cuts= len=9040 
+PASS c26|8|a18|None cuts= len=8666 
+PASS m32|8|a18|dong cuts= len=9523 
+PASS s18|8|a18|dong cuts= len=9888 
+PASS c26|8|a26|None cuts= len=8529 
+PASS m32|8|a26|None cuts= len=8989 
+PASS m32|8|a26|dong cuts= len=9472 
+PASS s18|8|a26|dong cuts= len=9929 
+PASS m12|8|a36|None cuts= len=9085 
+PASS s65|8|a36|None cuts= len=9441 
+PASS s51|8|a36|dong cuts= len=9612 
+PASS m12|8|a36|dong cuts= len=9568 
+FAIL m32|8|a51|None cuts= len=10749 ['FAIL LEN TOO LONG: prompt is 10749 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpp2w2ixai.txt scope tp8', 'STORE CHECK FAIL /tmp/tmpp2w2ixai.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL m12|8|a51|None cuts= len=10862 ['FAIL LEN TOO LONG: prompt is 10862 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpwlg3687s.txt scope tp8', 'STORE CHECK FAIL /tmp/tmpwlg3687s.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL m32|8|a51|dong cuts= len=10842 ['FAIL LEN TOO LONG: prompt is 10842 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpgof9nf1o.txt scope tp8', 'STORE CHECK FAIL /tmp/tmpgof9nf1o.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL s39|8|a51|dong cuts= len=11454 ['FAIL LEN TOO LONG: prompt is 11454 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmph2rqmp56.txt scope tp8', 'STORE CHECK FAIL /tmp/tmph2rqmp56.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL c06|8|a65|None cuts= len=11186 ['FAIL LEN TOO LONG: prompt is 11186 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpiazxl5r1.txt scope tp8', 'STORE CHECK FAIL /tmp/tmpiazxl5r1.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL m32|8|a65|None cuts= len=10552 ['FAIL LEN TOO LONG: prompt is 10552 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmplemxkkdj.txt scope tp8', 'STORE CHECK FAIL /tmp/tmplemxkkdj.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL m32|8|a65|dong cuts= len=10645 ['FAIL LEN TOO LONG: prompt is 10645 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmpt0mzfh_v.txt scope tp8', 'STORE CHECK FAIL /tmp/tmpt0mzfh_v.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+FAIL c06|8|a65|dong cuts= len=11261 ['FAIL LEN TOO LONG: prompt is 11261 characters, the gen tool refuses more than 10000', 'APPROVED CHECK FAIL /tmp/tmptkugveit.txt scope tp8', 'STORE CHECK FAIL /tmp/tmptkugveit.txt — APPROVED CHECK FAIL (APPROVED/BANNED tables in check_store.py): do NOT generate']
+gate (ok, over10k): {(False, False): 8, (True, False): 58, (False, True): 41}

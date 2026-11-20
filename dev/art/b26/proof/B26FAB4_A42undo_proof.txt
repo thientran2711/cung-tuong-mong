@@ -1,0 +1,63 @@
+# B26FAB4 A42 revoked (owner L1442): base = 3426b62 dump, new = A41 only; cmp9.py
+changed 2997
+  t4 a18 None: 3
+  t4 a18 dong: 3
+  t4 a26 None: 3
+  t4 a26 dong: 3
+  t4 a36 None: 2
+  t4 a36 dong: 2
+  t4 a51 None: 3
+  t4 a51 dong: 3
+  t4 a65 None: 3
+  t4 a65 dong: 2
+  t5 a18 None: 3
+  t5 a18 dong: 3
+  t5 a26 None: 2
+  t5 a26 dong: 2
+  t5 a36 None: 3
+  t5 a36 dong: 3
+  t5 a51 None: 3
+  t5 a51 dong: 3
+  t5 a65 None: 3
+  t5 a65 dong: 2
+  t6 a18 None: 146
+  t6 a18 dong: 145
+  t6 a26 None: 146
+  t6 a26 dong: 145
+  t6 a36 None: 146
+  t6 a36 dong: 145
+  t6 a51 None: 146
+  t6 a51 dong: 145
+  t6 a65 None: 146
+  t6 a65 dong: 145
+  t7 a18 None: 146
+  t7 a18 dong: 146
+  t7 a26 None: 146
+  t7 a26 dong: 146
+  t7 a36 None: 146
+  t7 a36 dong: 146
+  t7 a51 None: 146
+  t7 a51 dong: 146
+  t7 a65 None: 146
+  t7 a65 dong: 146
+  t8 a18 None: 3
+  t8 a18 dong: 3
+  t8 a26 None: 3
+  t8 a26 dong: 3
+  t8 a36 None: 3
+  t8 a36 dong: 3
+  t8 a51 None: 3
+  t8 a51 dong: 3
+  t8 a65 None: 2
+  t8 a65 dong: 2
+why: {'A41:word': 2855, 'A41:pose': 142}
+bad: 0 []
+necklace word left in new cells: 0
+cleavage clause in cells: 0 | square neckline WITHOUT clause: 2336
+pose re-picked (old pose touched a necklace): 142 c03|5|a26|None c03|5|a26|dong c03|5|a36|None c03|5|a36|dong c03|5|a51|None c03|5|a51|dong c04|5|a65|None c04|5|a65|dong c05|6|a65|None c05|6|a65|dong c06|8|a65|None c06|8|a65|dong c08|6|a18|None c08|6|a18|dong c08|6|a26|None c08|6|a26|dong c08|6|a36|None c08|6|a36|dong c08|6|a51|None c08|6|a51|dong c09|4|a18|None c09|4|a18|dong c09|4|a36|None c09|4|a36|dong c12|4|a65|None c12|4|a65|dong c20|7|a36|None c20|7|a36|dong c20|7|a51|None c20|7|a51|dong c20|7|a65|None c20|7|a65|dong c26|4|a51|None c26|4|a51|dong c26|8|a18|None c26|8|a18|dong c26|8|a26|None c26|8|a26|dong c31|7|a18|None c31|7|a18|dong c31|7|a26|None c31|7|a26|dong c32|4|a26|None c32|4|a26|dong m07|5|a18|None m07|5|a18|dong m12|8|a36|None m12|8|a36|dong m12|8|a51|None m12|8|a51|dong m23|7|a36|None m23|7|a36|dong m24|4|a26|None m24|4|a26|dong m24|4|a51|None m24|4|a51|dong m26|5|a18|None m26|5|a18|dong m32|8|a18|None m32|8|a18|dong m32|8|a26|None m32|8|a26|dong m32|8|a51|None m32|8|a51|dong m32|8|a65|None m32|8|a65|dong m41|4|a36|None m41|4|a36|dong m43|7|a18|None m43|7|a18|dong m43|7|a26|None m43|7|a26|dong m48|6|a51|None m48|6|a51|dong m49|5|a36|None m49|5|a36|dong m49|7|a65|None m49|7|a65|dong m50|5|a51|None m50|5|a51|dong m51|5|a26|None m51|5|a26|dong p01|5|a65|None s12|7|a51|None s12|7|a51|dong s14|4|a65|None s14|4|a65|dong s15|6|a36|None s15|6|a36|dong s17|4|a18|None s17|4|a18|dong s18|8|a18|None s18|8|a18|dong s18|8|a26|None s18|8|a26|dong s21|7|a18|None s21|7|a18|dong s21|7|a26|None s21|7|a26|dong s21|7|a36|None s21|7|a36|dong s21|7|a51|None s21|7|a51|dong s21|7|a65|None s21|7|a65|dong s24|5|a36|None s24|5|a36|dong s27|6|a18|None s27|6|a18|dong s27|6|a26|None s27|6|a26|dong s27|6|a65|None s27|6|a65|dong s37|5|a51|None s37|5|a51|dong s39|5|a65|None s39|5|a65|dong s39|8|a51|None s39|8|a51|dong s41|4|a18|None s41|4|a18|dong s41|4|a65|None s42|6|a18|None s42|6|a18|dong s42|6|a26|None s42|6|a26|dong s42|6|a36|None s42|6|a36|dong s42|6|a51|None s42|6|a51|dong s42|6|a65|None s42|6|a65|dong s51|8|a36|None s51|8|a36|dong s53|4|a51|None s53|4|a51|dong s54|5|a18|None s54|5|a18|dong s58|4|a26|None s58|4|a26|dong s65|8|a36|None s65|8|a36|dong
+went over 10000 (fitted in base): 0 
+cells > 10000 that fitted at HEAD 7007acc:
+  t5 a51 dong (9): c04 +22, c08 +43, c09 +31, c14 +69, c20 +5, c25 +33, c29 +47, c30 +16, m11 +116
+  t5 a65 dong (41): m01 +80, m03 +109, m05 +91, m06 +87, m07 +61, m08 +82, m10 +97, m13 +36, m14 +116, m15 +106, m16 +78, m18 +72, m19 +97, m20 +60, m21 +66, m22 +66, m24 +94, m26 +58, m27 +60, m28 +43, m29 +83, m30 +59, m32 +31, m33 +76, m34 +44, m35 +103, m36 +116, m38 +18, m39 +100, m40 +67, m41 +94, m42 +12, m43 +57, m44 +11, m45 +65, m46 +4, m48 +45, m49 +124, m50 +93, m51 +41, m52 +22
+  tnude a51 None (1): c06 +414
+  tnude a65 None (1): c06 +258
