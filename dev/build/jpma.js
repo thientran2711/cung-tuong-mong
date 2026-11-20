@@ -352,7 +352,14 @@ function pmLiveAns(k,x0,ok,send){const x=pmCoopX(k,x0);pmLvT("ans",k,ok,!!x,pmLv
  setTimeout(()=>{const L=PML[g]={g,x,role,send,me:null,op:null,opSc:0,w:null};pmLvSay(g,"go",{x,role:pmLvOt(role)});L.tm=setTimeout(()=>pmLvFall(L),B().live.wait)},0)}
 function pmLvFall(L){pmLvT("fall",L.fin,L.board);if(L.fin||L.board)return;L.fin=true;delete PML[L.g];log("Hảo hữu chưa vào ván; hai bên theo tài nghệ của mình.");L.send(true)}
 function pmLvSend(L){pmLvT("send",L.fin,L.me,L.op,L.w);if(L.fin)return;L.fin=true;clearTimeout(L.tm);delete PML[L.g];const lv={};if(L.me!=null)lv["r"+L.role]=L.me;if(L.op!=null)lv["r"+pmLvOt(L.role)]=L.op;if(L.w)lv.w=L.w;L.send(true,pmLvSan(lv)||undefined)}
-function pmLvMine(L,raw,lo){L.me=pmLvN(raw);if(lo)L.w=lo==="draw"?"d":lo==="win"?L.role:pmLvOt(L.role);pmLvSay(L.g,"end",{raw:L.me,w:L.w||null});
+/* fix 1 (law 6a, KIT §13.9): a give-up on this board goes to the friend AT ONCE (gu), not when she confirms her result card. The same rule as an NPC duel:
+   Cờ = the side that gives up loses the board; timed arts = her mark is 0/10 and the duel is scored as always (talent + mark, pmLiveRes) */
+function pmLvGu(L){if(L.gu)return;L.gu=1;L.me=0;if(L.x.kind==="co")L.w=pmLvOt(L.role);pmLvSay(L.g,"end",{raw:0,w:L.w,gu:1})}
+/* the friend gave up: this board ends now as her win (Cờ: the board's winner; timed arts: the mark her board showed so far); not started yet = it starts and ends at once */
+function pmLvGuEnd(L){if(L.guDone||!L.opGu)return;if(!L.go){const box=typeof kg82Box==="function"?kg82Box():null,go=box&&(box.querySelector(".kgr-go")||(KG82.ready&&KG82.ready.go&&box.querySelector(KG82.ready.go))||box.querySelector("#kg82go"));if(go)go.click();return}
+ if(KG82.phase!=="play"||!KG82.cur)return;L.guDone=1;const f=pmFr();if(f)log(`${f.name} bỏ cuộc giữa ván; ván này tính phần ngươi.`);
+ if(L.x.kind==="co"&&KG82.engX){KG82.kyOut="win";KG82.cur.end(K0().win)}else{KG82.endMark=L.sc!=null?L.sc:0;KG82.cur.end(KG82.endMark)}}
+function pmLvMine(L,raw,lo){L.me=L.gu?0:pmLvN(raw);if(lo&&!(L.x.kind==="co"&&(L.gu||L.opGu)))L.w=lo==="draw"?"d":lo==="win"?L.role:pmLvOt(L.role);pmLvSay(L.g,"end",{raw:L.me,w:L.w||null,gu:L.gu||0});
  if(L.remote){delete PML[L.g];log("Ván đã xong; đợi hảo hữu báo kết quả.");return}
  if(L.op!=null)pmLvSend(L);else{clearTimeout(L.tm);L.tm=setTimeout(()=>pmLvSend(L),B().live.wait)}}
 /* her device is busy (any kg82 frame open, a result not yet confirmed included: replacing it would drop that game) → «no» → the asker falls back */
@@ -365,7 +372,7 @@ function pmLvMsg(m){const L=PML[m.g];pmLvT("msg",m.mode,!!L);
  if(m.mode==="no"){if(!L.remote&&!L.board){clearTimeout(L.tm);pmLvFall(L)}return}
  if(m.mode==="sc"){const v=pmLvN(m.raw);if(v!=null){L.opSc=v;if(L.vsRe)L.vsRe()}return}
  if(m.mode==="mv"){const i=+m.i;if(L.net&&Number.isInteger(i)&&i>=0)L.net.on?L.net.on(i):L.net.q.push(i);return}
- if(m.mode==="end"){L.op=pmLvN(m.raw);if(!L.remote&&L.me!=null)pmLvSend(L)}}
+ if(m.mode==="end"){L.op=pmLvN(m.raw);if(m.gu&&!L.opGu&&!L.gu){L.opGu=1;L.op=0;if(L.x.kind==="co")L.w=L.role;pmLvGuEnd(L)}if(!L.remote&&L.me!=null)pmLvSend(L)}}
 if(typeof COOP==="object"&&COOP.on)COOP.on("act",m=>{try{if(m&&m.k==="pm-live"&&window.COOPW&&COOPW.on&&m.from!==COOPW.seat)pmLvMsg(m)}catch(e){console.error(e)}});
 /* both devices: the same board as an NPC game (kit frame, kgReady rules, the kit plate K-PM-1 on a duel); the friend's line = her messages */
 function pmLvBoard(L){const f=pmFr();if(!f){if(!L.remote)pmLvFall(L);return}L.board=1;const x=L.x,duel=x.a==="duel",R=pmR(S,f),A=L.role==="a"?S:f,T=L.role==="a"?f:S;
@@ -375,15 +382,17 @@ function pmLvBoard(L){const f=pmFr();if(!f){if(!L.remote)pmLvFall(L);return}L.bo
   const out=(raw,sk)=>sk?(pmScore(S,"co",R,SK)>pmScore(f,"co",R)?"win":"lose"):KG82.kyOut||(raw>=K0().win?"win":"lose");
   playArt({art:"co",eng:L.role==="a"?PM_KY:PM_KYW,title,occ:"pm",rank:R,rowsHead:"Ván cờ",rows:[["Đối thủ",`${f.name} (hảo hữu) cầm quân ${L.role==="a"?"trắng, đi sau":"đen, đi trước"}`,"t"]].concat(stRow),go:"Bắt đầu",
    quick:{n:"Để tài nghệ quyết định",sub:`tính như người cùng bậc (${SK}/10)`},
-   onGo:()=>{KG82.kyNoise=pmKyNoise(f,S,R);KG82.guardMs=K0().guard;L.net=KG82.kyNet={side:L.role==="a"?1:2,q:(L.net&&L.net.q)||[],mvWait:B().live.mv,send:(i,n)=>pmLvSay(L.g,"mv",{i,n})};
+   onGo:()=>{L.go=1;KG82.onFin=(r,g)=>{if(g)pmLvGu(L)};if(L.opGu)setTimeout(()=>pmLvGuEnd(L),0);KG82.kyNoise=pmKyNoise(f,S,R);KG82.guardMs=K0().guard;L.net=KG82.kyNet={side:L.role==="a"?1:2,q:(L.net&&L.net.q)||[],mvWait:B().live.mv,send:(i,n)=>pmLvSay(L.g,"mv",{i,n})};
     if(duel){const vs={me:0,f:1,opp:[{who:f,raw:0,shown:0}],ui:null};KG82.onVs=v=>{vs.me=v.me;vs.opp[0].shown=v.opp;vs.turn=v.turn;pmVsShow(vs,f,{round:v.round})}}},
    resRows:(raw,sk)=>{const w=out(raw,sk);res={w,raw:sk?SK:raw};return[["Ván cờ",w==="win"?"Ngươi thắng":w==="draw"?"Hòa cờ":`${f.name} thắng`,"t"]]},
    onDone:raw=>{const w=res?res.w:out(raw,false),r0=res?res.raw:raw;KG82.kyNoise=KG82.kyOut=KG82.onVs=KG82.kyNet=null;pmLvMine(L,r0,w)}});
   if(!L.net)L.net={q:[]};return}
  playArt({art:x.kind,title,occ:"pm",rank:R,rowsHead:duel?"Ván so tài":"Cùng chơi",rows:[["Cùng chơi với",`${f.name} (hảo hữu) · hai bên chơi cùng lúc`,"t"]].concat(stRow),go:"Bắt đầu",quick:{n:"Để tài nghệ quyết định",sub:"tính 5/10"},
-  onGo:()=>{if(!duel)return;const vs={me:0,f:0,t0:0,kind:x.kind,opp:[{who:f,raw:0,shown:0}],ui:null};KG82.vs=vs;L.tx=0;
+  onGo:()=>{L.go=1;L.sc=0;KG82.onFin=(r,g)=>{if(g)pmLvGu(L)};if(L.opGu)setTimeout(()=>pmLvGuEnd(L),0);
+   if(!duel){KG82.onHud=h=>{const m=/^(\d+)\s*\/\s*10/.exec(String(h&&h.score!=null?h.score:""));if(m)L.sc=+m[1]};return}
+   const vs={me:0,f:0,t0:0,kind:x.kind,opp:[{who:f,raw:0,shown:0}],ui:null};KG82.vs=vs;L.tx=0;
    L.vsRe=()=>{if(KG82.vs!==vs)return;vs.opp[0].shown=L.opSc;pmVsShow(vs,f,null)};
-   KG82.onHud=h=>{pmHud(vs,h,x.kind);vs.opp[0].shown=L.opSc;const t=Date.now();if(t-L.tx>=B().live.tx){L.tx=t;pmLvSay(L.g,"sc",{raw:vs.me})}pmVsShow(vs,f,h)}},
+   KG82.onHud=h=>{pmHud(vs,h,x.kind);L.sc=vs.me;vs.opp[0].shown=L.opSc;const t=Date.now();if(t-L.tx>=B().live.tx){L.tx=t;pmLvSay(L.g,"sc",{raw:vs.me})}pmVsShow(vs,f,h)}},
   onDone:raw=>{L.vsRe=null;pmLvMine(L,raw,null)}})}
 /* the act itself with the two live raws (ACT.pmplay / pmduel f, co-op path): Cờ = the board's winner, other arts = the duel score (talent + her raw), the same rule as pmAuto */
 function pmLiveRes(a,t,x){const lv=pmLvSan(x.live)||{},R=pmR(a,t),place=whereOf(a),ra=lv.ra!=null?lv.ra:pmRaw(a,x.kind,R),rt=lv.rt!=null?lv.rt:pmRaw(t,x.kind,R);

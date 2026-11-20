@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ff78a32a+","t":"2026-11-20T12:40Z","c":"review E22t: pm-giveup.test.js (§13.9 give-up × person duels; co-op live G1-G4 FAIL on 21102276)","b":"42a3ec1df70f","h":[{"s":"d39e3d2c+","t":"2026-11-20T12:07Z","c":"Nút «Mua» ở tiệm chơi một mình chạy lại; lời dẫn từng xuất thân chương 1–3"},{"s":"bf7cc4de+","t":"2026-11-20T11:56Z","c":"Mời khách khi chủ vắng nhà: khách chờ đúng luật"},{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"},{"s":"f6f4a69c+","t":"2026-11-20T11:10Z","c":"Sổ luân hồi thêm trang «Sơ đồ nhánh»"},{"s":"d941502e","t":"2026-11-20T11:16Z","c":"Chip điểm và đồng hồ trò chơi: chỉ còn con số, đồng hồ hổ phách khi gấp"},{"s":"c12231a1","t":"2026-11-20T11:05Z","c":"Trò chơi không chữ nhóm b: Đặt hoa có hình chỉ dẫn, bỏ chữ trên bàn chơi"},{"s":"62e3c9f1+","t":"2026-11-20T09:47Z","c":"cal-p2b-rv: tests follow the review fixes (cal-p2b C reads FAN/COOL; ag-mgcal 3 compares K2 with its own group band)"},{"s":"d5b8c01b","t":"2026-11-20T10:25Z","c":"Khung chung: sơ đồ nhánh, biển Thiên mệnh hai sắc (trang còn tắt)"}]};
+window.CTM_BI={"s":"74b42504+","t":"2026-11-20T12:51Z","c":"review E22t: pm-giveup.test.js (§13.9 give-up × person duels; co-op live G1-G4 FAIL on 21102276)","b":"34bf43485d23","h":[{"s":"d39e3d2c+","t":"2026-11-20T12:07Z","c":"Nút «Mua» ở tiệm chơi một mình chạy lại; lời dẫn từng xuất thân chương 1–3"},{"s":"bf7cc4de+","t":"2026-11-20T11:56Z","c":"Mời khách khi chủ vắng nhà: khách chờ đúng luật"},{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"},{"s":"f6f4a69c+","t":"2026-11-20T11:10Z","c":"Sổ luân hồi thêm trang «Sơ đồ nhánh»"},{"s":"d941502e","t":"2026-11-20T11:16Z","c":"Chip điểm và đồng hồ trò chơi: chỉ còn con số, đồng hồ hổ phách khi gấp"},{"s":"c12231a1","t":"2026-11-20T11:05Z","c":"Trò chơi không chữ nhóm b: Đặt hoa có hình chỉ dẫn, bỏ chữ trên bàn chơi"},{"s":"62e3c9f1+","t":"2026-11-20T09:47Z","c":"cal-p2b-rv: tests follow the review fixes (cal-p2b C reads FAN/COOL; ag-mgcal 3 compares K2 with its own group band)"},{"s":"d5b8c01b","t":"2026-11-20T10:25Z","c":"Khung chung: sơ đồ nhánh, biển Thiên mệnh hai sắc (trang còn tắt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -28613,7 +28613,7 @@ function kg82Open(o){const pb=KG82.preBack,pp=KG82.prePay||(typeof S!=='undefine
     same unpaid lesson, never a free one). Until then the ✕ is a free back: nothing was spent, nothing to undo. */
  if(pp){KG82.payOnGo=pp;try{if(typeof pp==="object"&&S.mg&&S.mg.pay!==pp){S.mg.pay=pp;save()}}catch(e){}KG82.backPre=()=>{KG82.payOnGo=null;try{if(typeof pb==="function")pb()}catch(e){console.error(e)}try{if(S.mg)S.mg=null}catch(e){}}}
  else if(typeof pb==="function")KG82.backPre=pb;return d}
-function kg82Close(silent){kgPay();/* closed by an outcome before «Sẵn sàng» (jsgame «Giao cho người làm»): the remembered charge is due */if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";KG82.back=null;KG82.backPre=null;KG82.payOnGo=null;KG82.backAsk=null;KG82.quit=null;KG82.quitAsk=null;KG82.xdo=null;KG82.giveUp=0;KG82.engX=KG82.onHud=KG82.onVs=KG82.guardMs=KG82.vs=KG82.kyNet=null;/* round C (jpma): engine / live plate / Cờ net hooks */
+function kg82Close(silent){kgPay();/* closed by an outcome before «Sẵn sàng» (jsgame «Giao cho người làm»): the remembered charge is due */if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";KG82.back=null;KG82.backPre=null;KG82.payOnGo=null;KG82.backAsk=null;KG82.quit=null;KG82.quitAsk=null;KG82.xdo=null;KG82.giveUp=0;KG82.engX=KG82.onHud=KG82.onVs=KG82.guardMs=KG82.vs=KG82.kyNet=KG82.kyNoise=KG82.kyOut=KG82.onFin=KG82.endMark=null;/* round C (jpma): engine / live plate / Cờ net hooks */
  const d=kg82El();if(!d)return;const ov=$("ov");d.remove();[...ov.children].forEach(c=>{if(c.dataset.kg82h!=null){c.hidden=c.dataset.kg82h==="1";delete c.dataset.kg82h}});
  if(typeof mgDone==="undefined"||mgDone)ov.hidden=true}
 const kg82Box=()=>document.getElementById("kg82box");
@@ -28884,8 +28884,8 @@ const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,pattern:kg82Pattern,steps:kg82Steps,
 
 /* ---------- running one game inside the frame ---------- */
 function kg82Play(kind,onEnd){kgPay();const box=kg82Box();if(!box)return;box.classList.remove("kgintro");box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";{const d=kg82El();if(d){d.classList.add("kg-run");d.classList.remove("kg-idle")}}
- let done=false,dead=false,stop=null;const env=KG82.cur={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]));if(KG82.onHud)try{KG82.onHud(o)}catch(e){console.error(e)}},end:raw=>{if(done)return;done=true;clearTimeout(guard);KG82.quit=null;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.rawF=raw;if(KG82.engX)return onEnd(raw);/* an engX board (jpma 7×7 Cờ) hands its own raw (win / hòa / loss), not the kind's graded curve */const gm=raw===0&&KG82.gaveUp?0:mgGrade(raw,kind);kg82Set0("score",`${gm}/10`);/* review/mg-score-same: the board ends on the mark given */onEnd(gm)}};/* mg-balance: engines pass a float; graded by BAL.mgTier.gamma */
- let guard=0;KG82.gaveUp=0;if(KG82.giveUp){KG82.giveUp=0;KG82.gaveUp=1;env.end(0);return}/* KIT §13.9 kit ✕ «Quay lại» on the rules screen: given up before «Sẵn sàng» = the caller's own 0/10 result, no board, no clock */
+ let done=false,dead=false,stop=null;const env=KG82.cur={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]));if(KG82.onHud)try{KG82.onHud(o)}catch(e){console.error(e)}},end:raw=>{if(done)return;done=true;clearTimeout(guard);KG82.quit=null;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.rawF=raw;if(KG82.onFin)try{KG82.onFin(raw,!!KG82.gaveUp)}catch(e){console.error(e)}/* jpma co-op live board: the board ended (a give-up reaches the friend's device at once) */if(KG82.engX)return onEnd(raw);/* an engX board (jpma 7×7 Cờ) hands its own raw (win / hòa / loss), not the kind's graded curve */const gm=KG82.endMark!=null?KG82.endMark:raw===0&&KG82.gaveUp?0:mgGrade(raw,kind);/* KG82.endMark (jpma): the board stopped from outside on the mark it showed so far (already graded) */kg82Set0("score",`${gm}/10`);/* review/mg-score-same: the board ends on the mark given */onEnd(gm)}};/* mg-balance: engines pass a float; graded by BAL.mgTier.gamma */
+ let guard=0;KG82.gaveUp=0;KG82.endMark=null;if(KG82.giveUp){KG82.giveUp=0;KG82.gaveUp=1;env.end(0);return}/* KIT §13.9 kit ✕ «Quay lại» on the rules screen: given up before «Sẵn sàng» = the caller's own 0/10 result, no board, no clock */
  guard=setTimeout(()=>env.end(0),KG82.guardMs||97500);/* KG82.guardMs (jpma: the untimed 7×7 Cờ board) */KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};KG82.quit=()=>{KG82.gaveUp=1;env.end(0)};/* §13.9: given up during play */
  /* the board paintings load first (≤2.5 s), then the game starts */
  kg82Preload(kind).then(()=>{if(dead||done)return;try{if(typeof kitGameMark==="function")kitGameMark("–/10");/* kit-mark: the chip shows 0/10 from the first moment, engines that call env.hud overwrite it */stop=KG82_ENG[KG82.engX||KG82_KIND[kind].e](box,env)}catch(e){console.error(e);env.end(5)}})}/* KG82.engX (jpmc): the caller's engine on this kind's numbers (talent, hand, board tier stay the kind's) */
@@ -80261,7 +80261,14 @@ function pmLiveAns(k,x0,ok,send){const x=pmCoopX(k,x0);pmLvT("ans",k,ok,!!x,pmLv
  setTimeout(()=>{const L=PML[g]={g,x,role,send,me:null,op:null,opSc:0,w:null};pmLvSay(g,"go",{x,role:pmLvOt(role)});L.tm=setTimeout(()=>pmLvFall(L),B().live.wait)},0)}
 function pmLvFall(L){pmLvT("fall",L.fin,L.board);if(L.fin||L.board)return;L.fin=true;delete PML[L.g];log("Hảo hữu chưa vào ván; hai bên theo tài nghệ của mình.");L.send(true)}
 function pmLvSend(L){pmLvT("send",L.fin,L.me,L.op,L.w);if(L.fin)return;L.fin=true;clearTimeout(L.tm);delete PML[L.g];const lv={};if(L.me!=null)lv["r"+L.role]=L.me;if(L.op!=null)lv["r"+pmLvOt(L.role)]=L.op;if(L.w)lv.w=L.w;L.send(true,pmLvSan(lv)||undefined)}
-function pmLvMine(L,raw,lo){L.me=pmLvN(raw);if(lo)L.w=lo==="draw"?"d":lo==="win"?L.role:pmLvOt(L.role);pmLvSay(L.g,"end",{raw:L.me,w:L.w||null});
+/* fix 1 (law 6a, KIT §13.9): a give-up on this board goes to the friend AT ONCE (gu), not when she confirms her result card. The same rule as an NPC duel:
+   Cờ = the side that gives up loses the board; timed arts = her mark is 0/10 and the duel is scored as always (talent + mark, pmLiveRes) */
+function pmLvGu(L){if(L.gu)return;L.gu=1;L.me=0;if(L.x.kind==="co")L.w=pmLvOt(L.role);pmLvSay(L.g,"end",{raw:0,w:L.w,gu:1})}
+/* the friend gave up: this board ends now as her win (Cờ: the board's winner; timed arts: the mark her board showed so far); not started yet = it starts and ends at once */
+function pmLvGuEnd(L){if(L.guDone||!L.opGu)return;if(!L.go){const box=typeof kg82Box==="function"?kg82Box():null,go=box&&(box.querySelector(".kgr-go")||(KG82.ready&&KG82.ready.go&&box.querySelector(KG82.ready.go))||box.querySelector("#kg82go"));if(go)go.click();return}
+ if(KG82.phase!=="play"||!KG82.cur)return;L.guDone=1;const f=pmFr();if(f)log(`${f.name} bỏ cuộc giữa ván; ván này tính phần ngươi.`);
+ if(L.x.kind==="co"&&KG82.engX){KG82.kyOut="win";KG82.cur.end(K0().win)}else{KG82.endMark=L.sc!=null?L.sc:0;KG82.cur.end(KG82.endMark)}}
+function pmLvMine(L,raw,lo){L.me=L.gu?0:pmLvN(raw);if(lo&&!(L.x.kind==="co"&&(L.gu||L.opGu)))L.w=lo==="draw"?"d":lo==="win"?L.role:pmLvOt(L.role);pmLvSay(L.g,"end",{raw:L.me,w:L.w||null,gu:L.gu||0});
  if(L.remote){delete PML[L.g];log("Ván đã xong; đợi hảo hữu báo kết quả.");return}
  if(L.op!=null)pmLvSend(L);else{clearTimeout(L.tm);L.tm=setTimeout(()=>pmLvSend(L),B().live.wait)}}
 /* her device is busy (any kg82 frame open, a result not yet confirmed included: replacing it would drop that game) → «no» → the asker falls back */
@@ -80274,7 +80281,7 @@ function pmLvMsg(m){const L=PML[m.g];pmLvT("msg",m.mode,!!L);
  if(m.mode==="no"){if(!L.remote&&!L.board){clearTimeout(L.tm);pmLvFall(L)}return}
  if(m.mode==="sc"){const v=pmLvN(m.raw);if(v!=null){L.opSc=v;if(L.vsRe)L.vsRe()}return}
  if(m.mode==="mv"){const i=+m.i;if(L.net&&Number.isInteger(i)&&i>=0)L.net.on?L.net.on(i):L.net.q.push(i);return}
- if(m.mode==="end"){L.op=pmLvN(m.raw);if(!L.remote&&L.me!=null)pmLvSend(L)}}
+ if(m.mode==="end"){L.op=pmLvN(m.raw);if(m.gu&&!L.opGu&&!L.gu){L.opGu=1;L.op=0;if(L.x.kind==="co")L.w=L.role;pmLvGuEnd(L)}if(!L.remote&&L.me!=null)pmLvSend(L)}}
 if(typeof COOP==="object"&&COOP.on)COOP.on("act",m=>{try{if(m&&m.k==="pm-live"&&window.COOPW&&COOPW.on&&m.from!==COOPW.seat)pmLvMsg(m)}catch(e){console.error(e)}});
 /* both devices: the same board as an NPC game (kit frame, kgReady rules, the kit plate K-PM-1 on a duel); the friend's line = her messages */
 function pmLvBoard(L){const f=pmFr();if(!f){if(!L.remote)pmLvFall(L);return}L.board=1;const x=L.x,duel=x.a==="duel",R=pmR(S,f),A=L.role==="a"?S:f,T=L.role==="a"?f:S;
@@ -80284,15 +80291,17 @@ function pmLvBoard(L){const f=pmFr();if(!f){if(!L.remote)pmLvFall(L);return}L.bo
   const out=(raw,sk)=>sk?(pmScore(S,"co",R,SK)>pmScore(f,"co",R)?"win":"lose"):KG82.kyOut||(raw>=K0().win?"win":"lose");
   playArt({art:"co",eng:L.role==="a"?PM_KY:PM_KYW,title,occ:"pm",rank:R,rowsHead:"Ván cờ",rows:[["Đối thủ",`${f.name} (hảo hữu) cầm quân ${L.role==="a"?"trắng, đi sau":"đen, đi trước"}`,"t"]].concat(stRow),go:"Bắt đầu",
    quick:{n:"Để tài nghệ quyết định",sub:`tính như người cùng bậc (${SK}/10)`},
-   onGo:()=>{KG82.kyNoise=pmKyNoise(f,S,R);KG82.guardMs=K0().guard;L.net=KG82.kyNet={side:L.role==="a"?1:2,q:(L.net&&L.net.q)||[],mvWait:B().live.mv,send:(i,n)=>pmLvSay(L.g,"mv",{i,n})};
+   onGo:()=>{L.go=1;KG82.onFin=(r,g)=>{if(g)pmLvGu(L)};if(L.opGu)setTimeout(()=>pmLvGuEnd(L),0);KG82.kyNoise=pmKyNoise(f,S,R);KG82.guardMs=K0().guard;L.net=KG82.kyNet={side:L.role==="a"?1:2,q:(L.net&&L.net.q)||[],mvWait:B().live.mv,send:(i,n)=>pmLvSay(L.g,"mv",{i,n})};
     if(duel){const vs={me:0,f:1,opp:[{who:f,raw:0,shown:0}],ui:null};KG82.onVs=v=>{vs.me=v.me;vs.opp[0].shown=v.opp;vs.turn=v.turn;pmVsShow(vs,f,{round:v.round})}}},
    resRows:(raw,sk)=>{const w=out(raw,sk);res={w,raw:sk?SK:raw};return[["Ván cờ",w==="win"?"Ngươi thắng":w==="draw"?"Hòa cờ":`${f.name} thắng`,"t"]]},
    onDone:raw=>{const w=res?res.w:out(raw,false),r0=res?res.raw:raw;KG82.kyNoise=KG82.kyOut=KG82.onVs=KG82.kyNet=null;pmLvMine(L,r0,w)}});
   if(!L.net)L.net={q:[]};return}
  playArt({art:x.kind,title,occ:"pm",rank:R,rowsHead:duel?"Ván so tài":"Cùng chơi",rows:[["Cùng chơi với",`${f.name} (hảo hữu) · hai bên chơi cùng lúc`,"t"]].concat(stRow),go:"Bắt đầu",quick:{n:"Để tài nghệ quyết định",sub:"tính 5/10"},
-  onGo:()=>{if(!duel)return;const vs={me:0,f:0,t0:0,kind:x.kind,opp:[{who:f,raw:0,shown:0}],ui:null};KG82.vs=vs;L.tx=0;
+  onGo:()=>{L.go=1;L.sc=0;KG82.onFin=(r,g)=>{if(g)pmLvGu(L)};if(L.opGu)setTimeout(()=>pmLvGuEnd(L),0);
+   if(!duel){KG82.onHud=h=>{const m=/^(\d+)\s*\/\s*10/.exec(String(h&&h.score!=null?h.score:""));if(m)L.sc=+m[1]};return}
+   const vs={me:0,f:0,t0:0,kind:x.kind,opp:[{who:f,raw:0,shown:0}],ui:null};KG82.vs=vs;L.tx=0;
    L.vsRe=()=>{if(KG82.vs!==vs)return;vs.opp[0].shown=L.opSc;pmVsShow(vs,f,null)};
-   KG82.onHud=h=>{pmHud(vs,h,x.kind);vs.opp[0].shown=L.opSc;const t=Date.now();if(t-L.tx>=B().live.tx){L.tx=t;pmLvSay(L.g,"sc",{raw:vs.me})}pmVsShow(vs,f,h)}},
+   KG82.onHud=h=>{pmHud(vs,h,x.kind);L.sc=vs.me;vs.opp[0].shown=L.opSc;const t=Date.now();if(t-L.tx>=B().live.tx){L.tx=t;pmLvSay(L.g,"sc",{raw:vs.me})}pmVsShow(vs,f,h)}},
   onDone:raw=>{L.vsRe=null;pmLvMine(L,raw,null)}})}
 /* the act itself with the two live raws (ACT.pmplay / pmduel f, co-op path): Cờ = the board's winner, other arts = the duel score (talent + her raw), the same rule as pmAuto */
 function pmLiveRes(a,t,x){const lv=pmLvSan(x.live)||{},R=pmR(a,t),place=whereOf(a),ra=lv.ra!=null?lv.ra:pmRaw(a,x.kind,R),rt=lv.rt!=null?lv.rt:pmRaw(t,x.kind,R);
@@ -83163,7 +83172,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="42a3ec1df70f";window.CTM_BUILD=BUILD;
+const BUILD="34bf43485d23";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

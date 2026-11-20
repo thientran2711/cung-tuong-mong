@@ -37,8 +37,8 @@ const HTML=process.argv[2]||'dev/index.html';const sleep=ms=>new Promise(r=>setT
  const gu=p=>p.evaluate(()=>{try{kg82GiveUp();return true}catch(e){return 'ERR '+e.message}});
  const resTxt=p=>p.evaluate(()=>{const r=document.getElementById('kg82box-res');return r&&!r.hidden?r.textContent.replace(/\s+/g,' ').trim().slice(0,200):''});
  const moveOnce=async p=>p.evaluate(()=>{const q=KG82.peek&&KG82.peek();const el=q&&q.sel&&document.querySelector(q.sel);if(el&&!el.disabled){el.click();return true}return false});
- const coop=async(label,kind,who,when)=>{sent.a.length=0;sent.b.length=0;await A.evaluate(()=>{__ans.length=0});
-  await ask(A,{a:"duel",kind,ak:kind==="co"?"ky":kind,n:kind==="co"?"Cờ":"Đàn",s:"bac"});
+ const coop=async(label,kind,who,when,act)=>{act=act||'duel';sent.a.length=0;sent.b.length=0;await A.evaluate(()=>{__ans.length=0});
+  await ask(A,{a:act,kind,ak:kind==="co"?"ky":kind,n:kind==="co"?"Cờ":"Đàn",s:"bac"});
   const opened=await until(async()=>!!(await A.evaluate(()=>!!document.getElementById('kg82go')))&&!!(await B.evaluate(()=>!!document.getElementById('kg82go'))),8000);
   const Q=who==='a'?A:B,O=who==='a'?B:A;let g;
   if(when==='pre'){g=await gu(Q);await sleep(300);await go(O)}
@@ -76,5 +76,11 @@ const HTML=process.argv[2]||'dev/index.html';const sleep=ms=>new Promise(r=>setT
  await npc('G6 NPC Cờ, gives up during play','co','play');
  await npc('G7 NPC Đàn, gives up during play','dan','play');
  await npc('G8 NPC Đàn, gives up before «Sẵn sàng»','dan','pre');
+ /* E22h fix 1 whole family: timed art before «Sẵn sàng» + the friend's side, and «Cùng chơi» (no stake) on both board kinds */
+ relay=true;await A.evaluate(()=>{COOPW.on=true;Q.length=0});/* the room back on after the NPC block */
+ await coop('G4b co-op Đàn, the friend gives up before «Sẵn sàng»','dan','b','pre');
+ await coop('G4c co-op Đàn, the friend gives up during play','dan','b','play');
+ await coop('G4d co-op Cùng chơi Cờ, the friend gives up during play','co','b','play','play');
+ await coop('G4e co-op Cùng chơi Đàn, card device gives up before «Sẵn sàng»','dan','a','pre','play');
  ok(!errs.length,'no page error',errs.slice(0,5));
  await b.close();const n=res.filter(Boolean).length;console.log((n===res.length?'PASS ':'FAIL ')+n+'/'+res.length);process.exit(n===res.length?0:1)})();
