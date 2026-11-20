@@ -1,13 +1,13 @@
-# tut-road review (BIG, E27r opus) — worker sha def9eaf0 → review sha e574e089 (review/tut-road-rv)
+# tut-road review (BIG, E27r opus) — worker sha def9eaf0 → review sha d39e3d2c (review/tut-road-rv)
 
 PRIORITY #1 CHECK ('tut-road|tut-followups|kitShopBuy|__kshBuild'): OD 0 | ledger 1 | claims E27 session_01DgYSWkVoq36pPMmqqz6m1u (done) + this review row | main jtq14.js:20-75, jinv.js:468 kitShopBuy, jcoopthinf.js:284-286 __kshBuild/reg8 kitShopBuy | review/tut-road def9eaf0 | report dev/handover/reports/tut-road.md (r3).
 
-**VERDICT: PASS e574e089** — FF on LIVE origin/main 99bdba82 (checked with `git merge-base --is-ancestor` right before the push).
+**VERDICT: PASS d39e3d2c** — FF on LIVE origin/main 15bf9c77 (checked with `git merge-base --is-ancestor` right before the push).
 
 ## What the reviewer changed (small fix, on review/tut-road-rv)
 1. **5 roads had no road line (law 11 / brief "right for EVERY road").** `roadSj()` returned "" for any subject holding a cast placeholder, and its comment wrongly said "uses its title". Affected: muoi_no, cn_chu, td_tha, ch_ho, cnv_chu (5 of 40 origin roads). The person of these roads is cast only when the road starts (j67 newThread67 → fill67), so at chapter 1 the subject is now told **unnamed**: `{v}`/`{foe}` → "một phi tần", `{mis}` → "chủ nhân" (const SJ0 in jtq14). Nobody is invented or named early (law 6b). Any other `{tag}` still gives no road line.
 2. dev/test/tut-road.js now also checks **every** origin road (not just the rolled one): `PASS 40/40 origin roads give a road line` (set `TR_ALL=1` to print all 40).
-3. Final-merges of LIVE: fd682a8d → 90b7e797 → f43efc71 → 0aaf8152 → ca642f9c → 99bdba82 (only index.html/sw.js conflicted; rebuilt each time with build_site.sh).
+3. Final-merges of LIVE: fd682a8d → 90b7e797 → f43efc71 → 0aaf8152 → ca642f9c → 99bdba82 → 15bf9c77 (only index.html/sw.js conflicted; rebuilt each time with build_site.sh).
 
 ## (A) OR15 — «Duyên cớ» row
 - Kit only (law 9): it is one more row in the same kitPanel info card (`rows` → sections), no new CSS or frame. Shots: the card fits whole on Fold 755x1000 and iPad 1180x820 for tt (tt_oan / tt_mat), td (td_song / td_tha), cnv (cnv_ma / cnv_chu); no overflow, 0 page errors.
@@ -34,3 +34,4 @@ card-{tt,td,cnv}-{755,1180}.png, shop-before/after-{755,1180}.png. Each was look
 1–3 n/a (no new choice) · 4 ok · 5 n/a · 6b ok (unnamed until cast), 6c ok (purchase lands in the chest, f3 ledger) · 7 ok · 9 ok (kitPanel row) · 11 ok after the reviewer fix (all 40 roads; both shop keys nvp + pet) · 12 ok (Fold + iPad) · 13 ok (worker brief + report carry the check line).
 - **9b76662f (final): QUICKCHECK PASS** · 214 s · old save ok · core gates PASS · perf new/live render 252/249, tab 451/467, buổi 2087/1369 ms (one median, within the gate; earlier runs 1130–1704 vs 1333–1929, so this is noise), tasks>200ms 21/21.
 - **e574e089 (FINAL, LIVE 99bdba82 kit-modal-spin merged): QUICKCHECK PASS** · 249 s · old save ok · core gates PASS · perf new/live render 298/269, tab 468/547, buổi 2452/1628 ms, tasks>200ms 25/24. On this sha also: one-core-guard PASS, tut-road 10/10 + 40/40, shop-buy-solo 2/2, story14-view 2/2, tut-quests tt 35/35. NOTE for the coordinator: the buổi median was higher than live in the last 2 runs (+50%), but lower than live in 3 of the 6 runs before that. This branch adds no per-buổi code (beatLine only runs inside the chapter-open card). The gate passed, so I read it as box load. Worth one look in the next perf watch.
+- **d39e3d2c = e574e089 + LIVE 15bf9c77 (kit-signs-odds: j82 + its test only; no overlap)**: one-core-guard PASS, tut-road 40/40, shop-buy-solo 2/2, story14-view 2/2. The full quickcheck PASS of e574e089 stands, because the merge added only j82 mini-game sign code.
