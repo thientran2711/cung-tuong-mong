@@ -61,3 +61,11 @@ Credits: 83 922 before → 81 222 after (pool shared with RANK8-B/C running at t
 - t7 yellow areas larger than t6, crown phoenix ok, no flower. Frontal.
 - t8 yellow dominant, nine-phoenix crown; item hairpin held at chest.
 - "Place" label = "Hậu cung" (no per-rank palace name in the builder) — tell me if a palace name per rank is wanted.
+
+## 7. OWNER TEST "cổ vuông" t1/t2 (ROOT-68 urgent) — 2 gens × 135 = 270 cr, builder NOT changed
+t3 store sentence (kept): "…court robe with a straight SQUARE NECKLINE framed by a wide stiff {S} embroidered {mot} band".
+NEW t1 (replaces "a snug crossed-collar upper garment with long wide flowing sleeves"): "a snug upper garment with an OPEN SQUARE NECKLINE (style 1, simple): a low, simple straight-edged square opening that shows her neck and collarbones, edged only by a narrow plain {S} silk band with no embroidery on it; never a round collar, never a V, NO crossed wrap collar; with long wide flowing sleeves"
+NEW t2 (replaces "a fine silk robe with delicate embroidered {mot} at the collar, sleeves and hem"): "a fine silk robe with an OPEN SQUARE NECKLINE (style 2, wide and shallow): a broad, shallow square opening stretching out toward the shoulders that shows her neck and collarbones, its edge a LAYERED border of two stacked bands, a thin {S} piping inside and a wider band of small embroidered {mot} outside; never a round collar, never a V, NO crossed wrap collar; delicate embroidered {mot} at the sleeves and hem"
+Sent same wording to RANK8-B + RANK8-C. Test prompts dev/art/rank8-s62/test-square/s62_t{1,2}_sq.txt; gate: full store FAIL only on the swapped sentence (expected), --scope tp1/tp2 --age a18 PASS.
+Gens xSBeugTjfW (t1), nVsx9M3YQD (t2). Sheet dev/handover/review-sheets/rank8-s62/s62_THU_covuong_t1-t2-t3.webp.
+Looked: both square, open, no round, no V, no cross collar. t1 = deep, low square (shows upper chest a bit — may be too low for the owner); band reads ice blue not clearly mint. t2 = wide shallow square with embroidered band — but close to t3's look (t3 adds stiff mint band + girdle + apron). Not redrawn.

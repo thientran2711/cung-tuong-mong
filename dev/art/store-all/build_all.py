@@ -68,8 +68,11 @@ def _install_ladder(g):
         n=int(re.sub(r"\D","",c) or 0) or sum(map(ord,c)); ai=IA.AGES.index(age); idx=(n-1+3*ai)%10; N=int(tier[1:])
         if N<=6: it,kind=g["L3F"][N][idx]; return it,"L:"+kind
         return (g["ITEMS7"][idx] if N==7 else g["ITEMS"][idx])
-    def age_item(c,tier,item,hk):
-        if tier not in LADDER_TIERS: return orig(c,tier,item,hk)
+    def age_item(c,tier,item,hk,pet=True):
+        if pet and "--olditem" not in sys.argv:   # PETS (owner Lượt 1057/1059, rule F17, t8-prompt-B/pets.py): a18/a26, kc + t1–t6, the pet replaces the held item
+            _p=g["_PETS"].pet(c,tier,g["AGE"])
+            if _p: return _p
+        if tier not in LADDER_TIERS: return orig(c,tier,item,hk,pet=False)
         return pick(c,tier,g["AGE"])   # E7 (Lượt 529): the person's OWN age index always (was: nearest status age -> two ages could share one item); step 3 mod 10 = 5 distinct items
     g["age_item"]=age_item; g["LADDER_PICK"]=pick
 def _inject(g):
@@ -463,16 +466,18 @@ def _kc_drawn(person):   # B8 (BW3): same table + rule as build.py kc_drawn (dev
     import json as _j
     p=_j.load(open(os.path.join(ART,"KC_REFS.json"),encoding="utf-8"))["people"].get(person)
     return bool(p and p.get("m09_ok")=="yes" and (p.get("face_words") or "").startswith("Her face: "))
+def g_pets_allowed(rank,age): return isinstance(rank,int) and rank<=6 and age in ("a18","a26")
 def build(person,rank,age="a18"):
     if not _kc_drawn(ALIAS.get(person,person)): raise NotDrawn(person)   # B8: people NOT drawn are refused (CLI exit 2, --check counts them HELD)
     person=ALIAS.get(person,person); S0=store(person,rank,age); S=S0
-    if rank=="nude": return S0,S0,[]
+    if rank=="nude": S0=LAST_G["_PETS"].depet(S0); return S0,S0,[]   # F17 PETS: Nữ đế never holds an animal pose
     if "Her face: . " in S:
         face=FACE_M.get(person,FACE_REF); S=S.replace("Her face: . ","Her face: "+face+(". " if not face.endswith(".") else " "),1)
     S=_clean_pose(S)
     S=apply_dedupe(person,rank,age,S); store(person,rank,age); S=_sec_slot(person,rank,S)   # Lượt 469 pose dedupe (slot); re-run store so LAST_G is this rank's
     anchor=" Pose:"; assert S.count(anchor)==1,("pose anchor",person,rank)
     add=(laws(rank,age,person in PR) if isinstance(rank,int) else laws(rank))+[angle_sentence(person,rank,age),grace_sentence(person,rank,age)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
+    if not g_pets_allowed(rank,age): S=LAST_G["_PETS"].depet(S)   # F17 PETS: no animal pose where pets are not allowed (only the animal words change)
     return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
 
 # ---------------- THÁI HẬU (owner Lượt 618 + 624, ROOT-53 order: BASE = the 18/11 Thái hậu prompt the owner liked, VERBATIM) ----------------

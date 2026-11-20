@@ -13,6 +13,7 @@ Usage
   scope face = thiếu nữ face prompts (face-common mNN/cNN/sNN .FULL.txt, or a maker's stdout via prompt_file "-")
   --pid sNN (scope face): B20 root-hex check, her root pair only (MG3 L784 #6); every scope: prompt > 10 000 chars = FAIL (gen tool limit)
 MASTER BLOCK (owner B25, Lượt 745/766, MG1): in EVERY scope every sentence of dev/art/MASTER_COMMON.txt must be present verbatim exactly once
+PETS (owner Lượt 1057/1059, rule F17): a pet in a hold sentence only at --age a18/a26 (or none), scope tp1-6/pr1-6/state:kc/face; never beside her = else FAIL; table + >=3 count: t8-prompt-B/pets.py check
 NOFRUIT (owner Lượt 1052/1054, 20/11, rule F16): in EVERY scope a fruit word in a hold sentence (holding/held/cradling/carrying…) = FAIL; no exemption (drawn s44/s64 records in face-common/legacy_fruit/ FAIL if reused)
 NOEAR (owner Lượt 1037, 20/11, rule F15): in EVERY woman/girl scope (all but --scope emperor|men) master_common.EAR_SENT exactly once + NO earring word (earring, ear drop/pendant/stud, jewels at the ears, hoa tai…) = else FAIL
   (dev/art/master_common.py); missing / edited / doubled = FAIL "MASTER ...".
@@ -834,7 +835,7 @@ HEX_RX = re.compile(r"#[0-9A-Fa-f]{6}\b")
 FRUIT_FROZEN = {"s44": "small red pomegranate (s44.v5 Sắc sảo 79foGbpJAL + s44.qr Quyến rũ DoOgxICpcl)", "s64": "golden-orange loquats (s64.v5 JNChlRROq4, Lượt 1046)"}
 FRUIT_RX = re.compile(r"\b(?:fruits?|peach(?:es)?|pomegranates?|persimmons?|loquats?|lychees?|litchis?|longans?|grapes?|jujubes?|kumquats?|tangerines?|mandarin oranges?"
                       r"|citrons?|buddha'?s[- ]hands?|apples?|pears?|plums|cherries|melons?|gourds?|figs|dates|bananas?|mangoes|mangos?|trái cây|hoa quả|quả)\b"
-                      r"(?![- ]?(?:blossoms?|flowers?|wood|pink|orange|cream|ivory|silk|colou?r|tone|tint|shade|coral|salmon|beige|gold|shaped|cheeks?|red|rose|blush|sorbet|ribbons?|sash|skirt|robe|top|trim|cord|tassels?|thread|satin|brocade|cotton|lining|border|hem|bow|apricot|doorway|door|window|arch))", re.I)
+                      r"(?![- ]?(?:blossoms?|flowers?|wood|pink|orange|cream|ivory|silk|colou?r|tone|tint|shade|coral|salmon|beige|gold|shaped|cheeks?|red|rose|blush|sorbet|ribbons?|sash|skirt|robe|top|trim|cord|tassels?|thread|satin|brocade|cotton|lining|border|hem|bow|apricot|sand|tan|nude|doorway|door|window|arch))", re.I)
 HOLD_RX = re.compile(r"\bPose:|\b(?:hold(?:s|ing)?|held|cradl(?:es|ing)|carr(?:y|ies|ying)|hugg?(?:s|ing)|grips?|gripping|rais(?:es|ing)|lift(?:s|ing)|offer(?:s|ing)|present(?:s|ing)|show(?:s|ing)|tw(?:irl|irling|irls)|clasp(?:s|ing)?|(?:in|with) (?:her|his|one|both|each) hands?|in her palm|cầm|ôm|bưng)\b", re.I)
 def fruit_fails(text, scope=None, pid=None):
     out = []
@@ -844,6 +845,24 @@ def fruit_fails(text, scope=None, pid=None):
             if NEG.search(sent[max(0, m.start() - 30):m.start()]): continue   # 'no fruit', 'never a peach' (a later 'never …' in the clause does not excuse it)
             out.append(("F16", "NOFRUIT", f"fruit in a held item (owner Lượt 1052/1054/1058: nobody holds fruit, any rank, any age): …{sent[max(0, m.start()-60):m.end()+30]}…")); break
         if out: break
+    return out
+# PETS (owner Lượt 1057/1059, 20/11, rule F17; table dev/art/t8-prompt-B/pets.py): a pet only at ages 18/26, only kc (thiếu nữ) / face and ranks 1–6;
+# none at t7 HQP, t8 HH, Thái hậu, triều phục, Nữ đế, maids/states, ages 36+; the animal only IN CONTACT, never beside her / at her feet.
+PET_RX = re.compile(r"\b(?:rabbits?|bunn(?:y|ies)|kittens?|cats?|pupp(?:y|ies)|dogs?|sparrows?|butterfl(?:y|ies)|doves?|canar(?:y|ies)|lovebirds?|parrots?|nightingales?"
+                    r"|orioles?|white-eye|kingfishers?|swallows?|songbirds?|birds?|cranes?|peacocks?|carps?|goldfish|fish|squirrels?|turtles?|deer|fawns?)\b(?! cage| shaped|-shaped| motif| pattern|[- ]blue|[- ]feathers?|[- ]inlay|[- ]green|-and-|[- ]silk|[- ]wings?| \(mõ\)|[- ]hairpin)", re.I)
+PET_SENT_RX = re.compile(r"\bPose:|\bshe holds\b|\bholding\b|\bperched\b|\bcradl\w*|\bin her arms\b|\bbeside her\b|\bat her feet\b", re.I)
+PET_BESIDE_RX = re.compile(r"\b(?:beside her(?! cheek| face| ear| chin| hair| temple| shoulder)|at her feet|next to her|by her side|by (?:the|her) chair|at her side on the ground|sitting beside|standing beside)\b", re.I)
+PET_SCOPES = {f"tp{i}" for i in range(1, 7)} | {f"pr{i}" for i in range(1, 7)} | {"state:kc", "face"}
+def pet_fails(text, scope=None, age=None):
+    out = []
+    for sent in re.split(r"(?<=[.;])\s+", text):
+        if not PET_SENT_RX.search(sent) or "Every hairpin" in sent: continue
+        m = PET_RX.search(sent)
+        if not m or NEG.search(sent[max(0, m.start() - 30):m.start()]) or re.search(r"\b(?:embroider\w*|motifs?|pattern|painted|carved|woven|jade|gold|silver|toy|scroll|painting|wooden|sandalwood|kite|lantern|fan|hairpin)\b[^,;]{0,40}$", sent[:m.start()], re.I): continue
+        ctx = sent[max(0, m.start() - 60):m.end() + 40]
+        if scope not in PET_SCOPES: out.append(("F17", "PET RANK", f"pet in a rank/state without pets (owner Lượt 1059: only thiếu nữ + ranks 1–6): …{ctx}…")); break
+        if age and age not in ("a18", "a26"): out.append(("F17", "PET AGE", f"pet at age {age} (owner Lượt 1059: only 18–26): …{ctx}…")); break
+        if PET_BESIDE_RX.search(sent): out.append(("F17", "PET BESIDE", f"pet beside her, not in contact (owner Lượt 1057): …{ctx}…")); break
     return out
 DEEP_COLOUR_RX = re.compile(r"\b(?:deep|dark|darker|deeper|dusky)[- ](?:blue|violet|blue-violet|purple|green|red|pink|rose|plum|teal|jade|navy|burgundy|crimson|wine|aubergine|lilac|lavender|aqua|aquamarine|turquoise|coral|peach|gold|yellow|orange|mint|periwinkle|emerald|sapphire|indigo|magenta|mauve|ochre|cyan|celadon|olive|maroon|scarlet|ruby|amber)\b", re.I)
 DEEP_ROOT_IDS = {"s44"}   # ids whose root pair is read from palettes_season_deep.json (ROOT-64, s44 only)
@@ -927,6 +946,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     text = norm(text)
     fails += b24_fails(text, scope)   # MG3 L784 item 7 (B24)
     fails += angle_fails(text)   # MG3 L806 (E1)
+    fails += pet_fails(text, scope, age)   # F17 PETS (owner Lượt 1057/1059): ages 18/26, kc + ranks 1–6 only, in contact only
     fails += fruit_fails(text, scope, pid)   # F16 NOFRUIT (owner Lượt 1052/1054): no fruit as a held item, except the frozen drawn thiếu nữ s44 / s64
     if scope == "face":   # MG3 L784 item 6 (B20 / Lượt 763/769/770)
         fails += root_hex_fails(text, pid)
@@ -996,6 +1016,12 @@ def selftest():
                     ("Pose: holding a sprig of pink peach blossom; a round fan in soft peach pink silk; a carved peach-wood comb.", 0),
                     ("Pose: she holds a round jade longevity plaque carved with a round shou symbol.", 0), ("She holds nothing, no fruit in her hands.", 0)]:   # F16 NOFRUIT
         if bool(fruit_fails(norm(t))) != bool(want): print("NOFRUIT SELFTEST", want, t); bad += 1
+    sys.path.insert(0, os.path.join(ART, "t8-prompt-B")); import pets as _PETS
+    for b in _PETS.check(): print("PETS TABLE", b); bad += 1
+    for t, sc, ag, want in [("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a18", 0), ("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a36", 1),
+                            ("Pose: holding a small songbird perched on her lightly raised finger.", "tp7", "a18", 1), ("Pose: a Persian cat sitting beside her, one hand holding a fan.", "tp4", "a18", 1),
+                            ("Pose: holding a fan embroidered with butterflies and cranes.", "tp8", "a51", 0), ("Pose: holding a small woven-grass cricket cage.", "tp8", "a51", 0)]:   # F17 PETS
+        if bool(pet_fails(norm(t), sc, ag)) != bool(want): print("PETS SELFTEST", want, sc, ag, t); bad += 1
     if fruit_fails(norm(open(os.path.join(ART, "face-common", "s64.v5.FULL.txt"), encoding="utf-8").read()), "face", "s64"): print("NOFRUIT s64 store still has fruit"); bad += 1
     if not fruit_fails(norm(open(os.path.join(ART, "face-common", "legacy_fruit", "s64.v5.FULL.txt"), encoding="utf-8").read()), "face", "s64"): print("NOFRUIT legacy s64 record passes"); bad += 1
     print(f"registry self-test: {len(S)} sentences, {len(X)} banned, {bad} problem(s)"); return 1 if bad else 0
