@@ -17,7 +17,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:VW,height:VH}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;
-  const m=document.getElementById('modal');if(m)m.hidden=true;try{render()}catch(e){}
+  const m=document.getElementById('modal');if(m)m.hidden=true;S.suc=100;S.bac=999;S.ap=9;try{render()}catch(e){}
   /* the in-page checker: open(src) → the first screen, the idle check, the guided round, back, «Sẵn sàng» */
   window.__rg=async(src,o)=>{o=o||{};const sleep=t=>new Promise(r=>setTimeout(r,t));const r={};
    try{kg82Close()}catch(e){}Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;
@@ -32,8 +32,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    if(r.tutBtn&&!o.noTut){const S0=JSON.stringify(S),T0=JSON.stringify(KG82.tier),L0=KG82.lv;
     box.querySelector('#kgrtut').click();await sleep(50);r.tutOn=!!KG82.tut&&!!document.querySelector('.kgt-bar');let hand=false,eng=false,clkT=true,end=performance.now()+(o.tutMs||15000);
     /* a player following the hand: taps the point / button the ghost hand shows (drags and holds are only watched) */
-    let nx=0;const tap=()=>{const pk=KG82.peek&&KG82.peek();const now=performance.now();if(!pk||now<nx)return;
-     if(pk.sel&&!pk.hsel){const el=document.querySelector(pk.sel);if(el)el.click()}else if(!pk.drag&&pk.hold==null&&Number.isFinite(pk.x)){const el=document.elementFromPoint(pk.x,pk.y);
+    let nx=0;const tap=()=>{const hh=KG82.hint&&KG82.hint();const pk=hh&&hh.soon?{x:hh.x,y:hh.y}:KG82.peek&&KG82.peek();const now=performance.now();if(!pk||now<nx)return;
+     if(pk.sel&&!pk.hsel){const el=document.querySelector(pk.sel);if(el)el.click()}else if(!pk.drag&&pk.hold==null&&Number.isFinite(pk.x)){let el=null;const cvs=[...box.querySelectorAll('canvas')].find(c=>{const q=c.getBoundingClientRect();return pk.x>=q.left&&pk.x<=q.right&&pk.y>=q.top&&pk.y<=q.bottom});el=cvs||document.elementFromPoint(pk.x,pk.y);/* the board itself (a test-only reward pop-up may lie over it) */
       if(el&&!el.closest('.kgt-hand'))el.dispatchEvent(new PointerEvent('pointerdown',{clientX:pk.x,clientY:pk.y,pointerType:'touch',isPrimary:true,bubbles:true,cancelable:true}))}nx=now+120};
     while(performance.now()<end&&KG82.tut){await sleep(o.play?8:80);if(document.querySelector('.kgt-hand.on'))hand=true;if(box.querySelector('canvas')||box.children.length)eng=true;if(!clk())clkT=false;
      if(o.play){tap();if(performance.now()>end-100)break}else if(hand&&performance.now()>end-o.tutMs+2500)break}
@@ -46,6 +46,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    const g2=box.querySelector('.kgr-go');if(g2){g2.click();await sleep(o.playWait||2200);r.play=KG82.phase==='play'||!!KG82.run||!!box.querySelector('canvas')||(o.j5&&!mgDone)}
    try{if(o.j5){if(typeof mgStop==='function'&&mgStop)mgStop();mgStop=null;mgDone=true;document.getElementById('ov').hidden=true}else kg82Close()}catch(e){}
    return r}});
+ await p.waitForTimeout(4000);/* the stat-change log of the setup above lands before any snapshot */
  const rows=[];const run=async(label,src,o)=>{let r;try{r=await p.evaluate(([s,o])=>window.__rg(s,o),[src,o||{}])}catch(e){r={err:String(e.message).slice(0,120)}}rows.push([label,r]);return r};
  /* 1–5 every kind (playArt; Cắm hoa by startContest: the plain art key "hoa" is Vẽ in playArt) */
  const kinds=await p.evaluate(()=>Object.keys(KG82_KIND).map(k=>[k,KG82_KIND[k].e]));
@@ -60,7 +61,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  await run('caller jexam khảo hạch','exRun(exPlan(S),{},()=>{})');
  await run('caller jentry tuyển chọn','kcEntryExam("dan",()=>{},{})');
  await run('caller jslap Tát',`slapGame({dodge:false,by:${v},title:"Giáng tay",rows:[],go:"Tát",skip:"Tát luôn",skipSub:"",onDone:()=>{}})`);
- await run('caller jtd Tu đức','(S.suc=100,S.bac=999,S.ap=9,TDS.busy=false,S.mg=null,tdPlay("cong","self"))');
+ await run('caller jtd Tu đức','(TDS.busy=false,S.mg=null,tdPlay("cong","self"))');
  await run('caller jts Hoàng thượng triệu','tsGame({kind:"duho",odds:50,onDone:()=>{}})');
  await run('caller j92 Chải chuốt','(can(1)||(S.ap=9),wdGroomUI())');
  await run('caller jsgame mưu kế',`sgPlay({G:SG.K.rumor,art:"Mưu kế",v:${v},p0:()=>50,run:()=>{},cost:""})`);
