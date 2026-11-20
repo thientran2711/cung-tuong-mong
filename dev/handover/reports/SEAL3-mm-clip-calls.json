@@ -1,0 +1,722 @@
+[
+ {
+  "seal": "mm-vui",
+  "part": "out",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "gOmdykvSXO"
+    },
+    "end": {
+     "type": "image",
+     "url": "xSBVwGYjfW"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun inside the round gold medallion lights up with joy: she leans forward and bursts out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out and wave happily, she laughs with a big open smile, tiny gold sparkles appear above her neat bun. Smooth, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-vui",
+  "part": "loop",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "xSBVwGYjfW"
+    },
+    "end": {
+     "type": "image",
+     "url": "xSBVwGYjfW"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green. The ma ma with the neat bun leaning out of the round gold medallion keeps laughing happily in a loop: she waves both hands, claps them softly once, bobs her head with a big laughing smile, her silver hairpins swing, the tiny gold sparkles twinkle; then she settles back to exactly the starting pose. Slow enough to read, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-vui",
+  "part": "back",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "xSBVwGYjfW"
+    },
+    "end": {
+     "type": "image",
+     "url": "gOmdykvSXO"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun leaning out of the round gold medallion gives one last happy wave, the sparkles fade away, she lowers her hands, pulls her arms back and slowly slides back inside the round medallion, shrinking back into it, until she is again only a happy laughing face with her neat bun inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-buon",
+  "part": "out",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "eIPStcjdqL"
+    },
+    "end": {
+     "type": "image",
+     "url": "xSBVwzHjfW"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun inside the round gold medallion grows sad: she slowly leans forward and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out and fold on the rim, she rests her chin on her hands, a tear rolls down, a tiny raincloud appears above her neat bun. Smooth, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-buon",
+  "part": "loop",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "xSBVwzHjfW"
+    },
+    "end": {
+     "type": "image",
+     "url": "xSBVwzHjfW"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green. The ma ma with the neat bun leaning out of the round gold medallion stays sad in a slow loop: she sighs deeply, her droopy eyes blink slowly, a tear rolls down her cheek, her shoulders sink, the tiny raincloud drips a few drops; then she settles back to exactly the starting pose. Slow enough to read, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-buon",
+  "part": "back",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "xSBVwzHjfW"
+    },
+    "end": {
+     "type": "image",
+     "url": "eIPStcjdqL"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun leaning out of the round gold medallion gives one last sad sigh, the raincloud fades away, she lifts her chin off her hands, pulls her arms back and slowly slides back inside the round medallion, shrinking back into it, until she is again only a sad face with droopy eyes and her neat bun inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-so",
+  "part": "out",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "vQANFEma47"
+    },
+    "end": {
+     "type": "image",
+     "url": "s7IpyOjl8e"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun inside the round gold medallion takes a fright: she jolts forward and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out and both hands fly up to her mouth, her eyes go wide, a sweat drop and shiver marks appear. Smooth, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-so",
+  "part": "loop",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "s7IpyOjl8e"
+    },
+    "end": {
+     "type": "image",
+     "url": "s7IpyOjl8e"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green. The ma ma with the neat bun leaning out of the round gold medallion keeps trembling in fear in a loop: she shivers, her hands quiver at her mouth, her wide eyes dart left and right together, her silver hairpins shake, the shiver marks flicker; then she settles back to exactly the starting pose. Slow enough to read, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-so",
+  "part": "back",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "s7IpyOjl8e"
+    },
+    "end": {
+     "type": "image",
+     "url": "vQANFEma47"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun leaning out of the round gold medallion gives one last shiver, the shiver marks fade away, she lowers her hands from her mouth, pulls her arms back and slowly slides back inside the round medallion, shrinking back into it, until she is again only a frightened face with wide eyes and her neat bun inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-an",
+  "part": "out",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "tCRPEe8mZJ"
+    },
+    "end": {
+     "type": "image",
+     "url": "DoOlIrzpcl"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun inside the round gold medallion turns secretive: she leans forward and comes out of the round frame toward the viewer through soft grey mist, her head and shoulders push past the gold rim, her arms come out, one hand parts the mist, the other raises a finger to her lips 'shh', she winks, a small question mark appears. Smooth, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-an",
+  "part": "loop",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "DoOlIrzpcl"
+    },
+    "end": {
+     "type": "image",
+     "url": "DoOlIrzpcl"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green. The ma ma with the neat bun leaning out of the round gold medallion keeps her secret in a loop: she holds her finger to her lips, winks with a sly smile, parts the drifting mist with her hand, the grey mist wisps swirl, the small question mark bobs; then she settles back to exactly the starting pose. Slow enough to read, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-an",
+  "part": "back",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "DoOlIrzpcl"
+    },
+    "end": {
+     "type": "image",
+     "url": "tCRPEe8mZJ"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun leaning out of the round gold medallion gives one last 'shh', the mist and the question mark fade away, she lowers her hands, pulls her arms back and slowly slides back inside the round medallion, shrinking back into it, until she is again only a sly secretive face with a finger at her lips and her neat bun inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-binh",
+  "part": "out",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "5jDYLuGKxe"
+    },
+    "end": {
+     "type": "image",
+     "url": "mEZ4QOshJQ"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun inside the round gold medallion feels at peace: she leans forward gently and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out, one hand rests on the rim, the other gives a small friendly wave, a serene smile. Smooth, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-binh",
+  "part": "loop",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "mEZ4QOshJQ"
+    },
+    "end": {
+     "type": "image",
+     "url": "mEZ4QOshJQ"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green. The ma ma with the neat bun leaning out of the round gold medallion stays calm in a slow loop: she waves gently, nods slowly with a serene smile, breathes calmly, her silver hairpins sway softly; then she settles back to exactly the starting pose. Slow enough to read, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-binh",
+  "part": "back",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "mEZ4QOshJQ"
+    },
+    "end": {
+     "type": "image",
+     "url": "5jDYLuGKxe"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun leaning out of the round gold medallion gives one last gentle wave, lowers her hand, lifts the other off the rim, pulls her arms back and slowly slides back inside the round medallion, shrinking back into it, until she is again only a calm gently smiling face with her neat bun inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-ghen",
+  "part": "out",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "rgXTSwlxtc"
+    },
+    "end": {
+     "type": "image",
+     "url": "UPvB9dBwny"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun inside the round gold medallion turns jealous: she leans forward and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out and both hands tug a pink silk handkerchief, she bites its corner and glares sideways, a tiny dark-green swirl appears. Smooth, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-ghen",
+  "part": "loop",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "UPvB9dBwny"
+    },
+    "end": {
+     "type": "image",
+     "url": "UPvB9dBwny"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green. The ma ma with the neat bun leaning out of the round gold medallion keeps sulking jealously in a loop: she tugs and twists the handkerchief, bites its corner, glares sideways and puffs her cheek, the tiny dark-green swirl turns; then she settles back to exactly the starting pose. Slow enough to read, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-ghen",
+  "part": "back",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "UPvB9dBwny"
+    },
+    "end": {
+     "type": "image",
+     "url": "rgXTSwlxtc"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun leaning out of the round gold medallion gives one last jealous glare, the swirl fades away, she lets the handkerchief go, lowers her hands, pulls her arms back and slowly slides back inside the round medallion, shrinking back into it, until she is again only a jealous side-glancing face with her neat bun inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-lo",
+  "part": "out",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "tCRPEdImZJ"
+    },
+    "end": {
+     "type": "image",
+     "url": "0eUxBBQTfW"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun inside the round gold medallion starts to worry: she leans forward and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out, her hands clasp and wring at her chin, she nibbles a fingertip, a sweat drop and tiny worry swirls appear. Smooth, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-lo",
+  "part": "loop",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "0eUxBBQTfW"
+    },
+    "end": {
+     "type": "image",
+     "url": "0eUxBBQTfW"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green. The ma ma with the neat bun leaning out of the round gold medallion keeps fretting in a loop: she wrings her hands, nibbles a fingertip, glances up anxiously, the sweat drop slides, the worry swirls turn; then she settles back to exactly the starting pose. Slow enough to read, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-lo",
+  "part": "back",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "0eUxBBQTfW"
+    },
+    "end": {
+     "type": "image",
+     "url": "tCRPEdImZJ"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun leaning out of the round gold medallion gives one last anxious sigh, the swirls fade away, she unclasps her hands, pulls her arms back and slowly slides back inside the round medallion, shrinking back into it, until she is again only a worried face with a sweat drop and her neat bun inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-muu",
+  "part": "out",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "1ld0g79r4r"
+    },
+    "end": {
+     "type": "image",
+     "url": "jUoMJJQLD0"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun inside the round gold medallion hatches a plan: she leans forward and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out, a fingertip taps her chin, the other hand drums on the rim, a sly smirk, a tiny glint flashes by her eye. Smooth, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-muu",
+  "part": "loop",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "jUoMJJQLD0"
+    },
+    "end": {
+     "type": "image",
+     "url": "jUoMJJQLD0"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green. The ma ma with the neat bun leaning out of the round gold medallion keeps scheming in a loop: she taps her chin, drums her fingers on the rim, narrows her eyes with a sly smirk, the tiny glint twinkles; then she settles back to exactly the starting pose. Slow enough to read, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-muu",
+  "part": "back",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "jUoMJJQLD0"
+    },
+    "end": {
+     "type": "image",
+     "url": "1ld0g79r4r"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun leaning out of the round gold medallion gives one last sly smirk, the glint fades away, she lifts her fingers off the rim and lowers her hand from her chin, pulls her arms back and slowly slides back inside the round medallion, shrinking back into it, until she is again only a sly scheming face with her neat bun inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-tutin",
+  "part": "out",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "u5WZKvwQLD"
+    },
+    "end": {
+     "type": "image",
+     "url": "xSBVwMxjfW"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun inside the round gold medallion: she lifts her chin proudly: she leans forward and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out, one hand rests elegantly on the gold rim, the other is placed proudly on her chest, a self-assured smile, a small gold sparkle twinkles. Smooth, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-tutin",
+  "part": "loop",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "xSBVwMxjfW"
+    },
+    "end": {
+     "type": "image",
+     "url": "xSBVwMxjfW"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green. The ma ma with the neat bun leaning out of the round gold medallion she keeps showing her confidence in a loop: she raises her chin a little higher, gives a proud little nod, pats her chest lightly, her eyes half-close with a pleased smile, the small gold sparkle twinkles; then she settles back to exactly the starting pose. Slow enough to read, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-tutin",
+  "part": "back",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "xSBVwMxjfW"
+    },
+    "end": {
+     "type": "image",
+     "url": "u5WZKvwQLD"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun leaning out of the round gold medallion calms: she gives one last proud little nod, lowers the hand from her chest, lets go of the gold rim, pulls her arms back and slowly slides back inside the round medallion, shrinking back into it, until she is again only a calm confident smile with her neat bun inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-hanghai",
+  "part": "out",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "vQANF8pa47"
+    },
+    "end": {
+     "type": "image",
+     "url": "gOmdPonSXO"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun inside the round gold medallion: she fires up with energy: she leans forward and bursts out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out and pump both small fists up with determination, a big eager smile, tiny energy lines pop. Smooth, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-hanghai",
+  "part": "loop",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "gOmdPonSXO"
+    },
+    "end": {
+     "type": "image",
+     "url": "gOmdPonSXO"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green. The ma ma with the neat bun leaning out of the round gold medallion she keeps cheering herself on in a loop: she pumps both fists up and down, bounces her shoulders eagerly, nods with a big determined smile, the tiny energy lines flicker; then she settles back to exactly the starting pose. Slow enough to read, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ },
+ {
+  "seal": "mm-hanghai",
+  "part": "back",
+  "tool": "video_generate",
+  "args": {
+   "slug": "bytedance-seedance-fast-2.0",
+   "duration": 4,
+   "aspectRatio": "1:1",
+   "resolution": "720p",
+   "withSoundEffects": false,
+   "folderReference": "ba4aecfe-efce-47e2-b53f-30d292091886",
+   "keyframes": {
+    "start": {
+     "type": "image",
+     "url": "gOmdPonSXO"
+    },
+    "end": {
+     "type": "image",
+     "url": "vQANF8pa47"
+    }
+   },
+   "prompt": "Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The ma ma with the neat bun leaning out of the round gold medallion calms: she gives one last eager fist pump, lowers both fists, pulls her arms back and slowly slides back inside the round medallion, shrinking back into it, until she is again only an energized open smile with her neat bun inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects."
+  }
+ }
+]

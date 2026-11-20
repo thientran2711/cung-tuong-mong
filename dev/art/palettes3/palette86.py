@@ -167,7 +167,22 @@ def lift_named(n, h, role):
 
 def lifted_pair(r):
     mn, mh = lift_named(r['main'], r['main_hex'], 'm'); sn, sh = lift_named(r['sec'], r['sec_hex'], 's')
+    if not pair_tone_ok(mh, sh) and in_tone(mh, 'm') and in_tone(sh, 's'):
+        sn, sh = lift_sec_to_main(sn, sh, mh)
     return dict(main=mn, main_hex=mh, sec=sn, sec_hex=sh)
+
+def lift_sec_to_main(n, h, mh):
+    """P2: secondary more than SEC_DEEPER_MAX darker than the main (owner Lượt 767/769) -> same hue, lifted to main L - .095;
+    name 'deep / dark / soft X' -> 'light X'"""
+    from seasons import SEC_DEEPER_MAX
+    L, C, H = oklch(h); Lt = oklch(mh)[0] - SEC_DEEPER_MAX + 0.005; C2 = C
+    for _ in range(20):
+        h2 = lch2hex(Lt, C2, H)
+        if in_tone(h2, 's') and pair_tone_ok(mh, h2): break
+        Lt += 0.003; C2 = max(0.05, C2 - 0.002)
+    for w in ('deep ', 'dark ', 'soft '):
+        if n.startswith(w): n = n[len(w):]
+    return ('light ' + n if not n.startswith(('light', 'pale')) else n), h2
 
 def current_roots():
     """per consort: drawn pair (picture), current code (before this run), lifted base code"""
@@ -339,11 +354,15 @@ def cmd_solve(seed=1, iters=int(os.environ.get('P86_ITERS', 20000))):
         rs = RS[k]; b = base[k]
         cand = [dict(b)]; cost = [0.0]
         if k not in FINAL_ROOTS:      # a root code may move a little (same names, same season) to break a ROOT-ROOT clash
+            b_dE, b_sc = dE(b['main_hex'], b['sec_hex']), season_contrast(b['main_hex'], b['sec_hex'])
             RDL, RDH = (-0.06, -0.03, 0, 0.03, 0.06), (-20, -12, -6, 0, 6, 12, 20)   # P2: widened (ROOT-ROOT clashes are FAILs now)
             for m in variants(b['main'], b['main_hex'], 'm', RDL, RDH) | cvariants(b['main'], b['main_hex'], 'm'):
                 for s_ in variants(b['sec'], b['sec_hex'], 's', RDL, RDH) | cvariants(b['sec'], b['sec_hex'], 's'):
                     if (m[1], s_[1]) == (b['main_hex'], b['sec_hex']): continue
-                    if not pair_tone_ok(m[1], s_[1]) or classify(m[1], s_[1]) != rs or not contrast_ok(m[1], s_[1], 0.0) or not season_contrast(m[1], s_[1]): continue
+                    if not pair_tone_ok(m[1], s_[1]) or classify(m[1], s_[1]) != rs: continue
+                    # P2: a root whose own code fails contrast keeps a variant that is no flatter than her code
+                    flat_ok = dE(m[1], s_[1]) >= b_dE - 0.005
+                    if not (contrast_ok(m[1], s_[1], 0.0) or flat_ok) or not (season_contrast(m[1], s_[1]) or (not b_sc and flat_ok)): continue
                     cand.append(pd(m, s_)); cost.append(25 + 100 * (dE(m[1], b['main_hex']) + dE(s_[1], b['sec_hex'])))
             # P2: or a pool pair of her root season with both colours in the same families as her root code (bigger move)
             fm, fs = family(b['main_hex']), family(b['sec_hex']); extra = []
@@ -463,6 +482,12 @@ def cmd_solve(seed=1, iters=int(os.environ.get('P86_ITERS', 20000))):
                 if s2 != se and lookalike((c['main_hex'], c['sec_hex']), (q['main_hex'], q['sec_hex']), 1): why['own-4 lookalike ' + ('root' if isroot or s2 == RS[k] else 'nonroot')] += 1
         print('DEBUG why:', dict(why), flush=True)
         print('DEBUG bad:', bad, flush=True)
+        for k, se in bad:                                  # best this variable could do against the OTHER roots alone
+            cands = vc[(k, se)][0]; rq = [q for q in order if q != k and RS[q] == se]
+            dm = de2000_np(lab_arr([c['main_hex'] for c in cands]), lab_arr([cur[q][se]['main_hex'] for q in rq]))
+            ds = de2000_np(lab_arr([c['sec_hex'] for c in cands]), lab_arr([cur[q][se]['sec_hex'] for q in rq]))
+            nc = (np.maximum(dm, ds) < FAIL_DE).sum(1); j = int(np.argmin(nc))
+            print('DEBUG root', k, se, 'cands', len(cands), 'min root clashes', int(nc[j]), 'with', [q for q, x in zip(rq, np.maximum(dm, ds)[j]) if x < FAIL_DE], flush=True)
         print('DEBUG per season:', Counter(se for k, se in bad), 'roots among bad:', sum(1 for k, se in bad if se == RS[k]), flush=True)
     for rep in range(2):                                  # soft pass: fewer WARNs where free
         for k, se in VARS:
