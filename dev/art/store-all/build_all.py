@@ -540,6 +540,7 @@ def _build_season(person,rank,age="a18",season=None):
     S0,S,add=build(person,rank,age,_season=season); S,notes=winter_g28.season(S,rank,a36,season)
     _m=b26_fit_ok(person,rank,age,season)
     if _m and len(S)>10000: S,notes=b26_fit(S,notes,angle=False,whole=_m=='whole',rank=_c2rank(rank))   # B26 length: winter_g28.season already dropped ANGLE
+    if _m and len(S)>10000: S,notes=b26_fit(S,notes,angle=False,whole=_m=='whole')   # B26 length: winter_g28.season already dropped ANGLE
     return S0,S,add+notes
 
 def _kc_drawn(person):   # B8 (BW3): same table + rule as build.py kc_drawn (dev/art/KC_REFS.json m09_ok yes + real face words)
@@ -563,16 +564,22 @@ def build(person,rank,age="a18",_season=None):
 # (before B26/JOB 2/JOB 3); the cells already over then are listed in dev/art/b26/HEAD_OVER10K.json and are never cut. Logged ART_RULES_CONFLICTS.md item 17(d).
 def _c2rank(rank):   # B26FAB4: t7 gets the LEN_CUTS2 cuts only in the HQP SHORT pass (the long-collar pass stays as before, so every t7 cell that fitted stays the same)
     return None if rank==7 and not HQP_SHORT else rank
+    if _m and len(S)>10000: S,add=b26_fit(S,add,angle=True,whole=_m=='whole')
+    return S0,S,add
+# B26FAB2 (Foreman C #5 decision 1, 20/11): length step t1-t6, CUT WHILE > 10 000 (no longer all-or-nothing), only for cells that were <= 10 000 at HEAD 7007acc
+# (before B26/JOB 2/JOB 3); the cells already over then are listed in dev/art/b26/HEAD_OVER10K.json and are never cut. Logged ART_RULES_CONFLICTS.md item 17(d).
 _HEAD_OVER=None
 def b26_fit_ok(person,rank,age,season):
     """-> 'while' (cut while > 10 000), 'whole' (cell over at HEAD, t4/t5: the JOB 1 all-or-nothing fit kept as it was, so nothing that fitted before goes over again), or False."""
     global _HEAD_OVER
     if not (isinstance(rank,int) and 1<=rank<=8): return False   # B26FAB3 (Foreman C #6, 20/11): t7/t8 too (F2 embroidery names), same cut-while step
+    if not (isinstance(rank,int) and 1<=rank<=6): return False
     if _HEAD_OVER is None:
         import json as _j; _HEAD_OVER=set(_j.load(open(os.path.join(ART,"b26","HEAD_OVER10K.json"),encoding="utf-8"))["cells"])
     if not ({f"{x}|{rank}|{age}|{season}" for x in (person,ALIAS.get(person,person))} & _HEAD_OVER): return 'while'
     return 'whole' if rank in (4,5) else False
 def b26_fit(S,add,angle,whole=False,rank=None):
+def b26_fit(S,add,angle,whole=False):
     """B26 length (owner Lượt 1283 đoạn sentence; JOB 2/3 growth): t1-t6, (1) drop the ANGLE sentence (owner ~15:39Z length rule, as winter_g28.season) when
     angle=True, (2) master_common.doan_fit master-repeat store clauses (Foreman C #5 decision (a)), each only while still > 10 000."""
     sys.path.insert(0,ART); import winter_g28 as _W, master_common as _MC
@@ -601,6 +608,9 @@ def hqp_collar(person,S):
     S=S.replace(m.group(0),f"a near-empress ceremonial robe of {m.group(1)} silk with {cs.hqp_layer(main,sec,HQP_SHORT)}; the robe ",1)
     assert S.count(cs.HQP_CAPE)==1,("HQP cape slot",person)
     return S.replace(cs.HQP_CAPE,cs.HQP_CAPE+cs.HQP_OPEN+", ",1)
+        T,_c=_MC.doan_fit(T,low=not whole); notes+=[f"B26 length cut (repeats {x})" for x in _c]
+    if whole and len(T)>10000: return S,add   # JOB 1 all-or-nothing (cells already over at HEAD)
+    return T,add+notes
 def _build(person,rank,age="a18"):
     if not _kc_drawn(ALIAS.get(person,person)): raise NotDrawn(person)   # B8: people NOT drawn are refused (CLI exit 2, --check counts them HELD)
     person=ALIAS.get(person,person); S0=store(person,rank,age); S=S0
@@ -613,6 +623,14 @@ def _build(person,rank,age="a18"):
     anchor=" Pose:"; assert S.count(anchor)==1,("pose anchor",person,rank)
     add=(laws(rank,age,person in PR) if isinstance(rank,int) else laws(rank))+[angle_sentence(person,rank,age),grace_sentence(person,rank,age)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
     if rank in (4,5,6): add=[hairflower_named(a,person,rank) for a in add]
+    if not g_pets_allowed(rank,age): S=LAST_G["_PETS"].depet(S)   # F17 PETS: no animal pose where pets are not allowed (only the animal words change)
+    return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
+# HAIR FLOWER SPECIES t4-t6 (Foreman C #5 decision 2, 20/11; species = F2 NEW TABLE owner DUYỆT Lượt 1352, build.py F2_FL via hairflower_species(person, rank)):
+# the F13 HAIR FLOWER SIZE sentence names the F2 species of this rank ('ONE fresh <species> in her hair'); size words unchanged.
+def hairflower_named(a,person,rank):
+    if not a.startswith(_F13): return a
+    sp=LAST_G["hairflower_species"](ALIAS.get(person,person),rank)   # F2 (owner Lượt 1352): the F2 species of THIS rank
+    if rank in (4,5,6): add=[hairflower_named(a,person) for a in add]
     if not g_pets_allowed(rank,age): S=LAST_G["_PETS"].depet(S)   # F17 PETS: no animal pose where pets are not allowed (only the animal words change)
     return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
 # HAIR FLOWER SPECIES t4-t6 (Foreman C #5 decision 2, 20/11; species = F2 NEW TABLE owner DUYỆT Lượt 1352, build.py F2_FL via hairflower_species(person, rank)):
