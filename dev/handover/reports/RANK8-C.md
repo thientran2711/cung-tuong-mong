@@ -44,3 +44,8 @@ NEXT: when RANK8-A/B finish → one combined transparent image per rank of s62/s
 
 ## 6. Combined per rank s62 | s64 | s65 (transparent) — 16 cuts × 3 cr = 48 cr
 `dev/art/rank8-trio/trio_t1_s62_s64_s65.png … trio_t8_…png`: 3072×2648 RGBA. Each girl stays at native 1024×2304, side by side. Labels: a big rank strip ("tN · rank · 3 người mới · chưa xếp cung") and one strip per girl ("sNN · group"). Cuts of the RANK8-A/B gens logged in the ledger (kind RANK8-CUT). Checked on a dark background: clean.
+
+## 7. OWNER TEST "cổ vuông" t1/t2 (test copies, builder untouched) — 2 × 135 = 270 cr
+Neckline sentences from RANK8-A (t1 style 1 simple, t2 style 2 wide-shallow layered) were swapped into copies of s65 t1/t2: `dev/art/rank8-s65/test-square/s65_t{1,2}_sq.txt` (only that outfit phrase differs). Gate: `--scope tp1/tp2` PASS; the full store check fails only on the swapped sentence (expected).
+Gens bxM0vET5Y2 (t1), Lw8XqYiswO (t2). Sheet `dev/art/rank8-s65/test-square/s65_coVuong_t1_t2_t3.jpg` (t1 NEW | t2 NEW | t3 existing).
+Looked: all 3 necklines read as square, never round, and differ from each other (t1 low simple + narrow plain peach band; t2 wide shallow + 2-band embroidered border; t3 tall square + wide stiff band + apron). Note: with the square neck, t1/t2 look closer to t3, so the rank difference now rests on the t3 apron/girdle.
