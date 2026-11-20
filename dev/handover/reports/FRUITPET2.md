@@ -92,3 +92,13 @@ Commit: (see the push message / git log "FRUITPET2")
 - Cause: FRUITPET1's F17 step `pets.depet` (at t7/t8 the old "butterfly on her raised finger" pose becomes "gazing at her lightly raised hand") runs in build() but not in check()'s rebuild of the store text. So the invariant compared the de-petted prompt against a reference that still had the butterfly. It only showed for people whose picked pose is one of the 3 old animal poses.
 - Fix: check() applies the same depet step. No prompt wording changes; build() output is untouched.
 - Re-run result: see "build_all --check after round 2" below.
+
+### build_all --check after round 2 (all 5 ages, working tree = origin 78298b1 + my round-2 changes)
+- "F minus added sentences" invariant: **0 at every age** (the 4 a18 FAILs are gone).
+- F16/F17: 0. E6: 0. E12: 0, with s62/s64/s65 now inside their groups.
+- NEW FAILs that are NOT from this work:
+  - a18/a26: 53 t2/t3 prompts FAIL check_store, "store sentence missing or rewritten [0.77] Luminous smooth porcelain skin, bare clean forehead …".
+  - a36+: t3 FAILs on "[0] G15 Quý nhân …".
+  - Both come with the G17/G15 neckline commits merged from origin (aef86d9, ad3c824 …). That is the t1/t2/t3 collar code COLLAR1 is editing, so I did not touch it. → COLLAR1 / foreman.
+- LEN FAILs at a36/a51/a65 as before (A18 trim still waiting for the owner).
+Round-2 commit: 9e46608 (merged 653c783).
