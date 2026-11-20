@@ -586,6 +586,7 @@ function maidLoveMonth(){let ev="";if((typeof asOn==="function"&&asOn()))return"
  for(const s of L.filter(x=>x.manLove)){const m=manById(s.manLove);const o=ownerOf(s);if(!m||!o){s.manLove=null;continue}
   const mine=isSrv()&&(o===srvM()||(S.srv.af[s.sid]||0)>=30);
   if(roll(4)){o.staff.splice(o.staff.indexOf(s),1);const t=roll(30)?`bị đuổi khỏi cung`:`bị đày xuống Tân Giả khố`;if(m.rw!=="vương gia"&&roll(35)){m.alive=false}const line=`${s.name}, cung nữ của ${NM(o)}, tư tình với ${m.name} bị lộ: ${t}${m.alive?"":"; hắn bị đày ra biên ải"}. `;log(line);if(mine)ev+=line;continue}
+  if(typeof asSelfOn==="function"&&asSelfOn(o))continue;/* coop-guest-agent: a co-op guest's own maids are granted in her agent month (jagstaff asMonth Ban gả), never twice */
   if(roll(3)){o.staff.splice(o.staff.indexOf(s),1);const line=`${s.name}, cung nữ của ${NM(o)}, được chủ ban gả cho ${m.name}. `;log(line);if(mine)ev+=line}}}catch(e){console.error(e)}return ev}
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(!S.dead&&!isSrv())maidLoveMonth()}catch(e){}return ev}})();
 /* the choice cards */

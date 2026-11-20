@@ -18,6 +18,8 @@
    ======================================================================================================================================== */
 const ASN=window.__asN={maid:{},srv:{},n:0,ms:0,tick:0};
 function asOn(){try{return !!(typeof agOn==="function"&&agOn()&&BAL.ag.staff&&!window.__asOff)}catch(e){return false}}
+/* coop-guest-agent: asOn for p's OWN household on this seat (jagent agSelf): host / solo = asOn(); a co-op guest = her own staff only */
+function asSelfOn(p){try{return !!(typeof agSelf==="function"&&agSelf(p)&&BAL.ag.staff&&!window.__asOff)}catch(e){return false}}
 function asB(){return BAL.ag.staff}
 function asGrp(s){return s&&s.role==="maid"?"maid":"srv"}
 function asC(s,k){const G=ASN[asGrp(s)];G[k]=(G[k]||0)+1;ASN.n++}
@@ -144,7 +146,7 @@ function asEmpTea(s){const m=ownerOf(s);asC(s,"empTea");const T=S.turn||0;if(!s.
 /* ---------- the choice: needs × traits (mindPick with jmind's slip) against keeping her routine ---------- */
 function asDecide(s,N){N=N||asNeeds(s);const O=asOpts(s,N);if(!O.length)return null;const mw=(()=>{try{return typeof mindW==="function"?mindW(s,"social"):1}catch(e){return 1}})();
  const c=mindPick([["keep",BAL.ag.routine/BAL.ag.unit]].concat(O.map(o=>[o,o.u*BAL.ag.needW*mw])),s);return c==="keep"?null:c}
-function asStaff(){const L=[];for(const p of consorts()){if(!p||!p.staff)continue;if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.sid!=null&&!s.out)L.push(s)}return L}
+function asStaff(){const L=[];for(const p of consorts()){if(!p||!p.staff)continue;if(p!==S&&(!p.alive||p.out))continue;for(const s of p.staff)if(s&&s.sid!=null&&!s.out&&!s.coop)L.push(s)}return L}/* s.coop = a co-op friend who plays a maid: she decides on her own phone (coop-guest-agent) */
 /* ---------- 5 DAY PLAN (OD 17/11 ~13:40Z): at the first buổi of each day every staff draws 4 slots {k, t, pl} by her needs (asDecide at
    plan time); each buổi she carries out her slot — the option is rebuilt with today's odds (same k and target); gone → she keeps her duties
    that buổi. Saved in S.agS (lazy; old saves load). Part A's jagday draws the consorts / Emperor / Thái hậu; staff plans are drawn here,
@@ -161,9 +163,9 @@ function asTick(){if(!asOn()||asPlanned())return"";const key=agKey();if(ASN.key=
   for(const s of asStaff()){let L=P[s.sid];if(!L){L=P[s.sid]=[0,1,2,3].map(()=>asSlot(asDecide(s)))}ev+=asDo(s,L[b])}}catch(e){console.error("jagstaff tick",e)}ASN.ms+=performance.now()-t0;
  if(ev)try{log(ev)}catch(e){}return ev}
 /* ---------- the month: wage, secrets, betrayal found, grant, age (the player maid's rules) ---------- */
-function asMonth(){if(!asOn())return"";let ev="";const B=asB();
- for(const p of consorts()){if(!p||!p.staff)continue;const sch=(p.schemes||0)>(p.schLast||0);
-  for(const s of p.staff.slice()){if(s.sid==null)continue;asSt(s);asAp(s,{bac:CNV_WAGE[Math.min(CNV_WAGE.length-1,srk(s))]||1,suc:B.monthSuc});
+function asMonth(){if(!asSelfOn(S))return"";let ev="";const B=asB();
+ for(const p of consorts()){if(!p||!p.staff||!asSelfOn(p))continue;/* coop-guest-agent: a co-op guest runs her OWN household only (the host runs the world's) */const sch=(p.schemes||0)>(p.schLast||0);
+  for(const s of p.staff.slice()){if(s.sid==null||s.coop)continue;/* s.coop: a co-op friend playing a maid lives her own month on her phone */asSt(s);asAp(s,{bac:CNV_WAGE[Math.min(CNV_WAGE.length-1,srk(s))]||1,suc:B.monthSuc});
    if(sch&&roll(B.secSee))s.sec=(s.sec||0)+1;/* she sees her master's schemes at home (the player maid's "Biết chuyện của chủ") */
    if(s.betray&&roll(agCap(nv(p,"betrayFind")))){s.betray=null;if(roll(SRVA.betray.kill)){asOut(s,"dead");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo chuyện trong cung, sai đánh chết. `}else{asOut(s,"tgk");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo, đày xuống Tân Giả khố. `}continue}
    /* Ban gả (j42 cnvGrant: the same trigger as the player maid's), then her own choice: Tạ ơn, xuất giá / Xin ở lại */
@@ -205,4 +207,4 @@ try{if(typeof agReg==="function"){agReg("maid","staff",(p,N)=>asOpts(p,N));agReg
  const sv0=servMonth;servMonth=function(){let r=sv0.apply(this,arguments)||"";try{r+=asMonth()}catch(e){console.error("jagstaff month",e)}return r};
  const aw0=amWeek;amWeek=function(){if(asOn())return"";return aw0.apply(this,arguments)};
 })();
-Object.assign(window,{asPlanDraw,asDo,asOn,asNeeds,asOpts,asDecide,asRun,asTick,asMonth,asSt,asSeekReact,asHitPick,asStaff,asGrp});
+Object.assign(window,{asSelfOn,asPlanDraw,asDo,asOn,asNeeds,asOpts,asDecide,asRun,asTick,asMonth,asSt,asSeekReact,asHitPick,asStaff,asGrp});
