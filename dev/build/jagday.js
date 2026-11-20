@@ -138,7 +138,7 @@ function agLzRun(){const Q=AGD.lz;if(!Q)return;if(Q.w!==S||!agDOn()){AGD.lz=null
   if(rp&&agRdcFar(p)){const prev=D.P[id]&&D.P[id][b-1];const c=agRdcCause(p,id,prev,"",rp===2?{[id]:1}:{});if(!c||agRdcN>=BAL.ag.day.redecideCap){agRdcKeep(p,id,b,c,kind);done.push(id);continue}agRdcN++;agRdcMark("far:"+c)}
   if(intent||!D.I||!D.I[id])agIntent(p,id);agDrawPerson(p,id,b,kind,b);done.push(id)}catch(e){agdErr("lz",e)}}
  try{const R=agRec();if(R){const k0=agKh();for(const id of done){const s=agDaySlot(id);const row=R.P[id];if(!s||!row)continue;const nr=agRow(s);
-   for(let kh=k0;kh<J95.KH;kh++){const e=row[kh];if(!e||e[1]==="go"&&!agBound(id,kh,R.key))row[kh]=nr[kh]}}}
+   for(let kh=k0;kh<J95.KH;kh++){const e=row[kh];if(!e||e[1]==="go"&&!agBound(id,kh,R.key)&&!(typeof walkIsRoad==="function"&&walkIsRoad(e)))row[kh]=nr[kh]}}}/* round 4: a road (jwalk / meeting lead-in / errand) is never repainted */
   if(done.length)agTickX()}catch(e){agdErr("lzPaint",e)}
  const ms=performance.now()-t0;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift();
  if(done.length)agLater("sync",agSyncNow)
@@ -467,6 +467,9 @@ function agWhyDay(n){if(agCanDay(n))return"";const w=typeof dayWhy==="function"?
 function agSpill(p){try{if(!p||!(p.sp>0)||p.drop||p.gone)return false;const R=agRec();if(!R||!R.P[p.id]||p.key===R.key)return false;
   const [w0,b0]=String(p.key).split("-"),[w1,b1]=String(R.key).split("-");if(w0!==w1||+b0+1!==+b1)return false;/* only into the very next buổi of the same day */
   const row=R.P[p.id];const k1=Math.min(J95.KH-1,p.sp-1);for(let q=0;q<=k1;q++){const e=row[q];if(!e||e[1]==="tryst"||e[1]==="meet"||AG_NOTFREE.has(e[1])||agBound(p.id,q,R.key))return false}
+  /* round 4 (b, DEED WALKS): the carried part must leave her the road on to the next kept row of the new buổi (a meeting, a binding) — like a khắc
+     that is not free, no road = not carried (agWalkShort, travel per walker; khắc 0 has no row before it) */
+  try{let d=null;try{d=agDoer(p)}catch(e){}if(typeof agWalkShort==="function"&&agWalkShort(R,p.id,0,k1+1,p.pl,d,0,1)>0){AGD.stat.walkSpill=(AGD.stat.walkSpill||0)+1;return false}}catch(e){}
   p.key=R.key;p.kh=0;p.k1=k1;p.cont=1;{const rest=p.sp-J95.KH;if(rest>0)p.sp=rest;else delete p.sp}/* longer than a buổi: runs on again (the day function allowed it) */p.seen=0;for(let q=0;q<=k1;q++)row[q]=[p.pl,"ag_"+p.k,p.t||null,p.why||""];
   AGD.stat.spill=(AGD.stat.spill||0)+1;return true}catch(e){agdErr("spill",e);return false}}
 (function(){const l0=agLand;agLand=function(p){if(agKhOn()&&agSpill(p))return"";return l0.apply(this,arguments)};
@@ -497,7 +500,14 @@ function agWalkFix(x){if(!x)return false;const a=x[1]||"";return /^ag_/.test(a)|
 function agWalkHeld(R,id,q){const row=R&&R.P&&R.P[id];const x=row&&row[q];if(!x)return false;try{if(agBound(id,q,R.key))return true}catch(e){}const a=x[1]||"";
  if(!/^ag_/.test(a))return agWalkFix(x);if(a==="ag_tell"||a==="ag_with"||/^ag_see:/.test(a))return true;
  for(const p of agZ().pend||[])if(p.id===id&&p.key===R.key&&!p.drop&&!p.gone&&p.kh<=q&&q<=agK1(p))return true;
- const s=agDaySlot(id);if(s&&s.k&&a==="ag_"+s.k)return false;return true}
+ /* round 4: every deed row is written with its pend entry (agPlan / agPlanX / agSpan / agSeePlan / agSpill / agReapply), so an «ag_» row no pend deed
+    holds is only the day plan's label (agRow: her own deed's label, a world-forced buổi «ag_routine» with k null, a label the staff slice agLzRun
+    repainted over a road) or a deed already landed / dropped — free (was: held unless it matched slot.k → a held plan label nobody could walk) */
+ return false}
+/* round 4 (MEETING ROADS, whole group): a secret meeting written later (j95secApply re-applied by placeWhere) right after a deed she already
+   started: she leaves that deed one khắc early to walk there (the deed still lands, at its new end) — never a meeting reached with no road */
+function agWalkCut(R,id,q){try{for(const p of agZ().pend||[]){if(p.id!==id||p.key!==R.key||p.drop||p.gone||p.sp>0||!(p.kh<q)||agK1(p)!==q)continue;
+  p.k1=q-1;AGD.stat.walkCut=(AGD.stat.walkCut||0)+1;return true}}catch(e){agdErr("walkCut",e)}return false}
 function agWalkReal(k){return !!k&&typeof k==="string"&&k!==(typeof J95OUT_!=="undefined"?J95OUT_:"__out")}
 function agWalkT(a,b,d){if(!agWalkReal(a)||!agWalkReal(b)||a===b)return 0;try{return travel(a,b,d===undefined?null:d)||0}catch(e){return 0}}
 /* the khắc short (0 = it fits) for a deed of `id` at `at`, khắc kh … kh+kc−1, walker d; cur = the khắc now (rows before it are past) */
@@ -505,7 +515,7 @@ function agWalkShort(R,id,kh,kc,at,d,cur,after){try{if(!(typeof walkNpcOn==="fun
   const K=J95.KH,k1=Math.min(K-1,kh+Math.max(1,kc||1)-1);if(cur==null)cur=R.kh!=null?R.kh:agKh();let s=0;
   const fx=q=>agWalkHeld(R,id,q);/* a deed, a card binding (J95B: a card said she was there), a forced list */
   /* before: the last kept row before kh (whole khắc after it), else the khắc now (spent walking unless a kept row holds it) */
-  let q=kh-1;while(q>cur&&!fx(q))q--;if(q<cur)q=cur;/* kh = the khắc now: she walks from where she stands now */
+  let q=kh-1;while(q>cur&&!fx(q))q--;if(q<cur)q=kh>0?Math.min(cur,kh-1):0;/* round 4 (b): a deed AT the khắc now (or a fresh khắc's guard, cur = the khắc before) starts from row kh−1 = where she was, never from its own row; khắc 0 has no row before: where she stands at the start */
   if(!after&&q>=0&&q<K&&row[q]){const t=agWalkT(row[q][0],at,d);if(t>0){const gap=q>=kh?0:kh-q-(fx(q)?1:0);s=Math.max(s,t-gap)}}
   /* after: the next kept row after the deed */
   let a=k1+1;while(a<K&&!fx(a))a++;
@@ -516,15 +526,20 @@ function agWalkOk(R,id,kh,kc,at,d,cur){const n=agWalkShort(R,id,kh,kc,at,d,cur);
    binding her, J95B; a forced list). Every khắc (j95fixHouse chain, before the jwalk pass) each deed of this buổi NOT YET STARTED is checked:
    no road → it moves to the first later khắc that has the road and is free (same deed, same cost, same place); none → dropped, she re-plans
    (agTouch), as a deed she can no longer do. A started deed never moves. */
-function agWalkGuard(R,cur){if(!R||!R.P||!agKhOn())return 0;if(!(typeof walkNpcOn==="function"?walkNpcOn():BAL.walk.npc!==0))return 0;const z=agZ();let n=0;
- for(const p of (z.pend||[]).slice()){if(p.key!==R.key||p.drop||p.gone||!(p.kh>cur)||!R.P[p.id]||p.cont)continue;let d=null;try{d=agDoer(p)}catch(e){}
-  const kc=Math.max(1,p.kc||agK1(p)-p.kh+1);if(!agWalkShort(R,p.id,p.kh,agK1(p)-p.kh+1,p.pl,d,cur))continue;
+/* round 4 (whole group, law 11): rows next to a deed can still change AFTER the guard of a khắc ran — a mistress's later move rewrites her maid's
+   retinue row (j95sPass), a deed slice / reaction lands frames after j95sync (AGL). So (1) the guard runs AFTER every row writer of the chain
+   (j95sPass / j95sGuard), right before the road pass (jwalk wrapper); (2) at the FIRST pass of a new khắc (fresh: R.kh still the khắc before)
+   the khắc now is not shown yet: the deeds starting NOW are checked too, from row cur−1 = where she really was, and the khắc now may be her
+   road (jwalk walks it the same way). A started or seen deed never moves. */
+function agWalkGuard(R,cur,fresh){if(!R||!R.P||!agKhOn())return 0;if(!(typeof walkNpcOn==="function"?walkNpcOn():BAL.walk.npc!==0))return 0;const z=agZ();let n=0;
+ const lo=fresh?cur:cur+1,base=fresh&&cur>0?cur-1:cur;/* khắc 0 of a buổi: no row before it — she starts where row 0 stands (jwalk never rewrites khắc 0) */
+ for(const p of (z.pend||[]).slice()){if(p.key!==R.key||p.drop||p.gone||p.kh<lo||(p.kh<=cur&&p.seen)||!R.P[p.id]||p.cont)continue;let d=null;try{d=agDoer(p)}catch(e){}
+  const kc=Math.max(1,p.kc||agK1(p)-p.kh+1);if(!agWalkShort(R,p.id,p.kh,agK1(p)-p.kh+1,p.pl,d,base))continue;
   agShClear(p,p.kh,agK1(p));p.drop=1;let to=-1;
   for(let kh=p.kh+1;kh<J95.KH;kh++){if(!agFitDay(kh,kc))continue;let ok=true;for(let q=kh;q<Math.min(kh+kc,J95.KH);q++)if(!agKhFree(R,p.id,q)){ok=false;break}if(!ok)continue;
-   if(agWalkShort(R,p.id,kh,Math.min(kc,J95.KH-kh),p.pl,d,cur))continue;to=kh;break}
+   if(agWalkShort(R,p.id,kh,Math.min(kc,J95.KH-kh),p.pl,d,base))continue;to=kh;break}
   if(to>=0){delete p.drop;p.kh=to;R.P[p.id][to]=[p.pl,"ag_"+p.k,p.t||null,p.why||""];agSpan(p,{k:p.k,kc},d);AGD.stat.walkMove=(AGD.stat.walkMove||0)+1;n++}
   else{const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);AG.stat.drop++;AGD.stat.walkDrop=(AGD.stat.walkDrop||0)+1;if(d&&typeof d==="object")agTouch(d);n++}}
  return n}
-(function(){if(typeof j95fixHouse!=="function")return;const f0=j95fixHouse;j95fixHouse=function(R,kh){let n=f0.apply(this,arguments)||0;
- try{n+=agWalkGuard(R,R&&R.kh==null?0:kh)}catch(e){agdErr("walkGuard",e)}return n}})();
-Object.assign(window,{agWalkFix,agWalkShort,agWalkOk,agWalkGuard});
+/* the guard's call sits in the jwalk j95fixHouse wrapper (after j95sPass, before walkNpcPass) */
+Object.assign(window,{agWalkFix,agWalkShort,agWalkOk,agWalkGuard,agWalkCut});

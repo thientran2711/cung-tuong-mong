@@ -12,6 +12,11 @@
    11 DEED WALKS (review/jagday-walk, FOLLOW-UP GAP): a deed is never placed where the walk from / to the kept rows around it does not fit
       (jagday agWalkShort, travel per walker); a deed that lost its road to a later fixed row moves to a later khắc (agWalkGuard); 16 buổi of
       play: NPC far moves between two deed rows, and errand-ledger rows (jptime ptLedger: road there / back inside the window), without their «on the way» khắc = 0 (and vs BAL.walk.npc = 0)
+   12 ROUND 4 (review/jagday-walk-rv FAIL 1): rows next to a deed written AFTER the guard of a khắc (a mistress's later move → her maid's
+      retinue row, a deed slice / reaction landing frames after j95sync, a carried deed at khắc 0, a meeting re-applied after a deed) —
+      (b) a deed AT the khắc now starts from row kh−1; the first pass of a khắc re-checks deeds starting now; seeds 1–10 × 16 buổi, seeded
+      Math.random (mulberry32), AGL flushed every khắc, travel per walker, ag_tell = road, «ngoai» / forced «confined» / card-bound «here»
+      not a walk: bare far jumps in every class (deed / deed↔other / follow / errand / other) = 0
    6 no page errors */
 const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
@@ -92,9 +97,10 @@ const boot=`localStorage.clear();SLOT=4;document.getElementById('title').hidden=
  const r11=await p.evaluate(boot=>{eval(boot);const o={};used=0;try{j95sync()}catch(e){}const R=S.roster;const v=liveRivals(true).find(x=>x.alive&&!x.out&&!x.confined&&R.P["v"+x.id]);if(!v)return{none:1};const id="v"+v.id;
   const K=["home","vuon","tyv","ksp","thu","kn","tn","nvp"];let A=null,B=null;for(const a of K)for(const b of K)if(!A&&a!==b&&travel(a,b,v)===BAL.walk.far){A=a;B=b}if(!A)return{nofar:1};o.A=A;o.B=B;o.far=BAL.walk.far;
   const keep=R.P[id].map(x=>x.slice()),pend=agZ().pend.slice();agZ().pend=agZ().pend.filter(x=>x.id!==id);
+  /* round 4: a deed row is held by its pend deed (a label alone is the plan) — the fixture books its deeds like agPlan */const dp=(k,kh)=>{const x={key:R.key,id,vid:v.id,k,kd:"",t:null,kh,k1:kh,kc:1,pl:A,act:"",why:"t"};agZ().pend.push(x);return x};dp("testA",0);
   try{R.P[id]=[[A,"ag_testA",null,"t"],[A,"rest",null,""],[A,"rest",null,""],[A,"rest",null,""]];
    o.s1=agWalkShort(R,id,1,1,B,v,0);o.s2=agWalkShort(R,id,2,1,B,v,0);o.s3=agWalkShort(R,id,3,1,B,v,0);o.near=agWalkShort(R,id,1,1,A,v,0);
-   R.P[id][3]=[A,"ag_testC",null,"t"];o.after=agWalkShort(R,id,1,1,B,v,0);o.after2=agWalkShort(R,id,2,1,B,v,0);
+   const pC=dp("testC",3);R.P[id][3]=[A,"ag_testC",null,"t"];o.after=agWalkShort(R,id,1,1,B,v,0);o.after2=agWalkShort(R,id,2,1,B,v,0);agZ().pend.splice(agZ().pend.indexOf(pC),1);
    /* a slot the deed planner offers: never one without the road */
    R.P[id]=[[A,"ag_testA",null,"t"],[A,"rest",null,""],[A,"rest",null,""],[A,"rest",null,""]];const sl=[];for(let kh=0;kh<4;kh++)if(agWalkOk(R,id,kh,1,B,v,0))sl.push(kh);o.slots=sl;
    /* errand ledger (r1): an NPC sends a servant far (n = 3 khắc, the walk included) → road there | errand | road back; due + away unchanged */
@@ -121,5 +127,40 @@ const boot=`localStorage.clear();SLOT=4;document.getElementById('title').hidden=
  ok(on11.deed===0,'11 16 buổi: NPC far moves deed → deed without «on the way» khắc: on '+on11.deed+' (all far jumps '+on11.bad+'/'+on11.far+') vs off '+off11.deed+' ('+off11.bad+'/'+off11.far+')',on11.L.slice(0,3));
  ok(!on11.errand,'11 16 buổi: errand far moves without their road: on '+(on11.errand||0)+' vs off '+(off11.errand||0),on11.L.slice(0,3));
  ok(!on11.errs.length,'11 no walk errors',on11.errs);
+
+ /* 12 ROUND 4: unit — (b) a deed AT the khắc now walks from row kh−1; the fresh-khắc guard moves a deed starting now that lost its road */
+ await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
+ const r12=await p.evaluate(boot=>{eval(boot);const o={};used=0;try{j95sync()}catch(e){}const R=S.roster;const v=liveRivals(true).find(x=>x.alive&&!x.out&&!x.confined&&R.P["v"+x.id]);if(!v)return{none:1};const id="v"+v.id;
+  const K=["home","vuon","tyv","ksp","thu","kn","tn","nvp"];let A=null,B=null;for(const a of K)for(const b of K)if(!A&&a!==b&&travel(a,b,v)===BAL.walk.far){A=a;B=b}if(!A)return{nofar:1};
+  const keep=R.P[id].map(x=>x.slice()),pend=agZ().pend.slice(),rk=R.kh;agZ().pend=agZ().pend.filter(x=>x.id!==id);
+  try{R.P[id]=[[A,"rest",null,""],[A,"rest",null,""],[B,"rest",null,""],[B,"rest",null,""]];
+   o.b=agWalkShort(R,id,1,1,B,v,1);/* at the khắc now (1): from row 0 (A), not from its own row */o.bNear=agWalkShort(R,id,1,1,A,v,1);
+   R.P[id]=[[A,"rest",null,""],[B,"ag_testF",null,"t"],[B,"rest",null,""],[B,"rest",null,""]];const pp={key:R.key,id,vid:v.id,k:"testF",kd:"",t:null,kh:1,k1:1,kc:1,pl:B,act:"",why:"t"};agZ().pend.push(pp);
+   o.stay=agWalkGuard(R,1,false);o.kh0=pp.kh;/* not fresh: a deed of the khắc now is never moved */
+   const n=agWalkGuard(R,1,true);o.f={n,kh:pp.kh,drop:!!pp.drop,row:R.P[id].map(x=>x[0]+"/"+x[1]).join(" | ")};
+   /* a plan label no pend deed holds is free (world-forced «ag_routine», a repainted label) */R.P[id][3]=[B,"ag_routine",null,""];o.free=!agWalkHeld(R,id,3);
+  }finally{R.P[id]=keep;agZ().pend=pend;R.kh=rk}
+  return o},boot);
+ if(r12.none||r12.nofar)ok(false,'12 setup',r12);else{
+  ok(r12.b>0&&r12.bNear===0,'12 (b) a deed at the khắc now walks from row kh−1 (short '+r12.b+', same place '+r12.bNear+')',r12);
+  ok(r12.stay===0&&r12.kh0===1&&r12.f.n===1&&(r12.f.drop||r12.f.kh>=2),'12 first pass of a khắc: a deed starting now with no road from row kh−1 moves on / drops',r12.f);
+  ok(r12.free,'12 an «ag_» plan label no deed holds is free (jwalk may walk it)',r12)}
+ const scan12=async(s0,s1,NB)=>{const T={far:0,deed:0,mix:0,follow:0,errand:0,other:0,forced:0,land:0},L=[],E=[];
+  for(let seed=s0;seed<=s1;seed++){const ctx=await b.newContext({viewport:{width:755,height:1000}});
+   await ctx.addInitScript(sd=>{let a=sd>>>0;Math.random=function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}},seed*7919);
+   const q=await ctx.newPage();q.on('pageerror',e=>E.push(e.message));await q.goto(URL,{waitUntil:'domcontentloaded'});await q.waitForTimeout(2500);
+   const o=await q.evaluate(([boot,NB,seed])=>{eval(boot);const o={far:0,deed:0,mix:0,follow:0,errand:0,other:0,forced:0,L:[]};const fl=()=>{for(let i=0;i<30&&AGL.L.length;i++){try{agFlush()}catch(e){}agLaterRun()}};const l0=AG.stat.land||0;
+    for(let s=0;s<NB;s++){Q.length=0;S.mg=0;for(let u=0;u<4;u++){used=u;try{j95sync()}catch(e){}fl()}const R=S.roster;if(R&&R.P)for(const id in R.P){if(id==="me")continue;const row=R.P[id];if(!Array.isArray(row))continue;
+      for(let j=1;j<row.length;j++){const x=row[j];if(!x||x[0]==null||x[1]==="go"||x[1]==="ag_tell"||(x[1]==="follow"&&x[2]==="me"))continue;let k=j-1,g=0;while(k>=0&&row[k]&&row[k][0]===x[0]&&(row[k][1]==="go"||row[k][1]==="ag_tell")){g++;k--}
+       if(k<0||!row[k]||row[k][0]==null||row[k][0]===x[0]||row[k][1]==="ag_tell"||/ngoai|__out/.test(row[k][0]+x[0]))continue;const t=travel(row[k][0],x[0],walkWho(id));if(t<2)continue;o.far++;if(g>=t-1)continue;
+       if(x[1]==="confined"||row[k][1]==="confined"||(x[1]==="here"&&agBound(id,j,R.key))||(row[k][1]==="here"&&agBound(id,k,R.key))){o.forced++;continue}/* a forced move / a card said she was there (by design) */
+       const A=/^ag_/.test(x[1]),B=/^ag_/.test(row[k][1]);const c=A&&B?"deed":(A||B)?"mix":/follow/.test(x[1]+row[k][1])?"follow":/errand/.test(x[1]+row[k][1])?"errand":"other";o[c]++;o.L.push(`s${seed} b${s} ${c} ${id}: `+row.map(e=>e[0]+"/"+e[1]).join(" | "))}}
+     try{nextBuoi()}catch(e){}fl()}
+    o.land=(AG.stat.land||0)-l0;o.errs=(JWALK.errs||[]).concat((AGD.errs||[]).filter(e=>/walk/.test(e)));return o},[boot,NB,seed]);
+   for(const k in T)T[k]+=o[k]||0;L.push(...o.L);E.push(...o.errs);await ctx.close()}
+  return{T,L,E}};
+ const s12=await scan12(1,10,16);const bad12=s12.T.deed+s12.T.mix+s12.T.follow+s12.T.errand+s12.T.other;
+ ok(bad12===0,`12 seeds 1–10 × 16 buổi, AGL flushed every khắc: bare far jumps ${bad12} (deed ${s12.T.deed} / deed↔other ${s12.T.mix} / follow ${s12.T.follow} / errand ${s12.T.errand} / other ${s12.T.other}) of ${s12.T.far} far moves; forced ${s12.T.forced}; deeds landed ${s12.T.land}`,s12.L.slice(0,4));
+ ok(!s12.E.length,'12 no walk / page errors',s12.E.slice(0,3));
  ok(!errs.length,'6 no page errors',errs.slice(0,3));
  await b.close();const n=res.filter(x=>!x).length;console.log(n?`${n} FAIL`:'ALL OK');process.exit(n?1:0)})();

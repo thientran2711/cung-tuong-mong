@@ -112,7 +112,7 @@ function ptLedger(){if(!S||typeof j95on!=="function"||!j95on())return false;cons
      "errand" — the stage keeps her token (hidden + the kit chip «đang đi …») so she is SEEN walking off and back (OD 18/11 ~20:05Z); she is still busy
      (j95sBusy "errand"), never followed nor sent again, and the target stays in the row. NPC senders keep the target place (their stage is not hers). */
   const mine=a.by==="me";
-  for(let i=0;i<e.length;i++){const K=b0+i;if(K>=a.t0&&K<a.due){const why=`${mine?"ngươi":a.byNm||"chủ"} sai ${a.lbl||"đi việc"}`;let x=[mine?((e[i]&&e[i][0])||J95OUT_):(a.place||e[i][0]),"errand",a.tgt||null,why];
+  for(let i=0;i<e.length;i++){const K=b0+i;if(K>=a.t0&&K<a.due){const why=`${mine?"ngươi":a.byNm||"chủ"} sai ${a.lbl||"đi việc"}`;if(mine&&(!a.mpl||a.mpl.b!==b0))a.mpl={b:b0,k:(e[i]&&e[i][0])||J95OUT_};/* round 4: one place for the whole window of this buổi (her slot when it began) — a later slot repaint never makes her jump while away */let x=[mine?a.mpl.k:(a.place||e[i][0]),"errand",a.tgt||null,why];
     /* NPC senders: her road there / back inside the window (jwalk walkErrRow, review/jagday-walk; n includes the walk, OD 18/11 ~20:00Z) */if(!mine&&typeof walkErrRow==="function")x=walkErrRow(e,b0,a,i,x[0],x);
     if(!e[i]||e[i][0]!==x[0]||e[i][1]!==x[1]||e[i][3]!==x[3]){e[i]=x;ch=true}}}}
  if(ch)try{const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){ptErr("view",e)}
