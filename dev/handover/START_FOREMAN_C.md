@@ -47,7 +47,7 @@ FOR MAIN lines in FOREMAN_C_STATUS.md (Lượt 726/728 B24 frame colours; Lượ
 - Owner decisions (shared, never edit casually): dev/OWNER_DECISIONS.md (grep "OD:L…"). Other foremen's files (A/B/D/E…) are not yours.
 
 ## MODEL RULE (owner 16/11 OD 'Pick the model by task weight' + correction; re-reminded 20/11 Lượt 1267)
-create_session model= MUST be set: NEVER haiku; SONNET (claude-sonnet-5-5) = default for ALL art workers (prompts, Magnific gens, sheets, builder text). OPUS only for game rules/numbers/core systems/hard root-cause. #4 broke this (DESIGN2/ITEMFIX3/SWAP56 on Opus) — don't repeat.
+create_session model= MUST be set: NEVER haiku; SONNET (claude-sonnet-5-5) = default for ALL art workers (prompts, Magnific gens, sheets, builder text). OPUS only for game rules/numbers/core systems/hard root-cause — AND (owner 20/11 Lượt 1271, verbatim: "Ok, nếu mà thiết kế thì cho Opus làm.") for NEW OUTFIT/DESIGN invention (new era looks, new garments, ladders). Copy/swap/trim edits, gens, sheets = Sonnet. #4 broke this (DESIGN2/ITEMFIX3/SWAP56 on Opus) — don't repeat.
 
 ## Opening a worker
 Brief = short: job + "read dev/art/START_ART_WORKER.md first" + "do not read big files whole" + the three ROLLOVER lines and LINEAGE line verbatim + its report file name + who to tell when done (send_message to you). Open it as your child (create_session).
