@@ -7,7 +7,8 @@ apply(text): every master sentence must be in the prompt VERBATIM exactly once. 
   right after master sentence M01 when the prompt already holds it, else at the very start (B25 'starts from the master block').
   Nothing else in the prompt is touched (conflicting approved sentences are NOT deleted: MG1 report lists them, A18).
 check(text): -> list of (id, kind, detail); kind = MISSING | REWRITTEN (a near copy, words changed) | NOT ONCE.
-CLI: python3 dev/art/master_common.py apply <file|->   |   check <file|->   |   --show"""
+NOEAR (owner Lượt 1037): female prompts (default) also get EAR_SENT once and must hold no earring word; pass --male for men / boys.
+CLI: python3 dev/art/master_common.py apply <file|-> [--male]   |   check <file|-> [--male]   |   --show"""
 import os, re, sys
 ART = os.path.dirname(os.path.abspath(__file__))
 FILE = os.path.join(ART, "MASTER_COMMON.txt")
@@ -52,12 +53,59 @@ def check_elder(text, scope, age):
 def high_scope(scope): return scope in HIGH_SCOPES
 
 
+# NOEAR (owner Lượt 1037, 20/11, verbatim: "Rồi, hoa tai ổn, ok nha. Vậy tiến hành làm hoa tai, bỏ hết, kiểm tra tất cả các cái prompt của tất cả
+# mọi người, tất cả các bậc, không có bỏ sót bất kỳ một người nữ nào, bất kỳ một cái bậc nào, không ai được đeo hoa tai."): earrings are a separate
+# dress-up layer (dev/art/earring-test, report EAR1) -> NO painted woman / girl of any rank or state wears earrings. Every FEMALE prompt carries EAR_SENT
+# exactly once (apply() puts it right after master M11 'Bare clean forehead…') and no earring word anywhere else. Men and boys: female=False, unchanged.
+EAR_SENT = "Bare earlobes: she wears NO earrings, nothing at the ears (earrings are added later as a separate layer)."
+EAR_RX = re.compile(r"\bear(?:-| )?rings?\b|\bear(?:-| )?(?:drops?|pendants?|studs?|hoops?|cuffs?|jewel\w*)\b|\bjhumkas?\b|\b(?:hoa|bông|khuyên) tai\b"
+                    r"|\b(?:jewel\w*|pearls?|jade|gold|silver|dangles?|tassels?|pendants?|drops?)\s+(?:at|on|from|in|hanging from) (?:the|her|both|each) ears?\b", re.I)
+M11_ID = "M11"
+MALE_SCOPES = {"emperor", "men", "man", "boy"}   # check_store scopes of men / boys (Hoàng thượng = emperor; build_npc men/boys: --scope men); every other scope = a woman / girl
+
+
+def male_scope(scope): return scope in MALE_SCOPES
+
+
+def strip_ear(text):
+    """remove the earring words of the builders' old wording (the same edit was made in the builder sources; legacy() uses it so old gens still verify)."""
+    t = text.replace("gold-and-jade necklace, earrings and bracelets", "gold-and-jade necklace and bracelets")
+    t = re.sub(r" and (?:[^,;.()\"]*? )?ear-?rings\b(?= as the only mark|[;.,)\"])", "", t)          # 'a fresh flower and slim silver tassel earrings;' -> 'a fresh flower;'
+    t = re.sub(r",(?: with| she wears)? (?:[^,;.()\"]*? )?ear-?rings(?: with [^,;.()\"]*?drops)?(?=[;.,)\"])", "", t)   # ', gold earrings;' / ', with small earrings,' -> ''
+    return t
+
+
+def ear_fails(text):
+    """-> list of (id, kind, detail) for a FEMALE prompt: EAR_SENT exactly once + no earring word outside it."""
+    t = _norm(text); n = t.count(EAR_SENT); out = []
+    if n != 1: out.append(("NOEAR", "MISSING" if n == 0 else "NOT ONCE", f"bare-earlobes sentence {n} times (must be 1): '{EAR_SENT}'"))
+    m = EAR_RX.search(t.replace(EAR_SENT, " "))
+    if m: out.append(("NOEAR", "EARRING", f"earring word in a woman's prompt (owner Lượt 1037: nobody wears earrings): …{t.replace(EAR_SENT, ' ')[max(0, m.start() - 50):m.end() + 30]}…"))
+    return out
+
+
+def apply_ear(text):
+    if EAR_SENT in text: return text
+    m11 = sentences()[ids().index(M11_ID)]
+    if m11 in text:
+        j = text.index(m11) + len(m11); return text[:j] + " " + EAR_SENT + text[j:]
+    return text.rstrip() + " " + EAR_SENT + text[len(text.rstrip()):]
+
+
 def _master(high):
     return [(k, s) for k, s in zip(ids(), sentences()) if not (high and k == M06_ID)]
 
 
-def apply(text, high=False):
-    """high=True (B12, rank t6+ / Thái hậu / Hoàng thượng / Nữ đế): M06 is not inserted (and must not be in the text); the builder supplies BROCADE."""
+def apply(text, high=False, female=True):
+    """high=True (B12, rank t6+ / Thái hậu / Hoàng thượng / Nữ đế): M06 is not inserted (and must not be in the text); the builder supplies BROCADE.
+    female=True (NOEAR, owner Lượt 1037): EAR_SENT is put right after M11 and the text must hold no earring word. Men / boys pass female=False."""
+    t = _apply(text, high)
+    if not female: return t
+    assert not EAR_RX.search(t.replace(EAR_SENT, " ")), "NOEAR (owner Lượt 1037): earring word in a woman's prompt: " + EAR_RX.search(t.replace(EAR_SENT, " ")).group(0)
+    return apply_ear(t)
+
+
+def _apply(text, high=False):
     if high: assert sentences()[ids().index(M06_ID)] not in text, "B12: master M06 (thin silk+gauze) in a t6+ / royal prompt"
     S = [s for _, s in _master(high)]; t = text
     for k, s in _master(high):
@@ -89,6 +137,7 @@ def legacy(text):
     t = text.replace(STYLE_OLD, "Full-body standing figure").replace(STYLE_OLD_TY, "Full-body standing figure")
     t = t.replace("skin rendering, painterly near-3D drawing style, fabric", "skin rendering, drawing style, fabric")
     t = re.sub(K3_RX, "", t)   # C2 (Lượt 780): the old transparent-background sentence is gone
+    t = strip_ear(t)   # NOEAR (owner Lượt 1037): the old earring words are gone
     return t
 
 
@@ -99,8 +148,8 @@ def _overlap(s, text):
     return best
 
 
-def check(text, high=False):
-    t = _norm(text); out = []
+def check(text, high=False, female=True):
+    t = _norm(text); out = ear_fails(text) if female else []
     m06 = sentences()[ids().index(M06_ID)]; nb = t.count(BROCADE)
     if high:   # B12 (Lượt 781): t6+ / royal = BROCADE exactly once, never M06
         if _norm(m06) in t: out.append((M06_ID, "HIGH RANK", "B12: master M06 (thin silk+gauze, thướt tha) in a t6+ / Thái hậu / Hoàng thượng / Nữ đế prompt"))
@@ -121,9 +170,9 @@ def _read(p): return sys.stdin.read() if p == "-" else open(p, encoding="utf-8")
 if __name__ == "__main__":
     a = sys.argv[1:]
     if not a or a[0] == "--show": print(" ".join(sentences())); sys.exit(0)
-    if a[0] == "apply": sys.stdout.write(apply(_read(a[1]))); sys.exit(0)
+    if a[0] == "apply": sys.stdout.write(apply(_read(a[1]), female="--male" not in a)); sys.exit(0)
     if a[0] == "check":
-        r = check(_read(a[1]))
+        r = check(_read(a[1]), female="--male" not in a)
         for x in r: print("  FAIL", *x)
         print("MASTER BLOCK", "FAIL" if r else "PASS"); sys.exit(1 if r else 0)
     print(__doc__); sys.exit(2)

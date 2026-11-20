@@ -275,7 +275,7 @@ def prompt(i, age, rank=None):
     assert out.endswith(END) and D9 not in out
     out = out[:-len(END)] + D9 + END   # D9 (Lượt 529)
     sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import master_common
-    return master_common.apply(out, high=i.startswith("thaihau"))   # + B12 (Lượt 781): Thái hậu = brocade, never M06   # B25 ONE MASTER COMMON BLOCK (owner Lượt 745/766, MG1), last step
+    return master_common.apply(out, high=i.startswith("thaihau"), female=gender(i) == "f")   # NOEAR (owner Lượt 1037): women + girls get the bare-earlobes sentence, men / boys unchanged   # + B12 (Lượt 781): Thái hậu = brocade, never M06   # B25 ONE MASTER COMMON BLOCK (owner Lượt 745/766, MG1), last step
 
 def _prompt(i, age):
     pre, _, n = i.rpartition("-")
@@ -316,7 +316,7 @@ def main(argv):
             try: p = prompt(o["id"], o["age"], o["rank"])
             except Held as e: p = "HELD " + str(e)
             import master_common   # a gen made before the B25 master block (MG1) passes when only the block differs
-            if (p != r["prompt"] and master_common.apply(master_common.legacy(r["prompt"])) != p.replace(B.ELDER_M05_SENT, "")) or refs(o["id"], o["age"]) != r.get("refs"): bad += 1; print("FAIL", r.get("gen_id"), r["cmd"])
+            if (p != r["prompt"] and master_common.apply(master_common.legacy(r["prompt"]), female=gender(o["id"]) == "f") != p.replace(B.ELDER_M05_SENT, "")) or refs(o["id"], o["age"]) != r.get("refs"): bad += 1; print("FAIL", r.get("gen_id"), r["cmd"])
         print(f"verify: {n} build_npc gens, {bad} FAIL"); return 1 if bad else 0
     o = _argv_parse(argv)
     try: p = prompt(o["id"], o["age"], o["rank"])

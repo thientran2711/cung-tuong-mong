@@ -43,6 +43,6 @@ VI = {"an": "Ẩn", "binh": "Bình", "buon": "Buồn", "chan": "Chán", "choang"
       "khochiu": "Khó chịu", "lo": "Lo", "muu": "Mưu", "so": "Sợ", "tinhnghich": "Tinh nghịch", "tinhtu": "Tình tứ", "tutin": "Tự tin", "vui": "Vui"}
 def caption(k): return ("Hành động · " + VI[k[4:]]) if k.startswith("act-") else VI[k]
 if __name__ == "__main__":
-    import os as _os; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
+    import os as _os; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG; import seal_ear as _SE  # F15 NOEAR (owner Lượt 1037): women seals = no earrings + bare-earlobes sentence  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
     ks = sys.argv[1:] or ORDER
-    print(json.dumps(_SG.guard({k: prompts(k) for k in ks}, "hh"), ensure_ascii=False, indent=1))
+    print(json.dumps(_SG.guard(_SE.ear({k: prompts(k) for k in ks}), "hh"), ensure_ascii=False, indent=1))

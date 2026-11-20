@@ -52,6 +52,6 @@ def prompts(k):
      "back": f"Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The furious {short} leaning out of the round gold medallion gives one last angry huff, the steam fades away, he lowers his fist, lets go of the gold rim, pulls his arms back and slowly slides back inside the round medallion, shrinking back into it, until he is again only {endface} inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects.",
     }
 if __name__ == "__main__":
-    import os as _os; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
+    import os as _os; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG; import seal_ear as _SE  # F15 NOEAR (owner Lượt 1037): women seals = no earrings + bare-earlobes sentence  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
     ks = sys.argv[1:] or list(G)
-    print(json.dumps(_SG.guard({k: prompts(k) for k in ks}, "sg4"), ensure_ascii=False, indent=1))
+    print(json.dumps(_SG.guard(_SE.ear({k: prompts(k) for k in ks}), "sg4"), ensure_ascii=False, indent=1))

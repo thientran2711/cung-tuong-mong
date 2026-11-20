@@ -70,5 +70,5 @@ AN = {  # hidden feeling: the still is grey smoke + '?' (no face); B: he peeks o
 ALL = {k: prompts(k) for k in S}
 ALL["an"] = AN
 if __name__ == "__main__":
-    import os as _os, sys; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
-    print(json.dumps(_SG.guard(ALL, "m"), ensure_ascii=False, indent=1))
+    import os as _os, sys; sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")); import seal_gate as _SG; import seal_ear as _SE  # F15 NOEAR (owner Lượt 1037): women seals = no earrings + bare-earlobes sentence  # A24 seal gate: FAIL = exit 1, no prompts printed = no gen
+    print(json.dumps(_SG.guard(_SE.ear(ALL), "m"), ensure_ascii=False, indent=1))
