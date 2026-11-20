@@ -213,7 +213,7 @@ def capelet_cut(person):
 def collar_cut(person):
     return ("COLLAR CUT (flowing): the collar's lower edge follows soft CURVES, never flat horizontal edges: "+CURVE_SHAPES[_pn(person)%len(CURVE_SHAPES)]+"; "
      "the front is NOT closed or buttoned from top to bottom: it opens gradually from the collar downward in a long soft V, flowing and graceful (uyển chuyển), never cramped or boxy.")
-HQP_LUX="HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), a layered pearl-and-gold necklace, pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress."
+HQP_LUX="HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress."
 INNER_EMB="INNER LAYER EMBROIDERED (t7/t8): the inner robe and skirt layer is ALSO embroidered with fine silk-thread embroidery stitched into the fabric, the motifs smaller, lighter and sparser than on the outer robe."
 def item_colour(person,rank,F):
     m=re.search(r" Pose: .*?(?:holding|holds|carrying|offering|raising|with) (an? [^,.]+?)(?: in | up | raised| held| forward| beside| at |,|\.)",F)
@@ -352,6 +352,16 @@ def plan(age="a18"):
             pz=best(ok,cp); up.append(pz); cp[t][pz]+=1
             gr=best([k for k in range(8) if k not in ug],cg); ug.add(gr); cg[t][gr]+=1
             P[(c,t)]=(a,pz,gr)
+    # A41 (owner Lượt 1411 'nobody wears a necklace', B26FAB4 item 6): a cell whose plan pose touches a necklace (POSES_30 C6) gets ANOTHER allowed pose AFTER the
+    # plan is made, so every other cell keeps exactly its old pose (least-used at that rank, not used by her other ranks, same bans / gesture keys as above).
+    for c in PEOPLE:
+        for t in range(1,9):
+            a,pz,gr=P[(c,t)]
+            if not re.search(r"necklace",_pose_tpl(g,*pz)): continue
+            up=[P[(c,u)][1] for u in range(1,9)]; prop=item(c,t); keys=set().union(*[_keys(_pose_tpl(g,*u)) for u in up if u!=pz])
+            ok0=[o for o in allp if o not in up and (t>=4 or lively(o)) and not re.search(r"necklace",_pose_tpl(g,*o)) and not any(re.search(q,_pose_tpl(g,*o)) for q in _banned(t,age,prop)+([PET_RX] if (t>=7 and c in S_NEW_SET) else []))]
+            ok=[o for o in ok0 if not (_keys(_pose_tpl(g,*o))&keys)] or ok0
+            R=_random.Random(f"{c}-{t}-A41"); ok=list(ok); R.shuffle(ok); nz=min(ok,key=lambda o:cp[t][o]); cp[t][pz]-=1; cp[t][nz]+=1; P[(c,t)]=(a,nz,gr)
     # E12 (owner Lượt 650/656, ROOT-54 ruling (b), BW6): inside each LOOK GROUP the angle and grace of THIS age are replaced by the group plan
     # (different angle sentence per person at one rank, <=2 per visual class, different grace line; E1 no repeat inside one person). Poses: untouched.
     for name,mem in g["look_groups"]().items():

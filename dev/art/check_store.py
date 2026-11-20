@@ -219,12 +219,12 @@ APPROVED = [{'id': 'W01', 'title': 'WINTER FUR Lông 1 t1-t3 (G26)', 'text': "WI
   'store': False},
  {'id': 'S14',
   'title': 'HOÀNG QUÝ PHI LUXURY t7',
-  'text': 'HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), a layered pearl-and-gold necklace, pearl and jade trims along '
+  'text': 'HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), pearl and jade trims along '
           'the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress.',
   'scope': 'tp7 pr7',
   'confirm': '',
   'ages': '',
-  'luot': '486 (G12)',
+  'luot': '486 (G12); A41 owner Lượt 1411 (no necklace for anyone): "a layered pearl-and-gold necklace, " removed (B26FAB4, Foreman C #8)',
   'source': 'dev/art/store-all/build_all.py HQP_LUX',
   'proof': 'dev/art/approved/proof/c06_t7_a18.txt',
   'picture': 'HQP c20 pearls (skin) · gen 0eUXPSZTfW · cut xSBwv6vjfW · https://ctm-img.victoria-tntt.workers.dev/img/_keep/skins-1119/c20_hqp_pearls.png',
@@ -721,7 +721,7 @@ BANNED = [{'id': 'X01',
 # (_t3_slot) and by store_check below: the gate then DEMANDS the option-B words (slots = any words) instead of the old t3 design.
 G15_T3_OLD=re.compile(r"a fine silk robe with wide embroidered (.+?) bands at the collar, sleeves and hem, long trailing wide sleeves, a silk waistband with hanging jade belt pendants and tassels, a sheer silk shawl")
 G15_T3_OPTB=("a structured, rich COURTLY palace consort dress (cung đình), never plain, never a simple wrap robe, NO crossed wrap collar, NO high-waisted chest-wrap skirt: "
- "an ankle-length {main} silk court robe with a straight SQUARE NECKLINE framed by a wide stiff {sec} embroidered {motif} band; a wide stiff {sec} brocade girdle at the natural waist, "
+ "an ankle-length {main} silk court robe with a straight SQUARE NECKLINE framed by a wide stiff {sec} embroidered {motif} band; the low square neckline shows a soft, natural hint of cleavage, tasteful and elegant; a wide stiff {sec} brocade girdle at the natural waist, "
  "from which hangs down the centre front an embroidered {sec} APRON PANEL (a long narrow ceremonial front panel, {motif} embroidery, gold-braid edge) reaching to the ankles; "
  "on each side of the apron hangs a long ceremonial jade pendant set down to the knees: small carved jade plaques linked by strings of pearls, ending in silk tassels; "
  "wide embroidered {motif} bands at the sleeve ends and the hem; a sheer silk shawl")
@@ -729,7 +729,8 @@ G15_T3_OPTB=("a structured, rich COURTLY palace consort dress (cung đình), nev
 # at a36/a51/a65 the t3 option-B words keep everything except the collar: the square neckline becomes the same snug crossed collar as the old (pre-G17) Đáp ứng words.
 G21_AGES=("a36","a51","a65")
 G21_T3_COLLAR=[("never plain, never a simple wrap robe, NO crossed wrap collar, NO high-waisted chest-wrap skirt: ","never plain, never a simple wrap robe, NO high-waisted chest-wrap skirt: "),
- ("with a straight SQUARE NECKLINE framed by a wide stiff {sec} embroidered {motif} band;","with a modest snug crossed-collar neckline framed by a wide stiff {sec} embroidered {motif} band;")]
+ ("with a straight SQUARE NECKLINE framed by a wide stiff {sec} embroidered {motif} band; the low square neckline shows a soft, natural hint of cleavage, tasteful and elegant;",   # A42 clause goes with the square neckline
+  "with a modest snug crossed-collar neckline framed by a wide stiff {sec} embroidered {motif} band;")]
 def g15_t3_words(age=None):
     w=G15_T3_OPTB
     if age in G21_AGES:
@@ -748,9 +749,9 @@ HQP_CAPE="a jewelled cloud-collar cape edged with pearls and gold over the shoul
 def hqp_layer(main,sec,short=False):
     edge="a broad royal-yellow brocade band studded with pearls (the Hoàng quý phi edge, her broad yellow collar)"; oe="a slim gold-and-pearl band"; outer=f"the {main} outer robe"
     if short: return (f"a LAYERED NECKLINE: a {sec} inner top with a low straight SQUARE neckline edged by {edge}, under {outer} worn OPEN at the front, "
-                      f"its two front edges ({oe}) falling from both shoulders, neck and collarbones visible; NO crossed wrap collar")
+                      f"its two front edges ({oe}) falling from both shoulders, neck and collarbones visible; the low square neckline shows a soft, natural hint of cleavage, tasteful and elegant; NO crossed wrap collar")   # A42 (L1413)
     return (f"a LAYERED NECKLINE (two-garment look): a fitted {sec} INNER top (like a tube-top bodice) with a low straight SQUARE neckline across the upper chest, "
-            f"showing her neck and collarbones, that square neckline edged by {edge}; OVER it {outer} worn OPEN at the front, its two straight front edges ({oe}) "
+            f"showing her neck and collarbones, that square neckline edged by {edge}; the low square neckline shows a soft, natural hint of cleavage, tasteful and elegant; OVER it {outer} worn OPEN at the front, its two straight front edges ({oe}) "
             f"running from behind the neck over BOTH shoulders and straight down each side of the chest, framing the bordered square neckline; {HQP_NO}")
 HQP_SLOT=re.compile(r"a near-empress ceremonial robe of ([^,]+?) silk, ")
 def hqp_store(store,prompt):
