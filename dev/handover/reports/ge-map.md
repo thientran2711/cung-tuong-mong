@@ -16,7 +16,7 @@ kit-ge.js still PASS.
 
 ## Tests
 - NEW `node dev/test/ge-map.js [dev/index.html] [outdir]` — 755x1000, 1180x820, 412x1058, 390x844: page opens, 10×4 tabs, nodes drawn (13/2/4), counts, totals, only the earned end named, tap card (pair, Điều cần no digits, lives), tap «?» card, tab switching, no overflow, no page errors, live life opens on its branch, all-branch wording scan: GE-MAP PASS.
-- kit-ge.js PASS. golive quickcheck: see below.
+- kit-ge.js PASS. golive quickcheck 8e2efbea: PASS (core gates, time-spill, old save ok, perf render 234/268 ms, buổi 1518/1248 ms vs live; never --yes).
 - Shots (Fold + iPad, LOOKED): CDN img/_review/ge-map/ge-map-{A,A2,A3,C}-{fold,ipad}.png (https://ctm-img.victoria-tntt.workers.dev/img/_review/ge-map/…). Delete after verdict.
 
 ## Notes for main (not done, not blocking)
