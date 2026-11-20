@@ -267,3 +267,4 @@ ROOT-65 Lượt 981 ~03:25Z: PR19 batch 1 (rooms 31–35 Tần, 675 cr) LOOKED +
 ROOT-65 Lượt 982 ~03:30Z: OWNER verbatim "Vẽ 1 cô thử theo bảng màu mới" then "Khaon, bảng mới xong chưa" (= Khoan → HOLD the test girl) → answered: new 4-season sheets done = Lượt 980 (a42b5f6); test girl waits her go + which girl/season. Next Lượt 983.
 ROOT-65 Lượt 984 ~03:35Z: OWNER verbatim "Vẽ 1 cô thử theo bảng màu mới" → F3 GO: c06 Sắc sảo THU pair #D13A48 + #559C46, 1 gen ~138 cr, CŨ|MỚI sheet. Next Lượt 985.
 - (20/11 03:08Z) FROM MAIN ROOT-73: LIVE 94c3bddc (mg-ready-guide, owner bug) on 72922870. ROLLBACK 72922870. Final-merge 94c3bddc before LAND READY.
+ROOT-65 Lượt 985 ~03:45Z: F3 c06 THU trial (gen tCR4nH2mZJ cut BhNJ2ShoQR, 138 cr, F3 total 552) LOOKED + sent. Fault: red+green reads "Giáng sinh", red shoes/tassel. check_store DEEP_SEASON_TRIAL={"c06":"thu"} added. F3 AT ROLL LINE (~29 %) → further face work needs a successor = FOR MAIN (I am depth 8). Next Lượt 986.
