@@ -2,7 +2,7 @@
 """WINTER prompt maker (TEST, WINTER1 for Foreman C #3). Builder is NOT changed: this takes build_all.py output and applies
   G25  autumn/winter t1-t3: old crossed collar = the builder's own a36 Outfit sentence (G21 words)
   G22r t4 Tần: pre-G22 crossed collar (owner revert ~19:00Z 20/11; G22 big flowers kept) - only while the builder still has the square neck
-  G28  winter fabric: every sheer/gauze/thin-silk wording -> thick warm OPAQUE fabric (padded silk / brocade / quilted look)
+  G28  winter fabric t1-t6: every see-through wording -> soft flowing OPAQUE silk (same drape; never thick/padded words); t7/t8 unchanged
   G26  fur: ONE sentence before 'Pose:', 3-step width ladder (t1-t3 / t4-t6 / t7-t8), plain ivory for all
   LEN  > 10 000 chars: drop the ANGLE sentence (owner OK to cut one side sentence, ~15:39Z) and say so
 Usage: python3 dev/art/winter1/make_winter.py s62 [--out DIR] [--gate]
@@ -23,21 +23,7 @@ FUR = {  # G26 ladder (owner ~19:00Z + ~19:15Z)
 def fur(t): return FUR[1 if t <= 3 else 2 if t <= 6 else 3]
 
 # G28 fabric swaps: (old exact text, new text). Each must match where present; the report lists which ones fired.
-FABRIC = [
- ("The FABRIC is thin, light, flowing silk and gauze with a soft sheen and fine delicate embroidery, long soft graceful drapery that sways and trails elegantly (thướt tha);",
-  "The FABRIC is thick, warm, OPAQUE winter cloth (padded silk and soft brocade with a gentle quilted look), never thin sheer silk or gauze, with a soft sheen and fine delicate embroidery, long soft graceful drapery that still sways and trails elegantly (thướt tha);"),
- ("Light, soft, thin flowing silk: the long sleeves, skirt and sash are supple and airy, drifting softly as in a gentle breeze, with soft natural folds, never stiff, flat or board-like.",
-  "Warm, soft, OPAQUE padded silk: the long sleeves, skirt and sash are supple and fall in soft, heavier folds, never see-through, never stiff, flat or board-like."),
- ("showing a sheer thin undersleeve", "showing a soft opaque undersleeve"),
- ("a sheer silk shawl", "a warm opaque padded-silk stole"),
-]
-PHI_RE = re.compile(r"PHI BẠCH: the sheer shawl draped behind her back and over her arms is a very sheer, highly translucent gauze shawl in (?P<sec>[^(]+?) "
-                    r"\(her secondary colour, clearly different from her main robe colour (?P<main>[^)]+)\) — .*?it keeps its soft graceful drape\.")
-def phi_winter(m):
-    return (f"PHI BẠCH (winter): the shawl draped behind her back and over her arms is a warm OPAQUE padded-silk stole in {m.group('sec')} "
-            f"(her secondary colour, clearly different from her main robe colour {m.group('main')}), soft and thick, never sheer or see-through; it keeps its soft graceful drape.")
-SHEER_LEFT = re.compile(r"\b(sheer|translucent|gauze|chiffon|organza)\b", re.I)
-SHEER_OK = ["no sheer floating scarf, stole, shawl or veil unless her outfit names one", "never thin sheer silk or gauze", "never sheer or see-through"]
+sys.path.insert(0, os.path.join(ROOT, "dev/art")); import winter_g28   # G28: ONE copy of the swaps (shared with check_store winter scope)
 
 def build(p, t, age="a18"):
     return subprocess.run(["python3", B, p, str(t), age], capture_output=True, text=True, check=True).stdout.rstrip("\n")
@@ -52,12 +38,8 @@ def winter(p, t):
         s = re.sub(r"(embroidered borders of [^,]+?) at sleeves and hem,", r"\1 at collar, sleeves and hem,", s, count=1)
         s = s.replace(" the low square neckline of rank 1, richer gold-brocade edge, NO crossed collar,", " a crossed collar,", 1)
         notes.append("pre-G22 crossed collar")
-    for a, b in FABRIC:
-        if a in s: s = s.replace(a, b); notes.append("G28 " + a[:28] + "…")
-    s, k = PHI_RE.subn(phi_winter, s)
-    if k: notes.append("G28 PHI BẠCH opaque")
-    left = SHEER_LEFT.findall(re.sub("|".join(map(re.escape, SHEER_OK)), "", s))
-    assert not left, (p, t, "sheer words left", left)
+    if t <= 6:   # G28 t1-t6 only (owner ~19:22Z: "Hqp và hh không đổi vải, vì là gấm rồi")
+        s, done = winter_g28.apply(s); notes += ["G28 " + d + "…" for d in done]
     assert s.count(" Pose:") == 1
     s = s.replace(" Pose:", " " + fur(t) + " Pose:", 1)
     if len(s) > LIMIT:

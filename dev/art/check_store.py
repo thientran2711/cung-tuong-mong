@@ -1168,6 +1168,9 @@ def main():
     if a[0]=="--registry-md":
         open(os.path.join(ART,"APPROVED_SENTENCES.md"),"w",encoding="utf-8").write(registry_md()); print("wrote dev/art/APPROVED_SENTENCES.md"); return 0
     pf=a[0]; prompt=sys.stdin.read() if pf=="-" else open(pf,encoding="utf-8").read()   # "-" = a builder's stdout piped in (face makers, MG1)
+    import winter_g28   # G28 WINTER scope (owner ~19:24Z, Foreman C #3): a prompt with the G26 fur sentence may carry M06/S06/S12 ONLY in their exact G28 opaque-silk forms
+    prompt,_wn=winter_g28.unwinter(prompt)
+    if _wn: print(f"WINTER scope (G26 fur present): {_wn} G28 opaque-silk sentence(s) checked as their approved originals")
     # BANNED REFS (owner Lượt 554/555): old khuê các set A (kc2k / kc2k-mass keys or their Magnific ids) may never be used again.
     refs=a[a.index("--refs")+1] if "--refs" in a else ""
     if "--refs" in a: i=a.index("--refs"); a=a[:i]+a[i+2:]
