@@ -463,6 +463,6 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW ge-npc r1 (opus BIG) of a28b107f | review/ge-npc-r1 | B | session_01N1tNP6UyqC6o8nnNuZC3Sj | RUNNING | 20/11 14:04Z |
 | ge-batu r2 fixes (opus E28b; E28r FAIL e0424d54, FIX LIST 1–9) | review/ge-batu; briefs/E28b-ge-batu-r2.md | FOREMAN E #19 | session_01DgYSWq3hb2D3NEYyra3aF3 | SẴN SÀNG KIỂM 1ca835da (report ge-batu.md ## ROUND 2) | 20/11 15:20Z |
 | kit-opt-text KIT KEEPER (sonnet; KP14) | review/kit-opt-text; reports/kit-opt-text.md | MAIN ROOT-79 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 39faf7c0 | 20/11 |
-| REVIEW kit-opt-text (sonnet small, KP14) of 39faf7c0 | review/kit-opt-text-rv; briefs/rv-root79-kit-opt-text.md | MAIN ROOT-79 | session_01Rc5AsMSxpxbsAMRSE5oWrq | RUNNING | 20/11 14:25Z |
+| REVIEW kit-opt-text (sonnet small, KP14) of 39faf7c0 | review/kit-opt-text-rv; briefs/rv-root79-kit-opt-text.md | MAIN ROOT-79 | session_01Rc5AsMSxpxbsAMRSE5oWrq | PASS 9f673ab2 → LIVE eb11e2ad | 20/11 14:58Z |
 | kit-fig2-left KIT KEEPER (sonnet; KP22 check, no code) | reports/kit-fig2-left.md | MAIN ROOT-79 | session_01Rc5AsMtjP4KTgBZVjENGLs | DONE (report only) | 20/11 |
 | rv-kit-opt-text REVIEWER (sonnet; small kit KP14) | review/kit-opt-text-rv; reports/rv-kit-opt-text.md | MAIN ROOT-79 | rv-signs session | DONE PASS 9f673ab2 | 20/11 14:41Z |

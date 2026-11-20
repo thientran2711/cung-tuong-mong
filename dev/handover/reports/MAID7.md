@@ -35,3 +35,17 @@ Gate: 5/7 STORE+APPROVED PASS; tm1 + nhất fail STORE only on the swapped sente
 1. Approve/redo the CHANGES.md swaps (thô sử fine cloth, embroidery ladder, nhất đẳng wording).
 2. a18 chưởng sự / nữ quan loose hair: add the bun sentence at a18 too?
 3. Nhất đẳng vs nhị đẳng: make the step bigger?
+
+## ROUND 2 (owner 20/11 ~14:50Z, brief maid7b.md) — 4 gens × 135 = 540 cr (balance 3 058 287 before)
+| rank | gen | note |
+|---|---|---|
+| Thô sử v2 | SyhuqQmUb8 | hip jacket + apron, cuffs tied, deep rose sash + hair tie ✔; a thin lavender band under the sash (tiny 3rd colour) |
+| Tam đẳng v2 | EbYMddNuuO | deep rose short top with short sleeves over blue robe ✔, small embroidery ✔ |
+| Nhị đẳng | KLpM5Iokqp (round 1, kept) | — |
+| Nhất đẳng v2 | Lw8auqkswO | ma ma outfit at a18, blue vest + pink robe/skirt ✔ BUT the vest + two front panels read as a LONG vest to the knee (what the owner disliked in round 1), and LONG LOOSE hair down her back under the buns (F1 defect) |
+| Nữ quan v2 | 5jDomu5Kxe | neat bun under the cap ✔, richer brocade with gold cloud borders ✔ |
+| Chưởng sự | round 1, greyed "CHỜ MÀU" | not drawn |
+Sheet: dev/handover/review-sheets/maid7/m18_maid_ladder_v2_sheet.webp. Prompts dev/art/maid7/test2_*.txt (make2.py), diffs CHANGES.md §ROUND 2. Ledger 4× MAID7-TEST.
+Gate: thô sử PASS; tam đẳng, nhất đẳng STORE FAIL only on swapped sentences (approved PASS); nữ quan approved FAIL only on B12/M06 = the owner-ordered brocade swap (B12 needs a nữ quan exception if approved).
+All faces same girl, mouth closed, no earrings, no hair flowers. No redraw.
+Open: nhất đẳng — shorten the vest / drop the two long front panels, and add the "ALL hair up, nothing loose" sentence for maids at a18?
