@@ -36,9 +36,9 @@ DH.a_doc={n:"Thư hương",g:"ngay",me:1,how:n=>`Đọc sách ${nTimes(n)}`};
 DH.a_nhan={n:"Dung nhan như ngọc",g:"ngay",me:1,how:n=>`Điểm trang, dưỡng nhan ${nTimes(n)}`};
 for(const k in MAST)DH["l_"+k]={n:MAST[k],g:"nghe",u:"bậc",how:n=>`${artN(k)} lên bậc ${n}`};
 for(const k in WORK)DH["m_"+k]={n:WORK[k][0],g:"nghe",how:n=>`${WORK[k][1]} ${nTimes(n)}`};
-const GROUPS=[["tm","Thiên mệnh"],["thi","Hội thi"],["nghe","Tài nghệ"],["ngay","Ngày thường"],["an","Ân sủng"]];
+const GROUPS=[["tm","Thiên mệnh"],["kc","Khuê các"],["thi","Hội thi"],["nghe","Tài nghệ"],["ngay","Ngày thường"],["an","Ân sủng"]];/* "kc" = jkcg «Khuê các» (OUTSIDE_PLAN §11): like tm, listed only once earned */
 /* «Thiên mệnh» (jge.js, grand endings): one title per grand-ending shading, earned only by reaching it — never listed as "still to earn", never counted in the totals until earned */
-const dhTot=()=>Object.keys(DH).filter(k=>DH[k].g!=="tm"||((S&&S.dh||{})[k]&&S.dh[k].i>=0)).length;
+const dhTot=()=>Object.keys(DH).filter(k=>(DH[k].g!=="tm"&&DH[k].g!=="kc")||((S&&S.dh||{})[k]&&S.dh[k].i>=0)).length;
 window.DH_CAT=DH;
 /* her acts that count (runOpt names; only when the act succeeds) */
 const ACTK=[[/^Thỉnh an/,"a_thinh"],[/^Đọc (sách|binh thư)/,"a_doc"],[/^(Điểm trang|Dưỡng nhan)/,"a_nhan"]];
@@ -180,7 +180,7 @@ function dhPanel(){if(!S)return;dhSync(S,true);DHTAB="dh";const wk=wornKey(S),E=
  const wo=wk&&dhObj(S,wk);sec.push({h:"Danh hiệu trên đầu",rows:[wo?[kitTitlePlate(wo),[esc(wo.fx||"chỉ để làm đẹp")],"t"]:["Trên đầu","chưa mang danh hiệu nào"]]});
  try{if(typeof window.dh2Secs==="function")for(const x of window.dh2Secs())sec.push(x)}catch(e){console.error("dh2Secs",e)}/* phase 2 (jdh2): hiệu ban + đường sám hối */
  for(const [g,gl] of GROUPS){const keys=Object.keys(DH).filter(k=>DH[k].g===g);const got=keys.filter(k=>E.includes(k)).map(k=>dhObj(S,k)).sort((a,b)=>b.tier-a.tier);
-  const rest=g==="tm"?[]:keys.filter(k=>!E.includes(k));const rows=got.map(o=>[kitTitlePlate(o),[esc(DH[o.key].how(need(o.key)[S.dh[o.key].i])),esc(o.key===wk?o.fx:(chTxt(o.key,S.dh[o.key].i)||o.fx)||"chỉ để làm đẹp")],"t"]);
+  const rest=g==="tm"||g==="kc"?[]:keys.filter(k=>!E.includes(k));const rows=got.map(o=>[kitTitlePlate(o),[esc(DH[o.key].how(need(o.key)[S.dh[o.key].i])),esc(o.key===wk?o.fx:(chTxt(o.key,S.dh[o.key].i)||o.fx)||"chỉ để làm đẹp")],"t"]);
   rest.forEach(k=>{const N=need(k),c=count(S,k);rows.push([esc(DH[k].n),[esc(DH[k].how(N[0])),`đã ${Math.min(c,N[0])}/${N[0]}`],"n"])});
   if(rows.length)sec.push({h:`${gl} · ${got.length}/${keys.length}`,rows})}
  const opts=E.filter(k=>k!==wk).map(k=>dhObj(S,k)).sort((a,b)=>b.tier-a.tier).map(o=>({n:`Đeo «${o.name}»`,fx:{},x:chTxt(o.key,S.dh[o.key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(o.key,1)}));

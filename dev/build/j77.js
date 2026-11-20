@@ -90,7 +90,7 @@ function j77Tap(k,empty){if(!S||S.dead||Q.length)return;if(empty||!k)return j77C
  if(sp&&sp.ok&&!st.ask&&!st.kind)return walkSpillGo(k);/* crosses a buổi turn (night card, roulette…): no undo window, the buổi card says it */
  if(!st.ask&&!st.kind&&!S.out&&!S.confined&&typeof srvToast==="function"){const why=String(st.why||"").replace(/\.$/,"");srvToast(`${accName(k)}: ${why}`);return}
  j77Card(k)}
-window.addEventListener("click",e=>{try{if(typeof tab==="undefined"||tab!=="go"||!S)return;
+window.addEventListener("click",e=>{try{if(typeof tab==="undefined"||tab!=="go"||!S||(typeof isKc==="function"&&isKc()))return;/* the home road map (jkcg) walks on its own [data-kcgo] / [data-kcmap] */
  const sp=e.target.closest("#panel .mspot, #panel .mtile");if(!sp)return;
  if(sp.classList.contains("mtile")&&e.target.closest(".acb"))return; /* the list keeps its own kit buttons */
  const k=sp.dataset.go||sp.dataset.ak||"";let empty="";if(!k){const l=sp.querySelector(".mlab");empty=(l?l.textContent:"")||"Cung trống"}

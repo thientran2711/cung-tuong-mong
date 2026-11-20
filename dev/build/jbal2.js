@@ -1628,3 +1628,19 @@ BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400
  greet:{delay:900,wait:1500,tries:20},w:{hap:1,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
 /* kitGameVs (K-PM-1, owner OD 20/11 ~01:00Z item 1, KIT §13.8): the live head-to-head split board «Thách đấu»; knobs only, the game that mounts it owns every rule number */
 BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share of the round clock left at which a clock chip turns red; end = ms the result banner takes to settle (all three still under reduced motion) */
+/* jkcg (GAP OR01/OR06/OR08/OR14, review/outside-gaps; OUTSIDE_PLAN §6 §9 §11): fest = home festivals played as the real mini-game: raw 0..10 ≥ top = first
+   (Danh +danh[0]), ≥ ok = praised (+danh[1]), else Danh −danh[2]; skip = the quick option's score (same 5/10 as Phúc tuyển), bot = [base, spread] quick score;
+   sister moves sisP % of the time (+sis[0] when she lost, +sis[1] when she did well). vpSac / vpRare = the old kcFest gate to the Vương phi rare.
+   carry = palace entry: cap (each of Sắc/Tài/Tâm cơ/Đức/Sức at most cap over its home-road start; 0 = off). OUTSIDE_PLAN §9 asked +15, but the later
+   owner rule OD:L1287/L1288 (waiting must be worth the same months in the palace; BAL.kcv calibrated with dev/measure/kc2val.js WITHOUT a cap) wins:
+   kc2val home arm on this build (tt/muoi/thd/dtq, 3 lives each, 20/11) — a +15 cap would cut 49–91 Tư chất points per life (mean ≈ 77), so it is OFF; ldOld (Lời đồn ≥ → «lời đồn cũ» flag),
+   dad {mid,k} (Phụ thân thiện cảm − mid) × k added to «Nhờ cha dâng sớ» odds, danhK/danhMax/bacMax/sung (were typed in kcEnter).
+   home = letters/gifts from Mẫu thân while she is in the palace: p + (af − mid) × pk % a month unasked (giftShare % of them a gift), writeO / giftO base odds
+   (+ (af − mid) × k), writeBac / writeAf / lostDanh / askAf = the two «Thư nhà» acts, know = j61 intel depth, keep = letters listed, gifts = items home sends.
+   ld = «lời đồn cũ» event: p % a month; own (admit) / wit (mother's letter, witBac, witO odds, foe Danh −witFoe and Oán witOan, lose Danh −witLose) / wait.
+   title = «Khuê các» titles: tier, rare tier, quyRank (Quý nhân), carry (worn again in later lives). */
+BAL.kcg={fest:{top:8,ok:5,danh:[4,2,1],skip:5,bot:[3,6],sisP:50,sis:[3,1]},vpSac:80,vpRare:.4,
+ carry:{cap:0,ldOld:40,dad:{mid:50,k:.3},danhK:.6,danhMax:30,bacMax:400,sung:[8,5]},
+ home:{p:8,mid:50,pk:.2,giftShare:30,writeO:70,giftO:60,k:.3,writeBac:5,writeAf:4,lostDanh:1,askAf:3,know:2,keep:12,gifts:["tuithom","luahang","huongtram","khantay"]},
+ ld:{p:6,own:{danh:4,duc:2},witBac:10,witO:55,witFoe:4,witOan:6,witLose:6,wait:{danh:2,tamco:1}},
+ title:{tier:4,rare:6,quyRank:2,carry:1}};
