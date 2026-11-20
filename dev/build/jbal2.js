@@ -247,10 +247,10 @@ Object.assign(BAL,{mline:{eye:[.1,.25,.4,.6,1,1.2],eyeSung:.5,eyeAge:[16,29],see
 Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5],tuyen:[1.5,0]},big:1,stakeMax:6,mid:2,slope:.8,band:1.5,easeMin:-2,
  kAdj:{ban:3,dan:0,den:0,duho:-1,hat:0,hoa:-2,huong:-2,kim:0,kinh:-1.5,may:-1.7,ve:-1.6,mua:0,theu:0,co:-1,banh:-.1,dauho:1.2,td_hanh:-1.4,td_dung:-1.2,td_ngon:-.9},
  lev:{/* review/mg-tune time part (mgPace) of the correctness games, calibrated with dev/measure/mg-bots.js (skilled ≈ 25 % Xuất sắc at the matching level) */
-  tho:{fast:[.05,.175],keep:[.5,.5]},doi:{fast:[.05,.425],keep:[.3,.3]},doden:{fast:[.05,.175],keep:[.3,.3]},le:{fast:[.075,.25],keep:[.3,.3]},
-  tc:{fast:[.05,.175],keep:[.3,.3]},xa:{fast:[.05,.1],keep:[.1,.1]},thq:{fast:[.075,.45],keep:[.5,.5]},
-  kim:{fast:[0,0],keep:[.6,.6]},/* review/mg-tune-r1: Khéo tay (untangle) moved onto mgPace, same curve as its old typed .6+.4·left/LIM */
-  banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4],reach:[1,1]},co:{lim:[8000,20000],fast:[.1,.8],keep:[.6,.6],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99],dark:[220,220]},
+  tho:{fast:[.2,.35],keep:[.5,.5]},doi:{fast:[.35,.55],keep:[.3,.3]},doden:{fast:[.3,.5],keep:[.3,.3]},le:{fast:[.3,.45],keep:[.3,.3]},
+  tc:{fast:[.3,.45],keep:[.3,.3]},xa:{fast:[.25,.4],keep:[.4,.4]},thq:{fast:[.5,.65],keep:[.5,.5]},
+  kim:{fast:[.25,.4],keep:[.6,.6]},/* review/mg-tune-r1: Khéo tay (untangle) moved onto mgPace, same curve as its old typed .6+.4·left/LIM */
+  banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4],reach:[1,1]},co:{lim:[8000,20000],fast:[.4,.8],keep:[.6,.6],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99],dark:[220,220]},
   td_hanh:{lim:[8000,20000],short:[2,0]},td_cong:{tol:[.0075,.028]},den:{swing:[.36,.36],band:[.16,.208]},/* review/mg-snap: Thêu theo nét trace tolerance, share of the board width (was typed W·(.055+.006·lv)·mgTol) *//* cal-p2 Đầu hồ owner-bug fix (OD 20/11 ~08:30Z, her first try 1.1/10 on a board no hand could read): aim dots long enough to reach the pot from the middle boards, wider mouth, softer pull (pull = drag gain × K, the drag cap ÷ pull, so the strongest throw is unchanged); human-model sim (cal-p2 report §D) her matching board ≈7.5; Bắn cung (kg82Aim) never reads these */dauho:{aid:[.6,2],mouth:[1.3,2.1],pull:[.8,.6]},td_dung:{band:[.2,.6],kick:[2.4,1],spill:[2,1.5]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
  kG:{td_cong:1.3,td_ngon:2,ban:.8,dan:2.8,den:.8,hat:.85,duho:1.5,hoa:2.3,huong:1,kim:1.8,kinh:.9,may:.82,ve:.9,mua:1.25,theu:5.5,co:3},/* review/mg-balance-2-r1 re-trim on pooled raws (co n=120, td_ngon n=60 float): co 4→3, td_ngon 1.6→2; review/mg-snap re-trim after the trace fix (her line scored, BAL.mgTier.trace.acc 1) and the wider Hoa đăng channel: td_cong 1.6→1.3, ve 1.7→.9, kinh 1.5→.9, may 1.5→.82, den 1.05→.8 */
  trace:{acc:1},
@@ -262,6 +262,10 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
       step now pops from its own start (kit kg82FxPop), so a repeat is seen as two.
     lev.banh.reach = a gust never pushes the fire faster than this share of what her hand can answer (1 = at most exactly that; fan up .34/s, cool .1/s);
       was gust .6/s at ease 0 = half the time no hand could hold the fire (ideal player in zone 10 %, dev/handover/reports/cal-p2.md §P1). */
+ /* review/cal-p2b (ROOT-75 07:36Z, owner OD 20/11 ~06:50Z «đạt hết mà toàn 9/10» + ~07:35Z broken grading IS fixed): the full-marks window lev[kind].fast of
+    the 9 mgPace kinds (co tho doi doden kim le tc xa thq) was smaller than a careful normal-speed round (skilled bot p75 time share .21–.56), so a
+    PERFECT run kept only .82–.94 (kim fast 0 = every ms cost; xa .07 = 0.7 s of 10 s). New fast = reports/mg-score-same.md pace proposal: full marks
+    while a p75 round is still inside the window at her matching board; xa keep .1 → .4 (same proposal); law 5: fast still falls as the board hardens. */
  blend:{w:.32,star:[.25,.55,.85]},/* review/mg-snap: weight of her line lying on the guide in the ONE trace score mgTraceScore (was a typed .5) */
  pace:{fast:[.2,.4],keep:[.5,.8]},word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,npc:[4,.4],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15],cong:[3,2]}}});
 /* mg-ready-guide (owner OD 20/11 ~00:20Z «Sẵn sàng» + «Hướng dẫn», KIT §13.7): the guided tutorial round, played on the EASIEST board = the lowest gap of the
