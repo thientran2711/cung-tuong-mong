@@ -10,7 +10,7 @@ Sheet (A37): `dev/handover/review-sheets/winter1/s62_dong_coLong_t1-t8.webp` (45
 | t1 Đáp ứng | 1ldmoUCr4r | mEZiZ8ShJQ |
 | t2 Thường tại | jUoattyLD0 | 9ZHuqIGNYZ |
 | t3 Quý nhân | jUoam4eLD0 | vQARGIUa47 |
-| t4 Tần | **not drawn** (see Q1) | SyhIap2Ub8 |
+| t4 Tần | cpSPN2P0eP (no ANGLE sentence, see end) | SyhIap2Ub8 |
 | t5 Phi | Lw8fhqlswO | xSBe8KVjfW |
 | t6 Quý phi | 1ldmIAjr4r | 1ldDonjr4r |
 | t7 Hoàng quý phi | 8aizA8UIrU | nVsxSZNYQD |
@@ -45,3 +45,8 @@ Need to remove ≥ 194 chars from `dev/art/winter1/s62_t4_dong.txt` (10 193). Ev
 - Removing any one whole sentence ≥ 194 chars: every one FAILs (store sentence missing, or approved S01/S11/S12/S13) **except the whole ANGLE sentence** (407 chars → 9 786, gate PASS). That would drop her ¾-left turn, so the pose would change. Not recommended.
 - ANGLE kept, only its last clause dropped ("her head turns together with her shoulders and body, never back-turned, never in profile.", a repeat of the HEAD AND BODY sentence) → 10 103, still LEN FAIL. Cutting more of the ANGLE words → **FAIL E1** (angle table).
 **Conclusion:** no trim passes the gate while keeping the t4 design and pose. Real options: (a) Foreman C shortens the t4 store/builder text (a builder change, owner OK needed); (b) the owner accepts dropping the ANGLE sentence for the test; (c) t4 waits. Nothing fired.
+
+## t4 DONE (Foreman C #2 go (b), owner YES "Sếp cho em cắt bớt một câu phụ trong đề vẽ Tần", ~15:39Z)
+Prompt `dev/art/winter1/s62_t4_dong_noangle.txt` = s62_t4_dong.txt minus the whole ANGLE sentence (9 786 chars), STORE + APPROVED PASS. Builder untouched.
+Gen **cpSPN2P0eP** (135 cr, one try). Look: square neckline + pearl-net capelet kept; ivory fur at capelet edge/collar, front edges, hem and cuffs; face OK (closed mouth, eyes straight). She stands almost frontal (no angle sentence). The sheet's t4 cell is filled ("Đông · có lông · không câu góc nghiêng").
+**Total WINTER1: 8 gens × 135 = 1 080 cr.**
