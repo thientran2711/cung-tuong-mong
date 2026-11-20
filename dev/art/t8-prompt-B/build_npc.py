@@ -198,7 +198,7 @@ FP = ["soft peach pink with ivory", "lilac with silver-white", "rose red with go
       "lemon yellow with white", "jade green with pale pink", "blush pink with sky blue", "ivory white with rose", "turquoise with ivory", "peony pink with gold",
       "pale violet with white", "cherry red with ivory", "powder blue with peach", "seafoam green with lilac", "honey gold with coral", "pearl white with lavender"]
 P4 = ["holding a small wooden toy horse", "holding a little rattle drum (bolang drum)", "holding a small red paper lantern", "hugging a little cloth tiger toy",
-      "holding a small spinning top", "holding a tiny kite", "holding a small round fruit", "hands together politely in front"]
+      "holding a small spinning top", "holding a tiny kite", "holding a small wooden boat toy", "hands together politely in front"]
 P9 = ["holding a thin book", "holding a writing brush", "holding a small wooden practice sword", "holding a bamboo flute", "holding a rolled scroll",
       "holding a small kite", "holding a little bird cage", "with hands clasped behind the back"]
 P14 = ["holding a hunting bow at his side", "holding a folding fan", "holding a rolled scroll", "holding a sword in its scabbard", "holding a bamboo flute",
@@ -206,7 +206,7 @@ P14 = ["holding a hunting bow at his side", "holding a folding fan", "holding a 
 P20 = ["holding a closed folding fan", "one hand behind the back, the other at the waist", "holding a sheathed sword", "holding a rolled scroll",
        "holding a jade pendant", "holding a bow", "hands in sleeves, calm and upright", "holding an open folding fan"]
 Q4 = ["hugging a little cloth rabbit toy", "holding a small flower", "holding a little lantern", "holding a small rattle drum", "holding a butterfly toy on a stick",
-      "holding a small peach", "holding a tiny round fan", "hands together politely in front"]
+      "holding a little clay doll", "holding a tiny round fan", "hands together politely in front"]
 Q9 = ["holding a round silk fan", "holding a flowering branch", "holding a thin book", "holding a shuttlecock", "holding a small kite", "holding a little basket of flowers",
       "holding a writing brush", "holding a small embroidered pouch"]
 Q14 = ["holding a round silk fan", "holding a lotus flower", "holding an embroidery hoop", "holding a bamboo flute", "holding an open book", "holding a plum blossom branch",
