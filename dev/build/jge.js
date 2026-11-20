@@ -199,6 +199,33 @@ function geMap(b){const Cb=GE_CAT[b];if(!Cb)return null;const g=geStore(),rb=sto
  const nG=ends.filter(x=>x.n!=="?").length,nT=ends.reduce((a,x)=>a+x.slots.filter(y=>y.ti!=="?").length,0),nK=rare.filter(x=>x.seen).length;
  return {b,n:Cb.n,id:GE_ID[b.split("_")[0]]||"",spine,rare,ends,count:{g:nG,t:nT,k:nK,txt:`Đại kết cục ${nG}/${GB().n.grand} · Danh hiệu ${nT}/${GB().n.grand*2} · Kỳ ngộ ${nK}/${GB().n.rare}`}}}
 window.geMap=geMap;
+/* ---------- the «Sơ đồ nhánh» PAGE in Sổ luân hồi (GE03, design GRAND_ENDINGS §2.10; BAL.ge.mapOn): kit parts only —
+   identity tab row (kitTabRowHTML, count = Đại kết cục earned / all of that identity) × road tab row (kitTabRowHTML, the roads of that identity) × kitBranchMap of the picked branch (counts chip, spine, her chip, 4 ends, card on tap = kitBranchMapOpen);
+   the whole-book totals are a kitRows row. Only her own lives are read (geMap: ctm-ge / ctm-rare97 / ctm-gech + this life's S.ge) — unseen nodes stay «?». The branch of the life she plays opens first. ---------- */
+let GEMP=null;
+function geMapIds(){return Object.keys(GE_ID).filter(id=>Object.keys(GE_CAT).some(k=>k.split("_")[0]===id))}
+function geMapRoads(id){return Object.keys(GE_CAT).filter(k=>k.split("_")[0]===id)}
+function geMapLive(){try{return S&&S.ge&&GE_CAT[S.ge.b]?S.ge.b:null}catch(e){return null}}
+function geMapPick(){if(GEMP&&GE_CAT[GEMP.b])return GEMP;const b=geMapLive()||Object.keys(GE_CAT)[0];return GEMP={id:b.split("_")[0],b}}
+function geMapInner(){const P=geMapPick(),ids=geMapIds(),GBn=GB().n;const cnt={};let tg=0,tt=0,tk=0,nb=0;
+ for(const id of ids){let g=0;const roads=geMapRoads(id);for(const b of roads){const m=geMap(b);if(m){g+=m.count.g;tg+=m.count.g;tt+=m.count.t;tk+=m.count.k;nb++}}cnt[id]=`${g}/${roads.length*GBn.grand}`}
+ const idTabs=ids.map(id=>({k:id,label:esc(GE_ID[id]),n:cnt[id],tip:`Đại kết cục đã đạt: ${cnt[id]}`}));
+ const rdTabs=geMapRoads(P.id).map(b=>{const m=geMap(b);return {k:b,label:esc(GE_CAT[b].n),n:m?`${m.count.g}/${GBn.grand}`:null,tip:m?m.count.txt:""}});
+ const m=geMap(P.b);
+ return rows67([["Cả sổ luân hồi",`Đại kết cục ${tg}/${nb*GBn.grand} · Danh hiệu ${tt}/${nb*GBn.grand*2} · Kỳ ngộ ${tk}/${nb*GBn.rare}`]])+
+  `<div class="pctabs kcattabs kgmtabs" role="tablist">${kitTabRowHTML(idTabs,P.id,"data-kgm-id")}</div>`+
+  `<div class="pctabs kcattabs kgmroads" role="tablist">${kitTabRowHTML(rdTabs,P.b,"data-kgm-rd")}</div>`+
+  `<div class="kgm-chart" data-kgm-b="${P.b}">${kitBranchMap(m)}</div>`}
+function geMapPageHTML(){if(!GB().mapOn||typeof kitBranchMap!=="function"||typeof kitTabRowHTML!=="function")return"";if(GEMP&&GEMP.keep)GEMP.keep=false;else GEMP=null;/* a node card closing re-mounts the page: keep the picked branch then */
+ try{return `<h3>Sơ đồ nhánh</h3><div class="kgm" data-kgm>${geMapInner()}</div>`}catch(e){console.error("ge",e);return""}}
+document.addEventListener("click",e=>{const t=e.target&&e.target.closest&&e.target.closest("[data-kgm-id],[data-kgm-rd]");if(!t)return;
+ try{const P=geMapPick();if(t.dataset.kgmId){const id=t.dataset.kgmId;if(id===P.id)return;const live=geMapLive();GEMP={id,b:live&&live.split("_")[0]===id?live:geMapRoads(id)[0]}}
+  else GEMP={id:t.dataset.kgmRd.split("_")[0],b:t.dataset.kgmRd};
+  const h=t.closest("[data-kgm]");if(h){h.innerHTML=geMapInner()}}catch(x){console.error("ge",x)}});
+/* the kit's node-card handler reads host.__kbm: refresh it from the data at the moment of the tap (capture phase = before the kit's own handler) */
+document.addEventListener("click",e=>{const n=e.target&&e.target.closest&&e.target.closest(".kgm-chart .kbm [data-kbm]");if(!n)return;const h=n.closest(".kgm-chart");if(h&&h.dataset.kgmB)try{h.__kbm=geMap(h.dataset.kgmB);if(GEMP)GEMP.keep=true}catch(x){}},true);
+if(typeof pastHTML==="function")(function(){const p0=pastHTML;pastHTML=function(){const h=p0.apply(this,arguments);try{return h+geMapPageHTML()}catch(e){return h}}})();
+window.geMapPageHTML=geMapPageHTML;
 /* state words of a node this life (Sơ đồ nhánh, VANPHONG §5) */
 window.geStateWord=(st,ch)=>st==="o"?"Còn mở":st==="f"?"Chỉ còn đường thua":`Đã khép${ch?" · chương "+ch:""}`;
 /* read-only hooks for dev/test + dev/measure (the condition terms, stats and shading the engine uses) */
