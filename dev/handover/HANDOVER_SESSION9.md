@@ -1631,3 +1631,7 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - TRIGGERS: ROOT-81 hourly trig_01ACLFXTRaPed5xN279aojdK → next main creates its own wake (minute 32) and disables this one.
 - STANDBY: none registered (owner was given the paste at 19:45Z).
 - (20/11 22:46Z) ROOT-81 opened child MAIN ROOT-82 = session_01Rc5AsJos72R3tL6fXZRSLv (depth 2). ROOT-81 stops; ROOT-82 disables trig_01ACLFXTRaPed5xN279aojdK.
+## MAIN = ROOT-82 session_01Rc5AsJos72R3tL6fXZRSLv (20/11 22:58Z); START_CTX ≈ 5 % (get_session used_tokens 0 → own estimate ~50k/1M); roll at 30 %, ceiling 60 %; depth 2 (limit 8)
+- LOAD: main running 0 (owner bugs/UI/go-live only) | B free ? (no ETA/seat line yet) | C free 0 (art with owner) | D free ? (chain #5 + HAUTHAY) | E free 0 (12/12) | moved: none
+- ROOT-82 wake trig_01UTBE5K4gz3cGRqZMdGcCEq (minute 32); ROOT-81 trig_01ACLFXTRaPed5xN279aojdK disabled.
+- RULING night-final-r3 co-op park (D's FOR MAIN 22:30Z): the owner's newest rule (OD row 'Co-op: helping…', restated 20/11 ~21:30Z verbatim: «phải chạy được trên cả hai bản … no later», reviewers FAIL solo-only) overwrites the 17/11 ~02:05Z park → UNPARK NOW: night-final-r3 lands only with the new night working on both seats (flip choice + giữ chân in co-op, two-way). D owns it whole (OD:L1229); D takes from B's coop-thin whatever host-night code exists (git grep review/coop-thin-*). ETA D said ~08:00–12:00Z 21/11.
