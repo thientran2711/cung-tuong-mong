@@ -148,3 +148,4 @@
 - L17 | over: Lượt 723 (19/11); Lượt 722 (19/11); Lượt 610 (19/11); Lượt 607 (19/11); Lượt 605 (19/11)
 - L20 | over: Lượt 718 (19/11)
 - L21 | over: Lượt 805 (19/11)
+- 2026-11-20 · replaced by Lượt 888 · L25 | ROOM COLOUR = LIVE TẨM CUNG HẠ SÁNG (owner 20/11, after 'Sao màu của mấy cái nền phòng cứ nâu nâu vậy' / 'mở hình tẩm cung đang live đi, đâu có nâu', verbatim: 'Lấy mẫu hạ sáng á, mẫu đó màu tôi ưng'): the colour reference for rooms is the live img/tam-cung-dem-ha-sang.webp (pale grey polished stone floor, lots of white-pink sheer gauze, ivory painted screens, rose-red brocade, wood only on frames/pillars, fresh daylight). Pass it as the colour/style reference image and drop the brown-wood/warm-wood-floor words. ONE sample room first (A1) before any more rooms; OK'd rooms not redrawn (L23). | Lượt 887 (20/11) | FG -
