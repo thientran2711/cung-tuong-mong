@@ -293,7 +293,12 @@ def lively(o):
     if tr=="p30": return P30[j][0][0]=="L"
     return bool(re.search(LIVELY_RX,_pose_tpl(LAST_G,tr,j)))
 # ENDING at the END of the pose sentence (E4 alt framing, owner: "low 3 lively / middle 3 / top 2 calm endings"; wording = POSE_GROUPS.md Lượt 501 endings)
-def pose_end(t): return "the skirt hem swinging softly" if t<=3 else "the robe hem stirring slightly" if t<=6 else "the robe falling still and straight"
+# G23 (owner 20/11 verbatim: "Sửa cái prompt, cái chân lại cho nó phù hợp đi."): ONE motion per prompt: a walking pose never ends with "still and straight";
+# walking -> the hem sways with the step; standing -> the t7+ calm ending. Same walk words as the check_store G23 gate (WALK_RX).
+WALK_RX=re.compile(r"\bwalk(?:s|ing)?\b|mid-step|\bstep(?:s|ping)?\b(?! stool)|\bstrid(?:e|es|ing)\b|\bstroll",re.I)
+def pose_end(t,pose=""):
+    if t>=7 and WALK_RX.search(pose): return "the robe hem swaying gently with her step"
+    return "the skirt hem swinging softly" if t<=3 else "the robe hem stirring slightly" if t<=6 else "the robe falling still and straight"
 # same GESTURE inside one person = a repeat even if the spec5 entry differs (e.g. two hairpin-adjusting entries)
 GESTURE_KEYS=[r"hairpin",r"stole",r"stair|skirt hem",r"cheek",r"offer",r"butterfly",r"songbird",r"twirl|dance",r"reading",r"both hands"]
 def _keys(txt): return {k for k in GESTURE_KEYS if re.search(k,txt)}
@@ -433,7 +438,7 @@ def apply_dedupe(person,rank,age,S):
         S=S.replace(a," Pose: "+new,1)
     # E4 (Lượt 529/534): the rank's ending at the END of the pose sentence (pose slot)
     i=S.index(" Pose: "); j=S.index(". The item is in a contrasting colour",i)
-    return S[:j]+", "+pose_end(rank)+S[j:]
+    return S[:j]+", "+pose_end(rank,S[i:j])+S[j:]
 TQ_RIGHT=", body turned slightly three-quarters to the right"
 def _clean_pose(S):
     """Lượt 440: the store's pose pass appends 'body turned slightly three-quarters to the right' at every odd pose slot (why almost everybody faced right); the ANGLE sentence (14 standing angles, left AND right) replaces it."""
