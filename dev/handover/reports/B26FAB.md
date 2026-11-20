@@ -33,7 +33,7 @@ FINAL JOB 1 PROOF (dev/art/b26/proof/JOB1_proof.txt; HEAD 7007acc vs JOB 1 final
 - CAPE6_TWO (t6): '…pearl-edged, with small jade and pearl drops dangling beneath it, fewer and smaller than the imperial noble consort's, never covering the neckline'.
 - s62 t5 = reference dev/art/b26/s62_t5_v2.txt word for word except plum blossoms (her species) + caption; t6 drops clause = swap56/s62_t6_v2.txt (other t6 diffs = the stale-base YEL/LUX wording SWAP56 already flagged).
 - SAMPLES: dev/art/capes/s62_t5.txt "Bậc Phi · Hai lớp choàng vai viền ngọc trai" (9 451), s62_t6.txt "Bậc Quý phi · Vân kiên có tua ngọc"; keep PASS, gate PASS.
-- PROOF: t5/t6 dump running in /tmp (lost if this container goes) — successor: re-run dev/art/b26/proof/dump5.py (ranks 5,6) vs a JOB1+2 dump and cmp3.py.
+- PROOF (dev/art/b26/proof/JOB3_proof.txt; JOB1+2 vs +JOB3, ranks t5/t6 x 5 ages x normal/đông): only t5/t6 change, bad 0. **OPEN: 219 new > 10 000** = t5 a51 54+55 đông, t5 a65 33+59 đông, t6 a26 2, t6 a36 7+9 đông (t6 has no length rule; t5's all-or-nothing fit no longer reaches 10 000).
 
 ## HANDOVER (B26FAB rolls over at ~29 % context, START_CTX ~5 %, depth 5) — for the successor the COORDINATOR opens
 1. LENGTH is the open problem: (i) 11 JOB 2 cells (+1..+11 / t5 a51) and (ii) JOB 3 t5/t6 growth. Proposals to put to Foreman C #5: extend b26_fit to t1–t6 (ANGLE drop + the same master-repeat cut list, the gate exception widened to t1–t6 / no DOAN needed), and make it 'cut while > 10 000' instead of all-or-nothing for cells that B26/JOB2/JOB3 pushed over (keep cells already over at HEAD untouched by comparing with the HEAD build).
