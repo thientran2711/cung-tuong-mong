@@ -67,6 +67,16 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  await run('caller jsgame mưu kế',`sgPlay({G:SG.K.rumor,art:"Mưu kế",v:${v},p0:()=>50,run:()=>{},cost:""})`);
  await run('caller jroute Nghiệm thân','rtNgSleight("alum",3,()=>{})');
  await run('caller j5 openMG (fallback)','(S.mg=null,openMG("cam",1,()=>{}))',{j5:1,noTut:1});
+ /* 7 jmgcal (owner bug 20/11, ROOT-72): the kind is kept the moment round n's raw arrives (before «Xem mức tay»); an unfinished kind never reaches the code */
+ const cal=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const k0=kg82Play;const o={};
+  kg82Play=(kind,onEnd)=>setTimeout(()=>onEnd(7),30);/* the board itself is tested above; here only the save */
+  try{const n=BAL.ag.mg2.cal.d.length;const has=k=>new RegExp("(^| )"+k+":").test(mgCalCode());o.ve0=has("ve");o.mua0=has("mua");
+   mgCalRun("mua");for(let i=0;i<n-2;i++){await sleep(200);document.getElementById("kg82go").click();await sleep(200);const b=document.getElementById("kg82ok");if(b&&i<n-3)b.click()}
+   await sleep(200);kg82Close();o.partial=has("mua");
+   mgCalRun("ve");for(let i=0;i<n;i++){await sleep(200);document.getElementById("kg82go").click();await sleep(250);if(i<n-1)document.getElementById("kg82ok").click()}
+   o.lastBtn=(document.getElementById("kg82ok")||{}).textContent;o.kept=has("ve");kg82Close();await sleep(100);o.keptAfterLeave=has("ve")}catch(e){o.err=String(e.message||e)}finally{kg82Play=k0}
+  return o});
+ console.log(JSON.stringify(cal));
  /* the scan table */
  console.log('\n| kind / caller | before (main) | after: rules | Sẵn sàng | Hướng dẫn | idle 1.5 s | guided: hand | unscored | back | self-end | play on Sẵn sàng |');
  console.log('|---|---|---|---|---|---|---|---|---|---|---|');
@@ -81,4 +91,5 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  B=rows.filter(([l])=>/\((rhythm|aim|go|pattern|steps|lamp)\)/.test(l)).filter(([l,r])=>!r.selfEnd).map(([l])=>l);ok(!B.length,'4 a round played by following the hand ends by itself and returns to the rules',B);
  B=bad((l,r)=>r.play);ok(!B.length,'5 «Sẵn sàng» starts the real play',B);
  ok(!errs.length,'6 no page errors',errs.slice(0,5));
+ ok(!cal.err&&!cal.ve0&&!cal.partial&&/Xem mức tay/.test(cal.lastBtn||'')&&cal.kept&&cal.keptAfterLeave,'7 Thử tay: kind saved when round n ends (before «Xem mức tay», kept after leaving); an unfinished kind is not in the code',cal);
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`FAIL ${f}/${res.length}`:`PASS ${res.length}/${res.length}`);process.exit(f?1:0)})();
