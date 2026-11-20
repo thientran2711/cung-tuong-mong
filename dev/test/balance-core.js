@@ -17,7 +17,7 @@ const {chromium}=require('playwright');const path=require('path');
   ok("two-way: addArt(her) = addArtP(NPC)",artPts(S,"ky")===artPts(w,"ky"),[artPts(S,"ky"),artPts(w,"ky")]);
   /* old save */const old={arts:{cam:3,ky:5},artp:{cam:4,ky:0},vir:{dung:2},virp:{dung:3}};crsMigrate(old);
   ok("old save keeps its bậc, progress share moves",old.arts.cam===3&&old.arts.ky===5&&Math.abs(old.artp.cam-4/5*artNeed(3))<.2&&old.vir.dung===2,old);
-  /* growth curve */S.tamco=85;const t0=S.tamco;window.__noGrow=0;for(let i=0;i<20;i++)apply({tamco:2});const g1=S.tamco-t0;w.tamco=85;for(let i=0;i<20;i++)ap(w,{tamco:2});
+  /* growth curve: the fraction of a gain is rounded by Math.random (≈ .2 a step at 85) → her and the NPC replay the SAME seeded draws (unseeded, 20 steps each failed ~1 in 16 by chance) */const mr=Math.random;const sd=()=>{let x=12345;Math.random=()=>((x=(x*1103515245+12345)%2147483648)/2147483648)};S.tamco=85;const t0=S.tamco;window.__noGrow=0;sd();for(let i=0;i<20;i++)apply({tamco:2});const g1=S.tamco-t0;w.tamco=85;sd();for(let i=0;i<20;i++)ap(w,{tamco:2});Math.random=mr;
   ok("growth curve: +40 Tâm cơ at 85 gives ≈4 (her) and the same for an NPC",g1>=1&&g1<=9&&Math.abs((w.tamco-85)-g1)<=5,[g1,w.tamco-85]);
   /* r1 note 7: a loss below her own peak heals at grow.back (×1), new heights stay slow */S.sac=88;apply({sac:0});S.pk.sac=88;S.sac=78;const s0r=S.sac;for(let i=0;i<5;i++)apply({sac:2});ok("regaining lost Sắc below her peak is not slowed by the curve",S.sac-s0r>=9&&S.sac<=88+1,[s0r,S.sac]);
   /* night odds */S.sung=40;S.sac=60;const f=oSteal(S,"feign"),r=oSteal(S,"road");S.sung=10;S.sac=85;const f2=oSteal(S,"feign"),r2=oSteal(S,"road");
