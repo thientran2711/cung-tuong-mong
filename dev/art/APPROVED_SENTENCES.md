@@ -624,3 +624,11 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - negation: no
 - luot: 780 (C2 = B9, via ROOT-57; MG2)
 - why: B9 GEN METHOD: no transparentBackground and no transparent-background prompt words; master M03 (plain light parchment) is the ONLY background sentence; the cut-out is images_remove_background after the gen. Scope 'any' incl. face and states
+
+### F14 · Qing headdress words (liangbatou / two-wing board / flag-style headdress / Qing / Manchu)
+- regex: `liang[- ]?ba[- ]?tou|\bqi[- ]?tou\b|two[- ]wing(?:ed)?\s+(?:black\s+)?(?:satin\s+)?(?:board|headdress)|(?:flat|black)[- ]board\s+headdress|board[- ]like\s+headdress|flag[- ](?:style|shaped)\s+headdress|banner\s+headdress|\bQing\b|\bManchu(?:rian)?\b`
+- scope: any
+- unless: -
+- negation: no
+- luot: 800 (F14, via ROOT-58; MG3)
+- why: owner Lượt 800: no black two-wing board headdress (liangbatou, 'cái cục trên đầu') and no Qing look on ANY person; the words are banned in every scope, even negated (seal prompts included)

@@ -691,7 +691,16 @@ BANNED = [{'id': 'X01',
   'unless': '',
   'negation': 'no',
   'luot': '780 (C2 = B9, via ROOT-57; MG2)',
-  'why': "B9 GEN METHOD: no transparentBackground and no transparent-background prompt words; master M03 (plain light parchment) is the ONLY background sentence; the cut-out is images_remove_background after the gen. Scope 'any' incl. face and states"}]
+  'why': "B9 GEN METHOD: no transparentBackground and no transparent-background prompt words; master M03 (plain light parchment) is the ONLY background sentence; the cut-out is images_remove_background after the gen. Scope 'any' incl. face and states"},
+ {'id': 'F14',
+  'title': "Qing headdress words (liangbatou / two-wing board / flag-style headdress / Qing / Manchu)",
+  'regex': r'liang[- ]?ba[- ]?tou|\bqi[- ]?tou\b|two[- ]wing(?:ed)?\s+(?:black\s+)?(?:satin\s+)?(?:board|headdress)|(?:flat|black)[- ]board\s+headdress|board[- ]like\s+headdress|flag[- ](?:style|shaped)\s+headdress|banner\s+headdress|\bQing\b|\bManchu(?:rian)?\b',
+  'slot': '',
+  'scope': 'any',
+  'unless': '',
+  'negation': 'no',
+  'luot': '800 (F14, via ROOT-58; MG3)',
+  'why': "owner Lượt 800: no black two-wing board headdress (liangbatou, 'cái cục trên đầu') and no Qing look on ANY person; the words are banned in every scope, even negated (seal prompts included)"}]
 
 # G15 (owner Lượt 559): QUÝ NHÂN t3 DESIGN = option B v2. The t3 outfit-design words of the store (TIER_LOW[3] robe in t8-prompt-B/build.py) are REPLACED
 # by the Outfit words of dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt, copied verbatim; slots only: lilac -> {main}, deep teal -> {sec}
@@ -836,6 +845,21 @@ def root_hex_fails(text, pid):
     extra = sorted(have - set(rp))
     if extra: out.append(("B20", "ROOT HEX", f"{pid}: hex not in her root pair (old or self-picked): {', '.join(extra)}"))
     return out
+# MG3 (owner Lượt 784 item 7 = B24, owner Lượt 726/728/766): ONE rank colour per rank. A triều phục prompt (scope trieuN) must carry
+# the B24 hex of rank N and no other rank's B24 hex (royal yellow #EFBD69 allowed at t6+: 'small royal-yellow touch' / t8 itself)
+# and none of the dead option-B / old codes.
+B24_HEX = {1: "#EAE3D0", 2: "#7FB394", 3: "#7E9CCB", 4: "#E3A3B8", 5: "#A88BCB", 6: "#E3A25B", 7: "#D46A64", 8: "#EFBD69"}
+B24_DEAD = {"#5FA8A6": "old t4 jade-teal (option B)", "#4F86A8": "old t6 kingfisher blue (option B)"}
+def b24_fails(text, scope):
+    m = re.fullmatch(r"trieu(\d)", scope or "")
+    if not m: return []
+    n = int(m.group(1)); have = {h.upper() for h in HEX_RX.findall(text)}; out = []
+    if B24_HEX[n] not in have: out.append(("B24", "RANK HEX", f"triều t{n}: rank colour {B24_HEX[n]} missing (B24 Lượt 726/728)"))
+    other = sorted(h for k, h in B24_HEX.items() if k != n and h in have and not (h == "#EFBD69" and n >= 6))
+    if other: out.append(("B24", "RANK HEX", f"triều t{n}: another rank's B24 colour in the prompt: {', '.join(other)}"))
+    dead = sorted(f"{h} ({w})" for h, w in B24_DEAD.items() if h in have)
+    if dead: out.append(("B24", "DEAD HEX", f"triều t{n}: dead rank code(s): {', '.join(dead)}"))
+    return out
 # K18 LIVE GAME HANDS-OFF (owner Lượt 591, BW4): a live game picture path (img/fig-*, img/hd/*, any img/ path outside img/_review and img/_keep) in the prompt or --refs = FAIL.
 K18_LIVE = re.compile(r"(?:^|[/\s\"'(,])(img/(?!_review/|_keep/)[\w./-]+|fig-[\w-]+\.(?:webp|png|jpg))")
 FLOOR_SLEEVE_RX = re.compile(r"(?:SLEEVE LENGTH|SLEEVES:)[^.]*(?:touch(?:es|ing)? the floor|sweep(?:s|ing)? the floor|reach(?:es|ing)? the floor|to the floor)", re.I)   # SL1: floor-length sleeve sentence (any wording)
@@ -847,6 +871,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     fails, warns, found = [], [], {}
     if len(text.strip()) > PROMPT_MAX: fails.append(("LEN", "TOO LONG", f"prompt is {len(text.strip())} characters, the gen tool refuses more than {PROMPT_MAX}"))
     text = norm(text)
+    fails += b24_fails(text, scope)   # MG3 L784 item 7 (B24)
     if scope == "face":   # MG3 L784 item 6 (B20 / Lượt 763/769/770)
         fails += root_hex_fails(text, pid)
         for m in DEEP_COLOUR_RX.finditer(text):
