@@ -170,7 +170,15 @@
     "max dE < 8"
    ]
   ],
-  "still_bad": []
+  "still_bad": [],
+  "grey_replaced": {
+   "s44": {
+    "sec": [
+     "#9EB39E",
+     "#94B594"
+    ]
+   }
+  }
  },
  "_offsets": {
   "m02": {
@@ -4360,15 +4368,22 @@
   "thu": {
    "main": "soft burnt sienna",
    "main_hex": "#A6593F",
-   "sec": "sage grey",
-   "sec_hex": "#9EB39E",
+   "sec": "sage green",
+   "sec_hex": "#94B594",
    "root": true,
    "root_code": {
     "main": "soft burnt sienna",
     "main_hex": "#D18C74",
     "sec": "sage grey",
     "sec_hex": "#99B599"
-   }
+   },
+   "root_drawn": {
+    "main": "soft burnt sienna",
+    "main_hex": "#A6593F",
+    "sec": "sage grey",
+    "sec_hex": "#9EB39E"
+   },
+   "note": "sec sage green #94B594 replaces drawn sage grey #9EB39E (owner \"Xám là bỏ hết\", ROOT-64 GO 20/11); root_drawn = the drawn pair, untouched"
   },
   "dong": {
    "main": "deep spring green",
