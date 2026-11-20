@@ -3,7 +3,7 @@
 PRIORITY #1 CHECK ('agOn coopGuest guest servants agent month agSelf asSelfOn'): OD 0 | ledger 0 | claims CLAIMS:513 (this worker only) | main 794c6b77 jagent.js:28 agOn() false when agGuest(); precedent jagemp.js:35 empGuestSelf (guest's own deeds), j10.js:78 / jmline.js:107 mlGuest (guest runs her own household only) | review/* none (review/coop-thin-g changes jagent.js:27 agGuest → coopGuest(), see Merge note) | archive 0.
 
 Worker session_01N1tNP6ULPfAUKCrZASGHHM (opus), coordinator Foreman B ROOT-3 session_01N1tNP4eeTKEG4m5mtSjnKd. START_CTX ≈ 4 % of 1M (estimate) → rollover ≈ 29 %, ceiling 60 %.
-Branch **review/coop-guest-agent** from LIVE 794c6b77: code e379c2bb + site rebuilt **b7648b65** (head, pushed).
+Branch **review/coop-guest-agent** from LIVE 794c6b77: r1 code e379c2bb + site b7648b65; **r2 (Foreman B: leftovers = same family, law 11) code cec0b93d + site 60ff8f11 (head, pushed)**.
 
 ## Cause
 `agOn()` (jagent.js:28) = agent layer on AND `!agGuest()`. It was written so the guest's phone never runs the WORLD's agents twice (the host owns NPCs). But jagstaff `asMonth` (wrapped onto j10 `servMonth`) loops every household and starts with `if(!asOn())return""`, so on the guest it also skipped HER OWN household. Her household lives only in her own blob (P.b.S.staff, written by her toCanon; the host's stand-in of her is built with `staff:[]`, jcoopworld buildFriend), so nobody ran it: her servants got **no wage / Sức, no secrets, no betrayal found, no Ban gả (agent), never left by age** in co-op, at every thin level (≤ 12: her phone runs her week end; 13 / G: the host runs it in her context with coopGuest() true — same switch).
@@ -59,6 +59,29 @@ Solo and host: every changed line returns the old value there (agSelf = agOn; as
 ## Merge note (for Foreman B → coop-thin G #8, same lines)
 review/coop-thin-g rewrites jagent.js:27 `agGuest()` to `coopGuest()`. This branch rewrites line 28 (`agOn`) and adds `agLive` / `agSelf` right after it → a textual conflict on lines 27–28. Resolve = keep G's `agGuest` body + this branch's `agLive` / `agOn` / `agSelf`. At level 13 the host's run of her week end (coopGuest() true, S = her store) then runs her household once; her phone runs no endTurn there. G's 28-site seat-guard family does not touch the five lines changed here (j42 maidLoveMonth, jagstaff asMonth / asStaff, jcmaid cmCh, jpromsv spMonth).
 
+## r2 — the rest of her people's life (Foreman B order 20/11 ~21:22Z: the three leftovers are the same family)
+Mechanism (jagent): `agMine()` = this seat may run ONLY her household (her phone, or the host inside her context TH.withSeat "b"); `agSelfRun(f)` = run f with agOn() true (solo rules: stf2 / p3 / amOn options), every loop inside keeps to her household (asStaff, asMonth0, amMaids, the jagmaid consorts loop filter `p===S` when agMine()).
+| leftover | before (r1) | after (r2) | where it runs, once |
+|---|---|---|---|
+| (1) her servants' DAY acts | none in co-op (asTick off on the guest; the host's day plan never sees her staff: stand-in staff:[]) | `asTickMine`: one tick per buổi key, guard **S.asK in HER person** (travels with her blob / the host's patches), plan S.agS, solo option list (stf2 included) | level ≥ 5 (LIVE 9): the HOST after her buổi step in her context (jagstaff wraps nextBuoi: `COOPW.ctx` set → asTick → asTickMine; placeWhere does not run there, jcoopthine E); level < 5 and her week end: her phone (placeWhere → asTick). World part of a deed follows that seat's contract (E put-back / part C lens); her household's part stays. |
+| old dice that the day acts replace (her household) | ran on her seat (asOn false) | off while her acts run: `asSelfOn(owner)` in j10 lover init / spy report / friend tell, j14 sale, jmline seek start / master react / feud, j42 maidLoveMonth (her maids left out of the list; r1's grant-only skip folded in) | host / solo: asSelfOn = asOn → unchanged |
+| (2) his regard of her maids fades | never on her seat | jagmaid month body runs in agSelfRun for her maids (decay; a favoured maid's rise = amRise → newRival → the guest→host request jcoopask, the same path as mlEye) | her week end (her phone ≤ 12; host in her context at 13) |
+| (3) p3 monthly cards (Rót rượu gần ngự tọa / tryst knowledge) | never on her seat | jagacts3 asMonth wrapper: agMine() → agSelfRun(p3MaidMonth), amMaids = her maids only | same as (2) |
+Not changed (correct exclusions): every world / NPC loop (rows 6, 9, 13 above), mlFeud for p===S on the guest (her maid harming an NPC maid = world, host), mlHit (p===S never rolls).
+
+### r2 tests (build cec0b93d / 60ff8f11)
+| test | result |
+|---|---|
+| dev/test/coop-guest-agent.js (extended: 25 checks) | **25/25 OK** (r1 build: the 4 new r2 checks FAIL — day acts 0 on guest and host-context, fade 0, p3 0) |
+| — guest: her staff act every buổi, once per key (a 2nd asTick in the same buổi = no-op), no NPC staff act on her seat | OK (8 ticks / 8 buổi) |
+| — host in her context (COOPW.ctx "b"): same, once per buổi, no NPC staff | OK |
+| — regard fade once a month for her maids (sung 20 → 20 − amD().decay), never twice; p3 cards for her maids only | OK |
+| — solo: staff day acts stay on the jagday plan (asTick adds no tick), fade + p3 still run | OK |
+| quickcheck | PASS 389 s (render 214/222, tab 488/481, buổi 1099/1479 ms new/live) |
+| one-core ×4 | PASS |
+| coop-e2e ×4 | 68/68, 68/68, 66/68, 68/68 — run 3's 2 reds = 'both seats show the same Thái hậu picture' (guest fid null: her picture not loaded), not servants; runs 1, 2, 4 green |
+| role-parity | ALL PASS |
+| coop-cyc | 59 ok / 10 FAIL — the same 10 as r1 and as LIVE 794c6b77 (cycle night draw, pre-existing) |
+
 ## Leftovers FOR B
-- Row 12: her servants' DAY acts (asTick / day plans) in co-op — a lane of its own (host-computes contract).
-- Rows 10–11: her maids' regard fade and p3 monthly cards on her seat.
+- None from this family. Rows 10–12 of the r1 table are done in r2.
