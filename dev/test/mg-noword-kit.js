@@ -10,7 +10,7 @@ const [VW,VH]=(pos[1]||'755x1000').split('x').map(Number);
  await p.addInitScript(()=>{window.__ct=null;const ok=t=>/^[^\p{L}]*$/u.test(t);for(const f of['fillText','strokeText']){const o=CanvasRenderingContext2D.prototype[f];CanvasRenderingContext2D.prototype[f]=function(t){if(window.__ct&&!ok(String(t).trim()))window.__ct.add(String(t).trim());return o.apply(this,arguments)}}});
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.suc=100;S.bac=999;S.ap=9;try{render()}catch(e){}
-  window.__words=root=>{const out=[];const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;
+  window.__words=root=>{const out=[];if(document.getElementById('kg82ok'))return out;/* a finished round shows the RESULT screen (words allowed there, KIT §13.x: never the result): not play */const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;
    while(n=w.nextNode()){const t=n.nodeValue.replace(/\s+/g,' ').trim();if(!t||/^[^\p{L}]*$/u.test(t))continue;const el=n.parentElement;if(!el)continue;
     if(el.closest('.kgr,.kgt-bar,script,style')||(el.closest('.kph,.kpht')&&!el.closest('.kgclk')))continue;const cs=getComputedStyle(el);if(cs.display==='none'||cs.visibility==='hidden')continue;const r=el.getBoundingClientRect();if(!r.width&&!r.height)continue;
     let h=el;while(h&&h!==root){if(h.hidden||getComputedStyle(h).display==='none'){el=null;break}h=h.parentElement}if(!el)continue;
