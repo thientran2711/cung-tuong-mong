@@ -69,3 +69,10 @@ NEW t2 (replaces "a fine silk robe with delicate embroidered {mot} at the collar
 Sent same wording to RANK8-B + RANK8-C. Test prompts dev/art/rank8-s62/test-square/s62_t{1,2}_sq.txt; gate: full store FAIL only on the swapped sentence (expected), --scope tp1/tp2 --age a18 PASS.
 Gens xSBeugTjfW (t1), nVsx9M3YQD (t2). Sheet dev/handover/review-sheets/rank8-s62/s62_THU_covuong_t1-t2-t3.webp.
 Looked: both square, open, no round, no V, no cross collar. t1 = deep, low square (shows upper chest a bit — may be too low for the owner); band reads ice blue not clearly mint. t2 = wide shallow square with embroidered band — but close to t3's look (t3 adds stiff mint band + girdle + apron). Not redrawn.
+
+## 8. G17 into the builder (owner verdict: kiểu 1 OK, kiểu 2 "rộng quá … muốn tuột xuống") — 0 cr
+- t8-prompt-B/build.py TIER_LOW (shared t1–t3 store, used by EVERY person's t1/t2): t1 "crossed-collar upper garment" → "upper garment with an OPEN SQUARE NECKLINE (style 1, simple) … narrow plain {sec} silk band …"; t2 "delicate embroidered {motif} at the collar, sleeves and hem" → same style-1 neckline + "delicate embroidered {motif} at the sleeves and hem" (rest of t2 robe kept). outfit_low123 now formats sec = secondary colour name. t3, t4+ untouched.
+- Gate: check_store STORE CHECK PASS s62/s64/s65 × t1/t2; m05 t2 PASS (band = her secondary "teal"). Outputs: dev/art/rank8-s62/g17/.
+- Rule G17 added (rule.py add, owner verbatim).
+- Note: this changes t1/t2 prompts for ALL people (c/m/p/s) at their next gen; already-drawn pictures untouched (no redraw).
+- Note: s62 t1/t3/t4 builder output also differs from my drawn prompts in the ANGLE sentence — that is an upstream commit (not mine).
