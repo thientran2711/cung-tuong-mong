@@ -106,7 +106,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* the same person + world as a SOLO game, same constant dice */
  const So=await b.newContext({viewport:{width:686,height:880}});await serve(So);const sp=await So.newPage();const serr=[];sp.on('pageerror',e=>serr.push(e.message));
  await sp.goto(BASE);await sp.waitForTimeout(3000);
- const B2=await sp.evaluate(([snap,K])=>{const k=0.37;const R0=Math.random;quiet=true;try{deser(snap)}finally{quiet=false}Q.length=0;S.dead=false;
+ const B2=await sp.evaluate(([snap,K])=>{const k=0.37;const R0=Math.random;BAL.world.on=0;/* the world windows (jworld tick / start: e.g. Khoa thi Đình gives her house's consorts Danh) are the HOST's world in co-op (part C; her share rides his week as a delta on her entry): the solo side compares her PERSONAL month only */quiet=true;try{deser(snap)}finally{quiet=false}Q.length=0;S.dead=false;
   Math.random=()=>k;try{nextBuoi()}catch(e){return {err:e.message}}finally{Math.random=R0}
   const A=S;const out={};for(const x of K)out[x]=A[x];out.kids=(A.kids||[]).map(c=>c&&c.age).join(',');out.inv=(A.inv||[]).length;out.staff=(A.staff||[]).length;out.loy=(A.staff||[]).map(s=>s&&s.loy).join(',');out.preg=JSON.stringify(A.preg||null).slice(0,40);out.ill=JSON.stringify(A.ill||null).slice(0,40);out.dead=!!A.dead;out.month=S.month;return out},[pr.snap,KEYS]);
  console.log('SAMEDICE',JSON.stringify({host:pr.A,solo:B2}));
