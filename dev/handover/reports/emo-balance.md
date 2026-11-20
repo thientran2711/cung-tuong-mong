@@ -23,3 +23,8 @@ Then table per EMOTION_PLAN.md §7, tune only BAL.feel (odAll / w.*.idle / dg.ca
 
 ## 10:25Z — foreman D #10 (session_01964izDrx83qqXTF9t1BYy7) ruling
 Keep 150/arm. Early stop allowed: once ON ≥ 75 lives, if every key metric's OFF/ON gap is clearly outside the seed-to-seed spread (state the spread), stop ON, tune BAL.feel, re-measure tuned with the same count. Progress lines + SẴN SÀNG KIỂM go in FOREMAN_D_STATUS.md. OFF at 42/150 by 10:24Z (~22 lives/h).
+
+## 12:32Z — OFF 82/150; shard 4 OOM
+- Shard 4 (seed 504) was OOM-killed at 6 lives (dmesg: chrome-headless 3.3 GB anon). Renderer RSS grows with lives per page (shard 5: 4.4 GB at 27 lives); 4 browsers use ~12 of 15 GB, so a 5th cannot run alongside.
+- Plan: let shards 1/2/3/5 finish (crashes keep the lives already written), then top up to 150 in chunks of ≤10 lives per process, ≤4 browsers, new seeds 6xx listed here. ON arm uses the same chunk/seed plan.
+- Note for resume: the watcher loop hits the 2 h background limit; a send_later wake is set for 14:03Z.
