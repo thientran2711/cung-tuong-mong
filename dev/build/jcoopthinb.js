@@ -91,9 +91,9 @@ function npcs(){return (rivals||[]).filter(v=>v&&!v.coop)}
 /* review/kc-coop-select (law 1, whole family): the build is the REAL nlRun chain, as on her phone in solo — j52 nlRun (seeded core start) + its
    hooks: j69 the weighted origin of HER stored life (ow), j66 her pid, jdiff HER Độ khó, jil her dead life's pieces (law 6c). Was: _start52
    alone, so a thin guest got a uniform origin (or the host's own forced one), the host's Độ khó and no pid. Her stored-life marks ride with
-   the intent (a.ow / a.pid / a.diff); window.__forceOrigin is a dev/test hook only (her own, a.fo; never the host's). */
+   the intent (a.ow / a.pid / a.diff); window.__forceOrigin is a dev/test hook only (hers, a.fo, else the host's). */
 function core(K){K.go=1;const fo0=window.__forceOrigin,df0=window.__diffO;const d={seed:K.seed};if(K.ow)d.ow=K.ow;else d.faces=1/* an old uniform life (no j69 mark) keeps its uniform pick */;if(K.pid)d.pid=K.pid;
- window.__forceOrigin=K.fo||undefined;window.__diffO=K.diff||undefined;
+ window.__forceOrigin=K.fo||fo0||undefined;/* her dev hook first, else the host's (coop-thin-b.js forces on the host) */window.__diffO=K.diff||undefined;
  NLP={seed:K.seed};try{nlRun(d)}finally{window.__forceOrigin=fo0;window.__diffO=df0}rebase(K);K.done=1}
 if(typeof nlBegin==="function"){const f=nlBegin;nlBegin=function(){if(CW.ctx&&TB.K)return core(TB.K);return f.apply(this,arguments)}}
 function blob(life){const P=X.myBlob(ser().S);P.life=life;P.dead=false;return P}
