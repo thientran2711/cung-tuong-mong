@@ -2,7 +2,9 @@
 """mgcal_apply.py — write the owner's minigame calibration code into BAL (one core).
 usage: python3 dev/tools/mgcal_apply.py "CTM-CAL dan:6.4/5@11/17/2026 co:5.1/5@11/17/2026"
 The code comes from the owner-only test (jmgcal, Thiết lập row «Thử tay tài nghệ», button «Chép mã»).
-It merges each kind into BAL.ag.mg2.cal.k in dev/build/jbal2.js (a kind already there is overwritten by the newer code), then prints the table.
+It merges each kind into BAL.ag.mg2.cal.k in dev/build/jbal2.js, then prints the table.
+FIRST TRY ONLY (owner OD 20/11 ~04:30Z: "bất kì lần 2 nào của game đều không tính. Chỉ tính kết quả lần 1"): a kind already in BAL is KEPT;
+only kinds not there yet are added. A re-done kind in a later code is reported as 'kept (first try)' and never overwrites.
 Rebuild after: python3 dev/build/assemble.py (and the site build)."""
 import re, sys, json, os
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -25,7 +27,12 @@ def main():
     if not m:
         sys.exit('BAL.ag.mg2.cal line not found in jbal2.js')
     cur = json.loads(re.sub(r'([{,])([a-z0-9]+):', r'\1"\2":', m.group(2))) if m.group(2) != '{}' else {}
-    cur.update(new)
+    for k, v in new.items():
+        if k in cur:
+            if cur[k] != v:
+                print(f"{k}: kept first try b {cur[k]['b']} (later try b {v['b']} not counted)")
+        else:
+            cur[k] = v
     js = json.dumps(cur, separators=(',', ':'), ensure_ascii=False)
     js = re.sub(r'"([a-z0-9]+)":', r'\1:', js)
     s = s[:m.start()] + m.group(1) + js + m.group(3) + s[m.end():]
