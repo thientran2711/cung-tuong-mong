@@ -48,7 +48,7 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
    is married (princes and princesses alike); matchShow = a child shows in the match lists from this age; matchMax = oldest prince offered as a match; age.reign = the young Emperor rules alone from this age (no regency).
    seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table. res / harem: see below.
    night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
-Object.assign(BAL,{time:{khac:4,sucMin:5,/* khắc a deed costs, ONE source for the player and every NPC (AG-ALL-2 G8): talk option (j2 talk), talk that is an act, a harm act (j8 doAct) */cost:{talk:1,talkAct:2,harm:2}},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45,old:45},
+Object.assign(BAL,{time:{khac:4,sucMin:5,/* khắc a deed costs, ONE source for the player and every NPC (AG-ALL-2 G8): talk option (j2 talk), talk that is an act, a harm act (j8 doAct) */cost:{talk:1,talkAct:2,harm:2}},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2,lead:15},srvAge:{ask:25,out:30,mama:45,old:45},
  age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:1,4:2,3:3}, /* owner 17/11 04:30Z: halved (was {7:1,6:1,5:2,4:4,3:6}) */
  /* RESIDENCE (owner 17/11 04:20Z + 04:32Z): every chủ vị (Tần, Phi, Quý phi; the player too) takes at most side co-residents in each
     of the halls (Đông phối điện, Tây phối điện), one room each; Hoàng hậu and Hoàng quý phi live alone. harem.cap = most consorts alive at once
@@ -164,6 +164,15 @@ Object.assign(BAL.orig,{art:{
  ch:{"":{dung:1},ch_co:{dung:2,ky:2,ngon:1,cam:1},ch_benh:{y:2,hanh:2,nau:1,dung:1},ch_ho:{vu:2,cam:2,dung:1,hoa:1},ch_bi:{thi:2,dung:2,ky:1,ngon:1}},
  thd:{"":{thi:1},thd_tho:{thi:2,hoa:1,cong:1,ngon:1},thd_sach:{thi:2,ky:1,hanh:1,cong:1},thd_tro:{thi:2,ngon:1,ky:1,nau:1},thd_hoc:{thi:2,ngon:1,hoa:1,hanh:1}},
  cnv:{"":{cong:1},cnv_chu:{cong:1,nau:1,y:1,ngon:1},cnv_ban:{theu:1,cong:1,hanh:1,nau:1},cnv_mat:{cong:1,vu:1,dung:1,theu:1},cnv_ma:{cong:1,nau:1,dung:1,hanh:1}}}});
+/* SỞ ĐOẢN per identity (owner OD 20/11 ~07:15Z, verbatim: "mình có cái môn sở trường thì mình cũng phải có môn sở đoản ... có nhiều người họ học hoài cái môn
+   này họ học không nổi"): the 1–2 arts an identity (origin × road, the same keys as BAL.orig.art above) is WEAK at — never an art of that identity's own row.
+   SỞ TRƯỜNG = every art of the identity's BAL.orig.art row (bậc ≥ BAL.orig.id.trAt); every other art = bình thường. "" = the origin's row (road unknown); a road key
+   overrides it. List from the C-AG cal-p2 analysis (reports/cal-p2.md §A2, script-checked: no overlap with the road's own arts; dev/test/cal-p2c.js re-checks it).
+   Read by jmgid mgIdClass → the identity target of a mini-game result (OD ~07:35Z: sở trường ≈ 9, bình thường ≈ 7.5, sở đoản ≈ 6; BAL.orig.id in jbal2.js). */
+Object.assign(BAL.orig,{doan:{
+ tt:{"":["nau","vu"]},dtq:{"":["theu","cam"]},muoi:{"":["hoa","vu"]},cn:{"":["ky","vu"]},
+ nc:{"":["thi","theu"],nc_vuong:["theu","hanh"],nc_tuc:["thi","cam"]},bd:{"":["thi","theu"],bd_tuc:["thi","hoa"]},
+ td:{"":["vu","nau"]},ch:{"":["nau","theu"],ch_benh:["theu","ky"]},thd:{"":["vu","cam"]},cnv:{"":["thi","ky"]}}});
 /* ONE CORE (OD:L1267): her household on the room stage (jhouse.js), Tứ đức works (jtds.js), Tứ đức lessons (jtd.js). Same values as before. */
 Object.assign(BAL,{
  house:{ /* jhouse.js: acts on a household servant's stage card */
