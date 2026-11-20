@@ -10,7 +10,7 @@
    ONE CORE: every board number is BAL.mgTier.lev.ve.* [ease0, ease5] through mgLev (jbal2.js); motifs +mgMore(env). No words in play (OD 05:10Z).
    STAND-IN ART («tạm»): the motif stamps, scroll and stone rim are drawn on the canvas until Foreman C paints the ART REQUEST (report mg-craft-ve.md);
    the inkstone and brush sprites ve-inkstone / ve-brush already exist. K91VE_TEMP marks the stand-in. */
-const K91VE_TEMP=true;
+const K91VE_TEMP=true;/* stand-in art: the missing sprite names ve-motif-<type> are listed by crArt (kitPhNote mg) */
 /* the master's paintings: motif type + spot on the scroll (u across, v down = near; far things sit high). Tone of a layer = how far it is (v). */
 const K91VE_PAINT=[
  [["sonchu",.30,.46],["sonkhach",.74,.28],["thuyen",.62,.80],["tung",.12,.74],["hac",.88,.58],["sonkhach",.50,.22]],
@@ -25,11 +25,11 @@ function k91VePath(g,t,x,y,s){/* stand-in silhouettes in a ±1 box round (x, y),
  else if(t==="thuyen"){m(-.55,.3);l(.55,.3);l(.38,.52);l(-.38,.52);g.closePath();m(0,-.7);l(0,.24);l(.46,.14);g.closePath();m(-.9,.74);g.quadraticCurveTo(x-.45*s,y+.64*s,x,y+.74*s);g.quadraticCurveTo(x+.45*s,y+.84*s,x+.9*s,y+.74*s);m(-.7,.92);g.quadraticCurveTo(x-.3*s,y+.84*s,x+.1*s,y+.92*s);g.quadraticCurveTo(x+.4*s,y+1*s,x+.7*s,y+.92*s)}
  else if(t==="tung"){m(-.07,.1);l(.07,.1);l(.09,.9);l(-.09,.9);g.closePath();e(0,-.55,.5,.17);e(0,-.28,.66,.2);e(0,.0,.82,.22)}
  else{e(-.34,.1,.3,.13);e(.42,.34,.24,.1);m(-.1,.02);g.quadraticCurveTo(x+.06*s,y-.3*s,x+.1*s,y-.62*s);m(.5,.26);g.quadraticCurveTo(x+.52*s,y,x+.58*s,y-.14*s);m(-.62,.1);l(-.95,.2)}}
-function k91VeDraw(g,t,x,y,s,col,a,line){g.save();g.globalAlpha*=a;k91VePath(g,t,x,y,s);if(line){g.strokeStyle=col;g.lineWidth=1.8;g.setLineDash([3,4]);g.lineJoin="round";g.stroke()}else{g.fillStyle=col;g.fill();g.strokeStyle=col;g.lineWidth=Math.max(1.4,s*.045);g.lineJoin="round";g.lineCap="round";g.stroke()}g.restore()}
+function k91VeDraw(g,t,x,y,s,col,a,line){if(crArt(g,"ve-motif-"+t,x,y,s*2,s*2,{alpha:a},null))return;g.save();g.globalAlpha*=a;k91VePath(g,t,x,y,s);if(line){g.strokeStyle=col;g.lineWidth=1.8;g.setLineDash([3,4]);g.lineJoin="round";g.stroke()}else{g.fillStyle=col;g.fill();g.strokeStyle=col;g.lineWidth=Math.max(1.4,s*.045);g.lineJoin="round";g.lineCap="round";g.stroke()}g.restore()}
 const k91VeInk=f=>{const [a,b]=K91VE_SZ.tone;return`rgb(${a.map((v,i)=>Math.round(v+(b[i]-v)*f)).join(",")})`};
 function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
- const Lv=n=>mgLev(env,"ve",n),Z=K91VE_SZ;
- const T=Math.max(2,Math.round(Lv("tones"))),PLACE=Lv("place"),RAMP=Lv("ramp"),DRY=Lv("dry"),PEEK=Lv("peek")*1000,BLEED=Lv("bleed"),HOLDMIN=Lv("holdMin"),REACH=Lv("reach");
+ const Lv=n=>crLev(env,"ve",n),Z=K91VE_SZ;
+ const T=Math.max(2,Math.round(Lv("tones"))),PLACE=Lv("place"),RAMP=Lv("ramp"),DRY=Lv("dry"),PEEK=Lv("peek"),BLEED=Lv("bleed"),HOLDMIN=Lv("holdMin"),REACH=Lv("reach");
  const WP=Lv("wPlace"),WT=Lv("wTone"),WC=Lv("wClean");
  const SX=W*.05,SW=W*.9,SY=H*.31,SH=H*.5,UN=SW*Z.u;/* the scroll */
  const TW=W*.38,TH=TW*SH/SW,TX=W*.04,TY=H*.03;/* the master's sample pinned top-left, same shape as the scroll */
@@ -40,10 +40,10 @@ function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
  const sc=cy=>Z.far+(1-Z.far)*cl((cy-SY)/SH,0,1),pa=cy=>Z.pale+(1-Z.pale)*cl((cy-SY)/SH,0,1);
  const toneF=v=>cl((v-Z.near[0])/(Z.near[1]-Z.near[0]),0,1),toneOf=v=>Math.round(toneF(v)*(T-1));
  const tgPt=t=>[SX+t.u*SW,SY+t.v*SH];
- function next(){r++;if(r>=NR){done=true;bd.disabled=true;return setTimeout(()=>env.end(Math.min(10,pts)),300)}
+ function next(){r++;if(r>=NR){done=true;bd.disabled=true;return crLater(()=>env.end(Math.min(10,pts)),300)}
   const n=Math.min(K91VE_PAINT[r].length,K91VE_BASE[r]+mgMore(env));const M=K91VE_PAINT[r].slice(0,n).map(([type,u,v])=>({type,u,v,tone:toneOf(v)}));
   const S=kg82Shuf(M.map((m,i)=>({ti:i,type:m.type,placed:false,x:0,y:0})));const tw=(W-12)/n;S.forEach((s,i)=>{s.hx=6+tw*(i+.5);s.hy=H*.915});
-  P={M,S,tw,order:null,tp:[],ts:[],blots:[],bl:0};LIM=n*Lv("lim")+Lv("limBase");phase="place";t0=performance.now();peekAt=t0;drag=null;fl=null;bd.disabled=true}
+  P={M,S,tw,order:null,tp:[],ts:[],blots:[],bl:0};LIM=n*Lv("lim")+Lv("limBase");phase="place";t0=crNow();peekAt=t0;drag=null;fl=null;bd.disabled=true}
  /* the best way to name which stamp stands for which motif (same type only; ≤ 6! tries) */
  function assign(){const S=P.S,M=P.M,sp=(s,t)=>{if(!s.placed||s.type!==t.type)return s.type===t.type?0:-9;const [tx,ty]=tgPt(t),d=Math.hypot(s.x-tx,(s.y-ty))/SW;return cl(1-(d-PLACE)/(2*PLACE),0,1)};
   let best=-1e9,bp=null;const perm=(a,rest)=>{if(!rest.length){let v=0;a.forEach((j,i)=>v+=sp(S[i],M[j]));if(v>best){best=v;bp=a.slice()}return}rest.forEach((j,k)=>perm(a.concat(j),rest.slice(0,k).concat(rest.slice(k+1))))};
@@ -54,8 +54,8 @@ function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
  function inkStart(now){assign();phase="ink";bd.disabled=true;P.li=0;fl={mode:"idle",loadAt:0,loadedAt:0,tone:0,down:null};peekAt=now}
  function paintEnd(now,ended){/* one painting is done: score it, show the stars, go on */
   phase="judge";bd.disabled=true;const n=P.M.length,pl=P.tp.reduce((a,b)=>a+b,0)/n,tn=P.lay.reduce((a,l)=>a+l.ts,0)/n,cn=cl(1-P.bl*.5,0,1);
-  const el=Math.min(LIM,now-t0),got=10/NR*(WP*pl+WT*tn+WC*cn)*mgPace(env,"ve",el,LIM);pts+=got;P.stars=got/(10/NR);kg82Pluck(2,P.stars>.5);setTimeout(next,1500)}
- const stop=k91Loop(now=>{if(!P)return;const left=LIM-(now-t0);
+  const el=Math.min(LIM,now-t0),got=10/NR*(WP*pl+WT*tn+WC*cn)*mgPace(env,"ve",el,LIM);pts+=got;P.stars=got/(10/NR);kg82Pluck(2,P.stars>.5);crLater(next,1500)}
+ const stop=crLoop(now=>{if(!P)return;const left=LIM-(now-t0);
   if(phase==="place"&&left<=0)inkStart(now);else if(phase==="ink"&&left<=0)paintEnd(now,true);
   kg82Bg(g,W,H,"ve",0,.7);
   /* the sample (rolled up once its time is out; tap it to look again) */
@@ -80,7 +80,7 @@ function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
   {const lit=phase==="ink";g.save();g.globalAlpha=lit?1:.55;if(!kg82Spr(g,"ve-inkstone",ST.x+ST.w*.5,ST.y+ST.h*.45,ST.w*.62,null,{})){g.fillStyle="#2a2622";k91RR(g,ST.x+ST.w*.12,ST.y,ST.w*.76,ST.h*.9,10);g.fill()}
    const lvl=fl&&fl.mode==="load"?Math.min(T-.001,T*(now-fl.loadAt)/RAMP):-1,sw=Math.min(ST.w*.8/T,22);
    for(let i=0;i<T;i++){const x=ST.x+ST.w*.5+(i-(T-1)/2)*sw*1.15,y=ST.y+ST.h*.98;g.fillStyle=k91VeInk(i/(T-1));g.strokeStyle=Math.floor(lvl)===i?"#e0a526":"#6b5a3c";g.lineWidth=Math.floor(lvl)===i?3.5:1.2;g.beginPath();g.arc(x,y,sw*.52*(Math.floor(lvl)===i?1.25:1),0,Math.PI*2);g.fill();g.stroke()}
-   if(fl&&(fl.mode==="load"||fl.mode==="loaded")){const tn=fl.mode==="load"?Math.floor(lvl):Math.max(0,fl.tone-Math.floor(DRY*(now-fl.loadedAt)/1000)),bx=ST.x+ST.w*.5,by=ST.y+ST.h*.35;
+   if(fl&&(fl.mode==="load"||fl.mode==="loaded")){const tn=fl.mode==="load"?Math.floor(lvl):Math.max(0,fl.tone-Math.floor((now-fl.loadedAt)/DRY)),bx=ST.x+ST.w*.5,by=ST.y+ST.h*.35;
     if(!kg82Spr(g,"ve-brush",bx,by,UN*1.6,null,{ax:.06,ay:.95,glow:fl.mode==="load"?BAL.mgFx.glow:null})){g.strokeStyle="#6b4a2a";g.lineWidth=5;g.lineCap="round";g.beginPath();g.moveTo(bx+UN*.9,by-UN*.9);g.lineTo(bx,by);g.stroke()}
     g.fillStyle=k91VeInk(tn/(T-1));g.beginPath();g.arc(bx,by,UN*.14,0,Math.PI*2);g.fill()}g.restore()}
   if(phase==="judge"&&P.stars!=null)k91Say(g,P.stars>=.8?"★★★":P.stars>=.55?"★★☆":"★☆☆",P.stars>=.8?K91C.good():P.stars>=.55?K91C.gold():K91C.red(),W/2,H*.915,W-16);
@@ -89,31 +89,29 @@ function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
  const nearStamp=(x,y)=>{let b=null,bd=1e9;P.S.forEach(s=>{if(!s.placed)return;const d=k91Dist(x,y,s.x,s.y);if(d<bd&&d<UN*sc(s.y)*1.1){bd=d;b=s}});return b};
  function flick(x,y,now){const l=P.lay[P.li],s=l.s,R=UN*sc(s.y),d=k91Dist(x,y,s.x,s.y),bl=BLEED*SW;
   if(d<=R*REACH){/* the wash lands on the layer: tone = what the brush still holds */
-   const put=cl(fl.tone-Math.floor(DRY*(now-fl.loadedAt)/1000),0,T-1),e=Math.abs(put-l.tone);l.ts=e===0?1:e===1?.5:0;l.tonePut=put;l.done=true;l.at=now;kg82Pluck(put,e<=1);
-   if(d+bl>R*REACH*.9){P.blots.push({x,y,r:bl});P.bl++}P.li++;if(P.li>=P.lay.length)setTimeout(()=>{if(phase==="ink")paintEnd(performance.now())},500)}
-  else{P.blots.push({x,y,r:bl});P.bl++;l.miss++;kg82Pluck(0,false);if(l.miss>=2){l.done=true;l.at=now;l.tonePut=0;l.ts=0;P.li++;if(P.li>=P.lay.length)setTimeout(()=>{if(phase==="ink")paintEnd(performance.now())},500)}}
+   const put=cl(fl.tone-Math.floor((now-fl.loadedAt)/DRY),0,T-1),e=Math.abs(put-l.tone);l.ts=e===0?1:e===1?.5:0;l.tonePut=put;l.done=true;l.at=now;kg82Pluck(put,e<=1);
+   if(d+bl>R*REACH*.9){P.blots.push({x,y,r:bl});P.bl++}P.li++;if(P.li>=P.lay.length)crLater(()=>{if(phase==="ink")paintEnd(crNow())},500)}
+  else{P.blots.push({x,y,r:bl});P.bl++;l.miss++;kg82Pluck(0,false);if(l.miss>=2){l.done=true;l.at=now;l.tonePut=0;l.ts=0;P.li++;if(P.li>=P.lay.length)crLater(()=>{if(phase==="ink")paintEnd(crNow())},500)}}
   fl.mode="idle";fl.down=null}
- k91Pointer(C,{down:(x,y,id)=>{const now=performance.now();if(!P)return;if(act!=null){if(fl&&fl.mode==="load")return;drag=null;if(fl)fl.down=null}act=id;/* a new finger replaces a finished-looking one, never a brush being loaded */
+ k91Pointer(C,{down:(x,y,id)=>{const now=crNow();if(!P)return;if(act!=null){if(fl&&fl.mode==="load")return;drag=null;if(fl)fl.down=null}act=id;/* a new finger replaces a finished-looking one, never a brush being loaded */
    if(x>=TX&&x<=TX+TW&&y>=TY&&y<=TY+TH&&(phase==="place"||phase==="ink")){peekAt=now;return}
    if(phase==="place"){let s=nearStamp(x,y);if(s)drag={s,x:s.x,y:s.y,dx:s.x-x,dy:s.y-y};else{s=P.S.find(s=>!s.placed&&Math.abs(x-s.hx)<P.tw/2&&y>H*.82);if(s)drag={s,x,y:y-OFF,dx:0,dy:-OFF}}return}
    if(phase==="ink"){if(onStone(x,y)){fl.mode="load";fl.loadAt=now;fl.down=null;return}if(fl.mode==="loaded")fl.down=[x,y]}},
   move:(x,y,id)=>{if(id===act&&drag){drag.x=x+drag.dx;drag.y=y+drag.dy}},
-  up:(x,y,id)=>{const now=performance.now();if(!P||id!==act)return;act=null;
+  up:(x,y,id)=>{const now=crNow();if(!P||id!==act)return;act=null;
    if(drag){const s=drag.s,cx=x+drag.dx,cy=y+drag.dy;drag=null;if(phase!=="place")return;if(cx>=SX&&cx<=SX+SW&&cy>=SY&&cy<=SY+SH){s.placed=true;s.x=cx;s.y=cy;kg82Pluck(1,true)}else s.placed=false;bd.disabled=!P.S.every(s=>s.placed);return}
    if(phase==="ink"&&fl){if(fl.mode==="load"){if(now-fl.loadAt<HOLDMIN){fl.mode="idle";return}fl.tone=Math.min(T-1,Math.floor(T*(now-fl.loadAt)/RAMP));fl.mode="loaded";fl.loadedAt=now;
      if(!onStone(x,y)&&P.li<P.lay.length)flick(x,y,now);/* one gesture: load on the stone, lift on the layer */return}
     if(fl.mode==="loaded"&&fl.down&&P.li<P.lay.length)flick(x,y,now)}}});
- bd.onclick=()=>{if(phase==="place"&&P.S.every(s=>s.placed))inkStart(performance.now())};
+ bd.onclick=()=>{if(phase==="place"&&P.S.every(s=>s.placed))inkStart(crNow())};
  KG82.peek=()=>{if(!P||drag)return null;
   if(phase==="place"){const s=P.S.find(s=>!s.placed);if(!s)return{sel:"#k91vdone"};const t=P.M[s.ti],[tx,ty]=tgPt(t),a=C.client(s.hx,s.hy),b=C.client(tx,ty+OFF),m=C.client((s.hx+tx)/2,(s.hy+ty)/2);return{drag:[[a.x,a.y],[m.x,m.y],[b.x,b.y]]}}
   if(phase==="ink"&&P.li<P.lay.length){const l=P.lay[P.li];
    if(fl.mode==="loaded"){const c=C.client(l.s.x,l.s.y);return{x:c.x,y:c.y,thinkMs:Lv("flick")}}
    const sc2=C.client(ST.x+ST.w*.5,ST.y+ST.h*.45);
-   if(fl.mode==="load"){const lv=Math.min(T-.001,T*(performance.now()-fl.loadAt)/RAMP);return{hold:!((lv>=l.tone+.3||lv>=T-.01)&&performance.now()-fl.loadAt>=HOLDMIN+25),x:sc2.x,y:sc2.y}}
+   if(fl.mode==="load"){const lv=Math.min(T-.001,T*(crNow()-fl.loadAt)/RAMP);return{hold:!((lv>=l.tone+.3||lv>=T-.01)&&crNow()-fl.loadAt>=HOLDMIN+25),x:sc2.x,y:sc2.y}}
    return{hold:true,x:sc2.x,y:sc2.y}}
   return null};
  next();return()=>{done=true;stop()}}
-/* ---- wiring (the lead's scaffold re-wires every craft kind in ONE place; until it is merged this file does it for ve) ---- */
-Object.assign(KG82_ENG,{ve2:k91Ve});KG82_DEMO.ve2="drag";
-Object.assign(KG82_KIND.ve,{e:"ve2",t:"Thủy mặc: bố cục, năm sắc mực",how:"Kéo từng hình vào cuộn giấy đúng chỗ như bức mẫu: xa thì nhỏ và nhạt, gần thì lớn và đậm. Rồi chạm ✓: giữ bút trên nghiên cho ngọn bút đậm đúng sắc mực của lớp đang sáng, nhấc tay và phẩy lên lớp ấy. Mực chảy ra chỗ để trắng thì lem. 3 bức."});
-if(KG82_MGL&&KG82_MGL.hoa&&KG82_MGL.hoa[1]==="ve")KG82_MGL.hoa[0]="Họa: bố cục thủy mặc";
+/* wiring: the ONE table KG82_CRAFT (j91) names the engine «inkwash» + rules text; crReg registers it and switches the kind ve (jcraft.js) */
+crReg("ve","inkwash",k91Ve);

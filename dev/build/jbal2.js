@@ -249,10 +249,7 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
  lev:{/* review/mg-tune time part (mgPace) of the correctness games, calibrated with dev/measure/mg-bots.js (skilled ≈ 25 % Xuất sắc at the matching level) */
   tho:{fast:[.05,.175],keep:[.5,.5]},doi:{fast:[.05,.425],keep:[.3,.3]},doden:{fast:[.05,.175],keep:[.3,.3]},le:{fast:[.075,.25],keep:[.3,.3]},
   tc:{fast:[.05,.175],keep:[.3,.3]},xa:{fast:[.05,.1],keep:[.1,.1]},thq:{fast:[.075,.45],keep:[.5,.5]},
-  kim:{fast:[0,0],keep:[.6,.6]},/* mg-craft-ve: Vẽ «Thủy mặc» board levers [ease 0, ease 5] (design MG_CRAFTS §2): place = hit radius share of the scroll width · tones on the stone · ramp = ms for the brush to pass every tone · dry = tones the loaded brush loses per second ·
-   peek = seconds the master's sample stays unrolled (a tap re-opens it) · bleed = blot radius share of the scroll width · holdMin ms a hold counts as loading · reach = flick hit radius × the layer's radius · wPlace/wTone/wClean = the score parts · lim/limBase ms per motif / fixed · fast/keep = mgPace */
-  ve:{flick:[420,420],place:[.016,.14],tones:[5,3],ramp:[450,2600],dry:[2.6,0],peek:[3,40],bleed:[.07,.03],holdMin:[40,40],reach:[1.1,1.5],wPlace:[.5,.5],wTone:[.4,.4],wClean:[.1,.1],lim:[7000,9500],limBase:[8000,10000],fast:[.5,.7],keep:[.6,.8]},
-/* review/mg-tune-r1: Khéo tay (untangle) moved onto mgPace, same curve as its old typed .6+.4·left/LIM */
+  kim:{fast:[0,0],keep:[.6,.6]},/* review/mg-tune-r1: Khéo tay (untangle) moved onto mgPace, same curve as its old typed .6+.4·left/LIM */
   banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4]},co:{lim:[8000,20000],fast:[.1,.8],keep:[.6,.6],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99]},
   td_hanh:{lim:[8000,20000],short:[2,0]},td_cong:{tol:[.0075,.028]},den:{swing:[.36,.36],band:[.16,.208]},/* review/mg-snap: Thêu theo nét trace tolerance, share of the board width (was typed W·(.055+.006·lv)·mgTol) */dauho:{aid:[.14,.45],mouth:[.8,1.3]},td_dung:{band:[.2,.6],kick:[2.4,1],spill:[2,1.5]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
  kG:{td_cong:1.3,td_ngon:2,ban:.8,dan:2.8,den:.8,hat:.85,duho:1.5,hoa:2.3,huong:3.65,kim:1.8,kinh:.9,may:.82,ve:.9,mua:1.25,theu:5.5,co:3},/* review/mg-balance-2-r1 re-trim on pooled raws (co n=120, td_ngon n=60 float): co 4→3, td_ngon 1.6→2; review/mg-snap re-trim after the trace fix (her line scored, BAL.mgTier.trace.acc 1) and the wider Hoa đăng channel: td_cong 1.6→1.3, ve 1.7→.9, kinh 1.5→.9, may 1.5→.82, den 1.05→.8 */
@@ -266,6 +263,22 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
    pass = glow passes (shadow stacks) · ringW = ring width as a share of the target's width · dim = darkening of the UNLIT painting under a lit cue (contrast) */
 BAL.mgFx={pop:1.24,ms:300,glow:"#fff0a0",ring:"#ffffff",blur:44,pass:3,ringW:.07,dim:.18};
 BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timing game's right moment that the hand says «chạm» (KG82.hint: rhythm, aim), a reaction time */
+/* mg-craft (owner OD 20/11 ~08:15Z "4 cái game mà chơi cái kiểu mà đồ nét chữ … boring lắm": each craft its OWN real mechanic; design dev/design/MG_CRAFTS.md):
+   the board levers of the four craft boards, each [at ease 0 (hard), at ease 5 (easy)], read through mgLev(env, kind, name) — ONE CORE: no board number is typed in
+   the engines. Each kind's builder adds knobs ONLY inside its own block. Kind keys, kG / kAdj, cal.k and the hand band are unchanged (MAIN ROOT-75 order).
+   theu «Thêu lướt sắc» (jcraft_theu): beat = ms between stitches · win = on-beat window ms (±) · near = the «near» window as a multiple of win · st = stitches per band · alike = decoy spools one
+     shade step off the right one · sway = hoop drift as a share of the hoop · peek = ms the finished sample stays before its cloth covers it (≥ round time = stays) ·
+     wC / wS = weight of the right colour / the stitch rhythm in a piece · lim = ms per piece (the time part mgPace) · fast / keep = mgPace of that time.
+   kim «Cắt hoa giấy» (jcraft_kim): folds = most folds of the hardest sheet (sheets 2 · folds/2 · folds, folds 8 = 2·4·8, 4 = 2·2·4) · holes = cuts of a sheet before mgMore · size = a cutter's size as a share of the wedge radius · place = snap tolerance as a share of
+     the wedge · peek = ms the unfolded sample stays (≥ lim = stays) · alike = look-alike cutter shapes · lim = ms per sheet · extra = what one extra hole costs
+     (share of a right hole) · fast / keep = mgPace (kept from review/mg-tune-r1).
+   Measured STEP 3 (dev/measure/mg-bots.js skilled n=30, graded): theu Dễ/Vừa/Khó 8.6 / 7.7 / 6.8 (old pattern 7.2 / 7.2 / 6.7), kim 8.7 / 8.5 / 6.8 (old untangle 9.0 / 8.6 / 7.7).
+   ve «Thủy mặc» (jcraft_ve) · hoa «Chọn mùa · cắt cành · nghiêng thế» (jcraft_hoa): the design's proposed shapes; their builders tune and add knobs here. */
+Object.assign(BAL.mgTier.lev,{
+ theu:{beat:[520,900],win:[45,75],near:[2,2],st:[3,3],alike:[3,0],sway:[.02,0],peek:[3000,40000],wC:[.35,.35],wS:[.65,.65],lim:[30000,30000],fast:[.8,.8],keep:[.6,.6]},
+ ve:{place:[.016,.14],tones:[5,3],ramp:[450,2600],dry:[400,30000],peek:[3000,40000],bleed:[.07,.03],flick:[420,420],holdMin:[40,40],reach:[1.1,1.5],wPlace:[.5,.5],wTone:[.4,.4],wClean:[.1,.1],lim:[7000,9500],limBase:[8000,10000],fast:[.5,.7],keep:[.6,.8]},/* mg-craft-ve «Thủy mặc» [ease 0, ease 5]: place = hit radius, share of the scroll width · tones on the stone · ramp = ms for the brush to pass every tone · dry = ms before the loaded brush pales one tone · peek = ms the master's sample stays unrolled (a tap re-opens it) · bleed = blot radius share · flick = ms a person takes to flick (bot oracle) · holdMin = ms a press counts as loading · reach = flick hit radius × the layer's radius · wPlace/wTone/wClean = score parts · lim/limBase = ms per motif / fixed · fast/keep = mgPace */
+ hoa:{ghost:[0,1],cutTol:[.06,.15],angTol:[8,20],alike:[3,0],sway:[.03,0]}});
+Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],holes:[2,2],size:[.11,.13],place:[.09,.17],peek:[4000,60000],alike:[2,0],lim:[30000,50000],extra:[.4,.4]});
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
    condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
