@@ -35,13 +35,12 @@ J = {
       ("a short round embroidered silk capelet (not cloud-shaped, scalloped or pointed) over only the shoulders and upper chest, a jade clasp at the throat, with a beaded yoke over it: an airy open net of sparse pearls and small jade beads with tiny gold flower studs, lying flat from the throat over the WHOLE capelet,",
        "a short round embroidered silk capelet (not cloud-shaped, scalloped or pointed) over only the shoulders, OPEN at the front (never closing at the throat, never hiding the neck), with a beaded yoke over it: an airy open net of sparse pearls and small jade beads with tiny gold flower studs, lying flat over the WHOLE capelet,"),
       ("the robe closes only at the throat clasp, never buttoned down the front,", "the outer robe closes only at the sash, never at the throat or down the front,")]),
- 5: ("seasons4/s62_t5_XUAN_COMOI.txt", "Mùa Xuân · Thiết kế hiện tại · Phi · Vân kiên + cổ mở",
+ 5: ("seasons4/s62_t5_XUAN_COMOI.txt", "Mùa Xuân · Thiết kế hiện tại · Phi · 2 choàng vai + cổ mở",
      [("a layered silk brocade court robe of two or three visible layers,", "a layered silk brocade court robe of two or three visible layers with " + layer("a wide gold-embroidered band (the Phi edge)", "a slim gold-edged band", "the outer robe")),
-      ("an embroidered cloud collar (yunjian) over the shoulders with a scalloped gold-thread edge and a fringe of small gold tassels,",
-       "an embroidered cloud collar (yunjian) over the shoulders, OPEN at the front (its lobes rest on the shoulders and back, never covering the neck or the square inner neckline), with a scalloped gold-thread edge and a fringe of small gold tassels,")]),
- 6: ("seasons4/s62_t6_XUAN_COMOI.txt", "Mùa Xuân · Thiết kế hiện tại · Quý phi · 2 choàng vai + cổ mở",
+      ("(upper shorter, lower longer), never covering the neckline,", "(upper shorter, lower longer), open at the front, never hiding the neck,")]),   # SWAP56: t5 Phi now = the two layered short capes
+ 6: ("seasons4/s62_t6_XUAN_COMOI.txt", "Mùa Xuân · Thiết kế hiện tại · Quý phi · Vân kiên + cổ mở",
      [("a HEAVY silk brocade robe in SATURATED ice blue silk,", "a HEAVY silk brocade robe in SATURATED ice blue silk with " + short("a pearl-edged gold band", "slim, pearl-edged")),
-      ("both resting on the shoulders, pearl-edged), never covering the neckline,", "both resting on the shoulders, open at the front, pearl-edged), never hiding the neck,")]),
+      ("with a scalloped gold-thread edge and a fringe of small gold tassels, pearl-edged, never covering the neckline,", "OPEN at the front (its lobes rest on the shoulders and back, never covering the neck or the square inner neckline), with a scalloped gold-thread edge and a fringe of small gold tassels, pearl-edged,")]),   # SWAP56: t6 Quý phi now = the vân kiên cloud collar
  7: ("seasons4/s62_t7_XUAN_COMOI.txt", "Mùa Xuân · Thiết kế hiện tại · Hoàng quý phi · Áo choàng ngọc + cổ mở",
      [("a near-empress ceremonial robe of ice blue silk,", "a near-empress ceremonial robe of ice blue silk with " + layer("a broad royal-yellow brocade band studded with pearls (the Hoàng quý phi edge)", "a slim gold-and-pearl band", "the outer robe")),
       ("a jewelled cloud-collar cape edged with pearls and gold over the shoulders,", "a jewelled cloud-collar cape edged with pearls and gold over the shoulders, OPEN at the front, never covering the neck or the square inner neckline,")]),
