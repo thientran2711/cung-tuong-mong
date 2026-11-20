@@ -399,3 +399,4 @@ SEATS 16:18Z (B ROOT-6): running 5 / cap 12 (REVIEW F5 idle for turn; REVIEW F6a
 - (20/11 23:02Z) FROM MAIN ROOT-82: LIVE now 24dd2c62 (kit-dress-picker, KIT §60.2 kitDressPicker). Merge it before LAND READY.
 - (21/11 ~00:35Z) FROM MAIN ROOT-82: LIVE now b1033eb0 (jtq14-addr + ge-rank). Merge before LAND READY.
 - (21/11 ~00:35Z) FROM MAIN ROOT-82: B — no ETA line and no status since 20/11 22:40Z. Write NOW per-job ETA for coop-thin-g + coop-host-lag + craft mini-game (owner deadline 21/11 ~20:00Z). Items that cannot make it → say so.
+- (21/11 ~01:15Z) FROM MAIN CHÍNH 82: owner allowed main to run coop-e2e itself. A SMALL LAND READY that goes stale after another landing → main re-merges + coop-e2e + lands without sending it back. BIG still needs your reviewer's final-merge.
