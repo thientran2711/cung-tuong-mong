@@ -70,9 +70,9 @@ function mg2On(){try{return typeof agOn==="function"&&agOn()&&!!(BAL.ag&&BAL.ag.
 function mgWith(o,f){const k=MGX.o;MGX.o=o;try{return f()}finally{MGX.o=k}}
 function mgMedD(d){const P=BAL.ag.mg2.med;d=+d||0;let i=0;while(i<P.length-2&&d>P[i+1][0])i++;const [a,ma]=P[i],[b,mb]=P[i+1];return cl(ma+(mb-ma)*(d-a)/(b-a),0,10)}
 function mgNpcTier(kind,p,o){o=o||{};return mgTier(kind,{occ:o.occ,big:!!o.big,rank:o.rank!=null?o.rank:mgRankOf(p),lv:o.lv,p})}
-function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||Math.random,u=(r()+r()+r())/3;MGX.n++;if(o.lv==null&&p&&typeof p==="object"&&p!==S&&typeof mgOrgLv==="function"){const ol=mgOrgLv(p,kind);if(ol){let v=0;try{v=kg82LvFor(p,kind)}catch(e){}if(ol>v)o.lv=ol}}/* upbringing start bậc (OD 20/11 ~01:50Z): her board as the player's, whose arts hold it */
+function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||Math.random,u=(r()+r()+r())/3;MGX.n++;const H=BAL.ag.mg2.hand;if(H&&H.on&&o.lv==null&&p&&typeof p==="object"&&p!==S&&typeof mgOrgLv==="function"){const ol=mgOrgLv(p,kind);if(ol){let v=0;try{v=kg82LvFor(p,kind)}catch(e){}if(ol>v)o.lv=ol}}/* upbringing start bậc (OD 20/11 ~01:50Z): her board as the player's, whose arts hold it; part of the hand rule, so off with BAL.ag.mg2.hand.on = 0 (rv) */
  const d=o.d!=null?o.d:mgNpcTier(kind,p,o).d;
- const H=BAL.ag.mg2.hand;if(H&&H.on&&p!==S){/* AG-ALL-2d HAND CEILING: a roll under her own ceiling (her hand + her art / upbringing lift, mgHandEff), then the board's ease (the same gap shift the player's board gives) */
+ if(H&&H.on&&p!==S){/* AG-ALL-2d HAND CEILING: a roll under her own ceiling (her hand + her art / upbringing lift, mgHandEff), then the board's ease (the same gap shift the player's board gives) */
   const c=mgHandEff(kind,p,o);return cl(Math.round(c-(1-u)*H.w+(mgMedD(d)-mgMedD(0))),0,10)}
  return cl(Math.round(mgMedD(d)+(u-.5)*BAL.ag.mg2.w),0,10)}/* o.d: a known gap (no person: the matching level 0) */
 /* ===== AG-ALL-2d · MINIGAME HAND CEILING (owner OD 17/11 ~16:00Z L1640, verbatim key words: "tất cả NPC đều phải có một cái mức trần chơi game, rồi
