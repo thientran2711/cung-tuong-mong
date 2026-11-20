@@ -40,7 +40,7 @@ const [,,URL,NL,RO]=process.argv;const N=+NL||20;const ROADS=(RO||'pt_hai,pt_su,
       for(const [lab,F] of [['no flag',{}],['all flags',allOn]]){const P=x=>x.o.o==null?100:(typeof x.o.o==='function'?x.o.o({f:F,sc:0,act:{},q97:{p:0,b:0}}):x.o.o);
        for(const X of xo)for(const Y of xo){if(X===Y)continue;const px=P(X),py=P(Y);
         if(px>=py&&X.c<=Y.c&&X.fk>=Y.fk&&X.wk>=Y.wk&&(px>py||X.c<Y.c||X.fk>Y.fk||X.wk>Y.wk))res.dom.push(id+'.'+bk+' ['+lab+'] «'+X.n+'» p'+px+' cost'+X.c.toFixed(1)+' fail'+X.fk+' beats «'+Y.n+'» p'+py+' cost'+Y.c.toFixed(1)+' fail'+Y.fk)}}
-      res.xrow.push(id+'.'+bk+': '+xo.map(x=>{const P0=x.o.o==null?100:(typeof x.o.o==='function'?x.o.o({f:{},sc:0,act:{},q97:{p:0,b:0}}):x.o.o);return '«'+x.n.slice(0,34)+'» p'+P0+' cost'+x.c.toFixed(1)+' '+x.wk+'/'+x.fk}).join(' | '))}
+      res.xrow.push(id+'.'+bk+': '+xo.map(x=>{const P0=x.o.o==null?100:(typeof x.o.o==='function'?x.o.o({f:{},sc:0,act:{},q97:{p:0,b:0}}):x.o.o);return '«'+String(typeof x.n==='function'?x.n({f:{},sc:0,act:{},q97:{p:0,b:0}}):x.n).slice(0,34)+'» p'+P0+' cost'+x.c.toFixed(1)+' '+x.wk+'/'+x.fk}).join(' | '))}
      if(vs.length>1){const mx=Math.max(...vs.map(x=>x[0])),mn=Math.min(...vs.map(x=>x[0]));if(mx-mn>SPREAD)res.spread.push(id+'.'+bk+' spread '+(mx-mn).toFixed(1)+' '+vs.map(x=>x[1]+'='+x[0].toFixed(1)).join(' | '))}}
     for(let t of txt){if(typeof t==='function'){try{t=t({act:{},f:{}})}catch(e){t=''}}/* r2: text functions (place-aware lines) are checked too */if(typeof t!=='string')continue;const s=t.replace(tok,'');if(/[0-9%]/.test(s))res.typed.push(id+': '+t.slice(0,60));let m;tok.lastIndex=0;while((m=tok.exec(t)))if(!known.has(m[1]))res.tok.add(m[1])}}
    res.tok=[...res.tok];out[r]=res}
