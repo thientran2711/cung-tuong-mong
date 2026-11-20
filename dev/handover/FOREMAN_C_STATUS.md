@@ -271,3 +271,4 @@ ROOT-65 Lượt 985 ~03:45Z: F3 c06 THU trial (gen tCR4nH2mZJ cut BhNJ2ShoQR, 13
 ROOT-65 Lượt 986: OWNER "Gửi hình phòng đợt 1" → resent rooms 31–35 as 5 separate labelled crops. Next Lượt 987.
 ROOT-65 Lượt 987: OWNER verbatim "Làm thử cô đó màu hạ xem" → PR19 (F3 at roll) GO: c06 HẠ trial, F3 recipe, 1 gen ~138 cr, sheet CŨ|THU|HẠ. Next Lượt 988.
 ROOT-65 Lượt 988: OWNER verbatim "Sàn phòng đợt 1 còn rộng quá, ảnh 1 ok, 2 loại, 3 sàn rộng, 4 rộng. 5 ok" → 31 OK, 32 loại, 33/34 floor too wide, 35 OK. PR19 records; recipe fix (less floor) prepared, redraw 32–34 asked (~405 cr). Next Lượt 989.
+ROOT-65 Lượt 989: OWNER verbatim "Khi tao nói loại là tự động vẽ lại đi không cần hỏi" → rule A30 added (loại = auto redraw 1 try). PR19 GO room 32 redraw (~135 cr, less floor). 33/34 sàn rộng still asked. Next Lượt 990.
