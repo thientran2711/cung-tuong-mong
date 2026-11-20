@@ -158,3 +158,7 @@ Left, in order:
 3. Reruns: f3 f3s f4 f4s f5 f5s, g4 g4s (+ TW / HIRE lines for g4s Danh +3), e2e e2es e2e0 (bot changed), cyc + cycs once more.
 4. ow seeds 1–10, role-parity alone, perf `MONTH=1 CPU=4 node dev/test/coop-thin-g-perf.js <W> 13`, build_site + commit + `bash dev/tools/quickcheck.sh`, week-31 staff transient (`TRIP=1 WEEKS=36 node dev/test/coop-thin-g.js <W> 13`).
 5. LOOK Fold 755x1000@2 + iPad 1180x820@2 at the week turn (scratch only), '## Done' (moved / retired rows 1–16, seat-guard 29 sites, tests table, perf, leftovers for H incl. the giau pre-existing red and item 2's L ≤ 12 note), merge newest origin/main, CLAIMS 'SẴN SÀNG KIỂM <sha>', send_message Foreman B. FOR MAIN: Worker THINMAX 13 deploy at landing.
+
+## #5 progress — worker session_01N1tNP5Wy7doJg2EzqJMECh (opus), depth 2 (limit 8); START_CTX ≈ 5 % of 1M → rollover ≈ 30 %, ceiling 60 %
+PRIORITY #1 CHECK ('kgDefer coop-thin|gG snapSave used|coop-night THIN 13'): OD 0 new | ledger 0 | main 8cf6b7d7: no G | review/* none for G (coop-staff-split = other B worker, not my files) | claims CLAIMS:443 (this worker).
+- d476d3b9 merge origin/main 8cf6b7d7 (pushed): conflicts = mg-back r3 kgDefer (main) vs F5/F6b game splits (G branch) in j23 lessonMode, j83 wkPractice, jrcp teacher lesson, jveil vlCraftRun, jsgame sgServ, jtoil toilFinShow → main's deferred charge kept around the split game part (kgDefer(pay,()=>vlCraftGame(m)) etc.; in her context on the host the captured game opens nothing → kgDefer charges at once, as before). undef-scan PASS; mg-back 755x1000 PASS 12/12.
