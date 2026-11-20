@@ -64,3 +64,25 @@ Hán colours (ice blue #71B5D7/mint mist → plum #DF9ED9/blush pink) were swapp
 2. **Bell fix (copy what works in t7/đông, keep HH's own item):** pose → "weight on one leg, a gold lidded jewel casket with a phoenix and pearls held low at her side in one hand, with stately grace, the robe hem swaying gently" (t7 structure). ANGLE → t7's clear THREE-QUARTER sentence. Add the đông guard "slim and close to the body, never bell-wide, never flared". (Pose/angle are per-rank store slots, so this needs the owner's yes.)
 3. **Empress signs back:** header "(the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks)"; "slim tall silhouette"; "the Empress's long royal golden yellow silk shou hung with large jade rings"; "many long strands of pearls and jade"; replace the HQP ladder words in the HH outfit ("near-empress", "one step richer than the Quý phi's", "LONGER … than the Quý phi's") with the HH words ("the Empress's Han-dynasty grand ceremonial dress", "the richest of all", "the LONGEST fringe of all ranks"). Shape/cut/vân kiên stay = HQP (owner L1515).
 4. Same bell guard (2) is worth applying to every HH t8 set that still has the store pose (thu_comoi v8 FULLY FRONTAL), only on the owner's word.
+
+# Job 4 — owner L1529: copy what the ORIGINAL/rules say (phoenix + Empress rank words) — 0 gens
+Files: dev/art/seasons4/s62_t8_HAN_BAC_open8.txt (+.keep, base = _open7 as edited by C #11 a99b9c1) and s62_t7_HAN_BAC_open7.txt (+.keep, base = _open6). Angle / pose / colour NOT touched (owner).
+## t8 HH open8 (9983 chars) — changes (phrase → phrase)
+- header "Outfit (the Empress (Hoàng hậu),):" → "Outfit (the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks):" (store)
+- "an empress Han ceremonial look in TWO visible robe layers like the Phi's, one step richer than the Quý phi's brocade, yet still light," → "the Empress's imperial phoenix ceremonial robe, a Han-dynasty grand ceremonial dress in TWO visible robe layers like the Phi's, FABRIC the richest of all, yet still light," (store "imperial phoenix ceremonial robe" + HH open6 words)
+- "+ its woven gold DENSER and its royal yellow larger than the Hoàng quý phi's" after "never stiff, thick or puffed" (HH open6)
+- "the robe body densely embroidered ALL OVER (not only the borders) with many LARGER spring flowers spread over the whole garment, clearly more embroidery than any palace maid in gold thread;" → "the robe body and quju densely embroidered ALL OVER with the LARGEST motifs of all ranks: large phoenixes, incurved chrysanthemums and clouds in gold and kingfisher-blue silk thread (far denser than any other rank);" (store t8 motif words as the store prints them today; ladder_base had "peonies")
+- shou → "the Empress's long royal golden yellow silk shou hung with large jade rings falling to the hem, a jade-and-gold belt and two long zupei;" (HH open6)
+- fringe "its LONGER … (longer than the Quý phi's tassels)" → "the LONGEST pearl-and-gold drop fringe of all ranks" (HH open6)
+- "with strands of pearls" → "with many long strands of pearls and jade" (HH open6)
+- "+ slim tall silhouette;" before the crown (store)
+- + store sentence "The phoenix is the main embroidered motif, larger and more prominent than the flowers." (before S04 "All flowers, birds and the phoenix…")
+- + store sentence "GRACE (pose variety, every rank its own): her chin lifted just a little, her neck long and elegant." (after ANGLE, its store place)
+- + store words "; elegant, slim, clearly adult" at the end of the "gentle expression…" sentence
+- TRIMS (boilerplate duplicates, to fit 10 000): ", lips closed, no teeth, mouth never open" (dup of MOUTH FULLY CLOSED sentence); "and the hand really grips it" (dup of "EXACTLY ONE held item, the hand really gripping it"); "the whole face fully visible with" + "nothing covering the face" (dup of "The whole face clearly visible"); "; the royal yellow in the robe is exactly that colour" (dup of the yellow hex rule, = t7's shorter image-2 line); "clearly more embroidery than any palace maid" (covered by "far denser than any other rank").
+- Cut / shape / layers / fabric / borders / cuffs / hem / vân kiên shape = HQP open6 unchanged.
+## t7 HQP open7 (9941 chars)
+- "densely embroidered ALL OVER (not only the borders) with many LARGER spring flowers" → "… with phoenixes, incurved chrysanthemums and auspicious clouds in gold thread on the chest and along the borders, and many LARGER spring flowers" (store t7 outfit words verbatim; store t7 has no separate "main motif" sentence, so none added)
+- TRIMS: ", lips closed, no teeth, mouth never open" (dup); item sentence "and the hand really grips it", "the whole face fully visible with", "eyes open, lips closed,", "nothing covering the face" (dups).
+## Checks
+keep_check --sidecar PASS both (t7 5 allowed, t8 16); --all 183 PASS; check_store = same pre-existing FAIL set as base (B12, S07), no new fails.
