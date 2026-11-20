@@ -460,7 +460,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW kit-rows-b (sonnet small) of 6ce984a6 | review/kit-rows-b-rv; reports/rv-kit-rows-b.md | MAIN ROOT-78 | session_01Rc5AsMLiYk8Qo5FC3nWVM1 | PASS 92f61247 | 20/11 |
 | REVIEW podium-wire r1 (opus BIG) of 02db04af | review/podium-wire-r1 | B | session_01N1tNP2KN32mTra7iVBwtPR | PASS d6868a02 (lv[0] 20->11; owner flags: sister on her house kcPow, grudge foul on her) | 20/11 |
 | MAIN ROOT-79 (opus; child of ROOT-78, depth 8 LAST) | handover HANDOVER_SESSION9 | ROOT-78 | session_01Rc5AsMT6GWGyV9SHc2vgNi | RUNNING | 20/11 14:06Z |
-| REVIEW ge-npc r1 (opus BIG) of a28b107f | review/ge-npc-r1 | B | session_01N1tNP6UyqC6o8nnNuZC3Sj | RUNNING | 20/11 14:04Z |
+| REVIEW ge-npc r1 (opus BIG) of a28b107f | review/ge-npc-r1 | B | session_01N1tNP6UyqC6o8nnNuZC3Sj | PASS c925183e (contains LIVE 983a9436) + 2 FLAGS (NPC world-changing summits; kit person column) — reports/ge-npc.md REVIEW r1 | 20/11 16:25Z |
 | ge-batu r2 fixes (opus E28b; E28r FAIL e0424d54, FIX LIST 1–9) | review/ge-batu; briefs/E28b-ge-batu-r2.md | FOREMAN E #19 | session_01DgYSWq3hb2D3NEYyra3aF3 | PASS 1ca835da (E28r r2) → LAND READY a99673e8; ARCHIVED | 20/11 15:20Z |
 | kit-opt-text KIT KEEPER (sonnet; KP14) | review/kit-opt-text; reports/kit-opt-text.md | MAIN ROOT-79 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 39faf7c0 | 20/11 |
 | REVIEW kit-opt-text (sonnet small, KP14) of 39faf7c0 | review/kit-opt-text-rv; briefs/rv-root79-kit-opt-text.md | MAIN ROOT-79 | session_01Rc5AsMSxpxbsAMRSE5oWrq | PASS 9f673ab2 → LIVE eb11e2ad | 20/11 14:58Z |
