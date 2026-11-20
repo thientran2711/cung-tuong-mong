@@ -220,11 +220,13 @@ APPROVED = [{'id': 'W01', 'title': 'WINTER FUR Lông 1 t1-t3 (G26)', 'text': "WI
  {'id': 'S14',
   'title': 'HOÀNG QUÝ PHI LUXURY t7',
   'text': 'HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), pearl and jade trims along '
+  'text': 'HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), a layered pearl-and-gold necklace, pearl and jade trims along '
           'the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress.',
   'scope': 'tp7 pr7',
   'confirm': '',
   'ages': '',
   'luot': '486 (G12); A41 owner Lượt 1411 (no necklace for anyone): "a layered pearl-and-gold necklace, " removed (B26FAB4, Foreman C #8)',
+  'luot': '486 (G12)',
   'source': 'dev/art/store-all/build_all.py HQP_LUX',
   'proof': 'dev/art/approved/proof/c06_t7_a18.txt',
   'picture': 'HQP c20 pearls (skin) · gen 0eUXPSZTfW · cut xSBwv6vjfW · https://ctm-img.victoria-tntt.workers.dev/img/_keep/skins-1119/c20_hqp_pearls.png',

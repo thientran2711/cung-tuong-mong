@@ -512,6 +512,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-week-stall (opus; pre-existing LIVE: late room snapshot rolls seat back, week end not sent ~1/8–14 coop-e2e) | review/coop-week-stall | B | session_01N1tNP6if7E7NXcFKwJ6yR5 | RUNNING | 20/11 19:48Z |
 | rv-kit-e-rows REVIEWER (sonnet; small kit) | review/kit-e-rows-rv (none pushed); reports/rv-kit-e-rows.md | MAIN ROOT-81 | rv-signs session | DONE FAIL dd2e0fe1 | 20/11 19:47Z |
 | FOREMAN E #22 (opus; child of E #21, depth 3) | handover FOREMAN_E_STATUS | FOREMAN E #21 | session_01DgYSWkbUPtieeBFfn8grWT | DONE → E #23 session_01DgYSWm5qy3Y59fKkn6eSf7 | 20/11 19:49Z |
+| FOREMAN E #22 (opus; child of E #21, depth 3) | handover FOREMAN_E_STATUS | FOREMAN E #21 | session_01DgYSWkbUPtieeBFfn8grWT | RUNNING | 20/11 19:49Z |
 | REVIEW phutang-road r3 gates (BIG opus E21r3; successor of E21r2 @8880b092) of e744d428 | review/phutang-road | FOREMAN E #21 | session_01DgYSWpKX4nyEMXAD8mxYaS | RUNNING | 20/11 19:53Z |
 | FOREMAN E #21 (opus; child of E #20, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #20 | session_01DgYSWpNbcJyCoGaB1FhLFq | RUNNING | 20/11 18:55Z |
 | kit-cost-rows-home KIT KEEPER (sonnet; ROOT-80 order) | review/kit-cost-rows-home; reports/kit-cost-rows-home.md | MAIN ROOT-80 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 3332c63b | 20/11 |
@@ -519,6 +520,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | rv-kit-cost-rows-home REVIEWER (sonnet; small kit) | review/kit-cost-rows-home-rv; reports/rv-kit-cost-rows-home.md | MAIN ROOT-80 | rv-signs session | DONE PASS 3332c63b | 20/11 19:10Z |
 | rv-kit-bgtone REVIEWER (sonnet; small kit) | review/kit-bgtone-rv; reports/rv-kit-bgtone.md | MAIN ROOT-80 | rv-signs session | DONE PASS fe6432c0 | 20/11 19:27Z |
 | PARKING #11 dresscode SEASON + COLOUR DRESS CODE (opus E30; ORDER MAIN 19:05Z; expert pass first OD:L1327) | review/dresscode; reports/dresscode.md | FOREMAN E #20 | session_01DgYSWnviLqLryPXMXj3CnP | RUNNING | 20/11 19:10Z |
+| PARKING #11 dresscode SEASON + COLOUR DRESS CODE (opus E30; ORDER MAIN 19:05Z; expert pass first OD:L1327) | review/dresscode; reports/dresscode.md | FOREMAN E #20 | session_PENDING_E30 | RUNNING | 20/11 19:10Z |
 | REVIEW dresscode r1 (BIG opus E30r; brief briefs/E30r-review-dresscode.md) of 459a91bf | review/dresscode; reports/dresscode-review.md | FOREMAN E #22 | session_01DgYSWpTexpKL6eD2PDxGZS | FAIL 459a91bf (14 fixes, reports/dresscode-review.md; merge on LIVE = review/dresscode-r6 b840116f) | 20/11 20:18Z |
 | B RE-GATE LANDER (opus; final-merge B PASS branches onto newest LIVE, LAND READY lines) | <branch>-land | B | session_01N1tNP4Whxd4Rssp5BqhJvD | RUNNING | 20/11 20:19Z |
 | GAP MG11 mg11-thutay (opus; ORDER MAIN ROOT-79 16:25Z; reuse mg-allkinds scan; jkc2 envoy chess, pet care, plant care, mưu kế → Thử tay hand b) | review/mg11-thutay; briefs/b-mg11.md | B | session_01N1tNP6gfoaarxkj8jTD5Aw | SẴN SÀNG KIỂM ef94ad20 (38 kinds; mg-allkinds 12/12, ag-mgcal ok, mg-ready-guide 9/9, quickcheck PASS; report reports/mg11-thutay.md) | 20/11 21:20Z |
@@ -535,3 +537,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW home-chapters r2 re-merge E25r2 (opus BIG; successor of E25r; handover reports/home-chapters-review.md «HANDOVER (E25r → E25r2)») | review/home-chapters* | FOREMAN E #23 | session_01DgYSWoGroauPy7gr26dtfY | WAITING GO (co-op check prep) | 20/11 21:33Z |
 | REVIEW coop-guest-agent r1 (opus BIG) of 60ff8f11 | review/coop-guest-agent-r1 | B | session_01N1tNP34YLAbVuMi631JPUN | RUNNING | 20/11 22:03Z |
 | REVIEW ge-rank r1 E35r (opus BIG) of c5ebab9a | review/ge-rank-r1; reports/ge-rank-review.md | FOREMAN E #23 | session_01DgYSWp7SnXwAmHQzVR8omH | RUNNING | 20/11 22:05Z |
+| coop-guest-agent (opus; agOn() false on co-op guest → guest's own servants skip agent month; found by G #7) | review/coop-guest-agent; briefs/b-coop-guest-agent.md | B | session_01N1tNP6ULPfAUKCrZASGHHM | RUNNING | 20/11 20:32Z |
+| REVIEW mg11-thutay r1 (opus BIG) of ef94ad20 | review/mg11-thutay-r1 | B | session_01N1tNP4zyqBbxbsY5JQ3jjJ | RUNNING | 20/11 20:58Z |
