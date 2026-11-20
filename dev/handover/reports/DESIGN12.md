@@ -50,3 +50,11 @@ Trimmed duplicate boilerplate (allow lines) to fit 10 000: late hairpin sentence
 Chars: t4 9751 (base 10032), t5 9678 (9946), m02_t7 9777 (9996), m02_t8 9994 (10370) — all ≤ 10 000 now.
 Proof: keep_check --sidecar PASS ×4, --all 110 PASS. check_store vs base: t4 one FAIL fewer (LEN fixed), t5 same; m02_t7 +W03 REWRITTEN, m02_t8 +W03 REWRITTEN (LEN fixed) — W03 = the approved t7/t8 fur sentence the owner asked to change (needs foreman W03 update).
 Not changed: s62 t6/t7/t8 _vk keep the longer fur wording from part 1 (t6 10259, t7 10571, t8 10566 > 10 000 — the same boilerplate trim + short fur form would fit them; say if wanted).
+
+## Job 3 part 3 (C #9, owner L1442: HH keeps 2-TIER collar; trim t6–t8)
+Rebuilt from current bases (pulled): dong_hientai/s62_t6, s62_t7, s62_t8, m02_t8 _DONG_HIENTAI_vk (+ fresh .keep).
+- t8 (s62 + m02): collar = thu_comoi/s62_t8_THU_COMOI_v8.txt 2-tier wording verbatim ("a jewelled cloud collar of two tiers … LONGEST fringe of all ranks … longer than the Hoàng quý phi's, never puffed, never bulky, OPEN at the front"), fur UNDER it. (A39: only the collar phrase replaced, base phrase is the older 2-tier v5 wording.)
+- t7: old compact cape (as part 1). t6: collar untouched.
+- fur short form on all four: "along the front edges below the <cloud collar | cloud-collar cape> down to the hem, the hem and her cuffs," + " The <piece> sits ON TOP of the fur; no fur on the shoulders or neck."
+- boilerplate trims (allow lines): late hairpin sentence, "NOTHING on the forehead (…)", "Luminous smooth porcelain skin … nothing covering the face." → short floor-length line; pose-tail duplicates ("and the hand really grips it", "eyes open, lips closed", "nothing covering the face") where needed; t7 "Everyone beautiful at every age."; t8 ", never copy anything but its colour".
+Chars: t6 9785, t7 9973, t8 9974, m02_t8 9993 (all ≤ 10 000). keep_check PASS ×4, --all 112 PASS. check_store vs base: t6 −LEN; t7/t8/m02_t8 −LEN +W03 REWRITTEN (owner-asked fur change). No cleavage wording in any đông _vk (A42 revoked L1442).
