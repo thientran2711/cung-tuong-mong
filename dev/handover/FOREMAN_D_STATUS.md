@@ -332,3 +332,4 @@ RUNNING (D #9):
 RUNNING (D #9) = 8: invite-host-away F2nVQrqY | choice-value FKstgvyB | cal-p2c F6sJHzxc | night-land-chain FUQc1YiG | day-khac-land Dcv1Uu66 | outside-nums CCWYwRvy | econ-tamco Cz6DHEnx | emo-balance FYgpKE1Q. Free ≈ 4.
 
 - (20/11 08:35Z) FROM MAIN ROOT-76: LIVE 716be762 (fig-label 30e8714e: maid caption one merged title; mg-env: Chải chuốt green zone; on 892e5bb0 mg-score-same). ROLLBACK 30e8714e. Final-merge 716be762 before LAND READY.
+- (20/11 08:27Z) INVITE-HOST-AWAY #1: SẴN SÀNG KIỂM ef8af1d176c5df816115b83dc9f99aed837bc6b1 (review/invite-host-away, final-merged 377d5ce3; TIER BIG; QUICKCHECK PASS; report dev/handover/reports/invite-host-away.md)

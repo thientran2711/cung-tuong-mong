@@ -54,3 +54,11 @@ Also existing and unchanged: j21 «rivals call at her palace» (callMe) already 
 ## STATUS / HANDOVER (if a successor picks this up)
 - Code + tests done and pushed on review/invite-host-away (HEAD ef8af1d1, final-merged origin/main 377d5ce3, index.html/sw.js rebuilt).
 - Remaining: coregates re-run result (append here), then the «SẴN SÀNG KIỂM <sha>» line here + at the end of dev/handover/FOREMAN_D_STATUS.md + send_message foreman.
+
+## Gates (final, on ef8af1d176c5df816115b83dc9f99aed837bc6b1)
+- The standalone coregates runs above were mis-invoked (coregates.sh needs the worktree/live/out args quickcheck gives it → empty paths). Proper run:
+  QUICKCHECK PASS · CORE GATES PASS (one-core-guard · rules-one-source · kit-conform · coop-one-world · hooks 6) · TIME-SPILL GUARD PASS · open 1283 ms · old save ok ·
+  perf median new/live: render 212/176 ms, tab 436/384, buổi 1210/1089, tasks>200ms 18/18 · total 326 s.
+- invite-host-away.test 8/8 · ptime2 ALL OK · ptime ALL OK except the pre-existing flaky check 5 (same flake on plain origin/main 377d5ce).
+
+SẴN SÀNG KIỂM ef8af1d176c5df816115b83dc9f99aed837bc6b1
