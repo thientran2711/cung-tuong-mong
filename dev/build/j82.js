@@ -431,7 +431,7 @@ window.startContest=startContest;window.playArt=playArt;
    spec: kind (KG82_KIND key) | n, t, how, e (own game), steps:[[label,text]] (rows instead of Luật), go (selector), timed (false = no clock in the game),
          tutor(box, env) → stop (a game with its own engine), v (the person an engine reads as env.v), lv (tutorial board ease). Returns true when dressed. */
 const KG82_DEMO={rhythm:"fall",aim:"swing",slapbar:"swing",groom:"swing",tspluck:"swing",tssteer:"swing",hold:"hold",tdwalk:"hold",cook:"hold",tdtalk:"hold",
- fling:"drag",calli:"drag",trace:"drag",arrange:"drag",untangle:"drag",tdthread:"drag",blend:"drag",sort:"drag",hoadien:"drag",kinh:"drag",may:"drag"};
+ fling:"pull",calli:"drag",trace:"drag",arrange:"drag",untangle:"drag",tdthread:"drag",blend:"slide",sort:"drag",hoadien:"drag",kinh:"drag",may:"drag"};
 const KG82_HAND=`<svg viewBox="0 0 48 56" aria-hidden="true"><path d="M20 4a4 4 0 0 1 8 0v20l2.5-.6a4 4 0 0 1 4.6 2.8l.4-.1a4 4 0 0 1 4.8 2.6 4 4 0 0 1 4.7 3.3l1 7.5c.9 7-3.4 13.5-10.2 15.3l-3.3.9c-5.6 1.5-11.5-.7-14.8-5.5L8.4 38.6a3.8 3.8 0 0 1 5.9-4.8L20 39z" fill="#fff8ea" stroke="#5a3a0c" stroke-width="2.2" stroke-linejoin="round"/><path d="M28 24v9M35 27v7M41 31v5" stroke="#5a3a0c" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>`;
 function kgReadySpec(s){s=typeof s==="string"?{kind:s}:Object.assign({},s||{});const K=(s.kind&&KG82_KIND[s.kind])||{};
  s.n=s.n||K.n||"";s.t=s.t||K.t||"";s.how=s.how!=null?s.how:(K.how||"");s.e=s.e||K.e||"";s.go=s.go||"#kg82go";s.timed=s.timed!==false;return s}
@@ -530,6 +530,15 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 .kgr-demo[data-m=hold] .kgr-hand{top:28%;animation:kgrHold 2.4s ease-in-out infinite}.kgr-demo[data-m=hold] .kgr-ring{animation:kgrHoldR 2.4s ease-out infinite}
 .kgr-demo[data-m=drag] .kgr-path{opacity:1;transform:rotate(-8deg);transform-origin:left center}.kgr-demo[data-m=drag] .kgr-hand{animation:kgrDrag 2.4s ease-in-out infinite}
 .kgr-demo[data-m=drag] .kgr-line{top:calc(52% - 1px);left:14%;right:auto;width:0;background:var(--ink);height:4px;transform:rotate(-8deg);transform-origin:left;opacity:1;animation:kgrInk 2.4s ease-in-out infinite}
+.kgr-demo[data-m=slide] .kgr-path{opacity:1;transform:rotate(90deg);left:36%;right:36%;top:50%}.kgr-demo[data-m=slide] .kgr-line{top:auto;bottom:12%;left:calc(50% - 2px);right:auto;width:4px;height:0;background:var(--good,#2d7a52);opacity:1;animation:kgrSlideL 2.4s ease-in-out infinite}
+.kgr-demo[data-m=slide] .kgr-hand{left:calc(50% - 2px);animation:kgrSlideH 2.4s ease-in-out infinite}
+.kgr-demo[data-m=pull] .kgr-obj{opacity:1;left:calc(30% - 11px);top:calc(72% - 11px);border-radius:3px;width:22px;height:8px;background:var(--bad,#c23b22);box-shadow:none;animation:kgrPullO 2.4s ease-in infinite}
+.kgr-demo[data-m=pull] .kgr-line{opacity:1;top:calc(52% - 1px);left:30%;right:auto;width:0;height:3px;background:var(--ink);transform:rotate(-45deg);transform-origin:left;animation:kgrPullL 2.4s ease-in-out infinite}
+.kgr-demo[data-m=pull] .kgr-hand{animation:kgrPullH 2.4s ease-in-out infinite}
+@keyframes kgrSlideH{0%,8%{top:70%}70%,100%{top:28%}}@keyframes kgrSlideL{0%,8%{height:0}70%,100%{height:42%}}
+@keyframes kgrPullH{0%,8%{left:46%;top:34%}55%,62%{left:28%;top:62%;transform:translate(-48%,-6%) scale(.92)}70%,100%{left:28%;top:62%;opacity:0}}
+@keyframes kgrPullL{0%,8%{width:0}55%,62%{width:22%}70%,100%{width:0}}
+@keyframes kgrPullO{0%,60%{left:calc(30% - 11px);top:calc(72% - 11px);opacity:1}100%{left:calc(80% - 11px);top:calc(12% - 11px);opacity:0}}
 .kgr-demo[data-m=tap] .kgr-obj{opacity:.25;top:calc(50% - 11px);left:calc(25% - 11px);animation:kgrGlow 2.4s step-end infinite}
 .kgr-demo[data-m=tap] .kgr-o2{left:calc(50% - 11px);animation-delay:.8s}.kgr-demo[data-m=tap] .kgr-o3{left:calc(75% - 11px);animation-delay:1.6s}
 .kgr-demo[data-m=tap] .kgr-hand{animation:kgrTap3 2.4s ease-in-out infinite}
