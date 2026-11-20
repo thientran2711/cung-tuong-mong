@@ -323,4 +323,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin G #2 (opus; successor of 4tAZPWV3 at 58d7ccb3) | review/coop-thin-g | B | session_01N1tNP64cNhXeETmhKekESy | RUNNING | 20/11 00:17Z |
 | FOREMAN E #14 (opus; child of E #13, depth 4) | handover FOREMAN_E_STATUS | FOREMAN E #13 | session_01DgYSWondh7NL1nHBy3F1eH | RUNNING | 20/11 00:34Z | PICKUP 00:40Z START_CTX ~6 %, wake trig_01YG2hz89tQYZqj582Wy3xro :47 |
 | REVIEW mg-ready-guide (sonnet SMALL UI/kit) of 230e5def + jmgcal save commit | review/mg-ready-guide; briefs/root72-rv-mg-ready-guide.md | MAIN ROOT-72 | session_01Rc5AsMEJ62t26ZVuDW44TB | RUNNING | 20/11 01:11Z |
-| mg-fair-hands (opus worker; MAIN ROOT-72 order, owner OD 20/11 ~01:10Z fair NPC hands) | review/mg-fair-hands; briefs/cag25-mg-fair-hands.md | C-AG #25 for ROOT-72 | (opening) | RUNNING | 20/11 01:14Z |
+| mg-fair-hands (opus worker; MAIN ROOT-72 order, owner OD 20/11 ~01:10Z fair NPC hands) | review/mg-fair-hands; briefs/cag25-mg-fair-hands.md | C-AG #25 for ROOT-72 | session_01Rc5AsMrfc2jsbTda4puXRG | RUNNING | 20/11 01:12Z |
