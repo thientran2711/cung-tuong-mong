@@ -51,3 +51,19 @@ Files: nhat_gpt_v5 (9 534 ch), tamdang_thancan_gpt_v2 (8 536), nhi_thancan_gpt_v
 (b) `tamdang_thancan_gpt_v3` (8 168), `nhi_thancan_gpt_v3` (7 695), `nhat_thancan_gpt_v3` (9 556) = v2 minus ONLY the L1545 extra outer layer (TC_EXTRA_VEST / TC_EXTRA_NHAT clause). Colour flip, square collar (tam strong words), nhất short tà + pink inner collar all kept.
 (c) K28 updated with rule.py set (--luot "L1542 + L1553"): "+ ONE EXTRA LAYER" dropped, L1553 owner verbatim cited.
 keep_check --sidecar PASS ×4; --all 212 PASS.
+
+## HANDOVER (MAIDP3 rolls over: context 37 % ≥ START 3 % + 25 %; depth 2) — all jobs DONE, idle
+Coordinator = Foreman C #13 session_01D3E3NZQZ3tznka9ZppefHM (opens the successor). Branch claude/cung-tuong-mong-handover-hj0h8w; last MAIDP3 commit 829586f.
+CURRENT maid ChatGPT files (dev/art/maid7/gpt/, each + .keep):
+- normal: tamdang_gpt, nhi_gpt_v2, nhat_gpt_v6
+- thân cận: tamdang_thancan_gpt_v3, nhi_thancan_gpt_v3, nhat_thancan_gpt_v3 (K28: colour flip + square collar, NO extra layer)
+- chưởng sự: chuongsu_gpt_v4 (= thancan_gpt_v4 outfit); ma ma: mama_gpt_v4_a51/_a65 (mama_v5 SUPERSEDED)
+Builder dev/art/maid7/make7_gpt.py — one function per file, swap() asserts each replacement once; jobs added by MAIDP3: nhi nhi2 thancan4 nhat4 chuongsu4 mama5_51/65 (dropped) tamdang_tc nhi_tc nhat_tc nhat5 tamdang_tc2 nhi_tc2 nhat_tc2 nhat6 tamdang_tc3 nhi_tc3 nhat_tc3. Shared pieces: tc_outfit(), swapcol(), sq_collar(), TAM_SQ_STRONG, NHAT_TA_NGAN2, NHAT_PLACE_NEW, NHI2_CROSSED, NHI2_TWO_TA, NHI_ONE_SLEEVE.
+Checks per file: keep_check --sidecar + --all; Counter word diff vs base; check_store --scope mama --age a18 is informational (maid files fail S01/S32 by scope, ma ma S19 upstream).
+OPEN: foreman never answered on the NHI2_TWO_TA clause (two short tà written from picture gOm5NnCSXO) — still in nhi_gpt_v2 and the nhị thân cận files.
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+NO HOURLY SCHEDULED TASKS (owner 20/11): never create one.
