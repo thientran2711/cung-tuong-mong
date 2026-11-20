@@ -395,7 +395,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | GAP GE08+GE09+GE10+OR19 ge-npc (opus; J4) | review/ge-npc | B | session_01N1tNP2MH8QedckaarkWVc2 | RUNNING | 20/11 08:21Z |
 | GAP IT05+KP03 palace-life-gaps (opus; J5) | review/palace-life-gaps | B | session_01N1tNP2d78pGcErwtE8UsCK | RUNNING | 20/11 08:21Z |
 | GAP KP02 map-places (sonnet; check review/places + places-port-r1 first; J6) | review/map-places | B | session_01N1tNP5RC6vRXez3u71oULJ | SẴN SÀNG KIỂM 6883c4feb (reports/map-places.md) | 20/11 |
-| GAP AP04 perf-ci (sonnet; J7) | review/perf-ci | B | session_01N1tNP2QsvPWxKEJb8JqVwa | RUNNING | 20/11 08:21Z |
+| GAP AP04 perf-ci (sonnet; J7) | review/perf-ci | B | session_01N1tNP2QsvPWxKEJb8JqVwa | DONE (SẴN SÀNG KIỂM 56d4c0a6) | 20/11 08:21Z |
 | GAP OD05+OD01+OD02+OD03 night land chain (opus; balance-core-r3 → night-final-r3 + giữ chân + môn ưa) | review/balance-core-r3, review/night-final-r3; briefs/D9-gap-jobs.md JOB 1 | D #9 for ROOT-76 | session_01964izFUQc1YiGuMjw5qYC7 | RUNNING | 20/11 08:24Z |
 | GAP OD07 day-khắc land (opus) | review/day-khac-audit-r2; JOB 2 | D #9 for ROOT-76 | session_01964izDcv1Uu66VaTiD7hZB | RUNNING | 20/11 08:24Z |
 | GAP OR11+OR12 outside-route numbers (opus) | review/outside-nums (or kc2val-home-r1); JOB 3 | D #9 for ROOT-76 | session_01964izCCWYwRvyU2FTazDMZ | RUNNING | 20/11 08:24Z |
