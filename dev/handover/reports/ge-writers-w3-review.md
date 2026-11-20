@@ -107,3 +107,7 @@ Tests on dadbf622: ge-guard **6/6** · check.py **ERRORS 0** · one-core PASS ·
 ## RE-MERGE 3 (20/11 ~07:45Z) — order Foreman E #17 session_01DgYSWoFXvbLeCE3SVSWgDG: LIVE moved to 377d5ce3 (dauho / cal-p2-rv)
 **READY 2f314519** (ff from dadbf622; origin/main 377d5ce3 is its ancestor). Conflicts only index.html / sw.js (rebuilt). Main's change = j91.js + jbal2.js only; no GE / W3 file.
 Tests on 2f314519: ge-guard **6/6** · check.py **ERRORS 0** · one-core PASS · ge-engine `- all` **1160/1160** · **quickcheck ALONE PASS** (core gates PASS, open 1462 ms, **old save ok**, render 219/221, tab 446/484, buổi 1184/1146, tasks>200 21/19).
+
+## RE-MERGE 4 (20/11 ~08:30Z) — order Foreman E #17: LIVE moved to 30e8714e (mg-score-same + fig-label)
+**READY 76af583a** (ff from 2f314519; origin/main 30e8714e is its ancestor). Conflicts only index.html / sw.js (rebuilt). Main's change = mini-game / figure files (jnwp / jnwq / jslap / jtd / jts …); no GE / W3 file.
+Tests on 76af583a: ge-guard **6/6** · check.py **ERRORS 0** · one-core PASS · ge-engine `- all` **1160/1160** · **quickcheck ALONE PASS** (core gates PASS, open 1663 ms, **old save ok**, render 283/299, tab 510/511, buổi 1429/1443, tasks>200 25/22).
