@@ -84,3 +84,23 @@ Faults (no redo): hanghai BACK jumps to a new pose (big raised fist, other arm c
 back — I looked, confirmed · tutin OUT strong zoom, BACK arm cut bottom-left · ghen OUT hands + handkerchief below the bottom edge, BACK
 handkerchief falls out · vui/so/lo OUT size jumps · an LOOP mist near the side edges · buon LOOP almost still. Clean: binh, muu.
 Credits tv set: 30 900. Balance at end 183 904 (shared). Ledger +50.
+
+## SET tg (20/11 ~00:27Z) — palace eunuch, 10 seals, sub-agent
+| seal | A used | B used | OUT | LOOP | BACK | fr out/loop/back | OUT start |
+|---|---|---|---|---|---|---|---|
+| vui | KLpWs9xkqp | cpSrdB50eP | xSBV7JXjfW | gOmd4NZSXO | aFG6bkHfSh | 44/60/58 | 1.1 s |
+| buon | 79f8Nc6JAL | rgXTUJaxtc | If3yuHYtvE | vQANqkua47 | P3Qh2nl42C | 45/60/28 | auto |
+| so | YMlkDfSWeC | 5jDYsh6Kxe (flat of 3zKuYVTREY) | DoOltfOpcl | 0eUxBhKTfW | jUoMOjELD0 | 54/60/45 | auto |
+| an | jUoMw1ILD0 (flat of N2qfAXf6D9) | KLpWlJbkqp | w4ao3JC7EI | DoOlhd1pcl | 4RFvz6y9Aa | 52/60/48 | auto |
+| binh | ksecl5D16B (flat of EbYR5O3uuO) | ov6JfcO829 (flat of Cqn35sxEEy) | Lw8DPSpswO | gOmdNJPSXO | MBJsmXPDCm | 44/60/46 | 1.1 s |
+| ghen | tCRPqWWmZJ (flat of ksecwEN16B) | SyhXiL4Ub8 | rgXTPS5xtc | dt4UuhyXSL | ksecOST16B | 42/60/43 | auto |
+| lo | MBJsmzxDCm | JNCI2UfOq4 | w4ao2iH7EI | MBJsamNDCm | Xm9wQEyBfo | 48/60/54 | auto |
+| muu | hu29bX5vqL | O6EtGkRynm (flat of SyhXiSiUb8) | nVsKoBKYQD | bxMnwJz5Y2 | iG5EMlC3uK | 48/60/47 | 0.8 s |
+| tutin | lJte913gv9 | Lw8D9uNswO (flat of rgXTyjMxtc) | jUoMNEVLD0 | 5jDYJhJKxe | hu291DCvqL | 47/60/47 | auto |
+| hanghai (coral) | ksecwHR16B | DoOladKpcl | 1ld0PCar4r | ov6Jq0g829 | rgXT4QRxtc | 46/60/60 | 1.0 s |
+CDN: tg-<k>-*.webp, still/tg-<k>.webp, tg-<k>-frames.jpg, tg-set-preview.mp4.
+Faults (no redo): so OUT fr 4–17 lunges far out with flailing arms, hands past the side edges, then snaps back (I looked: confirmed; purple
+face = fear tint) · ghen BACK pink handkerchief falls off the bottom edge · hanghai LOOP big bounces, energy lines near the edges, BACK opens
+with a jump-up; coral disc reads quite red · vui OUT size jump · buon BACK short (28 fr). Clean: an binh lo muu tutin.
+The eunuch hat has a red knob/cord on top in every seal (F14 Qing look, see above).
+Credits tg set: 30 900. Balance at end 182 964 (shared). Ledger +50.
