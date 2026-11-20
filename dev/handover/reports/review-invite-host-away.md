@@ -51,3 +51,13 @@ Final merge: review/invite-host-away-rv @ a797336e71fc46a537f402331d728ce1c3f3be
 
 ## Next
 Worker fixes item 1 on review/invite-host-away (+ test case), final-merges current origin/main, SẴN SÀNG KIỂM again; a re-review can reuse review/invite-host-away-rv.
+
+## RE-CHECK #2 (20/11 ~10:10Z) — review/invite-host-away @ 252ef6bad145891ddcffff0a3e371f0fcf75805a
+VERDICT: **PASS 69e06387a21593e189e34a81e8fd738e7571c9dd** (review/invite-host-away-rv = 252ef6ba + final-merge of CURRENT origin/main fd682a8d; FF of origin/main; index.html/sw.js rebuilt).
+- FAIL 1 fixed: jptime iwCoop(p) — iwAdd returns null when host or guest is a co-op seat (her invite, NPC host ↔ her, NPC↔NPC, all via rcvInvAt); iwTick drops any old-save coop entry.
+  New test I (friend as guest + friend as host: no wait, no roll, no loss, no notice) → INVITE-HOST-AWAY 9/9.
+- Diff vs main = only jptime §4b, BAL.invite.wait, the test, arrive-scan, PROGRESS (+ build). No regressions in the reviewed points (owner points (1)-(5), laws 1/4/6/7/9/11).
+- Gates on 69e06387: QUICKCHECK PASS (open 1699 ms · old save ok · perf new/live render 270/263, tab 544/481, buổi 1387/1470, tasks>200ms 22/21 · core gates PASS) · invite-host-away 9/9 · ptime2 ALL OK · ARRIVE-SCAN OK 17 kinds.
+- ptime.test: flaky checks 4 / 5 / 11 fail at random on BOTH branch and plain main (main fd/66bd: 5×2, 11×1, 4×1 in 9 runs). Check 11 was instrumented on the branch: its failures
+  (spy / poison order «left:1») happen with S.invW EMPTY (no waiting guest) → not caused by this branch; pre-existing flake → FOR MAIN (de-flake ptime.test 4/5/11).
+- role-parity 2 FAIL unchanged and pre-existing (see above) → FOR MAIN.
