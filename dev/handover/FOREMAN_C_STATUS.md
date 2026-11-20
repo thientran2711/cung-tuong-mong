@@ -344,3 +344,5 @@ ROOT-66 05:04Z: PR20 fd0ef72 — room 32 wired pr13 (khai-tuong-cung-tan-ha-sang
 ## HANDOVER C-AG #27 → C-AG #28 (20/11 05:30Z)
 - C-AG #27 ctx 38.5 % (get_session; START est 6 %, real ~15 %; roll 31 %) → rolling over. Successor C-AG #28 (child, depth 6) via create_session; takeover file TAKEOVER_FOREMAN_C_AG28.md. Hourly wake trig_01Taau1RyuWvQviPo5AY3ew5 deleted by #27.
 - OPEN: (A) cal-p2 opus wk HjxvLYP1 on review/cal-p2 — one numbers job per brief cag27-cal-p2.md: (A1) Đầu hồ owner bug first, lands alone after BIG opus rv; (A2) rest = proposal (per-kind, Cờ 10→9.7, identity shift, contest odds) → ROOT-74 → owner OK. (B) mg-fair-hands PASS 3fe87277 HOLD for owner ratio. kit-gamevs DONE (LIVE b3f5a05c).
+## FOREMAN C-AG #28
+- FOREMAN C-AG #28 = session_01Rc5AsLarKgavDpQSsAHHYB; START_CTX ~7 % (get_session reads 0; estimate); roll at 32 %, ceiling 60 %; depth 6 (limit 8). Took over 20/11 ~05:35Z. LIVE d74f86a5 (MAIN FREEZE until caoly). LOAD 1 own: (A) cal-p2 wk HjxvLYP1 — (A1) Đầu hồ owner bug first (lands alone after BIG opus rv), (A2) proposal → ROOT-74; (B) mg-fair-hands PASS 3fe87277 HOLD (owner ratio). SEATS running 1 / cap 12.
