@@ -572,3 +572,4 @@ NEWACCT#2 ~17:25Z: MAID8 idle (round 4 row added to v5 sheet 1d7e13bc). NEWACCT-
 NEWACCT-ROOT ~17:15Z: OWNER ORDER winter fur: winter = same prompts + one identical fur-trim sentence for all ranks/people; test one new face × 8 ranks (~1 080 cr) → forwarded verbatim to #2.
 NEWACCT#2 ~17:32Z: OWNER (via ROOT ~17:15Z) WINTER fur order → WINTER1 session_01D3E3Naf1jXaZL5A6VSYtr5 opened (briefs/winter1.md; 1 new face × t1–t8 a18, đông pair + one identical fur sentence, ~1 080 cr, A37 sheet). Next Lượt 1175.
 NEWACCT#2 ~17:35Z: OWNER (via ROOT ~17:20Z) SEASON NECKLINE rule (thu+đông: t1–t3 old crossed collar; xuân+hạ: open square; t6–t8 always crossed; t4/t5 later) → sent to WINTER1 before firing (t1–t3 crossed + fur).
+NEWACCT-ROOT ~17:20Z: OWNER season neckline rule (G) added + forwarded to #2 (winter test t1–t3 crossed collar).
