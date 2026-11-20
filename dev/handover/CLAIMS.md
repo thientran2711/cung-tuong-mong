@@ -554,3 +554,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW errand-bal r1 E32r (opus BIG) of be6302f6 | review/errand-bal-r1; reports/errand-bal-review.md | FOREMAN E #23 | session_01DgYSWnWdzcdCQFZxCythQm | RUNNING | 20/11 22:43Z |
 | E RE-GATE LANDER E37 (opus; re-merge PASS branches onto newest LIVE + coop-e2e → LAND READY; jtq14-addr then ge-rank; ORDER MAIN 22:40Z) | review/<topic>-land | FOREMAN E #23 | session_01DgYSWnqPc9TWWFNWckZKvC | RUNNING | 20/11 22:48Z |
 | FOREMAN E #24 (opus; child of E #23, depth 5) | handover FOREMAN_E_STATUS | FOREMAN E #23 | session_01DgYSWkpuYY1nYuAMVGQJVm | RUNNING | 20/11 22:50Z |
+| REVIEW cold-faction r1 E33r (opus BIG; briefs/E33r-review-cold-faction.md) of 29d9258e | review/cold-faction-r1; reports/cold-faction-review.md | FOREMAN E #24 | session_01DgYSWmyPJTrC9g68qSyay9 | RUNNING | 20/11 22:53Z |
+| REVIEW ge-phutang r1 E35br (opus BIG; briefs/E35br-review-ge-phutang.md) of fa820b35 | review/ge-phutang-r1; reports/ge-phutang-review.md | FOREMAN E #24 | session_01DgYSWobK4XTbVjoam1LAdP | RUNNING | 20/11 22:53Z |
