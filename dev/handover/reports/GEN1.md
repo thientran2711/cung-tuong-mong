@@ -72,3 +72,14 @@ A (outer = robe plum) = w4a1mt97EI  https://www.magnific.com/app/creation/w4a1mt
 B (outer = blush pink) = 5jDaT0bKxe  https://www.magnific.com/app/creation/5jDaT0bKxe
 Sheet: dev/handover/review-sheets/phoenix_L1547/sheet.jpg (+ phoenix_A.webp, phoenix_B.webp).
 Look: A — outer wing feathers are plum with gold outlines and darker plum edges, but the body/neck/tail read mostly blush pink, so the bird is only partly "same as robe"; it blends with the robe in the wings and shows by the gold outlines + pink body. Caption mis-spelt: "màu áo chinh" (missing accent on chính). B — outer feathers clearly blush pink, inner wing coverts plum, bird stands out strongly from the plum robe; tail eyes deep plum; cleanest reading of the idea; caption correct "màu phụ".
+
+# JOB L1548 — drafts now gpt-2-6 quality LOW 1k (A43 changed), 5 gens
+gpt-2-6, quality low via extraSettings, 1k 9:16 (752x1344), seed 7172. simulate_cost exact 55 each, total 275 cr. Phoenix A/B L1547 was already done on 2.5 low (kept, not redone).
+Sheet 1 (HH): s62_t8_HAN_BAC_open11.txt (9996 chars, accepted), refs nVsrRMPYQD + TdwDfOyVNR → open11 = fHzXAiZCDY https://www.magnific.com/app/creation/fHzXAiZCDY. Sheet dev/handover/review-sheets/hh_L1548/sheet.jpg = [open9 SyhK8ToUb8 (L1545, đã vẽ)] | [open11]; 'Tổng mới: 55 cr'.
+Sheet 2 (maids), ref s7IPw0Ll8e, prompts exactly from dev/art/maid7/gpt/ (ChatGPT header dropped): tam thân cận v2 = u5W8nBFQLD, nhị thân cận v2 = Xm9WPYfBfo, nhất thân cận v2 = lJtbIOzgv9, nhất đẳng v5 = 0eURSXITfW. Sheet dev/handover/review-sheets/maid_L1548/sheet.jpg; 'Tổng mới: 220 cr'.
+Look (viewed the maid sheet once, open11 once at 1024): 
+- open11: collar IS wide and off the shoulders (bare collarbones); khúc cư diagonal spiral bands clearly visible several turns; walking pose with casket at the side; fur/cloud collar with long fringe on shoulders. Not a real 3/4: body is only slightly turned, face almost frontal. Hem still wide and flares, sleeves hang to floor.
+- Tam thân cận v2: ONE extra layer clear (rose open over-vest over a blue short jacket with a clear square collar band + knot button); colours flipped as asked; comb box held.
+- Nhị thân cận v2: square collar clear, blue jacket with ONE half-sleeve layer, rose open vest over it; the two short flaps are barely visible; envelope is blue (low contrast with jacket).
+- Nhất thân cận v2: square collar on the blue vest, rose cropped open bolero on top, two long blue panels + a clearly visible short rose tà ngắn on top = two panel layers clear; sleeves rose, skirt rose.
+- Nhất đẳng v5 (thường): standing collar, rose vest, long rose panels + short blue tà ngắn clearly visible in front of them; blue skirt/sleeves.
