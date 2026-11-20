@@ -18,3 +18,8 @@ allow: fair porcelain skin   # same
 allow: beautiful/handsome romantic-lead looks for everyone   # same
 allow: Everyone beautiful at every age   # same
 allow: clearly much richer and more splendid than the lower ranks   # same
+allow: elegant, slim, clearly adult   # boilerplate dup, length after owner Lượt 1329 pearl net, DESIGN5 v7b
+allow: face clearly visible   # same
+allow: 3/4 or frontal view   # same (ANGLE line kept)
+allow: one single visible sleeve layer   # boilerplate dup (ONE SINGLE SLEEVE LAYER rule kept)
+allow: every inner sleeve hidden inside   # same

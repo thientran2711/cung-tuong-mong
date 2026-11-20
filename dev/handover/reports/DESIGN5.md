@@ -39,7 +39,7 @@ Edit script (for audit): every replacement is an exact one-time swap; listed bel
 | rank | base ed3e8fd | new |
 |---|---|---|
 | t4 | 9994 | 9958 |
-| t5 | 9868 | 9980 (v7) |
+| t5 | 9868 | 9978 (v7b) |
 | t6 | 9966 | 9955 (v7) |
 | t8 | 9997 | 9991 (v7) |
 
@@ -91,3 +91,6 @@ Counts: t6 9985, t7 9926, t8 9987. check_store: t7/t8 PASS, t6 M07+S12 (unchange
 - **t6 Quý phi vân kiên** (reference swap56/s62_t6_v2.txt): added `with small jade and pearl drops dangling beneath it, fewer and smaller than the Hoàng quý phi's` after the gold-tassel fringe.
 - Cuts (boilerplate dups only; allow lines added). t5: `Full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin;` (the MASTER full-body/background/skin sentences stay), ` beautiful/handsome romantic-lead looks for everyone;`, ` Everyone beautiful at every age.`, ` clearly much richer and more splendid than the lower ranks`. t6: `(one single visible sleeve layer, every inner sleeve hidden inside)` (the ONE SINGLE SLEEVE LAYER rule is kept) and ` clearly much richer and more splendid than the lower ranks`.
 - Counts: t5 9980, t6 9955, t7 9949, t8 9991. check_store: t5/t6 M07+S12 (unchanged); t7/t8 S07+B12 (expected, see conflict 18). keep_check --all PASS (24).
+
+## v7b (owner Lượt 1329 via Foreman C #5): t5 Phi pearl net
+Added after the cape drops: `over both capes an airy open net of small pearls and small jade beads lying flat (the same kind of beaded pearl net as the Tần's capelet)` (b26/s62_t5_v2 wording). Cuts (boilerplate dups, allow lines added): `elegant, slim, clearly adult;`, `; face clearly visible, 3/4 or frontal view` (ANGLE line kept), `(one single visible sleeve layer, every inner sleeve hidden inside)` (rule kept). t5 = 9978 chars; check_store M07+S12 (unchanged); keep_check --all PASS (24).
