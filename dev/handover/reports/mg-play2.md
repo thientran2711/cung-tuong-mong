@@ -28,3 +28,26 @@ START_CTX ~6 % (1M window); depth 4. Branch review/mg-play2, sha 9ca5bac9 (from 
 4. Finish the law-11 scan for faint guides (hat hold band, chai groom zone, cook zone, aim green bar) vs laneMin; apply kg82FxLane where a band is a path to follow.
 5. Rebuild site (dev/site/build_site.sh), merge newest origin/main (+ review/mg-noword-a/-b if landed: conflicts at jhd act/commit line and den draw line), iPad 1180x820@2 + Fold 755x1000@2 shots rules+play both kinds LOOKED, upload to CDN img/_review/mg-play2/, then SẴN SÀNG KIỂM to MAIN ROOT-74. BIG → opus reviewer.
 Her hoadien 5.5 and den 4.7 stay NOT counted; she re-tests after.
+
+## SUCCESSOR #2 (session_01Rc5AsKPc7jyATmC8vq6dep) — handover steps 1–5 DONE
+PRIORITY #1 CHECK: same as above + main moved (37e4a68f → eb056f7b mg-noword-a LANDED → 70bea3d3 mg-visual LANDED, both merged here); mg-noword-b still open (will conflict at the jhd board label line: this branch shows NO words in play on the Hoa điền board).
+START_CTX ~6 % (1M window); depth 4. Final sha: **209f34dfd** on review/mg-play2 (merged LIVE 70bea3d3, site built).
+1. dev/test/hoa-dien.js updated for no tilt (hdQ(d,sk,lvF) with points from BAL.hd.tolD, «no tilt buttons» check, anchor from the table + hidden) → ALL OK 39/39.
+2. Fallout fixed: none in hoadien/den rows; my sparse checkout had dropped dev/art/mkfit (generator) — restored, generator check OK (5896 rows).
+3. KIT.md §13.7.1 MINI-GAME CUE KIT · BAL.mgFx (kg82FxPop/Ring from mg-visual + kg82FxLane / .path / .stroke / .zone + kg82FxBad) and §13.7 motion «dodge» (now eight motions after the mg-noword-a merge); KIT_REQUESTS line «20/11 mg-play2 — cue-kit extensions for kit-keeper sign-off». All parts are inside the ONE BAL.mgFx cue kit, one function each, no per-kind look.
+4. Law-11 scan finished — kind | issue | fix:
+| kind (engine) | before | after |
+|---|---|---|
+| den (tssteer) | lane .32 gradient; lotus read as pickups | kg82FxLane + kg82FxBad danger ring ✕, hit burst/shake, dodge demo (worker 1) |
+| duho (tspluck) | reach zone .16 fill + thin dashed line | kg82FxLane (worker 1) |
+| hat (hold) | melody ribbon rgba(…,.38) + thin dashed line | **kg82FxLane.path** (same lit look, curved) |
+| tho (calli / thư pháp) | current stroke lane #8a735044 (.27) | **kg82FxLane.stroke** on the current stroke in play |
+| banh (cook) gauge | keep-zone #2d7a5244 (.27) | **kg82FxLane.zone** (kit --good × BAL.mgFx.zone .62 + glowing edges) |
+| td_ngon / Tu đức gauges (jtd play + rules picture) | keep-zone #2d7a5244 | **kg82FxLane.zone** |
+| hoadien | hidden spot could disagree; in-play label line | HD_ANC table (worker 1); in-play label removed (no words in play; rules screen holds the how) |
+| aim green bar, j92 groom zones, jtd walk meter, jslap zones | solid kit colours (meters, not paths) | no change — contrast already solid |
+| all others (grep «tránh»/hit/penalty) | no other avoid-obstacles; no hidden target besides hoadien | none |
+Remaining word on a board (not this lane): duho «Tầm tay» label in play — mg-noword family, left untouched.
+5. Site built, LIVE merged, shots LOOKED (Fold 755x1000@2 + iPad 1180x820@2, rules + play, 7 kinds: hoadien den duho hat banh tho td_ngon) — CDN img/_review/mg-play2/<kind>-<rules|play>-<WxH>.jpg, e.g. https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-play2/den-play-755x1000.jpg , …/hoadien-play-1180x820.jpg (script dev/test/mg-play2-shots.js). Wipe with `cdn_sync.py --wipe-review mg-play2` after the verdict.
+Tests on the final sha 209f34dfd: mg-play2 19/19 ok (incl. new law-11 group check) · hoa-dien ALL OK (37; NPC-layer checks run only when an NPC wears one) · mg-ready-guide PASS 9/9 · ag-mgcal 14/14 · mg-noword-a 46 ok · QUICKCHECK PASS (open 1570 ms, old save ok, perf render 197/222 ms, core gates PASS).
+BIG (scoring/BAL) → opus reviewer. Her hoadien 5.5 and den 4.7 stay NOT counted; she re-tests after.
