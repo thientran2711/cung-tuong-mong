@@ -85,9 +85,9 @@ function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||M
    better (c + eq … c + far), 1/3 worse (c − far … c − eq) — bell-shaped inside each third (mean of two hashed draws); eq / far = BAL.ag.mg2.hand.
    (2) ART: mgHandEff adds BAL.ag.mg2.hand.art per art level of that kind above
    the player's own level (kg82LvFor; minus below): a trained NPC clearly beats her, an untrained one is weak. (3) UPBRINGING (owner OD 20/11 ~01:50Z,
-   verbatim: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà nghèo mới yếu"; MAIN relay: read the EXISTING origin stats, no new
-   table): a person's art level for the lift = max(her own level, the start art bậc of her origin for that kind — j1 ORIGINS / ORIGIN_BR art:{…}, e.g. tt
-   cam 1, cn y 2, nc / bd vu 1, td / thd thi 1; mgOrgLv). Her origin key: mgOrgOf (S.origin; a consort's v.nr.o / v.ag.o / jagent agOrg; a servant "srv";
+   verbatim: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà nghèo mới yếu"; OD ~02:05Z: the per-identity start-arts
+   table): a person's art level for the lift = max(her own level, the start art bậc of her IDENTITY for that kind = origin × her road (v.nr.r) in
+   BAL.orig.art via j1 originArts; no road known = the origin's own row; mgOrgLv). Her origin key: mgOrgOf (S.origin; a consort's v.nr.o / v.ag.o / jagent agOrg; a servant "srv";
    unknown "_" = none). Rank itself gives NO skill — law 5 comes from her harder board as she climbs and from who she meets. Art / upbringing are read live (never saved), measured against the player of seat a (mgRefP: S; a co-op guest reads
    the host's person) so both co-op seats roll the same play.
    Her play = a roll UNDER that ceiling (c − (1 − u)·w, u = mean of 3 draws), THEN the same board ease the player gets from her own art level / rank /
@@ -111,8 +111,11 @@ function mgRefP(){try{if(typeof agGuest==="function"&&agGuest()&&typeof consorts
    (saved on her, host / solo only — a co-op guest reads what the host saved) */
 function mgOrgOf(p){try{if(!p||typeof p!=="object")return"_";if(p===S)return(S.origin&&S.origin.k)||"_";if(p.nr&&p.nr.o)return p.nr.o;if(p.ag&&p.ag.o)return p.ag.o;
  if(typeof p.org==="string")return"srv";if(p.rank!=null&&typeof agOrg==="function"&&!(typeof agGuest==="function"&&agGuest())&&typeof consorts==="function"&&consorts().includes(p)){const o=agOrg(p);if(o)return o}}catch(e){}return"_"}
-/* the start art bậc her upbringing gave her for this kind (the origin's art:{stat: bậc}, the highest over the kind's stats — as kg82LvFor reads arts) */
-function mgOrgLv(p,kind){try{const O=typeof originByKey==="function"?originByKey(mgOrgOf(p)):null;if(!O||!O.art)return 0;let m=0;kg82FormulaOf(kind).forEach(([s])=>{if(s!=="help"&&O.art[s])m=Math.max(m,+O.art[s]||0)});return cl(m,0,5)}catch(e){return 0}}
+/* the start art bậc her upbringing gave her for this kind: her identity row (origin × road, BAL.orig.art via originArts), the highest over the kind's
+   stats as kg82LvFor reads arts (a Tứ đức board td_<k> reads the virtue k). The player herself: 0 — her start row is already in her own arts (new game, j2
+   start), and an old save keeps the arts it had (never lifted by a table it did not start with). */
+function mgOrgLv(p,kind){try{if(!p||typeof p!=="object"||p===S||typeof originArts!=="function")return 0;const A=originArts(mgOrgOf(p),p.nr&&p.nr.r);let m=0;
+ (/^td_/.test(kind)?[[kind.slice(3)]]:kg82FormulaOf(kind)).forEach(([s])=>{if(s!=="help"&&A[s])m=Math.max(m,+A[s]||0)});return cl(m,0,5)}catch(e){return 0}}
 /* (2) + (3): the hand an NPC plays with now = her hand + art lift, her art level = max(her own level, her upbringing's start bậc) (o.lv: the level the caller
    already knows for this kind) */
 function mgHandEff(kind,p,o){const h=mgHand(kind,p);if(!p||typeof p!=="object")return h;const H=BAL.ag.mg2.hand,R=mgRefP();if(!R||p===R)return h;

@@ -1087,8 +1087,8 @@ Object.assign(BAL.ag,{mg2:{on:1,med:[[-2,8.9],[0,7.5],[2,5.8]],w:8,tat:{e:[0,2,5
         1/3 better (centre + eq … + far), 1/3 worse (centre − far … − eq), bell-shaped inside each third (mean of 2 hashed draws);
    split = the shares [worse, equal, better] (weights; default 1:1:1 = 1/3 each; the owner may retune after her real-life rating, OD 20/11 ~01:42Z);
    art  = hand points per art level of that kind above / below the player's own level (a trained NPC clearly beats her, an untrained one is weak);
-        UPBRINGING (owner OD 20/11 ~01:50Z: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà nghèo mới yếu"): no table here —
-        a person's art level for this lift = max(her own, her origin's start bậc from j1 ORIGINS art:{…}) (jmgt mgOrgLv); the bậc are tuned there.
+        UPBRINGING (owner OD 20/11 ~01:50Z: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà nghèo mới yếu"; OD ~02:05Z per-identity table):
+        a person's art level for this lift = max(her own, the start bậc of her identity (origin × road) in BAL.orig.art, jbal.js) (jmgt mgOrgLv); the bậc are tuned there.
         Rank gives NO skill: law 5 comes from her harder board as she climbs and from who she meets. */
 BAL.ag.mg2.hand={on:1,w:4,split:[1,1,1],eq:.5,far:2.5,art:.2};
 /* AG-ALL-2d2 OWNER CALIBRATION (owner OD 17/11 ~16:20Z (f) + ~16:40Z option 1: "chỉ có tôi test và cái số của tôi dùng chung cho mọi người"; jmgcal):

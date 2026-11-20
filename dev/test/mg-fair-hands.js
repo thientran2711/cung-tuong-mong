@@ -7,10 +7,10 @@
    1b the shares are one BAL knob (BAL.ag.mg2.hand.split): retuned to [1,2,1] the equal third holds half
    2 art (law 6): the same person with one art level more than her plays higher (+BAL.ag.mg2.hand.art on the hand, plus the board ease); one less, lower;
      an equal NPC (same art, same rank) wins about half against her
-   3 upbringing (owner OD 20/11 ~01:50Z + MAIN relay: the existing j1 ORIGINS art start bậc, no new table): on dan a tt-born NPC (cam 1) plays clearly
-     higher than her (thd, cam 0) at the same own level; cnv (no start bậc) = her; an own level above the start bậc counts as is;
+   3 upbringing (owner OD 20/11 ~01:50Z + ~02:05Z per-identity table BAL.orig.art, origin × road): on dan a tt-born NPC with no road (origin row cam 1)
+     plays clearly higher than her (thd, cam 0) at the same own level; on road tt_tranh (cam 2) higher still; cnv (no cam) = her; an own level above the start bậc counts as is;
      rank alone gives NO lift (same person two ranks up: same hand)
-   4 one core: every hand knob in BAL (w / split / eq / far / art); upbringing from ORIGINS art; the hand family (mgNpcRaw, jslap tat, jhd hoa điền) reads mgHandEff
+   4 one core: every hand knob in BAL (w / split / eq / far / art); upbringing from BAL.orig.art; the hand family (mgNpcRaw, jslap tat, jhd hoa điền) reads mgHandEff
    5 old saves: a hand rolled in the old skewed band (p.mgHv sig without "t/") re-rolls in the new band; her own play (S) never gets a hand
    6 no page errors */
 const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
@@ -36,7 +36,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   o.h0=mgHand(kind,q);o.e0=mgHandEff(kind,q);o.m0=mean();q.arts[st]=3;o.eA=mgHandEff(kind,q);o.mA=mean();q.arts[st]=1;o.mA2=mean();q.arts[st]=2;
   /* 3 upbringing on dan (stat cam): tt (ORIGINS art cam 1) vs her thd (none) — same own cam level 0 for both */
   {const st2="cam",kA=Object.assign({},S.arts);S.arts[st2]=0;const u={name:"Up",id:61500,rank:3,arts:{[st2]:0},alive:true,ag:{o:"thd"}};const M=()=>{let s=0;for(let i=0;i<N;i++)s+=mgNpcRaw("dan",u,{occ:"hoi"});return s/N};
-   o.u0=mgHandEff("dan",u);o.um0=M();u.ag.o="tt";o.uT=mgHandEff("dan",u);o.umT=M();o.orgLv=mgOrgLv(u,"dan");u.ag.o="cnv";o.uC=mgHandEff("dan",u);u.arts[st2]=3;u.ag.o="tt";o.uOwn=mgHandEff("dan",u)-o.u0;S.arts=kA}
+   o.u0=mgHandEff("dan",u);o.um0=M();u.ag.o="tt";o.uT=mgHandEff("dan",u);o.umT=M();o.orgLv=mgOrgLv(u,"dan");u.nr={o:"tt",r:"tt_tranh"};o.uR=mgHandEff("dan",u);o.orgLvR=mgOrgLv(u,"dan");delete u.nr;u.ag.o="cnv";o.uC=mgHandEff("dan",u);u.arts[st2]=3;u.ag.o="tt";o.uOwn=mgHandEff("dan",u)-o.u0;S.arts=kA}
   q.rank=5;o.eR=mgHandEff(kind,q);q.rank=3;
   /* equal NPC vs her, over a population: her play = her base + her board shift + the same roll */
   {let w=0,n=0;const sh=mgMedD(mgTier(kind,{occ:"hoi",rank:3,lv:2}).d)-mgMedD(0);for(let i=0;i<800;i++){const x={name:"E"+i,id:62000+i,rank:3,arts:{[st]:2},alive:true,ag:{o:"thd"}};
@@ -55,7 +55,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r.noSkew,'1 no skew / sp / rank / lo / hi / cal up / dn keys left in BAL (canon overwrite)',r.noSkew);
  ok(Math.abs(r.e0-r.h0)<1e-9&&Math.abs(r.eA-r.e0-r.H.art)<.011&&r.mA>r.m0+.4&&r.mA2<r.m0-.4,'2 art: one level above her lifts the hand by BAL art (and plays clearly higher); one below plays lower; equal = her hand',{h0:r.h0,e0:r.e0,eA:r.eA,m0:r.m0,mA:r.mA,mA2:r.mA2});
  ok(r.eqWin>=.44&&r.eqWin<=.56,'2 an equal NPC (same art, same rank) wins about half against her',{herWin:r.eqWin});
- ok(r.orgLv===1&&Math.abs(r.uT-r.u0-r.H.art)<.011&&r.umT>r.um0+.4&&Math.abs(r.uC-r.u0)<1e-9&&Math.abs(r.uOwn-3*r.H.art)<.011,'3 upbringing from ORIGINS art (no new table): tt (cam 1) plays clearly higher than her (thd) on dan; cnv (no start bậc) = her; an own level above the start bậc counts as is',{orgLv:r.orgLv,u0:r.u0,uT:r.uT,uC:r.uC,um0:r.um0,umT:r.umT,uOwn:r.uOwn});
+ ok(r.orgLv===1&&r.orgLvR===2&&Math.abs(r.uT-r.u0-r.H.art)<.011&&Math.abs(r.uR-r.u0-2*r.H.art)<.011&&r.umT>r.um0+.4&&Math.abs(r.uC-r.u0)<1e-9&&Math.abs(r.uOwn-3*r.H.art)<.011,'3 upbringing from BAL.orig.art (origin × road): tt no road (cam 1) plays clearly higher than her (thd) on dan; road tt_tranh (cam 2) higher still; cnv (no cam) = her; an own level above the start bậc counts as is',{orgLv:r.orgLv,orgLvR:r.orgLvR,u0:r.u0,uT:r.uT,uR:r.uR,uC:r.uC,um0:r.um0,umT:r.umT,uOwn:r.uOwn});
  ok(Math.abs(r.eR-r.e0)<1e-9,'3 rank alone gives no skill (two ranks up: the same hand)',{e0:r.e0,eR:r.eR});
  ok(r.fam.every(Boolean),'4 the whole hand family reads mgHandEff (mgNpcRaw, slapNpcDraw, hdNpc)',r.fam);
  ok(r.oldRe&&r.meNo,'5 an old-save hand from the skewed band re-rolls in the new band; her own play never gets a hand',{oldRe:r.oldRe,meNo:r.meNo});
