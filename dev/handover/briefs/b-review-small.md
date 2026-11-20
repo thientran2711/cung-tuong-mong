@@ -1,0 +1,5 @@
+# b-review-small — SMALL review (sonnet) template for Foreman B ROOT branches (UI/layout/text/art only; no BAL/save/co-op/time/progression change)
+Your branch/sha/report are named in your opening prompt.
+READ FIRST: dev/handover/briefs/b-root-common.md, dev/rules/START_REVIEWER.md (+ START_WORKER.md), dev/handover/briefs/b-gap-1.md (the worker's section), the worker report, dev/kit/KIT.md sections touched, dev/kit/VANPHONG.md for any player word.
+CHECK (SMALL tier, OD:L1370): confirm the diff really is SMALL (git diff --stat vs merge-base; any BAL / save / co-op / time / progression file → stop, tell Foreman B it needs a BIG review); the 18 laws it touches; KIT FIRST (no private part; consistency scan vs the same kind of element elsewhere); VANPHONG wording; touched-part tests + quickcheck; old-save load; Fold 755x1000@2 + iPad 1180x820@2 shots LOOKED 3×; stand-in art marked 'tạm' and ART/KIT REQUESTS filed. Merge newest origin/main first.
+VERDICT: small fixes yourself on review/<topic>-r1, else FAIL list. Report section '## REVIEW r1' in the worker's report; CLAIMS row; send_message Foreman B ROOT session_01N1tNP67dwhHUVRbLgDsEPs "PASS/FAIL <topic> <sha>".
