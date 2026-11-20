@@ -7,7 +7,7 @@
      D5 BAL.ge.title.carry "prev" (recommended: only the previous life's grand title is wearable next life, cosmetic) · alt "any" (any title ever earned)
      D7 BAL.ge.showOdds   false  (recommended: the two last choices show no odds) · alt true (the ladder word on the pair that points to an open ending)
      D8 BAL.ge.quietLoss  false  (recommended: a pair that points at no ending lands on a fail outcome with NO loss) · alt true (with its loss)
-   KIT gates: BAL.ge.mapOn false until the kit keeper ships kitBranchMap (K-GE-1); the Sơ đồ nhánh data API geMap() works either way. */
+   KIT gates: BAL.ge.mapOn = the Sơ đồ nhánh page (kitBranchMap, K-GE-1, landed); the Sơ đồ nhánh data API geMap() works either way. */
 BAL.ge={
  on:true,              /* the engine runs for branches with full data (GE_DATA) only; other branches keep today's game */
  n:{grand:4,rare:2},   /* fixed counts per branch (owner L1623 (1)); no normal endings */
@@ -15,7 +15,7 @@ BAL.ge={
  after:"rec",          /* D4 */
  showOdds:false,       /* D7 */
  quietLoss:false,      /* D8 */
- mapOn:false,          /* K-GE-1 kitBranchMap not in the kit yet */
+ mapOn:true,           /* K-GE-1 kitBranchMap landed (90b7e797): the Sơ đồ nhánh page in Sổ luân hồi is on */
  pull:{step:1,push:1}, /* a Chuỗi option adds step to its ending's pull; a push option takes push away (never below 0) */
  /* odds of the open ending her pair points to: base + pull × per, clamped [min, max]; its condition not met → capped at noCond */
  odds:{base:22,per:9,min:5,max:88,noCond:12},
@@ -57,7 +57,19 @@ BAL.ge={
  td_an_1:{danh:40,th:35},td_an_2:{tamco:45,sung:50},td_an_3:{tai:55,danh:35},td_an_4:{duc:35,sung:35},
  td_ke_1:{mat:4,tamco:45},td_ke_2:{duc:45,danh:35},td_ke_3:{mat:4,maid:50},td_ke_4:{tamco:35,duc:30},
  td_song_1:{danh:40,sung:45},td_song_2:{tamco:50,mat:4},td_song_3:{duc:35,maid:45},td_song_4:{duc:45,th:30},
- td_tha_1:{duc:45,sung:40},td_tha_2:{tamco:45,mat:3},td_tha_3:{duc:40,th:30},td_tha_4:{danh:30,duc:40}},
+ td_tha_1:{duc:45,sung:40},td_tha_2:{tamco:45,mat:3},td_tha_3:{duc:40,th:30},td_tha_4:{danh:30,duc:40},
+ /* writer wave W3 (brief E11, jgedata_w3.js): ch_* · thd_* · cnv_chu cnv_ban cnv_ma (same scales and sizes as the pilots) */
+ ch_co_1:{mat:4},ch_co_2:{tamco:50,sung:40},ch_co_3:{duc:40,danh:35},ch_co_4:{duc:40},
+ ch_benh_1:{tai:50,danh:35},ch_benh_2:{tamco:45,mat:3},ch_benh_3:{duc:40,sung:45},ch_benh_4:{th:30,duc:35},
+ ch_ho_1:{duc:40,danh:35},ch_ho_2:{sung:55,tamco:40},ch_ho_3:{duc:40},ch_ho_4:{dad:30,tamco:40},
+ ch_bi_1:{duc:45,danh:35},ch_bi_2:{tamco:50,mat:3},ch_bi_3:{th:30,duc:35},ch_bi_4:{tamco:45},
+ thd_tho_1:{tai:55,danh:40},thd_tho_2:{tai:45,tamco:45},thd_tho_3:{duc:35,tai:40},thd_tho_4:{sung:50,tai:45},
+ thd_sach_1:{tai:50,mat:4},thd_sach_2:{tamco:45,sung:45},thd_sach_3:{duc:40,danh:35},thd_sach_4:{tai:40,dad:25},
+ thd_tro_1:{duc:40},thd_tro_2:{tamco:45,danh:40},thd_tro_3:{duc:35,dad:25},thd_tro_4:{duc:40,tamco:40},
+ thd_hoc_1:{tai:50,sung:40},thd_hoc_2:{tamco:50,mat:3},thd_hoc_3:{duc:40,tai:35},thd_hoc_4:{duc:40,sung:40},
+ cnv_chu_1:{tamco:45,mat:2},cnv_chu_2:{mis:20},cnv_chu_3:{duc:35,tamco:35},cnv_chu_4:{duc:40,mat:2},
+ cnv_ban_1:{duc:40},cnv_ban_2:{tamco:45,danh:30},cnv_ban_3:{tai:45,danh:30},cnv_ban_4:{duc:30,sac:40},
+ cnv_ma_1:{tai:45,danh:35},cnv_ma_2:{tamco:45,mat:3},cnv_ma_3:{duc:40,danh:30},cnv_ma_4:{duc:40,sung:35}},
  /* fail-outcome losses (her pair pointed at the ending and missed; none in the quiet form unless quietLoss) */
  fail:{
   tt_co_1:{rank:-1,danh:-12},tt_co_2:{sung:-8,danh:-4},tt_co_3:{sung:-8,danh:-6},tt_co_4:{danh:-10,duc:-6},
@@ -86,7 +98,19 @@ BAL.ge={
  td_an_1:{danh:-10},td_an_2:{danh:-8,duc:-4},td_an_3:{danh:-6},td_an_4:{sung:-6},
  td_ke_1:{danh:-10,mat:-2},td_ke_2:{sung:-8},td_ke_3:{mat:-3},td_ke_4:{sung:-8,danh:-4},
  td_song_1:{danh:-8},td_song_2:{rank:-1,danh:-12},td_song_3:{sung:-6},td_song_4:{rank:-1,sung:-8},
- td_tha_1:{danh:-6},td_tha_2:{sung:-8,danh:-6},td_tha_3:{danh:-6},td_tha_4:{danh:-10}},
+ td_tha_1:{danh:-6},td_tha_2:{sung:-8,danh:-6},td_tha_3:{danh:-6},td_tha_4:{danh:-10},
+ /* writer wave W3 (brief E11, jgedata_w3.js): ch_* · thd_* · cnv_chu cnv_ban cnv_ma (same scales and sizes as the pilots) */
+ ch_co_1:{rank:-1,danh:-12},ch_co_2:{danh:-10,sung:-6},ch_co_3:{sung:-6,danh:-6},ch_co_4:{sung:-8,danh:-4},
+ ch_benh_1:{danh:-8,tai:-4},ch_benh_2:{danh:-10,duc:-6},ch_benh_3:{danh:-8,sung:-6},ch_benh_4:{sung:-6,danh:-6},
+ ch_ho_1:{danh:-8,sung:-6},ch_ho_2:{rank:-1,danh:-10},ch_ho_3:{sung:-6,danh:-6},ch_ho_4:{danh:-10,sung:-6},
+ ch_bi_1:{danh:-10,duc:-4},ch_bi_2:{danh:-10,tamco:-4},ch_bi_3:{danh:-8,sung:-6},ch_bi_4:{rank:-1,danh:-12},
+ thd_tho_1:{danh:-8,tai:-4},thd_tho_2:{danh:-10,sung:-6},thd_tho_3:{sung:-6,danh:-6},thd_tho_4:{sung:-8,danh:-4},
+ thd_sach_1:{rank:-1,danh:-12},thd_sach_2:{danh:-10,duc:-6},thd_sach_3:{danh:-8,sung:-4},thd_sach_4:{sung:-8,danh:-6},
+ thd_tro_1:{danh:-8,sung:-4},thd_tro_2:{danh:-10,sung:-8},thd_tro_3:{sung:-8,danh:-6},thd_tro_4:{danh:-10,sung:-4},
+ thd_hoc_1:{danh:-8,sung:-6},thd_hoc_2:{rank:-1,danh:-10},thd_hoc_3:{sung:-6,danh:-6},thd_hoc_4:{sung:-8,danh:-6},
+ cnv_chu_1:{danh:-8,mis:-15},cnv_chu_2:{mis:-15,danh:-6},cnv_chu_3:{sung:-6,danh:-6},cnv_chu_4:{danh:-10,duc:-4},
+ cnv_ban_1:{sung:-6,danh:-6},cnv_ban_2:{danh:-10,duc:-6},cnv_ban_3:{danh:-8,tai:-4},cnv_ban_4:{sung:-8,danh:-4},
+ cnv_ma_1:{danh:-8,sung:-6},cnv_ma_2:{danh:-10,duc:-6},cnv_ma_3:{sung:-6,danh:-6},cnv_ma_4:{danh:-8,sung:-6}},
  /* rewards: the same SIZE for both shadings (fair: no "right" morality); only the sign of everyone's attitude differs (rel thiện → thiện cảm +, ác → oán +).
     rw.mul × the road's RD97L rare fx ≈ the size (start 3×); rank = steps (never above the seat rules: Hoàng hậu only by seat "HH"); mis = the named NPC's attitude */
  rw:{mul:3,
@@ -116,7 +140,19 @@ BAL.ge={
  td_an_1:{danh:36,duc:10,rel:8},td_an_2:{rank:1,danh:30,tamco:10,rel:8},td_an_3:{danh:30,tai:10,rel:8},td_an_4:{danh:20,duc:12,rel:6},
  td_ke_1:{rank:1,danh:30,mat:2,rel:8},td_ke_2:{danh:24,duc:12,rel:8},td_ke_3:{danh:24,mat:3,rel:8},td_ke_4:{danh:18,duc:10,rel:6},
  td_song_1:{rank:1,danh:30,sung:15,rel:8},td_song_2:{danh:36,sung:18,rel:8},td_song_3:{danh:20,duc:12,bac:300,rel:6},td_song_4:{danh:24,duc:15,rel:8},
- td_tha_1:{danh:24,duc:12,rel:8},td_tha_2:{rank:1,danh:30,tamco:10,rel:8},td_tha_3:{danh:20,duc:15,rel:6},td_tha_4:{danh:20,duc:12,rel:6}},
+ td_tha_1:{danh:24,duc:12,rel:8},td_tha_2:{rank:1,danh:30,tamco:10,rel:8},td_tha_3:{danh:20,duc:15,rel:6},td_tha_4:{danh:20,duc:12,rel:6},
+ /* writer wave W3 (brief E11, jgedata_w3.js): ch_* · thd_* · cnv_chu cnv_ban cnv_ma (same scales and sizes as the pilots) */
+ ch_co_1:{danh:36,mat:2,tamco:10,rel:8},ch_co_2:{rank:1,danh:30,tamco:10,rel:8},ch_co_3:{danh:24,duc:12,sung:12,rel:6},ch_co_4:{danh:24,duc:12,bac:300,rel:6},
+ ch_benh_1:{danh:30,tai:10,bac:300,rel:6},ch_benh_2:{rank:1,danh:30,mat:2,rel:8},ch_benh_3:{rank:1,danh:30,sung:18,rel:8},ch_benh_4:{danh:24,duc:12,th:20,rel:6},
+ ch_ho_1:{rank:1,danh:24,duc:6,sung:12,rel:6},ch_ho_2:{seat:"HH",danh:30,sung:15,rel:8},ch_ho_3:{danh:24,duc:12,bac:300,rel:6},ch_ho_4:{rank:1,danh:30,tamco:10,rel:8},
+ ch_bi_1:{rank:1,danh:30,duc:10,sung:12,rel:8},ch_bi_2:{rank:1,danh:30,tamco:10,mat:2,rel:8},ch_bi_3:{danh:24,duc:12,bac:300,rel:6},ch_bi_4:{danh:36,sung:18,rel:10},
+ thd_tho_1:{danh:30,tai:10,bac:300,rel:6},thd_tho_2:{rank:1,danh:30,tamco:10,rel:8},thd_tho_3:{danh:24,duc:12,bac:300,rel:6},thd_tho_4:{rank:1,sung:30,danh:18,rel:6},
+ thd_sach_1:{danh:36,sung:18,mat:2,rel:8},thd_sach_2:{rank:1,danh:30,tamco:10,rel:8},thd_sach_3:{danh:24,duc:12,bac:300,rel:6},thd_sach_4:{danh:24,duc:12,bac:300,rel:6},
+ thd_tro_1:{rank:1,danh:30,duc:10,sung:12,rel:8},thd_tro_2:{rank:1,danh:30,mat:2,rel:8},thd_tro_3:{danh:24,duc:12,bac:300,rel:6},thd_tro_4:{rank:1,danh:30,duc:10,rel:8},
+ thd_hoc_1:{rank:1,danh:30,tai:10,rel:8},thd_hoc_2:{danh:36,tamco:10,mat:2,rel:10},thd_hoc_3:{danh:24,duc:12,bac:300,rel:6},thd_hoc_4:{rank:1,danh:24,sung:15,duc:6,rel:6},
+ cnv_chu_1:{rank:1,danh:30,mat:2,tamco:10,rel:8},cnv_chu_2:{rank:1,danh:24,sung:15,mis:20,rel:6},cnv_chu_3:{danh:20,duc:12,bac:300,rel:6},cnv_chu_4:{rank:1,danh:30,duc:10,rel:8},
+ cnv_ban_1:{danh:20,duc:12,bac:300,rel:6},cnv_ban_2:{rank:1,danh:30,tamco:10,rel:8},cnv_ban_3:{rank:1,danh:30,tai:10,rel:8},cnv_ban_4:{danh:24,duc:12,bac:300,rel:6},
+ cnv_ma_1:{rank:1,danh:30,tai:10,rel:8},cnv_ma_2:{rank:1,danh:30,mat:2,tamco:10,rel:8},cnv_ma_3:{danh:20,duc:12,bac:300,rel:6},cnv_ma_4:{rank:1,danh:30,duc:10,sung:12,rel:8}},
  help:{rw:{danh:6,duc:3}},   /* her help to an NPC who then unlocks (NPC parity, build step 5 — not live in this pass) */
  npc:{on:false},             /* NPC grand endings wait for NPC roads (OD:L1243, unit D) */
  /* measured bands (dev/measure/ge-measure.js): an in-character bot that follows one ending's road reaches a grand ending in about one life of two or three;
