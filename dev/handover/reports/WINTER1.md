@@ -73,3 +73,24 @@ Sheet `dev/handover/review-sheets/winter1/s62_t4_dong_long3.webp` (new big · v2
 
 ## Ladder confirmed (owner ~19:15Z: "Cho bản lông trước đó cho 3 bậc dưới, lông mới này cho, phi, quý phi, tần. Còn hqp và hh thì to hơn rõ, để thể hiện sự sang trọng hơn người khác")
 G26 updated (TEST): t1–t3 = v2 width (VX7Nn0OMMU), t4–t6 = v3 (hu20QqTvqL), t7–t8 strengthened to "the WIDEST, most luxurious band of thick soft plain ivory-white fur trim, clearly wider than at any lower rank, about two and a half hands wide, … rich, warm and cosy, yet lying smooth and close, never puffy or bulky; …" (408 chars; s62 t7/t8 builder prompts 9 142 / 9 311, so both still fit ≤10 000). No gens; Foreman C #3 asks the owner before a t7/t8 sample.
+
+## G28 winter fabric + G26 fur — prompt wording prepared (Foreman C #3 ~16:04Z; NO gens)
+Maker `dev/art/winter1/make_winter.py <person> [--gate]`. It does not change the builder; it starts from build_all output and applies G25 (t1–t3 crossed collar), pre-G22 t4 collar (while the builder still has the square neck), the G28 fabric swaps, the G26 ladder fur, and drops ANGLE when the prompt is over 10 000. It asserts that no sheer/translucent/gauze/chiffon/organza word is left (except the three negative phrases "no sheer floating scarf…", "never thin sheer silk or gauze", "never sheer or see-through"). Output for s62: `dev/art/winter1/g28/s62_tN_dong.txt`.
+G28 swaps (old → new):
+1. "The FABRIC is thin, light, flowing silk and gauze with a soft sheen … (thướt tha);" → "The FABRIC is thick, warm, OPAQUE winter cloth (padded silk and soft brocade with a gentle quilted look), never thin sheer silk or gauze, with a soft sheen and fine delicate embroidery, long soft graceful drapery that still sways and trails elegantly (thướt tha);"
+2. "Light, soft, thin flowing silk: … supple and airy, drifting softly as in a gentle breeze, …" → "Warm, soft, OPAQUE padded silk: the long sleeves, skirt and sash are supple and fall in soft, heavier folds, never see-through, never stiff, flat or board-like."
+3. t1 "showing a sheer thin undersleeve" → "showing a soft opaque undersleeve"
+4. t3/t5 "a sheer silk shawl" → "a warm opaque padded-silk stole"
+5. PHI BẠCH t1–t6 → "PHI BẠCH (winter): the shawl draped behind her back and over her arms is a warm OPAQUE padded-silk stole in {sec} (her secondary colour, clearly different from her main robe colour {main}), soft and thick, never sheer or see-through; it keeps its soft graceful drape."
+s62 lengths / approved gate (`--scope tpN`):
+| t | chars | notes | approved gate |
+|---|---|---|---|
+| 1 | 9 002 | G25, swaps 1-2-3-5 | FAIL M06 · S06 · S12 (winter swaps only) |
+| 2 | 8 817 | G25, swaps 1-2-5 | FAIL M06 · S06 · S12 |
+| 3 | 9 541 | G25, swaps 1-2-4-5 | FAIL M06 · S06 · S12 |
+| 4 | 9 871 | pre-G22 collar, swaps 1-5, **ANGLE dropped** | FAIL M06 · S12 |
+| 5 | 8 837 | swaps 1-4-5 | FAIL M06 · S12 |
+| 6 | 9 775 | swap 5 | FAIL S12 |
+| 7 | 9 561 | (no sheer words) | PASS |
+| 8 | 9 730 | (no sheer words) | PASS |
+The only FAILs are the approved sheer sentences that G28 replaces on purpose: M06 (master FABRIC line), S06 (store fabric t1–t3), S12 (PHI BẠCH). **For the foreman:** to gen a winter prompt, check_store needs a winter scope or an exemption for M06/S06/S12 that accepts exactly these G28 replacements (rule.py / gate change is the foreman's). Every other approved sentence passes.
