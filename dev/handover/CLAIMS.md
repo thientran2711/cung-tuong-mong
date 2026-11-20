@@ -478,3 +478,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW thancan r1 (opus BIG) of 6a9a01c0 | review/thancan-r1 | B | session_01N1tNP2SFmd1FjgGvLmvsRK | PASS a128fb98 (2 fixes + tests; contains main 983a9436) | 20/11 19:10Z |
 | REVIEW coop-name-clash r1 (opus BIG) of c2353df6 | review/coop-name-clash-r1 | B | session_01N1tNP3dftEE3NNrkg7qe5S | RUNNING | 20/11 18:01Z |
 | KIT kit-cost-rows-home (sonnet; KR home-stat rows + «quý nhau», E blockers of home-chapters / person-minigame) | review/kit-cost-rows-home | MAIN ROOT-80 | session_01Rc5AsMtjP4KTgBZVjENGLs | RUNNING | 20/11 18:50Z |
+| PARKING #11 dresscode SEASON + COLOUR DRESS CODE (opus E30; ORDER MAIN 19:05Z; expert pass first OD:L1327) | review/dresscode; reports/dresscode.md | FOREMAN E #20 | session_PENDING_E30 | RUNNING | 20/11 19:10Z |
