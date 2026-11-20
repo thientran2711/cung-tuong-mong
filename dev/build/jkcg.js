@@ -86,7 +86,7 @@ function palRecvFromKc(kind,pl,from){if(!kcgPal())return"";const nm=from?`${from
   h=`<p>${nm} gửi vào cung một gói đồ nhà.</p>`;rows.push(["Nhận",itm(k).n,"g"]);kcgMail().unshift({m:S.month,y:S.year,who:nm,what:itm(k).n})}
  else return"";
  if(kcgMail().length>BAL.kcg.home.keep)kcgMail().length=BAL.kcg.home.keep;
- Q.push({t:"Thư nhà",who:from?kcFace(from):pMe(),h:h+kitRows(rows.concat([["Cất ở","Tư trang › Thư nhà","n"]]))});return h}
+ Q.push({t:"Thư nhà",who:pMe()/* she reads it in her room: the sender lives at home, never stands on a palace stage (law 6b) */,h:h+kitRows(rows.concat([["Cất ở","Tư trang › Thư nhà","n"]]))});return h}
 window.palRecvFromKc=palRecvFromKc;
 function kcSendToPal(kind,pl,from){if(pl&&pl.coop){try{kcHook(kind,pl)}catch(e){}return""}return palRecvFromKc(kind,pl,from)}
 window.kcSendToPal=kcSendToPal;

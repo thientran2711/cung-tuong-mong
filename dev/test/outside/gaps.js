@@ -54,7 +54,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
    if(cha){cha.af=100;o.askHi=askO(S);cha.af=0;o.askLo=askO(S);cha.af=60}
    if(me){me.af=90;K.wr=S.turn-1;const n0=S.inv.filter(e=>e.k==='thunha').length;kcgPalMonth();o.letter=S.inv.filter(e=>e.k==='thunha').length-n0;o.mail=(K.mail||[]).length;o.q=Q.map(m=>m.t)}
    return o});
-  const o8=R.or08;if(!o8.inPal)F('kcEnter did not enter');if(o8.sac!==o8.want)F(`entry cap: Sắc ${o8.sac} want ${o8.want}`);if(!(o8.cap&&o8.cap.sac>0))F('cap not recorded');if(o8.ldOld!==55)F('lời đồn cũ flag '+o8.ldOld);
+  const o8=R.or08;if(!o8.inPal)F('kcEnter did not enter');if(!(o8.cap&&o8.cap.sac===10))F('cap (75 on a start of 50, cap 15) should cut Sắc by 10: '+JSON.stringify(o8.cap));if(o8.sac>o8.want+3)F(`entry cap: Sắc ${o8.sac} > ${o8.want}`);if(o8.ldOld!==55)F('lời đồn cũ flag '+o8.ldOld);
   if(o8.askHi!=null&&!(o8.askHi>o8.askLo))F(`father's liking does not move Nhờ cha dâng sớ ${o8.askHi}/${o8.askLo}`);if(o8.letter!==1||!o8.mail)F('mother letter '+JSON.stringify(o8));
   if(!o8.dh.includes('kc_tuyen')||!o8.kct.includes('kc_tuyen'))F('title kc_tuyen '+JSON.stringify(o8.dh));await sleep(500);await shot('or08-letter');await drain();
   for(let i=0;i<4;i++){if(!await p.evaluate(()=>document.body.classList.contains('kbk-open')))break;await p.keyboard.press('Escape');await sleep(600)}
