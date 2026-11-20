@@ -91,9 +91,11 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  /* H = the home seat, P = the palace seat (--home=b swaps them: law 1, both ways) */
  const H=HOME==='b'?B:A,P=HOME==='b'?A:B,OH=HOME==='b'?OB:OA,OP=HOME==='b'?OA:OB,hn=H===A?'A':'B',pn=P===A?'A':'B';
  /* both identity cards: wait for them, look, accept them as shown */
- {const t0=Date.now();let cd={};while(Date.now()-t0<90000){await clear(A);for(const [k,o] of [['A',A],['B',B]])if(!cd[k])cd[k]=await o.p.evaluate(()=>window.__cardSeen);if(cd.B&&(cd.A||HOME==='b'||Date.now()-t0>20000))break;await sleep(400)}
-  ok(cd.B&&cd.B.length===2&&cd.B.every(x=>!x.dis),'B card: both roads open (A\'s choice closes nothing)',cd.B);
-  if(cd.A)ok(cd.A.length===2&&cd.A.every(x=>!x.dis),'A card: both roads open',cd.A);await shot(B,'01-card-free')}
+ {const t0=Date.now();let cd={};while(Date.now()-t0<90000){await clear(A);for(const [k,o] of [['A',A],['B',B]])if(!cd[k])cd[k]=await o.p.evaluate(()=>window.__cardSeen);if(cd.B&&(cd.A||HOME==='b'||Date.now()-t0>20000))break;if(!cd.B&&Date.now()-t0>25000&&await B.p.evaluate(()=>!!(typeof S!=='undefined'&&S&&S.origin&&!kcOk(S.origin.k))))break;await sleep(400)}
+  /* an origin with no home road (cn) has no road to choose on her card, in solo as in co-op */
+  const road=o=>o.p.evaluate(()=>!!(typeof S!=='undefined'&&S&&S.origin&&kcOk(S.origin.k)));const rB=await road(B),rA=await road(A);
+  if(rB)ok(cd.B&&cd.B.length===2&&cd.B.every(x=>!x.dis),'B card: both roads open (A\'s choice closes nothing)',cd.B);else ok(!cd.B,'B card: no road to choose (her origin has no home road, as solo)',cd.B);
+  if(cd.A&&rA)ok(cd.A.length===2&&cd.A.every(x=>!x.dis),'A card: both roads open',cd.A);await shot(B,'01-card-free')}
  {const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);const a=await A.p.evaluate(()=>__co().world),c=await B.p.evaluate(()=>__co().world);if(a&&c)break;await sleep(500)}}
  const st=async o=>o.p.evaluate(()=>{const f=rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null;return{o:S.origin.k,sel:S.selx?S.selx.tier:null,kd:S.kc&&S.kc.kd,kc:typeof isKc==='function'&&isKc(),inPal:!!(S.kc&&S.kc.inPal),gate:!!(S.kc&&S.kc.gate),wIn:S.kc&&S.kc.wIn,due:S.kc&&S.kc.due,end:S.kc&&S.kc.end,name:S.name,d:[S.year,S.month,S.tuan],turn:S.turn,week:__co().week,fr:f&&f.name,srv:!!(S.srv&&!S.srv.risen),rank:S.rank,entV:S.entV||0,oiV:S.oiV||0,kpR0:S.kpR0,rk:!!S.rkSeed,diff:S.diff||null}});
  {for(let i=0;i<20;i++){await clear(P);const q=await P.p.evaluate(()=>Q.length&&Q[0].pid==='kc2Sel');if(!q)break;await P.p.evaluate(()=>chooseM(Q[0].opts.length-1));await sleep(300)}
