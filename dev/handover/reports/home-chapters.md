@@ -59,3 +59,15 @@ r1 saves repaired 24/24, no face used twice. No art request needed (no drawing).
 4. Banner: kc3 chapter dialogs had no picture of their own → the §59 placeholder, often still loading (empty frame). Each arc now names its EVENTS.json meaning group (KC3PIC: kc_ch thu-nha, kc_ke am-muu, kc_tt mat-uoc, kc_dtq bien-ai, kc_muoi bac-tien, kc_thd tai-nghe, kc_td vu-oan, kc_hon khach-den, tm96z tu-tinh), passed to the kit as the dialog's evId "cat:<group>" (beat card, result card, ending card; restored on reload via deserQ). Shots: letter picture on «Thư của cô mẫu», scheming picture on «Kế mẫu». Teacher «HAY» trait text: kcFamCard owner's, not touched (note only).
 Tests on 7882ea5d7: one-core-guard PASS · laws.js PASS (incl. static law 4) · faces.js PASS · smoke 6 origins × 3 lives errs [] fails 0 · oldsave main→this and r1→this 755x1000 errs [] · quickcheck alone PASS (old save ok, perf ≈ live; the only FAIL line was "not built" before the build commit) · shots.js Fold 755x1000@2 + iPad 1180x820@2 (10 screens each, bad 0), looked at: chapter dialogs show their picture, 5 teachers with faces. CDN upload 401 (Authentication error) → shots kept at /home/user/wt/e25b-shots, none in git.
 Remaining: item 1 wiring after KIT READY (then rerun costrows.js and re-shoot E28 + kc_ke s1 + bà mối).
+
+## r2 final — E25b — SẴN SÀNG KIỂM home-chapters r2 5853d71a4 (review/home-chapters-r1)
+Base: KIT READY 3332c63b (review/kit-cost-rows-home, includes LIVE main 983a9436) merged = 1d3bf5ef9 (conflicts assemble.py list union + KIT_REQUESTS both kept + index/sw rebuilt). Item 1 wired: kit parts only, no private rows.
+- Data side: relation gains/losses written in kit words («<người> thiện cảm ±n», was «… với ta / với ngươi ±n», 13 lines, jkc3.js) so the kit hint map names them.
+- costrows.js now reads the card as the kit shows it (stat name OR the kit's own hint words from kitHintPhrase) at the sharpest hint level (Tâm cơ 100: below it the kit hides «hỏng thì …» by design); «không» row check fixed (only a bare «không» cell).
+| family | before (r2 first SSK) | after |
+|---|---|---|
+| arc beat options | 101/366 hide a home stat · 10 «không» | 0/384 · 0 |
+| home events E9/E15/E28/early | 8/10 · 1 | 3/14 · 0 (all «thế lực nhà», E28) |
+E28 «Dâng phần hồi môn…» now TỐN Hồi môn −40 · ĐƯỢC «được lòng người» (Fold + iPad shots looked at). Left: «thế lực nhà ±n» (clan power, tdPowAdd) has no kit words → NEW KIT REQUEST «KR thế lực nhà» filed in dev/kit/KIT_REQUESTS.md on the branch (3 E28 options); worker draws nothing.
+Act cards (bà mối «nói khéo», teachers): shot looked at, Tốn/Được rows shown (e.g. «Bạc −20 · bà mối thiện cảm +10»); the scan cannot find act cards on screen (not counted).
+Tests on 5853d71a4: one-core-guard PASS · laws.js PASS · faces.js PASS · smoke 6×2 errs [] · kit-cost-rows-home.js PASS 15 · shots.js Fold 755x1000@2 + iPad 1180x820@2 bad 0 (20 screens, looked at E28, matchmaker, chapter dialogs) · quickcheck alone PASS (old save ok, perf ≈ live). CDN 401 → shots local /home/user/wt/e25b-shots, none in git.
