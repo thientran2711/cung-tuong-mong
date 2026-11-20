@@ -25,7 +25,7 @@ const KDH_ART={};
 function kdhArt(t){if(KDH_ART[t]===undefined){KDH_ART[t]=false;const im=new Image();im.onload=()=>{KDH_ART[t]=true};im.onerror=()=>{};im.src="img/kit/title-plate-"+t+".webp"}return KDH_ART[t]===true}
 /* K-GE-2 (review/kit-ge): the «Thiên mệnh» plate (tier 8) in TWO tones, same shape: sh "t" = thiện (gold-white), "a" = ác (gold-crimson). The tone comes from o.sh, the title's .sh,
    or the grand-ending key suffix (id "ge_<branch>_<n>t|a"); a title without a tone draws the plain tier plate. */
-function kdhTone(t,o){const s=(o&&o.sh)||t.sh||((/^ge_.+_\d+([ta])$/.exec(String(t.id||t.key||""))||[])[1]);return s==="t"||s==="a"?s:""}
+function kdhTone(t,o){const s=(o&&o.sh)||t.sh||([t.key,String(t.id||"").replace(/^dh-/,"").split("@")[0]].map(k=>(/^ge_.+_\d+([ta])$/.exec(String(k||""))||[])[1]).find(Boolean));return s==="t"||s==="a"?s:""}
 function kitTitlePlate(t,o){o=o||{};t=kitTitleDef(t);if(!t)return"";const tier=Math.max(1,Math.min(8,t.tier|0||1)),col=RCOL[tier-1],still=typeof kfStill==="function"&&kfStill(),tone=kdhTone(t,o);
  const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
  return `<span class="kdh kdh-t${tier}${tone?" kdh-sh"+tone.toUpperCase():""}${kdhArt(tier)&&!tone?" kdh-art":""}${still?" kdh-still":""}${o.cls?" "+o.cls:""}" style="--dh:${col}${kdhArt(tier)&&!tone?`;--kdh-art:url(img/kit/title-plate-${tier}.webp)`:""}"${o.id!==false?` data-kdh="${esc(t.id)}"`:""}><i class="kdh-s" aria-hidden="true"></i><b>${esc(t.name)}</b></span>`}

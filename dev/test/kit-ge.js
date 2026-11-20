@@ -31,11 +31,13 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    try{kitModalClose()}catch(e){}
    /* the real data API */
    try{const k=Object.keys(GE_CAT)[0];const gm=geMap(k);o.real={k,ok:!!gm,spine:gm&&gm.spine.length,ends:gm&&gm.ends.length};const h2=document.createElement('div');host.appendChild(h2);kitBranchMapMount(h2,gm);o.real.nodes=h2.querySelectorAll('.kbm-n').length;o.real.ends2=h2.querySelectorAll('.kbm-e').length;o.real.txt=h2.querySelector('.kbm-c').textContent}catch(e){o.real={err:String(e.message||e)}}
+   try{const bk=Object.keys(GE_CAT)[0];S.dh=S.dh||{};['t','a'].forEach(x=>{S.dh['ge_'+bk+'_1'+x]={i:0}});const ot=dhObj(S,'ge_'+bk+'_1t'),oa=dhObj(S,'ge_'+bk+'_1a');o.engine={t:!!ot&&/kdh-shT/.test(kitTitlePlate(ot)),a:!!oa&&/kdh-shA/.test(kitTitlePlate(oa)),tier:ot&&ot.tier}}catch(e){o.engine={err:String(e.message||e)}}
    return o});
   const t=r.tone;ok(t.length===3&&t[0].cls.includes('kdh-shT')&&t[1].cls.includes('kdh-shA')&&!/kdh-sh[TA]/.test(t[2].cls),`${tag} K-GE-2 tones by key suffix / sh / plain`,t.map(x=>x.cls));
   ok(t[0].bg!==t[1].bg&&t[0].bg!==t[2].bg&&t[1].bg!==t[2].bg,`${tag} K-GE-2 three distinct looks`);
   ok(Math.abs(t[0].h-t[2].h)<=1&&Math.abs(t[1].h-t[2].h)<=1,`${tag} K-GE-2 same shape/height as the plain plate`,t.map(x=>x.h));
   ok(r.row.valTop>=r.row.labBottom-1&&r.row.valW>=r.row.boxW*.9,`${tag} K-GE-3 plate on its own line, value full width`,r.row);
+  ok(r.engine&&r.engine.t&&r.engine.a,`${tag} K-GE-2 real engine titles (dhObj ge_…t / ge_…a) get their tone`,r.engine);
   const k=r.kbm;ok(k.nodes===13&&k.here===1&&k.past===4&&k.ahead===8&&k.rare===2&&k.ends===4,`${tag} K-GE-1 spine 13 · here 1 · past/ahead · rare 2 · ends 4`,[k.nodes,k.here,k.past,k.ahead,k.rare,k.ends]);
   ok(k.railPast==='solid'&&k.railAhead==='dotted',`${tag} K-GE-1 rail solid behind / dotted ahead`,[k.railPast,k.railAhead]);
   ok(k.states.join()==='open,crack,shut,open'&&/Còn mở/.test(k.words[0])&&/Chỉ còn đường thua/.test(k.words[1])&&/Đã khép · chương 8/.test(k.words[2]),`${tag} K-GE-1 end states + words`,k.words);
