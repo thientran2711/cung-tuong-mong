@@ -44,3 +44,10 @@ Owner-OK two-bed rooms with one bed LEFT + one RIGHT (L835 "rooms 11–15 all OK
 - room 13 Chung Tú tây phối bedroom aFG6jdzfSh (first made from owner L816 "frontal 2-bed layout"; 2-wall, windows LEFT M2X 8aiwqQTIrU; left bed just right of the window strip, right bed at the right edge, dressing table + panel + doorway centre) ← RECOMMENDED template
 - room 15 Hàm An đông phối bedroom WDg1hlscXe (same composition, quatrefoil doorway centre)
 Both look alike; neither has the left bed touching the left edge (window strip + small furniture there). → asked ROOT-61 which the owner means. HOLD all bedrooms until named.
+
+## JOB 2 — batch 5 rooms (receptions not on hold)
+| # | room | gen | layout | pair | floor_c | faults (list only, no redraw without owner yes) | tags sheet |
+|---|---|---|---|---|---|---|---|
+| 24 | Vĩnh Hòa đông phối reception | 8aiORuSIrU | 3-wall, windows RIGHT (cpS5YIl0eP); official's-hat chair pair + tea table in the LEFT third under a camellia/oriole scroll; gourd doorway in a lozenge lattice CENTRE; curio shelf right third; guqin on a low table left wall; bamboo-root flower stand + birdcage at the windows + NEW CARD_VH + FR | ĐĐ all cream-ivory | 17.3 | flowers read as pink peonies more than camellias; doorway = round-topped arch, gourd shape weak; nothing large over tag 1 | https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/pr13/pr13-ipad-tags-vinh-hoa-cung-dong-phoi.jpg |
+A17: new room on the DH_DONG_REC frame; new CARD_VH; only layout sentences, occupants, card and colour differ. Gates: builder GATE PASS + room_gate.py PASS. Credits after: ~93 200.
+Room 23 = Vĩnh Hòa đông phối BEDROOM (2w left) HOLD until ROOT-61 names the L22 template.

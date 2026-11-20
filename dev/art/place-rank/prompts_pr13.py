@@ -445,6 +445,32 @@ CT_DONG_NGU_R3 = ("Chung Tú cung Đông phối điện bedroom, the cosy bedcha
     + " Exactly two beds; only the two colours soft green (curtains) and cream-ivory (fabrics)." + NOPE + RECT + GUIDE_S + BEDH4 + BEDW + FG)
 OUT['chung-tu-cung-dong-phoi-ngu-r3'] = dict(prompt=room9(CT_DONG_NGU_R3, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3X])
 
+# PR17: Vĩnh Hòa style card (new; pattern of CARD_CP/KT/CT/HA/DH, none of these used by another palace): camellias; pairs of orioles on
+# bamboo stems; warm reddish-brown jichimu wood with small carved boxwood inlays; southern official's-hat chairs; a gourd-shaped doorway in a
+# lattice partition of overlapping lozenges.
+CARD_VH = ("Vĩnh Hòa cung signature style, the same in every room of this palace: camellias (hoa trà) are its flower, painted on the screens, "
+    "embroidered on the silks and in the pots; motifs of pairs of orioles on bamboo stems carved in the beams and furniture; warm reddish-brown "
+    "jichimu wood with small carved boxwood inlays; southern official's-hat armchairs with a gently curved top rail that does not stick out; a "
+    "gourd-shaped doorway in a lattice partition of overlapping lozenges. ")
+# 24) Vĩnh Hòa ĐÔNG phối reception — pair Đáp ứng + Đáp ứng (ĐĐ, least used: 2× in rooms 1–22): whole room cream-ivory #EAE3D0. THREE walls,
+#     windows RIGHT (image 3 cpS5YIl0eP; alternation 22 = 3w right, 23 = 2w left bedroom (HOLD L22), 24 = 3w right). Own layout (daybeds
+#     9/14/16, dais 18, chairs centred 11/20, chairs right half 12/22, chairs left half on a platform 7, daybed left of centre 4): host seats =
+#     a pair of official's-hat armchairs + square tea table in the LEFT third under a tall hanging scroll of camellias; the gourd doorway in
+#     the CENTRE of the back wall; RIGHT third = a tall open curio shelf (duobao ge); left side wall = a guqin on a long low table; right
+#     windows = a bamboo-root flower stand with camellias + a hanging birdcage. + CARD_VH + FR.
+VH_DONG_REC = ("Vĩnh Hòa cung Đông phối điện reception room, the small sitting room where two lower-ranking imperial consorts (two Đáp ứng) "
+    "living in the east side hall of a palace in ancient China receive their guests, a real room in daily use, no bed anywhere, " + W3R + ": wooden "
+    "pillars, lattice windows in the RIGHT side wall onto a sunny garden; against the back wall in its LEFT third, square to it and seen straight "
+    "on, the host seats, the large clear main subject: a pair of official's-hat armchairs of reddish-brown jichimu wood with a square tea table "
+    "and a tea set between them, under a tall hanging scroll painted with camellias and orioles; in the CENTRE of the back wall a lattice "
+    "partition of overlapping lozenges with the gourd-shaped doorway onto an inner room; in the RIGHT third of the back wall a tall open curio "
+    "shelf with porcelain, books and small jade pieces; against the left side wall a guqin on a long low table; along the right window wall a "
+    "bamboo-root flower stand with potted camellias and a small birdcage hanging by the window; hanging paper lanterns with tassels, a small "
+    "incense burner. " + CARD_VH + pair1('cream-ivory', '#EAE3D0') + "the sheer window curtains tied back, the curtain of the doorway, the "
+    "lantern tassels, the seat cushions and the table runner, set off by the reddish-brown wood. " + QN + " The only rank colour is cream-ivory."
+    + NOPE + P['NOSOFA'] + RECT + GUIDE_S + FR)
+OUT['vinh-hoa-cung-dong-phoi'] = dict(prompt=room9(VH_DONG_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3])
+
 # GATE (as v9): common block present, method refs, no drift words, no phoenix/yellow below t7.
 for k, v in OUT.items():
     p = v['prompt']
