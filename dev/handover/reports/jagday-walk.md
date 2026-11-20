@@ -42,3 +42,20 @@ walk-cost.test ALL OK (1–11) · ag-walk 10/10 · ptime ALL OK · ptime2 ALL OK
 FOLLOW-UP GAP | jptime ledger (ptLedger) + j95s servant errands | S | an NPC sent on a timed errand is written AT the target place from khắc t0 (and back home at due) with no «on the way» khắc (~8 far moves / 80 buổi); the window already holds the trip. Fix in ptLedger: the first / last travel()−1 khắc of an NPC's window = road rows (still «errand», still away — law 6b), same per-walker travel.
 
 SẴN SÀNG KIỂM review/jagday-walk 80d1cc41fecdf1f7059505c09fd329525797011a (TIER BIG)
+
+## ROUND 1 FIX (REVIEW FAIL 1 @80d1cc41, law 11: errand-ledger jumps = same family)
+- jwalk `walkErrRow` (one rule, j9 travel per walker = the person sent): inside an errand's away window [t0, due), the first travel(from, place)−1 khắc = her road there `[place,"go",tgt,"<why> · đang trên đường"]`, the last travel(place, back)−1 khắc = her road back `[back,"go",…,"… · đang trên đường về"]`, the khắc between stay "errand". from = her row before t0 (kept on the task, a.wfr); back = where her day goes on at due (this buổi), else from. n < both roads → split by the roads, no khắc added; due / cost / ptAwayOf unchanged (OD 18/11 ~20:00Z: n includes the walk). «go» rows with a why = j95sKeep → busy, never followed / sent again (law 6b); jwalk / agWalkHeld treat them as held.
+- jptime ptLedger: NPC-sender rows go through it (it runs after j95sync, so after jwalk); a row is rewritten when place, label or why differ.
+- «mine» rows (ptLedger, her own people) and jerr errLedger (fallback, hers only) keep the slot place by design (token hidden + «đang đi …» chip): the same scan finds 0 errand jumps from them (5 + 10 + 10 runs × 16 buổi), so no change (rule per the review: change only if any left).
+- walk-cost test 11: errand class in the 16-buổi scan (on 0) + unit case: NPC sender, far place, n = 3 → `A/serve | B/go | B/errand | A/go`, due = t0 + 3, ptAwayOf same task, all window rows busy.
+
+BEFORE / AFTER (same bot, 5 runs × 16 buổi; far = travel ≥ 2, no «on the way» khắc)
+| class | base ffd22ea6 | 80d1cc41 | 18f7921c (r1) |
+|---|---|---|---|
+| deed → deed | 18 | 0 | 0 |
+| deed ↔ other | 8 | 0 | 0 |
+| follower | 2 | 0 | 0 |
+| errand | 5 | 8 | 0 (10 more runs: 0) |
+| all | 33 / 121 | 8 / 116 | 0 / 125–151 |
+Gates on b25e42cc (one at a time): walk-cost ALL OK (1–11 incl. errand class + unit) · ag-walk 10/10 · ptime ALL OK · ptime2 ALL OK · invite-host-away 9/9 · time-spill-guard PASS (static + runtime) · coop-e2e 68/68 · QUICKCHECK PASS (old save from live ok, core gates PASS, perf new/live render 263/312, buổi 1474/1859 ms). Still stacked on review/walk-cost-rv ffd22ea6 (not in main 5cd6d24a at push).
+SẴN SÀNG KIỂM review/jagday-walk b25e42cc60f8469a662273112ab36366f17bbe78 (TIER BIG, round 1)
