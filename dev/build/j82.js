@@ -179,6 +179,18 @@ function kg82FxBad(g,x,y,r,now,hitAt){const F=BAL.mgFx,red=kg82Col("--bad",kg82C
  if(!hitAt)return 0;const e=now-hitAt;if(e<0||e>=F.badMs)return 0;const q=e/F.badMs;g.save();g.globalAlpha=1-q;g.strokeStyle=red;g.shadowColor=red;g.shadowBlur=F.blur*.5;g.lineWidth=Math.max(4,r*.3*(1-q));
  g.beginPath();g.arc(x,y,r*(1+q),0,Math.PI*2);g.stroke();g.restore();return Math.sin(e/26)*F.badShake*(1-q)}
 kg82FxBad.shake=(now,hitAt)=>{const F=BAL.mgFx,e=now-hitAt;return e<0||e>=F.badMs?0:Math.sin(e/26)*F.badShake*(1-e/F.badMs)};
+/* mg-play2 (law 11): the SAME lit path when the path curves (hát melody ribbon …): top / bot = [[x,y]…] edge points left→right; board outside darkened laneDim,
+   bright core (glow × lane), two glowing edges — same numbers, same look as the straight kg82FxLane */
+kg82FxLane.path=(g,top,bot)=>{const F=BAL.mgFx,W=g.canvas.width,H=g.canvas.height;if(!top.length)return;const poly=()=>{g.moveTo(top[0][0],top[0][1]);for(const p of top)g.lineTo(p[0],p[1]);for(let i=bot.length-1;i>=0;i--)g.lineTo(bot[i][0],bot[i][1]);g.closePath()};
+ const h=x=>Math.round(x*255).toString(16).padStart(2,"0");g.save();g.beginPath();g.rect(0,0,W,H);poly();g.fillStyle=`rgba(10,6,20,${F.laneDim})`;g.fill("evenodd");
+ g.beginPath();poly();g.fillStyle=F.glow+h(F.lane);g.fill();g.shadowColor=F.glow;g.shadowBlur=F.blur*.4;g.strokeStyle=F.ring;g.lineWidth=F.laneEdge;
+ for(const L of [top,bot]){g.beginPath();L.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.stroke()}g.restore()};
+/* mg-play2 (law 11): the SAME lit path along a stroke to trace (thư pháp …): P = [[x,y]…], w = the path width — glow core × lane + glowing ring edge */
+kg82FxLane.stroke=(g,P,w)=>{const F=BAL.mgFx,h=x=>Math.round(x*255).toString(16).padStart(2,"0");if(!P.length)return;const go=()=>{g.beginPath();P.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.stroke()};
+ g.save();g.lineCap="round";g.lineJoin="round";g.shadowColor=F.glow;g.shadowBlur=F.blur*.4;g.strokeStyle=F.ring;g.lineWidth=w+2*F.laneEdge;go();g.shadowBlur=0;g.strokeStyle=F.glow;g.lineWidth=w;go();g.restore()};
+/* mg-play2 (law 11): the «keep it here» zone of a gauge (nấu / Tu đức level …): kit --good × BAL.mgFx.zone + glowing ring edges, one look for every gauge */
+kg82FxLane.zone=(g,x,y,w,h)=>{const F=BAL.mgFx;g.save();g.globalAlpha=F.zone;g.fillStyle=kg82Col("--good","#2d7a52");g.fillRect(x,y,w,h);g.globalAlpha=1;g.shadowColor=F.glow;g.shadowBlur=F.blur*.3;g.strokeStyle=F.ring;g.lineWidth=F.laneEdge*.7;
+ g.beginPath();g.moveTo(x,y);g.lineTo(x+w,y);g.moveTo(x,y+h);g.lineTo(x+w,y+h);g.stroke();g.restore()};
 window.kg82FxLane=kg82FxLane;window.kg82FxBad=kg82FxBad;
 function kg82SprR(n){const im=kg82Img(n);return im.naturalWidth?im.naturalHeight/im.naturalWidth:1}
 /* label on a painting: light halo (or dark halo on night boards) so text always reads */

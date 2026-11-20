@@ -51,8 +51,8 @@ function k91Hold(box,env){const C=kg82Canvas(box,.9,430),{g,W,H}=C;const lv=env.
  const stop=k91Loop(now=>{const dt=Math.min(50,now-last);last=now;const t=now-t0;const tgt=held.size?-V:V;vy+=(tgt-vy)*Math.min(1,dt/80);y=cl(y+vy*dt,H*.06,H*.94);
   const ok=t>=0&&Math.abs(y-cy(t))<band;if(t>=0&&t<=DUR){tot+=dt;if(ok)inb+=dt}
   kg82Bg(g,W,H,"hat",.06,.75);
-  /* ribbon */const ta=t-MX/SPD,tb=t+(W-MX)/SPD;g.save();g.beginPath();for(let tt=ta;tt<=tb;tt+=40){const x=MX+(tt-t)*SPD;g.lineTo(x,cy(tt)-band)}for(let tt=tb;tt>=ta;tt-=40){const x=MX+(tt-t)*SPD;g.lineTo(x,cy(tt)+band)}g.closePath();
-  g.fillStyle="rgba(255,226,140,.38)";g.fill();g.setLineDash([4,6]);g.strokeStyle=K91C.gold();g.lineWidth=1.4;g.beginPath();for(let tt=ta;tt<=tb;tt+=40){const x=MX+(tt-t)*SPD;g.lineTo(x,cy(tt))}g.stroke();g.restore();
+  /* ribbon = the kit lit path (mg-play2 law 11: was a .38 fill + thin dashed line, too faint) */const ta=t-MX/SPD,tb=t+(W-MX)/SPD;{const T=[],B=[];for(let tt=ta;tt<=tb+40;tt+=40){const x=MX+(tt-t)*SPD;T.push([x,cy(tt)-band]);B.push([x,cy(tt)+band])}kg82FxLane.path(g,T,B)}
+  g.save();g.setLineDash([4,6]);g.strokeStyle=K91C.gold();g.lineWidth=1.4;g.beginPath();for(let tt=ta;tt<=tb;tt+=40){const x=MX+(tt-t)*SPD;g.lineTo(x,cy(tt))}g.stroke();g.restore();
   /* lyric words on the ribbon (from the start: the countdown and its hint own the board before) */g.font=k91F(600,Math.max(12,Math.min(16,W/30)));g.textAlign="center";g.textBaseline="alphabetic";
   if(t>=0)for(const w of words){if(w.t<ta-500||w.t>tb+500||w.t>DUR)continue;const x=MX+(w.t-t)*SPD;g.fillStyle=Math.abs(w.t-t)<350?K91C.red():"#3a2a1e";kg82Lbl(g,w.x,x,cy(w.t)-band-6)}
   g.fillStyle="#c23b2233";g.fillRect(MX-1,0,2,H);
@@ -262,7 +262,7 @@ function k91Cook(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.25
     for(let f=0;f<=lvz;f++)kg82Spr(g,"banh-flame",rx+cs*sc+8+f*9,cy+cs*.18,10,null,{ay:1,alpha:i<si?.4:1});
     if(i<si){g.fillStyle=K91C.good();g.font=k91F(700,Math.round(cs*.6),1);g.textAlign="center";g.fillText("✓",rx+cs/2,cy)}
     rx+=cs*sc+gap+lvz*9})}
-  /* gauge */g.fillStyle="#fffdf6";g.fillRect(GX,GY,GW,GH);g.strokeStyle=K91C.hair;g.strokeRect(GX,GY,GW,GH);g.fillStyle="#2d7a5244";g.fillRect(GX,GY+GH*(1-z[1]),GW,GH*(z[1]-z[0]));
+  /* gauge */g.fillStyle="#fffdf6";g.fillRect(GX,GY,GW,GH);g.strokeStyle=K91C.hair;g.strokeRect(GX,GY,GW,GH);kg82FxLane.zone(g,GX,GY+GH*(1-z[1]),GW,GH*(z[1]-z[0]));/* mg-play2 law 11: was .27 green */
   const hy=GY+GH*(1-heat);const gr=g.createLinearGradient(0,GY+GH,0,GY);gr.addColorStop(0,"#f0b040");gr.addColorStop(1,"#c23b22");g.fillStyle=gr;g.fillRect(GX+3,hy,GW-6,GY+GH-hy);
   g.fillStyle=inZ?K91C.good():K91C.red();g.beginPath();g.moveTo(GX+GW+2,hy);g.lineTo(GX+GW+11,hy-6);g.lineTo(GX+GW+11,hy+6);g.fill();kg82Spr(g,"banh-flame",GX+GW/2,GY+GH+22,18,null,{ay:1});
   {const zy=GY+GH*(1-(z[0]+z[1])/2);for(let f=0;f<=st[1];f++)kg82Spr(g,"banh-flame",GX+GW+30+f*13,zy+8,14,null,{ay:1})}
