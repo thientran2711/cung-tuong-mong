@@ -1,0 +1,35 @@
+# tut-road review (BIG, E27r opus) — worker sha def9eaf0 → review sha 9b76662f (review/tut-road-rv)
+
+PRIORITY #1 CHECK ('tut-road|tut-followups|kitShopBuy|__kshBuild'): OD 0 | ledger 1 | claims E27 session_01DgYSWkVoq36pPMmqqz6m1u (done) + this review row | main jtq14.js:20-75, jinv.js:468 kitShopBuy, jcoopthinf.js:284-286 __kshBuild/reg8 kitShopBuy | review/tut-road def9eaf0 | report dev/handover/reports/tut-road.md (r3).
+
+**VERDICT: PASS 9b76662f** — FF on LIVE origin/main ca642f9c (checked with `git merge-base --is-ancestor` right before the push).
+
+## What the reviewer changed (small fix, on review/tut-road-rv)
+1. **5 roads had no road line (law 11 / brief "right for EVERY road").** `roadSj()` returned "" for any subject holding a cast placeholder, and its comment wrongly said "uses its title". Affected: muoi_no, cn_chu, td_tha, ch_ho, cnv_chu (5 of 40 origin roads). The person of these roads is cast only when the road starts (j67 newThread67 → fill67), so at chapter 1 the subject is now told **unnamed**: `{v}`/`{foe}` → "một phi tần", `{mis}` → "chủ nhân" (const SJ0 in jtq14). Nobody is invented or named early (law 6b). Any other `{tag}` still gives no road line.
+2. dev/test/tut-road.js now also checks **every** origin road (not just the rolled one): `PASS 40/40 origin roads give a road line` (set `TR_ALL=1` to print all 40).
+3. Final-merges of LIVE: fd682a8d → 90b7e797 → f43efc71 → 0aaf8152 → ca642f9c (only index.html/sw.js conflicted; rebuilt each time with build_site.sh).
+
+## (A) OR15 — «Duyên cớ» row
+- Kit only (law 9): it is one more row in the same kitPanel info card (`rows` → sections), no new CSS or frame. Shots: the card fits whole on Fold 755x1000 and iPad 1180x820 for tt (tt_oan / tt_mat), td (td_song / td_tha), cnv (cnv_ma / cnv_chu); no overflow, 0 page errors.
+- 10 origins × ch1–3 = 30 lines (tt, dtq, ch, muoi, thd, td, nc, bd, cn, cnv). They follow STORY_ROADS_PLAN:69-90 (court families: house letter + sell + buy; muoi/thd: short stipend + buy through the eunuch; td: old steward, side gate, go somewhere; nc/bd: Lễ bộ checks custom; cn/cnv: mistress, gift, fellow maid's grudge). Each line points to the quests of its own chapter.
+- Wording (law 7): read all 30 + all 40 road lines. No %, no numbers typed, no odds words needed. Cổ trang register is fine. cnv lines are written with "ngươi" and j84 shows "ta" on screen ("Ta mới vào làm kẻ hầu…", "Điều ta canh cánh…"), as VANPHONG §2.1 asks. Consort lines use `{x}` → "tiểu chủ"/"nương nương" through jtq14 `X()`. This is the same helper the existing «Lời dặn» row uses. NOTE (old issue, not from this branch): jtq14 `X()` types the address by hand and does not use jvoice `kAddr`. That breaks VANPHONG §2 ("one core for address"). File it as a separate GAP; it is not this branch's fault.
+- Law 4: the card adds no number. «Phần thưởng» still prints `QB().bac` from BAL.
+- Law 6b: the only new people are the old steward (td; a story-only NPC, allowed by OD:L1234) and unnamed groups ("kẻ", "sứ thần theo hầu", "Khả hãn"). Nobody is named before the road casts them.
+
+## (B) LIVE bug — jinv.js kitShopBuy
+- Fault confirmed on clean main: `shop-buy-solo` FAILs 2/2 (nvp bạc 2000→2000, chest 9→9; pet same). On the branch it PASSes 2/2 every run.
+- Fix: `o` is replaced only when `__kshBuild(key)` returns a shop. Solo, and the host buying for herself, now use the open shop (KSHOP.reg). The host running a guest's intent (CW.ctx set, KSH[key]) still rebuilds HER shop from her data. On the guest, reg8 still turns the tap into one intent to the host (`done` only fixes local stock/qty). So there is one onBuy per tap and no double buy.
+- Co-op tests, run with the branch code in a clean sparse worktree: coop-thin-f3 2/2 runs all ok (S1 Mua ×2: bạc −price×2, +2 items; S2 Bán; S2 item ledger shows the piece in one place = law 6c; D1 double tap = one intent). coop-thin-f4 all ok (P3 pet shop via kitShopBuy pet). NOTE: in the full (non-sparse) review worktree f3 failed in 3/3 runs, each time on a different row (G1 / X1 / B1, gifts and use, not the shop). The same code in a clean sparse worktree passed 2/2, and main passed 3/3. So this is the environment (timing), not the code.
+- Prices come from the item table (tile showed «30 bạc», chip «Bạc −30», bạc 2000→1970, chest +1) — law 4 ok. Old saves: no save field changed; quickcheck old-save from LIVE loads and plays a buổi.
+
+## Runs (on the merged review shas)
+- quickcheck ALONE (bash; `sh` is dash here and fails on `set -o pipefail`): PASS on 415f459c, 56c007c3 (first run hit the flaky G4 coop-one-world seed 3; alone it passed 3/3, and the rerun gave a full PASS), 629bcfad, e0dcafab, 85757d60. Each one: old save ok, core gates PASS, perf new ≈ live. 9b76662f: see the last line below.
+- one-core-guard PASS · tut-road PASS 10/10 origins + 40/40 roads · tut-origins-scan PASS 10/10 · story14-view PASS 755x1000 + 1180x820 · shop-buy-solo PASS 2/2 (main FAIL 2/2).
+- tut-quests: 35/35 for tt and bd on def9eaf0+LIVE (415f459c), 629bcfad and 85757d60 (tt). FLAKES on later runs, each in a different place, all in the test setup and not in the quests: (a) «ban» not sold because `econSellUI` needs `can(1)` (khắc left) and the test does not reset `S.buoi` before it; (b) maid ch3 "Kết thân thiện cảm 20" not reached in one run; (c) bd «an» Bạc check `b1>=b0+bac−60` missed because of a random event (the quest itself was done, an+). Follow-up for the tests owner: in tut-quests.js reset `S.buoi=0; S.suc=80` before the sell step, and widen or remove the bạc tolerance. Not a fault of the code under review.
+
+## Shots (local only; CDN refuses with 401 on this account; never committed)
+card-{tt,td,cnv}-{755,1180}.png, shop-before/after-{755,1180}.png. Each was looked at 3×. Card: the rows Lời dặn / Duyên cớ / Mục tiêu / Việc phải làm / Phần thưởng / Hạn all fit inside the kit card, the narrator figure is whole, and nothing is cut. Shop: the reveal card «Thường · Trâm ngọc bích · Nhận» shows and the «Bạc −30» chip flies to the Bạc stat. The scratch shots are deleted with this verdict.
+
+## Laws touched
+1–3 n/a (no new choice) · 4 ok · 5 n/a · 6b ok (unnamed until cast), 6c ok (purchase lands in the chest, f3 ledger) · 7 ok · 9 ok (kitPanel row) · 11 ok after the reviewer fix (all 40 roads; both shop keys nvp + pet) · 12 ok (Fold + iPad) · 13 ok (worker brief + report carry the check line).
+- **9b76662f (final): QUICKCHECK PASS** · 214 s · old save ok · core gates PASS · perf new/live render 252/249, tab 451/467, buổi 2087/1369 ms (one median, within the gate; earlier runs 1130–1704 vs 1333–1929, so this is noise), tasks>200ms 21/21.
