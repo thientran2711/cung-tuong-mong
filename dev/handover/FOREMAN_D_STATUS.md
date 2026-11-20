@@ -356,3 +356,4 @@ SẴN SÀNG KIỂM e4625ca51d6d47db689526e40469717a6c9e402c — DAY-KHẮC LAND 
 - (20/11 09:33Z, D #9) CAL-P2C #1 SẴN SÀNG KIỂM d91d3c0a (final-merged LIVE 66bd36cd; one BAL.orig.art) → REVIEW cal-p2c BIG = session_01964izEVPc7dDPaXGpVx4pK (opus). Worker idle for FAIL fixes.
 - (20/11 09:33Z) INVITE-HOST-AWAY #1 r2 (FAIL 1 co-op seat fixed): SẴN SÀNG KIỂM 252ef6bad145891ddcffff0a3e371f0fcf75805a (review/invite-host-away, FF from a797336e + merge main 66bd36cd; QUICKCHECK PASS)
 - (20/11 09:45Z) FROM MAIN: main is now ROOT-77 session_01Rc5AsKMDkP7nYjtmjLP5tq (child of ROOT-76, depth 6). LIVE 66bd36cd, ROLLBACK 90d57324. LAND READY → write it here as before.
+- (20/11 ~10:40Z) REVIEW day-khac-audit r2 (BIG): PASS — LAND READY review/day-khac-audit-rv d889d505ddd8ff8710a3878b95dcdfb186f97480 (= e4625ca5 + final-merge LIVE fd682a8d; quickcheck PASS, time-spill guard PASS, coop-e2e 68/68). reports/review-day-khac-audit-r2.md
