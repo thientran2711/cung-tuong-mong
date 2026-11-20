@@ -60,3 +60,27 @@ the bottom · lo BACK smoke clouds, then sleeves turn greenish semi-transparent 
 size jump fr 12–24, sleeves at/over the edge · hanghai OUT small pop fr 18–21, BACK fr 3–14 zoom-in + yellow-green confetti near chroma.
 Clean: buon, binh, muu. ghen A reads more angry than jealous.
 Credits ht set: 20 × 135 + 30 × 940 = 30 900. Balance at end 191 294 (shared pool, started 413 165). Ledger +50 lines.
+
+## F14 (owner Lượt 800, relayed 20/11 ~00:20Z): "Qing-style" banned → sg4_prompts.py now "of the inner palace" (pushed).
+Made with the old wording: only the A keyframe prompts carry it (B/clip prompts never did) → the 4 giận samples' A, and all 10 A of
+ht, htg, tg, tv (all made before the rule). Headwear look: emperors = gold crown on topknot (not Qing) but a STANDING round collar;
+tg = round black hat with red knob (reads Qing eunuch cap); tv = helmet, not Qing. Fix would need new keyframes → not done, told ROOT-59.
+
+## SET tv (20/11 ~00:25Z) — palace guard, 10 seals, sub-agent
+| seal | A used | B used | OUT | LOOP | BACK | fr out/loop/back | OUT start |
+|---|---|---|---|---|---|---|---|
+| vui | VX7LBElMMU | Cqn35KqEEy | 5jDYlJtKxe | SyhX928Ub8 | yiumZccPW9 | 49/60/58 | 0.75 s |
+| buon | gOmdyGTSXO | 79f86igJAL | gOmd4AwSXO | ksecS9h16B | DoOltFNpcl | 56/60/48 | auto |
+| so | N2qfAev6D9 | aFG6qKHfSh | 0eUxBEjTfW | 1ld0U3Ar4r | cpSrXuS0eP | 54/60/54 | auto |
+| an | bxMnjuO5Y2 (flat of lJteOzEgv9) | cpSrd9M0eP (flat of xSBVwy9jfW) | 1ld0UZRr4r | tCRPQgwmZJ | rgXTwGixtc | 58/60/45 | auto |
+| binh | YMlkDAtWeC (flat of jUoMwGSLD0) | ksecgJ816B | 1ld0UGAr4r | ov6JCgf829 | 3zKucj1REY | 43/60/47 | 1.2 s |
+| ghen | p8ygasqehw (flat of 0eUx8ErTfW) | Lw8D4uVswO | jUoM4EnLD0 | cpSrINc0eP | Cqn3xdcEEy | 54/60/47 | auto |
+| lo | TdwjtLdVNR (flat of lJte9nDgv9) | mEZ4bVRhJQ | lJte6qygv9 | aFG61eYfSh | DoOlaGhpcl | 51/60/58 | 0.55 s |
+| muu | jUoMPePLD0 (flat of EbYRrO9uuO) | Cqn3rXTEEy | 9ZHaWgJNYZ | JNCIAj8Oq4 | If3yqDstvE | 50/60/53 | 0.7 s |
+| tutin | DoOlhK3pcl | VX7LmADMMU | 6AbC0J2iJO | 79f8GZjJAL | ksecyJD16B | 48/60/58 | 0.85 s |
+| hanghai (coral) | MBJsmKMDCm | VX7LmGpMMU | P3Qhnwm42C | u5WZLasQLD | YMlkI8FWeC | 50/60/57 | 0.7 s |
+CDN: tv-<k>-out.webp, tv-<k>.webp, tv-<k>-back.webp, still/tv-<k>.webp, tv-<k>-frames.jpg, tv-set-preview.mp4 (159 s).
+Faults (no redo): hanghai BACK jumps to a new pose (big raised fist, other arm cut by the bottom/right edge, yellow sparks) before shrinking
+back — I looked, confirmed · tutin OUT strong zoom, BACK arm cut bottom-left · ghen OUT hands + handkerchief below the bottom edge, BACK
+handkerchief falls out · vui/so/lo OUT size jumps · an LOOP mist near the side edges · buon LOOP almost still. Clean: binh, muu.
+Credits tv set: 30 900. Balance at end 183 904 (shared). Ledger +50.
