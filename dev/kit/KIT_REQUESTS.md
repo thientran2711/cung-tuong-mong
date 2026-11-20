@@ -127,3 +127,8 @@ Rule sentences stay on the rules screen only; the frame «Cách chơi» row is h
 |---|---|---|---|---|---|
 | 20/11 | E25b home-chapters | **KR home-stat rows** — Gia thanh (kgt), Áp lực hôn sự (kap), Hồi môn (khm), Lời đồn (kld) in the act/option card rows Tốn / Được / Thành / Bại and in word mode | every home card (jkc kcCard, jkc2, jkc3 kc3/kcE) | kit keeper | **KIT READY** review/kit-cost-rows-home (KIT §13.14) |
 | 20/11 | E22t | **«quý nhau» in the word/hint map** (jk2b) — the decline row of a receiver choice (jrcv rcvNoO «mất: hai bên quý nhau −F») showed «Tốn: không» | jrcv, every «quý nhau» line | kit keeper | **KIT READY** review/kit-cost-rows-home (KIT §13.14) |
+
+## 20/11 home-chapters r2 (E25b) — KIT REQUEST «KR thế lực nhà» (after KIT READY 3332c63b)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | E25b home-chapters | **«thế lực nhà ±n» (clan power, jtd tdPowAdd) in the word/hint map** (jk2b kitHintPhrase + kitHintSign): the home event E28 «Cha bị hặc tội» (3 options) gains / loses the father's clan power; the option card drops the phrase (no words for it), so «Khuyên cha tự dâng sớ…» hides «thế lực nhà −8» and «Dâng phần hồi môn…» hides «thế lực nhà +4 / −6». Scan: `node dev/test/home-chapters/costrows.js <url> --list` (3 of 398 choices left, all this phrase). The worker draws nothing. | jkc3 E28 (kcE hac); any «thế lực nhà» line | kit keeper | OPEN |
