@@ -526,3 +526,8 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-guest-agent (opus; agOn() false on co-op guest → guest's own servants skip agent month; found by G #7) | review/coop-guest-agent; briefs/b-coop-guest-agent.md | B | session_01N1tNP6ULPfAUKCrZASGHHM | SẴN SÀNG KIỂM b7648b65 (reports/coop-guest-agent.md) | 20/11 22:10Z |
 | REVIEW mg11-thutay r1 (opus BIG) of ef94ad20 | review/mg11-thutay-r1 | B | session_01N1tNP4zyqBbxbsY5JQ3jjJ | RUNNING | 20/11 20:58Z |
 | FOREMAN E #23 (opus; child of E #22, depth 4) | handover FOREMAN_E_STATUS | FOREMAN E #22 | session_01DgYSWm5qy3Y59fKkn6eSf7 | RUNNING | 20/11 21:28Z |
+| GAP OR20 or20-j68q E31 (opus; j68 life in lãnh cung / servant / Hoàng hậu duty; briefs/E31-or20-j68q.md) | review/or20-j68q | FOREMAN E #23 | session_PENDING_E31 | RUNNING | 20/11 21:45Z |
+| errand-bal E32 (opus; law 4 one BAL key errand odds + jkc hand-typed numbers; briefs/E32-errand-bal.md) | review/errand-bal | FOREMAN E #23 | session_PENDING_E32 | RUNNING | 20/11 21:45Z |
+| cold-faction E33 (opus; faction acts while she is in lãnh cung; briefs/E33-cold-faction.md) | review/cold-faction | FOREMAN E #23 | session_PENDING_E33 | RUNNING | 20/11 21:45Z |
+| jtq14-addr E34 (sonnet; jtq14 X() → jvoice kAddr, whole family; briefs/E34-jtq14-addr.md) | review/jtq14-addr | FOREMAN E #23 | session_PENDING_E34 | RUNNING | 20/11 21:45Z |
+| ge-rank → ge-phutang E35 (opus; GE law-5 rank key all waves, then Phù Tang GE; briefs/E35-ge-rank.md) | review/ge-rank, review/ge-phutang | FOREMAN E #23 | session_PENDING_E35 | RUNNING | 20/11 21:45Z |
