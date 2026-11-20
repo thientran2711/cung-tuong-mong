@@ -1,4 +1,5 @@
 # rv-kit-e-rows — reviewer verdict: r1 PASS 7d0cc7a8ae7c33f06a138d753f4375027330f892 (review/kit-e-rows-rv = keeper 1e558d26 + LIVE f6866eb8); r0 was FAIL dd2e0fe1 (kept below)
+# rv-kit-e-rows — reviewer verdict: FAIL dd2e0fe1 (kitColDot part is good; the «thế lực» word-mode phrase misreads other houses)
 PRIORITY #1 CHECK: ROOT-81 order · KIT §60.1 / §13.15 · main none (LIVE 983a9436) · review/kit-e-rows dd2e0fe1 on kit-cost-rows-home 3332c63b (PASSed) · claims keeper
 Branch merges clean on LIVE 983a9436 (FF-able). Tests: kit-e-rows.js 22/22 PASS, kit-cost-rows-home.js 15/15 PASS (both re-run by me, Fold + iPad). QUICKCHECK not re-run for a FAIL (keeper: PASS 197 s).
 
