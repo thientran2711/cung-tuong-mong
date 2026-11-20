@@ -52,6 +52,13 @@ Full prompts as sent: `dev/art/template-B/m07.v3.FULL.txt`, `dev/art/template-B/
 - Pass it as `{"type":"image","id":"eIyOFEidqL"}` — the ONLY reference. It gives drawing style + skin colour only, never its face or fabric (D1, D2).
 - No style image, no swatch, no other picture.
 
+## 3b. Before the gen: gate + ledger guard (MG3, owner Lượt 777 / 784 item 8)
+
+1. `python3 dev/art/check_store.py <prompt> --scope face --pid mNN` → PASS (B20 root hex pair only, no "deep/dark" colour words, ≤ 10 000 characters).
+2. `python3 dev/art/ledger_guard.py --person mNN --age aNN --state <face|tN|nude|thaihau|trieuN> [--owner-ok "Lượt N"]` → PASS.
+   If she already has a cut for that age/state the gen is a REDRAW: it needs the owner's yes, passed as `--owner-ok "Lượt N"`, and the ledger line
+   then carries `"owner_ok": "Lượt N"` and `"state": "<same word>"`. FAIL = no gen (A20/A21). Foreman: `ledger_guard.py --audit --since <ts>` lists redraws without owner_ok.
+
 ## 4. Gen settings (exact)
 
 | setting | value |
@@ -75,7 +82,7 @@ Look at the cut at full size before sending (A11: eyes, symmetry, no teeth, one 
 Append ONE line to `dev/art/gen_ledger.jsonl`, same form as the set-B lines:
 
 ```
-{"ts": "<UTC ISO>", "kind": "OWNER-DESIGN", "note": "owner Lượt <N>: mNN thiếu nữ COMMON_v3 v3 line; remove_bg <cut id>; skin B/R <x>", "refs": [{"type": "image", "id": "eIyOFEidqL"}], "gen_id": "<gen id>", "prompt_file": "dev/art/face-common/mNN.v3.FULL.txt", "settings": "gpt-2-6 1024x2304 2k seed 7172"}
+{"ts": "<UTC ISO>", "kind": "OWNER-DESIGN", "person": "mNN", "age": "a18", "state": "face", "owner_ok": "Lượt <N> (redraws only)", "note": "owner Lượt <N>: mNN thiếu nữ COMMON_v3 v3 line; remove_bg <cut id>; skin B/R <x>", "refs": [{"type": "image", "id": "eIyOFEidqL"}], "gen_id": "<gen id>", "prompt_file": "dev/art/face-common/mNN.v3.FULL.txt", "settings": "gpt-2-6 1024x2304 2k seed 7172"}
 ```
 
 Real examples: m07 gen `nVseV0pYQD` → cut `3zKcnbDREY` (dev/art/template-B/example_m07_3zKcnbDREY.webp); m13 gen `5jDgjs6Kxe` → cut `VX7IB7sMMU` (dev/art/template-B/example_m13_VX7IB7sMMU.webp).
