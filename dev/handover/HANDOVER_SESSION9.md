@@ -1302,3 +1302,4 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - (20/11 03:51Z) LANDED mgcal-co 651c317c (owner code co 9.7; review/mgcal-co from 94c3bddc; ag-mgcal 14/14; quickcheck PASS 144 s, old save ok, perf flat; manual FF). LIVE 651c317c, ROLLBACK 94c3bddc. Her rating told: Đàn 8.3 strong, Cờ 9.7 very strong; ratio after more kinds.
 - (20/11 03:58Z) LANDED mgcal ve+doi acc26bf0 (ag-mgcal 14/14; quickcheck PASS 153 s, old save ok; manual FF). LIVE acc26bf0, ROLLBACK 651c317c.
 - (20/11 04:05Z) LANDED mgcal hoa 82ed060e (ag-mgcal 14/14; quickcheck PASS 152 s; manual FF). LIVE 82ed060e, ROLLBACK acc26bf0.
+- (20/11 04:12Z) LANDED mgcal hat+tho b74e84cb (ag-mgcal 14/14; quickcheck PASS 170 s; buổi live median 2904 = noise; manual FF). LIVE b74e84cb, ROLLBACK 82ed060e.

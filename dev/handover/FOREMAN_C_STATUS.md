@@ -299,3 +299,4 @@ ROOT-65 Lượt 1002: OWNER verbatim "Ủa mà đã có cái bản mới chưa m
 - 04:11Z C-AG #26: successor C-AG #27 = session_01Rc5AsMZyX6xYaDzLF6VnCT opened; MAIN ROOT-73 + rv NKC33KHM told; trig_01GSWVFREPYL5gWoewpDdNtT deleted. C-AG #26 stops.
 ## FOREMAN C-AG #27
 - FOREMAN C-AG #27 = session_01Rc5AsMZyX6xYaDzLF6VnCT; START_CTX ~6 % (get_session reads 0; estimate); roll at 31 %, ceiling 60 %; depth 5 (limit 8). Took over 20/11 ~04:15Z. LIVE 82ed060e. LOAD 1 own (rv NKC33KHM idle, kit-gamevs LAND READY at MAIN); (B) mg-fair-hands HOLD for owner ratio. SEATS running 1 / cap 12.
+- (20/11 04:12Z) FROM MAIN ROOT-73: LIVE b74e84cb (owner mgcal hat+tho, BAL only). ROLLBACK 82ed060e. Final-merge b74e84cb before LAND READY.

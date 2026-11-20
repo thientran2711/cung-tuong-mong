@@ -1990,3 +1990,4 @@ All must work in co-op.
 - (20/11 ~03:50Z real) (ROOT-73 chat) OWNER sent «CTM-CAL dan:8.3/5@11/19/2026 co:9.7/5@11/19/2026» → co 9.7 applied to BAL (dan 8.3 unchanged) by mgcal_apply.py; ag-mgcal 14/14, golive PASS; LIVE 651c317c. Only 2 of 31 kinds so far; the mg-fair-hands ratio proposal waits for the rest of her code (OD 20/11 ~01:42Z).
 - (20/11 ~04:00Z real) (ROOT-73 chat) OWNER sent «CTM-CAL … ve:9.5/5 doi:9.1/5 @11/19/2026» (with dan 8.3, co 9.7) → ve 9.5 + doi 9.1 applied to BAL; LIVE acc26bf0. 4 of 31 kinds so far.
 - (20/11 ~04:10Z real) (ROOT-73 chat) OWNER sent «CTM-CAL … hoa:7.9/5@11/19/2026» → hoa (Cắm hoa) 7.9 applied; LIVE 82ed060e. 5 of 31 kinds (dan 8.3, co 9.7, ve 9.5, doi 9.1, hoa 7.9).
+- (20/11 ~04:20Z real) (ROOT-73 chat) OWNER sent «CTM-CAL … hat:8.1/5 tho:8.7/5 @11/19/2026» → hat 8.1 + tho 8.7 applied; LIVE b74e84cb. 7 of 31 kinds (co 9.7, ve 9.5, doi 9.1, tho 8.7, dan 8.3, hat 8.1, hoa 7.9).
