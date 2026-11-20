@@ -62,3 +62,18 @@ PAIRS (pair_verdict clean) and from each other; nearest root mains: s62 8.3 (s52
 ~138 cr each), look at each, one sheet with big labels (name · group · "MẶT MỚI"), push, send the sheet path. FACE_CUTS untouched until owner OK.
 
 Credits used: 0.
+
+## c09 hand redraw (ROOT-66 GO; owner 20/11 ~06:45Z "Rồi sẵn tiện nha, vẽ lại cái cô C09 này đi. Cái tay của cổ này giờ tôi nhìn tôi mới để ý. Cái tay trái cổ cầm lồng đèn nhưng mà thực tế tay này là tay phải.")
+- Builder dev/art/face-common/make_c09_hand.py → c09.v3h.FULL.txt = approved c09.v3.FULL.txt (gen xSBWQlajfW, cut xSBWFuTjfW, seed 7172, ref eIyOFEidqL) +
+  ONE "HANDS:" sentence after the pose (lantern stick in her LEFT hand = right side of the picture, thumb on the upper side toward her body, 4 fingers
+  under; other hand a correct RIGHT hand) + FG.final (master block + D9 forehead line: c09.v3 failed today's gate without them — M10, S34).
+- Gate-forced word change (flag): B20 DEEP COLOUR refuses "deep rose" → "rose" ×4, hex #C16776 unchanged.
+- Gate `python3 dev/art/check_store.py dev/art/face-common/c09.v3h.FULL.txt --scope face --pid c09` PASS.
+- Gen w4atqqr7EI → cut UPvIb4owny, gpt-2-6 1024x2304 2k seed 7172, 1 try, 135 + 3 = 138 cr. (One earlier call was refused by the server before
+  generating — bad model name — 0 credits.)
+- Looked full size + hand zooms + face: lantern hand is now a correct LEFT hand (palm toward the viewer, thumb over the stick, four fingertips under it);
+  OLD was the back of a hand with thumb on top = a right hand (owner was right). Other hand open, five fingers. Eyes level, lips closed, no teeth, no mark.
+- Side changes (not fixed, L777): free hand hangs open (OLD lifted the skirt) · shoes pink (OLD blue) · collar embroidery now flowers · face a little
+  less baby-round · skirt a touch lighter rose.
+- Sheet: dev/handover/review-sheets/new-faces-v4/c09_hand_F4.jpg (make_sheet_c09_hand.py): CŨ | MỚI, full figure + hand zoom + face zoom, big labels.
+- FACE_CUTS / FACE_MAP NOT switched (owner OK pending). Credits F4 total: 138.
