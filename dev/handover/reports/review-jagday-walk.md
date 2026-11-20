@@ -53,3 +53,19 @@ Note: E did not fail on this branch (0/10 vs 1/10 on base). It is the walk-cost 
 Base: walk-cost-rv is withdrawn → after WALK-COST #3 passes, the worker rebases onto review/walk-cost-regate and I do the final gate (no LAND READY before that).
 
 STATUS: FAIL review/jagday-walk b25e42cc — FAIL 1 fixed (errand jumps 0); NEW item 2: invite-host-away C 6/10 (base 0/10), jwalk now-rule rewrites the leaving guest's «back» row into a why-less «go»; fixer session_01964izFMBWywRUbAg2MV1QH.
+
+## ROUND 3 — review/jagday-walk 29c59bdc (r2 fix of FAIL 2) → VERDICT: PASS-PENDING-BASE (logic PASS; no LAND READY until rebased onto the re-passed walk-cost and final-gated)
+PRIORITY #1 CHECK ('walkRoadWhy|walkTimed|ptAwayOf|invite-host-away'): OD L1976 + OD 18/11 ~20:00Z | main dd248d5d | review/walk-cost-rv ffd22ea6 WITHDRAWN → WALK-COST #3 on review/walk-cost-regate | claims JAGDAY-WALK #1 session_01964izFMBWywRUbAg2MV1QH.
+2. FIXED. A row jwalk turns into «on the way» keeps its own why and target (walkRoadWhy: the guest's leave reason, whom a follower follows). The khắc-now rule skips timed-ledger rows (visit / back / anyone ptAwayOf), whose khắc already hold the walk. The only test change is that C reads its notice from 8 log lines instead of 4 (cards on her walk home log lines after it); every other C assert is unchanged.
+   invite-host-away 10 runs on 29c59bdc: C 10/10, E fails 1/10 (base ffd22ea6: C 10/10, E 1/10) → C regression gone; E = the pre-existing walk-cost flake, same rate.
+Re-check that the skip brings back no far jump (own scan, travel ≥ 2 with no road, 6 runs over seeds 1–15 × 16 buổi ≈ 480 buổi):
+- 4 runs: 0.
+- Run 1 (seeds 1–5): deed↔other 2, errand 3. Two of the errand rows are the «ngoai» stand-in row of jerr/«mine» errands (J95OUT_, not a real place, token hidden by design, skipped by jwalk on purpose), so 1 real.
+- Run 2: errand 1 (mm:9 r4/errand → tgk/errand: two back-to-back errands with different places).
+- Repeat runs over the same seeds did not reproduce run 1's deed↔other pair (async landing timing).
+⇒ ≈ 3 real residual jumps in 480 buổi vs base ≈ 50 per 80 buổi. Recorded as a watch item for the final gate: if the final-gate scan shows a sample, it must be named and fixed there.
+Deeds (seeds 1–5): landed 159/144/188/171/176, consorts 28/29/34/32/28 (base 39/46/26/21/34), walkDrop 0, errors 0.
+Gates I ran on 29c59bdc (one at a time): walk-cost ALL OK (11: deed 0 vs off 4, errand 0 vs off 1) · ag-walk 10/10 · ptime ALL OK · ptime2 ALL OK · invite-host-away ×10 above.
+FINAL GATE (after WALK-COST #3 passes and the worker rebases onto it): final-merge the then-current origin/main → review/jagday-walk-rv. Then re-run walk-cost, ag-walk, ptime, ptime2, invite-host-away ×10, time-spill-guard, coop-e2e, quickcheck (old save) and the far-jump scan; then LAND READY.
+
+STATUS: PASS-PENDING-BASE review/jagday-walk 29c59bdc — FAIL 1 + 2 fixed (errand roads; invite-host-away C 10/10, E 1/10 = base rate); residual ≈ 3 rare jumps / 480 buổi to watch at the final gate; LAND READY only after rebase onto re-passed walk-cost + final gate.
