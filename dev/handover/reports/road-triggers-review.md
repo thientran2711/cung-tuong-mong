@@ -80,3 +80,19 @@ What fails is truth of the reasons (law 6 / law 1) and the Emperor's help hồi 
   "≥ 3 hồi per family" bar was met only by tt, muoi, td, ch, thd; re-run those families longer in the re-review.
 - quickcheck: QUICKCHECK PASS · open 1535 ms · old save ok · perf new/live render 216/197, tab 444/443, buổi 1029/1063 ms, tasks>200ms 20/18 · core gates PASS.
 - Shots: none needed (one text line inside existing kit card/dialog); none taken.
+
+## ROUND 2 — E26r re-review of 255795ca (E26b): PASS 6692d20f08e560281891ad830b37a3fff3f02cae
+Head = 255795ca + final merge of LIVE origin/main 794c6b77 (only index.html / sw.js conflicted: generated, rebuilt with build_site.sh).
+| Item | Check | Result |
+|---|---|---|
+| Fix 1 law 6 | rtKind reads x.k: H95 → «ra tay»; gift / visit / F95 / cleared → own true lines; present / chosen / warn / misbelief / ag:* → no reason | OK |
+| Fix 2 law 1 | runAct wrap logs HER deed (a===S, consort target, known kind, deed went through) via j95actLog → «ngươi vừa …» lines fire; state tests prove both sides | OK |
+| Fix 3 law 11 / Q1 | 36 Emperor asks em_*_5..10 (2 kinds per chapter, trẫm voice, no kind emp, no heir named, «do» only on em_cai, stock Sức/bạc order); nrask-m-scan now reads jnroade.js (20 roads, 240 asks) | OK |
+| N1 / N3 / N5 | faction worded as standing state; queen debt reads both books; nrask-scan SLOT gets {kha} (engine fills it, jnroad.js:224) | OK |
+Tests (reviewer, alone): road-triggers.js 31/31 PASS, 0 page errors (an earlier run had one Pixi-internal error «r.updateLocalTransform» inside
+pixi-8.5.2.min.js, not reproduced alone; jrtrig / jnroade do not touch Pixi; plain 3-life probe 0 errors on both LIVE and branch) ·
+one-core-guard / -bind / -text / -text-rule PASS · nrask-m-scan + nrask-scan ALL PASS · role-parity.test.js ALL PASS on LIVE 983a9436 AND on the
+branch (the worker's "2 FAIL pre-existing" did not reproduce; either way no regression) · QUICKCHECK PASS on 6692d20f (open 1781 ms, old save ok,
+perf new/live render 289/309, tab 496/591, buổi 1406/1410, tasks>200ms 22/23, core gates PASS).
+Ratio (road-triggers bot, 3 × 36 months): 15 hồi, 8 by reason / 7 by timer; natural reasons still all grudges (N2 reach accepted). Shots: none (CDN 401, account E).
+Laws 1, 2, 3, 4, 6, 7, 8, 9, 11, 16: PASS.
