@@ -437,7 +437,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW ge-map (SMALL sonnet) of 8e2efbea | review/ge-map-rv; briefs/rv-root77-ge-map.md | MAIN ROOT-77 | session_01Rc5AsMyyPVJTYzCfuG2yDA | RUNNING | 20/11 11:01Z |
 | kit-modal-spin KIT KEEPER (sonnet; Group 1 KP18+KP16+KP06 of ROOT-77 kit queue) | review/kit-modal-spin; reports/kit-modal-spin.md | MAIN ROOT-77 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5a3cc86a | 20/11 10:55Z |
 | REVIEW kit-modal-spin (SMALL kit sonnet) of 5a3cc86a (KP18+KP16+KP06) | review/kit-modal-spin-rv; briefs/rv-root77-kit-modal-spin.md | MAIN ROOT-77 | session_01Rc5AsLfxAK1Hqs45iabuzb | RUNNING | 20/11 11:03Z |
-| REVIEW kc-fail-effects r1 (sonnet SMALL; shared kit card line) of 43d8d0cb | review/kc-fail-effects-r1 | B | session_01N1tNP3ftbWq26scAahWeQy | RUNNING | 20/11 11:10Z |
+| REVIEW kc-fail-effects r1 (sonnet SMALL; shared kit card line) of 43d8d0cb | review/kc-fail-effects-r1 | B | session_01N1tNP3ftbWq26scAahWeQy | PASS d354480f (contains LIVE f43efc71; 1 fix: G1 one-core-bind) | 20/11 ~12:20Z |
 | kit-signs-odds KIT KEEPER (sonnet; URGENT: kg82Signs must never sign odds words / quick buttons) | review/kit-signs-odds; reports/kit-signs-odds.md | MAIN ROOT-77 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM ac3e3b2f | 20/11 11:20Z |
 | coop-staff-split (opus; coop-e2e names-equal split: extra person in a consort staff list on one seat; found by names-unique-r2 review; on LIVE) | review/coop-staff-split | B | session_01N1tNP63RC2P5MoZ7Kkhi6a | RUNNING | 20/11 11:20Z |
 | coop-thin G #5 (opus; successor of G #4 5UhwqVC9 @f1b926a3) | review/coop-thin-g | B | session_01N1tNP5Wy7doJg2EzqJMECh | RUNNING | 20/11 11:21Z |

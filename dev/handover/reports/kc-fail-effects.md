@@ -80,3 +80,21 @@ Shots (looked at): CDN img/_review/kc-fail-effects/ — after-755x1000.jpg + aft
 
 ## FOR B (not this job, same family on the THÀNH side)
 - «Gặp riêng <chàng>» success also adds Lời đồn +3 (go: S.kld+=3) that THÀNH/KÈM does not print. A success-side twin of this fix (lf for go) if wanted.
+
+## REVIEW r1 (SMALL, sonnet r1, 20/11) — PASS d354480f
+PRIORITY #1 CHECK: OD 0 new | main f43efc71 (no kc-fail on main) | review/* kc-fail-effects 43d8d0cb only | claims worker 6BY715rY.
+START_CTX ~3 %. Branch review/kc-fail-effects-r1 @ d354480f = 43d8d0cb + merge origin/main f43efc71 (only index.html/sw.js conflicted → rebuilt with dev/site/build_site.sh) + 1 fix.
+**SMALL confirmed**: diff = text/derivation (jkc/jkc2/jkcco lf data, j2 failTxt, j17/j19/j25 call, jroute). No save / time / progression change. BAL: only moved typed Lời đồn amounts + 6-month wait into BAL with the same values (jbal2 +32 lines; each value equals the old typed one — worker's kc-fail state-diff proves it).
+**FIX (1, BLOCKING for go-live)**: quickcheck core gate G1 one-core-bind FAILED on 43d8d0cb: jkc.js:213 printed `BAL.eff.jkc.g7Wait` that the printing option does not read. Fix: the `cd` lf entry now carries the wait (`["cd","g7",BAL.eff.jkc.g7Wait]`, 2 cards) and kcLfTxt prints `n`. Same number, one source (law 4). quickcheck now PASS (core gates PASS, old save ok, perf same).
+Checks:
+| check | result |
+|---|---|
+| (a) kc-fail.js ld=0 / ld=1 | 0 fails (rows 474 / 474; worker said 480/474 — main moved, still 0 wrong) |
+| (a) 5+ cards really failed through act() (Math.random→0.9999, state diff vs shown BẠI) | Viết nhật ký «Lời đồn +8» = kld 8 ✓; Hầu cha «Phụ thân với ngươi -6·oán +3» = af -6, oan 3 ✓; Xin cha dâng sớ «…-5·oán +3·6 tháng…» = af -5, oan 3, g7 set ✓; Bán vải «Bạc +2» = bac +2 ✓. (Tố di nương, Nghe trà lâu: not payable in my harness; covered by kc-fail rows) |
+| (b) other callers of the kit card line | failTxt(a)=fmt(l)+lx only when `a.lx` is a string; only kcCard + route cards set it (j67 `lx` is event option data with its own renderer). act-text-scan «dau» old(da0c7397) vs new: 87 distinct BẠI/Mất rows, **0 differ** (other rows differ only by the random world/names). j63's local `const failTxt` is function-scoped (no clash). |
+| (c) VANPHONG | no %, no odds typed; «X với ngươi -N» / «<tên> oán +N» match existing house forms (j68 «Thái hậu với ngươi -1», j24 «nàng ghen +3»); «có lời ra tiếng vào» only while Lời đồn unseen (fog) |
+| (d) law 4 | amounts from BAL.eff.jkc.kld* / g7Wait / jkc2.kld*; one-core-guard 0 fails (inline 3836 < baseline 4212), one-core-text PASS |
+| (e) coop-kcco THIN=9 | 68/68 · coop-e2e 68/68 · undef-scan PASS · quickcheck PASS |
+| (f) Fold 755x1000@2 + iPad 1180x820@2 | shots taken (panel forced visible as act-text-scan does) and LOOKED 3×: BẠI «Lời đồn +8» / «Lời đồn +2», same kit card, no cut text; no page errors. Figure overlapping the card in my forced-panel shots is my harness (same on base), not this change. Shots scratch only, nothing in git/CDN. |
+Not run: bots (OOM-prone), act-text-scan scenarios toi/cao/con/hau/hh (RAM; 'dau' + static proof used).
+Law check (touched laws): 3 gain-and-loss (fail now shows real loss ✓), 4 ✓, 7 ✓, 9/11 kit-first + whole group (one failTxt for j19/j17/j25 + route) ✓. Nit (non-blocking): «Gặp riêng» success-side Lời đồn +3 unprinted (worker's FOR B note).
