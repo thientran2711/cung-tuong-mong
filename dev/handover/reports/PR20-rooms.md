@@ -53,3 +53,37 @@ STATUS 20/11 ~05:20Z: depth 1 (limit 8), START_CTX ~3 % (get_session used_tokens
 - Owner verbatim: "Khoan, là mấy cái phòng tiếp đi nha, sao mấy cái phòng tao thấy nó cứ bị nâu nâu á, không đúng ý tao. Mai tao ngủ dậy rồi tính tiếp, bây giờ bé này ngưng đi."
 - OPEN TOPIC FOR TOMORROW: owner finds the rooms too BROWN ("nâu nâu", not what she wants). Related data in this file: under the shared tone, the palace woods all read as a similar reddish brown, wood + glossy brown floors take much of every picture, and TONE v1 was measured paler.
 - State: TONE v2 sentence + strip v2 prepared (NOT uploaded, SWATCH_V2_TBD); no builder changes after the STOP; no gens pending. Session total 945 cr (rooms 33/34 270 + batch 2 675).
+
+## "NÂU NÂU" NOTE for tomorrow (ROOT-67 ask, 0 gens) — brown share per room
+Method: Lab per pixel (672×346); brown = L* 12–58, C* 8–45, hue 15–75° (dark/mid warm wood, floor, lacquer). Floor = bottom 20 % of the picture.
+| room | brown % all | floor-band brown % | upper brown % | brown L* |
+| 31 OK | 54.4 | 75.7 | 49.0 | 44.4 |
+| 32 OK | 57.9 | 85.7 | 50.8 | 44.2 |
+| 35 OK | 46.8 | 50.7 | 45.8 | 44.5 |
+| 33 old | 56.5 | 83.7 | 49.6 | 44.7 |
+| 34 old | 53.7 | 63.2 | 51.3 | 45.0 |
+| 33 new | 47.8 | 73.9 | 41.1 | 46.2 |
+| 34 new | 43.0 | 46.9 | 42.0 | 45.8 |
+| 36 | 39.6 | 32.9 | 41.3 | 47.5 |
+| 37 | 44.9 | 70.1 | 38.5 | 47.4 |
+| 38 | 48.7 | 60.6 | 45.6 | 45.6 |
+| 39 | 44.7 | 59.1 | 41.0 | 46.7 |
+| 40 | 53.3 | 69.9 | 49.1 | 46.5 |
+Reading: brown wood is about HALF of EVERY room (40–58 %), approved ones included; the new TONE rooms are not browner by area (slightly less). The pinks got paler in v1, so the brown wood dominates more by contrast. The floor band is 50–85 % brown wood, and every palace card asks for a dark/red-brown wood (nanmu honey-brown, red sandalwood, elm walnut-brown, huanghuali chestnut, jichimu reddish-brown).
+
+V3 OPTIONS (wording only; A18: the owner raised "nâu", so wood colour is the thing to change; she picks):
+- V3-A LIGHT WOOD: replace each card's wood with a light version + floor: " WOOD (owner: rooms too brown): all wood is LIGHT pale honey-golden wood, light and bright, never dark brown, never reddish-brown, never chocolate; the floor is pale blond wooden floorboards, matt, light. Brown is a small accent, never the main colour of the room." Keeps the palace motifs, doorways and chairs; the card's wood NAME stays but is described as its lightest grade.
+- V3-B LACQUER IN THE RANK PALETTE: " WOOD (owner: rooms too brown): pillars, beams, panels and the big furniture are lacquered and painted in the room's colours: ivory and pale cream lacquer with soft pink and jade-green painted flowers and thin gilt lines; only small trims show light natural wood; the floor is pale blond matt floorboards. The room reads ivory-pink-jade, never brown." (biggest change, most "not brown")
+- V3-C MIX (lightest touch): V3-A floor + walls/panels in ivory plaster and silk, furniture light honey wood; dark wood only on pillars.
+Each = 1 added sentence (replacing FLOOR words) + the TONE v2 sentence; layouts and floor fix unchanged. Test plan when the go comes: 1 room (e.g. 33) per option = 135 cr each, then a batch.
+
+## HANDOVER → next rooms worker (PR21). PR20 at context ~26 % (START_CTX ~3 %, roll line ~28 %). depth 1. Coordinator = Foreman C ROOT-67 session_01PEhRbxwtuTAkw2Fc6e7Enp (opens PR21).
+STATE: ALL ROOM WORK STOPPED by owner ("bé này ngưng đi") — no gens until her go via the foreman. Done this session: room 32 wired (pr13); s62–s65 composite in room 32; TONE v1 live → rooms 33/34 redraw (kseMweS16B, Xm9yC6fBfo) + batch 2 Tần 36–40 (mEZiKiwhJQ s7IB680l8e EbYGsNRuuO nVsx8bNYQD p8y7ET2ehw), 945 cr. Owner: v1 too pale ("nhạt hơn") and rooms too brown ("nâu nâu"); arch doorway is NOT a fault.
+READY (0 cr): TONE v2 sentence in prompts_pr20_rooms_tone.py (SWATCH_V2_TBD; strip v2 file img/_review/place-rank/pr20/tone-swatch-tan-t4-v2.png, upload 0 cr on OK); brown table + V3-A/B/C wood options above.
+METHOD: builder prompts_pr20_rooms_tone.py (imports prompts_pr20_rooms → prompts_pr19_batch1 → prompts_pr13) → python3 it (room_gate.guard) + room_gate.py per txt → images_generate mode gpt-2-6, 2688×1386, 2k, folder ba4aecfe-efce-47e2-b53f-30d292091886, refs [gOmYI7iSXO, EbYJzsMuuO, guide (M3 cpS5YIl0eP · M3X 1ldYySkr4r · M2 4RFIyNR9Aa · M2X 8aiwqQTIrU), swatch] → creations_wait → register_download → curl → webp q88 img/_review/place-rank/pr2X/<key>-ha-sang.webp → measure_floor.py (≥ 82 %) → labelled sheet (big labels: no · palace · room type · rank) → LOOK → cdn_sync.py → ledger → report → push → send_message foreman. Long prompts: print 2 per call (shared prefix/suffix).
+QUEUE: decide brown/tone with owner first; then Tần TM ×2 (no Thừa Minh card yet), Phi ×12, Quý phi ×12 (≈ 26 rooms ≈ 3 500 cr), Từ Ninh ~2, ~35 place scenes.
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
