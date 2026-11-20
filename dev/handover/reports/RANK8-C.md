@@ -35,3 +35,9 @@ Sheet: `dev/art/rank8-s65/s65_8bac_sheet.jpg` (labels ON the image: tN · rank �
 - (n3) t1 kite floats free on its string from the reel (fine); t7 is a "dance step, twirling one long sleeve" at HQP — calm but lively for t7.
 - (b, left as is per ROOT-68) Đoan trang gets lively t1–t3 poses, from the maid index trait (thamvong).
 - c02 t8 and c13 t7 still get a songbird pose (old people; pet ban not applied to them) — note for ROOT-68.
+
+## 5. Transparent cut-outs (owner URGENT via ROOT-68) — 8 × 3 cr = 24 cr
+`dev/art/rank8-s65/cut/s65_t1_cut.png … s65_t8_cut.png`: RGBA. The figure stays at native 1024×2304 with no rescale; a 220 px label band is added on top (canvas 1024×2524, strip "tN · rank · s65 · Đoan trang · chưa xếp cung").
+Tool: images_remove_background on each gen (cuts tCR6YKWmZJ cpSsPhc0eP O6Ea5cAynm N2qQxpJ6D9 iG5HLXb3uK yiufKMxPW9 aFGZTUTfSh bxM0oig5Y2). Ledger: kind RANK8-CUT.
+Checked on a dark background, overview + 1:1 zooms: hair strands clean, gauze sleeves/shawl keep partial transparency (semi-alpha 0.6–4.8 % of pixels), kite string + crown tassels kept, no parchment halo.
+NEXT: when RANK8-A/B finish → one combined transparent image per rank of s62/s64/s65 side by side (labels).
