@@ -1,0 +1,15 @@
+base: dev/art/swap56/s62_t6_v2.txt
+allow: embroidered with peonies and plum blossoms in ice blue and gold thread along the borders  # F2 Lượt 1352/1342: -> incurved chrysanthemums (s62 t6)
+allow: over the shoulders with a scalloped gold-thread edge and a fringe of small gold tassels  # owner Lượt 1361: cloud collar OPEN at the front inserted mid-clause, all words kept
+allow: "Bậc Quý phi · Vân kiên cổ cuộn mây"  # caption -> Mùa Thu · Thiết kế hiện tại
+allow: Full-body standing figure head to feet  # boilerplate repeat of the opening sentence (<=10 000)
+allow: soft even light  # same repeat
+allow: fair porcelain skin  # same repeat (opening keeps fair pinkish-white porcelain skin)
+allow: ALL her hair is swept UP into a high bun / chignon  # HAIR rank-law line repeats the Hair: clause (<=10 000)
+allow: nothing loose hanging down her back  # same repeat
+allow: her head turns together with her shoulders and body in the same direction with natural anatomy  # HEAD AND BODY line repeats the ANGLE clause "her head turns together with her shoulders and body" (<=10 000)
+allow: never a frontal head on a turned body  # same repeat
+allow: HEAD AND BODY  # label of the same repeated line
+allow: The item is in a contrasting colour  # repeat of HELD ITEM COLOUR rule (<=10 000)
+allow: not the robe colour  # same repeat
+allow: and the hand really grips it  # kept as "The hand really grips it"

@@ -1,0 +1,20 @@
+base: dev/art/b26/s62_t4.txt
+allow: a crossed collar  # owner Lượt 1361: layered neckline of t1–t3 on t4–t8 (overrides G22 Tần collar)
+allow: over only the shoulders and upper chest  # L1361: capelet re-seated OPEN at the front (now "and the outer upper chest")
+allow: a jade clasp at the throat  # L1361: clasp kept, moved low on the chest below the square neckline (never at the throat)
+allow: lying flat from the throat over the WHOLE capelet  # L1361: now "from the shoulders over the WHOLE capelet"
+allow: the robe closes only at the throat clasp  # L1361: now "the outer robe closes only at the sash"
+allow: robe of two or three visible layers with WIDE gold-thread embroidered borders of plum blossoms at sleeves and hem  # F2 Lượt 1352/1342: plum blossoms -> lotus flowers (s62 t4)
+allow: a few LARGE embroidered plum blossoms on the robe  # F2: -> lotus flowers
+allow: "Bậc Tần · Vải đoạn mờ"  # caption -> Mùa Thu · Thiết kế hiện tại
+allow: Full-body standing figure head to feet  # boilerplate repeat of the opening sentence (<=10 000)
+allow: soft even light  # same repeat
+allow: fair porcelain skin  # same repeat (opening keeps fair pinkish-white porcelain skin)
+allow: ALL her hair is swept UP into a high bun / chignon  # HAIR rank-law line repeats the Hair: clause (<=10 000)
+allow: nothing loose hanging down her back  # same repeat
+allow: her head turns together with her shoulders and body in the same direction with natural anatomy  # HEAD AND BODY line repeats the ANGLE clause "her head turns together with her shoulders and body" (<=10 000)
+allow: never a frontal head on a turned body  # same repeat
+allow: HEAD AND BODY  # label of the same repeated line
+allow: The item is in a contrasting colour  # repeat of HELD ITEM COLOUR rule (<=10 000)
+allow: not the robe colour  # same repeat
+allow: and the hand really grips it  # kept as "The hand really grips it"

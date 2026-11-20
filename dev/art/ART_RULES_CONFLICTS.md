@@ -25,3 +25,4 @@ Each item: the two rules (FG = line in dev/art/FIGURE_GATE.md), then the suggest
 - 9 soft/flowing words → settled by B25 (Lượt 745/748): flowing 'thướt tha' fabric sentence is in the master block; the 18/11 ban is dead.
 - 10 triều phục embroidery → settled by H6 (owner Lượt 492 table).
 - 15 ma ma separate figure → settled by K1 + D16 (Lượt 694 recipe frozen): ma ma is her own outfit/status.
+- 16 CURRENT outfit (Thu) t4–t8 collar (DESIGN7, owner Lượt 1361, 20/11): "cổ áo của những cái bậc kia cũng phải đổi giống như vậy, thống với ba bậc dưới" → for the current/Thu outfit prompts dev/art/thu_comoi/s62_t{4..8}_THU_COMOI.txt the t1–t3 LAYERED NECKLINE (square-neck inner top + open outer robe) overrides (a) "Tần back to the pre-G22 crossed collar" and (b) "t6–t8 always crossed" (G25 Thu/Đông crossed for everyone). Pending: foreman to fold into G-rules (rule.py set) if the owner duyệt.

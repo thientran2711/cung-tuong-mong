@@ -1,0 +1,13 @@
+base: dev/art/b26/s62_t5_v2.txt
+allow: richly embroidered in gold with peonies and small birds  # F2 Lượt 1352/1342: peonies -> double hollyhocks (s62 t5)
+allow: each cape richly embroidered in gold thread with small peonies  # F2
+allow: the front of the skirt embroidered with large peony medallions  # F2
+allow: "Bậc Phi · Vải đoạn mờ"  # caption -> Mùa Thu · Thiết kế hiện tại
+allow: Full-body standing figure head to feet  # boilerplate repeat of the opening sentence (<=10 000)
+allow: soft even light  # same repeat
+allow: fair porcelain skin  # same repeat (opening keeps fair pinkish-white porcelain skin)
+allow: ALL her hair is swept UP into a high bun / chignon  # HAIR rank-law line repeats the Hair: clause (<=10 000)
+allow: nothing loose hanging down her back  # same repeat
+allow: her head turns together with her shoulders and body in the same direction with natural anatomy  # HEAD AND BODY line repeats the ANGLE clause "her head turns together with her shoulders and body" (<=10 000)
+allow: never a frontal head on a turned body  # same repeat
+allow: HEAD AND BODY  # label of the same repeated line
