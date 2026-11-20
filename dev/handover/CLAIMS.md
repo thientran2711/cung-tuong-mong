@@ -381,3 +381,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | mg-craft-ve (sonnet; Vẽ «Thủy mặc» MG_CRAFTS §2; brief briefs/b-mg-craft-ve.md) | review/mg-craft-ve | B | session_01N1tNP2gpsC12ARDUqUciDw | RUNNING | 20/11 07:19Z |
 | mg-craft-hoa (sonnet; Cắm hoa «Chọn mùa · cắt cành · nghiêng thế» MG_CRAFTS §3; KIT REQUEST KG82_DEMO "cut"; brief briefs/b-mg-craft-hoa.md) | review/mg-craft-hoa | B | session_01N1tNP5RwFKrATahSHTu5r6 | RUNNING | 20/11 07:19Z |
 | cal-p2c identity offset + rolling hand b (opus; ORDER ROOT-75 20/11 07:25Z; moved from C-AG #29 PART 2) | review/cal-p2c; briefs/D9-cal-p2c.md; reports/cal-p2c.md | D #9 for ROOT-75 | session_01964izF6sJHzxcBve2mGhvJ | RUNNING | 20/11 07:20Z |
+| gap-audit (opus; MAIN ROOT-75 brief briefs/root75-gap-audit.md; read-only; output dev/handover/GAP_LIST.md) | handover GAP_LIST.md | MAIN ROOT-75 | session_01Rc5AsLymU7eumr5TcMGb2s | RUNNING | 20/11 08:10Z |
