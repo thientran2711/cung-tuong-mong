@@ -507,3 +507,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | rv-kit-bgtone REVIEWER (sonnet; small kit) | review/kit-bgtone-rv; reports/rv-kit-bgtone.md | MAIN ROOT-80 | rv-signs session | DONE PASS fe6432c0 | 20/11 19:27Z |
 | PARKING #11 dresscode SEASON + COLOUR DRESS CODE (opus E30; ORDER MAIN 19:05Z; expert pass first OD:L1327) | review/dresscode; reports/dresscode.md | FOREMAN E #20 | session_PENDING_E30 | RUNNING | 20/11 19:10Z |
 | REVIEW dresscode r1 (BIG opus E30r; brief briefs/E30r-review-dresscode.md) of 459a91bf | review/dresscode; reports/dresscode-review.md | FOREMAN E #22 | session_01DgYSWpTexpKL6eD2PDxGZS | RUNNING | 20/11 20:18Z |
+| B RE-GATE LANDER (opus; final-merge B PASS branches onto newest LIVE, LAND READY lines) | <branch>-land | B | session_01N1tNP4Whxd4Rssp5BqhJvD | RUNNING | 20/11 20:19Z |
