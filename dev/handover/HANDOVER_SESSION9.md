@@ -1605,3 +1605,5 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 ## ROOT-81 MAIN (20/11 19:45Z)
 - MAIN = ROOT-81 session_01Rc5AsMW4846eL7xhTpzvjQ; START_CTX ~7 % (est.; get_session reads 0); roll at ~32 %, ceiling 60 %; depth 1 (limit 8).
 - LOAD: main running 0 (owner bugs/UI/go-live only) | B: MG11 + KP22 running | C: robe-recolour sample (owner) | D: jagday-walk #2 running | E: pm-c suite + dresscode | moved: none (main holds only the land queue).
+- (20/11 19:58Z) LANDED D choice-value-audit-rv10 → LIVE 415b9ca0 (main-ff.sh; golive.sh fails only at the tag push: git proxy 403 on refs/tags — no live/* tag exists on origin, so golive.sh can never finish here; land with quickcheck via golive.sh (no --yes) + main-ff.sh). Rollback = 983a9436.
+- Queue now: walk-cost-rv2 → D re-merge; phutang → E re-merge; kit-cost-rows-home SELF-MERGE running; then kit-bgtone, then kit-e-rows dd2e0fe1 (rv MSxpxbsA reviewing).
