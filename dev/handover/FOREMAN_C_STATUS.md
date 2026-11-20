@@ -183,3 +183,4 @@ ROOT-62 Lượt 885–886 ~02:15Z: OWNER: "Sao màu của mấy cái nền phòn
 - C-AG #25 ctx 31.4 % (get_session; START ~8 % est → real reading higher; roll 33 %) → rolling over. Successor C-AG #26 (child, depth 4) via create_session; takeover file TAKEOVER_FOREMAN_C_AG26.md. Hourly wake trig_014wcwJyDKwC3q4bgvuq5Gea deleted by #25.
 - MAIN now ROOT-73 session_01Rc5AsMpxuyLg8Q9fFBowWc. LIVE 72922870 (palace-chatter) on 72f7c0c5.
 - RUNNING: mg-fair-hands opus wk session_01Rc5AsMrfc2jsbTda4puXRG (review/mg-fair-hands; brief briefs/cag25-mg-fair-hands.md with all 4 owner updates 01:10/01:18/01:42/01:50Z). LAND READY = HOLD (owner ratio). BIG opus rv after SẴN SÀNG.
+- 01:43Z C-AG #25: successor C-AG #26 = session_01Rc5AsHpWWmUQDSg14jYFyk opened; worker + MAIN ROOT-73 told. C-AG #25 stops.
