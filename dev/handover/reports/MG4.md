@@ -77,3 +77,7 @@ OPEN for the successor:
 2. Known gate hits waiting for rewording (not ours to reword without owner/ROOT): grp_set bt ghen (handkerchief, S10); sg2 pt/ptl A+B (silk/gauze, S11 — SEAL2c may already replace them).
 3. r26 triều files lack the MASTER block M01–M09 (+ t6 B12) → not drawable until fixed.
 4. NEW OWNER RULE (ROOT-61 relay 20/11 ~01:00Z; `python3 dev/art/rule.py find LABEL ON THE PICTURE`): every picture sent to the owner must have the group / rank written ON the image, BIG. Apply to every sheet/picture you send (my sheet tools: dev/handover/reports/MG4-l826/nd_sheet_transparent.py — enlarge the label plates and include group/rank).
+
+## S12 DISC done (rule A26, table dev/art/emo-anim/discs/disc_colours.json from SEAL8 191ea340f)
+seal_gate.py S12: for keyframes A/B whose emotion key (taken from the JSON path) is in the table: the table "en" colour words must be in the prompt, and any hex in a medallion/disc sentence (not a robe/collar/crown hex, not the #00FF00 screen) must be the table hex. PROPOSED entries (act-ghen #1E6B5C) only WARN. `--self` 0 problems.
+`--all`: grp_gian, grp_set bg/bt/mm, hh, th, sg2, sg4 → 0 S12 hits. Old sets fail on disc words (87 prompts): w-new 2, w-act 14, m 6, m-new 22, m-act 16, mo 7, mo-new 6, mo-act 14 — e.g. tutin "warm orange-gold" vs table "warm amber-gold", hanghai not "bright coral", vui not "warm sunny yellow". Those builders now refuse until their disc words follow the table (only matters for redraws). Handover item 1 is CLOSED.

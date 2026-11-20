@@ -28,6 +28,8 @@ Rules (seal only; source in brackets):
   S9 CROWN    A/B: Hoàng hậu / EMPRESS (not dowager) = LARGE phoenix crown; Hoàng quý phi = phoenix crown with ornaments as BIG as Quý phi's, never larger/grander than the Empress's, never 'small' (owner 20/11 ~01:01Z overrides 19/11 'small')
   S10 MALE    a male seal (he/his/him, man, emperor, eunuch, official…) must not hold a handkerchief: handkerchief / kerchief / hanky / khăn
               words FAIL unless negated (A25(1), owner 20/11: 'Đàn ông con trai mà cầm khăn.')
+  S12 DISC    A/B: the disc (medallion) colour of the emotion = discs/disc_colours.json (rule A26, SEAL8): its 'en' words must be in the prompt and any
+              hex in a medallion/disc sentence must be the table hex; 'PROPOSED' entries (act-ghen) only warn
   S11 CONSORT a consort seal (phi tần, any rank t1–t8 incl. Hoàng hậu; NOT Thái hậu) wears plain BROCADE: silk / gauze / sheer / translucent /
               see-through / chiffon / organza / tulle words on clothing FAIL unless negated (A25(3), owner 20/11: 'cứ cho nó mặc gấm bình thường')
 """
@@ -80,7 +82,31 @@ def kind_of(key):
     return KINDS.get(str(key).lower())
 
 
-def check(text, kind):
+_DISC = None
+def disc_table():
+    global _DISC
+    if _DISC is None:
+        try: _DISC = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "discs", "disc_colours.json")))["colours"]
+        except Exception: _DISC = {}
+    return _DISC
+
+
+def disc_fails(t, key):
+    d = disc_table().get(key)
+    if not d: return []
+    prop = "PROPOS" in json.dumps(d).upper()
+    tag = "S12 DISC (warn: proposed)" if prop else "S12 DISC"
+    out = []
+    if d["en"].lower() not in t.lower(): out.append((tag, f"'{key}' disc must be '{d['en']}' {d['hex']} (A26 table)"))
+    for sent in re.split(r"(?<=[.;])\s+", t):
+        if re.search(r"medallion|\bdisc\b", sent, re.I):
+            for h in re.findall(r"#[0-9A-Fa-f]{6}", sent):
+                if h.upper() not in (d["hex"].upper(), "#00FF00") and not re.search(r"robe|collar|sleeve|vest|hanfu|jacket|crown|hair", sent[max(0, sent.find(h) - 60):sent.find(h) + 40], re.I):
+                    out.append((tag, f"disc hex {h} != table {d['hex']} for '{key}'"))
+    return out
+
+
+def check(text, kind, key=None):
     """-> list of (rule, message). Empty = PASS."""
     kind = kind_of(kind) or kind
     t = text.strip(); f = []
@@ -101,6 +127,7 @@ def check(text, kind):
                 f.append(("S9 CROWN", "Hoàng quý phi seal needs a phoenix crown + 'never larger/grander than the empress' (owner 20/11 ~01:01Z)"))
             if re.search(r"\bsmall\b[^.;]{0,40}phoenix crown", t, re.I):
                 f.append(("S9 CROWN", "Hoàng quý phi crown must not be 'small' — as big as Quý phi's (owner 20/11 ~01:01Z)"))
+    if key and kind in ("A", "B"): f += disc_fails(t, key)
     if is_male(t):
         for m in KERCHIEF_RX.finditer(t):
             if not negated(t, m.start(), m.end()): f.append(("S10 MALE", f"male seal with '{m.group(0)}' (A25: men never hold a handkerchief)")); break
@@ -123,7 +150,8 @@ def walk(o, path=()):
 def check_obj(o):
     res = []
     for p, k, t in walk(o):
-        res.append(("/".join(p), k, len(t), check(t, k)))
+        key = next((x for x in reversed(p) if x in disc_table()), None)
+        res.append(("/".join(p), k, len(t), check(t, k, key)))
     return res
 
 
