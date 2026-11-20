@@ -1305,6 +1305,10 @@ BAL.ag.cx2.maidTalk.hear=15;
 BAL.kidTeach={get suc(){return BAL.sucNeed.kid},k:2,age:3};
 BAL.def70={taste:30,die:40,caught:12,ev:30};/* + Theo dõi một người, monthly: odds the watcher is caught / brings evidence */
 BAL.invite={affD:2,rk:5,hate:-30};/* odds base: BAL.odb.j21.odO_2 (ONE CORE, merge r2) */
+/* HOST-ABSENT RULE (owner OD L1976, 19/11 ~22:00Z; jptime §4b): the guest reached the host's place and the host is away. She waits the arrival khắc;
+   from the next khắc, once per khắc while the host is still away, she stays with odds o + liking/affD + (host rank − guest rank)×rk + her nết (net: Tính tình /
+   Chí hướng patience), capped by od(). A guest who leaves: relation host↔guest loss (small, like a refused invitation's BAL.eff.j21.top). */
+BAL.invite.wait={o:55,affD:3,rk:4,net:{"Nóng nảy":-20,"Lạnh lùng":-10,"Tham vọng":-5,"Điềm tĩnh":15,"Ân cần":10,"An phận":10,"Kín đáo":5},loss:-2};
 BAL.talk.secretMal=50;BAL.talk.secretGrab=50;
 /* AG-ALL-2f r2 — TAI MẮT MUST BE EARNED (owner OD 17/11 ~16:50Z): becoming someone's Tai mắt is the PERSON's choice (jagknow tmOdds = bribeOdds + what
    she wants from the recruiter; loyal servants mostly refuse and may tell their master). want = bonus when the recruiter can give it: bac (a greedy one,
