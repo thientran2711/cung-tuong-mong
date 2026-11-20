@@ -34,6 +34,11 @@ def oldcap(path):
     return [(m.group(1), 'owner Lượt 1483: caption = rank name only (garbled long caption)')] if m else []
 
 
+# owner L1503/L1507 / K27: below Tần only SMALL fine embroidered flowers (clause after the file's own embroidery wording)
+def k27(t, anchor, garments):
+    return swap(t, anchor, anchor + ' all embroidered flowers and motifs (on ' + garments + ') are SMALL and fine, never large flowers;')
+
+
 def swap(t, old, new):
     n = t.count(old)
     assert n == 1, (old, n)
@@ -157,6 +162,7 @@ def tamdang():
     t = swap(t, 'only a narrow band of small embroidered flowers along the collar edge and the edges of the short outer sleeves,',
              'only a narrow band of small embroidered flowers along the collar edge, the edges of the short outer sleeves and the '
              'whole bottom HEM edge of the short outer jacket (the same flower band as on its collar and cuffs),')
+    t = k27(t, 'in a lighter tone, no embroidery elsewhere;', "the collar, the jacket's sleeve edges and hem, and the skirt hem band")
     t = fixcap(t, 'Cung nữ tam đẳng')
     out = D + 'tamdang_gpt.txt'
     open(out, 'w', encoding='utf-8').write(t)
@@ -181,6 +187,7 @@ def nhat3():
     base = D + 'nhat_gpt_v2.txt'
     t = open(base, encoding='utf-8').read()
     t = swap(t, NHAT_V2_COLLAR, NHAT_R2_COLLAR)
+    t = k27(t, 'delicate cream-and-blush peony and plum-blossom embroidery over the vest, sleeves, panel and hem;', 'the robe, vest, front panels, cuffs and skirt hem band')
     t = fixcap(t, 'Cung nữ nhất đẳng')
     out = D + 'nhat_gpt_v3.txt'
     open(out, 'w', encoding='utf-8').write(t)
@@ -209,6 +216,7 @@ def thancan3():
     t = swap(t, 'the long sleeveless over-vest with its two front panels (hai tà) and the WHOLE wide sleeves, blue all the way down, are',
              'the sleeveless over-vest, the TWO separate soft front panels (hai tà) hanging from the waist and the wide LAYERED sleeves '
              '(every soft layer of each sleeve, all the way down) are')
+    t = k27(t, 'delicate cream-and-blush peony and plum-blossom embroidery over the vest, sleeves, panel and hem;', 'the robe, vest, front panels, cuffs and skirt hem band')
     t = fixcap(t, 'Cung nữ thân cận')
     out = D + 'thancan_gpt_v3.txt'
     open(out, 'w', encoding='utf-8').write(t)
@@ -247,6 +255,7 @@ def chuongsu3():
     base = D + 'chuongsu_gpt_v2.txt'
     t = open(base, encoding='utf-8').read()
     t = swap(t, CS_EMB_OLD, CS_EMB_NEW)
+    t = k27(t, 'with fine gold thread (embroidery, never brocade);', 'the collar band, front-edge borders, sleeve cuff bands, coat hem border and skirt hem')
     t = fixcap(t, 'Chưởng sự cô cô')
     out = D + 'chuongsu_gpt_v3.txt'
     open(out, 'w', encoding='utf-8').write(t)

@@ -148,3 +148,10 @@ Word diff vs previous: LOST none; ADDED only the hem words. keep_check PASS (4 a
 ## L1503 / K27 ma ma small embroidery (C #11 22:19Z) — in place, mama_gpt_v4_a51 (9737 c) / _a65 (9553 c)
 After "delicate cream-and-blush peony and plum-blossom embroidery over the vest, sleeves, panel and hem;" added: "all embroidered flowers and motifs (on the robe, vest, panels, hem band and cuffs) are SMALL and fine, never large flowers;". Nothing else changed; other maid files untouched (C #11: asking the owner first).
 Word diff vs previous: LOST none; ADDED only that clause. keep_check ×2 PASS, --all 171 PASS.
+
+## L1507 / K27 for the other maid files (C #11 22:24Z) — in place
+Right after each file's own embroidery clause, added "all embroidered flowers and motifs (on <the garments that file names>) are SMALL and fine, never large flowers;":
+- nhat_gpt_v3 (8799 c) + thancan_gpt_v3 (9488 c): after "…embroidery over the vest, sleeves, panel and hem;" → "(on the robe, vest, front panels, cuffs and skirt hem band)"
+- tamdang_gpt (7525 c): after "…in a lighter tone, no embroidery elsewhere;" → "(on the collar, the jacket's sleeve edges and hem, and the skirt hem band)"
+- chuongsu_gpt_v3 (7873 c): after "…with fine gold thread (embroidery, never brocade);" → "(on the collar band, front-edge borders, sleeve cuff bands, coat hem border and skirt hem)"
+Word diff vs previous: LOST none in all 4; ADDED only the K27 clause. keep_check ×4 PASS, --all 171 PASS.
