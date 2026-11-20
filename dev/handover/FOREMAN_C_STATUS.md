@@ -490,3 +490,4 @@ ROOT-69 08:03Z: m29 t7 redraw sent (baacc330, 135 cr). OWNER rule: t1/t2/t3 at a
 ROOT-69 08:04Z: OLD4 rolled over (37 %, handover OLD4.md a4e843af). Crossed-collar a36/a51/a65 builder job → RANK8-C (idle). No OLD successor opened (no drawing work open: production stopped).
 ROOT-69 08:05Z: RANK8-C rolled (34.7 %, handover RANK8-C.md 3d009e4). COLLAR1 session_01PEhRbwyYLoiVH6goFzcJNg opened (child) for crossed collar a36/a51/a65 builder job (0 cr). s62 t4/t5/t6 square test sent (4e4529a, 405 cr): only t4 reads square; asked owner A/B.
 ROOT-69 08:06Z: G-rule INNER_EMB t7/t8 (owner verbatim) added to build_all; gate PASS s62/m29 t7/t8.
+ROOT-69 08:07Z: FRUITPET2 DONE a950648 (0 gens): pets kids công chúa a4–a20 + hoàng tử a4–a14; s62–s65 season pairs (s62/s63/s64 one Hạ A31 fail each). OPEN (ask owner when convenient): foreign princesses nc/bd/bt/cl/pt pets? kid-p a20 pet? RANK8-A skins G19 afe601c (+m20 t1/t2 asked).
