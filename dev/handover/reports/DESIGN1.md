@@ -156,3 +156,10 @@ Fix (owner: inner chest neckline came out bare): the INNER top's square neckline
 | seasons4/s62_t6_XUAN_COMOI.txt | pearl-edged gold band (compact wording, length limit) | two short capes kept, open at the front | 9988 | PASS |
 | seasons4/s62_t7_XUAN_COMOI.txt | broad royal-yellow brocade band with pearls | jewelled cloud-collar cape kept, open at the front | 9959 | PASS |
 Phi bạch kept (spring = silk). Captions: t1–t3 "<bậc> · Cổ áo mới v2 (viền cổ vuông giữ nguyên)"; t4–t7 "Mùa Xuân · Cổ áo mới · <bậc>".
+
+---
+# HANDOVER (DESIGN1, depth 1, START_CTX ≈ 3 %, now ≈ 28–30 % → at the START+25 % rollover line)
+Done: JOB A/B thân cận r1 (rejected), r2 (4 layered designs, sheet thancan_design1_lan2.webp, awaiting owner pick); JOB 3 Minh/Hán A/B thu prompts; JOB 4 ladder tables + 5 ladder prompts; JOB 5 layered neckline t1–t3 v2 + spring t4–t7.
+Open: owner pick for thân cận r2 (ideas 1–4); ma ma text concepts (round 1 §) not drawn; gate conflicts to settle by the Foreman: S12 (phi bạch t1–t6) vs G32 for Minh/Hán; S13 (t4 throat clasp) vs the open neckline; base s62_t5_thu_MINH.txt fails F14 ("no Qing-style headdress").
+Tools: dev/art/design1/make.py, make2.py; dev/art/seasons4/make_thu_ab.py, make_ladder.py, make_comoi.py (all assert their swaps; bases in ladder_base/).
+Successor: opened by the COORDINATOR (worker rule), not by me.
