@@ -14,7 +14,9 @@ VN = {'xuan': 'Xuân', 'ha': 'Hạ', 'thu': 'Thu', 'dong': 'Đông'}
 def rd(k):
     p = ps[k]; r = p[p['root_season']].get('root_drawn') or p[p['root_season']]; return r['main'], r['main_hex'], r['sec'], r['sec_hex'], VN[p['root_season']]
 PEOPLE = ['s43', 's44', 's45']; BEN = ['s16', 's33', 's34']
-MISSING = {'s44': ['s44 MỚI: chưa vẽ', 'chờ màu phụ thay', '"sage grey"', '(chủ: "Xám là bỏ hết")']}
+MISSING = {}
+OK = {'s43': 'chủ OK Lượt 950', 's45': 'chủ OK Lượt 950', 's44': 'chờ chủ xem (mới vẽ)'}
+DEEP = json.load(open(os.path.join(D, 'palettes_season_deep.json')))   # s44 NEW: sec sage grey -> sage green (owner 'Xám là bỏ hết')
 F = lambda s, b=False: ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans%s.ttf' % ('-Bold' if b else ''), s)
 CW, FH, ZH, HH, TH, GAP = 300, 700, 360, 60, 110, 30
 cols = [(s, 'old') for s in PEOPLE for _ in [0]] ; cols = []
@@ -43,12 +45,16 @@ for i, (s, kind) in enumerate(cols):
         tile = Image.new('RGB', (CW, FH), BG); tile.paste(fig, ((CW - fig.width) // 2, FH - 5 - fig.height), fig); sheet.paste(tile, (x, y))
         sheet.paste(face(fn).resize((CW, ZH)), (x, y + FH))
     if kind == 'ben': mn, mh, sn, sh = sr[s]['main'], sr[s]['main_hex'], sr[s]['sec'], sr[s]['sec_hex']; l2 = 'mẫu chuẩn'
-    else: mn, mh, sn, sh, season = rd(s); l2 = f'gốc {season} ★ màu đậm (L27)'
+    else:
+        mn, mh, sn, sh, season = rd(s); l2 = f'gốc {season} ★ màu đậm (L27)'
+        if kind == 'new' and s == 's44':
+            r = next(v for v in DEEP['s44'].values() if isinstance(v, dict) and v.get('root')); mn, mh, sn, sh = r['main'], r['main_hex'], r['sec'], r['sec_hex']; l2 = l2.replace(' (L27)', ' · hết xám')
     ty = y + FH + ZH + 6
     dr.text((x + 6, ty), l2, fill=(90, 40, 40), font=F(17, True))
     for j, (n, h) in enumerate(((mn, mh), (sn, sh))):
         yy = ty + 28 + j * 26; dr.rectangle((x + 6, yy + 2, x + 26, yy + 22), fill=h, outline=(80, 80, 80))
         dr.text((x + 32, yy + 2), f'{n} {h}', fill=(40, 40, 40), font=F(15))
+    if kind == 'new': dr.text((x + 6, ty + 80), OK[s], fill=(0, 120, 0) if 'OK' in OK[s] else (170, 30, 60), font=F(18, True))
     x += CW
 out = os.path.join(R, 'dev/handover/review-sheets/new-faces-v4/quyenru_s43_45_F3.jpg')
 sheet.save(out, quality=86); print(out, os.path.getsize(out) // 1024, 'KB', sheet.size)

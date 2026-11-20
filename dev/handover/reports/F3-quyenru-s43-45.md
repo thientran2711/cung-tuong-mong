@@ -31,3 +31,10 @@ START_CTX ≈4 % of 1M (estimate; get_session read 0) · depth 7 (limit 8) · wo
   3. s45 OLD (Sắc sảo, already approved) already shows a dark dot under her eye, so the beauty mark doesn't set NEW apart from OLD.
   4. s43 blue reads lighter/softer than #385A9F (the master "medium-light" sentence), close to the OLD picture.
 - NOTE: ROOT-64 sent HOLD at 02:26:59Z (owner "Khoan, phải phân loại màu theo mùa đã"). It reached F3 only at 02:30Z, after the s43/s45 gens (~02:27–02:28Z) had run on the earlier GO. Told the foreman. Now HOLDING all (s44 too) until a new GO. If the season sort changes their colours, s43/s45 can be dropped (not in FACE_CUTS).
+
+## s44 (ROOT-64 GO, P3 sec pick)
+- Colour: P3 wrote s44.thu root sec "sage green" #94B594 in palettes_season_deep.json (commit 1ee0287; root_drawn there keeps sage grey). check_store.root_pair reads palettes_season_deep.json for s44 ONLY (DEEP_ROOT_IDS = {"s44"}); the builder takes s44's pair from the same file. Gate PASS.
+- gen kse0GTu16B → cut DoOgxICpcl, 1 try, 138 cr (F3 total 414). Sheet rebuilt with s44 OLD | NEW (status line under each NEW: s43/s45 "chủ OK Lượt 950", s44 "chờ chủ xem").
+- Looked: eyes level, lips closed, no teeth, pomegranate held, sienna + sage green clear, beauty mark under her LEFT eye (right side of picture), no forehead mark.
+- Faults (not fixed): red drop earrings (not in prompt); NEW again very close to OLD (same body/robe), the change is the face + greener skirt.
+- FACE_CUTS/FACE_MAP for s44 NOT switched (waiting for owner OK).
