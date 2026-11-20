@@ -6,10 +6,9 @@
    frame / rows / buttons the exam uses (jexam exRun pattern: kg82Open + kg82Rows + kg82Btn + kg82ShowRes + kg82Play). Nothing else is drawn here.
    HER BASE per kind  b = mean over rounds of (raw_i − (mgMedD(d_i) − mgMedD(0)))  = her graded play brought back to a MATCHING board (the same board
    shift the NPC side uses), clamped 0..10 — mgCalBase(raws, ds).
-   NPC HAND BAND per kind (jmgt mgHand reads mgCalBand; owner OD 20/11 ~01:10Z + ~01:18Z thirds): centre c = b + w/2, lo = c − far, hi = c + far
-   (BAL.ag.mg2.hand w / eq / far) — an NPC's average play is (hand − w/2): the hands fall within c ± eq (about equal to her), above or below by the
-   shares of the kind's skill group (mgCalSplit: BAL.ag.mg2.hand split / grp, owner OD 20/11 ~06:20Z ratio).
-   No calibration for a kind yet → the same centred band round the skilled human median mgMedD(0) (BAL.ag.mg2.med at the matching board).
+   NPC HAND CURVE per kind (jmgt mgHand reads mgCalBand; owner OD 20/11 ~06:40Z bell curve, OK ~07:15Z): the real adult population — average play
+   Normal(ctr, sd) per kind (BAL.ag.mg2.hand ctr / sd / grp), NOT centred on her. Her base b only places her on it (mgCalShare: better / about equal
+   (± eqZ·sd) / worse than her FALL OUT of the curve).
    WHERE HER NUMBERS LIVE: one core — BAL.ag.mg2.cal.k[kind] = {b, n, at} in jbal2.js, the SAME for every player (no test for anyone else). Her device
    keeps the raw record (localStorage "ctm-mgcal") and shows a short code line «CTM-CAL …» with a copy button; the coordinator writes it into BAL with
    dev/tools/mgcal_apply.py "<code>". Her device does NOT apply its local record (co-op and every other player must roll the same hands).
@@ -25,13 +24,17 @@ function C(){return (BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.cal)||{on:0,d:[0],k:{}}}
 function mgCalBase(raws,ds){const n=Math.min(raws.length,ds.length);if(!n)return null;let s=0;for(let i=0;i<n;i++)s+=(+raws[i]||0)-(mgMedD(ds[i])-mgMedD(0));
  return Math.round(cl(s/n,0,10)*10)/10}
 /* the NPC hand band of a kind: {lo, hi, sig} (sig changes when the band changes, so a cached hand is re-rolled from the same hash) */
-/* the shares [worse, equal, better] of a kind (owner OD 20/11 ~06:20Z ratio, BAL.ag.mg2.hand split / grp): her standing in the kind's skill group when the
-   kind is calibrated (the band sits on HER play); split[""] when it is not (the band sits on the skilled human median) or the kind is in no group */
+/* the NPC hand curve of a kind (owner OD 20/11 ~06:40Z bell curve, OK ~07:15Z; BAL.ag.mg2.hand ctr / sd / grp): the average adult play m = ctr (per kind, "" default),
+   spread sd of the kind's skill group; hands = m + w/2 + sd·z. c = the hand centre, lo / hi = ± 3 sd, far = 2 sd (the scale jslap reads); sig changes when
+   the curve changes, so a cached hand is re-rolled from the same hash. Her calibrated b does NOT move the curve — it only places her on it (mgCalShare). */
 function mgCalGrp(kind){const G=BAL.ag.mg2.hand.grp||{};for(const g in G)if((G[g]||[]).includes(kind))return g;return""}
-function mgCalSplit(kind){const H=BAL.ag.mg2.hand,S0=H.split||{},c=C(),e=c.on&&c.k&&c.k[kind],d=S0[""]||[1,1,1];
- if(!(e&&isFinite(+e.b)))return d;return S0[mgCalGrp(kind)]||d}
-function mgCalBand(kind){const H=BAL.ag.mg2.hand,c=C(),e=c.on&&c.k&&c.k[kind];const base=e&&isFinite(+e.b)?+e.b:mgMedD(0);
- const r=x=>Math.round(x*100)/100,m=r(base+H.w/2),lo=r(m-H.far),hi=r(m+H.far),sp=mgCalSplit(kind);return{lo,hi,c:m,split:sp,sig:"t/"+lo+"/"+hi+"/"+sp.join(":")}}
+function mgCalBand(kind){const H=BAL.ag.mg2.hand,r=x=>Math.round(x*100)/100,T=H.ctr||{},D=H.sd||{};
+ const m=+(T[kind]!=null?T[kind]:T[""]!=null?T[""]:mgMedD(0)),sd=+(D[mgCalGrp(kind)]!=null?D[mgCalGrp(kind)]:D[""]!=null?D[""]:1.5),c=r(m+H.w/2);
+ return{c,m:r(m),sd,lo:r(c-3*sd),hi:r(c+3*sd),far:r(2*sd),sig:"n/"+r(m)+"/"+sd}}
+/* where HER calibrated play b sits on that curve: the shares of NPCs (before art / upbringing lifts) better / about equal (± eqZ·sd) / worse than her */
+function mgCalShare(kind){const H=BAL.ag.mg2.hand,c=C(),e=c.on&&c.k&&c.k[kind];if(!(e&&isFinite(+e.b)))return null;const Bd=mgCalBand(kind),z=(+e.b-Bd.m)/Bd.sd,q=H.eqZ||0;
+ const P=x=>.5*(1+erf(x/Math.SQRT2)),r=x=>Math.round(x*1000)/1000;return{b:+e.b,z:r(z),better:r(1-P(z+q)),equal:r(P(z+q)-P(z-q)),worse:r(P(z-q))}}
+function erf(x){const t=1/(1+.3275911*Math.abs(x)),y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-.284496736)*t+.254829592)*t*Math.exp(-x*x);return x<0?-y:y}
 /* the kinds she can test: every KG82 kind whose engine is in the game */
 function mgCalKinds(){try{return Object.keys(KG82_KIND).filter(k=>{const K=KG82_KIND[k];return K&&K.n&&typeof KG82_ENG!=="undefined"&&typeof KG82_ENG[K.e]==="function"})}catch(e){return[]}}
 function rec(){try{return JSON.parse(LS.get(KEY)||"{}")||{}}catch(e){return{}}}
@@ -86,5 +89,5 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  const go=()=>{let n=0;const t=setInterval(()=>{const T=$("title");if((!T||T.hidden)||++n>40){clearInterval(t);pick()}},250)};
  if(typeof kitMenuResume==="function"&&kitMenuResume()){go();return}
  const x=document.querySelector("#modal .kph button, #modal #mclose");if(x)x.click();go()},true);
-Object.assign(window,{mgCalBase,mgCalBand,mgCalSplit,mgCalGrp,mgCalKinds,mgCalCode,mgCalOwner,mgCalOpen:pick,mgCalRun:run});
+Object.assign(window,{mgCalBase,mgCalBand,mgCalShare,mgCalGrp,mgCalKinds,mgCalCode,mgCalOwner,mgCalOpen:pick,mgCalRun:run});
 }catch(e){console.error(e)}})();

@@ -79,12 +79,11 @@ function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||M
    sau đó là mới được cộng thêm dựa theo cái tài, cái phẩm ... mỗi game mỗi người sẽ có một cái mức trần khác nhau ... Có người chơi giỏi, người chơi dở").
    FAIR SPREAD (owner OD 20/11 ~01:10Z, verbatim: "Không phải, tôi nói test tay xong, rồi đa số npc chơi dở hơn tôi, tôi thấy không fair" → "Duyệt cả 3 ý,
    làm luôn đi"): (1) every NPC has a hidden HAND per minigame kind = the best graded play her hands reach on a matching board, drawn ONCE per NPC per kind
-   in the band of jmgcal mgCalBand(kind) = centred on HER calibrated play (BAL.ag.mg2.cal.k[kind].b; a kind she has not tested: the skilled human median
-   mgMedD(0)): centre c = base + w/2 (an NPC's average play is hand − w/2). THIRDS (owner OD 20/11 ~01:18Z, verbatim: "Sao không chia 1/3 ngang, 1/3 hơn,
-   1/3 kém" — adopted, overwrites the ±2.5 half/half): a hashed draw t puts each person in one third — about equal to her (hand within c ± eq),
-   better (c + eq … c + far) or worse (c − far … c − eq) — by the shares [worse, equal, better] of the kind's skill group (RATIO, owner OD 20/11 ~06:20Z:
-   "chỉnh cái tỷ lệ của những người giỏi hơn tôi, những người bằng tôi và những người dở hơn tôi … cho nó giống với đời thật"; Bd.split = jmgcal mgCalSplit,
-   BAL.ag.mg2.hand split / grp; 1/3 each for a kind she has not tested) — bell-shaped inside each third (mean of two hashed draws); eq / far = BAL.ag.mg2.hand.
+   on the CURVE of jmgcal mgCalBand(kind) — BELL CURVE (owner OD 20/11 ~06:40Z, verbatim: "ở ngoài đời mình có thật sự là mình sẽ gặp 1/3 những người
+   mình gặp là sẽ là những người giỏi, hoặc là 1/3 người mình gặp là những người bình thường, hoặc 1/3 người gặp là những người dở hay không á" → OWNER OK
+   ~07:15Z; overwrites the thirds of ~01:18Z): the average play (hand − w/2) of the real adult population = Normal(ctr, sd) per kind (BAL.ag.mg2.hand ctr / sd
+   / grp), hand = c + sd·z, c = ctr + w/2, z = mgZ (one standard-normal draw hashed on person + kind, ±3). NOT centred on her: her calibrated b only places
+   her on the curve (mgCalShare), so better / equal / worse fall out of her real standing in each kind.
    (2) ART: mgHandEff adds BAL.ag.mg2.hand.art per art level of that kind above
    the player's own level (kg82LvFor; minus below): a trained NPC clearly beats her, an untrained one is weak. (3) UPBRINGING (owner OD 20/11 ~01:50Z,
    verbatim: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà nghèo mới yếu"; OD ~02:05Z: the per-identity start-arts
@@ -97,15 +96,14 @@ function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||M
    rolls below its ceiling most of the time. Saved on the person (p.mgH[kind]); the draw is hashed on the person + kind, so an old save (no p.mgH) and a
    co-op guest roll the very same hand lazily. Off: BAL.ag.mg2.hand.on = 0 (one skilled-bot curve for everyone, as part 2b). */
 function mgHashU(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}h^=h>>>13;h=Math.imul(h,0x5bd1e995);h^=h>>>15;return (h>>>0)/4294967296}
-function mgBand(kind){const H=BAL.ag.mg2.hand;if(typeof mgCalBand==="function")return mgCalBand(kind);const c=mgMedD(0)+H.w/2,sp=(H.split||{})[""]||[1,1,1];return{lo:c-H.far,hi:c+H.far,c,split:sp,sig:"t/"+(c-H.far)+"/"+(c+H.far)+"/"+sp.join(":")}}
-/* the offset of a person's hand from the band centre: her third (t: worse / equal / better), then a bell inside it (b = mean of two draws) */
-function mgThird(id,H,P){const t=mgHashU(id+"|t"),b=(mgHashU(id+"|a")+mgHashU(id+"|b"))/2;P=Array.isArray(P)?P:[1,1,1];const n=(P[0]+P[1]+P[2])||1;
- if(t<P[0]/n)return -(H.eq+(H.far-H.eq)*b);if(t<(P[0]+P[1])/n)return H.eq*(2*b-1);return H.eq+(H.far-H.eq)*b}
+function mgBand(kind){const H=BAL.ag.mg2.hand;if(typeof mgCalBand==="function")return mgCalBand(kind);const m=mgMedD(0),sd=1.5,c=m+H.w/2;return{c,m,sd,lo:c-3*sd,hi:c+3*sd,far:2*sd,sig:"n/"+m+"/"+sd}}
+/* the offset of a person's hand from the curve centre, in sd: one standard-normal draw hashed on the person + kind (Box–Muller of two hashes), clamped ±3 */
+function mgZ(id){const u=Math.max(1e-9,mgHashU(id+"|a")),v=mgHashU(id+"|b");return cl(Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v),-3,3)}
 function mgHand(kind,p){const H=BAL.ag.mg2.hand,Bd=mgBand(kind);if(!p||typeof p!=="object")return Bd.c;let M=p.mgH;if(!M||typeof M!=="object")M=p.mgH={};
  /* AG-ALL-2d2: p.mgHv[kind] = the band it was rolled in — a changed band re-rolls the SAME hash draw inside the new band (old saves rolled in the old
     skewed / half-half bands carry another sig and re-roll here) */
  let V=p.mgHv;if(!V||typeof V!=="object")V=p.mgHv={};
- if(M[kind]==null||V[kind]!==Bd.sig){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;M[kind]=Math.round((Bd.c+mgThird(id,H,Bd.split))*100)/100;V[kind]=Bd.sig;MGX.hand=(MGX.hand||0)+1}
+ if(M[kind]==null||V[kind]!==Bd.sig){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;M[kind]=Math.round((Bd.c+Bd.sd*mgZ(id))*100)/100;V[kind]=Bd.sig;MGX.hand=(MGX.hand||0)+1}
  return M[kind]}
 /* the player the art / rank lift is measured against: seat a (S; on a co-op guest the host's person, so both seats agree) */
 function mgRefP(){try{if(typeof agGuest==="function"&&agGuest()&&typeof consorts==="function"){const h=consorts().find(x=>x&&x.coop);if(h)return h}}catch(e){}return S}

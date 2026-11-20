@@ -22,26 +22,23 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 3 */
   /* steps 3–4 run on kinds the owner has NOT calibrated (BAL.ag.mg2.cal.k), picked at run time: a landed owner code must not break them */
   const UNC=mgCalKinds().filter(k=>!(C.k||{})[k]);const K=UNC[0],K2=UNC[1];o.K=K;o.K2=K2;
-  /* steps 3–4 test the band move alone: the group split of K is held at the untested 1:1:1 here (the ratio per skill group is checked in mg-fair-hands.js) */
-  const G0=mgCalGrp(K),SP0=H.split[G0];if(G0)H.split[G0]=H.split[""];
-  const L=liveRivals(true).filter(v=>v.alive);o.def=mgCalBand(K);o.defMed=mgMedD(0)+H.w/2;const before=L.map(v=>mgHand(K,v));
+  const L=liveRivals(true).filter(v=>v.alive);o.def=mgCalBand(K);o.defMed=(H.ctr[K]!=null?H.ctr[K]:H.ctr[""])+H.w/2;const before=L.map(v=>mgHand(K,v));
   const v=L[0];const keep=v.mgH,keepV=v.mgHv;delete v.mgH;delete v.mgHv;o.oldSave=mgHand(K,v)===before[0];v.mgH=keep;v.mgHv=keepV;
-  C.k[K]={b:7,n:5,at:"11/17/2026"};const Bd=mgCalBand(K);o.band=Bd;o.bandX={hi:7+H.w/2+H.far,lo:7+H.w/2-H.far};
+  C.k[K]={b:7,n:5,at:"11/17/2026"};const Bd=mgCalBand(K);o.band=Bd;o.same=Bd.sig===o.def.sig;o.share=mgCalShare(K);o.share0=mgCalShare(K2);
   const after=L.map(v=>mgHand(K,v));o.inBand=after.every(h=>h>=Bd.lo-1e-9&&h<=Bd.hi+1e-9);
-  const ord=a=>a.map((h,i)=>[h,i]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]).join(",");o.order=ord(before)===ord(after);o.otherKind=mgCalBand(K2).sig===o.def.sig;
+  const ord=a=>a.map((h,i)=>[h,i]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]).join(",");o.order=ord(before)===ord(after)&&after.every((h,i)=>h===before[i]);o.otherKind=mgCalBand(K2).sig===o.def.sig;
   /* 4 */
   const plays=[];for(let i=0;i<600;i++){const q={name:"T"+i,id:9000+i,rank:S.rank,arts:Object.assign({},S.arts),ag:{o:(S.origin&&S.origin.k)||"_"}};/* equal to her in art and upbringing: no lift */for(let j=0;j<3;j++)plays.push(mgNpcRaw(K,q,{d:0}))}plays.sort((a,b)=>a-b);
   o.reach=plays.filter(x=>x>=7).length/plays.length;o.med=plays[plays.length>>1];o.max=plays[plays.length-1];
   const hs=[];for(let i=0;i<600;i++)hs.push(mgHand(K,{name:"T"+i,id:9000+i})-H.w/2-7);o.up=hs.filter(x=>x>1).length;o.dn=hs.filter(x=>x<-1).length;o.loPlay=Math.min(...hs)+7;
   delete C.k[K];o.back=mgCalBand(K).sig===o.def.sig&&mgHand(K,v)===before[0];
-  if(G0)H.split[G0]=SP0;
   return o});
  console.log(JSON.stringify(r));
  ok(!r.row0&&r.row1===1&&r.kctl,'1 owner flag only: no row without it; one kit .kctl row with it',{row0:r.row0,row1:r.row1,kctl:r.kctl});
  ok(r.base===r.baseX&&r.baseClamp===10,'2 her base = mean of rounds brought back to a matching board, clamped',{base:r.base,want:r.baseX,clamp:r.baseClamp});
- ok(Math.abs(r.def.c-r.defMed)<.01&&r.oldSave,'3 no calibration → band centred on the skilled human median; an old save rolls the same hand',{def:r.def,old:r.oldSave});
- ok(Math.abs(r.band.hi-r.bandX.hi)<.01&&Math.abs(r.band.lo-r.bandX.lo)<.01&&r.inBand&&r.order&&r.otherKind&&r.back,'3 calibrated kind → her band; hands re-roll in it from the same draw; other kinds untouched; removing it restores',{band:r.band,want:r.bandX,inBand:r.inBand,order:r.order,other:r.otherKind,back:r.back});
- ok(r.reach>=.45&&r.reach<=.7&&Math.abs(r.med-7)<=.5&&r.max<=10&&Math.abs(r.up-r.dn)<=60,'4 fair to her (b 7): the middle NPC plays like her, about half at or above her, as many hands above her as below',{reach:r.reach,med:r.med,max:r.max,up:r.up,dn:r.dn,loPlay:r.loPlay});
+ ok(Math.abs(r.def.c-r.defMed)<.01&&r.oldSave,'3 the NPC curve centres on the average adult play (BAL.ag.mg2.hand ctr) + w/2; an old save rolls the same hand',{def:r.def,old:r.oldSave});
+ {const sh=r.share||{},t=sh.better+sh.equal+sh.worse;ok(r.same&&r.inBand&&r.order&&r.otherKind&&r.back&&Math.abs(t-1)<.01&&Math.abs(sh.better-sh.worse)<.08&&sh.equal>.28&&sh.equal<.38&&r.share0===null,'3 her calibration does NOT move the curve (same hands); it places her on it: b = the adult average → better / equal / worse ≈ 37 / 33 / 30; an uncalibrated kind has no place',{same:r.same,inBand:r.inBand,order:r.order,other:r.otherKind,back:r.back,share:sh,share0:r.share0})}
+ ok(r.reach>=.45&&r.reach<=.7&&Math.abs(r.med-7)<=.5&&r.max<=10&&Math.abs(r.up-r.dn)<=60,'4 her b 7 = the adult average: the middle NPC plays like her, about half at or above her, as many hands above her as below',{reach:r.reach,med:r.med,max:r.max,up:r.up,dn:r.dn,loPlay:r.loPlay});
  /* 5 the test UI */
  const u=await p.evaluate(async()=>{const o={tiers:[]};const sleep=t=>new Promise(r=>setTimeout(r,t));const k0=kg82Play;let n=0;
   window.kg82Play=function(kind,onEnd){n++;setTimeout(()=>onEnd(10-n),10)};try{kg82Play=window.kg82Play}catch(e){}

@@ -28,8 +28,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const heavy=(a)=>{let n=0;for(let i=0;i<600;i++)if(slapNpcDraw(a)===3)n++;return n/600};const sl=L.map(x=>[x,mgHandEff("tat",x)]).sort((a,b)=>a[1]-b[1]);
   o.slap={lo:[sl[0][1],heavy(sl[0][0])],hi:[sl[sl.length-1][1],heavy(sl[sl.length-1][0])]};
   /* 7 owner OD 20/11 ~01:10Z fair spread: an untested kind (the first kind not in BAL.ag.mg2.cal.k, picked at run time — her landed codes must not break it)
-     is centred on the skilled human median (7.5 at the matching board), symmetric */
-  {const U=mgCalKinds().find(k=>!(BAL.ag.mg2.cal.k||{})[k]);o.U=U;const C=[];for(let i=0;i<1000;i++)C.push(mgHand(U,{name:"T"+i,id:9000+i}));C.sort((a,b)=>a-b);o.medHand=C[500];o.medPlay=C[500]-H.w/2;o.skilled=mgMedD(0);o.above=C.filter(c=>c-H.w/2>=o.skilled).length/1000}
+     is centred on the average adult play (BAL.ag.mg2.hand ctr, the bell curve OD 20/11 ~06:40Z), symmetric */
+  {const U=mgCalKinds().find(k=>!(BAL.ag.mg2.cal.k||{})[k]);o.U=U;const C=[];for(let i=0;i<1000;i++)C.push(mgHand(U,{name:"T"+i,id:9000+i}));C.sort((a,b)=>a-b);o.medHand=C[500];o.medPlay=C[500]-H.w/2;o.skilled=H.ctr[U]!=null?H.ctr[U]:H.ctr[""];o.above=C.filter(c=>c-H.w/2>=o.skilled).length/1000}
   /* 6 off */
   H.on=0;o.off=mean(v,0);H.on=1;o.offMed=mgMedD(0);return o});
  console.log(JSON.stringify(r));
@@ -41,6 +41,6 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r.meNoHand,'4 her own odds (p = S) never get a hand',r.meNoHand);
  ok(r.slap.hi[1]>r.slap.lo[1],'5 slap: a weaker hand lands the heavy blow less often',r.slap);
  ok(Math.abs(r.off-r.offMed)<.6,'6 switch off → part 2b one curve (median at the matching board)',{off:r.off,med:r.offMed});
- ok(Math.abs(r.medPlay-r.skilled)<=.3&&r.above>=.42&&r.above<=.58,'7 fair spread: an untested kind centres on the skilled human median, about half the hands at or above it',{medHand:r.medHand,medPlay:r.medPlay,skilled:r.skilled,above:r.above});
+ ok(Math.abs(r.medPlay-r.skilled)<=.3&&r.above>=.42&&r.above<=.58,'7 bell curve: a kind centres on the average adult play (ctr), about half the hands at or above it',{medHand:r.medHand,medPlay:r.medPlay,skilled:r.skilled,above:r.above});
  ok(!errs.length,'no page errors',errs.slice(0,5));
  await b.close();process.exit(res.every(x=>x)?0:1)})().catch(e=>{console.error(e);process.exit(1)});

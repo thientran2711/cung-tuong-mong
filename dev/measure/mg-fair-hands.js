@@ -1,7 +1,7 @@
 /* mg-fair-hands measure (owner OD 20/11 ~01:10Z fair hands + ~01:18Z thirds + ~01:50Z upbringing). node dev/measure/mg-fair-hands.js [dev/index.html]
    Her share of wins (her play > an NPC's, ties half) on a contest board (occ hoi). Her play = her calibrated base b (BAL.ag.mg2.cal.k; else the skilled
    human median) + her board shift + the same roll the NPC play has (w·(u − .5), u = mean of 3). Kinds: dan (calibrated) and co (not).
-   A  thirds: an average untrained NPC set (art 0 = hers, her origin, her rank): share of NPCs per third + her win share vs each.
+   A  her place on the bell curve (OD 20/11 ~06:40Z): an average untrained NPC set (art 0 = hers, her origin, her rank): share of NPCs per third + her win share vs each.
    B  upbringing × art: her origin thd (poor scholar's daughter), art 2, rank 3; NPCs by origin (start bậc from j1 ORIGINS art) and own art step.
    C  by rank: the real courts of 20 fresh games (every live consort with her own origin road, art level, rank), her (origin thd, art 2) AT each rank r vs the consorts of rank r: law 5 = her own board gets harder (her average play) while who she meets plays on the same board. */
 const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
@@ -18,7 +18,7 @@ const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.ht
    const vs=(q,lv,R)=>{let w=0,n=0;for(let j=0;j<R;j++){const a=her(lv),x=mgNpcRaw(kind,q,{occ:"hoi"});w+=a>x?1:a===x?.5:0;n++}return[w,n]};
    /* A */
    S.arts[st]=0;const th={worse:[0,0,0],equal:[0,0,0],better:[0,0,0]};
-   for(let i=0;i<1500;i++){const q={name:"U"+kind+i,id:90000+i,rank:RK,arts:{[st]:0},alive:true,ag:{o:ORG}};const h=mgHandEff(kind,q),g=h>Bd.c+H.eq+1e-9?"better":h<Bd.c-H.eq-1e-9?"worse":"equal";
+   for(let i=0;i<1500;i++){const q={name:"U"+kind+i,id:90000+i,rank:RK,arts:{[st]:0},alive:true,ag:{o:ORG}};const h=mgHandEff(kind,q)-H.w/2,q2=H.eqZ*Bd.sd,g=h>base+q2+1e-9?"better":h<base-q2-1e-9?"worse":"equal";/* bell curve: better / equal / worse than HER b (± eqZ·sd) */
     th[g][0]++;const [w,n]=vs(q,0,6);th[g][1]+=w;th[g][2]+=n}
    const thirds=Object.keys(th).map(g=>({g,share:Math.round(1000*th[g][0]/1500)/10,herWin:Math.round(1000*th[g][1]/Math.max(1,th[g][2]))/10}));
    /* B */
