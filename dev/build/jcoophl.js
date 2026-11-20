@@ -126,7 +126,7 @@ function apply(m){if(!live()||host()||!m||m.from===CW.seat)return;let ok=0,miss=
       const i=arr.findIndex(e=>plain(e)&&(last[0]==="i"?e.id===last[1]:e.sid===last[1])&&!e.coop);if(t==="d"){if(i>=0)arr.splice(i,1)}else{const nv=toLive(op[2],"x");if(i>=0){const tg=arr[i];for(const k of Object.keys(tg))if(!(k in nv)&&!VIEW.has(k))delete tg[k];Object.assign(tg,nv)}else arr.push(nv)}ok++;continue}
     const par=resolve(p,p.length-1);if(!par||typeof par!=="object"){miss++;continue}const k=last===String(pidOf(CW.seat))?"me":last;
     if(t==="d")delete par[k];else{let nv=toLive(op[2],last);if(p[0]==="S"&&p[1]==="fidUsed"&&p.length===2&&Array.isArray(nv)&&S.pid&&!nv.includes(S.pid))nv.push(S.pid);/* her own face stays reserved on her seat */
-     if(Array.isArray(par[k])&&Array.isArray(nv)){par[k].length=0;nv.forEach(x=>par[k].push(x))}else par[k]=nv}ok++;continue}
+     if(Array.isArray(par[k])&&Array.isArray(nv)){const keep=par[k].filter(x=>plain(x)&&x.coop);/* the friend's own entry (her place on this seat, placeFriend) is never the host's to drop */par[k].length=0;nv.forEach(x=>par[k].push(x));keep.forEach(x=>{if(!par[k].includes(x))par[k].push(x)})}else par[k]=nv}ok++;continue}
    if(t==="a"){const arr=p.length===1&&p[0]==="R"?rivals:resolve(p,p.length);if(!Array.isArray(arr)){miss++;continue}const e=toLive(op[2],"x");const id=idOf(e);
     if(!arr.some(x=>idOf(x)===id&&!(plain(x)&&x.coop)))arr.push(e);ok++;continue}
    if(t==="r"){const arr=p.length===1&&p[0]==="R"?rivals:resolve(p,p.length);if(!Array.isArray(arr)){miss++;continue}const i=arr.findIndex(x=>idOf(x)===op[2]&&!(plain(x)&&x.coop));if(i>=0)arr.splice(i,1);ok++;continue}
