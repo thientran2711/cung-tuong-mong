@@ -33,3 +33,12 @@ Two paintings × 16 season×buổi (+ fallback) at 1280x720 like `thuong-thu-pho
 - Rows OD:L82 also lists Hoán y cục (= tgk), Dãy nhà cung nhân (= cnh), Thượng thư phòng (= ttp): already live. KP02 can close after nth/pd land; nvp was already done.
 
 SẴN SÀNG KIỂM map-places 6883c4feb (SMALL review: no acts/numbers changed).
+
+## REVIEW r1 (sonnet SMALL) — PASS 7c2aaa08c (review/map-places-r1 = 6883c4fe + merge of origin/main; index.html/sw.js conflicts resolved by rebuild)
+PRIORITY #1 CHECK: report + brief carry it; nvp drop verified (jact.js:90-97 live).
+- SMALL confirmed: diff = jplx.js, jact.js (icon map), places-d42.js, built files. No BAL, save, co-op, time or progression file. Access rules (nth: Quý nhân+ by day; pd: all by day) copy the existing ACC_ROLE pattern, no new numbers beyond the rank gate; flagged as a note, not a fail.
+- Laws: 9 KIT (same PLX registry, same spot/label/list code as the other 5 places; stand-ins marked tạm; KIT_REQUESTS rows place-nth/place-pd on handover branch; art request in report) OK; 6 (people: fixed keepers only, no invented ledger servants; objects n/a) OK; 7 wording OK (cổ trang, no %); 4 no typed numbers; 11 whole group (list view + map + count + access) done; 12 shots looked.
+- Tests on merged build: places-d42.js at 755x1000@2 and 1180x820@2: 7 spots found, nth/pd count = arrival people (1=1), page errors 0, no horizontal overflow, no overlap with neighbours. Fresh game, no old save needed (nothing stored).
+- Looked at: map + nth + pd stage on both devices (birth modals from the harness cover part of the frame; labels «Ngự thiện phòng» / «Phật đường» and keepers visible, stand-in pictures read correctly).
+- Not run: quickcheck.sh (absent on LIVE), co-op suites (nothing touched).
+Landing: ff main to 7c2aaa08c only if main has not moved; else coordinator re-merges (built files will conflict again — rebuild).

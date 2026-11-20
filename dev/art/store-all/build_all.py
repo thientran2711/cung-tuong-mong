@@ -265,7 +265,8 @@ def _pose_tpl(g,tr,j,adapt=True):
     if adapt and r_ in g["SPEC5_ADAPT"]: return g["SPEC5_ADAPT"][r_]
     return r_ if "{prop}" in r_ else g["SPEC5_ADAPT"][r_]
 PET_RX=r"songbird|\bbird|kitten|\bcat\b|rabbit|parrot|puppy|\bpet\b"   # RANK8-C (owner rule via ROOT-68 20/11): NO pet at t7 Hoàng quý phi / t8 Hoàng hậu
-S_NEW_SET={"s62","s64","s65"}   # applied to the new people only for now (c02 t8, c13 t7 still draw a songbird: reported to ROOT-68)
+S_NEW_SET={"s62","s64","s65"}|{"s%02d"%i for i in range(7,62)}|{"s63"}   # T78-PREP: + s07-s61, s63 (pet ban t7/t8, grammar fix)
+S_NEW_SET=S_NEW_SET   # applied to the new people only for now (c02 t8, c13 t7 still draw a songbird: reported to ROOT-68)
 def _banned(t,age,prop=""):
     """E4 (owner Lượt 529 + correction Lượt 534): t4+ may draw ANY of the 66 poses; walking/stepping poses ALLOWED at every rank (the Lượt 486 t6+ walking ban
     and the t6+/a51+ calm skips are replaced by the rank's restraint ENDING, see POSE_END). Still banned (other current rules, not E4):
@@ -359,8 +360,10 @@ def plan(age="a18"):
         cls=[ang_class(x) for x in g["ANG14"]]
         old=[c for c in mem if c not in S_NEW_SET]   # FRUITPET2 (ROOT-69 BEFORE MASS (a)): s62/s64/s65 joined their owner groups (OWNER_GROUPS_L686) -> the people already in the group keep
         A=group_angles(name,old,age,cls)              # EXACTLY their old angle plan; the newcomers are fitted into the free slots under the same E1/E12 caps (group_angles_add)
-        if len(old)<len(mem): A=group_angles_add(name,mem,old,age,cls,A)
-        Gr=group_grace(name,mem,age)
+        mem1=[c for c in mem if c not in S_NEW2]   # T78-PREP: s62/s64/s65 keep EXACTLY their RANK8-C plan (already drawn): the old fit first, without the T78 newcomers
+        if len(old)<len(mem1): A=group_angles_add(name,mem1,old,age,cls,A)
+        if len(mem1)<len(mem): A=group_angles_add(name,mem,mem1,age,cls,A)   # then s07-s61/s63 into the free slots (same caps, full group)
+        Gr=group_grace(name,mem1+[c for c in mem if c in S_NEW2],age)   # newcomers take the next Latin-square rows, the earlier members keep theirs
         for c in mem:
             for t in range(1,9):
                 a,pz,gr=P[(c,t)]; P[(c,t)]=(A[(c,t)],pz,Gr.get((c,t),gr))
@@ -623,6 +626,8 @@ def check(person,rank,age="a18",ref=None):
 PEOPLE=[f"c{i:02d}" for i in range(1,33)]+[f"m{i:02d}" for i in range(1,53)]+list(PR)
 S_NEW=["s62","s64","s65"]   # RANK8-C (owner GO via ROOT-68 20/11): new people, data rows in the store S_NEW_ROWS
 PEOPLE+=S_NEW   # appended LAST so the global plan of everyone before them is unchanged
+S_NEW2=["s%02d"%i for i in range(7,62)]+["s63"]   # T78-PREP (Foreman C ROOT 20/11): s07-s61 + s63, data rows in S_NEW_ROWS, appended LAST again (nobody else's plan changes)
+PEOPLE+=S_NEW2; S_NEW+=S_NEW2
 import subprocess,tempfile
 def gate(person,rank,age,text):
     """dev/art/check_store.py (owner Lượt 375 STORE GATE, reused) on this exact prompt with the SAME person's store args; PASS required."""
