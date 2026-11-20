@@ -691,3 +691,4 @@ SEATS 16:18Z (B ROOT-6): running 5 / cap 12 (REVIEW F5 idle for turn; REVIEW F6a
 - (20/11 04:44Z) FROM MAIN ROOT-73: LIVE a1aa8b19 (owner mgcal doden, BAL only). ROLLBACK dddb1f94. Final-merge a1aa8b19 before LAND READY.
 - (20/11 04:55Z) FROM MAIN: main rolls over ROOT-73 → ROOT-74 session_01Rc5AsLW7a12BUC5kZhtsTy. Send reports there.
 - (20/11 05:08Z) FROM MAIN ROOT-74: LIVE d74f86a5 (E kyngo-daily, BIG PASS E18r; FF from a1aa8b19; golive quickcheck PASS 185 s, old save ok, perf flat). ROLLBACK a1aa8b19. Final-merge d74f86a5 before LAND READY.
+- (20/11 05:58Z) FROM MAIN ROOT-74: LIVE 2ec6062e (owner mgcal batch, BAL cal.k + mgcal_apply accepts td_* ids) on 0de74d9e (E caoly-road). ROLLBACK 0de74d9e. MAIN FREEZE lifted. Final-merge 2ec6062e before LAND READY.
