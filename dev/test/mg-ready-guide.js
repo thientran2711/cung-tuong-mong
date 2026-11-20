@@ -29,7 +29,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    const clk=()=>{const c=document.querySelector('.kgame .kgclk');return !c||c.hidden};const tv=()=>{const e=document.querySelector('#kg82 [data-kg="time"]');return e?e.textContent:""};
    const idle=()=>KG82.phase!=='play'&&!KG82.run&&!box.querySelector('canvas')&&clk()&&!(o.j5&&!mgDone&&typeof mgStop==='function'&&mgStop);
    r.idle0=idle();const t0=tv();await sleep(1500);r.idle1=idle()&&tv()===t0;
-   if(r.tutBtn&&!o.noTut){const S0=JSON.stringify(S),T0=JSON.stringify(KG82.tier),L0=KG82.lv;
+   if(r.tutBtn&&!o.noTut){const SJ=()=>JSON.stringify(S,(k,v)=>k==='pcx'?undefined:v);/* pcx = palace-chatter's own chat memory, written by a background chat on main — not the guide */const S0=SJ(),T0=JSON.stringify(KG82.tier),L0=KG82.lv;
     box.querySelector('#kgrtut').click();await sleep(50);r.tutOn=!!KG82.tut&&!!document.querySelector('.kgt-bar');let hand=false,eng=false,clkT=true,end=performance.now()+(o.tutMs||15000);
     /* a player following the hand: taps the point / button the ghost hand shows (drags and holds are only watched) */
     let nx=0;const tap=()=>{const hh=KG82.hint&&KG82.hint();const pk=hh&&hh.soon?{x:hh.x,y:hh.y}:KG82.peek&&KG82.peek();const now=performance.now();if(!pk||now<nx)return;
@@ -41,7 +41,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
     if(o.play){const e2=performance.now()+4000;while(KG82.tut&&performance.now()<e2)await sleep(100);r.selfEnd=!KG82.tut}
     if(KG82.tut){const bk=document.getElementById('kgtback');if(bk)bk.click()}await sleep(200);
     r.back=!KG82.tut&&!!box.querySelector('.kgr-go')&&!!box.querySelector('#kgrtut')&&!document.querySelector('.kgt-hand')&&!document.querySelector('.kgt-bar');
-    r.unsaved=JSON.stringify(S)===S0;if(!r.unsaved){const a=JSON.parse(S0),c=S;r.diff=Object.keys(c).filter(k=>JSON.stringify(c[k])!==JSON.stringify(a[k])).slice(0,6)}
+    r.unsaved=SJ()===S0;if(!r.unsaved){const a=JSON.parse(S0),c=S;r.diff=Object.keys(c).filter(k=>JSON.stringify(c[k])!==JSON.stringify(a[k])).slice(0,6)}
     r.tierBack=JSON.stringify(KG82.tier)===T0&&KG82.lv===L0;r.idle2=idle()}
    const g2=box.querySelector('.kgr-go');if(g2){g2.click();await sleep(o.playWait||2200);r.play=KG82.phase==='play'||!!KG82.run||!!box.querySelector('canvas')||(o.j5&&!mgDone)}
    try{if(o.j5){if(typeof mgStop==='function'&&mgStop)mgStop();mgStop=null;mgDone=true;document.getElementById('ov').hidden=true}else kg82Close()}catch(e){}
