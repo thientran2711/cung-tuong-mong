@@ -9,13 +9,15 @@
      at + N(0, BOT.aim) ms instead of reacting; bot "casual" = the same with 2× BOT.aim. The demo card is skipped (KG82.noDemo).
    - RANDOM bot: random taps / drags / holds on the board every 250–650 ms (never reads the oracle).
    - Each play: kg82Open + kg82Play(kind) with KG82.lv = the tier's ease (window.mgEase when present), raw 0..10 recorded.
+   cal-p2 CHILD model (owner OD 20/11 ~05:35Z: Kingston 7 y/o as a reference beside her): the same skilled bot with env MGBOT_RT / MGBOT_PX / MGBOT_AIM /
+     MGBOT_THINK / MGBOT_SLIP / MGBOT_THINKD / MGBOT_SLIPD (defaults = the adult skilled bot above).
    usage: node dev/measure/mg-bots.js <baseURL> <kinds,comma|all> <tiers e.g. occ:lv,…> <bots skilled,random> <n> [pages=3] [out.json]
      tier spec "e2" = engine ease 2 directly; "hoc/3/2" = mgTier(kind, occ "hoc", rank 3, art level 2) (needs jmgt).                */
 const {chromium}=require('playwright');const fs=require('fs');
 const [,,BASE,KL,TL,BL,NN,PG,OUT]=process.argv;
 const ALL='dan,hat,co,dauho,ban,ve,hoa,theu,kim,mua,banh,huong,kinh,may,duho,den,td_cong,td_dung,td_ngon,td_hanh';
 const KINDS=(KL&&KL!=='all'?KL:ALL).split(',');const TIERS=(TL||'e2').split(',');const BOTS=(BL||'skilled,random').split(',');const N=+(NN||30);const PAGES=+(PG||3);
-const BOT={sloppy:+(process.env.MGBOT_SLOPPY||5),rt:+(process.env.MGBOT_RT||70),px:+(process.env.MGBOT_PX||.018),think:450,slip:.06,thinkD:900,slipD:.12,timing:'dan,ban,duho,hat,den,dauho,banh,td_dung,td_ngon',aim:40,seek:[+(process.env.MGBOT_SEEK0||600),+(process.env.MGBOT_SEEK1||350)]};
+const BOT={sloppy:+(process.env.MGBOT_SLOPPY||5),rt:+(process.env.MGBOT_RT||70),px:+(process.env.MGBOT_PX||.018),think:+(process.env.MGBOT_THINK||450),slip:+(process.env.MGBOT_SLIP||.06),thinkD:+(process.env.MGBOT_THINKD||900),slipD:+(process.env.MGBOT_SLIPD||.12),timing:'dan,ban,duho,hat,den,dauho,banh,td_dung,td_ngon',aim:+(process.env.MGBOT_AIM||40),seek:[+(process.env.MGBOT_SEEK0||600),+(process.env.MGBOT_SEEK1||350)]};
 const VCLOCK=()=>{const rP=performance.now.bind(performance),rST=window.setTimeout.bind(window),rCT=window.clearTimeout.bind(window);
  let vt=rP(),seq=1;const T=new Map(),RAF=new Map();const ch=new MessageChannel();let pumping=false;
  const fire=()=>{const due=[...T.entries()].filter(([,t])=>t.at<=vt).sort((a,b)=>a[1].at-b[1].at||a[0]-b[0]);
