@@ -27,3 +27,11 @@ Looked full size (honest): both = open square neckline, neck + collarbones visib
 - G1 owner verbatim NOT yet written into ART_RULES.md (edit errored) — to do.
 - s64 t6 test A prompt dev/art/rank8-s62/g1cape/s64_t6_test.txt (gate tp6 PASS, 9 867 chars); gen 1ldpG7Kr4r STARTED (135 cr), NOT yet looked at / no sheet. Version B (lower neckline) NOT started.
 - PAUSED: the user declined the wait call and said stop; waiting for instructions.
+
+## JOB 4 — t6 Quý phi 2-layer cape tests on 2 different people (owner GO via ROOT-69) — 2 gens, 270 cr
+- A s64 (1ldpG7Kr4r): fixed builder t6 + t1 square neckline (G17 words) + richest edge (smoke lilac piping, peony brocade, seed pearls); "pearl-edged collar and cape trim"→"pearl-edged cape trim". 9 867 chars, gate tp6 PASS.
+- B s65 (cpSl1dd0eP): same, neckline "set a little LOWER … a subtle, tasteful hint of the upper chest, elegant and refined, a noble court lady, never revealing". 9 921 chars, gate tp6 PASS (no banned word).
+- Sheet dev/handover/review-sheets/rank8-s62/s64A_s65B_THU_t6_2lop.webp (.jpg).
+- Looked full size: A — two tiered pearl-edged short capes clearly visible on the near shoulder (3/4 view, far shoulder hidden), open square neckline, pearl strands on chest; face ok. B — two tiered pearl-edged capes on both shoulders, square slightly lower with a faint, modest chest line; large royal-yellow front panel (from the builder yellow rule). Faces ok, lips closed, eyes aligned. No redraw.
+- G1 owner verbatim now written in ART_RULES.md.
+- Old s64 t6 B: never drawn (nothing to skin). A/B are tests → skins per G24 unless approved final (not added yet: waiting verdict).
