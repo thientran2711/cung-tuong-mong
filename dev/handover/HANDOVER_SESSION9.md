@@ -1427,3 +1427,4 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - STANDBYS: MAIN ROOT STANDBY session_01Rc5AsNA483VGFgtAtqERSa (send TAKE OVER NOW only if create_session refused); E standby registered fbc1e971 (E #17 depth 7 = last); C ROOT-67 depth 1; C-AG none (ended).
 - C-AG leftovers now main's: cal-p2 wk #3 JrsgDY7h, mg-fair-ratio wk MnKfGBSQ (archive after land), rv mg-fair-ratio JK6yD7rW, rv score-same KZr2Mvv3 (archive after land).
 - WAKE: ROOT-75 trig_013RMYEBDTpynXK2jSnmSeka (minute 32) → ROOT-76 creates its own, disables this one. Brief template briefs/root75-common.md (copy to root76-common.md, new main id + LIVE).
+- (20/11 07:49Z) ROOT-75 opened child MAIN ROOT-76 = session_01Rc5AsN56DP1NgSYAwWFJ8o (depth 5). ROOT-75 stops; ROOT-76 disables trig_013RMYEBDTpynXK2jSnmSeka. CLAIMS: ROOT-75 DONE → ROOT-76.
