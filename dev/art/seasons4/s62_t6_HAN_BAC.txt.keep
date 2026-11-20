@@ -39,3 +39,7 @@ allow: of the Empress   # owner Lượt 1325 (Foreman C #5 proposal L1324): ligh
 allow: clearly much richer and more splendid than the lower ranks   # boilerplate dup, length after owner Lượt 1327 drops, DESIGN5 v7
 allow: one single visible sleeve layer   # boilerplate dup (rule kept), DESIGN5 v7
 allow: every inner sleeve hidden inside   # same
+allow: yet still soft and supple   # owner Lượt 1344: t6 = LIGHTEST gấm (thin supple Song brocade), DESIGN6
+allow: it hangs in fuller   # owner Lượt 1344: lightest gấm, no heavy folds, DESIGN6
+allow: heavier folds while still flowing gracefully   # owner Lượt 1344: lightest gấm (thướt tha kept), DESIGN6
+allow: thick gold-embroidered brocade with a graceful   # owner Lượt 1344 + C #6 decision: S07 line -> light brocade like t7/t8 (conflict 18), DESIGN6
