@@ -15,7 +15,10 @@ Her full-body figure on the left as a LIVE preview (the tier of the dress she we
 ## Tests
 `dev/test/kit-dress-picker.js` 19/19 (Fold 755x1000 / iPad 1180x820 / phone 390x844): exactly ONE figure on screen, left of the choices, picture loaded, nothing cut off + «Mặc bộ này» in view, the figure follows the dress rank (rank 0 ≠ rank 7) with state put back, phone shows none. one-core-guard + media-check + kit-conform (quickcheck) green. Shots LOOKED: CDN `img/_review/kit-dress-picker/dress-{fold,ipad}.jpg` (delete with the verdict).
 
+## Co-op check (ROOT-82 gate) — done
+`dev/test/coop-dress-picker.js` (derived from the head of coop-e2e.js; branch @ bd61d2e7): Fold host A + iPad guest B in one room against the LIVE Worker, both in the shared world, then EACH seat opens the dress picker: 19/19 passed. Fold host: exactly one figure (the picker's own stand), left of the choices, picture loaded, «Mặc bộ này» in view. iPad guest: exactly one figure (the frame's column refreshed as the preview), her own name on the seat header (Thẩm Tử Yên) matches the figure shown, choices right, button in view. No page errors on either seat. Shot looked: guest seat, iPad. (coop-e2e itself 68/68.)
+
 ## Honest limits
-- Co-op: `coop-e2e` passes (both seats, 68/68) and the co-op redraw calls the same `toilDressUI`, but that run never opens the dress picker — no co-op-specific screenshot of it. The figure is `S` = the local seat's player, so each seat sees her own.
+- The co-op redraw (jcoopthinf:256) calls the same `toilDressUI`; I did not test a redraw triggered by the OTHER seat's action while the picker is open (only each seat opening it). The figure is `S` = the local seat's player, so each seat sees her own.
 - The figure art is per rank TIER (j88), so the preview changes when the worn dress changes rank band, not for every single garment of the same band.
 - Tư trang (stage figure beside the bag) is untouched.
