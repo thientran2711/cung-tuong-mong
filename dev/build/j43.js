@@ -51,10 +51,10 @@ function m43bad(p){if(p&&typeof p==="object"&&p!==S)p.badWk=bq()}
 (function(){const r0=rashOf;rashOf=function(v){const r=r0.apply(this,arguments);if(r)return r;if(v&&v.badWk!=null&&bq()-v.badWk<=9&&roll(25)){mindLog(v,"_badWeek");return 1}return 0}})();
 /* tells: the same chance as before, now carried by a named servant of hers; a servant who spies for the schemer keeps it back */
 function m43reporter(){const L=[];const seen=new Set();for(const s of [S.maid].concat(S.staff||[])){if(!s||seen.has(s))continue;seen.add(s);L.push(s)}if(!L.length)return null;
- const w=L.map(s=>(nv(s,"agentW"))*(s.loyal>=BAL.loy.close?1.5:1));let r=Math.random()*w.reduce((a,b)=>a+b,0),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}return L[i]}
+ /* NPC-PURPOSE G3: the one whose nết makes her the eyes of the house and who is closest to her mistress carries it (near-best) */return npwPick(L,s=>(nv(s,"agentW"))*(s.loyal>=BAL.loy.close?1.5:1))||L[0]}
 mindTell=function(v,t,k){mindLog(v,"_tell");try{if(v.plan&&v.plan.due>bq()+3)v.plan.due=bq()+3}catch(e){}/* a tell comes 1-3 buổi before the blow */const tc=witOf(v);let c=12+eyes(S)*7+(S.staff||[]).filter(s=>netIs(s,"sharp")||netIs(s,"talk")).length*8+(tc<BAL.wit.mid?15:0)-(tc>=BAL.wit.top?8:0)+(t===S&&S.maid&&S.maid.loyal>=BAL.loy.trust?10:0)-nq(v,"hide",BAL.net.k.hide);
  if(!roll(oddsCl(Math.min(c,80))))return;const s=m43reporter();
- if(s&&s.spyFor&&s.spyFor!=="me"&&(s.spyFor===key(v)||roll(50))){mindLog(v,"_tellWithheld");return}
+ if(s&&s.spyFor&&s.spyFor!=="me"&&(s.spyFor===key(v)||npwPick(["keep","tell"],x=>x==="keep"?100-(s.loyal||0):(s.loyal||0))==="keep")){/* G3: a servant who spies for another keeps it back unless her loyalty to her mistress wins */mindLog(v,"_tellWithheld");return}
  mindLog(v,"_tellSeen");const what=TELLS[k]||"có động tĩnh lạ";const txt=`${s?s.name+" về báo: n":"N"}gười của ${v.name} ${what}`;S.tells=S.tells||{};S.tells[v.id]={k,t:key(t),bq:bq()};
  try{newsAdd(v,k,txt,true)}catch(e){}noteAdd(v.id,`${s?s.name:"Tai mắt"} báo: ${what}${t===S?" (có lẽ nhắm vào ngươi)":` (có lẽ nhắm vào ${NM(t)})`}`);
  if(t===S){S.onGuard=S.onGuard||{};S.onGuard[v.id]=k;if(!S.dead)Q.push({t:"Tai mắt báo tin",h:`<p>${txt}.</p><p>Có lẽ nàng đang nhắm vào ngươi. Ngươi đã đề phòng: vài buổi tới mưu của nàng khó thành hơn; dò la hoặc tố giác nàng thì càng chắc.</p>`,who:{w:["r",v.id]}})}

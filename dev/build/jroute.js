@@ -82,7 +82,7 @@ function rtTtCards(){const T=rtS(),A=[],tt=T.tt,ducK=S.duc>=BAL.route.guiltDuc?"
   A.push(rtCard({id:"tt1",n:`Trao tín vật cho ${rtMnm(m)}`,t:"Một chiếc khăn thêu, một nhành trâm: lời không dám nói, gửi vào vật.",art:RT_ART.tt,c:{...BAL.route.token},o,k:BAL.route.k.tt1,
    need:[[`người đưa tin: cung nữ thân cận (lòng ${balAb(BAL.loy.mid)}+) hoặc y đang ở đây`,maid||here]],x:"tình ý +15 · y giữ tín vật",lx:"tín vật lọt vào tay người khác · Lời ra tiếng vào +12",kem:`Lời ra tiếng vào +6 · tín vật là tang vật nếu bị lục${ducK?" · "+ducK:""}`,
    go:()=>{m.tinh=(m.tinh||0)+15;m.letters=(m.letters||0)+1;tt.tok=1;rtHeat(6);if((m.tinh||0)>=40)tt.st=2;log(`${rtMnm(m)} nhận tín vật, giấu vào ngực áo.`)},
-   fail:()=>{rtHeat(12);const v=pick(liveRivals(true).filter(x=>eyes(x)>=2))||null;if(v&&roll(BAL.route.tokenLost)){evA(v,S,BAL.eff.jroute.evFail);log(`Tín vật bị ${rtVn(v)} nhặt được. Nàng giữ làm chứng cứ.`)}else log("Tín vật rơi dọc đường; có người nhặt được, chưa rõ là ai.")}}))}
+   fail:()=>{rtHeat(12);/* NPC-PURPOSE G3: the finder is a watchful one really on her road (npcWit at her place), not a random consort */const v=rtFinder((S.menW||{})[m.id]||S.place||"home");if(v&&roll(BAL.route.tokenLost)){evA(v,S,BAL.eff.jroute.evFail);log(`Tín vật bị ${rtVn(v)} nhặt được. Nàng giữ làm chứng cứ.`)}else log("Tín vật rơi dọc đường; có người nhặt được, chưa rõ là ai.")}}))}
  if(tt.st>=2){const sp=rtSpot(m);const night=rtNight();
   if(tt.st===2||!night||!sp||sp.k==="tyv"||sp.k==="tn"){const o=sp?rtSeeO(sp.k):30;
    A.push(rtCard({id:"tt2",n:`Hẹn gặp lén ${rtMnm(m)}`,t:sp?`Buổi này ${sp.why}.`:`Buổi này không có chỗ nào gặp ${rtMnm(m)} được.`,art:RT_ART.hen,c:{...BAL.route.meet},o,k:BAL.route.k.tt2,
@@ -104,8 +104,11 @@ function rtNightOk(m,k){const T=rtS(),tt=T.tt;m.trysts=(m.trysts||0)+1;m.tinh=(m
   r+=ok?" Mấy hôm sau ngươi biết mình có thai; ngày tháng trùng đêm thị tẩm.":` <b class="r">Ngươi có thai, mà sổ Kính sự phòng không có đêm thị tẩm nào khớp ngày.</b>`}
  log(r);if((m.tinh||0)>=80&&!tt.prom&&["thị vệ","vương gia","thái y"].includes(m.rw)){tt.prom=1;tt.st=4;rtPush("rtPromise",{m:m.id})}}
 /* seen while meeting: the witness decides by her nature (same rule as an NPC seeing an NPC) */
+/* G3: who finds what she drops / intercepts her letter: a watchful one (eyes ≥ 2) really at her place, the most watchful and hostile first */
+/* k = the spot on her road (where the token goes: the man's place); no k = a letter leaving her palace: only one who sees inside her house (npwIn) and resents her stops it */
+function rtFinder(k){if(!k){const L=npwIn(S).filter(x=>hostility(x,S)>=BAL.ag.why.tell.host);return npwPick(L,x=>hostility(x,S))}const w=npcWit(k,null,{pool:liveRivals(true).filter(x=>eyes(x)>=2),vs:S})[0];return w?w.p:null}
 function rtSeen(m,k,what){const W=rtWit(k);rtHeat(what==="dem"?30:20);
- const v=W.length?pick(W):null;
+ const w0=npcWit(k,null,{pool:W,vs:S})[0];const v=w0?w0.p:null;/* G3: the best watcher there (eyes × hostility), not a random one */
  if(!v){log(`Có tiếng bước chân ngoài hiên; ngươi và ${rtMnm(m)} kịp tản đi. Người trong cung bắt đầu xì xào.`);return}
  evA(v,S,what==="dem"?BAL.eff.jroute.evRtSeen[0]:BAL.eff.jroute.evRtSeen[1]);try{noteAdd(v.id,`bắt gặp ngươi với ${m.name}`)}catch(e){}rtCaughtBy(v,m,what)}
 /* what the witness does goes through the shared motive gate + record (OD:L35): blackmail = uyhiep, report = tocao (schedules3-r4) */
@@ -113,7 +116,8 @@ function rtGateT(v,t,k){try{if(typeof motiveOK!=="function")return{ok:true,why:"
 function rtGate(v,k){return rtGateT(v,S,k)}
 function rtCaughtBy(v,m,what){const T=rtS();rtStat("tt_caught");
  if(aff(v,S)>=BAL.route.seen.aff){relAdd(S,v,BAL.route.seen.rel);log(`${rtVn(v)} thấy ngươi với ${rtMnm(m)}. Nàng lặng lẽ quay đi, giữ kín cho ngươi.`);return}
- const greedy=netRx(v,/Tham|Xảo quyệt/);if((greedy||roll(BAL.route.bmRoll))&&rtGate(v,"uyhiep").ok){T.bm={v:v.id,mid:m.id,n:30+R(4)*10,since:S.turn,k:0};rtEmo("so",55,`${v.name} nắm thóp`);rtPush("rtBm",{v:v.id});return}
+ const greedy=netRx(v,/Tham|Xảo quyệt/);/* G3: not greedy → she blackmails only for silver she needs (bạc under BAL.ag.why.g3.bmBac), else her grudge would rather report */
+  const bm=greedy||npwPick(["bm","tell"],x=>x==="bm"?BAL.ag.why.g3.bmBac-(v.bac||0):Math.max(0,hostility(v,S)))==="bm";if(bm&&rtGate(v,"uyhiep").ok){T.bm={v:v.id,mid:m.id,n:30+R(4)*10,since:S.turn,k:0};rtEmo("so",55,`${v.name} nắm thóp`);rtPush("rtBm",{v:v.id});return}
  if(!rtGate(v,"tocao").ok){log(`${rtVn(v)} thấy ngươi với ${rtMnm(m)}. Nàng không nói gì, nhưng đã ghi nhớ.`);return}
  rtReport(v,m)}
 function rtReport(v,m){const T=rtS();rtStat("tt_report");{const kk=rtKidsAlive().find(k=>k.tf&&!k.tfOk);if(kk&&!T.ng){log(`<span class="r">${rtVn(v)} tâu: ${kk.name} không phải cốt nhục hoàng gia, xin trích huyết nghiệm thân.</span>`);rtNgSet(kk,v.id,false);return}}const ev=(typeof evG==="function"?evG(v,S):2)||2;
@@ -137,7 +141,7 @@ function rtTcCards(){const T=rtS(),A=[];const tc=T.tc;
   x:"đêm trốn: cơ may +5 · may được y phục cung nữ",lx:`nàng sợ hãi từ chối · lòng -${balAb(BAL.eff.jroute.loyalFail)}`,kem:"nàng biết chuyện của ngươi",go:()=>{P.maid=1},fail:()=>{if(S.maid)S.maid.loyal=Math.max(0,S.maid.loyal-BAL.eff.jroute.loyalFail);if(roll(BAL.route.maidBlab)){rtHeat(20);log(`<span class="r">${S.maid?S.maid.name:"Cung nữ"} hoảng sợ, lỡ lời với người ngoài.</span>`)}}});
  step("home",{n:"Gửi thư về nhà",t:"Nhờ người mang mật thư ra cửa cung: người nhà sẵn xe đón và dời nhà đi trước.",art:RT_ART.thu,c:{...BAL.route.home},o:od(BAL.odb.jroute.odO_3+eyes(S)*3+rtDf().o),k:BAL.route.k.step_home,
   x:"có người đón · nhà không bị liên lụy",lx:`thư bị chặn giữa đường · chứng cứ về ngươi ${balSg(BAL.eff.jroute.evFail_2)} · Lời ra tiếng vào +15`,kem:S.origin&&S.origin.land?`nhà ở ${S.origin.land} xa xôi, thư đi lâu`:"",/* every hòa thân country branch (land = its country) */
-  go:()=>{P.home=1},fail:()=>{rtHeat(15);const v=pick(liveRivals(true).filter(x=>eyes(x)>=2))||null;if(v){evA(v,S,BAL.eff.jroute.evFail_2);log(`<span class="r">Mật thư của ngươi rơi vào tay ${rtVn(v)}.</span>`)}else log("Mật thư bị chặn ở cửa cung; chưa rõ ai giữ.")}});
+  go:()=>{P.home=1},fail:()=>{rtHeat(15);const v=rtFinder();if(v){evA(v,S,BAL.eff.jroute.evFail_2);log(`<span class="r">Mật thư của ngươi rơi vào tay ${rtVn(v)}.</span>`)}else log("Mật thư bị chặn ở cửa cung; chưa rõ ai giữ.")}});
  step("route",{n:"Dò đường cổng Thần Vũ",t:"Đi một vòng giờ đổi phiên gác, nhớ từng ngã rẽ.",art:RT_ART.tc,c:{...BAL.route.scout},o:od(BAL.odb.jroute.odO_4+eyes(S)*4-rtDuc()+rtDf().o),k:BAL.route.k.step_route,x:"đêm trốn: cơ may +6",lx:"bị hỏi han giữa đường · Lời ra tiếng vào +10",go:()=>{P.route=1},fail:()=>{rtHeat(10)}});
  step("pass",{n:"Làm giả yêu bài xuất cung",t:"Một thái giám Nội vụ phủ nhận khắc yêu bài, giá không rẻ.",art:RT_ART.lo,c:{...BAL.route.pass},o:od(BAL.odb.jroute.odO_5+S.tamco/3+rtDf().o),k:BAL.route.k.step_pass,x:"có yêu bài xuất cung",lx:"mất bạc · tên thái giám ôm bạc biến mất · Lời ra tiếng vào +12",go:()=>{P.pass=1},fail:()=>{rtHeat(12)}});
  if(P.maid)step("cloth",{n:"May y phục cung nữ",t:"Cung nữ tâm phúc lén may một bộ áo xanh như của nàng.",art:RT_ART.tc,c:{...BAL.route.cloth},k:BAL.route.k.step_cloth,x:"có y phục cung nữ",go:()=>{P.cloth=1}});
@@ -236,7 +240,7 @@ PEND.rtPromise=pp=>{const m=manById(pp.m);if(!m||!S)return null;const T=rtS();
  return{ti:"Lời hứa đêm khuya",t:`<p>${rtMnm(m)} khẽ nói: «Theo ta. Ta sẽ đưa nàng ra khỏi nơi này.»</p>`,stage:[S,m],headArt:{src:RT_ART.hen,label:"Mật ước"},o:O}};
 PEND.rtKid=pp=>{const k=(S.kids||[]).find(x=>x.name===pp.k&&x.alive);if(!k)return null;const m=(S.men||[]).find(x=>x.id===k.tf);const r=m?m.rw:"người ngoài";const T=rtS();
  const oT=od(BAL.odb.jroute.odOT+(S.doctor?15:0)),oB=od(BAL.odb.jroute.odOB+S.tamco/4),oM=od(BAL.odb.jroute.odOM+(m&&m.rw==="thái y"&&m.alive?30:0)+(S.doctor?10:0));
- return{ti:"Càng lớn càng giống",t:`<p>${k.name} càng lớn, mày mắt càng giống ${r==="người ngoài"?"một người ngoài":`một ${r}`} trong cung. Lời xì xào đã đến tai Hoàng thượng.</p>`,stage:[k],headArt:{src:RT_ART.con,label:"Lời đồn"},o:[
+ return{ti:"Càng lớn càng giống",t:`<p>${k.name} càng lớn, mày mắt càng giống ${r==="người ngoài"?"một người ngoài":`một ${r}`} trong cung. ${(()=>{const b=pp.by!=null&&RV(pp.by);return b?`${npwNm(b)} vốn ${pp.w||"oán ngươi"}, đã đem lời xì xào đến tai Hoàng thượng.`:"Lời xì xào đã đến tai Hoàng thượng."})()}</p>`,stage:[k],headArt:{src:RT_ART.con,label:"Lời đồn"},o:[
   rtOpt("Nhờ thái y làm chứng",{...BAL.route.kidTy},rtX(oT,"thái y bẩm: trẻ con đổi nét · lời đồn lắng xuống",`thái y ấp úng · Sủng ${BAL.route.kidTyFail.sung} · Lời ra tiếng vào +15`),()=>{if(roll(oT))log("Thái y bẩm trẻ con lớn lên đổi nét là thường. Lời đồn lắng xuống.");else{apply(BAL.route.kidTyFail);rtHeat(15);if(roll(BAL.route.kidTyAsk))rtNgSet(k,"emp",false)}}),
   rtOpt("Đổ cho giống bên ngoại",{},rtX(oB,"Hoàng thượng gật gù · lời đồn tan",`Hoàng thượng càng nghi · Sủng ${BAL.route.kidBlameFail.sung} · Lời ra tiếng vào +20`),()=>{if(roll(oB))log("Ngươi kể về người cậu bên ngoại; Hoàng thượng gật gù.");else{apply(BAL.route.kidBlameFail);rtHeat(20);if(roll(BAL.route.kidBlameAsk))rtNgSet(k,"emp",false)}}),
   rtOpt("Tự xin trích huyết nghiệm thân",{},rtX(100,"định ngày nghiệm máu (tuần sau) · có thời gian chuẩn bị","",m&&m.rw==="thái y"?"người ấy là thái y: có thể nhờ y":"máu không hòa thì tư thông bại lộ"),()=>rtNgSet(k,"emp",false))]}};
@@ -253,10 +257,10 @@ PEND.rtAn=pp=>{if(!S)return null;return{ti:"Một đời an nhiên",t:`<p>Đã $
 function rtMonth(){if(!rtRoad()||!S.rt)return"";const T=S.rt;let ev="";
  const w=watcher();T.heat=cl(T.heat-RTC.decay-(w&&w.loyal>=BAL.loy.top?2:0),0,100);if(S.out)T.wasCold=1;
  /* someone hostile pieces it together (two-way: same as NPCs seeing NPCs) */
- const m=rtMan();if(m&&T.heat>=40&&!T.bm&&roll(T.heat/4)){const foes=liveRivals(true).filter(v=>aff(v,S)<0||(v.ghen||0)>=50);if(foes.length){const v=pick(foes);evA(v,S,BAL.eff.jroute.evRtMonth);rtCaughtBy(v,m,"gap")}}
+ const m=rtMan();if(m&&T.heat>=40&&!T.bm&&roll(T.heat/4)){const foes=liveRivals(true).filter(v=>aff(v,S)<0||(v.ghen||0)>=50);if(foes.length){/* G3: the sharpest, most hostile foe pieces it together */const v=npwPick(foes,x=>eyes(x)*BAL.ag.why.wit.eye+Math.max(0,hostility(x,S))*BAL.ag.why.wit.host);evA(v,S,BAL.eff.jroute.evRtMonth);rtCaughtBy(v,m,"gap")}}
  if(T.bm&&T.bm.since<S.turn&&T.bm.paid!==S.turn&&RV(T.bm.v)&&RV(T.bm.v).alive){if((T.bm.k||0)>=8){log(`${RV(T.bm.v).name} đã vơ đủ; nàng thôi đòi bạc.`);T.bm=null}else if(!rtGate(RV(T.bm.v),"uyhiep").ok){log(`${RV(T.bm.v).name} thôi đòi bạc của ngươi.`);T.bm=null}else rtPush("rtBm",{v:T.bm.v})}
  /* her children by the lover */
- for(const k of rtKidsAlive())if(k.tf&&!k.tfOk&&(k.age||0)>=3&&(k.age||0)<=12&&roll(RTC.kidRoll)){rtPush("rtKid",{k:k.name});break}
+ for(const k of rtKidsAlive())if(k.tf&&!k.tfOk&&(k.age||0)>=3&&(k.age||0)<=12){/* G3: the talk has a mouth — one who resents her (npcTell) carries it to Hoàng thượng; nobody → no talk */const tl=npcTell(S,{from:liveRivals(true),to:S.emp||{}});if(tl&&roll(RTC.kidRoll)){rtPush("rtKid",{k:k.name,by:tl.who.id,w:tl.why});break}}
  /* quiet life */
  if(T.ad&&T.ad.on){apply(BAL.route.adMonth);for(const v of liveRivals(true))if(v.ghen)v.ghen=Math.max(0,v.ghen-4);if(S.turn-T.ad.since>=36&&S.duc>=BAL.route.anDuc&&!T.ad.harm&&!T.ad.off){T.ad.off=1;rtEnd("ad_an");rtPush("rtAn",{})}}
  /* fire this month (true event; the escape route can use it) */

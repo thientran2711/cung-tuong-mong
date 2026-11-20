@@ -125,7 +125,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const H={};const reset=()=>{const K=JSON.parse(keep);for(const k in m)if(!(k in K))delete m[k];Object.assign(m,K);m.spyFor=null;m.out=0;m.loyal=50;if(!o.staff.includes(m))o.staff.push(m)};const t=liveRivals(true).find(x=>x!==o&&!x.out);
   try{for(let i=0;i<60;i++){reset();servDo(o,"phat",m);reset();m.lover=m.lover||9e6;threatServ(t,m);reset();
     const c1=stf2Pick(m,cnvFestOpts(m,o),"fest");H["fest_"+c1.id]=1;t.affair=t.affair||1;const c2=stf2Pick(m,cnvAffOpts(m,t,o),"aff");H["aff_"+c2.id]=1}
-   const sm=S.month;S.month=1;const n0=B.fest;window.__p3see=BAL.ag.par3.cnv.aff.see;BAL.ag.par3.cnv.aff.see=100;try{reset();p3MaidMonth()}finally{S.month=sm;BAL.ag.par3.cnv.aff.see=window.__p3see}
+   const sm=S.month;S.month=1;const n0=B.fest;window.__p3see=BAL.ag.why.p3.see;BAL.ag.why.p3.see=100;try{reset();p3MaidMonth()}finally{S.month=sm;BAL.ag.why.p3.see=window.__p3see}
    H.monthFest=B.fest-n0}finally{for(const k in W)window[k]=W[k];reset()}
   const N=window.__stf2N||{};const ids=k=>Object.keys(N).filter(x=>x.startsWith(k+"_")).map(x=>x.slice(k.length+1));
   /* her card is built by the same builder */
