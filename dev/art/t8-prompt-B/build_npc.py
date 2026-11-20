@@ -210,7 +210,7 @@ Q4 = ["hugging a little cloth rabbit toy", "holding a small flower", "holding a 
       "holding a little clay doll", "holding a tiny round fan", "hands together politely in front"]
 Q9 = ["holding a round silk fan", "holding a flowering branch", "holding a thin book", "holding a shuttlecock", "holding a small kite", "holding a little basket of flowers",
       "holding a writing brush", "holding a small embroidered pouch"]
-Q14 = ["holding a round silk fan", "holding a lotus flower", "holding an embroidery hoop", "holding a bamboo flute", "holding an open book", "holding a plum blossom branch",
+Q14 = ["holding a round silk fan", "holding a lotus flower", "holding an embroidery hoop flat, the cloth stretched tight in it, never on a handle", "holding a bamboo flute", "holding an open book", "holding a plum blossom branch",
        "holding a small pipa lute", "hands softly folded at the waist"]
 Q20 = ["holding a folding fan", "holding a peony", "holding a round silk fan", "holding a jade pendant", "hands folded in sleeves", "holding a plum blossom branch",
        "holding a small pipa lute", "holding a silk handkerchief"]
