@@ -76,3 +76,58 @@ Scan `node dev/test/coop-host-lag-scan.js 2 6` (lister, no relay) on the final b
 | coop-bot THIN=9 TRIP=1 (level 3: jcoophl inert there; new vs main side by side) | bot STALLS on BOTH builds the same way (a modal the bot cannot close; main 12 w: stuck at week 6; 4 w ×2: main 0/4 + 4/4, new 0/4 + 4/4); jcoophl OFF 4/4, #1 jcoophl 4/4, one new 0/4 → not a branch fault (bot flake, main too). Tripwire STATE per guest act, 4-week runs: new 9670/24 acts = 403, main 7113/18 = 395 (≈ same); week-0 runs 2643 vs 2220 (5 vs 7 acts). One removed risk: fidBack no longer renders inside the "start" event |
 | outside/coop-home.js | **51/51** on 3d73134b (run beside 2 e2e lanes); main 51/51 |
 Laws: 6b/6c (one face per person, her people's faces reserved, a face never changes), 11 (whole family + gates), 4 (no new number; NOADD = merge.js list), 14 (one world copy: ops patch it; the guest never writes host-owned parts). No UI change (no shots).
+
+## REVIEW r1 — BIG reviewer session_01N1tNP6RAQ5d4gTSNa3cYiK (opus), depth 3, START_CTX ≈ 4 % (used_tokens reads 0; estimate)
+PRIORITY #1 CHECK ('coop-host-lag'): OD 0 | ledger 0 | claims 8 | main 0 | review/* 1 (review/coop-host-lag) | archive 0. Also seen: review/coop-name-clash c2353df6 (SSK, names lane, does not touch jcoophl/j95c).
+Branch **review/coop-host-lag-r1 @ fe7297f6** = LIVE origin/main **983a9436** + review/coop-staff-split-r1 a069b6ea + review/coop-host-lag 3d73134b (which holds names-unique-r2-r1 8d71fed7) + 3 reviewer fixes. Base = staff-split-r1 merged with newest LIVE (land order names-unique → staff-split → host-lag kept).
+Merge conflicts resolved: assemble.py (LIVE list + jname/jnamefix), j10.js (staff-split hhHas coop filter + names-unique nmNew mkServ), jkc2.js (LIVE bdTxt Khả hãn/Ba Tư vương + names-unique gv/gm/gf names), coop-e2e.js (staff-split one-place/identity checks + host-lag Aonly/Bonly print + world-parity gate), index.html/sw.js rebuilt.
+
+### Verdict: PASS fe7297f6 for the coop-host-lag scope — LAND HOLD on the names-unique stack (role-parity, below)
+| law | result |
+|---|---|
+| 1/2/3/5/7/9/10/12 | not touched (no UI, no option, no number); no shots needed |
+| 4 ONE CORE | one-core-guard PASS (fails 0); no new number (NOADD = merge.js list) |
+| 6b/6c real people (one name, one face) | improved; 1 residual (Thái hậu face, below) |
+| 11 whole family | worker's table checked by forced/real runs + 2 more members found and fixed (below) |
+| 14 one copy | ops patch the one world; the guest no longer writes host-owned names/faces |
+
+### (1) "names split 2/10 = test artifact" — CONFIRMED, no hidden split
+My own check (not the worker's): on every seat, after start / every merged week / rejoin / rebirth, every person object listed with all its places (rivals, every staff list, kids, Thái hậu staff, own staff/kids); the WHOLE set of names (world + herself + the coop entries) compared between seats as a multiset; each player exactly once (one coop entry = the friend, never herself, no object in 2 places).
+54 e2e runs + 2 forced (12 on the merged worker build, 6 worker build A/B, 36 on reviewer builds; random, B=cn, A=cn, both cn, COOP_HL_FORCE, force+cn): **one-place 0 bad** (1 = a run where the host's socket dropped 1006 at the start, friend not placed: network); **names split after a merged week 0** except R4, where the week itself never merged (stall, below). The worker's test fix (staff.filter(!coop)) is right.
+
+### (2) Law-11 family, forced/traced by me
+| member | how I proved it | result |
+|---|---|---|
+| (a) Thái hậu face same week / keeps her face | e2e gates in 56 runs | 55 ok; **E1: host c01 at start, guest none for 20 s, then the host itself showed c16 from week 1 (face changed)** — 1/56, not reproduced in 26 runs after with extra logging (RVTH). Residual, see FOR B |
+| (b) renamed servant + her own text same week | COOP_HL_FORCE runs (R4, Q3, Q6, B3, B6, C5, D5, H5, G4, FD) | ok in every run that merged its week |
+| (c) housing resHead/resHall + "every id points to a person" | gates in every run | 0 hits |
+| (d) men.tin lazy-on-read | forced (d) in force runs | ok |
+| (e) emoH hhBind migration | gate (emoH/emo/mk) every run | 0 diffs |
+| fidUsed (friend's people's faces) | gate | **Q3 (worker code): after rejoin S.fidUsed held maid:m50 / maid:m36 on the guest only** (her own new maids, drawn after her last end). FIXED r1 (rsv), 0 in 44 runs after |
+| op-added person without ro/rl | coop-home 51/51 | ok |
+| **NEW member: guest-only world rename at start** | my check found a start split in 5/20 runs on BOTH the worker build and mine (8 s, not converging until week 1); trace E/F: R8 maid sid21 «Thu Thiền» on host, «San Hô» on guest; guest's own maid also «Thu Thiền». Root: j95c **j95cDedupe** (start / ageInit / j95sync) renames a WORLD servant on the guest seat only; the host keeps the old name, the merge puts it back: one person, two names for a week, then a full-name clash with her own maid | FIXED r1: at level < 3 on the guest every world servant keeps its name (host owns world names, as jnamefix rules). Forced proof RV_FORCEDD: worker build renamed the world servant (kept=false), r1 kept it (kept=true, gDd 1). Start splits after fix: 0 in 12 runs |
+| level >= 3 "untouched" claim | code read: figFill at host endTurn, fidBack at start and fidNote ran at level 3 too | FIXED r1: gated by !lvl3() (now really inert there) |
+| tho/thoM/thoO, net/trong/kh | scan rows / gate | as the worker says |
+
+### (3) Tests on fe7297f6 (and paired main 983a9436)
+| test | result |
+|---|---|
+| coop-e2e (my copy with the independent check) ×54 + forced 2 | listed above; other reds: week stall ×4 (R4 week 3, Q4 + D3 after rebirth, FD0 week 3 on the worker build), CORS rank-worker console error ×1 (infra) |
+| week stall on main? | **yes, paired**: main coop-e2e ×8 → M5 stalled at week 1 (same signature: modal open, end not sent, seat steps back to buổi 1); coop-bot THIN=9 TRIP=1 4 w: main 2/4, new 4/4 and 0/4 — pre-existing, not this branch |
+| quickcheck ×2 | **PASS** ×2 (old save ok, core gates PASS; perf new/live render 272/224 & 226/218, buổi 1158/2315 & 1177/1103) |
+| one-core-guard / undef-scan | PASS / PASS |
+| names-oldsave (old = LIVE, new = r1, 8 y × 8 lives) | PASS |
+| names-unique (15 y × 3 lives) | 0 failures |
+| outside/coop-home | 51/51 |
+| coop-bot THIN=9 TRIP=1 (level 3) | no page errors, 0 weeks with divergence; tripwire STATE per week new ≈ 2.9k vs main ≈ 4.9k (not worse) |
+| **role-parity** | **FAIL 1 (×2 runs): maid:N-ONLY:maid:accuse**. main 983a9436 ALL PASS; main + staff-split-r1 ALL PASS; r1 with jcoophl REMOVED still FAILS → it comes from the **names-unique-r2-r1 stack on newest LIVE** (or the j10/jkc2 merge of it), not from coop-host-lag. names-unique tip alone (old base f43efc71) cannot be compared (old open-gap list, many gaps) |
+
+### FOR B / FOR MAIN
+1. LAND HOLD: names-unique-r2-r1 merged with LIVE 983a9436 fails role-parity maid:accuse (player cung nữ's «Tố cáo … trước Hoàng hậu», j42 p.sk==="hh"); the names lane must fix it on its own branch before it lands; then re-merge this r1 on it (expect assemble.py / j10 / jkc2 / coop-e2e as above).
+2. FOR MAIN (not a FAIL): the server merge NOADD for other id numbers (spyFor, lover, owner…) = Worker deploy (coop/worker/src/merge.js), not in this branch.
+3. Pre-existing on main: the week stall (modal open, end not sent, seat steps back to buổi 1 on a late room snapshot: jcoopworld "room" handler catch-up while CW.sent<wk) ≈ 1 in 8–14 e2e runs on main and branch alike; coop-bot THIN=9 stalls on main too. Worth a co-op worker.
+4. Residual (1/56): Thái hậu face changed c01→c16 on the host from week 1 in run E1 (guest had none at start). Not reproduced in 26 runs with logging; a follow-up for the co-op lane with the RVTH logger (dev/test copy in this report's runs).
+5. kc2 «Xuân Đào» rename (jkc2 kc2Init renames any k61All person named Xuân Đào) is another guest-side world rename of the same kind; rare (names-unique avoids the name) — left as a note.
+6. coop-name-clash (c2353df6) reviewer: my j95cDedupe guard keeps world names on the guest; its "host decides one name list" should agree; re-check after merge.
+
+Reviewer fixes (all in dev/build/jcoophl.js): j95cDedupe guest guard; rsv (guest's own people's faces reserved on the host at once, also sent with "ask"); !lvl3() on figFill / fidBack / fidNote.
