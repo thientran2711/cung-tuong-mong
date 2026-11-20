@@ -59,12 +59,17 @@ RDQ.ptNgoc=()=>pfAlive("tieungoc");RDQ.ptKim=()=>pfAlive("kimthanh")&&pfP("kimth
 /* pt_hai · Vượt bể (Sinh tồn · Trung nghĩa). People: {emp}, {v}, {maid}, {th}; PFP kimthanh (envoy, capital), tieungoc (her nurse-maid, 4th ship),
    namlao (helmsman, 4th ship), thanlao (kiêng-keeper, her ship → Minh Châu), huuthanh (Tân La merchant, Minh Châu), ocuu (pirate chief, at sea).
    Objects (PFO): van (the painted plank), thu (Nham Lão's letter), danhsach (the embassy roll), nhatky (the 4th ship's log), ruong (the tribute chest),
-   niem (its seals), ngoctrai (her pearls), haido (the sea chart). GE hooks: ge1 Người đếm tên kẻ chết đuối · ge2 Chủ thuyền Đông Hải ·
-   ge3 Đổ tội cho biển · ge4 Thuyền về Nan Ba. */
+   niem (its seals), ngoctrai (her pearls), haido (Kim Hựu Thành's sea chart), haidodh (the Đại Hy navy chart copy, .11), giaythue (the tax-free paper),
+   hopthu (the mother's letter box, lost with Tiểu Ngọc), guong (the mother's bronze mirror, hers from .4), dongchau (the PF97 hairpin), tram ({v}'s planted hairpin).
+   GE hooks (r2: each named option carries it): ge1 Người đếm tên kẻ chết đuối (.11 x1 «Ghi đủ tên người chết…», s2 «Tự tay ghi tên bà») ·
+   ge2 Chủ thuyền Đông Hải (.8 x1 «Hứa cho Ô Cửu một bến…», .11 c2 «Xin tha cho hắn làm lính thủy») · ge3 Đổ tội cho biển (.4 x1 «Tâu: biển lấy cống…»,
+   .10 c2 «Tâu: biển làm mất…», .11 x1 «Ghi người chết là ‘ở lại…’») · ge4 Thuyền về Nan Ba (.11 t1 «Giao thuyền cho người {land} lái», E.mid). */
 const PFNGOC=()=>pfAlive("tieungoc")?"Tiểu Ngọc":"người sống sót";/* the one who tells, if the nurse-maid is gone */
 const PFLOG=()=>pfO("nhatky")==="ta";/* she holds the 4th ship's log */
+/* the ransom pearls' source, kept when they go to Ô Cửu (law 6c r2: the text names where the box came from) */
+const PFNGOCN=()=>({ta:"hộp ngọc hồi môn của mẫu hậu",kho:"hộp ngọc mượn của Nội vụ phủ",kimthanh:"hộp ngọc đại sứ đổi bằng sách"})[RD_FL("pt.f.ngoc")||pfO("ngoctrai")]||"hộp ngọc";
 RTHEME67.pt_hai="emp";
-ARC67.pt_hai=pfArc("pt_hai",{o:"pf",t:"Thuyền thứ tư chưa tới",w:"emp",sj:"chiếc thuyền thứ tư của sứ đoàn",cast(A){if(!pfO("ruong"))pfO("ruong","namlao");if(!pfO("nhatky"))pfO("nhatky","namlao");if(!pfO("danhsach"))pfO("danhsach","kimthanh");return rdCast(A,["v"])},
+ARC67.pt_hai=pfArc("pt_hai",{o:"pf",t:"Thuyền thứ tư chưa tới",w:"emp",sj:"chiếc thuyền thứ tư của sứ đoàn",cast(A){if(!pfO("ruong"))pfO("ruong","namlao");if(!pfO("nhatky"))pfO("nhatky","namlao");if(!pfO("danhsach"))pfO("danhsach","kimthanh");if(!pfO("guong"))pfO("guong","ta");return rdCast(A,["v"])},
  g:"Bốn chiếc thuyền sứ đoàn rời Ngũ Đảo cùng một con nước. Thuyền của ngươi cập bến Minh Châu; thuyền thứ tư, chở Tiểu Ngọc, rương cống và cuốn nhật ký hải trình, đến nay vẫn chưa thấy. Trong triều đã có người hỏi: {land} gửi nửa phần cống, hay gửi một nàng công chúa thay cho cống?",
  p:[["s1","s2"],["c1","c2","G.rumor"],["t1"],["x1"]],
  B:{s1:{h:"Đại sứ xin vào chầu",w:"emp",t:"Khiển Đường đại sứ Tá Bá Kim Thành xin vào chầu để tâu việc chiếc thuyền thứ tư. Ông nói tiếng Đại Hy chậm, từng chữ một. Hồng Lư tự khanh hỏi ngươi có muốn đứng cạnh ông không.",o:[
@@ -77,8 +82,9 @@ ARC67.pt_hai=pfArc("pt_hai",{o:"pf",t:"Thuyền thứ tư chưa tới",w:"emp",s
   {n:"Hỏi đại sứ xem thuyền thứ tư chở những gì",f:"le",wx:"biết rõ cái đang mất",lx:"đại sứ ngại nói",rt:"Đại sứ đưa ngươi xem bản danh sách sứ đoàn: tên người, tên cống phẩm, rương nào niêm phong ở đâu.",go:()=>{pfMeet("kimthanh");return pfO("danhsach","ta")}}]},
  c1:{h:"{v} hỏi về cống phẩm",w:"v",need:["v"],t:"{v} cười trước mặt các phi tần: nghe nói rương cống {land} chìm mất nửa, chẳng biết có thật từng có rương không.",o:[
   {n:"Mời {v} xem danh mục cống đã đến",wx:"{v} không còn cớ nói",lx:"{v} thấy danh mục thiếu thật",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"{v} đọc danh mục, im lặng.",rf:"{v} chỉ vào dòng thiếu: “Đây, thiếu.”"},
-  {n:"Đáp: biển lấy của ai thì người ấy biết",wx:"giữ được thể diện",lx:"{v} cho là ngươi mỉa nàng",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Các phi tần che miệng cười. {v} đỏ mặt."},
-  {n:"Lặng thinh, ghi nhớ từng lời",wx:"không thêm thù",lx:"lời đồn đi tiếp",rt:"Ngươi uống hết chén trà, không nói một lời."}]},
+  {n:"Đáp: biển lấy của ai thì người ấy biết",wx:"giữ được thể diện",lx:"{v} cho là ngươi mỉa nàng",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""}/* rolled (r2 6a); {v}'s grudge is the price of answering, won or lost */,rt:"Các phi tần che miệng cười. {v} đỏ mặt.",rf:"{v} cười nhạt: “Biển không biết nói, công chúa thì biết.” Các phi tần cười theo nàng."},
+  {n:"Lặng thinh, ghi nhớ từng lời",wx:"không thêm thù",lx:"lời đồn đi tiếp",rt:"Ngươi uống hết chén trà, không nói một lời."},
+  {n:"Sai người tung tin: người nhà {v} từng giữ cống phẩm của nước khác",wx:"lời đồn quay về phía {v}",lx:"nếu lộ, ngươi là kẻ bịa chuyện",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""}/* ác (r2): a rumour, not a proof; it can be traced back */,rt:"Ba hôm sau, hậu cung thì thầm về người nhà {v}.",rf:"Tin đồn bị lần ra từ cung ngươi. {v} đem chuyện ấy kể với Thái hậu."}]},
  c2:{h:"Mảnh ván sơn son",w:"emp",t:"Thứ sử Minh Châu gửi lên một mảnh ván sơn son, ngư dân vớt được ngoài cửa biển. Trên ván có hình mặt trời của thuyền {land}.",o:[
   {n:"Xin giữ mảnh ván làm chứng",wx:"có vật thật trong tay",lx:"người ta nói ngươi giữ đồ xui",rt:"Mảnh ván được đặt trong kho của cung ngươi.",go:()=>pfO("van","ta")},
   {n:"Gửi mảnh ván cho đại sứ xem",wx:"đại sứ nhận ra thuyền nào",lx:"đại sứ suy sụp",rt:"Đại sứ sờ hình mặt trời, nói: “Thuyền thứ tư. Nó còn trôi được.”",go:()=>{pfMeet("kimthanh");return pfO("van","kimthanh")}},
@@ -98,7 +104,7 @@ ARC67.pt_hai=pfArc("pt_hai",{o:"pf",t:"Thuyền thứ tư chưa tới",w:"emp",s
 PF97.push({a:"pt_hai",tag:"Lửa hiệu trên Ngũ Đảo",w:"emp",n:"Xin Hoàng thượng cho đốt lửa hiệu dọc bờ Minh Châu suốt ba đêm",
  path:["Đứng cạnh đại sứ","Gửi bạc cho thuyền chài","Hỏi đại sứ","Gửi mảnh ván","Thưa: thiếp tin","Tâu: biển lấy cống"],bad:["Lặng thinh","Thưa: thiếp chờ gió mùa"],x:[()=>S.tamco>=BAL.arc.rare.pt_hai.bar,`Tâm cơ từ ${BAL.arc.rare.pt_hai.bar}`],
  t:"Ngươi nhớ lời Nham Lão kể khi còn ở Phù Tang: thuyền lạc đêm đi theo lửa. Hoàng thượng cho đốt lửa hiệu dọc bờ Minh Châu ba đêm liền. Đêm thứ ba, lính canh thấy một đốm lửa nhỏ đáp lại ngoài khơi: thuyền thứ tư còn nổi. Hoàng thượng sai thưởng cho ngươi một cây trâm đông châu: “Ngọc của biển, trả cho người biết gọi biển.”",
- go:()=>pfO("haido","vua"),rw:"nt_dongchau",ti:"Lửa hiệu trên Ngũ Đảo"});
+ go:()=>pfO("dongchau","ta")/* r2 6c: the reward is the hairpin (rw item), booked as hers */,rw:"nt_dongchau",ti:"Lửa hiệu trên Ngũ Đảo"});
 
 rdDef("pt_hai",5,{t:"Thư từ Phúc Châu",w:"emp",sj:"lá thư từ bờ biển Phúc Châu",cast(A){return rdCast(A,["v"])},
  g:"Một chiếc thuyền chài từ Phúc Châu mang lên kinh lá thư của Nham Lão, lão lái thuyền thứ tư: cột buồm gãy, thuyền trôi về phương nam, mắc cạn ở một đảo không tên. Nước ngọt còn đủ ít hôm. Người trên thuyền xin một con thuyền, và xin đừng ai quên họ.",
@@ -121,7 +127,7 @@ rdDef("pt_hai",5,{t:"Thư từ Phúc Châu",w:"emp",sj:"lá thư từ bờ biể
   {n:"Tâu xin Hộ bộ chi theo lệ cứu nạn",wx:"đúng phép, không mất bạc",lx:"Hộ bộ chậm",rt:"Hộ bộ chuẩn chi, nhưng phải chờ mười ngày.",rf:"Hộ bộ nói: lệ cứu nạn dành cho dân Đại Hy."}]},
  c2:{h:"{v} hỏi thư ấy ai đọc được",w:"v",need:["v"],t:"{v} nói giữa lúc thỉnh an: “Thư viết bằng chữ gì? Người {land} viết, người {land} đọc, rồi bảo cả triều tin?”",o:[
   {n:"Xin Hoàng thượng cho Hàn lâm đọc thư",wx:"một người Đại Hy đọc, cả triều tin",lx:"nếu chữ run quá, Hàn lâm đọc sai",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Hàn lâm đọc thư, từng chữ khớp với lời ngươi.",rf:"Hàn lâm đọc ngắc ngứ ba chỗ; {v} cười."},
-  {n:"Đáp: chữ Hán trên thư là chữ Đại Hy dạy cho {land}",wx:"cả điện thấy ngươi khéo lời",lx:"{v} ghi hận",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Thái hậu khẽ cười. {v} cúi đầu."},
+  {n:"Đáp: chữ Hán trên thư là chữ Đại Hy dạy cho {land}",wx:"cả điện thấy ngươi khéo lời",lx:"{v} ghi hận",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Thái hậu khẽ cười. {v} cúi đầu.",rf:"{v} đáp ngay: “Học chữ người ta rồi viết thư xưng ngang người ta.” Thái hậu gật gù."},
   {n:"Mời {v} cùng gửi một chum nước ra đảo",wx:"{v} không thể nói gì thêm",lx:"{v} nhận công",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} miễn cưỡng nhận lời, sai người gửi một chum nước."}]},
  t1:{h:"Đại sứ muốn tự đi",w:"emp",t:"Tá Bá Kim Thành xin được tự mình theo thuyền cứu ra đảo. Ông là người giữ quốc thư; nếu ông chết trên biển, sứ đoàn không còn ai nói được với Đại Hy.",o:[
   {n:"Khuyên đại sứ ở lại kinh",f:"giu",wx:"sứ đoàn còn người đứng đầu",lx:"đại sứ thấy mình vô dụng",rt:"Đại sứ cúi đầu ở lại, đêm nào cũng ra bến nhìn.",go:()=>pfMeet("kimthanh")},
@@ -129,7 +135,7 @@ rdDef("pt_hai",5,{t:"Thư từ Phúc Châu",w:"emp",sj:"lá thư từ bờ biể
   {n:"Để đại sứ tự quyết",f:"le",wx:"ông nhớ ngươi tôn trọng ông",lx:"ông có thể đi mà không về",rt:"Đại sứ quyết ở lại. “Quốc thư phải có người giữ.”",go:()=>pfMeet("kimthanh")}]},
  x1:{h:"Thuyền cứu ra khơi",w:"emp",t:"Cuối tháng, gió còn chưa đổi. Thủy sư Minh Châu nói đi lúc này là liều. Thương thuyền Tân La nói họ đi được, nếu có giá. Hoàng thượng hỏi ngươi chọn thuyền nào.",o:[
   {n:"Xin thuyền thủy sư Đại Hy đi ngay",e:["win","lose"],rt:"Thuyền thủy sư ra khơi giữa sóng lớn, cờ Đại Hy trên cột buồm. Cả kinh nói ngài thương người của nàng.",rf:"Thuyền thủy sư gặp gió ngược, quay về sau năm ngày, gãy một mái chèo."},
-  {n:"Thuê thương thuyền Tân La, trả bằng giấy miễn thuế một mùa",e:["win","mid"],rt:"Thương thuyền Tân La nhổ neo đêm ấy. Thương nhân biết đường đảo hơn thủy sư.",rf:"Thương thuyền đi, nhưng không hứa ngày về."},
+  {n:"Thuê thương thuyền Tân La, trả bằng giấy miễn thuế một mùa",e:["win","mid"],rt:"Thương thuyền Tân La nhổ neo đêm ấy. Thương nhân biết đường đảo hơn thủy sư.",rf:"Thương thuyền đi, nhưng không hứa ngày về.",go:()=>pfO("giaythue","tanla")/* r2 6c: the paper goes to the Tân La ship master, won or not */},
   {n:"Chờ gió đổi, gửi thêm thuyền chài mang nước",e:"mid",lx:"người trên đảo phải chờ",rt:"Mười chum nước nữa ra khơi. Thuyền lớn chờ gió."}]}},
  E:{win:{tag:"Thuyền cứu đã đi",w:"emp",t:"Thuyền cứu rời Minh Châu. Hoàng thượng dặn: thấy người {land} thì đón như đón người Đại Hy."},
   mid:{tag:"Còn chờ gió",t:"Gió chưa đổi. Mỗi đêm trên bến Minh Châu có một ngọn lửa, đốt cho người trên đảo."},
@@ -147,7 +153,7 @@ rdDef("pt_hai",6,{t:"Người giữ kiêng",w:"emp",sj:"Thân Lão, người gi�
   {n:"Gửi bạc mua rượu thịt cho thủy thủ",f:"giu",wx:"cơn giận nguôi đi",lx:"bạc ra, người giữ kiêng ăn thịt thì lại thêm chuyện",rt:"Thủy thủ say một đêm, sáng ra im lặng."}]},
  c1:{h:"{v} gọi đó là lệ man rợ",w:"v",need:["v"],t:"{v} kể trước mặt Thái hậu: người {land} trói người vì một cơn gió, công chúa {land} chắc cũng tin thế.",o:[
   {n:"Thưa: thiếp xin Đại Hy cứu người ấy",wx:"Thái hậu thấy ngươi biết phải trái",lx:"{v} bảo ngươi chê lệ nước mình",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Thái hậu gật đầu: “Thế mới phải.”",rf:"Thái hậu nói: “Lệ nước nào nước ấy giữ.”"},
-  {n:"Đáp: Đại Hy cũng từng tế người cho sông",wx:"{v} không đáp được",lx:"Thái hậu không vui",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Cả điện im lặng. {v} cúi đầu."},
+  {n:"Đáp: Đại Hy cũng từng tế người cho sông",wx:"{v} không đáp được",lx:"Thái hậu không vui",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Cả điện im lặng. {v} cúi đầu.",rf:"{v} nói: “Đại Hy bỏ lệ ấy từ trăm năm, còn {land} thì chưa.” Thái hậu không vui với ngươi."},
   {n:"Cười, nói chuyện khác",wx:"không thêm chuyện",lx:"lời {v} đi khắp cung",rt:"Thái hậu hỏi sang chuyện hoa cúc."}]},
  c2:{h:"Chiếc lược trong tay nải",w:"maid",t:"Thân Lão nhờ người gửi vào cung một lời: lão giữ kiêng trọn chuyến. Nhưng lính ngục tìm thấy trong tay nải của lão một chiếc lược gỗ.",o:[
   {n:"Tin lão, xin thứ sử trả lại tay nải",wx:"Thân Lão biết ngươi tin lão",lx:"nếu lão nói dối, ngươi mất lời",rt:"Lão nhắn lại: chiếc lược là của con gái lão, lão chưa từng dùng.",go:()=>pfO("luoc","thanlao")},
@@ -183,12 +189,12 @@ rdDef("pt_hai",7,{t:"Thương thuyền Tân La",w:"emp",sj:"thương chủ Tân 
   {n:"Xin Thị bạc ty thu cuốn nhật ký theo luật",wx:"đúng luật, không tốn gì",lx:"thương nhân giận, nhật ký vào kho",rt:"Thị bạc ty thu nhật ký, niêm vào kho. Ngươi phải xin mới được đọc.",rf:"Thị bạc ty nói nhật ký không phải hàng buôn, không thu.",go:(_A,ok)=>ok?pfO("nhatky","kho"):""}]},
  c2:{h:"Người của {v} ở Thị bạc ty",w:"v",need:["v"],t:"Biểu huynh của {v} làm việc ở Thị bạc ty Minh Châu. Y đòi khám cả thuyền Tân La, nói thương nhân giấu đồ cống của {land}.",o:[
   {n:"Xin cho khám, có người của ngươi đứng xem",wx:"khám công bằng",lx:"thương nhân mất mặt",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Khám ba ngày, không thấy đồ cống nào.",rf:"Khám ba ngày, biểu huynh của {v} lấy đi hai hòm hàng."},
-  {n:"Tâu rằng biểu huynh {v} gây khó cho khách",wx:"chặn tay người của {v}",lx:"{v} biết ngươi chặn",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Biểu huynh {v} bị gọi về, mặt tối sầm."},
+  {n:"Tâu rằng biểu huynh {v} gây khó cho khách",wx:"chặn tay người của {v}",lx:"{v} biết ngươi chặn",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Biểu huynh {v} bị gọi về, mặt tối sầm.",rf:"Thị bạc ty tâu lại: khám thuyền là phép. Biểu huynh {v} ở lại, khám tiếp."},
   {n:"Gửi thư bảo thương nhân nhường y một hòm hàng",wx:"yên chuyện",lx:"thương nhân mất của",rt:"Biểu huynh {v} nhận hòm hàng, không khám nữa."}]},
- t1:{h:"Ai đến đảo trước",w:"emp",t:"Trang cuối nhật ký ghi bằng nét run: “Thuyền buồm đen. Họ hỏi rương nào có ngọc.” Kim Hựu Thành nói: đó là thuyền giặc biển Đông Hải của Ô Cửu.",o:[
+ t1:{h:"Ai đến đảo trước",w:"emp",t:()=>(PFLOG()?"Trang cuối nhật ký ghi bằng nét run":pfO("nhatky")==="kho"?"Ngươi xin Thị bạc ty cho đọc nhật ký. Trang cuối ghi bằng nét run":"Kim Hựu Thành mở nhật ký, đọc cho người của ngươi nghe trang cuối, nét chữ run")+": “Thuyền buồm đen. Họ hỏi rương nào có ngọc.” Kim Hựu Thành nói: đó là thuyền giặc biển Đông Hải của Ô Cửu.",o:[
   {n:"Tâu ngay lên Hoàng thượng",f:"tra",wx:"triều đình biết kẻ bắt người",lx:"triều đình biết rương có ngọc",rt:"Hoàng thượng sai thủy sư dò tìm thuyền buồm đen."},
   {n:"Báo đại sứ, bàn riêng việc chuộc người",f:"mua",wx:"người {land} lo người {land}",lx:"Đại Hy chưa biết",rt:"Đại sứ nắm tay lại: “Ngọc thì chuộc được, người thì không thể thay.”",go:()=>pfMeet("kimthanh")},
-  {n:"Giữ trang ấy, chưa nói với ai",f:"mua",wx:"có một con bài trong tay",lx:"người trên đảo phải chờ",rt:"Trang nhật ký được ép trong sách kinh của ngươi.",go:()=>pfO("trang","ta")}]},
+  {n:"Giữ trang ấy, chưa nói với ai",if:PFLOG/* r2 6c: only the holder of the log can keep its page */,f:"mua",wx:"có một con bài trong tay",lx:"người trên đảo phải chờ",rt:"Trang nhật ký được ép trong sách kinh của ngươi.",go:()=>pfO("trang","ta")}]},
  x1:{h:"Lời của thương nhân",w:"emp",t:"Kim Hựu Thành biết bến của Ô Cửu. Ông xin dẫn đường, đổi lấy một điều: thương thuyền Tân La được lập thương quán ở Minh Châu.",o:[
   {n:"Tâu xin cho Tân La lập thương quán ở Minh Châu",e:["win","lose"],rt:"Hoàng thượng chuẩn: thương quán Tân La mở ở bến Minh Châu. Kim Hựu Thành quỳ lạy, hẹn ngày dẫn đường.",rf:"Hộ bộ tâu: một phi tần đi xin quyền buôn cho thương nhân ngoại bang. Hoàng thượng gạt đi.",go:(_A,ok)=>ok?pfO("giaythue","huuthanh"):""},
   {n:"Hứa trả bạc khi người về đến bờ",e:["win","mid"],rt:"Kim Hựu Thành nhận lời: người về thì bạc về.",rf:"Ông nhận lời, nhưng không vội."},
@@ -214,41 +220,41 @@ rdDef("pt_hai",8,{t:"Giặc biển Đông Hải",w:"emp",sj:"thuyền buồm đe
   {n:"Xin đại sứ bán sách của sứ đoàn lấy ngọc",wx:"người {land} trả cho người {land}",lx:"sứ đoàn về nước tay không",rt:"Đại sứ bán ba rương sách vừa mua, đổi lấy ngọc.",go:()=>{pfMeet("kimthanh");return pfO("ngoctrai","kimthanh")}}]},
  c2:{h:"{v} nói chuộc giặc là nuôi giặc",w:"v",need:["v"],t:"{v} tâu với Thái hậu: chuộc người bằng ngọc thì năm sau giặc biển lại bắt thuyền Đại Hy.",o:[
   {n:"Thưa: thiếp chuộc người, Đại Hy diệt giặc sau",wx:"Thái hậu thấy ngươi nghĩ xa",lx:"{v} bảo ngươi hứa suông",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Thái hậu gật đầu.",rf:"Thái hậu nói: “Hứa thì phải làm.”"},
-  {n:"Hỏi lại {v}: nếu người bị bắt là em gái nàng thì sao",wx:"{v} câm lặng",lx:"{v} thù ngươi",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Cả điện nhìn {v}. Nàng ta không đáp."},
+  {n:"Hỏi lại {v}: nếu người bị bắt là em gái nàng thì sao",wx:"{v} câm lặng",lx:"{v} thù ngươi",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Cả điện nhìn {v}. Nàng ta không đáp.",rf:"{v} đáp: “Em gái thiếp không bao giờ để giặc bắt.” Thái hậu gật đầu với nàng."},
   {n:"Im lặng, cúi đầu nghe",wx:"không thêm chuyện",lx:"Thái hậu nghiêng về {v}",rt:"Thái hậu bảo: việc biển để Hoàng thượng quyết."}]},
  t1:{h:"Thư trả lời Ô Cửu",w:"emp",t:"Ô Cửu đòi trả lời trong ba ngày. Ngươi cầm bút.",o:[
   {n:"Viết: ngọc sẽ đến, người phải lành",f:"chuoc",wx:"giặc giữ người cho tử tế",lx:"giặc biết ngươi sẽ trả",rt:"Thư đi. Thuyền chài về kể: người trên đảo được ăn cơm."},
   {n:"Viết: thủy sư Đại Hy đã ra khơi",f:"danh",wx:"giặc sợ",lx:"giặc có thể giết người rồi chạy",rt:"Thư đi. Thuyền buồm đen dời neo vào sâu trong dãy đảo.",rf:"Thư đi. Ô Cửu gửi lại một mảnh áo nữa."},
   {n:"Viết: xin ba ngày nữa để gom ngọc",f:"chuoc",wx:"có thêm thời gian",lx:"giặc nghi",rt:"Ô Cửu cho thêm ba ngày."}]},
  x1:{h:"Đêm ở dãy đảo đá",w:"emp",t:"Đêm nước ròng. Thuyền thủy sư nằm chờ sau mỏm đá, thương thuyền Tân La treo đèn. Hoàng thượng để ngươi quyết lời cuối.",o:[
-  {n:"Xin thủy sư đánh đêm, cứu người",e:["win","lose"],rt:"Thủy sư áp mạn thuyền buồm đen lúc canh ba. Ô Cửu bị bắt sống, rương cống được khiêng về, người {land} lên thuyền Đại Hy, còn đủ.",rf:"Thủy sư áp mạn, giặc phóng lửa. Rương cống chìm theo thuyền buồm đen. Người ta vớt được Nham Lão; Tiểu Ngọc thì không.",go:(_A,ok)=>{if(ok){pfMove("ocuu","nguc");pfO("ruong","kho");if(pfO("nhatky")==="ocuu")pfO("nhatky","ta");return PFFREE()}pfMove("ocuu","hb");pfO("ruong","bien");if(pfO("nhatky")==="ocuu")pfO("nhatky","bien");pfKill("tieungoc");return PFFREE()}},
-  {n:"Mang ngọc đến chuộc, thương thuyền Tân La làm trung gian",e:["win2","mid"],rt:"Hộp ngọc đổi lấy người và rương. Ô Cửu giữ lời, nhổ neo đi về phía đông.",rf:"Hộp ngọc đổi được người. Ô Cửu giữ lại rương cống, cười: “Lần sau.”",go:(_A,ok)=>{pfO("ngoctrai","ocuu");pfMove("ocuu","hb");if(ok){pfO("ruong","kho");if(pfO("nhatky")==="ocuu")pfO("nhatky","ta")}return PFFREE()}},
+  {n:"Xin thủy sư đánh đêm, cứu người",e:["win","lose"],rt:()=>"Thủy sư áp mạn thuyền buồm đen lúc canh ba. Ô Cửu bị bắt sống, "+(pfO("ruong")==="ocuu"?"rương cống được khiêng về, ":"")+"người {land} lên thuyền Đại Hy, còn đủ.",rf:"Thủy sư áp mạn, giặc phóng lửa. Rương cống chìm theo thuyền buồm đen. Người ta vớt được Nham Lão; Tiểu Ngọc thì không.",go:(_A,ok)=>{if(ok){pfMove("ocuu","nguc");pfO("ruong","kho");if(pfO("nhatky")==="ocuu")pfO("nhatky","ta");return PFFREE()}pfMove("ocuu","hb");pfO("ruong","bien");if(pfO("nhatky")==="ocuu")pfO("nhatky","bien");pfKill("tieungoc");return PFFREE()}},
+  {n:"Mang ngọc đến chuộc, thương thuyền Tân La làm trung gian",if:()=>["ta","kho","kimthanh"].includes(pfO("ngoctrai"))/* r2 6c: only with the pearls in hand */,e:["win2","mid"],rt:()=>`${PFNGOCN()[0].toUpperCase()+PFNGOCN().slice(1)} đổi lấy người và rương. Ô Cửu giữ lời, nhổ neo đi về phía đông.`,rf:()=>`${PFNGOCN()[0].toUpperCase()+PFNGOCN().slice(1)} đổi được người. Ô Cửu giữ lại rương cống, cười: “Lần sau.”`,go:(_A,ok)=>{RD_FL("pt.f.ngoc",pfO("ngoctrai"));pfO("ngoctrai","ocuu");pfMove("ocuu","hb");if(ok){pfO("ruong","kho");if(pfO("nhatky")==="ocuu")pfO("nhatky","ta")}return PFFREE()}},
   {n:"Hứa cho Ô Cửu một bến ở Minh Châu, đổi lấy tất cả",e:"mid",lx:"giặc biển có bến trên đất Đại Hy",rt:"Ô Cửu trả người, trả rương, đổi cờ đen lấy cờ thương thuyền. Từ nay hắn neo ở bến Minh Châu như một thương nhân.",go:()=>{pfMove("ocuu","cang");pfO("ruong","kho");if(pfO("nhatky")==="ocuu")pfO("nhatky","ta");return PFFREE()}}]}},
  E:{win:{tag:"Lửa trên đảo đá",w:"emp",t:()=>(pfP("ocuu","w")==="nguc"?"Ô Cửu nằm trong ngục Minh Châu. ":"")+"Người {land} về bờ, đủ tên. Thủy sư Đại Hy kể chuyện đêm ấy khắp các bến."},
-  win2:{tag:"Ngọc đổi người",w:"emp",t:"Người về, rương về, hộp ngọc của mẫu hậu đi theo thuyền buồm đen. Ngươi không tiếc."},
-  mid:{tag:"Người về, biển còn giữ một phần",t:()=>pfP("ocuu","w")==="cang"?"Ô Cửu neo thuyền ở bến Minh Châu. Người ta không biết nên gọi hắn là giặc hay là khách.":"Người về bờ. Rương cống còn nằm trong khoang thuyền buồm đen, ở đâu đó phía đông."},
+  win2:{tag:"Ngọc đổi người",w:"emp",t:()=>pfO("ngoctrai")==="ocuu"?`Người về, rương về, ${PFNGOCN()} đi theo thuyền buồm đen. Ngươi không tiếc.`:"Người về, rương về. Ngươi không tiếc gì."},
+  mid:{tag:"Người về, biển còn giữ một phần",t:()=>pfP("ocuu","w")==="cang"?"Ô Cửu neo thuyền ở bến Minh Châu. Người ta không biết nên gọi hắn là giặc hay là khách.":pfO("ruong")==="ocuu"?"Người về bờ. Rương cống còn nằm trong khoang thuyền buồm đen, ở đâu đó phía đông.":"Người về bờ. Biển còn giữ một phần."},
   lose:{tag:"Mảnh áo trên sóng",w:"v",t:()=>"Thuyền buồm đen cháy, Ô Cửu thoát."+(pfAlive("tieungoc")?"":" Tiểu Ngọc không về.")+" {v} nói: công chúa {land} gọi binh mà không cứu nổi người của mình."}}});
 
 rdDef("pt_hai",9,{t:"Bến Minh Châu",w:"emp",sj:"những người sống sót của thuyền thứ tư",cast(A){return rdCast(A,["v"])},
- g:"Người của thuyền thứ tư lên bờ Minh Châu, ít hơn tên trong danh sách. Rương cống được khiêng vào nha môn; nhìn kỹ, dải niêm phong đỏ có một chỗ bị cắt rồi dán lại.",
+ g:()=>"Người của thuyền thứ tư lên bờ Minh Châu, ít hơn tên trong danh sách. "+(pfO("ruong")==="kho"?"Rương cống được khiêng vào nha môn; nhìn kỹ, dải niêm phong đỏ có một chỗ bị cắt rồi dán lại.":"Họ không mang theo rương cống nào; ngươi cho mở lại các rương cống của ba thuyền đã đến, gửi ở Thị bạc ty từ hôm cập bến."),
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Tiểu Ngọc lên bờ",w:"maid",if:()=>pfAlive("tieungoc"),t:"Tiểu Ngọc gầy rộc, tóc bạc thêm. Bà nhờ người viết một dòng gửi lên kinh: “Công chúa của già có được ăn no không?”",o:[
   {n:"Xin cho Tiểu Ngọc lên kinh ở cạnh ngươi",f:"dua",wx:"có người thân bên mình",lx:"Nội vụ phủ không ưa người ngoài vào cung",rt:"Nội vụ phủ chuẩn cho Tiểu Ngọc vào hầu, ghi tên là nhũ mẫu công chúa.",rf:"Nội vụ phủ nói: phải chờ xét.",go:(_A,ok)=>ok?pfMove("tieungoc","kinh"):""},
   {n:"Gửi bạc và thuốc cho bà dưỡng sức ở Minh Châu",f:"giu",wx:"bà được nghỉ",lx:"bạc ra, xa mặt",rt:"Tiểu Ngọc ở nhà trọ bến Minh Châu, mỗi tuần có người mang thuốc."},
   {n:"Viết thư tay bằng chữ {land} gửi bà",f:"giu",wx:"bà biết ngươi còn nhớ tiếng mẹ đẻ",lx:"người Đại Hy hỏi ngươi viết gì",rt:"Tiểu Ngọc giữ lá thư trong vạt áo."}]},
  s2:{h:"Nham Lão kể lại",w:"maid",if:()=>!pfAlive("tieungoc"),t:"Nham Lão quỳ trước cửa nha môn Minh Châu: lão lái thuyền mà không giữ được người bế công chúa. Lão xin kể lại đêm cuối của Tiểu Ngọc.",o:[
-  {n:"Nghe lão kể, ghi lại từng lời",f:"giu",wx:"ngươi biết bà chết thế nào",lx:"nỗi đau mở lại",rt:"Bà nhảy xuống nước để giữ hộp thư của mẫu hậu gửi ngươi. Hộp thư chìm theo bà.",go:()=>pfAlive("namlao")?pfMeet("namlao"):""},
+  {n:"Nghe lão kể, ghi lại từng lời",f:"giu",wx:"ngươi biết bà chết thế nào",lx:"nỗi đau mở lại",rt:"Bà nhảy xuống nước để giữ hộp thư của mẫu hậu gửi ngươi. Hộp thư chìm theo bà.",go:()=>{pfO("hopthu","bien");return pfAlive("namlao")?pfMeet("namlao"):""}/* r2 6c: the letter box is booked lost at sea */},
   {n:"Lập bàn thờ Tiểu Ngọc ở bến",f:"dua",wx:"thủy thủ {land} khóc theo ngươi",lx:"Thái hậu không ưa lễ lạ",rt:"Bàn thờ nhỏ đặt ở bến, quay mặt về phía đông."},
   {n:"Bảo Nham Lão đứng dậy, lão không có tội",f:"dua",wx:"lão nhớ ơn ngươi",lx:"thủy thủ cho là ngươi tha dễ quá",rt:"Nham Lão đứng dậy, không nói được gì.",go:()=>pfAlive("namlao")?pfMeet("namlao"):""}]},
- c1:{h:"Niêm phong bị cắt",w:"emp",t:"Dải niêm phong của rương cống bị cắt ngọt rồi dán lại bằng hồ gạo, mà giặc biển không dùng hồ gạo. Sổ nha môn ghi: rương đã qua tay Thị bạc ty một đêm.",o:[
+ c1:{h:"Niêm phong bị cắt",w:"emp",t:()=>(pfO("ruong")==="kho"?"Dải niêm phong của rương cống thuyền thứ tư":"Dải niêm phong của một rương cống ba thuyền đầu")+" bị cắt ngọt rồi dán lại bằng hồ gạo, mà giặc biển không dùng hồ gạo. Sổ nha môn ghi: rương đã qua tay Thị bạc ty một đêm.",o:[
   {n:"Xin mang dải niêm phong lên kinh",wx:"có chứng trong tay",lx:"Thị bạc ty biết ngươi để ý",rt:"Dải niêm phong được ép trong hộp gỗ của ngươi.",go:()=>pfO("niem","ta")},
   {n:"Xin thứ sử ghi tên người đã mở rương",wx:"biết người mở",lx:"thứ sử ngại đụng Thị bạc ty",rt:"Thứ sử ghi tên ba người trực đêm ấy.",rf:"Thứ sử nói sổ trực đã mất trang.",go:()=>pfO("niem","kho")},
   {n:"Bỏ qua, miễn rương về kinh",wx:"rương đi nhanh",lx:"chứng có thể mất",rt:"Rương được dán niêm mới, lên đường.",go:()=>pfO("niem","chay")}]},
  c2:{h:"Biểu huynh {v} xin giữ rương",w:"v",need:["v"],t:"Biểu huynh {v} ở Thị bạc ty xin giữ rương thêm mười ngày để đối sổ. {v} gửi lời: đó là phép.",o:[
   {n:"Đồng ý, cử người đứng canh",wx:"đúng phép, có người canh",lx:"mười ngày chậm",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Người của ngươi ngồi cạnh rương mười đêm.",rf:"Người của ngươi bị đuổi ra ngoài đêm thứ ba."},
-  {n:"Tâu xin rương đi thẳng về Hồng Lư tự",wx:"rương thoát tay Thị bạc ty",lx:"{v} biết ngươi nghi nhà nàng",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Chiếu xuống: rương về Hồng Lư tự."},
+  {n:"Tâu xin rương đi thẳng về Hồng Lư tự",wx:"rương thoát tay Thị bạc ty",lx:"{v} biết ngươi nghi nhà nàng",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Chiếu xuống: rương về Hồng Lư tự.",rf:"Lễ bộ tâu: đối sổ là phép của Thị bạc ty. Rương ở lại thêm mười ngày."},
   {n:"Gửi lễ vật cho biểu huynh {v}",wx:"yên chuyện",lx:"bạc ra, người ta biết ngươi lót tay",rt:"Biểu huynh {v} cười, cho rương đi."}]},
- t1:{h:"Ai hộ tống rương về kinh",w:"emp",t:"Rương cống phải đi mười ngày đường bộ lên kinh. Ai đi theo rương, người ấy chịu trách nhiệm nếu thiếu.",o:[
+ t1:{h:"Ai hộ tống rương về kinh",w:"emp",t:()=>(pfO("ruong")==="kho"?"Rương cống của thuyền thứ tư":"Các rương cống ba thuyền đầu")+" phải đi mười ngày đường bộ lên kinh. Ai đi theo rương, người ấy chịu trách nhiệm nếu thiếu.",o:[
   {n:"Xin đại sứ tự đi theo rương",f:"giu",wx:"người {land} giữ đồ {land}",lx:"nếu thiếu, đại sứ mang tội",rt:"Đại sứ cưỡi ngựa đi sát xe rương.",go:()=>{pfMeet("kimthanh");return pfO("ruong",pfO("ruong")==="kho"?"kimthanh":pfO("ruong"))}},
   {n:"Để Hồng Lư tự hộ tống theo phép",f:"dua",wx:"đúng phép Đại Hy",lx:"không có người của ngươi",rt:"Quan Hồng Lư tự niêm lại rương, ký tên.",go:()=>pfO("ruong",pfO("ruong")==="kho"?"hl":pfO("ruong"))},
   {n:"Gửi người sống sót đi cùng rương",f:"dua",wx:"có nhân chứng đi theo",lx:"người bệnh đi đường xa",rt:"Thủy thủ {land} đi bộ theo xe rương, chân còn quấn vải."}]},
@@ -260,19 +266,19 @@ rdDef("pt_hai",9,{t:"Bến Minh Châu",w:"emp",sj:"những người sống sót 
   mid:{tag:"Ở lại bến chờ gió",t:"Người sống sót ở lại bến Minh Châu. Mỗi chiều họ ra bến nhìn về phía đông."},
   lose:{tag:"Lời kể không rõ",w:"v",t:"Thủy sư tâu: người {land} kể lộn xộn. {v} nói: người lạc biển thì kể gì chẳng được."}}});
 rdDef("pt_hai",10,{t:"Kiểm cống",w:"emp",sj:"rương cống của {land}",cast(A){return rdCast(A,["v"])},
- g:()=>(pfO("ruong")==="bien"||pfO("ruong")==="ocuu"?"Rương cống của thuyền thứ tư không về. ":"")+"Hồng Lư tự đối chiếu cống phẩm với danh sách sứ đoàn trước mặt Hộ bộ và các phi tần. Lụa mốc nửa phần, hộp ngọc trai trống một ngăn. {v} nói: rương niêm ở {land} mà thiếu ở Đại Hy, chỉ có người từng cầm danh sách mới biết thiếu chỗ nào.",
+ g:()=>(pfO("ruong")==="bien"||pfO("ruong")==="ocuu"?"Rương cống của thuyền thứ tư không về. ":"")+"Hồng Lư tự đối chiếu cống phẩm với danh sách sứ đoàn trước mặt Hộ bộ và các phi tần. Lụa mốc nửa phần, hộp ngọc trai trống một ngăn. "+(pfO("danhsach")==="ta"?"{v} nói: rương niêm ở {land} mà thiếu ở Đại Hy, chỉ có người từng cầm danh sách mới biết thiếu chỗ nào.":"{v} nói: rương niêm ở {land} mà thiếu ở Đại Hy, chắc người {land} đã mở trên biển."),
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Nhật ký trong tay ngươi",w:"emp",if:PFLOG,t:"Cuốn nhật ký hải trình nằm trong hộp gỗ của ngươi. Trang nào cũng có chữ Nham Lão: ngày nào nước vào khoang, rương nào bị ướt.",o:[
   {n:"Dâng nhật ký lên Hồng Lư tự",f:"chung",wx:"lụa mốc có lời giải",lx:"nhật ký ra khỏi tay ngươi",rt:"Tự khanh đọc đến trang mười một: “Khoang hai ngập ba ngày.” Lụa mốc là vì thế.",go:()=>pfO("nhatky","hl")},
   {n:"Đọc to từng trang trước mặt mọi người",f:"chung",wx:"cả điện nghe",lx:"đọc lâu, Hộ bộ sốt ruột",rt:"Ngươi đọc đến khi Hộ bộ giơ tay: “Đủ rồi.”"},
   {n:"Chép trang về rương ngọc, giữ bản gốc",f:"nhuong",wx:"vẫn giữ được bản gốc",lx:"bản chép kém tin",rt:"Bản chép được đặt lên án Tự khanh."}]},
  s2:{h:"Không có nhật ký",w:"emp",if:()=>!PFLOG(),t:"Cuốn nhật ký không ở trong tay ngươi. Ngươi chỉ còn lời người.",o:[
-  {n:"Xin gọi Kim Hựu Thành làm chứng",f:"chung",wx:"một người ngoài nói giúp",lx:"thương nhân nói thì kém tin",rt:()=>pfAlive("huuthanh")&&["kinh","cang"].includes(pfP("huuthanh","w"))?"Kim Hựu Thành kể: ông thấy rương còn niêm khi trên đảo.":"Kim Hựu Thành đã đi biển, chỉ gửi được một tờ khai.",go:()=>pfAlive("huuthanh")?pfMeet("huuthanh"):""},
+  {n:"Xin gọi Kim Hựu Thành làm chứng",f:"chung",wx:"một người ngoài nói giúp",lx:"thương nhân nói thì kém tin",rt:()=>pfAlive("huuthanh")&&["kinh","cang"].includes(pfP("huuthanh","w"))?"Kim Hựu Thành kể: khi ông đến đảo, giặc biển đã khiêng rương đi; trong khoang chỉ còn vết rương nằm, nước chưa vào chỗ ấy.":"Kim Hựu Thành đã đi biển, chỉ gửi được một tờ khai.",go:()=>pfAlive("huuthanh")?pfMeet("huuthanh"):""},
   {n:"Xin gọi Nham Lão làm chứng",f:"chung",wx:"người lái thuyền nói",lx:"lão là người {land}",rt:()=>pfAlive("namlao")?"Nham Lão kể từng ngày nước vào khoang.":"Nham Lão không còn. Chỉ có tên lão trong danh sách.",go:()=>pfAlive("namlao")?pfMeet("namlao"):""},
   {n:"Nhận: thiếp không có chứng, xin xét theo danh sách",f:"nhuong",/* pt6c: "nhận" = she admits, no object changes hands */wx:"thật thà",lx:"không có gì đỡ",rt:"Tự khanh gật đầu, đọc tiếp danh sách."}]},
  c1:{h:"Chiếc trâm ngọc trai",w:"v",need:["v"],t:"{v} dâng một chiếc trâm ngọc trai, nói cung nữ tìm thấy dưới gối trong cung ngươi: ngọc đúng loại trong rương cống.",o:[
   {n:"Xin gọi thợ bạc xem ngọc từ đâu",wx:"ngọc có nguồn gốc của nó",lx:"thợ bạc có thể nói sai",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0]);return ok?pfO("tram","kho"):pfO("tram","v")},rt:"Thợ bạc nói: ngọc này mài kiểu Đại Hy, không phải ngọc {land}.",rf:"Thợ bạc ngập ngừng: ngọc giống ngọc {land}."},
-  {n:"Hỏi lại: cung nữ nào tìm thấy, vào cung thiếp lúc nào",wx:"lật lại câu hỏi về phía {v}",lx:"{v} giận",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return pfO("tram","kho")},rt:"Cung nữ ấy lắp bắp, không nhớ giờ."},
+  {n:"Hỏi lại: cung nữ nào tìm thấy, vào cung thiếp lúc nào",wx:"lật lại câu hỏi về phía {v}",lx:"{v} giận",go:(A,ok,G)=>{rdOan(A,"v",G[0]);return ok?pfO("tram","kho"):pfO("tram","v")},rt:"Cung nữ ấy lắp bắp, không nhớ giờ.",rf:"Cung nữ ấy khai trơn tru từng giờ, như đã thuộc lòng. {v} giữ lại chiếc trâm làm chứng."},
   {n:"Nhận đó là ngọc hồi môn của mình",wx:"không cãi nhau giữa điện",lx:"người ta tin {v} một nửa",go:()=>pfO("tram","ta"),rt:"Ngươi cài trâm lên tóc, nói: “Mẫu hậu cho.”"}]},
  c2:{h:"Hộ bộ đòi bồi",w:"emp",t:"Hộ bộ tâu: thiếu thì phải bồi. Nếu {land} không bồi, sổ cống ghi {land} lỗi lễ.",o:[
   {n:"Bỏ bạc riêng bồi phần thiếu",wx:"sổ cống sạch",lx:"bạc ra",rt:"Hộ bộ nhận bạc, xóa dòng thiếu."},
@@ -283,16 +289,16 @@ rdDef("pt_hai",10,{t:"Kiểm cống",w:"emp",sj:"rương cống của {land}",ca
   {n:"Gọi riêng hai lính trực hỏi chuyện",f:"chung",wx:"có người nói thật",lx:"lính sợ, khai nửa chừng",rt:"Một tên lính khai: đêm ấy có người mang kéo vào kho."},
   {n:"Không đụng đến nhà {v}",f:"nhuong",wx:"không thêm thù",lx:"kẻ cắt niêm thoát",rt:"Tên biểu huynh {v} không được ai nhắc."}]},
  x1:{h:"Trước án Hồng Lư tự",w:"emp",t:"Tự khanh hỏi lời cuối: phần thiếu là do biển, do người {land}, hay do người Đại Hy.",o:[
-  {n:"Trình đủ chứng, xin tra người cắt niêm",e:["win","lose"],rt:"Biểu huynh {v} bị đánh hai mươi trượng, phải trả ngọc. Sổ cống ghi: {land} cống đủ.",rf:"Chứng không đủ. Tự khanh phán: người giữ danh sách phải chịu. Ngươi bị cấm túc.",go:(_A,ok)=>ok?"":pfConfine("hai10")},
-  {n:"Nhận phần thiếu, xin bù bằng hồi môn, không truy ai",e:["win2","mid"],rt:"Hồi môn của ngươi bù đủ. Hoàng thượng khen ngươi biết giữ hòa khí.",rf:"Hồi môn bù được nửa. Sổ còn ghi nợ.",go:()=>pfO("hoimon","kho")},
+  {n:"Trình đủ chứng, xin tra người cắt niêm",e:["win","lose"],rt:"Biểu huynh {v} bị đánh hai mươi trượng, phải trả ngọc. Sổ cống ghi: {land} cống đủ.",rf:()=>"Chứng không đủ. Tự khanh phán: "+(pfO("danhsach")==="ta"?"người giữ danh sách phải chịu.":"công chúa đứng ra kiện thì công chúa phải chịu.")+" Ngươi bị cấm túc.",go:(_A,ok)=>ok?"":pfConfine("hai10")},
+  {n:"Nhận phần thiếu, xin tự bù, không truy ai",e:["win2","mid"],rt:()=>(pfO("hoimon")==="kho"?"Hồi môn đã vào kho từ trước; bổng lộc của cung ngươi bù đủ.":"Hồi môn của ngươi bù đủ.")+" Hoàng thượng khen ngươi biết giữ hòa khí.",rf:()=>(pfO("hoimon")==="kho"?"Bổng lộc của cung ngươi":"Hồi môn")+" bù được nửa. Sổ còn ghi nợ.",go:()=>pfO("hoimon")==="kho"?"":pfO("hoimon","kho")/* r2 6c: the dowry is spent once (.4 x1 may have spent it) */},
   {n:"Xin Hoàng thượng tự xét",e:"mid",lx:"không ai được rửa tiếng",rt:"Hoàng thượng phê: việc cống phẩm khép lại, không truy."}]}},
- E:{win:{tag:"Niêm phong biết nói",w:"emp",t:"Cả triều biết rương cống đã bị mở ở đâu. {v} không dự yến ba tháng."},
-  win2:{tag:"Bù cống, giữ hòa khí",w:"emp",t:"Sổ cống sạch. Không ai mất mặt, trừ hồi môn của ngươi."},
+ E:{win:{tag:"Niêm phong biết nói",w:"emp",t:"Cả triều biết cống phẩm đã bị mở ở đâu. {v} không dự yến ba tháng."},
+  win2:{tag:"Bù cống, giữ hòa khí",w:"emp",t:"Sổ cống sạch. Không ai mất mặt, trừ túi riêng của ngươi."},
   mid:{tag:"Sổ cống khép lại",t:"Việc cống khép lại, không ai bị truy. Người cắt niêm vẫn ở Thị bạc ty."},
-  lose:{tag:"Cấm túc vì rương cống",w:"v",t:"Ngươi bị cấm túc. {v} kể: công chúa {land} giữ danh sách mà để mất ngọc."}}});
+  lose:{tag:"Cấm túc vì rương cống",w:"v",t:()=>pfO("danhsach")==="ta"?"Ngươi bị cấm túc. {v} kể: công chúa {land} giữ danh sách mà để mất ngọc.":"Ngươi bị cấm túc. {v} kể: công chúa {land} kiện người Đại Hy mà không có chứng."}}});
 
 rdDef("pt_hai",11,{t:"Danh sách sứ đoàn",w:"emp",sj:"danh sách sứ đoàn về nước",cast(A){if(!pfO("danhsach")||pfO("danhsach")==="kimthanh")pfO("danhsach","ta");return rdCast(A,["v"])},
- g:"Gió mùa đã đổi. Sứ đoàn sắp về {land}. Tá Bá Kim Thành mang bản danh sách đến, xin ngươi đọc lần cuối: người sống ghi mực đen, người chết ghi mực son. Tên nào ghi màu gì, {quan} sẽ đọc.",
+ g:()=>"Gió mùa đã đổi. Sứ đoàn sắp về {land}. "+(pfO("danhsach")==="ta"?"Bản danh sách sứ đoàn nằm trên án ngươi; Tá Bá Kim Thành xin ngươi ghi lần cuối":"Tá Bá Kim Thành xin ngươi ghi lần cuối bản danh sách")+": người sống ghi mực đen, người chết ghi mực son. Tên nào ghi màu gì, Quốc chủ {land} sẽ đọc.",
  p:[["s1","s2"],["c1","c2","c3"],["t1"],["x1"]],
  B:{s1:{h:"Tiểu Ngọc muốn gì",w:"maid",if:()=>pfAlive("tieungoc"),t:()=>`Tiểu Ngọc ${pfP("tieungoc","w")==="kinh"?"đứng hầu sau lưng ngươi":"gửi thư từ bến Minh Châu"}: bà già rồi, muốn chết ở quê, nhưng không muốn bỏ ngươi.`,o:[
   {n:"Giữ bà lại bên mình",f:"that",wx:"có người thân đến cuối đời",lx:"bà nhớ quê",rt:"Tiểu Ngọc ở lại. Bà dạy {maid} nấu {canh}.",go:()=>pfMove("tieungoc","kinh")},
@@ -313,11 +319,11 @@ rdDef("pt_hai",11,{t:"Danh sách sứ đoàn",w:"emp",sj:"danh sách sứ đoàn
  c3:{h:"Thư gửi mẫu hậu",w:"maid",t:"Thuyền về sẽ mang theo thư. Ngươi viết cho {mh} điều gì?",o:[
   {n:"Viết thật mọi điều đã xảy ra",wx:"mẹ hiểu con",lx:"mẹ lo",rt:"Thư dài ba tờ, chữ nhỏ."},
   {n:"Viết rằng con được yêu chiều, mọi điều yên ổn",wx:"mẹ yên lòng",lx:"một lời nói dối",rt:"Thư ngắn, chữ đẹp."},
-  {n:"Gửi kèm tấm gương đồng của mẹ về",wx:"mẹ thấy con còn giữ lời",lx:"ngươi không còn gì của mẹ",rt:"Tấm gương đồng gói trong lụa, nằm trên cùng rương thư.",go:()=>pfO("guong","tn")}]},
+  {n:"Gửi kèm tấm gương đồng của mẹ về",if:()=>pfO("guong")==="ta"/* r2 6c: hers since .4 */,wx:"mẹ thấy con còn giữ lời",lx:"ngươi không còn gì của mẹ",rt:"Tấm gương đồng gói trong lụa, nằm trên cùng rương thư.",go:()=>pfO("guong","tn")}]},
  t1:{h:"Ai lái thuyền về",w:"emp",t:()=>pfAlive("namlao")?"Nham Lão xin lái chiếc thuyền về, để chuộc lỗi thuyền thứ tư.":"Không còn Nham Lão. Thuyền về cần một tay lái biết đường qua Ngũ Đảo.",o:[
   {n:"Giao thuyền cho người {land} lái",f:"that",wx:"người {land} đưa người {land} về",lx:"đường biển vẫn khó",rt:()=>pfAlive("namlao")?"Nham Lão cầm lái, cười lần đầu từ ngày lên bờ.":"Một thủy thủ già nhận lái.",go:()=>pfAlive("namlao")?pfMove("namlao","tn"):""},
   {n:"Xin một tay lái Tân La dẫn đường",f:"an",wx:"người quen biển dẫn",lx:"phải trả công",rt:"Kim Hựu Thành cho một tay lái già của ông theo thuyền."},
-  {n:"Xin Hoàng thượng cho hải đồ của thủy sư",f:"an",wx:"có đường biển Đại Hy",lx:"hải đồ Đại Hy ra khỏi nước",rt:"Hoàng thượng cho chép một bản hải đồ gửi theo.",go:()=>pfO("haido","tn")}]},
+  {n:"Xin Hoàng thượng cho hải đồ của thủy sư",f:"an",wx:"có đường biển Đại Hy",lx:"hải đồ Đại Hy ra khỏi nước",rt:()=>"Hoàng thượng cho chép một bản hải đồ của thủy sư gửi theo."+(pfO("haido")==="ta"?" Tấm hải đồ của Kim Hựu Thành vẫn nằm trong hộp gỗ của ngươi.":""),go:()=>pfO("haidodh","tn")/* r2 6c: a new copy, Kim Hựu Thành's chart (haido) is not overwritten */}]},
  x1:{h:"Đêm trước ngày thuyền đi",w:"emp",t:"Đêm cuối, đại sứ quỳ trước ngươi với bản danh sách: “Nếu {quan} thấy quá nhiều tên mực son, sứ đoàn năm sau sẽ không đi nữa. Xin công chúa quyết.”",o:[
   {n:"Ghi đủ tên người chết bằng mực son, xin Đại Hy làm lễ tế biển",e:["win","lose"],rt:"Hoàng thượng cho làm lễ tế biển ở Minh Châu. Tên từng người chết được đọc to. Đại sứ khóc.",rf:"Triều thần tâu: Đại Hy không tế người ngoại bang. Lễ không làm được.",go:()=>pfO("danhsach","kimthanh")},
   {n:"Ghi người chết là ‘ở lại Đại Hy học đạo’",e:["win2","mid"],rt:"Danh sách đi về {land} toàn mực đen. Sứ đoàn năm sau sẽ đi.",rf:"Danh sách toàn mực đen, nhưng thủy thủ biết, và thủy thủ nói.",go:()=>pfO("danhsach","kimthanh")},
@@ -337,7 +343,7 @@ RD97L.push(rdRare({a:"pt_hai_11",tag:"Đèn trên mặt bể",w:"emp",n:"Thả t
    pt_su · Khiển Đường sứ — lead (E21)
    ===================================================================================================================================== */
 /* .11: the embassy sails home with the monsoon (law 6b: the envoy leaves S.men; a scholar who passed the exam stays, else he sails too) */
-const pfSail=()=>{pfMove("kimthanh","tn");if(pfO("hoithu")==="kimthanh")pfO("hoithu","tn");if(pfO("thuta")==="kimthanh")pfO("thuta","tn");if(pfO("quat")==="kimthanh")pfO("quat","tn");if(pfAlive("trongla")&&pfP("trongla","quan")!==1){pfMove("trongla","tn");if(pfO("but")==="trongla")pfO("but","tn")}return""};
+const pfSail=()=>{pfMove("kimthanh","tn");if(pfO("hoithu")==="kimthanh")pfO("hoithu","tn");if(pfO("thuta")==="kimthanh")pfO("thuta","tn");if(pfO("thudai")==="kimthanh")pfO("thudai","tn");if(pfO("quat")==="kimthanh")pfO("quat","tn");if(pfAlive("trongla")&&pfP("trongla","quan")!==1){pfMove("trongla","tn");if(pfO("but")==="trongla")pfO("but","tn")}return""};
 /* pt_su · Khiển Đường sứ (Quyền mưu · Trung nghĩa). People: {emp}, {v}, {maid}, {th}; PFP kimthanh (envoy chief, capital → home at .11),
    trongla (student-scholar, capital; stays or sails at .11); unnamed: Hồng Lư tự khanh, the Tân La envoy, {v}'s father at Lễ bộ.
    Objects (PFO): quocthu (the Phù Tang state letter), hoithu (the Đại Hy answer), lenh (the forged sailing order), kiem (the Phù Tang sword),
@@ -356,11 +362,11 @@ ARC67.pt_su=pfArc("pt_su",{o:"pf",t:"Quốc thư hai mặt trời",w:"emp",sj:"q
   {n:"Bảo đại sứ cứ dâng nguyên",f:"doc",wx:"giữ đúng lời {quan}",lx:"ngày mai sẽ khó",rt:"Đại sứ thở ra: “Công chúa nói phải.”",go:()=>pfMeet("kimthanh")},
   {n:"Báo trước cho Hồng Lư tự khanh",f:"quy",wx:"Đại Hy không bị bất ngờ",lx:"đại sứ thấy ngươi đi báo",rt:"Hồng Lư tự khanh cảm ơn ngươi, dặn bá quan đừng làm ồn.",go:()=>pfMeet("kimthanh")}]},
  c1:{h:"{v} nói nước nhỏ mà xưng thiên tử",w:"v",need:["v"],t:"Ra khỏi điện, {v} nói lớn với các phi tần: một nước nhỏ bên kia bể mà dám xưng thiên tử, công chúa nước ấy ở đây làm gì.",o:[
-  {n:"Đáp: Đại Hy lớn nên không sợ một chữ",wx:"lời ngươi được truyền đi",lx:"{v} thấy ngươi mỉa",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Các phi tần im lặng. Câu ấy đến tai Hoàng thượng trước giờ ngọ."},
+  {n:"Đáp: Đại Hy lớn nên không sợ một chữ",wx:"lời ngươi được truyền đi",lx:"{v} thấy ngươi mỉa",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Các phi tần im lặng. Câu ấy đến tai Hoàng thượng trước giờ ngọ.",rf:"{v} cười: “Không sợ, nhưng cũng không nhận.” Các phi tần gật gù theo nàng."},
   {n:"Mời {v} ngày mai cùng nghe đại sứ giảng chữ",wx:"{v} không có cớ chê",lx:"{v} có thể bắt bẻ thêm",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"{v} đến, nghe, rồi về không nói gì.",rf:"{v} đến, bắt bẻ ba chữ."},
   {n:"Cúi đầu đi qua",wx:"không thêm chuyện",lx:"lời {v} đi tiếp",rt:"Ngươi đi thẳng về cung."}]},
  c2:{h:"Thái hậu hỏi chuyện",w:"th",t:"Thái hậu cho gọi ngươi: “Ở nước ngươi, đàn bà cũng đọc quốc thư giữa triều à?”",o:[
-  {n:"Thưa: ở {land} từng có nữ {quan}",wx:"Thái hậu biết thêm một chuyện",lx:"Thái hậu không ưa đàn bà trị nước",rt:"Thái hậu nhướng mày: “Thế à.”",rf:"Thái hậu nói: “Ở đây thì không.”"},
+  {n:"Thưa: ở {land} từng có nữ chúa",wx:"Thái hậu biết thêm một chuyện",lx:"Thái hậu không ưa đàn bà trị nước",rt:"Thái hậu nhướng mày: “Thế à.”",rf:"Thái hậu nói: “Ở đây thì không.”"},
   {n:"Thưa: thiếp chỉ đọc vì không ai khác biết chữ ấy",wx:"Thái hậu thấy ngươi biết phận",lx:"không ai nhớ ngươi giỏi",rt:"Thái hậu gật đầu, cho lui."},
   {n:"Dâng Thái hậu một bản chép quốc thư có giảng nghĩa",wx:"Thái hậu có cái để đọc",lx:"tốn một đêm chép",rt:"Thái hậu giữ bản chép, sai đem trà ra."}]},
  t1:{h:"Hoàng thượng hỏi riêng",w:"emp",t:"Đêm ấy Hoàng thượng hỏi: “Phụ hoàng nàng thật nghĩ mình ngang trẫm?”",o:[
@@ -373,7 +379,7 @@ ARC67.pt_su=pfArc("pt_su",{o:"pf",t:"Quốc thư hai mặt trời",w:"emp",sj:"q
   {n:"Thưa: việc nước, thiếp không dám bàn",e:"mid",lx:"triều quyết mà không có tiếng {land}",rt:"Triều nghị quyết: quốc thư nhận mà không trả lời.",go:()=>pfO("quocthu","hl")}]}},
  E:{win:{tag:"Một chữ thiên tử",w:"emp",t:"Cả triều nhớ cách ngươi giảng một chữ. Hồng Lư tự khanh gọi ngươi là ‘người dịch quốc thư’."},
   win2:{tag:"Công chúa nhận lỗi thay",w:"emp",t:"Ngươi chịu phạt thay {land}. Đại sứ quỳ ngoài cửa cung ngươi suốt một buổi."},
-  mid:{tag:"Quốc thư nằm trong kho",t:"Quốc thư được nhận mà không ai trả lời. Sứ đoàn ở lại, chờ."},
+  mid:{tag:"Quốc thư nằm trong kho",t:()=>pfO("quocthu")==="kho"?"Quốc thư cũ nằm trong kho, chờ thư mới của {land}. Sứ đoàn ở lại, chờ.":"Quốc thư được nhận mà không ai trả lời. Sứ đoàn ở lại, chờ."},
   lose:{tag:"Quốc thư bị trả lại",w:"v",t:"Quốc thư bị trả lại tay đại sứ. {v} nói: công chúa {land} giảng chữ mà triều không tin."}}});
 PF97.push({a:"pt_su",tag:"Hai mặt trời, một bầu trời",w:"emp",n:"Xin bút mực, viết ngay một câu đáp giữa điện",
  path:["Đọc đúng từng chữ","Bảo đại sứ cứ dâng nguyên","Mời {v} ngày mai","Dâng Thái hậu","Thưa thật","Thưa: ‘thiên tử’"],bad:["Quỳ xuống trước","Cúi đầu đi qua","Thưa: việc nước"],x:[()=>S.tamco>=BAL.arc.rare.pt_su.bar,`Tâm cơ từ ${BAL.arc.rare.pt_su.bar}`],
@@ -386,26 +392,27 @@ rdDef("pt_su",5,{t:"Hồi thư",w:"emp",sj:"hồi thư của Đại Hy gửi {la
  B:{s1:{h:"Ngài cho xem bản thảo",w:"emp",if:RDW(1),t:"Vì câu giảng chữ hôm trước, Hoàng thượng cho ngươi xem bản thảo hồi thư trước khi đóng ấn.",o:[
   {n:"Xin đổi chữ ‘Vương’ thành ‘Quốc chủ’",f:"giu",wx:"{land} không nhục mà Đại Hy cũng không",lx:"Lễ bộ thấy ngươi sửa thư của họ",rt:"Hoàng thượng gạch chữ ‘Vương’, viết chữ ‘Quốc chủ’ bên cạnh.",rf:"Hoàng thượng nói: chữ ấy để Lễ bộ quyết."},
   {n:"Khen bản thảo, không đổi gì",f:"thang",wx:"Lễ bộ nhớ ơn",lx:"{land} sẽ đọc chữ ‘Vương’",rt:"Lễ bộ thượng thư nghe tin, gửi lời cảm tạ."},
-  {n:"Xin thêm một câu thăm sức khỏe {quan}",f:"giu",wx:"thư có hơi người",lx:"thêm câu là thêm chuyện",rt:"Hoàng thượng tự tay thêm câu thăm hỏi."}]},
+  {n:"Xin thêm một câu thăm sức khỏe Quốc chủ {land}",f:"giu",wx:"thư có hơi người",lx:"thêm câu là thêm chuyện",rt:"Hoàng thượng tự tay thêm câu thăm hỏi."}]},
  s2:{h:"Hồng Lư tự viết thay",w:"emp",if:RDW(0),t:"Hồng Lư tự khanh được giao viết hồi thư một mình. Ông gửi người sang hỏi ngươi: chữ gì thì {land} chịu nhận?",o:[
   {n:"Gửi lại một tờ giảng các chữ {land} chịu được",f:"giu",wx:"Tự khanh có cái để dựa",lx:"Lễ bộ biết ngươi nhúng tay",rt:"Tự khanh viết theo tờ giảng của ngươi.",go:()=>pfO("togiang","hl")},
   {n:"Đáp: Đại Hy viết gì, {land} nhận nấy",f:"thang",wx:"Đại Hy thấy ngươi một lòng",lx:"đại sứ đau lòng",rt:"Tự khanh viết chữ ‘Vương’."},
   {n:"Mời đại sứ đến bàn với Tự khanh",f:"giu",wx:"hai bên tự nói với nhau",lx:"chậm",rt:"Đại sứ và Tự khanh ngồi đến canh hai.",go:()=>pfMeet("kimthanh")}]},
  c1:{h:"Phụ thân {v} muốn thêm một câu",w:"v",need:["v"],t:"Phụ thân {v} ở Lễ bộ xin thêm vào hồi thư một câu: ‘{land} mỗi năm phải sang triều cống.’ Câu ấy biến minh ước thành lệ cống.",o:[
-  {n:"Tâu xin bỏ câu ấy",wx:"minh ước vẫn là minh ước",lx:"nhà {v} mất mặt",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Câu ấy bị gạch.",rf:"Câu ấy được giữ lại."},
+  {n:"Tâu xin bỏ câu ấy",wx:"minh ước vẫn là minh ước",lx:"nhà {v} mất mặt",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""}/* fail cost by design (r2): tried and failed, {v}'s house still knows who asked */,rt:"Câu ấy bị gạch.",rf:"Câu ấy được giữ lại."},
   {n:"Đổi ‘mỗi năm’ thành ‘khi gió thuận’",wx:"giữ được lệ mà không thành gánh",lx:"{v} biết ngươi khéo hơn cha nàng",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Lễ bộ đồng ý. Câu thư mềm đi.",rf:"Lễ bộ nói chữ của Lễ bộ không đổi."},
-  {n:"Để câu ấy, xin {land} tự trả lời sau",wx:"không đụng nhà {v}",lx:"{land} sẽ đọc chữ ‘triều cống’",rt:"Câu ấy nằm trong hồi thư."}]},
+  {n:"Để câu ấy, xin {land} tự trả lời sau",wx:"không đụng nhà {v}",lx:"{land} sẽ đọc chữ ‘triều cống’",rt:"Câu ấy nằm trong hồi thư."},
+  {n:"Lén cho người chép câu ấy gửi sứ Tân La, để Tân La làm ồn thay",wx:"câu ấy bị bên ngoài chê",lx:"nếu lộ, ngươi tiết lộ thư của triều",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""}/* ác (r2) */,rt:"Sứ Tân La dâng biểu hỏi: Đại Hy định bắt bao nhiêu nước sang cống? Lễ bộ phải gạch câu ấy.",rf:"Người chép thư bị bắt ở nhà khách Tân La, khai ra cung ngươi."}]},
  c2:{h:"Đại sứ quỳ ngoài cửa",w:"emp",t:"Đại sứ quỳ ngoài cửa Hồng Lư tự từ sáng: ông xin được xem hồi thư trước khi đóng ấn, để biết mang gì về cho {quan}.",o:[
   {n:"Xin cho đại sứ xem một bản chép",wx:"đại sứ yên lòng",lx:"Lễ bộ nói ngươi tiết lộ thư",rt:"Đại sứ đọc bản chép, đứng dậy.",rf:"Hồng Lư tự không cho chép.",go:()=>pfMeet("kimthanh")},
   {n:"Ra tận cửa, bảo đại sứ đứng dậy",wx:"đại sứ không mất mặt hơn",lx:"phi tần ra cửa Hồng Lư tự",rt:"Đại sứ đứng dậy, cúi chào ngươi.",go:()=>pfMeet("kimthanh")},
   {n:"Gửi lời: đừng quỳ, chữ đã có người lo",wx:"đại sứ tin ngươi",lx:"ông sẽ trách nếu chữ xấu",rt:"Đại sứ về nhà khách, đóng cửa chờ.",go:()=>pfMeet("kimthanh")}]},
- t1:{h:"Chữ cuối cùng",w:"emp",t:"Hồi thư chỉ còn thiếu một chữ: gọi {quan} là gì. Hàn lâm cầm bút chờ.",o:[
+ t1:{h:"Chữ cuối cùng",w:"emp",t:"Hồi thư chỉ còn thiếu một chữ: gọi Quốc chủ {land} là gì. Hàn lâm cầm bút chờ.",o:[
   {n:"Đề nghị: ‘Quốc chủ’",f:"giu",wx:"hai bên cùng nhận được",lx:"không bên nào vui hẳn",rt:"Hàn lâm viết ‘Quốc chủ {land}’."},
   {n:"Đề nghị: ‘Vương’, như mọi nước khác",f:"thang",wx:"Đại Hy giữ lệ",lx:"{land} nhục",rt:"Hàn lâm viết ‘{land} Vương’."},
   {n:"Đề nghị: không gọi gì, chỉ ghi ‘gửi {land}’",f:"giu",wx:"không ai nhục",lx:"thư thiếu lễ",rt:"Hàn lâm viết ‘Gửi nước {land}’. Lễ bộ nhăn mặt."}]},
  x1:{h:"Ấn ngự trên hồi thư",w:"emp",t:"Hồi thư đặt trước ngự án, chờ ấn. Hoàng thượng hỏi lần cuối: “Nàng nói xem, thư này về đến {land} thì {land} vui hay buồn?”",o:[
   {n:"Thưa: {land} sẽ buồn, nhưng sẽ còn gửi sứ",e:["win","lose"],rt:"Hoàng thượng đóng ấn: “Buồn mà còn đến, thế là đủ.” Hồi thư trao tay đại sứ.",rf:"Hoàng thượng chau mày: “Buồn thì đừng đến.” Hồi thư được viết lại cứng hơn.",go:()=>pfO("hoithu","kimthanh")},
-  {n:"Thưa: thiếp xin viết kèm một thư riêng cho phụ hoàng",e:["win","mid"],rt:"Ngài cho phép. Thư riêng của ngươi gói chung với hồi thư.",rf:"Ngài cho phép, nhưng Lễ bộ đòi xem thư riêng.",go:()=>pfO("hoithu","kimthanh")},
+  {n:"Thưa: thiếp xin viết kèm một thư riêng cho phụ hoàng",e:["win","mid"],rt:"Ngài cho phép. Thư riêng của ngươi gói chung với hồi thư.",rf:"Ngài cho phép, nhưng Lễ bộ đòi xem thư riêng.",go:()=>{pfO("thuta","kimthanh");return pfO("hoithu","kimthanh")}/* r2 6c: the private letter is booked with the envoy (pfSail takes it home) */},
   {n:"Thưa: thư của Đại Hy, {land} phải vui",e:"mid",lx:"đại sứ nghe được",rt:"Hoàng thượng đóng ấn. Đại sứ nhận thư, không ngẩng đầu.",go:()=>pfO("hoithu","kimthanh")}]}},
  E:{win:{tag:"Buồn mà còn đến",w:"emp",t:"Hồi thư đóng ấn ngự. Đại sứ đọc chữ cuối, thở ra: {land} sẽ còn gửi sứ."},
   mid:{tag:"Hồi thư đã đóng ấn",t:"Hồi thư nằm trong tay đại sứ. Chữ trong ấy, chỉ {land} mới biết là vui hay buồn."},
@@ -421,12 +428,13 @@ rdDef("pt_su",6,{t:"Chỗ ngồi đêm Nguyên đán",w:"emp",sj:"chỗ ngồi c
   {n:"Xin vào gặp Hoàng thượng ngay",f:"tranh",wx:"ngài nghe trước giờ yến",lx:"ngài bận, không vui",rt:"Hoàng thượng nghe, nói sẽ xem.",rf:"Thái giám nói ngài đang nghỉ."},
   {n:"Khuyên đại sứ ngồi tạm, bàn sau",f:"nhuong",wx:"yến không có chuyện",lx:"đại sứ mất mặt một đêm",rt:"Đại sứ nghe, mặt tái.",go:()=>pfMeet("kimthanh")},
   {n:"Gửi lời hỏi sứ Tân La có chịu đổi không",f:"tranh",wx:"biết Tân La nghĩ gì",lx:"Tân La biết {land} đòi chỗ",rt:"Sứ Tân La đáp: “Chỗ của Tân La do Đại Hy xếp.”"}]},
- c1:{h:"{v} xin ngồi cạnh sứ Tân La",w:"v",need:["v"],t:"{v} xin Hoàng hậu cho mình ngồi gần dãy sứ Tân La trong yến, để ‘tỏ lòng hiếu khách’. Ai cũng hiểu nàng muốn gì.",o:[
+ c1:{h:"{v} xin ngồi cạnh sứ Tân La",w:"v",need:["v","hh"]/* r2 6b: names Hoàng hậu */,t:"{v} xin Hoàng hậu cho mình ngồi gần dãy sứ Tân La trong yến, để ‘tỏ lòng hiếu khách’. Ai cũng hiểu nàng muốn gì.",o:[
   {n:"Xin cho mình ngồi gần dãy sứ {land}",wx:"hai bên ngang nhau",lx:"phi tần chia phe giữa yến",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Hoàng hậu cho cả hai.",rf:"Hoàng hậu chỉ cho {v}."},
-  {n:"Tâu Hoàng hậu: phi tần không nên ngồi gần sứ",wx:"{v} không được chỗ",lx:"{v} biết ngươi chặn",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Hoàng hậu cho mọi phi tần ngồi sau rèm."},
-  {n:"Để mặc {v}",wx:"không đụng chạm",lx:"Tân La có người nói giúp",rt:"{v} ngồi gần sứ Tân La, cười nói suốt yến."}]},
+  {n:"Tâu Hoàng hậu: phi tần không nên ngồi gần sứ",wx:"{v} không được chỗ",lx:"{v} biết ngươi chặn",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Hoàng hậu cho mọi phi tần ngồi sau rèm.",rf:"Hoàng hậu nói: lòng hiếu khách thì có gì sai. {v} được ngồi gần sứ Tân La."},
+  {n:"Để mặc {v}",wx:"không đụng chạm",lx:"Tân La có người nói giúp",rt:"{v} ngồi gần sứ Tân La, cười nói suốt yến."},
+  {n:"Sai người làm đổ rượu lên áo {v} trước giờ yến",wx:"{v} phải về thay áo, lỡ chỗ ngồi",lx:"nếu lộ, cả cung biết ngươi chơi xấu",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""}/* ác (r2) */,rt:"{v} về thay áo; lúc quay lại, chỗ gần sứ Tân La đã có người ngồi.",rf:"Cung nữ làm đổ rượu khai ra người sai. {v} mang chuyện ấy đi khắp yến."}]},
  c2:{h:"Sứ Tân La gửi quà",w:"emp",t:"Sứ Tân La gửi đến cung ngươi một hộp nhân sâm: “Hai nước cùng ở bên kia bể, xin đừng tranh nhau một chỗ ngồi.”",o:[
-  {n:"Nhận quà, đáp lễ bằng giấy dó {land}",wx:"hai sứ có đường nói chuyện",lx:"đại sứ cho là ngươi nhượng",rt:"Sứ Tân La nhận giấy, gửi lời cảm tạ."},
+  {n:"Nhận quà, đáp lễ bằng giấy {land}",wx:"hai sứ có đường nói chuyện",lx:"đại sứ cho là ngươi nhượng",rt:"Sứ Tân La nhận giấy, gửi lời cảm tạ."},
   {n:"Trả lại quà, cảm ơn",wx:"không mắc nợ ai",lx:"Tân La thấy {land} kiêu",rt:"Hộp sâm về lại nhà khách Tân La."},
   {n:"Đưa hộp sâm cho đại sứ xem",wx:"đại sứ biết Tân La muốn hòa",lx:"đại sứ nghi ngươi",rt:"Đại sứ nhìn hộp sâm rất lâu: “Họ khôn hơn ta.”",go:()=>pfMeet("kimthanh")}]},
  t1:{h:"Giờ yến đã đến",w:"emp",t:"Trống canh một. Đại sứ đứng ở cửa điện, chưa chịu vào chỗ.",o:[
@@ -453,10 +461,11 @@ rdDef("pt_su",7,{t:"Lạy hay vái",w:"emp",sj:"lễ bái của sứ {land}",cas
   {n:"Xin đổi người dạy",f:"che",wx:"đại sứ bớt nhục",lx:"Lễ bộ không vui",rt:"Lễ bộ đổi người khác, già hơn, hiền hơn."},
   {n:"Tự đến đứng xem buổi dạy",f:"che",wx:"viên chủ sự giữ lời",lx:"phi tần đến nhà khách",rt:"Viên chủ sự thấy ngươi, nói năng nhỏ nhẹ."},
   {n:"Gửi lời bảo đại sứ cứ học",f:"day",wx:"việc chạy",lx:"đại sứ thấy ngươi bỏ ông",rt:"Đại sứ học, không nói gì.",go:()=>pfMeet("kimthanh")}]},
- c1:{h:"{v} chờ xem",w:"v",need:["v"],t:"{v} rủ các phi tần đứng sau rèm điện xem sứ {land} lạy. Nàng nói: “Xem có ngã không.”",o:[
+ c1:{h:"{v} chờ xem",w:"v",need:["v","hh"]/* r2 6b: names Hoàng hậu */,t:"{v} rủ các phi tần đứng sau rèm điện xem sứ {land} lạy. Nàng nói: “Xem có ngã không.”",o:[
   {n:"Rủ Thái hậu cùng xem",wx:"không ai dám cười",lx:"Thái hậu thấy ngươi làm lớn",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Thái hậu ngồi. Không ai cười.",rf:"Thái hậu không đến."},
-  {n:"Xin Hoàng hậu cấm phi tần đứng sau rèm",wx:"không ai xem",lx:"{v} biết ngươi chặn",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Hoàng hậu cấm. Rèm điện buông kín."},
-  {n:"Đứng xem cùng {v}",wx:"biết nàng nói gì",lx:"nếu đại sứ ngã, ngươi ở đó",rt:"{v} xem, không cười, vì ngươi đứng cạnh."}]},
+  {n:"Xin Hoàng hậu cấm phi tần đứng sau rèm",wx:"không ai xem",lx:"{v} biết ngươi chặn",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Hoàng hậu cấm. Rèm điện buông kín.",rf:"Hoàng hậu nói: sau rèm thì có gì mà cấm. {v} vẫn đứng xem."},
+  {n:"Đứng xem cùng {v}",wx:"biết nàng nói gì",lx:"nếu đại sứ ngã, ngươi ở đó",rt:"{v} xem, không cười, vì ngươi đứng cạnh."},
+  {n:"Cho người ghé tai {v}: Hoàng thượng đang để ý ai cười sau rèm",wx:"{v} không dám đứng xem",lx:"nếu lộ, ngươi mượn lời Hoàng thượng",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""}/* ác (r2) */,rt:"{v} rời rèm trước giờ lễ, mặt tái.",rf:"{v} hỏi lại thái giám hầu ngự, biết lời ấy không thật, rồi kể với Hoàng hậu."}]},
  c2:{h:"Đầu gối của đại sứ",w:"maid",t:"{maid} nghe người nhà khách kể: đại sứ có vết thương cũ ở gối từ chuyến vượt biển. Quỳ lâu ông sẽ ngã.",o:[
   {n:"Gửi thuốc đắp gối cho đại sứ",wx:"ông quỳ được lâu hơn",lx:"bạc ra",rt:"Ngự y gửi thuốc đắp, đại sứ cảm ơn.",go:()=>pfMeet("kimthanh")},
   {n:"Tâu xin cho đại sứ được kê đệm",wx:"ông không ngã",lx:"Lễ bộ nói ngươi xin ân ngoài lệ",rt:"Hoàng thượng chuẩn: một chiếc đệm mỏng.",rf:"Lễ bộ nói: sứ nước nào cũng quỳ đá."},
@@ -475,7 +484,7 @@ rdDef("pt_su",7,{t:"Lạy hay vái",w:"emp",sj:"lễ bái của sứ {land}",cas
   lose:{tag:"Phi tần giữa điện",w:"v",t:"Ngươi bị cấm túc vì bước ra khỏi rèm. {v} nói: công chúa {land} quên mình là phi của Đại Hy."}}});
 
 rdDef("pt_su",8,{t:"Hồi tứ",w:"emp",sj:"lễ vật Đại Hy ban về {land}",cast(A){if(!pfO("kiem"))pfO("kiem","kimthanh");return rdCast(A,["v"])},
- g:"Sứ đoàn dâng cống: ngọc trai, bạc, giấy dó, và một thanh đao {land} rèn trăm lần. Đại Hy phải hồi tứ: lụa, sách, thuốc. Đại sứ chỉ xin sách và thuốc; Hộ bộ muốn trả bằng lụa, vì sách là của quý không cho người ngoài.",
+ g:"Sứ đoàn dâng cống: ngọc trai, bạc, giấy {land}, và một thanh đao {land} rèn trăm lần. Đại Hy phải hồi tứ: lụa, sách, thuốc. Đại sứ chỉ xin sách và thuốc; Hộ bộ muốn trả bằng lụa, vì sách là của quý không cho người ngoài.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Danh mục sách",w:"emp",if:RDW(1),t:"Hoàng thượng giao ngươi xem danh mục sách đại sứ xin: kinh sử, luật lệnh, sách thuốc, lịch.",o:[
   {n:"Giữ nguyên danh mục, dâng lên",f:"sach",wx:"{land} có đủ sách",lx:"Hộ bộ cho là ngươi cho đi của quý",rt:"Danh mục dâng lên, không thiếu một quyển.",go:()=>pfO("sach","ta")},
@@ -489,8 +498,8 @@ rdDef("pt_su",8,{t:"Hồi tứ",w:"emp",sj:"lễ vật Đại Hy ban về {land}
   {n:"Xin ngài thử chém một tấm lụa thả rơi",wx:"ngài thấy đao thật",lx:"nếu không đứt, {land} mất mặt",rt:"Tấm lụa rơi xuống lưỡi đao, đứt làm đôi. Hoàng thượng treo đao trong thư phòng.",rf:"Tấm lụa vướng trên lưỡi đao. Các quan che miệng.",go:(_A,ok)=>pfO("kiem","vua")},
   {n:"Thưa: đao này để thờ, không để chém",wx:"đao được trọng",lx:"ngài thấy tiếc",rt:"Hoàng thượng cho đặt đao trên giá ở điện.",go:()=>pfO("kiem","vua")},
   {n:"Xin ngài ban đao cho Cấm quân thống lĩnh",wx:"võ tướng Đại Hy biết đao {land}",lx:"đao rời tay ngài",rt:"Thống lĩnh cấm quân nhận đao, quỳ tạ.",go:()=>pfO("kiem","kho")}]},
- c2:{h:"{v} xin lụa hồi tứ",w:"v",need:["v"],t:"{v} xin Hoàng hậu cho nhà mình được giữ việc dệt lụa hồi tứ. Lụa dệt dày hay mỏng, ai biết.",o:[
-  {n:"Xin cho Nội vụ phủ dệt",wx:"lụa đúng phép",lx:"{v} mất một mối lợi",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Nội vụ phủ nhận việc dệt."},
+ c2:{h:"{v} xin lụa hồi tứ",w:"v",need:["v","hh"]/* r2 6b: names Hoàng hậu */,t:"{v} xin Hoàng hậu cho nhà mình được giữ việc dệt lụa hồi tứ. Lụa dệt dày hay mỏng, ai biết.",o:[
+  {n:"Xin cho Nội vụ phủ dệt",wx:"lụa đúng phép",lx:"{v} mất một mối lợi",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Nội vụ phủ nhận việc dệt.",rf:"Hoàng hậu nói: nhà {v} dệt lâu năm, không đổi. Việc dệt về tay nhà {v}."},
   {n:"Để nhà {v} dệt, cử người xem",wx:"{v} vui, lụa có người canh",lx:"vẫn có thể bị bớt",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Lụa dệt đủ, dày.",rf:"Người của ngươi thấy lụa mỏng hơn mẫu."},
   {n:"Để mặc",wx:"không thêm thù",lx:"lụa có thể mỏng",rt:"Nhà {v} dệt lụa."}]},
  t1:{h:"Hộ bộ đếm",w:"emp",t:"Hộ bộ đếm xong: hồi tứ cho {land} nặng gấp đôi cống phẩm. Hộ bộ thượng thư nói: thế là Đại Hy lỗ.",o:[
@@ -517,9 +526,10 @@ rdDef("pt_su",9,{t:"Lưu học sinh",w:"emp",sj:"lưu học sinh Cát Thành Tr�
   {n:"Khuyên y học thêm, chờ dịp",f:"ve",wx:"y không làm liều",lx:"y buồn",rt:"Trọng Lữ cúi đầu.",go:()=>pfMeet("trongla")},
   {n:"Tìm một vị Hàn lâm nhận y làm học trò",f:"o",wx:"y có thầy Đại Hy",lx:"mang ơn một vị Hàn lâm",rt:"Một vị Hàn lâm già nhận y.",go:()=>pfMeet("trongla")}]},
  c1:{h:"{v} nói người ngoài chiếm chỗ",w:"v",need:["v"],t:"{v} nói: em trai nàng thi ba lần chưa đỗ, nay lại có người {land} xin vào thi.",o:[
-  {n:"Đáp: người giỏi thì ở đâu cũng giỏi",wx:"giữ được lời cho Trọng Lữ",lx:"{v} giận",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} không đáp."},
+  {n:"Đáp: người giỏi thì ở đâu cũng giỏi",wx:"giữ được lời cho Trọng Lữ",lx:"{v} giận",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} không đáp.",rf:"{v} đáp: “Giỏi thì về nước mà giỏi.” Các phi tần cười."},
   {n:"Mời em trai {v} cùng Trọng Lữ đọc sách",wx:"hai người học cùng nhau",lx:"em trai {v} có thể ghét y",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Hai người đọc sách cùng nhau một tháng, thành bạn.",rf:"Em trai {v} đến một lần rồi thôi."},
-  {n:"Im lặng",wx:"không thêm thù",lx:"lời {v} đến tai Quốc tử giám",rt:"Ngươi uống trà."}]},
+  {n:"Im lặng",wx:"không thêm thù",lx:"lời {v} đến tai Quốc tử giám",rt:"Ngươi uống trà."},
+  {n:"Cho người tung tin em trai {v} từng nhờ người viết thay bài thi",wx:"{v} lo cho em mình, thôi nói",lx:"nếu lộ, ngươi vu cho người",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""}/* ác (r2): a rumour, it can be traced back */,rt:"Quốc tử giám cho tra lại quyển cũ của em trai {v}. {v} không nhắc đến Trọng Lữ nữa.",rf:"Quyển cũ của em trai {v} sạch. Quốc tử giám biết lời đồn từ đâu ra."}]},
  c2:{h:"Thư của mẹ Trọng Lữ",w:"maid",t:"Trọng Lữ cho ngươi xem thư mẹ y gửi theo thuyền: bà già rồi, chỉ mong thấy con một lần.",o:[
   {n:"Khuyên y về thăm mẹ",wx:"y nhớ ơn ngươi",lx:"y có thể không quay lại",rt:"Trọng Lữ khóc.",go:()=>pfMeet("trongla")},
   {n:"Gửi kèm thư của y một món quà cho bà",wx:"bà có quà của con",lx:"bạc ra",rt:"Một tấm lụa và một gói trà theo thuyền về {land}."},
@@ -548,10 +558,10 @@ rdDef("pt_su",10,{t:"Thuyền về",w:"emp",sj:"ngày thuyền sứ đoàn rời
   {n:"Gửi người cưỡi ngựa nhanh đến Minh Châu bảo chờ",f:"cho",wx:"thuyền chưa nhổ neo",lx:"ngươi trái lệnh Lễ bộ",rt:"Người của ngươi đến kịp, thuyền chưa đi."},
   {n:"Xin Hồng Lư tự gửi bản sao lệnh về",f:"tra",wx:"có chứng để xem",lx:"chậm",rt:"Bản sao lệnh về đến tay ngươi.",go:()=>pfO("lenh","ta")},
   {n:"Báo đại sứ, để ông quyết",f:"cho",wx:"người {land} tự quyết",lx:"ông có thể đi liều",rt:"Đại sứ cho thủy thủ ngừng chất hàng.",go:()=>pfMeet("kimthanh")}]},
- c1:{h:"Chữ trên tờ lệnh",w:"v",need:["v"],t:"Ai đó so chữ trên tờ lệnh: giống chữ một viên chủ sự Lễ bộ, người làm dưới tay phụ thân {v}.",o:[
-  {n:"Trình chuyện này lên Hoàng thượng",wx:"kẻ giả lệnh bị tra",lx:"đụng đến nhà {v}",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Hoàng thượng sai tra viên chủ sự.",rf:"Viên chủ sự khai không biết gì."},
+ c1:{h:"Chữ trên tờ lệnh",w:"v",need:["v"],t:()=>({ta:"Ngươi so chữ trên tờ lệnh",vua:"Hoàng thượng cho so chữ trên tờ lệnh",hl:"Hồng Lư tự khanh so chữ trên tờ lệnh"})[pfO("lenh")]+": giống chữ một viên chủ sự Lễ bộ, người làm dưới tay phụ thân {v}.",o:[
+  {n:"Trình chuyện này lên Hoàng thượng",wx:"kẻ giả lệnh bị tra",lx:"đụng đến nhà {v}",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""}/* fail cost by design (r2): a failed try still points at {v}'s house */,rt:"Hoàng thượng sai tra viên chủ sự.",rf:"Viên chủ sự khai không biết gì."},
   {n:"Gọi riêng viên chủ sự đến hỏi",wx:"biết ai sai y",lx:"y có thể báo lại",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Viên chủ sự quỳ xuống: y chỉ làm theo lời người trên.",rf:"Viên chủ sự không đến."},
-  {n:"Đốt tờ lệnh, không nói gì",wx:"không thêm thù",lx:"kẻ giả lệnh thoát",rt:"Tờ lệnh cháy trong lò sưởi.",go:()=>pfO("lenh","chay")}]},
+  {n:"Đốt tờ lệnh, không nói gì",if:()=>pfO("lenh")==="ta"/* r2 6c: she burns only an order in her hands */,wx:"không thêm thù",lx:"kẻ giả lệnh thoát",rt:"Tờ lệnh cháy trong lò sưởi.",go:()=>pfO("lenh","chay")}]},
  c2:{h:"Đại sứ muốn đi",w:"emp",t:"Đại sứ nói: nếu Đại Hy không muốn sứ đoàn ở, ông sẽ đi, dù gió chưa đổi. Thể diện {land} không cho ông ở lại khi bị đuổi.",o:[
   {n:"Khuyên ông ở lại, lệnh là giả",wx:"ông không đi liều",lx:"ông nghi ngươi",rt:"Đại sứ ngồi xuống: “Nếu công chúa nói giả thì là giả.”",go:()=>pfMeet("kimthanh")},
   {n:"Xin Hoàng thượng ban lời giữ sứ đoàn",wx:"đại sứ có thể diện để ở",lx:"ngài phải nói một lời",rt:"Hoàng thượng phán: sứ đoàn ở đến gió mùa.",rf:"Hoàng thượng nói sẽ xem.",go:()=>pfMeet("kimthanh")},
@@ -560,17 +570,17 @@ rdDef("pt_su",10,{t:"Thuyền về",w:"emp",sj:"ngày thuyền sứ đoàn rời
   {n:"Xin Thiên văn đài xem ngày gió đổi",f:"tra",wx:"có lời Đại Hy làm chứng",lx:"Thiên văn đài có thể nói sai",rt:"Thiên văn đài tâu: hai mươi ngày nữa."},
   {n:"Tin lời lão thủy thủ",f:"cho",wx:"người biển biết biển",lx:"triều không tin người {land}",rt:"Ngươi ghi lời lão vào thư gửi Hồng Lư tự."},
   {n:"Hỏi thương nhân Tân La",f:"tra",wx:"có người thứ ba nói",lx:"Tân La biết sứ đoàn khó",rt:"Thương nhân Tân La đáp: “Hai mươi ngày, không ít hơn.”"}]},
- x1:{h:"Lệnh thật hay lệnh giả",w:"emp",t:"Hoàng thượng cho gọi Lễ bộ thượng thư, Hồng Lư tự khanh và ngươi vào thư phòng. Tờ lệnh đặt trên án.",o:[
+ x1:{h:"Lệnh thật hay lệnh giả",w:"emp",t:()=>"Hoàng thượng cho gọi Lễ bộ thượng thư, Hồng Lư tự khanh và ngươi vào thư phòng. "+(pfO("lenh")==="chay"?"Tờ lệnh đã cháy; trên án chỉ còn lời khai và lịch gió.":"Tờ lệnh đặt trên án."),o:[
   {n:"Tâu: lệnh giả, xin tra đến người sai",e:["win","lose"],rt:()=>pfO("lenh")==="ta"||pfO("lenh")==="vua"?"Ngươi chỉ dấu son lệch, nét chữ lạ. Viên chủ sự khai người sai y. Phụ thân {v} bị phạt bổng một năm.":"Ngươi chỉ lời khai và ngày gió. Lễ bộ thượng thư nhận: lệnh không phải của ông.",rf:"Lễ bộ thượng thư nói lệnh là thật, ông quên. Hoàng thượng cho qua. Ngươi mang tiếng vu cho Lễ bộ."},
   {n:"Tâu: xin hoãn lệnh đến gió mùa, không truy ai",e:["win2","mid"],rt:"Hoàng thượng phán hoãn. Lễ bộ thở ra. Sứ đoàn ở lại.",rf:"Hoàng thượng phán hoãn năm ngày thôi."},
-  {n:"Thưa: thiếp xin để ngài xét",e:"mid",lx:"không ai được rửa tiếng",rt:"Hoàng thượng cất tờ lệnh vào ngăn kéo.",go:()=>pfO("lenh","vua")}]}},
- E:{win:{tag:"Tờ lệnh giả",w:"emp",t:"Tờ lệnh giả bị đem ra giữa triều. Từ nay giấy tờ của sứ đoàn {land} phải qua tay ngươi xem trước."},
+  {n:"Thưa: thiếp xin để ngài xét",e:"mid",lx:"không ai được rửa tiếng",rt:()=>pfO("lenh")==="chay"?"Hoàng thượng gấp lời khai lại, cất vào ngăn kéo.":"Hoàng thượng cất tờ lệnh vào ngăn kéo.",go:()=>pfO("lenh")==="chay"?"":pfO("lenh","vua")}]}},
+ E:{win:{tag:"Tờ lệnh giả",w:"emp",t:()=>(pfO("lenh")==="chay"?"Chuyện tờ lệnh giả":"Tờ lệnh giả")+" bị đem ra giữa triều. Từ nay giấy tờ của sứ đoàn {land} phải qua tay ngươi xem trước."},
   win2:{tag:"Chờ gió mùa",w:"emp",t:"Sứ đoàn ở lại chờ gió mùa. Không ai bị truy, và không ai dám ra lệnh giả lần nữa."},
-  mid:{tag:"Tờ lệnh trong ngăn kéo",t:"Tờ lệnh nằm trong ngăn kéo ngự án. Sứ đoàn chờ."},
+  mid:{tag:"Tờ lệnh trong ngăn kéo",t:()=>pfO("lenh")==="vua"?"Tờ lệnh nằm trong ngăn kéo ngự án. Sứ đoàn chờ.":pfO("lenh")==="chay"?"Lời khai về tờ lệnh nằm trong ngăn kéo ngự án. Sứ đoàn chờ.":"Lệnh hoãn còn chờ ngự phê. Sứ đoàn chờ."},
   lose:{tag:"Vu cho Lễ bộ",w:"v",t:"Ngươi mang tiếng vu cho Lễ bộ. {v} nói: công chúa {land} giữ sứ đoàn như giữ của riêng."}}});
 
 rdDef("pt_su",11,{t:"Ai về cố quốc",w:"emp",sj:"sứ đoàn {land} về nước",cast(A){return rdCast(A,["v"])},
- g:"Gió mùa đã đổi. Sứ đoàn {land} xuống Minh Châu. Đại sứ mang hồi thư; lưu học sinh chờ biết mình đi hay ở; còn ngươi, ngươi gửi gì về theo thuyền?",
+ g:"Gió mùa đã đổi. Sứ đoàn {land} xuống Minh Châu. Hoàng thượng ngự giá xuống bến tiễn sứ, cho ngươi theo hầu; xe đi mười ngày mới tới biển. Đại sứ mang hồi thư; lưu học sinh chờ biết mình đi hay ở; còn ngươi, ngươi gửi gì về theo thuyền?",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Trọng Lữ ở lại",w:"emp",if:()=>pfAlive("trongla")&&pfP("trongla","quan")===1,t:"Trọng Lữ mặc áo quan Đại Hy đến bến tiễn sứ đoàn. Đại sứ không nhìn y.",o:[
   {n:"Bảo Trọng Lữ lạy đại sứ một lạy",f:"tien",wx:"đại sứ nguôi lòng",lx:"y thấy nhục",rt:"Trọng Lữ quỳ lạy. Đại sứ đỡ y dậy.",go:()=>pfMeet("kimthanh")},
@@ -580,13 +590,14 @@ rdDef("pt_su",11,{t:"Ai về cố quốc",w:"emp",sj:"sứ đoàn {land} về n�
   {n:"Tặng y một cây bút của mình",f:"tien",wx:"y có kỷ vật",lx:"ngươi mất cây bút quý",rt:"Trọng Lữ cầm bút, quỳ lạy.",go:()=>pfO("but","trongla")},
   {n:"Hứa sẽ xin cho y quay lại",f:"giu",wx:"y có hy vọng",lx:"một lời hứa khó giữ",rt:"Trọng Lữ cười lần đầu."},
   {n:"Chỉ cúi chào",f:"giu",wx:"không ai nói ngươi thân với y",lx:"y buồn",rt:"Trọng Lữ cúi chào lại."}]},
- c1:{h:"{v} đến bến xem",w:"v",need:["v"],t:"{v} xin theo Hoàng hậu xuống bến xem tiễn sứ, nói: “Xem công chúa có theo thuyền về không.”",o:[
+ c1:{h:"{v} đến bến xem",w:"v",need:["v"],t:"{v} xin theo đoàn ngự giá xuống bến xem tiễn sứ, nói: “Xem công chúa có theo thuyền về không.”",o:[
   {n:"Mời {v} đứng cạnh mình tiễn sứ",wx:"{v} không nói được gì",lx:"phải đứng cạnh nàng cả buổi",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"{v} đứng cạnh ngươi, im lặng.",rf:"{v} đứng cạnh ngươi, nói nhỏ suốt buổi."},
-  {n:"Đáp: thiếp về rồi thì ai tiễn nàng",wx:"cả bến cười",lx:"{v} ghi hận",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Các phi tần che miệng. {v} đỏ mặt."},
-  {n:"Không đáp",wx:"không thêm thù",lx:"lời {v} đi tiếp",rt:"Ngươi nhìn ra biển."}]},
+  {n:"Đáp: thiếp về rồi thì ai tiễn nàng",wx:"cả bến cười",lx:"{v} ghi hận",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Các phi tần che miệng. {v} đỏ mặt.",rf:"{v} đáp: “Người tiễn thì đông, chỉ sợ người về không có.” Cả bến nhìn ngươi."},
+  {n:"Không đáp",wx:"không thêm thù",lx:"lời {v} đi tiếp",rt:"Ngươi nhìn ra biển."},
+  {n:"Cho người thì thầm với đoàn ngự giá: {v} muốn ra thuyền gặp riêng ai đó",wx:"{v} phải đứng xa bến",lx:"nếu lộ, ngươi bịa chuyện về nàng",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""}/* ác (r2) */,rt:"Thái giám mời {v} lên lầu xa, không cho xuống bến.",rf:"Lời thì thầm bị lần ra. {v} đứng cạnh ngự giá, nhìn ngươi suốt buổi."}]},
  c2:{h:"Thư gửi phụ hoàng",w:"maid",t:"Đại sứ hỏi ngươi có thư gì gửi {pv} không.",o:[
-  {n:"Viết thư dài, kể mọi chuyện",wx:"{pv} hiểu con",lx:"thư có thể bị Lễ bộ xem",rt:"Thư dài năm tờ, gói chung với hồi thư.",go:()=>pfO("thuta","kimthanh")},
-  {n:"Viết một bài thơ ngắn",wx:"thư nhẹ mà sâu",lx:"{pv} có thể không hiểu",rt:"Bốn câu thơ trên giấy dó.",go:()=>pfO("thuta","kimthanh")},
+  {n:"Viết thư dài, kể mọi chuyện",wx:"{pv} hiểu con",lx:"thư có thể bị Lễ bộ xem",rt:"Thư dài năm tờ, gói chung với hồi thư.",go:()=>pfO("thudai","kimthanh")/* r2 6c: a second letter (thuta is the .5 one) */},
+  {n:"Viết một bài thơ ngắn",wx:"thư nhẹ mà sâu",lx:"{pv} có thể không hiểu",rt:"Bốn câu thơ trên giấy {land}.",go:()=>pfO("thudai","kimthanh")},
   {n:"Gửi lời miệng qua đại sứ",wx:"không để lại chữ",lx:"lời có thể sai",rt:"Đại sứ nhắc lại lời ngươi ba lần cho nhớ."}]},
  t1:{h:"Đại sứ xin một điều",w:"emp",t:"Trước khi lên thuyền, đại sứ xin ngươi một điều: “Năm sau, nếu thuyền {land} lại đến, xin công chúa ra bến đón.”",o:[
   {n:"Hứa sẽ ra bến đón",f:"tien",wx:"sứ đoàn năm sau có người đón",lx:"phi tần ra bến là chuyện lớn",rt:"Đại sứ cúi lạy.",go:()=>pfMeet("kimthanh")},
