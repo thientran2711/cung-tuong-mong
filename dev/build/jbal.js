@@ -1,6 +1,6 @@
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
 const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line stays on screen; stage-here r4 (owner OD 18/11 ~22:10Z "5 giây hay là 10 giây"): THE ms every notice chip (kitNotice, KIT §42.2) stays up */noticeMax:20,/* stage-here r4: notices kept in the top-bar «!» box list (oldest dropped) */allyRel:35,/* the "người quen cũ" ally of a new life: her Thiện cảm toward the player at the start (j2 allyBond; co-op part B rebase) */ghenNew:15,/* a new face: an NPC's Ghen toward her starts at R(ghenNew) (j1 newRival, j1 ghenNew0; co-op part B rebase) */wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */
- /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:60,/* diff-remeasure 16/11: 55 → 60 (Vừa HH 45 % → ~32 % with the fixed bot; 65 measured 26 %) */birthAdd:2,
+ /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,/* home road hazards (OUTSIDE_PLAN §12, GAP OR11; Vừa values; jdiff Dễ/Khó scale them like hz): kcSch = weight (100 = as shipped) of the hostile-kin schemes at home (stepmother, rival sister, assassin, the pestering suitor); kcRumFade = how much the city gossip about her (S.kld) fades each month; kcMatch = % of the monthly push toward a forced match (S.kap; 100 = as shipped; the sensible bot never loses to a forced match, so Vừa keeps it, GAP OR12) */kcSch:100,kcRumFade:2,kcMatch:100,/* kcRareX = the hidden roll (×100) of an outside rare ending once its gate is met (× its own weight and R97CFG.p; was a typed .12 in kcRare; value as shipped: the sensible bot meets no rare gate, so a bigger roll moved nothing, GAP OR12) */kcRareX:12,/* kcSelMax = the best chance (%) the court keeps a girl at Điện tuyển (was KC.selMax 80 in jkc; value as shipped, bot-checked for OUTSIDE_PLAN §12, GAP OR12) */kcSelMax:80,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:60,/* diff-remeasure 16/11: 55 → 60 (Vừa HH 45 % → ~32 % with the fixed bot; 65 measured 26 %) */birthAdd:2,
  /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
  hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180,
  /* handmade works (j83), by material 0 thường / 1 tốt / 2 quý: matQ = phần added to the score; cap = highest tier it can reach (only quý makes a
@@ -48,7 +48,7 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
    is married (princes and princesses alike); matchShow = a child shows in the match lists from this age; matchMax = oldest prince offered as a match; age.reign = the young Emperor rules alone from this age (no regency).
    seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table. res / harem: see below.
    night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
-Object.assign(BAL,{time:{khac:4,sucMin:5,/* khắc a deed costs, ONE source for the player and every NPC (AG-ALL-2 G8): talk option (j2 talk), talk that is an act, a harm act (j8 doAct) */cost:{talk:1,talkAct:2,harm:2}},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45,old:45},
+Object.assign(BAL,{time:{khac:4,sucMin:5,/* khắc a deed costs, ONE source for the player and every NPC (AG-ALL-2 G8): talk option (j2 talk), talk that is an act, a harm act (j8 doAct) */cost:{talk:1,talkAct:2,harm:2}},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2,lead:15},srvAge:{ask:25,out:30,mama:45,old:45},
  age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:1,4:2,3:3}, /* owner 17/11 04:30Z: halved (was {7:1,6:1,5:2,4:4,3:6}) */
  /* RESIDENCE (owner 17/11 04:20Z + 04:32Z): every chủ vị (Tần, Phi, Quý phi; the player too) takes at most side co-residents in each
     of the halls (Đông phối điện, Tây phối điện), one room each; Hoàng hậu and Hoàng quý phi live alone. harem.cap = most consorts alive at once
@@ -146,6 +146,33 @@ Object.assign(BAL,{orig:{ /* jorigins.js: Bac Dich (bd) origin numbers */
  /* arc bd_tuc (steppe customs): same layout as hoa */ tuc:{s1a:{c:{danh:-2},w:{th:6}},s1b:{w:{th:4,danh:3},l:{th:-6}},s2a:{c:{bac:-10},w:{th:6},l:{th:-4}},s2b:{w:{duc:2}},c1a:{c:{suc:-3},w:{th:12},l:{th:-8}},c1b:{w:{tamco:2}},c2a:{c:{bac:-30},w:{danh:5},l:{th:-6}},c2b:{c:{suc:-2},w:{duc:3}},t1a:{l:{th:-4}},t1b:{c:{suc:-2},w:{th:6}},x1a:{c:{suc:-5}},x1b:{c:{suc:-4}},x1c:{c:{bac:-60},w:{th:3}},win:{th:22,danh:6},win2:{th:16,duc:3},mid:{th:4},lose:{th:-15,danh:-6}},
  /* arc bd_hoang (Khan succession): same layout as hoa */ hoang:{s1a:{c:{bac:-10},w:{duc:3,sung:2}},s1b:{w:{mat:1},l:{duc:-1}},s2a:{w:{tamco:2}},s2b:{w:{sung:4,danh:3},l:{danh:-3}},c1a:{w:{danh:5},l:{danh:-3}},c1b:{c:{duc:-3},w:{bac:80}},c2a:{w:{sung:5,danh:3},l:{sung:-2}},c2b:{c:{suc:-3},w:{mat:1}},t1a:{c:{suc:-3},l:{sung:-3}},t1b:{w:{tamco:2}},x1a:{c:{suc:-5}},x1b:{c:{suc:-4}},x1c:{w:{duc:2}},win:{danh:12,sung:6},win2:{bac:120,danh:6},mid:{danh:3},lose:{danh:-6,sung:-5}}
 }});
+/* ORIGIN START ARTS (owner OD 20/11 ~02:05Z, verbatim: "mỗi một thân phận là có 4 nhánh chuyện ... thì phải là 4 các cái tài nghệ của mỗi thân phận khác nhau
+   đi cho nó đa dạng"; MAIN + OD ~02:15Z: each set fits ITS story road; noble upbringing higher bậc, poor lower, OD ~01:50Z). ONE table: identity = origin ×
+   its road (the j67 premise arc id, S.st.f14.road / an NPC's v.nr.r) → {art: bậc}. Keys: ARTS cam ky thi hoa vu y theu nau (S.arts) + tứ đức VIR cong dung
+   ngon hanh (S.vir). "" = the origin's own row, used when the road is not known (an old save, an NPC without a road, F14 off) = the old one-art
+   ORIGINS art (moved here, law 14). Read by j1 originArts → j2 start (her start arts) and jmgt mgOrgLv (the upbringing shift of an NPC of that identity).
+   Totals per origin (every road of one origin the same bậc AND the same training points, law 2): tt nc bd 7 · ch dtq td 6 · muoi cn thd 5 · cnv 4. Reasons per art per road:
+   dev/handover/reports/mg-fair-hands.md (handover branch), item (O). */
+Object.assign(BAL.orig,{art:{
+ tt:{"":{cam:1},tt_co:{ky:2,cam:2,thi:2,dung:1},tt_oan:{thi:2,cam:2,ngon:2,hanh:1},tt_tranh:{cam:2,ky:2,hoa:2,ngon:1},tt_mat:{cam:2,dung:2,ngon:2,hoa:1}},
+ dtq:{"":{vu:1},dtq_bien:{vu:2,y:2,ky:1,ngon:1},dtq_vu:{thi:2,hoa:2,vu:1,ky:1},dtq_binh:{ky:2,ngon:2,vu:1,dung:1},dtq_huynh:{vu:2,ky:2,thi:1,hanh:1}},
+ muoi:{"":{ngon:1},muoi_tuoc:{ngon:2,dung:1,cam:1,thi:1},muoi_lau:{ngon:2,thi:1,nau:1,ky:1},muoi_doi:{nau:2,hanh:1,ngon:1,y:1},muoi_no:{ky:2,ngon:1,theu:1,dung:1}},
+ cn:{"":{y:2},cn_chu:{y:2,cong:1,ngon:1,theu:1},cn_tinh:{y:2,thi:1,theu:1,dung:1},cn_ban:{y:2,cong:1,hanh:1,nau:1},cn_than:{y:2,cam:1,thi:1,ngon:1}},
+ nc:{"":{vu:1},nc_gian:{vu:2,ky:2,ngon:2,hoa:1},nc_su:{vu:2,cam:2,ngon:2,nau:1},nc_tuc:{vu:2,nau:2,theu:2,dung:1},nc_vuong:{ky:2,thi:2,vu:2,ngon:1}},
+ bd:{"":{vu:1},bd_hoa:{vu:2,ngon:2,dung:2,hanh:1},bd_ngua:{vu:2,y:2,ky:2,nau:1},bd_tuc:{vu:2,nau:2,theu:2,cam:1},bd_hoang:{ky:2,ngon:2,vu:2,dung:1}},
+ td:{"":{thi:1},td_an:{thi:2,ngon:2,cam:1,ky:1},td_ke:{ky:2,hoa:2,thi:1,cam:1},td_song:{theu:2,hanh:2,thi:1,y:1},td_tha:{cam:2,hanh:2,thi:1,dung:1}},
+ ch:{"":{dung:1},ch_co:{dung:2,ky:2,ngon:1,cam:1},ch_benh:{y:2,hanh:2,nau:1,dung:1},ch_ho:{vu:2,cam:2,dung:1,hoa:1},ch_bi:{thi:2,dung:2,ky:1,ngon:1}},
+ thd:{"":{thi:1},thd_tho:{thi:2,hoa:1,cong:1,ngon:1},thd_sach:{thi:2,ky:1,hanh:1,cong:1},thd_tro:{thi:2,ngon:1,ky:1,nau:1},thd_hoc:{thi:2,ngon:1,hoa:1,hanh:1}},
+ cnv:{"":{cong:1},cnv_chu:{cong:1,nau:1,y:1,ngon:1},cnv_ban:{theu:1,cong:1,hanh:1,nau:1},cnv_mat:{cong:1,vu:1,dung:1,theu:1},cnv_ma:{cong:1,nau:1,dung:1,hanh:1}}}});
+/* SỞ ĐOẢN per identity (owner OD 20/11 ~07:15Z, verbatim: "mình có cái môn sở trường thì mình cũng phải có môn sở đoản ... có nhiều người họ học hoài cái môn
+   này họ học không nổi"): the 1–2 arts an identity (origin × road, the same keys as BAL.orig.art above) is WEAK at — never an art of that identity's own row.
+   SỞ TRƯỜNG = every art of the identity's BAL.orig.art row (bậc ≥ BAL.orig.id.trAt); every other art = bình thường. "" = the origin's row (road unknown); a road key
+   overrides it. List from the C-AG cal-p2 analysis (reports/cal-p2.md §A2, script-checked: no overlap with the road's own arts; dev/test/cal-p2c.js re-checks it).
+   Read by jmgid mgIdClass → the identity target of a mini-game result (OD ~07:35Z: sở trường ≈ 9, bình thường ≈ 7.5, sở đoản ≈ 6; BAL.orig.id in jbal2.js). */
+Object.assign(BAL.orig,{doan:{
+ tt:{"":["nau","vu"]},dtq:{"":["theu","cam"]},muoi:{"":["hoa","vu"]},cn:{"":["ky","vu"]},
+ nc:{"":["thi","theu"],nc_vuong:["theu","hanh"],nc_tuc:["thi","cam"]},bd:{"":["thi","theu"],bd_tuc:["thi","hoa"]},
+ td:{"":["vu","nau"]},ch:{"":["nau","theu"],ch_benh:["theu","ky"]},thd:{"":["vu","cam"]},cnv:{"":["thi","ky"]}}});
 /* ONE CORE (OD:L1267): her household on the room stage (jhouse.js), Tứ đức works (jtds.js), Tứ đức lessons (jtd.js). Same values as before. */
 Object.assign(BAL,{
  house:{ /* jhouse.js: acts on a household servant's stage card */

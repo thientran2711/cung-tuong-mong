@@ -7,7 +7,7 @@
    Vừa (so a later balance pass on Vừa, e.g. C7 review/balance-pass, is followed automatically; only the knobs listed below are touched).
    Two-way rule: a knob that is a world rule (childbirth, illness, poison, spotting poison, the cooldown between charges, the Hoàng hậu
    seat gate, the outsider share of an empty seat, the scheme motive) changes for her and for every NPC alike. Her-side knobs only:
-   BAL.hz (how hard the palace aims at her), her starting bạc, and the Phúc duyên she earns (Khó ×1.5).
+   BAL.hz (how hard the palace aims at her), the home-road hazards BAL.kcSch / kcRumFade / kcMatch (OUTSIDE_PLAN §12: stepmother schemes, city gossip, forced-match speed; GAP OR11), her starting bạc, and the Phúc duyên she earns (Khó ×1.5).
    Mini-games (j82/j91 level tiers, review/mg-easy) are NOT touched: their tier follows her own art level in every life difficulty.
    Co-op (jcoopworld): S.diff is a personal key (not in W_KEYS), so each player's blob P[seat].S carries her own difficulty; each client
    applies the knobs of its own life (world rolls run on the host, so world-rule knobs follow the host's life there).
@@ -15,10 +15,10 @@
 const DIFF_KEY="ctm-diff";
 const DIFF={
  de:{n:"Dễ",d:"Hậu cung ôn hòa, ít kẻ ra tay; vào cung bạc dày hơn.",
-  bal:{hz:[.55,0],birthAdd:[1,-2],birthMin:[1,-3],illDie:[.5,0],seeMaxP:[1,15],poisonX:[.67,0],poisonNow:[0,0],accCdT:[1.5,0],hhTh:[1,-5]},j70:{mot:[.6,0]},bac:BAL.diff.bac.de,pd:1},
+  bal:{hz:[.55,0],birthAdd:[1,-2],birthMin:[1,-3],illDie:[.5,0],seeMaxP:[1,15],poisonX:[.67,0],poisonNow:[0,0],accCdT:[1.5,0],hhTh:[1,-5],kcSch:[.55,0],kcRumFade:[1,1],kcMatch:[.6,0]},j70:{mot:[.6,0]},bac:BAL.diff.bac.de,pd:1},
  vua:{n:"Vừa",d:"Hậu cung như vốn có, phúc họa chia đều.",bal:{},j70:{},bac:BAL.diff.bac.vua,pd:1},
  kho:{n:"Khó",d:"Hậu cung hiểm ác, sinh nở hiểm nghèo; Phúc duyên gấp rưỡi.",
-  bal:{hz:[1.1,0],birthAdd:[1,3],birthMin:[1,4],illDie:[1.5,0],illAdd:[2,0],poisonX:[1.2,0],accCdT:[.67,0],outQ:[1,25]},j70:{mot:[1.2,0]},bac:BAL.diff.bac.kho,pd:1.5}};
+  bal:{hz:[1.1,0],birthAdd:[1,3],birthMin:[1,4],illDie:[1.5,0],illAdd:[2,0],poisonX:[1.2,0],accCdT:[.67,0],outQ:[1,25],kcSch:[1.25,0],kcRumFade:[1,-1],kcMatch:[1.25,0]},j70:{mot:[1.2,0]},bac:BAL.diff.bac.kho,pd:1.5}};
 const DIFF_K=["de","vua","kho"];
 /* every knob any mode touches (only these are saved and restored; the rest of BAL is never written here) */
 const DIFF_KN={bal:[...new Set(DIFF_K.flatMap(k=>Object.keys(DIFF[k].bal)))],j70:[...new Set(DIFF_K.flatMap(k=>Object.keys(DIFF[k].j70)))]};

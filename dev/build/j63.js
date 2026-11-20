@@ -16,7 +16,7 @@ const KA_STAT=/^(Bạc|Sức|Sủng|Danh|Đức|Sắc|Tài|Tâm cơ|Tai mắt|Â
 const kaPlain=h=>String(h||"").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 /* sentiment of one value for her: g gain, r loss, n neutral word */
 const kaWord=h=>String(h).replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"quý ngươi -$1").replace(/thân \+(\d+)/g,"quý ngươi +$1");
-function kaSent(h,old){const s=kaPlain(h);if(!s)return"n";let c="n";try{c=kcls(h)}catch(e){}if(c==="n"&&(old==="g"||old==="r"))c=old;
+function kaSent(h,old){const s=kaPlain(h);if(!s)return"n";if(old==="g"||old==="r")return old; /* kit-rows-b KP12: the writer's explicit class g/r beats the word-meaning colouring */let c="n";try{c=kcls(String(h).replace(/<b>[^<]*<\/b>/g,"x"))}catch(e){} /* an unclassed <b>item name</b> never colours the row (e.g. "Son phần giáng") */
  /* sign wins: a value whose only number is negative is a loss for her (unless it is harm to a rival or less hostility) */
  if(c!=="r"&&/[-−]\s?\d/.test(s)&&!/\+\s?\d/.test(s)&&!/(^|\s)(nàng|con nàng|của nàng|hắn)(\s|$)/.test(s)&&!/(ghen|oán|thù|nghi)\s*[-−]/.test(s))c="r";return c}
 /* split one value "X +1 (note)" into value + trailing note */
@@ -25,6 +25,7 @@ function kaSplitNote(h){const s=kaPlain(h);const m=s.match(/^(.*\S)\s+(\([^()]*\
 function kaModel(html){const t=document.createElement("template");t.innerHTML=String(html||"");const M={odds:"",oddsX:"",items:[]};let lab="",afterOdds=false,bl="";
  const push=(h,old,l)=>{h=kaWord(h);const p=kaPlain(h);if(!p||p==="·")return;
   const lm=p.match(/^(được ngay|ngay|tốn|thành|được|hỏng|bại|mất|kèm)\s*:\s*/i);if(lm&&!/</.test(h)){l=lm[1].toLowerCase();if(l==="bại")l="hỏng";h=p.slice(lm[0].length);if(!h)return}
+  else if(/</.test(h)){/* kit-rows-b KP21(1): a coloured item that starts with a label («kèm: <span class="g">…</span>») — strip the label from the html, keep the tags, route by the label */const lh=h.match(/^((?:\s*<[^>]+>)*)\s*(được ngay|ngay|tốn|thành|được|hỏng|bại|mất|kèm)\s*:\s*/i);if(lh){l=lh[2].toLowerCase();if(l==="bại")l="hỏng";h=lh[1]+h.slice(lh[0].length);if(!kaPlain(h))return}}
   if(!M.odds&&KA_ODDS.test(p)){M.odds=p;return}
   const ll=l==null?lab:l;if(ll==="thành"||ll==="hỏng")bl=ll;M.items.push({h,old,l:ll,b:ll==="kèm"?(bl||""):ll==="thành"||ll==="hỏng"?ll:""})};
  const walk=nodes=>{for(const n of nodes){
@@ -65,7 +66,9 @@ function kaRows(M){const R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[],one:true
  const sure0=!M.odds,hasBad=M.items.some(it=>(it.l==="hỏng"||it.b==="hỏng")&&real(it.h)),hasWin=M.items.some(it=>it.l==="thành"&&real(it.h));
  const sure=sure0&&(!hasBad||!hasWin);R.one=sure;
  const add=(r,h,c,b)=>{b=(r==="why"||r==="ton"||r==="note")?"":sure||!b?"t":b;if(!R[r].some(x=>kaPlain(x.h)===kaPlain(h)&&x.b===b))R[r].push({h,c,b})};
- for(const it of M.items){let [h,nt]=kaSplitNote(kRangeW(it.h));if(nt)add("note",nt,"n");const p=kaPlain(h);if(!p)continue;if(KA_NOTHING.test(p))continue; /* owner 11/15: a line that says nothing is not shown */const c=kaSent(h,it.old);const neu=KNEU.test(p);const l=it.l||"";const cont=!!it.cont;
+ /* kit-rows-b KP21(2): a labelled value «a, Chủ tin với X +3» is split at the top-level «;» / «, » (not inside a clause about «nàng»), each piece routed alone — a pure gain inside a Kèm goes to Được, and a long list is one short line per value */
+ const SPL=it=>{if(it.sp||!/^(kèm|hỏng|thành|ngay)$/.test(it.l||""))return[it];const parts=[].concat(...kSplitTop(it.h,/; /y).map(q=>/(^|\s)nàng(\s|$)/.test(kaPlain(q))?[q]:kSplitTop(q,/, /y))).map(x=>x.trim()).filter(x=>kaPlain(x));return parts.length>1?parts.map(h=>Object.assign({},it,{h,sp:1})):[it]};
+ for(const it of [].concat(...M.items.map(SPL))){let [h,nt]=kaSplitNote(kRangeW(it.h));if(nt)add("note",nt,"n");const p=kaPlain(h);if(!p)continue;if(KA_NOTHING.test(p))continue; /* owner 11/15: a line that says nothing is not shown */const c=kaSent(h,it.old);const neu=KNEU.test(p);const l=it.l||"";const cont=!!it.cont;
   const kb=it.b==="hỏng"?"b":it.b==="thành"?"t":c==="r"?"b":"t";/* a Kèm belongs to the block label written before it; none → a bad thing is BẠI */
   if(/[+−-]\s?0(?![\d.,])/.test(p)&&!/[+−-]\s?(0[.,]\d*[1-9]|[1-9])/.test(p)){add("note",p.replace(/\s?[+−-]\s?0(?![\d.,])/g," không đổi"),"n");continue}
   if(l==="why"){add("why",h,"r");continue}
