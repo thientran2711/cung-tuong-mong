@@ -183,8 +183,10 @@ agRunReg("cx3:threat",v=>{const s=p3ThreatT(v);return s?p3Res("threat",String(th
 Object.assign(window,{itemTest,hireTake,staffTam,recommend,searchMaids});
 /* ---------------- phe phái: Lập phe cùng · Xin vào phe · Rời phe · Bán đứng · Ly gián (j10 facAct for her = found / askJoin / leaveFac / sellOut / divide; the same for an NPC) ---------------- */
 function p3FacOn(){return p3On()&&!!BAL.ag.par3.fac}
-function p3FacFr(v){const F=BAL.ag.par3.fac;return others(v).filter(x=>x&&x!==S&&x.alive&&!x.out&&!facOf(x)&&!sameHouse(v,x)&&(aff(v,x)>=F.frAff||clanOf(v)===clanOf(x)&&aff(v,x)>=F.clanAff||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=F.sharedOan&&oan(x,e)>=F.sharedOan)))}
-function p3FacJoin(v){const F=BAL.ag.par3.fac;return (S.facs||[]).filter(f=>{const l=facLeader(f);return l&&l!==S&&aff(v,l)>=F.clanAff})}
+function p3FacFr(v){const F=BAL.ag.par3.fac;return others(v).filter(x=>x&&(x===S||x.alive&&!x.out)&&!facOf(x)&&!sameHouse(v,x)&&(aff(v,x)>=F.frAff||clanOf(v)===clanOf(x)&&aff(v,x)>=F.clanAff||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=F.sharedOan&&oan(x,e)>=F.sharedOan)))}
+function p3FacJoin(v){const F=BAL.ag.par3.fac;return (S.facs||[]).filter(f=>{const l=facLeader(f);return l&&l!==v&&aff(v,l)>=F.clanAff})}
+/* facfound-parity (law 1 TWO-WAY): she can rủ an NPC to found a faction and ask to join an NPC's faction (j10 facAct lap / xin), so an NPC may rủ HER
+   (p3FacFr keeps S) and ask to join HER faction (p3FacJoin keeps a faction she leads); her answer is the jrcv card (PEND.rcvAsk facFound / facJoin, 4 answers) */
 function p3FacFoe(v){const F=BAL.ag.par3.fac;const mine=facOf(v);return (S.facs||[]).filter(f=>f!==mine&&facMembers(f).filter(x=>x!==v).length>=2&&facMembers(f).reduce((s,m)=>s+agSpite(v,m),0)/facMembers(f).length>=F.foeOan)}
 Object.assign(AGC3BTN,{facFound:"Lập phe cùng",facJoin:"Xin vào phe",facLeave:"Rời phe",facSell:"Bán đứng",facDiv:"Ly gián"});
 Object.assign(AGC3ACT,{facFound:"rủ người lập phe",facJoin:"xin vào phe",facLeave:"rời phe",facSell:"bán đứng phe mình",facDiv:"ly gián một phe"});

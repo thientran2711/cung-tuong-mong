@@ -49,7 +49,7 @@ const AO=process.env.TQ_ORIGIN||'tt';
   let b0=await bac(p);let r=await tapAct(p,/^Thỉnh an Thái hậu/);s=await st(p);let b1=await bac(p);
   C=await p.evaluate(()=>__cards.filter(c=>/^Xong việc/.test(c.t)));
   chk('A quest «an» done by tapping the Thỉnh an card; Bạc +BAL.st14.q.bac.c paid; narrator card',!r&&s.q[0]==='an+'&&C.length===1&&C[0].subj&&C[0].rows.some(x=>x==='Phần thưởng: Bạc +'+Q.bac.c)&&b1>=b0+Q.bac.c-60,[r,s,C,b0,b1]);
-  r=await p.evaluate(()=>{__clear();used=0;S.suc=80;goTo('vuon');__clear();return S.place});s=await st(p);
+  r=await p.evaluate(()=>{for(const k of places().map(x=>x.k).filter(k=>k!=='home')){__clear();used=0;S.suc=80;S.buoi=0;goTo('home');__clear();used=0;goTo(k);__clear();if(S.place===k)return k}return 'nowhere: '+S.place});s=await st(p);/* tut-road: any place she can reach (Ngự hoa viên is not open in every life / season) */
   chk('A quest «di» done by going to a place (goTo, Dư đồ)',s.q[1]==='di+',[r,s]);
   r=await p.evaluate(()=>{const ix=S.inv.findIndex(e=>e&&!e.h&&(typeof wdItem==='function'&&wdItem(e)||IT[e.k]&&IT[e.k].sl));if(ix<0)return 'nothing to wear';const e=S.inv[ix];if(typeof wdItem==='function'&&wdItem(e))wdWear(S,ix);else wear(S,ix);__clear();return null});
   s=await st(p);chk('A quest «trang» done by wearing (Tư trang)',!r&&s.q[2]==='trang+',[r,s]);
@@ -74,13 +74,17 @@ const AO=process.env.TQ_ORIGIN||'tt';
   r=await p.evaluate(()=>{__clear();used=0;S.suc=80;const v=liveRivals(true).find(v=>v!==S&&v.alive&&!v.out);const k=Object.keys(ACT).find(k=>!['gift','plant'].includes(k)&&ACT[k].ok(S,v));if(!k)return 'no act';const x=runAct(S,v,k);__clear();return x?null:'empty '+k});
   s=await st(p);chk('A quest «giao» done by a deed to a consort (runAct, Hậu cung)',!r&&s.q[0]==='giao+',[r,s]);
   /* Tài nghệ › Tứ đức › Tự rèn: pick the first work, the first material, then «Để trời định» in the mini game (a player's own choice) */
+  /* tut-road: a lesson can end with no progress (the mini game's own result, «Để trời định» is a chance), and then the quest is rightly not done: a player studies again, so the test repeats the lesson up to 16 times (the material pick sometimes misses in a try) */
+  let hocTry=0;for(;hocTry<16;hocTry++){
   await p.evaluate(()=>{__clear();used=0;S.buoi=0;S.suc=90;S.bac=Math.max(S.bac,200);tab='art';render();document.querySelector('[data-vlearn][data-mode="self"]:not([disabled]),[data-learn][data-mode="self"]:not([disabled])').click()});await p.waitForTimeout(400);
   r=await p.evaluate(()=>{const g=document.querySelector('#modal [data-kwrgo]:not([disabled])');if(!g)return 'no work to pick';g.click();return null});await p.waitForTimeout(400);
   if(!r)r=await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal button')].find(b=>/·/.test(b.textContent)&&!b.disabled);if(!b)return 'no material';b.click();return null});await p.waitForTimeout(1200);
-  if(!r)r=await p.evaluate(()=>{const b=[...document.querySelectorAll('button')].find(b=>b.offsetParent&&/^Để trời định/.test(b.textContent.trim()));if(!b)return 'no «Để trời định»';b.click();return null});await p.waitForTimeout(2500);
+  if(!r)r=await p.evaluate(()=>{const b=[...document.querySelectorAll('button')].find(b=>b.offsetParent&&/^Để trời định/.test(b.textContent.trim()));if(!b)return 'no «Để trời định»';b.click();return null});/* tut-road: wait for the result card itself (fixed 2.5 s let the mini game's own timing race the click: lesson never handed in) */for(let i=0;i<40&&!(await p.evaluate(()=>!!document.getElementById('kg82ok')));i++)await p.waitForTimeout(250);
   /* the mini game's result card: its kit ✕ presses #kg82ok, which hands the progress over (dev/test/lib/roulette.js closeResult) */
   await p.evaluate(()=>{const o=document.getElementById('kg82ok');if(o)o.click();else{const x=document.querySelector('.kit-x[data-kitx="ov"]');if(x)x.click()}});await p.waitForTimeout(800);
-  await p.evaluate(()=>{if(S.mg){try{if(typeof kg82Close==='function')kg82Close(true)}catch(e){}S.mg=null}__clear()});s=await st(p);chk('A quest «hoc» done by a whole lesson in Tài nghệ (tap Tự rèn, pick a work + material, «Để trời định»)',!r&&s.q[1]==='hoc+',[r,s]);
+  await p.evaluate(()=>{if(S.mg){try{if(typeof kg82Close==='function')kg82Close(true)}catch(e){}S.mg=null}__clear()});
+  s=await st(p);if(s.q[1]==='hoc+')break}
+  s=await st(p);chk('A quest «hoc» done by a whole lesson in Tài nghệ (tap Tự rèn, pick a work + material, «Để trời định»)',!r&&s.q[1]==='hoc+',[r,s]);
   r=await tapAct(p,/^Trò chuyện với cung nữ/);s=await st(p);chk('A quest «cn» done by tapping Trò chuyện với cung nữ',!r&&s.q[2]==='cn+',[r,s]);
   await p.evaluate(()=>{const v=liveRivals(true)[1]||liveRivals(true)[0];relAdd(S,v,BAL.st14.goal.rel+40);for(const k in S.arts)S.arts[k]=Math.max(S.arts[k],0);const k0=Object.keys(S.arts)[0];S.arts[k0]=Math.max(S.arts[k0],BAL.st14.goal.art)});
   e=await p.evaluate(()=>__month());const pa=await p.evaluate(()=>S.st.ch.past.slice(-1)[0]);s=await st(p);
@@ -96,7 +100,7 @@ const AO=process.env.TQ_ORIGIN||'tt';
   r=await tapAct(p,/^Học lễ nghi/);s=await st(p);chk('B quest «le» by tapping Học lễ nghi',!r&&s.q[1]==='le+',[r,s]);
   r=await p.evaluate(()=>{for(const k of places().map(x=>x.k).filter(k=>k!=='vuon')){__clear();used=0;S.suc=80;S.buoi=0;goTo('home');__clear();used=0;goTo(k);__clear();if(S.place===k)return k}return 'nowhere: '+S.place});s=await st(p);chk('B quest «di» by going somewhere',s.q[2]==='di+',[r,s]);
   const bs=await p.evaluate(()=>S.bac);
-  await p.evaluate(()=>{S.tin=BAL.st14.goal.tin+10});let e=await p.evaluate(()=>__month());s=await st(p);
+  await p.evaluate(()=>{S.tin=100/*tut-road: a month of buổi can drop Chủ tin by ~10 (random events), 70 was not always enough*/});let e=await p.evaluate(()=>__month());s=await st(p);
   chk('B maid ch1 closes, ch2 «Lọt vào mắt Hoàng thượng» with chai/vuon/theu',s.id==='sung14'&&s.q.join()==='chai-,vuon-,theu-',[e,s]);
   r=await tapAct(p,/^Chải chuốt/);s=await st(p);chk('B quest «chai»',!r&&s.q[0]==='chai+',[r,s]);
   r=await p.evaluate(()=>{__clear();used=0;S.suc=80;goTo('home');__clear();used=0;goTo('vuon');__clear();return S.place});s=await st(p);chk('B quest «vuon» (only the garden counts)',s.q[1]==='vuon+',s);
