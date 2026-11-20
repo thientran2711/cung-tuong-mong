@@ -432,7 +432,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW ge-batu (BIG opus E28r) of e0424d54 | review/ge-batu | FOREMAN E #17 | session_01DgYSWokELeSAzf9p9MFqAS | RUNNING | 20/11 11:26Z |
 | GAP GE03 ge-map «Sơ đồ nhánh» page (sonnet; on kitBranchMap 90b7e797) | review/ge-map; briefs/root77-ge-map.md | MAIN ROOT-77 | session_01Rc5AsNQDQXeYG8Yk7ugFpA | SẴN SÀNG KIỂM 8e2efbea | 20/11 10:36Z |
 | FOREMAN E #18 (opus; child of E #17, depth 8 = LAST) | handover FOREMAN_E_STATUS | FOREMAN E #17 | session_01DgYSWnmvkdgnzELwSixER7 | RUNNING | 20/11 11:42Z |
-| REVIEW wear-slots r1 (opus BIG) of 56f00454 | review/wear-slots-r1 | B | session_01N1tNP5gHxMtpFZ6rmVrtsc | PASS e4aaf610 (contains LIVE 0aaf8152; report reports/wear-slots.md REVIEW r1) | 20/11 12:20Z |
+| REVIEW wear-slots r1 (opus BIG) of 56f00454 | review/wear-slots-r1 | B | session_01N1tNP5gHxMtpFZ6rmVrtsc | PASS e71918c0 (contains LIVE 713d96dc; report reports/wear-slots.md REVIEW r1) | 20/11 12:20Z |
 | REVIEW mg-craft group-2 (opus BIG; all 4 kinds) of 8e74ddfa | review/mg-craft-r2 | B | session_01N1tNP4RbteU7EGALP3kLAP | RUNNING | 20/11 10:53Z |
 | REVIEW ge-map (SMALL sonnet) of 8e2efbea | review/ge-map-rv; briefs/rv-root77-ge-map.md | MAIN ROOT-77 | session_01Rc5AsMyyPVJTYzCfuG2yDA | RUNNING | 20/11 11:01Z |
 | kit-modal-spin KIT KEEPER (sonnet; Group 1 KP18+KP16+KP06 of ROOT-77 kit queue) | review/kit-modal-spin; reports/kit-modal-spin.md | MAIN ROOT-77 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5a3cc86a | 20/11 10:55Z |
