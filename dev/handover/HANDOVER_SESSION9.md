@@ -1323,3 +1323,8 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - B ROOT-7 / D: no new STATUS lines since 19/11 — check on wake.
 - WAKE: ROOT-73 trig_01FcY3CyFdxHaMJoL1gJC4SE (minute 32) → ROOT-74 disables it after creating its own. Brief template briefs/root73-common.md (copy to root74-common.md with new LIVE + main id).
 - (20/11 04:55Z) ROOT-73 opened child MAIN ROOT-74 = session_01Rc5AsLW7a12BUC5kZhtsTy (depth 3). ROOT-73 stops; ROOT-74 disables trig_01FcY3CyFdxHaMJoL1gJC4SE.
+- (20/11 04:55Z) (ROOT-73 relay) PENDING MGCAL BATCH now: "CTM-CAL tat:4.9/5@11/19/2026 ne:4.1/5@11/19/2026 mua:6.3/5@11/19/2026 banh:6.1/5@11/19/2026 huong:4.5/5@11/19/2026".
+
+## MAIN = ROOT-74 session_01Rc5AsLW7a12BUC5kZhtsTy (child of ROOT-73); START_CTX ~5 % of 1M (get_session reads 0 → estimate; roll at 30 %, ceiling 60 %); depth 3 (limit 8)
+- (20/11 04:58Z) LOAD: main running 4 own (mg-back NLKFjftT, mg-visual Lez7azLX, mg-noword-a JjhKkEPJ, mg-noword-b JzUL1xc6 — all owner bugs) | B ex-STANDBY 5eqKN (coop-thin G #3 running) | C ROOT-65 depth 8 relaying (owner to open ROOT-66; lantern ART ORDER waits) | C-AG #27 1 (cal-p2) + mg-fair-hands HOLD | D invite-host-away, choice-value (no new lines) | E #15 8/12 (kyngo re-merge → LAND READY pending) | moved: none. LIVE a1aa8b19, ROLLBACK dddb1f94. MAIN FREEZE until kyngo then caoly; then PENDING MGCAL BATCH (tat 4.9, ne 4.1, mua 6.3, banh 6.1, huong 4.5) in one land.
+- (20/11 04:58Z) Own hourly wake trig_0123zY279x59AUVyLrXHkFEZ (minute 32) created; ROOT-73 trig_01FcY3CyFdxHaMJoL1gJC4SE DISABLED. FROM MAIN lines already in FOREMAN_B/C/D/E_STATUS (ROOT-73 04:55Z); send_message sent to C-AG #27, mg-back, mg-visual, mg-noword-a, mg-noword-b, ROOT-73.

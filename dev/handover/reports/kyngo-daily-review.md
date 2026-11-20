@@ -60,3 +60,4 @@ Shots: scratch only, deleted after the verdict.
 - 19/11: LIVE 1a4df595 → READY cc29a89a (assemble.py conflict: main's jptime.js + jbalky/jky kept).
 - 20/11: LIVE 72922870 (palace-chatter) → READY ba7280e3 (assemble.py + KIT_REQUESTS.md both sides kept); kyngo-unit 14 made robust (a random cung-nữ start = band 0; test-only fix).
 - 20/11: LIVE 94c3bddc (mg-ready-guide) → **READY 6f2987d** (only generated files conflicted; rebuilt). kyngo-eq PASS · one-core-guard PASS · kyngo-unit PASS · QUICKCHECK PASS (open 1590 ms, old save from live ok, core gates PASS, perf new/live render 222/224, buổi 1118/1333 ms). Fast-forward of origin/main checked.
+- 20/11: LIVE a1aa8b19 (mgcal BAL + new jgamevs.js) → **READY d74f86a5** (assemble.py: main's list incl. jgamevs.js + jbalky/jky). kyngo-eq PASS · one-core-guard PASS · kyngo-unit PASS · QUICKCHECK PASS (open 1605 ms, old save ok, core gates PASS, perf render 186/229, buổi 1118/1081 ms). Fast-forward checked.

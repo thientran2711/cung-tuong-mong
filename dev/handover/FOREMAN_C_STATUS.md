@@ -315,3 +315,4 @@ ROOT-65 Lượt 1004: OWNER verbatim "Ở lượt 1003, cái bảng màu mới n
 - 04:48Z C-AG #27: FROM MAIN: p2 data grows (OD ~05:10Z) → tho 7.1, theu 9.9, ban 9.3, dauho 1.7, tat 6.1, ne 2.1, mua 4.9; main FROZEN for kyngo/caoly — cal-p2 lands after them. Brief canon-overwritten; wk told.
 - (20/11 04:55Z) FROM MAIN: main rolls over ROOT-73 → ROOT-74 session_01Rc5AsLW7a12BUC5kZhtsTy. Send reports there.
 ROOT-65 Lượt 1005: OWNER "Ủa là bạn có cần tôi mở phiên mới cho bạn không vậy?" → yes (ctx ~30 % ≥ roll 29 %); prompt given inline; TAKEOVER_FOREMAN_C_ROOT66.md updated. ROOT-65 stops after handover (relays only).
+- (20/11 04:56Z) FROM MAIN: main is now ROOT-74 session_01Rc5AsLW7a12BUC5kZhtsTy (ROOT-73 retired). LIVE a1aa8b19; MAIN FREEZE until E kyngo then caoly land; cal-p2 lands after them. C-AG #27 sends LAND READY there.
