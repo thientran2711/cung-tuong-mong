@@ -66,3 +66,43 @@ MEASURE (my run, dev/measure/mg-bots.js virtual clock, skilled n=30, mg-grade.py
 Matches the lead's table (theu 8.6/7.7/6.8, kim 8.7/8.5/6.8 vs old pattern 7.2/7.2/6.7, untangle 9.0/8.6/7.7). Law 5 holds (kim Dễ≈Vừa mean, XS share falls 90→83→40).
 NITS (no fail): rules picture uses the shared KG82_DEMO "tap"/"drag" (Khéo tay shows the generic thread drag, not a cutter onto paper) — a kit-side picture per craft would read better (kit keeper, later); stand-in art until Foreman C ART REQUEST (theu-hoop/spool/needle/motifs; kim-wedge/cutters/scissors).
 SHOTS: lead's CDN folder img/_review/mg-craft/ WIPED with this verdict; my shots (scratch only): kim/theu play pair Fold 755x1000@2 + iPad 1180x820@2 after the fixes, looked 3×.
+
+## SẴN SÀNG KIỂM (integrated) 8e74ddfa — lead #2 (session_01N1tNP3Whw8X1PLZAsT5ChZ)
+START_CTX ~5 % (get_session reads 0; own estimate, 1M window) → rollover at ~30 %, ceiling 60 %. depth 1.
+PRIORITY #1 CHECK ('mg-craft|inkwash|ikebana|craft'): OD 20/11 ~08:15Z + ~05:10Z | main 66bd36cd (no craft engine; KG82_DEMO tssteer dodge) | review/mg-craft 993b8929, mg-craft-ve f1ef0106, mg-craft-hoa c0f9fbbc, mg-craft-r1 8c84f17a (g1 review fixes) | claims: this job (CLAIMS row mg-craft lead #2); reused everything, rebuilt nothing.
+Branch review/mg-craft = 993b8929 + merge origin/main 66bd36cd (6d8d12db; j82/j91 conflicts: keep the removal of kg82Pattern / k91Untangle, KG82_DEMO takes main's tssteer "dodge" without the untangle row; no new caller on main) + review/mg-craft-r1 801f306b (24032cf1) + VE f1ef0106 (6b9b5490, clean) + HOA c0f9fbbc (8ff8f068; jbal2 lev: lead-tuned theu/kim + VE ve + HOA hoa with limStem; KIND_CASES ve + hoa in one table) + r1 8c84f17a (5edfad1b, kim «drop» cutter shape) + fixes below. index.html / sw.js rebuilt by build_site.sh.
+
+### Fixes made while integrating (family, law 4 / 11)
+1. **ONE live grade** (r1 put Thêu / Khéo tay on crHud → mgLive(mgReach)): Vẽ and Cắm hoa still printed their own `${Math.round(pts)}/10` → both now call crHud with mgReach (done rounds + the open round's time part + rounds to come). dev/test/mg-score-same-scan.py: before 2 raw cells (jcraft_ve.js:87, jcraft_hoa.js:98) → after 0 raw cells, 34 via the ONE grade (ca6ea2a5).
+2. **Family star rule** (crStars / crCol: good work the time part cut shows gold): Vẽ (k91Say ★★☆ by got incl. pace, own thresholds .8/.55) and Cắm hoa (verdict incl. pace) → crStars(quality) + crCol(quality, pace), same as Thêu / Khéo tay (ca6ea2a5).
+3. **mg-craft-shots.js**: a 2-point drag (Cắm hoa cut) crashed the shots script (L[2]) → last point = end (90f35330).
+4. **STEP 3 numbers for ve + hoa** (BAL only; kG / kAdj / cal.k untouched): Cắm hoa at Vừa / Khó graded 4.4 / 4.7 (old rings 7.8 / 7.7: hoa kG 2.3 is steep and Vừa/Khó sit at board ease 0) → ease-0 ends lev.hoa cutTol .04→.12, angTol 6→16, sway .03→.01, limStem 7000→10000. Vẽ at Khó was easier than the old board (7.3 vs 5.4) → ease-0 ends lev.ve place .016→.012, ramp 450→220, dry 400→150 (8e74ddfa). Ease-5 ends unchanged.
+
+### Measure (dev/measure/mg-bots.js skilled n=30/cell [after-tune n=20], graded mg-grade.py; Dễ hoc/0/2 · Vừa hoc/4/2 · Khó hoc/6/1 = board ease ve 2 / .4 / 0, hoa 1.6 / 0 / 0, theu+kim 3.6 / 2 / .4; random hoc/4/2 n=15). BEFORE = origin/main 66bd36cd (old trace / rings boards), same harness.
+| kind | board | Dễ XS / Giỏi+ / mean | Vừa XS / Giỏi+ / mean | Khó XS / Giỏi+ / mean | random raw |
+|---|---|---|---|---|---|
+| ve | BEFORE trace | 67% / 97% / 9.1 | 20% / 87% / 7.9 | 0% / 0% / 5.4 | 0.04 |
+| ve | AFTER merge (VE levers) | 90% / 97% / 9.4 | 83% / 100% / 8.8 | 0% / 93% / 7.3 | 0.0 |
+| ve | AFTER tune 8e74ddfa | 100% / 100% / 9.9 | 15% / 100% / 8.2 | 0% / 5% / 5.5 | – |
+| hoa | BEFORE rings | 77% / 87% / 8.5 | 13% / 90% / 7.8 | 13% / 90% / 7.7 | 0.51 |
+| hoa | AFTER merge (HOA levers) | 33% / 73% / 7.4 | 0% / 0% / 4.4 | 0% / 0% / 4.7 | 0.21 |
+| hoa | AFTER tune 8e74ddfa | 50% / 100% / 8.4 | 10% / 85% / 7.5 | 0% / 75% / 7.2 | – |
+| theu | AFTER (stitch, lead #1 tune) | 50% / 100% / 8.4 | 17% / 90% / 7.7 | 0% / 70% / 6.8 | 0.69 |
+| kim | AFTER (papercut, lead #1 tune) | 93% / 100% / 9.0 | 90% / 93% / 8.6 | 50% / 70% / 7.2 | 0.0 |
+Law 5 holds for all 4 (Dễ ≥ Vừa ≥ Khó). Note: Vẽ Dễ is a touch easier than the old board (9.9 vs 9.1); left as is (ease-2 end, owner re-tests cal per MAIN ROOT-75).
+
+### Tests (build 8e74ddfa unless noted)
+- dev/test/mg-craft.js 755x1000 --runs=2, 4 kinds: 46/47 on ca6ea2a5 — the 1 FAIL = theu skilled ≥ 9 at ease 5 [8.66, 9.21] while the box ran 6 Chromiums (load 10; real-time bot); rerun alone --runs=3 theu: PASS (9.74 / 9.77 / 9.83). iPad 1180x820 --runs=1, 4 kinds: PASS 47/47. After the tune: --kinds=ve,hoa PASS 25/25.
+- mg-ready-guide PASS 9/9 · mg-noword-a 46 ok (all kinds 0 words) · mg-visual ALL OK · mg-craft-hoa.js 755x1000 11 ok + 1180x820 11 ok · ag-mgcal 14 ok · one-core-guard PASS · mg-score-same-scan 0 raw cells.
+- ag-mg2: 3 FAIL (summons dan/co median, exam "an NPC can fail") = the SAME 3 FAIL on an origin/main 66bd36cd build → pre-existing, not craft kinds.
+- **mg-back** (review/mg-back-rv df44bc3e, not on main): trial merge onto this branch (clean except index/sw), dev/test/mg-back.js 755x1000: 12 ok / 0 FAIL — the ✕ «Quay lại» works on the 4 craft boards.
+- **co-op lane** (review/coop-thin-f6b-r1 26f36042, not on main): trial merge onto this branch, local Worker (wrangler dev 127.0.0.1:8787), dev/test/coop-thin-f6b.js L12: 41 ok / 0 FAIL (mini-game ends as one score intent; craft engines do not touch the end chain). NPC rivals (kitGameVs / mgNpcRaw) unchanged.
+- quickcheck: PASS 385 s (core gates PASS, old save ok, perf new/live render 226/237 ms, buổi 983/1337 ms)
+
+### Shots (Fold 755x1000@2 + iPad 1180x820@2; rules · guided round · play · result, 4 kinds; looked at each sheet; taken on ca6ea2a5 = same boards, the later tune only moves ease-0 numbers)
+Sheets: https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-craft/m-<theu|kim|ve|hoa>-<fold|ipad>.webp (+32 singles i-<kind>-<fold|ipad>-<1rules|2guide|3play|4result>.webp). Seen: no overflow, no word on the boards (signs only; the guided hand's «chạm»/«kéo» bubble is the kit ghost hand), Cắm hoa contest ends on the kit podium. Rules pictures of ve / hoa / kim are the plain "drag" demo (tạm; KIT REQUEST KG82_DEMO "cut" (hoa) open, "hold" for ve optional). Wipe after verdict: python3 dev/site/cdn_sync.py --wipe-review mg-craft (also mg-craft-ve, mg-craft-hoa).
+
+### Open for the BIG review / Foreman B
+- KIT REQUEST KG82_DEMO "cut" (hoa, filed by HOA); ART REQUESTS (Foreman C): lead #1 list (theu / kim) + VE list (ve-motif-* stamps, silk scroll, 3 master paintings) + HOA list (4 season windows, 6 stems × 4 seasons, 3 vases, cut end).
+- Cắm hoa uses performance.now / k91Loop instead of crNow / crLoop (CRAFT.speed does not speed it up in tests) — works, cosmetic.
+- old engine `arrange` k91Arrange: no kind uses it now; jwkr.js bhoa wrapper only restricts the old engine's flowers → safe to remove in a later scan (kept, not in this scope). `trace` kept (Chép kinh, May áo).
