@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c43c6066","t":"2026-11-20T07:16Z","c":"mg-back r3: deferred charge (kgDefer/kgPay) instead of kgSnap","b":"bd97db600507","h":[{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"},{"s":"dddb1f94+","t":"2026-11-20T04:29Z","c":"Tay đối thủ ở Thắp đèn nay đo theo đúng tài của nàng"},{"s":"b3f5a05c+","t":"2026-11-20T04:20Z","c":"Tay đối thủ ở Bắn cung, Đầu hồ và Kim chỉ nay đo theo đúng tài của nàng"},{"s":"29f5e418+","t":"2026-11-20T04:01Z","c":"Kit mới: bảng thi đấu đối mặt cho «Thách đấu» (chuẩn bị, chưa mở trong game)"},{"s":"b74e84cb+","t":"2026-11-20T04:06Z","c":"Tay đối thủ ở Thêu nay đo theo đúng tài của nàng"}]};
+window.CTM_BI={"s":"60e36dbc+","t":"2026-11-20T07:22Z","c":"review mg-back-rv: PASS c43c6066 — rebuild index.html/sw.js on LIVE main 70bea3d3","b":"141a2a1b99f7","h":[{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"},{"s":"dddb1f94+","t":"2026-11-20T04:29Z","c":"Tay đối thủ ở Thắp đèn nay đo theo đúng tài của nàng"},{"s":"b3f5a05c+","t":"2026-11-20T04:20Z","c":"Tay đối thủ ở Bắn cung, Đầu hồ và Kim chỉ nay đo theo đúng tài của nàng"},{"s":"29f5e418+","t":"2026-11-20T04:01Z","c":"Kit mới: bảng thi đấu đối mặt cho «Thách đấu» (chuẩn bị, chưa mở trong game)"},{"s":"b74e84cb+","t":"2026-11-20T04:06Z","c":"Tay đối thủ ở Thêu nay đo theo đúng tài của nàng"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29957,7 +29957,7 @@ function wkAsk(k,mode,run){const a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode===
 (function(){const l0=lessonMode;lessonMode=function(k,mode){if(wkPend||!wkLessonOK(k,mode))return l0.apply(this,arguments);wkAsk(k,mode,()=>l0.call(this,k,mode))}})();
 /* practice once mastered: j82's playArt gives the raw score directly when present; otherwise the art's lesson game */
 function wkPractice(k){if(!wkLessonOK(k,"prac"))return;wkAsk(k,"prac",()=>{if(!wkLessonOK(k,"prac"))return;
- if(typeof playArt==="function"&&typeof kgDefer==="function"){kgDefer({suc:-10,khac:2},()=>wkPracOpen(k));return}apply({suc:-10});spend(2);wkPracOpen(k)})}
+ const pc={suc:-10,khac:2};if(typeof playArt==="function"&&typeof kgDefer==="function"){kgDefer(pc,()=>wkPracOpen(k));return}apply({suc:pc.suc});spend(pc.khac);wkPracOpen(k)})}
 /* KIT §13.9: the practice charge (Sức -10, 2 khắc) is taken on «Sẵn sàng» (kgDefer); the ✕ before it = free back */
 function wkPracOpen(k){{
  if(typeof playArt==="function"){const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;S.mg={k,l:5,mode:"prac",wk:pick,pa:1};
@@ -60102,7 +60102,7 @@ function rcpMaster(k){if(!S||S.dead||Q.length||S.mg||(S.arts[k]||0)<5||!can(2)||
   const open=()=>{const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;S.mg={k,l:5,mode:"prac",wk:pick,pa:1};
   try{playArt({art:k,title:`Học ${an} với thầy`,quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},onDone:(raw,o)=>{S.mg=null;if(o&&o.skipped)log("Học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,cl(Math.round(raw),0,10),"học với thầy");render()}})}catch(x){S.mg=null}};
   /* KIT §13.9: Sức, the fee, the favour owed and 2 khắc are taken on «Sẵn sàng» (kgDefer); the ✕ before it = free back */
-  if(typeof kgDefer==="function")kgDefer({suc:-10,bac:-fee,tch:k,khac:2},open);else{apply({suc:-10,bac:-fee});tchPaid(k);spend(2);open()}})})}
+  const pc={suc:-10,bac:-fee,tch:k,khac:2};if(typeof kgDefer==="function")kgDefer(pc,open);else{apply({suc:pc.suc,bac:pc.bac});tchPaid(k);spend(pc.khac);open()}})})}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-rcpmt],[data-rcpls],[data-rcpq]");if(!b||b.disabled)return;ev.stopPropagation();
  if(b.dataset.rcpmt)rcpMaster(b.dataset.rcpmt);else if(b.dataset.rcpls)rcpListOpen(b.dataset.rcpls);else rcpAskQ(b.dataset.rcpq)},true);
 /* Tài nghệ cards: the teacher button with its real cost, the new-sub-style teacher at bậc 5, the learnt sub-styles */
@@ -82039,7 +82039,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bd97db600507";window.CTM_BUILD=BUILD;
+const BUILD="141a2a1b99f7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

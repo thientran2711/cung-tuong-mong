@@ -151,7 +151,7 @@ function wkAsk(k,mode,run){const a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode===
 (function(){const l0=lessonMode;lessonMode=function(k,mode){if(wkPend||!wkLessonOK(k,mode))return l0.apply(this,arguments);wkAsk(k,mode,()=>l0.call(this,k,mode))}})();
 /* practice once mastered: j82's playArt gives the raw score directly when present; otherwise the art's lesson game */
 function wkPractice(k){if(!wkLessonOK(k,"prac"))return;wkAsk(k,"prac",()=>{if(!wkLessonOK(k,"prac"))return;
- if(typeof playArt==="function"&&typeof kgDefer==="function"){kgDefer({suc:-10,khac:2},()=>wkPracOpen(k));return}apply({suc:-10});spend(2);wkPracOpen(k)})}
+ const pc={suc:-10,khac:2};if(typeof playArt==="function"&&typeof kgDefer==="function"){kgDefer(pc,()=>wkPracOpen(k));return}apply({suc:pc.suc});spend(pc.khac);wkPracOpen(k)})}
 /* KIT §13.9: the practice charge (Sức -10, 2 khắc) is taken on «Sẵn sàng» (kgDefer); the ✕ before it = free back */
 function wkPracOpen(k){{
  if(typeof playArt==="function"){const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;S.mg={k,l:5,mode:"prac",wk:pick,pa:1};

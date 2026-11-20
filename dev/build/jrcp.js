@@ -264,7 +264,7 @@ function rcpMaster(k){if(!S||S.dead||Q.length||S.mg||(S.arts[k]||0)<5||!can(2)||
   const open=()=>{const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;S.mg={k,l:5,mode:"prac",wk:pick,pa:1};
   try{playArt({art:k,title:`Học ${an} với thầy`,quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},onDone:(raw,o)=>{S.mg=null;if(o&&o.skipped)log("Học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,cl(Math.round(raw),0,10),"học với thầy");render()}})}catch(x){S.mg=null}};
   /* KIT §13.9: Sức, the fee, the favour owed and 2 khắc are taken on «Sẵn sàng» (kgDefer); the ✕ before it = free back */
-  if(typeof kgDefer==="function")kgDefer({suc:-10,bac:-fee,tch:k,khac:2},open);else{apply({suc:-10,bac:-fee});tchPaid(k);spend(2);open()}})})}
+  const pc={suc:-10,bac:-fee,tch:k,khac:2};if(typeof kgDefer==="function")kgDefer(pc,open);else{apply({suc:pc.suc,bac:pc.bac});tchPaid(k);spend(pc.khac);open()}})})}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-rcpmt],[data-rcpls],[data-rcpq]");if(!b||b.disabled)return;ev.stopPropagation();
  if(b.dataset.rcpmt)rcpMaster(b.dataset.rcpmt);else if(b.dataset.rcpls)rcpListOpen(b.dataset.rcpls);else rcpAskQ(b.dataset.rcpq)},true);
 /* Tài nghệ cards: the teacher button with its real cost, the new-sub-style teacher at bậc 5, the learnt sub-styles */
