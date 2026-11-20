@@ -2,3 +2,14 @@ base: dev/art/dong_hientai/s62_t7_DONG_HIENTAI_cloak5.txt
 allow: floor-length robe with slippers visible   # owner Lượt 1488 (C #10, DESIGN13): Phi soft/light like Tần; s62 t7/t8 neat like m02 (m02 wording / boilerplate said earlier); cloak6
 allow: The item is in a contrasting colour   # owner Lượt 1488 (C #10, DESIGN13): Phi soft/light like Tần; s62 t7/t8 neat like m02 (m02 wording / boilerplate said earlier); cloak6
 allow: not the robe colour   # owner Lượt 1488 (C #10, DESIGN13): Phi soft/light like Tần; s62 t7/t8 neat like m02 (m02 wording / boilerplate said earlier); cloak6
+allow: shoulders and face squarely facing the viewer   # owner Lượt 1490 + C #10 decision (L1488/L1490 neatness test): t7/t8 fur = Lông 2 (s62_t6 fur words verbatim); s62 t7/t8 turned angle + compact hold; cloak6
+allow: her weight and the item on her LEFT side   # owner Lượt 1490 + C #10 decision (L1488/L1490 neatness test): t7/t8 fur = Lông 2 (s62_t6 fur words verbatim); s62 t7/t8 turned angle + compact hold; cloak6
+allow: THICKEST and most luxurious band of deep   # owner Lượt 1490 + C #10 decision (L1488/L1490 neatness test): t7/t8 fur = Lông 2 (s62_t6 fur words verbatim); s62 t7/t8 turned angle + compact hold; cloak6
+allow: plush soft plain ivory-white fur trim   # owner Lượt 1490 + C #10 decision (L1488/L1490 neatness test): t7/t8 fur = Lông 2 (s62_t6 fur words verbatim); s62 t7/t8 turned angle + compact hold; cloak6
+allow: far wider and fuller than at any lower rank   # owner Lượt 1490 + C #10 decision (L1488/L1490 neatness test): t7/t8 fur = Lông 2 (s62_t6 fur words verbatim); s62 t7/t8 turned angle + compact hold; cloak6
+allow: about three and a half hands wide and visibly thick and lush   # owner Lượt 1490 + C #10 decision (L1488/L1490 neatness test): t7/t8 fur = Lông 2 (s62_t6 fur words verbatim); s62 t7/t8 turned angle + compact hold; cloak6
+allow: warm and sumptuous   # owner Lượt 1490 + C #10 decision (L1488/L1490 neatness test): t7/t8 fur = Lông 2 (s62_t6 fur words verbatim); s62 t7/t8 turned angle + compact hold; cloak6
+allow: softly rounded and full   # owner Lượt 1490 + C #10 decision (L1488/L1490 neatness test): t7/t8 fur = Lông 2 (s62_t6 fur words verbatim); s62 t7/t8 turned angle + compact hold; cloak6
+allow: yet neat and elegant   # owner Lượt 1490 + C #10 decision (L1488/L1490 neatness test): t7/t8 fur = Lông 2 (s62_t6 fur words verbatim); s62 t7/t8 turned angle + compact hold; cloak6
+allow: a jade flute with gold-filigree bands and gem tassels held low at her side   # owner Lượt 1490 + C #10 decision (L1488/L1490 neatness test): t7/t8 fur = Lông 2 (s62_t6 fur words verbatim); s62 t7/t8 turned angle + compact hold; cloak6
+allow: Even while her hands are raised to hold her item at chest height   # C #10 decision L1488/L1490: compact hold + boilerplate trim to fit 10 000 (said earlier in the prompt); cloak6

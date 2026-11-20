@@ -79,3 +79,28 @@ NOT changed, needs the FOREMAN: points 1–2 are the seeded angle/pose slots (E1
 FUR byte-identical vs _cloak4: 7/7
 
 Proof: keep_check --sidecar ×7 PASS · --all 165 PASS · fur byte-identical vs _cloak4 ×7 · check_store s62 t5/t7/t8: same FAIL sentences as _cloak5 (only the match scores moved), no new FAIL, no LEN.
+
+## _cloak6 UPDATE (in place): owner Lượt 1490 fur + C #10 decision (owner-test change, L1488/L1490 neatness)
+Owner L1490: "Nếu vậy cho lông của hqp và hh bằng lông 2 đi. Xem thử có đỡ cồng kềnh hơn không".
+- FUR (the ONLY fur change, ordered by the owner): s62 + m02 t7/t8 WINTER fur words = s62_t6 fur words VERBATIM (Lông 2: "a VERY WIDE … about two and a half hands wide … rich, warm and cosy, yet lying smooth and close, never puffy or bulky"). The collar noun stays "cloud collar" (rank-correct, the same as t6).
+- ANGLE (C #10 decision): s62's real store plan (build_all a18) is t1 = idx3 frontal, t2 = idx7 frontal mirrored, t3 = idx11 ¾ RIGHT, t4 ¾ LEFT, t5 frontal, t6 15° LEFT. The old Đông t7/t8 (idx7 / idx3) therefore repeated t2/t1. The new angles use FREE indices:
+  - t7 = idx8 "a SLIGHT turn toward the RIGHT (about 15 degrees) … whole face clearly visible and towards the viewer".
+  - t8 = idx2 "a clear THREE-QUARTER view toward the RIGHT, NOT frontal … face fully visible".
+  Note: idx2 is a free index, but it is the same visual class (¾ right) as t3's idx11. No turned class was left unused; the foreman should confirm.
+- COMPACT HOLD: t7 flute "held low at her side" → "held close at her waist in both hands, sleeves falling close,"; t8 hairpin "held in the hand raised and admired, the other hand beneath it" → "held close at her waist in both hands, sleeves falling close,".
+- Trims to fit 10 000 (said elsewhere in the same prompt): "Even while her hands are raised to hold her item at chest height, each wide sleeve" → "Each wide sleeve" (also wrong now that the hands are at the waist); t7 ANGLE "; her head turns together with her shoulders and body" (the HEAD AND BODY line says it); t8 "and its hem lies on the floor beside her feet" → "to the floor" (SLEEVE LENGTH already says it touches the floor); t8 "fair porcelain skin;" (said in line 1).
+- Chars: s62_t7 9952 · s62_t8 9982 · m02_t7 9905 · m02_t8 9894.
+
+FUR t4–t6: byte-identical vs _cloak4 (3/3). t7/t8 fur clause now == s62_t6 fur clause (4/4).
+FUR DIFF t7/t8 (identical for s62 t7, s62 t8, m02 t7, m02 t8): "the WIDEST, THICKEST and most" → "a VERY WIDE,"; "deep, dense, plush" → "thick"; "far" → ""; "and fuller" → ""; "any" → "the"; "rank," → "ranks,"; "three" → "two"; "wide and visibly thick and lush," → "wide,"; "sumptuous, softly rounded" → "cosy, yet lying smooth"; "full, yet neat and elegant;" → "close, never puffy or bulky;"
+
+WORD DIFF _cloak5 → _cloak6, NON-FUR (final):
+- s62_t4: (unchanged)
+- s62_t5: "FLAT" → "FLAT, THIN"; "SOFT:" → "LIGHT like the Tần's:"; "layered" → "very thin"; "supple" → ""; "bands draping with the shoulders," → "bands, so thin and close that they read as ONE soft layer,"; "one over" → ""; "other (the" → ""; "narrower), each" → "a little narrower,"; "small" → "tiny"; "each" → ""; "with ONE short row of" → "a few"; "beneath" → "at"; "band," → "edge,"; "small" → "sparse tiny"; "and small jade beads" → ""; "" → "them (like"; "bands (the same kind of beaded pearl net as the Tần's);" → "Tần's), never a raised cap, never puffed or stiff;"
+- s62_t6: (unchanged)
+- s62_t7: "" → "close-fitting, never a raised cap,"; "robe with slippers visible;" → "robe, only slipper toe tips peeking under the hem;"; "Even while her hands are raised to hold her item at chest height, each" → "Each"; "FULLY FRONTAL," → "a SLIGHT turn toward the RIGHT side of the picture (about 15 degrees):"; "body, shoulders" → "chest"; "squarely facing" → "point a little toward the right edge of the picture, the shoulder on the picture's left side slightly nearer"; "no turn, mirrored: her weight" → "the whole face clearly visible"; "" → "towards"; "item on her LEFT side; her head turns together with her shoulders and body," → "viewer,"; "low" → "close"; "side," → "waist in both hands, sleeves falling close,"; "item is in a contrasting colour, not the robe colour; the" → ""
+- s62_t8: "fair porcelain skin;" → ""; "" → "close-fitting, never a raised cap,"; "floor-length robe with slippers visible," → ""; "sides; the most splendid outfit of all, clearly grander than every other rank." → "sides."; "Even while her hands are raised to hold her item at chest height, each" → "Each"; "and its hem lies on" → "to"; "floor beside her feet;" → "floor;"; "FULLY FRONTAL," → "a clear THREE-QUARTER view toward the RIGHT side of the picture, NOT frontal:"; "" → "whole"; "shoulders" → "shoulders, hips"; "squarely facing" → "turned about 45 degrees so that her chest and face point toward the right edge of the picture, the shoulder on the picture's left side nearer"; "her weight resting on her RIGHT foot;" → "face fully visible;"; "" → "phoenix"; "on" → "along"; "dangles," → "dangles"; "" → "close at her waist"; "the hand raised and admired, the other hand beneath it," → "both hands, sleeves falling close,"; "No" → "Floor-length robe, only slipper toe tips peeking under the hem, no"
+- m02_t7: (unchanged)
+- m02_t8: (unchanged)
+
+Proof: keep_check --sidecar ×7 PASS · --all 165 PASS · fur t4–t6 byte-identical vs _cloak4 · t7/t8 fur == s62_t6 fur (×4, script) · check_store s62 t7/t8 and m02 t7/t8: same FAIL count/set as _cloak5 (no new FAIL, no LEN).
