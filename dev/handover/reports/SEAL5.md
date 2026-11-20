@@ -76,3 +76,20 @@ COORDINATOR (ROOT-57) opens the successor (SEAL6). Everything is in place:
 - Rules: Lượt 781 GO all Thái hậu, units of ~4 to ROOT-57 as you go, no waiting; Lượt 777 NO redo gens; refused gen → send ROOT-57 the
   exact call and continue with the next seal. Branch claude/cung-tuong-mong-handover-hj0h8w only; gen_ledger.jsonl is skip-worktree →
   `git update-index --no-skip-worktree` first; on merge conflict keep BOTH sides (drop <<< === >>> lines), check every line parses as JSON.
+
+## ORDERS that arrived during units 4–5 (read 20/11 ~00:00Z) — for SEAL6, they OVERRIDE the handover above where they differ
+- FOREMAN is now ROOT-58 (session_01PEhRbuLwt3mGKRm2EJUf5s); ROOT-57 handed over. Report ONLY to ROOT-58.
+- Owner Lượt 811: finish ALL remaining Thái hậu seals in ONE run, NO per-unit sends; then send the WHOLE set to ROOT-58 at once
+  (preview MP4(s) + frame sheets + fault list + credits). No redo gens; faults listed. Units 3–5 are OK'd (unit 3 Lượt 809).
+- Owner Lượt 798/803: th-dau REDRAW (A + B + OUT/LOOP/BACK, one try each, ≈3.1k) with the heart-ache wording — DONE in th_prompts.py
+  by SEAL5 (prompt only, not generated): brows knitted, eyes half-lowered + glistening, ONE tear at the eye corner, lips pressed, hand on
+  her heart; no sobbing / open mouth / streams / flying tears. Include the new th-dau in the final set.
+- Owner Lượt 803 DE-DUP (NOT done yet — do it BEFORE drawing): check all 38 keys for pairs that could read alike (buồn vs đau lòng vs
+  crying-like, lo vs sợ, hờn vs giận, chán vs khó chịu, act-x vs x …) and give each one a clearly different gesture/symbol in
+  th_prompts.py; list the distinctions in this file and send them to ROOT-58.
+- Owner Lượt 800: no 'Qing' words — DONE (WHO now "of the imperial inner palace"; no Qing/liangbatou/two-winged anywhere). Crown stays.
+- No disc near chroma green — DONE in th_prompts.py: hanghai + act-hanghai → "bright coral" (same as the other groups), act-ghen →
+  "deep jade-teal". th-hanghai itself is OK'd by the owner, NOT redone.
+- Owner: every preview/sheet caption must show the Vietnamese name WITH accents (an → «Ẩn – chưa rõ tâm trạng», binh → Bình thường,
+  dau → Đau lòng, …), never bare keys → th_sheet.py / th_preview.py need a key→name map (not done by SEAL5).
+- Owner Lượt 812: SEAL2/3/4 copy th_prompts.py word for word → keep it current and pushed.
