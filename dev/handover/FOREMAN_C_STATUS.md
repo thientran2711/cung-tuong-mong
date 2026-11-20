@@ -552,3 +552,4 @@ NEWACCT-ROOT ~16:06Z: THANCAN1 session_01D3E3NamKF1fT7crbjQHg3n opened (thân c�
 NEWACCT-ROOT ~16:15Z: MAID7 round 3 DONE 9c519901 (810 cr), sheet sent Lượt 1159. MAID7 rolled (26.5 %) → MAID8 session_01D3E3NZtN8SBFowp8wT25RP opened for maid7d (4+4 variants, 1 080 cr).
 NEWACCT-ROOT HANDOVER ~16:20Z: depth 0, ctx 41 % (START ~8 % + 25 % passed). TAKEOVER_FOREMAN_C_NEWACCT2.md written; opening child successor.
 NEWACCT-ROOT ~16:22Z: successor #2 session_01D3E3NZjsQSKDvCk39HnE5m opened; 5 workers told to report there. NEWACCT-ROOT stops.
+NEWACCT-ROOT ~16:25Z: OWNER: chưởng sự sleeves = nhất đẳng width, no narrow sleeves (rule added, MAID8 told). Successor #2 please confirm with MAID8.
