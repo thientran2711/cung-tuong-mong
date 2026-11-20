@@ -596,6 +596,91 @@ def nhat_tc():
     return out
 
 
+
+# ===== MAIDP3: owner L1545 (C #12) — corrections =====
+# (4) nhất short top tà was not visible -> say where, length, colour contrast
+NHAT_TA_NGAN2 = (" and ON TOP, in FRONT of these two long front panels, ONE more SHORT front panel (tà ngắn) that is clearly visible: "
+                 "a single short, wide embroidered panel hanging straight down from the waist sash at the CENTRE FRONT of her body, "
+                 "overlapping the inner edges of both long panels, ending at mid-thigh (about half as long as the long panels), in a "
+                 "CONTRASTING colour (powder blue against the deep rose long panels) with its own gold-edged border, never hidden "
+                 "behind the held item, the hands or the sash bow, so TWO layers of front panels are clearly visible at the front "
+                 "(the short top panel over the two long ones),")
+NHAT_PLACE_OLD = 'the sleeveless over-vest, its two long front panels and the short top front panel are deep rose.'
+NHAT_PLACE_NEW = ('the sleeveless over-vest and its two long front panels are deep rose; the short top front panel is powder blue '
+                  'with a deep rose gold-edged border, so it stands out clearly against them.')
+
+
+def nhat5():
+    base = D + 'nhat_gpt_v4.txt'
+    t = open(base, encoding='utf-8').read()
+    t = swap(t, NHAT_TA_NGAN, NHAT_TA_NGAN2)
+    t = swap(t, NHAT_PLACE_OLD, NHAT_PLACE_NEW)
+    out = D + 'nhat_gpt_v5.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [('and ON TOP of these two long front panels ONE more SHORTER front panel', 'owner Lượt 1545: tà ngắn made clearly visible'),
+                     ('a single short embroidered panel with a gold-edged border hanging at the centre front from the waist sash', 'owner Lượt 1545: + where/length/contrast'),
+                     (NHAT_PLACE_OLD, 'owner Lượt 1545: short panel in contrasting powder blue')])
+    return out
+
+
+# (3) tam: square collar did not show -> stronger words
+TAM_SQ_STRONG = ("a clearly visible SQUARE neckline (cổ vuông, fangling) on the jacket: a flat embroidered collar band runs straight "
+                 "DOWN from each side of the neck and turns at a RIGHT ANGLE into a straight HORIZONTAL edge across the upper chest, "
+                 "framing a clear SQUARE (box-shaped) opening, inside which the inner robe's crossed collar shows; below the square "
+                 "opening the jacket's two front edges meet edge to edge, closed with one small knot button; NEVER a crossed or wrap "
+                 "collar, NEVER a V-neck, never a tall upright stand collar")
+# (2) thân cận: ONE extra garment layer per grade (open front, so the square collar stays in view)
+TC_EXTRA_VEST = ("; OVER the jacket she also wears ONE extra layer that marks her as a thân cận maid: a short sleeveless over-vest "
+                 "(bijia) in %s, worn OPEN at the front with its straight edges hanging down on each side, ending at the hip, with "
+                 "a narrow band of small embroidered flowers along its edges, so the jacket's square collar stays fully visible between them")
+TC_EXTRA_NHAT = ("; OVER the vest she also wears ONE extra layer that marks her as a thân cận maid: a short cropped half-sleeve "
+                 "open jacket (bolero) in %s ending just above the waist, worn OPEN at the front, with a narrow band of small "
+                 "embroidered flowers along its edges, so the vest's square collar stays fully visible between its fronts")
+
+
+def tamdang_tc2():
+    base = D + 'tamdang_thancan_gpt.txt'
+    t = open(base, encoding='utf-8').read()
+    t = swap(t, 'with ' + sq_collar('jacket') + ', in', 'with ' + TAM_SQ_STRONG + ', in')
+    t = swap(t, '(never a plainer or duller cloth),', '(never a plainer or duller cloth)' + (TC_EXTRA_VEST % 'deep rose like #CA7281') + ',')
+    out = D + 'tamdang_thancan_gpt_v2.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [('a SQUARE collar (cổ vuông', 'owner Lượt 1545: tam square collar stronger'),
+                     ('with a SQUARE collar', 'owner Lượt 1545: -> clearly visible SQUARE neckline'),
+                     ('a flat embroidered collar band that runs straight down from each side of the neck and turns at a right angle', 'owner Lượt 1545: stronger square words'),
+                     ('framing a square opening at the upper chest', 'owner Lượt 1545')])
+    return out
+
+
+def nhi_tc2():
+    base = D + 'nhi_thancan_gpt.txt'
+    t = open(base, encoding='utf-8').read()
+    t = swap(t, NHI2_TWO_TA + ';', NHI2_TWO_TA + (TC_EXTRA_VEST % 'deep rose like #CA7281') + ';')
+    out = D + 'nhi_thancan_gpt_v2.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [])
+    return out
+
+
+def nhat_tc2():
+    base = D + 'nhat_thancan_gpt.txt'
+    t = swapcol(open(D + 'nhat_gpt_v5.txt', encoding='utf-8').read())
+    t = swap(t, NHAT_R2_COLLAR, 'a sleeveless embroidered over-vest with ' + sq_collar('vest') +
+             ', with a band of gold-edged trim down the front, worn over a crossed-collar inner robe')
+    t = swap(t, "(a touch deeper than a lower maid's blue), the sleeves blue all the way down",
+             "(a touch deeper than a lower maid's rose), the sleeves rose all the way down")
+    t = swap(t, 'never stiff, padded, flat or board-like;', 'never stiff, padded, flat or board-like' + (TC_EXTRA_NHAT % 'deep rose like #CA7281') + ';')
+    t = swap(t, 'so it stands out clearly against them.', "so it stands out clearly against them. The inner robe's crossed collar "
+             "showing inside the square collar opening is deep rose (PINK), never blue.")
+    t = tc_cap(t, 'Cung nữ nhất đẳng')
+    out = D + 'nhat_thancan_gpt_v2.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [('and ON TOP of these two long front panels ONE more SHORTER front panel', 'owner Lượt 1545: tà ngắn made clearly visible'),
+                     ('a single short embroidered panel with a gold-edged border hanging at the centre front from the waist sash', 'owner Lượt 1545'),
+                     ('the sleeveless over-vest, its two long front panels and the short top front panel are powder blue', 'owner Lượt 1545: short panel in contrasting colour')])
+    return out
+
+
 if __name__ == '__main__':
     # NOTE: mama51/mama65 (v2) and chuongsu (v2) are NOT in the default list: mama v2 was hand-edited by Foreman C (L1473).
     jobs = sys.argv[1:] or ['nhat', 'thancan', 'tamdang', 'nhat3', 'thancan3', 'chuongsu3', 'mama3_51', 'mama3_65', 'mama4_51', 'mama4_65']

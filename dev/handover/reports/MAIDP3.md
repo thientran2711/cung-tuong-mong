@@ -35,3 +35,13 @@ Builder jobs `chuongsu4 mama5_51 mama5_65 tamdang_tc nhi_tc nhat_tc`. 0 gens.
 - `nhi_thancan_gpt.txt` (7 695 ch): NHI2_CROSSED → square collar. LOST = only the crossed-collar words.
 - `nhat_thancan_gpt.txt` (9 084 ch): NHAT_R2_COLLAR (stand collar) → square-collar vest + "with a band of gold-edged trim down the front, worn over a crossed-collar inner robe"; also "lower maid's blue / sleeves blue all the way down" → "rose" (colour swap). LOST = stand-collar words + "blue" ×2.
 Gates: keep_check --sidecar PASS ×6, --all 195 PASS. check_store --scope mama: nhat_tc PASS. The other fails are the same as their bases: tamdang/nhi_tc S01+S32 (maid scope), ma ma v5 S19 (also in v4), chuongsu_v4 S01 (v3 had S01+S32).
+
+## L1545 (C #12) — corrections. Builder jobs `nhat5 tamdang_tc2 nhi_tc2 nhat_tc2`. 0 gens.
+1. MA MA: `mama_gpt_v5_a51/_a65` are **SUPERSEDED / dropped** (owner misspoke). mama_gpt_v4_a51/a65 stay current. chuongsu_gpt_v4 stays (owner: "Trưởng sự ổn").
+2. THÂN CẬN + ONE extra layer (open front, so the square collar stays visible; K27 small flowers; colours stay flipped):
+   - tam + nhị: a short sleeveless over-vest (bijia) in deep rose #CA7281, worn OPEN over the (powder-blue) jacket, ending at the hip, with a narrow small-flower edge band (TC_EXTRA_VEST).
+   - nhất: a short cropped half-sleeve open jacket (bolero) in deep rose #CA7281 over the (powder-blue) vest, ending just above the waist (TC_EXTRA_NHAT).
+3. TAM thân cận square collar → TAM_SQ_STRONG: "clearly visible SQUARE neckline … straight DOWN … RIGHT ANGLE into a straight HORIZONTAL edge across the upper chest … clear SQUARE (box-shaped) opening … NEVER a crossed or wrap collar, NEVER a V-neck".
+4. NHẤT tà ngắn (nhat_gpt_v5 + nhat_thancan_v2): NHAT_TA_NGAN2 — short wide panel from the sash at the CENTRE FRONT, overlapping the inner edges of both long panels, ending at mid-thigh (~half length), CONTRASTING colour (normal: powder blue on rose panels; thân cận: rose on blue panels), own gold-edged border, never hidden behind the item, hands or sash bow. Colour placement now gives the short panel the contrasting colour.
+5. NHẤT thân cận: + "The inner robe's crossed collar showing inside the square collar opening is deep rose (PINK), never blue."
+Files: nhat_gpt_v5 (9 534 ch), tamdang_thancan_gpt_v2 (8 536), nhi_thancan_gpt_v2 (8 063), nhat_thancan_gpt_v2 (9 897; built as nhat_v5 + the same thân cận transform + 3 and 5). keep_check --sidecar PASS ×4, --all 207 PASS. Word diff LOST: nhat_v5 {front, centre, SHORTER} (old tà sentence reworded); tam_tc_v2 {right, angle} (now "RIGHT ANGLE"); nhi_tc_v2 {}; nhat_tc_v2 {centre, SHORTER}.
