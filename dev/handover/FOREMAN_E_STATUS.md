@@ -953,3 +953,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   Depth-8 sessions (E21r2, E22t, E26r, E25r) cannot roll themselves: when one reaches its roll point, YOU open its successor. SEATS 8 / 12 (E21r2, E22t, E22i, E26b, E26r, E25r, E30 + E #22).
   Own wake trig_01Lcace3xYxn5QAj5hwcmHVx → disabled by me at handover. Worktree /home/user/wt/ho (sparse).
   → child FOREMAN E #22 = session_01DgYSWkbUPtieeBFfn8grWT (opus, depth 3; first attempt session_01DgYSWpvwJEo1haLLQzDjnT had no repo attached → archived). My wake trig_01Lcace3xYxn5QAj5hwcmHVx disabled. FOREMAN E #21 stops now.
+- (20/11 19:50Z) (relayed by E #21 after handover) E22t: pm r4 65b54c9d probe fix REVIEWED OK; all gates green on LIVE 983a9436 (1d73e67d); LIVE moved → merged onto 415b9ca0 = 161b0ad5 (FF), full gates + choice-value-scan re-running (~55 min) → LAND READY after.
