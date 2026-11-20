@@ -549,7 +549,7 @@ window.kitBranchMap=kitBranchMap;window.kitBranchMapMount=kitBranchMapMount;wind
 .kbm{display:flex;flex-direction:column;gap:8px;color:var(--ink);font-size:.84rem}
 .kbm-c{align-self:flex-start;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--k-card2);color:var(--k-lab);font-weight:700;font-size:.76rem}
 .kbm-sp{list-style:none;margin:0;padding:0 0 0 14px;position:relative}
-.kbm-n{position:relative;display:flex;align-items:center;flex-wrap:wrap;gap:4px 10px;min-height:34px;padding:2px 0 2px 22px;cursor:pointer}
+.kbm .kbm-n{position:relative;display:flex;align-items:center;flex-wrap:wrap;gap:4px 10px;min-height:34px;padding:2px 0 2px 22px;cursor:pointer}/* specificity (0,2,0): the Sổ luân hồi mount (.kpmain li{padding:2px 0}, 0,1,1) zeroed the 22px room of the dot and the dot sat on the first letter (ge-map, GE03) */
 .kbm-n::before{content:"";position:absolute;left:6px;top:0;bottom:0;border-left:2px solid var(--gold)}
 .kbm-n:first-child::before{top:50%}.kbm-n:last-child::before{bottom:50%}
 .kbm-n.ahead::before{border-left:2px dotted var(--line)}
@@ -580,8 +580,8 @@ html:where(.kv2) .kbm-es4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .kbm-sl{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}
 .kbm-sl .kdh{max-width:100%}
 .kbm-slq{display:inline-flex}
-.kbm-f{display:flex;align-items:baseline;gap:5px;font-size:.76rem;color:var(--dim);border-top:1px dashed var(--k-hair);padding-top:4px}
-.kbm-f small{font-size:.66rem;color:var(--k-lab)}
+.kbm-f{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 5px;font-size:.76rem;color:var(--dim);border-top:1px dashed var(--k-hair);padding-top:4px}
+.kbm-f small{flex:none;font-size:.66rem;color:var(--k-lab)}
 .kbm-f.lit{color:var(--bad);font-weight:700}
 `;document.head.appendChild(st)})();
 
