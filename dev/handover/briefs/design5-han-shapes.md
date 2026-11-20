@@ -1,0 +1,21 @@
+# DESIGN5 — Hán ladder body shapes per rank (Foreman C #5; owner Lượt 1290/1291/1292 in #4 chat, logged FOREMAN_C_STATUS NEWACCT#4 lines 672+)
+Model OPUS (design). 0 credits — text only, NO gens.
+Read dev/art/START_ART_WORKER.md first (esp. §2 A38). Do not read big files whole.
+Files: dev/art/seasons4/s62_t{4..8}_HAN_BAC.txt (current = DESIGN4 ed3e8fd + #4 t4 throat-clasp fix; each has a .keep sidecar). Look at the owner's ChatGPT pictures dev/handover/review-sheets/owner-chatgpt/han_t6_quyphi_L1290.webp + han_t8_hoanghau_L1290.webp (the t6 picture shows the petal / pointed layered-panel "khuê y đuôi én" look she liked).
+Owner verdict: Hán prompts "nhìn chung khá là ổn" — keep everything that works (open wide collar + visible neck/V from DESIGN4, rank signature pieces, captions, colours, jewellery, embroidery).
+CHANGES (body/robe shape per rank so ranks differ clearly):
+- t4 Tần: take the petal / lotus layered pointed panels + swallowtail streamers look (khuê y đuôi én, the look in han_t6_quyphi_L1290) → fresh, lively. Fabric matte silk satin đoạn (unchanged).
+- t5 Phi: khúc cư (Hán A, curved wrap spiralling round the body) — "giống như cái plan lúc đầu". Fabric matte đoạn.
+- t6 Quý phi: trực cư (Hán B, straight-hem robe). Fabric = GẤM brocade (owner Lượt 1291 — replace the đoạn words in t6).
+- t7 Hoàng quý phi: KEEP as is ("vừa phải").
+- t8 Hoàng hậu: TONE DOWN bulk (too many layers + big collar) but must still look above HQP: about 4 visible layers like HQP, outer mantle falls straight and close (no width), cloud collar flatter/smaller with one pearl-fringe tier; rank shown by royal-yellow dominance, gold-thread gấm kim tuyến, densest embroidery, nine-phoenix crown, long train BEHIND her.
+- Each caption: update the outfit name to the new shape (LARGE bold top-left, G31).
+RULES: change ONLY shape words (and t6 fabric). NEVER cut other details; if >10 000 chars trim only boilerplate. Update each .keep (allow lines with reason "owner Lượt 1290/1291/1292") and run `python3 dev/art/keep_check.py --all` → PASS. Keep previous versions in dev/art/seasons4/han_bac_base/ (suffix _ed3e8fd) as the new base.
+Note gate conflicts (S12 phi bạch vs G32, S13 throat clasp vs open neck, M06/M07 vs đoạn) in your report; do not decide them.
+Report: dev/handover/reports/DESIGN5.md (per-rank change list, char counts, every cut). Push HEAD:claude/cung-tuong-mong-handover-hj0h8w (pull --rebase first). Do NOT send to the owner. When done send_message to Foreman C #5 session_01D3E3NZREEZJgYHBspQQs8q (or "@parent").
+
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
