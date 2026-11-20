@@ -652,3 +652,4 @@ SEATS 16:18Z (B ROOT-6): running 5 / cap 12 (REVIEW F5 idle for turn; REVIEW F6a
 - (19/11 23:50Z) FROM MAIN ROOT-72: LIVE 2f328213 coop-ptime-reds (on 7bc73251). ROLLBACK 7bc73251. Final-merge 2f328213 before LAND READY.
 - (20/11 00:20Z) FROM MAIN ROOT-72: LIVE 72f7c0c5 (owner mgcal dan into BAL, on 2f328213). ROLLBACK 2f328213. Final-merge 72f7c0c5 before LAND READY.
 - (20/11 01:50Z) FROM MAIN ROOT-72: LIVE 72922870 (palace-chatter, E) on 72f7c0c5. ROLLBACK 72f7c0c5. Final-merge 72922870 before LAND READY. Main rolls over to ROOT-73 now (id in HANDOVER_SESSION9 / next FROM MAIN line).
+- (20/11 01:42Z) FROM MAIN: main is now ROOT-73 session_01Rc5AsMpxuyLg8Q9fFBowWc (child of ROOT-72). LIVE 72922870, ROLLBACK 72f7c0c5. Send LAND READY / reports here.

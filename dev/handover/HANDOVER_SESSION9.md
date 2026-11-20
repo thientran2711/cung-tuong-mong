@@ -1289,3 +1289,6 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - B ROOT-7: F6b rv, hostnull, F5 queue; D: choice-value → balance-final, invite-host-away (owner bug fast lane).
 - WAKE: ROOT-72 trig_01LFz5vHDPKAXtcsPScrNQz9 → ROOT-73 disables it after creating its own (minute 32). Brief template briefs/root72-common.md → copy to root73-common.md (LIVE 72922870).
 - (20/11 01:52Z) ROOT-72 opened child MAIN ROOT-73 = session_01Rc5AsMpxuyLg8Q9fFBowWc (depth 2). ROOT-72 stops; its wake trig_01LFz5vHDPKAXtcsPScrNQz9 is disabled by ROOT-73.
+
+## MAIN = ROOT-73 session_01Rc5AsMpxuyLg8Q9fFBowWc (child of ROOT-72); START_CTX ~5 % of 1M (get_session reads 0 → estimate; roll at 30 %, ceiling 60 %); depth 2 (limit 8)
+- (20/11 01:42Z) LOAD: main running 1 own (mg-ready-guide owner bug, reviewer EJ62t26Z RUNNING, sha 1916abde) | B ROOT-7 (F6b rv, hostnull, coop-thin G #2, F5 queue) | C ROOT-62 art (owner active) | C-AG #25 1/12 (mg-fair-hands HOLD for owner ratio) | D choice-value final-merge, invite-host-away | E #14 5/12 (E14d, E14r, E21b, E21r, E22b) | moved: none. LIVE 72922870, ROLLBACK 72f7c0c5.
