@@ -478,3 +478,4 @@ ROOT-68 HANDOVER ~07:48Z: depth 2, ctx ~28 % (≥ START ~5 % + 25 % close). TAKE
 ROOT-69 ~07:52Z: depth 3, START_CTX ~5 % (est.; used_tokens reads 0). Took over from ROOT-68. Workers OLD4/REDRAW3/RANK8-A/B/C/FRUITPET2 + ROOT-58..68 told.
 ROOT-69: hourly check trigger = trig_01CFFH65FCGKiMGpiryTkMAf (delete on handover). Main now ROOT-76 session_01Rc5AsN56DP1NgSYAwWFJ8o.
 ROOT-69 07:58Z: s64+s65 cổ vuông tests LOOKED + sent (my chat + ROOT-67). Owner neckline verdict (style 1 for t1 AND t2, t2 outfit below unchanged) → RANK8-A builder+rule, 0 cr. REDRAW3: GO c06 data row. HQP jewel diff: wording identical s62/s64/s65 (reports/HQP-jewel-diff-ROOT69.md).
+ROOT-69 07:52Z: OWNER clarify t2 = t1 cut (low narrow square) + 2-layer trim; GO 1 test s62 t2 (~135 cr) → RANK8-A.
