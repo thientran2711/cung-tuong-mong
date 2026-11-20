@@ -46,6 +46,19 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
    S.rank=1;f.rank=3;const up=cardN();S.rank=3;f.rank=1;const low=cardN();
    const xy=pmX(S,f,"duel",{s:"bac"});const bY=S.bac+f.bac,sb=S.bac;window.COOPW.inv=1;window.COOPW.yd=true;const ry=ACT.pmduel.f(S,f,xy);window.COOPW.yd=false;
    out.coopY={up,low,ry,gain:S.bac-sb,V:pmV(S,f),cons:S.bac+f.bac===bY};S.rank=r0;f.rank=f0}Object.assign(window.COOPW,cw0);window.COOPW.inv=0;rivals.splice(rivals.indexOf(f),1);
+  /* (10) review r1 fixes (r2): 1+2 the friend's card = the NPC card with her pick x; 3 NPC practice = addArtP; 4 receiver weights own key; 5 walk on her card; 6 wording */
+  {const f2=Object.assign({},t,{id:9902,coop:true,name:"Hảo hữu",rl:{},ro:{},inv:[],bac:300,danh:50});rivals.push(f2);S.bac=Math.max(S.bac,200);
+   const xs=pmX(f2,S,"duel",{s:"bac"});const c7=PEND.thInv({id:"t10",k:"pmduel",who:"Hảo hữu",v:f2.id,x:xs});const c8=PEND.thInv({id:"t10b",k:"pmplay",who:"Hảo hữu",v:f2.id,x:pmX(f2,S,"play")});
+   out.fc={h:c7&&String(c7.t),o:c7&&c7.o.map(o=>[o.n,o.x]),hp:c8&&String(c8.t),op:c8&&c8.o.map(o=>[o.n,o.x]),n:xs.n,X:pmCoopX("pmduel",JSON.parse(JSON.stringify(xs)))};rivals.splice(rivals.indexOf(f2),1)}
+  {const ak=(ARTS.find(z=>typeof KG82_PLAIN==="object"&&KG82_PLAIN[z.k])||ARTS[0]).k;const v=V.find(x=>x.arts&&x.arts[ak]!=null&&x.arts[ak]<4)||V[0];v.arts=v.arts||{};if(v.arts[ak]==null)v.arts[ak]=1;v.artp=v.artp||{};const l0=v.arts[ak];v.artp[ak]=l0+1;
+   const st=(ARTS.find(z=>z.k===ak)||{}).st;const s0=v[st]||0;let called=0;const a0=window.addArtP;window.addArtP=function(){called++;return a0.apply(this,arguments)};
+   try{pmPlayEnd(v,a,{a:"play",kind:KG82_PLAIN[ak]||"dauho",ak,n:"x"},8,8)}finally{window.addArtP=a0}out.xp={ak,l0,l1:v.arts[ak],st,s0,s1:v[st]||0,called}}
+  out.rk={pm:BAL.rcv.k.pm,on:BAL.pm.rcvOn,help:BAL.rcv.k.help};
+  {const far=V.find(x=>!together(S,x))||a;const xx=pmX(far,S,"play");Q.length=0;rcvAsk("pmPlay",far,S,xx);const q=Q[0];out.walkPlay=q?q.opts[0].x:null;Q.length=0;
+   rcvAsk("pmDuel",far,S,pmX(far,S,"duel",{s:"bac"}));out.walkDuel=Q[0]?Q[0].opts[0].x:null;Q.length=0;out.farTc=travel(S.place,whereOf(far))}
+  {const h=rvCard(a,rivals.indexOf(a));out.btnX=(h.match(/data-pmgo[^>]*>[\s\S]*?<\/button>/g)||[]).join(" ").replace(/<[^>]+>/g," ");out.rowX=pmRows(a).map(o=>o.x);
+   const pk=PEND.pmPick({v:a.id,a:"duel"});out.pickX=pk?pk.o.filter(o=>o.x).map(o=>o.x):[];
+   const n0=S.logs.length;Q.length=0;const v=a;v.pmW=null;S.pmMeW=null;S.pmMeN=0;const r=AGRUN["cx3:pmPlay"](v,S);out.runR=r;Q.length=0}
   /* (9) Emperor summons untouched (law 16): the functions still exist and run */out.ts=typeof tsSummonKind==="function"&&typeof tsSummonOdds==="function"&&typeof tsSummonGo==="function";
   return out});
  const L=r.ladder;const lad=x=>L.some(w=>x.startsWith(w+" ·")||x===w);
@@ -64,6 +77,14 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
  ok(r.card3===2&&r.walk,'Hậu cung card: both buttons in «Gặp mặt», bound to walking to her (goSee) or her place unknown',{n:r.card3,walk:r.walk});
  ok(/thắng|ván/.test(r.coop.r1)&&r.coop.cons&&r.coop.ask,'co-op friend: the accepted duel resolves by both hands, bạc conserved; both acts are ask acts',r.coop);
  ok(r.coopY&&r.coopY.up.includes('Nhường bề trên')&&!r.coopY.low.includes('Nhường bề trên')&&/nhường/.test(r.coopY.ry)&&r.coopY.gain===r.coopY.V&&r.coopY.cons,'co-op friend card: «Nhường bề trên» when the asker outranks (same as NPC), the yield pays the stake, bạc conserved',r.coopY);
+ ok(r.fc.h&&r.fc.h.includes(r.fc.n)&&/Cược:/.test(r.fc.h)&&r.fc.o&&r.fc.o[0][0]==='Nhận lời thách đấu'&&lad(r.fc.o[0][1])&&/thành:/.test(r.fc.o[0][1])&&/hỏng:/.test(r.fc.o[0][1])&&r.fc.o.some(o=>o[0]==='Từ chối'&&/được:/.test(o[1])&&/mất:/.test(o[1])),'r2 fix 2: the friend\'s duel card = the NPC card (game, stake, ladder word, gain + cost)',r.fc);
+ ok(r.fc.hp&&r.fc.hp.includes('chơi')&&r.fc.op&&r.fc.op[0][0]==='Nhận lời'&&/được:/.test(r.fc.op[0][1])&&/mất:/.test(r.fc.op[0][1])&&!/đi sang/.test(r.fc.hp+JSON.stringify(r.fc.op)),'r2 fix 2: the friend\'s pastime card = the NPC card, no walk line for the co-op friend',{h:r.fc.hp,o:r.fc.op});
+ ok(r.fc.X&&r.fc.X.kind&&r.fc.X.n===r.fc.n&&'s' in r.fc.X,'r2 fix 1: her pick survives the JSON carrier (pmCoopX)',r.fc.X);
+ ok(r.xp.called>=1&&r.xp.l1===r.xp.l0+1&&r.xp.s1>r.xp.s0,'r2 fix 3: NPC practice goes through addArtP (level-up gives the stat as for anyone)',r.xp);
+ ok(Array.isArray(r.rk.on)&&r.rk.pm.every((w,i)=>w===r.rk.help[i]*r.rk.on[i])&&r.rk.pm[3]===0,'r2 fix 4: BAL.rcv.k.pm = help weights × BAL.pm.rcvOn (own key)',r.rk);
+ ok(r.farTc>0&&/đi sang .+ \d+ khắc/.test(r.walkPlay||"")&&/tốn: đi sang .+ \d+ khắc/.test(r.walkDuel||""),'r2 fix 5: her invite / challenge card shows the walk khắc',{tc:r.farTc,play:r.walkPlay,duel:r.walkDuel});
+ ok(!/có thể (nhận lời|từ chối)/.test(r.btnX+r.rowX.join(" "))&&r.pickX.every(x=>!/\)$/.test(x)&&/^(Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc) · nàng bậc/.test(x)),'r2 fix 6a: labelled segments only (no stray «nàng có thể từ chối», the level note before the labels)',{btn:r.btnX.slice(0,300),row:r.rowX,pick:r.pickX});
+ ok(!/[.]\s*$/.test(r.runR||"")&&!/\.\./.test(r.runR+"."),'r2 fix 6b: the day-plan line has one full stop when logged',r.runR);
  ok(r.ts,'Emperor summons (jts tsSummon*) still in place');
  /* (6) NPC day plan over ≥ 10 days (fresh page) */
  const p2=await b.newPage();p2.on('pageerror',e=>errs.push(e.message));/* a seeded Math.random for the 200-buổi day plan (the role-parity-scan idiom): the world it starts from is the same each run */await p2.addInitScript(()=>{let s=7;Math.random=()=>{s=(s*16807)%2147483647;return (s-1)/2147483646}});await p2.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());await p2.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p2.waitForTimeout(2500);

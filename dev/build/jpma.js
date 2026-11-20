@@ -22,6 +22,8 @@ const nm=p=>p===S?"ngươi":p&&p.name||"";
 const Nm=p=>p===S?"Ngươi":p&&p.name||"";
 const rk=p=>{try{return p===S?S.rank:(p.queen?7:(p.rank||0))}catch(e){return 0}};
 const apx=(p,fx)=>{if(!fx||!Object.keys(fx).length)return;if(p===S)apply(fx);else ap(p,fx)};
+/* one sentence end for every pm result / log line (review r1 fix 6b: rcvAsk ends «. », the day plan / log add «.») */
+const pmEnd=s=>String(s||"").replace(/[.\s]+$/,"");
 const live=p=>!!p&&(p===S?!S.dead&&!S.out:p.alive!==false&&!p.out);
 /* ---------- pastimes ---------- */
 const ARTKIND=Object.assign({theu:"theu"},typeof KG82_PLAIN==="object"?KG82_PLAIN:{});
@@ -66,8 +68,8 @@ function pmPay(win,lose,st){if(!st)return"";
 function pmPair(a,t){const k=[key(a),key(t)].sort().join("|");S.pmM=S.pmM&&S.pmM.m===S.turn?S.pmM:{m:S.turn,c:{}};return k}
 function pmFade(a,t){const k=pmPair(a,t);return 1/(1+B().play.fade*(S.pmM.c[k]||0))}
 function pmMark(a,t){const k=pmPair(a,t);S.pmM.c[k]=(S.pmM.c[k]||0)+1}
-function pmXp(p,ak){if(!ak)return;try{if(p===S){addArt(ak,B().play.xp);return}if(!p.arts||p.arts[ak]==null)return;p.artp=p.artp||{};p.artp[ak]=(p.artp[ak]||0)+B().play.xp;
-  /* the j2 addArt rule (next level at level + 2 points) */while(p.arts[ak]<5&&p.artp[ak]>=p.arts[ak]+2){p.artp[ak]-=p.arts[ak]+2;p.arts[ak]++}}catch(e){}}
+/* art practice: the ONE shared rule (her: j2 addArt; an NPC: j85 addArtP — level-ups give stat, Danh, ARTB85 bonus, the công virtue bonus) */
+function pmXp(p,ak){if(!ak||!p||p.coop)return;try{addArtP(p,ak,B().play.xp)}catch(e){}}
 function pmMem(h,a,d,x){try{if(typeof memAdd==="function")memAdd(h,a,d,{x})}catch(e){}}
 function pmSee(a,t){try{return a===S||t===S||knows(a)||knows(t)}catch(e){return false}}
 /* «Cùng chơi»: gain-only (law 3), by the mean of the two plays */
@@ -100,42 +102,56 @@ function pmRun(a,t,x){if(!x||!live(a)||!live(t))return"";
  const place=whereOf(a);
  const title=`${x.a==="play"?"Cùng chơi":"Thách đấu"} với ${o.name}`;
  if(x.a==="play"){playArt({art:x.kind,title,occ:"pm",rank:R,quick:{n:"Để tài nghệ quyết định",sub:"tính 5/10"},onDone:raw=>{const ro=pmRaw(o,x.kind,R);const r=me===a?pmPlayEnd(a,t,x,raw,ro):pmPlayEnd(a,t,x,ro,raw);
-   log(r.r+".");pushModal({t:title,who:pv(o),h:`<p>${r.r}.</p>`});try{showModal();render()}catch(e){}}});return""}
+   log(pmEnd(r.r)+".");pushModal({t:title,who:pv(o),h:`<p>${r.r}.</p>`});try{showModal();render()}catch(e){}}});return""}
  const st=pmStakeOf(a,t,x.s);const note=st?`Cược: ${st.s==="item"?`${nm(a)} đặt ${st.wa}, ${nm(t)} đặt ${st.wt}`:st.what+" mỗi bên"} · thắng lấy cược của đối thủ, thua mất cược của mình`:"";
  startContest({art:x.kind,title,rivals:[o],occ:"pm",rank:R,noCup:1,luck:B().luck,stakes:{note},onDone:out=>{const iWin=!!out&&out.place===1;const aWins=me===a?iWin:!iWin;
-   const r=pmDuelEnd(a,t,x,aWins,place);log(r.r+".");pushModal({t:title,who:pv(o),h:`<p>${r.r}.</p>`});try{showModal();render()}catch(e){}}});return""}
+   const r=pmDuelEnd(a,t,x,aWins,place);log(pmEnd(r.r)+".");pushModal({t:title,who:pv(o),h:`<p>${r.r}.</p>`});try{showModal();render()}catch(e){}}});return""}
+/* her walk to an NPC who invites / challenges her (go-in-person rule OD 18/11 ~19:55Z; review r1 fix 5): the khắc and the reason, the same rule as pmBtns */
+function pmWalk(p){if(!p||p.coop||together(S,p))return{tc:0,why:"",late:false,k:S.place};const k=whereOf(p),tc=travel(S.place,k);return{k,tc,why:walkBlock(k,tc),late:walkLate(k,tc)}}
+function pmWalkTx(w){return w.tc?`đi sang ${placeName(w.k)} ${w.tc} khắc${w.late?" (tới nơi buổi sau)":""}`:""}
 /* ---------- the receiver's answers (jrcv shape: i = the L1876 weight slot) ---------- */
 function pmNoO(p,t,x){const F=BAL.ag.cx2.help.fail,me=t===S,up=rk(p)>rk(t)?B().refuse.up:0;
  return{i:2,id:"no",n:rcvKw(2),fx:{},x:`được: giữ thì giờ${x.a==="duel"?", giữ món cược":""} · mất: hai bên quý nhau ${balSg(-F)}${up?`, ${nm(p)} là bề trên, quý ${me?"ngươi":t.name} thêm ${balSg(-up)}`:""}`,
   go:()=>{affAdd(t,p,-F);affAdd(p,t,-F-up);return{ok:0,r:`${Nm(t)} khéo từ chối lời ${x.a==="play"?"mời":"thách"} của ${nm(p)}`}}}}
 function pmPlayOpts(p,t,x){const P=B().play,me=t===S;
- return[{i:0,id:"full",n:"Nhận lời",fx:me?{suc:-P.suc}:{},x:`được: hai bên quý nhau +${P.aff[0]}..+${P.aff[2]} (chơi càng hay càng thân) · mất: Sức ${balSg(-P.suc)}`,lk:()=>!me&&(t.suc||0)<P.suc,
+ const w=me?pmWalk(p):{tc:0,why:""};
+ return[{i:0,id:"full",n:"Nhận lời",fx:me?{suc:-P.suc}:{},x:`được: hai bên quý nhau +${P.aff[0]}..+${P.aff[2]} (chơi càng hay càng thân) · mất: Sức ${balSg(-P.suc)}${w.tc?", "+pmWalkTx(w):""}`,need:w.why?[{t:w.why,ok:false}]:undefined,tsDis:!!w.why,lk:()=>(!me&&(t.suc||0)<P.suc)||!!w.why,
   go:()=>{if(!me)ap(t,{suc:-P.suc});const r=pmRun(p,t,x);return{ok:1,r}}},pmNoO(p,t,x)]}
 function pmDuelOpts(p,t,x){const st=pmStakeOf(p,t,x.s),o=pmOdds(t,p,x.kind),me=t===S,what=st?pmPut(st,t,p):"";
- const O=[{i:0,id:"full",n:"Nhận lời thách đấu",fx:{},x:`${pmWord(o)} · thành: lấy ${pmPut(st,p,p)} của ${nm(p)} · hỏng: mất ${pmPut(st,t,p)} của ${me?"ngươi":"mình"}`,lk:()=>!st||!st.ok,
+ const w=me?pmWalk(p):{tc:0,why:""};
+ const O=[{i:0,id:"full",n:"Nhận lời thách đấu",fx:{},x:`${pmWord(o)} · tốn: ${w.tc?pmWalkTx(w):"không"} · thành: lấy ${pmPut(st,p,p)} của ${nm(p)} · hỏng: mất ${pmPut(st,t,p)} của ${me?"ngươi":"mình"}`,need:w.why?[{t:w.why,ok:false}]:undefined,tsDis:!!w.why,lk:()=>!st||!st.ok||!!w.why,
   go:()=>({ok:1,r:pmRun(p,t,x)})}];
  if(rk(p)>rk(t))O.push({i:1,id:"half",n:"Nhường bề trên",fx:{},x:`được: ${nm(p)} quý ${me?"ngươi":t.name} +${pmYieldAff(p,t)}, bớt oán ${B().duel.yieldOan} · mất: ${what}`,lk:()=>!st||!st.ok,go:()=>({ok:1,r:pmYield(p,t,x)})});
  O.push(pmNoO(p,t,x));return O}
 /* co-op (foreman E #14 ruling (3)): the friend's ask card offers «Nhường bề trên» when the asker outranks the reader — the same answer and preview as pmDuelOpts */
 function pmCoopYield(p,t){if(!p||!t||rk(p)<=rk(t))return null;return{n:"Nhường bề trên",x:`được: ${nm(p)} quý ngươi +${pmYieldAff(p,t)}, bớt oán ${B().duel.yieldOan} · mất: món cược của ngươi`}}
+/* her card logs the answer as it comes back (PEND.rcvAsk): one full stop, the same as every pm line (fix 6b) */
+function pmDot(t,O){if(t!==S)return O;return O.map(o=>Object.assign({},o,{go:()=>{const r=o.go();const s=r&&typeof r==="object"?r.r:r;const d=s?pmEnd(s)+".":"";return r&&typeof r==="object"?Object.assign({},r,{r:d}):d}}))}
+/* co-op (review r1 fix 1 + 2): the friend's ask card = the SAME card an NPC's ask gives (RCVK line + pmPlayOpts / pmDuelOpts previews: game, stake of each
+   side, ladder word, được / mất). p = the asker's entry in the reader's world, x = her pick {a, kind, ak, n, s} (rides with the ask, jcoopworld).
+   Each answer maps to the relay's ok: Nhận = true, Nhường bề trên = "yield", Từ chối = false. */
+function pmCoopX(k,x){if((k!=="pmplay"&&k!=="pmduel")||!x||typeof x!=="object"||!x.kind)return null;const o={a:k==="pmplay"?"play":"duel",kind:String(x.kind),ak:x.ak||null,n:String(x.n||pmKindN(x.kind))};if(o.a==="duel")o.s=x.s||null;return o}
+function pmCoopCard(p,k,x){x=pmCoopX(k,x);if(!p||!x)return null;const D=RCVK[x.a==="play"?"pmPlay":"pmDuel"];if(!D||(D.ok&&!D.ok(p,S,x)))return null;
+ const O=(x.a==="play"?pmPlayOpts(p,S,x):pmDuelOpts(p,S,x)).map(o=>({n:o.n,x:o.x,need:o.need,tsDis:o.tsDis,ok:o.id==="full"?true:o.id==="half"?"yield":false}));
+ return{h:D.line(p,x),o:O}}
 const okPair=(p,t)=>live(p)&&live(t)&&p!==t&&!(t===S&&(S.confined||isSrvSafe()))&&!(p===S&&(S.confined||isSrvSafe()));
 function isSrvSafe(){try{return typeof isSrv==="function"&&isSrv()}catch(e){return false}}
 RCVK.pmPlay={t:"Lời mời cùng chơi",act:"mời cùng chơi với",kind:"pm",ok:(p,t,x)=>okPair(p,t)&&!!x,
- line:(p,x)=>`<p>${p.name} sai người sang: “Nương nương nhà ta rảnh rang, muốn mời người sang ${placeName(whereOf(p))} cùng chơi ${x&&x.n||""} cho vui.”</p><p class="past">Nhận lời thì ngươi đi sang chỗ nàng rồi chơi ngay.</p>`,
- opts:(p,t,x)=>pmPlayOpts(p,t,x)};
+ line:(p,x)=>`<p>${p.name} sai người sang: “Nương nương nhà ta rảnh rang, muốn mời người sang ${placeName(whereOf(p))} cùng chơi ${x&&x.n||""} cho vui.”</p>${p.coop?"":`<p class="past">Nhận lời thì ngươi đi sang chỗ nàng rồi chơi ngay.</p>`}`,
+ opts:(p,t,x)=>pmDot(t,pmPlayOpts(p,t,x))};
 RCVK.pmDuel={t:"Lời thách đấu",act:"thách đấu",kind:"pm",ok:(p,t,x)=>okPair(p,t)&&!!x&&!!pmStakeOf(p,t,x.s),
- line:(p,x)=>{const st=x&&pmStakeOf(p,S,x.s);return `<p>${p.name} sai người sang: “Nghe danh tài ${x&&x.n||""} của người, nương nương nhà ta xin so tài một ván ở ${placeName(whereOf(p))}.”</p><p class="past">Cược: ${st?(st.s==="item"?`nàng đặt ${st.wa}, ngươi đặt ${st.wt}`:st.what+" mỗi bên"):""}. Nhận lời thì ngươi đi sang chỗ nàng rồi thi ngay.</p>`},
- opts:(p,t,x)=>pmDuelOpts(p,t,x)};
+ line:(p,x)=>{const st=x&&pmStakeOf(p,S,x.s);return `<p>${p.name} sai người sang: “Nghe danh tài ${x&&x.n||""} của người, nương nương nhà ta xin so tài một ván ở ${placeName(whereOf(p))}.”</p><p class="past">Cược: ${st?(st.s==="item"?`nàng đặt ${st.wa}, ngươi đặt ${st.wt}`:st.what+" mỗi bên"):""}.${p.coop?"":" Nhận lời thì ngươi đi sang chỗ nàng rồi thi ngay."}</p>`},
+ opts:(p,t,x)=>pmDot(t,pmDuelOpts(p,t,x))};
 /* ---------- her side: ask (popup / Hậu cung) ---------- */
 function pmAsk(t,x){if(!x)return"";const kc=B().kc;if(!can(kc))return"";spend(kc);
  if(t.coop&&typeof runAct==="function")return runAct(S,t,x.a==="play"?"pmplay":"pmduel",x)||"";
  return rcvAsk(x.a==="play"?"pmPlay":"pmDuel",S,t,x)||""}
-function pmDone(r){try{if(popIdx!=null&&S.visit){S.visit.tk=S.visit.tk||{};S.visit.tk[popIdx]=1}}catch(e){}if(r){log(r);try{popMsg=r}catch(e){}}}
+function pmDone(r){try{if(popIdx!=null&&S.visit){S.visit.tk=S.visit.tk||{};S.visit.tk[popIdx]=1}}catch(e){}if(r){r=pmEnd(r)+".";log(r);try{popMsg=r}catch(e){}}}
 /* the khắc row (Cần) of every pick option: her time left this buổi (j15 whyTime, one rule) */
 function pmNeedK(){const w=whyTime(B().kc);return w?[{t:w,ok:false}]:[]}
 PEND.pmPick=pp=>{const t=RV(pp.v);if(!t||!live(t))return null;const play=pp.a==="play";
  return{who:pv(t),t:`<p>${play?`Mời ${t.name} cùng chơi môn gì?`:`Thách ${t.name} so tài môn gì?`}</p><p class="past">Môn của ${t.name} và Đầu hồ (ai cũng chơi được). Tốn ${B().kc} khắc.</p>`,
-  o:pmArts(S,t).map(ar=>({n:ar.n,fx:{},x:(play?`tốn: ${B().kc} khắc · thành: hai bên quý nhau +${B().play.aff[0]}..+${B().play.aff[2]}`:`${pmWord(pmOdds(S,t,ar.kind))} · tốn: ${B().kc} khắc · thành: lấy cược của nàng · hỏng: mất cược ngang giá của ngươi`)+` · (nàng bậc ${pmLvTxt(t,ar.kind)}, ngươi bậc ${pmLvTxt(S,ar.kind)})`,
+  o:pmArts(S,t).map(ar=>({n:ar.n,fx:{},x:(play?"":`${pmWord(pmOdds(S,t,ar.kind))} · `)+`nàng bậc ${pmLvTxt(t,ar.kind)}, ngươi bậc ${pmLvTxt(S,ar.kind)} · `+(play?`tốn: ${B().kc} khắc · thành: hai bên quý nhau +${B().play.aff[0]}..+${B().play.aff[2]}`:`tốn: ${B().kc} khắc · thành: lấy cược của nàng · hỏng: mất cược ngang giá của ngươi`),
    need:pmNeedK(),tsDis:!!whyTime(B().kc),go:()=>{if(play)pmDone(pmAsk(t,{a:"play",kind:ar.kind,ak:ar.ak,n:ar.n}));else pushDil(mkP("pmStake",{v:t.id,kind:ar.kind}),"Thách đấu")}})).concat([{n:"Thôi",fx:{}}])}};
 PEND.pmStake=pp=>{const t=RV(pp.v);if(!t||!live(t))return null;const ar=pmArts(S,t).find(z=>z.kind===pp.kind);if(!ar)return null;const o=pmOdds(S,t,ar.kind);
  return{who:pv(t),t:`<p>Thách ${t.name} một ván ${ar.n}. Hai bên đặt cược ngang giá; thắng lấy cược của đối thủ.</p>`,
@@ -143,7 +159,7 @@ PEND.pmStake=pp=>{const t=RV(pp.v);if(!t||!live(t))return null;const ar=pmArts(S
    go:()=>{if(!st.ok)return;pmDone(pmAsk(t,{a:"duel",kind:ar.kind,ak:ar.ak,n:ar.n,s:st.s}))}})).concat([{n:"Thôi",fx:{}}])}};
 /* the popup rows (j2 talkOpts: a consort, the Hoàng hậu, the co-op friend) — same palace allowed (foreman Q1); khắc = BAL.pm.kc, paid when sent */
 function pmRows(v){if(!v||!live(v)||v===S||isSrvSafe())return[];const dis=S.confined?"đang cấm túc":"";
- return[{n:"Cùng chơi",o:100,pm:1,x:`môn của nàng · tốn: ${B().kc} khắc · thành: hai bên quý nhau thêm · nàng có thể nhận lời hoặc từ chối`,lock:!!dis,t:dis,open:()=>pushDil(mkP("pmPick",{v:v.id,a:"play"}),"Cùng chơi")},
+ return[{n:"Cùng chơi",o:100,pm:1,x:`môn của nàng · tốn: ${B().kc} khắc · thành: hai bên quý nhau thêm`,lock:!!dis,t:dis,open:()=>pushDil(mkP("pmPick",{v:v.id,a:"play"}),"Cùng chơi")},
   {n:"Thách đấu",o:100,pm:1,x:`hai bên đặt cược ngang giá · tốn: ${B().kc} khắc · thành: lấy cược của nàng · hỏng: mất cược của ngươi`,lock:!!dis,t:dis,open:()=>pushDil(mkP("pmPick",{v:v.id,a:"duel"}),"Thách đấu")}]}
 if(typeof talkOpts==="function"){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&(p.kind==="rival"||p.kind==="hh")&&p.ref&&Array.isArray(A))A.push(...pmRows(p.ref))}catch(e){console.error(e)}return A};window.talkOpts=talkOpts}
 if(typeof talkK==="function"){const k0=talkK;talkK=function(a){if(a&&a.pm)return 0;/* paid on sending (pmAsk) */return k0.apply(this,arguments)};window.talkK=talkK}
@@ -151,7 +167,7 @@ if(typeof talkK==="function"){const k0=talkK;talkK=function(a){if(a&&a.pm)return
 function pmBtns(v){if(!v||!live(v)||v===S||isSrvSafe())return[];const here=together(S,v),k=here?S.place:locKnown(v);const tc=k&&!here?travel(S.place,k):0;
  const why=S.confined?"đang cấm túc":S.out?"đang ở lãnh cung":!here&&!k?"chưa rõ nàng ở đâu":!here?walkBlock(k,tc):"";const kc=B().kc;
  const ton=`tốn: ${kc+tc} khắc${tc?` (đi đến chỗ nàng ${tc}, chơi ${kc})`:""}`;
- return [pbtn(`data-pmgo="${v.id}" data-pma="play"`,"Cùng chơi",`${ton} · thành: hai bên quý nhau thêm · nàng có thể từ chối`,why||whyTime(kc+tc)),
+ return [pbtn(`data-pmgo="${v.id}" data-pma="play"`,"Cùng chơi",`${ton} · thành: hai bên quý nhau thêm`,why||whyTime(kc+tc)),
   pbtn(`data-pmgo="${v.id}" data-pma="duel"`,"Thách đấu",`${ton} · thành: lấy cược của nàng · hỏng: mất cược ngang giá của ngươi`,why||whyTime(kc+tc))]}
 /* two more entries of the «Gặp mặt» group (each its own act card, counted by the group tab) */
 let PMCUR=null;
@@ -190,12 +206,12 @@ if(typeof agReg==="function"&&typeof p3O==="function"){
    if(t&&pmStakes(v,t).some(z=>z.ok)){const x=p3O(v,"pmDuel",{n:"Thách đấu",c:{},o:pmOddsEst(v,t,pmX(v,t,"duel").kind),k:B().kc},N,G.duel,"social",pmAt(t),t);if(x)O.push(x)}}
  }catch(e){try{agdErr("pm",e)}catch(x){}}return O});
  const run=act=>(v,t)=>{if(!t||!live(v)||!live(t)||!pmFree(v))return"";const x=pmX(v,t,act);if(!x)return"";v.pmW=wk();if(t===S){if(S.pmMeW!==wk()){S.pmMeW=wk();S.pmMeN=0}S.pmMeN++;S.pmMeL=wk()}
-  const r=rcvAsk(act==="play"?"pmPlay":"pmDuel",v,t,x);return p3Res(act==="play"?"pmPlay":"pmDuel",t===S||pmSee(v,t)?r:"")};
+  const r=pmEnd(rcvAsk(act==="play"?"pmPlay":"pmDuel",v,t,x));return p3Res(act==="play"?"pmPlay":"pmDuel",t===S||pmSee(v,t)?r:"")};
  agRunReg("cx3:pmPlay",run("play"));agRunReg("cx3:pmDuel",run("duel"));
  try{Object.assign(AGC3BTN,{pmPlay:"Cùng chơi",pmDuel:"Thách đấu"});Object.assign(AGC3ACT,{pmPlay:"rủ người cùng chơi",pmDuel:"thách người so tài"})}catch(e){}}
 /* ---------- memory (jmem): the deeds this act leaves ---------- */
 try{if(window.MEM_DEEDS){Object.assign(MEM_DEEDS,{pmplay:[1,0,"cùng {o} chơi {x}"],pmwin:[-1,0,"thắng {o} một ván {x}, lấy mất món cược"],pmyield:[1,0,"nhường {o} một ván {x}"]})}
  if(BAL.mem&&BAL.mem.w)Object.assign(BAL.mem.w,B().mem)}catch(e){}
 try{if(typeof MGT_OCCN==="object")MGT_OCCN.pm="so tài"}catch(e){}
-Object.assign(window,{pmCoopYield,pmArts,pmR,pmV,pmStakes,pmStakeOf,pmOdds,pmRun,pmAuto,pmX,pmPlayEnd,pmDuelEnd,pmYield,pmYieldAff,pmBtns,pmRows,pmPlayOpts,pmDuelOpts,pmScore,pmItem,pmGoTap});
+Object.assign(window,{pmCoopYield,pmCoopX,pmCoopCard,pmArts,pmR,pmV,pmStakes,pmStakeOf,pmOdds,pmRun,pmAuto,pmX,pmPlayEnd,pmDuelEnd,pmYield,pmYieldAff,pmBtns,pmRows,pmPlayOpts,pmDuelOpts,pmScore,pmItem,pmGoTap});
 })();
