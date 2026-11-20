@@ -193,7 +193,7 @@ function agLaterRun(cut){if(AGL.t){clearTimeout(AGL.t);AGL.t=0}if(AGL.run)return
 function agDrain(){if(AGL.run||!AGL.L.some(x=>!x.sl))return;AGL.stat.drain++;let n=0;while(AGL.L.some(x=>!x.sl)&&n++<20)agLaterRun(1)}
 function agQShow(){try{if(!Q.length||!S||S.dead||S.mg||window.__bot)return;const M=$("modal");if(M&&M.hidden&&!document.querySelector(".kbk-bar"))showModal()}catch(e){}}
 /* outermost: installed after every module's own nextBuoi / endTurn wrapper (the same load-time pattern as jagday W1) */
-setTimeout(()=>{try{const n0=nextBuoi;nextBuoi=function(){const q0=Q.length;try{agDrain()}catch(e){agErr("drain",e)}if(!q0&&Q.length&&S&&!S.dead){if(!window.__bot)showModal();return}/* jagday-walk r5: the drain raised a scene of the ending buổi (a visitor, a deed she sees): she meets it first and ends the buổi on her next press — the turn would be refused (j9) anyway, so no pre-turn pass (tin báo carry, NPC pass…) runs twice (same as jmen menWatch) */return n0.apply(this,arguments)};window.nextBuoi=nextBuoi;
+setTimeout(()=>{try{const n0=nextBuoi;nextBuoi=function(){try{agDrain()}catch(e){agErr("drain",e)}return n0.apply(this,arguments)};window.nextBuoi=nextBuoi;
  const e0=endTurn;endTurn=function(){try{agDrain()}catch(e){agErr("drain",e)}return e0.apply(this,arguments)};window.endTurn=endTurn}catch(e){agErr("drainWrap",e)}},0);
 function agSyncNow(){AG.syQ=0;const ts=performance.now();try{j95sync()}catch(e){}const ms=performance.now()-ts;AG.tm.sync+=ms;AG.sms=AG.sms||[];AG.sms.push(ms);if(AG.sms.length>BAL.ag.perf.n)AG.sms.shift()}
 /* finish the buổi's deciders now (tests / bot that need every decision before they read the record) */
