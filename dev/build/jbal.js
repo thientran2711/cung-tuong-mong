@@ -164,6 +164,15 @@ Object.assign(BAL.orig,{art:{
  ch:{"":{dung:1},ch_co:{dung:2,ky:2,ngon:1,cam:1},ch_benh:{y:2,hanh:2,nau:1,dung:1},ch_ho:{vu:2,cam:2,dung:1,hoa:1},ch_bi:{thi:2,dung:2,ky:1,ngon:1}},
  thd:{"":{thi:1},thd_tho:{thi:2,hoa:1,cong:1,ngon:1},thd_sach:{thi:2,ky:1,hanh:1,cong:1},thd_tro:{thi:2,ngon:1,ky:1,nau:1},thd_hoc:{thi:2,ngon:1,hoa:1,hanh:1}},
  cnv:{"":{cong:1},cnv_chu:{cong:1,nau:1,y:1,ngon:1},cnv_ban:{theu:1,cong:1,hanh:1,nau:1},cnv_mat:{cong:1,vu:1,dung:1,theu:1},cnv_ma:{cong:1,nau:1,dung:1,hanh:1}}}});
+/* SỞ ĐOẢN per identity (owner OD 20/11 ~07:15Z, verbatim: "mình có cái môn sở trường thì mình cũng phải có môn sở đoản ... có nhiều người họ học hoài cái môn
+   này họ học không nổi"): the 1–2 arts an identity (origin × road, the same keys as BAL.orig.art above) is WEAK at — never an art of that identity's own row.
+   SỞ TRƯỜNG = every art of the identity's BAL.orig.art row (bậc ≥ BAL.orig.id.trAt); every other art = bình thường. "" = the origin's row (road unknown); a road key
+   overrides it. List from the C-AG cal-p2 analysis (reports/cal-p2.md §A2, script-checked: no overlap with the road's own arts; dev/test/cal-p2c.js re-checks it).
+   Read by jmgid mgIdClass → the identity target of a mini-game result (OD ~07:35Z: sở trường ≈ 9, bình thường ≈ 7.5, sở đoản ≈ 6; BAL.orig.id in jbal2.js). */
+Object.assign(BAL.orig,{doan:{
+ tt:{"":["nau","vu"]},dtq:{"":["theu","cam"]},muoi:{"":["hoa","vu"]},cn:{"":["ky","vu"]},
+ nc:{"":["thi","theu"],nc_vuong:["theu","hanh"],nc_tuc:["thi","cam"]},bd:{"":["thi","theu"],bd_tuc:["thi","hoa"]},
+ td:{"":["vu","nau"]},ch:{"":["nau","theu"],ch_benh:["theu","ky"]},thd:{"":["vu","cam"]},cnv:{"":["thi","ky"]}}});
 /* ONE CORE (OD:L1267): her household on the room stage (jhouse.js), Tứ đức works (jtds.js), Tứ đức lessons (jtd.js). Same values as before. */
 Object.assign(BAL,{
  house:{ /* jhouse.js: acts on a household servant's stage card */
