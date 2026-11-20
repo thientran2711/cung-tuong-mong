@@ -1,5 +1,52 @@
 {
- "_note": "P4 (Foreman C ROOT-64): every one of the 86 consorts gets FOUR pairs (main + sec): Xuân, Hạ, Thu, Đông.\nOwner: \"Ủa là sao, người nào cũng có 4 bảng màu 4 mùa mà\" (each PERSON has all 4 seasons), on top of the earlier orders\n(\"Xám là bỏ hết\" · phân loại màu theo mùa · chuyên gia phối 2 màu cho đẹp · thu/đông KHÔNG có nghĩa là đậm hơn ·\nHạ cam/vàng nhiều vô · bỏ màu nâu, màu già · \"Thôi đại đi, có người màu này màu kia\" = depth not evened out).\n\nInput : dev/art/face-common/season_colour_classes.json (families per season + each person's ROOT pair in its season column)\n        dev/art/face-common/palettes_season_deep.json (only s44's drawn root block is kept, F3 draw #A6593F + #94B594)\nOutput: dev/art/face-common/palettes_season_deep.json (overwritten; s44 root block kept)\n\nMethod\n  root   : her root pair (classes file, CŨ→MỚI already marked there) stays in its season. s44: F3's drawn pair kept (flag nâu).\n  depth  : her depth per role = OKLCH L of her root main / root sec -> family depth index t (pale .85 = 0, medium .72 = 1,\n           deep .58 = 2; extrapolated to t 2.6 ≈ L .50 for very deep people, chroma kept, so deep = jewel, never brown).\n           The SAME t is used in all 4 seasons. Hạ families go at most to t 2.5 (L ≈ .68) and only as vivid (C ≥ .165) pumpkin/tangerine:\n           a darker yellow/orange is brown (owner: no brown).\n  pairing: main + sec both from THAT season's families (Hạ = orange/yellow only). Stylist score: complementary / far hue\n           best (pink + spring green, coral + leaf green, blue/violet + jade/teal, orange + lemon), analogous only with a clear\n           depth step; same family never. Identity: main family nearest her root main hue, sec nearest her root sec hue.\n  rules  : no grey (C >= .06), no brown / old, no royal yellow (ΔE2000 >= 12 from #EFBD69 and no H 80–100 yellow),\n           no dark yellow (H 65–122 below L .76 = mustard / olive),\n           unique per season (check_unique gate: ΔE2000 max(main, sec) >= 8, same-name pair = FAIL; WARN avoided).\n\nseed 0",
+ "_note": "P4 (Foreman C ROOT-64): every one of the 86 consorts gets FOUR pairs (main + sec): Xuân, Hạ, Thu, Đông.\nOwner: \"Ủa là sao, người nào cũng có 4 bảng màu 4 mùa mà\" (each PERSON has all 4 seasons), on top of the earlier orders\n(\"Xám là bỏ hết\" · phân loại màu theo mùa · chuyên gia phối 2 màu cho đẹp · thu/đông KHÔNG có nghĩa là đậm hơn ·\nHạ cam/vàng nhiều vô · bỏ màu nâu, màu già · \"Thôi đại đi, có người màu này màu kia\" = depth not evened out).\n\nInput : dev/art/face-common/season_colour_classes.json (families per season + each person's ROOT pair in its season column)\n        dev/art/face-common/palettes_season_deep.json (only s44's drawn root block is kept, F3 draw #A6593F + #94B594)\nOutput: dev/art/face-common/palettes_season_deep.json (overwritten; s44 root block kept)\n\nMethod\n  root   : her root pair (classes file, CŨ→MỚI already marked there) stays in its season. s44: F3's drawn pair kept (flag nâu).\n  depth  : her depth per role = OKLCH L of her root main / root sec -> family depth index t (pale .85 = 0, medium .72 = 1,\n           deep .58 = 2; extrapolated to t 2.6 ≈ L .50 for very deep people, chroma kept, so deep = jewel, never brown).\n           The SAME t is used in all 4 seasons. Hạ families go at most to t 2.5 (L ≈ .68) and only as vivid (C ≥ .165) pumpkin/tangerine:\n           a darker yellow/orange is brown (owner: no brown).\n  pairing: main + sec both from THAT season's families (Hạ = orange/yellow only). Stylist score: complementary / far hue\n           best (pink + spring green, coral + leaf green, blue/violet + jade/teal, orange + lemon), analogous only with a clear\n           depth step; same family never. Identity: main family nearest her root main hue, sec nearest her root sec hue.\n  rules  : no grey (C >= .06), no brown / old, no royal yellow (ΔE2000 >= 12 from #EFBD69 and no H 80–100 yellow),\n           no dark yellow (H 65–122 below L .76 = mustard / olive),\n           unique per season (check_unique gate: ΔE2000 max(main, sec) >= 8, same-name pair = FAIL; WARN avoided).\n\nseed 0\nTHU v2 autumn families (owner: \"Cái bảng màu của mùa thu nó chưa có ra mùa thu nha\"): maple red, persimmon, pumpkin, amber, ginkgo yellow, wine berry, plum, moss green, fresh olive green. Xuân/Hạ/Đông unchanged from commit 44715a2a6.",
+ "_thu_families_v2": {
+  "maple red": [
+   "#FDA297",
+   "#EC5C50",
+   "#C52C2A"
+  ],
+  "persimmon": [
+   "#FCAF91",
+   "#F3743F",
+   "#D44F13"
+  ],
+  "pumpkin": [
+   "#FEB48A",
+   "#F88A3D",
+   "#E16C10"
+  ],
+  "amber": [
+   "#FFBA81",
+   "#FF972F",
+   "#ED8714"
+  ],
+  "ginkgo yellow": [
+   "#EDE58D",
+   "#E9DE67",
+   "#E5D956"
+  ],
+  "wine berry": [
+   "#ED9CB5",
+   "#CD4A78",
+   "#A42052"
+  ],
+  "plum": [
+   "#DCA2CE",
+   "#B559A3",
+   "#89327E"
+  ],
+  "moss green": [
+   "#B2D994",
+   "#7DB04E",
+   "#508524"
+  ],
+  "fresh olive green": [
+   "#C3DD93",
+   "#97BA4F",
+   "#709517"
+  ]
+ },
  "status": "PROPOSAL (P4) — 4 pairs per person, owner verdict pending",
  "_flags": {
   "s44_brown_root": "nâu: main #A6593F (burnt sienna) is brown by the owner rule; stylist proposal deep coral red #B94738 + soft leaf green #87BA87 — foreman decides",
@@ -77,10 +124,10 @@
    "sec_depth_moved": "t 0.0 -> 1.4 (no free Hạ pair at her own secondary depth)"
   },
   "thu": {
-   "main": "rich pomegranate red",
-   "main_hex": "#E35D73",
-   "sec": "pale fresh olive green",
-   "sec_hex": "#BADAA1"
+   "main": "rich plum",
+   "main_hex": "#A04792",
+   "sec": "pale ginkgo yellow",
+   "sec_hex": "#EDE58D"
   },
   "dong": {
    "main": "soft sapphire blue",
@@ -107,10 +154,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from spring green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "rich coral red",
-   "main_hex": "#D95247",
-   "sec": "fresh olive green",
-   "sec_hex": "#7C9B3D"
+   "main": "rich pumpkin",
+   "main_hex": "#F17940",
+   "sec": "wine berry",
+   "sec_hex": "#C64162"
   },
   "dong": {
    "main": "soft royal purple",
@@ -137,10 +184,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral orange (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "light leaf green",
-   "main_hex": "#7DC48B",
-   "sec": "rich pomegranate red",
-   "sec_hex": "#E15C81"
+   "main": "light fresh olive green",
+   "main_hex": "#A4C465",
+   "sec": "rich maple red",
+   "sec_hex": "#DA473E"
   },
   "dong": {
    "main": "soft teal",
@@ -180,10 +227,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from leaf green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "coral red",
-   "main_hex": "#ED6A5D",
-   "sec": "berry",
-   "sec_hex": "#DF77AB"
+   "main": "maple red",
+   "main_hex": "#E14D56",
+   "sec": "ginkgo yellow",
+   "sec_hex": "#DCE16B"
   },
   "dong": {
    "main": "sapphire",
@@ -210,10 +257,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral orange (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "light berry",
-   "main_hex": "#EA91C8",
-   "sec": "fresh olive green",
-   "sec_hex": "#85B260"
+   "main": "light maple red",
+   "main_hex": "#F37669",
+   "sec": "moss green",
+   "sec_hex": "#7BAE4C"
   },
   "dong": {
    "main": "light violet",
@@ -239,10 +286,10 @@
    "root": true
   },
   "thu": {
-   "main": "pale pomegranate red",
-   "main_hex": "#FBA0B4",
-   "sec": "coral orange",
-   "sec_hex": "#E47938"
+   "main": "pale amber",
+   "main_hex": "#FFAF89",
+   "sec": "fresh olive green",
+   "sec_hex": "#71B75E"
   },
   "dong": {
    "main": "pale indigo",
@@ -268,10 +315,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from leaf green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "berry",
-   "main_hex": "#E08ACC",
-   "sec": "rich coral orange",
-   "sec_hex": "#D6681E"
+   "main": "plum",
+   "main_hex": "#BC67AB",
+   "sec": "rich ginkgo yellow",
+   "sec_hex": "#E6DB5D"
   },
   "dong": {
    "main": "soft lilac",
@@ -297,10 +344,10 @@
    "sec_hex": "#EE761F"
   },
   "thu": {
-   "main": "pale cranberry",
-   "main_hex": "#FAB2D4",
-   "sec": "deep leaf green",
-   "sec_hex": "#298543"
+   "main": "pale ginkgo yellow",
+   "main_hex": "#EDE58D",
+   "sec": "deep plum",
+   "sec_hex": "#7E2874"
   },
   "dong": {
    "main": "soft ivory cream",
@@ -368,10 +415,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral red (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "rich coral red",
-   "main_hex": "#E96949",
-   "sec": "leaf green",
-   "sec_hex": "#91B562"
+   "main": "rich maple red",
+   "main_hex": "#DE4A54",
+   "sec": "fresh olive green",
+   "sec_hex": "#8CBF5F"
   },
   "dong": {
    "main": "soft plum",
@@ -440,10 +487,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from leaf green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "rich pomegranate red",
-   "main_hex": "#E15A71",
-   "sec": "leaf green",
-   "sec_hex": "#6BAD65"
+   "main": "rich plum",
+   "main_hex": "#A54B96",
+   "sec": "amber",
+   "sec_hex": "#FD952B"
   },
   "dong": {
    "main": "soft orchid purple",
@@ -494,10 +541,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral red (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "rich cranberry",
-   "main_hex": "#DB6391",
-   "sec": "leaf green",
-   "sec_hex": "#75B56E"
+   "main": "rich persimmon",
+   "main_hex": "#E5642E",
+   "sec": "moss green",
+   "sec_hex": "#7BAE4C"
   },
   "dong": {
    "main": "rich orchid",
@@ -575,10 +622,10 @@
    "sec_hex": "#FF964F"
   },
   "thu": {
-   "main": "light coral orange",
-   "main_hex": "#FC9A97",
-   "sec": "rich berry",
-   "sec_hex": "#D76485"
+   "main": "light amber",
+   "main_hex": "#FFA980",
+   "sec": "rich plum",
+   "sec_hex": "#A9427D"
   },
   "dong": {
    "main": "light jade",
@@ -616,10 +663,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from spring green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "pale coral red",
-   "main_hex": "#FEAC96",
-   "sec": "rich berry",
-   "sec_hex": "#CE6AAA"
+   "main": "pale ginkgo yellow",
+   "main_hex": "#EDE489",
+   "sec": "rich persimmon",
+   "sec_hex": "#E6642E"
   },
   "dong": {
    "main": "pale ice blue",
@@ -645,10 +692,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral red (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "pale coral red",
-   "main_hex": "#FEB1AD",
-   "sec": "deep leaf green",
-   "sec_hex": "#32782C"
+   "main": "pale amber",
+   "main_hex": "#FEB98E",
+   "sec": "deep wine berry",
+   "sec_hex": "#8D0034"
   },
   "dong": {
    "main": "soft ivory",
@@ -737,10 +784,10 @@
    }
   },
   "thu": {
-   "main": "light coral orange",
-   "main_hex": "#FA9D83",
-   "sec": "deep leaf green",
-   "sec_hex": "#3E7217"
+   "main": "light pumpkin",
+   "main_hex": "#FEA069",
+   "sec": "deep plum",
+   "sec_hex": "#6F1765"
   },
   "dong": {
    "main": "light jade",
@@ -837,10 +884,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral orange (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "cranberry",
-   "main_hex": "#F17B9A",
-   "sec": "rich coral orange",
-   "sec_hex": "#D65C3D"
+   "main": "maple red",
+   "main_hex": "#EB5C72",
+   "sec": "rich fresh olive green",
+   "sec_hex": "#5DA64A"
   },
   "dong": {
    "main": "indigo",
@@ -878,10 +925,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from spring green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "pale fresh olive green",
-   "main_hex": "#ABCF8F",
-   "sec": "rich coral orange",
-   "sec_hex": "#E06458"
+   "main": "pale moss green",
+   "main_hex": "#8DD192",
+   "sec": "rich persimmon",
+   "sec_hex": "#E75C52"
   },
   "dong": {
    "main": "pale teal",
@@ -906,10 +953,10 @@
    "sec_hex": "#FEA175"
   },
   "thu": {
-   "main": "pale pomegranate red",
-   "main_hex": "#FDAFBF",
-   "sec": "fresh olive green",
-   "sec_hex": "#70AC5F"
+   "main": "pale pumpkin",
+   "main_hex": "#FEB48A",
+   "sec": "ginkgo yellow",
+   "sec_hex": "#E8DC63"
   },
   "dong": {
    "main": "ivory white",
@@ -936,10 +983,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from leaf green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "pomegranate red",
-   "main_hex": "#F37074",
-   "sec": "fresh olive green",
-   "sec_hex": "#88A64C"
+   "main": "wine berry",
+   "main_hex": "#C84573",
+   "sec": "ginkgo yellow",
+   "sec_hex": "#E8DC63"
   },
   "dong": {
    "main": "lavender purple",
@@ -966,10 +1013,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral red (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "light cranberry",
-   "main_hex": "#FC9DAA",
-   "sec": "rich coral orange",
-   "sec_hex": "#E66C5F"
+   "main": "light moss green",
+   "main_hex": "#A2C168",
+   "sec": "rich persimmon",
+   "sec_hex": "#E1670A"
   },
   "dong": {
    "main": "soft blue",
@@ -1019,10 +1066,10 @@
    }
   },
   "thu": {
-   "main": "coral orange",
-   "main_hex": "#F58669",
-   "sec": "rich leaf green",
-   "sec_hex": "#649844"
+   "main": "persimmon",
+   "main_hex": "#F47C4B",
+   "sec": "rich moss green",
+   "sec_hex": "#5D9231"
   },
   "dong": {
    "main": "teal",
@@ -1048,10 +1095,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from leaf green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "fresh olive green",
-   "main_hex": "#7BA854",
-   "sec": "light coral red",
-   "sec_hex": "#FC8888"
+   "main": "amber",
+   "main_hex": "#FE8F3E",
+   "sec": "light wine berry",
+   "sec_hex": "#DA657E"
   },
   "dong": {
    "main": "soft periwinkle",
@@ -1101,10 +1148,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral red (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "berry",
-   "main_hex": "#D176BD",
-   "sec": "fresh olive green",
-   "sec_hex": "#70AC5F"
+   "main": "amber",
+   "main_hex": "#FE9219",
+   "sec": "moss green",
+   "sec_hex": "#71A543"
   },
   "dong": {
    "main": "violet",
@@ -1131,10 +1178,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral red (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "cranberry",
-   "main_hex": "#F3839F",
+   "main": "maple red",
+   "main_hex": "#EF695C",
    "sec": "deep fresh olive green",
-   "sec_hex": "#526D01"
+   "sec_hex": "#5A7B00"
   },
   "dong": {
    "main": "violet",
@@ -1160,10 +1207,10 @@
    "sec_hex": "#F6961F"
   },
   "thu": {
-   "main": "pale leaf green",
-   "main_hex": "#B1D79D",
-   "sec": "rich cranberry",
-   "sec_hex": "#DC6183"
+   "main": "pale moss green",
+   "main_hex": "#ADD48D",
+   "sec": "rich wine berry",
+   "sec_hex": "#BA3766"
   },
   "dong": {
    "main": "pale jade",
@@ -1203,10 +1250,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from spring green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "deep coral orange",
-   "main_hex": "#B3313C",
-   "sec": "light berry",
-   "sec_hex": "#FA9AB2"
+   "main": "deep pumpkin",
+   "main_hex": "#E66441",
+   "sec": "light plum",
+   "sec_hex": "#D37EA9"
   },
   "dong": {
    "main": "deep violet",
@@ -1232,10 +1279,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral orange (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "deep pomegranate red",
-   "main_hex": "#CF466F",
-   "sec": "pale leaf green",
-   "sec_hex": "#A7DEB0"
+   "main": "deep moss green",
+   "main_hex": "#558A29",
+   "sec": "pale persimmon",
+   "sec_hex": "#FCAF91"
   },
   "dong": {
    "main": "soft emerald green",
@@ -1261,10 +1308,10 @@
    "sec_hex": "#FCD0B3"
   },
   "thu": {
-   "main": "deep berry",
-   "main_hex": "#9E336E",
-   "sec": "pale coral orange",
-   "sec_hex": "#FEAE97"
+   "main": "deep amber",
+   "main_hex": "#ED8714",
+   "sec": "pale wine berry",
+   "sec_hex": "#E993AD"
   },
   "dong": {
    "main": "soft indigo violet",
@@ -1302,10 +1349,10 @@
    "sec_hex": "#E5E29B"
   },
   "thu": {
-   "main": "deep cranberry",
-   "main_hex": "#BD3E66",
-   "sec": "pale coral orange",
-   "sec_hex": "#FFB59F"
+   "main": "deep wine berry",
+   "main_hex": "#9E143F",
+   "sec": "pale amber",
+   "sec_hex": "#FEB98E"
   },
   "dong": {
    "main": "deep orchid",
@@ -1330,10 +1377,10 @@
    "sec_hex": "#FEC6BA"
   },
   "thu": {
-   "main": "deep berry",
-   "main_hex": "#A43058",
-   "sec": "light coral orange",
-   "sec_hex": "#FB9996"
+   "main": "deep maple red",
+   "main_hex": "#A20739",
+   "sec": "light moss green",
+   "sec_hex": "#83CB88"
   },
   "dong": {
    "main": "soft royal purple",
@@ -1373,10 +1420,10 @@
    "sec_depth_moved": "t 0.0 -> 2.5 (no free Hạ pair at her own secondary depth)"
   },
   "thu": {
-   "main": "deep pomegranate red",
-   "main_hex": "#CD415D",
-   "sec": "pale berry",
-   "sec_hex": "#FEB6CF"
+   "main": "deep moss green",
+   "main_hex": "#2A8B42",
+   "sec": "pale maple red",
+   "sec_hex": "#FCA0AA"
   },
   "dong": {
    "main": "soft peacock blue",
@@ -1402,10 +1449,10 @@
    "sec_hex": "#E48111"
   },
   "thu": {
-   "main": "pale cranberry",
-   "main_hex": "#FFB1C4",
-   "sec": "deep coral orange",
-   "sec_hex": "#B83C1C"
+   "main": "pale fresh olive green",
+   "main_hex": "#C3DD93",
+   "sec": "deep maple red",
+   "sec_hex": "#B41419"
   },
   "dong": {
    "main": "pale blue",
@@ -1444,10 +1491,10 @@
    "sec_depth_moved": "t 0.1 -> 2.0 (no free Hạ pair at her own secondary depth)"
   },
   "thu": {
-   "main": "deep coral orange",
-   "main_hex": "#AC300D",
-   "sec": "pale berry",
-   "sec_hex": "#FDB0D4"
+   "main": "deep fresh olive green",
+   "main_hex": "#5A7B00",
+   "sec": "pale plum",
+   "sec_hex": "#D99DCB"
   },
   "dong": {
    "main": "soft ink blue",
@@ -1485,10 +1532,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from leaf green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "pale leaf green",
-   "main_hex": "#B6DBA3",
-   "sec": "deep pomegranate red",
-   "sec_hex": "#B22337"
+   "main": "pale moss green",
+   "main_hex": "#B2D994",
+   "sec": "deep persimmon",
+   "sec_hex": "#D44F13"
   },
   "dong": {
    "main": "pale jade",
@@ -1528,10 +1575,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral red (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "light cranberry",
-   "main_hex": "#F28AB0",
-   "sec": "deep leaf green",
-   "sec_hex": "#478E41"
+   "main": "light amber",
+   "main_hex": "#FEA072",
+   "sec": "deep wine berry",
+   "sec_hex": "#A82137"
   },
   "dong": {
    "main": "light sapphire",
@@ -1569,10 +1616,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from spring green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "coral red",
-   "main_hex": "#F37163",
-   "sec": "pale berry",
-   "sec_hex": "#FFB4D7"
+   "main": "pumpkin",
+   "main_hex": "#F88249",
+   "sec": "pale wine berry",
+   "sec_hex": "#EF9CAC"
   },
   "dong": {
    "main": "sapphire",
@@ -1597,10 +1644,10 @@
    "sec_hex": "#E07D05"
   },
   "thu": {
-   "main": "rich coral red",
-   "main_hex": "#DE584C",
-   "sec": "deep fresh olive green",
-   "sec_hex": "#587304"
+   "main": "rich pumpkin",
+   "main_hex": "#EA7725",
+   "sec": "deep wine berry",
+   "sec_hex": "#8D0442"
   },
   "dong": {
    "main": "soft violet mauve",
@@ -1639,10 +1686,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from spring green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "deep coral orange",
-   "main_hex": "#B33716",
-   "sec": "pale leaf green",
-   "sec_hex": "#B2D89E"
+   "main": "deep maple red",
+   "main_hex": "#AE0814",
+   "sec": "pale moss green",
+   "sec_hex": "#AED58F"
   },
   "dong": {
    "main": "deep sapphire",
@@ -1669,10 +1716,10 @@
    "sec_depth_moved": "t 0.0 -> 2.0 (no free Hạ pair at her own secondary depth)"
   },
   "thu": {
-   "main": "deep fresh olive green",
-   "main_hex": "#5D7B09",
-   "sec": "pale cranberry",
-   "sec_hex": "#FFB1C4"
+   "main": "deep pumpkin",
+   "main_hex": "#E4682D",
+   "sec": "pale ginkgo yellow",
+   "sec_hex": "#E4E991"
   },
   "dong": {
    "main": "deep teal",
@@ -1711,10 +1758,10 @@
    "sec_depth_moved": "t 0.1 -> 1.4 (no free Hạ pair at her own secondary depth)"
   },
   "thu": {
-   "main": "deep cranberry",
-   "main_hex": "#B1325C",
-   "sec": "pale leaf green",
-   "sec_hex": "#B0D79D"
+   "main": "deep pumpkin",
+   "main_hex": "#E16C10",
+   "sec": "pale plum",
+   "sec_hex": "#D89ACA"
   },
   "dong": {
    "main": "soft amethyst purple",
@@ -1752,10 +1799,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral red (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "deep berry",
-   "main_hex": "#9E336E",
-   "sec": "pale fresh olive green",
-   "sec_hex": "#C1D89C"
+   "main": "deep plum",
+   "main_hex": "#6F1765",
+   "sec": "pale ginkgo yellow",
+   "sec_hex": "#EDE58D"
   },
   "dong": {
    "main": "soft midnight blue",
@@ -1782,10 +1829,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral red (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "deep leaf green",
-   "main_hex": "#3E7217",
-   "sec": "pale coral red",
-   "sec_hex": "#FEA79A"
+   "main": "deep persimmon",
+   "main_hex": "#D44F13",
+   "sec": "pale moss green",
+   "sec_hex": "#A9D188"
   },
   "dong": {
    "main": "soft pine green",
@@ -1863,10 +1910,10 @@
    "sec_hex": "#F8D6B3"
   },
   "thu": {
-   "main": "deep leaf green",
-   "main_hex": "#1F7D3C",
-   "sec": "pale cranberry",
-   "sec_hex": "#FAB2D4"
+   "main": "deep pumpkin",
+   "main_hex": "#D97400",
+   "sec": "pale fresh olive green",
+   "sec_hex": "#CCDA8E"
   },
   "dong": {
    "main": "soft cobalt blue",
@@ -1904,10 +1951,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from leaf green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "deep cranberry",
-   "main_hex": "#C7528E",
+   "main": "deep wine berry",
+   "main_hex": "#A62254",
    "sec": "pale fresh olive green",
-   "sec_hex": "#B2DCA7"
+   "sec_hex": "#C3DD93"
   },
   "dong": {
    "main": "soft blue",
@@ -1946,10 +1993,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from leaf green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "light pomegranate red",
-   "main_hex": "#FD9898",
+   "main": "light maple red",
+   "main_hex": "#F68485",
    "sec": "deep fresh olive green",
-   "sec_hex": "#526D01"
+   "sec_hex": "#487F03"
   },
   "dong": {
    "main": "soft lavender",
@@ -1986,10 +2033,10 @@
    "sec_hex": "#F06757"
   },
   "thu": {
-   "main": "pale leaf green",
-   "main_hex": "#A7DEB0",
-   "sec": "deep cranberry",
-   "sec_hex": "#A22D6D"
+   "main": "pale persimmon",
+   "main_hex": "#FCAE90",
+   "sec": "deep moss green",
+   "sec_hex": "#396C02"
   },
   "dong": {
    "main": "pale sky blue",
@@ -2027,10 +2074,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from spring green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "pale berry",
-   "main_hex": "#FFB4D7",
-   "sec": "deep fresh olive green",
-   "sec_hex": "#526D01"
+   "main": "pale maple red",
+   "main_hex": "#FDA1A0",
+   "sec": "deep moss green",
+   "sec_hex": "#246E17"
   },
   "dong": {
    "main": "soft pale mint",
@@ -2067,10 +2114,10 @@
    "sec_hex": "#F8D6B3"
   },
   "thu": {
-   "main": "rich berry",
-   "main_hex": "#CC70B8",
-   "sec": "pale leaf green",
-   "sec_hex": "#A7DEB0"
+   "main": "rich amber",
+   "main_hex": "#FC9011",
+   "sec": "pale fresh olive green",
+   "sec_hex": "#C3DD93"
   },
   "dong": {
    "main": "soft blue",
@@ -2108,10 +2155,10 @@
    "sec_hex": "#EB6F28"
   },
   "thu": {
-   "main": "pale coral red",
-   "main_hex": "#FFB1A5",
-   "sec": "deep berry",
-   "sec_hex": "#9E336E"
+   "main": "pale pumpkin",
+   "main_hex": "#FEB29D",
+   "sec": "deep plum",
+   "sec_hex": "#770F53"
   },
   "dong": {
    "main": "pale blue",
@@ -2148,10 +2195,10 @@
    "sec_hex": "#E3E097"
   },
   "thu": {
-   "main": "rich fresh olive green",
-   "main_hex": "#779636",
-   "sec": "pale pomegranate red",
-   "sec_hex": "#FFACAB"
+   "main": "rich ginkgo yellow",
+   "main_hex": "#E6DA5C",
+   "sec": "pale wine berry",
+   "sec_hex": "#EB97B0"
   },
   "dong": {
    "main": "soft blue",
@@ -2201,10 +2248,10 @@
    "sec_hex": "#D88006"
   },
   "thu": {
-   "main": "coral red",
-   "main_hex": "#F97B6D",
-   "sec": "deep fresh olive green",
-   "sec_hex": "#526D01"
+   "main": "amber",
+   "main_hex": "#FD9A3A",
+   "sec": "deep wine berry",
+   "sec_hex": "#85003D"
   },
   "dong": {
    "main": "sapphire",
@@ -2273,10 +2320,10 @@
    "sec_depth_moved": "t 0.0 -> 2.5 (no free Hạ pair at her own secondary depth)"
   },
   "thu": {
-   "main": "deep coral red",
-   "main_hex": "#D74F44",
+   "main": "deep maple red",
+   "main_hex": "#CD3732",
    "sec": "pale fresh olive green",
-   "sec_hex": "#C1D89C"
+   "sec_hex": "#C3DD93"
   },
   "dong": {
    "main": "deep violet",
@@ -2315,10 +2362,10 @@
    "main_depth_moved": "t 1.9 -> 0.0"
   },
   "thu": {
-   "main": "deep coral red",
-   "main_hex": "#C43843",
-   "sec": "pale leaf green",
-   "sec_hex": "#94CB8E"
+   "main": "deep amber",
+   "main_hex": "#FE7B33",
+   "sec": "pale fresh olive green",
+   "sec_hex": "#A7DB96"
   },
   "dong": {
    "main": "deep indigo",
@@ -2345,10 +2392,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from leaf green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "pomegranate red",
-   "main_hex": "#F16D81",
-   "sec": "deep berry",
-   "sec_hex": "#A13163"
+   "main": "persimmon",
+   "main_hex": "#EE6F39",
+   "sec": "deep plum",
+   "sec_hex": "#6F1765"
   },
   "dong": {
    "main": "ice blue",
@@ -2385,10 +2432,10 @@
    }
   },
   "thu": {
-   "main": "light coral red",
-   "main_hex": "#FB8779",
-   "sec": "deep berry",
-   "sec_hex": "#9E336E"
+   "main": "light persimmon",
+   "main_hex": "#F88163",
+   "sec": "deep moss green",
+   "sec_hex": "#246E17"
   },
   "dong": {
    "main": "light teal",
@@ -2426,10 +2473,10 @@
    }
   },
   "thu": {
-   "main": "coral red",
-   "main_hex": "#F47082",
-   "sec": "deep leaf green",
-   "sec_hex": "#298543"
+   "main": "persimmon",
+   "main_hex": "#ED7525",
+   "sec": "deep moss green",
+   "sec_hex": "#567800"
   },
   "dong": {
    "main": "jade",
@@ -2454,10 +2501,10 @@
    "sec_hex": "#FED3B8"
   },
   "thu": {
-   "main": "deep leaf green",
-   "main_hex": "#4A9044",
-   "sec": "pale pomegranate red",
-   "sec_hex": "#FEAFB7"
+   "main": "deep fresh olive green",
+   "main_hex": "#529E41",
+   "sec": "pale maple red",
+   "sec_hex": "#FCA0AA"
   },
   "dong": {
    "main": "soft cerulean blue",
@@ -2536,10 +2583,10 @@
    "sec_hex": "#E5E29B"
   },
   "thu": {
-   "main": "deep pomegranate red",
-   "main_hex": "#B92C3D",
-   "sec": "pale coral orange",
-   "sec_hex": "#FFB59F"
+   "main": "deep maple red",
+   "main_hex": "#B0072D",
+   "sec": "pale ginkgo yellow",
+   "sec_hex": "#E4E991"
   },
   "dong": {
    "main": "deep indigo",
@@ -2565,10 +2612,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from leaf green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "deep berry",
-   "main_hex": "#953783",
-   "sec": "pale leaf green",
-   "sec_hex": "#A7DEB0"
+   "main": "deep plum",
+   "main_hex": "#641E75",
+   "sec": "pale fresh olive green",
+   "sec_hex": "#B1E1A1"
   },
   "dong": {
    "main": "soft sapphire blue",
@@ -2644,10 +2691,10 @@
    "sec_depth_moved": "t 0.0 -> 2.0 (no free Hạ pair at her own secondary depth)"
   },
   "thu": {
-   "main": "deep pomegranate red",
-   "main_hex": "#B02236",
-   "sec": "pale fresh olive green",
-   "sec_hex": "#C1D89C"
+   "main": "deep wine berry",
+   "main_hex": "#85003D",
+   "sec": "pale ginkgo yellow",
+   "sec_hex": "#EDE58D"
   },
   "dong": {
    "main": "deep orchid",
@@ -2685,10 +2732,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral orange (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "light fresh olive green",
-   "main_hex": "#ADC881",
-   "sec": "deep cranberry",
-   "sec_hex": "#A92A55"
+   "main": "light moss green",
+   "main_hex": "#9CC878",
+   "sec": "deep plum",
+   "sec_hex": "#6F1765"
   },
   "dong": {
    "main": "cool aquamarine",
@@ -2715,10 +2762,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from spring green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "berry",
-   "main_hex": "#E179AD",
-   "sec": "light coral orange",
-   "sec_hex": "#FBA188"
+   "main": "persimmon",
+   "main_hex": "#F26D4D",
+   "sec": "light moss green",
+   "sec_hex": "#94CC84"
   },
   "dong": {
    "main": "periwinkle",
@@ -2757,10 +2804,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral red (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "light coral red",
-   "main_hex": "#FC8B8A",
-   "sec": "light leaf green",
-   "sec_hex": "#93CA8D"
+   "main": "light wine berry",
+   "main_hex": "#D9698E",
+   "sec": "light ginkgo yellow",
+   "sec_hex": "#EBE17B"
   },
   "dong": {
    "main": "light violet",
@@ -2799,10 +2846,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral orange (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "rich cranberry",
-   "main_hex": "#DE6385",
+   "main": "rich wine berry",
+   "main_hex": "#BB3967",
    "sec": "deep fresh olive green",
-   "sec_hex": "#658319"
+   "sec_hex": "#6C910F"
   },
   "dong": {
    "main": "rich indigo",
@@ -2828,10 +2875,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral orange (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "pale cranberry",
-   "main_hex": "#FCA4BA",
-   "sec": "deep fresh olive green",
-   "sec_hex": "#66841A"
+   "main": "pale ginkgo yellow",
+   "main_hex": "#ECE485",
+   "sec": "deep wine berry",
+   "sec_hex": "#A11C50"
   },
   "dong": {
    "main": "clear ice blue",
@@ -2858,10 +2905,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral orange (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "light coral orange",
-   "main_hex": "#FBAA88",
-   "sec": "leaf green",
-   "sec_hex": "#8FB35F"
+   "main": "light plum",
+   "main_hex": "#CD86BD",
+   "sec": "fresh olive green",
+   "sec_hex": "#91B549"
   },
   "dong": {
    "main": "cool lilac",
@@ -2888,10 +2935,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from spring green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "light leaf green",
-   "main_hex": "#92D19D",
-   "sec": "berry",
-   "sec_hex": "#D67BC1"
+   "main": "light fresh olive green",
+   "main_hex": "#A9D384",
+   "sec": "plum",
+   "sec_hex": "#AA57A9"
   },
   "dong": {
    "main": "sky blue",
@@ -2918,10 +2965,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from coral red (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "berry",
-   "main_hex": "#E077AC",
-   "sec": "pale fresh olive green",
-   "sec_hex": "#C1D89C"
+   "main": "pumpkin",
+   "main_hex": "#F58639",
+   "sec": "pale ginkgo yellow",
+   "sec_hex": "#EDE58D"
   },
   "dong": {
    "main": "soft orchid",
@@ -2971,10 +3018,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from spring green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "light berry",
-   "main_hex": "#F196C2",
-   "sec": "coral orange",
-   "sec_hex": "#EE785B"
+   "main": "light persimmon",
+   "main_hex": "#F5935C",
+   "sec": "moss green",
+   "sec_hex": "#85A83D"
   },
   "dong": {
    "main": "light indigo",
@@ -3013,10 +3060,10 @@
    "sec_borrowed": "Hạ full: secondary borrowed from leaf green (fresh accent, main stays orange/yellow)"
   },
   "thu": {
-   "main": "light cranberry",
-   "main_hex": "#F58AA5",
-   "sec": "leaf green",
-   "sec_hex": "#8ABB70"
+   "main": "light wine berry",
+   "main_hex": "#D8658A",
+   "sec": "fresh olive green",
+   "sec_hex": "#9DBF5A"
   },
   "dong": {
    "main": "light sapphire",
@@ -3042,10 +3089,10 @@
    "root": true
   },
   "thu": {
-   "main": "light fresh olive green",
-   "main_hex": "#97C076",
-   "sec": "berry",
-   "sec_hex": "#DA77B5"
+   "main": "light ginkgo yellow",
+   "main_hex": "#EAE073",
+   "sec": "plum",
+   "sec_hex": "#AE539D"
   },
   "dong": {
    "main": "light ice blue",
@@ -3070,10 +3117,10 @@
    "sec_hex": "#E5E29B"
   },
   "thu": {
-   "main": "berry",
-   "main_hex": "#D57AC1",
-   "sec": "pale coral orange",
-   "sec_hex": "#FBB993"
+   "main": "wine berry",
+   "main_hex": "#C84574",
+   "sec": "pale pumpkin",
+   "sec_hex": "#FEB48A"
   },
   "dong": {
    "main": "soft orchid purple",
@@ -3163,10 +3210,10 @@
    }
   },
   "thu": {
-   "main": "light cranberry",
-   "main_hex": "#F7AACF",
-   "sec": "light leaf green",
-   "sec_hex": "#9CD7A6"
+   "main": "light pumpkin",
+   "main_hex": "#FEA169",
+   "sec": "light plum",
+   "sec_hex": "#C97EB9"
   },
   "dong": {
    "main": "light emerald",
@@ -3194,10 +3241,10 @@
    "sec_depth_moved": "t 1.4 -> 0.0 (no free Hạ pair at her own secondary depth)"
   },
   "thu": {
-   "main": "coral orange",
-   "main_hex": "#F5886B",
-   "sec": "rich berry",
-   "sec_hex": "#D3689F"
+   "main": "amber",
+   "main_hex": "#FE9E43",
+   "sec": "rich plum",
+   "sec_hex": "#A24893"
   },
   "dong": {
    "main": "orchid",
@@ -3223,10 +3270,10 @@
    "root": true
   },
   "thu": {
-   "main": "coral red",
-   "main_hex": "#F67567",
+   "main": "maple red",
+   "main_hex": "#E9594D",
    "sec": "pale fresh olive green",
-   "sec_hex": "#C1D89C"
+   "sec_hex": "#C3DD93"
   },
   "dong": {
    "main": "emerald",

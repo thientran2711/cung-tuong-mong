@@ -10,7 +10,7 @@ T = lambda f, n: ImageFont.truetype(f, n)
 f_t, f_s, f_col, f_id, f_grp, f_n, f_h, f_tag = T(FB, 60), T(F, 28), T(FB, 52), T(FB, 56), T(FB, 30), T(F, 23), T(F, 20), T(FB, 22)
 BG, INK, SUB, RED, GRP = (250, 248, 244), (40, 36, 34), (110, 104, 98), (190, 40, 40), (120, 70, 30)
 SE = ('xuan', 'ha', 'thu', 'dong'); VN = {'xuan': 'XUÂN', 'ha': 'HẠ', 'thu': 'THU', 'dong': 'ĐÔNG'}
-SUBT = {'xuan': 'hồng · đỏ Tết · xanh lá xuân', 'ha': 'CAM · VÀNG', 'thu': 'san hô · quả mọng · lá tươi', 'dong': 'lạnh: lam · tím · ngọc'}
+SUBT = {'xuan': 'hồng · đỏ Tết · xanh lá xuân', 'ha': 'CAM · VÀNG', 'thu': 'lá phong · hồng · bí · mận · rêu', 'dong': 'lạnh: lam · tím · ngọc'}
 COLBG = {'xuan': (252, 234, 238), 'ha': (255, 243, 214), 'thu': (252, 232, 222), 'dong': (228, 238, 250)}
 PAD, IDW, CW, HEAD = 18, 330, 580, 370
 GORDER = ['Dịu dàng', 'Đoan trang', 'Sắc sảo', 'Kiêu kỳ', 'Quyến rũ', 'Lạnh lùng']
@@ -75,7 +75,7 @@ def page(n, rows, N):
     dr.text((PAD + 6, 14), f'BẢNG 4 MÙA TỪNG NGƯỜI · tờ {n}/{N} · mỗi hàng = 1 phi tần, đủ 4 mùa', font=f_t, fill=INK)
     for i, t in enumerate([
         'Ô lớn = màu CHÍNH, ô nhỏ = màu PHỤ · ★ GỐC = cặp màu tranh đã vẽ (ở mùa của nó) · CŨ → MỚI = chuyên gia sửa + lý do',
-        'Mỗi mùa lấy từ HỌ MÀU của mùa: Xuân hồng/đỏ/xanh lá xuân · Hạ CAM/VÀNG · Thu san hô/quả mọng/lá tươi · Đông lạnh',
+        'Mỗi mùa lấy từ HỌ MÀU của mùa: Xuân hồng/đỏ/xanh lá xuân · Hạ CAM/VÀNG · THU lá phong đỏ, quả hồng, bí ngô, hổ phách, lá bạch quả, mận, rêu (bản mới) · Đông lạnh',
         'Cùng độ đậm của từng người ở cả 4 mùa (người đậm thì đậm, người nhạt thì nhạt) — Thu/Đông KHÔNG đậm hơn',
         'Không xám · không nâu/màu già · không vàng hoàng gia · mỗi cặp riêng mỗi mùa (cổng 0 TRÙNG)',
         'Hạ: màu CHÍNH luôn cam/vàng; "phụ mượn" = Hạ hết chỗ, màu phụ mượn san hô / xanh lá tươi · "~đậm" = đổi độ đậm 1 màu cho khỏi trùng']):

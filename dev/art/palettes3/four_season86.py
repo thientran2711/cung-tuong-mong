@@ -64,6 +64,22 @@ for s in SE:
     FAM[s] = []
     for f in C['families'][s]:
         FAM[s].append({'name': RENAME.get(f['name'], f['name']), 'sw': [oklch(h) for h in f['swatches']]})
+BORROW = [f for ss in ('thu', 'xuan') for f in FAM[ss] if f['name'] in ('coral orange', 'coral red', 'leaf green', 'spring green')]
+
+# THU v2 (owner on four-seasons sheets: "Cái bảng màu của mùa thu nó chưa có ra mùa thu nha"): real autumn-leaf families,
+# richer + warmer than Hạ (Hạ = bright light cam/vàng), still no brown / grey / old colour. OKLCH (L, C, H) pale·medium·deep.
+THU_V2 = [
+    ('maple red',        [(0.80, 0.11, 27), (0.66, 0.18, 28), (0.54, 0.19, 27)]),
+    ('persimmon',        [(0.82, 0.10, 42), (0.70, 0.17, 42), (0.60, 0.18, 40)]),
+    ('pumpkin',          [(0.83, 0.11, 50), (0.74, 0.16, 52), (0.66, 0.17, 50)]),
+    ('amber',            [(0.84, 0.13, 60), (0.77, 0.17, 60), (0.72, 0.18, 60)]),
+    ('ginkgo yellow',    [(0.91, 0.11, 104), (0.885, 0.14, 104), (0.87, 0.15, 104)]),
+    ('wine berry',       [(0.78, 0.10, 0), (0.60, 0.17, 2), (0.48, 0.17, 4)]),
+    ('plum',             [(0.78, 0.09, 335), (0.60, 0.15, 335), (0.47, 0.15, 333)]),
+    ('moss green',       [(0.84, 0.10, 132), (0.70, 0.14, 132), (0.56, 0.14, 134)]),
+    ('fresh olive green',[(0.86, 0.10, 124), (0.74, 0.14, 125), (0.62, 0.15, 126)]),
+]
+FAM['thu'] = [{'name': n, 'sw': sw} for n, sw in THU_V2]
 
 TMAX = {'xuan': 2.6, 'thu': 2.6, 'dong': 2.6, 'ha': 2.5}
 
@@ -74,6 +90,7 @@ def t_of(L):
 
 def fam_colour(s, f, t, dh=0.0):
     t = max(0.0, min(TMAX[s], t))
+    if f['name'] in ('persimmon', 'pumpkin', 'amber'): t = min(t, 2.0)   # darker autumn orange = rust / brown
     sw = f['sw']
     if t <= 2:
         i = min(1, int(t)); u = t - i
@@ -180,12 +197,13 @@ def solve(seed=0, verbose=False):
                         pal = {'main': nm(tm2, fm), 'main_hex': mh, 'sec': nm(ts2, fs), 'sec_hex': sh}
                         if mfree: pal['main_depth_moved'] = f't {tm:.1f} -> {tm2:.1f}'
                         if free: pal['sec_depth_moved'] = f't {ts:.1f} -> {ts2:.1f} (no free {VN[s]} pair at her own secondary depth)'
+                        if s == 'thu' and 'ha' in out[k] and max(de2000(mh, out[k]['ha']['main_hex']), de2000(sh, out[k]['ha']['sec_hex'])) < 14: continue   # her Thu must not look like her Hạ
                         vs = [pair_verdict(pal, q)[0] for _, q in placed]
                         if 'FAIL' not in vs and not (strict and 'WARN' in vs): return (pal, fm, fs)
                 return None
 
             def try_borrow(any_depth):     # Hạ: orange/yellow MAIN + a borrowed fresh coral / green accent
-                borrow = [f for ss in ('thu', 'xuan') for f in FAM[ss] if f['name'] in ('coral orange', 'coral red', 'leaf green', 'spring green')]
+                borrow = BORROW
                 bc = []
                 tms = sorted((tm, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5), key=lambda x: abs(x - tm)) if any_depth else [tm]
                 for fm in FAM['ha']:
@@ -232,7 +250,13 @@ def main():
         out = solve(seed)
         if out: break
     if not out: solve(0, verbose=True); sys.exit('no solution')
-    D = {'_note': __doc__ + f'\nseed {seed}', 'status': 'PROPOSAL (P4) — 4 pairs per person, owner verdict pending',
+    only = os.environ.get('ONLY')
+    if only:
+        for k in IDS:
+            for ss in SE:
+                if ss != only: out[k][ss] = OLD[k][ss]
+    D = {'_note': __doc__ + f'\nseed {seed}' + ('\nTHU v2 autumn families (owner: "Cái bảng màu của mùa thu nó chưa có ra mùa thu nha"): ' + ', '.join(n for n, _ in THU_V2) + '. Xuân/Hạ/Đông unchanged from commit 44715a2a6.' if only else ''),
+         '_thu_families_v2': {n: [lch2hex(*x) for x in sw] for n, sw in THU_V2}, 'status': 'PROPOSAL (P4) — 4 pairs per person, owner verdict pending',
          '_flags': {'s44_brown_root': people['s44']['flag'],
                     'root_changed_CU_MOI': [k for k in IDS if people[k]['changed']]}}
     for k in IDS:
