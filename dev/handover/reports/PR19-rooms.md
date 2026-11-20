@@ -24,3 +24,9 @@ STATUS 20/11 ~02:55Z: depth 8 (limit 8), START_CTX ~3 % (get_session used_tokens
 - LOOK (notes, no redraw): wood floors + white light OK, pink/ivory/jade OK, palace flowers right. Faults: 31 and 35 almost the same layout (same 3w bed template — next bedrooms need distinct layouts); 34 doorway an arch, not rounded-corner rectangle; floors still somewhat glossy; bedrooms strongly pink.
 - Thừa Minh chính điện skipped: no palace signature card in the builders.
 - QUEUE CORRECTION (L2: each palace chính điện = 3 versions Tần < Phi < Quý phi, each reception + bedroom): 7 palaces (TM KT CT HA DH VH TX) × 6 = 42; Cảnh Phúc done; TX chính điện = HQP rooms already done → ~36 − 5 = ~31 rooms left (Tần 7, Phi 12, Quý phi 12) ≈ 7 batches ≈ 4 200 cr; + Từ Ninh ~2 + ~35 place scenes (~37 gens ≈ 5 000 cr) → all ≈ 9 200 cr.
+
+## Side job: c06 HẠ palette trial (ROOT-65, owner "Làm thử cô đó màu hạ xem") — 1 gen 135 + cut 3 = 138 cr
+- F3 recipe (32fa74f) copied: make_c06_ha_trial.py = make_c06_thu_trial.py with the HẠ pair of palettes_season_deep.json c06.ha (marigold #FEA166 + leaf green #64B374); c06.ha.FULL.txt differs from c06.thu.FULL.txt only in the colour words/hexes.
+- check_store: DEEP_SEASON_TRIAL = {"c06": ["thu", "ha"]}; root_hex_fails picks the trial season pair the prompt carries (tested: ha PASS, thu PASS, wrong hex FAIL). Gate PASS.
+- gen nVskOsQYQD (seed 7174, ref eIyOFEidqL) → cut bxMY8Fe5Y2. Sheet dev/handover/review-sheets/new-faces-v4/c06_ha_trial_PR19.jpg (CŨ | THU | HẠ, make_sheet_c06_ha_trial.py).
+- LOOK: same face/pose/ponytail/bird whistle; jacket marigold, skirt + sash leaf green; mouth closed, eyes level. Notes: small ivory inner collar; red ribbon + red tassel stay (hair/knot, not robe). FACE_CUTS untouched.

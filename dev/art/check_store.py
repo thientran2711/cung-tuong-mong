@@ -825,13 +825,13 @@ PROMPT_MAX = 10000   # MG3: the Magnific gen tool refuses prompts over 10 000 ch
 HEX_RX = re.compile(r"#[0-9A-Fa-f]{6}\b")
 DEEP_COLOUR_RX = re.compile(r"\b(?:deep|dark|darker|deeper|dusky)[- ](?:blue|violet|blue-violet|purple|green|red|pink|rose|plum|teal|jade|navy|burgundy|crimson|wine|aubergine|lilac|lavender|aqua|aquamarine|turquoise|coral|peach|gold|yellow|orange|mint|periwinkle|emerald|sapphire|indigo|magenta|mauve|ochre|cyan|celadon|olive|maroon|scarlet|ruby|amber)\b", re.I)
 DEEP_ROOT_IDS = {"s44"}   # ids whose root pair is read from palettes_season_deep.json (ROOT-64, s44 only)
-DEEP_SEASON_TRIAL = {"c06": "thu"}   # ROOT-65 Lượt 982 owner "Vẽ 1 cô thử theo bảng màu mới": 1 trial gen, pair = this season of palettes_season_deep.json
+DEEP_SEASON_TRIAL = {"c06": ["thu", "ha"]}   # ROOT-65 Lượt 982 owner "Vẽ 1 cô thử theo bảng màu mới" (thu) + "Làm thử cô đó màu hạ xem" (ha, PR19): trial gens, pair = one of these seasons of palettes_season_deep.json (the one the prompt carries)
 def root_pair(pid):
     """-> (main_hex, sec_hex) of the person's ROOT palette, or None when the id has none (Kho / Công chúa / unknown)."""
     if not pid: return None
     fc = os.path.join(ART, "face-common")
     if pid in DEEP_SEASON_TRIAL:
-        v = json.load(open(os.path.join(fc, "palettes_season_deep.json"), encoding="utf-8"))[pid][DEEP_SEASON_TRIAL[pid]]
+        v = json.load(open(os.path.join(fc, "palettes_season_deep.json"), encoding="utf-8"))[pid][DEEP_SEASON_TRIAL[pid][0]]
         return (v["main_hex"].upper(), v["sec_hex"].upper())
     if pid in DEEP_ROOT_IDS:   # F3/ROOT-64: s44 sec sage grey -> sage green (owner 'Xám là bỏ hết'); pair lives in P3's palettes_season_deep.json
         dp = json.load(open(os.path.join(fc, "palettes_season_deep.json"), encoding="utf-8")).get(pid, {})
@@ -854,6 +854,10 @@ def root_hex_fails(text, pid):
     rp = root_pair(pid)
     if not rp: return []
     have = {h.upper() for h in HEX_RX.findall(text)}
+    if pid in DEEP_SEASON_TRIAL:   # trial: the season pair the prompt carries (most hexes present)
+        dp = json.load(open(os.path.join(ART, "face-common", "palettes_season_deep.json"), encoding="utf-8"))[pid]
+        prs = [(dp[k]["main_hex"].upper(), dp[k]["sec_hex"].upper()) for k in DEEP_SEASON_TRIAL[pid]]
+        rp = max(prs, key=lambda p: sum(h in have for h in p))
     out = []
     miss = [h for h in rp if h not in have]
     if miss: out.append(("B20", "ROOT HEX", f"{pid}: root pair {rp[0]}/{rp[1]} required, missing {', '.join(miss)}"))
