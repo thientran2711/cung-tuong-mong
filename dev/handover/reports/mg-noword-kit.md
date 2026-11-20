@@ -1,0 +1,5 @@
+# mg-noword-kit — SẴN SÀNG KIỂM (review/mg-noword-kit 6b6f1c52, from main 37e4a68f)
+PRIORITY #1 CHECK: OD 20/11 ~05:10Z + L1264 | main none | review/mg-noword-a (canvas words; landing) | claims mg-noword-b.
+Kit change once (KIT.md 13.x): CÁCH CHƠI row hidden in play; clock chip = ring + number; kg82Signs pass turns play buttons to signs, hides small lines and word-only rows. Test dev/test/mg-noword-kit.js (all KG82 kinds, whole .kgame frame, DOM+canvas). mg-ready-guide PASS 9/9. Fold+iPad shots looked (dan, co).
+Scan (DOM/kit elements, 755x1000) before → after: CÁCH CHƠI row all kinds → 0 · clock «Còn N giây» all timed kinds → ring+N · button words (co, hoa, huong, banh, td_*, hoadien, demo «Đã hiểu») → signs · «Ma ma» hint row (td_*) → hidden · «Còn lại … phần để chia» → number only.
+Left (canvas words belong to groups a/b; test lists them, only kit elements gate): td_hanh person cards (names + one-line descriptions: needs portraits only → group b / KIT_REQUESTS), and every canvas word of kinds not yet landed from mg-noword-a/b. The frame TITLE line («Đàn: Tấu khúc») is the kit header, left on purpose — decide.

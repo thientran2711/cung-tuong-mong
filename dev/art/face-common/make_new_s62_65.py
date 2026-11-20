@@ -9,6 +9,7 @@ m22 m28 m29 c04 c10 c16 c22 c28) and from each other (see DIFF below).
 COLOURS: root pair read from s_root_colours.json (s62–s65). Until P6's A32 palette lands these are F4 PLACEHOLDER toned picks
 (A32 band of four_season86_a32.BAND, src says so); at GO replace them there with P6's root pair and re-run → sNN.v5.FULL.txt.
 Run: python3 dev/art/face-common/make_new_s62_65.py"""
+EAR = "Bare earlobes: she wears NO earrings, nothing at the ears. "   # owner 20/11 (ROOT-66 relay) "…không ai được đeo hoa tai." (until NOEAR1 puts it in the master block)
 import os, io, builtins
 D = os.path.dirname(os.path.abspath(__file__))
 import sys as _s, json as _j; _s.path.insert(0, D); import face_gate as FG   # MG1 B25: master block + D9 + face gate on every output
@@ -84,6 +85,7 @@ for sid, grp, age, sw, hair, outfit, pose, ak in S_NEW:
 fails = []
 for k, v in out.items():
     if k.endswith('.FULL'):
+        v = v.replace("No text, no labels.", EAR + "No text, no labels.") if "NO earrings" not in v else v
         try: v = FG.final(v, k)
         except Exception as e: fails.append(k); print(f"GATE FAIL {k}: {e}"); continue
     _open(os.path.join(D, f'{k}.txt'), 'w').write(v)

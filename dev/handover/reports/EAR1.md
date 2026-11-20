@@ -1,6 +1,35 @@
 # EAR1 — earring + ngọc bội + túi hương try-on test (owner 20/11 ~06:20Z)
 depth 1 · START_CTX ~3 % (1M window) · worker of Foreman C ROOT-66
 
+## UPDATE 3 ~07:05Z — REAL LAYERS + hairpins + flowers (owner: tách lớp như Photoshop; trâm/hoa chỉ 2–3 chỗ đẹp, bấm là tự vào)
+Demo dev/art/earring-test/earring-demo.html (2.29 MB). Legend on the page: người → hoa tai tai xa → MẶT → hoa tai tai gần → TÓC TRƯỚC → thân trâm → TÓC → đầu trâm/hoa → ngọc bội/túi hương → TAY.
+- Layers per figure (make_layers.py, masks in masks/): SAM 3.1 via Magnific images_segment, 35 cr per mask. face = "her face, ears and neck skin"; hair = "her hair"; hands (c22) = "her two clasped hands".
+  - fronthair = hair over the face, using the face mask closed by ~44 px, alpha weighted by darkness.
+  - hairtop = hair above the earlobe line; it hides the pin shafts.
+- Cost per figure: 2 masks = 70 cr (hair + face); +35 for hands when the hands cover the belly.
+- Mask quality (looked at 3x): hair and face edges are clean, though binary (hard edge, 1 px). The hands mask is clean.
+- SAM could NOT isolate the sleeve cuffs: twice it returned the whole robe ("…hands + sleeve cuffs" and point clicks). Text prompts naming the cuff failed ("not found"). The cuffs therefore remain hand-placed polygons (c22 only).
+- Scale to all ~90: ~70–105 cr each ≈ 6–9k cr, about 2–3 calls per figure, fully scripted. Per figure, hand work = picking 2–3 head slots + ear/sash points (~5 min each by eye) + cuff polygons only when sleeves hang in front.
+- Hairpins (0 gens): the 8 old sprites from hairpin-tryon; 5 used (dangle, peony, plum, butterfly, floralfork).
+  - Each pin is split at its ornament base. The shaft is rotated to the slot angle, runs nearly horizontally INTO the hair along the head (±95–105°), is shortened, and goes UNDER the hair layer.
+  - The ornament stays upright with a 4–14° tilt, so dangles hang straight down. It gets a soft contact shadow.
+- Flowers: 1 gpt-2-6 gen N2qujKT6D9 (80 cr) + bg removal aFGRMR8fSh → 6 sprites (mẫu đơn, mai, đào, sen nhỏ, nhài, lan) in sprites/.
+- Slots (anchors.json): 2–3 per figure, fixed position, angle and size. They copy where the person's approved rank pictures carry their flower/pin: upper side of the head above the temple (main); crown/back of the knot; far side smaller.
+  - c11 already has a painted pin on the left, so it gets 2 slots; c09 and c22 get 3.
+  - Tapping an item fills the next free slot; tapping it again removes it. When all slots are full, the other buttons grey out.
+- Naturalness card: c09 Thường tại approved picture (painted peony) | c09 bare head + peony on layers | c11 painted pin (left) vs layered plum pin (right).
+- Fixes after LOOK:
+  - The crown pin shaft crossed the forehead → shafts now run along the head and are shortened.
+  - The near earring was hidden by a too-wide front-hair layer → front hair is now limited to the face area.
+  - The far-side flower and c22's side pins stood outside the hair → slots moved inward.
+- Crown (Hoàng hậu): NOT painted. It would be the TOP layer above hair, anchored to the crown of the head; it takes the place of all head slots (no pins with it).
+- Credits this round: 86 984 left (87 520 before) = 536 cr. That is 8 SAM masks ≈ 280 + flower gen 80 + bg 3; the rest is probably the 2 refused SAM calls / rounding (not checked per call).
+- Screenshots: screenshots/{fold,ipad}_{c11,c09,c22}_{off,on}.png, {fold,ipad}_page_off.png, {fold,ipad}_compare.png.
+- Superseded: the hand-cut occluders (c09_occ_cheek, c22_occ_hands) were removed from the folder; make_occ.py is kept for the record.
+
+HANDOVER (if a successor continues): depth 1; START_CTX ~3 %; context now near the START+25 % roll line.
+Open items: owner verdict on the layered look; per-figure slot picking for the other ~87 figures; antialiasing the binary SAM edges (feather 1 px) if the owner sees hard edges.
+
 ## UPDATE 2 ~06:45Z — owner feedback: c09 far ear + hands over belly; waist items back in (0 cr)
 - Demo dev/art/earring-test/earring-demo.html (1.73 MB): 3 figures, buttons «Đeo/Tháo hoa tai», «Đeo/Tháo ngọc bội», «Đeo/Tháo túi hương»; views Cận mặt · Dải lưng · Toàn thân.
 - c09 (3/4): far ear now wears an earring too — anchor (584,258), 0.8x size (perspective), HALF behind the cheek, hair strands across it (occluder c09_occ_cheek.png). Checked at 3x.
