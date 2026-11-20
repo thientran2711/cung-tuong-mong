@@ -130,7 +130,7 @@ const ORIGIN_LORE={
  dtq:["Cha ngươi giữ binh quyền biên ải. Ngươi quen ngựa, quen roi, thân thể khỏe hơn các khuê tú.","Võ tướng quý ngươi; văn thần chê ngươi thô, nhưng chẳng ai dám nói trước mặt."],
  muoi:["Nhà ngươi buôn muối, bạc chất đầy kho nhưng xuất thân thấp. Ngươi biết giá của mọi thứ.","Các phi tần khinh ngươi mùi muối, nhưng cũng nhận quà của ngươi."],
  cn:["Ngươi từng hầu trà ở Càn Thanh cung, được Hoàng thượng để ý một đêm rồi được sủng hạnh.","Cung nhân cũ vẫn gọi ngươi là chị; phi tần cũ nhớ ngươi từng đứng sau lưng họ."],
- nc:["Ngươi là công chúa Nam Chiếu, được gả sang Đại Hy để đổi lấy hòa bình biên ải. Phụ vương ngươi muốn ngươi làm tai mắt.","Thái hậu không ưa người ngoại tộc; triều thần dè chừng ngươi, nhưng Hoàng thượng thấy ngươi là tờ hòa ước."],
+ nc:["Ngươi là công chúa Cao Ly, được gả sang Đại Hy để đổi lấy hòa bình biên ải. Phụ vương ngươi muốn ngươi làm tai mắt.","Thái hậu không ưa người nước phiên; triều thần dè chừng ngươi, nhưng Hoàng thượng thấy ngươi là tờ hòa ước."],
  bd:["Ngươi lớn lên trên lưng ngựa giữa trướng nỉ thảo nguyên; phụ hãn gả ngươi sang để đổi mười năm yên biên ải.","Thái hậu gọi ngươi là người rợ; hậu cung xì xào, nhưng quân Bắc Địch chỉ yên khi ngươi còn yên."],
  td:["Cả nhà ngươi bị xử trảm vì một vụ án oan. Ngươi vào cung dưới tên khác để báo thù.","Không ai biết thân phận thật, nhưng kẻ thù vẫn ở trong cung."],
  ch:["Ngươi là cháu gái ruột Thái hậu, được bà đưa vào cung làm quân cờ.","Thái hậu chống lưng, Hoàng hậu e dè, và phi tần nào cũng nể ngươi ba phần."],
