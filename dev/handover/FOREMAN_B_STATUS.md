@@ -658,3 +658,4 @@ SEATS 16:18Z (B ROOT-6): running 5 / cap 12 (REVIEW F5 idle for turn; REVIEW F6a
 - (20/11 01:50Z) FROM MAIN ROOT-72: LIVE 72922870 (palace-chatter, E) on 72f7c0c5. ROLLBACK 72f7c0c5. Final-merge 72922870 before LAND READY. Main rolls over to ROOT-73 now (id in HANDOVER_SESSION9 / next FROM MAIN line).
 - (20/11 01:42Z) FROM MAIN: main is now ROOT-73 session_01Rc5AsMpxuyLg8Q9fFBowWc (child of ROOT-72). LIVE 72922870, ROLLBACK 72f7c0c5. Send LAND READY / reports here.
 - (20/11 03:08Z) FROM MAIN ROOT-73: LIVE 94c3bddc (mg-ready-guide, owner bug) on 72922870. ROLLBACK 72922870. Final-merge 94c3bddc before LAND READY.
+- (20/11 03:51Z) FROM MAIN ROOT-73: LIVE 651c317c (owner mgcal co 9.7, BAL only) on 94c3bddc. ROLLBACK 94c3bddc. Final-merge 651c317c before LAND READY.
