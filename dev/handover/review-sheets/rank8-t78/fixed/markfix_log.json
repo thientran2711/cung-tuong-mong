@@ -1,0 +1,133 @@
+[
+ {
+  "id": "s18_t7",
+  "status": "EXTRA",
+  "old": [
+   [
+    476,
+    318
+   ]
+  ],
+  "new": null,
+  "src": null,
+  "changed_px": 23
+ },
+ {
+  "id": "s37_t8",
+  "status": "EXTRA",
+  "old": [
+   [
+    626,
+    348
+   ]
+  ],
+  "new": null,
+  "src": null,
+  "changed_px": 22
+ },
+ {
+  "id": "s57_t7",
+  "status": "WRONG SIDE",
+  "old": [
+   [
+    466,
+    313
+   ]
+  ],
+  "new": [
+   583,
+   284
+  ],
+  "src": [
+   "s57_t7",
+   466,
+   313
+  ],
+  "changed_px": 40
+ },
+ {
+  "id": "s59_t7",
+  "status": "WRONG SIDE",
+  "old": [
+   [
+    481,
+    330
+   ]
+  ],
+  "new": [
+   591,
+   307
+  ],
+  "src": [
+   "s59_t7",
+   481,
+   330
+  ],
+  "changed_px": 75
+ },
+ {
+  "id": "s57_t8",
+  "status": "WRONG SIDE",
+  "old": [
+   [
+    457,
+    366
+   ]
+  ],
+  "new": [
+   572,
+   336
+  ],
+  "src": [
+   "s57_t7",
+   466,
+   313
+  ],
+  "changed_px": 32
+ },
+ {
+  "id": "s59_t8",
+  "status": "MISSING",
+  "old": [],
+  "new": [
+   588,
+   333
+  ],
+  "src": [
+   "s59_t7",
+   481,
+   330
+  ],
+  "changed_px": 34
+ },
+ {
+  "id": "s60_t7",
+  "status": "MISSING",
+  "old": [],
+  "new": [
+   582,
+   334
+  ],
+  "src": [
+   "s58_t7",
+   606,
+   301
+  ],
+  "changed_px": 10
+ },
+ {
+  "id": "s60_t8",
+  "status": "MISSING",
+  "old": [],
+  "new": [
+   575,
+   330
+  ],
+  "src": [
+   "s58_t8",
+   596,
+   350
+  ],
+  "changed_px": 15
+ }
+]
