@@ -1,4 +1,4 @@
-# SEAL9 — A26 disc colour table for the owner (worker of Foreman C ROOT-61) — depth 5, START_CTX ≈ 3 %
+# SEAL9 — A26 disc colour table for the owner (worker of Foreman C ROOT-61 → ROOT-62 session_01PEhRbv1mzNGajBinerKiRq from 01:15Z) — depth 5, START_CTX ≈ 3 %
 
 ## (1) DONE 20/11 — owner colour table sheet, 0 credits
 CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/emo-anim-groups/disc-colour-table.jpg (1920×5660)
