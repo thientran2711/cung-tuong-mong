@@ -34,3 +34,19 @@ parts = {'back': (1 - fade) * (~swag), 'sides': fade * (~swag), 'swag': swag * 1
 for k, m in parts.items():
     Image.fromarray(np.dstack([c, a * m * 255]).astype('uint8'), 'RGBA').save(os.path.join(S, f'phibach_{k}.webp'), quality=88, method=6)
 print('ok', b.size, (w, h))
+
+# --- EAR2 r2: NARROW ribbon phi bach (owner: "dải lụa dài, lơ lửng sau lưng, choàng qua tay, không lên tới vai") ---
+# ribbon_src.png = gen MBJUfm3DCm (pale ivory sheer ribbon on BLACK, ghost-mannequin front view): colour-to-alpha vs black,
+# tinted per figure to the outfit's secondary colour (F12), cut: back = arc between the two forearm loops (under the body),
+# sides = both loops + hanging ends (over the sleeves). Loop centres in sprite px: (105,325) and (645,325).
+r = np.array(Image.open(os.path.join(S, 'ribbon_src.png')).convert('RGB')).astype(float)
+ra = np.clip(r.max(2) / 255 * 1.5, 0, 0.9); ra[ra < 0.04] = 0
+lum = np.clip(r / np.maximum(r.max(2, keepdims=True), 1), 0, 1)        # hue of the paint (ivory / gold edge)
+h, w = ra.shape; yy = np.arange(h)[:, None] * np.ones((1, w)); xx = np.ones((h, 1)) * np.arange(w)[None, :]
+back = np.clip(np.minimum(xx - 140, 610 - xx) / 25, 0, 1) * (yy > 230) * (yy < 500)
+TINT = {'c22': (238, 160, 185), 'c11': (200, 165, 225), 'c09': (236, 168, 188)}
+for fid, t in TINT.items():
+    col = np.clip(255 - (255 - np.array(t)) * 0.75, 0, 255) * lum      # pale version of the secondary colour, keeps gold edge hue
+    for k, m in (('back', back), ('sides', 1 - back)):
+        Image.fromarray(np.dstack([col, ra * m * 255]).astype('uint8'), 'RGBA').save(
+            os.path.join(S, f'ribbon_{fid}_{k}.webp'), quality=88, method=6)
