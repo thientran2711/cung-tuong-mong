@@ -44,10 +44,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   window.kg82Play=function(kind,onEnd){n++;setTimeout(()=>onEnd(10-n),10)};try{kg82Play=window.kg82Play}catch(e){}
   mgCalOpen();await sleep(200);const box=()=>document.getElementById("kg82");o.frame=!!box()&&!box().hidden;o.kinds=mgCalKinds();
   o.btns=document.querySelectorAll("[data-mgcal-k]").length;o.sig0=mgCalBand("dan").sig;/* the shared band before her test (dan may carry the owner's landed code) */document.querySelector('[data-mgcal-k="dan"]').click();
-  for(let i=0;i<5;i++){await sleep(150);o.tiers.push(KG82.tier&&KG82.tier.word);const g=document.getElementById("kg82go");if(!g){o.noGo=i;break}g.click();await sleep(150);document.getElementById("kg82ok").click()}
+  for(let i=0;i<5;i++){await sleep(150);o.tiers.push(KG82.tier&&KG82.tier.word);const g=document.getElementById("kg82go");if(!g){o.noGo=i;break}g.click();await sleep(150);(document.getElementById("mgcal-nx")||document.getElementById("kg82ok")).click()}
   await sleep(200);const txt=(document.getElementById("kg82")||{}).textContent||"";o.res=/Mức tay của người/.test(txt);o.code=/CTM-CAL dan:/.test(txt);
   const R=JSON.parse(localStorage.getItem("ctm-mgcal")||"{}");o.rec=R.dan&&R.dan.raws;o.b=R.dan&&R.dan.b;o.shared=mgCalBand("dan").sig===o.sig0;
-  o.only=mgCalCode().split(" ").length===2;o.pct=/%/.test(txt);document.getElementById("kg82ok").click();await sleep(150);o.back=document.querySelectorAll("[data-mgcal-k]").length;{const t2=(document.getElementById("kg82")||{}).textContent||"";o.rows=/Đã thử 1\/\d+ môn/.test(t2)&&/Chưa thử/.test(t2)}kg82Close();try{kg82Play=k0}catch(e){}return o});
+  o.only=mgCalCode().split(" ").length===2;o.pct=/%/.test(txt);(document.getElementById("mgcal-nx")||document.getElementById("kg82ok")).click();await sleep(150);o.back=document.querySelectorAll("[data-mgcal-k]").length;{const t2=(document.getElementById("kg82")||{}).textContent||"";o.rows=/Đã thử 1\/\d+ môn/.test(t2)&&/Chưa thử/.test(t2)}kg82Close();try{kg82Play=k0}catch(e){}return o});
  console.log(JSON.stringify(u));
  ok(u.frame&&u.btns===u.kinds.length&&u.kinds.length>=10,'5 the kit game frame opens with one button per mini-game kind',{btns:u.btns,kinds:u.kinds.length});
  ok(u.tiers.length===5&&u.tiers[0]==="Dễ"&&u.tiers[4]==="Khó","5 five rounds, easy → hard",u.tiers);
@@ -58,8 +58,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 5c owner 17/11 ~17:10Z: ONE run through every kind in order; stop keeps progress; resume starts at the next kind not done */
  const sq=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const o={};let n=0;const k0=kg82Play;window.kg82Play=function(kind,onEnd){n++;setTimeout(()=>onEnd(6),5)};try{kg82Play=window.kg82Play}catch(e){}
   localStorage.removeItem("ctm-mgcal");const ks=mgCalKinds();mgCalOpen();await sleep(150);const b=document.getElementById("mgcal-seq");o.label=b&&b.textContent;b.click();o.played=[];
-  for(let j=0;j<3;j++){for(let i=0;i<5;i++){await sleep(60);document.getElementById("kg82go").click();await sleep(60);document.getElementById("kg82ok").click()}await sleep(80);o.played.push(Object.keys(JSON.parse(localStorage.getItem("ctm-mgcal")||"{}")).length);if(j<2)document.getElementById("mgcal-next").click()}
-  document.getElementById("kg82ok").click();await sleep(150);const b2=document.getElementById("mgcal-seq");o.resume=b2&&b2.textContent;b2.click();await sleep(100);o.resumeKind=(document.getElementById("kg82")||{}).textContent.includes(KG82_KIND[ks[3]].n);
+  for(let j=0;j<3;j++){for(let i=0;i<5;i++){await sleep(60);document.getElementById("kg82go").click();await sleep(60);(document.getElementById("mgcal-nx")||document.getElementById("kg82ok")).click()}await sleep(80);o.played.push(Object.keys(JSON.parse(localStorage.getItem("ctm-mgcal")||"{}")).length);if(j<2)document.getElementById("mgcal-next").click()}
+  (document.getElementById("mgcal-nx")||document.getElementById("kg82ok")).click();await sleep(150);const b2=document.getElementById("mgcal-seq");o.resume=b2&&b2.textContent;b2.click();await sleep(100);o.resumeKind=(document.getElementById("kg82")||{}).textContent.includes(KG82_KIND[ks[3]].n);
   o.order=Object.keys(JSON.parse(localStorage.getItem("ctm-mgcal")||"{}")).join()===ks.slice(0,3).join();kg82Close();try{kg82Play=k0}catch(e){}localStorage.removeItem("ctm-mgcal");return o});
  ok(/Thử hết cả/.test(sq.label)&&sq.played.join()==="1,2,3"&&sq.order&&/Thử tiếp các môn còn lại/.test(sq.resume)&&sq.resumeKind,'5c one run walks kind after kind; «Dừng ở đây» keeps progress; resume starts at the next kind not done',sq);
  /* 5b every kind's real board starts from the test (1.2 s each), no errors */
