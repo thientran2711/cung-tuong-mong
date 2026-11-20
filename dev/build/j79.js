@@ -518,7 +518,7 @@ KP_SEAL.week="TUẦN";
 /* KIT §0.3 BASE COLOUR SETS (review/kit-bgtone, owner OD 20/11 ~07:45Z "chỉnh cái màu nền ở trong game cho phù hợp với màu sắc" of the new rank-8 costume tone: powder-blue, mint, sage, peach, blush-pink, lilac + gold embroidery).
    ONE token file for the game's ground / paper / panel fills / label colour; every kit part already reads these tokens. KIT_BG picks the set: "a" = Ngọc sương (jade mist: sage-cream paper),
    "b" = Đào phấn (peach blush paper). One-line switch = change KIT_BG. Meaning colours (gold --gold/--trim, red --red/--bad/--k-seal, green --good, --ink, --dim, rank colours) are NOT touched. */
-const KIT_BG="a";
+const KIT_BG="b";
 (function(){try{document.documentElement.dataset.kbg=KIT_BG}catch(e){}const st=document.createElement("style");st.id="kbg-css";st.textContent=`
 html[data-kbg="a"]{--bg:#e4ebdc;--panel:#f6faee;--panel2:#e3ecd6;--line:#c9bf8e;--k-hair:#d3dab8;--k-card:#f6faee;--k-card2:#e3ecd6;--k-lab:#5f6b45}
 html[data-kbg="b"]{--bg:#f5e2dc;--panel:#fff4ef;--panel2:#f5dcd4;--line:#dcb7a0;--k-hair:#e8cbbd;--k-card:#fff4ef;--k-card2:#f5dcd4;--k-lab:#8a5f58}`;document.head.appendChild(st)})();
