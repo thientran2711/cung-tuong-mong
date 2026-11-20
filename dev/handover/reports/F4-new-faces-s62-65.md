@@ -77,3 +77,19 @@ Credits used: 0.
   less baby-round · skirt a touch lighter rose.
 - Sheet: dev/handover/review-sheets/new-faces-v4/c09_hand_F4.jpg (make_sheet_c09_hand.py): CŨ | MỚI, full figure + hand zoom + face zoom, big labels.
 - FACE_CUTS / FACE_MAP NOT switched (owner OK pending). Credits F4 total: 138.
+
+## Earrings + colour re-pick (~07:00Z)
+- Owner rule (ROOT-66 relay, verbatim "…không ai được đeo hoa tai."): "Bare earlobes: she wears NO earrings, nothing at the ears." added before
+  "No text, no labels." in make_new_s62_65.py and make_c09_hand.py (skipped once NOEAR1 puts it in the master block). Gate PASS ×5 (s62–s65, c09.v3h).
+- c09 picture already drawn (w4atqqr7EI): LOOKED at the ears — visible ear bare, other ear under the hair → no earring. c09.v3h.FULL.txt now also carries the sentence (for any rerun).
+- P6 pushed (P6.md: "s62–s65 left out"; palettes_season_deep.json overwritten, owner OK "toned palette"). My earlier picks clashed with P6's
+  same-season pairs (s63 FAIL c31/s49, s65 FAIL s32, s62 WARN s48) → re-picked (still PLACEHOLDER, no gens), no FAIL/WARN vs any same-season pair of P6's file:
+  | id | season | main | phụ |
+  |---|---|---|---|
+  | s62 | Đông | ice blue #71B5D7 | mint mist #CDF2E0 |
+  | s63 | Thu | amber #CB996C | ivory #F3E7CE |
+  | s64 | Xuân | peony pink #F8B3D3 | smoke lilac #ECE2FE (unchanged) |
+  | s65 | Đông | jade #4EA989 | peach cream #FBDAC1 |
+  Mains ≥ 26 ΔE2000 apart. Nearest of P6's mains: s62 5.7 (s48) · s63 3.3 (m19) · s64 4.7 (m02 xuân) · s65 5.8 (s36). The Dịu dàng band is nearly full:
+  only 2 clean candidates were left for s63, both at the band's darker edge (OKLCH L .72, L* 66).
+  Item colours re-checked: brass + red cord (ice blue/mint) · brown rabbit (amber/ivory — brown is close-ish to amber, flag) · golden-orange loquats (pink/lilac) · brown sandalwood (jade/peach).
