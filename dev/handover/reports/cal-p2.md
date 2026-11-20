@@ -6,7 +6,7 @@ Foreman: C-AG #28 session_01Rc5AsLarKgavDpQSsAHHYB (was #27). Branch review/cal-
 - Player-2 profile (first brief) was built and pushed (9144ec1b, 78d767f1), then REVERTED on review/cal-p2 (c29a7708) after the owner overwrite 05:35Z. No k2 / --p2 / co-op path anywhere.
 - review/cal-p2 = LIVE origin/main 2ec6062e (merged, 399e81d4) + ONE tool-only commit 0101f61f: dev/measure/mg-bots.js env knobs MGBOT_AIM/THINK/SLIP/THINKD/SLIPD (defaults = adult skilled bot, unchanged). No game file changed.
 - Methods followed in order as the brief changed: 05:35Z child ref → 05:45Z objective → 05:50Z marks → 06:00Z feel → 06:10Z adult scale → 06:35Z small easing → 07:05Z/07:15Z identity sở trường/sở đoản → 08:20Z 3 levels → 08:30Z ONE fitted board + identity ±2 on the RESULT (CURRENT). Target used: her base on the fitted board ≈ 7.5 (band 7–8, MAIN 08:35Z) so +2 is not eaten by the 10 cap and −2 leaves ≈ 5.5 (still placing).
-- Đầu hồ (owner-bug, lands ALONE): NOT BUILT YET — analyst A's numbers pending (see §A when present). 
+- Đầu hồ (owner-bug, lands ALONE): NOT BUILT YET — exact edit ready in §A1 (one BAL line + the 3 must-go-withs).
 
 ## HANDOVER (rollover at START_CTX 6 % + 25 % = 31 %; written at 28 %)
 Next session (opened by the coordinator):
@@ -65,4 +65,25 @@ Samples: ch_ho ve1 dan2 mua2 tat2 · td_ke ve2 co2 dan1 mua−1 tat−1 · tt_co
 ORDER: centre = her b FLATTENS her profile (≈7% 1st everywhere at lv0; identity alone decides: tat bậc2 41% beats ve 9%) → breaks 06:10Z. Centre = 7.5 KEEPS it (ve no match 45% 1st; tat bậc2 4%/31% top3; ve as weak art −1 still 22%/72%).
 OPEN for owner: (1) band centre: per kind on realistic adult scale (7.5 / measured) vs her b — conflicts with her 01:10Z "1/3 equal,1/3 better,1/3 worse"; (2) startContest score = talent (9/bậc dan/ve/co/mua, 4 tat) + raw×3 → talent dominates; NPC talent ignores upbringing = law-1 gap in her favour; (3) sở đoản on vũ double-hits her weak reflex kinds → floor; (4) NPC own art lv assumed 0; (5) doan.study hook not traced.
 
-## A — tat / ne / ban / dauho (analyst A): PENDING at 05:59Z (appended below when it arrives)
+## A — dauho / tat / ne / ban (analyst A, measured on 2ec6062e-equivalent engines; scratch p2a_*, an.js, run.sh, fl.js)
+### A1 Đầu hồ = BUG, READY TO BUILD (lands alone)
+- LIVE engine = "fling" (j91.js:312-314 Object.assign overrides j82:20 "aim"; all.js 28456 vs 27606). Bắn cung is ALONE on kg82Aim → NO shared engine / knob: the dauho edit cannot touch Bắn cung.
+- Why unplayable (j91.js:70-104): physics throw flies 0.7–1.9 s but aim dots show only lev.dauho.aid 0.14–0.45 s (≈0.24–0.44 s on her calibration eases 4.8→1.6) → she never sees the landing; q=1 zone ±0.025·U·mouth ≈ ±8 px on phone; pull factor K=5.4 (1 px error ≈ 6 px landing); new wind + pot each throw. Real fault.
+- Her-bot: MGBOT_PX=.2 reproduces her 1.1 (1.13, SD5 .51, n=16/board). Trained bot 7.1 only via oracle pull.
+- EDIT (jbal2.js:254, BAL.mgTier.lev): dauho:{aid:[.14,.45],mouth:[.8,1.3]} → dauho:{aid:[.6,3.0],mouth:[1.4,2.2]}; kAdj.dauho stays 1.2.
+  her-bot d=-2..2 before 1.4/1.2/0.8/0.8/1.0 base 1.1 SD .5 → after 8.6/7.6/6.9/6.9/5.4 base 7.1 SD .6 (law 5 kept: both levers rise with ease; ease 0 dots still only .6 s). Variants: aid[.35,2]+mouth[1,1.6]=4.6; aid[.5,2.5]+mouth[1.2,1.8]=6.0; aid[.5,2.5]+mouth[1.6,2.6]=6.8; for ≈7.5 try aid [.7,3.5] same mouth (not measured).
+- MUST GO WITH: (1) BAL.ag.mg2.cal.k.dauho b 1.1 was taken on the broken board → NPC band lo 1/hi 4.1 vs her ≈7 now: REMOVE the entry until her re-test (NPCs fall back to default 3/9.5) or put a temporary 7.1 — recommend remove (first-try rule: her re-test on the fixed board = her first valid try; ask MAIN). (2) Pot picture is mouth-sized (w = 2·mh/.42): at mouth 2.2 ≈ .52·U wide vs .31·U; on portrait phone a pot at x=.82·W can overflow the right edge ≈8 % (picture only) → LOOK on Fold 755x1000 + iPad 1180x820; if bad use mouth [1.4,1.9] + longer aid. (3) Oracle bots now hit 9.5–9.9 (bot shrinks scatter .1/aid, too kind) — trust the her-bot.
+- Optional later (typed in j91): wind H*.55 (l.72 setThrow), K=5.4, EAR=1.6, mouth base U*.05 (l.71-72).
+### A2' tat / ne / ban (proposal only; target her base 7–8)
+- Her-bot tat/ne: MGBOT_AIM=70 (one value both kinds) → tat 5.09 analytic/5.16 bot (her 4.9), ne 4.04/3.64 (her 4.1): a normal adult with ≈±70 ms timing error on a fast needle (trained ±40). Skill: anticipation timing; needle 1.4–1.75 s (BAL.slap.bar.w / dodge.w); ban same skill on a slower marker (3.0 s → 1.8 s over 6 shots, j82:314), no time limit → explains 9.1 vs ≈5 with one hand. Sources: Williams 1985 https://informahealthcare.com/doi/full/10.1080/00222895.1985.10735357 · life-span timing https://informahealthcare.com/doi/abs/10.1080/03610738008258380 · Thompson 2014 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3981764/ · touch latency https://pubmed.ncbi.nlm.nih.gov/35953659/
+- Minor faults: tat red window ±9–20 ms on her boards < one 60 fps frame (16.7 ms), tap read at handler time (jslap.js:62) → "nặng" partly luck; ne = one tap scored 10/0 → 5-round SD ≈2.1 (her 4.1 vs Kingston 2.1 = one tap).
+- tat: BAL.slap.bar (jbal2.js:493) redMs [8,11,14,18,22,28]→[28,38,49,63,77,98], amberMs [40,50,58,66,76,88]→[76,95,110,125,144,167] → her-bot 5.2→7.3 (analytic 7.65; rounds 8.9/7.9/7.2/6.1/6.0; SD5 1.2). Means more "nặng" slaps in play.
+- ne: BAL.slap.dodge.safeMs (jbal2.js:494) [20,28,36,45,55,66]→[45,63,81,101,124,148] (×2.25) → ≈7.5 analytic (rounds 9.0/8.3/7.5/6.6/5.4; SD5 1.9); bot-checked ×2.5 [50,70,90,112,138,165] = 8.2.
+- With tat/ne: re-measure BAL.slap.dodgeOdds [75,55,35] (Né card odds; her Vừa rate ≈39 % today) and BAL.ag.mg2.tat (NPC slap tiers); her cal tat 4.9 / ne 4.1 need a re-test.
+- ban: BAL.mgTier.kAdj.ban 3 → −0.5 (today kAdj 3 clamps rounds 1–3 to ease 5 = identical) → eases 3.1/2.3/1.5/0.7/−0.1, her 7.9 (analytic ±45 ms fit to her 9.07; rounds 8.6/8.3/7.9/7.4/6.8; SD5 ≈.4). Alt kAdj 0 → 8.15; kAdj 0 + kG.ban .8→1 → 7.7. mg-bots cannot anticipate on ban (7.2/8.0/8.8 avg/trained/master < her) → analytic. Her ban b 9.1 needs re-test.
+| kind | her (K) | skill | fault | knob before→after | her-bot base before→after | SD5 |
+| dauho | 1.1 (1.7) | fling aim+power, wind, landing unseen | UNPLAYABLE | lev.dauho aid [.14,.45]→[.6,3.0], mouth [.8,1.3]→[1.4,2.2] | 1.1→7.1 (bot PX .2) | .6 |
+| tat | 4.9 (6.1) | anticipation timing, fast needle | minor (sub-frame red) | slap.bar redMs ×3.5, amberMs ×1.9 | 5.2→7.3 (bot AIM 70) | 1.2 |
+| ne | 4.1 (2.1) | anticipation timing, 1 tap 10/0 | minor | slap.dodge.safeMs ×2.25 | 4.0→≈7.5 (analytic; ×2.5 bot 8.2) | 1.9 |
+| ban | 9.1 (9.3) | anticipation timing, slow marker | ease-5 clamp rounds 1–3 | kAdj.ban 3→−0.5 | 9.1→7.9 (analytic) | .4 |
+Kingston: every gap to her is inside one 5-round try's noise. Uncertainty: dauho after rests on a scatter model (her re-test is the check); ban analytic; bot cells n=16–30 (±.3).
