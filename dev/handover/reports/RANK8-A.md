@@ -94,3 +94,7 @@ Looked (honest): t4 = small square neckline visible in the capelet opening under
 ## 11. JOB 1 SKINS (0 cr)
 15 pictures kept as skins: s62/s64/s65/m29/m19 t1+t2 old crossed collar (10) + square tests s62 t2 kiểu 2, s64 t1/t2, s65 t1/t2 (5). Not skins: s62 t1 kiểu 1 (approved) and s62 t2 covuong2 (new). Copies in dev/handover/review-sheets/skins-1120/ (s64 + square-test files fetched from Magnific, 0 cr; others copied from repo; webp). SKINS.md section "20/11 t1/t2 new-girl outfits", 15 ledger rows kind SKIN-1120, rule added (owner verbatim). Nothing deleted.
 - Added m20 t2 (OLD4 gen If3NIDRtvE, first G17 plain-band t2) as skin #16. m20 t1 (5jDT5v0Kxe) NOT added: its prompt (after G17) already has the final style-1 square neckline, not the old crossed collar.
+
+## 12. G21 Tần t4 square neck + big flowers (0 cr, builder)
+build.py build_low t==4, a18/a26 only (a36+ = crossed collar, COLLAR1 scope, unchanged): borders "at sleeves and hem" (not collar) + "a few LARGE embroidered {motif} on the robe (fewer than Phi), none at the collar" + neckline "the low square neckline of rank 1, richer gold-brocade edge, NO crossed collar". t5/t6 untouched (cape hides the neck). Rule G21 (owner verbatim).
+Gate PASS s62/m29 t4+t5 (dev/art/rank8-s62/g20/). Words kept short: t4 sits at the 10 000-char limit. LENGTH: c06 t4 a18 now ~10 040 (FAIL LEN, was 9 921); c06 t4 a26 was already over before (10 139). s64 t4 a26 = 10 000 exactly.
