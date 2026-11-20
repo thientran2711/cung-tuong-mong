@@ -51,6 +51,7 @@ function dcHerOn(){try{return !!(S&&!S.dead&&!S.out&&!S.confined&&!(typeof isSrv
 function dcRefused(p){if(!dcOn())return false;const f=dcFestNow();if(!f)return false;if(p===S)return dcHerOut();const st=dcStat(p,f.k);return!!(st&&st.refused)}
 function dcCutPhan(p){if(!dcOn()||!p)return 0;const f=dcFestNow();if(!f)return 0;const st=dcStat(p,f.k);return st?st.cutPhan:0}
 function dcName(v){if(!v)return"";if(v===S)return"ngươi";const t=v.queen?"Hoàng hậu":(typeof RANKS!=="undefined"&&RANKS[v.rank]?RANKS[v.rank].n:"");return (t?t+" ":"")+v.name}
+function dcRankN(p){try{return p===S?(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):(p.queen?"Hoàng hậu":RANKS[p.rank].n)}catch(e){return""}}
 function dcFamList(L){return L.map(dcFamN).filter(Boolean).join(", ")}
 /* ---------- borrow: the piece really moves (law 6c) ---------- */
 function dcOwnKey(p){return p===S?"me:"+(S.pid||S.name||""):"id:"+p.id}
@@ -79,9 +80,9 @@ function dcReturn(){if(!S)return;const me=dcOwnKey(S);const back=[];
  for(const [e,p,o] of back){try{log(`${(WD_ITEMS[e.k]||{}).n||"Món đồ"} đã trả về cho ${dcName(o||p)}.`)}catch(x){}}}
 /* ---------- the gate frame (her) ---------- */
 function dcFacts(st,f){const F=[];F.push(`Lễ ${f.name} cần y phục có màu: ${dcFamList(st.code.need)}.`);
- if(st.needN<st.code.need.length)F.push(`Phẩm của ngươi chỉ cần có một trong các màu ấy.`);else F.push(`Phẩm của ngươi phải có đủ các màu ấy.`);
+ const rn=dcRankN(S);if(st.needN<st.code.need.length)F.push(`Phẩm ${rn} chỉ cần có một trong các màu ấy.`);else F.push(`Phẩm ${rn} phải có đủ các màu ấy.`);
  const acc=st.sh.acc.map(a=>`${(WD_ITEMS[a.k]||{}).n} (${dcFamN(a.f)})`);
- F.push(`Ngươi đang mặc áo màu ${dcFamList([...new Set(st.sh.robe)])}${acc.length?`, cài ${acc.join(", ")}`:""}.`);
+ F.push(`Y phục đang mặc: áo màu ${dcFamList([...new Set(st.sh.robe)])}${acc.length?`, cài ${acc.join(", ")}`:""}.`);
  if(st.taboo)F.push(`Màu ${dcFamN(st.sh.robe[0])} là màu kiêng trong ngày này.`);
  if(st.refused)F.push(`Ma ma giữ cửa không cho vào: y phục không có màu nào hợp lễ.`);
  else if(st.miss)F.push(`Thiếu màu: ${dcFamList(st.missing)}. Vào dự thì bị chê, hội thi bị trừ phần.`);return F}
@@ -125,7 +126,7 @@ function dcWeek(){if(!dcOn()||!S||S.dead)return;const R=typeof rivals!=="undefin
   const fx={};if(c.danh)fx.danh=-c.danh;if(c.th)fx.th=-c.th;
   if(Object.keys(fx).length){apply(fx);const sn=BAL.dc.season.n;
    Q.push({t:"Áo trái mùa",ev:"dc",evId:"dc:season",who:typeof pTH==="function"?pTH():null,
-    h:`<p>Đang mùa ${sn[dcSeason()]} mà ngươi mặc ${y?y.n:"áo"} (${BAL.dc.season.fabN[dcYFab(y&&y.k)]||"vải"}, hợp mùa ${dcYSeasons(y&&y.k).map(i=>sn[i]).join(", ")}).</p><p>Buổi thỉnh an, Thái hậu và các cung chê ngươi không biết lễ đổi y phục theo mùa.</p><p>Muốn khỏi bị chê: vào Tư trang, chạm ô Y phục, chọn bộ hợp mùa.</p>`});
+    h:`<p>Đang mùa ${sn[dcSeason()]} mà y phục đang mặc là ${y?y.n:"áo"} (${BAL.dc.season.fabN[dcYFab(y&&y.k)]||"vải"}, hợp mùa ${dcYSeasons(y&&y.k).map(i=>sn[i]).join(", ")}).</p><p>Buổi thỉnh an, Thái hậu và các cung chê không biết lễ đổi y phục theo mùa.</p><p>Muốn khỏi bị chê: vào Tư trang, chạm ô Y phục, chọn bộ hợp mùa.</p>`});
    try{log(`Mặc áo trái mùa: ${Object.entries(fx).map(([k,v])=>statTxt(k,v)).join(", ")}.`)}catch(e){}}}
  /* two-way borrow: a consort who lacks a colour asks to borrow her trâm (her seat; the piece moves for real) */
  const f=dcFestNow();if(f&&dcHerOn()&&S.dcAk!==dcKey(f)){S.dcAk=dcKey(f);
@@ -142,10 +143,12 @@ function dcWeek(){if(!dcOn()||!S||S.dead)return;const R=typeof rivals!=="undefin
 (function(){if(typeof fMake7!=="function")return;const m0=fMake7;fMake7=function(){try{if(dcHerOut())return null}catch(e){}return m0.apply(this,arguments)}})();
 /* ---------- kit surfaces: item rows (Tư trang), wear-slot label, calendar popover ---------- */
 function dcItemRows(k){const w=WD_ITEMS[k];if(!w)return"";const R=[];
- if(w.sl==="y"){const sn=BAL.dc.season.n;R.push(["Màu",dcPair(dcRobe(S)),"n"]);R.push(["Hợp mùa",dcYSeasons(k).map(i=>sn[i]).join(", "),"n"]);
-  R.push(["Ghi chú",["màu áo là màu trên tranh dáng người của ngươi",BAL.dc.season.fabN[dcYFab(k)]||"vải"],"n"])}
+ if(w.sl==="y"){const sn=BAL.dc.season.n;R.push(["Màu",dcPair(dcRobe(S)).concat(["theo tranh dáng người đang mặc"]),"n"]);
+  R.push(["Hợp mùa",`${dcYSeasons(k).map(i=>sn[i]).join(", ")} (${BAL.dc.season.fabN[dcYFab(k)]||"vải"})`,"n"])}
  else R.push(["Màu",dcPair(dcPiece(k)),"n"]);return kitRows(R)}
-(function(){if(typeof wdItemRowsE!=="function")return;const r0=wdItemRowsE;wdItemRowsE=function(e){const h=r0.apply(this,arguments);try{if(!dcOn()||!e||!WD_ITEMS[e.k])return h;const x=dcItemRows(e.k);return x?(typeof kitRowsJoin==="function"?kitRowsJoin(h,x):h+x):h}catch(err){console.error("dc rows",err);return h}}})();
+/* KIT §70: the ONE item detail (kitItemDetailRows) used by every item cell (Tư trang, Bên mình, shop, reward box…) */
+(function(){if(typeof kitItemDetailRows!=="function")return;const r0=kitItemDetailRows;kitItemDetailRows=function(ref){const h=r0.apply(this,arguments);try{if(!dcOn()||!h||/>Màu</.test(h))return h;const R=typeof kitItemRef==="function"?kitItemRef(ref):null;if(!R||!WD_ITEMS[R.k])return h;const x=dcItemRows(R.k);return x?(typeof kitRowsJoin==="function"?kitRowsJoin(h,x):h+x):h}catch(err){console.error("dc rows",err);return h}};window.kitItemDetailRows=kitItemDetailRows})();
+(function(){if(typeof wdItemRowsE!=="function")return;const r0=wdItemRowsE;wdItemRowsE=function(e){const h=r0.apply(this,arguments);try{if(!dcOn()||!e||!WD_ITEMS[e.k]||/>Màu</.test(h))return h;const x=dcItemRows(e.k);return x?(typeof kitRowsJoin==="function"?kitRowsJoin(h,x):h+x):h}catch(err){console.error("dc rows",err);return h}}})();
 (function(){if(typeof kitWearSlots!=="function")return;const k0=kitWearSlots;kitWearSlots=function(p){const h=k0.apply(this,arguments);try{if(!dcOn()||!p||!h||!dcOffSeason(p))return h;
  const lab=`<span class="kitl kitl-no">Trái mùa</span>`;return h.indexOf('<span class="kwearl">')>=0?h.replace('<span class="kwearl">','<span class="kwearl">'+lab+" "):h.replace(/<\/div>$/,`<span class="kwearl">${lab}</span></div>`)}catch(e){return h}}})();
 (function(){if(typeof mcPopHTML!=="function")return;const m0=mcPopHTML;mcPopHTML=function(k){const h=m0.apply(this,arguments);try{const c=dcOn()&&BAL.dc.fest[k];if(!c||!h)return h;

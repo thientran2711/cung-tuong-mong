@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6fbea748","t":"2026-11-20T19:17Z","c":"dresscode test: debug fields on the borrow step","b":"ec9a9d1e52e5","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
+window.CTM_BI={"s":"a6186cdb+","t":"2026-11-20T19:17Z","c":"dresscode: site build (index.html, sw.js, assets.json)","b":"546e6a7b2f33","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -81810,6 +81810,7 @@ function dcHerOn(){try{return !!(S&&!S.dead&&!S.out&&!S.confined&&!(typeof isSrv
 function dcRefused(p){if(!dcOn())return false;const f=dcFestNow();if(!f)return false;if(p===S)return dcHerOut();const st=dcStat(p,f.k);return!!(st&&st.refused)}
 function dcCutPhan(p){if(!dcOn()||!p)return 0;const f=dcFestNow();if(!f)return 0;const st=dcStat(p,f.k);return st?st.cutPhan:0}
 function dcName(v){if(!v)return"";if(v===S)return"ngươi";const t=v.queen?"Hoàng hậu":(typeof RANKS!=="undefined"&&RANKS[v.rank]?RANKS[v.rank].n:"");return (t?t+" ":"")+v.name}
+function dcRankN(p){try{return p===S?(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):(p.queen?"Hoàng hậu":RANKS[p.rank].n)}catch(e){return""}}
 function dcFamList(L){return L.map(dcFamN).filter(Boolean).join(", ")}
 /* ---------- borrow: the piece really moves (law 6c) ---------- */
 function dcOwnKey(p){return p===S?"me:"+(S.pid||S.name||""):"id:"+p.id}
@@ -81838,9 +81839,9 @@ function dcReturn(){if(!S)return;const me=dcOwnKey(S);const back=[];
  for(const [e,p,o] of back){try{log(`${(WD_ITEMS[e.k]||{}).n||"Món đồ"} đã trả về cho ${dcName(o||p)}.`)}catch(x){}}}
 /* ---------- the gate frame (her) ---------- */
 function dcFacts(st,f){const F=[];F.push(`Lễ ${f.name} cần y phục có màu: ${dcFamList(st.code.need)}.`);
- if(st.needN<st.code.need.length)F.push(`Phẩm của ngươi chỉ cần có một trong các màu ấy.`);else F.push(`Phẩm của ngươi phải có đủ các màu ấy.`);
+ const rn=dcRankN(S);if(st.needN<st.code.need.length)F.push(`Phẩm ${rn} chỉ cần có một trong các màu ấy.`);else F.push(`Phẩm ${rn} phải có đủ các màu ấy.`);
  const acc=st.sh.acc.map(a=>`${(WD_ITEMS[a.k]||{}).n} (${dcFamN(a.f)})`);
- F.push(`Ngươi đang mặc áo màu ${dcFamList([...new Set(st.sh.robe)])}${acc.length?`, cài ${acc.join(", ")}`:""}.`);
+ F.push(`Y phục đang mặc: áo màu ${dcFamList([...new Set(st.sh.robe)])}${acc.length?`, cài ${acc.join(", ")}`:""}.`);
  if(st.taboo)F.push(`Màu ${dcFamN(st.sh.robe[0])} là màu kiêng trong ngày này.`);
  if(st.refused)F.push(`Ma ma giữ cửa không cho vào: y phục không có màu nào hợp lễ.`);
  else if(st.miss)F.push(`Thiếu màu: ${dcFamList(st.missing)}. Vào dự thì bị chê, hội thi bị trừ phần.`);return F}
@@ -81884,7 +81885,7 @@ function dcWeek(){if(!dcOn()||!S||S.dead)return;const R=typeof rivals!=="undefin
   const fx={};if(c.danh)fx.danh=-c.danh;if(c.th)fx.th=-c.th;
   if(Object.keys(fx).length){apply(fx);const sn=BAL.dc.season.n;
    Q.push({t:"Áo trái mùa",ev:"dc",evId:"dc:season",who:typeof pTH==="function"?pTH():null,
-    h:`<p>Đang mùa ${sn[dcSeason()]} mà ngươi mặc ${y?y.n:"áo"} (${BAL.dc.season.fabN[dcYFab(y&&y.k)]||"vải"}, hợp mùa ${dcYSeasons(y&&y.k).map(i=>sn[i]).join(", ")}).</p><p>Buổi thỉnh an, Thái hậu và các cung chê ngươi không biết lễ đổi y phục theo mùa.</p><p>Muốn khỏi bị chê: vào Tư trang, chạm ô Y phục, chọn bộ hợp mùa.</p>`});
+    h:`<p>Đang mùa ${sn[dcSeason()]} mà y phục đang mặc là ${y?y.n:"áo"} (${BAL.dc.season.fabN[dcYFab(y&&y.k)]||"vải"}, hợp mùa ${dcYSeasons(y&&y.k).map(i=>sn[i]).join(", ")}).</p><p>Buổi thỉnh an, Thái hậu và các cung chê không biết lễ đổi y phục theo mùa.</p><p>Muốn khỏi bị chê: vào Tư trang, chạm ô Y phục, chọn bộ hợp mùa.</p>`});
    try{log(`Mặc áo trái mùa: ${Object.entries(fx).map(([k,v])=>statTxt(k,v)).join(", ")}.`)}catch(e){}}}
  /* two-way borrow: a consort who lacks a colour asks to borrow her trâm (her seat; the piece moves for real) */
  const f=dcFestNow();if(f&&dcHerOn()&&S.dcAk!==dcKey(f)){S.dcAk=dcKey(f);
@@ -81901,10 +81902,12 @@ function dcWeek(){if(!dcOn()||!S||S.dead)return;const R=typeof rivals!=="undefin
 (function(){if(typeof fMake7!=="function")return;const m0=fMake7;fMake7=function(){try{if(dcHerOut())return null}catch(e){}return m0.apply(this,arguments)}})();
 /* ---------- kit surfaces: item rows (Tư trang), wear-slot label, calendar popover ---------- */
 function dcItemRows(k){const w=WD_ITEMS[k];if(!w)return"";const R=[];
- if(w.sl==="y"){const sn=BAL.dc.season.n;R.push(["Màu",dcPair(dcRobe(S)),"n"]);R.push(["Hợp mùa",dcYSeasons(k).map(i=>sn[i]).join(", "),"n"]);
-  R.push(["Ghi chú",["màu áo là màu trên tranh dáng người của ngươi",BAL.dc.season.fabN[dcYFab(k)]||"vải"],"n"])}
+ if(w.sl==="y"){const sn=BAL.dc.season.n;R.push(["Màu",dcPair(dcRobe(S)).concat(["theo tranh dáng người đang mặc"]),"n"]);
+  R.push(["Hợp mùa",`${dcYSeasons(k).map(i=>sn[i]).join(", ")} (${BAL.dc.season.fabN[dcYFab(k)]||"vải"})`,"n"])}
  else R.push(["Màu",dcPair(dcPiece(k)),"n"]);return kitRows(R)}
-(function(){if(typeof wdItemRowsE!=="function")return;const r0=wdItemRowsE;wdItemRowsE=function(e){const h=r0.apply(this,arguments);try{if(!dcOn()||!e||!WD_ITEMS[e.k])return h;const x=dcItemRows(e.k);return x?(typeof kitRowsJoin==="function"?kitRowsJoin(h,x):h+x):h}catch(err){console.error("dc rows",err);return h}}})();
+/* KIT §70: the ONE item detail (kitItemDetailRows) used by every item cell (Tư trang, Bên mình, shop, reward box…) */
+(function(){if(typeof kitItemDetailRows!=="function")return;const r0=kitItemDetailRows;kitItemDetailRows=function(ref){const h=r0.apply(this,arguments);try{if(!dcOn()||!h||/>Màu</.test(h))return h;const R=typeof kitItemRef==="function"?kitItemRef(ref):null;if(!R||!WD_ITEMS[R.k])return h;const x=dcItemRows(R.k);return x?(typeof kitRowsJoin==="function"?kitRowsJoin(h,x):h+x):h}catch(err){console.error("dc rows",err);return h}};window.kitItemDetailRows=kitItemDetailRows})();
+(function(){if(typeof wdItemRowsE!=="function")return;const r0=wdItemRowsE;wdItemRowsE=function(e){const h=r0.apply(this,arguments);try{if(!dcOn()||!e||!WD_ITEMS[e.k]||/>Màu</.test(h))return h;const x=dcItemRows(e.k);return x?(typeof kitRowsJoin==="function"?kitRowsJoin(h,x):h+x):h}catch(err){console.error("dc rows",err);return h}}})();
 (function(){if(typeof kitWearSlots!=="function")return;const k0=kitWearSlots;kitWearSlots=function(p){const h=k0.apply(this,arguments);try{if(!dcOn()||!p||!h||!dcOffSeason(p))return h;
  const lab=`<span class="kitl kitl-no">Trái mùa</span>`;return h.indexOf('<span class="kwearl">')>=0?h.replace('<span class="kwearl">','<span class="kwearl">'+lab+" "):h.replace(/<\/div>$/,`<span class="kwearl">${lab}</span></div>`)}catch(e){return h}}})();
 (function(){if(typeof mcPopHTML!=="function")return;const m0=mcPopHTML;mcPopHTML=function(k){const h=m0.apply(this,arguments);try{const c=dcOn()&&BAL.dc.fest[k];if(!c||!h)return h;
@@ -85192,7 +85195,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ec9a9d1e52e5";window.CTM_BUILD=BUILD;
+const BUILD="546e6a7b2f33";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
