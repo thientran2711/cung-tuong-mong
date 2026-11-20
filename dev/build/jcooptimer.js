@@ -202,7 +202,7 @@ function kitCoopClock(o){css();o=o||{};const p=Math.max(0,Math.min(1,(o.left||0)
  if(o.state==="up")L.push(`<span class="kchip r">${ring}Hết buổi</span>`);
  else if(o.state==="pz")L.push(`<span class="kchip w">${ring}Đợi · còn ${fmtT(o.left)}</span>`);
  else if(o.state==="stop")L.push(`<span class="kchip n">${ring}Còn ${fmtT(o.left)}</span>`);
- else L.push(`<span class="kchip ${(o.left||0)<=20000?"r":"n"}">${ring}Còn ${fmtT(o.left)}</span>`);
+ else L.push(`<span class="kchip ${o.tone||((o.left||0)<=20000?"r":"n")}">${ring}Còn ${fmtT(o.left)}</span>`);
  /* the friend's status, always shown (owner 16/11: "không biết hảo hữu đang tới đâu hay sẵn sàng chưa"): name + one word */
  const nm=o.name?esc(String(o.name).slice(0,16))+" ":"";
  if(o.fr||o.me){if(o.fr==="ready")L.push(kitChip(`${nm||"Hảo hữu "}đã sẵn sàng`,"ok"));
