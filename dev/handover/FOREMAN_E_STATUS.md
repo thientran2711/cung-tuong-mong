@@ -643,3 +643,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   FOR MAIN (open): KIT REQUEST kaSent class precedence (E18b, not a gate); palace-chatter videos re-shoot from an R2-rights session; FOR C art lists (bd-roads §BUILT, caoly-road, phutang-road incl. origin-wide-pf); dev/index.html «Invalid or unexpected token» on LIVE (02:44Z); NEW FOREMAN E STANDBY still not reported.
   My wake trig_01YG2hz89tQYZqj582Wy3xro — successor DISABLES it (update_trigger enabled=false; my classifier refused that for E #13's, so if refused, ask me by send_message and I disable it) and sets its own (minute 47). SEATS 7 / 12 (E14d, E14r, E18r, E20r, E21c, E21r, E22b).
   GIT NOTE: '+' refspec fetch under flock; never bare git pull; on push reject fetch + rebase onto remote.
+  → child FOREMAN E #15 = session_01DgYSWqC1epTFkkxGoFxqYW (opus, depth 5). FOREMAN E #14 stops now.
