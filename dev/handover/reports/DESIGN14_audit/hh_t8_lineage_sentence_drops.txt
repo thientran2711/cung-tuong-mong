@@ -1,0 +1,60 @@
+
+### 0_std.txt -> s62_t8.txt
+
+### s62_t8.txt -> s62_t8_HAN_BAC_02cd263.txt
+ - [49%] Outfit (the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks): the Empress's imperial phoenix ceremonial robe of golden yellow silk mixed with ice blue, richly embroidered on the chest, shoulders and  || words gone: mixed ice richly phoenixes band layered fringes pendants
+ - [42%] The phoenix is the main embroidered motif, larger and more prominent than the flowers.  || words gone: motif larger prominent
+
+### s62_t8_HAN_BAC_02cd263.txt -> s62_t8_HAN_BAC_ed3e8fd.txt
+ - [62%] face clearly visible, 3/4 or frontal view.
+ - [43%] no cape, no cloud collar, no shoulder piece, no shawl;  || words gone: cape
+ - [24%] GRACE (pose variety, every rank its own): her chin lifted just a little, her neck long and elegant.  || words gone: variety lifted just
+ - [69%] Image 2 is only a colour reference for the royal yellow, never copy anything but its colour;  || words gone: anything but
+
+### s62_t8_HAN_BAC_ed3e8fd.txt -> s62_t8_HAN_BAC.txt
+ - [25%] elegant, slim, clearly adult;  || words gone: elegant
+ - [14%] beautiful/handsome romantic-lead looks for everyone;  || words gone: beautiful handsome romantic lead looks everyone
+ - [20%] 3/4 or frontal view.  || words gone: 3 4 view
+ - [67%] a kind, caring, gentle-hearted girl;  || words gone: hearted girl
+ - [51%] Outfit (the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks): the Empress's Han-dynasty grand ceremonial dress in FIVE visible layers, FABRIC the richest of all: heavy gold-thread brocade (gấm kim t  || words gone: much richer splendid FIVE gấm tuyến richer DOUBLE ring outermost mantle hidden inside
+ - [62%] gold only as thin accents on the borders;
+ - [20%] Everyone beautiful at every age.  || words gone: Everyone beautiful age
+
+### s62_t8_HAN_BAC.txt -> s62_t8_HAN_BAC_a2128fc.txt
+
+### s62_t8_HAN_BAC_a2128fc.txt -> s62_t8_HAN_BAC_gon.txt
+ - [67%] FABRIC: light gold-woven gauze over thin supple Song brocade, with a graceful, flowing drape.
+
+### s62_t8_HAN_BAC_gon.txt -> s62_t8_HAN_BAC_gon2.txt
+ - [40%] all collars WIDE to the shoulders: the lapels sweep out toward the edge of the SHOULDERS and meet low at the chest in a broad V, never a tight high crossing at the throat, SIX stacked WIDE gold-woven collar bands edged with pearls  || words gone: lapels sweep meet low tight crossing
+
+### s62_t8_HAN_BAC_gon2.txt -> s62_t8_HAN_BAC_gon3.txt
+ - [40%] An imperial consort, the Empress.  || words gone: consort
+ - [63%] her ONE signature piece: a FLAT jewelled gold-thread brocade cloud collar in royal yellow and gold edged with pearls, denser in gold and with more pearls than the Hoàng quý phi's, lying flat and sloping DOWN over the shoulders, wi  || words gone: sloping cut
+
+### s62_t8_HAN_BAC_gon3.txt -> s62_t8_HAN_BAC_open.txt
+ - [59%] all collars WIDE to the shoulders, soft and draping like the Hoàng quý phi's, never stiff: the lapels reach the very edge of the SHOULDERS and meet LOW near the sash in a broad deep V like the Phi's;  || words gone: lapels reach meet near deep
+ - [22%] every inner robe is ALSO a crossed-collar robe whose collar is a V nested inside it, so the open chest shows only nested V collar lines down to the sash;  || words gone: crossed whose nested inside so shows nested lines
+ - [67%] SIX stacked WIDE gold collar bands along the V;  || words gone: stacked
+ - [47%] her neck, collarbones and the wide V neckline are fully visible, never covered by the collar;  || words gone: neckline
+
+### s62_t8_HAN_BAC_open.txt -> s62_t8_HAN_BAC_open3.txt
+ - [69%] Outfit (the Empress (Hoàng hậu),): all collars soft and draping like the Hoàng quý phi's, never stiff, worn OPEN, wide OFF the neck: its edges run straight from the OUTER shoulder points to cross LOW at the sash, BARE SKIN between  || words gone: mid modest cleavage covered
+ - [67%] inner collars and SIX NARROW gold collar bands lie flat only along those edges, leaving the skin open, no horizontal inner top;  || words gone: leaving
+
+### s62_t8_HAN_BAC_open3.txt -> s62_t8_HAN_BAC_open4.txt
+ - [54%] the INNER layers in thin, supple Song brocade (Tống cẩm), falling softly: the inner bright blush pink robe, the light clear warm plum longest-spiral quju (khúc cư), the swallowtail guiyi layer (swallowtail points and many ribbon s  || words gone: swallowtail guiyi swallowtail ribbon streamers
+
+### s62_t8_HAN_BAC_open4.txt -> s62_t8_HAN_BAC_open5.txt
+ - [58%] all SIX NARROW gold collar bands lie flat only along those edges;  || words gone: lie
+ - [50%] at the front its ends slope DOWN along the V edges, no fringe across the chest;  || words gone: ends
+ - [33%] Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side.  || words gone: inserted pointing dangles
+ - [43%] Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe, only slipper toe tips peeking under the hem, no train, no cup, nothing covering the face.  || words gone: Luminous flower
+ - [33%] NOTHING on the forehead (no hoa điền, no dot, no mark, nothing).  || words gone: hoa điền dot
+
+### s62_t8_HAN_BAC_open5.txt -> s62_t8_HAN_BAC_open6.txt
+
+### s62_t8_HAN_BAC_open6.txt -> s62_t8_HAN_BAC_open7.txt
+ - [42%] the robe body and quju densely embroidered ALL OVER with the LARGEST motifs of all ranks: big peonies, peach blossoms and clouds in gold and kingfisher-blue silk thread (far denser than any other rank);  || words gone: LARGEST big peach blossoms clouds far denser
+ - [64%] the Empress's long royal golden yellow silk shou hung with large jade rings falling to the hem, a jade-and-gold belt and two long zupei;  || words gone: Empress's hung
+ - [69%] many long strands of pearls and jade hanging DOWN from the V point;
