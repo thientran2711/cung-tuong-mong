@@ -346,7 +346,7 @@ function kpConvert(root,m){const blocks=[];let sub="",prose=[],chipsLine="";
   if(/^H[1-6]$/.test(tg)){flush();blocks.push(`<h4 class="kpst">${n.innerHTML}</h4>`);continue}
   flush();n.classList.add("kpraw");blocks.push(n)}
  flush();return{sub,blocks}}
-function kpHeader(kind,title,sub){return `<div class="kph"><b class="kpseal kp-${kind}">${KP_SEAL[kind]||"BÁO"}</b><span class="kpht"><span class="kptitle">${title||""}</span>${sub?`<small class="kpsub">${sub}</small>`:""}</span></div>`}
+function kpHeader(kind,title,sub,seal){return `<div class="kph"><b class="kpseal kp-${kind}">${seal||KP_SEAL[kind]||"BÁO"}</b><span class="kpht"><span class="kptitle">${title||""}</span>${sub?`<small class="kpsub">${sub}</small>`:""}</span></div>`}
 function kpSubject(f,m){if(!f)return"";const p=f.__kp||null;let name="",role="";
  try{if(p){name=kitName(p,{cap:true})}else{name=`<b class="kname" style="--rc:${f.col||"#8a7350"}">${f.rw||""}</b>`}}catch(e){}
  return `<div class="kpsubj">${pframe(f)}<div class="kpsn">${name}</div></div>`}
@@ -602,9 +602,10 @@ window.kitQuick=kitQuick;window.kitQuickSub=kitQuickSub;window.kitQuickRoll=kitQ
 (function(){const st=document.createElement("style");st.id="kquick-css";/* ONE look wherever the quick button sits (inside .kg82act, in the j5 #ov lesson panel, under the care frames) */
  st.textContent=`button.kquick{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 #ov button.kquick small,button.kquick small{display:block;font-weight:400;font-family:var(--body);font-size:.72rem;opacity:.9}`;document.head.appendChild(st)})();
-/* kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
+/* seal: optional word for the header seal (default KP_SEAL.game "TÀI NGHỆ"; scheme games pass "MƯU") — one kit parameter for every caller
+   kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
    -> HTML of the frame; the game draws into #<id> (.kgbox). Update a HUD cell with kitGameSet("score", 12). */
-function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"").replace(/<\/div>$/,'<span class="kgmk" hidden></span><span class="kgclk" hidden></span></div>')}`+
+function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"",g.seal).replace(/<\/div>$/,'<span class="kgmk" hidden></span><span class="kgclk" hidden></span></div>')}`+
  `<div class="kgbody${fg?" kgfig-on":g.pic?" kgpic-on":""}">`+(fg||(g.pic?`<div class="kgpic"><img src="${g.pic}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.remove('kgpic-on');this.parentNode.remove()"></div>`:""))+`<div class="kginfo">`+
  (g.how?`<div class="kghow"><span class="krl">Cách chơi</span><span>${g.how}</span></div>`:"")+
  (g.hud&&g.hud.length?`<div class="kghud" hidden aria-hidden="true">${g.hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v==null?"":v}</b></span>`).join("")}</div>`:"")+
