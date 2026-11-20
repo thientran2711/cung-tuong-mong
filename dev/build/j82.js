@@ -101,8 +101,8 @@ const KG82_RW=/^(Hồi|Câu|Môn|Vòng|Lượt|Bước)\s+(.+)$/,KG82_PLACE=/^(N
 function kg82Pic(kind){if(["duho","den","may"].includes(kind))return "";const s=`img/kit/mg-${kg82BgName(kind)}.webp`;
  try{if(typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&!KIT_CDNHAVE.has(s)){if(typeof kitPhNote==="function")kitPhNote("mg",kg82BgName(kind),"light",(KG82_KIND[kind]||{}).t||kind);return ""}}catch(e){}return s}
 function kg82Frame(o){KG82.rlock=o.round||"";const hud=[["score","Phần","0/10"],["round",o.round||"Hồi",o.roundV||"–"],["time","Còn","–"]];
- if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box",pic:o.pic,fig:o.fig!==false});
- return `<div class="kgame"><div class="kph"><b class="kpseal">TÀI NGHỆ</b><span class="kpht"><span class="kptitle">${o.art}: ${o.title}</span></span></div><div class="kghow"><span class="krl">Cách chơi</span><span>${o.how}</span></div>`+
+ if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box",pic:o.pic,fig:o.fig!==false,seal:o.seal});
+ return `<div class="kgame"><div class="kph"><b class="kpseal">${o.seal||"TÀI NGHỆ"}</b><span class="kpht"><span class="kptitle">${o.art}: ${o.title}</span></span></div><div class="kghow"><span class="krl">Cách chơi</span><span>${o.how}</span></div>`+
   `<div class="kghud" hidden aria-hidden="true">${hud.map(([k,l,v])=>`<span class="kgc"><small>${l}</small><b data-kg="${k}">${v}</b></span>`).join("")}</div><div class="kgbox" id="kg82box"></div><div class="kgres" id="kg82box-res" hidden></div></div>`}
 /* a HUD count "a/b" (Phần 7/10, Hồi 2/3) never shows above its ceiling; KG82.over counts any engine that tried (tests fail on it) */
 function kg82Cap(v){if(typeof v!=="string")return v;return v.replace(/(\d+)\/(\d+)/,(m,a,b)=>{if(+a>+b){KG82.over=(KG82.over||0)+1;return b+"/"+b}return m})}
@@ -456,10 +456,10 @@ function kgReady(box,spec){box=box||kg82Box();if(!box)return false;const s=kgRea
  box.insertAdjacentHTML("afterbegin",html);box.classList.add("kgintro");
  const go=box.querySelector(s.go);
  if(go){if(!go.dataset.kgrLabel)go.dataset.kgrLabel=go.textContent;go.innerHTML=`Sẵn sàng<small>${s.timed?"từ lúc này mới tính giờ":"bắt đầu chơi"}</small>`;go.classList.add("kgr-go");
-  go.addEventListener("click",()=>{const d=kg82El();if(d)d.classList.remove("kg-ready");KG82.ready=null},{capture:true});
+  go.addEventListener("click",()=>{const d=kg82El()||box.closest(".kgame");if(d)d.classList.remove("kg-ready");KG82.ready=null},{capture:true});
   if(kgReadyCan(s)&&!box.querySelector("#kgrtut")){go.insertAdjacentHTML("afterend",`<button type="button" class="${kg82Btn(true)} kgr-tut" id="kgrtut">Hướng dẫn<small>chơi thử một hồi dễ, không tính phần, thử lại được</small></button>`);
    box.querySelector("#kgrtut").onclick=()=>kgTut(box,s)}}
- const d=kg82El();if(d)d.classList.add("kg-ready");return true}
+ const d=kg82El()||box.closest(".kgame");if(d)d.classList.add("kg-ready");return true}
 /* the guided round */
 function kgTutPt(p,now){if(!p)return null;
  if(p.drag&&p.drag.length){const L=p.drag;if(L.length<2)return{x:L[0][0],y:L[0][1],m:"drag"};const seg=[];let tot=0;for(let i=1;i<L.length;i++){const l=Math.hypot(L[i][0]-L[i-1][0],L[i][1]-L[i-1][1]);seg.push(l);tot+=l}
@@ -468,7 +468,7 @@ function kgTutPt(p,now){if(!p)return null;
  if(p.x!=null&&p.y!=null)return{x:p.x,y:p.y,m:p.hold===true?"hold":p.hold===false?"up":"tap"};
  if(p.hold===false)return{m:"up"};return null}
 const KG82_TUTMSG={tap:"Chạm ngay chỗ bàn tay chỉ.",drag:"Đặt ngón tay rồi kéo theo bàn tay.",hold:"Giữ ngón tay ở chỗ bàn tay chỉ.",up:"Thả tay ra.",wait:"Xem kỹ, chờ bàn tay chỉ rồi làm theo."};
-function kgTut(box,spec){if(KG82.tut||!box)return;const s=kgReadySpec(spec);const d=kg82El();if(!d)return;
+function kgTut(box,spec){if(KG82.tut||!box)return;const s=kgReadySpec(spec);const d=kg82El()||box.closest(".kgame");if(!d)return;/* any kit game frame (the care games sit inside a dialog, not #kg82) */
  const T=BAL.mgTier.tut,frag=document.createDocumentFragment();while(box.firstChild)frag.appendChild(box.firstChild);
  const keep={tier:KG82.tier,lv:KG82.lv,occ:KG82.occ,ctx:KG82.ctx,noDemo:KG82.noDemo,phase:KG82.phase,peek:KG82.peek,hint:KG82.hint,last:KG82.last,rawF:KG82.rawF,run:KG82.run,rlock:KG82.rlock};
  let ease=5;try{const cd=((BAL.ag||{}).mg2||{}).cal;const dMin=cd&&cd.d&&cd.d.length?Math.min(...cd.d):0;if(s.kind&&KG82_KIND[s.kind])ease=mgSet(s.kind,{occ:"hoc",d:dMin}).ease}catch(e){}if(s.lv!=null)ease=s.lv;
@@ -502,7 +502,8 @@ function kgTut(box,spec){if(KG82.tut||!box)return;const s=kgReadySpec(spec);cons
  const go=()=>{if(dead)return;try{stop=s.tutor?s.tutor(box,env):KG82_ENG[KG82_KIND[s.kind].e](box,env)}catch(e){console.error(e);finish();return}KG82.run={stop:()=>cleanup()};raf=requestAnimationFrame(loop)};
  if(s.kind&&KG82_KIND[s.kind])kg82Preload(s.kind).then(go);else go();
  KG82.tutSteps=()=>steps}
-window.kgReady=kgReady;window.kgTut=kgTut;window.KG82_DEMO=KG82_DEMO;
+function kgTutDrop(){if(KG82.tut&&KG82.tut.stop){try{KG82.tut.stop()}catch(e){}}}/* a screen that leaves the rules screen without «Sẵn sàng» (quick roll, redraw, ✕) drops a running guided round */
+window.kgReady=kgReady;window.kgTut=kgTut;window.kgTutDrop=kgTutDrop;window.KG82_DEMO=KG82_DEMO;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgReady · màn Luật chơi (Sẵn sàng / Hướng dẫn) trước MỌI trò tài nghệ",where:"mọi trò tài nghệ, mọi chỗ mở (thi, học, Thử tay, khảo hạch, tuyển chọn, Tát, Tu đức, Hoàng thượng triệu, Chải chuốt, mưu kế, Nghiệm thân); chưa chạm «Sẵn sàng» thì chưa tính giờ",
  html:()=>{try{return ["dan","ban","co"].map(k=>{const b=document.createElement("div");b.className="kgbox";b.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${typeof kitQuick==="function"?kitQuick({n:"Để trời định",sub:"tính 5/10"}):""}</div>`;
   kgReady(b,{kind:k});b.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));return `<div class="mg kpanel kgame kg82" style="position:relative;max-width:560px;margin:0 auto 12px"><div class="kgame"><div class="kgbody"><div class="kginfo">${b.outerHTML}</div></div></div></div>`}).join("")}catch(e){return ""}}})}catch(e){}
@@ -518,7 +519,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 .kg82opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}.kg82opts button{min-height:48px;text-align:center;justify-content:center}
 .kg82quiz .kb{font-size:1rem}.kg82quiz .kpnote{min-height:1.3em;margin-top:8px}.kg82 .kfact small{display:block}.kg82 .kgrow>b{flex:none;white-space:nowrap;padding-left:6px}
 /* KIT §13.7 rules screen + guided round (mg-ready-guide); colours from the kit tokens only */
-.kg82.kg-ready .kghow,.kg82.kg-tut .kghow{display:none}
+.kgame.kg-ready .kghow,.kgame.kg-tut .kghow{display:none}
 .kgr{margin:0 0 6px}.kgr .kpst{margin-top:0}.kgr-note{margin:8px 0 2px}
 .kgr-demo{margin:8px auto 2px;max-width:340px}
 .kgr-st{position:relative;height:118px;border:1px solid var(--k-hair);border-radius:var(--k-rad,8px);overflow:hidden;background:var(--k-card) center/cover no-repeat}
