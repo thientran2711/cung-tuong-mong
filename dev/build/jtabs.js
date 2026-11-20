@@ -28,7 +28,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /* ---- parts (kitSteps, kitBar, kitSkillCard, kitEmpty live in the kit: j79 §21) ---- */
 function kitInfo(term,label){return `<span class="ktinfo">${kitGloss(term,`ⓘ ${label||term}`)}</span>`}
 /* kit-rows-b KP19: one step list with THREE states — done ✓ / now ▸ / next · ; list = [[state,text,note?]…], state "done"|"now"|"next" (Việc nhờ steps; generalises kitChecks §46 / kitCoopSteps §69.3) */
-function kitSteps(list){return `<div class="kchecks ksteps">${(list||[]).map(([st,t,note])=>`<div class="kchk ksp-${st==="done"||st==="now"?st:"next"}"><span class="kchm ${st==="done"?"g":st==="now"?"w":"m"}">${st==="done"?"✓":st==="now"?"▸":"·"}</span><span class="kchkt">${t}${note?` <small>${note}</small>`:""}</span></div>`).join("")}</div>`}window.kitSteps=kitSteps;
+function kitStepList(list){return `<div class="kchecks ksteps">${(list||[]).map(([st,t,note])=>`<div class="kchk ksp-${st==="done"||st==="now"?st:"next"}"><span class="kchm ${st==="done"?"g":st==="now"?"w":"m"}">${st==="done"?"✓":st==="now"?"▸":"·"}</span><span class="kchkt">${t}${note?` <small>${note}</small>`:""}</span></div>`).join("")}</div>`}window.kitStepList=kitStepList;
 function kitChecks(list){return `<div class="kchecks">${list.map(([ok,t])=>`<div class="kchk ${ok?"y":"n"}"><span class="kchm ${ok?"g":"r"}">${kitMark(ok)}</span><span class="kchkt">${t}</span></div>`).join("")}</div>`}
 const ktDoable=h=>(String(h).match(/<button(?![^>]*\bdisabled\b)[^>]*data-(learn|vlearn|charity|wkprac|wk="prac"|q72a|q72c)/g)||[]).length;
 const ktTotal=h=>(String(h).match(/<button[^>]*data-(learn|vlearn|charity|wkprac|wk="prac"|q72a|q72c)/g)||[]).length;
