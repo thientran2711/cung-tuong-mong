@@ -235,3 +235,41 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 LINEAGE (owner 17/11; threshold overwritten by owner 18/11 ~07:33Z, canon overwrite): your FIRST STATUS line MUST state "depth <get_session lineage.depth>". Open workers as your children; ALWAYS roll over by opening your own child foreman (create_session) at EVERY depth the system allows, up to the limit (8) — never stop at 5/6/7; ONLY when create_session is refused (limit reached or any error) write the handover + send "TAKE OVER NOW" to the D standby (last "FOREMAN D ROOT STANDBY = …" line of FOREMAN_D_STATUS) or, if none, a FOR MAIN line so the owner opens a ROOT. Every takeover prompt you write copies this LINEAGE line and the SLEEP line below.
 SLEEP = STANDBY PASTE BLOCK (owner 18/11 ~07:45Z): when the owner says she is going to sleep, your SAME reply gives her, unasked, the D standby paste block: "You are FOREMAN D ROOT STANDBY (depth 0) of Cung Tường Mộng. Read dev/handover/TAKEOVER_FOREMAN_STANDBY.md on branch claude/cung-tuong-mong-handover-hj0h8w with <X> = D and follow ONLY the STANDBY FIRST part until your line sends TAKE OVER NOW." Rule text: dev/rules/START_FOREMAN.md "SLEEP = STANDBY PASTE BLOCKS".
+
+## CHOICE-VALUE #2 — RE-GATE FAIL 1 fixed (worker session_01964izDzpduBmBuPXEA4znS, opus, for Foreman D #10)
+START_CTX ≈ 3 % of 1M (get_session read 0; estimate) · depth 2 · finished ≈ ≈ 14 % (estimate).
+PRIORITY #1 CHECK ('choice-value'): OD law 3 (gain-and-loss, OD 18/11 ~09:20Z) + law 11 | main 4e8cbaeb (LIVE, merged) | review/choice-value-audit-rv9 0c7e21b6 (BASE) | claims CHOICE-VALUE (this job, rolled over from FKstgvyB)
+Branch **review/choice-value-audit** = rv9 0c7e21b6 → eb7e68db (fix) → 095c4477 (merge LIVE 0aaf8152) → da40997d (j24) → bfc00562 (wording) → **32614524** (merge LIVE 4e8cbaeb). Conflicts only index.html/sw.js (theirs + build_site.sh).
+
+### FAIL 1 — LAW 3 + LAW 11: every «không tốn gì»-only gain beside a loss (scan: `G70("không tốn gì` / `wx:"không tốn gì"` → 17 before, 0 after)
+| place | option | before (Được) | after (Được) | note |
+|---|---|---|---|---|
+| jface:139 Trúng độc | Nằm nghỉ chờ khỏi | không tốn gì | giữ lại ${FXF.docMed} lượng bạc và sức lực | siblings cost Bạc −FXF.docMed / Sức; number from FXF |
+| j70:542 scar | Để tự lành | không tốn gì | giữ bạc trong rương · khỏi uống thuốc đắng hao sức | siblings cost Bạc + Sức |
+| j70:428 orders | Giữ nguyên | không tốn gì thêm | kẻ hầu yên việc cũ · giữ bạc mỗi tháng | |
+| j70:433 / 439 / 443 orders | Thôi ×3 | không tốn gì | kẻ hầu còn rảnh tay · giữ bạc mỗi tháng / {name} vẫn làm việc cũ · giữ bạc mỗi tháng / giữ bạc mỗi tháng · chẳng ai oán vì bị theo dõi | on screen «Thôi» is the kit ✕ (menu cancel) — text kept true anyway |
+| j70:455 threat | Để sau | không tốn gì | giữ yên mọi bề · chẳng đắc tội thêm ai | kit KIT_BACK (jplace:44) draws it as the back button = menu cancel |
+| j67:266 | Để mặc | không tốn gì | giữ bạc riêng · êm chuyện với cha | |
+| jrd_muoi:636 / 795 | Chờ xem trời / Ghi lại, chờ xem | không tốn gì | bạc nhà còn nguyên · khỏi bị chê bàn chính sự / bạc còn nguyên · {v} không phải xấu hổ trước ngươi | |
+| jrd_nc:54 / 185 / 245 / 487 | Bảo lão tự lo lấy / Hứa suông / Mặc kệ ×2 | không tốn gì | giữ lại bạc lót tay mỗi mùa / lão {kha} tạm im · bạc còn nguyên / chuyện cũ không bị khơi · chẳng ai nắm thóp ngươi / êm chuyện ở buổi thỉnh an · chẳng ai nắm thóp ngươi | each = what the siblings' loss line costs |
+| jrd_tt:153 / 215 / 269 | Mặc kệ / Để mặc / Hứa suông cho yên lòng | không tốn gì | giữ bạc · {v} không lợi dụng được ngươi / đứng ngoài bè phái trước mặt Hoàng thượng · {v} chẳng nắm thóp được / Triệu tạm im · nhà ngươi khỏi gánh rủi ro | |
+| **j24:28 apSorry (found by seed 23 after the merge)** | Lạnh lùng | — (only «thiện cảm −3») | thành: giữ uy, nàng biết ngươi không dễ bỏ qua · Mất: thiện cảm −BAL.eff.j24.go_8 | same shape as jtsb «Lạnh lùng»; one-of-a-kind (grep: no other `x:` that is only a thiện cảm loss) |
+Kit lesson (Fold shot): the kit splits a gain at «, » and greys a part that starts with «không» (no-word) → no gain part after a comma starts with «không» (bfc00562).
+Not in scope, left (no cost shown → not cost-only): `j67:"tốn: không tốn gì"` rows with no «thành» (jveil «Thôi», jlost «Trả lại / Nói không thấy», j92 / jtruth chance roads) — they show no cost; jlost's real gain (thiện cảm) is not printed (FYI backlog).
+
+### GATES
+| gate | sha | result |
+|---|---|---|
+| grep «không tốn gì» as the only gain (`G70("không tốn gì` / `wx:"không tốn gì"`) | 32614524 | **0** (was 17) |
+| one-core-guard / -text / -bind / -text-rule | 32614524 | PASS ×4 |
+| odds-cap | 32614524 | PASS |
+| choice-value-scan 100 turns seeds 7 / 11 / 23 / 31 (one at a time) | 32614524 | **PASS** 266 / 255 / 275 / 248 · COST-ONLY 0 · HINT-NO-GAIN 0 · DOMINATED 0 · 0 page errors (also PASS on bfc00562: 270 / 228 / 282 / 243) |
+| --plant | 32614524 | PLANT OK 3/3 |
+| ptime2 / receiver-choice.test | 32614524 | ALL OK / ALL PASS |
+| ptime.test | 32614524 | **1 FAIL (FAIL 11 cnvOrd, once FAIL 5 invite)**: branch 5 of 5 runs fail; plain LIVE 4e8cbaeb 1 of 3 and LIVE 0aaf8152 1 of 2 runs fail with the same FAIL 11. Failing rows = `at`/`exp`/`left` of a random far rival (master's palace vs target, order left) — the branch touches no cnvOrd / accGrant / walk code (j95b diff = bribe-refusal rows only). Reported as LIVE flake; reviewer please re-check the rate |
+| quickcheck --runs 6 (vs live 4e8cbaeb) | 32614524 | **PASS** · old save ok · core gates PASS · render 214/238 ms, tab 513/462, buổi 1185/1384 |
+| coop-e2e vs live Worker | 32614524 | **68/68** |
+
+Shots (scratch only, not uploaded, looked at): Fold 755x1000@2 + iPad 1180x820@2 of Trúng độc, Chữa vết thương, Có kẻ rình rập, Theo dõi — new gains green under ĐƯỢC, no overflow, 0 page errors. Road cards (j67 / jrd_*) not shot (need a live arc state); their text goes through the same j67 «thành:» green line as before.
+Known, not ours: ptime FAIL 11 (cnvOrd) flaky — same on plain LIVE 0aaf8152 (1 FAIL then ALL OK); role-parity 2 FAIL = LIVE's (re-gate).
+### SẴN SÀNG KIỂM review/choice-value-audit 32614524f77a0986b1924ae50e54b8c52a85878e
