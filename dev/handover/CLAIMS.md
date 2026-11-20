@@ -445,5 +445,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-item-big KIT KEEPER (sonnet; Group 2 IT01 of ROOT-77 kit queue — already met by §28.13b; scan + guard test + art gaps) | review/kit-item-big; reports/kit-item-big.md | MAIN ROOT-77 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM bbe1b20f | 20/11 11:55Z |
 | MAIN ROOT-78 (opus; child of ROOT-77, depth 7) | handover HANDOVER_SESSION9 | ROOT-77 | session_01Rc5AsMLiYk8Qo5FC3nWVM1 | RUNNING | 20/11 11:29Z |
 | rv-kit-signs-odds + rv-kit-item-big REVIEWER (sonnet; small kit) | review/kit-signs-odds-rv, review/kit-item-big-rv; reports/rv-kit-signs-odds.md + rv-kit-item-big.md | MAIN ROOT-78 | session_RV_signs | RUNNING | 20/11 11:33Z |
-| road-triggers r2 fixes (opus E26b; E26r FAIL 72a9b918, 3 fixes + N1/N3) | review/road-triggers-r1; briefs/E26b-road-triggers-r2.md | FOREMAN E #19 | session_PENDING_E26b | RUNNING | 20/11 11:49Z |
+| road-triggers r2 fixes (opus E26b; E26r FAIL 72a9b918, 3 fixes + N1/N3) | review/road-triggers-r1; briefs/E26b-road-triggers-r2.md | FOREMAN E #19 | session_01DgYSWoGyW9js5iSr8uUs2x | RUNNING | 20/11 11:49Z |
 | kit-podium-gate KIT KEEPER (sonnet; Group 3 KP07 kitEntryGate + OR09 kit-side podium) | review/kit-podium-gate; reports/kit-podium-gate.md | MAIN ROOT-78 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 8815a189 | 20/11 |
