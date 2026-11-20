@@ -1155,6 +1155,566 @@
    "prompt_file": "dev/art/face-common/s65.v5.FULL.txt",
    "face_words": "Her face: a BALANCED, perfectly symmetrical classic oval face with a smooth high forehead, gently rounded, softly broad cheekbones and a gently rounded chin; calm LEVEL, slightly long almond eyes with clear double eyelids, perfectly even, with a steady serene gaze, fully open; long smooth evenly arched brows; a straight well-proportioned nose; a medium mouth with evenly shaped lips and a clearly defined lip bow; a dignified, upright, virtuous lady of good upbringing; never playful, never flirtatious, never haughty. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A calm, serene, DIGNIFIED composure, a steady level gaze straight at the viewer, the face poised and still, a small modest refined closed-lip smile, the head held perfectly straight and level, eyes fully open, never a stretched grin.",
    "note": "RANK8-C proposal: added for rank builds (B8), cut = FACE_MAP_L703 s65.cut"
+  },
+  "s07": {
+   "id": "s07",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind SAMPLE-686)",
+   "ref_id": "gOmpzsdSXO",
+   "gen_id": "SyhezotUb8",
+   "prompt_file": "dev/art/face-common/s07.v5.FULL.txt",
+   "face_words": "Her face: an ADULT, clearly DEFINED LONG OVAL face with HIGH sculpted cheekbones that are clearly visible, a slim crisply shaped jawline and a neat POINTED chin, no baby fat at all; CRISP long almond eyes with sharply LIFTED outer corners and a clean sharp upper lid line, fully open, with a PIERCING, keen, intelligent gaze that looks straight into the viewer as if reading the viewer's thoughts; long STRAIGHT, sharp, clearly defined brows with a slight angled lift at the tail; a slim straight nose with a fine high bridge and a neat tip; well-defined lips with a crisp clear cupid's bow; a quick-witted, clever, alert young woman; never a baby face, never round or chubby, never sleepy, dreamy or sweet. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A sharp, clever, PIERCING look straight at the viewer, the gaze keen, alert and knowing, as if she has already seen through everything; a small confident closed-lip smile lifted at ONE corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s07.cut; face_words = 'Her face' + 'Expression' VERBATIM from s07.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s08": {
+   "id": "s08",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind REDRAW-701)",
+   "ref_id": "4RFmfAq9Aa",
+   "gen_id": "WDgKkfTcXe",
+   "prompt_file": "dev/art/face-common/s08.v5b.FULL.txt",
+   "face_words": "Her face: an ADULT, clearly DEFINED DIAMOND-OVAL face with HIGH sculpted cheekbones that are clearly visible, a slim crisply shaped jawline and a neat POINTED chin, no baby fat at all; CRISP long almond eyes with sharply LIFTED outer corners and a clean sharp upper lid line, fully open, with a PIERCING, keen, intelligent gaze that looks straight into the viewer as if reading the viewer's thoughts; STRAIGHT, sharp, clearly defined brows with a slight angled lift at the tail; a slim straight nose with a fine high bridge and a neat tip; well-defined lips with a crisp clear cupid's bow; a quick-witted, clever, alert young woman; never a baby face, never round or chubby, never sleepy, dreamy or sweet. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A sharp, clever, PIERCING look straight at the viewer, the gaze keen, alert and knowing, as if she has already seen through everything; a small confident closed-lip smile lifted at ONE corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s08.cut; face_words = 'Her face' + 'Expression' VERBATIM from s08.v5b.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s09": {
+   "id": "s09",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind SAMPLE-686)",
+   "ref_id": "w4aXWwe7EI",
+   "gen_id": "s7IM283l8e",
+   "prompt_file": "dev/art/face-common/s09.v5.FULL.txt",
+   "face_words": "Her face: an ADULT, clearly DEFINED HEART-OVAL face with HIGH sculpted cheekbones that are clearly visible, a slim crisply shaped jawline and a neat POINTED chin, no baby fat at all; CRISP long almond eyes with sharply LIFTED outer corners and a clean sharp upper lid line, fully open, with a PIERCING, keen, intelligent gaze that looks straight into the viewer as if reading the viewer's thoughts; STRAIGHT, sharp, clearly defined brows with a slight angled lift at the tail; a slim straight nose with a fine high bridge and a lifted tip and a neat tip; well-defined lips with a crisp clear cupid's bow; a quick-witted, clever, alert young woman; never a baby face, never round or chubby, never sleepy, dreamy or sweet. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A sharp, clever, PIERCING look straight at the viewer, the gaze keen, alert and knowing, as if she has already seen through everything; a small confident closed-lip smile lifted at ONE corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s09.cut; face_words = 'Her face' + 'Expression' VERBATIM from s09.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s10": {
+   "id": "s10",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind SAMPLE-689)",
+   "ref_id": "u5W3NLlQLD",
+   "gen_id": "YMl5uBoWeC",
+   "prompt_file": "dev/art/face-common/s10.v5.FULL.txt",
+   "face_words": "Her face: a long refined OVAL face with HIGH defined cheekbones, a narrow elegant jaw and a small firm chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; long narrow PHOENIX eyes with sharply UP-SWEPT outer corners, fully open and bright; long slender brows rising in a HIGH proud arch toward the temples; a straight slim high-bridged nose; THIN well-defined lips held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s10.cut; face_words = 'Her face' + 'Expression' VERBATIM from s10.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s11": {
+   "id": "s11",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind SAMPLE-689)",
+   "ref_id": "cpSkbto0eP",
+   "gen_id": "1ldW2O1r4r",
+   "prompt_file": "dev/art/face-common/s11.v5.FULL.txt",
+   "face_words": "Her face: a long refined DIAMOND-OVAL face with HIGH defined cheekbones, a narrow elegant jaw and a small firm chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; long narrow PHOENIX eyes with sharply UP-SWEPT outer corners, fully open and bright; long slender brows rising in a HIGH proud arch toward the temples; a straight slim high-bridged nose; THIN well-defined lips held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s11.cut; face_words = 'Her face' + 'Expression' VERBATIM from s11.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s12": {
+   "id": "s12",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind SAMPLE-689)",
+   "ref_id": "fHzN9OxCDY",
+   "gen_id": "aFG9PMUfSh",
+   "prompt_file": "dev/art/face-common/s12.v5b.FULL.txt",
+   "face_words": "Her face: a long refined OVAL face with HIGH defined cheekbones, a narrow elegant jaw and a small firm chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; long narrow PHOENIX eyes with sharply UP-SWEPT outer corners, fully open and bright; long slender brows rising in a HIGH proud arch toward the temples; a straight slim high-bridged nose; THIN well-defined lips with a crisp upper lip line, held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s12.cut; face_words = 'Her face' + 'Expression' VERBATIM from s12.v5b.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s13": {
+   "id": "s13",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind SAMPLE-689)",
+   "ref_id": "bxMGZJJ5Y2",
+   "gen_id": "O6E8pl4ynm",
+   "prompt_file": "dev/art/face-common/s13.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow OVAL face with smooth FLAT cheeks, a straight slender jaw and a long tapered chin; narrow, long, perfectly LEVEL almond eyes (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT thin brows lying LOW and level, no arch at all; a slim straight nose; a small mouth with thin even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s13.cut; face_words = 'Her face' + 'Expression' VERBATIM from s13.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s14": {
+   "id": "s14",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind SAMPLE-689)",
+   "ref_id": "nVsbFtaYQD",
+   "gen_id": "Syhe0x1Ub8",
+   "prompt_file": "dev/art/face-common/s14.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow OVAL face with a high smooth forehead with smooth FLAT cheeks, a straight slender jaw and a long tapered chin; narrow, long, perfectly LEVEL almond eyes (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT thin brows lying LOW and level, no arch at all; a slim straight nose; a small mouth with thin even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s14.cut; face_words = 'Her face' + 'Expression' VERBATIM from s14.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s15": {
+   "id": "s15",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind SAMPLE-689)",
+   "ref_id": "YMl5HhtWeC",
+   "gen_id": "jUoTzk2LD0",
+   "prompt_file": "dev/art/face-common/s15.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow OVAL face with smooth FLAT cheeks, a straight slender jaw and a long tapered chin; narrow, long, perfectly LEVEL almond eyes (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT thin brows lying LOW and level, no arch at all; a slim straight nose with a narrow bridge; a small mouth with thin even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s15.cut; face_words = 'Her face' + 'Expression' VERBATIM from s15.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s16": {
+   "id": "s16",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind RESTORE-712)",
+   "ref_id": "hu2ynp3vqL",
+   "gen_id": "u5WiTRSQLD",
+   "prompt_file": "dev/art/face-common/s16.v4c.FULL.txt",
+   "face_words": "Her face: a soft HEART-OVAL face with smooth full cheeks and a delicate rounded chin, PEACH-BLOSSOM eyes (đào hoa nhãn): large glossy, liquid-bright almond eyes with long sweeping upper lashes whose outer corners curve softly UP, long curled lashes, fully open and bright, slender softly curved brows, a small fine nose, FULL plump glossy lips with a soft rose tint and a soft curved bow, closed, ONE tiny beauty mark (a single small dark dot) just below the outer corner of her LEFT eye, the only mark on her face. Expression: A seductive, alluring look: the head tilted slightly to one side, a slow lingering sidelong gaze from the fully open eyes straight to the viewer, a knowing half-smile with the full lips closed, one corner lifted more than the other, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s16.cut; face_words = 'Her face' + 'Expression' VERBATIM from s16.v4c.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s17": {
+   "id": "s17",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind SAMPLE-689)",
+   "ref_id": "WDgKqfpcXe",
+   "gen_id": "jUoTnh9LD0",
+   "prompt_file": "dev/art/face-common/s17.v5.FULL.txt",
+   "face_words": "Her face: a soft slightly LONG OVAL face with smooth full cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, fully open, the gaze lingering and inviting; slender softly curved brows; a small fine nose; FULL plump lips with a soft curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her RIGHT eye, the only mark on her face; a sensual, magnetic, enchanting woman; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A SEDUCTIVE, alluring look: the head tilted slightly, a slow lingering sidelong gaze straight to the viewer, a knowing half-smile with the full lips closed, one corner lifted more than the other, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s17.cut; face_words = 'Her face' + 'Expression' VERBATIM from s17.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s18": {
+   "id": "s18",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind SAMPLE-689)",
+   "ref_id": "SyheMY2Ub8",
+   "gen_id": "9ZHhorQNYZ",
+   "prompt_file": "dev/art/face-common/s18.v5.FULL.txt",
+   "face_words": "Her face: a soft HEART-OVAL face with smooth full cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, fully open, the gaze lingering and inviting; slender softly curved brows; a small fine nose; FULL plump lips with a deep curved bow on the upper lip, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her LEFT eye, the only mark on her face; a sensual, magnetic, enchanting woman; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A SEDUCTIVE, alluring look: the head tilted slightly, a slow lingering sidelong gaze straight to the viewer, a knowing half-smile with the full lips closed, one corner lifted more than the other, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s18.cut; face_words = 'Her face' + 'Expression' VERBATIM from s18.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s19": {
+   "id": "s19",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "gOmphLeSXO",
+   "gen_id": "VX7xgIWMMU",
+   "prompt_file": "dev/art/face-common/s19.v5.FULL.txt",
+   "face_words": "Her face: a long refined OVAL face with HIGH defined cheekbones, a narrow elegant jaw and a small firm chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; long narrow almond eyes with sharply UP-SWEPT outer corners, fully open and bright; long slender brows rising in a HIGH proud arch toward the temples; a straight slim high-bridged nose; THIN well-defined lips held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s19.cut; face_words = 'Her face' + 'Expression' VERBATIM from s19.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s20": {
+   "id": "s20",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "VX7xJ0OMMU",
+   "gen_id": "xSB0pPPjfW",
+   "prompt_file": "dev/art/face-common/s20.v5.FULL.txt",
+   "face_words": "Her face: a long refined DIAMOND-OVAL face with HIGH defined cheekbones, a narrow elegant jaw and a small firm chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; long narrow almond eyes with sharply UP-SWEPT outer corners, fully open and bright; long slender brows rising in a HIGH proud arch toward the temples; a straight slim high-bridged nose; THIN well-defined lips held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s20.cut; face_words = 'Her face' + 'Expression' VERBATIM from s20.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s21": {
+   "id": "s21",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "lJtDmsIgv9",
+   "gen_id": "JNCohz8Oq4",
+   "prompt_file": "dev/art/face-common/s21.v5.FULL.txt",
+   "face_words": "Her face: a long refined OVAL face with HIGH defined cheekbones, a narrow elegant jaw and a small firm chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; long narrow almond eyes with sharply UP-SWEPT outer corners, fully open and bright; long slender brows rising in a HIGH proud arch toward the temples; a straight slim high-bridged nose; THIN well-defined lips with a crisp upper lip line, held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s21.cut; face_words = 'Her face' + 'Expression' VERBATIM from s21.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s22": {
+   "id": "s22",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "9ZHhq9FNYZ",
+   "gen_id": "DoOLUufpcl",
+   "prompt_file": "dev/art/face-common/s22.v5.FULL.txt",
+   "face_words": "Her face: a long refined OVAL face with HIGH defined cheekbones, a narrow elegant jaw and a small firm pointed chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; long narrow almond eyes with sharply UP-SWEPT outer corners, fully open and bright; long slender brows rising in a HIGH proud arch toward the temples; a straight slim high-bridged nose; THIN well-defined lips held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s22.cut; face_words = 'Her face' + 'Expression' VERBATIM from s22.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s23": {
+   "id": "s23",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "0eU17VOTfW",
+   "gen_id": "kseYMxw16B",
+   "prompt_file": "dev/art/face-common/s23.v5.FULL.txt",
+   "face_words": "Her face: a long refined OVAL face with HIGH defined cheekbones, a narrow elegant jaw and a small firm chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; long narrow almond eyes with sharply UP-SWEPT outer corners, fully open and bright; long thin brows rising in a HIGH proud arch toward the temples; a straight slim high-bridged nose; THIN well-defined lips held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s23.cut; face_words = 'Her face' + 'Expression' VERBATIM from s23.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s24": {
+   "id": "s24",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "xSB08sMjfW",
+   "gen_id": "s7IMBwgl8e",
+   "prompt_file": "dev/art/face-common/s24.v5.FULL.txt",
+   "face_words": "Her face: a long slender refined OVAL face with HIGH defined cheekbones, a narrow elegant jaw and a small firm chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; long narrow almond eyes with sharply UP-SWEPT outer corners, fully open and bright; long slender brows rising in a HIGH proud arch toward the temples; a straight slim high-bridged nose; THIN well-defined lips held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s24.cut; face_words = 'Her face' + 'Expression' VERBATIM from s24.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s25": {
+   "id": "s25",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "jUoTIJnLD0",
+   "gen_id": "UPvdtPawny",
+   "prompt_file": "dev/art/face-common/s25.v5.FULL.txt",
+   "face_words": "Her face: a long refined OVAL face with HIGH defined cheekbones, a narrow elegant jaw and a small firm chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; long narrow almond eyes with sharply UP-SWEPT outer corners, fully open and bright; long slender brows rising in a HIGH proud arch toward the temples; a straight slim nose with a high fine bridge; THIN well-defined lips held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s25.cut; face_words = 'Her face' + 'Expression' VERBATIM from s25.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s26": {
+   "id": "s26",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "8ai7RulIrU",
+   "gen_id": "u5W3zKuQLD",
+   "prompt_file": "dev/art/face-common/s26.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow OVAL face with smooth FLAT cheeks, a straight slender jaw and a long tapered chin; narrow, long, perfectly LEVEL almond eyes (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT thin brows lying LOW and level, no arch at all; a slim straight nose; a small mouth with thin even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s26.cut; face_words = 'Her face' + 'Expression' VERBATIM from s26.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s27": {
+   "id": "s27",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "MBJjymCDCm",
+   "gen_id": "N2qvQ7E6D9",
+   "prompt_file": "dev/art/face-common/s27.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow OVAL face with smooth FLAT cheeks, a straight slender jaw and a long tapered chin; narrow, long, perfectly LEVEL almond eyes (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT thin brows lying LOW and level, no arch at all; a slim straight nose with a narrow bridge; a small mouth with thin even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s27.cut; face_words = 'Her face' + 'Expression' VERBATIM from s27.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s28": {
+   "id": "s28",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "kseYX7y16B",
+   "gen_id": "s7IMBr2l8e",
+   "prompt_file": "dev/art/face-common/s28.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow OVAL face, high smooth forehead, with smooth FLAT cheeks, a straight slender jaw and a long tapered chin; narrow, long, perfectly LEVEL almond eyes (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT thin brows lying LOW and level, no arch at all; a slim straight nose; a small mouth with thin even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s28.cut; face_words = 'Her face' + 'Expression' VERBATIM from s28.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s29": {
+   "id": "s29",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "WDgKUoPcXe",
+   "gen_id": "DoOLwTYpcl",
+   "prompt_file": "dev/art/face-common/s29.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow OVAL face with smooth FLAT cheeks, a straight slender jaw and a long finely pointed chin; narrow, long, perfectly LEVEL almond eyes (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT thin brows lying LOW and level, no arch at all; a slim straight nose; a small mouth with thin even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s29.cut; face_words = 'Her face' + 'Expression' VERBATIM from s29.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s30": {
+   "id": "s30",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "p8ys4fUehw",
+   "gen_id": "6AbaFNsiJO",
+   "prompt_file": "dev/art/face-common/s30.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow OVAL face with smooth FLAT cheeks, a straight slender jaw and a long tapered chin; narrow, long, perfectly LEVEL almond eyes (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT long thin brows lying LOW and level, no arch at all; a slim straight nose; a small mouth with thin even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s30.cut; face_words = 'Her face' + 'Expression' VERBATIM from s30.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s31": {
+   "id": "s31",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "cpSkwvc0eP",
+   "gen_id": "SyhetFIUb8",
+   "prompt_file": "dev/art/face-common/s31.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow OVAL face with smooth FLAT cheeks, a straight slender jaw and a long tapered chin; narrow, long, perfectly LEVEL almond eyes (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT thin brows lying LOW and level, no arch at all; a slim straight nose; a small neat mouth with thin even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s31.cut; face_words = 'Her face' + 'Expression' VERBATIM from s31.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s32": {
+   "id": "s32",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "jUoTI3pLD0",
+   "gen_id": "6AbaHlQiJO",
+   "prompt_file": "dev/art/face-common/s32.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow OVAL face with smooth FLAT cheeks, a straight slender jaw and a long tapered chin; narrow, long, perfectly LEVEL almond eyes (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT thin brows lying LOW and level, no arch at all; a slim straight nose; a small mouth with thin even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s32.cut; face_words = 'Her face' + 'Expression' VERBATIM from s32.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s33": {
+   "id": "s33",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind REDRAW-712)",
+   "ref_id": "N2qvybP6D9",
+   "gen_id": "N2qvJiB6D9",
+   "prompt_file": "dev/art/face-common/s33.v5r2.FULL.txt",
+   "face_words": "Her face: a soft HEART-OVAL face with smooth full cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, the gaze lingering, captivating and inviting; slender softly curved brows; a small fine nose; FULL plump lips with a soft curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a sensual, magnetic, enchanting woman; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: an ALLURING, captivating look: the head tilted to one side and the chin lowered a little, a languid half-lidded gaze straight at the viewer from under long lashes (the upper lids lowered a little, the eyes still open, both irises fully visible and aligned), one brow faintly raised, a knowing sly slight smile with the full lips closed, one lip corner lifted more than the other, a confident teasing charm; never a wide-eyed innocent look, never a sweet broad smile, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s33.cut; face_words = 'Her face' + 'Expression' VERBATIM from s33.v5r2.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s34": {
+   "id": "s34",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FULLSET-700)",
+   "ref_id": "cpSkwCV0eP",
+   "gen_id": "mEZy3ekhJQ",
+   "prompt_file": "dev/art/face-common/s34.v5.FULL.txt",
+   "face_words": "Her face: a soft HEART-OVAL face with smooth full cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, fully open, the gaze lingering and inviting; slender softly curved brows; a small fine nose; FULL plump lips with a deep curved bow on the upper lip, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a sensual, magnetic, enchanting woman; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A SEDUCTIVE, alluring look: the head tilted slightly, a slow lingering sidelong gaze straight to the viewer, a knowing half-smile with the full lips closed, one corner lifted more than the other, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s34.cut; face_words = 'Her face' + 'Expression' VERBATIM from s34.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s35": {
+   "id": "s35",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind A21-RETOUCH-712b)",
+   "ref_id": "Cqniu4NEEy",
+   "gen_id": "Lw8VL8VswO",
+   "prompt_file": "dev/art/face-common/s35.v5r2.FULL.txt",
+   "face_words": "Her face: a soft slightly LONG OVAL face with smooth full cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, the gaze lingering, captivating and inviting; slender softly curved brows; a small fine nose; FULL plump lips with a soft curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a magnetic, enchanting young lady; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: an ALLURING, captivating look: the head tilted to one side and the chin lowered a little, a languid half-lidded gaze straight at the viewer from under long lashes (the upper lids lowered a little, the eyes still open, both irises fully visible and aligned), one brow faintly raised, a knowing sly slight smile with the full lips closed, one lip corner lifted more than the other, a confident teasing charm; never a wide-eyed innocent look, never a sweet broad smile, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s35.cut; face_words = 'Her face' + 'Expression' VERBATIM from s35.v5r2.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s36": {
+   "id": "s36",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind REDRAW-712)",
+   "ref_id": "MBJjcPjDCm",
+   "gen_id": "9ZHh7RINYZ",
+   "prompt_file": "dev/art/face-common/s36.v5r2.FULL.txt",
+   "face_words": "Her face: a soft HEART-OVAL face with smooth full cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, the gaze lingering, captivating and inviting; slender softly curved brows; a small fine nose with a softly lifted tip; FULL plump lips with a soft curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a sensual, magnetic, enchanting woman; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: an ALLURING, captivating look: the head tilted to one side and the chin lowered a little, a languid half-lidded gaze straight at the viewer from under long lashes (the upper lids lowered a little, the eyes still open, both irises fully visible and aligned), one brow faintly raised, a knowing sly slight smile with the full lips closed, one lip corner lifted more than the other, a confident teasing charm; never a wide-eyed innocent look, never a sweet broad smile, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s36.cut; face_words = 'Her face' + 'Expression' VERBATIM from s36.v5r2.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s37": {
+   "id": "s37",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind A21-RETOUCH-712)",
+   "ref_id": "Lw8V5SlswO",
+   "gen_id": "O6E8sJQynm",
+   "prompt_file": "dev/art/face-common/s37.v5.FULL.txt",
+   "face_words": "Her face: a soft HEART-OVAL face with smooth full cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, fully open, the gaze lingering and inviting; slender softly arched brows; a small fine nose; FULL plump lips with a soft curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a sensual, magnetic, enchanting woman; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A SEDUCTIVE, alluring look: the head tilted slightly, a slow lingering sidelong gaze straight to the viewer, a knowing half-smile with the full lips closed, one corner lifted more than the other, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s37.cut; face_words = 'Her face' + 'Expression' VERBATIM from s37.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s38": {
+   "id": "s38",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind REDRAW-712)",
+   "ref_id": "MBJjc4LDCm",
+   "gen_id": "p8yscIfehw",
+   "prompt_file": "dev/art/face-common/s38.v5r2.FULL.txt",
+   "face_words": "Her face: a soft HEART-OVAL face with smooth full cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, the gaze lingering, captivating and inviting; slender softly curved brows; a small fine nose; FULL plump lips with a soft curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a magnetic, enchanting young lady; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: an ALLURING, captivating look: the head tilted to one side and the chin lowered a little, a languid half-lidded gaze straight at the viewer from under long lashes (the upper lids lowered a little, the eyes still open, both irises fully visible and aligned), one brow faintly raised, a knowing sly slight smile with the full lips closed, one lip corner lifted more than the other, a confident teasing charm; never a wide-eyed innocent look, never a sweet broad smile, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s38.cut; face_words = 'Her face' + 'Expression' VERBATIM from s38.v5r2.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s39": {
+   "id": "s39",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-737)",
+   "ref_id": "eIPgu6IdqL",
+   "gen_id": "Syhd3JGUb8",
+   "prompt_file": "dev/art/face-common/s39.v5.FULL.txt",
+   "face_words": "Her face: an ADULT, clearly DEFINED, slightly WIDE OVAL face, a broad smooth forehead, with HIGH sculpted cheekbones that are clearly visible, a slim crisply shaped jawline and a neat POINTED chin, no baby fat at all; CRISP long almond eyes with sharply LIFTED outer corners and a clean sharp upper lid line, fully open, with a PIERCING, keen, intelligent gaze that looks straight into the viewer as if reading the viewer's thoughts; thick STRAIGHT, sharp, clearly defined brows with a slight angled lift at the tail; a slim straight nose with a fine high bridge and a neat tip; well-defined lips with a crisp clear cupid's bow; a quick-witted, clever, alert young woman; never a baby face, never round or chubby, never sleepy, dreamy or sweet. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A sharp, clever, PIERCING look straight at the viewer, the gaze keen, alert and knowing, as if she has already seen through everything; a small confident closed-lip smile lifted at ONE corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s39.cut; face_words = 'Her face' + 'Expression' VERBATIM from s39.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s40": {
+   "id": "s40",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind FACEFIX-748)",
+   "ref_id": "VX7juWTMMU",
+   "gen_id": "vQA9sFDa47",
+   "prompt_file": "dev/art/face-common/s40.v5.FULL.txt",
+   "face_words": "Her face: an ADULT, clearly DEFINED, narrow V-shaped OVAL face with HIGH sculpted cheekbones that are clearly visible, a slim crisply shaped jawline and a neat POINTED chin, no baby fat at all; CRISP long almond eyes with sharply LIFTED outer corners and a clean sharp upper lid line, fully open, with a PIERCING, keen, intelligent gaze that looks straight into the viewer as if reading the viewer's thoughts; STRAIGHT, sharp, clearly defined brows with a slight angled lift at the tail; a slim nose with a fine high bridge and a small rounded tip; well-defined lips with a crisp clear cupid's bow; a quick-witted, clever, alert young woman; never a baby face, never round or chubby, never sleepy, dreamy or sweet. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A sharp, clever, PIERCING look straight at the viewer, the gaze keen, alert and knowing, as if she has already seen through everything; a small confident closed-lip smile lifted at ONE corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s40.cut; face_words = 'Her face' + 'Expression' VERBATIM from s40.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s41": {
+   "id": "s41",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-737)",
+   "ref_id": "u5WRlMfQLD",
+   "gen_id": "eIPgEtUdqL",
+   "prompt_file": "dev/art/face-common/s41.v5.FULL.txt",
+   "face_words": "Her face: an ADULT, clearly DEFINED, slightly SQUARE OVAL face, a firm jaw angle, with HIGH sculpted cheekbones that are clearly visible, a slim crisply shaped jawline and a neat POINTED chin, no baby fat at all; CRISP long almond eyes with sharply LIFTED outer corners and a clean sharp upper lid line, fully open, with a PIERCING, keen, intelligent gaze that looks straight into the viewer as if reading the viewer's thoughts; STRAIGHT, sharp, clearly defined brows with a slight angled lift at the tail; a slim straight nose with a fine high bridge and a neat tip; wide well-defined lips with a crisp clear cupid's bow; a quick-witted, clever, alert young woman; never a baby face, never round or chubby, never sleepy, dreamy or sweet. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A sharp, clever, PIERCING look straight at the viewer, the gaze keen, alert and knowing, as if she has already seen through everything; a small confident closed-lip smile lifted at ONE corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s41.cut; face_words = 'Her face' + 'Expression' VERBATIM from s41.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s42": {
+   "id": "s42",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-737)",
+   "ref_id": "tCRyKn2mZJ",
+   "gen_id": "9ZHvcGYNYZ",
+   "prompt_file": "dev/art/face-common/s42.v5.FULL.txt",
+   "face_words": "Her face: an ADULT, clearly DEFINED LONG OVAL face, a long lower face, with HIGH sculpted cheekbones that are clearly visible, a slim crisply shaped jawline and a neat POINTED chin, no baby fat at all; CRISP, slightly smaller deep-set almond eyes with sharply LIFTED outer corners and a clean sharp upper lid line, fully open, with a PIERCING, keen, intelligent gaze that looks straight into the viewer as if reading the viewer's thoughts; STRAIGHT, sharp, clearly defined brows with a slight angled lift at the tail; a slim straight nose with a fine high bridge and a neat tip; well-defined lips with a crisp clear cupid's bow; a quick-witted, clever, alert young woman; never a baby face, never round or chubby, never sleepy, dreamy or sweet. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A sharp, clever, PIERCING look straight at the viewer, the gaze keen, alert and knowing, as if she has already seen through everything; a small confident closed-lip smile lifted at ONE corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s42.cut; face_words = 'Her face' + 'Expression' VERBATIM from s42.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s43": {
+   "id": "s43",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind QUYENRU-MOVE-F3)",
+   "ref_id": "lJtdYwigv9",
+   "gen_id": "hu2Ng4AvqL",
+   "prompt_file": "dev/art/face-common/s43.qr.FULL.txt",
+   "face_words": "Her face: a soft HEART-OVAL face with softly sculpted cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, the gaze lingering, captivating and inviting; short, nearly straight, softly curved brows; a small fine nose; FULL plump lips with a soft curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a magnetic, enchanting young lady; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: an ALLURING, captivating look: the head tilted to one side and the chin lowered a little, a languid half-lidded gaze straight at the viewer from under long lashes (the upper lids lowered a little, the eyes still open, both irises fully visible and aligned), one brow faintly raised, a knowing sly slight smile with the full lips closed, one lip corner lifted more than the other, a confident teasing charm; never a wide-eyed innocent look, never a sweet broad smile, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s43.cut; face_words = 'Her face' + 'Expression' VERBATIM from s43.qr.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s44": {
+   "id": "s44",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind QUYENRU-MOVE-F3)",
+   "ref_id": "DoOgxICpcl",
+   "gen_id": "kse0GTu16B",
+   "prompt_file": "dev/art/face-common/s44.qr.FULL.txt",
+   "face_words": "Her face: a soft DIAMOND-OVAL face, widest at the gently high cheekbones, with smooth full cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, the gaze lingering, captivating and inviting; slender softly curved brows; a small fine nose; softly full lips with a clear curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a magnetic, enchanting young lady; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: an ALLURING, captivating look: the head tilted to one side and the chin lowered a little, a languid half-lidded gaze straight at the viewer from under long lashes (the upper lids lowered a little, the eyes still open, both irises fully visible and aligned), one brow faintly raised, a knowing sly slight smile with the full lips closed, one lip corner lifted more than the other, a confident teasing charm; never a wide-eyed innocent look, never a sweet broad smile, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s44.cut; face_words = 'Her face' + 'Expression' VERBATIM from s44.qr.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s45": {
+   "id": "s45",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind QUYENRU-MOVE-F3)",
+   "ref_id": "cpSxQta0eP",
+   "gen_id": "s7IezvGl8e",
+   "prompt_file": "dev/art/face-common/s45.qr.FULL.txt",
+   "face_words": "Her face: a soft TEARDROP-OVAL face with smooth full cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): very large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, the gaze lingering, captivating and inviting; slender softly curved brows; a straight nose with a gently arched bridge; FULL plump lips with a soft curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a magnetic, enchanting young lady; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: an ALLURING, captivating look: the head tilted to one side and the chin lowered a little, a languid half-lidded gaze straight at the viewer from under long lashes (the upper lids lowered a little, the eyes still open, both irises fully visible and aligned), one brow faintly raised, a knowing sly slight smile with the full lips closed, one lip corner lifted more than the other, a confident teasing charm; never a wide-eyed innocent look, never a sweet broad smile, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s45.cut; face_words = 'Her face' + 'Expression' VERBATIM from s45.qr.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s46": {
+   "id": "s46",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-761)",
+   "ref_id": "cpS1KEv0eP",
+   "gen_id": "w4aBpaU7EI",
+   "prompt_file": "dev/art/face-common/s46.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow DIAMOND-OVAL face, the cheekbones a little higher, with smooth FLAT cheeks, a straight slender jaw and a long tapered chin; narrow, long, perfectly LEVEL almond eyes (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT, slightly fuller dark brows lying LOW and level, no arch at all; a slim straight nose; a small mouth with thin even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s46.cut; face_words = 'Her face' + 'Expression' VERBATIM from s46.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s47": {
+   "id": "s47",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-761)",
+   "ref_id": "1ldcY3kr4r",
+   "gen_id": "hu24OP4vqL",
+   "prompt_file": "dev/art/face-common/s47.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow OVAL face with smooth FLAT cheeks, a straight slender jaw and a long tapered chin; narrow, long, perfectly LEVEL almond eyes set slightly wide apart (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT thin brows lying LOW and level, no arch at all; a slim straight nose with a softly rounded tip; a small mouth with thin even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s47.cut; face_words = 'Her face' + 'Expression' VERBATIM from s47.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s48": {
+   "id": "s48",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-761)",
+   "ref_id": "jUoV0AQLD0",
+   "gen_id": "YMlKqk5WeC",
+   "prompt_file": "dev/art/face-common/s48.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow OVAL face with smooth FLAT cheeks, a straight, slightly angular jaw and a long tapered chin; narrow, long, perfectly LEVEL almond eyes (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT thin brows lying LOW and level, no arch at all; a slim straight nose; a small mouth with slightly fuller even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s48.cut; face_words = 'Her face' + 'Expression' VERBATIM from s48.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s49": {
+   "id": "s49",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-761)",
+   "ref_id": "Tdwx1H7VNR",
+   "gen_id": "DoOsxgJpcl",
+   "prompt_file": "dev/art/face-common/s49.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow OVAL face with smooth FLAT cheeks, a straight slender jaw and a small softly rounded chin; long, slightly larger, perfectly LEVEL almond eyes (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT thin brows lying LOW and level, no arch at all; a slim straight nose; a small mouth with thin even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s49.cut; face_words = 'Her face' + 'Expression' VERBATIM from s49.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s50": {
+   "id": "s50",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-761)",
+   "ref_id": "u5WRiP4QLD",
+   "gen_id": "jUoVcelLD0",
+   "prompt_file": "dev/art/face-common/s50.v5.FULL.txt",
+   "face_words": "Her face: a LONG narrow HEART-OVAL face, a wide smooth forehead, with smooth FLAT cheeks, a straight slender jaw and a long tapered chin; narrow, long, perfectly LEVEL almond eyes (neither up- nor down-turned) with clear cold light-catching irises, fully open, staring straight with no warmth; STRAIGHT thin brows lying LOW and level, no arch at all; a slim straight nose with a high bridge; a small mouth with thin even lips in a calm straight line; an icy, untouchable beauty; never smiling warmly, never sweet, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A COLD, icy, distant stare straight at the viewer, the face completely still, the lips in a calm straight closed line with at most the faintest trace of a smile, the gaze remote and emotionless like winter frost, eyes fully open, never a grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s50.cut; face_words = 'Her face' + 'Expression' VERBATIM from s50.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s51": {
+   "id": "s51",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-786-EYES)",
+   "ref_id": "YMlKiMSWeC",
+   "gen_id": "p8ylzjyehw",
+   "prompt_file": "dev/art/face-common/s51.v5b.FULL.txt",
+   "face_words": "Her face: a long refined OVAL face with HIGH defined cheekbones, a firm, clearly angled jaw and a small firm chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; long almond eyes with gently lifted outer corners (natural, never slanted), fully open and bright; thick dark slender brows rising in a HIGH proud arch toward the temples; a straight slim high-bridged nose; THIN well-defined lips held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s51.cut; face_words = 'Her face' + 'Expression' VERBATIM from s51.v5b.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s52": {
+   "id": "s52",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-761)",
+   "ref_id": "lJtpQC3gv9",
+   "gen_id": "1ldchRar4r",
+   "prompt_file": "dev/art/face-common/s52.v5.FULL.txt",
+   "face_words": "Her face: a refined HEART-OVAL face, a wide smooth forehead, with HIGH defined cheekbones, a narrow elegant jaw and a small firm chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; long narrow almond eyes with sharply UP-SWEPT outer corners, fully open and bright; long slender brows rising in a HIGH proud arch toward the temples; a straight slim high-bridged nose; small, slightly full, well-defined lips held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s52.cut; face_words = 'Her face' + 'Expression' VERBATIM from s52.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s53": {
+   "id": "s53",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-761)",
+   "ref_id": "w4aBbFH7EI",
+   "gen_id": "tCRyW98mZJ",
+   "prompt_file": "dev/art/face-common/s53.v5.FULL.txt",
+   "face_words": "Her face: a long refined OVAL face with HIGH defined cheekbones, a narrow elegant jaw and a small firm chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; large almond eyes with sharply UP-SWEPT outer corners, fully open and bright; long slender brows rising in a HIGH proud arch toward the temples; a high-bridged nose with a slightly arched bridge; THIN well-defined lips held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s53.cut; face_words = 'Her face' + 'Expression' VERBATIM from s53.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s54": {
+   "id": "s54",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-786-EYES)",
+   "ref_id": "tCRyDEwmZJ",
+   "gen_id": "w4aB1Xp7EI",
+   "prompt_file": "dev/art/face-common/s54.v5b.FULL.txt",
+   "face_words": "Her face: a long refined TEARDROP-OVAL face with very HIGH, sharply defined cheekbones and slightly lean cheeks, a narrow elegant jaw and a small firm chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; long almond eyes with gently lifted outer corners (natural, never slanted), fully open and bright; long slender brows rising in a HIGH proud arch toward the temples; a straight slim high-bridged nose; THIN well-defined lips held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s54.cut; face_words = 'Her face' + 'Expression' VERBATIM from s54.v5b.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s55": {
+   "id": "s55",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-761)",
+   "ref_id": "WDgk4PIcXe",
+   "gen_id": "Xm9UADGBfo",
+   "prompt_file": "dev/art/face-common/s55.v5.FULL.txt",
+   "face_words": "Her face: a long refined OVAL face with HIGH defined cheekbones, a narrow elegant jaw and a small, softly rounded firm chin raised only a little (the head almost level) so she looks slightly DOWN along her straight nose, the whole face clearly visible; long narrow, slightly deep-set almond eyes with sharply UP-SWEPT outer corners, fully open and bright; long slender brows rising in a HIGH proud arch toward the temples; a straight slim high-bridged nose with a small lifted tip; THIN well-defined lips held firm; a proud noblewoman who knows she stands above everyone; never warm, never shy, never playful. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A HAUGHTY, superior, faintly disdainful gaze looking slightly down at the viewer as if unimpressed, the brows lifted proudly, only the faintest cool closed-lip curve at one corner, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s55.cut; face_words = 'Her face' + 'Expression' VERBATIM from s55.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s56": {
+   "id": "s56",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-761)",
+   "ref_id": "rgX0qMZxtc",
+   "gen_id": "3zKEOiVREY",
+   "prompt_file": "dev/art/face-common/s56.v5.FULL.txt",
+   "face_words": "Her face: a soft round-cheeked OVAL face with smooth full cheeks and a small delicate pointed chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, the gaze lingering, captivating and inviting; slender softly curved brows; a small fine nose; FULL plump lips with a soft curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a magnetic, enchanting young lady; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: an ALLURING, captivating look: the head tilted to one side and the chin lowered a little, a languid half-lidded gaze straight at the viewer from under long lashes (the upper lids lowered a little, the eyes still open, both irises fully visible and aligned), one brow faintly raised, a knowing sly slight smile with the full lips closed, one lip corner lifted more than the other, a confident teasing charm; never a wide-eyed innocent look, never a sweet broad smile, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s56.cut; face_words = 'Her face' + 'Expression' VERBATIM from s56.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s57": {
+   "id": "s57",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-761)",
+   "ref_id": "VX7jnlVMMU",
+   "gen_id": "kseWQNS16B",
+   "prompt_file": "dev/art/face-common/s57.v5.FULL.txt",
+   "face_words": "Her face: a soft HEART-OVAL face with smooth full cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): long, slightly narrower liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, the gaze lingering, captivating and inviting; thin long softly curved brows set high; a small fine nose; FULL plump lips with a soft curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a magnetic, enchanting young lady; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: an ALLURING, captivating look: the head tilted to one side and the chin lowered a little, a languid half-lidded gaze straight at the viewer from under long lashes (the upper lids lowered a little, the eyes still open, both irises fully visible and aligned), one brow faintly raised, a knowing sly slight smile with the full lips closed, one lip corner lifted more than the other, a confident teasing charm; never a wide-eyed innocent look, never a sweet broad smile, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s57.cut; face_words = 'Her face' + 'Expression' VERBATIM from s57.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s58": {
+   "id": "s58",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-761)",
+   "ref_id": "yiutSarPW9",
+   "gen_id": "9ZHvwpkNYZ",
+   "prompt_file": "dev/art/face-common/s58.v5.FULL.txt",
+   "face_words": "Her face: a soft DIAMOND-OVAL face with gently high cheekbones with smooth full cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, the gaze lingering, captivating and inviting; slender softly curved brows; a small straight nose with a fine bridge; FULL plump lips with a soft curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a magnetic, enchanting young lady; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: an ALLURING, captivating look: the head tilted to one side and the chin lowered a little, a languid half-lidded gaze straight at the viewer from under long lashes (the upper lids lowered a little, the eyes still open, both irises fully visible and aligned), one brow faintly raised, a knowing sly slight smile with the full lips closed, one lip corner lifted more than the other, a confident teasing charm; never a wide-eyed innocent look, never a sweet broad smile, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s58.cut; face_words = 'Her face' + 'Expression' VERBATIM from s58.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s59": {
+   "id": "s59",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-761)",
+   "ref_id": "JNC8lvIOq4",
+   "gen_id": "dt4S0zyXSL",
+   "prompt_file": "dev/art/face-common/s59.v5.FULL.txt",
+   "face_words": "Her face: a soft HEART-OVAL face with a wide smooth forehead, with smooth full cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, the gaze lingering, captivating and inviting; slender softly curved brows; a small fine nose; FULL, slightly wide plump lips with a soft curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a magnetic, enchanting young lady; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: an ALLURING, captivating look: the head tilted to one side and the chin lowered a little, a languid half-lidded gaze straight at the viewer from under long lashes (the upper lids lowered a little, the eyes still open, both irises fully visible and aligned), one brow faintly raised, a knowing sly slight smile with the full lips closed, one lip corner lifted more than the other, a confident teasing charm; never a wide-eyed innocent look, never a sweet broad smile, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s59.cut; face_words = 'Her face' + 'Expression' VERBATIM from s59.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s60": {
+   "id": "s60",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-761)",
+   "ref_id": "lJtpjSYgv9",
+   "gen_id": "lJtpxtNgv9",
+   "prompt_file": "dev/art/face-common/s60.v5.FULL.txt",
+   "face_words": "Her face: a soft HEART-OVAL face with smooth, slightly lean cheeks and a delicate, slightly long rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, long sweeping upper lashes, the gaze lingering, captivating and inviting; slender softly curved brows; a small fine nose; FULL plump lips with a soft curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a magnetic, enchanting young lady; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: an ALLURING, captivating look: the head tilted to one side and the chin lowered a little, a languid half-lidded gaze straight at the viewer from under long lashes (the upper lids lowered a little, the eyes still open, both irises fully visible and aligned), one brow faintly raised, a knowing sly slight smile with the full lips closed, one lip corner lifted more than the other, a confident teasing charm; never a wide-eyed innocent look, never a sweet broad smile, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s60.cut; face_words = 'Her face' + 'Expression' VERBATIM from s60.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s61": {
+   "id": "s61",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-761)",
+   "ref_id": "SyhdxtJUb8",
+   "gen_id": "gOme1k6SXO",
+   "prompt_file": "dev/art/face-common/s61.v5.FULL.txt",
+   "face_words": "Her face: a soft HEART-OVAL face with smooth full cheeks and a delicate rounded chin; PEACH-BLOSSOM eyes (đào hoa nhãn): large liquid-bright almond eyes whose outer corners curve softly UP, very long thick sweeping upper lashes, the gaze lingering, captivating and inviting; slightly fuller, softly curved brows; a small fine nose; FULL plump lips with a soft curved bow, closed; ONE tiny beauty mark (a single small dark dot) just below the outer corner of her own LEFT eye (the eye on the RIGHT side of the picture), the only mark on her face; a magnetic, enchanting young lady; never childlike, never stern, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: an ALLURING, captivating look: the head tilted to one side and the chin lowered a little, a languid half-lidded gaze straight at the viewer from under long lashes (the upper lids lowered a little, the eyes still open, both irises fully visible and aligned), one brow faintly raised, a knowing sly slight smile with the full lips closed, one lip corner lifted more than the other, a confident teasing charm; never a wide-eyed innocent look, never a sweet broad smile, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s61.cut; face_words = 'Her face' + 'Expression' VERBATIM from s61.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
+  },
+  "s63": {
+   "id": "s63",
+   "m09_ok": "yes",
+   "set": "face v5 (FACE_MAP_L703, kind NEWFACE-F4)",
+   "ref_id": "kseVFSr16B",
+   "gen_id": "s7IX5y2l8e",
+   "prompt_file": "dev/art/face-common/s63.v5.FULL.txt",
+   "face_words": "Her face: a SOFT gentle oval face with softly rounded, gently high cheekbones and a small soft chin, no sharp angles anywhere; large, slightly wide-set TENDER almond eyes with gently LOWERED outer corners and a soft warm look, fully open, the gaze soft and kind; thin long softly curved brows that slope gently DOWN at the tails; a small delicate nose; a small soft mouth with a softly full lower lip; a kind, caring, gentle-hearted girl; never sharp, never proud, never cold. Both eyes look straight at the viewer together: the two irises centred in the eyes and perfectly aligned at the same height, never cross-eyed, never wall-eyed, never looking in two directions. Expression: A TENDER, kind, caring look, the head inclined slightly to one side, the soft eyes warm and full of gentle affection, a small sweet closed-lip smile, eyes fully open, never a stretched grin.",
+   "note": "T78-PREP: added for rank builds t7/t8 (B8), same method as RANK8-C s62-s65; cut = FACE_MAP_L703 s63.cut; face_words = 'Her face' + 'Expression' VERBATIM from s63.v5.FULL.txt (= FACE_MAP_L703 prompt_file of that cut)"
   }
  }
 }

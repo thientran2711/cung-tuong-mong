@@ -1058,9 +1058,15 @@ for _i,(_c,(_m,_s,_h1,_h2,_mo,_fl)) in enumerate(PRINCESS_ROWS.items()):
 # RANK8 (owner ~07:22Z 20/11 + GO via ROOT-68, worker RANK8-C): NEW people s62 s64 s65 (faces owner OK Lượt 1046) = DATA ROWS ONLY, added exactly like the princesses above
 # (palette = root pair from face-common/s_root_colours.json, motif = the motif of her approved face outfit, hair flower = the maid index rule MAID_FLOWER[n%6]; no store sentence touched).
 S_NEW_ROWS={"s62":("plum blossoms",),"s64":("lilies of the valley",),"s65":("chrysanthemums",)}
+# T78-PREP (Foreman C ROOT order 20/11, owner standing order T78-MASS): s07-s61 + s63 = the same DATA ROWS (motif = the embroidered motif of her approved face outfit
+# = FACE_MAP_L703 prompt_file of her cut (sNN.v5.FULL.txt, or v5b/v5r2/v4c/qr where FACE_MAP says so); a leading 'gold' dropped since the motifs are gold-thread anyway;
+# s11 'phoenix feathers' -> 'feather scrolls' (phoenix is t7/t8 only: build_low assert); appended AFTER s62/s64/s65, no store sentence touched.
+# s44: root sec word 'sage grey' in s_root_colours.json is stale -> 'sage green' = her approved face (s44.qr.FULL.txt, owner Lượt 961 'Xám là bỏ hết'); hex kept.
+S_ROOT_FIX={"s44":{"sec":"sage green"}}
+S_NEW_ROWS.update({"s07":("plum branches",),"s08":("bamboo",),"s09":("orchids",),"s10":("peonies",),"s11":("feather scrolls",),"s12":("peacock feathers",),"s13":("snowflake plum blossoms",),"s14":("pine needles",),"s15":("water ripples and reeds",),"s16":("peach blossoms",),"s17":("camellias",),"s18":("wisteria",),"s19":("peonies",),"s20":("plum blossoms",),"s21":("orchids",),"s22":("cranes",),"s23":("pine needles",),"s24":("camellias",),"s25":("lotus leaves",),"s26":("peonies",),"s27":("plum blossoms",),"s28":("orchids",),"s29":("cranes",),"s30":("pine needles",),"s31":("camellias",),"s32":("lotus leaves",),"s33":("peonies",),"s34":("plum blossoms",),"s35":("orchids",),"s36":("cranes",),"s37":("pine needles",),"s38":("camellias",),"s39":("chrysanthemums",),"s40":("swallows",),"s41":("ginkgo leaves",),"s42":("magnolias",),"s43":("cloud scrolls",),"s44":("pomegranate flowers",),"s45":("cranes",),"s46":("snowflakes",),"s47":("chrysanthemums",),"s48":("pear blossoms",),"s49":("bamboo leaves",),"s50":("wave and cloud scrolls",),"s51":("peony scrolls",),"s52":("lotus scrolls",),"s53":("magnolias",),"s54":("orchids",),"s55":("begonias",),"s56":("butterflies",),"s57":("wisteria",),"s58":("plum blossoms",),"s59":("peonies",),"s60":("lotus flowers",),"s61":("swallows and willow leaves",),"s63":("osmanthus sprigs",)})
 _SRC_S=_json.load(open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)),"..","face-common","s_root_colours.json"),encoding="utf-8"))
 for _c,(_mo,) in S_NEW_ROWS.items():
-    _r=_SRC_S[_c]; _m,_s,_h1,_h2=_r["main"],_r["sec"],_r["main_hex"],_r["sec_hex"]; _n=int(_c[1:]); _fl=MAID_FLOWER[_n%6]
+    _r=dict(_SRC_S[_c],**S_ROOT_FIX.get(_c,{})); _m,_s,_h1,_h2=_r["main"],_r["sec"],_r["main_hex"],_r["sec_hex"]; _n=int(_c[1:]); _fl=MAID_FLOWER[_n%6]
     _pal=f"{_m} and {_s}"; DATA[_c]=(_pal,""); ORIG1[_c]=(f"{_m} silk like {_h1}",f"{_s} like {_h2}"); MOTIF_LOW[_c]=(_mo,_fl); LOWNAME[_c]=(_m,_m)
     ITEMS_LOW[_c]=items3f(_c)
     for _t in (4,5,6): OUTFIT_JOBS[f"{_c}-t{_t}"]=_g3["outfit"](_t,_pal,_mo).replace("Outfit for all four (","Outfit (",1).replace("(Tan)","(Tần)").replace("(Quy phi)","(Quý phi)")
