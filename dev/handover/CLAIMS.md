@@ -377,7 +377,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW mg-env (SMALL sonnet) of 4f3b78f | review/mg-env(-rv); briefs/rv-root75-mg-env.md | MAIN ROOT-75 | session_01Rc5AsN2aQw9SEbdD3besJR | RUNNING | 20/11 06:51Z |
 | rv-mg-score-same (BIG opus reviewer of review/mg-score-same c74d3afd (r2); lands alone) | review/mg-score-same-rv; briefs/cag29-rv-mg-score-same.md; reports/rv-mg-score-same.md | C-AG #29 → MAIN ROOT-75 | session_01Rc5AsKZr2Mvv3MpefHQpoX | LANDED 892e5bb0 LIVE 20/11 08:06Z | 20/11 07:09Z |
 | coop-thin G #4 (opus; successor of 3y9fZk3T at 0a481290) | review/coop-thin-g | B | session_01N1tNP5UhwqVC9izL9jLJXf | RUNNING | 20/11 07:15Z |
-| mg-craft lead (opus; ORDER MAIN ROOT-75 07:15Z: 4 craft mini-games MG_CRAFTS.md — scaffold + BAL lev + Thêu + Khéo tay + integration; brief briefs/b-mg-craft-lead.md) | review/mg-craft | B | session_01N1tNP6sTSG3yuHdpDD59P6 | RUNNING — SCAFFOLD READY 01114e27; building Thêu + Khéo tay | 20/11 08:05Z |
+| mg-craft lead (opus; ORDER MAIN ROOT-75 07:15Z: 4 craft mini-games MG_CRAFTS.md — scaffold + BAL lev + Thêu + Khéo tay + integration; brief briefs/b-mg-craft-lead.md) | review/mg-craft | B | session_01N1tNP6sTSG3yuHdpDD59P6 | ROLLED OVER @993b8929 (Thêu + Khéo tay done; handover cde22f90) → ARCHIVED | 20/11 |
 | mg-craft-ve (sonnet; Vẽ «Thủy mặc» MG_CRAFTS §2; brief briefs/b-mg-craft-ve.md) | review/mg-craft-ve | B | session_01N1tNP2gpsC12ARDUqUciDw | RUNNING | 20/11 07:19Z |
 | mg-craft-hoa (sonnet; Cắm hoa «Chọn mùa · cắt cành · nghiêng thế» MG_CRAFTS §3; KIT REQUEST KG82_DEMO "cut"; brief briefs/b-mg-craft-hoa.md) | review/mg-craft-hoa | B | session_01N1tNP5RwFKrATahSHTu5r6 | ROLLED OVER @e8b6e7f9 (handover in reports/mg-craft-hoa.md) → ARCHIVED | 20/11 07:19Z |
 | cal-p2c identity offset + rolling hand b (opus; ORDER ROOT-75 20/11 07:25Z; moved from C-AG #29 PART 2) | review/cal-p2c; briefs/D9-cal-p2c.md; reports/cal-p2c.md | D #9 for ROOT-75 | session_01964izF6sJHzxcBve2mGhvJ | RUNNING | 20/11 07:20Z |
@@ -394,13 +394,16 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | GAP OR01+OR06+OR08+OR13+OR14 outside-gaps (opus; check outside-art(-r1) first; J3) | review/outside-gaps | B | session_01N1tNP4VKcnA6UqaKXZanu1 | RUNNING | 20/11 08:21Z |
 | GAP GE08+GE09+GE10+OR19 ge-npc (opus; J4) | review/ge-npc | B | session_01N1tNP2MH8QedckaarkWVc2 | RUNNING | 20/11 08:21Z |
 | GAP IT05+KP03 palace-life-gaps (opus; J5) | review/palace-life-gaps | B | session_01N1tNP2d78pGcErwtE8UsCK | RUNNING | 20/11 08:21Z |
-| GAP KP02 map-places (sonnet; check review/places + places-port-r1 first; J6) | review/map-places | B | session_01N1tNP5RC6vRXez3u71oULJ | RUNNING | 20/11 08:21Z |
-| GAP AP04 perf-ci (sonnet; J7) | review/perf-ci | B | session_01N1tNP2QsvPWxKEJb8JqVwa | RUNNING | 20/11 08:21Z |
+| GAP KP02 map-places (sonnet; check review/places + places-port-r1 first; J6) | review/map-places | B | session_01N1tNP5RC6vRXez3u71oULJ | SẴN SÀNG KIỂM 6883c4feb (reports/map-places.md) | 20/11 |
+| GAP AP04 perf-ci (sonnet; J7) | review/perf-ci | B | session_01N1tNP2QsvPWxKEJb8JqVwa | DONE (SẴN SÀNG KIỂM 56d4c0a6) | 20/11 08:21Z |
 | GAP OD05+OD01+OD02+OD03 night land chain (opus; balance-core-r3 → night-final-r3 + giữ chân + môn ưa) | review/balance-core-r3, review/night-final-r3; briefs/D9-gap-jobs.md JOB 1 | D #9 for ROOT-76 | session_01964izFUQc1YiGuMjw5qYC7 | RUNNING | 20/11 08:24Z |
 | GAP OD07 day-khắc land (opus) | review/day-khac-audit-r2; JOB 2 | D #9 for ROOT-76 | session_01964izDcv1Uu66VaTiD7hZB | RUNNING | 20/11 08:24Z |
 | GAP OR11+OR12 outside-route numbers (opus) | review/outside-nums (or kc2val-home-r1); JOB 3 | D #9 for ROOT-76 | session_01964izCCWYwRvyU2FTazDMZ | RUNNING | 20/11 08:24Z |
-| GAP OR21 economy §5 Tâm cơ + paid safety (opus) | review/econ-tamco; JOB 4 | D #9 for ROOT-76 | session_01964izCz6DHEnx8DabpRi97 | RUNNING | 20/11 08:24Z |
+| GAP OR21 economy §5 Tâm cơ + paid safety (opus) | review/econ-tamco; JOB 4 | D #9 for ROOT-76 | session_01964izCzXkfovcY4kd6X4Mk (#2; #1 Cz6DHEnx archived) | RUNNING | 20/11 08:24Z |
 | GAP EM01 emotion balance proof (opus) | review/emo-balance; JOB 5 | D #9 for ROOT-76 | session_01964izFYgpKE1QKqdLq7n1c | RUNNING | 20/11 08:24Z |
 | person-minigame-acts r3 fixes (A walk khắc / word mode, B co-op art practice) + ROUND C finish (opus E22f; successor of E22e @acb38351, -c 47cb41b9) | review/person-minigame-acts(-c) | FOREMAN E #17 | session_01DgYSWkzA9w5sqzXzCyN3Xk | RUNNING | 20/11 09:30Z |
 | mg-ui-rest (sonnet; GAP MG04 td_dung guided + MG12 kgReady pet/plant care + KP05 scheme seal/HUD) | review/mg-ui-rest; briefs/root76-mg-ui-rest.md | MAIN ROOT-76 | session_01Rc5AsHdrZN7mzQfdLCDDAN | RUNNING | 20/11 08:30Z |
 | kit-bgtone KIT KEEPER (sonnet; OWNER order 20/11 ~07:45Z game background/UI colours to suit rank-8 costume tone) | review/kit-bgtone; briefs/root76-kit-bgtone.md | MAIN ROOT-76 | session_01Rc5AsMtjP4KTgBZVjENGLs | RUNNING | 20/11 08:35Z |
+| REVIEW mg-craft g1 (opus BIG; scaffold + Thêu + Khéo tay @993b8929; brief briefs/b-review-mg-craft-g1.md) | review/mg-craft-r1 | B | session_01N1tNP3G3tPpDtXygm5qtc9 | RUNNING | 20/11 08:36Z |
+| REVIEW map-places r1 (sonnet SMALL) of 6883c4feb | review/map-places-r1 | B | session_01N1tNP2yqZBK3vdqp6L52Zt | RUNNING | 20/11 08:38Z |
+| REVIEW perf-ci r1 (sonnet SMALL tooling) of 56d4c0a6 | review/perf-ci-r1 | B | session_01N1tNP4bjLTgLhGHK2jSsH8 | RUNNING | 20/11 08:40Z |

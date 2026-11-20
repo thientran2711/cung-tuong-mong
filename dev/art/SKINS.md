@@ -159,3 +159,5 @@ Copies in dev/handover/review-sheets/skins-1120/. Never delete. Rejected-for-def
 - s62 | t6 Quý phi THỬ cổ đứng a18 (20/11) | gen 79fvNG6JAL cut — | dev/handover/review-sheets/skins-1120/s62_t6_a18_THU_covuong.webp | standing-collar test, superseded by covuong2
 - s62 | t5 Phi THỬ cổ vuông y chang Đáp ứng a18 (20/11) | gen MBJwQZqDCm cut — | dev/handover/review-sheets/skins-1120/s62_t5_a18_THU_covuong2.webp | test (RANK8-A2); leaves this list if the owner approves it as final
 - s62 | t6 Quý phi THỬ cổ vuông y chang Đáp ứng a18 (20/11) | gen SyhtzkOUb8 cut — | dev/handover/review-sheets/skins-1120/s62_t6_a18_THU_covuong2.webp | test (RANK8-A2); leaves this list if the owner approves it as final
+- s64 | t6 Quý phi THỬ A áo choàng 2 lớp + cổ vuông như Đáp ứng a18 (20/11) | gen 1ldpG7Kr4r cut — | dev/handover/review-sheets/skins-1120/s64_t6_a18_THU_2lop_A.webp | owner: "Hai cái mẫu quý phi mới tạo ở trên cho cái người mới nè, cho vào skin."
+- s65 | t6 Quý phi THỬ B áo choàng 2 lớp + cổ vuông hơi thấp a18 (20/11) | gen cpSl1dd0eP cut — | dev/handover/review-sheets/skins-1120/s65_t6_a18_THU_2lop_B.webp | owner: same verbatim

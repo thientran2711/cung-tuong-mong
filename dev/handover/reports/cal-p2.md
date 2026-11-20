@@ -1,4 +1,4 @@
-# REPORT cal-p2 — wk cal-p2 #1 (session_01Rc5AsHjxvLYP1FYexFncti) + #2 (session_01Rc5AsMmEgNigPGpiup9uKs) + #3 (session_01Rc5AsJrsgDY7hAuWGR2XNq, START_CTX ≈4 %) — #3: P1 broken boards READY (review/cal-p2b 3541311d) + P3 standing below
+# REPORT cal-p2 — wk cal-p2 #1 (session_01Rc5AsHjxvLYP1FYexFncti) + #2 (session_01Rc5AsMmEgNigPGpiup9uKs) + #3 (session_01Rc5AsJrsgDY7hAuWGR2XNq, START_CTX ≈4 %) — #3: P1 broken boards + P1b full-marks windows READY (review/cal-p2b 45768ff8) + P3 standing below
 PRIORITY #1 CHECK: OD L1990–2034 + brief sections 05:35Z…08:35Z | main eb056f7b: jmgcal.js (cal.k one profile), jmgt mgTier/mgLev/mgGrade, BAL.mgTier kAdj/kG/lev, BAL.slap, mg-bots.js | review/* mg-fair-hands 3fe87277 (read only, NOT merged), review/cal-p2 445bcaeb | claims: cal-p2 only.
 Foreman: C-AG #28 session_01Rc5AsLarKgavDpQSsAHHYB (was #27). Branch review/cal-p2.
 
@@ -203,3 +203,26 @@ Method: her first tries (26 counted kinds) placed against bot hands of known "hu
 MAIN's rough reading to her (careful/strategy ≈ top 10–20 %, artistic ≈ top 30–40 %, reflex ≈ median or a bit below) = CONFIRMED, with two nuances: (1) fine-motor tracing sits with strategy in her top band, not with "artistic"; (2) timing on a slow, visible marker (ban) is a strength — only the fast single tap is her dip.
 How it maps into the game: NPC hands = bell curve of real adults, centre = adult median on the matching board (mg-fair-ratio, ctr 7; OD ~06:40Z/07:15Z); her calibrated b places her on that curve per kind, so in her top-band kinds most NPCs fall below her, in reflex kinds about half beat her. Identity (sở trường / thường / sở đoản target levels ≈9 / ≈7.5 / ≈6, owner 07:35Z, now with a rolling per-player b, OD ~07:55Z) is Foreman D's build and sits on top of this; nothing here changes a number.
 Sources: Thompson, Blair & Henrey 2014 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3981764/ · Pagulayan et al. 2006 https://pubmed.ncbi.nlm.nih.gov/16822742/ · Paramei & Oakley 2014 https://hira.hope.ac.uk/id/eprint/494/1/Paramei%20&%20Oakley_JOSA%20A%202014_Post-print.pdf · Li et al. (action games and visuomotor control) https://www.psychologicalscience.org/news/releases/playing-action-video-games-boosts-visual-motor-skill-underlying-driving.html · Bard, Fleury & Gagnon 1990 (coincidence-anticipation timing across ages) · Lobjois, Benguigui & Bertsch 2006 (ageing and coincidence timing).
+
+## P1b — wk #3: full-marks windows of the 9 mgPace kinds (ROOT-75 07:36Z order; owner OD ~06:50Z «đạt hết mà toàn 9/10» + ~07:35Z broken grading IS fixed) — review/cal-p2b 45768ff8 (= LIVE 716be762 + cal-p2b)
+PRIORITY #1 CHECK: reports/mg-score-same.md PROPOSAL (pace table, worker's own bot u-log) reused as is | main 716be762 (mg-score-same landed): jmgt mgPace, lev[kind].fast/keep | review/* none other on these keys.
+Fault: lev[kind].fast (share of the round time that still keeps the whole score) was below a careful normal-speed round in all 9 mgPace kinds (kim 0 = every ms cost; xa .07 = 0.7 s of 10 s; co ≈2.5 s of 10.4 s) → a PERFECT run kept .82–.94 = "all right, still 9". Whole group: only these 9 engines have a time cut (scan of every engine for time-share scoring: all go through mgPace; kim's old typed .6+.4·left/LIM already moved there).
+Fix (BAL only, proposal values): fast co [.1,.8]→[.4,.8] · tho [.05,.175]→[.2,.35] · doi [.05,.425]→[.35,.55] · doden [.05,.175]→[.3,.5] · kim [0,0]→[.25,.4] · le [.075,.25]→[.3,.45] · tc [.05,.175]→[.3,.45] · xa [.05,.1]→[.25,.4] (keep .1→.4, same proposal) · thq [.075,.45]→[.5,.65]. Law 5: fast still falls as the board hardens (e0 < e5 everywhere).
+Bot (skilled, n=10/cell, mg-score-same-rv build vs this branch) mean · share of plays = 10, at d −1 / 0 / +1:
+| kind | before | after |
+| co | 9.4·70 % / 9.3·30 % / 7.7·0 % | 9.3·60 % / 9.4·80 % / 8.9·40 % |
+| tho | 8.3 / 7.9 / 7.9 · 0 % | 8.6 / 8.6 / 8.3 · 0 % (trace accuracy limits the bot, not time) |
+| doi | 8.7 / 8.2 / 8.1 · 0 % | 9.9 / 9.8 / 9.7 · 90 % |
+| doden | 7.8 / 6.9 / 7.8 · 0 % | 9.1 / 9.5 / 9.3 · 40–60 % |
+| kim | 9.2 / 9.1 / 8.9 · 0 % | 10 / 9.95 / 9.7 · 90–100 % |
+| le | 8.5 / 8.3 / 8.1 · 0 % | 9.8 / 9.7 / 9.7 · 60–100 % |
+| tc | 8.5 / 8.3 / 8.3 · 0 % | 9.9 / 9.9 / 9.8 · 90–100 % |
+| xa | 8.0 / 8.0 / 7.8 · 0 % | 9.8 / 9.6 / 9.6 · 70–90 % |
+| thq | 8.5 / 8.4 / 8.1 · 0 % | 9.9 / 10 / 9.7 · 80–100 % |
+Read: before, a clean skilled run could NOT reach 10 in 8 of 9 kinds; after, it can, while harder boards (d+1) still cost more. These are her strong kinds (b 8.5–9.9): her first-try b were taken under the cut, so a re-test there reads higher — that is the bug going away, not a retune.
+Tests on 45768ff8: cal-p2b.js PASS Fold + iPad (new E: p50 round at ease 1 and p75 round at ease 2 keep 1 in all 9; law 5) · ag-mgcal 0 FAIL · mgcal-apply PASS · mg-visual ALL OK · mg-score-same-scan 35 cells via the ONE grade, 0 raw · mg-skip PASS · quickcheck PASS (old save ok). Pre-existing on main: cal-dauho.js test 1 "kg82Aim source identical" FAILs on main 377d5ce3 itself vs 70bea3d3 (mg-score-same touched kg82Aim's board mark) — test baseline, not this branch.
+Merge note: the first merge used review/mg-score-same-rv (e3e0a491 mgPaceCol); LIVE then landed the r2 version (892e5bb0) — LIVE engines/jmgt were taken whole and cal-p2b's own edits re-applied, so the branch = LIVE + only cal-p2b's diff (j82 mua, j91 huong/banh, jbal2 keys, the test).
+
+## HANDOVER wk #3 (context ≈27 %, START ≈4 % → rollover line 29 %)
+DONE: review/cal-p2b 45768ff8 (= LIVE 716be762 + P1 huong/mua/banh + P1b 9 pace windows + dev/test/cal-p2b.js) → "SẴN SÀNG KIỂM cal-p2b 45768ff8" sent to MAIN ROOT-76 session_01Rc5AsN56DP1NgSYAwWFJ8o (C-AG line ended 07:30Z). §P3 standing written. PART 2 not touched (Foreman D).
+NEXT (successor, only if the BIG reviewer asks for fixes): worktree /home/user/wt/calp2b3 (sparse), out /home/user/wt/calp2b3-out (bot logs pb/pa/b_*/a_*.log, shots). Re-merge newest LIVE before every report (index.html/sw.js conflicts: take LIVE, rebuild with dev/site/build_site.sh). Tests: node dev/test/cal-p2b.js dev/index.html <755x1000|1180x820> [shotdir]; ag-mgcal; sh dev/test/mgcal-apply.test.sh (needs a clean jbal2); mg-skip needs a file:// URL; bash dev/tools/quickcheck.sh.
