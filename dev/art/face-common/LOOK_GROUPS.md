@@ -88,3 +88,4 @@ File máy đọc: dev/art/face-common/OWNER_GROUPS_L686.json
 - Chủ (nguyên văn): "Bây giờ đưa sắc sảo 3 người qua bên quyến rũ là được." (KHÔNG chuyển Lạnh lùng.)
 - ROOT-60 chọn 3 người mới nhất của Sắc sảo: s43 s44 s45 → Quyến rũ (chủ có thể đổi người).
 - Sau: Sắc sảo 15 · Quyến rũ 18 · Lạnh lùng 15 · Kiêu kỳ 15 · Đoan trang 12 · Dịu dàng 11 = 86.
+- Lượt 949/950 (F3): owner "Quyến rũ ok" → s43 + s45 NEW Quyến rũ faces (make_quyenru_s43_45.py → sNN.qr.FULL.txt, root_drawn colours L27): s43 cut lJtdYwigv9 (was Sắc sảo 79foGqDJAL), s45 cut cpSxQta0eP (was kseWyhP16B). s44 waits for a non-grey sec colour (owner "Xám là bỏ hết"). Sheet: dev/handover/review-sheets/new-faces-v4/quyenru_s43_45_F3.jpg.

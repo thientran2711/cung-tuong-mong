@@ -1200,14 +1200,14 @@
   "kind": "NEWFACE-737"
  },
  "s43": {
-  "group": "Sắc sảo",
+  "group": "Quyến rũ",
   "hidden": false,
-  "ts": "2026-11-19T23:00:00Z",
-  "cut": "79foGqDJAL",
-  "gen": "s7ID6Pkl8e",
-  "ver": "v5",
-  "prompt_file": "dev/art/face-common/s43.v5.FULL.txt",
-  "kind": "NEWFACE-737"
+  "ts": "2026-11-20T02:35:00Z",
+  "cut": "lJtdYwigv9",
+  "gen": "hu2Ng4AvqL",
+  "ver": "qr",
+  "prompt_file": "dev/art/face-common/s43.qr.FULL.txt",
+  "kind": "QUYENRU-MOVE-F3"
  },
  "s44": {
   "group": "Sắc sảo",
@@ -1220,14 +1220,14 @@
   "kind": "NEWFACE-737"
  },
  "s45": {
-  "group": "Sắc sảo",
+  "group": "Quyến rũ",
   "hidden": false,
-  "ts": "2026-11-19T23:00:00Z",
-  "cut": "kseWyhP16B",
-  "gen": "kseWOTx16B",
-  "ver": "v5",
-  "prompt_file": "dev/art/face-common/s45.v5.FULL.txt",
-  "kind": "NEWFACE-737"
+  "ts": "2026-11-20T02:35:00Z",
+  "cut": "cpSxQta0eP",
+  "gen": "s7IezvGl8e",
+  "ver": "qr",
+  "prompt_file": "dev/art/face-common/s45.qr.FULL.txt",
+  "kind": "QUYENRU-MOVE-F3"
  },
  "s46": {
   "group": "Lạnh lùng",

@@ -23,7 +23,7 @@ START_CTX ≈4 % of 1M (estimate; get_session read 0) · depth 7 (limit 8) · wo
 ## Gens (GO ROOT-64; owner "Xám là bỏ hết" → s44 waits for a non-grey sec from P3)
 - s43 gen hu2Ng4AvqL → cut lJtdYwigv9 · s45 gen s7IezvGl8e → cut cpSxQta0eP. gpt-2-6 1024x2304 2k seed 7172, ref eIyOFEidqL, folder ba4aecfe. 1 try each. Credits 2×135 + 2×3 = 276.
 - Sheet: dev/handover/review-sheets/new-faces-v4/quyenru_s43_45_F3.jpg (make_sheet_quyenru_s43_45.py): per person OLD | NEW + face zoom + root_drawn swatches, big labels (A27), s44 NEW = empty slot with a note, benchmarks s16 s33 s34.
-- FACE_CUTS / FACE_MAP / face_page crops NOT changed: the new pictures replace approved Sắc sảo ones only after the owner says so. 2 ledger lines (QUYENRU-MOVE-F3).
+- (superseded) owner OK Lượt 950 → FACE_CUTS / FACE_MAP / face crops switched for s43 + s45, group Quyến rũ; ledger OWNER-OK line.
 - Looked (face zoom, full figure on the sheet): eyes level, irises aligned, lips closed, no teeth, item held (s43 scroll in both hands, s45 sachet at chest), both root colours clear, no forehead mark, beauty mark under her LEFT eye (right side of the picture) on both (D17 OK).
 - Faults (not fixed, L777):
   1. NEW looks very close to OLD (same seed + ref + same hair/outfit/pose): same body, robe, folds; the change is mostly in the face (head tilt, half-lidded gaze, one-corner sly smile, beauty mark). The owner may find the move too subtle.
