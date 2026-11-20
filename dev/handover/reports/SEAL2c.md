@@ -25,3 +25,10 @@ Looked at all 16 (one sheet). Small faults (list only, NO redo without owner yes
 - t7 young vs older: the small phoenix crown designs differ a little.
 - t8 Hoàng hậu trẻ is a new ~18 y version; the approved hh-gian (gOmeqH6SXO, ~30 y) still stands.
 Credits: 16 × 135 = 2 160. Balance 114 041 after (shared account).
+
+## JOB 2 — remaining Hoàng hậu keys: NOTHING ELIGIBLE YET (0 gens)
+Owner L812 approved for Thái hậu only: vui buồn sợ ẩn bình ghen lo mưu tựtin hănghái (FOREMAN_C_STATUS L88). Hoàng hậu has all of them already (SEAL2/SEAL2b).
+Remaining hh_prompts.ORDER keys tinhtu chuyentam hungkhoi tinhnghich hothen chan khochiu choang hon + 17 act-*: their Thái hậu units (SEAL5 u4/u5, SEAL6/SEAL7)
+were held for the whole-set send; no owner OK found in FOREMAN_C_STATUS / SEAL5 / SEAL6 → SKIPPED, waiting. đau: waits (wording). ghen LOOP/BACK: waits.
+→ When the owner OKs the Thái hậu units 4+ (or ROOT-60 says the whole-set GO covers them), run them in units of ≤6 using the SEAL2b method (handover in SEAL2.md).
+Side fix: sg2_prompts.py pt/ptl silk/gauze → brocade (A25(3)), so MG4 S11 PASS; marked SUPERSEDED by rank_gian_prompts.py. seal_gate --all sg2 PASS.
