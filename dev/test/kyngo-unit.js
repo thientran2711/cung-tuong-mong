@@ -70,7 +70,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   /* 14 (r2 F5) no card whose every option asks more Bạc than she has (vat_ngu: both options carry the buy price) */
   {const D=KY.DEF.vat_ngu,pl0=D.pl,wh0=D.when,wo0=D.who,wt0=D.what;const k=Object.keys(IT).find(k=>IT[k].pr>=40&&!IT[k].nt);D.pl=["zz"];D.when=null;D.who=()=>({kind:"court",c:"ped",ref:{name:"Thử"}});D.what=()=>({rr:{k}});
    S.ky={m:0,cd:-1,seen:{},got:[],last:-1};for(const id in KY.DEF)if(id!=="vat_ngu")S.ky.seen[id]=0;const b0=S.bac;
-   if(KY.band(S)<1||KY.band(S)>2)S.rank=1;S.bac=0;const poor=KY.elig(S,"zz").some(x=>x.id==="vat_ngu");S.bac=9999;const rich=KY.elig(S,"zz").some(x=>x.id==="vat_ngu");S.bac=b0;
+   const srv0=window.isSrv;window.isSrv=()=>false;/* a random start on the cung nữ road = band 0: pin her a consort for this check */if(KY.band(S)<1||KY.band(S)>2)S.rank=1;S.bac=0;const poor=KY.elig(S,"zz").some(x=>x.id==="vat_ngu");S.bac=9999;const rich=KY.elig(S,"zz").some(x=>x.id==="vat_ngu");S.bac=b0;window.isSrv=srv0;
    ck("14 vat_ngu: not eligible when Bạc < price, eligible when she can pay",!poor&&rich,{poor,rich,k});D.pl=pl0;D.when=wh0;D.who=wo0;D.what=wt0}
   /* 15 family scan of 14: the encounters whose EVERY option asks Bạc (cost or buy price) — each must be one the elig guard of 14 covers */
   {const all=[];for(const id in B.E){const E=B.E[id];if(E.o&&E.o.every(O=>(O.c&&O.c.bac>0)||O.buy||O.s==="item"&&id!=="vat_lac"))all.push(id)}ck("15 every-option-costs-Bạc encounters = [vat_ngu] (gated by 14)",all.length===1&&all[0]==="vat_ngu",all)}
