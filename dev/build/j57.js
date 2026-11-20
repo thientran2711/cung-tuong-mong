@@ -55,7 +55,7 @@ setTimeout(tabsFit,0);
    not be tapped and "col" never changed anything there. Now one toggle at every width: a 36px kit button with icon + word as the
    panel's first item; collapsed keeps only the key chips, at every width. A wide screen with no saved choice starts open. */
 (function(){const H="html body #hud2.hud2";const st=document.createElement("style");st.textContent=
- H+" .h2t{display:inline-flex!important;position:static!important;order:-1;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;width:auto!important;min-width:36px;height:36px!important;min-height:36px;padding:0 10px!important;border:1px solid var(--trim,var(--line));border-radius:8px;background:#fffaf0;color:var(--gold);font-family:var(--body,inherit);font-size:.78rem!important;font-weight:600;white-space:nowrap;cursor:pointer;touch-action:manipulation;z-index:2}"+
+ H+" .h2t{display:inline-flex!important;position:static!important;order:-1;align-items:center;justify-content:center;gap:4px;flex:0 0 auto;width:auto!important;min-width:36px;height:36px!important;min-height:36px;padding:0 10px!important;border:1px solid var(--trim,var(--line));border-radius:8px;background:var(--k-card,#fffaf0);color:var(--gold);font-family:var(--body,inherit);font-size:.78rem!important;font-weight:600;white-space:nowrap;cursor:pointer;touch-action:manipulation;z-index:2}"+
  H+" .h2t i{font-style:normal;font-size:.9rem;line-height:1}"+
  H+"{padding-right:5px!important}"+H+".col .hc:not(.keep){display:none!important}"+
  "";document.head.appendChild(st)})();

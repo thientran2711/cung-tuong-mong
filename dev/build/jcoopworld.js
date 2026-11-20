@@ -40,8 +40,8 @@ window.stateOn=function(n){if(worldOn()||thinW())return true;try{const C=window.
 if(typeof COOP!=="object")return;
 /* thIll (Thái hậu illness), cm (Thái hậu / Hoàng hậu mood; her own "seen"/spy/drop part stays personal, CM_P), men (palace men; her own
    ties to each man stay personal, MEN_P) + menG2 are WORLD keys since review/coop-one-world. Old rooms: the host's copy wins (HOST_ONLY). */
-const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","wxDay","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn","thIll","cm","men","menG2","lyF","fdead","fidDead","dnames"];  /* tn: B2 the Emperor's night (host); D4 npc-death: Phế phi họ Lý + retired faces/names are world (host rolls) */
-const HOST_ONLY=["tn","thIll","cm","men","menG2","wxDay"];  /* wxDay: weather-khac, the host rolls the day (jwxk) */  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
+const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","court","wx","wxDay","vacSince","trieu","storms","festDone","usedFaces","fidUsed","kidUsed","luxEdict","tn","thIll","cm","men","menG2","lyF","fdead","fidDead","dnames","nmReg","nmOrd"];  /* coop-name-clash: nmReg (every name ever given) + nmOrd (the host's rename orders for the friend's own people) are world, written by the host only (jnamefix) */  /* tn: B2 the Emperor's night (host); D4 npc-death: Phế phi họ Lý + retired faces/names are world (host rolls) */
+const HOST_ONLY=["tn","thIll","cm","men","menG2","wxDay","nmReg","nmOrd"];  /* wxDay: weather-khac, the host rolls the day (jwxk) */  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
 const CM_P=["seen","spy","thDrop","hhDrop"],MEN_P=["tinh","letters","trysts","knowsMe","af","grudge","grudgeN","debt","seen"];
 const REFF=["resHead","spyFor","lover","mid","owner","by","who","tgt","from","to"];   /* fields whose "me" value names the viewer */
 const STAT=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat","confined","shield","block"];
@@ -185,7 +185,7 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  const known=S.emp&&S.emp.known;
  /* the new life knows nobody yet: drop every link into the throwaway world */
  keep.rl={};keep.ro={};keep.tonight=null;keep.toMorning=0;keep.heir=null;keep.evd={};keep.chat={};keep.cev={};keep.resHead=null;keep.where=null;keep.dead=false;
- S=keep;const sS=J(ser().S);
+ S=keep;try{if(typeof nmBirth==="function")nmBirth(C)}catch(e){console.error("nmBirth",e)}/* coop-name-clash: her new life's people never repeat a name the room already holds (law 6b) */const sS=J(ser().S);
  const P={pid:mp,ok:S.origin&&S.origin.k,name:S.name,rank:S.rank,dead:false,srv:!!(S.srv&&!S.srv.risen),life:(CW.life||0)+1,S:{}};
  for(const k in sS)if(!W_KEYS.includes(k))P.S[k]=sS[k];splitP(sS,P.S);P.S.empKnown={};if(P.S.menP)for(const id in P.S.menP)P.S.menP[id]={};if(P.S.cmP)P.S.cmP={seen:{}};
  const C2=J(C);C2.P=C2.P||{};C2.P[CW.seat]=P;
@@ -594,7 +594,7 @@ function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
  if(!CW.base){CW.base=J(C);if(CW.waitWorld){CW.waitWorld=false;try{COOP_LOBBY.hostPick(false)}catch(e){}newLife()}return}
  /* the friend's character changed (first character / reborn): keep my week, take the new base and her new entry */
  const had=CW.base;CW.base=J(C);if(had&&had.P&&had.P[CW.seat]&&C.P&&!C.P[CW.seat])CW.base.P[CW.seat]=had.P[CW.seat];
- if(S&&!S.dead&&!CW.inLife){const old=friendEntry();placeFriend(C.P[fs()]);
+ if(S&&!S.dead&&!CW.inLife){const old=friendEntry();placeFriend(C.P[fs()]);try{if(host()&&typeof nmFix==="function")nmFix("join")}catch(e){console.error(e)}/* coop-name-clash: her new person against the one name list, at once */
   const P=C.P[fs()];const fk=P&&((P.name||"")+"#"+(P.life||0)+(friendHome(P)?"h":""));if(P)CW.fWasHome=friendHome(P);
   if(P&&!P.dead&&(old?old.name!==P.name:CW.fNote!==fk)){CW.fNote=fk;const home=friendHome(P);
    pushModal({t:home?"Hảo hữu chọn thân phận":"Hảo hữu vào cung",h:`<p>Hảo hữu ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}${home?"nay còn ở nhà cha chờ kỳ tuyển tú, chưa vào cung":"nay ở trong cung"+(friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:""))}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p>`+(home?`<p class="past">Qua kỳ tuyển tú, nàng sẽ vào cung; khi ấy hai người mới gặp được nhau.</p>`:`<p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`)})}
@@ -919,16 +919,19 @@ const isSrvMe=()=>typeof isSrv==="function"&&isSrv();
 P2H.bribe=m=>{if(S.dead||!isSrvMe())return p2say("briber",{rid:m.rid,no:1});const mis=srvM(),B=BAL.coopBribe,nm=esc(m.who||friendName()),mn=esc(mis?mis.name:"chủ nhân");
  pushModal({act:1,t:"Bạc lạ",h:`<p>Một thái giám của <b>${nm}</b> chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${mn}.”</p>`,opts:[
   {n:"Nhận bạc, làm tai mắt",fx:{bac:+m.pay||B.pay},x:cnvSpyX(mis),go:()=>{S.srv.spyFor=fp();p2say("briber",{rid:m.rid,ok:1})}},
-  {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},/* previews: briber (P2H.briber, told) */x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm}`,go:()=>p2say("briber",{rid:m.rid,told:1})},
-  {n:"Từ chối, im lặng",fx:{},x:"trả lại bạc",go:()=>p2say("briber",{rid:m.rid})}]});showModal();render()};
+  {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},/* previews: briber (P2H.briber, told) */x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm} · kèm: ${nm} ghi hận ngươi, thiện cảm ${balSg(-B.grudge)}`,go:()=>p2say("briber",{rid:m.rid,told:1})},
+  {n:"Từ chối, im lặng",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${nm}, thiện cảm ${balSg(B.grudge)}`,go:()=>p2say("briber",{rid:m.rid})}]});showModal();render()};
 P2H.briber=m=>briberRes(m);
 /* the briber's side of her answer (old relay: P2H.briber; part D: the host runs it in the briber's context, m.o = the mistress) */
+/* law 2 «Bạc lạ» co-op (review coopBribe 19/11): the briber's thiện cảm for the friend who serves = HER regard row S.rl[fp()] (the same row resApply
+   writes and the friend's consort entry {id:fp()} reads); the servant entity {sid,coop} has no id, so affAdd(S,s) wrote S.rl["undefined"] */
+function brbAff(n){const id=fp();S.rl=S.rl||{};S.rl[id]=cl((S.rl[id]||0)+n,-100,100)}
 function briberRes(m){const a=m.o!=null?{o:m.o}:(CW.brb||{})[m.rid];if(!a)return;if(CW.brb)delete CW.brb[m.rid];if(S.dead)return;const s=fSrvE(),o=RV(a.o),B=BAL.coopBribe,nm=esc(friendName()),on=esc(o?o.name:"cung khác");let h="";
  if(m.no)h=`<p><b>${nm}</b> nay không còn hầu ở cung ${on}.</p>`;
  else{try{deedAdd(S,"sbribe",null,1,`mua chuộc người hầu của ${o?o.name:"cung khác"}`)}catch(e){}
   if(m.ok){apply({bac:-B.pay});if(s)s.spyFor="me";h=`<p><b>${nm}</b> nhận bạc, thành tai mắt của ngươi trong cung ${on}.</p><p>${fmt({bac:-B.pay})}</p>`}
-  else if(m.told){let d=0;if(o&&o.alive){d=evA(o,S,BAL.eff.jcoopworld.evBriber);relAdd(S,o,BAL.eff.jcoopworld.briber)}h=`<p><span class="r"><b>${nm}</b> từ chối bạc, bẩm với ${on}.</span></p>${d?`<p class="r">${on} nắm thêm ${d} chứng cứ của ngươi.</p>`:""}`}
-  else h=`<p><b>${nm}</b> từ chối, trả lại bạc.</p>`}
+  else if(m.told){let d=0;if(o&&o.alive){d=evA(o,S,BAL.eff.jcoopworld.evBriber);relAdd(S,o,BAL.eff.jcoopworld.briber)}brbAff(-B.grudge);h=`<p><span class="r"><b>${nm}</b> từ chối bạc, bẩm với ${on}.</span></p>${d?`<p class="r">${on} nắm thêm ${d} chứng cứ của ngươi.</p>`:""}`}
+  else{brbAff(B.grudge);h=`<p><b>${nm}</b> từ chối, trả lại bạc.</p>`}}
  pushModal({t:"Mua chuộc",h});showModal();render()}
 P2H.nbribe=m=>nbribeIn(m.r);
 function nbribeIn(r){if(S.dead||!isSrvMe())return;const v=RV(r);if(!v||!v.alive)return;try{pushDil(mkP("cnvBribe",{r:v.id}),"Bạc lạ")}catch(e){console.error(e)}showModal();render()}
@@ -1094,8 +1097,8 @@ PEND.thBribe=pp=>{if(!pp||!isSrvMe())return null;const mis=srvM(),B=BAL.coopBrib
  const ans=r=>{const m=Object.assign({rid:pp.rid,o:pp.o},r);otherSide(()=>briberRes(m),"briber",m,pp.lf)};
  return {t:`<p>Một thái giám của <b>${nm}</b> chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${mn}.”</p>`,o:[
   {n:"Nhận bạc, làm tai mắt",fx:{bac:pay},x:cnvSpyX(mis),go:()=>{S.srv.spyFor=fp();ans({ok:1})}},
-  {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm}`,go:()=>ans({told:1})},
-  {n:"Từ chối, im lặng",fx:{},x:"trả lại bạc",go:()=>ans({})}]}};
+  {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm} · kèm: ${nm} ghi hận ngươi, thiện cảm ${balSg(-B.grudge)}`,go:()=>ans({told:1})},
+  {n:"Từ chối, im lặng",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${nm}, thiện cảm ${balSg(B.grudge)}`,go:()=>ans({})}]}};
 CW.dInit=function(T){
  /* B r2: every D work into the other player's context, as data (jcoopthin D.kind): the card kinds and their answers */
  Object.assign(T.D.K,{inv:a=>pushDil(mkP("thInv",a),"Hảo hữu tìm đến"),

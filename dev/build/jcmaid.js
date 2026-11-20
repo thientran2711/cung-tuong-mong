@@ -55,7 +55,7 @@ function cmAskPick(){if(cmOff()||!S.maid)return;const k=S.origin&&S.origin.k;if(
 function cmFoe(){const L=liveRivals(true).filter(v=>v!==S&&!v.coop);if(!L.length)return null;return npwPick(L,v=>hostility(v,S))}/* npc-purpose G2a: the house that bears her a grudge (none → nobody picks a fight) */
 PEND.cmTt=()=>{const B=cmB(),m=S.maid;return{who:pMaid(),t:`Thư phủ Tể tướng gửi vào qua tay ${m.name}: cha muốn ngươi dò ý Hoàng thượng về việc triều chính, viết lại cho người.`,o:[
  {n:"Làm theo lời cha",fx:{danh:B.ttDanh,sung:-B.ttSung},x:"phe cha mạnh thêm; Hoàng thượng thấy ngươi dò ý"},
- {n:`Dặn ${m.name} chỉ viết chuyện vặt`,fx:{maid:-B.ttLoy,bac:-B.ttBac},x:"cha giận, tháng này không gửi bạc vào cung"}]}};
+ {n:`Dặn ${m.name} chỉ viết chuyện vặt`,fx:{maid:-B.ttLoy,bac:-B.ttBac,duc:BAL.cv.decl.duc},x:"thành: không dò ý Hoàng thượng, giữ đạo bề tôi, Sủng không suy · kèm: cha giận, tháng này không gửi bạc vào cung"}]}};
 PEND.cmBrawl=pp=>{const B=cmB(),m=S.maid,v=RV(pp.v);if(!v)return null;return{who:pMaid(),t:`${m.name} nóng tính, cãi rồi xô ngã cung nữ của ${v.name} ở Nội vụ phủ. Người bên ấy đòi ngươi xử.`,o:[
  {n:`Phạt ${m.name} trước mặt người ta`,fx:{maid:-B.brLoy,danh:B.brDanh},x:`${v.name} bớt oán`,go:()=>{oanAdd(v,S,-B.brOan)}},
  {n:"Bênh người của mình",fx:{maid:B.brLoy,danh:-B.brDanh},x:`${v.name} oán ngươi thêm`,go:()=>{oanAdd(v,S,B.brOan)}}]}};
@@ -75,7 +75,7 @@ PEND.cmSec=pp=>{const B=cmB(),m=S.maid;if(!m||!m.sec)return null;const k=m.sec.k
  const t=k==="debt"?`${m.name} quỳ xuống thú thật: nàng ta nợ cờ bạc ngoài cung, chủ nợ dọa báo lên Nội vụ phủ.`:k==="family"?`${m.name} khóc, kể mẹ già ở quê bệnh nặng, không có tiền thuốc.`:
   `${m.name} thú thật: trước kia nàng ta từng nhận bạc của ${v?v.name:"người cung khác"} để kể chuyện cung ngươi.`;
  const o=k==="spy"?[{n:"Giữ lại, dặn nàng ta chỉ báo chuyện vô hại",fx:{maid:B.secLoy},x:"từ nay không còn lộ chuyện"},{n:"Trả nàng ta về Nội vụ phủ",fx:{danh:-B.spyDanh},x:"Nội vụ phủ đưa người khác đến",go:()=>cmReplace("noi")}]:
-  [{n:k==="debt"?`Trả nợ thay (${B.secPay} lượng)`:`Gửi tiền thuốc (${B.secPay} lượng)`,fx:{bac:-B.secPay,maid:B.secLoy*2},x:"nàng ta mang ơn"},{n:"Mặc kệ",fx:{maid:-B.secLoy},x:k==="debt"?"nợ vẫn còn đó":"nàng ta tủi thân"}];
+  [{n:k==="debt"?`Trả nợ thay (${B.secPay} lượng)`:`Gửi tiền thuốc (${B.secPay} lượng)`,fx:{bac:-B.secPay,maid:B.secLoy*BAL.cv.secPayMul},x:"nàng ta mang ơn"},{n:"Mặc kệ",fx:{maid:-B.secLoy},x:`thành: giữ lại ${B.secPay} lượng bạc · kèm: ${k==="debt"?"nợ vẫn còn đó":"nàng ta tủi thân"}`}];
  return{who:pMaid(),t,o:o.map(x=>Object.assign(x,{go:(g=>()=>{if(g)g();if(S.maid===m)m.sec.done=1})(x.go)}))}};
 function cmReplace(src){const B=cmB();const m=newMaid(nmNew("maid"),B.newLoy);S.maid=m;cmInit(m,src||"noi");m.loyal=B.newLoy;cmC("replace")}
 

@@ -45,16 +45,33 @@ function nmBad(b){b=nmBare(b);if(!b)return"";const su=nmSurOf(b);if(su&&NM_BAN_S
 function nmPeople(){const L=[];if(typeof S==="undefined"||!S)return L;const seen=new Set();
  const add=(o,kind,f,x)=>{if(!o||typeof o!=="object"||seen.has(o))return;const v=o[f||"name"];if(typeof v!=="string"||!v.trim())return;seen.add(o);L.push(Object.assign({o,kind,f:f||"name"},x||{}))};
  add(S,"f","name",{me:1});
- try{(rivals||[]).forEach(v=>add(v,"f",null,v.coop?{guest:1}:null))}catch(e){}
- try{allKids().forEach(([k,v])=>add(k,k.sex==="m"?"prince":"princess",null,v&&v.coop?{guest:1}:null))}catch(e){}
+ try{(rivals||[]).forEach(v=>add(v,"f",null,v.coop?{guest:1,fp:"name"}:null))}catch(e){}
+ /* coop-name-clash: a player serving as cung nữ is ONE coop entry in her mistress's staff (jcoopworld buildFriendSrv): she is the friend herself */
+ try{(rivals||[]).forEach(v=>(v.staff||[]).forEach(s=>{if(s&&s.coop)add(s,"f",null,{guest:1,fp:"name"})}))}catch(e){}
+ try{allKids().forEach(([k,v])=>add(k,k.sex==="m"?"prince":"princess",null,v&&v.coop?{guest:1,fp:"kids."+(v.kids||[]).indexOf(k)}:null))}catch(e){}
  try{const C=S.court||{};for(const k in C){const c=C[k];if(!c||typeof c!=="object")continue;add(c,k==="ty"?"doc":k==="ped"?"eun":"eunE",c.pn?"pn":"name",{court:k})}}catch(e){}
  try{(S.men||[]).forEach(m=>add(m,"m"))}catch(e){}
  try{const T=S.trieu;if(T&&T.H)for(const c in T.H)add(T.H[c],"m",null,{fam:T.H[c]&&T.H[c].dadOf==="me"})}catch(e){}
  try{(S.kc&&S.kc.fam||[]).forEach(p=>add(p,p.role==="consort"?"f":p.role==="mama"?"mo":"m",null,{fam:/^(cha|huynh|muoi|to)$/.test(p.r||"")}))}catch(e){}
  try{(S.hPool||[]).forEach(p=>add(p,"m"))}catch(e){}
  try{(S.qPool||[]).forEach(p=>add(p,"f"))}catch(e){}
- try{add(S.maid,"maid");const sk=s=>s.role==="eunuch"?"eun":s.eid?"f":"maid";(S.staff||[]).forEach(s=>add(s,sk(s)));(rivals||[]).forEach(v=>{const G=v.coop?{guest:1}:null;add(v.maid,"maid",null,G);(v.staff||[]).forEach(s=>add(s,sk(s),null,G))});try{(S.thO&&S.thO.staff||[]).forEach(s=>add(s,sk(s)))}catch(e){}}catch(e){}
+ try{add(S.maid,"maid");const sk=s=>s.role==="eunuch"?"eun":s.eid?"f":"maid";(S.staff||[]).forEach(s=>add(s,sk(s)));(rivals||[]).forEach(v=>{add(v.maid,"maid",null,v.coop?{guest:1,fp:"maid"}:null);(v.staff||[]).forEach((s,i)=>add(s,sk(s),null,v.coop?{guest:1,fp:"staff."+i}:null))});try{(S.thO&&S.thO.staff||[]).forEach(s=>add(s,sk(s)))}catch(e){}}catch(e){}
+ try{nmFrPeople(add)}catch(e){}
  return L}
+/* coop-name-clash (law 6b, one living person = one full name, on BOTH seats): the personal people of an S-shaped object (a player and
+   the people only her own seat holds: her maid, her household servants, her children, her home family, her marriage pools), with their
+   path inside it ("name" = the player herself). One list for the host's view of the friend (nmFrPeople) and the new-life check (nmBirth). */
+function nmPers(s){const out=[];if(!s||typeof s!=="object")return out;const sk=x=>x.role==="eunuch"?"eun":x.eid?"f":"maid";const one=(o,kind,p,x)=>{if(o&&typeof o==="object"&&typeof o.name==="string"&&o.name.trim())out.push(Object.assign({o,kind,f:"name",fp:p},x||{}))};
+ one(s,"f","name");one(s.maid,"maid","maid");(s.staff||[]).forEach((x,i)=>{if(x&&!x.coop)one(x,sk(x),"staff."+i)});
+ (s.kids||[]).forEach((k,i)=>one(k,k&&k.sex==="m"?"prince":"princess","kids."+i));
+ ((s.kc&&s.kc.fam)||[]).forEach((p,i)=>one(p,p.role==="consort"?"f":p.role==="mama"?"mo":"m","kc.fam."+i,{fam:/^(cha|huynh|muoi|to)$/.test(p.r||"")}));
+ (s.hPool||[]).forEach((p,i)=>one(p,"m","hPool."+i));(s.qPool||[]).forEach((p,i)=>one(p,"f","qPool."+i));return out}
+/* the friend's blob (co-op host only): the room's last P of the other seat */
+function nmFrBlob(){try{const W=window.COOPW;if(!W||!W.on||!W.base||!W.base.P||!nmOwner())return null;const P=W.base.P[W.seat==="a"?"b":"a"];return P&&P.S&&!P.dead&&!P.S.dead?P:null}catch(e){return null}}
+/* HOST: the friend's own people (on her seat only) join the one name list as hers (guest, never renamed here: nmFix sends her a rename
+   order instead); the ones her coop entry already shows on this seat (her name, maid, children) are not added twice */
+function nmFrPeople(add){const P=nmFrBlob();if(!P)return;const ent=(rivals||[]).find(v=>v&&v.coop),srv=!ent&&(rivals||[]).some(v=>(v.staff||[]).some(x=>x&&x.coop));
+ for(const e of nmPers(P.S)){if(e.fp==="name"&&(ent||srv))continue;if(ent&&(e.fp==="maid"||/^kids\./.test(e.fp)))continue;add(e.o,e.kind,null,{guest:1,fr:1,fp:e.fp,fam:e.fam})}}
 function nmAlive(e){const o=e.o;return o.alive!==false&&o.alive!==0&&!o.dead&&!o.out}
 function nmReg(){if(typeof S==="undefined"||!S)return null;if(!S.nmReg||typeof S.nmReg!=="object")S.nmReg={};return S.nmReg}
 /* co-op: the host owns the one registry (owner rule); a guest never writes it (worldOn() of the one-world co-op, review/coop-one-world: true = solo or host; before it lands: COOPW seat "a" = host). A guest's new person is
@@ -91,4 +108,4 @@ function nmNew(kind,opts){const o=opts||{};const T=nmTaken();(o.more||[]).forEac
   if(!n&&kind==="prince")outer3:for(const a of NM_PGEN)for(const g of NM_PX){const c=a+" "+g;if(ok(c)){n=c;break outer3}}
   if(!n)outer2:for(const s of NM_SUR)for(const a of NM_SUR)for(const g of (kind==="f"||kind==="maid"?NM_F:NM_M)){const c=s+" "+a.split(" ")[0]+" "+g.split(" ")[1];if(!T.full.has(c)&&!nmBad(c)){n=c;break outer2}}}
  if(o.reg!==false&&nmOwner()){const R=nmReg();if(R){R[n]=kind;const m=/^Tiểu (.+) Tử$/.exec(n);if(m)R["Lão "+m[1]+" Tử"]=kind/* j25 ageInit: the same eunuch at 45 */}}return n}
-window.nmNew=nmNew;window.nmBare=nmBare;window.nmBad=nmBad;window.nmPeople=nmPeople;
+window.nmNew=nmNew;window.nmPers=nmPers;window.nmBare=nmBare;window.nmBad=nmBad;window.nmPeople=nmPeople;

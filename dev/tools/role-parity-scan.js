@@ -234,6 +234,10 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
      write here, so goTo walks the real path (gates, khắc, people) instead of stopping at the card. S.ent is restored after each place. */
   for(const k of PLS()){richK(S);Q.length=0;const e0=S.ent;try{S.place="home";if(typeof j95sDay==="function")S.ent={d:j95sDay(),ids:[],at:k};goTo(k);Q.length=0}catch(e){E("goTo "+k,e)}finally{if(e0===undefined)delete S.ent;else S.ent=e0}
    for(const pp of (S.visit&&S.visit.people)||[]){try{for(const a of talkOpts(pp)||[])addP(role,a.n,"talk:"+pp.kind)}catch(e){E("talk "+pp.kind,e)}}}
+  /* review coop-name-clash r1: a player maid meets the Hoàng hậu only where the seeded world puts her this khắc (a names change re-draws the
+     seeded world: no place held her, so "Tố cáo … trước Hoàng hậu" was read as an NPC-only act although the player holds it). The
+     Hoàng hậu is asked directly, as a visit person (j42 srvVisitOf: {kind:"srv",sk:"hh",ref}), like every NPC maid's hh probe */
+  if(isSrv())try{const m=srvM(),q=rivals.find(v=>v&&v.queen&&v.alive!==false&&!v.out&&v!==m);if(q)for(const a of talkOpts({kind:"srv",sk:"hh",ref:q,name:q.name})||[])addP(role,a.n,"talk:srv-hh")}catch(e){E("talk srv-hh",e)}
   S.place="home";Q.length=0;
   if(!isSrv()){for(let i=0;i<rivals.length;i++){const v=rivals[i];if(v===S)continue;try{for(const n of lab(rvCard(v,i)))addP(role,n,"rv")}catch(e){E("rv",e)}try{for(const a of topicOpts(v)||[])addP(role,a.n,"topic")}catch(e){E("topic",e)}}
    for(const f of ["staffTabHTML","staffHTML","facHTML","artTabHTML","invHTML","wkTabHTML","petPanelHTML","kidTabHTML"])try{for(const h of tabAll(f))for(const n of lab(h))addP(role,n,f)}catch(e){E(f,e)}

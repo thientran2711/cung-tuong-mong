@@ -118,8 +118,8 @@ function kc2Init(d){const sur=tdSur(S.name);const fam=[];const gm=()=>nmNew("m",
   fam.push(T("ly","Lý trưởng",gx(),50+R(10),"official",["Ham lợi","Cương trực","Xu nịnh","Kín đáo"],R(30),{out:1}));
   fam.push(T("ba","Bà Tư",`Bà Tư ${gmo()}`,62+R(8),"mama",["Lạnh lùng","Ân cần","Nhiều chuyện"],30+R(20),{out:1}));
  }else{const L=kc2L(),bd=kc2Br()==="bd";
-  const gn=gv();fam.push(T("cha",L.dad,bd?bdTxt(`Khả hãn ${gn}`,`Ba Tư vương ${gn}`):gm(),50+R(8),"official",["Tham vọng","Cương trực","Kín đáo","Kín đáo"],35+R(30)));
-  const fn=gf();fam.push(T("me",L.mom,bd?bdTxt(`Khả đôn ${fn}`,`Vương hậu ${fn}`):`Vương hậu ${fn}`,42+R(6),"mama",["Ân cần","Khiêm nhường","Kín đáo","Cương trực"],50+R(30)));
+  fam.push(T("cha",L.dad,bd?(gn=>bdTxt(`Khả hãn ${gn}`,`Ba Tư vương ${gn}`))(gv()):gm(),50+R(8),"official",["Tham vọng","Cương trực","Kín đáo","Kín đáo"],35+R(30)));
+  fam.push(T("me",L.mom,bd?(fn=>bdTxt(`Khả đôn ${fn}`,`Vương hậu ${fn}`))(gf()):`Vương hậu ${gf()}`,42+R(6),"mama",["Ân cần","Khiêm nhường","Kín đáo","Cương trực"],50+R(30)));
   if(bd){fam.push(T("huynh","Trưởng huynh",gv(),26+R(4),"man",["Tham vọng","cương trực","nóng nảy"],30+R(30)));fam.push(T("huynh2","Nhị huynh",gv(),23+R(3),"man",["Tham vọng","Kín đáo","Ham vui"],30+R(30)))}
   else{fam.push(T("huynh","Thế tử huynh",gm(),25+R(4),"man",["Tham vọng","trung hậu","Kín đáo","nóng nảy"],35+R(30)));fam.push(T("thuc","Vương thúc",gm(),46+R(8),"official",["Tham vọng","Kín đáo","Cương trực"],R(30),{out:0}))}
   const mu=T("muoi",bd?"Muội muội":"Vương muội",(bd?gf():nmNew("f",{sur,more:fam})),18,"consort",["Kiêu ngạo","Tham vọng","Khiêm nhường","Ân cần"],10+R(40));mu.sac=40+R(50);mu.tai=30+R(50);fam.push(mu);
