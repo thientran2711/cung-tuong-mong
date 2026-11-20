@@ -70,3 +70,21 @@ F3 (evidence) — the report's Fold servant shot rms-srv-755x1000 shows Ta ↔ H
 
 Notes (not blocking, for Foreman B): N1 m.grudge/grudgeN (revenge rumours) and the new m.oan are two stores of one grudge; oán fades (BAL.oanFade) while the rumour count does not — acceptable now, a later merge would read oan. N2 nrMAsk reads aff(S.thO,S): before = S.thO.rel (undefined), now S.thO.af (0) — same «no» either way; the right value is S.th (pre-existing). N3 co-op: the friend's men ties live twice (m.afw/m.ro[friend id] world vs her seat's m.af/m.oan personal), pre-existing for af, now also for oán.
 CDN: python3 dev/site/cdn_sync.py --wipe-review rel-men-servants done 17:25Z (4 objects); the worker re-shoots after the fix.
+
+## r2 (fix worker, sonnet, session_01N1tNP64FJEwd9DWxE9nJFE) — F2/F3 DONE 494ea79b, F1 WAITING KIT §52
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 5 | main 0 | review/* 1 (review/rel-men-servants) | KIT §52 kitRelRows (jkrel.js 25–42) = the one relation-row place; KIT_REQUESTS «20/11 rel-men-servants» still OPEN at 17:30Z.
+Branch review/rel-men-servants @494ea79b (origin/main 983a9436 already merged, unchanged).
+- F2: new relMSName(o) (jhc) = «Người lạ» while k61Named(o) is false; used by relPerson (strip, pair heading, side label) and whoL (row heads «Người lạ → ta»). j61 pager hook skips a name already «Người lạ» (it printed «???» at stage 1). Court officials, servants, men all through the same helper.
+- F3: test shot step uses tab="rel" + relKey(servant); new stranger-official shot; both devices. Fold servant shot now shows the maid (Liên ↔ Ta), not Ta ↔ Hoàng thượng.
+- F1: NOT changed (jkrel.js is the kit keeper's). Prepared side: the man card (j22 manCard 69–72) has 4 custom lines «Hắn quý ngươi / Ngươi quý hắn / Hắn oán ngươi / Ngươi oán hắn» (aff/oan) — they are the SAME numbers as Ân oán. The kit block on the same card still prints p.loyal «Hắn → ta Thiện cảm» + «Ta tin cậy», so removing the custom lines now would leave only the OTHER number (worse). Left exactly as is; when the keeper marks the request DONE: merge it, delete j22 lines 70–71 (keep «Tình ý»), update U3 to read the kit block, rerun.
+Scan (law 11) of places that print an unmet person's name:
+| Place | Before | After |
+|---|---|---|
+| Ân oán strip (stage 1) | «???» | «Người lạ» |
+| Ân oán heading / side label (stage 0,1) | real name or «???» | «Người lạ» |
+| Ân oán row heads (stage 0,1) | real name («Liên Anh → ta») | «Người lạ → ta» |
+| Man card / court card | men shown only when met (menMet); no «???» printed by this branch | unchanged |
+| Other screens' «<tước> ???» (jmen menStageNm, jinv, jpet, kitName…) | pre-existing j61 name mask, not Ân oán | not touched |
+Note (not mine): a long court title in the strip is cut («Tổng quản thái giám Càn T…»), pre-existing kit strip.
+Tests (on 494ea79b): rel-men-servants 24/24 ×3 (new F2 ×2 devices) · quickcheck PASS (render 199/188, tab 447/392, buổi 1117/1183 ms) · one-core-guard PASS · undef-scan PASS (253) · coop-home 51/51 · coop-e2e 68/68 (first run 66/68: Thái hậu picture empty on the guest seat, CDN image timing; rerun 68/68) · role-parity: see last line below.
+Shots LOOKED 3×, CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/rel-men-servants/ : rms-man / rms-srv / rms-stranger × {755x1000, 1180x820}.jpg. Wipe: python3 dev/site/cdn_sync.py --wipe-review rel-men-servants.
