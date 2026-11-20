@@ -1,0 +1,8 @@
+base: dev/art/b26/base/s62_t5.txt
+allow: The FABRIC is thin  # owner Lượt 1283/1284 B26: t4/t5 master M06 -> matte satin đoạn sentence (m11 Lượt 1275)
+allow: flowing silk and gauze with a soft sheen and fine delicate embroidery  # B26 same M06 sentence
+allow: long soft graceful drapery that sways and trails elegantly  # B26 same M06 sentence
+allow: a layered silk brocade court robe of two or three visible layers  # B26: robe fabric word silk -> satin (đoạn), rest of clause kept
+allow: the robe itself is clearly ice blue silk  # B26: silk -> satin
+allow: TWO layered embroidered SHORT shoulder capes, one over the other (upper shorter, lower longer)
+# owner L1296/L1312: Phi capes v2 (colour, gold embroidery, scalloped edge, tassels, pearl rim)
