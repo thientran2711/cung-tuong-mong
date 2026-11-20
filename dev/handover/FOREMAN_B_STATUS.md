@@ -695,3 +695,4 @@ SEATS 16:18Z (B ROOT-6): running 5 / cap 12 (REVIEW F5 idle for turn; REVIEW F6a
 - (20/11 06:18Z) FROM MAIN ROOT-74: LIVE 37e4a68f (owner mgcal xa thq duho kinh may, BAL only) on 2ec6062e. ROLLBACK 2ec6062e. Final-merge 37e4a68f before LAND READY.
 - (20/11 06:56Z) FROM MAIN ROOT-74: LIVE eb056f7b (SELF-MERGE LAND mg-noword-a: no words in play 15 kinds + demo motions pull/slide, KIT.md) on 37e4a68f. ROLLBACK 37e4a68f. Final-merge eb056f7b before LAND READY.
 - (20/11 07:14Z) FROM MAIN ROOT-74: LIVE 70bea3d3 (SELF-MERGE LAND mg-visual: BAL.mgFx cue/pop all engines, Nấu ăn pictures, no screen-covering touch flash) on eb056f7b. ROLLBACK eb056f7b. Final-merge 70bea3d3 before LAND READY.
+- (20/11 06:47Z) FROM MAIN: main rolls over ROOT-74 → ROOT-75 session_01Rc5AsKTznPCBPujNFrdVVF. Send reports there.

@@ -1,25 +1,363 @@
 {
- "_note": "EAR1 try-on test. Coords = pixels in the 1024x2304 transparent cut-out. place: item drawn with its top-centre anchor at pt, height = item.h*scale. occ: occluder = a piece cut from the SAME figure (hands/sleeve cuffs, cheek) drawn ABOVE the items, so items pass behind it. Layer order: figure -> items -> occluders. Anchors by eye on 3x zoom crops with a pixel ruler, corrected after 2x renders. Occluder masks: skin colour threshold (hands, cheek) + hand-placed polygons along the sleeve-cuff inner edges (c22). Built by make_occ.py.",
+ "_note": "EAR1 layered try-on. Coords = pixels in the 1024x2304 cut-out. place.z = layer slot: 'back' (under face: far earring), 'ear' (over face, under front hair: near earring), 'waist' (under hands). Head slots: pt = where the ornament meets the hair (shaft enters here), shaft = shaft angle in degrees (0 = straight down; -105 = shaft runs to picture-right slightly upward, +105 = to picture-left; the shaft runs INTO the hair along the head, never straight out), len = visible shaft length factor (rest is cropped), tilt = ornament tilt (dangles still hang down), size = perspective scale (far side smaller). Slots copied from where this person's approved rank pictures carry their flower/pin (upper side of the head above the temple; crown at the back of the knot). Layers from make_layers.py (SAM masks).",
  "items": {
-  "earring":   {"file": "earring.png",   "gen": "gOmoB2gSXO", "cut": "u5WGAppQLD", "anchor": [0.525, 0.0], "h": 66},
-  "ngoc_boi":  {"file": "ngoc_boi.png",  "gen": "lJtBXAGgv9", "cut": "fHzZRM2CDY", "anchor": [0.511, 0.0], "h": 300},
-  "tui_huong": {"file": "tui_huong.png", "gen": "0eUsLE8TfW", "cut": "Syh8oHaUb8", "anchor": [0.516, 0.0], "h": 270}
+  "earring": {
+   "file": "earring.png",
+   "gen": "gOmoB2gSXO",
+   "cut": "u5WGAppQLD",
+   "anchor": [
+    0.525,
+    0.0
+   ],
+   "h": 66
+  },
+  "ngoc_boi": {
+   "file": "ngoc_boi.png",
+   "gen": "lJtBXAGgv9",
+   "cut": "fHzZRM2CDY",
+   "anchor": [
+    0.511,
+    0.0
+   ],
+   "h": 300
+  },
+  "tui_huong": {
+   "file": "tui_huong.png",
+   "gen": "0eUsLE8TfW",
+   "cut": "Syh8oHaUb8",
+   "anchor": [
+    0.516,
+    0.0
+   ],
+   "h": 270
+  }
+ },
+ "head_items": {
+  "pin_dangle": {
+   "kind": "pin",
+   "sprite": "dangle",
+   "label": "Trâm ngọc trai rủ"
+  },
+  "pin_peony": {
+   "kind": "pin",
+   "sprite": "peony",
+   "label": "Trâm hoa mẫu đơn"
+  },
+  "pin_plum": {
+   "kind": "pin",
+   "sprite": "plum",
+   "label": "Trâm hoa mai"
+  },
+  "pin_butterfly": {
+   "kind": "pin",
+   "sprite": "butterfly",
+   "label": "Trâm bướm ngọc"
+  },
+  "pin_floralfork": {
+   "kind": "pin",
+   "sprite": "floralfork",
+   "label": "Thoa hoa (hai chân)"
+  },
+  "fl_peony": {
+   "kind": "flower",
+   "sprite": "flower_peony.png",
+   "label": "Hoa mẫu đơn"
+  },
+  "fl_plum": {
+   "kind": "flower",
+   "sprite": "flower_plum.png",
+   "label": "Hoa mai"
+  },
+  "fl_peach": {
+   "kind": "flower",
+   "sprite": "flower_peach.png",
+   "label": "Hoa đào"
+  },
+  "fl_lotus": {
+   "kind": "flower",
+   "sprite": "flower_lotus.png",
+   "label": "Hoa sen nhỏ"
+  },
+  "fl_jasmine": {
+   "kind": "flower",
+   "sprite": "flower_jasmine.png",
+   "label": "Hoa nhài"
+  },
+  "fl_orchid": {
+   "kind": "flower",
+   "sprite": "flower_orchid.png",
+   "label": "Hoa lan"
+  }
  },
  "figures": {
-  "c11": {"cut": "Cqn9IfbEEy", "group": "Sắc sảo", "angle": "FF",
-   "sub": "Đôi hoa tai (hai tai). Ngọc bội, túi hương treo ở dải lưng.",
-   "place": [{"item": "earring", "pt": [427, 256]}, {"item": "earring", "pt": [598, 249], "mirror": true},
-             {"item": "ngoc_boi", "pt": [472, 776]}, {"item": "tui_huong", "pt": [430, 776]}],
-   "occ": [], "head_view": [330, 70, 370, 400], "waist_view": [280, 660, 440, 640]},
-  "c09": {"cut": "xSBWFuTjfW", "group": "Tinh nghịch", "angle": "3/4",
-   "sub": "Tai gần: hoa tai đầy đủ. Tai xa: nhỏ hơn, khuất sau má, chỉ lộ một chút.",
-   "place": [{"item": "earring", "pt": [415, 280]}, {"item": "earring", "pt": [584, 258], "mirror": true, "scale": 0.8},
-             {"item": "ngoc_boi", "pt": [565, 731]}, {"item": "tui_huong", "pt": [432, 731]}],
-   "occ": [{"file": "c09_occ_cheek.png", "x": 530, "y": 220}], "head_view": [265, 95, 370, 400], "waist_view": [280, 610, 440, 640]},
-  "c22": {"cut": "rgXY1yHxtc", "group": "Đoan trang", "angle": "FF",
-   "sub": "Hai tay che bụng: dây luồn sau bàn tay, ngọc bội và túi hương lộ ra dưới tay.",
-   "place": [{"item": "earring", "pt": [443, 261]}, {"item": "earring", "pt": [608, 247], "mirror": true},
-             {"item": "ngoc_boi", "pt": [548, 880]}, {"item": "tui_huong", "pt": [622, 880]}],
-   "occ": [{"file": "c22_occ_hands.png", "x": 380, "y": 760}], "head_view": [340, 80, 340, 370], "waist_view": [340, 660, 440, 640]}
+  "c11": {
+   "cut": "Cqn9IfbEEy",
+   "group": "Sắc sảo",
+   "angle": "FF",
+   "sub": "Đôi hoa tai. Đã có sẵn một trâm vẽ bên trái → còn 2 chỗ cài.",
+   "place": [
+    {
+     "item": "earring",
+     "pt": [
+      427,
+      256
+     ],
+     "z": "ear"
+    },
+    {
+     "item": "earring",
+     "pt": [
+      598,
+      249
+     ],
+     "mirror": true,
+     "z": "ear"
+    },
+    {
+     "item": "ngoc_boi",
+     "pt": [
+      472,
+      776
+     ],
+     "z": "waist"
+    },
+    {
+     "item": "tui_huong",
+     "pt": [
+      430,
+      776
+     ],
+     "z": "waist"
+    }
+   ],
+   "slots": [
+    {
+     "name": "bên phải, trên thái dương",
+     "pt": [
+      590,
+      90
+     ],
+     "shaft": 105,
+     "len": 0.6,
+     "tilt": 12,
+     "size": 1.0
+    },
+    {
+     "name": "đỉnh búi, phía sau",
+     "pt": [
+      470,
+      62
+     ],
+     "shaft": -95,
+     "len": 0.5,
+     "tilt": -4,
+     "size": 0.8
+    }
+   ],
+   "head_view": [
+    330,
+    0,
+    370,
+    400
+   ],
+   "waist_view": [
+    280,
+    660,
+    440,
+    640
+   ]
+  },
+  "c09": {
+   "cut": "UPvIb4owny",
+   "group": "Tinh nghịch",
+   "angle": "3/4",
+   "sub": "Tai gần đeo đủ; tai xa nhỏ hơn, nằm DƯỚI lớp mặt nên tự khuất. 3 chỗ cài.",
+   "place": [
+    {
+     "item": "earring",
+     "pt": [
+      403,
+      276
+     ],
+     "z": "ear"
+    },
+    {
+     "item": "earring",
+     "pt": [
+      577,
+      250
+     ],
+     "mirror": true,
+     "scale": 0.8,
+     "z": "back"
+    },
+    {
+     "item": "ngoc_boi",
+     "pt": [
+      590,
+      718
+     ],
+     "z": "waist"
+    },
+    {
+     "item": "tui_huong",
+     "pt": [
+      466,
+      718
+     ],
+     "z": "waist"
+    }
+   ],
+   "slots": [
+    {
+     "name": "bên trái (phía gần), trên thái dương",
+     "pt": [
+      395,
+      88
+     ],
+     "shaft": -105,
+     "len": 0.6,
+     "tilt": -12,
+     "size": 1.0
+    },
+    {
+     "name": "đỉnh búi, phía sau",
+     "pt": [
+      510,
+      56
+     ],
+     "shaft": 95,
+     "len": 0.5,
+     "tilt": 4,
+     "size": 0.78
+    },
+    {
+     "name": "bên phải (phía xa)",
+     "pt": [
+      566,
+      106
+     ],
+     "shaft": 105,
+     "len": 0.5,
+     "tilt": 14,
+     "size": 0.72
+    }
+   ],
+   "head_view": [
+    265,
+    0,
+    370,
+    400
+   ],
+   "waist_view": [
+    280,
+    590,
+    440,
+    640
+   ],
+   "cut_note": "new picture (owner-approved hand fix, gen w4atqqr7EI); old xSBWFuTjfW retired"
+  },
+  "c22": {
+   "cut": "rgXY1yHxtc",
+   "group": "Đoan trang",
+   "angle": "FF",
+   "sub": "Hai tay che bụng: ngọc bội, túi hương nằm DƯỚI lớp tay. 3 chỗ cài.",
+   "place": [
+    {
+     "item": "earring",
+     "pt": [
+      443,
+      261
+     ],
+     "z": "ear"
+    },
+    {
+     "item": "earring",
+     "pt": [
+      608,
+      247
+     ],
+     "mirror": true,
+     "z": "ear"
+    },
+    {
+     "item": "ngoc_boi",
+     "pt": [
+      548,
+      880
+     ],
+     "z": "waist"
+    },
+    {
+     "item": "tui_huong",
+     "pt": [
+      622,
+      880
+     ],
+     "z": "waist"
+    }
+   ],
+   "slots": [
+    {
+     "name": "bên trái, trên thái dương",
+     "pt": [
+      422,
+      112
+     ],
+     "shaft": -105,
+     "len": 0.6,
+     "tilt": -12,
+     "size": 1.0
+    },
+    {
+     "name": "bên phải, trên thái dương",
+     "pt": [
+      594,
+      110
+     ],
+     "shaft": 105,
+     "len": 0.6,
+     "tilt": 12,
+     "size": 1.0
+    },
+    {
+     "name": "đỉnh búi, phía sau",
+     "pt": [
+      505,
+      62
+     ],
+     "shaft": -95,
+     "len": 0.5,
+     "tilt": -4,
+     "size": 0.78
+    }
+   ],
+   "head_view": [
+    335,
+    0,
+    350,
+    380
+   ],
+   "waist_view": [
+    340,
+    660,
+    440,
+    640
+   ]
+  }
+ },
+ "compare": {
+  "rank_head": "rank_c09_t2_head.webp",
+  "rank_label": "c09 · Thường tại (ảnh đã duyệt, hoa VẼ SẴN)",
+  "fig": "c09",
+  "preset": {
+   "0": "fl_peony"
+  },
+  "fig_label": "c09 · đầu trơn + hoa mẫu đơn GHÉP LỚP (chỗ 1)",
+  "fig2": "c11",
+  "preset2": {
+   "0": "pin_plum"
+  },
+  "fig2_label": "c11 · trâm vẽ sẵn (trái) | trâm ghép lớp (phải)"
  }
 }

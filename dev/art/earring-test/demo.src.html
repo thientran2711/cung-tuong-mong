@@ -9,69 +9,124 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Roboto,"Noto Sans",sans-serif}
 h1{font-size:20px;margin:12px 16px 4px}
-p.sub{margin:0 16px 10px;font-size:14px;opacity:.8}
-.wrap{display:grid;grid-template-columns:1fr;gap:14px;padding:0 16px 20px}
-.wrap{max-width:1200px}
+p.sub{margin:0 16px 6px;font-size:14px;opacity:.85}
+.legend{margin:0 16px 10px;font-size:13px;background:#fff;border:1px dashed var(--line);border-radius:8px;padding:6px 10px}
+.wrap{display:grid;grid-template-columns:1fr;gap:14px;padding:0 16px 20px;max-width:1200px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px}
 .cap{font-size:24px;font-weight:700;margin:2px 4px 8px}
 .cap small{display:block;font-size:14px;font-weight:400;opacity:.75}
-.btns{display:flex;flex-wrap:wrap;gap:8px;margin:0 4px 10px}
-button{font-size:16px;padding:9px 14px;border-radius:999px;border:2px solid var(--accent);background:#fff;color:var(--accent);cursor:pointer;font-weight:600}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:0 4px 8px;align-items:center}
+.btns .t{font-size:13px;font-weight:700;margin-right:4px;min-width:64px}
+button{font-size:15px;padding:7px 12px;border-radius:999px;border:2px solid var(--accent);background:#fff;color:var(--accent);cursor:pointer;font-weight:600}
 button.on{background:var(--accent);color:#fff}
+button.fl{border-color:#c06a86;color:#a0446a}button.fl.on{background:#c06a86;color:#fff}
+button:disabled{opacity:.35;cursor:default}
+.slotinfo{font-size:13px;margin:0 4px 8px;opacity:.85}
 .views{display:flex;gap:8px;align-items:flex-start}
 .vw{position:relative;overflow:hidden;border-radius:10px;border:1px solid var(--line);
   background-color:#fff;background-image:linear-gradient(45deg,#ddd 25%,transparent 25%),linear-gradient(-45deg,#ddd 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#ddd 75%),linear-gradient(-45deg,transparent 75%,#ddd 75%);
   background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
-.vw .lbl{position:absolute;left:6px;top:6px;z-index:5;background:rgba(255,255,255,.85);border-radius:6px;padding:2px 7px;font-size:13px}
+.vw .lbl{position:absolute;left:6px;top:6px;z-index:50;background:rgba(255,255,255,.88);border-radius:6px;padding:2px 7px;font-size:13px}
 .stage{position:absolute;left:0;top:0;width:1024px;height:2304px;transform-origin:0 0}
-.stage img{position:absolute;display:block}
+.stage img{position:absolute;display:block;max-width:none}
+.stage .orn img{filter:drop-shadow(0 2px 2px rgba(50,25,25,.38))}
 .stage .item{display:none}
 .stage.w-earring .earring,.stage.w-ngoc_boi .ngoc_boi,.stage.w-tui_huong .tui_huong{display:block}
+.cmp{display:flex;gap:8px;align-items:flex-start}
+.cmp>div{flex:1}
+.cmp img.rank{width:100%;display:block;border-radius:10px;border:1px solid var(--line)}
+.cmp .cl{font-size:14px;font-weight:600;margin:4px 2px}
 </style>
 </head>
 <body>
-<h1>Thử trang sức: hoa tai · ngọc bội · túi hương</h1>
-<p class="sub">Mặt chính diện (FF) đeo đôi hoa tai; mặt nghiêng 3/4 tai gần đeo đủ, tai xa nhỏ hơn và khuất sau má. Ngọc bội, túi hương treo ở dải lưng; khi tay che bụng thì dây luồn sau tay.</p>
+<h1>Thử trang sức: hoa tai · trâm · hoa cài · ngọc bội · túi hương</h1>
+<p class="sub">Tách lớp như Photoshop: mỗi món nằm giữa đúng hai lớp của người, chỗ nào bị mặt, tóc hay tay đè lên thì tự khuất. Trâm và hoa chỉ cài vào chỗ đẹp có sẵn (2–3 chỗ); bấm món là tự vào chỗ trống kế tiếp, bấm lại là tháo.</p>
+<div class="legend"><b>Lớp (dưới → trên):</b> người (tóc sau, áo) → hoa tai tai xa → <b>mặt</b> → hoa tai tai gần → <b>tóc trước</b> → thân trâm → <b>tóc</b> → đầu trâm / hoa → ngọc bội, túi hương → <b>tay</b></div>
 <div class="wrap" id="wrap"></div>
 <script>
 /*DATA*/
 const NAMES={earring:['Đeo hoa tai','Tháo hoa tai'],ngoc_boi:['Đeo ngọc bội','Tháo ngọc bội'],tui_huong:['Đeo túi hương','Tháo túi hương']};
 const ANG={FF:'FF (chính diện)','3/4':'3/4 (nghiêng)'};
-function addItem(st,kind,pt,mirror,scale){
-  const it=A.items[kind],im=new Image();im.src=IMG[kind];im.className='item '+kind;
-  im.onload=()=>{const h=it.h*(scale||1),w=h*im.naturalWidth/im.naturalHeight;
-    const ax=mirror?1-it.anchor[0]:it.anchor[0];
-    im.style.height=h+'px';im.style.width=w+'px';
-    im.style.left=(pt[0]-ax*w)+'px';im.style.top=(pt[1]-it.anchor[1]*h)+'px';
-    if(mirror)im.style.transform='scaleX(-1)';};
-  st.appendChild(im);
+const ORDER=['back','L:face','ear','L:fronthair','shaft','L:hairtop','orn','waist','L:hands'];
+function el(tag,cls){const e=document.createElement(tag);if(cls)e.className=cls;return e}
+function addItem(g,p){
+  const it=A.items[p.item],im=new Image();im.src=IMG[p.item];im.className='item '+p.item;
+  im.onload=()=>{const h=it.h*(p.scale||1),w=h*im.naturalWidth/im.naturalHeight;const ax=p.mirror?1-it.anchor[0]:it.anchor[0];
+    Object.assign(im.style,{height:h+'px',width:w+'px',left:(p.pt[0]-ax*w)+'px',top:(p.pt[1]-it.anchor[1]*h)+'px'});
+    if(p.mirror)im.style.transform='scaleX(-1)';};
+  g[p.z].appendChild(im);
 }
 const stages=[];
-function makeView(id,f,box,label){
-  const vw=document.createElement('div');vw.className='vw';vw.style.flex=(box[2]/box[3]).toFixed(3);vw.style.aspectRatio=box[2]+'/'+box[3];
+function makeView(id,box,label){
+  const f=A.figures[id],vw=el('div','vw');vw.style.flex=(box[2]/box[3]).toFixed(3);vw.style.aspectRatio=box[2]+'/'+box[3];
   vw.innerHTML='<span class="lbl">'+label+'</span>';
-  const st=document.createElement('div');st.className='stage';
-  const fig=new Image();fig.src=FIG[id];fig.style.left='0';fig.style.top='0';fig.style.width='1024px';fig.style.height='2304px';st.appendChild(fig);
-  for(const p of f.place)addItem(st,p.item,p.pt,!!p.mirror,p.scale);
-  for(const o of f.occ){const im=new Image();im.src=OCC[o.file];im.className='occ';im.style.left=o.x+'px';im.style.top=o.y+'px';st.appendChild(im);}
-  vw.appendChild(st);stages.push({vw,st,box});return vw;
+  const st=el('div','stage');const fig=new Image();fig.src=FIG[id];Object.assign(fig.style,{left:0,top:0,width:'1024px',height:'2304px'});st.appendChild(fig);
+  const g={};
+  for(const z of ORDER){
+    if(z.startsWith('L:')){const L=LAYERS[id][z.slice(2)];if(L){const im=new Image();im.src=L[0];Object.assign(im.style,{left:L[1]+'px',top:L[2]+'px'});im.className='layer';st.appendChild(im);}}
+    else{const d=el('div',z);d.style.position='absolute';d.style.left=0;d.style.top=0;st.appendChild(d);g[z]=d;}
+  }
+  for(const p of f.place)addItem(g,p);
+  vw.appendChild(st);const s={vw,st,box,g,id};stages.push(s);return s;
 }
 function fit(){for(const s of stages){const k=s.vw.clientWidth/s.box[2];s.st.style.transform=`scale(${k}) translate(${-s.box[0]}px,${-s.box[1]}px)`;}}
-for(const [id,f] of Object.entries(A.figures)){
-  const c=document.createElement('div');c.className='card';c.id='card-'+id;
-  c.innerHTML=`<div class="cap">${id} · ${f.group} · góc ${ANG[f.angle]}<small>${f.sub}</small></div>`;
-  const b=document.createElement('div');b.className='btns';c.appendChild(b);
-  const v=document.createElement('div');v.className='views';c.appendChild(v);
-  const vs=[makeView(id,f,f.head_view,'Cận mặt'),makeView(id,f,f.waist_view,'Dải lưng'),makeView(id,f,[0,0,1024,2304],'Toàn thân')];
-  vs.forEach(x=>v.appendChild(x));
-  for(const k of ['earring','ngoc_boi','tui_huong']){
-    const bt=document.createElement('button');bt.textContent=NAMES[k][0];bt.dataset.k=k;
-    bt.onclick=()=>{const on=!bt.classList.contains('on');bt.classList.toggle('on',on);bt.textContent=NAMES[k][on?1:0];
-      for(const s of vs)s.querySelector('.stage').classList.toggle('w-'+k,on);};
-    b.appendChild(bt);
+// head items: pin = shaft (rotated into the hair, under the hair layer) + ornament (upright, small tilt, above the hair)
+function putHead(s,slot,key){
+  const H=HEAD[key],meta=A.head_items[key],out=[];
+  if(meta.kind==='pin'){
+    const k=0.62*slot.size,bx=H.base_x*k;
+    const sh=new Image();sh.src=H.shaft;Object.assign(sh.style,{width:H.w*k+'px',height:H.shaft_h*k*(slot.len||1)+'px',objectFit:'cover',objectPosition:'top',left:(slot.pt[0]-bx)+'px',top:(slot.pt[1]-2)+'px',transformOrigin:bx+'px 0',transform:`rotate(${slot.shaft}deg)`});
+    s.g.shaft.appendChild(sh);out.push(sh);
+    const hd=new Image();hd.src=H.head;Object.assign(hd.style,{width:H.w*k+'px',height:H.head_h*k+'px',left:(slot.pt[0]-bx)+'px',top:(slot.pt[1]-H.head_h*k+3*k)+'px',transformOrigin:`${bx}px ${H.head_h*k}px`,transform:`rotate(${slot.tilt}deg)`});
+    s.g.orn.appendChild(hd);out.push(hd);
+  }else{
+    const im=new Image();im.src=H.img;im.onload=()=>{const k=0.3*slot.size,w=im.naturalWidth*k,h=im.naturalHeight*k;
+      Object.assign(im.style,{width:w+'px',height:h+'px',left:(slot.pt[0]-w/2)+'px',top:(slot.pt[1]-h*0.62)+'px',transform:`rotate(${slot.tilt}deg)`});};
+    s.g.orn.appendChild(im);out.push(im);
   }
+  return out;
+}
+function card(id){
+  const f=A.figures[id],c=el('div','card');c.id='card-'+id;
+  c.innerHTML=`<div class="cap">${id} · ${f.group} · góc ${ANG[f.angle]}<small>${f.sub}</small></div>`;
+  const b1=el('div','btns');b1.innerHTML='<span class="t">Đeo:</span>';c.appendChild(b1);
+  const b2=el('div','btns');b2.innerHTML='<span class="t">Trâm:</span>';c.appendChild(b2);
+  const b3=el('div','btns');b3.innerHTML='<span class="t">Hoa cài:</span>';c.appendChild(b3);
+  const info=el('div','slotinfo');c.appendChild(info);
+  const v=el('div','views');c.appendChild(v);
+  const vs=[makeView(id,f.head_view,'Cận mặt'),makeView(id,f.waist_view,'Dải lưng'),makeView(id,[0,0,1024,2304],'Toàn thân')];
+  vs.forEach(s=>v.appendChild(s.vw));
+  for(const k of ['earring','ngoc_boi','tui_huong']){
+    const bt=el('button');bt.textContent=NAMES[k][0];bt.dataset.k=k;
+    bt.onclick=()=>{const on=!bt.classList.contains('on');bt.classList.toggle('on',on);bt.textContent=NAMES[k][on?1:0];vs.forEach(s=>s.st.classList.toggle('w-'+k,on));};
+    b1.appendChild(bt);
+  }
+  const used=f.slots.map(()=>null),btn={};
+  function refresh(){const n=used.filter(x=>x).length;
+    info.textContent=`Chỗ cài: ${n}/${f.slots.length} — `+f.slots.map((s,i)=>`${i+1}. ${s.name}${used[i]?' ✓':''}`).join(' · ');
+    for(const [k,bt] of Object.entries(btn)){const on=used.some(u=>u&&u.key===k);bt.classList.toggle('on',on);bt.disabled=!on&&n>=f.slots.length;}}
+  for(const [k,meta] of Object.entries(A.head_items)){
+    const bt=el('button',meta.kind==='flower'?'fl':'');bt.textContent=meta.label;bt.dataset.h=k;btn[k]=bt;
+    bt.onclick=()=>{const i=used.findIndex(u=>u&&u.key===k);
+      if(i>=0){used[i].els.forEach(e=>e.remove());used[i]=null;}
+      else{const j=used.findIndex(u=>!u);if(j<0)return;used[j]={key:k,els:vs.flatMap(s=>putHead(s,f.slots[j],k))};}
+      refresh();};
+    (meta.kind==='flower'?b3:b2).appendChild(bt);
+  }
+  refresh();
   document.getElementById('wrap').appendChild(c);
 }
+for(const id of Object.keys(A.figures))card(id);
+// naturalness compare
+(function(){const C=A.compare,c=el('div','card');c.id='card-compare';
+  c.innerHTML='<div class="cap">So sánh độ tự nhiên<small>Trái: ảnh đã duyệt, hoa vẽ sẵn trong tranh. Giữa / phải: đầu trơn + hoa, trâm ghép lớp vào chỗ cài.</small></div>';
+  const row=el('div','cmp');c.appendChild(row);
+  const d1=el('div');d1.innerHTML=`<img class="rank" src="${RANK}"><div class="cl">${C.rank_label}</div>`;row.appendChild(d1);
+  for(const [fid,pre,lab] of [[C.fig,C.preset,C.fig_label],[C.fig2,C.preset2,C.fig2_label]]){
+    const d=el('div');const f=A.figures[fid];const s=makeView(fid,f.head_view,'Ghép lớp');d.appendChild(s.vw);
+    for(const [i,k] of Object.entries(pre))putHead(s,f.slots[+i],k);
+    const l=el('div','cl');l.textContent=lab;d.appendChild(l);row.appendChild(d);}
+  document.getElementById('wrap').appendChild(c);})();
 fit();addEventListener('resize',fit);new ResizeObserver(fit).observe(document.body);
 </script>
 </body>
