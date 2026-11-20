@@ -36,13 +36,19 @@ const boot=`localStorage.clear();SLOT=4;document.getElementById('title').hidden=
  if(r.need>1)ok(s3.at==="home"&&!s3.w,'3 she is home in the new buổi',s3);
  ok(r.forced.cost===0&&r.forced.at==="home",'4 forced move home charges nothing',r.forced);
  /* 5 NPCs */
- const scan=async off=>{await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);return p.evaluate(([boot,off])=>{eval(boot);if(off)BAL.walk.npc=0;const o={far:0,bad:0};
+ const scan=async off=>{await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);return p.evaluate(([boot,off])=>{eval(boot);if(off)BAL.walk.npc=0;const o={far:0,bad:0,kfar:0,kbad:0};
   for(let s=0;s<48;s++){/* 48 buổi (was 16): the ratio over ~20 far moves ranged 0.08–0.55 on any build (a 0.48 tail failed 2/40 runs); over ~100 moves it holds 0.20–0.33 — same 0.4 bar, more evidence */Q.length=0;S.mg=0;for(let u=0;u<4;u++){used=u;try{j95sync()}catch(e){}}const R=S.roster;if(R&&R.P)for(const id in R.P){if(id==="me")continue;const row=R.P[id];if(!Array.isArray(row))continue;
     for(let j=1;j<row.length;j++){const x=row[j];if(!x||x[0]==null||x[1]==="go"||(x[1]==="follow"&&x[2]==="me"))continue;let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&row[q][1]==="go"){g++;q--}
-     if(q<0||!row[q]||row[q][0]==null||row[q][0]===x[0])continue;const t=travel(row[q][0],x[0]);if(t<2)continue;o.far++;if(g<t-1)o.bad++}}
+     if(q<0||!row[q]||row[q][0]==null||row[q][0]===x[0])continue;const t=travel(row[q][0],x[0]);if(t<2)continue;o.far++;const kp=walkKeepRow(row[q])||walkKeepRow(x);if(kp)o.kfar++;if(g<t-1){o.bad++;if(kp)o.kbad++}}}
    try{nextBuoi()}catch(e){}}o.errs=JWALK.errs;return o},[boot,off])};
  const off=await scan(true),on=await scan(false);
- ok(on.far>0&&on.bad/on.far<off.bad/Math.max(1,off.far)&&on.bad/on.far<=0.4,'5 NPC far moves without «on the way» khắc: on '+on.bad+'/'+on.far+' vs off '+off.bad+'/'+off.far);
+ /* the 0.4 bar is on the moves jwalk may rewrite (both rows free). A move from/to a KEPT row (deed ag_*, tryst, meet, called… j95sKeep) is
+    never rewritten by jwalk by design (header: kept rows are never rewritten); those deed→deed jumps are the jagday-walk job (review/jagday-walk,
+    stacked on this branch, deed jumps 18→0), which brings the all-rows bar back. Measured (WALK-COST #4, 10 runs × 48 buổi each): all rows
+    0.15–0.39 on this branch and 0.19–0.37 on walk-cost-rv ffd22ea6 (same tail, kept rows = ~75 % of the bare jumps); free rows 0.09–0.30. */
+ const fr=o=>({far:o.far-o.kfar,bad:o.bad-o.kbad});const onF=fr(on),offF=fr(off);
+ ok(on.far>0&&on.bad/on.far<off.bad/Math.max(1,off.far),'5 NPC far moves without «on the way» khắc (all rows): on '+on.bad+'/'+on.far+' < off '+off.bad+'/'+off.far+' (kept-row jumps on '+on.kbad+'/'+on.kfar+' = jagday-walk job)');
+ ok(onF.far>0&&onF.bad/onF.far<offF.bad/Math.max(1,offF.far)&&onF.bad/onF.far<=0.4,'5 NPC far moves jwalk may rewrite (free rows) without «on the way» khắc: on '+onF.bad+'/'+onF.far+' vs off '+offF.bad+'/'+offF.far+' (bar 0.4)');
  ok(!on.errs.length,'5 jwalk pass no errors',on.errs);
  /* 7–10 (walk-cost r3) */
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
