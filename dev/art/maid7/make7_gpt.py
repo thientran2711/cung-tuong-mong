@@ -3,7 +3,6 @@
 Run from repo root: python3 dev/art/maid7/make7_gpt.py [nhat chuongsu thancan mama]
 """
 import sys, os, re
-import sys, os
 D = 'dev/art/maid7/gpt/'
 
 CAP = ('\n\nCAPTION: in LARGE bold letters, top-left corner, on the plain background, never over her body, '
@@ -54,8 +53,6 @@ def nhat():
     # family fix (Foreman C 21:43Z, owner L1476): soft shoulder sentence instead of job-4 VEST_SHOULDER
     t = swap(t, 'with a band of gold-edged trim down the front, worn over the inner robe',
              'with a band of gold-edged trim down the front, worn over the inner robe' + TC_SOFT_SHOULDER)
-    t = swap(t, 'with a band of gold-edged trim down the front, worn over the inner robe',
-             'with a band of gold-edged trim down the front, worn over the inner robe' + VEST_SHOULDER)
     t = t.rstrip() + CAP.format('Cung nữ nhất đẳng · Áo ghi lê cổ đứng + hai tà')
     out = D + 'nhat_gpt_v2.txt'
     open(out, 'w', encoding='utf-8').write(t)
@@ -282,23 +279,64 @@ def mama3_51(): return mama3('a51')
 def mama3_65(): return mama3('a65')
 
 
-if __name__ == '__main__':
-    # NOTE: mama51/mama65 (v2) and chuongsu (v2) are NOT in the default list: mama v2 was hand-edited by Foreman C (L1473).
-    jobs = sys.argv[1:] or ['nhat', 'thancan', 'tamdang', 'nhat3', 'thancan3', 'chuongsu3', 'mama3_51', 'mama3_65']
-    t = t.rstrip() + CAP.format('Chưởng sự cô cô · Áo khoác tím cà dài tới gối + váy xanh')
-    out = D + 'chuongsu_gpt_v2.txt'
+# owner L1493: ma ma still 3D/realistic -> master style block (copied verbatim from nhat_gpt_v3) replaces B's own style lines
+HDR_MM4 = ("[ChatGPT: attach Image 1 = her face reference (Magnific KLpSlnEkqp, m05). 'The reference image' and 'the identity "
+           "reference' below both mean Image 1. Make ONE tall picture (about 1024x2304), one figure.]\n\n")
+MM_STYLELOCK_OLD = ("STYLE LOCK (same drawing as her 36-year-old picture, the second reference): exactly the same soft painterly "
+                    "guofeng illustration rendering, the same smooth luminous painted skin, soft stylised features and gentle painted "
+                    "shading as the 36-year-old picture; her age shows ONLY through the silver in her hair and a few soft painted "
+                    "lines, NEVER photographic, NEVER photo-realistic, no realistic skin texture, no pores, no detailed wrinkles.")
+MM_AGE_NEW = "Her age shows ONLY through the silver in her hair and a few soft painted lines."
+
+
+def master_block():
+    n = open(D + 'nhat_gpt_v3.txt', encoding='utf-8').read()
+    return n[n.index('\n\n') + 2:n.index(' A first-rank palace maid')]
+
+
+def mama4(age):
+    base = D + 'mama_gpt_v3_%s.txt' % age
+    t = open(base, encoding='utf-8').read()
+    body = t[t.index('\n\n') + 2:]
+    b_open = body[:body.index(' A palace ma ma')]
+    body = master_block() + body[len(b_open):]
+    body = swap(body, MM_STYLELOCK_OLD, MM_AGE_NEW)
+    body = swap(body, ', with small earrings;', ';')   # master "Bare earlobes, no earrings" (NOEAR)
+    t = HDR_MM4 + body
+    out = D + 'mama_gpt_v4_%s.txt' % age
     open(out, 'w', encoding='utf-8').write(t)
-    keep(out, base, [('with one plain jade hairpin in the bun',
-                      'owner Lượt 1456: chưởng sự hairpins not fewer than the young maids'),
-                     ('with broad powder blue front-edge borders and a powder blue lining showing at the hem', 'K26 owner L1461: secondary = her deep rose'),
-                     ('over a long inner robe and skirt in powder blue like #A7BAD2', 'K26 owner L1461'),
-                     ('in lighter tones of purple and powder blue with fine gold thread', 'K26 owner L1461'),
-                     ('the MAIN colour eggplant purple and the SECONDARY colour powder blue like #A7BAD2', 'K26 owner L1461')])
+    keep(out, base, [('exactly matching the rendering of the reference portraits', 'owner Lượt 1493: B style line -> master style block'),
+                     ('soft natural light and fine detail', 'owner Lượt 1493: B style line removed'),
+                     ('never semi-realistic', 'owner Lượt 1493: B style line -> master block (NOT a photo, NOT a realistic real person, NOT 3D)'),
+                     ('never photographic', 'owner Lượt 1493'),
+                     ('smooth airbrushed painted shading', 'owner Lượt 1493: master block says smooth airbrushed painting'),
+                     ('STYLE LOCK', 'owner Lượt 1493: style lock to the near-3D a36 picture removed (Image 2 dropped)'),
+                     ('same drawing as her 36-year-old picture', 'owner Lượt 1493'),
+                     ('the second reference', 'owner Lượt 1493'),
+                     ('exactly the same soft painterly guofeng illustration rendering', 'owner Lượt 1493'),
+                     ('the same smooth luminous painted skin', 'owner Lượt 1493'),
+                     ('soft stylised features and gentle painted shading as the 36-year-old picture', 'owner Lượt 1493'),
+                     ('her age shows ONLY through the silver in her hair and a few soft painted lines', 'owner Lượt 1493: kept as its own sentence (Her age shows ONLY …)'),
+                     ('NEVER photographic', 'owner Lượt 1493'),
+                     ('NEVER photo-realistic', 'owner Lượt 1493'),
+                     ('no realistic skin texture', 'owner Lượt 1493'),
+                     ('no pores', 'owner Lượt 1493'),
+                     ('no detailed wrinkles', 'owner Lượt 1493'),
+                     ('with small earrings', 'master block NOEAR: Bare earlobes, no earrings'),
+                     ('attach Image 1 = her identity / face reference', 'owner Lượt 1493: header -> Image 1 only (style + face)'),
+                     ('and Image 2 = her 36-year-old picture', 'owner Lượt 1493: near-3D a36 ref dropped'),
+                     ("'the reference portraits' means both images", 'owner Lượt 1493'),
+                     ('Make ONE tall portrait image', 'owner Lượt 1493: no "portrait" word -> tall picture')])
     return out
 
 
+def mama4_51(): return mama4('a51')
+def mama4_65(): return mama4('a65')
+
+
 if __name__ == '__main__':
-    jobs = sys.argv[1:] or ['nhat', 'chuongsu']
+    # NOTE: mama51/mama65 (v2) and chuongsu (v2) are NOT in the default list: mama v2 was hand-edited by Foreman C (L1473).
+    jobs = sys.argv[1:] or ['nhat', 'thancan', 'tamdang', 'nhat3', 'thancan3', 'chuongsu3', 'mama3_51', 'mama3_65', 'mama4_51', 'mama4_65']
     for j in jobs:
         p = globals()[j]()
         print(p, len(open(p, encoding='utf-8').read()))

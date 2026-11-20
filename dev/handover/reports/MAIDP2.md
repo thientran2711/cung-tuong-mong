@@ -18,11 +18,6 @@ FINAL files (dev/art/maid7/gpt/): thancan_gpt_v2.txt · nhat_gpt_v2.txt · chuon
 - Caption 'Cung nữ thân cận · Áo ghi lê dài xanh + áo trong hồng'.
 
 ## Job 6 candidates shown to the owner (history)
-## STATUS
-- Jobs 2–5 done for nhất + chưởng sự (v2 files below).
-- Jobs 1 + 6 (thân cận v2, ma ma v2): candidate PICTURES sent to Foreman C (sheet dev/handover/review-sheets/maid7/MAIDP2_candidates_mama_thancan.jpg, commit 7bec2e5). WAITING FOR GO. No prompt written yet.
-
-## Job 6 — ma ma candidates (19/11, the OLD person)
 | key | picture | creation | prompt | refs (Magnific gpt-2-6 seed 7172) |
 |---|---|---|---|---|
 | A1 (my pick) | m01 a51, BROWN, two front tà | BhNEMlJoQR (cut Xm9CDwcBfo) | dev/art/owner-copy/mama-night-1119/m01-a51.txt | style 6AbGv6EiJO + face Lw87kgoswO + costume 79fNlPEJAL |
@@ -49,7 +44,6 @@ Appended after "No text, no labels." on a new paragraph, like the house files:
 `CAPTION: in LARGE bold letters, top-left corner, on the plain background, never over her body, write exactly this Vietnamese text WITH accents: "<rank> · <outfit>"`
 - nhất: "Cung nữ nhất đẳng · Áo ghi lê cổ đứng + hai tà"
 - chưởng sự: "Chưởng sự cô cô · Áo khoác tím cà dài tới gối + váy hồng"
-- chưởng sự: "Chưởng sự cô cô · Áo khoác tím cà dài tới gối + váy xanh"
 - thân cận / ma ma: after GO ("Cung nữ thân cận · …", "Ma ma · …")
 
 ## Job 4 — vest shoulders (prompts with the over-vest: nhất, thân cận; ma ma only if the confirmed base has the vest. Chưởng sự kiểu D has a coat, no vest)
@@ -134,6 +128,15 @@ Word diff vs the previous commit: only the old caption's garment/colour words (e
 Owner "Vẫn bị": the nhất vest still split into a V below the knot button. My L1474 text literally asked for "a NARROW opening … slim V under the button" — my fault (the round-2 picture's narrow V was the same fault, just smaller). New collar sentence (nhat_gpt_v3, thancan_gpt_v3, mama_gpt_v3_a51/_a65; chưởng sự never had it):
 "a sleeveless embroidered over-vest with a TALL upright stand (mandarin) collar that wraps closely around the neck and is fastened at the throat with ONE small knot button; from the button the vest's two front edges MEET EDGE TO EDGE and stay closed all the way down to the waist sash, one smooth closed front like a straight upright standing-collar robe, with NO gap, NO slit, NO V-opening and NO inner robe visible on the chest; the inner robe's collar shows ONLY as a thin line just above the stand collar at the neck, with a band of gold-edged trim down the front, worn over a crossed-collar inner robe" (thân cận: "the inner robe's collar in her own colour shows ONLY as a thin line…"). Closed-front idea = chưởng sự kiểu B "straight upright standing collar" robe.
 Word diff vs previous commit: only the slim-V words (narrow, opening, slim, v, side by side, close together, layered crossed collars…). keep_check ×4 PASS, --all 158 PASS; check_store nhất v3 / thân cận v3 PASS (ma ma: same upstream-gate fails as before).
-| gpt/chuongsu_gpt_v2.txt (7529 c) | gpt/chuongsu_gpt.txt | hairpin swap, + caption | PASS (1 allowed) | FAIL S32 "ma ma hai tà" only — same as v1 (chưởng sự has no hai tà; scope mismatch, pre-existing) |
-Own Counter word diff (LOST words, base − new): nhat v2: none. chuongsu v2: "one", "hairpin" (singular; now "hairpins") — the hairpin swap only. keep_check --all: 135 sidecars PASS.
-Own Counter word diff (LOST words, base − new): nhat v2: none. chuongsu v2: "one", "hairpin" (hairpin swap) + powder×5, blue×5, #a7bad2×2 (K26 swap) — nothing else. keep_check --all: 135 sidecars PASS.
+
+## L1493 MA MA STILL 3D (Foreman C 22:08Z) → mama_gpt_v4_a51.txt (9613 c) / _a65.txt (9429 c), from v3
+- The whole B style opening ("Soft painted guofeng game illustration (… never semi-realistic, never 3D, never photographic), soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body …") is REPLACED by the master style block copied VERBATIM from nhat_gpt_v3 (from "Soft painted guofeng game illustration in EXACTLY the drawing style of the reference image …" up to "… face clearly visible, 3/4 or frontal view.", incl. "NOT a photo, NOT a realistic real person, NOT 3D", the colour/fabric/legs/mouth/forehead/earlobe/one-item/hairpin lines).
+- STYLE LOCK sentence (to her a36 picture, with "NEVER photographic, NEVER photo-realistic, no realistic skin texture, no pores, no detailed wrinkles") → only "Her age shows ONLY through the silver in her hair and a few soft painted lines." The a51/a65 age sentences (silver streaks, soft lines) are kept.
+- ", with small earrings" removed: the master block says "Bare earlobes, no earrings" (NOEAR), so they would contradict.
+- Header: Image 2 (her a36 picture BhNUblSoQR) DROPPED. I looked at it: it was made from the "Semi-realistic … near-3D realistic rendering" prompt, and its heavy textured brocade pulls toward 3D. Now Image 1 = face ref KLpSlnEkqp only (it looks soft painted), used as 'the reference image' (style + skin) AND 'the identity reference' (face), like the maid files. "portrait image" → "picture".
+- After the edit, '3D' and 'realistic' appear ONLY inside the copied master block ("NOT a realistic real person, NOT 3D"); no 'photographic', 'portrait', 'rendering', 'fine detail'.
+- Outfit, colours, collar (L1486 closed front), hairpins, "Exactly two garments", caption "Ma ma" untouched.
+- keep_check ×2 PASS (16 allowed: the B style/STYLE LOCK phrases, earrings, header). Word diff LOST (v3→v4) = the B style words (semi-realistic, photographic×2, photo-realistic, rendering×2, fine detail, painterly, STYLE LOCK, pores, texture, detailed wrinkles, portrait(s), 36-year-old picture, Image 2/BhNUblSoQR …) — nothing from outfit/colour/age.
+- check_store: CANNOT RUN — dev/art/check_store.py line 223 SyntaxError on the branch tip (not mine). keep_check --all: only dong_hientai/m02_t7_DONG_HIENTAI_cloak4.txt fails (not mine).
+- Expected gate side effect: S36 (D15 ELDER STYLE LOCK for a51/a65) will report MISSING because the STYLE LOCK sentence was removed on purpose (it points to the dropped near-3D picture). Foreman decides.
+- REPAIR: a stale replay (commits 6ce619d / c41dbb3, "21:24") had duplicated lines in gpt/chuongsu_gpt_v2.txt, gpt/nhat_gpt_v2.txt, make7_gpt.py (2nd __main__, syntax error) and this report. All 4 restored to my last good commit eead8d6 in this commit.

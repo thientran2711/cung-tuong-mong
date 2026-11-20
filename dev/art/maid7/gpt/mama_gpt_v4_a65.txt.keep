@@ -1,0 +1,23 @@
+base: dev/art/maid7/gpt/mama_gpt_v3_a65.txt
+allow: exactly matching the rendering of the reference portraits   # owner Lượt 1493: B style line -> master style block
+allow: soft natural light and fine detail   # owner Lượt 1493: B style line removed
+allow: never semi-realistic   # owner Lượt 1493: B style line -> master block (NOT a photo, NOT a realistic real person, NOT 3D)
+allow: never photographic   # owner Lượt 1493
+allow: smooth airbrushed painted shading   # owner Lượt 1493: master block says smooth airbrushed painting
+allow: STYLE LOCK   # owner Lượt 1493: style lock to the near-3D a36 picture removed (Image 2 dropped)
+allow: same drawing as her 36-year-old picture   # owner Lượt 1493
+allow: the second reference   # owner Lượt 1493
+allow: exactly the same soft painterly guofeng illustration rendering   # owner Lượt 1493
+allow: the same smooth luminous painted skin   # owner Lượt 1493
+allow: soft stylised features and gentle painted shading as the 36-year-old picture   # owner Lượt 1493
+allow: her age shows ONLY through the silver in her hair and a few soft painted lines   # owner Lượt 1493: kept as its own sentence (Her age shows ONLY …)
+allow: NEVER photographic   # owner Lượt 1493
+allow: NEVER photo-realistic   # owner Lượt 1493
+allow: no realistic skin texture   # owner Lượt 1493
+allow: no pores   # owner Lượt 1493
+allow: no detailed wrinkles   # owner Lượt 1493
+allow: with small earrings   # master block NOEAR: Bare earlobes, no earrings
+allow: attach Image 1 = her identity / face reference   # owner Lượt 1493: header -> Image 1 only (style + face)
+allow: and Image 2 = her 36-year-old picture   # owner Lượt 1493: near-3D a36 ref dropped
+allow: 'the reference portraits' means both images   # owner Lượt 1493
+allow: Make ONE tall portrait image   # owner Lượt 1493: no "portrait" word -> tall picture
