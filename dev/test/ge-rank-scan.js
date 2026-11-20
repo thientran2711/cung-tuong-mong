@@ -19,14 +19,18 @@ console.log('STATIC sites');for(const s of sites)console.log(' ',s.join(' · '))
 const URL=process.argv[2]&&process.argv[2]!=='-'?process.argv[2]:'file://'+path.resolve(__dirname,'../index.html');
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'})).newPage();p.setDefaultTimeout(0);
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
- await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof geOdds==='function'&&typeof GE_DATA==='object'&&typeof S!=='undefined',null,{timeout:0});await p.waitForTimeout(1500);
+ await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof geOdds==='function'&&typeof GE_DATA==='object'&&typeof start==='function',null,{timeout:0});await p.waitForTimeout(1500);
+ /* a life (as ge-engine): S exists only after start() */await p.evaluate(()=>{document.getElementById('title').hidden=true;quiet=true;start();quiet=false});
+ await p.waitForFunction(()=>typeof S!=='undefined'&&!!S&&!!S.origin,null,{timeout:0});
  const R=await p.evaluate(()=>{const O=BAL.ge.odds,k0=O.rank,nc=O.noCond,r0=S.rank,srv=S.srv;const out=[];
   const wave=b=>/^bd_/.test(b)?'Ba Tư':['tt_co','cnv_mat','nc_tuc'].includes(b)?'pilot':/^(tt_oan|tt_tranh|tt_mat|dtq_|muoi_)/.test(b)?'W1':/^(cn_|nc_gian|nc_su|nc_vuong|td_)/.test(b)?'W2':'W3';
   S.srv=null;O.noCond=O.max;
   for(const b of Object.keys(GE_DATA)){const s={b,st:["o","o","o","o"],pull:[0,0,0,0]};
    for(let i=0;i<4;i++){const row={b,w:wave(b),i,t:{}};for(const key of ['before','after']){O.rank=key==='before'?0:k0;row.t[key]=[0,3,6].map(pl=>{s.pull[i]=pl;return [0,1,2,3,4,5,6,7].map(r=>{S.rank=r;return geOdds(s,i)})})}
     s.pull[i]=0;out.push(row)}}
-  O.rank=k0;O.noCond=nc;S.rank=r0;S.srv=srv;return {k:k0,out,ranks:RANKS.map(r=>r.n)}});
+  /* a servant life climbs the maid ladder: step = S.srv.rk */
+  const sv={rk:3,risen:0};S.srv=sv;const srvOk=geRk()===3;sv.risen=1;S.rank=2;const risenOk=geRk()===2;
+  O.rank=k0;O.noCond=nc;S.rank=r0;S.srv=srv;out.srv=[srvOk,risenOk];return {k:k0,out,srv:out.srv,ranks:RANKS.map(r=>r.n)}});
  await b.close();
  const W={};for(const r of R.out){const w=W[r.w]||(W[r.w]={br:new Set(),n:0,bOk:0,aOk:0,b:[],a:[]});w.br.add(r.b);w.n++;
   const law=t=>t.every(L=>L.every((v,k)=>k===0||v<=L[k-1])&&L[7]<L[0]);if(law(r.t.before))w.bOk++;if(law(r.t.after))w.aOk++;else faults.push(`${r.b}_${r.i+1}: odds do not fall with rank ${JSON.stringify(r.t.after)}`);
@@ -37,5 +41,6 @@ const URL=process.argv[2]&&process.argv[2]!=='-'?process.argv[2]:'file://'+path.
  for(const [w,x] of Object.entries(W))console.log(`| ${w} | ${x.br.size} | ${x.n} | ${x.bOk}/${x.n} | ${x.aOk}/${x.n} | ${x.b[0].join(' ')} | ${x.a[0].join(' ')} |`);
  const tot=R.out.length,br=new Set(R.out.map(r=>r.b)).size;console.log(`| all | ${br} | ${tot} | ${Object.values(W).reduce((a,x)=>a+x.bOk,0)}/${tot} | ${Object.values(W).reduce((a,x)=>a+x.aOk,0)}/${tot} | | |`);
  const r1=R.out[0].t.after;console.log('\nodds AFTER, every branch the same (pull 0 / 3 / 6 × rank 0…7):');r1.forEach((L,k)=>console.log(`  pull ${[0,3,6][k]}: ${L.join(' ')}`));
+ console.log(`servant life: step = maid rung ${R.srv[0]?'ok':'FAULT'} · raised: step = rank ${R.srv[1]?'ok':'FAULT'}`);if(!R.srv[0]||!R.srv[1])faults.push('servant rank step');
  if(errs.length)faults.push('page errors: '+errs.join(' | '));
  console.log(faults.length?`\nFAULTS ${faults.length}\n`+faults.join('\n'):'\nge-rank-scan: PASS (0 faults)');process.exit(faults.length?1:0)})();

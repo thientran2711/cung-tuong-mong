@@ -143,6 +143,17 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
   ok(r.ok,o.name+': friend starts as Người lạ (unknown, like any NPC)'+(r.unk?'':' — known: '+r.why),r.ok?undefined:r)}await shot(A,'05-world');await shot(B,'05-world');
  /* COOP_MLINE=1 (review/servant-mline-r3): the guest's own maids are a target of the NPC maid line on the guest (forced odds on B only);
     her proof on NPCs (ep[pid]) survives the week merges, and the host's own proof is not touched by hers */
+
+ /* COOP_GE=1 (review/ge-rank, brief E35): law 5 rank key of the grand endings in co-op — each seat's GE odds read HER OWN rank (S is personal),
+    two-way: host high / guest low, then swapped; the friend's rank never moves the other seat's odds; checked again after the merged weeks */
+ const GE=+process.env.COOP_GE||0;
+ const geP=async(tag,ra,rb)=>{const q=(o,r)=>o.p.evaluate(r=>{const O=BAL.ge.odds,nc=O.noCond;O.noCond=O.max;if(r!=null&&!(S.srv&&!S.srv.risen))S.rank=r;
+    const s={b:Object.keys(GE_DATA)[0],st:["o","o","o","o"],pull:[3,0,0,0]};const g=geOdds(s,0);O.noCond=nc;const f=rivals.find(v=>v.coop);
+    return{rank:S.rank,rk:geRk(),g,want:Math.round(Math.max(O.min,Math.min(O.max,O.base+3*O.per-geRk()*O.rank))),srv:!!(S.srv&&!S.srv.risen),srk:S.srv?S.srv.rk|0:0,fr:f?f.rank:null}},r);
+   const a=await q(A,ra),c=await q(B,rb);const own=x=>x.rk===Math.min(7,x.srv?x.srk:x.rank)&&x.g===x.want;
+   ok(own(a)&&own(c),tag+': ge odds on each seat read her own rank (law 5)',[a,c]);
+   if(!a.srv&&!c.srv&&a.rank!==c.rank)ok(a.g!==c.g&&(a.rank>c.rank)===(a.g<c.g),tag+': the higher seat has the harder odds',[a,c]);return[a,c]};
+ if(GE){await geP('ge rank host 5 / guest 1',5,1);await geP('ge rank host 1 / guest 5 (two-way)',1,5)}
  const ML=+process.env.COOP_MLINE||0;let mlA0=null,mlB0=null;
  if(ML){mlB0=await B.p.evaluate(()=>{for(let i=0;i<3;i++){const s=mkServ('maid');s.age=17+i;S.staff.push(s)}Object.assign(BAL.mline,{feud:100,feudHost:-999,hit:100,frameCatch:100,hitCatch:100,poisonCatch:100,hitBribe:0});window.__mlN={};
    window.__mlHit=0;window.__mlCalls=[];const mm0=mlMonth;mlMonth=function(){window.__mlCalls.push([S.month,(S.staff||[]).filter(x=>x.role==='maid').length,!!(S.srv&&!S.srv.risen),consorts().includes(S),S.rank,S.place]);return mm0.apply(this,arguments)};const f0=mlFx;mlFx=function(g,s){if((S.staff||[]).includes(s))window.__mlHit++;return f0.apply(this,arguments)};
@@ -154,6 +165,7 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
   await weekBoth(A,B,w);
   for(const o of [A,B]){const r=await untilC(o,x=>__co().week===x+1,wk,90000);ok(r,`week ${w+1}: ${o.name} advanced`,r?undefined:await o.p.evaluate(()=>({co:__co(),sent:COOPW.sent,pend:COOPW.pend,pendBuoi:!!COOPW.pendBuoi,bend:COOPW.bend,buoi:S.buoi,Q:Q.map(m=>(m.pid||'')+':'+String(m.t||'').slice(0,30)),mg:!!S.mg,tm:S.toMorning,stale:window.__nightStale,modal:(document.getElementById('modal')||{}).hidden,tr:COOPW.tr.slice(-20)})))}
   await clear(A);await clear(B);await same('after week '+(w+1))}
+ if(GE)await geP('ge rank after 3 merged weeks',null,null);
  /* NPC agent loop (jagent AG1, host-only): the host runs one tick per buổi, the guest never runs it (the world is the host's) */
  {const g=o=>o.p.evaluate(()=>({has:typeof agOn==='function',on:typeof agOn==='function'&&agOn(),tick:window.AG?AG.stat.tick:-1}));const ha=await g(A),hb=await g(B);
   ok(ha.has&&ha.tick>0,'agent loop: the host ticks',ha);ok(hb.has&&!hb.on&&hb.tick===agB0,'agent loop: the guest never runs agTick',{...hb,before:agB0})}
