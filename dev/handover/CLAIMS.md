@@ -416,7 +416,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | GAP OR13 co-op half outside-coop (opus; J3b) | review/outside-coop; reports/outside-coop.md | B | session_01N1tNP4iVdUXvnLhmBA3k9Y | SẴN SÀNG KIỂM 2c904461 (coop-kcco 63/63, coop-e2e 68/68, coop-home 51/51) | 20/11 ~10:20Z |
 | mg-craft lead #2 (opus; STEP 4 integrate VE f1ef0106 + HOA c0f9fbbc (+ g1 review fixes) onto review/mg-craft) | review/mg-craft | B | session_01N1tNP3Whw8X1PLZAsT5ChZ | RUNNING | 20/11 09:06Z |
 | REVIEW phutang-road r2 (BIG opus E21r2; successor of E21r @0448dc8c) of b868bbce | review/phutang-road | FOREMAN E #17 | session_01DgYSWod6Dw7HtUXCQisjD1 | RUNNING | 20/11 10:14Z |
-| home-chapters r2 fixes (opus E25b; successor of E25 @b6b5b99d5; E25r FAIL @a3cc98226) | review/home-chapters-r1 | FOREMAN E #17 | session_01DgYSWob7AScwYwurseKupN | RUNNING | 20/11 10:18Z |
+| home-chapters r2 fixes (opus E25b; successor of E25 @b6b5b99d5; E25r FAIL @a3cc98226) | review/home-chapters-r1 | FOREMAN E #17 | session_01DgYSWob7AScwYwurseKupN | SẴN SÀNG KIỂM r2 7882ea5d7 (kit part pending) | 20/11 10:18Z |
 | REVIEW role-parity-drift-kyngo (SMALL sonnet E23r; probe-only) of 41d620a5 | review/role-parity-drift-kyngo | FOREMAN E #17 | session_01DgYSWmgey4KqSWQJLrpZR5 | RUNNING | 20/11 10:20Z |
 | walk-cost «về nhà» khắc + every goTo/walk cost (opus; ORDER ROOT-76 08:36Z; OD L1976) | review/walk-cost; briefs/D9-gap-jobs.md JOB 6 | D #9 for ROOT-76 | session_01964izCjQfM4AKD13HmruCn | RUNNING | 20/11 09:21Z |
 | person-minigame-acts ROUND C (opus E22g; successor of E22f @90f464f5; r3 42dba2ac with E22r) | review/person-minigame-acts-c | FOREMAN E #17 | session_01DgYSWpbhufsng6okRiVwYE | RUNNING | 20/11 10:28Z |

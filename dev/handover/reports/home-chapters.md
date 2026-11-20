@@ -35,3 +35,27 @@ Fix list (whole family each, scan table before/after):
 4. empty scene banner on kc_ch / kc_ke dialogs (the kit picture box above the text is empty: find how kcE dialogs get their banner — act-pic/jopic by title? — and give kc3 dialogs the same source).
 Tests to rerun: one-core-guard, dev/test/home-chapters/{laws,smoke,shots}.js (server: python3 -m http.server from the worktree root; shots need the overlay cleanup already in shots.js), dev/test/outside/oldsave.js (main.html from git show origin/main:index.html under .port/), bash dev/tools/quickcheck.sh. CDN gave 401 for E-account → say so, no images in git.
 Worktrees /home/user/wt/e25 (review/home-chapters) and /home/user/wt/e25ho (handover) can be reused; flock /home/user/wt/e25.build.lock around builds.
+
+## r2 — E25b (opus, session_01DgYSWob7AScwYwurseKupN) — SẴN SÀNG KIỂM home-chapters r2 7882ea5d7 (kit part pending)
+PRIORITY #1 CHECK ('kgt|kap|khm|kld|KR home-stat|kc3Mk|kcFreeFid|BAL.kc3|home-stat rows'): OD 0 | ledger 0 | claims 8 | main 15 | review/* 0 | archive 24
+Branch review/home-chapters-r1: 9d860229 = LIVE merge of origin/main 66bd36cd (conflicts index.html/sw.js only, rebuilt), then 1bf9bbb97, d0c190c6f, 7882ea5d7.
+Fix list of reports/home-chapters-review.md @a3cc98226:
+1. Home-stat cost/gain rows — WAITING FOR «KIT READY: KR home-stat rows» (no private part built). Data side done: every number of every kc3 choice is in its c/w/l or in its j67 line (the scan reads them from there). New scan dev/test/home-chapters/costrows.js renders every arc beat option (9 arcs, all origins), every home event option and the roster act cards, and lists each home-stat number (Gia thanh / Áp lực hôn sự / Hồi môn / Lời đồn / thế lực nhà / «X với ta ±n») the shown card does not print + every TỐN/ĐƯỢC «không» row whose line has content. BEFORE (now):
+| family | choices | home number not shown | «Tốn/Được: không» with content |
+|---|---|---|---|
+| arc beats | 366 | 101 | 10 |
+| events E9/E15/E28/early | 10 | 8 | 1 |
+(act cards: the scan does not find them on screen yet — only one act carries a home stat, bà mối «nói khéo» w kap −8; check by eye after wiring.) AFTER the kit part: rerun `node dev/test/home-chapters/costrows.js <url> --list`, must print 0 / 0. Cause is the kit option card's hint words (jk2b kitHintPhrase) having no words for home stats; that is the kit keeper's part.
+2. Faces (law 6b) — whole roster group: kc3Fid takes the role's pool, then the next existing pool of the same sex (BAL.kc3.ros.pool mama→maid, man→official…; all pools have the 4 age bands, kcPor picks her age's band), never a named palace face (BAL.kc3.ros.noFid: man:vuonggia, man:thaiy, emperor, thaihau); Họa sư prefers man:hoasu-1 (the painter face). Old r1 saves: the month hook gives a face to anyone without one or with a palace face. Scan dev/test/home-chapters/faces.js, 24 lives:
+| role | before (no face) | after (no face / palace face) |
+|---|---|---|
+| Nữ phu tử | 24/24 | 0 / 0 |
+| Ma ma xuất cung | 24/24 | 0 / 0 |
+| Cầm sư | 15/24 | 0 / 0 |
+| Họa sư | palace faces (vuonggia/thaiy) | 0 / 0 |
+| Nhũ mẫu, Bà mối, Vũ sư, 72 suitors | 0 | 0 / 0 |
+r1 saves repaired 24/24, no face used twice. No art request needed (no drawing). Possible follow-up for C (not a gate): own faces for the 3 older women teachers instead of maid faces at a36/a51.
+3. ONE CORE: all BAL.kc3.fx blocks moved out of jkc3/jkc3a/jkc3b into new dev/build/jbalkc3.js (assemble.py after jbal2.js). Inline numbers → BAL.kc3: ros.age (nm/ba/thay/le), ros.sxAge (was KC3SXAGE), ba.bieu.k / ba.khe.k / thay.bieu.k, thay.truyen.tier, thay.leMax (also jkc.js lễ-nghi lock / «nay x/5» / max), cal.nc (1+R(2)), mid (A.sc>=1), ev.qMax, gtuMin (muoi kgtu floor), know.foe (k61Know level), rare.r4/r6/dtqOc (jkc.js:459/460 now read the same keys as jkc3a). kcR1 elope gate: ONE function kcR1Ok() reading BAL.kc3.rare.r1 {h,loyal,kld,p}, used by jkc.js tmtron and jkc3b tm96z. laws.js got a static law-4 scan of jkc3*.js (R(n), roll(n), kcRare odds, k:n, Math.min|max(n, typed comparisons, k61Know level, arc number blocks, a second kcR1 gate) — proven to fail on an injected line.
+4. Banner: kc3 chapter dialogs had no picture of their own → the §59 placeholder, often still loading (empty frame). Each arc now names its EVENTS.json meaning group (KC3PIC: kc_ch thu-nha, kc_ke am-muu, kc_tt mat-uoc, kc_dtq bien-ai, kc_muoi bac-tien, kc_thd tai-nghe, kc_td vu-oan, kc_hon khach-den, tm96z tu-tinh), passed to the kit as the dialog's evId "cat:<group>" (beat card, result card, ending card; restored on reload via deserQ). Shots: letter picture on «Thư của cô mẫu», scheming picture on «Kế mẫu». Teacher «HAY» trait text: kcFamCard owner's, not touched (note only).
+Tests on 7882ea5d7: one-core-guard PASS · laws.js PASS (incl. static law 4) · faces.js PASS · smoke 6 origins × 3 lives errs [] fails 0 · oldsave main→this and r1→this 755x1000 errs [] · quickcheck alone PASS (old save ok, perf ≈ live; the only FAIL line was "not built" before the build commit) · shots.js Fold 755x1000@2 + iPad 1180x820@2 (10 screens each, bad 0), looked at: chapter dialogs show their picture, 5 teachers with faces. CDN upload 401 (Authentication error) → shots kept at /home/user/wt/e25b-shots, none in git.
+Remaining: item 1 wiring after KIT READY (then rerun costrows.js and re-shoot E28 + kc_ke s1 + bà mối).
