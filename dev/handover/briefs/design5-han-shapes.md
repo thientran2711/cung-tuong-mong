@@ -8,7 +8,7 @@ CHANGES (body/robe shape per rank so ranks differ clearly):
 - t5 Phi: khúc cư (Hán A, curved wrap spiralling round the body) — "giống như cái plan lúc đầu". Fabric matte đoạn.
 - t6 Quý phi: trực cư (Hán B, straight-hem robe). Fabric = GẤM brocade (owner Lượt 1291 — replace the đoạn words in t6).
 - t7 Hoàng quý phi: KEEP as is ("vừa phải").
-- t8 Hoàng hậu: TONE DOWN bulk (too many layers + big collar) but must still look above HQP: about 4 visible layers like HQP, outer mantle falls straight and close (no width), cloud collar flatter/smaller with one pearl-fringe tier; rank shown by royal-yellow dominance, gold-thread gấm kim tuyến, densest embroidery, nine-phoenix crown, long train BEHIND her.
+- t8 Hoàng hậu: TONE DOWN bulk (too many layers + big collar) but must still look above HQP: EXACTLY 4 layers, the same 4 layers as HQP t7 (owner Lượt 1293 verbatim: "hoàng hậu vẫn giữ 4 lớp áo đi cho nó đỡ phải bị cồng kềnh. 4 lớp áo của hoàng quý phi giống như hoàng quý phi á."), outer mantle falls straight and close (no width), cloud collar flatter/smaller with one pearl-fringe tier; rank shown by royal-yellow dominance, gold-thread gấm kim tuyến, densest embroidery, nine-phoenix crown, long train BEHIND her.
 - Each caption: update the outfit name to the new shape (LARGE bold top-left, G31).
 RULES: change ONLY shape words (and t6 fabric). NEVER cut other details; if >10 000 chars trim only boilerplate. Update each .keep (allow lines with reason "owner Lượt 1290/1291/1292") and run `python3 dev/art/keep_check.py --all` → PASS. Keep previous versions in dev/art/seasons4/han_bac_base/ (suffix _ed3e8fd) as the new base.
 Note gate conflicts (S12 phi bạch vs G32, S13 throat clasp vs open neck, M06/M07 vs đoạn) in your report; do not decide them.
