@@ -1279,13 +1279,20 @@ BAL.ag.par3={on:1,
  staff:{thuong:{below:55},phat:{below:30},doi:{below:15},/* bạc / Danh: BAL.house.thuongBac / BAL.eff.j10.danhServAct (merge r2) */hoi:{af:20,dt:30},g:{"safe":2},gHoi:{"spite":2,"safe":1}},
  use:{sucBelow:60,g:{"rest":2}},sell:{bacBelow:40,g:{"bac":2}},
  cutRisk:30,cold:{friend:40,sonAge:8,beg:{bac:20,anD:2,sungD:4},out:{bac:10,dad:50,affD:3,facD:10,dadD:5},ev:{mat:6,tcD:5},poem:{an:30,anD:2,thi:8},son:{fondD:2},/* odds bases: BAL.odb.j14.odO…odO_6, evidence need: BAL.coldEvNeed (ONE CORE, merge r2) */
-  sutra:{c:{"suc":-3},w:{"duc":3}},veg:{w:{"suc":6}},embro:{c:{"suc":-5},w:{"bac":10}},nunSuc:10,nunO:10,oanFree:20,gFree:{"sung":30},gStay:{"duc":1,"rest":1,"bac":1}},charity:{g:{"duc":3,"danh":2}},restLat:{sucBelow:50,g:{"rest":2}},tyGift:{g:{"spite":1,"safe":1}},work:{g:{"danh":2,"ally":1}},
+  sutra:{c:{"suc":-3},w:{"duc":3}},veg:{w:{"suc":6}},embro:{c:{"suc":-5},w:{"bac":10}},nunSuc:10,nunO:10,oanFree:20,
+  /* cold-faction: a faction letter from lãnh cung (j14 coldActsOf, her card = an NPC's): road A the food eunuch (Bạc bac, odds base euO), road B her own kept maid (no bạc, odds base maidO + the maid's loyalty / loyD; caught → that maid loyalty − maidLoy) */
+  lt:{bac:12,euO:80,maidO:45,loyD:2,maidLoy:15},gFree:{"sung":30},gStay:{"duc":1,"rest":1,"bac":1}},charity:{g:{"duc":3,"danh":2}},restLat:{sucBelow:50,g:{"rest":2}},tyGift:{g:{"spite":1,"safe":1}},work:{g:{"danh":2,"ally":1}},
  /* 2e part 3 (AG-ALL-2e2): NPC↔NPC talk topics (P3T) — worth = the liking she would win from the listener */
  talk:{health:{"ally":1},praise:{"ally":1.5},secret:{"ally":2},gossip:{"ally":1.5,"spite":1},invoke:{"ally":2}},
  /* household: Nghiệm độc (her button + NPC; bạc, odds bonus over oSee), Thêm cung nữ / thái giám (bạc), Tiến cử (công lao), Tâm sự / Tra xét / Dọa tố worth */
  test:{o:25,g:{"safe":2}},hire:{g:{"safe":1,"danh":1}},/* bạc: BAL.bacFee.itTest / BAL.house.hireBac (ONE CORE, merge r2) */house:{merit:5,tamBelow:50,upLoyal:70,gTam:{"safe":1},gUp:{"danh":3,"safe":1},gSearch:{"safe":3},gThreat:{"spite":2,"safe":1}},
  /* phe phái (j10 facAct for her, cx3:fac* for an NPC): khắc of her button; friend bar to found; worth per deed */
- fac:{k:2,frAff:35,clanAff:15,sharedOan:30,foeOan:25,gFound:{"ally":3},gJoin:{"ally":2,"safe":1},gLeave:{"safe":1},gSell:{"hh":1,"safe":1},gDiv:{"spite":3},gDivTc:3},
+ fac:{k:2,frAff:35,clanAff:15,sharedOan:30,foeOan:25,gFound:{"ally":3},gJoin:{"ally":2,"safe":1},gLeave:{"safe":1},gSell:{"hh":1,"safe":1},gDiv:{"spite":3},gDivTc:3,
+  /* cold-faction: Bán đứng numbers (j10 sellOut, her button + NPC + her lãnh cung letter): Danh / Sủng to the seller, oán of each member named, the Emperor's accuse gift chance, punish chance with no Hoàng hậu */
+  sell:{danh:5,sung:3,oan:40,emp:40,pun:40},
+  /* cold-faction: a leader strikes a member who is in lãnh cung off the roll (j10 facDrop: her button + NPC leader in facMonth): NPC leader drops when liking < aff, chance p a month; the one dropped oán + oan; the leader Danh + BAL.rcv.prop.danh (keeps clear of a phế phi) */
+  drop:{aff:20,p:15,oan:15},
+  leave:{rel:10}},/* cold-faction: Rời phe — each member quý the one who leaves − rel (j10 leaveFac; was a typed 10) */
  /* Uống thuốc thúc sinh (P3C.drug): worth = the book-mismatch danger she escapes */
  drug:{g:{"safe":4,"kid":2}},
  /* 2e3: Mời đến cung ta (cx3:invite, worth = the liking she would win), Phòng bị (cx3:def_<order>, worth per order; spite bar for the theo dõi target) */
