@@ -87,3 +87,5 @@ Head: review/walk-cost **08384111d8a6b789f63c7476e3c8890c86901b5d**. Commits: fc
 Gates on 08384111 (one at a time): walk-cost ALL OK · ptime ALL OK · ptime2 ALL OK · ag-walk 10/10 · invite-host-away 9/9 · coop-e2e 68/68 · QUICKCHECK PASS (old save ok, core gates PASS, TIME-SPILL GUARD PASS static+runtime; perf new/live render 348/343, buổi 2063/1846 ms — same box load as live run).
 Note for D/MAIN: when invite-host-away-rv lands, walk-cost already contains 69e06387 → its final-merge of the new LIVE should be clean (index.html/sw.js rebuild only).
 SẴN SÀNG KIỂM 08384111d8a6b789f63c7476e3c8890c86901b5d
+- Re-merge (11:32Z LIVE 0aaf8152 arrived right after the first ready line): final-merged 0aaf8152 (assemble.py conflict = main's list incl. jnwb.js + jwalk.js last), rebuilt, all gates re-run green: walk-cost ALL OK · ptime ALL OK · ptime2 ALL OK · ag-walk 10/10 · invite-host-away 9/9 · coop-e2e 68/68 · QUICKCHECK PASS (old save ok, core gates PASS, TIME-SPILL GUARD PASS; perf new/live render 296/317, buổi 1789/1720 ms). 08384111 is superseded.
+SẴN SÀNG KIỂM e84b30510916a2ba1af527a4e260d547b26511ec
