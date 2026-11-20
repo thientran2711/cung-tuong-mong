@@ -447,3 +447,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | rv-kit-signs-odds + rv-kit-item-big REVIEWER (sonnet; small kit) | review/kit-signs-odds-rv, review/kit-item-big-rv; reports/rv-kit-signs-odds.md + rv-kit-item-big.md | MAIN ROOT-78 | session_RV_signs | RUNNING | 20/11 11:33Z |
 | road-triggers r2 fixes (opus E26b; E26r FAIL 72a9b918, 3 fixes + N1/N3) | review/road-triggers-r1; briefs/E26b-road-triggers-r2.md | FOREMAN E #19 | session_01DgYSWoGyW9js5iSr8uUs2x | RUNNING | 20/11 11:49Z |
 | kit-podium-gate KIT KEEPER (sonnet; Group 3 KP07 kitEntryGate + OR09 kit-side podium) | review/kit-podium-gate; reports/kit-podium-gate.md | MAIN ROOT-78 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 8815a189 | 20/11 |
+| coop-thin G #6 (opus; successor of G #5 5Wy7doJg @45222abc) | review/coop-thin-g | B | session_01N1tNP5sNDT7i8Um811DRG1 | RUNNING | 20/11 12:20Z |
