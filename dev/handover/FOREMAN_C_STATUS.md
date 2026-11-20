@@ -338,3 +338,4 @@ ROOT-66 05:04Z: PR20 fd0ef72 — room 32 wired pr13 (khai-tuong-cung-tan-ha-sang
 - (20/11 05:13Z) FROM MAIN (ROOT-73 relay): td_dung (Tài đức · Dung) owner first try 0.3 — near zero like Đầu hồ → check for broken/unplayable first in the expert job.
 - (20/11 05:18Z) ORDER ADD FROM MAIN (ROOT-73 relay, OD 20/11 ~06:35Z): her weak reflex kinds still get a SMALL easing — she must not lose every time (can place, sometimes win with effort), but they stay clearly below her strong kinds.
 - 05:20Z C-AG #27: owner OD ~06:35Z relayed — weak reflex kinds keep realistic scale + SMALL easing (she can place / sometimes win with effort, still below strong kinds). Brief edited in place; wk told.
+- 05:27Z C-AG #27: ROOT-74 data: td_hanh 9.3, le 9.9 (ceiling side), td_ngon 6.7 (reflex side); td_dung 0.3 + chai 4.9 broken, not counted (mg-noword-b / mg-env fix). Brief edited; wk told.
