@@ -127,7 +127,11 @@ function knLine(r,h){const W=agPlaceTxt(h.k),what=knWhat(h);const fill=t=>String
   const P=KN_POOL[r.how==="self"?"here":r.by]||KN_POOL.mat;let t=fill(kLine("tinbao:"+r.by,P,{m:"cool"}));
   if(r.e){const o=ownerOf(r.e);t=t.replace(/\{N\}/g,r.e.name).replace(/\{P\}/g,o?(o===S?"ta":NM(o)):"khác")}return t}catch(e){return `Ở ${W} ${what}.`}}
 /* ---------- her TIN BÁO list ---------- */
-function knTb(){let b="";try{b=bkey()}catch(e){}S.tb=S.tb||{};if(S.tb.b!==b){S.tb.b=b;S.tb.K={};knCarryIn(S.tb)}else if(S.tb.W&&S.tb.W.length)knCarryTick(S.tb);if(!S.tb.R||S.tb.d!==wk()){S.tb.d=wk();S.tb.R=[]}S.tb.K=S.tb.K||{};return S.tb}
+/* jagday-walk r5 (law 6c, law 11 — the carry group): during the buổi turn (nextBuoi → endTurn) bkey() passes through half-turned keys
+   (S.buoi already 0, wk() not yet moved; the khắc still the old one). A rebuild there landed the carried items into a list the real
+   new key wiped a moment later (and landed them at the old khắc, before their bearer arrives). So: no rebuild while KN.turn; the
+   nextBuoi wrapper rebuilds once the turn is done, at the real key and khắc. */
+function knTb(){let b="";try{b=bkey()}catch(e){}S.tb=S.tb||{};if(KN.turn&&S.tb.b!=null){S.tb.K=S.tb.K||{};if(!S.tb.R)S.tb.R=[];return S.tb}if(S.tb.b!==b){S.tb.b=b;S.tb.K={};knCarryIn(S.tb)}else if(S.tb.W&&S.tb.W.length)knCarryTick(S.tb);if(!S.tb.R||S.tb.d!==wk()){S.tb.d=wk();S.tb.R=[]}S.tb.K=S.tb.K||{};return S.tb}
 function knRaw(){return KN.raw||[]}
 function knScan(L){if(!S||S.dead||S.out)return[];try{knFlush()}catch(e){agErr("knFlush",e)}const T=knTb();KN.stat.scan++;const out=[];const now=agKh();
  for(const h of L){if(h.done)continue;const hid=knHid(h);const w=knWin(h);const ended=w[1]<now&&!knFixed(h)?1:0;/* AG-ALL-2d2: an ENDED happening still reaches her (late news down the khắc chain), flagged ended */
@@ -148,18 +152,24 @@ function tinBaoList(){if(!knOn()||!S||S.dead||S.out)return[];let L=[];try{L=adHa
    arrive (last khắc of the buổi + knRelay); what would reach her is carried into the next buổi as an ENDED TIN BÁO item (knEnd: "vừa …" + "đã
    xong"), with the same informer. Hidden news stays hidden; fixed happenings (lễ) are known anyway; deeds that run on into the next buổi are in
    its list already (agSpan carry). */
-function knCarryOut(){if(!knOn()||!S||S.dead||S.out)return 0;const D=knRelay();if(!D)return 0;let L=[];try{adHapNow();L=KN.raw||[]}catch(e){return 0}
+/* jagday-walk r5: the carry reads the WHOLE ending buổi — first land the world work still waiting (AGL later jobs: the last khắc's deeds),
+   else a deed landed after this read has no tin báo at all (law 6c). In nextBuoi the outer agDrain already ran: a no-op there. */
+function knCarryOut(){if(!knOn()||!S||S.dead||S.out)return 0;const D=knRelay();if(!D)return 0;try{if(typeof agDrain==="function")agDrain()}catch(e){agErr("drain",e)}let L=[];try{adHapNow();L=KN.raw||[]}catch(e){return 0}
  const T=knTb();const KH=J95.KH,real=agKh;const C=[];
  for(const h of L){if(!h||h.done||knFixed(h))continue;const hid=knHid(h);if(T.K[hid]||C.some(x=>x.id===hid+":c"))continue;const w=knWin(h);if(!w||w[1]+D<KH||w[1]>=KH)continue;/* runs on: in the next buổi list already *//* its news could not come inside this buổi */
   let r=null;agKh=()=>Math.max(real(),w[1])+D;try{r=knFor(S,h)}catch(e){agErr("knCarry",e)}finally{agKh=real}
   if(!r)continue;/* AG-ALL-2d4: the same walk — it reaches her in the next buổi at khắc (arrival − KH): a far informer comes later than a near one */
   const due=Math.max(0,(r.at!=null?r.at:w[1]+D)-KH);const it={id:hid+":c",k:h.id,place:h.k,k0:-1,k1:-1,/* its window lay in the buổi before: over before khắc 0 of this one */who:knWho(h),line:knLine(r,h),by:r.by,inf:knInf(r),infName:knInfName(r),seen:0,ended:0,carry:1,due};C.push(it)}
- S.tb.C=C;KN.stat.carry=(KN.stat.carry||0)+C.length;return C.length}
-function knCarryIn(T){T.W=(T.C||[]).slice();T.C=[];knCarryTick(T)}
+ /* a turn refused (a scene still waiting, j9) asks again on the next press: keep what is already carried (same buổi key), never drop it */
+ let b="";try{b=bkey()}catch(e){}const old=S.tb.Cb===b?(S.tb.C||[]).filter(x=>!C.some(y=>y.id===x.id)&&!T.K[x.id]):[];
+ S.tb.C=C.concat(old);S.tb.Cb=b;KN.stat.carry=(KN.stat.carry||0)+C.length;return S.tb.C.length}
+/* items still on the road when a buổi turns (W, due not reached: she ended the buổi early) are not dropped: their bearer has
+   arrived by now, so they land at once in the new buổi, with the new carry after them */
+function knCarryIn(T){const W=(T.W||[]).map(it=>(it.due=0,it));const C=(T.C||[]).filter(x=>!W.some(y=>y.id===x.id));T.W=W.concat(C);T.C=[];T.Cb="";knCarryTick(T)}
 /* a carried item lands when its bearer arrives (its khắc in this buổi), not all at the buổi's start */
 function knCarryTick(T){if(!T.W||!T.W.length)return;let now=0;try{now=agKh()}catch(e){}const keep=[];
  for(const it of T.W){if((it.due||0)>now){keep.push(it);continue}delete it.due;it.b=S.buoi||0;knEnd(it);T.K[it.id]=it;for(const f of KN.cb)try{f(Object.assign({},it))}catch(e){console.error("tinBao cb",e)}}T.W=keep}
-(function(){const n0=nextBuoi;nextBuoi=function(){try{knCarryOut()}catch(e){agErr("knCarry",e)}return n0.apply(this,arguments)}})();
+(function(){const n0=nextBuoi;nextBuoi=function(){try{knCarryOut()}catch(e){agErr("knCarry",e)}KN.turn=(KN.turn||0)+1;try{return n0.apply(this,arguments)}finally{KN.turn--;if(!KN.turn)try{if(S&&!S.dead)knTb()}catch(e){agErr("knTb",e)}}}})();
 function tinBaoNew(){return tinBaoList().filter(x=>!x.seen).length}
 function tinBaoOn(fn){if(typeof fn==="function")KN.cb.push(fn);return ()=>{const i=KN.cb.indexOf(fn);if(i>=0)KN.cb.splice(i,1)}}
 function tinBaoSeen(id){const T=knTb();for(const it of Object.values(T.K).concat(T.R||[]))if(id==null||it.id===id)it.seen=1}
