@@ -1,2 +1,4 @@
 base: dev/handover/reports/mama-specs/m05-a65.styleref.r55.prompt.txt
 allow: with her hairpins   # owner Lượt 1456: ma ma hairpins not fewer than the young maids (-> richer set)
+allow: Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with   # owner Lượt 1473 (C #10): X18 near-3D wording not acceptable — removed
+allow: near-3D realistic rendering with soft natural light and fine detail   # owner Lượt 1473 (C #10): X18 near-3D removed (light + detail words kept)
