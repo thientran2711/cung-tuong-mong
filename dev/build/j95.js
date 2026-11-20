@@ -620,7 +620,7 @@ function j95ledObj(id){const who=(S.roster.who||{})[id]||[];const c=id[0];try{
  if(c==="v"){const v=RV(+id.slice(1));if(!v||!v.alive)return null;if(v.out)return{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi"};return v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v)}
  if(id==="emp")return{kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
  if(id==="th")return S.thDead?null:{kind:"th",name:"Thái hậu",ini:"Từ",col:"#c9a0e0",info:"Thái hậu"};
- if(id==="mm:me")return S.maid?{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`Cung nữ thân tín · thiện cảm ${S.maid.loyal}`}:null;
+ if(id==="mm:me")return S.maid?{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`${kitMaidTitle()} · thiện cảm ${S.maid.loyal}`}:null;
  if(id.indexOf("mm:")===0){const v=RV(+id.slice(3));const m=v&&v.maid;if(!m||!m.name)return null;return{kind:"npc",lid:id,name:m.name,ini:m.name.split(" ").pop()[0],col:"#b9a48a",info:who[1]||"Cung nữ thân tín"}}
  if(c==="s"){const s=j95sv(id);if(!s)return null;if(s.eid)return j95elderEntry(s);if((S.staff||[]).includes(s)&&typeof hsvPerson==="function"&&typeof hsvOn==="function"&&hsvOn())return hsvPerson(s);
   return{kind:"npc",sid:s.sid,name:s.name,ini:String(s.name).split(" ").pop()[0],col:"#b9a48a",info:who[1]||(s.role==="maid"?"Cung nữ":"Thái giám")}}

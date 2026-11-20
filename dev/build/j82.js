@@ -111,13 +111,17 @@ function kg82Set(k,v){if(k==="round"&&typeof v==="string"){let lab=null;const m=
   if(lab)document.querySelectorAll('[data-kg="round"]').forEach(e=>{const l=e.previousElementSibling;if(l&&l.tagName==="SMALL"&&l.textContent!==lab)l.textContent=lab})}
  kg82Set0(k,v)}
 function kg82Set0(k,v){if(typeof kitGameSet==="function")kitGameSet(k,v);else document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
-function kg82Open(o){kg82Close(true);const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
- const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;return d}
-function kg82Close(silent){if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";
+function kg82Open(o){const pb=KG82.preBack,pp=KG82.prePay||(typeof S!=='undefined'&&S&&S.mg&&S.mg.pay)||null;KG82.preBack=null;KG82.prePay=null;kg82Close(true);const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
+ const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;kg82BackX(d);
+ /* §13.9: a charge the caller only REMEMBERS (kgDefer) is taken on «Sẵn sàng» / the quick option / any outcome (kgPay); a lesson keeps it in S.mg.pay (a reload reopens the
+    same unpaid lesson, never a free one). Until then the ✕ is a free back: nothing was spent, nothing to undo. */
+ if(pp){KG82.payOnGo=pp;try{if(typeof pp==="object"&&S.mg&&S.mg.pay!==pp){S.mg.pay=pp;save()}}catch(e){}KG82.backPre=()=>{KG82.payOnGo=null;try{if(typeof pb==="function")pb()}catch(e){console.error(e)}try{if(S.mg)S.mg=null}catch(e){}}}
+ else if(typeof pb==="function")KG82.backPre=pb;return d}
+function kg82Close(silent){kgPay();/* closed by an outcome before «Sẵn sàng» (jsgame «Giao cho người làm»): the remembered charge is due */if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";KG82.back=null;KG82.backPre=null;KG82.payOnGo=null;KG82.backAsk=null;KG82.quit=null;KG82.quitAsk=null;KG82.xdo=null;KG82.giveUp=0;
  const d=kg82El();if(!d)return;const ov=$("ov");d.remove();[...ov.children].forEach(c=>{if(c.dataset.kg82h!=null){c.hidden=c.dataset.kg82h==="1";delete c.dataset.kg82h}});
  if(typeof mgDone==="undefined"||mgDone)ov.hidden=true}
 const kg82Box=()=>document.getElementById("kg82box");
-function kg82ShowRes(html){{const d=kg82El();if(d){d.classList.remove("kg-run");d.classList.add("kg-idle")}}const bx=kg82Box(),res=$("kg82box-res");if(res){bx.innerHTML="";bx.hidden=true;res.innerHTML=html;res.hidden=false}else bx.innerHTML=html}
+function kg82ShowRes(html){kgPay();KG82.backPre=null;{const d=kg82El();if(d){d.classList.remove("kg-run");d.classList.add("kg-idle")}}const bx=kg82Box(),res=$("kg82box-res");if(res){bx.innerHTML="";bx.hidden=true;res.innerHTML=html;res.hidden=false}else bx.innerHTML=html}
 
 /* ---------- canvas helper ---------- */
 function kg82Canvas(box,hRatio,hMax,hMin){const W=Math.max(240,Math.floor(box.clientWidth||300));const H=Math.round(Math.min(W*hRatio,hMax||520,Math.max(hMin||260,(innerHeight||800)*.56)));
@@ -165,6 +169,33 @@ function kg82FxPop(since,now){const F=BAL.mgFx;if(since==null)return F.pop;const
 /* the press ring: a bright ring that blooms and fades over BAL.mgFx.ms round a target pressed at "since" */
 function kg82FxRing(g,x,y,r,since,now){const F=BAL.mgFx,e=(now==null?performance.now():now)-since;if(!since||e<0||e>=F.ms)return;const k=e/F.ms;g.save();g.globalAlpha=1-k*k;g.shadowColor=F.glow;g.shadowBlur=F.blur;g.strokeStyle=F.ring;g.lineWidth=Math.max(3,r*F.ringW*1.6);g.beginPath();g.arc(x,y,r*(1+.5*k),0,Math.PI*2);g.stroke();g.restore()}
 window.kg82FxPop=kg82FxPop;window.kg82FxRing=kg82FxRing;
+/* mg-play2 (kit, BAL.mgFx): THE lit path to follow — the board OUTSIDE [x0,x1] is darkened by laneDim, the path gets a bright core (glow colour × lane) and two bright
+   glowing edges (ring colour), so it reads at a glance on every painting; vertical band, full height unless y0/y1 given */
+function kg82FxLane(g,x0,x1,y0,y1,W){const F=BAL.mgFx;if(y0==null)y0=0;if(W==null)W=g.canvas.width;g.save();
+ g.fillStyle=`rgba(10,6,20,${F.laneDim})`;if(x0>0)g.fillRect(0,y0,x0,y1-y0);if(x1<W)g.fillRect(x1,y0,W-x1,y1-y0);
+ const gr=g.createLinearGradient(x0,0,x1,0),c=F.glow,h=x=>Math.round(x*255).toString(16).padStart(2,"0");gr.addColorStop(0,c+h(F.lane*.55));gr.addColorStop(.5,c+h(F.lane));gr.addColorStop(1,c+h(F.lane*.55));
+ g.fillStyle=gr;g.fillRect(x0,y0,x1-x0,y1-y0);g.shadowColor=F.glow;g.shadowBlur=F.blur*.4;g.strokeStyle=F.ring;g.lineWidth=F.laneEdge;g.beginPath();g.moveTo(x0,y0);g.lineTo(x0,y1);g.moveTo(x1,y0);g.lineTo(x1,y1);g.stroke();g.restore()}
+/* mg-play2 (kit, BAL.mgFx): THE «avoid this» look — a red (kit --bad) danger ring with a small ✕ round a thing the player must NOT touch; hitAt = when it was hit
+   → a red burst that blooms and fades over badMs (the hit cue). Returns the shake offset (px) to give the hit thing / the player's piece. */
+function kg82FxBad(g,x,y,r,now,hitAt){const F=BAL.mgFx,red=kg82Col("--bad",kg82Col("--red","#c23b22"));g.save();g.strokeStyle=red;g.lineWidth=Math.max(2.5,r*2*F.bad);g.shadowColor="rgba(0,0,0,.35)";g.shadowBlur=4;
+ g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.stroke();const k=r*.3,bx=x+r*.72,by=y-r*.72;g.fillStyle=red;g.beginPath();g.arc(bx,by,k*1.15,0,Math.PI*2);g.fill();
+ g.strokeStyle="#fff";g.lineWidth=Math.max(2,k*.42);g.beginPath();g.moveTo(bx-k*.5,by-k*.5);g.lineTo(bx+k*.5,by+k*.5);g.moveTo(bx+k*.5,by-k*.5);g.lineTo(bx-k*.5,by+k*.5);g.stroke();g.restore();
+ if(!hitAt)return 0;const e=now-hitAt;if(e<0||e>=F.badMs)return 0;const q=e/F.badMs;g.save();g.globalAlpha=1-q;g.strokeStyle=red;g.shadowColor=red;g.shadowBlur=F.blur*.5;g.lineWidth=Math.max(4,r*.3*(1-q));
+ g.beginPath();g.arc(x,y,r*(1+q),0,Math.PI*2);g.stroke();g.restore();return Math.sin(e/26)*F.badShake*(1-q)}
+kg82FxBad.shake=(now,hitAt)=>{const F=BAL.mgFx,e=now-hitAt;return e<0||e>=F.badMs?0:Math.sin(e/26)*F.badShake*(1-e/F.badMs)};
+/* mg-play2 (law 11): the SAME lit path when the path curves (hát melody ribbon …): top / bot = [[x,y]…] edge points left→right; board outside darkened laneDim,
+   bright core (glow × lane), two glowing edges — same numbers, same look as the straight kg82FxLane */
+kg82FxLane.path=(g,top,bot)=>{const F=BAL.mgFx,W=g.canvas.width,H=g.canvas.height;if(!top.length)return;const poly=()=>{g.moveTo(top[0][0],top[0][1]);for(const p of top)g.lineTo(p[0],p[1]);for(let i=bot.length-1;i>=0;i--)g.lineTo(bot[i][0],bot[i][1]);g.closePath()};
+ const h=x=>Math.round(x*255).toString(16).padStart(2,"0");g.save();g.beginPath();g.rect(0,0,W,H);poly();g.fillStyle=`rgba(10,6,20,${F.laneDim})`;g.fill("evenodd");
+ g.beginPath();poly();g.fillStyle=F.glow+h(F.lane);g.fill();g.shadowColor=F.glow;g.shadowBlur=F.blur*.4;g.strokeStyle=F.ring;g.lineWidth=F.laneEdge;
+ for(const L of [top,bot]){g.beginPath();L.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.stroke()}g.restore()};
+/* mg-play2 (law 11): the SAME lit path along a stroke to trace (thư pháp …): P = [[x,y]…], w = the path width — glow core × lane + glowing ring edge */
+kg82FxLane.stroke=(g,P,w)=>{const F=BAL.mgFx,h=x=>Math.round(x*255).toString(16).padStart(2,"0");if(!P.length)return;const go=()=>{g.beginPath();P.forEach((p,i)=>i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]));g.stroke()};
+ g.save();g.lineCap="round";g.lineJoin="round";g.shadowColor=F.glow;g.shadowBlur=F.blur*.4;g.strokeStyle=F.ring;g.lineWidth=w+2*F.laneEdge;go();g.shadowBlur=0;g.strokeStyle=F.glow;g.lineWidth=w;go();g.restore()};
+/* mg-play2 (law 11): the «keep it here» zone of a gauge (nấu / Tu đức level …): kit --good × BAL.mgFx.zone + glowing ring edges, one look for every gauge */
+kg82FxLane.zone=(g,x,y,w,h)=>{const F=BAL.mgFx;g.save();g.globalAlpha=F.zone;g.fillStyle=kg82Col("--good","#2d7a52");g.fillRect(x,y,w,h);g.globalAlpha=1;g.shadowColor=F.glow;g.shadowBlur=F.blur*.3;g.strokeStyle=F.ring;g.lineWidth=F.laneEdge*.7;
+ g.beginPath();g.moveTo(x,y);g.lineTo(x+w,y);g.moveTo(x,y+h);g.lineTo(x+w,y+h);g.stroke();g.restore()};
+window.kg82FxLane=kg82FxLane;window.kg82FxBad=kg82FxBad;
 function kg82SprR(n){const im=kg82Img(n);return im.naturalWidth?im.naturalHeight/im.naturalWidth:1}
 /* label on a painting: light halo (or dark halo on night boards) so text always reads */
 function kg82Lbl(g,t,x,y,maxW,dark){g.save();g.lineJoin="round";g.lineWidth=3.5;g.strokeStyle=dark?"rgba(20,16,30,.85)":"rgba(255,250,238,.92)";
@@ -211,7 +242,7 @@ function kg82Rhythm(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const L=
     kg82DrawPops(g,pops,now)}
  function frame(now){if(stop)return;const tt=now-t0;
   for(const n of notes)if(!n.st&&tt-n.t>WIN){n.st=2;miss++;kg82Pop(pops,lw*(n.l+.5),HIT-24,"Trượt","#8a7350")}
-  const done=notes.filter(n=>n.st).length;env.hud({score:`${sc()}/10`,round:`Hồi ${Math.min(N,done+1)}/${N}`,time:`${Math.max(0,Math.ceil((end-tt)/1000))} giây`});
+  const done=notes.filter(n=>n.st).length;env.hud({score:mgLive(env,cl(10*(credit+N-done)/N,0,10)),round:`Hồi ${Math.min(N,done+1)}/${N}`,time:`${Math.max(0,Math.ceil((end-tt)/1000))} giây`});
   draw(now);if(tt>end){stop=true;return env.end(sc())}raf=requestAnimationFrame(frame)}
  function tap(l){if(stop)return;const tt=performance.now()-t0;let best=null,bd=1e9;for(const n of notes){if(n.st||n.l!==l)continue;const d=Math.abs(n.t-tt);if(d<bd){bd=d;best=n}}
   flash[l]=performance.now();
@@ -262,10 +293,10 @@ function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Ma
      g.strokeStyle=kg82Col("--good","#2d7a52");g.beginPath();g.arc(px(P.L),py(P.L),s*.42+Math.sin(now/90)*2,0,Math.PI*2);g.stroke()}}}
   kg82DrawPops(g,pops,now)}
  function frame(now){if(stop&&!fade)return;if(phase==="play"){const left=LIM-(now-t0);if(IDLE&&!hintAt&&now-tAct>IDLE)doHint();if(left<=0){phase="wait";kg82Pop(pops,px(P.L),py(P.L)-s*.6,"Hết giờ","#8a7350");mark={i:P.L,ok:false,miss:1};round++;setTimeout(next,900)}
-   env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(round+1,5)}/5`,time:`${Math.max(0,Math.ceil(left/1000))} giây`})}else env.hud({score:`${Math.round(pts)}/10`,time:"–"});
+   env.hud({score:mgLive(env,mgReach(pts,round,R0.length)-(phase==="play"?(2-(hinted?1.4:2)*mgPace(env,"co",now-t0,LIM)):0)),round:`Hồi ${Math.min(round+1,5)}/5`,time:`${Math.max(0,Math.ceil(left/1000))} giây`})}else env.hud({score:mgLive(env,mgReach(pts,round,R0.length)),time:"–"});
   draw(now);raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();if(phase!=="play"||stop)return;tAct=performance.now();const [x,y]=C.at(e);let bi=-1,bd=1e9;for(let i=0;i<n*n;i++){const d=Math.hypot(px(i)-x,py(i)-y);if(d<bd){bd=d;bi=i}}
-  if(bd>s*.6||P.B[bi])return;phase="wait";if(bi===P.L){const sp=mgPace(env,"co",performance.now()-t0,LIM);pts+=(hinted?1.4:2)*sp;/* a slow capture earns less (review/mg-tune: the ONE time part jmgt mgPace) */mark={i:bi,ok:true,a:performance.now()};fade={s:P.cap,a:performance.now()};kg82Pop(pops,px(bi),py(bi)-s*.6,`Ăn ${P.cap.length} quân!`,kg82Col("--good","#2d7a52"));kg82Pluck(2,true)}
+  if(bd>s*.6||P.B[bi])return;phase="wait";if(bi===P.L){const sp=mgPace(env,"co",performance.now()-t0,LIM);pts+=(hinted?1.4:2)*sp;/* a slow capture earns less (review/mg-tune: the ONE time part jmgt mgPace) */mark={i:bi,ok:true,a:performance.now()};fade={s:P.cap,a:performance.now()};kg82Pop(pops,px(bi),py(bi)-s*.6,`Ăn ${P.cap.length} quân!`,sp<.995?kg82Col("--gold","#8f5f0c"):kg82Col("--good","#2d7a52"));/* review/mg-score-same: a success the time part cut shows gold, not green */kg82Pluck(2,true)}
   else{mark={i:bi,ok:false};kg82Pop(pops,px(bi),py(bi)-s*.6,"Chưa ăn được",kg82Col("--red","#c23b22"));kg82Pluck(0,false)}round++;setTimeout(next,950)});
  /* think = how long a player needs to find the spot: more white groups to read, no gold ring at Khó (dev/measure/mg-bots.js) */
  KG82.peek=()=>phase==="play"&&P?Object.assign(C.client(px(P.L),py(P.L)),{think:(1+.45*Math.max(0,(P.wg||1)-1))*(tier>=2?1.5:tier?1.15:1)*(hintAt?.5:1)}):null;next();raf=requestAnimationFrame(frame);return()=>{stop=true;fade=null;cancelAnimationFrame(raf)}}
@@ -298,7 +329,7 @@ function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const 
   kg82DrawPops(g,pops,now)}
  function frame(now){if(stop&&phase!=="judge")return;let left=0;if(phase==="show"&&now-t0>SHOW){phase="play";t0=now}
   if(phase==="play"){left=LIM-(now-t0);if(left<=0)judge()}
-  env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(round+1,5)}/5`,time:phase==="show"?"nhìn kỹ":phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"});draw(now);raf=requestAnimationFrame(frame)}
+  env.hud({score:mgLive(env,mgReach(pts,round,R0.length)),round:`Hồi ${Math.min(round+1,5)}/5`,time:phase==="show"?"nhìn kỹ":phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"});draw(now);raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();if(phase!=="play")return;const [x,y]=C.at(e);const cc=Math.floor((x-ox)/c),rr=Math.floor((y-oy)/c);if(cc<0||rr<0||cc>=n||rr>=n)return;const i=rr*n+cc;if(tapped.includes(i))return;
   tapped.push(i);press[i]=performance.now();kg82Pluck(tapped.length,pat.includes(i));if(tapped.length>=pat.length)judge()});
  KG82.peek=()=>{if(phase!=="play")return null;const i=pat.find(k=>!tapped.includes(k));return i==null?null:C.client(cx(i),cy(i))};
@@ -307,13 +338,13 @@ function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const 
 /* 5. STEPS (múa): watch the steps light up, then repeat them */
 function kg82Steps(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const V=[["↑","Giơ tay áo"],["←","Xoay trái"],["→","Xoay phải"],["↓","Cúi mình"]];
  const mx=W/2,my=H/2,D=Math.min(W,H)*.31,pr=Math.min(W,H)*.15;const pos=[[mx,my-D],[mx-D,my],[mx+D,my],[mx,my+D]];
- const R0=[3,3,4,4,5].map(n=>n+mgMore(env));let round=0,pts=0,seq=[],inp=0,phase="",t0=0,stop=false,raf=0,lit=-1,litUntil=0,lastTap=0;const pops=[];/* mg-balance-2: show speed and the beat window of each step (miss the beat = the round stops there): BAL.mgTier.lev.mua by ease */const SP=Math.round(mgLev(env,"mua","sp")),IDLE=Math.round(mgLev(env,"mua","beat")),RT=Math.floor(mgLev(env,"mua","retry"));let rtl=0;/* easy boards forgive RT wrong steps per round */
+ const R0=[3,3,4,4,5].map(n=>n+mgMore(env));let round=0,pts=0,seq=[],inp=0,phase="",t0=0,stop=false,raf=0,lit=-1,litUntil=0,lastTap=0;const pops=[];/* mg-balance-2: show speed and the beat window of each step (miss the beat = the round stops there): BAL.mgTier.lev.mua by ease */const SP=Math.round(mgLev(env,"mua","sp")),IDLE=Math.round(mgLev(env,"mua","beat")),RT=Math.floor(mgLev(env,"mua","retry"));let rtl=0;/* cal-p2b: dark gap between shown steps + each shown step pops from its own start (a repeat reads as two) */const DARK=Math.min(SP*mgLev(env,"mua","darkCap"),mgLev(env,"mua","dark"));let showAt=0;/* easy boards forgive RT wrong steps per round */
  const pc=kg82Col("--peony","#e48aa4"),gold=kg82Col("--gold","#8f5f0c");
  function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}seq=Array.from({length:R0[round]},()=>Math.floor(Math.random()*4));inp=0;rtl=RT;phase="show";t0=performance.now()+500}
  function endRound(ok){phase="judge";const got=2*ok/seq.length;pts+=got;kg82Pop(pops,mx,my-8,ok===seq.length?"Đẹp lắm!":`Đúng ${ok}/${seq.length} bước`,ok===seq.length?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"));round++;setTimeout(next,1100)}
  function draw(now){kg82Bg(g,W,H,"mua",0,.55);kg82Spr(g,"mua-fan",mx,my-D*.06,D*.5,null,{alpha:.95});
-  let showI=-1;if(phase==="show"){const k=now-t0;if(k>=0){const i=Math.floor(k/SP);if(i>=seq.length){phase="play";lastTap=now}else if(k-i*SP<SP*.72)showI=seq[i]}}
-  pos.forEach(([x,y],i)=>{const on=i===showI||(i===lit&&now<litUntil),pz=on?kg82FxPop(i===showI?null:litUntil-BAL.mgFx.ms,now):1;g.save();
+  let showI=-1;if(phase==="show"){const k=now-t0;if(k>=0){const i=Math.floor(k/SP);if(i>=seq.length){phase="play";lastTap=now}else if(k-i*SP<SP-DARK){showI=seq[i];showAt=t0+i*SP}}}
+  pos.forEach(([x,y],i)=>{const on=i===showI||(i===lit&&now<litUntil),pz=on?kg82FxPop(i===showI?showAt:litUntil-BAL.mgFx.ms,now):1;g.save();
    /* the painted dance cushion; lit = golden glow and a small lift */
    if(!kg82Spr(g,"mua-mat",x,y-(on?3:0),pr*2.05*pz,null,{glow:on?BAL.mgFx.glow:null,ring:on})){g.fillStyle=on?pc:"#ecd9b4";g.beginPath();g.arc(x,y,pr,0,Math.PI*2);g.fill()}
    g.fillStyle=on?"#fff6dc":"#fff3e0";g.textAlign="center";g.textBaseline="alphabetic";g.font=`700 ${pr*.62}px serif`;g.save();g.shadowColor="#5a1208";g.shadowBlur=6;g.fillText(V[i][0],x,y+pr*.12);g.restore();
@@ -321,7 +352,7 @@ function kg82Steps(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const V=[["�
   if(phase==="play"){g.fillStyle="#3a1a0c";g.font=`700 13px ${kg82Col("--body","sans-serif")}`;g.textAlign="center";kg82Lbl(g,`${inp+1}/${seq.length}`,mx,my+D*.36)}
   kg82DrawPops(g,pops,now)}
  function frame(now){if(stop&&phase!=="judge")return;if(phase==="play"&&now-lastTap>IDLE)endRound(inp);
-  env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(round+1,5)}/5`,time:phase==="show"?"xem bước":phase==="play"?`${Math.max(0,Math.ceil((IDLE-(now-lastTap))/1000))} giây`:"–"});draw(now);raf=requestAnimationFrame(frame)}
+  env.hud({score:mgLive(env,mgReach(pts,round,R0.length)),round:`Hồi ${Math.min(round+1,5)}/5`,time:phase==="show"?"xem bước":phase==="play"?`${Math.max(0,Math.ceil((IDLE-(now-lastTap))/1000))} giây`:"–"});draw(now);raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();if(phase!=="play")return;const [x,y]=C.at(e);let bi=-1,bd=1e9;pos.forEach(([px,py],i)=>{const d=Math.hypot(px-x,py-y);if(d<bd){bd=d;bi=i}});if(bd>pr*1.5)return;
   lit=bi;litUntil=performance.now()+BAL.mgFx.ms;lastTap=performance.now();if(bi===seq[inp]){kg82Pluck(bi,true);inp++;if(inp>=seq.length)endRound(inp)}else if(rtl>0){rtl--;kg82Pluck(0,false);kg82Pop(pops,mx,my-8,"Lỡ một bước, chạm lại",kg82Col("--gold","#8f5f0c"))}else{kg82Pluck(0,false);endRound(inp)}});
  KG82.peek=()=>phase==="play"?C.client(...pos[seq[inp]]):null;next();raf=requestAnimationFrame(frame);return()=>{stop=true;phase="";cancelAnimationFrame(raf)}}
@@ -344,10 +375,10 @@ function kg82Aim(box,env){const C=kg82Canvas(box,.95,420),{g,W,H}=C;const pot=en
   const x=lock?flyX:pos(now);{const pz=lock?kg82FxPop(flyAt,now):1;g.save();g.translate(x,H*.16);g.scale(pz,pz);g.fillStyle="#8a2a1e";if(pz>1){g.shadowColor=BAL.mgFx.glow;g.shadowBlur=BAL.mgFx.blur}g.beginPath();g.moveTo(0,4);g.lineTo(-9,-12);g.lineTo(9,-12);g.closePath();g.fill();g.restore();if(lock)kg82FxRing(g,x,H*.16-4,16,flyAt,now)}
   if(lock&&now<flyAt+350){const kk=(now-flyAt)/350;const yy=H*.16+((pot?ty-50*kz:ty)-H*.16)*kk;if(!kg82Spr(g,an,flyX,yy,46*kz,null,{rot:Math.PI/2,ax:1,ay:.5})){g.strokeStyle="#4a3010";g.lineWidth=2;g.beginPath();g.moveTo(flyX,yy-20);g.lineTo(flyX,yy);g.stroke()}}
   kg82DrawPops(g,pops,now)}
- function frame(now){if(stop)return;env.hud({score:`${Math.round(10*pts/N)}/10`,round:`Hồi ${Math.min(k+1,N)}/${N}`,time:`${N-k} ${pot?"tên":"phát"}`});draw(now);raf=requestAnimationFrame(frame)}
+ function frame(now){if(stop)return;env.hud({score:mgLive(env,10*(pts+N-k)/N),round:`Hồi ${Math.min(k+1,N)}/${N}`,time:`${N-k} ${pot?"tên":"phát"}`});draw(now);raf=requestAnimationFrame(frame)}
  function shoot(){if(lock||stop)return;const now=performance.now();const x=pos(now);const d=Math.abs(x-cx)/A/(1+(env.lv||0)*.06)/mgTol(env);const q=d<.08?1:d<.2?.75:d<.35?.5:d<.55?.25:0;lock=true;flyAt=now;flyX=x;
   setTimeout(()=>{pts+=q;if(q>0)shots.push({x:cx+(x-cx)*(pot?.35:.55)});kg82Pop(pops,cx,ty-80,q===1?(pot?"Trúng giữa bình!":"Hồng tâm!"):q>=.5?"Trúng":q>0?"Sượt qua":"Trượt",q>=.5?kg82Col("--good","#2d7a52"):q>0?kg82Col("--gold","#8f5f0c"):kg82Col("--red","#c23b22"));kg82Pluck(k,q>0);
-   k++;if(k>=N){stop=true;draw(performance.now());return setTimeout(()=>env.end((10*pts/N)),600)}setTimeout(()=>{lock=false;t0=performance.now()-Math.random()*1500},450)},360)}
+   k++;env.hud({score:mgLive(env,10*(pts+N-k)/N)});/* review/mg-score-same: the mark moves on the shot itself (the frame loop stops after the last one) */if(k>=N){stop=true;draw(performance.now());return setTimeout(()=>env.end((10*pts/N)),600)}setTimeout(()=>{lock=false;t0=performance.now()-Math.random()*1500},450)},360)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();shoot()});const kd=e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();shoot()}};document.addEventListener("keydown",kd);
  KG82.peek=()=>{if(lock||stop)return null;const x=pos(performance.now());return Math.abs(x-cx)/A<.04?C.client(W/2,H*.8):null};
  /* hint hook (KIT §13.7 guided round): tap anywhere on the board; soon = the marker reaches the centre within a reaction time */
@@ -356,13 +387,69 @@ function kg82Aim(box,env){const C=kg82Canvas(box,.95,420),{g,W,H}=C;const pot=en
 const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,pattern:kg82Pattern,steps:kg82Steps,aim:kg82Aim};
 
 /* ---------- running one game inside the frame ---------- */
-function kg82Play(kind,onEnd){const box=kg82Box();if(!box)return;box.classList.remove("kgintro");box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";{const d=kg82El();if(d){d.classList.add("kg-run");d.classList.remove("kg-idle")}}
- let done=false,dead=false,stop=null;const env={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:raw=>{if(done)return;done=true;clearTimeout(guard);const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.rawF=raw;onEnd(mgGrade(raw,kind))}};/* mg-balance: engines pass a float; graded by BAL.mgTier.gamma */
- const guard=setTimeout(()=>env.end(0),97500);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};
+function kg82Play(kind,onEnd){kgPay();const box=kg82Box();if(!box)return;box.classList.remove("kgintro");box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";{const d=kg82El();if(d){d.classList.add("kg-run");d.classList.remove("kg-idle")}}
+ let done=false,dead=false,stop=null;const env={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:raw=>{if(done)return;done=true;clearTimeout(guard);KG82.quit=null;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.rawF=raw;const gm=raw===0&&KG82.gaveUp?0:mgGrade(raw,kind);kg82Set0("score",`${gm}/10`);/* review/mg-score-same: the board ends on the mark given */onEnd(gm)}};/* mg-balance: engines pass a float; graded by BAL.mgTier.gamma */
+ let guard=0;KG82.gaveUp=0;if(KG82.giveUp){KG82.giveUp=0;KG82.gaveUp=1;env.end(0);return}/* KIT §13.9 kit ✕ «Quay lại» on the rules screen: given up before «Sẵn sàng» = the caller's own 0/10 result, no board, no clock */
+ guard=setTimeout(()=>env.end(0),97500);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};KG82.quit=()=>{KG82.gaveUp=1;env.end(0)};/* §13.9: given up during play */
  /* the board paintings load first (≤2.5 s), then the game starts */
  kg82Preload(kind).then(()=>{if(dead||done)return;try{stop=KG82_ENG[KG82_KIND[kind].e](box,env)}catch(e){console.error(e);env.end(5)}})}
 function kg82Word(raw){return mgWord(raw)}/* thresholds in BAL.mgTier.word (jmgt) */
 function kg82Norm(st){if(!st)return[];if(Array.isArray(st))return st.filter(x=>x&&x[1]);return Object.entries(st).filter(([k,v])=>v&&typeof v==="number").map(([k,v])=>[(typeof NAMES!=="undefined"&&NAMES[k])||k,v])}
+
+/* =============== KIT §13.9 · THE WAY BACK «Quay lại» on EVERY mini-game screen (owner 20/11 ~04:45Z, review/mg-back) ===============
+   Owner: "thêm cho tôi một cái option là cái chữ X hoặc là chữ go back, quay lại, để mà khi mà tôi vào một cái game mà tôi không có muốn thì tôi có thể
+   go back để tôi ra tôi chọn cái game lại." ONE kit ✕ (jk4 kitXHTML, label «Quay lại») in the header of the shared game frame (kg82Open), on the rules
+   screen, during «Hướng dẫn», during play and on the result screen. What it does, in this order:
+     0. KG82.backPre (before «Sẵn sàng» only; cleared by «Sẵn sàng», by any result screen, by kg82Close): a FREE back — the game closes, nothing played,
+        nothing spent. Callers that cost something only REMEMBER the charge until «Sẵn sàng» (kgDefer / kgPay below: lessons j23 + j2, practice j83,
+        jrcp teacher, jveil craft, jsgame paid choice), so the back has nothing to undo (no snapshot, no refund: spend() never ran); KG82.preBack = the
+        caller's own clean-up for that back (jaudit works deck card: the card untaken); a caller with nothing charged sets backPre itself (jtd: its own
+        «Thôi, để lúc khác · không tốn gì»); jaudit's pending cost for the unplayed game is dropped;
+     1. KG82.back (a caller with nothing at stake, set right after kg82Open — Thử tay: back to the kind list, the kind not saved): the game closes, back() runs;
+        KG82.backAsk = the confirm lines asked first while a board is live (Thử tay: the rounds played of this kind are not kept);
+     2. a result screen (jk4 kitOvBtn: #kg82ok / #kg92ok): presses it, the caller's own result applies (unchanged 32.10 behaviour); a screen whose
+        only way on is another button (jsgame «Ra tay», jtoil result, Nghiệm thân blood scene) names it in KG82.xdo — the ✕ runs it, no confirm;
+     3. otherwise = GIVE UP (laws 2/3: leaving is never a free escape from what the caller charged or staked): a kit confirm «Bỏ cuộc?», then
+        the caller's OWN lose path with 0/10 — during play KG82.quit() (kg82Play / sgEng / j92 / jroute / jtoil end their run with 0), on the rules
+        screen the «Sẵn sàng» button runs with KG82.giveUp set (the run ends at once with 0, no board, no clock); «Hướng dẫn» is put back first.
+   KG82.quitAsk = the caller's own confirm lines when its lose result is not «0/10» (jtoil: Để mộc). Callers never draw their own back button;
+   kg82Close clears back / backAsk / quit / quitAsk / xdo. Test: node dev/test/mg-back.js. */
+function kg82BackX(d){try{if(!d||typeof kitXHTML!=="function"||d.querySelector(".kit-x[data-kitx=kgback]"))return;const h=d.querySelector(".kph");
+ const html=kitXHTML('data-kitx="kgback"',"Quay lại");if(h){if(getComputedStyle(h).position==="static")h.style.position="relative";h.insertAdjacentHTML("beforeend",html)}
+ else{d.insertAdjacentHTML("afterbegin",html);d.firstElementChild.classList.add("kxabs")}
+ d.querySelector(".kit-x[data-kitx=kgback]").addEventListener("click",e=>{e.stopPropagation();e.preventDefault();kg82Back()})}catch(e){console.error("kg82BackX",e)}}
+/* the confirm is the kit's (j79 kitConfirm on #modal); body.kg82cf (showModal rewrites #modal's own class) lifts it over the game layer #ov while it is open */
+function kg82Ask(lines,yes,onYes,title,no){if(typeof kitConfirm!=="function"){onYes();return}const B=document.body.classList,off=()=>B.remove("kg82cf");
+ B.add("kg82cf");kitConfirm({title:title||(yes==="Bỏ cuộc"?"Bỏ cuộc?":"Quay lại?"),lines,yes,no:no||"Chơi tiếp",onYes:()=>{off();onYes()},onNo:off})}
+function kg82Back(){if(!kg82El())return;
+ if(typeof KG82.backPre==="function"&&KG82.phase!=="play"&&KG82.phase!=="result"){const f=KG82.backPre;KG82.backPre=null;KG82.payOnGo=null;kg82Close();try{f()}catch(e){console.error(e)}
+  /* jaudit (b)/(c): the cost it holds pending for this game is dropped — a game closed unplayed costs nothing — so the next act is not blocked */
+  window.__aaPend=null;window.__aaTitle=null;try{if(S&&S.mg&&S.mg.cost)S.mg=null;save();render()}catch(e){}return}
+ if(typeof KG82.back==="function"){const f=KG82.back,live=KG82.phase==="play"&&!KG82.tut&&KG82.run;
+  const go=()=>{kg82Close();try{f()}catch(e){console.error(e)}};if(live&&KG82.backAsk)kg82Ask(KG82.backAsk,"Quay lại",go);else go();return}
+ const ok=typeof kitOvBtn==="function"?kitOvBtn():null;if(ok){ok.click();return}
+ if(typeof KG82.xdo==="function"){const f=KG82.xdo;f();return}
+ const live=KG82.phase==="play"&&!KG82.tut&&typeof KG82.quit==="function";
+ kg82Ask(KG82.quitAsk||[live?"Ván đang chơi dừng lại, tính như thua: 0/10 phần.":"Chưa chơi mà rời đi thì tính như bỏ cuộc: 0/10 phần.","Thưởng phạt theo đúng luật của việc này."],"Bỏ cuộc",kg82GiveUp)}
+function kg82GiveUp(){const tb=document.getElementById("kgtback");if(KG82.tut&&tb)tb.click();
+ if(KG82.phase==="play"&&typeof KG82.quit==="function"){const q=KG82.quit;KG82.quit=null;q();return}
+ const box=kg82Box(),go=box&&(box.querySelector(".kgr-go")||(KG82.ready&&box.querySelector(KG82.ready.go)));
+ if(go){KG82.giveUp=1;go.click();KG82.giveUp=0;return}
+ if(typeof KG82.quit==="function"){const q=KG82.quit;KG82.quit=null;q();return}
+ console.warn("kg82GiveUp: no lose path on this screen")}
+/* §13.9 deferred charge (rv-mg-back r2: never spend and refund — spend() moves the world): kgDefer(cost, open) runs open() with the charge only remembered;
+   kg82Open picks it up (KG82.prePay) and kgPay() takes it on «Sẵn sàng» / the quick option / any result / an outcome close. cost = {suc, bac, th, khac, tch:art}
+   (numbers as apply() takes them) or a function (jsgame's own pay). No kg82 frame (bot, no #ov) or the game did not open → charged at once, as before. */
+function kgDefer(cost,open){const fr=!window.__bot&&typeof kg82Open==="function"&&!!document.getElementById("ov");if(!fr){kgPayNow(cost);return open()}
+ KG82.prePay=cost;let r;try{r=open()}finally{const p=KG82.prePay;KG82.prePay=null;if(p)kgPayNow(p)}return r}
+function kgPayNow(c){if(!c)return;if(typeof c==="function"){c();return}const f={};["suc","bac","th"].forEach(k=>{if(c[k])f[k]=c[k]});
+ /* jaudit holds this game's cost pending (paid with its one result card when the game reports): the charge joins it, so the card still shows the whole cost */
+ const pend=[window.__aaPend,S&&S.mg&&S.mg.cost].filter((x,i,a)=>x&&typeof x==="object"&&a.indexOf(x)===i);
+ if(pend.length){pend.forEach(o=>{for(const k in f)o[k]=(o[k]||0)+f[k];if(c.khac)o.khac=(o.khac||0)+c.khac})}else{if(Object.keys(f).length)apply(f);if(c.khac)spend(c.khac)}
+ if(c.tch!=null&&typeof tchPaid==="function")try{tchPaid(c.tch)}catch(e){console.error(e)}}
+function kgPay(){const p=KG82.payOnGo;if(!p)return;KG82.payOnGo=null;KG82.backPre=null;try{if(S&&S.mg&&S.mg.pay)delete S.mg.pay}catch(e){}try{kgPayNow(p)}catch(e){console.error("kgPay",e)}
+ try{save()}catch(e){}try{if(typeof renderHUD==="function")renderHUD()}catch(e){}}
+window.kg82Back=kg82Back;window.kg82GiveUp=kg82GiveUp;window.kgDefer=kgDefer;window.kgPay=kgPay;window.kgPayNow=kgPayNow;
 
 /* =============== startContest =============== */
 function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.onDone(null);return}
@@ -431,7 +518,8 @@ window.startContest=startContest;window.playArt=playArt;
    jslap/jtd/jhd/j92 engines, the scheme games jsgame, Nghiệm thân jroute):
    kgReady(box, spec) dresses the game's FIRST screen (the intro the caller already drew, nothing runs yet, no clock):
      · a rules block on top: «Luật chơi · <name>», kit rows Môn / Luật (the kind's `how`) or the caller's own step rows, and a small looping picture of the move
-       (.kgr-demo, one of five motions by engine group: fall / swing / hold / drag / tap; still under Cảnh động off / reduced motion);
+       (.kgr-demo, one of six motions by engine group: fall / swing / hold / drag / tap / dodge; still under Cảnh động off / reduced motion;
+      dodge = mg-play2, owner OD 20/11 ~08:05Z: a lit path, a thing with the kit danger ring ✕ comes down it, the hand drags the player's piece aside and back);
      · the caller's start button (spec.go, default #kg82go; its own onclick kept) becomes «Sẵn sàng» — the clock and the board start ONLY on that tap;
      · «Hướng dẫn» beside it = kgTut: a quick guided round of the same engine on the EASIEST board (BAL.mgTier.tut + the lowest gap of BAL.ag.mg2.cal.d),
        a ghost hand (.kgt-hand) shows each move from the engine's own hint hook KG82.peek (point / drag path / button sel / hold-release), unscored, nothing
@@ -439,7 +527,7 @@ window.startContest=startContest;window.playArt=playArt;
        and puts the SAME first screen back (its buttons and handlers kept), repeatable.
    spec: kind (KG82_KIND key) | n, t, how, e (own game), steps:[[label,text]] (rows instead of Luật), go (selector), timed (false = no clock in the game),
          tutor(box, env) → stop (a game with its own engine), v (the person an engine reads as env.v), lv (tutorial board ease). Returns true when dressed. */
-const KG82_DEMO={rhythm:"fall",aim:"swing",slapbar:"swing",groom:"swing",tspluck:"swing",tssteer:"swing",hold:"hold",tdwalk:"hold",cook:"hold",tdtalk:"hold",
+const KG82_DEMO={rhythm:"fall",aim:"swing",slapbar:"swing",groom:"swing",tspluck:"swing",tssteer:"dodge",hold:"hold",tdwalk:"hold",cook:"hold",tdtalk:"hold",
  fling:"pull",calli:"drag",trace:"drag",arrange:"drag",untangle:"drag",tdthread:"drag",blend:"slide",sort:"drag",hoadien:"drag",kinh:"drag",may:"drag"};
 const KG82_HAND=`<svg viewBox="0 0 48 56" aria-hidden="true"><path d="M20 4a4 4 0 0 1 8 0v20l2.5-.6a4 4 0 0 1 4.6 2.8l.4-.1a4 4 0 0 1 4.8 2.6 4 4 0 0 1 4.7 3.3l1 7.5c.9 7-3.4 13.5-10.2 15.3l-3.3.9c-5.6 1.5-11.5-.7-14.8-5.5L8.4 38.6a3.8 3.8 0 0 1 5.9-4.8L20 39z" fill="#fff8ea" stroke="#5a3a0c" stroke-width="2.2" stroke-linejoin="round"/><path d="M28 24v9M35 27v7M41 31v5" stroke="#5a3a0c" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>`;
 function kgReadySpec(s){s=typeof s==="string"?{kind:s}:Object.assign({},s||{});const K=(s.kind&&KG82_KIND[s.kind])||{};
@@ -451,12 +539,12 @@ function kgReady(box,spec){box=box||kg82Box();if(!box)return false;const s=kgRea
  const old=box.querySelector(".kgr");if(old)old.remove();
  const rows=[["Môn",s.t?`${s.n} · ${s.t}`:s.n,"t"]].concat(s.steps&&s.steps.length?s.steps.map(r=>[r[0],r[1],r[2]||"t"]):s.how?[["Luật",s.how,"t"]]:[]);
  let pic="";try{pic=s.pic!=null?s.pic:(s.kind&&!["duho","den","may"].includes(s.kind)?`img/kit/mg-${kg82BgName(s.kind)}.webp`:"")}catch(e){}/* the board painting under the picture of the move (no painting: plain card) */
- const html=`<div class="kgr"><h4 class="kpst">Luật chơi · ${s.n}</h4>${kg82Rows(rows)}${kgReadyDemo(KG82_DEMO[s.e]||"tap",pic)}`+
+ const html=`<div class="kgr"><h4 class="kpst">Luật chơi · ${s.n}</h4>${kg82Rows(rows)}${(window.NWB_DEMO&&window.NWB_DEMO[s.e]?window.NWB_DEMO[s.e]():kgReadyDemo(KG82_DEMO[s.e]||"tap",pic))}`+
   `<p class="kpnote kgr-note">${s.timed?"Đọc kỹ luật, xem hình mẫu; chưa tính giờ. Chạm «Sẵn sàng» thì ván mới bắt đầu và mới tính giờ.":"Đọc kỹ luật, xem hình mẫu. Chạm «Sẵn sàng» thì ván mới bắt đầu."}</p></div>`;
  box.insertAdjacentHTML("afterbegin",html);box.classList.add("kgintro");
  const go=box.querySelector(s.go);
  if(go){if(!go.dataset.kgrLabel)go.dataset.kgrLabel=go.textContent;go.innerHTML=`Sẵn sàng<small>${s.timed?"từ lúc này mới tính giờ":"bắt đầu chơi"}</small>`;go.classList.add("kgr-go");
-  go.addEventListener("click",()=>{const d=kg82El();if(d)d.classList.remove("kg-ready");KG82.ready=null},{capture:true});
+  go.addEventListener("click",()=>{const d=kg82El();if(d)d.classList.remove("kg-ready");KG82.ready=null;KG82.backPre=null;kgPay()/* §13.9: «Sẵn sàng» takes the remembered charge; from here on the back is no longer free */},{capture:true});
   if(kgReadyCan(s)&&!box.querySelector("#kgrtut")){go.insertAdjacentHTML("afterend",`<button type="button" class="${kg82Btn(true)} kgr-tut" id="kgrtut">Hướng dẫn<small>chơi thử một hồi dễ, không tính phần, thử lại được</small></button>`);
    box.querySelector("#kgrtut").onclick=()=>kgTut(box,s)}}
  const d=kg82El();if(d)d.classList.add("kg-ready");return true}
@@ -511,6 +599,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 /* layout only (colours and chrome come from the kit) */
 (function(){const st=document.createElement("style");st.id="kg82-css";st.textContent=`
 #ov .mg.kg82{width:100%;max-width:560px}
+body.kg82cf #modal{z-index:40}
 .kg82cv{display:block;margin:0 auto;touch-action:none;user-select:none;-webkit-user-select:none;border-radius:var(--k-rad,8px);max-width:100%}
 #kg82,#kg82 canvas,#kg82 button{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;user-select:none}
 .kg82act{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 4px}.kg82act button{flex:1 1 200px;display:flex;flex-direction:column;align-items:center;justify-content:center}
@@ -518,7 +607,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 .kg82opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}.kg82opts button{min-height:48px;text-align:center;justify-content:center}
 .kg82quiz .kb{font-size:1rem}.kg82quiz .kpnote{min-height:1.3em;margin-top:8px}.kg82 .kfact small{display:block}.kg82 .kgrow>b{flex:none;white-space:nowrap;padding-left:6px}
 /* KIT §13.7 rules screen + guided round (mg-ready-guide); colours from the kit tokens only */
-.kg82.kg-ready .kghow,.kg82.kg-tut .kghow{display:none}
+.kg82 .kghow{display:none}/* owner OD 20/11 ~05:10Z: no text in play — the rules sentence lives on the rules screen (.kgr) and in «Hướng dẫn»; never above the board */
 .kgr{margin:0 0 6px}.kgr .kpst{margin-top:0}.kgr-note{margin:8px 0 2px}
 .kgr-demo{margin:8px auto 2px;max-width:340px}
 .kgr-st{position:relative;height:118px;border:1px solid var(--k-hair);border-radius:var(--k-rad,8px);overflow:hidden;background:var(--k-card) center/cover no-repeat}
@@ -552,6 +641,16 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 .kgr-demo[data-m=tap] .kgr-obj{opacity:.25;top:calc(50% - 11px);left:calc(25% - 11px);animation:kgrGlow 2.4s step-end infinite}
 .kgr-demo[data-m=tap] .kgr-o2{left:calc(50% - 11px);animation-delay:.8s}.kgr-demo[data-m=tap] .kgr-o3{left:calc(75% - 11px);animation-delay:1.6s}
 .kgr-demo[data-m=tap] .kgr-hand{animation:kgrTap3 2.4s ease-in-out infinite}
+.kgr-demo[data-m=dodge] .kgr-line{opacity:1;top:0;bottom:0;height:auto;left:36%;right:36%;border-radius:0;background:var(--gold);opacity:.5;box-shadow:0 0 14px var(--gold);border-left:3px solid var(--k-card);border-right:3px solid var(--k-card)}
+.kgr-demo[data-m=dodge] .kgr-obj{opacity:1;left:calc(50% - 13px);width:26px;height:26px;background:var(--k-card);box-shadow:none;border:3px solid var(--bad,#c23b22);animation:kgrDrop 2.4s linear infinite}
+.kgr-demo[data-m=dodge] .kgr-obj::after{content:"✕";position:absolute;right:-9px;top:-9px;width:14px;height:14px;border-radius:50%;background:var(--bad,#c23b22);color:var(--k-card);font:700 10px/14px var(--body);text-align:center}
+.kgr-demo[data-m=dodge] .kgr-o2{top:auto;bottom:16%;width:20px;height:20px;background:var(--gold);border:0;box-shadow:0 0 10px var(--gold);animation:kgrDodge 2.4s ease-in-out infinite}
+.kgr-demo[data-m=dodge] .kgr-o2::after{content:none}
+.kgr-demo[data-m=dodge] .kgr-o3{display:none}
+.kgr-demo[data-m=dodge] .kgr-hand{top:auto;bottom:-22%;animation:kgrDodgeH 2.4s ease-in-out infinite}
+@keyframes kgrDrop{0%{top:-24%}100%{top:112%}}
+@keyframes kgrDodge{0%,40%{left:calc(50% - 10px)}54%,86%{left:calc(22% - 10px)}97%,100%{left:calc(50% - 10px)}}
+@keyframes kgrDodgeH{0%,40%{left:50%}54%,86%{left:22%}97%,100%{left:50%}}
 @keyframes kgrFall{0%{top:-12%;opacity:1}62%{top:calc(74% - 11px);opacity:1}70%{top:calc(74% - 11px);opacity:0}100%{opacity:0}}
 @keyframes kgrTapAt{0%,52%{transform:translate(-48%,10%)}62%{transform:translate(-48%,-6%) scale(.92)}74%,100%{transform:translate(-48%,10%)}}
 @keyframes kgrRing{0%,60%{opacity:0;transform:scale(.6)}64%{opacity:1}80%,100%{opacity:0;transform:scale(1.8)}}
@@ -581,3 +680,17 @@ const KG82_MGL={theu:["Thêu: nhớ mẫu thêu","theu"],nau:["Nấu nướng: c
 function kg82Lesson(k){const [t,kind]=KG82_MGL[k];return[t,KG82_KIND[kind].how,(b,lv,end)=>{b.innerHTML="";let stop=null,dead=false;KG82.ctx="hoc";const T=mgSet(kind,{occ:"hoc",lv}),L=BAL.mgTier.lesson;const env={kind,lv:T.ease,hud:()=>{},end:raw=>{KG82.peek=()=>null;raw=mgGrade(raw,kind);end(raw>=L[1]?3:raw>=L[0]?2:1)}};
  kg82Preload(kind).then(()=>{if(dead)return;try{stop=KG82_ENG[KG82_KIND[kind].e](b,env)}catch(e){console.error(e);end(1)}});return()=>{dead=true;if(stop)stop()}}]}
 (function(){if(typeof openMG!=="function"||typeof MG==="undefined")return;const o0=openMG;openMG=function(k){try{if(KG82_MGL[k])MG[k]=kg82Lesson(k)}catch(e){}return o0.apply(this,arguments)}})();
+
+/* KIT §13.x NO TEXT IN PLAY (owner OD 20/11 ~05:10Z: "không có một cái mini game nào mà có chữ hết trơn"): ONE kit pass over the live game frame, for every kind and caller.
+   Inside the play area (#kg82box and .kg82act; never the rules block .kgr, the guided bar .kgt-bar, the result .kgres) a button shows a SIGN (? hint, ✓ done, ↶ ↷ tilt, ♨ fan, ● other)
+   with its word kept only in the tooltip / aria-label, a `small` line is hidden, and a kit row (.krl label + sentence) is hidden when it holds no number, else only its number stays. */
+(function(){const SIGN=[[/Gợi ý/,"?"],[/Nghiêng trái/,"↶"],[/Nghiêng phải/,"↷"],[/Quạt/,"♨"],[/xong|Xong|Dâng|Dán|Nộp|Chấm/,"✓"]];
+ const inPlay=e=>e.closest("#kg82box,.kg82act")&&!e.closest(".kgr,.kgt-bar,.kgres");
+ function pass(){try{if(KG82.ready||KG82.phase==="tut"||KG82.tut||KG82.phase==="result"||KG82.phase==="intro"||document.querySelector("#kg82ok,#mgcal-copy,#mgcal-seq,#mgcal-x"))return;/* review fix: a result / intro / Thử tay screen is not play: its buttons keep their words */document.querySelectorAll(".kg82 button,#kg82box button,.kg82act button").forEach(b=>{if(!inPlay(b)||b.dataset.kgsign||/kgr|kgt/.test(b.id+" "+b.className)||b.id==="kg82go"||b.dataset.kgrLabel||b.closest(".kgr-bt,.kgr-acts,.kgrb"))return;const t=b.textContent.replace(/\s+/g," ").trim();if(!/\p{L}/u.test(t))return;
+   let s="●";for(const [re,g] of SIGN)if(re.test(t)){s=g;break}b.dataset.kgsign=s;if(!b.title)b.title=t;b.setAttribute("aria-label",t);b.textContent=s});
+  document.querySelectorAll("#kg82box small,.kg82act small").forEach(e=>{if(inPlay(e))e.hidden=true});
+  document.querySelectorAll("#kg82box .krl").forEach(l=>{if(!inPlay(l))return;const row=l.parentElement;if(!row||row.dataset.kgrow)return;row.dataset.kgrow=1;
+   const rest=row.textContent.replace(l.textContent,"");if(!/\d/.test(rest)){row.hidden=true;return}l.hidden=true;
+   const w=document.createTreeWalker(row,NodeFilter.SHOW_TEXT);const ns=[];let n;while(n=w.nextNode())if(!l.contains(n))ns.push(n);ns.forEach(x=>{if(!x.parentElement.closest("b")&&/\p{L}/u.test(x.nodeValue))x.nodeValue=x.nodeValue.replace(/[^\d\s\/]+/gu,"")})})}catch(e){}}
+ let q=0;try{new MutationObserver(()=>{if(q)return;q=setTimeout(()=>{q=0;pass()},30)}).observe(document.body,{childList:true,subtree:true})}catch(e){}
+ window.kg82Signs=pass})();

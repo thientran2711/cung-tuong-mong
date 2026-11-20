@@ -140,7 +140,11 @@ PEND.vlget=pp=>{if(!S||S.dead)return null;const sc=S.scar?scarOf(S):null;const O
 PEND.vlcraft=pp=>{const lv=vlLv(S),a=ARTS.find(x=>x.k===vlArt());const O=[0,1,2].map(m=>vlOpt({n:`Kết bằng ${VL_MATN[m]}`,fx:VL.mat[m]?{bac:-VL.mat[m]}:{},x:`tốn: ${VL.craftK} khắc, Sức -${VL.craftSuc} · thành: ${vlGradeOdds(S,m)}`,go:()=>vlCraftRun(m)}));
  O.push({n:"Thôi",fx:{},j67:"tốn: không tốn gì"});
  return{who:pMe(),t:`<p>Tự tay kết mạng che mặt bằng trò thêu. Phẩm của mạng là phần chơi, cộng ${a?a.n:"Thêu thùa"} bậc ${lv}, cộng vật liệu: thường thêm 0, tốt thêm 1, quý thêm 2.</p><p class="past">Dưới ${BAL.cut.veil[0]} ra mạng Thường, từ ${BAL.cut.veil[0]} Tinh phẩm, từ ${BAL.cut.veil[1]} Trân phẩm, từ ${BAL.cut.veil[2]} Tuyệt phẩm. Vật liệu quý ra kiểu mạng phẩm cao. Chơi được 5 phần: vải sa ra ${WD_GRADE[vlG({k:vlCraftOut(S,0,5)})]}, dây bạc ra ${WD_GRADE[vlG({k:vlCraftOut(S,1,5)})]}, kim tuyến ra ${WD_GRADE[vlG({k:vlCraftOut(S,2,5)})]}.</p>`,o:O}};
-function vlCraftRun(m){if(!can(VL.craftK)||S.suc<VL.craftSuc){if(VL.mat[m])apply({bac:VL.mat[m]});return}spend(VL.craftK);apply({suc:-VL.craftSuc});vlCraftGame(m)}
+function vlCraftRun(m){if(!can(VL.craftK)||S.suc<VL.craftSuc){if(VL.mat[m])apply({bac:VL.mat[m]});return}
+ /* KIT §13.9: the khắc + Sức are taken on «Sẵn sàng» / «Kết nhanh» (kgDefer); the ✕ before it = free back (the material comes back with jaudit's pending cost).
+    co-op thin F6b: a start in her context on the host is captured (vlCraftGame plays on her phone) → kgDefer charges at once there, as before */
+ const pay={khac:VL.craftK,suc:-VL.craftSuc};if(typeof kgDefer==="function"&&typeof playArt==="function"){kgDefer(pay,()=>vlCraftGame(m));return}
+ spend(VL.craftK);apply({suc:-VL.craftSuc});vlCraftGame(m)}
 /* co-op thin F6b: the game part (opened on HER phone when the start ran in her context on the host; mgEnd 12 = her end is the intent) and
    the ONE named end (the host runs it in her context) */
 function vlCraftGame(m){if(typeof playArt==="function"){try{playArt({art:vlArt(),title:"Kết mạng che mặt",quick:{n:"Kết nhanh",sure:1,win:"không ra mạng, vật liệu trả lại"},mgEnd:12,onDone:(raw,o)=>vlCraftEnd(m,raw,!!(o&&o.skipped))});return}catch(x){console.error(x)}}vlCraftEnd(m,5,true)}

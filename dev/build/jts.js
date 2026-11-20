@@ -54,43 +54,48 @@ function tsEngPluck(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const N=12,
  const risk=KG82.tsRisk||null;let alarm=null;KG82.tsGuard=null;
  function spawn(tt){const big=Math.random()<.55;L.push({x:W+40,y:zy+(zy1-zy)*(.2+Math.random()*.65),r:big?26+Math.random()*7:16+Math.random()*5,big,born:tt,st:0});made++}
  function draw(now){const tt=now-t0;kg82Bg(g,W,H,"duho",.05,.5);
-  g.save();g.fillStyle="rgba(240,208,112,.16)";g.fillRect(zx0,zy,zx1-zx0,zy1-zy);g.strokeStyle="rgba(240,208,112,.85)";g.setLineDash([6,5]);g.lineWidth=2;g.strokeRect(zx0,zy,zx1-zx0,zy1-zy);g.restore();
-  g.font=`700 14px ${kg82Col("--display","serif")}`;g.textAlign="center";kg82Lbl(g,"Tầm tay",(zx0+zx1)/2,zy1-8);
+  kg82FxLane(g,zx0,zx1,zy,zy1,W);/* mg-play2 (law 11, faint guide): the reach zone = the kit lit lane (was a .16 fill + thin dashed line) */
   for(const s of L){if(s.st)continue;if(!kg82Spr(g,"hat-lotus",s.x,s.y,s.r*2.2,null,{alpha:s.big?1:.88}))kg82Blossom(g,s.x,s.y,s.r*.8,"#e48aa4",false)}
-  if(alarm&&!alarm.done){g.font=`700 15px ${kg82Col("--display","serif")}`;g.textAlign="left";kg82Lbl(g,"Lau sậy bên bờ khẽ động",10,22,W-20,true)}
+  if(alarm&&!alarm.done){g.font=`700 26px ${kg82Col("--display","serif")}`;g.textAlign="left";g.fillStyle="#d9482b";kg82Lbl(g,"!",14,28,40,true)}
   kg82DrawPops(g,pops,now)}
  function frame(now){if(stop)return;const tt=now-t0;
   if(!alarm||alarm.done){if(tt>next&&made<N){spawn(tt);next=tt+1500+Math.random()*700}}
   for(const s of L){if(s.st)continue;s.x-=spd*16;if(s.x<-40)s.st=2}
-  if(risk&&!alarm&&tt>dur*.5){alarm={a:tt,done:false};const b=document.createElement("button");b.className="kgbtn ts-guard";b.type="button";b.textContent="Hộ giá";b.onclick=()=>{if(alarm.done)return;alarm.done=true;KG82.tsGuard=1;b.remove();kg82Pop(pops,W/2,H*.3,"Hộ giá kịp lúc","#2d7a52")};box.appendChild(b);alarm.btn=b}
-  if(alarm&&!alarm.done&&tt-alarm.a>3500){alarm.done=true;KG82.tsGuard=0;if(alarm.btn)alarm.btn.remove();kg82Pop(pops,W/2,H*.3,"Cấm quân đã xông tới","#8a7350")}
-  const left=L.filter(s=>!s.st).length;const done=made>=N&&!left;env.hud({score:`${Math.round(10*Math.min(1,credit/(N*mgFull(env,.62))))}/10`,round:`Hồi ${Math.min(N,made)}/${N}`,time:`${Math.max(0,Math.ceil((dur-tt)/1000))} giây`});
+  if(risk&&!alarm&&tt>dur*.5){alarm={a:tt,done:false};const b=document.createElement("button");b.className="kgbtn ts-guard";b.type="button";b.innerHTML=NWB.ic("shield");b.setAttribute("aria-label","Hộ giá");b.title="Hộ giá";b.onclick=()=>{if(alarm.done)return;alarm.done=true;KG82.tsGuard=1;b.remove();kg82Pop(pops,W/2,H*.3,NWB.POP.ok,"#2d7a52")};box.appendChild(b);alarm.btn=b}
+  if(alarm&&!alarm.done&&tt-alarm.a>3500){alarm.done=true;KG82.tsGuard=0;if(alarm.btn)alarm.btn.remove();kg82Pop(pops,W/2,H*.3,NWB.POP.bad,"#8a7350")}
+  const left=L.filter(s=>!s.st).length;const done=made>=N&&!left;env.hud({score:mgLive(env,10*Math.min(1,Math.max(0,credit+L.reduce((a,s)=>a+(s.st?0:s.big?1:.45),0)+(N-made)*(.55+.45*.45))/(N*mgFull(env,.62)))),/* review/mg-score-same: the mark in hand (lotuses still coming counted at their mean worth) */round:`Hồi ${Math.min(N,made)}/${N}`,time:`${Math.max(0,Math.ceil((dur-tt)/1000))} giây`});
   draw(now);if(done||tt>dur+4000){stop=true;if(risk&&KG82.tsGuard==null)KG82.tsGuard=0;return env.end(10*Math.min(1,credit/(N*mgFull(env,.62))))}raf=requestAnimationFrame(frame)}
  C.cv.addEventListener("pointerdown",e=>{e.preventDefault();if(stop)return;const [x,y]=C.at(e);let best=null,bd=1e9;for(const s of L){if(s.st)continue;const d=Math.hypot(s.x-x,s.y-y);if(d<s.r*1.25&&d<bd){bd=d;best=s}}
-  if(!best)return;if(best.x>=zx0&&best.x<=zx1){best.st=1;credit+=best.big?1:.45;kg82Pop(pops,best.x,best.y-best.r,best.big?"Sen nở":"Búp sen",best.big?"#2d7a52":"#8f5f0c")}else{credit-=.15;kg82Pop(pops,best.x,best.y-best.r,"Xa quá","#c23b22")}});
+  if(!best)return;if(best.x>=zx0&&best.x<=zx1){best.st=1;credit+=best.big?1:.45;kg82Pop(pops,best.x,best.y-best.r,best.big?NWB.POP.s2:NWB.POP.s1,best.big?"#2d7a52":"#8f5f0c")}else{credit-=.15;kg82Pop(pops,best.x,best.y-best.r,NWB.POP.bad,"#c23b22")}});
  KG82.peek=()=>{const s=L.find(s=>!s.st&&s.x>zx0+10&&s.x<zx1-10);return s?C.client(s.x,s.y):null};
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf);const b=box.querySelector(".ts-guard");if(b)b.remove()}}
-function tsEngSteer(box,env){const C=kg82Canvas(box,1.05,470),{g,W,H}=C;const lv=env.lv||0,dur=20000;const t0=performance.now();let stop=false,raf=0,lx=W/2,tx=W/2,wind=0,good=0,tot=0,hit=0;const pops=[];
+function tsEngSteer(box,env){const C=kg82Canvas(box,1.05,470),{g,W,H}=C;const lv=env.lv||0,dur=20000;const t0=performance.now();let stop=false,raf=0,lx=W/2,tx=W/2,wind=0,good=0,tot=0,hit=0,hitP=0;const pops=[];KG82.denHit=0;
  const pads=[];let nextPad=900;const ly=H*.72;
  /* review/mg-snap: the channel swings wider than the scoring band (BAL.mgTier.lev.den), so a lantern left in the middle drifts out of the light; was a typed swing .22·W
     against a band .8·(.2+.012·lv)·W that covered it (idle play scored 5.5–8.8) */
  const SW=mgLev(env,"den","swing"),BD=mgLev(env,"den","band");
  function chan(tt){return W/2+Math.sin(tt/2100)*W*SW}
+ /* mg-play2 (owner OD 20/11 ~08:05Z): the path = the kit lit lane (kg82FxLane, BAL.mgFx: board outside darkened, bright core + glowing edges), the lotus pads wear
+    the kit danger ring ✕ (kg82FxBad: things to AVOID, never to catch), a hit = red burst + the pad sinks + the lantern shakes; no words on the board */
  function draw(now){const tt=now-t0;kg82Bg(g,W,H,"den",.04,.55);const cx=chan(tt),cw=W*BD/.8;
-  const gr=g.createLinearGradient(cx-cw,0,cx+cw,0);gr.addColorStop(0,"rgba(255,240,190,0)");gr.addColorStop(.5,"rgba(255,240,190,.32)");gr.addColorStop(1,"rgba(255,240,190,0)");g.fillStyle=gr;g.fillRect(cx-cw,0,cw*2,H);
-  for(const p of pads)kg82Spr(g,"hat-lotus",p.x,p.y,p.r*2.1,null,{alpha:.95});
-  if(!kg82Spr(g,"doden-lantern",lx,ly,48,null,{glow:hit>now?0:1}))kg82Blossom(g,lx,ly,16,"#e06030",true);
-  g.font=`700 13px ${kg82Col("--display","serif")}`;g.textAlign="center";kg82Lbl(g,wind>.15?"→":wind<-.15?"←":"·",W/2,18);kg82DrawPops(g,pops,now)}
+  kg82FxLane(g,cx-cw*.8,cx+cw*.8,0,H,W);
+  for(const p of pads){const sh=kg82FxBad(g,p.x,p.y,p.r*1.02,now,p.hitAt||0);kg82Spr(g,"hat-lotus",p.x+sh,p.y,p.r*2.1,null,{alpha:p.hit?.4:.95})}
+  const lh=hitP?kg82FxBad.shake(now,hitP):0;
+  if(!kg82Spr(g,"doden-lantern",lx+lh,ly,48,null,{glow:hit>now?0:1}))kg82Blossom(g,lx+lh,ly,16,"#e06030",true);
+  kg82DrawPops(g,pops,now)}
  function frame(now){if(stop)return;const tt=now-t0;wind=Math.sin(tt/1700)*.6+Math.sin(tt/530)*.25;
   lx+=(tx-lx)*.12+wind*1.6;lx=cl(lx,20,W-20);
   if(tt>nextPad){pads.push({x:20+Math.random()*(W-40),y:-30,r:22+Math.random()*10});nextPad=tt+900+Math.random()*700}
   for(const p of pads)p.y+=H/(5200+lv*300)*16;for(let i=pads.length-1;i>=0;i--)if(pads[i].y>H+40)pads.splice(i,1);
   const cx=chan(tt),cw=W*BD/.8;tot++;if(Math.abs(lx-cx)<cw*.8)good++;
-  for(const p of pads){if(!p.hit&&Math.hypot(p.x-lx,p.y-ly)<p.r+14){p.hit=1;good=Math.max(0,good-40);hit=now+500;kg82Pop(pops,lx,ly-30,"Chạm hoa sen","#c23b22")}}
-  const sc=Math.round(10*good/Math.max(1,tot));env.hud({score:`${sc}/10`,round:`Hồi 1/1`,time:`${Math.max(0,Math.ceil((dur-tt)/1000))} giây`});
+  for(const p of pads){if(!p.hit&&Math.hypot(p.x-lx,p.y-ly)<p.r+14){p.hit=1;p.hitAt=now;hitP=now;KG82.denHit=(KG82.denHit||0)+1;good=Math.max(0,good-40);hit=now+500;kg82Pop(pops,lx,ly-30,"✕",kg82Col("--bad","#c23b22"));try{kg82Pluck(0,false)}catch(e){}}}
+  const all=Math.max(tot,tot*dur/Math.max(1,tt));env.hud({score:mgLive(env,10*cl((good+all-tot)/Math.max(1,all),0,1)),round:`Hồi 1/1`,time:`${Math.max(0,Math.ceil((dur-tt)/1000))} giây`});
   draw(now);if(tt>dur){stop=true;return env.end(10*good/Math.max(1,tot))}raf=requestAnimationFrame(frame)}
  const mv=e=>{const [x]=C.at(e);tx=x};C.cv.addEventListener("pointerdown",e=>{e.preventDefault();mv(e)});C.cv.addEventListener("pointermove",e=>{if(e.buttons||e.pointerType==="touch")mv(e)});
- KG82.peek=()=>C.client(chan(performance.now()-t0),ly);
+ /* guided round (KIT §13.7): the hand DRAGS the lantern to the lit path, and steps aside from a lotus pad about to reach it (shows dodging) */
+ const safeX=()=>{const tt=performance.now()-t0,cx=chan(tt),cw=W*BD/.8;let x=cx;for(const p of pads){if(p.hit||p.y>ly+p.r||p.y<ly-H*.32)continue;if(Math.abs(p.x-x)<p.r+22){const l=p.x-(p.r+30),r=p.x+(p.r+30);x=Math.abs(l-cx)<Math.abs(r-cx)&&l>20?l:r<W-20?r:l}}return cl(x,20,W-20)};
+ KG82.peek=()=>{if(stop)return null;const x=safeX();if(Math.abs(x-lx)<8)return C.client(x,ly);const a=C.client(lx,ly),b=C.client(x,ly);return{drag:[[a.x,a.y],[b.x,b.y]]}};
+ KG82.denPeek=()=>({lx,ly,pads,chan:chan(performance.now()-t0),cw:W*BD/.8,W,H,good,tot});
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf)}}
 Object.assign(KG82_ENG,{tspluck:tsEngPluck,tssteer:tsEngSteer});
 /* tsGame({kind, art, title, odds (cơ may thường 0–100), risk, ctx, intro:[rows], onDone(res)}): res {raw 0–10, skipped, guard} */

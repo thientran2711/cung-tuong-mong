@@ -310,7 +310,8 @@ function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>
  if(typeof wkDeckCard==="function"){const w0=wkDeckCard;wkDeckCard=function(){const a=w0.apply(this,arguments);if(a)a.aaMG=1;return a}}
  if(typeof act==="function"){const a0=act;act=function(i){const a=Array.isArray(deck)&&deck[i];if(!a||!a.aaMG||typeof a.go!=="function")return a0.apply(this,arguments);
   if((a.b!=null&&(S.buoi||0)!==a.b)||!can(cardCost(a))||a.done||S.dead||Q.length||!canPay(a)||busy())return;
-  a.done=1;const c={khac:cardCost(a)};KEYS.forEach(k=>c[k]=(a.c&&a.c[k])||0);window.__aaTitle=a.n;window.__aaL=0;a.go();
+  a.done=1;const c={khac:cardCost(a)};KEYS.forEach(k=>c[k]=(a.c&&a.c[k])||0);window.__aaTitle=a.n;window.__aaL=0;
+  KG82.preBack=()=>{a.done=0;S.mg=null};/* KIT §13.9: ✕ before «Sẵn sàng» = the card back untaken, nothing paid (the cost was only pending) */try{a.go()}finally{KG82.preBack=null}
   if(window.__aaL)keep(c);else{a.done=0;window.__aaTitle=null}render()}}
  /* the one result, after the game screen closes */
  let fin=null;
