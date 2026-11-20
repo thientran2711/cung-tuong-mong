@@ -1,0 +1,15 @@
+PRIORITY #1 CHECK: OD 17/11 ~16:20Z (f) skew rule (now overwritten) + OD 20/11 ~01:10Z (dev/OWNER_DECISIONS.md line ~1983) | main: jmgt.js:87 mgHand (skew draw), jmgcal.js mgCalBand (hi=b+w/2+up, lo=b+w/2−dn), jbal2.js:1087 BAL.ag.mg2.hand {lo3,hi9.5,w4,skew1.6}, :1094 BAL.ag.mg2.cal {up1,dn4} | review/* none | claims none (MAIN ROOT-72 check, 20/11 01:15Z)
+# BRIEF cag25-mg-fair-hands (WORKER, opus; numbers = BIG review) — opened by Foreman C-AG #25 session_01Rc5AsLvodEu25Uni5aNHei for MAIN ROOT-72
+FIRST read dev/handover/briefs/root72-common.md (same branch) in full and follow it — EXCEPT: report to C-AG #25 (send_message session_01Rc5AsLvodEu25Uni5aNHei "SẴN SÀNG KIỂM mg-fair-hands <sha>"), not to MAIN. You never send LAND READY.
+OWNER WORDS (verbatim, OD 20/11 ~01:10Z — read the whole line in dev/OWNER_DECISIONS.md):
+- (20/11 ~01:10Z real) (ROOT-72 chat) OWNER: "Không phải, tôi nói test tay xong, rồi đa số npc chơi dở hơn tôi, tôi thấy không fair" → main proposed 3: (1) NPC hands centred on HER calibrated level — about half equal/better, half worse, spread about ±2.5 points; (2) an NPC's own art level in that kind (arts.cam / ky / …) lifts her hand: a talented player clearly beats her, an untrained one is weak; (3) harder as she climbs (law 5): higher-rank opponents tend to be stronger. OWNER (verbatim): "Duyệt cả 3 ý, làm luôn đi" → CANON OVERWRITE of OD 17/11 ~16:20Z (f) "strong NPC hands RARE, weak hands clearly WORSE than her" (BAL.ag.mg2.hand skew + cal up 1 / dn 4): replaced by this fair spread. Her calibrated base (dan 8.3) stays. Job → Foreman C-AG #25 (free seats; numbers = opus).
+BRANCH: review/mg-fair-hands from latest origin/main (LIVE 72f7c0c5).
+BUILD (ORDER from MAIN ROOT-72, verbatim):
+(1) NPC hand band centred on her calibrated play per kind (≈ half at/above her, half below, spread ≈ ±2.5, symmetric draw — no rare-strong skew) and the same centred spread for uncalibrated kinds around the default skilled-human median;
+(2) the NPC's own art level for that kind shifts her hand up/down (trained clearly beats her, untrained weak);
+(3) rank: higher-rank opponents lean stronger (law 5).
+All knobs in BAL (law 4); update the BAL comments (canon overwrite, law 14 — delete the old skew/rare-strong wording, write the new rule in its place); old saves re-roll via the band sig as today.
+LAWS that bite here: 2 EQUAL-VALUE / 3 GAIN-AND-LOSS (no choice becomes free), 4 ONE CORE (no number outside BAL), 5 HARDER AS SHE CLIMBS, 6 REAL PEOPLE (NPC's own arts drive her hand), 7 wording (any visible odds via the ladder, no %), 11 whole group (every mini-game kind that uses mgHand/mgCalBand — scan + table).
+MEASURE: table of win share vs her level by opponent rank / art level (target ≈ 50 % vs an equal NPC, clearly higher for trained / high-rank NPCs, clearly lower for untrained); put it in the report.
+TESTS: ag-mgcal + every mg test + quickcheck; add a test that asserts the centred symmetric spread and the art/rank shifts.
+REPORT: dev/handover/reports/mg-fair-hands.md (handover branch) + CLAIMS row 'mg-fair-hands' update; then send_message C-AG #25 "SẴN SÀNG KIỂM mg-fair-hands <sha>". Push branch every ~30 min.
