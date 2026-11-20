@@ -42,7 +42,7 @@ const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=
   a.hM=60;g.hM=60;S.turn=(S.turn|0)+1;let ev=kidLifeMonth();o.estr=a.hM-60;o.girl=g.hM-60;o.ev=ev.replace(/<[^>]+>/g,"");
   /* call home */S.turn++;S.buoi=1;used=0;const t0=a.tal;const why=kmCallWhy(a);kmCall(a);o.callWhy=why;o.call=a.hM-(60+B.estr);o.tal=a.tal-t0;o.atHome=plxKidPlace(a)===null;
   o.btns=[...new DOMParser().parseFromString(kidCard(a),'text/html').querySelectorAll('.pcb')].filter(x=>x.querySelector('[data-go="home"]')).flatMap(x=>[...x.children]).map(h=>h.textContent.replace(/<[^>]+>/g," ").replace(/\s+/g," ").slice(0,30));o.card=/Mẫu tử/.test(kidCard(a));
-  ev=kidLifeMonth();o.noEstrAfterCall=a.hM-(60+B.estr+B.call);
+  S.turn++;ev=kidLifeMonth();/* r1: the real month runs S.turn++ first */o.noEstrAfterCall=a.hM-(60+B.estr+B.call);
   /* visit A ca sở */S.turn++;S.buoi=1;used=0;S.place='home';const h0=a.hM;try{accGrant&&accGrant(S,'acs')}catch(e){}goTo('acs');o.place=S.place;o.visit=a.hM-h0;
   /* Thái tử prestige: her son, then an NPC son */S.heir=null;allKids().forEach(([x])=>x.heir=false);const d0=S.danh;setHeir(a,null);o.heir=S.danh-d0;
   const v=rivals.find(x=>x.alive&&!x.out&&!x.queen);v.kids=v.kids||[];const s2=mkKid('m',9);v.kids.push(s2);const d1=S.danh,vd=v.danh||0;setHeir(s2,v);o.lost=S.danh-d1;o.npc=(v.danh||0)-vd;

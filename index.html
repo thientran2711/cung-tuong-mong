@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"dfc0bb55","t":"2026-11-20T08:44Z","c":"KP03 children living rules (jkidlife): Mẫu tử for sons, monthly estrangement when away, «Cho gọi con về» / «Sang A ca sở thăm con», Thái tử…","b":"68171b73684b","h":[{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"}]};
+window.CTM_BI={"s":"3af67a8e+","t":"2026-11-20T08:44Z","c":"review palace-life-gaps: site rebuilt","b":"2de35d725e6a","h":[{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -76035,10 +76035,11 @@ function kmNpcSees(m,k){const B=kmB();if(typeof npcWhy==="function"&&typeof npwO
 try{if(typeof npwReg==="function")npwReg("kidSee",{grp:"KP03",who:c=>c.p?[c.p]:[],why:(m,c)=>({s:Math.max(npwB().min,(c.k&&c.k.hM)||kmB().hm0[0]),t:c.k,r:"nhớ con, muốn sang thăm"})})}catch(e){console.error("kidSee reg",e)}
 /* month's end: estrangement for the children who live away and were not seen (her children; NPC children on the host only) */
 function kidLifeMonth(){if(!S||S.dead)return"";const B=kmB(),far=[];let ev="";
- const L=allKids().filter(([k,mo])=>k.alive&&(!mo||(typeof worldOn!=="function"||worldOn())));
- for(const [k,mo] of L){const m=kmMom(mo);kmHM(k);if(!kmAway(k,mo)){k.kmS=S.turn|0;continue}
-  if(m!==S&&kmMomOk(m)&&k.kmS!==(S.turn|0)&&kmNpcSees(m,k))kmSee(k,B.visit);
-  if(k.kmS!==(S.turn|0)&&(m===S||m.alive)){k.hM=cl(k.hM+B.estr,0,100);if(m===S)far.push(k.name)}}
+ /* review r1: monthTick runs S.turn++ BEFORE kidsMonth, so the month that just ended is S.turn-1 (the turn kmSee stamped while she played it) */
+ const T=(S.turn|0)-1,L=allKids().filter(([k,mo])=>k.alive&&(!mo||(typeof worldOn!=="function"||worldOn())));
+ for(const [k,mo] of L){const m=kmMom(mo);kmHM(k);if(!kmAway(k,mo)){k.kmS=T;continue}
+  if(m!==S&&kmMomOk(m)&&k.kmS!==T&&kmNpcSees(m,k)){k.kmS=T;k.hM=cl(k.hM+B.visit,0,100)}
+  if(k.kmS!==T&&(m===S||m.alive)){k.hM=cl(k.hM+B.estr,0,100);if(m===S)far.push(k.name)}}
  /* wards: the foster mother's bond (k.fM) grows while the child lives with her; the Danh of the foster mother on the first month */
  for(const [k,mo] of L){const f=kmFoster(k,mo);if(!f||f==="th"){k.kmF=null;continue}const fk=f===S?"me":"v"+f.id;
   if(k.kmF!==fk){k.kmF=fk;k.fM=k.fM==null?kmB().hm0[0]:k.fM;ap(f,{danh:B.ward.danh});if(f===S)ev+=`<span class="g">${k.name} mất chỗ dựa nơi mẹ ruột, được giao về cung ngươi nuôi dạy.</span> Danh ${balSg(B.ward.danh)}. `}
@@ -82174,7 +82175,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="68171b73684b";window.CTM_BUILD=BUILD;
+const BUILD="2de35d725e6a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

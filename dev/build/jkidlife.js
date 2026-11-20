@@ -50,10 +50,11 @@ function kmNpcSees(m,k){const B=kmB();if(typeof npcWhy==="function"&&typeof npwO
 try{if(typeof npwReg==="function")npwReg("kidSee",{grp:"KP03",who:c=>c.p?[c.p]:[],why:(m,c)=>({s:Math.max(npwB().min,(c.k&&c.k.hM)||kmB().hm0[0]),t:c.k,r:"nhớ con, muốn sang thăm"})})}catch(e){console.error("kidSee reg",e)}
 /* month's end: estrangement for the children who live away and were not seen (her children; NPC children on the host only) */
 function kidLifeMonth(){if(!S||S.dead)return"";const B=kmB(),far=[];let ev="";
- const L=allKids().filter(([k,mo])=>k.alive&&(!mo||(typeof worldOn!=="function"||worldOn())));
- for(const [k,mo] of L){const m=kmMom(mo);kmHM(k);if(!kmAway(k,mo)){k.kmS=S.turn|0;continue}
-  if(m!==S&&kmMomOk(m)&&k.kmS!==(S.turn|0)&&kmNpcSees(m,k))kmSee(k,B.visit);
-  if(k.kmS!==(S.turn|0)&&(m===S||m.alive)){k.hM=cl(k.hM+B.estr,0,100);if(m===S)far.push(k.name)}}
+ /* review r1: monthTick runs S.turn++ BEFORE kidsMonth, so the month that just ended is S.turn-1 (the turn kmSee stamped while she played it) */
+ const T=(S.turn|0)-1,L=allKids().filter(([k,mo])=>k.alive&&(!mo||(typeof worldOn!=="function"||worldOn())));
+ for(const [k,mo] of L){const m=kmMom(mo);kmHM(k);if(!kmAway(k,mo)){k.kmS=T;continue}
+  if(m!==S&&kmMomOk(m)&&k.kmS!==T&&kmNpcSees(m,k)){k.kmS=T;k.hM=cl(k.hM+B.visit,0,100)}
+  if(k.kmS!==T&&(m===S||m.alive)){k.hM=cl(k.hM+B.estr,0,100);if(m===S)far.push(k.name)}}
  /* wards: the foster mother's bond (k.fM) grows while the child lives with her; the Danh of the foster mother on the first month */
  for(const [k,mo] of L){const f=kmFoster(k,mo);if(!f||f==="th"){k.kmF=null;continue}const fk=f===S?"me":"v"+f.id;
   if(k.kmF!==fk){k.kmF=fk;k.fM=k.fM==null?kmB().hm0[0]:k.fM;ap(f,{danh:B.ward.danh});if(f===S)ev+=`<span class="g">${k.name} mất chỗ dựa nơi mẹ ruột, được giao về cung ngươi nuôi dạy.</span> Danh ${balSg(B.ward.danh)}. `}
