@@ -369,7 +369,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | rv-dauho (BIG opus reviewer of review/cal-p2 b218d1d2, Đầu hồ owner bug; lands alone) | review/cal-p2-rv; briefs/cag29-rv-dauho.md; reports/rv-dauho.md | C-AG #29 for ROOT-74 | session_01Rc5AsKzsQh875fpMyv46vr | PASS 377d5ce3 → LAND READY ROOT-75; archived | 20/11 07:02Z |
 | MAIN ROOT-75 (opus; child of ROOT-74, depth 4) | handover HANDOVER_SESSION9 | ROOT-74 | session_01Rc5AsKTznPCBPujNFrdVVF | RUNNING | 20/11 06:47Z |
 | REVIEW mg-noword-kit (SMALL sonnet) of 6b6f1c52 | review/mg-noword-kit(-rv); briefs/rv-root75-mg-noword-kit.md | MAIN ROOT-75 | session_01Rc5AsM2JGiVZGesoFRmmkP | RUNNING | 20/11 06:50Z |
-| REVIEW kit-mark (SMALL sonnet) of 1c134a6f | review/kit-mark(-rv); briefs/rv-root75-kit-mark.md | MAIN ROOT-75 | session_01Rc5AsMhE5ZpVRnMT4NDeXv | RUNNING | 20/11 06:50Z |
+| REVIEW kit-mark (SMALL sonnet) of 1c134a6f | review/kit-mark(-rv); briefs/rv-root75-kit-mark.md | MAIN ROOT-75 | session_01Rc5AsMhE5ZpVRnMT4NDeXv | PASS 5e8c7ad0 (reports/rv-kit-mark.md) | 20/11 06:50Z |
 | FOREMAN E #17 (opus; child of E #16, depth 7 = LAST) | handover FOREMAN_E_STATUS | FOREMAN E #16 | session_01DgYSWoFXvbLeCE3SVSWgDG | RUNNING | 20/11 07:18Z | PICKUP 07:30Z, ctx roll at real START+25 % |
 | mg-craft-design E24 (opus; MAIN ROOT-74 order 06:06Z / owner OD ~L2030: Vẽ/Thêu/Cắm hoa/Khéo tay own mechanics, tracing only Chép kinh; STEP 1 expert + designs, owner sees first) | review/mg-craft-design; briefs/E24-mg-craft-design.md | FOREMAN E #17 | session_01DgYSWpoMdWjXUGXw7cXUdd | RUNNING | 20/11 07:35Z |
 | REVIEW mg-env (SMALL sonnet) of 4f3b78f | review/mg-env(-rv); briefs/rv-root75-mg-env.md | MAIN ROOT-75 | session_01Rc5AsN2aQw9SEbdD3besJR | RUNNING | 20/11 06:51Z |
