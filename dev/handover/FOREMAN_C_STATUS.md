@@ -504,3 +504,4 @@ NEWACCT-ROOT ~08:42Z: OWNER (verbatim in briefs/maid7-test.md): tonight ONE pers
 NEWACCT-ROOT ~08:42Z: MAID7 session_01D3E3NYRserySjEixVQuGJu opened (7 gens ~950 cr).
 NEWACCT-ROOT ~08:43Z: T78-B DONE c5e9cdba (12 gens, 1 620 cr). Notes: m20 t7 two items (builder pose 'raised hairpin + peony vase' = family fault, fix after owner), m18 t7 near-frontal, m14 t7 hoop→fan, m14 t8 drum→disc, m22 t7 saturated.
 NEWACCT-ROOT ~08:44Z: T78-A DONE 0f7550c4+42c9a7ef (12 gens, 1 620 cr). Notes: m08 t8 gold drop EARRING (recommend redraw), m04 t7 + m09 t7 ear stud, m04 t8 extra short sleeve layer, m08 t7 jade drop at hairline, pellet drum reads fan/mirror (m05 t7, m10 t8), m09 t8 drum oversized. Balance 72 867.
+- (20/11 08:52Z) FROM MAIN ROOT-76: LIVE 90d57324 (mg-fair-ratio: NPC hands bell curve per kind group; BAL.orig.art in jbal.js — D cal-p2c can build on it). ROLLBACK 716be762. Final-merge 90d57324 before LAND READY.
