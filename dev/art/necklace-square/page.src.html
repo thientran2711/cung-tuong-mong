@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thử dây chuyền cổ vuông</title>
+<style>
+:root{--bg:#f6efe6;--card:#fffaf3;--ink:#3a2a22;--muted:#7a6558;--line:#e3d3c2;--accent:#9c3d2e;--btn:#fff;--on:#9c3d2e;--onink:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1714;--card:#282019;--ink:#f3e7da;--muted:#bba796;--line:#4a3a2f;--accent:#e08a6f;--btn:#33291f;--on:#e08a6f;--onink:#1d1714}}
+:root[data-theme="dark"]{--bg:#1d1714;--card:#282019;--ink:#f3e7da;--muted:#bba796;--line:#4a3a2f;--accent:#e08a6f;--btn:#33291f;--on:#e08a6f;--onink:#1d1714}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:16px}
+h1{font-size:30px;margin:6px 0 4px}p.sub{margin:0 0 16px;color:var(--muted);font-size:17px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.card h2{font-size:22px;margin:0 0 10px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+button{font-family:inherit;font-weight:600;font-size:19px;line-height:1;padding:13px 18px;border-radius:10px;border:2px solid var(--accent);background:var(--btn);color:var(--ink);cursor:pointer;min-height:48px}
+button.on{background:var(--on);color:var(--onink)}
+button.wear{flex:1 1 100%;font-size:22px}
+.stage{position:relative;width:100%;overflow:hidden;border-radius:10px;background:#efe6da}
+.inner{position:absolute;left:0;top:0;width:1024px;height:2304px;transform-origin:0 0}
+.inner img{position:absolute;display:block}.inner .neck{display:none}.stage.wear .neck{display:block}
+.note{color:var(--muted);font-size:15px;margin:8px 0 0}
+</style></head><body><main>
+<h1>Thử dây chuyền — áo cổ vuông</h1>
+<p class="sub">Cô s62 (Dịu dàng) mặc áo cổ vuông hở cổ. Bấm <b>Đeo dây chuyền</b> để thử, bấm <b>Cận cổ</b> để xem gần. Dây chuyền là hình cũ (không vẽ mới), luồn ra sau cổ và tóc.</p>
+<div class="grid" id="grid"></div>
+<p class="note">Cách làm: dây xích được đặt lại theo đường cong cổ – xương quai xanh (giữ đúng tỉ lệ, hạt ngọc tròn), mặt hoa + giọt ngọc treo thẳng trên ngực, trên mép cổ áo; có bóng đổ nhẹ; phần dây ra ngoài da (sau cổ, dưới tóc, dưới cổ áo) bị ẩn. 0 credit.</p>
+</main>
+<script>
+const DATA=/*DATA*/null;
+const grid=document.getElementById('grid');
+for(const [id,f] of Object.entries(DATA)){
+  const c=document.createElement('section');c.className='card';c.id='card-'+id;
+  c.innerHTML=`<h2>${f.label}</h2><div class="bar"><button class="wear on" data-w>Tháo dây chuyền</button>
+  <button data-v="full">Toàn thân</button><button data-v="half">Nửa người</button><button data-v="close" class="on">Cận cổ</button></div>
+  <div class="stage wear"><div class="inner"><img src="${f.base}" width="1024" height="2304" alt="${f.label}">
+  <img class="neck" src="${f.neck}" style="left:${f.x}px;top:${f.y}px;width:${f.w}px;height:${f.h}px" alt="dây chuyền"></div></div>`;
+  grid.appendChild(c);
+  const st=c.querySelector('.stage'),inn=c.querySelector('.inner'),wb=c.querySelector('[data-w]');let view='close';
+  const V={full:[0,0,1024,2304],half:[150,60,724,1000],close:[f.zoom[0]-150,f.zoom[1]-125,300,250]};
+  function lay(){const [x,y,w,h]=V[view];const W=st.clientWidth;let H=W*h/w;const maxH=Math.max(320,innerHeight*0.72);
+    let s=W/w;if(H>maxH){H=maxH;s=H/h;}st.style.height=H+'px';const ox=(W-w*s)/2;
+    inn.style.transform=`translate(${ox-x*s}px,${-y*s}px) scale(${s})`;}
+  wb.onclick=()=>{const on=st.classList.toggle('wear');wb.classList.toggle('on',on);wb.textContent=on?'Tháo dây chuyền':'Đeo dây chuyền';};
+  c.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{view=b.dataset.v;c.querySelectorAll('[data-v]').forEach(x=>x.classList.toggle('on',x===b));lay();});
+  addEventListener('resize',lay);lay();
+}
+</script></body></html>

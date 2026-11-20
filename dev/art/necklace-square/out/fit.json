@@ -1,0 +1,30 @@
+{
+ "t1": {
+  "base": "t1_base.webp",
+  "neck": "t1_neck.png",
+  "x": 440,
+  "y": 340,
+  "w": 240,
+  "h": 200,
+  "label": "s62 · Dịu dàng · t1 Đáp ứng · cổ vuông kiểu 1 (đã duyệt)",
+  "gen": "xSBeugTjfW",
+  "zoom": [
+   545,
+   440
+  ]
+ },
+ "t2": {
+  "base": "t2_base.webp",
+  "neck": "t2_neck.png",
+  "x": 440,
+  "y": 340,
+  "w": 240,
+  "h": 200,
+  "label": "s62 · Dịu dàng · t2 Thường tại · cổ vuông kiểu 2 (mới)",
+  "gen": "8ai9BR2IrU",
+  "zoom": [
+   550,
+   445
+  ]
+ }
+}
