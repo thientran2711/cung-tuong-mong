@@ -141,3 +141,18 @@ Base = build_all.py s62 N (saved ladder_base/s62_t{5,6,7}.txt), thu colours swap
 | s62_t6_HAN_LADDER.txt (Quý phi: 2-robe zhiju, wide collar to shoulders, triple collar, wide belt + zupei) | 9965 | FAIL only S12 |
 | s62_t7_HAN_LADDER.txt (HQP: 2-robe, gold-woven pearl-edged triple collar, 2 zupei, phoenix crown kept) | 9941 | PASS |
 GATE CONFLICT for the Foreman: check_store approved S12 (PHI BẠCH t1–t6) contradicts owner G32 (no phi bạch in Minh/Hán). Fine for ChatGPT tests (no Magnific); the gate needs a G32 exemption before any Magnific use. t7 store sentences still say "cape" (colour rule "robe, cape and sleeves", HQP LUXURY "trims along the cape edges") — kept verbatim (store), outfit says "no cape"; watch for a cape in the ChatGPT result.
+
+---
+# JOB 5 — layered neckline fix t1–t3 + spring t4–t7 (owner 20/11 via Foreman C #3; prompts only, 0 cr) — dev/art/seasons4/make_comoi.py
+Base = build_all.py s62 N (ladder_base/s62_tN.txt, spring/base colours ice blue + mint mist). Only collar words changed (asserted swaps).
+Fix (owner: inner chest neckline came out bare): the INNER top's square neckline now carries the rank's ORIGINAL square-neck border, the outer open robe's front edges are a simple matching edge.
+| File | Inner square-neck edge | Signature re-cut | chars | gate |
+|---|---|---|---|---|
+| dapung4/s62_t1_COMOI_v2.txt | narrow plain mint band, no embroidery | — | 9514 | PASS |
+| dapung4/s62_t2_COMOI_v2.txt | 2 stacked bands: mint piping + small embroidered plum blossoms | — | 9409 | PASS |
+| dapung4/s62_t3_COMOI_v2.txt | wide stiff mint band embroidered with plum blossoms | — (girdle, apron panel, jade sets unchanged) | 9964 | PASS |
+| seasons4/s62_t4_XUAN_COMOI.txt | richer gold-brocade band | capelet + pearl yoke kept, OPEN at the front (never closing at the throat); robe closes at the sash | 9995 | FAIL only S13 (approved "closes only at the throat clasp" — rewritten on purpose for the open neck; owner-ordered) |
+| seasons4/s62_t5_XUAN_COMOI.txt | wide gold-embroidered band | cloud collar kept, open at the front, lobes on shoulders/back | 9294 | PASS |
+| seasons4/s62_t6_XUAN_COMOI.txt | pearl-edged gold band (compact wording, length limit) | two short capes kept, open at the front | 9988 | PASS |
+| seasons4/s62_t7_XUAN_COMOI.txt | broad royal-yellow brocade band with pearls | jewelled cloud-collar cape kept, open at the front | 9959 | PASS |
+Phi bạch kept (spring = silk). Captions: t1–t3 "<bậc> · Cổ áo mới v2 (viền cổ vuông giữ nguyên)"; t4–t7 "Mùa Xuân · Cổ áo mới · <bậc>".
