@@ -1,4 +1,5 @@
 base: dev/art/maid7/gpt/thancan_gpt_v2.txt
+allow: Cung nữ thân cận · Áo ghi lê dài xanh + áo trong hồng   # owner Lượt 1483: caption = rank name only (garbled long caption)
 allow: a LONG sleeveless embroidered over-vest with a straight upright standing collar   # owner L1475 round-2 collar; L1476 "LONG" made it a stiff coat
 allow: the vest closed edge to edge all the way from the collar down to the waist   # owner L1475: round-2 collar
 allow: with NO knot button at the throat   # owner L1475: round-2 collar has the knot button

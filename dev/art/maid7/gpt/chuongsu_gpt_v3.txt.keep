@@ -1,4 +1,5 @@
 base: dev/art/maid7/gpt/chuongsu_gpt_v2.txt
+allow: Chưởng sự cô cô · Áo khoác tím cà dài tới gối + váy hồng   # owner Lượt 1483: caption = rank name only (garbled long caption)
 allow: RICH embroidery   # owner Lượt 1478: -> RICH border embroidery, edges only
 allow: clearly MORE and denser than a first-rank maid's   # owner Lượt 1478: thêu nhiều quá như phi tần
 allow: on wide embroidered cuff bands and along the coat hem and the skirt hem   # owner Lượt 1478: kept as cuff bands of the sleeves + coat hem border + skirt hem

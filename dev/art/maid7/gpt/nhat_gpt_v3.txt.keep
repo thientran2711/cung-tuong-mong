@@ -1,4 +1,5 @@
 base: dev/art/maid7/gpt/nhat_gpt_v2.txt
+allow: Cung nữ nhất đẳng · Áo ghi lê cổ đứng + hai tà   # owner Lượt 1483: caption = rank name only (garbled long caption)
 allow: the vest closed edge to edge all the way from the collar down to the waist   # owner Lượt 1474: round-2 collar replaces the closed collar
 allow: with NO knot button at the throat   # owner Lượt 1474: round-2 collar (knot button)
 allow: NO gap   # owner Lượt 1474

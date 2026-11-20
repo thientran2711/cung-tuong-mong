@@ -2,7 +2,7 @@
 """MAIDP2 (owner Lượt 1456/1457): v2 ChatGPT maid prompts. Every swap asserted exactly once.
 Run from repo root: python3 dev/art/maid7/make7_gpt.py [nhat chuongsu thancan mama]
 """
-import sys, os
+import sys, os, re
 D = 'dev/art/maid7/gpt/'
 
 CAP = ('\n\nCAPTION: in LARGE bold letters, top-left corner, on the plain background, never over her body, '
@@ -16,6 +16,22 @@ VEST_SHOULDER = (', the over-vest cut from a firmer, lightly stiffened brocade w
 # job 2 (owner L1456): senior hairpins at least as rich as the young maids' ("several silver and pearl hairpins")
 SENIOR_PINS = ('with MORE and richer hairpins than a young first-rank maid (nhất đẳng): several gold, jade and pearl '
                'hairpins with small dangles set in the bun, all pointing upward or backward, no flowers')
+
+
+# owner L1483: caption garbled -> rank name ONLY + exact-spelling clause (family fix, all v3 maid gpt files + tamdang)
+CAP2 = ('\n\nCAPTION: in LARGE bold letters, top-left corner, on the plain background, never over her body, write exactly this '
+        'Vietnamese text WITH accents, spelling every Vietnamese letter and accent mark exactly, with no extra or wrong marks: "{}"')
+
+
+def fixcap(t, rank):
+    t2, n = re.subn(r'\n\nCAPTION: [^\n]*$', '', t.rstrip())
+    assert n <= 1, n
+    return t2 + CAP2.format(rank)
+
+
+def oldcap(path):
+    m = re.search(r'write exactly this Vietnamese text WITH accents: "([^"]*)"', open(path, encoding='utf-8').read())
+    return [(m.group(1), 'owner Lượt 1483: caption = rank name only (garbled long caption)')] if m else []
 
 
 def swap(t, old, new):
@@ -137,6 +153,7 @@ def tamdang():
              'the same real outer jacket with the same weight, body and structure (a proper jacket, never thin, flimsy or see-through), '
              'only SHORTER than the nhị đẳng\'s, ending just below the waist')
     t = HDR_M18 + t.rstrip() + CAP.format('Cung nữ tam đẳng · Áo khoác bỉ giáp ngắn hồng + váy xanh')
+    t = fixcap(t, 'Cung nữ tam đẳng')
     out = D + 'tamdang_gpt.txt'
     open(out, 'w', encoding='utf-8').write(t)
     keep(out, base, [('with a SMALL SHORT outer top on top', 'owner Lượt 1470: outer top too flimsy -> nhị đẳng jacket'),
@@ -164,9 +181,10 @@ def nhat3():
     base = D + 'nhat_gpt_v2.txt'
     t = open(base, encoding='utf-8').read()
     t = swap(t, NHAT_V2_COLLAR, NHAT_R2_COLLAR)
+    t = fixcap(t, 'Cung nữ nhất đẳng')
     out = D + 'nhat_gpt_v3.txt'
     open(out, 'w', encoding='utf-8').write(t)
-    keep(out, base, [('the vest closed edge to edge all the way from the collar down to the waist', 'owner Lượt 1474: round-2 collar replaces the closed collar'),
+    keep(out, base, oldcap(base) + [('the vest closed edge to edge all the way from the collar down to the waist', 'owner Lượt 1474: round-2 collar replaces the closed collar'),
                      ('with NO knot button at the throat', 'owner Lượt 1474: round-2 collar (knot button)'),
                      ('NO gap', 'owner Lượt 1474'),
                      ('NO V-opening and NO slit below the collar', 'owner Lượt 1474: round-2 collar (narrow slim V)'),
@@ -197,9 +215,10 @@ def thancan3():
     t = swap(t, 'the long sleeveless over-vest with its two front panels (hai tà) and the WHOLE wide sleeves, blue all the way down, are',
              'the sleeveless over-vest, the TWO separate soft front panels (hai tà) hanging from the waist and the wide LAYERED sleeves '
              '(every soft layer of each sleeve, all the way down) are')
+    t = fixcap(t, 'Cung nữ thân cận')
     out = D + 'thancan_gpt_v3.txt'
     open(out, 'w', encoding='utf-8').write(t)
-    keep(out, base, [('a LONG sleeveless embroidered over-vest with a straight upright standing collar', 'owner L1475 round-2 collar; L1476 "LONG" made it a stiff coat'),
+    keep(out, base, oldcap(base) + [('a LONG sleeveless embroidered over-vest with a straight upright standing collar', 'owner L1475 round-2 collar; L1476 "LONG" made it a stiff coat'),
                      ('the vest closed edge to edge all the way from the collar down to the waist', 'owner L1475: round-2 collar'),
                      ('with NO knot button at the throat', 'owner L1475: round-2 collar has the knot button'),
                      ('NO gap', 'owner L1475'),
@@ -234,9 +253,10 @@ def chuongsu3():
     base = D + 'chuongsu_gpt_v2.txt'
     t = open(base, encoding='utf-8').read()
     t = swap(t, CS_EMB_OLD, CS_EMB_NEW)
+    t = fixcap(t, 'Chưởng sự cô cô')
     out = D + 'chuongsu_gpt_v3.txt'
     open(out, 'w', encoding='utf-8').write(t)
-    keep(out, base, [("RICH embroidery", 'owner Lượt 1478: -> RICH border embroidery, edges only'),
+    keep(out, base, oldcap(base) + [("RICH embroidery", 'owner Lượt 1478: -> RICH border embroidery, edges only'),
                      ("clearly MORE and denser than a first-rank maid's", 'owner Lượt 1478: thêu nhiều quá như phi tần'),
                      ('on wide embroidered cuff bands and along the coat hem and the skirt hem', 'owner Lượt 1478: kept as cuff bands of the sleeves + coat hem border + skirt hem'),
                      ('plus embroidered flower sprays scattered over the whole coat body', 'owner Lượt 1478: không thêu trên thân áo'),
@@ -258,9 +278,10 @@ def mama3(age):
              'the long robe\'s own wide long sleeves hanging softly in ONE single layer, each with a broad embroidered cuff band')
     t = swap(t, "(never a consort's long trailing sleeves). COLOUR RULE",
              "(never a consort's long trailing sleeves)." + MM_TWO + " COLOUR RULE")
+    t = fixcap(t, 'Ma ma')
     out = D + 'mama_gpt_v3_%s.txt' % age
     open(out, 'w', encoding='utf-8').write(t)
-    keep(out, base, [('a sleeveless embroidered over-vest with a stand collar closed by a small knot button', 'owner Lượt 1479: ma ma collar = round-2 nhất collar'),
+    keep(out, base, oldcap(base) + [('a sleeveless embroidered over-vest with a stand collar closed by a small knot button', 'owner Lượt 1479: ma ma collar = round-2 nhất collar'),
                      ('wide layered sleeves hanging softly', 'owner Lượt 1480: "layered" invites an extra short-sleeve layer -> one single layer')])
     return out
 
