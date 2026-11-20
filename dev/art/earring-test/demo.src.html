@@ -64,13 +64,15 @@ const stages=[];
 function box(parent,cls,x,y,w,h,src,rot){const d=el('div','jw '+cls);Object.assign(d.style,{position:'absolute',left:x+'px',top:y+'px',width:w+'px',height:h+'px'});
   if(rot)Object.assign(d.style,{transform:`rotate(${rot}deg)`,transformOrigin:'50% 50%'});
   const im=new Image();im.src=src;Object.assign(im.style,{left:0,top:0,width:'100%',height:'100%'});d.appendChild(im);parent.appendChild(d);return d;}
-function addJewels(g,f){
+function addJewels(g,f){f.id=f.id||Object.keys(A.figures).find(k=>A.figures[k]===f);
   for(const w of (f.wrists||[])){const h=w.w*w.squash,r=w.rot+(w.flip?180:0);
     box(g.wristback,'bangle',w.pt[0]-w.w/2,w.pt[1]-h/2,w.w,h,JEW.bangle_back,r);
     box(g.wristfront,'bangle',w.pt[0]-w.w/2,w.pt[1]-h/2,w.w,h,JEW.bangle_front,r);}
   if(f.neck){const n=f.neck,k=n.w/995;box(g.neck,'necklace',n.cx-n.w/2,n.top,n.w,n.h,JEW.necklace);   // chain stretched to the neck
     box(g.neck,'necklace',n.cx-52*k*(n.pk||1),n.top+n.h*745/949,104*k*(n.pk||1),204*k*(n.pk||1),JEW.pendant);}   // pendant at true shape
-  if(f.phibach){const p=f.phibach;for(const [gz,k] of [['pbback','pb_back'],['pbswag','pb_swag'],['pbsides','pb_sides']])box(g[gz],'phibach',p.x,p.y,p.w,p.h,JEW[k]);}
+  if(f.ribbon){const r=f.ribbon,dx=r.p2[0]-r.p1[0],dy=r.p2[1]-r.p1[1],s=Math.hypot(dx,dy)/540,a=Math.atan2(dy,dx)*180/Math.PI;  // sprite loops at (105,325),(645,325)
+    for(const [gz,k] of [['pbback','back'],['pbsides','sides']]){const d=box(g[gz],'phibach',r.p1[0]-105,r.p1[1]-325,752,1344,JEW[`rb_${f.id}_${k}`]);
+      Object.assign(d.style,{transformOrigin:'105px 325px',transform:`rotate(${a}deg) scale(${s},${s*r.ky})`});}}
 }
 function makeView(id,box,label){
   const f=A.figures[id],vw=el('div','vw');vw.style.flex=(box[2]/box[3]).toFixed(3);vw.style.aspectRatio=box[2]+'/'+box[3];
@@ -116,7 +118,7 @@ function card(id){
   const v=el('div','views');c.appendChild(v);
   const vs=[makeView(id,f.head_view,'Cận mặt'),makeView(id,f.wrist_view,'Cổ tay'),makeView(id,f.waist_view,'Dải lưng'),makeView(id,[0,0,1024,2304],'Toàn thân')];
   vs.forEach(s=>v.appendChild(s.vw));
-  for(const k of ['earring','bangle','necklace',...(f.phibach?['phibach']:[]),'ngoc_boi','tui_huong']){
+  for(const k of ['earring','bangle','necklace',...(f.ribbon?['phibach']:[]),'ngoc_boi','tui_huong']){
     const bt=el('button');bt.textContent=NAMES[k][0];bt.dataset.k=k;
     bt.onclick=()=>{const on=!bt.classList.contains('on');bt.classList.toggle('on',on);bt.textContent=NAMES[k][on?1:0];vs.forEach(s=>s.st.classList.toggle('w-'+k,on));};
     b1.appendChild(bt);
@@ -147,14 +149,14 @@ for(const id of Object.keys(A.figures))card(id);
     for(const [i,k] of Object.entries(pre))putHead(s,f.slots[+i],k);
     const l=el('div','cl');l.textContent=lab;d.appendChild(l);row.appendChild(d);}
   document.getElementById('wrap').appendChild(c);})();
-// phi bach: A (layered sprite) vs B (Magnific edit of the real picture) vs the look reference (c11 painted shawl)
-(function(){const P=A.figures.c22.phibach,c=el('div','card');c.id='card-phibach';
-  c.innerHTML='<div class="cap">Phi bạch trên c22 — hai cách<small>A: 1 hình phi bạch vẽ riêng, cắt 3 mảnh ghép lớp (sau lưng · vắt trước tay · hai bên tay áo). B: sửa thẳng ảnh thật c22 bằng công cụ sửa ảnh của Magnific (giữ nguyên người, chỉ thêm phi bạch). Phải: mẫu nhìn — phi bạch tím nhạt vẽ sẵn của c11.</small></div>';
+// phi bach r2 (narrow ribbon): A = ONE layered sprite reused on 3 figures, B = Magnific edit of the real c22 picture
+(function(){const c=el('div','card');c.id='card-phibach';
+  c.innerHTML='<div class="cap">Phi bạch (dải lụa hẹp) — hai cách<small>A: MỘT hình dải lụa vẽ riêng, tô lại theo màu phụ từng người, cắt 2 mảnh: vòng sau lưng nằm DƯỚI người, hai vòng vắt qua cẳng tay + hai đuôi buông nằm TRÊN tay áo. Cùng 1 hình dùng cho c22, c11, c09. B: sửa thẳng ảnh thật c22 bằng công cụ sửa ảnh Magnific (không ảnh mẫu).</small></div>';
   const row=el('div','cmp');c.appendChild(row);
-  const d1=el('div');const s=makeView('c22',[0,0,1024,2304],'A · ghép lớp');s.st.classList.add('w-phibach');d1.appendChild(s.vw);d1.insertAdjacentHTML('beforeend','<div class="cl">A · ghép lớp (bấm «Đeo phi bạch» ở thẻ c22 để bật/tắt)</div>');row.appendChild(d1);
-  const d2=el('div');d2.innerHTML=`<div class="vw" style="aspect-ratio:1024/2304;background:#fff"><span class="lbl">B · sửa ảnh</span><img src="${JEW.pbB}" style="width:100%;display:block"></div><div class="cl">B · sửa ảnh thật (lần 2, không dùng ảnh mẫu)</div>`;row.appendChild(d2);
-  const d3=el('div');const s3=makeView('c11',[0,0,1024,2304],'Mẫu: c11');d3.appendChild(s3.vw);d3.insertAdjacentHTML('beforeend','<div class="cl">Mẫu nhìn: c11 phi bạch vẽ sẵn</div>');row.appendChild(d3);
-  const d4=el('div');d4.style.flex='0.5';d4.innerHTML=`<div class="vw" style="aspect-ratio:1024/2304;background:#fff"><span class="lbl">B lần 1 ✗</span><img src="${JEW.pbB1}" style="width:100%;display:block"></div><div class="cl">B lần 1 (có kèm ảnh mẫu c11): ra hẳn người khác ✗</div>`;row.appendChild(d4);
+  const mk=(id,lab)=>{const d=el('div');const s=makeView(id,[0,0,1024,2304],lab);s.st.classList.add('w-phibach');d.appendChild(s.vw);d.insertAdjacentHTML('beforeend',`<div class="cl">${lab}</div>`);row.appendChild(d);};
+  mk('c22','A · c22 ghép lớp');
+  const d2=el('div');d2.innerHTML=`<div class="vw" style="aspect-ratio:1024/2304;background:#fff"><span class="lbl">B · sửa ảnh</span><img src="${JEW.pbB}" style="width:100%;display:block"></div><div class="cl">B · c22 sửa ảnh thật</div>`;row.appendChild(d2);
+  mk('c11','A · c11 (cùng hình)');mk('c09','A · c09 (cùng hình)');
   document.getElementById('wrap').appendChild(c);})();
 fit();addEventListener('resize',fit);new ResizeObserver(fit).observe(document.body);
 </script>
