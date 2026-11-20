@@ -40,3 +40,21 @@ Only one hit in every prompt: master M01 "…; NOT a photo, NOT a realistic real
 
 ## Gate (check_store.py, store args = live args)
 tm0 tm2 tm3 tm4 mama: STORE PASS + APPROVED PASS. tm1, nhất: STORE FAIL only on the swapped outfit/who sentences (expected, test); `--scope tm1` / `--scope tm2` APPROVED PASS; MASTER/NOEAR/NOFRUIT/PETS pass; all ≤ 10 000 chars.
+
+# ROUND 2 (owner 20/11 ~14:50Z, brief maid7b.md) — make2.py → test2_*.txt (builder untouched)
+Colours m18: main powder blue #A7BAD2, secondary deep rose #CA7281 (her M_COLS, same as her round-1 ma ma).
+### thô sử v2 (base test_tm0)
+- Outfit sentence replaced whole: WORKING uniform, powder blue cotton-silk, TWO SEPARATE PIECES (never one long robe neck-to-feet): short crossed-collar jacket to the hip + ankle skirt + plain work APRON (tạp dề, lighter tone) tied at the waist; sleeves ~1 hand-span, cuffs tied back with a cord; NO embroidery; deep rose ONLY on a narrow sash + small hair tie; simple bun, one wooden pin. ("no apron" of the live text removed.)
+- COLOUR RULE: jacket/skirt/apron = powder blue held-back tone; deep rose only on sash + hair tie.
+### tam đẳng v2 (base live_tm1)
+- Outfit: ruqun, long inner robe + skirt powder blue, SMALL SHORT outer top (short jacket, short outer sleeves, ends just below the waist, smaller/shorter than nhị đẳng's half-sleeve jacket) in deep rose; small embroidery only at collar edge + short-sleeve edges; sash + small jade/tassel; double buns, silver pearl pins.
+- COLOUR RULE tail: "her main colour powder blue on the inner robe and skirt, her secondary colour deep rose clearly visible on the short outer top."
+### nhị đẳng: round-1 picture kept (KLpM5Iokqp), no regen.
+### nhất đẳng v2 (base live_tm2)
+- who = nhất đẳng (as round 1). Outfit = the round-1 MA MA outfit sentence VERBATIM (D16 recipe words) with 3 slot changes: "(the ma ma costume, never poor)" → "(a first-rank palace maid, nhất đẳng, never poor)"; hair → "hair in neat double-loop buns with several silver and pearl hairpins"; "a palace ma ma's sleeves" → "a palace maid's sleeves".
+- tm2 COLOUR RULE → the ma ma COLOUR RULE + TWO-COLOUR RULE sentences verbatim. Item: embroidered handkerchief.
+### nữ quan v2 (base test_tm4 = live)
+- master M06 (thin silk + gauze, thướt tha) REMOVED; consort store BROCADE sentence verbatim ("FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.", master_common.BROCADE / build_all FABRIC_B) put right before "Pose:" (same place the builder puts it for high ranks).
+- Hair: the builder's own a36+ words used at a18: "…over her hair, which is ALL pinned UP in a neat bun under the cap (nothing loose down her back);"
+- Gate: approved FAIL on exactly 2 lines (B12 "brocade in a maid prompt", M06 missing) = the owner's ordered change; if approved, rule B12 needs a nữ quan exception (foreman).
+### ma ma (new outfit) + chưởng sự (new colour): NOT drawn (owner deciding uniform colours).
