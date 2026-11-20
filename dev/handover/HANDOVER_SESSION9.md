@@ -1322,3 +1322,4 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - E #15 session_01DgYSWqC1epTFkkxGoFxqYW (other account; send_message fails → FOREMAN_E_STATUS): E22c person-minigame-acts round C (uses kitGameVs), kyngo/caoly lands.
 - B ROOT-7 / D: no new STATUS lines since 19/11 — check on wake.
 - WAKE: ROOT-73 trig_01FcY3CyFdxHaMJoL1gJC4SE (minute 32) → ROOT-74 disables it after creating its own. Brief template briefs/root73-common.md (copy to root74-common.md with new LIVE + main id).
+- (20/11 04:55Z) ROOT-73 opened child MAIN ROOT-74 = session_01Rc5AsLW7a12BUC5kZhtsTy (depth 3). ROOT-73 stops; ROOT-74 disables trig_01FcY3CyFdxHaMJoL1gJC4SE.
