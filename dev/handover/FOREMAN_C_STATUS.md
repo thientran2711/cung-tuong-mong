@@ -479,3 +479,6 @@ ROOT-69 ~07:52Z: depth 3, START_CTX ~5 % (est.; used_tokens reads 0). Took over 
 ROOT-69: hourly check trigger = trig_01CFFH65FCGKiMGpiryTkMAf (delete on handover). Main now ROOT-76 session_01Rc5AsN56DP1NgSYAwWFJ8o.
 ROOT-69 07:58Z: s64+s65 cổ vuông tests LOOKED + sent (my chat + ROOT-67). Owner neckline verdict (style 1 for t1 AND t2, t2 outfit below unchanged) → RANK8-A builder+rule, 0 cr. REDRAW3: GO c06 data row. HQP jewel diff: wording identical s62/s64/s65 (reports/HQP-jewel-diff-ROOT69.md).
 ROOT-69 07:52Z: OWNER clarify t2 = t1 cut (low narrow square) + 2-layer trim; GO 1 test s62 t2 (~135 cr) → RANK8-A.
+ROOT-69 07:58Z: G18 HQP jewels (owner verbatim): Quý phi t6 unchanged; t7 HQP_LUX + S14 'HQP JEWEL VISIBILITY' added (0 cr); gate PASS s62/s64/s65 t7.
+ROOT-69 07:55Z: OWNER CANCEL HQP change (verbatim "Thôi thôi thôi thôi, không sửa một cái gì hết, Hoàng Quý Phi giữ nguyên như cũ please.") → build_all + check_store reverted to exact prior text; G18 marked CANCELLED.
+ROOT-69 07:57Z: OWNER STOP (angry, verbatim "Ủa tại sao bạn vẫn sản xuất hình ra trong khi là tôi còn đang làm bậc đáp ứng và thường tại mới mà chưa có mà đã vẽ hai người đó rồi. Trời đất ơi, vẽ gì mà vẽ một loạt rồi.") → ALL 8-rank production STOPPED (OLD4 m20, REDRAW3 c06 0 gens) until she approves t1/t2. m29+m19 done before (1 104 cr each). t2 test s62 (e70f9a3) sent.
