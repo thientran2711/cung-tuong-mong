@@ -16,9 +16,12 @@ const CR_B={r:null,g:0,s:1};/* the craft clock: continuous when CRAFT.speed chan
 function crNow(){const n=performance.now();if(CR_B.r==null){CR_B.r=n;CR_B.g=n;CR_B.s=CRAFT.speed}if(CRAFT.speed!==CR_B.s){CR_B.g+=(n-CR_B.r)*CR_B.s;CR_B.r=n;CR_B.s=CRAFT.speed}return CR_B.g+(n-CR_B.r)*CR_B.s}
 /* register an engine; switch the kind to it from KG82_CRAFT (rules text, move picture, lesson label) */
 function crReg(kind,eng,fn){KG82_ENG[eng]=fn;const D=(typeof KG82_CRAFT!=="undefined"&&KG82_CRAFT[kind])||null;const K=KG82_KIND[kind];if(!D||D.e!==eng||!K)return;
- K.e=eng;K.t=D.t;K.how=D.how;if(D.n)K.n=D.n;if(D.demo)KG82_DEMO[eng]=D.demo;
+ const was=K.e;K.e=eng;K.t=D.t;K.how=D.how;if(D.n)K.n=D.n;if(D.demo)KG82_DEMO[eng]=D.demo;
  if(D.mgl)for(const a in KG82_MGL)if(KG82_MGL[a][1]===kind)KG82_MGL[a]=[D.mgl,kind];
- if(D.spr)KG82_SPR[kind]=D.spr}
+ if(D.spr)KG82_SPR[kind]=D.spr;
+ /* the engine this kind left: unregistered once no kind runs it (mg-allkinds guard 1: every KG82_ENG engine backs a kind; old trace / arrange). The
+    functions stay where something still calls them directly (k91Trace: jwkg Chép kinh / May áo) */
+ if(was!==eng&&!Object.values(KG82_KIND).some(k=>k.e===was))delete KG82_ENG[was]}
 /* is the kind on its craft engine? (tests, scans) */
 function crOn(kind){const D=KG82_CRAFT[kind];return !!D&&KG82_KIND[kind]&&KG82_KIND[kind].e===D.e&&typeof KG82_ENG[D.e]==="function"}
 /* a board lever (mgLev) — the craft engines never type a number of their own */

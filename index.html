@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"8e74ddfa+","t":"2026-11-20T10:44Z","c":"mg-craft integrate STEP 3 for ve + hoa: tune the ease-0 ends of BAL lev.ve (place, ramp, dry) and lev.hoa (cutTol, angTol, sway, limStem) s…","b":"0cc75e95f5d7","h":[{"s":"d5b8c01b","t":"2026-11-20T10:25Z","c":"Khung chung: sơ đồ nhánh, biển Thiên mệnh hai sắc (trang còn tắt)"},{"s":"8c8b6fd7","t":"2026-11-20T09:45Z","c":"Trò chơi không chữ: khung trò dùng chung bộ khung chuẩn"},{"s":"f6e84391+","t":"2026-11-20T08:44Z","c":"review mg-back-rv: one core (law 4) — j83 practice + jrcp teacher name their charge once (pc), no duplicated suc:-10; index/sw rebuilt"},{"s":"9b6e9395+","t":"2026-11-20T08:46Z","c":"rv mg-play2: keep only the vetted face points — the 70 changed kc rows from the live img/mk-fit (no new v1/v2 rows: anchor-table gate flags…"},{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."}]};
+window.CTM_BI={"s":"d278a459+","t":"2026-11-20T10:54Z","c":"mg-craft integrate STEP 3 for ve + hoa: tune the ease-0 ends of BAL lev.ve (place, ramp, dry) and lev.hoa (cutTol, angTol, sway, limStem) s…","b":"43b9b948c7b7","h":[{"s":"d5b8c01b","t":"2026-11-20T10:25Z","c":"Khung chung: sơ đồ nhánh, biển Thiên mệnh hai sắc (trang còn tắt)"},{"s":"8c8b6fd7","t":"2026-11-20T09:45Z","c":"Trò chơi không chữ: khung trò dùng chung bộ khung chuẩn"},{"s":"f6e84391+","t":"2026-11-20T08:44Z","c":"review mg-back-rv: one core (law 4) — j83 practice + jrcp teacher name their charge once (pc), no duplicated suc:-10; index/sw rebuilt"},{"s":"9b6e9395+","t":"2026-11-20T08:46Z","c":"rv mg-play2: keep only the vetted face points — the 70 changed kc rows from the live img/mk-fit (no new v1/v2 rows: anchor-table gate flags…"},{"s":"5ac8c186+","t":"2026-11-20T08:09Z","c":"rv mg-fair-ratio: cal-dauho test 4 reads the bell curve (hand.lo/hi deleted, law 14)"},{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29620,9 +29620,12 @@ const CR_B={r:null,g:0,s:1};/* the craft clock: continuous when CRAFT.speed chan
 function crNow(){const n=performance.now();if(CR_B.r==null){CR_B.r=n;CR_B.g=n;CR_B.s=CRAFT.speed}if(CRAFT.speed!==CR_B.s){CR_B.g+=(n-CR_B.r)*CR_B.s;CR_B.r=n;CR_B.s=CRAFT.speed}return CR_B.g+(n-CR_B.r)*CR_B.s}
 /* register an engine; switch the kind to it from KG82_CRAFT (rules text, move picture, lesson label) */
 function crReg(kind,eng,fn){KG82_ENG[eng]=fn;const D=(typeof KG82_CRAFT!=="undefined"&&KG82_CRAFT[kind])||null;const K=KG82_KIND[kind];if(!D||D.e!==eng||!K)return;
- K.e=eng;K.t=D.t;K.how=D.how;if(D.n)K.n=D.n;if(D.demo)KG82_DEMO[eng]=D.demo;
+ const was=K.e;K.e=eng;K.t=D.t;K.how=D.how;if(D.n)K.n=D.n;if(D.demo)KG82_DEMO[eng]=D.demo;
  if(D.mgl)for(const a in KG82_MGL)if(KG82_MGL[a][1]===kind)KG82_MGL[a]=[D.mgl,kind];
- if(D.spr)KG82_SPR[kind]=D.spr}
+ if(D.spr)KG82_SPR[kind]=D.spr;
+ /* the engine this kind left: unregistered once no kind runs it (mg-allkinds guard 1: every KG82_ENG engine backs a kind; old trace / arrange). The
+    functions stay where something still calls them directly (k91Trace: jwkg Chép kinh / May áo) */
+ if(was!==eng&&!Object.values(KG82_KIND).some(k=>k.e===was))delete KG82_ENG[was]}
 /* is the kind on its craft engine? (tests, scans) */
 function crOn(kind){const D=KG82_CRAFT[kind];return !!D&&KG82_KIND[kind]&&KG82_KIND[kind].e===D.e&&typeof KG82_ENG[D.e]==="function"}
 /* a board lever (mgLev) — the craft engines never type a number of their own */
@@ -82791,7 +82794,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0cc75e95f5d7";window.CTM_BUILD=BUILD;
+const BUILD="43b9b948c7b7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
