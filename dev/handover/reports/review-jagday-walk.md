@@ -141,3 +141,10 @@ Deeds: walkDrop ≈ 50–60 per 80 buổi is the same on round-3 29c59bdc, so it
 Nothing else fails. Everything else in 00452105 (and walk-cost-rv2 bd2b1c59 inside it) can PASS as it is, once item 1 is 0.
 
 STATUS: FAIL review/jagday-walk-rv 64750121 (= jagday-walk-r2 00452105 + LIVE 27a7dcf5). All 8 gates green. The far-jump scan finds 7 bare jumps per 160 buổi (main 307 per 80), all from rows written after agWalkGuard in the khắc. Fixer: JAGDAY-WALK #2.
+
+### ROUND 4 addendum: co-op seat check (owner CO-OP LAND GATE, D #12 21:21Z), on 64750121
+I ran a two-seat probe (coop-thin-f2 setup, LIVE Worker, level 7, 10 buổi steps) comparing S.roster NPC rows host vs guest. Result: there is no record on EITHER seat. The cause is j95.js:28 `j95on()` = false whenever COOPW.on, and j95sync returns at its first line (j95.js:297).
+So in a co-op room nothing this branch adds runs: no jwalk walkNpcPass / walkErrRow / walkLeadIn, no agWalkGuard, no ptLedger road rows. Both seats see the same thing (nothing): no difference, no page errors.
+What does run in co-op: her own walk cost (walk-cost-rv2: goTo → travel / BAL.walk). On the guest it is a host intent (F2), and coop-e2e 68/68 covers it.
+Seat-check verdict: solo = the scan above; 2 players = identical by construction (the record is off). This was pre-existing design, not changed here. Whether NPC walks should exist in co-op at all is a MAIN / owner question for later (parking lot), not this branch.
+At the re-gate: re-run the probe (both seats, record absent or equal) + coop-e2e.
