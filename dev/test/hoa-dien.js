@@ -1,5 +1,5 @@
 /* hoa-dien (review/hoa-dien, dev/build/jhd.js): hoa điền = owned items in the ONE j92 table (slot "hd"), the placing step of the makeup
-   (drag + tilt, score = distance + tilt to the forehead anchor), NPCs by the same formula (cap BAL.hd.npcCap), xa xỉ inside luxTotal,
+   (drag only — tilt step removed, mg-play2 owner OD 20/11 ~07:55Z; score = distance to the brow-centre spot), NPCs by the same formula (cap BAL.hd.npcCap), xa xỉ inside luxTotal,
    +1 per promotion, the Thử tay kind, old saves. Plays the step with REAL pointer drags (mouse, or touch through CDP with TOUCH=1).
    usage: node dev/test/hoa-dien.js <url of dev/index.html> <WxH@dpr> <shotdir>   (env TOUCH=1: touch drags) */
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
@@ -28,16 +28,16 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
  const os=await p.evaluate(()=>{const v=rivals.find(x=>x.alive);v.wd={tram:{k:'hoadien_bac',from:'emp'},y:null};const w=wdOf(v);return{tram:w.tram&&w.tram.k,back:(v.inv||[]).some(e=>e.k==='hoadien_bac')}});
  ck('old save: worn hoa điền → chest, default trâm back',os.tram&&os.tram!=='hoadien_bac'&&os.back,os);
 
- /* 2. one formula: toilRaw without hd = the old .4/.3/.3; hdQ falls with distance and tilt; NPC by the same q, hashed, cap 95 % */
+ /* 2. one formula: toilRaw without hd = the old .4/.3/.3; hdQ falls with distance (no tilt); NPC by the same q, hashed, cap 95 % */
  const f=await p.evaluate(()=>{const P={brow:.8,powder:.6,son:.7};const old=Math.round(100*(.4*.8+.3*.6+.3*.7));
-  const q=[hdQ(0,0,0,1),hdQ(.1,5,0,1),hdQ(.3,15,0,1),hdQ(.6,40,0,1),hdQ(.3,15,1,1)];
+  const T=BAL.hd.tolD;const q=[hdQ(0,0,1),hdQ(T*.2,0,1),hdQ(T*.5,0,1),hdQ(T*.8,0,1),hdQ(T*.5,1,1)];
   const v=rivals.find(x=>x.alive&&x!==S);v.inv=(v.inv||[]).filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='hd');v.inv.push({k:'hd_mai'},{k:'hd_phuong'});delete v.tl2;/* AG (jagtoil G11): her face of the day is chosen once, at first need; she chose it before these were in her chest, so she sits again */
   const a=hdNpc(v,12345,.6),b2=hdNpc(v,12345,.6);let mx=0;for(let i=0;i<400;i++)mx=Math.max(mx,hdNpc(v,i,1).q);
   const rec=toilNpc(v);const lx=luxOf(v).sc,parts=luxParts(v);
   return{raw:toilRaw(P),old,rawHd:toilRaw(Object.assign({hd:1},P)),q,a,same:JSON.stringify(a)===JSON.stringify(b2),mx,cap:BAL.hd.npcCap,rec:rec.hd||null,mk:rec.makeup,lx,parts,
    P:wdPOf(v),pick:a&&WD_ITEMS[a.k].P}});
  ck('toilRaw without hd = old formula',f.raw===f.old,[f.raw,f.old]);ck('a good hoa điền raises the score',f.rawHd>f.raw,[f.rawHd,f.raw]);
- ck('hdQ: 1 at the anchor, falls with distance/tilt, skill widens',f.q[0]===1&&f.q[1]>f.q[2]&&f.q[2]>f.q[3]&&f.q[4]>f.q[2],f.q);
+ ck('hdQ: 1 at the anchor, falls with distance, skill widens',f.q[0]===1&&f.q[1]>f.q[2]&&f.q[2]>f.q[3]&&f.q[4]>f.q[2],f.q);
  ck('NPC hd deterministic',f.same,f.a);ck('NPC never above cap',f.mx<=f.cap+1e-9,[f.mx,f.cap]);ck('NPC wears one within her phẩm (or her lowest)',f.pick<=Math.max(1,f.P+1),[f.pick,f.P]);
  ck('NPC record carries hd when made up',!f.mk||!!f.rec,f.rec);ck('luxParts.hd inside mk',!f.rec||(f.parts.hd>0&&f.parts.mk>=f.parts.hd),f.parts);
 
@@ -55,7 +55,7 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
  ck('dropped designs are never given out (pool / pick), empty phẩm falls back to a kept one',dr.D.every(k=>!dr.given.includes(k))&&dr.empty.every(n=>n>0),dr);
  ck('old save owning a dropped design maps to a kept one (no crash)',dr.own.length>0&&dr.own.every(k=>!dr.D.includes(k))&&dr.map.every(k=>!dr.D.includes(k))&&!dr.D.includes(dr.shown),dr);
 
- /* 4. the makeup step, played: give her two hoa điền, run the morning sitting fast, pick one, drag it onto the forehead, straighten it, Dán */
+ /* 4. the makeup step, played: give her two hoa điền, run the morning sitting fast, pick one, drag it onto the brow centre, Dán (no tilt step) */
  async function sitting(good){await p.evaluate(()=>{Q.length=0;S.buoi=0;used=0;S.suc=90;S.toilette=null;S.toilSeen=null;S.inv=(S.inv||[]).filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='hd');S.inv.push({k:'hd_dao'},{k:'hd_sen'});
    try{closeModal()}catch(e){}deal();render()});await p.waitForTimeout(500);
   for(let i=0;i<4;i++){try{await require('./lib/roulette').clearMoments(p)}catch(e){}await p.evaluate(()=>document.querySelectorAll('.kfgain').forEach(e=>e.remove()));await p.waitForTimeout(200)}
@@ -73,7 +73,7 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
   const sx=pk.at.x-40,sy=pk.at.y+30,ex=sx+(tx-pk.at.x),ey=sy+(ty-pk.at.y);
   if(TOUCH){const tp=(type,x,y)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:type==='touchEnd'?[]:[{x,y}]});await tp('touchStart',sx,sy);for(let i=1;i<=12;i++)await tp('touchMove',sx+(ex-sx)*i/12,sy+(ey-sy)*i/12);await tp('touchEnd')}
   else{await p.mouse.move(sx,sy);await p.mouse.down();await p.mouse.move(ex,ey,{steps:12});await p.mouse.up()}
-  if(good){const n=Math.round((pk.ideal-pk.ang)/3);for(let i=0;i<Math.abs(n);i++){if(TOUCH){const bb=await p.$eval(n>0?'#hdr':'#hdl',e=>{const r=e.getBoundingClientRect();return[r.x+r.width/2,r.y+r.height/2]});await p.touchscreen.tap(bb[0],bb[1])}else await p.click(n>0?'#hdr':'#hdl')}}
+  ck('no tilt buttons on the board',!(await p.$('#hdl,#hdr')));
   const pk2=await p.evaluate(()=>HD.peek());await p.screenshot({path:`${DIR}/hd-${tag}-2-place${good?'':'-miss'}.jpg`,quality:70});
   if(TOUCH){const bb=await p.$eval('#hdok',e=>{const r=e.getBoundingClientRect();return[r.x+r.width/2,r.y+r.height/2]});await p.touchscreen.tap(bb[0],bb[1])}else await p.click('#hdok');
   await p.waitForFunction(()=>S.toilette&&S.toilette.wk===toilWk(),null,{timeout:30000});const snap=await p.evaluate(()=>HD.peek());await p.waitForTimeout(1500);
@@ -95,7 +95,7 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
  ck('picker lists her 2 hoa điền + Không dán',G.pick.n===3,G.pick.lbl);
  ck('placed on the anchor → high q',G.res.rec.hd&&G.res.rec.hd.q>=.8,G.res.rec.hd);ck('result row "Dán hoa điền"',G.res.row);
  ck('xa xỉ: the hoa điền is in the total',G.res.lux.hd>0&&G.res.lux.mk>=G.res.lux.hd,G.res.lux);
- ck('anchor from the face mesh',!!(G.pk&&G.pk.mesh),G.pk);
+ ck('anchor from the face table/mesh, hidden',!!(G.pk&&G.pk.mesh&&!G.pk.shown),G.pk);
  const Mi=await sitting(false);
  ck('miss still counts (lower q, still a part)',Mi.res.rec.hd&&Mi.res.rec.hd.q<G.res.rec.hd.q,Mi.res.rec.hd);
  /* r2 owner OD 21:03Z: the result sits at the anchor whatever she dragged; straight when good, fixed vụng tilt when low */
