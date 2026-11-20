@@ -455,7 +455,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | person-minigame-acts ROUND C r2 fixes (opus E22h; successor of E22g @8cfb79f0; E22t FAIL 96b9db00) | review/person-minigame-acts-c | FOREMAN E #19 | session_01DgYSWniAXpADTXukGd9dzH | RUNNING | 20/11 12:43Z |
 | FOREMAN E #19 (opus; = E ROOT STANDBY, depth 0; took over from E #18) | handover FOREMAN_E_STATUS | owner (claude.ai) | session_01DgYSWky5RC6FxdEKQrycwt | DONE → E #20 session_01DgYSWktqRepcrRpV9LRJV2 | 20/11 11:47Z |
 | kit-signs-preplay KIT KEEPER (sonnet; ROOT-78 order 12:27Z) | review/kit-signs-preplay; reports/kit-signs-preplay.md | MAIN ROOT-78 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM daa4c717 | 20/11 |
-| coop-host-lag #2 (opus; successor of 6rvC3RLv @6fb5ca7a) | review/coop-host-lag | B | session_01N1tNP4bsWeYsVudLfWWFKf | RUNNING | 20/11 13:08Z |
+| coop-host-lag #2 (opus; successor of 6rvC3RLv @6fb5ca7a) | review/coop-host-lag | B | session_01N1tNP4bsWeYsVudLfWWFKf | SẴN SÀNG KIỂM 3d73134b (report reports/coop-host-lag.md "## #2": names split = test artifact; family fixed in jcoophl: housing, trust, Empress-regard migration, start faces, her people's faces, new-person rows; e2e final 4/4 + forced (a)-(e); quickcheck, names-oldsave, coop-home, undef, one-core PASS; coop-bot stalls on main too) | 20/11 16:05Z |
 | GAP OR09 podium-wire (opus; ORDER MAIN ROOT-78 13:02Z; kitPodium + kcPhucPlay fin, BAL marks) | review/podium-wire; reports/podium-wire.md | B | session_01N1tNP4BpQj3Z4jjSkAua3X | SẴN SÀNG KIỂM 02db04af | 20/11 |
 | REVIEW kit-rows-b (sonnet small) of 6ce984a6 | review/kit-rows-b-rv; reports/rv-kit-rows-b.md | MAIN ROOT-78 | session_01Rc5AsMLiYk8Qo5FC3nWVM1 | PASS 92f61247 | 20/11 |
 | REVIEW podium-wire r1 (opus BIG) of 02db04af | review/podium-wire-r1 | B | session_01N1tNP2KN32mTra7iVBwtPR | PASS d6868a02 (lv[0] 20->11; owner flags: sister on her house kcPow, grudge foul on her) | 20/11 |
@@ -468,3 +468,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | rv-kit-opt-text REVIEWER (sonnet; small kit KP14) | review/kit-opt-text-rv; reports/rv-kit-opt-text.md | MAIN ROOT-79 | rv-signs session | DONE PASS 9f673ab2 | 20/11 14:41Z |
 | KP22 rel-men-servants (opus; ORDER MAIN ROOT-79 14:45Z; men + servants real pairwise relations → relGrp/GR groups) | review/rel-men-servants | B | session_01N1tNP6Ndqa9P3vKrpqp9M7 | RUNNING | 20/11 15:19Z |
 | FOREMAN E #20 (opus; child of E #19, depth 1) | handover FOREMAN_E_STATUS | FOREMAN E #19 | session_01DgYSWktqRepcrRpV9LRJV2 | RUNNING | 20/11 15:49Z |
+| coop-thin G #7 (opus; successor of G #6 5sNDT7i8 @fcaebe77) | review/coop-thin-g | B | session_01N1tNP4hKBjqGrnmw98Dz3q | RUNNING | 20/11 15:57Z |
