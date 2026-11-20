@@ -16,13 +16,14 @@ function lmTier(env){const T=BAL.lantern.tier;if(T!=null)return cl(+T||0,0,2);
 /* one lantern: shape 0 tròn · 1 bầu · 2 lục giác · 3 trụ dài; col 0 đỏ · 1 vàng · 2 ngọc; lit = glowing; st n|ok|bad|dim */
 function lmDraw(g,cx,cy,w,h,shape,col,lit,st,sway){const C=LM_COL[col];g.save();g.translate(cx,cy);if(sway)g.rotate(sway);
  const bw=w*.92,bh=h*.7,top=-h/2,by=-bh/2+h*.03;g.strokeStyle="#7a5a20";g.lineWidth=1.5;g.beginPath();g.moveTo(0,top-3);g.lineTo(0,by);g.stroke();
- g.globalAlpha=st==="dim"?.35:1;if(lit){g.shadowColor=C[1];g.shadowBlur=w*.55}
+ g.globalAlpha=st==="dim"?.35:1;if(lit){g.shadowColor=BAL.mgFx.glow;g.shadowBlur=Math.max(w*.55,BAL.mgFx.blur)}
  const body=()=>{g.beginPath();if(shape===0)g.ellipse(0,0,bw/2,bh/2,0,0,Math.PI*2);
   else if(shape===1){const a=bw/2,b=bh/2;g.moveTo(0,-b);g.bezierCurveTo(a*.62,-b,a*.7,-b*.2,a*.34,-b*.12);g.bezierCurveTo(a*1.08,-b*.02,a*1.08,b,0,b);g.bezierCurveTo(-a*1.08,b,-a*1.08,-b*.02,-a*.34,-b*.12);g.bezierCurveTo(-a*.7,-b*.2,-a*.62,-b,0,-b);g.closePath()}
   else if(shape===2){const a=bw/2,b=bh/2,c=bw*.2;g.moveTo(-a+c,-b);g.lineTo(a-c,-b);g.lineTo(a,0);g.lineTo(a-c,b);g.lineTo(-a+c,b);g.lineTo(-a,0);g.closePath()}
   else{const a=bw*.3,b=bh*.58,r=a*.5;g.moveTo(-a+r,-b);g.arcTo(a,-b,a,b,r);g.arcTo(a,b,-a,b,r);g.arcTo(-a,b,-a,-b,r);g.arcTo(-a,-b,a,-b,r);g.closePath()}};
  const gr=g.createRadialGradient(0,-bh*.1,bw*.05,0,0,bw*.62);gr.addColorStop(0,lit?"#fffbe6":C[1]);gr.addColorStop(.55,lit?C[1]:C[0]);gr.addColorStop(1,lit?C[0]:C[2]);
  body();g.fillStyle=gr;g.fill();if(st==="off"){g.fillStyle="rgba(24,12,36,.5)";g.fill()}g.shadowBlur=0;g.lineWidth=2;g.strokeStyle=st==="ok"?"#7dffb0":st==="bad"?"#ff6a50":"#4a2a0a";g.stroke();
+ if(lit){g.save();g.shadowColor=BAL.mgFx.glow;g.shadowBlur=BAL.mgFx.blur;g.strokeStyle=BAL.mgFx.ring;g.lineWidth=Math.max(3,w*BAL.mgFx.ringW*.7);body();g.stroke();g.restore()}
  g.save();body();g.clip();g.strokeStyle="rgba(60,20,10,.35)";g.lineWidth=1.2;
  if(col===0){for(const k of[-.5,0,.5]){g.beginPath();g.ellipse(0,0,Math.abs(bw*k*.5)+.1,bh/2,0,0,Math.PI*2);g.stroke()}}
  else if(col===1){for(const k of[-.22,.22]){g.beginPath();g.moveTo(-bw/2,bh*k);g.lineTo(bw/2,bh*k);g.stroke()}}
@@ -31,14 +32,14 @@ function lmDraw(g,cx,cy,w,h,shape,col,lit,st,sway){const C=LM_COL[col];g.save();
  g.strokeStyle=C[0];g.lineWidth=2;g.beginPath();g.moveTo(0,by+bh*.97+5);g.lineTo(0,by+bh*.97+h*.16);g.stroke();g.restore()}
 function lmShuf(a){return kg82Shuf(a.slice())}
 function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lantern.short.h?BAL.lantern.short.min:0),{g,W,H}=C;const tier=lmTier(env),B=BAL.lantern,LIM=B.lim[tier],IDLE=B.idle[tier];
- let rd=-1,pts=0,R=null,t0=0,tAct=0,done=false,wait=0;const pops=[];const hb=k91Btns(box,[["k92hint","Gợi ý","bớt một ít phần"]]);
+ let rd=-1,pts=0,R=null,t0=0,tAct=0,done=false,wait=0;const pops=[];const hb=k91Btns(box,[["k92hint","?","","Gợi ý: bớt một ít phần"]]);
  const dm=k91DemoCard(box,"doden2",{title:"CÁCH CHƠI: THẮP ĐÈN",done:()=>{hb.hidden=false;t0=tAct=performance.now();setTimeout(fit,50)},
   lines:["Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn trên màn.","Hồi 1: chạm mọi chiếc đèn giống đèn mẫu (cùng dáng, cùng màu). Hồi 2: chạm để thắp đèn cho giống hình mẫu. Hồi 3: chạm đèn theo đúng thứ tự dải mẫu.","Chạm nhầm thì đèn tối đi, chạm lại. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."]});
  if(dm)hb.hidden=true;
  const TZ=()=>Math.round(H*.3);
  function cells(n,cols,y0,h0){const rows=Math.ceil(n/cols),cw=(W-16)/cols,ch=h0/rows;return Array.from({length:n},(_,i)=>{const c=i%cols,r=Math.floor(i/cols);return{x:8+c*cw,y:y0+r*ch,w:cw,h:ch}})}
  function lw(c){const w=Math.min(c.w*.72,c.h*.62);return[w,w*1.28]}
- function mk(type){const o={type,found:0,miss:0,cost:0,mean:tier<2,t:performance.now(),flash:[]};
+ function mk(type){const o={type,found:0,miss:0,cost:0,mean:tier<2,t:performance.now(),flash:[],tp:{}};
   if(type===0){const n=B.field[tier],K=B.same[tier],cols=n<=8?4:n<=10?5:4;const s0=Math.floor(Math.random()*4),c0=Math.floor(Math.random()*3);o.samp={s:s0,c:c0};
    const L=[];for(let i=0;i<K;i++)L.push({s:s0,c:c0,ok:1});
    while(L.length<n){let s=Math.floor(Math.random()*4),c=Math.floor(Math.random()*3);const one=tier>=1&&Math.random()<.7;if(one){if(Math.random()<.5)s=s0;else c=c0}
@@ -66,11 +67,11 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lanter
    const m=Array.from({length:n},(_,i)=>({x:W-8-sw+(i%mc)*cw,y:8+Math.floor(i/mc)*ch,w:cw,h:ch}));return{f:cells(n,R.cols,fy,fh),m}}
   const n=R.S.length,sw=(W-16)/n,s=Array.from({length:n},(_,i)=>({x:8+i*sw,y:20,w:sw,h:tz-22}));return{s,f:cells(n,Math.min(n,5),fy,fh)}}
  function tapAt(x,y){if(!R||R.fin||(dm&&dm.on))return;tAct=performance.now();const G=geo();const i=G.f.findIndex(c=>x>=c.x&&x<=c.x+c.w&&y>=c.y&&y<=c.y+c.h);if(i<0)return;
-  if(R.type===0){const L=R.L[i];if(L.on)return;if(L.ok){L.on=1;R.found++;kg82Pluck(R.found,true);if(R.found>=R.need)fin(false)}
+  if(R.type===0){const L=R.L[i];if(L.on)return;if(L.ok){L.on=1;R.tp[i]=performance.now();R.found++;kg82Pluck(R.found,true);if(R.found>=R.need)fin(false)}
    else{R.miss++;L.bad=performance.now()+B.bad[tier];kg82Pluck(0,false);if(tier<2)kg82Pop(pops,G.f[i].x+G.f[i].w/2,G.f[i].y+8,"Chưa giống, thử đèn khác",K91C.red())}}
-  else if(R.type===1){const was=R.P[i]===R.T[i];R.P[i]^=1;const now=R.P[i]===R.T[i];kg82Pluck(i,now);if(was&&!now){R.miss++;kg82Pop(pops,G.f[i].x+G.f[i].w/2,G.f[i].y+8,"Chưa đúng hình",K91C.red())}
+  else if(R.type===1){const was=R.P[i]===R.T[i];R.P[i]^=1;R.tp[i]=performance.now();const now=R.P[i]===R.T[i];kg82Pluck(i,now);if(was&&!now){R.miss++;kg82Pop(pops,G.f[i].x+G.f[i].w/2,G.f[i].y+8,"Chưa đúng hình",K91C.red())}
    if(R.P.every((v,k)=>v===R.T[k]))fin(false)}
-  else{const t=R.tray[i];if(t.used)return;const want=R.S[R.k];if(t.s===want.s&&t.c===want.c){t.used=1;R.k++;kg82Pluck(R.k,true);if(R.k>=R.need)fin(false)}
+  else{const t=R.tray[i];if(t.used)return;const want=R.S[R.k];if(t.s===want.s&&t.c===want.c){t.used=1;R.tp[i]=performance.now();R.k++;kg82Pluck(R.k,true);if(R.k>=R.need)fin(false)}
    else{R.miss++;t.bad=performance.now()+B.bad[tier];kg82Pluck(0,false);if(tier<2)kg82Pop(pops,G.f[i].x+G.f[i].w/2,G.f[i].y+8,"Chưa tới đèn này",K91C.red())}}}
  const TXT=["Chạm mọi chiếc đèn giống đèn mẫu","Chạm để thắp đèn cho giống hình mẫu","Chạm đèn theo thứ tự dải mẫu"];
  const stop=k91Loop(now=>{if(!R)return;kg82Bg(g,W,H,"doden",0,.6);
@@ -80,20 +81,20 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lanter
   g.fillStyle="#fff1d0";g.font=k91F(700,Math.max(12,Math.min(15,W/28)),1);g.textAlign="center";g.textBaseline="alphabetic";
   if(R.type===0){/* sample card, left */
    const cw=Math.min(W*.3,tz*1.0);k91RR(g,10,8,cw,tz-12,10);g.fillStyle="rgba(255,250,236,.92)";g.fill();g.strokeStyle=K91C.hair;g.lineWidth=2;g.stroke();
-   lmDraw(g,10+cw/2,8+(tz-12)*.52,cw*.55,(tz-12)*.62,R.samp.s,R.samp.c,true,"n",sw);g.fillStyle="#5a3a0c";g.font=k91F(700,12,1);g.textAlign="center";g.fillText("Đèn mẫu",10+cw/2,tz-8);
-   g.fillStyle="#fff1d0";g.font=k91F(700,Math.max(12,Math.min(15,W/28)),1);g.textAlign="left";kg82Lbl(g,TXT[0],cw+22,tz*.4,W-cw-30,true);g.font=k91F(600,12,1);kg82Lbl(g,`Đã thấy ${R.found}/${R.need} chiếc`,cw+22,tz*.4+20,W-cw-30,true)}
+   lmDraw(g,10+cw/2,8+(tz-12)*.52,cw*.55,(tz-12)*.62,R.samp.s,R.samp.c,true,"n",sw);g.fillStyle="#5a3a0c";g.font=k91F(700,12,1);g.textAlign="center";
+   g.fillStyle="#fff1d0";g.font=k91F(700,Math.max(12,Math.min(15,W/28)),1);g.textAlign="left";kg82Lbl(g,`${R.found}/${R.need}`,cw+22,tz*.4,W-cw-30,true)}
   else if(R.type===1){/* sample grid, right */
    const m=G.m,x0=m[0].x-4,y0=m[0].y-4,mw=m[0].w*R.cols+8,mh=m[0].h*R.rows+8;k91RR(g,x0,y0,mw,mh,8);g.fillStyle="rgba(255,250,236,.9)";g.fill();g.strokeStyle=K91C.hair;g.lineWidth=2;g.stroke();
    m.forEach((c,i)=>{const [w,h]=lw(c);lmDraw(g,c.x+c.w/2,c.y+c.h*.5,w*.8,h*.8,R.sc,1,!!R.T[i],R.T[i]?"n":"off",0)});
-   g.fillStyle="#fff1d0";g.font=k91F(700,Math.max(12,Math.min(15,W/28)),1);g.textAlign="left";kg82Lbl(g,TXT[1],12,tz*.42,x0-16,true)}
+   g.fillStyle="#fff1d0";g.font=k91F(700,Math.max(12,Math.min(15,W/28)),1);g.textAlign="left";}
   else{/* sample string */
    G.s.forEach((c,i)=>{const [w,h]=lw({w:c.w,h:c.h});const lit=i<R.k;lmDraw(g,c.x+c.w/2,c.y+c.h*.55,w*.78,h*.78,R.S[i].s,R.S[i].c,lit,"n",sw);if(i===R.k&&!R.fin){g.save();g.globalAlpha=.55+.45*Math.sin(now/170);g.strokeStyle="#e0a526";g.lineWidth=3;k91RR(g,c.x+3,c.y,c.w-6,c.h,8);g.stroke();g.restore()}});
-   g.textAlign="center";kg82Lbl(g,TXT[2],W/2,16,W-16,true)}
+   }
   G.f.forEach((c,i)=>{const [w,h]=lw(c);const sy=Math.sin(now/600+i)*.02;let sh,co,lit=false,st="n";
    if(R.type===0){const L=R.L[i];sh=L.s;co=L.c;lit=!!L.on;if(L.on)st="ok";else if(L.bad>now)st="dim"}
    else if(R.type===1){sh=R.sc;co=1;lit=!!R.P[i];if(!lit)st="off"}
    else{const t=R.tray[i];sh=t.s;co=t.c;if(t.used)st="dim";else if(t.bad>now)st="bad"}
-   if(R.type===0&&R.L[i].bad>now)st="dim";lmDraw(g,c.x+c.w/2,c.y+c.h*.5,w,h,sh,co,lit,st,sy);
+   if(R.type===0&&R.L[i].bad>now)st="dim";{const pz=kg82FxPop(R.tp[i],now);lmDraw(g,c.x+c.w/2,c.y+c.h*.5,w*pz,h*pz,sh,co,lit,st,sy);if(R.tp[i])kg82FxRing(g,c.x+c.w/2,c.y+c.h*.5,Math.min(w,h)*.5,R.tp[i],now)}
    if(R.glow===i&&now-R.glowAt<B.glow&&!R.fin)k91Glow(g,c.x+c.w*.12,c.y+c.h*.06,c.w*.76,c.h*.88,now)});
   kg82DrawPops(g,pops,now);env.hud({score:`${Math.round(pts)}/10`,round:`Hồi ${Math.min(rd+1,3)}/3`,time:R.fin?"–":`${Math.max(0,Math.ceil(left/1000))} giây`})});
  k91Pointer(C,{down:(x,y)=>tapAt(x,y)});
