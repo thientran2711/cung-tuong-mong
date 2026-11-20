@@ -92,3 +92,10 @@ PRIORITY #1 CHECK ('ge-writers-w3 r3'): review/ge-writers-w3 (FAIL r2 c13b7748) 
 
 ## Note FOR E (shared test, not this branch)
 ge-engine «thd_hoc: the life runs the road thd_sach» failed in 3 of my 5 full runs (r2, r3, and E11c's r1 first run): the thd_hoc premise (jrd_thd.js:772 P.ok) needs a school-age royal child of a living rival, which a fresh random test life does not always have, so __life falls to another thd road. Not caused by any wave; the shared ge-engine block should retry the life or seed a pupil (one line, all waves).
+
+---
+# RE-MERGE (20/11) — order from Foreman E #16 session_01DgYSWnBz5jJxoLHrf1deug: READY b79930bf stale (LIVE moved)
+PRIORITY #1 CHECK ('ge-writers-w3 re-merge'): OD 3 | claims E11r-w3 | review/ge-writers-w3 READY b79930bf | main 0de74d9e → 37e4a68f during the run.
+**READY 2cd929e7** on review/ge-writers-w3 (fast-forward from b79930bf; origin/main 37e4a68f is its ancestor). Three merges, because main moved twice while I tested: 0de74d9e (kyngo-daily + caoly-road) → 6a55694c, 2ec6062e (mgcal) → 83fa9024, 37e4a68f (mgcal jbal2) → 2cd929e7. Conflicts only assemble.py (main's list incl. the new jagwhy*/jgamevs/jchat*/jbalky/jky + `jgedata_w3.js` after `jgedata_w2.js`), assets.json / index.html / sw.js (rebuilt by build_site.sh).
+- caoly / kyngo touch no W3 road: jrd_ch / jrd_thd / jrd_cnv / jge.js / jbalge.js / ge tests unchanged on main since 2bda29a1; main's caoly changes are in j67 + jgecat GE_ID + jgedata.js + jgedata_w2.js (Nam Chiếu → Cao Ly); jgedata_w3.js names no Nam Chiếu (0 hits). No W3 ending reads anything they changed.
+- Tests on 2cd929e7: ge-guard **6/6** (36 live) · ge_guard/check.py **ERRORS 0** · one-core PASS · ge-engine `- all` **1160/1160** · **quickcheck ALONE PASS** (core gates PASS, open 1469 ms, **old save ok**, render 185/186, tab 340/406, buổi 1141/970, tasks>200 18/17). Same set also PASS on 6a55694c (engine 1160/1160) and 83fa9024.
