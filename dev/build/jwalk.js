@@ -8,6 +8,16 @@
    BAL.walk.npc = 0 turns the NPC part off (tests / rollback). */
 /* the walker of a record row (her penalty never lengthens an NPC's road; theirs does — law 1) */
 function walkWho(id){try{const c=String(id)[0];if(c==="v")return (typeof RV==="function"&&RV(+String(id).slice(1)))||null;if(c==="s"&&typeof j95sv==="function")return j95sv(id)||null}catch(e){}return null}
+/* ERRAND LEDGER ROADS (review/jagday-walk r1, owner OD 18/11 ~20:00Z: an errand's n khắc INCLUDE the walk; ~20:05Z: seen walking off and back):
+   inside the away window [t0, due) of a person sent on an errand, the first travel(from, place)−1 khắc are her road there and the last
+   travel(place, from)−1 khắc her road back («go» rows with a why = busy, j95sKeep); the khắc between stay "errand" at the place. due and the
+   cost never change: when n is shorter than both roads the window is split by the roads (no khắc added). from = where she stood before t0
+   (kept on the task: a.wfr). Walker = the person sent (j9 travel per walker). BAL.walk.npc = 0 → the old rows. */
+function walkErrRow(e,b0,a,i,place,x){if(!walkNpcOn()||!a||!x||!place)return x;try{const OUT=typeof J95OUT_!=="undefined"?J95OUT_:"__out";const real=k=>!!k&&typeof k==="string"&&k!==OUT&&k!=="ngoai";
+  if(a.wfr==null){const q=a.t0-b0-1;const y=q>=0&&q<e.length?e[q]:null;a.wfr=y&&real(y[0])?y[0]:""}
+  const fr=a.wfr;if(!real(place))return x;const D=a.due-b0,y=D>=0&&D<e.length?e[D]:null;const bk=y&&real(y[0])&&y[1]!=="errand"?y[0]:fr;/* back = where her day goes on at due (this buổi), else where she came from */
+  const w=walkWho(a.who),n=Math.max(0,a.due-a.t0);let tO=0,tB=0;try{if(real(fr)&&fr!==place)tO=travel(fr,place,w);if(real(bk)&&bk!==place)tB=travel(place,bk,w)}catch(z){}if(!tO&&!tB)return x;const gO=Math.min(Math.max(0,tO-1),n),gB=Math.min(Math.max(0,tB-1),n-gO);
+  const K=b0+i,why=x[3]||"đi việc";if(K-a.t0<gO)return[place,"go",x[2],why+" · đang trên đường"];if(K>=a.due-gB)return[bk,"go",x[2],why+" · đang trên đường về"];return x}catch(z){return x}}
 function walkNpcOn(){try{return BAL.walk.npc!==0}catch(e){return false}}
 const JWALK={stat:{fix:0,late:0,miss:0,now:0},errs:[],seen:null};
 const walkSig=x=>x?x[0]+"|"+x[1]+"|"+(x[2]||""):"";

@@ -11,7 +11,7 @@
    10 «đi chậm» (jface penalty) adds BAL.walk.pen to HER walk (shown = charged), never to an NPC's road (j9 travel per walker) (r3 FAIL 4)
    11 DEED WALKS (review/jagday-walk, FOLLOW-UP GAP): a deed is never placed where the walk from / to the kept rows around it does not fit
       (jagday agWalkShort, travel per walker); a deed that lost its road to a later fixed row moves to a later khắc (agWalkGuard); 16 buổi of
-      play: NPC far moves between two deed rows without their «on the way» khắc = 0 (and vs BAL.walk.npc = 0)
+      play: NPC far moves between two deed rows, and errand-ledger rows (jptime ptLedger: road there / back inside the window), without their «on the way» khắc = 0 (and vs BAL.walk.npc = 0)
    6 no page errors */
 const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
@@ -86,6 +86,10 @@ const boot=`localStorage.clear();SLOT=4;document.getElementById('title').hidden=
    R.P[id][3]=[A,"ag_testC",null,"t"];o.after=agWalkShort(R,id,1,1,B,v,0);o.after2=agWalkShort(R,id,2,1,B,v,0);
    /* a slot the deed planner offers: never one without the road */
    R.P[id]=[[A,"ag_testA",null,"t"],[A,"rest",null,""],[A,"rest",null,""],[A,"rest",null,""]];const sl=[];for(let kh=0;kh<4;kh++)if(agWalkOk(R,id,kh,1,B,v,0))sl.push(kh);o.slots=sl;
+   /* errand ledger (r1): an NPC sends a servant far (n = 3 khắc, the walk included) → road there | errand | road back; due + away unchanged */
+   {const sid=Object.keys(R.P).find(k=>/^s\d+$|^mm:\d/.test(k));if(sid){const ke=R.P[sid].map(x=>x.slice()),b0=bid()*ptKH();R.P[sid][0]=[A,"serve",null,"t"];
+     const a={id:"t11e",who:sid,by:"v"+v.id,byNm:"t",lbl:"đi việc",t0:b0+1,due:b0+4,place:B,tgt:null};ptZ().push(a);
+     try{ptLedger();o.err={rows:R.P[sid].map(x=>x[0]+"/"+x[1]).join(" | "),due:a.due,t0:a.t0,b0,away:ptAwayOf(sid)===a,keep:R.P[sid].slice(1).every(x=>j95sBusy(x))}}finally{ptZ().splice(ptZ().indexOf(a),1);R.P[sid]=ke}}else o.err={none:1}}
    /* guard: a deed placed at khắc 1, then a fixed row lands right before it → it moves on to where the road fits */
    R.P[id]=[[A,"rest",null,""],[A,"rest",null,""],[B,"ag_testG",null,"t"],[A,"rest",null,""]];const pp={key:R.key,id,vid:v.id,k:"testG",kd:"",t:null,kh:2,k1:2,kc:1,pl:B,act:"",why:"t"};agZ().pend.push(pp);
    o.g0=agWalkShort(R,id,2,1,B,v,0);R.P[id][0]=[A,"ag_testA",null,"t"];o.g1=agWalkShort(R,id,2,1,B,v,0);const n=agWalkGuard(R,0);o.guard={n,kh:pp.kh,drop:!!pp.drop,row:R.P[id].map(x=>x[0]+"/"+x[1]).join(" | ")};
@@ -96,13 +100,15 @@ const boot=`localStorage.clear();SLOT=4;document.getElementById('title').hidden=
   ok(r11.after>0&&r11.after2>0,'11 and the walk on to the next kept row must fit too',r11);
   ok(JSON.stringify(r11.slots)===JSON.stringify([r11.far+1]),'11 the planner offers only khắc with the road ('+r11.slots+')',r11.slots);
   ok(r11.g0===0&&r11.g1>0&&r11.guard.kh===r11.far+1&&!r11.guard.drop,'11 guard: a deed that lost its road moves on (kh '+r11.guard.kh+')',r11.guard)}
+ ok(r11.err&&r11.err.rows===`${r11.A}/serve | ${r11.B}/go | ${r11.B}/errand | ${r11.A}/go`&&r11.err.due===r11.err.b0+4&&r11.err.away&&r11.err.keep,'11 errand ledger: NPC sender, far place → road there | errand | road back, due + away unchanged, busy',r11.err);
  const scan11=async off=>{await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);return p.evaluate(([boot,off])=>{eval(boot);if(off)BAL.walk.npc=0;const o={far:0,bad:0,deed:0,L:[]};
   for(let s=0;s<16;s++){Q.length=0;S.mg=0;for(let u=0;u<4;u++){used=u;try{j95sync()}catch(e){}}const R=S.roster;if(R&&R.P)for(const id in R.P){if(id==="me")continue;const row=R.P[id];if(!Array.isArray(row))continue;
     for(let j=1;j<row.length;j++){const x=row[j];if(!x||x[0]==null||x[1]==="go"||x[1]==="ag_tell"||(x[1]==="follow"&&x[2]==="me"))continue;let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&(row[q][1]==="go"||row[q][1]==="ag_tell")){g++;q--}
-     if(q<0||!row[q]||row[q][0]==null||row[q][0]===x[0]||row[q][1]==="ag_tell")continue;const t=travel(row[q][0],x[0]);if(t<2)continue;o.far++;if(g<t-1){o.bad++;if(/^ag_/.test(x[1])&&/^ag_/.test(row[q][1])){o.deed++;o.L.push(id+" "+row.map(e=>e[0]+"/"+e[1]).join("|"))}}}}
+     if(q<0||!row[q]||row[q][0]==null||row[q][0]===x[0]||row[q][1]==="ag_tell")continue;const t=travel(row[q][0],x[0]);if(t<2)continue;o.far++;if(g<t-1){o.bad++;if(/^ag_/.test(x[1])&&/^ag_/.test(row[q][1])){o.deed++;o.L.push(id+" "+row.map(e=>e[0]+"/"+e[1]).join("|"))}else if(x[1]==="errand"||row[q][1]==="errand"){o.errand=(o.errand||0)+1;o.L.push(id+" "+row.map(e=>e[0]+"/"+e[1]).join("|"))}}}}
    try{nextBuoi()}catch(e){}}o.errs=JWALK.errs.concat(AGD.errs.filter(e=>/walk/.test(e)));return o},[boot,off])};
  const on11=await scan11(false),off11=await scan11(true);
  ok(on11.deed===0,'11 16 buổi: NPC far moves deed → deed without «on the way» khắc: on '+on11.deed+' (all far jumps '+on11.bad+'/'+on11.far+') vs off '+off11.deed+' ('+off11.bad+'/'+off11.far+')',on11.L.slice(0,3));
+ ok(!on11.errand,'11 16 buổi: errand far moves without their road: on '+(on11.errand||0)+' vs off '+(off11.errand||0),on11.L.slice(0,3));
  ok(!on11.errs.length,'11 no walk errors',on11.errs);
  ok(!errs.length,'6 no page errors',errs.slice(0,3));
  await b.close();const n=res.filter(x=>!x).length;console.log(n?`${n} FAIL`:'ALL OK');process.exit(n?1:0)})();
