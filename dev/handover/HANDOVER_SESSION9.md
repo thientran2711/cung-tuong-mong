@@ -1492,3 +1492,6 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - (20/11 11:00Z) REGRESSION found by rv cal-p2b: dev/test/mg-skip.js FAIL 1 — mg-noword-kit kg82Signs turns the makeup quick-button odds word into «●» (on LIVE since dbddaed2). → keeper MtjP4KTg urgent fix review/kit-signs-odds (whole group) BEFORE Group 1.
 - (20/11 11:01Z) ge-map SẴN SÀNG 8e2efbea (wk NQDQXeYG; touched kitBranchMap CSS specificity — rv to confirm) → SMALL rv MyyPVJTY opened.
 - (20/11 11:03Z) kit-modal-spin SẴN SÀNG 5a3cc86a (keeper G1: KP18 kitModal over title, KP16 kitSpin, KP06 Y dược) → SMALL rv LfxAK1Hq. Keeper told: kit-signs-odds fix NEXT, then G2, G3.
+- (20/11 11:21Z) SELF-MERGE LAND mg-noword-b 8cf6b7d7 (= LAND READY 0e1f272b + LIVE f43efc71; index/sw only; mg-noword-b ALL OK, noword-kit PASS; golive PASS 190 s; FF). Closes MG03 group b + MG04 td_dung guided. CDN wiped. Archived rv Moh1gadi.
+- (20/11 11:31Z) SELF-MERGE LAND kit-mark 0aaf8152 (= PASS 34969fb6 + LIVE 8cf6b7d7; index/sw only; KIT-MARK PASS, noword-b ok; golive PASS 183 s; FF). LIVE 0aaf8152, ROLLBACK 8cf6b7d7. Closes MG01/MG08 chip.
+- (20/11 11:32Z) mg-ui-rest LAND READY 86a81259 → REAL conflict j79 kitGameFrame (g.seal vs kgmk span) → rv M53iAEvG final-merge 0aaf8152. D lander: invite-host-away-rv bd1c39c6, LAND READY line pending.
