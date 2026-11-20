@@ -421,6 +421,6 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | walk-cost «về nhà» khắc + every goTo/walk cost (opus; ORDER ROOT-76 08:36Z; OD L1976) | review/walk-cost; briefs/D9-gap-jobs.md JOB 6 | D #9 for ROOT-76 | session_01964izCjQfM4AKD13HmruCn | RUNNING | 20/11 09:21Z |
 | person-minigame-acts ROUND C (opus E22g; successor of E22f @90f464f5; r3 42dba2ac with E22r) | review/person-minigame-acts-c | FOREMAN E #17 | session_01DgYSWpbhufsng6okRiVwYE | RUNNING | 20/11 10:28Z |
 | kit-ge KIT KEEPER (sonnet; K-GE-1 kitBranchMap + K-GE-2 two-tone Thiên mệnh plate + K-GE-3 plate-label rows) | review/kit-ge; reports/kit-ge.md | MAIN ROOT-76 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5bbdf1ea | 20/11 09:10Z |
-| REVIEW kit-ge (SMALL kit sonnet) of 5bbdf1ea (K-GE-1/2/3) | review/kit-ge-rv; briefs/rv-root76-kit-ge.md | MAIN ROOT-76 | session_01Rc5AsMf18e5QE71CKAndhz | RUNNING | 20/11 09:28Z |
+| REVIEW kit-ge (SMALL kit sonnet) of 5bbdf1ea (K-GE-1/2/3) | review/kit-ge-rv; briefs/rv-root76-kit-ge.md | MAIN ROOT-76 | session_01Rc5AsMf18e5QE71CKAndhz | PASS 5bbdf1ea | 20/11 09:28Z |
 | REVIEW outside-coop r1 (opus BIG; must run thin-level co-op) of 2c904461 | review/outside-coop-r1 | B | session_01N1tNP2SCHwhuKDqSe6NWh8 | RUNNING | 20/11 09:30Z |
 | MAIN ROOT-77 (opus; child of ROOT-76, depth 6) | handover HANDOVER_SESSION9 | ROOT-76 | session_01Rc5AsKMDkP7nYjtmjLP5tq | RUNNING | 20/11 09:34Z |
