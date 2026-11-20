@@ -67,3 +67,4 @@ Text only, 0 credits, no gens. Nothing sent to the owner.
    - check_store via build_all.gate on 2 random cells per change group (dev/art/b26/proof/B26FAB2_gate.txt): every cell ≤ 10 000 PASS (29/29, incl. t1/t2/t6 cut cells = widened exception); every FAIL is a cell still > 10 000 (LEN TOO LONG; c11 grey / c10 fruit fails ride on over cells, pre-existing).
 4. SAMPLES rebuilt (builder output + same caption): dev/art/capes/s62_t5.txt (9 457), s62_t6.txt (9 601); dev/art/flower/s62_t4 (9 749), t5 (9 436 — now also carries JOB 3 capes), t6 (9 593). Each = old sample with only 'ONE fresh flower in her hair' -> 'ONE fresh plum blossom in her hair' (flower t5/t6 also JOB 3). .keep allow lines added; **keep_check --all PASS (24)**; check_store PASS x5.
 OPEN for Foreman C #5: the 156 t5 a51/a65 cells (max overshoot +422 đông, +247 normal). Options: shorter Phi cape wording (owner words), more boilerplate cuts (need a decision), or accept.
+Commit: 8ea863f (B26FAB2).
