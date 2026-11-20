@@ -33,3 +33,35 @@ Friend at home ↔ friend in the palace: letter / gift / sớ / rumour / joining
 | typed numbers in kcEnter / kcFest | 9 | 0 (BAL.kcg) |
 
 SẴN SÀNG KIỂM outside-gaps 70f3c853 → BIG review (rules-numbers + UI).
+
+## REVIEW r1 (opus BIG, session_01N1tNP3qXHKuMuUrxD5QGRQ, 20/11) — VERDICT: PASS 52f0638e
+PRIORITY #1 CHECK: worker's check reused (OD 12 | main 15 | review/outside-art(-r1) art only); re-grepped kcFest/kcEnter/kcHook/askO/geLifeNo on main — no second copy. START_CTX ≈4 % (1M window).
+Branch **review/outside-gaps-r1** @ **52f0638e** = 70f3c853 + merge LIVE fd682a8d + reviewer fixes (index.html/sw.js rebuilt).
+
+### Reviewer fixes (commit ca3ff6b8)
+| # | law | fault | fix |
+|---|---|---|---|
+| 1 | 4 ONE CORE | one-core-guard FAILED on the worker sha: Thư nhà typed `can(1)`/`spend(1)`/"1 khắc" (3 new inline rule numbers); festival quick option typed "tính 5/10" while the score is BAL.kcg.fest.skip | BAL.kcg.home.khac (1); text prints `${BAL.kcg.fest.skip}/10`. Guard now PASS (0 fails). |
+| 2 | 7 / kit hint | cost written "tốn: Bạc 10" (no sign): the kit event hint read it as a GAIN — «Nhờ … viết thư làm chứng» showed "Được: có thêm bạc"; Thư nhà put "Bạc 5" under GHI CHÚ and the ask's thiện cảm under KÈM | game convention "tốn: N khắc, Bạc -N" (3 strings). Looked: TỐN rows now "1 khắc · Bạc -15" / "1 khắc · Tổ mẫu thiện cảm -1". |
+| 3 | 2 EQUAL VALUE | «Viết thư thăm nhà» (−5 bạc; af +4, a Thư nhà item Sức+10/Đức+2, true intel) dominated «Xin nhà gửi đồ vào» (af −3; one gift worth 6–30 bạc) | BAL knobs writeBac 5→15, askAf 3→1 (noted in the BAL.kcg comment). |
+| 4 | bug | «Viết thư» spent the khắc before checking bạc (khắc lost, no result) | bạc check first. |
+| 5 | bug | Khuê các titles always "kiếp 0": geLifeNo lives inside jge's closure (undefined globally) | same count (lifeLog().length+1) in jkcg; checked: lives [1]. |
+
+### Special checks
+- **OR08 +15 cap (BAL.kcg.carry.cap 0) — measurement CONFIRMED.** Reviewer re-ran dev/measure/kc2val.js home arm, tt/muoi/thd/dtq × 3 lives, cap 15 vs cap 0 (same build): lives that entered the palace with cap 15 lost **48 / 75 / 75 / 92 / 108 Tư chất (mean ≈ 80)**; entry stat sums cap15 mean ≈ 240 vs cap0 ≈ 307 (5 entries each, n small). Worker's 49–91 / ≈77 is the same order. So a +15 cap would break the OD:L1287 "Chờ 3 năm worth the palace years" calibration (BAL.kcv).
+  **OFF = LIVE behaviour: CONFIRMED** by code: the cap block runs only when `C.cap>0`; S.kc.st0 is written but inert; kcEnter numbers moved to BAL with LIVE's values (Sủng 8+5×rank, Danh ×0.6 max 30, Bạc max 400). Decision stays with the owner (Foreman B → MAIN): OUTSIDE_PLAN §9 (+15) vs OD:L1287; not decided here.
+- **kc-end 6/7 flake — PRE-EXISTING ON LIVE, proven.** 6 runs each, same server: this build 6/6 PASS; LIVE main.html 5/6, run 2 FAIL "girlhood set above allowance 58/57" (the same random chest roll). Not this branch; flag for whoever owns the girlhood chest (jkc kcInit chest vs luxOf budget).
+
+### Tests (reviewer, on the merged build)
+- gaps.js 755x1000@2 + 1180x820@2: PASS both (after fixes, after the final main merge).
+- one-core-guard PASS · undef-scan PASS (250 names) · oldsave.js (LIVE → this build, same origin) PASS · route.js tt 755x1000 PASS (0 fail, 0 errs) · kc-end 6/6 PASS · **coop-home.js (LIVE Worker) 51/51 PASS** (co-op home road unaffected).
+- role-parity.test.js: 2 FAIL (harm:accuse/banphe/uyhiep N-ONLY + NPC promoted maid onlyRisen harm acts) — PRE-EXISTING: the SAME 2 FAILs on LIVE 66bd36cd (assembled from origin/main); nothing in jkcg touches harm acts or maid promotion
+- Shots LOOKED (Fold + iPad, scratch only, none uploaded): house map, city map (kit .mapv/.mspot, faces, "đang ở đây", khắc), festival mini-game card (kit kg82 + kitQuick), Thư nhà sub-tab (kit .ksubb + act cards), Lời đồn cũ event (kit event card, 3 options, odds words), titles (jdh kit plates). No overflow, no cut text, no page errors.
+
+### 18 laws touched
+1 two-way: «lời đồn cũ» is one-way (rivals have no home road to dig up) — by design in OUTSIDE_PLAN §9; noted, not FAIL. 2/3: fixed (#3); every option has gain+loss (lời đồn: admit Đức+/Danh−, witness bạc−/odds, wait Tâm cơ+/Danh−). 4: fixed (#1), guard PASS. 5: festivals play with occ "hoi" (mgTier rank rule). 6b: letter card shows her, sender stays home; 6c: letters/gifts are real items with ledger rows (lgr, from kc:<id>). 7: odds words only; "5/10" is the shared quick-option form. 9 kit: map/sub-tab/cards/plates all existing kit parts; jinv KINV_XTRA is a generic registry on the same .ksubb control (no new look). 11: scan table in the report.
+
+### Notes (not blocking)
+- kcgHyLoad refetches FIGURES-huynh.json every 5 min (no-cache) — tiny, but a one-shot (or SW-cached) fetch would do.
+- kcgLdMonth falls back to ANY rival (shot: Hoàng hậu digs it up) when no hostile one exists.
+- Pre-existing elsewhere (not this branch): j82/jkc/jkc2 type "tính 5/10" and fin(5) — whole-group one-core item for MAIN's mini-game lane.
