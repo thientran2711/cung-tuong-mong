@@ -59,3 +59,12 @@ bg lo OUT sleeve overshoot; bg hanghai OUT short (27 frames) + glitch, BACK adds
 bg tutin amber disc ≈ lo orange; mm so B has 3 hairpins.
 STATUS 00:45Z: the helper processing the late clips (cuts, sheets, previews) is running. Then: cdn_sync, report per group to ROOT-59
 (session_01PEhRbxKh3jLw4atknQREnq) with preview URLs.
+
+## HANDOVER (20/11 ~00:50Z) — SEAL3 context ≈ 33 % (START 5 % + 25 % passed)
+If I finish (only upload + report left) this section is void; otherwise the successor does:
+1. Wait for the late-clip processing (cuts of the 32 clips in SEAL3-late-clips.json + sheets + previews mm/bt/bg). If the helper died: download each id
+   (creations_register_download + curl), cut with th_cut.py (out/loop/back → $D/<G>-<k>-out.webp / <G>-<k>.webp / <G>-<k>-back.webp, mv *.npy out of $D),
+   th_sheet.py <G>-<k>, LOOK, th_preview.py $D/<G>-set-preview.mp4 <G>-vui … (bg without bg-so).
+2. python3 dev/site/cdn_sync.py img/_review/emo-anim-groups; report per group to ROOT-59 (session_01PEhRbxKh3jLw4atknQREnq): preview URL + sheets + credits + faults.
+3. bg-so OUT: ROOT-59 runs it (classifier blocked SEAL3); when the id comes, cut + sheet + rebuild the bg preview with bg-so.
+No new gens without ROOT-59; check account_balance first (stop < 60 000).
