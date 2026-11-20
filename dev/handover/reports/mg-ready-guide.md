@@ -76,3 +76,14 @@ https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-ready-guide/{fold,ipad}
 | caller jsgame mưu kế | clock/board start on the first tap, no rules screen, no tutorial | yes | yes | yes | yes | yes | yes | yes | – | yes |
 | caller jroute Nghiệm thân | clock/board start on the first tap, no rules screen, no tutorial | yes | yes | yes | yes | yes | yes | yes | – | yes |
 | caller j5 openMG (fallback) | clock/board start on the first tap, no rules screen, no tutorial | yes | yes | n/a (fallback, no hint hook) | yes | – | – | – | – | yes |
+
+## REVIEW (reviewer session_01Rc5AsMEJ62t26ZVuDW44TB) — **PASS 1916abde** (contains origin/main 72f7c0c5)
+PRIORITY #1 CHECK: OD 20/11 ~00:20Z read verbatim | main: kg82Open/kgReady none before | review/*: none | claims: this row.
+1. Rules screen first, no clock/engine/canvas before «Sẵn sàng»: PASS — mg-ready-guide 9/9 on 1916abde (31 kinds × 12 callers table, idle 1.5 s, no page errors).
+2. «Hướng dẫn»: PASS — ghost hand shown (dan/co/ve looked, Fold + iPad), no clock chip, S byte-identical, back to the same rules screen, repeatable, self-ends for rhythm/aim/go/pattern/steps/lamp.
+3. Kit first: PASS — one shared kgReady/kgTut (j82), KIT.md §13.7 +9 lines, kit rows/buttons only; wording cổ trang, no % in player text (only CSS % hits).
+4. jmgcal save: PASS — kind saved when round n raw arrives; mid-kind nothing in code (test step 7 ok).
+5. Co-op: PASS with note — shared buổi clock not paused; friend's reading counts inside jsmg coopMs (120 s) as before; judged acceptable (law 16, unchanged rule).
+6. Tests: quickcheck PASS (189 s, open 1524 ms, old save ok, perf new/live ≈ equal) on 2a17a1ea; 1916abde adds only dev/test/ag-mgcal.js (ran: all ok). ag-mgcal step 3 failed identically on clean main 72f7c0c5 (confirmed), now fixed in the test.
+Shots LOOKED (Fold 755x1000@2 + iPad 1180x820@2; rules + guided step; Đàn/Cờ/Vẽ): clean, no overflow/cut text. Mine were kept in scratch, not git.
+Minor, not blocking: the Fold rules screen leaves a stray petal over the «Để trời định» button (decor only).
