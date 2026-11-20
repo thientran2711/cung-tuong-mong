@@ -331,3 +331,4 @@ RUNNING (D #9):
   GAP MG17+MG18 = CAL-P2C #1 (running; built f8784c91, waits mg-fair-ratio in LIVE). GAP MG07 + MG15 = C-AG (MAIN ORDER 07:25Z: C-AG keeps broken boards + mg-fair-ratio) → not D. invite-host-away #1 pushed ef8af1d1 (working).
 RUNNING (D #9) = 8: invite-host-away F2nVQrqY | choice-value FKstgvyB | cal-p2c F6sJHzxc | night-land-chain FUQc1YiG | day-khac-land Dcv1Uu66 | outside-nums CCWYwRvy | econ-tamco Cz6DHEnx | emo-balance FYgpKE1Q. Free ≈ 4.
 
+- (20/11 08:35Z) FROM MAIN ROOT-76: LIVE 716be762 (fig-label 30e8714e: maid caption one merged title; mg-env: Chải chuốt green zone; on 892e5bb0 mg-score-same). ROLLBACK 30e8714e. Final-merge 716be762 before LAND READY.
