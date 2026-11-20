@@ -54,8 +54,6 @@ const WD={/* KNOBS (dev/WARDROBE.md §Núm) */
  overSac:2,overSung:1,overGhen:1,   /* monthly while Vượt phẩm: Sắc (effective), Sủng chance, rivals' jealousy */
  underDanh:1,festUnderDanh:2,festOkDanh:1,  /* Danh lost per month when too plain; extra on a festival; gained when right on a festival */
  tangPunish:1,           /* red/yellow worn in quốc tang: punishment level */
- remarkBad:35,remarkOk:10,          /* % per month someone remarks on her outfit (reveals the items) */
- taimat:25,              /* % per month tai mắt reveal one unknown item seen around */
  mamaReveal:30,          /* % a trusted ma ma names the P of a new item */
  autoErr:[0,0,1,-1,1,-1,2,-2],      /* Tự chọn: hidden noise drawn once per unknown item kind (in P steps) */
  groomBase:.26,groomTai:300,groomArt:.02,groomMama:.10,groomMax:.5,groomSec:10,
@@ -250,14 +248,11 @@ const WD_GMIN={night:0,contest:1,son:2,promo:2,birthday:1,accuse:0,story:1,sinht
 (function(){if(typeof restock!=="function")return;const r0=restock;restock=function(){const r=r0.apply(this,arguments);try{const n=1+R(2);for(let i=0;i<n;i++){const k=wdPickAt(R(7),roll(50)?"tram":"y",0);if(k&&!S.shop.includes(k))S.shop.push(k)}}catch(e){}return r}})();
 
 /* ---------- remarks: the only way anyone learns whether an outfit is right (true for her and for NPCs) ---------- */
-function wdRemarker(p){const L=others(p).filter(v=>v!==S&&v.alive&&!v.out&&!v.confined);const q=queenP();
- if(!S.thDead&&roll(12))return{name:"Thái hậu",face:pTH(),sure:true,th:1};
- if(!L.length)return null;const v=pick(L);return{v,name:wdNm(v),face:pv(v),sure:v===q||["tram","y"].every(sl=>{const e=wdOf(p)[sl];return !e||((v.wdk||{})[e.k])})}}
+function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy("wdRemark",{p,st},()=>roll(BAL.ag.why.wd.meet[st]||BAL.ag.why.wd.meet.over));/* G1 #7: the one with a reason says it when she meets her this month = the old remark odds (BAL.ag.why.wd.meet, was WD.remarkBad / remarkOk / 70 at quốc tang); with no occasion roll the Thái hậu spoke on every rule break: "nhìn … của" lines 4–8x */return o?wdNpwR(p,o):null} /* npc-purpose (jagwhy1 wdRemark = npcWhy): only one with a reason remarks: Thái hậu / Hoàng hậu keep the rules, a foe sneers, a friend praises */
 const WD_SAY={ok:["khen {p} ăn vận vừa vặn, đúng phẩm vị.","gật đầu khi thấy {p}: ăn vận vừa vặn, đúng lễ.","khen {p} biết chừng mực, y phục đúng phẩm.","nhìn {p} một lượt, khẽ khen là biết giữ lễ.","thấy {p} ăn vận đúng phẩm, khẽ gật đầu."],
  over:["“Đồ này e vượt phẩm vị.”","“{I} này… phẩm của {P} cài được sao?”","“Đẹp thì đẹp, chỉ e lễ chế không cho.”","“{Xung} nhớ thứ này là của bậc trên mới được dùng.”"],
  under:["“{P} ăn vận giản dị quá, chẳng ra dáng {R}.”","“Áo xống thế kia, người ngoài lại tưởng Nội vụ phủ bạc đãi {P}.”","“Giản dị là đức, nhưng sơ sài quá thì thất lễ.”","“{P} tiết kiệm quá, đến phẩm phục cũng chẳng buồn may mới.”"]};
-function wdRemark(p,st){const r=wdRemarker(p);if(!r)return"";const view=r.sure?st:wdBelStatus(r.v||p,p);
- if(view==="ok"&&!(roll(35)))return"";/* praise is rarer than blame */
+function wdRemark(p,st){const r=wdRemarker(p,st);if(!r)return"";const view=r.sure?st:wdBelStatus(r.v||p,p);/* praise only from one who likes her (wdRemark), so it is rarer than blame */
  const item=view==="tang"?wdFestItem(p):wdItem(wdOf(p).y)||wdItem(wdOf(p).tram);const nm=item?item.n:"bộ y phục";const R0=r.name.charAt(0).toUpperCase()+r.name.slice(1);
  /* palace voice: each remark is a pool (jvoice kLine, no repeat), the speaker's self word from the one core (kSay r → p) */
  const sp=r.th?"th":r.v,RK=p===S?(isSrv&&isSrv()?"người hầu cận":rkName(S)):(p.alive!==undefined?rkName(p):"");
@@ -268,7 +263,7 @@ function wdRemark(p,st){const r=wdRemarker(p);if(!r)return"";const view=r.sure?s
   under:`${R0} cười khẽ: ${fill(kLine("wd:under",kTP("wd:under")||WD_SAY.under,VO))}`,
   tang:`${R0} thấy ${wdNm(p)} mặc ${nm} giữa quốc tang.`}[view];
  /* who hears it: p always; others by chance; the player also through her tai mắt */
- for(const o of consorts()){if(o===p)continue;if(o===S?(roll(BAL.odb.j92.rbWdRemark+eyes(S)*8)):roll(45))wdSee(o,p,view,r.name,r.sure)}
+ const hw=new Set(npcWit(whereOf(p),null,{vs:p}).map(x=>x.p));const tl=npcTell(p,{place:whereOf(p)});for(const o of consorts()){if(o===p)continue;if(hw.has(o)||(o===S&&tl))wdSee(o,p,view,r.name,r.sure)} /* who hears: people really there; she, through someone who tells her */
  if(r.v)wdSee(r.v,p,view,r.name,r.sure);
  let fx="";
  /* being looked down on only costs Danh when she really is too plain (a wrong sneer falls flat) */
@@ -281,9 +276,9 @@ function wdRemark(p,st){const r=wdRemarker(p);if(!r)return"";const view=r.sure?s
   try{intelAdd(p,{k:"wd",kind:"wd",txt:t},{by:r.name,how:"nghe nhận xét về y phục"})}catch(e){}log(t+fx)}}
  return ""}
 /* tai mắt: a loyal servant finds out the TRUE phẩm of one unknown item a known consort wears (Nội vụ phủ ledgers) */
-function wdTaimat(){const w=watcher();if(!w||!roll(WD.taimat+eyes(S)*3))return"";
+function wdTaimat(){const w=watcher();if(!w)return"";
  const C=liveRivals(true).filter(v=>(typeof knows!=="function"||knows(v)));const cand=[];for(const v of C){const ww=wdOf(v);for(const sl of ["tram","y"]){const e=ww[sl];if(e&&!wdKnowsE(e))cand.push([v,e])}}
- if(!cand.length)return"";const [v,e]=pick(cand);const t=wdReveal(e.k,`${w.name} dò được ở Nội vụ phủ`);const ks=wdKnownStatus(v);let more="";
+ if(!cand.length)return"";const sp=npcWhy("wdSpy",{w:w.s||S.maid,cand});if(!sp)return"";const [v,e]=sp.place;const t=wdReveal(e.k,`${w.name} dò được ở Nội vụ phủ`);const ks=wdKnownStatus(v);let more="";
  if(ks){wdSee(S,v,ks,w.name,true);more=` Vậy ${wdNm(v)} đang ăn vận ${WD_ST_WORD[ks]}.`}
  const txt=`${w.name} báo: ${WD_ITEMS[e.k].n} mà ${wdNm(v)} đang dùng là đồ phẩm ${wdPName(WD_ITEMS[e.k].P)}.${more}`;try{noteAdd(v.id,txt)}catch(x){}try{intelAdd(v,{k:"wd",kind:"wd",txt},{by:w.name,how:"tai mắt dò ở Nội vụ phủ"})}catch(x){}log(txt);return""}
 
@@ -334,7 +329,7 @@ function wdFrameResolve(a,t){if(typeof lostUnwear==="function")lostUnwear(t,a);c
  if(t===S)S.wdFrame=null;
  if(i<0){ap(a,{danh:BAL.eff.j92.danhWdFrameResolve_3});relAdd(a,t,BAL.eff.j92.wdFrameResolve);return `${wdNmC(a)} tố ${wdNm(t)} lấy trộm ${nm}; Cung Chính ti khám phòng ${wdNm(t)} không thấy gì. ${wdNmC(a)} bị quở vì tố bừa, Danh ${balSg(BAL.eff.j92.danhWdFrameResolve_3)}. `}
  const lo=!!e.lo,cu=wdFrameCulprit(a,e);
- if(t!==S&&roll(25)){if(lo){wdFrameTake(t,i);return `${wdNmC(t)} cho người soát phòng trước, thấy ${nm} của ${wdNm(a)} lẫn trong rương, sai người đem trả. `}const f=inspect(t);if(f.length)return `${wdNmC(t)} cho người soát phòng trước, tìm ra ${f.join("; ")}. Mưu giá họa của ${wdNm(a)} không thành. `}
+ if(t!==S&&npcWhy("wdSearch",{t,a},()=>roll(BAL.ag.why.wd.search))){/* G1 #7: the watchful one searches in time = the old odds (always-on made it 5→34) */if(lo){wdFrameTake(t,i);return `${wdNmC(t)} cho người soát phòng trước, thấy ${nm} của ${wdNm(a)} lẫn trong rương, sai người đem trả. `}const f=inspect(t);if(f.length)return `${wdNmC(t)} cho người soát phòng trước, tìm ra ${f.join("; ")}. Mưu giá họa của ${wdNm(a)} không thành. `}
  if(t===S){pushDil(mkP("wdframe",{a:key(a),k:e.k,lo:e.lo||0}),lo?"Đồ thất lạc":"Bị tố ăn cắp");return ""}
  const o=oddsCl(WD.clearBase+eyes(t)*WD.clearMat+wdFrameEv(t,a,e)*10);
  if(roll(o)){wdFrameTake(t,i);
@@ -390,7 +385,7 @@ function wdNtMonth(p){const H=wdNtHeld(p);if(!H.length)return"";const clumsy=[p.
  if(p===S&&S.wdNtHide&&wk()>=S.wdNtHide.due){const h=S.wdNtHide;S.wdNtHide=null;if(roll(45)){apply({sung:BAL.eff.j92.sungWdNtMonth});punish(S,"làm mất đồ ngự tứ mà giấu, tội bất kính",2);Q.push({t:"Tội bất kính",who:pEmp(),h:`<p class="r">Chuyện ${h.n} ngự tứ ${h.how} bị lộ. Hoàng thượng giận ngươi giấu giếm. Sủng ${balSg(BAL.eff.j92.sungWdNtMonth)}, bị phạt.</p>`})}}
  if(!roll(clumsy?2.5:.8))return"";const x=pick(H);const it=wdItem(x.e);const how=clumsy&&netIs(clumsy,"greed")?"bị mất":"bị làm vỡ";
  if(p===S){pushDil(mkP("wdnt",{k:x.e.k,how,by:clumsy?clumsy.name:""}),"Đồ ngự tứ");return""}
- wdNtRemove(p,x.e,how);if(roll(55)){ap(p,{sung:-6});punish(p,"làm mất đồ ngự tứ, tội bất kính",1);try{newsAdd(p,"wd",`${wdNmC(p)} để ${it.n} ngự tứ ${how}, mang tội bất kính.`)}catch(e){}}return""}
+ wdNtRemove(p,x.e,how);const tl=npcTell(p,{from:npwIn(p),to:S.emp||S});/* npc-purpose: only one who sees inside her house knows it is gone */if(tl){ap(p,{sung:-6});punish(p,"làm mất đồ ngự tứ, tội bất kính",1);try{newsAdd(p,"wd",`${wdNmC(p)} để ${it.n} ngự tứ ${how}; ${npwNm(tl.who)} tâu lên, mang tội bất kính.`)}catch(e){}}return""}
 PEND.wdnt=pp=>{const it=WD_ITEMS[pp.k];if(!it)return null;const find=()=>wdNtHeld(S).find(x=>x.e.k===pp.k);
  const o=oddsCl(50+eyes(S)*5);
  return{t:`<p><b>${it.n}</b>${/ngự tứ/.test(it.n)?"":" (ngự tứ)"} ${pp.how}${pp.by?`; ${pp.by} run rẩy quỳ xin tội`:""}.</p><p class="past">Làm mất hay làm hỏng đồ ngự tứ là tội bất kính.</p>`,who:pMe(),o:[
@@ -404,7 +399,7 @@ PEND.wdnt=pp=>{const it=WD_ITEMS[pp.k];if(!it)return null;const find=()=>wdNtHel
 (function(){const s0=sellItem;sellItem=function(p,ix){const e=p&&p.inv&&p.inv[ix];if(e&&(wdIsNt(e)))return"";return s0.apply(this,arguments)}})();
 
 /* ---------- monthly: quốc tang, NPC dressing, remarks, tai mắt, pawns, ngự tứ, promotions (all consorts alike) ---------- */
-function wdNpcDress(v){if(!v.wd||roll(70)&&!wdTang())return;wdAutoFor(v,wdNpcBias(v))}
+function wdNpcDress(v){if(!v.wd||!(wdTang()||npcWhy("wdDress",{v},()=>roll(npw1B("wd").dressGo)/* G1 #9 flat-roll audit: she changes her outfit by the old odds (base skipped 70 %; with no done roll NPC re-dressing rose 4390 → 8115) */)))return;wdAutoFor(v,wdNpcBias(v))}
 function wdNpcInit(v){if(v.wdI)return;v.wdI=1;v.inv=v.inv||[];const P=wdPOf(v);const n=1+R(2);for(let i=0;i<n;i++){const k=wdPickAt(cl(P-1+R(4),0,8),roll(50)?"tram":"y",0);if(k)v.inv.push({k,from:"base0"})}}
 function wdMonth(pre){let ev="";S.wdk=S.wdk||{};
  /* quốc tang: Thái hậu or Hoàng hậu passes away → 3 months, no red or yellow */
@@ -416,11 +411,11 @@ function wdMonth(pre){let ev="";S.wdk=S.wdk||{};
  if(!window.PROMO_SET)for(const p of consorts()){const P=wdPOf(p);const p0=p===S?pre.P:p.wdP0;if(p0!=null&&P>p0){const k1=wdPickAt(P,"y",1),k2=wdPickAt(P,"tram",1);for(const k of [k1,k2])if(k)wdGain(p,k,{from:"nvp",giver:"Nội vụ phủ",nvp:1});
    if(p===S&&(k1||k2))log(`Nội vụ phủ đưa y phục theo phẩm mới: ${[k1,k2].filter(Boolean).map(k=>WD_ITEMS[k].n).join(", ")}.`)}if(p!==S)p.wdP0=P}
  for(const p of consorts()){if(p!==S){wdNpcInit(p);wdNpcDress(p)}const st=wdStatus(p);
-  if(st==="over"){if(roll(40)){ap(p,{sung:WD.overSung});if(p===S)log(`Hoàng thượng để mắt tới y phục rực rỡ của ngươi. Sủng +${WD.overSung}.`)}/* rivals' jealousy: the approved luxury law (jinv luxMonth) */}
-  if(!p.confined&&roll(st==="ok"?WD.remarkOk:st==="tang"?70:WD.remarkBad))ev+=wdRemark(p,st)}
+  if(st==="over"){if(npcWhy("wdNotice",{p})){ap(p,{sung:WD.overSung});if(p===S)log(`Hoàng thượng để mắt tới y phục rực rỡ của ngươi. Sủng +${WD.overSung}.`)}/* rivals' jealousy: the approved luxury law (jinv luxMonth) */}
+  if(!p.confined)ev+=wdRemark(p,st)} /* npc-purpose: wdRemark asks npcWhy("wdRemark") — a remark only from one with a reason */
  ev+=wdTaimat();ev+=wdPawnMonth(S);for(const p of consorts())wdNtMonth(p);
  /* NPCs short of silver sell quietly too */
- for(const v of liveRivals(true))if((v.bac||0)<15&&roll(20)){const i=(v.inv||[]).findIndex(e=>e&&!e.h&&wdItem(e)&&!wdIsNt(e));if(i>=0)wdSell(v,i)}
+ for(const o of npcWhyAll("wdPawn")){const v=o.who;const i=(v.inv||[]).findIndex(e=>e&&!e.h&&wdItem(e)&&!wdIsNt(e));if(i>=0)wdSell(v,i)}
  return ev}
 (function(){const m0=monthTick;monthTick=function(){let pre=null;try{const q=queenP();pre={th:!!S.thDead,q:q&&q!==S?q.id:null,P:wdPOf(S)}}catch(e){}
  const r=m0.apply(this,arguments);let add="";try{if(pre&&S&&!S.dead)add=wdMonth(pre)}catch(e){console.error(e)}return (r||"")+add}})();
@@ -474,6 +469,7 @@ function wdGroomUI(){if(!S||S.dead||!can(1))return;const w=wdGroomW(S);const m=w
   const html=kg82Rows([["Trâm cài",wdItem(wdOf(S).tram)?wdItem(wdOf(S).tram).n:"không cài","t"],["Y phục",wdItem(wdOf(S).y)?wdItem(wdOf(S).y).n:"thường phục","t"],["Kim dừng",zone==="ok"?"vùng giữa":zone==="over"?"lệch về phía lộng lẫy":"lệch về phía giản dị","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg92ok">Đã hiểu</button></div>`;
   kg82ShowRes(html,zone==="ok");$("kg92ok").onclick=()=>{kg82Close();render()}};
  KG82.phase="intro";box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg92go">Bắt đầu</button>${kitQuick({id:"kg92skip",n:"Bỏ qua",sub:`tính như Tự chọn đồ`})}</div>`;
+ kgReady(box,{kind:"chai",how,go:"#kg92go",tutor:(b,env)=>kg92Groom(b,Object.assign(env,{zw:w}))});/* KIT §13.7: rules + «Sẵn sàng» / «Hướng dẫn» (the guided round never dresses her) */
  $("kg92go").onclick=()=>{box.innerHTML="";box.hidden=false;KG82.phase="play";let fin=false;const env={kind:"chai",zw:w,hud:o=>{for(const k in o)kg82Set(k,o[k])},end:raw=>{if(fin)return;fin=true;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.phase="result";kg82Set("score","3/3");kg82Set("round","–");kg82Set("time","đã xong");done(KG92.last?KG92.last.zone:"ok")}};
   let stop=null;try{stop=kg92Groom(box,env)}catch(e){console.error(e);env.end(5);return}KG82.run={stop:()=>{if(stop)stop()}}};
  $("kg92skip").onclick=()=>{kg82Close();wdAutoUI()}}

@@ -5,7 +5,7 @@
    (who owes whom a favour, both ways: she can call a favour in, they can come to collect), rewards, risks (cấm túc, chứng cứ, can chính of j55).
    NPCs ask each other too (monthly). Cadence: ≤2 offers a month, ≤4 open quests; skips a tuần when evBusy()/storyBusy().
    Anti-repetition: a template once per life; templates seen in the last 5 lives are avoided (evHistSeen). Wraps only. ================= */
-const Q72CFG={mo:2,max:4,p:.30,npc:.55,cdAsk:3,cdCall:4};
+const Q72CFG={mo:2,max:4,cdAsk:3,cdCall:4}; /* npc-purpose: the weekly p / monthly npc rolls are gone (BAL.ag.why.q72.gap, npcFavor, ladyJob) */
 const T72=[],T72I={};
 const KIND72={craft:"Tìm vật, làm đồ",social:"Giao thiệp",inv:"Tra xét",pro:"Che chở",love:"Giúp duyên",trade:"Đổi ơn",risk:"Việc liều",court:"Việc triều",fam:"Việc nhà"};
 const G72=t=>`<span class="g">${t}</span>`,R72=t=>`<span class="r">${t}</span>`;
@@ -125,7 +125,7 @@ function q72Cands(place){const q=q72(),C=q72Ctx(),out=[];const act=new Set(q.a.m
   if(T.or&&!T.or.includes(C.or))continue;if(T.rk&&(S.rank<T.rk[0]||S.rank>T.rk[1]))continue;if(T.sea&&!T.sea.includes(C.sea))continue;
   const seen=evHistSeen("j72:"+T.id);w*=Math.pow(.12,seen);out.push([T,w,seen])}
  const fresh=out.filter(z=>!z[2]);return fresh.length>=3?fresh:out}
-function q72Choose(L,place,rq){L=L.slice();for(let t=0;t<30&&L.length;t++){const tot=L.reduce((a,z)=>a+z[1],0);let r=Math.random()*tot,i=0;while(i<L.length-1&&r>L[i][1]){r-=L[i][1];i++}const T=L[i][0];L.splice(i,1);const x=q72Make(T,rq,place);if(x)return x}return null}
+function q72Choose(L,place,rq){L=L.slice();for(let t=0;t<30&&L.length;t++){const z=npwPick(L,y=>y[1]);if(!z)break;L.splice(L.indexOf(z),1);const x=q72Make(z[0],rq,place);if(x)return x}return null}
 
 /* VOICE BY TÍNH TÌNH (W-C): the asker's own tone — a lead-in ("‹A› hấp tấp kéo ngươi lại, nói liền một hơi:") before her quoted request, and her reaction when a
    quest of hers ends with no line of its own written. Pools in jtone_c.js (TONE_POOL.askLead / askOk / askNo); only for a named woman who speaks (rv / hh / fallen / rsv) */
@@ -213,21 +213,21 @@ const NPCQ72=["chép hộ một quyển kinh","thêu hộ đôi gối","dò hộ
 const MN72=["giêng","hai","ba","tư","năm","sáu","bảy","tám","chín","mười","mười một","chạp"],YN72=["","nhất","hai","ba","tư","năm","sáu","bảy","tám","chín","mười"];
 function q72Date(){try{if(window.VP&&typeof VP.date==="function")return VP.date(S.month,S.year,S.tuan)}catch(e){}return `Tháng ${MN72[S.month-1]} · năm thứ ${YN72[S.year]||S.year}`}
 function q72Npc(){const q=q72();if(!q72On())return"";const L=liveRivals(true).filter(v=>!v.confined);if(L.length<2)return"";let ev="";
- for(let t=0;t<2;t++){if(!roll(Q72CFG.npc*100))continue;const a=pick(L);const others=L.filter(v=>v!==a);
-  const w=others.map(v=>Math.max(.1,10+aff(a,v)));let r=Math.random()*w.reduce((x,y)=>x+y),i=0;while(r>w[i]&&i<others.length-1){r-=w[i];i++}const b=others[i];
+ for(const o of npcWhyAll("npcFavor",{L}).sort((x,y)=>y.s-x.s).slice(0,BAL.ag.why.fav.max)){const a=o.who,b=o.tgt;
   const tr=(()=>{try{return traitsOf(b)}catch(e){return[b.trait]}})();const p=oddsCl(40+aff(b,a)/2+(tr.includes("Ân cần")?20:0)+(tr.includes("Khiêm nhường")?10:0)-(tr.includes("Kiêu ngạo")?15:0)-(tr.includes("Xảo quyệt")?10:0));
-  const what=pick(NPCQ72);const ok=roll(p);relAdd(a,b,ok?BAL.eff.j72.q72Npc[0]:BAL.eff.j72.q72Npc[1]);const k=[a.id,b.id].join(">");q.nd=q.nd||{};if(ok)q.nd[k]=(q.nd[k]||0)+1;
+  const what=o.why;const ok=roll(p);relAdd(a,b,ok?BAL.eff.j72.q72Npc[0]:BAL.eff.j72.q72Npc[1]);const k=[a.id,b.id].join(">");q.nd=q.nd||{};if(ok)q.nd[k]=(q.nd[k]||0)+1;
   const txt=ok?`${a.name} nhờ ${b.name} ${what}; ${b.name} giúp, hai người thân hơn.`:`${a.name} nhờ ${b.name} ${what}; ${b.name} từ chối, hai người sinh hiềm khích.`;
   q.np.unshift({w:q72Date(),t:txt,a:a.id,b:b.id});if(q.np.length>8)q.np.length=8;try{const s=seenNPC(b,a,txt+" ");if(s)ev+=s}catch(e){}}
- /* Thái hậu / Hoàng hậu give errands to consorts too: the same favour for anyone who does it */
- if(roll(35)){const v=pick(L.filter(x=>!x.queen));if(v){const byTh=!S.thDead&&roll(60);const p=oddsCl(45+(v.tai||40)/4);const ok=roll(p);
-  if(byTh){ap(v,{th:ok?3:-2})}else{const qn=queenP();if(qn&&qn!==S&&qn!==v)relAdd(qn,v,ok?BAL.eff.j72.q72Npc_2[0]:BAL.eff.j72.q72Npc_2[1])}
-  const txt=`${byTh?"Thái hậu":"Hoàng hậu"} nhờ ${v.name} ${pick(["chép kinh","thêu bình phong","lo việc yến","thăm người ốm"])}; ${ok?"nàng làm chu đáo, được khen":"nàng làm hỏng, bị chê"}.`;q.np.unshift({w:q72Date(),t:txt,a:v.id});if(q.np.length>8)q.np.length=8;
-  if(roll(BAL.odb.j72.rbQ72Npc+eyes(S)*5))ev+=txt+" "}}
+ /* Thái hậu / Hoàng hậu give errands to the consort they trust (npc-purpose ladyJob); she hears of it only through someone who tells her (npcTell) */
+ for(const o of npcWhyAll("ladyJob",{L})){const v=o.tgt,byTh=o.who===NPW1_TH;const p=oddsCl(45+(v.tai||40)/4);const ok=roll(p);v.q72job=wk();
+  if(byTh){ap(v,{th:ok?3:-2})}else{relAdd(o.who,v,ok?BAL.eff.j72.q72Npc_2[0]:BAL.eff.j72.q72Npc_2[1])}
+  const txt=`${byTh?"Thái hậu":"Hoàng hậu"} tin cậy, nhờ ${v.name} ${o.why}; ${ok?"nàng làm chu đáo, được khen":"nàng làm hỏng, bị chê"}.`;q.np.unshift({w:q72Date(),t:txt,a:v.id});if(q.np.length>8)q.np.length=8;
+  if(npcTell(v,{place:whereOf(v)}))ev+=txt+" "}
  return ev}
 /* monthly: those she owes may come to collect (two-way) */
-function q72Collect(){const q=q72();for(const k in q.d){if(q.d[k]>=0)continue;if(!roll(25))continue;const [kind,...r]=k.split(":");const id=r.join(":");const a=q72A(kind,kind==="rv"||kind==="hh"||kind==="fallen"||kind==="sv"||kind==="rsv"?+id:id||undefined);if(!a)continue;
-  const L=q72Cands().filter(z=>{const sp=z[0].r;return (a.k==="rv"&&/^rv/.test(sp))||sp===a.k||(a.k==="man"&&sp==="man:"+a.o.rw)||(a.k==="off"&&sp==="off")||(a.k==="sv"&&/^sv/.test(sp))});const x=q72Choose(L,null,a);if(x){x.collect=1;return x}}return null}
+function q72Collect(){const q=q72();const C=[];for(const k in q.d){if(q.d[k]>=0)continue;const [kind,...r]=k.split(":");const id=r.join(":");const a=q72A(kind,kind==="rv"||kind==="hh"||kind==="fallen"||kind==="sv"||kind==="rsv"?+id:id||undefined);if(!a)continue;
+  const L=q72Cands().filter(z=>{const sp=z[0].r;return (a.k==="rv"&&/^rv/.test(sp))||sp===a.k||(a.k==="man"&&sp==="man:"+a.o.rw)||(a.k==="off"&&sp==="off")||(a.k==="sv"&&/^sv/.test(sp))});if(L.length)C.push({id:"q72:"+k,a,L,n:-q.d[k]})}
+ const o=npcWhy("q72Collect",{C});if(!o)return null;const x=q72Choose(o.who.L,null,o.who.a);if(x){x.collect=1;return x}return null}
 
 /* ---------- the tuần tick ---------- */
 function q72Tick(){const q=q72();if(!q)return;
@@ -238,8 +238,8 @@ function q72Tick(){const q=q72();if(!q)return;
  if(Q.length>3||!q72CanOffer())return;if(evBusy())return;
  /* due follow-ups first */
  const now=wk();const f=q.ch.find(c=>c.at<=now);if(f){q.ch.splice(q.ch.indexOf(f),1);const T=T72I[f.tid];const A=q72A(f.rk,f.ri);if(T&&A){const x=q72Make(T,A);if(x){if(f.p)x.p=Object.assign({},f.p,x.p);q72Offer(x,"fu");evBusyMark();return}}}
- if(!roll(Q72CFG.p*100))return;
- let x=null;if(S.tuan===1&&roll(40))x=q72Collect();if(!x)x=q72Choose(q72Cands());if(x){q72Offer(x,x.collect?"collect":"");evBusyMark()}}
+ if(wk()<(q.nx||0))return;
+ let x=null;if(S.tuan===1)x=q72Collect();if(!x)x=q72Choose(q72Cands());if(x){q.nx=wk()+BAL.ag.why.q72.gap;q72Offer(x,x.collect?"collect":"");evBusyMark()}}
 (function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(q72On()&&!q72Off()&&w0!=null&&wk()!==w0){q72Tick();if(Q.length&&$("modal").hidden)showModal()}}catch(x){console.error(x)}return r}})();
 
 /* ---------- the Việc nhờ tab (kit only: .ph header, pbtn, pager + pcard, chips, pcrow rows, logs) ---------- */
@@ -570,7 +570,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("","Thưa với Hoàng thượng","sung",50,1,{},"r",{emp:1})],ok:{r:10,fn:bien(5),x:"Biên cương +5",cc:1},no:{r:-4,cc:1}});
  T7("fam_muoi","fam",{r:"fam",rf:()=>S.origin.k==="muoi",w:c=>c.bac<120?2:1,t:"Thư nhà: xin quyền buôn muối ở trấn mới",h:"“Con gái, trấn Lâm An mới mở đường muối. Nhà mình muốn xin giấy phép. Con nhờ người đưa lời đến Hộ bộ.”",dl:5,
   s:[G("ksp","Nhờ Tổng quản đưa lời đến Hộ bộ","tamco",50,1,{bac:-20})],ok:{fx:{bac:80},cc:1,fn:pow("Hộ bộ",1)},no:{}});
- T7("fam_nc","fam",{r:"man:sứ thần",rf:()=>S.origin.k==="nc",t:"Thư phụ vương: xin giảm cống phẩm cho Nam Chiếu",h:"“Công chúa, phụ vương người gửi thư. Năm nay Nam Chiếu mất mùa, xin người tâu với Hoàng đế giảm bớt cống phẩm.”",dl:5,
+ T7("fam_nc","fam",{r:"man:sứ thần",rf:()=>S.origin.k==="nc",t:"Thư phụ vương: xin giảm cống phẩm cho Cao Ly",h:"“Công chúa, phụ vương người gửi thư. Năm nay Cao Ly mất mùa, xin người tâu với Hoàng đế giảm bớt cống phẩm.”",dl:5,
   s:[G("","Tâu xin Hoàng thượng","sung",45,1,{},"r",{emp:1})],ok:{r:12,fx:{danh:3},cc:1,fn:X=>bien(3)()+" "+kho(-2)(),x:"Biên cương +3, Kho lúa -2"},no:{r:-4,cc:1}});
  T7("fam_bd","fam",{r:"man:sứ thần",rf:()=>S.origin.k==="bd",t:"Thư phụ hãn: xin mở chợ ngựa ở biên ải",h:"“Công chúa, phụ hãn người gửi thư. Mùa đông này tuyết lớn, dân thiếu muối, thiếu trà. Xin người tâu với Hoàng đế cho mở chợ biên, đổi ngựa lấy muối, trà.”",dl:5,
   s:[G("","Tâu xin Hoàng thượng","sung",45,1,{},"r",{emp:1})],ok:{r:12,fx:{...BAL.m72.bdOk},cc:1,fn:X=>bien(4)()+" "+kho(-1)(),x:"Biên cương +4, Kho lúa -1"},no:{r:-4,cc:1}});

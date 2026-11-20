@@ -29,7 +29,7 @@ const URL=process.argv[2],ORGS=(process.argv[3]||'cnv,nc').split(','),OUT=proces
     ok('age at entry','j42 srvInit (18+R(3))',`home 18 → palace ${E.gate.age}`,E.gate.age===E.home.age)}
    else{const dad=g('cha'),bros=S.kc.fam.filter(m=>/^huynh/.test(m.r)),th=g('thuc');
     ok('father alive at entry (sends orders / falls ill / dies later in the palace arcs)',og==='nc'?'j4 goal, j67 nc_gian / nc_vuong':'j67 bd_hoa c2',`${dad.t} ${dad.name}: ${dad.alive?'alive':'dead'}`,dad.alive);
-    if(og==='nc'){ok('Hoàng huynh leads the envoy; Hoàng huynh vs Hoàng thúc fight for the throne','j67 nc_su, nc_vuong',`${bros.map(m=>m.t).join(', ')}; ${th?th.t:'no uncle'}`,bros.length===1&&bros[0].t==='Hoàng huynh'&&th);
+    if(og==='nc'){ok('Thế tử huynh leads the envoy; Thế tử huynh vs Vương thúc fight for the throne','j67 nc_su, nc_vuong',`${bros.map(m=>m.t).join(', ')}; ${th?th.t:'no uncle'}`,bros.length===1&&bros[0].t==='Thế tử huynh'&&th);
      ok('father wants her as eyes and ears','j4 goal "Phụ vương … muốn ngươi làm tai mắt"','home hồi 3: he asks; she accepts or refuses (he still wants it)',true)}
     else{ok('two elder brothers fight for the throne','jorigins bd_hoang',bros.map(m=>m.t).join(', '),bros.length===2);
      ok('300 horses as dowry','jorigins bd_ngua s1','home hồi 3 text: "Ba trăm con ngựa sẽ theo con làm hồi môn" (always)',true);

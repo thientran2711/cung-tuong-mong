@@ -15,7 +15,7 @@ function fact6(x){if(!x)return null;const L=[];const kn=(x.kids||[]).filter(k=>k
 function factAny6(not){const L=liveRivals(true).filter(x=>x!==not);for(let i=0;i<6&&L.length;i++){const x=pick(L);const f=fact6(x);if(f)return f}return null}
 const G6set=(id,o)=>{const s=E68I[id];if(s)Object.assign(s,o)};
 /* --- stock sources --- */
-try{if(typeof SOC==="object"&&SOC.gossip)SOC.gossip.run=(v,t)=>{const L=liveRivals(true).filter(y=>y!==v);if(!L.length)return"";const hate=L.filter(y=>aff(v,y)<0);const x=pick(hate.length?hate:L);ap(x,{danh:-1});const f=fact6(x);
+try{if(typeof SOC==="object"&&SOC.gossip)SOC.gossip.run=(v,t)=>{const L=liveRivals(true).filter(y=>y!==v);if(!L.length)return"";const x=npwPick(L,y=>Math.max(0,hostility(v,y)))||npwPick(L,y=>Math.max(0,(y.sung||0)-(v.sung||0)));if(!x)return"";ap(x,{danh:-1});const f=fact6(x);
  return f?`${v.name} rỉ tai với cung nhân rằng ${f} (danh tiếng ${x.name} -1)`:`${v.name} nói xấu ${x.name} với cung nhân (danh tiếng ${x.name} -1)`}}catch(e){}
 (function(){const a0=approachOne;approachOne=function(){const r=a0.apply(this,arguments);try{if(r&&/sang chơi, kể chuyện trong cung\./.test(r.h||"")){const v=r.who&&r.who.w&&RV(r.who.w[1]);const f=factAny6(v);
   r.h=r.h.replace(/sang chơi, kể chuyện trong cung\./,f?`sang chơi, kể: ${f}. (Lời nàng kể; ngươi có thể tự dò cho chắc.)`:"sang chơi, kể chuyện ai đang được sủng.")}}catch(e){}return r}})();

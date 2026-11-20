@@ -289,8 +289,10 @@ function luxMonth(p){try{if(!p||p.out||p.alive===false)return"";const x=luxOf(p,
  if(x.lv>=2){const n=x.lv===3?3:1;liveRivals(true).forEach(v=>{if(v===p)return;const m=tv(LUX_TR,v)||1;ghenUp(v,Math.max(1,Math.round(n*m*(me?1:.5))),`thấy ${me?"ngươi":p.name} dùng đồ xa xỉ`,p)});
   if(me&&x.lv===3)r+="Hậu cung xì xào ngươi ăn mặc quá xa xỉ, nhiều người ghen. "}
  if(x.lv===3&&roll(cl(50-(p.duc|0)/2,10,50))){if(me){apply({th:BAL.eff.jinv.thLuxMonth});r+=`Thái hậu chê ngươi phô trương. Thái hậu ${balSg(BAL.eff.jinv.thLuxMonth)}. `}else ap(p,{danh:-2})}
- if(x.lv===3&&roll(25)){if(me){apply({danh:BAL.eff.jinv.danhLuxMonth});r+=`Lời đồn ngươi phung phí lan khắp cung. Danh ${balSg(BAL.eff.jinv.danhLuxMonth)}. `}else ap(p,{danh:-1})}
- if(x.lv===0&&rkOf(p)>=3&&roll(25)){if(me){apply({duc:BAL.eff.jinv.ducLuxMonth});r+=`Ngươi ăn mặc giản dị, được khen có đức. Đức ${balSg(BAL.eff.jinv.ducLuxMonth)}. `}else ap(p,{duc:1})}
+ const gz=x.lv===3?npwPick(liveRivals(true).filter(v=>v!==p),v=>hostility(v,p)-BAL.ag.why.g2lux.gos):null;/* npc-purpose G2c: the gossip = one who saw the dress at thỉnh an and bears her a grudge */
+ if(gz&&roll(25)){if(me){apply({danh:BAL.eff.jinv.danhLuxMonth});r+=`${npwNm(gz)} vốn có hiềm khích, đem chuyện ngươi phung phí đồn khắp cung. Danh ${balSg(BAL.eff.jinv.danhLuxMonth)}. `}else ap(p,{danh:-1})}
+ const pz=x.lv===0&&rkOf(p)>=3?npwPick(liveRivals(true).filter(v=>v!==p),v=>aff(v,p)-BAL.ag.why.g2lux.praise):null;/* npc-purpose G2c: praise comes from one who likes her */
+ if(pz&&roll(25)){if(me){apply({duc:BAL.eff.jinv.ducLuxMonth});r+=`${npwNm(pz)} khen ngươi ăn mặc giản dị, có đức. Đức ${balSg(BAL.eff.jinv.ducLuxMonth)}. `}else ap(p,{duc:1})}
  return r}catch(e){return""}}
 if(typeof itemMonth==="function"){const im0=itemMonth;itemMonth=function(p){let r=im0.apply(this,arguments)||"";r+=luxMonth(p);return r}}
 if(typeof wearBonus==="function")wearBonus=function(p){const b={sac:0,danh:0};if(!p||!p.inv)return b;const r=rkOf(p);

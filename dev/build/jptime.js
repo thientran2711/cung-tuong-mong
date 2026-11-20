@@ -174,7 +174,7 @@ ptReg("invite",a=>{const v=RV(a.a.v);const m=ptPerson(a.a);const nm=m?m.name:"Ng
    the deed lands at the due khắc with the same function, odds and news as before) ---- */
 const PT_NPC={"cx2:maidSpy":{kind:"spy",who:v=>v&&v.maid&&v.maid.name?{id:"mm:"+v.id,nm:v.maid.name}:null,lbl:t=>`đi dò la ${t&&t.name?t.name:""}`.trim()}};
 function ptNpcWire(){if(typeof AGRUN==="undefined")return;for(const k in PT_NPC){const f0=AGRUN[k];if(!f0||f0.__pt)continue;const D=PT_NPC[k];
- const f=function(v,t,pd){if(!ptOn()||PT.landing||!v||v===S)return f0.apply(this,arguments);const w=D.who(v);if(!w)return f0.apply(this,arguments);
+ const f=function(v,t,pd){if(!ptOn()||PT.landing||!v||v===S||v.coop)return f0.apply(this,arguments);const w=D.who(v);if(!w)return f0.apply(this,arguments);
   if(ptBusy(w.id))return"";/* her person is still out on the last errand: no second order (the deed is dropped, as an NPC with no maid) */
   let tid=null;try{tid=ledgerId(t)}catch(e){tid=t===S?"me":t&&t.id!=null?"v"+t.id:null}
   ptSend({who:w.id,nm:w.nm,kind:D.kind,by:"v"+v.id,byNm:v.name,place:t&&t!==S?palaceOf(t):t===S?(S.out?"lc":"home"):null,tgt:tid,a:{npc:k,v:v.id,t:tid},lbl:D.lbl(t)});PT.stat.npc++;return""};
@@ -203,7 +203,7 @@ ptReg("plant",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Ng�
  if(!e)return{ok:null};if(!v||!v.alive||v.out){log(`${nm} trở về, mang ${iname(e)} về lại rương.`);return{ok:null}}
  const i=S.inv.indexOf(e);let r="";fzRun(a.a.fz,"plant",()=>{r=runAct(S,v,"plant",i)});if(r)log(r);return{t:`${nm} lẻn vào cung ${v.name} trở về`}});
 /* ---- 8. Tặng quà by hand (PEND.giftpick from her card, not together): a servant carries the gift ---- */
-(function(){try{const b0=PEND.giftpick;if(!b0)return;PEND.giftpick=function(p){const d=b0.apply(this,arguments);try{if(!d||!ptOn()||p.v==null)return d;const v=RV(p.v);if(!v||together(S,v))return d;const s=bestSent(S);
+(function(){try{const b0=PEND.giftpick;if(!b0)return;PEND.giftpick=function(p){const d=b0.apply(this,arguments);try{if(!d||!ptOn()||p.v==null)return d;const v=RV(p.v);if(!v||v.coop/* the co-op friend: ONE path for gifts between the two players = the ASK act (she answers first, no servant), as the co-op giftin above (coop-ptime-reds) */||together(S,v))return d;const s=bestSent(S);
   if(!s){d.o=(d.o||[]).map(o=>o.ik!=null?Object.assign({},o,{lock:true,x:ptNoRunner()}):o);return d}
   d.t=(d.t||"")+`<p class="past">${s.name} mang quà đi · tốn ${ptRow("gift").o} khắc, ${ptWaitTxt("gift")}</p>`;
   d.o=(d.o||[]).map(o=>o.ik==null?o:Object.assign({},o,{go:()=>{const e=S.inv[o.ik];if(!e)return;S.inv.splice(o.ik,1);
@@ -360,7 +360,7 @@ ptReg("rtOrd",a=>{const g=PT.cl&&PT.cl[a.id];if(g){delete PT.cl[a.id];try{g()}ca
 /* ---- 16. TWO-WAY (ruling (c)): NPC senders — a gift carried by her servant (PEND.giftin), an NPC host's invitation (AG cx3:invite2) ---- */
 function ptNpcCarrier(v){if(!v)return null;if(v.maid&&v.maid.name&&!ptBusy("mm:"+v.id))return{id:"mm:"+v.id,nm:v.maid.name};try{const s=bestSent(v);if(s)return{id:ptPid(s,v),nm:s.name}}catch(e){}return null}
 (function(){try{const p0=pushDil;pushDil=function(d,title){try{if(ptOn()&&!PT.landing&&d&&d.pid==="giftin"&&d.pp&&d.pp.f!=null){const f=byKey(d.pp.f);
-   if(f&&f!==S&&f.id!=null&&typeof RV==="function"&&RV(f.id)===f){const w=ptNpcCarrier(f);if(w){ptSend({who:w.id,nm:w.nm,kind:"giftin",by:"v"+f.id,byNm:f.name,place:S.out?"lc":"home",tgt:"me",a:{run:"giftin",pp:d.pp,title:title||"Quà tặng"},lbl:"mang quà sang cung ngươi"});PT.stat.npc++;return""}}}}catch(e){ptErr("giftin",e)}return p0.apply(this,arguments)};window.pushDil=pushDil}catch(e){ptErr("pushDil wire",e)}})();
+   if(f&&f!==S&&f.id!=null&&!f.coop/* a co-op friend is a player seat, not an NPC: her gift is NOT delayed (design, reports/parallel-time.md §16; was missing → the co-op gift card waited 2 khắc on the receiver's clock) */&&typeof RV==="function"&&RV(f.id)===f){const w=ptNpcCarrier(f);if(w){ptSend({who:w.id,nm:w.nm,kind:"giftin",by:"v"+f.id,byNm:f.name,place:S.out?"lc":"home",tgt:"me",a:{run:"giftin",pp:d.pp,title:title||"Quà tặng"},lbl:"mang quà sang cung ngươi"});PT.stat.npc++;return""}}}}catch(e){ptErr("giftin",e)}return p0.apply(this,arguments)};window.pushDil=pushDil}catch(e){ptErr("pushDil wire",e)}})();
 ptReg("giftin",a=>{PT.landing=1;try{const d=mkP("giftin",a.a.pp);if(d)pushDil(d,a.a.title);else log(`${a.nm} mang quà đến, nhưng người tặng không còn.`)}finally{PT.landing=0}return null});
 PT_NPC["cx3:invite2"]={kind:"npcinv",who:v=>{/* one invitation out at a time per host: the runner still out = busy (the deed is dropped) */const p=ptZ().find(a=>!a.back&&a.a&&a.a.npc==="cx3:invite2"&&a.a.v===v.id);return p?{id:p.who,nm:p.nm}:ptNpcCarrier(v)},lbl:t=>`đi mời ${t===S?"ngươi":t&&t.name?t.name:"khách"}`,land:1};
 try{ptNpcWire()}catch(e){ptErr("npcWire2",e)}
@@ -376,7 +376,7 @@ ptReg("shop",a=>{PT.landing=1;try{pushDil(mkP("shop"),"Nhờ thái giám mua đ�
    goes through the SAME S.away / due-khắc path as hers (kind "harm": her deed on a consort when not together = order o, servant away n,
    lands at due). Callers: j28 npcAct, j40 mindRun (incl. j70 exec70), j70 plant, jtruth npcFrame, jtsb planned harm. The deed's own
    function, odds and news run at the due khắc; the servant sent is away (ledger, bestSent skips her) and cannot be sent again. ---- */
-function ptNpcSent(a,t,k){try{return ptOn()&&!PT.landing&&!!a&&a!==S&&!!t&&a.id!=null&&typeof RV==="function"&&RV(a.id)===a&&!!ACT[k]&&!ACT_NOSEND.includes(k)&&!together(a,t)&&!sameHouse(a,t)}catch(e){return false}}
+function ptNpcSent(a,t,k){try{return ptOn()&&!PT.landing&&!!a&&a!==S&&!a.coop/* a co-op friend is a player seat (her own sends ride HER S.away) */&&!!t&&a.id!=null&&typeof RV==="function"&&RV(a.id)===a&&!!ACT[k]&&!ACT_NOSEND.includes(k)&&!together(a,t)&&!sameHouse(a,t)}catch(e){return false}}
 function ptTid(t){try{return ledgerId(t)}catch(e){return t===S?"me":t&&t.id!=null?"v"+t.id:null}}
 function ptNpcDeed(a,t,k,run,x){const sv=bestSent(a);if(!sv)return"";/* no free servant (all away): the deed is dropped, as an NPC with no one to send */
  ptSend({who:ptPid(sv,a),nm:sv.name,kind:"harm",by:"v"+a.id,byNm:a.name,place:t===S?(S.out?"lc":"home"):palaceOf(t),tgt:ptTid(t),
@@ -398,7 +398,7 @@ ptReg("npcMind",a=>ptNpcBack(a,(v,t)=>mindRun(v,t,a.a.k,a.a.err)));
 ptReg("npcAct",a=>ptNpcBack(a,(v,t)=>{let ix;if(a.a.item){v.inv=v.inv||[];v.inv.push(a.a.item);ix=v.inv.indexOf(a.a.item)}
  const T0=typeof TSB!=="undefined"?TSB.now:0;if(a.a.tsb&&typeof TSB!=="undefined")TSB.now=1;try{return runAct(v,t,a.a.k,ix)}finally{if(typeof TSB!=="undefined")TSB.now=T0}}));
 /* an NPC's trusted maid away on an errand (mm:<vid>) is away for EVERY deed of her mistress, not only the same deed sent again */
-function ptMaidOut(v){return !!v&&v!==S&&v.id!=null&&ptOn()&&ptBusy("mm:"+v.id)}
+function ptMaidOut(v){return !!v&&v!==S&&!v.coop&&v.id!=null&&ptOn()&&ptBusy("mm:"+v.id)}
 (function(){try{if(typeof AGRUN==="undefined")return;for(const k of Object.keys(AGRUN)){if(!/^cx\d*:maid/.test(k)||k==="cx2:maidSpy")continue;/* a MISTRESS's deed that uses her maid (cx2:maidTalk …); never the maid's own deeds ("maid:<key>", jagstaff) */const f0=AGRUN[k];if(!f0||f0.__ptm)continue;
   const f=function(v){if(ptMaidOut(v))return"";return f0.apply(this,arguments)};f.__ptm=1;AGRUN[k]=f}}catch(e){ptErr("maid lock",e)}})();
 (function(){try{if(typeof sendMaid==="function"){const s0=sendMaid;sendMaid=function(a){if(ptMaidOut(a))return"";return s0.apply(this,arguments)}}
@@ -424,7 +424,7 @@ PT_NPC["cx2:plantSrv"]={kind:"bribe",who:v=>{let s=null;try{s=bestSent(v)}catch(
 try{ptNpcWire()}catch(e){ptErr("npcWire3",e)}
 /* ---- 20. TWO-WAY of §9 (role-parity cx4 ill route, jagacts4 p4IllCard → illBuy(v,"maid",k)): an NPC's trusted maid sent out by the Thần Vũ gate is
    away n khắc like hers (ledger, locked); caught or not is known at the due khắc with illBuy's own odds and bạc. ---- */
-(function(){try{if(typeof illBuy!=="function")return;const ib1=illBuy;illBuy=function(p,r,k){if(!p||p===S||r!=="maid"||!ptOn()||PT.landing||!p.maid||p.id==null)return ib1.apply(this,arguments);
+(function(){try{if(typeof illBuy!=="function")return;const ib1=illBuy;illBuy=function(p,r,k){if(!p||p===S||p.coop||r!=="maid"||!ptOn()||PT.landing||!p.maid||p.id==null)return ib1.apply(this,arguments);
   if(ptMaidOut(p))return"";ptSend({who:"mm:"+p.id,nm:p.maid.name,kind:"buy",by:"v"+p.id,byNm:p.name,place:typeof J95OUT_!=="undefined"?J95OUT_:null,a:{run:"npcBuy",v:p.id,k},lbl:`lén ra cửa Thần Vũ mua ${itm(k).n}`});PT.stat.npc++;return""}}catch(e){ptErr("npc illBuy wire",e)}})();
 ptReg("npcBuy",a=>{const v=RV(a.a.v);if(!v||!v.alive||v.out)return null;PT.landing=1;let r="";try{r=illBuy(v,"maid",a.a.k)||""}catch(e){ptErr("npcBuy",e)}finally{PT.landing=0}
  try{if(r)newsAdd(v,"ill",r,false)}catch(e){}return null});
