@@ -70,3 +70,6 @@ Sample s62 t4 → `dev/art/winter1/s62_t4_dong_fur3.txt` (9 887 chars, gate PASS
 Gen **hu20QqTvqL** (135 cr). Look: crossed collar OK; the fur is clearly wider than v2, smooth and not puffy; the collar fur wraps the base of the neck (face free); face OK.
 Sheet `dev/handover/review-sheets/winter1/s62_t4_dong_long3.webp` (new big · v2 VX7Nn0OMMU small).
 **WINTER1 total: 10 gens = 1 350 cr.**
+
+## Ladder confirmed (owner ~19:15Z: "Cho bản lông trước đó cho 3 bậc dưới, lông mới này cho, phi, quý phi, tần. Còn hqp và hh thì to hơn rõ, để thể hiện sự sang trọng hơn người khác")
+G26 updated (TEST): t1–t3 = v2 width (VX7Nn0OMMU), t4–t6 = v3 (hu20QqTvqL), t7–t8 strengthened to "the WIDEST, most luxurious band of thick soft plain ivory-white fur trim, clearly wider than at any lower rank, about two and a half hands wide, … rich, warm and cosy, yet lying smooth and close, never puffy or bulky; …" (408 chars; s62 t7/t8 builder prompts 9 142 / 9 311, so both still fit ≤10 000). No gens; Foreman C #3 asks the owner before a t7/t8 sample.
