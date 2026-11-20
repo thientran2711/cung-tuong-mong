@@ -9,7 +9,13 @@ Expert fixes (each logged CŨ → MỚI + reason):
             a real hue (her own hue, else her root-code hue for that role), chroma .06 (.035 for a pale tint L >= .86).
   2 TWINS : two roots that fail the ΔE2000 8 gate in the same season -> the one with the smaller move shifts hue (same
             lightness = same depth) until both read as different people.
-Classification: season = seasons.classify (colour character: family + temperature, NOT depth — Thu/Đông are not darker).
+Classification (owner Lượt 954 "Hạ phải có kiểu màu cam, màu vàng nhiều vô ... khá giống như mùa đông"): season = character of
+  the MAIN colour (an ivory/white main -> her secondary), by colour word then hue, NEVER by depth:
+  XUÂN pinks / rose / coral / red / raspberry / fuchsia (Tết reds), and spring greens worn with a pink
+  HẠ   orange / apricot / peach / mango / marigold / yellow / honey / saffron / amber / caramel / persimmon / gold (warm sun)
+  THU  terracotta / rust / brick / sienna / olive / moss / bamboo / sage / khaki / brown / aubergine (earth)
+  ĐÔNG blue / navy / indigo / violet / purple / lilac / lavender / orchid / plum / jade / teal / aqua / celadon / mint / emerald
+       / pine / ice / white (cool, icy).
 Output: dev/art/face-common/season_colour_classes.json + dev/handover/review-sheets/palettes-season/deep86/season-colour-classes.png"""
 import json, os, sys, functools, itertools
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -18,7 +24,35 @@ colourlib.oklab = functools.lru_cache(maxsize=None)(colourlib.oklab)
 _ok = colourlib.oklch
 colourlib.oklch = functools.lru_cache(maxsize=None)(lambda h: _ok(h))
 from colourlib import *
-from seasons import SEASONS, VN, classify, summer_warm
+from seasons import SEASONS, VN
+import re
+KW = [('thu', 'terracotta rust brick sienna olive moss bamboo sage khaki brown aubergine'),
+      ('ha', 'orange apricot peach mango marigold sunflower yellow honey saffron amber caramel persimmon melon cantaloupe gold lemon'),
+      ('xuan', 'pink rose coral blush peony cherry lotus raspberry fuchsia magenta crimson red garnet wine burgundy lychee'),
+      ('dong', 'blue navy indigo violet purple lilac lavender orchid plum jade teal aqua celadon mint emerald pine ice frost white ivory pearl cream')]
+def word_season(name):
+    n = name.lower()
+    for se, ws in KW:                          # first listed wins: 'peach-blossom pink' -> pink handled below
+        pass
+    if re.search(r'blossom|pink', n): return 'xuan'
+    for se, ws in KW:
+        if any(re.search(r'\b' + w, n) for w in ws.split()): return se
+    return None
+def hue_season(h):
+    L, C, H = oklch(h)
+    if is_white(h): return 'dong'
+    if H >= 345 or H < 35: return 'xuan'
+    if H < 100: return 'ha'
+    if H < 140: return 'thu'
+    return 'dong'
+def green(name, h):
+    return bool(re.search(r'green|celadon|jade|mint|leaf', name.lower())) and 120 <= oklch(h)[2] < 175
+def classify(m, s, mn='', sn=''):
+    if is_white(m) or re.search(r'ivory|white|cream|pearl', mn.lower()):
+        return word_season(sn) or hue_season(s)
+    if green(mn, m) and not re.search(r'olive|moss|sage|bamboo', mn.lower()) and (word_season(sn) == 'xuan'):
+        return 'xuan'                          # spring green worn with a pink
+    return word_season(mn) or hue_season(m)
 from xuan_pink import lch2hex
 from check_unique import pair_verdict, de2000
 
@@ -45,6 +79,19 @@ def ungrey(h, ref):
     Hn = H if C >= 0.015 else oklch(ref)[2]
     return lch2hex(L, 0.035 if L >= 0.86 else 0.06, Hn)
 
+# season colour FAMILIES (the classification itself): name, OKLCH hue, chroma — each shown pale / medium / deep
+# (depth is NOT the season). Yellows kept off the royal-yellow band H 80–100 (B21): mango H 72, lemon H 106.
+FAMILIES = {
+ 'xuan': [('cherry-blossom pink', 2, .09), ('rose', 10, .11), ('coral pink', 25, .12), ('peony', 350, .12),
+          ('raspberry', 355, .14), ('Tết red', 22, .16), ('spring green', 138, .11)],
+ 'ha':   [('peach', 45, .09), ('apricot', 55, .11), ('orange', 50, .15), ('mango', 72, .13), ('marigold', 65, .15),
+          ('honey', 78, .10), ('saffron', 60, .14), ('lemon yellow', 106, .12)],
+ 'thu':  [('terracotta', 38, .11), ('rust', 45, .13), ('brick', 30, .10), ('burnt sienna', 50, .09), ('olive', 115, .09),
+          ('moss', 128, .08), ('sage', 145, .05), ('aubergine', 330, .09)],
+ 'dong': [('ice blue', 230, .06), ('sapphire', 260, .12), ('indigo', 275, .11), ('violet', 300, .12), ('orchid', 320, .10),
+          ('jade', 160, .09), ('teal', 195, .08), ('emerald', 165, .12)],
+}
+
 def main():
     R, log = {}, {}
     for k in ids:
@@ -59,7 +106,7 @@ def main():
         R[k] = q
         if why: log[k] = dict(old=old, why=why)
     # season by colour character (same pair, any depth)
-    S = {k: classify(R[k]['main_hex'], R[k]['sec_hex']) for k in ids}
+    S = {k: classify(R[k]['main_hex'], R[k]['sec_hex'], R[k]['main'], R[k]['sec']) for k in ids}
     # twins: two roots in one season failing the gate -> move the one whose smallest hue shift clears ALL its clashes
     def clashes(k, q):
         return [o for o in ids if o != k and S[o] == S[k] and pair_verdict(q, R[o])[0] == 'FAIL']
@@ -73,7 +120,7 @@ def main():
                                        key=lambda x: abs(x[1]) + (0 if x[0] == 'sec' else 5)):
                     L, C, H = oklch(R[k][role + '_hex']); h2 = lch2hex(L, max(C, 0.05), (H + dh) % 360)
                     q = dict(R[k]); q[role + '_hex'] = h2; q[role] = cname(h2)
-                    if is_grey(h2, '') or classify(q['main_hex'], q['sec_hex']) != S[k] or clashes(k, q): continue
+                    if is_grey(h2, '') or classify(q['main_hex'], q['sec_hex'], q['main'], q['sec']) != S[k] or clashes(k, q): continue
                     best = (k, role, q, dh); break
                 if best: break
             if best:
@@ -95,7 +142,11 @@ def main():
         log[k]['old'] = {x: src[x] for x in ('main', 'main_hex', 'sec', 'sec_hex')}
         log[k]['why'] = [why]; R[k] = q
     left = [(a, b) for a, b in itertools.combinations(ids, 2) if S[a] == S[b] and pair_verdict(R[a], R[b])[0] == 'FAIL']
-    out = {'_note': __doc__.strip(), 'status': 'PROPOSAL — owner approves the classification before per-person seasons',
+    fam = {}
+    for se, lst in FAMILIES.items():
+        fam[se] = [dict(name=n, swatches=[lch2hex(L, min(C * f, 0.17), H) for L, f in ((0.84, 0.75), (0.70, 1.0), (0.52, 0.95))])
+                   for n, H, C in lst]
+    out = {'_note': __doc__.strip(), 'families': fam, 'status': 'PROPOSAL — owner approves the classification before per-person seasons',
            'counts': {VN[s]: sum(1 for k in ids if S[k] == s) for s in SEASONS}, 'gate_fails_left': left}
     for s in SEASONS:
         out[s] = [dict(id=k, group=D[k]['group'], **R[k], old_root_season=D[k]['root_season'],

@@ -1,14 +1,282 @@
 {
- "_note": "Season colour classification of the 86 DEEP root pairs (P3, owner orders ~02:27–02:34Z 20/11 via ROOT-64):\n\"Xám là bỏ hết\" · \"phải phân loại màu theo mùa đã\" · \"chuyên gia thiết kế thời trang và phối màu làm bảng màu cho đẹp, 2 màu\nphối cho đẹp\" · \"Chuyên gia khuyến nghị sửa màu nào thì sửa, ngay cả sửa bảng đã duyệt\" · \"thu và đông không có nghĩa là màu\nđậm hơn\".\nInput : palettes_season_deep.json (root pair = root_drawn, or code for the 16 without one).\nExpert fixes (each logged CŨ → MỚI + reason):\n  1 GREY  : a non-white colour with chroma < .045, a silvery cold white (C < .012, blue-grey hue), or a colour named grey /\n            silver / pewter -> same lightness,\n            a real hue (her own hue, else her root-code hue for that role), chroma .06 (.035 for a pale tint L >= .86).\n  2 TWINS : two roots that fail the ΔE2000 8 gate in the same season -> the one with the smaller move shifts hue (same\n            lightness = same depth) until both read as different people.\nClassification: season = seasons.classify (colour character: family + temperature, NOT depth — Thu/Đông are not darker).\nOutput: dev/art/face-common/season_colour_classes.json + dev/handover/review-sheets/palettes-season/deep86/season-colour-classes.png",
+ "_note": "Season colour classification of the 86 DEEP root pairs (P3, owner orders ~02:27–02:34Z 20/11 via ROOT-64):\n\"Xám là bỏ hết\" · \"phải phân loại màu theo mùa đã\" · \"chuyên gia thiết kế thời trang và phối màu làm bảng màu cho đẹp, 2 màu\nphối cho đẹp\" · \"Chuyên gia khuyến nghị sửa màu nào thì sửa, ngay cả sửa bảng đã duyệt\" · \"thu và đông không có nghĩa là màu\nđậm hơn\".\nInput : palettes_season_deep.json (root pair = root_drawn, or code for the 16 without one).\nExpert fixes (each logged CŨ → MỚI + reason):\n  1 GREY  : a non-white colour with chroma < .045, a silvery cold white (C < .012, blue-grey hue), or a colour named grey /\n            silver / pewter -> same lightness,\n            a real hue (her own hue, else her root-code hue for that role), chroma .06 (.035 for a pale tint L >= .86).\n  2 TWINS : two roots that fail the ΔE2000 8 gate in the same season -> the one with the smaller move shifts hue (same\n            lightness = same depth) until both read as different people.\nClassification (owner Lượt 954 \"Hạ phải có kiểu màu cam, màu vàng nhiều vô ... khá giống như mùa đông\"): season = character of\n  the MAIN colour (an ivory/white main -> her secondary), by colour word then hue, NEVER by depth:\n  XUÂN pinks / rose / coral / red / raspberry / fuchsia (Tết reds), and spring greens worn with a pink\n  HẠ   orange / apricot / peach / mango / marigold / yellow / honey / saffron / amber / caramel / persimmon / gold (warm sun)\n  THU  terracotta / rust / brick / sienna / olive / moss / bamboo / sage / khaki / brown / aubergine (earth)\n  ĐÔNG blue / navy / indigo / violet / purple / lilac / lavender / orchid / plum / jade / teal / aqua / celadon / mint / emerald\n       / pine / ice / white (cool, icy).\nOutput: dev/art/face-common/season_colour_classes.json + dev/handover/review-sheets/palettes-season/deep86/season-colour-classes.png",
+ "families": {
+  "xuan": [
+   {
+    "name": "cherry-blossom pink",
+    "swatches": [
+     "#F1B9C7",
+     "#CE879A",
+     "#915365"
+    ]
+   },
+   {
+    "name": "rose",
+    "swatches": [
+     "#FBB5BE",
+     "#D9818F",
+     "#9B4D5B"
+    ]
+   },
+   {
+    "name": "coral pink",
+    "swatches": [
+     "#FFB4AD",
+     "#DF7F78",
+     "#A04B47"
+    ]
+   },
+   {
+    "name": "peony",
+    "swatches": [
+     "#F8B3D3",
+     "#D67EA9",
+     "#984B72"
+    ]
+   },
+   {
+    "name": "raspberry",
+    "swatches": [
+     "#FFAECE",
+     "#E177A3",
+     "#A1436D"
+    ]
+   },
+   {
+    "name": "Tết red",
+    "swatches": [
+     "#FFABA7",
+     "#F17070",
+     "#AF3B3F"
+    ]
+   },
+   {
+    "name": "spring green",
+    "swatches": [
+     "#B1D8A3",
+     "#7CAF6A",
+     "#497739"
+    ]
+   }
+  ],
+  "ha": [
+   {
+    "name": "peach",
+    "swatches": [
+     "#F1BDA7",
+     "#CE8D6F",
+     "#92583E"
+    ]
+   },
+   {
+    "name": "apricot",
+    "swatches": [
+     "#F5BD97",
+     "#D38B59",
+     "#965726"
+    ]
+   },
+   {
+    "name": "orange",
+    "swatches": [
+     "#FFB587",
+     "#E77F3E",
+     "#A74A00"
+    ]
+   },
+   {
+    "name": "mango",
+    "swatches": [
+     "#F2C082",
+     "#D09033",
+     "#945A00"
+    ]
+   },
+   {
+    "name": "marigold",
+    "swatches": [
+     "#FDBB7A",
+     "#DD881B",
+     "#9F5300"
+    ]
+   },
+   {
+    "name": "honey",
+    "swatches": [
+     "#E6C593",
+     "#C19652",
+     "#87611E"
+    ]
+   },
+   {
+    "name": "saffron",
+    "swatches": [
+     "#FDBA83",
+     "#DD8736",
+     "#9E5200"
+    ]
+   },
+   {
+    "name": "lemon yellow",
+    "swatches": [
+     "#D2CF89",
+     "#A8A340",
+     "#726C00"
+    ]
+   }
+  ],
+  "thu": [
+   {
+    "name": "terracotta",
+    "swatches": [
+     "#FBB8A4",
+     "#D9856B",
+     "#9B513A"
+    ]
+   },
+   {
+    "name": "rust",
+    "swatches": [
+     "#FFB796",
+     "#E08256",
+     "#A14E24"
+    ]
+   },
+   {
+    "name": "brick",
+    "swatches": [
+     "#F8B9AE",
+     "#D58679",
+     "#985247"
+    ]
+   },
+   {
+    "name": "burnt sienna",
+    "swatches": [
+     "#F0BEA4",
+     "#CC8E6B",
+     "#905A3A"
+    ]
+   },
+   {
+    "name": "olive",
+    "swatches": [
+     "#C9D09E",
+     "#9CA563",
+     "#676F31"
+    ]
+   },
+   {
+    "name": "moss",
+    "swatches": [
+     "#BFD3A9",
+     "#90A872",
+     "#5C7141"
+    ]
+   },
+   {
+    "name": "sage",
+    "swatches": [
+     "#BCD1BC",
+     "#8CA78C",
+     "#587058"
+    ]
+   },
+   {
+    "name": "aubergine",
+    "swatches": [
+     "#E5BBE0",
+     "#BF8AB9",
+     "#855680"
+    ]
+   }
+  ],
+  "dong": [
+   {
+    "name": "ice blue",
+    "swatches": [
+     "#ADD1E3",
+     "#78A6BD",
+     "#456F84"
+    ]
+   },
+   {
+    "name": "sapphire",
+    "swatches": [
+     "#A8CCFF",
+     "#729FE9",
+     "#4068AA"
+    ]
+   },
+   {
+    "name": "indigo",
+    "swatches": [
+     "#BAC7FF",
+     "#8A99E3",
+     "#5863A5"
+    ]
+   },
+   {
+    "name": "violet",
+    "swatches": [
+     "#D3BEFD",
+     "#AA8DDE",
+     "#7358A0"
+    ]
+   },
+   {
+    "name": "orchid",
+    "swatches": [
+     "#E1BBE9",
+     "#BA8AC5",
+     "#81568B"
+    ]
+   },
+   {
+    "name": "jade",
+    "swatches": [
+     "#A5D9BC",
+     "#6AB08B",
+     "#367858"
+    ]
+   },
+   {
+    "name": "teal",
+    "swatches": [
+     "#9DD7D7",
+     "#5DAEAE",
+     "#267676"
+    ]
+   },
+   {
+    "name": "emerald",
+    "swatches": [
+     "#91DEBC",
+     "#46B68C",
+     "#007D58"
+    ]
+   }
+  ]
+ },
  "status": "PROPOSAL — owner approves the classification before per-person seasons",
  "counts": {
-  "Xuân": 26,
-  "Hạ": 16,
-  "Thu": 22,
-  "Đông": 22
+  "Xuân": 28,
+  "Hạ": 9,
+  "Thu": 8,
+  "Đông": 41
  },
  "gate_fails_left": [],
  "xuan": [
+  {
+   "id": "m05",
+   "group": "Đoan trang",
+   "main": "coral red",
+   "main_hex": "#D4897D",
+   "sec": "teal",
+   "sec_hex": "#499597",
+   "old_root_season": "thu",
+   "changed": null
+  },
   {
    "id": "m09",
    "group": "Sắc sảo",
@@ -18,26 +286,6 @@
    "sec_hex": "#499597",
    "old_root_season": "xuan",
    "changed": null
-  },
-  {
-   "id": "m10",
-   "group": "Đoan trang",
-   "main": "soft honey",
-   "main_hex": "#D5BF8E",
-   "sec": "deep rose",
-   "sec_hex": "#CA7281",
-   "old_root_season": "xuan",
-   "changed": {
-    "old": {
-     "main": "sage green",
-     "main_hex": "#ABCDA2",
-     "sec": "deep rose",
-     "sec_hex": "#CA7281"
-    },
-    "why": [
-     "chính gần trùng c28 → xoay sắc -52°, giữ độ đậm"
-    ]
-   }
   },
   {
    "id": "m22",
@@ -50,24 +298,34 @@
    "changed": null
   },
   {
+   "id": "m28",
+   "group": "Đoan trang",
+   "main": "coral pink",
+   "main_hex": "#D9998C",
+   "sec": "indigo blue",
+   "sec_hex": "#4E5D97",
+   "old_root_season": "thu",
+   "changed": null
+  },
+  {
    "id": "m29",
    "group": "Đoan trang",
    "main": "pale celadon",
    "main_hex": "#AFD4BC",
-   "sec": "soft raspberry pink",
-   "sec_hex": "#C3739A",
+   "sec": "deep rose",
+   "sec_hex": "#CA7281",
    "old_root_season": "xuan",
-   "changed": {
-    "old": {
-     "main": "pale celadon",
-     "main_hex": "#AFD4BC",
-     "sec": "deep rose",
-     "sec_hex": "#CA7281"
-    },
-    "why": [
-     "phụ gần trùng m10 → xoay sắc -20°, giữ độ đậm"
-    ]
-   }
+   "changed": null
+  },
+  {
+   "id": "c06",
+   "group": "Sắc sảo",
+   "main": "soft vermilion",
+   "main_hex": "#CF816E",
+   "sec": "jade green",
+   "sec_hex": "#6AAF98",
+   "old_root_season": "thu",
+   "changed": null
   },
   {
    "id": "c08",
@@ -90,52 +348,12 @@
    }
   },
   {
-   "id": "c11",
-   "group": "Sắc sảo",
-   "main": "soft lilac",
-   "main_hex": "#BC9FCE",
-   "sec": "deep rose",
-   "sec_hex": "#C76B82",
-   "old_root_season": "dong",
-   "changed": null
-  },
-  {
-   "id": "c19",
-   "group": "Sắc sảo",
-   "main": "soft plum",
-   "main_hex": "#BD7FA1",
-   "sec": "soft teal",
-   "sec_hex": "#70B7AB",
-   "old_root_season": "xuan",
-   "changed": {
-    "old": {
-     "main": "soft plum",
-     "main_hex": "#BD7FA1",
-     "sec": "soft jade",
-     "sec_hex": "#7CB699"
-    },
-    "why": [
-     "phụ gần trùng m22 → xoay sắc +20°, giữ độ đậm"
-    ]
-   }
-  },
-  {
    "id": "c20",
    "group": "Dịu dàng",
    "main": "soft lotus pink",
    "main_hex": "#DFA79F",
    "sec": "celadon green",
    "sec_hex": "#6AAF81",
-   "old_root_season": "xuan",
-   "changed": null
-  },
-  {
-   "id": "c22",
-   "group": "Đoan trang",
-   "main": "soft orchid purple",
-   "main_hex": "#B27FBD",
-   "sec": "rose pink",
-   "sec_hex": "#D28995",
    "old_root_season": "xuan",
    "changed": null
   },
@@ -164,18 +382,28 @@
    "group": "Đoan trang",
    "main": "soft celadon",
    "main_hex": "#98CAA5",
-   "sec": "rose-red",
-   "sec_hex": "#CA727E",
+   "sec": "soft coral",
+   "sec_hex": "#CB7564",
    "old_root_season": "xuan",
-   "changed": null
+   "changed": {
+    "old": {
+     "main": "soft celadon",
+     "main_hex": "#98CAA5",
+     "sec": "rose-red",
+     "sec_hex": "#CA727E"
+    },
+    "why": [
+     "phụ gần trùng m29 → xoay sắc +20°, giữ độ đậm"
+    ]
+   }
   },
   {
    "id": "c31",
    "group": "Sắc sảo",
    "main": "soft pale jade",
    "main_hex": "#ABD4BB",
-   "sec": "soft coral",
-   "sec_hex": "#CE7D70",
+   "sec": "soft raspberry pink",
+   "sec_hex": "#C67BA0",
    "old_root_season": "xuan",
    "changed": {
     "old": {
@@ -185,7 +413,7 @@
      "sec_hex": "#CD7A88"
     },
     "why": [
-     "phụ gần trùng c28 → xoay sắc +20°, giữ độ đậm"
+     "phụ gần trùng m29 → xoay sắc -20°, giữ độ đậm"
     ]
    }
   },
@@ -236,16 +464,6 @@
    "main_hex": "#D88579",
    "sec": "champagne ivory",
    "sec_hex": "#E6DDD1",
-   "old_root_season": "xuan",
-   "changed": null
-  },
-  {
-   "id": "s18",
-   "group": "Quyến rũ",
-   "main": "soft violet mauve",
-   "main_hex": "#AD6EB9",
-   "sec": "deep rose",
-   "sec_hex": "#A63F59",
    "old_root_season": "xuan",
    "changed": null
   },
@@ -320,6 +538,37 @@
    "changed": null
   },
   {
+   "id": "s36",
+   "group": "Quyến rũ",
+   "main": "soft lychee red",
+   "main_hex": "#C6535C",
+   "sec": "soft honey",
+   "sec_hex": "#D3C69A",
+   "old_root_season": "thu",
+   "changed": {
+    "old": {
+     "main": "soft lychee red",
+     "main_hex": "#C6535C",
+     "sec": "soft gold beige",
+     "sec_hex": "#D2C4AC"
+    },
+    "why": [
+     "phụ xám → soft honey cùng độ sáng (bỏ xám)",
+     "phụ gần trùng s10 → xoay sắc +12°, giữ độ đậm"
+    ]
+   }
+  },
+  {
+   "id": "s37",
+   "group": "Quyến rũ",
+   "main": "soft orchid pink",
+   "main_hex": "#C982BE",
+   "sec": "deep violet",
+   "sec_hex": "#593A78",
+   "old_root_season": "thu",
+   "changed": null
+  },
+  {
    "id": "s42",
    "group": "Sắc sảo",
    "main": "soft raspberry magenta",
@@ -368,9 +617,243 @@
    "sec_hex": "#75A7C3",
    "old_root_season": "xuan",
    "changed": null
+  },
+  {
+   "id": "s55",
+   "group": "Kiêu kỳ",
+   "main": "pink lilac",
+   "main_hex": "#CEA1BF",
+   "sec": "soft jade green",
+   "sec_hex": "#9EB28F",
+   "old_root_season": "thu",
+   "changed": null
+  },
+  {
+   "id": "s60",
+   "group": "Quyến rũ",
+   "main": "coral pink",
+   "main_hex": "#D9998C",
+   "sec": "soft sea blue",
+   "sec_hex": "#649AB8",
+   "old_root_season": "thu",
+   "changed": null
   }
  ],
  "ha": [
+  {
+   "id": "m04",
+   "group": "Đoan trang",
+   "main": "warm apricot",
+   "main_hex": "#DBB294",
+   "sec": "indigo blue",
+   "sec_hex": "#4E5D97",
+   "old_root_season": "ha",
+   "changed": null
+  },
+  {
+   "id": "m08",
+   "group": "Dịu dàng",
+   "main": "peach-salmon",
+   "main_hex": "#DBA694",
+   "sec": "jade green",
+   "sec_hex": "#5DAC85",
+   "old_root_season": "thu",
+   "changed": null
+  },
+  {
+   "id": "m19",
+   "group": "Dịu dàng",
+   "main": "caramel apricot",
+   "main_hex": "#CE9F7E",
+   "sec": "teal",
+   "sec_hex": "#499597",
+   "old_root_season": "thu",
+   "changed": null
+  },
+  {
+   "id": "c10",
+   "group": "Đoan trang",
+   "main": "soft peach",
+   "main_hex": "#DFBB9F",
+   "sec": "soft jade",
+   "sec_hex": "#5AAC99",
+   "old_root_season": "ha",
+   "changed": {
+    "old": {
+     "main": "soft peach",
+     "main_hex": "#DFBB9F",
+     "sec": "jade teal",
+     "sec_hex": "#53ACA5"
+    },
+    "why": [
+     "phụ gần trùng m19 → xoay sắc -12°, giữ độ đậm"
+    ]
+   }
+  },
+  {
+   "id": "s38",
+   "group": "Quyến rũ",
+   "main": "soft apricot rose",
+   "main_hex": "#D99F8C",
+   "sec": "deep rose brown",
+   "sec_hex": "#743E47",
+   "old_root_season": "thu",
+   "changed": null
+  },
+  {
+   "id": "s39",
+   "group": "Sắc sảo",
+   "main": "soft saffron amber",
+   "main_hex": "#C89741",
+   "sec": "smoky teal",
+   "sec_hex": "#477A85",
+   "old_root_season": "thu",
+   "changed": null
+  },
+  {
+   "id": "s56",
+   "group": "Quyến rũ",
+   "main": "apricot",
+   "main_hex": "#D6A585",
+   "sec": "lavender violet",
+   "sec_hex": "#A991CA",
+   "old_root_season": "thu",
+   "changed": null
+  },
+  {
+   "id": "s59",
+   "group": "Quyến rũ",
+   "main": "soft apricot",
+   "main_hex": "#DEAF9B",
+   "sec": "soft moonlight blue",
+   "sec_hex": "#A4BCD8",
+   "old_root_season": "ha",
+   "changed": null
+  },
+  {
+   "id": "s61",
+   "group": "Quyến rũ",
+   "main": "persimmon",
+   "main_hex": "#D2906C",
+   "sec": "ivory",
+   "sec_hex": "#EDDCC6",
+   "old_root_season": "thu",
+   "changed": null
+  }
+ ],
+ "thu": [
+  {
+   "id": "m02",
+   "group": "Dịu dàng",
+   "main": "moss green",
+   "main_hex": "#A8C379",
+   "sec": "coral rose",
+   "sec_hex": "#CF8377",
+   "old_root_season": "thu",
+   "changed": null
+  },
+  {
+   "id": "m10",
+   "group": "Đoan trang",
+   "main": "sage green",
+   "main_hex": "#ABCDA2",
+   "sec": "deep rose",
+   "sec_hex": "#CA7281",
+   "old_root_season": "xuan",
+   "changed": null
+  },
+  {
+   "id": "c16",
+   "group": "Đoan trang",
+   "main": "soft sage green",
+   "main_hex": "#B1BD7F",
+   "sec": "plum rose",
+   "sec_hex": "#B8618C",
+   "old_root_season": "thu",
+   "changed": null
+  },
+  {
+   "id": "c27",
+   "group": "Sắc sảo",
+   "main": "soft terracotta",
+   "main_hex": "#CF776E",
+   "sec": "deep teal",
+   "sec_hex": "#4D9699",
+   "old_root_season": "thu",
+   "changed": null
+  },
+  {
+   "id": "s41",
+   "group": "Sắc sảo",
+   "main": "soft olive green",
+   "main_hex": "#788A42",
+   "sec": "pale gold beige",
+   "sec_hex": "#DBD0BD",
+   "old_root_season": "thu",
+   "changed": null
+  },
+  {
+   "id": "s44",
+   "group": "Quyến rũ",
+   "main": "soft burnt sienna",
+   "main_hex": "#A6593F",
+   "sec": "sage green",
+   "sec_hex": "#94B594",
+   "old_root_season": "thu",
+   "changed": {
+    "old": {
+     "main": "soft burnt sienna",
+     "main_hex": "#A6593F",
+     "sec": "sage grey",
+     "sec_hex": "#9EB39E"
+    },
+    "why": [
+     "phụ xám → xanh lá xô thơm cùng độ sáng (bỏ xám); F3 vẽ s44 bằng #94B594"
+    ]
+   }
+  },
+  {
+   "id": "s45",
+   "group": "Quyến rũ",
+   "main": "soft aubergine purple",
+   "main_hex": "#7C4587",
+   "sec": "pale gold",
+   "sec_hex": "#DACEA9",
+   "old_root_season": "thu",
+   "changed": null
+  },
+  {
+   "id": "s58",
+   "group": "Quyến rũ",
+   "main": "soft rust red",
+   "main_hex": "#D28B79",
+   "sec": "pale mint green",
+   "sec_hex": "#B0DDD0",
+   "old_root_season": "thu",
+   "changed": null
+  }
+ ],
+ "dong": [
+  {
+   "id": "m14",
+   "group": "Dịu dàng",
+   "main": "ivory white",
+   "main_hex": "#EDE0CC",
+   "sec": "jade green",
+   "sec_hex": "#5DAC85",
+   "old_root_season": "dong",
+   "changed": null
+  },
+  {
+   "id": "m16",
+   "group": "Đoan trang",
+   "main": "lavender purple",
+   "main_hex": "#AD91CA",
+   "sec": "jade green",
+   "sec_hex": "#5DAC85",
+   "old_root_season": "dong",
+   "changed": null
+  },
   {
    "id": "m18",
    "group": "Dịu dàng",
@@ -392,6 +875,36 @@
    }
   },
   {
+   "id": "m20",
+   "group": "Dịu dàng",
+   "main": "slate blue",
+   "main_hex": "#8E95C2",
+   "sec": "apricot",
+   "sec_hex": "#D6A585",
+   "old_root_season": "dong",
+   "changed": null
+  },
+  {
+   "id": "c02",
+   "group": "Dịu dàng",
+   "main": "soft sapphire blue",
+   "main_hex": "#7E8FBE",
+   "sec": "warm ivory",
+   "sec_hex": "#EAD7BF",
+   "old_root_season": "dong",
+   "changed": null
+  },
+  {
+   "id": "c04",
+   "group": "Đoan trang",
+   "main": "soft royal purple",
+   "main_hex": "#A87FBD",
+   "sec": "rose-red",
+   "sec_hex": "#CF818C",
+   "old_root_season": "dong",
+   "changed": null
+  },
+  {
    "id": "c05",
    "group": "Sắc sảo",
    "main": "soft peacock teal",
@@ -402,14 +915,114 @@
    "changed": null
   },
   {
-   "id": "c10",
-   "group": "Đoan trang",
-   "main": "soft peach",
-   "main_hex": "#DFBB9F",
-   "sec": "jade teal",
-   "sec_hex": "#53ACA5",
+   "id": "c11",
+   "group": "Sắc sảo",
+   "main": "soft lilac",
+   "main_hex": "#BC9FCE",
+   "sec": "deep rose",
+   "sec_hex": "#C76B82",
+   "old_root_season": "dong",
+   "changed": null
+  },
+  {
+   "id": "c14",
+   "group": "Sắc sảo",
+   "main": "soft ivory cream",
+   "main_hex": "#EAD7BF",
+   "sec": "blue-violet",
+   "sec_hex": "#6B64B4",
    "old_root_season": "ha",
    "changed": null
+  },
+  {
+   "id": "c19",
+   "group": "Sắc sảo",
+   "main": "soft plum",
+   "main_hex": "#BD7FA1",
+   "sec": "soft jade",
+   "sec_hex": "#7CB699",
+   "old_root_season": "xuan",
+   "changed": null
+  },
+  {
+   "id": "c22",
+   "group": "Đoan trang",
+   "main": "soft orchid purple",
+   "main_hex": "#B27FBD",
+   "sec": "soft coral",
+   "sec_hex": "#D38B80",
+   "old_root_season": "xuan",
+   "changed": {
+    "old": {
+     "main": "soft orchid purple",
+     "main_hex": "#B27FBD",
+     "sec": "rose pink",
+     "sec_hex": "#D28995"
+    },
+    "why": [
+     "phụ gần trùng c04 → xoay sắc +20°, giữ độ đậm"
+    ]
+   }
+  },
+  {
+   "id": "c32",
+   "group": "Dịu dàng",
+   "main": "soft ivory",
+   "main_hex": "#EDDCC6",
+   "sec": "indigo blue",
+   "sec_hex": "#49659C",
+   "old_root_season": "ha",
+   "changed": {
+    "old": {
+     "main": "soft ivory",
+     "main_hex": "#EDDCC6",
+     "sec": "indigo blue",
+     "sec_hex": "#54629C"
+    },
+    "why": [
+     "phụ gần trùng c14 → chàm ngả xanh hơn 10°, giữ ngà + chàm (cặp kinh điển), giữ độ đậm"
+    ]
+   }
+  },
+  {
+   "id": "s08",
+   "group": "Sắc sảo",
+   "main": "soft emerald green",
+   "main_hex": "#3B9174",
+   "sec": "pearl white",
+   "sec_hex": "#E9E7E2",
+   "old_root_season": "dong",
+   "changed": null
+  },
+  {
+   "id": "s09",
+   "group": "Sắc sảo",
+   "main": "soft indigo violet",
+   "main_hex": "#634EA2",
+   "sec": "pale rose",
+   "sec_hex": "#E6BCC3",
+   "old_root_season": "dong",
+   "changed": null
+  },
+  {
+   "id": "s11",
+   "group": "Kiêu kỳ",
+   "main": "soft royal purple",
+   "main_hex": "#794096",
+   "sec": "soft blue",
+   "sec_hex": "#A5BCE2",
+   "old_root_season": "dong",
+   "changed": {
+    "old": {
+     "main": "soft royal purple",
+     "main_hex": "#794096",
+     "sec": "silver grey",
+     "sec_hex": "#B7BBC2"
+    },
+    "why": [
+     "phụ xám → soft blue cùng độ sáng (bỏ xám)"
+    ]
+   }
   },
   {
    "id": "s12",
@@ -482,6 +1095,16 @@
    }
   },
   {
+   "id": "s18",
+   "group": "Quyến rũ",
+   "main": "soft violet mauve",
+   "main_hex": "#AD6EB9",
+   "sec": "deep rose",
+   "sec_hex": "#A63F59",
+   "old_root_season": "xuan",
+   "changed": null
+  },
+  {
    "id": "s20",
    "group": "Kiêu kỳ",
    "main": "soft deep teal",
@@ -490,510 +1113,6 @@
    "sec_hex": "#E6DDD1",
    "old_root_season": "ha",
    "changed": null
-  },
-  {
-   "id": "s25",
-   "group": "Kiêu kỳ",
-   "main": "soft cobalt blue",
-   "main_hex": "#3F6AA6",
-   "sec": "pale blue",
-   "sec_hex": "#D2E1F8",
-   "old_root_season": "ha",
-   "changed": {
-    "old": {
-     "main": "soft cobalt blue",
-     "main_hex": "#3F6AA6",
-     "sec": "silver white",
-     "sec_hex": "#DDE0E3"
-    },
-    "why": [
-     "phụ xám → pale blue cùng độ sáng (bỏ xám)"
-    ]
-   }
-  },
-  {
-   "id": "s26",
-   "group": "Lạnh lùng",
-   "main": "soft blue",
-   "main_hex": "#617F9F",
-   "sec": "soft white",
-   "sec_hex": "#EDEBE9",
-   "old_root_season": "ha",
-   "changed": {
-    "old": {
-     "main": "soft slate grey-blue",
-     "main_hex": "#667F99",
-     "sec": "soft white",
-     "sec_hex": "#EDEBE9"
-    },
-    "why": [
-     "chính xám → soft blue cùng độ sáng (bỏ xám)"
-    ]
-   }
-  },
-  {
-   "id": "s27",
-   "group": "Lạnh lùng",
-   "main": "soft ice lavender",
-   "main_hex": "#BEB6D8",
-   "sec": "deep indigo",
-   "sec_hex": "#353A6E",
-   "old_root_season": "ha",
-   "changed": null
-  },
-  {
-   "id": "s32",
-   "group": "Lạnh lùng",
-   "main": "soft steel blue",
-   "main_hex": "#6A8CAF",
-   "sec": "pale blue",
-   "sec_hex": "#B8CBF3",
-   "old_root_season": "ha",
-   "changed": {
-    "old": {
-     "main": "soft steel blue",
-     "main_hex": "#6A8CAF",
-     "sec": "pale silver grey",
-     "sec_hex": "#C9CBCF"
-    },
-    "why": [
-     "phụ xám → pale blue cùng độ sáng (bỏ xám)"
-    ]
-   }
-  },
-  {
-   "id": "s40",
-   "group": "Sắc sảo",
-   "main": "soft cerulean blue",
-   "main_hex": "#4384B1",
-   "sec": "pale apricot",
-   "sec_hex": "#F5CEBE",
-   "old_root_season": "ha",
-   "changed": {
-    "old": {
-     "main": "soft cerulean blue",
-     "main_hex": "#4384B1",
-     "sec": "pale apricot",
-     "sec_hex": "#E7D3C6"
-    },
-    "why": [
-     "phụ gần trùng s12 → xoay sắc -12°, giữ độ đậm"
-    ]
-   }
-  },
-  {
-   "id": "s51",
-   "group": "Kiêu kỳ",
-   "main": "cool lilac",
-   "main_hex": "#CCB0E5",
-   "sec": "soft pine teal",
-   "sec_hex": "#62AEA9",
-   "old_root_season": "ha",
-   "changed": null
-  },
-  {
-   "id": "s53",
-   "group": "Kiêu kỳ",
-   "main": "soft lavender",
-   "main_hex": "#A893CE",
-   "sec": "pale mint green",
-   "sec_hex": "#B0DDD0",
-   "old_root_season": "ha",
-   "changed": null
-  },
-  {
-   "id": "s59",
-   "group": "Quyến rũ",
-   "main": "soft apricot",
-   "main_hex": "#DEAF9B",
-   "sec": "soft moonlight blue",
-   "sec_hex": "#A4BCD8",
-   "old_root_season": "ha",
-   "changed": null
-  }
- ],
- "thu": [
-  {
-   "id": "m02",
-   "group": "Dịu dàng",
-   "main": "moss green",
-   "main_hex": "#A8C379",
-   "sec": "coral rose",
-   "sec_hex": "#CF8377",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "m04",
-   "group": "Đoan trang",
-   "main": "warm apricot",
-   "main_hex": "#DBB294",
-   "sec": "indigo blue",
-   "sec_hex": "#4E5D97",
-   "old_root_season": "ha",
-   "changed": null
-  },
-  {
-   "id": "m05",
-   "group": "Đoan trang",
-   "main": "coral red",
-   "main_hex": "#D4897D",
-   "sec": "teal",
-   "sec_hex": "#499597",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "m08",
-   "group": "Dịu dàng",
-   "main": "peach-salmon",
-   "main_hex": "#DBA694",
-   "sec": "jade green",
-   "sec_hex": "#5DAC85",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "m19",
-   "group": "Dịu dàng",
-   "main": "caramel apricot",
-   "main_hex": "#CE9F7E",
-   "sec": "teal",
-   "sec_hex": "#499597",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "m28",
-   "group": "Đoan trang",
-   "main": "coral pink",
-   "main_hex": "#D9998C",
-   "sec": "indigo blue",
-   "sec_hex": "#4E5D97",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "c06",
-   "group": "Sắc sảo",
-   "main": "soft vermilion",
-   "main_hex": "#CF816E",
-   "sec": "jade green",
-   "sec_hex": "#6AAF98",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "c16",
-   "group": "Đoan trang",
-   "main": "soft sage green",
-   "main_hex": "#B1BD7F",
-   "sec": "plum rose",
-   "sec_hex": "#B8618C",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "c27",
-   "group": "Sắc sảo",
-   "main": "soft rose",
-   "main_hex": "#CE757D",
-   "sec": "deep teal",
-   "sec_hex": "#4D9699",
-   "old_root_season": "thu",
-   "changed": {
-    "old": {
-     "main": "soft terracotta",
-     "main_hex": "#CF776E",
-     "sec": "deep teal",
-     "sec_hex": "#4D9699"
-    },
-    "why": [
-     "chính gần trùng m05 → xoay sắc -12°, giữ độ đậm"
-    ]
-   }
-  },
-  {
-   "id": "s31",
-   "group": "Lạnh lùng",
-   "main": "pale blue",
-   "main_hex": "#DAE4FC",
-   "sec": "deep plum",
-   "sec_hex": "#5D325D",
-   "old_root_season": "xuan",
-   "changed": {
-    "old": {
-     "main": "soft moonlight white",
-     "main_hex": "#E2E4E9",
-     "sec": "deep plum",
-     "sec_hex": "#5D325D"
-    },
-    "why": [
-     "chính xám → pale blue cùng độ sáng (bỏ xám)"
-    ]
-   }
-  },
-  {
-   "id": "s36",
-   "group": "Quyến rũ",
-   "main": "soft lychee red",
-   "main_hex": "#C6535C",
-   "sec": "soft honey",
-   "sec_hex": "#DAC39A",
-   "old_root_season": "thu",
-   "changed": {
-    "old": {
-     "main": "soft lychee red",
-     "main_hex": "#C6535C",
-     "sec": "soft gold beige",
-     "sec_hex": "#D2C4AC"
-    },
-    "why": [
-     "phụ xám → soft honey cùng độ sáng (bỏ xám)"
-    ]
-   }
-  },
-  {
-   "id": "s37",
-   "group": "Quyến rũ",
-   "main": "soft orchid pink",
-   "main_hex": "#C982BE",
-   "sec": "deep violet",
-   "sec_hex": "#593A78",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "s38",
-   "group": "Quyến rũ",
-   "main": "soft apricot rose",
-   "main_hex": "#D99F8C",
-   "sec": "deep rose brown",
-   "sec_hex": "#743E47",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "s39",
-   "group": "Sắc sảo",
-   "main": "soft saffron amber",
-   "main_hex": "#C89741",
-   "sec": "smoky teal",
-   "sec_hex": "#477A85",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "s41",
-   "group": "Sắc sảo",
-   "main": "soft olive green",
-   "main_hex": "#788A42",
-   "sec": "pale gold beige",
-   "sec_hex": "#DBD0BD",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "s44",
-   "group": "Quyến rũ",
-   "main": "soft burnt sienna",
-   "main_hex": "#A6593F",
-   "sec": "sage green",
-   "sec_hex": "#94B594",
-   "old_root_season": "thu",
-   "changed": {
-    "old": {
-     "main": "soft burnt sienna",
-     "main_hex": "#A6593F",
-     "sec": "sage grey",
-     "sec_hex": "#9EB39E"
-    },
-    "why": [
-     "phụ xám → xanh lá xô thơm cùng độ sáng (bỏ xám); F3 vẽ s44 bằng #94B594"
-    ]
-   }
-  },
-  {
-   "id": "s45",
-   "group": "Quyến rũ",
-   "main": "soft aubergine purple",
-   "main_hex": "#7C4587",
-   "sec": "pale gold",
-   "sec_hex": "#DACEA9",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "s55",
-   "group": "Kiêu kỳ",
-   "main": "pink lilac",
-   "main_hex": "#CEA1BF",
-   "sec": "soft jade green",
-   "sec_hex": "#9EB28F",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "s56",
-   "group": "Quyến rũ",
-   "main": "apricot",
-   "main_hex": "#D6A585",
-   "sec": "lavender violet",
-   "sec_hex": "#A991CA",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "s58",
-   "group": "Quyến rũ",
-   "main": "soft rust red",
-   "main_hex": "#D28B79",
-   "sec": "pale mint green",
-   "sec_hex": "#B0DDD0",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "s60",
-   "group": "Quyến rũ",
-   "main": "coral pink",
-   "main_hex": "#D9998C",
-   "sec": "soft sea blue",
-   "sec_hex": "#649AB8",
-   "old_root_season": "thu",
-   "changed": null
-  },
-  {
-   "id": "s61",
-   "group": "Quyến rũ",
-   "main": "persimmon",
-   "main_hex": "#D2906C",
-   "sec": "ivory",
-   "sec_hex": "#EDDCC6",
-   "old_root_season": "thu",
-   "changed": null
-  }
- ],
- "dong": [
-  {
-   "id": "m14",
-   "group": "Dịu dàng",
-   "main": "ivory white",
-   "main_hex": "#EDE0CC",
-   "sec": "jade green",
-   "sec_hex": "#5DAC85",
-   "old_root_season": "dong",
-   "changed": null
-  },
-  {
-   "id": "m16",
-   "group": "Đoan trang",
-   "main": "lavender purple",
-   "main_hex": "#AD91CA",
-   "sec": "jade green",
-   "sec_hex": "#5DAC85",
-   "old_root_season": "dong",
-   "changed": null
-  },
-  {
-   "id": "m20",
-   "group": "Dịu dàng",
-   "main": "slate blue",
-   "main_hex": "#8E95C2",
-   "sec": "apricot",
-   "sec_hex": "#D6A585",
-   "old_root_season": "dong",
-   "changed": null
-  },
-  {
-   "id": "c02",
-   "group": "Dịu dàng",
-   "main": "soft sapphire blue",
-   "main_hex": "#7E8FBE",
-   "sec": "warm ivory",
-   "sec_hex": "#EAD7BF",
-   "old_root_season": "dong",
-   "changed": null
-  },
-  {
-   "id": "c04",
-   "group": "Đoan trang",
-   "main": "soft royal purple",
-   "main_hex": "#A87FBD",
-   "sec": "rose-red",
-   "sec_hex": "#CF818C",
-   "old_root_season": "dong",
-   "changed": null
-  },
-  {
-   "id": "c14",
-   "group": "Sắc sảo",
-   "main": "soft ivory cream",
-   "main_hex": "#EAD7BF",
-   "sec": "blue-violet",
-   "sec_hex": "#6B64B4",
-   "old_root_season": "ha",
-   "changed": null
-  },
-  {
-   "id": "c32",
-   "group": "Dịu dàng",
-   "main": "soft ivory",
-   "main_hex": "#EDDCC6",
-   "sec": "indigo blue",
-   "sec_hex": "#49659C",
-   "old_root_season": "ha",
-   "changed": {
-    "old": {
-     "main": "soft ivory",
-     "main_hex": "#EDDCC6",
-     "sec": "indigo blue",
-     "sec_hex": "#54629C"
-    },
-    "why": [
-     "phụ gần trùng c14 → chàm ngả xanh hơn 10°, giữ ngà + chàm (cặp kinh điển), giữ độ đậm"
-    ]
-   }
-  },
-  {
-   "id": "s08",
-   "group": "Sắc sảo",
-   "main": "soft emerald green",
-   "main_hex": "#3B9174",
-   "sec": "pearl white",
-   "sec_hex": "#E9E7E2",
-   "old_root_season": "dong",
-   "changed": null
-  },
-  {
-   "id": "s09",
-   "group": "Sắc sảo",
-   "main": "soft indigo violet",
-   "main_hex": "#634EA2",
-   "sec": "pale rose",
-   "sec_hex": "#E6BCC3",
-   "old_root_season": "dong",
-   "changed": null
-  },
-  {
-   "id": "s11",
-   "group": "Kiêu kỳ",
-   "main": "soft royal purple",
-   "main_hex": "#794096",
-   "sec": "soft blue",
-   "sec_hex": "#A5BCE2",
-   "old_root_season": "dong",
-   "changed": {
-    "old": {
-     "main": "soft royal purple",
-     "main_hex": "#794096",
-     "sec": "silver grey",
-     "sec_hex": "#B7BBC2"
-    },
-    "why": [
-     "phụ xám → soft blue cùng độ sáng (bỏ xám)"
-    ]
-   }
   },
   {
    "id": "s21",
@@ -1046,6 +1165,56 @@
    }
   },
   {
+   "id": "s25",
+   "group": "Kiêu kỳ",
+   "main": "soft cobalt blue",
+   "main_hex": "#3F6AA6",
+   "sec": "pale blue",
+   "sec_hex": "#D2E1F8",
+   "old_root_season": "ha",
+   "changed": {
+    "old": {
+     "main": "soft cobalt blue",
+     "main_hex": "#3F6AA6",
+     "sec": "silver white",
+     "sec_hex": "#DDE0E3"
+    },
+    "why": [
+     "phụ xám → pale blue cùng độ sáng (bỏ xám)"
+    ]
+   }
+  },
+  {
+   "id": "s26",
+   "group": "Lạnh lùng",
+   "main": "soft blue",
+   "main_hex": "#617F9F",
+   "sec": "soft white",
+   "sec_hex": "#EDEBE9",
+   "old_root_season": "ha",
+   "changed": {
+    "old": {
+     "main": "soft slate grey-blue",
+     "main_hex": "#667F99",
+     "sec": "soft white",
+     "sec_hex": "#EDEBE9"
+    },
+    "why": [
+     "chính xám → soft blue cùng độ sáng (bỏ xám)"
+    ]
+   }
+  },
+  {
+   "id": "s27",
+   "group": "Lạnh lùng",
+   "main": "soft ice lavender",
+   "main_hex": "#BEB6D8",
+   "sec": "deep indigo",
+   "sec_hex": "#353A6E",
+   "old_root_season": "ha",
+   "changed": null
+  },
+  {
    "id": "s28",
    "group": "Lạnh lùng",
    "main": "pale sky blue",
@@ -1070,10 +1239,20 @@
    "group": "Lạnh lùng",
    "main": "soft pale mint",
    "main_hex": "#BFD9CE",
-   "sec": "deep slate green",
-   "sec_hex": "#396059",
+   "sec": "deep jade",
+   "sec_hex": "#3A6153",
    "old_root_season": "dong",
-   "changed": null
+   "changed": {
+    "old": {
+     "main": "soft pale mint",
+     "main_hex": "#BFD9CE",
+     "sec": "deep slate green",
+     "sec_hex": "#396059"
+    },
+    "why": [
+     "phụ gần trùng s15 → xoay sắc -12°, giữ độ đậm"
+    ]
+   }
   },
   {
    "id": "s30",
@@ -1092,6 +1271,66 @@
     },
     "why": [
      "chính xám → soft blue cùng độ sáng (bỏ xám)"
+    ]
+   }
+  },
+  {
+   "id": "s31",
+   "group": "Lạnh lùng",
+   "main": "pale blue",
+   "main_hex": "#DAE4FC",
+   "sec": "deep plum",
+   "sec_hex": "#5D325D",
+   "old_root_season": "xuan",
+   "changed": {
+    "old": {
+     "main": "soft moonlight white",
+     "main_hex": "#E2E4E9",
+     "sec": "deep plum",
+     "sec_hex": "#5D325D"
+    },
+    "why": [
+     "chính xám → pale blue cùng độ sáng (bỏ xám)"
+    ]
+   }
+  },
+  {
+   "id": "s32",
+   "group": "Lạnh lùng",
+   "main": "soft steel blue",
+   "main_hex": "#6A8CAF",
+   "sec": "pale blue",
+   "sec_hex": "#B8CBF3",
+   "old_root_season": "ha",
+   "changed": {
+    "old": {
+     "main": "soft steel blue",
+     "main_hex": "#6A8CAF",
+     "sec": "pale silver grey",
+     "sec_hex": "#C9CBCF"
+    },
+    "why": [
+     "phụ xám → pale blue cùng độ sáng (bỏ xám)"
+    ]
+   }
+  },
+  {
+   "id": "s40",
+   "group": "Sắc sảo",
+   "main": "soft cerulean blue",
+   "main_hex": "#4384B1",
+   "sec": "pale apricot",
+   "sec_hex": "#F5CEBE",
+   "old_root_season": "ha",
+   "changed": {
+    "old": {
+     "main": "soft cerulean blue",
+     "main_hex": "#4384B1",
+     "sec": "pale apricot",
+     "sec_hex": "#E7D3C6"
+    },
+    "why": [
+     "phụ gần trùng s12 → xoay sắc -12°, giữ độ đậm"
     ]
    }
   },
@@ -1136,6 +1375,16 @@
    "changed": null
   },
   {
+   "id": "s51",
+   "group": "Kiêu kỳ",
+   "main": "cool lilac",
+   "main_hex": "#CCB0E5",
+   "sec": "soft pine teal",
+   "sec_hex": "#62AEA9",
+   "old_root_season": "ha",
+   "changed": null
+  },
+  {
    "id": "s52",
    "group": "Kiêu kỳ",
    "main": "sky blue",
@@ -1144,6 +1393,26 @@
    "sec_hex": "#D38A7B",
    "old_root_season": "dong",
    "changed": null
+  },
+  {
+   "id": "s53",
+   "group": "Kiêu kỳ",
+   "main": "soft orchid",
+   "main_hex": "#B290C7",
+   "sec": "pale mint green",
+   "sec_hex": "#B0DDD0",
+   "old_root_season": "ha",
+   "changed": {
+    "old": {
+     "main": "soft lavender",
+     "main_hex": "#A893CE",
+     "sec": "pale mint green",
+     "sec_hex": "#B0DDD0"
+    },
+    "why": [
+     "chính gần trùng s47 → xoay sắc +12°, giữ độ đậm"
+    ]
+   }
   },
   {
    "id": "s57",
