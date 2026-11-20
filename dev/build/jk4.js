@@ -655,7 +655,7 @@ window.kitXHTML=kitXHTML;window.kitXAdd=kitXAdd;
    cards (Hậu cung / Cung nhân: `.pcl` name + rank moved above the portrait). The same look as the 32.7 chip's kitName (rank over name). */
 const KIT_TITLE_ONLY=/^(hoàng thượng|hoàng thái hậu|thái hậu|thánh thượng|hoàng đế|hoàng hậu)$/i;
 /* KIT 48.5 (owner 17/11 ~16:20Z, kit-rank-name): the rank is never printed twice. kitDedupRank(rank,name) drops the rank / title words a plain-text name already starts with
-   ("Hoàng hậu Lý Ngưng Sương" under the rank "Hoàng hậu" → "Lý Ngưng Sương"). Single-word ranks that are also surnames (Tần, Phi) are only dropped through kitTitledName's title-word list. */
+   ("Hoàng hậu Tần Ngưng Sương" under the rank "Hoàng hậu" → "Tần Ngưng Sương"). Single-word ranks that are also surnames (Tần, Phi) are only dropped through kitTitledName's title-word list. */
 function kitDedupRank(rank,name){try{const r=String(rank||"").replace(/<[^>]*>/g,"").trim(),n=String(name==null?"":name);if(!r||!n||/</.test(n))return n;let m=typeof kitTitledName==="function"?kitTitledName(r,n):n;
  if(m===n&&/\s/.test(r)&&n.toLowerCase().startsWith(r.toLowerCase()+" "))m=n.slice(r.length+1).trim();return m||n}catch(e){return name}}
 window.kitDedupRank=kitDedupRank;
