@@ -172,13 +172,20 @@ if(typeof ACT==="object"&&typeof ACT_NOSEND!=="undefined"){
 function pmAt(t){return t===S?null:(kh)=>agAt(t,kh)}
 function pmFree(v){return !(v.pmW!=null&&wk()-v.pmW<B().npc.gapW)}
 function pmMeFree(){return !(S.pmMeW===wk()&&(S.pmMeN||0)>=B().npc.me)}
+/* the day plan's pick without the global dice (law: weighted, never always-best): a roll hashed from the person, the target list and the buổi,
+   so planning never shifts anyone else's draws (role-parity probe seeds Math.random) */
+function pmHash(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)/4294967296}
+function pmPickBy(L,w,v,salt){const W=L.map(x=>Math.max(BAL.mind.pickMin,w(x)));const T=W.reduce((s,x)=>s+x,0);let r=pmHash([key(v),salt,typeof bkey==="function"?bkey():"",L.map(key).join(",")].join("|"))*T;for(let i=0;i<L.length;i++){r-=W[i];if(r<=0)return L[i]}return L[L.length-1]}
+/* the NPC's own estimate of a duel (no draw): each side's median board (jmgt mgSkipRaw on its gap d) + talent → the share of the luck range */
+function pmOddsEst(a,t,kind){const R=pmR(a,t),L=B().luck;const med=p=>{try{return mgSkipRaw(mgTier(kind,{occ:"pm",rank:R,p,lv:kg82LvFor(p,kind)}))}catch(e){return 5}};
+ const d=(pmTal(a,kind)+med(a)/10*L)-(pmTal(t,kind)+med(t)/10*L);return oddsCl(Math.round(100/2+d/L*100))}
 if(typeof agReg==="function"&&typeof p3O==="function"){
  agReg("consort","pm",(v,N,need)=>{const O=[];try{if(!(typeof p3On==="function"&&p3On())||v===S||!live(v)||v.confined||v.coop||!pmFree(v))return O;const G=B().npc.g;
   const L=others(v).filter(x=>x&&x!==v&&live(x)&&!x.confined&&(x!==S||(pmMeFree()&&!isSrvSafe()&&!S.confined)));if(!L.length)return O;
-  if(!need||G.play[need]!=null){const F=L.filter(x=>aff(v,x)>=B().npc.minAff);const t=F.length?mindPickBy(F,x=>BAL.mind.pick.ag.base+Math.max(0,aff(v,x)),v):null;
+  if(!need||G.play[need]!=null){const F=L.filter(x=>aff(v,x)>=B().npc.minAff);const t=F.length?pmPickBy(F,x=>BAL.mind.pick.ag.base+Math.max(0,aff(v,x)),v,"play"):null;
    if(t){const x=p3O(v,"pmPlay",{n:"Cùng chơi",c:{},o:100,k:B().kc},N,G.play,"social",pmAt(t),t);if(x)O.push(x)}}
-  if(!need||G.duel[need]!=null){const F=L.filter(x=>(typeof agSpite==="function"?agSpite(v,x):-aff(v,x))>=B().npc.spite);const t=F.length?mindPickBy(F,x=>BAL.mind.pick.ag.base+Math.max(0,typeof agSpite==="function"?agSpite(v,x):-aff(v,x)),v):null;
-   if(t&&pmStakes(v,t).some(z=>z.ok)){const x=p3O(v,"pmDuel",{n:"Thách đấu",c:{},o:pmOdds(v,t,pmX(v,t,"duel").kind),k:B().kc},N,G.duel,"social",pmAt(t),t);if(x)O.push(x)}}
+  if(!need||G.duel[need]!=null){const F=L.filter(x=>(typeof agSpite==="function"?agSpite(v,x):-aff(v,x))>=B().npc.spite);const t=F.length?pmPickBy(F,x=>BAL.mind.pick.ag.base+Math.max(0,typeof agSpite==="function"?agSpite(v,x):-aff(v,x)),v,"duel"):null;
+   if(t&&pmStakes(v,t).some(z=>z.ok)){const x=p3O(v,"pmDuel",{n:"Thách đấu",c:{},o:pmOddsEst(v,t,pmX(v,t,"duel").kind),k:B().kc},N,G.duel,"social",pmAt(t),t);if(x)O.push(x)}}
  }catch(e){try{agdErr("pm",e)}catch(x){}}return O});
  const run=act=>(v,t)=>{if(!t||!live(v)||!live(t)||!pmFree(v))return"";const x=pmX(v,t,act);if(!x)return"";v.pmW=wk();if(t===S){if(S.pmMeW!==wk()){S.pmMeW=wk();S.pmMeN=0}S.pmMeN++}
   const r=rcvAsk(act==="play"?"pmPlay":"pmDuel",v,t,x);return p3Res(act==="play"?"pmPlay":"pmDuel",t===S||pmSee(v,t)?r:"")};

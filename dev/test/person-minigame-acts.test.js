@@ -67,13 +67,13 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
  ok(d.by.play+d.by.duel>=2,'NPC → NPC over ≥ 10 game days (day plan cx3:pmPlay / cx3:pmDuel land)',d);
  ok(r.exec.includes("pmPlay")&&r.exec.includes("pmDuel"),'NPC → her: the day-plan deed reaches her as her answer card (both acts)',{exec:r.exec,simMe:d.me,S:d.S});
  /* (8) old save */
- const o=await p2.evaluate(()=>{try{Q.length=0;delete S.pmM;delete S.pmGo;delete S.pmMeW;delete S.pmMeN;for(const v of rivals)delete v.pmW;save();const d=loadSlot(SLOT);quiet=true;deser(d);quiet=false;render();
+ const o=await p2.evaluate(()=>{try{window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;Q.length=0;delete S.pmM;delete S.pmGo;delete S.pmMeW;delete S.pmMeN;for(const v of rivals)delete v.pmW;save();const d=loadSlot(SLOT);quiet=true;deser(d);quiet=false;render();
   const v=liveRivals(true).find(x=>x!==S&&!x.out);return{ok:!!S&&!S.dead&&!!d,rows:talkOpts({kind:"rival",ref:v}).filter(z=>z.pm).length,st:pmStakes(S,v).length}}catch(e){return{err:e.message}}});
  ok(o.ok&&o.rows===2,'an old save without the pm fields loads and offers the acts',o);
  ok(!errs.length,'no page errors',errs.slice(0,3));
  /* (9) one core: jpma.js types no number of its own (only 0 / 1 / indices / 100-odds / 7 the top rank / 2 halves) */
  const src=fs.readFileSync(path.join(__dirname,'../build/jpma.js'),'utf8').replace(/\/\*[\s\S]*?\*\//g,'').replace(/`[^`]*`/g,m=>m.replace(/\$\{[^}]*\}/g,'')).replace(/"[^"]*"/g,'""');
- const nums=(src.match(/(?<![\w.$])\d+(\.\d+)?(?![\w])/g)||[]).filter(n=>!["0","1","2","5","7","10","100","9901"].includes(n));
+ const nums=(src.match(/(?<![\w.$])\d+(\.\d+)?(?![\w])/g)||[]).filter(n=>!["0","1","2","5","7","10","100","9901","2166136261","16777619","4294967296"]/* FNV-1a hash constants (pmHash), not balance */.includes(n));
  ok(nums.length===0,'one core: no stray number in jpma.js (all in BAL.pm)',nums);
  let tsDiff="";try{tsDiff=execSync('git diff --stat origin/main -- dev/build/jts.js',{cwd:path.join(__dirname,'../..')}).toString().trim()}catch(e){tsDiff="(no origin/main)"}
  ok(!tsDiff,'jts.js (Emperor summons) unchanged vs origin/main (law 16)',tsDiff);
