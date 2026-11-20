@@ -17,3 +17,5 @@ After a2/a3/c2/c3: put HH t8 CURRENT OUTFIT = thu_comoi/s62_t8_THU_COMOI_v5.txt 
 
 ## CHANGE to item (4) — owner Lượt 1438 verbatim: "Không ai cầm bình hoa cả." + "Cái món nào mà lấy ra, cái bình hoa lấy ra thì phải có một cái món khác thay thế chứ."
 → NO rank/person holds a vase at all (all item lists in build.py + item_age.py: every 'vase' hand item, incl. clay/celadon/white-jade vases; NOT room/place props). Each removed vase is REPLACED by a NEW item (not already in that rank's list), fitting that rank's richness (e.g. t7: a gold-and-jade hand warmer / a jewelled incense ball / a gold lotus lamp…), with its hand clause; list the new items per rank in the report so #9 can show the owner. Cells re-pointed 1:1 (vase → new item), rotation untouched otherwise.
+
+## (5) owner Lượt 1442: A42 REVOKED — remove every cleavage / 'hint of cleavage' wording from the builder (undo your item 7 if done). Rule G35.
