@@ -54,4 +54,8 @@ Variety: 4 groups per branch (≥3), each branch has an ác-natural ending, a st
 - `node dev/test/ge-guard.js`: **10/10** (catalogue ERRORS 0; all 16 option lists real; pt live; identity family; no era word).
 - `node dev/test/ge-engine.js - pt_hai,pt_su,pt_tang,pt_dang`: **140/140**; `… - all`: **1460/1460** (44 branches).
 - `node dev/test/ge-rank-scan.js`: PASS, law 5 on **176/176** endings. `node dev/test/ge-pt-scan.js`: 0 faults. `node dev/test/ge-bd-scan.js`: unchanged (34 hits). `node dev/test/one-core-guard.js`: PASS.
-- PENDING (filled below when run): quickcheck alone + old save, coop-e2e COOP_GE=1 + two-seat GE look, shots Fold 755x1000@2 + iPad 1180x820@2.
+- `bash dev/tools/quickcheck.sh` (alone, on 7b9e58fa): CORE GATES PASS, TIME-SPILL PASS, open 1653 ms, **old save ok** (load ok, buổi ok, 0 errors), perf median new/live render 264/224, tab 509/418, buổi 1208/1996, tasks>200ms 20/22. Only fail = NOT BUILT → build_site run and committed (fa820b35).
+- `COOP_GE=1 node dev/test/coop-e2e.js`: **78/78** (was 74 + 4 new two-seat Phù Tang checks: Fold seat on pt_hai opens its own branch + Hồi kết nhánh while the iPad seat's branch stays its own; swapped: iPad on pt_dang, Fold untouched → two-way; plus the law-5 rank checks on each seat).
+- Shots (scratch copy of dev/test/ge-shots.js with road pt_su / origin pf, outside repo): 755x1000@2 + 1180x820@2, 8 screens each (Hồi kết nhánh ×2, Đại kết cục «Sứ giả hai trời», title notice, Bảng Thiên mệnh, fail «Lệnh giả thành thật», quiet, Sổ luân hồi): **34/34**, no overflow, no page error; looked at them. Not uploaded (CDN refused for ge-batu last time; no image committed).
+
+## READY: review/ge-phutang **fa820b35** — stacked on review/phutang-road c50ef1ba (+ ge-rank c5ebab9a). phutang-road is NOT on LIVE (main 463d3d70): when it lands, merge origin/main (GE files + jge.js helper + coop-e2e block only; expect clean), rebuild, re-run ge-guard / ge-engine pt / coop-e2e COOP_GE=1.
