@@ -180,6 +180,10 @@ function apply(m){if(!live()||host()||!m||m.from===CW.seat)return;let ok=0,miss=
     if(t==="d")delete par[k];else{let nv=toLive(op[2],last);if(p[0]==="S"&&p[1]==="fidUsed"&&p.length===2&&Array.isArray(nv)&&S.pid&&!nv.includes(S.pid))nv.push(S.pid);/* her own face stays reserved on her seat */
      if(Array.isArray(par[k])&&Array.isArray(nv)){const keep=par[k].filter(x=>plain(x)&&x.coop);/* the friend's own entry (her place on this seat, placeFriend) is never the host's to drop */par[k].length=0;nv.forEach(x=>par[k].push(x));keep.forEach(x=>{if(!par[k].includes(x))par[k].push(x)})}else par[k]=nv}ok++;continue}
    if(t==="a"){const arr=p.length===1&&p[0]==="R"?rivals:resolve(p,p.length);if(!Array.isArray(arr)){miss++;continue}const e=toLive(op[2],"x");const id=idOf(e);
+    /* a world person new this week: the ops carry the world part only (viewer rows dropped), so her rows toward this seat start empty as
+       fromCanon starts them (coop-home under load: rivalsBuoi -> hostility -> oan read x.ro[...] of a new consort without ro: TypeError) */
+    if(arr===rivals&&plain(e)){for(const f of ["rl","ro","gp","ep","evm"])if(!plain(e[f]))e[f]={};for(const f of ["rel","oan","ev"])if(typeof e[f]!=="number")e[f]=0;
+     if(typeof e.ghen!=="number")e.ghen=typeof ghenNew0==="function"?ghenNew0():0}
     if(!arr.some(x=>idOf(x)===id&&!(plain(x)&&x.coop)))arr.push(e);ok++;continue}
    if(t==="r"){const arr=p.length===1&&p[0]==="R"?rivals:resolve(p,p.length);if(!Array.isArray(arr)){miss++;continue}const i=arr.findIndex(x=>idOf(x)===op[2]&&!(plain(x)&&x.coop));if(i>=0)arr.splice(i,1);ok++;continue}
   }catch(e){miss++;console.error("hl op",e)}}
