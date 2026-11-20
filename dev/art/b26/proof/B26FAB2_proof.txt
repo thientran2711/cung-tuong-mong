@@ -1,0 +1,189 @@
+cells 12410 
+changed 3857
+  ANGLE t2 2
+  ANGLE t6 1
+  ANGLE/M03/M01/M10/M10/M13 (approved S24) t5 5
+  M03 t1 3
+  M03 t2 1
+  M03 t6 1
+  M03/M01/M10/M10/M13 (approved S24) t5 7
+  changed 1 3
+  changed 2 3
+  changed 4 1267
+  changed 5 1297
+  changed 6 1287
+  hair t4 1264
+  hair t5 1178
+  hair t6 1266
+  hair/ANGLE t4 1
+  hair/ANGLE t5 1
+  hair/ANGLE t6 11
+  hair/ANGLE/M03/M01/M10/M10/M13 (approved S24) t5 36
+  hair/M01/M10/M10/M13 (approved S24) t5 3
+  hair/M03 t6 7
+  hair/M03/M01 t6 1
+  hair/M03/M01/M10/M10/M13 (approved S24) t5 40
+  hair/M10 t5 1
+  hair/M10/M10/M13 (approved S24) t5 7
+  hair/M10/M13 (approved S24) t5 13
+  hair/M13 (approved S24) t4 2
+  hair/M13 (approved S24) t5 6
+cuts {'ANGLE': 57, 'M03': 101, 'M01': 92, 'M10': 210, 'M13 (approved S24)': 119}
+bad 0
+new >10000 vs HEAD 7007acc: 156
+  OVER c01|5|a51|dong 10256 +256
+  OVER c01|5|a65|dong 10093 +93
+  OVER c02|5|a51|dong 10299 +299
+  OVER c02|5|a65|dong 10165 +165
+  OVER c03|5|a51|dong 10255 +255
+  OVER c03|5|a65|dong 10147 +147
+  OVER c04|5|a51|dong 10296 +296
+  OVER c04|5|a65|dong 10149 +149
+  OVER c05|5|a51|dong 10270 +270
+  OVER c05|5|a65|dong 10138 +138
+  OVER c07|5|a51|dong 10267 +267
+  OVER c07|5|a65|dong 10134 +134
+  OVER c08|5|a51|None 10035 +35
+  OVER c08|5|a51|dong 10345 +345
+  OVER c08|5|a65|dong 10235 +235
+  OVER c09|5|a51|dong 10293 +293
+  OVER c09|5|a65|dong 10128 +128
+  OVER c10|5|a51|dong 10202 +202
+  OVER c10|5|a65|dong 10066 +66
+  OVER c11|5|a51|dong 10269 +269
+  OVER c11|5|a65|dong 10135 +135
+  OVER c12|5|a51|None 10016 +16
+  OVER c12|5|a51|dong 10326 +326
+  OVER c12|5|a65|dong 10126 +126
+  OVER c13|5|a51|None 10003 +3
+  OVER c13|5|a51|dong 10313 +313
+  OVER c13|5|a65|dong 10170 +170
+  OVER c14|5|a51|None 10023 +23
+  OVER c14|5|a51|dong 10333 +333
+  OVER c14|5|a65|dong 10187 +187
+  OVER c15|5|a51|dong 10261 +261
+  OVER c15|5|a65|dong 10115 +115
+  OVER c16|5|a51|dong 10238 +238
+  OVER c16|5|a65|dong 10093 +93
+  OVER c17|5|a51|dong 10235 +235
+  OVER c17|5|a65|dong 10082 +82
+  OVER c18|5|a51|dong 10283 +283
+  OVER c18|5|a65|dong 10121 +121
+  OVER c19|5|a51|dong 10176 +176
+  OVER c19|5|a65|dong 10039 +39
+  OVER c20|5|a51|dong 10289 +289
+  OVER c20|5|a65|dong 10140 +140
+  OVER c21|5|a51|dong 10265 +265
+  OVER c21|5|a65|dong 10148 +148
+  OVER c22|5|a51|dong 10278 +278
+  OVER c22|5|a65|dong 10100 +100
+  OVER c23|5|a51|dong 10261 +261
+  OVER c23|5|a65|dong 10072 +72
+  OVER c24|5|a51|dong 10213 +213
+  OVER c24|5|a65|dong 10089 +89
+  OVER c25|5|a51|dong 10305 +305
+  OVER c25|5|a65|dong 10122 +122
+  OVER c26|5|a51|None 10001 +1
+  OVER c26|5|a51|dong 10311 +311
+  OVER c26|5|a65|dong 10117 +117
+  OVER c27|5|a51|dong 10303 +303
+  OVER c27|5|a65|dong 10129 +129
+  OVER c28|5|a51|dong 10213 +213
+  OVER c28|5|a65|dong 10096 +96
+  OVER c29|5|a51|None 10025 +25
+  OVER c29|5|a51|dong 10335 +335
+  OVER c29|5|a65|dong 10176 +176
+  OVER c30|5|a51|dong 10290 +290
+  OVER c30|5|a65|dong 10167 +167
+  OVER c31|5|a51|dong 10266 +266
+  OVER c31|5|a65|dong 10109 +109
+  OVER c32|5|a51|dong 10216 +216
+  OVER c32|5|a65|dong 10082 +82
+  OVER m01|5|a65|dong 10398 +398
+  OVER m02|5|a65|None 10004 +4
+  OVER m02|5|a65|dong 10314 +314
+  OVER m03|5|a65|dong 10407 +407
+  OVER m05|5|a65|None 10063 +63
+  OVER m05|5|a65|dong 10373 +373
+  OVER m06|5|a51|None 10224 +224
+  OVER m06|5|a65|dong 10384 +384
+  OVER m07|5|a65|None 10093 +93
+  OVER m07|5|a65|dong 10403 +403
+  OVER m08|5|a65|dong 10404 +404
+  OVER m09|5|a65|dong 10254 +254
+  OVER m10|5|a65|dong 10399 +399
+  OVER m11|5|a51|dong 10422 +422
+  OVER m11|5|a65|dong 10301 +301
+  OVER m13|5|a65|None 10044 +44
+  OVER m13|5|a65|dong 10354 +354
+  OVER m14|5|a65|None 10094 +94
+  OVER m14|5|a65|dong 10404 +404
+  OVER m15|5|a65|dong 10380 +380
+  OVER m16|5|a65|None 10094 +94
+  OVER m16|5|a65|dong 10404 +404
+  OVER m17|5|a65|None 10006 +6
+  OVER m17|5|a65|dong 10316 +316
+  OVER m18|5|a65|dong 10369 +369
+  OVER m19|5|a65|None 10071 +71
+  OVER m19|5|a65|dong 10381 +381
+  OVER m20|5|a65|None 10048 +48
+  OVER m20|5|a65|dong 10358 +358
+  OVER m21|5|a51|None 10190 +190
+  OVER m21|5|a65|None 10054 +54
+  OVER m21|5|a65|dong 10364 +364
+  OVER m22|5|a65|dong 10416 +416
+  OVER m24|5|a65|None 10047 +47
+  OVER m24|5|a65|dong 10357 +357
+  OVER m26|5|a65|None 10070 +70
+  OVER m26|5|a65|dong 10380 +380
+  OVER m27|5|a65|None 10072 +72
+  OVER m27|5|a65|dong 10382 +382
+  OVER m28|5|a65|None 10059 +59
+  OVER m28|5|a65|dong 10369 +369
+  OVER m29|5|a51|None 10205 +205
+  OVER m29|5|a65|dong 10355 +355
+  OVER m30|5|a65|None 10022 +22
+  OVER m30|5|a65|dong 10332 +332
+  OVER m32|5|a51|None 10222 +222
+  OVER m32|5|a65|None 10067 +67
+  OVER m32|5|a65|dong 10377 +377
+  OVER m33|5|a65|None 10064 +64
+  OVER m33|5|a65|dong 10374 +374
+  OVER m34|5|a65|None 10026 +26
+  OVER m34|5|a65|dong 10336 +336
+  OVER m35|5|a65|None 10075 +75
+  OVER m35|5|a65|dong 10385 +385
+  OVER m36|5|a65|dong 10413 +413
+  OVER m37|5|a65|None 10020 +20
+  OVER m37|5|a65|dong 10330 +330
+  OVER m38|5|a65|None 10030 +30
+  OVER m38|5|a65|dong 10340 +340
+  OVER m39|5|a65|None 10054 +54
+  OVER m39|5|a65|dong 10364 +364
+  OVER m40|5|a65|dong 10369 +369
+  OVER m41|5|a65|None 10090 +90
+  OVER m41|5|a65|dong 10400 +400
+  OVER m42|5|a51|None 10176 +176
+  OVER m42|5|a65|None 10023 +23
+  OVER m42|5|a65|dong 10333 +333
+  OVER m43|5|a65|None 10065 +65
+  OVER m43|5|a65|dong 10375 +375
+  OVER m44|5|a65|dong 10299 +299
+  OVER m45|5|a51|None 10139 +139
+  OVER m45|5|a65|None 10029 +29
+  OVER m45|5|a65|dong 10339 +339
+  OVER m46|5|a65|None 10020 +20
+  OVER m46|5|a65|dong 10330 +330
+  OVER m47|5|a65|dong 10274 +274
+  OVER m48|5|a65|dong 10342 +342
+  OVER m49|5|a51|None 10247 +247
+  OVER m49|5|a65|None 10098 +98
+  OVER m49|5|a65|dong 10408 +408
+  OVER m50|5|a65|None 10081 +81
+  OVER m50|5|a65|dong 10391 +391
+  OVER m51|5|a65|None 10029 +29
+  OVER m51|5|a65|dong 10339 +339
+  OVER m52|5|a65|None 10062 +62
+  OVER m52|5|a65|dong 10372 +372
+  OVER p02|5|a65|None 10004 +4
+  OVER p02|5|a65|dong 10314 +314

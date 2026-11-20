@@ -1,0 +1,80 @@
+PASS m17|1|a65|dong cuts=1 angle=False len=9900
+PASS m52|1|a65|dong cuts=1 angle=False len=9904
+PASS m49|2|a51|None cuts=0 angle=True len=9639
+PASS m10|2|a51|None cuts=0 angle=True len=9615
+PASS m04|2|a51|dong cuts=1 angle=False len=9904
+PASS s16|4|a26|None cuts=0 angle=False len=9845
+PASS m34|4|a18|None cuts=0 angle=False len=9326
+FAIL m02|4|a65|None cuts=0 angle=False len=10811
+FAIL s62|4|a65|None cuts=0 angle=False len=11087
+PASS c21|4|a65|None cuts=1 angle=False len=9856
+PASS s38|4|a36|dong cuts=0 angle=False len=9987
+PASS m20|4|a36|dong cuts=0 angle=False len=9726
+FAIL s58|4|a51|dong cuts=0 angle=False len=11696
+FAIL c08|4|a51|dong cuts=0 angle=False len=10701
+PASS s29|4|a18|dong cuts=0 angle=True len=9648
+FAIL c21|4|a65|dong cuts=1 angle=False len=10160
+PASS s58|5|a18|None cuts=0 angle=False len=9997
+PASS m52|5|a26|None cuts=0 angle=False len=9195
+FAIL c06|5|a51|None cuts=0 angle=False len=11429
+FAIL s65|5|a65|None cuts=0 angle=False len=10863
+PASS c13|5|a65|None cuts=1 angle=False len=9860
+PASS c02|5|a65|None cuts=1 angle=False len=9855
+FAIL m49|5|a65|None cuts=5 angle=True len=10098
+FAIL m29|5|a51|None cuts=5 angle=True len=10205
+PASS m03|5|a18|dong cuts=0 angle=False len=9545
+PASS c16|5|a36|dong cuts=0 angle=False len=9450
+FAIL c06|5|a51|dong cuts=0 angle=False len=11377
+FAIL c07|5|a51|dong cuts=0 angle=False len=10267
+PASS s19|5|a18|dong cuts=0 angle=True len=9612
+FAIL c13|5|a65|dong cuts=1 angle=False len=10170
+FAIL c04|5|a65|dong cuts=1 angle=False len=10149
+FAIL c11|5|a65|dong cuts=2 angle=False len=10135
+FAIL c18|5|a65|dong cuts=2 angle=False len=10121
+FAIL c28|5|a65|dong cuts=3 angle=False len=10096
+FAIL c01|5|a65|dong cuts=3 angle=False len=10093
+FAIL c23|5|a65|dong cuts=4 angle=False len=10072
+FAIL c10|5|a65|dong cuts=4 angle=False len=10066
+FAIL m32|5|a65|dong cuts=5 angle=False len=10377
+FAIL m35|5|a65|dong cuts=5 angle=False len=10385
+PASS m04|6|a26|None cuts=0 angle=False len=9094
+PASS c01|6|a18|None cuts=0 angle=False len=8852
+FAIL m14|6|a65|None cuts=0 angle=False len=10856
+FAIL s45|6|a51|None cuts=0 angle=False len=11749
+PASS s56|6|a36|None cuts=0 angle=True len=9684
+PASS s38|6|a26|None cuts=0 angle=True len=9656
+PASS c30|6|a18|dong cuts=0 angle=False len=9033
+PASS c12|6|a36|dong cuts=0 angle=False len=9445
+FAIL s11|6|a65|dong cuts=0 angle=False len=11188
+FAIL m23|6|a51|dong cuts=0 angle=False len=10979
+PASS s16|6|a36|dong cuts=0 angle=True len=9799
+PASS s16|6|a18|dong cuts=0 angle=True len=9650
+PASS s38|6|a36|dong cuts=1 angle=False len=9948
+PASS s57|6|a36|dong cuts=1 angle=False len=9946
+PASS s59|6|a36|dong cuts=2 angle=False len=9980
+gate {True: 29, False: 25}
+FAIL m02|4|a65|None FAIL LEN TOO LONG: prompt is 10811 characters, the gen tool refuses more than 10000
+FAIL s62|4|a65|None FAIL LEN TOO LONG: prompt is 11087 characters, the gen tool refuses more than 10000
+FAIL s58|4|a51|dong FAIL LEN TOO LONG: prompt is 11696 characters, the gen tool refuses more than 10000
+FAIL c08|4|a51|dong FAIL LEN TOO LONG: prompt is 10701 characters, the gen tool refuses more than 10000
+FAIL c21|4|a65|dong FAIL LEN TOO LONG: prompt is 10160 characters, the gen tool refuses more than 10000
+FAIL c06|5|a51|None FAIL LEN TOO LONG: prompt is 11429 characters, the gen tool refuses more than 10000
+FAIL s65|5|a65|None FAIL LEN TOO LONG: prompt is 10863 characters, the gen tool refuses more than 10000
+FAIL m49|5|a65|None FAIL LEN TOO LONG: prompt is 10098 characters, the gen tool refuses more than 10000
+FAIL m29|5|a51|None FAIL LEN TOO LONG: prompt is 10205 characters, the gen tool refuses more than 10000
+FAIL c06|5|a51|dong FAIL LEN TOO LONG: prompt is 11377 characters, the gen tool refuses more than 10000
+FAIL c07|5|a51|dong FAIL LEN TOO LONG: prompt is 10267 characters, the gen tool refuses more than 10000
+FAIL c13|5|a65|dong FAIL LEN TOO LONG: prompt is 10170 characters, the gen tool refuses more than 10000
+FAIL c04|5|a65|dong FAIL LEN TOO LONG: prompt is 10149 characters, the gen tool refuses more than 10000
+FAIL c11|5|a65|dong er Lượt 591, NO GREY): … pins; her signature colour family soft pink-grey and silver stays th…
+FAIL c18|5|a65|dong FAIL LEN TOO LONG: prompt is 10121 characters, the gen tool refuses more than 10000
+FAIL c28|5|a65|dong FAIL LEN TOO LONG: prompt is 10096 characters, the gen tool refuses more than 10000
+FAIL c01|5|a65|dong FAIL LEN TOO LONG: prompt is 10093 characters, the gen tool refuses more than 10000
+FAIL c23|5|a65|dong FAIL LEN TOO LONG: prompt is 10072 characters, the gen tool refuses more than 10000
+FAIL c10|5|a65|dong efuses more than 10000
+FAIL m32|5|a65|dong FAIL LEN TOO LONG: prompt is 10377 characters, the gen tool refuses more than 10000
+FAIL m35|5|a65|dong FAIL LEN TOO LONG: prompt is 10385 characters, the gen tool refuses more than 10000
+FAIL m14|6|a65|None FAIL LEN TOO LONG: prompt is 10856 characters, the gen tool refuses more than 10000
+FAIL s45|6|a51|None FAIL LEN TOO LONG: prompt is 11749 characters, the gen tool refuses more than 10000
+FAIL s11|6|a65|dong FAIL LEN TOO LONG: prompt is 11188 characters, the gen tool refuses more than 10000
+FAIL m23|6|a51|dong FAIL LEN TOO LONG: prompt is 10979 characters, the gen tool refuses more than 10000

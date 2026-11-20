@@ -1,3 +1,5 @@
 base: dev/art/flower/base/s62_t5.txt
 allow: richly embroidered in gold with peonies and small birds  # owner Lượt 1303: embroidery flower = her hair flower (plum blossom); birds kept
 allow: the front of the skirt embroidered with large peony medallions  # owner Lượt 1303: peony -> plum blossom medallions
+allow: exactly ONE fresh flower in her hair  # Foreman C #5 decision 2 (20/11): t4-t6 hair flower names her species (plum blossom), size words unchanged
+allow: TWO layered embroidered SHORT shoulder capes  # owner Lượt 1312/1314 via Foreman C #5: Phi capes v2 = 'TWO layered embroidered <main> SHORT shoulder capes …' (colour word added, nothing cut)

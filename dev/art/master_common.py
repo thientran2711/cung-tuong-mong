@@ -58,20 +58,26 @@ DOAN_LEN_CUTS = [   # (exact store words, what stays, master sentence it repeats
 def _norm1(s): return re.sub(r"\s+", " ", s).strip()
 
 
-def doan_fit(text):
-    """-> (text, list of cut ids). Only for a t4/t5 DOAN prompt over LIMIT; cuts in order, each only while still over LIMIT."""
+# B26FAB2 (Foreman C #5 decision 1, 20/11): the same length step for t1-t6 thường phục (JOB 2 species names + JOB 3 capes grew them): no DOAN needed
+# when the caller says the prompt is t1-t6 (build_all.b26_fit low=True / check_store scope tp1-tp6 pr1-pr6). Cells already > LIMIT at HEAD 7007acc are not cut
+# (build_all reads dev/art/b26/HEAD_OVER10K.json).
+LEN_SCOPES = {f"{k}{n}" for k in ("tp", "pr") for n in range(1, 7)}
+
+
+def doan_fit(text, low=False):
+    """-> (text, list of cut ids). Only for a t4/t5 DOAN prompt (or any t1-t6 prompt when low=True) over LIMIT; cuts in order, each only while still over LIMIT."""
     cuts = []
-    if DOAN not in text: return text, cuts
+    if DOAN not in text and not low: return text, cuts
     for old, new, mid in DOAN_LEN_CUTS:
         if len(text) <= LIMIT: break
         if old in text: text = text.replace(old, new, 1); cuts.append(mid)
     return text, cuts
 
 
-def doan_cuts_made(text):
-    """-> the (old, new) pairs of DOAN_LEN_CUTS this prompt shows cut, when allowed (t4/t5 DOAN prompt, prefix rule, last cut needed), else []."""
+def doan_cuts_made(text, scope=None):
+    """-> the (old, new) pairs of DOAN_LEN_CUTS this prompt shows cut, when allowed (t4/t5 DOAN prompt or scope in LEN_SCOPES, prefix rule, last cut needed), else []."""
     t = _norm1(text)
-    if DOAN not in t: return []
+    if DOAN not in t and scope not in LEN_SCOPES: return []
     made = []
     for old, new, _ in DOAN_LEN_CUTS:
         o, n = _norm1(old), _norm1(new)

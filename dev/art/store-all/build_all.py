@@ -517,8 +517,9 @@ def build_season(person,rank,age="a18",season=None):
     assert isinstance(rank,int), "season: ranks 1-8 only"
     sys.path.insert(0,ART); import winter_g28
     a36=build(person,rank,"a36")[1] if rank<=3 else None
-    S0,S,add=build(person,rank,age); S,notes=winter_g28.season(S,rank,a36,season)
-    if rank in (4,5) and len(S)>10000: S,notes=b26_fit(S,notes,angle=False)   # B26 length: winter_g28.season already dropped ANGLE
+    S0,S,add=build(person,rank,age,_season=season); S,notes=winter_g28.season(S,rank,a36,season)
+    _m=b26_fit_ok(person,rank,age,season)
+    if _m and len(S)>10000: S,notes=b26_fit(S,notes,angle=False,whole=_m=='whole')   # B26 length: winter_g28.season already dropped ANGLE
     return S0,S,add+notes
 
 def _kc_drawn(person):   # B8 (BW3): same table + rule as build.py kc_drawn (dev/art/KC_REFS.json m09_ok yes + real face words)
@@ -533,21 +534,33 @@ def eyes(S):
     if EYES_STRAIGHT[:-1] in S: return S
     m=re.search(r"Her face: [^.]*\. ",S); assert m,"EYES: face sentence"
     return S[:m.end()]+EYES_STRAIGHT+" "+S[m.end():]
-def build(person,rank,age="a18"):
+def build(person,rank,age="a18",_season=None):
     S0,S,add=_build(person,rank,age); S=eyes(S)
-    if rank in (4,5) and len(S)>10000: S,add=b26_fit(S,add,angle=True)
+    _m=b26_fit_ok(person,rank,age,_season)
+    if _m and len(S)>10000: S,add=b26_fit(S,add,angle=True,whole=_m=='whole')
     return S0,S,add
-def b26_fit(S,add,angle):
-    """B26 length (owner Lượt 1283 đoạn sentence is ~250 chars longer): t4/t5 only, ALL-OR-NOTHING: (1) drop the ANGLE sentence (owner ~15:39Z length rule, as
-    winter_g28.season) when angle=True, (2) master_common.doan_fit master-repeat store clauses (Foreman C #5 decision (a)); kept only if the prompt then fits
-    <= 10 000, else the prompt is returned unchanged (cells already over 10 000 before B26 are not cut)."""
+# B26FAB2 (Foreman C #5 decision 1, 20/11): length step t1-t6, CUT WHILE > 10 000 (no longer all-or-nothing), only for cells that were <= 10 000 at HEAD 7007acc
+# (before B26/JOB 2/JOB 3); the cells already over then are listed in dev/art/b26/HEAD_OVER10K.json and are never cut. Logged ART_RULES_CONFLICTS.md item 17(d).
+_HEAD_OVER=None
+def b26_fit_ok(person,rank,age,season):
+    """-> 'while' (cut while > 10 000), 'whole' (cell over at HEAD, t4/t5: the JOB 1 all-or-nothing fit kept as it was, so nothing that fitted before goes over again), or False."""
+    global _HEAD_OVER
+    if not (isinstance(rank,int) and 1<=rank<=6): return False
+    if _HEAD_OVER is None:
+        import json as _j; _HEAD_OVER=set(_j.load(open(os.path.join(ART,"b26","HEAD_OVER10K.json"),encoding="utf-8"))["cells"])
+    if not ({f"{x}|{rank}|{age}|{season}" for x in (person,ALIAS.get(person,person))} & _HEAD_OVER): return 'while'
+    return 'whole' if rank in (4,5) else False
+def b26_fit(S,add,angle,whole=False):
+    """B26 length (owner Lượt 1283 đoạn sentence; JOB 2/3 growth): t1-t6, (1) drop the ANGLE sentence (owner ~15:39Z length rule, as winter_g28.season) when
+    angle=True, (2) master_common.doan_fit master-repeat store clauses (Foreman C #5 decision (a)), each only while still > 10 000."""
     sys.path.insert(0,ART); import winter_g28 as _W, master_common as _MC
     T=S; notes=[]
     m=_W.ANGLE_RX.search(T) if angle else None
     if m: T=T.replace(m.group(0)+" ","",1); notes.append("ANGLE dropped (length, B26)")
     if len(T)>10000:
-        T,_c=_MC.doan_fit(T); notes+=[f"B26 length cut (repeats {x})" for x in _c]
-    return (T,add+notes) if len(T)<=10000 else (S,add)
+        T,_c=_MC.doan_fit(T,low=not whole); notes+=[f"B26 length cut (repeats {x})" for x in _c]
+    if whole and len(T)>10000: return S,add   # JOB 1 all-or-nothing (cells already over at HEAD)
+    return T,add+notes
 def _build(person,rank,age="a18"):
     if not _kc_drawn(ALIAS.get(person,person)): raise NotDrawn(person)   # B8: people NOT drawn are refused (CLI exit 2, --check counts them HELD)
     person=ALIAS.get(person,person); S0=store(person,rank,age); S=S0
@@ -558,8 +571,17 @@ def _build(person,rank,age="a18"):
     S=apply_dedupe(person,rank,age,S); store(person,rank,age); S=_sec_slot(person,rank,S)   # Lượt 469 pose dedupe (slot); re-run store so LAST_G is this rank's
     anchor=" Pose:"; assert S.count(anchor)==1,("pose anchor",person,rank)
     add=(laws(rank,age,person in PR) if isinstance(rank,int) else laws(rank))+[angle_sentence(person,rank,age),grace_sentence(person,rank,age)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
+    if rank in (4,5,6): add=[hairflower_named(a,person) for a in add]
     if not g_pets_allowed(rank,age): S=LAST_G["_PETS"].depet(S)   # F17 PETS: no animal pose where pets are not allowed (only the animal words change)
     return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
+# HAIR FLOWER SPECIES t4-t6 (Foreman C #5 decision 2, 20/11: the t4-t6 prompts said only 'ONE fresh flower in her hair' -> Magnific painted s62 a peony while her
+# JOB 2 embroidery is plum blossom): the F13 HAIR FLOWER SIZE sentence names HER species (build.py hairflower_species = MOTIF_LOW[person][1], the JOB 2 source).
+# Size words unchanged; the 17 'a pink silk flower' people (no species) unchanged.
+def hairflower_named(a,person):
+    if not a.startswith(_F13): return a
+    sp=LAST_G["hairflower_species"](person)
+    if not sp: return a
+    return a.replace("ONE fresh flower in her hair","ONE fresh "+sp[0]+" in her hair",1)
 
 # ---------------- THÁI HẬU (owner Lượt 618 + 624, ROOT-53 order: BASE = the 18/11 Thái hậu prompt the owner liked, VERBATIM) ----------------
 # BASE file dev/art/elder-copy/THAIHAU_1811_c04_a36_BASE.txt = Magnific prompt of gen CqnHqn1EEy (c04 a36, 18/11 22:28Z; a51 bxMrxpT5Y2 / a65 cpSDpJs0eP
