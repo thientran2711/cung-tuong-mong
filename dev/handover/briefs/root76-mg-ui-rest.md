@@ -1,0 +1,11 @@
+PRIORITY #1 CHECK: OD L1981 (Sẵn sàng/Hướng dẫn every mini-game), L2008 (td_dung), PROGRESS_scheme-games-port.md:17-20 | main jtd.js:17 td_dung rules, jpetcare.js:89 + jshelf.js:403 open frames without kgReady, j82.js:105 seal "TÀI NGHỆ" hard-coded, jsgame.js:11 | review/scheme-games (CHECK FIRST — reuse/finish it, do not rebuild) | claims none (GAP MG04, MG12, KP05)
+# WORKER mg-ui-rest (sonnet, UI) — MAIN ROOT-76
+Read briefs/root76-common.md first (all of it), then START_WORKER.md, dev/rules/topic/kit-ui.md, KIT.md mini-game sections (kgReady, kg82Frame, kitGameFrame, seal), VANPHONG.md.
+Source rows: dev/handover/GAP_LIST.md MG04, MG12, KP05 (read them + the OD lines verbatim).
+WHOLE JOB (one group = mini-game framing leftovers):
+1. MG04 td_dung (Dung): rewrite its rules + guided round so the move is clear FROM PICTURES (owner OD:L2008 verbatim; no words in play — mg-noword rules, OD L1997/L2013). Touch box already fixed (d9800e60).
+2. MG12 «Sẵn sàng» / «Hướng dẫn» rules screen (kgReady, the same kit screen every KG82 kind uses) in pet care (jpetcare) and plant care (jshelf). Điểm trang is HELD by the owner (OD 20/11 ~08:45Z L2036) — do NOT touch jmkt/jtoil makeup.
+3. KP05 scheme mini-games (jsgame: Nghe ngóng / Truyền lời / Mặc cả / Thời cơ): seal shows "MƯU" instead of the hard-coded "TÀI NGHỆ" (make the seal word a kit-frame parameter, every caller passes or defaults — whole group), own HUD per PROGRESS_scheme-games-port.md. FIRST check review/scheme-games (git log, report, PROGRESS) — if it already holds this, merge/finish it on your branch. Painted boards = art → file a request line for Foreman C in your report (do not draw).
+KIT FIRST: a missing kit part → STOP that part, file dev/kit/KIT_REQUESTS.md, tell main (kit keeper builds it). Whole group scan table (every caller of kgReady/seal) in the report.
+Tests: your own test dev/test/mg-ui-rest.js (assert: td_dung guided round exists; kgReady opens before pet/plant care; seal word per caller), mg-ready-guide 9/9, ag-mgcal, mg-allkinds if present, mg-back if on main, quickcheck. Shots Fold 755x1000@2 + iPad 1180x820@2 of each screen, LOOKED.
+Branch review/mg-ui-rest from origin/main 716be762. Report reports/mg-ui-rest.md; send "SẴN SÀNG KIỂM mg-ui-rest <sha>" to MAIN ROOT-76 session_01Rc5AsN56DP1NgSYAwWFJ8o.
