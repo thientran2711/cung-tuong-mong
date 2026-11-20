@@ -29,12 +29,12 @@ function nmFix(why){if(typeof S==="undefined"||!S)return null;if(!nmOwner()){nmO
   for(const k in (S.npw||{})){const n=k.split("|")[0];if(n&&n!=="*"&&n!=="me"&&/^\p{Lu}/u.test(n)&&!/\d/.test(n)&&!R0[n])R0[n]="gone"}}}catch(e){}
  try{const L0=nmPeople();const L=L0.filter(e=>e.me).concat(L0.filter(e=>!e.me&&e.guest),L0.filter(e=>!e.me&&!e.guest));const me=L.find(e=>e.me);const meSur=me?nmSurOf(nmBare(S.name)):"";
   const held=new Map();for(const e of L){const b=nmBare(e.o[e.f]);held.set(b,(held.get(b)||0)+1)}
-  const full=new Set(),vars=new Set(),sur=new Set();const todo=[];
+  const full=new Set(),vars=new Set(),sur=new Set(),vby=new Map();const todo=[];
   for(const e of L){const raw=e.o[e.f];const b=nmBare(raw);let bad=e.me||e.guest?"":nmBad(b);if(e.guest&&!e.me&&full.has(b))bad="dup";/* coop-name-clash: her person behind a higher holder (the host herself / the friend / an earlier person of hers) */
    if(bad==="sur"&&e.fam&&nmSurOf(b)===meSur)bad="";/* her own family keeps her surname */
-   if(!e.me&&!e.guest&&!bad){if(full.has(b))bad="dup";else if(nmAlive(e)&&(e.kind==="mo"?sur.has(nmSurOf(b)):nmVars(b).some(v=>vars.has(v))))bad="like"}
+   if(!e.me&&!e.guest&&!bad){if(full.has(b))bad="dup";else if(nmAlive(e)&&(e.kind==="mo"?sur.has(nmSurOf(b)):nmVars(b).some(v=>vars.has(v)))){bad="like";e.by=(nmVars(b).map(v=>vby.get(v)).find(Boolean))||""}}
    if(bad){todo.push([e,bad]);continue}
-   full.add(b);if(nmAlive(e)){nmVars(b).forEach(v=>vars.add(v));if(e.kind==="mo")sur.add(nmSurOf(b))}}
+   full.add(b);if(nmAlive(e)&&!e.fr/* coop-name-clash: the friend's people seen only through her blob (her servants, home family, marriage pools) hold their FULL names; a world person is not renamed for a short form one of them shares (her seat's own nmNew keeps short forms apart; host-side churn of living consorts for a pool candidate = a world rename every merge) */){nmVars(b).forEach(v=>{vars.add(v);if(!vby.has(v))vby.set(v,(e.guest?(e.fr?"fr:":"g:"):e.me?"me:":"")+(e.fp?e.fp+":":"")+b)});if(e.kind==="mo")sur.add(nmSurOf(b))}}
   /* the storyline people kept as plain text (j4 S.st.guard / S.st.stu) and the fallen consort's name (j59 S.lcfPn) */
   const txt=[];try{if(S.st){if(S.st.guard)txt.push([S.st,"guard","m"]);if(S.st.stu)txt.push([S.st,"stu","m"])}if(S.lcfPn)txt.push([S,"lcfPn","f",{sur:"Tần"}])}catch(e){}
   for(const [o,f,kind,op] of txt){const b=nmBare(o[f]);const bad=nmBad(b)||(full.has(b)?"dup":"");if(bad)todo.push([{o,f,kind,txt:1,op},bad]);else full.add(b)}
@@ -45,7 +45,7 @@ function nmFix(why){if(typeof S==="undefined"||!S)return null;if(!nmOwner()){nmO
    e.o[e.f]=pre+nb;if(e.f==="pn"&&e.o.name===b)e.o.name=nb;
    if(e.o.eid&&typeof e.o.call==="string"){const oc=e.o.call;e.o.call=nmSurOf(nb)+" "+oc.split(" ").slice(-2).join(" ");if(held.get(b)===1&&oc!==e.o.call&&nmSurOf(b)!==nmSurOf(nb))nmRewrite(oc,e.o.call,names)}
    let refs=0;if(bad!=="dup"&&held.get(b)===1)refs=nmRewrite(b,nb,names);else if(bad!=="dup"&&!shared.has(b))shared.set(b,{nb,x:null});
-   const x={old:raw,neu:pre+nb,why:bad,kind:e.kind,refs};if(shared.has(b)&&!shared.get(b).x&&shared.get(b).nb===nb)shared.get(b).x=x;out.push(x)}
+   const x={old:raw,neu:pre+nb,why:bad,kind:e.kind,refs};if(e.by)x.by=e.by;/* who keeps the short form (diagnostics) */if(shared.has(b)&&!shared.get(b).x&&shared.get(b).nb===nb)shared.get(b).x=x;out.push(x)}
   /* a name two people shared, and every holder was renamed (e.g. two maids "Thu Thủy"): texts and name keys (S.npw "Thu Thủy|maidSell")
      cannot tell them apart, but they must not keep naming nobody (law 6b: a person named in any road really exists) -> they go to the
      first holder renamed (the player's family / the friend's people / the world, in that order); if someone still holds it, they stay */
