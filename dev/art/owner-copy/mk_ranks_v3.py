@@ -1,12 +1,12 @@
 # Lượt 306-308/321 builder (t1-t3 add SLEEVES sentence): princesses V3 + m19 V5, base = m19_tN_V4.txt (approved prompt), only parts swapped.
 import re
 B='/home/user/cung-tuong-mong/dev/art/owner-copy/'
-FL={1:['jasmine sprigs','peach blossoms','osmanthus clusters','pear blossoms','small climbing roses'],
-    2:['apricot blossoms','gardenias','plum blossoms','begonias','lilac sprays'],
-    3:['crabapple blossoms','small camellias','magnolia buds','small hydrangea clusters','azaleas'],
-    4:['orchids','michelia blossoms','small lotus flowers','lilies','camellias'],
-    5:['herbaceous peonies','full lotus blooms','China roses','narcissus flowers','double camellias'],
-    6:['tree peonies','cotton-rose hibiscus flowers','queen-of-the-night (epiphyllum) flowers','large chrysanthemums','double magnolias']}
+FL={1:['osmanthus clusters', 'lilac sprays', 'pear blossoms', 'single peach blossoms', 'plum blossoms'],
+    2:['cymbidium orchids', 'tiger lilies', 'narcissus flowers', 'lily magnolias', 'pomegranate flowers'],
+    3:['michelia blossoms', 'semi-double China roses', 'double azaleas', 'semi-double rose-of-Sharon flowers', 'wintersweet blossoms'],
+    4:['epiphyllum flowers', 'lotus flowers', 'double peach blossoms', 'double kerria pompons', 'double daylilies'],
+    5:['formal double camellias', 'double hollyhocks', 'tea-scented China roses', 'double cotton-rose hibiscus flowers', 'peony-flowered Chinese asters'],
+    6:['tree peonies', 'incurved chrysanthemums', 'thousand-petal lotuses', 'mophead hydrangeas', 'bomb-form herbaceous peonies']}   # F2 NEW TABLE owner DUYỆT Lượt 1352 (FLORA1; = t8-prompt-B/build.py F2_FL plural)
 SZ={1: 'HAIR FLOWER SIZE: the fresh hair flower is a LARGE full bloom about the size of her palm, clearly visible at game size (never tiny florets).', 2: 'HAIR FLOWER SIZE: the fresh hair flower is a LARGE full bloom about the size of her palm, clearly visible at game size (never tiny florets).', 3: 'HAIR FLOWER SIZE: the fresh hair flowers are LARGE full blooms about the size of her palm with a few buds, clearly visible at game size (never tiny florets).', 4: 'HAIR FLOWER SIZE: the fresh hair flowers are LARGER than a palm, one big bloom plus smaller blooms, clearly bigger than the lower ranks.', 5: 'HAIR FLOWER SIZE: two or three BIG full blooms, each larger than her palm, clearly bigger than the Tần rank.', 6: 'HAIR FLOWER SIZE: a big lush cluster of the LARGEST blooms of all ranks, each larger than her palm, the grandest hair flowers in the palace.'}
 FLCOL=" in a soft colour that suits her outfit (never her main robe colour)"
 ANG=[("FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn","a light graceful step, {item}","feet close together, one foot a little forward and lightly on its toes, toes peeking from under the hem"),

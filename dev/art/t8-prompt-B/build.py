@@ -696,6 +696,7 @@ TIER_LOW_CROSSED={
 2:"a fine silk robe with delicate embroidered {motif} at the collar, sleeves and hem and a soft silk sash"}
 def outfit_low123(c,t,pal,main):
     rk,robe,hair,gold=TIER_LOW[t]; mo,fl=MOTIF_LOW[c]
+    _sp=hairflower_species(c,t); fl=_art(_sp[0]) if _sp else fl   # F2 (owner Lượt 1352): hair flower t1–t3 = the F2 species of this rank
     if AGE in CROSSED_AGES and t in TIER_LOW_CROSSED: robe=TIER_LOW_CROSSED[t]   # G21: crossed collar at a36/a51/a65
     return f"Outfit ({rk}): a NEW outfit, {robe.format(motif=mo,sec=pal.split(" and ")[-1])}; {hair.format(flower=fl)}; her signature colour family {pal} stays the MAIN robe colour ({main}, NOT green); the robe itself is clearly {main} silk, {gold}, NOT a cream, beige or all-gold robe"
 ITEMS_LOW={"c06":{1:("a plain silk round fan with a bamboo handle","two"),2:("an embroidered silk sachet with a tassel","one"),3:("an embroidered silk round fan with a silk tassel","two"),
@@ -1990,22 +1991,51 @@ HAIRFL={"an orchid":("orchid","orchids","lan"),"a white jasmine sprig":("jasmine
  "a pale magnolia":("magnolia","magnolias","mộc lan"),"a begonia":("begonia","begonias","hải đường"),"a red rose":("rose","roses","hồng"),
  "a purple wisteria sprig":("wisteria","wisteria","tử đằng")}
 HAIRFL_NONE=("a pink silk flower",)
+# F2 NEW TABLE (owner DUYỆT Lượt 1352, FLORA1 table dev/handover/reports/FLORA1.md: petal count rises strictly with rank): hair flower t1–t6 = F2_FL[t][(n-1)%5],
+# n = the number in her id (c07 -> 7, as owner-copy/pr-night-1119/mk.py); embroidery flower t1–t6 = the same species; t7 HQP / t8 HH embroidery = her t6 species
+# (owner Lượt 1342; still NO hair flower at t7/t8). Entries = (singular, plural, VN label); short builder names of FLORA1's prompt words (petal form kept, colour left
+# to F3 'flower colour suits her outfit'). Replaces JOB 2's MOTIF_LOW species (one per person) — every person now has a species (the 17 'pink silk flower' included).
+F2_FL={1:[("osmanthus cluster","osmanthus clusters","quế"),("lilac spray","lilac sprays","tử đinh hương"),("pear blossom","pear blossoms","lê"),
+          ("single peach blossom","single peach blossoms","đào đơn"),("plum blossom","plum blossoms","mai đỏ")],
+       2:[("cymbidium orchid","cymbidium orchids","lan"),("tiger lily","tiger lilies","ly hổ"),("narcissus flower","narcissus flowers","thủy tiên"),
+          ("lily magnolia","lily magnolias","mộc lan tím"),("pomegranate flower","pomegranate flowers","lựu")],
+       3:[("michelia blossom","michelia blossoms","ngọc lan"),("semi-double China rose","semi-double China roses","hồng nguyệt quý"),
+          ("double azalea","double azaleas","đỗ quyên kép"),("semi-double rose of Sharon","semi-double rose-of-Sharon flowers","mộc cận kép"),
+          ("wintersweet sprig","wintersweet blossoms","lạp mai")],
+       4:[("epiphyllum (queen of the night) flower","epiphyllum flowers","quỳnh"),("lotus flower","lotus flowers","sen hồng"),
+          ("double peach blossom","double peach blossoms","bích đào"),("double kerria pompon","double kerria pompons","đệ đường kép"),
+          ("double daylily","double daylilies","huyên thảo kép")],
+       5:[("formal double camellia","formal double camellias","trà kép trắng"),("double hollyhock","double hollyhocks","thục quỳ kép"),
+          ("tea-scented China rose","tea-scented China roses","hồng trà vàng"),("double cotton-rose hibiscus","double cotton-rose hibiscus flowers","phù dung kép"),
+          ("peony-flowered Chinese aster","peony-flowered Chinese asters","thúy cúc")],
+       6:[("tree peony","tree peonies","mẫu đơn"),("incurved chrysanthemum","incurved chrysanthemums","cúc đại đóa"),
+          ("thousand-petal lotus","thousand-petal lotuses","sen ngàn cánh"),("mophead hydrangea","mophead hydrangeas","cẩm tú cầu"),
+          ("bomb-form herbaceous peony","bomb-form herbaceous peonies","thược dược cầu")]}
+def f2_n(c):
+    m=re.fullmatch(r"[a-z]+(\d+)",c or ""); return int(m.group(1)) if m else None
 # flower species words as they occur in the t1–t6 outfits (plural forms first, then the adjective/singular form used in 'peony medallions', 'lotus scrolls' …)
 FLOWER_PL=["snowflake plum blossoms","pomegranate flowers","lilies of the valley","lotus flowers","plum blossoms","peach blossoms","pear blossoms","jasmine blossoms",
  "chrysanthemums","peonies","orchids","camellias","magnolias","begonias","roses","osmanthus","wisteria"]
 FLOWER_SG=["plum blossom","peach blossom","pear blossom","chrysanthemum","peony","orchid","camellia","magnolia","begonia","lotus"]   # 'rose' never as a source: it is a colour word (rose pink, dusty rose)
 _FL_RX=re.compile(r"(?<![-\w])("+"|".join(re.escape(w) for w in FLOWER_PL+FLOWER_SG)+r")\b(?! leaves| purple| pink| lilac| red|-)")   # colour names (orchid purple, lotus pink, wisteria lilac) and leaves stay
-def hairflower_species(c):
-    return HAIRFL.get(MOTIF_LOW.get(c,(None,None))[1])
-def flower_outfit(o,c):
-    sp=hairflower_species(c)
+def hairflower_species(c,t):
+    """F2 (Lượt 1352): her species at rank t (t7/t8 -> her t6 species, embroidery only)."""
+    n=f2_n(c)
+    if not n or not isinstance(t,int) or not 1<=t<=8: return None
+    return F2_FL[min(t,6)][(n-1)%5]
+def flower_outfit(o,c,t):
+    sp=hairflower_species(c,t)
     if not sp or "Outfit (" not in o: return o
     i=o.index("Outfit ("); j=o.find(". ",i); j=len(o) if j<0 else j
     seg=o[i:j]
+    _tok=[]   # protect words already = her species (the t1–t3 hair-flower clause, F2 names holding 'lotus'/'peony' …) from a second swap
+    def _prot(m): _tok.append(m.group(0)); return f"\x00{len(_tok)-1}\x00"
+    seg=re.sub(r"fresh flower \([^)]*\)|"+"|".join(re.escape(x) for x in (sp[1],sp[0])),_prot,seg)
     def rep(m):
         w=m.group(1)
         return sp[1] if w in FLOWER_PL else sp[0]
     new=_FL_RX.sub(rep,seg)
+    new=re.sub(r"\x00(\d+)\x00",lambda m:_tok[int(m.group(1))],new)
     for f in (sp[1],):   # 'plum blossoms and plum blossoms' -> 'plum blossoms'
         new=new.replace(f+" and "+f,f).replace(f+", "+f+",",f+",")
     return o[:i]+new+o[j:]
@@ -2130,7 +2160,8 @@ if __name__=="__main__":
             assert _o.count(" Pose:")==1,"B12 pose anchor"; _o=_o.replace(" Pose:"," "+_MC.BROCADE+" Pose:",1)
         _DOAN=(not _HIGH) and not STATE and TRIEUN is None and not BDQ and "--low" in sys.argv and LOWN in (4,5)   # B26 (owner Lượt 1283/1284): t4 Tần + t5 Phi = matte satin đoạn
         if _DOAN: _o=doan_outfit(_o)
-        if (not _HIGH or LOWN==6) and not STATE and TRIEUN is None and not BDQ and "--low" in sys.argv and LOWN in (1,2,3,4,5,6): _o=flower_outfit(_o,a[0])   # owner Lượt 1303: embroidery flower = her hair flower, t1–t6
+        if (not _HIGH or LOWN==6) and not STATE and TRIEUN is None and not BDQ and "--low" in sys.argv and LOWN in (1,2,3,4,5,6): _o=flower_outfit(_o,a[0],LOWN)
+        if not STATE and TRIEUN is None and not BDQ and "--low" not in sys.argv and not any(x.startswith("--nude") for x in sys.argv): _o=flower_outfit(_o,a[0],7 if "--t7" in sys.argv else 8)   # owner Lượt 1342: t7/t8 embroidery = her t6 F2 species (no hair flower)   # owner Lượt 1303: embroidery flower = her hair flower, t1–t6
         _o=_MC.apply(_o,high=_HIGH,doan=_DOAN)
     print(_o,end="")
     _lg=[x for x in _RAW if x not in ("--log","--refs")]

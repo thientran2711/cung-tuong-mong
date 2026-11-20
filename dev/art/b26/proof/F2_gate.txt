@@ -1,0 +1,82 @@
+PASS m39|1|a18|None cuts=0 angle=False len=8718
+FAIL m34|1|a51|None cuts=0 angle=False len=10210
+FAIL c28|1|a51|None cuts=0 angle=True len=9615
+PASS s11|1|a36|dong cuts=0 angle=False len=9477
+FAIL s47|1|a51|dong cuts=0 angle=False len=10527
+FAIL c11|1|a65|dong cuts=0 angle=True len=9795
+PASS m09|1|a65|dong cuts=1 angle=False len=9927
+PASS s37|2|a18|None cuts=0 angle=False len=9217
+FAIL m25|2|a51|None cuts=0 angle=False len=10028
+PASS m33|2|a51|None cuts=0 angle=True len=9602
+PASS s27|2|a36|dong cuts=0 angle=False len=8999
+FAIL s24|2|a51|dong cuts=0 angle=False len=10320
+PASS c24|2|a51|dong cuts=0 angle=True len=9614
+PASS p03|2|a51|dong cuts=1 angle=False len=9926
+PASS m17|3|a18|None cuts=0 angle=False len=9043
+FAIL s20|3|a51|None cuts=0 angle=False len=11074
+PASS c15|3|a18|dong cuts=0 angle=False len=9002
+FAIL m23|3|a51|dong cuts=0 angle=False len=10714
+PASS s09|3|a36|dong cuts=0 angle=True len=9664
+FAIL c29|4|a65|None cuts=0 angle=False len=9985
+FAIL s62|4|a51|None cuts=0 angle=False len=11226
+PASS s09|4|a18|None cuts=0 angle=True len=9627
+FAIL c28|4|a65|None cuts=1 angle=False len=9855
+PASS c01|4|a65|None cuts=2 angle=False len=9861
+PASS s08|4|a36|dong cuts=0 angle=False len=9978
+FAIL s61|4|a65|dong cuts=0 angle=False len=11509
+PASS s21|4|a26|dong cuts=0 angle=True len=9834
+PASS s38|4|a36|dong cuts=1 angle=False len=9981
+FAIL c10|4|a65|dong cuts=1 angle=False len=10285
+PASS s33|4|a36|dong cuts=2 angle=False len=9966
+FAIL c01|4|a65|dong cuts=2 angle=False len=10165
+PASS m10|5|a36|None cuts=0 angle=False len=9350
+FAIL m02|5|a51|None cuts=0 angle=False len=10935
+PASS s33|5|a18|None cuts=0 angle=True len=9683
+PASS c26|5|a65|None cuts=1 angle=False len=9997
+PASS c20|5|a65|None cuts=2 angle=False len=9908
+PASS c24|5|a65|None cuts=3 angle=False len=9873
+PASS m52|5|a26|dong cuts=0 angle=False len=9517
+FAIL c15|5|a65|dong cuts=0 angle=False len=10195
+PASS s42|5|a26|dong cuts=0 angle=True len=9820
+PASS s58|5|a26|dong cuts=1 angle=False len=9902
+PASS s45|5|a36|dong cuts=2 angle=False len=9904
+PASS s26|6|a26|None cuts=0 angle=False len=9573
+FAIL s50|6|a51|None cuts=0 angle=False len=11424
+PASS s45|6|a18|None cuts=0 angle=True len=9636
+PASS m02|6|a26|dong cuts=0 angle=False len=9507
+FAIL s36|6|a65|dong cuts=0 angle=False len=11456
+PASS s65|6|a36|dong cuts=0 angle=True len=9595
+PASS s33|6|a36|dong cuts=1 angle=False len=9912
+PASS c03|7|a26|None cuts=0 angle=False len=8688
+FAIL c12|7|a65|None cuts=0 angle=False len=10285
+PASS m37|7|a26|dong cuts=0 angle=False len=9388
+FAIL s55|7|a51|dong cuts=0 angle=False len=11221
+PASS s60|7|a18|dong cuts=0 angle=True len=9760
+PASS s12|8|a18|None cuts=0 angle=False len=9357
+FAIL c06|8|a51|None cuts=0 angle=False len=11261
+PASS m30|8|a18|dong cuts=0 angle=False len=9375
+FAIL c21|8|a51|dong cuts=0 angle=False len=10505
+PASS s15|8|a36|dong cuts=0 angle=True len=9605
+gate {True: 37, False: 22}
+FAIL m34|1|a51|None FAIL LEN TOO LONG: prompt is 10210 characters, the gen tool refuses more than 10000
+FAIL c28|1|a51|None FAIL F16 NOFRUIT: fruit in a held item (owner Lượt 1052/1054/1058: nobody holds fruit, any rank, any age): …roidered pomegranates hem band, small sprays of embroidered pomegranates on the upper garment;…
+FAIL s47|1|a51|dong FAIL LEN TOO LONG: prompt is 10527 characters, the gen tool refuses more than 10000
+FAIL c11|1|a65|dong er Lượt 591, NO GREY): …ster); her signature colour family soft pink-grey and silver stays th…
+FAIL m25|2|a51|None FAIL LEN TOO LONG: prompt is 10028 characters, the gen tool refuses more than 10000
+FAIL s24|2|a51|dong FAIL LEN TOO LONG: prompt is 10320 characters, the gen tool refuses more than 10000
+FAIL s20|3|a51|None FAIL LEN TOO LONG: prompt is 11074 characters, the gen tool refuses more than 10000
+FAIL m23|3|a51|dong FAIL LEN TOO LONG: prompt is 10714 characters, the gen tool refuses more than 10000
+FAIL c29|4|a65|None FAIL B19 GREY: grey outfit colour (owner Lượt 591, NO GREY): …ure colour family muted mauve-lilac and pale grey stays the MAIN robe…
+FAIL s62|4|a51|None FAIL LEN TOO LONG: prompt is 11226 characters, the gen tool refuses more than 10000
+FAIL c28|4|a65|None FAIL F16 NOFRUIT: fruit in a held item (owner Lượt 1052/1054/1058: nobody holds fruit, any rank, any age): …visible layers with WIDE gold-thread embroidered borders of pomegranates at collar, sleeves and hem, a…
+FAIL s61|4|a65|dong es more than 10000
+FAIL c10|4|a65|dong efuses more than 10000
+FAIL c01|4|a65|dong FAIL LEN TOO LONG: prompt is 10165 characters, the gen tool refuses more than 10000
+FAIL m02|5|a51|None FAIL LEN TOO LONG: prompt is 10935 characters, the gen tool refuses more than 10000
+FAIL c15|5|a65|dong FAIL LEN TOO LONG: prompt is 10195 characters, the gen tool refuses more than 10000
+FAIL s50|6|a51|None FAIL LEN TOO LONG: prompt is 11424 characters, the gen tool refuses more than 10000
+FAIL s36|6|a65|dong FAIL LEN TOO LONG: prompt is 11456 characters, the gen tool refuses more than 10000
+FAIL c12|7|a65|None FAIL LEN TOO LONG: prompt is 10285 characters, the gen tool refuses more than 10000
+FAIL s55|7|a51|dong FAIL LEN TOO LONG: prompt is 11221 characters, the gen tool refuses more than 10000
+FAIL c06|8|a51|None FAIL LEN TOO LONG: prompt is 11261 characters, the gen tool refuses more than 10000
+FAIL c21|8|a51|dong FAIL LEN TOO LONG: prompt is 10505 characters, the gen tool refuses more than 10000

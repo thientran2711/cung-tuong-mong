@@ -8,9 +8,7 @@ sys.argv=['build.py']; sys.path.insert(0,'/home/user/cung-tuong-mong/dev/art/t8-
 import build as S
 S.OLDITEM=True   # items are slot words given below (item_age.py has no rows for new persons)
 OUT=os.path.dirname(os.path.abspath(__file__))+'/'
-FL={1:['white jasmine sprigs','pink peach blossoms','golden osmanthus clusters'],2:['pale apricot blossoms','white gardenias','red plum blossoms'],
-    3:['crabapple blossoms','small camellias','magnolia buds'],4:['orchids','white michelia blossoms','small pink lotus flowers'],
-    5:['herbaceous peonies','full lotus blooms','China roses'],6:['tree peonies','cotton-rose hibiscus flowers','queen-of-the-night (epiphyllum) flowers']}
+FL={1:['osmanthus clusters', 'lilac sprays', 'pear blossoms'],2:['cymbidium orchids', 'tiger lilies', 'narcissus flowers'],3:['michelia blossoms', 'semi-double China roses', 'double azaleas'],4:['epiphyllum flowers', 'lotus flowers', 'double peach blossoms'],5:['formal double camellias', 'double hollyhocks', 'tea-scented China roses'],6:['tree peonies', 'incurved chrysanthemums', 'thousand-petal lotuses']}   # F2 NEW TABLE owner DUYỆT Lượt 1352 (FLORA1; first 3 of build.py F2_FL, n=1..3)
 FLC=' in a soft colour that suits her outfit (never her main robe colour)'
 SZ={1:'HAIR FLOWER SIZE: the fresh hair flower is a LARGE full bloom about the size of her palm, clearly visible at game size (never tiny florets).',
     2:'HAIR FLOWER SIZE: the fresh hair flower is a LARGE full bloom about the size of her palm, clearly visible at game size (never tiny florets).',

@@ -1,0 +1,59 @@
+cells 12410
+  changed t1 1405
+  changed t2 1455
+  changed t3 1455
+  changed t4 1435
+  changed t5 1455
+  changed t6 1455
+  changed t7 1460
+  changed t8 1460
+cuts {'ANGLE cut': 82, 'ANGLE restored': 8, 'M03 cut': 23, 'M01 cut': 14, 'M10 cut': 43, 'M13 (approved S24) cut': 28, 'M03 restored': 9, 'M01 restored': 8, 'M10 restored': 16, 'M13 (approved S24) restored': 8}
+bad 0
+top swaps:
+new >10000 vs HEAD 7007acc: 177
+   t5 a51 dong 32 +252..+478
+   t5 a51 normal 29 +1..+325
+   t5 a65 dong 79 +118..+486
+   t5 a65 normal 35 +20..+176
+   t8 a36 dong 2 +1..+2
+top swaps:
+   640  -> tree
+   640 peonies -> incurved chrysanthemums
+   600  -> bomb-form herbaceous
+   580 peonies -> thousand-petal lotuses
+   570 peonies -> mophead hydrangeas
+   180 orchids -> semi-double rose-of-Sharon flowers
+   150  -> formal double
+   150 camellias -> semi-double rose-of-Sharon flowers
+   130 plum -> michelia
+   130 plum -> single peach
+   120 orchids -> single peach blossoms
+   120 jasmine blossoms -> double azaleas
+   120 jasmine -> michelia
+   120 camellias -> semi-double China roses
+   120 plum blossoms -> semi-double rose-of-Sharon flowers
+   120 camellias -> wintersweet blossoms
+   110 plum -> pear
+   100 jasmine blossoms -> double hollyhocks
+   100 plum blossoms -> peony-flowered Chinese asters
+   100 orchids -> formal double camellias
+   100 plum blossoms -> tea-scented China roses
+   100 orchids -> double cotton-rose hibiscus flowers
+   100 peonies -> double hollyhocks
+   100 jasmine blossoms -> tea-scented China roses
+   100 camellias -> single peach blossoms
+   100 jasmine blossoms -> formal double camellias
+   100 camellias -> double hollyhocks
+   100 plum blossoms -> double cotton-rose hibiscus flowers
+   100 orchids -> peony-flowered Chinese asters
+   100 plum blossoms -> double hollyhocks
+   100  -> single
+   100 peach -> plum
+   100 peach -> michelia
+   90 camellias -> double azaleas
+   90 plum -> wintersweet
+   90 jasmine -> wintersweet
+   90 camellias -> michelia blossoms
+   90 plum blossoms -> double azaleas
+   90 orchids -> wintersweet blossoms
+   90 plum blossoms -> semi-double China roses

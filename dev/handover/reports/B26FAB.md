@@ -68,3 +68,31 @@ Text only, 0 credits, no gens. Nothing sent to the owner.
 4. SAMPLES rebuilt (builder output + same caption): dev/art/capes/s62_t5.txt (9 457), s62_t6.txt (9 601); dev/art/flower/s62_t4 (9 749), t5 (9 436 — now also carries JOB 3 capes), t6 (9 593). Each = old sample with only 'ONE fresh flower in her hair' -> 'ONE fresh plum blossom in her hair' (flower t5/t6 also JOB 3). .keep allow lines added; **keep_check --all PASS (24)**; check_store PASS x5.
 OPEN for Foreman C #5: the 156 t5 a51/a65 cells (max overshoot +422 đông, +247 normal). Options: shorter Phi cape wording (owner words), more boilerplate cuts (need a decision), or accept.
 Commit: 8ea863f (B26FAB2).
+
+## B26FAB2 — F2 NEW TABLE redo (Foreman C #6 GO, owner DUYỆT Lượt 1352 + Lượt 1342)
+NOTE: C #5 had put item 2 on HOLD at 18:25Z. I only read that after pushing 8ea863f; this redo replaces item 2.
+- dev/art/t8-prompt-B/build.py: F2_FL = the FLORA1 table (dev/handover/reports/FLORA1.md) as short builder names (singular, plural, VN). The petal form is kept ('formal double', 'semi-double', 'bomb-form' …); colour words are dropped (F3: flower colour suits her outfit). Person n = the number in her id (c07 -> 7, as owner-copy/pr-night-1119/mk.py); species = F2_FL[t][(n-1)%5].
+  hairflower_species(c,t) now uses F2_FL (MOTIF_LOW species no longer used; the 17 'pink silk flower' people now get F2 species too).
+  - t1–t3 hair clause 'a fresh flower (<F2 species>)' (outfit_low123).
+  - t4–t6 'HAIR FLOWER SIZE: exactly ONE fresh <F2 species> in her hair' (build_all.hairflower_named).
+  - embroidery t1–t6 = the same species (flower_outfit(o,c,t); words already = her species are protected from a second swap).
+  - t7 HQP / t8 HH embroidery = her t6 species; still no hair flower; Nữ đế (--nude3), triều, state, bdq untouched.
+- FLOWERS lists updated: owner-copy/mk_ranks_v3.py FL (5 per rank) and owner-copy/pr-night-1119/mk.py FL (first 3). face-common/make_new_s62_65.py has NO FLOWERS list (nothing to change). Rule F2 set via rule.py (ART_RULES + HISTORY, Lượt 1352/1342).
+- PROOF (dev/art/b26/proof/F2_proof.txt, cmp5.py): 8ea863f vs F2 redo, 12 410 cells.
+  - changed t1 1405, t2–t3 1455, t4 1435, t5–t6 1455, t7–t8 1460. Nữ đế 0.
+  - **bad 0**: every diff is flower words inside the Outfit sentence / hair-flower clause / t4–t6 hair-size sentence, plus the length step re-balancing (ANGLE/cuts added or restored as names got longer or shorter).
+  - Length step unchanged (≤10 000 method). **new > 10 000 vs HEAD = 177:**
+    - t5 a51 normal 29 (+1..+325), t5 a51 đông 32 (+252..+478), t5 a65 normal 35 (+20..+176), t5 a65 đông 79 (+118..+486): all cuts already used.
+    - **t8 a36 đông 2 (+1..+2)**: the t8 embroidery name 'incurved chrysanthemums' etc. is longer than 'peonies'; t7/t8 have no length step. Needs a decision.
+- GATE (dev/art/b26/proof/F2_gate.txt, 1 random cell per change group): 37 PASS. Every FAIL ≤ 10 000 is PRE-EXISTING: c28 F16 fruit (pomegranate motif), c11/c29 B19 grey. Those 4 cells FAIL at 8ea863f too (re-gated). All other FAILs are > 10 000.
+- SAMPLES dev/art/f2/s62_t1..t8.txt (+ base/ = 8ea863f builder output, + .keep with flower-only allow lines). Captions 'Bậc <rank> · Hoa <VN>' (t7/t8 'Thêu hoa <VN>'). keep_check --all PASS (36). check_store PASS x8. The older dev/art/flower + capes samples (plum blossom) are now stale.
+s62 (n=62 -> column 2) table:
+  t1 Đáp ứng: hair = lilac spray | embroidery = lilac sprays (tử đinh hương) | 8936 chars | 3 allow
+  t2 Thường tại: hair = tiger lily | embroidery = tiger lilies (ly hổ) | 8918 chars | 3 allow
+  t3 Quý nhân: hair = semi-double China rose | embroidery = semi-double China roses (hồng nguyệt quý) | 9273 chars | 4 allow
+  t4 Tần: hair = lotus flower | embroidery = lotus flowers (sen hồng) | 9579 chars | 3 allow
+  t5 Phi: hair = double hollyhock | embroidery = double hollyhocks (thục quỳ kép) | 9282 chars | 4 allow
+  t6 Quý phi: hair = incurved chrysanthemum | embroidery = incurved chrysanthemums (cúc đại đóa) | 9439 chars | 2 allow
+  t7 Hoàng quý phi: hair = none (t7/t8) | embroidery = incurved chrysanthemums (cúc đại đóa) | 9158 chars | 1 allow
+  t8 Hoàng hậu: hair = none (t7/t8) | embroidery = incurved chrysanthemums (cúc đại đóa) | 9150 chars | 1 allow
+- Rolling over: near my context line. Remaining = nothing for this job; the open decisions are the 177 over-10 000 cells (t5 cape length, t8 a36 đông 2).
