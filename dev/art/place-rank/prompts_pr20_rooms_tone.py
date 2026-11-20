@@ -9,12 +9,14 @@ D = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, D)
 with contextlib.redirect_stdout(io.StringIO()):
     import prompts_pr20_rooms as R
 A = R.A
-SWATCH = '3zKqcUwREY'   # tone-swatch-tan-t4.png (#E3A3B8:3 #F3EBDD:2 #A8CDB8:1), uploaded 0 cr
-TONE = (" COLOUR TONE (owner: the room has the same colour tone as the outfit of the woman who lives here): the whole room keeps the same "
-        "lightness and softness as her clothes, like the colour strip in image 4: fresh but calm, medium saturation, never brighter, darker or "
-        "more saturated than her outfit, never vivid or neon, never dusty or greyed; the wood, the silks, the curtains, the cushions and the "
-        "ornaments all stay in that one mood, the pink of image 4 as the main colour with its ivory and soft jade-green partners; bright neutral "
-        "white daylight over everything, no warm golden or amber cast.")
+SWATCH = 'SWATCH_V2_TBD'   # v2 strip pink:4 ivory:1 jade:1 (v1 3zKqcUwREY was pink:3 ivory:2 jade:1)   # tone-swatch-tan-t4.png (#E3A3B8:3 #F3EBDD:2 #A8CDB8:1), uploaded 0 cr
+TONE = (" COLOUR TONE (owner: the room has the same colour tone as the outfit of the woman who lives here): the room's colours have the "
+        "SAME colour strength as her outfit and as the colour strip in image 4: rich, clear and fully coloured, like a room dressed in the very "
+        "colours of her clothes; never paler, never greyer, never faded, milky or washed out, and never neon or glaring either; the pink of image 4 "
+        "at its full strength is the main colour of the silks, curtains and cushions, with its ivory and soft jade-green partners, and the wood "
+        "keeps its own rich polished colour; bright neutral white daylight, no warm golden or amber cast.")
+# v2 (owner "tông màu mới ... còn bị nhạt hơn cái tông màu cũ"): v1 said "same lightness and softness ... never brighter, darker or more
+#   saturated ... fresh but calm, medium saturation" -> measured paler (33: C* 19.3 -> 17.2). Those pulls removed.
 ANCH = "no purple, no orange, no red silks."   # last words of RC4 / RC4R (rank colour sentence) in every room prompt
 def add_tone(p):
     assert p.count(ANCH) == 1, 'rank colour anchor'; return p.replace(ANCH, ANCH + TONE)
@@ -23,7 +25,7 @@ for S in (R.R3334, R.BATCH2):
     for k, v in S.items():
         OUT[k] = dict(prompt=add_tone(v['prompt']), refs=[*v['refs'], SWATCH])
 for k, v in OUT.items():
-    assert v['prompt'].count('image 4') == 2 and len(v['refs']) == 4, k
+    assert v['prompt'].count('image 4') == 2 and 'never paler' in v['prompt'] and len(v['refs']) == 4, k
 import room_gate; room_gate.guard(OUT, 'pr20-tone')
 json.dump(OUT, open(os.path.join(D, 'prompts_pr20_rooms_tone.json'), 'w'), ensure_ascii=False, indent=1)
 open(os.path.join(D, 'prompts_pr20_tone_chung-tu-cung-tan.txt'), 'w').write(OUT['chung-tu-cung-tan']['prompt'])

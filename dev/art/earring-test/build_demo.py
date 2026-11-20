@@ -27,8 +27,10 @@ for k, v in A['head_items'].items():
         HEAD[k] = {'img': uri('sprites/' + v['sprite'])}
 RANK = uri(A['compare']['rank_head'])
 JEW = {k: uri('sprites/' + f) for k, f in [('bangle_back', 'bangle_back.webp'), ('bangle_front', 'bangle_front.webp'),
-       ('necklace', 'necklace.webp'), ('pendant', 'necklace_pendant.webp'), ('pb_back', 'phibach_back.webp'), ('pb_sides', 'phibach_sides.webp'), ('pb_swag', 'phibach_swag.webp')]}
-JEW['pbB'] = uri(A['figures']['c22']['phibach']['B']['file']); JEW['pbB1'] = uri(A['figures']['c22']['phibach']['B']['try1'])
+       ('necklace', 'necklace.webp'), ('pendant', 'necklace_pendant.webp')]}
+for fid in ('c09', 'c11', 'c22'):
+    for k in ('back', 'sides'): JEW[f'rb_{fid}_{k}'] = uri(f'sprites/ribbon_{fid}_{k}.webp')
+JEW['pbB'] = uri(A['figures']['c22']['phibach']['B2']['file'])   # B = Magnific edit, narrow ribbon (r2)
 
 for k in ('bangle_back', 'necklace'):
     f = 'sprites/' + ('bangle_back.webp' if k == 'bangle_back' else 'necklace.webp'); im = Image.open(os.path.join(D, f)); JEW[k + '_wh'] = im.size

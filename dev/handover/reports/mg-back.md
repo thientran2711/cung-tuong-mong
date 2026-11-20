@@ -81,3 +81,23 @@ Branch **review/mg-back** = **7f7d467a** (r2 a0a98e66 + merge origin/main eb056f
 | Thử tay (mgcal) | ✕ | ✕ | ✕ | ✕ | kind list, no confirm | confirm → kind list | nothing at stake; kind not saved |
 
 Shots (looked): «Ra tay?» https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/scheme-raytay-755x1000.webp · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/scheme-raytay-1180x820.webp (earlier r1 shots still in the same folder).
+
+# r3 — reviewer FAIL 7f7d467a fix (rv-mg-back.md r2 section, handover 19372a3c)
+Branch **review/mg-back** = **c43c6066** (contains LIVE 70bea3d3).
+- **kgSnap removed** (it JSON-restored S: detached S→rivals refs, rewound S.away after spend()'s wrappers had moved the world). Replaced by a **deferred charge**: `kgDefer(cost, open)` opens the game with the charge only remembered → `kg82Open` keeps it as `KG82.payOnGo` (lessons also `S.mg.pay`, so a reload reopens the same unpaid lesson) → `kgPay()` takes it on «Sẵn sàng» / the quick option / any result / an outcome close (jsgame «Giao cho người làm»). When jaudit holds a pending cost for the game, the charge joins it (paid with jaudit's one result card, which keeps showing the whole cost). A rules-screen ✕ = free back with nothing to undo: **spend() never runs before «Sẵn sàng»**; no refund anywhere.
+- Wired: j23 lessonMode (self / Thái hậu / thầy incl. tchPaid favour), j2 lesson (old path), j83 wkPractice (→ wkPracOpen), jrcp rcpMaster (fee + tchPaid), jveil vlCraftRun (material stays with jaudit's existing pending), jsgame sgpick (`pay.chk` = can she pay now; `pay` runs on «Sẵn sàng» / «Giao cho người làm»). j83 wkAsk / jwkr wkrMat back to main (no undo code). jaudit deck card: `KG82.preBack` = card untaken (clean-up only). jtd + jsgame «Ra tay?» unchanged (passed r2).
+## r3 tests (c43c6066)
+- `mg-back.js` **PASS 12/12** at 755x1000 and 1180x820: 6 free back per caller — closed, no confirm, **spend() calls = 0**, **every S→rivals reference held before is the same object after**, S identical incl. S.away (ambient: chatter, logs, Emperor walk, roster, visit, emoSeen), nothing pending left; 6b the charge is only remembered on the rules screen; 6c «Sẵn sàng» takes it (lesson: Sức −15 + 2 khắc join jaudit's pending; paid scheme: spend runs, used +).
+- `mg-ready-guide.js` PASS 9/9; `ag-mgcal.js` all ok; no page errors.
+| caller | charge remembered on rules screen | spend() calls | S→rivals refs | S after ✕ | pending left |
+|---|---|---|---|---|---|
+| jtd Tu đức (self) | no charge before the frame | 0 | same (0/0) | identical | none |
+| jtd Tu đức (thầy) | no charge before the frame | 0 | same (0/0) | identical | none |
+| j83 Tự học (bậc 5, vật liệu tốt) | yes | 0 | same (0/0) | identical | none |
+| j83 học: tự học | yes | 0 | same (0/0) | identical | none |
+| jrcp học với thầy | yes | 0 | same (0/0) | identical | none |
+| jrcp thầy dạy lối mới (bậc 5) | yes | 0 | same (0/0) | identical | none |
+| j83 thẻ Tự học (Hành sự) | no charge before the frame | 0 | same (0/0) | identical | none |
+| jveil kết mạng (dây bạc) | yes | 0 | same (0/0) | identical | none |
+| jsgame mua chuộc (trả khắc) | yes | 0 | same (0/0) | identical | none |
+Note: jaudit's own pre-existing putBack-after-spend (main, lessons opened outside these callers) is not touched; with r3 no caller above spends before «Sẵn sàng», so that path now sees no khắc to put back.

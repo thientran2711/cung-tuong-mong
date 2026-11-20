@@ -71,3 +71,24 @@ New buttons: «Đeo/Tháo vòng tay», «Đeo/Tháo dây chuyền», «Đeo/Thá
   - pendant checked at 3x.
 - EAR1's sprites and hairneck layers stay in the folder unused, as a record.
 - Necklace approach differs: EAR1 = over the collar (drama way); EAR2 = under both collar edges, as the brief asked. The owner can pick; EAR1's vong_co.png is ready for the over-collar version.
+
+## UPDATE r2 ~07:20Z — PHI BẠCH = NARROW RIBBON (owner GO "Ok, làm cả hai cách để so đi"; shape: "dải lụa dài, lơ lửng sau lưng, choàng qua tay, không lên tới vai")
+- The old wide-shawl A/B are replaced in the page (files kept: c22_phibach_B*.webp, sprites/phibach_*).
+- **A: 1 gen MBJUfm3DCm** (gpt-2-6). Pale ivory sheer ribbon painted on black, ghost-mannequin front view: arc + 2 forearm loops + 2 hanging ends. LOOKED: good shape.
+  - Colour-to-alpha vs black; tinted in code to each figure's secondary colour (c22 rose, c11 lilac, c09 pink).
+  - Cut into back arc (UNDER the body) and loops + ends (OVER the sleeves).
+  - ONE sprite reused on all 3 figures. Fit = 2 points (left/right forearm loop) + vertical stretch, through rotate+scale, 0 cr per figure.
+  - Button «Đeo/Tháo phi bạch» on all 3 cards.
+- **B: edit Lw8X69kswO** (80 cr, no reference). It kept c22: the face at 3x is practically identical. It adds a narrow sheer peach-pink ribbon floating at hip height beside her body, passing the forearms, ends beside the skirt. Nothing on the shoulders.
+- **VERDICT (honest):**
+  - B = natural, hand-painted look, correct shape. It costs 80 cr per picture and is a full re-render (owner OK per picture).
+  - A = right shape and fine at full-figure size, but at 2–3x it reads as a flat sticker: the loop never goes behind the arm and has no shading.
+  - c11 already wears a painted lilac shawl, so A there is double phi bạch: do not offer it to figures that already have one.
+  - Fit tweaks after LOOK: c22 loops moved out to the sleeve edges; c09 left loop moved onto the sleeve (it floated in the air) and the right end moved off the fish lantern.
+- Credits r2: 2 × 80 = 160.
+- Screenshots: screenshots/{fold,ipad}_phibach_AB.png (A c22 | B c22 | A c11 | A c09), {fold,ipad}_{c09,c11,c22}_on.png.
+
+HANDOVER (EAR2 → successor; the coordinator opens it): depth 1; START_CTX ~4 %; context now ~29 % = roll line.
+- On hold: flower per-angle test (mẫu đơn ~83 cr), waiting for the owner's go via ROOT-67. Plan in my message to ROOT-67.
+- Possible A improvement (0–35 cr): an "arm" mask per figure, so the loop's back half goes under the forearm and wraps.
+- Tools: make_jewelry.py (sprites), make_layers.py <dir of full cut-outs, downloaded from creations_get url>, build_demo.py, shots.js.

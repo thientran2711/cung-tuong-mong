@@ -21,7 +21,7 @@ STATUS 20/11 ~02:55Z: depth 8 (limit 8), START_CTX ~3 % (get_session used_tokens
 ## BATCH 1 (owner "Ok" batches of 5, ROOT-64 GO ~02:58Z) — 5 gens, 675 cr, room gate PASS ×5
 - Builder dev/art/place-rank/prompts_pr19_batch1.py (room-30-NEW recipe; one occupant Tần, B24 t4 soft pink #E3A3B8 + ivory/jade partners, Tần lux = Cảnh Phúc RANK['tan'] wording, BED height/width; receptions: colour sentence without bed words).
 - 31 khai-tuong-cung-tan-ngu 1ldTBsMr4r (3w R, M3) · 32 khai-tuong-cung-tan mEZ9AuOhJQ (2w L, M2X) · 33 chung-tu-cung-tan-ngu kse0XUS16B (2w L, M2X) · 34 chung-tu-cung-tan mEZ9Aq9hJQ (3w R, M3) · 35 ham-an-cung-tan-ngu gOmXv6MSXO (3w R, M3). CDN img/_review/place-rank/pr19/<key>-ha-sang.webp; sheet rooms-batch1-tan-lbl.jpg.
-- LOOK (notes, no redraw): wood floors + white light OK, pink/ivory/jade OK, palace flowers right. Faults: 31 and 35 almost the same layout (same 3w bed template — next bedrooms need distinct layouts); 34 doorway an arch, not rounded-corner rectangle; floors still somewhat glossy; bedrooms strongly pink.
+- LOOK (notes, no redraw): wood floors + white light OK, pink/ivory/jade OK, palace flowers right. Faults: 31 and 35 almost the same layout (same 3w bed template — next bedrooms need distinct layouts); floors still somewhat glossy; bedrooms strongly pink.
 - Thừa Minh chính điện skipped: no palace signature card in the builders.
 - QUEUE CORRECTION (L2: each palace chính điện = 3 versions Tần < Phi < Quý phi, each reception + bedroom): 7 palaces (TM KT CT HA DH VH TX) × 6 = 42; Cảnh Phúc done; TX chính điện = HQP rooms already done → ~36 − 5 = ~31 rooms left (Tần 7, Phi 12, Quý phi 12) ≈ 7 batches ≈ 4 200 cr; + Từ Ninh ~2 + ~35 place scenes (~37 gens ≈ 5 000 cr) → all ≈ 9 200 cr.
 
