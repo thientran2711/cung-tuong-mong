@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 20/11 15:11Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u (jagday-walk r3 → reviewer)
+last wake: 20/11 15:30Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u (hourly)
 (older entries D #4–#6, 19/11: dev/archive/FOREMAN_D_STATUS-11-20-2026.md)
 ## HANDOVER — Foreman D #6 → D #7 (19/11 12:45Z; #6 depth 6, START_CTX ≈ 7 %, context 31 % (get_session 314k/1M) → rollover per OD:L1217)
 MAIN = ROOT-70 session_01Rc5AsKJHPE6qV9k9Ugyhj7 (depth 8 = LIMIT; other account → FOR MAIN / LAND READY lines here; send_message to MAIN fails 'not found'). C-AG = #22 session_01Rc5AsM9pCcsWwjoC8PjjW7 (other account; D relays to C-AG seats by "FOR C-AG" lines). LIVE main = edb2e724 (or newer). D never pushes main. D STANDBY = session_01964izFLpgp8aeBD8Y13gek (depth 0, idle).
@@ -333,3 +333,4 @@ LAND READY review/outside-nums-rv 4e3c855389e3474cdcd07b8d0846bb9c0dab417d (re-g
 SẴN SÀNG KIỂM review/jagday-walk 29c59bdc58de2f6acb9f90807fbb2f102883dba7 (TIER BIG)
 - (20/11 15:11Z, D #11) JAGDAY-WALK #1 SẴN SÀNG KIỂM 29c59bdc (FAIL 2 fixed: rewrite keeps target/why; khắc-now rule skips timed-ledger rows visit/back/ptAwayOf; test C note window 4→8 lines; invite-host-away ×10 A–D/F–H 10/10, E 9/10 = walk-cost flake) → reviewer EnQ6kRCc round 3 (PASS-PENDING-BASE until rebased on walk-cost after WALK-COST #3).
 - (20/11 ~15:45Z, REVIEW jagday-walk) **PASS-PENDING-BASE review/jagday-walk 29c59bdc** (round 3): FAIL 1+2 fixed; invite-host-away ×10 C 10/10, E 1/10 (= base); walk-cost/ag-walk/ptime/ptime2 green; far-jump scan 480 buổi ≈ 3 rare residual (watch at final gate). No LAND READY: waiting for WALK-COST #3 PASS → worker rebases onto it → my final gate (merge LIVE, all gates) → LAND READY.
+- (20/11 15:30Z, hourly, D #11) LIVE eb11e2ad. **FOR MAIN ROOT-79 (re-post): LAND READY review/outside-nums-rv 4e3c8553 waits — it is the only D item ready; it carries the LIVE soft-lock fix (jkc de86f1e4).** Waiting: walk-cost (WALK-COST #3 CtSP7ALH, test E flake) → jagday-walk (PASS-PENDING-BASE 29c59bdc, rebase after walk-cost) | choice-value re-gate reviewer E9Hd8tHX on 32614524 | balance-core-r3 CODE PASS, owner call (a/b/c) pending MAIN, re-port queued to NIGHT LAND CHAIN #3 EJ3UxEan after night-final-r3 | emo-balance bot FYgpKE1Q | econ-tamco parked (kit). Running 11 seats, free ≈ 1, no new REAL item in D's queue (N1 jentry rides with a later job). Context D #11 18 % (182k/1M) < 33 %. Next wake ~16:30Z.
