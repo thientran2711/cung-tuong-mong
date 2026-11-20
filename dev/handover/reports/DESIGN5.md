@@ -40,8 +40,8 @@ Edit script (for audit): every replacement is an exact one-time swap; listed bel
 |---|---|---|
 | t4 | 9994 | 9958 |
 | t5 | 9868 | 9975 |
-| t6 | 9966 | 9991 (v5) |
-| t8 | 9997 | 9958 (v5) |
+| t6 | 9966 | 9985 (v6) |
+| t8 | 9997 | 9987 (v6) |
 
 ## Every cut (boilerplate only, to stay ≤ 10 000; all listed as allow lines)
 From the duplicated line `Full-body standing figure head to feet, soft even light; fair porcelain skin; gentle expression … mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; 3/4 or frontal view.` (its content is repeated by the MASTER head-to-feet/skin/proportion sentences and the ANGLE line; S18 smile clause kept verbatim):
@@ -76,3 +76,11 @@ Removed `, with a long train BEHIND her` and the v3 sentence `Exception: her own
 - `a long light clear warm plum straight-hem outer robe falling STRAIGHT to the floor in clean vertical lines,` → `a long open-front light clear warm plum straight-hem outer robe worn OPEN, falling STRAIGHT to the floor,`
 - Length trims: my own words `in clean vertical lines`, `one above the other`, `level` (in "front edges and level hem"); boilerplate `elegant, slim, clearly adult;`, `; 3/4 or frontal view`, and `, never copy anything but its colour` (the same trim as t7/t8). Allow lines added.
 - 9991 chars; check_store: M07+S12 only (same as before); keep_check --all PASS (20).
+
+## v6 (owner Lượt 1325 "Ok. làm đi" to Foreman C #5's proposal L1324): t7/t8 lighter fabric
+**t7 HQP:** `in FOUR visible layers of thick BROCADE (gấm), richer than the Quý phi's brocade:` → `in FOUR visible layers, richer than the Quý phi's brocade: the OUTER robes in gold-woven gauze (sa dệt kim, zhijin sha): light, thin, airy silk gauze with gold and coloured patterns WOVEN in, soft drape close to the body, never stiff, thick or puffed; the INNER layers in thin, supple Song brocade (Tống cẩm), falling softly:`. The embroidery clause `in thick gold thread` → `in gold thread`. Caption → `Đại bào bốn lớp sa dệt kim + Tống cẩm`.
+**t8 HH:** `heavy gold-thread brocade (gấm kim tuyến) richer than the Hoàng quý phi's brocade:` → the same gauze + Song brocade text plus `, its woven gold DENSER and its royal yellow larger than the Hoàng quý phi's`. The 4th layer `royal golden yellow gold-thread brocade` → `royal golden yellow gold-woven gauze`. Caption → `Lễ phục bốn lớp sa dệt kim + Tống cẩm`.
+**t6:** comparison synced: `NOT the heavy gold-thread brocade (gấm kim tuyến) of the Empress` → `NOT the light gold-woven gauze (sa dệt kim) of the Empress`. 9985 chars.
+**GATE CONFLICT (new, NOT decided):** `FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.` is approved sentence S07 plus master rule B12 (owner Lượt 364/781: t6+ = this BROCADE sentence exactly once). Replacing it FAILS S07 + B12, so it stays verbatim in t6/t7/t8 and now contradicts the light-fabric text. Needs an owner exemption or rewrite of S07/B12 for the Hán t7/t8 (and t6) prompts. Also the MASTER M07 sentence `The silk has real weight` stays (master).
+Cuts to fit (boilerplate dups only; allow lines added): t7 `Full-body standing … skin;`, `beautiful/handsome …`, `elegant, slim, clearly adult;`, `; 3/4 or frontal view`, ` clearly much richer and more splendid than the lower ranks`, `(one single visible sleeve layer, every inner sleeve hidden inside)` (the ONE SINGLE SLEEVE LAYER rule is kept). t8: `; 3/4 or frontal view`, the same two rank/sleeve dups, `; gold only as thin accents on the borders` (THREE-COLOUR RULE gold accents kept), plus my own words `, zhijin sha`, ` (no added width)`, `the SAME four layers as the Hoàng quý phi` → `the Hoàng quý phi's four`. No face, outfit, jewellery, embroidery or hair detail cut.
+Counts: t6 9985, t7 9926, t8 9987. check_store: t7/t8 PASS, t6 M07+S12 (unchanged). keep_check --all PASS (24).
