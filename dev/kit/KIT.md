@@ -680,6 +680,13 @@ Owner: "thêm cho tôi một cái option là cái chữ X hoặc là chữ go ba
 - `kg82Close` clears back / backAsk / quit / quitAsk / xdo. Callers never draw their own back button.
 - Test: `node dev/test/mg-back.js [page] [WxH] [shotdir]` (every caller × every screen, scan table).
 
+### 13.10 GAME MARK CHIP «n/10» + AMBER CLOCK · kitGameMark / kitGameClock (owner OD 20/11 ~07:15Z, review/kit-mark) — `dev/build/j79.js` (+ `mgFast` in jmgt.js, `tone` in kitCoopClock)
+- ONE small chip «n/10» in the game title line (`.kgmk`, left of the `.kgclk` clock), the same kit chip look as the clock (`kitChips` / `.kchip.n`). Number only: no word, no %. The 17/11 clutter ruling stands: the PHẦN/HỒI/CÒN row stays hidden; this is the only extra chip.
+- Wired ONCE for every kind: all engines report through `env.hud` → `kg82Set` → `kitGameSet`; `kitGameSet("score"|"time")` calls `kitGameMark`. The chip READS the HUD score and never grades again: since review/mg-score-same every engine puts `mgLive(env,x)` (the already graded mark, equals the result) in `env.hud({score})`, so a second `mgGrade` would double-grade. "a/b" counts as 10·a/b, "–/10" = 0. `KG82.cur` (the running env: kind + ease) is set by the three env makers (j82 kg82Play, j92 Chải chuốt, jsgame) and read by the clock. No engine draws or updates the chip itself.
+- Rewritten only when the number changes; a DROP replays the kit pop (`.kgmk-pop`, scale 1→1.22→1, off under reduced motion); a rise does not pop. Hidden before «Sẵn sàng» (no engine, §13.7); a ✕ «Quay lại» (§13.9) never touches it.
+- `kitGameClock`: the clock chip is NORMAL (`.kchip.n`) and turns AMBER (`.kchip.w`, `.kgclk-amber`) once the FULL-MARKS WINDOW of the kind's time part is passed (elapsed > `mgFast(env,kind)` × round length; only a real window > 0 — a window of 0 or none stays normal); the window is `BAL.mgTier.lev[kind].fast` read through `mgFast`, the very value `mgPace` uses (ONE CORE). A kind with no time part (no `lev[kind].fast`) never turns amber; a new round resets the clock to full → normal again. `kitCoopClock({tone})` lets the caller set the chip tone (the old auto-red at ≤ 20 s stays for the co-op clock, where no tone is given).
+- Test: `node dev/test/kit-mark.js` (every kind: chip, graded value, pop, amber clock). Kit page sample «§13.10».
+
 ## 14. SCENE PANEL (j79) — identity card, opening story, title screen
 - Compact translucent kit frame (`rgba(255,250,240,.90)` + blur) to one side in landscape (max 440 px / 44vw, vertically centred, right) and in the
   lower part in portrait; the background art stays visible. Fits ONE screen, no scrolling, buttons always visible (tested at the 4 sizes).
