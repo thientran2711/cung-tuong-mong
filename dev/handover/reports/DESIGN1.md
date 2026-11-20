@@ -63,3 +63,29 @@ Designer pick: 1 (most distinctive + historically the Ming palace-maid uniform),
 
 ## Open
 Owner picks 1/2/3/4 (or mix, e.g. badge of 1 on jacket of 4). Unused = skins later (A35). Ma ma concepts 1–4 above await her choice before any gen.
+
+---
+# ROUND 2 (owner 20/11 ~17:55Z via Foreman C) — round-1 4 designs REJECTED ("quá xấu", never show again; round-1 sheet removed from review-sheets, gens stay in the ledger only)
+Owner wording "giống với trang phục của Nhật Bản" — read as speech-to-text for "nhất đẳng" (the next sentences say "na ná như nhất đẳng … bậc sau của cái nhất đẳng"), NOT Japanese dress. Nothing Japanese was used.
+Brief: thân cận = the step after nhất đẳng: 2–3 visible layers, idea 1 ≈ nhất đẳng round 5 (MAID8 ov6GUhR829), ideas 2–4 new on the same idea; sleeves = nhất đẳng; no consort collar, no standing collar; 4 new people.
+
+## Prompts / gate
+dev/art/design1/make2.py: base = base_nhat_v5.txt (copy of maid7/test5_nhat.txt); per person face+expression from live_<id>.txt (build.py <id> v0 --state tm2 --nostyle). Swaps (asserted): face block, who-line ("the rank ABOVE nhất đẳng"), outfit sentence, colour block (THÂN CẬN = reversed nhất đẳng: SKIRT + inner sleeves = her own colour; outer layer = powder blue #A7BAD2), held item, + no-broom. Nhất đẳng's STAND collar on the vest replaced by straight front edges + jade knot clasp; inner robe keeps the maid crossed collar (same as every maid). Sleeve sentence = nhất đẳng round-1/5 ("two and a half hand-spans").
+Gate: check_store --scope tm2 and --scope tm1, --age a18: APPROVED PASS ×4 (master incl.). No store args (base is a test prompt, not a builder output).
+
+## Gens — 4 × 135 = 540 cr, gpt-2-6 1024x2304 2k seed 7172, 1 try each, fired together
+| Idea | person | gen | ref | design | item |
+|---|---|---|---|---|---|
+| 1 Như nhất đẳng, bậc trên | m15 blush pink | MBJ6ZakDCm | fHzKqW3CDY | nhất đẳng v5 shape reversed: blue embroidered vest (no stand collar) + two blue hai tà + extra blue peplum layer; pink skirt + pink inner sleeves | lacquered jewellery box |
+| 2 Áo bán tý dài gối | m12 warm sand apricot | aFGTpjTfSh | xSB7FTWjfW | knee-length blue half-sleeve over-robe, apricot long inner sleeves + skirt | folded silk cloak |
+| 3 Áo khoác dài nẹp thêu | m13 lilac | 1ldmfNEr4r | VX7IB7sMMU | mid-calf blue sleeveless over-robe with long lilac embroidered front bands, high side slits | register scroll |
+| 4 Ba tầng áo bậc thang | m07 pale jade green | Lw8fQ0CswO | 3zKcnbDREY | blue waist jacket / green knee robe / green skirt, three hems stepping | sewing basket |
+Sheet (A37): dev/handover/review-sheets/design1/thancan_design1_lan2.webp (4 NEW big; below small: nhất đẳng round 5 for comparison + the 4 THANCAN1 olds "cũ"). Ledger 4× THANCAN-TEST. No cut-outs.
+
+## Looked (row + upper-body crops) — notes only, NO redraw
+All 4: clearly 2–3 layers and richer than nhất đẳng (dense gold-edged flower borders), hair up, no hair flowers, no earrings seen, mouths closed (m12 dimple smile closed), hands clean, one item each, no stand collar (inner crossed maid collar only), skirt = own colour.
+- 1: reads as "nhất đẳng, one step up" — same family as the nhất đẳng picture beside it. Sleeves came out WIDER than nhất đẳng (fuller, longer) → if chosen, keep the sleeve words but add "no wider than the nhất đẳng sleeve".
+- 2: three layers clear; the cloak she holds is lilac (third colour, only the held item).
+- 3: long front bands + side flaps read well; blue sash ribbon ends long.
+- 4: three stepped hems read clearly; a long blue sash end hangs to the knee.
+Designer pick: 1 (closest to what the owner described), then 4.
