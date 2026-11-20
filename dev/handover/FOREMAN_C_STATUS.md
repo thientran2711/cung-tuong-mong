@@ -446,3 +446,4 @@ ROOT-67 07:17Z: PR20 brown note (ade00e8): brown wood ≈ half of EVERY room (ap
 ROOT-67 HANDOVER ~07:18Z: depth 1, ctx ~32 % (≥ START ~5 % + 25 %). TAKEOVER_FOREMAN_C_ROOT68.md written; opening ROOT-68 as child; trigger trig_01AbQhGhchJ8feE9bEruFUgz deleted.
 
 ROOT-68 ~07:20Z: depth 2, START_CTX ~5 % (est.; used_tokens reads 0). Took over from ROOT-67. Workers FRUITPET1/PR20/EAR2/F4/NOEAR1 + ROOT-58..67 told. Own hourly check created. Owner asleep; overnight only GO'd 0-cr work (FRUITPET1). Next Lượt 1075.
+ROOT-68: hourly check trigger = trig_01Lnn2hqBfW5iGzzo3ijc2fu (delete on handover). ROOT-58..67 + workers told.
