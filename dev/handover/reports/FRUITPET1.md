@@ -96,4 +96,4 @@ When OK'd: the animal replaces the held item for those people/ages (E5 one item)
 
 ## Files
 dev/art/check_store.py (fruit_fails + FRUIT_FROZEN + --self samples + doc line) · dev/art/ART_RULES.md (F16) · dev/art/t8-prompt-B/build.py · item_age.py · build_npc.py · dev/art/item-rank-age.md · this report.
-COMMIT_LINE
+Commit: 5de287f (report line filled in the next commit)
