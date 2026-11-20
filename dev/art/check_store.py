@@ -787,6 +787,7 @@ def store_check(pf, prompt, args):
         if not re.search(rx,prompt): return [(0,'G15 Quý nhân t3 option-B outfit words missing (dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt)')]
     store=hqp_store(store,prompt)   # HQP COLLAR (L1384)
     store=re.sub(r"(?:,|;) a sheer silk shawl(?=[;.,])","",store)   # G36 (owner L1446): the store shawl words are optional (builder xuân/đông drop them)
+    _sc=scope_from_store_args(args); store=master_common.b29_store_swap(store,prompt,_sc,master_common.high_scope(_sc),master_common.doan_scope(_sc),winter_g28.is_winter(prompt))   # B29 (owner L1556/L1558): the group's table sentence may stand in the fabric slot
     for _o,_n in master_common.doan_cuts_made(prompt,scope_from_store_args(args)):   # B26 length exception (Foreman C #5 (a)): the same master-repeat clauses cut from the store text (prefix + necessity rule)
         store=store.replace(_o,_n,1)
     sp=lambda s:[x.strip() for x in re.split(r'(?<=[.;])\s+',s) if len(x.strip())>12]
@@ -1030,7 +1031,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
             if negated(text, m.start(), m.end()): continue
             fails.append(("B20", "DEEP COLOUR", f"'deep/dark' adjective on a colour word (all seasons light and fresh, Lượt 769): …{text[max(0,m.start()-30):m.end()+20]}…")); break
     import winter_g28; _winter = winter_g28.is_winter(text)   # SEASON đông: G26 fur sentence present -> winter twins (W*) replace S06/S12, M06 in its G28 form
-    for k, kind, d in master_common.check(text, high=master_common.high_scope(scope), female=not master_common.male_scope(scope), winter=_winter, doan=master_common.doan_scope(scope)):   # + NOEAR (owner Lượt 1037): every woman / girl scope = bare-earlobes sentence once + no earring word; men / boys (--scope emperor|men) unchanged   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
+    for k, kind, d in master_common.check(text, high=master_common.high_scope(scope), female=not master_common.male_scope(scope), winter=_winter, doan=master_common.doan_scope(scope), scope=scope):   # + NOEAR (owner Lượt 1037): every woman / girl scope = bare-earlobes sentence once + no earring word; men / boys (--scope emperor|men) unchanged   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
         fails.append((k, "MASTER " + kind, d))
     for k, kind, d in master_common.check_elder(text, scope, age):   # C5 (owner Lượt 779/784): elder colours win over M05 at a51/a65, never in Nữ đế
         fails.append((k, kind, d))
@@ -1046,6 +1047,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
         if e["id"] in ("S24", "S16", "S19"):   # B26 length exception: S24 repeats master M13 (cut 5); B26FAB4: S16 / S19 tails cut by LEN_CUTS2 N1 / N2 (same-prompt repeats), only when needed
             _made = [x[0] for x in master_common.doan_cuts_made(text,scope)]; _k = {"S24": master_common.DOAN_LEN_CUTS[4][0], "S16": master_common.LEN_CUTS2[0][0], "S19": master_common.LEN_CUTS2[2][0]}[e["id"]]
             if _k in _made: continue
+        if e["id"] == "S07" and master_common.high_scope(scope) and master_common.b29_alt_in(text, scope, high=True): continue   # B29 (owner L1556/L1558, B28): the one light gấm sentence stands in the S07 brocade slot
         if skip_store and e.get("store") and not e.get("season"): continue   # already enforced by the STORE part (same prompt, store args)
         ages = (e.get("ages") or "all").split()
         if age and "all" not in ages and age not in ages: continue

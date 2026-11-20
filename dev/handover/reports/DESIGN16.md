@@ -88,3 +88,15 @@ Flags still open: B20 colours (plum/blush pink vs peach-blossom pink + ivory); H
 - Fabric: A-NẶNG was already in (now owner-approved, B29).
 - Chars t1 9340 · t2 9591 · t3 9745. keep_check ×3 PASS (.keep rebuilt), --all 215 PASS.
 - GATE still FAILs on one item only: "M06 MASTER MISSING". The master/gate does not know the B29 t1–t3 xuân fabric yet. Foreman: add the A-NẶNG form to master_common/check_store (like winter_g28 for đông) before any gen.
+
+## B29 gate wiring (C #13 order (b)): check_store accepts the owner-approved fabric table
+- dev/art/master_common.py: B29_A_LIGHT, B29_A_HEAVY, B29_B_LIGHT, B29_C_GAM (DESIGN15 sentences verbatim); b29_alts(scope, high, doan, winter), b29_alt_in(), b29_store_swap(); check(..., scope=) lets EXACTLY ONE group sentence stand in the fabric slot:
+  - t1–t3 / pr1–pr3: A_HEAVY any season; A_LIGHT not in winter (G28 opaque).
+  - t4/t5 (doan scopes): B_LIGHT not in winter, DOAN as before.
+  - t6+ / royal (high scopes): C_GAM in place of BROCADE (B28: one light gấm, all seasons).
+  - Maids: unchanged (M06 / G28 winter form ARE the B29 S sentences).
+  The old sentences still pass; nothing else changed. The gate cannot tell xuân from hạ/thu, only winter.
+- dev/art/check_store.py: passes scope= to master_common.check; the store part reads the store's fabric sentence as the B29 alternative when the prompt carries it; S07 (brocade registry line) is satisfied by C_GAM in high scopes.
+- Regression (scratchpad reg.sh: --scope tpN --age a22 + store args, 119 prompts: seasons4 Hán + xuân, dapung4, winter1/g28, thu_comoi, dong_hientai cloak9): before vs after identical for 116; only my 3 Hán t1–t3 changed, FAIL → PASS (approved + master).
+- Synthetic: A_LIGHT tp1 PASS · A_HEAVY tp1 PASS · A_HEAVY winter tp1 PASS · A_LIGHT winter tp1 FAIL · B_LIGHT tp1 FAIL · A_HEAVY tp4 FAIL · A_HEAVY tp6 FAIL · B_LIGHT tp4 (Hán open5) = same fail set as its base (M07, S13, already there) · C_GAM tp6 = same as its base + LEN (the sentence is longer). check_store --self: 2 problems, the same with and without the change (already there).
+- Gates now for s62_t{1,2,3}_HAN_BAC: approved + master PASS ×3. Store part (--low N) fails only on the Tang square-neck outfit sentences (t1/t2) and G15 option B (t3), which the Hán cut replaces by nature.

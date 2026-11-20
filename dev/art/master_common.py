@@ -240,11 +240,52 @@ def _overlap(s, text):
     return best
 
 
-def check(text, high=False, female=True, winter=False, doan=False):
+# B29 FABRIC TABLE (owner L1556 'Ok' + L1558 'Ok duyệt', 20/11; table = dev/handover/reports/DESIGN15.md 'bảng vải chung B27', sentences VERBATIM; wired by DESIGN16
+# for Foreman C #13): accepted ALTERNATIVE forms of the fabric slot. A prompt passes with the old slot sentence (M06 / DOAN / BROCADE) OR exactly one of its
+# group's B29 sentences in its place. The gate cannot tell xuân from hạ/thu: it only blocks the LIGHT (gauze) forms in winter (G28 opaque).
+# Group S (maids): M06 (light) / M06 winter G28 form (heavier) = unchanged. Group A t1-t3 (+ princesses pr1-pr3): A_LIGHT (hạ+thu) / A_HEAVY (xuân+đông).
+# Group B t4-t5: B_LIGHT (hạ+thu) / DOAN (xuân+đông, unchanged). Group C t6-t8 (high scopes): ONE light gấm all seasons (B28) = C_GAM in place of BROCADE.
+B29_A_LIGHT = "The FABRIC is thin, light, flowing silk and patterned silk gauze (sa hoa) with a faint woven flower pattern and a soft sheen, a little finer than a palace maid's plain gauze, with fine delicate embroidery, long soft graceful drapery that sways and trails elegantly (thướt tha); the small embroidered motifs are stitched in fine gold thread."
+B29_A_HEAVY = "The FABRIC is soft, supple OPAQUE patterned silk (lụa hoa) with a faint woven flower pattern and a soft sheen, never see-through, just a little fuller than summer silk yet still thin, light and airy, NOT satin and NOT brocade; long soft graceful drapery that sways and trails elegantly (thướt tha); the small embroidered motifs are stitched in fine gold thread."
+B29_B_LIGHT = "The FABRIC is light, thin silk SATIN (đoạn) with a soft MATTE finish and only a very faint gentle lustre, like fine old silk, never glossy, shiny, wet-looking or plastic, with a faint woven self-pattern (damask), thinner and airier than the winter satin, soft and supple, NOT brocade; it falls in long, light, flowing folds (thướt tha); the small embroidered motifs are stitched in fine gold thread."
+B29_C_GAM = "The FABRIC is the LIGHTEST brocade (gấm): thin, supple Song brocade (Tống cẩm) with a soft MATTE finish and only a very faint gentle lustre, never glossy, shiny, wet-looking or plastic, with a woven flower pattern all through the cloth, never stiff, thick, heavy or puffed; it falls in soft, light folds close to the body, flowing gracefully (thướt tha); the small embroidered motifs are stitched in fine gold thread."
+B29_A_SCOPES = {"tp1", "tp2", "tp3", "pr1", "pr2", "pr3"}
+
+
+def b29_alts(scope, high=False, doan=False, winter=False):
+    """B29: the alternative fabric sentences accepted for this scope (empty = only the old slot sentence)."""
+    if high: return [B29_C_GAM]
+    if doan: return [] if winter else [B29_B_LIGHT]
+    if scope in B29_A_SCOPES: return [B29_A_HEAVY] + ([] if winter else [B29_A_LIGHT])
+    return []
+
+
+def b29_alt_in(text, scope, high=False, doan=False, winter=False):
+    """the ONE B29 alternative the text carries (exactly once), else None."""
+    t = _norm(text); hit = [a for a in b29_alts(scope, high, doan, winter) if t.count(_norm(a)) == 1]
+    return hit[0] if len(hit) == 1 else None
+
+
+def b29_store_swap(store, prompt, scope, high=False, doan=False, winter=False):
+    """store gate: when the prompt carries its B29 alternative, the store's old fabric sentence is read as that alternative."""
+    alt = b29_alt_in(prompt, scope, high, doan, winter)
+    if not alt: return store
+    old = BROCADE if high else DOAN if doan else winter_master_m06(winter)
+    return store.replace(old, alt, 1) if old in store else store
+
+
+def winter_master_m06(winter):
+    import winter_g28
+    return winter_g28.master_form(sentences()[ids().index(M06_ID)], winter)
+
+
+def check(text, high=False, female=True, winter=False, doan=False, scope=None):
     """winter=True (SEASON đông, dev/art/winter_g28.py): each master sentence is checked in its G28 winter form (M06 = opaque silk, never see-through)."""
     import winter_g28
     t = _norm(text); out = ear_fails(text) if female else []
     m06 = winter_g28.master_form(sentences()[ids().index(M06_ID)], winter); nb = t.count(BROCADE)
+    alt = b29_alt_in(text, scope, high, doan, winter)   # B29 (owner L1556/L1558): the group's table sentence may stand in the fabric slot
+    if high and alt and nb == 0: nb = 1
     if high:   # B12 (Lượt 781): t6+ / royal = BROCADE exactly once, never M06
         if _norm(m06) in t: out.append((M06_ID, "HIGH RANK", "B12: master M06 (thin silk+gauze, thướt tha) in a t6+ / Thái hậu / Hoàng thượng / Nữ đế prompt"))
         if nb != 1: out.append(("B12", "BROCADE MISSING" if nb == 0 else "NOT ONCE", f"B12: t6+ fabric sentence '{BROCADE}' {nb} times (must be 1)"))
@@ -253,6 +294,7 @@ def check(text, high=False, female=True, winter=False, doan=False):
     if not doan and _norm(DOAN) in t: out.append(("B26", "NOT T4/T5", "B26 (owner Lượt 1283/1284): the matte satin đoạn sentence is for t4 Tần + t5 Phi only"))
     for k, s in _master(high, doan):
         s = winter_g28.master_form(s, winter)
+        if alt and k == M06_ID: s = alt   # B29: the slot is filled by the group's table sentence
         n = t.count(_norm(s))
         if n == 1: continue
         if n > 1: out.append((k, "NOT ONCE", f"master sentence {n} times: {s[:70]}…")); continue
