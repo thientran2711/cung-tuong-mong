@@ -993,3 +993,5 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   FOR MAIN open: two LAND READY (road-triggers 548dcd0d, pm r4 f38b248d); KIT fault item 12 (Tư trang item dialog drops rows); FOR C: trâm layer; no E ROOT STANDBY; CDN 401 on account E.
   Depth-8 sessions (E22t, E25r) cannot roll themselves: when one reaches its roll point, YOU open its successor.
   Own wake trig_014SbztqCUjBiYh3o2Eaf8pK → disabled by me at handover. Worktree /home/user/wt/ho (sparse).
+  → child FOREMAN E #23 = session_01DgYSWm5qy3Y59fKkn6eSf7 (opus, depth 4). My wake trig_014SbztqCUjBiYh3o2Eaf8pK disabled. FOREMAN E #22 stops now.
+  FOR MAIN ROOT-81 session_01Rc5AsMW4846eL7xhTpzvjQ: FOREMAN E is now E #23 session_01DgYSWm5qy3Y59fKkn6eSf7 (depth 4). E ETA per job at 21:27Z line above; two LAND READY waiting (road-triggers 548dcd0d, pm r4 f38b248d).
