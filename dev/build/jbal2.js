@@ -194,7 +194,7 @@ Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2
 Object.assign(BAL,{coopEmpY:12});
 /* co-op part 2 (review/coop-b1b5-p2): a player buys the friend who serves as a cung nữ (the same pay as an NPC's bribe card, j42 cnvBribe);
    tin = her Chủ tin gain when she refuses and tells her mistress */
-Object.assign(BAL,{coopBribe:{pay:20,tin:5}});
+Object.assign(BAL,{coopBribe:{pay:20,tin:5,grudge:5}});/* grudge: the briber's thiện cảm for the servant, −grudge when she tells her mistress, +grudge when she refuses quietly (law 2 «Bạc lạ», j42 + jcoopworld twins) */
 /* review/emperor-visit (owner OD:L603): the Emperor comes to HER palace and stays the night (event "empnight", j7 + jvisit).
    visit: a daily roll after the tablet flip, % = base + slope × (Sủng − minSung) + anK × Ân tình, × the Emperor's nature (datinh / lanhlung),
    capped; none within gap days of the last visit, none while she is pregnant, in lãnh cung, or he is gravely ill. On top of the night
@@ -1137,6 +1137,25 @@ BAL.ag.mg2.hand={on:1,w:4,art:.2,ctr:{"":7},sd:{c:1.4,a:1.5,r:1.7,"":1.5},eqZ:.4
    A first try taken on a BROKEN board is dropped when that board is fixed, so her re-test is the first counted try (dauho cal-p2 b218d1d2; huong 4.5,
    mua 6.3, banh 6.1 dropped by review/cal-p2b-rv with the Điều hương / Múa / Nấu ăn fixes, owner OD 20/11 ~07:35Z «chỉnh mấy cái game bị lỗi lại thôi, rồi tôi test lại») */
 BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],k:{dan:{b:8.3,n:5,at:"11/19/2026"},co:{b:9.7,n:5,at:"11/19/2026"},ve:{b:9.5,n:5,at:"11/19/2026"},doi:{b:9.1,n:5,at:"11/19/2026"},hoa:{b:7.9,n:5,at:"11/19/2026"},hat:{b:8.1,n:5,at:"11/19/2026"},tho:{b:8.7,n:5,at:"11/19/2026"},theu:{b:9.7,n:5,at:"11/19/2026"},ban:{b:9.1,n:5,at:"11/19/2026"},kim:{b:7.7,n:5,at:"11/19/2026"},doden:{b:9.9,n:5,at:"11/19/2026"},tat:{b:4.9,n:5,at:"11/19/2026"},ne:{b:4.1,n:5,at:"11/19/2026"},td_cong:{b:10.0,n:5,at:"11/20/2026"},td_ngon:{b:6.7,n:5,at:"11/20/2026"},td_hanh:{b:9.3,n:5,at:"11/20/2026"},le:{b:9.9,n:5,at:"11/20/2026"},tc:{b:9.5,n:5,at:"11/20/2026"},xa:{b:9.5,n:5,at:"11/20/2026"},thq:{b:8.5,n:5,at:"11/20/2026"},duho:{b:7.9,n:5,at:"11/20/2026"},kinh:{b:9.9,n:5,at:"11/20/2026"},may:{b:10.0,n:5,at:"11/20/2026"}}};
+/* CAL-P2C · IDENTITY OFFSET + ROLLING HAND b (owner OD 20/11 ~07:35Z + ~07:55Z + ~08:00Z, ROOT-74 chat; jmgid.js). Verbatim key words:
+   ~07:35Z "Những cái môn sở trường của tôi á, khi vào game á, nếu như cái môn đó là cái môn bình thường là phải là ở mức 8, tức là phải automatic trừ 2. Còn nếu mà
+   sở đoản là phải trừ thêm nữa ... sở đoản là phải đâu đó 6 điểm ... sở trường là chẳng hạn như là 9 điểm hoặc 10 điểm ... mình không có cần phải điều chỉnh cái điểm gì hết trơn á."
+   ~07:55Z "chính những cái lần mà họ chơi sẽ là những cái bài test với họ ... Qua mỗi một cái màn chơi nó cũng chính là những cái lần test tay của họ."
+   ~08:00Z "dù mà tôi có chơi 2 người, chơi 5 người, 10 người đi chăng nữa thì tất cả là đều dựa theo cái tay của cái người đó, chứ không phải là dựa theo cái tay của tôi".
+   on    1 = on; 0 = every result is the graded play as before (no offset, no b kept)
+   tgt   the level each identity class plays at, on a matching board: tr = sở trường (an art of her identity's BAL.orig.art row), "" = bình thường, doan = sở đoản
+         (BAL.orig.doan, jbal.js). trAt = the least bậc in the row that makes an art a sở trường.
+   HAND b per player per kind (S.mgB[kind] = {s, w, n}, saved with her; old saves start empty): b = s / w, a weighted mean of her plays brought back to a matching
+         board (graded − (mgMedD(d) − mgMedD(0)), the same shift jmgcal mgCalBase uses), newest weight 1, each older play × (1 − a);
+         prior = the default hand of a kind never played, worth pw plays (b = (pw·prior + Σw·x) / (pw + Σw)); age 1 = the prior ages like the oldest plays (so after many
+         plays b is her recent play), 0 = the prior keeps its full weight pw for ever.
+         SEED (her Thử tay, "first tries seed her b"): on the owner's device (jmgcal owner flag) a kind's first use adds BAL.ag.mg2.cal.k[kind].b worth seedW plays per
+         round taken (n); noSeed = kinds whose first try was on a broken board (owner OD 20/11: NOT COUNTED) — they start from the prior only.
+   OFFSET = tgt[class] − b (+ gap·(b − prior)), added to the graded result, clamp lo..hi, rounded. gap = the share of a player's real skill gap kept (OPEN, owner answer
+         pending: default 0, do not build on it). Study bậc keeps its board ease (mgTier); the offset sits on top of it.
+   npc   1 = an NPC's mini-game play (jmgt mgNpcRaw) moves by the same identity class shift tgt[class] − tgt[""] (law 1; her own hand curve, mg-fair-ratio, unchanged);
+         the player's skip / odds roll (mgSkipRaw, mgNpcRaw on her) = the same shift on her median play. */
+BAL.orig.id={on:1,tgt:{tr:9,"":7.5,doan:6},trAt:1,prior:7.5,pw:3,a:.2,age:1,seedW:1,noSeed:["dauho","td_dung","chai","den","hoadien"],gap:0,npc:1,lo:0,hi:10};
 /* j71 odds words under mg2: the same draw (mgNpcRaw, seeded by the plan) for every entrant, her included, on this contest's board (j71 mgX7) */
 (function(){if(typeof cOdds7!=="function"||typeof fxOdds7!=="function")return;const c0=cOdds7,f0=fxOdds7;
  const win=(E,base,kindAt,mi,r)=>{let w=0;const N=500;for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+mgNpcRaw(kindAt(i),E[i],{rnd:r})/10*J71.luck;if(x>b){b=x;bi=i}}if(bi===mi)w++}return oddsCl(Math.round(100*w/N))};
@@ -1286,6 +1305,10 @@ BAL.ag.cx2.maidTalk.hear=15;
 BAL.kidTeach={get suc(){return BAL.sucNeed.kid},k:2,age:3};
 BAL.def70={taste:30,die:40,caught:12,ev:30};/* + Theo dõi một người, monthly: odds the watcher is caught / brings evidence */
 BAL.invite={affD:2,rk:5,hate:-30};/* odds base: BAL.odb.j21.odO_2 (ONE CORE, merge r2) */
+/* HOST-ABSENT RULE (owner OD L1976, 19/11 ~22:00Z; jptime §4b): the guest reached the host's place and the host is away. She waits the arrival khắc;
+   from the next khắc, once per khắc while the host is still away, she stays with odds o + liking/affD + (host rank − guest rank)×rk + her nết (net: Tính tình /
+   Chí hướng patience), capped by od(). A guest who leaves: relation host↔guest loss (small, like a refused invitation's BAL.eff.j21.top). */
+BAL.invite.wait={o:55,affD:3,rk:4,net:{"Nóng nảy":-20,"Lạnh lùng":-10,"Tham vọng":-5,"Điềm tĩnh":15,"Ân cần":10,"An phận":10,"Kín đáo":5},loss:-2};
 BAL.talk.secretMal=50;BAL.talk.secretGrab=50;
 /* AG-ALL-2f r2 — TAI MẮT MUST BE EARNED (owner OD 17/11 ~16:50Z): becoming someone's Tai mắt is the PERSON's choice (jagknow tmOdds = bribeOdds + what
    she wants from the recruiter; loyal servants mostly refuse and may tell their master). want = bonus when the recruiter can give it: bac (a greedy one,
