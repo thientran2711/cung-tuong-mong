@@ -1,4 +1,4 @@
-# rv-mg-fair-ratio — BIG opus review of review/mg-fair-ratio 996b17d0 — VERDICT: PASS 950f7272 (landing order: after cal-p2's Đầu hồ fix, see L2/3)
+# rv-mg-fair-ratio — BIG opus review of review/mg-fair-ratio 996b17d0 — VERDICT: LAND READY c214eadd (on LIVE 377d5ce3 = cal-p2 Đầu hồ landed; earlier PASS 950f7272)
 PRIORITY #1 CHECK: OD 20/11 ~06:20Z / ~06:40Z / ~07:15Z / ~07:20Z (brief cag29-rv-mg-fair-ratio.md) | main eb056f7b: BAL.ag.mg2.hand {on,lo,hi,w,skew} + cal {up,dn,min,max} (jbal2.js), jmgcal mgCalBand, jmgt mgHand / mgNpcRaw | review/mg-fair-ratio 996b17d0 (from mg-fair-hands PASS 3fe87277); review/cal-p2 445bcaeb read only (has the Đầu hồ fix 6e456cf8, not merged here) | claims: wk session_01Rc5AsMnKfGBSQk1sEvtKda
 Reviewer session_01Rc5AsJK6yD7rWjkFjs3So6 (foreman C-AG #29). START_CTX ≈ 4 % (1M window). final = 996b17d0 + reviewer fix 2b067168 + final-merge of LIVE origin/main 70bea3d3 (mg-visual; only index.html / sw.js conflicted, rebuilt) = **950f7272** (origin/main is its ancestor, checked at push). Re-run on 950f7272: mg-fair-hands 18, ag-mgcal 14, ag-mgh 10, origin-arts 8, mg-visual 8 all ok.
 
@@ -43,3 +43,10 @@ Pre-existing on LIVE main (listed apart): ag-mg2 summons ×2; slap-mg #k91demo t
 - After fitted boards + her re-test, re-run dev/measure/mg-fair-ratio.js (tables D / A) — only her b moves.
 
 VERDICT: **PASS 950f7272** (landing order above). Reviewer context ≈ 12 % at end.
+
+## FINAL (after cal-p2 Đầu hồ landed, LIVE 377d5ce3; coordinator now MAIN ROOT-75)
+- 62915be4 = merge LIVE 377d5ce3: one conflict in jbal2 BAL.ag.mg2.cal — kept the bell-curve line (no up / dn / min / max) with main's k (dauho 1.1 dropped, she re-tests); index.html / sw.js rebuilt.
+- c214eadd = test fix (law 14 / 11): dev/test/cal-dauho.js 4 read the deleted hand.lo / hi → now checks the dauho curve centre = BAL.ag.mg2.hand ctr and no cal.k.dauho.
+- Tests on c214eadd: mg-fair-hands 18, ag-mgcal 14, ag-mgh 10, origin-arts 8, mg-visual 8, mgcal-apply ok; cal-dauho ALL OK against base 70bea3d3 (pre-fix). Against the default base origin/main its check 3 "board easier than before" fails by design (main already has the fix: before = after) — same on main itself.
+- QUICKCHECK PASS (173 s, old save ok, core gates PASS). origin/main 377d5ce3 is an ancestor of c214eadd (checked at push).
+- The Đầu hồ sure-loss flag is resolved: no dauho base in the book until her re-test; NPCs play the adult curve on the fixed board.
