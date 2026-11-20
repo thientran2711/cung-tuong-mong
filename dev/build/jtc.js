@@ -31,10 +31,10 @@ function thcPay(p,o){if(p===S)apply(o);else if(typeof p.bac==="number"&&o.bac)p.
 function thcSet(p,s){const B=thcB();if(!p)return "";const cur=thcOf(p);const me=p===S;const H=thcHouse(p);let r="";
  if(s&&cur===s)return "";
  if(cur){/* the one stepping down: her lòng drops, the others' envy eases */cur.loyal=cl((cur.loyal||0)+B.drop.loy,0,100);for(const e of H)if(e.s!==cur&&e.s!==s)e.s.loyal=cl((e.s.loyal||0)+B.drop.calm,0,100);delete p.thc;
-  r=me?`${cur.name} thôi làm cung nữ thân cận: lòng ${balSg(B.drop.loy)}; các cung nữ khác bớt ghen, lòng ${balSg(B.drop.calm)}.`:`${p.name} cho ${cur.name} thôi làm cung nữ thân cận.`}
+  r=me?`${cur.name} thôi làm cung nữ thân cận: nàng: lòng ${balSg(B.drop.loy)}; cung nữ khác: lòng ${balSg(B.drop.calm)}.`:`${p.name} cho ${cur.name} thôi làm cung nữ thân cận.`}
  if(s){if(thcWhyNot(p,s))return r;const id=thcRef(p,s);if(id==null)return r;thcPay(p,{bac:-B.pick.bac});s.loyal=cl((s.loyal||0)+B.pick.loy,0,100);
   for(const e of H)if(e.s!==s&&e.s!==cur)e.s.loyal=cl((e.s.loyal||0)-B.pick.envy,0,100);p.thc=id;s.thcAt=S?S.turn||0:0;
-  const t=me?`Chọn ${s.name} làm cung nữ thân cận, may y phục thân cận riêng của cung ngươi (Bạc ${balSg(-B.pick.bac)}): lòng nàng ${balSg(B.pick.loy)}; các cung nữ khác ghen, lòng ${balSg(-B.pick.envy)}.`
+  const t=me?`Chọn ${s.name} làm cung nữ thân cận, may y phục thân cận riêng của cung ngươi (Bạc ${balSg(-B.pick.bac)}): nàng: lòng ${balSg(B.pick.loy)}; cung nữ khác ghen: lòng ${balSg(-B.pick.envy)}.`
    :`${p===S.thO?"Thái hậu":p.name} chọn ${s.name} làm cung nữ thân cận.`;r=r?r+" "+t:t}
  try{if(typeof J95S==="object")J95S.last=null}catch(e){}/* the record re-reads the close one */
  return r}

@@ -133,5 +133,13 @@
 "maid"
 ],
 "reason": "the decline of srvTalk emp (keep her place, Đức +1): an NPC maid's same choice is keeping her routine instead of «Quỳ dâng trà» (jagstaff mindPick vs BAL.ag.routine) — not an act (B4 role-parity-4b, applied by B3)"
+},
+{
+"reason": "cung nữ thân cận (jtc, owner OD 20/11 ~15:55Z, review/thancan): her person-card button and every NPC master (consort, Hoàng hậu, Thái hậu) run the SAME thcSet with the same BAL.thc gain/loss; the NPC side is the monthly world pass thcNpcAll (monthTick: picks her most loyal trusted maid at BAL.thc.npc.p, lets one go under BAL.thc.npc.drop), not a day-plan provider",
+"label": "Chọn làm cung nữ thân cận"
+},
+{
+"reason": "cung nữ thân cận (jtc, owner OD 20/11 ~15:55Z, review/thancan): her person-card button and every NPC master (consort, Hoàng hậu, Thái hậu) run the SAME thcSet with the same BAL.thc gain/loss; the NPC side is the monthly world pass thcNpcAll (monthTick: picks her most loyal trusted maid at BAL.thc.npc.p, lets one go under BAL.thc.npc.drop), not a day-plan provider",
+"label": "Thôi làm cung nữ thân cận"
 }
 ]

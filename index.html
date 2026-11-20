@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"0ef566c8+","t":"2026-11-20T16:29Z","c":"thancan: cung nu than can (owner OD 20/11 ~15:55Z) - choose/dismiss on her person card, NPC masters pick, q.close reused, uniform look key …","b":"6941f6a1548e","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
+window.CTM_BI={"s":"af144258+","t":"2026-11-20T16:34Z","c":"thancan: live-servants T3 makes her personal maid the chosen thân cận","b":"c25b3b7416df","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -83449,10 +83449,10 @@ function thcPay(p,o){if(p===S)apply(o);else if(typeof p.bac==="number"&&o.bac)p.
 function thcSet(p,s){const B=thcB();if(!p)return "";const cur=thcOf(p);const me=p===S;const H=thcHouse(p);let r="";
  if(s&&cur===s)return "";
  if(cur){/* the one stepping down: her lòng drops, the others' envy eases */cur.loyal=cl((cur.loyal||0)+B.drop.loy,0,100);for(const e of H)if(e.s!==cur&&e.s!==s)e.s.loyal=cl((e.s.loyal||0)+B.drop.calm,0,100);delete p.thc;
-  r=me?`${cur.name} thôi làm cung nữ thân cận: lòng ${balSg(B.drop.loy)}; các cung nữ khác bớt ghen, lòng ${balSg(B.drop.calm)}.`:`${p.name} cho ${cur.name} thôi làm cung nữ thân cận.`}
+  r=me?`${cur.name} thôi làm cung nữ thân cận: nàng: lòng ${balSg(B.drop.loy)}; cung nữ khác: lòng ${balSg(B.drop.calm)}.`:`${p.name} cho ${cur.name} thôi làm cung nữ thân cận.`}
  if(s){if(thcWhyNot(p,s))return r;const id=thcRef(p,s);if(id==null)return r;thcPay(p,{bac:-B.pick.bac});s.loyal=cl((s.loyal||0)+B.pick.loy,0,100);
   for(const e of H)if(e.s!==s&&e.s!==cur)e.s.loyal=cl((e.s.loyal||0)-B.pick.envy,0,100);p.thc=id;s.thcAt=S?S.turn||0:0;
-  const t=me?`Chọn ${s.name} làm cung nữ thân cận, may y phục thân cận riêng của cung ngươi (Bạc ${balSg(-B.pick.bac)}): lòng nàng ${balSg(B.pick.loy)}; các cung nữ khác ghen, lòng ${balSg(-B.pick.envy)}.`
+  const t=me?`Chọn ${s.name} làm cung nữ thân cận, may y phục thân cận riêng của cung ngươi (Bạc ${balSg(-B.pick.bac)}): nàng: lòng ${balSg(B.pick.loy)}; cung nữ khác ghen: lòng ${balSg(-B.pick.envy)}.`
    :`${p===S.thO?"Thái hậu":p.name} chọn ${s.name} làm cung nữ thân cận.`;r=r?r+" "+t:t}
  try{if(typeof J95S==="object")J95S.last=null}catch(e){}/* the record re-reads the close one */
  return r}
@@ -85076,7 +85076,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6941f6a1548e";window.CTM_BUILD=BUILD;
+const BUILD="c25b3b7416df";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
