@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4a5eda41+","t":"2026-11-20T00:19Z","c":"coop-thin G: regression lane script (dev/test/coop-thin-g-reg.sh)","b":"66a9d01feb35","h":[{"s":"2f328213+","t":"2026-11-19T23:11Z","c":"coop-ptime-reds r1 (review): merge main 7bc73251 (B24 rank palette, colour only); index/sw/assets rebuilt by build_site.sh"},{"s":"66a26121+","t":"2026-11-19T22:49Z","c":"coop-ptime-reds r1 (review): her tap while her due-task tick (ptTickHer) is pending is HELD and sent after its answer (was refused busy = l…"},{"s":"2dd36abf+","t":"2026-11-19T22:36Z","c":"B24 fix: rank text on paintings / night panels uses the RCOL base (one accessor kitRankTone ground), paper keeps derived tone; rebuilt inde…"},{"s":"868c682c+","t":"2026-11-19T17:43Z","c":"runact-sv-fix: j29 hoist textually identical to review/coop-thin-f6-r1 (merges clean)"},{"s":"c8af1135+","t":"2026-11-19T14:36Z","c":"npc-purpose G1 #14: build line"},{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"}]};
+window.CTM_BI={"s":"045c48f4","t":"2026-11-20T00:42Z","c":"coop-thin G #2: her cards raised on the host reach her (level 13): world windows' cards (jworld EVD card) built in HER context on the host …","b":"6da880c80e5a","h":[{"s":"2f328213+","t":"2026-11-19T23:11Z","c":"coop-ptime-reds r1 (review): merge main 7bc73251 (B24 rank palette, colour only); index/sw/assets rebuilt by build_site.sh"},{"s":"66a26121+","t":"2026-11-19T22:49Z","c":"coop-ptime-reds r1 (review): her tap while her due-task tick (ptTickHer) is pending is HELD and sent after its answer (was refused busy = l…"},{"s":"2dd36abf+","t":"2026-11-19T22:36Z","c":"B24 fix: rank text on paintings / night panels uses the RCOL base (one accessor kitRankTone ground), paper keeps derived tone; rebuilt inde…"},{"s":"868c682c+","t":"2026-11-19T17:43Z","c":"runact-sv-fix: j29 hoist textually identical to review/coop-thin-f6-r1 (merges clean)"},{"s":"c8af1135+","t":"2026-11-19T14:36Z","c":"npc-purpose G1 #14: build line"},{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -76501,15 +76501,18 @@ function startCard(w){const E=EVD[w.k];let m=null;try{m=E.card(w)}catch(e){wErr(
  return m}
 function worldShow(){if(!S||S.dead)return;S.wwSeen=S.wwSeen||{};S.wwEnd=S.wwEnd||{};const A=worldWin(),z=wZ();
  for(const h of (z.H||[])){if(h.id==null||!h.end||S.wwEnd[h.id]||!S.wwSeen[h.id])continue;S.wwEnd[h.id]=1;Q.push({t:h.n||"Tin trong cung",who:pEmp(),h:`<p>${h.end}</p>`})}
- for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;const m=startCard(w);if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts;Q.push(m)}}
+ for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;const m=startCard(w);if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts;
+  /* co-op thin G (level 13): built on the host in HER context, a card with options travels as a pid card (part D: rebuilt from the window id at her pick, run in her context) */
+  Q.push(m.opts&&typeof window.wwPid==="function"&&window.wwPid()?Object.assign(m,{pid:"wwc",pp:{id:w.id}}):m)}}
  const lo=z.seq-20;for(const k in S.wwSeen)if(+k<lo)delete S.wwSeen[k];for(const k in S.wwEnd)if(+k<lo)delete S.wwEnd[k]}
 {const e0=endTurn;endTurn=function(){const t0=S?now():0;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&now()!==t0){worldTick();if(Q.length&&$("modal").hidden)showModal()}}catch(e){wErr("tick",e)}return r}}
 /* co-op guest: cards of windows the host opened */
-{const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(S&&!S.dead&&!host()&&!Q.length&&!S.mg){const n=Q.length;worldShow();if(Q.length>n&&$("modal").hidden)showModal()}}catch(e){}return r}}
+{const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(S&&!S.dead&&!host()&&!Q.length&&!S.mg&&!(typeof window.wwGuestOff==="function"&&window.wwGuestOff())/* co-op thin G: her cards come from the host */){const n=Q.length;worldShow();if(Q.length>n&&$("modal").hidden)showModal()}}catch(e){}return r}}
 try{const K=window.COOPW&&COOPW.X&&COOPW.X.W_KEYS;if(Array.isArray(K)&&!K.includes("wwin"))K.push("wwin")}catch(e){}
 /* the batch-2 module (jworld2.js) adds its events into the same EVD / WN / BAL.world and reuses these helpers (one layer, no second copy) */
 window.WORLD_X={B,now,T_,wZ,wErr,wName,WN,TANG_NO,EVD,XH,liveR,cons,moodFloor,moodSet,nmList,npcPick,mW,monthsWord,meCons,pid,byPid,wNow0,wPresent,rawNight,wGroup,isEmpP,isThP};
-Object.assign(window,{worldQueue,worldWin,worldPlanW,worldStart,worldEnd,worldTick,worldName:wName,WORLD_EVD:EVD,worldNightBlocked:nightBlocked});
+PEND.wwc=pp=>{const w=pp&&worldWin().find(x=>x&&x.id===pp.id);if(!w)return null;const m=startCard(w);if(!m||!m.opts||!m.opts.length)return null;return {t:m.h,o:m.opts,who:m.who||pEmp(),cls:m.cls}};/* co-op thin G: a world card with options as a pid card (only built when wwPid(): solo never) */
+Object.assign(window,{worldShow,worldQueue,worldWin,worldPlanW,worldStart,worldEnd,worldTick,worldName:wName,WORLD_EVD:EVD,worldNightBlocked:nightBlocked});
 })();
 /* ================= jworld2 — WORLD EVENTS batch 2 (review/world-events-2) =================
    Owner OD:L1587 rule 4 + OD 17/11 13:48Z ("càng nhiều sự kiện thì nó càng đa dạng phong phú") + OD 17/11 ~14:30Z (CENTER pop-up at start
@@ -81670,6 +81673,38 @@ CW.gEmp=function(){if(!on()||!host()||CW.ctx||!CW.base||!CW.base.P||!CW.base.P[o
   catch(e){G.stat.err++;console.error("thin G emp",e)}
   finally{CW.gWk=false;CW.mine=m0;try{E.wRestore(snap)}catch(e){console.error("thin G restore",e)}}});
  if(ch)try{const b=CW.gBlob();if(b){const P=CW.base.P[seat];b.pid=P.pid||b.pid;CW.base.P[seat]=b}}catch(e){console.error(e)}};
+/* ---------- world windows' cards (Lễ Phật đản, Vạn thọ, quyên bạc cứu đói … jworld EVD.<k>.card): built on the host in HER context ----------
+   Until level 13 her phone built them itself (jworld render hook → worldShow) and her answer ran on her phone's S, which reached the room
+   through her `end`. At level 13 her phone sends no week: that answer was a LOCAL write the host never saw (coop-thin-g #2: Cúng dường
+   hậu hĩnh = her phone −40 bạc, Thái hậu +5; Dâng lễ vật vừa phải = −20 bạc, Sủng +3; both undone by the next week's snapshot = her choice
+   lost). Now: her phone builds none (wwGuestOff); the host runs worldShow in her context whenever the world has a window (or an end
+   note) her store has not seen; a card with options goes out as the pid card "wwc" (jworld PEND.wwc, rebuilt from the window id at her
+   pick, run in her context: fx / go / her rows through part D's patch), a note as a part-D note. Solo and levels ≤ 12: unchanged. */
+window.wwPid=()=>on()&&!!CW.ctx&&host();
+window.wwGuestOff=()=>on()&&CW.on&&!host()&&!CW.ctx;
+let wwAsk=false;
+function wwHers(){if(!on()||!host()||CW.ctx||!CW.on||wwAsk||typeof worldWin!=="function"||typeof worldShow!=="function")return;const seat=other();let st=null;try{st=TH.seatOf(seat)}catch(e){}
+ if(!st||!st.S||st.S.dead||(TH.held&&TH.held(seat)))return;const seen=st.S.wwSeen||{},ended=st.S.wwEnd||{};let need=false;
+ try{for(const w of worldWin())if(w&&!seen[w.id]){need=true;break}const z=S.wwin;if(!need&&z&&Array.isArray(z.H))for(const h of z.H)if(h&&h.id!=null&&h.end&&seen[h.id]&&!ended[h.id]){need=true;break}}catch(e){return}
+ if(!need)return;wwAsk=true;G.stat.ww=(G.stat.ww|0)+1;
+ D.later(seat,()=>{wwAsk=false;if(!S||S.dead||S.mg)return;try{worldShow()}catch(e){console.error("thin G world cards",e)}})}
+{const r0=render;render=function(){const r=r0.apply(this,arguments);try{wwHers()}catch(e){console.error("thin G ww",e)}return r}}
+/* ---------- her cards with options and no pid (the whole family; worker #2) ----------
+   Part D keeps a card only as a pid (rebuilt at her pick) or as a note: a card with handlers and no pid raised in her context was DROPPED
+   (D.bad; seen in her week end on the host: «Hội phối đồ: báo đề» jts tsPanel, «Một ánh mắt» j24 manPoem …). Until level 13 her phone
+   raised them in her own week end and she answered them there; at level 13 that week end runs on the host, so dropping = her choice lost.
+   Level 13, in her context on the host: such a card gets the pid "live" and stays in the host's memory by its id (D.LIVE) until she picks;
+   her pick runs it in her context as any part-D card. Its look on her phone is the native card's (the stand-in drops the pid / pp).
+   Her store lives until her answer: the host's `end` waits while she has an open card (CW.gHold → herFree), so the card's own references
+   are still her store's. A host reload loses the memory: the card is then stale (pick-stale, removed), logged in D.liveLost.
+   FOR H: give each of these a real pid (list: G.liveK, the titles seen). Solo and levels ≤ 12: unchanged. */
+const LIVE=D.LIVE=new Map();let lN=0;G.liveK={};D.liveLost=0;
+PEND.live=pp=>{const m=pp&&LIVE.get(pp.lid);if(!m){D.liveLost++;return null}return {t:m.h,o:m.opts,who:m.who,cls:m.cls}};
+{const tq=D.takeQ;D.takeQ=function(){try{if(on()&&host()&&CW.ctx&&Array.isArray(Q))for(const m of Q){if(!m||m.pid||!m.opts||!m.opts.length||(typeof isMenuCard==="function"&&isMenuCard(m)))continue;
+   const lid="L"+wkR()+"-"+(lN++);LIVE.set(lid,m);m.pid="live";m.pp={lid};const k=String(m.t||"?");G.liveK[k]=(G.liveK[k]||0)+1}}catch(e){console.error("thin G live",e)}
+  return tq.apply(this,arguments)}}
+{const vo=D.vOf;D.vOf=function(m){const v=vo.apply(this,arguments);if(v&&v.pid==="live"){delete v.pid;delete v.pp}return v}}
+{const so=TH.seatDrop;if(typeof so==="function")TH.seatDrop=function(seat){try{if(LIVE.size>40){const ks=[...LIVE.keys()];for(const k of ks.slice(0,ks.length-40))LIVE.delete(k)}}catch(e){}return so.apply(this,arguments)}}
 COOP.on("week",()=>{const k=wkR();for(const x of Object.keys(G.done))if(+x<k-2)delete G.done[x]});
 /* the guest: a room that reaches level 13 mid-week has no `end` of hers pending: drop any (the server refuses it: thinend) */
 COOP.on("error",m=>{if(m&&m.code==="thinend"){lg(["thinend",m.week]);}});
@@ -81704,7 +81739,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="66a9d01feb35";window.CTM_BUILD=BUILD;
+const BUILD="6da880c80e5a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
