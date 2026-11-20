@@ -7,3 +7,6 @@ Owner verbatim: "Ok, thô sử ok. Tam đẳng ok, nhưng mà tới nhị đẳn
 4. NHẤT ĐẲNG: blue skirt AND blue sleeves (try the whole sleeve blue; pink embroidery on the sleeve edge OK); outer top/vest pink. Sleeves: round 3 too big → use the smaller of rounds 1/2 nhất đẳng sleeves (a little wider than nhị đẳng); the same sleeve for chưởng sự cô cô.
 5. MA MA: round-3 open-coat-over design rejected; needs a new design (4 variants are on HOLD in MAID8 — she has not yet given her full list; ask).
 6. EVERY new test sheet = NEW next to the OLD pictures of earlier rounds (round 1/2/3 columns), big labels — rule A37.
+## Thân cận verdict (owner 20/11 ~16:50Z) — collect, no redraw yet (A36)
+Owner verbatim: "Cái cổ áo của thân cận là sai nha. Đây là cái cổ áo của bậc tần hay là bậc phi rồi. Không có được để cổ áo đó. 3 kiểu thân cận mày gửi tao thấy không có gì đặc sắc hết trơn á. 4 kiểu luôn."
+7. THÂN CẬN: all 4 variants (THANCAN1 sheet) rejected as not distinctive; the collar used reads as a consort (Tần/Phi) collar → forbidden for thân cận (find which collar words: standing collar / square-ish? — ask her which one if unclear, or ban both consort collar types: standing high collar and the G17/G22 square neckline). New 4 designs needed, more distinctive, on 4 different people (A35), only after she confirms the whole list.
