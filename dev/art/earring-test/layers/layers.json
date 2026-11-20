@@ -1,0 +1,58 @@
+{
+ "c09": {
+  "face": [
+   "c09_face.webp",
+   374,
+   112
+  ],
+  "fronthair": [
+   "c09_fronthair.webp",
+   370,
+   109
+  ],
+  "hairtop": [
+   "c09_hairtop.webp",
+   321,
+   12
+  ]
+ },
+ "c11": {
+  "face": [
+   "c11_face.webp",
+   407,
+   123
+  ],
+  "fronthair": [
+   "c11_fronthair.webp",
+   402,
+   118
+  ],
+  "hairtop": [
+   "c11_hairtop.webp",
+   367,
+   11
+  ]
+ },
+ "c22": {
+  "face": [
+   "c22_face.webp",
+   418,
+   112
+  ],
+  "fronthair": [
+   "c22_fronthair.webp",
+   414,
+   109
+  ],
+  "hairtop": [
+   "c22_hairtop.webp",
+   385,
+   19
+  ],
+  "hands": [
+   "c22_hands.webp",
+   378,
+   786
+  ]
+ }
+}

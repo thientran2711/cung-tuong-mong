@@ -1,0 +1,32 @@
+{
+ "dangle": {
+  "w": 70,
+  "head_h": 130,
+  "shaft_h": 222,
+  "base_x": 35.2
+ },
+ "peony": {
+  "w": 76,
+  "head_h": 93,
+  "shaft_h": 259,
+  "base_x": 38.8
+ },
+ "butterfly": {
+  "w": 86,
+  "head_h": 90,
+  "shaft_h": 262,
+  "base_x": 44.4
+ },
+ "floralfork": {
+  "w": 76,
+  "head_h": 46,
+  "shaft_h": 306,
+  "base_x": 38.5
+ },
+ "plum": {
+  "w": 79,
+  "head_h": 96,
+  "shaft_h": 257,
+  "base_x": 33.8
+ }
+}
