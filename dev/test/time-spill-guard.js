@@ -21,18 +21,27 @@ const PAT={
  used4:/used\s*\+\s*[\w.()]+\s*(<=|>)\s*4\b/g,               /* "fits this buổi" test */
  trunc:/Math\.min\(\s*[\w.]+\s*,\s*4\s*-\s*used\s*\)/g,        /* act cost cut to what is left (no spill) */
  khongkip:/không kịp( xong| gặp nàng| đến)? trong \$\{/g,     /* a per-buổi "too late" reason built from the buổi name */
- kh:/j77Kh\(\s*[^)]*[+][^)]*\)/g                               /* j77Kh(walk + something): an act gated on this buổi only */
+ kh:/j77Kh\(\s*[^)]*[+][^)]*\)/g,                              /* j77Kh(walk + something): an act gated on this buổi only */
+ four:/[^\w.]4\s*-\s*used\b/g,                                 /* day-khắc audit 17/11: a typed 4 for the buổi's khắc (one core: BAL.time.khac / j76left) */
+ ofbuoi:/khắc còn lại của buổi/g                                   /* day-khắc audit 17/11: player words must say the DAY ("còn lại trong ngày") */,
+ dayfit4:/function dayFit\([^)]*\)\{[^}]*<=\s*4\b/g,                 /* day-khắc r2: the ONE time gate never reads a typed 4 */
+ thisbuoi:/thành: (được vào|vào được) buổi này/g,               /* day-khắc r2: ask / sneak / lead may spill: say the arrival buổi (j77When), never a fixed "buổi này" */
+ /* day-khắc land (20/11): the BAL forms of the same buổi-only gates, so new code written with BAL.time.khac instead of a typed 4 is caught too */
+ usedbal:/used\s*\+\s*[\w.()]+\s*(<=|>|<|>=)\s*BAL\.time\.khac\b/g,  /* used+N vs the buổi's khắc: fits THIS buổi only */
+ minbal:/Math\.min\(\s*[\w.]+\s*,\s*BAL\.time\.khac\s*-\s*used\s*\)/g, /* cost cut to the buổi's rest (no spill) */
+ kleft:/BAL\.time\.khac\s*-\s*used\)?\s*(<=|>=|<|>)\s*[\w.(]/g          /* the buổi's khắc left compared to a cost */
 };
 /* allowed occurrences: file -> pattern -> count, each with why */
 const ALLOW={
- 'j1.js':{used4:1},        /* the first can(); replaced by j76's day-aware can() */
- 'j15.js':{used4:1},       /* the first whyTime(); wrapped by j76 (day reasons) */
- 'j76.js':{used4:7,khongkip:3}, /* the time core: fits-this-buổi test + spill; "không kịp xong trong <buổi>" only for acts tied to their buổi (a.b cards, sáng lesson) */
- 'j9.js':{used4:1},        /* walkOk: the walk fits now; walkSpill / walkGo spill the rest */
- 'j77.js':{kh:1},          /* accEtqGo old path: greeting that fits this buổi (the spill path is dayFit) */
- 'j72.js':{used4:1},       /* message after !can(k) (can is day-aware) */
- 'jmen.js':{trunc:1},      /* menKh: after the j76spills branch, only the night end (buổi tối) is cut */
- 'jtsb.js':{trunc:1}       /* tsbKh: same */
+ /* day-khắc land (20/11) usedbal/minbal/kleft rows, each read by hand after the 2072-commit main merge:
+    j1 can() = base, wrapped by j76 day can · j15 whyTime = wrapped by j76 day words · j72 = text after the day can() already failed ·
+    j9 walkOk = "the walk fits THIS buổi" (plain walk; every spill path goes through walkSpill/walkLate) · j77 j77When = label "buổi này"
+    vs arrival buổi · jmen menKh / jtsb tsbKh = spill first (j76spills), the min only trims when the day itself is short ·
+    jrest = fallback when j76left is missing · j76 = the time core itself */
+ 'j1.js':{usedbal:1},'j15.js':{usedbal:1},'j72.js':{usedbal:1},'j9.js':{usedbal:1},'j77.js':{usedbal:1},
+ 'jmen.js':{minbal:1},'jtsb.js':{minbal:1},'jrest.js':{kleft:1},
+ 'j76.js':{khongkip:3,usedbal:7} /* the time core: "không kịp xong trong <buổi>" only for acts tied to their buổi (a.b cards, sáng lesson).
+   day-khắc r2: every other entry (used4 in j1/j15/j9/j72/j76, j77 kh, jmen/jtsb trunc) had 0 hits and was dropped — dayFit reads BAL.time.khac */
 };
 const ST={};
 for(const f of mods){const s=strip(fs.readFileSync(path.join(ROOT,'dev/build',f),'utf8'));
@@ -102,9 +111,51 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
   base(CH,3);const far=places().map(x=>x.k).find(k=>{if(k==="home"||travel("home",k)<2)return false;const P=walkSpill(k);return !!(P&&P.ok)});
   if(far){const P0=walkSpill(far);const W0=window.COOPW;window.COOPW=Object.assign({},W0||{},{on:true});let P=null;try{P=walkSpill(far)}finally{window.COOPW=W0}row('co-op walkSpill = solo walkSpill',JSON.stringify(P)===JSON.stringify(P0),{solo:P0,coop:P})}
   else row('a far place open next buổi',false,'none');
+  /* 7. day-khắc audit (owner 17/11 ~16:45Z): the Dư đồ greys a place only when the DAY cannot hold the walk — a walk that spills keeps the plain label */
+  base(CH,3);{const ml=window.__mapList,kp=window.__kpm;window.__mapList=0;window.__kpm=null;let h='';try{h=mapHTML()}finally{window.__mapList=ml;window.__kpm=kp}if(!/data-(go|ak)=/.test(h))row('dudo map rendered',false,h.slice(0,120));let n=0;for(const k of places().map(x=>x.k)){if(k==="home")continue;const P=walkSpill(k);if(!(P&&P.ok))continue;n++;
+   const m=h.match(new RegExp('<(?:button|div) class="mspot([^"]*)"[^>]*data-(?:go|ak)="'+k+'"'));if(m&&/\b(off|awalk|agrey)\b/.test(m[1]))row('dudo '+k+' spills but greyed',false,m[1])}
+   out.rows.push({id:'dudo spill places checked',ok:true,info:n});
+   let g='';try{g=mapHTMLgrid()}catch(e){}for(const k of places().map(x=>x.k)){if(k==="home")continue;const P=walkSpill(k);if(!(P&&P.ok))continue;const m=g.match(new RegExp('<(?:button|div) class="mtile([^"]*)"[^>]*data-(?:go|ak)="'+k+'"'));if(m&&/\b(awalk|agrey)\b/.test(m[1]))row('list '+k+' spills but greyed',false,m[1])}}
+  /* 8. rest (Nghỉ ngơi dưỡng sức, buổi tối only): its khắc = the rest of the DAY; 1 left at tối → refused in day words */
+  {const rd=(pool()||[]).find(a=>a.rest==="ds");if(rd){base(B4,1);restFix(rd);row('rest tối 3 left: k = day left',rd.k===j76left()&&!cardWhy(rd),{k:rd.k,left:j76left(),why:cardWhy(rd)});
+   base(B4,3);restFix(rd);const w=cardWhy(rd)||'';row('rest tối 1 left: refused in day words',/hết khắc trong ngày/i.test(w)&&!/không kịp/.test(w),w)}else out.rows.push({id:'rest card not in pool',ok:true})}
+  /* 9. NPC parity (two-way): an NPC deed reads the SAME function — j76left(buổi, her khắc) — as her act (dayFit) */
+  base(CH,3);row('NPC chiều kh 3, deed 2 khắc: allowed (spills)',2<=j76left(CH,3)&&dayFit(2),{left:j76left(CH,3)});
+  base(B4,3);row('NPC tối kh 3, deed 2 khắc: refused',!(2<=j76left(B4,3))&&!dayFit(2),{left:j76left(B4,3)});
+  row('NPC rows = player rows for every buổi/khắc',[0,1,2,3].every(b=>[0,1,2,3,4].every(u=>{base(Math.min(b,B4),u);return j76left(Math.min(b,B4),u)===j76left()})),'');
+  /* 10. day-khắc r2 (review r1 FAIL 1): EVERY reader of accState treats a walk that only spills as OPEN. Court panel "Đến <nơi> gặp ngài"
+     (Hoàng thượng) and "Sang Đức Thọ cung thỉnh an" (Thái hậu), sáng + chiều with 1 khắc left: enabled whenever walkSpill(k).ok */
+  const dis=h=>/^<button[^>]*\sdisabled/.test(h||''),txt=h=>String(h||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+  let cm=0;for(const bu of [0,CH]){for(const k of places().map(x=>x.k)){if(k==="home")continue;base(bu,3);S.where=S.where||{};S.where.emp=k;const st=accState(k);
+    if(st.ask||st.why&&!st.walk)continue;const P=walkSpill(k);if(!(P&&P.ok))continue;cm++;const B=courtMeet('emp');const h=B.find(x=>/data-kgmgo=/.test(x))||'';
+    row(`court emp at ${k} b${bu}: spill walk open`,!!h&&!dis(h)&&!/buổi này/.test(txt(h)),txt(h).slice(0,180))}
+   base(bu,3);if(!S.thDead){const st=accState("tn"),P=walkSpill("tn");if(!st.ask&&P&&P.ok){cm++;const h=courtMeet('th').find(x=>/data-kgmgo=/.test(x))||'';row(`court th b${bu}: spill walk open`,!!h&&!dis(h),txt(h).slice(0,180))}}}
+  out.rows.push({id:'court walks checked',ok:true,info:cm});
+  /* 10b. the tap: the court button walks on into the next buổi (walkGo → walkSpillGo), it does not stall */
+  {base(0,3);const P=walkSpill("tn");if(P&&P.ok&&!S.thDead&&!accState("tn").ask){const h=courtMeet('th').find(x=>/data-kgmgo=/.test(x))||'';const d=document.createElement('div');d.innerHTML=h;document.body.appendChild(d);
+    try{const b=d.querySelector('button');if(b)b.click()}finally{d.remove()}const W=window.__walkSpill;row('court th tap at sáng 1 left: spill walk started',!!(W&&W.k==="tn")||S.place==="tn",{W:W&&W.k,place:S.place});window.__walkSpill=null}}
+  /* 11. the whole family, by render: no disabled button anywhere (every tab + court cards) carries the spill sentence of j77WalkWhy
+     ("đi N khắc, đến nơi đã sang buổi X" with no closing reason) — a spill is never a block */
+  {const SPILL=/(^|\s)đi \d+ khắc, đến nơi đã sang buổi \S+(\s|$)(?!—)/;const seen=[];const p0=pbtn;pbtn=function(){const h=p0.apply(this,arguments);seen.push(h);return h};
+   try{for(const bu of [0,CH]){base(bu,3);for(const t of ["act","go","staff","inv","rv","court","rel","fac","kid","art","story"]){try{tab=t;window.__mapList=0;render()}catch(e){}
+     const pn=document.getElementById('panel');if(pn)pn.querySelectorAll('button[disabled]').forEach(b=>seen.push(b.outerHTML));
+     try{window.__mapList=1;if(t==="go")render();if(pn)pn.querySelectorAll('button[disabled]').forEach(b=>seen.push(b.outerHTML))}catch(e){}window.__mapList=0}
+    for(const k of places().map(x=>x.k)){if(k==="home")continue;base(bu,3);S.where.emp=k;try{courtMeet('emp');courtMeet('th')}catch(e){}}}}finally{pbtn=p0}
+   let n=0;for(const h of new Set(seen)){if(!dis(h))continue;n++;const m=(h.match(/<span class="kwhy">([^<]*)<\/span>/)||[])[1]||'';if(SPILL.test(m))row('disabled by a spill: '+txt(h).slice(0,80),false,m);
+    /* day-khắc land (20/11, the sweep after the 2072-commit main merge): at sáng / chiều with 1 khắc left the DAY still holds 5+ khắc, so no
+       button may be greyed "hết khắc" or "không kịp" — except the sáng-only thỉnh an («không kịp xong trong buổi sáng», OD L852 (b)) */
+    if(/hết khắc|không kịp/.test(m)&&!/không kịp xong trong buổi sáng/.test(m))row('greyed for time while the day has khắc: '+txt(h).slice(0,80),false,m)}
+   out.rows.push({id:'disabled buttons scanned',ok:true,info:n})}
+  /* 12. words (review r1 FAIL 3): ask / sneak / lead lines say the arrival buổi when the walk spills, "buổi này" only when it fits */
+  {base(CH,3);let wn=0;for(const k of places().map(x=>x.k)){if(k==="home")continue;const st=accState(k);if(!st.ask&&!st.kind)continue;const tc=st.tc||0;wn++;
+    const L=[st.ask?accAskLine(k):'',st.kind?accSneakLine(k,tc):''].filter(Boolean).join(' | ');const sp=used+tc+1>BAL.time.khac;
+    row(`ask/sneak words ${k} chiều 1 left`,sp?(!/buổi này/.test(L)&&/đến nơi vào buổi/.test(L)):/buổi này/.test(L),L.slice(0,200))}
+   out.rows.push({id:'ask/sneak lines checked',ok:true,info:wn})}
+  /* 13. one core (review r1 FAIL 2): dayFit follows BAL.time.khac, not a typed 4 */
+  {const k0=BAL.time.khac;try{BAL.time.khac=k0+1;base(CH,k0);row('dayFit reads BAL.time.khac',dayFit(1)===true,{khac:BAL.time.khac,used})}finally{BAL.time.khac=k0}}
   clr();return out});
  for(const r of R.bad)fail('runtime '+r.id+' · '+JSON.stringify(r.info).slice(0,220));
  if(errs.length)fail('page errors: '+errs.slice(0,3).join(' | '));
- console.log('runtime: '+R.rows.length+' checks, '+R.bad.length+' bad');
+ console.log('runtime: '+R.rows.length+' checks, '+R.bad.length+' bad · '+R.rows.filter(r=>r.ok&&typeof r.info==='number').map(r=>r.id+' '+r.info).join(' · '));
  await b.close();done()})().catch(e=>{fail('crash '+e.message);done()});
 function done(){try{srv.close()}catch(e){}console.log(fails.length?`TIME-SPILL GUARD FAIL · ${fails.length} · ${fails[0]}`:'TIME-SPILL GUARD PASS · static + runtime');process.exit(fails.length?1:0)}

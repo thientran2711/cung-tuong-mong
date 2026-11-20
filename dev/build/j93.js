@@ -61,6 +61,21 @@ function kitSceneEnd(ov,label,onClick){if(!ov)return null;ov.querySelectorAll(".
  if(!b){b=document.createElement("button");b.type="button";b.className="kbtn kmend";ov.appendChild(b)}ov.classList.add("km-endon");kitSceneFit(ov);b.textContent=label||"Tiếp theo";if(onClick)b.onclick=e=>{e.stopPropagation();onClick()};return b}
 window.kitSceneEnd=kitSceneEnd;
 
+/* ---------- KIT §81.1 kitEntryGate (K-OI-1 / KP07, review/kit-podium-gate; OD:L1244 + L1261): the ENTRY animation «palace gate → selection hall» ----------
+   kitEntryGate({kind, origin, road, to}) — kind "consort" (sedan: tt dtq muoi ch thd td) · "bride" (bridal sedan + envoy: nc bd) · "maid" (cnv: maids behind a mama) · "corridor" (cn: the Càn Thanh corridor);
+   to = the name of the selection she is about to enter (joi.js oiGate passes oiSel().head). A kmStage scene (queued with kmPush, one at a time): a painted gate whose two leaves swing open while the picture
+   pushes in, the caption «<cap> · Vào <to>», then ONE kit button (KIT §81, label by kind) — an outside tap only skips to the final frame. Gọn / reduced motion = the final frame at once.
+   ART SLOTS (Foreman C paints, nothing is drawn in code): img/kit/entry-gate-bg-<kind>.webp (the scene, 4:3), entry-gate-door-l.webp / entry-gate-door-r.webp (the two leaves, transparent, hinged at the outer edge).
+   A slot not on the CDN yet is listed once for painting (kitPhNote "entry") and the scene stays complete without it: dark gate ground, two plain kit-paper leaves (kind colour), the caption. */
+const KEG={consort:{cap:"Cổng cung",end:"Vào điện",col:"#8f1d1d"},bride:{cap:"Kiệu hoa đến cổng cung",end:"Vào điện",col:"#8f1d1d"},maid:{cap:"Cổng bên của cung nữ",end:"Theo ma ma",col:"#6a4a2a"},corridor:{cap:"Hành lang Càn Thanh",end:"Tiếp theo",col:"#1f2d4a"}};
+function kegPic(n){const s=`${KM_DIR}${n}.webp`;try{if(typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&!KIT_CDNHAVE.has(s)){if(typeof kitPhNote==="function")kitPhNote("entry",n,"light","Cổng cung · "+n);return""}}catch(e){}return s}
+function kitEntryGate(o){o=o||{};const kind=KEG[o.kind]?o.kind:"consort",K=KEG[kind];const bg=kegPic("entry-gate-bg-"+kind),dl=kind==="corridor"?"":kegPic("entry-gate-door-l"),dr=kind==="corridor"?"":kegPic("entry-gate-door-r");
+ const rm=`onerror="this.remove()"`;const to=o.to?kmEsc(String(o.to).replace(/<[^>]+>/g,"").trim()):"";
+ const door=(side,src)=>kind==="corridor"?"":src?`<img class="kmeg-d kmeg-d${side}" src="${src}" alt="" draggable="false" ${rm}>`:`<span class="kmeg-d kmeg-d${side} kmeg-dp" aria-hidden="true"></span>`;
+ const html=`<div class="kmeg kmeg-${kind}${bg?" kmeg-art":""}" style="--keg:${K.col}">${bg?`<img class="kmeg-bg" src="${bg}" alt="" draggable="false" ${rm}>`:""}<span class="kmeg-glow" aria-hidden="true"></span><div class="kmeg-gate">${door("l",dl)}${door("r",dr)}</div>`+
+  `<div class="kmeg-cap"><small>${K.cap}</small><b>${to?"Vào "+to:"Nhập cung"}</b></div></div>`;
+ kmPush(done=>{kmStage("km-gate km-gate-"+kind,html,{dur:3800,end:o.end||K.end,onEnd:done})})}
+window.kitEntryGate=kitEntryGate;
 /* ---------- stage overlay ---------- */
 function kmStage(cls,html,o){o=o||{};const red=kmReduced();const ov=document.createElement("div");ov.className="kmov "+cls+(red?" km-red km-skip":"");
  ov.setAttribute("role","dialog");ov.innerHTML=`<div class="kmst">${html}</div>${o.manual?"":`<div class="kmhint">${o.hint||"Chạm để bỏ qua"}</div>`}`;document.body.appendChild(ov);
@@ -188,13 +203,15 @@ function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=K
   <div class="kmshelf"></div><div class="kmtap km-loop">Chạm để mở</div><div class="kmlist">${rows}<button class="kbtn kmtake" data-km-close>Nhận</button></div></div>`;
  kmPush(done=>{const st=kmStage("km-reward",html,{manual:true,dur:60000,onEnd:done});const root=st.ov.querySelector(".kmrew");st.ov.id="kmrew";let step=0;
   const spot=root.querySelector(".kmspot"),shelf=root.querySelector(".kmshelf");const T=[];const later=(ms,f)=>T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms));
-  const fin=()=>{T.forEach(clearTimeout);T.length=0;step=2;spot.innerHTML="";shelf.innerHTML=seq.map(tile).join("");root.classList.add("km-done","km-fast");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}};
+  /* kit-rows-b KP15: the shelf shows at most KMCAP icons + one «+N» chip (22 items = 3 rows of icons covered the list and the Nhận button); the full list below holds every item */const KMCAP=8,more=n=>`<span class="kmsh kmsh-more" style="--i:${KMCAP}">+${n}</span>`;const shelfAll=()=>seq.slice(0,seq.length>KMCAP+1?KMCAP:seq.length).map(tile).join("")+(seq.length>KMCAP+1?more(seq.length-KMCAP):"");
+  const shelfAdd=(x,i)=>{if(seq.length<=KMCAP+1)return shelf.insertAdjacentHTML("beforeend",tile(x,i));if(i<KMCAP)shelf.insertAdjacentHTML("beforeend",tile(x,i));else{const m=shelf.querySelector(".kmsh-more");if(m)m.textContent="+"+(seq.length-KMCAP);else shelf.insertAdjacentHTML("beforeend",more(i+1-KMCAP))}};
+  const fin=()=>{T.forEach(clearTimeout);T.length=0;step=2;spot.innerHTML="";shelf.innerHTML=shelfAll();root.classList.add("km-done","km-fast");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}};
   const one=i=>{if(step!==1)return;if(i>=seq.length){later(RV.list||350,()=>{step=2;root.classList.add("km-done");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}});return}
    const x=seq[i];spot.innerHTML=kitRevealHTML(info(x),{noSub:true});root.dataset.kmi=String(i);
    try{if(typeof kitSfx==="function")kitSfx(x.coin?"coinBounce":x.g>=3?"itemRare":"itemPop",{rate:1+Math.min(i,5)*.05});else if(typeof sfx==="function")sfx(x.coin?"sfx-coin":"sfx-open")}catch(e){}
    if(x.g>=2){const r=spot.getBoundingClientRect();later((RV.rise||550)*.7,()=>kmSpark(st.ov,r.left+r.width/2,r.top+r.height*.4,x.g>=4?34:x.g>=3?26:16,x.g>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4",KG[x.g].c,"#f6ead6"],x.g>=3?170:130))}
    later((RV.rise||550)+(RV.hold||1300),()=>{const p=spot.firstElementChild;if(p)p.classList.add("krev-out");
-    later(RV.shelf||380,()=>{spot.innerHTML="";shelf.insertAdjacentHTML("beforeend",tile(x,i));one(i+1)})})};
+    later(RV.shelf||380,()=>{spot.innerHTML="";shelfAdd(x,i);one(i+1)})})};
   const open=()=>{if(step)return;step=1;if(kmReduced()){root.classList.add("km-open");fin();return}root.classList.add("km-shake");
    later(RV.shake||420,()=>{root.classList.remove("km-shake");root.classList.add("km-open");
     const b=root.querySelector(".kmbox").getBoundingClientRect();const best=seq.length?Math.max(...seq.map(x=>x.g)):0;kmSpark(st.ov,b.left+b.width/2,b.top+b.height*.45,best>=4?40:24,best>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4","#f6ead6","#e0c080"],best>=3?190:140);
@@ -293,6 +310,25 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
  padding:max(12px,env(safe-area-inset-top)) 16px max(12px,env(safe-area-inset-bottom));user-select:none;-webkit-user-select:none;cursor:pointer;overflow:hidden}
 .kmov.km-out{animation:kmFadeOut .24s ease forwards}
 .kmst{position:relative;width:100%;max-width:760px;max-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.km-gate{background:radial-gradient(ellipse at 50% 38%,#3a2418,#150c08 80%)}
+.kmeg{position:relative;width:min(92vw,560px,calc((100dvh - 190px)*4/3));aspect-ratio:4/3;overflow:hidden;border:1px solid var(--gold);border-radius:var(--k-rad,8px);box-shadow:0 0 0 3px #f6ead655,0 14px 40px #000a;background:linear-gradient(#2a1a12,#120a07 70%);perspective:900px;margin:0 auto}
+.kmeg-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kmegPush calc(3.4s*var(--pace,1)) ease-out both}
+.kmeg-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 52%,#ffe7a8cc 0,#f0b64f66 28%,transparent 62%);opacity:0;animation:kmegGlow calc(1.8s*var(--pace,1)) ease-out calc(.6s*var(--pace,1)) both}
+.kmeg-gate{position:absolute;left:14%;right:14%;top:12%;bottom:12%;display:flex;transform-style:preserve-3d}
+.kmeg-maid .kmeg-gate{left:24%;right:24%;top:18%}
+.kmeg-d{flex:1 1 50%;min-width:0;height:100%;object-fit:contain;display:block;box-sizing:border-box}
+.kmeg-dl{transform-origin:0 50%;animation:kmegOpenL calc(1.7s*var(--pace,1)) cubic-bezier(.4,.1,.2,1) calc(.5s*var(--pace,1)) both}
+.kmeg-dr{transform-origin:100% 50%;animation:kmegOpenR calc(1.7s*var(--pace,1)) cubic-bezier(.4,.1,.2,1) calc(.5s*var(--pace,1)) both}
+.kmeg-dp{background:linear-gradient(90deg,color-mix(in srgb,var(--keg) 80%,#000),var(--keg) 40%,color-mix(in srgb,var(--keg) 70%,#000));border:2px solid var(--trim,#d9b25f);box-shadow:inset 0 0 0 3px #00000040}
+.kmeg-dl.kmeg-dp{border-radius:6px 0 0 6px}.kmeg-dr.kmeg-dp{border-radius:0 6px 6px 0}
+.kmeg-corridor .kmeg-glow{background:radial-gradient(ellipse at 50% 55%,#b9c8ff55 0,#6e86c444 32%,transparent 66%)}
+.kmeg-cap{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 10px;text-align:center;background:linear-gradient(transparent,#0009 60%);color:#fffaf0;animation:kmFade calc(.8s*var(--pace,1)) ease-out calc(1.4s*var(--pace,1)) both}
+.kmeg-cap small{display:block;font-size:.76rem;letter-spacing:.06em;color:#f6ead6c0}.kmeg-cap b{font-family:var(--display);font-size:1.2rem;text-shadow:0 1px 3px #000}
+@keyframes kmegPush{from{transform:scale(1)}to{transform:scale(1.12)}}
+@keyframes kmegGlow{from{opacity:0}to{opacity:1}}
+@keyframes kmegOpenL{from{transform:rotateY(0)}to{transform:rotateY(-84deg)}}
+@keyframes kmegOpenR{from{transform:rotateY(0)}to{transform:rotateY(84deg)}}
+@media (prefers-reduced-motion:reduce){.kmeg *{animation:none!important}.kmeg-dl{transform:rotateY(-84deg)}.kmeg-dr{transform:rotateY(84deg)}.kmeg-glow,.kmeg-cap{opacity:1}.kmeg-bg{transform:scale(1.12)}}
 .kmov{--kmend-room:calc(68px + env(safe-area-inset-bottom,0px))}
 .kmov.km-endon{box-sizing:border-box;padding-bottom:var(--kmend-room)}
 /* KIT 81b (owner 17/11 toil-reveal bug): a FULL-BLEED scene (its own backdrop fills the screen: .km-full) has NO padding top or bottom, so the backdrop runs edge to edge
@@ -330,7 +366,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmxt{position:relative;height:96px;width:70px;display:flex;justify-content:center;align-items:flex-end}
 .kmtube{height:96px;width:auto;transform-origin:50% 90%;animation:kmShake calc(.9s*var(--pace)) ease-in-out var(--kd,calc(0s*var(--pace))) both;position:relative;z-index:1}
 .kmstick{position:absolute;height:84px;width:auto;left:50%;bottom:18px;z-index:2;transform-origin:50% 100%;animation:kmStick calc(.7s*var(--pace)) var(--km-out) calc(var(--kd,calc(0s*var(--pace))) + calc(.85s*var(--pace))) both}
-.kmlot{display:flex;flex-direction:column;align-items:center;min-width:5.5rem;padding:4px 10px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:#fffaf0;animation:kmPop calc(.4s*var(--pace)) var(--km-ease) calc(var(--kd,calc(0s*var(--pace))) + calc(1.45s*var(--pace))) both}
+.kmlot{display:flex;flex-direction:column;align-items:center;min-width:5.5rem;padding:4px 10px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0);animation:kmPop calc(.4s*var(--pace)) var(--km-ease) calc(var(--kd,calc(0s*var(--pace))) + calc(1.45s*var(--pace))) both}
 .kmlot b{font-family:var(--display);font-size:1.15rem;color:var(--gold)}.kmlot small{font-size:.68rem;color:var(--dim)}.kmlot.g b{color:var(--good)}.kmlot.r b{color:var(--bad)}
 .kmlotsec{--kd:0s}.dawn .kmlotsec{--kd:calc(1.3s*var(--pace))}.dawn.km-nocal .kmlotsec{--kd:0s}.kmlotsec .krows,.kmlotsec .kfacts{animation:kmFade calc(.35s*var(--pace)) ease calc(var(--kd,calc(0s*var(--pace))) + calc(1.6s*var(--pace))) both}
 @keyframes kmShake{0%,100%{transform:rotate(0)}10%{transform:rotate(-9deg)}22%{transform:rotate(8deg)}34%{transform:rotate(-8deg)}46%{transform:rotate(7deg)}58%{transform:rotate(-6deg)}70%{transform:rotate(5deg)}82%{transform:rotate(-3deg)}}
@@ -340,7 +376,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmseal{position:absolute;right:6px;top:-18px;width:78px;height:auto;z-index:3;pointer-events:none;transform:rotate(-12deg);mix-blend-mode:multiply;animation:kmStamp calc(.5s*var(--pace)) cubic-bezier(.3,1.4,.5,1) calc(.1s*var(--pace)) both}
 .km-thump{animation:kmThump calc(.35s*var(--pace)) ease calc(.45s*var(--pace)) both!important}
 .kmfls{position:fixed;z-index:9050;pointer-events:none;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;width:max-content}
-.kmfl{position:relative;font-weight:800;font-size:1rem;white-space:nowrap;background:#fffaf0;border:1.5px solid currentColor;border-radius:12px;padding:1px 9px;box-shadow:0 4px 12px #5a3a2050;animation:kmFloat calc(1.5s*var(--pace)) var(--km-out) both}
+.kmfl{position:relative;font-weight:800;font-size:1rem;white-space:nowrap;background:var(--k-card,#fffaf0);border:1.5px solid currentColor;border-radius:12px;padding:1px 9px;box-shadow:0 4px 12px #5a3a2050;animation:kmFloat calc(1.5s*var(--pace)) var(--km-out) both}
 .kmfl.g{color:var(--good)}.kmfl.r{color:var(--bad)}
 .kmbar{display:block;height:4px;margin:2px 0 3px;border-radius:2px;background:#e6d3ac;overflow:hidden;max-width:220px}.kmbar b{display:block;height:100%;border-radius:2px;transition:width .9s var(--km-out) .35s}
 .kmbar.up b{background:var(--good)}.kmbar.down b{background:var(--bad)}
@@ -360,7 +396,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmfr-old{animation:kmFadeOut calc(.5s*var(--pace)) ease calc(1.55s*var(--pace)) forwards}
 /* §66.1 rank up: the light gold glow is PAINTED (KIT §68 glowburst + glow-gold light, see kitEdict); no CSS sweep */
 .kmchip-row{display:flex;align-items:center;gap:8px}.kmarrow{color:#f6e3b4;font-weight:700}
-.kmchip{font-size:.8rem;font-weight:700;padding:3px 10px;border-radius:12px;border:1px solid var(--line);background:#fffaf0;color:var(--dim)}
+.kmchip{font-size:.8rem;font-weight:700;padding:3px 10px;border-radius:12px;border:1px solid var(--line);background:var(--k-card,#fffaf0);color:var(--dim)}
 .kmchip-new{color:#3a1f10;border-color:var(--rc);background:linear-gradient(#fffaf0,color-mix(in srgb,var(--rc) 35%,#fffaf0));box-shadow:0 0 0 3px color-mix(in srgb,var(--rc) 35%,transparent);animation:kmPop calc(.45s*var(--pace)) var(--km-ease) calc(1.75s*var(--pace)) both}
 @keyframes kmScC{0%{opacity:0;transform:translate(-50%,-30%) scale(.7)}40%{opacity:1;transform:translate(-50%,-50%) scale(1)}70%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.04)}}
 @keyframes kmScO{from{clip-path:inset(0 50% 0 50%)}to{clip-path:inset(0 0 0 0)}}
@@ -451,6 +487,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmspot{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:6;pointer-events:none;width:max-content;max-width:92vw}
 .kmshelf{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;min-height:0;max-width:min(92vw,520px)}
 .km-open .kmshelf{min-height:56px}
+.kmsh-more{align-self:center;min-width:44px;text-align:center;font:700 15px/1 var(--kit-font,inherit);color:var(--kit-mut,#8a6a40);padding:10px 8px;border:1px dashed currentColor;border-radius:999px}
 .kmsh{display:inline-block;animation:kmPop calc(.32s*var(--pace)) var(--km-ease) both}.km-fast .kmsh{animation-delay:calc(var(--i) * 40ms)}
 .kmbox{transition:width .3s ease,opacity .3s}.km-done .kmbox{width:min(30vw,150px);opacity:.6}
 .km-done .kmlist{max-height:calc(100dvh - 120px);overflow:auto}
