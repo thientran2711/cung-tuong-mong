@@ -1,4 +1,6 @@
-"""G28 WINTER FABRIC (owner ~19:20Z / ~19:22Z / ~19:24Z 20/11, answer A) — ONE copy of the winter fabric swaps, shared by
+"""WINTER (G25 + G26 + G28, owner-approved ladder ~16:50Z / "đưa vào cái prompt chính vào cái máy duyệt prompt" 20/11): ONE copy of the winter words,
+used by the MAIN builder (build_all.py --season dong) and check_store.py (season-aware APPROVED / MASTER / STORE checks).
+G28 WINTER FABRIC (owner ~19:20Z / ~19:22Z / ~19:24Z 20/11, answer A) — ONE copy of the winter fabric swaps, shared by
 dev/art/winter1/make_winter.py (applies them) and dev/art/check_store.py (winter scope: reverses them before the normal gate).
 t1-t6 only: every see-through wording -> soft, light, flowing OPAQUE silk with the same drape (thướt tha); NEVER thick/padded/quilted/
 brocade/heavy words ("vải dày cui lên nhìn ghê lắm"). t7/t8 keep their brocade (owner: "Hqp và hh không đổi vải, vì là gấm rồi").
@@ -51,3 +53,48 @@ def unwinter(text):
         c = text.count(w); text = text.replace(w, o); n += c
     text, k = PHI_WINTER_RX.subn(lambda m: PHI_ORIG.format(sec=m.group("sec"), main=m.group("main")), text)
     return text, n + k
+
+
+# G26 FUR LADDER (owner approved 20/11 ~16:50Z): ONE sentence before ' Pose:'; plain ivory for all, width by rank group.
+FUR_END = (", visibly warm and cosy, yet lying smooth and close, never puffy or bulky; the same plain ivory at every rank, "
+           "no coloured fur, never covering her face or neck, the neckline keeps its shape.")
+FUR = {
+ 1: "WINTER: a WIDE band of soft plain ivory-white fur trim, about a hand's width, along her collar, the front edges and hem of her outer garment, and her cuffs" + FUR_END,
+ 2: "WINTER: a VERY WIDE, luxurious band of thick soft plain ivory-white fur trim, wider than at the lower ranks, about two and a half hands wide, "
+    "along her collar, the front edges and hem of her outer garment, and her cuffs, rich, warm and cosy, yet lying smooth and close, never puffy or bulky; "
+    "the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape.",
+ 3: "WINTER: the WIDEST, THICKEST and most luxurious band of deep, dense, plush soft plain ivory-white fur trim, far wider and fuller than at any lower rank, "
+    "about three and a half hands wide and visibly thick and lush, along her collar, the front edges and hem of her outer garment, and her cuffs, "
+    "rich, warm and sumptuous, softly rounded and full, yet neat and elegant; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape."}
+def fur_level(rank): return 1 if rank <= 3 else 2 if rank <= 6 else 3
+def fur(rank): return FUR[fur_level(rank)]
+def is_winter(text): return bool(WINTER_MARK.search(text))
+def fabric_form(words):
+    """G28 swaps only (no assertion): approved words as they must appear in a winter t1-t6 prompt."""
+    for o, w in FABRIC: words = words.replace(o, w)
+    return words
+def master_form(sentence, winter):
+    """master sentence as it must appear (winter: the G28 opaque form of M06)."""
+    if not winter: return sentence
+    for o, w in FABRIC: sentence = sentence.replace(o, w)
+    return sentence
+def outfit(text):
+    i = text.index("Outfit ("); return text[i:text.index(". ", i) + 1]
+ANGLE_RX = re.compile(r"ANGLE: .*?(?= GRACE)")
+LIMIT = 10000
+
+def season(text, rank, a36_text=None, season="dong"):
+    """MAIN builder season switch. text = build() output (a18/a26 …) for an int rank 1-8; a36_text = the same person/rank built at a36
+    (needed for t1-t3: G25 old crossed collar = the builder's own a36 Outfit sentence). -> (text, notes)."""
+    assert season == "dong", "only đông (winter) is defined"
+    notes = []
+    if rank <= 3:
+        assert a36_text, "G25 t1-t3 needs the a36 build"; text = text.replace(outfit(text), outfit(a36_text), 1); notes.append("G25 crossed collar")
+    if rank <= 6:   # G28 t1-t6 only ("Hqp và hh không đổi vải, vì là gấm rồi")
+        text, done = apply(text); notes += ["G28 " + d for d in done]
+    assert text.count(" Pose:") == 1
+    text = text.replace(" Pose:", " " + fur(rank) + " Pose:", 1); notes.append(f"G26 Lông {fur_level(rank)}")
+    if len(text) > LIMIT:   # owner ~15:39Z: OK to cut one side sentence (the ANGLE sentence) when the prompt is too long
+        m = ANGLE_RX.search(text)
+        if m: text = text.replace(m.group(0) + " ", "", 1); notes.append("ANGLE dropped (length)")
+    return text, notes

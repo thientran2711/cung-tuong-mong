@@ -1,0 +1,178 @@
+person	rank	chars	status
+c06	t4	10117	OVER
+c06	t6	9729	fits only without ANGLE
+c06	t8	9843	fits only without ANGLE
+m03	t4	9748	fits only without ANGLE
+m04	t4	9746	fits only without ANGLE
+m05	t4	9663	fits only without ANGLE
+m06	t4	9675	fits only without ANGLE
+m07	t4	9663	fits only without ANGLE
+m08	t4	9661	fits only without ANGLE
+m10	t4	9670	fits only without ANGLE
+m12	t4	9803	fits only without ANGLE
+m15	t4	9633	fits only without ANGLE
+m16	t4	9647	fits only without ANGLE
+m18	t4	9651	fits only without ANGLE
+m21	t4	9726	fits only without ANGLE
+m23	t4	9771	fits only without ANGLE
+m25	t4	9644	fits only without ANGLE
+m28	t4	9627	fits only without ANGLE
+m30	t4	9655	fits only without ANGLE
+m31	t4	9694	fits only without ANGLE
+m35	t4	9650	fits only without ANGLE
+m39	t4	9649	fits only without ANGLE
+m43	t4	9610	fits only without ANGLE
+m51	t4	9669	fits only without ANGLE
+s62	t4	9842	fits only without ANGLE
+s64	t4	9930	fits only without ANGLE
+s65	t4	9984	fits only without ANGLE
+s07	t4	10231	OVER
+s07	t6	9795	fits only without ANGLE
+s07	t8	9780	fits only without ANGLE
+s08	t4	10221	OVER
+s08	t6	9810	fits only without ANGLE
+s08	t8	9842	fits only without ANGLE
+s09	t4	10261	OVER
+s09	t6	9807	fits only without ANGLE
+s09	t8	9802	fits only without ANGLE
+s10	t4	10079	OVER
+s11	t4	10133	OVER
+s11	t6	9665	fits only without ANGLE
+s12	t4	10102	OVER
+s12	t6	9672	fits only without ANGLE
+s12	t8	9639	fits only without ANGLE
+s13	t4	10091	OVER
+s13	t6	9662	fits only without ANGLE
+s14	t4	9989	fits only without ANGLE
+s14	t8	9656	fits only without ANGLE
+s15	t4	10035	OVER
+s16	t4	10194	OVER
+s16	t6	9757	fits only without ANGLE
+s16	t8	9663	fits only without ANGLE
+s17	t4	10102	OVER
+s17	t6	9651	fits only without ANGLE
+s17	t8	9685	fits only without ANGLE
+s18	t4	10079	OVER
+s18	t8	9673	fits only without ANGLE
+s19	t4	10037	OVER
+s19	t6	9679	fits only without ANGLE
+s20	t4	10051	OVER
+s20	t6	9641	fits only without ANGLE
+s21	t4	10128	OVER
+s21	t6	9691	fits only without ANGLE
+s22	t4	10064	OVER
+s22	t6	9673	fits only without ANGLE
+s23	t4	10084	OVER
+s23	t8	9789	fits only without ANGLE
+s24	t4	10087	OVER
+s24	t8	9618	fits only without ANGLE
+s25	t4	10014	OVER
+s25	t8	9699	fits only without ANGLE
+s26	t4	9978	fits only without ANGLE
+s26	t6	9657	fits only without ANGLE
+s26	t8	9594	fits only without ANGLE
+s27	t4	10043	OVER
+s28	t4	10022	OVER
+s29	t4	10018	OVER
+s30	t4	10077	OVER
+s31	t4	10084	OVER
+s31	t6	9668	fits only without ANGLE
+s32	t4	9971	fits only without ANGLE
+s33	t4	10348	OVER
+s33	t6	9976	fits only without ANGLE
+s33	t8	9933	fits only without ANGLE
+s34	t4	10100	OVER
+s34	t6	9754	fits only without ANGLE
+s34	t8	9676	fits only without ANGLE
+s35	t4	10404	OVER
+s35	t6	9989	fits only without ANGLE
+s35	t7	9717	fits only without ANGLE
+s35	t8	10008	OVER
+s36	t3	9699	fits only without ANGLE
+s36	t4	10378	OVER
+s36	t6	9914	fits only without ANGLE
+s36	t7	9919	fits only without ANGLE
+s36	t8	9988	fits only without ANGLE
+s37	t4	10146	OVER
+s37	t6	9782	fits only without ANGLE
+s37	t8	9853	fits only without ANGLE
+s38	t3	9633	fits only without ANGLE
+s38	t4	10438	OVER
+s38	t6	9954	fits only without ANGLE
+s38	t8	9947	fits only without ANGLE
+s39	t4	10306	OVER
+s39	t6	9928	fits only without ANGLE
+s39	t8	9829	fits only without ANGLE
+s40	t4	10215	OVER
+s40	t6	9878	fits only without ANGLE
+s40	t7	9661	fits only without ANGLE
+s40	t8	9780	fits only without ANGLE
+s41	t4	10279	OVER
+s41	t6	9803	fits only without ANGLE
+s41	t7	9662	fits only without ANGLE
+s41	t8	9918	fits only without ANGLE
+s42	t4	10284	OVER
+s42	t6	9854	fits only without ANGLE
+s42	t7	9854	fits only without ANGLE
+s42	t8	9877	fits only without ANGLE
+s43	t3	9739	fits only without ANGLE
+s43	t4	10381	OVER
+s43	t6	9984	fits only without ANGLE
+s43	t8	10014	OVER
+s44	t3	9688	fits only without ANGLE
+s44	t4	10414	OVER
+s44	t6	9997	fits only without ANGLE
+s44	t7	9781	fits only without ANGLE
+s44	t8	9997	fits only without ANGLE
+s45	t3	9668	fits only without ANGLE
+s45	t4	10450	OVER
+s45	t6	10001	OVER
+s45	t7	9782	fits only without ANGLE
+s45	t8	9975	fits only without ANGLE
+s46	t4	10055	OVER
+s46	t6	9650	fits only without ANGLE
+s46	t8	9673	fits only without ANGLE
+s47	t4	9987	fits only without ANGLE
+s48	t4	9992	fits only without ANGLE
+s48	t6	9653	fits only without ANGLE
+s49	t4	10064	OVER
+s49	t8	9658	fits only without ANGLE
+s50	t4	10102	OVER
+s50	t6	9651	fits only without ANGLE
+s50	t8	9674	fits only without ANGLE
+s51	t4	10065	OVER
+s52	t4	10005	OVER
+s52	t8	9639	fits only without ANGLE
+s53	t4	10100	OVER
+s53	t6	9661	fits only without ANGLE
+s54	t4	10075	OVER
+s54	t6	9693	fits only without ANGLE
+s54	t8	9768	fits only without ANGLE
+s55	t4	10055	OVER
+s55	t6	9651	fits only without ANGLE
+s56	t4	10345	OVER
+s56	t6	9924	fits only without ANGLE
+s56	t8	9916	fits only without ANGLE
+s57	t4	10446	OVER
+s57	t6	10010	OVER
+s57	t7	9748	fits only without ANGLE
+s57	t8	10073	OVER
+s58	t3	9799	fits only without ANGLE
+s58	t4	10404	OVER
+s58	t6	10003	OVER
+s58	t7	9929	fits only without ANGLE
+s58	t8	10014	OVER
+s59	t3	9676	fits only without ANGLE
+s59	t4	10500	OVER
+s59	t6	10015	OVER
+s59	t7	9916	fits only without ANGLE
+s59	t8	10157	OVER
+s60	t4	10421	OVER
+s60	t6	9932	fits only without ANGLE
+s60	t8	9950	fits only without ANGLE
+s61	t3	9718	fits only without ANGLE
+s61	t4	10364	OVER
+s61	t6	9874	fits only without ANGLE
+s61	t7	9708	fits only without ANGLE
+s61	t8	9978	fits only without ANGLE
+s63	t4	9912	fits only without ANGLE

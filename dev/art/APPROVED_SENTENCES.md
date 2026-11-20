@@ -14,6 +14,66 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 
 ## Sentences (S)
 
+### W01 · WINTER FUR Lông 1 t1-t3 (G26)
+- text: `WINTER: a WIDE band of soft plain ivory-white fur trim, about a hand's width, along her collar, the front edges and hem of her outer garment, and her cuffs, visibly warm and cosy, yet lying smooth and close, never puffy or bulky; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape.`
+- scope: tp1-3 pr1-3
+- confirm: -
+- ages: all
+- store: no
+- luot: owner 20/11 ~16:50Z (fur 1/2/3 approved) + "đưa vào cái prompt chính vào cái máy duyệt prompt"
+- source: dev/art/winter_g28.py FUR[1]
+- proof: dev/art/winter1/g28/s62_t1_dong.txt
+- picture: VX7Nn0OMMU (width sample)
+- vn: Đông: viền lông ngà rộng ~1 bàn tay (bậc 1–3).
+
+### W02 · WINTER FUR Lông 2 t4-t6 (G26)
+- text: `WINTER: a VERY WIDE, luxurious band of thick soft plain ivory-white fur trim, wider than at the lower ranks, about two and a half hands wide, along her collar, the front edges and hem of her outer garment, and her cuffs, rich, warm and cosy, yet lying smooth and close, never puffy or bulky; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape.`
+- scope: tp4-6 pr4-6
+- confirm: -
+- ages: all
+- store: no
+- luot: owner 20/11 ~16:50Z
+- source: dev/art/winter_g28.py FUR[2]
+- proof: dev/art/winter1/g28/s62_t5_dong.txt
+- picture: eIPZ5GkdqL (width sample)
+- vn: Đông: viền lông ngà rất rộng ~2,5 bàn tay (bậc 4–6).
+
+### W03 · WINTER FUR Lông 3 t7-t8 (G26)
+- text: `WINTER: the WIDEST, THICKEST and most luxurious band of deep, dense, plush soft plain ivory-white fur trim, far wider and fuller than at any lower rank, about three and a half hands wide and visibly thick and lush, along her collar, the front edges and hem of her outer garment, and her cuffs, rich, warm and sumptuous, softly rounded and full, yet neat and elegant; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape.`
+- scope: tp7-8 pr7-8
+- confirm: -
+- ages: all
+- store: no
+- luot: owner 20/11 ~16:50Z ("lông ba mới cho bậc hoàng hậu và hoàng quý phi")
+- source: dev/art/winter_g28.py FUR[3] = dev/art/seasons4/s62_t8_dong_LONG3moi.txt
+- proof: dev/art/winter1/g28/s62_t8_dong.txt
+- picture: owner ChatGPT run
+- vn: Đông: viền lông ngà rộng nhất, dày ~3,5 bàn tay (HQP, HH).
+
+### W04 · WINTER STORE FABRIC t1-t3 (G28, twin of S06)
+- text: `Light, soft, flowing OPAQUE silk: the long sleeves, skirt and sash are supple and airy, drifting softly as in a gentle breeze, with soft natural folds, never see-through, never stiff, flat or board-like.`
+- scope: tp1-3 pr1-3
+- confirm: -
+- ages: all
+- store: no
+- luot: owner 20/11 ~19:24Z answer A ("vải không xuyên thấu")
+- source: dev/art/winter_g28.py FABRIC[1]
+- proof: dev/art/winter1/g28/s62_t1_dong.txt
+- picture: 
+- vn: Đông: lụa mềm bay nhưng KHÔNG xuyên thấu (thay S06).
+
+### W05 · WINTER PHI BẠCH t1-t6 (G28, twin of S12)
+- text: `PHI BẠCH (winter): the shawl draped behind her back and over her arms is a soft, light, flowing OPAQUE silk shawl in {sec} (her secondary colour, clearly different from her main robe colour {main}), never see-through, never stiff or bulky; it keeps its soft graceful drape.`
+- scope: tp1-6 pr1-6
+- confirm: -
+- ages: all
+- store: no
+- luot: owner 20/11 ~19:24Z answer A
+- source: dev/art/winter_g28.py PHI_WINTER
+- proof: dev/art/winter1/g28/s62_t1_dong.txt
+- picture: 
+- vn: Đông: khăn choàng lụa mềm KHÔNG xuyên thấu (thay S12).
+
 ### S01 · TWO-COLOUR RULE (hai màu)
 - text: `TWO-COLOUR RULE: the whole outfit uses EXACTLY TWO colours that clearly interact: the MAIN colour {main} and the SECONDARY colour {secondary}, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, never a third colour.`
 - scope: tp1-6 pr1-6 mama
@@ -248,11 +308,11 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - confirm: -
 - ages: all
 - store: yes
-- luot: 18/11 23:25Z (D9, D10)
+- luot: 18/11 23:25Z (D9, D10); feet words changed by G23 (owner 20/11 verbatim: "Sửa cái prompt, cái chân lại cho nó phù hợp đi."): was "floor-length robe with slippers visible"
 - source: dev/art/owner-copy/pr_cl_t2_V2.txt = store
 - proof: dev/art/owner-copy/pr_cl_t2_V2.txt
 - picture: Cao Ly V2 t2 (Lượt 301-303) · gen Lw8y0mCswO · cut 79f3BGcJAL (ledger :288) · NO file on CDN/repo (sent in chat only) — ART_RULES B15 lists xSByOSyjfW/yiuGA83PW9/cpS8oJg0eP, but the ledger (:509/510/518) says those are the later Cao Ly t4/t5/t6 store pictures · the same sentence is in the store prompts of the Lượt 395 store sheets, approved Lượt 397: https://ctm-img.victoria-tntt.workers.dev/img/_review/morning-1119/sheet_congchua.jpg
-- vn: Da sáng mịn; trán trơn, không hoa điền; mắt mở; áo dài chạm sàn thấy giày; không đuôi áo, không chén; không che mặt.
+- vn: Da sáng mịn; trán trơn, không hoa điền; mắt mở; áo dài chạm sàn, chỉ ló mũi giày dưới gấu áo; không đuôi áo, không chén; không che mặt.
 
 ### S20 · HAIR loose t1-t3
 - text: `HAIR (rank law): her hair stays LOOSE and flowing like her young-lady picture: at most the top half gathered up, most of her hair hanging loose down her back.`

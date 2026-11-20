@@ -151,14 +151,17 @@ def _overlap(s, text):
     return best
 
 
-def check(text, high=False, female=True):
+def check(text, high=False, female=True, winter=False):
+    """winter=True (SEASON đông, dev/art/winter_g28.py): each master sentence is checked in its G28 winter form (M06 = opaque silk, never see-through)."""
+    import winter_g28
     t = _norm(text); out = ear_fails(text) if female else []
-    m06 = sentences()[ids().index(M06_ID)]; nb = t.count(BROCADE)
+    m06 = winter_g28.master_form(sentences()[ids().index(M06_ID)], winter); nb = t.count(BROCADE)
     if high:   # B12 (Lượt 781): t6+ / royal = BROCADE exactly once, never M06
         if _norm(m06) in t: out.append((M06_ID, "HIGH RANK", "B12: master M06 (thin silk+gauze, thướt tha) in a t6+ / Thái hậu / Hoàng thượng / Nữ đế prompt"))
         if nb != 1: out.append(("B12", "BROCADE MISSING" if nb == 0 else "NOT ONCE", f"B12: t6+ fabric sentence '{BROCADE}' {nb} times (must be 1)"))
     elif nb: out.append(("B12", "LOW RANK", f"B12: brocade fabric sentence in a t1-t5 / face / maid prompt (must be M06 thướt tha only)"))
     for k, s in _master(high):
+        s = winter_g28.master_form(s, winter)
         n = t.count(_norm(s))
         if n == 1: continue
         if n > 1: out.append((k, "NOT ONCE", f"master sentence {n} times: {s[:70]}…")); continue

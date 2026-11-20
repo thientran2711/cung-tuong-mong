@@ -510,6 +510,15 @@ def _t3_slot(person,rank,S):
     main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
     return _cs_mod.g15_t3(S,main,sec,LAST_G.get("AGE","a18"))   # G21: crossed collar at a36/a51/a65
 class NotDrawn(Exception): pass
+# SEASON (owner 20/11 ~16:50Z: "áp dụng cái prompt mới … Đưa vào trong cái prompt chính vào cái máy duyệt prompt luôn đi"): đông = G25 (t1-t3 old crossed
+# collar) + G28 (t1-t6 opaque silk) + G26 (fur ladder Lông 1/2/3); words live in dev/art/winter_g28.py (one copy, shared with check_store.py).
+def build_season(person,rank,age="a18",season=None):
+    if not season: return build(person,rank,age)
+    assert isinstance(rank,int), "season: ranks 1-8 only"
+    sys.path.insert(0,ART); import winter_g28
+    a36=build(person,rank,"a36")[1] if rank<=3 else None
+    S0,S,add=build(person,rank,age); S,notes=winter_g28.season(S,rank,a36,season); return S0,S,add+notes
+
 def _kc_drawn(person):   # B8 (BW3): same table + rule as build.py kc_drawn (dev/art/KC_REFS.json m09_ok yes + real face words)
     import json as _j
     p=_j.load(open(os.path.join(ART,"KC_REFS.json"),encoding="utf-8"))["people"].get(person)
@@ -699,16 +708,17 @@ if __name__=="__main__":
         for p,t in (("m19",1),("m19",3),("c06",7),("p01",2),("p03",8)):
             print(f"\n===== {p} t{t} {age} =====\n"+build(p,t,age)[1])
         sys.exit(0)
-    pos=[x for x in a if not x.startswith("--") and x!=age]
+    pos=[x for x in a if not x.startswith("--") and x!=age and not ("--season" in a and x==a[a.index("--season")+1])]
     if len(pos)==3 and "--age" not in a and re.fullmatch(r"a(18|26|36|51|65)",pos[2]): age=pos.pop()   # ROOT-51: positional age (build_all.py m13 3 a26) used to build a18 silently
-    if len(pos)!=2: print("usage: build_all.py <person> <rank 1-8|nude|thaihau> [aNN | --age aNN]",file=sys.stderr); sys.exit(2)
+    if len(pos)!=2: print("usage: build_all.py <person> <rank 1-8|nude|thaihau> [aNN | --age aNN] [--season dong]",file=sys.stderr); sys.exit(2)
     if not _kc_drawn(ALIAS.get(pos[0],pos[0])): print(f"REFUSED {pos[0]}: NOT drawn (ART_RULES B8, dev/art/KC_REFS.json)",file=sys.stderr); sys.exit(2)
     if pos[1]=="thaihau":   # Lượt 618 I4: Thái hậu = HH t8 + 3 Thái hậu slots (see thaihau())
         out=thaihau(pos[0],age)[1]; ok,msg=gate_th(pos[0],age,out)
         if not ok: print(msg,file=sys.stderr); sys.exit(1)
         print(msg,file=sys.stderr)
         print(out,end=""); sys.exit(0)
-    out=build(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age)[1]
+    season=a[a.index("--season")+1] if "--season" in a else None   # SEASON: --season dong (winter, G25/G26/G28)
+    out=(build_season(pos[0],int(pos[1]),age,season) if season else build(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age))[1]
     ok,msg=gate(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age,out)
     if not ok: print(msg,file=sys.stderr); sys.exit(1)
     print(out,end="")

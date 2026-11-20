@@ -25,7 +25,17 @@ sys.path.insert(0, ART); import master_common   # B25 ONE MASTER COMMON BLOCK (d
 NEG=re.compile(r"\b(no|not|never|without|nothing|none|nor)\b", re.I)
 
 # ---------------- APPROVED / BANNED tables (source of truth; APPROVED_SENTENCES.md is generated from these) ----------------
-APPROVED = [{'id': 'S01',
+APPROVED = [{'id': 'W01', 'title': 'WINTER FUR Lông 1 t1-t3 (G26)', 'text': "WINTER: a WIDE band of soft plain ivory-white fur trim, about a hand's width, along her collar, the front edges and hem of her outer garment, and her cuffs, visibly warm and cosy, yet lying smooth and close, never puffy or bulky; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape.", 'scope': 'tp1-3 pr1-3', 'confirm': '', 'ages': '', 'store': False, 'season': 'dong',
+  'luot': 'owner 20/11 ~16:50Z (fur 1/2/3 approved) + "đưa vào cái prompt chính vào cái máy duyệt prompt"', 'source': 'dev/art/winter_g28.py FUR[1]', 'proof': 'dev/art/winter1/g28/s62_t1_dong.txt', 'picture': 'VX7Nn0OMMU (width sample)', 'vn': 'Đông: viền lông ngà rộng ~1 bàn tay (bậc 1–3).'},
+ {'id': 'W02', 'title': 'WINTER FUR Lông 2 t4-t6 (G26)', 'text': 'WINTER: a VERY WIDE, luxurious band of thick soft plain ivory-white fur trim, wider than at the lower ranks, about two and a half hands wide, along her collar, the front edges and hem of her outer garment, and her cuffs, rich, warm and cosy, yet lying smooth and close, never puffy or bulky; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape.', 'scope': 'tp4-6 pr4-6', 'confirm': '', 'ages': '', 'store': False, 'season': 'dong',
+  'luot': 'owner 20/11 ~16:50Z', 'source': 'dev/art/winter_g28.py FUR[2]', 'proof': 'dev/art/winter1/g28/s62_t5_dong.txt', 'picture': 'eIPZ5GkdqL (width sample)', 'vn': 'Đông: viền lông ngà rất rộng ~2,5 bàn tay (bậc 4–6).'},
+ {'id': 'W03', 'title': 'WINTER FUR Lông 3 t7-t8 (G26)', 'text': 'WINTER: the WIDEST, THICKEST and most luxurious band of deep, dense, plush soft plain ivory-white fur trim, far wider and fuller than at any lower rank, about three and a half hands wide and visibly thick and lush, along her collar, the front edges and hem of her outer garment, and her cuffs, rich, warm and sumptuous, softly rounded and full, yet neat and elegant; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape.', 'scope': 'tp7-8 pr7-8', 'confirm': '', 'ages': '', 'store': False, 'season': 'dong',
+  'luot': 'owner 20/11 ~16:50Z ("lông ba mới cho bậc hoàng hậu và hoàng quý phi")', 'source': 'dev/art/winter_g28.py FUR[3] = dev/art/seasons4/s62_t8_dong_LONG3moi.txt', 'proof': 'dev/art/winter1/g28/s62_t8_dong.txt', 'picture': 'owner ChatGPT run', 'vn': 'Đông: viền lông ngà rộng nhất, dày ~3,5 bàn tay (HQP, HH).'},
+ {'id': 'W04', 'title': 'WINTER STORE FABRIC t1-t3 (G28, twin of S06)', 'text': 'Light, soft, flowing OPAQUE silk: the long sleeves, skirt and sash are supple and airy, drifting softly as in a gentle breeze, with soft natural folds, never see-through, never stiff, flat or board-like.', 'scope': 'tp1-3 pr1-3', 'confirm': '', 'ages': '', 'store': False, 'season': 'dong',
+  'luot': 'owner 20/11 ~19:24Z answer A ("vải không xuyên thấu")', 'source': 'dev/art/winter_g28.py FABRIC[1]', 'proof': 'dev/art/winter1/g28/s62_t1_dong.txt', 'picture': '', 'vn': 'Đông: lụa mềm bay nhưng KHÔNG xuyên thấu (thay S06).'},
+ {'id': 'W05', 'title': 'WINTER PHI BẠCH t1-t6 (G28, twin of S12)', 'text': 'PHI BẠCH (winter): the shawl draped behind her back and over her arms is a soft, light, flowing OPAQUE silk shawl in {sec} (her secondary colour, clearly different from her main robe colour {main}), never see-through, never stiff or bulky; it keeps its soft graceful drape.', 'scope': 'tp1-6 pr1-6', 'confirm': '', 'ages': '', 'store': False, 'season': 'dong',
+  'luot': 'owner 20/11 ~19:24Z answer A', 'source': 'dev/art/winter_g28.py PHI_WINTER', 'proof': 'dev/art/winter1/g28/s62_t1_dong.txt', 'picture': '', 'vn': 'Đông: khăn choàng lụa mềm KHÔNG xuyên thấu (thay S12).'},
+ {'id': 'S01',
   'title': 'TWO-COLOUR RULE (hai màu)',
   'text': 'TWO-COLOUR RULE: the whole outfit uses EXACTLY TWO colours that clearly interact: the MAIN colour {main} and the SECONDARY colour {secondary}, the secondary clearly visible in large areas '
           '(inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, never a third colour.',
@@ -107,7 +117,8 @@ APPROVED = [{'id': 'S01',
   'proof': 'dev/art/approved/proof/c06_t1_a18.txt',
   'picture': "Lượt 395 store sheets, approved Lượt 397 'vẽ rất là đẹp' · https://ctm-img.victoria-tntt.workers.dev/img/_review/morning-1119/sheet_congchua.jpg",
   'vn': 'Câu tả vải của KHO (luật số 1): lụa nhẹ, mềm, mỏng, bay; tay áo, váy, đai mềm như gió thổi; không cứng.',
-  'store': True},
+  'store': True,
+  'not_season': 'dong'},
  {'id': 'S07',
   'title': 'FABRIC prompt B t7/t8/Nữ đế',
   'text': 'FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.',
@@ -192,7 +203,8 @@ APPROVED = [{'id': 'S01',
   'proof': 'dev/art/approved/proof/bw4_f12_m13_t2_a26.txt',
   'picture': 'Phù Tang t4 curved test (Lượt 412) · gen 5jDiW44Kxe · cut EbYOArVuuO · https://ctm-img.victoria-tntt.workers.dev/img/_review/princess/phutang_t4_curved_vs_old.jpg (right half)',
   'vn': 'Khăn phi bạch choàng sau lưng, qua tay, màu KHÁC hẳn màu áo (màu phụ), không lẫn vào áo; chỉ bậc 1-6.',
-  'store': False},
+  'store': False,
+  'not_season': 'dong'},
  {'id': 'S13',
   'title': 'CAPELET CUT t4 Tần (curved, opens gradually)',
   'text': 'CAPELET CUT (flowing): the capelet stays the same short round shoulder capelet, but its lower edge and the collar lines are soft CURVES, never flat horizontal edges; the lower edge is '
@@ -733,10 +745,17 @@ def store_check(pf, prompt, args):
     """STORE GATE (owner Lượt 371/373/375), unchanged logic: -> list of (best, sentence) missing/rewritten."""
     B=os.path.join(ART,'t8-prompt-B')
     store=subprocess.run(['python3','build.py']+args,cwd=B,capture_output=True,text=True).stdout
+    import winter_g28   # SEASON đông (G25): t1-t3 winter wear the old crossed collar = the store's own a36 Outfit sentence
+    _w25=winter_g28.is_winter(prompt) and '--low' in args and int(args[args.index('--low')+1])<=3
+    if _w25 and 'Outfit (' in store:
+        _a=[x for i,x in enumerate(args) if not (x=='--age' or (i and args[i-1]=='--age'))]+['--age','a36']
+        _s36=subprocess.run(['python3','build.py']+_a,cwd=B,capture_output=True,text=True).stdout
+        store=store.replace(winter_g28.outfit(store),winter_g28.outfit(_s36),1)
     m=G15_T3_OLD.search(store)
     if m:   # G15: the t3 design words must be option B (main/secondary = any words, motif = the store's motif), never the old t3 design
-        _age=args[args.index('--age')+1] if '--age' in args else None
-        rx=re.escape(g15_t3_words(_age)).replace(re.escape('{main}'),'(.+?)').replace(re.escape('{sec}'),'(.+?)').replace(re.escape('{motif}'),re.escape(m.group(1)))
+        _age='a36' if _w25 else (args[args.index('--age')+1] if '--age' in args else None)   # SEASON đông: t3 winter = G15 option B with the a36 crossed collar (G21/G25)
+        _g15=g15_t3_words(_age); _g15=winter_g28.fabric_form(_g15) if winter_g28.is_winter(prompt) else _g15   # SEASON đông: G28 opaque shawl inside the t3 words
+        rx=re.escape(_g15).replace(re.escape('{main}'),'(.+?)').replace(re.escape('{sec}'),'(.+?)').replace(re.escape('{motif}'),re.escape(m.group(1)))
         store=store[:m.start()]+store[m.end():]
         if not re.search(rx,prompt): return [(0,'G15 Quý nhân t3 option-B outfit words missing (dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt)')]
     sp=lambda s:[x.strip() for x in re.split(r'(?<=[.;])\s+',s) if len(x.strip())>12]
@@ -979,7 +998,8 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
         for m in DEEP_COLOUR_RX.finditer(text):
             if negated(text, m.start(), m.end()): continue
             fails.append(("B20", "DEEP COLOUR", f"'deep/dark' adjective on a colour word (all seasons light and fresh, Lượt 769): …{text[max(0,m.start()-30):m.end()+20]}…")); break
-    for k, kind, d in master_common.check(text, high=master_common.high_scope(scope), female=not master_common.male_scope(scope)):   # + NOEAR (owner Lượt 1037): every woman / girl scope = bare-earlobes sentence once + no earring word; men / boys (--scope emperor|men) unchanged   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
+    import winter_g28; _winter = winter_g28.is_winter(text)   # SEASON đông: G26 fur sentence present -> winter twins (W*) replace S06/S12, M06 in its G28 form
+    for k, kind, d in master_common.check(text, high=master_common.high_scope(scope), female=not master_common.male_scope(scope), winter=_winter):   # + NOEAR (owner Lượt 1037): every woman / girl scope = bare-earlobes sentence once + no earring word; men / boys (--scope emperor|men) unchanged   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
         fails.append((k, "MASTER " + kind, d))
     for k, kind, d in master_common.check_elder(text, scope, age):   # C5 (owner Lượt 779/784): elder colours win over M05 at a51/a65, never in Nữ đế
         fails.append((k, kind, d))
@@ -990,7 +1010,9 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     for e in S:
         req = e["scope"] == "any" or (e["scope"] == "any-but-nude" and scope != "nude") or scope in parse_scope(e["scope"]); conf = scope in parse_scope(e.get("confirm", ""))   # 'any' = every prompt of every scope (D9)
         if not (req or conf): continue
-        if skip_store and e.get("store"): continue   # already enforced by the STORE part (same prompt, store args)
+        if e.get("season") and not _winter: continue   # SEASON: winter-only sentence (W01-W05)
+        if e.get("not_season") and _winter: continue   # SEASON: replaced in winter by its W twin
+        if skip_store and e.get("store") and not e.get("season"): continue   # already enforced by the STORE part (same prompt, store args)
         ages = (e.get("ages") or "all").split()
         if age and "all" not in ages and age not in ages: continue
         if e.get("strict_ages") and not age: continue   # D15 (S36): age-only sentence -> needs a known age
@@ -1168,9 +1190,6 @@ def main():
     if a[0]=="--registry-md":
         open(os.path.join(ART,"APPROVED_SENTENCES.md"),"w",encoding="utf-8").write(registry_md()); print("wrote dev/art/APPROVED_SENTENCES.md"); return 0
     pf=a[0]; prompt=sys.stdin.read() if pf=="-" else open(pf,encoding="utf-8").read()   # "-" = a builder's stdout piped in (face makers, MG1)
-    import winter_g28   # G28 WINTER scope (owner ~19:24Z, Foreman C #3): a prompt with the G26 fur sentence may carry M06/S06/S12 ONLY in their exact G28 opaque-silk forms
-    prompt,_wn=winter_g28.unwinter(prompt)
-    if _wn: print(f"WINTER scope (G26 fur present): {_wn} G28 opaque-silk sentence(s) checked as their approved originals")
     # BANNED REFS (owner Lượt 554/555): old khuê các set A (kc2k / kc2k-mass keys or their Magnific ids) may never be used again.
     refs=a[a.index("--refs")+1] if "--refs" in a else ""
     if "--refs" in a: i=a.index("--refs"); a=a[:i]+a[i+2:]
