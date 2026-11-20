@@ -62,6 +62,17 @@ t7 lost: BARE SKIN and both collarbones horizontal leaving mid-chest modest neck
 t7 added: an bare blush bright cư its khúc layer left long-spiral natural neckline opaque over pink quju
 t8 lost: BARE SKIN and both collarbones horizontal leaving mid-chest modest neck open skin the×2 to top upper×2 whole zhiju
 t8 added: an bare blush bright cư its khúc layer left longest-spiral natural neckline opaque over pink quju
+## Word diff (Counter, base vs new) — collar words only
+t4 lost: BOTH V×4 WIDE a×2 across and are as band broad but chest collarbones collars covered crossing edge×2 following fully×2 her×2 high horizontal×2 in inside lapels layered low meet modestly narrow near neck never×3 of×2 open or out×2 robes showing×2 sloping sweep the×4 tight to toward wide×3
+t4 added: AT COLLAR FROM HORIZONTAL LOW OUTER SHOULDERS STARTS THE×2 above along at×2 begin cleavage covers cross edged edges×2 flat framing from gold-embroidered it its layer neckline no×2 on opaque outer×2 plum points real sash×2 sheer shoulder top's two upper whole with
+t5 lost: BOTH V×4 WIDE and are as bands broad but collarbones collars covered crossing edge×2 following fully×2 her×2 high in×2 inside lapels layered low meet modestly narrow near neck never×2 of×2 open out×2 robes showing×2 sweep the×5 tight to toward wide×4
+t5 added: AT COLLAR FROM HORIZONTAL LOW OUTER SHOULDERS STARTS THE×2 above across along at×2 band begin chest×2 cleavage covers cross edged edges×3 flat framing from gold-embroidered it×2 its layer no×2 opaque outer×2 plum points real sash sheer shoulder straight top two upper whole with
+t6 lost: ALL ALSO Phi's V×7 WIDE a×2 are broad cloud collar×3 covered crossed-collar deep down edge×2 every fully her in×2 inner inside×2 is×2 lapels like lines meet near nested×3 of×2 only open×2 reach robe×2 robes sash shows so the×4 three to very whose wide×2
+t6 added: AT COLLAR FROM HORIZONTAL OUTER SHOULDERS START THE×2 above across at×3 band×2 begin chest×2 cleavage covers cross edged edges×2 edging flat framing golden it layer neck no×2 opaque points real royal sheer shoulder straight their top×2 upper whole with yellow
+t7 lost: ALSO Phi's V×6 WIDE all are collar covered crossed-collar deep down edge every fully her in inside is×2 lapels like lines meet near nested×2 of only open reach robe×2 sash shoulders shows so the×4 to×2 very whose wide
+t7 added: COLLAR FROM HORIZONTAL OUTER THE above across at×3 band begin chest×2 cleavage covers cross crossed edged edges flat framing it layer neck no×2 opaque pearl-edged pink points real royal sheer shoulder straight top upper whole with yellow
+t8 lost: ALSO Phi's V×6 WIDE are collar×3 covered crossed-collar deep down edge every fully her in inside is×2 lapels like lines meet near nested×2 of only open reach robe×2 sash shoulders shows so the×4 to×2 very whose wide
+t8 added: COLLAR FROM HORIZONTAL OUTER THE above across at×3 band begin chest×2 cleavage collars×2 covers cross crossed edged flat framing it layer neck no×2 opaque pearl-edged pink points real royal sheer shoulder straight top upper whole with yellow
 
 ## Open
 - Ready for a 1-sample gen when the owner says yes (A20/A21). Suggested first sample: t4 Tần (worst in the _open run).
