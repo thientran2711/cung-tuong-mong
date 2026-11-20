@@ -457,3 +457,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kit-signs-preplay KIT KEEPER (sonnet; ROOT-78 order 12:27Z) | review/kit-signs-preplay; reports/kit-signs-preplay.md | MAIN ROOT-78 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM daa4c717 | 20/11 |
 | coop-host-lag #2 (opus; successor of 6rvC3RLv @6fb5ca7a) | review/coop-host-lag | B | session_01N1tNP4bsWeYsVudLfWWFKf | RUNNING | 20/11 13:08Z |
 | GAP OR09 podium-wire (opus; ORDER MAIN ROOT-78 13:02Z; kitPodium + kcPhucPlay fin, BAL marks) | review/podium-wire | B | session_01N1tNP4BpQj3Z4jjSkAua3X | RUNNING | 20/11 13:19Z |
+| REVIEW kit-rows-b (sonnet small) of 6ce984a6 | review/kit-rows-b-rv; reports/rv-kit-rows-b.md | MAIN ROOT-78 | session_01Rc5AsMLiYk8Qo5FC3nWVM1 | PASS 92f61247 | 20/11 |
