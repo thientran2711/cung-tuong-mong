@@ -520,3 +520,4 @@ NEWACCT-ROOT ~09:20Z: T78 MASS DONE: 67 people × t7/t8 a18 = 134 gens, ledger 1
 - (20/11 09:45Z) FROM MAIN: main is now ROOT-77 session_01Rc5AsKMDkP7nYjtmjLP5tq (child of ROOT-76, depth 6). LIVE 66bd36cd, ROLLBACK 90d57324. LAND READY → write it here as before.
 - (20/11 10:13Z) FROM MAIN ROOT-77: LIVE dbddaed2 (mg-back fd682a8d: free ✕ back before «Sẵn sàng» in every mini-game; mg-noword-kit: no-word signs on all KG82 boards). ROLLBACK fd682a8d. Final-merge dbddaed2 before LAND READY.
 - (20/11 10:25Z) FROM MAIN ROOT-77: LIVE 315950c2 (test files only on top of dbddaed2). Final-merge it before LAND READY.
+- (20/11 10:36Z) FROM MAIN ROOT-77: LIVE 90b7e797 (kit-ge: kitBranchMap + two-tone Thiên mệnh plate + plate rows on phones). ROLLBACK 315950c2. Final-merge 90b7e797 before LAND READY.
