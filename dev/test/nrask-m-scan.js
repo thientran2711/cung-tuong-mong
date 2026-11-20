@@ -8,6 +8,11 @@ const bal=fs.readFileSync(B+'jbal2.js','utf8');const [h0,h1]=JSON.parse((bal.mat
 global.BAL={road:{first:5,last:11},arc:{tier:{win:1,mid:0,lose:-1}}};
 const jm=fs.readFileSync(B+'jnroadm.js','utf8');const s0=jm.indexOf('(function(){const MID');eval(jm.slice(s0,jm.indexOf('})();',s0)+5));
 const src=fs.readFileSync(B+'jnrask_m.js','utf8');eval(src);
+/* road-triggers r2 fix 3: the Emperor's roads (jnroade.js: the NRM template block + the NRASK block @nrask-emp … @nrask-emp-end) */
+const je=fs.readFileSync(B+'jnroade.js','utf8');{const e0=je.indexOf('(function(){if(typeof NRM!=="object")return;');eval(je.slice(e0,je.indexOf('})();',e0)+5));
+ const a0=je.indexOf('(function(){/* @nrask-emp */');if(a0<0)throw new Error('jnroade.js: no @nrask-emp block');eval(je.slice(a0,je.indexOf('/* @nrask-emp-end */',a0)))}
+const QX=/Hoàng hậu|Trung cung|Khôn Ninh|cô mẫu|ngôi hậu|hậu vị|phượng ấn|mẫu nghi/iu;/* = jnroad.js NRQX */
+const HEIR=/(lập|phong|chọn|truyền ngôi cho)[^.;]{0,30}(Thái tử|hoàng tử (cả|thứ|út))|Thái tử là|người nối ngôi là|ngôi báu (sẽ )?về tay/iu;
 let bad=[];const KINDS=["emp","th","hh","thu","do","y","che"];
 const ORD={emp:["suc","bac"],th:["suc","bac"],hh:["suc","bac"],che:["suc","bac"],thu:["bac","suc"],do:["bac","suc"],y:["bac","suc"]};
 /* cost words: a Sức option (công sức, no money) must not say it pays (the stock bạc options, e.g. «Sai người dò la», may leave the
@@ -19,7 +24,7 @@ const nosay=/(\d|%|chắc chắn|thần thiếp|bổn cung|muội muội|tỷ t�
 const sents=new Map();const addS=(t,where)=>{for(const x of t.split(/(?<=[.;:?!])\s+/).map(z=>z.trim().replace(/[.;:?!]+$/,'')).filter(z=>z.length>12)){if(sents.has(x)&&sents.get(x)!==where)bad.push(`shared sentence: «${x}» ${sents.get(x)} / ${where}`);sents.set(x,where)}};
 const jr=fs.readFileSync(B+'jnroad.js','utf8');for(const m of jr.matchAll(/O\("([^"]+)"/g))addS(m[1],'stock');for(const m of jr.matchAll(/lx:"([^"]+)"/g))addS(m[1],'stock');
 /* the costs as written in the rows (the builder already ordered them; re-read the rows to check the label fits its cost) */
-const rowsCost=new Map();for(const m of src.matchAll(/\["([^"]+)","(suc|bac)","([^"]+)"\]/g))rowsCost.set(m[1],m[2]);
+const rowsCost=new Map();for(const m of (src+je).matchAll(/\["([^"]+)","(suc|bac)","([^"]+)"\]/g))rowsCost.set(m[1],m[2]);
 const labels=new Map();let n=0,roads=0;
 for(const id in NRM){const R=NRM[id];
  if(R.k==="hz"){for(let c=h0;c<=h1;c++)if(NRASK[id+"_"+c])bad.push(`${id}_${c}: prince roads never ask (e.a=null)`);continue}roads++;
@@ -30,6 +35,12 @@ for(const id in NRM){const R=NRM[id];
      (ty roads) is never asked for kind «y» */
   if(L.every(a=>/\{B\}/.test([a.h,a.c||""].concat(...a.o).join(" "))))bad.push(`${k0}: every ask names {B} (none left when there is no rival)`);
   if(R.k==="ty"&&L.some(a=>a.k==="y"))bad.push(`${k0}: a Thái y asks kind «y» (NRSELF ty, never drawn)`);
+  /* the Emperor (jnroade.js): never kind emp (NRSELF.emp), «do» / {B} only on em_cai (the only road with a real rival), one ask per chapter
+     left when SHE is the Hoàng hậu (no hh, no queen alias: nrAskPick drops them), never names an heir */
+  if(R.k==="emp"){if(L.some(a=>a.k==="emp"))bad.push(`${k0}: the Emperor asks kind «emp» (NRSELF.emp)`);
+   if(id!=="em_cai"&&L.some(a=>a.k==="do"||/\{B\}/.test([a.h,a.c||""].concat(...a.o).join(" "))))bad.push(`${k0}: «do» / {B} on a road with no rival`);
+   if(!L.some(a=>a.k!=="hh"&&!QX.test([a.h,a.c||""].concat(...a.o).join(" "))))bad.push(`${k0}: no ask left when she is the Hoàng hậu`);
+   for(const a of L){const t=[a.h,a.c||""].concat(...a.o).join(" ");if(HEIR.test(t))bad.push(`${k0}: names an heir «${t.match(HEIR)[0]}»`)}}
   L.forEach((E,ai)=>{const k=k0+"["+ai+"]";n++;
   if(E.k==="do"&&!/\{B\}/.test(E.h))bad.push(`${k}: a «do» ask must name {B}`);
   /* review E7cr (FAIL b99f4bc) as rules, whole families:
@@ -59,7 +70,7 @@ for(const id in NRM){const R=NRM[id];
    const want=ORD[E.k][i];if(rowsCost.get(L)!==want)bad.push(`${k}: option ${i} «${L}» is ${rowsCost.get(L)}, stock wants ${want}`);
    if(want==="suc"&&PAY.test(L))bad.push(`${k}: Sức option «${L}» says it pays`);
    if(labels.has(L))bad.push(`dup label «${L}» ${labels.get(L)} / ${k}`);labels.set(L,k);addS(L,k+'/x');addS(lx,k+'/lx')});
-  for(const v of voices){for(const t of [E.c,E.h].concat(...E.o)){const f=fill(t,v);if(/[{}]/.test(f))bad.push(`${k}: unknown slot in «${t}»`);if(nosay.test(f))bad.push(`${k}: VANPHONG «${f.match(nosay)[0]}» in «${f}»`)}}})
+  for(const v of (R.k==="emp"?[{me:"trẫm",call:"ái phi",B:"Tể tướng"}]:voices)){for(const t of [E.c,E.h].concat(...E.o)){const f=fill(t,v);if(/[{}]/.test(f))bad.push(`${k}: unknown slot in «${t}»`);if(nosay.test(f))bad.push(`${k}: VANPHONG «${f.match(nosay)[0]}» in «${f}»`)}}})
  }}
-console.log(`roads ${roads} (hz excluded), asks ${n}, labels ${labels.size}, sentences ${sents.size}`);
+console.log(`roads ${roads} (hz excluded; emp ${Object.keys(NRM).filter(i=>NRM[i].k==="emp").length}), asks ${n}, labels ${labels.size}, sentences ${sents.size}`);
 if(bad.length){console.log(bad.join('\n'));process.exit(1)}console.log('PASS nrask-m-scan');
