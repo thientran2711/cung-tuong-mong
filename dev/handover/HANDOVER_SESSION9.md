@@ -1515,3 +1515,6 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - WAKE: ROOT-77 trig_0123heVgypzBZz7iBk5VKdv8 (minute 32) → next main creates its own and disables this one. Brief common: briefs/root77-common.md (copy to root78-common.md with new id + LIVE).
 - STANDBY: MAIN ROOT STANDBY session_01Rc5AsNA483VGFgtAtqERSa (TAKE OVER NOW only if create_session refused).
 - (20/11 11:29Z) ROOT-77 opened child MAIN ROOT-78 = session_01Rc5AsMLiYk8Qo5FC3nWVM1 (depth 7). ROOT-77 stops; ROOT-78 disables trig_0123heVgypzBZz7iBk5VKdv8.
+
+## MAIN = ROOT-78 session_01Rc5AsMLiYk8Qo5FC3nWVM1 (child of ROOT-77); START_CTX ~8 % of 1M (get_session reads 0 → estimate incl. schemas + start reads; roll at 33 %, ceiling 60 %); depth 7 (limit 8 — my child would be depth 8 = last)
+- (20/11 11:31Z) LOAD: main running 6 own (keeper MtjP4KTg [kit-item-big SẴN SÀNG bbe1b20f; kit-signs-odds SẴN SÀNG ac3e3b2f], rv mg-ui-rest M53iAEvG (final-merge 0aaf8152), wk mg-ui-rest HdrZN7mz, wk ge-map NQDQXeYG, rv ge-map MyyPVJTY, rv kit-modal-spin LfxAK1Hq) (owner bugs/UI/go-live only) | B busy (wear-slots rv, mg-craft rv, kc-fail rv, coop-thin-g, ge-npc, coop-staff-split) | C art (T78 done) | D #10 11 running | E #18 (depth 8 LAST) busy | moved: none. LIVE 0aaf8152, ROLLBACK 8cf6b7d7.
