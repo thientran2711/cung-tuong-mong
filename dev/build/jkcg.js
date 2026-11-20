@@ -59,7 +59,7 @@ function kcgFestRes(t,raw,extra,b){const F=BAL.kcg.fest;let txt;
 kcFest=function(t,art,extra){const b=rsnap();const kind=KCFEST[t]||art;
  if(window.__bot||typeof playArt!=="function"||!isKc()){kcgFestRes(t,cl(BAL.kcg.fest.bot[0]+R(BAL.kcg.fest.bot[1]),0,10),extra,b);return}
  let done=0;const fin=raw=>{if(done)return;done=1;kcgFestRes(t,raw,extra,b);try{showModal()}catch(e){}};
- try{playArt({art:kind,occ:"hoi",title:t,note:"Thứ hạng ở hội tính theo màn chơi",quick:{n:"Để tài nghệ quyết định",sub:"tính 5/10, như người cùng bậc"},onDone:(raw,o)=>fin(o&&o.skipped?BAL.kcg.fest.skip:raw)})}catch(e){console.error(e);fin(BAL.kcg.fest.skip)}};
+ try{playArt({art:kind,occ:"hoi",title:t,note:"Thứ hạng ở hội tính theo màn chơi",quick:{n:"Để tài nghệ quyết định",sub:`tính ${BAL.kcg.fest.skip}/10, như người cùng bậc`},onDone:(raw,o)=>fin(o&&o.skipped?BAL.kcg.fest.skip:raw)})}catch(e){console.error(e);fin(BAL.kcg.fest.skip)}};
 
 /* ---------- OR08 carry-over at palace entry (OUTSIDE_PLAN §9 table + "Thư nhà" line) ----------
    (1) Sắc/Tài/Tâm cơ/Đức/Sức: each at most BAL.kcg.carry.cap over its value at the start of the home road (S.kc.st0, written at kcInit;
@@ -100,7 +100,7 @@ PEND.kcgLd=pp=>{if(!kcgPal()||!S.kc.ldOld||S.kc.ldDone)return null;const f=RV(pp
  const oW=m?oddsCl(C.witO+Math.round((m.af-BAL.kcg.home.mid)*BAL.kcg.home.k)):0;const done=()=>{S.kc.ldDone=1};
  return{who:pv(f),t:`<p>${f.name} nhắc lại chuyện cũ ở kinh thành: hồi còn ở nhà, ngươi từng bị người ta xì xào. Lời ấy nay truyền khắp hậu cung.</p>`,o:[
   {n:"Thản nhiên nhận là chuyện cũ",fx:{},x:`an toàn · được: Đức ${balSg(C.own.duc)} · mất: Danh ${balSg(-C.own.danh)} · lời đồn khép lại`,go:()=>kcDo("Lời đồn cũ",()=>{done();S.danh=Math.max(0,S.danh-C.own.danh);apply({duc:C.own.duc});return"Ngươi nhận là chuyện non dại ngày trước. Có người khen ngươi thẳng thắn."})},
-  m?{n:`Nhờ ${m.t.toLowerCase()} viết thư làm chứng`,fx:{bac:-C.witBac},x:`${word(oW)} · tốn: Bạc ${C.witBac} · thành: ${f.name} Danh ${balSg(-C.witFoe)}, lời đồn khép lại · hỏng: Danh ${balSg(-C.witLose)}`,go:()=>kcDo("Lời đồn cũ",()=>{done();
+  m?{n:`Nhờ ${m.t.toLowerCase()} viết thư làm chứng`,fx:{bac:-C.witBac},x:`${word(oW)} · tốn: Bạc -${C.witBac} · thành: ${f.name} Danh ${balSg(-C.witFoe)}, lời đồn khép lại · hỏng: Danh ${balSg(-C.witLose)}`,go:()=>kcDo("Lời đồn cũ",()=>{done();
    if(roll(oW)){f.danh=Math.max(0,(f.danh||0)-C.witFoe);try{affAdd(f,S,-C.witOan)}catch(e){}return`Thư của ${m.t.toLowerCase()} đến tay Hoàng hậu. Người ta quay sang chê ${f.name} bịa chuyện.`}
    S.danh=Math.max(0,S.danh-C.witLose);return"Thư nhà đến muộn, chẳng ai tin. Lời đồn càng lan."})}:null,
   {n:"Lặng im chờ lời đồn nguội",fx:{},x:`an toàn · được: Tâm cơ ${balSg(C.wait.tamco)} · mất: Danh ${balSg(-C.wait.danh)} · lời đồn có thể bị nhắc lại`,go:()=>kcDo("Lời đồn cũ",()=>{S.danh=Math.max(0,S.danh-C.wait.danh);apply({tamco:C.wait.tamco});return"Ngươi không đáp. Vài tuần sau, người ta tìm chuyện khác để nói."})}].filter(Boolean)}};
@@ -108,14 +108,14 @@ PEND.kcgLd=pp=>{if(!kcgPal()||!S.kc.ldOld||S.kc.ldDone)return null;const f=RV(pp
 /* Tư trang › «Thư nhà» (kit sub-tab, jinv KINV_XTRA): her letters home + what home sent */
 function kcgHomeO(kind){const m=kcgMom(),H=BAL.kcg.home;return m?oddsCl((kind==="ask"?H.giftO:H.writeO)+Math.round((m.af-H.mid)*H.k)):0}
 function kcgHomeHTML(){const m=kcgMom();if(!m)return"";const H=BAL.kcg.home,K=S.kc;const wO=kcgHomeO("wr"),aO=kcgHomeO("ask");
- const why=k=>K[k]===S.turn?"tháng này đã gửi":!can(1)?"hết khắc":"";const wB=why("wr")||(S.bac<H.writeBac?"không đủ bạc":""),aB=why("ask");
- const acts=`<div class="rbtn">`+pbtn(`data-kcgh="wr"`,"Viết thư thăm nhà",`${word(wO)} · tốn: 1 khắc · Bạc ${H.writeBac} · thành: ${m.t} thiện cảm ${balSg(H.writeAf)}, tháng sau có thư hồi âm (tin thật về một phi tần) · hỏng: thư bị chặn, Danh ${balSg(-H.lostDanh)}`,wB)+
-  pbtn(`data-kcgh="ask"`,"Xin nhà gửi đồ vào",`${word(aO)} · tốn: 1 khắc · ${m.t} thiện cảm ${balSg(-H.askAf)} · thành: tháng sau nhận một món đồ nhà gửi`,aB)+`</div>`;
+ const why=k=>K[k]===S.turn?"tháng này đã gửi":!can(BAL.kcg.home.khac)?"hết khắc":"";const wB=why("wr")||(S.bac<H.writeBac?"không đủ bạc":""),aB=why("ask");
+ const acts=`<div class="rbtn">`+pbtn(`data-kcgh="wr"`,"Viết thư thăm nhà",`${word(wO)} · tốn: ${BAL.kcg.home.khac} khắc, Bạc -${H.writeBac} · thành: ${m.t} thiện cảm ${balSg(H.writeAf)}, tháng sau có thư hồi âm (tin thật về một phi tần) · hỏng: thư bị chặn, Danh ${balSg(-H.lostDanh)}`,wB)+
+  pbtn(`data-kcgh="ask"`,"Xin nhà gửi đồ vào",`${word(aO)} · tốn: ${BAL.kcg.home.khac} khắc, ${m.t} thiện cảm ${balSg(-H.askAf)} · thành: tháng sau nhận một món đồ nhà gửi`,aB)+`</div>`;
  const L=kcgMail();const rows=L.length?L.map(x=>[x.y?`Tháng ${x.m}, năm thứ ${x.y}`:"Trước đây",`${x.who}: ${x.what}`,"t"]):[["Chưa có thư","Nhà chưa gửi gì vào","n"]];
  return kitRows([[m.t,`${m.name} · thiện cảm ${m.af}`,"t"]])+acts+`<h4 class="kpst">Thư nhà đã nhận</h4>`+kitRows(rows)}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kcgh]");if(!b||!kcgPal())return;e.stopPropagation();e.preventDefault();if(b.disabled)return;
- const m=kcgMom();if(!m||!can(1))return;const H=BAL.kcg.home,K=S.kc,k=b.dataset.kcgh;if(K[k]===S.turn)return;const bs=rsnap();spend(1);
- if(k==="wr"){if(S.bac<H.writeBac)return;S.bac-=H.writeBac;if(roll(kcgHomeO("wr"))){kcAf(m,H.writeAf);K.wr=S.turn;kcRes("Viết thư thăm nhà",bs,`Thư gửi đi. ${m.t} sẽ hồi âm.`)}else{K.wr=S.turn;K.wrLost=1;S.danh=Math.max(0,S.danh-H.lostDanh);kcRes("Viết thư thăm nhà",bs,"Thư bị chặn ở cửa cung.")}}
+ const m=kcgMom();if(!m||!can(BAL.kcg.home.khac))return;const H=BAL.kcg.home,K=S.kc,k=b.dataset.kcgh;if(K[k]===S.turn)return;if(k==="wr"&&S.bac<H.writeBac)return;const bs=rsnap();spend(BAL.kcg.home.khac);
+ if(k==="wr"){S.bac-=H.writeBac;if(roll(kcgHomeO("wr"))){kcAf(m,H.writeAf);K.wr=S.turn;kcRes("Viết thư thăm nhà",bs,`Thư gửi đi. ${m.t} sẽ hồi âm.`)}else{K.wr=S.turn;K.wrLost=1;S.danh=Math.max(0,S.danh-H.lostDanh);kcRes("Viết thư thăm nhà",bs,"Thư bị chặn ở cửa cung.")}}
  else{kcAf(m,-H.askAf);K.ask=S.turn;kcRes("Xin nhà gửi đồ vào",bs,`${m.t} hứa sẽ gửi.`)}
  try{showModal()}catch(x){}render()},true);
 (function(){if(typeof KINV_XTRA!=="object")return;KINV_XTRA.push({k:"nha",label:"Thư nhà",on:()=>!!kcgMom(),html:kcgHomeHTML})})();
@@ -132,7 +132,7 @@ const KCT={kc_tuyen:["Trâm hoa ngự ban","Qua kỳ tuyển tú, được giữ
 function kctStore(){const g=store.get("ctm-kct");return g&&typeof g==="object"&&g.t?g:{t:{}}}
 (function(){try{if(typeof DH_CAT!=="object")return;BAL.dh.T=BAL.dh.T||{};for(const k in KCT){const d=KCT[k];DH_CAT[k]={n:d[0],g:"kc",how:()=>{const r=kctStore().t[k];return `${d[1]}${r&&r.first?` · kiếp ${r.first.life}`:""}`}};
   BAL.dh.T[k]={n:[1],b:/^kc_R/.test(k)?BAL.kcg.title.rare:BAL.kcg.title.tier,ch:[]}}}catch(e){console.error("kct",e)}})();
-function kctGive(k){try{if(!KCT[k]||!S)return;const g=kctStore();const life=typeof geLifeNo==="function"?geLifeNo():0;const e=g.t[k]||(g.t[k]={lives:[],first:{life,who:S.name}});if(!e.lives.includes(life))e.lives.push(life);store.set("ctm-kct",g);
+function kctGive(k){try{if(!KCT[k]||!S)return;const g=kctStore();const life=(typeof geLifeNo==="function"?geLifeNo():typeof lifeLog==="function"?lifeLog().length+1:1);/* geLifeNo lives inside jge's closure: same count here */const e=g.t[k]||(g.t[k]={lives:[],first:{life,who:S.name}});if(!e.lives.includes(life))e.lives.push(life);store.set("ctm-kct",g);
   S.dh=S.dh||{};if(!S.dh[k]||S.dh[k].i==null||S.dh[k].i<0){if(typeof dhInc==="function")dhInc(S,k,1);else S.dh[k]={n:1,i:0,at:[""]}}log(`<b class="g">Danh hiệu mới: «${KCT[k][0]}».</b>`)}catch(e){console.error("kct",e)}}
 (function(){const e0=kcEnter;kcEnter=function(rank){const r=e0.apply(this,arguments);try{if(S.kc&&S.kc.inPal){kctGive("kc_tuyen");if(S.rank>=BAL.kcg.title.quyRank)kctGive("kc_quy")}}catch(e){}return r}})();
 (function(){const e0=kcEnd;kcEnd=function(id){try{const m=/^kcR(\d)$/.exec(id||"");if(m)kctGive("kc_R"+m[1])}catch(e){}return e0.apply(this,arguments)}})();
