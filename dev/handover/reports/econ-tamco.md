@@ -53,3 +53,8 @@ Still open: the kit option card's «Tốn» row cannot show a Tâm cơ cost, or 
 Follow-ups (unchanged): co-op thin guest runs the plain road; jsgame person-card and j70 plot chains keep their own roads.
 
 SẴN SÀNG KIỂM 6b705fb3a6a08cdc0c47fe2e02997802a65ba182 (KIT-BLOCKED: Tốn row Tâm cơ)
+
+### Re-merge (LIVE moved to 4e8cbaeb during the report)
+review/econ-tamco @ c45265d6c97a95b814365cd527df85a9f731d9f1 = 6b705fb3 + origin/main 4e8cbaeb (index/sw rebuilt). econ-tamco PASS, quickcheck PASS 205 s (core gates PASS, old save ok). This sha replaces 6b705fb3.
+
+SẴN SÀNG KIỂM c45265d6c97a95b814365cd527df85a9f731d9f1 (KIT-BLOCKED: Tốn row Tâm cơ)
