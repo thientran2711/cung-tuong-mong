@@ -532,7 +532,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | GAP OR20 or20-j68q E31 (opus; j68 life in lãnh cung / servant / Hoàng hậu duty; briefs/E31-or20-j68q.md) | review/or20-j68q | FOREMAN E #23 | session_01DgYSWnmREuzk7Lkargpxp7 | RUNNING | 20/11 21:45Z |
 | errand-bal E32 (opus; law 4 one BAL key errand odds + jkc hand-typed numbers; briefs/E32-errand-bal.md) | review/errand-bal | FOREMAN E #23 | session_01DgYSWorKhgaqhMCCFzyuKs | RUNNING | 20/11 21:45Z |
 | cold-faction E33 (opus; faction acts while she is in lãnh cung; briefs/E33-cold-faction.md) | review/cold-faction | FOREMAN E #23 | session_01DgYSWntLTqn83CRYF8pg1G | RUNNING | 20/11 21:45Z |
-| jtq14-addr E34 (sonnet; jtq14 X() → jvoice kAddr, whole family; briefs/E34-jtq14-addr.md) | review/jtq14-addr | FOREMAN E #23 | session_01DgYSWkVYi1pgWU4VLXgARQ | RUNNING | 20/11 21:45Z |
+| jtq14-addr E34 (sonnet; jtq14 X() → jvoice kAddr, whole family; briefs/E34-jtq14-addr.md) | review/jtq14-addr | FOREMAN E #23 | session_01DgYSWkVYi1pgWU4VLXgARQ | SẴN SÀNG KIỂM 685b71fb (archived) | 20/11 21:45Z |
 | ge-rank → ge-phutang E35 (opus; GE law-5 rank key all waves, then Phù Tang GE; briefs/E35-ge-rank.md) | review/ge-rank, review/ge-phutang | FOREMAN E #23 | session_01DgYSWmjPvugYh1ZvnrYsFG | ge-rank SSK c5ebab9a (reports/ge-rank.md); ge-phutang WAITING phutang-road LIVE | 20/11 23:30Z |
 | PARKING #11 dresscode r2 E30b (opus; successor of E30 @7438275b; handover reports/dresscode.md «HANDOVER (E30 → successor)») | review/dresscode | FOREMAN E #23 | session_01DgYSWoKR63FnqBVfM37DPu | RUNNING | 20/11 21:32Z |
 | REVIEW home-chapters r2 re-merge E25r2 (opus BIG; successor of E25r; handover reports/home-chapters-review.md «HANDOVER (E25r → E25r2)») | review/home-chapters* | FOREMAN E #23 | session_01DgYSWoGroauPy7gr26dtfY | WAITING GO (co-op check prep) | 20/11 21:33Z |
@@ -543,3 +543,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW mg11-thutay r1 (opus BIG) of ef94ad20 | review/mg11-thutay-r1 | B | session_01N1tNP4zyqBbxbsY5JQ3jjJ | RUNNING | 20/11 20:58Z |
 | FOREMAN E #23 (opus; child of E #22, depth 4) | handover FOREMAN_E_STATUS | FOREMAN E #22 | session_01DgYSWm5qy3Y59fKkn6eSf7 | RUNNING | 20/11 21:28Z |
 | KIT dress-picker (owner UI ~21:45Z; figure live-preview left, every dress picker) | review/kit-dress-picker | keeper MtjP4KTg (ordered by MAIN ROOT-81) | session_01Rc5AsMtjP4KTgBZVjENGLs | RUNNING | 20/11 22:12Z |
+| REVIEW jtq14-addr r1 E34r (sonnet) of 685b71fb | review/jtq14-addr-r1; reports/jtq14-addr-review.md | FOREMAN E #23 | session_01DgYSWnxMa5aqrzNNQQsPe9 | RUNNING | 20/11 22:06Z |
