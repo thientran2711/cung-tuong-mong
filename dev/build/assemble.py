@@ -24,6 +24,8 @@ js+='\n'+cdn('jcoopthinc.js',open(d+'build/jcoopthinc.js',encoding='utf-8').read
 js+='\n'+cdn('jcoopthine.js',open(d+'build/jcoopthine.js',encoding='utf-8').read())
 # thin guest part F1 (review/coop-thin-f1): her acts as intents (the ONE intent wrapper for F2-F5); LAST = the outermost engine wrappers
 js+='\n'+cdn('jcoopthinf.js',open(d+'build/jcoopthinf.js',encoding='utf-8').read())
+# coop-host-lag (review/coop-host-lag): the host's world writes after a merged week reach the guest at once (level < 3); after jnamefix + jcoopthinf (wraps nmFix / figPick / figThPick / endTurn outermost)
+js+='\n'+cdn('jcoophl.js',open(d+'build/jcoophl.js',encoding='utf-8').read())
 # jreg (review/story-frame): every registry pass also covers the entries later modules added (regEach); sweep at the script end + after load timers
 js+='\ntry{regSweep();setTimeout(regSweep,0)}catch(e){console.error(e)}\n'
 open(d+'build/all.js','w',encoding='utf-8').write(js)

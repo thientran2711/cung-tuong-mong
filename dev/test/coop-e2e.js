@@ -127,6 +127,18 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  const same=async tag=>{const a=await A.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join(),N:rivals.filter(v=>!v.coop).flatMap(v=>[v.name,...(v.staff||[]).map(x=>x.name),...(v.kids||[]).map(k=>k.name)]).concat(Object.values(S.court||{}).map(c=>c&&(c.pn||c.name))).join('|')}));
    const c=await B.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join(),N:rivals.filter(v=>!v.coop).flatMap(v=>[v.name,...(v.staff||[]).map(x=>x.name),...(v.kids||[]).map(k=>k.name)]).concat(Object.values(S.court||{}).map(c=>c&&(c.pn||c.name))).join('|')}));
    ok(a.era===c.era&&a.R===c.R,tag+': same Emperor and same consorts',[a.era,c.era]);ok(String(a.d)===String(c.d),tag+': same date',[a.d,c.d]);if(tag!=='start')ok(a.N===c.N,tag+': same names of the world people (consorts, their staff and kids, court) on both seats',a.N===c.N?a.N.split('|').length:[a.N.slice(0,300),c.N.slice(0,300)]);
+   /* coop-host-lag (law 11 family "a HOST-only world write reaches the guest one merged week late"): the canonical world (W of C, the
+      viewer-relative rows dropped) is the same on both seats once a merged week is shown; every differing path is a host-only (or
+      guest-only) world write outside the merge */
+   if(tag!=='start'){const wc=o=>o.p.evaluate(()=>{const X=COOPW.X,J=X.J;const d=ser();const sS=d.S;const pid=((COOPW.base&&COOPW.base.P&&COOPW.base.P[COOP.state.you])||{}).pid;
+      const W={};for(const k of X.W_KEYS)if(k in sS){const v=J(sS[k]);if(k==='cm'&&v)for(const f of X.CM_P)delete v[f];if(k==='men'&&Array.isArray(v))for(const x of v)if(x)for(const f of X.MEN_P)delete x[f];W[k]=v}
+      if(W.emp)delete W.emp.known;delete W.tn;
+      const R=d.R.filter(r=>!r.coop).map(r=>{for(const f of ['rel','oan','ghen','ev','rl','ro','gp','ep','evm'])delete r[f];if(r.staff)r.staff=r.staff.filter(s=>!s.coop);return X.mapMe(r,true,pid)});
+      X.mapMe(W,true,pid);const out={};const fl=(v,p)=>{if(v&&typeof v==='object'){const ks=Object.keys(v);if(!ks.length)out[p]=Array.isArray(v)?'[]':'{}';for(const k of ks)fl(v[k],p+'.'+(Array.isArray(v)&&v[k]&&(v[k].id!=null||v[k].sid!=null)?'#'+(v[k].id!=null?v[k].id:'s'+v[k].sid):k))}else out[p]=v};
+      fl(W,'S');R.forEach(r=>fl(r,'R#'+r.id));return out});
+    const t0=Date.now();let dif=[];while(Date.now()-t0<8000){const wa=await wc(A),wb=await wc(B);dif=[...new Set(Object.keys(wa).concat(Object.keys(wb)))].filter(k=>JSON.stringify(wa[k])!==JSON.stringify(wb[k])).map(k=>k+' A='+JSON.stringify(wa[k])+' B='+JSON.stringify(wb[k]));if(!dif.length)break;await sleep(500)}
+    if(process.env.COOP_WDIFF)fs.appendFileSync(OUT+'/wdiff.txt',tag+' '+dif.length+'\n'+dif.slice(0,80).join('\n')+'\n');
+    ok(!dif.length,tag+': the same world on both seats (canonical W; coop-host-lag family)',dif.length?{n:dif.length,d:dif.slice(0,12).map(s=>s.slice(0,160))}:undefined)}
    /* art-wiring-1119: the Thái hậu is a pool face drawn by the host; both seats show the same picture (her own face's Thái hậu robe) */
    {const th=o=>o.p.evaluate(()=>({f:typeof figFor==='function'?figFor({kind:'th'},'fig'):'',fid:S.thO&&S.thO.fid||null}));let x,y;const t0=Date.now();
     while(Date.now()-t0<20000){x=await th(A);y=await th(B);if(x.f&&x.f===y.f)break;await sleep(400)}
@@ -148,12 +160,30 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
    window.__mlHit=0;window.__mlCalls=[];const mm0=mlMonth;mlMonth=function(){window.__mlCalls.push([S.month,(S.staff||[]).filter(x=>x.role==='maid').length,!!(S.srv&&!S.srv.risen),consorts().includes(S),S.rank,S.place]);return mm0.apply(this,arguments)};const f0=mlFx;mlFx=function(g,s){if((S.staff||[]).includes(s))window.__mlHit++;return f0.apply(this,arguments)};
    const d0={};rivals.filter(v=>!v.coop).forEach(v=>d0[v.id]=v.duc||0);return{ev:rivals.filter(v=>!v.coop).reduce((a,v)=>a+(v.ev||0),0),d0,maids:S.staff.filter(x=>x.role==='maid').length,srv:!!(S.srv&&!S.srv.risen),inC:consorts().includes(S),rank:S.rank}});
   mlA0=await A.p.evaluate(()=>{window.__mlN={};const d0={};rivals.filter(v=>!v.coop).forEach(v=>d0[v.id]=v.duc||0);return{ev:rivals.filter(v=>!v.coop).reduce((a,v)=>a+(v.ev||0),0),d0}})}
+ /* COOP_HL_FORCE=1 (review/coop-host-lag, regression for its family): the FIRST merged week reaches both seats with (a) no Thái hậu face
+    (S.thO.fid dropped: only the host's lazy pick at render can give it) and (b) one world servant under an excluded (Vietnamese-style)
+    name that the host's name sweep (jnamefix nmFix "load") must rename, while a text of the GUEST's own save names her. Same merged week:
+    the guest shows the host's face, the servant's new name, and her own text names the new name (law 6b), before any next merge. */
+ const HLF=+process.env.COOP_HL_FORCE||0;
+ if(HLF){for(const o of [A,B])await o.p.evaluate(()=>{const r0=COOP.rxWrap;let done=0;window.__hlF=null;
+   COOP.rxWrap=(fn,m)=>{try{if(!done&&m&&m.t==='week'&&m.state&&m.state.W){done=1;const W=m.state.W;if(W.S&&W.S.thO)delete W.S.thO.fid;
+     const v=(W.R||[]).find(r=>!r.coop&&r.alive!==false&&(r.staff||[]).some(s=>!s.coop&&s.sid!=null));
+     if(v){const s=v.staff.find(x=>!x.coop&&x.sid!=null);window.__hlF={id:v.id,sid:s.sid,old:'Nguyễn Thị Hoa',was:s.name};s.name='Nguyễn Thị Hoa'}
+     const P=m.state.P&&m.state.P.b;if(P&&P.S)P.S.hlTxt='Hôm trước gặp Nguyễn Thị Hoa ở ngự hoa viên.'}}catch(e){console.error('hl force',e)}return r0?r0(fn,m):fn()}})}
  /* 3 three weeks */
  const agB0=await B.p.evaluate(()=>window.AG?AG.stat.tick:-1);
  for(let w=0;w<3;w++){const wk=(await C(A)).week;
   await weekBoth(A,B,w);
   for(const o of [A,B]){const r=await untilC(o,x=>__co().week===x+1,wk,90000);ok(r,`week ${w+1}: ${o.name} advanced`,r?undefined:await o.p.evaluate(()=>({co:__co(),sent:COOPW.sent,pend:COOPW.pend,pendBuoi:!!COOPW.pendBuoi,bend:COOPW.bend,buoi:S.buoi,Q:Q.map(m=>(m.pid||'')+':'+String(m.t||'').slice(0,30)),mg:!!S.mg,tm:S.toMorning,stale:window.__nightStale,modal:(document.getElementById('modal')||{}).hidden,tr:COOPW.tr.slice(-20)})))}
-  await clear(A);await clear(B);await same('after week '+(w+1))}
+  await clear(A);await clear(B);await same('after week '+(w+1))
+  if(HLF&&w===0){const g=o=>o.p.evaluate(()=>{const F=window.__hlF;const v=F&&rivals.find(x=>x.id===F.id);const s=v&&(v.staff||[]).find(x=>x.sid===F.sid);
+     return{wk:__co().week,fid:S.thO&&S.thO.fid||null,name:s&&s.name,txt:S.hlTxt||null,hl:COOPW.hl&&COOPW.hl.stat}});let x,y;const t0=Date.now();
+   while(Date.now()-t0<20000){x=await g(A);y=await g(B);if(x.fid&&x.fid===y.fid&&x.name&&x.name===y.name&&x.name!=='Nguyễn Thị Hoa'&&y.txt&&y.txt.includes(y.name))break;await sleep(400)}
+   const same1=x.wk===y.wk&&y.wk===wk+1;
+   ok(same1&&!!x.fid&&x.fid===y.fid,'hl force (a): the host\'s lazy Thái hậu face reaches the guest in the same merged week',[x.fid,y.fid,x.wk,y.wk]);
+   ok(same1&&!!x.name&&x.name!=='Nguyễn Thị Hoa'&&x.name===y.name,'hl force (b): the host\'s renamed world servant reaches the guest in the same merged week',[x.name,y.name]);
+   ok(!!y.txt&&y.txt.includes(y.name)&&!y.txt.includes('Nguyễn Thị Hoa'),'hl force (b): the guest\'s own text names the new name',[y.txt,x.hl,y.hl])}
+  }
  /* NPC agent loop (jagent AG1, host-only): the host runs one tick per buổi, the guest never runs it (the world is the host's) */
  {const g=o=>o.p.evaluate(()=>({has:typeof agOn==='function',on:typeof agOn==='function'&&agOn(),tick:window.AG?AG.stat.tick:-1}));const ha=await g(A),hb=await g(B);
   ok(ha.has&&ha.tick>0,'agent loop: the host ticks',ha);ok(hb.has&&!hb.on&&hb.tick===agB0,'agent loop: the guest never runs agTick',{...hb,before:agB0})}
@@ -182,16 +212,18 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  const before=await B.p.evaluate(()=>({n:S.name,era:S.emp.era}));
  if(RECON){await netDown(A);await sleep(300)}/* her rebirth's `state` broadcast reaches nobody on the host: it must catch up from the room snapshot */
  await B.p.evaluate(()=>die('Thử: trúng gió'));await B.p.waitForTimeout(600);await shot(B,'10-death');
- for(let i=0;i<12;i++){const st=await B.p.evaluate(()=>S&&!S.dead&&S.name);if(st&&st!==before.n)break;
+ /* coop-host-lag (c): the 1-in-20 "B reborn … FAIL (name unchanged)" = the rebirth outran 12 fixed tries (~11 s) on a loaded machine
+    (in each case "A sees the reborn friend by her new name" passed: she WAS reborn, later). Now: a time budget (45 s), not a try count */
+ const rbT0=Date.now();for(let i=0;Date.now()-rbT0<45000;i++){const st=await B.p.evaluate(()=>S&&!S.dead&&S.name);if(st&&st!==before.n)break;
   const m=await B.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal:not([hidden]) button:not([disabled]), #title:not([hidden]) button:not([disabled]), .kroul button:not([disabled]), [data-coop-reborn]')].filter(x=>x.offsetParent!==null);
     const pref=b.find(x=>/Đầu thai|Luân hồi|Nhận thân phận|Tiến cung|Vào cung|Ở nhà|Nhập cung|Lật|Chọn/.test(x.textContent))||b[0];if(pref){const t=pref.textContent.trim();pref.click();return t}return''});
   if(i===1)await shot(B,'11-rebirth-choice');await B.p.waitForTimeout(900)}
- const after=await B.p.evaluate(()=>({n:S.name,dead:S.dead,era:S.emp.era}));
+ const after=await B.p.evaluate(()=>({n:S.name,dead:S.dead,era:S.emp.era,inLife:COOPW.inLife,modal:(()=>{const m=document.getElementById('modal');return m&&!m.hidden?m.textContent.slice(0,140):''})(),btn:[...document.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null).map(x=>x.textContent.trim().slice(0,24)).slice(0,10),tr:COOPW.tr.slice(-10)}));console.log('   rebirth took',Math.round((Date.now()-rbT0)/100)/10,'s');
  /* her new life's throwaway world must not leak into the shared one (review/coop-stable: 10 temp-id ghost consorts + 10 new-consort requests) */
  {const ri=await B.p.evaluate(()=>({srv:S.srv&&!S.srv.risen?{mid:S.srv.mid,here:!!RV(S.srv.mid)}:null,tmp:rivals.filter(v=>!v.coop&&v.id>=1000).map(v=>v.id),ask:(S.coopAsk||[]).length,ids:rivals.filter(v=>!v.coop).map(v=>v.id).sort((a,b)=>a-b).join(','),base:((COOPW.base&&COOPW.base.W&&COOPW.base.W.R)||[]).map(r=>r.id).sort((a,b)=>a-b).join(',')}));
   ok(!ri.tmp.length&&!ri.ask&&ri.ids===ri.base&&(!ri.srv||ri.srv.here),'reborn guest: same consorts as the room world, no ghost (temp-id) consorts, no requests, a real mistress',ri)}
  if(RECON){await sleep(3500);ok(await netUp(A),'reconnect: host back online after the friend was reborn')}
- ok(!after.dead&&after.n!==before.n&&after.era===before.era,'B reborn as a new person in the same world',[before,after]);
+ ok(!after.dead&&after.n!==before.n&&after.era===before.era,'B reborn as a new person in the same world',!after.dead&&after.n!==before.n&&after.era===before.era?[before.n,after.n]:[before,after]);
  {let seen=false;const t0=Date.now();while(Date.now()-t0<40000){await clear(A);await clear(B);seen=await A.p.evaluate(n=>!!(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop))&&(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null).name===n,after.n);if(seen)break;await sleep(700)}
   ok(seen,'A sees the reborn friend by her new name',seen?undefined:await A.p.evaluate(()=>({P:(()=>{const P=COOPW.base&&COOPW.base.P&&COOPW.base.P[COOP.other()];const v=P&&P.S&&P.S.srv;return P&&{name:P.name,dead:P.dead,rank:P.rank,home:COOPW.friendHome(P),srv:v&&{mid:v.mid,risen:v.risen,mOk:!!(typeof RV==='function'&&RV(v.mid))}}})(),n:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name,inLife:COOPW.inLife,tr:COOPW.tr.slice(-16),ws:window.__wsLog})));}
  {const r=await A.p.evaluate(()=>{const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);return{ok:!!f&&(k61St(f)===0||f.id==null/* servant-origin friend (random life): same acceptance as the start check, test-flaky-sure */),srv:f&&f.id==null,st:f&&k61St(f),here:f&&f.id!=null&&whereOf(f),me:S.place,tr:COOPW.tr.slice(-12)}});

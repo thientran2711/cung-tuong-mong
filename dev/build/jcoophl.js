@@ -1,0 +1,144 @@
+/* jcoophl: CO-OP HOST LAG (review/coop-host-lag; law 11 family "a HOST-only world write reaches the guest one merged week late").
+   A merged week reaches each seat as fromCanon -> deser -> the deser hooks -> render. The host then makes world writes the guest does
+   not make the same way: the name sweep (jnamefix nmFix "load": a world person renamed because a name of the friend's people reached the
+   world), the lifespan of a person new in the world (jmort initAll, host only), the lazy face of the Thái hậu (jfigx figThPick at render,
+   host only: "the guest waits for the host's face"), a lazy face of any world person (figPick at render). Before: those writes rode only
+   the host's NEXT week's end, so the guest saw the old name / no face / another face for one whole merged week.
+   Now (room thin level < 3; from level 3 the host's snapshot + world deltas, jcoopthin / jcoopthinc, already carry the host's world):
+     HOST  after the merged week is shown (and after the first world / a new life, and after every host lazy pick) the host diffs its
+           canonical world (W of C: the W_KEYS of S + the NPCs; viewer rows, the friend's entry and her personal parts dropped) against
+           the world it last shared, and sends the difference as ops {t:"act",k:"ctm-wfix"} (relayed by the Worker as it is), with every
+           rename it made (old -> new name);
+     GUEST applies the ops in place (identity of every object kept: a card holding an NPC sees the new value) and rewrites every text of
+           HER save that names a renamed person (law 6b: her ledger / notes / letters never name nobody), again after her next merged
+           week (her end may have been in flight with the old texts).
+   Merge safety (coop/worker/src/merge.js m3): a number both seats moved is ADDED (a + (b - base)); a host number sent to the guest and
+   moved again by her would be counted twice, so a number whose base is a number is never sent (it waits for the merge, as before),
+   except the state numbers the merge never adds (NOADD, same list as merge.js). Strings / flags / objects / arrays without ids: the
+   host's value is sent; at the merge both seats then hold the same value (no conflict). Keys starting "__" are module stamps, not
+   world facts: never sent.
+   The guest never invents a world person's face (figPick of a world person on the guest = the face it would get, shown, not stored):
+   the host gives every world person without a face one at its week end (figFill, before its end goes out) and sends lazy picks at once.
+   API: COOPW.hl = {stat, last, nm, diff(a,b), canon(), check(why), apply(m)}. Solo never runs any of it (every hook checks CW.on). */
+(function(){try{
+const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
+const X=CW.X,J=X.J,K="ctm-wfix";
+const host=()=>CW.seat==="a";
+const lvl3=()=>{try{return typeof thinW==="function"&&thinW()}catch(e){return false}};
+const live=()=>!!(CW.on&&CW.seat&&S&&!lvl3());
+const pidOf=seat=>seat==="a"?901:902;
+const NOADD=new Set(["mood","rank","buoi","tuan","month","year","turn","age","era","face","hue","fid","fc","fk","id","sid","rid","week","life","step","done","pal","used","lastPromo","vacSince","pregWk","preg","srk","pid","v","seatBan","until","at","wx"]);
+const VIEW=new Set(["rel","oan","ghen","ev","rl","ro","gp","ep","evm"]);/* viewer rows: per player, never a world fact */
+const plain=o=>!!o&&typeof o==="object"&&!Array.isArray(o);
+const isNum=x=>typeof x==="number"&&isFinite(x);
+const idOf=e=>plain(e)?(e.id!=null?"i"+e.id:e.sid!=null?"s"+e.sid:null):null;
+const idArr=a=>Array.isArray(a)&&a.length>0&&a.every(e=>idOf(e)!=null);
+const HL=CW.hl={stat:{sent:0,ops:0,skipNum:0,applied:0,miss:0,nm:0,nmRefs:0,checks:0,ms:0},last:null,nm:[],log:[]};
+const lg=x=>{HL.log.push([Date.now()%1e7].concat(x));if(HL.log.length>40)HL.log.shift()};
+/* one NPC / world value in canonical form, the world part only */
+function npcW(r){if(!plain(r)||r.coop)return null;r=J(r);for(const f of VIEW)delete r[f];if(Array.isArray(r.staff))r.staff=r.staff.filter(s=>!(plain(s)&&s.coop));return r}
+function keyW(k,v){v=J(v);if(k==="emp"&&plain(v))delete v.known;if(k==="cm"&&plain(v))for(const f of X.CM_P)delete v[f];if(k==="men"&&Array.isArray(v))for(const x of v)if(plain(x))for(const f of X.MEN_P)delete x[f];return v}
+/* canonical world of a C (W part) or of this seat now (pid = this seat's player id) */
+function fromC(W){const o={S:{},R:{}};if(!W)return o;const s=W.S||{};for(const k of X.W_KEYS)if(k in s&&k!=="cnews")o.S[k]=keyW(k,s[k]);
+ for(const r of W.R||[]){const n=npcW(r);if(n&&n.id!=null)o.R[n.id]=n}return o}
+function canon(){const d=ser(),pid=pidOf(CW.seat);const W={S:{},R:[]};for(const k of X.W_KEYS)if(k in d.S)W.S[k]=d.S[k];
+ W.R=d.R.filter(r=>plain(r)&&!r.coop);const o=fromC(W);X.mapMe(o.S,true,pid);for(const id in o.R)X.mapMe(o.R[id],true,pid);return o}
+function eq(a,b){return a===b||JSON.stringify(a)===JSON.stringify(b)}
+/* ops: ["s",path,value] set · ["d",path] delete · ["a",path,elem] add an id element · ["r",path,"i5"|"s7"] remove an id element.
+   path steps: "S" | "R" | key | ["i",id] / ["s",sid] (array element by id / sid) */
+function diff(b,n){const ops=[];let skip=0;
+ const walk=(bv,nv,path,key)=>{if(eq(bv,nv))return;if(typeof key==="string"&&key.slice(0,2)==="__")return;
+  if(nv===undefined){ops.push(["d",path]);return}
+  if(isNum(bv)&&isNum(nv)&&!NOADD.has(key)){skip++;return}
+  if(plain(bv)&&plain(nv)){for(const k of new Set(Object.keys(bv).concat(Object.keys(nv))))walk(bv[k],nv[k],path.concat([k]),k);return}
+  if(idArr(bv)&&idArr(nv)){const bm=new Map(bv.map(e=>[idOf(e),e])),nm=new Map(nv.map(e=>[idOf(e),e]));
+   for(const [i,e] of nm){const st=[i[0],i[0]==="i"?e.id:e.sid];if(bm.has(i))walk(bm.get(i),e,path.concat([st]),key);else ops.push(["a",path,e])}
+   for(const [i] of bm)if(!nm.has(i))ops.push(["r",path,i]);return}
+  ops.push(["s",path,nv===undefined?null:nv])};
+ for(const k of new Set(Object.keys(b.S).concat(Object.keys(n.S))))walk(b.S[k],n.S[k],["S",k],k);
+ for(const id of new Set(Object.keys(b.R).concat(Object.keys(n.R)))){const bv=b.R[id],nv=n.R[id];
+  if(!bv&&nv){ops.push(["a",["R"],nv]);continue}if(bv&&!nv){ops.push(["r",["R"],"i"+id]);continue}
+  for(const k of new Set(Object.keys(bv).concat(Object.keys(nv))))walk(bv[k],nv[k],["R",["i",bv.id],k],k)}
+ HL.stat.skipNum+=skip;return ops}
+HL.diff=diff;HL.canon=canon;
+
+/* ---------- HOST: send what it wrote outside the merge ---------- */
+let shared=null,tmr=0,nmQ=[];
+function check(why){if(!live()||!host())return;HL.stat.checks++;const t0=performance.now();let ops=[];
+ if(why!=="pick"&&why!=="nm")try{figFill()}catch(e){}/* a world person still without a face gets the host's now (not at its next render) */
+ try{const now=canon();if(shared)ops=diff(shared,now);shared=now}catch(e){console.error("hl check",e);return}
+ HL.stat.ms=Math.round(performance.now()-t0);const nm=nmQ.splice(0);
+ if(!ops.length&&!nm.length)return;
+ try{COOP.send({t:"act",k:K,week:COOP.state.week||0,why:String(why||""),ops,nm,id:K+Date.now().toString(36)});HL.stat.sent++;HL.stat.ops+=ops.length;HL.last={why,n:ops.length,nm:nm.length,ex:ops.slice(0,6)};lg(["send",why,ops.length,nm.length])}catch(e){console.error("hl send",e)}}
+function soon(why,ms){clearTimeout(tmr);tmr=setTimeout(()=>{tmr=0;check(why)},ms==null?250:ms)}
+HL.check=check;
+/* what the guest holds right after a merged week / a new world = that C's world; the host's own writes after it are the difference */
+function baseFrom(C,why){if(!host()||!C||!C.W)return;try{shared=fromC(J(C.W))}catch(e){shared=null}soon(why,60)}
+COOP.on("week",m=>{if(!CW.on||!m||!m.state)return;if(host())baseFrom(m.state,"week");else setTimeout(nmAgain,0)});
+COOP.on("state",m=>{if(CW.on&&m&&m.state&&host()&&!shared)baseFrom(m.state,"state")});
+COOP.on("start",d=>{shared=null;nmQ=[];const C=(d&&d.state)||(COOP.state&&COOP.state.C);setTimeout(()=>{if(CW.on&&host()&&C)baseFrom(C,"start")},0)});
+COOP.on("stop",()=>{shared=null;nmQ=[];HL.nm=[]});
+/* the guest (re)joins: she rebuilt from the room's C; the host's writes since are sent again */
+COOP.on("peer",on=>{if(on&&CW.on&&host()&&CW.base)baseFrom(CW.base,"peer")});
+/* every rename the host makes (any sweep: load, start, month) goes to the guest's own texts */
+if(typeof nmFix==="function"){const f0=nmFix;nmFix=function(why){const r=f0.apply(this,arguments);try{if(CW.on&&host()&&Array.isArray(r)&&r.length){
+  for(const x of r)if(x&&x.old&&x.neu&&x.old!==x.neu&&x.kind!=="lbl")nmQ.push([x.old,x.neu,x.why==="dup"?0:1]);if(nmQ.length>200)nmQ.splice(0,nmQ.length-200);soon("nm")}}catch(e){}return r};window.nmFix=nmFix}
+/* a lazy face pick on the host (render) is sent at once */
+function wrapPick(name){const f=window[name];if(typeof f!=="function")return;const g=function(who){const a=who&&who.fid;const r=f.apply(this,arguments);
+  try{if(CW.on&&host()&&who&&who.fid&&who.fid!==a)soon("pick")}catch(e){}return r};window[name]=g;return g}
+try{const g=wrapPick("figThPick");if(g)figThPick=g}catch(e){}
+/* ---------- the guest never stores a world person's face ---------- */
+function mine(who){try{if(!S||who===S||who===S.maid)return true;if((S.staff||[]).includes(who))return true;
+  if((S.kids||[]).includes(who))return true;if(typeof tsbPets==="function"&&tsbPets(S).includes(who))return true}catch(e){}return false}
+function seeded(seed,fn){const r0=Math.random;let s=seed>>>0||1;Math.random=()=>{s=(Math.imul(s,1664525)+1013904223)>>>0;return s/4294967296};try{return fn()}finally{Math.random=r0}}
+const hash=s=>{let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0};
+if(typeof figPick==="function"){const p0=figPick;figPick=function(who){try{if(CW.on&&!host()&&who&&typeof who==="object"&&!who.coop&&!mine(who)&&!(who.fid&&typeof figxHas==="function"&&figxHas(who.fid))){
+   const U=figUsed(),n=U.length,f0=who.fid;const k=seeded(hash((who.id!=null?who.id:"")+"|"+(who.sid!=null?who.sid:"")+"|"+(who.name||"")),()=>p0.call(this,who));
+   who.fid=f0;U.length=n;HL.stat.gPick=(HL.stat.gPick||0)+1;return k}}catch(e){console.error("hl gpick",e)}
+  const a=who&&who.fid;const r=p0.apply(this,arguments);try{if(CW.on&&host()&&who&&who.fid&&who.fid!==a)soon("pick")}catch(e){}return r};window.figPick=figPick}
+/* host week end: every world person without a face gets one before the end goes out (so the merged C carries it) */
+function worldPeople(){const L=[];try{if(S.thO&&!S.thDead)L.push(S.thO);for(const v of rivals||[]){if(!v||v.coop)continue;L.push(v);if(v.maid)L.push(v.maid);
+  for(const s of v.staff||[])if(s&&!s.coop)L.push(s);for(const k of v.kids||[])if(k)L.push(k)}
+  for(const s of (S.thO&&S.thO.staff)||[])L.push(s);for(const m of S.men||[])if(m)L.push(m)}catch(e){}return L}
+function figFill(){if(!CW.on||!host()||!S||S.dead||typeof figPick!=="function")return 0;if(typeof figxReady==="function"&&!figxReady())return 0;let n=0;
+ for(const p of worldPeople()){try{if(p.alive===false||p.dead)continue;const a=p.fid;if(p===S.thO){if(typeof figThPick==="function")figThPick()}else if(typeof figRoles==="function"&&figRoles(p).length)figPick(p);if(p.fid&&p.fid!==a)n++}catch(e){}}
+ HL.stat.fill=(HL.stat.fill||0)+n;return n}
+HL.figFill=figFill;
+if(typeof endTurn==="function"){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(CW.on&&host()&&!CW.ctx)figFill()}catch(e){console.error("hl fill",e)}return r}}
+
+/* ---------- GUEST: apply the host's writes in place ---------- */
+function fixRefs(o){if(!o||typeof o!=="object")return o;if(o.$r!=null&&Object.keys(o).length===1)return (rivals||[]).find(v=>v.id===o.$r)||null;
+ if(o.$k!=null&&Object.keys(o).length===1){try{return allKids().map(x=>x[0]).find(k=>k.name===o.$k)||null}catch(e){return null}}
+ if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=fixRefs(o[i]);return o}for(const k in o)o[k]=fixRefs(o[k]);return o}
+function toLive(v,key){const pid=pidOf(CW.seat);const w={};w[key]=J(v);X.mapMe(w,false,pid);const k2=key===String(pid)?"me":key;return fixRefs(w[k2])}
+function step(o,s){if(o==null)return undefined;if(Array.isArray(s)){if(!Array.isArray(o))return undefined;return o.find(e=>plain(e)&&(s[0]==="i"?e.id===s[1]:e.sid===s[1])&&!e.coop)}
+ const k=s===String(pidOf(CW.seat))?"me":s;return o[k]}
+function root(p){if(p[0]==="S")return{o:S,i:1};if(p[0]==="R"){if(p.length===1)return{o:rivals,i:1};const v=(rivals||[]).find(x=>plain(x)&&!x.coop&&x.id===p[1][1]);return{o:v,i:2}}return{o:undefined,i:0}}
+function resolve(p,upto){const r=root(p);let o=r.o;for(let i=r.i;i<upto;i++)o=step(o,p[i]);return o}
+function apply(m){if(!live()||host()||!m||m.from===CW.seat)return;let ok=0,miss=0;
+ const q=quiet;quiet=true;try{
+  for(const op of m.ops||[]){try{const [t,p]=op;
+   if(t==="s"||t==="d"){const last=p[p.length-1];if(Array.isArray(last)){/* an id element replaced / dropped */const arr=resolve(p,p.length-1);if(!Array.isArray(arr)){miss++;continue}
+      const i=arr.findIndex(e=>plain(e)&&(last[0]==="i"?e.id===last[1]:e.sid===last[1])&&!e.coop);if(t==="d"){if(i>=0)arr.splice(i,1)}else{const nv=toLive(op[2],"x");if(i>=0){const tg=arr[i];for(const k of Object.keys(tg))if(!(k in nv)&&!VIEW.has(k))delete tg[k];Object.assign(tg,nv)}else arr.push(nv)}ok++;continue}
+    const par=resolve(p,p.length-1);if(!par||typeof par!=="object"){miss++;continue}const k=last===String(pidOf(CW.seat))?"me":last;
+    if(t==="d")delete par[k];else{let nv=toLive(op[2],last);if(p[0]==="S"&&p[1]==="fidUsed"&&p.length===2&&Array.isArray(nv)&&S.pid&&!nv.includes(S.pid))nv.push(S.pid);/* her own face stays reserved on her seat */
+     if(Array.isArray(par[k])&&Array.isArray(nv)){par[k].length=0;nv.forEach(x=>par[k].push(x))}else par[k]=nv}ok++;continue}
+   if(t==="a"){const arr=p.length===1&&p[0]==="R"?rivals:resolve(p,p.length);if(!Array.isArray(arr)){miss++;continue}const e=toLive(op[2],"x");const id=idOf(e);
+    if(!arr.some(x=>idOf(x)===id&&!(plain(x)&&x.coop)))arr.push(e);ok++;continue}
+   if(t==="r"){const arr=p.length===1&&p[0]==="R"?rivals:resolve(p,p.length);if(!Array.isArray(arr)){miss++;continue}const i=arr.findIndex(x=>idOf(x)===op[2]&&!(plain(x)&&x.coop));if(i>=0)arr.splice(i,1);ok++;continue}
+  }catch(e){miss++;console.error("hl op",e)}}
+  for(const x of m.nm||[]){HL.nm.push({o:x[0],n:x[1],r:x[2],w:COOP.state.week||0});nmText(x)}
+  if(HL.nm.length>120)HL.nm.splice(0,HL.nm.length-120);
+ }finally{quiet=q}
+ HL.stat.applied+=ok;HL.stat.miss+=miss;lg(["apply",m.why,ok,miss,(m.nm||[]).length]);try{if(typeof Q==="undefined"||!Q.length)render()}catch(e){}}
+/* her own texts that name a renamed person (the world copies came with the ops) */
+function nmText(x){try{if(typeof nmRewrite!=="function"||!x[2])return;const b=typeof nmBare==="function"?nmBare:(s=>s);const o=b(x[0]),n=b(x[1]);if(!o||o===n)return;
+  const names=(typeof nmPeople==="function"?nmPeople():[]).map(e=>String(e.o[e.f]));if(names.some(s=>b(s)===o))return;/* someone here still holds the old name: texts cannot tell them apart */
+  const k=nmRewrite(o,n,names);HL.stat.nm++;HL.stat.nmRefs+=k}catch(e){console.error("hl nm",e)}}
+/* after her next merged week: her P came back from her own end (which may have left with the old texts) */
+function nmAgain(){if(!live()||host())return;const w=COOP.state.week||0;HL.nm=HL.nm.filter(x=>w-x.w<=2);const q=quiet;quiet=true;try{for(const x of HL.nm)nmText([x.o,x.n,x.r])}finally{quiet=q}}
+HL.apply=apply;
+COOP.on("act",m=>{if(!m||m.k!==K||!CW.on||m.from===CW.seat)return;try{if(m.ask){if(host()&&CW.base)baseFrom(CW.base,"ask");return}apply(m)}catch(e){console.error("hl apply",e)}});
+/* the guest (re)opened the room (reload / rejoin / first join): she was rebuilt from the room's C; she asks for the host's writes since */
+COOP.on("start",()=>setTimeout(()=>{try{if(live()&&!host())COOP.send({t:"act",k:K,ask:1,id:K+"q"+Date.now().toString(36)})}catch(e){}},400));
+}catch(e){console.error("jcoophl",e)}})();
