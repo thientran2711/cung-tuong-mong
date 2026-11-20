@@ -142,3 +142,7 @@ Kết quả: 158/360 ô SỬA (E3 116, E2 57, E4 8; E1 0 — màu phụ luôn đ
 Hình: phoenix_L1536/phoenix_{xuan,ha,thu,dong}_{1,2}.jpg (tiêu đề "ĐÃ QUA CHUYÊN GIA MÀU (L1545)"). Script expert_L1545.py.
 Q2 ví dụ: phoenix_L1536/Q2_mock_s62_thu_A_vs_B.jpg — s62 thu, cùng dáng phượng trên nền áo #DF9ED9: A lông ngoài = màu áo (hoà vào áo, chỉ nổi nhờ viền vàng) · B lông ngoài = màu phụ (nổi rõ). Ý chuyên gia: B cho phượng lớn trên ngực/vạt áo; A hợp hoạ tiết nhỏ, kín đáo.
 Context: ~27 % (START 3 %) — sát ngưỡng chuyển giao 28 %; job sau nên giao cho phiên mới.
+
+## L1550 — chị chọn B: lông NGOÀI = màu phụ
+phoenix_L1536.json: plumage = [ngoài = phụ, trong = chính (màu áo), đầu lông/mắt = màu 3], thêm layout_L1550 {outer, inner, tips}; 'words' EN + 'vi' viết lại mỗi ô (vd s62 thu: "phoenix plumage: OUTER feathers in bright blush, inner feathers in light clear warm plum, feather tips and eyes in deeper light clear warm plum, outlined in fine gold thread"). 8 sheets vẽ lại, tiêu đề "B: lông ngoài = màu phụ", ô nền = màu áo chính. 0 gen.
+HANDOVER: DESIGN15 dừng ở đây (ngưỡng context ~28 %). Việc tiếp theo cho G33: nối 'words' vào builder t7/t8 thêu + mũ (G33 builder hold) — cần Foreman quyết.
