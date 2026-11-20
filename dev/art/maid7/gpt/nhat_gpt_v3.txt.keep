@@ -1,0 +1,9 @@
+base: dev/art/maid7/gpt/nhat_gpt_v2.txt
+allow: the vest closed edge to edge all the way from the collar down to the waist   # owner Lượt 1474: round-2 collar replaces the closed collar
+allow: with NO knot button at the throat   # owner Lượt 1474: round-2 collar (knot button)
+allow: NO gap   # owner Lượt 1474
+allow: NO V-opening and NO slit below the collar   # owner Lượt 1474: round-2 collar (narrow slim V)
+allow: so it fully covers the inner robe at the neck and chest   # owner Lượt 1474
+allow: none of the inner robe shows at the neck or chest   # owner Lượt 1474
+allow: a sleeveless embroidered over-vest with a straight upright standing collar   # owner Lượt 1474
+allow: worn over the inner robe   # owner Lượt 1474: -> worn over a crossed-collar inner robe (round-2 words)

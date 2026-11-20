@@ -144,8 +144,40 @@ def tamdang():
     return out
 
 
+NHAT_V2_COLLAR = ('a sleeveless embroidered over-vest with a straight upright standing collar, the vest closed edge to edge all '
+                  'the way from the collar down to the waist, with NO knot button at the throat, NO gap, NO V-opening and NO slit '
+                  'below the collar, so it fully covers the inner robe at the neck and chest (none of the inner robe shows at the '
+                  'neck or chest), with a band of gold-edged trim down the front, worn over the inner robe')
+# owner L1474: the collar of nhất đẳng round 2 (Lw8auqkswO, test2_nhat). Its prompt words = the round-5 words, so the look is
+# written out from the picture: tall stand collar + one knot button, vest edges close together, narrow slim-V of layered inner collars.
+NHAT_R2_COLLAR = ('a sleeveless embroidered over-vest with a TALL upright stand (mandarin) collar that wraps closely around the neck '
+                  'and is fastened at the throat with ONE small knot button; below the button the two straight front edges of the '
+                  'vest run down side by side, CLOSE together, leaving only a NARROW straight opening down to the sash (never a '
+                  'wide gap, never a wide V), and inside that narrow opening the neat layered crossed collars of the inner robe '
+                  '(with a thin light inner edge) show as a slim V just under the button, the inner robe\'s crossed collar also '
+                  'rising neatly inside the stand collar at the neck, with a band of gold-edged trim down the front, worn over a '
+                  'crossed-collar inner robe')
+
+
+def nhat3():
+    base = D + 'nhat_gpt_v2.txt'
+    t = open(base, encoding='utf-8').read()
+    t = swap(t, NHAT_V2_COLLAR, NHAT_R2_COLLAR)
+    out = D + 'nhat_gpt_v3.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [('the vest closed edge to edge all the way from the collar down to the waist', 'owner Lượt 1474: round-2 collar replaces the closed collar'),
+                     ('with NO knot button at the throat', 'owner Lượt 1474: round-2 collar (knot button)'),
+                     ('NO gap', 'owner Lượt 1474'),
+                     ('NO V-opening and NO slit below the collar', 'owner Lượt 1474: round-2 collar (narrow slim V)'),
+                     ('so it fully covers the inner robe at the neck and chest', 'owner Lượt 1474'),
+                     ('none of the inner robe shows at the neck or chest', 'owner Lượt 1474'),
+                     ('a sleeveless embroidered over-vest with a straight upright standing collar', 'owner Lượt 1474'),
+                     ('worn over the inner robe', 'owner Lượt 1474: -> worn over a crossed-collar inner robe (round-2 words)')])
+    return out
+
+
 if __name__ == '__main__':
-    jobs = sys.argv[1:] or ['nhat', 'chuongsu', 'thancan', 'mama51', 'mama65', 'tamdang']
+    jobs = sys.argv[1:] or ['nhat', 'chuongsu', 'thancan', 'mama51', 'mama65', 'tamdang', 'nhat3']
     for j in jobs:
         p = globals()[j]()
         print(p, len(open(p, encoding='utf-8').read()))
