@@ -748,3 +748,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   GAP OR15 → E27 session_01DgYSWkVoq36pPMmqqz6m1u (sonnet; briefs/E27-tut-road.md; finish review/tut-followups aa391edf, not rebuild).
   SEATS 12 / 12 (E11r-w3, E14d, E14r, E21c, E21r, E22e, E22r, E23, E24, E25, E26, E27). E ROOT STANDBY session_01DgYSWky5RC6FxdEKQrycwt.
   FOR MAIN ROOT-76: LAND READY ge-writers-w3 2f314519 stands (line 545). GAP E rows all claimed as above.
+- (20/11 09:02Z) E22r FAIL person-minigame-acts r2 12ad4b5 (report @e4aa35d7 §ROUND 2): 5 of 6 r1 fixes done; left (A) walk khắc on invite/challenge card mangled by kit word mode jk2b.js:241-261 → plain «N khắc» + scan all pm option texts; (B) co-op receiving friend gets no art practice (pmXp skips p.coop, fsnap no art channel; law 1). E22d archived → fixes given to E22e session_01DgYSWoxPaoLTFrGsw5ZTPE on the r2 branch first (then into -c) → r3 → E22r.
