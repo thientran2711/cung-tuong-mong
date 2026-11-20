@@ -69,3 +69,24 @@ NEW t2 (replaces "a fine silk robe with delicate embroidered {mot} at the collar
 Sent same wording to RANK8-B + RANK8-C. Test prompts dev/art/rank8-s62/test-square/s62_t{1,2}_sq.txt; gate: full store FAIL only on the swapped sentence (expected), --scope tp1/tp2 --age a18 PASS.
 Gens xSBeugTjfW (t1), nVsx9M3YQD (t2). Sheet dev/handover/review-sheets/rank8-s62/s62_THU_covuong_t1-t2-t3.webp.
 Looked: both square, open, no round, no V, no cross collar. t1 = deep, low square (shows upper chest a bit — may be too low for the owner); band reads ice blue not clearly mint. t2 = wide shallow square with embroidered band — but close to t3's look (t3 adds stiff mint band + girdle + apron). Not redrawn.
+
+## 8. G17 into the builder (owner verdict: kiểu 1 OK, kiểu 2 "rộng quá … muốn tuột xuống") — 0 cr
+- t8-prompt-B/build.py TIER_LOW (shared t1–t3 store, used by EVERY person's t1/t2): t1 "crossed-collar upper garment" → "upper garment with an OPEN SQUARE NECKLINE (style 1, simple) … narrow plain {sec} silk band …"; t2 "delicate embroidered {motif} at the collar, sleeves and hem" → same style-1 neckline + "delicate embroidered {motif} at the sleeves and hem" (rest of t2 robe kept). outfit_low123 now formats sec = secondary colour name. t3, t4+ untouched.
+- Gate: check_store STORE CHECK PASS s62/s64/s65 × t1/t2; m05 t2 PASS (band = her secondary "teal"). Outputs: dev/art/rank8-s62/g17/.
+- Rule G17 added (rule.py add, owner verbatim).
+- Note: this changes t1/t2 prompts for ALL people (c/m/p/s) at their next gen; already-drawn pictures untouched (no redraw).
+- Note: s62 t1/t3/t4 builder output also differs from my drawn prompts in the ANGLE sentence — that is an upstream commit (not mine).
+
+## 9. G17 clarification + 1 new t2 test (owner GO) — 1 gen, 135 cr
+- build.py TIER_LOW t2: "OPEN SQUARE NECKLINE (style 1 cut, Thường tại edge): the SAME low, simple, narrow straight-edged square opening as the lowest rank (NOT wide, NOT stretched toward the shoulders) … its edge a LAYERED border of two stacked narrow bands, a thin {sec} piping inside and a narrow band of small embroidered {motif} outside …". t1 unchanged (plain band). G17 updated with the owner's clarification verbatim.
+- Gate STORE CHECK PASS s62/s64/s65 t2 (dev/art/rank8-s62/g17/).
+- Gen 8ai9BR2IrU. Sheet dev/handover/review-sheets/rank8-s62/s62_THU_covuong2_t1-t2.webp (t1 đã OK | t2 THỬ MỚI).
+- Looked: t2 square is the same narrow size as t1 (not wide), edge = thin mint piping + plum-blossom band; rest of t2 outfit as before. Face ok, mouth closed, no earrings.
+
+## 10. TEST cổ vuông t4 Tần / t5 Phi / t6 Quý phi (owner) — 3 gens, 405 cr, builder untouched
+Test prompts dev/art/rank8-s62/test-square456/s62_t{4,5,6}_sq.txt (= current builder output + one neckline phrase). Approved gate --scope tp4/5/6 --age a18 PASS (t4 shortened to stay < 10 000 chars).
+- t4 Tần: ", a crossed collar," → ", a SQUARE NECKLINE (Tần, more covered): a small, high square opening at the base of the throat, collarbones covered, edged with a stiff embroidered band; never round, never a V, NO crossed wrap collar,"
+- t5 Phi: + "with a SQUARE COLLAR (Phi style, closed and covered): a high square-cut collar whose small square front frames the base of the neck, the neck covered up to the throat by a {S} inner collar, the square edged with a DOUBLE band of gold brocade; never round/V/cross"
+- t6 Quý phi: + "with a SQUARE STANDING COLLAR (Quý phi style, the most covered): a stiff upright collar with SQUARE corners closing high around the neck, only a very narrow square notch at the front of the throat, edged with plain gold brocade (no pearls, no fringe, no tassels on the collar); never round/V/cross"
+Gens eIPOIm2dqL / UPvmPCKwny / 79fvNG6JAL. Sheet dev/handover/review-sheets/rank8-s62/s62_THU_covuong_t4-t5-t6.webp.
+Looked (honest): t4 = small square neckline visible in the capelet opening under the jade clasp — reads square. t5 = closed mint stand collar under the cloud collar; the SQUARE does NOT read (looks like a mandarin stand collar). t6 = stand collar with squared top corners; square weak, reads mostly as a stand collar. Coverage rises t4 → t6 as asked. No redraw.

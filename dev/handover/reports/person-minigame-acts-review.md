@@ -1,4 +1,4 @@
-# person-minigame-acts — BIG REVIEW E22r (opus) — VERDICT: FAIL (6 fixes)
+# person-minigame-acts — BIG REVIEW E22r (opus) — VERDICT r1: FAIL (6 fixes) · r2: FAIL (2 fixes, see ROUND 2 at the end)
 
 depth 6 · START_CTX ~3 % of 1M window (roll at ~28 %, ceiling 60 %) · session_01DgYSWkkEFYdpG7opFYFx8H · reviewer for FOREMAN E #15 session_01DgYSWqC1epTFkkxGoFxqYW
 PRIORITY #1 CHECK ('person-minigame-acts|E22r|pm-rank'): OD 2 | ledger 0 | claims 8 | main 1 | review/* 1 (review/person-minigame-acts = under review) | archive 0 (brief line; re-checked: no other branch builds pm acts; reuse of j82 startContest/playArt, jmgt occ, jrcv RCVK/rcvPick, jagacts3 agReg/p3O, jcoopworld ASK, jmem, goSee/actMove confirmed in the diff).
@@ -34,3 +34,28 @@ Law by law: 1 two-way — her→NPC, NPC→her, NPC→NPC OK; co-op NOT OK (fix 
 Accepted as built (foreman rulings 20/11 01:22Z, not re-opened): law 5 vs same-level peer; NPC → her ≥ 4 / 200 buổi (measured 6–18); co-op auto-hand; «Nắm chắc» on sure answers. role-parity-exempt harm:pmplay / harm:pmduel = co-op carrier of cx3:pmPlay/pmDuel (reasons written; both sides hold the act) — accepted.
 
 r2: fix on review/person-minigame-acts (merge LIVE first), then SẴN SÀNG KIỂM; the r2 reviewer re-runs the table above + a part-D co-op probe for fix 1.
+
+## ROUND 2 (r2) — review/person-minigame-acts 12ad4b5 — VERDICT: FAIL (2 fixes)
+E22r, depth 6, same session; FOREMAN E #17 session_01DgYSWoFXvbLeCE3SVSWgDG. PRIORITY #1 CHECK ('person-minigame-acts|pmCoopCard|rcvOff'): OD 2 | ledger 0 | claims 8 | main 1 | review/* 1 (this branch) | archive 0.
+LIVE merge: local review/person-minigame-acts-r2 = 12ad4b5 + merge of origin/main 70bea3d3 (mg-noword-a + mg-visual) @ d0e86ca1 (conflicts index.html / sw.js only → rebuilt by build_site.sh). Not pushed (FAIL).
+
+### The 6 r1 fixes
+| r1 fix | r2 | check |
+|---|---|---|
+| 1 co-op pick lost | DONE | x rides in all four carriers (old relay act, host D.kind inv, guest doSend inv, PEND.thInv pp) and invRun (host reload) + invHer read it (jcoopworld askX); pmCoopX sanitises it. pm-coop-d.js 23/23 run with two real clients on the co-op worker: host→guest, guest→host and after a host reload the game + stake are kept |
+| 2 friend's card | DONE | pmCoopCard = RCVK line + pmPlayOpts / pmDuelOpts; shot ipad-8: game, place, «Cược: Danh 5 mỗi bên», ladder word, được/mất on all three answers |
+| 3 pmXp | DONE | addArtP (shared rule) — but see new fix B for the co-op friend |
+| 4 rcv weights | DONE | BAL.pm.rcvOff=[3], BAL.rcv.k.pm from help weights; one-core-guard PASS |
+| 5 walk on her invite card | NOT VISIBLE → fix A | the option data has it, the rendered card does not |
+| 6 wording | DONE | labelled segments; one full stop (pmEnd) on every pm line |
+
+### Suites after the LIVE merge (d0e86ca1)
+person-minigame-acts.test 31/31 · pm-coop-d.js 23/23 · receiver-choice ALL PASS · pm-equal ALL WITHIN TOLERANCE · pm-rank stake rises, board falls, chance vs real NPCs now falls too (63.7 → 47.5) · one-core-guard PASS · ag-mgcal PASS · mg-ready-guide PASS 9/9 · role-parity ×2 + quickcheck: see the line at the end.
+role-parity probe change (scan: asHitPick also for the Hoàng hậu and with every maid-palace target forced in turn): honest — it widens the NPC side the player side is checked against, adds no exempt and no open row.
+
+### FIXES (whole family, law 11)
+A. THE WALK COST STILL DOES NOT REACH HER CARD, AND THE CARD SAYS SOMETHING FALSE (law 3, law 7, go-in-person OD 18/11 ~19:55Z; r1 fix 5). jpma.js:110-111 pmWalkTx writes the walk as «đi sang <place> N khắc» inside the mất / tốn segment. Her rcvCard renders option text through the kit word mode (dev/build/jk2b.js:241-261): only a plain «N khắc» segment survives (:242); a phrase is matched against the stat rules, so a place name with a stat word is translated. Repro (new game, default card, she at home, the asker at Đức Thọ cung, travel 2): data «mất: Sức -6, đi sang Đức Thọ cung 2 khắc» → card TỐN «Sức −6 · mang tiếng ác» (the /Đức/ rule, :260); duel data «tốn: đi sang Đức Thọ cung 2 khắc» → card TỐN «không», ĐƯỢC «được tiếng hiền, có thêm bạc» (shot fold-7). Fix: put the walk as the kit-read cost «N khắc» (the place is already in the card line «… mời người sang <place> …»); scan EVERY pm option text (RCVK pmPlay/pmDuel, pmCoopCard, PEND.pmPick/pmStake, pmRows, pmBtns) through the same word mode at the default level in the test: the visible TỐN holds the khắc, and no stat word appears that is not in the option's effects (place names Đức Thọ, Khôn Ninh, … included).
+B. THE CO-OP FRIEND NEVER GETS THE PRACTICE OF «CÙNG CHƠI» (law 1; I missed this in r1). pmPlayEnd → pmXp skips p.coop (jpma.js:72), and the co-op result has no art channel (jcoopworld.js:401-403 fsnap carries DK + rel + oan only). So only the asker's own device adds practice (addArt on her S); the friend who accepted gets none, while an NPC partner gets it (addArtP) and she gets it from an NPC. Fix: carry the practice to the receiver's own S (e.g. an art op in the result she applies with addArt, the fam/res path), both directions; test in pm-coop-d (receiver's artp rises by BAL.pm.play.xp).
+
+Shots r2 (Fold 755x1000@2 + iPad 1180x820@2, looked 3×, scratch only): Hậu cung cards, art pick, stake pick, duel rules screen (mg-ready-guide), her challenge card, her invite card with walk (fold-7 = fix A), the friend's duel card (ipad-8). No page errors, no overflow.
+Role-parity ×2 ALL PASS, outputs byte-identical (md5 b9bbde2a…). QUICKCHECK PASS · open 1360 ms · old save ok · perf new/live render 225/212, tab 449/458, buổi 992/1221 ms, tasks>200 19/18 · core gates PASS. All suites green; FAIL is on fixes A + B only.
