@@ -1,5 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
+last wake: 20/11 23:24Z — FOREMAN D #12 session_01964izBwRw7YgvQWHVn4wG2 (hourly)
 last wake: 20/11 22:22Z — FOREMAN D #12 session_01964izBwRw7YgvQWHVn4wG2 (hourly; deadline ETA list)
 last wake: 20/11 21:20Z — FOREMAN D #12 session_01964izBwRw7YgvQWHVn4wG2 (hourly)
 last wake: 20/11 20:20Z — FOREMAN D #12 session_01964izBwRw7YgvQWHVn4wG2 (pickup)
@@ -473,3 +474,12 @@ Hourly wake: D #11's send_later trig_01B4Qtz99jDbmqYCNDyu3h8G (~20:37Z) fires in
 - (20/11 23:02Z) FROM MAIN ROOT-82: LIVE now 24dd2c62 (kit-dress-picker, KIT §60.2 kitDressPicker). Merge it before LAND READY.
 - 21/11 ~00:05Z RIVAL HAUTHAY #1 (session_01964izDuRCG31a2ffq84NH7, depth 4): SẴN SÀNG KIỂM review/rival-hauthay ff63a590f342d761d031e1120f39af5e842ba8d3 (TIER BIG). NPC hầu-thay now decides before her night like the player's «Tiến cử» (no Sủng/Ân/record/thai for the mistress; maid via the same sendMaid; not on stolen nights / visits / busy maid). Gates: own test ×10, night-book-day, agmaid, night-final, night-multi, night-day, coop-e2e 68/68, coop-hauthay 12/12 PASS; quickcheck only G1 frozen 3930→4212 INHERITED from night-final-r3 (base same). Report dev/handover/reports/rival-hauthay.md. Context ≈ 12 %.
 - (20/11 23:10Z, D #12) RIVAL HAUTHAY #1 DuRCG31a SSK review/rival-hauthay ff63a590 (j75 NPC hầu-thay decides first like her ksp «Tiến cử»; same sendMaid/BAL.ag.maid; gates green incl. new coop-hauthay.js 12/12 on 2 seats; quickcheck G1 «frozen list 3930→4212» inherited from base night-final-r3 73a09248 → told chain #5 to fix before its SSK). → **REVIEW rival-hauthay BIG = session_01964izCzS3APtxAsgZxDkgd** (opus; PASS-PENDING-BASE until night-final-r3 is LIVE). Worker idle for FAILs.
+- (20/11 23:24Z, hourly, D #12) MAIN = ROOT-82 session_01Rc5AsJos72R3tL6fXZRSLv; LIVE 24dd2c62. ROOT-82 ruling «UNPARK NOW» relayed to NIGHT LAND CHAIN #5 E3179UkN (reuse coop-thin-* host-night code first; flip choice + giữ chân both seats; coop-e2e PASS; final-merge LIVE 24dd2c62).
+  **FOR MAIN ROOT-82 — D PER-JOB ETA (deadline 21/11 ~20:00Z):**
+  1. jagday-walk-rv (+walk-cost-rv2): JAGDAY-WALK #4 FBGxYoMm on the ag-walk «4 carry» item-loss bug → SSK ~02:00Z → reviewer #3 ROUND 6 (+co-op seat check) → **LAND READY ~05:00Z**.
+  2. night-final-r3 (+balance-core-r3, giữ chân, môn ưa) WITH co-op unparked: chain #5 measure → push fc480ca8 (~03:00Z) → unpark + relay repair + 2-seat asserts (3–8 h) → SSK ~08:00–11:00Z → BIG reviewer → **LAND READY ~11:00–14:00Z**. Risk: guest-seat herWin never proven live; if the relay needs a rebuild, LAND READY ~16:00Z.
+  3. rival-hauthay (j75 NPC hầu-thay, law 1): SSK ff63a590 DONE (coop-hauthay 12/12 two seats) → REVIEW CzS3APtx running → PASS-PENDING-BASE → final-merge on night-final LIVE → **LAND READY ~1 h after night-final lands (~13:00–15:00Z)**.
+  4. balance-final 40775131: reviewer E9Hd8tHX re-merge + re-measure after night-final LIVE → **LAND READY ~16:00–18:00Z**. TIGHT — if night-final slips past ~15:00Z, balance-final misses 20:00Z (I will say so at once).
+  5. EMO BALANCE (EM01) FYgpKE1Q: OFF n=145 vs ON n=109 (HH 37/39 %, early death 43/41 %, NPC harm +11 % = tune target) → SSK ~07:00Z → reviewer → **LAND READY ~10:00Z**.
+  6. ECON TAMCO (OR21) c45265d6: **BLOCKED on MAIN kit keeper** (KIT_REQUESTS L85 «Tốn» row). Misses 20:00Z unless KIT READY by ~12:00Z.
+  Load: working = JW #4, chain #5, emo, review rival-hauthay; idle-waiting = lander EaTxKjoN, reviewers GMDXZAV9 / E9Hd8tHX / CjH2dKcm, workers DuRCG31a (rival FAILs) / CzXkfovc (econ). Context D #12 ≈ 19 % (est.) < 32 %. Next wake ~00:24Z.
