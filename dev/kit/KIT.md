@@ -680,6 +680,12 @@ Owner: "thêm cho tôi một cái option là cái chữ X hoặc là chữ go ba
 - `kg82Close` clears back / backAsk / quit / quitAsk / xdo. Callers never draw their own back button.
 - Test: `node dev/test/mg-back.js [page] [WxH] [shotdir]` (every caller × every screen, scan table).
 
+### 59.2 SMALL SPINNER · kitSpin (KP16, review/kit-modal-spin; life-preload part b) — `dev/build/jph.js`
+- `kitSpin({s,label,cls})` → `<i class="kspin">`: a 28 px (18 px with `s:true`) gold ring on the parchment hair-line (`--gold`, `--k-hair`), turning at the game pace (`--pace`); still gentle breath under «Hiệu ứng: Gọn» (`kspin-still`) and, via the global reduced-motion rule, not turning. Spoken label = `CTM_WAIT.spin` («Đang chờ…»). ONE look: the dialog wait of the life gate (`#modal.klifewait::after`, jload.js) draws the same ring, so a dialog waiting up to 3 s for its picture shows the spinner instead of nothing.
+- Use `kitSpin()` anywhere a short wait needs a sign (buttons, chips, a pane); never a private spinner. Test `node dev/test/kit-modal-spin.js`; kit page sample «§59.2».
+
+### 8.3 A DIALOG OPENED FROM THE TITLE SCREEN (KP18, review/kit-modal-spin) — `kitModal` in `dev/build/j79.js`
+- `kitModal` puts a dialog opened while `#title` is up on the title layer by itself (adds the existing class `kptitle` = `.modal.kptitle`, z 55, j74): kitConfirm / notice / pick work from any title sub-panel, no caller patches it (the jcloud `dropAsk` patch is gone). In play (title hidden) nothing changes.
 ### 13.10 GAME MARK CHIP «n/10» + AMBER CLOCK · kitGameMark / kitGameClock (owner OD 20/11 ~07:15Z, review/kit-mark) — `dev/build/j79.js` (+ `mgFast` in jmgt.js, `tone` in kitCoopClock)
 - ONE small chip «n/10» in the game title line (`.kgmk`, left of the `.kgclk` clock), the same kit chip look as the clock (`kitChips` / `.kchip.n`). Number only: no word, no %. The 17/11 clutter ruling stands: the PHẦN/HỒI/CÒN row stays hidden; this is the only extra chip.
 - Wired ONCE for every kind: all engines report through `env.hud` → `kg82Set` → `kitGameSet`; `kitGameSet("score"|"time")` calls `kitGameMark`. The chip READS the HUD score and never grades again: since review/mg-score-same every engine puts `mgLive(env,x)` (the already graded mark, equals the result) in `env.hud({score})`, so a second `mgGrade` would double-grade. "a/b" counts as 10·a/b, "–/10" = 0. `KG82.cur` (the running env: kind + ease) is set by the three env makers (j82 kg82Play, j92 Chải chuốt, jsgame) and read by the clock. No engine draws or updates the chip itself.
@@ -710,6 +716,7 @@ Category colour (owner 11/14): the brocade is tinted, the photo window gets a co
 | trung-phat | Trừng phạt | `#5a3a2a` |
 | muu-ke | Mưu kế | `#5a3f8f` |
 | hai-nguoi | Hại người | `#7a0f14` (blood red) |
+| y-duoc | Y dược | `#5d8a3c` (KP06, review/kit-modal-spin: medicine / pregnancy / physician acts — thuốc, an thai, thụ thai, mang/có thai, thái y, chữa/khám bệnh, bồi bổ, bắt mạch; «Hầu thuốc …» / «Mang … thuốc men» stay Hầu hạ; checked first, art `act-cat-y-duoc`) |
 | sung-ai | Tranh sủng | `#b03a7a` (Chặn ngự giá, Tranh sủng, lật/rút/giữ thẻ, Liếc mắt đưa tình: winning the Emperor's night, checked first) |
 | nghi-ngoi | Nghỉ ngơi | `#5f9a5f` |
 | buon-ban | Buôn bán | `#a8692a` |
