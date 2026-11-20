@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà","b":"c83b95d7990d","h":[{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"},{"s":"39228682+","t":"2026-11-20T10:45Z","c":"Phi tần khác cũng rủ nàng lập phe, vào phe của nàng (luật hai chiều)"}]};
+window.CTM_BI={"s":"983a9436+","t":"2026-11-20T15:42Z","c":"SELF-MERGE LAND outside-nums: merge LIVE a99673e8 (index.html/sw.js rebuilt)","b":"3ba2852702ba","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -26250,11 +26250,11 @@ const KA_ROWS=[["why","Cần"],["ton","Tốn"],["duoc","Được"],["mat","Mất
 const KA_ODDS=/^(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)$/;
 /* "chờ N khắc" (parallel time, jptime: the khắc the person sent is away) sits in the Tốn row beside the order khắc */
 const KA_TIME=/^(?:[●○]+\s*)?(?:chờ\s+)?\d+(?:\s*[-–]\s*\d+)?\s*(khắc|việc)$/i;
-const KA_STAT=/^(Bạc|Sức|Sủng|Danh|Đức|Sắc|Tài|Tâm cơ|Tai mắt|Ân tình|Thai)\s*-\s?\d/;
+const KA_STAT=/^(Bạc|Hồi môn|Sức|Sủng|Danh|Đức|Sắc|Tài|Tâm cơ|Tai mắt|Ân tình|Thai)\s*-\s?\d/;
 const kaPlain=h=>String(h||"").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 /* sentiment of one value for her: g gain, r loss, n neutral word */
 const kaWord=h=>String(h).replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"quý ngươi -$1").replace(/thân \+(\d+)/g,"quý ngươi +$1");
-function kaSent(h,old){const s=kaPlain(h);if(!s)return"n";if(old==="g"||old==="r")return old; /* kit-rows-b KP12: the writer's explicit class g/r beats the word-meaning colouring */let c="n";try{c=kcls(String(h).replace(/<b>[^<]*<\/b>/g,"x"))}catch(e){} /* an unclassed <b>item name</b> never colours the row (e.g. "Son phần giáng") */
+function kaSent(h,old){const s=kaPlain(h);if(!s)return"n";if(old!=="g"&&old!=="r"){const lo=s.match(/^(Áp lực hôn sự|Lời đồn)\s*([+−-])\s?\d/);if(lo)return lo[2]==="+"?"r":"g"}/* kit-cost-rows-home: pressure / rumour — less is better (j1 KLOW) */if(old==="g"||old==="r")return old; /* kit-rows-b KP12: the writer's explicit class g/r beats the word-meaning colouring */let c="n";try{c=kcls(String(h).replace(/<b>[^<]*<\/b>/g,"x"))}catch(e){} /* an unclassed <b>item name</b> never colours the row (e.g. "Son phần giáng") */
  /* sign wins: a value whose only number is negative is a loss for her (unless it is harm to a rival or less hostility) */
  if(c!=="r"&&/[-−]\s?\d/.test(s)&&!/\+\s?\d/.test(s)&&!/(^|\s)(nàng|con nàng|của nàng|hắn)(\s|$)/.test(s)&&!/(ghen|oán|thù|nghi)\s*[-−]/.test(s))c="r";return c}
 /* split one value "X +1 (note)" into value + trailing note */
@@ -37480,7 +37480,7 @@ kitFigRects=function(){const st=$("stage");if(!st)return[];const out=[];st.query
    option with no cost has NO Tốn row (owner 13:25Z: never "Tốn: không"). Under it the kit HINT row (6b). The result card afterwards shows the true numbers. Active acts keep everything.
    Use (data only): a Q / kitModal item with `hideOut:true` (every option) or an option with `hideOut:true`; any priced button may also carry
    `data-khide="1"`. Which items are events: `kitIsEventChoice` below. ---------- */
-const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b/i;
+const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b|Hồi môn/i;/* kit-cost-rows-home: a dowry spent is a price like bạc */
 /* ---------- 6b. KIT HINT + ODDS METER (owner 11/15 15:05Z / 15:10Z, 19/11 ~01:48Z, KIT 28.6 — shared kit parts kitHint / kitHintRow / kitOptOdds) ----------
    kitHint(o, m, lv) → {hint}: read from the option's OWN data (fx + its x / j67 text: the odds, people and state of THIS moment), so it is
    true now and changes with the context (no fixed answer to learn). Words only: stat numbers never appear (a count in a story phrase is
@@ -37514,9 +37514,11 @@ function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):typeof dil
  return M}
 /* her side of a phrase: +1 good for her, -1 bad, 0 neutral (the kit colour rule kcls/kaSent + story words) */
 function kitHintSign(p,l){if(/^(không (mất|được|tốn)[^,]*gì|không được không mất)/i.test(p))return 0;
+ if(/^(Áp lực hôn sự|Lời đồn)\s*\+\s?\d/.test(p))return -1;if(/^(Áp lực hôn sự|Lời đồn)\s*[-−]\s?\d/.test(p))return 1;/* kit-cost-rows-home: less pressure / rumour is good */
+
  if(l==="kèm"&&!/\+\s?\d/.test(p)&&!/bớt (ghen|oán)/.test(p))return -1;/* a side effect is a risk unless it is a plain gain */
  if(/(^|\s)(phật ý|hận|sa sút|không thể|đoạn tuyệt|bẽ mặt|nhạt|lạt lẽo|lạnh nhạt|chán|trách|giận|ghét|tang vật|lộ là|bị đánh|chịu đòn|thất sủng|bị phạt)(\s|$|,)/i.test(p)&&!/^(nàng|con nàng|của nàng|hắn) /i.test(p))return -1;
- if(/(thân|thiện cảm|quý ngươi|quý ta|tình ý|(^|\s|\()lòng)\s*[-−]\s?\d/i.test(p))return -1;if(/(thân|thiện cảm|quý ngươi|quý ta|tình ý|(^|\s|\()lòng)\s*\+\s?\d/i.test(p))return 1;
+ if(/(thân|thiện cảm|quý ngươi|quý ta|quý nhau|tình ý|(^|\s|\()lòng)\s*[-−]\s?\d/i.test(p))return -1;if(/(thân|thiện cảm|quý ngươi|quý ta|quý nhau|tình ý|(^|\s|\()lòng)\s*\+\s?\d/i.test(p))return 1;
  let c="n";try{c=kaSent(p,"n")}catch(e){}if(c==="g")return 1;if(c==="r")return -1;
  if(/(^|\s)(hài lòng|thoát nạn|vui|hợp ý|thương|tin cậy|giữ được|được giữ|được dời|dọn sang|tạ ơn)(\s|$|,)/i.test(p))return 1;return l==="hỏng"?-1:l==="kèm"?-1:1}
 const KIT_DEADLY=/(tru di|ban chết|mất mạng|lộ là chết|là chết|bị chết|xử tử|xử trảm|\bchết\b)/i;
@@ -37535,6 +37537,11 @@ function kitHintPhrase(p,sg,nm,lv){const who=nm||"\u0001";
   [/phi tần.*ghen|ghen.*phi tần/i,["chuốc lòng ghen","các phi tần ghen ghét","các phi tần ghen ghét"],["bớt người ghen","các phi tần bớt ghen","các phi tần bớt ghen"],"i"],
   [/ghen|oán|ghét/i,["kết thêm oán","có người ghen ghét",`${who} sinh oán`],["bớt người oán","có người nguôi giận",`${who} nguôi giận`],"i"],
   [/tình ý/i,["thêm tình riêng","người ấy thêm tình ý",`${who} thêm tình ý`],["dứt tình riêng","người ấy nguội lòng",`${who} nguội lòng`]],
+  [/quý nhau/i,["hai bên thêm thân thiết","hai bên quý nhau hơn","hai bên quý nhau hơn"],["hai bên sinh xa cách","hai bên bớt quý nhau","hai bên bớt quý nhau"]],/* kit-cost-rows-home «quý nhau» (a decline that costs the liking of both sides) */
+  [/Gia thanh/i,["thêm danh giá gia môn","gia môn thêm danh giá","gia môn thêm danh giá"],["tổn danh giá gia môn","gia môn sút danh giá","gia môn sút danh giá"]],
+  [/Áp lực hôn sự/i,["thêm sức ép hôn sự","hôn sự bị thúc ép hơn","hôn sự bị thúc ép hơn"],["đỡ sức ép hôn sự","hôn sự bớt bị thúc ép","hôn sự bớt bị thúc ép"],"i"],
+  [/Lời đồn/i,["thêm lời ra tiếng vào","người ngoài xì xào thêm","người ngoài xì xào thêm"],["lời đồn lắng xuống","người ngoài bớt xì xào","người ngoài bớt xì xào"],"i"],
+  [/Hồi môn/i,["thêm của hồi môn","thêm của hồi môn","thêm của hồi môn"],["hao của hồi môn","hao của hồi môn","hao của hồi môn"]],
   [/thân\b|thiện cảm|quý ngươi|quý ta/i,["được lòng người","người ấy có thiện cảm hơn",`${who} có thiện cảm với ta hơn`],["mất lòng người","người ấy mất thiện cảm",`${who} mất thiện cảm với ta`]],
   [/(^|\s|\()(lòng|Lòng)\s/,["được lòng kẻ hầu","kẻ hầu một lòng theo ta",`${who} một lòng theo ta`],["mất lòng kẻ hầu","kẻ hầu sinh oán",`${who} sinh oán`]],
   [/thương con|hoàng tử|công chúa|các con/i,["có lợi cho con","con được thương","Hoàng thượng thương con hơn"],["con thiệt","con bị lạnh nhạt","con bị lạnh nhạt"]],
@@ -37558,7 +37565,7 @@ function kitHintWho(p,m){try{const L=(typeof liveRivals==="function"?liveRivals(
  for(const v of L)if(v&&v.name&&p.includes(v.name))return v.name;
  if(!/^(nàng|hắn|con nàng)\s/.test(p))return"";const w=m&&m.who;if(w&&w.w&&w.w[0]==="r"){const v=typeof RV==="function"?RV(w.w[1]):null;if(v)return v.name}if(w&&w.nm)return w.nm}catch(e){}return""}
 /* how big a change is, in words (from Tâm cơ 25): "(nhiều)" / "(chút ít)" against the usual size of that stat — never the number */
-const KIT_HINT_MAG=[[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,10],[/được ưa/i,3],[/Sủng/i,5],[/Danh|Đức|Ân tình/i,4],[/Bạc/i,40],[/Sức/i,10],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,2]];
+const KIT_HINT_MAG=[[/Áp lực hôn sự|Lời đồn|Gia thanh/i,10],[/Hồi môn/i,40],[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,10],[/được ưa/i,3],[/Sủng/i,5],[/Danh|Đức|Ân tình/i,4],[/Bạc/i,40],[/Sức/i,10],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,2]];
 function kitHintMag(p){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];if(!n)return"";const v=+n;for(const [re,big] of KIT_HINT_MAG)if(re.test(p))return v>=big*1.5?" (nhiều)":v<=Math.max(1,Math.floor(big/4))?" (chút ít)":"";return""}
 function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:""};
  if(o.hint){const h=typeof o.hint==="function"?o.hint(lv):String(o.hint);return{hint:h}}
@@ -62361,6 +62368,8 @@ window.KBM_SAMPLE={b:"sample",n:"Cung nữ · Đường vào cung",count:{txt:"�
   {i:1,n:"?",st:"f",ch:0,slots:[{sh:"t",ti:"?"},{sh:"a",ti:"?"}],fail:{n:"Thất thế"},card:{txt:"Chưa ai biết ngả này dẫn tới đâu."}},
   {i:2,n:"?",st:"c",ch:8,slots:[{sh:"t",ti:"?"},{sh:"a",ti:"?"}],fail:{n:"?"},card:{txt:"Chưa ai biết ngả này dẫn tới đâu."}},
   {i:3,n:"?",st:"o",ch:0,slots:[{sh:"t",ti:"?"},{sh:"a",ti:"?"}],fail:{n:"?"},card:{txt:"Chưa ai biết ngả này dẫn tới đâu."}}]};
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.6h",title:"Chỉ số đường nhà + «quý nhau» trong hàng Tốn / Được / Bại và trong lời gợi ý (chế độ ẩn kết quả)",where:"mọi thẻ việc / lựa chọn có Gia thanh, Áp lực hôn sự, Hồi môn, Lời đồn hoặc «quý nhau»: hàng Tốn / Được / Bại giữ đủ; Áp lực hôn sự và Lời đồn càng ít càng tốt; Hồi môn đã dâng là một khoản Tốn; lời gợi ý nêu đúng điều đó, không bao giờ «không được mất gì» khi có chỉ số",
+ html:()=>{try{const L=["Khá chắc · tốn: Hồi môn -40 · thành: Gia thanh +2 · hỏng: Áp lực hôn sự +8","Chắc · thành: Áp lực hôn sự -8 · hỏng: Gia thanh -2","Liều · thành: Lời đồn -4 · hỏng: Lời đồn +5","được: ngươi giữ lễ · mất: hai bên quý nhau -5"];return L.map(x=>{let h="";try{h=kitHint({x},null,1).hint}catch(e){}return `<p class="kpnote">${kaPlain(x)}</p>${kitRows([["Gợi ý",h]])}`}).join("")}catch(e){return ""}}})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§82.1",title:"kitTitlePlate «Thiên mệnh» hai sắc · hàng có nhãn là danh hiệu",where:"mọi chỗ danh hiệu Thiên mệnh (thẻ trên sân khấu, tab Danh hiệu, Bảng Thiên mệnh, Sổ luân hồi); hàng có nhãn là bảng danh hiệu xếp bảng trên, giá trị dưới",html:()=>{try{const a=kitTitlePlate({id:"ge_x_1t",name:"Phượng triều thiên hạ",tier:8,sh:"t"},{id:false}),b=kitTitlePlate({id:"ge_x_1a",name:"Phượng triều thiên hạ",tier:8,sh:"a"},{id:false}),c=kitTitlePlate({id:"s8",name:"Phượng minh thiên hạ",tier:8},{id:false});return `<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">${a}${b}${c}</div><div class="kpb">${kitRows([[a,["Đạt được khi nàng ngồi vững ngôi Hoàng hậu"],"t"],["Trên đầu","chưa mang danh hiệu nào"]])}</div>`}catch(e){return ""}}})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§21.2",title:"kitBranchMap · Sơ đồ nhánh",where:"Sổ luân hồi (trang Sơ đồ nhánh): một sơ đồ cho mỗi nhánh; chạm một nút để xem thẻ",html:()=>{try{const id="kbmsample";setTimeout(()=>{const el=document.getElementById(id);if(el)kitBranchMapMount(el,window.KBM_SAMPLE)},0);return `<div id="${id}" style="max-width:760px;margin:0 auto"></div>`}catch(e){return ""}}})}catch(e){}
 /* KIT §81.1 sample (review/kit-podium-gate): the entry gate scene, one play button per kind */
@@ -68767,7 +68776,7 @@ const KCPL={
  kc_hau:["Phủ thế giao","kcHau",0,"Nhà các bạn khuê phòng; hội thơ, ngắm hoa thường mở ở đây."]};
 Object.assign(SCIMG,{kcKhue:"phi-tan-cung",kcSanh:"tu-ninh-cung",kcThu:"ngu-thu-phong",kcMe:"khon-ninh-cung",kcDi:"phi-tan-cung",kcVuon:"ngu-hoa-vien",kcTu:"duong-tam-dien",kcHoc:"kinh-su-phong",
  kcChua:"duong-tam-dien",kcCho:"origin-wide-muoi",kcTra:"origin-wide-thd",kcSach:"origin-wide-thd",kcHau:"origin-wide-tt"});
-Object.assign(NAMES,{kgt:"Gia thanh",kap:"Áp lực hôn sự",khm:"Hồi môn"});
+Object.assign(NAMES,{kgt:"Gia thanh",kap:"Áp lực hôn sự",khm:"Hồi môn",kld:"Lời đồn"});/* kit-cost-rows-home: kld joins the other home stats (j1 KLOW already treats kap / kld as «lower is better») */
 RKEYS.push(["kgt","Gia thanh"],["kap","Áp lực hôn sự"],["khm","Hồi môn"]);
 try{Object.assign(HX,{kgt:"Gia thanh: danh dự của nhà ngươi (0–100). Tai tiếng làm giảm; mối hôn sự tốt, công danh của cha anh làm tăng. Sơ tuyển và các nhà cầu thân đều xem.",
  kap:`Áp lực hôn sự (0–100): mỗi tháng một tăng. Từ ${BAL.kc2.st.kc.moi} bà mối bắt đầu tới nhà; tới ${BAL.kc2.st.kc.dinh} cha định hôn.`,khm:"Hồi môn cha mẹ hứa cho ngươi. Vào cung hay xuất giá đều mang theo thành bạc.",
@@ -84986,7 +84995,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c83b95d7990d";window.CTM_BUILD=BUILD;
+const BUILD="3ba2852702ba";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
