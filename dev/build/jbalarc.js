@@ -166,3 +166,11 @@ Object.assign(BAL,{arc:{
  bd_tuc:{s1:[0,{c:{},o:[40,["d","tai",4],["d","sac",6]],sc:1}],s2:[{o:45,sc:1},{c:{}}],c1:[{o:[45,["a","y",6]],sc:2},{c:{}}],c2:[{o:50,sc:1},0],t1:[{c:{},o:[45,["f","keep",10,0]],sc:1},0],x1:[{o:[35,["f","keep",20,0],["a","vu",6]]},{o:[50,["f","bend",20,0]]},0],E:{win:{k:1},win2:{k:1},mid:{k:0},lose:{k:-1}}},
  bd_hoang:{s1:[0,{c:{},o:[45,["d","tamco",4]],sc:1}],s2:[{c:{}},{c:{},o:50,sc:1}],c1:[{c:{},o:[45,["d","duc",4]],sc:2},0],c2:[{c:{},o:[50,["d","tamco",5]],sc:1},0],t1:[{o:[45,["f","open",15,0]],sc:1},{c:{}}],x1:[{o:[35,["f","keep",20,0],["f","open",10,0]]},{o:[50,["f","bend",15,0]]},{c:{}}],E:{win:{k:1},win2:{k:1},mid:{k:0},lose:{k:-1}}},
  }}});
+/* GAP OR16 (jrtrig.js): the hồi clock. fb = after a hồi the next one falls due S.turn + fb[0] + rI67(fb[1]) months (the timer fallback; was
+   inline 2 + rI67(3) in res67), fr = the same after a played card (was 2 + rI67(2)), st = the first hồi of a chapter: chapters ≤ st[0] after
+   st[1] month, else st[2] + rI67(st[3]) (was 1 / 3 + rI67(3)). Reason triggers: on = 0 switches them off; min = months after the last hồi
+   before a reason may open the next one (the first of those months needs a strong reason: score ≥ early × BAL.ag.why.min); gr = grudge
+   (j9 hostility / her oán) that counts as a reason, its score = min × grudge / gr; debtK = score per nợ ân above min; fac / facAlly = score
+   (× min) of an opposed / own jreign side; goal = that person's own road names her as rival; evK = she / they did a HOSTILE deed to the other within the
+   last ev entries of the people ledger (S.roster.acts); evF = the same for a friendly deed (gift / visit / kết giao) or a cleared misunderstanding (r2). */
+BAL.arc.trig={on:1,fb:[2,3],fr:[2,2],st:[3,1,3,3],min:1,early:2,gr:30,debtK:.5,fac:1,facAlly:1,goal:1.2,evK:1.5,evF:1,ev:12};
