@@ -27,7 +27,7 @@ function mTinh(m,p){return p===S?(m.tinh||0):((m.tw||{})[p.id]||0)}
 function mTinhAdd(m,p,n,set){if(p===S){m.tinh=set?n:(m.tinh||0)+n;return}m.tw=m.tw||{};m.tw[p.id]=Math.max(0,set?n:(m.tw[p.id]||0)+n)}
 function manWit(p){const L=(p===S?liveRivals(true):[S].concat(liveRivals(true))).filter(v=>v&&v!==p&&v.alive!==false&&!v.out);const W=npcWit(whereOf(p),null,{vs:p,not:[p],pool:L});return W.length?W[0].p:null} /* npc-purpose G1 (two-way): the one who sees is a woman really there (npcWit), never a dice + a random name */
 function manCards(p,m,k){if(!m||!m.alive)return[];const me=p===S,risk=lộRisk(k,p),t=mTinh(m,p),ng=me?"ngươi":p.name;const A=[];
- A.push({id4:"manHail",n:"Chào hỏi đúng lễ",o:100,w:{danh:1},x:"hắn quý ngươi +5",go:()=>{relAdd(p,m,5)/* rel-men-servants: a greeting moves both ways (j9 relAdd: m.af / m.afw[id] ↔ her S.rl / v.rl) */}});
+ A.push({id4:"manHail",n:"Chào hỏi đúng lễ",o:100,w:{danh:1},x:`hắn quý ngươi +${BAL.relMS.hail}`,go:()=>{relAdd(p,m,BAL.relMS.hail)/* rel-men-servants: a greeting moves both ways (j9 relAdd: m.af / m.afw[id] ↔ her S.rl / v.rl) */}});
  A.push({id4:"manFlirt",n:"Liếc mắt đưa tình",o:odA(p,BAL.odb.j22.odO+(p.sac||0)/BAL.manRd.sacD),x:`tình ý của hắn +12 · có thể bị người thấy, một phi tần nắm ${balAb(BAL.eff.j22.evGo)} chứng cứ của ngươi: ${manWit(p)?"quanh đây có người":"quanh đây vắng người"}`,l:{},
   go:()=>{mTinhAdd(m,p,12+(nv(m,"flirtTinh")));deedAdd(p,"flirt",null,1,`liếc mắt đưa tình với ${m.name}`);{const v=manWit(p);if(v){/*evok: flirt deed written just before*/evA(v,p,BAL.eff.j22.evGo);if(me)log(`Có kẻ thấy ngươi liếc mắt với ${m.name}.`);else if(v===S)log(`Ngươi thấy ${p.name} liếc mắt đưa tình với ${m.name}.`)}}}});
  if(t>=BAL.tinhLv.warm)A.push({id4:"manToken",n:"Trao khăn tay",o:odA(p,BAL.odb.j22.odO_2+(p.tamco||0)/BAL.manRd.tcD),x:`hắn giữ khăn tay của ngươi (là tang vật nếu bị lục) · tình ý +15`,go:()=>{mTinhAdd(m,p,15);if(me){m.letters++;S.aff=S.aff||{};S.aff[m.id]=(S.aff[m.id]||0)+1}else{m.lw=m.lw||{};m.lw[p.id]=(m.lw[p.id]||0)+1}}});
@@ -67,7 +67,7 @@ function affairMonth(){if(!S||!S.men)return"";let ev="";
 /* the man's dossier: only known facts */
 function manCard(m){const f=pMan(m);const known=m.seen===bkey();
  const lines=[tuoi(m.age),`Tính: <b>${netTxt(m)}</b>`,/* rel-men-servants: the j9 relation model both ways (m.af was printed as "Ngươi quý hắn" though every deed writes HIS regard for her); his tình ý keeps its own line */
-  ...[[aff(m,S),"Hắn quý ngươi"],[aff(S,m),"Ngươi quý hắn"]].map(([a,l])=>`${l}: <span class="ef ${a>10?"g":a<0?"r":"n"}">${typeof quyW==="function"?quyW(a):affW(a)} · ${Math.round(a)}</span>`),
+  ...[[aff(m,S),"Hắn quý ngươi"],[aff(S,m),"Ngươi quý hắn"]].map(([a,l])=>`${l}: <span class="ef ${a>0?"g":a<0?"r":"n"}">${typeof quyW==="function"?quyW(a):affW(a)} · ${Math.round(a)}</span>`),
   ...[[oan(m,S),"Hắn oán ngươi"],[oan(S,m),"Ngươi oán hắn"]].filter(([o])=>o>0).map(([o,l])=>`${l}: <span class="ef r">${oanW(o)} · ${Math.round(o)}</span>`),
   m.tinh>=BAL.tinhLv.known||m.letters?`Tình ý: <span class="ef ${m.tinh>=BAL.tinhLv.close?"r":"g"}">${tinhW(m.tinh)}</span>`:`Tình ý: <span class="ef n">chưa rõ</span>`,known?`Thấy ở ${placeName(S.menW[m.id]||"")} (buổi này)`:"Nơi ở: không rõ"];
  const tt=[m.letters?`${m.letters} lần trao khăn, thư (tang vật nếu bị lục)`:"",m.trysts?`${m.trysts} lần hẹn riêng · người dễ biết chuyện: ${whoMayKnow()}`:"",S.trueFather===m.id&&S.preg?"Cha thật của đứa bé trong bụng ngươi":""].filter(Boolean);
