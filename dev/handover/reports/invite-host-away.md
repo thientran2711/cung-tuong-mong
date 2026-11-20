@@ -62,3 +62,10 @@ Also existing and unchanged: j21 «rivals call at her palace» (callMe) already 
 - invite-host-away.test 8/8 · ptime2 ALL OK · ptime ALL OK except the pre-existing flaky check 5 (same flake on plain origin/main 377d5ce).
 
 SẴN SÀNG KIỂM ef8af1d176c5df816115b83dc9f99aed837bc6b1
+
+## r2 — review FAIL 1 fixed (co-op friend seat)
+- jptime iwCoop(p): a rival entry coop:true (the co-op friend, jcoopworld) is a PLAYER → iwAdd returns null when host OR guest is a co-op seat (the one entry rcvInvAt covers her invite, npcinv her↔NPC, NPC↔NPC) and iwTick drops any such entry (old saves). No roll, no loss, no notice for her; visit as before.
+- Test I (friend as guest of her while she is away; friend as host away while an NPC comes): without the guard FAIL {guest:1,host:1,loss:1}; with it PASS. invite-host-away.test 9/9 · ptime2 ALL OK.
+- Base: reviewer's a797336e (LIVE 716be762) + merge origin/main 66bd36cd (sw.js conflict = generated file, rebuilt). QUICKCHECK PASS (core gates PASS; one perf-smoke run read buổi 3615 ms under load, the re-run 1149/1187 ms PASS).
+
+SẴN SÀNG KIỂM 252ef6bad145891ddcffff0a3e371f0fcf75805a
