@@ -59,7 +59,7 @@ Colours m18: main powder blue #A7BAD2, secondary deep rose #CA7281 (her M_COLS, 
 - Gate: approved FAIL on exactly 2 lines (B12 "brocade in a maid prompt", M06 missing) = the owner's ordered change; if approved, rule B12 needs a nữ quan exception (foreman).
 ### ma ma (new outfit) + chưởng sự (new colour): NOT drawn (owner deciding uniform colours).
 
-# ROUND 3 (owner 20/11 ~15:35Z, brief maid7c.md; K19 uniform colours; new rules K20 hair always up, K21 no broom) — make3.py → test3_*.txt
+# ROUND 3 (owner 20/11 ~15:35Z, brief maid7c.md; K19 uniform colours; new rules K22 hair always up, K23 no broom) — make3.py → test3_*.txt
 Uniform (K19) cung nữ = powder blue #A7BAD2 main + deep rose #CA7281 secondary (the round-1 ma ma pair). Her own accent colour: NOT added (owner proposal still open).
 HAIR sentence (copied from build_mama --oneref) added before "Pose:" in every round-3 prompt: "HAIR: ALL her hair is pinned UP in a neat bun: NO long loose hair down her back or over her shoulders, NO ribbons in the hair." (thô sử: without "NO ribbons", she has a cloth hair tie).
 - thô sử: sash → "ONE single clean narrow cloth sash at the waist (one even solid colour, no second band under or over it, never blotchy, mottled or patchy)".
