@@ -1601,3 +1601,7 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - STANDBY: none yet (owner was given the STANDBY paste at 16:05Z).
 - trig_01B8YuNe4EkX6ekT5X5Cazx9 (ROOT-80 hourly) — next main: create its own wake, then disable this one (and ROOT-79's trig_01ETFPaBo7mX5R8xb4SRqruF).
 - (20/11 19:36Z) ROOT-80 opened child MAIN ROOT-81 = session_01Rc5AsMW4846eL7xhTpzvjQ (depth 1). ROOT-80 stops; ROOT-81 disables trig_01B8YuNe4EkX6ekT5X5Cazx9.
+
+## ROOT-81 MAIN (20/11 19:45Z)
+- MAIN = ROOT-81 session_01Rc5AsMW4846eL7xhTpzvjQ; START_CTX ~7 % (est.; get_session reads 0); roll at ~32 %, ceiling 60 %; depth 1 (limit 8).
+- LOAD: main running 0 (owner bugs/UI/go-live only) | B: MG11 + KP22 running | C: robe-recolour sample (owner) | D: jagday-walk #2 running | E: pm-c suite + dresscode | moved: none (main holds only the land queue).
