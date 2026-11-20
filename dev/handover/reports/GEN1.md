@@ -83,3 +83,16 @@ Look (viewed the maid sheet once, open11 once at 1024):
 - Nhị thân cận v2: square collar clear, blue jacket with ONE half-sleeve layer, rose open vest over it; the two short flaps are barely visible; envelope is blue (low contrast with jacket).
 - Nhất thân cận v2: square collar on the blue vest, rose cropped open bolero on top, two long blue panels + a clearly visible short rose tà ngắn on top = two panel layers clear; sleeves rose, skirt rose.
 - Nhất đẳng v5 (thường): standing collar, rose vest, long rose panels + short blue tà ngắn clearly visible in front of them; blue skirt/sleeves.
+
+# JOB L1554 — xuân Hán t1–t3 drafts (gpt-2-6 low 1k, A43)
+gpt-2-6, quality low via extraSettings, 1k 9:16 (752x1344), seed 7172, ONE ref nVsrRMPYQD (s62 face; these prompts have no image-2 swatch). simulate_cost exact 55 each, total 165 cr. Prompts exactly: dev/art/seasons4/s62_t1_HAN_BAC.txt (9341 ch), _t2 (9592), _t3 (9746).
+| pic | creation | link |
+|---|---|---|
+| Xuân Hán t1 (Đáp ứng) | yiuLx9bPW9 | https://www.magnific.com/app/creation/yiuLx9bPW9 |
+| Xuân Hán t2 (Thường tại) | fHzXeFtCDY | https://www.magnific.com/app/creation/fHzXeFtCDY |
+| Xuân Hán t3 (Quý nhân) | yiuLxikPW9 | https://www.magnific.com/app/creation/yiuLxikPW9 |
+Sheet: dev/handover/review-sheets/xuan_han_t13_L1564/sheet.jpg (+ xuan_han_t1/t2/t3.webp); per-picture label 'Xuân Hán tN · s62 · GPT 2.6 low 1k · 55 cr' + 'Tổng: 165 cr' ON the sheet. I viewed each picture once at 1024; did not view the finished sheet.
+Look:
+- t1: very wide open collar, off both shoulders, bare collarbones; plain narrow ivory collar band; embroidery = many SMALL lilac+ivory sprays all over, a wider lilac/white flower band at the hem; peach-pink robe + ivory inner robe, ivory sash with long ends, both colours clear; one small lilac in the hair; loose long hair; book held at side; mid-step, sleeves flowing, cuffs ivory.
+- t2: wide open collar off the shoulders with two stacked narrow bands (ivory piping + small flower band); body embroidery = fewer but LARGER tiger lilies (ivory/gold) scattered, more than t1 in size, sparser in count; peach pink + ivory clear; ONE peach-orange lily in hair, medium; jade disc on sash; blue pellet drum raised in one hand; skirt flares wide at the hem.
+- t3: widest/deepest open collar (low V, shoulders bare) with a WIDE embroidered rose band; densest embroidery = medium ivory-gold China roses over the whole robe, plus wide rose bands at sleeve ends/hem; peach pink + ivory clear; one big ivory rose in hair; jade plaques + pearl strings + green tassels hang each side of the girdle; bamboo flute at waist, other hand at hairpin; clear 3/4 turn to the right.
