@@ -71,7 +71,12 @@ for sid, age, sw, hair, outfit, pose, ak in S761Q:
     assert "phoenix" not in v.lower() and "sensual" not in v.lower() and "(thướt tha)" in v, sid
     assert "her own LEFT eye (the eye on the RIGHT side of the picture)" in v, sid   # same as approved s33–s38
     out[f"{sid}.qr.{ext}"] = v
+_fail = []
 for k, v in out.items():
-    if k.endswith('.FULL'): v = FG.final(v, k)
+    if k.endswith('.FULL'):
+        try: v = FG.final(v, k)
+        except SystemExit as e: _fail.append(str(e)); continue   # no gate PASS = no file, the others still built
     _open(os.path.join(D, f'{k}.txt'), 'w').write(v)
     print(f"== {k}\n{v}\n")
+
+if _fail: raise SystemExit('\n'.join(_fail))

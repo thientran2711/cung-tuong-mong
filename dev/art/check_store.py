@@ -820,7 +820,7 @@ def grey_hits(text):
         out.append(ctx)
     return out
 # MG3 (owner Lượt 784 item 6, B20 Lượt 763/769/770): a FACE prompt of a known person must carry exactly her ROOT hex pair
-# (s-ids: face-common/s_root_colours.json; others: palettes_season.json, the season marked root:true) and no other #hex; old / self-picked hex = FAIL.
+# (L27: root_drawn of the root season when present; else s-ids: face-common/s_root_colours.json; others: palettes_season.json, the season marked root:true) and no other #hex; old / self-picked hex = FAIL.
 PROMPT_MAX = 10000   # MG3: the Magnific gen tool refuses prompts over 10 000 characters (Thái hậu a51 L781 = 10 229 -> refused) -> FAIL before the gen
 HEX_RX = re.compile(r"#[0-9A-Fa-f]{6}\b")
 DEEP_COLOUR_RX = re.compile(r"\b(?:deep|dark|darker|deeper|dusky)[- ](?:blue|violet|blue-violet|purple|green|red|pink|rose|plum|teal|jade|navy|burgundy|crimson|wine|aubergine|lilac|lavender|aqua|aquamarine|turquoise|coral|peach|gold|yellow|orange|mint|periwinkle|emerald|sapphire|indigo|magenta|mauve|ochre|cyan|celadon|olive|maroon|scarlet|ruby|amber)\b", re.I)
@@ -828,9 +828,15 @@ def root_pair(pid):
     """-> (main_hex, sec_hex) of the person's ROOT palette, or None when the id has none (Kho / Công chúa / unknown)."""
     if not pid: return None
     fc = os.path.join(ART, "face-common")
+    ps = json.load(open(os.path.join(fc, "palettes_season.json"), encoding="utf-8")).get(pid)
+    # L27 (owner 20/11 'Giữ lại bảng áo đậm màu' + 'Thôi đại đi, có người màu này màu kia'): a person with a root_drawn entry
+    # (the DEEP colours her picture was drawn in) -> new/redrawn pictures use root_drawn, not the softened Lượt 769/770 codes.
+    if isinstance(ps, dict):
+        for k, v in ps.items():
+            if isinstance(v, dict) and v.get("root") and isinstance(v.get("root_drawn"), dict):
+                return (v["root_drawn"]["main_hex"].upper(), v["root_drawn"]["sec_hex"].upper())
     sr = json.load(open(os.path.join(fc, "s_root_colours.json"), encoding="utf-8"))
     if pid in sr and pid != "_note": return (sr[pid]["main_hex"].upper(), sr[pid]["sec_hex"].upper())
-    ps = json.load(open(os.path.join(fc, "palettes_season.json"), encoding="utf-8")).get(pid)
     if isinstance(ps, dict):
         for k, v in ps.items():
             if isinstance(v, dict) and v.get("root"): return (v["main_hex"].upper(), v["sec_hex"].upper())

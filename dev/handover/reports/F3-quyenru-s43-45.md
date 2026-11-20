@@ -14,3 +14,8 @@ START_CTX ≈4 % of 1M (estimate; get_session read 0) · depth 7 (limit 8) · wo
 3. Note (not a gate fail): the FG.final master COLOUR RULE says "medium-light tone … never heavy" while L27 deep hexes (#385A9F, #A6593F, #7C4587) are medium-dark. May pull the robes lighter. Unchanged (LAW #0).
 
 ## Credits: 0 used. Commit: see git log ("F3 …").
+
+## Update (ROOT-64; owner "Thôi đại đi, có người màu này màu kia" = keep each deep root as is)
+- check_store.root_pair(): a person with root_drawn on her root season → the gate requires root_drawn (L27); else as before. Regression over all face-common/sNN.v5.FULL.txt: the same 9 files fail B20 before and after (s15 s18 s20 s27 s28 s31 s33 s37 s38, old-code prompts that already failed) → no new fails.
+- make_quyenru_s43_45.py: a gate fail on one person no longer stops the others (no PASS = no file; exit non-zero at the end).
+- Gate: s43.qr.FULL.txt PASS · s45.qr.FULL.txt PASS · s44 FAIL B19 NO GREY (sage grey) → waiting on the owner. READY, 0 gens.
