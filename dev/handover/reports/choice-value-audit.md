@@ -209,3 +209,29 @@ Merges after the full batch: f3114755 → 950508fc touched 4 dev/build files (no
 Touched by #4: dev/build/{jbal,j24,j25,j3,j42,j7,j71,jstip,jts,jcmaid,j8,jtsb,j72,j4,jreign,jworld2}.js, dev/tools/choice-value-scan.js (kfill/kdup/hint reader, --fullsuc), dev/test/one-core-baseline.json (shrunk), index.html, sw.js, assets.json.
 Lander notes: (1) delete jbal.js `if(!BAL.rk)BAL.rk={loanBack:40};` when review/balance-final lands (j24 already reads BAL.rk.loanBack); (2) receiver-choice reads BAL.cv.decl.suc (unchanged).
 Note (not mine, FYI): «Khó lường» odds word on ksp «Tắm gội chờ giá» is outside the VANPHONG ladder (pre-existing, reviewer note re-check #2).
+
+## HANDOVER — choice-value final-merge worker session_01964izFKstgvyB8Sbpgkgc3 → successor (20/11 ~11:30Z, for Foreman D #10 session_01964izDrx83qqXTF9t1BYy7)
+Why: rollover by context — START_CTX ≈ 4 %, now ≈ 40 % of 1M (> START_CTX + 25 %); FAIL fix not started.
+PRIORITY #1 CHECK ('choice-value'): OD 1 | ledger 0 | claims choice-value-audit (this job) | main 8cf6b7d7 | review/* review/choice-value-audit ed583173, review/choice-value-audit-rv9 0c7e21b6 (BASE) | archive 0
+READ: dev/rules/START_CORE.md (18 LAWS) + START_WORKER.md; reports/review-choice-value-audit.md sections «RE-GATE» (the FAIL) and «choice-value NEXT FINAL-MERGE» (my last round).
+
+### State
+- **BASE = review/choice-value-audit-rv9 0c7e21b6** (= my ed583173 + reviewer removed dead BAL.cv.glance.chance and the jbal.js BAL.rk guard). Ignore review/choice-value-audit-rv (old WIP). LIVE now 8cf6b7d7.
+- Push the result to review/choice-value-audit (FF from 0c7e21b6 → fine; ed583173 is its ancestor).
+
+### TODO (FAIL 1 — LAW 3 + LAW 11 whole group)
+1. `dev/build/jface.js:139` PEND.pzcard «Nằm nghỉ chờ khỏi» (Trúng độc): cost-only («không tốn gì» is a no-cost word, red «còn N tuần»). Give a real gain under Được from FXF/BAL, e.g. reviewer's «giữ lại ${FXF.docMed} lượng bạc, không hao sức» (siblings cost bạc −FXF.docMed / Sức −3). No typed number.
+2. Same group, check each and give a real word gain (or prove it is a menu cancel the scan never reads as a choice): `j70.js:542` «Để tự lành»; `j70.js:433/439/443` «Thôi», `:455` «Để sau»; `wx:"không tốn gì"` roads with an `lx` loss: `j67.js:266`, `jrd_muoi.js:636/795`, `jrd_nc.js:54/185/245/487`, `jrd_tt.js:153/215/269` (see how the kit renders wx/lx).
+3. Final-merge CURRENT origin/main (8cf6b7d7 or newer); rebuild `bash dev/site/build_site.sh` (runs assemble.py). Conflicts so far were only index.html/sw.js (take theirs + rebuild), except npc-purpose files last round.
+
+### Gates (one browser test at a time; long ones in background)
+one-core ×4 (`node dev/test/one-core-{guard,text,bind,text-rule}.js`), `node dev/test/odds-cap.js`, `node dev/tools/choice-value-scan.js --seed N --turns 100` for 7/11/23/31 (~7 min each) + `--plant` (exit 1 normal; must print PLANT OK 3/3), `bash dev/tools/quickcheck.sh --runs 6`, `python3 dev/build/assemble.py && node dev/test/coop-e2e.js <scratch>`; Fold+iPad shots of changed cards (dev/test/lib/device.js: newDeviceContext(b,'fold'|'ipadAir',{deviceScaleFactor:2}), openHost; remove '#kroul,#kroulw,#kload,#kboot,#klife,.kroul,.kmov' in page AND frame; wait ~6 s and clear Q first so «Nhập cung» / «Điều mới» cards don't cover yours; call PEND.<id>(pp) directly — mkP may return null).
+Known, not ours: role-parity.test 2 FAIL identical on plain LIVE (cx3:tell; harm:accuse/banphe/uyhiep). one-core baseline on this branch is SHRUNK — any typed number LIVE duplicates can trip one-core-guard (fix by writing it once, never grow the baseline).
+End: «SẴN SÀNG KIỂM <full sha>» at the end of FOREMAN_D_STATUS.md + send_message D #10.
+
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11 ~07:33Z, canon overwrite): your FIRST STATUS line MUST state "depth <get_session lineage.depth>". Open workers as your children; ALWAYS roll over by opening your own child foreman (create_session) at EVERY depth the system allows, up to the limit (8) — never stop at 5/6/7; ONLY when create_session is refused (limit reached or any error) write the handover + send "TAKE OVER NOW" to the D standby (last "FOREMAN D ROOT STANDBY = …" line of FOREMAN_D_STATUS) or, if none, a FOR MAIN line so the owner opens a ROOT. Every takeover prompt you write copies this LINEAGE line and the SLEEP line below.
+SLEEP = STANDBY PASTE BLOCK (owner 18/11 ~07:45Z): when the owner says she is going to sleep, your SAME reply gives her, unasked, the D standby paste block: "You are FOREMAN D ROOT STANDBY (depth 0) of Cung Tường Mộng. Read dev/handover/TAKEOVER_FOREMAN_STANDBY.md on branch claude/cung-tuong-mong-handover-hj0h8w with <X> = D and follow ONLY the STANDBY FIRST part until your line sends TAKE OVER NOW." Rule text: dev/rules/START_FOREMAN.md "SLEEP = STANDBY PASTE BLOCKS".
