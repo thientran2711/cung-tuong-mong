@@ -38,3 +38,10 @@ Faces: OK. Mouths closed, no teeth, eyes straight, no forehead marks. Ivory fur 
 
 ## Files
 dev/art/winter1/ (8 prompt files) · sheet webp · ledger 8 WINTER-TEST lines · ART_RULES G26 (added).
+
+## t4 option B — trim study (Foreman C #2 asked ~15:32Z: prepare, do NOT fire)
+Need to remove ≥ 194 chars from `dev/art/winter1/s62_t4_dong.txt` (10 193). Every trim was tested with check_store (store + approved):
+- PHI BẠCH trim (drop "(her secondary colour, …ice blue)" + "— the robe, sleeves and arms are clearly visible … band of colour;") → 9 972 chars but **FAIL S12** (approved sentence). Not usable.
+- Removing any one whole sentence ≥ 194 chars: every one FAILs (store sentence missing, or approved S01/S11/S12/S13) **except the whole ANGLE sentence** (407 chars → 9 786, gate PASS). That would drop her ¾-left turn, so the pose would change. Not recommended.
+- ANGLE kept, only its last clause dropped ("her head turns together with her shoulders and body, never back-turned, never in profile.", a repeat of the HEAD AND BODY sentence) → 10 103, still LEN FAIL. Cutting more of the ANGLE words → **FAIL E1** (angle table).
+**Conclusion:** no trim passes the gate while keeping the t4 design and pose. Real options: (a) Foreman C shortens the t4 store/builder text (a builder change, owner OK needed); (b) the owner accepts dropping the ANGLE sentence for the test; (c) t4 waits. Nothing fired.
