@@ -457,3 +457,4 @@ ROOT-68 Lượt 1076: OWNER verbatim (via ROOT-67) "Cung nữ nhà nghèo, nữ 
 - OPEN owner question (D/ROOT-75): share of real-skill gap kept in co-op (ROOT-74 rec 20–30 %), BAL knob default 0. Time-window proposal (mg-score-same report) HOLD (owner ~07:35Z: no retune).
 
 ROOT-68 note: ROOT-67 itself answered the owner as Lượt 1076 (same content; mine not pasted). Next free Lượt 1077.
+ROOT-68: OWNER verbatim (via ROOT-67, ~07:21Z) "Thôi tao ngủ đây, cái việc phòng ốc nhân vật mai tính tiếp." → asleep; rooms + characters wait to tomorrow; no gens tonight. ROOT-67 used Lượt 1077 → next free 1078.
