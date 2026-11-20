@@ -1666,3 +1666,16 @@ BAL.kcg={fest:{top:8,ok:5,danh:[4,2,1],skip:5,bot:[3,6],sisP:50,sis:[3,1]},vpSac
  home:{p:8,mid:50,pk:.2,giftShare:30,writeO:70,giftO:60,k:.3,writeBac:5,writeAf:4,lostDanh:1,askAf:3,know:2,keep:12,gifts:["tuithom","luahang","huongtram","khantay"]},
  ld:{p:6,own:{danh:4,duc:2},witBac:10,witO:55,witFoe:4,witOan:6,witLose:6,wait:{danh:2,tamco:1}},
  title:{tier:4,rare:6,quyRank:2,carry:1}};
+/* jkcco (GAP OR13 co-op half, review/outside-coop; OUTSIDE_PLAN §13): the friend at home <-> the friend in the palace, both ways.
+   letter: o odds, suc Sức price, bond tình hảo hữu (S.rl[friend]) when kept, lost = Danh (palace) / Lời đồn (home) when it fails, know = j61 level.
+   gift: wait = turns until the visiting day, pickMax = items listed, back* = the receiver's «Trả lại quà» (Đức gain, bond loss).
+   so: odds = o + house power*powK (+ father's liking - mid)*afK at home; pow = house power moved; rel = j55 relation between the two houses;
+       danh = the receiver's name gain on «Đội ơn»; noDuc = Đức for «Xin thôi»; af / lost = the sender's price when it fails.
+   rumour: o odds, bac / suc = the two equal roads (law 2), n = Danh / Lời đồn moved, lost = the sender's Danh when traced, bond = tình hảo hữu;
+       fix = the receiver's answer to a bad rumour: o + her Danh*k, bac / suc roads (law 2), duc = «Mặc kệ» gain.
+   join: o + her Sủng*k = «Xin ban nàng về ở cung mình» odds, suc price, sung = loss when refused, bond / greet = tình hảo hữu.
+   keep = list lengths, resend = seconds between relay resends. */
+BAL.kcco={letter:{o:70,suc:10,bond:4,lost:2,know:2},gift:{wait:1,pickMax:6,bond:5,backDuc:1,backBond:4},
+ so:{o:35,powK:.4,mid:50,afK:.3,suc:15,pow:4,rel:6,danh:3,noDuc:1,bond:3,af:4,lost:2},
+ rumour:{o:60,bac:12,suc:12,n:3,lost:2,bond:3,fix:{o:45,k:.3,bac:10,suc:10,duc:1}},
+ join:{o:55,k:.3,suc:10,sung:2,bond:8,greet:3},keep:12,resend:15};
