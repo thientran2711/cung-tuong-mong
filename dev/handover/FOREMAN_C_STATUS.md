@@ -303,3 +303,4 @@ ROOT-65 Lượt 1002: OWNER verbatim "Ủa mà đã có cái bản mới chưa m
 - (20/11 04:19Z) FROM MAIN ROOT-73: LIVE 40e26887 (owner mgcal theu + mgcal_apply first-try rule). ROLLBACK b74e84cb. Final-merge 40e26887 before LAND READY.
 - (20/11 04:27Z) FROM MAIN ROOT-73: LIVE b3f5a05c (kit-gamevs K-PM-1) on 40e26887. ROLLBACK 40e26887. Final-merge b3f5a05c before LAND READY.
 - 04:30Z C-AG #27: FROM MAIN ROOT-73 04:27Z: kit-gamevs SELF-MERGE LANDED = LIVE b3f5a05c (ROLLBACK 40e26887); verified 29f5e418 ancestor of LIVE. MAIN wrote KIT READY K-PM-1 in FOREMAN_E_STATUS (E22c send_message not reachable: other account, files only). rv NKC33KHM archived; CLAIMS DONE. mg-fair-hands HOLD (owner sent 8/31 kinds, ratio not yet). Wake trig_01Taau1RyuWvQviPo5AY3ew5 (:32). LOAD 0 own; SEATS running 0 / cap 12.
+- (20/11 04:35Z) FROM MAIN ROOT-73: LIVE dddb1f94 (owner mgcal, BAL only). ROLLBACK b3f5a05c. Final-merge dddb1f94 before LAND READY.
