@@ -488,3 +488,4 @@ ROOT-69 08:00Z: OWNER APPROVED t2 neckline ('Rồi thường tại ổn nha, r�
 ROOT-69 08:01Z: OWNER FINAL t1/t2 square neckline ('Ok, quyết định giữ như cũ, làm cổ vuông đi.'); old crossed t1/t2 = skins. G17 marked FINAL.
 ROOT-69 08:03Z: m29 t7 redraw sent (baacc330, 135 cr). OWNER rule: t1/t2/t3 at a36/a51/a65 = modest crossed collar (old pre-G17 words; copy to t3) → OLD4 builder job 0 cr.
 ROOT-69 08:04Z: OLD4 rolled over (37 %, handover OLD4.md a4e843af). Crossed-collar a36/a51/a65 builder job → RANK8-C (idle). No OLD successor opened (no drawing work open: production stopped).
+ROOT-69 08:05Z: RANK8-C rolled (34.7 %, handover RANK8-C.md 3d009e4). COLLAR1 session_01PEhRbwyYLoiVH6goFzcJNg opened (child) for crossed collar a36/a51/a65 builder job (0 cr). s62 t4/t5/t6 square test sent (4e4529a, 405 cr): only t4 reads square; asked owner A/B.
