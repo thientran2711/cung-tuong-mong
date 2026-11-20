@@ -23,3 +23,14 @@ START_CTX ~4 % (1M window); depth 4. Reviewer: session_01Rc5AsJgLB4y1dGfnpRG8qm.
 - While the give-up confirm is open the board clock keeps running («Chơi tiếp» returns to a board that lost time). Worth a pause hook later (parking lot).
 - Pre-existing (main): Thử tay kind list at 1180x820 — kind buttons overlap the «Đã thử/Chưa thử» rows (worker's note); own small fix.
 - Review shots stayed in scratch (not uploaded); worker's CDN folder img/_review/mg-back/ to be wiped after the final verdict.
+
+---
+# r2 — re-check of 7f7d467a (worker fixes a0a98e66 + merge of origin/main 70bea3d3) — **FAIL 7f7d467a, 1 fix**
+- Fix 1 (jtd): OK — `KG82.backPre=cancel` = its own free «Thôi, để lúc khác»; cleared by «Sẵn sàng».
+- Fix 3 (jsgame result): OK — ✕ asks kit confirm «Ra tay?» (Ra tay / Ở lại), never silent.
+- jaudit works card: preBack = card untaken, pending cost dropped: OK.
+- Tests: mg-back.js 755x1000 PASS 11/11, 1180x820 PASS 11/11.
+- **Fix 2 is wrong in its mechanism — FAIL.** `kgSnap()` (j82) undoes a charge by JSON-copying the whole `S` before the charge and, on ✕, writing back every top-level field that changed. Two real faults:
+  a. **Breaks object identity with real NPCs (law 6b).** S holds live references to rival objects (ser() in j6 dedups them via `new Set(rivals)`). Proven in a browser on the merged build: new game → `S.visit.people[2].ref` is a rival object; `u=kgSnap(); spend(2); u()` → that ref is now a detached JSON copy (S→rivals refs 1 → 0). Any later change to that person goes to a ghost copy, not the living NPC.
+  b. **Half-undoes the world tick.** `spend()` is wrapped (jptime ptTick/ptLand, j95sync, jmen menWatch, jerr, jwxk, j76): during the 2 khắc, timed errands land and NPC runners change `rivals` (outside S). The restore puts `S.away` back to «not landed» while the NPC side stays done → the errand lands a second time on the next spend (double effect; with p3InvLand an item can be duplicated — law 6c REAL OBJECTS).
+- **Fix:** no whole-S snapshot. Preferred: charge only on «Sẵn sàng» / the quick option (the dialog just remembers what it will charge), so a rules-screen ✕ has nothing to undo. A refund after spend() is not clean: the world tick of those khắc already ran, rewinding `used` alone is wrong too. Test: after a rules-screen ✕, every S→rivals reference is the same object (identity), `S.away` unchanged, bạc/Sức/khắc/fee mark as before opening, and no errand lands twice.
