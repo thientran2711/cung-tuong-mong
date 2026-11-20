@@ -1630,3 +1630,4 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - PEOPLE: keeper session_01Rc5AsMtjP4KTgBZVjENGLs; rv session_01Rc5AsMSxpxbsAMRSE5oWrq; ROOT-79 session_01Rc5AsMT6GWGyV9SHc2vgNi relays owner words (she still writes there). ROOT-79 makes the 11c robe recolour sample itself.
 - TRIGGERS: ROOT-81 hourly trig_01ACLFXTRaPed5xN279aojdK → next main creates its own wake (minute 32) and disables this one.
 - STANDBY: none registered (owner was given the paste at 19:45Z).
+- (20/11 22:46Z) ROOT-81 opened child MAIN ROOT-82 = session_01Rc5AsJos72R3tL6fXZRSLv (depth 2). ROOT-81 stops; ROOT-82 disables trig_01ACLFXTRaPed5xN279aojdK.
