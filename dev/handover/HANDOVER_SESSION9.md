@@ -1342,3 +1342,4 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - (20/11 05:16Z) (ROOT-73 relay) PENDING MGCAL BATCH now: "CTM-CAL tat:4.9/5@11/19/2026 ne:4.1/5@11/19/2026 mua:6.3/5@11/19/2026 banh:6.1/5@11/19/2026 huong:4.5/5@11/19/2026 td_cong:10/5@11/20/2026 td_ngon:6.7/5@11/20/2026" (NOT td_dung).
 - (20/11 05:22Z) PENDING MGCAL BATCH now (pass ONLY this line to mgcal_apply; td_dung 0.3 NOT counted): "CTM-CAL tat:4.9/5@11/19/2026 ne:4.1/5@11/19/2026 mua:6.3/5@11/19/2026 banh:6.1/5@11/19/2026 huong:4.5/5@11/19/2026 td_cong:10/5@11/20/2026 td_ngon:6.7/5@11/20/2026".
 - (20/11 05:24Z) OWNER BUG td_dung yellow touch boxes (OD ~06:30Z) → mg-visual (owns touch fx all engines), whole group; brief ADDED line.
+- (20/11 05:26Z) ROOT-73 relay: owner OD ~06:35Z — weak reflex kinds get a small easing so she doesn't lose every time (still below her strong kinds); relayed to C-AG #27.
