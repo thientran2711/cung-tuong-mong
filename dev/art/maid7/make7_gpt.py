@@ -153,12 +153,17 @@ def tamdang():
              'the same real outer jacket with the same weight, body and structure (a proper jacket, never thin, flimsy or see-through), '
              'only SHORTER than the nhị đẳng\'s, ending just below the waist')
     t = HDR_M18 + t.rstrip() + CAP.format('Cung nữ tam đẳng · Áo khoác bỉ giáp ngắn hồng + váy xanh')
+    # owner L1501: the jacket hem carries the same embroidered flower band as its collar and cuffs
+    t = swap(t, 'only a narrow band of small embroidered flowers along the collar edge and the edges of the short outer sleeves,',
+             'only a narrow band of small embroidered flowers along the collar edge, the edges of the short outer sleeves and the '
+             'whole bottom HEM edge of the short outer jacket (the same flower band as on its collar and cuffs),')
     t = fixcap(t, 'Cung nữ tam đẳng')
     out = D + 'tamdang_gpt.txt'
     open(out, 'w', encoding='utf-8').write(t)
     keep(out, base, [('with a SMALL SHORT outer top on top', 'owner Lượt 1470: outer top too flimsy -> nhị đẳng jacket'),
                      ('a short jacket with short outer sleeves that ends just below the waist', 'owner Lượt 1470: = nhị đẳng bijia, only shorter'),
-                     ('clearly smaller and shorter than a nhị đẳng maid\'s half-sleeve jacket', 'owner Lượt 1470: "chẳng qua là nó ngắn hơn thôi" (only shorter)')])
+                     ('clearly smaller and shorter than a nhị đẳng maid\'s half-sleeve jacket', 'owner Lượt 1470: "chẳng qua là nó ngắn hơn thôi" (only shorter)'),
+                     ('only a narrow band of small embroidered flowers along the collar edge and the edges of the short outer sleeves', 'owner Lượt 1501: + jacket hem band (same as collar/cuffs)')])
     return out
 
 

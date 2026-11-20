@@ -140,3 +140,7 @@ Word diff vs previous commit: only the slim-V words (narrow, opening, slim, v, s
 - check_store: CANNOT RUN — dev/art/check_store.py line 223 SyntaxError on the branch tip (not mine). keep_check --all: only dong_hientai/m02_t7_DONG_HIENTAI_cloak4.txt fails (not mine).
 - Expected gate side effect: S36 (D15 ELDER STYLE LOCK for a51/a65) will report MISSING because the STYLE LOCK sentence was removed on purpose (it points to the dropped near-3D picture). Foreman decides.
 - REPAIR: a stale replay (commits 6ce619d / c41dbb3, "21:24") had duplicated lines in gpt/chuongsu_gpt_v2.txt, gpt/nhat_gpt_v2.txt, make7_gpt.py (2nd __main__, syntax error) and this report. All 4 restored to my last good commit eead8d6 in this commit.
+
+## L1501 tam đẳng jacket hem (via #10 22:17Z, report to #11) — in place, tamdang_gpt.txt (7374 c)
+Owner: "Phần áo cũng thêu như cổ và tay áo" (circled the jacket's bottom hem). Embroidery clause: "along the collar edge and the edges of the short outer sleeves" → "along the collar edge, the edges of the short outer sleeves and the whole bottom HEM edge of the short outer jacket (the same flower band as on its collar and cuffs)". Nothing else changed.
+Word diff vs previous: LOST none; ADDED only the hem words. keep_check PASS (4 allowed), --all 169 PASS. check_store (works again): S01 + S32 only, the same as before this edit (scope mismatch, pre-existing).
