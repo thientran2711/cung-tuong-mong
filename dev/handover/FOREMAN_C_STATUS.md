@@ -467,3 +467,4 @@ ROOT-68 07:30Z: OWNER (via ROOT-67) no mass production tonight (out of credits; 
 ⚠ FOR MAIN (ROOT-75): owner is moving Foreman C to a NEW Claude account (old one near limit). New Foreman C ROOT starts from dev/handover/TAKEOVER_FOREMAN_C_NEWACCOUNT.md.
 ROOT-68 07:31Z: OWNER order: 32 old consorts c01–c32 redrawn too (new style + palette); 56 count wrong → 87 of 90 + c01–c32. Recorded in TAKEOVER_FOREMAN_C_NEWACCOUNT.md. RANK8 rows fbb5797; 3 workers drawing.
 ROOT-68 07:33Z: OWNER: old 32 consorts archived, never counted → plan 87×8 ≈ 96 000 cr; takeover file fixed; rule added.
+ROOT-68 07:37Z: OWNER on old 8-rank tests m07/m29/m13/m20 (verbatim via ROOT-67): check tone, colours, prompt vs current; ORDER t3 Quý nhân redraw for all 4 → OLD4 session_01PEhRbxu7EMCJ5chXj2AeN5 (report OLD4.md). Next Lượt 1093. ROOT-68 ctx ~21%.
