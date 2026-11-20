@@ -731,7 +731,6 @@ COOP.on("act",m=>{if(!m||m.k!==TK||!CW.on||eW()||m.from===CW.seat||!S||S.dead||m
  {const fe=cyFe();if(cyWait(fe)){CW.cyHold=window.cyWk();S.tonight=null;T("cyHold "+CW.cyHold);return}}
  if(L&&L.length)pushFriend(L.slice());let r;
  try{r=f.apply(this,arguments)}finally{if(L&&L.length)pullFriend()}
- try{CW.flW=window.cyWk()}catch(e){}/* review/coop-week-stall: this week's draw is done (her thin phone may now send her week end: cyHer) */
  /* reviewer r2: the week's flip can run AFTER endTurn (main's jcycle defers it behind her maid's Kỳ nguyệt sự card, cyrep → flip again):
     CW.pend = this week's end is still waiting to go out, so that night is next week's too (else tn.w = the old week and the guest never takes it) */
  const nx=CW.inTurn||CW.pend?1:0;S.tn={w:wk()+nx,who:tnWho()};CW.tnLast=JSON.stringify([wk()+nx,tnWho()]);return r}})();
@@ -977,13 +976,14 @@ function cyFree(){if(CW.cyHold==null||!CW.on||!S)return;if(!S.dead&&cyWait(cyFe(
    draw runs (E-fix cyAsk on host). Her own night ran on her phone at the same go and her week end went out at once: the card then came to
    a seat that was already "waiting" (#next "Chờ hảo hữu…"), while the host's end waited for her answer (cyHold) — a modal open, the week
    end never sent (coop-bot THIN=9). A real choice is never made for her (jcooptimer), so the order is fixed instead: in her cycle tuần,
-   with this week's answer not in, her week end waits until the host's draw is done (view e.fl = his draw's week) or her answer is in
-   (S.cyb.rk, the host's patch). The card reaches her while her end is still hers to send; she answers; his draw runs; her end goes. */
+   with this week's answer not in, her week end waits until the host's week end is out (his end goes only once his draw ran: cyHold) or
+   her answer is in (S.cyb.rk, the host's patch). The card reaches her while her end is still hers to send; she answers; his draw runs,
+   his end goes; then hers. (The host's end never waits for hers, so this wait cannot turn around.) */
 function cyHer(){if(!eW()||host()||CW.ctx||!S||S.dead||S.out||typeof window.cycOn!=="function"||typeof window.cyWk!=="function")return false;
  let on=false;try{on=!!window.cycOn(S)}catch(e){}if(!on)return false;const g=window.cyWk(),c=S.cyb||{};if(c.rk===g)return false;
- const V=CW.thin&&CW.thin.view,e=V&&V.o&&V.o.e;if(e&&e.fl===g)return false;if(CW.cyHerT!==g){CW.cyHerT=g;T("cyHer "+g)}return true}
+ const e=COOP.state.ended||{};if(e[fs()])return false;if(CW.cyHerT!==g){CW.cyHerT=g;T("cyHer "+g)}return true}
 CW.cyHer=()=>cyHer();
-COOP.on("thinview",()=>{if(CW.on&&CW.pend&&CW.cyHerT!=null&&!host())soonEnd()});
+{const go=()=>{if(CW.on&&CW.pend&&CW.cyHerT!=null&&!host())soonEnd()};COOP.on("thinview",go);COOP.on("presence",go)}
 CW.cyFree=()=>cyFree();/* thin E: jcoopthine's `do cyb` (her answer, written into her stored person) frees the draw */
 P2H.cyb=m=>{if(typeof m.w!=="number")return;CW.fcy={w:m.w,c:m.c&&typeof m.c==="object"?m.c:{},pend:!!m.pend,life:m.life||0};cyFree()};
 COOP.on("presence",()=>{if(CW.on&&CW.cyHold!=null)cyFree()});
