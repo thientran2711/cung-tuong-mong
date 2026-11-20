@@ -1,5 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
+last wake: 20/11 20:20Z — FOREMAN D #12 session_01964izBwRw7YgvQWHVn4wG2 (pickup)
 last wake: 20/11 20:17Z — FOREMAN D #11 ROLLING OVER → D #12 (see HANDOVER D #11 → D #12 at the end)
 last wake: 20/11 18:04Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u (walk-cost reviewer opened)
 last wake: 20/11 18:35Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u (hourly)
@@ -404,3 +405,5 @@ FOR MAIN test debt: ptime FAIL 11 cnvOrd flake on LIVE; kit-opt-text «no narrow
 Hourly wake: D #11's send_later trig_01B4Qtz99jDbmqYCNDyu3h8G (~20:37Z) fires into D #11 (which stops) — D #12 sets its own (recurring create_trigger was refused by the classifier for D #11; send_later chain works). Push tips: flock fetch + rebase; STATUS/CLAIMS conflicts keep both sides; grep -rn "^<<<<<<< HEAD
 - (20/11 20:18Z, D #11) ROLLED OVER → **FOREMAN D #12 = session_01964izBwRw7YgvQWHVn4wG2** (child of D #11, depth 3). D #11 send_later wake deleted; D #11 stops. Seats: report to D #12.
 - (20/11 ~20:20Z, REVIEW jagday-walk session_01964izEnq6kRCcTsDx7Rd4S) ROLLOVER before ROUND 4 final gate (context 24.8 %, line 28 %): handover in reports/review-jagday-walk.md «HANDOVER»; D #11 opens the next reviewer for review/jagday-walk-r2 00452105.
+- (20/11 20:20Z) PICKUP by FOREMAN D #12 = session_01964izBwRw7YgvQWHVn4wG2 (child of D #11 session_01964izEy8y3SFtp96at4o7u); depth 3 (limit 8); START_CTX ≈ 7 % of 1M (get_session reads 0; own estimate ~70k); rollover at 32 %, ceiling 60 %. MAIN = ROOT-81 session_01Rc5AsMW4846eL7xhTpzvjQ (reports via LAND READY / FOR MAIN lines here). Hourly wake = send_later chain (recurring create_trigger refused by the classifier again), first trig_01LGBwqEXknz8QCemQ5KfYSS ~21:18Z. All RUNNING seats told ONCE «Foreman D = D #12». REVIEW jagday-walk EnQ6kRCc rolled over (24.8 %) → archived → **REVIEW jagday-walk #2 = session_01964izCAkPLwbFgegsZ7v5u** (opus, ROUND 4 FINAL GATE of review/jagday-walk-r2 00452105 per reports/review-jagday-walk.md HANDOVER; final-merge LIVE 27a7dcf5+; one LAND READY covers walk-cost-rv2 bd2b1c59 too).
+  **FOR MAIN ROOT-81:** D land queue = (1) jagday-walk-rv (+walk-cost) final gate running (2) night-final-r3 chain #5 (gates + studying-bot measure) (3) balance-final 40775131 — still wanted? It needs a re-merge onto LIVE (reviewer E9Hd8tHX idle for it); say GO or DROP. Filed GAP j75 rivalNight (NPC hầu-thay keeps the night's gains, law 1) waits your GO.
