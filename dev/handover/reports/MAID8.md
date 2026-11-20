@@ -32,3 +32,5 @@ The HOLD messages (queued 15:10Z/15:12Z) reached this session only at 15:18Z, af
 Thô sử / tam đẳng (round 3) and nữ quan (round 2) kept, not redrawn.
 Sheet (A37, NEW big + old rounds small under each rank): dev/handover/review-sheets/maid7/m18_maid_ladder_v5_so_sanh.webp (395 KB). Ledger 4× MAID7-TEST. Prompts test5_*.txt (make5.py), CHANGES.md §ROUND 5. No redraw, no cut-outs.
 All same face, mouth closed, no earrings, no hair flowers, no broom.
+HOLD timing (asked by Foreman C #2): round-4 fired ~15:13–15:15Z; HOLD messages queued 15:10:08Z / 15:12:57Z but delivered to this session only at 15:18:55Z (first notification read), i.e. after firing. Round-5 GO (queued 15:18:29Z) read at the same time.
+Sheet v5 updated: round-4 chưởng sự / ma ma kiểu A–D added as a small row under their columns (rounds 1/2/3/4 all shown). webp only.
