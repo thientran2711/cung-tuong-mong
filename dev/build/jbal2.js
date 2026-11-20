@@ -414,7 +414,12 @@ Object.assign(BAL,{nroad:{
     the bond a man / court man / allied house needs to ask the player */
  men:{st:40,kidAge:15,men:{fx:{win:{loyal:3},mid:{loyal:-1},lose:{loyal:-4}},rv:{win:-2,lose:1}},court:{af:4,danh:1},
   off:{pow:{win:2,lose:-2},rv:{win:-1,lose:1},rel:3,ally:5},hz:{fx:{win:{fond:3,tal:2,hp:-2},mid:{tal:1,hp:-1},lose:{fond:-3,hp:-1}},rv:{win:-1,lose:1}},
-  askTinh:30,askAf:10,askRel:25}}});
+  askTinh:30,askAf:10,askRel:25,
+  /* GAP OR18 the Emperor's road (jnroade.js): st = his test stat with no reign line (else the throne's grip rg.p); hist = lives of template
+     history avoided; askSung = her Sủng for him to ask her help; biên ải: bien = Biên cương, gen = the Đại tướng quân house thế lực; cải cách:
+     kho = Kho lúa, old = thế lực the strongest other house loses (win) / gains (lose, as −); kế vị: age = a prince counts from this age,
+     fond = his regard for the prince closest to the succession and the next one [first, second] */
+  emp:{st:40,hist:1,askSung:60,age:6,bien:{win:6,mid:0,lose:-6},gen:{win:2,mid:0,lose:-2},kho:{win:6,mid:0,lose:-6},old:{win:2,mid:0,lose:-1},fond:{win:[3,-1],mid:[0,0],lose:[-2,-2]}}}}});
 /* QUESTLINE Q3 — HELPERS IN HER ROAD (owner D-Q1 = "1", OD 18/11 07:56Z; QUESTLINES_AUDIT §4 Q3; engine jroad.js rdHp*, tags + lines jrdhp.js).
    A «Nhờ …» option of her road tagged in RDHP asks a helper; the helper answers ONE of 4 ways, drawn by weight [full, half, no, sab]:
      full = giúp hết lòng (the option's own odds) · half = giúp qua loa (odds − half, never below min; a sure option then rolls at 100 − half)
@@ -1321,7 +1326,7 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
    cd    tuần before the same person acts again in the same kind (_ = default; per kind: cd.<kind>)
    wit   witness rank: eye × eyes(p) + host × hostility toward the one watched
    tell  a witness carries a fact when her grudge against its subject ≥ host, or her liking for the one told ≥ friend */
-BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4},wit:{eye:10,host:1},tell:{host:40,friend:30}};
+BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4,hoi67:6/* jrtrig OR16: one person moves a hồi at most once every 6 tuần */},wit:{eye:10,host:1},tell:{host:40,friend:30}};
 /* npc-purpose G1 kinds (jagwhy1; the stray man; an NPC affair itself begins / is exposed through her day plan + proof: role-parity part 2).
    tryst: base + rove (roving man) − fear (Kín đáo), cd [roving, other] = the old 2 / 3 tuần cadence; letter: w per reason (old order of reasons; jealous = Sủng under jSung and ghen ≥ jGhen), cd 12 = once a season;
    seek: base (his fancy, ≥ ag.why.min) + her looks above sac, his gap = BAL.net menGap; tryst base 35 − fear 12 ≥ min (rates review: a careful pair still meets); menGrudge: s while his grudge lasts, cd 9 tuần = the old once every 3 months (monthly caller) */
