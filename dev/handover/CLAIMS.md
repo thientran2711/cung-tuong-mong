@@ -468,3 +468,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | rv-kit-opt-text REVIEWER (sonnet; small kit KP14) | review/kit-opt-text-rv; reports/rv-kit-opt-text.md | MAIN ROOT-79 | rv-signs session | DONE PASS 9f673ab2 | 20/11 14:41Z |
 | KP22 rel-men-servants (opus; ORDER MAIN ROOT-79 14:45Z; men + servants real pairwise relations → relGrp/GR groups) | review/rel-men-servants | B | session_01N1tNP6Ndqa9P3vKrpqp9M7 | RUNNING | 20/11 15:19Z |
 | FOREMAN E #20 (opus; child of E #19, depth 1) | handover FOREMAN_E_STATUS | FOREMAN E #19 | session_01DgYSWktqRepcrRpV9LRJV2 | RUNNING | 20/11 15:49Z |
+| coop-thin G #7 (opus; successor of G #6 5sNDT7i8 @fcaebe77) | review/coop-thin-g | B | session_01N1tNP4hKBjqGrnmw98Dz3q | RUNNING | 20/11 15:57Z |
