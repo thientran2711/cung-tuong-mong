@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1d3bf5ef+","t":"2026-11-20T19:03Z","c":"kit-cost-rows-home: home stats (Gia thanh / Áp lực hôn sự / Hồi môn / Lời đồn) + «quý nhau» in option rows and word mode; NAMES.kld; KIT §1…","b":"482a6d164e1c","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
+window.CTM_BI={"s":"5853d71a+","t":"2026-11-20T19:12Z","c":"home-chapters r2: wire KIT READY home-stat rows — relation gains in kit words (thiện cảm), costrows.js reads kit hint words at the sharpest…","b":"fa8b43f80344","h":[{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -68913,7 +68913,11 @@ function kcFace(m){if(m.r==="ty"&&S.maid)return pMaid();const f={src:kcPor(m),in
  f.__kp=m;try{f.__kr=personRoleRank(m)}catch(e){}return f}
 /* the kcR1 elope gate, ONE key for jkc tmtron and jkc3b tm96z (law 4) */
 function kcR1Ok(){const G=BAL.kc3.rare.r1;return !!S.tm96&&S.tm96.h>=G.h&&(S.maid?S.maid.loyal:0)>=G.loyal&&(S.kld||0)<G.kld}
-function kcFreeFid(role,pref){const U=new Set(figUsed());const keys=Object.keys((FIGIX||{})[role]||{});const L=(pref||[]).filter(k=>keys.includes(k)&&!U.has(k)).concat(shuf(keys.filter(k=>!U.has(k))));const k=L[0]||"";if(k)figUsed().push(k);return k}
+/* E25r2 (co-op land gate, law 6b): the role's pool first, then the next pool of the same sex (the one chain BAL.kc3.ros.pool, as kc3Fid):
+   the mama pool holds 8 faces and one home household uses all 8, so in a co-op room (fidUsed is a world key) the second seat's mother /
+   di nương / tổ mẫu were left with no face */
+function kcFreeFid(role,pref){const U=new Set(figUsed());const ch=(typeof BAL!=="undefined"&&BAL.kc3&&BAL.kc3.ros&&BAL.kc3.ros.pool&&BAL.kc3.ros.pool[role])||[role];
+ for(const r of ch){const keys=Object.keys((FIGIX||{})[r]||{});const L=(r===role?(pref||[]).filter(k=>keys.includes(k)&&!U.has(k)):[]).concat(shuf(keys.filter(k=>!U.has(k))));const k=L[0]||"";if(k){figUsed().push(k);return k}}return""}
 
 /* ---------- start: the identity card choice, then the home life ---------- */
 function kcPick(){return (S&&S.kcPick)||"cung"}
@@ -85601,7 +85605,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="482a6d164e1c";window.CTM_BUILD=BUILD;
+const BUILD="fa8b43f80344";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

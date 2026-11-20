@@ -84,7 +84,11 @@ function kcFace(m){if(m.r==="ty"&&S.maid)return pMaid();const f={src:kcPor(m),in
  f.__kp=m;try{f.__kr=personRoleRank(m)}catch(e){}return f}
 /* the kcR1 elope gate, ONE key for jkc tmtron and jkc3b tm96z (law 4) */
 function kcR1Ok(){const G=BAL.kc3.rare.r1;return !!S.tm96&&S.tm96.h>=G.h&&(S.maid?S.maid.loyal:0)>=G.loyal&&(S.kld||0)<G.kld}
-function kcFreeFid(role,pref){const U=new Set(figUsed());const keys=Object.keys((FIGIX||{})[role]||{});const L=(pref||[]).filter(k=>keys.includes(k)&&!U.has(k)).concat(shuf(keys.filter(k=>!U.has(k))));const k=L[0]||"";if(k)figUsed().push(k);return k}
+/* E25r2 (co-op land gate, law 6b): the role's pool first, then the next pool of the same sex (the one chain BAL.kc3.ros.pool, as kc3Fid):
+   the mama pool holds 8 faces and one home household uses all 8, so in a co-op room (fidUsed is a world key) the second seat's mother /
+   di nương / tổ mẫu were left with no face */
+function kcFreeFid(role,pref){const U=new Set(figUsed());const ch=(typeof BAL!=="undefined"&&BAL.kc3&&BAL.kc3.ros&&BAL.kc3.ros.pool&&BAL.kc3.ros.pool[role])||[role];
+ for(const r of ch){const keys=Object.keys((FIGIX||{})[r]||{});const L=(r===role?(pref||[]).filter(k=>keys.includes(k)&&!U.has(k)):[]).concat(shuf(keys.filter(k=>!U.has(k))));const k=L[0]||"";if(k){figUsed().push(k);return k}}return""}
 
 /* ---------- start: the identity card choice, then the home life ---------- */
 function kcPick(){return (S&&S.kcPick)||"cung"}
