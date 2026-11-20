@@ -694,3 +694,4 @@ NEWACCT#5 ~18:55Z: OWNER Lượt 1319: old s62_t6_a18 picture does not look like
 NEWACCT#5 ~18:58Z: OWNER Lượt 1321: Phi capes ALSO get small dangling pearl drops (Tần already has a pearl fringe) → 'short fringe of tiny pearl drops dangling beneath each cape edge, richer than Tần, fewer than Quý phi'; B26FAB told; sent Lượt 1322.
 NEWACCT#5 ~19:00Z: OWNER asked current Tần pic → sent rank8-s62/s62_t4_a18.webp Lượt 1323.
 NEWACCT#5 ~19:05Z: OWNER Lượt 1324/1325: Hán t7/t8 thick gấm looks bulky → OK to #5 proposal: outer = sa dệt kim (zhijin sha, light gold-woven gauze), inner = thin Tống cẩm; HH denser gold than HQP → DESIGN5 v6.
+NEWACCT#5 ~19:08Z: OWNER Lượt 1327: 1322 file = current outfit; wants Hán Phi too → DESIGN5 v6 also: Hán t5 capes = colour + gold peony embroidery + pearl edge + tiny pearl drop fringe; Hán t6 vân kiên + jade/pearl drops.
