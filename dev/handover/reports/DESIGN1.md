@@ -101,3 +101,32 @@ Files (make: dev/art/seasons4/make_thu_ab.py; only the Outfit sentence + CAPTION
 | s62_t5_thu_HAN_A.txt | quju spiral-wrap robe, crossed collar opened WIDE to the shoulders (broad low V, neck + collarbones, modest), triple collar bands repeated on the spiral hem, wide belt + jade zupei to the knee | 9553 | PASS |
 | s62_t5_thu_HAN_B.txt | 2-robe zhiju (plum outer + blush inner), both collars opened wide to the shoulder edge, layered collar edges, deep embroidered hem/front border, sash + 2 jade pendants | 9645 | PASS |
 Notes: base MINH text "no Qing-style headdress" FAILS gate F14 (banned word even negated) → removed in A/B (the base s62_t5_thu_MINH.txt itself fails the gate — flag for Foreman). HAN_B "phoenix-free" failed X08 → removed. Inner sleeves stated "hidden inside" so the common ONE SINGLE SLEEVE LAYER rule holds. Phi bạch common sentences (G29: behind the back, never shoulders) kept verbatim. Captions: "Mùa Thu · Thiết kế thời Minh/Hán (cải tiến A/B) · Phi".
+
+---
+# JOB 4 — Minh + Hán RANK LADDER (owner G32, 20/11 ~18:15Z; prompts only G30/G31, 0 cr) — STEP 1: ladder table (Vietnamese, for the owner)
+Common to every rank: thu colours (main + secondary of the person); NO phi bạch (no shawl, no PHI BẠCH sentences); embroidery density per H6 (thân áo thêu dày ở mọi bậc, nhiều hơn cung nữ); motif to dần theo bậc; long garments only (H12); no phoenix on the robe (t7/t8 phoenix only in the crown, F6); vàng hoàng gia #EFBD69 from t6 (ít) → t7 → t8 (nhiều nhất), B21; nothing Qing (F14). Hán: crossed collar opens WIDE to the shoulders at EVERY rank (owner liked it).
+
+## THỜI MINH (gốc: Minh A áo dài cổ đứng + váy mã diện; Minh B áo choàng mở vạt)
+| Bậc | Điểm phân biệt |
+|---|---|
+| t1 Đáp ứng | Áo dài qua gối cổ đứng, cúc ngọc trai; váy mã diện 1 dải dệt vàng ở gấu; thân thêu hoa thu dày; trâm bạc + 1 hoa nhỏ |
+| t2 Thường tại | Như t1; viền cổ + cổ tay 2 lớp (thêu); dải gấu váy rộng hơn |
+| t3 Quý nhân | Như t2; thêm dải vàng thứ 2 ngang gối váy; trâm vàng |
+| t4 Tần | ★ DẤU HIỆU: BỔ TỬ vuông thêu vàng giữa ngực (khung viền vàng đôi); hoa thêu to hơn |
+| t5 Phi | Bổ tử + DẢI DỆT VÀNG chạy ngang vai xuống hết tay áo; chuỗi ngọc bội (cấm bộ) treo giữa váy; mũ vàng lớn có tua |
+| t6 Quý phi | Thêm ÁO CHOÀNG DÀI MỞ VẠT (phi phong) tới mắt cá, 2 nẹp vạt thêu vàng; chút vàng hoàng gia ở nẹp; mũ lớn hơn |
+| t7 Hoàng quý phi | Phi phong + váy dệt kim gần toàn bộ; vàng hoàng gia nhiều (nẹp, dải vai–tay, gấu); mũ phượng HQP (nhỏ hơn HH) |
+| t8 Hoàng hậu | Đầy đủ nhất: vàng hoàng gia nhiều nhất, bổ tử lớn kim tuyến, hai bộ ngọc bội, váy dệt kim toàn phần; mũ phượng lớn nhất, ít tua |
+
+## THỜI HÁN (gốc: Hán A khúc cư quấn vạt xoắn; Hán B trực cư 2 lớp; cổ mở rộng tới vai mọi bậc)
+| Bậc | Điểm phân biệt |
+|---|---|
+| t1 Đáp ứng | Khúc cư quấn 1 vòng, cổ chéo mở rộng tới vai, 1 dải cổ trơn màu phụ; đai vải; thân thêu hoa thu dày; trâm bạc + 1 hoa nhỏ |
+| t2 Thường tại | Như t1; dải cổ 2 lớp có viền thêu |
+| t3 Quý nhân | Như t2; dải viền cổ lặp lại ở mép vạt xoắn; 1 ngọc bội; trâm vàng |
+| t4 Tần | ★ DẤU HIỆU: CHỒNG 3 DẢI CỔ RỘNG (cổ ba lớp) thêu vàng ôm theo chữ V tới vai; hoa thêu to hơn |
+| t5 Phi | Cổ 3 lớp + ĐAI LƯNG RỘNG CỨNG thêu, khoá vàng, chuỗi ngọc tổ bội dài tới gối; vạt xoắn quấn 2 vòng; mũ vàng lớn có tua |
+| t6 Quý phi | Thêm ÁO NGOÀI trực cư (2 lớp áo, cổ cả hai lớp mở rộng); chút vàng hoàng gia ở dải cổ ngoài; mũ lớn hơn |
+| t7 Hoàng quý phi | 2 lớp áo, vàng hoàng gia nhiều ở dải cổ + cổ tay + gấu; thân thêu kim tuyến dày, mây lớn; mũ phượng HQP |
+| t8 Hoàng hậu | Vàng hoàng gia nhiều nhất, dải cổ + gấu dệt kim rộng nhất, hai bộ ngọc tổ bội; mũ phượng lớn nhất, ít tua |
+STEP 2 (after owner OK): 8 prompts per era on s62 a18 thu colours, captions "Mùa Thu · Thiết kế thời Minh/Hán · <bậc>".
