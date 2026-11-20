@@ -16,7 +16,12 @@ function openMG(k,lv,cb){const [t,h,fn]=MG[k];$("mgt").textContent=t;$("mgh").te
   $("mgb").innerHTML=`<p class="mgres">${skip?(pts?"May mắn":"Không vào"):["","Tạm được","Khá","Xuất sắc"][pts]}</p><p style="text-align:center">Tiến bộ +${g}${S.master&&pts?" (danh sư dạy, gấp đôi)":""}</p><div style="display:flex;justify-content:center"><button class="main" id="mgok">Xong</button></div>`;
   $("mgok").onclick=()=>{$("ov").hidden=true;$("mgb").innerHTML="";cb(g)};/* the used result button is removed: no stale "Xong" with an old callback stays in #ov */$("mgok").focus()};
  sk.onclick=()=>fin(kitQuickRoll()?1:0,true);
- mgStop=fn($("mgb"),lv,p=>fin(p,false))}
+ /* KIT §13.7 (mg-ready-guide, owner OD 20/11 ~00:20Z): the lesson board starts only on «Sẵn sàng» (rules read first, no clock); this j5 path is the
+    fallback (j83 routes every lesson with S.mg to playArt, which has the full rules screen + «Hướng dẫn»); its old engines have no hint hook, so no guided round here */
+ const mb=$("mgb"),run=()=>{mb.innerHTML="";mgStop=fn(mb,lv,p=>fin(p,false))};
+ if(typeof kgReady!=="function"){run();return}
+ mb.innerHTML=`<div class="kg82act"><button type="button" class="kbtn" id="mgready">Bắt đầu</button></div>`;kgReady(mb,{n:String(t).split(":")[0],t:String(t).split(":").slice(1).join(":").trim(),how:h,go:"#mgready",pic:""});
+ $("mgready").onclick=run}
 function gCam(b,lv,end){const L=["Cung","Thương","Giốc","Chủy"],N=16,fall=Math.max(1100,2200-lv*220),gap=Math.max(450,800-lv*60);
  b.innerHTML=`<div class="lanes" id="lanes">${L.map((n,i)=>`<div class="lane" data-l="${i}"></div>`).join("")}<div class="hitline" id="hitl"></div></div><div class="lbtns">${L.map((n,i)=>`<button data-l="${i}">${n}</button>`).join("")}</div><p class="mgsc" id="mgsc">Trúng 0/${N}</p>`;
  const H=$("lanes").clientHeight,HIT=Math.round(H*.83);$("hitl").style.top=HIT+"px";

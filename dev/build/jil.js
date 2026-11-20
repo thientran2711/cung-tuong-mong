@@ -109,14 +109,16 @@ function ilCensus(){if(!S)return;const I=ilS();const now={};const seen=new Set()
 function ilOut(p,e){const i=(p.inv||[]).indexOf(e);if(i>=0){p.inv.splice(i,1);return}const w=p.wd;if(w)for(const sl of ["tram","y"])if(w[sl]===e){w[sl]=null;return}if(p.vl===e){p.vl=null;return}
  if(p.wdPawn){const j=p.wdPawn.findIndex(P=>P&&P.e===e);if(j>=0)p.wdPawn.splice(j,1)}}
 /* ---- weekly: the box moves on (returns, ransom, atonement, mending, resale) ---- */
+function ilWant(v,x,o,pr){const W=BAL.ag.why.g2il;if(!v||v===o||(v.bac||0)<(pr!=null?pr:x.pr)+W.spare)return 0;const has=(v.inv||[]).some(e=>e&&e.k===x.e.k);
+ return (has?0:W.lack)+(o&&o!==v?Math.max(0,hostility(v,o))*W.hostW:0)}
 function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false;
  for(const x of I.box.slice()){const o=ilP(x.own);const live=o&&ilAlive(o)&&!(o!==S&&o.out);
   if(x.at==="mkt"){
    if(live&&o===S){if(!x.shop&&roll(B.shopP)){x.shop=1;log(`Thái giám Nội vụ phủ báo: khay đồ mua ngoài cung có ${ilNm(x.e)}, giống đồ cũ của ngươi.`)}
     /* the ceiling holds (reviewer r1): due → queued even when other dialogs wait (one ransom visit a week) */if(!ask&&wk()>=x.ret){ask=true;x.ret=wk()+ilRng(B.againW);pushDil(mkP("ilback",{u:x.e.iu}),"Đồ cũ trở về")}continue}
-   if(live&&o!==S&&(o.bac||0)>=x.pr&&roll(B.npcBackP)){ap(o,{bac:-x.pr});ilTake(x,o,"chuộc về");continue}
-   if(roll(B.npcBuyP)){const L=liveRivals(true).filter(v=>v!==o&&(v.bac||0)>=x.pr+20);if(L.length){const v=pick(L);ap(v,{bac:-x.pr});ilTake(x,v,"mua");continue}}
-   if(!live&&!x.shop&&roll(B.shopP))x.shop=1;continue}
+   if(live&&o!==S&&(o.bac||0)>=x.pr&&npcWhy("ilBack",{p:o,x},()=>roll(B.npcBackP))){/* npc-purpose G2c: she wants her piece back and can pay */ap(o,{bac:-x.pr});ilTake(x,o,"chuộc về");continue}
+   {const bw=npcWhy("ilBuy",{x,o},()=>roll(B.npcBuyP));if(bw){const v=bw.who;ap(v,{bac:-x.pr});ilTake(x,v,"mua");continue}}/* npc-purpose G2c: the buyer = one who wants that piece and can pay */
+   if(!live&&!x.shop&&npwPick(liveRivals(true),v=>ilWant(v,x,null))&&roll(B.shopP))x.shop=1;continue}/* npc-purpose G2c: put on the tray only when someone would buy it */
   /* the box keeps moving so it stays small (save size bounded; reviewer r1): a servant sells what she pocketed (→ market: it comes back to the owner like any sold piece);
      tang vật is released to the Nội vụ phủ store after cctW weeks; Hoàng thượng / Thái hậu hand pieces beyond heldCap down to the Nội vụ phủ store */
   if(x.at==="srv"&&x.why==="pil"&&wk()-x.w>=B.srvW){x.at="mkt";x.why="sell";x.ret=wk()+ilRng(B.retW);x.pr=Math.max(1,Math.round(ilVal(x.e)*B.ransomPct/100));ilLog(x.e,"srv","mkt","kẻ hầu bán ra ngoài");continue}
@@ -125,8 +127,8 @@ function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false;
   if(x.dh)continue;/* jdh2 (sắc phong book / seal): its own atonement / census road; never resold */
   if((x.why==="fix"||x.why==="burn")&&wk()>=x.rel){if(live){ilTake(x,o,"sửa xong");if(o===S)Q.push({t:"Đồ sửa xong",who:pMe(),h:`${ilTag(x.e)}<p>Nội vụ phủ sửa xong <b>${ilNm(x.e)}</b>, sai người đem trả về rương ngươi.</p>`,btn:"Đã hiểu"})}else{x.why="dead";x.own=""}continue}
   if(x.why==="conf"&&wk()>=x.rel){if(live&&o===S){if(!ask){ask=true;x.rel=wk()+ilRng(B.againW);pushDil(mkP("ilconf",{u:x.e.iu}),"Đồ bị tịch thu")}}
-   else if(live&&roll(B.npcConfP))ilTake(x,o,"xin lại");else if(!live){x.why="dead";x.own=""}continue}
-  if((x.why==="dead"||x.why==="kho"||x.why==="net")&&!live&&roll(B.resaleP)){x.at="mkt";x.why="sell";x.own="";x.pr=Math.max(1,Math.round(ilVal(x.e)*B.ransomPct/100));x.ret=1e9;ilLog(x.e,"nvp","mkt","bán lại")}}
+   else if(live&&npcWhy("ilConf",{p:o,x},()=>roll(B.npcConfP)))ilTake(x,o,"xin lại");/* npc-purpose G2c: she asks for it back when it matters to her */else if(!live){x.why="dead";x.own=""}continue}
+  if((x.why==="dead"||x.why==="kho"||x.why==="net")&&!live&&npwPick(liveRivals(true),v=>ilWant(v,x,null,Math.round(ilVal(x.e)*B.ransomPct/100)))&&roll(B.resaleP)){x.at="mkt";/* npc-purpose G2c: resold only when someone in the cung wants it */x.why="sell";x.own="";x.pr=Math.max(1,Math.round(ilVal(x.e)*B.ransomPct/100));x.ret=1e9;ilLog(x.e,"nvp","mkt","bán lại")}}
  /* ownerless pieces outside (a dead person's effects resold, released stock) beyond mktCap: Nội vụ phủ buys them back and hands them out
     as allotment to a consort (they stay in the game, the box stays small) */
  {const M=I.box.filter(x=>x.at==="mkt"&&!x.own);if(M.length>B.mktCap){const L=liveRivals(true).filter(v=>v&&!v.out&&!v.coop&&ilAlive(v));if(L.length)for(const x of M.slice(0,M.length-B.mktCap))ilTake(x,pick(L),"Nội vụ phủ cấp phát")}}

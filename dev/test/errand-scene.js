@@ -7,6 +7,9 @@
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,BASE,OUT,W0,H0]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const W=+W0||755,H=+H0||1000,tag=`${W}x${H}`;const SLOW=+process.env.SLOW||6;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:2,hasTouch:true,isMobile:W<900});
+ /* PTIME branch (parallel-time fixer #6): with the parallel-time core in the build the adapter reads S.away (jptime); __erReset clears HER sends in BOTH
+    adapters so each flow starts with one fresh task (a test assumption, not a game rule); the stub of the receiver check is put back to the real core after. */
+ await ctx.addInitScript(()=>{window.__erReset=()=>{S.erra=[];if(Array.isArray(S.away))S.away=S.away.filter(a=>a&&a.by!=='me')}});
  await ctx.addInitScript(()=>{let a=0x2f6e2b1;Math.random=function(){a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296}});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(BASE+'index.html',{waitUntil:'domcontentloaded'});
@@ -22,7 +25,7 @@ const W=+W0||755,H=+H0||1000,tag=`${W}x${H}`;const SLOW=+process.env.SLOW||6;con
  for(const [name,fn] of flows){
   await clean();
   const res=await p.evaluate(async([name,fnS,SLOWK])=>{const Wt=t=>new Promise(r=>setTimeout(r,t));
-   Q.length=0;S.buoi=0;used=0;S.bac=Math.max(S.bac,500);S.erra=[];ERR.slow=SLOWK;OPT.fxon=true;render();await Wt(1500);
+   Q.length=0;S.buoi=0;used=0;S.bac=Math.max(S.bac,500);__erReset();ERR.slow=SLOWK;OPT.fxon=true;render();await Wt(1500);
    const i=rivals.findIndex(v=>v.alive&&!v.out&&!sameHouse(S,v)&&!together(S,v)&&(!ACT[name]||ACT[name].ok(S,v)));if(i<0)return{skip:'no rival'};
    if(name==='scout'){const v=rivals[i];try{delete S.seen[v.id]}catch(e){}}
    const runner=(bestSent(S)||S.maid||{}).name;const u0=used;
@@ -54,7 +57,7 @@ const W=+W0||755,H=+H0||1000,tag=`${W}x${H}`;const SLOW=+process.env.SLOW||6;con
  }
  /* runner ON the stage (her maid, token in view): walk-off from her own slot, slot chip, walk-back, «!» chip on her, tap = panel */
  await clean();await p.evaluate(()=>{try{kmReset()}catch(e){}});
- const ons=await p.evaluate(async(SLOWK)=>{const Wt=t=>new Promise(r=>setTimeout(r,t));Q.length=0;S.buoi=0;used=0;S.erra=[];S.bac=Math.max(S.bac,500);ERR.slow=SLOWK;OPT.fxon=true;render();await Wt(1500);
+ const ons=await p.evaluate(async(SLOWK)=>{const Wt=t=>new Promise(r=>setTimeout(r,t));Q.length=0;S.buoi=0;used=0;__erReset();S.bac=Math.max(S.bac,500);ERR.slow=SLOWK;OPT.fxon=true;render();await Wt(1500);
   window.bestSent=()=>S.maid;const tokIn=()=>[...document.querySelectorAll('#tokens .tok.fig')].some(t=>t.querySelector('.tag').textContent.includes(S.maid.name));const before=tokIn();
   const i=rivals.findIndex(v=>v.alive&&!v.out&&!sameHouse(S,v)&&!together(S,v));doAct(i,'spy');return{maid:S.maid.name,tokBefore:before,tasks:ERR.tasks().length}},SLOW);
  R.onstage=ons;ck('on-stage runner: her token was in view',ons.tokBefore,ons);
@@ -64,35 +67,35 @@ const W=+W0||755,H=+H0||1000,tag=`${W}x${H}`;const SLOW=+process.env.SLOW||6;con
  await p.evaluate(async(SLOWK)=>{window.__kn=[];window.__kn0=window.kitNotice;window.kitNotice=o=>{window.__kn.push(o);return window.__kn0?window.__kn0(o):null};const T=ERR.tasks();Q.length=0;spend(Math.max(1,T[0].due-ERR.now()))},SLOW);
  await sleep(450*SLOW);await p.screenshot({path:`${OUT}/onstage-3on-${tag}.jpg`,type:'jpeg',quality:70});await sleep(900*SLOW);
  const ob=await p.evaluate(()=>({khap:(()=>{const c=document.querySelector('i.kmerr-bang.khead');const im=c&&c.querySelector('img');return !!(c&&!c.classList.contains('khap')&&(c.classList.contains('kfb')||im&&/ico-talk-y\.webp/.test(im.getAttribute('src')||'')))})(),bub:(()=>{const im=document.querySelector('i.kmerr-bang.khead>img');return im?{ok:im.complete&&im.naturalWidth>0,bg:getComputedStyle(im.parentNode).backgroundImage}:null})(),above:(()=>{const c=document.querySelector('.kmerr-bang');const t=[...document.querySelectorAll('#tokens .tok.fig')].find(x=>x.querySelector('.tag').textContent.includes(S.maid.name));if(!c||!t)return false;const im=t.querySelector('.figimg').getBoundingClientRect(),cr=c.getBoundingClientRect(),em=[...t.parentNode.querySelectorAll('.kemo,.kemoseal,[class*=emo]')].map(e=>e.getBoundingClientRect());return cr.bottom<=im.top+im.height*.3&&!em.some(e=>e.width&&cr.left<e.right&&cr.right>e.left&&cr.top<e.bottom&&cr.bottom>e.top)})(),bang:document.querySelectorAll('.kmerr-bang').length,hid:[...document.querySelectorAll('#tokens .tok.fig')].filter(t=>t.style.visibility==='hidden').length}));
- const kn=await p.evaluate(()=>{const r=(window.__kn||[]).map(o=>({id:o.id,line:o.line,go:typeof o.go,goLabel:o.goLabel}));window.kitNotice=window.__kn0;return r});ck('notice goes through the ONE entry point kitNotice({id:errand:…,line,text,go}) when it exists',kn.length===1&&/^errand:/.test(kn[0].id)&&/đã về báo tin/.test(kn[0].line)&&kn[0].go==='function',kn);
+ const kn=await p.evaluate(()=>{const r=(window.__kn||[]).map(o=>({id:o.id,line:o.line,go:typeof o.go,goLabel:o.goLabel}));window.kitNotice=window.__kn0;return r});ck('ONE landing notice through the ONE entry point kitNotice({id:errand:…|pt:back:…,line «đã về: có tin báo»,text,go}) when it exists',kn.length===1&&/^(errand|pt:back):/.test(kn[0].id)&&/đã về: có tin báo/.test(kn[0].line)&&kn[0].go==='function',kn);
  ck('on-stage runner: the kit head marker (.khead yellow speech bubble, no disc; OD 19/11 ~03:05Z) above her head, not on the emotion chip, token visible',ob.bang===1&&ob.hid===0&&ob.khap&&ob.above&&(!ob.bub||ob.bub.bg==='none'),ob);await p.screenshot({path:`${OUT}/onstage-4bang-${tag}.jpg`,type:'jpeg',quality:70});
  const ot=await p.evaluate(async()=>{document.querySelector('.kmerr-bang').click();await new Promise(r=>setTimeout(r,1500));const md=document.getElementById('modal');const dlg=md&&md.querySelector('.dlg');return{modal:!!(md&&!md.hidden),txt:md?md.innerText.slice(0,400):'',maid:S.maid.name,hasMaid:!!md&&md.innerText.includes(S.maid.name),nLines:md?md.innerText.split('\n').filter(x=>x.trim().length>12).length:0,h:dlg?dlg.getBoundingClientRect().height:0,bang:document.querySelectorAll('.kmerr-bang').length}});
  ck('on-stage runner: tap «!» opens the report, chip gone',ot.modal&&ot.bang===0,ot);ck('report names the person who went (law 6b) and carries the result lines',ot.hasMaid&&ot.nLines>=2,ot);await p.screenshot({path:`${OUT}/onstage-5report-${tag}.jpg`,type:'jpeg',quality:70});
  await p.evaluate(()=>{const md=document.getElementById('modal');if(md)md.hidden=true;try{kmReset()}catch(e){}});
  /* receiver side: a PTIME stub with ONE order → the ONE «tin» icon shows the badge, the panel lists the order row + «Nghe lệnh», its button calls PTIME.answer */
  await clean();await p.evaluate(()=>{try{kmReset()}catch(e){}});
- R.ord=await p.evaluate(async()=>{const Wt=t=>new Promise(r=>setTimeout(r,t));S.erra=[];Q.length=0;window.__ans=null;
-  window.PTIME={on:()=>true,now:()=>bid()*BAL.time.khac+used,when:K=>'khắc '+K,orders:()=>[{id:'o1',pid:'cnvOrd',byNm:'Chưởng sự cô cô',title:'Lệnh của Chưởng sự cô cô',due:bid()*BAL.time.khac+used+2}],ordWhen:o=>'trả lời trước khắc 3',answer:id=>{window.__ans=id;return true}};
+ R.ord=await p.evaluate(async()=>{const Wt=t=>new Promise(r=>setTimeout(r,t));__erReset();Q.length=0;window.__ans=null;
+  window.__pt0=window.PTIME;window.PTIME={on:()=>true,now:()=>bid()*BAL.time.khac+used,when:K=>'khắc '+K,orders:()=>[{id:'o1',pid:'cnvOrd',byNm:'Chưởng sự cô cô',title:'Lệnh của Chưởng sự cô cô',due:bid()*BAL.time.khac+used+2}],ordWhen:o=>'trả lời trước khắc 3',answer:id=>{window.__ans=id;return true}};
   render();await Wt(400);const it=kitStatusIcon.items().includes('tin');const badge=!!document.querySelector('.krail .kbadge');
   kitStatusIcon.open('tin');await Wt(1200);const md=document.getElementById('modal');const txt=md?md.innerText:'';
   const btn=[...document.querySelectorAll('#modal button,#modal .opt')].find(b=>/Nghe lệnh/.test(b.innerText));if(btn)btn.click();await Wt(600);
-  const r={txt:txt.slice(0,300),it,badge,row:/Chưởng sự cô cô/.test(txt)&&/có lệnh cho (ngươi|ta)/.test(txt),btn:!!btn,ans:window.__ans,has:kitStatusIcon.has('tin')};delete window.PTIME;const md2=document.getElementById('modal');if(md2)md2.hidden=true;Q.length=0;render();return r});
+  const r={txt:txt.slice(0,300),it,badge,row:/Chưởng sự cô cô/.test(txt)&&/có lệnh cho (ngươi|ta)/.test(txt),btn:!!btn,ans:window.__ans,has:kitStatusIcon.has('tin')};if(window.__pt0)window.PTIME=window.__pt0;else delete window.PTIME;const md2=document.getElementById('modal');if(md2)md2.hidden=true;Q.length=0;render();return r});
  ck('receiver side: PTIME order → badge + row + «Nghe lệnh» → PTIME.answer',R.ord.it&&R.ord.badge&&R.ord.row&&R.ord.btn&&R.ord.ans==='o1'&&R.ord.has,R.ord);
  /* runner NOT on the stage in view (crowded "+N" / other swipe page): still drawn by kitErrandSpot */
  await clean();
- const crowd=await p.evaluate(async(SLOWK)=>{const Wt=t=>new Promise(r=>setTimeout(r,t));Q.length=0;S.buoi=0;used=0;S.erra=[];ERR.slow=SLOWK;render();await Wt(1200);
+ const crowd=await p.evaluate(async(SLOWK)=>{const Wt=t=>new Promise(r=>setTimeout(r,t));Q.length=0;S.buoi=0;used=0;__erReset();ERR.slow=SLOWK;render();await Wt(1200);
   const i=rivals.findIndex(v=>v.alive&&!v.out&&!sameHouse(S,v)&&!together(S,v));const sv=bestSent(S)||S.maid;
   document.querySelectorAll('#tokens .tok.fig').forEach(t=>{const g=t.querySelector('.tag');if(g&&g.textContent.includes(sv.name))t.remove()});/* simulate: her token is on another swipe page */
   doAct(i,'spy');await Wt(250);const f=document.querySelector('.kmerr-fig img');return{runner:sv.name,fig:!!f,src:f?f.src.slice(-40):'',tasks:ERR.tasks().length,spot:JSON.stringify(kitErrandSpot(document.getElementById('stage')))}},SLOW);
  R.crowd=crowd;ck('crowded stage: runner without a token is still drawn',crowd.fig&&crowd.src,crowd);await p.screenshot({path:`${OUT}/crowd-1off-${tag}.jpg`,type:'jpeg',quality:70});
- await sleep(1200*SLOW/2);await p.evaluate(()=>{S.erra=[];render()});
+ await sleep(1200*SLOW/2);await p.evaluate(()=>{__erReset();render()});
  /* reduced motion: chips only, no walking layer */
  await clean();await p.evaluate(()=>{try{kmReset()}catch(e){}});
- R.reduced=await p.evaluate(async()=>{const Wt=t=>new Promise(r=>setTimeout(r,t));Q.length=0;S.buoi=0;used=0;S.erra=[];render();await Wt(800);OPT.fxon=false;
-  const i=rivals.findIndex(v=>v.alive&&!v.out&&!sameHouse(S,v)&&!together(S,v));doAct(i,'spy');await Wt(300);const r={layer:!!document.querySelector('.kmerr-fig'),tasks:ERR.tasks().length,chip:document.querySelectorAll('.kmerr-slot').length};OPT.fxon=true;S.erra=[];render();return r});
+ R.reduced=await p.evaluate(async()=>{const Wt=t=>new Promise(r=>setTimeout(r,t));Q.length=0;S.buoi=0;used=0;__erReset();render();await Wt(800);OPT.fxon=false;
+  const i=rivals.findIndex(v=>v.alive&&!v.out&&!sameHouse(S,v)&&!together(S,v));doAct(i,'spy');await Wt(300);const r={layer:!!document.querySelector('.kmerr-fig'),tasks:ERR.tasks().length,chip:document.querySelectorAll('.kmerr-slot').length};OPT.fxon=true;__erReset();render();return r});
  ck('reduced motion: no walking layer, task kept',!R.reduced.layer&&R.reduced.tasks===1,R.reduced);
  /* old save: a life with no S.erra */
- R.old=await p.evaluate(()=>{delete S.erra;try{render();spend(1)}catch(e){return{err:String(e)}}return{ok:Array.isArray(S.erra)}});ck('old save (no S.erra) works',R.old.ok,R.old);
+ R.old=await p.evaluate(()=>{const pt=ERR.adapter()==='ptime';delete S.erra;if(pt)delete S.away;try{render();spend(1);ERR.tasks()}catch(e){return{err:String(e)}}return{ok:pt?Array.isArray(S.away):Array.isArray(S.erra),adapter:ERR.adapter()}});ck('old save (no S.erra) works',R.old.ok,R.old);
  /* full run, 40 acts, fixed seed */
  await clean();
  R.full=await p.evaluate(async()=>{const Wt=t=>new Promise(r=>setTimeout(r,t));ERR.slow=.05;let acts=0;S.bac=99999;

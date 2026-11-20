@@ -95,25 +95,27 @@ try{ACTDOM.batnat="Mưu kế"}catch(e){}
 function tsbTake(a,t,want,kind){/* real transfer + ledger */if(want){const ix=t.inv.indexOf(want);if(ix<0)return"";const e=t.inv.splice(ix,1)[0];e.w=0;a.inv=a.inv||[];e.tsbFrom=key(t);a.inv.push(e);const n=tsbItemN(e);if(t===S)tsbLedger({what:n,how:"bị lấy",who:a.id,by:tsbNm(a)});return n}
  const g=tsbBulPay(a,t);ap(t,{bac:-g});ap(a,{bac:g});if(t===S)tsbLedger({what:`${g} lượng bạc`,how:"bị lấy",who:a.id,by:tsbNm(a)});return `${g} lượng bạc`}
 function tsbBulRec(a,t){t.tsbBul=t.tsbBul||{};const r=t.tsbBul[key(a)]=t.tsbBul[key(a)]||{n:0,calm:0,stop:0};r.n++;r.last=tsbWk();return r}
-function tsbBulNpc(a,t,kind){/* an NPC target decides by the same odds (NPC rule) */const o=tsbBulO(a,t,kind==="uyhiep");const want=kind==="uyhiep"?null:(tsbBulPay(a,t)<15||roll(45)?tsbWant(a,t):null);const want2=want&&want[0];const r=tsbBulRec(a,t);
+function tsbBulNpc(a,t,kind){/* an NPC target decides by the same odds (NPC rule) */const od=tsbBulO(a,t,kind==="uyhiep");/* success odds of the deed (BAL), allowed */const want=kind==="uyhiep"?null:((npcWhy("bulWant",{a,t})||{}).place||null);const want2=want&&want[0];const r=tsbBulRec(a,t);
 
- if(r.n>=2&&evG(t,a)>=1&&roll(45)){const q=queenP();if(q&&q!==a&&q!==t){punish(a,"ức hiếp người dưới phẩm",1);affAdd(q,t,BAL.eff.jtsb.tsbBulNpc);return `${tsbCap(tsbNm(t))} bị ${tsbNm(a)} ép nộp của nhiều lần, đem chứng cứ trình Hoàng hậu: ${tsbNm(a)} bị quở phạt. `}}
- if(aRoll(o,a)){const n=tsbTake(a,t,want2,kind);if(kind==="uyhiep")evA(a,t,BAL.eff.jtsb.evTsbBulNpc);oanAdd(t,a,BAL.eff.jtsb.tsbBulNpc_2);return `${tsbCap(tsbNm(t))} sợ ${tsbNm(a)}, đành nộp ${n}. `}
- if(aRoll(o,a)){ap(t,{danh:BAL.eff.jtsb.danhTsbBulNpc,suc:BAL.eff.jtsb.sucTsbBulNpc});oanAdd(t,a,BAL.eff.jtsb.tsbBulNpc_3);return `${tsbCap(tsbNm(t))} không chịu nộp, bị ${tsbNm(a)} làm nhục giữa đường: Danh ${balSg(BAL.eff.jtsb.danhTsbBulNpc)}, Sức ${balSg(BAL.eff.jtsb.sucTsbBulNpc)}. `}
+ if(r.n>=2&&evG(t,a)>=1&&npcWhy("bulTell",{a,t})){const q=queenP();if(q&&q!==a&&q!==t){punish(a,"ức hiếp người dưới phẩm",1);affAdd(q,t,BAL.eff.jtsb.tsbBulNpc);return `${tsbCap(tsbNm(t))} bị ${tsbNm(a)} ép nộp của nhiều lần, đem chứng cứ trình Hoàng hậu: ${tsbNm(a)} bị quở phạt. `}}
+ if(aRoll(od,a)){const n=tsbTake(a,t,want2,kind);if(kind==="uyhiep")evA(a,t,BAL.eff.jtsb.evTsbBulNpc);oanAdd(t,a,BAL.eff.jtsb.tsbBulNpc_2);return `${tsbCap(tsbNm(t))} sợ ${tsbNm(a)}, đành nộp ${n}. `}
+ if(aRoll(od,a)){ap(t,{danh:BAL.eff.jtsb.danhTsbBulNpc,suc:BAL.eff.jtsb.sucTsbBulNpc});oanAdd(t,a,BAL.eff.jtsb.tsbBulNpc_3);return `${tsbCap(tsbNm(t))} không chịu nộp, bị ${tsbNm(a)} làm nhục giữa đường: Danh ${balSg(BAL.eff.jtsb.danhTsbBulNpc)}, Sức ${balSg(BAL.eff.jtsb.sucTsbBulNpc)}. `}
  ap(a,{danh:-2});oanAdd(t,a,BAL.eff.jtsb.tsbBulNpc_4);evA(t,a,BAL.eff.jtsb.evTsbBulNpc_2);return `${tsbCap(tsbNm(t))} không chịu nộp của cho ${tsbNm(a)}, còn kể khắp nơi. `}
 
 /* ---------------- the planned harm: NPC -> anyone: scheduled with an omen (thathu, phonghoa) ---------------- */
 const TSB_PLAN=["thathu","phonghoa"];
 (function(){const r0=runAct;runAct=function(a,t,k){
- try{if(!TSB.now&&a&&a!==S&&t&&TSB_PLAN.includes(k)&&S&&!S.dead){S.tsbTh=S.tsbTh||[];if(!S.tsbTh.some(x=>x.a===key(a)&&x.t===key(t)&&x.k===k)){S.tsbTh.push({k,a:key(a),t:key(t),due:tsbWk()+1+R(2),seen:0});try{deedAdd(a,"plot",t,1,`bày mưu ${deedTxt(k,t)}`)}catch(e){}}return ""}
-  if(!TSB.now&&a&&a!==S&&t===S&&(k==="batnat"||k==="uyhiep")&&tsbOn()&&!Q.some(m=>m.pid==="tsbBul")){const r=tsbBulRec(a,S);if((r.stop||0)>tsbWk())return "";const want=k==="uyhiep"?null:(tsbBulPay(a,S)<15||roll(50)?tsbWant(a,S):null);
+ try{if(!TSB.now&&a&&a!==S&&t&&TSB_PLAN.includes(k)&&S&&!S.dead){S.tsbTh=S.tsbTh||[];if(!S.tsbTh.some(x=>x.a===key(a)&&x.t===key(t)&&x.k===k)){S.tsbTh.push({k,a:key(a),t:key(t),due:tsbWk()+(hasT(a,"Kín đáo")?BAL.ag.why.bul.wait[1]:BAL.ag.why.bul.wait[0]),seen:0});try{deedAdd(a,"plot",t,1,`bày mưu ${deedTxt(k,t)}`)}catch(e){}}return ""}
+  if(!TSB.now&&a&&a!==S&&t===S&&(k==="batnat"||k==="uyhiep")&&tsbOn()&&!Q.some(m=>m.pid==="tsbBul")){const r=tsbBulRec(a,S);if((r.stop||0)>tsbWk())return "";const want=k==="uyhiep"?null:((npcWhy("bulWant",{a,t:S})||{}).place||null);
    tsbCard("tsbBul",{a:a.id,k,ix:want?want[1]:-1,n:r.n},k==="uyhiep"?"Bị uy hiếp đòi của":"Bị ép nộp của");return ""}}catch(e){console.error("tsb runAct",e)}
  return r0.apply(this,arguments)}})();
+/* the planned harm reaches her: the news card (also when a sent servant lands it later, jptime parallel time) */
+function tsbHit(k,r){Q.push({t:k==="thathu"?"Hung tin trong cung":"Hỏa hoạn",h:`<p>${r}</p>`,headArt:k==="phonghoa"?tsbArt("ev-hoa-hoan","Hỏa hoạn"):undefined});log(r);tsbShow()}
 function tsbThWeek(){const L=S.tsbTh||[];const w=tsbWk();const keep=[];for(const th of L){const a=byKey(th.a),t=byKey(th.t);if(!a||!t||a===t||(a!==S&&(!a.alive||a.out))||(t!==S&&(!t.alive||t.out))){continue}
   if(!th.seen&&w<th.due){/* omen: the target's own eyes; she gets a card, an NPC simply guards */const see=oddsCl(oSee(t)+(petGuard(t)?15:0));
    if(roll(see)){th.seen=1;if(t===S){if(!Q.some(m=>m.pid==="tsbOmen"))tsbCard("tsbOmen",{k:th.k,a:th.a},"Điềm lạ quanh cung")}else t.tsbGuard=w+2}}
   if(w>=th.due){TSB.now=1;let r="";try{r=runAct(a,t,th.k)||""}catch(e){console.error(e)}finally{TSB.now=0}
-   if(t===S&&r){Q.push({t:th.k==="thathu"?"Hung tin trong cung":"Hỏa hoạn",h:`<p>${r}</p>`,headArt:th.k==="phonghoa"?tsbArt("ev-hoa-hoan","Hỏa hoạn"):undefined});log(r);tsbShow()}
+   if(t===S&&r)tsbHit(th.k,r)
    else if(r&&typeof knows==="function"&&knows(t)&&roll(50))log(r);continue}
   keep.push(th)}S.tsbTh=keep}
 PEND.tsbOmen=pp=>{if(!S)return null;const a=byKey(pp.a);if(!a)return null;const fire=pp.k==="phonghoa";const mm=tsbMaid(S);const see=eyes(S);
@@ -183,7 +185,7 @@ function tsbFireMonth(){const w=tsbWk();
     else if(lost.length&&typeof newsAdd==="function")newsAdd(p,"fire",`Cung của ${p.name} bén lửa, cháy mất ${lost.join(", ")}.`)}continue}
   const cs=tsbCareless(p);const ch=tsbFireBase(p)+(cs?1.5:0);if(!roll(ch))continue;
   p.tsbFW={cause:cs?"hau":"den",due:w+2+R(3),heed:0,who:cs&&cs.name?cs.name:""};
-  if(p===S&&tsbOn()&&!Q.some(m=>m.pid==="tsbFireW"))tsbCard("tsbFireW",{},"Đèn nến trong cung");else if(p!==S&&roll(60))p.tsbFW.heed=1}}
+  if(p===S&&tsbOn()&&!Q.some(m=>m.pid==="tsbFireW"))tsbCard("tsbFireW",{},"Đèn nến trong cung");else if(p!==S&&npcWhy("fireHeed",{p},()=>roll(npw1B("bul").fire.heed)))p.tsbFW.heed=1}}
 PEND.tsbFireW=()=>{const W=S&&S.tsbFW;if(!W)return null;const hau=W.cause==="hau";
  const t=hau?`${W.who||"Một kẻ hầu"} mấy đêm liền quên tắt đèn trong gian chứa đồ; sáng ra bấc đèn cháy sát chân rèm.`:`Trời hanh khô, đèn nến thắp suốt đêm; đã hai lần tàn đèn rơi xuống thảm, may có người thấy.`;const O=[];
  O.push({cap:1,n:"Dặn giữ đèn nến cẩn thận",fx:{},x:`${capW()} · tốn: 1 khắc · thành: hiểm họa cháy giảm hẳn`,need:[tsbNeedKhac(1)],go:()=>{tsbKh(1);if(S.tsbFW)S.tsbFW.heed=1;log("Ngươi dặn kẻ hầu giữ đèn nến cẩn thận, đêm nào cũng soát.")}});
@@ -227,7 +229,7 @@ function tsbMockOpts(v){const hi=rkOf(v)>rkOf(S);const o=tsbMockO(v);
   {n:"Đáp trả sắc sảo",fx:{},x:`${word(o)} · thành: Danh +${hi?3:2} · kẻ hầu Lòng ${balSg(BAL.eff.jtsb.loyalDap)} · hỏng: Danh -1${hi?" · Đức -1":""} · kèm: nàng oán ngươi ${balSg(BAL.eff.jtsb.go_7)} · (${hi?"đáp vụng với người phẩm cao hơn thành ra hỗn; ":""}thành hay bại tùy Tâm cơ và Tài của ngươi)`,
    go:()=>{oanAdd(v,S,BAL.eff.jtsb.go_7);v.tsbEasy=0;if(roll(o)){apply({danh:hi?3:2});tsbLoyal(BAL.eff.jtsb.loyalDap);log(`<span class="g">Ngươi đáp lại ${v.name} một câu sắc sảo; cung nhân đều phục.</span>`)}else{apply(hi?{danh:-1,duc:-1}:{danh:-1});log(`Ngươi đáp lại ${v.name} nhưng vụng lời, lại thành trò cười.`)}}}]}
 (function(){if(typeof approachOne!=="function")return;const a0=approachOne;approachOne=function(){let m=a0.apply(this,arguments);try{if(!m||!m.opts||!m.who||!m.who.w||m.who.w[0]!=="r")return m;let v=RV(m.who.w[1]);if(!v)return m;const h=String(m.h||"");
-  if(/mỉa mai/.test(h)){const easy=liveRivals(true).filter(x=>tsbEasy(x)&&bandOf(danger(x,S))>=1&&!x.confined);if(easy.length&&!tsbEasy(v)&&roll(60)){v=pick(easy);m.who=pv(v);m.h=`<p>${v.name} lại đến tận cửa cung, buông lời mỉa mai ngươi trước mặt cung nhân.</p>`}m.opts=tsbMockOpts(v);m.optLayout="rows";return m}
+  if(/mỉa mai/.test(h)){const e2=npwPick(liveRivals(true).filter(x=>tsbEasy(x)&&bandOf(danger(x,S))>=1&&!x.confined&&npw1Mot(x,S,"provoke")),x=>hostility(x,S));if(e2&&!tsbEasy(v)&&hostility(e2,S)>=hostility(v,S)){v=e2;m.who=pv(v);m.h=`<p>${v.name} lại đến tận cửa cung, buông lời mỉa mai ngươi trước mặt cung nhân.</p>`}m.opts=tsbMockOpts(v);m.optLayout="rows";return m}
   if(/kết làm chị em/.test(h)){const foes=liveRivals(true).filter(x=>x!==v&&(oan(x,v)>=20||aff(x,v)<=-20));m.opts=[{n:"Nhận lời",fx:{},x:`thành: thiện cảm ${balSg(BAL.eff.jtsb.go_8)} · có người đứng về phía ngươi${foes.length?` · kèm: ${foes.length} người vốn thù nàng oán ngươi ${balSg(BAL.eff.jtsb.go_9)} (ngươi đứng về phe nàng)`:""}`,go:()=>{relAdd(S,v,BAL.eff.jtsb.go_8);foes.forEach(x=>oanAdd(x,S,BAL.eff.jtsb.go_9))}},
     {n:"Khéo từ chối",fx:{},x:`thành: không dính vào thù oán của nàng · Mất: thiện cảm ${balSg(BAL.eff.jtsb.go_10)}`,go:()=>relAdd(S,v,BAL.eff.jtsb.go_10)}];m.optLayout="rows";return m}
   if(/xin lỗi chuyện cũ/.test(h)){m.opts=[{n:"Nhận lời xin lỗi",fx:{},x:`thành: nàng bớt oán ${balAb(BAL.eff.jtsb.go_11)} · thiện cảm ${balSg(BAL.eff.jtsb.go_12)} · kèm: người khác thấy ngươi dễ bỏ qua`,go:()=>{oanAdd(v,S,BAL.eff.jtsb.go_11);relAdd(S,v,BAL.eff.jtsb.go_12)}},

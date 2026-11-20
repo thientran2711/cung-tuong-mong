@@ -83,8 +83,8 @@ function dhHieuNotice(h,it,why){const d=H().danhG;log(`Hoàng thượng ban hi�
 const KIND={cold:"vào lãnh cung",giang:"bị giáng phẩm",cam:"bị cấm túc"};
 function wornK(p){const w=p===S?S.titleWorn:p.titleWorn;return typeof w==="string"&&/^dh-/.test(w)?w.slice(3).split("@")[0]:null}
 function dhConfiscate(p,kind,why){if(!p||!alive(p))return null;const P=(C().p||{})[kind];if(!P)return null;const out={hieu:"",title:"",items:[]};
- if(p.hieu&&roll(P[0])){out.hieu=p.hieu;p.hieu="";for(const k of DK)for(const y of findAll(pk(p),k))if(y.p===p){const i=p.inv.indexOf(y.e);if(i>=0){p.inv.splice(i,1);toStore(p,y.e,"conf");out.items.push(y.e)}}}
- const wk0=wornK(p);if(wk0&&p.dh&&p.dh[wk0]&&roll(P[1])){p.dh[wk0].conf=1;if(typeof dhWear==="function")dhWear(p,null,true);out.title=wk0}
+ if(p.hieu&&npcWhy("dhConf",{p,kind,i:0},()=>roll(P[0]))){/* npc-purpose G2: the Emperor takes it back from his own anger vs his favour for her (P = the old odds, now the success) */out.hieu=p.hieu;p.hieu="";for(const k of DK)for(const y of findAll(pk(p),k))if(y.p===p){const i=p.inv.indexOf(y.e);if(i>=0){p.inv.splice(i,1);toStore(p,y.e,"conf");out.items.push(y.e)}}}
+ const wk0=wornK(p);if(wk0&&p.dh&&p.dh[wk0]&&npcWhy("dhConf",{p,kind,i:1},()=>roll(P[1]))){p.dh[wk0].conf=1;if(typeof dhWear==="function")dhWear(p,null,true);out.title=wk0}
  if(!out.hieu&&!out.title)return null;
  const c=p.dhConf||(p.dhConf={});if(out.hieu)c.hieu=out.hieu;if(out.title){c.titles=c.titles||[];if(!c.titles.includes(out.title))c.titles.push(out.title)}
  c.at=S.turn;c.kind=kind;c.why=why||KIND[kind];delete c.open;delete c.kn;delete c.d0;delete c.ask;
@@ -141,8 +141,9 @@ function confTick(p){const c=p.dhConf;if(!c)return;if(!c.open){if(confOpenOK(p))
 /* ---------- 5. LOSS / THEFT (jlost case for that piece) ---------- */
 let FORCE=null;(window.THIN_REG=window.THIN_REG||[]).push(["FORCE",()=>FORCE,v=>{FORCE=v}]);/* per-player state for the co-op host (jcoopthin TH.reg) */
 (function(){if(typeof loOk!=="function")return;const o0=loOk;loOk=function(e){if(FORCE)return e===FORCE;if(isDh(e))return false;return o0.apply(this,arguments)}})();
-function dhLose(p,e){if(typeof loLose!=="function"||!p||!e)return null;let c=null;FORCE=e;const cd=p.loCd;
- const q0=Q.length;try{const cause=Object.assign({},typeof loCause==="function"?loCause(p):{cause:"mis"});if(cause.cause==="riv"&&roll(LO.keepP))cause.keep=1;c=loLose(p,cause)}finally{FORCE=null}
+function dhLose(p,e,o){if(typeof loLose!=="function"||!p||!e)return null;let c=null;FORCE=e;const cd=p.loCd;
+ const q0=Q.length;try{const w=o||npcWhy("dhTake",{p});/* npc-purpose G2: the taker is a person with a goal (jlost loTake rules); nobody → nothing lost */const z=w&&typeof loCauseOf==="function"?loCauseOf(p,w):null;
+  if(z){const cause=Object.assign({},z);if(cause.cause==="riv"&&typeof loKeepPick==="function"&&loKeepPick(loP(cause.by),p)==="keep")cause.keep=1;c=loLose(p,cause)}}finally{FORCE=null}
  if(c){p.loCd=cd;c.dh=1;lgr(e,pk(p),"lo"+c.id,c.cause==="riv"?"bị trộm":"thất lạc");
   if(p===S){if(Q.length>q0&&Q[Q.length-1]&&Q[Q.length-1].t==="Đồ thất lạc")Q.pop();pushDil(mkP("dhlost",{id:c.id}),"Ấn tín thất lạc")}}return c}
 window.dhLose=dhLose;
@@ -152,7 +153,8 @@ PEND.dhlost=pp=>{const c=typeof loGet==="function"?loGet(pp.id):null;if(!c||c.st
  add("cct","Báo Cung Chính ti tra xét","chứng cứ thật mới thành án; báo lên thì ai cũng biết");add("ask","Lặng lẽ hỏi cung nhân","kín đáo, có khi dò ra dấu vết");
  O.push({n:"Để sau",fx:{},j67:`kèm: tra xét sau ở Tư trang › Việc › Đồ thất lạc; không tìm lại được thì Danh -${I().lostDanh}`,go:()=>{}});
  return{who:typeof pMe==="function"?pMe():null,t:`<p><b>${nm}</b> ngự ban của ngươi không còn trong rương.</p><p>Mất ấn tín Hoàng thượng ban là tội không nhỏ. Tra xét ngay, hay âm thầm tìm?</p>`,o:O}};
-function lostTick(){for(const p of people()){if(!alive(p))continue;if(p!==S&&!npcOK())continue;for(const e of slots(p))if(isDh(e)&&e.own===pk(p)&&!e.lo&&roll(I().lose)){window.dhLose(p,e);break}}}
+function lostTick(){for(const p of people()){if(!alive(p))continue;if(p!==S&&!npcOK())continue;const E=slots(p).filter(e=>isDh(e)&&e.own===pk(p)&&!e.lo);if(!E.length)continue;/* one taker with a reason per owner; each piece is at risk (old: break only on a loss); cd stamped only on a real loss */
+  let hit=null;const o=npcWhy("dhTake",{p},()=>{hit=E.find(()=>roll(I().lose))||null;return !!hit});if(o&&hit)window.dhLose(p,hit,o)}}
 /* a case closed and the piece not back with its owner → Danh −lostDanh once (the piece still sits somewhere: conservation) */
 function lostPenalty(){for(const c of S.lost||[]){if(!c||!c.dh||c.st!=="done"||c.dhPen)continue;const o=byK(c.own);c.dhPen=1;if(!o||!alive(o))continue;
  const back=slots(o).some(e=>isDh(e)&&e.dhid===c.e.dhid);if(back)continue;const d=I().lostDanh;ap(o,{danh:-d});
@@ -175,7 +177,7 @@ window.dhCensus=census;
 function seed(){for(const p of people()){if(p.hieu&&!p.dhSeed){p.dhSeed=1;giveItems(p,p.hieu,true)}if(!Array.isArray(p.dhSn))p.dhSn=snap(p)}}
 /* ---------- the turn: weekly state check + census; monthly grant / atonement / loss ---------- */
 function dhMonth(){for(const p of people()){if(!alive(p))continue;if(p!==S&&!npcOK())continue;
- if(dhHieuOK(p).ok&&roll(H().p))window.dhHieuGrant(p,"month");confTick(p)}lostTick()}
+ if(dhHieuOK(p).ok&&npcWhy("dhHieu",{p},()=>roll(H().p)))/* npc-purpose G2: the Emperor bestows from his favour */window.dhHieuGrant(p,"month");confTick(p)}lostTick()}
 function dhWeek(){seed();for(const p of people()){if(p!==S&&!npcOK())continue;dhCheck(p)}lostPenalty();census()}
 window.dhMonth=dhMonth;window.dhWeek=dhWeek;
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const t0=S&&S.turn,w0=S&&wk();const r=e0.apply(this,arguments);

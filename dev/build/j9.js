@@ -29,11 +29,17 @@ function placeName(k){return placeOf(k).n}
 function countAt(k){const W=S.where||{};let n=0;for(const v of rivals)if(v.alive&&!v.out&&W[v.id]===k)n++;if(W.emp===k&&["vuon","thu","dtd"].includes(k))n++;if(k==="tn"&&!S.thDead)n++;if(k==="home")n+=1+S.kids.filter(x=>x.alive).length;if(k==="tyv"||k==="ksp")n++;if(k==="lc")n+=Math.max(1,Math.min(3,rivals.filter(v=>v.alive&&v.out).length));return n}
 /* NPCs who share a place meet: small talk or friction, by the same bars */
 function npcEncounters(){const by={};for(const v of liveRivals(true)){const k=S.where[v.id];(by[k]=by[k]||[]).push(v)}
- for(const k in by){const L=by[k];for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){const a=L[i],b=L[j];if(!roll(30))continue;
-  if(oan(a,b)+oan(b,a)>40||a.ghen+b.ghen>110){oanAdd(a,b,BAL.eff.j9.npcEncounters);oanAdd(b,a,BAL.eff.j9.npcEncounters_2);affAdd(a,b,BAL.eff.j9.npcEncounters_3);affAdd(b,a,BAL.eff.j9.npcEncounters_4)}else{affAdd(a,b,BAL.eff.j9.npcEncounters_5);affAdd(b,a,BAL.eff.j9.npcEncounters_6)}}}}
+ for(const k in by){const L=by[k];for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){const a=L[i],b=L[j];
+  /* npc-purpose G2: two women in one place quarrel from a real grudge / jealousy, chat from liking, or pass each other by (no tie → nothing) */
+  const W=BAL.ag.why.j9,xq=Math.max(0,oan(a,b)+oan(b,a)-W.oan0)+Math.max(0,(a.ghen||0)+(b.ghen||0)-W.ghen0);
+  const k=npwPick(["q","c","n"],x=>x==="q"?(xq>0?W.q0+xq*W.q:0):x==="c"?W.c0+Math.max(0,aff(a,b)+aff(b,a))*W.c:W.none);if(k!=="q"&&k!=="c")continue;
+  if(k==="q"){oanAdd(a,b,BAL.eff.j9.npcEncounters);oanAdd(b,a,BAL.eff.j9.npcEncounters_2);affAdd(a,b,BAL.eff.j9.npcEncounters_3);affAdd(b,a,BAL.eff.j9.npcEncounters_4)}else{affAdd(a,b,BAL.eff.j9.npcEncounters_5);affAdd(b,a,BAL.eff.j9.npcEncounters_6)}}}}
 
 /* sending someone instead of going: same act, lower odds, the servant may be caught and confess */
 let ACTX={a:null,pen:0};
+/* «Giúp qua loa» (owner OD 18/11 ~21:15Z, the 4 answers of OD L1876 for every receiver): while a receiver does the order half-heartedly, the deed's odds − BAL.road.hp.half (the ONE qua-loa number, OD L1876).
+   ONE flag for every road (her maid road srvDoOrder / ordOdds, an NPC servant's deed through runAct / actCtx, Việc chủ sai merit). */
+var ORDHALF=0;function ordHalf(fn){const h0=ORDHALF;ORDHALF=BAL.road.hp.half;try{return fn()}finally{ORDHALF=h0}}
 /* ONE act context (review/shown-odds-one-path, ORDER ROOT-52 18/11): the roll (runAct) and EVERY screen that prints an act's odds
    build the same ACTX here — sent-servant penalty (pen), her lá số on the act's domain (lotB via dom), fresh spy knowledge of the
    target (spyKnowB via t) — so the word on the card is the odds the roll uses (shown == rolled; dev/test/shown-odds.test.js).
@@ -41,7 +47,7 @@ let ACTX={a:null,pen:0};
 const ACT_NOSEND=["accuse","vp","xx","gift","steal","road","takeaway"];
 function actCtx(a,t,k,sv,x){const sent=!(x&&x.here)&&!together(a,t)&&!ACT_NOSEND.includes(k);/* x.here: she does it herself on the spot (no servant sent) */if(sent&&sv===undefined)sv=bestSent(a);
  const K0=ACTK;ACTK=k;let pen=0;try{pen=sent?sentPen(sv)-(sv?srk(sv)*3:0):0}finally{ACTK=K0}
- return{a,t,pen:pen+((x&&x.pen)||0),dom:ACTDOM[k]}}
+ return{a,t,pen:pen+((x&&x.pen)||0)+(ORDHALF||0),dom:ACTDOM[k]}}
 /* the odds an act's own roll will use, for display: ACT[k].o evaluated inside actCtx (then the one odds cap oddsCl) */
 function actOdds(a,t,k,x){const A2=ACT[k];if(!A2||typeof A2.o!=="function")return null;const X0=ACTX,K0=ACTK;ACTK=k;ACTX=actCtx(a,t,k,undefined,x);
  try{const o=A2.o(a,t);return o==null||o>=100?o:oddsCl(Math.round(o))}finally{ACTX=X0;ACTK=K0}}
@@ -62,7 +68,7 @@ function aOdd(o,a){/* the odds an act's own success uses: the frozen shown odds 
 function aRoll(o,a){const z=aOdd(o,a);return z>=100||roll(z)}
 function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!together(a,t)&&!ACT_NOSEND.includes(k);const where=together(a,t)?placeName(whereOf(a)):"";
  if(sameHouse(a,t)&&k!=="accuse")return a===S?"Người cùng cung, ngươi không thể ra tay hay lấy lòng. ":"";
- const sv=sent?bestSent(a):null;ACTX=actCtx(a,t,k,sv);if(a===S&&ACTFZ&&(!ACTFZ.k||ACTFZ.k===k)){ACTX.fz=ACTFZ.o;ACTFZ=null}/* the odds she saw (fzRun) */let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
+ const sv=sent?bestSent(a):null;ACTX=actCtx(a,t,k,sv);if(a===S&&ACTFZ&&(!ACTFZ.k||ACTFZ.k===k)){ACTX.fz=ORDHALF?oddsCl(ACTFZ.o-ORDHALF):ACTFZ.o;ACTFZ=null}/* the odds she saw (fzRun) */let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
  const harm=!["ally","gift","spy"].includes(k);
  if(sent&&sv&&!/bị lộ|bị bắt|phát giác|chặn kịp|từ chối/.test(r))servMerit(sv,2);if(sent&&harm&&roll(confessRisk(sv))){const n=evA(t,a,BAL.eff.j9.evN);r+=`${sv?sv.name:"Kẻ"} được ${NM(a)} sai đi bị bắt, khai ra chủ${n?`: ${NM(t)} nắm thêm ${balAb(BAL.eff.j9.evN)} chứng cứ`:""}. `+servCaught(a,sv)}
  if(sent&&sv)r=r.replace(/\(sai người đi\)/,"");
@@ -78,7 +84,7 @@ function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=li
  const same=sameHouse(S,v);
  /* AG-ALL-2e: the four talk topics are built ONCE by P3T.<k>(speaker, listener) (jagacts3) — her talk and an NPC↔NPC talk run the same card */
  const TK=BAL.talk;A.push(P3T.health(S,v));A.push(P3T.praise(S,v));if(third)A.push(P3T.gossip(S,v,third));A.push(P3T.secret(S,v));
- A.push({n:"Nhờ giúp đỡ",o:100,inner:1,x:aff(v,S)>=BAL.ag.cx2.help.aff?"nàng thân với ngươi":`nàng chưa đủ quý ngươi (cần ${BAL.ag.cx2.help.aff}): nàng quý ngươi -${BAL.ag.cx2.help.fail}`,run:()=>{chatMark(v);return helpAsk(S,v).r}});
+ A.push({n:"Nhờ giúp đỡ",o:100,inner:1,x:typeof rcvWord==="function"?`${rcvWord(v,S)} · nàng có thể giúp hết lòng, làm qua loa, từ chối, hoặc đem chuyện đi mách`:"",run:()=>{chatMark(v);return helpAsk(S,v).r}});
  const foe=liveRivals(true).filter(x=>x!==v&&oan(x,v)>=TK.warn.foe)[0];
  A.push({n:"Cảnh báo nàng",o:100,x:foe?`có kẻ đang oán nàng: nàng quý ngươi +${g(TK.warn.hit)}`:`không có căn cứ: nàng quý ngươi -${TK.warn.miss}`,run:()=>{chatMark(v);if(foe){affAdd(v,S,g(TK.warn.hit));oanAdd(v,foe,TK.warn.oan);return `Ngươi nhắc ${v.name} coi chừng ${foe.name}. Nàng quý ngươi +${g(TK.warn.hit)}.`}affAdd(v,S,-TK.warn.miss);return `${v.name} nghi ngươi gây chia rẽ. Nàng quý ngươi -${TK.warn.miss}.`}});
  if(oan(v,S)>0){A.push({n:"Tạ lỗi",o:100,c:{danh:-1},x:`oán ${balSg(BAL.eff.j9.run_8)}`,run:()=>{oanAdd(v,S,BAL.eff.j9.run_8);chatMark(v);return `Ngươi hạ mình tạ lỗi. ${v.name} oán ${balSg(BAL.eff.j9.run_8)}.`}});
