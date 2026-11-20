@@ -14,3 +14,8 @@ Read-only colour dot + family name (jtoil, next to the §60 picker `kitSwatches`
 ## Limits
 - E28 «Cha bị hặc tội» and E25b's `costrows.js` live on branches not on the remote — I did NOT see the real E28 card; E25b should re-run its scan after merging this (and cost-rows) branch.
 - The three places that should show the dot (item «Màu» rows, jmcal popover, festival gate) belong to review/dresscode (E30): wiring is theirs; the kit part is ready.
+
+## r1 — rv FAIL fix (reports/rv-kit-e-rows.md): «thế lực» scoped to her own house
+`review/kit-e-rows` @ 1e558d26 (merged origin/main 415b9ca0). The first regex /thế lực/ matched ANY house (j55: «nhà Hộ bộ thế lực +6», «nhà nàng thế lực -6», «nhà Lễ bộ thế lực +3», «nhà Đại tướng quân thế lực +6») and printed «nhà ngươi thêm vững thế» (law 6a). Now: her own house only = E28's wording «thế lực nhà ±n» (/thế lực nhà\s*[+−-]\s?\d/); any other house (name before «thế lực») gets ONE neutral phrase «thế các nhà quyền thần đổi thay», sign not hers to read. `KIT_HINT_MAG` entry scoped the same way. KIT §13.15 updated.
+Tests `dev/test/kit-e-rows.js` 26/26 (Fold + iPad): +2 per device — negative (the 4 other-house lines never read as hers, all give the neutral phrase) and positive (E28's «hỏng: thế lực nhà −10» still reads «thế lực nhà ngươi sút giảm»).
+quickcheck 1e558d26: run 1 FAIL only on perf (buổi 3011 vs live 1113 — one outlier, like 4709 / 4518 seen on earlier runs; core gates PASS); run 2 PASS (224 s, buổi 1094/1527, core gates PASS, old save ok). The change is one regex + one phrase; no perf path touched. golive.sh not run (classifier refuses).
