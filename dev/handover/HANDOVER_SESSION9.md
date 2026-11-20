@@ -1392,3 +1392,4 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - FOREMAN E #16: ORDER 06:06Z pattern-engine 4-kind redesign (expert first, designs to owner before build). Foreman C ROOT-66: lantern + person-figure art orders.
 - Her profile: 27 first tries in cal.k (dauho to be removed); NOT counted: td_dung, chai, den, hoadien (+dauho) → she re-tests after fixes. Điểm trang held until faces are done (OD ~08:45Z).
 - WAKE: ROOT-74 trig_0123zY279x59AUVyLrXHkFEZ (minute 32) → ROOT-75 creates its own then disables this one. Brief template briefs/root74-common.md (copy to root75-common.md with new LIVE + main id).
+- (20/11 06:47Z) ROOT-74 opened child MAIN ROOT-75 = session_01Rc5AsKTznPCBPujNFrdVVF (depth 4). ROOT-74 stops; ROOT-75 disables trig_0123zY279x59AUVyLrXHkFEZ.
