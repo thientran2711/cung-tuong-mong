@@ -141,3 +141,26 @@ Worktrees here are lost with this container. Setup: worktree per branch under /h
 1. night-final-r3 6e8173ce: run night-final ×10 and night-multi ×10 (must be all green; any red → capture with a debug copy: Q titles/pids at FLIP-end, S.nfX, kmov classes). Then night-day ×10, night-book-day, night-steal-unit, flip-entry, night-coop-park, steal-mg-nf, balance-core, quickcheck (old save), coop-e2e 68/68, one-core-guard (watch night-day: the FLIPQ rule changed which dialogs go first when tonight is hers).
 2. Re-merge balance-core-r3 7e4e5d90 into night-final-r3 (no rewrite), rebuild, re-run step 1's key suites; final-merge CURRENT LIVE (deepen first) → «SẴN SÀNG KIỂM review/night-final-r3 <sha> (TIER BIG)» in FOREMAN_D_STATUS.md.
 3. balance-core-r3 7e4e5d90: gates balance-core, origin-arts, quickcheck, coop-e2e, one-core-guard. Then the studying-bot measure: rvbot (handover dev/measure/rvbot/, README) with INP2 adding instudy.js — edit run.sh's INP2 to `inbc.js,$REL,instudy.js` (instudy.js lives in the branch worktree dev/measure/, run.sh runs both arms from $BR so both get it); main worktree = LIVE; seeds 21–25, HHSTOP=1, CAP 5400, ≤4 processes, ≥30 lives/arm; table.py + ladder.py → before/after table incl. HH %, first bậc 3 month, Danh m36, study counts (x.study; HH-STOP lives lack it — over() is not called there). If HH stays well below ~32 %: PROPOSE a knob that keeps §7's times (no BAL change applied) → D #11 relays to MAIN.
+
+---
+# NIGHT LAND CHAIN #5 — report (opus, session_01964izE3179UkNYimmBhA5e; depth 3; foreman D #11 session_01964izEy8y3SFtp96at4o7u)
+PRIORITY #1 CHECK: OD night/balance-core hits in reports | main none (not landed) | review/night-final-r3 6e8173ce, review/balance-core-r3 7e4e5d90 | claims CLAIMS.md L399 (this chain).
+START_CTX ≈ 5 % of 1M.
+
+## Step 1 — night-final-r3 6e8173ce (no change needed)
+night-final 10/10 · night-multi 10/10 (consecutive) · night-day 10/10 · night-book-day · night-steal-unit · flip-entry ALL OK · night-coop-park 6/6 · steal-mg-nf · balance-core · one-core-guard PASS · coop-e2e 68/68 · QUICKCHECK PASS (old save ok; render 242/252, tab 504/500, buổi 1362/3223 ms new/live).
+(coop-e2e needs `python3 dev/build/assemble.py` first: it serves dev/index.html.)
+
+## Step 2 — balance-core-r3 → 812a1f39 (ff of 7e4e5d90)
+- 6eaa5f18 instudy.js: study counts also attached to HH-STOP lives (at the next start).
+- 812a1f39 site rebuild: QUICKCHECK said NOT BUILT — 706b4d70 (N1) changed jbalcore/jbal2 without rebuilding index.html.
+- Gates on 812a1f39: balance-core 42/42 · one-core-guard PASS · coop-e2e 68/68 · QUICKCHECK PASS (old save ok; render 264/232, tab 501/533, buổi 1470/1270 ms).
+- origin-arts FAIL 1 + 5 (Bắc Địch: 8 story roads, Ba Tư roads bd_tuyet / bd_hen have no BAL.orig.art row → new game falls back to the origin row) — **the SAME FAIL on LIVE 983a9436** (run on the live worktree) → pre-existing main gap from the Ba Tư wave, not balance-core. For D to file (owner of jrd_bd2 / BAL.orig.art rows).
+
+## Step 3 — night-final-r3 ← balance-core-r3 812a1f39 ← LIVE 983a9436 (no rewrite)
+- dc3ab36c merge balance-core 6eaa5f18: 2 conflicts (assemble list = ours, which already had jbalcore + jnf; jbal2: BAL.steal.ea gets balance-core's `w:2` AND night-final's BAL.steal.choice line stays).
+- fe1502d4 merge LIVE 983a9436 (deepened, one base): assemble list = ours + main's new jgedata_bd.js; index/sw rebuilt. LIVE delta eb11e2ad→983a9436 has no art-odds / ORIGINS / BAL.orig lines.
+- a508434c merge balance-core 812a1f39 (rebuild only).
+- Gates on a508434c: night-final 8/10 — case 2 ×2. ROOT (debug copy, 200 case-2 runs, Math.random call stacks):
+  1. **GAME (LIVE bug too) jweather wxOutActAny**: the outdoor-act test was a bare substring match, case-insensitive. «hái» (pick) matched inside «T**hái** hậu / T**hái** y» → 260 indoor options counted as outdoor (weather risk + looks/mud rolls on «Báo Thái hậu ngay», «Mời Thái y…»); «tuyết» (snow) matched a consort named «… **Tuyết** Dao» in the flip option «Tranh sủng (Tối nay thẻ bài của … Tuyết Dao được lật)» → lkAfterAct → lkOutdoor rolled weather/mud on her night choice. FIX beb1f19e: whole words only (`\p{L}` boundaries) and the act name without the «(…)» tail and without capitalised words after the first (people, places). Whole-group scan of all 7,922 option names (dev script, before → after): OUT 260 change (all «hái»-in-«Thái», none a real pick act), IN 11 change («Dưỡng Tâm» place name ×9, «Châm chọc», «Đành»); 0 options lose a real outdoor word. looks-2 checks identical to the unpatched build; weather-port PASS.
+  2. **FIXTURE night-final T.seq (cases 2, 3, 4)**: the values meant for the night's own rolls were taken by whatever drew Math.random first (the weather roll above, a figure pick on render). T.seq now feeds only draws made inside resolveAll / nfResolve; other draws stay random. No assertion changed.
