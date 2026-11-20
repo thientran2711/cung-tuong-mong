@@ -290,3 +290,4 @@ ROOT-65 Lượt 1001: OWNER verbatim "Không, tôi không có muốn đổi mấ
 ROOT-65 Lượt 1002: OWNER verbatim "Ủa mà đã có cái bản mới chưa mà vẽ người? Bây giờ đợi có cái bản mới đã." → F4 subagent STOPPED before any gen (0 cr, nothing pushed). 4 new faces wait until P4 A32 palette is done + shown. Next Lượt 1003.
 - 03:44Z C-AG #26: wk MgNUZB9c SẴN SÀNG kit-gamevs 2ed549e (jgamevs.js, KIT §13.8, BAL.gameVs, sample page, test 0 FAIL at 4 sizes; quickcheck pending; kit page §89 list.map error claimed pre-existing; BAL.gameVs.end not yet wired). SMALL sonnet kit rv session_01Rc5AsNKC33KHMAiEXV52HE opened. wk kept for fixes. LOAD 2 own; SEATS running 2 / cap 12.
 - (20/11 03:51Z) FROM MAIN ROOT-73: LIVE 651c317c (owner mgcal co 9.7, BAL only) on 94c3bddc. ROLLBACK 94c3bddc. Final-merge 651c317c before LAND READY.
+- (20/11 03:58Z) FROM MAIN ROOT-73: LIVE acc26bf0 (owner mgcal ve+doi, BAL only) on 651c317c. ROLLBACK 651c317c. Final-merge acc26bf0 before LAND READY.
