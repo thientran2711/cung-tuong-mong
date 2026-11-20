@@ -185,8 +185,13 @@ ptReg("invite",a=>{const v=RV(a.a.v);const m=ptPerson(a.a);const nm=m?m.name:"Ng
 function iwZ(){if(!S)return[];if(!Array.isArray(S.invW))S.invW=[];return S.invW}
 function iwId(p){return p===S?"me":p&&p.id!=null?"v"+p.id:null}
 function iwP(id){if(id==="me")return S;try{return RV(+String(id).slice(1))}catch(e){return null}}
-let iwDest=null;/* while she walks (goTo spends the walk before S.place moves) she is already gone from where she was */
-function iwHere(p,k){if(!p)return false;if(p===S)return(S.out?"lc":iwDest!=null?iwDest:S.place)===k;try{const R=S.roster,i=ptNow()-bid()*ptKH(),e=R&&R.P&&R.P["v"+p.id];if(e&&e[i]&&e[i][0]!=null)return e[i][0]===k&&e[i][1]!=="back"}catch(e){}return !!(S.where&&S.where[p.id]===k)}
+let iwDest=null,iwRoad=0;/* while she walks (goTo spends the walk before S.place moves) she is already gone from where she was */
+/* where SHE stands for this rule (OD L1976 «tôi bấm về nhà là tốn một khắc, khắc thứ tư tôi đã ở nhà»): she leaves a place at the khắc she taps
+   (walking off = no longer there) and is at the new place only once the walk is paid. null = on the road: the moment she taps (iwRoad, before
+   any khắc of the walk passes) and the whole of a walk that runs on into the next buổi (j9 walkSpill, until it lands) */
+function iwSpillOn(){const W=window.__walkSpill;return !!(W&&S&&W.from===S.place&&W.k!==S.place)}
+function iwMe(){if(S.out)return"lc";if(iwRoad)return null;if(iwDest!=null)return iwDest;if(iwSpillOn())return null;return S.place}
+function iwHere(p,k){if(!p)return false;if(p===S)return iwMe()===k;try{const R=S.roster,i=ptNow()-bid()*ptKH(),e=R&&R.P&&R.P["v"+p.id];if(e&&e[i]&&e[i][0]!=null)return e[i][0]===k&&e[i][1]!=="back"}catch(e){}return !!(S.where&&S.where[p.id]===k)}
 /* the guest's odds of staying one more khắc (law 4: every number from BAL; law 7: shown only as a ladder word) */
 function iwStayO(g,h){const W=BAL.invite.wait;let n=0;try{n=tv(W.net,g,0)}catch(e){}return od(W.o+aff(g,h)/W.affD+(rkOf(h)-rkOf(g))*W.rk+n)}
 function iwDraw(w,K){const s=w.id+"|"+K;let x=2166136261;for(let i=0;i<s.length;i++){x^=s.charCodeAt(i);x=Math.imul(x,16777619)>>>0}return x%100}
@@ -211,7 +216,7 @@ function iwTick(){if(iwBusy||!S||S.dead||!Array.isArray(S.invW)||!S.invW.length)
   if(!g||!h||iwCoop(g)||iwCoop(h)||g.alive===false||h.alive===false||g.out||(g!==S&&g.confined)){drop("gone");continue}
   if(w.b!==b){/* the buổi ended and the host never came */if(w.t!=null)iwLeave(w,now,"buoi");drop("buoi");continue}
   if(g===S){/* SHE is the guest: arrival when she stands there; host there = visit; walking off first = leaving */
-   const at=(S.out?"lc":S.place)===w.k;if(w.t==null){if(at){w.t=now;w.last=now}else continue}
+   const at=iwMe()===w.k;if(w.t==null){if(at){w.t=now;w.last=now}else continue}
    if(at&&iwHere(h,w.k)){PT.stat.iwMet=(PT.stat.iwMet||0)+1;drop();continue}if(!at){iwLeave(w,now);drop("walked")}continue}
   /* an NPC guest: one decision per khắc after the arrival khắc, taken AT that khắc */
   /* the last khắc of the buổi is the last decision; the buổi end itself is handled above */const end=Math.min(now,b*ptKH()+ptKH()-1);let done=false;for(let K=w.last+1;K<=end&&!done;K++){w.last=K;
@@ -222,7 +227,9 @@ function iwTick(){if(iwBusy||!S||S.dead||!Array.isArray(S.invW)||!S.invW.length)
 (function(){try{
  if(typeof rcvInvAt==="function"){const a0=rcvInvAt;rcvInvAt=function(h,g){const r=a0.apply(this,arguments);try{iwAdd(h,g)}catch(e){ptErr("iwAdd",e)}return r};window.rcvInvAt=rcvInvAt}
  const l1=ptLand;ptLand=function(a){const d0=PT.iwDue;PT.iwDue=a&&a.due;try{return l1.apply(this,arguments)}finally{PT.iwDue=d0}};
- const sp1=spend;spend=function(){const r=sp1.apply(this,arguments);iwTick();return r};
+ const sp1=spend;spend=function(){/* the first khắc of her walk: she has left the place she tapped away from AT the tap khắc (a guest of hers
+   leaves with the loss then; a host coming back during her walk no longer meets her there) — before any khắc passes */
+  if((iwDest!=null&&iwDest!==S.place)||iwSpillOn()){iwRoad=1;try{iwTick()}finally{iwRoad=0}}const r=sp1.apply(this,arguments);iwTick();return r};
  const g1=goTo;goTo=function(k){const d0=iwDest;iwDest=k;let r;try{r=g1.apply(this,arguments)}finally{iwDest=d0}iwTick();return r};
  if(typeof nextBuoi==="function"){const nb1=nextBuoi;nextBuoi=function(){iwTick();const old=iwZ().slice();const r=nb1.apply(this,arguments);/* a guest placed while the new buổi was drawn (j21 placeWhere) belongs to the new buổi */
   try{const now=ptNow();for(const w of iwZ())if(!old.includes(w)){w.b=bid();w.last=now;if(w.t!=null)w.t=now}}catch(e){ptErr("iw buoi",e)}iwTick();return r}}
