@@ -272,12 +272,13 @@ BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timin
    kim «Cắt hoa giấy» (jcraft_kim): folds = most folds of the hardest sheet (sheets 2 · folds/2 · folds, folds 8 = 2·4·8, 4 = 2·2·4) · holes = cuts of a sheet before mgMore · size = a cutter's size as a share of the wedge radius · place = snap tolerance as a share of
      the wedge · peek = ms the unfolded sample stays (≥ lim = stays) · alike = look-alike cutter shapes · lim = ms per sheet · extra = what one extra hole costs
      (share of a right hole) · fast / keep = mgPace (kept from review/mg-tune-r1).
+   Measured STEP 3 (dev/measure/mg-bots.js skilled n=30, graded): theu Dễ/Vừa/Khó 8.6 / 7.7 / 6.8 (old pattern 7.2 / 7.2 / 6.7), kim 8.7 / 8.5 / 6.8 (old untangle 9.0 / 8.6 / 7.7).
    ve «Thủy mặc» (jcraft_ve) · hoa «Chọn mùa · cắt cành · nghiêng thế» (jcraft_hoa): the design's proposed shapes; their builders tune and add knobs here. */
 Object.assign(BAL.mgTier.lev,{
- theu:{beat:[520,900],win:[70,190],near:[2,2],st:[3,3],alike:[3,0],sway:[.02,0],peek:[3000,40000],wC:[.35,.35],wS:[.65,.65],lim:[22000,28000],fast:[.65,.7],keep:[.6,.6]},
+ theu:{beat:[520,900],win:[45,75],near:[2,2],st:[3,3],alike:[3,0],sway:[.02,0],peek:[3000,40000],wC:[.35,.35],wS:[.65,.65],lim:[30000,30000],fast:[.8,.8],keep:[.6,.6]},
  ve:{place:[.07,.14],tones:[5,3],dry:[1400,30000],peek:[3000,40000],bleed:[.06,.03]},
  hoa:{ghost:[0,1],cutTol:[.06,.15],angTol:[8,20],alike:[3,0],sway:[.03,0]}});
-Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],holes:[3,2],size:[.11,.13],place:[.05,.12],peek:[4000,60000],alike:[2,0],lim:[30000,50000],extra:[.5,.5]});
+Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],holes:[2,2],size:[.11,.13],place:[.09,.17],peek:[4000,60000],alike:[2,0],lim:[30000,50000],extra:[.4,.4]});
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
    condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
