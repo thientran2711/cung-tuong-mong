@@ -49,7 +49,9 @@ function mgGrade(raw,kind){const g=(BAL.mgTier.kG||{})[kind]||BAL.mgTier.gamma;c
    (kg82Play also writes the given mark on the board when the play ends). */
 function mgReach(got,done,of){return cl((+got||0)+10*Math.max(0,(+of||0)-(+done||0))/Math.max(1,+of||1),0,10)}
 function mgLive(env,x){return `${mgGrade(x,env&&env.kind)}/10`}
-window.mgReach=mgReach;window.mgLive=mgLive;
+/* gold round pop (owner OD 20/11 ~07:15Z (c), review/mg-score-same-rv): a round whose score the time part cut (mgPace < 1) pops in the kit --gold tone instead of its own colour */
+function mgPaceCol(sp,col){return sp<1?kg82Col("--gold","#8f5f0c"):col}
+window.mgReach=mgReach;window.mgLive=mgLive;window.mgPaceCol=mgPaceCol;
 /* tolerance factor of a board (hit windows, trace width, heat zone, scent match, time): BAL.mgTier.tol[0] at ease 0 → tol[1] at ease 5 */
 function mgTol(env){const T=BAL.mgTier.tol,e=env&&env.lv!=null?+env.lv:5;return Math.max(T[2],T[0]+(T[1]-T[0])*cl(e/5,-1,1))}/* below ease 0 it keeps shrinking, floor tol[2] */
 /* extra pieces to remember (thêu pattern, múa steps): BAL.mgTier.more at ease 0, none at ease ≥ 5·(1 − 1/(more+1)) */
