@@ -53,7 +53,7 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
   {const ak=(ARTS.find(z=>typeof KG82_PLAIN==="object"&&KG82_PLAIN[z.k])||ARTS[0]).k;const v=V.find(x=>x.arts&&x.arts[ak]!=null&&x.arts[ak]<4)||V[0];v.arts=v.arts||{};if(v.arts[ak]==null)v.arts[ak]=1;v.artp=v.artp||{};const l0=v.arts[ak];v.artp[ak]=l0+1;
    const st=(ARTS.find(z=>z.k===ak)||{}).st;const s0=v[st]||0;let called=0;const a0=window.addArtP;window.addArtP=function(){called++;return a0.apply(this,arguments)};
    try{pmPlayEnd(v,a,{a:"play",kind:KG82_PLAIN[ak]||"dauho",ak,n:"x"},8,8)}finally{window.addArtP=a0}out.xp={ak,l0,l1:v.arts[ak],st,s0,s1:v[st]||0,called}}
-  out.rk={pm:BAL.rcv.k.pm,on:BAL.pm.rcvOn,help:BAL.rcv.k.help};
+  out.rk={pm:BAL.rcv.k.pm,off:BAL.pm.rcvOff,help:BAL.rcv.k.help};
   {const far=V.find(x=>!together(S,x))||a;const xx=pmX(far,S,"play");Q.length=0;rcvAsk("pmPlay",far,S,xx);const q=Q[0];out.walkPlay=q?q.opts[0].x:null;Q.length=0;
    rcvAsk("pmDuel",far,S,pmX(far,S,"duel",{s:"bac"}));out.walkDuel=Q[0]?Q[0].opts[0].x:null;Q.length=0;out.farTc=travel(S.place,whereOf(far))}
   {const h=rvCard(a,rivals.indexOf(a));out.btnX=(h.match(/data-pmgo[^>]*>[\s\S]*?<\/button>/g)||[]).join(" ").replace(/<[^>]+>/g," ");out.rowX=pmRows(a).map(o=>o.x);
@@ -81,7 +81,7 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
  ok(r.fc.hp&&r.fc.hp.includes('chơi')&&r.fc.op&&r.fc.op[0][0]==='Nhận lời'&&/được:/.test(r.fc.op[0][1])&&/mất:/.test(r.fc.op[0][1])&&!/đi sang/.test(r.fc.hp+JSON.stringify(r.fc.op)),'r2 fix 2: the friend\'s pastime card = the NPC card, no walk line for the co-op friend',{h:r.fc.hp,o:r.fc.op});
  ok(r.fc.X&&r.fc.X.kind&&r.fc.X.n===r.fc.n&&'s' in r.fc.X,'r2 fix 1: her pick survives the JSON carrier (pmCoopX)',r.fc.X);
  ok(r.xp.called>=1&&r.xp.l1===r.xp.l0+1&&r.xp.s1>r.xp.s0,'r2 fix 3: NPC practice goes through addArtP (level-up gives the stat as for anyone)',r.xp);
- ok(Array.isArray(r.rk.on)&&r.rk.pm.every((w,i)=>w===r.rk.help[i]*r.rk.on[i])&&r.rk.pm[3]===0,'r2 fix 4: BAL.rcv.k.pm = help weights × BAL.pm.rcvOn (own key)',r.rk);
+ ok(Array.isArray(r.rk.off)&&r.rk.pm.every((w,i)=>w===(r.rk.off.includes(i)?0:r.rk.help[i]))&&r.rk.pm[3]===0,'r2 fix 4: BAL.rcv.k.pm = help weights, slots BAL.pm.rcvOff off (own key)',r.rk);
  ok(r.farTc>0&&/đi sang .+ \d+ khắc/.test(r.walkPlay||"")&&/tốn: đi sang .+ \d+ khắc/.test(r.walkDuel||""),'r2 fix 5: her invite / challenge card shows the walk khắc',{tc:r.farTc,play:r.walkPlay,duel:r.walkDuel});
  ok(!/có thể (nhận lời|từ chối)/.test(r.btnX+r.rowX.join(" "))&&r.pickX.every(x=>!/\)$/.test(x)&&/^(Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc) · nàng bậc/.test(x)),'r2 fix 6a: labelled segments only (no stray «nàng có thể từ chối», the level note before the labels)',{btn:r.btnX.slice(0,300),row:r.rowX,pick:r.pickX});
  ok(!/[.]\s*$/.test(r.runR||"")&&!/\.\./.test(r.runR+"."),'r2 fix 6b: the day-plan line has one full stop when logged',r.runR);
