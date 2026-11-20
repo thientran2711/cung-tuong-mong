@@ -33,6 +33,8 @@ _PS = _j.load(_open(os.path.join(D, 'palettes_season.json')))   # L27: DEEP draw
 def _rd(k):
     p = _PS[k]; rs = p['root_season']; r = p[rs]['root_drawn']; return (rs, r['main'], r['main_hex'], r['sec'], r['sec_hex'])
 ROOTS = {k: _rd(k) for k in "s43 s44 s45".split()}
+_DP = _j.load(_open(os.path.join(D, 'palettes_season_deep.json')))['s44']   # ROOT-64: s44 sec sage grey -> P3 pick (owner 'Xám là bỏ hết')
+_r = next(v for v in _DP.values() if isinstance(v, dict) and v.get('root')); ROOTS['s44'] = (_DP['root_season'], _r['main'], _r['main_hex'], _r['sec'], _r['sec_hex'])
 PH = ("{ROOT_MAIN}", "{ROOT_MAIN_HEX}", "{ROOT_SEC}", "{ROOT_SEC_HEX}")
 
 # DIFF vs approved Quyến rũ (make_nf4 S4 s16–s18 + FACEV/HAIR/ITEMS/ANGS s33–s38):
