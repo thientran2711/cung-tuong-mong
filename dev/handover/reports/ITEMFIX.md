@@ -45,3 +45,11 @@ Fix: store-all/build_all.py `build()` now calls `eyes()`. If a prompt doesn't al
 Still without it: only c06 Thái hậu at a18/a26. That prompt does not build at all at those ages (pre-existing ERR "1811 section a18 AGE TEXT": Thái hậu is an elder state).
 Gate: build_all CLI (store + approved check_store) PASS 10/10: m06 t1, m12 t2, m18 t3, m24 t4, m30 t5, m36 t6, m42 t7, m48 t8 (a18), s16 t7, m18 t7 a26.
 LENGTH (open, foreman's call): the sentence is 193 chars. a18/a26: 0 prompts newly over 10 000. a36: 2 newly over (m23 t4 10 024, s16 t4 10 131). a51: 63 newly over, a65: 58 newly over (elder m-prompts, mostly t1/t5, which were already at 9 800–9 990 chars). Not trimmed: the brief says exact sentence, and other sentences are not mine to touch.
+
+## TAN-REVERT (Foreman C #2, owner 20/11 ~18:45Z, verbatim: "Không, bậc tần tao đã trả về cổ áo trước đó, không còn vuông như 3 bậc dưới nữa")
+- t8-prompt-B/build.py build_low t==4: `_G20N` at a18/a26 was "the low square neckline of rank 1, richer gold-brocade edge, NO crossed collar" (G22). It is now **"a crossed collar"**, the pre-G22 t4 words (same as a36+; see e.g. rank8-s62/s62_t4.txt "… at collar, sleeves and hem, a crossed collar, long trailing wide sleeves …").
+- KEPT from G22: borders only "at sleeves and hem" (no collar-embroidery words, per the owner's ROOT-70 correction) + "a few LARGE embroidered {motif} on the robe (fewer than Phi)". The pre-G22 "at collar" border words were NOT restored, because the owner's G22 correction says the t4 prompt mentions nothing about collar embroidery.
+- Whole plan a18–a65 (4 490 prompts, built before/after): only **t4 a18 (112) + t4 a26 (112)** changed, and only these words (0 extra diffs). a36/a51/a65: 0 changed. Every changed prompt is 62 chars SHORTER.
+- Gate: build_all CLI (store + approved) PASS 4/4: m06 t4 a18 (9 744), m20 t4 a26 (9 684), s62 t4 a18 (9 928), s64 t4 a26 (9 973).
+- LENGTH: no prompt goes newly over 10 000. Still over, but each 62 chars shorter than before: 48 t4 prompts at a18 and 49 at a26 (c06 + most s-people t4, now 10 002–10 613). This is a pre-existing problem, not trimmed here.
+- Rule: **G22 updated** via `rule.py set` (revert noted with the verbatim; old line moved to ART_RULES_HISTORY.md).

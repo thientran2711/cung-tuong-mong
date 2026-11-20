@@ -604,3 +604,4 @@ NEWACCT#3 ~16:09Z: FROM #2: owner CORRECTION ~19:24Z "Không phải dày ấm, m
 NEWACCT#3 ~16:10Z: FROM #2: owner ~19:26Z "Không đươnc uyển chuyển nữa" — AMBIGUOUS (worry opaque loses flow? or wants less flowy?). Asked owner Lượt 1213. G28 unchanged until answer.
 NEWACCT#3 ~16:11Z: owner answered "A" (via #2): opaque soft silk still flowing thướt tha; G28 final wording; WINTER1 told.
 NEWACCT#3 ~16:15Z: OWNER (this chat): "Chọn áo kiểu đường, phi bạch là kiểu vắt sau lưng như thiết kế hiện tại,không phải choàng vai" → rule G29; TANG1 told (no gens). Asked scope/next test Lượt 1216.
+NEWACCT#3 ~16:17Z: ITEMFIX TAN-REVERT DONE f0d64869c (via #2; 0 cr; t4 a18/a26 → crossed collar pre-G22, gate 4/4 PASS). OPEN: 48 (a18)+49 (a26) t4 prompts >10 000 → trim needs owner OK (asked Lượt 1217).
