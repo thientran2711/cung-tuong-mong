@@ -485,3 +485,4 @@ ROOT-69 07:57Z: OWNER STOP (angry, verbatim "Ủa tại sao bạn vẫn sản xu
 ROOT-69 07:59Z: OWNER Lượt ~1121: (1) GO redraw m29 t7 (eyes odd/lé) → OLD4 1 gen; (2) today's non-final t1/t2 → SKINS, keep (RANK8-A, 0 cr); (3) TEST s62 t4/t5/t6 square neckline 3 gens ~405 cr → RANK8-A, builder untouched.
 ROOT-69 08:00Z: OWNER APPROVED t2 neckline ('Rồi thường tại ổn nha, rồi tiến hành copy cái prompt này cho tất cả mọi người đi.') → G17 builder applies to all (checked m29/s62 builds). m20 stopped: t1–t4 drawn (540 cr, raw only). 8-rank production waits for t4/t5/t6 verdict.
 - (20/11 08:06Z) FROM MAIN ROOT-76: LIVE 892e5bb0 (mg-score-same: board score = given score, all 31 kinds; BIG PASS) on 377d5ce3. ROLLBACK 377d5ce3. Final-merge 892e5bb0 before LAND READY.
+ROOT-69 08:01Z: OWNER FINAL t1/t2 square neckline ('Ok, quyết định giữ như cũ, làm cổ vuông đi.'); old crossed t1/t2 = skins. G17 marked FINAL.
