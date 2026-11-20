@@ -38,3 +38,4 @@ START_CTX ≈4 % of 1M (estimate; get_session read 0) · depth 7 (limit 8) · wo
 - Looked: eyes level, lips closed, no teeth, pomegranate held, sienna + sage green clear, beauty mark under her LEFT eye (right side of picture), no forehead mark.
 - Faults (not fixed): red drop earrings (not in prompt); NEW again very close to OLD (same body/robe), the change is the face + greener skirt.
 - FACE_CUTS/FACE_MAP for s44 NOT switched (waiting for owner OK).
+- Owner OK Lượt 961 → s44 FACE_CUTS/FACE_MAP/crop switched to DoOgxICpcl, ledger OWNER-OK. F3 done, idle. Total 414 credits.
