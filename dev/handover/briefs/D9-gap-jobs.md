@@ -23,3 +23,7 @@ PRIORITY #1 CHECK ('EMO_OD|emoOff|feelOff'): dev/EMOTION_PLAN.md:106-119, dev/PR
 Do: 150 lives emotions OFF vs 150 ON on LIVE (seeded), table per EMOTION_PLAN.md:119; then tune EMO_OD / EMO_W idle / danger cap in BAL.feel only (one core — remove the double source if jfeel overwrites EMO tables), re-measure, before/after table. Branch review/emo-balance. Expect BIG.
 
 NOT D (left to their owner, per MAIN ORDER 07:25Z): MG07 broken boards + MG15 fair hands = C-AG (cal-p2b / mg-fair-ratio). MG17 + MG18 = D's cal-p2c (running).
+
+## JOB 6 — WALK COST «về nhà» (ORDER MAIN ROOT-76 20/11 08:36Z; opus; time/khắc rules)
+PRIORITY #1 CHECK ('goTo|walk|khắc đi'): OD L1976 (owner's example: «tôi bấm về nhà là tốn một khắc») | main j2 goTo("home") costs 0 khắc (found by invite-host-away #1) | review/invite-host-away(-rv) touches jptime invite only, not goTo | claims none.
+Do: read OD L1976 verbatim + grep OWNER_DECISIONS / dev/rules/topic time files for every ruling on walking/moving cost (khắc per move, đi lại). Scan EVERY goTo / walk / move path (her, NPC roster walks, co-op friend; home, palaces, map places, outings) → before table of what each costs; make walking cost follow the owner's rulings, one BAL knob family (law 4), same for NPCs (law 1) and co-op. After table. ptime.test check 5 flake (~1/3, guest random receiver answer): fix it (seed / pin) or file it as test debt in your report. Branch review/walk-cost from CURRENT origin/main. Tests: new walk-cost test, ptime/ptime2, time-spill, quickcheck, old save, coop-e2e. Expect BIG.
