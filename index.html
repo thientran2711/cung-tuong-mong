@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng.","b":"755a95abf8b9","h":[{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"},{"s":"dddb1f94+","t":"2026-11-20T04:29Z","c":"Tay đối thủ ở Thắp đèn nay đo theo đúng tài của nàng"},{"s":"b3f5a05c+","t":"2026-11-20T04:20Z","c":"Tay đối thủ ở Bắn cung, Đầu hồ và Kim chỉ nay đo theo đúng tài của nàng"},{"s":"29f5e418+","t":"2026-11-20T04:01Z","c":"Kit mới: bảng thi đấu đối mặt cho «Thách đấu» (chuẩn bị, chưa mở trong game)"},{"s":"b74e84cb+","t":"2026-11-20T04:06Z","c":"Tay đối thủ ở Thêu nay đo theo đúng tài của nàng"},{"s":"82ed060e+","t":"2026-11-20T03:59Z","c":"Tay đối thủ ở Hát và Thơ nay đo theo đúng tài của nàng"}]};
+window.CTM_BI={"s":"70bea3d3+","t":"2026-11-20T06:26Z","c":"SELF-MERGE LAND mg-visual bb5a84b7 onto LIVE eb056f7b (j91 hat: keep mgFx lotus + no-word hint; index/sw rebuilt)","b":"dbe09aeac86c","h":[{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"},{"s":"dddb1f94+","t":"2026-11-20T04:29Z","c":"Tay đối thủ ở Thắp đèn nay đo theo đúng tài của nàng"},{"s":"b3f5a05c+","t":"2026-11-20T04:20Z","c":"Tay đối thủ ở Bắn cung, Đầu hồ và Kim chỉ nay đo theo đúng tài của nàng"},{"s":"29f5e418+","t":"2026-11-20T04:01Z","c":"Kit mới: bảng thi đấu đối mặt cho «Thách đấu» (chuẩn bị, chưa mở trong game)"},{"s":"b74e84cb+","t":"2026-11-20T04:06Z","c":"Tay đối thủ ở Thêu nay đo theo đúng tài của nàng"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -28677,13 +28677,13 @@ function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const 
 /* 5. STEPS (múa): watch the steps light up, then repeat them */
 function kg82Steps(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const V=[["↑","Giơ tay áo"],["←","Xoay trái"],["→","Xoay phải"],["↓","Cúi mình"]];
  const mx=W/2,my=H/2,D=Math.min(W,H)*.31,pr=Math.min(W,H)*.15;const pos=[[mx,my-D],[mx-D,my],[mx+D,my],[mx,my+D]];
- const R0=[3,3,4,4,5].map(n=>n+mgMore(env));let round=0,pts=0,seq=[],inp=0,phase="",t0=0,stop=false,raf=0,lit=-1,litUntil=0,lastTap=0;const pops=[];/* mg-balance-2: show speed and the beat window of each step (miss the beat = the round stops there): BAL.mgTier.lev.mua by ease */const SP=Math.round(mgLev(env,"mua","sp")),IDLE=Math.round(mgLev(env,"mua","beat")),RT=Math.floor(mgLev(env,"mua","retry"));let rtl=0;/* easy boards forgive RT wrong steps per round */
+ const R0=[3,3,4,4,5].map(n=>n+mgMore(env));let round=0,pts=0,seq=[],inp=0,phase="",t0=0,stop=false,raf=0,lit=-1,litUntil=0,lastTap=0;const pops=[];/* mg-balance-2: show speed and the beat window of each step (miss the beat = the round stops there): BAL.mgTier.lev.mua by ease */const SP=Math.round(mgLev(env,"mua","sp")),IDLE=Math.round(mgLev(env,"mua","beat")),RT=Math.floor(mgLev(env,"mua","retry"));let rtl=0;/* cal-p2b: dark gap between shown steps + each shown step pops from its own start (a repeat reads as two) */const DARK=Math.min(SP*.6,mgLev(env,"mua","dark"));let showAt=0;/* easy boards forgive RT wrong steps per round */
  const pc=kg82Col("--peony","#e48aa4"),gold=kg82Col("--gold","#8f5f0c");
  function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}seq=Array.from({length:R0[round]},()=>Math.floor(Math.random()*4));inp=0;rtl=RT;phase="show";t0=performance.now()+500}
  function endRound(ok){phase="judge";const got=2*ok/seq.length;pts+=got;kg82Pop(pops,mx,my-8,ok===seq.length?"Đẹp lắm!":`Đúng ${ok}/${seq.length} bước`,ok===seq.length?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"));round++;setTimeout(next,1100)}
  function draw(now){kg82Bg(g,W,H,"mua",0,.55);kg82Spr(g,"mua-fan",mx,my-D*.06,D*.5,null,{alpha:.95});
-  let showI=-1;if(phase==="show"){const k=now-t0;if(k>=0){const i=Math.floor(k/SP);if(i>=seq.length){phase="play";lastTap=now}else if(k-i*SP<SP*.72)showI=seq[i]}}
-  pos.forEach(([x,y],i)=>{const on=i===showI||(i===lit&&now<litUntil),pz=on?kg82FxPop(i===showI?null:litUntil-BAL.mgFx.ms,now):1;g.save();
+  let showI=-1;if(phase==="show"){const k=now-t0;if(k>=0){const i=Math.floor(k/SP);if(i>=seq.length){phase="play";lastTap=now}else if(k-i*SP<SP-DARK){showI=seq[i];showAt=t0+i*SP}}}
+  pos.forEach(([x,y],i)=>{const on=i===showI||(i===lit&&now<litUntil),pz=on?kg82FxPop(i===showI?showAt:litUntil-BAL.mgFx.ms,now):1;g.save();
    /* the painted dance cushion; lit = golden glow and a small lift */
    if(!kg82Spr(g,"mua-mat",x,y-(on?3:0),pr*2.05*pz,null,{glow:on?BAL.mgFx.glow:null,ring:on})){g.fillStyle=on?pc:"#ecd9b4";g.beginPath();g.arc(x,y,pr,0,Math.PI*2);g.fill()}
    g.fillStyle=on?"#fff6dc":"#fff3e0";g.textAlign="center";g.textBaseline="alphabetic";g.font=`700 ${pr*.62}px serif`;g.save();g.shadowColor="#5a1208";g.shadowBlur=6;g.fillText(V[i][0],x,y+pr*.12);g.restore();
@@ -29187,7 +29187,7 @@ const K91_ING={"Nước giếng":"nuoc","Hạt sen":"sen","Long nhãn":"nhan","�
 function k91Ing(g,t,x,y,w,h,st,fs){k91Tile(g,x,y,w,h,"",st,fs,"tho-slip");const ic=h*1.02;kg82Spr(g,"banh-"+K91_ING[t.n],x+w/2,y+h/2,ic,ic)}/* picture only: no ingredient name in play */
 function k91Cook(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.25:.95,470),{g,W,H}=C;const lv=env.lv||0;const [nm,steps]=kg82Shuf(K91_RC)[0];const Z=[[.14,.36],[.42,.62],[.68,.88]].map(([a,b])=>{const c=(a+b)/2,h=((b-a)/2+.015*lv)*mgTol(env);return[c-h,c+h]});const ZN=["lửa nhỏ","lửa vừa","lửa lớn"];
  /* mg-balance-2: the fire answers the fan with a LAG and draughts of wind (gusts) push it up or down; both grow as the ease falls (BAL.mgTier.lev.banh) */
- const LAG=Math.max(.02,mgLev(env,"banh","lag")),GUA=mgLev(env,"banh","gust"),GAP=mgLev(env,"banh","gap");let rr=-.1,gu=0,guEnd=0,guNext=GAP*(.6+.8*Math.random());
+ const LAG=Math.max(.02,mgLev(env,"banh","lag")),GUA=mgLev(env,"banh","gust"),GAP=mgLev(env,"banh","gap"),REACH=mgLev(env,"banh","reach");let rr=-.1,gu=0,guEnd=0,guNext=GAP*(.6+.8*Math.random());
  const DUR=55000,SIM=3200;let heat=.3,fan=new Set(),si=0,simAt=0,inz=0,qual=[],miss=0,t0=performance.now()+1200,last=performance.now(),drag=null,done=false,msg="";const pops=[];
  const nd=lv>=3?1:2;const tiles=kg82Shuf(steps.map(([n],i)=>({n,i})).concat(kg82Shuf(K91_RX).slice(0,nd).map(n=>({n,i:-1}))));
  const bt=k91Btns(box,[["k91fan",`<img alt="" src="${kg82Img("banh-flame").src}" style="height:2.2em;vertical-align:middle;pointer-events:none">`,""]]);const fb=bt.querySelector("#k91fan");
@@ -29201,7 +29201,7 @@ function k91Cook(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.25
  lay();const score=()=>Math.max(0,(qual.reduce((a,b)=>a+b,0)-.3*miss)/steps.length);
  function add(t){if(si>=steps.length||simAt)return;if(t.i===si){t.used=true;simAt=performance.now();inz=0;lay();kg82Pluck(si,true);msg=""}
   else{miss++;kg82Pluck(0,false);if(t.i<0){t.used=true;lay();kg82Pop(pops,PX,PY-PR-10,"✗",K91C.red())}else kg82Pop(pops,PX,PY-PR-10,"✗",K91C.red())}}
- const stop=k91Loop(now=>{const dt=Math.min(50,now-last)/1000;last=now;const t=now-t0;if(t>=0&&!done){const ts=t/1000;if(GUA>.01&&ts>=guNext){gu=(Math.random()<.5?-1:1)*GUA*(.6+.4*Math.random());guEnd=ts+.7;guNext=ts+GAP*(.6+.8*Math.random());kg82Pop(pops,PX,PY-PR-10,gu>0?"▲":"▼",K91C.gold())}if(ts>=guEnd)gu=0;
+ const stop=k91Loop(now=>{const dt=Math.min(50,now-last)/1000;last=now;const t=now-t0;if(t>=0&&!done){const ts=t/1000;if(GUA>.01&&ts>=guNext){gu=(Math.random()<.5?-1:1)*GUA*(.6+.4*Math.random());gu=gu>0?Math.min(gu,REACH*.1):Math.max(gu,-REACH*.34);/* cal-p2b: never past what her hand can answer (cool .1/s, fan .34/s) */guEnd=ts+.7;guNext=ts+GAP*(.6+.8*Math.random());kg82Pop(pops,PX,PY-PR-10,gu>0?"▲":"▼",K91C.gold())}if(ts>=guEnd)gu=0;
    rr+=((fan.size?.34:-.1)-rr)*Math.min(1,dt/LAG);heat=cl(heat+(rr+gu)*dt,0,1)}
   const st=steps[Math.min(si,steps.length-1)];const z=Z[st[1]];const inZ=heat>=z[0]&&heat<=z[1];
   if(simAt){inz+=inZ?dt*1000:0;if(now-simAt>=SIM){const q=.4+.6*Math.min(1,inz/SIM);qual.push(q);kg82Pop(pops,PX,PY-PR-10,q>.85?"★★★":q>.6?"★★":"★",q>.85?K91C.good():q>.6?K91C.gold():K91C.red());simAt=0;si++;
@@ -29246,14 +29246,15 @@ function k91Blend(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.
  const dist=(a,b)=>{const p=ratio(a),q=ratio(b);return p.reduce((s,x,i)=>s+Math.abs(x-q[i]),0)/2};
  function next(){r++;if(r>=NR){done=true;bd.disabled=true;return setTimeout(()=>env.end((10*sum/NR)),300)}const E=pick3();let tv;do tv=[0,1,2].map(()=>1+Math.floor(Math.random()*6));while(Math.max(...tv)-Math.min(...tv)<2);
   P={E,tv,v:[.5,.5,.5]};phase="play";t0=performance.now();bd.disabled=false}
+ /* cal-p2b: ONE round score for the live hint, the verdict and the grade (BAL.mgTier.blend) */const rs=d=>cl(1-d/(BAL.mgTier.blend.w*mgTol(env)),0,1);
  const SL=()=>{const top=H*.47,bot=H*.93,cw=W/3;return[0,1,2].map(i=>({x:cw*(i+.5),top,bot}))};
- function judge(){phase="judge";bd.disabled=true;const d=dist(P.v,P.tv);const s=cl(1-d/(.32*mgTol(env)),0,1);sum+=s;/* the verdict takes the hint line's place (never drawn over it) */P.verdict=[s>.85?"★★★":s>.55?"★★":"✗",s>.85?K91C.good():s>.55?K91C.gold():K91C.red()];setTimeout(next,1500)}
+ function judge(){phase="judge";bd.disabled=true;const d=dist(P.v,P.tv);const s=rs(d),T=BAL.mgTier.blend.star;sum+=s;/* the verdict takes the hint line's place (never drawn over it) */P.verdict=[s>T[2]?"★★★":s>T[1]?"★★":"✗",s>T[2]?K91C.good():s>T[1]?K91C.gold():K91C.red()];setTimeout(next,1500)}
  function smoke(x,y,R,c,lab){/* the painted censer under its live smoke */kg82Spr(g,"huong-censer",x,y+R*.42,R*1.35,null,{ay:0});g.save();const gr=g.createRadialGradient(x,y,R*.1,x,y,R);gr.addColorStop(0,`rgba(${c},1)`);gr.addColorStop(.7,`rgba(${c},.85)`);gr.addColorStop(1,`rgba(${c},0)`);g.fillStyle=gr;g.beginPath();g.arc(x,y,R,0,Math.PI*2);g.fill();
   g.fillStyle=K91C.ink;g.font=k91F(700,12,1);g.textAlign="center";g.textBaseline="alphabetic";kg82Lbl(g,lab,x,y+R*1.85+12);g.restore()}
  const stop=k91Loop(now=>{if(!P)return;const left=LIM-(now-t0);if(phase==="play"&&left<=0)judge();kg82Bg(g,W,H,"huong",.08,.8);
   const R=Math.min(W*.14,H*.095);const tc=mix(P.E,P.tv),mc=mix(P.E,P.v);smoke(W*.27,H*.12,R,tc.join(","),"◎");smoke(W*.73,H*.12,R,mc.join(","),"●");
-  const d=dist(P.v,P.tv);const word=d>.22?"còn xa":d>.12?"đã gần":d>.05?"rất gần":"khớp";g.fillStyle=d<=.05?K91C.good():d<=.12?K91C.gold():"#6b5643";g.font=k91F(700,13,1);g.textAlign="center";
-  const dom=P.E[P.tv.indexOf(Math.max(...P.tv))][0];if(phase==="judge"&&P.verdict)k91Say(g,P.verdict[0],P.verdict[1],W/2,H*.4,W-16);else kg82Lbl(g,d>.22?"☆☆☆":d>.12?"★☆☆":d>.05?"★★☆":"★★★",W/2,H*.4,W-16);
+  const ls=rs(dist(P.v,P.tv)),T=BAL.mgTier.blend.star;g.fillStyle=ls>T[2]?K91C.good():ls>T[1]?K91C.gold():"#6b5643";g.font=k91F(700,13,1);g.textAlign="center";
+  const dom=P.E[P.tv.indexOf(Math.max(...P.tv))][0];if(phase==="judge"&&P.verdict)k91Say(g,P.verdict[0],P.verdict[1],W/2,H*.4,W-16);else kg82Lbl(g,ls>T[2]?"★★★":ls>T[1]?"★★☆":ls>T[0]?"★☆☆":"☆☆☆",W/2,H*.4,W-16);
   SL().forEach((s,i)=>{const e=P.E[i];g.strokeStyle=K91C.hair;g.lineWidth=6;g.lineCap="round";g.beginPath();g.moveTo(s.x,s.top);g.lineTo(s.x,s.bot-22);g.stroke();
    const y=s.bot-22-(s.bot-22-s.top)*P.v[i];g.strokeStyle=`rgb(${e[1].join(",")})`;g.beginPath();g.moveTo(s.x,s.bot-22);g.lineTo(s.x,y);g.stroke();
    /* knob = the painted jar of that scent */if(!kg82Spr(g,"huong-"+e[2],s.x,y,56,null,{})){g.fillStyle=`rgb(${e[1].join(",")})`;g.strokeStyle="#6e4d0e";g.lineWidth=2;g.beginPath();g.arc(s.x,y,13,0,Math.PI*2);g.fill();g.stroke()}
@@ -31376,10 +31377,19 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
   tho:{fast:[.05,.175],keep:[.5,.5]},doi:{fast:[.05,.425],keep:[.3,.3]},doden:{fast:[.05,.175],keep:[.3,.3]},le:{fast:[.075,.25],keep:[.3,.3]},
   tc:{fast:[.05,.175],keep:[.3,.3]},xa:{fast:[.05,.1],keep:[.1,.1]},thq:{fast:[.075,.45],keep:[.5,.5]},
   kim:{fast:[0,0],keep:[.6,.6]},/* review/mg-tune-r1: Khéo tay (untangle) moved onto mgPace, same curve as its old typed .6+.4·left/LIM */
-  banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4]},co:{lim:[8000,20000],fast:[.1,.8],keep:[.6,.6],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99]},
+  banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4],reach:[.8,.8]},co:{lim:[8000,20000],fast:[.1,.8],keep:[.6,.6],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99],dark:[220,220]},
   td_hanh:{lim:[8000,20000],short:[2,0]},td_cong:{tol:[.0075,.028]},den:{swing:[.36,.36],band:[.16,.208]},/* review/mg-snap: Thêu theo nét trace tolerance, share of the board width (was typed W·(.055+.006·lv)·mgTol) */dauho:{aid:[.14,.45],mouth:[.8,1.3]},td_dung:{band:[.2,.6],kick:[2.4,1],spill:[2,1.5]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
- kG:{td_cong:1.3,td_ngon:2,ban:.8,dan:2.8,den:.8,hat:.85,duho:1.5,hoa:2.3,huong:3.65,kim:1.8,kinh:.9,may:.82,ve:.9,mua:1.25,theu:5.5,co:3},/* review/mg-balance-2-r1 re-trim on pooled raws (co n=120, td_ngon n=60 float): co 4→3, td_ngon 1.6→2; review/mg-snap re-trim after the trace fix (her line scored, BAL.mgTier.trace.acc 1) and the wider Hoa đăng channel: td_cong 1.6→1.3, ve 1.7→.9, kinh 1.5→.9, may 1.5→.82, den 1.05→.8 */
- trace:{acc:1},/* review/mg-snap: weight of her line lying on the guide in the ONE trace score mgTraceScore (was a typed .5) */
+ kG:{td_cong:1.3,td_ngon:2,ban:.8,dan:2.8,den:.8,hat:.85,duho:1.5,hoa:2.3,huong:1,kim:1.8,kinh:.9,may:.82,ve:.9,mua:1.25,theu:5.5,co:3},/* review/mg-balance-2-r1 re-trim on pooled raws (co n=120, td_ngon n=60 float): co 4→3, td_ngon 1.6→2; review/mg-snap re-trim after the trace fix (her line scored, BAL.mgTier.trace.acc 1) and the wider Hoa đăng channel: td_cong 1.6→1.3, ve 1.7→.9, kinh 1.5→.9, may 1.5→.82, den 1.05→.8 */
+ trace:{acc:1},
+ /* review/cal-p2b (owner OD 20/11 ~07:35Z: fix the broken games only) — three board faults, BAL only:
+    blend (Điều hương): w = share of the scent mix that still scores (one round = clamp(1 − mix gap / (w·mgTol))), was typed .32 in k91Blend;
+      star = the live hint ★ / ★★ / ★★★ and the verdict ★★ / ★★★ read THAT SAME round score (was typed mix-gap thresholds .22/.12/.05, so «★★★» could
+      grade 2/10 under kG 3.65); kG.huong 3.65 → 1: the grade = what the board shows (HUD 10·mean round), kG had been fitted on an oracle bot.
+    lev.mua.dark = ms the cushion goes dark between two shown steps (was SP·.28 ≈ 145–215 ms: the same cushion twice read as one step); each shown
+      step now pops from its own start (kit kg82FxPop), so a repeat is seen as two.
+    lev.banh.reach = a gust never pushes the fire faster than this share of what her hand can answer (fan up .34/s, cool .1/s); was gust .6/s at ease 0
+      = half the time no hand could hold the fire (ideal player in zone 10 %, dev/handover/reports/cal-p2.md §P1). */
+ blend:{w:.32,star:[.25,.55,.85]},/* review/mg-snap: weight of her line lying on the guide in the ONE trace score mgTraceScore (was a typed .5) */
  pace:{fast:[.2,.4],keep:[.5,.8]},word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,npc:[4,.4],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15],cong:[3,2]}}});
 /* mg-ready-guide (owner OD 20/11 ~00:20Z «Sẵn sàng» + «Hướng dẫn», KIT §13.7): the guided tutorial round, played on the EASIEST board = the lowest gap of the
    calibration ladder BAL.ag.mg2.cal.d (read at play time, no second number here); part = it ends once this share of the engine's rounds is done
@@ -81955,7 +81965,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="755a95abf8b9";window.CTM_BUILD=BUILD;
+const BUILD="dbe09aeac86c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
