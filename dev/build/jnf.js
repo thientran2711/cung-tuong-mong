@@ -175,14 +175,15 @@ const LOOKUP="img.kemo[data-emo],[data-emo-open],[data-svlook]";
 window.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest||!t.closest(LOOKUP)||!S||!nfOn())return;const x=X();
  if(!(scene()||(x&&x.st==="open"&&Q[0]&&Q[0].pid==="nfch")))return;e.stopPropagation();e.preventDefault()}catch(z){}},true);
 let WT=null;
-/* the dialogs already waiting when the tablet flips (a person met on the way, the entering-the-palace card, a rumour …) never hold the forced
-   choice: it comes right after the flip scene (owner OD 16/11 22:45Z) and they follow it (Q.unshift in showChoice). Only while tonight is NOT hers already:
-   when it is hers (her card turned, a night already won: notice nfsum, bath and night dialogs) every waiting dialog goes first, as before. Not saved: after a reload every waiting dialog goes first. */
-let PREQ=new WeakSet();
+/* the forced choice comes right after the flip scene (owner OD 16/11 22:45Z): only the flip's OWN dialogs (what realFlip itself pushed, e.g. the
+   Kính sự phòng mama check that can take the night away) and a won-night notice (nfsum) go before it. Every other dialog — waiting before the flip
+   (a person met, the entering-the-palace card, a rumour) or arriving with the end of the day (the agent loop's «Ngươi bắt gặp», a reward) — follows
+   it (Q.unshift in showChoice), whoever's card was turned (night-final #2/#4/#7). Not saved: after a reload every waiting dialog goes first. */
+let FLIPQ=new WeakSet();
 function wake(){step();if(!WT&&!window.__bot)WT=setInterval(step,250)}
 function sleep(){if(WT){clearInterval(WT);WT=null}}
 function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(!x||x.st==="done"){sleep();return}
- if(x.st==="wait"){const pre=S.tonight!=="me";if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&!(pre&&m.pid!=="nfsum"&&PREQ.has(m))))return;openChoice()}
+ if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&(m.pid==="nfsum"||FLIPQ.has(m))))return;openChoice()}
  if(x.st!=="open")return;
  if(x.me===undefined&&!x.dlg){if(scene()&&Date.now()-(x.at||0)<B().choice.waitMs*2)return;showChoice()}
  if(guest())return;
@@ -239,7 +240,9 @@ const TM={t0:0,id:null,stop(){if(this.id){clearInterval(this.id);this.id=null}th
 if(typeof showModal==="function"){const sm0=showModal;showModal=function(){
  /* the scene just closed and the choice is due: it goes up first (showChoice puts it at the front), never a card queued meanwhile
     (a reward, a person met) in the ≤250 ms before step's next tick (owner OD 16/11 22:45Z: the choice right after the scene) */
- try{const x=S&&nfOn()?X():null;if(x&&x.st==="open"&&x.me===undefined&&!x.dlg&&!scene())showChoice()}catch(e){console.error(e)}
+ try{const x=S&&nfOn()?X():null;if(x&&x.st==="open"&&x.me===undefined&&!x.dlg){if(scene()){if(!window.__bot)return}else showChoice()}}catch(e){console.error(e)}
+ /* the choice is due but the flip scene still plays: no other dialog opens under / over it (a card queued before the flip, a reward, a rumour);
+    step() puts the choice up the moment the scene closes and the rest follow it (night-final #7) */
  const r=sm0.apply(this,arguments);try{if(Q[0]&&Q[0].pid==="nfch"&&!$("modal").hidden)TM.start()}catch(e){}return r}}
 /* everyone has chosen: ONE resolve (host / single player) */
 function resolveAll(){const x=X();if(!x||x.st!=="open")return;x.st="done";sleep();
@@ -284,7 +287,7 @@ function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
  const d=day();
  if(S.nfC!==d){S.nfC=d;
-  if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait"};PREQ=new WeakSet(Q.filter(m=>m&&typeof m==="object"));if(S.nfN!==d&&!flippedToday())realFlip()}   /* her night already played today (his visit, a summons): no flip, no choice */
+  if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait"};FLIPQ=new WeakSet();if(S.nfN!==d&&!flippedToday()){const q0=new Set(Q);realFlip();FLIPQ=new WeakSet(Q.filter(m=>m&&typeof m==="object"&&!q0.has(m)))}}   /* her night already played today (his visit, a summons): no flip, no choice */
   else ask()}
  if(!guest()){const x=X();if(x&&x.st!=="done"){hold();wake();return}}
  else if(S.nfFin!==d){S.nfW=d;ask();hold();wake();return}       /* the host's flip, then the host's last word on who holds tonight */
