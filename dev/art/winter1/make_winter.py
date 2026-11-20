@@ -14,12 +14,14 @@ LIMIT = 10000
 
 FUR_END = (", visibly warm and cosy, yet lying smooth and close, never puffy or bulky; the same plain ivory at every rank, "
            "no coloured fur, never covering her face or neck, the neckline keeps its shape.")
-FUR = {  # G26 ladder (owner ~19:00Z + ~19:15Z)
+FUR = {  # G26 ladder (owner ~19:00Z + ~19:15Z; re-laddered ~16:50Z after approving fur 1/2/3: Lông 2 = the old t7-t8 width, Lông 3 = new thicker)
  1: "WINTER: a WIDE band of soft plain ivory-white fur trim, about a hand's width, along her collar, the front edges and hem of her outer garment, and her cuffs" + FUR_END,
- 2: "WINTER: a WIDER band of soft plain ivory-white fur trim, about one and a half hands wide, along her collar, the front edges and hem of her outer garment, and her cuffs" + FUR_END,
- 3: "WINTER: the WIDEST, most luxurious band of thick soft plain ivory-white fur trim, clearly wider than at any lower rank, about two and a half hands wide, "
+ 2: "WINTER: a VERY WIDE, luxurious band of thick soft plain ivory-white fur trim, wider than at the lower ranks, about two and a half hands wide, "
     "along her collar, the front edges and hem of her outer garment, and her cuffs, rich, warm and cosy, yet lying smooth and close, never puffy or bulky; "
-    "the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape."}
+    "the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape.",
+ 3: "WINTER: the WIDEST, THICKEST and most luxurious band of deep, dense, plush soft plain ivory-white fur trim, far wider and fuller than at any lower rank, "
+    "about three and a half hands wide and visibly thick and lush, along her collar, the front edges and hem of her outer garment, and her cuffs, "
+    "rich, warm and sumptuous, softly rounded and full, yet neat and elegant; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape."}
 def fur(t): return FUR[1 if t <= 3 else 2 if t <= 6 else 3]
 
 # G28 fabric swaps: (old exact text, new text). Each must match where present; the report lists which ones fired.
