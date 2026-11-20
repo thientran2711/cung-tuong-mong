@@ -141,6 +141,17 @@ function kitPhWaitMark(im){try{if(!im||im.tagName!=="IMG"||im.hasAttribute("data
    {const own=getComputedStyle(p,"::after").content;if(own&&own!=="none"&&own!=="normal"){const sp=document.createElement("span");sp.className="kwaitl";sp.textContent=KPHW_TXT();p.appendChild(sp);p.setAttribute("data-kwaitq","1");has.push(p.getBoundingClientRect());continue}}
    p.setAttribute("data-kwaitp",KPHW_TXT());has.push(p.getBoundingClientRect())}})}catch(e){}}
 window.kitPhWaitMark=kitPhWaitMark;
+/* KP16 (review/kit-modal-spin, life-preload part b; KIT §59.2) kitSpin(o) = the ONE small loading spinner: a gold ring on the parchment hair-line, turns at the game pace; still (a gentle breath) under reduced motion / «Hiệu ứng: Gọn».
+   kitSpin({s:true}) = 18 px for a button / chip, default 28 px; o.label = the spoken label (CTM_WAIT.spin). The dialog wait of the life gate (#modal.klifewait, jload.js) draws the SAME ring with a pseudo-element: one look. */
+function kitSpin(o){o=o||{};let st=false;try{st=typeof kfStill==="function"&&kfStill()}catch(e){}const lab=String(o.label||(window.CTM_WAIT&&CTM_WAIT.spin)||"Đang chờ…").replace(/"/g,"&quot;");return `<i class="kspin${o.s?" kspin-s":""}${st?" kspin-still":""}${o.cls?" "+o.cls:""}" role="status" aria-label="${lab}"></i>`}
+window.kitSpin=kitSpin;
+(function(){const st=document.createElement("style");st.id="kit-spin";st.textContent=`
+.kspin{display:inline-block;flex:none;width:28px;height:28px;box-sizing:border-box;border-radius:50%;border:3px solid var(--k-hair,#e6d3ac);border-top-color:var(--gold,#8f5f0c);animation:kspin calc(.9s*var(--pace,1)) linear infinite;vertical-align:middle}
+.kspin.kspin-s{width:18px;height:18px;border-width:2px}
+@keyframes kspin{to{transform:rotate(360deg)}}
+@keyframes kspinb{50%{opacity:.35}}
+.kspin.kspin-still{animation:kspinb 1.6s ease-in-out infinite;border-top-color:var(--k-hair,#e6d3ac);border-right-color:var(--gold,#8f5f0c)}
+@media(prefers-reduced-motion:reduce){.kspin,#modal.klifewait::after{animation:kspinb 1.6s ease-in-out infinite}}`;document.head.appendChild(st)})();
 document.addEventListener("load",e=>{if(e.target&&e.target.tagName==="IMG")kitPhWaitClear(e.target)},true);
 document.addEventListener("error",e=>{if(e.target&&e.target.tagName==="IMG")kitPhWaitClear(e.target)},true);
 /* review life-preload-fu r2v: kitFigHD (jfighd) gives a figure srcset/sizes; the browser may then drop the picture it was loading/showing and fetch the
@@ -150,6 +161,7 @@ function kitPhSetChk(im){const c=()=>{try{if(im.isConnected&&!im.hasAttribute("d
 (function(){const one=n=>{if(n.nodeType!==1)return;if(n.tagName==="IMG")kitPhWaitMark(n);else if(n.firstElementChild)n.querySelectorAll("img").forEach(kitPhWaitMark)};
  try{new MutationObserver(ms=>{for(const m of ms){if(m.type==="attributes"){if(m.attributeName==="src")kitPhWaitMark(m.target);else if(m.target.tagName==="IMG")kitPhSetChk(m.target)}else m.addedNodes.forEach(one)}}).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["src","srcset","sizes"]});
   document.querySelectorAll("img").forEach(kitPhWaitMark)}catch(e){}})();
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59.2",title:"kitSpin · vòng chờ nhỏ",where:"chỗ nào cần dấu hiệu chờ ngắn: nút, chip, ô; hộp thoại chờ tranh (≤ 3 s) vẽ cùng một vòng",html:()=>{try{return `<div style="display:flex;gap:14px;align-items:center">${kitSpin()}${kitSpin({s:true})}<span>vòng 28 px · vòng 18 px</span></div>`}catch(e){return ""}}})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59.1",title:"Tranh đang về (đang thỉnh): nền giấy dịu thở nhẹ + dòng chữ ở ô từ 72 px; ô nhỏ chỉ có nền; chân dung đang về hiện bóng người mờ của kit",html:()=>{
  const box=(w,h,mv)=>`<div style="position:relative;width:${w}px;height:${h}px;border-radius:6px;overflow:hidden;border:1px solid var(--line)"${h>=72?` data-kwaitp="${KPHW_TXT()}"`:""}><img data-kph-sample data-kwait="${mv}" alt="" style="width:100%;height:100%;display:block"></div>`;
  return `<div class="kitpg-row" style="align-items:flex-end;gap:8px">${[[44,44],[84,112],[120,160],[162,216],[300,140]].map(([w,h])=>box(w,h,"1")).join("")}${box(120,160,"s")}${box(44,58,"pf")}${box(44,58,"pm")}${box(120,160,"pf")}</div>`}})}catch(e){}
