@@ -357,3 +357,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW mg-visual (SMALL sonnet) of d9800e60 | review/mg-visual(-rv) | MAIN ROOT-74 | session_01Rc5AsLyyrm1QVkoFVnhPYy | RUNNING | 20/11 06:00Z |
 | REVIEW mg-noword-b (SMALL sonnet) of 7e0d6c26 | review/mg-noword-b(-rv) | MAIN ROOT-74 | session_01Rc5AsMoh1gaditXxUMq1Nh | RUNNING | 20/11 06:00Z |
 | mg-fair-ratio (opus; owner ask OD 20/11 ~06:20Z better/equal/worse NPC split per kind group on mg-fair-hands 3fe87277; HOLD until owner OK) | review/mg-fair-ratio; briefs/cag28-mg-fair-ratio.md; reports/mg-fair-ratio.md | C-AG #28 for ROOT-74 | (opening) | RUNNING | 20/11 06:08Z |
+| fig-label (sonnet; OWNER bug OD 20/11 ~06:30Z maid caption role+rank twice → one merged title, whole group) | review/fig-label; briefs/root74-fig-label.md | MAIN ROOT-74 | (opening) | RUNNING | 20/11 06:16Z |
