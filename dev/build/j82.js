@@ -520,8 +520,8 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 .kgr-demo[data-m=hold] .kgr-path{opacity:1;top:auto;bottom:14%;border-top:8px solid var(--k-hair);left:20%;right:20%}
 .kgr-demo[data-m=hold] .kgr-line{opacity:1;top:auto;bottom:14%;left:20%;right:auto;height:8px;background:var(--good,#2d7a52);animation:kgrFill 2.4s linear infinite}
 .kgr-demo[data-m=hold] .kgr-hand{top:28%;animation:kgrHold 2.4s ease-in-out infinite}.kgr-demo[data-m=hold] .kgr-ring{animation:kgrHoldR 2.4s ease-out infinite}
-.kgr-demo[data-m=drag] .kgr-path{opacity:1;transform:rotate(-8deg)}.kgr-demo[data-m=drag] .kgr-hand{animation:kgrDrag 2.4s ease-in-out infinite}
-.kgr-demo[data-m=drag] .kgr-line{top:calc(52% - 2px);left:14%;right:auto;width:0;background:var(--ink);height:4px;transform:rotate(-8deg);transform-origin:left;opacity:1;animation:kgrInk 2.4s ease-in-out infinite}
+.kgr-demo[data-m=drag] .kgr-path{opacity:1;transform:rotate(-8deg);transform-origin:left center}.kgr-demo[data-m=drag] .kgr-hand{animation:kgrDrag 2.4s ease-in-out infinite}
+.kgr-demo[data-m=drag] .kgr-line{top:calc(52% - 1px);left:14%;right:auto;width:0;background:var(--ink);height:4px;transform:rotate(-8deg);transform-origin:left;opacity:1;animation:kgrInk 2.4s ease-in-out infinite}
 .kgr-demo[data-m=tap] .kgr-obj{opacity:.25;top:calc(50% - 11px);left:calc(25% - 11px);animation:kgrGlow 2.4s step-end infinite}
 .kgr-demo[data-m=tap] .kgr-o2{left:calc(50% - 11px);animation-delay:.8s}.kgr-demo[data-m=tap] .kgr-o3{left:calc(75% - 11px);animation-delay:1.6s}
 .kgr-demo[data-m=tap] .kgr-hand{animation:kgrTap3 2.4s ease-in-out infinite}
@@ -532,8 +532,8 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 @keyframes kgrFill{0%,18%{width:0}70%{width:60%}100%{width:60%}}
 @keyframes kgrHold{0%,12%{transform:translate(-48%,8%)}20%,72%{transform:translate(-48%,-6%) scale(.92)}82%,100%{transform:translate(-48%,8%)}}
 @keyframes kgrHoldR{0%,18%{opacity:0;transform:scale(.6)}24%,70%{opacity:1;transform:scale(1.3)}80%,100%{opacity:0;transform:scale(1.8)}}
-@keyframes kgrDrag{0%,8%{left:16%;top:56%}70%{left:84%;top:44%}80%,100%{left:84%;top:44%;opacity:1}}
-@keyframes kgrInk{0%,8%{width:0}70%,100%{width:70%}}
+@keyframes kgrDrag{0%,8%{left:14%;top:52%}70%{left:84%;top:30%}80%,100%{left:84%;top:30%;opacity:1}}
+@keyframes kgrInk{0%,8%{width:0}70%,100%{width:72%}}
 @keyframes kgrGlow{0%{opacity:1}33%{opacity:.25}}
 @keyframes kgrTap3{0%{left:25%}30%{left:25%}36%{left:50%}63%{left:50%}69%{left:75%}96%{left:75%}100%{left:25%}}
 .kgr-st.kgr-still *{animation:none!important}

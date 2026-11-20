@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"03ea2943+","t":"2026-11-20T00:35Z","c":"mg-ready-guide: KIT §13.7 rules screen «Sẵn sàng» + guided round «Hướng dẫn» for every mini-game (owner OD 20/11 ~00:20Z)","b":"c77b6f211052","h":[{"s":"2f328213+","t":"2026-11-19T23:11Z","c":"coop-ptime-reds r1 (review): merge main 7bc73251 (B24 rank palette, colour only); index/sw/assets rebuilt by build_site.sh"},{"s":"66a26121+","t":"2026-11-19T22:49Z","c":"coop-ptime-reds r1 (review): her tap while her due-task tick (ptTickHer) is pending is HELD and sent after its answer (was refused busy = l…"},{"s":"2dd36abf+","t":"2026-11-19T22:36Z","c":"B24 fix: rank text on paintings / night panels uses the RCOL base (one accessor kitRankTone ground), paper keeps derived tone; rebuilt inde…"},{"s":"868c682c+","t":"2026-11-19T17:43Z","c":"runact-sv-fix: j29 hoist textually identical to review/coop-thin-f6-r1 (merges clean)"},{"s":"c8af1135+","t":"2026-11-19T14:36Z","c":"npc-purpose G1 #14: build line"},{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"}]};
+window.CTM_BI={"s":"b32fcd2a+","t":"2026-11-20T00:56Z","c":"mg-ready-guide: hint hooks (rhythm/aim KG82.hint lead, hoa điền KG82.peek), hint reset on close; test fixes; site build","b":"9796b611ac84","h":[{"s":"2f328213+","t":"2026-11-19T23:11Z","c":"coop-ptime-reds r1 (review): merge main 7bc73251 (B24 rank palette, colour only); index/sw/assets rebuilt by build_site.sh"},{"s":"66a26121+","t":"2026-11-19T22:49Z","c":"coop-ptime-reds r1 (review): her tap while her due-task tick (ptTickHer) is pending is HELD and sent after its answer (was refused busy = l…"},{"s":"2dd36abf+","t":"2026-11-19T22:36Z","c":"B24 fix: rank text on paintings / night panels uses the RCOL base (one accessor kitRankTone ground), paper keeps derived tone; rebuilt inde…"},{"s":"868c682c+","t":"2026-11-19T17:43Z","c":"runact-sv-fix: j29 hoist textually identical to review/coop-thin-f6-r1 (merges clean)"},{"s":"c8af1135+","t":"2026-11-19T14:36Z","c":"npc-purpose G1 #14: build line"},{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -28889,8 +28889,8 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 .kgr-demo[data-m=hold] .kgr-path{opacity:1;top:auto;bottom:14%;border-top:8px solid var(--k-hair);left:20%;right:20%}
 .kgr-demo[data-m=hold] .kgr-line{opacity:1;top:auto;bottom:14%;left:20%;right:auto;height:8px;background:var(--good,#2d7a52);animation:kgrFill 2.4s linear infinite}
 .kgr-demo[data-m=hold] .kgr-hand{top:28%;animation:kgrHold 2.4s ease-in-out infinite}.kgr-demo[data-m=hold] .kgr-ring{animation:kgrHoldR 2.4s ease-out infinite}
-.kgr-demo[data-m=drag] .kgr-path{opacity:1;transform:rotate(-8deg)}.kgr-demo[data-m=drag] .kgr-hand{animation:kgrDrag 2.4s ease-in-out infinite}
-.kgr-demo[data-m=drag] .kgr-line{top:calc(52% - 2px);left:14%;right:auto;width:0;background:var(--ink);height:4px;transform:rotate(-8deg);transform-origin:left;opacity:1;animation:kgrInk 2.4s ease-in-out infinite}
+.kgr-demo[data-m=drag] .kgr-path{opacity:1;transform:rotate(-8deg);transform-origin:left center}.kgr-demo[data-m=drag] .kgr-hand{animation:kgrDrag 2.4s ease-in-out infinite}
+.kgr-demo[data-m=drag] .kgr-line{top:calc(52% - 1px);left:14%;right:auto;width:0;background:var(--ink);height:4px;transform:rotate(-8deg);transform-origin:left;opacity:1;animation:kgrInk 2.4s ease-in-out infinite}
 .kgr-demo[data-m=tap] .kgr-obj{opacity:.25;top:calc(50% - 11px);left:calc(25% - 11px);animation:kgrGlow 2.4s step-end infinite}
 .kgr-demo[data-m=tap] .kgr-o2{left:calc(50% - 11px);animation-delay:.8s}.kgr-demo[data-m=tap] .kgr-o3{left:calc(75% - 11px);animation-delay:1.6s}
 .kgr-demo[data-m=tap] .kgr-hand{animation:kgrTap3 2.4s ease-in-out infinite}
@@ -28901,8 +28901,8 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 @keyframes kgrFill{0%,18%{width:0}70%{width:60%}100%{width:60%}}
 @keyframes kgrHold{0%,12%{transform:translate(-48%,8%)}20%,72%{transform:translate(-48%,-6%) scale(.92)}82%,100%{transform:translate(-48%,8%)}}
 @keyframes kgrHoldR{0%,18%{opacity:0;transform:scale(.6)}24%,70%{opacity:1;transform:scale(1.3)}80%,100%{opacity:0;transform:scale(1.8)}}
-@keyframes kgrDrag{0%,8%{left:16%;top:56%}70%{left:84%;top:44%}80%,100%{left:84%;top:44%;opacity:1}}
-@keyframes kgrInk{0%,8%{width:0}70%,100%{width:70%}}
+@keyframes kgrDrag{0%,8%{left:14%;top:52%}70%{left:84%;top:30%}80%,100%{left:84%;top:30%;opacity:1}}
+@keyframes kgrInk{0%,8%{width:0}70%,100%{width:72%}}
 @keyframes kgrGlow{0%{opacity:1}33%{opacity:.25}}
 @keyframes kgrTap3{0%{left:25%}30%{left:25%}36%{left:50%}63%{left:50%}69%{left:75%}96%{left:75%}100%{left:25%}}
 .kgr-st.kgr-still *{animation:none!important}
@@ -81194,7 +81194,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c77b6f211052";window.CTM_BUILD=BUILD;
+const BUILD="9796b611ac84";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
