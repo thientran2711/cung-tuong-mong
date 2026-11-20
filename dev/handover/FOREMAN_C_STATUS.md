@@ -97,4 +97,4 @@ ROOT-58 Lượt 819: PR14 batch 2 (rooms 6–10, 945 cr; BEDH4 bed-height senten
 ROOT-58 OWNER Lượt 820: 'phi tần trẻ, bà già … không có đúng rồi, phải vẽ thôi' → SEAL2b redraws pt (t4 Tần pink, no phoenix, 1 flower, thin silk) + ptl (t5 Phi purple, no phoenix, 1 flower, thin silk) «giận» v3, one try each. Still open: named consorts' everyday robes by rank? (G13 says own colours).
 ROOT-58 ~00:07Z: depth 1, START_CTX ~5 %, rollover at ~26 %. PR14 rolled → PR15 session_01PEhRbv6jPa7WafFCjSxYLP (composite test first). Handover: dev/handover/TAKEOVER_FOREMAN_C_ROOT59.md.
 
-ROOT-59 20/11 ~00:10Z: took over from ROOT-58. depth 2, START_CTX ~5 % (used_tokens read 0; estimate). Told workers SEAL6 SEAL2b SEAL3 SEAL4 MG3 PR15 P2.
+ROOT-59 20/11 ~00:10Z: took over from ROOT-58. depth 2, START_CTX ~5 % (used_tokens read 0; estimate). Told workers SEAL6 SEAL2b SEAL3 SEAL4 MG3 PR15 P2.- (20/11 00:20Z) FROM MAIN ROOT-72: LIVE 72f7c0c5 (owner mgcal dan into BAL, on 2f328213). ROLLBACK 2f328213. Final-merge 72f7c0c5 before LAND READY.
