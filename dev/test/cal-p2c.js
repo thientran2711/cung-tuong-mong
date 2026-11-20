@@ -64,7 +64,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 9 */
   
   const A1={origin:S.origin,st:S.st,mgB:{co:{s:90,w:10,n:9}}},A2={origin:S.origin,st:S.st,mgB:{co:{s:50,w:10,n:9}}};const S0=S;
-  S=A1;const off1=mgIdOff('co',S);S=A2;const off2=mgIdOff('co',S);S=S0;o.coop={off1:Math.round(off1*100)/100,off2:Math.round(off2*100)/100};
+  S=A1;const off1=mgIdOff('co',S),c1=mgIdClass(S,'co');S=A2;const off2=mgIdOff('co',S);S=S0;const tg=BAL.orig.id.tgt[c1];o.coop={off1:Math.round(off1*100)/100,off2:Math.round(off2*100)/100,want1:tg-9,want2:tg-5};
   return o},oldSave);
  r.world=/\"mgB\"/.test((require('fs').readFileSync(path.join(__dirname,'../build/jcoopworld.js'),'utf8').match(/const W_KEYS=\[[^\]]*\]/)||['"mgB"'])[0]);console.log(JSON.stringify(r));
  ok(r.knobs&&r.clash.length===0&&r.roads>=40,'1 BAL.orig.id knobs; BAL.orig.doan never names an art of the identity row ('+r.roads+' rows)',{clash:r.clash});
@@ -78,6 +78,6 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r.play.n===1&&r.play.hasRow&&!r.play.pct&&r.cal.r===r.cal.want&&r.cal.same,'6 a real play (kg82Play): identity row on the result, b saved; Thử tay raw learns nothing',{play:r.play,cal:r.cal});
  ok(r.skip.co===r.skip.want&&Math.abs(r.npc.tr-1.5)<.15&&Math.abs(r.npc.doan+1.5)<.15&&Math.abs(r.npc.bt)<.05,'7 skip = her class level on her board; NPC play shifts by the same class shift (law 1)',{skip:r.skip,npc:r.npc});
  ok(r.old.no&&r.old.has&&r.old.kept&&(!OLD||(r.mainOld&&r.mainOld.no&&r.mainOld.has&&r.mainOld.play)),'8 old save (no S.mgB'+(OLD?', also from the old build':'')+') loads, plays, gets a store; ser → deser keeps it',{old:r.old,mainOld:r.mainOld});
- ok(r.world===false&&r.coop.off1!==r.coop.off2&&near(r.coop.off1,0)&&near(r.coop.off2,4),'9 co-op: S.mgB is personal (not a world key) → each player by her OWN b',{world:r.world,coop:r.coop});
+ ok(r.world===false&&r.coop.off1!==r.coop.off2&&near(r.coop.off1,r.coop.want1)&&near(r.coop.off2,r.coop.want2),'9 co-op: S.mgB is personal (not a world key) → each player by her OWN b',{world:r.world,coop:r.coop});
  ok(errs.length===0,'10 no page errors',errs.slice(0,5));
  await b.close();const n=res.filter(x=>!x).length;console.log(n?`${n} FAIL`:'ALL PASS ('+res.length+')');process.exit(n?1:0)})();
