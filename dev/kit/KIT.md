@@ -646,6 +646,14 @@ The ONE first screen of EVERY mini-game (all KG82_KIND kinds and every caller: s
 - Co-op: the read time is on her own screen only; the shared buổi clock is never paused (the steal game's host hold `BAL.steal.mg.coopMs` still counts while the friend reads).
 - Test: `node dev/test/mg-ready-guide.js` (every kind × every caller, scan table). Kit page sample «§13.7».
 
+### 13.8 HEAD-TO-HEAD SPLIT BOARD «Thách đấu» · kitGameVs (owner OD 20/11 ~01:00Z item 1, K-PM-1, review/kit-gamevs) — `dev/build/jgamevs.js`, knobs `BAL.gameVs` (jbal2)
+ONE shared live board for EVERY person-minigame art (đàn, cờ, hát, múa, thư pháp, họa, thêu, hương … any KG82 / person game that plays against a living NPC or friend): her board + the opponent's live score and clock side by side. Display only: no game logic, no rule numbers (the game owns them; the part only has `BAL.gameVs` = pop / warn / end knobs).
+- `kitGameVs({box, me:{p|face,name}, opp:{p|face,name}, unit:"phần", round, total, oppBoard})` → controller; mounts at the top of `box` (default `kg82Box()`), after `kgReady` (§13.7). Portrait = `kitFaceH` (kit portrait), score and clock = kit chips (`.kchip`), panes use `--k-hair / --k-card / --gold`.
+- API: `setScore(side,n)` (bump) · `setClock(side,secondsLeft|null)` («còn N giây», red under `BAL.gameVs.warn` of `total`) · `setTurn(side|null)` («Đến phiên» + gold ring) · `setRound(text)` · `end({win:"me"|"opp"|"draw",text})` (locks the board, ring green / red) · `vs.me` / `vs.opp` = board slots the game draws into · `destroy()`. `side` = "me" | "opp".
+- Layout: `html.kv1` (Fold portrait) opponent pane above, her pane below; `html.kv2` (iPad / spread) side by side, her LEFT, opponent RIGHT, round state between. Reduced-motion: no bump animation.
+- Words (VANPHONG): «phần» (never điểm / %), «khắc/giây», «Đến phiên», «Nàng thắng / Nàng thua / Hòa nhau».
+- Mount rule: a person minigame calls `kgReady` first, then `kitGameVs`; never a private scoreboard. Kit page sample «§13.8» (fake opponent ticking). Test: `node dev/test/kit-gamevs.js` (API, words, stacked / side-by-side, Fold + iPad + 390x844 + 1510x2000 shots).
+
 ## 14. SCENE PANEL (j79) — identity card, opening story, title screen
 - Compact translucent kit frame (`rgba(255,250,240,.90)` + blur) to one side in landscape (max 440 px / 44vw, vertically centred, right) and in the
   lower part in portrait; the background art stays visible. Fits ONE screen, no scrolling, buttons always visible (tested at the 4 sizes).
