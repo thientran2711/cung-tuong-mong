@@ -282,7 +282,7 @@ function loEvCase(s,p){if(p.lc){const c=loGet(p.lc);return c&&c.e?c:null}
  const i=S.inv.indexOf(e);if(i<0)return null;S.inv.splice(i,1);
  const thief=s.id==="hairpinThief"?(()=>{try{const a=A6("sv",p["a"+(p.g|0)]);return a&&a.n}catch(x){return""}})():(p.c!=null?((typeof servById==="function"&&servById(p.c))||{}).name:"");
  const c=loLoseE(S,e,thief?"srv":"mis");if(!c){S.inv.push(e);return null}if(thief)c.sv=thief;c.ev68=s.id;p.lc=c.id;return c}
-function loEvBack(p,how){try{const c=p&&p.lc?loGet(p.lc):null;if(c&&c.st!=="done"&&c.e)lostReturn(c.e,how||"tra")}catch(e){console.error("lo ev back",e)}}
+function loEvBack(p,how){try{const c=p&&p.lc?loGet(p.lc):null;if(c&&c.st!=="done"&&c.e)lostReturn(Object.assign({},c.e,{lo:c.id}),how||"tra")/* the case's own piece (loLoseE keeps no lo mark on it) */}catch(e){console.error("lo ev back",e)}}
 (function(){try{
  for(const id in LO_EV){const s=E68I[id];if(!s)continue;const pp0=s.pp;s.pp=function(){return loEvOk()?(pp0?pp0.apply(this,arguments):{}):null}}
  const b0=e68Build;e68Build=function(s,p){if(!s||!LO_EV[s.id])return b0.apply(this,arguments);const c=loEvCase(s,p);if(!c)return null;

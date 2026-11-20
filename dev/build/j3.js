@@ -57,7 +57,7 @@ function logChoice(m,c,b0,s0){const n=Math.max(0,Math.min((S.logSeq||0)-s0,S.log
 function heirMonth(){if(S.heir&&S.heir.k.alive)return"";S.heir=null;
   const c=allKids().filter(([k])=>k.alive&&k.sex==="m"&&k.age>=6);if(!c.length||!roll(15))return"";
   const w=c.map(([k,v])=>5+momRank(v)*10+k.tal/2+k.fond/2+(v?0:Math.max(0,S.th)/2));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}
-  const [k,v]=c[i];setHeir(k,v);fx("gold");return v?`Hoàng thượng lập ${k.name}, con của ${v.name}, làm Thái tử. `:`<b class="g">Hoàng thượng lập ${k.name}, con của ngươi, làm Thái tử.</b> Danh +10. `}
+  const [k,v]=c[i];setHeir(k,v);fx("gold");return v?`Hoàng thượng lập ${k.name}, con của ${v.name}, làm Thái tử. `:`<b class="g">Hoàng thượng lập ${k.name}, con của ngươi, làm Thái tử.</b> Danh ${balSg(BAL.kid.heirDanh)}. `}
 
 /* promotion */
 /* Emperor mood, festivals, dilemmas */
