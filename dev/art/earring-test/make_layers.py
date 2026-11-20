@@ -7,6 +7,7 @@ Every layer = pixels of the SAME figure (so it is invisible on its own); it only
   face      : face/ears/neck skin                      -> hides far earrings
   fronthair : hair strands lying over the face (face mask closed by 44 px), alpha by darkness (thin strands half-see-through) -> over near earrings
   hairtop   : hair above the earlobe line               -> hides hairpin shafts (pin pushed INTO the hair)
+  hairneck  : hair beside the neck/shoulders (lobe+10 .. lobe+320), alpha by darkness -> over the necklace
   hands     : hands (SAM) + sleeve-cuff polygons (SAM could not isolate the cuffs: it returned the whole robe)
 Output: layers/<id>_<layer>.webp (cropped) + layers/layers.json {id: {layer: [file, x, y]}}.
 """
@@ -49,6 +50,8 @@ for fid in ['c09', 'c11', 'c22']:
     inside = np.array(closed).astype(float) / 255
     dark = np.clip((205 - L) / 70, 0, 1)
     save(fig, H * inside * dark, fid, 'fronthair', out)
+    band = np.zeros_like(H); band[LOBE_Y[fid] + 10:LOBE_Y[fid] + 320] = 1
+    save(fig, H * band * dark, fid, 'hairneck', out)   # hair falling beside the neck/shoulders -> over the necklace
     top = np.zeros_like(H); top[:LOBE_Y[fid] - 30] = 1
     save(fig, H * top, fid, 'hairtop', out)
     hands = m(fid + '_hands')
