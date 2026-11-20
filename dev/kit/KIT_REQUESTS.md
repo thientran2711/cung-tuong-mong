@@ -103,6 +103,11 @@ KIT FIRST: the worker draws nothing. Data is ready in jshelf.js `shelfView(p)` �
 |---|---|---|---|---|---|
 | 19/11 | E18b kyngo-daily | **kaSent class precedence** (j63.js:18): today a value's MEANING (kcls: KRED words) wins over its explicit kit class `<span class="g">`; an item NAME holding a bad-sounding word (e.g. «Son phần giáng», key lxson2) under «thành:» is shown under TỐN / MẤT. Ask: an explicit class g/r set by the writer wins over kcls (or kcls ignores text inside `<b>` item names). Family: every option line that prints an item name (shops, gifts, lost pieces, Nội vụ phủ). | jky.js specW worked around (names no piece on the option line) | MAIN kit keeper | OPEN |
 
+## 20/11 mg-play2 (MAIN ROOT-74 owner-bug lane) — cue-kit extensions for kit-keeper sign-off
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | mg-play2 | **kg82FxLane** (lit path) + **kg82FxBad** (danger ring ✕ + hit burst/shake) + `BAL.mgFx.{lane,laneEdge,laneDim,laneMin,bad,badMs,badShake}` + §13.7 demo motion «dodge» — added INSIDE the shared BAL.mgFx cue kit (one function each, no per-kind look), registered KIT §13.7.1 in the same branch | den tssteer, duho tspluck (any «follow the path» / «avoid» kind) | kit keeper (sign-off) | built on review/mg-play2, awaiting kit-keeper sign-off |
+
 ## 20/11 mg-score-same (C-AG #28 owner bug) — the mark in hand + the time cue, visible in play
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|

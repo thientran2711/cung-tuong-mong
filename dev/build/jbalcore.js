@@ -37,18 +37,25 @@ function virO(p,k){const l=((p&&p.vir)||{})[k]||0;return BAL.art.odds[Math.min(l
 function origRow(k){return (BAL.start&&BAL.start[k])||BAL.start.quan}
 function origRoll(x){return Array.isArray(x)?x[0]+R(x[1]-x[0]+1):x}
 function origPickNpc(){const W=BAL.start.npcW;const ks=Object.keys(W).filter(k=>W[k]>0);let r=Math.random()*ks.reduce((a,k)=>a+W[k],0);for(const k of ks){if((r-=W[k])<0)return k}return "quan"}
-/* npc: {rank, malice} — her own start passes nothing */
+/* start arts / tứ đức: ONE table BAL.orig.art (jbal.js; identity = origin × story road, in bậc) — j1 originArts reads the row; here a bậc becomes
+   the floor points of that bậc on the one ladder (BAL.art.tier), so she starts AT that bậc with no progress */
+function origArtRow(k,road){return typeof originArts==="function"?originArts(k,road):{}}
+function origArtPts(l){const T=BAL.art.tier;return T[Math.max(0,Math.min(T.length-1,l|0))]}
+/* her start once STORY init has rolled her road (j2 start): every art / tứ đức back to 0, then the row of her identity */
+function origArtSet(p,k,road){const R0=origArtRow(k,road);for(const a of ARTS){p.arts[a.k]=0;p.artp[a.k]=0}for(const v of (typeof VIR!=="undefined"?VIR:[])){p.vir[v.k]=0;p.virp[v.k]=0}
+ for(const a in R0){if(ARTS.some(x=>x.k===a))crsSet(p.arts,p.artp,a,origArtPts(R0[a]));else crsSet(p.vir,p.virp,a,origArtPts(R0[a]))}return p}
+/* npc: {rank, malice, road?} — her own start passes nothing */
 function origSet(p,k,npc){const o=origRow(k);p.org=k;p.arts=p.arts||{};p.artp=p.artp||{};p.vir=p.vir||{};p.virp=p.virp||{};
  for(const a of ARTS){p.arts[a.k]=0;p.artp[a.k]=0}for(const v of (typeof VIR!=="undefined"?VIR:[])){p.vir[v.k]=0;p.virp[v.k]=0}
  p.sac=origRoll(o.sac);p.tai=origRoll(o.tai);p.tamco=origRoll(o.tamco);p.duc=origRoll(o.duc);p.suc=origRoll(o.suc);
- const ap0=Object.assign({},o.art||{});
+ const ap0={},R0=origArtRow(k,npc&&npc.road);for(const a in R0)if(ARTS.some(x=>x.k===a))ap0[a]=origArtPts(R0[a]);
  if(npc){const N=BAL.start.npc,rk=npc.rank|0,mal=npc.malice==null?40:npc.malice;
   p.tamco=cl(p.tamco+Math.round((mal-40)/N.mal),0,100);p.duc=cl(p.duc+Math.round((40-mal)/2)+R(11)-5+N.duc,0,100);
   p.danh=origRoll(o.danh)+rk*N.danh;p.bac=origRoll(o.bac)+rk*N.bac;p.th=origRoll(o.th)+R(20)-5;p.hh=origRoll(o.hh)+R(20)-5;
   const best=Object.keys(ap0).sort((a,b)=>ap0[b]-ap0[a]).slice(0,2);if(!best.length)best.push("cam");for(const b of best)ap0[b]=(ap0[b]||0)+rk*N.art}
  else{p.danh=origRoll(o.danh);p.bac=origRoll(o.bac);p.sung=origRoll(o.sung);p.th=origRoll(o.th);p.hh=origRoll(o.hh)}
  for(const a in ap0)if(p.arts[a]!=null||ARTS.some(x=>x.k===a))crsSet(p.arts,p.artp,a,ap0[a]);
- for(const v in (o.vir||{}))crsSet(p.vir,p.virp,v,o.vir[v]);
+ for(const v in R0)if(!ARTS.some(x=>x.k===v))crsSet(p.vir,p.virp,v,origArtPts(R0[v]));
  p.crsV=1;return p}
 /* ---- old saves: progress (0..bậc+1 of the old 'bậc+2' step) onto the new bậc width, once ---- */
 function crsMigrate(p){if(!p||p.crsV)return;const f=(lv,pt)=>{if(!lv||!pt)return;for(const k in lv){const l=Math.min(lv[k]|0,5);lv[k]=l;const o=+pt[k]||0;pt[k]=l>=5?0:Math.min(artNeed(l)-.1,Math.round(o/(l+2)*artNeed(l)*10)/10)}};
