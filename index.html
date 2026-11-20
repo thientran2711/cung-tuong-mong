@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e3ed68b9+","t":"2026-11-20T10:33Z","c":"balance-core-r3: npc-purpose row j85 npcStudy fingerprint follows the one-core move (40 -> BAL.start.npc.study; still LIVE-OFF, no purpose …","b":"4e582fc0a6c0","h":[{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"},{"s":"39228682+","t":"2026-11-20T10:45Z","c":"Phi tần khác cũng rủ nàng lập phe, vào phe của nàng (luật hai chiều)"},{"s":"d39e3d2c+","t":"2026-11-20T12:07Z","c":"Nút «Mua» ở tiệm chơi một mình chạy lại; lời dẫn từng xuất thân chương 1–3"}]};
+window.CTM_BI={"s":"6eaa5f18","t":"2026-11-20T17:23Z","c":"instudy.js: attach study counts to HH-STOP lives at the next start","b":"525efd64ac79","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -33431,8 +33431,8 @@ BAL.start={
  cnv: {sac:[45,70],tai:[10,25],tamco:[25,35],duc:30,danh:2,sung:0,bac:8,suc:85,th:0,hh:0},
  quan:{sac:[45,75],tai:[25,40],tamco:[15,30],duc:40,danh:12,sung:8,bac:90,suc:80,th:0,hh:0},
  npcW:{quan:40,tt:8,dtq:8,muoi:10,cn:6,ch:3,thd:10,td:3,nc:1,bd:1,cnv:0},
- npc:{danh:8,bac:20,art:4,mal:6,duc:10,study:60,focus:4}  /* per NPC rank: Danh +8, Bạc +20, art points +4 to her two best courses; malice moves Tâm cơ ±(malice−40)/mal and Đức ∓(malice−40)/2, duc = Đức of her years of palace conduct (keeps NPC Đức ≈ the old mean 48);
-   study = % a month she takes a lesson (j85 npcStudy, beside j8 npcMonthly), focus = weight of her best art in that pick */
+ npc:{danh:8,bac:20,art:4,mal:6,duc:10,study:60,focus:4,mal0:40,malDuc:2,ducJ:5,favJ:[20,5]}  /* per NPC rank: Danh +8, Bạc +20, art points +4 to her two best courses; malice moves Tâm cơ ±(malice−40)/mal and Đức ∓(malice−40)/2, duc = Đức of her years of palace conduct (keeps NPC Đức ≈ the old mean 48);
+   study = % a month she takes a lesson (j85 npcStudy, beside j8 npcMonthly), focus = weight of her best art in that pick; mal0 = the neutral malice (no NPC given one), malDuc = its Đức divisor, ducJ = Đức jitter ±, favJ = Thái hậu / Hoàng hậu favour jitter R(favJ[0])−favJ[1] */
 };
 /* ONE ladder for every art (ARTS) and every Tứ đức course (VIR): points 0–100, bậc 0–5 by floor (tier), named (nm); bậc 5 Tông sư = 100 points = a lifetime's mastery.
    gain: points per lesson point (the lesson game gives 1–3; teachers more) at each bậc — the higher, the slower (bot table in the report).
@@ -33470,7 +33470,7 @@ BAL.steal.m={feign:{b:30,w:{sung:.35},art:.75,win:{sung:1},lose:{sung:-3,duc:-1}
     road:{b:4,w:{sac:.35,sung:.25},art:2,win:{sung:8,danh:3},lose:{sung:-8,danh:-2},rel:18,hh:2,ghen:20}};
 BAL.steal.art={fav:1,dis:.75,neu:0};
 BAL.steal.keep={base:35,sung:.3,sac:.1,art:1,rung:1,gain:2,oan:1.5,npcP:.85};/* names agreed with night-final (jnf nfOdds "keep"): odds = base + Sủng×sung + Sắc×sac + best art×art + mood; gain = Sủng when nobody took her night; oan = × of the robbed hit; npcP = chance a flipped NPC presses it, costs nothing (night-final value) */
-BAL.steal.ea={mat:5,r0:5,rMat:4,disc:35};
+BAL.steal.ea={mat:5,r0:5,rMat:4,disc:35,w:2 /* draw weight of a month art his trait prizes (Trọng tài: Cầm/Kỳ/Thi/Họa · Mê sắc: Vũ); others 1 */};
 /* STEAL MINI-GAME (owner 16/11 ~22:20Z, PARKING_LOT #3b; jsmg.js): before a Tranh sủng / Chặn ngự giá try the one who tries may play ONE short tài nghệ
    game (an existing one, KIT tài nghệ frame). raw ≥ win → THAT try's odds go up `rung` rung(s) on the word ladder (BAL.odds.cut, keeping the place inside
    the band; capped at Nắm chắc / BAL.odds.hi); lose or skip → unchanged (no extra loss). art = the game per act (feign: Hát, road: Múa — "múa một khúc
@@ -74090,9 +74090,9 @@ function origSet(p,k,npc){const o=origRow(k);p.org=k;p.arts=p.arts||{};p.artp=p.
  for(const a of ARTS){p.arts[a.k]=0;p.artp[a.k]=0}for(const v of (typeof VIR!=="undefined"?VIR:[])){p.vir[v.k]=0;p.virp[v.k]=0}
  p.sac=origRoll(o.sac);p.tai=origRoll(o.tai);p.tamco=origRoll(o.tamco);p.duc=origRoll(o.duc);p.suc=origRoll(o.suc);
  const ap0={},R0=origArtRow(k,npc&&npc.road);for(const a in R0)if(ARTS.some(x=>x.k===a))ap0[a]=origArtPts(R0[a]);
- if(npc){const N=BAL.start.npc,rk=npc.rank|0,mal=npc.malice==null?40:npc.malice;
-  p.tamco=cl(p.tamco+Math.round((mal-40)/N.mal),0,100);p.duc=cl(p.duc+Math.round((40-mal)/2)+R(11)-5+N.duc,0,100);
-  p.danh=origRoll(o.danh)+rk*N.danh;p.bac=origRoll(o.bac)+rk*N.bac;p.th=origRoll(o.th)+R(20)-5;p.hh=origRoll(o.hh)+R(20)-5;
+ if(npc){const N=BAL.start.npc,rk=npc.rank|0,mal=npc.malice==null?N.mal0:npc.malice;
+  p.tamco=cl(p.tamco+Math.round((mal-N.mal0)/N.mal),0,100);p.duc=cl(p.duc+Math.round((N.mal0-mal)/N.malDuc)+R(2*N.ducJ+1)-N.ducJ+N.duc,0,100);
+  p.danh=origRoll(o.danh)+rk*N.danh;p.bac=origRoll(o.bac)+rk*N.bac;p.th=origRoll(o.th)+R(N.favJ[0])-N.favJ[1];p.hh=origRoll(o.hh)+R(N.favJ[0])-N.favJ[1];
   const best=Object.keys(ap0).sort((a,b)=>ap0[b]-ap0[a]).slice(0,2);if(!best.length)best.push("cam");for(const b of best)ap0[b]=(ap0[b]||0)+rk*N.art}
  else{p.danh=origRoll(o.danh);p.bac=origRoll(o.bac);p.sung=origRoll(o.sung);p.th=origRoll(o.th);p.hh=origRoll(o.hh)}
  for(const a in ap0)if(p.arts[a]!=null||ARTS.some(x=>x.k===a))crsSet(p.arts,p.artp,a,ap0[a]);
@@ -74116,7 +74116,7 @@ function growPeak(p){if(!p)return;const pk=p.pk=p.pk||{};for(const k of BAL.grow
 (function(){const a0=ap;ap=function(p,o){try{growPeak(p);if(p&&p!==S&&!window.__noGrow)o=growScale(p,o)}catch(e){}return a0.apply(this,arguments.length>2?[p,o].concat([].slice.call(arguments,2)):[p,o])}})();
 /* ---- the Emperor's month art (owner 23:05Z) ---- */
 function empArtMonth(){if(!S||S.dead||!S.emp)return"";const E=S.emp;if(E.ea&&E.ea.m===S.turn)return"";
- const W=ARTS.map(a=>{let w=1;try{if((["cam","ky","thi","hoa"].includes(a.k)&&has("trongtai"))||(a.k==="vu"&&has("mesac")))w=2}catch(e){}return [a.k,w]});
+ const W=ARTS.map(a=>{let w=1;try{if((["cam","ky","thi","hoa"].includes(a.k)&&has("trongtai"))||(a.k==="vu"&&has("mesac")))w=BAL.steal.ea.w}catch(e){}return [a.k,w]});
  let r=Math.random()*W.reduce((s,x)=>s+x[1],0),f=W[0][0];for(const [k,w] of W){if((r-=w)<0){f=k;break}}
  const rest=ARTS.map(a=>a.k).filter(k=>k!==f);E.ea={m:S.turn,f,d:rest[R(rest.length)]};return""}
 function empArt(){const E=S&&S.emp;return E&&E.ea&&E.ea.m===S.turn?E.ea:null}
@@ -74139,7 +74139,7 @@ function stealArtB(p,mode){const M=mode==="keep"?BAL.steal.keep:(BAL.steal.m[mod
 /* the odds a person SEES (owner note r1 #6): without the month-art part when she does not know his month art (eaKnows); the roll uses the true odds */
 function stealArtN(p,mode){const M=mode==="keep"?BAL.steal.keep:(BAL.steal.m[mode]||{}),b=stBestArt(p);if(!b)return 0;return Math.round(BAL.art.odds[b.l]*BAL.steal.art.neu*(M.art==null?1:M.art))}
 function stealShown(a,mode){const t=mode==="keep"?oKeep(a):oSteal(a,mode==="road"?"road":"feign");if(!empArt()||eaKnows(a))return t;
- const m=mode==="keep"?"keep":mode==="road"?"road":"feign";return Math.max(5,Math.min(95,t-stealArtB(a,m)+stealArtN(a,m)))}
+ const m=mode==="keep"?"keep":mode==="road"?"road":"feign";return Math.max(BAL.odds.lo,Math.min(BAL.odds.hi,t-stealArtB(a,m)+stealArtN(a,m)))}
 function stealBase(a,mode){const M=BAL.steal.m[mode];let o=M.b;for(const k in M.w){const v=k==="sac"?effSac(a):(a[k]||0);o+=v*M.w[k]}return o+stealArtB(a,mode)}
 function oKeep(p){const K=BAL.steal.keep;return odA(p,K.base+(p.sung||0)*K.sung+effSac(p)*K.sac+stealArtB(p,"keep")+stealFit(p)+mm())}
 /* a failed Tranh sủng / Chặn ngự giá: the loss of that choice (BAL.steal.m[mode].lose); returns the line */
@@ -84954,7 +84954,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4e582fc0a6c0";window.CTM_BUILD=BUILD;
+const BUILD="525efd64ac79";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
