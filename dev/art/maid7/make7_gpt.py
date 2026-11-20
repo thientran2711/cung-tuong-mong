@@ -176,8 +176,44 @@ def nhat3():
     return out
 
 
+# owner L1475 (round-2 collar for thân cận too) + L1476 (v2 fabric not soft like round 1)
+TC_R2_COLLAR = ('a sleeveless embroidered over-vest with a TALL upright stand (mandarin) collar that wraps closely around the neck '
+                'and is fastened at the throat with ONE small knot button; below the button the two straight front edges of the '
+                'vest run down side by side, CLOSE together, leaving only a NARROW straight opening down to the sash (never a '
+                'wide gap, never a wide V), and inside that narrow opening the neat layered crossed collars of the inner robe in '
+                'her own colour (with a thin light inner edge) show as a slim V just under the button, the inner robe\'s crossed '
+                'collar also rising neatly inside the stand collar at the neck, with a band of gold-edged trim down the front, '
+                'worn over a crossed-collar inner robe')
+TC_SOFT_SHOULDER = (', the vest only slightly crisp and neat right AT the shoulder line (not clinging to or hugging the shoulder), '
+                    'while the rest of the vest, its two front panels and the sleeves stay the same soft, thin, light, flowing silk '
+                    'as the rest of the outfit, draping, swaying and trailing softly (thướt tha), never stiff, padded, flat or board-like')
+
+
+def thancan3():
+    base = D + 'thancan_gpt_v2.txt'
+    t = open(base, encoding='utf-8').read()
+    t = swap(t, TC_COLLAR_NEW, TC_R2_COLLAR + TC_SOFT_SHOULDER)
+    t = swap(t, 'the long sleeveless over-vest with its two front', 'the sleeveless over-vest with its two front')
+    out = D + 'thancan_gpt_v3.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [('a LONG sleeveless embroidered over-vest with a straight upright standing collar', 'owner L1475 round-2 collar; L1476 "LONG" made it a stiff coat'),
+                     ('the vest closed edge to edge all the way from the collar down to the waist', 'owner L1475: round-2 collar'),
+                     ('with NO knot button at the throat', 'owner L1475: round-2 collar has the knot button'),
+                     ('NO gap', 'owner L1475'),
+                     ('NO V-opening and NO slit below the collar', 'owner L1475: round-2 slim V'),
+                     ('so it fully covers the inner robe at the chest', 'owner L1475'),
+                     ("only a thin edge of the inner robe's own collar shows just above and inside the vest's standing collar at the neck", 'owner L1475: now the slim V of her colour'),
+                     ('the over-vest cut from a firmer', 'owner L1476: stiff fabric -> only the shoulder line crisp'),
+                     ('lightly stiffened brocade with crisp', 'owner L1476'),
+                     ('slightly structured shoulders that keep a clean straight shoulder line and sit a little away from her shoulders', 'owner L1476'),
+                     ('never clinging to or hugging the shoulder', 'owner L1476: -> not clinging to or hugging the shoulder'),
+                     ('never padded or boxy', 'owner L1476: -> never stiff, padded, flat or board-like'),
+                     ('the long sleeveless over-vest with its two front panels', 'owner L1476: no LONG coat-like vest (round-1 words)')])
+    return out
+
+
 if __name__ == '__main__':
-    jobs = sys.argv[1:] or ['nhat', 'chuongsu', 'thancan', 'mama51', 'mama65', 'tamdang', 'nhat3']
+    jobs = sys.argv[1:] or ['nhat', 'chuongsu', 'thancan', 'mama51', 'mama65', 'tamdang', 'nhat3', 'thancan3']
     for j in jobs:
         p = globals()[j]()
         print(p, len(open(p, encoding='utf-8').read()))

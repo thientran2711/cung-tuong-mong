@@ -83,3 +83,18 @@ Own Counter word diff (LOST words, base − new): nhat v2: none. chuongsu v2: "o
 - v3 = nhat_gpt_v2 with ONLY the collar sentence swapped (v2's closed collar → the round-2 description). Vest shoulders, colours and caption kept.
 - keep_check sidecar PASS (7 allowed = the v2 closed-collar phrases); --all 147 PASS; check_store PASS. Word diff LOST = only the closed-collar words (no×4, closed, edge, way, V-opening, slit, covers, chest×2, none, shows…).
 - thancan_gpt_v2 collar: it uses the nhất **v2** closed collar sentence (no button, closed edge to edge, covers the inner robe) + "only a thin edge of the inner robe's own collar shows just above and inside the vest's standing collar". NOT changed (foreman: only on your say).
+
+## NEW JOBS owner L1475 + L1476 (via Foreman C 21:41–21:42Z) → gpt/thancan_gpt_v3.txt (9319 c), delivered with nhat_gpt_v3
+L1475: the round-2 collar goes on thân cận too. L1476: owner's ChatGPT test of thancan_v2 (dev/handover/review-sheets/maid7/owner_L1476/thancan_v2_owner_test.webp) — the cloth is not soft and flowing like round 1.
+WHY v2 came out stiff (English; looked at the owner's picture: the vest is a flat, board-like LONG closed coat with straight rigid panels, vs round-1's soft gauzy vest and fluttering tà):
+1. My job-4 shoulder words "cut from a firmer, lightly stiffened brocade with crisp, slightly structured shoulders … sit a little away from her shoulders" — ChatGPT applies "stiffened brocade" to the WHOLE vest (one garment), not just the shoulder → the vest goes flat and board-like.
+2. "a LONG sleeveless … over-vest" (+ "the long sleeveless over-vest" in COLOUR PLACEMENT) — round 1 never said LONG; together with (1) it reads as a long coat → straight heavy panels to the knee.
+3. "closed edge to edge all the way from the collar down to the waist, NO gap, NO V-opening, fully covers" — a sealed, smooth front surface; round 1 had a soft V of inner layers, which breaks up the surface and looks layered and light.
+4. The COLOUR PLACEMENT ties the two front panels into the vest ("the vest with its two front panels … blue") → ChatGPT drew one continuous stiff coat instead of separate soft tà.
+(The round-1 fabric sentences — "thin, light, flowing silk and gauze … thướt tha", "real weight … never stiff, flat or board-like" — were still in v2 unchanged; they were outvoted by 1–3.)
+v3 = thancan_gpt_v2 with ONLY the vest sentence + one word changed:
+- collar → the round-2 collar (same words as nhat_gpt_v3), with the inner layers "in her own colour" — her deep rose fits naturally (the round-2 picture shows exactly a rose slim V), so the rose collar edge is kept that way.
+- shoulders → "the vest only slightly crisp and neat right AT the shoulder line (not clinging to or hugging the shoulder), while the rest of the vest, its two front panels and the sleeves stay the same soft, thin, light, flowing silk as the rest of the outfit, draping, swaying and trailing softly (thướt tha), never stiff, padded, flat or board-like".
+- "LONG" removed (vest sentence + COLOUR PLACEMENT "the long sleeveless over-vest" → "the sleeveless over-vest").
+keep_check PASS (12 allowed, all the v2 collar/shoulder/LONG phrases); --all 148 PASS; check_store --scope mama --age a36 PASS. Word diff vs round-1 test_mama: only ma×4, senior, woman, staff (who), costume, closed (old knot-collar "closed by") — all round-1 fabric words present.
+NOTE (not changed): nhat_gpt_v3 still carries the job-4 "firmer, lightly stiffened brocade … structured shoulders" sentence; if ChatGPT stiffens nhất the same way, the same soft-shoulder sentence can be swapped in there.
