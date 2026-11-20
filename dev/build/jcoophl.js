@@ -111,6 +111,14 @@ if(typeof figPick==="function"){const p0=figPick;figPick=function(who){try{if(CW
 if(typeof tinOf==="function"){const t0=tinOf;tinOf=function(s){try{if(CW.on&&!host()&&!lvl3()&&s&&typeof s==="object"&&s.tin==null&&!s.coop&&!mine(s)){
    const v=t0.call(this,s);delete s.tin;HL.stat.gTin=(HL.stat.gTin||0)+1;return v}}catch(e){}
   const a=s&&s.tin;const r=t0.apply(this,arguments);try{if(CW.on&&host()&&s&&a==null&&s.tin!=null)soon("tin")}catch(e){}return r};window.tinOf=tinOf}
+/* the Empress's regard (j24 hhBind): a consort object carrying an old plain "hh" number is migrated ONCE when consorts() first binds it
+   (blended into aff(Empress, her) by affAdd, whose side effect writes a feeling cause on the Empress: "được X đối đãi tử tế"). Each seat
+   binds each object at its own moment (a rejoin rebuilds every object: the guest re-ran it on her seat only, e2e trace: normAll ->
+   staffInit -> consorts -> hhBind -> affAdd -> emoSet on the Empress, R#1.emoH one entry ahead of the host's and of the room's C).
+   At level < 3 that world write is the HOST's: on her seat the old number is dropped unblended (the host's blend reaches her as ops) */
+if(typeof hhBind==="function"){const b0=hhBind;hhBind=function(o){try{if(o&&typeof o==="object"&&CW.on&&!lvl3()){const d=Object.getOwnPropertyDescriptor(o,"hh");
+   if(d&&!d.get&&typeof d.value==="number"&&d.value!==0){if(!host()){delete o.hh;HL.stat.gHh=(HL.stat.gHh||0)+1}else{const r=b0.apply(this,arguments);soon("hh");return r}}}}catch(e){}
+  return b0.apply(this,arguments)};window.hhBind=hhBind}
 /* host week end: every world person without a face gets one before the end goes out (so the merged C carries it) */
 function worldPeople(){const L=[];try{if(S.thO&&!S.thDead)L.push(S.thO);for(const v of rivals||[]){if(!v||v.coop)continue;L.push(v);if(v.maid)L.push(v.maid);
   for(const s of v.staff||[])if(s&&!s.coop)L.push(s);for(const k of v.kids||[])if(k)L.push(k)}

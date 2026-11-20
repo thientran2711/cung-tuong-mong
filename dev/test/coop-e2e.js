@@ -20,7 +20,7 @@ async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0]
    window.WebSocket.prototype=W0.prototype;Object.assign(window.WebSocket,{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3})});
   if(process.env.COOP_EMOTRACE)await ctx.addInitScript(()=>{/* debug: who writes a world person's feeling cause / name on this seat (stack) */
     const t=setInterval(()=>{if(window.__ctmBuilt!==1||typeof emoSet!=='function')return;clearInterval(t);window.__emoTr=[];
-     const W=(n,f)=>function(p){try{if(window.COOPW&&COOPW.on&&p&&typeof p==='object'&&p!==S){window.__emoTr.push({f:n,who:p.name,wk:COOP.state.week,fc:COOPW.inFC||0,a:[].slice.call(arguments,1,4).map(x=>typeof x==='object'?'obj':String(x).slice(0,60)),st:(new Error().stack||'').split('\n').slice(2,9).map(x=>x.trim().slice(0,90))});if(window.__emoTr.length>60)window.__emoTr.shift()}}catch(e){}return f.apply(this,arguments)};
+     Error.stackTraceLimit=40;const W=(n,f)=>function(p){try{if(window.COOPW&&COOPW.on&&p&&typeof p==='object'&&p!==S){window.__emoTr.push({f:n,who:p.name,wk:COOP.state.week,fc:COOPW.inFC||0,a:[].slice.call(arguments,1,4).map(x=>typeof x==='object'?'obj':String(x).slice(0,60)),st:(new Error().stack||'').split('\n').slice(2,30).map(x=>x.trim().slice(0,90))});if(window.__emoTr.length>60)window.__emoTr.shift()}}catch(e){}return f.apply(this,arguments)};
      emoSet=W('emoSet',emoSet);window.emoSet=emoSet},200)});
   await ctx.addInitScript(()=>{/* merge-train-4: the card-flip scene waits for its kit end button (KIT 81); hide it like main's tests do */document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='.kcf,#kroul{display:none!important}';document.head.appendChild(s)})});await ctx.addInitScript(u=>{window.COOP_URL=u;
     /* one view of the co-op hooks, whatever the client module names them */
@@ -140,7 +140,8 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
    const DERIVED=/(^|\.)__|^S\.wx\./;
    /* lazy values a screen stores on its first READ (jtrong trongOf, jnet netOf: drawn from a fixed hash of the person, the same on both seats):
       one seat that drew a person's card holds them, the other not yet; both seats read every world person first, so a difference left is real */
-   if(tag!=='start'){const wc=o=>o.p.evaluate(()=>{try{for(const v of rivals||[]){if(!v||v.coop)continue;for(const p of [v,...(v.staff||[]).filter(x=>x&&!x.coop),...(v.kids||[])]){try{if(typeof trongOf==='function')trongOf(p)}catch(e){}try{if(typeof netOf==='function')netOf(p)}catch(e){}}}}catch(e){}
+   if(tag!=='start'){const wc=o=>o.p.evaluate(()=>{try{for(const v of rivals||[]){if(!v||v.coop)continue;for(const p of [v,...(v.staff||[]).filter(x=>x&&!x.coop),...(v.kids||[])]){try{if(typeof trongOf==='function')trongOf(p)}catch(e){}try{if(typeof netOf==='function')netOf(p)}catch(e){}}}
+      for(const p of [S.thO,...((S.thO&&S.thO.staff)||[]),...(S.men||[])]){if(!p)continue;try{if(typeof trongOf==='function')trongOf(p)}catch(e){}try{if(typeof netOf==='function')netOf(p)}catch(e){}}}catch(e){}
       const X=COOPW.X,J=X.J;const d=ser();const sS=d.S;const pid=((COOPW.base&&COOPW.base.P&&COOPW.base.P[COOP.state.you])||{}).pid;
       const W={};for(const k of X.W_KEYS)if(k in sS){const v=J(sS[k]);if(k==='cm'&&v)for(const f of X.CM_P)delete v[f];if(k==='men'&&Array.isArray(v))for(const x of v)if(x)for(const f of X.MEN_P)delete x[f];W[k]=v}
       if(W.emp)delete W.emp.known;delete W.tn;
@@ -149,7 +150,10 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
       fl(W,'S');R.forEach(r=>fl(r,'R#'+r.id));return out});
     const t0=Date.now();let dif=[];while(Date.now()-t0<8000){const wa=await wc(A),wb=await wc(B);dif=[...new Set(Object.keys(wa).concat(Object.keys(wb)))].filter(k=>!DERIVED.test(k)&&JSON.stringify(wa[k])!==JSON.stringify(wb[k])).map(k=>k+' A='+JSON.stringify(wa[k])+' B='+JSON.stringify(wb[k]));if(!dif.length)break;await sleep(500)}
     if(process.env.COOP_WDIFF)fs.appendFileSync(OUT+'/wdiff.txt',tag+' '+dif.length+'\n'+dif.slice(0,80).join('\n')+'\n');
-    if(process.env.COOP_EMOTRACE&&dif.length)for(const o of [A,B])fs.appendFileSync(OUT+'/wdiff.txt','TRACE '+o.name+' '+JSON.stringify(await o.p.evaluate(()=>(window.__emoTr||[]).splice(0))).slice(0,6000)+'\n');
+    if(process.env.COOP_EMOTRACE&&dif.length){const ids=[...new Set(dif.map(x=>(x.match(/^R#(\d+)\.(emoH|emo|mk)/)||[])[1]).filter(Boolean))].slice(0,3).map(Number);
+     for(const o of [A,B])fs.appendFileSync(OUT+'/wdiff.txt','EMOH '+o.name+' '+JSON.stringify(await o.p.evaluate(ids=>ids.map(id=>{const v=rivals.find(x=>x.id===id);const b=COOPW.base&&COOPW.base.W&&(COOPW.base.W.R||[]).find(x=>x.id===id);
+       const f=h=>(h||[]).map(e=>e.w+':'+e.k+':'+String(e.why).slice(0,40));return{id,name:v&&v.name,live:f(v&&v.emoH),base:f(b&&b.emoH),week:COOP.state.week,hl:COOPW.hl&&COOPW.hl.stat,hlog:COOPW.hl&&COOPW.hl.log.slice(-8)}}),ids))+'\n')}
+    if(process.env.COOP_EMOTRACE&&dif.length)for(const o of [A,B])fs.appendFileSync(OUT+'/wdiff.txt','TRACE '+o.name+' '+JSON.stringify(await o.p.evaluate(()=>(window.__emoTr||[]).splice(0))).slice(0,60000)+'\n');
     /* another family, not a host-only write (follow-up ticket in reports/coop-host-lag.md): the NPC feeling memory (jmoodknow mkSync) is
        re-read on EACH seat (both write mk[].s / emo from __mkL); printed, not gated here */
     const FEEL=/\.(mk\.\d+|emo)(\.|$)/;const feel=dif.filter(s=>FEEL.test(s.split(' ')[0]));dif=dif.filter(s=>!FEEL.test(s.split(' ')[0]));if(feel.length)console.log('   info '+tag+': feeling memory differs (other family) '+feel.length+' '+feel.slice(0,3).join(' ; ').slice(0,240));
