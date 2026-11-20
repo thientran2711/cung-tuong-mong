@@ -69,7 +69,8 @@ def male_scope(scope): return scope in MALE_SCOPES
 
 def strip_ear(text):
     """remove the earring words of the builders' old wording (the same edit was made in the builder sources; legacy() uses it so old gens still verify)."""
-    t = text.replace("gold-and-jade necklace, earrings and bracelets", "gold-and-jade necklace and bracelets")
+    t = re.sub(r"Bare earlobes: she wears NO earrings, nothing at the ears\. ?(?! ?\(earrings are added)", "", text)   # the interim maker sentence (F4 make_new_s62_65 / make_c09_hand, 20/11) -> replaced by EAR_SENT
+    t = t.replace("gold-and-jade necklace, earrings and bracelets", "gold-and-jade necklace and bracelets")
     t = re.sub(r" and (?:[^,;.()\"]*? )?ear-?rings\b(?= as the only mark|[;.,)\"])", "", t)          # 'a fresh flower and slim silver tassel earrings;' -> 'a fresh flower;'
     t = re.sub(r",(?: with| she wears)? (?:[^,;.()\"]*? )?ear-?rings(?: with [^,;.()\"]*?drops)?(?=[;.,)\"])", "", t)   # ', gold earrings;' / ', with small earrings,' -> ''
     return t
