@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge","b":"7be3ebe747dd","h":[{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"}]};
+window.CTM_BI={"s":"df7639bb+","t":"2026-11-20T21:41Z","c":"cold-faction: one presence rule for faction life in lãnh cung (roll vs present), letter cards from lãnh cung for her and NPCs (eunuch / mai…","b":"1b43c4d7c1a2","h":[{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3729,26 +3729,37 @@ PEND.plantsv=()=>({t:"<p>Cài người hầu của ngươi vào cung ai?</p>",o:
 const CLANS=["Tể tướng","Đại tướng quân","Lễ bộ","Hộ bộ","Hàn lâm"];
 function clanOf(p){if(p===S)return {tt:"Tể tướng",dtq:"Đại tướng quân",ch:"Thái hậu",thd:"Hàn lâm"}[S.origin.k]||"";if(!p.clan)p.clan=pick(CLANS);return p.clan}
 function facOf(p){return (S.facs||[]).find(f=>f.m.includes(key(p)))||null}
-function facMembers(f){return f.m.map(byKey).filter(p=>p&&(p===S||(p.alive&&!p.out)))}
+/* cold-faction (law 1 + 6, whole family): ONE «present» rule for faction life. She is out of it while in lãnh cung (S.out from cold(), not the
+   srvW / kcW stand-in S.out of the servant / tiểu thư road); an NPC (and the co-op friend's mirror, v.out = her cold) while dead or out.
+   facRoll = the roll (named: still a member, sold out / dropped by name); facMembers = who is present (leads, counts, shares news, meets). */
+function herCold(){try{return !!(S&&S.out&&S.coldTurn!=null&&!(typeof isSrv==="function"&&isSrv())&&!(typeof isKc==="function"&&isKc()))}catch(e){return false}}
+function facIn(p){return !!p&&(p===S?!herCold()&&!S.dead:p.alive&&!p.out)}
+function facRoll(f){return f.m.map(byKey).filter(p=>p&&(p===S?!S.dead:p.alive))}
+function facCold(f){return facRoll(f).filter(p=>!facIn(p))}
+function facMembers(f){return f.m.map(byKey).filter(p=>p&&facIn(p))}
 function facLeader(f){return facMembers(f).sort((a,b)=>rkOf(b)-rkOf(a))[0]||null}
 function facStr(f){return Math.round(facMembers(f).reduce((s,p)=>s+rkOf(p)*10+p.danh/2+(p.dad||40)/2,0))}
 function facName(lead){if(lead===S)return `phe ${S.name.split(" ")[0]} gia`;if(lead.queen)return "phe Càn Ninh";return `phe ${lead.name.split(" ")[0]} gia`}
 function facN(a){const f=facOf(a);return f?facMembers(f).length:1}
 function found(a,b){if(facOf(a)||facOf(b))return"";S.facs=S.facs||[];const f={id:Date.now()%1e7+R(999),m:[key(a),key(b)],name:""};S.facs.push(f);f.name=facName(facLeader(f));relAdd(a,b,5);return `${NMc(a)} và ${NM(b)} kết thành ${f.name}. `}
 function joinFac(p,f){if(facOf(p)||!f)return"";f.m.push(key(p));return `${NMc(p)} gia nhập ${f.name}. `}
-function leaveFac(p){const f=facOf(p);if(!f)return"";f.m=f.m.filter(k=>k!==key(p));facMembers(f).forEach(x=>relAdd(p,x,-10));if(facMembers(f).length<2)S.facs=S.facs.filter(x=>x!==f);return `${NMc(p)} rời ${f.name}. `}
+function leaveFac(p){const f=facOf(p);if(!f)return"";f.m=f.m.filter(k=>k!==key(p));facMembers(f).forEach(x=>relAdd(p,x,-BAL.ag.par3.fac.leave.rel));if(!facLive(f))S.facs=S.facs.filter(x=>x!==f);return `${NMc(p)} rời ${f.name}. `}
 function inviteOdds(a,t){const f=facOf(a);return odA(a,30+aff(t,a)/2+(f?facStr(f)/10:0)+(clanOf(a)===clanOf(t)?15:0))}
 function facInvite(a,t){const f=facOf(a);if(!f||facOf(t))return"";/* RECEIVER CHOICE (jrcv RCVK.facInvite) */return rcvAsk("facInvite",a,t)}
 function askJoin(a,f){const l=facLeader(f);if(!l||facOf(a))return"";/* RECEIVER CHOICE (jrcv RCVK.facJoin): the leader answers */if(l===a)return joinFac(a,f);return rcvAsk("facJoin",a,l,f.id)}
-function sellOut(a){const f=facOf(a);if(!f)return"";const M=facMembers(f).filter(x=>x!==a);const q=queenP()&&queenP()!==a?queenP():null;leaveFac(a);
- for(const m of M){oanAdd(m,a,40);if(q)evA(q,m,BAL.eff.j10.evSellOut);else if(roll(40))punish(m,"bị đồng đảng tố giác",1)}ap(a,{danh:5,sung:3});if(empGive(a,40,"accuse"))bestow(a,"accuse");return `${NMc(a)} bán đứng ${f.name}, đem chuyện của ${M.map(NM).join(", ")} dâng lên ${q?(q===S?"ngươi":"Hoàng hậu"):"Hoàng thượng"}. `}
+function sellOut(a){const f=facOf(a);if(!f)return"";const X=BAL.ag.par3.fac.sell,M=facRoll(f).filter(x=>x!==a);/* cold-faction: a member in lãnh cung is named too */const q=queenP()&&queenP()!==a?queenP():null;leaveFac(a);
+ for(const m of M){oanAdd(m,a,X.oan);if(q)evA(q,m,BAL.eff.j10.evSellOut);else if(facIn(m)&&roll(X.pun))punish(m,"bị đồng đảng tố giác",1)}if(a===S)apply({danh:X.danh,sung:X.sung});else ap(a,{danh:X.danh,sung:X.sung});if(empGive(a,X.emp,"accuse"))bestow(a,"accuse");return `${NMc(a)} bán đứng ${f.name}, đem chuyện của ${M.map(NM).join(", ")} dâng lên ${q?(q===S?"ngươi":"Hoàng hậu"):"Hoàng thượng"}. `}
 function divide(a,f){const M=facMembers(f).filter(x=>x!==a);if(M.length<2)return"";const [x,y]=shuf(M.slice()).slice(0,2);if(roll(odA(a,40+a.tamco/3))){oanAdd(x,y,25);oanAdd(y,x,25);affAdd(x,y,-15);affAdd(y,x,-15);let r=`${NMc(a)} ly gián ${x===S?"ngươi":x.name} và ${y===S?"ngươi":y.name}. `;if(roll(50))r+=leaveFac(rkOf(x)<rkOf(y)?x:y);return r}evA(x,a,BAL.ag.ev.one);return `Mưu ly gián của ${NM(a)} bị ${NM(x)} nhìn thấu. `}
+/* cold-faction (law 1): the leader strikes a member in lãnh cung off the roll — her button when she leads, an NPC leader in facMonth; one function */
+function facDrop(l,m){const f=facOf(l);if(!f||facOf(m)!==f||facLeader(f)!==l||facIn(m))return"";const D=BAL.ag.par3.fac.drop;f.m=f.m.filter(k=>k!==key(m));oanAdd(m,l,D.oan);
+ if(l===S)apply({danh:BAL.rcv.prop.danh});else ap(l,{danh:BAL.rcv.prop.danh});if(!facLive(f))S.facs=S.facs.filter(x=>x!==f);return `${NMc(l)} gạch tên ${NM(m)} khỏi ${f.name}. `}
 /* ONE odds of a joint scheme (review/shown-odds-one-path): the faction card (her "Hợp mưu hạ") and the roll read the leader's, not hers */
 function jointO(f){const M=facMembers(f),l=facLeader(f);return odA(l,oFrame(l)+5*(M.length-1))}
 function jointScheme(f,t){const M=facMembers(f),l=facLeader(f);const o=jointO(f);
  if(aRoll(o)){fall(t,`bị ${f.name} hợp mưu tố tội`);M.forEach(m=>ap(m,{tamco:1}));return `${f.name} hợp mưu hạ ${NM(t)}: thành. `}
  M.forEach(m=>punish(m,`hợp mưu vu cáo ${NM(t)}`,2));return `<span class="r">${f.name} hợp mưu hạ ${NM(t)} bị lộ, cả phe bị phạt.</span> `}
-function facMonth(){let ev="";S.facs=(S.facs||[]).filter(f=>facMembers(f).length>=2);
+function facLive(f){return facRoll(f).length>=2&&facMembers(f).length>=1}/* cold-faction: a member in lãnh cung keeps her place on the roll */
+function facMonth(){let ev="";S.facs=(S.facs||[]).filter(facLive);
  for(const p of consorts())if(p.dad==null)p.dad=30+R(40);for(const p of consorts())if(roll(15))p.dad=cl(p.dad+(R(2)?8:-8),0,100);
  for(const f of S.facs){const M=facMembers(f);const l=facLeader(f);f.name=facName(l);
   /* members share evidence and news */
@@ -3756,25 +3767,29 @@ function facMonth(){let ev="";S.facs=(S.facs||[]).filter(f=>facMembers(f).length
   /* betrayal, split */
   const b=mindPickBy(M.filter(m=>m!==S&&m!==l&&aff(m,l)<0),m=>-aff(m,l)*mindW(m,"flee"),null);/* npc-mind: was FIRST */if(b&&!p3FacOn()&&roll(4))ev+=seenNPC(b,b,sellOut(b))||"";
   const top=M.filter(m=>m!==S).sort((a,c)=>c.sung-a.sung);if(top.length>=2&&top[0].ghen>60&&top[1].ghen>60&&!p3FacOn()&&roll(5))ev+=eyes(S)>=2?leaveFac(top[1]):(leaveFac(top[1]),"");
-  if(l!==S){const o=npcWhy("facJoint",{p:l,f},x=>!!x.tgt&&roll(6));if(o)ev+=seenNPC(l,o.tgt,jointScheme(f,o.tgt))}}/* npc-purpose G2: the leader moves only on a foe the whole faction hates */
+  if(l!==S){const o=npcWhy("facJoint",{p:l,f},x=>!!x.tgt&&roll(6));if(o)ev+=seenNPC(l,o.tgt,jointScheme(f,o.tgt))}
+  /* cold-faction: an NPC leader may strike a member in lãnh cung off the roll (her too: the news reaches her) */
+  if(l&&l!==S){const D=BAL.ag.par3.fac.drop;for(const m of facCold(f))if(aff(l,m)<D.aff&&roll(D.p)){const r=facDrop(l,m);if(r)ev+=m===S||eyes(S)>=2?r:"";break}}}/* npc-purpose G2: the leader moves only on a foe the whole faction hates */
  /* NPCs found, join, invite, divide */
  /* AG-ALL-2e2: with the day plan on, an NPC founds / asks to join / leaves / sells out / divides through her own options (jagacts3 cx3:fac*, the same functions as facAct) */
  if(!p3FacOn())for(const v of liveRivals(true)){if(facOf(v))continue;
-  const fr=others(v).filter(x=>(x===S||x.alive)&&!sameHouse(v,x)&&(aff(v,x)>=35||clanOf(v)===clanOf(x)&&aff(v,x)>=15||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=30&&oan(x,e)>=30)));
+  const fr=others(v).filter(x=>facIn(x)/* cold-faction: nobody rủ a woman in lãnh cung face to face (the one presence rule) */&&!sameHouse(v,x)&&(aff(v,x)>=35||clanOf(v)===clanOf(x)&&aff(v,x)>=15||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=30&&oan(x,e)>=30)));
   const x=mindPickBy(fr,y=>BAL.mind.pick.j10fr.base+Math.max(0,aff(v,y)),v);/* npc-mind: was FIRST; facfound-parity: she is in fr too (law 1, her answer = jrcv card) */if(x&&roll(25)){const g=facOf(x);/* RECEIVER CHOICE (jrcv): the leader / the friend answers */const r=g?askJoin(v,g):rcvAsk("facFound",v,x);ev+=eyes(S)>=2||g&&facOf(S)===g?r:""}}
- const mine=facOf(S);for(const f of S.facs){if(f===mine)continue;const l=facLeader(f);const oa=l&&l!==S&&!facOf(S)&&aff(l,S)>=35?npcWhy("facAsk",{p:l,minAff:35},()=>roll(10)):null;if(oa)rcvAsk("facInvite",l,S)/* npc-purpose G2 reason + her card: the 4 answers (jrcv) */}
+ const mine=facOf(S);for(const f of S.facs){if(f===mine)continue;const l=facLeader(f);const oa=l&&l!==S&&!facOf(S)&&facIn(S)/* cold-faction */&&aff(l,S)>=35?npcWhy("facAsk",{p:l,minAff:35},()=>roll(10)):null;if(oa)rcvAsk("facInvite",l,S)/* npc-purpose G2 reason + her card: the 4 answers (jrcv) */}
  if(mine){const od=npcWhy("facDiv",{mine});const l=od&&od.who;if(l&&l!==S&&roll(5)){const r=divide(l,mine);if(r)ev+=r}}/* npc-purpose G2: a rival leader who bears her a grudge divides her faction */
  return ev}
-function facHTML(){const mine=facOf(S),F=S.facs||[];let h=`<div class="ph"><span>${mine?`Ngươi thuộc <b>${mine.name}</b>`:"Ngươi chưa vào phe nào"}</span><span>Họ: ${clanOf(S)||"không"}</span></div>`;
- if(!mine){const cands=liveRivals(true).filter(v=>!facOf(v)&&aff(v,S)>=BAL.facJoinAff&&!sameHouse(S,v));h+=`<div class="rbtn" style="margin-bottom:6px">${cands.slice(0,4).map(v=>`<button data-fa="lap" data-fv="${v.id}" ${!can(2)?"disabled":""}>${mdH(pv(v),"xs")}Lập phe cùng ${v.name}<small>2 khắc · ${rcvWord(v,S)}</small></button>`).join("")||`<span class="past">Cần một phi tần quý ngươi từ ${BAL.facJoinAff} để lập phe.</span>`}</div>`}
- else{const out=liveRivals(true).filter(v=>!facOf(v)&&!sameHouse(S,v));h+=`<div class="rbtn" style="margin-bottom:6px">${out.slice(0,4).map(v=>`<button data-fa="moi" data-fv="${v.id}" ${!can(2)?"disabled":""}>${mdH(pv(v),"xs")}Mời ${v.name}<small>${rcvWord(v,S)}</small></button>`).join("")}<button data-fa="roi">Rời phe<small>đồng đảng giận</small></button><button data-fa="ban" ${!can(2)?"disabled":""}>Bán đứng<small>Danh +5 · cả phe oán +40</small></button></div>`}
+function facHTML(){const mine=facOf(S),F=S.facs||[],lc=herCold(),SB=BAL.ag.par3.fac.sell,DB=BAL.ag.par3.fac.drop;let h=`<div class="ph"><span>${mine?`Ngươi thuộc <b>${mine.name}</b>`:"Ngươi chưa vào phe nào"}</span><span>Họ: ${clanOf(S)||"không"}</span></div>`;
+ /* cold-faction: in lãnh cung she cannot meet anyone; her faction business goes by letter (the lãnh cung cards, j14 coldActsOf) */
+ if(lc)h+=`<p class="past">Ngươi đang ở lãnh cung, không gặp được ai. Chuyện phe phái chỉ còn cách gửi thư ra ngoài (xem các việc ở lãnh cung).</p>`;
+ else if(!mine){const cands=liveRivals(true).filter(v=>!facOf(v)&&aff(v,S)>=BAL.facJoinAff&&!sameHouse(S,v));h+=`<div class="rbtn" style="margin-bottom:6px">${cands.slice(0,4).map(v=>`<button data-fa="lap" data-fv="${v.id}" ${!can(2)?"disabled":""}>${mdH(pv(v),"xs")}Lập phe cùng ${v.name}<small>2 khắc · ${rcvWord(v,S)}</small></button>`).join("")||`<span class="past">Cần một phi tần quý ngươi từ ${BAL.facJoinAff} để lập phe.</span>`}</div>`}
+ else{const out=liveRivals(true).filter(v=>!facOf(v)&&!sameHouse(S,v));h+=`<div class="rbtn" style="margin-bottom:6px">${out.slice(0,4).map(v=>`<button data-fa="moi" data-fv="${v.id}" ${!can(2)?"disabled":""}>${mdH(pv(v),"xs")}Mời ${v.name}<small>${rcvWord(v,S)}</small></button>`).join("")}<button data-fa="roi">Rời phe<small>đồng đảng quý ngươi ${balSg(-BAL.ag.par3.fac.leave.rel)}</small></button><button data-fa="ban" ${!can(2)?"disabled":""}>Bán đứng<small>Danh ${balSg(SB.danh)} · cả phe oán ${balSg(SB.oan)}</small></button></div>`}
  h+=F.map(f=>{const M=facMembers(f),l=facLeader(f),st=Math.round(M.filter(m=>m!==S).reduce((s,m)=>s+aff(m,S),0)/Math.max(1,M.filter(m=>m!==S).length));const me=f===mine;
-  return `<div class="rival"><div class="top" style="align-items:center;justify-content:flex-start"><b>${f.name}</b><em>đứng đầu: ${mdH(l===S?pMe():pv(l),"xs")}${l===S?"ngươi":l.name} · thế lực ${facStr(f)}</em></div><div class="chips">${M.map(m=>chip(`${mdH(m===S?pMe():pv(m),"xs")}${m===S?"Ngươi":m.name}`)).join("")}${me?"":chip(`Với ngươi: ${st>=BAL.cut.facRel?"thân":st<=-BAL.cut.facRel?"thù":"bình thường"} (${st})`,st<=-BAL.cut.facRel?"hot":st>=BAL.cut.facRel?"ok":"")}</div>${me?(l===S?`<div class="rbtn">${consorts().filter(x=>x!==S&&!M.includes(x)&&!sameHouse(S,x)).slice(0,3).map(x=>`<button data-fa="hop" data-fv="${x.id}" ${!can(2)?"disabled":""}>${mdH(pv(x),"xs")}Hợp mưu hạ ${x.name}<small>${word(jointO(f))} · lộ: cả phe bị phạt</small></button>`).join("")}</div>`:""):`<div class="rbtn">${mine?"":`<button data-fa="xin" data-ff="${f.id}" ${!can(2)?"disabled":""}>Xin vào phe<small>2 khắc</small></button>`}<button data-fa="ly" data-ff="${f.id}" ${!can(2)||M.length<2?"disabled":""}>Ly gián<small>${word(odA(S,40+S.tamco/3))} · 2 khắc</small></button></div>`}</div>`}).join("")||`<p class="past">Hậu cung chưa có phe phái nào.</p>`;
+  return `<div class="rival"><div class="top" style="align-items:center;justify-content:flex-start"><b>${f.name}</b><em>đứng đầu: ${mdH(l===S?pMe():pv(l),"xs")}${l===S?"ngươi":l.name} · thế lực ${facStr(f)}</em></div><div class="chips">${M.map(m=>chip(`${mdH(m===S?pMe():pv(m),"xs")}${m===S?"Ngươi":m.name}`)).join("")}${facCold(f).map(m=>chip(`${mdH(m===S?pMe():pv(m),"xs")}${m===S?"Ngươi":m.name} (lãnh cung)`,"hot")).join("")}${me?"":chip(`Với ngươi: ${st>=BAL.cut.facRel?"thân":st<=-BAL.cut.facRel?"thù":"bình thường"} (${st})`,st<=-BAL.cut.facRel?"hot":st>=BAL.cut.facRel?"ok":"")}</div>${lc?"":me?(l===S?`<div class="rbtn">${facCold(f).map(x=>`<button data-fa="gach" data-fv="${x.id}" ${!can(BAL.ag.par3.fac.k)?"disabled":""}>${mdH(pv(x),"xs")}Gạch tên ${x.name}<small>Danh ${balSg(BAL.rcv.prop.danh)} · nàng oán ${balSg(DB.oan)}</small></button>`).join("")}${consorts().filter(x=>x!==S&&!M.includes(x)&&!sameHouse(S,x)).slice(0,3).map(x=>`<button data-fa="hop" data-fv="${x.id}" ${!can(2)?"disabled":""}>${mdH(pv(x),"xs")}Hợp mưu hạ ${x.name}<small>${word(jointO(f))} · lộ: cả phe bị phạt</small></button>`).join("")}</div>`:""):`<div class="rbtn">${mine?"":`<button data-fa="xin" data-ff="${f.id}" ${!can(2)?"disabled":""}>Xin vào phe<small>2 khắc</small></button>`}<button data-fa="ly" data-ff="${f.id}" ${!can(2)||M.length<2?"disabled":""}>Ly gián<small>${word(odA(S,40+S.tamco/3))} · 2 khắc</small></button></div>`}</div>`}).join("")||`<p class="past">Hậu cung chưa có phe phái nào.</p>`;
  return h}
-function facAct(a,d){if(S.dead||Q.length)return;let r="";const v=d.fv?RV(+d.fv):null,f=d.ff?(S.facs||[]).find(x=>x.id===+d.ff):null;
+function facAct(a,d){if(S.dead||Q.length||herCold())return;/* cold-faction: from lãnh cung only by letter (j14 coldActsOf) */let r="";const v=d.fv?RV(+d.fv):null,f=d.ff?(S.facs||[]).find(x=>x.id===+d.ff):null;
  if(a==="roi"){r=leaveFac(S)}
  else{if(!can(2))return;const fz=a==="hop"&&v&&facOf(S)?jointO(facOf(S)):null;/* the odds on the card, read before the spend (j9 fzRun) */spend(2);
-  r=fzRun(fz,null,()=>{let r;if(a==="lap"&&v)r=rcvAsk("facFound",S,v);else if(a==="moi"&&v)r=facInvite(S,v);else if(a==="xin"&&f)r=askJoin(S,f);else if(a==="ban")r=sellOut(S);else if(a==="ly"&&f)r=divide(S,f);else if(a==="hop"&&v&&facOf(S))r=jointScheme(facOf(S),v);else spend(-2);return r})}
+  r=fzRun(fz,null,()=>{let r;if(a==="lap"&&v)r=rcvAsk("facFound",S,v);else if(a==="moi"&&v)r=facInvite(S,v);else if(a==="xin"&&f)r=askJoin(S,f);else if(a==="ban")r=sellOut(S);else if(a==="ly"&&f)r=divide(S,f);else if(a==="hop"&&v&&facOf(S))r=jointScheme(facOf(S),v);else if(a==="gach"&&v)r=facDrop(S,v);else spend(-2);return r})}
  if(r)log(r);render()}
 
 /* rendering */
@@ -4146,7 +4161,7 @@ function restore(full,why){S.out=0;S.rank=full&&S.coldRank>=7&&seatHas(S,7)?7:se
  log(`<b class="g">${why}. Ngươi được rời lãnh cung, phục vị ${RANKS[S.rank].n}.</b>`);Q.push({t:"Rời lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Ngươi được phục vị <b>${RANKS[S.rank].n}</b>.</p>`,btn:"Tạ ơn"});deal();if(typeof feedback==="function")feedback("decree")}
 /* ONE list for her lãnh cung cards and an NPC in the cold palace (AG-ALL-2e, jagacts3 p3Cold): p = the one inside; free / end = what "được tha" / Xuất gia do for her or an NPC */
 function coldActs(){return coldActsOf(S)}
-function coldActsOf(p){const me=p===S,A=[],X=BAL.ag.par3.cold,odP=b=>odA(p,b),fr=others(p).filter(v=>v&&v!==p&&(v===S||v.alive)&&!v.out&&aff(v,p)>=X.friend),f=facOf(p),
+function coldActsOf(p){const me=p===S,A=[],X=BAL.ag.par3.cold,odP=b=>odA(p,b),fr=others(p).filter(v=>v&&v!==p&&facIn(v)/* cold-faction: the one presence rule */&&aff(v,p)>=X.friend),f=facOf(p),
  son=(me?mySons():sonsOf(p)).find(k=>k.age>=X.sonAge),free=(full,why)=>me?restore(full,why):p3Free(p,why),fb=me?S.framedBy:p.coldBy;
  A.push({n:"Cầu xin",t:"Đút bạc cho lính gác, gửi thư lên Dưỡng Hòa điện.",c:{bac:-X.beg.bac},o:odP(BAL.odb.j14.odO+(p.an||0)/X.beg.anD+(p.sung||0)/X.beg.sungD),k:2,w:{},l:{},x:"được tha",go:()=>free(false,"Hoàng thượng đọc thư, động lòng")});
  if(fr.length||f||(p.dad||0)>=X.out.dad)A.push({n:"Nhờ người bên ngoài",t:fr.length?`Nhờ ${fr[0].name} nói giúp.`:f?`Nhờ ${f.name} vận động.`:"Nhờ cha ở triều đình dâng sớ.",c:{bac:-X.out.bac},o:odP(BAL.odb.j14.odO_2+(fr.length?aff(fr[0],p)/X.out.affD:0)+(f?facStr(f)/X.out.facD:0)+(p.dad||0)/X.out.dadD),k:2,w:{},l:{},x:"được tha",go:()=>free(false,"Có người bên ngoài nói giúp")});
@@ -4154,7 +4169,23 @@ function coldActsOf(p){const me=p===S,A=[],X=BAL.ag.par3.cold,odP=b=>odA(p,b),fr
  if((p.an||0)>=X.poem.an)A.push({n:"Gửi bài thơ cũ",t:"Chép lại bài thơ đêm nào ngài khen, nhờ người lén dâng.",c:{},o:odP(BAL.odb.j14.odO_4+(p.an||0)/X.poem.anD+((p.arts&&p.arts.thi)||0)*X.poem.thi),k:2,w:{},l:{},x:"ngài nhớ chuyện cũ",go:()=>free(false,"Hoàng thượng đọc bài thơ cũ, nhớ chuyện xưa")});
  if(son)A.push({n:`Nhờ ${son.name} cầu xin`,t:"Con quỳ trước Dưỡng Hòa điện xin cho mẹ.",c:{},o:odP(BAL.odb.j14.odO_5+(son.fond||0)/X.son.fondD),k:1,w:{},l:{},x:"được tha",go:()=>free(false,`${son.name} quỳ khóc xin cho mẹ`)});
  A.push({n:"Chép kinh, giữ đức",t:"Ngày ngày chép kinh Kim Cương.",c:{...X.sutra.c},o:100,k:2,w:{...X.sutra.w}},{n:"Trồng rau",t:"Cuốc đất sau sân, trồng rau mà ăn.",c:{},o:100,k:2,w:{...X.veg.w}},{n:"Thêu khăn bán",t:"Nhờ lính gác đem ra ngoài bán.",c:{...X.embro.c},o:odP(BAL.odb.j14.odO_6),k:2,w:{...X.embro.w},l:{}},
+  ...coldFacActs(p),
   {n:"Xuất gia",t:"Cắt tóc đi tu, rời bỏ hồng trần.",c:{},o:100,fix:1,k:4,w:{},x:"kết thúc kiếp này, yên ổn (sẽ hỏi lại)",go:()=>me?xgConfirm(()=>over("Xuất gia",`${S.name} cạo tóc, vào chùa Bảo Hoa tu hành, sống nốt quãng đời thanh tịnh.`,"Xuất gia")):p3Nun(p)});
+ return A}
+/* cold-faction (law 1 + 6): faction business from lãnh cung goes by LETTER only — the same cards for her and for an NPC inside (p3Cold).
+   Two roads of equal worth (law 2): the food eunuch (Bạc BAL.ag.par3.cold.lt.bac, sure-ish) or her own kept maid (no bạc, odds by the maid's loyalty;
+   caught → that maid's loyalty − lt.maidLoy). Deeds: Rời phe · Tố phe (j10 sellOut: members in lãnh cung are named too) · Xin vào phe (the leader answers: jrcv facJoin). */
+function coldFacActs(p){const me=p===S,L=BAL.ag.par3.cold.lt,F=BAL.ag.par3.fac,odP=b=>odA(p,b),f=facOf(p),A=[],say=r=>{if(me&&r)log(r);return r||""};
+ let mds=[];try{mds=(me?(S.staff||[]).concat(S.maid&&!(S.staff||[]).includes(S.maid)?[S.maid]:[]):(p.staff||[])).filter(m=>m&&m.role!=="eunuch"&&(m===S.maid||m.role==="maid")).filter(m=>m&&m.alive!==false&&!m.coop&&(m.loyal||0)>=BAL.loy.trust).sort((a,b)=>(b.loyal||0)-(a.loyal||0))}catch(e){}
+ const m=mds[0],R=[{w:"thái giám đưa cơm",c:{bac:-L.bac},o:odP(L.euO)}];
+ if(m)R.push({w:m.name,c:{},o:odP(L.maidO+(m.loyal||0)/L.loyD),fail:()=>{m.loyal=cl((m.loyal||0)-L.maidLoy,0,100);return say(`${m.name} bị lính gác bắt được thư, bị tra hỏi một trận. Lòng trung ${balSg(-L.maidLoy)}.`)},fx:` · bị bắt: ${m.name} lòng trung ${balSg(-L.maidLoy)}`});
+ const card=(n,t,x,ag,go)=>R.map(r=>({n:`${n} (nhờ ${r.w})`,t,c:{...r.c},o:r.o,k:2,w:{},l:{},ag,x:x+(r.fx||""),go:()=>say(go()),fail:r.fail}));
+ if(f){A.push(...card(`Gửi thư xin rời ${f.name}`,"Viết thư báo với phe rằng ngươi không muốn liên lụy ai nữa.",`rời phe, không dính bè phái: Danh ${balSg(BAL.rcv.prop.danh)} · đồng đảng quý ${me?"ngươi":p.name} ${balSg(-F.leave.rel)}`,F.gLeave,
+   ()=>{const r=leaveFac(p);if(r)rcvAp(p,{danh:BAL.rcv.prop.danh});return r}));
+  if(facRoll(f).some(x=>x!==p)){const q=queenP()&&queenP()!==p?queenP():null;
+   A.push(...card(`Gửi thư tố ${f.name}`,`Kể hết chuyện của phe trong thư, nhờ người dâng lên ${q?(q===S?"ngươi":"Hoàng hậu"):"Hoàng thượng"}.`,`Danh ${balSg(F.sell.danh)}, Sủng ${balSg(F.sell.sung)} · cả phe oán ${balSg(F.sell.oan)}`,F.gSell,()=>sellOut(p)))}}
+ else{const G=(S.facs||[]).map(g=>({g,l:facLeader(g)})).filter(o=>o.l&&o.l!==p&&facIn(o.l)&&aff(o.l,p)>=F.clanAff).sort((a,b)=>aff(b.l,p)-aff(a.l,p));const o=G[0];
+  if(o)A.push(...card(`Gửi thư xin vào ${o.g.name}`,`Xin ${o.l===S?"ngươi":o.l.name} cho đứng cùng phe, để có người bên ngoài nói giúp.`,`${o.l===S?"ngươi":o.l.name} tự quyết (${rcvWord(o.l,p)}) · vào phe thì nhờ phe vận động được`,F.gJoin,()=>rcvAsk("facJoin",p,o.l,o.g.id)))}
  return A}
 function coldMonth(){let ev="";
  if(S.out){apply({bac:2});const w=SEASON[S.month-1]==="Đông";apply({suc:w?-12:-6});if(w&&roll(8)){apply({suc:BAL.eff.j14.sucColdMonth});ev+=`<span class="r">Đêm đông giá buốt, lãnh cung không than sưởi.</span> Sức ${balSg(BAL.eff.j14.sucColdMonth)}. `}
@@ -34236,13 +34267,20 @@ BAL.ag.par3={on:1,
  staff:{thuong:{below:55},phat:{below:30},doi:{below:15},/* bạc / Danh: BAL.house.thuongBac / BAL.eff.j10.danhServAct (merge r2) */hoi:{af:20,dt:30},g:{"safe":2},gHoi:{"spite":2,"safe":1}},
  use:{sucBelow:60,g:{"rest":2}},sell:{bacBelow:40,g:{"bac":2}},
  cutRisk:30,cold:{friend:40,sonAge:8,beg:{bac:20,anD:2,sungD:4},out:{bac:10,dad:50,affD:3,facD:10,dadD:5},ev:{mat:6,tcD:5},poem:{an:30,anD:2,thi:8},son:{fondD:2},/* odds bases: BAL.odb.j14.odO…odO_6, evidence need: BAL.coldEvNeed (ONE CORE, merge r2) */
-  sutra:{c:{"suc":-3},w:{"duc":3}},veg:{w:{"suc":6}},embro:{c:{"suc":-5},w:{"bac":10}},nunSuc:10,nunO:10,oanFree:20,gFree:{"sung":30},gStay:{"duc":1,"rest":1,"bac":1}},charity:{g:{"duc":3,"danh":2}},restLat:{sucBelow:50,g:{"rest":2}},tyGift:{g:{"spite":1,"safe":1}},work:{g:{"danh":2,"ally":1}},
+  sutra:{c:{"suc":-3},w:{"duc":3}},veg:{w:{"suc":6}},embro:{c:{"suc":-5},w:{"bac":10}},nunSuc:10,nunO:10,oanFree:20,
+  /* cold-faction: a faction letter from lãnh cung (j14 coldActsOf, her card = an NPC's): road A the food eunuch (Bạc bac, odds base euO), road B her own kept maid (no bạc, odds base maidO + the maid's loyalty / loyD; caught → that maid loyalty − maidLoy) */
+  lt:{bac:12,euO:80,maidO:45,loyD:2,maidLoy:15},gFree:{"sung":30},gStay:{"duc":1,"rest":1,"bac":1}},charity:{g:{"duc":3,"danh":2}},restLat:{sucBelow:50,g:{"rest":2}},tyGift:{g:{"spite":1,"safe":1}},work:{g:{"danh":2,"ally":1}},
  /* 2e part 3 (AG-ALL-2e2): NPC↔NPC talk topics (P3T) — worth = the liking she would win from the listener */
  talk:{health:{"ally":1},praise:{"ally":1.5},secret:{"ally":2},gossip:{"ally":1.5,"spite":1},invoke:{"ally":2}},
  /* household: Nghiệm độc (her button + NPC; bạc, odds bonus over oSee), Thêm cung nữ / thái giám (bạc), Tiến cử (công lao), Tâm sự / Tra xét / Dọa tố worth */
  test:{o:25,g:{"safe":2}},hire:{g:{"safe":1,"danh":1}},/* bạc: BAL.bacFee.itTest / BAL.house.hireBac (ONE CORE, merge r2) */house:{merit:5,tamBelow:50,upLoyal:70,gTam:{"safe":1},gUp:{"danh":3,"safe":1},gSearch:{"safe":3},gThreat:{"spite":2,"safe":1}},
  /* phe phái (j10 facAct for her, cx3:fac* for an NPC): khắc of her button; friend bar to found; worth per deed */
- fac:{k:2,frAff:35,clanAff:15,sharedOan:30,foeOan:25,gFound:{"ally":3},gJoin:{"ally":2,"safe":1},gLeave:{"safe":1},gSell:{"hh":1,"safe":1},gDiv:{"spite":3},gDivTc:3},
+ fac:{k:2,frAff:35,clanAff:15,sharedOan:30,foeOan:25,gFound:{"ally":3},gJoin:{"ally":2,"safe":1},gLeave:{"safe":1},gSell:{"hh":1,"safe":1},gDiv:{"spite":3},gDivTc:3,
+  /* cold-faction: Bán đứng numbers (j10 sellOut, her button + NPC + her lãnh cung letter): Danh / Sủng to the seller, oán of each member named, the Emperor's accuse gift chance, punish chance with no Hoàng hậu */
+  sell:{danh:5,sung:3,oan:40,emp:40,pun:40},
+  /* cold-faction: a leader strikes a member who is in lãnh cung off the roll (j10 facDrop: her button + NPC leader in facMonth): NPC leader drops when liking < aff, chance p a month; the one dropped oán + oan; the leader Danh + BAL.rcv.prop.danh (keeps clear of a phế phi) */
+  drop:{aff:20,p:15,oan:15},
+  leave:{rel:10}},/* cold-faction: Rời phe — each member quý the one who leaves − rel (j10 leaveFac; was a typed 10) */
  /* Uống thuốc thúc sinh (P3C.drug): worth = the book-mismatch danger she escapes */
  drug:{g:{"safe":4,"kid":2}},
  /* 2e3: Mời đến cung ta (cx3:invite, worth = the liking she would win), Phòng bị (cx3:def_<order>, worth per order; spite bar for the theo dõi target) */
@@ -77546,6 +77584,7 @@ function p3Cold(v){const X=BAL.ag.par3.cold;let N;try{N=agNeeds(v)}catch(e){N={}
  const W=[];for(const C of L){const free=(/được tha|phục vị|nhớ chuyện cũ/.test(C.x||"")||String(C.x||"").includes(evSg(BAL.ag.ev.one)))/* the evidence words come from the one helper (evSg), never a typed "+1" */;let u;
   if(C.n==="Xuất gia")u=(v.suc||0)<X.nunSuc&&best<X.nunO?agcU(v,N,100,{rest:BAL.ag.unit},{},"self"):0;
   else if(free)u=agcU(v,N,C.o==null?100:C.o,X.gFree,C.c||{},"self");
+  else if(C.ag)u=agcU(v,N,C.o==null?100:C.o,C.ag,C.c||{},"social");/* cold-faction: a faction letter is worth what the same deed is worth outside (BAL.ag.par3.fac g*) */
   else{const g={};for(const k in C.w||{})g[k==="suc"?"rest":k]=(C.w[k]||0)*(X.gStay[k==="suc"?"rest":k]||0);u=agcU(v,N,C.o==null?100:C.o,g,C.c||{},"self")}
   if(u>0)W.push([C,u])}
  if(!W.length)return"";const C=mindPick(W,v);if(!C)return"";const r=p3Run(v,C,"cold:"+C.n);const seen=eyes(S)>=BAL.mline.seeMat||!!v.p3Freed;v.p3Freed=null;return seen&&r?r+". ":""}
@@ -77619,7 +77658,7 @@ agRunReg("cx3:threat",v=>{const s=p3ThreatT(v);return s?p3Res("threat",String(th
 Object.assign(window,{itemTest,hireTake,staffTam,recommend,searchMaids});
 /* ---------------- phe phái: Lập phe cùng · Xin vào phe · Rời phe · Bán đứng · Ly gián (j10 facAct for her = found / askJoin / leaveFac / sellOut / divide; the same for an NPC) ---------------- */
 function p3FacOn(){return p3On()&&!!BAL.ag.par3.fac}
-function p3FacFr(v){const F=BAL.ag.par3.fac;return others(v).filter(x=>x&&(x===S||x.alive&&!x.out)&&!facOf(x)&&!sameHouse(v,x)&&(aff(v,x)>=F.frAff||clanOf(v)===clanOf(x)&&aff(v,x)>=F.clanAff||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=F.sharedOan&&oan(x,e)>=F.sharedOan)))}
+function p3FacFr(v){const F=BAL.ag.par3.fac;return others(v).filter(x=>x&&facIn(x)/* cold-faction: not her in lãnh cung (was x===S||…) */&&!facOf(x)&&!sameHouse(v,x)&&(aff(v,x)>=F.frAff||clanOf(v)===clanOf(x)&&aff(v,x)>=F.clanAff||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=F.sharedOan&&oan(x,e)>=F.sharedOan)))}
 function p3FacJoin(v){const F=BAL.ag.par3.fac;return (S.facs||[]).filter(f=>{const l=facLeader(f);return l&&l!==v&&aff(v,l)>=F.clanAff})}
 /* facfound-parity (law 1 TWO-WAY): she can rủ an NPC to found a faction and ask to join an NPC's faction (j10 facAct lap / xin), so an NPC may rủ HER
    (p3FacFr keeps S) and ask to join HER faction (p3FacJoin keeps a faction she leads); her answer is the jrcv card (PEND.rcvAsk facFound / facJoin, 4 answers) */
@@ -77879,7 +77918,7 @@ function rcvAsk(k,p,t,x){const D=RCVK[k];if(!D||!p||!t||p===t)return"";if(D.ok&&
  /* the co-op friend is a PLAYER (law 1): inside her accepted offer (jcoopworld invHer: he already tapped «Nhận» on his own card, COOPW.inv) his
     answer is that «Nhận» = the first (yes) option, never a roll for him (coop-ptime-reds: coop-thin-d «Kết giao» came back as «mách lẻo») */
  const O=D.opts(p,t,x);const c=t.coop&&window.COOPW&&COOPW.inv?O[0]:rcvPick(t,p,O,D.kind||"help");if(!c)return"";const r=c.go();const s=r&&typeof r==="object"?r.r:r;return s?String(s).replace(/([^.!?])$/,"$1. "):""}
-PEND.rcvAsk=pp=>{const D=RCVK[pp.k],p=byKey(pp.a);if(!D||!p||p===S||!p.alive||p.out||(D.ok&&!D.ok(p,S,pp.x)))return null;
+PEND.rcvAsk=pp=>{const D=RCVK[pp.k],p=byKey(pp.a);if(!D||!p||p===S||!p.alive||(p.out&&!D.cold)/* cold-faction: a letter from lãnh cung still waits */||(D.ok&&!D.ok(p,S,pp.x)))return null;
  return{who:pv(p),t:D.line(p,pp.x),o:D.opts(p,S,pp.x).map(o=>({n:o.n,fx:o.fx,x:o.x,risk:o.risk,go:()=>{const r=o.go();const s=r&&typeof r==="object"?r.r:r;if(s)log(s)}}))}};
 const rcvSg=(p,me,a,b)=>p===S?a:me?b:null;
 /* Kết giao (j8 ACT.ally, NPC cx:ally): the asker sends BAL.actBac.ally bạc as the gift (paid when sent); yes / mách keep it, «từ chối» sends it back */
@@ -77897,7 +77936,7 @@ RCVK.ally={t:"Lời kết giao",act:"xin kết giao với",kind:"help",
   rcvNoO(p,t,{g:[`không dính bè phái, Danh ${balSg(A.danh)}`,rcvFoeX(fo,t,fh)].filter(Boolean).join(", "),fx:{danh:A.danh},go:()=>{rcvAp(p,{bac:g});foeAdd(fh)},r:`${me?"Ngươi":t.name} trả lễ, khéo từ chối kết giao với ${NM(p)}`}),
   rcvSabO(p,t,{g:`giữ lễ ${g} lượng`,go:keep,r:tq=>`${me?"Ngươi":t.name} nhận lễ của ${NM(p)} rồi đem chuyện đi kể${tq?" với "+rcvQn(tq):""}`})]}};
 /* Lập phe cùng (j10 found: her button, NPC cx3:facFound) */
-RCVK.facFound={t:"Lời rủ lập phe",act:"rủ lập phe với",kind:"help",ok:(p,t)=>!facOf(p)&&!facOf(t),
+RCVK.facFound={t:"Lời rủ lập phe",act:"rủ lập phe với",kind:"help",ok:(p,t)=>facIn(p)&&facIn(t)&&!facOf(p)&&!facOf(t),/* cold-faction: founding needs both present */
  line:p=>`<p>${p.name} sai người sang: “Trong cung một cây làm chẳng nên non. Nương nương nhà ta muốn cùng người lập một phe, chia nhau tin tức, che chở nhau.”</p>`,
  opts:(p,t)=>{const me=t===S;return[
   rcvYesO(p,t,0,{n:"Nhận lời lập phe",g:"có phe cùng chia tin tức, chứng cứ",go:()=>found(p,t)}),
@@ -77906,14 +77945,16 @@ RCVK.facFound={t:"Lời rủ lập phe",act:"rủ lập phe với",kind:"help",o
   rcvSabO(p,t,{g:"không dính bè phái",r:tq=>`${me?"Ngươi":t.name} đem chuyện ${NM(p)} rủ lập phe đi kể${tq?" với "+rcvQn(tq):""}`})]}};
 /* Xin vào phe (j10 askJoin: the receiver is the faction's leader) and Mời vào phe (j10 facInvite: the receiver is the one invited); x = the faction id */
 const rcvFac=x=>(S.facs||[]).find(f=>f.id===x)||null;
-RCVK.facJoin={t:"Xin vào phe",act:"xin vào phe của",kind:"help",ok:(p,t,x)=>{const f=rcvFac(x);return !!f&&!facOf(p)&&facLeader(f)===t},
- line:(p,x)=>{const f=rcvFac(x);return `<p>${p.name} sai người sang: “Nương nương nhà ta xin được đứng cùng ${f?f.name:"phe của người"}.”</p>`},
- opts:(p,t,x)=>{const f=rcvFac(x),me=t===S;return[
-  rcvYesO(p,t,0,{n:"Nhận vào phe",g:"phe thêm người",go:()=>joinFac(p,f)}),
-  rcvYesO(p,t,1,{n:"Nhận cho có",g:"phe thêm người",go:()=>joinFac(p,f)}),
+/* cold-faction: the asker may write from lãnh cung (her letter card = an NPC's, j14 coldActsOf): the leader answers the letter (cold:1 lets PEND keep it);
+   taking in a phế phi is a real cost: yes = Danh − BAL.rcv.prop.danh (the mirror of the «no» gain) */
+RCVK.facJoin={t:"Xin vào phe",act:"xin vào phe của",kind:"help",cold:1,ok:(p,t,x)=>{const f=rcvFac(x);return !!f&&!facOf(p)&&facIn(t)&&facLeader(f)===t},
+ line:(p,x)=>{const f=rcvFac(x);return facIn(p)?`<p>${p.name} sai người sang: “Nương nương nhà ta xin được đứng cùng ${f?f.name:"phe của người"}.”</p>`:`<p>Một lá thư từ lãnh cung lọt ra: ${p.name} xin được đứng cùng ${f?f.name:"phe của người"}, mong có người bên ngoài nói giúp.</p><p class="past">Nhận một phế phi vào phe thì phe mang tiếng.</p>`},
+ opts:(p,t,x)=>{const f=rcvFac(x),me=t===S,lc=!facIn(p),D=BAL.rcv.prop.danh,lx=lc?{fx:{danh:-D},c:`nhận phế phi: Danh ${balSg(-D)}`}:{};return[
+  rcvYesO(p,t,0,Object.assign({n:"Nhận vào phe",g:"phe thêm người",go:()=>joinFac(p,f)},lx)),
+  rcvYesO(p,t,1,Object.assign({n:"Nhận cho có",g:"phe thêm người",go:()=>joinFac(p,f)},lx)),
   rcvNoO(p,t,{g:`phe giữ kín người, Danh ${balSg(BAL.rcv.prop.danh)}`,fx:{danh:BAL.rcv.prop.danh},r:`${me?"Ngươi":t.name} chưa nhận ${NM(p)} vào phe`}),
   rcvSabO(p,t,{g:"phe giữ kín người",r:tq=>`${me?"Ngươi":t.name} đem chuyện ${NM(p)} xin vào phe đi kể${tq?" với "+rcvQn(tq):""}`})]}};
-RCVK.facInvite={t:"Lời mời vào phe",act:"mời vào phe",kind:"help",ok:(p,t)=>!!facOf(p)&&!facOf(t),
+RCVK.facInvite={t:"Lời mời vào phe",act:"mời vào phe",kind:"help",ok:(p,t)=>facIn(p)&&facIn(t)&&!!facOf(p)&&!facOf(t),
  line:p=>{const f=facOf(p);return `<p>${p.name} mời ngươi vào ${f?f.name:"phe của nàng"}. Vào thì cùng chia tin tức, chứng cứ, che chở nhau.</p>`},
  opts:(p,t)=>{const f=facOf(p),me=t===S;return[
   rcvYesO(p,t,0,{n:"Nhận lời vào phe",g:"có phe cùng chia tin tức, chứng cứ",go:()=>joinFac(t,f)}),
@@ -85318,7 +85359,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7be3ebe747dd";window.CTM_BUILD=BUILD;
+const BUILD="1b43c4d7c1a2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
