@@ -520,6 +520,8 @@ def build_season(person,rank,age="a18",season=None):
     S0,S,add=build(person,rank,age,_season=season); S,notes=winter_g28.season(S,rank,a36,season)
     _m=b26_fit_ok(person,rank,age,season)
     if _m and len(S)>10000: S,notes=b26_fit(S,notes,angle=False,whole=_m=='whole')   # B26 length: winter_g28.season already dropped ANGLE
+    S0,S,add=build(person,rank,age); S,notes=winter_g28.season(S,rank,a36,season)
+    if rank in (4,5) and len(S)>10000: S,notes=b26_fit(S,notes,angle=False)   # B26 length: winter_g28.season already dropped ANGLE
     return S0,S,add+notes
 
 def _kc_drawn(person):   # B8 (BW3): same table + rule as build.py kc_drawn (dev/art/KC_REFS.json m09_ok yes + real face words)
@@ -553,6 +555,14 @@ def b26_fit_ok(person,rank,age,season):
 def b26_fit(S,add,angle,whole=False):
     """B26 length (owner Lượt 1283 đoạn sentence; JOB 2/3 growth): t1-t6, (1) drop the ANGLE sentence (owner ~15:39Z length rule, as winter_g28.season) when
     angle=True, (2) master_common.doan_fit master-repeat store clauses (Foreman C #5 decision (a)), each only while still > 10 000."""
+def build(person,rank,age="a18"):
+    S0,S,add=_build(person,rank,age); S=eyes(S)
+    if rank in (4,5) and len(S)>10000: S,add=b26_fit(S,add,angle=True)
+    return S0,S,add
+def b26_fit(S,add,angle):
+    """B26 length (owner Lượt 1283 đoạn sentence is ~250 chars longer): t4/t5 only, ALL-OR-NOTHING: (1) drop the ANGLE sentence (owner ~15:39Z length rule, as
+    winter_g28.season) when angle=True, (2) master_common.doan_fit master-repeat store clauses (Foreman C #5 decision (a)); kept only if the prompt then fits
+    <= 10 000, else the prompt is returned unchanged (cells already over 10 000 before B26 are not cut)."""
     sys.path.insert(0,ART); import winter_g28 as _W, master_common as _MC
     T=S; notes=[]
     m=_W.ANGLE_RX.search(T) if angle else None
@@ -561,6 +571,8 @@ def b26_fit(S,add,angle,whole=False):
         T,_c=_MC.doan_fit(T,low=not whole); notes+=[f"B26 length cut (repeats {x})" for x in _c]
     if whole and len(T)>10000: return S,add   # JOB 1 all-or-nothing (cells already over at HEAD)
     return T,add+notes
+        T,_c=_MC.doan_fit(T); notes+=[f"B26 length cut (repeats {x})" for x in _c]
+    return (T,add+notes) if len(T)<=10000 else (S,add)
 def _build(person,rank,age="a18"):
     if not _kc_drawn(ALIAS.get(person,person)): raise NotDrawn(person)   # B8: people NOT drawn are refused (CLI exit 2, --check counts them HELD)
     person=ALIAS.get(person,person); S0=store(person,rank,age); S=S0
@@ -581,6 +593,8 @@ def hairflower_named(a,person,rank):
     sp=LAST_G["hairflower_species"](ALIAS.get(person,person),rank)   # F2 (owner Lượt 1352): the F2 species of THIS rank
     if not sp: return a
     return a.replace("ONE fresh flower in her hair","ONE fresh "+sp[0]+" in her hair",1)
+    if not g_pets_allowed(rank,age): S=LAST_G["_PETS"].depet(S)   # F17 PETS: no animal pose where pets are not allowed (only the animal words change)
+    return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
 
 # ---------------- THÁI HẬU (owner Lượt 618 + 624, ROOT-53 order: BASE = the 18/11 Thái hậu prompt the owner liked, VERBATIM) ----------------
 # BASE file dev/art/elder-copy/THAIHAU_1811_c04_a36_BASE.txt = Magnific prompt of gen CqnHqn1EEy (c04 a36, 18/11 22:28Z; a51 bxMrxpT5Y2 / a65 cpSDpJs0eP

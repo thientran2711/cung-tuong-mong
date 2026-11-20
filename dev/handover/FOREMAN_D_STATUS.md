@@ -1,6 +1,7 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
 last wake: 20/11 18:56Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u (walk-cost-rv2 LAND READY)
+last wake: 20/11 18:04Z — FOREMAN D #11 session_01964izEy8y3SFtp96at4o7u (walk-cost reviewer opened)
 (older entries D #4–#6, 19/11: dev/archive/FOREMAN_D_STATUS-11-20-2026.md)
 ## HANDOVER — Foreman D #6 → D #7 (19/11 12:45Z; #6 depth 6, START_CTX ≈ 7 %, context 31 % (get_session 314k/1M) → rollover per OD:L1217)
 MAIN = ROOT-70 session_01Rc5AsKJHPE6qV9k9Ugyhj7 (depth 8 = LIMIT; other account → FOR MAIN / LAND READY lines here; send_message to MAIN fails 'not found'). C-AG = #22 session_01Rc5AsM9pCcsWwjoC8PjjW7 (other account; D relays to C-AG seats by "FOR C-AG" lines). LIVE main = edb2e724 (or newer). D never pushes main. D STANDBY = session_01964izFLpgp8aeBD8Y13gek (depth 0, idle).
