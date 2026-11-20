@@ -562,3 +562,4 @@ NEWACCT#2 ~16:50Z: THANCAN1 DONE 9e942f45 (540 cr) sheet LOOKED + sent Lượt 1
 NEWACCT#2 ~16:55Z: MARKFIX cut-outs DONE fdb28d16 (8 *-a18-mf.png on CDN, 0 cr). NOTE Lượt collision: NEWACCT-ROOT also sent thancan sheet as 'Lượt 1164' while I used 1163–1165; next = 1166. NEWACCT-ROOT has stopped.
 NEWACCT-ROOT ~16:52Z: OWNER thân cận 4 kiểu rejected (not distinctive; collar = Tần/Phi collar forbidden) → added to briefs/maid-edits-1162.md item 7. Asked about Nữ đế: not drawn for the new faces.
 NEWACCT-ROOT ~16:55Z: OWNER: thân cận sleeves ≈ nhất đẳng (item 8 in maid-edits-1162.md).
+NEWACCT#2 ~17:00Z: ITEMFIX DONE 939e37f9 incl. EYES sentence (424/age m-prompts, gate PASS). OPEN LEN: s31 t4/s33 t6 a18 >10k; elder a36 2, a51 63, a65 58 m-prompts >10k after EYES → asked owner OK to trim (Lượt 1168). Owner edit list items 7 (thân cận rejected, consort collar banned) + 8 (thân cận sleeves = nhất đẳng) via NEWACCT-ROOT. Next Lượt 1169.
