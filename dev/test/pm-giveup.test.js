@@ -68,7 +68,9 @@ const HTML=process.argv[2]||'dev/index.html';const sleep=ms=>new Promise(r=>setT
   await sleep(600);await okb(A);await sleep(1200);await okb(A);await sleep(1500);
   const r=await A.evaluate(()=>{const a=__npc;return{b0:__b0,b1:[S.bac,a.bac]}});const h=await hooks(A);
   const dS=r.b1[0]-r.b0[0],dA=r.b1[1]-r.b0[1];
-  ok(r0===true&&g===true&&ended&&dS<0&&dS===-dA,label+': she loses, the stake moves once from her to the NPC (bạc conserved)',{r0,g,rt,r,dS,dA});
+  /* E22u ruling (one rule with startContest / Hội thi, KIT §13.9 «the caller's own lose path with 0/10»): Cờ = the side that gives up loses the board;
+     a timed art = her mark is 0/10 and the duel is scored as always (talent + mark), so a strong talent may still beat a weak rival — the stake moves once either way */
+  const won=dS>0;ok(r0===true&&g===true&&ended&&dS!==0&&dS===-dA&&(kind==="co"?dS<0:true),label+(kind==="co"?': she loses the board, the stake moves once from her to the NPC (bạc conserved)':': scored with her 0/10 mark, the stake moves once (bạc conserved)'+(won?' — she won on talent':' — she lost')),{r0,g,rt,r,dS,dA});
   await sleep(2500);const r2=await A.evaluate(()=>[S.bac,__npc.bac]);ok(r2[0]===r.b1[0]&&r2[1]===r.b1[1],label+': nothing moves again later',{r2,b1:r.b1});
   ok(!h.frame&&h.kyNoise==null&&h.kyOut==null&&!h.onVs&&h.guardMs==null&&!h.onHud&&h.engX==null,label+': hooks cleared',h)};
  relay=false;await A.evaluate(()=>{COOPW.on=false});
