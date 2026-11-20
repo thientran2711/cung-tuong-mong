@@ -548,3 +548,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | ge-phutang (Phù Tang grand endings; E35 rolled at setup, review/ge-phutang 76be3f59, handover reports/ge-phutang.md) | review/ge-phutang | FOREMAN E #23 | session_01DgYSWmtReE6rpy19ACp49C (E35b) | RUNNING | 20/11 22:15Z |
 | GAP j75 rivalNight hầu-thay two-way (law 1; MAIN ROOT-81 20:40Z «yours, whole job»; opus) | review/rival-hauthay (base review/night-final-r3) | Foreman D #12 | session_01964izDuRCG31a2ffq84NH7 | RUNNING | 20/11 22:20Z |
 | kit-dress-picker KIT KEEPER (sonnet; owner OD ~21:45Z via ROOT-81) | review/kit-dress-picker; reports/kit-dress-picker.md | MAIN ROOT-81 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 17c9ac7e | 20/11 |
+| REVIEW dresscode r2 E30r2 (opus BIG) of 94abcf83 | review/dresscode-r2; reports/dresscode-review.md «ROUND 2» | FOREMAN E #23 | session_01DgYSWpFMntGUa2vqhwPDpr | RUNNING | 20/11 22:34Z |
