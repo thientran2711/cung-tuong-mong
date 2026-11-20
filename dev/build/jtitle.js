@@ -23,9 +23,12 @@ function kitHieuJoin(r,p){try{const h=p===S?S.hieu:p&&p.hieu;if(!h||!r||/^Hoàng
 window.kitHieuJoin=kitHieuJoin;
 const KDH_ART={};
 function kdhArt(t){if(KDH_ART[t]===undefined){KDH_ART[t]=false;const im=new Image();im.onload=()=>{KDH_ART[t]=true};im.onerror=()=>{};im.src="img/kit/title-plate-"+t+".webp"}return KDH_ART[t]===true}
-function kitTitlePlate(t,o){o=o||{};t=kitTitleDef(t);if(!t)return"";const tier=Math.max(1,Math.min(8,t.tier|0||1)),col=RCOL[tier-1],still=typeof kfStill==="function"&&kfStill();
+/* K-GE-2 (review/kit-ge): the «Thiên mệnh» plate (tier 8) in TWO tones, same shape: sh "t" = thiện (gold-white), "a" = ác (gold-crimson). The tone comes from o.sh, the title's .sh,
+   or the grand-ending key suffix (id "ge_<branch>_<n>t|a"); a title without a tone draws the plain tier plate. */
+function kdhTone(t,o){const s=(o&&o.sh)||t.sh||((/^ge_.+_\d+([ta])$/.exec(String(t.id||t.key||""))||[])[1]);return s==="t"||s==="a"?s:""}
+function kitTitlePlate(t,o){o=o||{};t=kitTitleDef(t);if(!t)return"";const tier=Math.max(1,Math.min(8,t.tier|0||1)),col=RCOL[tier-1],still=typeof kfStill==="function"&&kfStill(),tone=kdhTone(t,o);
  const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
- return `<span class="kdh kdh-t${tier}${kdhArt(tier)?" kdh-art":""}${still?" kdh-still":""}${o.cls?" "+o.cls:""}" style="--dh:${col}${kdhArt(tier)?`;--kdh-art:url(img/kit/title-plate-${tier}.webp)`:""}"${o.id!==false?` data-kdh="${esc(t.id)}"`:""}><i class="kdh-s" aria-hidden="true"></i><b>${esc(t.name)}</b></span>`}
+ return `<span class="kdh kdh-t${tier}${tone?" kdh-sh"+tone.toUpperCase():""}${kdhArt(tier)&&!tone?" kdh-art":""}${still?" kdh-still":""}${o.cls?" "+o.cls:""}" style="--dh:${col}${kdhArt(tier)&&!tone?`;--kdh-art:url(img/kit/title-plate-${tier}.webp)`:""}"${o.id!==false?` data-kdh="${esc(t.id)}"`:""}><i class="kdh-s" aria-hidden="true"></i><b>${esc(t.name)}</b></span>`}
 window.kitTitlePlate=kitTitlePlate;
 function kitTitleTag3(p,rank,name,col,me){const pl=kitTitlePlate(kitTitleWorn(p),{cls:"kdh-cap"});return `<div class="kt3">${pl}${typeof kitNameRank==="function"?kitNameRank(rank,name,col,me):""}</div>`}
 function kitTitleOpen(t){t=kitTitleDef(t);if(!t||typeof kitModal!=="function")return;const worn=kitTitleWorn(S)&&kitTitleWorn(S).id===t.id;
@@ -47,6 +50,10 @@ document.addEventListener("click",e=>{const x=e.target&&e.target.closest&&e.targ
 .kdh-t7::before,.kdh-t8::before,.kdh-t8::after{content:"✦";position:absolute;color:#fff6c8;font-size:.7rem;text-shadow:0 0 4px #ffe07a,0 0 8px var(--dh);pointer-events:none;animation:kdhst 1.8s ease-in-out infinite;z-index:2}
 .kdh-t7::before,.kdh-t8::before{left:-5px;top:-6px}.kdh-t8::after{right:-5px;bottom:-6px;animation-delay:.9s}
 .kdh-t8{animation:kdhpl 2.6s ease-in-out infinite}
+/* K-GE-2 tones (same shape, size, sparkle as tier 8): thiện = gold-white with dark-gold text, ác = gold-crimson with cream text */
+.kdh.kdh-shT{--dh:#d9a93a;color:#4a2f02;background:linear-gradient(135deg,#fffef4,#f9e9a8 38%,#e8c25a 72%,#bf902a);border-color:#fff7cf;box-shadow:0 0 0 1px #8a6a1a66,0 0 8px #ffe9a0,0 0 14px #fff3c8aa}
+.kdh.kdh-shT>b{text-shadow:0 1px 0 #fffbe8;color:#4a2f02}
+.kdh.kdh-shA{--dh:#b3262a;color:#fff6e0;background:linear-gradient(135deg,#f2c866 0%,#c43a2e 24%,#8f1522 70%,#5c0c18);border-color:#f0c86a;box-shadow:0 0 0 1px #00000055,0 0 8px #d84a3a,0 0 14px #b3262aaa}
 .kdh-still,.kdh-still .kdh-s,.kdh-still::before,.kdh-still::after{animation:none!important}
 @keyframes kdhsw{0%{background-position:-150% 0}60%,100%{background-position:250% 0}}
 @keyframes kdhst{0%,100%{opacity:.25;transform:scale(.6)}50%{opacity:1;transform:scale(1.1)}}
