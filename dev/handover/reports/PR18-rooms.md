@@ -35,3 +35,8 @@ NEXT (HELD until the owner's go via ROOT-62): room 30 sample per L25 (hạ sáng
 - owner ~02:00Z: same composites on the live Ngự hoa viên hạ sáng bg: nf867-nhv-{a,b,c}-lbl.jpg (c = s54 s55 s56 s58), 0 cr.
 - Coordinator now Foreman C ROOT-63 session_01PEhRbvZfdPoYPcwQjYD5EG (child of ROOT-62, verified 01:57Z).
 - L25 update (ROOT-63 01:58Z, owner ~01:57Z 'Giữ bảng màu gốc, đồng thời lấy thêm ánh sáng của ngự hoa viên làm mẫu'): room 30 sample LIGHT refs = tam-cung-dem-ha-sang.webp + ngu-hoa-vien-ha-sang.webp (light only). Still HELD.
+
+## Owner job (ROOT-63 ~02:00Z, 0 cr): công chúa + nhân vật theo màu công chúa on live Ngự hoa viên hạ sáng
+- Sheet 1 cc-nhv-1-lbl.jpg: 3 công chúa Cao Ly V2 cut-outs xSByOSyjfW (t4) / yiuGA83PW9 (t5) / cpS8oJg0eP (t6), all present; deep rose #C9708A + jade green #79A98F (pair used ONLY in princess prompts).
+- Sheet 2 cc-nhv-2-lbl.jpg: 6 LIVE figures (CDN img/fig-consort-*-a26.webp, B15 two-colour sentence, own colours): c06 t1 Đáp ứng · c01 t2 Thường tại · c30 t3 Quý nhân · c10 t4 Tần · c20 t5 Phi · c15 t6 Quý phi. Note: these live pictures still hold a teacup (older set).
+- Composer dev/art/face-common/pastel_L867/sheet_row.py.
