@@ -1,8 +1,8 @@
-# mg-ready-guide — SẴN SÀNG KIỂM (worker session_01Rc5AsMmYHY9za4sMP3PYzV, child of MAIN ROOT-72, depth 2)
+# mg-ready-guide — SẴN SÀNG KIỂM 2a17a1ea (worker session_01Rc5AsMmYHY9za4sMP3PYzV, child of MAIN ROOT-72, depth 2)
 PRIORITY #1 CHECK: OD 20/11 ~00:20Z (verbatim, owner bug fast lane) · main: KG82_KIND (31 kinds, `how`), kg82Open/kg82Play/kg82Rows, every engine's KG82.peek (reused as the hint hook), j91 k91DemoCard / jsgame / jtd first-time how-to cards (folded into the shared block), BAL.ag.mg2.cal.d (easiest gap) · review/*: none for a rules screen (review/tutorial*, tut-place-ready = story tutorial, not mini-games) · claims: this row only.
 START_CTX ~5 % of a 1M window; finished well under the rollover line.
 
-Branch `review/mg-ready-guide` · head **230e5de** (base origin/main 72f7c0c5, no merge needed — main unchanged at report time).
+Branch `review/mg-ready-guide` · head **2a17a1ea** (230e5de + the jmgcal save fix) (base origin/main 72f7c0c5, no merge needed — main unchanged at report time).
 
 ## What
 - **KIT §13.7 (new shared part, j82)** `kgReady(box, spec)` dresses the FIRST screen of every mini-game: rules block `.kgr` («Luật chơi · <môn>», kit rows Môn / Luật or step rows, a small looping picture of the move by engine group — fall / swing / hold / drag / tap — over the board painting, still under reduced motion), the caller's start button becomes **«Sẵn sàng»** ("từ lúc này mới tính giờ"), **«Hướng dẫn»** beside it, the §13.6 quick option kept. Nothing runs before «Sẵn sàng»: no engine, no canvas, no clock chip.
@@ -13,13 +13,16 @@ Branch `review/mg-ready-guide` · head **230e5de** (base origin/main 72f7c0c5, n
 - BAL: `BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260}` (jbal2). mgcal numbers unchanged (rounds 5, gaps -2..2 untouched).
 - Rejected: a gate inside kg82Play (would add a second screen and break 26 tests that tap #kg82go) — the rules block sits on the existing intro, so tap count is unchanged.
 
+## Added (ROOT-72, owner bug 20/11): Thử tay save
+`jmgcal.js` saved the kind (recSet) only in done() = after «Xem mức tay»; she played 5 rounds of Vẽ, left on the round-5 result, the kind was lost. Now `after()` calls recSet the moment the LAST round's raw arrives (before any button); done() reuses it. Unfinished kinds were and stay unsaved (raws local until round n), so the code never carries a partial kind. Test step 7 (mg-ready-guide.js): no `ve` before; 3 of 5 rounds of Múa then leave → `mua` not in the code; 5 rounds of Vẽ → `ve` in the code while the button still reads «Xem mức tay», and still there after leaving.
+
 ## Co-op note (brief point 4)
 Read time is on her own screen only; the shared buổi clock is never paused. Conflict noted: the steal game (jsmg) host holds the flip for the friend at most `BAL.steal.mg.coopMs` (120 s) — the friend's reading on the rules screen counts inside that hold (unchanged rule; if she reads long, the hold can expire as before). Not changed (law 16).
 
 ## Tests
-- `node dev/test/mg-ready-guide.js` (new) **PASS 8/8**: 31 kinds × first screen / idle 1.5 s / guided round with hand / unscored / back / Sẵn sàng starts play; self-end by following the hand for rhythm, aim, go, pattern, steps, lamp; 12 callers.
+- `node dev/test/mg-ready-guide.js` (new) **PASS 9/9** on 2a17a1ea (8/8 on 230e5de): 31 kinds × first screen / idle 1.5 s / guided round with hand / unscored / back / Sẵn sàng starts play; self-end by following the hand for rhythm, aim, go, pattern, steps, lamp; 12 callers.
 - `bash dev/tools/quickcheck.sh` on b32fcd2 **PASS** (core gates, time-spill, open 1560 ms, old save ok, perf new/live render 213/242, buổi 1188/1567). 230e5de after it = CSS-only (drag demo alignment) + build.
-- `node dev/test/ag-mgcal.js`: all ok except step 3 (2 lines) — **pre-existing on origin/main 72f7c0c** (test assumes Đàn uncalibrated; owner calibration dan 8.3 landed). Same output on a clean main build.
+- `node dev/test/ag-mgcal.js` (re-run on 2a17a1ea): all ok except step 3 (2 lines) — **pre-existing, not from this branch**: step 3 checks that `mgCalBand("dan")` is the BAL default band (lo 3 / hi 9.5) when nothing is calibrated, but main 72f7c0c landed the owner's calibration `BAL.ag.mg2.cal.k.dan={b:8.3}`, so the band is 6.3/9.5 and the test's "default" and "other kind untouched / removing it restores" assumptions (it uses dan as the uncalibrated kind) no longer hold. Identical output on a clean origin/main build. Fix belongs to the test (use an uncalibrated kind), not to the game; left untouched here (not my scope).
 - `node dev/test/mg-skip-audit.js`: 1 FAIL "jmgcal.js frame without kitQuick" — **pre-existing on main** (owner-only Thử tay screen).
 
 ## Shots (LOOKED; CDN img/_review/mg-ready-guide/, wipe with the verdict)
