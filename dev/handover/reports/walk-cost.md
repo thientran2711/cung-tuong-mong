@@ -47,3 +47,11 @@ dev/build: j2 j9 j15 j27 j41 j42 j72 j77 j95 jagent jbal (walk.npc) jkc jstagehe
 - A phối điện resident's home spot on Dư đồ is the chủ vị's palace spot (jres): its text can say «N khắc · bái kiến» (that palace's greeting, j77; was already there); the walk part is the same as goTo("home") charges.
 - Follow-up (not done here, deed timing belongs to jagday): NPC walks between two KEPT rows (deed → deed) still jump; ~8 of 27 far moves in 16 buổi.
 SẴN SÀNG KIỂM 85be2440d4bc4d40c9c8e96768864a7ec1bdac77
+
+## Round 2 (FROM FOREMAN D #9 ~09:59Z: de-flake ptime checks 4, 5 AND 11, whole family)
+- Check 5: guest's random answer pinned (rcvInviteGo, round 1).
+- Check 11: the tested order WAS gone; the «left:1» was a DIFFERENT new order (an NPC's rcvAsk «call») arriving while the khắc pass → the check counts only the tested order id (rows + half0).
+- Check 4: the jump and landing were right (diagnosed: back=1, now=due); the flake was waitOk read while a random card from the send was still queued (ptWaitOk = false with Q non-empty) → the card is closed first, as the player does; jump retries 3 → 6.
+- Result: ptime 12/12 + 3/3 on the merged build; ptime2 6/6 + 1/1. jptime not touched (invite-host-away-rv not needed).
+- Final-merged origin/main dbddaed2, index.html/sw.js rebuilt. Gates on b9da80741894e4b01354f33b94ba5e2188e5ff05: walk-cost ALL OK · ptime ×3 · ptime2 · ag-walk 10/10 · coop-e2e 68/68 · QUICKCHECK PASS (old save ok; perf buổi 1537/1033 ms this run vs 1014/1098 and 1039/1856 in earlier runs — noise likely, reviewer may re-measure).
+SẴN SÀNG KIỂM b9da80741894e4b01354f33b94ba5e2188e5ff05
