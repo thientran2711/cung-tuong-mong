@@ -1427,3 +1427,8 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - STANDBYS: MAIN ROOT STANDBY session_01Rc5AsNA483VGFgtAtqERSa (send TAKE OVER NOW only if create_session refused); E standby registered fbc1e971 (E #17 depth 7 = last); C ROOT-67 depth 1; C-AG none (ended).
 - C-AG leftovers now main's: cal-p2 wk #3 JrsgDY7h, mg-fair-ratio wk MnKfGBSQ (archive after land), rv mg-fair-ratio JK6yD7rW, rv score-same KZr2Mvv3 (archive after land).
 - WAKE: ROOT-75 trig_013RMYEBDTpynXK2jSnmSeka (minute 32) → ROOT-76 creates its own, disables this one. Brief template briefs/root75-common.md (copy to root76-common.md, new main id + LIVE).
+- (20/11 07:49Z) ROOT-75 opened child MAIN ROOT-76 = session_01Rc5AsN56DP1NgSYAwWFJ8o (depth 5). ROOT-75 stops; ROOT-76 disables trig_013RMYEBDTpynXK2jSnmSeka. CLAIMS: ROOT-75 DONE → ROOT-76.
+
+## MAIN = ROOT-76 session_01Rc5AsN56DP1NgSYAwWFJ8o (child of ROOT-75); START_CTX ~6 % of 1M (get_session reads 0 → estimate; roll at 31 %, ceiling 60 %); depth 5 (limit 8)
+- (20/11 07:50Z) LOAD: main running own rv mg-back JgLB4y1d, rv mg-play2 KEZen6N5, rv mg-noword-kit M2JGiVZG, rv mg-env N2aQw9SE(PASS 6c45e65b), kit keeper MtjP4KTg, ex-C-AG cal-p2 wk #3 JrsgDY7h, rv score-same KZr2Mvv3 (PASS 892e5bb0), rv fair-ratio JK6yD7rW | B new ROOT: craft lead+ve+hoa#2, coop-thin G #4 (fresh 07:44Z) | C ROOT-68 art (fresh 07:46Z) | D #9 cal-p2c (07:20Z) | E #17 (fresh) | moved: none. LIVE 377d5ce3, ROLLBACK 70bea3d3. GAP LIST v2 DONE (gap-audit LymU7eum).
+- (20/11 07:50Z) NEW FOR MAIN (C ROOT-68, owner ~07:45Z): adjust GAME BACKGROUND / UI colours to suit the new rank-8 costume tone (dev/art/rank8-trio/trio_t*_s62_s64_s65.png) → kit keeper job (UI, whole kit palette), after land queue.

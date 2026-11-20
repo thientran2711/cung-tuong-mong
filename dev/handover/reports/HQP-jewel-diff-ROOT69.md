@@ -1,0 +1,5 @@
+# HQP t7 jewel wording diff (ROOT-69, 0 cr) — s62 vs s64 vs s65
+Files: dev/art/rank8-s62/s62_t7.txt, dev/handover/review-sheets/rank8/s64/s64_t7.txt, dev/art/rank8-s65/s65_t7.txt
+Result: the jewel/ornament wording is IDENTICAL in all three (jewelled cloud-collar cape edged with pearls and gold, strands of pearls across the chest, phoenix crown with pearl strands + kingfisher inlay + gold tassels, HOÀNG QUÝ PHI LUXURY sentence: rubies/sapphires/pearls/jade on crown, layered pearl-and-gold necklace, pearl+jade trims on cape edges, long jade-and-gold belt pendants with pearl tassels).
+Only differences: robe colours (s62 ice blue + mint mist, s64 peony pink + smoke lilac, s65 jade + peach cream) and pose/held item (s62 jade flute held low, s64 gold flower basket at chest, s65 dance step + silk ball with gem tassels).
+=> s65 looks richer because of the image result (gold/pearls contrast more on jade; dance pose shows the cape + pendants; gem-tassel ball), NOT because of extra words. "Copy s65 wording" is impossible; to raise s62/s64 to s65 level the builder needs NEW jewel words (e.g. jewels written as clearly visible at game size), only after owner OK.
