@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c925183e+","t":"2026-11-20T16:15Z","c":"ge-npc-r1: bots — SEED (same opening draws per life across arms) + arms ge / fp to split the cause; fate per life","b":"2102cc5ece92","h":[{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"}]};
+window.CTM_BI={"s":"32c726b3+","t":"2026-11-20T20:28Z","c":"ge-npc-r1: bots — SEED (same opening draws per life across arms) + arms ge / fp to split the cause; fate per life","b":"e829909a7453","h":[{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -37579,6 +37579,8 @@ function kitHintPhrase(p,sg,nm,lv){const who=nm||"\u0001";
   [/phi tần.*ghen|ghen.*phi tần/i,["chuốc lòng ghen","các phi tần ghen ghét","các phi tần ghen ghét"],["bớt người ghen","các phi tần bớt ghen","các phi tần bớt ghen"],"i"],
   [/ghen|oán|ghét/i,["kết thêm oán","có người ghen ghét",`${who} sinh oán`],["bớt người oán","có người nguôi giận",`${who} nguôi giận`],"i"],
   [/tình ý/i,["thêm tình riêng","người ấy thêm tình ý",`${who} thêm tình ý`],["dứt tình riêng","người ấy nguội lòng",`${who} nguội lòng`]],
+  [/thế lực nhà\s*[+−-]\s?\d/i,["nhà ngươi thêm vững thế","thế lực nhà ngươi thêm vững","thế lực nhà ngươi thêm vững"],["nhà ngươi sút thế","thế lực nhà ngươi sút giảm","thế lực nhà ngươi sút giảm"]],/* kit-e-rows «KR thế lực nhà» (E25b, E28): HER OWN house only — E28's wording is «thế lực nhà −N»; another house («nhà Hộ bộ thế lực +6», «nhà nàng thế lực −6», j55) has the name BEFORE «thế lực» and must never read as hers (law 6a) */
+  [/(^|[^\p{L}])thế lực\s*[+−-]\s?\d/iu,["thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay"],["thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay"]],/* another house (j55): named in the line, not hers — a neutral phrase, the sign is not hers to read */
   [/quý nhau/i,["hai bên thêm thân thiết","hai bên quý nhau hơn","hai bên quý nhau hơn"],["hai bên sinh xa cách","hai bên bớt quý nhau","hai bên bớt quý nhau"]],/* kit-cost-rows-home «quý nhau» (a decline that costs the liking of both sides) */
   [/Gia thanh/i,["thêm danh giá gia môn","gia môn thêm danh giá","gia môn thêm danh giá"],["tổn danh giá gia môn","gia môn sút danh giá","gia môn sút danh giá"]],
   [/Áp lực hôn sự/i,["thêm sức ép hôn sự","hôn sự bị thúc ép hơn","hôn sự bị thúc ép hơn"],["đỡ sức ép hôn sự","hôn sự bớt bị thúc ép","hôn sự bớt bị thúc ép"],"i"],
@@ -37607,7 +37609,7 @@ function kitHintWho(p,m){try{const L=(typeof liveRivals==="function"?liveRivals(
  for(const v of L)if(v&&v.name&&p.includes(v.name))return v.name;
  if(!/^(nàng|hắn|con nàng)\s/.test(p))return"";const w=m&&m.who;if(w&&w.w&&w.w[0]==="r"){const v=typeof RV==="function"?RV(w.w[1]):null;if(v)return v.name}if(w&&w.nm)return w.nm}catch(e){}return""}
 /* how big a change is, in words (from Tâm cơ 25): "(nhiều)" / "(chút ít)" against the usual size of that stat — never the number */
-const KIT_HINT_MAG=[[/Áp lực hôn sự|Lời đồn|Gia thanh/i,10],[/Hồi môn/i,40],[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,10],[/được ưa/i,3],[/Sủng/i,5],[/Danh|Đức|Ân tình/i,4],[/Bạc/i,40],[/Sức/i,10],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,2]];
+const KIT_HINT_MAG=[[/Áp lực hôn sự|Lời đồn|Gia thanh|thế lực nhà/i,10],[/Hồi môn/i,40],[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,10],[/được ưa/i,3],[/Sủng/i,5],[/Danh|Đức|Ân tình/i,4],[/Bạc/i,40],[/Sức/i,10],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,2]];
 function kitHintMag(p){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];if(!n)return"";const v=+n;for(const [re,big] of KIT_HINT_MAG)if(re.test(p))return v>=big*1.5?" (nhiều)":v<=Math.max(1,Math.floor(big/4))?" (chút ít)":"";return""}
 function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:""};
  if(o.hint){const h=typeof o.hint==="function"?o.hint(lv):String(o.hint);return{hint:h}}
@@ -53648,6 +53650,19 @@ window.toilMkDraw=toilMkDraw;window.toilColOfP=toilColOfP;
 
 /* ---------- KIT §60 kitSwatches: one row per part (label · the picked name · round colour swatches with a short name) ---------- */
 const KSWT={reg:{}};
+/* §60.1 kitColDot (kit-e-rows, E30 dresscode, PARKING #11): a READ-ONLY colour dot + the family name (kitSwatches below is a picker). The colour is DATA, never the kit's own:
+   fam = a key of the ONE table BAL.dc.fam (jbal2: {hex,n}) or a ready object {hex|col, n|name}. kitColDot(fam,{role:"main"|"sec", size:"sm"|"md"}) · kitColDots([[fam,role],…]) = a row, «·» between. */
+function kitColDot(fam,o){o=o||{};const T=(typeof BAL==="object"&&BAL&&BAL.dc&&BAL.dc.fam)||{};const f=typeof fam==="object"&&fam?fam:T[fam]||{};const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,"");
+ const hex=f.hex||f.col||"",name=f.n||f.name||(typeof fam==="string"?fam:"");const sz=o.size==="md"?"md":"sm",role=o.role==="main"?"main":o.role==="sec"?"sec":"";
+ return `<span class="kcdot kcdot-${sz}${role?" kcdot-"+role:""}"${hex?` style="--cd:${esc(hex)}"`:""} title="${esc(name)}"><i aria-hidden="true"></i><b>${esc(name)}</b>${role?`<small>${role==="main"?"chính":"phụ"}</small>`:""}</span>`}
+function kitColDots(L,o){return (L||[]).filter(Boolean).map(x=>Array.isArray(x)?kitColDot(x[0],Object.assign({},o,{role:x[1]})):kitColDot(x,o)).join('<span class="ksep"> · </span>')}
+window.kitColDot=kitColDot;window.kitColDots=kitColDots;
+(function(){const st=document.createElement("style");st.id="kcdot-css";st.textContent=`
+.kcdot{display:inline-flex;align-items:center;gap:5px;vertical-align:middle;white-space:nowrap;color:var(--ink,#2a1a12);font-size:.75rem;line-height:1.2}
+.kcdot i{flex:none;display:block;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 34% 30%,rgba(255,255,255,.55),rgba(255,255,255,0) 42%),var(--cd,var(--line,#d6c7a8));box-shadow:inset 0 0 0 1px var(--line,rgba(0,0,0,.18))}
+.kcdot-md i{width:16px;height:16px}.kcdot-md{font-size:.82rem}
+.kcdot small{color:var(--dim,#7a6650);font-size:.68rem}.kcdot-main b{font-weight:700}
+`;document.head.appendChild(st)})();
 function kitSwatches(o){o=o||{};const key=o.key||"sw";KSWT.reg[key]=o;const esc=s=>String(s).replace(/[&<>"]/g,"");
  return `<div class="kswt" data-kswt="${key}">`+(o.rows||[]).map(r=>{const cur=r.items.find(i=>i.k===r.sel)||r.items[0];
   return `<div class="kswt-r"><div class="kswt-h"><b>${esc(r.label)}</b><span>${esc(cur?cur.name:"")}</span></div><div class="kswt-g" role="radiogroup" aria-label="${esc(r.label)}">`+
@@ -53681,6 +53696,8 @@ window.kitFaceZoom=kitFaceZoom;
 .kfzoom-i>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
 /* kv3:.kv1 */`;document.head.appendChild(st)})();
 function toilColRows(c){return ["mat","ma","son","may"].map(k=>({k,label:TOIL_COL[k].label,sel:c[k],items:TOIL_COL[k].L.map(x=>({k:x[0],name:x[1],short:x[2],col:x[3]}))}))}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60.1",title:"kitColDot · chấm màu chỉ để xem + tên họ màu (không bấm được)",where:"thông tin món y phục / trang sức (hàng «Màu»), lịch lễ, cổng lễ: màu chính + màu phụ; màu lấy từ MỘT bảng dữ liệu (BAL.dc.fam), kit không tự giữ màu nào",
+ html:()=>{const D=[{hex:"#c0392b",n:"Đỏ"},{hex:"#d4a017",n:"Vàng"},{hex:"#8fa98c",n:"Lục"},{hex:"#e8a0a8",n:"Hồng"}];return `<p class="kpnote">kitColDot · cỡ nhỏ / vừa</p>${kitRows([["Màu",kitColDot(D[0],{role:"main"})+'<span class="ksep"> · </span>'+kitColDot(D[1],{role:"sec"})],["Màu (vừa)",kitColDot(D[2],{size:"md"})]])}<p class="kpnote">kitColDots · một hàng</p>${kitRows([["Họ màu",kitColDots([[D[3],"main"],[D[2],"sec"]])]])}`}})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60",title:"kitSwatches · màu trang điểm (phấn mắt, phấn má, son môi, màu mày)",html:()=>{let z="";try{if(typeof S!=="undefined"&&S){const f=kitFile(toilPor().src);TOIL.prev={look:"dep",col:toilColDef()};try{z=kitFaceZoom(S,f)}finally{TOIL.prev=null}}}catch(e){}return `<div style="display:grid;grid-template-columns:minmax(110px,200px) 1fr;gap:10px;align-items:start">${z||"<span></span>"}${kitSwatches({key:"kitpage",rows:toilColRows(toilColDef())})}</div>`}})}catch(e){}
 
 /* (b0) CHỌN MÀU — before the three hồi: her portrait wears the picks live (the same layers as all day, at the "đẹp" strength) */
@@ -85217,7 +85234,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2102cc5ece92";window.CTM_BUILD=BUILD;
+const BUILD="e829909a7453";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
