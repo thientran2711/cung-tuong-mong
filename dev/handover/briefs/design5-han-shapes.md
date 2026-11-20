@@ -4,7 +4,7 @@ Read dev/art/START_ART_WORKER.md first (esp. §2 A38). Do not read big files who
 Files: dev/art/seasons4/s62_t{4..8}_HAN_BAC.txt (current = DESIGN4 ed3e8fd + #4 t4 throat-clasp fix; each has a .keep sidecar). Look at the owner's ChatGPT pictures dev/handover/review-sheets/owner-chatgpt/han_t6_quyphi_L1290.webp + han_t8_hoanghau_L1290.webp (the t6 picture shows the petal / pointed layered-panel "khuê y đuôi én" look she liked).
 Owner verdict: Hán prompts "nhìn chung khá là ổn" — keep everything that works (open wide collar + visible neck/V from DESIGN4, rank signature pieces, captions, colours, jewellery, embroidery).
 CHANGES (body/robe shape per rank so ranks differ clearly):
-- t4 Tần: take the petal / lotus layered pointed panels + swallowtail streamers look (khuê y đuôi én, the look in han_t6_quyphi_L1290) → fresh, lively. Fabric matte silk satin đoạn (unchanged).
+- t4 Tần: (CORRECTED owner Lượt 1300) NO petal/lotus, NO swallowtail hem — a Hán wrap robe of the same family as Phi khúc cư / Quý phi trực cư, simpler and clearly lower. Fabric matte silk satin đoạn (unchanged).
 - t5 Phi: khúc cư (Hán A, curved wrap spiralling round the body) — "giống như cái plan lúc đầu". Fabric matte đoạn.
 - t6 Quý phi: trực cư (Hán B, straight-hem robe). Fabric = GẤM brocade (owner Lượt 1291 — replace the đoạn words in t6).
 - t7 Hoàng quý phi: KEEP as is ("vừa phải").
