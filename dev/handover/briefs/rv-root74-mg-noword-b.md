@@ -1,0 +1,7 @@
+PRIORITY #1 CHECK: OD 20/11 ~05:10Z (no text in play) + ~06:20Z/~06:45Z (td_dung/td_hanh clarity) + ~07:35Z (thq seat label bug) | main j82 kit frame | review/mg-noword-b 7e0d6c26 | claims mg-noword-b JzUL1xc6
+# REVIEW mg-noword-b (SMALL, sonnet) — MAIN ROOT-74
+Read briefs/root74-common.md (all), START_REVIEWER.md, topic kit-ui.md, KIT.md parts touched, VANPHONG.md.
+Owner: "không có một cái mini game nào mà có chữ hết trơn á..." (OD ~05:10Z); "Cái trò dung này là tôi chịu quá, tôi không hiểu cách chơi." (OD ~06:20Z); td_hanh too much text / hard to understand (OD ~06:45Z); thq hồi 5 seat cards show overlapping «phong năm 209.8…» labels (OD ~07:35Z).
+Target review/mg-noword-b = 7e0d6c26 (report reports/mg-noword-b.md, clarity table).
+CHECK: 0 words in play + «Hướng dẫn» for the 15 group-b kinds (run mg-noword-b.js + look); td_dung/td_hanh/td_ngon/td_cong/chai animated rules pictures make the move obvious (LOOK, judge as a first-time player); thq label bug gone (look at hồi 5); kit-only parts registered in KIT.md; Fold 755x1000 + iPad 1180x820; mg-ready-guide 9/9, ag-mgcal, quickcheck incl. old save; does not touch env.zw / touch fx. If PASS: final-merge newest origin/main on review/mg-noword-b-rv (rebuild index/sw), rerun tests, FF-check.
+VERDICT: reports/rv-mg-noword-b.md; CLAIMS row; send_message MAIN ROOT-74 session_01Rc5AsLW7a12BUC5kZhtsTy "PASS <final sha>" or "FAIL <sha> <n fixes>" (fixes to worker JzUL1xc6).
