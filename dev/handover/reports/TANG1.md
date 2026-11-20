@@ -1,6 +1,6 @@
 # TANG1 report (worker of Foreman C #2) · START_CTX ≈ 3 % (estimate) · finished well under the roll line
 
-## JOB A — Option 1 drawn: s62 a18 xuân, t4/t5/t6, rank cape kept, Tang open neck — 3 gens, 405 cr, one try each, no cut-outs
+## JOB A — Option 1 drawn (DROPPED by owner ~18:55Z, rule G27: never show these 3 again): s62 a18 xuân, t4/t5/t6, rank cape kept, Tang open neck — 3 gens, 405 cr, one try each, no cut-outs
 Base = `build_all.py s62 4|5|6` (builder untouched). Test prompts dev/art/tang1/s62_t{4,5,6}_tang_xuan.txt (bases in the same folder).
 Colours: s62 has no entry in palettes_season.json; her xuân pair is in face-common/palettes_season_deep.json: soft clear cool peach-blossom pink #EB8186 + ivory white #F4F0E6 (root = đông ice blue / mint mist). Swap = colour words + hex only ("peach-blossom pink", "ivory white").
 Diff vs builder (A17):
@@ -19,7 +19,9 @@ Looked (honest):
 - Dangles next to the face on t5/t6 look like headdress tassels, not earrings; please check at full size.
 - Colours: xuân pair (pink/ivory), so the sheet compares against her ice-blue current pictures — the colour change is the season swap, not part of the neckline test.
 
-## JOB B — plan only (v2 after owner feedback): dev/handover/reports/TANG1_plan_B.md — big block = Tang chest band (hezi) ladder recommended; alternatives yingluo collar necklace, Tang shoulder wrap; Tang hair per rank decided; later test 405 cr per option.
+## JOB B — plan only (v3): dev/handover/reports/TANG1_plan_B.md — two FULL looks: T = Tang (rank = chest band), H = Han/Three Kingdoms deep crossed V (rank = stacked collar bands 2/3/4); test 405 cr each, 810 both. Rule G27 added (drop of Option 1).
 Open question: t6 open neck vs G25 (t6 always closed).
 
-Total credits: 405.
+## Phi test T vs H (owner GO ~19:10Z): 2 gens 270 cr — T fHzM1ekCDY, H hu205pSvqL; gate tp5 PASS (8 899 / 8 734 chars); sheet dev/handover/review-sheets/tang1/s62_t5_DUONG_vs_HAN.webp (new only). Looked: faces fine, no earrings, lips closed. T = open neck + strong chest-band block; H = crossed V modest depth, collar stack thinner. plan_B fixed: Tần starts at today's embroidery density.
+
+Total credits: 675.

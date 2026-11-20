@@ -59,3 +59,17 @@ Gen **VX7Nn0OMMU** (135 cr). Look: the fur band is clearly wider (about twice v1
 Sheet: `dev/handover/review-sheets/winter1/s62_t4_dong_long2.webp` (new v2 big · v1 cpSPN2P0eP · current).
 Length note for the rollout: v2 adds 141 chars more than v1. The s62 builder prompts + v2 fit ≤10 000 at every rank except t4 (which needs the ANGLE sentence cut).
 **WINTER1 total: 9 gens = 1 215 cr.**
+
+## Fur v3 — 3-step width ladder + Tần crossed collar (owner ~19:00Z: "Cho viền lông mới cho 3 bậc thấp, 3 bậc tiếp theo to hơn, gửi mẫu 1 hình tần. Hoàng quý phi và hoàng hậu to hơn nữa")
+G26 set to the ladder (TEST). The colour is plain ivory for everyone; only the width changes:
+- t1–t3: "WINTER: a WIDE band … about a hand's width …" (345 chars)
+- t4–t6: "WINTER: a WIDER band … about one and a half hands wide …" (357)
+- t7–t8: "WINTER: the WIDEST band … about two hands wide, rich and full …" (364)
+(full text in rule G26; each one ends "… yet lying smooth and close, never puffy or bulky; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape.")
+Sample s62 t4 → `dev/art/winter1/s62_t4_dong_fur3.txt` (9 887 chars, gate PASS): noangle prompt + t4–t6 fur + **pre-G22 collar** (the builder is not reverted yet, so the old words come from her drawn `dev/art/rank8-s62/s62_t4.txt`: "…borders of plum blossoms at collar, sleeves and hem, … a crossed collar,"; the G22 "few LARGE embroidered plum blossoms" kept, since only the neckline was reverted).
+Gen **hu20QqTvqL** (135 cr). Look: crossed collar OK; the fur is clearly wider than v2, smooth and not puffy; the collar fur wraps the base of the neck (face free); face OK.
+Sheet `dev/handover/review-sheets/winter1/s62_t4_dong_long3.webp` (new big · v2 VX7Nn0OMMU small).
+**WINTER1 total: 10 gens = 1 350 cr.**
+
+## Ladder confirmed (owner ~19:15Z: "Cho bản lông trước đó cho 3 bậc dưới, lông mới này cho, phi, quý phi, tần. Còn hqp và hh thì to hơn rõ, để thể hiện sự sang trọng hơn người khác")
+G26 updated (TEST): t1–t3 = v2 width (VX7Nn0OMMU), t4–t6 = v3 (hu20QqTvqL), t7–t8 strengthened to "the WIDEST, most luxurious band of thick soft plain ivory-white fur trim, clearly wider than at any lower rank, about two and a half hands wide, … rich, warm and cosy, yet lying smooth and close, never puffy or bulky; …" (408 chars; s62 t7/t8 builder prompts 9 142 / 9 311, so both still fit ≤10 000). No gens; Foreman C #3 asks the owner before a t7/t8 sample.
