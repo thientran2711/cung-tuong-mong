@@ -661,3 +661,4 @@ NEWACCT#4 ~17:31Z: OWNER Lượt 1278: run matte-đoạn Tần on Magnific ('cho
 NEWACCT#4 ~17:32Z: OWNER Lượt 1280: all 5 Hán prompts → closed neck on ChatGPT. Cause: signature-piece text (throat clasp/yoke, capes on shoulders) contradicts wide collar (collar text present). → DESIGN4 (Opus, design fix) brief briefs/design4-han-neck.md.
 NEWACCT#4 ~17:33Z: OWNER Lượt 1281: Sonnet+retries wasteful → ALL prompt writing/editing on OPUS; Sonnet only for gens/sheets with a ready prompt; A38 script stays. START_FOREMAN_C updated. (SWAP56 runs on Sonnet — left to finish, will A38-check.)
 NEWACCT#4 ~17:34Z: ITEMFIX4 edcb027: m11 t4 matte đoạn 8aiY6uzIrU (135 cr); #4 LOOKED, sent Lượt 1282 (notes: small earring left ear = fault, scalloped capelet, book+bird). ITEMFIX4 archived.
+NEWACCT#4 ~17:35Z: OWNER Lượt 1283: matte đoạn for t4 Tần, t5 Phi, t6 Quý phi (rule added, overrides B12 for t4–t6). Builder change to do AFTER SWAP56 finishes (same files) — Opus worker.
