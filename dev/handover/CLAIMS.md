@@ -508,3 +508,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | PARKING #11 dresscode SEASON + COLOUR DRESS CODE (opus E30; ORDER MAIN 19:05Z; expert pass first OD:L1327) | review/dresscode; reports/dresscode.md | FOREMAN E #20 | session_PENDING_E30 | RUNNING | 20/11 19:10Z |
 | REVIEW dresscode r1 (BIG opus E30r; brief briefs/E30r-review-dresscode.md) of 459a91bf | review/dresscode; reports/dresscode-review.md | FOREMAN E #22 | session_01DgYSWpTexpKL6eD2PDxGZS | RUNNING | 20/11 20:18Z |
 | B RE-GATE LANDER (opus; final-merge B PASS branches onto newest LIVE, LAND READY lines) | <branch>-land | B | session_01N1tNP4Whxd4Rssp5BqhJvD | RUNNING | 20/11 20:19Z |
+| GAP MG11 mg11-thutay (opus; ORDER MAIN ROOT-79 16:25Z; reuse mg-allkinds scan; jkc2 envoy chess, pet care, plant care, mưu kế → Thử tay hand b) | review/mg11-thutay; briefs/b-mg11.md | B | session_01N1tNP6gfoaarxkj8jTD5Aw | RUNNING | 20/11 20:28Z |
