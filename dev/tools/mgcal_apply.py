@@ -14,7 +14,7 @@ def main():
         sys.exit(__doc__)
     new = {}
     for tok in sys.argv[1].split()[1:]:
-        m = re.fullmatch(r'([a-z0-9]+):(\d+(?:\.\d+)?)/(\d+)@(\d\d/\d\d/\d{4})', tok)
+        m = re.fullmatch(r'([a-z0-9_]+):(\d+(?:\.\d+)?)/(\d+)@(\d\d/\d\d/\d{4})', tok)
         if not m:
             sys.exit('bad token: ' + tok)
         b = float(m.group(2))
@@ -26,7 +26,7 @@ def main():
     m = rx.search(s)
     if not m:
         sys.exit('BAL.ag.mg2.cal line not found in jbal2.js')
-    cur = json.loads(re.sub(r'([{,])([a-z0-9]+):', r'\1"\2":', m.group(2))) if m.group(2) != '{}' else {}
+    cur = json.loads(re.sub(r'([{,])([a-z0-9_]+):', r'\1"\2":', m.group(2))) if m.group(2) != '{}' else {}
     for k, v in new.items():
         if k in cur:
             if cur[k] != v:
@@ -34,7 +34,7 @@ def main():
         else:
             cur[k] = v
     js = json.dumps(cur, separators=(',', ':'), ensure_ascii=False)
-    js = re.sub(r'"([a-z0-9]+)":', r'\1:', js)
+    js = re.sub(r'"([a-z0-9_]+)":', r'\1:', js)
     s = s[:m.start()] + m.group(1) + js + m.group(3) + s[m.end():]
     open(P, 'w', encoding='utf-8').write(s)
     print('kind | base b | rounds | date')
