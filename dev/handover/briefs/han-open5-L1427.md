@@ -1,0 +1,10 @@
+# DESIGN12 job — Hán _open5 (owner Lượt 1427, verbatim):
+"Ok, sữa là làm sao á, mà chỉ có đúng mỗi Phi là cổ áo đúng cái kiểu mà phải thích rồi, còn những người khác vẫn có một cái vạt ngang qua, không hiểu nổi là mày copy cái kiểu gì. Tiếp đến á, là coi lại cái phần ừm, viền cổ áo của Tần nha, rom một hồi mất mất tiêu luôn cái viền đó luôn, không có còn thấy rõ giống như hồi đầu nữa."
+Read dev/art/START_ART_WORKER.md; A38/A39/A40/A41. 0 gens.
+#9 cause guess (verify): the collar SENTENCE is already identical (Phi = others). What only Phi has is her signature: "TWO layered embroidered ... satin collar bands sewn flat along the collar, following the wide V out to the shoulders, one over the other ...". Others: t4 has only a slim pearl-net band (collar border hard to see = Tần's lost border); t6–t8 put a cloud collar (yunjian) at the shoulders whose front reads as a HORIZONTAL band/flap across the chest.
+JOB: s62_t4_HAN_BAC_open5 (base t4 _open3) and s62_t{6,7,8}_HAN_BAC_open5 (base _open4):
+1. Give each the Phi's layered collar-band look as the visible COLLAR BORDER along the wide V out to the shoulders (copy Phi's words; colours = that rank's colours; t4 border clearly visible like her first version — find the early t4 Hán border wording in git history/approved files and say which you used).
+2. t6–t8 cloud collar: lies ONLY over the shoulders and upper back; at the FRONT nothing crosses the chest — only the layered V collar bands show; no horizontal band, flap or panel across the chest. Keep each rank's khúc cư, fringe ladder, yellow amounts and every other sentence.
+3. Find and remove any other word that can make a horizontal piece across the chest (inner top edge, chest band, bib, etc.).
+Proof: keep_check --sidecar + --all PASS, Counter word diff, check_store FAIL set vs base. Write dev/art/seasons4/*_open5.txt + .keep, commit+push (pull --rebase), append report dev/handover/reports/DESIGN12.md, send_message Foreman C #9 session_01D3E3NZXhAofYrqBeAVwLCF.
+ROLLOVER: at START_CTX % + 25 % of the window (ceiling 60 %) write your handover in your report and tell #9.
