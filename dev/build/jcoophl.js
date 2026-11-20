@@ -103,7 +103,7 @@ HL.check=check;
 function baseFrom(C,why){if(!host()||!C||!C.W)return;try{shared=fromC(J(C.W))}catch(e){shared=null}soon(why,60)}
 COOP.on("week",m=>{if(!CW.on||!m||!m.state)return;if(host())baseFrom(m.state,"week");else setTimeout(nmAgain,0)});
 COOP.on("state",m=>{if(CW.on&&m&&m.state&&host()&&!shared)baseFrom(m.state,"state")});
-COOP.on("start",d=>{shared=null;nmQ=[];const C=(d&&d.state)||(COOP.state&&COOP.state.C);try{if(CW.on&&host()&&fidBack())render()}catch(e){console.error("hl fidBack",e)}setTimeout(()=>{if(CW.on&&host()&&C)baseFrom(C,"start")},0)});
+COOP.on("start",d=>{shared=null;nmQ=[];const C=(d&&d.state)||(COOP.state&&COOP.state.C);try{if(CW.on&&host())fidBack()/* no render here: the room's own start flow draws next (a render inside "start" stalled a level-3 room at week 0) */}catch(e){console.error("hl fidBack",e)}setTimeout(()=>{if(CW.on&&host()&&C)baseFrom(C,"start")},0)});
 COOP.on("stop",()=>{shared=null;nmQ=[];HL.nm=[];FID.clear()});
 /* the guest (re)joins: she rebuilt from the room's C; the host's writes since are sent again */
 COOP.on("peer",on=>{if(on&&CW.on&&host()&&CW.base)baseFrom(CW.base,"peer")});
