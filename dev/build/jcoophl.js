@@ -64,7 +64,11 @@ HL.diff=diff;HL.canon=canon;
 
 /* ---------- HOST: send what it wrote outside the merge ---------- */
 let shared=null,tmr=0,nmQ=[];
-function check(why){if(!live()||!host())return;HL.stat.checks++;const t0=performance.now();let ops=[];
+/* the friend's own face (her pid, a pool identity) is reserved in the ONE world face list on the host too: before, only her seat held it
+   (pidEnforce on her side), the merge kept the host's list (arrays without ids: host wins), and the host could give her face to an NPC */
+function reserveFriend(){try{if(!CW.on||!host()||!S)return;const P=CW.base&&CW.base.P&&CW.base.P.b;const pid=P&&P.S&&P.S.pid;
+  if(pid&&typeof pid==="string"&&typeof figUsed==="function"){const U=figUsed();if(!U.includes(pid))U.push(pid)}}catch(e){}}
+function check(why){if(!live()||!host())return;HL.stat.checks++;const t0=performance.now();let ops=[];reserveFriend();
  if(why!=="pick"&&why!=="nm")try{figFill()}catch(e){}/* a world person still without a face gets the host's now (not at its next render) */
  try{const now=canon();if(shared)ops=diff(shared,now);shared=now}catch(e){console.error("hl check",e);return}
  HL.stat.ms=Math.round(performance.now()-t0);const nm=nmQ.splice(0);
@@ -92,7 +96,7 @@ function mine(who){try{if(!S||who===S||who===S.maid)return true;if((S.staff||[])
   if((S.kids||[]).includes(who))return true;if(typeof tsbPets==="function"&&tsbPets(S).includes(who))return true}catch(e){}return false}
 function seeded(seed,fn){const r0=Math.random;let s=seed>>>0||1;Math.random=()=>{s=(Math.imul(s,1664525)+1013904223)>>>0;return s/4294967296};try{return fn()}finally{Math.random=r0}}
 const hash=s=>{let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0};
-if(typeof figPick==="function"){const p0=figPick;figPick=function(who){try{if(CW.on&&!host()&&who&&typeof who==="object"&&!who.coop&&!mine(who)&&!(who.fid&&typeof figxHas==="function"&&figxHas(who.fid))){
+if(typeof figPick==="function"){const p0=figPick;figPick=function(who){try{if(CW.on&&!host()&&!lvl3()/* level >= 3: the lens drops her world writes */&&who&&typeof who==="object"&&!who.coop&&!mine(who)&&!(who.fid&&typeof figxHas==="function"&&figxHas(who.fid))){
    const U=figUsed(),n=U.length,f0=who.fid;const k=seeded(hash((who.id!=null?who.id:"")+"|"+(who.sid!=null?who.sid:"")+"|"+(who.name||"")),()=>p0.call(this,who));
    who.fid=f0;U.length=n;HL.stat.gPick=(HL.stat.gPick||0)+1;return k}}catch(e){console.error("hl gpick",e)}
   const a=who&&who.fid;const r=p0.apply(this,arguments);try{if(CW.on&&host()&&who&&who.fid&&who.fid!==a)soon("pick")}catch(e){}return r};window.figPick=figPick}
@@ -100,7 +104,7 @@ if(typeof figPick==="function"){const p0=figPick;figPick=function(who){try{if(CW
 function worldPeople(){const L=[];try{if(S.thO&&!S.thDead)L.push(S.thO);for(const v of rivals||[]){if(!v||v.coop)continue;L.push(v);if(v.maid)L.push(v.maid);
   for(const s of v.staff||[])if(s&&!s.coop)L.push(s);for(const k of v.kids||[])if(k)L.push(k)}
   for(const s of (S.thO&&S.thO.staff)||[])L.push(s);for(const m of S.men||[])if(m)L.push(m)}catch(e){}return L}
-function figFill(){if(!CW.on||!host()||!S||S.dead||typeof figPick!=="function")return 0;if(typeof figxReady==="function"&&!figxReady())return 0;let n=0;
+function figFill(){if(!CW.on||!host()||!S||S.dead||typeof figPick!=="function")return 0;reserveFriend();if(typeof figxReady==="function"&&!figxReady())return 0;let n=0;
  for(const p of worldPeople()){try{if(p.alive===false||p.dead)continue;const a=p.fid;if(p===S.thO){if(typeof figThPick==="function")figThPick()}else if(typeof figRoles==="function"&&figRoles(p).length)figPick(p);if(p.fid&&p.fid!==a)n++}catch(e){}}
  HL.stat.fill=(HL.stat.fill||0)+n;return n}
 HL.figFill=figFill;
@@ -116,7 +120,7 @@ function step(o,s){if(o==null)return undefined;if(Array.isArray(s)){if(!Array.is
 function root(p){if(p[0]==="S")return{o:S,i:1};if(p[0]==="R"){if(p.length===1)return{o:rivals,i:1};const v=(rivals||[]).find(x=>plain(x)&&!x.coop&&x.id===p[1][1]);return{o:v,i:2}}return{o:undefined,i:0}}
 function resolve(p,upto){const r=root(p);let o=r.o;for(let i=r.i;i<upto;i++)o=step(o,p[i]);return o}
 function apply(m){if(!live()||host()||!m||m.from===CW.seat)return;let ok=0,miss=0;
- const q=quiet;quiet=true;try{
+ const q=quiet;quiet=true;CW.inFC=(CW.inFC||0)+1;/* a sync from the host, as fromCanon (the guest tripwire counts only writes outside it) */try{
   for(const op of m.ops||[]){try{const [t,p]=op;
    if(t==="s"||t==="d"){const last=p[p.length-1];if(Array.isArray(last)){/* an id element replaced / dropped */const arr=resolve(p,p.length-1);if(!Array.isArray(arr)){miss++;continue}
       const i=arr.findIndex(e=>plain(e)&&(last[0]==="i"?e.id===last[1]:e.sid===last[1])&&!e.coop);if(t==="d"){if(i>=0)arr.splice(i,1)}else{const nv=toLive(op[2],"x");if(i>=0){const tg=arr[i];for(const k of Object.keys(tg))if(!(k in nv)&&!VIEW.has(k))delete tg[k];Object.assign(tg,nv)}else arr.push(nv)}ok++;continue}
@@ -129,14 +133,14 @@ function apply(m){if(!live()||host()||!m||m.from===CW.seat)return;let ok=0,miss=
   }catch(e){miss++;console.error("hl op",e)}}
   for(const x of m.nm||[]){HL.nm.push({o:x[0],n:x[1],r:x[2],w:COOP.state.week||0});nmText(x)}
   if(HL.nm.length>120)HL.nm.splice(0,HL.nm.length-120);
- }finally{quiet=q}
+ }finally{quiet=q;CW.inFC--}
  HL.stat.applied+=ok;HL.stat.miss+=miss;lg(["apply",m.why,ok,miss,(m.nm||[]).length]);try{if(typeof Q==="undefined"||!Q.length)render()}catch(e){}}
 /* her own texts that name a renamed person (the world copies came with the ops) */
 function nmText(x){try{if(typeof nmRewrite!=="function"||!x[2])return;const b=typeof nmBare==="function"?nmBare:(s=>s);const o=b(x[0]),n=b(x[1]);if(!o||o===n)return;
   const names=(typeof nmPeople==="function"?nmPeople():[]).map(e=>String(e.o[e.f]));if(names.some(s=>b(s)===o))return;/* someone here still holds the old name: texts cannot tell them apart */
   const k=nmRewrite(o,n,names);HL.stat.nm++;HL.stat.nmRefs+=k}catch(e){console.error("hl nm",e)}}
 /* after her next merged week: her P came back from her own end (which may have left with the old texts) */
-function nmAgain(){if(!live()||host())return;const w=COOP.state.week||0;HL.nm=HL.nm.filter(x=>w-x.w<=2);const q=quiet;quiet=true;try{for(const x of HL.nm)nmText([x.o,x.n,x.r])}finally{quiet=q}}
+function nmAgain(){if(!live()||host())return;const w=COOP.state.week||0;HL.nm=HL.nm.filter(x=>w-x.w<=2);const q=quiet;quiet=true;CW.inFC=(CW.inFC||0)+1;try{for(const x of HL.nm)nmText([x.o,x.n,x.r])}finally{quiet=q;CW.inFC--}}
 HL.apply=apply;
 COOP.on("act",m=>{if(!m||m.k!==K||!CW.on||m.from===CW.seat)return;try{if(m.ask){if(host()&&CW.base)baseFrom(CW.base,"ask");return}apply(m)}catch(e){console.error("hl apply",e)}});
 /* the guest (re)opened the room (reload / rejoin / first join): she was rebuilt from the room's C; she asks for the host's writes since */

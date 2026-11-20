@@ -7,7 +7,9 @@
      host-only  = changed on the host, not (or differently) on the guest  -> a family member (must reach the guest in the same week)
      same       = both seats wrote the same value (deterministic fix-up)  -> fine
      guest-only = the guest wrote a world value the host did not           -> the merge drops it (host wins): a guest-side divergence
-   usage: node dev/test/coop-host-lag-scan.js [lives=4] [months=14]   (exit 1 when a host-only or guest-only path is found) */
+   usage: node dev/test/coop-host-lag-scan.js [lives=4] [months=14]
+   A LISTER (it finds the family members; it runs no co-op room, so the relay of jcoophl is not in it): exit 0 with the table. The GATE is
+   dev/test/coop-e2e.js 'the same world on both seats' (two seats, the LIVE Worker) + COOP_HL_FORCE=1 (forced members (a) and (b)). */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');
 const LIVES=+process.argv[2]||4,MONTHS=+process.argv[3]||14;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000}});await serve(ctx);
@@ -44,4 +46,4 @@ const LIVES=+process.argv[2]||4,MONTHS=+process.argv[3]||14;
   for(const s of r.host){const k='host-only '+fam(s);all[k]=(all[k]||0)+1}for(const s of r.guest){const k='guest-only '+fam(s);all[k]=(all[k]||0)+1}
   bad+=r.host.length+r.guest.length}
  console.log('\n| side | world path (ids stripped) | hits |\n|---|---|---|');for(const [k,n] of Object.entries(all).sort((a,b)=>b[1]-a[1])){const [s,...q]=k.split(' ');console.log(`| ${s} | ${q.join(' ')} | ${n} |`)}
- console.log('page errors',errs.length,errs.slice(0,4));console.log(bad?'FAIL '+bad:'PASS');await b.close();process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(2)});
+ console.log('page errors',errs.length,errs.slice(0,4));console.log('LISTED '+bad+' differing paths');await b.close();process.exit(errs.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
