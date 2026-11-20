@@ -1,5 +1,5 @@
 /* ================= j96 THANH MAI TRÚC MÃ (owner 11/14): mạch tình kéo dài cả đời, ba chương trong chính tuyến j67 =================
-   Ai: con gái Tể tướng (tt), Đại tướng quân (dtq), nhà buôn muối (muoi), thầy đồ (thd), cháu Thái hậu (ch), tội thần (td), công chúa Nam Chiếu (nc).
+   Ai: con gái Tể tướng (tt), Đại tướng quân (dtq), nhà buôn muối (muoi), thầy đồ (thd), cháu Thái hậu (ch), tội thần (td), công chúa Cao Ly (nc).
    Người ấy là một nam nhân THẬT trong S.men (j22): tên, mặt có sẵn (không hồng tím), vai trò, chỉ số tình (m.tinh, hắn với nàng),
    lui tới nơi hợp vai (S.menW, bản ghi vị trí của j22; nếu sau này có bản ghi j95 thì đọc từ đó). Lòng nàng với hắn: S.tm96.h.
    Ba chương: tm96a đầu đời (tiến cung, gặp lại, tín vật) · tm96b giữa đời (liều mình, nghi ngờ, giá họa, Hoàng thượng thử lòng) ·
@@ -37,9 +37,9 @@ const TM96V={
   bg:"hôn phu đã định từ thuở nhỏ, trước khi nhà ngươi mang tội",how:"bỏ thi cử, học nghề y, vào Thái y viện để được ở gần ngươi",
   tok:"nửa tờ hôn thư đã cháy sém",force:"Nhà ngươi bị xử trảm, hôn ước tan theo. Ngươi đổi tên vào cung để báo thù. Đêm cuối, chàng tìm được ngươi ở bến sông, chỉ kịp nói: “Ta sẽ tìm nàng.”",
   route:"gói trong một thang thuốc bổ Thái y viện gửi sang",risk:"lén đổi bát thuốc có độc người ta dâng cho ngươi, rồi ghi bệnh án giả để che",bride:"con gái Viện sứ Thái y viện"},
- nc:{role:"Phó sứ Nam Chiếu",pre:"Phó sứ",up:"Đại sứ Nam Chiếu thường trú ở kinh thành",fr:"man",fid:["man:suthan-2","man:suthan-1"],haunts:["thu","vuon"],sur:["Đoàn","Mông"],
-  bg:"võ sĩ hộ vệ của ngươi ở cố quốc Nam Chiếu",how:"xin theo sứ đoàn Nam Chiếu làm phó sứ, vượt núi đến kinh thành",
-  tok:"chiếc vòng bạc chạm hoa trà, vật của mẹ chàng",force:"Phụ vương gả ngươi sang hòa thân để đổi lấy mười năm yên ổn nơi biên giới. Chàng cưỡi ngựa theo kiệu hoa đến tận cửa ải rồi phải quay về.",
+ nc:{role:"Phó sứ Cao Ly",pre:"Phó sứ",up:"Đại sứ Cao Ly thường trú ở kinh thành",fr:"man",fid:["man:suthan-2","man:suthan-1"],haunts:["thu","vuon"],sur:["Kim","Phác","Thôi"],
+  bg:"võ sĩ hộ vệ của ngươi ở cố quốc Cao Ly",how:"xin theo sứ đoàn Cao Ly làm phó sứ, vượt núi đến kinh thành",
+  tok:"chiếc vòng bạc chạm hoa mai, vật của mẹ chàng",force:"Phụ vương gả ngươi sang hòa thân để đổi lấy mười năm yên ổn nơi biên giới. Chàng cưỡi ngựa theo kiệu hoa đến tận cửa ải rồi phải quay về.",
   route:"giấu trong cống phẩm sứ đoàn dâng lên",risk:"đứng ra nhận tội thay khi sứ đoàn bị vu mang thư mật cho ngươi",bride:"một tiểu thư nhà quan được Hoàng thượng ban hôn để giữ chân sứ đoàn"}};
 function T96(){return S&&S.tm96||null}
 function V96(){const t=T96();return t?TM96V[t.k]:null}
@@ -111,7 +111,7 @@ ARC67.tm96a=arcFx("tm96a",{o:"tm",ok:ok96,t:"Thanh mai trúc mã: Ngày từ bi�
   {n:"Viết một dòng: “Hãy lập công danh”",go:()=>{adj96(BAL.arc.h96.tm96a.a1[2])},rt:"Ngươi gửi đi một dòng chữ, không ký tên."}]},
  a2:{h:"Gặp lại ở {lvp}",w:"lv",t:"Đi ngang {lvp}, ngươi khựng lại. {lv} đứng đó, y phục chỉnh tề. Chàng cúi đầu hành lễ như với mọi phi tần, chỉ có đôi mắt là không giấu được.",o:[
   {n:"Cúi đầu đi qua như người lạ",go:()=>{adj96(BAL.arc.h96.tm96a.a2[0]);A96f("cold")},rt:"Ngươi bước qua, không ngoái lại."},
-  {n:"Dừng lại hỏi một câu xã giao",go:(A,ok)=>{adj96({h:BAL.arc.h96.tm96a.a2[1].h,t:BAL.arc.h96.tm96a.a2[1].t,sus:ok?BAL.arc.h96.tm96a.a2[1].sus[0]:BAL.arc.h96.tm96a.a2[1].sus[1]});if(!ok){const v=pick(liveRivals(true));if(v)evA(v,S,BAL.eff.j96.evGo)}},rt:"Hai câu hỏi thăm, chỉ hai người hiểu nghĩa thật.",rf:"Một cung nữ của phi tần khác thấy hai người đứng hơi lâu."},
+  {n:"Dừng lại hỏi một câu xã giao",go:(A,ok)=>{adj96({h:BAL.arc.h96.tm96a.a2[1].h,t:BAL.arc.h96.tm96a.a2[1].t,sus:ok?BAL.arc.h96.tm96a.a2[1].sus[0]:BAL.arc.h96.tm96a.a2[1].sus[1]});if(!ok){/* NPC-PURPOSE G3: the one who really stands there and watches (npcWit), not a random consort */const w=npcWit(loc96(),null,{vs:S,not:[S,S.emp]})[0];const v=w?w.p:null;if(v)evA(v,S,BAL.eff.j96.evGo)}},rt:"Hai câu hỏi thăm, chỉ hai người hiểu nghĩa thật.",rf:"Một cung nữ của phi tần khác thấy hai người đứng hơi lâu."},
   {n:"Sai cung nữ chuyển lời: “Đừng tìm ta”",go:()=>{adj96(BAL.arc.h96.tm96a.a2[2]);A96f("cut")},rt:"{maid} chuyển lời. Chàng lặng người, rồi gật đầu."}]},
  a3:{h:"Tín vật trở lại",w:"maid",t:"{maid} run run đặt lên bàn một gói nhỏ: {lvtok}, {lvroute}. Bên trong có một mảnh giấy: “Vật này vẫn là của nàng.”",o:[
   {n:"Giữ lại, giấu thật kỹ",go:()=>{adj96(BAL.arc.h96.tm96a.a3[0]);T96().tok=1},rt:"Ngươi khâu tín vật vào lớp lót gối."},

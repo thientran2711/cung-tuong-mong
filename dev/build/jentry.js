@@ -61,6 +61,7 @@ function entExam(o,fin){o=o||{};let art=o.art||"";let k=entKind(art);if(!k||entW
  const after=(raw,sk)=>{KG82.phase="result";kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");
   kg82ShowRes(kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"],["Kết quả",o.note||"tính cùng Sắc, Tài, Đức","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
   $("kg82ok").onclick=()=>{kg82Close();end(raw)}};
+ kgReady(box,{kind:k});/* KIT §13.7 */
  $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)}
 /* the ONE seam (contract set by review/kc-roads-cn-nc-r1 at jkc2 kc2Play): kcEntryExam(kind, done(raw 0..10), info{art,origin,title,note}) */
 window.kcEntryExam=function(kind,fin,info){if(kind&&typeof kind==="object"){const o=kind;kind=null;info=o}info=info||{};entExam(Object.assign({},info,{kind}),fin)};
@@ -82,7 +83,7 @@ const ENT_INTRO={
  dtq:["Cha ngươi giữ binh quyền biên ải. Ngươi lớn lên giữa tiếng trống trận và bãi tập ngựa, chân cứng đá mềm.","Hoàng thượng cần lòng trung của Đại tướng quân; ngươi là sợi chỉ buộc lòng trung ấy vào cung cấm."],
  muoi:["Nhà ngươi giàu nhờ muối: thuyền muối của cha ngươi đi khắp các bến sông phương nam.","Bạc mua được lụa gấm, mua được một chỗ trong sổ tuyển; nhưng trong cung, người ta vẫn gọi sau lưng ngươi là con nhà buôn."],
  cn:["Ba năm nay ngươi hầu trà ở Càn Thanh cung. Ngươi biết Hoàng thượng thích nước trà thứ hai, biết thái giám nào nói thật, ma ma nào ăn bạc.","Một đêm mưa, Hoàng thượng giữ ngươi lại. Từ cung nữ thành chủ tử chỉ cách một lời khẩu dụ, và bao nhiêu ánh mắt."],
- nc:["Nam Chiếu ở xa về phương nam, nơi hồ Nhĩ Hải phẳng như gương, sơn trà nở quanh năm.","Hòa ước đổi lấy mười năm yên ổn nơi biên giới; cái giá của hòa ước là ngươi. Thái hậu không ưa người ngoại tộc."],
+ nc:["Cao Ly ở xa về phương đông, nơi biển Hải Đông xanh thẫm, hoa mai nở đầu xuân.","Hòa ước đổi lấy mười năm yên ổn nơi biên giới; cái giá của hòa ước là ngươi. Thái hậu không ưa người nước phiên."],
  bd:["Thảo nguyên Bắc Địch mênh mông, gió thổi rạp cỏ tới chân trời. Ngươi cưỡi ngựa trước khi biết đi giày thêu.","Ba trăm con ngựa theo ngươi làm của hồi môn, đổi lấy hòa ước mười năm với Đại Hy."],
  td:["Cả nhà ngươi bị xử trảm vì một bản sớ vu cáo. Người thế giao đổi tên ngươi trong sổ tuyển để giữ một đường sống.","Ngươi vào cung với cái tên không phải của mình, mang theo mối thù chưa ai hay."],
  ch:["Thái hậu là cô ruột của ngươi; từ nhỏ ngươi đã quen từng lối đi trong Từ Ninh cung.","Thái hậu muốn một người nhà mình đứng cạnh Hoàng thượng. Có người chống lưng là may, nhưng phẩm vị vẫn phải tự mình giành lấy."],

@@ -126,7 +126,7 @@ EVD.tuyen={place:w=>typeof qOn==="function"&&qOn()?"kn":"tn",
    const v=newRival(R(b.rankMax+1));Object.assign(v,drawFace());v.age=b.age[0]+R(b.age[1]);v.sung=cl((v.sung||0)+b.newSung,0,100);v.wNew=w.id;rivals.push(v);N.push(v)}catch(e){wErr("tuyen new",e)}}
   try{if(N.length&&typeof palFix==="function")palFix()}catch(e){}w.x.n=N.map(v=>v.id);
   for(const p of old)ap(p,{sung:-b.sungThin});
-  for(const v of old){if(v===S||!N.length)continue;const t=pick(N);const k=npcPick(v,[["welcome",mW(v,"help")],["ambush",mW(v,"harm")*(1+(v.ghen||0)/b.ghenDiv)],["ignore",1]]);
+  for(const v of old){if(v===S||!N.length)continue;/* NPC-PURPOSE G3: she sizes up the newcomer who counts most (Sủng + rank: the one worth winning or the one to cow), near-best */const t=npwPick(N,x=>1+(x.sung||0)+rkOf(x)*BAL.ag.why.g3.newRk);const k=npcPick(v,[["welcome",mW(v,"help")],["ambush",mW(v,"harm")*(1+(v.ghen||0)/b.ghenDiv)],["ignore",1]]);
    if(k==="welcome")affAdd(t,v,b.welcomeAff);else if(k==="ambush"){relAdd(v,t,b.ambushRel);if(typeof newsAdd==="function")newsAdd(v,"tuyen",`${v.name} ra oai với tú nữ mới ${t.name}.`)}}
   return N.length?`${N.length} tú nữ vào cung: ${N.map(v=>`${v.name} (${RANKS[v.rank].n})`).join(", ")}. Ân sủng cũ phải chia bớt.`:"Hậu cung đã đủ người, lần này không ai được giữ lại."},
  end(w){const N=(w.x.n||[]).map(byPid).filter(v=>v&&v.alive);return N.length?`Các tú nữ mới đã ổn định chỗ ở: ${nmList(N)}.`:""},

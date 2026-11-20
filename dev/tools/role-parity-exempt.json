@@ -104,8 +104,8 @@
 "re": "^label:(Đọc sách giải khuây|Đàn hát tự thưởng|Đập đồ|Mắng cung nữ|Khóc thầm|Viết thư nhà)"
 },
 {
-"reason": "first meeting (k61 greet): NPCs already know each other; NPC→her approach = jgreet gmOpts (ag-all-parity 1b)",
-"label": "Chào hỏi"
+"reason": "first meeting (k61 greet): NPCs already know each other; NPC→her approach = jgreet gmOpts (ag-all-parity 1b); the whole k61 stranger gate (j61 k61Gate: «Chào hỏi» / «Hành lễ», then «Hỏi danh tính» / «Kính cẩn hỏi danh tính»): an NPC learns a name through k61Week npcWit / npcTell (npc-purpose G3) — law 11 family (G1 #14)",
+"re": "^label:(Chào hỏi|Hành lễ|Hỏi danh tính|Kính cẩn hỏi danh tính)$"
 },
 {
 "reason": "witness card: an NPC who sees a deed answers through agSeeNpc hear/join/mediate/ignore (ag-all-parity 1c, SAME choice set)",

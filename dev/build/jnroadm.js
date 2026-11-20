@@ -98,10 +98,10 @@ const nrCKey=p=>p===S?"me":p.id;
 function nrCWho(k){return k==="me"?S:RV(k)}
 /* his rival (kept for the whole road; recast and told when gone) */
 function nrMenRival(e){const N=e.p.nr;const B=nrB().men;
- if(e.g==="men"){const L=(S.men||[]).filter(m=>m!==e.p&&m.alive!==false&&m.id!=="m96");const p=N.c!=null&&L.find(m=>m.id===N.c);if(p)return p;if(N.c!=null){N.rc=N.cn||"";N.c=null}if(!L.length)return null;const q=pick(L);N.c=q.id;N.cn=q.name;return q}
+ if(e.g==="men"){const L=(S.men||[]).filter(m=>m!==e.p&&m.alive!==false&&m.id!=="m96");const p=N.c!=null&&L.find(m=>m.id===N.c);if(p)return p;if(N.c!=null){N.rc=N.cn||"";N.c=null}if(!L.length)return null;/* NPC-PURPOSE G3: his rival = the man who also has his heart set on her (tình ý), near-best */const q=npwPick(L,m=>1+Math.max(0,m.tinh||0))||L[0];N.c=q.id;N.cn=q.name;return q}
  if(e.g==="off"){const T=trS();const L=Object.keys(T.H).filter(c=>c!==e.c);if(N.c&&L.includes(N.c))return N.c;if(!L.length)return null;
-  L.sort((a,b)=>NRM[N.r].ally?tdRel(e.c,b)-tdRel(e.c,a):tdRel(e.c,a)-tdRel(e.c,b));N.c=L[Math.min(L.length-1,R(Math.min(nrB().offTop,L.length)))];return N.c}
- if(e.g==="hz"){const L=allKids().map(z=>z[0]).filter(k=>k!==e.p&&k.sex==="m"&&k.alive);const p=N.c&&L.find(k=>k.name===N.c);if(p)return p;if(N.c){N.rc=N.c;N.c=null}if(!L.length)return null;const q=pick(L);N.c=q.name;return q}
+  L.sort((a,b)=>NRM[N.r].ally?tdRel(e.c,b)-tdRel(e.c,a):tdRel(e.c,a)-tdRel(e.c,b));/* G3: the clan his road stands with / against most (tdRel), near-best of the top offTop */N.c=npwPick(L.slice(0,Math.min(nrB().offTop,L.length)),c=>Math.max(1,(L.length-L.indexOf(c))*10));return N.c}
+ if(e.g==="hz"){const L=allKids().map(z=>z[0]).filter(k=>k!==e.p&&k.sex==="m"&&k.alive);const p=N.c&&L.find(k=>k.name===N.c);if(p)return p;if(N.c){N.rc=N.c;N.c=null}if(!L.length)return null;/* G3: his rival = the brother who stands closest to the succession (Tài + được thương), near-best */const q=npwPick(L,k=>1+(k.tal||0)+(k.fond||0))||L[0];N.c=q.name;return q}
  /* court men: the consort he leans toward (patron pk) and the one he leans against (c), from his af (key "me" = the player) */
  const C=liveRivals(true).filter(p=>!p.coop).concat(S.out||S.dead||nrLearn()?[]:[S]);const af=p=>(e.p.af&&e.p.af[nrCKey(p)])||0;
  const ok=k=>{const p=k!=null&&nrCWho(k);return p&&(p===S||p.alive&&!p.out)};

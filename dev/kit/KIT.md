@@ -99,23 +99,23 @@ Kit core: `j15` (person card, pager, buttons), `j17` (effect lines), `j19` (act 
 - risks are on their own red line labelled `kèm` (`.kl` label + `.ef.r`), never mixed into the gain line.
 - result toast deltas use the same `.ef g/r` spans (`resultShow`).
 
-### 1.3 ONE rank palette (harem + servants + roles) — `dev/build/j1.js` (owner 11/16 13:00Z "nhạt nhòa quá → tươi hơn")
+### 1.3 ONE rank palette B24 (owner Lượt 726/728: avatar frame/badge/halo, triều phục, rooms, any rank accent = the SAME colour per rank) (harem + servants + roles) — `dev/build/j1.js` (owner 11/16 13:00Z "nhạt nhòa quá → tươi hơn")
 The values are typed ONLY in j1: `RCOL` (8 ranks), `RCOL_COLD` (lãnh cung), `MRCOL` (maids), `ERCOL` (eunuchs), `KIT_ROLE` (non-rank roles). Nobody keeps a copy:
 read live `RCOL[rank]` / `KIT_RANK_COL[rank]` / `kitRankCol(rank|'cold')` (j60) / `kitServCol(role,rank)`. Used by: halo, ring, chips, card colour `--c`, portrait ground `.rk-c0..c7`,
-text tone. The TEXT tone on paper is DERIVED, never typed: `kitToneOf(base)` (jk4) = same hue, saturation kept ≥ .75 for vivid families, lightness lowered only until contrast ≥ 3.6:1
+text tone. B24 GROUNDS: ONE accessor `kitRankTone(title,col,ground)` (jk4) — ground `paper` (default for cream paper) = derived tone (`kitToneOf`); ground `stage` (painting / dark panel) = the RCOL base itself. Called without ground it returns the paper tone for `--rt` plus `;--rb:<RCOL base>` for the 8 harem ranks, so every existing builder carries both; CSS uses `--rt` on paper and `--rb` (+ dark ink edge) on stage tags / `.kesov` / `.krs` / `.modal.night`. No per-place colour. B24 note: Quý phi's "small royal-yellow touch, less than t7" (B21) has no existing kit accent slot; not invented here (see report). The TEXT tone on paper is DERIVED, never typed: `kitToneOf(base)` (jk4) = same hue, saturation kept ≥ .75 for vivid families, lightness lowered only until contrast ≥ 3.6:1
 on parchment #fbf3e2 (jewel tones; plain text, no edge); `kitRankTone(title)` looks the title up in `KIT_RT` (title words → base colour read from j1) and applies `kitToneOf`.
 Portrait grounds `.rk-c0..c7` are generated from `RCOL` by the `kit-rk` style (jk4), not typed in CSS.
 
 | rank | name | base colour (RCOL) | family |
 |---|---|---|---|
-| 0 | Đáp ứng | `#b8862f` | champagne-bronze |
-| 1 | Thường tại | `#27b04c` | green |
-| 2 | Quý nhân | `#2d7ef0` | blue |
-| 3 | Tần | `#f0489a` | pink |
-| 4 | Phi | `#9b4ee6` | purple |
-| 5 | Quý phi | `#ee2a3f` | red |
-| 6 | Hoàng quý phi | `#ff7a10` | orange |
-| 7 | Hoàng hậu | `#ffc20a` | gold |
+| 0 | Đáp ứng | `#eae3d0` | cream-ivory (kem / trắng ngà) |
+| 1 | Thường tại | `#7fb394` | green (xanh lá) |
+| 2 | Quý nhân | `#7e9ccb` | blue (xanh dương) |
+| 3 | Tần | `#e3a3b8` | hồng phấn |
+| 4 | Phi | `#a88bcb` | purple (tím) |
+| 5 | Quý phi | `#e3a25b` | orange (cam) |
+| 6 | Hoàng quý phi | `#d46a64` | red (đỏ) |
+| 7 | Hoàng hậu | `#efbd69` | gold (vàng) |
 | cold | Lãnh cung | `#8fa3b8` | cool steel grey |
 
 Frame / gem / brocade art (`img/kit/frame-consort-N`, `gem-N`, `bg-consort-N`) are painted pictures per rank (see §3); they keep their painted look (re-painting them brighter is an art task, not a palette change).
@@ -636,6 +636,23 @@ The ONE quick / skip choice of EVERY mini-game, beside its start button (the old
 - Name per game type: "Để trời định" (lessons, Tu đức, care games), "Học nhanh" (Tài nghệ lessons / practice), "Điểm trang nhanh" (makeup), "Kết nhanh" (veil craft).
 - Outcome table (a quick result never beats a good own play): lesson won = tiến bộ một phần (j5/j83: 1 of 3 pts; jtd: the progress of a `BAL.skip.raw` play), lost = 0 · works / crafts = never a product (sure) · makeup won = Đoan trang (`BAL.toil.tier[0]`, the middle tier), lost = Vụng về; "Để mặt mộc" stays its own choice · care (pet, plant) won = `BAL.skip.care` of the gain, lost = nothing.
 - Audit: `node dev/test/mg-skip-audit.js` (every game listed, FAILS a new game frame without kitQuick); page test `dev/test/mg-skip.js`.
+
+### 13.7 RULES SCREEN «Sẵn sàng» + GUIDED ROUND «Hướng dẫn» · kgReady / kgTut (owner OD 20/11 ~00:20Z, review/mg-ready-guide) — `dev/build/j82.js`, numbers `BAL.mgTier.tut` (jbal2)
+Owner (verbatim): "Có nhiều cái game đó tôi không biết luật chơi. Vừa mới vào game các bạn đã bắt đầu bạn trừ giờ của tôi là không có được. Phải cho tôi cái option là khi mà vào cho tôi đọc, cho tôi cái thời gian tôi đọc, khi nào tôi ready thì tôi bấm sẵn sàng rồi bắt đầu mới trừ giờ của tôi chứ. Phải thêm cả cho tôi có option là hướng dẫn, có nghĩa là sẽ có một màn hướng dẫn chơi, tức là một màn hướng dẫn chơi nhanh đó để còn biết chơi."
+The ONE first screen of EVERY mini-game (all KG82_KIND kinds and every caller: startContest, playArt, jmgcal Thử tay, jexam, jentry, jslap, jtd, jts tsGame, j92 Chải chuốt, jsgame mưu kế, jroute Nghiệm thân, the j5 openMG fallback; new callers — e.g. Foreman E person mini-games — use it too, never a private rules screen):
+- `kgReady(box, spec)` — call right after drawing the intro (rows + start button + §13.6 quick button) inside `.kgbox`. It puts on top a rules block `.kgr`: `.kpst` «Luật chơi · <name>», kit rows (`kitRows` via kg82Rows) Môn / Luật (the kind's `how`) or the caller's `steps` rows, and `.kgr-demo` = a small looping picture of the move over the board painting (seven motions by engine group, `KG82_DEMO`: fall · swing · hold · drag · tap · pull (fling: hand pulls back, releases, the arrow flies) · slide (blend: the hand slides a bar up, the bar fills); still when `reducedMotion()`). NO TEXT IN PLAY (owner OD 20/11 ~05:10Z): every pop word goes through the ONE kit table `kg82Sym` (j82): ★★★/★★/★ = how well, ✗ = miss, ▼ = look here, ↻ = once more, a/b = a count; in-play buttons are signs (`?` hint, `✓` done, word only in the tooltip, `k91Btns` 4th item); test dev/test/mg-noword-a.js; then a `.kpnote` "chưa tính giờ". The caller's start button (`spec.go`, default `#kg82go`, its own onclick kept) becomes «Sẵn sàng» (small line: "từ lúc này mới tính giờ" / untimed: "bắt đầu chơi"); «Hướng dẫn» (`#kgrtut`, `.kbtn.alt`) is added beside it. While this screen is up the frame's «Cách chơi» line is hidden (`.kg-ready`, no duplicate). NOTHING runs: no engine, no canvas, no clock chip (§13 kitGameClock) until «Sẵn sàng».
+- spec: `kind` (KG82_KIND key) | for an own game `n`, `t`, `how`, `e` (demo group), `pic`; `steps:[[label,text]]` (rows instead of Luật: jtd Tu đức rules + example, jsgame steps — shown EVERY time, no more first-time-only cards); `go` (selector); `timed:false`; `tutor(box, env) → stop` (an own engine for the guided round); `v` (env.v); `lv`.
+- `kgTut(box, spec)` = «Hướng dẫn»: the intro is kept aside (DOM fragment, handlers intact), the SAME engine runs in `.kgbox` on the EASIEST board (`mgSet(kind,{occ:"hoc", d: lowest gap of BAL.ag.mg2.cal.d})`), with `.kgt-bar` on top ("Hướng dẫn · <name>", the live step line: chạm / kéo / giữ / thả / chờ, "không tính phần, không mất gì, thử lại được") and «Về luật chơi» under it. The ghost hand `.kgt-hand` (one SVG, `KG82_HAND`, body-level fixed, pointer-events none) reads the engine's OWN hint hook `KG82.peek()` every frame — point `{x,y}` (tap), `{drag:[[x,y]…]}` (the hand travels the path), `{sel}` (a button), `{hold, x,y | hsel}` (hold / release) — so every engine family (j82, j91, jnwp, jnwq, jlant, jts, jslap, jtd, jhd, j92, jsgame, jroute) is guided by the same driver; an own game adds a `KG82.peek` (jroute: «Ra tay» while no gaze is on the bowl). Unscored: env.hud never touches the HUD / clock, env.end only ends the round, demo cards off (`KG82.noDemo`), `S` untouched, `KG82.tier/lv/occ/ctx/peek/run` put back. It ends by itself after `BAL.mgTier.tut.part` of the engine's rounds (round "a/b": a−1 ≥ max(1, ⌈b·part⌉)), on the engine's end, or after `BAL.mgTier.tut.ms`; «Xong hồi hướng dẫn» shows `BAL.mgTier.tut.back` ms, then the SAME rules screen returns (repeatable). ✕ during the round closes the game and keeps nothing.
+- Co-op: the read time is on her own screen only; the shared buổi clock is never paused (the steal game's host hold `BAL.steal.mg.coopMs` still counts while the friend reads).
+- Test: `node dev/test/mg-ready-guide.js` (every kind × every caller, scan table). Kit page sample «§13.7».
+
+### 13.8 HEAD-TO-HEAD SPLIT BOARD «Thách đấu» · kitGameVs (owner OD 20/11 ~01:00Z item 1, K-PM-1, review/kit-gamevs) — `dev/build/jgamevs.js`, knobs `BAL.gameVs` (jbal2)
+ONE shared live board for EVERY person-minigame art (đàn, cờ, hát, múa, thư pháp, họa, thêu, hương … any KG82 / person game that plays against a living NPC or friend): her board + the opponent's live score and clock side by side. Display only: no game logic, no rule numbers (the game owns them; the part only has `BAL.gameVs` = pop / warn / end knobs).
+- `kitGameVs({box, me:{p|face,name}, opp:{p|face,name}, unit:"phần", round, total, oppBoard})` → controller; mounts at the top of `box` (default `kg82Box()`), after `kgReady` (§13.7). Portrait = `kitFaceH` (kit portrait), score and clock = kit chips (`.kchip`), panes use `--k-hair / --k-card / --gold`.
+- API: `setScore(side,n)` (bump) · `setClock(side,secondsLeft|null)` («còn N giây», red under `BAL.gameVs.warn` of `total`) · `setTurn(side|null)` («Đến phiên» + gold ring) · `setRound(text)` · `end({win:"me"|"opp"|"draw",text})` (locks the board, ring green / red) · `vs.me` / `vs.opp` = board slots the game draws into · `destroy()`. `side` = "me" | "opp".
+- Layout: `html.kv1` (Fold portrait) opponent pane above, her pane below; `html.kv2` (iPad / spread) side by side, her LEFT, opponent RIGHT, round state between. Reduced-motion: no bump animation.
+- Words (VANPHONG): «phần» (never điểm / %), «khắc/giây», «Đến phiên», «Nàng thắng / Nàng thua / Hòa nhau».
+- Mount rule: a person minigame calls `kgReady` first, then `kitGameVs`; never a private scoreboard. Kit page sample «§13.8» (fake opponent ticking). Test: `node dev/test/kit-gamevs.js` (API, words, stacked / side-by-side, Fold + iPad + 390x844 + 1510x2000 shots).
 
 ## 14. SCENE PANEL (j79) — identity card, opening story, title screen
 - Compact translucent kit frame (`rgba(255,250,240,.90)` + blur) to one side in landscape (max 440 px / 44vw, vertically centred, right) and in the
@@ -3163,7 +3180,7 @@ merit invitation, opened for real and measured (layout, one person, banner in th
   7 amber-gold phoenix with spread wings (Hoàng hậu; owner 11/15 swapped 6↔7). Size factor `KIT_MEMARK.sc[r]` (0.78 → 1.22). Sheet dev/shots/me-mark/ranks8.jpg.
 - Where: her stage figure `#mefig` (any slot) and her figure in dialogs / event stages (`kitStageFig` adds `.kesme`). Never on anyone else.
 - STAGE SIZE (owner 18/11 ~06:15Z "chốt A1"; line: owner OD 19/11 ~02:05Z + ~03:50Z): on stages the marker stands ON the badge line of her sex (§78.y `kitMarkLine(st,sex)`: the highest REAL head top of the visible figures of that sex − G), on her centre line, level with every bubble of that line; `KIT_SLOTS.band` 70 and `KIT_FIG.h` .79 are unchanged; j59 `meCap` shrinks the one body H just enough that the men's standard line + bounce stay inside the frame (`kitMarkRoom`); when a crown / tall hat lifts the line past that room the marker shrinks (down to `KIT_MEMARK.tiny`), never sinks onto a head.
-- GLOW: `.kmemark` / `.kmmapmk` drop-shadow stack uses the Hoàng hậu title pill's gold (`--dh` = RCOL[7] #ffc400, jtitle kdh tier 8): white core + 3 halos 6/12/22 px.
+- GLOW: `.kmemark` / `.kmmapmk` drop-shadow stack uses the Hoàng hậu title pill's gold (`--dh` = RCOL[7] #efbd69, jtitle kdh tier 8): white core + 3 halos 6/12/22 px.
 - DIALOG placement rule (dialogs / event stages; stages use the row above): marker bottom = top of her head (first opaque row of the figure art, hair ornaments included) − `KIT_MEMARK.gap` (1.2 %)
   × her drawn figure height. Measured: iPad dialog 6.3 px on 524 px, 390 dialog 3.8 px on
   320 px (all = rule). Height 8.5 % of the figure × sc[r], 26–72 px; when the room above the head is short (dialog, scene title, plaques,

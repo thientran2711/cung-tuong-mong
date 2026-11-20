@@ -153,10 +153,10 @@ function motives70(v){const out=[];const z=j70();const sh=z.sh;const rise=sh.len
  try{if(sonsOf(v).length&&mySons().length&&(mySons().some(k=>k.heir)||rkOf(S)>=rkOf(v)))out.push([S,"ngoi"])}catch(e){}
  return out}
 function motiveTick70(){const z=j70();for(const v of liveRivals(true)){if(v.confined||v.plan||cnt70(p=>p.a===v.id))continue;const M=motives70(v);if(!M.length)continue;
-  const [t,mo]=pick(M);if(!alive70(t)||(typeof sameHouse==="function"&&sameHouse(v,t)))continue;const b=bandOf(danger(v,t));if(!b)continue;
+  const pm=npwPick(M,([x])=>alive70(x)?danger(v,x):0);if(!pm)continue;const [t,mo]=pm;/* npc-purpose G2: the motive with the deepest grudge */if(!alive70(t)||(typeof sameHouse==="function"&&sameHouse(v,t)))continue;const b=bandOf(danger(v,t));if(!b)continue;
   const T=traitsOf(v);let c=J70CFG.mot*(T.includes("Xảo quyệt")?1.6:1)*(T.includes("Ân cần")?.3:1)*(T.includes("Khiêm nhường")?.5:1)*(b>=2?1.2:1);if(t===S&&typeof BAL==="object"&&BAL.hz)c*=Math.min(1.2,BAL.hz);
-  if(!roll(c)||!canNew70(v.id,key(t)))continue;
-  let O=[];try{O=mindMenu(v,t)}catch(e){O=[]}O=O.filter(x=>methFor70(x[0])&&M70[methFor70(x[0])].band<=b);if(!O.length)continue;const k=wpick(O);const m=methFor70(k);if(!m||!okAct70(v,t,k))continue;
+  if(!canNew70(v.id,key(t))||!npcWhy("j70Plot",{p:v,t,mo},()=>roll(c)))continue;/* npc-purpose G2: a plot only from her motive; c = how soon she acts on it */
+  let O=[];try{O=mindMenu(v,t)}catch(e){O=[]}O=O.filter(x=>methFor70(x[0])&&M70[methFor70(x[0])].band<=b);if(!O.length)continue;const k=(npwPick(O,x=>x[1],{all:1})||[])[0];if(!k)continue;/* npc-purpose G2: every way on her own menu is hers: weighted by how much she wants it (the old wpick spread; near-best made the strongest ways ~2× commoner) */const m=methFor70(k);if(!m||!okAct70(v,t,k))continue;
   const p=newPlot70(v,t,m,null,mo);if(p&&!p.end){v.plan={k:M70[m].k,t:key(t),due:1e9,err:0,j70:p.id};try{mindLog(v,"_tell")}catch(e){}}}}
 /* j40's big-scheme plan becomes a chain (the plan stays as the 'one scheme at a time' lock) */
 (function(){if(typeof mindTell!=="function")return;const m0=mindTell;mindTell=function(v,t,k){try{if(j70On()&&v&&v.plan&&t&&!v.plan.j70&&canNew70(v.id,key(t))){const m=methFor70(k);if(m){const mo=t===S&&(v.ghen||0)>=Math.max(oan(v,S),-aff(v,S))?"ghen":"band";const p=newPlot70(v,t,m,null,mo,{err:v.plan.err||0});if(p){if(p.end)v.plan=null;else{v.plan.due=1e9;v.plan.j70=p.id}try{mindLog(v,"_tell")}catch(e){}return}}}}catch(e){console.error(e)}return m0.apply(this,arguments)}})();
@@ -366,8 +366,8 @@ function self70(a){const out=[];const busy=ords70().map(o=>o.sid);
  if(S.maid&&!busy.includes("maid")&&roll(selfP70maid()))out.push({n:S.maid.name,b:10,t:`${S.maid.name} tự canh chừng cho ngươi (lòng ${S.maid.loyal})`});
  for(const s of S.staff||[]){if(busy.includes(s.sid)||traitor70(s)||netIs(s,"timid"))continue;const p=netIs(s,"loyal")?(s.loyal-50)*2:(s.loyal-80)*3;if(p>0&&roll(Math.min(p,85)))out.push({n:s.name,b:8,t:`${s.name} tự để mắt cho ngươi (lòng ${s.loyal}${s.kn?`, tính ${netTxt(s)}`:""})`})}
  for(const v of liveRivals(true)){if(v===a||v.confined)continue;const f=aff(v,S);if(f>=50&&roll(Math.min((f-40)/2,25)))out.push({n:v.name,b:8,t:`${title70(v)} thân với ngươi (thiện cảm ${f}), cho người báo tin`})}
- if((S.sung||0)>=70&&roll(10))out.push({n:"Hoàng thượng",b:10,t:`Hoàng thượng thương ngươi (Sủng ${S.sung}), cho thị vệ để mắt`});
- if(!S.thDead&&(S.th||0)>=60&&roll(8))out.push({n:"Thái hậu",b:8,t:`Thái hậu quý ngươi (${S.th}), sai người trông chừng`});
+ if(S.emp&&npcWhy("j70Guard",{p:S.emp},()=>roll(10)))out.push({n:"Hoàng thượng",b:10,t:`Hoàng thượng thương ngươi (Sủng ${S.sung}), cho thị vệ để mắt`});
+ if(!S.thDead&&S.thO&&npcWhy("j70Guard",{p:S.thO},()=>roll(8)))out.push({n:"Thái hậu",b:8,t:`Thái hậu quý ngươi (${S.th}), sai người trông chừng`});
  return out}
 /* giuchung makes slanders against her harder; thudoc's taster may fall in her place */
 (function(){const r0=runAct;runAct=function(a,t,k,extra){if(t!==S||!a||a===S||!ACT[k]||!S||window.__j70off)return r0.apply(this,arguments);
@@ -528,8 +528,8 @@ try{ORD70.thudoc.acts.push("huydung");ORD70.canh.acts.push("huydung");ORD70.thud
   const btn=`<button data-r="${i}" data-a="huydung" ${dis||!ok?"disabled":""}>${a.n}<small>${[ok?word(oddsCl(o)):"",fmt(a.c),v.scar?"nàng đang có sẹo":S.bac<actBac("huydung",S,v)?"cần "+actBac("huydung",S,v)+" bạc":a.x].filter(Boolean).join(" · ")}</small></button>`;
   h=h.replace(/(<button[^>]*data-a="poison")/,btn+"$1")}catch(e){}return h}})();
 /* recovery, the same weekly rule for everyone */
-function heal70(p){const s=p.scar;if(!s)return;let st=1;const me=p===S;if(me?S.doctor:(p.doc||roll(20)))st++;if(me&&(S.arts&&S.arts.y>=2))st++;if(s.tr>0){st++;s.tr--}s.pg+=st;
- if(!me&&!s.cure&&s.sev>=2&&(p.bac||0)>=120&&roll(8)){p.bac-=120;s.cure=1}
+function heal70(p){const s=p.scar;if(!s)return;let st=1;const me=p===S;if(me?S.doctor:(p.doc||npcWhy("j70Face",{p},()=>roll(20))))st++;if(me&&(S.arts&&S.arts.y>=2))st++;if(s.tr>0){st++;s.tr--}s.pg+=st;
+ if(!me&&!s.cure&&npcWhy("j70Face",{p,cure:1},()=>roll(8))){p.bac-=BAL.ag.why.g2b.face.cureBac;s.cure=1}
  if(s.pg>=s.need){const L=SCAR70[s.sev];const perm=s.cure?0:L.perm;if(perm)p.sac=Math.max(5,(p.sac||0)-perm);p.scar=null;
   if(me)log(perm?`Vết thương trên mặt ngươi đã lành, nhưng để lại sẹo: Sắc -${perm} mãi mãi.`:`Vết thương trên mặt ngươi đã lành hẳn, nhan sắc như xưa.`);else if(knows(p))log(`${title70(p)} đã lành vết thương trên mặt${perm?`, còn sẹo (Sắc -${perm})`:""}.`)}}
 (function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&w0!=null&&wk()!==w0&&!window.__j70off){heal70(S);for(const v of rivals)if(v.alive&&v.scar)heal70(v);

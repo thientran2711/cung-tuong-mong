@@ -74,7 +74,6 @@ Object.assign(BAL,{route:{
  nightG:{suc:12} /* gain: a secret night that goes well */,
  order:{bac:-30} /* cost: summon the painter / musician for a week */,
  cutW:{duc:2} /* gain: break off the affair */,
- bmRoll:55 /* roll: a witness (not greedy) chooses blackmail over reporting */,
  accused:{sung:-10,danh:-6} /* she is reported for an affair without proof: the Emperor's rebuke */,
  watch:3 /* months Cung Chính ti watches her after a bribed guard reports */,
  maidBlab:25 /* roll: the frightened maid lets the escape plan slip */,
@@ -293,7 +292,7 @@ function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)
 Object.assign(BAL,{confess:{base:70,sungDiv:4,thDiv:5},
  /* BUTTON ACTS that roll at the odds cap (j63 capAt): k = khắc, suc = Sức each one costs. The handler, its hint and its soft-fail gate read
     the SAME key (one core); a soft fail spends of it only BAL.odds.softFail.spend (khắc + Sức), never the bạc. */
- /* the road with a man (j22 manCards, her and an NPC consort alike): Sắc / Tâm cơ divisors of «Liếc mắt» / «Trao khăn tay»; a tryst within seenW tuần leaves a hostile woman proof, seen % a month */manRd:{sacD:5,tcD:5,seenW:3,seen:4},
+ /* the road with a man (j22 manCards, her and an NPC consort alike): Sắc / Tâm cơ divisors of «Liếc mắt» / «Trao khăn tay»; a tryst within seenW tuần may leave proof with a hostile woman whose tai mắt dig it up (npcWhy trystKnow, her and an NPC alike) */manRd:{sacD:5,tcD:5,seenW:3},
  btn:{courtHoi:{k:2},kidTeach:{k:2},kidCare:{k:2},kidGuard:{k:2,mo:2,blk:50},cnv:{k:1},h54Thu:{k:1},wkShow:{k:2},h54Day:{k:2,suc:5},kidHeal:{k:2,suc:10},htAsk:{k:1},loSneak:{k:1}},/* Thú tội tư thông (a chance, the Emperor's mercy): base + Sủng/sungDiv + Thái hậu/thDiv; hỏng: bị ban chết */
  odds:{cut:[31,46,56,66,81,91],lo:5,hi:95,weak:{suc:30,pen:15}/* odA (j9): the doer's Sức below suc → every act's odds −pen; the poison card "Vì sao" prints this same key */,simN:200,softFail:{spend:["suc"]}}});
 function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
