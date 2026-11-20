@@ -820,6 +820,8 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
     text = norm(text); fails, warns, found = [], [], {}
     for k, kind, d in master_common.check(text, high=master_common.high_scope(scope)):   # + B12 (Lượt 781): fabric by rank   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
         fails.append((k, "MASTER " + kind, d))
+    for k, kind, d in master_common.check_elder(text, scope, age):   # C5 (owner Lượt 779/784): elder colours win over M05 at a51/a65, never in Nữ đế
+        fails.append((k, kind, d))
     # SL1 (owner Lượt 773/778): ANY prompt (every scope) whose sleeve sentence sends the sleeves to the floor must carry S37 (sleeve-hold sentence) exactly once
     if FLOOR_SLEEVE_RX.search(text):
         _s37 = next(e["text"] for e in S if e["id"] == "S37"); _n = text.count(norm(_s37))

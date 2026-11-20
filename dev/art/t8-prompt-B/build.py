@@ -2017,6 +2017,13 @@ if __name__=="__main__":
     if "--golden" not in sys.argv:
         _o,_n=IDENT_RX.subn(IDENT_LAW,_o)
         assert "hairstyle colour" not in _o and "her own hairstyle (the same" not in _o,"identity sentence variant not covered: "+_o[max(0,_o.find("hairstyle")-200):_o.find("hairstyle")+80]
+    # C5 (owner Lượt 779/784, MG2): EVERY a51/a65 lady prompt except Nữ đế (B23) says her elder colours win over master M05. Paths with the S33 COLOUR RULE got the clause above;
+    # the others (ma ma, triều, cung nữ/nữ quan states ...) get ELDER_M05_SENT right after her age text (AGE_TXT, which holds the 'DEEPER, DARKER ... older lady' colour words).
+    if AGE in ("a51","a65") and STATE!="nude" and "--nude3" not in _RAW and "--golden" not in sys.argv and ELDER_M05_BRIDGE not in _o and ELDER_M05_SENT.strip() not in _o:
+        if AGE_TXT[AGE] in _o: _o=_o.replace(AGE_TXT[AGE],AGE_TXT[AGE]+ELDER_M05_SENT,1)
+        else:
+            _m=re.search(r"[^.]*DEEPER, DARKER[^.]*\.",_o)
+            if _m: _o=_o[:_m.end()]+ELDER_M05_SENT+_o[_m.end():]
     if "--golden" not in sys.argv and os.environ.get("CTM_MASTER_LATER")!="1":   # B25 ONE MASTER COMMON BLOCK (owner Lượt 745/766, MG1): dev/art/MASTER_COMMON.txt verbatim, every output (golden = frozen reproduction, exempt; CTM_MASTER_LATER=1 = a post-editing caller (nude-B/mk.py) applies it as ITS last step; check_store FAILs any prompt without it)
         sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import master_common as _MC
         _PRIN=bool(a) and a[0] in ("p01","p02","p03","bt","cl","pt")

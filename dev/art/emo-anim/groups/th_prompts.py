@@ -2,7 +2,7 @@
 """Thái hậu mood-seal set (prefix th-): prompts = th-gian.md copied exactly, only the feeling words + disc colour change.
 Ref A = eIPl4i6dqL (th-gian A); B ref = that seal's own A. Seedance clips: keyframes only."""
 import json, sys
-WHO = ("an ELDERLY EMPRESS DOWAGER of the Qing-style inner palace: an old woman about seventy, kind round face with soft wrinkles at the eyes and mouth, "
+WHO = ("an ELDERLY EMPRESS DOWAGER of the imperial inner palace: an old woman about seventy, kind round face with soft wrinkles at the eyes and mouth, "
        "silver-grey hair streaked with a little black, swept up into a high formal bun under a LARGE ornate gold phoenix crown with spread phoenix wings, "
        "pearl strings and red jewels (clearly grander than any consort's hairpins, nothing like a maid's single hairpin and flower), small pearl earrings, "
        "a royal yellow (#EFBD69) brocade robe with a deep plum (#6E3A5E) collar and gold embroidery at the shoulders")
@@ -58,13 +58,13 @@ S.update({
    "turns secretive: she leans forward and comes out of the round frame toward the viewer through soft grey mist, her head and shoulders push past the gold rim, her arms come out, one hand parts the mist, the other raises a finger to her lips 'shh', she winks, a small question mark appears",
    "keeps her secret in a loop: she holds her finger to her lips, winks with a sly smile, parts the drifting mist with her hand, the grey mist wisps swirl, the small question mark bobs",
    "gives one last 'shh', the mist and the question mark fade away, she lowers her hands", "a sly secretive old face with a finger at her lips and the large phoenix crown"),
- "dau": ("deep blue",
-   "Her face is WAILING in grief: eyes squeezed shut, mouth open in a sob, brows up, streams of tears down her cheeks",
-   "HEARTBROKEN and wailing",
-   "both fists rubbing her eyes, wiping tears, wide royal yellow sleeves with plum cuffs visible; wailing sobbing old face, brows up; streaming tears and a few small flying tear drops",
-   "breaks into tears: she leans forward and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out and both fists rub her eyes, she wails, tears stream and a few drops fly",
-   "keeps sobbing in a loop: she rubs her eyes with both fists, her shoulders shake with sobs, she wails with her mouth open, tears stream and small drops fly",
-   "gives one last sniffle, the flying tears stop, she lowers her fists", "a crying old face with tears and the large phoenix crown"),
+ "dau": ("deep blue",  # owner Lượt 798/803: HEARTACHE held back, must NOT read as crying (no sobbing, no open mouth, no streams/flying tears)
+   "Her face shows deep inner PAIN held back: brows knitted in pain, eyes half-lowered and glistening, ONE single tear at the corner of one eye, lips pressed tight, one hand pressed to her chest over her heart",
+   "HEARTSICK, in deep pain held back",
+   "one hand pressed flat to her chest over her heart, the other hand gripping the gold rim, wide royal yellow sleeves with plum cuffs visible; brows knitted in pain, eyes half-lowered and glistening, ONE single tear at the corner of one eye, lips pressed tight, mouth closed; no sobbing, no streams of tears, no flying drops",
+   "feels a stab of heartache: she leans forward and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out, she presses one hand to her heart and grips the rim with the other, she winces with her lips pressed tight, one single tear forms at the corner of her eye; no sobbing, mouth stays closed",
+   "keeps holding back the pain in a slow loop: she presses her hand to her heart, winces, her shoulders tense, she breathes slowly in pain with her lips pressed tight, the single tear glistens at her eye corner; no sobbing, no open mouth, no streams of tears, no flying drops",
+   "gives one last slow pained breath, eases the hand from her heart, lets go of the rim", "a pained old face with knitted brows, lips pressed, one tear at the eye corner, and the large phoenix crown"),
  "ghen": ("yellow-green",
    "Her face is JEALOUS: narrowed eyes glancing sideways (both eyes looking the same way), one cheek puffed, a sour pout",
    "JEALOUS",
@@ -96,6 +96,9 @@ W = {}
 for _k, _v in _load("w-new").items(): W[_k] = _v
 for _k, _v in _load("w-act").items(): W["act-" + _k] = _v
 # Thái hậu is the emperor's mother: her act-tinhtu invites an honoured guest to tea, not the emperor
+# owner/ROOT-57 23:46Z + ROOT-58 23:55Z: no disc colour near chroma green (the key eats it; th-hanghai disc came out semi-transparent)
+for _k, _c in (("hanghai", "bright coral"), ("act-hanghai", "bright coral"), ("act-ghen", "deep jade-teal")):
+    W[_k] = (_c,) + tuple(W[_k][1:])
 W["act-tinhtu"] = tuple(x.replace("INVITING THE EMPEROR", "INVITING AN HONOURED GUEST TO HER TEA") for x in W["act-tinhtu"])
 def _strip(face): return face[5:] if face.startswith("same ") else face
 def wprompts(k):

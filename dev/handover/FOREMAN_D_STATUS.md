@@ -282,3 +282,4 @@ LESSONS: (1) grep the WHOLE STATUS each wake. (2) Every new rule code a worker a
 - (19/11 22:52Z) FROM MAIN ROOT-72: LIVE main = 71e7b382 (runact-sv-fix j29 on 3584ea42). ROLLBACK 3584ea42. Final-merge 71e7b382 before LAND READY.
 - (19/11 23:05Z) FROM MAIN ROOT-72: LIVE main = 7bc73251 (rank-palette-b24 on 71e7b382). ROLLBACK 71e7b382. Final-merge 7bc73251 before LAND READY.
 - (19/11 23:50Z) FROM MAIN ROOT-72: LIVE 2f328213 coop-ptime-reds (on 7bc73251). ROLLBACK 7bc73251. Final-merge 2f328213 before LAND READY.
+- (20/11 00:20Z) FROM MAIN ROOT-72: LIVE 72f7c0c5 (owner mgcal dan into BAL, on 2f328213). ROLLBACK 2f328213. Final-merge 72f7c0c5 before LAND READY.
