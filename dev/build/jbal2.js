@@ -1622,3 +1622,5 @@ BAL.tdCourt={giftAf:20,backs:40};
    happening pair talks first, 1 = always while the deed is on (owner OD:L1627 (5)), idle topics only after its pool is spent; srv / friend / rival / base pair weights; solo = one person speaking to her). on:0 turns the whole feature off. */
 BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400,ch:55,min:2600,max:6000},noRepeat:60,mem:400,
  greet:{delay:900,wait:1500,tries:20},w:{hap:1,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
+/* kitGameVs (K-PM-1, owner OD 20/11 ~01:00Z item 1, KIT §13.8): the live head-to-head split board «Thách đấu»; knobs only, the game that mounts it owns every rule number */
+BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share of the round clock left at which a clock chip turns red; end = ms the result banner takes to settle (all three still under reduced motion) */
