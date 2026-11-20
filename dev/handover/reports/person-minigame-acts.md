@@ -322,3 +322,37 @@ Useful from E22g: shots harness = pm-live relay + dismiss the start chest (#kmre
 ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
 - Trigger = context: at START_CTX % + 25 % of the window, NEVER above 60 % (hard ceiling): write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too; the COORDINATOR opens the successor.
+
+## §ROUND C r2 + pm r4 probe job (E22h, session_01DgYSWniAXpADTXukGd9dzH; FOREMAN E #19 → #20)
+PRIORITY #1 CHECK: grepped OWNER_DECISIONS/HANDOVER/PROGRESS + git grep origin/main and origin/review/* for pmSk/mgSkipRaw/quick, kitHint «quý nhau», KG82 gomoku, role-parity drift-2 worlds; reused: mgSkipRaw/mgTier (jmgt), kgGomoku + BAL.pm.ky, KIT_REQUESTS.md line 80 (the «quý nhau» request already OPEN, not filed again), the drift-2 / m-meet explicit-world method in dev/tools/role-parity-scan.js.
+
+### pm r4 (FOREMAN priority job) — SẴN SÀNG KIỂM pm r4 65b54c9d (review/person-minigame-acts-r4-wip; base 56a85ffd = r3 + LIVE eb11e2ad)
+Scan tool only (no game code, no exempt, open list unchanged):
+| gap | root cause | fix |
+|---|---|---|
+| hh N-ONLY ml:beat / ml:frame | the port now asks the NPC hh asHitPick against every maid-palace; on the player hh pass every other-palace maid was a stranger → j61 k61Dis disabled «Bắt quỳ / Vu tội» («Chưa biết người này là ai»); lab() skips disabled buttons | «social» world: she also knows every other palace's servant (k61 3), as it already did for the consorts |
+| t1 P-ONLY harm:phonghoa | player gate ACT.ok opened only when a drawn rival store held a burnable piece (tsbBurnable); NPC side never chose it: flat N0 world, Đức −8 > spite +4 → agU 0 at every rank | both sides: gates + haOpts0 target loop give each target one burnable piece (removed after); the target loop also asks her own needs NR (#real) → SAME t1..t7, hh, up |
+Proof: role-parity.test ×2 PASS (10/10 each); two --json scans identical (rows + gaps); gaps 17, all listed; quickcheck PASS alone (render 255/263, tab 525/536, buổi 1598/1385 ms). New non-gap cell: cx3:talkGossip P·draw t4/t6. Not merged: LIVE 983a9436 (asked FOREMAN).
+
+### ROUND C r2 fixes on review/person-minigame-acts-c (E22t FAIL 96b9db00)
+| # | fix | sha |
+|---|---|---|
+| 0 | rvwip ff78a32a + LIVE 4e8cbaeb / 5cd6d24a / eb11e2ad / 983a9436 merged (j82 kg82Play = main's po + mgIdRes identity mark + round-C hooks onHud/onFin/engX-own raw/endMark/guardMs) | 74b42504, bf127820, 08ac808a, 81b09b10 |
+| 1 | co-op live give-up reaches the other device at once (pmLvGu sends end{gu}; pmLvGuEnd ends the friend's board: Cờ kyOut win, timed endMark = mark so far; log «… bỏ cuộc giữa ván …»); timed give-up = 0/10 as the NPC rule | 9b16a06f |
+| 2 | «quý nhau» = KIT part: no jk2b edit; family scan dev/test/kit-quynhau-scan.js (lost: jrcv rcvNoO, pm decline rows play+duel; kept: accept rows, talkOpts «quý nhau thêm»); pm-wordmode now deterministic (always a bề-trên and a non-bề-trên asker) → (c) FAILS until KIT READY | df8b3449 |
+| 3 | 7×7 Cờ in Thử tay: KG82_KIND.co7 (gomoku, own raw, guard BAL.pm.ky.guard) | 1f9d5965 |
+| 4 | one pmSk/pmQuick (mgSkipRaw of the pm tier) at all four quick sites; playArt skip scores quick.raw; typed 5 fallbacks gone; pmMed (median, not a draw) for odds + Cờ noise | 1f9d5965, a31e8357 |
+| 4b | Cờ noise uses his base-tier median: the tier-R median fell with R and weakened him as she climbed (law 5); pm-rank okK 39 31 23 15 10 10 10 10 | 5afcb4fd |
+| 5 | N1: ladder sim 400 buổi | df8b3449 |
+| 6 | role-parity probe fixes from r4 carried over | 5fe030e9, 31ef0b7f |
+Tests on 08ac808a (before the last LIVE + probe port): pm-giveup 41/41 · pm-quick-co7 8/8 · mg-allkinds 7/7 · pm-live 19 · pm-coop-d rc0 · -c 22 ×3 · pma 31/31 · one-core-guard PASS · mg-ready-guide 9/9 · mg-back 12/12 · receiver-choice PASS · pm-equal PASS · pm-rank rc0 · pm-wordmode FAIL (c) only ×5 (KIT READY). mg-env «DOM engine drew dan/hat/banh», mg-noword-kit 1 kind, kit-mark dan 1/289 FAIL on main 5cd6d24a's own build too (pre-existing flake, not this branch). Full suite on 31ef0b7f: running.
+OPEN until KIT READY: «quý nhau ±N» sign in kitHint (KIT_REQUESTS line 80) → pm-wordmode (c). Flag (law 16, outside pm): jkc.js:516 and jkc2.js:343 still type «tính 5/10» / fin(5). Question: KIT §13.9 says a give-up «tính như thua», but a timed NPC give-up can still win on talent (pre-existing; co-op mirrors it).
+Shots (local, CDN 401): Fold 755×1000 + iPad 1180×820 — co7 board, pm quick «tính như người cùng bậc (9/10)», no h-scroll.
+
+## HANDOVER (E22h → successor; written at the roll point ~31 %, 20/11 ~18:40Z)
+State: pm r4 65b54c9d = SSK sent to FOREMAN E #20 (session_01DgYSWktqRepcrRpV9LRJV2). -c HEAD 31ef0b7f pushed; full suite (/home/user/wt/pm22h-rv/suite.sh) was running on it.
+To do: (1) re-run the -c suite on 31ef0b7f (or newer LIVE): expect pm-wordmode (c) FAIL only, the dan/hat/banh flake as on main, role-parity ×2 identical + PASS, quickcheck PASS; (2) retake shots fold/ipad thutay-list + co7-rules (last run caught the boot cover under load: run alone); (3) send «SẴN SÀNG KIỂM person-minigame-acts-c <sha>» to FOREMAN E #20 with the OPEN list above; (4) if FOREMAN says so, merge LIVE into r4 and re-prove role-parity ×2 + quickcheck.
+Never two browser jobs at once (OOM killed a run). Each full role-parity scan takes ~8 min.
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- Trigger = context: at START_CTX % + 25 % of the window, NEVER above 60 % (hard ceiling): write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too; the COORDINATOR opens the successor.
