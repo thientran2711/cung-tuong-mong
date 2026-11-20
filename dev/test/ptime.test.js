@@ -37,7 +37,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 5 invite */
   toB0();const v=liveRivals(true).find(x=>x.alive&&!x.out&&!x.confined&&!sameHouse(S,x));o.inv=!!v;
   if(v){BAL.invite.hate=-999;const before=used;invite(v.id);const ia=ptZ().find(a=>a.kind==="invite"&&!a.back);o.ia=ia?{who:ia.who,due:ia.due,now:ptNow()}:null;o.iused=used-before;
-   const oo=ia.a.o;ia.a.o=100;spend(R.invite.n-R.invite.o);o.iback=!!ia.back;o.iwhere=S.where[v.id];ia.a.o=oo}
+   const oo=ia.a.o;ia.a.o=100;/* walk-cost: pin the guest's answer (jrcv rcvInviteGo is the guest's own random choice; this check is the TIMING) - was a ~1/3 flake */const rg=typeof rcvInviteGo==="function"?rcvInviteGo:null;if(rg)rcvInviteGo=()=>true;try{spend(R.invite.n-R.invite.o)}finally{if(rg)rcvInviteGo=rg}o.iback=!!ia.back;o.iwhere=S.where[v.id];ia.a.o=oo}
   /* 6 NPC sender two-way */
   toB0();const n=liveRivals(true).find(x=>x.maid&&x.alive&&!x.out);o.npc=!!n;
   if(n&&typeof AGRUN!=="undefined"&&AGRUN["cx2:maidSpy"]){const tg=S;const s1=ptZ().length;const ret=AGRUN["cx2:maidSpy"](n,tg);const na=ptZ().find(a=>a.who==="mm:"+n.id&&!a.back);o.npcAway=na?{due:na.due,now:ptNow(),by:na.by}:null;o.npcRet=ret;
