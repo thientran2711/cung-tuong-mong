@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2548e06a+","t":"2026-11-20T01:36Z","c":"mg-fair-hands: site build (upbringing)","b":"c6ca45386698","h":[{"s":"b7633b66+","t":"2026-11-19T23:50Z","c":"palace-chatter: CHAT_L topic hh-me (12 lines, Hoàng hậu to her; warm/cool/cold + season tags) — the only -me pair kind with no bank, so a H…"},{"s":"2f328213+","t":"2026-11-19T23:11Z","c":"coop-ptime-reds r1 (review): merge main 7bc73251 (B24 rank palette, colour only); index/sw/assets rebuilt by build_site.sh"},{"s":"66a26121+","t":"2026-11-19T22:49Z","c":"coop-ptime-reds r1 (review): her tap while her due-task tick (ptTickHer) is pending is HELD and sent after its answer (was refused busy = l…"},{"s":"2dd36abf+","t":"2026-11-19T22:36Z","c":"B24 fix: rank text on paintings / night panels uses the RCOL base (one accessor kitRankTone ground), paper keeps derived tone; rebuilt inde…"},{"s":"868c682c+","t":"2026-11-19T17:43Z","c":"runact-sv-fix: j29 hoist textually identical to review/coop-thin-f6-r1 (merges clean)"},{"s":"c8af1135+","t":"2026-11-19T14:36Z","c":"npc-purpose G1 #14: build line"},{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"}]};
+window.CTM_BI={"s":"5bf7d64a","t":"2026-11-20T01:46Z","c":"mg-fair-hands: upbringing reads the existing j1 ORIGINS art start levels (MAIN relay), no new table","b":"bc9729e1283a","h":[{"s":"b7633b66+","t":"2026-11-19T23:50Z","c":"palace-chatter: CHAT_L topic hh-me (12 lines, Hoàng hậu to her; warm/cool/cold + season tags) — the only -me pair kind with no bank, so a H…"},{"s":"2f328213+","t":"2026-11-19T23:11Z","c":"coop-ptime-reds r1 (review): merge main 7bc73251 (B24 rank palette, colour only); index/sw/assets rebuilt by build_site.sh"},{"s":"66a26121+","t":"2026-11-19T22:49Z","c":"coop-ptime-reds r1 (review): her tap while her due-task tick (ptTickHer) is pending is HELD and sent after its answer (was refused busy = l…"},{"s":"2dd36abf+","t":"2026-11-19T22:36Z","c":"B24 fix: rank text on paintings / night panels uses the RCOL base (one accessor kitRankTone ground), paper keeps derived tone; rebuilt inde…"},{"s":"868c682c+","t":"2026-11-19T17:43Z","c":"runact-sv-fix: j29 hoist textually identical to review/coop-thin-f6-r1 (merges clean)"},{"s":"c8af1135+","t":"2026-11-19T14:36Z","c":"npc-purpose G1 #14: build line"},{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29179,7 +29179,8 @@ function mg2On(){try{return typeof agOn==="function"&&agOn()&&!!(BAL.ag&&BAL.ag.
 function mgWith(o,f){const k=MGX.o;MGX.o=o;try{return f()}finally{MGX.o=k}}
 function mgMedD(d){const P=BAL.ag.mg2.med;d=+d||0;let i=0;while(i<P.length-2&&d>P[i+1][0])i++;const [a,ma]=P[i],[b,mb]=P[i+1];return cl(ma+(mb-ma)*(d-a)/(b-a),0,10)}
 function mgNpcTier(kind,p,o){o=o||{};return mgTier(kind,{occ:o.occ,big:!!o.big,rank:o.rank!=null?o.rank:mgRankOf(p),lv:o.lv,p})}
-function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||Math.random,u=(r()+r()+r())/3;MGX.n++;const d=o.d!=null?o.d:mgNpcTier(kind,p,o).d;
+function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||Math.random,u=(r()+r()+r())/3;MGX.n++;if(o.lv==null&&p&&typeof p==="object"&&p!==S&&typeof mgOrgLv==="function"){const ol=mgOrgLv(p,kind);if(ol){let v=0;try{v=kg82LvFor(p,kind)}catch(e){}if(ol>v)o.lv=ol}}/* upbringing start bậc (OD 20/11 ~01:50Z): her board as the player's, whose arts hold it */
+ const d=o.d!=null?o.d:mgNpcTier(kind,p,o).d;
  const H=BAL.ag.mg2.hand;if(H&&H.on&&p!==S){/* AG-ALL-2d HAND CEILING: a roll under her own ceiling (her hand + her art / upbringing lift, mgHandEff), then the board's ease (the same gap shift the player's board gives) */
   const c=mgHandEff(kind,p,o);return cl(Math.round(c-(1-u)*H.w+(mgMedD(d)-mgMedD(0))),0,10)}
  return cl(Math.round(mgMedD(d)+(u-.5)*BAL.ag.mg2.w),0,10)}/* o.d: a known gap (no person: the matching level 0) */
@@ -29193,10 +29194,10 @@ function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||M
    better (c + eq … c + far), 1/3 worse (c − far … c − eq) — bell-shaped inside each third (mean of two hashed draws); eq / far = BAL.ag.mg2.hand.
    (2) ART: mgHandEff adds BAL.ag.mg2.hand.art per art level of that kind above
    the player's own level (kg82LvFor; minus below): a trained NPC clearly beats her, an untrained one is weak. (3) UPBRINGING (owner OD 20/11 ~01:50Z,
-   verbatim: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà nghèo mới yếu"): + BAL.ag.mg2.hand.up[origin] − up[her origin]
-   (mgOrgOf: j1 ORIGINS key of a consort — S.origin, v.nr.o / v.ag.o, jagent agOrg; a servant = "srv"; unknown "_"): noble-born trained from childhood
-   are strong on entry, poor-born weak, rising only through the palace art level. Rank itself gives NO skill — law 5 comes from who she meets higher up
-   (mostly noble-born, more trained). Art / upbringing are read live (never saved), measured against the player of seat a (mgRefP: S; a co-op guest reads
+   verbatim: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà nghèo mới yếu"; MAIN relay: read the EXISTING origin stats, no new
+   table): a person's art level for the lift = max(her own level, the start art bậc of her origin for that kind — j1 ORIGINS / ORIGIN_BR art:{…}, e.g. tt
+   cam 1, cn y 2, nc / bd vu 1, td / thd thi 1; mgOrgLv). Her origin key: mgOrgOf (S.origin; a consort's v.nr.o / v.ag.o / jagent agOrg; a servant "srv";
+   unknown "_" = none). Rank itself gives NO skill — law 5 comes from her harder board as she climbs and from who she meets. Art / upbringing are read live (never saved), measured against the player of seat a (mgRefP: S; a co-op guest reads
    the host's person) so both co-op seats roll the same play.
    Her play = a roll UNDER that ceiling (c − (1 − u)·w, u = mean of 3 draws), THEN the same board ease the player gets from her own art level / rank /
    occasion (mgMedD(d) − mgMedD(0): the skilled bot's measured shift between an easy / matching / hard board). Never a perfect player: even the best hand
@@ -29219,12 +29220,14 @@ function mgRefP(){try{if(typeof agGuest==="function"&&agGuest()&&typeof consorts
    (saved on her, host / solo only — a co-op guest reads what the host saved) */
 function mgOrgOf(p){try{if(!p||typeof p!=="object")return"_";if(p===S)return(S.origin&&S.origin.k)||"_";if(p.nr&&p.nr.o)return p.nr.o;if(p.ag&&p.ag.o)return p.ag.o;
  if(typeof p.org==="string")return"srv";if(p.rank!=null&&typeof agOrg==="function"&&!(typeof agGuest==="function"&&agGuest())&&typeof consorts==="function"&&consorts().includes(p)){const o=agOrg(p);if(o)return o}}catch(e){}return"_"}
-function mgUp(p){const U=BAL.ag.mg2.hand.up||{},k=mgOrgOf(p);return U[k]!=null?U[k]:(U._||0)}
-/* (2) + (3): the hand an NPC plays with now = her hand + art lift + upbringing lift (o.lv: the level the caller already knows for this kind) */
+/* the start art bậc her upbringing gave her for this kind (the origin's art:{stat: bậc}, the highest over the kind's stats — as kg82LvFor reads arts) */
+function mgOrgLv(p,kind){try{const O=typeof originByKey==="function"?originByKey(mgOrgOf(p)):null;if(!O||!O.art)return 0;let m=0;kg82FormulaOf(kind).forEach(([s])=>{if(s!=="help"&&O.art[s])m=Math.max(m,+O.art[s]||0)});return cl(m,0,5)}catch(e){return 0}}
+/* (2) + (3): the hand an NPC plays with now = her hand + art lift, her art level = max(her own level, her upbringing's start bậc) (o.lv: the level the caller
+   already knows for this kind) */
 function mgHandEff(kind,p,o){const h=mgHand(kind,p);if(!p||typeof p!=="object")return h;const H=BAL.ag.mg2.hand,R=mgRefP();if(!R||p===R)return h;
- const lv=x=>{try{return kg82LvFor(x,kind)}catch(e){return 0}};const lp=o&&o.lv!=null&&isFinite(+o.lv)?cl(+o.lv,0,5):lv(p);
- return Math.round((h+(H.art||0)*(lp-lv(R))+mgUp(p)-mgUp(R))*100)/100}
-window.mgHandEff=mgHandEff;window.mgBand=mgBand;window.mgRefP=mgRefP;window.mgOrgOf=mgOrgOf;window.mgUp=mgUp;
+ const lv=x=>{let v=0;try{v=kg82LvFor(x,kind)}catch(e){}return Math.max(v,mgOrgLv(x,kind))};const lp=Math.max(o&&o.lv!=null&&isFinite(+o.lv)?cl(+o.lv,0,5):lv(p),mgOrgLv(p,kind));
+ return Math.round((h+(H.art||0)*(lp-lv(R)))*100)/100}
+window.mgHandEff=mgHandEff;window.mgBand=mgBand;window.mgRefP=mgRefP;window.mgOrgOf=mgOrgOf;window.mgOrgLv=mgOrgLv;
 window.mgHand=mgHand;
 function mgSkipRaw(t){return cl(Math.round(mgMedD(t&&t.d!=null?t.d:0)),0,10)}
 window.mg2On=mg2On;window.mgWith=mgWith;window.mgMedD=mgMedD;window.mgNpcTier=mgNpcTier;window.mgNpcRaw=mgNpcRaw;window.mgSkipRaw=mgSkipRaw;window.MGX=MGX;
@@ -32062,11 +32065,10 @@ Object.assign(BAL.ag,{mg2:{on:1,med:[[-2,8.9],[0,7.5],[2,5.8]],w:8,tat:{e:[0,2,5
         1/3 better (centre + eq … + far), 1/3 worse (centre − far … − eq), bell-shaped inside each third (mean of 2 hashed draws);
    split = the shares [worse, equal, better] (weights; default 1:1:1 = 1/3 each; the owner may retune after her real-life rating, OD 20/11 ~01:42Z);
    art  = hand points per art level of that kind above / below the player's own level (a trained NPC clearly beats her, an untrained one is weak);
-   up   = hand points by UPBRINGING (owner OD 20/11 ~01:50Z: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà nghèo mới yếu"),
-          per j1 ORIGINS key, counted against HER origin (same upbringing = no lift): noble houses taught from childhood (tt Tể tướng, ch Thái hậu's niece,
-          nc princess) high; dtq general / td fallen official / muoi merchant / thd poor scholar in between; cn / cnv palace maids and srv servants low;
-          _ unknown. Rank gives NO skill: law 5 comes from who she meets higher up (mostly noble-born, more trained). */
-BAL.ag.mg2.hand={on:1,w:4,split:[1,1,1],eq:.5,far:2.5,art:.2,up:{tt:1,ch:1,nc:1,dtq:.5,td:.5,muoi:0,thd:0,cn:-.75,cnv:-1,srv:-1,_:0}};
+        UPBRINGING (owner OD 20/11 ~01:50Z: "tiểu thư khuê các ngày xưa đã được học từ, nên vào cung đã giỏi mà, chỉ có nhà nghèo mới yếu"): no table here —
+        a person's art level for this lift = max(her own, her origin's start bậc from j1 ORIGINS art:{…}) (jmgt mgOrgLv); the bậc are tuned there.
+        Rank gives NO skill: law 5 comes from her harder board as she climbs and from who she meets. */
+BAL.ag.mg2.hand={on:1,w:4,split:[1,1,1],eq:.5,far:2.5,art:.2};
 /* AG-ALL-2d2 OWNER CALIBRATION (owner OD 17/11 ~16:20Z (f) + ~16:40Z option 1: "chỉ có tôi test và cái số của tôi dùng chung cho mọi người"; jmgcal):
    d  = the board gaps of the test rounds, easy → hard (one round each; 5 rounds, rising difficulty)
    k  = her calibrated base per mini-game kind {b: her graded play on a matching board, n: rounds, at: mm/dd/yyyy}, written from her «CTM-CAL …» code by
@@ -81407,7 +81409,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c6ca45386698";window.CTM_BUILD=BUILD;
+const BUILD="bc9729e1283a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
