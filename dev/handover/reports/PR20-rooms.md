@@ -33,3 +33,9 @@ STATUS 20/11 ~05:20Z: depth 1 (limit 8), START_CTX ~3 % (get_session used_tokens
 - 33 chung-tu-cung-tan-ngu kseMweS16B · 34 chung-tu-cung-tan Xm9yC6fBfo → CDN img/_review/place-rank/pr20/<key>-ha-sang.webp. Sheet pr20/rooms33-34-tone-lbl.jpg (CŨ | MỚI, big labels).
 - measure_floor base_c: 33 83.5 → 87.0 %, 34 80.1 → 86.1 % (target ≥ 82 %).
 - LOOK: camera closer, narrower floor; one unified soft tone (mauve-pink walls, pink + ivory silks, jade accents), white light. Notes (no redraw): floor still a little glossy; in 34 the right armchair is cut by the frame edge; 34 doorway still an arch (not raised by the owner, A18).
+
+## BATCH 2 (5 Tần chính điện rooms, TONE method; owner GO via ROOT-67) — 5 gens, 675 cr
+- 36 ham-an-cung-tan mEZiKiwhJQ · 37 dien-huy-cung-tan-ngu s7IB680l8e · 38 dien-huy-cung-tan EbYGsNRuuO · 39 vinh-hoa-cung-tan-ngu nVsx8bNYQD · 40 vinh-hoa-cung-tan p8y7ET2ehw (room numbers 36–40 = working numbers). CDN img/_review/place-rank/pr20/<key>-ha-sang.webp; sheet pr20/rooms-batch2-tan-tone-lbl.jpg (big labels: no · palace · room type · TẦN).
+- measure_floor base_c: 36 84.8 · 37 81.4 · 38 88.3 · 39 81.0 · 40 88.3 % (target ≥ 82).
+- LOOK: all 5 follow their written layouts (each different), one soft pink/ivory/jade tone, white light. Notes (no redraw): under the shared tone the palace woods (elm / huanghuali / jichimu) all read as a similar reddish brown, so palace identity now rests on the flowers, doorways and chairs; 37/39 floor just under target; 40 daybed near the centre instead of the right half; 39 has an extra pair of armchairs at the left; floors still a little glossy.
+- Credits this session: 270 + 675 = 945 cr (balance before 85 567).
