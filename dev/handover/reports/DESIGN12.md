@@ -96,3 +96,12 @@ The earlier _cloak2 fur/lapel/width edits are DROPPED. WINTER sentence is byte-i
 - t7 + m02_t7: "small, neat and flat, lying close to the shoulders, never big or bulky," → "SMALL, NEAT and FLAT, lying close to the shoulders, never a big or bulky cape,"
 - t8 + m02_t8 (2 tiers kept): "light and flat, not bigger than the Hoàng quý phi's cape," → "SMALL, NEAT, FLAT, not bigger than the Hoàng quý phi's, never a cape,"
 Chars 9852/9798/9916/9942/9995/9868/9967. keep_check --sidecar PASS ×7 (allow = only those phrases), --all 126 PASS. check_store FAIL set IDENTICAL to *_cloak for all 7.
+### diff _cloak vs _cloak2 (git diff --word-diff, changed words only)
+- s62_t4: {+SMALL, NEAT,+} {+lying close+} [-shoulders and the outer upper chest,-] {+shoulders, never a big cape,+} 
+- s62_t5: {+SMALL, NEAT, FLAT+} {+never big capes,+} 
+- s62_t6: [-an-] {+a SMALL, NEAT, FLAT+} {+lying close+} {+never a big cape,+} 
+- s62_t7: [-small, neat-] {+SMALL, NEAT+} [-flat,-] {+FLAT,+} {+a+} [-bulky,-] {+bulky cape,+} 
+- s62_t8: [-light and flat,-] {+SMALL, NEAT, FLAT,+} [-phi's-] {+phi's, never a+} 
+- m02_t7: [-small, neat-] {+SMALL, NEAT+} [-flat,-] {+FLAT,+} {+a+} [-bulky,-] {+bulky cape,+} 
+- m02_t8: [-light and flat,-] {+SMALL, NEAT, FLAT,+} [-phi's-] {+phi's, never a+} 
+All fur words byte-identical (WINTER sentence cmp per file = identical). 'on the cloak's shoulders' kept (part of the WINTER/fur sentence, L1449 owner's cloak idea).
