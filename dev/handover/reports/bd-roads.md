@@ -376,3 +376,11 @@ bd_soi meets the ≥2-win bar, so no retune of bd_soi_11. Writer 2's 12-life cra
   - quickcheck: QUICKCHECK PASS, core gates PASS, old save ok, perf equal to live.
 - G4 manifest-guard now PASSes, so the CDN floor is fixed.
 - G4 50-coop-one-world: the first quickcheck had seed 3 FAIL (R.evm changed by the guest week). It passed 5 standalone runs on seed 3, it passed on main's build, and the second full quickcheck passed. So it is flaky and not tied to this branch (R.evm is written in j29.js with a random roll; bd-roads does not touch it). Recorded FOR MAIN as a flaky gate.
+### FINAL 2 — merge of LIVE main 70bea3d3 (mg-visual) → review/bd-roads @17034d70
+- Conflicts only in index.html/sw.js, both rebuilt. mg-visual has no bd overlap.
+- Gates on the 17034d70 build:
+  - one-core-guard PASS; ge-guard 6/6, check.py 0 errors;
+  - static, 4 roads: 0 faults; bd-batu-switch PASS incl. case 4;
+  - caoly-oldsave 14/14; bd-legacy-save PASS; road-rare ALL PASS;
+  - road-full bd_hen 9/9;
+  - quickcheck PASS, core gates PASS (coop-one-world PASS this run).

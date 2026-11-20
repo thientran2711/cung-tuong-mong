@@ -262,6 +262,8 @@ def _pose_tpl(g,tr,j,adapt=True):
     r_=g["SPEC5_POSES"][tr][j]
     if adapt and r_ in g["SPEC5_ADAPT"]: return g["SPEC5_ADAPT"][r_]
     return r_ if "{prop}" in r_ else g["SPEC5_ADAPT"][r_]
+PET_RX=r"songbird|\bbird|kitten|\bcat\b|rabbit|parrot|puppy|\bpet\b"   # RANK8-C (owner rule via ROOT-68 20/11): NO pet at t7 Hoàng quý phi / t8 Hoàng hậu
+S_NEW_SET={"s62","s64","s65"}   # applied to the new people only for now (c02 t8, c13 t7 still draw a songbird: reported to ROOT-68)
 def _banned(t,age,prop=""):
     """E4 (owner Lượt 529 + correction Lượt 534): t4+ may draw ANY of the 66 poses; walking/stepping poses ALLOWED at every rank (the Lượt 486 t6+ walking ban
     and the t6+/a51+ calm skips are replaced by the rank's restraint ENDING, see POSE_END). Still banned (other current rules, not E4):
@@ -337,7 +339,7 @@ def plan(age="a18"):
                 opts=list(opts); R.shuffle(opts); return min(opts,key=lambda o:cnt[t][o])
             a=best([k for k in range(14) if k not in ua],ca); ua.add(a); ca[t][a]+=1
             prop=item(c,t); keys=set().union(*[_keys(_pose_tpl(g,*u)) for u in up]) if up else set()
-            ok0=[o for o in allp if o not in up and (t>=4 or lively(o)) and not any(re.search(q,_pose_tpl(g,*o)) for q in _banned(t,age,prop))]   # E4: t1-t3 lively only
+            ok0=[o for o in allp if o not in up and (t>=4 or lively(o)) and not any(re.search(q,_pose_tpl(g,*o)) for q in _banned(t,age,prop)+([PET_RX] if (t>=7 and c in S_NEW_SET) else []))]   # E4: t1-t3 lively only
             ok=[o for o in ok0 if not (_keys(_pose_tpl(g,*o))&keys)] or ok0
             pz=best(ok,cp); up.append(pz); cp[t][pz]+=1
             gr=best([k for k in range(8) if k not in ug],cg); ug.add(gr); cg[t][gr]+=1
@@ -424,6 +426,7 @@ def apply_dedupe(person,rank,age,S):
     g=LAST_G
     if not (pick==sp and _pose_tpl(g,*pick)==_pose_tpl(g,*pick,adapt=False)):
         new=_frontal(g,_pose_tpl(g,*pick)).format(prop=prop)
+        if person in S_NEW_SET: new=re.sub(r"held in the hand in (one hand|both hands)",r"held in \1",new)   # RANK8-C (c): grammar
         a=" Pose: "+body; assert S.count(a)==1,("pose slot",person,rank)
         S=S.replace(a," Pose: "+new,1)
     # E4 (Lượt 529/534): the rank's ending at the END of the pose sentence (pose slot)
@@ -572,10 +575,15 @@ def check(person,rank,age="a18",ref=None):
         if s.strip() and s not in F: errs.append("store frame sentence missing: "+s[:70])
     return errs
 PEOPLE=[f"c{i:02d}" for i in range(1,33)]+[f"m{i:02d}" for i in range(1,53)]+list(PR)
+S_NEW=["s62","s64","s65"]   # RANK8-C (owner GO via ROOT-68 20/11): new people, data rows in the store S_NEW_ROWS
+PEOPLE+=S_NEW   # appended LAST so the global plan of everyone before them is unchanged
 import subprocess,tempfile
 def gate(person,rank,age,text):
     """dev/art/check_store.py (owner Lượt 375 STORE GATE, reused) on this exact prompt with the SAME person's store args; PASS required."""
     sp=ALIAS.get(person,person)
+    if sp in S_NEW_SET and rank in (7,8):
+        m=re.search(r" Pose: (.+?)\. The item is in a contrasting colour",text)
+        if m and re.search(PET_RX,m.group(1),re.I): return False,"PET GATE FAIL: pet in the t%d pose (owner: no pet at t7/t8): %s"%(rank,m.group(1)[:120])
     with tempfile.NamedTemporaryFile("w",suffix=".txt",delete=False,encoding="utf-8") as f: f.write(text); fn=f.name
     try:
         args=[sp,"v0"]+(["--nostyle"] if NOSTYLE_FOR(rank) else [])+([] if rank=="nude" else ["--low",str(rank)] if rank<=6 else ["--t7"] if rank==7 else [])+(["--age",age] if age!="a18" else [])

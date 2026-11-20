@@ -103,3 +103,7 @@ PRIORITY #1 CHECK ('ge-writers-w3 re-merge'): OD 3 | claims E11r-w3 | review/ge-
 ## RE-MERGE 2 (20/11 ~06:55Z) — order Foreman E #16: LIVE moved to 70bea3d3 (mg-noword-a eb056f7b + mg-visual)
 **READY dadbf622** (ff from 2cd929e7; origin/main 70bea3d3 is its ancestor). Conflicts only index.html / sw.js (rebuilt). Main's change = mini-game files (j82 / j91 / jbal2 / jlant / jslap / jtd / jts + 2 tests); no GE or W3 road file touched.
 Tests on dadbf622: ge-guard **6/6** · check.py **ERRORS 0** · one-core PASS · ge-engine `- all` **1160/1160** · **quickcheck ALONE PASS** (core gates PASS, open 1281 ms, **old save ok**, render 160/162, tab 392/315, buổi 902/970, tasks>200 18/17).
+
+## RE-MERGE 3 (20/11 ~07:45Z) — order Foreman E #17 session_01DgYSWoFXvbLeCE3SVSWgDG: LIVE moved to 377d5ce3 (dauho / cal-p2-rv)
+**READY 2f314519** (ff from dadbf622; origin/main 377d5ce3 is its ancestor). Conflicts only index.html / sw.js (rebuilt). Main's change = j91.js + jbal2.js only; no GE / W3 file.
+Tests on 2f314519: ge-guard **6/6** · check.py **ERRORS 0** · one-core PASS · ge-engine `- all` **1160/1160** · **quickcheck ALONE PASS** (core gates PASS, open 1462 ms, **old save ok**, render 219/221, tab 446/484, buổi 1184/1146, tasks>200 21/19).
