@@ -1,7 +1,7 @@
 /* ================= jrd_nc: the four full roads of «Công chúa hòa thân» (nc, country branches Nam Chiếu / Bắc Địch), chapters .5–.11 (ROAD_MAP.md §4.5) =================
    ONE origin, country branches (owner OD:L1213/L1215): the roads are written ONCE with land tokens ({land} {pv} {mh} {quan} {pa} {pb}) and the
-   Bắc Địch branch (S.origin.k "bd", premises bd_* in jorigins.js) plays the SAME chapters .5–.11 under its own premise id (aliases at the end of
-   this file: bd_hoa→nc_su, bd_ngua→nc_gian, bd_tuc→nc_tuc, bd_hoang→nc_vuong). Chapter .5 opens on the .4 that was really played: nc openings
+   Bắc Địch branch (S.origin.k "bd", OLD premises bd_* in jorigins.js) plays the SAME chapters .5–.11 under its own premise id (LEGACY aliases, now in
+   jrd_bd.js, kept for saves that rolled an old bd premise; new bd lives play bd's own 4 roads: bd_hoa→nc_su, bd_ngua→nc_gian, bd_tuc→nc_tuc, bd_hoang→nc_vuong). Chapter .5 opens on the .4 that was really played: nc openings
    carry NCW(k), Bắc Địch openings BDW(k) (the bd premise ended differently). Helpers RDW / rdRel / rdOan come from jrd_tt.js (same script). */
 const ncBd=()=>{try{return S.origin.k==="bd"}catch(e){return false}};
 RDQ.ncvBL=()=>RD_FL("nc_vuong.bought")||RD_FL("nc_vuong.loser");/* named predicate an odds term in BAL.road.fx reads (rdOdds "q") */
@@ -1008,9 +1008,3 @@ RD97L.push(rdRare({a:"nc_vuong_11",tag:"Hai nhà thề hòa bằng rượu của
  bad:["Nhận vàng, hứa nói giúp","Nhận trang ấp","Khuyên chia đôi"],x:[()=>S.danh>=RR("nc_vuong_11").bar,"Danh từ "+RR("nc_vuong_11").bar],
  t:"Rượu hội thề được cất ở cung ngươi theo cách {mh} dạy, niêm ấn cung ngươi đưa ra Hồng Lô tự. Sứ của tân {quan} và sứ phe thua ngôi, hai bên từng muốn giết nhau, cùng nâng chén; Hoàng thượng về kể: “Họ uống rượu của nàng, nên không bên nào dám bội.” Hoàng thượng ban biển ngự bút «Trung hiếu lưỡng toàn»: trung với Đại Hy, hiếu với {land}. Ở cố quốc, người ta lập một tấm bia ghi tên ngươi bên cạnh lời thề.",
  go:(_A,G)=>e67bien(G[0]),rw:"bienngu",ti:"Người giữ lời thề hai nhà"}));
-/* Bắc Địch branch: the same chapters under the bd premise ids (road key = the premise rolled for this life).
-   Runs at load, before jbal2.js: it walks the registered chapters (ROAD14), not BAL.road. */
-(function(){const P={bd_hoa:"nc_su",bd_ngua:"nc_gian",bd_tuc:"nc_tuc",bd_hoang:"nc_vuong"};
- for(const b in P){const r=P[b];for(const n in ROAD14[r]||{}){const id=ROAD14[r][n];
-  const {o,road,rn,...d}=ARC67[id];d.rth=d.rth||RTHEME67[id];rdDef(b,+n,d)}
-  for(const x of RD97L.filter(x=>x.a===r+"_11"))RD97L.push(Object.assign({},x,{a:b+"_11"}))}})();
