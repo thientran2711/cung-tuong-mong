@@ -104,3 +104,28 @@ face = fear tint) · ghen BACK pink handkerchief falls off the bottom edge · ha
 with a jump-up; coral disc reads quite red · vui OUT size jump · buon BACK short (28 fr). Clean: an binh lo muu tutin.
 The eunuch hat has a red knob/cord on top in every seal (F14 Qing look, see above).
 Credits tg set: 30 900. Balance at end 182 964 (shared). Ledger +50.
+
+## Rule ROOT-59 00:20Z: every seal prompt checked for Qing/Manchu/qipao/cheongsam/two-wing/flag-head before the gen (sg4_set.py now refuses
+them); MG3 gate script to be used once its path arrives. Why Qing passed: copied with the approved th-gian person block, not checked against F14.
+
+## SET htg (20/11 ~00:30Z) — old emperor, 10 seals, sub-agent (clips carry the "natural skin colour, never purple" sentence except so)
+| seal | A used | B used | OUT | LOOP | BACK | fr out/loop/back | OUT start |
+|---|---|---|---|---|---|---|---|
+| vui | aFG6HgLfSh | s7IpORal8e | s7Ipyz9l8e | JNCI3M9Oq4 | Cqn3KOUEEy | 46/60/60 | 1.0 |
+| buon | Cqn3bwSEEy | aFG6qlxfSh | mEZ4FU1hJQ | 5jDYlRFKxe | SyhX9VaUb8 | 48/60/54 | 0.8 |
+| so | gOmdPw4SXO (flat of BhN7vrPoQR) | mEZ4QLbhJQ | N2qfztu6D9 | xSBVOUUjfW | rgXTJS1xtc | 37/60/50 | auto 1.6 |
+| an | SyhXPcEUb8 | 1ld0S33r4r | Lw8DPJBswO | xSBVyPXjfW | 5jDYUyIKxe | 40/60/54 | 1.3 |
+| binh | EbYRKHruuO (flat of p8ygIx5ehw) | SyhX4WmUb8 | O6EtAcFynm | ksec7Gu16B | rgXTObYxtc | 48/60/52 | 0.8 |
+| ghen | aFG6bp0fSh | xSBVJ8IjfW | ksec7qR16B | YMlkBGBWeC | 1ld0Ohor4r | 40/60/54 | 1.3 |
+| lo | 1ld0UCfr4r | EbYR10puuO | rgXTya6xtc | hu29KVCvqL | cpSrtwR0eP | 50/60/48 | 0.7 |
+| muu | eIPShYkdqL | lJte4fwgv9 | xSBV4IBjfW | 79f8AQMJAL | lJte3Bbgv9 | 52/60/37 | auto 0.6 |
+| tutin | dt4UaLpXSL (flat of rgXTwFYxtc) | DoOlm68pcl | 3zKuDqaREY | ov6Jq9Q829 | 3zKupeYREY | 37/60/57 | 1.6 |
+| hanghai (coral) | fHzi5tHCDY | xSBVJvOjfW | fHziLXICDY | s7Ip3bBl8e | lJteZFSgv9 | 47/60/58 | 0.9 |
+CDN: htg-<k>-*.webp, still/htg-<k>.webp, htg-<k>-frames.jpg, htg-set-preview.mp4 (154.6 s).
+Purple face: NONE (except so = intended fear tint) → the skin sentence worked.
+Faults (no redo): an LOOP fr ~19–30: he shrinks into the disc, disc goes dark/black ~0.8 s, pops back (I looked: confirmed) · ghen OUT ~5 fr
+overshoot cut by the edge, BACK handkerchief drops out the bottom · so OUT 3–4 oversized frames · vui BACK white glow halo flash · hanghai
+LOOP size pulses. Clean: buon (little motion) binh lo muu tutin.
+Credits htg set: 30 900. Balance at end 182 019 (shared). Ledger +50.
+SEAL4 TOTAL since GO (Lượt 812): 4 sets × 30 900 = 123 600 cr (+ 12 360 for the 4 samples before). All 40 A keyframes carry the old
+"Qing-style" wording (made before F14); emperors wear a standing collar, the eunuch hat a red knob → owner to decide.
