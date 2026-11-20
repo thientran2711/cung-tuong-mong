@@ -480,3 +480,4 @@ ROOT-69: hourly check trigger = trig_01CFFH65FCGKiMGpiryTkMAf (delete on handove
 ROOT-69 07:58Z: s64+s65 cổ vuông tests LOOKED + sent (my chat + ROOT-67). Owner neckline verdict (style 1 for t1 AND t2, t2 outfit below unchanged) → RANK8-A builder+rule, 0 cr. REDRAW3: GO c06 data row. HQP jewel diff: wording identical s62/s64/s65 (reports/HQP-jewel-diff-ROOT69.md).
 ROOT-69 07:52Z: OWNER clarify t2 = t1 cut (low narrow square) + 2-layer trim; GO 1 test s62 t2 (~135 cr) → RANK8-A.
 ROOT-69 07:58Z: G18 HQP jewels (owner verbatim): Quý phi t6 unchanged; t7 HQP_LUX + S14 'HQP JEWEL VISIBILITY' added (0 cr); gate PASS s62/s64/s65 t7.
+ROOT-69 07:55Z: OWNER CANCEL HQP change (verbatim "Thôi thôi thôi thôi, không sửa một cái gì hết, Hoàng Quý Phi giữ nguyên như cũ please.") → build_all + check_store reverted to exact prior text; G18 marked CANCELLED.
