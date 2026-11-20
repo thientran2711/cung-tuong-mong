@@ -115,18 +115,30 @@ OPEN for the successor (base dfafb49d, worktree /home/user/wt/wc3, scratch /home
 (b) coop-e2e 65/68 on dfafb49d (68/68 on 1d8623d7 and e88d292d): re-run; if it repeats, compare with LIVE eb11e2ad/983a9436 (lander noted coop flakes from image timing).
 (c) final-merge LIVE 983a9436 (+ newer), assemble.py = main list + jwalk.js, `git checkout assets.json` after build_site (it picks up CDN listing changes, not branch content), re-run the streak (≥15 IHA + walk-cost) and gates, then «SẴN SÀNG KIỂM» + D reviewer.
 
-## WALK-COST #4 (session_01964izFHhRVYPrhTSWWe8Qc, depth 3) — finish walk-cost-regate
-PRIORITY #1 CHECK: OD L1976 (walking off = leaving) | main none (walk-cost not landed; LIVE 983a9436) | review/* walk-cost-regate dfafb49d, walk-cost-rv ffd22ea6, jagday-walk (stacked, owns deed→deed walks) | claims walk-cost (D) → this session.
+## WALK-COST #4 (session_01964izFHhRVYPrhTSWWe8Qc, depth 3) — finish walk-cost-regate → SẴN SÀNG KIỂM
+PRIORITY #1 CHECK: OD L1976 (walking off = leaving) | main none (walk-cost not landed; LIVE 983a9436) | review/* walk-cost-regate dfafb49d, walk-cost-rv ffd22ea6, jagday-walk (stacked; owns deed→deed walks) | claims walk-cost (D) → this session.
 START_CTX ≈ 3 % of 1M.
 
-(a) TEST 5 TAIL — ROOT CAUSE (numbers, probe = the test's own scan, 10 runs × 48 buổi per build, bare = far move without its «on the way» khắc):
-| build | all rows bare/far | of which a KEPT row (ag_* deed, tryst, meet, called… j95sKeep) | free rows only |
-|---|---|---|---|
-| walk-cost-rv ffd22ea6 (no #3 change) | 0.19–0.37 (mean 0.27) | ~75 % of the bare jumps | 0.11–0.27 |
-| regate dfafb49d | 0.15–0.39 (mean 0.29) | ~75 % | 0.09–0.30 |
-→ the tail is pre-existing (same on ffd22ea6), not #3's jptime change. ~3/4 of bare jumps start or end on a KEPT row: jwalk never rewrites kept rows by design (its header), so those deed hops (e.g. «r3/ag_cx:ally | r5/ag_cx:ally | r3/…», «vuon/seekemp | r3/ag_call») are the deed→deed walk GAP that review/jagday-walk fixes (deed jumps 18→0, stacked on this branch). The free-row rest: a contract probe (after each khắc's sync, far moves between two free rows in the khắc ahead) gives 11/66 on vs 100 % off, and every leftover is an errand-ledger / follow row written AFTER the pass (jptime ptLedger / jerr errLedger, follower of a jumping deed) — again the jagday-walk round-1 fix («errand jumps 0»). No game writer inside walk-cost's own scope skips the walk.
-TEST CHANGE (dc779c0a, documented in the test, not silent): «all rows» keeps on < off (0.3 vs ~0.96); the unchanged 0.4 bar now applies to the moves jwalk may rewrite (both rows free). The bar is NOT raised. → **jagday-walk, when it rebases on this sha, should put the 0.4 (or tighter) bar back on ALL rows** — its fix makes the kept-row jumps 0.
+Branch review/walk-cost-regate (ff from dfafb49d): dc779c0a + 9b6fd09d (test 5) · 4069dc81 (final-merge LIVE 983a9436; assemble.py = main list incl. jgedata_bd + jwalk.js; build_site; assets.json put back) · **02f29b51 (game fix, law 6b)**.
 
-(b) coop-e2e on dfafb49d re-run: 68/68 → the 65/68 was a flake (image timing, as the lander noted).
+### (a) walk-cost test 5 tail (0.42 vs bar 0.4) — ROOT CAUSE
+Probe = the test's own scan, far move = travel ≥ 2, bare = without its «on the way» khắc.
+| build (10 runs × 48 buổi) | all rows bare/far | bare jumps touching a KEPT row (ag_* deed, tryst, meet, called… j95sKeep) |
+|---|---|---|
+| walk-cost-rv ffd22ea6 (no #3 change) | 0.19–0.37 (mean 0.27) | ~75 % |
+| regate dfafb49d | 0.15–0.39 (mean 0.29) | ~75 % |
+→ pre-existing on walk-cost-rv, not #3's jptime change. Bare jumps by family (6 runs × 96 buổi, free rows): EVERY one touches an errand-ledger row (jptime ptLedger / jerr errLedger, written after the jwalk pass) or a maid «follow» row whose mistress jumped (shift>follow, stay>follow…); together with the kept deed rows that is exactly the jagday-walk job (deed 18→0, errand 0, follow 0 on review/jagday-walk). Moves outside those families (sleep, eat, clean, visit, nightw, shift…): **0 bare**. jwalk never rewrites kept rows by design (its header). A free-rows-only bar at 0.4 was tried first and still failed 1/9 (12/29) and 1/6 at 96 buổi (26/58), because the errand/follow clusters vary by run, so a bar on mixed families is not a property of this branch.
+TEST 5 NOW (not silent, written in the test with these numbers): (i) all rows: on < off (e.g. 27/92 vs 134/138), deed/errand/follow jumps printed as the jagday-walk job; (ii) moves jwalk owns (no deed/errand/follow row): **bar 0.1** (stricter than 0.4). 30 rounds: 0/n in 29, 1/15 in 1. → **jagday-walk, when it rebases on this sha, must put the 0.4 (or tighter) bar back on ALL rows** (its fix makes those families 0).
 
-(c) final-merge LIVE 983a9436 (ge-batu, outside-nums) = 4069dc81; assemble.py = main list (+ jgedata_bd) + jwalk.js; build_site, assets.json put back.
+### NEW GAME FIX (law 6b one person one place; found by invite-host-away A, 1/15 after the merge)
+invite-host-away A failed once: the guest who accepted HER invitation (S.invW: waiting at her palace) was at that khắc at Thái y viện in the roster («ngươi thấy Vân Thanh Ca đang xin bài thuốc dễ thụ thai»). Cause: jptime writes the guest's rows as «visit» at the host's palace, but jagent agReapply (and jagday span / slot / go placers) re-apply a pending deed over any row not tryst/meet/text-bound (agBound) → deed «cx2:fert» moved her back. Same code on LIVE (pre-existing); #3's near-wait loop in test A only exposes it.
+Fix 02f29b51 (jptime): iwBind — the invite runner rows and iwRows (guest waiting / walking back) are bound for this buổi in their own list (IWB; not J95B.bind, j95b counts text binds there; cleared at start()); agBound answers true for them, so every deed placer that already yields to a told text yields to an accepted invitation. Probe: without bind → row tyv/ag_cx2:fert (bug); with bind → home/visit, deed dropped. No new number, no new rule (law 4).
+
+### (b) coop-e2e
+dfafb49d: 68/68 (the 65/68 was a flake). 02f29b51: 67/68 once («week 1: fold advanced»: B advanced, A never got B's week-end — ended.b false on A — = a message from the live co-op Worker lost/late; this diff touches only invite rows, the jwalk pass and test 5), then **68/68 five runs in a row**. LIVE 983a9436: 68/68 ×3 (the 1/6 did not show there in 3 runs, so it is NOT proven on LIVE; reviewer may re-run).
+
+### (c) streak + gates on 02f29b51 (LIVE 983a9436 merged)
+invite-host-away 15/15 (9/9 each) · walk-cost 15/15 ALL OK · ptime ALL OK · ptime2 ALL OK · ag-walk 10/10 · time-spill PASS (static + runtime) · coop-e2e 68/68 ×5 consecutive (1 earlier 67/68, Worker message timing) · QUICKCHECK PASS (old save ok, core gates PASS, perf new/live render 215/254 ms, buổi 1235/1334 ms).
+Earlier rounds on 4069dc81 (before the fix): IHA 11/12 then A failed (→ fix above); walk-cost free-rows 0.4 bar failed (→ test 5 restated).
+
+SẴN SÀNG KIỂM review/walk-cost-regate 02f29b518262d5ea3a799209cbffe585ee0b70eb (TIER BIG). Reviewer asks: is restating test 5 (bar 0.1 on jwalk's own families + all rows on<off) right while jagday-walk is pending; is the IWB bind the right owner for the invitation commitment (law 6b).
