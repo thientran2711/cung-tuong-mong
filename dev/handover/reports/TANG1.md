@@ -22,4 +22,6 @@ Looked (honest):
 ## JOB B — plan only (v3): dev/handover/reports/TANG1_plan_B.md — two FULL looks: T = Tang (rank = chest band), H = Han/Three Kingdoms deep crossed V (rank = stacked collar bands 2/3/4); test 405 cr each, 810 both. Rule G27 added (drop of Option 1).
 Open question: t6 open neck vs G25 (t6 always closed).
 
-Total credits: 405.
+## Phi test T vs H (owner GO ~19:10Z): 2 gens 270 cr — T fHzM1ekCDY, H hu205pSvqL; gate tp5 PASS (8 899 / 8 734 chars); sheet dev/handover/review-sheets/tang1/s62_t5_DUONG_vs_HAN.webp (new only). Looked: faces fine, no earrings, lips closed. T = open neck + strong chest-band block; H = crossed V modest depth, collar stack thinner. plan_B fixed: Tần starts at today's embroidery density.
+
+Total credits: 675.
