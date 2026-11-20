@@ -418,3 +418,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW phutang-road r2 (BIG opus E21r2; successor of E21r @0448dc8c) of b868bbce | review/phutang-road | FOREMAN E #17 | session_01DgYSWod6Dw7HtUXCQisjD1 | RUNNING | 20/11 10:14Z |
 | home-chapters r2 fixes (opus E25b; successor of E25 @b6b5b99d5; E25r FAIL @a3cc98226) | review/home-chapters-r1 | FOREMAN E #17 | session_01DgYSWob7AScwYwurseKupN | RUNNING | 20/11 10:18Z |
 | REVIEW role-parity-drift-kyngo (SMALL sonnet E23r; probe-only) of 41d620a5 | review/role-parity-drift-kyngo | FOREMAN E #17 | session_01DgYSWmgey4KqSWQJLrpZR5 | RUNNING | 20/11 10:20Z |
+| walk-cost «về nhà» khắc + every goTo/walk cost (opus; ORDER ROOT-76 08:36Z; OD L1976) | review/walk-cost; briefs/D9-gap-jobs.md JOB 6 | D #9 for ROOT-76 | session_01964izCjQfM4AKD13HmruCn | RUNNING | 20/11 09:21Z |
