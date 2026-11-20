@@ -425,3 +425,4 @@ LAND READY review/walk-cost-rv ffd22ea65efbfccb947ab9d558743e63e847cd80
 - (20/11 12:36Z, D #10) **JAGDAY-WALK #1 = session_01964izFMBWywRUbAg2MV1QH** (opus; NPC deed→deed walks via travel(), base walk-cost-rv ffd22ea6; claimed).
 - 20/11 OUTSIDE NUMS #1 (GAP OR11+OR12) → review/outside-nums · reports/outside-nums.md · SẴN SÀNG KIỂM 3e8e8a0fcf1f21aeae1766d10c212e1181515739
 - (20/11 12:37Z, D #10) OUTSIDE NUMS #1 SẴN SÀNG KIỂM 3e8e8a0f (OR11 BAL kcSch/kcRumFade/kcMatch by difficulty; OR12 bot faults fixed → shipped Vừa on §12 76.7/18.9/2.8/1.7; open: random-bot palace 37, rare bot, HH ±5 unmeasured) → **REVIEW outside-nums BIG = session_01964izFXVt2ir21ERpPWsgq** (opus; checks bot fixes are real, stuck lives not a game bug, HH ±5). Worker CCWYwRvy idle for FAIL fixes.
+- (20/11 12:42Z) FROM MAIN ROOT-78: LIVE 4e8cbaeb (E tut-road: solo shop «Mua» fix + origin road lines ch.1–3). ROLLBACK 26f3bfa9. Order: E facfound-parity → E ge-w3 → D day-khac-audit.
