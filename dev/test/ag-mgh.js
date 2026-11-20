@@ -31,7 +31,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
      is centred on the average adult play (BAL.ag.mg2.hand ctr, the bell curve OD 20/11 ~06:40Z), symmetric */
   {const U=mgCalKinds().find(k=>!(BAL.ag.mg2.cal.k||{})[k]);o.U=U;const C=[];for(let i=0;i<1000;i++)C.push(mgHand(U,{name:"T"+i,id:9000+i}));C.sort((a,b)=>a-b);o.medHand=C[500];o.medPlay=C[500]-H.w/2;o.skilled=H.ctr[U]!=null?H.ctr[U]:H.ctr[""];o.above=C.filter(c=>c-H.w/2>=o.skilled).length/1000}
   /* 6 off */
-  H.on=0;o.off=mean(v,0);H.on=1;o.offMed=mgMedD(0);return o});
+  const ID=BAL.orig.id,n0=ID&&ID.npc;if(ID)ID.npc=0;/* cal-p2c: the bare curve; the identity class shift is checked in dev/test/cal-p2c.js */H.on=0;o.off=mean(v,0);H.on=1;if(ID)ID.npc=n0;o.offMed=mgMedD(0);return o});
  console.log(JSON.stringify(r));
  ok(r.on&&r.inRange&&r.distinct>=Math.min(10,r.n/3)&&r.max-r.min>=r.bw*.5,'1 every NPC has a hidden hand per kind between lo and hi; hands spread good ↔ bad',{n:r.n,min:r.min,max:r.max,distinct:r.distinct});
  ok(r.saved&&r.stable&&r.oldSave,'1 drawn once, saved on the person, stable; an old save rolls the same hand',{saved:r.saved,stable:r.stable,old:r.oldSave});
