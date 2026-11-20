@@ -8,12 +8,12 @@ STATUS 20/11 ~05:20Z: depth 1 (limit 8), START_CTX ~3 % (get_session used_tokens
 
 ## PREPARED, NOT GENERATED (waiting for owner go via the foreman) — dev/art/place-rank/prompts_pr20_rooms.py
 - Run: `python3 dev/art/place-rank/prompts_pr20_rooms.py` → prompts_pr20_rooms.json {r3334, batch2} + prompts_pr20_<key>.txt. room_gate PASS ×7 (guard + room_gate.py per txt).
-- SET r3334 (rooms 33 chung-tu-cung-tan-ngu, 34 chung-tu-cung-tan): A17 diff vs batch 1 = ONLY the LESS-FLOOR FIX of 32b (FR "four fifths / one fifth" → "five sixths / one sixth" + CAMERA CLOSE sentence). Layout, refs (33 M2X, 34 M3), words otherwise the same. Not changed: arch doorway of 34 (owner did not raise it; A18). 2 gens = 270 cr.
+- SET r3334 (rooms 33 chung-tu-cung-tan-ngu, 34 chung-tu-cung-tan): A17 diff vs batch 1 = ONLY the LESS-FLOOR FIX of 32b (FR "four fifths / one fifth" → "five sixths / one sixth" + CAMERA CLOSE sentence). Layout, refs (33 M2X, 34 M3), words otherwise the same. 2 gens = 270 cr.
 - SET batch2 (5 Tần chính điện rooms with cards; recipe = 32b): each its own layout —
   ham-an-cung-tan reception 3w win L (M3X), daybed centred, begonia doorway right side wall · dien-huy-cung-tan-ngu bedroom 2w win R (M2), bed left half · dien-huy-cung-tan reception 2w win L (M2X), daybed left half, side chairs facing · vinh-hoa-cung-tan-ngu bedroom 3w win L (M3X), bed right half · vinh-hoa-cung-tan reception 2w win R (M2), daybed right half. Woods/doorways/chairs/flowers from CARD_HA/DH/VH. 5 gens = 675 cr.
 - Gen settings when the go comes (PR19 METHOD): images_generate gpt-2-6 2k 2688×1386, folder ba4aecfe-efce-47e2-b53f-30d292091886, refs from the json, then measure_floor.py (target base ≥ 82 % H), webp q88 pr20/<key>-ha-sang.webp, labelled sheet, LOOK, cdn_sync, ledger.
 - Cost: r3334 270 cr · batch2 675 cr · both 945 cr. Remaining after that (Tần TM ×2 needs a card; Phi 12; Quý phi 12) ≈ 26 rooms ≈ 5–6 batches ≈ 3 500 cr; + Từ Ninh ~2 + ~35 place scenes ≈ 5 000 cr.
-- Open: Thừa Minh has no palace card (foreman); 34 arch doorway (owner never raised it).
+- Open: Thừa Minh has no palace card (foreman).
 
 ## s62–s65 in the white-light room (ROOT-67, owner "Đặt thử 4 cô này vào cái phòng tầng mà mình mới vừa vẽ theo cái phong cách ánh sáng trắng thử coi.") — 0 cr
 - Room = newest white-light Tần room = room 32 Khải Tường cung chính điện reception (khai-tuong-cung-tan, VX7s33bMMU, approved).
@@ -32,10 +32,19 @@ STATUS 20/11 ~05:20Z: depth 1 (limit 8), START_CTX ~3 % (get_session used_tokens
 - Live builder dev/art/place-rank/prompts_pr20_rooms_tone.py (= DRAFT + swatch id 3zKqcUwREY, uploaded 0 cr). Room gate PASS ×7. check_store has no room scope; room_gate.py is the room store gate (as for every PR19 room).
 - 33 chung-tu-cung-tan-ngu kseMweS16B · 34 chung-tu-cung-tan Xm9yC6fBfo → CDN img/_review/place-rank/pr20/<key>-ha-sang.webp. Sheet pr20/rooms33-34-tone-lbl.jpg (CŨ | MỚI, big labels).
 - measure_floor base_c: 33 83.5 → 87.0 %, 34 80.1 → 86.1 % (target ≥ 82 %).
-- LOOK: camera closer, narrower floor; one unified soft tone (mauve-pink walls, pink + ivory silks, jade accents), white light. Notes (no redraw): floor still a little glossy; in 34 the right armchair is cut by the frame edge; 34 doorway still an arch (not raised by the owner, A18).
+- LOOK: camera closer, narrower floor; one unified soft tone (mauve-pink walls, pink + ivory silks, jade accents), white light. Notes (no redraw): floor still a little glossy; in 34 the right armchair is cut by the frame edge.
 
 ## BATCH 2 (5 Tần chính điện rooms, TONE method; owner GO via ROOT-67) — 5 gens, 675 cr
 - 36 ham-an-cung-tan mEZiKiwhJQ · 37 dien-huy-cung-tan-ngu s7IB680l8e · 38 dien-huy-cung-tan EbYGsNRuuO · 39 vinh-hoa-cung-tan-ngu nVsx8bNYQD · 40 vinh-hoa-cung-tan p8y7ET2ehw (room numbers 36–40 = working numbers). CDN img/_review/place-rank/pr20/<key>-ha-sang.webp; sheet pr20/rooms-batch2-tan-tone-lbl.jpg (big labels: no · palace · room type · TẦN).
 - measure_floor base_c: 36 84.8 · 37 81.4 · 38 88.3 · 39 81.0 · 40 88.3 % (target ≥ 82).
 - LOOK: all 5 follow their written layouts (each different), one soft pink/ivory/jade tone, white light. Notes (no redraw): under the shared tone the palace woods (elm / huanghuali / jichimu) all read as a similar reddish brown, so palace identity now rests on the flowers, doorways and chairs; 37/39 floor just under target; 40 daybed near the centre instead of the right half; 39 has an extra pair of armchairs at the left; floors still a little glossy.
 - Credits this session: 270 + 675 = 945 cr (balance before 85 567).
+
+## STOP + TONE v2 (ROOT-67 07:10Z; owner "Làm cái tông màu mới thế nó còn bị nhạt hơn cái tông màu cũ. Cái phòng á, phòng 33 đó, nó còn nhạt màu hơn nữa. Cửa phòng hình vòm đâu có vấn đề gì đâu mà tại sao bạn lại ghi nó là lỗi ta?") — 0 gens
+- STOP arrived after batch 2 had fully run: all 5 (36–40) were drawn with TONE v1 (675 cr). Nothing in flight.
+- Measured (Lab C* mean / HSV S %, 672×346): 33 OLD 19.3/31.9 → NEW 17.2/27.6; 34 OLD 16.3/28.4 → NEW 14.7/24.9; approved 31 19.3/33.1, 35 18.8/31.3, 32 18.6/32.5; batch 2 (v1): 36 15.7/25.9, 37 17.4/27.7, 38 17.1/28.6, 39 16.9/27.4, 40 17.9/29.6. So v1 = about 10–15 % less colour, slightly lighter (L* +1…+5).
+- Cause: v1 words "same lightness and softness … fresh but calm, medium saturation, never brighter, darker or more saturated". Strip v1 pixels are the true hexes at full strength (#E3A3B8 = 227,163,184), but ivory took 2/6 of the strip (strip C* 18.6).
+- TONE v2 (live builder prompts_pr20_rooms_tone.py, room gate PASS ×7): " COLOUR TONE (owner: the room has the same colour tone as the outfit of the woman who lives here): the room's colours have the SAME colour strength as her outfit and as the colour strip in image 4: rich, clear and fully coloured, like a room dressed in the very colours of her clothes; never paler, never greyer, never faded, milky or washed out, and never neon or glaring either; the pink of image 4 at its full strength is the main colour of the silks, curtains and cushions, with its ivory and soft jade-green partners, and the wood keeps its own rich polished colour; bright neutral white daylight, no warm golden or amber cast."
+- Strip v2 = pink:4 ivory:1 jade:1, same exact hexes (strip C* 18.6 → 21.7) → CDN pr20/tone-swatch-tan-t4-v2.png; upload (0 cr) only on OK; builder holds SWATCH_V2_TBD.
+- v1 prompt texts of the 7 gens are in git at 0d74203 (prompts_pr20_tone_*.txt now hold v2).
+- Arch doorway: NOT a fault (owner). Removed from PR20 + PR19 fault lists. No rule (rule.py find arch / vòm) and no room_gate check bans arches.
