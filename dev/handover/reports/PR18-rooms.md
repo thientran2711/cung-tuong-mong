@@ -40,3 +40,4 @@ NEXT (HELD until the owner's go via ROOT-62): room 30 sample per L25 (hạ sáng
 - Sheet 1 cc-nhv-1-lbl.jpg: 3 công chúa Cao Ly V2 cut-outs xSByOSyjfW (t4) / yiuGA83PW9 (t5) / cpS8oJg0eP (t6), all present; deep rose #C9708A + jade green #79A98F (pair used ONLY in princess prompts).
 - Sheet 2 cc-nhv-2-lbl.jpg: 6 LIVE figures (CDN img/fig-consort-*-a26.webp, B15 two-colour sentence, own colours): c06 t1 Đáp ứng · c01 t2 Thường tại · c30 t3 Quý nhân · c10 t4 Tần · c20 t5 Phi · c15 t6 Quý phi. Note: these live pictures still hold a teacup (older set).
 - Composer dev/art/face-common/pastel_L867/sheet_row.py.
+- CORRECTION (owner "công chúa 3 nước"): cc3-nhv-1-lbl.jpg = Ba Tư t4 mEZbHB7hJQ (#5B6CA6 + #EFE6D2) · Cao Ly t4 xSByOSyjfW (#C9708A + #79A98F) · Phù Tang t4 mEZbq2FhJQ (#9C88BC + #B8556A), night-1119 store set. Sheet 2: no other character uses any princess pair (grep prompts/palettes/ledger) → reported, nothing composited.
