@@ -429,3 +429,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | facfound-parity E29 (opus; LIVE law-1 regression «Lập phe» in role-parity-drift2-play, found by E23r) | review/facfound-parity; briefs/E29-facfound-parity.md | FOREMAN E #17 | session_01DgYSWmngcUnfqKR9MvpkS1 | RUNNING | 20/11 10:58Z |
 | GAP IT03 wear-slots Hoa tai + Giày (opus; ORDER MAIN ROOT-77 10:20Z; brief briefs/b-wear-slots.md) | review/wear-slots | B | session_01N1tNP54h4MaGv7EfQy7u43 | RUNNING | 20/11 10:18Z |
 | GAP kc-fail-effects J3c (opus; home cards hide fail effects, whole group) | review/kc-fail-effects | B | session_01N1tNP6BY715rYe4KHs14ko | RUNNING | 20/11 10:20Z |
+| REVIEW ge-batu (BIG opus E28r) of e0424d54 | review/ge-batu | FOREMAN E #17 | session_01DgYSWokELeSAzf9p9MFqAS | RUNNING | 20/11 11:26Z |
