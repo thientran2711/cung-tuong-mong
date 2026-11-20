@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"983a9436+","t":"2026-11-20T15:42Z","c":"SELF-MERGE LAND outside-nums: merge LIVE a99673e8 (index.html/sw.js rebuilt)","b":"04a5a589f2b6","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
+window.CTM_BI={"s":"0ef566c8+","t":"2026-11-20T16:29Z","c":"thancan: cung nu than can (owner OD 20/11 ~15:55Z) - choose/dismiss on her person card, NPC masters pick, q.close reused, uniform look key …","b":"6941f6a1548e","h":[{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"},{"s":"2eb9b39e+","t":"2026-11-20T14:01Z","c":"Điểm trò chơi nhỏ theo tay người chơi và sở trường, sở đoản của nhân vật"},{"s":"c7a73791","t":"2026-11-20T14:02Z","c":"Thêm bốn nhánh đường riêng của Bắc Địch"},{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4269,8 +4269,8 @@ function staffTabHTML(){const [cm,ce]=capOf(S),[nm,ne]=hhHas(S);
  const t2=whyTime(2);
  const mk=i=>{const e=L[i];
   if(e.t==="maid")return pcard({f:e.f,name:S.maid.name,rank:kitMaidTitle(),lines:[tuoi(S.maid.age),typeof bondBars==="function"?bondBars(S.maid):`Lòng <b>${S.maid.loyal}</b>`,`Kẻ hầu: ${nm}/${cm} cung nữ · ${ne}/${ce} thái giám`,(typeof runnerLine==="function"?runnerLine():`Người chạy việc: ${bestSent(S)?bestSent(S).name:"chưa có ai"}`)],chips:[S.maid.loyal<BAL.loy.warn?chip("lòng lung lay","hot"):""],
-   note:(typeof runnerHouse==="function"?runnerHouse()+". ":"")+"Gặp nàng ở tẩm cung để tâm sự hay sai đi dò la.",groups:[["Quản kẻ hầu",[pbtn(`data-hire="maid"`,"Thêm cung nữ","Nội vụ phủ · Bạc -"+BAL.house.hireBac,nm>=cm?"đủ số theo phẩm":!roomFor("maid")?"hậu cung hết cung nữ":S.bac<BAL.house.hireBac?"cần "+BAL.house.hireBac+" bạc":""),pbtn(`data-hire="eunuch"`,"Thêm thái giám","Bạc -"+BAL.house.hireBac,ne>=ce?"đủ số theo phẩm":!roomFor("eunuch")?"hết thái giám":S.bac<BAL.house.hireBac?"cần "+BAL.house.hireBac+" bạc":""),pbtn(`data-plantsv="1"`,"Cài người vào cung khác","Bạc -"+BAL.house.plantBac+" · 2 khắc",t2||(S.bac<BAL.house.plantBac?"cần "+BAL.house.plantBac+" bạc":!bestSent(S)?"không có ai để sai":"")),S.staff.some(s=>s.role==="maid"&&srk(s)>=BAL.srvRk.cs)?pbtn(`data-smaid="1"`,"Chưởng sự tra xét cung nữ","2 khắc · tìm tai mắt, đối thực",t2):""]]].concat(typeof tcGroups==="function"?tcGroups(S.maid):[])});
-  if(e.t==="own"){const s=e.s;return pcard({f:e.f,name:s.name,rank:s.role==="maid"?"Cung nữ":"Thái giám",lines:sinfo(s),chips:schip(s),groups:[["Thưởng phạt",servJudgeBtns(s).concat(s.kn?[]:[pbtn(`data-svlook="${s.sid}"`,"Xem người","Bạc -"+BAL.house.lookBac+" · 1 khắc",S.bac<BAL.house.lookBac?"cần "+BAL.house.lookBac+" bạc":!can(1)?"hết khắc":"")])],["Sai bảo",[pbtn(`data-sv="hoi" data-sid="${s.sid}"`,"Hỏi chuyện",`${word(nv(s,"askTalk"))} · 2 khắc · thành: chứng cứ ${balSg(BAL.eff.j10.evServAct_2)} nếu quen người cung khác · hỏng: không biết gì mới`,t2),pbtn(`data-rec="${s.sid}"`,"Tiến cử","Bạc -"+BAL.house.upBac+" · Danh -"+BAL.house.upDanh,S.bac<BAL.house.upBac?"cần "+BAL.house.upBac+" bạc":""),pbtn(`data-sv="doi" data-sid="${s.sid}"`,"Đổi người",`tốn: Bạc -20, Danh -1 (đuổi 2 người trong nửa năm: Danh -3) · thành: trả ${s.name.split(" ").pop()} về, người thay ngẫu nhiên, nết chưa rõ ${servSellO(S,s)>0?` · kèm: hắn đem chuyện của ngươi bán cho kẻ thù (kẻ ấy nắm thêm chứng cứ): ${chanceW(servSellO(S,s))}`:""}`,S.bac<BAL.house.swapBac?"thiếu bạc (cần "+BAL.house.swapBac+")":"")]]].concat(typeof tcGroups==="function"?tcGroups(s):[])})}
+   note:(typeof runnerHouse==="function"?runnerHouse()+". ":"")+"Gặp nàng ở tẩm cung để tâm sự hay sai đi dò la.",groups:[["Quản kẻ hầu",[pbtn(`data-hire="maid"`,"Thêm cung nữ","Nội vụ phủ · Bạc -"+BAL.house.hireBac,nm>=cm?"đủ số theo phẩm":!roomFor("maid")?"hậu cung hết cung nữ":S.bac<BAL.house.hireBac?"cần "+BAL.house.hireBac+" bạc":""),pbtn(`data-hire="eunuch"`,"Thêm thái giám","Bạc -"+BAL.house.hireBac,ne>=ce?"đủ số theo phẩm":!roomFor("eunuch")?"hết thái giám":S.bac<BAL.house.hireBac?"cần "+BAL.house.hireBac+" bạc":""),pbtn(`data-plantsv="1"`,"Cài người vào cung khác","Bạc -"+BAL.house.plantBac+" · 2 khắc",t2||(S.bac<BAL.house.plantBac?"cần "+BAL.house.plantBac+" bạc":!bestSent(S)?"không có ai để sai":"")),S.staff.some(s=>s.role==="maid"&&srk(s)>=BAL.srvRk.cs)?pbtn(`data-smaid="1"`,"Chưởng sự tra xét cung nữ","2 khắc · tìm tai mắt, đối thực",t2):""]]].concat(typeof thcGroups==="function"?thcGroups(S.maid):[])});
+  if(e.t==="own"){const s=e.s;return pcard({f:e.f,name:s.name,rank:s.role==="maid"?(typeof thcIs==="function"&&thcIs(S,s)?"Cung nữ thân cận":"Cung nữ"):"Thái giám",lines:sinfo(s),chips:schip(s),groups:[["Thưởng phạt",servJudgeBtns(s).concat(s.kn?[]:[pbtn(`data-svlook="${s.sid}"`,"Xem người","Bạc -"+BAL.house.lookBac+" · 1 khắc",S.bac<BAL.house.lookBac?"cần "+BAL.house.lookBac+" bạc":!can(1)?"hết khắc":"")])],["Sai bảo",[pbtn(`data-sv="hoi" data-sid="${s.sid}"`,"Hỏi chuyện",`${word(nv(s,"askTalk"))} · 2 khắc · thành: chứng cứ ${balSg(BAL.eff.j10.evServAct_2)} nếu quen người cung khác · hỏng: không biết gì mới`,t2),pbtn(`data-rec="${s.sid}"`,"Tiến cử","Bạc -"+BAL.house.upBac+" · Danh -"+BAL.house.upDanh,S.bac<BAL.house.upBac?"cần "+BAL.house.upBac+" bạc":""),pbtn(`data-sv="doi" data-sid="${s.sid}"`,"Đổi người",`tốn: Bạc -20, Danh -1 (đuổi 2 người trong nửa năm: Danh -3) · thành: trả ${s.name.split(" ").pop()} về, người thay ngẫu nhiên, nết chưa rõ ${servSellO(S,s)>0?` · kèm: hắn đem chuyện của ngươi bán cho kẻ thù (kẻ ấy nắm thêm chứng cứ): ${chanceW(servSellO(S,s))}`:""}`,S.bac<BAL.house.swapBac?"thiếu bạc (cần "+BAL.house.swapBac+")":"")]]].concat(typeof thcGroups==="function"?thcGroups(s):[])})}
   if(e.t==="court"){const c=e.c,k=e.k;return pcard({f:e.f,name:c.name,rank:c.n,lines:[tuoi(c.age),`Thiện cảm <b>${c.af.me||0}</b>`].concat(k==="ty"&&typeof thyCardLines==="function"?thyCardLines():[]),groups:[k==="ty"&&typeof thyCardGroup==="function"?thyCardGroup():null,["Giao thiệp",[pbtn(`data-cv="thuong" data-ck="${k}"`,"Biếu","Bạc -"+BAL.bacFee.court+" · người ấy quý ngươi +10",S.bac<BAL.bacFee.court?"cần "+BAL.bacFee.court+" bạc":""),pbtn(`data-cv="hoi" data-ck="${k}"${k!=="tq"&&k!=="ksp"?capAt(BAL.btn.courtHoi):""}`,"Hỏi chuyện",k==="tq"?`${word(oddsCl(BAL.odb.j10.rbCourtAct+(c.af.me||0)/2))} · ${BAL.btn.courtHoi.k} khắc · thành: biết một sở thích của Hoàng thượng · hỏng: ông chỉ cười`:k==="ksp"?`${BAL.btn.courtHoi.k} khắc · thành: xem sổ thị tẩm`:`${capW()} · ${BAL.btn.courtHoi.k} khắc · người ấy quý ngươi +1`,t2)]]]})}
   if(e.t==="thh"){const s=e.s;return pcard({f:e.f,name:s.name,rank:`${srkName(s)} · Thái hậu`,lines:sinfo(s),chips:schip(s),groups:typeof elderGroups==="function"?elderGroups(s):[]})}
   const s=e.s,v=e.v;const known=s.lover&&(S.knowDT||[]).includes(s.sid);
@@ -23837,7 +23837,7 @@ EV6("kidLie","kid",{a:["kid","sv"],pp:()=>{const a=kid6(k=>k.age>=5&&k.age<=14);
 EV6("servHero","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>.9,
  v:["Đêm qua bếp cung bén lửa; {A} xông vào dập, bỏng cả tay.","{A} phát hiện bậc thềm đá bị bôi dầu trơn, kịp lau trước khi ngươi đi qua.","{A} đuổi được một con rắn độc bò vào buồng các con.","{A} thức trắng chép lại sổ sách cung bị nước làm nhòe."],
  o:X=>[c6("Thưởng hậu",{c:{bac:-25},r:[[X.A,18]]}),
-  c6("Thăng làm người thân cận",{r:[[X.A,12]],w:{tamco:1},k:[R6("người hầu khác ghen tị")],ok:()=>{/* jtc: a maid who now meets the bar becomes her cung nữ thân cận (the same tcSet as the person card) */try{const s=X.A.o;if(s&&s.role==="maid"&&typeof tcSet==="function"&&!tcWhyNot(S,s))return tcSet(S,s)}catch(e){}return ""}}),
+  c6("Thăng làm người thân cận",{r:[[X.A,12]],w:{tamco:1},k:[R6("người hầu khác ghen tị")],ok:()=>{/* jtc: a maid who now meets the bar becomes her cung nữ thân cận (the same thcSet as the person card) */try{const s=X.A.o;if(s&&s.role==="maid"&&typeof thcSet==="function"&&!thcWhyNot(S,s))return thcSet(S,s)}catch(e){}return ""}}),
   c6("Tra xem có kẻ gây ra không",{c:{suc:-4},p:od(BAL.odb.j68g.odP_7+eyes(S)*5),w:{mat:1},wt:[G6("biết đó là tai nạn hay có người")],lt:[R6("không lần ra gì")],l:{suc:-2},r:[[X.A,4]],ok:()=>{const v=liveRivals(true).find(v=>v.plan&&v.plan.t===key(S));return v?`Dấu vết dẫn về người của ${v.name}.`:"Tra kỹ: chỉ là tai nạn, không ai bày ra."}})]});
 EV6("rumorTH","rumor",{a:["th"],pp:()=>S.thDead?null:{a0:0},w:C=>1,
  v:["Cung nhân đồn Thái hậu dạo này không ưa ngươi, chê ngươi lười thỉnh an.","Lời đồn: Thái hậu định chọn ngươi trông coi việc tế lễ năm nay.","Người ta bảo Thái hậu khen ngươi trước mặt Hoàng thượng.","Có tin Thái hậu nhắc tên ngươi khi bàn chuyện ghế trống."],
@@ -34620,7 +34620,7 @@ BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share
    bar is BAL.loy.trust. pick: her lòng +loy, Bạc -bac (her master's thân cận uniform is sewn), every other maid of the house lòng -envy (law 3: gain and loss);
    drop: the dismissed maid lòng +loy (negative), the others lòng +calm. npc: an NPC master with none picks her most loyal trusted maid at p (in 100)
    a month; lets her go when her lòng falls under drop. */
-BAL.tc={rk:[1,3],pick:{loy:10,bac:30,envy:3},drop:{loy:-15,calm:2},npc:{p:25,drop:45}};
+BAL.thc={rk:[1,3],pick:{loy:10,bac:30,envy:3},drop:{loy:-15,calm:2},npc:{p:25,drop:45}};
 /* ================= jbalge: ONE CORE (OD:L1267) rulebook of the GRAND ENDINGS (Đại kết cục, jge.js; design dev/design/GRAND_ENDINGS.md §2.14, r3) =================
    Every number the grand-ending engine uses or a text prints lives here; jge.js / jgedata.js hold words, option names and logic only.
    Loads after jbal2.js (BAL exists), before jgedata.js / jge.js. Set by measurement: dev/measure/ge-measure.js (bands BAL.ge.target).
@@ -66649,8 +66649,8 @@ function j95ppl(R){const L=[],seen={};const add=(id,name,role,kind,home,ref)=>{i
     and the two people fixed to a place (Quản sự Tân Giả khố, Thầy dạy): the record takes the SAME lists the stage draws (one ledger) */
  J95.px={};const PXT=typeof plxPeople==="function";if(PXT)try{for(const k of ["cnh","tgk"])for(const q of plxPeople(k))if(q&&q.sid!=null)J95.px["s"+q.sid]=k}catch(e){}
  for(const p of [S].concat(rivals)){if(p!==S&&!p.alive)continue;const hk=p===S?(S.out?"lc":"home"):p.out?"lc":palaceOf(p);const pk=p===S?"me":p.id;const ow=p===S?"ngươi":p.name;
-  if(p.maid&&p.maid.name&&!(p===S&&typeof isSrv==="function"&&isSrv()))add("mm:"+pk,p.maid.name,(typeof tcIs==="function"&&tcIs(p,p.maid)?"Cung nữ thân cận của ":"Cung nữ thân tín của ")+ow,"mm",hk,p);
-  for(const s of p.staff||[])if(s&&s.sid!=null){const px=J95.px["s"+s.sid];add("s"+s.sid,s.name,(s.role==="eunuch"?"Thái giám":typeof tcIs==="function"&&tcIs(p,s)?"Cung nữ thân cận":"Cung nữ")+" của "+ow,px?"px":"st",px||hk,p)}}
+  if(p.maid&&p.maid.name&&!(p===S&&typeof isSrv==="function"&&isSrv()))add("mm:"+pk,p.maid.name,(typeof thcIs==="function"&&thcIs(p,p.maid)?"Cung nữ thân cận của ":"Cung nữ thân tín của ")+ow,"mm",hk,p);
+  for(const s of p.staff||[])if(s&&s.sid!=null){const px=J95.px["s"+s.sid];add("s"+s.sid,s.name,(s.role==="eunuch"?"Thái giám":typeof thcIs==="function"&&thcIs(p,s)?"Cung nữ thân cận":"Cung nữ")+" của "+ow,px?"px":"st",px||hk,p)}}
  /* named palace staff (jstaff, main 16/11): the elders stand at their post (the stage draws them there); the rest of Thái hậu's household serves at Đức Thọ cung */
  J95.eld={};const eh=x=>{if(!x||x.sid==null)return;const k=j95elderK(x);if(x.eid)J95.eld["s"+x.sid]=x.eid;if(seen["s"+x.sid]){const q=L.find(z=>z.id==="s"+x.sid);if(q&&x.eid){q.kind="el";q.home=k}return}add("s"+x.sid,x.name,x.call||"Người hầu của Thái hậu","el",k,x)};
  try{for(const x of (S.thO&&S.thO.staff)||[])eh(x);for(const v of rivals)if(v.alive)for(const x of v.staff||[])if(x&&x.eid)eh(x)}catch(e){}
@@ -75292,10 +75292,10 @@ function j95sOid(o){return o===S?"me":o==="th"?"th":"v"+o.id}
 function j95sSvTab(){const M=new Map();try{for(const p of [S].concat(rivals,(S.thO?[S.thO]:[])))for(const s of (p&&p.staff)||[])if(s&&!M.has(s.sid))M.set(s.sid,s)}catch(e){}return M}
 function j95sHouses(ppl){const H=new Map();const add=(o,q)=>{let h=H.get(o);if(!h){h=[];H.set(o,h)}h.push(q)};let SV=null;const sv=id=>{if(!SV)SV=j95sSvTab();const s=SV.get(+String(id).slice(1));return s===undefined?null:s};
  for(const p of ppl){if(p.kind==="mm"||p.kind==="st"){const o=p.ref;if(!o)continue;if(o!==S&&(!o.alive))continue;add(o,{id:p.id,kind:p.kind,close:j95sClose(o,p,sv),sv:p.kind==="st"?sv(p.id):null,name:p.name,home:p.home})}
-  else if(p.kind==="el"&&p.ref&&!p.ref.eid&&p.home==="tn"&&!S.thDead)add("th",{id:p.id,kind:"el",close:!!(S.thO&&typeof tcOf==="function"&&tcOf(S.thO)===p.ref),sv:p.ref,name:p.name,home:"tn"})}
+  else if(p.kind==="el"&&p.ref&&!p.ref.eid&&p.home==="tn"&&!S.thDead)add("th",{id:p.id,kind:"el",close:!!(S.thO&&typeof thcOf==="function"&&thcOf(S.thO)===p.ref),sv:p.ref,name:p.name,home:"tn"})}
  return H}
 /* q.close = her cung nữ thân cận (jtc, owner OD 20/11 ~15:55Z): the maid her master CHOSE (master.tc), no longer simply the personal maid (kind mm) */
-function j95sClose(o,p,sv){try{if(typeof tcOf!=="function")return p.kind==="mm";const c=tcOf(o);if(!c)return false;return p.kind==="mm"?c===o.maid:c===sv(p.id)}catch(e){return false}}
+function j95sClose(o,p,sv){try{if(typeof thcOf!=="function")return p.kind==="mm";const c=thcOf(o);if(!c)return false;return p.kind==="mm"?c===o.maid:c===sv(p.id)}catch(e){return false}}
 /* ---------- her own day (per khắc, deterministic per buổi) ---------- */
 function j95sErrand(o,r){const B=BAL.slv.err;const L=[];let ill=false;try{ill=o!=="th"&&o!==S?!!(illOf(o)||o.preg):!!(o===S&&(illOf(S)||S.preg))}catch(e){}
  for(const k in B){if(k==="nvp"&&!j95nvp())continue;L.push([k,B[k]*(k==="tyv"&&ill?BAL.slv.illTyv:1)])}const k=j95sPw(r,L);const ow=j95sOw(o);
@@ -75453,8 +75453,9 @@ Object.assign(window,{j95here,j95whereId});
    j95sNpcPick. Off in co-op (j95on false: the record is off there) and for a servant start (isSrv) / a home life (isKc). */
 function j95sMine(){const R=S.roster;if(!R||R.key!==j95key())return[];const kh=j95kh();const L=[];
  const add=(id,s,role,close)=>{const e=R.P[id];if(!e)return;const x=e[kh];L.push({id,s,name:s.name,role,close,x,free:j95sFree(x,"home")})};
- if(S.maid&&S.maid.name)add("mm:me",S.maid,kitMaidTitle(),true);
- for(const s of S.staff||[])if(s&&!s.out&&s.sid!=null)add("s"+s.sid,s,s.role==="eunuch"?"Thái giám":"Cung nữ",false);
+ const tcI=s=>typeof thcIs==="function"?thcIs(S,s):s===S.maid;/* jtc: the close one = her chosen thân cận */
+ if(S.maid&&S.maid.name)add("mm:me",S.maid,kitMaidTitle(),tcI(S.maid));
+ for(const s of S.staff||[])if(s&&!s.out&&s.sid!=null)add("s"+s.sid,s,s.role==="eunuch"?"Thái giám":tcI(s)?"Cung nữ thân cận":"Cung nữ",tcI(s));
  return L}
 const J95S_ENT_T=["Hôm nay ra khỏi cung, ngươi dẫn ai theo? Chọn bao nhiêu người cũng được, trong những người đang ở cung và rảnh. Đã đi rồi thì hôm nay không gọi thêm người được nữa.","Người theo hầu thấy những gì ngươi thấy, có thêm tai mắt cho ngươi; nhưng họ cũng biết việc ngươi làm và có thể kể lại với người khác. Người ở lại trông cung."];
 function j95sEntAsk(k){const L=j95sMine();if(!L.some(p=>p.free))return false;/* nobody free: no card, she goes alone; the card comes at her next departure */
@@ -83416,82 +83417,84 @@ KY.stat.buoi=()=>{const r={elig:KY.stat.elig>KY._e,hit:KY.stat.hit>KY._h,id:KY.c
 KY.stat.npc=()=>({hit:Object.assign({},KY.stat.npcHit),buoi:Object.assign({},KY.stat.npcB)});
 })();
 /* ================= jtc: CUNG NỮ THÂN CẬN (owner OD 20/11 ~15:55Z = OD:L2051, verbatim there; order MAIN ROOT-79 20/11 15:40Z; review/thancan) =================
-   RULE (owner): no thân cận slot at the start of a life; any trusted maid of her household (tam / nhị / nhất đẳng, BAL.tc.rk) can be raised by the
+   RULE (owner): no thân cận slot at the start of a life; any trusted maid of her household (tam / nhị / nhất đẳng, BAL.thc.rk) can be raised by the
    interaction «Chọn làm cung nữ thân cận» on her person card; a thân cận wears HER MASTER'S own thân cận uniform (one per master: every chủ vị by her
    palace + Hoàng hậu + Thái hậu; same cut, embroidery richer with the master's rank); NPC masters choose the same way (law 1 two-way, law 6b).
    ONE flag, reused: the record's q.close (j95s: serves more, follows first, "cung nữ thân cận … không rảnh") now means THIS choice — it was "the
-   personal maid" (kind mm) before. Data: master.tc = sid of a staff maid, or "m:<name>" = her personal maid (p.maid, j3 / jcmaid). A tc that no longer
-   points to a maid of that house (dismissed, sold, died, replaced, raised out of range) reads as none and is cleared (tcOf).
-   GAIN AND LOSS (law 3; numbers BAL.tc, jbal2.js — law 4): choose = the maid's lòng +pick.loy and she becomes the close one (j95s) | Bạc -pick.bac (her
+   personal maid" (kind mm) before. Data: master.thc = sid of a staff maid, or "m:<name>" = her personal maid (p.maid, j3 / jcmaid). A thc that no longer
+   points to a maid of that house (dismissed, sold, died, replaced, raised out of range) reads as none and is cleared (thcOf).
+   GAIN AND LOSS (law 3; numbers BAL.thc, jbal2.js — law 4): choose = the maid's lòng +pick.loy and she becomes the close one (j95s) | Bạc -pick.bac (her
    uniform is sewn) and the other maids of the house lòng -pick.envy (jealous). Dismiss = the others' envy eases (lòng +drop.calm) | the dismissed
    maid lòng drop.loy. Trust bar = BAL.loy.trust (the one "trusted" bar of the game).
    LOOK (kit figure, j88 f88Best): a thân cận's figure is the record of her identity whose tier is her look key "maid-thancan-<master>-t<tier>"
    (master = th | hh | p<palace slot>; tier = master rank + 1, Thái hậu 9). Not painted yet → her usual maid dress (never an empty picture);
    uniform records never stand in for an ordinary maid dress. Art keys proposed to Foreman C (THANCAN batch).
-   CO-OP: one world; the guest's tap is an intent run on the host (jcoopthinf F.reg "tcPick"); both seats read the same master.tc.
-   OLD SAVES: a master without tcV (her, every consort; set on start / newRival) keeps the personal maid of every house as its thân cận (she was the close maid before); new lives start with none. */
-function tcB(){return BAL.tc}
-function tcMaidRk(s,isM){try{if(isM)return s.rk!=null?s.rk:BAL.srvRk.dai;return s.rk==null?1:s.rk}catch(e){return 1}}
+   CO-OP: one world; the guest's tap is an intent run on the host (jcoopthinf F.reg "thcPick"); both seats read the same master.thc.
+   OLD SAVES: a master without thcV (her, every consort; set on start / newRival) keeps the personal maid of every house as its thân cận (she was the close maid before); new lives start with none. */
+function thcB(){return BAL.thc}
+function thcMaidRk(s,isM){try{if(isM)return s.rk!=null?s.rk:BAL.srvRk.dai;return s.rk==null?1:s.rk}catch(e){return 1}}
 /* the maids of a master's house: [{s, id, m (personal maid)}] */
-function tcHouse(p){const L=[];if(!p)return L;try{if(p.maid&&p.maid.name&&p!==S.thO&&!(p===S&&typeof isSrv==="function"&&isSrv()))L.push({s:p.maid,id:"m:"+p.maid.name,m:true});
+function thcHouse(p){const L=[];if(!p)return L;try{if(p.maid&&p.maid.name&&p!==S.thO&&!(p===S&&typeof isSrv==="function"&&isSrv()))L.push({s:p.maid,id:"m:"+p.maid.name,m:true});
  for(const s of p.staff||[])if(s&&s.role==="maid"&&s.sid!=null&&!s.out&&!s.dead)L.push({s,id:s.sid,m:false})}catch(e){}return L}
-function tcRef(p,s){if(!p||!s)return null;if(s===p.maid)return "m:"+s.name;return s.sid!=null?s.sid:null}
+function thcRef(p,s){if(!p||!s)return null;if(s===p.maid)return "m:"+s.name;return s.sid!=null?s.sid:null}
 /* the thân cận of master p (the maid object) or null; a stale pointer is cleared */
-function tcOf(p){if(!p||p.tc==null)return null;const e=tcHouse(p).find(x=>x.id===p.tc);if(e&&tcRkOk(e.s,e.m))return e.s;try{delete p.tc}catch(x){}return null}
-function tcIs(p,s){return !!s&&tcOf(p)===s}
-function tcRkOk(s,isM){const r=tcMaidRk(s,isM),R=tcB().rk;return r>=R[0]&&r<=R[1]}
+function thcOf(p){if(!p||p.thc==null)return null;const e=thcHouse(p).find(x=>x.id===p.thc);if(e&&thcRkOk(e.s,e.m))return e.s;try{delete p.thc}catch(x){}return null}
+function thcIs(p,s){return !!s&&thcOf(p)===s}
+function thcRkOk(s,isM){const r=thcMaidRk(s,isM),R=thcB().rk;return r>=R[0]&&r<=R[1]}
 /* who may be chosen: why-not text (VANPHONG) or "" */
-function tcWhyNot(p,s){if(!s||s.role!=null&&s.role!=="maid"&&s!==p.maid)return "chỉ cung nữ";const isM=s===p.maid;if(!tcRkOk(s,isM))return "chỉ cung nữ tam đẳng đến nhất đẳng";
- if((s.loyal||0)<BAL.loy.trust)return `chưa đủ tin (lòng cần ${BAL.loy.trust})`;if(typeof p.bac==="number"&&p.bac<tcB().pick.bac)return `cần ${tcB().pick.bac} bạc`;return ""}
-function tcPay(p,o){if(p===S)apply(o);else if(typeof p.bac==="number"&&o.bac)p.bac+=o.bac}
+function thcWhyNot(p,s){if(!s||s.role!=null&&s.role!=="maid"&&s!==p.maid)return "chỉ cung nữ";const isM=s===p.maid;if(!thcRkOk(s,isM))return "chỉ cung nữ tam đẳng đến nhất đẳng";
+ if((s.loyal||0)<BAL.loy.trust)return `chưa đủ tin (lòng cần ${BAL.loy.trust})`;if(typeof p.bac==="number"&&p.bac<thcB().pick.bac)return `cần ${thcB().pick.bac} bạc`;return ""}
+function thcPay(p,o){if(p===S)apply(o);else if(typeof p.bac==="number"&&o.bac)p.bac+=o.bac}
 /* ONE function for her and every NPC master (two-way): s = the maid to raise, or null = dismiss the current one. Returns the log line ("" = nothing) */
-function tcSet(p,s){const B=tcB();if(!p)return "";const cur=tcOf(p);const me=p===S;const H=tcHouse(p);let r="";
+function thcSet(p,s){const B=thcB();if(!p)return "";const cur=thcOf(p);const me=p===S;const H=thcHouse(p);let r="";
  if(s&&cur===s)return "";
- if(cur){/* the one stepping down: her lòng drops, the others' envy eases */cur.loyal=cl((cur.loyal||0)+B.drop.loy,0,100);for(const e of H)if(e.s!==cur&&e.s!==s)e.s.loyal=cl((e.s.loyal||0)+B.drop.calm,0,100);delete p.tc;
+ if(cur){/* the one stepping down: her lòng drops, the others' envy eases */cur.loyal=cl((cur.loyal||0)+B.drop.loy,0,100);for(const e of H)if(e.s!==cur&&e.s!==s)e.s.loyal=cl((e.s.loyal||0)+B.drop.calm,0,100);delete p.thc;
   r=me?`${cur.name} thôi làm cung nữ thân cận: lòng ${balSg(B.drop.loy)}; các cung nữ khác bớt ghen, lòng ${balSg(B.drop.calm)}.`:`${p.name} cho ${cur.name} thôi làm cung nữ thân cận.`}
- if(s){if(tcWhyNot(p,s))return r;const id=tcRef(p,s);if(id==null)return r;tcPay(p,{bac:-B.pick.bac});s.loyal=cl((s.loyal||0)+B.pick.loy,0,100);
-  for(const e of H)if(e.s!==s&&e.s!==cur)e.s.loyal=cl((e.s.loyal||0)-B.pick.envy,0,100);p.tc=id;s.tcAt=S?S.turn||0:0;
+ if(s){if(thcWhyNot(p,s))return r;const id=thcRef(p,s);if(id==null)return r;thcPay(p,{bac:-B.pick.bac});s.loyal=cl((s.loyal||0)+B.pick.loy,0,100);
+  for(const e of H)if(e.s!==s&&e.s!==cur)e.s.loyal=cl((e.s.loyal||0)-B.pick.envy,0,100);p.thc=id;s.thcAt=S?S.turn||0:0;
   const t=me?`Chọn ${s.name} làm cung nữ thân cận, may y phục thân cận riêng của cung ngươi (Bạc ${balSg(-B.pick.bac)}): lòng nàng ${balSg(B.pick.loy)}; các cung nữ khác ghen, lòng ${balSg(-B.pick.envy)}.`
    :`${p===S.thO?"Thái hậu":p.name} chọn ${s.name} làm cung nữ thân cận.`;r=r?r+" "+t:t}
  try{if(typeof J95S==="object")J95S.last=null}catch(e){}/* the record re-reads the close one */
  return r}
-/* her tap (person card): k = sid or "m:<name>", on = 1 choose / 0 dismiss. Registered as a co-op intent (jcoopthinf "tcPick") */
-function tcPick(k,on){if(!S||S.dead||(typeof Q!=="undefined"&&Q.length))return "";const e=tcHouse(S).find(x=>x.id===k);if(!e)return "";
- const r=on?tcSet(S,e.s):(tcOf(S)===e.s?tcSet(S,null):"");if(r){log(r);try{render()}catch(x){}}return r}
+/* her tap (person card): k = sid or "m:<name>", on = 1 choose / 0 dismiss. Registered as a co-op intent (jcoopthinf "thcPick") */
+function thcPick(k,on){if(!S||S.dead||(typeof Q!=="undefined"&&Q.length))return "";const e=thcHouse(S).find(x=>x.id===k);if(!e)return "";
+ const r=on?thcSet(S,e.s):(thcOf(S)===e.s?thcSet(S,null):"");if(r){log(r);try{render()}catch(x){}}return r}
 /* the kit person-card group (j15 pcard groups) for one of her maids */
-function tcGroups(s){try{if(!S||!s||S.dead)return[];const p=S;const isM=s===p.maid;if(!isM&&s.role!=="maid")return[];if(typeof isSrv==="function"&&isSrv())return[];
- const B=tcB(),k=isM?"m:"+s.name:s.sid,cur=tcOf(p);const ka=`data-tcp="${k}"`;
- if(cur===s)return [["Thân cận",[pbtn(`${ka} data-tcon="0"`,"Thôi làm cung nữ thân cận",`nàng: lòng ${balSg(B.drop.loy)} · cung nữ khác: lòng ${balSg(B.drop.calm)}`,"")]]];
- const why=tcWhyNot(p,s);
- return [["Thân cận",[pbtn(`${ka} data-tcon="1"`,"Chọn làm cung nữ thân cận",`Bạc ${balSg(-B.pick.bac)} · nàng: lòng ${balSg(B.pick.loy)} · cung nữ khác ghen: lòng ${balSg(-B.pick.envy)}${cur?` · thay ${cur.name}`:""}`,why)]]]}catch(e){return[]}}
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("button[data-tcp]");if(!b||b.disabled)return;const k0=b.dataset.tcp;const k=/^m:/.test(k0)?k0:+k0;
- tcPick(k,b.dataset.tcon==="1"?1:0)});
+function thcGroups(s){try{if(!S||!s||S.dead)return[];const p=S;const isM=s===p.maid;if(!isM&&s.role!=="maid")return[];if(typeof isSrv==="function"&&isSrv())return[];
+ const B=thcB(),k=isM?"m:"+s.name:s.sid,cur=thcOf(p);const ka=`data-thcp="${k}"`;
+ if(cur===s)return [["Thân cận",[pbtn(`${ka} data-thcon="0"`,"Thôi làm cung nữ thân cận",`nàng: lòng ${balSg(B.drop.loy)} · cung nữ khác: lòng ${balSg(B.drop.calm)}`,"")]]];
+ const why=thcWhyNot(p,s);
+ return [["Thân cận",[pbtn(`${ka} data-thcon="1"`,"Chọn làm cung nữ thân cận",`Bạc ${balSg(-B.pick.bac)} · nàng: lòng ${balSg(B.pick.loy)} · cung nữ khác ghen: lòng ${balSg(-B.pick.envy)}${cur?` · thay ${cur.name}`:""}`,why)]]]}catch(e){return[]}}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("button[data-thcp]");if(!b||b.disabled)return;const k0=b.dataset.thcp;const k=/^m:/.test(k0)?k0:+k0;
+ thcPick(k,b.dataset.thcon==="1"?1:0)});
 /* NPC masters (every living consort, Hoàng hậu, Thái hậu): once a month by their own reasons — the most loyal trusted maid at npc.p odds when none;
    a thân cận whose lòng fell under npc.drop is let go. The world's step: host only in co-op (monthTick runs there). */
-function tcNpc(p){const B=tcB().npc;if(!p||p===S)return "";const cur=tcOf(p);
- if(cur){if((cur.loyal||0)<B.drop)return tcSet(p,null);return ""}
- const L=tcHouse(p).filter(e=>!tcWhyNot(p,e.s)).sort((a,b)=>(b.s.loyal||0)-(a.s.loyal||0));if(!L.length||!roll(B.p))return "";return tcSet(p,L[0].s)}
-function tcNpcAll(){const N=window.__tcN=window.__tcN||{pick:0,drop:0};try{for(const v of (typeof liveRivals==="function"?liveRivals(true):[]))if(v&&v.alive&&!v.out){const h=!!tcOf(v);tcNpc(v);const n=!!tcOf(v);if(n&&!h)N.pick++;if(h&&!n)N.drop++}
- if(S.thO&&!S.thDead){const h=!!tcOf(S.thO);tcNpc(S.thO);const n=!!tcOf(S.thO);if(n&&!h)N.pick++;if(h&&!n)N.drop++}}catch(e){console.error("tcNpc",e)}}
+function thcNpc(p){const B=thcB().npc;if(!p||p===S)return "";const cur=thcOf(p);
+ if(cur){if((cur.loyal||0)<B.drop)return thcSet(p,null);return ""}
+ const L=thcHouse(p).filter(e=>!thcWhyNot(p,e.s)).sort((a,b)=>(b.s.loyal||0)-(a.s.loyal||0));if(!L.length||!roll(B.p))return "";return thcSet(p,L[0].s)}
+function thcNpcAll(){const N=window.__tcN=window.__tcN||{pick:0,drop:0};try{for(const v of (typeof liveRivals==="function"?liveRivals(true):[]))if(v&&v.alive&&!v.out){const h=!!thcOf(v);thcNpc(v);const n=!!thcOf(v);if(n&&!h)N.pick++;if(h&&!n)N.drop++}
+ if(S.thO&&!S.thDead){const h=!!thcOf(S.thO);thcNpc(S.thO);const n=!!thcOf(S.thO);if(n&&!h)N.pick++;if(h&&!n)N.drop++}}catch(e){console.error("thcNpc",e)}}
 /* the look key of a thân cận (kit figure, j88): null when s is not a thân cận */
-function tcMasterOf(s){try{if(!S||!s)return null;const M=[S].concat(typeof rivals!=="undefined"?rivals:[],S.thO?[S.thO]:[]);for(const p of M)if(p&&p.tc!=null&&tcOf(p)===s)return p}catch(e){}return null}
-function tcLookKey(s){const p=tcMasterOf(s);if(!p)return null;let m,t;
+function thcMasterOf(s){try{if(!S||!s)return null;const M=[S].concat(typeof rivals!=="undefined"?rivals:[],S.thO?[S.thO]:[]);for(const p of M)if(p&&p.thc!=null&&thcOf(p)===s)return p}catch(e){}return null}
+function thcLookKey(s){const p=thcMasterOf(s);if(!p)return null;let m,t;
  if(p===S.thO){m="th";t=9}else{const r=rkOf(p);t=cl(r,0,7)+1;if(p.queen||(p===S&&r>=7))m="hh";else{/* her house's palace (the chủ vị's; a low consort lives in one) */let sl=null;try{const h=byKey(houseOf(p));sl=h===S?S.pal:h?h.pal:null;if(sl==null)sl=p===S?S.pal:p.pal}catch(e){}m=sl!=null?"p"+sl:"x"}}
  return `maid-thancan-${m}-t${t}`}
 (function(){
  /* figure: a thân cận wears her master's uniform record when painted; uniform records are never an ordinary maid dress */
  if(typeof f88Best==="function"){const f0=f88Best;f88Best=function(L,who,kind){try{if(Array.isArray(L)&&L.some(f=>f&&/^maid-thancan-/.test(String(f.tier||"")))){
-   const k=who&&who!==S?tcLookKey(who):null;if(k){const U=L.filter(f=>f&&f.tier===k&&(kind!=="por"||f.por));if(U.length)return U[0]}
+   const k=who&&who!==S?thcLookKey(who):null;if(k){const U=L.filter(f=>f&&f.tier===k&&(kind!=="por"||f.por));if(U.length)return U[0]}
    const N=L.filter(f=>!(f&&/^maid-thancan-/.test(String(f.tier||""))));return f0.call(this,N.length?N:L,who,kind)}}catch(e){}return f0.apply(this,arguments)}}
+ /* her personal maid's title reads «thân cận» only while she is the chosen one (kit title, j79) */
+ if(typeof kitMaidTitle==="function"){const k0=kitMaidTitle;kitMaidTitle=function(m){const t=k0.apply(this,arguments);try{const x=m||(S&&S.maid);if(x&&thcIs(S,x))return String(t).replace("thân tín","thân cận")}catch(e){}return t}}
  /* new life: no thân cận anywhere (owner: "ngay từ đầu … không có") */
- if(typeof start==="function"){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S){S.tcV=1;delete S.tc;for(const v of rivals||[])if(v)delete v.tc;if(S.thO)delete S.thO.tc}}catch(e){}return r}}
+ if(typeof start==="function"){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S){S.thcV=1;delete S.thc;for(const v of rivals||[])if(v)delete v.thc;if(S.thO)delete S.thO.thc}}catch(e){}return r}}
  /* every master made from now on is new (per object, so a co-op world rebuilt by deser never re-migrates a new consort) */
- if(typeof newRival==="function"){const n0=newRival;newRival=function(){const n=n0.apply(this,arguments);try{if(n&&typeof n==="object")n.tcV=1}catch(e){}return n}}
+ if(typeof newRival==="function"){const n0=newRival;newRival=function(){const n=n0.apply(this,arguments);try{if(n&&typeof n==="object")n.thcV=1}catch(e){}return n}}
  /* old save: the personal maid of every house was its close maid → stays its thân cận */
- if(typeof deser==="function"){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{tcOld()}catch(e){}return r}}
- if(typeof monthTick==="function"){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{if(S&&!S.dead&&(typeof worldOn!=="function"||worldOn()))tcNpcAll()}catch(e){}return ev}}
+ if(typeof deser==="function"){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{thcOld()}catch(e){}return r}}
+ if(typeof monthTick==="function"){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{if(S&&!S.dead&&(typeof worldOn!=="function"||worldOn()))thcNpcAll()}catch(e){}return ev}}
 })();
-function tcOld(){if(!S)return;for(const p of [S].concat(rivals||[])){if(!p||p.tcV)continue;p.tcV=1;if(p.maid&&p.maid.name&&p.tc==null)p.tc="m:"+p.maid.name}}
+function thcOld(){if(!S)return;for(const p of [S].concat(rivals||[])){if(!p||p.thcV)continue;p.thcV=1;if(p.maid&&p.maid.name&&p.thc==null)p.thc="m:"+p.maid.name}}
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -84898,7 +84901,7 @@ F.reg("srvGoTo",Object.assign({},W7,{ret:false,mine:A=>typeof A[0]==="string"&&!
 F.reg("kcGo",Object.assign({},W7,{ret:false,mine:A=>typeof A[0]==="string"&&!!S&&!S.dead&&!Q.length,enc:A=>({k:A[0]}),dec:a=>a&&typeof a.k==="string"?[a.k]:null,
  done:(A,r)=>{if(r&&r.rv&&S&&S.place===A[0]){tab="act";try{render()}catch(e){}}}/* its tap handler switches to the act tab when it went (jkc :626) */}));
 /* jtc (review/thancan): her «Chọn làm cung nữ thân cận» / «Thôi làm cung nữ thân cận» tap = an intent; the host decides (one world, one master.tc) */
-F.reg("tcPick",{lv:LV,log:false,title:A=>A[1]?"Chọn làm cung nữ thân cận":"Thôi làm cung nữ thân cận",mine:A=>(typeof A[0]==="number"||/^m:/.test(String(A[0])))&&idle(),
+F.reg("thcPick",{lv:LV,log:false,title:A=>A[1]?"Chọn làm cung nữ thân cận":"Thôi làm cung nữ thân cận",mine:A=>(typeof A[0]==="number"||/^m:/.test(String(A[0])))&&idle(),
  enc:A=>({k:A[0],on:A[1]?1:0}),dec:a=>a&&(typeof a.k==="number"||/^m:/.test(String(a.k)))?[a.k,a.on?1:0]:null});
 /* PARALLEL TIME on the guest (coop-ptime-reds; jptime S.away): her sends created on the host (runAct gift / harm / plant …, scout, invite) or on
    her phone land at their due khắc. The landing runs the act's own runner (roll, NPC answer, giveTo, runAct, ordered servant, late order =
@@ -85073,7 +85076,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="04a5a589f2b6";window.CTM_BUILD=BUILD;
+const BUILD="6941f6a1548e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -197,7 +197,7 @@ F.reg("srvGoTo",Object.assign({},W7,{ret:false,mine:A=>typeof A[0]==="string"&&!
 F.reg("kcGo",Object.assign({},W7,{ret:false,mine:A=>typeof A[0]==="string"&&!!S&&!S.dead&&!Q.length,enc:A=>({k:A[0]}),dec:a=>a&&typeof a.k==="string"?[a.k]:null,
  done:(A,r)=>{if(r&&r.rv&&S&&S.place===A[0]){tab="act";try{render()}catch(e){}}}/* its tap handler switches to the act tab when it went (jkc :626) */}));
 /* jtc (review/thancan): her «Chọn làm cung nữ thân cận» / «Thôi làm cung nữ thân cận» tap = an intent; the host decides (one world, one master.tc) */
-F.reg("tcPick",{lv:LV,log:false,title:A=>A[1]?"Chọn làm cung nữ thân cận":"Thôi làm cung nữ thân cận",mine:A=>(typeof A[0]==="number"||/^m:/.test(String(A[0])))&&idle(),
+F.reg("thcPick",{lv:LV,log:false,title:A=>A[1]?"Chọn làm cung nữ thân cận":"Thôi làm cung nữ thân cận",mine:A=>(typeof A[0]==="number"||/^m:/.test(String(A[0])))&&idle(),
  enc:A=>({k:A[0],on:A[1]?1:0}),dec:a=>a&&(typeof a.k==="number"||/^m:/.test(String(a.k)))?[a.k,a.on?1:0]:null});
 /* PARALLEL TIME on the guest (coop-ptime-reds; jptime S.away): her sends created on the host (runAct gift / harm / plant …, scout, invite) or on
    her phone land at their due khắc. The landing runs the act's own runner (roll, NPC answer, giveTo, runAct, ordered servant, late order =
