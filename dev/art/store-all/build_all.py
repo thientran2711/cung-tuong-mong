@@ -546,6 +546,7 @@ def b26_fit_ok(person,rank,age,season):
     """-> 'while' (cut while > 10 000), 'whole' (cell over at HEAD, t4/t5: the JOB 1 all-or-nothing fit kept as it was, so nothing that fitted before goes over again), or False."""
     global _HEAD_OVER
     if not (isinstance(rank,int) and 1<=rank<=8): return False   # B26FAB3 (Foreman C #6, 20/11): t7/t8 too (F2 embroidery names), same cut-while step
+    if not (isinstance(rank,int) and 1<=rank<=6): return False
     if _HEAD_OVER is None:
         import json as _j; _HEAD_OVER=set(_j.load(open(os.path.join(ART,"b26","HEAD_OVER10K.json"),encoding="utf-8"))["cells"])
     if not ({f"{x}|{rank}|{age}|{season}" for x in (person,ALIAS.get(person,person))} & _HEAD_OVER): return 'while'
@@ -579,6 +580,15 @@ def _build(person,rank,age="a18"):
 def hairflower_named(a,person,rank):
     if not a.startswith(_F13): return a
     sp=LAST_G["hairflower_species"](ALIAS.get(person,person),rank)   # F2 (owner Lượt 1352): the F2 species of THIS rank
+    if rank in (4,5,6): add=[hairflower_named(a,person) for a in add]
+    if not g_pets_allowed(rank,age): S=LAST_G["_PETS"].depet(S)   # F17 PETS: no animal pose where pets are not allowed (only the animal words change)
+    return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
+# HAIR FLOWER SPECIES t4-t6 (Foreman C #5 decision 2, 20/11: the t4-t6 prompts said only 'ONE fresh flower in her hair' -> Magnific painted s62 a peony while her
+# JOB 2 embroidery is plum blossom): the F13 HAIR FLOWER SIZE sentence names HER species (build.py hairflower_species = MOTIF_LOW[person][1], the JOB 2 source).
+# Size words unchanged; the 17 'a pink silk flower' people (no species) unchanged.
+def hairflower_named(a,person):
+    if not a.startswith(_F13): return a
+    sp=LAST_G["hairflower_species"](person)
     if not sp: return a
     return a.replace("ONE fresh flower in her hair","ONE fresh "+sp[0]+" in her hair",1)
 

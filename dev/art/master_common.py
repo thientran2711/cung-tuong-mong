@@ -62,6 +62,7 @@ def _norm1(s): return re.sub(r"\s+", " ", s).strip()
 # when the caller says the prompt is t1-t6 (build_all.b26_fit low=True / check_store scope tp1-tp6 pr1-pr6). Cells already > LIMIT at HEAD 7007acc are not cut
 # (build_all reads dev/art/b26/HEAD_OVER10K.json).
 LEN_SCOPES = {f"{k}{n}" for k in ("tp", "pr") for n in range(1, 9)}   # B26FAB3 (Foreman C #6, 20/11): + tp7/tp8 pr7/pr8 (t7/t8 F2 embroidery names pushed 2 cells over)
+LEN_SCOPES = {f"{k}{n}" for k in ("tp", "pr") for n in range(1, 7)}
 
 
 def doan_fit(text, low=False):
