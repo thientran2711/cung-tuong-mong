@@ -1628,3 +1628,18 @@ BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400
  greet:{delay:900,wait:1500,tries:20},w:{hap:1,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
 /* kitGameVs (K-PM-1, owner OD 20/11 ~01:00Z item 1, KIT §13.8): the live head-to-head split board «Thách đấu»; knobs only, the game that mounts it owns every rule number */
 BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share of the round clock left at which a clock chip turns red; end = ms the result banner takes to settle (all three still under reduced motion) */
+/* jkc3 HOME CHAPTERS (GAP OR03–OR10): the calendar of the home arcs, the roster people, the home events E9 / E15 / E28, the early roads.
+   cal: o0 months to the first beat · gap [min, +roll] months between beats · tP odds of a turn beat · min beats an unopened arc needs · fin spare months before Sơ tuyển.
+   win Lợi thế for the win ending of an arc with no fixed ending · scOdds odds per Lợi thế at a climax · plan.ke odds of «Kế mẫu» over «Hôn sự» when the mother lives.
+   ros: starting favour [base, +roll] · me = her own liking · baSanh odds the bà mối sits in the chính sảnh while a match is open.
+   thay: t favour for tier 1 / 2 · mul lesson speed per tier · hau / bieu / truyen the three teacher acts. entry: rank index of the early roads (1 = Thường tại). fx: every arc's option / ending numbers (BAL.arc.fx format). */
+Object.assign(BAL,{kc3:{cal:{o0:2,gap:[1,2],tP:65,min:3,fin:1},win:3,scOdds:7,plan:{ke:50},
+ ros:{me:[30,20],nm:[60,25],ba:[25,20],thay:[20,20],sx:[30,30],baSanh:60},
+ thay:{t:[45,75],mul:[1,1.25,1.5],hau:{k:2,suc:-10,af:7},bieu:{bac:-15,af:7},truyen:{k:2,suc:-15,danh:3,art:8}},
+ nm:{ke:{k:1,tamco:1,af:3},do:{k:1,od:40,afD:4,proof:1,oan:6,af:-5,oanMin:12},an:{k:2,suc:20}},
+ ba:{bieu:{bac:-20,af:10,q:10},khe:{suc:-10,kap:-8,af:4}},
+ ev:{mebenh:{t0:6,p:6,af:10,y:{bac:-40,od:55},hau:{suc:-30,od:50}},divat:{hua:{duc:3},hoi:{tamco:3,proof:1}},
+  xemmat:{dep:{suc:-10,od:45,sacD:3,kgt:4,kap:10,af:8,kgtF:-3},gian:{duc:2,kap:3},muoi:{af:8,danh:2,kap:-4,p:50}},
+  hac:{t0:8,p:8,lo:{khm:40,od:60,pow:4,powF:-6,af:10},ha:{pow:-8,kgt:-4,af:-4,duc:3},tra:{suc:-15,od:30,tcD:3,pow:3,af:6,kgtF:-5,afF:-4}},
+  vh:{duc:3},th:{go:10,wait:6,duc:2}},
+ entry:{th:1,vh:1},fx:{}}});
