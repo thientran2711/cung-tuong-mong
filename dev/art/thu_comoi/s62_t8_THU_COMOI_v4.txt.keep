@@ -1,0 +1,11 @@
+base: dev/art/thu_comoi/s62_t8_THU_COMOI_v2.txt
+allow: a jewelled cloud-collar cape edged with pearls and gold over the shoulders  # owner Lượt 1411 (a): HH cloud collar = two tiers of scalloped wavy lobes, not a flat square
+allow: the SAME size and light flat shape as the Hoàng quý phi's  # owner Lượt 1411 (a): made it square; 'not bigger' kept
+allow: never long or layered fringes  # owner Lượt 1412 (c): t8 = the LONGEST fringe
+allow: only a little richer  # same clause, re-split by the new collar sentence (words kept)
+allow: denser gold embroidery and a few more pearls  # same words kept, re-split
+allow: Full-body standing figure head to feet  # boilerplate: exact duplicate of the first full-body sentence, trimmed to stay <= 10 000
+allow: plain light parchment background  # same duplicate boilerplate (kept once in sentence 4)
+allow: soft even light  # same duplicate boilerplate sentence (lighting kept in sentence 4)
+allow: face clearly visible, 3/4 or frontal view  # boilerplate duplicate of "The whole face clearly visible" (sentence 10), trimmed for <= 10 000 after A42 line
+allow: Everyone beautiful at every age  # boilerplate (keep_check example), trimmed for <= 10 000
