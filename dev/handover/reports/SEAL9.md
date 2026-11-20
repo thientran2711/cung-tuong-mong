@@ -22,3 +22,5 @@ Faults: no handkerchief anywhere; arms crossed in every LẶP. LẶP turns the b
 ht (#18–#35 back of head), tg (#18–#26 face turned away, braid shown). tg VÀO hat dips over the face (#9–#25). bt VÀO #9 head bowed
 (top of head). tv LẶP puff of smoke leaves the disc (#18, fine). Fix clips: all smooth, no shrink-to-doll; th-chan RA #39 and th-muu RA
 #37 have a small dip (figure smaller, then back to normal) — mild, not the broken kind.
+
+## HOLD (~01:30Z) — owner: "Khoan vẽ tiếp ấn" (via ROOT-61 + ROOT-62). No seal gens, no recolour, no redraw until ROOT-62 relays her next word.
