@@ -75,7 +75,11 @@ const f0=flip;
 function realFlip(){S.nfP=null;S.nfF=day();
  const n=typeof ntTaken==="function"?ntTaken():null;
  if(n){S.tonight=n.who==="me"?"me":((typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===n.who)||null);return}
- REAL=1;let r;try{r=f0.apply(this,arguments)}finally{REAL=0}return r}
+ REAL=1;let r;try{r=f0.apply(this,arguments)}finally{REAL=0}
+ /* her own summons (ksp / prep) waits for the choice from the moment the flip writes it: while another dialog holds the choice back
+    (step's gate), the summons sitting in Q could be answered first and play her night before the choice (no defence, no tries) */
+ try{const x=X();if(x&&x.st==="wait")for(let i=Q.length-1;i>=0;i--)if(Q[i]&&(Q[i].pid==="ksp"||Q[i].pid==="prep")){Q.splice(i,1);if(S.tonight==="me")x.ksp=1}}catch(e){console.error(e)}
+ return r}
 flip=function(){if(!S||REAL||!nfOn())return f0.apply(this,arguments);
  if(guest()){S.tonight=null;S.nfP=day();return}               /* co-op guest: the host's Emperor turns the card (relayed) */
  if(S.nfC===day()&&S.nfX&&S.nfX.d===day()&&S.nfX.st==="wait")return realFlip.apply(this,arguments);   /* inside the commit, before the choice (the cycle answer re-flips) */
@@ -163,7 +167,7 @@ function roleOf(a,t){if(!t)return null;if(a===t)return "def";return canAtt(a,t)?
 const VALID=v=>v==="feign"||v==="road"||v==="keep"?v:null;
 /* S.nfX: st "wait" (flip done, the dialogs it pushed first) → "open" (choices running) → "done" */
 function X(){const x=S&&S.nfX;return x&&x.d===day()?x:null}
-const scene=()=>{try{return (typeof window.cfBusy==="function"&&window.cfBusy())||!!document.querySelector(".kmov.kcf")}catch(e){return false}};
+const scene=()=>{try{return (typeof window.cfBusy==="function"&&window.cfBusy())||!!document.querySelector(".kmov.kcf:not(.km-out)")/* a closing scene (km-out fade, removed 240 ms later) no longer holds the choice back */}catch(e){return false}};
 /* no dialog may cover the flip choice (night-final #4, coop-steal family): while the card-flip scene or the choice is on screen, a tap on a
    look-up opener (mood seal → "Tâm trạng · X" jevb/jpcf, servant look j29) does nothing — the scene / the choice owns the screen; the seal's
    own popover (jemo emoTip) is a tooltip, not a dialog, and is not what is stopped here: the whole tap is. Window capture = before every other listener. */
@@ -232,7 +236,11 @@ const TM={t0:0,id:null,stop(){if(this.id){clearInterval(this.id);this.id=null}th
    const el=document.querySelector("#mb .kchips.kctm");if(el&&typeof kitCoopClock==="function")el.outerHTML=kitCoopClock({left:Math.max(0,left),len:E});   /* the kit text pass drops the wrapper id: find the chip row itself */
    if(left<=0){this.stop();const i=Q.findIndex(m=>m&&m.pid==="nfch");
     if(i===0&&!$("modal").hidden){const j=Q[0].opts.findIndex(c=>c.n==="Thôi");chooseM(j)}else{if(i>=0)Q.splice(i,1);mine(null);try{showModal();render()}catch(e){}}}}catch(e){console.error(e)}},250)}};
-if(typeof showModal==="function"){const sm0=showModal;showModal=function(){const r=sm0.apply(this,arguments);try{if(Q[0]&&Q[0].pid==="nfch"&&!$("modal").hidden)TM.start()}catch(e){}return r}}
+if(typeof showModal==="function"){const sm0=showModal;showModal=function(){
+ /* the scene just closed and the choice is due: it goes up first (showChoice puts it at the front), never a card queued meanwhile
+    (a reward, a person met) in the ≤250 ms before step's next tick (owner OD 16/11 22:45Z: the choice right after the scene) */
+ try{const x=S&&nfOn()?X():null;if(x&&x.st==="open"&&x.me===undefined&&!x.dlg&&!scene())showChoice()}catch(e){console.error(e)}
+ const r=sm0.apply(this,arguments);try{if(Q[0]&&Q[0].pid==="nfch"&&!$("modal").hidden)TM.start()}catch(e){}return r}}
 /* everyone has chosen: ONE resolve (host / single player) */
 function resolveAll(){const x=X();if(!x||x.st!=="open")return;x.st="done";sleep();
  const t=tonightOf();if(!t||(typeof ntTaken==="function"&&ntTaken())){finish();return}

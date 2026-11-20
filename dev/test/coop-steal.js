@@ -69,10 +69,10 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  ok(await toNight('1'),'1: at tối');
  /* the host's Emperor turns the card of `who` at the END of tối (forced weights; no mùng 1 / rằm custom); NPCs do not attack on their own */
  const force=(who)=>A.p.evaluate(who=>{const f=liveRivals(false).find(v=>v.coop);const tgt=who==="friend"?f:(liveRivals(false).find(x=>x&&!x.coop&&nightCh(x)>0)||liveRivals(false).find(x=>x&&!x.coop));
-   window.__T=window.__T||{nc:nightCh,rl:roll,cu:FAIRN.custom,os:oSteal,ok:oKeep,sw:window.stealWant};const T=window.__T;
-   nightCh=function(p){p=p||S;return p===tgt?100:(T.nc(p)>0?1e-9:0)};roll=function(x){return x===90||x===65?true:T.rl.apply(this,arguments)};FAIRN.custom=[0,0];
+   window.__T=window.__T||{nc:nightCh,rl:roll,cu:BAL.ag.emp.custom,os:oSteal,ok:oKeep,sw:window.stealWant};const T=window.__T;
+   nightCh=function(p){p=p||S;return p===tgt?100:(T.nc(p)>0?1e-9:0)};roll=function(x){return x===90||x===65?true:T.rl.apply(this,arguments)};BAL.ag.emp.custom=[0,0];
    window.stealWant=()=>({u:0,p:0,mode:null});S.cyb=Object.assign(S.cyb||{},{lie:wk()});return{id:tgt.id,n:tgt.nights||0,coop:!!tgt.coop}},who);
- const unforce=()=>A.p.evaluate(()=>{const T=window.__T;if(!T)return;nightCh=T.nc;roll=T.rl;FAIRN.custom=T.cu;oSteal=T.os;oKeep=T.ok;window.stealWant=T.sw});
+ const unforce=()=>A.p.evaluate(()=>{const T=window.__T;if(!T)return;nightCh=T.nc;roll=T.rl;BAL.ag.emp.custom=T.cu;oSteal=T.os;oKeep=T.ok;window.stealWant=T.sw});
  const noCyc=o=>o.p.evaluate(()=>{S.cyb=Object.assign(S.cyb||{},{lie:wk()})});
  /* answer the flip choice (pid nfch) with `name`; the card-flip scene (if on screen) is closed by its own button first */
  async function answer(o,name,ms=60000){const t0=Date.now();while(Date.now()-t0<ms){const r=await o.p.evaluate(name=>{const i=Q.findIndex(m=>m&&m.pid==="nfch");
