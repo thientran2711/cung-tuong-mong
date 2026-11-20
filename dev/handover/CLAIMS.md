@@ -384,3 +384,6 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | gap-audit (opus; MAIN ROOT-75 brief briefs/root75-gap-audit.md; read-only; output dev/handover/GAP_LIST.md) | handover GAP_LIST.md | MAIN ROOT-75 | session_01Rc5AsLymU7eumr5TcMGb2s | DONE — GAP_LIST v2 (90 rows + LAND FIRST table) | 20/11 08:10Z |
 | mg-craft-hoa #2 (sonnet; successor of 5RwFKrAT at e8b6e7f9; merge scaffold 01114e27 + full tests) | review/mg-craft-hoa | B | session_01N1tNP5dR4zbum2tbzNH3qG | RUNNING | 20/11 07:44Z |
 | MAIN ROOT-76 (opus; child of ROOT-75, depth 5) | handover HANDOVER_SESSION9 | ROOT-75 | session_01Rc5AsN56DP1NgSYAwWFJ8o | RUNNING — PICKUP 07:50Z | 20/11 07:49Z |
+| GAP OR03+OR04+OR05+OR07+OR10 home-chapters E25 (opus; MAIN ROOT-75 GAP order 07:47Z) | review/home-chapters; briefs/E25-home-chapters.md | FOREMAN E #17 | (opening) | RUNNING | 20/11 08:55Z |
+| GAP OR16+OR18+OR20 road-triggers E26 (opus; MAIN ROOT-75 GAP order 07:47Z) | review/road-triggers; briefs/E26-road-triggers.md | FOREMAN E #17 | (opening) | RUNNING | 20/11 08:55Z |
+| GAP OR15 tut-road E27 (sonnet; finish review/tut-followups aa391edf; MAIN ROOT-75 GAP order 07:47Z) | review/tut-followups; briefs/E27-tut-road.md | FOREMAN E #17 | (opening) | RUNNING | 20/11 08:55Z |
