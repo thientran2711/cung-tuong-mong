@@ -1,0 +1,31 @@
+# b-gap-1 — GAP LIST rows "B build" (ORDER FROM MAIN ROOT-75 07:47Z + ORDER 2 07:50Z), opened by FOREMAN B ROOT session_01N1tNP67dwhHUVRbLgDsEPs
+Every worker: read dev/handover/briefs/b-root-common.md (all laws) + dev/handover/GAP_LIST.md (the header + YOUR rows + "LAND FIRST" table) + the design/OD sources named in your rows (verbatim). LAW 13 first: a matching review/* branch exists → check it on origin (what it does, verdict, base), finish / re-merge newest LIVE / fix it — NEVER rebuild. A row already done on LIVE → say so with file:line proof and drop it. Feature freeze OD:L1402: build only what the rows' sources designed/ruled; anything new → dev/PARKING_LOT.md. Co-op check is a PASS criterion for every rules/numbers change (coop-e2e + the coop-thin lanes that touch your files). Report dev/handover/reports/<topic>.md; CLAIMS row; send_message Foreman B one line "SẴN SÀNG KIỂM <topic> <sha>" (B opens the BIG/SMALL reviewer). LIVE at brief time 30e8714e.
+Your section below is your whole job (rows together, one worker start to finish; tell Foreman B early if it is too big for one worker).
+
+## J1 night-rule (opus) — rows OD01 (+ OD02 if the same branch closes it) + KP01. Branch review/night-rule.
+PRIORITY #1 CHECK ('night-final|night-ledger|Tranh sủng|10-night'): OD 23 | ledger 1 | claims 8 | main 15 | review/* 6 | archive 137 — review/night-final SSK f7c54202 (reports/night-final.md, MAIN s22 worker, stale base 9fc1ac33) + review/night-ledger SSK 55141158 (reports/night-ledger.md, Foreman D #9; NPC Ân drift flagged).
+Job: read both reports + OD:L1436, L1477, L1478, L1387, L1391, L1395 verbatim; check both branches against LIVE (still needed? conflicts with parallel-time / jptime / co-op thin night code?); bring both onto ONE branch from newest LIVE (merge or port), fix what LIVE broke, run night/cycle/coop-night/coop-cyc suites + bots (balance: the NPC Ân drift → measure before/after, numbers in BAL only). Then SSK → BIG review.
+
+## J2 names-unique (sonnet) — row OD06. Branch review/names-unique-r2.
+PRIORITY #1 CHECK ('names-unique|freshName|name registry'): OD 1 | ledger 0 | claims 0 | main 13 | review/* 2 — review/names-unique-r1 PASS dcb2ea96 (16/11, never landed, base c1e1bbd1).
+Job: OD:L1444 verbatim; re-merge names-unique-r1 onto newest LIVE (resolve every conflict, keep LIVE behaviour elsewhere), then scan ALL name pools added since 16/11 (NPC roads jnroad*, foreign princesses, men jnroadm, maids, kc/outside route) for banned Vietnamese-reading surnames (e.g. Bùi j22.js:5, Đặng j59.js:358) — whole group, one shared registry; old saves keep their names. Tests + scan table before/after. SSK → SMALL/BIG by files.
+
+## J3 outside-route (opus) — rows OR01, OR06, OR08, OR13, OR14. Branch review/outside-gaps.
+PRIORITY #1 CHECK ('outside-art|kcFest|kcEnter|Khuê các|kcHook'): OD 11 | ledger 4 | claims 2 | main 15 | review/* 2 — review/outside-art + review/outside-art-r1 (OR01 art wiring).
+Job: OUTSIDE_PLAN.md (lines in the rows) verbatim. OR01: land/re-merge outside-art(-r1) wiring (scenes, house + city maps, Huynh trưởng figure; art already painted — check CDN assets.json). OR06: home poetry contest + festivals play the REAL mini-game (reuse the Phúc tuyển call; the no-word rule applies), not the formula. OR08: palace-entry carry-over (+15 cap, father's liking in «Nhờ cha dâng sớ», mother letters/gifts, «lời đồn cũ» flag, «Thư nhà» section). OR13: co-op help home↔palace (letter/gift/sớ/rumour/joining tuyển tú) + co-op rebirth into the home road (two-way law 1; host-computed numbers). OR14: «Khuê các» title/milestone set. Numbers in BAL; kit only. SSK → BIG review.
+
+## J4 ge-npc (opus) — rows GE08, GE09, GE10, OR19. Branch review/ge-npc.
+PRIORITY #1 CHECK ('ge.npc|geSeat|ge.help|nrOrigin|foreign princess'): OD 13 | ledger 2 | claims 3 | main 7 | review/* 0 — review/foreign-princess-samples (art only, not this job); check CLAIMS for ge-writers / bd-roads (D/E) and do NOT touch their branch files.
+Job: design/GRAND_ENDINGS.md :100, :124-129, :497 + STORY_ROADS_PLAN.md:143-148 + OD:L1289 verbatim. GE09 NPC grand-ending parity (BAL.ge.npc on, NPC branch draw, last answers by nature, seat locks, title, Bảng rows, fall news); GE10 her help/sabotage on an NPC road moves that NPC's grand ending + BAL.ge.help.rw; GE08 unlock world news as centre pop-up / NPC news (kit pop-up); OR19 NPC consorts roll origin from the player's pool incl. foreign princesses (stand-in face until art; shared princess-face rule). Laws 1, 4, 6b. Bots before/after (ending spread). SSK → BIG review.
+
+## J5 palace-life (opus) — rows IT05, KP03. Branch review/palace-life-gaps.
+PRIORITY #1 CHECK ('jewellery|hộp trang sức|orphan|mồ côi|Cho gọi con'): OD 7 | ledger 1 | claims 0 | main 15 | review/* 0.
+Job: IT05 (OD:L507, L1313; law 6c real objects): the bribed maid who «steals the jewellery box» must move a REAL item out of her chest (traceable: who holds it, can be found/recovered), not only silver; whole group = scan every theft/loss text that moves only bạc but names an object. KP03 (PROGRESS_places-port.md:25; OD:L87): children living rules — call a child home, monthly estrangement, Thái tử prestige, orphans go to Thái hậu / Hoàng hậu. Gain AND loss on every option (laws 2, 3), numbers in BAL. SSK → BIG review.
+
+## J6 map-places (sonnet) — row KP02. Branch review/map-places.
+PRIORITY #1 CHECK ('places-port|Ngự thiện phòng|Nội vụ phủ|Phật đường'): OD 21 | ledger 2 | claims 8 | main 15 | review/* 2 — review/places + review/places-port-r1.
+Job: PROGRESS_places-port.md:24 + OD:L82 verbatim: add Ngự thiện phòng, Nội vụ phủ, Phật đường to the palace map (j2.js:112 map + j26 MAPH) with their existing acts if any (check places-port-r1 first). Missing art → stand-in + 'tạm' + ART REQUEST for Foreman C in your report. Kit only. SSK → SMALL review (BIG if acts/numbers change).
+
+## J7 perf-ci (sonnet) — row AP04. Branch review/perf-ci.
+PRIORITY #1 CHECK ('perf-fx|perf-budget|perf CI'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 (dev/test/perf-fx.js + perf-budget.json exist on LIVE).
+Job: OD:L719 (budget rule 6) verbatim: a GitHub Actions workflow running the perf test (frame time, memory, bytes/scene) at 755x1000 + a mid-phone profile on every push to main/review/*, failing over perf-budget.json; reuse dev/test/perf-fx.js. Tooling only. SSK → SMALL review.
