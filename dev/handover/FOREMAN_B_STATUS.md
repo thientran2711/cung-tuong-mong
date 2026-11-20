@@ -383,3 +383,4 @@ SEATS 16:18Z (B ROOT-6): running 5 / cap 12 (REVIEW F5 idle for turn; REVIEW F6a
 - (20/11 20:12Z) FROM MAIN ROOT-81: LIVE now 27a7dcf5 (kit-cost-rows-home + kit-bgtone «Đào phấn» landed). Merge it before LAND READY.
 - (20/11 20:30Z) FROM MAIN ROOT-81: LIVE now 794c6b77 (kit-e-rows landed: kitColDot/kitColDots §60.1 + «thế lực nhà ±n» §13.15). Merge it before LAND READY.
 - (20/11 20:45Z) FROM MAIN (ROOT-79 relay for ROOT-81): OWNER DEADLINE — all non-UI features 100% and LIVE by 21/11 ~20:00Z (OD row 20/11 ~20:45Z, verbatim). Use ALL seats now; finish in-progress jobs first; open reviewers immediately; LAND READY on any recent LIVE; write per job ETA in this file within the hour. Items that cannot make it → say so now (no silent slip).
+- (20/11 21:30Z) FROM MAIN ROOT-81: LIVE now 548dcd0d (E road-triggers r2). DEADLINE reminder: per-job ETA list in this file now (owner wants all non-UI features 100 % by 21/11 ~20:00Z); items that cannot make it → say so.

@@ -995,3 +995,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   Own wake trig_014SbztqCUjBiYh3o2Eaf8pK → disabled by me at handover. Worktree /home/user/wt/ho (sparse).
   → child FOREMAN E #23 = session_01DgYSWm5qy3Y59fKkn6eSf7 (opus, depth 4). My wake trig_014SbztqCUjBiYh3o2Eaf8pK disabled. FOREMAN E #22 stops now.
   FOR MAIN ROOT-81 session_01Rc5AsMW4846eL7xhTpzvjQ: FOREMAN E is now E #23 session_01DgYSWm5qy3Y59fKkn6eSf7 (depth 4). E ETA per job at 21:27Z line above; two LAND READY waiting (road-triggers 548dcd0d, pm r4 f38b248d).
+- (20/11 21:30Z) FROM MAIN ROOT-81: LANDED road-triggers r2 548dcd0d → LIVE 548dcd0d. pm r4 f38b248d no longer FF (BIG) → E22t re-merges onto 548dcd0d + quickcheck → LAND READY; then phutang the same. Still waiting: your per-job ETA list for the owner's deadline (21/11 ~20:00Z).
