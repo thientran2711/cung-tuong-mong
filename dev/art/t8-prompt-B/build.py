@@ -1084,7 +1084,13 @@ def low_outfit(c,t,v="v0"):
 import re as _re6
 _re_cape6=_re6.compile(r"an embroidered ([^,]+?) pearl-edged cape/stole over the shoulders")
 CAPE6_TWO=r"an embroidered \1 cloud collar (yunjian) over the shoulders with a scalloped gold-thread edge and a fringe of small gold tassels, pearl-edged, never covering the neckline"   # SWAP56 (owner 20/11 L1266): Quý phi now carries the Phi's old cloud collar (yunjian); pearl edge stays with Quý phi
-CAPE5_TWO="TWO layered embroidered SHORT shoulder capes, one over the other (upper shorter, lower longer), never covering the neckline"   # SWAP56: Phi now carries the Quý phi's old TWO-layer short capes (pearl edge NOT moved: pearls stay Quý phi)
+CAPE5_TWO="TWO layered embroidered SHORT shoulder capes, one over the other (upper shorter, lower longer), never covering the neckline"
+# JOB 3 (owner Lượt 1312 + correction 1314 via Foreman C #5, reference dev/art/b26/s62_t5_v2.txt): Phi capes v2 = her main colour + gold-thread flower embroidery + the OLD
+# Phi cloud-collar trim (scalloped gold-thread edge + small gold tassels hanging from every scallop), NO pearls on the capes. 'peonies' -> her hair-flower species via
+# flower_outfit (owner Lượt 1303); people with no species keep peonies (Foreman rule).
+CAPE5_V2=("TWO layered embroidered {main} SHORT shoulder capes, one over the other (the upper cape shorter, the lower cape a little longer, both resting on the shoulders), "
+          "each cape richly embroidered in gold thread with small peonies, with a scalloped gold-thread edge and a fringe of small gold tassels hanging down from every scallop "
+          "(exactly the old Phi cloud-collar trim), no pearls on the capes, never covering the neckline")   # SWAP56: Phi now carries the Quý phi's old TWO-layer short capes (pearl edge NOT moved: pearls stay Quý phi)
 # LOWV1/LOWV2[cNN][t] = (robe main colour word, hex, lining word, hex), MEASURED (W79, 18/11) from the LIVE v1/v2 pictures
 # img/_review/consort-tiers/<cNN>/b10/<cNN>_a18_t<t>_v<1|2>.png : median RGB of the dominant non-neutral k-means cluster of the central torso/skirt band
 # (alpha>200, gold and near-black hair pixels gated out), lining = next distinct cluster. Foreman ruling: --low v1/v2 never use royal yellow (only the t6 small touch).
@@ -1207,7 +1213,7 @@ def build_low(c,t,v="v0"):
         if _pv: o=o.replace(_a,PHI_VAR[_pv[0]]+"; a LARGER gold headdress")
         else:
             # TAN <-> PHI SWAP (owner 19/11 ~01:20Z, FIGURE_GATE last line): t5 Phi = the OLD t4 Tan DESIGN (layered robe of two or three visible layers, embroidered cloud collar (yunjian) over the shoulders, waist tie) at the t5 Phi LUXURY level (old t5 default words: silk brocade court robe richly embroidered in gold, scalloped gold-thread edge + gold tassel fringe, deep brocade cuffs, broad gold brocade girdle with jade pendants, peony medallions, LARGER gold headdress). "larger than the rank below" dropped (t4 no longer has a cloud collar).
-            o=o.replace(_a,"a layered silk brocade court robe of two or three visible layers, richly embroidered in gold with peonies and small birds, "+CAPE5_TWO+", long trailing wide sleeves with deep brocade cuffs, a broad gold brocade girdle with two long jade pendants hanging on silk cords, the front of the skirt embroidered with large peony medallions, a sheer silk shawl; a LARGER gold headdress")   # F1 (owner verdict 19/11 ~03:05Z item 2): OLD Phi light sheer silk outer layer, words copied verbatim from the old t5 text ("a sheer silk shawl")
+            o=o.replace(_a,"a layered silk brocade court robe of two or three visible layers, richly embroidered in gold with peonies and small birds, "+CAPE5_V2.format(main=re.search(r"the robe itself is clearly (.+?) silk",o).group(1))+", long trailing wide sleeves with deep brocade cuffs, a broad gold brocade girdle with two long jade pendants hanging on silk cords, the front of the skirt embroidered with large peony medallions, a sheer silk shawl; a LARGER gold headdress")   # F1 (owner verdict 19/11 ~03:05Z item 2): OLD Phi light sheer silk outer layer, words copied verbatim from the old t5 text ("a sheer silk shawl")
     if LV is not None: o=o.replace("NOT yellow, ","")   # v1/v2: no yellow words outside the t6 small-touch clause
     assert "phoenix" not in o,(c,t)
     s=PRE+f" An imperial consort. Her face: {face}. From the identity reference keep ONLY her face, facial features, hairstyle colour and signature colour family; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose. {AGE_TXT[AGE]} "+o+"."
