@@ -1,5 +1,6 @@
 # T78-PREP — builder rows s07–s61 + s63 (t7/t8 a18 prompts for T78-MASS) — 0 cr, no gens
 Worker for Foreman C ROOT (session_01D3E3NWtCdQC92tFLkd25H5). Brief: dev/handover/briefs/t78-mass.md.
+depth 1 · START_CTX ≈ 3 % (context_usage reads 0; own estimate) · end ≈ 12 % (< START+25 %, no rollover needed) · task finished, no successor needed.
 PRIORITY #1 CHECK: OD/briefs t78-mass + RANK8-C report (method) | main: none (art builder lives on the handover branch) | review/*: none | claims: T78-PREP is this worker.
 
 ## 1. Result
