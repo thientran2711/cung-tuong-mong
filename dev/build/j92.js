@@ -471,6 +471,7 @@ function wdGroomUI(){if(!S||S.dead||!can(1))return;const w=wdGroomW(S);const m=w
  const d=kg82Open({art:"Chải chuốt",title:"Điểm trang trước gương",how});if(!d){wdAutoUI();return}const box=kg82Box();
  const done=zone=>wdGroomEnd(zone);
  KG82.phase="intro";box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg92go">Bắt đầu</button>${kitQuick({id:"kg92skip",n:"Bỏ qua",sub:`tính như Tự chọn đồ`})}</div>`;
+ kgReady(box,{kind:"chai",how,go:"#kg92go",tutor:(b,env)=>kg92Groom(b,Object.assign(env,{zw:w}))});/* KIT §13.7: rules + «Sẵn sàng» / «Hướng dẫn» (the guided round never dresses her) */
  $("kg92go").onclick=()=>{box.innerHTML="";box.hidden=false;KG82.phase="play";let fin=false;const env={kind:"chai",zw:w,hud:o=>{for(const k in o)kg82Set(k,o[k])},end:raw=>{if(fin)return;fin=true;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.phase="result";kg82Set("score","3/3");kg82Set("round","–");kg82Set("time","đã xong");done(KG92.last?KG92.last.zone:"ok")}};
   let stop=null;try{stop=kg92Groom(box,env)}catch(e){console.error(e);env.end(5);return}KG82.run={stop:()=>{if(stop)stop()}}};
  $("kg92skip").onclick=()=>{kg82Close();wdAutoUI()}}

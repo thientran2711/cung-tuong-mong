@@ -258,6 +258,10 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
  kG:{td_cong:1.3,td_ngon:2,ban:.8,dan:2.8,den:.8,hat:.85,duho:1.5,hoa:2.3,huong:3.65,kim:1.8,kinh:.9,may:.82,ve:.9,mua:1.25,theu:5.5,co:3},/* review/mg-balance-2-r1 re-trim on pooled raws (co n=120, td_ngon n=60 float): co 4→3, td_ngon 1.6→2; review/mg-snap re-trim after the trace fix (her line scored, BAL.mgTier.trace.acc 1) and the wider Hoa đăng channel: td_cong 1.6→1.3, ve 1.7→.9, kinh 1.5→.9, may 1.5→.82, den 1.05→.8 */
  trace:{acc:1},/* review/mg-snap: weight of her line lying on the guide in the ONE trace score mgTraceScore (was a typed .5) */
  pace:{fast:[.2,.4],keep:[.5,.8]},word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,npc:[4,.4],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15],cong:[3,2]}}});
+/* mg-ready-guide (owner OD 20/11 ~00:20Z «Sẵn sàng» + «Hướng dẫn», KIT §13.7): the guided tutorial round, played on the EASIEST board = the lowest gap of the
+   calibration ladder BAL.ag.mg2.cal.d (read at play time, no second number here); part = it ends once this share of the engine's rounds is done
+   (round a/b: a−1 ≥ max(1, ceil(b·part))) or when the engine ends; ms = the longest it may run; back = the pause on «Xong» before the rules screen returns. */
+BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timing game's right moment that the hand says «chạm» (KG82.hint: rhythm, aim), a reaction time */
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
    condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
