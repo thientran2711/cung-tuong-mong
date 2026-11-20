@@ -433,6 +433,40 @@ def nhat4():
     return out
 
 
+
+# ===== MAIDP3: owner L1528 — nhi_gpt v1 came out like tam đẳng ("I said the COLLAR like tam, not the whole outfit") =====
+# v1 culprits: "exactly like a tam đẳng maid's jacket" in the collar clause + tam's colour-placement sentence. v2: ONLY the 5 asked changes.
+NHI2_CROSSED = ("with a CROSSED collar (cổ xéo, jiaoling): the jacket's two front edges cross over the chest in one clean diagonal "
+                "wrap, the left front over the right, forming a y-shape at the neck, with the inner robe's crossed collar showing as "
+                "a thin line inside it; never a square, straight-down or upright stand collar")
+# test5_nhi has NO words for the two short tà; written from the owner-approved nhị picture gOm5NnCSXO so they are not lost
+NHI2_TWO_TA = ("below the sash the jacket's front hangs down in TWO small SHORT separate front flaps (two short tà), one on each side "
+               "of the centre, ending around the upper thigh over the skirt")
+
+
+def nhi2():
+    base = 'dev/art/maid7/test5_nhi.txt'
+    t = open(base, encoding='utf-8').read()
+    # (3) fabric + colour words = shared words (tam/nhất: same hex, same brocade cloth); no tam jacket shape
+    t = swap(t, 'a fine silk ruqun in powder blue, with narrow embroidered',
+             'a fine silk ruqun, the long inner robe and skirt in powder blue like #A7BAD2, with narrow embroidered')
+    # (1) crossed collar  (2) ONE sleeve layer  (3) shared brocade fabric words; nhị's own two short tà kept explicit
+    t = swap(t, 'a layered half-sleeve brocade jacket (bijia) on top in deep rose like #CA7281,',
+             'a half-sleeve brocade jacket (bijia) on top in deep rose like #CA7281, made of the SAME fine silk brocade with a soft '
+             'sheen as the outer jacket of the higher maids (never a plainer or duller cloth), ' + NHI_ONE_SLEEVE + ', '
+             + NHI2_CROSSED + '; ' + NHI2_TWO_TA + ';')
+    # (4) K27
+    t = k27(t, '(a little more embroidery than a tam đẳng maid),', 'the collar, cuffs, jacket and skirt hem band')
+    # (5) header + caption
+    t = HDR_M18 + t.rstrip()
+    t = fixcap(t, 'Cung nữ nhị đẳng')
+    out = D + 'nhi_gpt_v2.txt'
+    open(out, 'w', encoding='utf-8').write(t)
+    keep(out, base, [('a fine silk ruqun in powder blue', 'owner Lượt 1518/1528: shared colour words (+ #A7BAD2)'),
+                     ('a layered half-sleeve brocade jacket (bijia) on top in deep rose like #CA7281', 'owner Lượt 1518: ONE sleeve layer only (no "layered")')])
+    return out
+
+
 if __name__ == '__main__':
     # NOTE: mama51/mama65 (v2) and chuongsu (v2) are NOT in the default list: mama v2 was hand-edited by Foreman C (L1473).
     jobs = sys.argv[1:] or ['nhat', 'thancan', 'tamdang', 'nhat3', 'thancan3', 'chuongsu3', 'mama3_51', 'mama3_65', 'mama4_51', 'mama4_65']
