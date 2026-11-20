@@ -1642,4 +1642,4 @@ Object.assign(BAL,{kc3:{cal:{o0:2,gap:[1,2],tP:65,min:3,fin:1},win:3,scOdds:7,pl
   xemmat:{dep:{suc:-10,od:45,sacD:3,kgt:4,kap:10,af:8,kgtF:-3},gian:{duc:2,kap:3},muoi:{af:8,danh:2,kap:-4,p:50}},
   hac:{t0:8,p:8,lo:{khm:40,od:60,pow:4,powF:-6,af:10},ha:{pow:-8,kgt:-4,af:-4,duc:3},tra:{suc:-15,od:30,tcD:3,pow:3,af:6,kgtF:-5,afF:-4}},
   vh:{duc:3},th:{go:10,wait:6,duc:2}},
- entry:{th:1,vh:1},fx:{}}});
+ entry:{th:1,vh:1},tier:{win:1,mid:0,lose:-1},seedP:50,thdTro:40,rare:{dtqSuc:90,muoiTc:60},fx:{}}});
