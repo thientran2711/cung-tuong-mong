@@ -583,12 +583,11 @@ def hairflower_named(a,person,rank):
     if rank in (4,5,6): add=[hairflower_named(a,person) for a in add]
     if not g_pets_allowed(rank,age): S=LAST_G["_PETS"].depet(S)   # F17 PETS: no animal pose where pets are not allowed (only the animal words change)
     return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
-# HAIR FLOWER SPECIES t4-t6 (Foreman C #5 decision 2, 20/11: the t4-t6 prompts said only 'ONE fresh flower in her hair' -> Magnific painted s62 a peony while her
-# JOB 2 embroidery is plum blossom): the F13 HAIR FLOWER SIZE sentence names HER species (build.py hairflower_species = MOTIF_LOW[person][1], the JOB 2 source).
-# Size words unchanged; the 17 'a pink silk flower' people (no species) unchanged.
-def hairflower_named(a,person):
+# HAIR FLOWER SPECIES t4-t6 (Foreman C #5 decision 2, 20/11; species = F2 NEW TABLE owner DUYỆT Lượt 1352, build.py F2_FL via hairflower_species(person, rank)):
+# the F13 HAIR FLOWER SIZE sentence names the F2 species of this rank ('ONE fresh <species> in her hair'); size words unchanged.
+def hairflower_named(a,person,rank):
     if not a.startswith(_F13): return a
-    sp=LAST_G["hairflower_species"](person)
+    sp=LAST_G["hairflower_species"](ALIAS.get(person,person),rank)   # F2 (owner Lượt 1352): the F2 species of THIS rank
     if not sp: return a
     return a.replace("ONE fresh flower in her hair","ONE fresh "+sp[0]+" in her hair",1)
 

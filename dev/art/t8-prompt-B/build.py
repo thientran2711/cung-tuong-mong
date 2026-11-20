@@ -2038,6 +2038,9 @@ def flower_outfit(o,c):
     if not sp or "Outfit (" not in o: return o
     i=o.index("Outfit ("); j=o.find(". ",i); j=len(o) if j<0 else j
     seg=o[i:j]
+    _tok=[]   # protect words already = her species (the t1–t3 hair-flower clause, F2 names holding 'lotus'/'peony' …) from a second swap
+    def _prot(m): _tok.append(m.group(0)); return f"\x00{len(_tok)-1}\x00"
+    seg=re.sub(r"fresh flower \([^)]*\)|"+"|".join(re.escape(x) for x in (sp[1],sp[0])),_prot,seg)
     def rep(m):
         w=m.group(1)
         return sp[1] if w in FLOWER_PL else sp[0]
