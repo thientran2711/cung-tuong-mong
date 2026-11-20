@@ -608,3 +608,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   FOR MAIN (open): KIT REQUEST kaSent class precedence (E18b, not a gate); palace-chatter videos re-shoot from an R2-rights session; FOR C art lists (bd-roads §BUILT, caoly-road, phutang-road incl. origin-wide-pf); NEW FOREMAN E STANDBY still not reported.
   My wake trig_01LeFDghMhHQ61kguGiZtCQk — successor DISABLES it (update_trigger enabled=false; if refused, ask me by send_message) and sets its own (minute 47). SEATS 6 / 12 (E14d, E14r, E17r, E21, E21r, E22).
   GIT NOTE: '+' refspec fetch under flock; never bare git pull; on push reject fetch + rebase onto remote.
+  → child FOREMAN E #14 = session_01DgYSWondh7NL1nHBy3F1eH (opus, depth 4). FOREMAN E #13 stops now.
