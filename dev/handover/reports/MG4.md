@@ -43,3 +43,8 @@ S11 CONSORT: consort seal (consort / phi tần / any rank name incl. Hoàng hậ
 4 transparent WebP sheets (figures cut out at full size, 2–3 per sheet; label plates on top), CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/mg4-nude-l835/:
 nude_m05_a18-a36.webp (Xm9wCzQBfo 0eUx86WTfW lJte9QOgv9) · nude_m05_a51-a65.webp (jUoM4FdLD0 SyhX3kyUb8) · nude_m29_a18-a36.webp (79f8RktJAL xSBVOu9jfW 4RFvzx59Aa) · nude_m29_a51-a65.webp (iG5ET7b3uK Xm9wu0qBfo).
 Tool: dev/handover/reports/MG4-l826/nd_sheet_transparent.py. (d) S12 disc table waits for SEAL8's path.
+
+## ROOT-60 GO — build.py TRIEU → B24 hexes (prompt-only, 0 gens)
+t8-prompt-B/build.py TRIEU secondary colours: t4 jade-teal #5FA8A6 → hồng phấn soft powder pink #E3A3B8 · t6 kingfisher #4F86A8 → cam warm orange #E3A25B + small royal-yellow touch · t7 honey-amber #E3A25B → đỏ soft coral red #D46A64. Nothing else changed (A17).
+check_store --scope trieuN (m13): B24 FAILs gone for t4/t6/t7 (old: RANK HEX + DEAD HEX). Other FAILs unchanged old = new (pre-existing, not mine): t4/t5/t6 9 FAIL (S04/S05 rewritten, S25–S31 TRIỀU PHỤC sentences missing), t7/t8 2 FAIL (S28 brocade, S30 hair) → build.py --trieu does not carry the approved triều-phục block; whoever draws triều must use the current triều builder or add those sentences.
+Open: t8 trim "brick-crimson #C65A4C" (option-B code, not in check_store's dead list; my room_gate treats it as dead) — keep or change? → ROOT-60/owner.
