@@ -207,9 +207,7 @@ APPROVED = [{'id': 'W01', 'title': 'WINTER FUR Lông 1 t1-t3 (G26)', 'text': "WI
   'not_season': 'dong'},
  {'id': 'S13',
   'title': 'CAPELET CUT t4 Tần (curved, opens gradually)',
-  'text': 'CAPELET CUT (flowing): the capelet stays the same short round shoulder capelet, but its lower edge and the collar lines are soft CURVES, never flat horizontal edges; the lower edge is '
-          '{shape}; the front is NOT closed or buttoned from top to bottom: the robe is closed only at the throat clasp and its front opens gradually from the collar downward in a long soft V, the '
-          'two front panels parting more and more toward the hem, flowing and graceful (uyển chuyển), never cramped or boxy.',
+  'text': 'CAPELET CUT (flowing): its lower edge and collar lines are soft CURVES, never flat; the lower edge is {shape}; the robe closes only at the throat clasp, never buttoned down the front, opening gradually in a long soft V toward the hem, graceful (uyển chuyển), never boxy.',
   'scope': 'tp4 pr4',
   'confirm': '',
   'ages': '',
