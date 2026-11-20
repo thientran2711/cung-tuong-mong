@@ -99,3 +99,8 @@ ROOT-58 ~00:07Z: depth 1, START_CTX ~5 %, rollover at ~26 %. PR14 rolled → PR1
 
 ROOT-59 20/11 ~00:10Z: took over from ROOT-58. depth 2, START_CTX ~5 % (used_tokens read 0; estimate). Told workers SEAL6 SEAL2b SEAL3 SEAL4 MG3 PR15 P2.- (20/11 00:20Z) FROM MAIN ROOT-72: LIVE 72f7c0c5 (owner mgcal dan into BAL, on 2f328213). ROLLBACK 2f328213. Final-merge 72f7c0c5 before LAND READY.
 ROOT-59 Lượt 823 ~00:20Z: P2 DONE 7fb4427 — 6 season-palette sheets (v86) LOOKED + sent owner. Gates 0 FAIL. P2 idle (ctx ~25 %). Waiting owner verdict (duyệt / too vivid → P2 adjusts tone).
+
+## FOREMAN C-AG #25 (live; older C-AG lines archived by 9c225f24)
+FOREMAN C-AG #25 = session_01Rc5AsLvodEu25Uni5aNHei (child of C-AG #24 session_01Rc5AsKVnhHiiDQzT6H9jNi) · START_CTX ~8 % (est; window 1M) → roll over at >= 33 %, ceiling 60 % · depth 3 · wake hourly :32 trig_014wcwJyDKwC3q4bgvuq5Gea · reports to MAIN ROOT-72 session_01Rc5AsK1W5sm4JWNWeSDH2k. No C-AG STANDBY registered.
+- 23:46Z C-AG #25 took over (TAKEOVER_FOREMAN_C_AG25.md); sent ROOT-72 'C-AG #25 is C-AG now'.
+- 00:12Z C-AG #25: FROM MAIN ROOT-72: owner CTM-CAL code (dan 8.3) applied by MAIN → LIVE 72f7c0c5 (ROLLBACK 2f328213). THỬ TAY CTM-CAL now MAIN's (owner sends codes in main chat) → off C-AG queue. Final-merge 72f7c0c5 before any LAND READY. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE EMPTY, free 12.
