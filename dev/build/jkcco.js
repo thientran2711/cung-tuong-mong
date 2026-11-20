@@ -170,7 +170,7 @@ function failOf(k,noStat){const C=K();if(!noStat){const l=failL(k);if(l.kld)S.kl
  if(/^ru_/.test(k)){kccoS().last.rumour=S.turn;return"Người ta lần ra lời đồn từ chỗ ngươi."}return""}
 /* the choices inside gift / rumour (kit dialog) */
 PEND.kccoPick=p=>{if(!kccoOn())return null;const C=K();
- if(p.k==="gift"){const L=giftable().slice(0,C.gift.pickMax);if(!L.length)return null;
+ if(p.k==="gift"){const L=giftable().reverse().slice(0,C.gift.pickMax)/* newest first */;if(!L.length)return null;
   return{who:pMe(),t:`<p>Chọn món gửi cho ${esc(fName())}.</p>`,o:L.map(([e,i])=>({n:itm(e.k).n,fx:{},x:"rời rương ngươi, ngày thăm nuôi tới đến tay nàng",go:()=>{const r=kccoDo("gift",{ix:i});if(r)log(r);try{render()}catch(x){}}})).concat([{n:"Thôi, không gửi",fx:{},x:"an toàn · giữ đồ lại",go:()=>{}}])}}
  if(p.k==="ru"){const f=fName(),t=npcTargets().slice(0,2);const o=[{n:`Khen ${f}`,v:null,dir:1},{n:`Chê ${f}`,v:null,dir:-1}].concat(t.map(([v])=>({n:`Chê ${v.name}`,v:v.id,dir:-1})));
   return{who:pMe(),t:"<p>Ngươi muốn người ta nói gì?</p>",o:o.map(x=>({n:x.n,fx:{},x:`${x.v==null?f:"nàng"} ${x.dir>0?"được tiếng tốt":"mang tiếng xấu"} (±${C.rumour.n})`,go:()=>{const r=kccoDo("rumour",{v:x.v,dir:x.dir});if(r)log(r);try{render()}catch(e){}}}))}}

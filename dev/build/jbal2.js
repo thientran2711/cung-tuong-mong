@@ -1670,7 +1670,7 @@ BAL.kcg={fest:{top:8,ok:5,danh:[4,2,1],skip:5,bot:[3,6],sisP:50,sis:[3,1]},vpSac
 /* jkcco (GAP OR13 co-op half, review/outside-coop; OUTSIDE_PLAN §13): the friend at home <-> the friend in the palace, both ways.
    letter: o odds, suc Sức price, bond tình hảo hữu (S.rl[friend]) when kept, lost = Danh (palace) / Lời đồn (home) when it fails, know = j61 level,
        burn = Tâm cơ for «Đọc xong đốt đi» (law 2, review r1).
-   gift: wait = turns until the visiting day, pickMax = items listed, back* = the receiver's «Trả lại quà» (Đức gain, bond loss).
+   gift: wait = turns until the visiting day, pickMax = items listed (newest first; 3 + «Thôi» = 4 options while the kit T3 frame crushes 5+ options on the Fold, KIT_REQUESTS 20/11 review r1), back* = the receiver's «Trả lại quà» (Đức gain, bond loss).
    so: odds = o + house power*powK (+ father's liking - mid)*afK at home; pow = house power moved; rel = j55 relation between the two houses;
        danh = the receiver's name gain on «Đội ơn», beDuc = its Đức loss (seen as one faction, law 3, review r1); noDuc = Đức for «Xin thôi»;
        af / lost = the sender's price when it fails.
@@ -1678,7 +1678,7 @@ BAL.kcg={fest:{top:8,ok:5,danh:[4,2,1],skip:5,bot:[3,6],sisP:50,sis:[3,1]},vpSac
        fix = the receiver's answer to a bad rumour: o + her Danh*k, bac / suc roads (law 2), duc = «Mặc kệ» gain.
    join: o + her Sủng*k = «Xin ban nàng về ở cung mình» odds, suc price, sung = loss when refused, bond / greet = tình hảo hữu.
    kh = khắc each act costs (letter / gift / so / rumour); keep = list lengths, resend = seconds between relay resends. */
-BAL.kcco={letter:{kh:1,o:70,suc:10,bond:4,lost:2,know:2,burn:1},gift:{kh:1,wait:1,pickMax:6,bond:5,backDuc:1,backBond:4},
+BAL.kcco={letter:{kh:1,o:70,suc:10,bond:4,lost:2,know:2,burn:1},gift:{kh:1,wait:1,pickMax:3,bond:5,backDuc:1,backBond:4},
  so:{kh:2,o:35,powK:.4,mid:50,afK:.3,suc:15,pow:4,rel:6,danh:3,noDuc:1,beDuc:1,bond:3,af:4,lost:2},
  rumour:{kh:1,o:60,bac:12,suc:12,n:3,lost:2,bond:3,fix:{o:45,k:.3,bac:10,suc:10,duc:1}},
  join:{o:55,k:.3,suc:10,sung:2,bond:8,greet:3},keep:12,resend:15};
