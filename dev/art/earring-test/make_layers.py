@@ -16,7 +16,7 @@ from PIL import Image, ImageDraw, ImageFilter
 
 SRC = sys.argv[1]
 D = os.path.dirname(os.path.abspath(__file__))
-LOBE_Y = {'c09': 280, 'c11': 256, 'c22': 261}   # hairtop stops 30 px above the near earlobe
+LOBE_Y = {'c09': 276, 'c11': 256, 'c22': 261}   # hairtop stops 30 px above the near earlobe
 CUFFS = {'c22': [[(380, 800), (500, 800), (512, 924), (516, 960), (505, 1100), (487, 1260), (380, 1260)],
                  [(780, 800), (640, 800), (626, 924), (632, 1000), (650, 1120), (666, 1260), (780, 1260)]]}
 
