@@ -48,7 +48,8 @@ function eitPilWho(p){const P=BAL.eit.pil,L=[];if(p.maid&&p.maid.alive!==false)L
  return L.map(s=>{const lo=s.loyal|0;if(lo>=P.loyal&&!s.spyFor)return null;if(s.pilDet!=null&&S.turn<s.pilDet)return null;
    let ch=P.base+Math.max(0,P.loyal-lo)*P.k+(s.spyFor?P.spy:0)+(s.pilOk?P.ok:0)+(p.pilSoft!=null&&S.turn<p.pilSoft&&p.pilSoftBy!==s.name?P.ok:0)+((p.sung||0)<BAL.stip.lowSung?P.lowSung:0);return{s,ch:Math.min(P.cap,Math.round(ch))}}).filter(Boolean)}
 function eitPilfer(p,G){if(p===S)EIT_PIL=null;try{if(!p||p.dead||p.out||!G||!G.length)return null;if(p===S&&typeof isSrv==="function"&&isSrv())return null;
- const C=eitPilWho(p);let hit=null;for(const c of C)if(ag2Ch(c.s,c.ch)){hit=c.s;break}if(!hit)return null;/* (ag2Ch: her own inclination from lòng / spy / a soft master, AG-ALL-2) */
+ const C=eitPilWho(p);const o=C.length?npcWhy("eitPil",{p,C},x=>{const c=C.find(c=>c.s===x.who);return !!c&&ag2Ch(c.s,c.ch)}):null;/* npc-purpose G2: the pilferer = a servant with a reason (greed, a spy's errand, a grudge against her mistress); each one with a reason tries (reg each), ch = her success */
+ const hit=o?o.who:null;if(!hit)return null;/* (ag2Ch: her own inclination from lòng / spy / a soft master, AG-ALL-2) */
  /* the dearest piece that really arrived this month */
  let best=null;for(const g of G)for(const e of (g.E||[])){const v=(IT[e.k]&&itm(e.k).pr)||0;if(!best||v>best.v)best={g,e,v}}if(!best)return null;
  const i=p.inv.indexOf(best.e);if(i>=0)p.inv.splice(i,1);best.g.E.splice(best.g.E.indexOf(best.e),1);best.g.n=Math.max(0,best.g.n-1);if(!best.g.n)best.g.lost=true;best.g.pil=1;

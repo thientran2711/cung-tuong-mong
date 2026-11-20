@@ -147,7 +147,7 @@ function objKeys(src,i){let d=0,inS=null,keys=[],tok='',want=true;for(let j=i;j<
   if('{[('.includes(c)){d++;if(d===1){want=true;tok=''}continue}if('}])'.includes(c)){d--;if(d===0)return keys;continue}
   if(d===1){if(c===','){want=true;tok='';continue}if(want){if(/[\w$]/.test(c))tok+=c;else if(c===':'&&tok){keys.push(tok);want=false}else if(!/\s/.test(c))tok=''}}}return keys}
 for(const f of ORDER){const src=fs.readFileSync(path.join(B,f),'utf8');let m;const re=/Object\.assign\(BAL(?:\.[\w$]+)*,\{|const BAL=\{/g;
- while((m=re.exec(src))){const ln=src.slice(0,m.index).split('\n').length;for(const k of objKeys(src,m.index+m[0].length-1))(sets[k]=sets[k]||[]).push(f+':'+ln)}
+ while((m=re.exec(src))){const ln=src.slice(0,m.index).split('\n').length;const pre=(m[0].match(/^Object\.assign\(BAL((?:\.[\w$]+)*),/)||[,''])[1].slice(1);/* full path: Object.assign(BAL.ag.why.cd,{k}) sets BAL.ag.why.cd.k, not BAL.k (npc-purpose G2) */for(const k of objKeys(src,m.index+m[0].length-1)){const K=pre?pre+'.'+k:k;(sets[K]=sets[K]||[]).push(f+':'+ln)}}
  for(const t of lex(src))if(t.t==='code'){const r2=/(?<![\w$.])BAL\.([A-Za-z_$][\w$]*)\s*=(?!=)\s*(?=[-+.\d\[{])/g  /* a typed value only (a copy b0 / a setter v forwards, not a second value) */;while((m=r2.exec(t.s))){(sets[m[1]]=sets[m[1]]||[]).push(f+':'+(t.line+t.s.slice(0,m.index).split('\n').length-1))}}}
 for(const k in sets)if(sets[k].length>1)fail.push(`BAL.${k} is set ${sets[k].length} times (${sets[k].join(', ')}): one rule, one value`);
 /* the same for every other knob table (const NAME={…} in one module, Object.assign(NAME,{…}) in another: J70CFG, FAIRN, WD …) */

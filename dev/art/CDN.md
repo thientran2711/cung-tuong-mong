@@ -8,6 +8,14 @@
 - Sửa manifest (`img/FIGURES*.json`, `EVENTS.json`, `ACTS.json`, `INFO.json`, `MANIFEST.json`, `map-hotspots.json`…):
   **`--pull` ngay trước khi sửa, đẩy ngay sau khi sửa.** Nếu người khác đã đổi bản trên CDN từ lần bạn kéo về, lệnh đẩy sẽ GIỮ LẠI
   ("HELD") — kéo về, gộp tay, đẩy lại (hoặc `--force` nếu chắc).
+- **OWNER-ORDERED PULL-DOWN / any manifest that must SHRINK (ROOT-71 19/11, cdn-kc-guard; Foreman C and every painter):** a figure manifest
+  (`img/FIGURES*.json`, `ACTS.json`, `EVENTS.json`) may never get smaller, except on an owner order, and then the floor drops IN THE SAME change:
+  push with `python3 dev/site/cdn_sync.py --allow-shrink --reason "owner Lượt <N>" img/FIGURES-x.json` (lowers the floor itself), or after any
+  other pull-down run `python3 dev/site/manifest_guard.py --set-floor-from-live FIGURES-x.json --reason "owner Lượt <N>"`. Both record the
+  lowered floor on the CDN (`img/_floor-sanctioned.json`) and write `dev/site/manifest-floor.json`: commit that file on your branch.
+  A reason that does not name the owner order (Lượt N / OD line) is refused. Never shrink a manifest by curl, the dashboard or your own script:
+  `put()` / DELETE in cdn_sync refuse it. (19/11: the old kc set came down on the owner's order, the floor stayed at 420, and every branch's
+  go-live check failed for hours.)
 - Ảnh + manifest đẩy lên là game thấy ngay (manifest đọc lại mỗi 5 phút, CDN giữ manifest 60 giây) — **không cần dựng lại game**.
 - Vẽ lại một ảnh cùng tên: máy người chơi có thể giữ bản cũ tới 7 ngày (bộ đệm trình duyệt) hoặc tới bản dựng sau (sw.js).
   Muốn hiện ngay: đặt tên mới (vd `-v2`) và sửa manifest.

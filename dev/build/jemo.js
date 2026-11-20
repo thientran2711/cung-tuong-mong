@@ -112,14 +112,14 @@ function emoWeek(){if(!emoOn())return;const W=emoW();S.emoSnap=S.emoSnap||{};con
  for(const p of P){const e=emoGet(p),tp=S.emoSnap[emoKey(p)];for(const s of p.staff||[]){const k="s"+s.sid,o=S.emoSnap[k],l=s.loyal||0;S.emoSnap[k]={l};
    if(o&&o.l!=null){if(l>=o.l+5)emoEv(s,"loyalUp","được chủ đối đãi tử tế");else if(l<=o.l-5)emoEv(s,"loyalDown","bị chủ hắt hủi")}
    if(e.w===W&&e.v>=40){if(["vui"].includes(e.k))emoEv(s,"mistressUp",`chủ nhân ${e.why||"vui"}`);else if((typeof feelBad==="function"?feelBad(e.k):["so","buon","lo"].includes(e.k))&&/giáng|lãnh cung|cấm túc|mất con/.test(e.why||""))emoEv(s,"mistressDown",`chủ nhân ${e.why}`);
-    else if(e.k==="gian"&&roll(30))emoSet(s,"so",30,"chủ nhân đang nổi giận")}}}
+    else if(e.k==="gian"&&npwPick(["so","calm"],q=>emoFearW(s,e,q))==="so")emoSet(s,"so",30,"chủ nhân đang nổi giận")/* npc-purpose G2c: a timid / unloved servant fears her angry mistress; a trusted one does not */}}}
  if(S.maid){const e=emoGet(S);if(e.w===W&&e.v>=40&&e.k==="vui")emoEv(S.maid,"mistressUp",`chủ nhân ${e.why||"vui"}`);else if(e.w===W&&/giáng|lãnh cung|cấm túc|mất con/.test(e.why||""))emoEv(S.maid,"mistressDown",`chủ nhân ${e.why}`)}
  /* children: by their mother */
  try{for(const [k,mo] of allKids()){if(!k.alive)continue;const m=mo||S;const mk="k:"+emoKey(m)+":"+(k.name||""),o=S.emoSnap[mk];const n={d:m===S?!!S.dead:!m.alive,c:!!m.out};S.emoSnap[mk]=n;
-  if(o&&n.d&&!o.d)emoEv(k,"motherDie","mẫu thân qua đời");else if(o&&n.c&&!o.c)emoEv(k,"motherCold","mẫu thân vào lãnh cung");else if(!k.emo&&roll(8))emoSet(k,"vui",30,"được chơi đùa trong vườn")}}catch(e){}
+  if(o&&n.d&&!o.d)emoEv(k,"motherDie","mẫu thân qua đời");else if(o&&n.c&&!o.c)emoEv(k,"motherCold","mẫu thân vào lãnh cung");else if(!k.emo){const o=npcWhy("emoKid",{p:k,m,W});if(o)emoSet(k,"vui",30,o.why)}/* npc-purpose G2c: a child is glad for a real reason (mother glad, siblings, pets) */}}catch(e){}
  /* officials: their house's daughters rise and fall */
- try{if(S.court)for(const c in S.court){const of=S.court[c];if(!of||!of.name)continue;if(!of.emo&&roll(6))emoSet(of,pick(["vui","lo"]),30,pick(["việc triều thuận lợi","việc triều rối ren"]))}}catch(e){}
- for(const m of S.men||[]){if(m.alive&&!m.emo&&roll(5))emoSet(m,pick(["vui","lo","buon"]),25,"chuyện riêng")}
+ try{if(S.court)for(const c in S.court){const of=S.court[c];if(!of||!of.name)continue;if(!of.emo){const x=npwPick(emoOffCauses(of,W),y=>y.s);if(x&&roll(BAL.ag.why.emo.ofP))emoSet(of,x.k,30,x.why)}/* npc-purpose G2c: the Emperor's temper, the patron she serves */}}catch(e){}
+ for(const m of S.men||[]){if(!m.alive)continue;const mk="mn:"+m.id,o=S.emoSnap[mk],n={t:m.tinh||0,l:m.letters||0,y:m.trysts||0};S.emoSnap[mk]=n;if(m.emo||!o)continue;const x=npwPick(emoManCauses(m,o,n),y=>y.s);if(x)emoSet(m,x.k,25,x.why)}/* npc-purpose G2c: his mood follows what really passed between him and her */
  /* the Emperor grieves a lost child and rejoices at a birth (one rule: same as anyone's child) */
  try{let n=0,a=0;for(const [k] of allKids()){a++;if(k.alive)n++}const o=S.emoSnap.empK;S.emoSnap.empK={n,a};if(o){if(a>o.a)emoSet(S.emp,"vui",55,"mừng có hoàng tự");if(n<o.n-(a-o.a))emoSet(S.emp,"buon",75,"thương xót hoàng tự yểu mệnh")}}catch(e){}}
 /* ---------- direct hooks: a slight (oán) and a kindness (thiện cảm) land at once ---------- */
@@ -155,7 +155,15 @@ function emoMonth(){if(!emoOn())return;for(const p of emoPeople())for(const s of
 /* motive gate (j95): feelings are a recorded motive. Wrapped lazily so it works whatever the load order. */
 /* one answer per question (people ledger, owner 16/11 13:40Z: every act has ONE recorded reason): "sad, wants to be alone" holds for half
    of the friendly acts, chosen by the calendar (life seed + buổi + who + whom + what), not a fresh roll — asking the gate again gives the same answer */
-function emoHalf(a,t,kind){try{if(typeof j95hash==="function"&&typeof j95key==="function"&&S&&S.roster)return j95hash((S.j95seed||0)+"|"+j95key()+"|emo|"+emoKey(a)+"|"+emoKey(t)+"|"+kind)%100<50}catch(x){}return roll(50)}
+function emoHalf(a,t,kind){const M=window.__emoHalf||(window.__emoHalf={b:null,m:{}});const b=typeof j95key==="function"?j95key():wk();if(M.b!==b){M.b=b;M.m={}}
+ const q=emoKey(a)+"|"+emoKey(t)+"|"+kind;if(M.m[q]==null)M.m[q]=npwPick(["alone","go"],k=>emoAloneW(a,t,k))!=="go";return M.m[q]}/* npc-purpose G2c: her grief vs her liking for the one asking; one answer per buổi */
+function emoAloneW(a,t,k){const B=BAL.ag.why.emo,e=emoGet(a);return k==="alone"?(e.v||0):B.goBase+Math.max(0,aff(a,t))}
+function emoFearW(s,e,k){const B=BAL.ag.why.emo;return k==="so"?(e.v||0)*B.angW+Math.max(0,netQ(s,"timid"))*B.timid:B.calm+Math.max(0,(s.loyal||0)-BAL.loy.mid)}
+function emoOffCauses(of,W){const B=BAL.ag.why.emo,L=[];try{const em=S.emp?S.emp.mood:null;if(em!=null&&em>=3)L.push({k:"lo",s:B.ofEmp,why:"Hoàng thượng đang nổi giận"});else if(em===0)L.push({k:"vui",s:B.ofEmp,why:"Hoàng thượng vui vẻ"})}catch(e){}
+ try{let pt=null,bv=B.ofAf;for(const p of [S].concat(liveRivals(true))){const v=(of.af||{})[key(p)]||0;if(v>=bv){bv=v;pt=p}}if(pt){const e=emoGet(pt);if(e.w===W&&e.v>=40){if(e.k==="vui")L.push({k:"vui",s:bv,why:"mừng cho "+npwNm(pt)});else if((typeof feelBad==="function"?feelBad(e.k):["so","buon","lo"].includes(e.k)))L.push({k:"lo",s:bv,why:"lo cho "+npwNm(pt)})}}}catch(e){}return L}
+function emoManCauses(m,o,n){const B=BAL.ag.why.emo,L=[];if(n.t<BAL.tinhLv.known)return L;
+ if(n.l>o.l||n.y>o.y)L.push({k:"vui",s:B.manMet+n.t,why:"được ngươi đoái hoài"});if(n.t>=o.t+B.manDt)L.push({k:"vui",s:n.t-o.t+B.manMet,why:"lòng hướng về ngươi"});
+ if(n.t<=o.t-B.manDt)L.push({k:"buon",s:o.t-n.t+B.manMet,why:"buồn vì ngươi lạnh nhạt"});return L}
 function emoGateWrap(){if(window.__emoGate||typeof motiveOK!=="function")return;window.__emoGate=1;const g0=motiveOK;
  motiveOK=function(a,t,kind){const g=g0.apply(this,arguments);try{if(!emoOn()||!a||!t||a===S||a===t||typeof a!=="object")return g;const e=emoGet(a);if(e.k==="binh")return g;
   const at=e.t!=null&&e.t===emoKey(t);const H=typeof H95!=="undefined"&&H95.has(kind),F=typeof F95!=="undefined"&&F95.has(kind);

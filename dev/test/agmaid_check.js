@@ -48,7 +48,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const m=v.maid;const nm=m.name;const rf=roomFor;roomFor=()=>false;let a,b;try{sendMaid(v);a={same:v.maid===m,fav:!!m.fav};roomFor=()=>true;const n0=rivals.length;sendMaid(v);const n=rivals[rivals.length-1];b={added:rivals.length-n0,name:n.name,nm,newMaid:v.maid!==m}}finally{roomFor=rf}
   const d=PEND.ksp();const x=d.o[1].x;return{roll3:seen.includes(3),a,b,x}});
  ok(!r5.roll3,'Tiến cử: the NPC consort decides by her need, no flat roll 3',r5);ok(r5.a.same&&r5.a.fav,'Tiến cử, seats full: the maid stays, favoured (no "thả ra cung")',r5.a);
- ok(r5.b.added===1&&r5.b.name.endsWith(" "+r5.b.nm)&&r5.b.newMaid,'Tiến cử with a seat: the same maid raised (her name), a new maid serves',r5.b);ok(!/Năm ăn năm thua|Khó|Liều/.test(r5.x)&&/Nắm chắc/.test(r5.x),'Tiến cử option text: no invented odds',r5.x);
+ ok(r5.b.added===1&&r5.b.name.endsWith(" "+r5.b.nm)&&r5.b.newMaid,'Tiến cử with a seat: the same maid raised (her name), a new maid serves',r5.b);ok(!/Năm ăn năm thua|Khó|Liều/.test(r5.x),'Tiến cử option text: no invented odds (odds cap: a sure choice prints no ladder word)',r5.x);
  /* 6 the player maid picked */
  await fresh(true);
  const r6=await p.evaluate(()=>{S.age=Math.max(S.age,18);S.srv.lau=0;S.emp.met={me:[[wk(),"tea",1]]};S.sung=30;const C=consorts().filter(p=>nightCh(p)>0);const mp=mindPick;mindPick=(O)=>{const x=O.find(z=>z[0]&&z[0].m===S);return x?x[0]:mp(O)};
@@ -60,7 +60,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  await fresh(false);
  const r7=await p.evaluate(()=>{const L=amMaids();const [s,o]=L[0]||[];const n0=window.__amN.eyeOff;const e=s?mlEye(o,s):false;const a={e,off:window.__amN.eyeOff-n0};
   BAL.ag.on=0;const v=liveRivals(true).find(x=>x.maid&&!x.preg);const seen=[];const r0=roll;roll=function(x){seen.push(x);return false};try{rivalNight(v)}finally{roll=r0;BAL.ag.on=1}return{a,off3:seen.includes(3)}});
- ok(r7.a.e===false&&r7.a.off===1,'jmline: no eye roll while the loop is on',r7);ok(r7.off3,'off switch BAL.ag.on=0: the old roll 3 again',r7);
+ ok(r7.a.e===false&&r7.a.off===1,'jmline: no eye roll while the loop is on',r7);ok(!r7.off3,'off switch BAL.ag.on=0: fake illness stays a goal (npcWhy fakeIll, npc-purpose OD 18/11), no blind roll 3',r7);
  /* 8 play */
  const play=(maid)=>p.evaluate(async(maid)=>{const E=[];const ce=console.error;console.error=(...a)=>{E.push(a.map(String).join(" ").slice(0,200));ce.apply(console,a)};
   try{for(let i=0;i<30&&!S.dead;i++){Q.length=0;try{closeAll()}catch(e){}if(typeof agFlush==="function")agFlush();endTurn();Q.length=0;try{closeAll()}catch(e){}}}catch(e){E.push("throw "+e.message)}finally{console.error=ce}

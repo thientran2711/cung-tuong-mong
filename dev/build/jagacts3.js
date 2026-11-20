@@ -132,10 +132,10 @@ const P3T={
  gossip:(p,v,third)=>{const T=BAL.talk,G=T.gossip,f=p3ChatF(p,v),n=Math.max(1,Math.round(G.hit*f));return{n:`Bàn tán về ${third.name}`,o:100,inner:1,
   x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng quý ngươi +${n}`:`kèm: nàng quý ngươi -${G.miss} · nàng có thể mách lại`,
   run:()=>{p3ChatMark(p,v);if(aff(v,third)<0){affAdd(v,p,n);oanAdd(v,third,G.oan);return p===S?`Hai người to nhỏ chuyện ${third.name}. Nàng quý ngươi +${n}.`:`${p.name} và ${p3Who(v)} to nhỏ chuyện ${p3Who(third)}`}
-   affAdd(v,p,-G.miss);if(roll(agCap(G.tell))){oanAdd(third,p,G.tellOan);return p===S?`${v.name} đem lời ngươi kể lại với ${third.name}. ${third.name} oán ngươi +${G.tellOan}.`:`${p3Who(v)} đem lời ${p.name} bàn tán kể lại với ${p3Who(third)}`}
+   affAdd(v,p,-G.miss);const tl=npcTell(p,{to:third,from:[v]});/* npc-purpose G2a: she carries it only from a grudge against the gossip or a tie to the one talked of */if(tl&&roll(agCap(G.tell))){oanAdd(third,p,G.tellOan);return p===S?`${v.name} đem lời ngươi kể lại với ${third.name}. ${third.name} oán ngươi +${G.tellOan}.`:`${p3Who(v)} đem lời ${p.name} bàn tán kể lại với ${p3Who(third)}`}
    return p===S?`${v.name} lảng sang chuyện khác. Nàng quý ngươi -${G.miss}.`:`${p.name} bàn tán về ${p3Who(third)}, ${p3Who(v)} lảng sang chuyện khác`}}},
  secret:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.secret*f));return{n:"Chia sẻ bí mật",o:100,inner:1,x:`nàng quý ngươi +${n}${v.malice>BAL.talk.secretMal?" · nàng có thể nắm thóp ngươi":""}`,
-  run:()=>{p3ChatMark(p,v);affAdd(v,p,n);if(v.malice>BAL.talk.secretMal&&roll(agCap(BAL.talk.secretGrab))){evA(v,p,BAL.ag.ev.one);return p===S?`${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Nàng quý ngươi +${n}.`:`${p.name} chia sẻ bí mật với ${p3Who(v)}; ${p3Who(v)} ghi nhớ từng lời`}
+  run:()=>{p3ChatMark(p,v);affAdd(v,p,n);if(v.malice>BAL.talk.secretMal&&npcWhy("p3Grab",{v,p},()=>roll(agCap(BAL.talk.secretGrab)))){evA(v,p,BAL.ag.ev.one);return p===S?`${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Nàng quý ngươi +${n}.`:`${p.name} chia sẻ bí mật với ${p3Who(v)}; ${p3Who(v)} ghi nhớ từng lời`}
    return p===S?`${v.name} cũng kể chuyện riêng. Nàng quý ngươi +${n}.`:`${p.name} và ${p3Who(v)} kể chuyện riêng cho nhau`}}}};
 function p3Third(p,v){return liveRivals(true).filter(x=>x!==v&&x!==p).sort((a,b)=>aff(v,a)-aff(v,b))[0]||null}
 Object.assign(AGC3BTN,{talkHealth:"Hỏi han sức khỏe",talkPraise:"Khen tài nghệ nàng",talkGossip:"Bàn tán về",talkSecret:"Chia sẻ bí mật",invoke:"Nhắc lại ân xưa"});
@@ -198,7 +198,7 @@ agReg("consort","par3fac",(v,N,need)=>{const O=[];if(!p3FacOn()||v===S||v.out||!
   if(nd(F.gDiv)){const L=p3FacFoe(v);if(L.length){const g=mindPickBy(L,f2=>facMembers(f2).reduce((s,m)=>s+agSpite(v,m),0),v);P(p3O(v,"facDiv",{n:"Ly gián",c:{},o:odA(v,40+(v.tamco||0)/F.gDivTc),k:F.k},N,F.gDiv,"scheme",null,facLeader(g)))}}
  }catch(e){agdErr("par3fac",e)}return O});
 function p3FacRes(v,k,r){v.p3FacM=S.turn;r=String(r||"").trim();if(r&&typeof seenNPC==="function"){const s=seenNPC(v,v,r);if(s)try{log(s)}catch(e){}}return p3Res(k,r)}
-agRunReg("cx3:facFound",(v,t)=>t&&!facOf(v)&&!facOf(t)?p3FacRes(v,"facFound",found(v,t)):"");
+agRunReg("cx3:facFound",(v,t)=>t&&!facOf(v)&&!facOf(t)?p3FacRes(v,"facFound",rcvAsk("facFound",v,t)):"");
 agRunReg("cx3:facJoin",(v,l)=>{const g=l&&facOf(l);return g&&!facOf(v)?p3FacRes(v,"facJoin",askJoin(v,g)):""});
 agRunReg("cx3:facLeave",v=>facOf(v)?p3FacRes(v,"facLeave",leaveFac(v)):"");
 agRunReg("cx3:facSell",v=>facOf(v)?p3FacRes(v,"facSell",sellOut(v)):"");
@@ -216,9 +216,10 @@ agRunReg("cx3:drug",v=>p3DrugOk(v)?p3Run(v,P3C.drug(v),"drug"):"");
    guest = another consort: on yes she is at the host's palace that buổi (S.where), on no the host's liking of her drops BAL.eff.j21.top (her refusal rule);
    guest = HER: the host is at home and sends word (the old 4 % flat roll is off while par3 is on) — she chooses whether to go */
 function p3InvQ(){return(S.invQ=S.invQ||[])}
+/* RECEIVER CHOICE (OD 18/11 ~21:15Z, review FAIL 6 #2): the guest answers with the 4 answers (jrcv RCVK.invite): an NPC guest rcvPick, HER = her card (rcvAsk → rcvCard) */
 function p3InvLand(){const Q=p3InvQ();if(!Q.length)return;S.invQ=[];for(const q of Q){const h=RV(q.h);if(!h||!h.alive||h.out||h.confined)continue;const k=palaceOf(h);
- if(q.g==="me"){S.where[h.id]=k;seeLoc(h,k);log(`${h.name} sai người mời ngươi sang cung nàng chơi buổi này.`);continue}
- const g=RV(q.g);if(!g||!g.alive||g.out||g.confined)continue;const io=inviteO(h,g);if(agTry(io)){S.where[g.id]=k;S.where[h.id]=k}else if(!agSoft(io))affAdd(h,g,BAL.eff.j21.top)}}
+ if(q.g==="me"){S.where[h.id]=k;seeLoc(h,k);if(typeof rcvAsk==="function")rcvAsk("invite",h,S);else log(`${h.name} sai người mời ngươi sang cung nàng chơi buổi này.`);continue}
+ const g=RV(q.g);if(!g||!g.alive||g.out||g.confined)continue;if(typeof rcvInviteGo==="function"){rcvInviteGo(h,g);continue}const io=inviteO(h,g);if(agTry(io)){S.where[g.id]=k;S.where[h.id]=k}else if(!agSoft(io))affAdd(h,g,BAL.eff.j21.top)}}
 AGC3BTN.invite2="Mời đến cung ta";AGC3ACT.invite2="sai người đi mời khách";
 agReg("consort","par3inv",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||v.confined||!v.alive||(need&&need!=="ally"))return O;const X=BAL.ag.par3.invite;
  try{if(p3InvQ().some(q=>q.h===v.id))return O;const L=others(v).filter(x=>x&&x.alive!==false&&!x.out&&!x.confined&&!sameHouse(v,x)&&aff(v,x)>=X.minAff&&aff(x,v)>=BAL.invite.hate);if(!L.length)return O;
@@ -292,17 +293,18 @@ AGC3BTN.sumNo="Cáo bệnh";AGC3BTN.sumGo="Tắm gội chờ giá";
    cnvBlackOpts / cnvAffOpts), picked by jagstf2 stf2Pick (her needs × nết × odds, mindPick slip), run by stf2Do (fx, odds w / l, go). Numbers BAL.ag.par3.cnv.
    bị mắng: when her master punishes her (j10 servDo "phat", her button and cx3:staffPhat) · yến: months 1 and 7, every adult maid at her master's side (asMonth)
    bị nắm thóp: j10 threatServ (her Dọa tố đối thực and cx3:threat) — the servant answers instead of always turning Tai mắt
-   biết tư tình: each month an NPC maid may learn a consort's affair (BAL.ag.par3.cnv.aff.see), then Dọa tố / Bẩm chủ / Giữ kín ================= */
+   biết tư tình: an NPC maid who was at a consort's tryst (s.trSaw, j95secApply) may notice it (BAL.ag.why.p3.see), then Dọa tố / Bẩm chủ / Giữ kín ================= */
 function p3Cnv(s,O,kind){const c=stf2Pick(s,O,kind);if(!c)return"";AG3.stat.by["cnv_"+kind+"_"+c.id]=(AG3.stat.by["cnv_"+kind+"_"+c.id]||0)+1;const d=stf2Do(s,c);return d.r?String(d.r).replace(/<[^>]+>/g,""):""}
 function p3CnvOn(s){return p3On()&&stf2On()&&s&&s!==S&&s.sid!=null&&!s.out}
 (function(){if(typeof servDo!=="function")return;const d0=servDo;servDo=function(m,a,s){const r=d0.apply(this,arguments);
  try{if(a==="phat"&&p3CnvOn(s)&&s.role==="maid"&&(m.staff||[]).includes(s)){const x=p3Cnv(s,cnvScoldOpts(s,m),"scold");if(x)return `${r} ${x}.`}}catch(e){agdErr("par3:scold",e)}return r}})();
 (function(){if(typeof threatServ!=="function")return;const t0=threatServ;threatServ=function(a,s){const o=ownerOf(s);if(!p3CnvOn(s)||!o||!s.lover)return t0.apply(this,arguments);
  try{const x=p3Cnv(s,cnvBlackOpts(s,a,o),"black");return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}: ${x||"không ai nói ra"}. `}catch(e){agdErr("par3:black",e);return t0.apply(this,arguments)}}})();
+function p3MaidSaw(sw,x){try{if(!sw||typeof knAt!=="function")return null;for(let kh=0;kh<=agKh();kh++){const a=knAt(sw,kh);if(a&&a===knAt("v"+x.id,kh))return a}}catch(e){}return null}
 function p3MaidMonth(){if(!p3On()||!stf2On())return"";let ev="";const X=BAL.ag.par3.cnv;const fest=S.month===1||S.month===7;const lovers=liveRivals(true).filter(v=>v&&v.alive&&!v.out&&v.affair);
  for(const [s,p] of amMaids()){if(!p3CnvOn(s))continue;
   if(fest){const x=p3Cnv(s,cnvFestOpts(s,p),"fest");if(x&&asSee(p))ev+=x+". "}
-  for(const v of lovers){if(v===p||(s.knowAff||[]).includes(v.id)||!roll(X.aff.see))continue;s.knowAff=(s.knowAff||[]).concat([v.id]);const x=p3Cnv(s,cnvAffOpts(s,v,p),"aff");if(x&&asSee(p))ev+=x+". ";break}}
+  for(const v of lovers){if(v===p||(s.knowAff||[]).includes(v.id)||!(s.trSaw||[]).includes(v.id))continue;s.trSaw=s.trSaw.filter(x=>x!==v.id);if(!roll(BAL.ag.why.p3.see))continue;/* npc-purpose: she learns it only when she was really at the tryst's place at its khắc (recorded by j95secApply from the day record: s.trSaw); noticing = p3.see odds */s.knowAff=(s.knowAff||[]).concat([v.id]);const x=p3Cnv(s,cnvAffOpts(s,v,p),"aff");if(x&&asSee(p))ev+=x+". ";break}}
  return ev}
 (function(){if(typeof asMonth!=="function")return;const m0=asMonth;asMonth=function(){let ev=m0.apply(this,arguments)||"";try{ev+=p3MaidMonth()}catch(e){agdErr("par3:maidMonth",e)}return ev}})();
 Object.assign(AGC3BTN,{cnvScold:"Khóc lóc xin tha",cnvFest:"Rót rượu gần ngự tọa",cnvBlack:"Đút bạc bịt miệng",cnvAff:"Dọa tố chuyện tư tình"});
@@ -312,13 +314,10 @@ Object.assign(window,{p3MaidMonth});
    the NPC names a target (maidSpyT, mindPick) and uses her odds spyRoll(p,t,maid), her gain (chứng cứ BAL.eff.j78.evN) and her failure (lòng −, target oán) ·
    jgreet (an NPC comes to her): Hỏi han / Khen / Chia sẻ bí mật / Bàn tán = P3T.<k>(v,S), Cảnh báo / Khiêu khích = twDo(v,S,k) (her TW buttons) ·
    Soát quà (TW.check) = j8 inspect (her Kiểm tra đồ) · cx:study = npcStudyDo with mindPick (j85) · Đánh đàn chờ ngự giá (jact adStroll) = qinCard(p), NPC cx3:qin */
-function helpAsk(p,t){const X=BAL.ag.cx2.help,me=p===S;if(aff(t,p)<X.aff){affAdd(t,p,-X.fail);return{ok:0,r:me?`${t.name} khéo từ chối. Nàng quý ngươi -${X.fail}.`:`${t.name} khéo từ chối lời nhờ của ${p.name}`}}
- if(roll(cnvOd(X.p))&&(t.bac||0)>=X.bac){ap(t,{bac:-X.bac});if(me)apply({bac:X.bac});else ap(p,{bac:X.bac});return{ok:1,r:me?`${t.name} cho ngươi mượn ${X.bac} lượng.`:`${t.name} cho ${p.name} mượn ${X.bac} lượng`}}
- const x=evGuilty(p,others(p).filter(y=>y&&y!==p&&y!==t&&(y===S||y.alive)));if(x&&evA(p,x,BAL.ag.ev.one))return{ok:1,r:me?`${t.name} kể cho ngươi một chuyện về ${x.name}: ${evSg(BAL.ag.ev.one)}.`:`${t.name} kể cho ${p.name} một chuyện về ${agcNm(x)}`};
- return{ok:1,r:me?`${t.name} tiếp ngươi ân cần.`:`${t.name} tiếp ${p.name} ân cần`}}
-agRunReg("cx2:help",(v,t)=>{if(!t||t===S)return"";const h=helpAsk(v,t);return ag2Res(v,"help",h.ok,h.r)});
+/* helpAsk(p,t) = jrcv.js (RECEIVER CHOICE, OD 18/11 ~21:15Z): the receiver answers with the 4 answers (L1876), she gets her card when asked */
+agRunReg("cx2:help",(v,t)=>{if(!t)return"";const h=helpAsk(v,t);return ag2Res(v,"help",h.ok,h.r)});
 function maidTalkDo(p){const X=BAL.ag.cx2.maidTalk,m=p===S?S.maid:p.maid;if(!m)return"";if(p===S)apply({maid:X.w.maid});else m.loyal=cl((m.loyal||0)+X.w.maid,0,100);
- if(p===S&&roll(cnvOd(X.hear))){const t=liveRivals(true);if(t.length){const v=pick(t);try{seeLoc&&seeLoc(v)}catch(e){}log(`${S.maid.name} kể: ${v.name} đang ở ${placeName(whereOf(v))} buổi này.`)}}/* an NPC reads places from the record (agAt): information only */
+ if(p===S&&roll(cnvOd(X.hear))){const sw=S.maid&&S.maid.sid!=null?"s"+S.maid.sid:null;const v=npwPick(liveRivals(true).filter(x=>p3MaidSaw(sw,x)),x=>1+Math.max(0,hostility(x,S)));/* npc-purpose G2a: she tells only where she really saw someone today, the one who threatens her mistress first */if(v){try{seeLoc&&seeLoc(v,p3MaidSaw(sw,v))}catch(e){}log(`${S.maid.name} kể: hôm nay thấy ${v.name} ở ${placeName(p3MaidSaw(sw,v))}.`)}}/* an NPC reads places from the record (agAt): information only */
  return p===S?"":`${p.name} trò chuyện với ${m.name}`}
 try{AGC2BTN.maidTalk="Trò chuyện với cung nữ"}catch(e){}
 agRunReg("cx2:maidTalk",v=>{const r=maidTalkDo(v);return r?ag2Res(v,"maidTalk",1,r):""});

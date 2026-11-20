@@ -35,7 +35,7 @@ Object.assign(BAL,{ration:{on:true,
  borrow:{base:25,aff:2,ghen:10,whim:20,fail:-2,spare:2,trait:{"Ân cần":15,"Khiêm nhường":10,"Kín đáo":0,"Xảo quyệt":-5,"Tham vọng":-10,"Kiêu ngạo":-15}},
  beg:{hh:15,th:10,stat:2,fail:-3,cd:2},/* xin Hoàng hậu / Thái hậu: base + stat/2 (jveil xin road); fail costs favour; once per cd months */
  steal:{danh:-4,duc:-2,oan:10,cut:1,add:10},/* caught stealing: Danh, Đức, the victim's oán, bổng khất 1 month; odds = plant odds + add */
- npc:{use:3,buy:50,askAff:10},/* NPC month: lượt spent per part; chance to buy when out (borrow / beg / steal / ask her = day-plan choices, jagacts4); askAff = thiện cảm her «Chia» answer wins */
+ npc:{use:3,buy:50},/* NPC month: lượt spent per part; chance to buy when out (borrow / beg / steal / ask her = day-plan choices, jagacts4); (her «Chia» answer: jrcv RCVK.rougeBorrow, the asker quý BAL.rcv.help.af) */
  allergy:{rel:2,chiW:[.3,.45,.25],nguaW:[.2,.45,.35]},/* a tainted box at the sitting → the ONE rash system (jrash rashGive: timed, picture, Thái y): severity weights for pha chì / bột ngứa; the first use of a clean box rolls RASH.cos like any son phấn; rel = her oán toward the one who tainted it */
  tribute:{ch:{promo:60,son:60,contest:35,birthday:50,sinhthan:50,night:5},ghen:3}}});
 const LX_KD="Son phấn";
@@ -133,21 +133,26 @@ function lxRush(){const c=lxRushCost();if(!lxOn()||(S.bac||0)<c)return;const M=l
 function lxLend(v,part){const L=lxBoxes(v,part);if(!L.length)return null;const tot=L.reduce((a,e)=>a+e.u,0);return tot>=BAL.ration.borrow.spare?L.slice().sort((a,b)=>b.u-a.u)[0]:null}
 function lxBorrowOdds(v,p){p=p||S;const B=BAL.ration.borrow;let o=B.base+Math.round(aff(v,p)/B.aff)-Math.round((v.ghen||0)/B.ghen);for(const t of traitsOf(v))o+=B.trait[t]||0;
  o+=Math.round((lxHash(`${v.id}:${toilWk()}`)%(2*B.whim+1))-B.whim);return cl(o,5,95)}
-function lxGive(from,to,e,how){const r=lxOf(e.k);const n=how==="half"?Math.max(1,Math.ceil(e.u/2)):e.u;e.u-=n;if(e.u<=0)from.inv.splice(from.inv.indexOf(e),1);
+function lxGive(from,to,e,how){const r=lxOf(e.k);const n=typeof how==="number"?Math.max(1,Math.min(e.u,how)):how==="half"?Math.max(1,Math.ceil(e.u/2)):e.u;e.u-=n;if(e.u<=0)from.inv.splice(from.inv.indexOf(e),1);
  const g={k:e.k,c:e.c,u:n,from:how==="steal"?"steal":"borrow",d:S.turn};if(from!==S)g.giver=from.name;if(e.t){g.t=e.t;g.by=e.by}to.inv=to.inv||[];to.inv.push(g);return g}
 /* ONE builder per road (role-parity part 2, law 1 + law 4): her talk cards (rival visit / Hoàng hậu, Thái hậu / a rival's chest) and an NPC
    consort's day-plan options cx4:rougeBorrow / rougeBeg / rougeSteal (jagacts4) — the SAME odds function of the doer, the same gain and loss.
    An NPC who asks HER is the receiver side: her answer card (lxAskHer), never a dice in her place. */
 const lxNm=p=>p===S?"ngươi":p.name;
-function lxBorrowCard(p,v){const M=lxMiss(p);const lend=M.map(part=>[part,lxLend(v,part)]).find(x=>x[1]);const od=lxBorrowOdds(v,p);
- return{n:"Mượn son phấn",o:od,lock:!M.length||!lend,t:!M.length?"son phấn còn đủ":"nàng không có thứ ngươi thiếu",x:`${word(od)} · thành: nàng chia cho ngươi một nửa hộp ${lend?TOIL_COL[lend[0]].label.toLowerCase():"còn thiếu"} · hỏng: thiện cảm ${BAL.ration.borrow.fail} · tùy nàng quý ngươi, nết, cơn ghen và hứng hôm nay`,
-  run:()=>{if(!lend)return"";if(v===S){lxAskHer(p,lend[0]);return `${p.name} sai người sang xin ngươi ${TOIL_COL[lend[0]].label.toLowerCase()}`}
+function lxBorrowCard(p,v){const M=lxMiss(p);const lend=M.map(part=>[part,lxLend(v,part)]).find(x=>x[1]);const od=lxBorrowOdds(v,p);const lbl=lend?TOIL_COL[lend[0]].label.toLowerCase():"còn thiếu";
+ /* RECEIVER CHOICE (jrcv RCVK.rougeBorrow, review FAIL 6 #4): the LENDER answers with the 4 answers — an NPC lender picks (rcvPick, L1876 weights), she as the
+    lender gets the card (PEND.rcvAsk). Her asking card shows the lender's willingness word (rcvWord), not odds; od stays the NPC planner's worth (p4O) */
+ const ww=typeof rcvWord==="function"?rcvWord(v,p):"";
+ return{n:"Mượn son phấn",o:p===S&&ww?null:od,lock:!M.length||!lend,t:!M.length?"son phấn còn đủ":"nàng không có thứ ngươi thiếu",x:`${p===S&&ww?ww:word(od)} · nàng có thể chia một nửa hộp ${lbl}, chia chút ít cho có, từ chối hoặc đem chuyện đi kể · tùy nàng quý ngươi và nết của nàng`,
+  run:()=>{if(!lend)return"";if(typeof rcvAsk==="function")return rcvAsk("rougeBorrow",p,v,lend[0])||"";
    if(roll(od)){const g=lxGive(v,p,lend[1],"half");if(p!==S)lxFix(p);return `${v.name} chia cho ${lxNm(p)} ${lxName(g)} (${g.u} lần dùng).`}affAdd(v,p,BAL.ration.borrow.fail);return `${v.name} khéo từ chối${p===S?"":" "+p.name}. Thiện cảm ${BAL.ration.borrow.fail}.`}}}
 function lxBegOdds(p,kind){const B=BAL.ration.beg,hh=kind==="hh";return cl((hh?B.hh:B.th)+Math.round(((hh?p.hh:p.th)||0)/B.stat),5,95)}
 function lxBegCd(p,kind){const st=p.lxBeg||{};return st[kind]!=null&&S.turn-st[kind]<BAL.ration.beg.cd}
 function lxBegCard(p,kind){const B=BAL.ration.beg,hh=kind==="hh",M=lxMiss(p);const od=lxBegOdds(p,kind),cd=lxBegCd(p,kind);const nm=hh?"Hoàng hậu":"Thái hậu";const part=M[0];const t=BAL.ration.tier[Math.min(7,p.rank||0)];
  return{n:"Xin son phấn",o:od,lock:!M.length||cd,t:!M.length?"son phấn còn đủ":`vừa xin rồi, ${B.cd} tháng mới xin lại`,x:`${word(od)} · thành: ${nm} ban một hộp ${part?TOIL_COL[part].label.toLowerCase():"còn thiếu"} · hỏng: ${nm} ${B.fail}`,
-  run:()=>{(p.lxBeg=p.lxBeg||{})[kind]=S.turn;if(!part)return"";if(roll(od)){let n;if(p===S)n=goodsGive(S,lxKey(part,t),{from:kind});else{const e={k:lxKey(part,t),from:kind,d:S.turn};(p.inv=p.inv||[]).push(e);n=lxName(e)}lxFix(p);return `${nm} ban cho ${lxNm(p)} ${n}.`}
+  run:()=>{(p.lxBeg=p.lxBeg||{})[kind]=S.turn;if(!part)return"";
+   /* RECEIVER CHOICE (jrcv RCVJ.rougeBeg, law 1): the Hoàng hậu decides — she as the Hoàng hậu gets the card, an NPC queen the same answers at these odds (the Thái hậu is NPC-only) */
+   if(hh&&typeof rcvJudge==="function"&&queenP()&&queenP()!==p)return rcvJudge("rougeBeg",p,p,od);if(roll(od)){let n;if(p===S)n=goodsGive(S,lxKey(part,t),{from:kind});else{const e={k:lxKey(part,t),from:kind,d:S.turn};(p.inv=p.inv||[]).push(e);n=lxName(e)}lxFix(p);return `${nm} ban cho ${lxNm(p)} ${n}.`}
    const f=hh?{hh:B.fail}:{th:B.fail};if(p===S)apply(f);else ap(p,f);return `${nm} cho là ${lxNm(p)} không biết giữ phận. ${nm} ${B.fail}.`}}}
 function lxStealOdds(p,v){return cl((typeof oPlant==="function"&&v.maid?oPlant(p,v):30)+BAL.ration.steal.add,5,95)}
 function lxStealCard(p,v){const M=lxMiss(p);const L=BAL.ration.parts.map(part=>lxLend(v,part)).filter(Boolean);const od=lxStealOdds(p,v);const ST=BAL.ration.steal;
@@ -174,11 +179,8 @@ function lxNpcMonth(v){if(!lxNpcOk(v))return;const N=BAL.ration.npc;
  lxFix(v)}
 /* she always gets a clue when an NPC steals from her (never an invisible loss); who did it only through Tai mắt (newsAdd) */
 function lxStolenNote(v,g){try{log(`<span class="r">Một hộp ${lxName(g)} trong rương ngươi không cánh mà bay.</span>`);newsAdd(v,"lx",`${rkName(v)} ${v.name} sai người lấy hộp son phấn trong rương ngươi`,false)}catch(e){}}
-/* two-way: a consort asks HER (an event card; her answer is remembered as thiện cảm) */
-function lxAskHer(v,part){try{if(window.__bot||(typeof isSrv==="function"&&isSrv()))return;const e=lxLend(S,part);if(!e)return;const lbl=TOIL_COL[part].label.toLowerCase();
- Q.push({ev:1,t:"Sang mượn son phấn",who:typeof pv==="function"?pv(v):null,h:`<p>Cung nữ của ${rkName(v)} ${v.name} sang thưa: chủ tử nhà nàng hết ${lbl}, xin ngươi chia cho một ít.</p>${kitRows([["Rương ngươi",`${lxName(e)}, còn ${e.u} lần dùng`,"n"]])}`,
-  opts:[{n:"Chia cho nàng một nửa",fx:{},x:`thành: ${v.name} thiện cảm ${balSg(BAL.ration.npc.askAff)} · mất: nửa hộp ${lbl}`,go:()=>{const g=lxGive(S,v,e,"half");affAdd(v,S,BAL.ration.npc.askAff);log(`Ngươi chia cho ${v.name} ${lxName(g)}, ${g.u} lần dùng.`)}},
-   {n:"Khéo từ chối",fx:{},x:`mất: ${v.name} thiện cảm ${BAL.ration.borrow.fail}`,go:()=>{affAdd(v,S,BAL.ration.borrow.fail);log(`Ngươi khéo từ chối ${v.name}.`)}}]})}catch(x){console.error("rt ask",x)}}
+/* two-way: a consort asks HER → jrcv RCVK.rougeBorrow (her 4-answer card PEND.rcvAsk, saveable, the ONE notice path); kept as a name for old callers */
+function lxAskHer(v,part){try{if(typeof rcvAsk==="function")rcvAsk("rougeBorrow",v,S,part)}catch(x){console.error("rt ask",x)}}
 /* ---------- 6. tribute cosmetics with a bestowal ---------- */
 (function(){if(typeof bestow!=="function")return;const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{const T=BAL.ration.tribute,ch=T.ch[why]||0;if(!lxOn()||!p||p.dead||!ch||!roll(ch))return r;
   const part=BAL.ration.parts[lxHash(`${p.id!=null?p.id:"me"}:${S.turn}:${why}`)%BAL.ration.parts.length],k=lxKey(part,3);p.lxBest=S.turn;

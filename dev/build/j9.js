@@ -29,8 +29,11 @@ function placeName(k){return placeOf(k).n}
 function countAt(k){const W=S.where||{};let n=0;for(const v of rivals)if(v.alive&&!v.out&&W[v.id]===k)n++;if(W.emp===k&&["vuon","thu","dtd"].includes(k))n++;if(k==="tn"&&!S.thDead)n++;if(k==="home")n+=1+S.kids.filter(x=>x.alive).length;if(k==="tyv"||k==="ksp")n++;if(k==="lc")n+=Math.max(1,Math.min(3,rivals.filter(v=>v.alive&&v.out).length));return n}
 /* NPCs who share a place meet: small talk or friction, by the same bars */
 function npcEncounters(){const by={};for(const v of liveRivals(true)){const k=S.where[v.id];(by[k]=by[k]||[]).push(v)}
- for(const k in by){const L=by[k];for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){const a=L[i],b=L[j];if(!roll(30))continue;
-  if(oan(a,b)+oan(b,a)>40||a.ghen+b.ghen>110){oanAdd(a,b,BAL.eff.j9.npcEncounters);oanAdd(b,a,BAL.eff.j9.npcEncounters_2);affAdd(a,b,BAL.eff.j9.npcEncounters_3);affAdd(b,a,BAL.eff.j9.npcEncounters_4)}else{affAdd(a,b,BAL.eff.j9.npcEncounters_5);affAdd(b,a,BAL.eff.j9.npcEncounters_6)}}}}
+ for(const k in by){const L=by[k];for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){const a=L[i],b=L[j];
+  /* npc-purpose G2: two women in one place quarrel from a real grudge / jealousy, chat from liking, or pass each other by (no tie → nothing) */
+  const W=BAL.ag.why.j9,xq=Math.max(0,oan(a,b)+oan(b,a)-W.oan0)+Math.max(0,(a.ghen||0)+(b.ghen||0)-W.ghen0);
+  const k=npwPick(["q","c","n"],x=>x==="q"?(xq>0?W.q0+xq*W.q:0):x==="c"?W.c0+Math.max(0,aff(a,b)+aff(b,a))*W.c:W.none);if(k!=="q"&&k!=="c")continue;
+  if(k==="q"){oanAdd(a,b,BAL.eff.j9.npcEncounters);oanAdd(b,a,BAL.eff.j9.npcEncounters_2);affAdd(a,b,BAL.eff.j9.npcEncounters_3);affAdd(b,a,BAL.eff.j9.npcEncounters_4)}else{affAdd(a,b,BAL.eff.j9.npcEncounters_5);affAdd(b,a,BAL.eff.j9.npcEncounters_6)}}}}
 
 /* sending someone instead of going: same act, lower odds, the servant may be caught and confess */
 let ACTX={a:null,pen:0};
@@ -81,7 +84,7 @@ function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=li
  const same=sameHouse(S,v);
  /* AG-ALL-2e: the four talk topics are built ONCE by P3T.<k>(speaker, listener) (jagacts3) — her talk and an NPC↔NPC talk run the same card */
  const TK=BAL.talk;A.push(P3T.health(S,v));A.push(P3T.praise(S,v));if(third)A.push(P3T.gossip(S,v,third));A.push(P3T.secret(S,v));
- A.push({n:"Nhờ giúp đỡ",o:100,inner:1,x:aff(v,S)>=BAL.ag.cx2.help.aff?"nàng thân với ngươi":`nàng chưa đủ quý ngươi (cần ${BAL.ag.cx2.help.aff}): nàng quý ngươi -${BAL.ag.cx2.help.fail}`,run:()=>{chatMark(v);return helpAsk(S,v).r}});
+ A.push({n:"Nhờ giúp đỡ",o:100,inner:1,x:typeof rcvWord==="function"?`${rcvWord(v,S)} · nàng có thể giúp hết lòng, làm qua loa, từ chối, hoặc đem chuyện đi mách`:"",run:()=>{chatMark(v);return helpAsk(S,v).r}});
  const foe=liveRivals(true).filter(x=>x!==v&&oan(x,v)>=TK.warn.foe)[0];
  A.push({n:"Cảnh báo nàng",o:100,x:foe?`có kẻ đang oán nàng: nàng quý ngươi +${g(TK.warn.hit)}`:`không có căn cứ: nàng quý ngươi -${TK.warn.miss}`,run:()=>{chatMark(v);if(foe){affAdd(v,S,g(TK.warn.hit));oanAdd(v,foe,TK.warn.oan);return `Ngươi nhắc ${v.name} coi chừng ${foe.name}. Nàng quý ngươi +${g(TK.warn.hit)}.`}affAdd(v,S,-TK.warn.miss);return `${v.name} nghi ngươi gây chia rẽ. Nàng quý ngươi -${TK.warn.miss}.`}});
  if(oan(v,S)>0){A.push({n:"Tạ lỗi",o:100,c:{danh:-1},x:`oán ${balSg(BAL.eff.j9.run_8)}`,run:()=>{oanAdd(v,S,BAL.eff.j9.run_8);chatMark(v);return `Ngươi hạ mình tạ lỗi. ${v.name} oán ${balSg(BAL.eff.j9.run_8)}.`}});

@@ -14,14 +14,14 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;let g=0;do{start();g++}while(isSrv()&&g<30);window.__nlInner=0;window.__bot=1;window.__agAll=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()});
  /* helpers in page */
  await p.evaluate(()=>{window.__setNet=(s,ld)=>{netOf(s);s.net=s.net.slice();s.net[1]=ld;KN.m=null};
-  window.__rig=()=>{const R=liveRivals(true).filter(v=>v.alive&&!v.out&&(v.staff||[]).length>=1);const v=R[0];const s=v.staff[0];
+  window.__rig=()=>{delete S.npw;/* npc-purpose G2: fresh cooldowns per rig */const R=liveRivals(true).filter(v=>v.alive&&!v.out&&(v.staff||[]).length>=1);const v=R[0];const s=v.staff[0];
    for(const x of allServ()){if(x!==s){x.loyal=95}}s.loyal=10;s.spyFor=null;__setNet(s,"Ham lợi");v.affair=null;v.plan=null;v.inv=[];v.preg=0;v.hidden=false;S.intel={};
    v.preg=2;v.hidden=true;/* a hidden pregnancy: worth BAL.ag.sell.val.preg */return{v,s}}});
  /* 1 who sells */
  const r1=await p.evaluate(()=>{const {v,s}=__rig();const o={};o.wGreedy=knSellW(s);s.loyal=BAL.ag.sell.loy;o.wLoyal=knSellW(s);s.loyal=10;
   __setNet(s,"Thanh liêm");o.wClean=knSellW(s);__setNet(s,"Ham lợi");
   const own=(S.staff||[])[0];if(own){own.loyal=5;__setNet(own,"Ham lợi")}
-  let picks={},n=0;for(let i=0;i<40;i++){const r=knSellPick(S);if(r){n++;picks[r.s.sid]=(picks[r.s.sid]||0)+1;o.ownSel=o.ownSel||(own&&r.s===own)}}o.picks=picks;o.n=n;o.sid=s.sid;
+  let picks={},n=0;for(let i=0;i<40;i++){delete S.npw;/* npc-purpose G2: a seller who came waits BAL.ag.why.cd.knSell tuần; each pick here is a fresh week */const r=knSellPick(S);if(r){n++;picks[r.s.sid]=(picks[r.s.sid]||0)+1;o.ownSel=o.ownSel||(own&&r.s===own)}}o.picks=picks;o.n=n;o.sid=s.sid;
   s.spyFor="me";o.tmSel=!!knSellPick(S);s.spyFor=null;return o});
  ok(r1.wGreedy>0&&r1.wLoyal===0&&r1.wClean===0,'who: Ham lợi + low lòng sells; lòng ≥ BAL.ag.sell.loy or Thanh liêm never',r1);
  /* 1b non-greedy (review ag-all-2 r2 C6, OD ~17:00Z (3)): low lòng alone never makes an offer; only her master offending a chữ she holds does */
