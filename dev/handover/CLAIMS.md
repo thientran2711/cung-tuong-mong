@@ -383,4 +383,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | cal-p2c identity offset + rolling hand b (opus; ORDER ROOT-75 20/11 07:25Z; moved from C-AG #29 PART 2) | review/cal-p2c; briefs/D9-cal-p2c.md; reports/cal-p2c.md | D #9 for ROOT-75 | session_01964izF6sJHzxcBve2mGhvJ | RUNNING | 20/11 07:20Z |
 | gap-audit (opus; MAIN ROOT-75 brief briefs/root75-gap-audit.md; read-only; output dev/handover/GAP_LIST.md) | handover GAP_LIST.md | MAIN ROOT-75 | session_01Rc5AsLymU7eumr5TcMGb2s | DONE — GAP_LIST v2 (90 rows + LAND FIRST table) | 20/11 08:10Z |
 | mg-craft-hoa #2 (sonnet; successor of 5RwFKrAT at e8b6e7f9; merge scaffold 01114e27 + full tests) | review/mg-craft-hoa | B | session_01N1tNP5dR4zbum2tbzNH3qG | RUNNING | 20/11 07:44Z |
-| MAIN ROOT-76 (opus; child of ROOT-75, depth 5) | handover HANDOVER_SESSION9 | ROOT-75 | session_01Rc5AsN56DP1NgSYAwWFJ8o | RUNNING | 20/11 07:49Z |
+| MAIN ROOT-76 (opus; child of ROOT-75, depth 5) | handover HANDOVER_SESSION9 | ROOT-75 | session_01Rc5AsN56DP1NgSYAwWFJ8o | RUNNING — PICKUP 07:50Z | 20/11 07:49Z |
