@@ -556,3 +556,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | FOREMAN E #24 (opus; child of E #23, depth 5) | handover FOREMAN_E_STATUS | FOREMAN E #23 | session_01DgYSWkpuYY1nYuAMVGQJVm | RUNNING | 20/11 22:50Z |
 | REVIEW cold-faction r1 E33r (opus BIG; briefs/E33r-review-cold-faction.md) of 29d9258e | review/cold-faction-r1; reports/cold-faction-review.md | FOREMAN E #24 | session_01DgYSWmyPJTrC9g68qSyay9 | RUNNING | 20/11 22:53Z |
 | REVIEW ge-phutang r1 E35br (opus BIG; briefs/E35br-review-ge-phutang.md) of fa820b35 | review/ge-phutang-r1; reports/ge-phutang-review.md | FOREMAN E #24 | session_01DgYSWobK4XTbVjoam1LAdP | RUNNING | 20/11 22:53Z |
+| rv-kit-dress-picker REVIEWER (sonnet; small kit/UI) | review/kit-dress-picker-rv; reports/rv-kit-dress-picker.md | MAIN ROOT-82 | rv-signs session | DONE PASS 24dd2c62ec24b3f970aeb92a32312a3e04815b7e | 20/11 22:57Z |
