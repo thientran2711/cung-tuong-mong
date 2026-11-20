@@ -5,11 +5,11 @@
    carry NCW(k), Bắc Địch openings BDW(k) (the bd premise ended differently). Helpers RDW / rdRel / rdOan come from jrd_tt.js (same script). */
 const ncBd=()=>{try{return S.origin.k==="bd"}catch(e){return false}};
 RDQ.ncvBL=()=>RD_FL("nc_vuong.bought")||RD_FL("nc_vuong.loser");/* named predicate an odds term in BAL.road.fx reads (rdOdds "q") */
-const NCL={nc:{land:"Nam Chiếu",pv:"Phụ vương",mh:"Mẫu hậu",quan:"Quốc vương",pa:"Hoàng huynh",pb:"hoàng thúc",canh:"canh chua",laq:"lá rừng",nden:"thả đèn hoa trên nước"},
- bd:{land:"Bắc Địch",pv:"Phụ hãn",mh:"Khả đôn",quan:"Khả hãn",pa:"Đại huynh",pb:"nhị huynh",canh:"canh sữa dê",laq:"cỏ thảo nguyên",nden:"thắp đèn bơ quanh chùa"}};
+const NCL={nc:{land:"Cao Ly",pv:"Phụ vương",mh:"Vương hậu",quan:"Quốc vương",pa:"Thế tử huynh",pb:"Vương thúc",canh:"canh rong biển",laq:"lá tía tô dại",nden:"thắp đèn Nhiên Đăng",kha:"Phác"},
+ bd:{land:"Bắc Địch",pv:"Phụ hãn",mh:"Khả đôn",quan:"Khả hãn",pa:"Đại huynh",pb:"nhị huynh",canh:"canh sữa dê",laq:"cỏ thảo nguyên",nden:"thắp đèn bơ quanh chùa",kha:"Kha"}};
 if(typeof TOK67==="object")Object.assign(TOK67,{land:()=>NCL[ncBd()?"bd":"nc"].land,pv:()=>NCL[ncBd()?"bd":"nc"].pv,mh:()=>NCL[ncBd()?"bd":"nc"].mh,
  quan:()=>NCL[ncBd()?"bd":"nc"].quan,pa:()=>NCL[ncBd()?"bd":"nc"].pa,pb:()=>NCL[ncBd()?"bd":"nc"].pb,
- canh:()=>NCL[ncBd()?"bd":"nc"].canh,laq:()=>NCL[ncBd()?"bd":"nc"].laq,nden:()=>NCL[ncBd()?"bd":"nc"].nden});
+ canh:()=>NCL[ncBd()?"bd":"nc"].canh,laq:()=>NCL[ncBd()?"bd":"nc"].laq,nden:()=>NCL[ncBd()?"bd":"nc"].nden,kha:()=>NCL[ncBd()?"bd":"nc"].kha});
 /* opening filters of chapter .5: NCW after a Nam Chiếu premise, BDW after a Bắc Địch premise (k as RDW) */
 const NCW=k=>()=>!ncBd()&&RDW(k)();
 /* months of cấm túc a road ending applies (S.confined, j3 counts it down): BAL.road.ncConf (jbal2.js) */
@@ -21,66 +21,66 @@ const BDW=k=>()=>ncBd()&&RDW(k)();
 const NC_MP=()=>!S.thDead?"Thái hậu":qOn()?"Hoàng hậu":"";
 const NC_MPOK=()=>!!NC_MP();
 /* ---------- nc_gian · Mật lệnh cố quốc ---------- */
-/* Written ONCE for both country branches: Nam Chiếu (premise nc_gian) and Bắc Địch (premise bd_ngua plays these chapters, alias in nc_tail).
+/* Written ONCE for both country branches: Cao Ly (premise nc_gian) and Bắc Địch (premise bd_ngua plays these chapters, alias in nc_tail).
    Land words only through tokens {land} {pv} {mh} {quan} {pa} {pb}. Chapter .5 openings: NCW(k) after nc_gian .4, BDW(k) after bd_ngua .4.
-   Story-only NPC: lão Kha, a merchant of {land} lodging at Hội Đồng quán (the go-between); the envoy of {land} (§5.4 row exists).
+   Story-only NPC: lão {kha}, a merchant of {land} lodging at Hội Đồng quán (the go-between); the envoy of {land} (§5.4 row exists).
    BAL.road.nc_gian = {} (no chapter constants: deadlines are told in text, costs inline as in jrd_tt). */
 rdDef("nc_gian",5,{t:"Đường thư qua Hội Đồng quán",w:"maid",sj:"đường thư về {land}",cast(A){return rdCast(A,["v"])},
- g:"{pv} không coi ván trước là xong. Lão Kha, một lái buôn {land} trọ ở Hội Đồng quán, được giao làm người đưa thư cho ngươi. Ai cầm đầu sợi dây ấy, người đó định tin gì về đến cố quốc.",
+ g:"{pv} không coi ván trước là xong. Lão {kha}, một lái buôn {land} trọ ở Hội Đồng quán, được giao làm người đưa thư cho ngươi. Ai cầm đầu sợi dây ấy, người đó định tin gì về đến cố quốc.",
  p:[["s1","s2","s3","s4","s5"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Thư khen của {pv}",w:"maid",if:()=>NCW(1)()&&rdPrev()!=="win2",t:"Hai nước vừa ngừng binh nhờ thư ngươi viết. {pv} gửi thư khen, nhưng cuối thư có một dòng: “Hòa là để thở. Con hãy cho ta biết Đại Hy rút bao nhiêu quân khỏi ải.” Người mang thư là lão Kha, lái buôn {land} trọ ở Hội Đồng quán.",o:[
+ B:{s1:{h:"Thư khen của {pv}",w:"maid",if:()=>NCW(1)()&&rdPrev()!=="win2",t:"Hai nước vừa ngừng binh nhờ thư ngươi viết. {pv} gửi thư khen, nhưng cuối thư có một dòng: “Hòa là để thở. Con hãy cho ta biết Đại Hy rút bao nhiêu quân khỏi ải.” Người mang thư là lão {kha}, lái buôn {land} trọ ở Hội Đồng quán.",o:[
   {n:"Đưa thư cho Hoàng thượng xem",f:"court",wx:"ngài thấy ngươi không giấu điều gì",lx:"Hoàng thượng hỏi vì sao thư lọt được vào cung; cố quốc biết ngươi trình thư",rt:"Hoàng thượng đọc xong, đặt tay lên tay ngươi: “Trẫm nhớ lần này.”",rf:"Hoàng thượng chỉ nói: “Sao thư vẫn vào được cung?”"},
-  {n:"Hồi thư: đã hòa thì thôi dò",f:"court",wx:"lòng ngay thẳng",lx:"{pv} cho là con gái đã quên nước",rt:"Ngươi viết bốn chữ, gấp lại, trao lão Kha."},
-  {n:"Nhận lão Kha làm người đưa thư riêng",f:"hold",wx:"đường thư nằm trong tay ngươi",lx:"lão Kha nhận bạc hai đầu",rt:"Lão Kha cúi đầu: từ nay thư nào đi, thư nào đến, đều qua mắt ngươi trước.",rf:"Lão Kha nhận bạc, rồi vẫn báo hết về {land}."}]},
- s2:{h:"Vàng tạ ơn và lệnh mới",w:"maid",if:()=>NCW(1)()&&rdPrev()==="win2",t:"{pv} gửi vàng tạ ơn vì mùa thu năm trước. Kèm vàng là lệnh mới, do lão Kha, lái buôn {land} ở Hội Đồng quán, mang vào: chép cho được bản đồ các kho lương dọc ải. Ngươi đã giúp một lần, cố quốc tin ngươi sẽ giúp lần nữa.",o:[
-  {n:"Nhận vàng, nhận lệnh",f:"home",wx:"cố quốc gửi vàng, tin ngươi trọn vẹn",lx:"nhận vàng là nhận một sợi dây buộc",rt:"Lão Kha để lại hộp vàng, dặn ngày quay lại."},
+  {n:"Hồi thư: đã hòa thì thôi dò",f:"court",wx:"lòng ngay thẳng",lx:"{pv} cho là con gái đã quên nước",rt:"Ngươi viết bốn chữ, gấp lại, trao lão {kha}."},
+  {n:"Nhận lão {kha} làm người đưa thư riêng",f:"hold",wx:"đường thư nằm trong tay ngươi",lx:"lão {kha} nhận bạc hai đầu",rt:"Lão {kha} cúi đầu: từ nay thư nào đi, thư nào đến, đều qua mắt ngươi trước.",rf:"Lão {kha} nhận bạc, rồi vẫn báo hết về {land}."}]},
+ s2:{h:"Vàng tạ ơn và lệnh mới",w:"maid",if:()=>NCW(1)()&&rdPrev()==="win2",t:"{pv} gửi vàng tạ ơn vì mùa thu năm trước. Kèm vàng là lệnh mới, do lão {kha}, lái buôn {land} ở Hội Đồng quán, mang vào: chép cho được bản đồ các kho lương dọc ải. Ngươi đã giúp một lần, cố quốc tin ngươi sẽ giúp lần nữa.",o:[
+  {n:"Nhận vàng, nhận lệnh",f:"home",wx:"cố quốc gửi vàng, tin ngươi trọn vẹn",lx:"nhận vàng là nhận một sợi dây buộc",rt:"Lão {kha} để lại hộp vàng, dặn ngày quay lại."},
   {n:"Trả vàng, im lặng",f:"court",wx:"tay sạch",lx:"{pv} giận, cố quốc thôi tin",rt:"Hộp vàng theo đoàn buôn về nước, nguyên niêm."},
-  {n:"Nhận vàng, khất lệnh",f:"hold",wx:"có vàng mà chưa phải làm gì",lx:"lão Kha thấy ngươi dùng dằng",rt:"Lão Kha gật đầu: “Công chúa cứ thong thả.”",rf:"Lão Kha cười nhạt: “Vàng không chờ lâu.”"}]},
- s3:{h:"Thư vẫn đến",w:"maid",if:NCW(0),t:"Từ mùa thu năm ấy, ngoài cung ngươi lúc nào cũng có một thị vệ đứng xa xa. Vậy mà thư {pv} vẫn đến, qua tay lão Kha, lái buôn {land} ở Hội Đồng quán: “Đừng sợ. Kẻ đã bị nghi rồi là kẻ người ta thôi canh.”",o:[
+  {n:"Nhận vàng, khất lệnh",f:"hold",wx:"có vàng mà chưa phải làm gì",lx:"lão {kha} thấy ngươi dùng dằng",rt:"Lão {kha} gật đầu: “Công chúa cứ thong thả.”",rf:"Lão {kha} cười nhạt: “Vàng không chờ lâu.”"}]},
+ s3:{h:"Thư vẫn đến",w:"maid",if:NCW(0),t:"Từ mùa thu năm ấy, ngoài cung ngươi lúc nào cũng có một thị vệ đứng xa xa. Vậy mà thư {pv} vẫn đến, qua tay lão {kha}, lái buôn {land} ở Hội Đồng quán: “Đừng sợ. Kẻ đã bị nghi rồi là kẻ người ta thôi canh.”",o:[
   {n:"Trình thư để rửa nghi",f:"court",wx:"Hoàng thượng bớt nghi",lx:"ngài hỏi vì sao thư vẫn lọt vào",rt:"Hoàng thượng đọc, rồi bảo người thôi đứng ngoài cung ngươi.",rf:"Hoàng thượng cho canh cung ngươi chặt hơn."},
   {n:"Đốt thư, cắt đường",f:"court",wx:"không còn dấu",lx:"cố quốc sẽ tìm đường khác, khó đoán hơn",rt:"Thư thành tro trong lò hương."},
-  {n:"Hồi thư bằng mật ngữ thuở nhỏ",f:"hold",wx:"thư đi mà không ai đọc được",lx:"chữ lạ bị chặn thì càng thêm nghi",rt:"Lão Kha giấu thư trong bao trà, ra cửa thành êm ả.",rf:"Thị vệ giữ bao trà lại một đêm."}]},
- s4:{h:"Ngựa mới từ {land}",w:"emp",if:BDW(1),t:"Tiếng nữ kỵ của ngươi về đến {land}. {pv} gửi sang mười con ngựa quý dâng Hoàng thượng, người dắt ngựa là lão Kha, sau đó trọ lại Hội Đồng quán. Trong bờm con ngựa đầu đàn có tết một cuộn lụa: “Con đã cưỡi ngựa bên vua Đại Hy. Hãy cho ta biết quân mã Đại Hy đóng ở những ải nào.”",o:[
+  {n:"Hồi thư bằng mật ngữ thuở nhỏ",f:"hold",wx:"thư đi mà không ai đọc được",lx:"chữ lạ bị chặn thì càng thêm nghi",rt:"Lão {kha} giấu thư trong bao trà, ra cửa thành êm ả.",rf:"Thị vệ giữ bao trà lại một đêm."}]},
+ s4:{h:"Ngựa mới từ {land}",w:"emp",if:BDW(1),t:"Tiếng nữ kỵ của ngươi về đến {land}. {pv} gửi sang mười con ngựa quý dâng Hoàng thượng, người dắt ngựa là lão {kha}, sau đó trọ lại Hội Đồng quán. Trong bờm con ngựa đầu đàn có tết một cuộn lụa: “Con đã cưỡi ngựa bên vua Đại Hy. Hãy cho ta biết quân mã Đại Hy đóng ở những ải nào.”",o:[
   {n:"Dâng cả cuộn lụa lên Hoàng thượng",f:"court",wx:"ngài thấy ngươi không giấu",lx:"triều thần bàn tán: ngựa {land} mang cả thư",rt:"Hoàng thượng cười: “Ngựa thì trẫm nhận, thư thì nàng giữ lòng là được.”",rf:"Hoàng thượng sai Thượng tứ viện khám kỹ cả mười con ngựa."},
   {n:"Đốt lụa, nhận ngựa",f:"court",wx:"không để lại dấu",lx:"{pv} chờ mãi không thấy hồi âm",rt:"Cuộn lụa cháy trong lò sưởi chuồng ngựa."},
-  {n:"Giữ lão Kha lại làm người đưa thư",f:"hold",wx:"đường thư nằm trong tay ngươi",lx:"một người lạ đi lại giữa cung và Hội Đồng quán",rt:"Lão Kha nhận lời: thư nào đi, đều qua tay ngươi trước.",rf:"Lão Kha nhận bạc, rồi vẫn báo hết về {land}."}]},
- s5:{h:"Người giữ chuồng ở Thượng tứ viện",w:"maid",if:BDW(0),t:"Đàn ngựa hồi môn của ngươi nay ở trong chuồng Đại Hy, chẳng ai nhớ chủ của chúng. Nhưng một người giữ chuồng ở Thượng tứ viện vốn là người {land}. Y lén đưa ngươi cuộn lụa của {pv} và chỉ đường: thư từ nay đi qua lão Kha, lái buôn trọ ở Hội Đồng quán.",o:[
+  {n:"Giữ lão {kha} lại làm người đưa thư",f:"hold",wx:"đường thư nằm trong tay ngươi",lx:"một người lạ đi lại giữa cung và Hội Đồng quán",rt:"Lão {kha} nhận lời: thư nào đi, đều qua tay ngươi trước.",rf:"Lão {kha} nhận bạc, rồi vẫn báo hết về {land}."}]},
+ s5:{h:"Người giữ chuồng ở Thượng tứ viện",w:"maid",if:BDW(0),t:"Đàn ngựa hồi môn của ngươi nay ở trong chuồng Đại Hy, chẳng ai nhớ chủ của chúng. Nhưng một người giữ chuồng ở Thượng tứ viện vốn là người {land}. Y lén đưa ngươi cuộn lụa của {pv} và chỉ đường: thư từ nay đi qua lão {kha}, lái buôn trọ ở Hội Đồng quán.",o:[
   {n:"Trình cuộn lụa lên Hoàng thượng",f:"court",wx:"ngài thấy ngươi một lòng",lx:"người giữ chuồng bị bắt, cố quốc biết ngươi trình thư",rt:"Hoàng thượng đọc, rồi chỉ sai người đổi kẻ giữ chuồng sang việc khác.",rf:"Hoàng thượng hỏi lại: “Ngựa của nàng còn mang theo gì nữa?”"},
   {n:"Đốt lụa, dặn y đừng đến nữa",f:"court",wx:"không còn dấu",lx:"cố quốc sẽ tìm đường khác",rt:"Người giữ chuồng cúi đầu lui ra."},
-  {n:"Hồi thư qua lão Kha bằng mật ngữ",f:"hold",wx:"thư đi mà không ai đọc được",lx:"chữ lạ bị chặn thì càng thêm nghi",rt:"Thư giấu trong bao cỏ khô, ra khỏi kinh êm ả.",rf:"Thị vệ giữ bao cỏ lại một đêm."}]},
- c1:{h:"Lão Kha ra giá",w:"maid",t:"Lão Kha nhắn vào: đường thư cần tiền lót tay lính gác cửa Tây Hoa và người đánh xe. Mỗi mùa một khoản, thiếu thì thư nằm lại.",o:[
-  {n:"Trả đủ, dặn lão giữ miệng",wx:"đường thư êm",lx:"bạc ra mỗi mùa",rt:"Lão Kha nhận bạc, lính gác thôi hỏi han."},
+  {n:"Hồi thư qua lão {kha} bằng mật ngữ",f:"hold",wx:"thư đi mà không ai đọc được",lx:"chữ lạ bị chặn thì càng thêm nghi",rt:"Thư giấu trong bao cỏ khô, ra khỏi kinh êm ả.",rf:"Thị vệ giữ bao cỏ lại một đêm."}]},
+ c1:{h:"Lão {kha} ra giá",w:"maid",t:"Lão {kha} nhắn vào: đường thư cần tiền lót tay lính gác cửa Tây Hoa và người đánh xe. Mỗi mùa một khoản, thiếu thì thư nằm lại.",o:[
+  {n:"Trả đủ, dặn lão giữ miệng",wx:"đường thư êm",lx:"bạc ra mỗi mùa",rt:"Lão {kha} nhận bạc, lính gác thôi hỏi han."},
   {n:"Cho cung nữ thân tín tự đi đường riêng",wx:"không phải qua tay ai",lx:"cung nữ bị hỏi ở cửa cung",rt:"{maid} tìm được một lối qua phòng giặt.",rf:"{maid} bị thái giám gác cửa giữ lại hỏi chuyện."},
-  {n:"Bảo lão tự lo lấy",wx:"không tốn gì",lx:"lão Kha báo về {land} rằng ngươi keo kiệt",rt:"Lão Kha im lặng mấy ngày rồi vẫn đến."}]},
+  {n:"Bảo lão tự lo lấy",wx:"không tốn gì",lx:"lão {kha} báo về {land} rằng ngươi keo kiệt",rt:"Lão {kha} im lặng mấy ngày rồi vẫn đến."}]},
  c2:{h:"{v} để ý cửa Tây Hoa",w:"v",need:["v"],t:"Người của {v} thấy cung nữ của ngươi ba lần ra cửa Tây Hoa trong một tháng. Nàng ta bắt đầu hỏi han Hội Đồng quán có ai người {land}.",o:[
   {n:"Đổi hẳn lối đi",wx:"{v} mất dấu",lx:"{v} biết ngươi đã đề phòng",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Từ đó thư đi qua phòng giặt, không qua cửa Tây Hoa."},
   {n:"Cho {v} thấy một việc vô hại",wx:"{v} theo nhầm đường",lx:"{v} càng nghi",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0])},rt:"Người của {v} theo cung nữ ra chợ, chỉ thấy nàng mua chỉ thêu.",rf:"{v} cười: “Mua chỉ thêu mà phải đi ba lần?”"},
   {n:"Mời {v} sang uống trà, nói chuyện quê nhà",wx:"{v} bớt tò mò",lx:"{v} thấy ngươi chột dạ",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} nghe ngươi kể chuyện quê, rồi thôi hỏi.",rf:"{v} uống trà, mắt không rời cung nữ của ngươi."}]},
- t1:{h:"Bản đồ kho lương",w:"emp",t:"Lão Kha nhắn lệnh thật của {pv}: chép cho được các kho lương dọc ải. Bản đồ ấy nằm trong ngự thư phòng, nơi ngươi thỉnh thoảng vào mài mực cho Hoàng thượng.",o:[
+ t1:{h:"Bản đồ kho lương",w:"emp",t:"Lão {kha} nhắn lệnh thật của {pv}: chép cho được các kho lương dọc ải. Bản đồ ấy nằm trong ngự thư phòng, nơi ngươi thỉnh thoảng vào mài mực cho Hoàng thượng.",o:[
   {n:"Ghi nhớ thật",f:"home",wx:"cố quốc có tin thật",lx:"bị bắt gặp đứng trước án",rt:"Ngươi nhớ được năm kho lớn.",rf:"Hoàng thượng quay lại, thấy ngươi nhìn bản đồ."},
   {n:"Ghi nhớ, rồi sửa đi khi chép",f:"double",wx:"cố quốc tin mà Đại Hy không thiệt",lx:"tin sai bị nhận ra",rt:"Ngươi chép một bản đồ nửa thật nửa giả.",rf:"Ngươi chép vội, nét sửa còn lộ."},
-  {n:"Không nhìn, báo lão Kha là không vào được",f:"court",wx:"tay sạch",lx:"{pv} cho là ngươi lười việc nước",rt:"Ngươi chỉ mài mực, mắt nhìn xuống nghiên."}]},
- x1:{h:"Đoàn buôn rời kinh",w:"maid",t:"Cuối tháng, đoàn buôn của lão Kha rời kinh. Thư gửi {pv} phải đi theo đoàn ấy, hoặc không đi. Lính cửa thành mấy hôm nay khám xe kỹ hơn thường lệ.",o:[
-  {n:"Gửi bản tin do ngươi chọn từng chữ",e:["win","lose"],rt:"{pv} nhận thư, tin con gái. Lão Kha từ nay chỉ chuyển thư của ngươi.",rf:"Lính cửa thành khám xe, một tờ thư rơi ra. Lão Kha chạy thoát, nhưng cấm quân giữ tờ thư."},
+  {n:"Không nhìn, báo lão {kha} là không vào được",f:"court",wx:"tay sạch",lx:"{pv} cho là ngươi lười việc nước",rt:"Ngươi chỉ mài mực, mắt nhìn xuống nghiên."}]},
+ x1:{h:"Đoàn buôn rời kinh",w:"maid",t:"Cuối tháng, đoàn buôn của lão {kha} rời kinh. Thư gửi {pv} phải đi theo đoàn ấy, hoặc không đi. Lính cửa thành mấy hôm nay khám xe kỹ hơn thường lệ.",o:[
+  {n:"Gửi bản tin do ngươi chọn từng chữ",e:["win","lose"],rt:"{pv} nhận thư, tin con gái. Lão {kha} từ nay chỉ chuyển thư của ngươi.",rf:"Lính cửa thành khám xe, một tờ thư rơi ra. Lão {kha} chạy thoát, nhưng cấm quân giữ tờ thư."},
   {n:"Gửi tin thật để {pv} yên lòng",wx:"{pv} tin ngươi, tin từ cố quốc về đến tay ngươi trước",e:["mid","lose"],rt:"Thư thật về đến {land}. {pv} yên lòng, còn ngươi thì mang thêm một điều phải giấu.",rf:"Lính cửa thành khám xe, tờ thư thật rơi vào tay cấm quân."},
   {n:"Không gửi gì, để đoàn đi tay không",e:"mid",lx:"{pv} chờ trong im lặng",rt:"Đoàn buôn ra khỏi cửa thành, không mang theo một chữ của ngươi."}]}},
- E:{win:{tag:"Đường thư trong tay ngươi",w:"maid",t:"Thư nào về {land}, thư nào đến cung ngươi, đều qua tay lão Kha, và lão Kha chỉ nghe ngươi. Cố quốc biết gì, từ nay do ngươi định."},
+ E:{win:{tag:"Đường thư trong tay ngươi",w:"maid",t:"Thư nào về {land}, thư nào đến cung ngươi, đều qua tay lão {kha}, và lão {kha} chỉ nghe ngươi. Cố quốc biết gì, từ nay do ngươi định."},
   mid:{tag:"Sợi dây còn đó",t:"Đoàn buôn đã đi. Cố quốc chưa giận, Đại Hy chưa biết, nhưng sợi dây giữa ngươi và {land} vẫn còn nguyên đó."},
   lose:{tag:"Một tờ thư lọt vào tay cấm quân",w:"emp",t:"Cấm quân giữ một tờ thư không ký tên, chữ viết như chữ người trong cung. Chưa ai nói ra, nhưng Hoàng thượng đã cho người đọc nó.",go:(_A,G)=>e67bien(G[0])}}});
 
-rdDef("nc_gian",6,{t:"Tấm lộ dẫn",w:"maid",sj:"rương hàng của lão Kha",cast(A){return rdCast(A,["v"])},
- g:"Lão Kha trở lại kinh với đoàn buôn mới, nhưng bị giữ ở cửa Chính Dương: thiếu lộ dẫn của bộ Lễ, hàng sẽ bị khám đến đáy rương. Trong một rương có thư của {pv}. Trước rằm tháng này phải có lộ dẫn, hoặc rương ấy phải biến mất.",
+rdDef("nc_gian",6,{t:"Tấm lộ dẫn",w:"maid",sj:"rương hàng của lão {kha}",cast(A){return rdCast(A,["v"])},
+ g:"Lão {kha} trở lại kinh với đoàn buôn mới, nhưng bị giữ ở cửa Chính Dương: thiếu lộ dẫn của bộ Lễ, hàng sẽ bị khám đến đáy rương. Trong một rương có thư của {pv}. Trước rằm tháng này phải có lộ dẫn, hoặc rương ấy phải biến mất.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Lão Kha cầu cứu",w:"maid",if:RDW(1),t:"Lão Kha, nay chỉ nghe ngươi, nhắn vào cung qua cung nữ: đoàn xe bị giữ ngoài cửa Chính Dương, lính gác hẹn đến rằm sẽ mở rương. Lão không sợ mất hàng, chỉ sợ mất đầu.",o:[
-  {n:"Hứa lo cho lão",wx:"lão Kha yên lòng, giữ miệng",lx:"hứa rồi thì phải làm cho được",rt:"Lão Kha nhắn lại một chữ: “Chờ.”"},
-  {n:"Bảo lão tự đốt rương",wx:"thư cháy, không còn dấu",lx:"bồi hàng cho lão",rt:"Lão Kha gật đầu, nhưng xin ngươi bồi một nửa giá hàng."},
+ B:{s1:{h:"Lão {kha} cầu cứu",w:"maid",if:RDW(1),t:"Lão {kha}, nay chỉ nghe ngươi, nhắn vào cung qua cung nữ: đoàn xe bị giữ ngoài cửa Chính Dương, lính gác hẹn đến rằm sẽ mở rương. Lão không sợ mất hàng, chỉ sợ mất đầu.",o:[
+  {n:"Hứa lo cho lão",wx:"lão {kha} yên lòng, giữ miệng",lx:"hứa rồi thì phải làm cho được",rt:"Lão {kha} nhắn lại một chữ: “Chờ.”"},
+  {n:"Bảo lão tự đốt rương",wx:"thư cháy, không còn dấu",lx:"bồi hàng cho lão",rt:"Lão {kha} gật đầu, nhưng xin ngươi bồi một nửa giá hàng."},
   {n:"Dò xem ai ra lệnh giữ xe",wx:"biết kẻ đứng sau",lx:"lộ ra ngươi quan tâm đến một đoàn buôn",rt:"Lệnh giữ xe không phải của bộ Lễ, mà của một viên quan giữ cửa.",rf:"Không ai dám nói."}]},
- s2:{h:"Lại bị giữ ở cửa thành",w:"maid",if:RDW(0),t:"Lần trước đường thư suýt đứt. Lần này đoàn buôn của lão Kha bị giữ ngay ở cửa Chính Dương, lính gác hẹn đến rằm sẽ mở rương. Lão nhắn vào: “Nếu rương mở, lão không chết một mình.”",o:[
-  {n:"Nhắn lại: lão sẽ không chết",wx:"lão Kha tạm yên",lx:"lão Kha nghe ra ngươi chỉ hứa",rt:"Lão Kha thôi dọa.",rf:"Lão Kha nhắn lại lời dọa lần thứ hai."},
-  {n:"Gửi bạc để lão lo lót",wx:"có người lo việc ở cửa thành",lx:"bạc của ngươi nằm trong tay lão",rt:"Lão Kha nhận bạc, lính gác hoãn mở rương."},
+ s2:{h:"Lại bị giữ ở cửa thành",w:"maid",if:RDW(0),t:"Lần trước đường thư suýt đứt. Lần này đoàn buôn của lão {kha} bị giữ ngay ở cửa Chính Dương, lính gác hẹn đến rằm sẽ mở rương. Lão nhắn vào: “Nếu rương mở, lão không chết một mình.”",o:[
+  {n:"Nhắn lại: lão sẽ không chết",wx:"lão {kha} tạm yên",lx:"lão {kha} nghe ra ngươi chỉ hứa",rt:"Lão {kha} thôi dọa.",rf:"Lão {kha} nhắn lại lời dọa lần thứ hai."},
+  {n:"Gửi bạc để lão lo lót",wx:"có người lo việc ở cửa thành",lx:"bạc của ngươi nằm trong tay lão",rt:"Lão {kha} nhận bạc, lính gác hoãn mở rương."},
   {n:"Cắt đứt với lão",wx:"không dính thêm",lx:"rương mở thì không ai đỡ ngươi",rt:"Ngươi không hồi âm."}]},
  c1:{h:"Lộ dẫn của bộ Lễ",w:"emp",t:"Lộ dẫn cho đoàn buôn ngoại quốc do bộ Lễ cấp. Một chủ sự nói được việc, nhưng y muốn có người đứng tên bảo lãnh.",o:[
-  {n:"Gửi bạc qua lão Kha mua lộ dẫn",f:"pass",wx:"có giấy trước rằm",lx:"chủ sự đòi thêm bạc, và giữ tên ngươi trong sổ",rt:"Chủ sự đóng dấu, không hỏi thêm.",rf:"Chủ sự nhận bạc rồi đòi thêm."},
+  {n:"Gửi bạc qua lão {kha} mua lộ dẫn",f:"pass",wx:"có giấy trước rằm",lx:"chủ sự đòi thêm bạc, và giữ tên ngươi trong sổ",rt:"Chủ sự đóng dấu, không hỏi thêm.",rf:"Chủ sự nhận bạc rồi đòi thêm."},
   {n:"Xin Hoàng thượng ân cho thương nhân quê nhà",f:"pass",wx:"lộ dẫn đến từ ân vua",lx:"Hoàng thượng nhớ tên đoàn buôn này",rt:"Hoàng thượng phẩy bút: “Cho họ đi lại dễ hơn.”",rf:"Hoàng thượng bảo: “Việc của bộ Lễ, nàng đừng xen.”"},
   {n:"Không đứng tên ai",wx:"không để lại dấu",lx:"không có giấy",rt:"Ngươi để mặc bộ Lễ."}]},
  c2:{h:"Viên quan giữ cửa",w:"v",need:["v"],t:"Viên quan giữ cửa Chính Dương là anh họ của {v}. Hắn đã báo về cung nàng ta: rương thứ ba của đoàn buôn {land} có mùi mực mới.",o:[
@@ -89,12 +89,12 @@ rdDef("nc_gian",6,{t:"Tấm lộ dẫn",w:"maid",sj:"rương hàng của lão Kh
   {n:"Gặp {v} dàn xếp",wx:"hai cung tạm yên",lx:"{v} biết ngươi có điều phải giấu",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} nói: “Một rương hàng thôi mà.” Rồi cho người dặn anh họ.",rf:"{v} cười: “Thì ra có thật.”"}]},
  t1:{h:"Rương thứ ba",w:"maid",t:"Rương thứ ba nằm trong sân cửa thành, có lính canh đêm. Thư của {pv} khâu dưới lớp vải lót.",o:[
   {n:"Cho người lẻn vào đổi lớp lót",wx:"rương sạch trước rằm",lx:"người của ngươi bị bắt gặp",rt:"Lớp lót mới, thư cũ đã nằm trong tay áo cung nữ.",rf:"Lính canh hô lên, người của ngươi chạy thoát mà để lại dấu giày."},
-  {n:"Gửi lão Kha mật ngữ đổi chữ trong thư",wx:"thư có bị đọc cũng thành thư nhà",lx:"chữ đổi vụng, càng lạ",rt:"Lão Kha bôi bỏ mấy dòng, thư chỉ còn lời hỏi thăm.",rf:"Lão Kha không kịp sửa."},
+  {n:"Gửi lão {kha} mật ngữ đổi chữ trong thư",wx:"thư có bị đọc cũng thành thư nhà",lx:"chữ đổi vụng, càng lạ",rt:"Lão {kha} bôi bỏ mấy dòng, thư chỉ còn lời hỏi thăm.",rf:"Lão {kha} không kịp sửa."},
   {n:"Để nguyên, tin vào niêm",wx:"không động thì không lộ",lx:"rương mở là hết đường",rt:"Ngươi chờ đến rằm."}]},
  x1:{h:"Ngày rằm",w:"maid",t:"Rằm đến. Viên quan giữ cửa cho mở rương trước mặt dân buôn. Ngươi chỉ còn một nước đi trước giờ Thìn.",o:[
   {n:"Đưa lộ dẫn ra trước giờ khám",e:["win","lose"],rt:"Lộ dẫn đến kịp. Xe qua cửa, rương không ai mở.",rf:"Lộ dẫn đến muộn nửa khắc. Rương đã mở."},
   {n:"Tự đến trình Hoàng thượng: rương có thư nhà",e:["win","mid"],rt:"Hoàng thượng cười: “Thư nhà thì cứ để nàng đọc.” Ngài sai trả rương nguyên vẹn.",rf:"Hoàng thượng cho mở rương trước mặt ngài; thư chỉ còn lời thăm hỏi, nhưng ngài nhớ."},
-  {n:"Bảo lão Kha đốt rương ngay trong đêm",e:"mid",lx:"mất hàng, mất thư, {pv} không có tin",rt:"Lửa cháy một góc sân cửa thành. Lão Kha chịu phạt vì bất cẩn."}]}},
+  {n:"Bảo lão {kha} đốt rương ngay trong đêm",e:"mid",lx:"mất hàng, mất thư, {pv} không có tin",rt:"Lửa cháy một góc sân cửa thành. Lão {kha} chịu phạt vì bất cẩn."}]}},
  E:{win:{tag:"Rương qua cửa, thư về tay",w:"maid",t:"Thư của {pv} đến tay ngươi nguyên niêm. Viên quan giữ cửa mất một mẻ, và ai cũng thấy: đoàn buôn {land} có người che chở.",go:(A,G)=>{rdOan(A,"v",G[0]);return""}},
   mid:{tag:"Rương không còn gì",t:"Rương qua cửa, nhưng thư không còn. Đường thư chưa đứt, cũng chưa yên."},
   lose:{tag:"Rương bị mở trước dân buôn",w:"v",t:"Rương thứ ba bị mở. Thư chỉ còn vài dòng nhòe, không ai đọc ra là gì, nhưng cả kinh thành bàn chuyện đoàn buôn {land} giấu thư. {v} nghe trước tiên.",go:(A,G)=>{rdOan(A,"v",G[0]);return""}}}});
@@ -111,7 +111,7 @@ rdDef("nc_gian",7,{t:"Mắt của Hoàng thượng",w:"emp",sj:"lời {v} dâng 
   {n:"Sai người mang canh đến Dưỡng Tâm điện",wx:"ngài nhớ ngươi",lx:"canh bị trả về",rt:"Hoàng thượng cho gọi ngươi đến.",rf:"Canh nguội ngoài cửa điện."},
   {n:"Đối đãi tử tế với thị vệ",wx:"thị vệ báo lên những lời tốt",lx:"bị nói là mua chuộc lính canh",rt:"Thị vệ trưởng nhận chén trà nóng, gật đầu."}]},
  c1:{h:"Cung nữ bị gọi đi hỏi",w:"maid",t:"Thị vệ gọi {maid} đi hỏi chuyện: ai ra cửa Tây Hoa, ai gặp người Hội Đồng quán.",o:[
-  {n:"Dặn nàng nói thật những gì vô hại",wx:"lời khai sạch",lx:"lời thật cũng có thể bị bóp méo",rt:"{maid} về, kể lại từng câu, không sót một câu nào nguy.",rf:"{maid} lỡ lời nhắc đến lão Kha."},
+  {n:"Dặn nàng nói thật những gì vô hại",wx:"lời khai sạch",lx:"lời thật cũng có thể bị bóp méo",rt:"{maid} về, kể lại từng câu, không sót một câu nào nguy.",rf:"{maid} lỡ lời nhắc đến lão {kha}."},
   {n:"Xin Hoàng hậu cho nàng được miễn hỏi",need:["hh"],wx:"cung nữ không bị hỏi",lx:"Hoàng hậu biết ngươi có điều lo",rt:"Hoàng hậu nói một câu, thị vệ thôi gọi.",rf:"Hoàng hậu bảo: “Không có gì thì sợ gì hỏi.”"},
   {n:"Để nàng tự đáp",wx:"không dạy ai nói dối",lx:"nàng run, nói lộn xộn",rt:"{maid} đáp ngắn, thị vệ ghi rồi cho về."}]},
  c2:{h:"{v} xin khám cung ngươi",w:"v",need:["v"],t:"{v} quỳ trước Hoàng thượng, xin cho khám cung ngươi “để rửa tiếng cho tỷ tỷ”.",o:[
@@ -119,7 +119,7 @@ rdDef("nc_gian",7,{t:"Mắt của Hoàng thượng",w:"emp",sj:"lời {v} dâng 
   {n:"Tự mở cửa cung mời khám",wx:"tỏ lòng trong sạch",lx:"bị lục tung trước mắt mọi người",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Khám cả ngày không thấy gì. {v} mất mặt.",rf:"Khám thấy một bức thư mẹ ngươi viết, chữ {land}, ai cũng nhìn."},
   {n:"Nhờ người nói xấu nhà {v} một câu",wx:"{v} phải lo cho mình",lx:"Hoàng thượng chán chuyện hai cung",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} bận chạy tội cho nhà, thôi nhắc đến ngươi.",rf:"Lời đồn quay về chính ngươi."}]},
  t1:{h:"Hoàng thượng kể chuyện biên ải",w:"emp",t:"Đêm khuya, Hoàng thượng nói như vô tình: “Tháng sau trẫm rút một vạn quân ở ải giáp {land} về kinh.” Ngươi biết ngài đang thử.",o:[
-  {n:"Giữ kín, không báo lão Kha",f:"court",wx:"ngài thấy tin không lọt",lx:"nếu là thật, cố quốc lỡ một tin lớn",rt:"Một tháng sau, không ai ngoài cung nhắc chuyện ấy."},
+  {n:"Giữ kín, không báo lão {kha}",f:"court",wx:"ngài thấy tin không lọt",lx:"nếu là thật, cố quốc lỡ một tin lớn",rt:"Một tháng sau, không ai ngoài cung nhắc chuyện ấy."},
   {n:"Báo về {land} kèm lời: tin này là bẫy",f:"double",wx:"cố quốc tin ngươi mà không mắc bẫy",lx:"tin vẫn đi, ngài vẫn biết",rt:"{pv} không động binh. Hoàng thượng chẳng thấy gì lọt ra.",rf:"Thư đi, và ngài biết có thư đi."},
   {n:"Hỏi ngài sao nói với thiếp",wx:"ngài thích sự thẳng thắn",lx:"ngài cho là ngươi quá để tâm",rt:"Hoàng thượng cười: “Không thật. Trẫm chỉ muốn xem nàng.”",rf:"Hoàng thượng không đáp."}]},
  x1:{h:"Đêm khám cung",w:"emp",t:"Canh ba, tổng quản Nội vụ phủ dẫn thái giám đến cửa cung ngươi với khẩu dụ: khám thư từ. Hoàng thượng không đến, nhưng ngài sẽ đọc tờ tấu sáng mai.",o:[
@@ -139,7 +139,7 @@ rdDef("nc_gian",8,{t:"Hai lòng",w:"emp",sj:"tin về đường hành quân",cas
   {n:"Hỏi khéo đường quân",f:"home",wx:"biết được ải nào",lx:"ngài thấy ngươi dò",rt:"Ngài vẽ ngón tay lên án: ải phía tây.",rf:"Ngài nhìn ngươi: “Nàng hỏi cho ai?”"}]},
  s2:{h:"Ngài không kể nữa",w:"emp",if:RDW(0),t:"Từ đêm khám cung, Hoàng thượng không nhắc một lời việc biên ải ở cung ngươi. Tin đánh trả {land} ngươi nghe từ miệng cung nữ.",o:[
   {n:"Hỏi Hoàng hậu",need:["hh"],wx:"biết hướng gió",lx:"Hoàng hậu thấy ngươi để tâm quá",rt:"Hoàng hậu nói một câu, đủ để ngươi hiểu.",rf:"Hoàng hậu chỉ cười."},
-  {n:"Chờ lão Kha đưa tin ngoài thành",wx:"biết tin ngoài triều",lx:"tin chậm và mua bằng bạc",rt:"Lão Kha nghe được ở chợ ngựa: quân đang dồn về phía tây."},
+  {n:"Chờ lão {kha} đưa tin ngoài thành",wx:"biết tin ngoài triều",lx:"tin chậm và mua bằng bạc",rt:"Lão {kha} nghe được ở chợ ngựa: quân đang dồn về phía tây."},
   {n:"Đóng cửa, thắp hương cầu cho cả hai nước",wx:"lòng yên",lx:"không biết gì, không làm gì",rt:"Khói hương bay qua song cửa."}]},
  c1:{h:"Sứ thần {land} vào triều",w:"emp",t:"Sứ thần {land} là một lão thần từng bế ngươi thuở nhỏ. Ông xin một buổi gặp “để chuyển lời {mh}”; theo lệ, sứ thần chỉ gặp phi tần trong buổi gia lễ ở nội điện.",o:[
   {n:"Xin Hoàng thượng cho gặp trong buổi gia lễ ở nội điện, có ngài ngồi đó",f:"court",wx:"không có gì giấu",lx:"sứ thần không nói được điều cần nói",rt:"Sứ thần chỉ nói chuyện {mh}, mắt nhìn ngươi đầy ý."},
@@ -149,11 +149,11 @@ rdDef("nc_gian",8,{t:"Hai lòng",w:"emp",sj:"tin về đường hành quân",cas
   {n:"Bắt kẻ theo dõi",wx:"{v} mất tai mắt",lx:"ầm ĩ trước mặt sứ thần",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Kẻ theo dõi khai là người của {v}.",rf:"Kẻ theo dõi chạy thoát."},
   {n:"Cho kẻ ấy thấy một cảnh vô hại",wx:"{v} tâu sai",lx:"{v} thêu dệt",rt:"{v} tâu rằng sứ thần chỉ dâng ngươi một gói trà.",rf:"{v} vẫn tâu có khăn trao tay."},
   {n:"Mặc kệ",wx:"không động",lx:"{v} tự do thêu dệt",rt:"Ngươi không để ý."}]},
- t1:{h:"Thư {pv} viết tay",w:"maid",t:"Lão Kha đưa vào bức thư chính tay {pv} viết: “Con gái. Nếu quân Đại Hy qua ải phía tây, ta mất ba vạn người. Ta không xin con phản ai. Ta chỉ xin một chữ.”",o:[
-  {n:"Đốt thư trước mặt lão Kha",f:"court",wx:"dứt khoát",lx:"lòng đau, cố quốc giận",rt:"Lão Kha nhìn tro bay, không nói gì."},
+ t1:{h:"Thư {pv} viết tay",w:"maid",t:"Lão {kha} đưa vào bức thư chính tay {pv} viết: “Con gái. Nếu quân Đại Hy qua ải phía tây, ta mất ba vạn người. Ta không xin con phản ai. Ta chỉ xin một chữ.”",o:[
+  {n:"Đốt thư trước mặt lão {kha}",f:"court",wx:"dứt khoát",lx:"lòng đau, cố quốc giận",rt:"Lão {kha} nhìn tro bay, không nói gì."},
   {n:"Giữ thư, chưa trả lời",wx:"còn đường chọn",lx:"giữ thư là giữ lửa",rt:"Ngươi giấu thư trong hộp trang điểm."},
   {n:"Viết chữ ấy, nhưng là chữ sai",f:"double",wx:"cố quốc tin mà quân Đại Hy không bị phục",lx:"chữ sai có thể làm chết người khác",rt:"Ngươi viết: “Đông.”",rf:"Tay ngươi run, nét chữ nhòe."}]},
- x1:{h:"Bức thư cuối mùa",w:"maid",t:"Đêm trước ngày quân xuất ải, lão Kha chờ ngoài cửa Tây Hoa. Ngươi viết, hoặc không viết.",o:[
+ x1:{h:"Bức thư cuối mùa",w:"maid",t:"Đêm trước ngày quân xuất ải, lão {kha} chờ ngoài cửa Tây Hoa. Ngươi viết, hoặc không viết.",o:[
   {n:"Gửi tin giả để {land} lui về giữ chỗ khác",e:["win","lose"],rt:"Quân {land} kéo về phía đông. Quân Đại Hy phạt mấy trại cướp rồi về, không đánh một trận lớn nào.",rf:"{pv} không tin, dồn quân về phía tây. Hai bên đánh một trận đẫm máu."},
   {n:"Gửi tin thật để {land} kịp phòng",e:["mid","lose"],rt:"{land} giữ được ải. Quân Đại Hy về tay không, không ai biết vì sao.",rf:"Tin đến, quân {land} phục kích. Đại Hy thua một trận, và Binh bộ bắt đầu tìm kẽ hở."},
   {n:"Không gửi, xin Hoàng thượng chỉ phạt kẻ cướp",e:["win","mid"],rt:"Hoàng thượng nghe, chỉ phạt mấy trại cướp. Biên ải yên mà không ai phải chết.",rf:"Hoàng thượng không đổi ý. Hai bên đánh nhau ở ải phía tây, ngươi không nhúng tay vào đâu."}]}},
@@ -161,45 +161,45 @@ rdDef("nc_gian",8,{t:"Hai lòng",w:"emp",sj:"tin về đường hành quân",cas
   mid:{tag:"Hai bên đều giữ thế",t:"Biên ải đánh một trận nhỏ rồi thôi. Không bên nào thắng, không bên nào nợ ngươi."},
   lose:{tag:"Máu đổ ở ải phía tây",w:"emp",t:"Hai bên đánh một trận lớn. Ai cũng hỏi: tin quân đi đường nào, sao bên kia lại biết.",go:(_A,G)=>e67bien(G[0])}}});
 
-rdDef("nc_gian",9,{t:"Lão Kha bị bắt",w:"maid",sj:"lão Kha trong ngục Đại Lý tự",cast(A){return rdCast(A,["v"])},
- g:"Binh bộ lần ra đoàn buôn {land} chuyên đi qua ải. Lão Kha bị bắt giải về ngục Đại Lý tự. Mười ngày nữa là phiên thẩm vấn. Lão có thể câm, có thể khai, và tên ngươi nằm ở đầu lưỡi lão.",
+rdDef("nc_gian",9,{t:"Lão {kha} bị bắt",w:"maid",sj:"lão {kha} trong ngục Đại Lý tự",cast(A){return rdCast(A,["v"])},
+ g:"Binh bộ lần ra đoàn buôn {land} chuyên đi qua ải. Lão {kha} bị bắt giải về ngục Đại Lý tự. Mười ngày nữa là phiên thẩm vấn. Lão có thể câm, có thể khai, và tên ngươi nằm ở đầu lưỡi lão.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Kẻ thắc mắc ở Binh bộ",w:"emp",if:RDW(1),t:"Binh đao tránh được, nhưng một Thị lang bộ Binh cứ thắc mắc: vì sao quân {land} lui đúng lúc ấy. Y lần theo các đoàn buôn qua ải, và tìm ra lão Kha.",o:[
+ B:{s1:{h:"Kẻ thắc mắc ở Binh bộ",w:"emp",if:RDW(1),t:"Binh đao tránh được, nhưng một Thị lang bộ Binh cứ thắc mắc: vì sao quân {land} lui đúng lúc ấy. Y lần theo các đoàn buôn qua ải, và tìm ra lão {kha}.",o:[
   {n:"Khen công Thị lang trước Hoàng thượng",wx:"y được thăng, thôi đào sâu",lx:"y thấy ngươi quá quan tâm",rt:"Hoàng thượng thăng Thị lang, điều y sang việc khác.",rf:"Thị lang càng tò mò ai khen mình."},
-  {n:"Để mặc, tin lão Kha câm",wx:"không động thì không lộ",lx:"tin vào miệng một lái buôn",rt:"Ngươi chờ."},
+  {n:"Để mặc, tin lão {kha} câm",wx:"không động thì không lộ",lx:"tin vào miệng một lái buôn",rt:"Ngươi chờ."},
   {n:"Đốt hết thư cũ trong cung",wx:"không còn gì để khám",lx:"mất cả bằng chứng có lợi cho ngươi",rt:"Mọi thư từ {land} thành tro trong một đêm."}]},
- s2:{h:"Tờ thư cũ có chủ",w:"emp",if:RDW(0),t:"Những tờ thư không tên, chuyện khám cung, trận đánh ở ải: Đại Lý tự xếp tất cả lên một án. Lão Kha bị bắt ở chợ ngựa ngoài thành.",o:[
+ s2:{h:"Tờ thư cũ có chủ",w:"emp",if:RDW(0),t:"Những tờ thư không tên, chuyện khám cung, trận đánh ở ải: Đại Lý tự xếp tất cả lên một án. Lão {kha} bị bắt ở chợ ngựa ngoài thành.",o:[
   {n:"Nhờ người hỏi xem ai thẩm án",wx:"biết người cầm án",lx:"lộ ra ngươi quan tâm",rt:"Người thẩm án là một Thiếu khanh tiếng thẳng.",rf:"Không ai dám nói."},
   {n:"Đốt hết thư cũ trong cung",wx:"không còn gì để khám",lx:"mất cả bằng chứng có lợi cho ngươi",rt:"Mọi thư từ {land} thành tro trong một đêm."},
-  {n:"Viết thư về {land} báo tin",wx:"{pv} kịp lo cho người của mình",lx:"thêm một bức thư, thêm một rủi ro",rt:"Thư đi theo đường khác, không qua lão Kha.",rf:"Thư bị chặn ở cửa thành."}]},
- c1:{h:"Ngục Đại Lý tự",w:"maid",t:"Muốn lão Kha biết ngươi chưa bỏ lão, phải có người vào được ngục.",o:[
-  {n:"Lót tay cai ngục",f:"reach",wx:"lão Kha nhận được lời nhắn",lx:"cai ngục nhớ mặt người đưa bạc",rt:"Cai ngục đưa vào một bát cháo, dưới đáy bát có lời nhắn.",rf:"Cai ngục nhận bạc, rồi báo lên trên."},
-  {n:"Xin thái y vào ngục xem bệnh cho phạm nhân ngoại quốc",f:"reach",wx:"lời nhắn đi theo hộp thuốc",lx:"thái y kể với người khác",rt:"Thái y vào ngục, lão Kha nhận hộp thuốc.",rf:"Thái y không được cho vào."},
-  {n:"Không liên lạc",wx:"không để lại dấu",lx:"lão Kha nghĩ ngươi bỏ lão",rt:"Ngươi im lặng."}]},
- c2:{h:"Cơm của {v}",w:"v",need:["v"],t:"Người của {v} đưa cơm vào ngục cho lão Kha, kèm lời hứa: khai ra người trong cung thì được tha về nước.",o:[
+  {n:"Viết thư về {land} báo tin",wx:"{pv} kịp lo cho người của mình",lx:"thêm một bức thư, thêm một rủi ro",rt:"Thư đi theo đường khác, không qua lão {kha}.",rf:"Thư bị chặn ở cửa thành."}]},
+ c1:{h:"Ngục Đại Lý tự",w:"maid",t:"Muốn lão {kha} biết ngươi chưa bỏ lão, phải có người vào được ngục.",o:[
+  {n:"Lót tay cai ngục",f:"reach",wx:"lão {kha} nhận được lời nhắn",lx:"cai ngục nhớ mặt người đưa bạc",rt:"Cai ngục đưa vào một bát cháo, dưới đáy bát có lời nhắn.",rf:"Cai ngục nhận bạc, rồi báo lên trên."},
+  {n:"Xin thái y vào ngục xem bệnh cho phạm nhân ngoại quốc",f:"reach",wx:"lời nhắn đi theo hộp thuốc",lx:"thái y kể với người khác",rt:"Thái y vào ngục, lão {kha} nhận hộp thuốc.",rf:"Thái y không được cho vào."},
+  {n:"Không liên lạc",wx:"không để lại dấu",lx:"lão {kha} nghĩ ngươi bỏ lão",rt:"Ngươi im lặng."}]},
+ c2:{h:"Cơm của {v}",w:"v",need:["v"],t:"Người của {v} đưa cơm vào ngục cho lão {kha}, kèm lời hứa: khai ra người trong cung thì được tha về nước.",o:[
   {n:"Tâu Hoàng thượng có kẻ mua lời khai",wx:"lời khai của lão bị coi là nghi",lx:"vụ án càng lớn",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Hoàng thượng truyền Đại Lý tự cấm người ngoài đưa cơm.",rf:"Hoàng thượng chỉ bảo Đại Lý tự ghi lại."},
-  {n:"Hứa với lão nhiều hơn {v} hứa",wx:"lão Kha không nghe {v}",lx:"lời hứa phải trả bằng bạc",rt:"Lão Kha trả lại bát cơm của người nhà {v}.",rf:"Lão Kha nhận cả hai."},
+  {n:"Hứa với lão nhiều hơn {v} hứa",wx:"lão {kha} không nghe {v}",lx:"lời hứa phải trả bằng bạc",rt:"Lão {kha} trả lại bát cơm của người nhà {v}.",rf:"Lão {kha} nhận cả hai."},
   {n:"Gặp {v}, xin nàng ta dừng tay",wx:"bớt một mũi tên",lx:"{v} biết ngươi đang sợ",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} nhìn ngươi lâu, rồi bảo người thôi đưa cơm.",rf:"{v} cười: “Tỷ tỷ cũng biết sợ.”"}]},
- t1:{h:"Lão Kha nhắn ra",w:"maid",t:"Lão Kha nhắn ra một câu: vợ con lão ở khu người {land} ngoài thành. Nếu ai đó lo cho họ, lão sẽ câm như đá.",o:[
-  {n:"Đưa vợ con lão về {land}",wx:"lão Kha câm",lx:"tốn bạc, thêm người biết chuyện",rt:"Vợ con lão Kha đi theo một đoàn buôn khác trong đêm."},
-  {n:"Hứa suông",wx:"không tốn gì",lx:"lão biết ngươi chỉ hứa",rt:"Lão Kha tạm tin.",rf:"Lão Kha bảo: lời hứa không nuôi được ai."},
+ t1:{h:"Lão {kha} nhắn ra",w:"maid",t:"Lão {kha} nhắn ra một câu: vợ con lão ở khu người {land} ngoài thành. Nếu ai đó lo cho họ, lão sẽ câm như đá.",o:[
+  {n:"Đưa vợ con lão về {land}",wx:"lão {kha} câm",lx:"tốn bạc, thêm người biết chuyện",rt:"Vợ con lão {kha} đi theo một đoàn buôn khác trong đêm."},
+  {n:"Hứa suông",wx:"không tốn gì",lx:"lão biết ngươi chỉ hứa",rt:"Lão {kha} tạm tin.",rf:"Lão {kha} bảo: lời hứa không nuôi được ai."},
   {n:"Nhờ sứ thần {land} lo",wx:"người {land} lo cho người {land}",lx:"thêm một lần gặp sứ thần",rt:"Sứ thần đưa vợ con lão về Hội Đồng quán.",rf:"Sứ thần sợ liên lụy, từ chối."}]},
- x1:{h:"Phiên thẩm vấn",w:"emp",t:"Sáng nay Đại Lý tự thẩm lão Kha. Thiếu khanh hỏi: thư trong rương gửi cho ai trong cung.",o:[
-  {n:"Lo lót để án chỉ còn là tội buôn lậu",e:["win","lose"],rt:"Đại Lý tự tâu lên: lão Kha chỉ là kẻ buôn lậu. Hoàng thượng phê đuổi về nước. Lão đi, không nói thêm một chữ.",rf:"Thiếu khanh nghi có người lo lót, tra ngược: ai đã chạy án cho lão."},
-  {n:"Để lão tự giữ miệng",e:["mid","lose"],rt:"Lão Kha bị đánh ba mươi trượng, vẫn chỉ nói: “Thư nhà của người buôn.”",rf:"Lão Kha ngất đi, tỉnh dậy thì khai một cái tên."},
+ x1:{h:"Phiên thẩm vấn",w:"emp",t:"Sáng nay Đại Lý tự thẩm lão {kha}. Thiếu khanh hỏi: thư trong rương gửi cho ai trong cung.",o:[
+  {n:"Lo lót để án chỉ còn là tội buôn lậu",e:["win","lose"],rt:"Đại Lý tự tâu lên: lão {kha} chỉ là kẻ buôn lậu. Hoàng thượng phê đuổi về nước. Lão đi, không nói thêm một chữ.",rf:"Thiếu khanh nghi có người lo lót, tra ngược: ai đã chạy án cho lão."},
+  {n:"Để lão tự giữ miệng",e:["mid","lose"],rt:"Lão {kha} bị đánh ba mươi trượng, vẫn chỉ nói: “Thư nhà của người buôn.”",rf:"Lão {kha} ngất đi, tỉnh dậy thì khai một cái tên."},
   {n:"Tâu trước: lão chỉ mang thư nhà cho thiếp",e:["win","mid"],rt:"Hoàng thượng cho rằng ngươi thật thà, phê xử lão tội buôn lậu.",rf:"Hoàng thượng cho giữ lão lại, cùng với lời ngươi tâu."}]}},
- E:{win:{tag:"Lão Kha bị đuổi về, không khai",w:"maid",t:"Lão Kha ra khỏi ải với hai vết trượng và một cái miệng kín. Án đóng lại, không có tên ai trong cung."},
-  mid:{tag:"Lão Kha nằm trong ngục",t:"Lão Kha còn sống, còn câm, và còn nằm đó. Ai đến hỏi lão một lần nữa, lão có thể đổi lời."},
-  lose:{tag:"Lão Kha khai ra tên ngươi",w:"emp",t:"Lão Kha khai: thư trong rương gửi cho một vị phi tần người {land}. Không có chữ ký, không có ấn, nhưng ai cũng biết là ai.",go:(A,G)=>{rdOan(A,"v",G[0]);return""}}}});
+ E:{win:{tag:"Lão {kha} bị đuổi về, không khai",w:"maid",t:"Lão {kha} ra khỏi ải với hai vết trượng và một cái miệng kín. Án đóng lại, không có tên ai trong cung."},
+  mid:{tag:"Lão {kha} nằm trong ngục",t:"Lão {kha} còn sống, còn câm, và còn nằm đó. Ai đến hỏi lão một lần nữa, lão có thể đổi lời."},
+  lose:{tag:"Lão {kha} khai ra tên ngươi",w:"emp",t:"Lão {kha} khai: thư trong rương gửi cho một vị phi tần người {land}. Không có chữ ký, không có ấn, nhưng ai cũng biết là ai.",go:(A,G)=>{rdOan(A,"v",G[0]);return""}}}});
 
 rdDef("nc_gian",10,{t:"Đường cùng",w:"emp",sj:"những bức thư trên án Hoàng thượng",cast(A){return rdCast(A,["v"])},
  g:"Hoàng thượng cho bày lên án mọi thứ Đại Lý tự thu được về đoàn buôn {land}. Ngài cho gọi ngươi đến một mình. Nhận, chối, hay lật ngược ván cờ.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Một bức thư còn sót",w:"emp",if:RDW(1),t:"Lão Kha đi rồi, nhưng trong sổ của Đại Lý tự còn sót một bức thư có nét chữ của ngươi. Hoàng thượng cầm nó đến cung ngươi, không mang theo ai.",o:[
+ B:{s1:{h:"Một bức thư còn sót",w:"emp",if:RDW(1),t:"Lão {kha} đi rồi, nhưng trong sổ của Đại Lý tự còn sót một bức thư có nét chữ của ngươi. Hoàng thượng cầm nó đến cung ngươi, không mang theo ai.",o:[
   {n:"Nhận đó là thư nhà",wx:"ngài thấy ngươi không chối",lx:"ngài hỏi thư nhà sao lại đi lối ấy",rt:"Ngài gật đầu chậm rãi.",rf:"Ngài không gật đầu."},
   {n:"Xin ngài đọc hết rồi hẵng hỏi",wx:"ngài đọc thấy toàn lời thăm hỏi",lx:"ngài đọc thấy chữ lạ",rt:"Ngài đọc xong, cười khẽ: “Nàng viết thư nhà dài thật.”",rf:"Ngài dừng ở một dòng, cau mày."},
   {n:"Im lặng chờ ngài nói",wx:"không lỡ lời",lx:"im lặng cũng là một câu trả lời",rt:"Ngài nhìn ngươi rất lâu."}]},
- s2:{h:"Lời khai trên án",w:"emp",if:RDW(0),t:"Hồ sơ Đại Lý tự về lão Kha nằm trên án Hoàng thượng, cạnh mấy bức thư thu từ rương hàng. Thái giám truyền ngươi đến Dưỡng Tâm điện, đi một mình.",o:[
+ s2:{h:"Lời khai trên án",w:"emp",if:RDW(0),t:"Hồ sơ Đại Lý tự về lão {kha} nằm trên án Hoàng thượng, cạnh mấy bức thư thu từ rương hàng. Thái giám truyền ngươi đến Dưỡng Tâm điện, đi một mình.",o:[
   {n:"Thay áo trắng, tháo trâm",wx:"tỏ ý nhận tội trước",lx:"cả cung thấy ngươi như kẻ có tội",rt:"Ngươi đi qua dãy hành lang, không ai dám nhìn."},
   {n:"Mặc lễ phục, giữ dáng",wx:"cả cung thấy ngươi không sợ",lx:"ngài thấy ngươi ngạo",rt:"Ngươi bước vào điện như ngày được sắc phong.",rf:"Ngài nhìn áo ngươi, mím môi."},
   {n:"Gửi trước một lời xin gặp riêng",wx:"ngài cho lui hết người hầu",lx:"ngài để quan Đại Lý tự chờ ngay gian ngoài",rt:"Trong điện chỉ còn ngài và ngươi.",rf:"Thiếu khanh Đại Lý tự đứng chờ ở gian ngoài, cửa không khép."}]},
@@ -259,7 +259,7 @@ RD97L.push(rdRare({a:"nc_gian_11",tag:"Trung hiếu lưỡng toàn",w:"emp",n:"X
  t:"Bức thư ngươi viết, có ấn Đại Hy đóng bên dưới, đến tay {pv} giữa mùa mưa. Ông đọc xong, đốt hết mật lệnh, rồi sai sứ sang xin lập lệ: thư từ hai nước từ nay đi đường quan, và người giữ lệ ấy là ngươi. Hoàng thượng ngự bút bốn chữ, sai treo trước cửa cung ngươi.",
  go:(_A,G)=>e67bien(G[0]),rw:"bienngu",ti:"Trung hiếu lưỡng toàn"}));
 /* ---------- nc_su · Sứ đoàn cố quốc ---------- */
-/* Written ONCE for both country branches: Nam Chiếu (premise nc_su) and Bắc Địch (premise bd_hoa plays these chapters, alias in nc_tail).
+/* Written ONCE for both country branches: Cao Ly (premise nc_su) and Bắc Địch (premise bd_hoa plays these chapters, alias in nc_tail).
    Land words only through tokens {land} {pv} {mh} {quan} {pa} {pb}. Chapter .5 openings: NCW(k) after nc_su .4, BDW(k) after bd_hoa .4.
    {pa} = her elder royal brother (family token, NCL), head of the mission. Story-only NPC: the envoy of {land} (§5.4 row exists); the
    Đại Hy interpreter of Hội Đồng quán (nc_su .4 s2 already names "một thông sự người Đại Hy"; here he is paid by the rival's house).
@@ -512,10 +512,10 @@ rdDef("nc_tuc",5,{t:"Áo váy cố hương",w:"th",sj:"y phục ngươi mặc tr
   {n:"Tặng mẫu thêu cho mọi người",wx:"thành người dẫn lối trong hậu cung",lx:"{v} có cớ nói ngươi kết bè",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Cả hậu cung thêu hoa văn cố hương. {v} tức đến đổ chén trà."},
   {n:"Tự đến Nội vụ phủ xin định lệ",f:"keep",wx:"áo cố hương có chỗ trong lệ cung",lx:"Nội vụ phủ cho là ngươi lên mặt",rt:"Nội vụ phủ chép thêm một dòng: phi tần ngoại quốc được mặc y phục bản quốc ngày thường.",rf:"Tổng quản Nội vụ phủ cười nhạt: “Lệ cung không vì một người mà đổi.”"},
   {n:"Bảo các nàng thôi may",f:"bend",wx:"dập lời tâu của {v}",lx:"người theo ngươi cụt hứng",rt:"Các phi tần cất váy thêu kiểu cố hương vào rương."}]},
- s5:{h:"Áo lông công và lễ mồng Một",w:"v",need:["th"],if:()=>NCW(1)()&&rdPrev()==="r97",t:"Từ điệu múa chim công, ai chê áo cố hương của ngươi là chê Đức Thọ cung, nên không ai dám chê nữa. {v} đổi cách: sai người đi khắp cung hỏi xem sáng mồng Một ngươi có mặc áo lông công vào lạy Thái hậu không, như thể ơn của bà là cái cớ để ngươi lấn lễ.",o:[
-  {n:"Xin Thái hậu chỉ dạy nên mặc gì",f:"keep",wx:"lời Thái hậu chặn miệng mọi người",lx:"Thái hậu thấy ngươi cậy ơn bà",rt:"Thái hậu cười: “Lễ sáng thì phẩm phục. Tối yến, ai gia muốn thấy con chim công.”",rf:"Thái hậu bảo: “Việc áo xống, tự con liệu.”"},
-  {n:"Lễ sáng mặc phẩm phục, giữ áo lông công cho yến tối",f:"bend",wx:"không ai bắt được lỗi",lx:"{v} bảo ngươi không dám dùng ơn Thái hậu",rt:"Ngươi cất áo lông công vào rương, để dành cho yến tối."},
-  {n:"Mặc áo lông công cả buổi lễ",f:"keep",wx:"cả cung nhớ ơn Thái hậu ban cho ngươi",lx:"cả cung, và Thái hậu, cho là ngươi lấn lễ",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0])},rt:"Thái hậu gật đầu khi thấy ngươi; không ai dám nói gì.",rf:"Thái hậu nhíu mày: “Lễ sáng không phải chỗ múa.”"}]},
+ s5:{h:"Áo thêu hạc và lễ mồng Một",w:"v",need:["th"],if:()=>NCW(1)()&&rdPrev()==="r97",t:"Từ điệu hạc vũ, ai chê áo cố hương của ngươi là chê Đức Thọ cung, nên không ai dám chê nữa. {v} đổi cách: sai người đi khắp cung hỏi xem sáng mồng Một ngươi có mặc áo thêu hạc vào lạy Thái hậu không, như thể ơn của bà là cái cớ để ngươi lấn lễ.",o:[
+  {n:"Xin Thái hậu chỉ dạy nên mặc gì",f:"keep",wx:"lời Thái hậu chặn miệng mọi người",lx:"Thái hậu thấy ngươi cậy ơn bà",rt:"Thái hậu cười: “Lễ sáng thì phẩm phục. Tối yến, ai gia muốn thấy con hạc.”",rf:"Thái hậu bảo: “Việc áo xống, tự con liệu.”"},
+  {n:"Lễ sáng mặc phẩm phục, giữ áo thêu hạc cho yến tối",f:"bend",wx:"không ai bắt được lỗi",lx:"{v} bảo ngươi không dám dùng ơn Thái hậu",rt:"Ngươi cất áo thêu hạc vào rương, để dành cho yến tối."},
+  {n:"Mặc áo thêu hạc cả buổi lễ",f:"keep",wx:"cả cung nhớ ơn Thái hậu ban cho ngươi",lx:"cả cung, và Thái hậu, cho là ngươi lấn lễ",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0])},rt:"Thái hậu gật đầu khi thấy ngươi; không ai dám nói gì.",rf:"Thái hậu nhíu mày: “Lễ sáng không phải chỗ múa.”"}]},
  s2:{h:"Thượng y cục chậm tay",w:"maid",if:NCW(0),t:"Từ yến thọ, cả cung gọi ngươi là người ngoài. Thượng y cục viện cớ bận, chưa may lễ phục Nguyên đán cho cung ngươi; chỉ còn hơn một tháng là đến lễ.",o:[
   {n:"Lo lót Thượng y cục",wx:"áo kịp lễ",lx:"cả cung biết ngươi phải đút lót mới có áo",rt:"Ba ngày sau, lễ phục được đưa đến, đường kim đều tăm tắp.",rf:"Thượng y cục nhận bạc, áo vẫn chậm."},
   {n:"Tự tay may lấy",f:"bend",wx:"áo do chính tay ngươi",lx:"mệt người, đường kim chưa khéo",rt:"Ngươi thức mấy đêm liền bên ngọn đèn."},

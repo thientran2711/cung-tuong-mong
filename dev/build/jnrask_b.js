@@ -21,7 +21,7 @@ nc_gian_7:[{k:"emp",h:"Thị vệ đứng ngoài cung {me} đã ba đêm. Hoàng
  o:[["Nhân lúc hầu Hoàng thượng, nói rằng nàng vẫn một lòng","Hoàng thượng hỏi ngược sao ngươi biết rõ lòng người khác"],["Nhờ người thân cận của Hoàng thượng đỡ lời","người thân cận nhận lễ rồi kể lại cho ngài nghe"]]}],
 nc_gian_8:[{k:"do",h:"Từ khi biên ải có chuyện, người của {B} đếm từng lá thư {me} viết. {Me} cần biết ai đang canh cửa sổ của {me}, trước khi {me} phải chọn gửi tin thật hay giả về cố quốc.",
  o:[["Sai người canh xem ai rình cung nàng","người của ngươi bị chính kẻ rình bắt gặp"],["Tự để ý trong những buổi thỉnh an","ngươi hỏi han nhiều quá, cả cung đồn ngươi cũng dính vào"]]}],
-nc_gian_9:[{k:"thu",h:"Lão Kha nằm trong ngục Đại Lý tự, chờ phiên thẩm vấn. {Me} chỉ cần lão nghe được một câu: cứ im lặng, nhà lão sẽ có người lo. {call} có ai ra vào được cửa ngục không?",
+nc_gian_9:[{k:"thu",h:"Lão {kha} nằm trong ngục Đại Lý tự, chờ phiên thẩm vấn. {Me} chỉ cần lão nghe được một câu: cứ im lặng, nhà lão sẽ có người lo. {call} có ai ra vào được cửa ngục không?",
  o:[["Bỏ bạc nhờ thái giám đưa lời vào ngục","cai ngục nhận bạc rồi đem lời nhắn đi bán"],["Nhờ người nhà mình hỏi thăm ở Đại Lý tự","người nhà bị ghi tên là kẻ quen với phạm nhân"]]}],
 nc_gian_10:[{k:"emp",h:"Hoàng thượng đã cho bày hết thư từ lên án, rồi gọi {me} đến một mình. {Me} không xin {call} che tội. {Me} chỉ xin, trước giờ ấy, có người nhắc ngài nhớ những năm {me} đã ở bên ngài.",
  o:[["Hầu Hoàng thượng, nhắc những ngày nàng hầu ngài","Hoàng thượng phật ý, cho rằng ngươi bênh kẻ có tội"],["Dâng lễ nhờ người hầu cận nói giúp một câu","lễ bị trả về, cả cung biết ngươi đứng về phía nàng"]]}],
@@ -288,8 +288,8 @@ add("nc_gian_7",A("che","Thị vệ đứng ngoài cửa, mà trong cung {me} c�
  "Nhận cung nữ cố hương sang hầu cung mình","thị vệ theo nàng ấy sang tận cửa cung ngươi","Bỏ bạc gửi nàng ấy xuống Châm công cục","Châm công cục hỏi gốc gác, nàng ấy bị giữ lại"));
 add("nc_gian_8",A("emp","Hoàng thượng tin {me}, nên kể cả đường hành quân. {Me} không muốn biết thêm một chữ nào nữa. {Call} khéo khuyên ngài đừng bàn việc quân ở cung {me}, để {me} khỏi phải chọn.",
  "Khuyên Hoàng thượng đừng bàn việc quân trong hậu cung","Hoàng thượng cho rằng ngươi dạy ngài cách trị nước","Dâng lễ nhờ lão thái giám hầu ngự khéo can","lão thái giám can vụng, ngài lại càng hỏi nàng"));
-add("nc_gian_9",A("y","Lão Kha có bệnh suyễn, vào ngục mà không có thuốc thì khó qua khỏi. Chết trong ngục thì người ta sẽ nói {me} giết người diệt khẩu. Nếu {call} quen một vị thái y, xin cho lão một thang thuốc.",
- "Mời thái y quen vào ngục bắt mạch cho lão Kha","Đại Lý tự ghi tên ngươi là người lo thuốc cho phạm nhân","Tự sắc thuốc suyễn gửi vào ngục","thuốc bị cai ngục giữ lại khám, lời đồn lan ra"));
+add("nc_gian_9",A("y","Lão {kha} có bệnh suyễn, vào ngục mà không có thuốc thì khó qua khỏi. Chết trong ngục thì người ta sẽ nói {me} giết người diệt khẩu. Nếu {call} quen một vị thái y, xin cho lão một thang thuốc.",
+ "Mời thái y quen vào ngục bắt mạch cho lão {kha}","Đại Lý tự ghi tên ngươi là người lo thuốc cho phạm nhân","Tự sắc thuốc suyễn gửi vào ngục","thuốc bị cai ngục giữ lại khám, lời đồn lan ra"));
 add("nc_gian_10",A("hh","Hoàng thượng gọi {me} đến một mình, mà Trung cung đã sai người đứng chờ ngoài điện. Nếu Hoàng hậu cũng hỏi tội, {me} không còn chỗ đứng. {Call} thưa với Hoàng hậu, xin bà đợi ngài xét xong.",
  "Thỉnh an Hoàng hậu, xin bà khoan hỏi tội","Hoàng hậu cho rằng ngươi chen vào việc của Trung cung","Dâng Khôn Ninh cung một hộp trầm, xin hoãn một ngày","hộp trầm bị trả lại kèm một lời trách"));
 /* nc_su */

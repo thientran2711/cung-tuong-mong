@@ -7,7 +7,7 @@
    1. INTRO PANELS: jentry's single "Tiền truyện" card becomes 3–4 narrated scene panels per origin (KIT §14 kitPanel({scene:true}) +
       §28.17 kitSceneArt picture frame + kitTiles on the last panel: origin, highest rank of this selection, the selection, what it weighs).
       Pictures img/intro/<k>-<n>.webp (direct road 1..4, home road 1, 2, h3); until a picture is on the CDN the frame shows the KIT §59
-      event placeholder (kitPhTone). Every origin incl. the hòa thân branches (nc Nam Chiếu, bd Bắc Địch), cn, cnv.
+      event placeholder (kitPhTone). Every origin incl. the hòa thân branches (nc Cao Ly, bd Bắc Địch), cn, cnv.
       Direct road: 4 panels → the selection. Home road (jkc tiểu thư, jkc2 thôn quê / cố quốc): panels 1, 2, h3 → the home road's own card.
    2. REASON on every result card ("Vì sao"): the part of her score furthest above / below an ordinary new girl (BAL.entry.why.ref × the road's
       own weights BAL.entry.w) in words of the judges of that road (Hoàng thượng để mắt, Thái hậu khen / nói giúp, Hoàng hậu chê, ma ma…).
@@ -44,9 +44,9 @@ const OI_TXT={
   d:[()=>`Khẩu dụ truyền xuống: cung nữ ${oiName()} được ban danh phận. Nhưng Thái hậu muốn tự mình xem mặt trước đã.`,
    "Ngươi theo thái giám qua những hành lang quen thuộc, lần đầu không phải cúi đầu bưng khay trà."],
   h:"Ngươi vẫn hầu trà ở Càn Thanh cung, chờ một lời của Hoàng thượng."},
- nc:{a:["Nam Chiếu ở xa về phương nam, nơi hồ Nhĩ Hải phẳng như gương, sơn trà nở quanh năm.",
-   "Hòa ước đổi lấy mười năm yên ổn nơi biên giới; cái giá của hòa ước là ngươi. Thái hậu không ưa người ngoại tộc."],
-  d:["Sứ đoàn đi ba tháng đường. Đêm cuối trên đất cũ, ngươi giấu một cánh sơn trà khô vào tay áo.",
+ nc:{a:["Cao Ly ở xa về phương đông, nơi biển Hải Đông xanh thẫm, hoa mai nở đầu xuân.",
+   "Hòa ước đổi lấy mười năm yên ổn nơi biên giới; cái giá của hòa ước là ngươi. Thái hậu không ưa người nước phiên."],
+  d:["Sứ đoàn đi ba tháng đường. Đêm cuối trên đất cũ, ngươi giấu một cánh mai khô vào tay áo.",
    "Kinh thành Đại Hy rộng lớn và xa lạ. Lễ bộ đã dọn lễ ra mắt; cả triều sẽ nhìn công chúa ngoại quốc."],
   h:"Hòa ước còn đang bàn. Phụ vương cho ngươi ở lại cố quốc thêm ít năm, học tiếng nói và lễ nghi Đại Hy trước khi lên đường."},
  bd:{a:["Thảo nguyên Bắc Địch mênh mông, gió thổi rạp cỏ tới chân trời. Ngươi cưỡi ngựa trước khi biết đi hài thêu.",
@@ -79,7 +79,7 @@ const OI_TXT={
 /* picture captions (the frame's title / alt) — the ART LIST in the report describes each scene in full */
 const OI_CAP={tt:["Phủ Tể tướng","Triều cục","Chiếu chỉ","Rời phủ","Ở nhà chờ tuyển"],dtq:["Biên ải","Lòng trung","Thư cha","Lên kiệu","Khuê các"],
  muoi:["Bến muối","Con nhà buôn","Rương bạc","Tường đỏ","Ở nhà chờ tuyển"],cn:["Trà Càn Thanh","Đêm mưa","Khẩu dụ","Hành lang",""],
- nc:["Nhĩ Hải","Hòa ước","Sứ đoàn","Kinh thành","Cố quốc"],bd:["Thảo nguyên","Ngựa hồi môn","Tết tóc","Ngoài cửa thành","Lều nỉ"],
+ nc:["Hải Đông","Hòa ước","Sứ đoàn","Kinh thành","Cố quốc"],bd:["Thảo nguyên","Ngựa hồi môn","Tết tóc","Ngoài cửa thành","Lều nỉ"],
  td:["Phủ bị niêm phong","Bản sớ","Đổi tên","Cửa cung","Thị lang phủ","Bản sớ ngầm"],ch:["Từ Ninh cung","Người nhà Thái hậu","Trâm ngọc","Ngọ môn","Chờ tuyển"],
  thd:["Mái tranh","Sổ tuyển","Sách chép tay","Thuyền về kinh","Lớp chữ"],cnv:["Lệnh tuyển","Đêm ở làng","Lời mẹ dặn","Cửa sau cung","Làng quê"]};
 function oiEmp(){try{return empName()}catch(e){return""}}
@@ -120,7 +120,7 @@ function oiBuild(home){const L=oiPanels(home);return L.map((P,i)=>{const m=oiPan
    oiNameSel();showModal();render()}}}catch(e){console.error("oiIntro",e)}return r}})();
 
 /* ---------- 3. the selection named for what it is (direct road card of jkc2 PEND.kc2Sel; jentry exam frame heading) ---------- */
-const OI_SELT={nc:()=>`<p>Điện Thái Hòa. Hoàng thượng ngồi trên, Thái hậu ngồi bên, bá quan hai hàng; sứ thần ${S.origin.k==="bd"?"Bắc Địch":"Nam Chiếu"} đứng chờ ngoài thềm. Công chúa dâng lễ ra mắt. Hòa ước cho ngươi được phong tới <b>${RANKS[S.origin.r||0].n}</b>; được hay không là ở lễ hôm nay.</p>`,
+const OI_SELT={nc:()=>`<p>Điện Thái Hòa. Hoàng thượng ngồi trên, Thái hậu ngồi bên, bá quan hai hàng; sứ thần ${S.origin.k==="bd"?"Bắc Địch":"Cao Ly"} đứng chờ ngoài thềm. Công chúa dâng lễ ra mắt. Hòa ước cho ngươi được phong tới <b>${RANKS[S.origin.r||0].n}</b>; được hay không là ở lễ hôm nay.</p>`,
  cn:()=>`<p>Từ Ninh cung. Thái hậu cho gọi cung nữ được Hoàng thượng giữ lại${oiQueen()?"; Hoàng hậu ngồi bên":""}. Hoàng thượng muốn ban cho ngươi danh phận tới <b>${RANKS[S.origin.r||0].n}</b>; Thái hậu gật đầu hay không là ở buổi hôm nay.</p>`};
 OI_SELT.bd=OI_SELT.nc;
 function oiNameSel(){const k=oiK();const X=oiSel(false);const m=Q.find(x=>x.pid==="kc2Sel");if(!m)return;if(X.head&&k!=="cnv")m.t=X.head;if(OI_SELT[k])m.h=OI_SELT[k]()}
