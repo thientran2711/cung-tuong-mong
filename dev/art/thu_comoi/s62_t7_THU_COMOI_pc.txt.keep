@@ -1,0 +1,6 @@
+base: dev/art/thu_comoi/s62_t7_THU_COMOI_nn.txt
+allow: kingfisher-blue inlay  # G33 phoenix colours (owner L1422/1423/1430)
+allow: the robe embroidered with phoenixes  # G33 phoenix colours + owner L1430 phoenix visible
+allow: incurved chrysanthemums and auspicious clouds in gold thread on the chest and along the borders  # same sentence rewritten
+allow: her head turns together with her shoulders and body, never back-turned, never in profile  # dup of HEAD AND BODY sentence; trimmed for <= 10 000 (as v5)
+allow: beautiful/handsome romantic-lead looks for everyone  # boilerplate; trimmed for <= 10 000 (as v5)

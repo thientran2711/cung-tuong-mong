@@ -1,0 +1,4 @@
+base: dev/art/thu_comoi/s62_t8_THU_COMOI_v6.txt
+allow: kingfisher-blue inlay  # G33 phoenix colours (owner L1422/1423/1430)
+allow: the robe embroidered with phoenixes  # G33 phoenix colours + owner L1430 phoenix visible
+allow: incurved chrysanthemums and auspicious clouds in gold thread on the chest and along the borders  # same sentence rewritten
