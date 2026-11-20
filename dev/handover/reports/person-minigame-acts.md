@@ -359,3 +359,21 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 
 ## §ROUND C r2 finish (E22i, session_01DgYSWpBDFJ2RrpvK4xpAMs; FOREMAN E #20)
 PICKUP (20/11 18:50Z): depth 2 (limit 8), START_CTX ~3 % of 1M → roll at ~28 %, ceiling 60 %. PRIORITY #1 CHECK: prio line from E #20 (OD 3 | ledger 0 | claims 8 | main 2 | review/* 10 | archive 2) — work exists: review/person-minigame-acts-c 31ef0b7f; reused, not rebuilt. LIVE not merged into -c (E #20 practice: the reviewer final-merges newest LIVE once).
+Coordinator: FOREMAN E #20 → #21 session_01DgYSWpNbcJyCoGaB1FhLFq → #22 session_01DgYSWkbUPtieeBFfn8grWT → #23 session_01DgYSWm5qy3Y59fKkn6eSf7.
+
+### Work (review/person-minigame-acts-c, final 1d7eaaa5)
+| # | what | sha |
+|---|---|---|
+| 1 | merge KIT READY review/kit-cost-rows-home 3332c63b («quý nhau ±N» sign + word-mode phrase; E #21 order) → pm-wordmode (c) PASS with NO pm code change (the pm rows already pass their text through kitHint) | 6900783e, 54f5852c |
+| 2 | REAL FAULT found by the 31ef0b7f suite (E22h had listed it as a pre-existing flake): mg-noword-kit co7 — the 7×7 Cờ status line printed words in play («Đến lượt ngươi / Tới phiên ta», OD 20/11 ~05:10Z NO TEXT); came in with fix 3 (co7 = a KG82 kind). Whole family fixed in kgGomoku: turn / wait / offline / win / draw / loss → kit signs ● ○ «…» ★★★ ★★ ✗, the sentence kept in title + aria-label | 608f845b |
+| 3 | kit-quynhau-scan «lost» = the segment left no trace in the hint (the kit now has its own phrase triple) | 2cf7976e |
+| 4 | LIVE merges (foreman orders): 415b9ca0 → 439e5072, 794c6b77 → 8ae069ca, 548dcd0d → 1d7eaaa5 (assemble.py = main list + jpma after jstagehere). E #23: no further LIVE merge by me; E22t final-merges | 439e5072, 8ae069ca, 1d7eaaa5 |
+
+Family scans before → after: mg-noword-kit 31/32 kinds clean (co7 1 word) → 32/32, 0 words; kit-quynhau-scan rows with the «quý nhau» segment lost 7/8 → 0/8; pm-wordmode (c) FAIL → PASS.
+
+### §SUITES (final sha 1d7eaaa5 = LIVE 548dcd0d merged)
+noword 32 kinds 0 words · pm-wordmode ALL PASS · kit-cost-rows-home 15/15 · pma 31/31 · person-minigame-acts-c 22/22 ×3 · pm-giveup 40/41 (G8 = the open question below, by draw) · pm-quick-co7 8/8 · pm-live 19/19 · pm-coop-d 35/35 · coop-e2e 68/68 (LIVE Worker; NEW LAND GATE) · kit-quynhau-scan 0/8 lost · mg-allkinds 7/7 · mg-ready-guide 9/9 · mg-back 12/12 · receiver-choice PASS · mg-env ALL OK · kit-mark PASS · one-core-guard PASS · pm-equal within tolerance · pm-rank ladder ok · role-parity ×2 ALL PASS, logs identical, 17 gaps = open list · QUICKCHECK PASS (197 s, open 1711 ms, old save ok, render 244/184, tab 401/464, buổi 1386/1031 ms, core gates PASS).
+Flakes seen (not this branch): mg-env «dan/hat/banh» + kit-mark «dan» 1/280 FAIL on main 548dcd0d's own build (same run); on the branch they failed on 31ef0b7f / 439e5072 / 8ae069ca and passed on 1d7eaaa5. pm-coop-d 22/36 once on 8ae069ca (guest got the plain card; 525 s run) → 35/35 on 1d7eaaa5 = flake. mg-back 1/12 once when I ran a scan beside it (two browsers) → 12/12 alone.
+Shots (local only, CDN upload HTTP 401 on this account): /home/user/wt/pm22i-shots fold/ipad × thutay-list, co7-rules, co7-play — looked at all: Cờ năm quân listed in Thử tay; board in play shows only stones + «●» status, no words; no h-scroll, no page error, on Fold 755×1000 and iPad 1180×820.
+OPEN (unchanged): Question KIT §13.9 «bỏ cuộc tính như thua» vs a timed NPC give-up that can still win on talent (G8). FLAG (law 16, outside pm, not changed): jkc.js:516 / jkc2.js:343 type «tính 5/10» / fin(5); j5 gKy (old engine) still has the same status words — dead path? not touched.
+SẴN SÀNG KIỂM person-minigame-acts-c 1d7eaaa5 → FOREMAN E #23 (forwards to E22t).
