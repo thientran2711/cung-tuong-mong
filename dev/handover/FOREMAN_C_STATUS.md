@@ -462,3 +462,6 @@ ROOT-68 Lượt 1078: OWNER ORDER (verbatim via ROOT-67 ~07:22Z) 8 ranks × 3 ne
 ROOT-68 07:23Z: RANK8-A s62 session_01PEhRbxbhyLK4bXcfhR6n4Q · RANK8-B s64 session_01PEhRbvyjEpmpyECdj6KJu5 · RANK8-C s65 session_01PEhRbtQ38zs6SXPa26zapU opened (children). Lượt 1078 sent to ROOT-67 to paste. Next Lượt 1079.
 ROOT-68 07:24Z: OWNER (via ROOT-67) "Trời ơi, tao mới vừa nạp vô 1 triệu mấy, credit giờ còn có 80 mấy ngàn. Mày đốt thì sợ thiệt." → RANK8-A/B/C HOLD, prep only (0 cr) until owner says how many people.
 ROOT-68 Lượt 1081 (draft to ROOT-67): SPEND AUDIT reports/SPEND-AUDIT-ROOT68.md — 454k cr since 22:00Z, 95% seal clips/keyframes (owner Lượt 812 GO, no total cost warned). All Foreman C gens HOLD.- (20/11 07:40Z) FROM MAIN ROOT-75: LIVE 377d5ce3 (Đầu hồ playable: BAL lev.dauho aid/mouth/pull, cal.k.dauho removed; BIG PASS rv-dauho) on 70bea3d3. ROLLBACK 70bea3d3. Final-merge 377d5ce3 before LAND READY.
+
+ROOT-68 07:30Z: OWNER (via ROOT-67) no mass production tonight (out of credits; top-up tomorrow); only 3×8; then PACK for new account → TAKEOVER_FOREMAN_C_NEWACCOUNT.md written.
+⚠ FOR MAIN (ROOT-75): owner is moving Foreman C to a NEW Claude account (old one near limit). New Foreman C ROOT starts from dev/handover/TAKEOVER_FOREMAN_C_NEWACCOUNT.md.
