@@ -1,0 +1,43 @@
+# mg-back — kit ✕ «Quay lại» on every mini-game screen (MAIN ROOT-73, owner bug fast lane)
+PRIORITY #1 CHECK ('kgrback|Quay lại|go back|mg back'): OD 5 (generic) | ledger 0 | claims 0 (own row) | main: kit ✕ only on result screens (jk4 kitOvSync), none on rules/play; Thử tay only «Thôi» on the kind list | review/* 0 | reused: kit ✕ kitXHTML (32.10), kitConfirm (83.9), kitOvBtn.
+START_CTX ~5 % (1M window); now ~15 %. Depth 3.
+
+Branch **review/mg-back** = **883aaa7a** (from dddb1f94, merged newest origin/main d74f86a5 clean).
+
+## What
+- **KIT §13.9** (j82 `kg82BackX` / `kg82Back` / `kg82GiveUp`, KIT.md entry): ONE kit ✕ (`kitXHTML('data-kitx="kgback"',"Quay lại")`, the 32.10 ✕, no new CSS look) put by `kg82Open` in the frame header — rules screen, «Hướng dẫn», play, result, every caller. jk4 kitOvSync adds no second ✕.
+- Order: `KG82.back` (nothing at stake → back) → result button (kitOvBtn, old behaviour) → `KG82.xdo` (only way on: jsgame «Ra tay», jtoil result, Nghiệm thân blood scene) → else **give up** (laws 2/3): kit `kitConfirm` «Bỏ cuộc?» (Bỏ cuộc / Chơi tiếp, lifted over #ov by `body.kg82cf{z-index:40}`), then the caller's OWN lose path with 0/10: during play `KG82.quit()`, rules screen = «Sẵn sàng» run with `KG82.giveUp` (ends at once with 0, no board, no clock).
+- **Thử tay** (jmgcal): ✕ → kind list from rules / Hướng dẫn / between rounds at once, during play after a confirm («Bỏ dở môn …: các hồi đã chơi của môn này không được ghi»); kind left early NOT saved (recSet only at round n, unchanged); first-try rule unchanged. Kind list: «Thôi» row removed (✕ closes it, 32.10). Between-round button renamed `#mgcal-nx` so the ✕ means «Quay lại» there.
+- Hooks: kg82Play (startContest, playArt, jexam, jentry, jslap, jtd, jts, Thử tay), jsgame sgEng, j92 (rules = straight back, nothing spent; play = «quá giản dị», the timeout rule), jroute (give up = «bị nhìn thấy»), jtoil + jmkt (✕ = «Để mộc», own confirm lines).
+
+## Tests
+- `node dev/test/mg-back.js dev/index.html 755x1000` **PASS 8/8**; `1180x820` **PASS 8/8** (merged build).
+- `node dev/test/mg-ready-guide.js` PASS 9/9 (31 kinds × callers; jmgcal step uses #mgcal-nx); `node dev/test/ag-mgcal.js` all ok (same id update). No page errors.
+
+## Scan table (caller | screen ✕ | rules ✕ goes to | play ✕ goes to | cost/stake effect) — 755x1000
+| caller | rules ✕ | Hướng dẫn ✕ | play ✕ | result ✕ | rules ✕ goes to | play ✕ goes to | cost/stake effect |
+| startContest (hội thi) | ✕ | ✕ | ✕ | ✕ | confirm → own result: Màn thiVụng 0/10 → +0Tài 63+19Cầm bậc 1+9Cầm: Hoàn | confirm → own result: Màn thiVụng 0/10 → +0Tài 63+19Cầm bậc 1+9Cầm: Hoàn | contest stake / place prizes → give up → last-place result (0/10 màn thi) |
+| playArt (học, tự học, tác phẩm) | ✕ | ✕ | ✕ | ✕ | confirm → own result: Màn chơi0/10 · VụngĐã hiểu | confirm → own result: Màn chơi0/10 · VụngĐã hiểu | khắc / materials already spent by the caller → give up → «Màn chơi 0/10» |
+| jexam khảo hạch | ✕ | ✕ | ✕ | ✕ | confirm → own result: Môn 10/10 · VụngMôn kế tiếp | confirm → own result: Môn 10/10 · VụngMôn kế tiếp | exam subject → give up → this subject 0/10, exam goes on |
+| jentry tuyển chọn | ✕ | ✕ | ✕ | ✕ | confirm → own result: Màn chơi0/10 · VụngKết quảtính cùng Sắc, Tài, ĐứcĐ | confirm → own result: Màn chơi0/10 · VụngKết quảtính cùng Sắc, Tài, ĐứcĐ | entry exam → give up → 0/10 |
+| jslap Tát / Né | ✕ | ✕ | ✕ | ✕ | confirm → own result: Kết quảTay nhẹĐã hiểu | confirm → own result: Kết quảTay nhẹĐã hiểu | slap stake → give up → 0/10 lose result |
+| jtd Tu đức | ✕ | ✕ | ✕ | ✕ | confirm → own result: Màn chơi0/10 · VụngMục đíchĐường kim đều và đúng m | confirm → own result: Màn chơi0/10 · VụngMục đíchĐường kim đều và đúng m | khắc of the lesson → give up → 0/10 |
+| jts Hoàng thượng triệu | ✕ | ✕ | ✕ | ✕ | confirm → own result: Màn chơi0/10 · VụngĐã hiểu | confirm → own result: Màn chơi0/10 · VụngĐã hiểu | the summons → give up → 0/10 lose |
+| jsgame mưu kế | ✕ | ✕ | ✕ | ✕ | confirm → own result: Phần chơiVụng · 0/10Vụng về: cơ may xuống một bậc. | confirm → own result: Phần chơiVụng · 0/10Vụng về: cơ may xuống một bậc. | scheme odds → give up → 0/10 odds result, ✕ there = «Ra tay» |
+| jroute Nghiệm thân | ✕ | ✕ | ✕ | ✕ | confirm → own result: Ra taybị nhìn thấyNgười canh3 ngườiCó người đã thấ | confirm → own result: Ra taybị nhìn thấyNgười canh3 ngườiCó người đã thấ | the trick → give up → «bị nhìn thấy» |
+| j92 Chải chuốt | ✕ | ✕ | ✕ | ✕ | closed (back) | confirm → own result: Trâm càiTrâm ngọc bíchY phụcVáy sa xanh ngọcKim dừ | spend(1) only at the end → rules: straight back (nothing spent); play: give up → «quá giản dị» (the timeout rule) |
+| Thử tay (mgcal) | ✕ | ✕ | ✕ | ✕ | kind list, no confirm | confirm → kind list | nothing at stake; kind not saved |
+
+## Shots (Fold 755x1000@2 + iPad 1180x820@2, looked) — CDN img/_review/mg-back/
+rules https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/rules-755x1000.webp · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/rules-1180x820.webp
+play https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/play-755x1000.webp · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/play-1180x820.webp
+Thử tay confirm https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/confirm-755x1000.webp · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/confirm-1180x820.webp
+kind list after back https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/list-755x1000.webp · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/list-1180x820.webp
+hội thi confirm https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/contest-confirm-755x1000.webp · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/contest-confirm-1180x820.webp
+hội thi give-up (ceremony then result) https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/contest-giveup-755x1000.webp · https://ctm-img.victoria-tntt.workers.dev/img/_review/mg-back/contest-giveup-1180x820.webp
+
+## Notes for main
+- PRE-EXISTING (same on main, not touched): Thử tay kind list at 1180x820 — the kind buttons overlap the «Đã thử / Chưa thử» rows and the «Hoặc chọn một môn» heading (kg82act grid over kitRows). Worth its own small fix.
+- While the give-up confirm is open the board keeps running (clock not paused); «Chơi tiếp» returns to the live board. Pausing would need an engine pause hook per family — left out to land fast.
+- j5 old lesson panel (openMG fallback, not the kg82 frame) not changed.
+- Free return (no give-up) is used only where nothing is charged before the end (Thử tay, Chải chuốt rules); every other caller gives up with its own lose result, per brief item 3.
