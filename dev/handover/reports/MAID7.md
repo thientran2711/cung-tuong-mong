@@ -60,5 +60,5 @@ Open: nhất đẳng — shorten the vest / drop the two long front panels, and 
 | Chưởng sự v3 | ksetgGU16B | tím cà, ledger book + keys ✔, hair up ✔; purple a bit strong/saturated |
 | Nữ quan | 5jDomu5Kxe (v2 kept) | — |
 | Ma ma v3 a36 | SyhQ4ewUb8 | new outfit: jade blue-green open coat + ivory skirt, umbrella, bun ✔, young-looking |
-All: hair up, no broom, no earrings/hair flowers, same face. Sheet dev/handover/review-sheets/maid7/m18_maid_ladder_v3_sheet.webp. Rules added: K20 (hair always up), K21 (no broom). Gate: 5/6 approved PASS; ma ma FAIL only S32 hai tà (old outfit, expected). No cut-outs (test, A34 refinement). Prompts test3_*.txt (make3.py), CHANGES.md §ROUND 3.
+All: hair up, no broom, no earrings/hair flowers, same face. Sheet dev/handover/review-sheets/maid7/m18_maid_ladder_v3_sheet.webp. Rules added: K22 (hair always up), K23 (no broom) (K20 was taken). Gate: 5/6 approved PASS; ma ma FAIL only S32 hai tà (old outfit, expected). No cut-outs (test, A34 refinement). Prompts test3_*.txt (make3.py), CHANGES.md §ROUND 3.
 Open: ma ma secondary colour (ivory = my pick); her personal accent colour (K19 open); nhị vs nhất look similar in colour.
