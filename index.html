@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"adf44ae8+","t":"2026-11-20T12:53Z","c":"review outside-nums: miễn tuyển girl whose cha relents at Sơ tuyển gets her Sơ tuyển back (home road soft-lock, was hidden by the old bot's…","b":"f55b7d6d448c","h":[{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"},{"s":"39228682+","t":"2026-11-20T10:45Z","c":"Phi tần khác cũng rủ nàng lập phe, vào phe của nàng (luật hai chiều)"},{"s":"d39e3d2c+","t":"2026-11-20T12:07Z","c":"Nút «Mua» ở tiệm chơi một mình chạy lại; lời dẫn từng xuất thân chương 1–3"},{"s":"bf7cc4de+","t":"2026-11-20T11:56Z","c":"Mời khách khi chủ vắng nhà: khách chờ đúng luật"},{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"},{"s":"4be15f10+","t":"2026-11-20T11:04Z","c":"Hộp thoại mở từ màn đầu nổi trên cùng; dấu chờ chung; nhóm «Y dược»"},{"s":"f6f4a69c+","t":"2026-11-20T11:10Z","c":"Sổ luân hồi thêm trang «Sơ đồ nhánh»"},{"s":"d941502e","t":"2026-11-20T11:16Z","c":"Chip điểm và đồng hồ trò chơi: chỉ còn con số, đồng hồ hổ phách khi gấp"},{"s":"c12231a1","t":"2026-11-20T11:05Z","c":"Trò chơi không chữ nhóm b: Đặt hoa có hình chỉ dẫn, bỏ chữ trên bàn chơi"}]};
+window.CTM_BI={"s":"46e42c8f+","t":"2026-11-20T13:10Z","c":"review outside-nums: miễn tuyển girl whose cha relents at Sơ tuyển gets her Sơ tuyển back (home road soft-lock, was hidden by the old bot's…","b":"4f99e005ea24","h":[{"s":"6322731c+","t":"2026-11-20T12:54Z","c":"Mọi việc «còn kịp không» tính theo khắc còn trong NGÀY"},{"s":"92f61247+","t":"2026-11-20T12:35Z","c":"Nhãn «kèm/thành/Được» trên thẻ việc; kệ thưởng gọn; danh sách bước Việc nhờ; bìa chương"},{"s":"d2c28b69+","t":"2026-11-20T13:01Z","c":"Màn trước khi chơi trang điểm hiện đủ chữ"},{"s":"c6c1acab+","t":"2026-11-20T12:54Z","c":"Thêm 11 nhánh đại kết cục"},{"s":"763c74de+","t":"2026-11-20T12:28Z","c":"Cảnh vào cổng cung và bục tuyển tú có thứ muội, khuê hữu"},{"s":"39228682+","t":"2026-11-20T10:45Z","c":"Phi tần khác cũng rủ nàng lập phe, vào phe của nàng (luật hai chiều)"},{"s":"d39e3d2c+","t":"2026-11-20T12:07Z","c":"Nút «Mua» ở tiệm chơi một mình chạy lại; lời dẫn từng xuất thân chương 1–3"},{"s":"bf7cc4de+","t":"2026-11-20T11:56Z","c":"Mời khách khi chủ vắng nhà: khách chờ đúng luật"},{"s":"ce4db1cf+","t":"2026-11-20T11:28Z","c":"Màn luật chăm thú, tưới cây có «Hướng dẫn» và «Sẵn sàng»"},{"s":"d002f789+","t":"2026-11-20T11:34Z","c":"Nút chơi nhanh giữ chữ cơ hội"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3547,7 +3547,7 @@ function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(he
 const MAPL=[["thu","dtd","tn"],["kn","vuon","ksp"],["tyv","lc","home"]];
 function mapHTMLgrid(){const W=S.where||{};const dis=k=>!walkOk(travel(S.place,k))||S.confined||S.dead||S.place===k;
  const tile=(k,n,sc,sub)=>`<button class="mtile" data-go="${k}" ${k==="home"?(S.place==="home"?"disabled":""):(dis(k)?"disabled":"")} style="${(SCIMG[sc]||k==="home")?`background-image:url(https://ctm-img.victoria-tntt.workers.dev/img/${k==="home"&&sc!=="maid"?"tam-cung-dem":SCIMG[sc]}.webp)`:""}"><span class="mband">${k!=="home"&&S.place!==k&&!walkOk(travel(S.place,k))?`<span class="mchip">${used>=BAL.time.khac?"hết khắc":`đi ${travel(S.place,k)} khắc`}</span>`:""}<b>${n}</b><span>${countAt(k)?silChip(countAt(k)):"vắng"} · ${k==="home"?"không tốn khắc":travel(S.place,k)+" khắc"}</span>${sub&&k!=="home"?`<small>${sub}</small>`:""}</span></button>`;
- let h=`<div class="ph"><span>Đi gần ${BAL.walk.near} khắc, xa ${walkFarK()} khắc · còn <b>${BAL.time.khac-used}</b> ${pips(BAL.time.khac-used)}. Đi được khi đường đi không quá số khắc còn; đến nơi hết khắc thì chỉ kịp xem ai ở đó.</span>${S.confined?`<span class="r">Cấm túc ${S.confined} tháng</span>`:""}</div><div class="pmap">`;
+ let h=`<div class="ph"><span>Đi gần ${BAL.walk.near} khắc, xa ${walkFarK()} khắc · còn <b>${BAL.time.khac-used}</b> ${pips(BAL.time.khac-used)}. Đường xa hơn số khắc còn trong buổi thì đi tiếp sang buổi sau, miễn trong ngày còn đủ khắc; riêng buổi tối không đi qua đêm.</span>${S.confined?`<span class="r">Cấm túc ${S.confined} tháng</span>`:""}</div><div class="pmap">`;
  for(const row of MAPL)for(const k of row){if(k==="kn"&&!qOn()){h+=`<div class="mtile off"><b>Càn Ninh cung</b><span>bỏ trống</span></div>`;continue}const P=placeOf(k);h+=tile(k,k==="home"?"Tẩm cung":P.n,P.sc,k==="home"?"không tốn việc":"")}
  h+=`</div><div class="pmap two">`+liveRivals(false).filter(v=>palaceOf(v)!=="home").map(v=>{const k="r"+v.id;return tile(k,typeof palName==="function"?palName(k):"Cung phi tần","rv","")}).filter((x,i,a)=>a.indexOf(x)===i).join("")+`</div>`;
  return h}
@@ -5855,7 +5855,7 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
    is married (princes and princesses alike); matchShow = a child shows in the match lists from this age; matchMax = oldest prince offered as a match; age.reign = the young Emperor rules alone from this age (no regency).
    seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table. res / harem: see below.
    night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
-Object.assign(BAL,{time:{khac:4,sucMin:5,/* khắc a deed costs, ONE source for the player and every NPC (AG-ALL-2 G8): talk option (j2 talk), talk that is an act, a harm act (j8 doAct) */cost:{talk:1,talkAct:2,harm:2}},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2},srvAge:{ask:25,out:30,mama:45,old:45},
+Object.assign(BAL,{time:{khac:4,sucMin:5,/* khắc a deed costs, ONE source for the player and every NPC (AG-ALL-2 G8): talk option (j2 talk), talk that is an act, a harm act (j8 doAct) */cost:{talk:1,talkAct:2,harm:2}},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2,lead:15},srvAge:{ask:25,out:30,mama:45,old:45},
  age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:1,4:2,3:3}, /* owner 17/11 04:30Z: halved (was {7:1,6:1,5:2,4:4,3:6}) */
  /* RESIDENCE (owner 17/11 04:20Z + 04:32Z): every chủ vị (Tần, Phi, Quý phi; the player too) takes at most side co-residents in each
     of the halls (Đông phối điện, Tây phối điện), one room each; Hoàng hậu and Hoàng quý phi live alone. harem.cap = most consorts alive at once
@@ -6682,8 +6682,8 @@ function accState(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:
  if(!a.ok){const st={why:a.why,kind:a.kind,ask:a.ask,tc};st.sneakOk=can(tc+2);if(a.ask==="yk")st.empAway=(S.where||{}).emp!==k;st.askOk=can(1)&&!st.empAway;return st}
  if(k!=="home"&&!walkOk(tc))return{why:walkWhy(tc)};
  return{why:"",tc}}
-function accSneakLine(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+1} khắc · thành: vào được buổi này · hỏng: Danh -${BAL.sneak.danh}, bị phạt`}
-function accAskLine(k){return `${word(accAskO(k))} · tốn: 1 khắc · thành: được vào buổi này · hỏng: không mất gì thêm`}
+function accSneakLine(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+1} khắc · thành: vào được${typeof j77When==="function"?j77When(tc+1):" buổi này"} · hỏng: Danh -${BAL.sneak.danh}, bị phạt`} /* replaced by j77; same words */
+function accAskLine(k){return `${word(accAskO(k))} · tốn: 1 khắc · thành: được vào${typeof j77When==="function"?j77When(1):" buổi này"} · hỏng: không mất gì thêm`} /* replaced by j77 */
 /* small kit buttons for the map hotspot: name + odds chip + price */
 function accMini(k,st,risk){const L=[];
  if(st.ask&&st.ask==="yk")L.push(`<button class="acb" data-acask="${k}" ${st.askOk?"":"disabled"}>Xin yết kiến ${st.empAway?'<i>ngài vắng</i>':oddsChip(word(accAskO(k)))+'<i>1 khắc</i>'}</button>`);
@@ -6702,7 +6702,7 @@ function accSneak(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=
  spend(tc);apply({danh:-BAL.sneak.danh});log(`<span class="r">Lẻn vào ${nm}, bị thị vệ bắt được: Danh -${BAL.sneak.danh}.</span>`);punish(S,`tự tiện lẻn vào ${nm}`,1);
  Q.push({t:"Bị bắt",h:`<p>Thị vệ ${nm} bắt được ngươi ở cửa hông. Chuyện truyền khắp lục cung.</p><p class="r">Danh -${BAL.sneak.danh} ·${S.confined?`cấm túc ${S.confined} tháng`:"bị phạt"}</p>`});showModal();render()}
 function accAsk(k){if(!S||S.dead||Q.length||!can(1))return;const st=accState(k);if(!st.ask||st.empAway)return;const nm=accName(k);const o=accAskO(k);spend(1);
- if(roll(o)){accGrant(S,k);log(`Xin vào ${nm}: được cho vào buổi này.`);Q.push({t:st.ask==="yk"?"Được yết kiến":"Được mời vào",h:`<p>${st.ask==="yk"?"Thái giám truyền khẩu dụ: Hoàng thượng cho ngươi vào.":"Cung nữ ra cửa mời ngươi vào."}</p><p class="g">Được vào ${nm} buổi này.</p>`});}
+ if(roll(o)){accGrant(S,k);const aw=typeof j77When==="function"?j77When(k==="home"?0:travel(S.place,k)):" buổi này";/* the walk may spill: say the arrival buổi (day-khắc r2) */log(`Xin vào ${nm}: được cho vào${aw}.`);Q.push({t:st.ask==="yk"?"Được yết kiến":"Được mời vào",h:`<p>${st.ask==="yk"?"Thái giám truyền khẩu dụ: Hoàng thượng cho ngươi vào.":"Cung nữ ra cửa mời ngươi vào."}</p><p class="g">Được vào ${nm}${aw}.</p>`});}
  else{log(`Xin vào ${nm}: bị từ chối.`);Q.push({t:"Bị từ chối",h:`<p>${st.ask==="yk"?`Thái giám ra cửa: “Hoàng thượng đang ${S.emp.mood>=2?"không vui":"bận"}, ${kSay({srv:"m"},S,"{goi}")} xin hồi cung.”`:"Cung nữ ra cửa: “Chủ tử nhà nô tỳ không tiện tiếp.”"}</p>`})}
  showModal();render()}
 document.addEventListener("click",e=>{const s=e.target.closest("[data-acsneak]");if(s){e.preventDefault();e.stopImmediatePropagation();if(!s.disabled)accSneak(s.dataset.acsneak);return}
@@ -6735,7 +6735,14 @@ function accDis(html,k){if(!html||!k||!S||S.place===k)return html;const a=access
 (function(){if(typeof seeBtn==="function"){const s0=seeBtn;seeBtn=function(v){const h=s0.apply(this,arguments);try{return accDis(h,whereOf(v))}catch(e){return h}}}
  if(typeof visitBtn==="function"){const v0=visitBtn;visitBtn=function(v){const h=v0.apply(this,arguments);try{return accDis(h,palaceOf(v))}catch(e){return h}}}})();
 /* THE MAP: a place she cannot enter now keeps the kit map label + a lock mark; the reason and the ways in live in the option card (j77Card) */
+/* owner 17/11 ~16:45Z (OD tail, restating OD L852/L1473): "có còn làm được tiếp hay không" = the TOTAL khắc left in the DAY. OD L1418's
+   grey ("nơi nào không có đủ khắc để tới") therefore means: the DAY cannot hold the walk (buổi tối, or closed when she would arrive).
+   An open place whose walk only runs past THIS buổi spills (j9 walkSpill) and keeps the plain label; the tap still opens the kit card
+   with "Đi (đến nơi vào buổi sau)". */
+function accSpillOk(k,st){try{if(!st||!st.walk)return false;if(st.spill!=null)return !!st.spill;if(typeof walkSpill!=="function")return false;const P=walkSpill(k);return !!(P&&P.ok)}catch(e){return false}}
+function accSpillLab(k,st){let b="";try{b=String(BUOI[walkSpill(k).b]).toLowerCase()}catch(e){}return `${st.tc} khắc${b?` · sang ${b}`:""}`}
 function accSpot(all,cls,k,attrs,inner){const st=accState(k);if(st.here||!st.why)return all;
+ if(accSpillOk(k,st))return all.replace(/class="mspot([^"]*)"/,(m,c)=>`class="mspot${c.replace(/\soff\b/g,"")}"`).replace(/\sdisabled(?=[\s>])/,"").replace(/<em>[^<]*<\/em>/,`<em class="ok">${accSpillLab(k,st)}</em>`);
  attrs=attrs.replace(/\sdisabled/g,"").replace(/title="([^"]*)"/,(m,t)=>`title="${t.replace(/ · (hết khắc|đang cấm túc[^·"]*|đang ở lãnh cung)/,"")} · ${st.why}"`);
  /* KIT map-label rule (owner 11/15 "map grey box"): a locked place wears the SAME label as every place (name + "N bóng") plus a small lock
     mark; no grey box over the map art, no reason line, no buttons on the map — a tap opens the kit option card (j77Card: reason, Xin yết
@@ -6754,6 +6761,7 @@ const ACC_LOCK=`<svg class="mlock" viewBox="0 0 12 14" width="10" height="12" ar
 /* THE LIST: the same grey tiles */
 (function(){const g0=mapHTMLgrid;mapHTMLgrid=function(){let h=g0.apply(this,arguments);
  try{h=h.replace(/<button class="mtile" data-go="([^"]+)"([^>]*)>([\s\S]*?)<\/button>/g,(all,k,attrs,inner)=>{const st=accState(k);if(st.here)return all.replace('class="mtile"','class="mtile ahere"');if(!st.why)return all;
+   if(accSpillOk(k,st))return all.replace(/<span class="mchip">[^<]*<\/span>/g,"").replace(/\sdisabled(?=[\s>])/,""); /* the walk spills: a plain open tile (day-khắc audit) */
    inner=inner.replace(/<span class="mchip">[^<]*<\/span>/g,"");inner=inner.replace('<span class="mband">',`<span class="mband"><span class="mchip agw">${st.why}</span>`);
    const acts=st.kind?`<span class="tacts">${accMini(k,st,1).replace(/<\/?span class="macts">/g,"")}</span>`:"";
    return `<div class="mtile ${st.walk?"awalk":"agrey"}" data-ak="${k}"${attrs.replace(/\sdisabled/g,"")}>${inner}${acts}</div>`}); /* awalk: open, only farther than the khắc left (walk spill) — not greyed as locked (review/dudo-lock) */
@@ -23108,7 +23116,7 @@ function q72Why(x,X,st,o){if(S.dead)return"đã hết kiếp";if(Q.length)return
  if(pl&&S.place!==pl&&!(pl==="home"&&S.place==="home"))return `phải đến ${q72PlN(pl)} trước`;
  if(st.bu!=null&&(S.buoi||0)!==st.bu)return `chỉ làm được ${BUOI[st.bu].toLowerCase()}`;
  if(st.emp&&!q72EmpNear())return "chỉ khi ở cạnh Hoàng thượng (gặp ngài trên bản đồ, hoặc vừa thị tẩm tuần này)";
- if(!can(k))return used+k>BAL.time.khac?"hết khắc":"Sức dưới "+(BAL.time.sucMin)+", cần nghỉ";if(c&&c.bac&&S.bac+c.bac<0)return `thiếu bạc (cần ${-c.bac})`;if(c&&c.suc&&S.suc+c.suc<5)return"Sức quá yếu";
+ if(!can(k))return (typeof whyTime==="function"&&whyTime(k))||(used+k>BAL.time.khac?"hết khắc":"Sức dưới "+(BAL.time.sucMin)+", cần nghỉ");if(c&&c.bac&&S.bac+c.bac<0)return `thiếu bạc (cần ${-c.bac})`;if(c&&c.suc&&S.suc+c.suc<5)return"Sức quá yếu";
  if(o&&o.t){try{if(!o.t(X))return q72Txt(o.tw||"không làm được",X)}catch(e){return"không làm được"}}return""}
 function q72Line(x,X,st,o){const s=o||st;const k=o?(o.k==null?1:o.k):st.k;const rolled=s.p!=null||(!o&&s.b<100);const od=rolled?q72Odds(o?o.p:st.b,s.sk,X):100;
  const cost=q72Fx(s.c).map(t=>t);cost.unshift(`${k} khắc`);
@@ -23191,14 +23199,14 @@ function q72Card(x){const X=q72X(x);if(!X)return`<p class="past">Người nhờ 
    B.push(pbtn(`data-q72g="${pl}"`,`Đến ${q72PlN(pl)}`,`tốn: ${tc} khắc đi đường · thành: tới nơi làm bước này`,why))}
   if(st.ch)st.ch.forEach((o,i)=>B.push(pbtn(`data-q72d="${x.u}" data-q72o="${i}"`,q72Txt(o.n,X),q72Line(x,X,st,o),q72Why(x,X,st,o))));
   else B.push(pbtn(`data-q72d="${x.u}"`,q72Txt(st.n,X),q72Line(x,X,st,null),q72Why(x,X,st,null)))}
- const rows=T.s.map((s,i)=>{const p=q72StepPl(s,X);return [`${i<x.st?"✓":i===x.st?"▸":"·"} ${q72Txt(s.n,X)}`,s.w?`đợi ${s.w} tuần`:p?q72PlN(p):s.emp?"cạnh Hoàng thượng":"tùy chọn",i===x.st?"t":"n"]});
+ const rows=T.s.map((s,i)=>{const p=q72StepPl(s,X);return [i<x.st?"done":i===x.st?"now":"next",q72Txt(s.n,X),s.w?`đợi ${s.w} tuần`:p?q72PlN(p):s.emp?"cạnh Hoàng thượng":"tùy chọn"]});
  const lg=x.log.slice(-3).map(t=>`<div class="pcrow"><span>${t}</span></div>`);
  const drop=pbtn(`data-q72x="${x.u}"`,"Bỏ việc này",`tốn: ${no.join(", ")||"không"}`,Q.length?"đang có việc chờ":"");
  const dt=q72Debt(X.A);
  return pcard({f:X.A.f,name:X.A.n,rank:q72Role(X.A),tabKey:"q72",col:X.A.f.col,
   lines:[`<b>${q72Title(X)}</b>`,`${KIND72[T.kind]} · bước ${x.st+1}/${T.s.length} · còn <b class="${left<=1?"r":""}">${left} tuần</b>`,X.B?`Liên quan: ${mdH(X.B.f,"xs")} ${X.B.n}`:"",dt?(dt>0?`<span class="g">${q72Short(X.A)} đang nợ ngươi ${dt} ân</span>`:`<span class="r">Ngươi đang nợ ${q72Short(X.A)} ${-dt} ân</span>`):""],
   chips:[chip(`Thành: ${ok.map(plain).join(", ")||"êm chuyện"}`,"ok"),chip(`Bại/lỡ hẹn: ${no.map(plain).join(", ")}`,"hot"),bad.length?chip(`Bại lộ: ${bad.map(plain).join(", ")}`,"hot"):""],
-  groups:[["Bước này",B],["Các bước",rows.concat(lg)],["Bỏ việc",[drop]]]})}
+  groups:[["Bước này",B],["Các bước",[kitStepList(rows)].concat(lg)],["Bỏ việc",[drop]]]})}
 function q72HCard(h){const f=h.f||{ini:"?",col:KIT_ROLE.slate};const seal=h.res==="ok"?`<span class="g">Xong</span>`:h.res==="bad"?`<span class="r">Bại lộ</span>`:h.res==="gone"?"Dừng giữa chừng":`<span class="r">Không thành</span>`;
  return pcard({f,name:h.n||"",rank:f.rw||"",tabKey:"q72h",lines:[`<b>${h.t}</b>`,seal,h.end||"",h.tok?`Kết quả: ${h.tok}`:""],groups:[["Đã làm",(h.lg||[]).map(t=>`<div class="pcrow"><span>${t}</span></div>`)]],empty:"Không còn việc gì cần làm."})}
 function q72HTML(){const q=q72();const mo=q.mo[S.turn]||0;
@@ -23836,6 +23844,7 @@ function j76need(c,a,win){if(!S||S.dead||!(c>0))return{t:`${c||0} khắc`,ok:tru
  if(used+c<=BAL.time.khac)return{t:`${c} khắc (còn ${left})`,ok:true};
  const w=win||(a&&a.b!=null)||window.__j76win;
  if(left<=0||S.j76carry)return{t:`hết khắc buổi này (cần ${c})`,ok:false};
+ if(b>=B4L&&c>j76left())return{t:`hết khắc trong ngày (cần ${c}, còn ${j76left()})`,ok:false}; /* buổi tối is the end of the day: say the day */
  if(w)return{t:`không kịp xong trong ${BUOI[b].toLowerCase()} (cần ${c} khắc)`,ok:false};
  if(c>j76left())return{t:`hết khắc trong ngày (cần ${c}, còn ${j76left()})`,ok:false};
  return{t:`${c} khắc (sang ${j76arrive(c)})`,ok:true}}
@@ -23843,7 +23852,7 @@ function j76need(c,a,win){if(!S||S.dead||!(c>0))return{t:`${c||0} khắc`,ok:tru
    dayFit(n): n khắc can be started now: they fit this buổi, or they spill into the next buổi (j76spills: the day still has them and
    nothing ties the act to this buổi). dayWhy(n): the reason in words when not ("hết khắc trong ngày (cần N, còn M)" …), same words as the
    kit Cần chip (j76need). Every khắc gate outside the deck (walk-ins, greetings, asks, servant walks, court acts) asks these, never used+n<=4. */
-function dayFit(n){return !!S&&!S.dead&&(used+n<=4||j76spills(n))}
+function dayFit(n){return !!S&&!S.dead&&(used+n<=BAL.time.khac||j76spills(n))}
 function dayWhy(n){if(dayFit(n))return"";const r=j76need(n);return r.ok?"":r.t}
 /* ===== ONE Sức FLOOR (folds the j80 hotfix in) =====
    Sức under 5 = kiệt sức: acts of 2+ khắc wait until she rests. A card that costs Sức needs more Sức than it costs.
@@ -23868,7 +23877,7 @@ function j76carryFix(){try{if(!S||!S.j76carry||!S.j76ck||window.__j76nb)return;c
  try{if(c&&S&&(S.buoi||0)!==b0){if(!S.dead&&(S.buoi||0)>b0){used=Math.min(BAL.time.khac,c);S.j76carry=c>BAL.time.khac?c-BAL.time.khac:0;S.j76ck=S.j76carry?j76key():""}else{S.j76carry=0;S.j76ck=""}if(!S.dead){save();render()}}}catch(e){}return r}})();
 /* why an act cannot be done now, in words */
 (function(){const w0=whyTime;whyTime=function(c){if(!S||S.dead)return"";if(can(c))return"";const sw=j76sucWhy(c);if(sw)return sw;
- if(S.j76carry||used>=BAL.time.khac)return w0.call(this,c)||"hết khắc buổi này";if(used+c>BAL.time.khac&&window.__j76win)return `không kịp xong trong ${BUOI[S.buoi||0].toLowerCase()}`;
+ if(S.j76carry||used>=BAL.time.khac)return w0.call(this,c)||"hết khắc buổi này";if(used+c>BAL.time.khac&&window.__j76win&&!((S.buoi||0)>=B4L&&c>j76left()))return `không kịp xong trong ${BUOI[S.buoi||0].toLowerCase()}`;
  if(used+c>BAL.time.khac)return "hết khắc trong ngày";return w0.call(this,c)}})();
 function j76cap(s){return s?s[0].toUpperCase()+s.slice(1):s}
 /* deck cards: a card bound to a buổi may not spill */
@@ -23972,18 +23981,20 @@ accState=function(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:
  if(S.out)return{why:"đang ở lãnh cung"};if(S.confined)return{why:`cấm túc ${S.confined} tháng`};
  const a=accessOf(S,k);const tc=k==="home"?0:travel(S.place,k);
  if(!a.ok){const st={why:a.why,kind:a.kind,ask:a.ask,tc};st.sneakOk=dayFit(tc+1);if(a.ask==="yk")st.empAway=(S.where||{}).emp!==k;st.askOk=dayFit(tc+1)&&!st.empAway;return st}
- if(k!=="home"&&!j77Kh(tc))return{why:j77WalkWhy(tc,k),tc,walk:1};
+ if(k!=="home"&&!j77Kh(tc)){const P=typeof walkSpill==="function"?walkSpill(k):null;return{why:j77WalkWhy(tc,k),tc,walk:1,spill:!!(P&&P.ok)}} /* spill: the walk only runs on into the next buổi = OPEN (day-khắc r2); every reader asks accSpillOk(k,st), never !st.why alone */
  return{why:"",tc}};
 /* sneaking: 1 khắc at the side gate, then the walk; the Emperor's halls are a serious offence */
 function accSneakPen(k){return typeof ACC_ETQ!=="undefined"&&ACC_ETQ.sneakHeavy[k]?{danh:-BAL.sneak.heavy,sev:2,txt:`Danh -${BAL.sneak.heavy}, ${typeof aaPunishTxt==="function"?aaPunishTxt(2):"tội nặng (có thể bị giáng phẩm)"}`}:{danh:-BAL.sneak.danh,sev:1,txt:`Danh -${BAL.sneak.danh}, ${typeof aaPunishTxt==="function"?aaPunishTxt(1):"bị phạt"}`}}
 function j77Tc(k){try{return k==="home"?0:travel(S.place,k)}catch(e){return 1}}
-accAskLine=function(k){return `${word(accAskO(k))} · tốn: ${j77Tc(k)+1} khắc · thành: được vào buổi này · hỏng: không mất gì`};
+/* where she ends up when asking / sneaking / being led in costs n khắc (the ask + the walk): this buổi, or the buổi the walk spills into (j76arrive) — VANPHONG true words (day-khắc r2) */
+function j77When(n){return used+n<=BAL.time.khac?" buổi này":` (đến nơi vào ${j76arrive(n)})`}
+accAskLine=function(k){return `${word(accAskO(k))} · tốn: ${j77Tc(k)+1} khắc · thành: được vào${j77When(j77Tc(k)+1)} · hỏng: không mất gì`};
 accMini=function(k,st,risk){const L=[];const t=(st.tc!=null?st.tc:j77Tc(k))+1;
  if(st.ask==="yk")L.push(`<button class="acb" data-acask="${k}" ${st.askOk?"":"disabled"}>Xin yết kiến ${st.empAway?'<i>ngài vắng</i>':st.dayDone?'<i>hôm nay đã gặp</i>':oddsChip(word(accAskO(k)))+`<i>${t} khắc</i>`}</button>`);
  if(st.ask==="bk")L.push(`<button class="acb" data-acask="${k}" ${st.askOk?"":"disabled"}>Xin bái kiến ${oddsChip(word(accAskO(k)))}<i>${t} khắc</i></button>`);
  if(st.kind)L.push(`<button class="acb" data-acsneak="${k}" ${st.sneakOk?"":"disabled"}>Lẻn vào ${oddsChip(word(accSneakO(k)))}<i>${t} khắc${risk?` · bắt: Danh ${accSneakPen(k).danh}`:""}</i></button>`);
  return L.length?`<span class="macts">${L.join("")}</span>`:""};
-accSneakLine=function(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+1} khắc · thành: vào được buổi này · hỏng: ${accSneakPen(k).txt}`};
+accSneakLine=function(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+1} khắc · thành: vào được${j77When(tc+1)} · hỏng: ${accSneakPen(k).txt}`};
 accSneak=function(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!dayFit(tc+1))return;const nm=accName(k);const o=accSneakO(k);spend(1);
  if(roll(o)){accGrant(S,k);log(`Lẻn vào ${nm} trót lọt.`);window.__accSilent=0;j77In(k);if(S.place!==k)render();return}
  const P=accSneakPen(k);const r0=S.rank;spend(tc);apply({danh:P.danh});log(`<span class="r">Lẻn vào ${nm}, bị thị vệ bắt được: Danh ${P.danh}.</span>`);punish(S,`tự tiện lẻn vào ${nm}`,P.sev);
@@ -24147,7 +24158,7 @@ seeBtn=function(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))re
  return accGuestNeed(pbtn(`data-see="${v.id}" class="seeb"`,`Đến gặp ${v.name.split(" ").pop()}`,accGuestLine(k,tc,"gặp mặt, mọi việc làm tại chỗ, dễ hơn sai người")+accLockTag(k),accGuestWhy(k,tc)),k,tc)};
 /* hard-lock extra way in: ask a eunuch to lead her in (bạc), for the Emperor's halls */
 function accLeadO(k){return od(BAL.odb.j77.odAccLeadO+(S.danh||0)/8+(typeof mm==="function"?mm():0))}
-function accLeadCost(){return 15}
+function accLeadCost(){return BAL.sneak.lead}
 function accLead(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!dayFit(tc+1)||S.bac<accLeadCost())return;const nm=accName(k);
  const o=accLeadO(k);/* odds read before the spend (shown-odds r2) */spend(1);/* review ag-all-2 r2 A5 (OD 17/11 ~17:10Z (1)): the eunuch's bạc only when he leads her in */if(roll(o)){apply({bac:-accLeadCost()});accGrant(S,k);log(`Nhờ thái giám dẫn vào ${nm}: được dẫn vào (Bạc -${accLeadCost()}).`);j77In(k);if(S.place!==k)render();return}
  log(`Nhờ thái giám dẫn vào ${nm}: hắn không dám nhận bạc, từ chối.`);Q.push({t:"Không được dẫn vào",h:`<p>Thái giám đẩy gói bạc lại, lắc đầu: “Không có khẩu dụ, nô tài không dám.”</p>`});showModal();render()}
@@ -24157,7 +24168,7 @@ function accLead(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=t
   if(!ACC_ETQ.lead){m.h+=`<p class="past">Tự ý vào là tội nặng. Hoặc chờ được triệu.</p>`;showModal();return}
   if(!m.opts)m.opts=[{n:"Thôi",fx:{},x:""}],m.btn=undefined;
   const ok=dayFit(tc+1)&&S.bac>=accLeadCost();
-  if(ok)m.opts.splice(Math.max(0,m.opts.length-1),0,{n:"Nhờ thái giám dẫn vào",fx:{},x:`${word(accLeadO(k))} · tốn: ${tc+1} khắc · thành: được vào buổi này, Bạc -${accLeadCost()} · hỏng: không mất bạc`,go:()=>setTimeout(()=>accLead(k),0)});
+  if(ok)m.opts.splice(Math.max(0,m.opts.length-1),0,{n:"Nhờ thái giám dẫn vào",fx:{},x:`${word(accLeadO(k))} · tốn: ${tc+1} khắc · thành: được vào${j77When(tc+1)}, Bạc -${accLeadCost()} · hỏng: không mất bạc`,go:()=>setTimeout(()=>accLead(k),0)});
   else m.h+=`<p class="past">Nhờ thái giám dẫn vào: ${!dayFit(tc+1)?j77Bound(tc+1):`cần ${accLeadCost()} bạc (có ${S.bac})`}.</p>`;
   m.h+=`<p class="past">Hoặc chờ được triệu.</p>`;showModal()}catch(e){}}})();
 /* map tiles: a palace whose chủ vị outranks her shows the greeting in its price */
@@ -24758,7 +24769,7 @@ const KA_STAT=/^(Bạc|Sức|Sủng|Danh|Đức|Sắc|Tài|Tâm cơ|Tai mắt|Â
 const kaPlain=h=>String(h||"").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 /* sentiment of one value for her: g gain, r loss, n neutral word */
 const kaWord=h=>String(h).replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"quý ngươi -$1").replace(/thân \+(\d+)/g,"quý ngươi +$1");
-function kaSent(h,old){const s=kaPlain(h);if(!s)return"n";let c="n";try{c=kcls(h)}catch(e){}if(c==="n"&&(old==="g"||old==="r"))c=old;
+function kaSent(h,old){const s=kaPlain(h);if(!s)return"n";if(old==="g"||old==="r")return old; /* kit-rows-b KP12: the writer's explicit class g/r beats the word-meaning colouring */let c="n";try{c=kcls(String(h).replace(/<b>[^<]*<\/b>/g,"x"))}catch(e){} /* an unclassed <b>item name</b> never colours the row (e.g. "Son phần giáng") */
  /* sign wins: a value whose only number is negative is a loss for her (unless it is harm to a rival or less hostility) */
  if(c!=="r"&&/[-−]\s?\d/.test(s)&&!/\+\s?\d/.test(s)&&!/(^|\s)(nàng|con nàng|của nàng|hắn)(\s|$)/.test(s)&&!/(ghen|oán|thù|nghi)\s*[-−]/.test(s))c="r";return c}
 /* split one value "X +1 (note)" into value + trailing note */
@@ -24767,6 +24778,7 @@ function kaSplitNote(h){const s=kaPlain(h);const m=s.match(/^(.*\S)\s+(\([^()]*\
 function kaModel(html){const t=document.createElement("template");t.innerHTML=String(html||"");const M={odds:"",oddsX:"",items:[]};let lab="",afterOdds=false,bl="";
  const push=(h,old,l)=>{h=kaWord(h);const p=kaPlain(h);if(!p||p==="·")return;
   const lm=p.match(/^(được ngay|ngay|tốn|thành|được|hỏng|bại|mất|kèm)\s*:\s*/i);if(lm&&!/</.test(h)){l=lm[1].toLowerCase();if(l==="bại")l="hỏng";h=p.slice(lm[0].length);if(!h)return}
+  else if(/</.test(h)){/* kit-rows-b KP21(1): a coloured item that starts with a label («kèm: <span class="g">…</span>») — strip the label from the html, keep the tags, route by the label */const lh=h.match(/^((?:\s*<[^>]+>)*)\s*(được ngay|ngay|tốn|thành|được|hỏng|bại|mất|kèm)\s*:\s*/i);if(lh){l=lh[2].toLowerCase();if(l==="bại")l="hỏng";h=lh[1]+h.slice(lh[0].length);if(!kaPlain(h))return}}
   if(!M.odds&&KA_ODDS.test(p)){M.odds=p;return}
   const ll=l==null?lab:l;if(ll==="thành"||ll==="hỏng")bl=ll;M.items.push({h,old,l:ll,b:ll==="kèm"?(bl||""):ll==="thành"||ll==="hỏng"?ll:""})};
  const walk=nodes=>{for(const n of nodes){
@@ -24807,7 +24819,9 @@ function kaRows(M){const R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[],one:true
  const sure0=!M.odds,hasBad=M.items.some(it=>(it.l==="hỏng"||it.b==="hỏng")&&real(it.h)),hasWin=M.items.some(it=>it.l==="thành"&&real(it.h));
  const sure=sure0&&(!hasBad||!hasWin);R.one=sure;
  const add=(r,h,c,b)=>{b=(r==="why"||r==="ton"||r==="note")?"":sure||!b?"t":b;if(!R[r].some(x=>kaPlain(x.h)===kaPlain(h)&&x.b===b))R[r].push({h,c,b})};
- for(const it of M.items){let [h,nt]=kaSplitNote(kRangeW(it.h));if(nt)add("note",nt,"n");const p=kaPlain(h);if(!p)continue;if(KA_NOTHING.test(p))continue; /* owner 11/15: a line that says nothing is not shown */const c=kaSent(h,it.old);const neu=KNEU.test(p);const l=it.l||"";const cont=!!it.cont;
+ /* kit-rows-b KP21(2): a labelled value «a, Chủ tin với X +3» is split at the top-level «;» / «, » (not inside a clause about «nàng»), each piece routed alone — a pure gain inside a Kèm goes to Được, and a long list is one short line per value */
+ const SPL=it=>{if(it.sp||!/^(kèm|hỏng|thành|ngay)$/.test(it.l||""))return[it];const parts=[].concat(...kSplitTop(it.h,/; /y).map(q=>/(^|\s)nàng(\s|$)/.test(kaPlain(q))?[q]:kSplitTop(q,/, /y))).map(x=>x.trim()).filter(x=>kaPlain(x));return parts.length>1?parts.map(h=>Object.assign({},it,{h,sp:1})):[it]};
+ for(const it of [].concat(...M.items.map(SPL))){let [h,nt]=kaSplitNote(kRangeW(it.h));if(nt)add("note",nt,"n");const p=kaPlain(h);if(!p)continue;if(KA_NOTHING.test(p))continue; /* owner 11/15: a line that says nothing is not shown */const c=kaSent(h,it.old);const neu=KNEU.test(p);const l=it.l||"";const cont=!!it.cont;
   const kb=it.b==="hỏng"?"b":it.b==="thành"?"t":c==="r"?"b":"t";/* a Kèm belongs to the block label written before it; none → a bad thing is BẠI */
   if(/[+−-]\s?0(?![\d.,])/.test(p)&&!/[+−-]\s?(0[.,]\d*[1-9]|[1-9])/.test(p)){add("note",p.replace(/\s?[+−-]\s?0(?![\d.,])/g," không đổi"),"n");continue}
   if(l==="why"){add("why",h,"r");continue}
@@ -28607,7 +28621,7 @@ function kg82Set(k,v){if(k==="round"&&typeof v==="string"){let lab=null;const m=
   if(lab)document.querySelectorAll('[data-kg="round"]').forEach(e=>{const l=e.previousElementSibling;if(l&&l.tagName==="SMALL"&&l.textContent!==lab)l.textContent=lab})}
  kg82Set0(k,v)}
 function kg82Set0(k,v){if(typeof kitGameSet==="function")kitGameSet(k,v);else document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
-function kg82Open(o){const pb=KG82.preBack,pp=KG82.prePay||(typeof S!=='undefined'&&S&&S.mg&&S.mg.pay)||null;KG82.preBack=null;KG82.prePay=null;kg82Close(true);const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
+function kg82Open(o){const pb=KG82.preBack,pp=KG82.prePay||(typeof S!=='undefined'&&S&&S.mg&&S.mg.pay)||null;KG82.preBack=null;KG82.prePay=null;kg82Close(true);KG82.setup=0;KG82.phase="";KG82.ready=null;const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
  const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;kg82BackX(d);
  /* §13.9: a charge the caller only REMEMBERS (kgDefer) is taken on «Sẵn sàng» / the quick option / any outcome (kgPay); a lesson keeps it in S.mg.pay (a reload reopens the
     same unpaid lesson, never a free one). Until then the ✕ is a free back: nothing was spent, nothing to undo. */
@@ -28883,7 +28897,7 @@ function kg82Aim(box,env){const C=kg82Canvas(box,.95,420),{g,W,H}=C;const pot=en
 const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,pattern:kg82Pattern,steps:kg82Steps,aim:kg82Aim};
 
 /* ---------- running one game inside the frame ---------- */
-function kg82Play(kind,onEnd){kgPay();const box=kg82Box();if(!box)return;box.classList.remove("kgintro");box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";{const d=kg82El();if(d){d.classList.add("kg-run");d.classList.remove("kg-idle")}}
+function kg82Play(kind,onEnd){KG82.setup=0;kgPay();const box=kg82Box();if(!box)return;box.classList.remove("kgintro");box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";{const d=kg82El();if(d){d.classList.add("kg-run");d.classList.remove("kg-idle")}}
  let done=false,dead=false,stop=null;const env=KG82.cur={kind,lv:KG82.lv||0,hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:raw=>{if(done)return;done=true;clearTimeout(guard);KG82.quit=null;const st=KG82.run&&KG82.run.stop;KG82.peek=()=>null;if(st)try{st()}catch(e){}KG82.run=null;KG82.rawF=raw;const gm=raw===0&&KG82.gaveUp?0:mgGrade(raw,kind);kg82Set0("score",`${gm}/10`);/* review/mg-score-same: the board ends on the mark given */onEnd(gm)}};/* mg-balance: engines pass a float; graded by BAL.mgTier.gamma */
  let guard=0;KG82.gaveUp=0;if(KG82.giveUp){KG82.giveUp=0;KG82.gaveUp=1;env.end(0);return}/* KIT §13.9 kit ✕ «Quay lại» on the rules screen: given up before «Sẵn sàng» = the caller's own 0/10 result, no board, no clock */
  guard=setTimeout(()=>env.end(0),97500);KG82.run={stop:()=>{dead=true;clearTimeout(guard);if(stop)stop()}};KG82.quit=()=>{KG82.gaveUp=1;env.end(0)};/* §13.9: given up during play */
@@ -29191,7 +29205,7 @@ function kg82Lesson(k){const [t,kind]=KG82_MGL[k];return[t,KG82_KIND[kind].how,(
     (.kquick), the makeup #toilquick, any id ending skip / quick, and any button / small whose text holds a word of the kit ladder KIT_ODDS (j79). */
  const ODDRE=(()=>{const L=(typeof KIT_ODDS!=="undefined"&&KIT_ODDS.length?KIT_ODDS:["Liều","Khó","Năm ăn năm thua","Khá chắc","Chắc","Rất chắc","Nắm chắc"]).map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));return new RegExp("(?<![\\p{L}])(?:"+L.join("|")+")(?![\\p{L}])","u")})();
  const isOdds=e=>!!(e.closest(".kquick,#toilquick,[id$='skip'],[id$='quick']")||ODDRE.test(e.textContent||""));
- function pass(){try{if(KG82.ready||KG82.phase==="tut"||KG82.tut||KG82.phase==="result"||KG82.phase==="intro"||document.querySelector("#kg82ok,#mgcal-copy,#mgcal-seq,#mgcal-x"))return;/* review fix: a result / intro / Thử tay screen is not play: its buttons keep their words */document.querySelectorAll(".kg82 button,#kg82box button,.kg82act button").forEach(b=>{if(!inPlay(b)||isOdds(b)||b.dataset.kgsign||/kgr|kgt/.test(b.id+" "+b.className)||b.id==="kg82go"||b.dataset.kgrLabel||b.closest(".kgr-bt,.kgr-acts,.kgrb"))return;const t=b.textContent.replace(/\s+/g," ").trim();if(!/\p{L}/u.test(t))return;
+ function pass(){try{if(KG82.setup||KG82.ready||KG82.phase==="tut"||KG82.tut||KG82.phase==="result"||KG82.phase==="intro"||document.querySelector("#kg82ok,#mgcal-copy,#mgcal-seq,#mgcal-x"))return;/* review fix: a result / intro / Thử tay screen is not play: its buttons keep their words */document.querySelectorAll(".kg82 button,#kg82box button,.kg82act button").forEach(b=>{if(!inPlay(b)||isOdds(b)||b.dataset.kgsign||/kgr|kgt/.test(b.id+" "+b.className)||b.id==="kg82go"||b.dataset.kgrLabel||b.closest(".kgr-bt,.kgr-acts,.kgrb"))return;const t=b.textContent.replace(/\s+/g," ").trim();if(!/\p{L}/u.test(t))return;
    let s="●";for(const [re,g] of SIGN)if(re.test(t)){s=g;break}b.dataset.kgsign=s;if(!b.title)b.title=t;b.setAttribute("aria-label",t);b.textContent=s});
   document.querySelectorAll("#kg82box small,.kg82act small").forEach(e=>{if(inPlay(e)&&!isOdds(e))e.hidden=true});
   document.querySelectorAll("#kg82box .krl").forEach(l=>{if(!inPlay(l))return;const row=l.parentElement;if(!row||row.dataset.kgrow)return;row.dataset.kgrow=1;
@@ -29199,6 +29213,7 @@ function kg82Lesson(k){const [t,kind]=KG82_MGL[k];return[t,KG82_KIND[kind].how,(
    const w=document.createTreeWalker(row,NodeFilter.SHOW_TEXT);const ns=[];let n;while(n=w.nextNode())if(!l.contains(n))ns.push(n);ns.forEach(x=>{if(!x.parentElement.closest("b")&&/\p{L}/u.test(x.nodeValue))x.nodeValue=x.nodeValue.replace(/[^\d\s\/]+/gu,"")})})}catch(e){}}
  let q=0;try{new MutationObserver(()=>{if(q)return;q=setTimeout(()=>{q=0;pass()},30)}).observe(document.body,{childList:true,subtree:true})}catch(e){}
  window.kg82Signs=pass})();
+/* kit-signs-preplay (rv-kit-signs-odds note): KG82.setup=1 marks a screen that is NOT the running board (dress / pre-play / colour pick / result of a game that builds its own screens, e.g. makeup «Trước gương đồng»): its buttons keep their words. Cleared by kg82Open / kg82Play / the game when its board starts. */
 /* ================= j91 MỖI MÔN MỘT TRÒ (owner 11/14: "5 câu hỏi chọn đáp án không phải minigame") =================
    Every contest kind of j82 / j71 (and every lesson art) now has its OWN mechanic; no two kinds share one.
    Table (dev/MINIGAMES.md):  dan rhythm · hat hold (giữ hơi theo giai điệu) · co go · dauho fling (kéo thả ném tên) · ban aim ·
@@ -33154,7 +33169,19 @@ BAL.ge={
  td_an_1:{danh:40,th:35},td_an_2:{tamco:45,sung:50},td_an_3:{tai:55,danh:35},td_an_4:{duc:35,sung:35},
  td_ke_1:{mat:4,tamco:45},td_ke_2:{duc:45,danh:35},td_ke_3:{mat:4,maid:50},td_ke_4:{tamco:35,duc:30},
  td_song_1:{danh:40,sung:45},td_song_2:{tamco:50,mat:4},td_song_3:{duc:35,maid:45},td_song_4:{duc:45,th:30},
- td_tha_1:{duc:45,sung:40},td_tha_2:{tamco:45,mat:3},td_tha_3:{duc:40,th:30},td_tha_4:{danh:30,duc:40}},
+ td_tha_1:{duc:45,sung:40},td_tha_2:{tamco:45,mat:3},td_tha_3:{duc:40,th:30},td_tha_4:{danh:30,duc:40},
+ /* writer wave W3 (brief E11, jgedata_w3.js): ch_* · thd_* · cnv_chu cnv_ban cnv_ma (same scales and sizes as the pilots) */
+ ch_co_1:{mat:4},ch_co_2:{tamco:50,sung:40},ch_co_3:{duc:40,danh:35},ch_co_4:{duc:40},
+ ch_benh_1:{tai:50,danh:35},ch_benh_2:{tamco:45,mat:3},ch_benh_3:{duc:40,sung:45},ch_benh_4:{th:30,duc:35},
+ ch_ho_1:{duc:40,danh:35},ch_ho_2:{sung:55,tamco:40},ch_ho_3:{duc:40},ch_ho_4:{dad:30,tamco:40},
+ ch_bi_1:{duc:45,danh:35},ch_bi_2:{tamco:50,mat:3},ch_bi_3:{th:30,duc:35},ch_bi_4:{tamco:45},
+ thd_tho_1:{tai:55,danh:40},thd_tho_2:{tai:45,tamco:45},thd_tho_3:{duc:35,tai:40},thd_tho_4:{sung:50,tai:45},
+ thd_sach_1:{tai:50,mat:4},thd_sach_2:{tamco:45,sung:45},thd_sach_3:{duc:40,danh:35},thd_sach_4:{tai:40,dad:25},
+ thd_tro_1:{duc:40},thd_tro_2:{tamco:45,danh:40},thd_tro_3:{duc:35,dad:25},thd_tro_4:{duc:40,tamco:40},
+ thd_hoc_1:{tai:50,sung:40},thd_hoc_2:{tamco:50,mat:3},thd_hoc_3:{duc:40,tai:35},thd_hoc_4:{duc:40,sung:40},
+ cnv_chu_1:{tamco:45,mat:2},cnv_chu_2:{mis:20},cnv_chu_3:{duc:35,tamco:35},cnv_chu_4:{duc:40,mat:2},
+ cnv_ban_1:{duc:40},cnv_ban_2:{tamco:45,danh:30},cnv_ban_3:{tai:45,danh:30},cnv_ban_4:{duc:30,sac:40},
+ cnv_ma_1:{tai:45,danh:35},cnv_ma_2:{tamco:45,mat:3},cnv_ma_3:{duc:40,danh:30},cnv_ma_4:{duc:40,sung:35}},
  /* fail-outcome losses (her pair pointed at the ending and missed; none in the quiet form unless quietLoss) */
  fail:{
   tt_co_1:{rank:-1,danh:-12},tt_co_2:{sung:-8,danh:-4},tt_co_3:{sung:-8,danh:-6},tt_co_4:{danh:-10,duc:-6},
@@ -33183,7 +33210,19 @@ BAL.ge={
  td_an_1:{danh:-10},td_an_2:{danh:-8,duc:-4},td_an_3:{danh:-6},td_an_4:{sung:-6},
  td_ke_1:{danh:-10,mat:-2},td_ke_2:{sung:-8},td_ke_3:{mat:-3},td_ke_4:{sung:-8,danh:-4},
  td_song_1:{danh:-8},td_song_2:{rank:-1,danh:-12},td_song_3:{sung:-6},td_song_4:{rank:-1,sung:-8},
- td_tha_1:{danh:-6},td_tha_2:{sung:-8,danh:-6},td_tha_3:{danh:-6},td_tha_4:{danh:-10}},
+ td_tha_1:{danh:-6},td_tha_2:{sung:-8,danh:-6},td_tha_3:{danh:-6},td_tha_4:{danh:-10},
+ /* writer wave W3 (brief E11, jgedata_w3.js): ch_* · thd_* · cnv_chu cnv_ban cnv_ma (same scales and sizes as the pilots) */
+ ch_co_1:{rank:-1,danh:-12},ch_co_2:{danh:-10,sung:-6},ch_co_3:{sung:-6,danh:-6},ch_co_4:{sung:-8,danh:-4},
+ ch_benh_1:{danh:-8,tai:-4},ch_benh_2:{danh:-10,duc:-6},ch_benh_3:{danh:-8,sung:-6},ch_benh_4:{sung:-6,danh:-6},
+ ch_ho_1:{danh:-8,sung:-6},ch_ho_2:{rank:-1,danh:-10},ch_ho_3:{sung:-6,danh:-6},ch_ho_4:{danh:-10,sung:-6},
+ ch_bi_1:{danh:-10,duc:-4},ch_bi_2:{danh:-10,tamco:-4},ch_bi_3:{danh:-8,sung:-6},ch_bi_4:{rank:-1,danh:-12},
+ thd_tho_1:{danh:-8,tai:-4},thd_tho_2:{danh:-10,sung:-6},thd_tho_3:{sung:-6,danh:-6},thd_tho_4:{sung:-8,danh:-4},
+ thd_sach_1:{rank:-1,danh:-12},thd_sach_2:{danh:-10,duc:-6},thd_sach_3:{danh:-8,sung:-4},thd_sach_4:{sung:-8,danh:-6},
+ thd_tro_1:{danh:-8,sung:-4},thd_tro_2:{danh:-10,sung:-8},thd_tro_3:{sung:-8,danh:-6},thd_tro_4:{danh:-10,sung:-4},
+ thd_hoc_1:{danh:-8,sung:-6},thd_hoc_2:{rank:-1,danh:-10},thd_hoc_3:{sung:-6,danh:-6},thd_hoc_4:{sung:-8,danh:-6},
+ cnv_chu_1:{danh:-8,mis:-15},cnv_chu_2:{mis:-15,danh:-6},cnv_chu_3:{sung:-6,danh:-6},cnv_chu_4:{danh:-10,duc:-4},
+ cnv_ban_1:{sung:-6,danh:-6},cnv_ban_2:{danh:-10,duc:-6},cnv_ban_3:{danh:-8,tai:-4},cnv_ban_4:{sung:-8,danh:-4},
+ cnv_ma_1:{danh:-8,sung:-6},cnv_ma_2:{danh:-10,duc:-6},cnv_ma_3:{sung:-6,danh:-6},cnv_ma_4:{danh:-8,sung:-6}},
  /* rewards: the same SIZE for both shadings (fair: no "right" morality); only the sign of everyone's attitude differs (rel thiện → thiện cảm +, ác → oán +).
     rw.mul × the road's RD97L rare fx ≈ the size (start 3×); rank = steps (never above the seat rules: Hoàng hậu only by seat "HH"); mis = the named NPC's attitude */
  rw:{mul:3,
@@ -33213,7 +33252,19 @@ BAL.ge={
  td_an_1:{danh:36,duc:10,rel:8},td_an_2:{rank:1,danh:30,tamco:10,rel:8},td_an_3:{danh:30,tai:10,rel:8},td_an_4:{danh:20,duc:12,rel:6},
  td_ke_1:{rank:1,danh:30,mat:2,rel:8},td_ke_2:{danh:24,duc:12,rel:8},td_ke_3:{danh:24,mat:3,rel:8},td_ke_4:{danh:18,duc:10,rel:6},
  td_song_1:{rank:1,danh:30,sung:15,rel:8},td_song_2:{danh:36,sung:18,rel:8},td_song_3:{danh:20,duc:12,bac:300,rel:6},td_song_4:{danh:24,duc:15,rel:8},
- td_tha_1:{danh:24,duc:12,rel:8},td_tha_2:{rank:1,danh:30,tamco:10,rel:8},td_tha_3:{danh:20,duc:15,rel:6},td_tha_4:{danh:20,duc:12,rel:6}},
+ td_tha_1:{danh:24,duc:12,rel:8},td_tha_2:{rank:1,danh:30,tamco:10,rel:8},td_tha_3:{danh:20,duc:15,rel:6},td_tha_4:{danh:20,duc:12,rel:6},
+ /* writer wave W3 (brief E11, jgedata_w3.js): ch_* · thd_* · cnv_chu cnv_ban cnv_ma (same scales and sizes as the pilots) */
+ ch_co_1:{danh:36,mat:2,tamco:10,rel:8},ch_co_2:{rank:1,danh:30,tamco:10,rel:8},ch_co_3:{danh:24,duc:12,sung:12,rel:6},ch_co_4:{danh:24,duc:12,bac:300,rel:6},
+ ch_benh_1:{danh:30,tai:10,bac:300,rel:6},ch_benh_2:{rank:1,danh:30,mat:2,rel:8},ch_benh_3:{rank:1,danh:30,sung:18,rel:8},ch_benh_4:{danh:24,duc:12,th:20,rel:6},
+ ch_ho_1:{rank:1,danh:24,duc:6,sung:12,rel:6},ch_ho_2:{seat:"HH",danh:30,sung:15,rel:8},ch_ho_3:{danh:24,duc:12,bac:300,rel:6},ch_ho_4:{rank:1,danh:30,tamco:10,rel:8},
+ ch_bi_1:{rank:1,danh:30,duc:10,sung:12,rel:8},ch_bi_2:{rank:1,danh:30,tamco:10,mat:2,rel:8},ch_bi_3:{danh:24,duc:12,bac:300,rel:6},ch_bi_4:{danh:36,sung:18,rel:10},
+ thd_tho_1:{danh:30,tai:10,bac:300,rel:6},thd_tho_2:{rank:1,danh:30,tamco:10,rel:8},thd_tho_3:{danh:24,duc:12,bac:300,rel:6},thd_tho_4:{rank:1,sung:30,danh:18,rel:6},
+ thd_sach_1:{danh:36,sung:18,mat:2,rel:8},thd_sach_2:{rank:1,danh:30,tamco:10,rel:8},thd_sach_3:{danh:24,duc:12,bac:300,rel:6},thd_sach_4:{danh:24,duc:12,bac:300,rel:6},
+ thd_tro_1:{rank:1,danh:30,duc:10,sung:12,rel:8},thd_tro_2:{rank:1,danh:30,mat:2,rel:8},thd_tro_3:{danh:24,duc:12,bac:300,rel:6},thd_tro_4:{rank:1,danh:30,duc:10,rel:8},
+ thd_hoc_1:{rank:1,danh:30,tai:10,rel:8},thd_hoc_2:{danh:36,tamco:10,mat:2,rel:10},thd_hoc_3:{danh:24,duc:12,bac:300,rel:6},thd_hoc_4:{rank:1,danh:24,sung:15,duc:6,rel:6},
+ cnv_chu_1:{rank:1,danh:30,mat:2,tamco:10,rel:8},cnv_chu_2:{rank:1,danh:24,sung:15,mis:20,rel:6},cnv_chu_3:{danh:20,duc:12,bac:300,rel:6},cnv_chu_4:{rank:1,danh:30,duc:10,rel:8},
+ cnv_ban_1:{danh:20,duc:12,bac:300,rel:6},cnv_ban_2:{rank:1,danh:30,tamco:10,rel:8},cnv_ban_3:{rank:1,danh:30,tai:10,rel:8},cnv_ban_4:{danh:24,duc:12,bac:300,rel:6},
+ cnv_ma_1:{rank:1,danh:30,tai:10,rel:8},cnv_ma_2:{rank:1,danh:30,mat:2,tamco:10,rel:8},cnv_ma_3:{danh:20,duc:12,bac:300,rel:6},cnv_ma_4:{rank:1,danh:30,duc:10,sung:12,rel:8}},
  help:{rw:{danh:6,duc:3}},   /* her help to an NPC who then unlocks (NPC parity, build step 5 — not live in this pass) */
  npc:{on:false},             /* NPC grand endings wait for NPC roads (OD:L1243, unit D) */
  /* measured bands (dev/measure/ge-measure.js): an in-character bot that follows one ending's road reaches a grand ending in about one life of two or three;
@@ -35336,13 +35387,15 @@ function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=K
   <div class="kmshelf"></div><div class="kmtap km-loop">Chạm để mở</div><div class="kmlist">${rows}<button class="kbtn kmtake" data-km-close>Nhận</button></div></div>`;
  kmPush(done=>{const st=kmStage("km-reward",html,{manual:true,dur:60000,onEnd:done});const root=st.ov.querySelector(".kmrew");st.ov.id="kmrew";let step=0;
   const spot=root.querySelector(".kmspot"),shelf=root.querySelector(".kmshelf");const T=[];const later=(ms,f)=>T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms));
-  const fin=()=>{T.forEach(clearTimeout);T.length=0;step=2;spot.innerHTML="";shelf.innerHTML=seq.map(tile).join("");root.classList.add("km-done","km-fast");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}};
+  /* kit-rows-b KP15: the shelf shows at most KMCAP icons + one «+N» chip (22 items = 3 rows of icons covered the list and the Nhận button); the full list below holds every item */const KMCAP=8,more=n=>`<span class="kmsh kmsh-more" style="--i:${KMCAP}">+${n}</span>`;const shelfAll=()=>seq.slice(0,seq.length>KMCAP+1?KMCAP:seq.length).map(tile).join("")+(seq.length>KMCAP+1?more(seq.length-KMCAP):"");
+  const shelfAdd=(x,i)=>{if(seq.length<=KMCAP+1)return shelf.insertAdjacentHTML("beforeend",tile(x,i));if(i<KMCAP)shelf.insertAdjacentHTML("beforeend",tile(x,i));else{const m=shelf.querySelector(".kmsh-more");if(m)m.textContent="+"+(seq.length-KMCAP);else shelf.insertAdjacentHTML("beforeend",more(i+1-KMCAP))}};
+  const fin=()=>{T.forEach(clearTimeout);T.length=0;step=2;spot.innerHTML="";shelf.innerHTML=shelfAll();root.classList.add("km-done","km-fast");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}};
   const one=i=>{if(step!==1)return;if(i>=seq.length){later(RV.list||350,()=>{step=2;root.classList.add("km-done");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}});return}
    const x=seq[i];spot.innerHTML=kitRevealHTML(info(x),{noSub:true});root.dataset.kmi=String(i);
    try{if(typeof kitSfx==="function")kitSfx(x.coin?"coinBounce":x.g>=3?"itemRare":"itemPop",{rate:1+Math.min(i,5)*.05});else if(typeof sfx==="function")sfx(x.coin?"sfx-coin":"sfx-open")}catch(e){}
    if(x.g>=2){const r=spot.getBoundingClientRect();later((RV.rise||550)*.7,()=>kmSpark(st.ov,r.left+r.width/2,r.top+r.height*.4,x.g>=4?34:x.g>=3?26:16,x.g>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4",KG[x.g].c,"#f6ead6"],x.g>=3?170:130))}
    later((RV.rise||550)+(RV.hold||1300),()=>{const p=spot.firstElementChild;if(p)p.classList.add("krev-out");
-    later(RV.shelf||380,()=>{spot.innerHTML="";shelf.insertAdjacentHTML("beforeend",tile(x,i));one(i+1)})})};
+    later(RV.shelf||380,()=>{spot.innerHTML="";shelfAdd(x,i);one(i+1)})})};
   const open=()=>{if(step)return;step=1;if(kmReduced()){root.classList.add("km-open");fin();return}root.classList.add("km-shake");
    later(RV.shake||420,()=>{root.classList.remove("km-shake");root.classList.add("km-open");
     const b=root.querySelector(".kmbox").getBoundingClientRect();const best=seq.length?Math.max(...seq.map(x=>x.g)):0;kmSpark(st.ov,b.left+b.width/2,b.top+b.height*.45,best>=4?40:24,best>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4","#f6ead6","#e0c080"],best>=3?190:140);
@@ -35618,6 +35671,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmspot{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:6;pointer-events:none;width:max-content;max-width:92vw}
 .kmshelf{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;min-height:0;max-width:min(92vw,520px)}
 .km-open .kmshelf{min-height:56px}
+.kmsh-more{align-self:center;min-width:44px;text-align:center;font:700 15px/1 var(--kit-font,inherit);color:var(--kit-mut,#8a6a40);padding:10px 8px;border:1px dashed currentColor;border-radius:999px}
 .kmsh{display:inline-block;animation:kmPop calc(.32s*var(--pace)) var(--km-ease) both}.km-fast .kmsh{animation-delay:calc(var(--i) * 40ms)}
 .kmbox{transition:width .3s ease,opacity .3s}.km-done .kmbox{width:min(30vw,150px);opacity:.6}
 .km-done .kmlist{max-height:calc(100dvh - 120px);overflow:auto}
@@ -40778,7 +40832,7 @@ html body #modal .dlg.kdper.kdpall.kdpbanner>#mb>.opts{grid-row:3!important}
  try{if(L.length&&typeof S!=="undefined"&&S&&L.every(p=>p===S||p.__kp===S)&&m){const w=m.who&&(m.who.__kp||m.who);if(w&&w!==S&&typeof w==="object"&&(w.name||w.kind))L=[w].concat(L)}}catch(e){}
  try{if(L.length>1&&typeof S!=="undefined"&&S){const o=L.filter(p=>p!==S&&p.__kp!==S);if(o.length)L=o.concat(L.filter(p=>p===S||p.__kp===S))}}catch(e){}
  return window.KIT_EVENT_DP===false?L:L.slice(0,1)};window.kitStagePeople=kitStagePeople;
- if(typeof kitEvArt!=="function")return;const a0=kitEvArt;kitEvArt=function(m){try{/* review r8: a festival dialog whose festival has no "fest:<k>" category in EVENTS.json (Vu Lan, Lạp bát, Thánh thọ, Vạn thọ)
+ if(typeof kitEvArt!=="function")return;const a0=kitEvArt;kitEvArt=function(m){/* kit-rows-b KP17: an act picker / shop is not an event — never tag a guessed evId on it, never invent its picture (KIT_ACT_PIDS / act / shop, same set kitIsEventChoice excludes) */if(m&&(m.act||m.shop||(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid))))return a0.apply(this,arguments);try{/* review r8: a festival dialog whose festival has no "fest:<k>" category in EVENTS.json (Vu Lan, Lạp bát, Thánh thọ, Vạn thọ)
    takes the festival's own band (https://ctm-img.victoria-tntt.workers.dev/img/ev-fest-<k>-b.webp, the one the festival day already shows, j71) — not the Hoàng thượng / Thái hậu picture */
   if(m&&!m.art&&!m.stArt&&!(m.evId&&typeof evArtCat==="function"&&evArtCat(m.evId))){const f=kitFestKey(m);if(f&&typeof evArtCat==="function"&&!evArtCat("fest:"+f))return{src:`https://ctm-img.victoria-tntt.workers.dev/img/ev-fest-${f}-b.webp`,lab:String(FEST[f].name||"").replace(/\s*\([^)]*\)\s*$/,"")}}
   if(m&&!m.evId&&!m.art&&!m.stArt){const f=kitFestKey(m);if(f&&typeof evArtCat==="function"&&evArtCat("fest:"+f))m.evId="fest:"+f;
@@ -42729,7 +42783,7 @@ window.thaiyVisits=function(n){if(!S||off())return[];const f=window.thaiyNextVis
 /* ---------- 2. Mời thái y bắt mạch (two roads) ---------- */
 function findO(self){const o=T().find+(S.arts&&S.arts.y||0)*T().findY+(trusted(S)?T().findTrust:0)+(self?T().findSelf:0);return oddsCl(o)}
 function why(road){if(!S||S.dead)return"không được";if(S.out)return"ở lãnh cung, Thái y viện không cử người";if(typeof isSrv==="function"&&isSrv())return"phận cung nữ";
- if(road==="pay"){if((S.bac||0)<cost())return `cần ${cost()} bạc`;if(!can(T().khPay))return"hết khắc";return""}
+ if(road==="pay"){if((S.bac||0)<cost())return `cần ${cost()} bạc`;if(!can(T().khPay))return whyTime(T().khPay)||"hết khắc";return""}
  if(S.confined)return"đang bị cấm túc";if(!can(T().khSelf))return `cần ${T().khSelf} khắc`;if((S.suc||0)<20)return"Sức không đủ";return""}
 function xLine(road){const tr=trusted(S);const self=road==="self";
  return `thành: rõ Sức, bệnh và có thai hay chưa · thấy mưu hại ngầm (nếu có): ${word(findO(self))} · kèm: ${self?"người trong cung thấy ngươi ở Thái y viện, thái y khó nói sai":"kín đáo, thái y đến tận cung"}${tr?"":", thái y chưa phải người của ngươi nên lời có khi không thật"}`}
@@ -46470,20 +46524,23 @@ PEND.giftto=p=>{const t=p.t;const L=giftBagFor(t);if(!L.length)return{t:"<p>Rư�
  return{t:`<p>Dâng món gì lên ${who}? Mỗi món ghi đúng điều được, theo tâm trạng và sở thích của ${t==="emp"?"ngài":"người"}.</p>`,
   o:L.map(x=>({n:`${giftName(x.e)}${x.e.wk?" ("+WTIER[x.e.wk.ti]+")":""}`,ik:x.i,fx:{},kgift:x.ok?x.x:"",kgwhy:x.ok?"":x.why,lock:!x.ok,kgg:x.e.wk?"wk":"it",
    go:()=>{if(!x.ok)return;spend(2);const i=S.inv.indexOf(x.e);window.__kitLastEvArt={src:giftArt(x.e).src,lab:giftName(x.e)};log(giveTo(S,t,i))}})).concat([{n:"Thôi",fx:{},kgx:1}])}};
+/* the buổi she arrives in when the walk spills (j9 walkSpill) */
+function kgmArr(k){try{return String(BUOI[walkSpill(k).b]).toLowerCase()}catch(e){return"buổi sau"}}
 function courtMeet(t){const B=[];try{
  if(t==="emp"){const k=(S.where||{}).emp;const night=(S.buoi||0)>=B4L;
   if(k&&!night&&S.place!==k){const st=accState(k);const nm=accName(k);
    if(st.ask==="yk")B.push(pbtn(`data-acask="${k}"`,`Xin yết kiến ở ${nm}`,accAskLine(k),st.askWhy||(!can(1)?"hết khắc":"")));
    else if(!st.why)B.push(pbtn(`data-kgmgo="${k}"`,`Đến ${nm} gặp ngài`,`tốn: ${st.tc||0} khắc · thành: đến nơi ngài đang ngự, gặp được ngài`,!can(st.tc||0)?"hết khắc":""));
+   else if(accSpillOk(k,st))B.push(pbtn(`data-kgmgo="${k}"`,`Đến ${nm} gặp ngài`,`tốn: ${st.tc} khắc · thành: đến ${nm} vào ${kgmArr(k)}, gặp ngài nếu ngài còn ngự ở đó`,"")); /* the walk only spills into the next buổi: open, never greyed (day-khắc r2) */
    else B.push(pbtn(`data-kgmgo="${k}" disabled`,`Đến ${nm} gặp ngài`,"",st.why))}
   else if(S.place===k)B.push(`<p class="kr3note">Ngài đang ở đây: chạm vào ngài trên sân khấu để trò chuyện.</p>`)}
- if(t==="th"&&!S.thDead){const k="tn";if(S.place!==k){const st=accState(k);B.push(pbtn(`data-kgmgo="${k}"`,"Sang Đức Thọ cung thỉnh an",`tốn: ${st.tc||0} khắc · thành: đến Đức Thọ cung, thỉnh an Thái hậu tại đó`,st.why||(!can(st.tc||0)?"hết khắc":"")))}}
+ if(t==="th"&&!S.thDead){const k="tn";if(S.place!==k){const st=accState(k);const sp=accSpillOk(k,st);B.push(pbtn(`data-kgmgo="${k}"`,"Sang Đức Thọ cung thỉnh an",`tốn: ${st.tc||0} khắc · thành: đến Đức Thọ cung${sp?` vào ${kgmArr(k)}`:""}, thỉnh an Thái hậu tại đó`,sp?"":st.why||(!can(st.tc||0)?"hết khắc":"")))}}
  const n=S.inv.filter(e=>e&&!e.h&&(e.wk||IT[e.k])).length;
  B.push(pbtn(`data-kgmgive="${t}"`,t==="emp"?"Dâng quà lên Hoàng thượng":"Dâng quà lên Thái hậu",`tốn: 2 khắc · thành: chọn món trong rương (${n} món), mỗi món ghi đúng điều được`,!n?"rương trống":!can(2)?"hết khắc":""))}catch(e){console.error("courtMeet",e)}
  return B}
 document.addEventListener("click",ev=>{const g=ev.target.closest&&ev.target.closest("[data-kgmgo],[data-kgmgive]");if(!g||g.disabled)return;ev.stopPropagation();ev.preventDefault();
  try{closeModal()}catch(e){}
- if(g.dataset.kgmgo){if(typeof goTo==="function")goTo(g.dataset.kgmgo);return}
+ if(g.dataset.kgmgo){const k=g.dataset.kgmgo;if(typeof walkGo==="function")walkGo(k);else if(typeof goTo==="function")goTo(k);return} /* walkGo = goTo, or the spill walk (arrives next buổi) */
  const t=g.dataset.kgmgive;if(!can(2)||Q.length)return;pushDil(mkP("giftto",{t}),t==="emp"?"Dâng quà lên Hoàng thượng":"Dâng quà lên Thái hậu");render()},true);
 (function(){const P0=typeof pcard==="function"?pcard:null;if(!P0)return;pcard=function(o){try{const gi=o&&o.groups?o.groups.findIndex(g=>g&&g[0]==="Việc hôm nay"):-1;if(gi>=0){
    const t=o.rank==="Hoàng thượng"?"emp":/^Thái hậu/.test(o.rank||"")?"th":null;if(t){const B=courtMeet(t);if(B.length){o.groups=o.groups.slice();o.groups.splice(gi,0,["Gặp "+(t==="emp"?"ngài":"Thái hậu")+" ban ngày",B])}}}}catch(e){}return P0.apply(this,arguments)}})();
@@ -46509,7 +46566,7 @@ function kmEmpO(a,kind){const sung=a.sung||0;
  return odA(a,20+sung/3+effSac(a)/6+mm())}
 const KM_DAYWHY="hôm nay đã gặp ngài một lần";
 function kmEmpWhy(a,kind){if(a.kmEmpDay===wk())return KM_DAYWHY;const f=kmEmpFree();if(!f.ok)return f.why;
- if((kind==="ky"||kind==="cam")&&!((a.arts&&a.arts[kind])>=1))return `cần ${kind==="ky"?"Kỳ":"Cầm"} bậc 1`;if(kind==="walk"&&kmStorm())return S.wx.f===4?"tuyết rơi dày":"trời giông bão";if(a===S&&!can(2))return"hết khắc";if((a.suc||0)<BAL.empDay.suc+5)return"Sức quá thấp";return""}
+ if((kind==="ky"||kind==="cam")&&!((a.arts&&a.arts[kind])>=1))return `cần ${kind==="ky"?"Kỳ":"Cầm"} bậc 1`;if(kind==="walk"&&kmStorm())return S.wx.f===4?"tuyết rơi dày":"trời giông bão";if(a===S&&!can(2))return whyTime(2)||"hết khắc";if((a.suc||0)<BAL.empDay.suc+5)return"Sức quá thấp";return""}
 const KM_EMPACT={ky:["Xin hầu cờ","Ngươi xin bày bàn cờ, hầu Hoàng thượng một ván."],cam:["Xin đánh đàn hầu ngài","Ngươi mang đàn đến, xin gảy một khúc cho ngài nghe."],
  walk:["Mời ngài dạo ngự hoa viên","Ngươi mời Hoàng thượng thong thả dạo ngự hoa viên."]};
 function kmEmpLine(kind){const o=kmEmpO(S,kind);if(kind==="walk"){const n0=nightCh(S),n1=cl(n0+BAL.empDay.walkNight,0,70),w0=word(n0),w1=word(n1);
@@ -46872,8 +46929,8 @@ window.kitEvBanner=kitEvBanner;window.kitDlgKey=kitDlgKey;
    Before: "Nghỉ ngơi dưỡng sức" (1 khắc, Sức +20, "uống thuốc bổ, ngủ sớm") and "Nghỉ ngơi một lát" (1 khắc, Sức +6) cost the same,
    so the second was never worth taking, and the first gave a tonic and a night's sleep for free in any buổi.
    Now each card does what its own text says (numbers: BAL.rest*):
-   - Nghỉ ngơi dưỡng sức = uống thuốc bổ, ngủ sớm: chỉ buổi tối; dùng hết số khắc còn lại của buổi (ít nhất BAL.restDsMinK),
-     tức là hết buổi tối; Sức +BAL.restDsSuc; cần một thang thuốc bổ trong rương (dùng thang rẻ nhất) HOẶC Bạc BAL.restDsBac mua thuốc.
+   - Nghỉ ngơi dưỡng sức = uống thuốc bổ, ngủ sớm: chỉ buổi tối; dùng hết số khắc còn lại trong ngày (ít nhất BAL.restDsMinK; buổi tối là buổi cuối
+     nên đó là hết buổi tối, j76left); Sức +BAL.restDsSuc; cần một thang thuốc bổ trong rương (dùng thang rẻ nhất) HOẶC Bạc BAL.restDsBac mua thuốc.
    - Nghỉ ngơi một lát = mọi buổi, BAL.restLatK khắc, Sức +BAL.restLatSuc, không tốn gì, và bớt nỗi buồn/lo/giận… BAL.restLatEmo
      (jemo, chỉ khi tâm trạng đang xấu; bình thường hay vui thì không đổi — thẻ nói rõ).
    The cards are refreshed from the live state each time they are drawn or played, so Cần/Tốn/Được always match what happens. */
@@ -46884,10 +46941,10 @@ function restBad(k){return typeof feelBad==="function"?feelBad(k):REST_BAD.inclu
 function restTonic(){if(!S||!Array.isArray(S.inv))return null;let best=-1,pr=1e9;
  S.inv.forEach((e,i)=>{const it=e&&IT[e.k];if(it&&it.kd==="Thuốc bổ"&&!e.h&&!e.w&&(it.pr||0)<pr){pr=it.pr||0;best=i}});return best<0?null:{i:best,e:S.inv[best],it:IT[S.inv[best].k]}}
 function restDsB(){const i=BUOI.indexOf(BAL.restDsBuoi);return i<0?BUOI.length-1:i}
-function restDsK(){return Math.max(BAL.restDsMinK,4-(typeof used==="number"?used:0))}
+function restDsK(){return Math.max(BAL.restDsMinK,typeof j76left==="function"?j76left(restDsB(),(S&&(S.buoi||0)===restDsB())?used:0):BAL.time.khac-(typeof used==="number"?used:0))} /* day-khắc audit: the khắc left in the DAY from buổi tối on (j76left), never a typed 4 */
 function restDs(a){if(!a||a.rest!=="ds")return a;const T=restTonic(),k=restDsK();a.k=k;a.b=restDsB();a.o=100;a.w={suc:BAL.restDsSuc};a.l={};
  a.c=T?{}:{bac:-BAL.restDsBac};
- const B=BUOI[restDsB()].toLowerCase();a.t=`Uống thuốc bổ, ngủ sớm: ${(S.buoi||0)!==restDsB()?`chỉ ${B}, dùng hết số khắc còn lại của buổi.`:BAL.time.khac-used<BAL.restDsMinK?`cần còn ít nhất ${BAL.restDsMinK} khắc; hết ${B}.`:`dùng hết ${k} khắc còn lại, hết ${B}.`}${T?"":" Rương không có thuốc bổ: sai người mua một chén."}`;
+ const B=BUOI[restDsB()].toLowerCase();a.t=`Uống thuốc bổ, ngủ sớm: ${(S.buoi||0)!==restDsB()?`chỉ ${B}, dùng hết số khắc còn lại trong ngày.`:(typeof j76left==="function"?j76left():BAL.time.khac-used)<BAL.restDsMinK?`cần còn ít nhất ${BAL.restDsMinK} khắc; hết ${B}.`:`dùng hết ${k} khắc còn lại trong ngày, hết ${B}.`}${T?"":" Rương không có thuốc bổ: sai người mua một chén."}`;
  a.x="";a.restTon=T?`1 ${T.it.n} trong rương`:""; /* review R6: the tonic is a COST — it goes in the Tốn row (cardH below), not in a.x (a.x is read as Được); the "(thang thuốc bổ rẻ nhất…)" aside ran past the card at 844x390 */
  a.go=()=>{const t=restTonic();if(t&&!(a.c&&a.c.bac)){S.inv.splice(t.i,1);log(`Ngươi sắc ${t.it.n} uống rồi ngủ sớm.`)}else log("Ngươi sai người mua chén thuốc bổ, uống rồi ngủ sớm.")};return a}
 function restLat(a){if(!a||a.rest!=="lat")return a;const e=typeof emoGet==="function"?emoGet(S):{k:"binh",v:0};const bad=restBad(e.k)&&e.v>=15;
@@ -48332,6 +48389,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  const key=row.dataset.ktsub;KTSUB[key]=b.dataset.ktsv;try{localStorage.setItem("ctm-ktsub-"+key,b.dataset.ktsv)}catch(x){}const P=$("panel");if(P)P.scrollTop=0;renderPanel()},true);
 /* ---- parts (kitSteps, kitBar, kitSkillCard, kitEmpty live in the kit: j79 §21) ---- */
 function kitInfo(term,label){return `<span class="ktinfo">${kitGloss(term,`ⓘ ${label||term}`)}</span>`}
+/* kit-rows-b KP19: one step list with THREE states — done ✓ / now ▸ / next · ; list = [[state,text,note?]…], state "done"|"now"|"next" (Việc nhờ steps; generalises kitChecks §46 / kitCoopSteps §69.3) */
+function kitStepList(list){return `<div class="kchecks ksteps">${(list||[]).map(([st,t,note])=>`<div class="kchk ksp-${st==="done"||st==="now"?st:"next"}"><span class="kchm ${st==="done"?"g":st==="now"?"w":"m"}">${st==="done"?"✓":st==="now"?"▸":"·"}</span><span class="kchkt">${t}${note?` <small>${note}</small>`:""}</span></div>`).join("")}</div>`}window.kitStepList=kitStepList;
 function kitChecks(list){return `<div class="kchecks">${list.map(([ok,t])=>`<div class="kchk ${ok?"y":"n"}"><span class="kchm ${ok?"g":"r"}">${kitMark(ok)}</span><span class="kchkt">${t}</span></div>`).join("")}</div>`}
 const ktDoable=h=>(String(h).match(/<button(?![^>]*\bdisabled\b)[^>]*data-(learn|vlearn|charity|wkprac|wk="prac"|q72a|q72c)/g)||[]).length;
 const ktTotal=h=>(String(h).match(/<button[^>]*data-(learn|vlearn|charity|wkprac|wk="prac"|q72a|q72c)/g)||[]).length;
@@ -48444,7 +48503,7 @@ html body :is(#panel,#kitpage) .kcattabs.ktsub>.pctinfo{position:static}
 .ktinfo .kgl{font-size:.82rem;color:var(--gold,#8a5a12);font-weight:600;cursor:pointer;border-bottom:1px dotted currentColor}
 .kchecks{display:flex;flex-direction:column;gap:5px;margin:8px 0}
 .kchk{display:flex;align-items:flex-start;gap:8px;font-size:.88rem;line-height:1.35}.kchk .kchm{flex:0 0 auto;width:1.2em;display:inline-flex;justify-content:center;font-size:1.05rem;line-height:1.2}.kchk .kchm.g{color:var(--good,#2d7a52)}.kchk .kchm.r{color:var(--bad,#c23b22)}.kchk .kchm .kmk{margin:0}
-.kchk.y .kchkt{color:var(--dim,#6b5a44)}
+.kchk.y .kchkt{color:var(--dim,#6b5a44)}.kchk .kchm.w{color:var(--gold,#b8860b)}.kchk .kchm.m{color:var(--dim,#6b5a44)}.ksp-now .kchkt{font-weight:700}.ksp-next .kchkt,.ksp-done .kchkt{color:var(--dim,#6b5a44)}.ksteps .kchkt small{display:block;color:var(--dim,#6b5a44);font-size:.78rem}
 /* .pcb.ktacts: p1 .pcb (auto-fill 168 px) sits in a later <style> (body) and won at equal specificity -> a lone act was 1/4 wide (reviewer r7) */
 .ktacts,.pcb.ktacts{display:grid;grid-auto-rows:auto;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:6px;margin:0 0 10px}
 .ktprow>.pcb.kpanec{grid-template-columns:minmax(0,1fr);grid-auto-rows:auto}
@@ -48963,7 +49022,7 @@ function kitPopSample(k){try{if(typeof S==="undefined"||!S||typeof kitModal!=="f
   news:{kind:"news",title:"Tin trong cung",sub:"Tháng 3 · Năm 1",facts:[v2?{who:v2,text:"được lật thẻ bài đêm qua",chips:[["Sủng",3]]}:"Đêm qua Hoàng thượng lật thẻ bài.","Tháng này: Được mùa khắp nơi. Kho lúa +12."],btn:"Đã rõ"}};
  /* kit-size #8: the two real-path cards the §84 samples open (place card = ONE place picture left + kit rows; option naming a person = that person's portrait) */
  if(k==="place"||k==="personopt"){let m=null;
-  if(k==="place"){const pk=(typeof places==="function"?places().map(x=>x.k):[]).find(x=>x&&x!=="home"&&x!==S.place&&typeof accState==="function"&&accState(x).why)||(typeof places==="function"?places().map(x=>x.k).find(x=>x&&x!=="home"&&x!==S.place):"");
+  if(k==="place"){const pk=(typeof places==="function"?places().map(x=>x.k):[]).find(x=>x&&x!=="home"&&x!==S.place&&typeof accState==="function"&&(st=>st.why&&!(typeof accSpillOk==="function"&&accSpillOk(x,st)))(accState(x)))||(typeof places==="function"?places().map(x=>x.k).find(x=>x&&x!=="home"&&x!==S.place):"");
    if(!pk||typeof kitPlaceDress!=="function"){back();return false}m={t:accName(pk),h:'<p>Không vào được lúc này: <b>chưa đến giờ mở cửa</b>.</p>',opts:[{n:"Sang buổi",fx:{},x:"buổi sau đủ khắc · thử lại",go:nop}]};kitPlaceDress(m,pk)}
   else{const v=R[0];if(!v){back();return false}m={t:"Đêm thị tẩm",h:"<p>Hương trầm vấn vít. Ngài nắm tay ngươi rất lâu.</p>",opts:[{n:"Xin ân cho gia đình",fx:{},x:`Khá chắc · thành: Danh +${BAL.kitpage.demo.ask.danh}`,go:nop},{n:"Thì thầm nói xấu "+v.name,fx:{},x:`Khó · thành: nàng Sủng -${BAL.kitpage.demo.ask.sung}`,go:nop},{n:"Im lặng, tựa vai ngài",fx:{},x:`Ân tình +${BAL.kitpage.demo.ask.an}`,go:nop}]}}
   m.onClose=back;m.opts.forEach(o=>{const g=o.go;o.go=()=>{g();setTimeout(back,0)}});Q.push(m);showModal();return true}
@@ -51317,7 +51376,7 @@ function toilWorn(sl){if(sl==="tram"||sl==="y"){const e=wdOf(S)[sl],w=wdItem(e);
  const e=(S.inv||[]).find(x=>x&&x.w&&!x.h&&IT[x.k]&&itm(x.k).sl===sl);if(!e)return null;let a=null;try{a=itemArt(e.k)}catch(x){}return{src:a?a.src:keqArt(e.k),name:itm(e.k).n,grade:a?a.grade|0:0,lux:luxVal(e.k),tip:itm(e.k).n}}
 function toilPorAt(rank){const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"por")}catch(e){return""}finally{figTierOf=f0}}
 function toilPor(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const me=pMe();const src=toilPorAt(rank)||me.src;return{src,rank}}
-function toilDressUI(){const box=kg82Box();if(!box)return;box.hidden=false;const st=TOIL.st;toilMkPre();
+function toilDressUI(){const box=kg82Box();if(!box)return;KG82.setup=1;box.hidden=false;const st=TOIL.st;toilMkPre();
  const items=kinvItems().filter(x=>x&&x.g&&(WD_ITEMS[x.g.k]?x.g.wdPawn==null&&WD_ITEMS[x.g.k].sl!=="hd":(IT[x.g.k]&&["wrist","waist","scent"].includes(itm(x.g.k).sl)))).map(x=>Object.assign({},x,{cat:WD_ITEMS[x.g.k]?(WD_ITEMS[x.g.k].sl==="tram"?"tram":"y"):"trang"}));
  const sel=toilSelFind(items);items.forEach(x=>{x.sel=!!(sel&&sel.x===x)});
  const tabs=[{k:"tram",label:"Trâm cài"},{k:"y",label:"Y phục"},{k:"trang",label:"Trang sức"}];
@@ -51361,7 +51420,7 @@ function toilDressDone(keep){const st=TOIL.st;if(keep&&st.start!==wdCur(S)){/* "
  const dr=toilDress(S,st.F);st.dv=dr.v;st.style=dr.style;const good=dr.v==="hopdip"||dr.v==="hoppham";try{sfx(good?"learn-good":"learn-bad")}catch(e){}
  const why={hopdip:"Vừa phẩm, vừa dịp: người trọng lễ ưng ý.",hoppham:"Đúng phẩm, chưa thật hợp dịp hôm nay.",giandi:st.F?"Quá giản dị cho dịp gặp bề trên: người trọng lễ coi là thiếu tôn trọng; người chuộng giản dị lại khen.":"Quá giản dị.",
   photruong:"Quá phô trương: phi tần dễ ghen, người chuộng giản dị chê.",vuot:"Có món trên phẩm của ta: dễ bị hặc, bị thu.",tang:"Màu đỏ, vàng trong quốc tang: phạm tang."}[dr.v];
- const box=kg82Box();box.innerHTML=`<div class="kgr">${kitRows([["Y phục",`<span class="ef ${good?"g":"r"}"><b>${TOIL_DV[dr.v][0].toUpperCase()+TOIL_DV[dr.v].slice(1)}</b></span>`],["Ghi chú",[why,`đo theo dịp: ${st.occ.slice().sort((a,b)=>b.F-a.F)[0].n.toLowerCase()}`],"n"]])}</div>`+
+ KG82.setup=1;const box=kg82Box();box.innerHTML=`<div class="kgr">${kitRows([["Y phục",`<span class="ef ${good?"g":"r"}"><b>${TOIL_DV[dr.v][0].toUpperCase()+TOIL_DV[dr.v].slice(1)}</b></span>`],["Ghi chú",[why,`đo theo dịp: ${st.occ.slice().sort((a,b)=>b.F-a.F)[0].n.toLowerCase()}`],"n"]])}</div>`+
   `<div class="kg82act"><button class="${kg82Btn()}" id="toilmk">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button>${kitQuick({id:"toilquick",n:"Điểm trang nhanh",win:TOIL_MK.vua,lose:TOIL_MK.vung})}<button class="${kg82Btn(true)}" id="toilmoc">Để ${toilMkW("moc")}</button></div>`;
  $("toilmk").onclick=()=>toilColUI();$("toilquick").onclick=()=>toilFinish("quick");$("toilmoc").onclick=()=>toilFinish(false)}
 
@@ -51387,7 +51446,7 @@ function toilGeom(W,H,src){const ky=H*.94/(TOIL_MIR.ry*2*1024),k=Math.min(ky,W/(
  const T=(u,v)=>{/* face-box units (u: 0..1 of fw from the left, v: of fh from the top) → canvas */const px=fx+u*fw-(fx+fw/2),py=fy+v*fh-(fy+fh/2);const qx=px*cs-py*sn+(fx+fw/2),qy=px*sn+py*cs+(fy+fh/2);return[mx+(qx-fcx)*s,my+(qy-fcy)*s]};
  return{bg:{x:ox,y:oy,s:S0},mx,my,rx,ry,img:{x:mx-fcx*s,y:my-fcy*s,w:IW*s,h:IH*s},T,fws:fw*s,ax:ax!=null}}
 function toilQuad(a,c,b,n){const L=[];for(let i=0;i<=n;i++){const t=i/n;L.push([(1-t)*(1-t)*a[0]+2*(1-t)*t*c[0]+t*t*b[0],(1-t)*(1-t)*a[1]+2*(1-t)*t*c[1]+t*t*b[1]])}return L}
-function toilMakeup(){const st=TOIL.st,box=kg82Box();box.innerHTML="";box.hidden=false;const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style.touchAction="none";
+function toilMakeup(){KG82.setup=0;const st=TOIL.st,box=kg82Box();box.innerHTML="";box.hidden=false;const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style.touchAction="none";
  const por=toilPor();const face=new Image();face.decoding="async";face.src=typeof IMG_U==="function"?IMG_U(por.src):por.src;let G=toilGeom(W,H,por.src);const sk=toilSkill();st.sk=sk;
  /* diemtrang-score (owner 16/11): NO guide lines. The hidden ideal is THIS face's own brows / cheekbones / mouth (https://ctm-img.victoria-tntt.workers.dev/img/mk-fit face points;
     a picture without points uses the measured average, BAL.toil.fb) — anchored per portrait, so the brow target is the painted brow itself */
@@ -51458,7 +51517,7 @@ function toilMakeup(){const st=TOIL.st,box=kg82Box();box.innerHTML="";box.hidden
   draw(now);raf=requestAnimationFrame(frame)}
  toilHUD({round:"2/4"});setBtn();raf=requestAnimationFrame(frame);KG82.run={stop:()=>{stop=true;cancelAnimationFrame(raf)}};
  TOIL.test={get I(){return I},get brows(){return brows},get cpts(){return cpts},get lips(){return lips},next,browQ,powQ,sonQ,setPowder:v=>{cpts.forEach(p=>p.c=cheeks.some(c=>Math.hypot(p.x-c.x,p.y-c.y)<=c.r)?v:0);pdirty=true},strokes,dots,get lr(){return lr}}}
-function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.run.stop)KG82.run.stop()}catch(e){}KG82.run=null;
+function toilFinish(made){const st=TOIL.st;if(!st)return;KG82.setup=1;try{if(KG82.run&&KG82.run.stop)KG82.run.stop()}catch(e){}KG82.run=null;
  const sk=toilSkill();let score=0,raw=0,bonus=0;
  /* mg-skip-all (KIT §13.6, BAL.skip): "Điểm trang nhanh" = ONE roll; won = the middle tier (Đoan trang: the lowest score of it, BAL.toil.tier[0]), lost = Vụng về; never more */
  const quick=made==="quick",qok=quick?kitQuickRoll():false;if(quick){score=qok?BAL.toil.tier[0]:0}else if(made){const P=st.parts;raw=toilRaw({brow:P.brow||0,powder:P.powder||0,son:P.son||0,hd:typeof P.hd==="number"?P.hd:null});bonus=Math.round(BAL.toil.skillShare*sk.sk);score=Math.max(0,Math.min(100,Math.round(raw*(100-BAL.toil.skillShare)/100)+bonus))}
@@ -52049,7 +52108,7 @@ function toilColRows(c){return ["mat","ma","son","may"].map(k=>({k,label:TOIL_CO
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60",title:"kitSwatches · màu trang điểm (phấn mắt, phấn má, son môi, màu mày)",html:()=>{let z="";try{if(typeof S!=="undefined"&&S){const f=kitFile(toilPor().src);TOIL.prev={look:"dep",col:toilColDef()};try{z=kitFaceZoom(S,f)}finally{TOIL.prev=null}}}catch(e){}return `<div style="display:grid;grid-template-columns:minmax(110px,200px) 1fr;gap:10px;align-items:start">${z||"<span></span>"}${kitSwatches({key:"kitpage",rows:toilColRows(toilColDef())})}</div>`}})}catch(e){}
 
 /* (b0) CHỌN MÀU — before the three hồi: her portrait wears the picks live (the same layers as all day, at the "đẹp" strength) */
-function toilColUI(){const st=TOIL.st,box=kg82Box();if(!box||!st)return;box.hidden=false;st.col=toilColFix(st.col||(S.toilette&&S.toilette.col));if(typeof lxColPick==="function")st.col=lxColPick(st.col);const lxF=typeof lxColRows==="function"?lxColRows:(r=>r),lxN=typeof lxCount==="function"?lxCount(S):4;
+function toilColUI(){const st=TOIL.st,box=kg82Box();if(!box||!st)return;KG82.setup=1;box.hidden=false;st.col=toilColFix(st.col||(S.toilette&&S.toilette.col));if(typeof lxColPick==="function")st.col=lxColPick(st.col);const lxF=typeof lxColRows==="function"?lxColRows:(r=>r),lxN=typeof lxCount==="function"?lxCount(S):4;
  TOIL.prev={look:st.col.want==="diem"?"tuyet":"dep",col:st.col};/* makeup-lux: the bold group previews at the top level (Khuynh thành), no overdone level */TOIL.prevUI=toilColUI;const por=toilPor(),me=pMe();
  box.innerHTML=`<div class="toilw"><div class="toilfig"><p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này. Mỗi mức mang độ xa xỉ riêng như bảng dưới; ${TOIL_STY.diem} hợp dịp lớn. Gặp dịp, xa xỉ của son phấn cộng chung với y phục, trang sức mà xét; quá dịp, quá phẩm thì người ta chê ${TOIL_DV.diem}.${toilTasteNote()}</p><div class="kgr">${kitRows(toilLvRows())}</div></div>`+
   `<div>${typeof lxMirrorNote==="function"?lxMirrorNote():""}${kitSwatches({key:"toilcol",rows:lxF(toilPreRows(st.col).concat(toilColRows(st.col))),onPick:(r,k)=>{if(/^pre-/.test(r)){const x=TOIL_PRE.find(y=>y[0]===k&&"pre-"+y[2]===r);if(x){st.col=Object.assign({},x[4]);if(x[2]==="diem")st.col.want="diem"}}else st.col[r]=k;toilColUI()}})}</div></div>`+
@@ -58594,7 +58653,7 @@ const INTRO=[
    ["Nhà và con","nhà mẹ đẻ có vinh có nhục theo {x}; con được trọng thì mẫu thân được nể"],
    ["Mệnh truyện","truyện riêng của thân phận, mở từng chương; cuộn chiếu Mục tiêu ở cột nút bên trái màn luôn cho biết chương này cần gì"],
    ["Kết cục","mỗi kiếp khép lại bằng một kết: kết hay, kết dở, và những kết hiếm khó gặp"]])},
- {t:"Chơi thế nào",p:()=>ia("Hành sự"),h:()=>rows([["Buổi · khắc","mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi tháng ba tuần; mỗi buổi "+(BAL.time.khac)+" khắc, việc nào cũng tốn khắc"],
+ {t:"Chơi thế nào",p:()=>ia("Hành sự"),h:()=>rows([["Buổi · khắc","mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi tháng ba tuần; mỗi buổi "+(BAL.time.khac)+" khắc, việc nào cũng tốn khắc; làm được hay không là tính theo tổng số khắc còn lại trong ngày, việc dài hơn buổi thì kéo sang buổi sau"],
    [srv()?"Phận sự":"Hành sự","chọn việc mà làm; thẻ ghi cơ may, cái giá, cái được"],["Dư đồ","đi tới các nơi trong cung, gặp người"],
    srv()?["Đồng liêu","người làm cùng: kết bạn, đề phòng kẻ vu cáo"]:["Hậu cung · Giao tình","người trong cung; ai thương, ai ghen, ai oán {x}"],
    srv()?null:["Tài nghệ","học cầm kỳ thi họa, nữ công; mỗi bài là một trò nhỏ"],
@@ -58620,7 +58679,7 @@ const STEPS=[
   html:()=>srv()?say(`<p>Tám ô trên cùng là căn cơ của {x}: Sắc, Tài, Tâm cơ, Đức là tư chất; Bạc để chi tiêu, Sức để làm việc, Chủ tin là chủ nhân tin {x} bao nhiêu, Danh là tiếng tăm.</p><p>Chạm vào ô nào cũng có lời giải.</p>`)
    :say(`<p>Tám ô trên cùng là căn cơ của {x}:</p>${kitRows([R("Tư chất","Sắc · Tài · Tâm cơ · Đức"),R("Bạc","tiền riêng để chi tiêu"),R("Sức","để làm việc; dưới 20 thì không làm được việc nặng"),R("Sủng","Hoàng thượng thương {x} bao nhiêu"),R("Danh","tiếng tăm trong cung")].map(x=>[x[0],say(x[1]),x[2]]))}<p>Chạm vào ô nào cũng có lời giải.</p>`)},
  {id:"khac",title:"Buổi · khắc · quẻ tuần",target:"#k3tt",prep(){goRoom()},
-  html:()=>say(`<p>Mỗi buổi có ${BAL.time.khac} khắc, chấm tròn đầy là khắc còn lại. Việc nào cũng tốn khắc; hết khắc thì qua buổi.</p><p>Đầu mỗi tuần rút một quẻ: quẻ tốt thì loại việc ghi trong ngoặc dễ thành hơn suốt tuần, quẻ xấu thì khó hơn; gặp quẻ Hung thì nên giữ mình. Bên cạnh là thời tiết hôm nay.</p>`)},
+  html:()=>say(`<p>Mỗi buổi có ${BAL.time.khac} khắc, chấm tròn đầy là số khắc buổi này còn. Việc nào cũng tốn khắc. Làm được hay không là tính theo tổng số khắc còn lại trong ngày: việc dài hơn số khắc còn trong buổi thì kéo sang buổi sau; riêng buổi tối không kéo qua đêm.</p><p>Đầu mỗi tuần rút một quẻ: quẻ tốt thì loại việc ghi trong ngoặc dễ thành hơn suốt tuần, quẻ xấu thì khó hơn; gặp quẻ Hung thì nên giữ mình. Bên cạnh là thời tiết hôm nay.</p>`)},
  {id:"the",title:"Đọc một thẻ việc",when:()=>!!groupBtn("act"),target:()=>pickAct(),pad:4,
   prep(re){goTab("act");setTimeout(()=>{allCat();const c=pickAct();if(c&&!re)scrollTo(c)},420)},
   html:()=>say(`<p>Mỗi việc là một thẻ. Chữ bên phải là cơ may: Liều, Khó, Năm ăn năm thua, Khá chắc, Chắc, Rất chắc, Nắm chắc; việc chắc thì không ghi.</p>${kitRows([R("Cần","điều kiện: ✓ đã đủ, ✗ còn thiếu"),R("Tốn","khắc và thứ phải bỏ ra"),R("Được","lợi khi thành, chữ xanh","g"),R("Mất","thiệt khi hỏng, chữ đỏ","r"),R("Kèm","hệ lụy có thể đến dù thành","r")])}<p>Dòng Quẻ dưới cơ may cho biết quẻ tuần làm việc ấy dễ hay khó hơn; "có thai: Liều" trong Được là cơ may riêng của điều ấy.</p>`)},
@@ -58862,7 +58921,7 @@ function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
  /* a milestone chapter: its HẠN row, the same words as the card, the Mệnh truyện tab and the panel (msHan67, j67; review/story14-p1-r2 item 7) */
  if(C.kind==="ms"&&S.st&&S.st.ms&&typeof msHan67==="function")sec.push({h:"Cần lưu ý",rows:[msHan67(S.st.ms,2)]})}
  sec.push({h:"Việc nên làm",rows:nextRows(G.next)});
- kitPanel({kind:"info",title:`${G.kicker} · ${C.t}`,sub:G.road?`Mệnh truyện: ${G.road}`:"",headArt:art(),sections:sec,opts:nextOpts(G.next).concat([{n:"Đóng",fx:{},go:()=>{}}])},true);showModal()}  /* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10) */
+ kitPanel({kind:"info",title:`${G.kicker} · ${C.t}`,sub:G.road?`Mệnh truyện: ${G.road}`:"",headArt:(CM&&CM.cover&&typeof CM.cover==="string"?{src:CM.cover,label:road()}:CM&&CM.cover&&CM.cover.src?{src:CM.cover.src,label:CM.cover.label||road()}:art()),/* kit-rows-b KP20: the chapter cover (chapModel .cover) replaces the topic picture in the headArt band */sections:sec,opts:nextOpts(G.next).concat([{n:"Đóng",fx:{},go:()=>{}}])},true);showModal()}  /* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10) */
 /* ---------- "Mệnh truyện kiếp này": right after Nhập cung ---------- */
 function kitGoalCard(){const G=kitGoalNow();if(!G)return null;const C=G.C;
  const life=isS()?"Từ thân cung nữ, đi lên bằng lòng tin của chủ và ánh mắt của Hoàng thượng.":`Từ ${RANKS[S.rank].n} leo dần lên Hoàng hậu, rồi Hoàng thái hậu; giữ mình, giữ nhà.`;
@@ -62227,6 +62286,419 @@ Object.assign(GE_DATA,{
    ht:"cùng con gái kẻ thù rời cung, để bài vị hai họ đặt cạnh nhau",ha:"lấy tình của con gái kẻ thù làm con dao cuối cùng",
    fail:"Oán ngăn đôi bờ",ft:"Nhà kia đóng cửa, nàng không đến. Chuyện con gái tội thần kết thân với con gái kẻ thù thành lời đồn khắp cung."}]}
 });
+/* ================= jgedata_w3: GRAND ENDINGS — writer wave W3 (brief E11): ch_* (4) · thd_* (4) · cnv_chu, cnv_ban, cnv_ma =================
+   Same shape as jgedata.js (read its header: pull / push / close / doom / cond / fo / cw / t / a / ht / ha / fail / ft, lean p / m). Names / pairs / titles
+   come from GE_CAT (catalogue §3). Words only; every number is BAL.ge (jbalge.js). Every option name is a REAL raw option of that road (jrd_ch / jrd_thd /
+   jrd_cnv .4–.11) or of ch12–14; every person / place / object named in t / a / ht / ha / ft is in that road or in the game, and true for every life that
+   passes cond (W1 / W2 review lessons). Notes:
+   - ch_*: the Thái hậu («cô mẫu» in the road) can die mid-road; S.th is set to 0 on every death (j4 / j13 / jmort / jpq / jrd_ch), so a ["s","th"] gate
+     also means «she is alive». Endings without it never claim she is alive. The rival niece of ch_ho is «người cháu kia» (the road may recast her).
+   - thd_*: {n1} / {n2} / {v} / {dad} are never printed (no placeholders in GE text): «người học trò của cha», «người học trò nhỏ», «cha».
+   - FOLLOW endings (thd_sach_4, thd_tro_3, cnv_ban_4) speak of «người ấy» = the engine's «Theo người ấy đi» bond, and claim nothing else about him.
+   - cnv_*: words fit both a maid life and a consort life (srv / nsrv beats).
+   - r2 (law 6c / 6b): no ending holds an object the road can take away. ch_bi: the letter burns or goes back to họ Lâm (.4 «Đốt ngay», ch11 lgone)
+     → only ch_bi_2 (all of them Khóa) holds the letter; ch_bi_1 / 3 / 4 speak of «chuyện năm xưa» (her knowledge, true in every life).
+     ch_benh_2 needs the residue → fo ch7 mid|lose. ch_ho_3 no longer gives away the seal (ch10 lose: the other niece holds it). thd_sach_4 carries
+     her own copy, not the draft (given to Hàn lâm viện / lost in ch5). thd_hoc_1 / 2 / 4 crown no named pupil ({n1} may be a girl or dead):
+     the heir is the ending's own effect. */
+Object.assign(GE_DATA,{
+ ch_co:{lean:{
+   p:["Thưa khéo: con còn non, sợ hỏng việc","Kính trọng ma ma","Từ chối thẳng","Nhận thuốc rồi lén đổ đi","Báo cho {v} biết hắn là người của Đức Thọ cung","Xin Hoàng thượng một ân điển nhỏ","Cho họ về quê, giữ lấy một hai người","Bảo bà thôi dò, rút về","Giữ lời hứa, xin cho bà","Gửi bạc cho người nhà bà","Nhận là người cũ của cung mình","Tự gánh, không đổ cho người đã khuất","Gửi lễ mừng mẹ già của y","Bắt biểu ca tự đến nhận lỗi","Cho nàng về quê một thời gian","Trả gói vải, từ chối","Đốt trước mặt ma ma","Từ chối ngay với ma ma","Khấn xin cô mẫu tha","Xóa nợ cho họ","Giữ, ta lo","Lo lễ giỗ thật chu đáo","Gom người cũ lại một chỗ","Cho {v} lý do: nhắc ơn cũ","Đến báo {v}, bắt nàng nợ ngươi"],
+   m:["Lấy lòng ma ma, kéo về phe mình","Thưởng bạc, buộc họ vào mình","Nhắc hắn chuyện cũ hắn muốn giấu","Dặn hắn khai một tên giả","Cắt đứt, như chưa từng quen","Để mọi lời nghi dồn về {v}","Đổ hết cho lệnh cũ của cô mẫu","Lo bạc bịt miệng","Hứa chia cho nhà {v} một chân phó tướng","Làm theo lệnh","Bảo nàng đi chôn thay","Nhận để không ai khác làm","Khấn hứa làm cho xong","Thề ngay","Cho {v} lý do: một chuyện xấu của nhà nàng","Gặp từng người, nói rõ món nợ còn đó","Chép sổ, giữ riêng cho mình","Tâu một nửa, giữ một nửa","Đọc hết, ghi nhớ","Lấy bản nháp tờ sớ","Làm người ngồi bên kia bàn","Khấn: con sẽ ngồi chỗ của cô mẫu"]},
+  e:[
+  {pull:["Vâng mệnh","Lấy lòng ma ma, kéo về phe mình","Thưa: con muốn tự đứng được để báo đáp cô mẫu","Đánh cờ theo cách của mình: gom chứng cứ rồi mới dâng","Gặp từng người, nhận mặt","Thưởng bạc, buộc họ vào mình","Thu nhận họ về cung mình","Chép sổ, giữ riêng cho mình","Tâu một nửa, giữ một nửa","Đọc hết, ghi nhớ","Nhận lời che chở của cô mẫu","Xin cô mẫu dạy thêm, chưa nhận","Nhận hộp","Gặp từng người, nói rõ món nợ còn đó","Xóa nợ cho họ","Giữ, ta lo","Gom người cũ lại một chỗ","Cho họ về quê, giữ lấy một hai người","Làm người ngồi bên kia bàn","Khấn: con sẽ ngồi chỗ của cô mẫu","@st_dong=win","@ke14=win"],
+   close:["Bỏ bàn cờ","Trả hết, xin đứng ngoài","Khấn: con xin buông","Dâng ấn lên Hoàng thượng, giữ sổ"],
+   cond:[["s","mat"],["son"],["seat","THH"]],fo:[["seatT","THH"]],
+   cw:"cần Tai mắt rộng, một hoàng tử của ngươi và ngôi Thái hậu sau này còn trống",
+   t:"Con ngươi lên ngôi khi còn nhỏ, và ngươi ngồi sau rèm ở Đức Thọ cung như cô mẫu năm nào. Tai mắt khắp cung vẫn báo tin về đó, nhưng ngươi dùng tin để cứu người chứ không để bắt người. Triều thần quen gọi ngươi là Đức Thọ đời sau, giọng kính chứ không sợ.",
+   a:"Con ngươi lên ngôi khi còn nhỏ, rèm châu ở Đức Thọ cung lại buông xuống. Không chiếu nào ra khỏi cung mà ngươi chưa đọc trước, không phủ nào trong kinh mà tai mắt của ngươi không vào được. Cô mẫu dạy ngươi đánh cờ; nay cả triều đình là bàn cờ của ngươi.",
+   ht:"ngồi lại chỗ của cô mẫu sau rèm, dùng tai mắt Đức Thọ cung để che người",ha:"buông rèm ở Đức Thọ cung, biến cả triều đình thành bàn cờ của mình",
+   fail:"Sau rèm không người",ft:"Triều thần dâng sớ xin đề phòng người của Đức Thọ cung gần ngôi báu. Tai mắt của ngươi lần lượt bị đổi đi, và một mùa liền không ai dám đến cung ngươi."},
+  {pull:["Thưa: con muốn tự đứng được để báo đáp cô mẫu","Lấy lòng ma ma, kéo về phe mình","Lặng lẽ gây người của riêng mình","Thưa với vua lời của chính mình","Ngầm báo Hoàng thượng ý cô mẫu trước","Đứng về phía Hoàng thượng","Tiến cử tướng trẻ của Hoàng thượng","Chép sổ, giữ riêng cho mình","Dâng thẳng lên Hoàng thượng","Gây dựng chỗ đứng riêng","Trả chuỗi hạt, xin làm cháu chứ không làm quân cờ","Từ chối, nhận mất chỗ dựa","Mặc cả: thề có điều kiện","Đứng về phía Càn Ninh cung","Ngầm hứa không cản","Làm người ngồi bên kia bàn","Đổ hết cho lệnh cũ của cô mẫu","Đến báo {v}, bắt nàng nợ ngươi","Nhắc hắn chuyện cũ hắn muốn giấu","Xin Hoàng thượng một ân điển nhỏ","Bắt biểu ca tự đến nhận lỗi","@st_the=win"],
+   close:["Thề ngay","Quỳ thề","Làm cháu của cô mẫu","Quỳ, thưa vẫn là cháu ngoan","Thề, giữ chỗ dựa"],
+   cond:[["s","tamco"],["s","sung"]],fo:[],
+   cw:"cần Tâm cơ sâu và Hoàng thượng nghe lời ngươi",
+   t:"Ngươi gỡ từng sợi dây cô mẫu từng buộc quanh triều đình, đặt chúng vào tay Hoàng thượng. Việc lục cung, việc họ ngoại từ đó đều qua ngươi, mà không việc nào trái phép nước. Có người bảo ngươi phản cô; ngươi chỉ đáp rằng nước không phải của riêng một nhà.",
+   a:"Ngươi cắt từng sợi dây cô mẫu từng buộc quanh triều đình, rồi buộc lại bằng tay mình. Họ ngoại phải qua cửa ngươi mới đến được Đức Thọ cung, tai mắt cũ chỉ còn báo tin cho một người. Cả cung biết quân cờ năm xưa đã ngồi vào chỗ người đánh cờ.",
+   ht:"gỡ dây quyền của cô mẫu, trao lại cho phép nước",ha:"giành lấy quyền của cô mẫu, buộc cả họ ngoại vào tay mình",
+   fail:"Quân cờ bị bỏ",ft:"Người cũ Đức Thọ cung và họ ngoại cùng quay lưng một lúc. Chỗ dựa cũ không còn, chỗ đứng mới chưa thành; ngươi đứng một mình giữa hai bên."},
+  {pull:["Vâng mệnh","Kính trọng ma ma","Thưa: cháu của cô mẫu","Làm đúng như cô mẫu dặn","Xin cô mẫu cho hầu lại","Tâu hết","Nhận lời che chở của cô mẫu","Thưa với vua đúng lời cô mẫu","Đứng về phía cô mẫu","Thưa ý cô mẫu","Vâng lời","Ngày ngày sang thỉnh an","Nhận chuỗi hạt, chưa thề","Tiếp theo đúng lễ, không hơn","Lo lễ giỗ thật chu đáo","Tự gánh, không đổ cho người đã khuất","Làm cháu của cô mẫu","Quỳ, thưa vẫn là cháu ngoan","Nhận để giữ lời cô mẫu","Cắt đứt, như chưa từng quen","Lo bạc bịt miệng","Để mọi lời nghi dồn về {v}","Cho {v} lý do: một chuyện xấu của nhà nàng"],
+   close:["Từ chối, nhận mất chỗ dựa","Trả chuỗi hạt, xin làm cháu chứ không làm quân cờ","Đứng về phía Hoàng thượng","Đứng về phía Càn Ninh cung"],
+   cond:[["s","duc"],["s","danh"]],fo:[],
+   cw:"cần Đức dày và tiếng hiếu thảo vang trong cung",
+   t:"Ngươi chưa từng ngồi vào chỗ của cô mẫu, cũng chưa từng bỏ bà. Thỉnh an, lễ tết, thư nhà ngoại, việc nào ngươi cũng giữ đúng phép, nên khi họ ngoại có chuyện, cả triều nể ngươi mà nương tay. Đời sau nhắc đến Đức Thọ cung, người ta nhắc đến người cháu hiền trước.",
+   a:"Ai cũng khen ngươi ngoan: cúi đầu đúng lúc, thưa đúng lời cô mẫu muốn nghe. Chỉ những kẻ từng chắn đường họ ngoại mới biết, chưa ai trong số họ còn ở lại trong cung. Ngươi chưa từng lớn tiếng, cũng chưa từng tha ai.",
+   ht:"giữ trọn lễ của người cháu, che chở họ ngoại bằng tiếng hiền",ha:"cúi đầu làm cháu ngoan, sau lưng dọn sạch những kẻ chắn đường họ ngoại",
+   fail:"Cháu ngoan mất phần",ft:"Ngươi giữ lễ cả đời mà họ ngoại vẫn chọn người khác đứng đầu. Nết ngoan của ngươi chỉ còn được nhắc như một lời khen, không ai cần đến."},
+  {pull:["Thưa khéo: con còn non, sợ hỏng việc","Cất danh sách, chưa gọi ai","Xin cô mẫu cho thêm thời gian","Bảo bà thôi dò, rút về","Không đụng đến sổ","Quỳ im, nhận phạt chung","Xin không nói, để hai bên tự bàn","Không dám bàn việc triều","Đốt trước mặt ma ma","Trả gói vải, từ chối","Khấn xin cô mẫu tha","Bỏ bàn cờ","Khấn: con xin buông","Trả hết, xin đứng ngoài","Nâng chén mừng thọ, lảng đi","Chôn gói vải ở nơi không ai đào","Đổ hết cho lệnh cũ của cô mẫu","Cắt đứt, như chưa từng quen","Nói không quen","Bảo nàng đi chôn thay"],
+   close:["Làm người ngồi bên kia bàn","Đứng ra nhận phần của cô mẫu","Nhận hộp","Thề, giữ chỗ dựa","Làm theo lệnh"],
+   cond:[["s","duc"]],fo:[],
+   cw:"cần Đức dày để Hoàng thượng tin ngươi đi tu thật lòng",
+   t:"Ngươi xin rời cung, lên chùa Hộ Quốc tụng kinh trả những món nợ năm xưa thay cô mẫu, và Hoàng thượng chuẩn lời xin ấy. Mỗi sớm tiếng chuông chùa vọng về kinh thành, và người trong cung bảo nhau: cháu gái Đức Thọ cung đã chọn gánh nghiệp thay bà.",
+   a:"Ngươi xin lên chùa Hộ Quốc đúng lúc sóng trong cung sắp đổ xuống những người từng làm việc cho Đức Thọ cung. Kẻ ở lại chịu tra, chịu phạt; ngươi ngồi sau cửa thiền lần tràng hạt, và không ai dám gọi người tu ra hỏi tội.",
+   ht:"rời cung lên chùa Hộ Quốc, tụng kinh trả nợ thay cô mẫu",ha:"mượn cửa thiền chùa Hộ Quốc mà tránh sóng, để người khác chịu tội thay",
+   fail:"Chuông chùa không gọi",ft:"Hoàng thượng không chuẩn: cháu gái Thái hậu xuống tóc là làm mất mặt hoàng gia. Kinh ngươi chép được đem cất vào kho, chuỗi tràng hạt ngươi phải tháo ra trước buổi thỉnh an."}]},
+ ch_benh:{lean:{
+   p:["Xin vào hầu thuốc","Tìm thái y giỏi bên ngoài","Tự tay sắc thuốc","Xin đi","Mời lương y vào châm cứu","Quỳ ngoài điện suốt đêm","Xin Hoàng thượng cho lương y ở lại chờ tra","Xin Hoàng thượng chuẩn cho lương y họ Tôn ở lại bên cô mẫu","Tự hầu thuốc ngày đêm","Chặn đạo sĩ ngoài cửa","Quỳ dâng lại","Đổi thuốc thành canh","Bù bạc từ cung mình","Tha cho họ đi","Hứa lo cho mẹ hắn, bắt hắn khai","Không nghi ai, chỉ theo chứng","Ở lại","Ngồi nghe hết","Cho {maid} thay một đêm","Đi tìm tận các nhà buôn kinh thành","Hầu bà từng khắc tỉnh","Ngồi canh đến rằm","Quỳ bên giường, nắm tay bà gọi","Hứa với bà","Hứa lo cho họ","Tiễn y về, hậu tạ","Xin Hoàng thượng cho y một chức trong Thái y viện","Mở cửa đón họ","Dâng phương thuốc của lương y, xin bà dưỡng thêm","Xin bà nghỉ ngơi, đừng lo việc cung","Dâng chứng kẻ bỏ thuốc lên Hoàng thượng trước","Xin Hoàng thượng niêm Ngự dược phòng"],
+   m:["Ghi nhớ, không nói","Nhận lời Viện phán","Trả việc sắc thuốc cho Thái y viện","Nhường Hoàng hậu","Cho {v} một tin giả","Ghi tên họ","Nhường {v} để nàng nợ ngươi","Doạ đưa hắn sang Thận hình ty","Giữ kín, chưa nói với ai","Mua bã thuốc từ người đổ","Lặng lẽ thay người sắc thuốc","Ghi lại những tên bà nhắc","Mua người giữ kho chép trước","Chờ xem ai muốn đốt sổ sớm","Cho người canh kẻ sốt ruột","Để người lạ vào, bắt tận tay","Từ chối ở cửa","Gặp riêng {v}, đổi im lặng lấy một lời thề","Dâng ấn cho Trung cung","Để {v} hầu, ngươi sang Dưỡng Tâm điện","Lo hậu sự từ bây giờ","Tin Viện phán, lo hậu sự","Từ chối khéo","Đặt thị vệ ở gian thuốc","Tự tay giữ siêu thuốc"]},
+  e:[
+  {pull:["Xin vào hầu thuốc","Tìm thái y giỏi bên ngoài","Lén đổi thuốc, nhờ lương y xem","Tự tay sắc thuốc","Mời lương y vào châm cứu","Tâu rõ chuyện thuốc và kẻ hai lòng","Để hai bên cùng bắt mạch, ngươi đọc phương","Đọc sách thuốc, tự xét","Xin hai bên cùng viết phương, ngươi chọn từng vị","Đổi thuốc thành canh","Giữ ba thang thuốc lại","Bảo y nghiệm cho kỹ","Đưa bã thuốc cho lương y nghiệm trước mặt thị vệ","Lặng lẽ thay người sắc thuốc","Hỏi lương y còn cách nào khác","Giữ bà bằng châm cứu, chờ thêm","Cho lương y châm cứu","Tự tay giữ siêu thuốc","Dâng phương thuốc của lương y, xin bà dưỡng thêm","Xin Hoàng thượng cho y một chức trong Thái y viện","Giữ kín, chưa nói với ai","Mua bã thuốc từ người đổ","Mua người giữ kho chép trước","Để người lạ vào, bắt tận tay"],
+   close:["Tin Viện phán","Để Thái y viện dùng thuốc của viện","Trả việc sắc thuốc cho Thái y viện","Tin Viện phán, lo hậu sự","Nhường Hoàng hậu"],
+   cond:[["s","tai"],["s","danh"]],fo:[],
+   cw:"cần Tài cao và tiếng hầu thuốc vang khắp cung",
+   t:"Từ những đêm hầu bên giường bệnh Đức Thọ cung, ngươi thuộc từng vị thuốc như thuộc lòng bàn tay. Phi tần ốm, cung nữ sốt, ai cũng tìm đến cung ngươi trước khi tìm Thái y viện, và ngươi chưa từng lấy của ai một đồng. Thái y viện chép phương của ngươi vào sách, đề bốn chữ Thần y hậu cung.",
+   a:"Từ những đêm hầu bên giường bệnh Đức Thọ cung, ngươi biết vị nào cứu người, vị nào hại người, và biết cả cách để không ai nhận ra. Phi tần ốm vẫn tìm đến cung ngươi; kẻ nào từng chống lại ngươi thì bệnh cứ dây dưa mãi không khỏi.",
+   ht:"học thuốc bên giường bệnh Thái hậu, rồi chữa cho cả hậu cung không lấy một đồng",ha:"học thuốc bên giường bệnh Thái hậu, rồi dùng thuốc mà giữ cả hậu cung trong tay",
+   fail:"Phương thuốc bị nghi",ft:"Một phi tần uống thuốc ngươi bốc rồi trở bệnh nặng hơn. Thái y viện nhân dịp tâu rằng phi tần không được tự ý cho thuốc; tủ thuốc của ngươi bị niêm."},
+  {pull:["Xin Hoàng thượng cho lương y ở lại chờ tra","Tự tay sắc thuốc","Ghi nhớ, không nói","Lén đổi thuốc, nhờ lương y xem","Nhận lời Viện phán","Dò lai lịch đạo sĩ","Giữ ba thang thuốc lại","Giữ kín, chưa nói với ai","Cho {maid} làm thân với cung nữ ấy","Dò bạc của tiểu thái giám từ đâu","Hứa lo cho mẹ hắn, bắt hắn khai","Doạ đưa hắn sang Thận hình ty","Để yên, cho người theo dõi","Mua bã thuốc từ người đổ","Đặt bẫy bắt người đưa thuốc","Lặng lẽ thay người sắc thuốc","Ghi lại những tên bà nhắc","Mua người giữ kho chép trước","Chờ xem ai muốn đốt sổ sớm","Cho người canh kẻ sốt ruột","Gặp riêng {v}, đổi im lặng lấy một lời thề","Đứng ra nhận","Dâng chứng kẻ bỏ thuốc lên Hoàng thượng trước","Không nghi ai, chỉ theo chứng","Xin Hoàng thượng niêm Ngự dược phòng","Đặt thị vệ ở gian thuốc"],
+   close:["Bỏ qua lời đồn","Chưa nghi {v}","Không động đến đồ ngự dụng","Buông, để họ tự chọn"],
+   cond:[["s","tamco"],["s","mat"]],fo:[["e",7,"mid|lose"]],
+   cw:"cần Tâm cơ sâu và tai mắt trong Ngự dược phòng",
+   t:"Ngươi giữ bã thuốc năm ấy không để hại ai, chỉ để không ai dám hại thêm. Gian sắc thuốc của mọi cung từ đó đều có người của ngươi canh; chén thuốc nào ra khỏi Ngự dược phòng cũng qua mắt ngươi trước. Người ta gọi ngươi là kẻ nắm chén thuốc, nhưng nhờ ngươi mà không còn chén thuốc nào giết người.",
+   a:"Ngươi biết bã thuốc năm ấy dẫn về tay ai, và ngươi chưa bao giờ nói ra. Kẻ đứng sau chén thuốc từ đó làm mọi việc ngươi sai, còn những kẻ khác hiểu rằng một chén thuốc có thể đến bất kỳ cung nào. Cả hậu cung uống trà ở cung ngươi mà không ai dám để tay run.",
+   ht:"nắm hết đường thuốc trong cung để không còn ai bị đầu độc",ha:"nắm bí mật chén thuốc năm ấy để cả hậu cung phải nghe lời",
+   fail:"Bã thuốc trở về",ft:"Kẻ đứng sau chén thuốc ra tay trước: bã thuốc năm ấy được trình lên, kèm lời rằng chính ngươi đã giữ nó. Ngươi mất một mùa giải thích, mà lời giải thích không ai nghe hết."},
+  {pull:["Xin vào hầu thuốc","Xin Hoàng thượng phân xử","Xin Hoàng thượng chuẩn cho lương y họ Tôn ở lại bên cô mẫu","Thưa: cháu ruột hầu thuốc mới là phép","Cho {v} một chỗ hầu","Giữ lệ thỉnh an mỗi sáng","Kéo hai Đáp ứng về cùng một lòng","Kể và xin bà cho ngươi đứng thay ở lễ tế","Xin dâng hương thay Thái hậu trong hàng nội mệnh phụ","Bước lên đứng thay Đức Thọ cung","Bù bạc từ cung mình","Giữ họ bằng một ân điển","Xin Hoàng thượng cho giữ việc tang","Xin Hoàng thượng cho giữ ấn làm kỷ vật","Ngồi chép cho bà","Mở cửa đón họ","Thưa: người của Thái hậu, cháu Thái hậu lo","Xin cô mẫu trao người cho mình","Đứng ra nhận","Ở lại Đức Thọ cung","Nhường {v} để nàng nợ ngươi","Ghi tên họ","Cho {v} một tin giả","Từ chối ở cửa"],
+   close:["Nhịn","Để mọi việc theo phép","Đứng đúng hàng của mình","Phụ việc, không đứng đầu","Không nhận ai","Dâng ấn cho Trung cung"],
+   cond:[["s","duc"],["s","sung"]],fo:[],
+   cw:"cần Đức dày và Hoàng thượng nhớ công ngươi hầu mẹ ngài",
+   t:"Những tháng Thái hậu nằm bệnh, ngươi giữ Đức Thọ cung không rơi một việc. Hoàng thượng nhớ điều ấy: ngài giao ngươi cùng giữ việc lục cung, đặt ấn vào tay ngươi kèm một lời “người hiếu với mẹ trẫm thì không phụ ai”. Người cũ Đức Thọ cung theo ngươi, cả cung theo phép.",
+   a:"Những tháng Thái hậu nằm bệnh, ngươi thu dần việc của Đức Thọ cung về tay mình, mỗi việc kèm một lời “để cô mẫu được nghỉ”. Đến khi Hoàng thượng giao ấn hiệp lý lục cung, cả cung mới nhận ra người hầu thuốc đã nắm hết sổ sách, người cũ và cả lời vào tai Thái hậu.",
+   ht:"giữ trọn Đức Thọ cung những tháng cô mẫu nằm bệnh, rồi được giao ấn lục cung",ha:"mượn bệnh của cô mẫu mà thu hết việc về tay, rồi cầm ấn lục cung",
+   fail:"Ấn về tay khác",ft:"Ấn lục cung được giao cho người khác, kèm lời khen ngươi hiếu thảo. Việc của Đức Thọ cung ngươi gánh bao tháng, nay có người khác thu sổ."},
+  {pull:["Xin vào hầu thuốc","Ở lại","Xin Hoàng thượng sang Đức Thọ cung","Quỳ dâng lại","Để bà nghỉ một hôm","Ngồi nghe hết","Cố thêm","Ở lại Đức Thọ cung","Vào hầu bà trước đã","Hầu bà từng khắc tỉnh","Ngồi canh đến rằm","Quỳ bên giường, nắm tay bà gọi","Thưa: con xin cô mẫu sống lâu mà giữ","Để bà tự định, ngươi chỉ hầu","Xin bà nghỉ ngơi, đừng lo việc cung","Đuổi người may đồ tang đi","Xin bà nghỉ, đừng viết","Tự tay giữ siêu thuốc","Từ chối ở cửa","Đặt thị vệ ở gian thuốc","Từ chối khéo","Ghi lại những tên bà nhắc","@ch_benh_10=win"],
+   close:["Sang Dưỡng Tâm điện, nửa đêm về","Dự yến, sai lương y sang trước","Để {v} hầu, ngươi sang Dưỡng Tâm điện","Lo hậu sự từ bây giờ","Tin Viện phán, lo hậu sự"],
+   cond:[["s","th"],["s","duc"]],fo:[["e",10,"lose|dwin|dlose"]],
+   cw:"cần Thái hậu còn sống và thương ngươi, cùng Đức dày",
+   t:"Bệnh qua, Thái hậu xin Hoàng thượng cho về hành cung dưỡng già, và chỉ xin mang theo một người. Ngươi gác lại mọi việc trong cung mà theo bà. Ở hành cung, sáng ngươi sắc thuốc, chiều đẩy xe cho bà đi quanh hồ; bà bảo đó là những ngày ai gia được làm một bà cô bình thường.",
+   a:"Bệnh qua, ngươi thưa với Hoàng thượng rằng cô mẫu cần tĩnh dưỡng xa kinh, rồi tự tay đưa bà về hành cung. Người ra vào đều qua tay ngươi, thư từ đều qua mắt ngươi; Thái hậu sống yên đến cuối đời, nhưng không còn lời nào của bà đến được triều đình mà ngươi chưa đọc.",
+   ht:"theo cô mẫu về hành cung, hầu bà những ngày dưỡng già",ha:"đưa cô mẫu về hành cung, giữ bà xa triều đình trong tay mình",
+   fail:"Hành cung xa mãi",ft:"Chuyến về hành cung bị dời hết lần này đến lần khác. Thứ ngươi còn giữ được chỉ là mấy thang thuốc cũ gói trong tủ, không ai sắc nữa."}]},
+ ch_ho:{lean:{
+   p:["Nhường {v} dâng trước","Đề nghị họ ủng hộ cả hai","Gặp Thái hậu giải thích","Xin bà cứu {v}","Nhường {v}","Bắt tay","Tiến cử cả hai cùng nhau","Rủ {v} cùng chịu tang","Bàn với {v} một lời chung","Mời {v} cùng đứng ra","Dặn người của mình luôn nhường","Mời {v} vào cùng hầu","Phạt người của mình trước","Sai người mang trà sang tạ lỗi {v}","Rủ {v} cùng dâng một món","Kể lại với {v}","Lặng lẽ làm lại","Gửi trả trâm cho {v}","Xin bà đừng hỏi nữa, hai cháu tự hòa","Thưa: chia cho cả hai","Không nhà nào phải ngã","Không đưa tên ai","Đưa tên quản gia phủ Quốc cữu từng ăn chặn","Cùng {v} quỳ xin xét công bằng","Mang áo ấm đến cho nàng","Giúp {v} lo lễ Phật đản","Mời {v} cùng lo việc","Lặng lẽ gửi bạc nuôi nhà {v}","Hứa với cô mẫu sẽ giữ {v}","Mời {v} cùng thắp"],
+   m:["Thưa: để nàng tự chịu","Tự tiến cử mình","Cũng đến từ canh tư","Đến tận nơi đòi lẽ phải","Nói một món, dâng một món","Tung một lời đồn khác đè lên","Đáp thẳng: lời ấy từ cung muội ra","Giữ trâm, không tra","Đứng ngoài, để nhà nàng chịu","Nhờ người nhà báo tin cho Ngự sử về đất phong","Xin nàng đưa sổ đất phong để lo","Đưa tên một quản sự đất phong nhà {v}","Tâu riêng cho nhà mình","Tìm việc {v} làm sai","Cho người xem nàng quỳ thật hay giả","Giữ trọn việc trong tay","Xin phụ thân giao phủ cho người hợp ý ngươi","Tra cho ra kẻ phá","Cho người bắt tận cung nữ nói đầu","Nhà ta không phạm tội","Không đến, giữ khoảng cách","Để mặc, lời đồn tự tắt"]},
+  e:[
+  {pull:["Nhường {v} dâng trước","Đề nghị họ ủng hộ cả hai","Xin bà cứu {v}","Nhường {v}","Bắt tay","Tiến cử cả hai cùng nhau","Rủ {v} cùng chịu tang","Bàn với {v} một lời chung","Mời {v} cùng đứng ra","Dặn người của mình luôn nhường","Cùng {v} chia ngày hầu trà","Mời {v} vào cùng hầu","Tin {v}","Rủ {v} cùng dâng một món","Dâng chung với {v}","Nhờ {v} cùng nói","Xin bà để hai cháu cùng giữ","Giữ trọn việc trong tay","Xin nàng đưa sổ đất phong để lo","Giữ trâm, không tra","Cho người xem nàng quỳ thật hay giả","Tìm việc {v} làm sai","Cho người bắt tận cung nữ nói đầu"],
+   close:["Thưa: để nàng tự chịu","Tự tiến cử mình","Nhờ người nhà báo tin cho Ngự sử về đất phong","Đưa tên một quản sự đất phong nhà {v}","Tâu riêng cho nhà mình"],
+   cond:[["s","duc"],["s","danh"]],fo:[],
+   cw:"cần Đức dày và tiếng hòa thuận của hai người cháu",
+   t:"Hai người cháu từng tranh nhau từng ánh mắt của Thái hậu, nay ngồi chung một chiếu. Việc lớn của họ ngoại hai người cùng bàn, ai gặp nạn người kia đứng ra gánh, nên không ai trong cung tìm được khe hở giữa hai nhà. Người ta gọi họ là chị em một nhà, quên rằng năm xưa họ từng là đối thủ.",
+   a:"Hai người cháu ngồi chung một chiếu, nhưng ai cũng biết chiếu ấy trải theo ý ai. Người cháu kia đứng sau ngươi trong mọi buổi lễ, nói lời ngươi dặn, nhận những việc ngươi không muốn mang tên. Nàng ta mang ơn ngươi, và không còn đường nào khác.",
+   ht:"cùng người cháu kia thành chị em một nhà, chung tay giữ họ ngoại",ha:"giữ người cháu kia bên mình như cái bóng, nợ ngươi cả đời",
+   fail:"Hai nhà hai ngả",ft:"Mối hòa giữa hai người cháu không qua nổi một mùa sóng. Nhà ngoại chia đôi, mỗi bên ôm một mối nghi; ngươi giữ được nửa họ, mất nửa còn lại."},
+  {pull:["Pha theo khẩu vị bà thích","Gửi lễ cho các trưởng bối","Gặp Thái hậu giải thích","Dâng một món quà khác thật quý","Thưa: để nàng tự chịu","Xin nhận nuôi","Từ chối","Tự tiến cử mình","Lặng lẽ đến sớm hơn","Cũng đến từ canh tư","Đến tận nơi đòi lẽ phải","Cho người dò ở Đức Thọ cung","Đọc rồi giảng nghĩa theo lòng mình","Dâng lời chúc trước cả điện","Đặt thợ Thượng y cục thêu bình phong Vạn thọ","Bán bớt trang sức, đặt quà lớn","Nói một món, dâng một món","Dâng món quà riêng của ngươi","Tung một lời đồn khác đè lên","Đặt chứng cứ trước bà","Thưa: dồn cho con","Gửi thư nói rõ ngươi làm được gì cho họ","Bước lên nhận ấn","Bước lên thắp hương đầu","Đứng ra trước, nhận phần mình","Phạt người của mình trước","Lặng lẽ làm lại","Không đưa tên ai","@hau14=win"],
+   close:["Nhường {v} dâng trước","Nhường {v}","Lùi lại, để {v} nhận","Lùi về chỗ các phi tần","Lui về sau, giữ lễ tang"],
+   cond:[["s","sung"],["s","tamco"],["seat","HH"]],fo:[],
+   cw:"cần Sủng cao, Tâm cơ sâu và ghế Trung cung không ai ngồi",
+   t:"Chiếu lập hậu ban xuống phủ Quốc cữu trước khi ban ra cả triều. Ngươi nhận phượng ấn, rồi việc đầu tiên là xin cho người cháu kia một bậc phong, để trong họ ngoại không ai phải cúi đầu oán ai. Thiên hạ gọi ngươi là Trung cung hiền, vì người từng tranh với ngươi nay được chính ngươi nâng lên.",
+   a:"Ngươi đội mũ phượng giữa tiếng chúc của cả họ ngoại. Từ hôm ấy họ ngoại chỉ còn một con phượng: người cháu kia được dời sang một cung xa, cả họ chỉ đến thỉnh an ở Càn Ninh cung. Ai còn nhắc chuyện hai người cháu năm xưa đều được nhắc lại rằng nay chỉ có một.",
+   ht:"lên ngôi Trung cung rồi nâng người cháu từng tranh với ngươi",ha:"lên ngôi Trung cung, để họ ngoại chỉ còn một con phượng",
+   fail:"Phượng gãy cánh",ft:"Cả họ dồn sức cho ngươi, nhưng ghế Trung cung không về họ ngoại. Phủ Quốc cữu bị gọi là kết bè, các trưởng bối lặng lẽ thu lễ về."},
+  {pull:["Nhường {v} dâng trước","Nhường {v}","Xin bà cứu {v}","Hồi thư khiêm nhường","Lui về sau, giữ lễ tang","Đứng sau mà vẫn giữ lễ","Xin chép kinh dâng cô mẫu","Để {v} đọc trước","Lùi về chỗ các phi tần","Chỉ dâng lễ theo phép","Dâng theo phép, không tranh","Nhận lỗi đã lỡ lời","Thưa: con không xen việc triều","Thưa: để trưởng bối tự chọn","Chỉ gửi lời chúc Tết","Lùi lại, để {v} nhận","Đứng sau Thái hậu, không tranh","Xin phụ thân để họ tự bầu","Lặng lẽ gửi bạc nuôi nhà {v}","Đứng ngoài, để nhà nàng chịu","Nhà ta không phạm tội","Không đến, giữ khoảng cách","Để mặc, lời đồn tự tắt","Đưa tên một quản sự đất phong nhà {v}"],
+   close:["Tự tiến cử mình","Bước lên nhận ấn","Bước lên thắp hương đầu","Thưa: dồn cho con","Đứng ra trước, nhận phần mình"],
+   cond:[["s","duc"]],fo:[],
+   cw:"cần Đức dày để người cháu kia tin ngươi nhường thật",
+   t:"Ngươi nhường hết cho người cháu kia: chỗ đứng đầu họ ngoại, việc lớn nhỏ của nhà ngoại, cả những lá thư nhà. Rồi ngươi dâng biểu xin ra cung về phủ Quốc cữu, không mang theo gì ngoài mấy quyển kinh. Trong họ không còn ai phải chọn giữa hai người cháu.",
+   a:"Đúng lúc tờ sớ hặc ngoại thích sắp được xét, ngươi dâng biểu xin ra cung, để lại cho người cháu kia chỗ đứng đầu họ ngoại cùng mọi món nợ đi kèm. Ngươi về phủ Quốc cữu yên ổn; ngọn sóng ập xuống người còn ở lại.",
+   ht:"nhường hết cho người cháu kia rồi ra cung, để họ ngoại khỏi phải chọn",ha:"ra cung đúng lúc sóng đến, để người cháu kia gánh hết",
+   fail:"Muốn nhường không xong",ft:"Họ ngoại không cho ngươi đi: một người cháu rời cung lúc này là tự nhận nhà mình có tội. Ngươi ở lại, chỗ đã nhường thì không lấy lại được."},
+  {pull:["Gửi lễ cho các trưởng bối","Viết thư cho phụ thân bàn việc họ","Gửi lễ cho các trưởng bối họ ngoại","Hỏi nhà ngoại xem bà nhớ gì nhất","Nhờ nhà ngoại gửi người làm bánh vào","Kể thật quà của mình","Hứa sẽ nói giúp","Gửi bạc về giúp họ","Viết thư cho phụ thân hỏi rõ","Gửi lễ Tết cho từng trưởng bối","Khéo nói với Hoàng thượng","Mừng cho cuộc hôn nhân","Thưa: chia cho cả hai","Gửi thư nói rõ ngươi làm được gì cho họ","Đề nghị họ ủng hộ cả hai cháu","Viết thư dặn phụ thân lui một bước","Đưa tên quản gia phủ Quốc cữu từng ăn chặn","Xin phụ thân giao phủ cho người hợp ý ngươi","Thưa: họ cần một người đứng đầu","Tâu riêng cho nhà mình","Đưa tên một quản sự đất phong nhà {v}","Nhờ người nhà báo tin cho Ngự sử về đất phong","Không đưa tên ai","@ch_ho_11=win"],
+   close:["Thưa: con không xen việc triều","Khuyên họ để cháu ấy tự thi","Chỉ gửi lời chúc Tết","Viết thư cho phụ thân can"],
+   cond:[["s","dad"],["s","tamco"]],fo:[],
+   cw:"cần phụ thân còn tin ngươi và Tâm cơ đủ giữ cả họ",
+   t:"Phủ Quốc cữu không ai làm quan quá phép, không ai nhận đất phong quá lệ, mà trong triều không ai dám xem nhẹ. Mỗi lần họ ngoại có người sai, ngươi tự tay đưa người ấy ra chịu xét trước khi Ngự sử kịp dâng sớ. Trăm năm sau, gia phả họ vẫn chép: đời ấy có một người cháu giữ họ bằng phép.",
+   a:"Phủ Quốc cữu đông người ra vào hơn cả Lục bộ. Chức Tri phủ, đất phong ven sông, cái gì họ ngoại muốn đều đến qua một lá thư từ cung ngươi. Ngự sử nào dâng sớ hặc ngoại thích thì mùa sau đã đi trấn ở biên ải.",
+   ht:"giữ họ ngoại bằng phép, để phủ Quốc cữu đứng vững mà không lấn ai",ha:"đưa họ ngoại lên khắp triều, ai dám hặc thì kẻ ấy phải đi",
+   fail:"Họ ngoại tan đàn",ft:"Tờ sớ hặc ngoại thích được phê: phủ Quốc cữu bị thu đất phong, mấy người trong họ mất chức. Các trưởng bối đổ lỗi cho người cháu đã hứa quá nhiều."}]},
+ ch_bi:{lean:{
+   p:["Thưa thật với bà","Tìm gặp lão cung nữ","Đưa lão cung nữ về bên mình","Đưa nhân chứng nói rõ sự thật","Viết thư mời nói chuyện","Gửi bạc nuôi mẹ già hắn","Ghi lời ma ma làm chứng","Hỏi vì sao cả nhà phải chịu","Mời Đàm ma ma cùng đọc","Xin bà cho họ Lâm một lời đền bù kín","Xin Hoàng thượng cho họ Lâm một lời đền bù kín","Thưa thật cả hai phía","Xin bà để lại một trang cho họ Lâm","Giữ lại một trang cho họ Lâm","Xin Hoàng thượng lặng lẽ phục danh cho Lâm thị","Viết thay cô mẫu một lời tạ lỗi","Xin bà viết một dòng cho họ Lâm","Gửi bạc lo cho mẹ hắn, kèm một lời","Xin Hoàng thượng cho Lâm thị được trả lại tên","Gửi bạc lo hậu sự cho mẹ hắn","Hứa không đem ra","Trả về cho họ Lâm","Gửi về cho họ Lâm","Viết thư hỏi thăm mẹ Lâm Khải","Xin Hoàng thượng thăm mẫu hậu","Xin ngài lặng lẽ đền bù họ Lâm, giữ tiếng mẫu hậu","Chôn bí mật, xin cô mẫu lặng lẽ đền bù họ Lâm","Thưa: mẫu hậu chỉ tự vệ","Giữ tiếng cho cô mẫu","Đứng chắn trước cô mẫu"],
+   m:["Biếu Tổng quản để ông giữ kín","Cảnh cáo nàng","Chối","Dùng bản gốc mặc cả với Thái hậu","Viết thư răn đe","Xin ma ma giữ kín","Báo Hoàng hậu {v} thông đồng người ngoài","Đi, nhưng chỉ kể một nửa","Bắt tiểu cung nữ khai","Tha nàng, bắt nàng làm hai mang","Cho người lẻn vào lấy","Giữ hộp, không nói gì","Tìm chứng {v} đưa bạc ra cung để đổi lại","Giữ cả, để không ai đem ra","Cho người chặn tên thái giám ở cổng cung","Giữ thóp, bắt nàng theo ngươi","Khóa kỹ, giữ làm con bài","Giữ lại, khóa kỹ","Giữ lá thư làm con bài của mình","Giữ kín mọi giấy tờ","Xin bà một ân điển cho cung mình"]},
+  e:[
+  {pull:["Tìm gặp lão cung nữ","Thưa thật với bà","Đưa lão cung nữ về bên mình","Đưa nhân chứng nói rõ sự thật","Nhờ nhà ngoại đối chiếu nét chữ với sổ Hàn lâm","Viết thư mời nói chuyện","Ghi lời ma ma làm chứng","Hỏi ma ma Lâm Khải là người thế nào","Đặt lời khai của Đàm ma ma trước hắn","Xin bà cho họ Lâm một lời đền bù kín","Xin Hoàng thượng cho họ Lâm một lời đền bù kín","Thưa thật cả hai phía","Xin Hoàng thượng lặng lẽ phục danh cho Lâm thị","Viết thư răn đe","Bắt tiểu cung nữ khai","Báo Hoàng hậu {v} thông đồng người ngoài","Tìm chứng {v} đưa bạc ra cung để đổi lại","Cho người chặn tên thái giám ở cổng cung","Giữ thóp, bắt nàng theo ngươi","Cho người lẻn vào lấy","Cảnh cáo nàng","Tha nàng, bắt nàng làm hai mang"],
+   close:["Đốt ngay","Chối","Đốt tờ giấy","Giữ lá thư làm con bài của mình","Khóa kỹ, giữ làm con bài","Giữ lại, khóa kỹ"],
+   cond:[["s","duc"],["s","danh"]],fo:[],
+   cw:"cần Đức dày và lời ngươi được cả triều tin",
+   t:"Ngươi không đem chuyện năm xưa ra làm nhục ai. Ngươi đặt trọn hai câu chuyện của đêm năm ấy trước Hoàng thượng, và xin cho họ Lâm được trả lại tên. Cả triều biết chuyện cũ của Đức Thọ cung, nhưng cũng biết người cháu của bà đã trả món nợ ấy bằng lẽ phải.",
+   a:"Ngươi đem chuyện năm xưa ra trước triều, từng lời, từng tên người đã nhúng tay. Họ Lâm được trả tên; những kẻ từng chép bản sao, từng đưa thư, từng mua bán chuyện cũ thì không ai còn giữ được chức. Lẽ phải đã thắng, nhưng ai cũng thấy lưỡi dao ngươi cầm sắc đến mức nào.",
+   ht:"đặt trọn chuyện năm xưa trước Hoàng thượng, trả lại tên cho họ Lâm",ha:"đem chuyện năm xưa ra làm dao, trả tên cho họ Lâm và chém sạch những kẻ dính vào",
+   fail:"Lẽ phải chôn vùi",ft:"Chuyện năm xưa bị gọi là bịa đặt trước khi ngươi kịp nói hết. Họ Lâm vẫn mang tội cũ, còn ngươi bị nhắc chớ đào lại chuyện đời tiên đế."},
+  {pull:["Chôn bí mật, xin cô mẫu lặng lẽ đền bù họ Lâm","Xin ngài lặng lẽ đền bù họ Lâm, giữ tiếng mẫu hậu","Gửi bạc nuôi mẹ già hắn","Viết thư hỏi thăm mẹ Lâm Khải","Giữ kỹ, không cho ai biết","Biếu Tổng quản để ông giữ kín","Dò ngược lại","Cảnh cáo nàng","Tìm cách lấy lại","Chỉ giữ thư","Dùng bản gốc mặc cả với Thái hậu","Để ma ma lục, thư đã giấu nơi khác","Lặng lẽ dò ai còn bản sao","Xin ma ma giữ kín","Viết thư răn đe","Giữ tờ giấy làm chứng","Đi, nhưng chỉ kể một nửa","Giữ kín, không cho ai biết đã mất","Tha nàng, bắt nàng làm hai mang","Cho người lẻn vào lấy","Giữ hộp, không nói gì","Giữ cả, để không ai đem ra","Thưa: con giữ, để không ai đem ra nữa","Giữ thóp, bắt nàng theo ngươi","Khóa kỹ, giữ làm con bài","Giữ lại, khóa kỹ","Giữ lá thư làm con bài của mình","Giữ kín mọi giấy tờ","Thưa: mẫu hậu chỉ tự vệ","Hứa không đem ra","Giữ tiếng cho cô mẫu","Đứng chắn trước cô mẫu"],
+   close:["Đốt ngay","Đốt trước mặt bà","Đốt trước bài vị cô mẫu","Trả về cho họ Lâm","Gửi về cho họ Lâm","Xin Hoàng thượng tự xét chuyện nhà","Xin ngài tự xét chuyện nhà"],
+   cond:[["s","tamco"],["s","mat"]],fo:[],
+   cw:"cần Tâm cơ sâu và tai mắt đủ biết bản sao nào còn nằm ở đâu",
+   t:"Lá thư cũ nằm trong một chiếc tráp khóa, chìa chỉ ngươi giữ. Ngươi không dùng nó để đổi lấy gì; ngươi giữ nó để không ai đem tên Thái hậu ra bôi nhọ, cũng không ai đem họ Lâm ra làm mồi thêm lần nào. Kẻ muốn đào chuyện cũ đều phải qua ngươi, và chưa ai qua được.",
+   a:"Ngươi khóa lá thư cũ vào tráp và đeo chìa bên mình, không giấu ai điều ấy. Người cũ Đức Thọ cung biết, người cũ của tiên đế biết, những kẻ từng chép bản sao cũng biết. Không ai dám trái ý ngươi, vì ai cũng nhớ ngươi có thể mở tráp bất cứ lúc nào.",
+   ht:"giữ kín lá thư cũ để che cho cả hai họ khỏi bị bôi nhọ",ha:"giữ kín lá thư cũ làm thóp, để cả hậu cung phải nghe ngươi",
+   fail:"Thóp lại vào tay người",ft:"Một bản sao cuối cùng bật ra từ nơi ngươi không ngờ. Lá thư ngươi giữ bỗng thành vô giá trị, còn những kẻ ngươi từng nắm thóp thì nhớ rất rõ ngươi."},
+  {pull:["Thưa thật với bà","Đưa nhân chứng nói rõ sự thật","Báo Thái hậu: việc chưa xong","Tự mang hộp thư sang Đức Thọ cung","Thay cô mẫu sang thỉnh an Hoàng thượng","Đưa tờ giấy cho Thái hậu","Đưa tờ giấy cho cô mẫu","Đi ngay, kể hết","Quỳ thưa thật","Nắm tay bà, không hỏi","Thưa: nhận một nửa thì được một nửa","Báo Thái hậu ngay","Thưa thật cả hai phía","Thưa: mẫu hậu chỉ tự vệ","Xin bà viết một dòng cho họ Lâm","Ngồi im bên bà","Ngồi đánh cờ với bà","Xin Hoàng thượng thăm mẫu hậu","Đốt trước mặt bà","Bảo nàng đi xin lỗi Thái hậu","Đi, nhưng chỉ kể một nửa","Dùng bản gốc mặc cả với Thái hậu","Cho bà biết {v} gửi bạc cho họ Lâm","Xin bà một ân điển cho cung mình","Xin ma ma giữ kín","Giữ kín mọi giấy tờ","Tha nàng, bắt nàng làm hai mang"],
+   close:["Chối","Tự đứng ra trước các phi tần","Lui về cung mình","Giữ lại, khóa kỹ","Xin Hoàng thượng tự xét chuyện nhà"],
+   cond:[["s","th"],["s","duc"]],fo:[],
+   cw:"cần Thái hậu còn sống và thương ngươi, cùng Đức dày đủ để cả hai mẹ con tin",
+   t:"Ngươi kể trọn chuyện năm xưa trước mặt hai mẹ con rồi lui ra ngoài hiên. Đêm ấy Hoàng thượng ở lại Đức Thọ cung đến canh tư; sáng ra ngài quỳ dâng trà cho mẹ như thuở nhỏ. Việc của ngươi đã xong, ngươi xin ra cung về nhà ngoại, không mang theo gì.",
+   a:"Ngươi đưa Hoàng thượng đến Đức Thọ cung, nhưng chỉ kể cho ngài nửa câu chuyện mà ngươi muốn ngài nghe. Mẹ con ngài nhận lại nhau qua lời ngươi, và từ đó Thái hậu tin ngươi hơn tin con mình. Ngày ngươi xin ra cung, bà khóc như mất con, gửi theo ngươi cả nửa kho riêng của Đức Thọ cung.",
+   ht:"đưa Hoàng thượng và Thái hậu nhận lại nhau, rồi lặng lẽ ra cung",ha:"đứng giữa hai mẹ con mà nhận hết lòng tin của bà, rồi mang theo ra cung",
+   fail:"Mẹ con cách mặt",ft:"Chuyện năm xưa đến tai Hoàng thượng trước lời ngươi. Giữa ngài và Đức Thọ cung từ đó là một khoảng lặng không ai lấp nổi, và người bị trách là người cháu đã biết mà không nói."},
+  {pull:["Giữ kỹ, không cho ai biết","Thưa thật với bà","Đưa lão cung nữ về bên mình","Cho người theo tên thái giám ra ngoài","Khéo hỏi Hoàng thượng ai đã dâng","Xin Tổng quản cho người khám xe","Nhờ Tổng quản đổi người giữ cửa","Cho người chặn ở cửa Tây Hoa","Viết thư mời nói chuyện","Gửi bạc nuôi mẹ già hắn","Xin xem sổ","Nhờ Tổng quản cấm hộp ra cổng ba ngày","Chặn trước ngày mồng một","Đến cung {v} đòi lại","Thưa thật cả hai phía","Đứng chắn trước cô mẫu","Cho người chặn tên thái giám ở cổng cung","Viết một lá thư có ấn riêng của ngươi","Tự mình đi","Giữ thóp, bắt nàng theo ngươi","Bắt tiểu cung nữ khai","Cho người lẻn vào lấy","Tìm chứng {v} đưa bạc ra cung để đổi lại","Giữ hộp, không nói gì","@st_dong=win","@ke14=win"],
+   close:["Lui về cung mình","Ở lại, để trời quyết","Để mọi việc đi theo đường của nó","Để mặc, chờ xem","Giữ thế, chờ người khác đi trước"],
+   cond:[["son"],["s","tamco"],["seat","TM"]],fo:[["seatT","TM"]],
+   cw:"cần một hoàng tử của ngươi, Tâm cơ sâu và ngôi mẹ vua còn trống",
+   t:"Suốt những năm sóng gió quanh lá thư cũ, ngươi giữ con mình xa khỏi mọi chuyện của Đức Thọ cung, đến mức triều thần gần như quên trong cung còn một hoàng tử ấy. Khi ngôi báu cần người, chính sự trong sạch ấy khiến cả triều đồng lòng. Con ngươi lên ngôi, ngươi thành mẹ của thiên tử mà không mang một món nợ cũ nào.",
+   a:"Khi ngôi báu cần người, ngươi chỉ khẽ nhắc rằng mình biết chuyện năm xưa của Đức Thọ cung. Những kẻ đứng sau các hoàng tử khác lần lượt im tiếng, vì không ai muốn chuyện ấy bị đem ra giữa lúc chọn vua. Con ngươi lên ngôi; sau lưng, người ta gọi đó là ngôi báu mượn danh một bí mật.",
+   ht:"giữ con xa khỏi chuyện cũ, để con lên ngôi trong sạch",ha:"mượn bí mật năm xưa làm cả triều im tiếng, đưa con lên ngôi",
+   fail:"Ngôi báu về tay khác",ft:"Triều thần chọn một hoàng tử khác. Người ta nói nhỏ rằng mẹ của vua không thể là người biết bí mật của Đức Thọ cung."}]},
+ thd_tho:{lean:{
+   p:["Viết thư cảm tạ {n1}","Từ chối, báo Hàn lâm viện","Đem nộp Hàn lâm viện ngay","Viết thơ chân thật về tuyết quê nghèo","Để mặc, chỉ xin ghi tên cha dạy chữ","Cười mà nhận cái tên","Báo Hàn lâm viện đổi đề","Gửi bạc về sửa trường","Gửi thơ mới cho trò làng chép","Tâu Hoàng thượng đề đã lộ","Viết ngay bài mới, mặc tập cũ","Chào {v} trước mặt mọi người","Kể thật bài thơ đầu cha dạy","Xin Chưởng viện cho cả hai hồi tị","Viết về tuyết trên mái trường làng","Khuyên y xin hồi tị cho trong sạch","Đáp: chữ của cha, lòng của con","Kể thật từng chi tiết","Gửi thuốc thăm chú của {v}","Tin nàng, cho nàng một lối lui","Xin tha cho {v}, chỉ cần trả tên","Chọn bài viết cho cha","Thôi tranh, dạy chữ cho cung nữ","Họa lại một bài","Xin ban chữ cho trường làng của cha","Xin xóa hẳn tiếng đạo thơ cho cả {v}","Xin Hoàng thượng cho chấm tên che","Xin cả {v} cùng viết tiếp","Xin Hoàng thượng cho chấm lại công khai","Xin chỉ danh, không xin gì thêm"],
+   m:["Mua đề","Giữ kín, luyện đúng đề ấy","Cũng luyện vịnh mai cho chắc","Lặng im, ghi nhớ","Trả công người báo tin, dặn nàng im","Mua lời khai của hắn","Xin Cung chính ty khám cung {v}","Mượn nghiên của {v}","Ra hiệu nhờ y để mắt bài {v}","Viết một bài đáp thẳng bài {v}","Tìm ra ai tung tin","Tố ngược {v} lấy trộm tập nháp","Đòi viện xử tội vu cáo","Giữ bản sao sổ điểm","Bắt nàng viết lời khai","Xin xử đúng luật","Gửi trả bài thơ","Viết theo lối cung đình cho chắc","Đem bài thơ lên Hoàng hậu","Đốt đi","Không tiếp","Lặng lẽ cho người dò ngoài cung"]},
+  e:[
+  {pull:["Thức đêm luyện thơ","Mời thầy Hàn lâm dạy","Ứng tác ngay một bài khác","Đối ngay","Xin ngài cho một đêm nghĩ","Viết thơ chân thật về tuyết quê nghèo","Xin Hàn lâm viện cấm bản in lén","Đáp một câu thơ","Đóng cửa luyện thơ","Dâng thơ lên Hoàng thượng xin dự","Viết ngay bài mới, mặc tập cũ","Bỏ hết thơ cũ, chỉ viết điều mới","Ngồi yên, viết bài khác hay hơn","Viết về tuyết trên mái trường làng","Ứng tác trước buổi thỉnh an","Xin Hoàng thượng một buổi đối thơ","Viết tiếp bằng giọng của bài cũ","Chọn bài đã đứng đầu","Nhận viết đề tựa","Dâng Hoàng thượng một bài mới","Mua đề","Giữ kín, luyện đúng đề ấy","Cũng luyện vịnh mai cho chắc","Viết một bài đáp thẳng bài {v}","Viết theo lối cung đình cho chắc","Kể thật bài thơ đầu cha dạy"],
+   close:["Cáo bệnh không thi","Thôi tranh, dạy chữ cho cung nữ","Nhường trang đầu cho người khác","Nhường Chưởng viện"],
+   cond:[["s","tai"],["s","danh"]],fo:[],
+   cw:"cần Tài cao và thơ ngươi vang khắp kinh thành",
+   t:"Tập Ngự tuyển in xong, sĩ tử kinh thành chép thơ ngươi lên quạt, lên vách quán trà. Ngươi vẫn viết về tuyết trên mái trường làng, về cha ngồi dạy chữ dưới đèn dầu, và chưa bài nào đem ra để hơn thua với ai. Hàn lâm viện tôn ngươi là thi tiên của đời mình.",
+   a:"Thơ ngươi vang khắp kinh thành, sắc như dao. Kẻ nào từng vu ngươi đạo thơ đều có một bài mang tên mình truyền miệng ngoài phố, đọc lên ai cũng cười. Cả Hàn lâm viện phục tài ngươi, mà không ai dám đem thơ mình đặt cạnh thơ ngươi.",
+   ht:"thơ truyền khắp kinh thành mà chưa từng dùng chữ để hơn thua",ha:"dùng thơ làm dao, khiến không ai dám đặt chữ mình cạnh chữ ngươi",
+   fail:"Thơ bị chê lạc điệu",ft:"Hàn lâm viện chê thơ ngươi quê mùa, không hợp lệ cung đình. Thơ ngươi chỉ còn được chép trong vài quán trà ngoài thành."},
+  {pull:["Nhờ {n1} minh oan","Từ chối, báo Hàn lâm viện","Đem nộp Hàn lâm viện ngay","Tâu Hoàng thượng đề đã lộ","Báo Hàn lâm viện đổi đề","Lặng im, ghi nhớ","Khóa cửa, tra từng người hầu","Giữ mẩu giấy làm chứng","Đem mẩu giấy đến hỏi thẳng {v}","Mua lời khai của hắn","Xin Cung chính ty khám cung {v}","Đứng dậy nói đó là thơ của ngươi","Ghi lại từng chữ nàng đổi","Mượn nghiên của {v}","Viết một bài đáp thẳng bài {v}","Tìm ra ai tung tin","Tố ngược {v} lấy trộm tập nháp","Xin Hàn lâm viện thử giấy","Đem lời đề nghị lên viện","Đòi viện xử tội vu cáo","Giữ bản sao sổ điểm","Bắt nàng viết lời khai","Xin xử đúng luật","Gửi trả bài thơ","Xin xóa hẳn tiếng đạo thơ cho cả {v}","Tin nàng, cho nàng một lối lui","Xin tha cho {v}, chỉ cần trả tên","Xin Hoàng thượng cho chấm lại công khai"],
+   close:["Cười mà nhận cái tên","Để mặc, chỉ xin ghi tên cha dạy chữ","Viết lại từ trí nhớ, mặc nó","Nhận lời, hai bên cùng rút","Họa lại một bài"],
+   cond:[["s","tai"],["s","tamco"]],fo:[],
+   cw:"cần Tài cao và Tâm cơ đủ biết chữ nào đâm trúng",
+   t:"Ngươi viết một bài thơ về những sĩ tử nghèo bị tráo bài, về người chép thuê bị mua chữ. Bài thơ chép tay khắp kinh thành, đến tận Ngự thư phòng; Hoàng thượng đọc xong cho tra lại các bài Xuân thí. Ngòi bút từng bị vu là đạo thơ nay đòi lẽ phải cho người khác.",
+   a:"Một bài thơ của ngươi chép tay ra khỏi cung, chữ nào cũng nhẹ như gió mà ai đọc cũng hiểu nói về ai. Chú của kẻ từng vu ngươi đạo thơ mất ghế giám khảo, rồi mất luôn chỗ đứng ở Hàn lâm viện. Từ đó, trong cung không ai đọc thơ ngươi mà không tự hỏi bài sau sẽ viết về ai.",
+   ht:"viết thơ đòi lẽ phải cho người bị mua chữ, tráo bài",ha:"viết thơ đâm trúng kẻ thù, khiến cả cung sợ bài thơ sau",
+   fail:"Bút gãy giữa chừng",ft:"Bài thơ của ngươi bị gọi là lời phỉ báng người trong triều. Hàn lâm viện thu hết bản chép, ngươi bị cấm làm thơ một mùa."},
+  {pull:["Viết thơ chân thật về tuyết quê nghèo","Để mặc, chỉ xin ghi tên cha dạy chữ","Gửi bạc về sửa trường","Gửi thơ mới cho trò làng chép","Cười mà nhận cái tên","Viết thư hỏi cha có giữ bản chép","Viết lại từ trí nhớ, mặc nó","Ngồi yên, nhắm mắt định thần","Kể thật bài thơ đầu cha dạy","Gửi thư về hỏi cha","Xin cha gửi thư lên","Lặng im chờ bảng","Gửi bạc lo chỗ trọ cho cha","Chọn bài viết cho cha","Thôi tranh, dạy chữ cho cung nữ","Xin để cha viết","Để cha về","Thưa: thiếp chỉ xin giữ chữ","Xin ban chữ cho trường làng của cha","Đốt đi","Viết ngay bài mới, mặc tập cũ","Bỏ hết thơ cũ, chỉ viết điều mới","Không tiếp","Gửi trả bài thơ","Lặng lẽ cho người dò ngoài cung","Trả công người báo tin, dặn nàng im","Lặng im, ghi nhớ"],
+   close:["Chọn bài đã đứng đầu","Nhận viết đề tựa","Mua đề","Đòi viện xử tội vu cáo"],
+   cond:[["s","duc"],["s","tai"]],fo:[],
+   cw:"cần Đức dày và thơ ngươi đủ nuôi ngươi ngoài cung",
+   t:"Ngươi để lại trong Ngự thư phòng một tập thơ không đề tên, rồi theo đường quan về làng. Hoàng thượng đọc xong, sai người đuổi theo chỉ để trao một lời: “Thơ của nàng, trẫm vẫn muốn đọc.” Ở trường làng của cha, ngươi dạy trẻ con đọc thơ, và thơ ngươi theo người đi chợ, theo thuyền buôn về khắp các ngả sông.",
+   a:"Đêm trước khi ra cung, ngươi đốt hết thơ mình viết trong cung. Không ai còn giữ được một chữ nào để tranh với ngươi, hay để vu ngươi lần nữa. Ngươi về làng tay không, chỉ giữ những câu thơ trong đầu.",
+   ht:"để lại thơ cho Hoàng thượng rồi về làng dạy trẻ, thơ theo người đi khắp nơi",ha:"đốt hết thơ viết trong cung rồi ra đi, không để ai giữ được chữ nào",
+   fail:"Gió không đưa thơ",ft:"Ngươi xin về làng mà không ai đáp. Thơ ngươi bị cất vào kho Hàn lâm viện, còn ngươi ở lại trong cung làm một tài nữ không ai đọc."},
+  {pull:["Xin Hoàng thượng thứ lỗi vì thơ lọt ra","Đối ngay","Xin ngài cho một đêm nghĩ","Dâng thơ lên Hoàng thượng xin dự","Xin Hoàng thượng ban chữ cho trường làng","Xin Hoàng thượng cho chấm tên che","Xin vào gặp Hoàng thượng","Xin Hoàng thượng một buổi đối thơ","Viết tiếp bằng giọng của bài cũ","Xin cả {v} cùng viết tiếp","Xin Hoàng thượng cho chấm lại công khai","Thưa: thiếp chỉ xin giữ chữ","Dâng Hoàng thượng một bài mới","Xin Hoàng thượng gặp cha","Xin chỉ danh, không xin gì thêm","Dâng chứng giấy và thư, xin không phải thử","Ra hiệu nhờ y để mắt bài {v}","Tố ngược {v} lấy trộm tập nháp","Giữ kín, luyện đúng đề ấy","Đòi viện xử tội vu cáo","Xin xử đúng luật","Giữ bản sao sổ điểm","Xin tha cho {v}, chỉ cần trả tên"],
+   close:["Cáo bệnh không thi","Viết thơ hoa mỹ theo lối cung đình","Để {n1} tự tâu","Viết theo lối cung đình cho chắc"],
+   cond:[["s","sung"],["s","tai"]],fo:[],
+   cw:"cần Hoàng thượng thương ngươi và thơ ngươi hợp lòng ngài",
+   t:"Đêm nào phê tấu xong, Hoàng thượng cũng sang cung ngươi đọc một câu, chờ ngươi đối một câu. Những câu thơ ấy không kèm một lời xin nào, nên ngài tin chúng như tin chính lòng mình. Ngài bảo người hầu: “Thiên hạ dâng trẫm lời hay, chỉ nàng dâng trẫm lời thật.”",
+   a:"Đêm nào phê tấu xong, Hoàng thượng cũng sang cung ngươi nghe thơ. Câu nào ngài khen, sáng mai triều đình đã thấy trong chiếu; câu nào ngươi khẽ chê, người được nhắc đến lặng lẽ mất ghế. Ngài tin mình đang tìm tri âm, mà không biết từng câu đều do ngươi dắt.",
+   ht:"thành tri âm của Hoàng thượng qua những đêm đối thơ",ha:"dắt lòng Hoàng thượng đi theo từng câu thơ của mình",
+   fail:"Vế đối bỏ dở",ft:"Hoàng thượng ra một vế đối mà ngươi đáp lệch ý ngài. Từ đó ngài đọc thơ ở cung khác, vế đối năm ấy còn treo trên vách cung ngươi."}]},
+ thd_sach:{lean:{
+   p:["Từ chối","Cho xem","Góp bạc cứu lụt","Hồi thư khuyên cha thong thả","Gửi bạc cho mẹ thuê người canh","Viết thư an ủi mẹ","Gửi lời an ủi {v}","Nói thẳng chuyện sách với nàng","Gửi bạc giấu ông ở chỗ an toàn","Từ chối thẳng","Gửi bạc dựng lại trường","Gửi bạc cho mẹ","Dặn cha cấm học trò đánh trả","Gửi bạc nuôi cơm học trò","Nghe cha, chỉ dâng sách","Tự chép","Nhờ học trò của cha chép","Từ chối, ghi tên hắn","Gửi bạc lo cơm áo trong ngục","Nghe lời cha, không quỳ","Gửi sâm vào ngục","Chuẩn bị nhận lỗi thay cha","Hứa giữ nàng nếu cha nàng đổ","Thưa: cha chỉ muốn dạy học","Xin chịu giáng phần bổng thay cha","Xin Hoàng thượng đừng liên lụy {v}","Tiễn cha về làng","Xin dâng ván lên Hàn lâm viện"],
+   m:["Nhận quà, nói sách đã mất","Nhận","Đốt theo lời {n1}","Để sách giả làm mồi","Để nàng thấy một bản thảo giả","Đáp lại sắc bén","Đút lót Tri huyện","Ghi tên hắn, chờ ngày tính","Nắm lấy câu ấy, tâu lên","Kẹp lời khai vào cuối sách","Giữ hắn, đọc soát từng chữ","Trả bạc gấp đôi để hắn trung thành","Gặp riêng {v}, nhắc nàng chuyện phủ nàng","Đưa bạc","Đáp: cha ngươi tự chọn","Tiễn nàng ra, không nói","Hỏi nàng điều phủ nàng còn giấu","Khuyên cha đốt bản thảo giữ mạng","Cắt trang ấy ra","Cho học trò dò về kẻ đốt"]},
+  e:[
+  {pull:["Góp bạc cứu lụt","Xin dâng ván lên Hàn lâm viện","Đọc kỹ, chép thêm bản","Dâng chương sách về đê điều","Dâng trọn bộ lên Hoàng thượng","Đọc trọn, chép một bản dự phòng","Dâng quyển hạ cho Hàn lâm viện khắc","Giữ nguyên trang ấy","Xin Hoàng thượng đọc sách trước khi xét sớ","Âm thầm đưa sổ đê lên Ngự thư phòng","Tâu Hoàng thượng phủ {n1} chèn ép","Xin Hoàng thượng chiếu cho quan phủ bảo hộ","Kẹp lời khai vào cuối sách","Đính sổ vào","Xin học sĩ đọc to chương cuối","Chép lại hai mươi chỗ ngài gạch","Xin Hoàng thượng tự xét án","Đem sổ ra","Thưa: sách đúng, xin xét kẻ bị sách chỉ mặt","Xin cho sách được khắc in lại","Hỏi nàng điều phủ nàng còn giấu","Để sách giả làm mồi","Để nàng thấy một bản thảo giả","Ghi tên hắn, chờ ngày tính","Nắm lấy câu ấy, tâu lên","Gặp riêng {v}, nhắc nàng chuyện phủ nàng","Tiễn nàng ra, không nói","Gửi bạc giấu ông ở chỗ an toàn","Nghe lời cha, không quỳ","Xin Hoàng thượng đừng liên lụy {v}","@st_the=win"],
+   close:["Nhận quà, nói sách đã mất","Nhận","Đốt theo lời {n1}","Khuyên cha thôi viết","Nhận, xin cha cải chính một lời","Khuyên cha đốt bản thảo giữ mạng"],
+   cond:[["s","tai"],["s","mat"],["seat","NDE"]],fo:[["seatT","NDE"]],
+   cw:"cần Tài cao, Tai mắt rộng và ngôi nữ đế còn trống",
+   t:"Năm đầu ngươi lên ngôi, ‘Trị quốc sách’ của cha được đem ra từng chương làm phép nước: sổ đê điều công khai, quan coi đê ký tên vào từng tấc đất đắp. Nơi nào sách từng cảnh báo vỡ đê, năm sau nơi ấy lúa chín kín đồng. Sĩ tử gọi đó là đời trị của chữ nghĩa.",
+   a:"Năm đầu ngươi lên ngôi, ‘Trị quốc sách’ thành luật, và luật ấy không chừa một ai. Quan coi đê ăn bớt một thúng đất thì cả nhà đi đày; những phủ từng chèn ép cha ngươi không còn ai đứng trong triều. Đê vững thật, nhưng sĩ tử chép sách cha ngươi mà lòng không yên.",
+   ht:"lên ngôi nữ đế, đem sách cha làm phép nước cứu dân",ha:"lên ngôi nữ đế, đem sách cha làm luật sắt không chừa một ai",
+   fail:"Sách thành tội",ft:"Phe đại thần từng bị sách chỉ mặt hợp sức lại trước. ‘Trị quốc sách’ bị gọi là sách của kẻ muốn đoạt ngôi; ngươi bị giữ trong cung mình, sách cha bị niêm."},
+  {pull:["Cất kỹ, chưa đọc","Nhận quà, nói sách đã mất","Chỉ cho xem chương đầu","Giấu sách ở Phụng Tiên điện","Chỉ in phần không nhắc tên ai","Niêm phong, giấu sau bài vị","Tự đọc, sửa những chỗ quá lời","Cắt trang ấy ra","Giấu, chờ thời","Đổi chỗ giấu sách ngay đêm ấy","Lùi một bước, xin cho sách ngừng bán","Khuyên cha đốt bản thảo giữ mạng","Rút lại, dâng vào dịp khác","Dâng một chương thôi","Xin cho cha nhận một lỗi nhẹ","Thưa: xin tha cho cha, sách tùy ngài","Bỏ bạc chuộc ván về cung","Xin ngài giữ sách trong Ngự thư phòng","Đốt theo lời {n1}","Nhận","Đút lót Tri huyện","Đưa bạc","Trả bạc gấp đôi để hắn trung thành","Gửi bạc cho mẹ thuê người canh","Chuẩn bị nhận lỗi thay cha","Hứa giữ nàng nếu cha nàng đổ","Gửi lời an ủi {v}"],
+   close:["Dâng trọn bộ lên Hoàng thượng","Dâng quyển hạ cho Hàn lâm viện khắc","Để nhà khắc Giang Nam in","Góp tiền ván gỗ","Xin cho sách được khắc in lại"],
+   cond:[["s","tamco"],["s","sung"]],fo:[],
+   cw:"cần Tâm cơ sâu và Hoàng thượng còn để ngươi gần ngài",
+   t:"Ngươi giấu ‘Trị quốc sách’ vào nơi không ai tìm được, đổi lấy một chỗ đứng đủ vững để che cho cha và những người từng giữ sách. Hoàng thượng giao ngươi cùng giữ việc lục cung. Những trang sách cha viết vẫn nằm yên, chờ một đời vua đọc được mà không giận.",
+   a:"Ngươi cho đốt những bản chép ‘Trị quốc sách’ còn lưu ngoài cung. Phe đại thần từng sợ sách ấy nay mang ơn ngươi; Hoàng thượng thấy ngươi biết điều, giao ngươi ấn hiệp lý lục cung. Cha ngươi sống yên, nhưng không viết thêm một chữ nào nữa.",
+   ht:"giấu sách cha đổi lấy chỗ đứng che cho người giữ sách",ha:"đốt sách cha đổi lấy ấn lục cung",
+   fail:"Tro sách bay lên",ft:"Một bản chép bị sót lại đến tay Ngự sử. Người ta nói ngươi bán sách cha để cầu vinh, mà chỗ đứng ngươi mong cũng không đến."},
+  {pull:["Đọc kỹ, chép thêm bản","Cho xem","Góp bạc cứu lụt","Hồi thư khuyên cha thong thả","Góp tiền ván gỗ","Viết thư an ủi mẹ","Nhờ Hàn lâm viện viết lời bình","Gửi bạc dựng lại trường","Gửi bạc nuôi cơm học trò","Dặn cha cấm học trò đánh trả","Nhờ học trò của cha chép","Tự chép","Nhờ học sĩ Hàn lâm giảng câu ấy","Gom lời sĩ tử làm chứng","Khôi phục sách từ bản chép tay","Nhờ sĩ lâm dâng sớ xin tha","Thưa: cha chỉ muốn dạy học","Xin Hoàng thượng cho cha mở trường ở kinh","Cho học trò dò về kẻ đốt","Dặn học trò lớn của cha canh nhà","Thuê tiêu cục hộ tống cha lên kinh","Bỏ bạc chuộc ván về cung","Gửi lời khai cho Đại Lý tự","Ghi tên hắn, chờ ngày tính","Đáp lại sắc bén","Kẹp lời khai vào cuối sách","Nắm lấy câu ấy, tâu lên"],
+   close:["Nhận quà, nói sách đã mất","Đốt theo lời {n1}","Khuyên cha đốt bản thảo giữ mạng","Để ván ở nhà khắc"],
+   cond:[["s","duc"],["s","danh"]],fo:[],
+   cw:"cần Đức dày và tiếng sách của cha vang trong sĩ lâm",
+   t:"Ngươi xin ra cung, về dựng lại trường làng của cha trên nền đất cũ đã cháy. ‘Trị quốc sách’ được chép tay cho từng trò, chương đê điều học trước chương thơ phú. Mười năm sau, quan coi đê ở mấy huyện quanh đó đều từng ngồi học dưới mái trường ấy.",
+   a:"Ngươi xin ra cung, dựng lại trường làng của cha thành một trường lớn. Sĩ tử khắp nơi kéo về học ‘Trị quốc sách’, và học cả cách nhớ tên những kẻ đã đốt trường. Mười năm sau, trong triều có một phe chỉ nghe lời người thầy ngoài cung.",
+   ht:"ra cung dựng lại trường làng, đem sách cha dạy cho thiên hạ",ha:"ra cung mở trường, gom sĩ tử thành phe của riêng mình",
+   fail:"Trường không người học",ft:"Triều thần dâng sớ: con gái người viết sách bị tố phỉ báng mà mở trường thì thiên hạ học theo điều gì? Ngươi phải ở lại, sách cha bị cất vào rương khóa."},
+  {pull:["Đọc kỹ, chép thêm bản","Cất kỹ, chưa đọc","Từ chối","Giấu sách ở Phụng Tiên điện","Nhận giữ, không nói với ai","Đọc trọn, chép một bản dự phòng","Giấu, chờ thời","Để nhà khắc Giang Nam in","Góp tiền ván gỗ","Đổi chỗ giấu sách ngay đêm ấy","Xin cha lên kinh","Để cha tự quyết","Viết thư hỏi cha","Tự chép","Khôi phục sách từ bản chép tay","Nghe cha, giữ sách","Tìm cách giữ cả hai","Để cha tự đáp","Để ván ở nhà khắc","Tiễn cha về làng","Nhận quà, nói sách đã mất","Để sách giả làm mồi","Bỏ bạc chuộc ván về cung","Đưa bạc","Trả bạc gấp đôi để hắn trung thành","Đáp: cha ngươi tự chọn"],
+   close:["Qua thái giám Ngự thư phòng","Tự dâng vào ngày ngài đến cung","Xin chịu giáng phần bổng thay cha","Đốt theo lời {n1}"],
+   cond:[["s","tai"],["s","dad"]],fo:[],
+   cw:"cần Tài đủ hiểu sách và cha còn tin ngươi",
+   t:"Ngươi theo người ấy rời kinh, trên vai một gánh sách: những quyển ‘Trị quốc sách’ chép tay. Hai người dừng ở đâu thì mở lớp ở đó, dạy vài đứa trẻ, rồi lại đi. Người ta kể có một đôi thầy đồ đi khắp phương nam, gánh theo cả một bộ sách triều đình từng cấm.",
+   a:"Ngươi theo người ấy rời kinh, mang theo bộ ‘Trị quốc sách’ ngươi tự chép lại mà không hỏi cha một lời. Sách in dưới tên khác, bán khắp phương nam, bạc chảy về túi hai người; ở quê, cha ngươi vẫn tưởng sách mình còn nằm yên trong cung.",
+   ht:"theo người ấy rời kinh, gánh sách cha dạy chữ khắp nơi",ha:"chép lại sách cha, theo người ấy đem in bán dưới tên khác",
+   fail:"Gánh sách bỏ lại",ft:"Rương sách đã buộc dây, mà đêm ấy cửa cung không mở cho ngươi. Gánh sách nằm lại dưới gầm giường, bụi phủ dần lên từng quyển."}]},
+ thd_tro:{lean:{
+   p:["Gửi bạc giúp hắn ở lại kinh","Khuyên Hoàng thượng phúc khảo","Nhờ học sĩ Hàn lâm","Mời thầy thuốc, giấu hắn","Gửi lời động viên {n1}","Tâu: chỉ cần trả lại tên cho người bị oan","Bảo {n1} báo ngay Lễ bộ","Giữ {n1} ở lại kinh","Viết thư hỏi {dad}","Trả lễ, nói thẳng","Hỏi cha chuyện khoa thi năm xưa","Đón sĩ tử già lên kinh","Nhờ cha ghi lại lời ông","Khuyên cha từ chối","Tìm người làm chứng ở tửu lâu","Từ chối","Đưa nhân chứng tửu lâu đến trước phủ doãn","Gửi lời cảm ơn trăm sĩ tử","Can họ, để ngươi đưa đơn","Lo hậu sự cho nhà hắn","Quỳ cạnh nàng, xin tha cho người già trẻ nhỏ","Tâu: có tội thì xét, không tội thì tha","Xử kẻ đầu sỏ, tha kẻ bị lôi theo","Dặn {n1} giữ mình, ăn ngủ cẩn thận","Hứa không làm gì thêm với nhà nàng","Xin tha chết, đày đi biên ải","Muốn nàng thôi hận","Hứa giữ cho người già trẻ nhỏ nhà nàng","Tâu: chỉ xin trả tên cho người bị oan"],
+   m:["Mua chuộc người giữ kho","Gửi bạc nhờ {n1} dò giúp","Khuyên {n1} yên phận làm quan","Mua chuộc hắn khai","Nhận lễ, giả như nghe lời","Giữ hắn lại, lấy lời khai","Mua bản sao sổ khắc đề","Khuyên ông lão đừng nói nữa","Lo cho người giữ kho mở cửa","Khuyên cha nhận, giữ hắn gần","Lo lót cho bộ khoái chậm chân","Nhận lời, đổi lấy mạng {n1}","Giả vờ nghĩ thêm, giữ tờ giấy làm chứng","Để họ đánh trống","Giữ danh sách, không đáp","Xử tất cả, khoa trường mới sạch","Để chúng làm, bắt quả tang","Xin nàng đổi lấy lời khai về Thị lang","Để luật xử","Đổi mạng {n2} lấy lời khai về Thị lang"]},
+  e:[
+  {pull:["Gửi bạc giúp hắn ở lại kinh","Khuyên Hoàng thượng phúc khảo","Nhờ học sĩ Hàn lâm","Mời thầy thuốc, giấu hắn","Gửi lời động viên {n1}","Tâu: chỉ cần trả lại tên cho người bị oan","Bảo {n1} báo ngay Lễ bộ","Giữ {n1} ở lại kinh","Nhờ {n1} so dấu son ở Hàn lâm viện","Nhờ {n1} báo Ngự sử đài","Nhờ {n1} hỏi đồng khoa của {n2}","Tìm người làm chứng ở tửu lâu","Đưa nhân chứng tửu lâu đến trước phủ doãn","Đọc kỹ từng chữ","Can họ, để ngươi đưa đơn","Dâng cả đơn và chứng","Gửi sách cho {n1} ôn","Dặn {n1} giữ mình, ăn ngủ cẩn thận","Ngồi yên, tin vào {n1}","Chỉ lo cho học trò của cha","Gửi bạc nhờ {n1} dò giúp","Mua chuộc người giữ kho","Mua chuộc hắn khai","Lo lót cho bộ khoái chậm chân","Giấu {n1} ngay trong đêm","@thd_tro_10=win","Giữ hắn lại, lấy lời khai","Mua bản sao sổ khắc đề"],
+   close:["Khuyên hắn về quê","Khuyên {n1} yên phận làm quan","Để hắn về, chỉ xin hắn vẽ lại dấu son","Nhận lời, đổi lấy mạng {n1}","Không đưa, để sĩ tử tự lo"],
+   cond:[["s","duc"],["e",10,"win"]],fo:[],
+   cw:"cần Đức dày và người học trò của cha đứng đầu kỳ thi lại",
+   t:"Người học trò của cha đứng đầu kỳ thi lại, rồi từng bước lên đến chức cao trong triều. Mỗi tấu chương y dâng đều hỏi ý ngươi trước, và ngươi chỉ dặn một điều: nói thật với Hoàng thượng. Triều đình có một vị quan thẳng, và người ta biết sau y là con gái một thầy đồ nghèo.",
+   a:"Người học trò của cha đứng đầu kỳ thi lại, rồi lên đến chức cao trong triều. Tấu chương nào y dâng cũng do ngươi đọc trước, sửa từng chữ; y nợ ngươi cả tên tuổi, nên chưa từng dám trái một lời. Cả triều nghe y nói, mà không biết là đang nghe ngươi.",
+   ht:"giúp học trò của cha đứng đầu kỳ thi lại, rồi phò y làm quan thẳng",ha:"đưa học trò của cha lên cao, rồi nói bằng miệng y giữa triều",
+   fail:"Bảng vàng nhạt mực",ft:"Người học trò của cha bị đẩy ra khỏi mọi ghế lớn trong triều: hễ tên y được nhắc, lại có lời đồn y nhờ phi tần trong cung. Thư y gửi vào cung thưa dần rồi thôi."},
+  {pull:["Khuyên Hoàng thượng phúc khảo","Đón sĩ tử già lên kinh","Dò xem lời hắn có thật","Giữ kín, gom chứng cứ","Mua chuộc người giữ kho","Lặng lẽ theo dấu bạc","Gửi bạc nhờ {n1} dò giúp","Mua chuộc hắn khai","Giữ hắn lại, lấy lời khai","Mua bản sao sổ khắc đề","Lấy danh sách khoa trước","Giữ kín, chờ thêm chứng","Lo cho người giữ kho mở cửa","Lặng lẽ trao quyển mực cũ cho Hàn lâm viện","Giấu {n1} ngay trong đêm","Lo lót cho bộ khoái chậm chân","Gửi lời cảm ơn trăm sĩ tử","Để họ đánh trống","Giữ danh sách, không đáp","Trao chứng cho Ngự sử","Xử tất cả, khoa trường mới sạch","Đổi mạng {n2} lấy lời khai về Thị lang","Xin Hoàng thượng đổi phép thi","Tâu: xin rọc phách, chép lại bài để quan chấm không thấy tên","Lo hậu sự cho nhà hắn","Hứa giữ cho người già trẻ nhỏ nhà nàng","Xin tha chết, đày đi biên ải","Tâu: có tội thì xét, không tội thì tha"],
+   close:["Im lặng","Thưa: việc triều, thiếp không dám bàn","Không xen vào","Đứng ngoài hẳn","Tâu: thiếp không dám bàn, xin ngài tự định"],
+   cond:[["s","tamco"],["s","danh"]],fo:[],
+   cw:"cần Tâm cơ sâu và tên ngươi được sĩ tử khắp nơi nhắc",
+   t:"Sau kỳ thi lại, những sĩ tử nghèo đỗ nhờ kỳ thi ấy lần lượt vào triều. Họ gọi ngươi là ân sư dù chưa từng học ngươi một chữ, và giữ cho khoa trường sạch như ngày ngươi đòi. Môn sinh đầy triều, mà không ai mua được một ghế.",
+   a:"Sau kỳ thi lại, khoa nào cũng có người của ngươi đỗ, và người nào đỗ cũng biết mình nợ ai. Họ đứng kín hai hàng trong triều, dâng sớ cùng một ngày, hặc cùng một người. Kẻ nào trái ý ngươi thì khoa sau con cháu đừng mong đỗ.",
+   ht:"để sĩ tử nghèo đỗ đạt vào triều, giữ khoa trường sạch",ha:"biến sĩ tử đỗ nhờ ngươi thành một phe nghe ngươi giữa triều",
+   fail:"Phe vỡ trước trận",ft:"Triều thần nghe được rằng sĩ tử kêu oan đều qua tay một phi tần. Tiếng kết bè lan khắp triều, những sĩ tử từng nhờ ngươi lần lượt quay đi."},
+  {pull:["Gửi bạc giúp hắn ở lại kinh","Mời thầy thuốc, giấu hắn","Gửi lời động viên {n1}","Giữ {n1} ở lại kinh","Giấu {n1} ngay trong đêm","Giấu {n1} ở nhà cha","Đổi chỗ trốn mỗi đêm","Nhờ hắn đưa {n1} vào thành","Giấu {n1} cho qua đêm cuối","Xin cho cha vào cung gặp mặt","Dặn {n1} giữ mình, ăn ngủ cẩn thận","Nhờ cha ở lại kèm hắn","Ở cung chờ tin, không gửi gì","Gửi thư an ủi cha","Mời cha vào cung bái kiến Hoàng thượng","Không muốn gì","Không đưa, để sĩ tử tự lo","Nhận lời, đổi lấy mạng {n1}","Lo lót cho bộ khoái chậm chân","Đứng ngoài hẳn","Khuyên {n1} yên phận làm quan","Nhận lễ, giả như nghe lời"],
+   close:["Khuyên hắn ra trình diện","Khuyên hắn về quê","Mặc cho phủ Thuận Thiên xét","Xử tất cả, khoa trường mới sạch"],
+   cond:[["s","duc"],["s","dad"]],fo:[],
+   cw:"cần Đức dày và cha vẫn thương ngươi",
+   t:"Ngươi theo người ấy rời kinh khi án khoa cử vừa khép. Hai người về một huyện nhỏ ven sông, nơi không ai biết ngươi từng ở trong cung; người ấy làm việc của mình, ngươi dạy chữ cho con gái trong vùng như cha từng dạy con trai.",
+   a:"Ngươi bỏ lại tất cả, ân sủng, án khoa cử còn dở, cả những sĩ tử còn chờ ngươi nói giúp, rồi theo người ấy đi trong một đêm. Ở kinh, người ta trách ngươi bỏ cuộc giữa chừng; ở chỗ mới, ngươi không bao giờ hỏi lại chuyện ấy.",
+   ht:"theo người ấy rời kinh khi án khoa cử vừa khép",ha:"bỏ lại cả án khoa cử dở dang mà theo người ấy đi",
+   fail:"Cửa Tây Hoa không mở",ft:"Đêm hẹn, cửa Tây Hoa đóng sớm hơn mọi khi. Ngươi đứng sau cánh cửa đến sáng, rồi quay về cung trước khi ai kịp thấy."},
+  {pull:["Tâu: xử nghiêm kẻ mua đề, trả công bằng cho sĩ tử","Đối chất với {v}","Giữ kín, gom chứng cứ","Mua một bản làm chứng","Bảo {n1} báo ngay Lễ bộ","Cho người hỏi chuyện vợ hắn","Nhờ {n1} báo Ngự sử đài","Giữ hắn lại, lấy lời khai","Lấy danh sách khoa trước","Đón sĩ tử già lên kinh","Nhờ cha ghi lại lời ông","Xin Hoàng thượng cho Hàn lâm viện xem lại quyển cũ","Xin ra đề làm thơ ngay tại chỗ","Giữ nguyên tên","Đính kèm chứng cứ đã có","Dâng cả đơn và chứng","Cho người khám lá thư tuyệt mệnh","Đưa danh sách lên Hoàng thượng","Tâu: có tội thì xét, không tội thì tha","Xử kẻ đầu sỏ, tha kẻ bị lôi theo","Để chúng làm, bắt quả tang","Từ chối: thi là thi","Để luật xử","Xử tất cả, khoa trường mới sạch","Đổi mạng {n2} lấy lời khai về Thị lang","Mua chuộc hắn khai","Xin nàng đổi lấy lời khai về Thị lang"],
+   close:["Im lặng","Thưa: việc triều, thiếp không dám bàn","Để mặc kho đốt quyển","Khuyên ông lão đừng nói nữa","Bỏ tên, chỉ kể việc"],
+   cond:[["s","duc"],["s","tamco"]],fo:[],
+   cw:"cần Đức dày và Tâm cơ đủ lần ra từng đường bạc",
+   t:"Án khoa cử khép lại bằng chứng chứ không bằng lời đồn: kẻ bán đề, kẻ mua đề, viên quan đóng dấu son đều bị xử đúng tội của mình, còn những người bị lôi theo được tha. Sĩ tử khắp nơi gọi đó là kỳ khoa sạch nhất trong trăm năm, và nhắc tên con gái thầy đồ đã đòi cho bằng được.",
+   a:"Án khoa cử không dừng ở một người. Mấy khoa liền bị lật lại, bảng vàng bị gỡ từng tên, nhà nào từng mua đề đều có người vào ngục. Khoa trường sạch thật; nhưng mùa thi năm ấy, người đứng ngoài cửa trường thi đông hơn người vào thi.",
+   ht:"đem chứng cứ vạch tội khoa trường, xử đúng người đúng tội",ha:"lật cả mấy khoa thi, không tha một nhà nào dính đến mua đề",
+   fail:"Án khoa cử chìm xuồng",ft:"Viên quan đóng dấu son không bị chạm đến. Án khép lại ở mấy tên thư lại, còn người đòi xét đến cùng bị nhắc là đàn bà xen việc triều."}]},
+ thd_hoc:{lean:{
+   p:["Dạy bằng chuyện kể","Kèm riêng","Mời {v} đến dự giờ","Kèm thêm cho con nàng","Đối xử như mọi đứa","Nhận lỗi, xin chăm sóc","Chuẩn bị cho chúng hiểu bài, không học vẹt","Ra vườn bắt dế cùng nó","Kể chuyện, rồi dắt nó về tận cung mẹ","Ngồi xuống tìm cùng nó","Trả hộp, nhắn: đứng đầu phải tự học","Nhận hộp, chia cho cả lớp","Sang khuyên {v}","Mời cung nữ vào ngồi nghe cho rõ","Trả hết","Ôm nó, nói thầy thương nó","Mời {v} cùng dạy một buổi","Báo Hoàng thượng","Xin {v} cho con nghỉ","Mời thái y đến xem","Can ra, băng bó cho cả hai","Ngồi kèm trò chép bài","Sang thức trông nó","Xin ngài tha cho cả lớp","Mời Thị giảng đến dự giờ","Đáp: thì có bề tôi ngay thẳng dám can","Viết mỗi đứa một trang như nhau","Dùng lễ mua sách cho Thượng thư phòng","Hứa nói thật về {n1}","Hứa vẫn dạy nó mỗi tuần một buổi","Gửi bạc về sửa trường làng cho cha","Nhận lời, rót trà mời nàng","Dạy chữ “Nhân”","Dặn: thương trò như thương con"],
+   m:["Dạy nghiêm, phạt đứng","Kèm thêm cho con mình","Phạt nó chép bài","Không cho nó vào nữa","Nhận hộp, hứa kèm thêm","Đuổi cung nữ đi","Nhận lễ","Cử {n1} làm trưởng lớp","Mua đề","Bảo {n2} nhường một chút","Bắt quỳ chép đủ mười lượt","Đứng thẳng: đây là lớp, không phải cung nàng","Ở yên trong cung mình","Bắt tận tay bức thư","Mặc sớ","Đáp: vua không sai","Nhận hết","Hứa sẽ nói tên {n1}","Gửi nó về cho {v}","Nhắc nàng chuyện roi vọt ngày trước","Từ chối gặp","Dạy chữ “Trung”","Dặn: nghiêm thì trò nên người","Bảo nó hỏi mẹ vì sao nghĩ vậy","Để {n1} tự nói với mẹ","Gặp {v}, hỏi nàng muốn gì"]},
+  e:[
+  {pull:["Dạy bằng chuyện kể","Kèm riêng","Mời {v} đến dự giờ","Kèm thêm cho con nàng","Chuẩn bị cho chúng hiểu bài, không học vẹt","Ra vườn bắt dế cùng nó","Kể chuyện, rồi dắt nó về tận cung mẹ","Ngồi xuống tìm cùng nó","Xin dạy ngay tại Thượng thư phòng","Ôm nó, nói thầy thương nó","Khen {n1} nhiều hơn hôm ấy","Kèm riêng nó mỗi tối","Dạy bọn trẻ tự đặt câu hỏi","Gọi riêng nó ra nói chuyện","Ngồi kèm trò chép bài","Sang thức trông nó","Xin ngài cho thiếp giảng trọn câu","Giảng trọn câu, dẫn cả sách","Đáp: thì có bề tôi ngay thẳng dám can","Hứa vẫn dạy nó mỗi tuần một buổi","Tâu tên {n1}","Dặn riêng về {n1}","Dạy chữ “Nhân”","Dạy nghiêm, phạt đứng","Phạt nó chép bài","Cử {n1} làm trưởng lớp","Hứa sẽ nói tên {n1}","Nhận lễ","Đáp: vua không sai","Bắt quỳ chép đủ mười lượt","Kèm thêm cho con mình"],
+   close:["Xin thôi dạy trước ngày khảo","Từ chối khéo","Không cho nó vào nữa","Gửi nó về cho {v}","Thưa: thiếp chỉ dạy chữ"],
+   cond:[["s","tai"],["s","sung"]],fo:[],
+   cw:"cần Tài cao và Hoàng thượng tin cách ngươi dạy",
+   t:"Tiếng dạy chữ của ngươi ở Thượng thư phòng đến tai cả triều, nên khi Đông cung cần thầy, Hoàng thượng chọn ngươi. Người học trò ấy về sau lên ngôi; buổi chầu đầu tiên, ngài cho dọn một chiếc ghế bên điện cho thầy cũ, và hỏi ngươi trước khi hỏi cả triều. Ngươi chỉ nhắc ngài câu đã dạy năm xưa: dân là trọng, vua là nhẹ.",
+   a:"Hoàng thượng giao ngươi dạy chữ cho Đông cung, và người học trò ấy lớn lên chưa quen làm điều gì khi thầy chưa gật đầu. Ngày ngài lên ngôi, tấu chương đến tay ngài thì đã qua tay ngươi; quan nào muốn tâu việc lớn đều phải sang cung ngươi trước.",
+   ht:"dạy chữ cho Đông cung, để vị vua mới biết lấy dân làm trọng",ha:"dạy Đông cung thành thiên tử không quyết điều gì khi thầy chưa gật đầu",
+   fail:"Thầy cũ bị quên",ft:"Đông cung có thầy mới, triều đình có người mới. Tên ngươi không còn được nhắc ở Thượng thư phòng."},
+  {pull:["Đáp: thì có bề tôi ngay thẳng dám can","Dạy chữ “Nhân”","Chuẩn bị cho chúng hiểu bài, không học vẹt","Dạy nghiêm, phạt đứng","Kèm riêng","Cho học thuộc lòng thật kỹ","Phạt nó chép bài","Nhận lời, dạy ở cung mình","Nhận hộp, hứa kèm thêm","Khen {n1} nhiều hơn hôm ấy","Cử {n1} làm trưởng lớp","Nhận lễ","Kèm riêng nó mỗi tối","Hỏi Hoàng thượng ngài muốn nghe gì","Mua đề","Bắt quỳ chép đủ mười lượt","Đứng thẳng: đây là lớp, không phải cung nàng","Xin ngài khen {n1} trước mặt mẹ nó","Bắt tận tay bức thư","Đáp: vua không sai","Hứa sẽ nói tên {n1}","Tâu tên {n1}","Dặn riêng về {n1}","Dặn: nghiêm thì trò nên người","Dạy chữ “Trung”","Ôm nó, nói thầy thương nó","Xin ngài cho thiếp giảng trọn câu","Hứa nói thật về {n1}","Dạy bằng chuyện kể"],
+   close:["Xin thôi dạy trước ngày khảo","Thưa: thiếp chỉ dạy chữ","Từ chối: thầy không chọn vua","Tâu: mỗi đứa một tài, xin ngài xem từng đứa","Gửi nó về cho {v}"],
+   cond:[["s","tamco"],["s","mat"]],fo:[],
+   cw:"cần Tâm cơ sâu và tai mắt trong Thượng thư phòng",
+   t:"Khi ngôi báu cần người, chính ngươi đứng ra tâu tên vị hoàng tử mà ngươi tin sẽ biết thương dân. Ngài lên ngôi còn non, và ngươi dạy ngài thêm một bài nữa: tự đứng. Năm ngài tự phê được tờ tấu đầu tiên mà không nhìn sang ngươi, ngươi biết bài học cuối đã thuộc.",
+   a:"Khi ngôi báu cần người, ngươi đứng ra tâu tên một hoàng tử còn nhỏ, đủ nhỏ để ngoảnh lại tìm thầy. Ngài lên ngôi, ngồi trên ngai mà vẫn chờ ngươi gật đầu; chiếu nào cũng một tay ngươi thảo. Cả triều quỳ trước một ông vua, mà nghe một người thầy.",
+   ht:"tâu tên một hoàng tử lên ngôi rồi dạy ngài tự đứng",ha:"đưa một hoàng tử nhỏ lên ngôi rồi cầm tay ngài mà viết chiếu",
+   fail:"Con rối đứt dây",ft:"Triều thần chọn một hoàng tự khác lên ngôi, và vị vua mới không cần thầy cũ của anh em mình. Người ta nhắc đến ngươi như một phi tần từng muốn dạy vua."},
+  {pull:["Dạy bằng chuyện kể","Chuẩn bị cho chúng hiểu bài, không học vẹt","Ra vườn bắt dế cùng nó","Từ chối khéo","Trả hộp, nhắn: đứng đầu phải tự học","Nhận hộp, chia cho cả lớp","Trả hết","Dạy như mọi ngày","Mời thái y đến xem","Dạy nhẹ đi trong lớp","Can ra, băng bó cho cả hai","Xin ngài tha cho cả lớp","Mời Thị giảng đến dự giờ","Nhờ {dad} viết thư giải nghĩa","Viết mỗi đứa một trang như nhau","Dùng lễ mua sách cho Thượng thư phòng","Từ chối: thầy không chọn vua","Dạy nó biết chia tay","Xin Hoàng thượng cho nghỉ sớm","Đọc thư cho bọn trẻ nghe","Tặng mỗi đứa một cây bút","Cúi đầu, không dặn gì","Thưa: thiếp chỉ dạy chữ","Mặc sớ","Để mặc","Ở yên trong cung mình","Từ chối gặp","Gửi nó về cho {v}","Xin thôi dạy trước ngày khảo","Nhận lễ","Bắt tận tay bức thư"],
+   close:["Tâu tên {n1}","Hứa sẽ nói tên {n1}","Cử {n1} làm trưởng lớp","Nhận hết"],
+   cond:[["s","duc"],["s","tai"]],fo:[],
+   cw:"cần Đức dày và chữ nghĩa đủ để một kho sách tin ngươi",
+   t:"Kết khóa xong, ngươi dâng biểu xin ra cung. Hoàng thượng ban cho một gian nhà bên hồ ngoài kinh cùng mấy rương sách cũ của Thượng thư phòng. Gian nhà thành thư viện cho trẻ con quanh vùng; cha ngươi lên thăm, ngồi đọc ở hiên cả buổi không muốn về.",
+   a:"Ngày rời cung, ngươi mang theo cả những quyển sách từng bị Thị giảng Hàn lâm viện dâng sớ xin cấm dạy hoàng tự. Gian nhà bên hồ của ngươi thành nơi sĩ tử lén tìm đến đọc những trang không ai dám in, và quan phủ làm như không biết, vì người giữ sách từng dạy con vua.",
+   ht:"ra cung giữ một thư viện bên hồ cho trẻ con đọc sách",ha:"ra cung ôm theo sách bị xin cấm, mở chỗ đọc lén bên hồ",
+   fail:"Sách khóa trong rương",ft:"Mấy rương sách ngươi xin mang theo bị Nội vụ phủ giữ lại kiểm. Ngươi chờ một mùa không thấy trả, mà chỗ ở ngoài kinh cũng không ai lo."},
+  {pull:["Kèm riêng","Kèm thêm cho con nàng","Kể chuyện, rồi dắt nó về tận cung mẹ","Sang thưa với {v}","Nhận lời, dạy ở cung mình","Cho người báo {v} đến đón con","Sang khuyên {v}","Thoa thuốc, không nói gì","Tâu Hoàng thượng","Mời {v} ra đề cho bọn trẻ","Mời {v} cùng dạy một buổi","Ôm nó, nói thầy thương nó","Xin {v} cho con nghỉ","Mời thái y đến xem","Kèm riêng nó mỗi tối","Sang thức trông nó","Mời thái y giỏi nhất xem bệnh","Hứa vẫn dạy nó mỗi tuần một buổi","Nhận lời, rót trà mời nàng","Dặn: thương trò như thương con","Nhắc nàng chuyện roi vọt ngày trước","Bảo nó hỏi mẹ vì sao nghĩ vậy","Để {n1} tự nói với mẹ","Đứng thẳng: đây là lớp, không phải cung nàng","Gặp {v}, hỏi nàng muốn gì","@st_con=win","Kèm thêm cho con mình","Nhận hộp, hứa kèm thêm"],
+   close:["Không cho nó vào nữa","Gửi nó về cho {v}","Dạy nó biết chia tay","Từ chối gặp","Ở yên trong cung mình"],
+   cond:[["s","duc"],["s","sung"]],fo:[],
+   cw:"cần Đức dày và Hoàng thượng tin cách ngươi thương trẻ",
+   t:"Hoàng thượng lập Thái tử, rồi giao Đông cung cho ngươi trông nom, vì cả Thượng thư phòng nhớ cách ngươi dạy trẻ. Ngươi không thay ai làm mẹ; ngươi chỉ dạy đứa trẻ ăn, ngủ, học, biết thương người hầu. Đông cung từ đó có nề nếp như một lớp học: giờ nào học, giờ nào chơi, giờ nào sang thỉnh an phụ hoàng.",
+   a:"Thái tử được lập, và Đông cung về tay ngươi trông nom. Từ đó đứa trẻ chỉ nghe lời ngươi, người hầu Đông cung đều do ngươi chọn, và ai muốn gặp Thái tử phải qua cửa cung ngươi. Người ta nói nhỏ: Đông cung có hai chủ, và người thật là người nuôi.",
+   ht:"được giao trông nom Đông cung, dạy Thái tử nên người",ha:"nuôi Thái tử trong tay mình, để Đông cung chỉ có một người nói",
+   fail:"Đông cung đổi người",ft:"Việc trông nom Đông cung được giao cho người khác. Thái tử đi ngang cung ngươi mà không được dừng lại, và Thượng thư phòng cũng thôi nhắc tên ngươi."}]},
+ cnv_chu:{lean:{
+   p:["Hỏi chủ có cần giúp","Từ chối, báo chủ","Lén đổ thuốc đi, giả như đã làm","Quỳ xin chủ đừng làm","Thưa khéo cho chủ","Một mình nhận hết để che chủ","Giữ trọn bí mật cho chủ","Xin {mis} cho biết thật","Đem mẩu giấy đến {mis}","Hỏi khéo một thái y quen","Hứa giữ kín cho ông","Nói với {mis} điều ngươi biết","Báo {mis} có kẻ rình","Từ chối thẳng","Hiểu cho nàng","Khuyên nàng tâu lên","Đến thưa với {mis}: không phải ngươi","Khuyên {mis} tự đem nộp trước","Để {mis} tự nộp, nói rõ gốc gác","Đến xin ông ở lại","Trả nguyên hộp","Hứa giữ đến cùng","Khuyên nàng nói hết","Lo bạc cho ông bớt roi","Nhận tội nhỏ thay chủ","Nhận lời đứng cạnh nàng","Kể cho nàng biết ai đã cứu con nàng","Đáp: là cả hai","Nói hết, xin công cho {mis}"],
+   m:["Vâng lời","Bán một tin vặt","Lén lấy một ít đem hỏi","Trình lên Hoàng hậu","Báo tiếp lên trên mỗi điều thấy","Thả tin giả cho {v}","Ép ông nói hết","Báo {mis} rằng ông đã nói","Lén cho {v} biết có người đã biết","Nhận bạc, kể chuyện vô hại","Cho nàng bạc gấp đôi để quay về","Mua chuộc thái giám ấy","Cho nàng mang tin giả về","Lén mở xem","Lén mở xem trước khi giao","Đánh lạc hướng đoàn khám","Dúi bạc cho thái giám","Nhận hộp trâm","Khai {mis} giấu xạ hương, không nói vì sao","Dúi bạc để được hỏi sau","Mặc ông tự khai","Đưa bạc cho y khép vụ","Giả nhận để {v} lơi tay","Đáp: là chính mình","Nói phần mình, để {mis} tự gánh phần nàng"]},
+  e:[
+  {pull:["Từ chối, báo chủ","Quỳ xin chủ đừng làm","Thưa khéo cho chủ","Báo {mis} có kẻ rình","Đến thưa với {mis}: không phải ngươi","Hỏi chủ có cần giúp","Lén lấy một ít đem hỏi","Bán một tin vặt","Nói thật chủ hay mất ngủ, lo âu","Trình lên Hoàng hậu","Mở rương xem gói giấy dầu","Lặng lẽ tìm thêm chứng cứ","Báo tiếp lên trên mỗi điều thấy","Lần ra kẻ nhét giấy","Đưa bạc xem sổ","Thả tin giả cho {v}","Ép ông nói hết","Giữ trong lòng, chép lại một bản","Lén cho {v} biết có người đã biết","Hỏi ngược lại nàng","Giả nhận, quay về báo {mis}","Cho nàng bạc gấp đôi để quay về","Hỏi {v} muốn đổi gì","Mua chuộc thái giám ấy","Cho nàng mang tin giả về","Lén mở xem","Lén mở xem trước khi giao","Cất gói thuốc vào chỗ kín","Giấu vào chỗ không ai khám","Đánh lạc hướng đoàn khám","Dúi bạc cho thái giám","Nhận rồi trình lên Trung cung","Giữ kín, thưa không biết gì","Đưa bạc cho y khép vụ","Giả nhận để {v} lơi tay","Đáp: là chính mình","Nói phần mình, để {mis} tự gánh phần nàng","Giữ trọn bí mật cho chủ","Hứa giữ kín cho ông","Hứa giữ đến cùng","Nhận tội nhỏ thay chủ"],
+   close:["Xin chuyển sang hầu cung khác","Thôi, không dò nữa","Đốt mẩu giấy","Để yên, khép kín cửa","Xin Hoàng thượng khép vụ, không truy"],
+   cond:[["s","tamco"],["s","mat"]],fo:[],
+   cw:"cần Tâm cơ sâu và tai mắt đủ biết ai còn dính đến gói xạ hương",
+   t:"Bí mật gói xạ hương nằm trong tay ngươi, và ngươi dùng nó để che tên chủ nhân. Những ai muốn đem chuyện năm xưa ra bôi nhọ nàng ta đều phải qua ngươi trước, và không ai qua được. Cái bóng đứng sau ghế chủ không đòi gì cho mình.",
+   a:"Bí mật gói xạ hương nằm trong tay ngươi, và những kẻ từng dính đến nó đều biết điều ấy. Cung kia, những kẻ từng dò hỏi, từng làm chứng gian, ai cũng phải nghe lời người hầu năm nào. Ngươi vẫn đứng sau ghế chủ, nhưng lệnh trong cung ấy là lệnh của ngươi.",
+   ht:"dùng bí mật năm xưa để che tên chủ nhân, không đòi gì cho mình",ha:"nắm bí mật năm xưa để cả những kẻ dính vào phải nghe lời ngươi",
+   fail:"Bóng bị đuổi khỏi cửa",ft:"Bí mật lọt ra ngoài trước khi ngươi kịp dùng. Người ta bảo kẻ hầu biết quá nhiều thì không nên ở gần chủ; ngươi bị dời sang một góc cung khác."},
+  {pull:["Quỳ xuống: nô tỳ không thấy gì","Hỏi chủ có cần giúp","Để nguyên chỗ cũ","Từ chối, báo chủ","Lén đổ thuốc đi, giả như đã làm","Quỳ xin chủ đừng làm","Thưa khéo cho chủ","Một mình nhận hết để che chủ","Giữ trọn bí mật cho chủ","Giữ chìa khóa, không mở rương","Xin {mis} cho biết thật","Quỳ xin {mis} tha lỗi","Đem mẩu giấy đến {mis}","Nói với {mis} điều ngươi biết","Báo {mis} có kẻ rình","Giả nhận, quay về báo {mis}","Đến thưa với {mis}: không phải ngươi","Thề chưa nói với ai","Hiểu cho nàng","Đem đi, không mở","Ngồi canh gói thuốc đến khi {mis} về","Đến gặp {mis} trước khi ai khác","Nhắn {mis} một lời trước khi đi","Hứa giữ đến cùng","Nhận trâm, nghe việc","Đáp: là chủ nhân","Vâng lời","Thả tin giả cho {v}","Đánh lạc hướng đoàn khám","Giữ kín, thưa không biết gì","Cho nàng mang tin giả về","Ép ông nói hết","Mua chuộc thái giám ấy","Dúi bạc cho thái giám"],
+   close:["Trình lên Hoàng hậu","Khai thật với Nội vụ phủ","Báo tiếp lên trên mỗi điều thấy","Khai {mis} giấu xạ hương, không nói vì sao","Nói phần mình, để {mis} tự gánh phần nàng"],
+   cond:[["mis"]],fo:[["misD"]],
+   cw:"cần chủ nhân còn ở trong cung và tin ngươi như tin chính mình",
+   t:"Gói xạ hương năm ấy được chặn lại trước khi đến bếp một phi tần đang mang thai, và chỉ hai người biết. Chủ của ngươi không bao giờ nhắc lại, nhưng mỗi lần được ban thưởng, nàng ta đều chia ngươi một nửa; mỗi lần có kẻ hỏi chuyện cũ, nàng ta đứng chắn trước ngươi như ngươi từng đứng chắn trước nàng ta.",
+   a:"Chủ tớ cùng giữ một gói bí mật, nên cùng lên, cùng xuống. Những kẻ từng dò hỏi, từng đứng ra làm chứng, lần lượt bị hai người đẩy ra khỏi cung. Không ai trong lục cung tách nổi hai người, vì tách một người là kéo theo người kia.",
+   ht:"cùng chủ nhân giữ một bí mật cứu người, thành tri kỷ chủ tớ",ha:"cùng chủ nhân giữ một bí mật mà đẩy hết kẻ dò hỏi ra khỏi cung",
+   fail:"Chủ tớ nghi nhau",ft:"Một lời đồn lọt ra, và chủ của ngươi tin là từ miệng ngươi. Hai người vẫn ở chung một cung, nhưng từ đó không nói với nhau một lời thật."},
+  {pull:["Quỳ xuống: nô tỳ không thấy gì","Để nguyên chỗ cũ","Xin chuyển sang hầu cung khác","Giữ trọn bí mật cho chủ","Giữ chìa khóa, không mở rương","Đốt mẩu giấy","Thôi, không dò nữa","Xóa dấu chân mình","Hứa giữ kín cho ông","Làm như không biết, nói chuyện vặt","Từ chối thẳng","Cúi đầu, không đáp","Để yên, giả như chưa biết","Để yên, khép kín cửa","Im lặng chịu trách","Im lặng, để thời gian nói","Đem trả gói thuốc cho Thái y viện","Mang gói thuốc ra khỏi cung","Xin nghỉ ốm tránh mặt","Để ông đi","Giữ một lời: không biết","Gửi trả trâm","Không kéo nàng vào","Xin Hoàng thượng khép vụ, không truy","Bán một tin vặt","Nhận bạc, kể chuyện vô hại","Nhận hộp trâm","Nhận lời giảng hòa","Lén cho {v} biết có người đã biết","Hỏi {v} muốn đổi gì"],
+   close:["Một mình nhận hết để che chủ","Nhận gói thuốc là của mình","Nhận lời đứng cạnh nàng","Đáp: là chủ nhân"],
+   cond:[["s","duc"],["s","tamco"]],fo:[],
+   cw:"cần Đức dày và đủ khôn để ra đi mà không ai đuổi theo",
+   t:"Ngươi xin ra cung khi chuyện gói xạ hương đã yên, không xin thêm gì. Chủ của ngươi tiễn ngươi đến tận cửa cung, không nhắc một lời về chuyện cũ, chỉ siết tay ngươi rất lâu. Về quê, ngươi sống bằng nghề may vá, và đến cuối đời chưa kể bí mật ấy với ai.",
+   a:"Trước khi ra cung, ngươi tìm đến cung kia và bán chuyện gói xạ hương với một giá rất cao. Ngươi đi qua cửa cung với hai túi bạc, một của chủ cũ tiễn, một của kẻ thù chủ cũ trả. Sau lưng, sóng trong cung dậy lên; ngươi đã ở xa ngoài kinh.",
+   ht:"giữ trọn bí mật của chủ nhân rồi lặng lẽ ra cung",ha:"bán bí mật của chủ nhân cho kẻ thù nàng ta rồi ra cung với hai túi bạc",
+   fail:"Bí mật giữ chân",ft:"Người ta không để kẻ biết chuyện gói xạ hương rời khỏi tầm mắt. Ngươi ở lại, và từ đó mỗi lần ngươi ra khỏi phòng đều có người theo sau."},
+  {pull:["Từ chối, báo chủ","Quỳ xin chủ đừng làm","Khai thật với Nội vụ phủ","Lén lấy một ít đem hỏi","Lần ra kẻ nhét giấy","Hỏi khéo một thái y quen","Đưa bạc xem sổ","Hứa giữ kín cho ông","Theo xem nàng gặp ai","Báo {mis} đề phòng Nội vụ phủ","Bắt tận tay kẻ dò hỏi","Đi tìm gốc lời đồn","Khuyên nàng tâu lên","Hỏi gói thuốc thật ra để làm gì","Khuyên {mis} tự đem nộp trước","Tìm ra kẻ thật sự đã nói","Để {mis} tự nộp, nói rõ gốc gác","Xin ông viết lời khai trước khi đi","Đến xin ông ở lại","Kể hết, cả điều tốt lẫn điều xấu","Bác lời nàng bằng giờ trực","Hỏi nàng ai dạy nói","Lo bạc cho ông bớt roi","Xin {eun} cho gặp ông","Đưa sổ xuất kho và lời Ôn thái y","Xin dâng chuyện lên Hoàng thượng","Xin nàng làm chứng","Từ chối, giữ đường cũ","Nói hết, xin công cho {mis}","Ép ông nói hết","Trình lên Hoàng hậu","Nhận rồi trình lên Trung cung","Không nhận, đòi xét đến cùng","Báo tiếp lên trên mỗi điều thấy","Mua chuộc thái giám ấy"],
+   close:["Giữ kín, thưa không biết gì","Đưa bạc cho y khép vụ","Xin Hoàng thượng khép vụ, không truy","Nhận lời giảng hòa","Để ông đi"],
+   cond:[["s","duc"],["s","mat"]],fo:[],
+   cw:"cần Đức dày và tai mắt đủ lần ra kẻ đứng sau",
+   t:"Ngươi đem hết những gì mình biết về gói xạ hương lên tận Ngự thư phòng: nó ra khỏi Thái y viện dưới tên cung nào, đi về đâu, ai đã chặn nó lại. Ôn thái y được rửa sạch tên, cung kia phải trả lời cho từng chữ. Người bị oan năm ấy không ai còn phải cúi đầu.",
+   a:"Ngươi đem chuyện gói xạ hương lên Ngự thư phòng, nhưng không dừng ở chuyện rửa oan. Cung nữ áo xanh, viên thái giám từng chuyển tin, cả những kẻ từng làm chứng gian, người nào cũng bị lôi ra xét; cung kia mất hết người hầu trong một mùa. Ôn thái y được trả tên, còn kẻ thù của ông thì không còn ai đứng trong cung.",
+   ht:"đem chuyện gói xạ hương lên Ngự thư phòng, rửa sạch tên cho Ôn thái y",ha:"đem chuyện gói xạ hương lên Ngự thư phòng, lôi ra xét từng kẻ đã hại người cũ",
+   fail:"Oan chưa rửa",ft:"Sổ sách được trình lên, nhưng cung kia có người đỡ lời trước ngươi. Ôn thái y vẫn mang tiếng, còn ngươi bị nhắc là kẻ hầu biết quá nhiều."}]},
+ cnv_ban:{lean:{
+   p:["Đến xin cho nàng","Lén mang thuốc","Bênh bạn","Lấy lại khăn trước khi ai thấy","Tìm người làm chứng","Đứng ra tố Thu Cúc","Xin chủ nhẹ tay với Xuân Đào","Hỏi Xuân Đào đã thấy gì","Gửi bánh, hỏi thăm Xuân Đào","Lén mang cơm cho Xuân Đào","Gửi bạc chuộc vòng","Bảo Xuân Đào kể lại trước người làm chứng","Bảo Xuân Đào từ chối","Trả nợ cho Thu Cúc để kéo nàng về","Lo bạc đút lót người coi Tân Giả khố","Tìm người làm chứng nàng vô tội","Tự sắc lá thuốc theo cách quê nhà","Xin thuốc dưới tên mình","Làm thay phần việc của Xuân Đào","Ở lại canh đến sáng","Lén xuống Tân Giả khố ngồi cạnh nàng","Xin đưa nàng ra khỏi Tân Giả khố chữa bệnh","Hứa đứng cạnh nàng","Dặn nàng chỉ nói điều tận mắt thấy","Ôm nàng, không ép","Hứa bảo vệ nàng đến cùng","Xin {mis} tha Thu Cúc một mạng","Xin {mis} xử theo chứng cứ","Hứa giúp nàng về quê","Xin thêm bạc lộ phí cho Xuân Đào về quê","Ngồi khâu cùng nàng","Góp bạc lo đường xuất cung","Đến gặp Thu Cúc","Gửi thuốc, không gặp","Xin cho Xuân Đào xuất cung với tên sạch","Nhận một phần tội về mình để nàng sạch"],
+   m:["Không dám","Thưa không rõ","Im lặng","Để Nội vụ phủ tự tra","Quên chuyện cũ cho yên","Tha hắn, đổi lấy tin sau này","Để Thu Cúc tự chịu","Dặn Xuân Đào quên đi để giữ mạng","Khuyên Xuân Đào nhận để dò bên trong","Giữ làm lá bài","Chặn Thu Cúc giữa đường, ép nàng khai","Khóc một đêm rồi đi làm","Đút lót ma ma","Khuyên nàng để ngươi nói thay","Dọa hắn bằng sổ cầm đồ","Bỏ hắn, chỉ dựa vào người khác","Khuyên xử nhẹ cho êm","Dâng chứng cứ thẳng lên Nội vụ phủ, bỏ qua {mis}","Thôi, đủ chứng rồi","Nhận lời","Nhận cuộc mặc cả của {eun}","Đưa sổ cho {mis}, để nàng dùng","Giữ thư lại, chờ xong việc","Không đến"]},
+  e:[
+  {pull:["Đến xin cho nàng","Lén mang thuốc","Bênh bạn","Tìm người làm chứng","Đứng ra tố Thu Cúc","Hỏi Xuân Đào đã thấy gì","Gửi bánh, hỏi thăm Xuân Đào","Lén mang cơm cho Xuân Đào","Gửi bạc chuộc vòng","Bảo Xuân Đào từ chối","Lo bạc đút lót người coi Tân Giả khố","Tự sắc lá thuốc theo cách quê nhà","Làm thay phần việc của Xuân Đào","Ở lại canh đến sáng","Lén xuống Tân Giả khố ngồi cạnh nàng","Xin đưa nàng ra khỏi Tân Giả khố chữa bệnh","Ôm nàng, không ép","Hứa bảo vệ nàng đến cùng","Đưa Xuân Đào đến cùng","Đọc thư cùng Xuân Đào","Về đi, sống cho mình","Không dám","Thưa không rõ","Dặn Xuân Đào quên đi để giữ mạng","Khóc một đêm rồi đi làm","Giữ thư lại, chờ xong việc","Nhận lời","Giữ làm lá bài","Khuyên Xuân Đào nhận để dò bên trong","Quên chuyện cũ cho yên"],
+   close:["Khuyên nàng ở lại đến khi rửa sạch tiếng","Ở lại cùng tỷ","Xin Nội vụ phủ cho Xuân Đào về hầu cung mình","Xin {mis} cho Xuân Đào về cùng phòng"],
+   cond:[["s","duc"],["e",11,"win|mid"]],fo:[],
+   cw:"cần Đức dày và tên Xuân Đào đã được rửa sạch",
+   t:"Tên Xuân Đào đã sạch trong sổ Nội vụ phủ, và đến lượt ngươi xin ra cung. Hai đứa con gái cùng làng lại ngồi chung bậc cửa nhà mẹ Xuân Đào như thuở nhỏ, dựng chung một khung cửi, và không đêm nào phải giật mình vì tiếng gọi tra hỏi nữa.",
+   a:"Ngươi ra cung một mình, mang theo bạc thưởng và tên sạch, không ghé qua nhà Xuân Đào lấy một lần dù hai nhà chỉ cách nhau một con đường làng. Người trong làng hỏi chuyện cung cấm, ngươi chỉ kể công của mình.",
+   ht:"cùng Xuân Đào về làng với tên sạch, chung một khung cửi",ha:"ra cung một mình với bạc thưởng, không ngoái lại người bạn cùng làng",
+   fail:"Cửa cung khép sau lưng",ft:"Sổ Nội vụ phủ còn vướng một dòng chưa xóa, nên ngươi không được thả. Mỗi mùa ra cung, ngươi lại đứng nhìn người khác đi."},
+  {pull:["Lặng lẽ dò xem ai lấy vòng","Rình bắt Thu Cúc","Nói thẳng với Thu Cúc","Lấy lại khăn trước khi ai thấy","Báo trước với chưởng sự","Chuẩn bị lời bênh","Xin xem chiếc vòng giả","Để mắt đến Thu Cúc","Dò xem Thu Cúc giấu gì","Rình Phúc An","Đưa bạc hỏi Phúc An","Nhờ người chép sổ tiệm","Bắt hắn viết lời khai","Giải hắn lên {eun}","Giữ tang vật, chờ bắt kẻ lớn hơn","Theo Thu Cúc","Lén mở bọc","Giữ làm lá bài","Chặn Thu Cúc giữa đường, ép nàng khai","Khuyên nàng để ngươi nói thay","Dọa hắn bằng sổ cầm đồ","Làm chứng, kể hết","Xin được trình bày trước","Dâng chứng cứ thẳng lên Nội vụ phủ, bỏ qua {mis}","Chép trước một bản","Đòi đưa cả sổ lên","Dâng cả cuốn sổ lên Hoàng thượng","Hứa đứng cạnh nàng","Dặn nàng chỉ nói điều tận mắt thấy","Để Xuân Đào tự nói","Bảo Xuân Đào kể lại trước người làm chứng","Xin {mis} xử theo chứng cứ"],
+   close:["Im lặng","Để Nội vụ phủ tự tra","Quên chuyện cũ cho yên","Thôi, đủ chứng rồi","Nhận cuộc mặc cả của {eun}"],
+   cond:[["s","tamco"],["s","danh"]],fo:[],
+   cw:"cần Tâm cơ sâu và tên ngươi được nhắc trong vụ vòng ngọc",
+   t:"Vụ vòng ngọc khép lại, người được khen là ngươi. Ngươi nhận chức mới, rồi việc đầu tiên là xin Xuân Đào về làm phó bên mình; ai hỏi công, ngươi đều đáp: “Nếu nàng không dám đứng ra, chẳng ai rửa được oan.” Hai chị em đồng hương cùng lên, cùng được người dưới thương.",
+   a:"Vụ vòng ngọc khép lại, cả cung chỉ nhắc tên ngươi: người chặn được Phúc An, người dâng chứng, người được thưởng. Lời làm chứng của Xuân Đào, những đêm nàng ta sốt ở Tân Giả khố, không ai còn nhớ. Ngươi lên chức, và lần đầu tiên nàng ta phải cúi chào ngươi.",
+   ht:"khép vụ vòng ngọc rồi kéo Xuân Đào cùng lên",ha:"nhận hết công vụ vòng ngọc, bước lên trên vai Xuân Đào",
+   fail:"Công về tay khác",ft:"Công vụ vòng ngọc về tay một chưởng sự chưa từng nhúng tay. Ngươi đứng nhìn người khác được thưởng, còn Xuân Đào thì thôi tin ngươi."},
+  {pull:["Ngồi khâu cùng nàng","Tặng nàng một món bạc","Hỏi nàng muốn gì sau này","Khuyên Xuân Đào nhận để dò bên trong","Tự đến cảm ơn {v} thay Xuân Đào","Tự sắc lá thuốc theo cách quê nhà","Xin {mis} cho Xuân Đào về cùng phòng","Xin Nội vụ phủ cho Xuân Đào về hầu cung mình","Ở lại cùng tỷ","Khuyên nàng ở lại đến khi rửa sạch tiếng","Xin {mis} xử theo chứng cứ","Thưa: xin gánh cùng","Xin {mis} tha Thu Cúc một mạng","Đến gặp Thu Cúc","Gửi thuốc, không gặp","Trả nợ cho Thu Cúc để kéo nàng về","Xin chủ nhẹ tay với Xuân Đào","Đem tang vật đến {mis}","Hỏi {mis} Thu Cúc từng qua lại cung nào","Mách {mis}","Nói chuyện nợ với {mis}","Báo cho {mis} biết","Nhờ {mis} che chở nàng","Xin thuốc dưới tên mình","Đút lót ma ma","Tố ma ma lên Nội vụ phủ","Đưa bạc hỏi Phúc An","Tha hắn, đổi lấy tin sau này","Giữ làm lá bài","Khuyên xử nhẹ cho êm","Đưa sổ cho {mis}, để nàng dùng"],
+   close:["Hứa giúp nàng về quê","Xin cho Xuân Đào xuất cung với tên sạch","Về đi, sống cho mình","Góp bạc lo đường xuất cung"],
+   cond:[["s","tai"],["s","danh"]],fo:[],
+   cw:"cần Tài khéo tay và tiếng thêu vang đến Thượng y cục",
+   t:"Mũi kim ngươi học từ quê nhà nay thành mẫu thêu của cả Thượng y cục. Ngươi được giao giữ việc thêu cho lục cung, và tấm áo đầu tiên dâng lên Hoàng thượng có hai tên thêu ở gấu áo: ngươi, và Xuân Đào. Hai đứa con gái cùng làng được nhớ đến bằng nghề, không còn ai nhắc chuyện chiếc vòng ngọc.",
+   a:"Ngươi được giao giữ việc thêu cho lục cung, và từ đó mẫu thêu nào ở Thượng y cục được khen cũng phải mang tên ngươi mới được dâng lên. Thợ thêu nào không chịu thì bị đưa xuống Tân Giả khố giặt áo. Tên ngươi đứng trên mọi tấm áo đẹp nhất trong cung, mà ít mũi kim nào là của ngươi.",
+   ht:"đem mũi kim quê nhà vào Thượng y cục, cùng Xuân Đào thành danh",ha:"giữ việc thêu lục cung, để mọi mẫu thêu đẹp đều phải mang tên ngươi",
+   fail:"Kim gãy giữa chừng",ft:"Một tấm áo thêu dâng lên bị chê sai phẩm phục. Thượng y cục trả lại kim chỉ cho ngươi, kèm một lời dặn chớ mơ chuyện lớn."},
+  {pull:["Đến xin cho nàng","Hỏi Xuân Đào đã thấy gì","Nhờ người chép sổ tiệm","Gửi bánh, hỏi thăm Xuân Đào","Không động, sợ lộ","Dặn Xuân Đào quên đi để giữ mạng","Để nàng đi, ghi lại giờ giấc","Khóc một đêm rồi đi làm","Tự sắc lá thuốc theo cách quê nhà","Mua thuốc ngoài cung qua cửa sau","Ôm nàng, không ép","Cúi đầu, để phiên hỏi đi đúng phép","Chờ thêm","Tránh nhắc đến {v}","Khuyên xử nhẹ cho êm","Hứa giúp nàng về quê","Thôi, đủ chứng rồi","Đọc thư cùng Xuân Đào","Tùy muội","Hỏi nàng muốn gì sau này","Không dám","Thưa không rõ","Không đến","Để Thu Cúc tự chịu","Để mặc","Giữ thư lại, chờ xong việc"],
+   close:["Đứng ra tố Thu Cúc","Làm chứng, kể hết","Dâng cả cuốn sổ lên Hoàng thượng","Ở lại cùng tỷ"],
+   cond:[["s","duc"],["s","sac"]],fo:[],
+   cw:"cần Đức đủ để người ta tin và dung mạo khiến người ấy nhớ mãi",
+   t:"Ngươi theo người ấy rời kinh về làng cũ, đi qua những bờ ruộng hồi nhỏ ngươi và Xuân Đào cùng chạy. Mỗi lần người trong làng hỏi chuyện cung cấm, ngươi chỉ kể về một cô bạn tên Xuân Đào và một chiếc vòng ngọc nàng chưa từng lấy.",
+   a:"Ngươi theo người ấy rời kinh trong một đêm, không để lại cho Xuân Đào một lời. Về làng, ngươi dựng nhà mới bên sông; nhà mẹ nàng ta ở cuối xóm, ngươi đi chợ đường vòng để khỏi phải đi ngang.",
+   ht:"theo người ấy về làng cũ, mang theo chuyện cũ như một món quà",ha:"theo người ấy về làng trong một đêm, bỏ lại Xuân Đào không một lời",
+   fail:"Làng xa không tới",ft:"Thư hẹn về làng đến tay ngươi muộn mất một mùa. Ngươi giấu nó dưới đáy rương áo, và mỗi lần Xuân Đào hỏi, ngươi chỉ bảo là thư nhà."}]},
+ cnv_ma:{lean:{
+   p:["Tập đến khi được","Báo ma ma","Chăm bà","Tìm người làm chứng","Không động đến","Khuyên ma ma tự nhận","Làm hết sức, không cầu cạnh","Tự tay kiểm từng tấm","Mời ma ma ngồi, xin dạy lại từ đầu","Đưa đúng lệ, không thêm","Sai người đến Nội vụ phủ đòi đúng lệ","Báo ngay với ma ma","Giao đủ sáu cung, ghi thiếu đúng chỗ thiếu","Đòi đủ phần than theo sổ cũ, chỉ rõ chỗ thiếu","Đưa bản chép cho ma ma","Dâng chứng cứ lên Tổng quản","Sai người mang áo ấm theo","Chạy theo, xin cho mang áo ấm","Sai người tin cẩn vào ngục gặp bà","Xin vào ngục gặp bà","Khai đúng những gì đã thấy trong sổ","Lo thuốc vào ngục","Xin thái y vào khám","Hứa che chở cho hắn","Đưa nhân chứng và sổ ra","Dạy như ma ma đã dạy","Tự sắc thuốc thức đêm","Ghi lại lời ma ma làm chứng","Ra cổng Thần Vũ tiễn bà","Tặng bà bạc lộ phí","Dâng lên Hoàng hậu chuyện tiệm lụa","Nói: ai ngồi cũng được, miễn sổ sạch"],
+   m:["Lén đổ bớt trà cho nhẹ","Chép đúng như sổ cũ","Cất giùm vào tủ","Nhờ ma ma nâng đỡ","Chép theo sổ mới","Đưa thêm, ghi vào sổ là “hao hụt”","Bảo ma ma đây là việc của cung ngươi","Nhường cung {v} một phần, đổi lấy một lời hứa","Giao đủ, lặng lẽ khép sổ","Cho {v} biết là ngươi đã biết","Lấy trộm một cuốn sổ gốc","Sai người thân tín lấy một cuốn sổ gốc","Đốt bản chép, giữ mình","Đưa bản chép giả","Cáo bệnh, không làm chứng","Ghi tên từng người, giữ lại cho sau","Dò bài Phùng cô cô sẽ ra","Nhận một người, để dùng ngược","Bán một bản chép giả","Gặp {v} chia phần","Mời bà ta ra, nói thẳng","Gửi lời, không dám đến","Đứng xa nhìn theo"]},
+  e:[
+  {pull:["Tập đến khi được","Báo ma ma","Làm hết sức, không cầu cạnh","Tự tay kiểm từng tấm","Xin ma ma dạy phép đòi lệ","Nhận sổ, lén đối chiếu","Đưa đúng lệ, không thêm","Nhận sổ lệ mới, lén đối chiếu","Sai người đến Nội vụ phủ đòi đúng lệ","Báo ngay với ma ma","Chép riêng một bản sổ để giữ","Chép riêng một bản sổ lệ để giữ","Giao đủ sáu cung, ghi thiếu đúng chỗ thiếu","Đòi đủ phần than theo sổ cũ, chỉ rõ chỗ thiếu","Đọc sổ suốt đêm","Dâng chứng cứ lên Tổng quản","Khai đúng những gì đã thấy trong sổ","Đưa nhân chứng và sổ ra","Ôn lại từng bài như năm đầu","Tự xem người, không cần danh sách","Dạy như ma ma đã dạy","Kể vì sao chọn từng người, như ma ma đã dạy","Đứng thẳng chờ","Tự mang tờ tiến cử đến Tổng quản","Xin họ cùng ký","Nói: ai ngồi cũng được, miễn sổ sạch","Chép theo sổ mới","Đưa thêm, ghi vào sổ là “hao hụt”","Lấy trộm một cuốn sổ gốc","Dò bài Phùng cô cô sẽ ra","Nhận một người, để dùng ngược","Ghi tên từng người, giữ lại cho sau","Giao đủ, lặng lẽ khép sổ","Cho {v} biết là ngươi đã biết"],
+   close:["Xin hoãn khảo","Nhường chỗ cho học trò khác của ma ma","Xin ma ma đừng tiến cử ai","Không nói gì","Xin ma ma viết tên học trò khác"],
+   cond:[["s","tai"],["s","danh"]],fo:[],
+   cw:"cần Tài làm việc và tiếng giữ sổ sạch khắp lục cung",
+   t:"Ghế của Lưu ma ma, rồi cả những ghế cao hơn, lần lượt về tay ngươi. Sổ Nội vụ phủ từ đó công khai từng tấm gấm, từng cân than; cung nào thiếu, cung nào thừa, người hầu nhỏ nhất cũng đọc được. Những điều Lưu ma ma dạy ngươi từ ngày đầu vào cung, nay thành phép của cả lục cung.",
+   a:"Ngươi ngồi vào ghế của Lưu ma ma, rồi những ghế cao hơn nữa. Không một tấm gấm nào ra khỏi kho mà ngươi chưa đếm; kẻ hầu nào lệch một dòng sổ thì bị phạt trước mặt cả phòng. Lục cung chưa bao giờ ngăn nắp đến thế, cũng chưa bao giờ sợ đến thế.",
+   ht:"từ học trò Lưu ma ma lên giữ việc lục cung, sổ sách sạch đến từng dòng",ha:"giữ việc lục cung bằng roi và sổ, không ai dám lệch một dòng",
+   fail:"Ghế về tay người khác",ft:"Ghế chưởng sự về tay người khác; người ta bảo học trò Lưu ma ma còn non. Ngươi vẫn chép sổ, nhưng để người khác ký tên."},
+  {pull:["Tự tay kiểm từng tấm","Giao đủ sáu cung, ghi thiếu đúng chỗ thiếu","Khai đúng những gì đã thấy trong sổ","Chép đúng như sổ cũ","Lén đổ bớt trà cho nhẹ","Cất giùm vào tủ","Giữ kín cho ma ma","Chép theo sổ mới","Đưa thêm, ghi vào sổ là “hao hụt”","Nhường cung {v} một phần, đổi lấy một lời hứa","Nhận lệ mới cho yên","Giao đủ, lặng lẽ khép sổ","Nhận than lệ mới, lặng lẽ cho người mua thêm","Chỉ chép những trang có dấu Phùng cô cô","Giữ bản chép, chờ thời","Nhờ tiểu thái giám giữ kho mở cửa","Nhờ người ngoài cung mua lại một tấm làm chứng","Cho {v} biết là ngươi đã biết","Nhận lời ngoài mặt","Lấy trộm một cuốn sổ gốc","Sai người thân tín lấy một cuốn sổ gốc","Đưa bản chép giả","Ghi tên từng người, giữ lại cho sau","Cho hắn bạc về quê sau khi khai","Chấp nhận mỗi bên nhận một nửa","Bán một bản chép giả","Nhận hộp, hứa giữ người trong ấy","Nhận lời, giữ lại tờ lời khai của ma ma","Gặp {v} chia phần","Dâng chứng cứ lên Tổng quản","Dâng lên Hoàng hậu chuyện tiệm lụa","Nói: ai ngồi cũng được, miễn sổ sạch","Đòi đủ phần than theo sổ cũ, chỉ rõ chỗ thiếu"],
+   close:["Khuyên ma ma đừng lật nữa","Đốt bản chép, giữ mình","Đốt hộp cùng ma ma","Không làm gì, giữ những gì đã có","Không nói gì"],
+   cond:[["s","tamco"],["s","mat"]],fo:[],
+   cw:"cần Tâm cơ sâu và tai mắt trong kho Nội vụ phủ",
+   t:"Ngươi cầm sổ Nội vụ phủ trong tay, và việc đầu tiên là mở kho cho mọi cung đến đối chiếu. Gấm Tô Châu không còn biến khỏi sổ, than không còn bị cắt của cung thấp phẩm. Người ta gọi Nội vụ phủ đời ngươi là kho không thủng một lỗ.",
+   a:"Sổ Nội vụ phủ nằm trong tay ngươi, và mỗi tấm gấm, mỗi cân than ra khỏi kho đều phải qua một cái gật đầu của ngươi. Cung nào thuận ý thì mùa đông ấm, cung nào trái ý thì áo rét về chậm, về thiếu, ghi sổ là hao hụt. Không phi tần nào trong lục cung dám làm phật lòng một người giữ kho.",
+   ht:"nắm sổ Nội vụ phủ mà giữ kho không thủng một lỗ",ha:"nắm sổ Nội vụ phủ, để than và gấm của lục cung theo ý ngươi",
+   fail:"Sổ bị niêm",ft:"Tổng quản cho niêm toàn bộ sổ ngươi từng giữ để tra lại. Từng dòng ngươi chép bị đọc lại như chứng cứ, kho ngươi từng giữ có người khác cầm chìa."},
+  {pull:["Tập đến khi được","Chăm bà","Gửi thuốc rồi về làm việc","Tự đi nhận lỗi để êm","Không động đến","Khuyên ma ma tự nhận","Làm hết sức, không cầu cạnh","Mời ma ma ngồi, xin dạy lại từ đầu","Khuyên ma ma đừng lật nữa","Đưa bản chép cho ma ma","Đưa chứng cứ cho ma ma tự xử","Sai người mang áo ấm theo","Chạy theo, xin cho mang áo ấm","Lo thuốc vào ngục","Xin thái y vào khám","Viết lại lời khai của ma ma","Lo nhân sâm","Tự sắc thuốc thức đêm","Ngồi lại đến khi bà ta về","Bảo ma ma nghỉ, đừng nghĩ nữa","Xin ma ma tự giữ đến khi khỏe","Ra cổng Thần Vũ tiễn bà","Tặng bà bạc lộ phí","Nhường chỗ cho học trò khác của ma ma","Xin ma ma đừng tiến cử ai","Bảo họ đứng ngoài, giữ mình","Cất giùm vào tủ","Lén đổ bớt trà cho nhẹ","Đưa thêm, ghi vào sổ là “hao hụt”","Gặp {v} chia phần","Bán một bản chép giả","Đốt bản chép, giữ mình","Nhờ ma ma nâng đỡ","Đứng xa nhìn theo"],
+   close:["Tự mang tờ tiến cử đến Tổng quản","Nói: ghế ấy phải về người của Lưu ma ma","Xin họ cùng ký","Dâng chứng cứ lên Tổng quản"],
+   cond:[["s","duc"],["s","danh"]],fo:[],
+   cw:"cần Đức dày và tiếng tốt theo ngươi đến ngày về",
+   t:"Năm tóc ngươi bạc, ngươi cũng dạy việc cho mấy lứa cung nữ như Lưu ma ma từng dạy ngươi. Rồi ngươi xin về quê, đi qua cửa cung với một tay nải nhỏ, sau lưng mấy lứa học trò đứng tiễn. Ở quê, ngươi trồng một luống rau, sáng nào cũng pha một ấm trà rót ra hai chén.",
+   a:"Năm tóc ngươi bạc, ngươi xin về quê với một tay nải nhỏ, và mấy rương đồ cũ đã gửi ra ngoài trước từ lâu. Ở quê, ngươi dựng nhà ngói, mua ruộng; trong kinh, sổ kho mấy năm ngươi giữ đến giờ vẫn còn những dòng không ai đối chiếu được.",
+   ht:"dạy mấy lứa cung nữ như ma ma từng dạy mình, rồi về quê với một tay nải nhỏ",ha:"về quê với tay nải nhỏ, còn bạc kho thì đã đi trước từ lâu",
+   fail:"Tóc bạc trong cung",ft:"Ngươi xin về quê mấy lần, lần nào cũng có việc giữ lại. Tóc ngươi bạc dần trong cung, như tóc Lưu ma ma ngày trước."},
+  {pull:["Chăm bà","Gửi thuốc rồi về làm việc","Không động đến","Tự đi nhận lỗi để êm","Tự tay kiểm từng tấm","Xin ma ma một người phụ","Mời ma ma ngồi, xin dạy lại từ đầu","Xin ma ma dạy phép đòi lệ","Báo ngay với ma ma","Mời ma ma ra nói với người của {v}","Xin ma ma đứng ra giao","Đưa bản chép cho ma ma","Sai người mang bạc lo lót trong ngục","Lo thuốc vào ngục","Xin thái y vào khám","Hứa che chở cho hắn","Đến Càn Ninh cung xin","Nhờ ma ma Càn Ninh cung nói giúp","Dâng ngài một chén trà","Mời ngài cùng chọn","Dạy như ma ma đã dạy","Xin Thái y viện cấp thuốc theo lệ","Tự sắc thuốc thức đêm","Xin Tổng quản cho bà ra chỗ ấm","Nhận hộp, hứa giữ người trong ấy","Ra cổng Thần Vũ tiễn bà","Nhờ ma ma nâng đỡ","Bảo ma ma đây là việc của cung ngươi","Mời bà ta ra, nói thẳng","Báo Hoàng hậu {v} dòm ngó người các cung","Gửi lời, không dám đến","Đứng xa nhìn theo","@st_con=win","Lấy trộm một cuốn sổ gốc","Ghi tên từng người, giữ lại cho sau"],
+   close:["Lén đổ bớt trà cho nhẹ","Đốt hộp cùng ma ma","Cáo bệnh, không làm chứng","Lặng lẽ giữ khoảng cách"],
+   cond:[["s","duc"],["s","sung"]],fo:[],
+   cw:"cần Đức dày và Hoàng thượng đủ tin để trao một hoàng tử nhỏ vào tay ngươi",
+   t:"Hoàng thượng giao một hoàng tử còn đỏ hỏn cho ngươi trông nom, vì cả cung biết học trò của Lưu ma ma chưa từng để sót một việc. Ngươi thức với đứa trẻ qua những mùa đau ốm, dạy nó những chữ đầu tiên. Ngày nó lên ngôi, nó phong ngươi làm Phụng Thánh phu nhân trước cả khi phong thưởng triều thần.",
+   a:"Hoàng thượng giao một hoàng tử còn đỏ hỏn cho ngươi trông nom. Đứa trẻ lớn lên chỉ quen tay ngươi, chỉ nghe lời ngươi; ngày nó lên ngôi khi còn nhỏ, ấn của vua nhỏ nằm trong hộp ở phòng ngươi, và chưa ai thấy hộp được mở mà không có ngươi đứng cạnh.",
+   ht:"nuôi một hoàng tử nhỏ đến ngày lên ngôi, được phong Phụng Thánh phu nhân",ha:"nuôi vua từ thuở đỏ hỏn, giữ ấn của vua nhỏ trong phòng mình",
+   fail:"Nôi đổi tay",ft:"Hoàng thượng chọn người khác trông nom các hoàng tử nhỏ. Ngươi trở về với sổ sách kho, nghe chuyện Đông cung qua lời người khác kể."}]}
+});
 /* ================= jge: GRAND ENDINGS ENGINE — Đại kết cục (design dev/design/GRAND_ENDINGS.md r3 §2; owner OD:L1613, L1618, L1623–L1624 (1), L1601 (3)–(5), L1837) =================
    Phase 1 (§7 step 2): engine + the pilot branches of GE_DATA (jgedata.js); names / pairs / titles from GE_CAT (jgecat.js, generated from the catalogue).
    A branch = identity × road (S.st.f14.rd, a full road of jroad.js). Only a branch with data is live; every other life plays as before.
@@ -65417,7 +65889,7 @@ function j95cStrip(why,list){const w=String(why||"").slice(0,60);if(!w)return 0;
  for(const m of list||Q){if(!m||typeof m.h!=="string")continue;const j=m.h.indexOf(w);if(j<0)continue;const re=/[.!?…](\s|<|$)/g;re.lastIndex=j+w.length-1;const mm=re.exec(m.h);const e=mm?mm.index+1:m.h.length;m.h=m.h.slice(0,j)+m.h.slice(e).replace(/^\s+/,"");n++;J95C.stat.unsay=(J95C.stat.unsay||0)+1}return n}
 function j95cNext(){const P=J95B.next;if(!P||!P.length)return;J95B.next=[];if(!j95cCur())return;const R=S.roster;const used={};let n=0;
  for(const x of P){const e=R.P[x.id];if(!e){J95C.later.push(x.why);continue}if(x.id[0]==="v"){const v=RV(+x.id.slice(1));if(!v||!v.alive||v.out||v.confined){J95C.later.push(x.why);continue}}
-  let kh=used[x.id]||0;/* the first khắc of the coming buổi (endTurn resets the khắc count only after planning) */while(kh<4&&(e[kh][1]==="tryst"||e[kh][1]==="meet"))kh++;if(kh>=4){J95C.later.push(x.why);continue}used[x.id]=kh+1;
+  let kh=used[x.id]||0;/* the first khắc of the coming buổi (endTurn resets the khắc count only after planning) */while(kh<J95.KH&&(e[kh][1]==="tryst"||e[kh][1]==="meet"))kh++;if(kh>=J95.KH){J95C.later.push(x.why);continue}used[x.id]=kh+1;
   e[kh]=[x.k,x.act||"here",x.k==="home"?"me":null,x.why];J95B.bind.push({id:x.id,k:x.k,kh,key:R.key,wk:R.wk,b:R.b,past:1,next:1,src:x.src,why:x.why});if(J95B.bind.length>400)J95B.bind.splice(0,100);n++}
  if(n){J95C.stat.next+=n;j95sync()}}
 /* a second turn-of-buổi act for her, decided after the new buổi was planned (the month report after the week report): the first act
@@ -71559,7 +72031,7 @@ try{Object.assign(KIT_GLOSS,{"Ra khỏi xóm":"Đi ra đình, chợ, chùa hay n
 (function(){const h0=kcHud;kcHud=function(){const r=h0.apply(this,arguments);try{if(kc2On()){const e=$("hud-sung");const sm=e&&e.querySelector("small");if(sm)sm.innerHTML=sm.dataset.ko0.replace(/Sủng|Chủ tin/,NAMES.kgt);if(e)e.title=HX.kgt}}catch(x){}return r}})();
 (function(){const h0=kcHud2;kcHud2=function(){if(!kc2On())return h0.apply(this,arguments);const el=$("hud2");if(!el)return;const col=el.classList.contains("col");const dan=S.kc.kd==="dan";
  const c=(k,l,v,cls)=>`<button class="hc ${cls||""}${["buoi","date"].includes(k)?" keep":""}" data-hx="${k}">${l}${v!==""&&v!=null?` <b>${v}</b>`:""}</button>`;
- el.innerHTML=`<button class="h2t" data-h2t="1" aria-label="${col?"Mở ra":"Thu lại"}">${col?"▾":"▴"}</button>`+c("date",typeof VP==="object"&&VP.date?VP.date(S.month,S.year,S.tuan):`Tháng ${S.month}`,"")+c("buoi",`${BUOI[S.buoi||0].replace("Buổi ","")} · còn`,`${4-used} khắc`)
+ el.innerHTML=`<button class="h2t" data-h2t="1" aria-label="${col?"Mở ra":"Thu lại"}">${col?"▾":"▴"}</button>`+c("date",typeof VP==="object"&&VP.date?VP.date(S.month,S.year,S.tuan):`Tháng ${S.month}`,"")+c("buoi",`${BUOI[S.buoi||0].replace("Buổi ","")} · còn`,`${BAL.time.khac-used} khắc`)
   +c("sac","Sắc",S.sac)+c("tai","Tài",S.tai)+c("tamco","Tâm cơ",S.tamco)+c("duc","Đức",S.duc)+c("kgt",NAMES.kgt,S.kgt,S.kgt<BAL.kc2.st.kgtLow?"hot":"")+c("kap",NAMES.kap,S.kap,S.kap>=BAL.kc2.st.kapHot?"hot":"")
   +(dan?"":c("khm",NAMES.khm,S.khm))+(S.kc.ldSeen?c("kld","Lời đồn",S.kld,S.kld>=50?"hot":""):"")+c("kty",KC2W[S.kc.kd].kty,`còn ${kcMonthsLeft()} tháng`)+c("age","Tuổi",S.age)}})();
 (function(){const p0=kcChipPaint;kcChipPaint=function(){if(!kc2On())return p0.apply(this,arguments);try{const tt=document.getElementById("k3tt");if(!tt)return;const l1=tt.querySelector(".k3l1");if(!l1)return;
@@ -76707,7 +77179,7 @@ Object.assign(window,{mgCalBase,mgCalBand,mgCalShare,mgCalGrp,mgCalKinds,mgCalCo
    (đàn, cờ, hát, múa, thư pháp, họa, thêu, hương … any KG82 / person game): her board + the opponent's live score and clock side by side. Pure display: NO game logic,
    NO numbers of its own (the tick / warn / settle knobs are BAL.gameVs, jbal2). Built on the kit game frame look (.kgbox / .kgame tokens), kitFaceH portraits, kitRows words.
    API:  const vs = kitGameVs({box, me:{p|face|name}, opp:{p|face|name}, unit:"phần", round:"Ván 1/3", clock:true, oppBoard:false});
-         vs.setScore(side,n) · vs.setClock(side,t) (t = seconds left, null = hide) · vs.setTurn(side|null) · vs.setRound(text) · vs.end({win:"me"|"opp"|"draw", text})
+         vs.setScore(side,n) · vs.setClock(side,t) (t = seconds left, null = hide) · vs.setTurn(side|null) · vs.setMood(side,text) · vs.setRound(text) · vs.end({win:"me"|"opp"|"draw", text})
          vs.me / vs.opp = the board slots (.kgvs-bd) the game draws into (opp slot only when oppBoard:true) · vs.destroy(). side = "me" | "opp".
    Layout: html.kv1 (Fold portrait, one page) = opponent pane on top, her pane below (stacked); html.kv2 (iPad / spread) = side by side with the round state between. */
 function kitGameVs(o){o=o||{};const B=BAL.gameVs||{pop:320,warn:.2,end:900};const unit=o.unit||"phần";
@@ -76715,7 +77187,7 @@ function kitGameVs(o){o=o||{};const B=BAL.gameVs||{pop:320,warn:.2,end:900};cons
  const side=(k,d)=>{d=d||{};let face="";try{face=d.face?d.face:kitFaceH(d.p,"sm")}catch(e){}
   return `<section class="kgvs-pane kgvs-${k}" data-side="${k}"><header class="kgvs-hd"><span class="kgvs-face">${face}</span><b class="kgvs-nm">${d.name||(d.p&&d.p.name)||""}</b><i class="kgvs-turn" hidden>Đến phiên</i></header>`+
    `<div class="kgvs-st"><span class="kchip kgvs-sc"><b data-vs="sc">0</b> <small>${unit}</small></span><span class="kchip kgvs-clk" data-vs="clk" hidden></span></div>`+
-   (k==="me"||o.oppBoard?`<div class="kgvs-bd"></div>`:"")+`</section>`};
+   `<small class="kgvs-mood" data-vs="mood" hidden></small>`+(k==="me"||o.oppBoard?`<div class="kgvs-bd"></div>`:"")+`</section>`};
  const el=document.createElement("div");el.className="kgvs";el.style.setProperty("--kgvs-pop",B.pop+"ms");el.style.setProperty("--kgvs-end",B.end+"ms");el.dataset.turn="";el.innerHTML=side("opp",o.opp)+`<div class="kgvs-mid"><b data-vs="round">${o.round||""}</b><span class="kgvs-res" hidden></span></div>`+side("me",o.me);
  box.insertBefore(el,box.firstChild);
  const q=(s,k)=>el.querySelector(`.kgvs-${s} [data-vs="${k}"]`),full=o.full||{};let over=false;
@@ -76723,6 +77195,8 @@ function kitGameVs(o){o=o||{};const B=BAL.gameVs||{pop:320,warn:.2,end:900};cons
   setScore(s,n){const e=q(s,"sc");if(!e||over)return;const t=String(n);if(e.textContent===t)return;e.textContent=t;const c=e.parentNode;c.classList.remove("kgvs-pop");void c.offsetWidth;c.classList.add("kgvs-pop");clearTimeout(c._t);c._t=setTimeout(()=>c.classList.remove("kgvs-pop"),B.pop)},
   setClock(s,t){const e=q(s,"clk");if(!e||over)return;if(t==null){e.hidden=true;return}e.hidden=false;e.textContent=`còn ${Math.max(0,Math.ceil(t))} giây`;if(o.total)e.classList.toggle("kgvs-warn",t<=o.total*B.warn)},
   setTurn(s){if(over)return;el.dataset.turn=s||"";el.querySelectorAll(".kgvs-turn").forEach(i=>{i.hidden=i.closest(".kgvs-pane").dataset.side!==s})},
+  /* K-PM-1 fix 20/11 (E22g): a mood / reaction line («Nàng ấy đang cười») lives HERE, in the pane flow under the score — never an absolute bubble over the board / a ladder row */
+  setMood(s,t){const e=q(s,"mood");if(!e)return;e.textContent=t||"";e.hidden=!t},
   setRound(t){const e=el.querySelector('[data-vs="round"]');if(e)e.textContent=t||""},
   end(r){if(over)return;over=true;r=r||{};el.dataset.turn="";el.dataset.end=r.win||"draw";el.querySelectorAll(".kgvs-turn").forEach(i=>i.hidden=true);
    const m=el.querySelector(".kgvs-res");m.hidden=false;m.textContent=r.text||(r.win==="me"?"Nàng thắng":r.win==="opp"?"Nàng thua":"Hòa nhau");
@@ -76749,7 +77223,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.8",title:"kit
 .kgvs-bd{min-height:80px}.kgvs-win{border-color:var(--good,#2d7a52);box-shadow:0 0 0 2px var(--good,#2d7a52)}
 .kgvs[data-end=opp] .kgvs-me{border-color:var(--bad,#c23b22)}
 .kgvs-res{font-weight:700;animation:kgvsEnd var(--kgvs-end) ease-out}@keyframes kgvsEnd{from{opacity:0;transform:translateY(4px)}}
-html.kv2 .kgvs{grid-template-columns:1fr auto 1fr}html.kv2 .kgvs-me{order:0}html.kv2 .kgvs-opp{order:2}html.kv2 .kgvs-mid{order:1;min-width:84px}
+html.kv2 .kgvs{grid-template-columns:1fr auto 1fr;align-items:start}.kgvs-pane{align-self:start}.kgvs-mood{color:var(--dim,#6b5a44);font-size:.8rem;line-height:1.3;overflow-wrap:anywhere}.kgvs-mood[hidden]{display:none}html.kv2 .kgvs-me{order:0}html.kv2 .kgvs-opp{order:2}html.kv2 .kgvs-mid{order:1;min-width:84px}
 @media (prefers-reduced-motion:reduce){.kgvs-pop,.kgvs-res{animation:none}}`;document.head.appendChild(st)})();
 /* ================= SHOW WHY A NUMBER (owner 17/11 05:45Z, review/show-why) — the read-out of the trait / trọng engine =================
    Owner rule (OD 17/11 05:45Z): every result box and every Sổ ghi line that shows a changed number also shows WHY in one short line:
@@ -82724,7 +83198,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f55b7d6d448c";window.CTM_BUILD=BUILD;
+const BUILD="4f99e005ea24";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
