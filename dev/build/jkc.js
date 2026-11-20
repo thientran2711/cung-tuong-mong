@@ -300,7 +300,7 @@ function kcEndTurn(){if(S.dead||Q.length||S.mg)return;S.buoi=0;let ev="";
  rollWx();if(kcCity(S.place))S.place="kc_khue";used=0;popIdx=null;popMsg="";kcW(()=>{const q=quiet;quiet=true;try{flip()}finally{quiet=q}});/* r2-r2: the palace night runs silently at home (no jflip card-flip scene, no j93 flip note) */kcW(()=>palFix());if(kcCoopOn())kcW(()=>placeWhere());/* co-op: the host sends the palace whereabouts of the new week */kcWhere();S.visit=kcVisit(S.place);kcFix();
  try{curtain()}catch(e){}deal();render();if(Q.length&&$("modal").hidden)showModal()}
 function kcWeek(){if(Q.length>2)return;const E=[];const add=(e,w)=>{if(w>0)E.push([e,w])};const di=kcR("di"),mu=kcR("muoi"),cha=kcR("cha"),to=kcR("to"),hu=kcR("huynh");
- const mal=m=>m?(tv({"Xảo quyệt":3,"Tham vọng":2,"Kiêu ngạo":1.4,"Kín đáo":1,"Khiêm nhường":.4,"Ân cần":.2},m)||1)*(1+(m.oan||0)/40)*(m.af<10?1.4:.7):0;
+ const mal=m=>m?(tv({"Xảo quyệt":3,"Tham vọng":2,"Kiêu ngạo":1.4,"Kín đáo":1,"Khiêm nhường":.4,"Ân cần":.2},m)||1)*(1+(m.oan||0)/40)*(m.af<10?1.4:.7)*BAL.kcSch/100:0;/* BAL.kcSch: difficulty scales the home schemes (jdiff) */
  if(di&&!(S.kc.diBan>S.turn)){add("phan",mal(di)*1.2);add("doc",S.turn>=6&&!S.kc.ev.doc&&di.oan+(30-di.af)>40?mal(di)*.5:0);add("trom",mal(di));add("tudg",S.year>=2?mal(di)*.6:0)}
  if(mu){add("ao",mal(mu));add("tranhmoi",S.kc.suit.length?mal(mu):0)}
  if(cha)add("say",.8);if(hu)add("bac",nv(hu,"kcBac"));if(to)add("tobenh",S.kc.ev.tobenh?0:.4);
@@ -313,7 +313,7 @@ function kcWeek(){if(Q.length>2)return;const E=[];const add=(e,w)=>{if(w>0)E.pus
  const o=npcWhy("kcWeek",{E},()=>roll(KC.ev));if(!o)return;/* npc-purpose G2: the strongest motive in the house acts (KC.ev = it comes to a head this week) */const e=o.who.e;const d=mkP("kcE",{e});if(d)pushDil(d,KCE[e].t)}
 function kcMonth(){S.turn++;const k=S.origin.k;
  apply({bac:5+Math.round(S.kgtu/6)});
- if(!S.kc.ev.chieu||S.kc.mien)S.kap+=KC.apM+(S.age>=19?1:0)+(S.kgtu<BAL.kc2.st.kc.gtuPoor?1:0)+(S.kc.suit.length?1:0);/* registered for tuyển tú: no match may be made */S.kld=Math.max(0,S.kld-2);
+ if(!S.kc.ev.chieu||S.kc.mien)S.kap+=Math.round((KC.apM+(S.age>=19?1:0)+(S.kgtu<BAL.kc2.st.kc.gtuPoor?1:0)+(S.kc.suit.length?1:0))*BAL.kcMatch/100);/* registered for tuyển tú: no match may be made */S.kld=Math.max(0,S.kld-BAL.kcRumFade);
  for(const m of S.kc.fam){if(!m.alive)continue;m.oan=Math.max(0,(m.oan||0)-BAL.eff.jkc.oanKcMonth);if(/^ban|muoi/.test(m.r)){m.tai=Math.min(95,(m.tai||40)+R(2));m.sac=m.sac||50}}
  /* the palace runs on: same monthly world calls as the servant road (j42), with her outside */
  kcW(()=>{for(const v of liveRivals(true))stipend(v);rivalsMonth();servRanks();servMonth();oanMonth();restock();heirMonth();moodMonth();try{tdMonth()}catch(e){}return""});if(S.dead)return;

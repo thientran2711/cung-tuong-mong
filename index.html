@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm","b":"4a072e503dff","h":[{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"},{"s":"dddb1f94+","t":"2026-11-20T04:29Z","c":"Tay đối thủ ở Thắp đèn nay đo theo đúng tài của nàng"},{"s":"b3f5a05c+","t":"2026-11-20T04:20Z","c":"Tay đối thủ ở Bắn cung, Đầu hồ và Kim chỉ nay đo theo đúng tài của nàng"}]};
+window.CTM_BI={"s":"30e8714e+","t":"2026-11-20T08:00Z","c":"SELF-MERGE LAND fig-label: merge LIVE 892e5bb0 (index.html/sw.js rebuilt)","b":"1bd1d146b1af","h":[{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"},{"s":"dddb1f94+","t":"2026-11-20T04:29Z","c":"Tay đối thủ ở Thắp đèn nay đo theo đúng tài của nàng"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5799,7 +5799,7 @@ function mindTell(v,t,k){mindLog(v,"_tell");const tc=witOf(v);let c=12+eyes(S)*7
 (function(){const n0=npcAct;npcAct=function(v,t){if(v&&v.plan)return"";return n0.apply(this,arguments)}})();
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
 const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line stays on screen; stage-here r4 (owner OD 18/11 ~22:10Z "5 giây hay là 10 giây"): THE ms every notice chip (kitNotice, KIT §42.2) stays up */noticeMax:20,/* stage-here r4: notices kept in the top-bar «!» box list (oldest dropped) */allyRel:35,/* the "người quen cũ" ally of a new life: her Thiện cảm toward the player at the start (j2 allyBond; co-op part B rebase) */ghenNew:15,/* a new face: an NPC's Ghen toward her starts at R(ghenNew) (j1 newRival, j1 ghenNew0; co-op part B rebase) */wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */
- /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:60,/* diff-remeasure 16/11: 55 → 60 (Vừa HH 45 % → ~32 % with the fixed bot; 65 measured 26 %) */birthAdd:2,
+ /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,/* home road hazards (OUTSIDE_PLAN §12, GAP OR11; Vừa values; jdiff Dễ/Khó scale them like hz): kcSch = weight (100 = as shipped) of the hostile-kin schemes at home (stepmother, rival sister, assassin, the pestering suitor); kcRumFade = how much the city gossip about her (S.kld) fades each month; kcMatch = % (100 = as shipped) of the monthly push toward a forced match (S.kap) */kcSch:100,kcRumFade:2,kcMatch:100,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:60,/* diff-remeasure 16/11: 55 → 60 (Vừa HH 45 % → ~32 % with the fixed bot; 65 measured 26 %) */birthAdd:2,
  /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
  hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180,
  /* handmade works (j83), by material 0 thường / 1 tốt / 2 quý: matQ = phần added to the score; cap = highest tier it can reach (only quý makes a
@@ -33436,7 +33436,7 @@ function mortFate(o0,h,t,fate,alive){if(!M.on||!S||S.dead)return o0.call(this,h,
    Vừa (so a later balance pass on Vừa, e.g. C7 review/balance-pass, is followed automatically; only the knobs listed below are touched).
    Two-way rule: a knob that is a world rule (childbirth, illness, poison, spotting poison, the cooldown between charges, the Hoàng hậu
    seat gate, the outsider share of an empty seat, the scheme motive) changes for her and for every NPC alike. Her-side knobs only:
-   BAL.hz (how hard the palace aims at her), her starting bạc, and the Phúc duyên she earns (Khó ×1.5).
+   BAL.hz (how hard the palace aims at her), the home-road hazards BAL.kcSch / kcRumFade / kcMatch (OUTSIDE_PLAN §12: stepmother schemes, city gossip, forced-match speed; GAP OR11), her starting bạc, and the Phúc duyên she earns (Khó ×1.5).
    Mini-games (j82/j91 level tiers, review/mg-easy) are NOT touched: their tier follows her own art level in every life difficulty.
    Co-op (jcoopworld): S.diff is a personal key (not in W_KEYS), so each player's blob P[seat].S carries her own difficulty; each client
    applies the knobs of its own life (world rolls run on the host, so world-rule knobs follow the host's life there).
@@ -33444,10 +33444,10 @@ function mortFate(o0,h,t,fate,alive){if(!M.on||!S||S.dead)return o0.call(this,h,
 const DIFF_KEY="ctm-diff";
 const DIFF={
  de:{n:"Dễ",d:"Hậu cung ôn hòa, ít kẻ ra tay; vào cung bạc dày hơn.",
-  bal:{hz:[.55,0],birthAdd:[1,-2],birthMin:[1,-3],illDie:[.5,0],seeMaxP:[1,15],poisonX:[.67,0],poisonNow:[0,0],accCdT:[1.5,0],hhTh:[1,-5]},j70:{mot:[.6,0]},bac:BAL.diff.bac.de,pd:1},
+  bal:{hz:[.55,0],birthAdd:[1,-2],birthMin:[1,-3],illDie:[.5,0],seeMaxP:[1,15],poisonX:[.67,0],poisonNow:[0,0],accCdT:[1.5,0],hhTh:[1,-5],kcSch:[.55,0],kcRumFade:[1,1],kcMatch:[.75,0]},j70:{mot:[.6,0]},bac:BAL.diff.bac.de,pd:1},
  vua:{n:"Vừa",d:"Hậu cung như vốn có, phúc họa chia đều.",bal:{},j70:{},bac:BAL.diff.bac.vua,pd:1},
  kho:{n:"Khó",d:"Hậu cung hiểm ác, sinh nở hiểm nghèo; Phúc duyên gấp rưỡi.",
-  bal:{hz:[1.1,0],birthAdd:[1,3],birthMin:[1,4],illDie:[1.5,0],illAdd:[2,0],poisonX:[1.2,0],accCdT:[.67,0],outQ:[1,25]},j70:{mot:[1.2,0]},bac:BAL.diff.bac.kho,pd:1.5}};
+  bal:{hz:[1.1,0],birthAdd:[1,3],birthMin:[1,4],illDie:[1.5,0],illAdd:[2,0],poisonX:[1.2,0],accCdT:[.67,0],outQ:[1,25],kcSch:[1.25,0],kcRumFade:[1,-1],kcMatch:[1.25,0]},j70:{mot:[1.2,0]},bac:BAL.diff.bac.kho,pd:1.5}};
 const DIFF_K=["de","vua","kho"];
 /* every knob any mode touches (only these are saved and restored; the rest of BAL is never written here) */
 const DIFF_KN={bal:[...new Set(DIFF_K.flatMap(k=>Object.keys(DIFF[k].bal)))],j70:[...new Set(DIFF_K.flatMap(k=>Object.keys(DIFF[k].j70)))]};
@@ -66186,7 +66186,7 @@ function kcEndTurn(){if(S.dead||Q.length||S.mg)return;S.buoi=0;let ev="";
  rollWx();if(kcCity(S.place))S.place="kc_khue";used=0;popIdx=null;popMsg="";kcW(()=>{const q=quiet;quiet=true;try{flip()}finally{quiet=q}});/* r2-r2: the palace night runs silently at home (no jflip card-flip scene, no j93 flip note) */kcW(()=>palFix());if(kcCoopOn())kcW(()=>placeWhere());/* co-op: the host sends the palace whereabouts of the new week */kcWhere();S.visit=kcVisit(S.place);kcFix();
  try{curtain()}catch(e){}deal();render();if(Q.length&&$("modal").hidden)showModal()}
 function kcWeek(){if(Q.length>2)return;const E=[];const add=(e,w)=>{if(w>0)E.push([e,w])};const di=kcR("di"),mu=kcR("muoi"),cha=kcR("cha"),to=kcR("to"),hu=kcR("huynh");
- const mal=m=>m?(tv({"Xảo quyệt":3,"Tham vọng":2,"Kiêu ngạo":1.4,"Kín đáo":1,"Khiêm nhường":.4,"Ân cần":.2},m)||1)*(1+(m.oan||0)/40)*(m.af<10?1.4:.7):0;
+ const mal=m=>m?(tv({"Xảo quyệt":3,"Tham vọng":2,"Kiêu ngạo":1.4,"Kín đáo":1,"Khiêm nhường":.4,"Ân cần":.2},m)||1)*(1+(m.oan||0)/40)*(m.af<10?1.4:.7)*BAL.kcSch/100:0;/* BAL.kcSch: difficulty scales the home schemes (jdiff) */
  if(di&&!(S.kc.diBan>S.turn)){add("phan",mal(di)*1.2);add("doc",S.turn>=6&&!S.kc.ev.doc&&di.oan+(30-di.af)>40?mal(di)*.5:0);add("trom",mal(di));add("tudg",S.year>=2?mal(di)*.6:0)}
  if(mu){add("ao",mal(mu));add("tranhmoi",S.kc.suit.length?mal(mu):0)}
  if(cha)add("say",.8);if(hu)add("bac",nv(hu,"kcBac"));if(to)add("tobenh",S.kc.ev.tobenh?0:.4);
@@ -66199,7 +66199,7 @@ function kcWeek(){if(Q.length>2)return;const E=[];const add=(e,w)=>{if(w>0)E.pus
  const o=npcWhy("kcWeek",{E},()=>roll(KC.ev));if(!o)return;/* npc-purpose G2: the strongest motive in the house acts (KC.ev = it comes to a head this week) */const e=o.who.e;const d=mkP("kcE",{e});if(d)pushDil(d,KCE[e].t)}
 function kcMonth(){S.turn++;const k=S.origin.k;
  apply({bac:5+Math.round(S.kgtu/6)});
- if(!S.kc.ev.chieu||S.kc.mien)S.kap+=KC.apM+(S.age>=19?1:0)+(S.kgtu<BAL.kc2.st.kc.gtuPoor?1:0)+(S.kc.suit.length?1:0);/* registered for tuyển tú: no match may be made */S.kld=Math.max(0,S.kld-2);
+ if(!S.kc.ev.chieu||S.kc.mien)S.kap+=Math.round((KC.apM+(S.age>=19?1:0)+(S.kgtu<BAL.kc2.st.kc.gtuPoor?1:0)+(S.kc.suit.length?1:0))*BAL.kcMatch/100);/* registered for tuyển tú: no match may be made */S.kld=Math.max(0,S.kld-BAL.kcRumFade);
  for(const m of S.kc.fam){if(!m.alive)continue;m.oan=Math.max(0,(m.oan||0)-BAL.eff.jkc.oanKcMonth);if(/^ban|muoi/.test(m.r)){m.tai=Math.min(95,(m.tai||40)+R(2));m.sac=m.sac||50}}
  /* the palace runs on: same monthly world calls as the servant road (j42), with her outside */
  kcW(()=>{for(const v of liveRivals(true))stipend(v);rivalsMonth();servRanks();servMonth();oanMonth();restock();heirMonth();moodMonth();try{tdMonth()}catch(e){}return""});if(S.dead)return;
@@ -70656,17 +70656,17 @@ function kc2CardsNc(){const X=[];const L=kc2L();const cha=kcR("cha"),me=kcR("me"
 const KC2CD={d_benh:10,d_ghe:12,d_lai:6,d_lu:12,d_thue:12,d_bac:12,n_hoi:12,n_benh:14,n_yen:10,n_le:99,n_muoi:99,n_thich:99,d_xd:99,d_moi:99};
 function kc2Week(){if(Q.length>2)return;const E=[];const K=S.kc;K.evT=K.evT||{};const ok=e=>K.evT[e]==null||S.turn-K.evT[e]>=(KC2CD[e]||99);const add=(e,w)=>{if(w>0&&KCE[e]&&ok(e))E.push([e,w])};
  if(K.kd==="dan"){const me=kcR("me"),ly=kcR("ly"),xd=kcR("xd"),hu=kcR("huynh");
-  if(me)add("d_benh",.8);if(ly)add("d_ghe",.6);if(xd)add("d_xd",.6);add("d_lai",.5);if(hu&&hasT(hu,"Ham vui"))add("d_bac",.8);
+  if(me)add("d_benh",.8);if(ly)add("d_ghe",.6*BAL.kcSch/100);if(xd)add("d_xd",.6);add("d_lai",.5);if(hu&&hasT(hu,"Ham vui"))add("d_bac",.8);
   if(S.month>=6&&S.month<=9)add("d_lu",1.4);if(S.month>=10)add("d_thue",1);if(S.kap>=BAL.kc2.st.dan.moi)add("d_moi",1)}
  else{const th=kcR("thuc"),mu=kcR("muoi"),cha=kcR("cha");
-  if(K.sx&&S.month===6)add("n_hoi",3);if(mu&&K.sx)add("n_muoi",(tv({"Kiêu ngạo":1.2,"Tham vọng":1.4},mu)||.4));if(cha)add("n_benh",.35);
-  if(K.sx&&S.month>=5&&S.month<=8)add("n_le",1.2);if(K.sx&&S.kap>=BAL.kc2.st.nc.thich)add("n_thich",.5+S.kap/100);if(th)add("n_yen",.6)}
+  if(K.sx&&S.month===6)add("n_hoi",3);if(mu&&K.sx)add("n_muoi",(tv({"Kiêu ngạo":1.2,"Tham vọng":1.4},mu)||.4)*BAL.kcSch/100);if(cha)add("n_benh",.35);
+  if(K.sx&&S.month>=5&&S.month<=8)add("n_le",1.2);if(K.sx&&S.kap>=BAL.kc2.st.nc.thich)add("n_thich",(.5+S.kap/100)*BAL.kcSch/100);if(th)add("n_yen",.6*BAL.kcSch/100)}
  const o=npcWhy("kcWeek",{E},()=>roll(KC.ev));if(!o)return;/* npc-purpose G2: the strongest motive acts */const e=o.who.e;const d=mkP("kcE",{e});if(d){K.evT[e]=S.turn;pushDil(d,KCE[e].t)}}
 (function(){const m0=kcMonth;kcMonth=function(){if(!S||!S.kc||!S.kc.kd)return m0.apply(this,arguments);return kc2Month()}})();
 function kc2Month(){S.turn++;const K=S.kc;const d=K.kd;
- if(d==="dan"){S.kap+=BAL.eff.jkc2.kapKc2Month;if(S.kap>=BAL.kc2.st.dan.siet&&!K.ev.d_siet){K.ev.d_siet=1;pushDil(mkP("kcE",{e:"d_siet"}),"Chủ nợ đến nhà")}apply({bac:BAL.kc2.kc2Month_o_bac})}
- else{S.kap+=BAL.kc2.st.nc.month+(kcR("thuc")?BAL.kc2.st.nc.monthThuc:0);apply({bac:BAL.kc2.kc2Month_o_bac2});if(S.kap>=BAL.kc2.st.nc.pha&&!K.ev.n_pha){K.ev.n_pha=1;pushDil(mkP("kcE",{e:"n_pha"}),"Phe chủ chiến ra tay")}}
- S.kld=Math.max(0,S.kld-2);for(const m of K.fam){if(!m.alive)continue;m.oan=Math.max(0,(m.oan||0)-BAL.eff.jkc2.oanKc2Month)}
+ if(d==="dan"){S.kap+=Math.round(BAL.eff.jkc2.kapKc2Month*BAL.kcMatch/100);if(S.kap>=BAL.kc2.st.dan.siet&&!K.ev.d_siet){K.ev.d_siet=1;pushDil(mkP("kcE",{e:"d_siet"}),"Chủ nợ đến nhà")}apply({bac:BAL.kc2.kc2Month_o_bac})}
+ else{S.kap+=Math.round((BAL.kc2.st.nc.month+(kcR("thuc")?BAL.kc2.st.nc.monthThuc:0))*BAL.kcMatch/100);apply({bac:BAL.kc2.kc2Month_o_bac2});if(S.kap>=BAL.kc2.st.nc.pha&&!K.ev.n_pha){K.ev.n_pha=1;pushDil(mkP("kcE",{e:"n_pha"}),"Phe chủ chiến ra tay")}}
+ S.kld=Math.max(0,S.kld-BAL.kcRumFade);for(const m of K.fam){if(!m.alive)continue;m.oan=Math.max(0,(m.oan||0)-BAL.eff.jkc2.oanKc2Month)}
  /* the palace runs on: the same monthly world calls as jkc / the servant road (j42), with her outside */
  kcW(()=>{for(const v of liveRivals(true))stipend(v);rivalsMonth();servRanks();servMonth();oanMonth();restock();heirMonth();moodMonth();try{tdMonth()}catch(e){}return""});if(S.dead)return;
  /* chapters on a fixed calendar, then the sending event */
@@ -81974,7 +81974,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4a072e503dff";window.CTM_BUILD=BUILD;
+const BUILD="1bd1d146b1af";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
