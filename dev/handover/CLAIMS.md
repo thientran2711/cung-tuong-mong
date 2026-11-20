@@ -450,7 +450,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin G #6 (opus; successor of G #5 5Wy7doJg @45222abc) | review/coop-thin-g | B | session_01N1tNP5sNDT7i8Um811DRG1 | RUNNING | 20/11 12:20Z |
 | kit-rows-b KIT KEEPER (sonnet; KP12/13/15/17/19/20/21 + K-PM-1; KP14, KP22 open) | review/kit-rows-b; reports/kit-rows-b.md | MAIN ROOT-78 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM (see message) | 20/11 |
 | REVIEW coop-staff-split r1 (opus BIG) of 797982a5 | review/coop-staff-split-r1 | B | session_01N1tNP57zWUL3xM4EWuAwtL | RUNNING | 20/11 12:26Z |
-| coop-host-lag (opus; host-only world writes reach guest a week late: figThPick + names sweep + rebirth flake; stacked on names-unique-r2-r1) | review/coop-host-lag | B | session_01N1tNP6rvC3RLvQMFGeo8UB | RUNNING | 20/11 12:27Z |
+| coop-host-lag (opus; host-only world writes reach guest a week late: figThPick + names sweep + rebirth flake; stacked on names-unique-r2-r1) | review/coop-host-lag | B | session_01N1tNP6rvC3RLvQMFGeo8UB | ROLLED OVER @6fb5ca7a (handover #1→#2 in reports/coop-host-lag.md; B opens #2) | 20/11 13:06Z |
 | jagday-walk NPC deed→deed walks (GAP follow-up, MAIN GO 10:42Z; opus) | review/jagday-walk | Foreman D #10 | session_01964izFMBWywRUbAg2MV1QH | RUNNING 20/11 12:35Z |
 | person-minigame-acts ROUND C r2 fixes (opus E22h; successor of E22g @8cfb79f0; E22t FAIL 96b9db00) | review/person-minigame-acts-c | FOREMAN E #19 | session_01DgYSWniAXpADTXukGd9dzH | RUNNING | 20/11 12:43Z |
 | FOREMAN E #19 (opus; = E ROOT STANDBY, depth 0; took over from E #18) | handover FOREMAN_E_STATUS | owner (claude.ai) | session_01DgYSWky5RC6FxdEKQrycwt | RUNNING | 20/11 11:47Z |
