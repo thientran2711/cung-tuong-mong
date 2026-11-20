@@ -1,19 +1,14 @@
-# REPORT cal-p2 — worker wk cal-p2 (opus, session_01Rc5AsHjxvLYP1FYexFncti) — PARTIAL + HANDOVER
-PRIORITY #1 CHECK: OD L1990–1999 + brief sections 05:35Z…08:35Z | main: jmgcal.js (cal.k one profile), jmgt mgTier/mgHand, BAL.mgTier kAdj/kG/lev, mg-bots.js | review/* mg-fair-hands (read only, NOT merged) | git grep lvStep / per-kind fit key: none | claims: this worker only.
+# REPORT cal-p2 — wk cal-p2 #1 (session_01Rc5AsHjxvLYP1FYexFncti) + #2 (session_01Rc5AsMmEgNigPGpiup9uKs) — DONE (proposal awaits owner)
+PRIORITY #1 CHECK: OD L1990–2034 + brief sections 05:35Z…08:35Z | main eb056f7b: jmgcal.js (cal.k one profile), jmgt mgTier/mgLev/mgGrade, BAL.mgTier kAdj/kG/lev, BAL.slap, mg-bots.js | review/* mg-fair-hands 3fe87277 (read only, NOT merged), review/cal-p2 445bcaeb | claims: cal-p2 only.
 Foreman: C-AG #28 session_01Rc5AsLarKgavDpQSsAHHYB (was #27). Branch review/cal-p2.
 
-## STATE (05:59Z)
-- Player-2 profile (first brief) was built and pushed (9144ec1b, 78d767f1), then REVERTED on review/cal-p2 (c29a7708) after the owner overwrite 05:35Z. No k2 / --p2 / co-op path anywhere.
-- review/cal-p2 = LIVE origin/main 2ec6062e (merged, 399e81d4) + ONE tool-only commit 0101f61f: dev/measure/mg-bots.js env knobs MGBOT_AIM/THINK/SLIP/THINKD/SLIPD (defaults = adult skilled bot, unchanged). No game file changed.
-- Methods followed in order as the brief changed: 05:35Z child ref → 05:45Z objective → 05:50Z marks → 06:00Z feel → 06:10Z adult scale → 06:35Z small easing → 07:05Z/07:15Z identity sở trường/sở đoản → 08:20Z 3 levels → 08:30Z ONE fitted board + identity ±2 on the RESULT (CURRENT). Target used: her base on the fitted board ≈ 7.5 (band 7–8, MAIN 08:35Z) so +2 is not eaten by the 10 cap and −2 leaves ≈ 5.5 (still placing).
-- Đầu hồ (owner-bug, lands ALONE): NOT BUILT YET — exact edit ready in §A1 (one BAL line + the 3 must-go-withs).
+## STATE (wk cal-p2 #2, session_01Rc5AsMmEgNigPGpiup9uKs, 20/11)
+- (1) Đầu hồ owner-bug DONE on review/cal-p2 445bcaeb (fix 6e456cf8 + merge of LIVE main eb056f7b). Sent C-AG #28 "SẴN SÀNG dauho 445bcaeb". Detail §D.
+- (2) ONE numbers proposal DONE below: §A (ban/tat/ne/dauho), §C (one table, all 26 counted kinds), §E (identity result bonus + NPC + mg-fair-hands + sample contests), §F (expert verdict on MAIN 08:35Z). PROPOSAL ONLY — no BAL lands without the owner's OK (via ROOT-74).
+- Player-2 profile (first brief) stays reverted (c29a7708). review/cal-p2 has no other game change than the Đầu hồ fix; mg-bots env knobs (0101f61f) are tool-only.
 
-## HANDOVER (rollover at START_CTX 6 % + 25 % = 31 %; written at 28 %)
-Next session (opened by the coordinator):
-1. Fetch review/cal-p2 (sparse worktree), merge newest LIVE. Build Đầu hồ per §A (per-kind dauho BAL knobs; Bắn cung board unchanged; law 5 kept; target her ≈ 7.5 on the fitted board) + a test for both kinds (dauho playable for the default skilled bot; ban byte-identical board: compare mgLev/engine values for ban before/after). Run: assemble + build_site, mgcal-apply.test.sh, ag-mgcal, ag-mgh, ag-mg2, mg-skip (args: url 755x1000@1 outdir), slap-mg (url 755x1000@1 outdir), quickcheck. Pre-existing FAILs on main (shown same on main 2026-11-20): ag-mgh 7 "strong hands rare", ag-mg2 summons ×2, slap-mg fails ["marks"]; ag-mgh 4 is flaky (unseeded world; passed 3/3 reruns). Restore `_aa.html` if a test deletes it (tracked file). Then send C-AG #28 "SẴN SÀNG dauho <sha>".
-2. Then finish the ONE numbers proposal (08:30Z): §B (fitted board per kind) + §A (tat/ne/ban) + identity ±2 on the result (BAL knob, e.g. BAL.orig.res={tr:2,doan:-2}, clamp 0–10, NPCs same) using §A2's sở đoản list + mg-fair-hands combination + sample contests; expert verdict on MAIN's 08:35Z view (point by point, law 8). Note A2 was done under 07:05Z (eased board); under 08:30Z the shift moves to the RESULT (+2/−2) — re-run its contest sim with ±2 on her play instead of the board lift (script /home/user/wt/cal-p2-out/idsim.js may be gone; re-derive).
-3. Scratch (may be wiped): /home/user/wt/cal-p2-out/ (A2-identity.md, B-boards.md, c2_*, idsim.js, doan.js). Everything needed is copied below.
-
+## HANDOVER
+Nothing left for this worker after the two SẴN SÀNG messages. If the owner OKs §C/§E: one worker writes the BAL keys listed in §C/§E on review/cal-p2 (BAL only, law 4), adds the per-kind board test (bot-check each E row, n≥20/cell), re-measures BAL.slap.dodgeOdds after the ne change, and the NPC side of §E goes into review/mg-fair-hands (law 1). Scratch sims (may be wiped): /tmp/claude-0/…/scratchpad/{fling.js,tim.js,cont.js}; all numbers copied below.
 
 ## B — one fitted board per kind (her base → ≈7.5, band 7–8), analyst B (tho/theu/mua/huong/banh/ceilings), M = bot-measured, E = estimate
 Method: mg-bots.js on ladder d=-2..2 (hoc/0/2,hoc/0/1,hoc/0/0,hoc/2/0,hoc/4/0); raw float KG82.rawF re-graded with mgGrade + kind kG, mgMedD correction (med [[-2,8.9],[0,7.5],[2,5.8]]). Bots: trained = default; MASTER RT40 PX.010 AIM20 THINK250 THINKD450 SLIP.02 SLIPD.03; AVG RT110 PX.028 AIM65 THINK650 THINKD1250 SLIP.09 SLIPD.18. Her-bot = closest base; her after = her + her-bot delta. n=10–20/cell; SD = spread of one 5-round base. Scratch: /home/user/wt/cal-p2-out/c2_*, an.py, c2_tier.py, c2_sim.py.
@@ -87,3 +82,82 @@ OPEN for owner: (1) band centre: per kind on realistic adult scale (7.5 / measur
 | ne | 4.1 (2.1) | anticipation timing, 1 tap 10/0 | minor | slap.dodge.safeMs ×2.25 | 4.0→≈7.5 (analytic; ×2.5 bot 8.2) | 1.9 |
 | ban | 9.1 (9.3) | anticipation timing, slow marker | ease-5 clamp rounds 1–3 | kAdj.ban 3→−0.5 | 9.1→7.9 (analytic) | .4 |
 Kingston: every gap to her is inside one 5-round try's noise. Uncertainty: dauho after rests on a scatter model (her re-test is the check); ban analytic; bot cells n=16–30 (±.3).
+
+## A3 — independent cross-check of §A by worker #2 (own timing / fling models, not analyst A's scripts)
+Engines: ban = j82 kg82Aim (needle swing, tap on centre; q by distance ÷ mgTol); tat / ne = jslap kg82SlapBar (ONE tap; time windows in ms from BAL.slap.bar / .dodge, indexed by ease 0..5); dauho = j91 k91Fling (drag-throw; NOT the aim engine — see §D).
+Method: timing model = tap error N(0, σ) ms on a predictable crossing (coincidence-anticipation timing); her cal base = mgCalBase over the ladder d −2..2 (ease = 2 − .8d + kAdj), 20k draws/cell. σ fitted to HER first tries: tat σ≈70 ms → 5.07 (her 4.9), ne σ≈70 → 4.02 (her 4.1), ban σ≈45 → 9.09 (her 9.1). One σ explains both slap boards (same single-tap feel); ban is lower (6 shots of a steady swing = warm-up inside the game). Adult CAT error SD 20–50 ms in the lab (Bard et al. 1990; Lobjois et al. 2006 age effects), + touchscreen latency jitter + a first try → 70 ms is plausible.
+| kind | her | skill | knob before → after (BAL) | her base before → after | M/E |
+| ban | 9.1 | anticipation timing | kAdj.ban 3 → 1.5 + kG.ban .8 → 1.3 | 9.09 → ≈7.8 (kAdj 1 → 7.63; hard end ease 0 ≈5.4) | M (model) |
+| tat | 4.9 | single-tap timing | BAL.slap.bar.redMs [8,11,14,18,22,28] → [22,30,38,49,59,76], amberMs [40,50,58,66,76,88] → [68,85,99,112,129,150] (×2.7 / ×1.7) | 5.07 → ≈7.1 | M (model) |
+| ne | 4.1 | single-tap timing | BAL.slap.dodge.safeMs [20,28,36,45,55,66] → [40,56,72,90,110,132] (×2) | 4.02 → ≈6.9 | M (model) |
+| dauho | 1.1 (broken) | drag aim + judgement | BUG FIX landed on review/cal-p2 (§D) | 1.3 → ≈7.6–7.8 | M (model) |
+Agreement with analyst A (§A): same engines found (dauho = fling, Bắn cung alone on kg82Aim), same σ ≈70 ms for tat/ne and ≈45 ms for ban, same knob directions and sizes within the target difference (A aimed 7.3–7.9 flat; §C aims the keep-order band, so tat/ne/ban get slightly smaller easing here). Two independent models agreeing = the E→M upgrade for these four rows.
+Side effect: BAL.slap.dodgeOdds [75,55,35] (the odds word on the "Né đòn" card = measured dodge rate) must be re-measured after the ne change (one core: the card must read the new board). tat/ne also drive NPC slaps (raw per tier) — same table, law 1 kept.
+
+## C — THE ONE NUMBERS PROPOSAL: one fitted board per kind (26 counted kinds)
+TARGET (owner 08:30Z "vừa với cái tay của tôi … đừng có khó quá cũng đừng dễ quá" + brief "her strong-vs-weak order preserved" + MAIN 08:35Z "7–8, not 10"): KEEP-ORDER BAND T = 7.0 + (b − 4.1)/5.9 → her weakest kind (ne 4.1) sits at 7.0, her best (10) at 8.0, every kind in between keeps her order. Why a band and not flat 7.5: flat 7.5 erases who she is (Cờ = Né); 7–8 keeps every game "playable, not too easy" and leaves room for +2 (8 + 2 = 10, the cap) and for −1/−2 (7 − 2 = 5, still placing — owner 06:35Z).
+Knob rule: §B / §A knobs were sized for ≈7.5; for T ≠ 7.5 add Δ kAdj ≈ −(T − 7.5) × 1.0 per kind where kAdj bites (≈1 play point per ease unit near the matching board, mgMedD slope); for kinds where only kG / lev bite, the §B value is within ±.5 of T (inside one-try noise SD .3–1.4) → keep.
+| kind | her b | T | skill | board knob (BAL) | est. her base after | M/E |
+| may | 10 | 8.0 | fine trace | kG.may .82 → 1.8 | ≈8.0 | E |
+| td_cong | 10 | 8.0 | fine trace | lev.td_cong.tol [.0075,.028] → [.005,.016], kG 1.3 → 1.8 | ≈7.9 | M |
+| doden | 9.9 | 8.0 | visual search + speed | lev.doden.fast [.05,.175] → [.03,.11] | ≈8.0 (bot slower than her; re-test) | E |
+| le | 9.9 | 8.0 | search + speed | lev.le.fast [.075,.25] → [.04,.13] | ≈8.0 | E |
+| kinh | 9.9 | 8.0 | fine trace | kG.kinh .9 → 1.8 | ≈8.0 | E |
+| co | 9.7 | 7.95 | reading + speed | kAdj.co −1 → −1.6, lev.co.lim [8000,20000] → [6500,20000], lev.co.extra [5,0] → [6,0], kG.co 3 → 4 | ≈8.1 | M |
+| theu | 9.7 | 7.95 | spatial memory | typed R0/SHOW/LIM (j82:258) → BAL.mgTier.lev.theu {show:[1500,2700], add:[2,0]} (law 4 fix too) | untestable by bot → her re-test | E |
+| ve | 9.5 | 7.9 | fine trace | kAdj.ve −1.6 → −3.6 | ≈7.9 | E |
+| tc | 9.5 | 7.9 | logic + speed | lev.tc.fast [.05,.175] → [.035,.12], kAdj −1.2 | ≈7.9 | E |
+| xa | 9.5 | 7.9 | logic + speed | lev.xa.fast [.05,.1] → [.035,.07], kAdj −1.2 | ≈7.9 | E |
+| td_hanh | 9.3 | 7.9 | counting under time | kAdj.td_hanh −1.4 → −2.6 | ≈7.9 | E |
+| doi | 9.1 | 7.85 | matching + speed | kAdj.doi 0 → −1.2, lev.doi.fast [.05,.425] → [.05,.25] | ≈7.9 | E |
+| ban | 9.1 | 7.85 | anticipation timing | kAdj.ban 3 → 1.5, kG.ban .8 → 1.3 | ≈7.8 | M |
+| tho | 8.7 | 7.8 | fine trace | kAdj.tho 0 → −.7 | ≈7.8 | E |
+| thq | 8.5 | 7.75 | — | kAdj.thq 0 → −.5 | ≈7.8 | E |
+| dan | 8.3 | 7.7 | rhythm timing | kAdj.dan 0 → −.4 | ≈7.7 | E |
+| hat | 8.1 | 7.7 | hold timing | kAdj.hat 0 → −.3 | ≈7.7 | E |
+| hoa | 7.9 | 7.65 | arrangement | keep | 7.9 (in band) | – |
+| duho | 7.9 | 7.65 | — | keep | 7.9 (in band) | – |
+| kim | 7.7 | 7.6 | — | keep | 7.7 | – |
+| td_ngon | 6.7 | 7.45 | reflex | kAdj.td_ngon −.9 → −.2 | ≈7.4 | E |
+| mua | 6.3 | 7.35 | sequence memory + beat | kAdj.mua 0 → +.7 (alt lev.mua.beat [1300,2600]); cue-gap fix first (§B) | ≈7.4 | E/M |
+| banh | 6.1 | 7.35 | lag control | kAdj.banh −.1 → +.5 | ≈7.35 | E |
+| tat | 4.9 | 7.15 | single-tap timing | BAL.slap.bar redMs ×2.7, amberMs ×1.7 (values §A) | ≈7.1 | M |
+| huong | 4.5 | 7.05 | colour judgement (REAL FAULT) | kG.huong 3.65 → 1.0 + «khớp» word thresholds to BAL (.32·mgTol) | ≈7.1–7.4 | M |
+| ne | 4.1 | 7.0 | single-tap timing | BAL.slap.dodge.safeMs ×2 (values §A) | ≈6.9 | M |
+Not counted (broken / re-test first): dauho (fixed §D, re-test), td_dung 0.3, chai 4.9, den 4.7, hoadien 5.5 → same band rule after her re-test.
+Law 5 (harder as she climbs) untouched: every knob above moves the matching-board point only; ease still falls with d = stake − lv (BAL.mgTier mid/slope), every lev pair still runs hard → easy.
+Cờ 9.7 explained (§B): board shows rounded RAW points, result shows GRADED; real fault = scoreboard/result mismatch in every j82/j91 engine → separate family fix (show the graded score in play).
+
+## D — Đầu hồ owner-bug fix (LANDED on review/cal-p2 445bcaeb, awaiting reviewer)
+Engine: j91 k91Fling (drag back, release; wind changes each throw). Bắn cung = j82 kg82Aim → no shared knob; the fix cannot touch Bắn cung (test proves it).
+Cause (measured with a copy of the engine physics, canvas 700×430 = Fold / iPad): the aim dots showed only .14–.45 s of a 1.0–1.3 s flight, so she never saw where the arrow comes down; and 1 px of drag moved the landing 7–13 px against a ±9–12 px full-marks half-mouth (±17–24 px for any score). The skilled oracle bot (knows the landing) got 6.7 at d=0; a human cannot.
+Fix (BAL only): BAL.mgTier.lev.dauho aid [.14,.45] → [.6,2], mouth [.8,1.3] → [1.3,2.1], NEW pull [.8,.6]; k91Fling K = 5.4·pull and MAXD = .45U/pull (strongest throw unchanged). Law 5: ease 0 = .6 s dots, mouth 1.3, pull .8 (touchy); ease 5 = full path, mouth 2.1, pull .6.
+Human model (release jitter 2.5 px + landing judgement error 200 px per unseen second + 4 px reading; calibrated to her 1.1 on the old board): ease 4.8/3.2/1.6/0 before 1.8/1.3/1.0/0.9 → after 8.9/7.8/5.2/2.5 ⇒ her matching base ≈7.6–7.8 (target band 7–8). Oracle bot (mg-bots skilled n=12): before 8.2/6.7/5.4/3.6 → after 9.9/9.4/9.7/8.9 (playable).
+Test dev/test/cal-dauho.js: kg82Aim source, KG82_KIND.ban, ban BAL knobs, mgTier("ban").ease for 5 occasions × 8 ranks × 6 levels byte-identical to main; dauho knobs + law 5 direction. Pot picture (analyst A caution: picture width = 2·mh/.42): measured in the built game, worst pot position (x = .82·W) at the easiest board (mouth 2.1): Fold 755×1000 canvas 681 px → pot right edge 666; iPad 1180×820 canvas 609 → 607; matching board (1.81) Fold 651 → inside on both primary devices (phones play landscape, rot.js). cal.k.dauho b=1.1 kept in this branch: it was taken on the broken board, so until her re-test NPC dauho hands centre low (band lo 1 / hi 4.1). Analyst A recommends REMOVING the entry until her re-test (NPCs fall back to the default band) — a BAL data call for MAIN/owner (first-try rule), not made by this worker.
+
+## E — identity changes the RESULT (owner 08:30Z), NPCs the same (law 1)
+BAL knob (one core): BAL.orig.res = {tr:2, doan:-1, doan2:-2, lo:0, hi:10} — final score = clamp(graded play + bonus, lo, hi); bonus = tr when the kind's art is a SỞ TRƯỜNG of her current identity (BAL.orig.art on mg-fair-hands, main road/side road), doan for her 1st sở đoản, doan2 only for an identity whose story says she truly cannot (rare). Kind→art map from §A2 (ve/theu/kim/hoa→hoa; dan→cam; co/dauho→ky; tho/doi/doden→thi; mua/tat/ne/ban→vu; huong→y; banh→y/nau).
+Sở đoản lists: §A2 list stands (2 untrained arts per road, never a strong art of that road), now read as a RESULT malus instead of a negative bậc / eased board. Slow study in a weak art (owner 07:15Z): BAL.orig.doan.study .5 (lesson gain multiplier) — hook still to trace.
+NPCs: the same BAL.orig.res on mgNpcRaw's result by their upbringing (mgOrgLv roads); under 08:30Z the mg-fair-hands upbringing lift (board d + hand.art .2) should become this result bonus so both sides use ONE mechanism (law 1) — a change for review/mg-fair-hands when it lands.
+mg-fair-hands combination (§A2 finding kept): centre NPC hands on 7.5 (the matching-board adult), NOT on her b — after §C her b sits at 7.0–8.0 anyway, so the two now nearly coincide and her order is kept by the band, not flattened.
+CONTEST SIM (6 entrants; her play = T + N(0,1.2) + bonus; NPC = 7.5 + third offset (±.5 / +.5..2.5 / −.5..2.5) + N(0,1.2) + their own identity (+2 p .30, −2 p .15); 40k runs). P1st / Ptop3 / mean place:
+| her board T | sở đoản −2 | sở đoản −1 | ordinary | sở trường +2 |
+| 7.0 | 0/5/5.3 | 1/14/4.8 | 3/32/4.1 | 25/76/2.6 |
+| 7.5 | 0/9/5.1 | 2/22/4.5 | 6/43/3.7 | 33/84/2.3 |
+| 8.0 | 1/15/4.8 | 3/32/4.1 | 10/55/3.3 | 43/90/2.0 |
+(without NPC identity bonus: +2 → 37–58 % first, 83–95 % top 3.)
+Samples per identity (T from §C; trường +2, đoản −1):
+| identity | ve | co | dan | mua | tat |
+| ch_ho (trường ve dan mua tat) | +2 41/89 | 0 10/53 | +2 37/87 | +2 31/82 | +2 27/79 |
+| td_ke (trường ve co dan; đoản mua tat) | +2 41/89 | +2 42/90 | +2 38/87 | −1 1/20 | −1 1/16 |
+| tt_co (trường co dan; đoản mua tat) | 0 10/53 | +2 42/90 | +2 38/87 | −1 1/20 | −1 1/17 |
+| dtq_bien (trường co mua tat; đoản dan) | 0 10/53 | +2 42/90 | −1 2/26 | +2 31/82 | +2 27/78 |
+| cnv_mat (trường mua tat; đoản co) | 0 10/53 | −1 3/31 | 0 8/48 | +2 31/82 | +2 28/78 |
+Read: every life plays differently (td_ke wins the arts, loses the dances; dtq_bien the reverse). Sở trường ≈ a top-3 nearly always and a win 1 in 3 — not "sure" while 1/3 of NPC hands are better and 30 % of NPCs also have that art as a strength (law 1). If she wants "≈ sure win" in sở trường: tr 3 (→ ≈55 % first, ≈95 % top 3) — her call, not ours. Sở đoản −2 gives ≤1 % first / 5–15 % top 3 = breaks 06:35Z ("không có nghĩa rằng là tôi cứ thua hoài"); −1 keeps a top-3 1 time in 5 → recommend −1 as the default.
+Still open (from §A2): startContest total = talent + raw×3 lets talent dominate and ignores NPC upbringing (law-1 gap) — separate fix, not in this package.
+
+## F — expert verdict on MAIN's 08:35Z view (law 8)
+(1) "Tune each board so her usual score is ≈7–8, not 10" — AGREE. Flat bonuses only mean something when the base sits mid-range and well below the cap: D&D 5e "bounded accuracy" keeps targets mid-range so a +2 always shows (Mearls/Crawford, PHB 2014 design notes); learning research puts the best challenge near 80–85 % success (Wilson, Shenhav et al., "The Eighty Five Percent Rule for optimal learning", Nature Communications 2019; flow channel, Csikszentmihalyi 1990; Hunicke 2005 dynamic difficulty). With base 10, +2 is fully eaten by the 0–10 clamp; with base 8 the average loss is ≈.5, with 7.5 ≈.25. Refinement: a 7–8 band that keeps her order (§C), not one flat 7.5.
+(2) "Sở trường +2 / sở đoản −2 on the RESULT, shown as a small seal line" — AGREE on the result + the visible line; DISAGREE on symmetric −2. Players accept modifiers they can see (XCOM shot breakdown, Civilization combat preview, Disco Elysium check tooltips list every +/−); a hidden −2 reads as a broken game. Losses weigh about twice gains (Kahneman & Tversky 1979, prospect theory), so −1 already feels as strong as +2; the sim shows −2 leaves ≤1 % wins, against her 06:35Z words. → sở trường +2, sở đoản −1 (−2 only for a story-level "cannot"). The line must be cổ trang words from the kit result row (e.g. «Sở trường: thêm 2 điểm» / «Sở đoản: bớt 1 điểm»; numbers of points are allowed, no %), via the existing kit result rows — no new part.
+(3) "Optional: a little extra time / tolerance for sở trường, less for sở đoản" — DISAGREE (park it). It double-counts the same strength (+2 AND an easier board), contradicts her own 08:30Z line "identity changes the RESULT, not the board", hides the size of the effect (players cannot read a 5 % wider window), and is a new feature under law 18. If she wants the strength "felt in the hands", the honest way is the visible +2 line at the end, plus the intro row naming the art as sở trường before play.
+Summary for ROOT-74: boards → her band 7–8 keeping her order (§C, 26 kinds, BAL only, law 5 kept); result bonus BAL.orig.res tr +2 / doan −1 (doan2 −2 rare), clamp 0–10, NPCs the same (law 1); show the bonus as a kit result line; no board-feel option. Owner decides.
