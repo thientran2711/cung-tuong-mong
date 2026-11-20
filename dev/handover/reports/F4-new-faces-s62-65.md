@@ -62,3 +62,40 @@ PAIRS (pair_verdict clean) and from each other; nearest root mains: s62 8.3 (s52
 ~138 cr each), look at each, one sheet with big labels (name · group · "MẶT MỚI"), push, send the sheet path. FACE_CUTS untouched until owner OK.
 
 Credits used: 0.
+
+## c09 hand redraw (ROOT-66 GO; owner 20/11 ~06:45Z "Rồi sẵn tiện nha, vẽ lại cái cô C09 này đi. Cái tay của cổ này giờ tôi nhìn tôi mới để ý. Cái tay trái cổ cầm lồng đèn nhưng mà thực tế tay này là tay phải.")
+- Builder dev/art/face-common/make_c09_hand.py → c09.v3h.FULL.txt = approved c09.v3.FULL.txt (gen xSBWQlajfW, cut xSBWFuTjfW, seed 7172, ref eIyOFEidqL) +
+  ONE "HANDS:" sentence after the pose (lantern stick in her LEFT hand = right side of the picture, thumb on the upper side toward her body, 4 fingers
+  under; other hand a correct RIGHT hand) + FG.final (master block + D9 forehead line: c09.v3 failed today's gate without them — M10, S34).
+- Gate-forced word change (flag): B20 DEEP COLOUR refuses "deep rose" → "rose" ×4, hex #C16776 unchanged.
+- Gate `python3 dev/art/check_store.py dev/art/face-common/c09.v3h.FULL.txt --scope face --pid c09` PASS.
+- Gen w4atqqr7EI → cut UPvIb4owny, gpt-2-6 1024x2304 2k seed 7172, 1 try, 135 + 3 = 138 cr. (One earlier call was refused by the server before
+  generating — bad model name — 0 credits.)
+- Looked full size + hand zooms + face: lantern hand is now a correct LEFT hand (palm toward the viewer, thumb over the stick, four fingertips under it);
+  OLD was the back of a hand with thumb on top = a right hand (owner was right). Other hand open, five fingers. Eyes level, lips closed, no teeth, no mark.
+- Side changes (not fixed, L777): free hand hangs open (OLD lifted the skirt) · shoes pink (OLD blue) · collar embroidery now flowers · face a little
+  less baby-round · skirt a touch lighter rose.
+- Sheet: dev/handover/review-sheets/new-faces-v4/c09_hand_F4.jpg (make_sheet_c09_hand.py): CŨ | MỚI, full figure + hand zoom + face zoom, big labels.
+- FACE_CUTS / FACE_MAP NOT switched (owner OK pending). Credits F4 total: 138.
+
+## Earrings + colour re-pick (~07:00Z)
+- Owner rule (ROOT-66 relay, verbatim "…không ai được đeo hoa tai."): "Bare earlobes: she wears NO earrings, nothing at the ears." added before
+  "No text, no labels." in make_new_s62_65.py and make_c09_hand.py (skipped once NOEAR1 puts it in the master block). Gate PASS ×5 (s62–s65, c09.v3h).
+- c09 picture already drawn (w4atqqr7EI): LOOKED at the ears — visible ear bare, other ear under the hair → no earring. c09.v3h.FULL.txt now also carries the sentence (for any rerun).
+- P6 pushed (P6.md: "s62–s65 left out"; palettes_season_deep.json overwritten, owner OK "toned palette"). My earlier picks clashed with P6's
+  same-season pairs (s63 FAIL c31/s49, s65 FAIL s32, s62 WARN s48) → re-picked (still PLACEHOLDER, no gens), no FAIL/WARN vs any same-season pair of P6's file:
+  | id | season | main | phụ |
+  |---|---|---|---|
+  | s62 | Đông | ice blue #71B5D7 | mint mist #CDF2E0 |
+  | s63 | Thu | amber #CB996C | ivory #F3E7CE |
+  | s64 | Xuân | peony pink #F8B3D3 | smoke lilac #ECE2FE (unchanged) |
+  | s65 | Đông | jade #4EA989 | peach cream #FBDAC1 |
+  Mains ≥ 26 ΔE2000 apart. Nearest of P6's mains: s62 5.7 (s48) · s63 3.3 (m19) · s64 4.7 (m02 xuân) · s65 5.8 (s36). The Dịu dàng band is nearly full:
+  only 2 clean candidates were left for s63, both at the band's darker edge (OKLCH L .72, L* 66).
+  Item colours re-checked: brass + red cord (ice blue/mint) · brown rabbit (amber/ivory — brown is close-ish to amber, flag) · golden-orange loquats (pink/lilac) · brown sandalwood (jade/peach).
+
+## c09 APPROVED (owner "Duyệt", Lượt 1044) → switched ~07:05Z
+- FACE_CUTS_L703.json c09.cut xSBWFuTjfW → UPvIb4owny (src c09.v3h.FULL.txt) · FACE_MAP_L703.json c09 (gen w4atqqr7EI, ver v3h, kind HANDFIX-F4, group unchanged
+  "Công chúa (Tinh nghịch)") · face crop face_page/faces/c09.jpg (crop.py on the new cut, looked) · ledger OWNER-OK line · LOOK_GROUPS.md line. No CDN step (F3's s44 had none).
+- NOT touched: dev/art/earring-test/anchors.json + EAR1.md still use the old cut xSBWFuTjfW (c09, one ear picture-left) → EAR1 refits. The new picture
+  also shows one ear on the picture's left, bare. face_page/ASSETS_L703.json + face_tick.html (old L703 page) also still list the old cut, same as s44 (F3 didn't update them).

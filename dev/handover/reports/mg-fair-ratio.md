@@ -1,6 +1,6 @@
 # mg-fair-ratio — worker report (opus wk session_01Rc5AsMnKfGBSQk1sEvtKda; foreman C-AG #28 → #29 session_01Rc5AsJ8GMpdM1fyxzYaf1d) — BUILT FOR REAL (owner OK OD 20/11 ~07:15Z; next: BIG opus rv)
 PRIORITY #1 CHECK: OD 20/11 ~01:18Z (thirds) / ~01:42Z / ~01:50Z (upbringing) / ~06:20Z (ratio ask) / ~06:40Z (bell curve, canon overwrite of the 15/20/65 table) / ~07:15Z (OWNER OK) / ~07:20Z (centre = average adult ≈ 7, via MAIN → C-AG #29) | main 37e4a68f: BAL.ag.mg2.cal.k (27 of 31 kinds), jmgcal mgCalBand, jmgt mgHand / mgNpcRaw | review/mg-fair-hands PASS 3fe87277 = the mechanism, reused (branch made from it) | review/cal-p2 read only (report §A2 / §B), not touched | claims: this worker.
-START_CTX 4 % (1M window). Branch `review/mg-fair-ratio` = review/mg-fair-hands 3fe87277 + merge LIVE origin/main 37e4a68f (50cd0a9f; still LIVE at push) + code **10919436** + site build **447fadb1**. The first pass (fixed group split, 78f11921 / b3f53559) is overwritten in place by the bell curve (law 14).
+START_CTX 4 % (1M window). Branch `review/mg-fair-ratio` = review/mg-fair-hands 3fe87277 + merge LIVE origin/main 37e4a68f (50cd0a9f; still LIVE at push) + code **10919436** + merge LIVE eb056f7b (mg-noword-a; site only conflicts) + site build **996b17d0**. The first pass (fixed group split, 78f11921 / b3f53559) is overwritten in place by the bell curve (law 14).
 
 ## What (law 4 one core; upbringing, art lift, law 1, law 5 kept)
 - **BELL CURVE** (owner OD 20/11 ~06:40Z → OK ~07:15Z): every NPC's average play in a kind (hand − w/2) = one hashed draw of **Normal(ctr, sd)** clamped ±3 sd — the real adult population, **NOT centred on her**. jmgt `mgZ(id)` (Box–Muller of two hashes on person + kind) → `mgHand` = c + sd·z, c = ctr + w/2.
@@ -102,7 +102,7 @@ mean exChance % over every live consort below Hoàng hậu, 8 fresh courts (72 c
 | **bell curve (this head)** | **86.4** | 0 | 27 | 100 |
 Answer: the jump is **fixed as a mechanism fault** — NPC hands no longer follow her (high) b, so the thirds' 99 % is gone; the bell curve sits close to today's main (+4) with a real spread (p10 27 %). The 3–9 % was measured on 72922870 when only Đàn was calibrated; LIVE main has since moved to ≈ 82 % on her own codes (its old band followed b). The remaining level (median NPC passes) is the exam's own bar (BAL.ex.bar 22 / 25 / 28 vs play avg × 6 + Tứ đức + art): an average adult play of 7 clears it — a promotion-pace question for BAL.ex if MAIN wants slower NPC promotions, not the ratio.
 
-## Tests (head 447fadb1)
+## Tests (head 447fadb1; re-run on 996b17d0 after the eb056f7b merge: mg-fair-hands 18, ag-mgcal 14, ag-mgh 10, origin-arts 8 all ok)
 | test | result |
 |---|---|
 | assemble + build_site | ok |
