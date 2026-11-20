@@ -346,7 +346,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | mg-noword-b (sonnet; OWNER rule OD 20/11 ~05:10Z no text in mini-game play; kinds group b) | review/mg-noword-b; briefs/root73-mg-noword-b.md | MAIN ROOT-73 | session_01Rc5AsJzUL1xc6n5B1bzUVs | SẴN SÀNG KIỂM 7e0d6c26 (round 2 clarity) (review/mg-noword-b; banh waits for review/mg-visual) | 20/11 04:53Z |
 | MAIN ROOT-74 (opus; child of ROOT-73, depth 3) | handover HANDOVER_SESSION9 | ROOT-73 | session_01Rc5AsLW7a12BUC5kZhtsTy | RUNNING | 20/11 04:55Z |
 | FOREMAN E #16 (opus; child of E #15, depth 6) | handover FOREMAN_E_STATUS | FOREMAN E #15 | session_01DgYSWnBz5jJxoLHrf1deug | RUNNING | 20/11 04:58Z | PICKUP 05:12Z START_CTX ~13 %, wake trig_0185QD8tDryHn1HXWKXxhKbu :47 |
-| REVIEW mg-back (BIG opus) of 883aaa7a | review/mg-back(-rv); briefs/rv-root74-mg-back.md | MAIN ROOT-74 | session_01Rc5AsJgLB4y1dGfnpRG8qm | RUNNING | 20/11 05:28Z |
+| REVIEW mg-back (BIG opus) of 883aaa7a | review/mg-back(-rv); briefs/rv-root74-mg-back.md | MAIN ROOT-74 | session_01Rc5AsJgLB4y1dGfnpRG8qm | FAIL 883aaa7a, 3 fixes (reports/rv-mg-back.md) → worker NLKFjftT | 20/11 06:20Z |
 | mg-env (sonnet; OWNER bug OD 20/11 ~06:55Z Chải chuốt no green zone; whole group engine env defaults) | review/mg-env; briefs/root74-mg-env.md | MAIN ROOT-74 | session_01Rc5AsMwM9DrWGScmHGEFvQ | SẴN SÀNG KIỂM 4f3b78f (quickcheck PASS) | 20/11 |
 | REVIEW mg-noword-a (SMALL sonnet) of ab5e4f68 | review/mg-noword-a(-rv); briefs/rv-root74-mg-noword-a.md | MAIN ROOT-74 | session_01Rc5AsK5AbeBQUR9bnWpJ4q | RUNNING | 20/11 05:38Z |
 | FOREMAN C-AG #28 (npc-agent + whole jobs from MAIN; child of C-AG #27, depth 6) | handover FOREMAN_C_STATUS | C-AG #27 | session_01Rc5AsLarKgavDpQSsAHHYB | RUNNING | 20/11 05:35Z |
