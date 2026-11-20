@@ -38,7 +38,7 @@ for s,sv in SE:
     for part in (0,1):
         sub=ppl[part*45:(part+1)*45]; cols=9; rows=(len(sub)+cols-1)//cols
         im=Image.new("RGB",(cols*CW+40,rows*CH+150),(250,246,238)); d=ImageDraw.Draw(im)
-        d.text((20,15),f"MÀU LÔNG PHƯỢNG · MÙA {sv} · phần {part+1}/2",font=F(46,True),fill=(110,20,30))
+        d.text((20,15),f"MÀU LÔNG PHƯỢNG · MÙA {sv} · phần {part+1}/2   ·   vẽ bằng code · 0 cr · TỔNG 0 cr",font=F(46,True),fill=(110,20,30))
         d.text((20,75),"Phượng thêu trên áo (HQP t7 / Hoàng hậu t8) VÀ phượng trên mũ = CÙNG bộ màu này · màu của chính người đó · viền chỉ vàng · ô nền = màu áo chính",font=F(24),fill=(60,60,60))
         for i,k in enumerate(sub):
             x=20+(i%cols)*CW; y=130+(i//cols)*CH; p=T[k][s]["plumage"]; m=D[k][s]

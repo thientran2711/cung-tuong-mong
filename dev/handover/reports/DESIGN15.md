@@ -130,3 +130,6 @@ Hình (tên + nhóm ghi trên hình, A27): dev/handover/review-sheets/phoenix_L1
 Bảng: phoenix_L1536.json (kèm câu EN 'words' cho builder) + phoenix_L1536.md. Script: make_phoenix_L1536.py.
 Ghi chú: lớp ngoài lông = màu áo chính → trên áo cùng màu, phượng chỉ nổi nhờ viền vàng + màu phụ + màu đậm (như v7 L1430). Nếu chị muốn phượng nổi hơn: đổi thứ tự (phụ ngoài, chính trong). Chưa nối vào builder (G33 builder HOLD).
 Câu hỏi: 'đậm' là màu thứ 3 do tôi đề xuất (chính tối hơn một chút) — chị có muốn chỉ 2 màu (chính + phụ) không?
+
+## A44 (owner L1538) — model + credit trên hình
+fabric_L1534/*_A44.jpg: mỗi ảnh có dòng model + cr (Magnific GPT 2.6 · 135 cr theo gen_ledger/GEN1; ảnh chụp màn hình của chị = ChatGPT chị thử · 0 cr) + TỔNG mỗi tấm: S 675 · A 810 · B 270 · C 135 cr (đã tiêu trước đây; làm sheet = 0 gen). phoenix_L1536 sheets: 'vẽ bằng code · 0 cr · TỔNG 0 cr'.
