@@ -86,10 +86,13 @@ def main():
     HAND = {'c32': (dict(main='soft ivory', main_hex='#EDDCC6', sec='indigo blue', sec_hex='#49659C'),
                     'phụ gần trùng c14 → chàm ngả xanh hơn 10°, giữ ngà + chàm (cặp kinh điển), giữ độ đậm'),
             's19': (dict(main='soft garnet red', main_hex='#AA3C4E', sec='pale jade', sec_hex='#B2D3C6'),
-                    'phụ xám → ngọc nhạt cùng độ sáng: đỏ lựu + ngọc bích (cặp lụa cổ điển), khác s07 đỏ rượu + xanh lam')}
+                    'phụ xám → ngọc nhạt cùng độ sáng: đỏ lựu + ngọc bích (cặp lụa cổ điển), khác s07 đỏ rượu + xanh lam'),
+            's44': (dict(main='soft burnt sienna', main_hex='#A6593F', sec='sage green', sec_hex='#94B594'),
+                    'phụ xám → xanh lá xô thơm cùng độ sáng (bỏ xám); F3 vẽ s44 bằng #94B594')}
     for k, (q, why) in HAND.items():
         log.setdefault(k, dict(old=dict(R[k]), why=[]))
-        log[k]['old'] = {x: D[k][D[k]['root_season']][x] for x in ('main', 'main_hex', 'sec', 'sec_hex')}
+        src = D[k][D[k]['root_season']]; src = src.get('root_drawn', src)     # the DRAWN pair (s44 deep root already patched)
+        log[k]['old'] = {x: src[x] for x in ('main', 'main_hex', 'sec', 'sec_hex')}
         log[k]['why'] = [why]; R[k] = q
     left = [(a, b) for a, b in itertools.combinations(ids, 2) if S[a] == S[b] and pair_verdict(R[a], R[b])[0] == 'FAIL']
     out = {'_note': __doc__.strip(), 'status': 'PROPOSAL — owner approves the classification before per-person seasons',
