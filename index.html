@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"12ad4b54+","t":"2026-11-20T06:35Z","c":"role-parity probe (drift-2 method, no exempt): asHitPick asked for the Hoang hau too (jmline mlMonth runs mlHit over consorts(), which hold…","b":"56038b680ccb","h":[{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"}]};
+window.CTM_BI={"s":"f9808562+","t":"2026-11-20T08:31Z","c":"role-parity probe (drift-2 method, no exempt): asHitPick asked for the Hoang hau too (jmline mlMonth runs mlHit over consorts(), which hold…","b":"e14070bdf0e1","h":[{"s":"6c45e65b+","t":"2026-11-20T06:51Z","c":"Chải chuốt hiện rõ vùng xanh trong Thử tay"},{"s":"e8aa37ce+","t":"2026-11-20T07:04Z","c":"Danh xưng tì nữ gộp một dòng: chức và phẩm"},{"s":"c74d3afd+","t":"2026-11-20T07:16Z","c":"mg-score-same: a success the time part cut shows its pop gold, not green (co kim doden doi le tc thq xa) — C-AG #29 order"},{"s":"b218d1d2+","t":"2026-11-20T06:42Z","c":"cal-p2: drop cal.k.dauho 1.1 (taken on the broken Đầu hồ board; she re-tests) — ROOT-74 06:04Z"},{"s":"bb5a84b7+","t":"2026-11-20T06:15Z","c":"Mini-game sáng rõ hơn khi bấm; Nấu ăn toàn bằng hình; chạm không còn hiện khung vàng."},{"s":"3ff39b1a+","t":"2026-11-20T05:59Z","c":"Mini-game không còn chữ khi chơi ở mười lăm môn; thêm cử chỉ làm mẫu kéo và trượt."},{"s":"2ec6062e+","t":"2026-11-20T05:49Z","c":"Ghi thêm tay nghề Thử tay của năm môn."},{"s":"0de74d9e+","t":"2026-11-20T05:05Z","c":"Ghi thêm tay nghề Thử tay của mười môn."},{"s":"1cbb2bbe+","t":"2026-11-20T01:50Z","c":"caoly-road r2: migrate old nc home-phase saves (fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu, thanh-mai role) on load; oldsave test +home case…"},{"s":"6f2987d5+","t":"2026-11-20T03:26Z","c":"kyngo-unit 14: pin her off the cung nữ road (a random maid start = band 0 made the check flaky)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -43036,7 +43036,8 @@ const PUB=["petcare","accuse","vp","xx","gift","ally","steal","road","takeaway",
 const DK=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat"];
 const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 function fsnap(v){const o={};for(const k of DK.concat(["confined","rel","oan"]))o[k]=v[k]||0;o.alive=v.alive;o.out=!!v.out;o.em=(v.evm&&v.evm.me)||0;return o}
-function sendRes(v,k,b0,txt,id,pet,items,fam){if(CW.ctx&&!fW())return;/* part D: her act on the host run by the host in her context: TH.bridge carries it */const b1=fsnap(v);const fx={};for(const x of DK)if(b1[x]!==b0[x])fx[x]=b1[x]-b0[x];
+function sendRes(v,k,b0,txt,id,pet,items,fam){if(CW.ctx&&!fW()){/* jpma r3 fix B: TH.bridge carries stats only; the «Cùng chơi» practice of the host lands on his own S once her context closes */
+  const ar=(fam||[]).filter(o=>o&&o.op==="art");if(ar.length&&CW.thin&&CW.thin.D&&CW.thin.D.after)CW.thin.D.after(()=>{try{for(const l of famApply(ar).out)log(l)}catch(e){console.error("pm art",e)}});return}/* part D: her act on the host run by the host in her context: TH.bridge carries it */const b1=fsnap(v);const fx={};for(const x of DK)if(b1[x]!==b0[x])fx[x]=b1[x]-b0[x];
  const flags={rel:b1.rel-b0.rel,oan:b1.oan-b0.oan,em:b1.em-b0.em,conf:b1.confined-b0.confined,dead:b0.alive&&!b1.alive,cold:!b0.out&&b1.out};
  const t=String(txt||"").replace(/<[^>]+>/g,"");const caught=/bị lộ|bị bắt|phát giác|khai ra|tố giác/.test(t);
  /* review/looks-2 r1 FAIL 1: face marks / looks the act put on her entry ride THIS message (tuần-scoped looks would expire before the week write-back);
@@ -43124,6 +43125,7 @@ function famDiff(t,k,inv0,K0,plants){const ops=[];const L1=t.inv||[];
   const d={};for(const x of ["hp","tal","fond"])if(typeof kd[x]==="number"&&kd[x]!==c[x])d[x]=kd[x]-(c[x]||0);const h0=!!c.heir&&!kd.heir;
   if(Object.keys(d).length||h0)ops.push(Object.assign({op:"kd",n,d},h0?{heir0:1}:{}))}
  if(K0.preg&&!t.preg)ops.push({op:"preg0"});
+ try{if(typeof pmArtTake==="function")for(const ak of pmArtTake(t))ops.push({op:"art",ak})}catch(e){}/* jpma r3 fix B: «Cùng chơi» practice for her */
  return ops}
 /* her side: returns the lines for her note; `quiet` lines are told by their own dialog (Đồ thất lạc) */
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
@@ -43137,6 +43139,7 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
   if(o.how==="burn"){try{if(typeof tsbLedger==="function")tsbLedger({what:nm,how:"cháy",cause:"có kẻ phóng hỏa (chưa rõ là ai)"})}catch(x){}out.push(`<span class="r">Kho đồ của ngươi bốc cháy: mất ${esc(nm)}.</span>`)}
   else if(o.how==="taken"){try{if(typeof tsbLedger==="function")tsbLedger({what:nm,how:"bị lấy",who:fp(),by:friendName()})}catch(x){}out.push(`<span class="r">Ngươi phải nộp ${esc(nm)} cho ${esc(friendName())}.</span>`)}
   else out.push(`<span class="r">${esc(nm)} trong rương ngươi không còn nữa.</span>`)}
+ for(const o of ops)if(o.op==="art"&&typeof pmArtIn==="function"){const l=pmArtIn(o.ak);if(l){out.push(esc(l));loud=1}}/* jpma r3 fix B: the practice of «Cùng chơi» on her own S */
  for(const o of ops)if(o.op==="plant"&&o.e&&o.e.k){const x=Object.assign({},o.e);delete x.ci;S.inv.push(x)}
  /* p2 B4: a thing given to her in the host's world (a contest prize, a bestowal): into her chest, told */
  for(const o of ops)if(o.op==="add"&&o.e&&o.e.k&&typeof IT==="object"&&IT[o.e.k]){const x=Object.assign({},o.e);delete x.ci;S.inv.push(x);loud=1;out.push(`<span class="g">Được ban ${esc(typeof iname==="function"?iname(x):x.k)}${o.why?` (${esc(o.why)})`:""}.</span>`)}
@@ -79244,7 +79247,13 @@ function pmPair(a,t){const k=[key(a),key(t)].sort().join("|");S.pmM=S.pmM&&S.pmM
 function pmFade(a,t){const k=pmPair(a,t);return 1/(1+B().play.fade*(S.pmM.c[k]||0))}
 function pmMark(a,t){const k=pmPair(a,t);S.pmM.c[k]=(S.pmM.c[k]||0)+1}
 /* art practice: the ONE shared rule (her: j2 addArt; an NPC: j85 addArtP — level-ups give stat, Danh, ARTB85 bonus, the công virtue bonus) */
-function pmXp(p,ak){if(!ak||!p||p.coop)return;try{addArtP(p,ak,B().play.xp)}catch(e){}}
+function pmXp(p,ak){if(!ak||!p)return;if(p.coop){pmArtQ(p,ak);return}try{addArtP(p,ak,B().play.xp)}catch(e){}}
+/* r3 fix B (law 1 two-way): the co-op friend's practice lands on HER OWN S — her entry here is a copy, so the art rides the act's result
+   (jcoopworld famDiff → res.fam {op:"art",ak} → famApply on her side adds BAL.pm.play.xp with her own addArt), both directions, one rule */
+const PM_ART=new WeakMap();
+function pmArtQ(p,ak){const L=PM_ART.get(p)||[];L.push(ak);PM_ART.set(p,L)}
+function pmArtTake(p){const L=p&&PM_ART.get(p)||[];if(p)PM_ART.delete(p);return L}
+function pmArtIn(ak){const a=typeof ARTS!=="undefined"&&ARTS.find(z=>z.k===ak);if(!a||!S||!S.artp||S.artp[ak]==null)return"";addArt(ak,B().play.xp);return `Ngươi luyện thêm ${a.n}.`}
 function pmMem(h,a,d,x){try{if(typeof memAdd==="function")memAdd(h,a,d,{x})}catch(e){}}
 function pmSee(a,t){try{return a===S||t===S||knows(a)||knows(t)}catch(e){return false}}
 /* «Cùng chơi»: gain-only (law 3), by the mean of the two plays */
@@ -79283,7 +79292,8 @@ function pmRun(a,t,x){if(!x||!live(a)||!live(t))return"";
    const r=pmDuelEnd(a,t,x,aWins,place);log(pmEnd(r.r)+".");pushModal({t:title,who:pv(o),h:`<p>${r.r}.</p>`});try{showModal();render()}catch(e){}}});return""}
 /* her walk to an NPC who invites / challenges her (go-in-person rule OD 18/11 ~19:55Z; review r1 fix 5): the khắc and the reason, the same rule as pmBtns */
 function pmWalk(p){if(!p||p.coop||together(S,p))return{tc:0,why:"",late:false,k:S.place};const k=whereOf(p),tc=travel(S.place,k);return{k,tc,why:walkBlock(k,tc),late:walkLate(k,tc)}}
-function pmWalkTx(w){return w.tc?`đi sang ${placeName(w.k)} ${w.tc} khắc${w.late?" (tới nơi buổi sau)":""}`:""}
+function pmWalkTx(w){return w.tc?`${w.tc} khắc`:""}/* r3 fix A: the kit word mode keeps only a plain «N khắc» cost; the place + «buổi sau» ride the card line (pmWalkLine) */
+function pmWalkLine(p,play){const w=pmWalk(p);return `Nhận lời thì ngươi đi sang chỗ nàng${w.tc?` (đi đường ${w.tc} khắc${w.late?", tới nơi buổi sau":""})`:""} rồi ${play?"chơi":"thi"} ngay.`}
 /* ---------- the receiver's answers (jrcv shape: i = the L1876 weight slot) ---------- */
 function pmNoO(p,t,x){const F=BAL.ag.cx2.help.fail,me=t===S,up=rk(p)>rk(t)?B().refuse.up:0;
  return{i:2,id:"no",n:rcvKw(2),fx:{},x:`được: giữ thì giờ${x.a==="duel"?", giữ món cược":""} · mất: hai bên quý nhau ${balSg(-F)}${up?`, ${nm(p)} là bề trên, quý ${me?"ngươi":t.name} thêm ${balSg(-up)}`:""}`,
@@ -79294,9 +79304,9 @@ function pmPlayOpts(p,t,x){const P=B().play,me=t===S;
   go:()=>{if(!me)ap(t,{suc:-P.suc});const r=pmRun(p,t,x);return{ok:1,r}}},pmNoO(p,t,x)]}
 function pmDuelOpts(p,t,x){const st=pmStakeOf(p,t,x.s),o=pmOdds(t,p,x.kind),me=t===S,what=st?pmPut(st,t,p):"";
  const w=me?pmWalk(p):{tc:0,why:""};
- const O=[{i:0,id:"full",n:"Nhận lời thách đấu",fx:{},x:`${pmWord(o)} · tốn: ${w.tc?pmWalkTx(w):"không"} · thành: lấy ${pmPut(st,p,p)} của ${nm(p)} · hỏng: mất ${pmPut(st,t,p)} của ${me?"ngươi":"mình"}`,need:w.why?[{t:w.why,ok:false}]:undefined,tsDis:!!w.why,lk:()=>!st||!st.ok||!!w.why,
+ const O=[{i:0,id:"full",n:"Nhận lời thách đấu",fx:{},x:`${pmWord(o)}${w.tc?` · tốn: ${pmWalkTx(w)}`:""} · thành: lấy ${pmPut(st,p,p)} của ${nm(p)} · hỏng: mất ${pmPut(st,t,p)} của ${me?"ngươi":"mình"}`,need:w.why?[{t:w.why,ok:false}]:undefined,tsDis:!!w.why,lk:()=>!st||!st.ok||!!w.why,
   go:()=>({ok:1,r:pmRun(p,t,x)})}];
- if(rk(p)>rk(t))O.push({i:1,id:"half",n:"Nhường bề trên",fx:{},x:`được: ${nm(p)} quý ${me?"ngươi":t.name} +${pmYieldAff(p,t)}, bớt oán ${B().duel.yieldOan} · mất: ${what}`,lk:()=>!st||!st.ok,go:()=>({ok:1,r:pmYield(p,t,x)})});
+ if(rk(p)>rk(t))O.push({i:1,id:"half",n:"Nhường bề trên",fx:{},x:`được: ${nm(p)} quý ${me?"ngươi":t.name} +${pmYieldAff(p,t)}, bớt oán ${B().duel.yieldOan} · mất: ${st&&st.s==="item"?"nộp "+what:what}`,lk:()=>!st||!st.ok,go:()=>({ok:1,r:pmYield(p,t,x)})});
  O.push(pmNoO(p,t,x));return O}
 /* co-op (foreman E #14 ruling (3)): the friend's ask card offers «Nhường bề trên» when the asker outranks the reader — the same answer and preview as pmDuelOpts */
 function pmCoopYield(p,t){if(!p||!t||rk(p)<=rk(t))return null;return{n:"Nhường bề trên",x:`được: ${nm(p)} quý ngươi +${pmYieldAff(p,t)}, bớt oán ${B().duel.yieldOan} · mất: món cược của ngươi`}}
@@ -79312,10 +79322,10 @@ function pmCoopCard(p,k,x){x=pmCoopX(k,x);if(!p||!x)return null;const D=RCVK[x.a
 const okPair=(p,t)=>live(p)&&live(t)&&p!==t&&!(t===S&&(S.confined||isSrvSafe()))&&!(p===S&&(S.confined||isSrvSafe()));
 function isSrvSafe(){try{return typeof isSrv==="function"&&isSrv()}catch(e){return false}}
 RCVK.pmPlay={t:"Lời mời cùng chơi",act:"mời cùng chơi với",kind:"pm",ok:(p,t,x)=>okPair(p,t)&&!!x,
- line:(p,x)=>`<p>${p.name} sai người sang: “Nương nương nhà ta rảnh rang, muốn mời người sang ${placeName(whereOf(p))} cùng chơi ${x&&x.n||""} cho vui.”</p>${p.coop?"":`<p class="past">Nhận lời thì ngươi đi sang chỗ nàng rồi chơi ngay.</p>`}`,
+ line:(p,x)=>`<p>${p.name} sai người sang: “Nương nương nhà ta rảnh rang, muốn mời người sang ${placeName(whereOf(p))} cùng chơi ${x&&x.n||""} cho vui.”</p>${p.coop?"":`<p class="past">${pmWalkLine(p,1)}</p>`}`,
  opts:(p,t,x)=>pmDot(t,pmPlayOpts(p,t,x))};
 RCVK.pmDuel={t:"Lời thách đấu",act:"thách đấu",kind:"pm",ok:(p,t,x)=>okPair(p,t)&&!!x&&!!pmStakeOf(p,t,x.s),
- line:(p,x)=>{const st=x&&pmStakeOf(p,S,x.s);return `<p>${p.name} sai người sang: “Nghe danh tài ${x&&x.n||""} của người, nương nương nhà ta xin so tài một ván ở ${placeName(whereOf(p))}.”</p><p class="past">Cược: ${st?(st.s==="item"?`nàng đặt ${st.wa}, ngươi đặt ${st.wt}`:st.what+" mỗi bên"):""}.${p.coop?"":" Nhận lời thì ngươi đi sang chỗ nàng rồi thi ngay."}</p>`},
+ line:(p,x)=>{const st=x&&pmStakeOf(p,S,x.s);return `<p>${p.name} sai người sang: “Nghe danh tài ${x&&x.n||""} của người, nương nương nhà ta xin so tài một ván ở ${placeName(whereOf(p))}.”</p><p class="past">Cược: ${st?(st.s==="item"?`nàng đặt ${st.wa}, ngươi đặt ${st.wt}`:st.what+" mỗi bên"):""}.${p.coop?"":" "+pmWalkLine(p,0)}</p>`},
  opts:(p,t,x)=>pmDot(t,pmDuelOpts(p,t,x))};
 /* ---------- her side: ask (popup / Hậu cung) ---------- */
 function pmAsk(t,x){if(!x)return"";const kc=B().kc;if(!can(kc))return"";spend(kc);
@@ -79388,7 +79398,7 @@ if(typeof agReg==="function"&&typeof p3O==="function"){
 try{if(window.MEM_DEEDS){Object.assign(MEM_DEEDS,{pmplay:[1,0,"cùng {o} chơi {x}"],pmwin:[-1,0,"thắng {o} một ván {x}, lấy mất món cược"],pmyield:[1,0,"nhường {o} một ván {x}"]})}
  if(BAL.mem&&BAL.mem.w)Object.assign(BAL.mem.w,B().mem)}catch(e){}
 try{if(typeof MGT_OCCN==="object")MGT_OCCN.pm="so tài"}catch(e){}
-Object.assign(window,{pmCoopYield,pmCoopX,pmCoopCard,pmArts,pmR,pmV,pmStakes,pmStakeOf,pmOdds,pmRun,pmAuto,pmX,pmPlayEnd,pmDuelEnd,pmYield,pmYieldAff,pmBtns,pmRows,pmPlayOpts,pmDuelOpts,pmScore,pmItem,pmGoTap});
+Object.assign(window,{pmArtTake,pmArtIn,pmCoopYield,pmCoopX,pmCoopCard,pmArts,pmR,pmV,pmStakes,pmStakeOf,pmOdds,pmRun,pmAuto,pmX,pmPlayEnd,pmDuelEnd,pmYield,pmYieldAff,pmBtns,pmRows,pmPlayOpts,pmDuelOpts,pmScore,pmItem,pmGoTap});
 })();
 /* ================= jnotice: THE ONE NOTICE SYSTEM — kitNotice · top-bar «!» box · top chip · «Tin báo» panel (KIT §42.2, stage-here r4) =================
    Owner OD 18/11 ~22:10Z (ROOT-56, angry): "Bất kỳ một cái thông báo nào của cái game đều phải vô cái ô này hết. Đó, tức là khi mà cái ô này nó sáng
@@ -82235,7 +82245,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="56038b680ccb";window.CTM_BUILD=BUILD;
+const BUILD="e14070bdf0e1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
