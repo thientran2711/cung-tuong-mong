@@ -458,7 +458,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-host-lag #2 (opus; successor of 6rvC3RLv @6fb5ca7a) | review/coop-host-lag | B | session_01N1tNP4bsWeYsVudLfWWFKf | RUNNING | 20/11 13:08Z |
 | GAP OR09 podium-wire (opus; ORDER MAIN ROOT-78 13:02Z; kitPodium + kcPhucPlay fin, BAL marks) | review/podium-wire; reports/podium-wire.md | B | session_01N1tNP4BpQj3Z4jjSkAua3X | SẴN SÀNG KIỂM 02db04af | 20/11 |
 | REVIEW kit-rows-b (sonnet small) of 6ce984a6 | review/kit-rows-b-rv; reports/rv-kit-rows-b.md | MAIN ROOT-78 | session_01Rc5AsMLiYk8Qo5FC3nWVM1 | PASS 92f61247 | 20/11 |
-| REVIEW podium-wire r1 (opus BIG) of 02db04af | review/podium-wire-r1 | B | session_01N1tNP2KN32mTra7iVBwtPR | RUNNING | 20/11 13:58Z |
+| REVIEW podium-wire r1 (opus BIG) of 02db04af | review/podium-wire-r1 | B | session_01N1tNP2KN32mTra7iVBwtPR | PASS d6868a02 (lv[0] 20->11; owner flags: sister on her house kcPow, grudge foul on her) | 20/11 |
 | MAIN ROOT-79 (opus; child of ROOT-78, depth 8 LAST) | handover HANDOVER_SESSION9 | ROOT-78 | session_01Rc5AsMT6GWGyV9SHc2vgNi | RUNNING | 20/11 14:06Z |
 | REVIEW ge-npc r1 (opus BIG) of a28b107f | review/ge-npc-r1 | B | session_01N1tNP6UyqC6o8nnNuZC3Sj | RUNNING | 20/11 14:04Z |
 | ge-batu r2 fixes (opus E28b; E28r FAIL e0424d54, FIX LIST 1–9) | review/ge-batu; briefs/E28b-ge-batu-r2.md | FOREMAN E #19 | session_01DgYSWq3hb2D3NEYyra3aF3 | SẴN SÀNG KIỂM 1ca835da (report ge-batu.md ## ROUND 2) | 20/11 15:20Z |
