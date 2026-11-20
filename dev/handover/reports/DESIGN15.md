@@ -133,3 +133,12 @@ Câu hỏi: 'đậm' là màu thứ 3 do tôi đề xuất (chính tối hơn m�
 
 ## A44 (owner L1538) — model + credit trên hình
 fabric_L1534/*_A44.jpg: mỗi ảnh có dòng model + cr (Magnific GPT 2.6 · 135 cr theo gen_ledger/GEN1; ảnh chụp màn hình của chị = ChatGPT chị thử · 0 cr) + TỔNG mỗi tấm: S 675 · A 810 · B 270 · C 135 cr (đã tiêu trước đây; làm sheet = 0 gen). phoenix_L1536 sheets: 'vẽ bằng code · 0 cr · TỔNG 0 cr'.
+
+---
+# JOB L1545 — CHUYÊN GIA MÀU duyệt bảng lông phượng + ví dụ Q2 (0 gen, vẽ bằng code · 0 cr)
+Vai: nhà thiết kế màu trang phục cấp cao (như dresscode-expert.md). Mỗi người × mùa (360 ô) xét bộ lông với áo (màu chính = thân áo nơi thêu phượng, màu phụ = lớp trong):
+E1 phượng phải đọc được trên áo (ít nhất 1 màu lông cách màu áo ΔE ≥ 22) · E2 màu phụ gần trắng (ngà/kem/sương) → giữ làm điểm sáng, thân phượng = chính đậm hơn · E3 áo đã đậm (L* < 55) → màu thứ 3 làm SÁNG (chính nhạt) thay vì đậm cho khỏi bẩn · E4 áo vàng → viền vàng cổ #B8862F (vàng #EFBD69 chìm) · chỉ dùng màu của chính người đó (G33 A), không đổi bảng màu áo (A31).
+Kết quả: 158/360 ô SỬA (E3 116, E2 57, E4 8; E1 0 — màu phụ luôn đủ tương phản). Ô sửa có nhãn đỏ "SỬA" trên hình; JSON: expert_L1545 (lý do) + plumage_before_L1545; câu EN 'words' cập nhật.
+Hình: phoenix_L1536/phoenix_{xuan,ha,thu,dong}_{1,2}.jpg (tiêu đề "ĐÃ QUA CHUYÊN GIA MÀU (L1545)"). Script expert_L1545.py.
+Q2 ví dụ: phoenix_L1536/Q2_mock_s62_thu_A_vs_B.jpg — s62 thu, cùng dáng phượng trên nền áo #DF9ED9: A lông ngoài = màu áo (hoà vào áo, chỉ nổi nhờ viền vàng) · B lông ngoài = màu phụ (nổi rõ). Ý chuyên gia: B cho phượng lớn trên ngực/vạt áo; A hợp hoạ tiết nhỏ, kín đáo.
+Context: ~27 % (START 3 %) — sát ngưỡng chuyển giao 28 %; job sau nên giao cho phiên mới.
