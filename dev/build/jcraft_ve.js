@@ -79,7 +79,7 @@ function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
   /* the inkstone: tones on its rim, the brush tip darkens while held */
   {const lit=phase==="ink";g.save();g.globalAlpha=lit?1:.55;if(!kg82Spr(g,"ve-inkstone",ST.x+ST.w*.5,ST.y+ST.h*.45,ST.w*.62,null,{})){g.fillStyle="#2a2622";k91RR(g,ST.x+ST.w*.12,ST.y,ST.w*.76,ST.h*.9,10);g.fill()}
    const lvl=fl&&fl.mode==="load"?Math.min(T-.001,T*(now-fl.loadAt)/RAMP):-1,sw=Math.min(ST.w*.8/T,22);
-   for(let i=0;i<T;i++){const x=ST.x+ST.w*.5+(i-(T-1)/2)*sw*1.15,y=ST.y+ST.h*.98;g.fillStyle=k91VeInk(i/(T-1));g.strokeStyle=Math.floor(lvl)===i?"#e0a526":"#6b5a3c";g.lineWidth=Math.floor(lvl)===i?3.5:1.2;g.beginPath();g.arc(x,y,sw*.44*(Math.floor(lvl)===i?1.25:1),0,Math.PI*2);g.fill();g.stroke()}
+   for(let i=0;i<T;i++){const x=ST.x+ST.w*.5+(i-(T-1)/2)*sw*1.15,y=ST.y+ST.h*.98;g.fillStyle=k91VeInk(i/(T-1));g.strokeStyle=Math.floor(lvl)===i?"#e0a526":"#6b5a3c";g.lineWidth=Math.floor(lvl)===i?3.5:1.2;g.beginPath();g.arc(x,y,sw*.52*(Math.floor(lvl)===i?1.25:1),0,Math.PI*2);g.fill();g.stroke()}
    if(fl&&(fl.mode==="load"||fl.mode==="loaded")){const tn=fl.mode==="load"?Math.floor(lvl):Math.max(0,fl.tone-Math.floor(DRY*(now-fl.loadedAt)/1000)),bx=ST.x+ST.w*.5,by=ST.y+ST.h*.35;
     if(!kg82Spr(g,"ve-brush",bx,by,UN*1.6,null,{ax:.06,ay:.95,glow:fl.mode==="load"?BAL.mgFx.glow:null})){g.strokeStyle="#6b4a2a";g.lineWidth=5;g.lineCap="round";g.beginPath();g.moveTo(bx+UN*.9,by-UN*.9);g.lineTo(bx,by);g.stroke()}
     g.fillStyle=k91VeInk(tn/(T-1));g.beginPath();g.arc(bx,by,UN*.14,0,Math.PI*2);g.fill()}g.restore()}
@@ -109,7 +109,7 @@ function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
   if(phase==="ink"&&P.li<P.lay.length){const l=P.lay[P.li];
    if(fl.mode==="loaded"){const c=C.client(l.s.x,l.s.y);return{x:c.x,y:c.y,thinkMs:Lv("flick")}}
    const sc2=C.client(ST.x+ST.w*.5,ST.y+ST.h*.45);
-   if(fl.mode==="load"){const lv=Math.min(T-.001,T*(performance.now()-fl.loadAt)/RAMP);return{hold:!(lv>=l.tone+.3||lv>=T-.01),x:sc2.x,y:sc2.y}}
+   if(fl.mode==="load"){const lv=Math.min(T-.001,T*(performance.now()-fl.loadAt)/RAMP);return{hold:!((lv>=l.tone+.3||lv>=T-.01)&&performance.now()-fl.loadAt>=HOLDMIN+25),x:sc2.x,y:sc2.y}}
    return{hold:true,x:sc2.x,y:sc2.y}}
   return null};
  next();return()=>{done=true;stop()}}
