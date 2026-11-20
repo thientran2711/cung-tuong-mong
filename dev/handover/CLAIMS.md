@@ -460,3 +460,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW kit-rows-b (sonnet small) of 6ce984a6 | review/kit-rows-b-rv; reports/rv-kit-rows-b.md | MAIN ROOT-78 | session_01Rc5AsMLiYk8Qo5FC3nWVM1 | PASS 92f61247 | 20/11 |
 | REVIEW podium-wire r1 (opus BIG) of 02db04af | review/podium-wire-r1 | B | session_01N1tNP2KN32mTra7iVBwtPR | RUNNING | 20/11 13:58Z |
 | MAIN ROOT-79 (opus; child of ROOT-78, depth 8 LAST) | handover HANDOVER_SESSION9 | ROOT-78 | session_01Rc5AsMT6GWGyV9SHc2vgNi | RUNNING | 20/11 14:06Z |
+| REVIEW ge-npc r1 (opus BIG) of a28b107f | review/ge-npc-r1 | B | session_01N1tNP6UyqC6o8nnNuZC3Sj | RUNNING | 20/11 14:04Z |
