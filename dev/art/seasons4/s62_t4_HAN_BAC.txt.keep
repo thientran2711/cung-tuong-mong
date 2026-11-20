@@ -1,0 +1,16 @@
+base: dev/art/seasons4/han_bac_base/s62_t4_HAN_BAC_02cd263.txt
+allow: no cloud collar   # Luot 1263 owner: signature piece added
+allow: no shoulder piece   # Luot 1263 owner: signature piece added
+allow: smooth with a soft satin lustre and a faint woven self-pattern   # Luot 1275 owner: fabric matte, new m03_t4_VAI_DOAN text
+allow: The satin has real weight   # fabric: lead sentence shortened, redundant with new FABRIC text (length)
+allow: a little more than thin silk   # same
+allow: her signature colour family light clear warm plum and bright blush pink stays the MAIN robe colour   # colour-family restatement, foreman OK
+allow: the robe itself is clearly light clear warm plum silk   # same
+allow: NOT a cream   # same
+allow: beige or all-gold robe   # same
+allow: never a pair   # hair-flower dup, length
+allow: her head inclined gently toward the hand that holds the item   # GRACE trim, foreman OK
+allow: her face still toward the viewer   # GRACE trim
+allow: never in profile   # boilerplate trim (length), head-turn sentence kept
+allow: every rank its own   # boilerplate: GRACE trim, foreman OK
+allow: Everyone beautiful at every age   # boilerplate, foreman OK

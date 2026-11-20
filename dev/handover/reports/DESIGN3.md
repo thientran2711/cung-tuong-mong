@@ -28,3 +28,9 @@ Edited dev/art/seasons4/make_han_bac.py (SIG dict + OPEN clause) and regenerated
 ## Watch in ChatGPT tests
 Only a "signature piece open at the front" tests whether wide collar still shows; t5 two capes vs t4 capelet may look alike — compare. SWAP56 may change main-builder t5/t6 words later; re-read if so.
 Gens 0 · credits 0.
+
+## v4 (Foreman owner Lượt 1274/1275)
+- Fabric t4–t6: new matte text from m03_t4_VAI_DOAN.txt picked up by the builder regex (soft MATTE finish, faint lustre, never glossy/shiny). t7/t8 gấm text has no shiny/lustre words — nothing added.
+- To keep ≤10 000 with the longer fabric text I shortened the lead of DESIGN2's weight sentence: "The satin has real weight, a little more than thin silk: the wide sleeves…" -> "The wide sleeves…" (t4–t6; its meaning is now in the new FABRIC text) — FLAGGED for Foreman. t4 also ", never a pair", ", no cluster" (hair-flower dup); t6 ", no handle", ", no stick". OPEN clause now "worn open at the front so the wide collar shows".
+- A38 sidecars s62_tN_HAN_BAC.txt.keep + base copies han_bac_base/s62_tN_HAN_BAC_02cd263.txt; `keep_check.py --all` PASS for t4–t8 (allow list with reasons inside each .keep).
+- Lengths: t4 9997 · t5 9769 · t6 9981 · t7 9909 · t8 9922. Gate unchanged (t7/t8 PASS; t4–t6 S12 + M06/M07 known).
