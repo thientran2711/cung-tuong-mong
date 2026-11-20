@@ -41,7 +41,7 @@ const src=['j82.js','j91.js'].map(f=>fs.readFileSync(path.join(__dirname,'../bui
  ok(/kg82FxPop\(i===showI\?showAt:/.test(src)&&/SP-DARK/.test(src)&&!/SP\*\.72/.test(src),'B each shown step pops from its own start; no typed .72 lit share');
  ok(M.dark>=200&&B.mua.dark&&B.mua.dark.length===2,'B BAL.mgTier.lev.mua.dark',B.mua.dark);
  // C — source + copy of the fire physics on the real BAL
- ok(/gu=gu>0\?Math\.min\(gu,REACH\*\.1\):Math\.max\(gu,-REACH\*\.34\)/.test(src)&&/REACH=mgLev\(env,"banh","reach"\)/.test(src),'C k91Cook caps every gust by BAL lev.banh.reach');
+ok(/gu=gu>0\?Math\.min\(gu,REACH\*COOL\):Math\.max\(gu,-REACH\*FAN\)/.test(src)&&/REACH=mgLev\(env,"banh","reach"\),FAN=\.34,COOL=\.1;/.test(src)&&/rr\+=\(\(fan\.size\?FAN:-COOL\)-rr\)/.test(src),'C k91Cook caps every gust by BAL lev.banh.reach');
  const T=await p.evaluate(()=>{const lv=(L,e)=>L[0]+(L[1]-L[0])*Math.min(5,Math.max(0,e))/5,Lb=BAL.mgTier.lev.banh;let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
   const one=(e,cap)=>{const env={lv:e};const LAG=Math.max(.02,lv(Lb.lag,e)),GUA=lv(Lb.gust,e),GAP=lv(Lb.gap,e),RE=lv(Lb.reach,e);
    const Z=[[.14,.36],[.42,.62],[.68,.88]].map(([a,b])=>{const c=(a+b)/2,h=((b-a)/2+.015*e)*mgTol(env);return[c-h,c+h]});
