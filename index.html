@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"851d17a5+","t":"2026-11-21T06:00Z","c":"bang-words: chợ biên trade line the right way round ({land} có ngựa, Đại Hy có sắt); site build","b":"b9a390fdab78","h":[{"s":"38e0fd93+","t":"2026-11-21T04:21Z","c":"Dấu cảm xúc ở góc trên-phải tranh sự kiện, hiện ngay"},{"s":"31114358+","t":"2026-11-21T03:20Z","c":"Đồ mặc: các ô mặc đồ (chơi chung khớp hai bên)"},{"s":"6fb2f34a+","t":"2026-11-21T03:59Z","c":"Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»"},{"s":"8d4f9919+","t":"2026-11-21T04:05Z","c":"Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)"},{"s":"ee8847b0+","t":"2026-11-21T04:13Z","c":"Tab trống: thẻ tranh «Ta chưa có…»; khung không cuộn khi đủ chỗ"},{"s":"0f9d0f77+","t":"2026-11-21T02:52Z","c":"Công chúa ngoại bang: thêm các đường Phù Tang"},{"s":"0b2bbd82+","t":"2026-11-21T03:25Z","c":"Chí tôn: tên «Hoàng thượng» giữa, niên hiệu dòng dưới; Sở trường · Trọng · Dạo này một cột"},{"s":"8da94cef+","t":"2026-11-21T03:27Z","c":"Mini-game: luật gọn 5 giây, bỏ chữ thừa"},{"s":"0266713d+","t":"2026-11-21T03:45Z","c":"Khung người: cột trái hết dải trống, chữ đủ to"},{"s":"181f35de+","t":"2026-11-21T03:25Z","c":"Ô quan hệ lẻ trải hết hàng"}]};
+window.CTM_BI={"s":"cd28b5ad+","t":"2026-11-21T06:08Z","c":"E40r WIP: jtq14 tutorial line for Ba Tư lives (was «Khả hãn … thảo nguyên») + Phù Tang row; screen test (4 lands played); caoly-oldsave pre…","b":"a5189f09cd58","h":[{"s":"38e0fd93+","t":"2026-11-21T04:21Z","c":"Dấu cảm xúc ở góc trên-phải tranh sự kiện, hiện ngay"},{"s":"31114358+","t":"2026-11-21T03:20Z","c":"Đồ mặc: các ô mặc đồ (chơi chung khớp hai bên)"},{"s":"6fb2f34a+","t":"2026-11-21T03:59Z","c":"Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»"},{"s":"8d4f9919+","t":"2026-11-21T04:05Z","c":"Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)"},{"s":"ee8847b0+","t":"2026-11-21T04:13Z","c":"Tab trống: thẻ tranh «Ta chưa có…»; khung không cuộn khi đủ chỗ"},{"s":"0f9d0f77+","t":"2026-11-21T02:52Z","c":"Công chúa ngoại bang: thêm các đường Phù Tang"},{"s":"0b2bbd82+","t":"2026-11-21T03:25Z","c":"Chí tôn: tên «Hoàng thượng» giữa, niên hiệu dòng dưới; Sở trường · Trọng · Dạo này một cột"},{"s":"8da94cef+","t":"2026-11-21T03:27Z","c":"Mini-game: luật gọn 5 giây, bỏ chữ thừa"},{"s":"0266713d+","t":"2026-11-21T03:45Z","c":"Khung người: cột trái hết dải trống, chữ đủ to"},{"s":"181f35de+","t":"2026-11-21T03:25Z","c":"Ô quan hệ lẻ trải hết hàng"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -56876,6 +56876,16 @@ function alt72(s,n){const bac=s.c&&s.c.bac,p0=Math.min(s.p!=null?s.p:(s.b==null?
  if(!st.ch&&st.c&&st.c.bac<0){const o0={n:st.n,p:st.b<100?st.b:null,sk:st.sk,k:st.k,c:st.c,w:st.w,r:st.r,rb:st.rb,l:st.l,lr:st.lr,lrb:st.lrb,fn:st.fn,ok:st.ok,no:st.no,lto:st.f};
   st.ch=[o0,alt72(Object.assign({},st,{p:st.b}),st.n)]}
  else if(st.ch&&st.ch.length&&!st.ch.some(o=>o.alt72)&&st.ch.every(o=>o.c&&o.c.bac<0))st.ch.push(alt72(st.ch[0],st.ch[0].n))} },"T72 alt")}catch(e){console.error("jstory j72",e)}})();
+/* bang-words review (E40r, law 11 whole group): a chapter TITLE may carry a token («Lão {kha} bị bắt» nc_gian .9, «Nhà {v} trong án cũ» cn_than .6);
+   the 23 places that print ARC67[id].t (story card, chapter card, log lines, past-chapter list, hồi header…) showed it raw. ONE fix here: every
+   titled arc whose t holds a {token} gets a getter that fills it through the one token table TOK67 with that arc's live thread (S.st.M or a
+   side thread); no thread (a past chapter) → the same table with an empty thread (nm67 says «một phi tần»). Runs after every arc file loaded. */
+function arcTitleFill67(){try{if(typeof ARC67!=="object"||typeof TOK67!=="object")return;
+ const thr=id=>{try{const L=[S&&S.st&&S.st.M].concat((S&&S.st&&S.st.X)||[]);return L.find(A=>A&&A.a===id)||{}}catch(e){return{}}};
+ for(const id of Object.keys(ARC67)){const a=ARC67[id];if(!a||typeof a!=="object")continue;const d=Object.getOwnPropertyDescriptor(a,"t");
+  if(!d||!("value" in d)||typeof d.value!=="string"||!/\{\w+\}/.test(d.value))continue;const raw=d.value;
+  Object.defineProperty(a,"t",{get:()=>{const A=thr(id);return raw.replace(/\{(\w+)\}/g,(m,k)=>{try{return TOK67[k]?String(TOK67[k](A)):m}catch(e){return m}})},enumerable:true,configurable:true})}}catch(e){console.error("arcTitleFill67",e)}}
+arcTitleFill67();setTimeout(arcTitleFill67,0);
 /* ================= jreign: TÂN QUÂN LẬP UY — the Emperor's side story + her faction road (owner 16/11, D5) =================
    New games only (S.ps + S.reign, review/palace-start). Old saves never see any of this.
    (1) WORLD (shared court, co-op: lives in S.trieu.rg, a W_KEYS world key → host-authoritative; numbers merge as deltas):
@@ -87947,7 +87957,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b9a390fdab78";window.CTM_BUILD=BUILD;
+const BUILD="a5189f09cd58";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

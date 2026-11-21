@@ -28,13 +28,14 @@ const BAD={nc:['steppe','persia','japan'],bt:['steppe','japan'],bd:['korea','per
    const tabs=()=>{for(const t of['story','act','rel','go']){try{tab=t;render();grab('tab:'+t)}catch(e){}}};
    if(!S.kc&&typeof kcOk==='function'&&kcOk(S.origin.k))try{kcInit()}catch(e){}
    grab('start');tabs();
-   for(let m=0;m<MONTHS;m++){const t=S.turn;for(let g=0;g<40&&S&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){out.push('err\t'+e.message);break}grab('buoi')}
+   for(let m=0;m<MONTHS;m++){if(m===6&&S.kc&&!S.kc.inPal&&typeof kc2Enter==='function'){try{Q.length=0;kc2Enter(7);grab('enter')}catch(e){out.push('err\tkc2Enter '+e.message)}}const t=S.turn;for(let g=0;g<40&&S&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){out.push('err\t'+e.message);break}grab('buoi')}
+    if(m>6&&S.st&&S.st.ch){const M0=S.st.M;if(!M0||M0.done){try{S.st.ms=null;chAdvance67({k:(m%3)-1});grab('chapter')}catch(e){out.push('err\tchAdvance '+e.message)}}}
     const A=S&&S.st&&S.st.M;if(A&&(A.a||A.id))arcs.add(A.a||A.id);if(A&&!A.done&&!A.cur&&A.nb){A.due=0;try{fireBeat67(A)}catch(e){}}
     if(A&&A.cur){try{const bd=beatDef67(A,A.cur);grab('beat');const O=opts67(A,bd);const i=(m+L.length)%Math.max(1,O.length);res67(thKey67(A),A.cur,i,O[i]&&O[i].o!=null?oOf67(A,O[i],bd):100);grab('res')}catch(e){}}
     if(S&&S.st&&S.st.ms)S.st.ms.t0=-99;if(m%3===0)tabs()}
    tabs();const prem=(S.st.f14&&S.st.f14.road)||'';
    const bad=[];for(const line of out){const x=line.split('\t').slice(1).join(' ');if(/\{[a-zA-Z]\w*\}/.test(x))bad.push('raw-token\t'+line.slice(0,240));for(const w of WS.__bad)if(W[w].test(x))bad.push(w+'\t«'+x.match(W[w])[0]+'»\t'+line.slice(0,260))}
-   return{ch:S.st.ch&&S.st.ch.n,kcLeft:!!S.kc&&!S.kc.done,land:S.origin.land,k:S.origin.k,prem,legacy:typeof bdLegacy==='function'?bdLegacy():null,arcs:[...arcs],n:out.length,kc:!!S.kc,bad}},[L,MONTHS,Object.assign(Object.fromEntries(Object.entries(W).map(([k,v])=>[k,v.source])),{__bad:BAD[L]})]);
+   return{ch:S.st.ch&&S.st.ch.i,kcLeft:!!S.kc&&!S.kc.inPal,land:S.origin.land,k:S.origin.k,prem,legacy:typeof bdLegacy==='function'?bdLegacy():null,arcs:[...arcs],n:out.length,kc:!!S.kc,bad}},[L,MONTHS,Object.assign(Object.fromEntries(Object.entries(W).map(([k,v])=>[k,v.source])),{__bad:BAD[L]})]);
   hits+=r.bad.length;rows.push(`${L}#${s}\t${r.land}\tpremise ${r.prem}${L==='bd'||L==='bt'?' legacy='+r.legacy:''}\tarcs ${r.arcs.join(',')}\tch ${r.ch} home ${r.kcLeft}\tlines ${r.n}\thits ${r.bad.length}`);
-  for(const x of r.bad)console.log(L+'#'+s+'\t'+x);await ctx.close()}
+  for(const x of r.bad)console.log(L+'#'+s+'\t'+x);console.log(rows[rows.length-1]);await ctx.close()}
  console.log(rows.join('\n'));if(errs.length)console.log('page errors',errs.length,errs.slice(0,4));console.log(hits||errs.length?'FAIL':'PASS');await b.close();process.exit(hits||errs.length?1:0)})();

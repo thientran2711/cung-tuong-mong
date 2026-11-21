@@ -17,7 +17,7 @@ const AGE_FAM={"Thế tử huynh":"Hoàng huynh","Vương thúc":"Hoàng thúc",
 const ageNc=async(q,save)=>q.evaluate(([s,F])=>{const o=JSON.parse(s);const sub=v=>typeof v==="string"?v.split("Cao Ly").join("Nam Chiếu"):v;
   const walk=x=>{if(!x||typeof x!=="object")return;for(const k in x){if(typeof x[k]==="string")x[k]=sub(x[k]);else walk(x[k])}};
   const find=(x,d)=>{if(!x||typeof x!=="object"||d>3)return null;if(x.origin&&x.origin.k)return x;for(const k in x){const r=find(x[k],d+1);if(r)return r}return null};
-  const R=find(o,0)||o;if(R.origin)walk(R.origin);if(R.kc&&Array.isArray(R.kc.fam))for(const m of R.kc.fam)if(m&&F[m.t])m.t=F[m.t];
+  const R=o.S||find(o,0)||o;if(R.origin)walk(R.origin);if(R.kc&&Array.isArray(R.kc.fam))for(const m of R.kc.fam)if(m&&F[m.t])m.t=F[m.t];
   if(Array.isArray(R.men))R.men.forEach(m=>{if(m&&/Phó sứ (Cao Ly|Nam Chiếu)/.test(m.role||""))walk(m)});return JSON.stringify(o)},[save,AGE_FAM]);
  const old0=await mk(MAIN,'nc',40);let old=old0;
  if(old0.land==='Cao Ly'){const qa=await boot(MAIN);old={...old0,save:await ageNc(qa,old0.save),land:'Nam Chiếu',aged:1};await qa.context().close();console.log('main is post-rename: save AGED to the pre-rename strings (fixture)')}console.log('old save (main build):',JSON.stringify({land:old.land,n:old.n,arc:old.arc,ch:old.ch}));
