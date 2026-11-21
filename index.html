@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d3b49912+","t":"2026-11-21T13:56Z","c":"coop-palace-life: P4 her own act names her son in her context (world S.hr + host S.heir follow, Danh once)","b":"a723a22af0c9","h":[{"s":"29bc6813+","t":"2026-11-21T11:04Z","c":"Chơi chung: cảm xúc đúng ghế hai bên (D)"},{"s":"c2b10901+","t":"2026-11-21T10:49Z","c":"Hộp thoại: một ô trái, Tốn/Được/Mất đủ, tiêu đề thẳng hàng; bỏ «ma ma» nói thay (#71 #75 #76 #80 #82 #58 #59)"},{"s":"5e7dae26+","t":"2026-11-21T13:05Z","c":"Dư đồ: bấm người → cảnh tập trung, nút hành động hai bên (Bước 1)"},{"s":"3f08f4f2+","t":"2026-11-21T10:56Z","c":"Màn kết cục phần 2 + Sang buổi toàn màn (#52 #84)"},{"s":"352b2b18+","t":"2026-11-21T10:54Z","c":"Màn kết cục / kiếp này: một khung chung (#48 #50 #51)"},{"s":"c5bbde7e+","t":"2026-11-21T11:14Z","c":"Thẻ hoàng tự: dòng thông tin bấm được, gọn"},{"s":"f6d0af80+","t":"2026-11-21T12:13Z","c":"Cảnh tập trung: dòng giá hai mục trên Fold"},{"s":"42d5985e+","t":"2026-11-21T11:41Z","c":"Bảng danh hiệu mới không đè tranh sự kiện (iPad)"},{"s":"33661a10+","t":"2026-11-21T10:27Z","c":"Chơi chung: dấu tạm dừng ⏸ trên chip đồng hồ"},{"s":"b4aa7f42+","t":"2026-11-21T10:23Z","c":"Hảo hữu: icon trên thanh trên cùng, xám khi vắng, ✓ sẵn sàng, … bận; bấm xem thông tin (#2)"}]};
+window.CTM_BI={"s":"5a43675b+","t":"2026-11-21T14:10Z","c":"coop-palace-life: P4 her own act names her son in her context (world S.hr + host S.heir follow, Danh once)","b":"432a0dfc3f59","h":[{"s":"da3aa72d+","t":"2026-11-21T12:27Z","c":"Hội thi / trò tài nghệ: giới thiệu tranh trên cùng, đối thủ không bị cắt (#55)"},{"s":"29bc6813+","t":"2026-11-21T11:04Z","c":"Chơi chung: cảm xúc đúng ghế hai bên (D)"},{"s":"c2b10901+","t":"2026-11-21T10:49Z","c":"Hộp thoại: một ô trái, Tốn/Được/Mất đủ, tiêu đề thẳng hàng; bỏ «ma ma» nói thay (#71 #75 #76 #80 #82 #58 #59)"},{"s":"5e7dae26+","t":"2026-11-21T13:05Z","c":"Dư đồ: bấm người → cảnh tập trung, nút hành động hai bên (Bước 1)"},{"s":"3f08f4f2+","t":"2026-11-21T10:56Z","c":"Màn kết cục phần 2 + Sang buổi toàn màn (#52 #84)"},{"s":"352b2b18+","t":"2026-11-21T10:54Z","c":"Màn kết cục / kiếp này: một khung chung (#48 #50 #51)"},{"s":"c5bbde7e+","t":"2026-11-21T11:14Z","c":"Thẻ hoàng tự: dòng thông tin bấm được, gọn"},{"s":"f6d0af80+","t":"2026-11-21T12:13Z","c":"Cảnh tập trung: dòng giá hai mục trên Fold"},{"s":"42d5985e+","t":"2026-11-21T11:41Z","c":"Bảng danh hiệu mới không đè tranh sự kiện (iPad)"},{"s":"33661a10+","t":"2026-11-21T10:27Z","c":"Chơi chung: dấu tạm dừng ⏸ trên chip đồng hồ"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -32430,10 +32430,13 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
  const d=kg82Open({art:artLabel,title:`${title} · ${K.t}`,how:K.how,pic:kg82Pic(kind)});if(!d){if(o.onDone)o.onDone(null);return}
  const box=kg82Box();const tRows=partsOk?me.parts.map(([l,v])=>[l,kg82Chip("cộng",v,"g")]):[["Tài nghệ",kg82Chip(`cộng${o.talentBy?` (${o.talentBy})`:""}`,talent,"g")]];
  const SK=typeof mg2On==="function"&&mg2On()?mgSkipRaw(KG82.tier):R.some(x=>x&&x.score!=null)?5:Math.round(kg82NpcMean(KG82.tier.lv));/* mg2: her median on this board, the curve the rivals are drawn from */
- const intro=()=>{KG82.phase="intro";box.classList.add("kgintro");box.innerHTML=`<h4 class="kpst">Phần của ngươi</h4>`+kg82Rows([["Màn thi",`tự chơi 0–10 phần, quy ra 0–${luck} (đối thủ thi theo tài nghệ cùng luật)`,"t"],["Độ khó",mgDiffTxt(KG82.tier,kind),"n"]].concat(tRows,prep?[["Chuẩn bị",kg82Chip("cộng",prep,"g")]]:[]))+
-  (rows.length?`<h4 class="kpst">Đối thủ</h4><div class="kgrv">`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t}${r.pr?` + chuẩn bị ${r.pr}`:""} + màn thi chưa rõ (0–${luck})</small>`})))+`</div>`:"")+
+ const intro=()=>{KG82.phase="intro";box.classList.add("kgintro");
+  /* mg-intro-2 (owner OD 21/11 ~04:17Z): short essentials only — «Độ khó» + one «Phần của ngươi» line; every part / every rival detail behind the kit «!» */
+  const allRows=[["Màn thi",`tự chơi 0–10 phần, quy ra 0–${luck} (đối thủ thi theo tài nghệ cùng luật)`,"t"],["Độ khó",mgDiffTxt(KG82.tier,kind),"n"]].concat(tRows,prep?[["Chuẩn bị",kg82Chip("cộng",prep,"g")]]:[]);
+  box.innerHTML=kgBangRows("Phần của ngươi",allRows,[["Gồm",`tài nghệ ${talent}${prep?` + chuẩn bị ${prep}`:""} + tự chơi 0–${luck}`,"t"],["Độ khó",mgDiffTxt(KG82.tier,kind),"n"]])+
+  (rows.length?`<h4 class="kpst">${kgBang(`<p class="kpnote">Phần của mỗi đối thủ = tài nghệ + chuẩn bị + màn thi chưa rõ (0–${luck}).</p>`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t}${r.pr?` + chuẩn bị ${r.pr}`:""} + màn thi chưa rõ (0–${luck})</small>`}))),"Đối thủ")}</h4><div class="kgrv kgrv-c">`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t+r.pr}</small>`})))+`</div>`:"")+
   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`màn thi tính ${SK}/10 phần (+${Math.round(SK/10*luck)}), như người cùng bậc tài nghệ`})}</div>`;
-  kgReady(box,{kind});/* KIT §13.7: rules + «Sẵn sàng» / «Hướng dẫn»; the clock starts only on «Sẵn sàng» */
+  kgReady(box,{kind,ev:o.ev||(o.fk?"fest:"+o.fk:"cat:tai-nghe")});/* KIT §13.7: rules + «Sẵn sàng» / «Hướng dẫn»; the clock starts only on «Sẵn sàng» */
   $("kg82go").onclick=()=>{if(o.onGo)try{o.onGo(rows)}catch(e){console.error(e)}/* jpmc split board: the rivals' raws drawn ONCE above are the ones shown live and scored */kg82Play(kind,raw=>finish(raw,false))};$("kg82skip").onclick=()=>finish(SK,true)};
  const finish=(raw,skipped)=>{KG82.phase="result";const skill=Math.round(raw/10*luck),score=talent+prep+skill;
   const all=rows.map(r=>({who:r.p||r.face,p:r.p,id:r.id,name:r.name,score:r.score,sub:`tài nghệ ${r.t}${r.pr?` + chuẩn bị ${r.pr}`:""} + màn thi ${r.lk}`}));
@@ -32474,8 +32477,8 @@ function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),EG=o.eng&&
   kg82ShowRes(o.resRows?kg82Rows(o.resRows(raw,skipped))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`:html,qRow?(QK.roll?!!ok:null):raw>=5);kg82Set("score",qRow?"–":`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped,ok};
   $("kg82ok").onclick=()=>{kg82Close();try{if(o.onDone)o.onDone(raw,{skipped,ok})}catch(e){console.error(e)}}};
  KG82.phase="intro";if(o.rows)box.classList.add("kgintro");
- box.innerHTML=(o.rows?`<h4 class="kpst">${o.rowsHead||"Phần của ngươi"}</h4>`+kg82Rows(o.rows):"")+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">${o.go||"Bắt đầu"}</button>${kitQuick(QK)}</div>`;
- kgReady(box,EG?{kind,n:K.n,t:K.t,how:K.how,e:K.e,timed:K.timed!==false,tutor:KG82_ENG[K.e]}:{kind});/* KIT §13.7 */
+ box.innerHTML=(o.rows?kgBangRows(o.rowsHead||"Phần của ngươi",o.rows,o.rows.slice(0,2)):"")+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">${o.go||"Bắt đầu"}</button>${kitQuick(QK)}</div>`;
+ kgReady(box,EG?{kind,ev:o.ev,n:K.n,t:K.t,how:K.how,e:K.e,timed:K.timed!==false,tutor:KG82_ENG[K.e]}:{kind,ev:o.ev});/* KIT §13.7 */
  $("kg82go").onclick=()=>{if(EG)KG82.engX=K.e;if(o.onGo)try{o.onGo()}catch(e){console.error(e)}kg82Play(kind,raw=>done(raw,false))};$("kg82skip").onclick=()=>QK.roll?done(0,true,kitQuickRoll()):done(o.quick&&o.quick.raw!=null?o.quick.raw:o.quick&&o.quick.sub==null?0:5,true)}/* o.quick.raw (jpma pmQuick): the caller's one value, the same number its sub text prints */
 window.startContest=startContest;window.playArt=playArt;
 
@@ -32485,7 +32488,7 @@ window.startContest=startContest;window.playArt=playArt;
    jslap/jtd/jhd/j92 engines, the scheme games jsgame, Nghiệm thân jroute):
    kgReady(box, spec) dresses the game's FIRST screen (the intro the caller already drew, nothing runs yet, no clock):
      · a rules block on top: «Luật chơi · <name>», kit rows Môn / Luật (the kind's `how`) or the caller's own step rows, and a small looping picture of the move
-       (.kgr-demo, one of six motions by engine group: fall / swing / hold / drag / tap / dodge; still under Cảnh động off / reduced motion;
+       (mg-intro-2: NO picture of the move any more; the picture on top is the EVENT's (spec.ev = evArtOf id, default cat:tai-nghe, ev:false = none), the long rules sit behind a kit tap-word (kgBang));
       dodge = mg-play2, owner OD 20/11 ~08:05Z: a lit path, a plain lotus comes down it, the hand drags the player's piece aside and back);
      · the caller's start button (spec.go, default #kg82go; its own onclick kept) becomes «Sẵn sàng» — the clock and the board start ONLY on that tap;
      · «Hướng dẫn» beside it = kgTut: a quick guided round of the same engine on the EASIEST board (BAL.mgTier.tut + the lowest gap of BAL.ag.mg2.cal.d),
@@ -32497,17 +32500,25 @@ window.startContest=startContest;window.playArt=playArt;
 const KG82_DEMO={rhythm:"fall",aim:"swing",slapbar:"swing",groom:"swing",tspluck:"swing",tssteer:"dodge",hold:"hold",tdwalk:"hold",cook:"hold",tdtalk:"hold",
  fling:"pull",calli:"drag",trace:"drag",arrange:"drag",untangle:"drag",tdthread:"drag",blend:"slide",sort:"drag",hoadien:"drag",kinh:"drag",may:"drag"};
 const KG82_HAND=`<svg viewBox="0 0 48 56" aria-hidden="true"><path d="M20 4a4 4 0 0 1 8 0v20l2.5-.6a4 4 0 0 1 4.6 2.8l.4-.1a4 4 0 0 1 4.8 2.6 4 4 0 0 1 4.7 3.3l1 7.5c.9 7-3.4 13.5-10.2 15.3l-3.3.9c-5.6 1.5-11.5-.7-14.8-5.5L8.4 38.6a3.8 3.8 0 0 1 5.9-4.8L20 39z" fill="#fff8ea" stroke="#5a3a0c" stroke-width="2.2" stroke-linejoin="round"/><path d="M28 24v9M35 27v7M41 31v5" stroke="#5a3a0c" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>`;
+/* KIT §13.7.4 (mg-intro-2): everything long goes behind a kit TAP-WORD (kitTapWord, §73.2: dotted underline, a tap opens the small kit pop-up with the word as title).
+   Owner OD 21/11 ~04:17Z: "những thông tin không cần thiết đưa hết vào" a tap-word / «!». kgBang(html,title) = the heading words as the tap-word holding `html`;
+   kgBangRows(head,all,shown,extra) = a kit heading (tap-word) holding ALL rows + the few essential rows shown. No private pop-up code here. */
+/* KIT §13.7.4 (mg-intro-2): everything long goes behind the kit «!» (kitNoteBang(text,title), §62.1: round yellow «!», a tap opens the small kit pop-up with that title).
+   Owner OD 21/11 ~04:17Z: "những thông tin không cần thiết đưa hết vào dấu chấm than". kgBang(html,title) = the heading words + that «!» holding `html`;
+   kgBangRows(head,all,shown,extra) = a kit heading with the «!» holding ALL rows + the few essential rows shown. No private pop-up code here. */
+function kgBang(html,title){return html?`${title||"Thông tin"}${kitNoteBang(html,title||"Thông tin")}`:String(title||"")}
+function kgBangRows(head,all,shown,extra){return `<h4 class="kpst">${kgBang(kg82Rows(all)+(extra||""),head)}</h4>`+(shown&&shown.length?kg82Rows(shown):"")}
+window.kgBang=kgBang;window.kgBangRows=kgBangRows;
 function kgReadySpec(s){s=typeof s==="string"?{kind:s}:Object.assign({},s||{});const K=(s.kind&&KG82_KIND[s.kind])||{};
  s.n=s.n||K.n||"";s.t=s.t||K.t||"";s.how=s.how!=null?s.how:(K.how||"");s.e=s.e||K.e||"";s.go=s.go||"#kg82go";s.timed=s.timed!==false;return s}
-function kgReadyDemo(m,pic){const st=pic?` style="background-image:url('${pic}')"`:"";let still=false;try{still=typeof reducedMotion==="function"&&!!reducedMotion()}catch(e){}
- return `<div class="kgr-demo" data-m="${m}" aria-hidden="true"><div class="kgr-st${still?" kgr-still":""}"${st}><i class="kgr-path"></i><i class="kgr-obj"></i><i class="kgr-obj kgr-o2"></i><i class="kgr-obj kgr-o3"></i><i class="kgr-line"></i><span class="kgr-hand">${KG82_HAND}<b class="kgr-ring"></b></span></div></div>`}
 function kgReadyCan(s){return !!(s.tutor||(s.kind&&KG82_KIND[s.kind]&&typeof KG82_ENG[KG82_KIND[s.kind].e]==="function"))}
 function kgReady(box,spec){box=box||kg82Box();if(!box)return false;const s=kgReadySpec(spec);KG82.ready=s;
  const old=box.querySelector(".kgr");if(old)old.remove();
  const rows=[["Môn",s.t?`${s.n} · ${s.t}`:s.n,"t"]].concat(s.steps&&s.steps.length?s.steps.map(r=>[r[0],r[1],r[2]||"t"]):s.how?[["Luật",s.how,"t"]]:[]);
- let pic="";try{pic=s.pic!=null?s.pic:(s.kind&&!["duho","den","may"].includes(s.kind)?`https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-${kg82BgName(s.kind)}.webp`:"")}catch(e){}/* the board painting under the picture of the move (no painting: plain card) */
- const html=`<div class="kgr"><h4 class="kpst">Luật chơi · ${s.n}</h4>${kg82Rows(rows)}${(window.NWB_DEMO&&window.NWB_DEMO[s.e]?window.NWB_DEMO[s.e](s):kgReadyDemo(KG82_DEMO[s.e]||"tap",pic))}`+
-  `<p class="kpnote kgr-note">${s.timed?"Đọc kỹ luật, xem hình mẫu; chưa tính giờ. Chạm «Sẵn sàng» thì ván mới bắt đầu và mới tính giờ.":"Đọc kỹ luật, xem hình mẫu. Chạm «Sẵn sàng» thì ván mới bắt đầu."}</p></div>`;
+ /* mg-intro-2 (owner OD 21/11 ~04:17Z): the picture on top is the EVENT's (festival / contest scene, evArtOf), never the picture of the move; the rules sit behind the kit «!» */
+ let evp="";try{const id=s.ev===false?"":(s.ev||"cat:tai-nghe");evp=id&&typeof evArtOf==="function"?evArtOf(id,s.n):""}catch(e){}
+ const note=`<p class="kpnote">${s.timed?"Đọc kỹ luật; chưa tính giờ. Chạm «Sẵn sàng» thì ván mới bắt đầu và mới tính giờ.":"Đọc kỹ luật. Chạm «Sẵn sàng» thì ván mới bắt đầu."}</p>`;
+ const html=`<div class="kgr">${evp?`<div class="kgr-ev"><img src="${evp}" alt="" draggable="false" onerror="this.parentNode.remove()"></div>`:""}<h4 class="kpst">${kgBang(kg82Rows(rows)+note,`Luật chơi · ${s.n}`)}</h4></div>`;
  box.insertAdjacentHTML("afterbegin",html);box.classList.add("kgintro");
  const go=box.querySelector(s.go);
  if(go){if(!go.dataset.kgrLabel)go.dataset.kgrLabel=go.textContent;go.innerHTML=`Sẵn sàng<small>${s.timed?"từ lúc này mới tính giờ":"bắt đầu chơi"}</small>`;go.classList.add("kgr-go");
@@ -32581,61 +32592,33 @@ body.kg82cf #modal{z-index:40}
 .kgame.kg-ready .kghow,.kgame.kg-tut .kghow{display:none}
 /* KIT §13.7 (law 10): a rules / guided / playing screen inside a figure-left dialog (.k3right is overflow:clip) must fit, so the care info above the game frame (bars, rows, act buttons) folds away while the frame is open; petcDraw / shelfPlantDraw bring it back */
 #kpcare.kg-open>:not(#kpcgw),#kshp.kg-open>:not(#kshpgw){display:none!important}
-#kpcgw .kgpic,#kshpgw .kgpic{display:none}#kpcgw .kgr-demo,#kshpgw .kgr-demo{max-width:110px;margin:4px auto 0}#kpcgw .kgr .kpst,#kshpgw .kgr .kpst{display:none}#kpcgw .kgr-st,#kshpgw .kgr-st{height:38px}#kpcgw .kgr-note,#kshpgw .kgr-note{display:none}
+#kpcgw .kgpic,#kshpgw .kgpic{display:none}#kpcgw .kgr-ev,#kshpgw .kgr-ev{display:none}#kpcgw .kgr .kpst,#kshpgw .kgr .kpst{display:none}#kpcgw .kgr-st,#kshpgw .kgr-st{height:38px}#kpcgw .kgr-note,#kshpgw .kgr-note{display:none}
 .kgr{margin:0 0 6px}.kgr .kpst{margin-top:0}.kgr-note{margin:8px 0 2px}
-.kgr-demo{margin:8px auto 2px;max-width:340px}
-.kgr-st{position:relative;height:118px;border:1px solid var(--k-hair);border-radius:var(--k-rad,8px);overflow:hidden;background:var(--k-card) center/cover no-repeat}
-.kgr-st::before{content:"";position:absolute;inset:0;background:rgba(255,250,238,.55)}
-.kgr-st>i,.kgr-st>span{position:absolute;display:block}
-.kgr-obj{width:22px;height:22px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);left:30%;top:40%;opacity:0}
-.kgr-line{left:8%;right:8%;top:74%;height:4px;border-radius:2px;background:var(--bad,#c23b22);opacity:0}
-.kgr-path{left:14%;right:14%;top:52%;height:0;border-top:3px dashed var(--line);opacity:0}
+/* §13.7.4 (mg-intro-2): the EVENT picture on top of every intro + the «!» that holds the long text */
+.kgr-ev{margin:0 0 8px;height:clamp(84px,calc(12*var(--kvh)),150px);border:1px solid var(--k-hair);border-radius:var(--k-rad,8px);overflow:hidden;background:var(--k-card)}.kgrv.kgrv-c{max-height:none;overflow:visible}/* the 3 rival rows are never cut (MAIN 87) */
+.kgr-ev img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+
 .kgr-hand{width:38px;height:44px;left:50%;top:50%;transform:translate(-48%,-6%);filter:drop-shadow(0 2px 3px rgba(60,30,10,.35))}
 .kgr-hand svg,.kgt-hand svg{width:100%;height:100%;display:block}
 .kgr-ring{position:absolute;left:28%;top:-14%;width:20px;height:20px;margin:-2px 0 0 -2px;border:3px solid var(--good,#2d7a52);border-radius:50%;opacity:0}
-.kgr-demo[data-m=fall] .kgr-line{opacity:1}.kgr-demo[data-m=fall] .kgr-obj{left:calc(50% - 11px);animation:kgrFall 2.4s linear infinite}
-.kgr-demo[data-m=fall] .kgr-hand{top:74%;animation:kgrTapAt 2.4s ease-in-out infinite}.kgr-demo[data-m=fall] .kgr-ring{animation:kgrRing 2.4s ease-out infinite}
-.kgr-demo[data-m=swing] .kgr-path{opacity:1;top:28%}.kgr-demo[data-m=swing] .kgr-line{top:calc(28% - 6px);left:calc(50% - 16px);right:auto;width:32px;height:14px;background:var(--good,#2d7a52);opacity:.85}
-.kgr-demo[data-m=swing] .kgr-obj{top:calc(28% - 11px);border-radius:3px;width:14px;background:var(--bad,#c23b22);box-shadow:none;opacity:1;animation:kgrSwing 2.4s ease-in-out infinite}
-.kgr-demo[data-m=swing] .kgr-hand{top:52%;animation:kgrTapAt 2.4s ease-in-out infinite}.kgr-demo[data-m=swing] .kgr-ring{animation:kgrRing 2.4s ease-out infinite}
-.kgr-demo[data-m=hold] .kgr-path{opacity:1;top:auto;bottom:14%;border-top:8px solid var(--k-hair);left:20%;right:20%}
-.kgr-demo[data-m=hold] .kgr-line{opacity:1;top:auto;bottom:14%;left:20%;right:auto;height:8px;background:var(--good,#2d7a52);animation:kgrFill 2.4s linear infinite}
-.kgr-demo[data-m=hold] .kgr-hand{top:28%;animation:kgrHold 2.4s ease-in-out infinite}.kgr-demo[data-m=hold] .kgr-ring{animation:kgrHoldR 2.4s ease-out infinite}
-.kgr-demo[data-m=drag] .kgr-path{opacity:1;transform:rotate(-8deg);transform-origin:left center}.kgr-demo[data-m=drag] .kgr-hand{animation:kgrDrag 2.4s ease-in-out infinite}
-.kgr-demo[data-m=drag] .kgr-line{top:calc(52% - 1px);left:14%;right:auto;width:0;background:var(--ink);height:4px;transform:rotate(-8deg);transform-origin:left;opacity:1;animation:kgrInk 2.4s ease-in-out infinite}
-.kgr-demo[data-m=slide] .kgr-path{opacity:1;transform:rotate(90deg);left:36%;right:36%;top:50%}.kgr-demo[data-m=slide] .kgr-line{top:auto;bottom:12%;left:calc(50% - 2px);right:auto;width:4px;height:0;background:var(--good,#2d7a52);opacity:1;animation:kgrSlideL 2.4s ease-in-out infinite}
-.kgr-demo[data-m=slide] .kgr-hand{left:calc(50% - 2px);animation:kgrSlideH 2.4s ease-in-out infinite}
-.kgr-demo[data-m=pull] .kgr-obj{opacity:1;left:calc(30% - 11px);top:calc(72% - 11px);border-radius:3px;width:22px;height:8px;background:var(--bad,#c23b22);box-shadow:none;animation:kgrPullO 2.4s ease-in infinite}
-.kgr-demo[data-m=pull] .kgr-line{opacity:1;top:calc(52% - 1px);left:30%;right:auto;width:0;height:3px;background:var(--ink);transform:rotate(-45deg);transform-origin:left;animation:kgrPullL 2.4s ease-in-out infinite}
-.kgr-demo[data-m=pull] .kgr-hand{animation:kgrPullH 2.4s ease-in-out infinite}
-@keyframes kgrSlideH{0%,8%{top:70%}70%,100%{top:28%}}@keyframes kgrSlideL{0%,8%{height:0}70%,100%{height:42%}}
-@keyframes kgrPullH{0%,8%{left:46%;top:34%}55%,62%{left:28%;top:62%;transform:translate(-48%,-6%) scale(.92)}70%,100%{left:28%;top:62%;opacity:0}}
-@keyframes kgrPullL{0%,8%{width:0}55%,62%{width:22%}70%,100%{width:0}}
-@keyframes kgrPullO{0%,60%{left:calc(30% - 11px);top:calc(72% - 11px);opacity:1}100%{left:calc(80% - 11px);top:calc(12% - 11px);opacity:0}}
-.kgr-demo[data-m=tap] .kgr-obj{opacity:.25;top:calc(50% - 11px);left:calc(25% - 11px);animation:kgrGlow 2.4s step-end infinite}
-.kgr-demo[data-m=tap] .kgr-o2{left:calc(50% - 11px);animation-delay:.8s}.kgr-demo[data-m=tap] .kgr-o3{left:calc(75% - 11px);animation-delay:1.6s}
-.kgr-demo[data-m=tap] .kgr-hand{animation:kgrTap3 2.4s ease-in-out infinite}
-.kgr-demo[data-m=dodge] .kgr-line{opacity:1;top:0;bottom:0;height:auto;left:36%;right:36%;border-radius:0;background:linear-gradient(90deg,transparent,var(--gold) 28%,var(--gold) 72%,transparent);opacity:.5;box-shadow:none}/* den-look: soft glow edges, no white edge lines */
-.kgr-demo[data-m=dodge] .kgr-obj{opacity:1;left:calc(50% - 13px);width:26px;height:26px;background:#e48aa4;box-shadow:none;border:0;animation:kgrDrop 2.4s linear infinite}/* den-look: a plain lotus, no danger ring / ✕ */
-.kgr-demo[data-m=dodge] .kgr-o2{top:auto;bottom:16%;width:20px;height:20px;background:var(--gold);border:0;box-shadow:0 0 10px var(--gold);animation:kgrDodge 2.4s ease-in-out infinite}
-.kgr-demo[data-m=dodge] .kgr-o3{display:none}
-.kgr-demo[data-m=dodge] .kgr-hand{top:auto;bottom:-22%;animation:kgrDodgeH 2.4s ease-in-out infinite}
-@keyframes kgrDrop{0%{top:-24%}100%{top:112%}}
-@keyframes kgrDodge{0%,40%{left:calc(50% - 10px)}54%,86%{left:calc(22% - 10px)}97%,100%{left:calc(50% - 10px)}}
-@keyframes kgrDodgeH{0%,40%{left:50%}54%,86%{left:22%}97%,100%{left:50%}}
-@keyframes kgrFall{0%{top:-12%;opacity:1}62%{top:calc(74% - 11px);opacity:1}70%{top:calc(74% - 11px);opacity:0}100%{opacity:0}}
-@keyframes kgrTapAt{0%,52%{transform:translate(-48%,10%)}62%{transform:translate(-48%,-6%) scale(.92)}74%,100%{transform:translate(-48%,10%)}}
-@keyframes kgrRing{0%,60%{opacity:0;transform:scale(.6)}64%{opacity:1}80%,100%{opacity:0;transform:scale(1.8)}}
-@keyframes kgrSwing{0%{left:14%}50%{left:calc(86% - 14px)}100%{left:14%}}
-@keyframes kgrFill{0%,18%{width:0}70%{width:60%}100%{width:60%}}
-@keyframes kgrHold{0%,12%{transform:translate(-48%,8%)}20%,72%{transform:translate(-48%,-6%) scale(.92)}82%,100%{transform:translate(-48%,8%)}}
-@keyframes kgrHoldR{0%,18%{opacity:0;transform:scale(.6)}24%,70%{opacity:1;transform:scale(1.3)}80%,100%{opacity:0;transform:scale(1.8)}}
-@keyframes kgrDrag{0%,8%{left:14%;top:52%}70%{left:84%;top:30%}80%,100%{left:84%;top:30%;opacity:1}}
-@keyframes kgrInk{0%,8%{width:0}70%,100%{width:72%}}
-@keyframes kgrGlow{0%{opacity:1}33%{opacity:.25}}
-@keyframes kgrTap3{0%{left:25%}30%{left:25%}36%{left:50%}63%{left:50%}69%{left:75%}96%{left:75%}100%{left:25%}}
-.kgr-st.kgr-still *{animation:none!important}
-@media (prefers-reduced-motion:reduce){.kgr-st *{animation:none!important}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .kgt-bar{display:flex;flex-direction:column;gap:2px;margin:0 0 8px;padding:6px 10px;border:1px solid var(--k-hair);border-left:4px solid var(--good,#2d7a52);border-radius:var(--k-rad,8px);background:var(--k-card)}
 .kgt-bar b{font-family:var(--display);color:var(--ink)}.kgt-msg{font-weight:600;color:var(--ink)}.kgt-bar small{color:var(--dim);font-size:.74rem}
 .kgt-hand{position:fixed;left:0;top:0;width:44px;height:50px;margin:-3px 0 0 -21px;z-index:2147480000;pointer-events:none;opacity:0;transition:opacity .2s;filter:drop-shadow(0 2px 4px rgba(60,30,10,.45))}
@@ -34044,7 +34027,7 @@ Object.assign(KG82_KIND,{
  td_hanh:{e:"tdalms",n:"Hạnh",t:"Làm phúc",how:"Chạm + hoặc − chia phần cho đủ số chấm của mỗi người, rồi chạm ✓. Ba lượt."}});
 Object.assign(KG82_SPR,{td_cong:["kim-needle","theu-cloud"],td_dung:["mua-mat","banh-pot"],td_ngon:[],td_hanh:[]});
 (function(){const b0=kg82BgName;kg82BgName=function(kind){return TD_BG[kind]||b0.apply(this,arguments)}})();
-const TD_RULES={/* owner OD 20/11 ~06:45Z: a few words only; the picture of the move is drawn by NWB_DEMO (jnwb) */
+const TD_RULES={/* owner OD 20/11 ~06:45Z: a few words only; the «Hướng dẫn» round teaches the move */
  cong:[["1","Chạm sợi chỉ cùng màu chỉ mẫu."],["2","Kéo kim theo nét chấm, từ chấm xanh tới chấm đỏ."]],
  dung:[["1","Bát đặt trên đầu, mỗi bước chân làm bát nghiêng."],["2","Dấu ◀ ▶ trên sàn báo bát sắp nghiêng về bên nào."],["3","Giữ nửa khung bên kia để đỡ; kim ở dải xanh là vững."]],
  ngon:[["1","Chờ người nói xong, vòng xanh sáng thì giữ nút Thưa."],["2","Buông khi tiếng nói vào dải xanh."]],
@@ -37249,151 +37232,6 @@ const NWB={
 .nwb-row{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:6px 0}.nwb-row .nwb-mid{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
 .nwb-row .nwb-who .nwb-i{width:2.2em;height:2.2em}
 .nwb-pool{display:flex;gap:4px;justify-content:center;align-items:center;margin:4px 0;flex-wrap:wrap}.nwb-pool .nwb-i{width:1.6em;height:1.6em}
-`;document.head.appendChild(st)})();
-
-/* ================= rules screen: the move shown by PICTURE (owner OD 20/11 ~06:20Z td_dung «tôi không hiểu cách chơi», ~06:45Z td_* too much text) =================
-   kgReady (j82) draws NWB_DEMO[engine]() in place of the generic dot demo when it exists. Wordless, looping CSS animation (still under Cảnh động off):
-   tdwalk: the floor arrow says which way the bowl leans, the bowl tips, a hand HOLDS the opposite half, the bowl stands again.
-   tdalms: a hand taps «+», the pips of that person fill, ✓. tdtalk: dots, green ring, a hand HOLDS the voice button, the bar rises into the green band, release, ✓.
-   tdthread: sample colour, a hand taps the same thread, then the needle draws the dotted line. */
-(function(){
- const H=()=>typeof KG82_HAND==="string"?KG82_HAND:"";
- const hand=(c)=>`<span class="nd-hand ${c}">${H()}<b class="kgr-ring"></b></span>`;
- const wrap=(c,inner)=>`<div class="kgr-demo nwb-demo" aria-hidden="true"><div class="kgr-st nwb-st ${c}">${inner}</div></div>`;
- const bowl='<svg viewBox="0 0 60 40"><path d="M4 12h52c0 16-12 26-26 26S4 28 4 12z" fill="#b07a3a" stroke="#5a3a0c" stroke-width="2"/><ellipse cx="30" cy="12" rx="26" ry="5" fill="#d9a85a" stroke="#5a3a0c" stroke-width="2"/></svg>';
- window.NWB_DEMO={
-  tdwalk:()=>{let f="";try{f=kitFigOf(S)}catch(e){}return wrap("nd-dung",`<i class="nd-half l"></i><i class="nd-half r"></i>${f?`<img class="nd-fig" src="${f}" alt="">`:""}<b class="nd-mark m1">◀</b><b class="nd-mark m2">▶</b><span class="nd-bowl">${bowl}</span><span class="nd-gauge"><i class="nd-gz"></i><i class="nd-needle"></i></span><b class="nd-ok">✓</b>${hand("h1")}${hand("h2")}`)},/* td-dung-clear: HER with the bowl on her head, the floor arrow, the held half, the bowl stands again (✓) */
-  tdalms:()=>wrap("nd-hanh",`<span class="nd-pool">${NWB.ic("bowl")}</span><span class="nd-btn">−</span><span class="nd-who">${NWB.ic("elder")}</span><span class="nd-need"><i class="nwb-pip"></i><i class="nwb-pip"></i><i class="nwb-pip on nd-f1"></i><i class="nwb-pip on nd-f2"></i></span><span class="nd-btn nd-plus">+</span>${hand("h1")}<b class="nd-ok">✓</b>`),
-  tdtalk:()=>wrap("nd-ngon",`<span class="nd-bub"><i></i><i></i><i></i></span><span class="nd-ring"></span><span class="nd-say">${NWB.ic("voice")}</span><span class="nd-bar"><i class="nd-band"></i><i class="nd-fill"></i></span>${hand("h1")}<b class="nd-ok">✓</b>`),
-  groom:()=>wrap("nd-groom",`<span class="nd-zb"><i class="z1"></i><i class="z2"></i><i class="z3"></i><b class="nd-nd">▼</b></span>${hand("h1")}<b class="nd-ok">✓</b>`),
-  tdthread:()=>wrap("nd-cong",`<span class="nd-sample"></span><b class="nd-arrow">▼</b><span class="nd-sw s1"></span><span class="nd-sw s2"></span><span class="nd-sw s3"></span><svg class="nd-line" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M2 12 C 25 0, 45 22, 70 8 S 92 10 98 6" fill="none" stroke="#5a3a0c" stroke-width="2.5" stroke-dasharray="2 5" stroke-linecap="round"/><path class="nd-ink" d="M2 12 C 25 0, 45 22, 70 8 S 92 10 98 6" fill="none" stroke="#c23b22" stroke-width="3.5" stroke-linecap="round" pathLength="1"/></svg>${hand("h1")}`)
- };
- const st=document.createElement("style");st.id="nwb-demo-css";st.textContent=`
-.nwb-st{height:118px;position:relative;overflow:hidden}.nwb-st::before{display:none}
-.nwb-st>*{position:absolute;display:block}
-.nwb-st .nd-hand{width:38px;height:44px;opacity:0;filter:drop-shadow(0 2px 3px rgba(60,30,10,.35))}.nwb-st .nd-hand svg{width:100%;height:100%;display:block}.nwb-st .nd-hand .kgr-ring{left:36%;top:6%}
-.nwb-st .nd-ok{right:7%;top:8%;font-size:30px;color:var(--good,#2d7a52);opacity:0}
-/* td_dung (td-dung-clear): she stands, the bowl sits on her head; mark ◀ = it leans left; the hand holds the OTHER half; the bowl stands again */
-.nwb-st.nd-dung{height:168px}
-.nd-dung .nd-half{top:34px;bottom:4px;width:30%;border:2px dashed #b8935588;border-radius:10px;opacity:0}.nd-dung .nd-half.l{left:2%}.nd-dung .nd-half.r{right:2%}
-.nd-dung .nd-fig{left:50%;bottom:2px;height:112px;width:auto;margin-left:-26px;transform-origin:50% 100%;animation:ndFig 8s infinite}
-.nd-dung .nd-bowl{left:50%;bottom:112px;width:44px;margin-left:-22px;margin-bottom:-2px;transform-origin:50% 100%;animation:ndBowl 8s infinite}
-.nd-dung .nd-mark{left:50%;bottom:4px;margin-left:-60px;font-size:22px;color:#fff3d6;background:var(--red,#c23b22);border-radius:12px;padding:0 10px;opacity:0}
-.nd-dung .nd-mark.m2{margin-left:36px}
-.nd-dung .nd-gauge{left:10%;right:10%;top:6px;height:12px;border:2px solid #5a3a1a;border-radius:3px;background:rgba(194,59,34,.3);overflow:visible}
-.nd-dung .nd-gz{position:absolute;left:35%;right:35%;top:0;bottom:0;background:rgba(76,160,110,.85)}
-.nd-dung .nd-needle{position:absolute;top:10px;left:50%;margin-left:-6px;border:6px solid transparent;border-bottom:9px solid var(--good,#2d7a52);border-top:0;animation:ndNeedle 8s infinite}
-.nd-dung .nd-ok{right:6%;top:30px;animation:ndOk2 8s infinite}
-.nd-dung .nd-hand.h1{right:12%;top:90px;animation:ndH1 8s infinite}.nd-dung .nd-hand.h2{left:12%;top:90px;animation:ndH2 8s infinite}
-.nd-dung .m1{animation:ndM1 8s infinite}.nd-dung .m2{animation:ndM2 8s infinite}.nd-dung .nd-half.r{animation:ndH1 8s infinite}.nd-dung .nd-half.l{animation:ndH2 8s infinite}
-@keyframes ndBowl{0%,8%{transform:rotate(0)}20%,30%{transform:translateX(-5px) rotate(-26deg)}45%,55%{transform:rotate(0)}62%,72%{transform:translateX(5px) rotate(26deg)}90%,100%{transform:rotate(0)}}
-@keyframes ndFig{0%,8%{transform:rotate(0)}20%,30%{transform:rotate(-3deg)}45%,55%{transform:rotate(0)}62%,72%{transform:rotate(3deg)}90%,100%{transform:rotate(0)}}
-@keyframes ndNeedle{0%,8%{margin-left:-6px;border-bottom-color:var(--good,#2d7a52)}20%,30%{margin-left:-62px;border-bottom-color:var(--red,#c23b22)}45%,55%{margin-left:-6px;border-bottom-color:var(--good,#2d7a52)}62%,72%{margin-left:50px;border-bottom-color:var(--red,#c23b22)}90%,100%{margin-left:-6px;border-bottom-color:var(--good,#2d7a52)}}
-@keyframes ndOk2{0%,40%{opacity:0}46%,56%{opacity:1}60%,90%{opacity:0}92%,100%{opacity:0}}
-@keyframes ndM1{0%,4%{opacity:0}8%,30%{opacity:1}36%,100%{opacity:0}}@keyframes ndM2{0%,54%{opacity:0}58%,80%{opacity:1}86%,100%{opacity:0}}
-@keyframes ndH1{0%,24%{opacity:0}28%,46%{opacity:1}52%,100%{opacity:0}}@keyframes ndH2{0%,72%{opacity:0}76%,94%{opacity:1}98%,100%{opacity:0}}
-/* td_hanh */
-.nd-hanh .nd-pool{left:5%;top:10%;color:var(--gold,#d99a1e)}.nd-hanh .nd-pool .nwb-i{width:2em;height:2em}
-.nd-hanh .nd-btn{top:38%;width:38px;height:38px;border:1.5px solid var(--k-hair,#b59a6a);border-radius:8px;text-align:center;line-height:34px;font-size:22px;background:#fffdf6}.nd-hanh .nd-btn:first-of-type{left:12%}.nd-hanh .nd-plus{right:12%}
-.nd-hanh .nd-who{left:50%;top:14%;margin-left:-22px}.nd-hanh .nd-who .nwb-i{width:2.6em;height:2.6em}
-.nd-hanh .nd-need{left:50%;top:62%;transform:translateX(-50%);display:flex;gap:7px}.nd-hanh .nd-need .nwb-pip{width:16px;height:16px}
-.nd-hanh .nd-need .nwb-pip.on{opacity:0}.nd-hanh .nd-f1{animation:ndF1 6s infinite}.nd-hanh .nd-f2{animation:ndF2 6s infinite}
-.nd-hanh .nd-need .nwb-pip:nth-child(3){margin-left:-46px}.nd-hanh .nd-need .nwb-pip:nth-child(4){margin-left:0}
-.nd-hanh .nd-hand.h1{right:7%;top:44%;animation:ndTap 6s infinite}.nd-hanh .nd-ok{animation:ndOk 6s infinite}
-@keyframes ndF1{0%,18%{opacity:0}22%,100%{opacity:1}}@keyframes ndF2{0%,42%{opacity:0}46%,100%{opacity:1}}
-@keyframes ndTap{0%,8%{opacity:0;transform:translateY(8px)}12%,70%{opacity:1;transform:translateY(0)}18%{transform:translateY(6px)}40%{transform:translateY(0)}44%{transform:translateY(6px)}50%{transform:translateY(0)}78%,100%{opacity:0}}
-@keyframes ndOk{0%,60%{opacity:0}68%,92%{opacity:1}100%{opacity:0}}
-/* td_ngon */
-.nd-ngon .nd-bub{left:6%;top:12%;width:92px;height:48px;border:2px solid var(--k-hair,#b59a6a);border-radius:20px;background:#fffdf6;display:flex;gap:7px;align-items:center;justify-content:center;animation:ndBub 8s infinite}
-.nd-ngon .nd-bub i{width:9px;height:9px;border-radius:50%;background:#3a1a0c;animation:ndDot 1s infinite}.nd-ngon .nd-bub i:nth-child(2){animation-delay:.2s}.nd-ngon .nd-bub i:nth-child(3){animation-delay:.4s}
-.nd-ngon .nd-ring{left:102px;top:10px;width:30px;height:30px;border-radius:50%;border:6px solid #8a735055;animation:ndRing 8s infinite}
-.nd-ngon .nd-say{left:42%;top:56%;width:54px;height:40px;border:1.5px solid var(--k-hair,#b59a6a);border-radius:10px;background:#fffdf6;text-align:center;line-height:40px}.nd-ngon .nd-say .nwb-i{width:1.7em;height:1.7em}
-.nd-ngon .nd-bar{right:20%;top:10%;bottom:10%;width:22px;border:2px solid var(--k-hair,#b59a6a);background:#fffdf6}.nd-ngon .nd-band{position:absolute;left:0;right:0;bottom:30%;height:16%;background:#2d7a5255}
-.nd-ngon .nd-fill{position:absolute;left:3px;right:3px;bottom:0;background:linear-gradient(#c23b22,#f0b040);height:0;animation:ndFill 8s infinite}
-.nd-ngon .nd-hand.h1{left:44%;top:56%;animation:ndHold 8s infinite}.nd-ngon .nd-ok{animation:ndOk8 8s infinite}
-@keyframes ndBub{0%,24%{opacity:1}30%,100%{opacity:.25}}@keyframes ndDot{0%,100%{opacity:.3}50%{opacity:1}}
-@keyframes ndRing{0%,24%{border-color:#8a735055}30%,100%{border-color:var(--good,#2d7a52)}}
-@keyframes ndHold{0%,32%{opacity:0}36%,70%{opacity:1}76%,100%{opacity:0}}@keyframes ndFill{0%,34%{height:0}70%,76%{height:46%}84%,100%{height:0}}
-@keyframes ndOk8{0%,72%{opacity:0}78%,94%{opacity:1}100%{opacity:0}}
-/* chai */
-.nd-groom .nd-zb{left:8%;right:8%;top:46%;height:26px;border:2px solid #6e4d0e;display:flex}.nd-groom .nd-zb i{display:block;height:100%}.nd-groom .z1{width:30%;background:#cdbf9f}.nd-groom .z2{width:40%;background:var(--good,#2d7a52)}.nd-groom .z3{width:30%;background:var(--red,#c23b22)}
-.nd-groom .nd-nd{top:-24px;left:0;font-size:22px;color:#8a2a1e;animation:ndNeedle 4s infinite}
-.nd-groom .nd-hand.h1{left:50%;top:6%;animation:ndHold4 4s infinite}.nd-groom .nd-ok{animation:ndOk4 4s infinite}
-@keyframes ndNeedle{0%{left:0}40%{left:46%}50%,62%{left:46%}100%{left:94%}}
-@keyframes ndHold4{0%,38%{opacity:0}42%,60%{opacity:1;transform:translateY(8px)}66%,100%{opacity:0}}@keyframes ndOk4{0%,50%{opacity:0}56%,90%{opacity:1}100%{opacity:0}}
-/* td_cong */
-.nd-cong .nd-sample{left:50%;top:6%;width:34px;height:34px;margin-left:-17px;border-radius:50%;background:#c23b22;border:3px solid #fff6dc}
-.nd-cong .nd-arrow{left:50%;top:38%;margin-left:-9px;font-size:16px;color:#3a1a0c}
-.nd-cong .nd-sw{top:56%;width:28px;height:28px;border-radius:50%;border:3px solid #fff6dc}.nd-cong .s1{left:28%;background:#c23b22;animation:ndSw 7s infinite}.nd-cong .s2{left:45%;background:#d99a1e}.nd-cong .s3{left:62%;background:#6a4ca8}
-.nd-cong .nd-line{left:6%;right:6%;top:78%;width:88%;height:30px;opacity:0;animation:ndLine 7s infinite}.nd-cong .nd-ink{stroke-dasharray:1;stroke-dashoffset:1;animation:ndInk 7s infinite}
-.nd-cong .nd-hand.h1{left:26%;top:60%;animation:ndCong 7s infinite}
-@keyframes ndSw{0%,18%{transform:scale(1)}24%{transform:scale(1.3)}30%,100%{transform:scale(1)}}
-@keyframes ndLine{0%,34%{opacity:0}40%,92%{opacity:1}100%{opacity:0}}@keyframes ndInk{0%,44%{stroke-dashoffset:1}84%,100%{stroke-dashoffset:0}}
-@keyframes ndCong{0%,10%{opacity:0;transform:translate(0,0)}16%,28%{opacity:1;transform:translate(0,0)}36%{opacity:1;transform:translate(-4%,50%)}46%{opacity:1;transform:translate(-4%,50%)}84%{opacity:1;transform:translate(220px,40%)}92%,100%{opacity:0;transform:translate(220px,40%)}}
-.kgr-still~*,.kgr-still *{animation:none!important}
-@media (prefers-reduced-motion:reduce){.nwb-st *{animation:none!important}.nwb-st .nd-hand,.nwb-st .nd-ok,.nwb-st .nd-mark.m1{opacity:1!important}}
-`;document.head.appendChild(st)})();
-/* ================= rules-screen demos of mg-5s-clear (owner OD 21/11 ~00:50Z «tôi không hiểu đang chơi cái gì»): ban, tat/ne, banh, duho, doi, hoadien =================
-   Same pattern as the td demos above: wordless-ish looping CSS pictures (a short label only), still under Cảnh động off. Every one shows: the object, the move (a hand), the ✓. */
-(function(){
- const H=()=>typeof KG82_HAND==="string"?KG82_HAND:"";
- const hand=()=>`<span class="nd-hand">${H()}<b class="kgr-ring"></b></span>`;
- const wrap=(c,inner)=>`<div class="kgr-demo nwb-demo" aria-hidden="true"><div class="kgr-st nwb-st nd5 ${c}">${inner}</div></div>`;
- const cap=t=>`<b class="nd-cap">${t}</b>`;
- Object.assign(window.NWB_DEMO,{
-  aim:()=>wrap("nd-ban",`<i class="nd-rail"><i class="nd-zn"></i></i><b class="nd-mk">▼<i></i></b><span class="nd-tg"></span>${cap("Chạm khi mũi ngắm ở giữa")}${hand()}<b class="nd-ok">✓</b>`),
-  slapbar:(s)=>{const ne=s&&s.kind==="ne";return wrap(ne?"nd-ne":"nd-tat",`<i class="nd-rail"><i class="nd-zn z1"></i><i class="nd-zn z2"></i></i><b class="nd-mk">▼</b>${cap(ne?"Chạm khi kim vào vùng xanh":"Chạm khi kim qua giữa vùng đỏ")}${hand()}<b class="nd-ok">✓</b>`)},
-  cook:()=>wrap("nd-banh",`<span class="nd-gg"><i class="nd-zn"></i><i class="nd-fl"></i></span><span class="nd-pot"></span><span class="nd-slip">gạo</span><span class="nd-fan">quạt</span>${cap("Giữ quạt cho lửa vừa, kéo nguyên liệu vào nồi")}${hand()}<b class="nd-ok">✓</b>`),
-  tspluck:()=>wrap("nd-duho",`<i class="nd-lane"><u>vùng hái</u></i><span class="nd-lotus"></span>${cap("Chạm sen khi nó vào vùng sáng")}${hand()}<b class="nd-ok">✓</b>`),
-  doiline:()=>wrap("nd-doi",`<span class="nd-sc l"><svg viewBox="0 0 40 40"><path d="M10 8 L28 32" stroke="#2a1a12" stroke-width="4" stroke-linecap="round"/></svg></span><i class="nd-axis"></i><span class="nd-sc r"></span><span class="nd-tl"><svg viewBox="0 0 40 40"><path d="M30 8 L12 32" stroke="#2a1a12" stroke-width="4" stroke-linecap="round"/></svg></span>${cap("Nét bên phải là hình lật gương của nét bên trái")}${hand()}<b class="nd-ok">✓</b>`),
-  hoadien:()=>wrap("nd-hd",`<span class="nd-face"><i class="nd-br l"></i><i class="nd-br r"></i><i class="nd-spot"></i></span><span class="nd-fl2">❀</span>${cap("Đặt hoa điền vào giữa hai đầu mày")}${hand()}<b class="nd-ok">✓</b>`)});
- const st=document.createElement("style");st.id="nwb-demo5-css";st.textContent=`
-.nd5{height:128px}.nd5 .nd-cap{left:4%;right:4%;bottom:4px;text-align:center;font:700 12.5px var(--body,sans-serif);color:#5a3a1a}
-.nd5 .nd-hand{animation:ndx5H 8s infinite}.nd5 .nd-ok{right:6%;top:6px;animation:ndOk 8s infinite}
-@keyframes ndx5H{0%,46%{opacity:0;transform:scale(1.15)}50%{opacity:1;transform:scale(1)}58%{opacity:1;transform:scale(.92)}66%,100%{opacity:0}}
-.nd5 .nd-rail{left:10%;right:10%;top:36px;height:14px;border-radius:3px;background:rgba(120,86,40,.2);border:2px solid #8a6a30}
-.nd5 .nd-zn{position:absolute;top:0;bottom:0}
-.nd5 .nd-mk{top:22px;left:50%;margin-left:-8px;color:#8a2a1e;font-size:18px;line-height:14px;animation:ndx5M 8s infinite}
-@keyframes ndx5M{0%{left:12%}22%{left:88%}46%,92%{left:50%}100%{left:12%}}
-.nd5 .nd-hand{left:52%;top:40px}
-/* ban */
-.nd-ban .nd-rail{top:12px}.nd-ban .nd-mk{top:0}.nd-ban .nd-zn{left:44%;width:12%;background:var(--good,#2d7a52)}
-.nd-ban .nd-mk i{position:absolute;left:7px;top:18px;height:50px;border-left:2px dashed #8a2a1e99}
-.nd-ban .nd-tg{left:50%;top:50px;width:52px;height:52px;margin-left:-26px;border-radius:50%;border:2px solid #6e4d0e;background:radial-gradient(circle,#f0d070 0 14%,#c23b22 14% 34%,#6a8aa0 34% 56%,#2a1a12 56% 78%,#fffaf0 78%)}
-.nd-ban .nd-hand{left:56%;top:12px}
-/* tat / ne */
-.nd-tat .nd-zn.z1{left:30%;width:40%;background:rgba(184,135,42,.6)}.nd-tat .nd-zn.z2{left:44%;width:12%;background:var(--red,#c23b22)}
-.nd-ne .nd-zn.z1{left:62%;width:14%;background:var(--good,#2d7a52)}.nd-ne .nd-zn.z2{display:none}
-.nd-ne .nd-mk{animation:ndx5N 8s infinite}@keyframes ndx5N{0%{left:12%}22%{left:88%}46%,92%{left:69%}100%{left:12%}}.nd-ne .nd-hand{left:71%}
-/* banh */
-.nd-banh .nd-gg{left:8%;top:8px;width:22px;height:84px;border:2px solid #8a6a30;border-radius:3px;background:#fffdf6;overflow:hidden}
-.nd-banh .nd-zn{left:0;right:0;top:28%;height:26%;background:rgba(76,160,110,.75)}
-.nd-banh .nd-fl{position:absolute;left:3px;right:3px;bottom:0;height:12%;background:linear-gradient(#c23b22,#f0b040);animation:ndx5F 8s infinite}
-@keyframes ndx5F{0%,10%{height:12%}34%,92%{height:48%}100%{height:12%}}
-.nd-banh .nd-pot{left:50%;top:26px;width:62px;height:46px;margin-left:-31px;border-radius:8px 8px 26px 26px;background:#4a3326;border:2px solid #2a1a12}
-.nd-banh .nd-slip{left:62%;top:10px;padding:2px 10px;background:#fffdf6;border:1.5px solid #b59a6a;border-radius:6px;font:700 13px var(--body,sans-serif);animation:ndx5S 8s infinite}
-@keyframes ndx5S{0%,40%{left:70%;top:14px;opacity:1}58%,64%{left:50%;margin-left:-16px;top:34px;opacity:1}70%,100%{left:50%;margin-left:-16px;top:34px;opacity:0}}
-.nd5.nd-banh{height:140px}.nd-banh .nd-fan{left:22%;top:64px;padding:2px 8px;background:#f2d3a4;border:1.5px solid #8a5a2a;border-radius:8px;font:700 12px var(--body,sans-serif)}
-.nd-banh .nd-hand{left:30%;top:72px;animation:ndx5F2 8s infinite}@keyframes ndx5F2{0%,8%{opacity:0}12%,34%{opacity:1;transform:scale(.92)}40%,100%{opacity:0}}
-/* duho */
-.nd-duho{background:linear-gradient(#bfe3d8,#8fc7b3)}.nd-duho .nd-lane{left:30%;right:30%;top:6px;height:74px;border:2px dashed rgba(184,135,42,.9);border-radius:10px;background:rgba(255,226,140,.38)}
-.nd-duho .nd-lane u{position:absolute;left:0;right:0;top:-1px;text-align:center;text-decoration:none;font:700 11px var(--body,sans-serif);color:#6b4a1c}
-.nd-duho .nd-lotus{top:40px;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle,#fff0f4 0 20%,#e48aa4 22% 70%,#c9617f 72%);border:2px solid #fff;animation:ndx5L 8s infinite}
-@keyframes ndx5L{0%{left:94%}46%,56%{left:48%}100%{left:-8%}}.nd-duho .nd-hand{left:50%;top:44px}
-/* doi */
-.nd-doi .nd-sc{top:8px;width:56px;height:70px;border:1.5px solid #b59a6a;border-radius:8px;background:rgba(255,252,242,.7)}.nd-doi .nd-sc.l{left:22%}.nd-doi .nd-sc.r{right:22%;border-style:dashed}
-.nd-doi .nd-sc svg{width:100%;height:100%}.nd-doi .nd-axis{left:50%;top:6px;height:74px;border-left:2px dashed rgba(194,59,34,.6)}
-.nd5.nd-doi{height:146px}.nd-doi .nd-tl{width:44px;height:44px;border:1.5px solid #b59a6a;border-radius:8px;background:#fffdf6;animation:ndx5T 8s infinite}.nd-doi .nd-tl svg{width:100%;height:100%}
-@keyframes ndx5T{0%,40%{left:calc(50% - 22px);top:78px}58%,92%{right:auto;left:calc(78% - 56px);top:14px}100%{left:calc(50% - 22px);top:78px}}
-.nd-doi .nd-hand{left:calc(50% - 6px);top:86px;animation:ndx5D 8s infinite}@keyframes ndx5D{0%,38%{opacity:0;left:calc(50% - 6px);top:92px}42%{opacity:1}58%,64%{opacity:1;left:calc(78% - 34px);top:28px}70%,100%{opacity:0}}
-/* hoadien */
-.nd-hd .nd-face{left:50%;top:4px;width:78px;height:84px;margin-left:-39px;border-radius:50% 50% 46% 46%;background:#f1dfc3;border:2px solid #8a6a30}
-.nd-hd .nd-br{position:absolute;top:34px;width:26px;height:5px;border-radius:5px;background:#3a2412}.nd-hd .nd-br.l{left:8px;transform:rotate(-8deg)}.nd-hd .nd-br.r{right:8px;transform:rotate(8deg)}
-.nd-hd .nd-spot{position:absolute;left:50%;top:26px;width:16px;height:16px;margin-left:-8px;border-radius:50%;border:2px dashed #c23b22}
-.nd-hd .nd-fl2{left:70%;top:68px;font-size:22px;color:#c23b22;animation:ndx5H2 8s infinite}
-@keyframes ndx5H2{0%,40%{left:72%;top:64px}58%,92%{left:calc(50% - 11px);top:26px}100%{left:72%;top:64px}}
-.nd-hd .nd-hand{left:calc(72% + 4px);top:70px;animation:ndx5D2 8s infinite}@keyframes ndx5D2{0%,38%{opacity:0;left:calc(72% + 4px);top:70px}42%{opacity:1}58%,64%{opacity:1;left:calc(50% - 6px);top:32px}70%,100%{opacity:0}}
-@media (prefers-reduced-motion:reduce){.nd5 .nd-hand,.nd5 .nd-ok{opacity:1!important}}
 `;document.head.appendChild(st)})();
 /* ================= jlant: THẮP ĐÈN — the non-word lantern game for the Nguyên tiêu / Hoa đăng / Trung thu contests (key "doden") =================
    Owner 16/11 07:20Z (no word games): the đố đèn riddle game (j91 k91Lantern) is replaced by a lantern light/shape game, winnable by what is SHOWN.
@@ -50311,7 +50149,7 @@ function petcGameBox(title,how){const w=document.getElementById("kpcgw");if(!w)r
    NO khắc are spent and nothing runs until «Sẵn sàng»; then the khắc go and run(box) starts the real game. tutor(box, env) = the unscored guided round. */
 function petcRules(kind,title,how,e,tutor,run){const box=petcGameBox(title,how);if(!box)return;PETC.game=kind;PETC.kind=kind;PETC.rdy=0;
  box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="kpcgo">Bắt đầu</button></div>`;
- kgReady(box,{n:"Chăm",t:title,how,e,go:"#kpcgo",pic:"",timed:false,tutor});
+ kgReady(box,{n:"Chăm",t:title,how,e,go:"#kpcgo",pic:"",ev:false,timed:false,tutor});
  try{const t=box.querySelector("#kgrtut")||box.querySelector("#kpcgo");if(t)t.scrollIntoView({block:"nearest"})}catch(e){}
  box.querySelector("#kpcgo").addEventListener("click",()=>{if(PETC.game!==kind||PETC.rdy)return;if(!can(BAL.pet.khac))return;spend(BAL.pet.khac);PETC.rdy=1;box.classList.remove("kgintro");box.innerHTML="";run(box)})}
 /* guided rounds (unscored, nothing saved): the hand shows the move through KG82.peek; ends on the first success or two */
@@ -53021,9 +52859,10 @@ function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n
  const round=()=>{const k=P.rounds[i],K=KG82_KIND[k];KG82.ctx="thi";const lv=exLv(S,k);mgSet(k,{occ:"exam",rank:P.to,lv});/* mg-balance: board ease from the tier; skip keeps her level */try{kg82Preload(k)}catch(x){}
   const d=kg82Open({art:"Khảo hạch",title:`Môn ${i+1}/${n} · ${K.n}`,how:K.how,round:"Môn",roundV:`${i+1}/${n}`,pic:kg82Pic(k)});if(!d){e.pend=null;done(exFinish(P,{raws}));return}
   const box=kg82Box();const SK=exSkipRaw(P,k);
-  box.innerHTML=`<h4 class="kpst">Khảo hạch ${P.srv?"lên":"tấn phong"} ${P.rk}</h4>`+kg82Rows([["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",mgDiffTxt(KG82.tier,k),"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]])+
+  const exRows=[["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",mgDiffTxt(KG82.tier,k),"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]];/* mg-intro-2: Độ khó + Mức đỗ shown, the rest behind the kit «!» */
+  box.innerHTML=kgBangRows(`Khảo hạch ${P.srv?"lên":"tấn phong"} ${P.rk}`,exRows,[exRows[2],exRows[3]])+
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`môn này tính ${SK}/10, như người cùng bậc`})}</div>`;
-  kgReady(box,{kind:k});/* KIT §13.7 */
+  kgReady(box,{kind:k,ev:"sys:thi-tam"});/* KIT §13.7 */
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
  const after=(raw,sk)=>{raws.push(raw);i++;const last=i>=n;try{save()}catch(x){}
   kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`,raw>=5);
@@ -77420,12 +77259,13 @@ function entExam(o,fin){o=o||{};let art=o.art||"";let k=entKind(art);if(!k||entW
  if(X.road&&X.topN){const G=BAL.mgTier.word[3];const pS=entOdds(X.road,SK,art,2),pG=entOdds(X.road,G,art,2);
   rows.push([X.flat?"Được để mắt":X.srv?"Về hầu phi tần bậc cao":`Lên tới ${X.topN}`,`để tài nghệ quyết định: ${entWord(pS)} · chơi xuất sắc: ${entWord(pG)}`,"n"])}
  const box=kg82Box();KG82.phase="intro";
- box.innerHTML=`<h4 class="kpst">${X.head}</h4>`+kg82Rows(rows)+
+ const keepN=rows.filter(r=>r[0]==="Độ khó"||/^(Lên tới|Được để mắt|Về hầu)/.test(r[0]));/* mg-intro-2: Độ khó + the road row; the rest behind the kit «!» */
+ box.innerHTML=kgBangRows(X.head,rows,keepN.length?keepN:rows.slice(0,2))+
   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`tính ${SK}/10, như người cùng bậc`})}</div>`;
  const after=(raw,sk)=>{KG82.phase="result";kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");
   kg82ShowRes(kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"],["Kết quả",o.note||"tính cùng Sắc, Tài, Đức","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
   $("kg82ok").onclick=()=>{kg82Close();end(raw)}};
- kgReady(box,{kind:k});/* KIT §13.7 */
+ kgReady(box,{kind:k,ev:"sys:tuyen-tu"});/* KIT §13.7 */
  $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)}
 /* the ONE seam (contract set by review/kc-roads-cn-nc-r1 at jkc2 kc2Play): kcEntryExam(kind, done(raw 0..10), info{art,origin,title,note}) */
 window.kcEntryExam=function(kind,fin,info){if(kind&&typeof kind==="object"){const o=kind;kind=null;info=o}info=info||{};entExam(Object.assign({},info,{kind}),fin)};
@@ -84892,7 +84732,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
   /* KIT §13.7 (mg-ui-rest, owner OD:L1981): the tap opens the RULES screen (kgReady: luật + «Hướng dẫn» + «Sẵn sàng»); the khắc are spent and the game starts only on «Sẵn sàng» */
   const W=shelfWord(shelfOf(S).g[SHPC.g]);w.innerHTML=kitGameFrame({art:"Chăm",title:W.act,how:W.how,id:"kshpgame"})+`<div class="kg82act">${kitQuick({id:"kshpquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;SHPC.game="rules";SHPC.rdy=0;
   const box=document.getElementById("kshpgame");box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="kshpgo">Bắt đầu</button></div>`;
-  kgReady(box,{n:"Chăm",t:W.act,how:W.how,e:"hold",go:"#kshpgo",pic:"",timed:false,tutor:(b,env)=>{const G=BAL.shelf.plant.game;const stop=shelfWaterGame(b,()=>{SHPC.game="rules";KG82.hint=null;env.end()},W,env);
+  kgReady(box,{n:"Chăm",t:W.act,how:W.how,e:"hold",go:"#kshpgo",pic:"",ev:false,timed:false,tutor:(b,env)=>{const G=BAL.shelf.plant.game;const stop=shelfWaterGame(b,()=>{SHPC.game="rules";KG82.hint=null;env.end()},W,env);
     KG82.hint=()=>{const bt=b.querySelector("[data-shw]");if(!bt)return null;const r=bt.getBoundingClientRect(),lv=SHPC.peek?SHPC.peek():0;return{x:r.left+r.width/2,y:r.top+r.height/2,soon:lv>=G.band[0]-1&&lv<=G.band[1]}};
     return()=>{stop();KG82.hint=null;SHPC.game="rules"}}});
   try{const t=box.querySelector("#kgrtut")||box.querySelector("#kshpgo");if(t)t.scrollIntoView({block:"nearest"})}catch(e){}
@@ -90837,7 +90677,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a723a22af0c9";window.CTM_BUILD=BUILD;
+const BUILD="432a0dfc3f59";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
