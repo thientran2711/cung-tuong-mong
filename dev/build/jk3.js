@@ -125,7 +125,7 @@ window.kgfClearEmo=kgfClearEmo;
    chuyện của chủ, tai mắt cho người khác when they apply) — the facts that sat in a separate servant box (srk = the header's title, not repeated) */
 const K3_SRVAS=["nt","merit","wage","lau","sec","spy"];
 function k3AsRows(){if(!S||S.dead)return[];const rd=window.kitRoad&&kitRoad();
- if(rd==="srv"){const L=[["mat","Tai mắt",S.mat|0]];K3_SRVAS.forEach(k=>{const b=k3hc(k);if(b)L.push([k,k3lab(b),k3val(b)])});return L}
+ if(rd==="srv"){const L=[["mat","Tai mắt",S.mat|0]];K3_SRVAS.forEach(k=>{const b=k3hc(k);if(b)L.push([k,k==="nt"?"Ngài để ý"/* the column width (KIT_RCOLW 140 px) cuts «Hoàng thượng để ý»; «Ngài» = Hoàng thượng as in «Ngài sủng ngươi»; tap = the full HX text */:k3lab(b),k3val(b)])});return L}
  /* consort-only facts (Lật thẻ, Có thai, Bổng lộc…): none in lãnh cung nor at home (review/small-bugs-2) */if(rd)return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
  L.push(["mat","Tai mắt",S.mat|0]);
  let c="",n="";try{c=chanceLvl(conceiveCh())}catch(e){}try{n=chanceLvl(nightCh())}catch(e){}

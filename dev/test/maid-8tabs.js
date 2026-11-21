@@ -54,7 +54,7 @@ const walk=p=>p.evaluate(()=>{const out=[];const heads=[...document.querySelecto
     py:R?[...R.querySelectorAll('.k3py [data-k3]')].map(x=>x.dataset.k3):null,rk:rkName(S)}});
   ok(!c33.strip,sz+' #33: no «Cung nữ … · Chủ tin» strip under the tabs',c33);
   ok(!c33.btn||(c33.btn[0]===`${c33.tin}Chủ tin`&&c33.btn.some(x=>/Chí tôn$/.test(x))),sz+' #33: right column = «Chủ tin N» in the Cung nhân place + Chí tôn',c33.btn);
-  ok(!c33.as||(c33.as[0]==='Tai mắt'&&c33.as.includes('Hoàng thượng để ý')&&c33.as.includes('Công lao')&&c33.as.includes('Lương tháng')),sz+' #33: the Ân sủng card holds Tai mắt + her facts',c33.as);
+  ok(!c33.as||(c33.as[0]==='Tai mắt'&&c33.as.includes('Ngài để ý')&&c33.as.includes('Công lao')&&c33.as.includes('Lương tháng')),sz+' #33: the Ân sủng card holds Tai mắt + her facts',c33.as);
   ok(!c33.py||!c33.py.some(k=>['srk','nt','wage','merit'].includes(k)),sz+' #33: no separate servant box',c33.py);
   ok(c33.rk!=='Đáp ứng'&&/Cung nữ|Ma ma/.test(c33.rk),sz+' her own title in consort panels = her servant rung',c33.rk);
   /* 4 rank-up */
