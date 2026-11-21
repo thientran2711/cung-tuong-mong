@@ -1677,3 +1677,9 @@ SẴN SÀNG KIỂM huong-cue d9fa3a93 (round 2: Điều hương words + group a/
 - OWNER DEADLINE all non-UI 100 % LIVE by 21/11 ~20:00Z. Owner AWAKE and playing (writes in this main chat).
 - TRIGGER: MAIN CHÍNH 83 hourly trig_011C4JwoyhAG9MBYnsWztGx7 → successor creates its own (minute 32) and disables this one. Next title "MAIN CHÍNH 84".
 - (21/11 01:24Z) MAIN CHÍNH 83 opened child MAIN CHÍNH 84 = session_01Rc5AsKwFNncn5NJ71zfUof (depth 4). 83 stops; 84 disables trig_011C4JwoyhAG9MBYnsWztGx7. Late messages to 83 are relayed to 84.
+
+## MAIN CHÍNH 84 (session_01Rc5AsKwFNncn5NJ71zfUof) — 21/11 ~01:35Z
+- MAIN = MAIN CHÍNH 84 session_01Rc5AsKwFNncn5NJ71zfUof; START_CTX ~7 % (est.; get_session reads 0) → roll at ~32 %, ceiling 60 %; depth 4 (limit 8). Trigger trig_01WbDiHoAN975v3qdgWa5q9j (minute 32); 83's trig_011C4JwoyhAG9MBYnsWztGx7 disabled. All rv/workers/keeper/82 told "report here".
+- LOAD: main running 9 (owner bugs/UI/go-live only: rv td-dung-clear, den-look, huong-cue, chai-ramp, MSxpxbsA; mg-5s-clear, huong-cue-2, dauho-lv5, ui-tour PDF; keeper) | B running (mg-craft theu ETA ~03:30Z; 5 stale LAND READY) | C art with owner | D night chain #6 + balance | E 8 seats | moved: none.
+- (01:30Z) td-dung-clear rv FAIL law 9 (pill() private chip, private «Đỡ trái/phải» buttons) → NOT waived; rv KRhcu4Cu told to fix itself on review/td-dung-clear-rv + re-gate + LAND READY. kit-ton-row-2 f8d36f6b queued at rv MSxpxbsA after kit-progress-run → kit-kg82-stack.
+- LAND ORDER: phutang-road 54e068e5 (E blocker, FF on e4fd4dcf, ~01:45Z) FIRST → owner-waited mini-game fixes as they PASS → B stale train (thancan 6ed639e7, coop-name-clash 91216b96, wear-slots 23f1e651, coop-week-stall ccd41e45, coop-guest-agent a00be4e5) via a main LANDER worker re-merging serially onto LIVE → E order errand-bal → cold-faction → pm -c → kc-coop-select → or20 → home-chapters → ge-phutang → dresscode.
