@@ -742,4 +742,4 @@ kit-rankunit rv | review/kit-rankunit-rv 673a9028 | rv session | FAIL (place nam
 | REVIEW empty-states r2 (SMALL sonnet) 892976db | review/empty-states-rv2; briefs/main87-rv-empty-states.md | MAIN CHÍNH 87 | session_01Rc5AsMCJmZryqUCw8ZbtnY | RUNNING | 21/11 03:50Z |
 | REVIEW chapter-card r2 (SMALL sonnet) 52657663 | review/chapter-card-rv; briefs/main87-rv-chapter-card.md | MAIN CHÍNH 87 | session_01Rc5AsNH8m96AMdWBf7vREp | RUNNING | 21/11 03:50Z |
 | bag-inline-3 worker (sonnet; F1 F2 of bag-inline-2; succeeds JTtZ) | review/bag-inline-2; briefs/main87-bag-inline-3.md | MAIN CHÍNH 87 | session_01Rc5AsJuyCsaNqz1pfQgV8q | RUNNING | 21/11 03:50Z |
-| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | (opening) | RUNNING | 21/11 05:52Z |
+| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | RUNNING | 21/11 05:52Z |
