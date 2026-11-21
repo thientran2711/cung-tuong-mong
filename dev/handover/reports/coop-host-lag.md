@@ -157,3 +157,27 @@ Branch review/coop-host-lag-r2 @ **70309b27** = f13d8932 + merge LIVE aee7ff84 +
 2. coop-e2e "hl force (c)" FAIL ×2 on the aee7ff84 merge = TEST artifact: the forced re-housing put the consort under the GUEST player; the host reads resHead 902, her seat "me" (jcoopworld REFF: "me" = that seat's pid) — same fact. The test now maps "me" to the seat's pid; COOP_SWAP run exercises exactly that case (902/902 PASS).
 Tests on 70309b27 (each alone): coop-hl-faces N=8 three runs on the fixed code: 8/8, 8/8 (pre-commit), 7/8 (R4: at the START window the guest had no Thái hậu face within 20 s — the host sent only 2 "ask" checks in that window, no "start" face send; healed by week 1, redrawn 0 — residual start-timing of cause 2/3, ~1 in 32 room starts on this branch; LIVE without r2 had 3/8 of this kind) · extra run 8/8 (total 31/32 room starts clean, 0 splits after week 1) · coop-e2e 104/104 ×5 · COOP_HL_FORCE=1 106/106 · +COOP_SWAP=1 106/106 · COOP_NC_FORCE=1 106/106 · quickcheck PASS (old save ok; perf new/live render 262/283 ms) · undef PASS (266) · role-parity ALL PASS.
 Left for the reviewer: (a) Thái hậu / servant / her maid holding the same pool face as her portrait or her people = duplicate face (both seats agree), not fixed here; (b) the start-window miss above (heals at week 1); (c) #2b's note: guest f88Carry sets n.fromMaid on her seat. LIVE is at a4ee93d7 now (branch has 2bab70e1): the land re-merge needs only index.html/sw.js rebuilt unless co-op files move.
+
+## REVIEW r2-r1 — BIG reviewer session_01N1tNP2pAt8zEYzvzn4yUxb (opus), 21/11; branch review/coop-host-lag-r2-r1 @ c34efd5b (contains LIVE 9c5b6de3)
+PRIORITY #1 CHECK: grepped OWNER_DECISIONS / OWNER_LEDGER / HANDOVER / PROGRESS + git grep origin/main and origin/review/* for fidBack / FID / reserveFriend / rfYield / roomFaces / mindTr / netOf; reused jcoopworld rfYield / roomFaces (coop-room-faces, LIVE) and the r2c clash path; no new mechanism added; read CLAIMS + FOREMAN_B_STATUS (Foreman B = ROOT-8 session_01N1tNP5aArhXJqHNFSRixhK).
+
+VERDICT: NOT YET — reviewer rolled over by context (summary compaction > START + 25 %). Branch is pushed; a successor reviewer finishes it. Do NOT land 70309b27 alone: the fixes below are needed.
+
+### Findings on 70309b27 (+ fixes on review/coop-host-lag-r2-r1)
+1. Start-window miss (7/8) = REAL BUG, not a probe artifact: the host answered the guest's "ask" with the diff only, no faces (R5 guest had no Thái hậu face). Fix: "ask" in FACEW.
+2. Thái hậu redraw one beat after the merged week (same signature as r1 E1): fidBack ran only on "week"/"start"; a later rebuild (fromCanon) re-drew. Fix: fidBack in CW.afterFC (after every host rebuild, before render).
+3. After LIVE coop-room-faces: room audit (D) failed 3/8 on the branch, 0/14 on LIVE: fidBack gave a world servant its pre-join face while the guest drew it for her own maid. Fix: fidBack treats every face of the friend's own people as held; reserveFriend's r2c clash covers her maid/staff/kids, order-aware (only a face the merged W never had yields on the host; otherwise rfYield makes HER person yield).
+4. Lazy-write family (law 11, two more members): jmind mindTr (trM fade on read) and jnet netOf (net drawn on read) stored on world people on the guest seat (e2e after rejoin). Fix: wrapped like tinOf (guest shows, host stores + sends).
+5. «hl force (c)» test mapping (resHead 'me' -> 901/902 by seat): checked against jcoopworld REFF/me(): correct, hides no fault.
+6. f88Carry note (#2b (c)): a guest-made world consort is dropped by the merge on both seats (forced CARRY probe 3/3): no lasting split.
+7. Probe artifact: servant sid collides across seats (j10 sidN per seat); probe key now sid+name. The collision itself belongs to coop-guest-names.
+
+### Tests on c34efd5b (chain6)
+coop-hl-faces x3 N=8: 24/24 rooms clean · coop-e2e x5: 4x 136/136, 1x 135/136 (open item B) · HL_FORCE 138/138 both seat orders · NC_FORCE 138/138 both · coop-room-faces x3: 2 PASS 37/37, 1 FAIL (open item A) · coop-pool-face 13/13 · coop-arrive-see L9 swap0 89/89, swap1 89/89 · coop-emo-seat 25/25 · undef-scan PASS (281) · quickcheck PASS, old save ok, perf new/live render 218/240, tab 484/459, buổi 1005/992, tasks>200ms 21/19 · role-parity ALL PASS · worker node tests 7/7.
+
+### OPEN (successor: fix or prove LIVE has it, then rerun the set above)
+A. Stuck week (~5/40 runs on the branch since LIVE 9c5b6de3; 0/14 roomfaces+e2e runs on LIVE so far): the guest never sends her week end: CW.pend=true, sent=-1, Q holds night dialogs ("cnvScold:… quở mắng", "e68q6srvCredit:Kẻ hầu") that are never shown, so tryEnd waits on Q.length for ever. Next: run LIVE coop-room-faces/e2e ~10x more to get a real LIVE rate; if LIVE is clean, bisect the branch commits (70309b27 alone vs + my fixes) for what keeps Q un-shown on the guest.
+B. After rejoin: S.fidUsed guest-only tail (maid:m09/m33) — coop-room-faces' figUsed writes held faces into the list on each seat; the host's "state" check (added) did not close it. Likely the guest's own new faces before her blob reaches the host; decide: host adds friendFaces to the list at every check, or the probe ignores the list tail order.
+
+### HANDOVER
+Worktree /home/user/wt/hl-r2r1 (review/coop-host-lag-r2-r1), LIVE build in /home/user/wt/hl-old (detached 9c5b6de3). Chain scripts /tmp/claude-0/rv/chain6.sh (logs c6/). Overlaps still to rerun by whoever lands second: coop-emo-seat (landed), coop-arrive-see (landed), coop-room-faces (landed), coop-thin-g F1 (assemble.py / coop-e2e.js).
