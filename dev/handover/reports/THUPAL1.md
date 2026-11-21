@@ -35,7 +35,7 @@ Why Xuân/Hạ move in 2–3: her Xuân coral-pink (hue 17) and Hạ peach (hue 
 
 ---
 ## PART 2 — L1583 full redo (Foreman msg 00:26Z: redo all 86 × 4, separate file, rule add)
-- Rule **B30** added (rule.py add, owner L1583 verbatim): MAIN carries the season feeling, SECONDARY free but suits; pink only as phụ in Thu.
+- Rule **B30** (L1583): the foreman had already added it; my duplicate was dropped in the merge (theirs kept).
 - Solver `dev/art/palettes3/four_season_L1583.py` → **dev/art/face-common/palettes_season_L1583.json** (NEW file; palettes_season_deep.json untouched) + diff `review-sheets/thu_palette_L1582/diff_L1583.json`.
   Least change: keeps a pair when its main already reads right; else picks inside the group band (A32) + season notch; Hạ may go light (lemon/mango exist only light); Thu deep groups may lighten to .74; no grey phụ (B19); no pink/dusty-rose/light-salmon as a NEW Thu main (L1583); A31 ΔE ≥ 20 / neutral ≥ 12; check_unique **0 FAIL** (WARNs only).
 - Result (90 people): mains reading as their season Xuân 78 · Hạ 83 · Thu 84 (was 9) · Đông 86. **Every miss is a ★GỐC drawn root (29)** — kept per L27, listed in `_clashes` (owner may decide to let roots move). A31 had to relax to ΔE 16 (or 12 for c08/s63) for 11 people whose ★GỐC roots leave no room (`_fails`); 16 people carry A31 notes in `a31`.
