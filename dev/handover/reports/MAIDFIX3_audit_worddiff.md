@@ -1,0 +1,279 @@
+### m09_chuongsu_L1836.txt  vs chuongsu_gpt_v5.txt: 25 word-diff hunks, keep unallowed drops=0
+  - `[ChatGPT: attach Image 1 = m18 face reference (the same single reference used on Magnific, s7IPw0Ll8e). 'The reference image' and 'the identity reference' below` → ``
+  - `` → `matte`
+  - `and gauze` → `crepe (lụa tơ tằm dệt nhám): a softly crinkled, slightly grainy, completely MATTE surface`
+  - `a soft` → `no`
+  - `and` → `at all, never glossy, never satin, never brocade, with`
+  - `SLIM OVAL` → `small HEART-SHAPED`
+  - `gently` → `narrow`
+  - `chin, large` → `chin and wide cheekbones, long`
+  - `with softly upturned` → `clearly UPTURNED at the`
+  - `corners, fully open and clear, softly` → `corners (a cat-eye look), high thin`
+  - `thin` → ``
+  - `slim` → `small`
+  - `small rosebud mouth.` → `slightly fuller pouty lower lip.`
+  - `Sparkling eyes,` → ``
+  - `small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin.` → `sly, confident little smile with one corner of the mouth higher.`
+  - `` → `matte`
+  - `brocade` → `crepe`
+  - `` → `tone-on-tone`
+  - `` → `in her main eggplant purple`
+  - `` → `at the FRONT of the waist`
+  - `` → `pretty, graceful bow, the front BOW in the opposite colour teal so the`
+  - `at the waist,` → `stands out, never white,`
+  - `deep rose` → `teal`
+  - `#CA7281,` → `#499597,`
+  - `` → `CLEAN COLOUR EDGES: every garment part is ONE flat solid colour with crisp clean edges (collar band, jacket, sash, bow, skirt): no colour bleeding, no gradient `
+### m09_mama_a36_L1836.txt  vs m09_mama_a36_builder.txt: 5 word-diff hunks, keep unallowed drops=0
+  - `` → `in her main colour`
+  - `` → `at the FRONT of the waist`
+  - `` → `pretty, graceful bow, the front BOW in the opposite (secondary) colour so the`
+  - `at the waist,` → `stands out, never white,`
+  - `` → `CLEAN COLOUR EDGES: every garment part is ONE flat solid colour with crisp clean edges (collar band, jacket, sash, bow, skirt): no colour bleeding, no gradient `
+### m09_mama_a51_L1836.txt  vs mama_gpt_v6_a51.txt: 27 word-diff hunks, keep unallowed drops=0
+  - `[ChatGPT: attach Image 1 = her face reference (Magnific KLpSlnEkqp, m05). 'The reference image' and 'the identity reference' below both mean Image 1. Make ONE t` → ``
+  - `broad ROUND-OVAL` → `small HEART-SHAPED`
+  - `full apple cheeks` → `a narrow pointed chin`
+  - `a firm little chin, large round doe` → `wide cheekbones, long almond`
+  - `with` → ``
+  - `defined double lids, thick softly` → `UPTURNED at the outer corners (a cat-eye look), high thin`
+  - `short` → `small`
+  - `full plump lips.` → `a slightly fuller pouty lower lip.`
+  - `A clear bright striking gaze, defined elegant features,` → ``
+  - `subtle poised closed-lip smile, eyes fully open, never a stretched grin.` → `sly, confident little smile with one corner of the mouth higher.`
+  - `Her` → `STYLE LOCK (same drawing as her 36-year-old picture, the second reference): exactly the same soft painterly guofeng illustration rendering, the same smooth lumi`
+  - `lines.` → `lines, NEVER photographic, NEVER photo-realistic, no realistic skin texture, no pores, no detailed wrinkles.`
+  - `` → `At this age this elder colour rule wins over the first COLOUR RULE (medium-light tone): her own colours in the DEEPER, DARKER mature shades described above, nev`
+  - `coral red` → `rose pink`
+  - `coral red:` → `rose pink:`
+  - `coral red,` → `rose pink,`
+  - `coral red,` → `rose pink,`
+  - `coral red` → `rose pink`
+  - `#D4897D` → `#D5909C`
+  - `RIGHT,` → `RIGHT side of the picture,`
+  - `` → `shoulders,`
+  - `to` → `so that her chest and face point toward`
+  - `right, her` → `right edge of the picture, the shoulder on the picture's`
+  - `shoulder` → `side`
+  - `robe with slippers visible,` → `robe, only slipper toe tips peeking under the hem,`
+  - `IGNORE the reference image's background completely; the background is completely transparent with NOTHING behind or around her: no backdrop, no parchment, no pa` → ``
+  - `CAPTION: in LARGE bold letters, top-left corner, on the plain background, never over her body, write exactly this Vietnamese text WITH accents, spelling every V` → ``
+### m09_nhat_L1836.txt  vs test18_nhat_L1797.txt: 22 word-diff hunks, keep unallowed drops=0
+  - `SLIM OVAL` → `small HEART-SHAPED`
+  - `gently` → `narrow`
+  - `chin, large` → `chin and wide cheekbones, long`
+  - `with softly upturned` → `clearly UPTURNED at the`
+  - `corners, fully open and clear, softly` → `corners (a cat-eye look), high thin`
+  - `thin` → ``
+  - `slim` → `small`
+  - `small rosebud mouth.` → `slightly fuller pouty lower lip.`
+  - `Sparkling eyes,` → ``
+  - `small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin.` → `sly, confident little smile with one corner of the mouth higher.`
+  - `powder blue` → `rose pink`
+  - `deep rose` → `teal`
+  - `deep rose,` → `teal,`
+  - `powder blue,` → `rose pink,`
+  - `powder blue` → `rose pink`
+  - `#A7BAD2` → `#D5909C`
+  - `deep rose` → `teal`
+  - `#CA7281,` → `#499597,`
+  - `powder blue` → `rose pink`
+  - `blue` → `rose pink`
+  - `deep rose` → `teal`
+  - `deep rose.` → `teal.`
+### m09_nhat_thancan_L1836.txt  vs test18_nhat_thancan_L1797.txt: 22 word-diff hunks, keep unallowed drops=0
+  - `SLIM OVAL` → `small HEART-SHAPED`
+  - `gently` → `narrow`
+  - `chin, large` → `chin and wide cheekbones, long`
+  - `with softly upturned` → `clearly UPTURNED at the`
+  - `corners, fully open and clear, softly` → `corners (a cat-eye look), high thin`
+  - `thin` → ``
+  - `slim` → `small`
+  - `small rosebud mouth.` → `slightly fuller pouty lower lip.`
+  - `Sparkling eyes,` → ``
+  - `small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin.` → `sly, confident little smile with one corner of the mouth higher.`
+  - `deep rose` → `teal`
+  - `powder blue` → `rose pink`
+  - `powder blue,` → `rose pink,`
+  - `deep rose,` → `teal,`
+  - `deep rose` → `teal`
+  - `#CA7281` → `#499597`
+  - `powder blue` → `rose pink`
+  - `#A7BAD2,` → `#D5909C,`
+  - `deep rose` → `teal`
+  - `deep rose` → `teal`
+  - `powder blue` → `rose pink`
+  - `powder blue.` → `rose pink.`
+### m09_nhi_L1836.txt  vs test17_nhi_L1785.txt: 20 word-diff hunks, keep unallowed drops=0
+  - `SLIM OVAL` → `small HEART-SHAPED`
+  - `gently` → `narrow`
+  - `chin, large` → `chin and wide cheekbones, long`
+  - `with softly upturned` → `clearly UPTURNED at the`
+  - `corners, fully open and clear, softly` → `corners (a cat-eye look), high thin`
+  - `thin` → ``
+  - `slim` → `small`
+  - `small rosebud mouth.` → `slightly fuller pouty lower lip.`
+  - `Sparkling eyes,` → ``
+  - `small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin.` → `sly, confident little smile with one corner of the mouth higher.`
+  - `powder blue,` → `rose pink,`
+  - `deep rose` → `teal`
+  - `#CA7281,` → `#499597,`
+  - `deep rose` → `teal`
+  - `powder blue` → `rose pink`
+  - `powder blue;` → `rose pink;`
+  - `powder blue` → `rose pink`
+  - `#A7BAD2` → `#D5909C`
+  - `deep rose` → `teal`
+  - `#CA7281` → `#499597`
+### m09_nhi_thancan_L1836.txt  vs test17_nhi_thancan_L1785.txt: 20 word-diff hunks, keep unallowed drops=0
+  - `SLIM OVAL` → `small HEART-SHAPED`
+  - `gently` → `narrow`
+  - `chin, large` → `chin and wide cheekbones, long`
+  - `with softly upturned` → `clearly UPTURNED at the`
+  - `corners, fully open and clear, softly` → `corners (a cat-eye look), high thin`
+  - `thin` → ``
+  - `slim` → `small`
+  - `small rosebud mouth.` → `slightly fuller pouty lower lip.`
+  - `Sparkling eyes,` → ``
+  - `small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin.` → `sly, confident little smile with one corner of the mouth higher.`
+  - `deep rose,` → `teal,`
+  - `powder blue` → `rose pink`
+  - `#A7BAD2,` → `#D5909C,`
+  - `powder blue` → `rose pink`
+  - `deep rose` → `teal`
+  - `deep rose;` → `teal;`
+  - `deep rose` → `teal`
+  - `#CA7281` → `#499597`
+  - `powder blue` → `rose pink`
+  - `#A7BAD2` → `#D5909C`
+### m09_tam_L1836.txt  vs test17_tam_L1785.txt: 19 word-diff hunks, keep unallowed drops=0
+  - `SLIM OVAL` → `small HEART-SHAPED`
+  - `gently` → `narrow`
+  - `chin, large` → `chin and wide cheekbones, long`
+  - `with softly upturned` → `clearly UPTURNED at the`
+  - `corners, fully open and clear, softly` → `corners (a cat-eye look), high thin`
+  - `thin` → ``
+  - `slim` → `small`
+  - `small rosebud mouth.` → `slightly fuller pouty lower lip.`
+  - `Sparkling eyes,` → ``
+  - `small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin.` → `sly, confident little smile with one corner of the mouth higher.`
+  - `powder blue` → `rose pink`
+  - `#A7BAD2,` → `#D5909C,`
+  - `deep rose` → `teal`
+  - `#CA7281,` → `#499597,`
+  - `powder blue` → `rose pink`
+  - `deep rose` → `teal`
+  - `deep rose;` → `teal;`
+  - `powder blue` → `rose pink`
+  - `deep rose` → `teal`
+### m09_tam_thancan_L1836.txt  vs test17_tam_thancan_L1785.txt: 19 word-diff hunks, keep unallowed drops=0
+  - `SLIM OVAL` → `small HEART-SHAPED`
+  - `gently` → `narrow`
+  - `chin, large` → `chin and wide cheekbones, long`
+  - `with softly upturned` → `clearly UPTURNED at the`
+  - `corners, fully open and clear, softly` → `corners (a cat-eye look), high thin`
+  - `thin` → ``
+  - `slim` → `small`
+  - `small rosebud mouth.` → `slightly fuller pouty lower lip.`
+  - `Sparkling eyes,` → ``
+  - `small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin.` → `sly, confident little smile with one corner of the mouth higher.`
+  - `deep rose` → `teal`
+  - `#CA7281,` → `#499597,`
+  - `powder blue` → `rose pink`
+  - `#A7BAD2,` → `#D5909C,`
+  - `deep rose` → `teal`
+  - `powder blue` → `rose pink`
+  - `powder blue;` → `rose pink;`
+  - `deep rose` → `teal`
+  - `powder blue` → `rose pink`
+### m09_thosu_L1836.txt  vs test3_tm0.txt: 24 word-diff hunks, keep unallowed drops=0
+  - `` → `matte`
+  - `and gauze` → `crepe (lụa tơ tằm dệt nhám): a softly crinkled, slightly grainy, completely MATTE surface`
+  - `a soft` → `no`
+  - `and` → `at all, never glossy, never satin, never brocade, with`
+  - `SLIM OVAL` → `small HEART-SHAPED`
+  - `gently` → `narrow`
+  - `chin, large` → `chin and wide cheekbones, long`
+  - `with softly upturned` → `clearly UPTURNED at the`
+  - `corners, fully open and clear, softly` → `corners (a cat-eye look), high thin`
+  - `thin` → ``
+  - `slim` → `small`
+  - `small rosebud mouth.` → `slightly fuller pouty lower lip.`
+  - `Sparkling eyes,` → ``
+  - `small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin.` → `sly, confident little smile with one corner of the mouth higher.`
+  - `cotton-silk` → `matte silk crepe`
+  - `powder blue` → `rose pink`
+  - `#A7BAD2,` → `#D5909C,`
+  - `deep rose` → `teal`
+  - `#CA7281` → `#499597`
+  - `` → `that sash is tied at the FRONT of the waist in a small, pretty, graceful bow, the sash teal and the front BOW in the opposite colour rose pink so the bow stands`
+  - `deep rose` → `teal`
+  - `powder blue` → `rose pink`
+  - `deep rose` → `teal`
+  - `` → `CLEAN COLOUR EDGES: every garment part is ONE flat solid colour with crisp clean edges (collar band, jacket, sash, bow, skirt): no colour bleeding, no gradient `
+### m18_chuongsu_L1836.txt  vs chuongsu_gpt_v5.txt: 13 word-diff hunks, keep unallowed drops=0
+  - `[ChatGPT: attach Image 1 = m18 face reference (the same single reference used on Magnific, s7IPw0Ll8e). 'The reference image' and 'the identity reference' below` → ``
+  - `` → `matte`
+  - `and gauze` → `crepe (lụa tơ tằm dệt nhám): a softly crinkled, slightly grainy, completely MATTE surface`
+  - `a soft` → `no`
+  - `and` → `at all, never glossy, never satin, never brocade, with`
+  - `` → `matte`
+  - `brocade` → `crepe`
+  - `` → `tone-on-tone`
+  - `` → `in her main eggplant purple`
+  - `` → `at the FRONT of the waist`
+  - `` → `pretty, graceful bow, the front BOW in the opposite colour deep rose so the`
+  - `at the waist,` → `stands out, never white,`
+  - `` → `CLEAN COLOUR EDGES: every garment part is ONE flat solid colour with crisp clean edges (collar band, jacket, sash, bow, skirt): no colour bleeding, no gradient `
+### m18_mama_a36_L1836.txt  vs m18_mama_a36_builder.txt: 5 word-diff hunks, keep unallowed drops=0
+  - `` → `in her main colour`
+  - `` → `at the FRONT of the waist`
+  - `` → `pretty, graceful bow, the front BOW in the opposite (secondary) colour so the`
+  - `at the waist,` → `stands out, never white,`
+  - `` → `CLEAN COLOUR EDGES: every garment part is ONE flat solid colour with crisp clean edges (collar band, jacket, sash, bow, skirt): no colour bleeding, no gradient `
+### m18_mama_a51_L1836.txt  vs mama_gpt_v6_a51.txt: 31 word-diff hunks, keep unallowed drops=0
+  - `[ChatGPT: attach Image 1 = her face reference (Magnific KLpSlnEkqp, m05). 'The reference image' and 'the identity reference' below both mean Image 1. Make ONE t` → ``
+  - `broad ROUND-OVAL` → `SLIM OVAL`
+  - `full apple cheeks and` → ``
+  - `firm little` → `gently pointed`
+  - `round doe` → `almond`
+  - `clearly defined double lids, thick` → `softly upturned outer corners, fully open and clear,`
+  - `` → `thin`
+  - `short` → `slim`
+  - `full plump lips.` → `a small rosebud mouth.`
+  - `A clear bright striking gaze, defined elegant features,` → `Sparkling eyes,`
+  - `subtle poised` → `small playful`
+  - `` → `head slightly tilted,`
+  - `Her` → `STYLE LOCK (same drawing as her 36-year-old picture, the second reference): exactly the same soft painterly guofeng illustration rendering, the same smooth lumi`
+  - `lines.` → `lines, NEVER photographic, NEVER photo-realistic, no realistic skin texture, no pores, no detailed wrinkles.`
+  - `` → `At this age this elder colour rule wins over the first COLOUR RULE (medium-light tone): her own colours in the DEEPER, DARKER mature shades described above, nev`
+  - `coral red` → `powder blue`
+  - `coral red:` → `powder blue:`
+  - `coral red,` → `powder blue,`
+  - `coral red,` → `powder blue,`
+  - `coral red` → `powder blue`
+  - `#D4897D` → `#A7BAD2`
+  - `teal` → `deep rose`
+  - `#499597,` → `#CA7281,`
+  - `RIGHT,` → `RIGHT side of the picture,`
+  - `` → `shoulders,`
+  - `to` → `so that her chest and face point toward`
+  - `right, her` → `right edge of the picture, the shoulder on the picture's`
+  - `shoulder` → `side`
+  - `robe with slippers visible,` → `robe, only slipper toe tips peeking under the hem,`
+  - `IGNORE the reference image's background completely; the background is completely transparent with NOTHING behind or around her: no backdrop, no parchment, no pa` → ``
+  - `CAPTION: in LARGE bold letters, top-left corner, on the plain background, never over her body, write exactly this Vietnamese text WITH accents, spelling every V` → ``
+### m18_nhat_L1836.txt  vs test18_nhat_L1797.txt: 0 word-diff hunks, keep unallowed drops=0
+### m18_nhat_thancan_L1836.txt  vs test18_nhat_thancan_L1797.txt: 0 word-diff hunks, keep unallowed drops=0
+### m18_nhi_L1836.txt  vs test17_nhi_L1785.txt: 0 word-diff hunks, keep unallowed drops=0
+### m18_nhi_thancan_L1836.txt  vs test17_nhi_thancan_L1785.txt: 0 word-diff hunks, keep unallowed drops=0
+### m18_tam_L1836.txt  vs test17_tam_L1785.txt: 0 word-diff hunks, keep unallowed drops=0
+### m18_tam_thancan_L1836.txt  vs test17_tam_thancan_L1785.txt: 0 word-diff hunks, keep unallowed drops=0
+### m18_thosu_L1836.txt  vs test3_tm0.txt: 7 word-diff hunks, keep unallowed drops=0
+  - `` → `matte`
+  - `and gauze` → `crepe (lụa tơ tằm dệt nhám): a softly crinkled, slightly grainy, completely MATTE surface`
+  - `a soft` → `no`
+  - `and` → `at all, never glossy, never satin, never brocade, with`
+  - `cotton-silk` → `matte silk crepe`
+  - `` → `that sash is tied at the FRONT of the waist in a small, pretty, graceful bow, the sash deep rose and the front BOW in the opposite colour powder blue so the bow`
+  - `` → `CLEAN COLOUR EDGES: every garment part is ONE flat solid colour with crisp clean edges (collar band, jacket, sash, bow, skirt): no colour bleeding, no gradient `

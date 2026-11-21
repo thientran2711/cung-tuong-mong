@@ -83,10 +83,39 @@ def allows_for(base_text, new_text, reason):
         out.append(raw.split("#")[0].strip())
     return out
 
+import ast
+def _ang():
+    for n in ast.parse(open("dev/art/t8-prompt-B/build.py",encoding="utf-8").read()).body:
+        if isinstance(n,ast.Assign) and getattr(n.targets[0],"id","")=="ANG14": return ast.literal_eval(n.value)
+V6FACE = "Her face: a broad ROUND-OVAL face with full apple cheeks and a firm little chin"
+def mama_v6(P, age):
+    """APPROVED ma ma (gpt/mama_gpt_v6_{age}, m05 face + coral red/teal) -> Magnific/gate form: ChatGPT header + CAPTION + transparent-bg words removed,
+    E1 angle = ANG14[11] (3/4 RIGHT, same intent), C5 + S36 + S19(G23) gate sentences inserted. Garment/hair/item words untouched."""
+    t = hdr(rd(D + f"gpt/mama_gpt_v6_{age}.txt"))
+    t = re.sub(r"\s*CAPTION:.*$", "", t, flags=re.S).rstrip() + "\n"
+    t = re.sub(r" IGNORE the reference image's background completely;[^.]*\.", "", t, count=1)
+    t = re.sub(r"ANGLE: a clear THREE-QUARTER view toward the RIGHT, NOT frontal:[^;]*;", "ANGLE: " + _ang()[11] + ";", t, count=1)
+    t = sub(t, "floor-length robe with slippers visible", "floor-length robe, only slipper toe tips peeking under the hem")
+    t = sub(t, "Her age shows ONLY through the silver in her hair and a few soft painted lines. Her robe keeps", "STYLE LOCK (same drawing as her 36-year-old picture, the second reference): exactly the same soft painterly guofeng illustration rendering, the same smooth luminous painted skin, soft stylised features and gentle painted shading as the 36-year-old picture; her age shows ONLY through the silver in her hair and a few soft painted lines, NEVER photographic, NEVER photo-realistic, no realistic skin texture, no pores, no detailed wrinkles. Her robe keeps")
+    t = sub(t, " Outfit (the ma ma costume", " At this age this elder colour rule wins over the first COLOUR RULE (medium-light tone): her own colours in the DEEPER, DARKER mature shades described above, never bright, never pastel. Outfit (the ma ma costume")
+    return t
+def v6_person(t, P):
+    m = re.search(r"Her face: a broad ROUND-OVAL.*?Expression:[^.]*\.", t, flags=re.S); assert m
+    t = t.replace(m.group(0), P["face"] or FACE18, 1)
+    t = t.replace("coral red", P["main"]).replace("#D4897D", P["mh"]).replace("teal", P["sec"]).replace("#499597", P["sh"])
+    return t
+
 manifest = []
 for pid, P in PERS.items():
     for key, base, scope, age, port in RANKS + [("mama_a36", None, "mama", "a36", None), ("mama_a51", None, "mama", "a51", None)]:
         name = f"{pid}_{key}_L1836.txt"; path = OUT + name
+        if key == "mama_a51":
+            snap = OUT + f"base/{pid}_{key}_v6base.txt"; open(snap, "w", encoding="utf-8").write(rd(D + "gpt/mama_gpt_v6_a51.txt")); base = D + "gpt/mama_gpt_v6_a51.txt"
+            b = rd(base); new18 = mama_v6(M18, "a51"); new = v6_person(new18, P)
+            allp = allows_for(b, new, "x"); mid = allows_for(b, new18, "x")
+            open(path, "w", encoding="utf-8").write(new)
+            lines = [f"base: {base}"] + [f"allow: {a}   # " + ("gate/Magnific form (header, CAPTION, transparent-bg words, E1 angle table, C5/S36/S19 gate sentences)" if a in mid else "person swap: face + main/secondary colour (m05 coral red/teal -> " + pid + ")") for a in allp]
+            open(path + ".keep", "w", encoding="utf-8").write("\n".join(lines) + "\n"); manifest.append((pid, key, path, scope, age, len(new))); continue
         if base:
             b = rd(base); new18 = port(b) if port else b
         else:  # ma ma: builder text for THIS person is the base snapshot (gate-PASS), ports applied on top
