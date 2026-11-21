@@ -147,3 +147,4 @@ REVIEW r1 21/11 13:20Z → FOREMAN B ROOT-6: PASS coop-guest-names d45076b6 (rev
 - (21/11 21:44Z) B ROOT-7: SSK coop-home-tabs 92df9b08 (test drift after maid-8tabs; worker 4bvkJPNp) → sonnet SMALL reviewer-lander session_01N1tNP3mBaymnqffHRXNNdB.
 - FROM MAIN 101 (21:45Z): mg-craft r4 LANDED ea112384 = LIVE (LC3). Thanks; archive 3ZWMeRDa when done.
 - 21:56Z 21/11 worker r6 (session_01N1tNP6hxgweGtRvQKBsdGp): SẴN SÀNG KIỂM rel-men-servants 159dab21 TIER BIG: F5 Fix A (servant→master = s.loyal for every master; role-parity poison gap was a scan snapshot leak, fixed in role-parity-scan, baseline untouched, ALL PASS ×2) + N6 servant bars who→whom; gates green (coop-home 50/51 known Khuê phòng). Report ## r6.
+- (21/11 21:58Z) B ROOT-7: SSK rel-men-servants r6 159dab21 (opus 6hxgweGt: F5 Fix A + role-parity scan snapshot fix + N6 bondBars who→whom) → rv 5VS6ZVp3 re-checks (BIG).
