@@ -90,8 +90,8 @@ function ievOf(m){if(!m||!m.opts||!m.opts.length)return null;let r=null;
  const I=kitItemInfo(e||key);const acts=r.acts&&!r.txt?ievActsFor(m,r.acts,r.offer):r.acts||ievActsFor(m,null,r.offer);return{I,e,key,acts,who:r.who||null,own:!!r.own}}
 window.ievOf=ievOf;window.ievVerb=ievVerb;window.ievNoun=ievNoun;
 /* ---------- §64.1 kitItemTag: the item frame on the event banner / at the top of the text ---------- */
-function kitItemTag(I){/* KIT §70: tap the tag → kitItemCard (the shared item detail) */const tap=typeof kitItemTap==="function"&&I.k?kitItemTap({k:I.k}):"";
- return `<div class="kiev" data-kiev="${I.k}">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"md",tip:`${I.name} · ${I.gname} · chạm để xem`,data:tap})}</div>`}
+function kitItemTag(I){/* KIT §70: tap the tag → kitItemCard (the shared item detail). owner 21/11 #63: an item named in a dialog is the SMALLEST kit item size (sm), inline beside its line — never its own big row */const tap=typeof kitItemTap==="function"&&I.k?kitItemTap({k:I.k}):"";
+ return `<div class="kiev" data-kiev="${I.k}">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"sm",tip:`${I.name} · ${I.gname} · chạm để xem`,data:tap})}</div>`}
 window.kitItemTag=kitItemTag;
 function ievPlace(R){const mb=document.getElementById("mb");if(!mb)return null;mb.querySelectorAll(".kiev:not(.kiev-own)").forEach(x=>x.remove());if(!R)return null;
  const own=mb.querySelector(".tsbtile");if(own){own.classList.add("kiev","kiev-own");return own}
