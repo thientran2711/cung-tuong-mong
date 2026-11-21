@@ -82,3 +82,12 @@ Gates: keep --sidecar PASS; check_store tp8 a22 PASS (0 FAIL; the paste itself a
 | "grand ceremonial dress", "imperial phoenix ceremonial robe", "GRANDEST headdress", "taller and wider" | base, open11c | "grand/ceremonial/wider" → volume |
 | casket "raised and admired" (both hands at chest) + floor sleeves | base | DESIGN14 audit: sleeves fall from chest-high hands as a cone |
 | ONE LARGE phoenix across the front | hqp1 | needs a flat wide canvas → robe spread out |
+
+# HANDOVER (HAN2 → successor), 21/11 ~06:25Z
+depth 1 (get_session lineage.depth) · START_CTX ~6 % · now 29 % of 1M → at roll line (START+25 = 31 %); job 6 not started (0 gens, nothing half-written).
+Coordinator: Foreman C #21 session_01D3E3NZAjbtepUBb2PArbqD (reply in Vietnamese to owner side; to me English OK). #21 opens the successor.
+JOB 6 (owner L1745, from #21's message, 0 gens):
+- Bases (owner liked, drawn L1741): Phi = dev/art/han_bac_base/s62_t5_HAN_BAC_02cd263.txt (EbYI8xvuuO); Quý phi = dev/art/seasons4/s62_t6_HAN_LADDER.txt (bxMfaRi5Y2); HQP = dev/art/seasons4/s62_t7_HAN_LADDER.txt (kseuEem16B).
+- Owner: Phi + Quý phi shoulder/collar = TARGET (collar stiff/crisp, never slips). Diagonal wrap (khúc cư / vạt xéo) must read clearly from Quý phi up. Old per-rank signature pieces (cloud collar etc.) dropped for Hán; Phi→Quý phi differ by belt + shoulder embroidery richness. From Tần (t4) up: copy the shoulder/collar TASSEL FRINGE (tua rua) of the current THU set onto Hán shoulders = rank signature. HQP: copy Phi/Quý phi collar words, keep HQP neck jewels/luxury. Thường tại (t1 file name per #21; check rank: Thường tại is t2 in the store — ask #21 which tier): from the PHI prompt, ≥2 garment layers, same fabric words as Phi.
+- Deliver: (a) short analysis (which sentences give the crisp non-slipping collar, layer count per base, which words give the diagonal wrap); (b) seasons4/s62_t7_HAN_HQP_collar_L1745.txt, s62_t1_HAN_THUONGTAI_fromphi_L1745.txt, s62_t5_HAN_PHI_tuarua_L1745.txt, each + .keep (base = the liked file), keep_check --sidecar PASS, check_store PASS or note waivers.
+Tips from my jobs: check_store <f> --scope tpN --age a22; ≤10 000 chars counted by the gate; HQP LADDER passes tp8 0 FAIL after Empress edits (job 5) — LADDER has "FABRIC: thick gold-embroidered brocade" (S07 ok) and a necklace phrase (A41: drop it, list as allow). Make .keep from `keep_check.py BASE NEW` CUT lines. Thu tassel words: grep the current thu_comoi t5 file for "tassel"/"fringe". Push with `git pull --rebase` then push, retry on ref-lock reject. Stage by path only.
