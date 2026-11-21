@@ -63,6 +63,7 @@ Her own maid-true acts toward a consort stay where they always were: when she me
 | Sát hại | Hạ độc (poison) · Hạ độc dần (slowpoison) · Hạ độc con nàng (kpoison) · Tặng quà ăn có độc (pgift) · Bỏ xạ hương (musk) · Mua chuộc bà đỡ (catswap) · Hủy dung (huydung) · Đẩy xuống hồ sen (pushp) · Đẩy con nàng xuống hồ (pond) | absent | consort harm; her poison road stays «Bỏ độc vào bát cơm» (a maid of a hostile palace, jmline) |
 | Sát hại | Vu con nàng trù ẻo (kframe) | absent | consort harm on a child; added by reviewer rv-maid-acts-a (table was missing it; code already hid it) |
 | Sát hại | Hạ độc (poison) · Hạ độc dần (slowpoison) · Hạ độc con nàng (kpoison) · Tặng quà ăn có độc (pgift) · Bỏ xạ hương (musk) · Mua chuộc bà đỡ (catswap) · Hủy dung (huydung) · Đẩy xuống hồ sen (pushp) · Đẩy con nàng xuống hồ (pond) | absent | consort harm; her poison road stays «Bỏ độc vào bát cơm» (a maid of a hostile palace, jmline) |
+| Sát hại | Vu con nàng trù ẻo (kframe) | absent | consort harm on a child; added by reviewer rv-maid-acts-a (table was missing it; code already hid it) |
 | Quyền Hoàng hậu | Xử tội · Tịch thu · Ban thưởng · Ân xá · Khất bổng lộc (hh:*) | absent | Hoàng hậu only (never on her road anyway) |
 | (any act added later) | unknown key | absent by default | allowlist: a new consort act never leaks onto her card; role-parity now scans this card in the maid column |
 
