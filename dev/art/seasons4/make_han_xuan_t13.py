@@ -19,6 +19,9 @@ LADDER1 (owner L1590 + L1592 via Foreman C #14, A39, files _v3): (1) G40 = maste
 COLLAR CUT 'the robe closes only by its wrap and sash' -> 'the outer robe is held in only by the sash' (ends the 'no wrap' vs 'closes by its wrap'
 contradiction; collar crossing above the sash kept = the L1577 liked t2 collar);
 (2) density = the approved common TIER_LOW words (the store G8 clause, already in); DENSE removed.
+DESIGN19 (owner L1604 via Foreman C #14, A39, files _v5): COLLAR back to a real Han crossed collar (jiaoling) from the liked Han words
+(t5 gon/open2 + t4-t6 open5c): one broad V crossing right over left just above the sash; inner collar = layered edge inside the same V (no horizontal/square inner top =
+the beizi/Song look of v3, no second diagonal at the throat = L1577); front edge below the crossing straight down (zhiju, L1601).
 Run from the repo root:  python3 dev/art/seasons4/make_han_xuan_t13.py   (writes the 3 files + prints lengths; gate = check_store + keep_check)."""
 import os, re, subprocess, sys
 D = os.path.dirname(os.path.abspath(__file__)); ART = os.path.dirname(D); ROOT = os.path.dirname(os.path.dirname(ART))
@@ -36,11 +39,12 @@ def sw(s, a, b):
 STORE_FABRIC = ("The FABRIC is thin, light, flowing silk and gauze with a soft sheen and fine delicate embroidery, long soft graceful drapery that sways and "
                 "trails elegantly (thướt tha); the small embroidered motifs are stitched in fine gold thread.")
 HEAD = "OPEN-NECK LOOK: collar open OFF the neck, SECURE on the shoulders: bare neck and collarbones. "
-COLLAR = ("the collar is worn moderately OPEN: its two edges sit SECURELY on the shoulders, never slipping off, "
-          "and curve down to cross high above the sash, never a deep low V; INNER ROBE: opaque mint mist, NO crossed collar, its top edge "
-          "straight across below the collarbones; that edge edged by {inner} in ice blue and gold; all collar bands lie flat only along those edges; ")
+COLLAR = ("a WIDE Han CROSSED COLLAR (jiaoling): its two edges start near the shoulder points, SECURE on the shoulders, never slipping off, "
+          "and sweep down in one broad V to CROSS left over right just above the sash; INNER ROBE: opaque mint mist, its collar a layered "
+          "edge just inside the outer collar, same V (no second diagonal at the throat, no straight-across top, never parallel open-coat edges), "
+          "edged by {inner} in ice blue and gold; all collar bands lie flat only along those edges; ")
 HAN = ("a NEW outfit, a Han-dynasty look in TWO visible layers, LONG garments only: a straight-cut floor-length robe (zhiju) in ice blue over an inner "
-       "robe in mint mist, a straight vertical front edge to a WIDE straight hem band (no flare, no ruffled petticoat, no high waist, no wrap spiral, never a short jacket); wide long sleeves "
+       "robe in mint mist, below the crossing the front edge runs straight down to a WIDE straight hem band (no flare, no ruffled petticoat, no high waist, no wrap spiral, never a short jacket); wide long sleeves "
        "(one single visible sleeve layer, every inner sleeve hidden inside), the sleeve body plain, ending in embroidered mint mist cuff bands; {edge}; "
        "{g8}; {outer}; {rest}no shawl; ")
 HAIRCL = r"(?=pretty silver hairpins|silver and pearl hairpins|two or three slim pearl hairpins)"
@@ -102,5 +106,5 @@ if __name__ == "__main__":
     k = next(k for k in range(len(TRIM) + 1) if max(len(trim(x, k)) for x in full.values()) <= LIMIT)
     print("trims used:", k)
     for t in (1, 2, 3):
-        p = os.path.join(D, f"s62_t{t}_HAN_BAC_v4.txt"); s = trim(full[t], k)
+        p = os.path.join(D, f"s62_t{t}_HAN_BAC_v5.txt"); s = trim(full[t], k)
         open(p, "w", encoding="utf-8").write(s); print(t, len(s), os.path.relpath(p, ROOT))

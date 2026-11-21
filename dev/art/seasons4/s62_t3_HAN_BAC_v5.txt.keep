@@ -1,0 +1,14 @@
+base: dev/art/seasons4/s62_t3_HAN_BAC_v4.txt
+allow: the collar is worn moderately OPEN   # owner L1604 via Foreman C #14 (DESIGN19): collar back to Han crossed collar (jiaoling)
+allow: its two edges sit SECURELY on the shoulders   # owner L1604 via Foreman C #14 (DESIGN19): collar back to Han crossed collar (jiaoling)
+allow: curve down to cross high above the sash   # owner L1604 via Foreman C #14 (DESIGN19): collar back to Han crossed collar (jiaoling)
+allow: never a deep low V   # owner L1604 via Foreman C #14 (DESIGN19): collar back to Han crossed collar (jiaoling)
+allow: NO crossed collar   # owner L1604 via Foreman C #14 (DESIGN19): collar back to Han crossed collar (jiaoling)
+allow: its top edge straight across below the collarbones   # owner L1604 via Foreman C #14 (DESIGN19): collar back to Han crossed collar (jiaoling)
+allow: that edge edged by   # owner L1604 via Foreman C #14 (DESIGN19): collar back to Han crossed collar (jiaoling)
+allow: a straight vertical front edge   # owner L1604 via Foreman C #14 (DESIGN19): collar back to Han crossed collar (jiaoling)
+allow: , never a pair   # A38 boilerplate trim (make_han_bac.TRIM[4]; stated elsewhere) for L1604 length
+allow: , no cluster   # A38 boilerplate trim (make_han_bac.TRIM[4]; stated elsewhere) for L1604 length
+allow: , never back-turned   # A38 boilerplate trim (make_han_bac.TRIM[4]; stated elsewhere) for L1604 length
+allow: , never in profile   # A38 boilerplate trim (make_han_bac.TRIM[4]; stated elsewhere) for L1604 length
+allow: Everyone beautiful at every age.   # A38 boilerplate trim (make_han_bac.TRIM[4]; stated elsewhere) for L1604 length
