@@ -58,3 +58,14 @@ SẴN SÀNG KIỂM 6b705fb3a6a08cdc0c47fe2e02997802a65ba182 (KIT-BLOCKED: Tốn 
 review/econ-tamco @ c45265d6c97a95b814365cd527df85a9f731d9f1 = 6b705fb3 + origin/main 4e8cbaeb (index/sw rebuilt). econ-tamco PASS, quickcheck PASS 205 s (core gates PASS, old save ok). This sha replaces 6b705fb3.
 
 SẴN SÀNG KIỂM c45265d6c97a95b814365cd527df85a9f731d9f1 (KIT-BLOCKED: Tốn row Tâm cơ)
+
+## ECON TAMCO #2 — round 2 after KIT READY (21/11)
+PRIORITY #1 CHECK ('Tâm cơ|tamco|thuê người'): ECONOMY.md §5 | main: kit-ton-row LIVE e4fd4dcf (KIT §13.16) | review/econ-tamco (this branch, law 13) | claims D #12.
+Branch review/econ-tamco @ 60703f26d71bf8f9f1d11a75e0ca9d4af843944c (final-merged LIVE 8c8b8b6b). TIER BIG (8 files).
+- KIT Tốn row (law 9): PEND.roadpick uses the kit `ton` field only (no private text): «Làm như thường» = Bạc −price · «Hao tâm cơ» = Tâm cơ −tc · Bạc −price · «Thuê người» = Bạc −(price + hire) (one figure; the hire is now paid in the road, not via fx). KIT_REQUESTS kit-ton-row row → DONE.
+- CO-OP (owner CO-OP LAND GATE) — gap #1 left is fixed: her road rides with the act as ECON_HER. Direct act: the runAct intent carries it (jcoopthinf F1 runAct ctx "econ"); the host pays it in her context and rolls the odds she saw (fzRun). Sent deed (parallel time): ptSend tags the deed, ptLand pays it when it lands (host, her context, ptTickHer). Nothing is paid on the guest phone.
+- Law 3 fix found on the way (law 11): an act whose own gate stops it after the price was taken (j95c giá họa motive gate) → the jecon §5 extra price and the NPC road are refunded (econVeto). Was: NPC paid for a frame that never happened.
+- Tests: econ-tamco.test.js PASS Fold 755x1000@2 + iPad 1180x820@2 (rendered Tốn rows, price = charge, hire/Tâm cơ charged once, sent deed carries + pays at landing, NPC roads, price scan 0). econ-tamco-coop.js (new, live worker): PASS 18/18 on 904046ad, 17/17 on 60703f26d71bf8f9f1d11a75e0ca9d4af843944c (the two-way step was skipped that run: no priced scheme on the friend at that moment) — both seats see the kit card; guest Tâm cơ / hire paid once by the host in her context with her shown odds, 0 on her phone; two-way on the friend; host's own road. kit-ton-row.js PASS 12. coop-e2e 68/68. quickcheck PASS 191 s (core gates PASS, old save ok).
+- Shots (not in git): /home/user/wt/econ-tamco-shots/roadpick-755x1000.jpg + roadpick-1180x820.jpg (the 3 roads with their kit Tốn rows).
+
+SẴN SÀNG KIỂM review/econ-tamco 60703f26d71bf8f9f1d11a75e0ca9d4af843944c (TIER BIG)
