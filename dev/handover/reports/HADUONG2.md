@@ -54,6 +54,7 @@ All 4: collar = Tang parallel collar (đối khâm), STRAIGHT edges, SQUARE open
 # HANDOVER (HADUONG2 → successor) · depth 8 · START_CTX ≈ 3 % · now ≈ 26 % (rollover at 28 %; stopping cleanly before the big step 3)
 Coordinator: Foreman C #27 session_01D3E3NaDamfSozkn47q9kMK (opens the successor). Push tip: `git fetch -q --filter=blob:none origin <branch> && git rebase -q origin/<branch>` (retry on reject).
 Open:
+0. NEW (owner L1958 via #27, words only, no gens): costume-expert research on Tang dramas/films (The Empress of China 2014, Royal Feast 2023, The Longest Day in Chang'an, Glory of Tang Dynasty, Princess Taiping, others): (1) cung nữ by rank, (2) phi tần by rank, (3) Võ Tắc Thiên in history vs dramas (fabric thickness, layers, collar, colours, embroidery, headdress); compare drama vs history; list what to borrow for the game; sources; short Vietnamese summary in the report → #27. Not started.
 1. G65 step 3 (above).
 2. WAITING on the owner: thô sử design A/B/C + fabric ladder (dev/art/research_tang_maids_L1939.md parts 1–2). Then rebuild the maid ladder from the chosen option (base = m18_*_ha_DUONG_L1933.txt, no phi bạch, G65 small motifs).
 3. HOLD: L1933 maids (dev/art/maid7/prod/m18_{thosu,tam,nhi,nhat}_ha_DUONG_L1933.txt) — draw only on #27 GO (VE10 session_01D3E3NaakFbargWadMNeWzZ).
