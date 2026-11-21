@@ -790,7 +790,7 @@
 "status": "LIVE-OFF",
 "group": "G2",
 "event": "\"Hoàng thượng để mắt\"; maidLoveMonth",
-"fp": " if(L.length&&roll(25)){const s=pick(L.filter(x=>!x.ma"
+"fp": " if(L.length&&roll(BAL.odb.j42.rlMaidLoveMonth)){const s=pick(L.filter(x=>!x.ma"
 },
 {
 "f": "j42.js",
@@ -798,7 +798,7 @@
 "status": "LIVE-OFF",
 "group": "G2",
 "event": "\"Hoàng thượng để mắt\"; maidLoveMonth",
-"fp": "  if(roll(4)){o.staff.splice(o.staff.indexOf("
+"fp": "  if(roll(BAL.odb.j42.rlMaidLoveMonth_2)){o.staff.splice(o.staff.indexOf("
 },
 {
 "f": "j42.js",
@@ -806,7 +806,7 @@
 "status": "LIVE-OFF",
 "group": "G2",
 "event": "\"Hoàng thượng để mắt\"; maidLoveMonth",
-"fp": "  if(roll(3)){o.staff.splice(o.staff.indexOf("
+"fp": "  if(roll(BAL.odb.j42.rlMaidLoveMonth_4)){o.staff.splice(o.staff.indexOf("
 },
 {
 "f": "j54.js",
@@ -1479,7 +1479,7 @@
 "status": "LIVE-OFF",
 "group": "G3",
 "event": "surprise moves; lovers' slots; staff errand; ambusher",
-"fp": "   if(!v.j95spot||j95dice(15)){const L=SPOT95.slice();if(m"
+"fp": "   if(!v.j95spot||j95dice(BAL.odb.j95.dcJ95week_2)){const L=SPOT95.slice();if(m"
 },
 {
 "f": "j95.js",
@@ -1487,7 +1487,7 @@
 "status": "LIVE-OFF",
 "group": "G3",
 "event": "surprise moves; lovers' slots; staff errand; ambusher",
-"fp": "i<n&&pool.length;i++){const c=j95dice(70)?pool[pool.length-1]:pool[0];"
+"fp": "i<n&&pool.length;i++){const c=j95dice(BAL.odb.j95.dcC)?pool[pool.length-1]:pool[0];"
 },
 {
 "f": "j95.js",
@@ -1495,7 +1495,7 @@
 "status": "LIVE-OFF",
 "group": "G3",
 "event": "surprise moves; lovers' slots; staff errand; ambusher",
-"fp": "d])continue;if(p.kind===\"st\"&&j95dice(15)&&p.home!==\"lc\"){p.__err=1+Ma"
+"fp": "if(p.kind===\"st\"&&p.home!==\"lc\"&&p.ref&&j95dice(BAL.errand.offer))"
 },
 {
 "f": "j95.js",
@@ -1503,7 +1503,7 @@
 "status": "LIVE-OFF",
 "group": "G3",
 "event": "surprise moves; lovers' slots; staff errand; ambusher",
-"fp": "&!z.seen[sk]){z.seen[sk]=1;if(j95dice(35)){const g=motiveOK(v,S,\"ambus"
+"fp": "&!z.seen[sk]){z.seen[sk]=1;if(j95dice(BAL.odb.j95.dcJ95watch)){const g=motiveOK(v,S,\"ambus"
 },
 {
 "f": "j95b.js",
@@ -2047,7 +2047,7 @@
 "status": "DICE-ONLY",
 "group": "G2-last",
 "event": "family whereabouts per buổi; old flame / stranger met",
-"done": "npcWhy(\"kcMeet\",{tm},()=>roll(35))"
+"done": "npcWhy(\"kcMeet\",{tm},()=>roll(BAL.odb.jkc.rlKcMeet))"
 },
 {
 "f": "jkc.js",
@@ -2055,7 +2055,7 @@
 "status": "DICE-ONLY",
 "group": "G2-last",
 "event": "family whereabouts per buổi; old flame / stranger met",
-"done": "npcWhy(\"kcVh\",{},()=>roll(4))"
+"done": "npcWhy(\"kcVh\",{},()=>roll(BAL.odb.jkc.rlKcVh))"
 },
 {
 "f": "jkc2.js",
@@ -2087,7 +2087,7 @@
 "status": "PARTIAL",
 "group": "G2-last",
 "event": "weekly family event; matchmaker; creditor; lantern lover; stare",
-"done": "npcWhy(\"kcMeet\",{tm},()=>roll(60))"
+"done": "npcWhy(\"kcMeet\",{tm},()=>roll(BAL.odb.jkc.rlKcMeet_2))"
 },
 {
 "f": "jkc.js",
@@ -2487,7 +2487,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "sad consort refuses; outburst + victim; acts on feeling; Emperor drink",
-"done": "function eaVictim(L){return npwPick(L,m=>101-(m.loyal||0))||L[0]}"
+"done": "function eaVictim(L){return npwPick(L,m=>BAL.ea.victimBase-(m.loyal||0))||L[0]}"
 },
 {
 "f": "jht.js",
