@@ -104,3 +104,27 @@ Before / after (law 11 scan, S1 on every met man + servant, both devices):
 Tests on 88c83c37: rel-men-servants 26/26 ×3 · quickcheck PASS (render 217/252, tab 391/403, buổi 1067/1070 ms) · one-core-guard PASS · undef-scan PASS (277) · role-parity ALL PASS · coop-e2e 124/124 (COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc) · coop-home 50/51: the only FAIL = «A has the home tabs» expects «Khuê phòng» but the home road now shows Hành sự|Dư đồ|Hậu cung|Giao tình|Hoàng tự|Tư trang|Tài nghệ|Mệnh truyện — stale expectation from the upstream tab rename, not touched by this branch (pre-existing; coop-home.js is outside this topic) · old save loads (quickcheck).
 Shots LOOKED 3× (Fold 755x1000@2 + iPad 1180x820@2): https://ctm-img.victoria-tntt.workers.dev/img/_review/rel-men-servants/ rms-man / rms-srv / rms-stranger × both. Wipe: python3 dev/site/cdn_sync.py --wipe-review rel-men-servants.
 READY: review/rel-men-servants 88c83c37.
+
+## REVIEW r3 (BIG, opus, session_01N1tNP5VS6ZVp3CRYrxc8sA) — FAIL 0d4b38e8 (review branch 11b1f3f2)
+PRIORITY #1 CHECK: OD 0 new (OD:L352 found, see F4) | ledger 0 | claims 8 | main 3 (kit-relrows-ms jkrel.js isMS branch LIVE) | review/* 1 (review/rel-men-servants) | archive 16.
+START_CTX ~4 % (get_session reads 0; own estimate), depth 8 (limit 8).
+Merge: newest origin/main c9ae030e merged on review/rel-men-servants-r1 @11b1f3f2 (only index.html/sw.js conflicted → rebuilt by build_site.sh). Pushed; the r4 worker starts from it.
+r3 merge 7e4114b7 conflict hunks (git show --remerge-diff + script: every '+' line of base 983a9436..494ea79b and base..a201d968 must be in the result):
+| File | Branch side | Main side | Result |
+|---|---|---|---|
+| j15 court card | aff(c,S) | c.af.me line + thcIs «Cung nữ thân cận» own card | both kept |
+| j29 bribeServ | affAdd(s,a,relMS.bribe) | stf2Bribe(…aOdd(odds,a)…) | both kept |
+| j42 cnvBribeOpts | take: affAdd(a,v,bribe) | tell/quiet cnvBribeAff ±coopBribe.grudge + x texts | both kept |
+| jcoopworld | MEN_P +oan | W_KEYS/HOST_ONLY +nmReg/nmOrd | both kept |
+| jhc | GR 5 groups, ct/ms Chí tôn exclusion, rv guard, relMS stranger filter | popup picker relCands/relPopBody, houseLine residence line | both kept (branch strips→popup; sameHouse line replaced by main's houseLine, which returns "" for men/servants — probed, 0 errors) |
+Missing lines after the script: only the 3 branch lines and 1 main line that were rewritten into the merged form above. No LIVE behaviour lost.
+
+Tests on 11b1f3f2: quickcheck PASS (core gates incl. one-core-guard, rules-one-source, kit-conform, coop-one-world; time-spill; old LIVE save loads + plays; perf new/live render 221/216, tab 352/349, buổi 938/1158 ms, tasks>200 18/18) · rel-men-servants.js 26/26 · coop-e2e 124/124 (COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc) · coop-home on LIVE c9ae030e = 50/51 with the SAME «Khuê phòng» FAIL → pre-existing, confirmed not this branch. Own both-seat Ân oán check NOT run (FAIL found first; next reviewer runs it).
+F2 holds (stranger official/servant = «Người lạ», no «???», both devices). F3 holds (Fold servant shot shows the servant pair). Shots looked 3× (scratch): rms-srv / rms-man / rms-stranger × Fold 755x1000@2 + iPad 1180x820@2.
+Laws: 1 two-way OK · 3 OK (note N5) · 4 BAL.relMS OK · 6b deeds OK · 9 kit parts OK · 7 FAIL (F4: «Lòng») · 11/16 FAIL (F4).
+
+FAIL item (worker r4):
+F4 (OD:L352 verbatim "Everyone's attitude to her (servants included) uses only ONE word "Thiện cảm"; drop "Lòng"." + VANPHONG.md line 55 (owner 11/15 10:10Z: kẻ hầu đối với ta = thiện cảm; avoid «Lòng») + law 4 one core + law 11 + law 16) — F1 is NOT closed for a servant toward her master. LIVE c9ae030e shows ONE number for her maid everywhere: home people info «thiện cảm 75», kit person block «Nàng → ta: thiện cảm 75» (= loyal). Branch 11b1f3f2, same maid: home people info (j2 homePeople) «thiện cảm 67» but kit person block + Ân oán «Thiện cảm 0 · Oán 0 · Lòng 67» (probe; shot rms-srv-755x1000: «Thiện cảm 0 · Oán 30 · Lòng 26»). aff(own servant, S) reads s.af.me, which nothing writes for household servants → «Thiện cảm» is a permanent 0 and the real attitude moves to the forbidden word «Lòng». Same for an NPC consort's servant toward its mistress (aff = s.af["r"+id] ≈ 0, «Lòng» = loyal).
+ Fix (the branch's own rule "reuse the store the game already writes"): j9 msAff / msAffAdd — a servant toward ITS master (S.maid / ownerOf(s)===S → S; NPC staff → ownerOf(s)) reads / writes s.loyal (clamp 0..100); drop jhc relRows loy() «Lòng»; KIT §52 kitRelRows isMS «lòng» row removed by the kit keeper (filed KIT_REQUESTS «21/11 rel-men-servants r3»); then the scan table: every place printing a servant's attitude to her master (j2 homePeople, j95 mm:me, j8, jeitem 70–86, jts 437, kit block, Ân oán) = one «Thiện cảm» = loyal; test U2/S1 updated (no «Lòng», Thiện cảm = loyal).
+Notes (not blocking, Foreman B): N4 «Lòng» is already on LIVE in other places against OD:L352 (bondBars jtin.js «Lòng / Chủ tin», HUD Nhân tâm «Lòng», KIT.md 1812/1813) — pre-existing family, worth one owner-rule sweep. N5 j42 «Bạc lạ» take now also gives regard +bribe (and the servant-road threat oán +threat) not shown on the option text (law 3 visible gain; small).
+CDN: shots stay for r4 (worker re-shoots and wipes after the verdict).
