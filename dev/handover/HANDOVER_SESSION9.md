@@ -2038,3 +2038,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (12:58Z) duodo-focus #2 LtG4 SSK 4e9257b0 → rv MC6N (both rv faults fixed as families + speaker-without-figure → centre card; merged LIVE ee02e8c0 + kit-focus r5; gates PASS; mp4 redone on CDN).
 - (13:08Z) rv MSxp LAND READY mg-intro-2 da3aa72d (review/mg-intro-2-rv2) → 89 chain. LIVE test fault mg-ui-rest pet bath (line 45 /Đã vuốt 0\/5/, likely stale after mg-noword-care) → ORDER Foreman B.
 - (13:10Z) 89: LANDED kit-g4-plate 452e4c41, kit-focus r5 3a2b81b1, kit-info-tap 6f4e8d70. Chain now ending-screens → -2, ban-cung, kit-mark-fix, kit-dialog-2, coop-emo-seat, mg-intro-2.
+- (13:12Z) keeper #3: kit-relrows-ms d80b9d2b SSK → rv MSxp (F1 for rel-men-servants r2; worker 64FJ told to merge). Keeper now on Fold option-title wrap group.
