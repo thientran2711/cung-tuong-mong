@@ -41,8 +41,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const back=await p.evaluate(()=>{const bx=document.getElementById('kpcgame');return !!bx&&!!bx.querySelector('.kgr-go')&&!!bx.querySelector('.kgr')&&!KG82.tut});
   ok(back,`pet ${kind}: «Về luật chơi» brings the same rules screen back`);
   await p.evaluate(()=>document.querySelector('#kpcgame .kgr-go').click());await sleep(500);
-  const g=await p.evaluate(()=>{const bx=document.getElementById('kpcgame');return{kgr:!!bx.querySelector('.kgr'),food:!!bx.querySelector('[data-food]'),ball:!!bx.querySelector('[data-ball]'),bath:PETC.game,txt:(bx.textContent||'')}});
-  ok(!g.kgr&&(kind==='bath'?g.bath==='bath'&&/Đã vuốt 0\/5/.test(g.txt):kind==='feed'?g.food:g.ball),`pet ${kind}: «Sẵn sàng» starts the game`,g);
+  const g=await p.evaluate(()=>{const bx=document.getElementById('kpcgame');return{kgr:!!bx.querySelector('.kgr'),food:!!bx.querySelector('[data-food]'),ball:!!bx.querySelector('[data-ball]'),bath:PETC.game,pips:bx.querySelectorAll('.nwb-cnt .nwb-pip').length,on:bx.querySelectorAll('.nwb-cnt .nwb-pip.on').length,words:/Đã vuốt/.test(bx.textContent||'')}/* mg-noword-care: no word in play, the game state is checked (5 empty dots), not text */});
+  ok(!g.kgr&&(kind==='bath'?g.bath==='bath'&&g.pips===5&&g.on===0&&!g.words:kind==='feed'?g.food:g.ball),`pet ${kind}: «Sẵn sàng» starts the game`,g);
   ok(await khac()===u0+await p.evaluate(()=>BAL.pet.khac),`pet ${kind}: khắc spent only on «Sẵn sàng»`,{u:await khac()});await shot('pet-'+kind+'-play')}
  /* 2b plant care */
  const pk=await p.evaluate(()=>Object.keys(BAL.shelf.it).find(k=>BAL.shelf.it[k].care)||null);
