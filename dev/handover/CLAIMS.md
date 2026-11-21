@@ -634,3 +634,4 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | dialog-person (sonnet; OWNER marks #58 speaker rule, #59 person option cards kit avatar) | review/dialog-person; briefs/main86-dialog-person.md | MAIN CHÍNH 86 | session_01Rc5AsLY5saawhz5LjrvM95 | RUNNING | 21/11 03:23Z |
 | dialog-person (sonnet; OWNER marks #58 #59 dialog speaker + person option cards) | review/dialog-person; briefs/main86-dialog-person.md; reports/dialog-person.md | MAIN CHÍNH 86 | session_01Rc5AsLY5saawhz5LjrvM95 | RUNNING | 21/11 03:25Z |
 | mg-intro-2 (sonnet; OWNER mark #55; successor of mg-5s-clear worker) | review/mg-intro-2; briefs/main86-mg-intro-2.md | MAIN CHÍNH 86 | session_01Rc5AsJi75sHocL2mwRsbkt | RUNNING | 21/11 03:25Z |
+| REVIEW calendar (SMALL sonnet) | review/calendar-rv; briefs/main86-rv-calendar.md | MAIN CHÍNH 86 | session_01Rc5AsKHZyzLGYRFR43QaZN | RUNNING | 21/11 03:29Z |
