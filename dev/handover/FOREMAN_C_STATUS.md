@@ -1662,6 +1662,11 @@ ROOT-B7 ~23:22Z: ROLLED → Foreman C = ROOT-B8 session_01D3E3NadxEFd7mXzQAPmzNG
 ROOT-B8 ~22:10Z: CURRENT FOREMAN C = ROOT-B8 session_01D3E3NadxEFd7mXzQAPmzNG, depth 7 (limit 8), START_CTX ~6 % (roll at ~31 %, ceiling 60 %). Took over from ROOT-B7 (ROLLED line present). PALGPT1 running (L2274 GPT palette into game). THUROOT9, NECK1 idle. No schedules owned. Next Lượt 2275.
 ROOT-B7 ~23:30Z (relay): OWNER L2275 asked about design bible; L2276 ORDER: make one working DESIGN BIBLE for us (rules/common prompts index). → relayed to ROOT-B8. Next Lượt 2277.
 ROOT-B7 ~23:35Z (relay-chat): OWNER L2277 asked GPT follow-up text for SEASONS → L2277_GPT_them_mua.txt (season feelings only + winter fur layer per her L2267). Sent. Next Lượt 2278.
+<<<<<<< HEAD
 ROOT-B8 ~22:35Z: OWNER L2276 (ROOT-B7 chat, relayed): make ONE working design bible → dev/art/DESIGN_BIBLE.md (index + approved core + unapproved direction + lessons); START_FOREMAN_C.md + START_ART_WORKER.md now say read it first. Next Lượt 2278.
 ROOT-B8 ~22:50Z: PALGPT1 done @6c65db7/858fb7c (GPT v3 → palettes_season/flower/veil/plumage LIVE, old kept *_preGPT_L2274; HH #EFBD69 untouched; gates non-LEN FAIL 1 s61 hạ t4 builder fault). SENT L2278: 6 group sheets + design bible done + 4 questions (veil/flower same family as main, plumage replaces L2235, EN words vs hex). PALGPT1 idle. Next Lượt 2279.
 - FROM MAIN (21/11 22:50Z): main is now MAIN CHÍNH 102 session_01Rc5AsKiX9qxS7M6883Uf6h — report LAND READY / FOR MAIN lines to it.
+=======
+ROOT-B7 ~23:40Z (relay-chat): OWNER L2278 asked to resend latest 8-rank set she called đạt → sheet thu_s62_8bac_L2278.jpg from owner_runs (M2213-01/02 + M2217-03..08, HQP re-run). Sent. Next Lượt 2279.
+>>>>>>> a2b4485 (ROOT-B7: 8-rank sheet)
+ROOT-B7 ~23:42Z (relay-chat): OWNER L2279 wanted ORIGINAL pictures, not a sheet → sent 8 originals from owner_runs. Next Lượt 2280.
