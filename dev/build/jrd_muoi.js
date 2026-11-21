@@ -633,7 +633,7 @@ rdDef("muoi_doi",10,{t:"Mùa sau",w:"emp",sj:"mùa gặt năm sau ở Giang Nam"
  B:{s1:{h:"Tháng tư không mưa",w:"emp",if:RDW(1),t:"Dân huyện ven sông đặt tên con là ‘Nghĩa’ để nhớ năm phát chẩn. Nhưng tháng tư không mưa, giá gạo lại nhích lên.",o:[
   {n:"Bảo cha lập kho thường bình",f:"plan",wx:"giá gạo có chỗ dựa",lx:"bạc chôn trong kho, cha xót",rt:"Cha mua thóc lúc rẻ, hứa bán ra lúc đắt theo giá cũ."},
   {n:"Xin Hoàng thượng mở kho quan trước",wx:"kho quan mở sớm",lx:"ngài cho là đàn bà bàn chính sự",rt:"Hoàng thượng hạ chỉ mở kho quan từ tháng năm.",rf:"Hoàng thượng nói: “Chưa đến lúc.”"},
-  {n:"Chờ xem trời",wx:"không tốn gì",lx:"giá lên từng ngày, dân trách nhà buôn",rt:"Ngươi ngồi nhìn mây."}]},
+  {n:"Chờ xem trời",wx:"bạc nhà còn nguyên, khỏi bị chê bàn chính sự",lx:"giá lên từng ngày, dân trách nhà buôn",rt:"Ngươi ngồi nhìn mây."}]},
  s2:{h:"Cha nghe con",w:"maid",if:RDW(0),t:"Năm ngoái chưa sạch tiếng, năm nay trời lại hạn. Phụ thân gửi thư: “Lần này cha nghe con. Con muốn làm gì?”",o:[
   {n:"Xin cha mở kho ngay từ đầu",f:"plan",wx:"giá không kịp lên",lx:"nếu mưa đến sớm, cha lỗ nặng",rt:"Cha mở kho bán giá cũ từ đầu tháng tư."},
   {n:"Xin cha mua giống chịu hạn phát cho dân",f:"seed",wx:"ruộng khô vẫn có lúa",lx:"giống không hợp đất, bạc mất",rt:"Giống lúa sớm từ phương nam mọc tốt trên ruộng khô.",rf:"Giống không hợp đất, mạ chết cả."},
@@ -792,7 +792,7 @@ rdDef("muoi_no",8,{t:"Nợ chồng nợ",w:"v",sj:"những món nợ mới của
  B:{s1:{h:"Cây trâm ngự ban",w:"v",if:RDW(1),need:["v"],t:"Sau Trung thu {v} thở được ít ngày. Rồi ngươi thấy nàng lén cầm cố cả cây trâm ngự ban.",o:[
   {n:"Hỏi thẳng {v} nợ ai",to:"c3",tf:"c3",f:"know",wx:"biết chủ nợ mới",lx:"{v} xấu hổ, đóng cửa không tiếp",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0])},rt:"{v} khai: một thái giám coi kho ở Nội vụ phủ.",rf:"{v} đóng cửa cung, không tiếp ai."},
   {n:"Chuộc lại cây trâm cho nàng",to:"c3",tf:"c3",f:"help",wx:"{v} giữ được trâm ngự ban",lx:"bạc ngươi đi, nợ nàng vẫn còn",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"Cây trâm về lại hộp gấm của {v}."},
-  {n:"Ghi lại, chờ xem",to:"c3",tf:"c3",wx:"không tốn gì",lx:"nợ nàng lăn thêm một tháng, lòng ngươi áy náy",rt:"Ngươi ghi vào sổ riêng."}]},
+  {n:"Ghi lại, chờ xem",to:"c3",tf:"c3",wx:"bạc còn nguyên, {v} không phải xấu hổ trước ngươi",lx:"nợ nàng lăn thêm một tháng, lòng ngươi áy náy",rt:"Ngươi ghi vào sổ riêng."}]},
  s2:{h:"{v} tránh mặt",w:"maid",if:RDW(0),need:["v"],t:"{v} tránh mặt ngươi đã lâu. Người của ngươi nghe được: nàng vay cả bạc của một thái giám cho vay nặng lãi.",o:[
   {n:"Sai người dò chủ nợ",to:"c3",tf:"c3",f:"know",wx:"biết kẻ cho vay là ai",lx:"tốn bạc, {v} biết ngươi dò",rt:"Kẻ cho vay là một thái giám coi kho ở Nội vụ phủ."},
   {n:"Gửi lời: nếu cần, cứ đến tìm",to:"c3",tf:"c3",f:"help",wx:"{v} có lối quay lại",lx:"{v} cho là ngươi thương hại, nói khắp nơi",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"Đêm ấy {v} gửi sang một mảnh lụa thêu, không lời.",rf:"{v} trả lời: “Không dám làm phiền chủ nợ cũ.”"},

@@ -40,7 +40,7 @@ const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JS
    o.board=(S.geBoard||[]).length===1&&S.geBoard[0].ti===r.ti;o.book=!!(geStore().t[key]);o.evt=Q.some(m=>m.pid==='geR'&&/Đại kết cục/.test(m.h));
    o.exit=(()=>{const d=mkP('geR',{});return d&&d.o[0].n==='Tạ ơn'})();o.done=s2.done===1;o.twice=geAnswer(0,0,true)===null;
    /* shading rules on fresh states */const shade=(lt,i)=>{S.ge=null;const s=geS();s.lt=lt;s.d0=S.duc;s.r1=C.e[i][3];return geAnswer(C.e[i][3],C.e[i][4],true)};
-   const iA=C.e.findIndex(e=>e[2]==='A'),iT=C.e.findIndex(e=>e[2]!=='A');
+   const iA=C.e.findIndex(e=>e[2]==='A'),iT=(()=>{S.ge=null;const s0=geS();geLive(s0);return C.e.findIndex((e,i)=>e[2]!=='A'&&s0.st[i]==='o')})();/* W3: skip a thiện ending whose fail-only rule holds in this test life (e.g. cnv_chu_2 needs {mis}, not cast yet) */
    const Qs=rivals.map(v=>v.queen);rivals.forEach(v=>v.queen=false);/* seats free for the shading check (seat lock has its own test) */
    const rA=shade(0,iA),rT=shade(0,iT),rX=shade(-50,iT),rY=shade(50,iA);rivals.forEach((v,i)=>v.queen=Qs[i]);
    o.shade=rA.sh==='a'&&rT.sh==='t'&&rX.sh==='a'&&rY.sh==='t'&&rX.ti===C.e[iT][7]&&rY.ti===C.e[iA][6];
@@ -54,11 +54,15 @@ const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JS
    /* D7 showOdds */BAL.ge.showOdds=true;S.ge=null;s=geS();s.r1=C.e[0][3];const d2=mkP('ge2',{});o.odds=KIT_ODDS.includes(d2.o[C.e[0][4]].x);BAL.ge.showOdds=false;const d3=mkP('ge2',{});o.noOdds=d3.o.every(x=>!x.x);
    /* D3 r11 */BAL.ge.when='r11';S.ge=null;s=geS();S.st.ch.all=0;S.st.f14.ends=S.st.f14.ends||{};delete S.st.f14.ends[11];Q.length=0;geAsk();const a1=Q.some(m=>m.pid==='ge1');S.st.f14.ends[11]='win';geAsk();o.r11=!a1&&Q.some(m=>m.pid==='ge1');BAL.ge.when='ch14';Q.length=0;
    /* odds: more pull → higher, condition unmet → capped */S.ge=null;s=geS();const g0=geOdds(s,0);s.pull[0]=20;const g1=geOdds(s,0);o.oddsUp=g1>=g0&&g1<=BAL.ge.odds.max;
+   /* law 5 (brief E35): one rank step lowers the odds by BAL.ge.odds.rank (inside the clamp), the same key on every branch */
+   {const sv=typeof isSrv==='function'&&isSrv(),r0=sv?S.srv.rk:S.rank,O=BAL.ge.odds,nc=O.noCond;O.noCond=O.max;/* condition cap lifted so the rank term shows on every ending; a servant life (cnv) steps on the maid ladder S.srv.rk */s.pull[0]=3;const put=r=>{if(sv)S.srv.rk=r;else S.rank=r};const at=r=>{put(r);return geOdds(s,0)};const L=[0,1,2,3,4,5,6,7].map(at);put(r0);O.noCond=nc;
+    const want=[0,1,2,3,4,5,6,7].map(r=>Math.round(Math.max(O.min,Math.min(O.max,O.base+3*O.per-r*O.rank))));
+    o.rank=O.rank>0&&JSON.stringify(L)===JSON.stringify(want)&&L[7]<L[0]||JSON.stringify([L,want])}
    /* map + panels */const M=geMap(road);o.map=!!M&&M.spine.length>=12&&M.ends.length===4&&/Đại kết cục \d\/4/.test(M.count.txt);
    try{geBoardPanel();o.panel=Q.length>0;Q.length=0}catch(e){o.panel='err '+e.message}
    o.past=/Thiên mệnh/.test(pastHTML());return o},road);
   console.log(road,JSON.stringify(R));
-  for(const k of ['old','pull','close','lean','ask','bondOff','once','ge2','win','rw','kim','title','board','book','evt','exit','done','twice','shade','fail','closedFail','quiet','quietLoss','odds','noOdds','r11','oddsUp','map','panel','past'])chk(`${road}: ${k}`,R[k]===true,R[k]);
+  for(const k of ['old','pull','close','lean','ask','bondOff','once','ge2','win','rw','kim','title','board','book','evt','exit','done','twice','shade','fail','closedFail','quiet','quietLoss','odds','noOdds','r11','oddsUp','rank','map','panel','past'])chk(`${road}: ${k}`,R[k]===true,R[k]);
   chk(`${road}: S.ge made open at the start`,R.init===JSON.stringify([road,['o','o','o','o'],[0,0,0,0]]),R.init)}
  /* seat lock (HH) on cnv_mat ge2 + D4 switches + carry across lives */
  await p.evaluate(r=>window.__life(r),'cnv_mat');

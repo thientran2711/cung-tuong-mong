@@ -56,7 +56,9 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
  const addN=(role,k,src)=>{if(!k)return;const R=res.N[role]=res.N[role]||{};(R[k]=R[k]||{})[src]=1};
  /* role-parity-drift-2 (law 11, whole group): the kit info chips .kchipb «Chứng cứ N ›» (data-kev → kitEvidencePanel) and «Đã biết: N tin ›» / «Xem thêm N điều ›»
     (data-kintel → kitIntelPanel) only OPEN an info panel (j79 click hook): navigation, not an act — they became a row when a drawn rival happened to hold proof */
- const SKIPA=/data-(tab|pg|pv|sub|close|x|kinvpane|ksub|ktsv|kinvsub|kinvtab|mode|rail|lay|kitsample|kitx|maplist|v85tab|cl|coop|sl|new|kt53|kev|kintel)=/;
+ /* role-parity-drift-kyngo: data-pct = the person-card act-group tab (j15 / j56 «Hành sự 3/5», jpcf «Chuyện cũ»): it only switches the shown group (j25
+    click hook), the buttons of every group are read anyway — a tab label is navigation, never an act (up PROMO-me «Chuyện cũ» / «Hại nặng 11/18») */
+ const SKIPA=/data-(tab|pct|pg|pv|sub|close|x|kinvpane|ksub|ktsv|kinvsub|kinvtab|mode|rail|lay|kitsample|kitx|maplist|v85tab|cl|coop|sl|new|kt53|kev|kintel)=/;
  /* B3: a real act button that also carries a navigation-like attribute (Tài nghệ «Tự học» data-learn + data-mode; kid card «Dạy chữ» data-kt53) is
     still an act: the probe used to drop it (cx:study / cx3:teachV / cx3:teachD were N-ONLY by probe only); sub-tab rows (data-ktsv) are navigation */
  const DOA=/data-(learn|vlearn)="|data-kt53="(?!none")/;
@@ -75,7 +77,11 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
       (j61 k61Hide). In the social world she is acquainted (Quen biết) with them too, so «Lập phe cùng» is judged by its rule at her rank, never by whom
       the drawn life had met (hh / up cx3:facFound were N-ONLY by draw only after 98f9f0f1 shifted the dice) */
    if(a===S)try{const K=typeof k61S==="function"&&k61S();if(K){const K0=Object.assign({},K);UNDO.push(()=>{for(const z in K)delete K[z];Object.assign(K,K0)});
-    for(const t of others(a)){const kk=t&&t!==S&&kOf61(t);if(kk&&(+K[kk]||0)<3)K[kk]=3}}}catch(e){}}],
+    for(const t of others(a)){const kk=t&&t!==S&&kOf61(t);if(kk&&(+K[kk]||0)<3)K[kk]=3;
+     /* E22h r4 (same family): her own acts on another palace's maid (j15 «Mưu kế»: Mua chuộc / jmline Bắt quỳ, vả miệng / Vu tội) sit on that maid's card,
+        which a stranger shows disabled (j61 k61Dis «Chưa biết người này là ai»); whether she knew any of them hung on the drawn life (hh N-ONLY ml:beat /
+        ml:frame once the probe asked the NPC Hoàng hậu's asHitPick on every maid-palace). In the social world she knows their households too */
+     for(const sv of (t&&t!==S&&t.staff)||[]){const ks=kOf61(sv);if(ks&&(+K[ks]||0)<3)K[ks]=3}}}}catch(e){}}],
   /* npc-purpose G1 #14: the doer is WELL REGARDED (everyone else's thiện cảm toward her = 60): the acts that need another's goodwill — «Xin Hoàng hậu
      giáng» (aff(Hoàng hậu, doer) ≥ BAL.m30.xinhhAff), «Nhờ ơn người quen rút thẻ bài» (jecon econFavor: someone with rel ≥ BAL.favorRel) — are judged by
      their rule, not by how the seeded world's regard fell (npc-purpose moves regard by real causes: rumours, remarks). Same for both doers; undone after. */
@@ -119,7 +125,23 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
        her and an NPC: «Trò chuyện với cung nữ» (cx2:maidTalk) is weighed by an NPC only below that lòng — up was P-ONLY by the drawn maid's lòng only */
     const cm=a.maid&&!a.maid.out&&a.maid.loyal!=null&&!L.includes(a.maid)?a.maid:null;if(cm){const b0=cm.loyal;UNDO.push(()=>{cm.loyal=b0});cm.loyal=Math.min(cm.loyal,BAL.ag.cx2.maidTalk.below-25)}const o=liveRivals(true).find(x=>x&&x!==a&&!x.out);
     const ST=[s=>{s.loyal=10},s=>{s.loyal=25},s=>{s.loyal=45},s=>{s.trouble=wk();s.loyal=60},s=>{if(o)s.af=Object.assign({},s.af||{},{[o.id]:40});s.loyal=80}];
-    L.forEach((s,i)=>{const b={loyal:s.loyal,trouble:s.trouble,af:s.af};UNDO.push(()=>Object.assign(s,b));ST[i%ST.length](s)})}]];
+    L.forEach((s,i)=>{const b={loyal:s.loyal,trouble:s.trouble,af:s.af};UNDO.push(()=>Object.assign(s,b));ST[i%ST.length](s)})}],
+  /* role-parity-drift-kyngo: proof on someone she ALSO resents — the «proof» world's 3 proofs plus the doer's own grudge (oán 60) and ill regard (−60) toward
+     each target, one world, the same for her and an NPC. An NPC tells / judges only from a motive (jagacts3 par3 tell: evG > 0 and agSpite > 0; jagacts
+     AGHHG judge: evG ≥ BAL.ag.ev.judge and rel < 0); the player decides herself. hh / up cx3:tell and hh hh:judge were held by the NPC side only because
+     the proof world's a.evm leaked into the later worlds (fixed in snapW). Raw j9 fields (as «liked»), only the doer → target direction, undone after
+     (UNDO), so no other world or doer sees this state */
+  ["proof-foe",a=>{if(a===S)try{const K=typeof k61S==="function"&&k61S();if(K){const K0=Object.assign({},K);UNDO.push(()=>{for(const z in K)delete K[z];Object.assign(K,K0)});
+    for(const t of others(a)){const kk=t&&t!==S&&kOf61(t);if(kk&&(+K[kk]||0)<3)K[kk]=3}}}catch(e){}
+   const F=t=>a===S?[S.ro,t.id,S.rl,t.id]:t===S?[a,"oan",a,"rel"]:[(a.ro=a.ro||{}),t.id,(a.rl=a.rl||{}),t.id];
+   /* law 6a REAL EVIDENCE: a proof needs a real wrong behind it (jtruth deedCap). In the maid-life page nobody has done one yet, so no proof could exist for
+      either doer (up cx3:tell: her card stayed the LOCKED «Kể tội một phi tần · cần chứng cứ», the NPC had no one to tell on). Each target gets one real
+      recorded wrong (deedAdd «bày mưu», weight 3) before the proofs, undone after — the same for both doers */
+   for(const t of others(a)){try{if(typeof deedCap==="function"&&typeof deedAdd==="function"&&deedCap(t)<3){const d0=t.dw,w0=t.wrongs?t.wrongs.slice():t.wrongs;
+     UNDO.push(()=>{t.dw=d0;t.wrongs=w0});deedAdd(t,"plot",null,3-deedCap(t),"bày mưu")}}catch(e){}}
+   for(const t of others(a)){try{if(typeof evA==="function")evA(a,t,3,"scan");else t.ev=3;const [O,ok,R,rk]=F(t);const o0=O[ok],r0=R[rk];UNDO.push(()=>{O[ok]=o0;R[rk]=r0});
+    O[ok]=Math.max(+o0||0,60);R[rk]=Math.min(+r0||0,-60)}catch(e){}}
+   try{if(a!==S&&typeof HA==="object"&&HA){const G=HA.gv=HA.gv||{};G[a.id]=(G[a.id]||0)+1}}catch(e){}}]];
  const UNDO=[];
  /* B4 (maid column): worlds of a maid life, the SAME mutation for the player maid (S, S.srv) and an NPC maid — friends / a same-palace foe /
     a hostile palace's maid (Nhờ dò tin, Tố lỗi, Bỏ độc), no friend yet (Biếu quà), the master out (Theo hầu chủ, Hầu bên cạnh chủ), a senior bậc
@@ -145,6 +167,15 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   ["m-plain",a=>{a.sac=10;a.tai=10;a.duc=10}],
   ["m-secret",a=>{const m=MST(a);if(!m)return;const v=liveRivals(true).find(x=>x!==m&&!x.out&&!x.queen);const X=SV(a);X.sec=Math.max(2,SRVA.accuse.sec||0);X.intel=v?[v.id]:[];if(v){oanAdd(v,m,60)}
     /* G1 #14: «Bẩm tin dò được» is told to the master face to face (jagstaff asOpts home): the news world has her at home, for both doers */mHome(a)}],
+  /* person-minigame-acts round B (20/11, the role-parity-drift-2 way): the palace men and the Hoàng hậu stand in the garden all day — her srvTalk «Chào hỏi
+     đúng lễ» / «Liếc mắt đưa tình» (a man where she is, j42 srvVisitOf ← S.menW) and «Tố cáo … trước Hoàng hậu» (sk hh) needed them at the place she
+     probes; before, they met her only by the seeded day plan (main: the Thái y viện), so any new NPC option (jpma) moved them away (N-ONLY maid:hail /
+     flirt / accuse). The same world for an NPC maid (her road to them is the agent plan). Restored by mSnap / mRest. */
+  ["m-meet",a=>{const X="vuon";S.where=S.where||{};S.menW=S.menW||{};const P=S.roster&&S.roster.P;const put=id=>{const e=P&&P[id];if(e)for(const x of e)if(Array.isArray(x))x[0]=X};
+    try{menInit()}catch(e){}for(const m of S.men||[])if(m.alive){S.menW[m.id]=X;put(m.id)}const q=queenP();if(q&&q!==S&&q!==MST(a)){S.where[q.id]=X;put("v"+q.id);
+     /* the Hoàng hậu has no roster rel: goTo re-places her by S.where (back to her palace, where a maid of another palace is not let in), so the
+        player side of this world reads the card she gets when the Hoàng hậu stands before her (the srvVisitOf person entry, sk "hh") — playerOnce */
+     window.__rpMeetHH=q;UNDO.push(()=>{window.__rpMeetHH=null})}}],
   ["m-emp",a=>{S.where=S.where||{};S.where.emp="vuon";const e=S.roster&&S.roster.P&&S.roster.P.emp;if(e)for(const x of e)if(Array.isArray(x))x[0]="vuon"}],
   ["m-lonely",a=>{if(a===S)S.srv.af={};else a.af={}}],
   /* role-parity-drift-2: a sour servant (her lòng with her master under BAL.eit.pil.loyal: S.tin for the player maid, loyal for an NPC maid) — the state
@@ -153,7 +184,11 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
  const mSnap=()=>JSON.stringify({where:S.where,roster:S.roster,srv:S.srv,S:{suc:S.suc,sac:S.sac,tai:S.tai,duc:S.duc,bac:S.bac,ro:S.ro},sv:allServ().map(x=>({sid:x.sid,af:x.af,rk:x.rk,sec:x.sec,intel:x.intel,suc:x.suc,bac:x.bac,sac:x.sac,tai:x.tai,duc:x.duc})),R:rivals.filter(v=>v!==S).map(v=>({id:v.id,ro:v.ro,oan:v.oan}))});
  const mRest=j=>{const o=JSON.parse(j);S.where=o.where;S.roster=o.roster;S.srv=o.srv;Object.assign(S,o.S);for(const x of o.sv){const s=servById(x.sid);if(s)Object.assign(s,x)}for(const x of o.R){const v=rivals.find(r=>r.id===x.id);if(v)Object.assign(v,x)}};
  const N0={};try{for(const k of Object.keys(agNeedsC(liveRivals(true)[0]||S)))N0[k]=100}catch(e){};["company","desire","tea","order","love","self","tin","mp"].forEach(k=>N0[k]=100);
- const snapW=()=>JSON.stringify({facs:S.facs||[],menW:S.menW||null,S:{malice:S.malice,hh:S.hh,cutPay:S.cutPay,rank:S.rank,preg:S.preg,hidden:S.hidden,kids:S.kids,inv:S.inv,confined:S.confined},R:rivals.map(v=>({id:v.id,rank:v.rank,queen:v.queen,confined:v.confined,suc:v.suc,sung:v.sung,preg:v.preg,hidden:v.hidden,kids:v.kids,inv:v.inv,ev:v.ev,malice:v.malice,hh:v.hh,cutPay:v.cutPay}))});
+ /* role-parity-drift-kyngo: the world snapshot also holds each NPC's own proof book (evm). The «proof» world gives the doer 3 proofs on every target:
+    for her they sit on the target (t.ev, restored here), for an NPC doer in her own a.evm — which was NOT restored, so an NPC's proof leaked into every
+    later world (malice / seen / wares / disfavour / staff) and the promoted maid (probed first) showed Uy hiếp / Bán cho phe khác / Tố giác that
+    neither she nor her born-Đáp-ứng clone holds in those worlds (up N-ONLY + PROMO-npc rows, red on LIVE d74f86a5 by the shifted draw only) */
+ const snapW=()=>JSON.stringify({facs:S.facs||[],menW:S.menW||null,S:{malice:S.malice,hh:S.hh,cutPay:S.cutPay,rank:S.rank,preg:S.preg,hidden:S.hidden,kids:S.kids,inv:S.inv,confined:S.confined},R:rivals.map(v=>({id:v.id,rank:v.rank,queen:v.queen,confined:v.confined,suc:v.suc,sung:v.sung,preg:v.preg,hidden:v.hidden,kids:v.kids,inv:v.inv,ev:v.ev,evm:v.evm||{},malice:v.malice,hh:v.hh,cutPay:v.cutPay}))});
  const restoreW=j=>{while(UNDO.length)try{UNDO.pop()()}catch(e){}const o=JSON.parse(j);S.facs=o.facs||[];S.menW=o.menW||{};Object.assign(S,o.S);for(const x of o.R){const v=rivals.find(r=>r.id===x.id);if(v)Object.assign(v,x)}};
  const npcOpts=(role,v,grps,VL)=>{for(const [vn,f] of (VL||VAR)){const W=snapW(),W2=/^m-/.test(vn)?mSnap():null;SEED(7);try{AG.sc={}}catch(e){}try{rich(v);f(v)}catch(e){E("var "+vn,e)}
    for(let t=0;t<TRIES;t++){try{for(const o of agOptsG(v,Object.assign({},N0),null)||[])addN(role,o.k,"agOptsG")}catch(e){E("agOptsG",e)}
@@ -162,13 +197,29 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
     for(const need of [null].concat(Object.keys(N0)))for(const g of grps)for(const k in AGREG[g]||{}){try{for(const o of AGREG[g][k](v,Object.assign({},N0),need)||[])if(o&&o.k)addN(role,o.k,g+"."+k)}catch(e){}}
     /* B3: a consort's choice to hit another palace's maid (jagstaff asHitPick, run monthly by jmline mlHit) is not an AGREG option: read it here.
        «Bắt quỳ» is weighed only by a cruel consort (Xảo quyệt / Kiêu ngạo): the probe asks it as such a consort too */
-    if(g0(v)==="consort"&&typeof asHitPick==="function"){const T0=window.traitsOf;for(const cr of [0,1]){if(cr)window.traitsOf=p=>p===v?["Xảo quyệt"]:T0(p);
-     try{for(let i=0;i<12;i++){const r=asHitPick(v);if(r&&r.k&&r.k!=="bribe")addN(role,"ml:"+r.k,"asHitPick")}}catch(e){E("asHitPick",e)}finally{window.traitsOf=T0}}}
+    /* E22d r2: the Hoàng hậu is in consorts() too (jmline mlMonth runs mlHit for her), so she is asked as well (agGrp = "hh") */
+    if((g0(v)==="consort"||g0(v)==="hh")&&typeof asHitPick==="function"){const T0=window.traitsOf;for(const cr of [0,1]){if(cr)window.traitsOf=p=>p===v?["Xảo quyệt"]:T0(p);
+     /* drift-2 method (E22d r2): the probe world is explicit — every other palace that has a maid is asked as the target in turn (j8 pickTarget's
+        hashed-by-Math.random pick no longer decides which acts the probe sees; a new module's draws moved hh off its only maid-palace target) */
+     const P0=window.pickTarget;let TG=[];try{TG=(others(v)||[]).filter(x=>(x.staff||[]).some(s=>s.role==="maid"))}catch(e){}if(!TG.length)TG=[null];
+     try{for(const tg of TG){if(tg)window.pickTarget=()=>tg;for(let i=0;i<12;i++){const r=asHitPick(v);if(r&&r.k&&r.k!=="bribe")addN(role,"ml:"+r.k,"asHitPick")}}}catch(e){E("asHitPick",e)}finally{window.traitsOf=T0;window.pickTarget=P0}}}
+    /* E22e round C (drift-2 method, no exempt): a scheme's target is ONE hashed pick (jagharm haOpts0 → jmind mindPickBy keyed on the doer), so which
+       deeds the probe saw hung on the doer's id and on every other module's draws (the risen maid and her born clone picked different targets:
+       PROMO onlyBorn / up P-ONLY harm:taint). The probe world is explicit: every target in her danger band is asked in turn, the same for every doer */
+    if((g0(v)==="consort"||g0(v)==="hh")&&typeof haOpts0==="function"&&typeof haTargets==="function"){const M0=window.mindPickBy;let TT=[];
+     try{TT=haTargets(v)}catch(e){E("haTargets",e)}/* E22g: EVERY target, each given the grudge FIRST (the band ≥ 1 gate of haOpts0 reads danger = oán, so the band is asked after the grudge, not before) */
+     /* her nature too: a scheme's weight is persW of her traits (drawn per person), so she is asked as she is and as a scheming consort (Xảo quyệt),
+        the same as the asHitPick probe above */
+     const T0=window.traitsOf;try{for(const cr of [0,1]){if(cr)window.traitsOf=p=>p===v?["Xảo quyệt"]:T0(p);for(const tg of TT.concat([null])){window.mindPickBy=(L,w,p)=>p===v&&tg&&(L||[]).includes(tg)?tg:M0(L,w,p);/* and a real grudge toward that target (the m-peers oán), undone after *//* E22g fix: oán lives where j9 oan() reads it — toward her = v.oan (a NUMBER), toward an NPC = v.ro[id]; the old probe wrote v.oan[id] (a no-op on a number), so no grudge was ever set */const toS=tg===S,o0=tg?(toS?v.oan:(v.ro||{})[tg.id]):null;if(tg){if(toS)v.oan=Math.max(v.oan||0,80);else{v.ro=v.ro||{};v.ro[tg.id]=Math.max(v.ro[tg.id]||0,80)}}/* E22h r4 (drift-2 method, no exempt): «Phóng hỏa kho đồ» (harm:phonghoa) needs a target whose store holds something that burns (jtsb tsbBurnable); whether any target had one hung on the drawn stores (the pm planner option shifted the draws: t1 P-ONLY harm:phonghoa). Each target is asked with one burnable piece added (Túi thơm thêu, Hương liệu), taken out after */const iv0=tg?tg.inv:null;if(tg)tg.inv=(tg.inv||[]).concat([{k:"tuithom",rp:1}]);/* and under her own needs too (the part-2 #real world: a full Đức weighs a deed's Đức cost little — «Phóng hỏa» costs Đức 8, so the flat all-needs world never weighs it up) */try{for(const NN of [N0].concat(NR?[NR]:[]))for(const need of [null,"spite"])for(const o of haOpts0(v,Object.assign({},NN),need)||[])if(o&&o.k)addN(role,o.k,NN===N0?"haOpts0@target":"haOpts0@target#real")}finally{if(tg){tg.inv=iv0;if(toS)v.oan=o0;else if(o0==null)delete v.ro[tg.id];else v.ro[tg.id]=o0}}}}}catch(e){E("haOpts0",e)}finally{window.mindPickBy=M0;window.traitsOf=T0}}
     try{if(typeof agOpts==="function"&&g0(v)!=="maid")for(const need of [null,"sung","ally","spite","danh","safe","kid","rest","th","hh","bac"])for(const o of agOpts(v,Object.assign({},N0),need)||[])addN(role,o.k,"agOpts")}catch(e){}}
    /* role-parity-drift-2: an NPC servant's «Lén giữ đồ Nội vụ phủ phát» is no agent option: jeitem eitPilfer runs on her master's monthly goods (stipGoods),
        chosen by eitPilWho (lòng under BAL.eit.pil.loyal or a spy, not caught lately) — the same gate as her card (eitPilMaidOk: S.tin under the same loyal,
        spyFor, pilDet) plus this month's Nội vụ phủ piece (eitPilPick). Read that gate for the NPC side (maid:pil was P-ONLY by probe only once 98f9f0f1
        gave every master this month's goods) */
+    /* E22e round C: «Việc chủ sai» (a master's errand) — the player maid gets it as a card (j42 S.srv.err, roll SRVA.errand.offer), an NPC servant
+       as her record row (j95 planner: a household staff of a master not in lãnh cung is sent «chủ sai đi lấy thuốc / Kính sự phòng», p.__err). Both
+       are draws; the probe read only hers (P-ONLY whenever her draw came up). Read the NPC gate (same rule: a servant of a master outside lãnh cung) */
+    if(g0(v)==="maid")try{const m=ownerOf(v);if(m&&m.alive!==false&&!m.out)addN(role,"maid:errand","j95 errand gate")}catch(e){E("errandGate",e)}
     if(g0(v)==="maid"&&typeof eitPilWho==="function")try{const m=ownerOf(v);if(m&&!m.out&&eitPilPick(m)&&eitPilWho(m).some(c=>c.s===v&&c.ch>0))addN(role,"maid:pil","eitPilWho")}catch(e){E("eitPilWho",e)}
    if(g0(v)!=="maid"&&g0(v)!=="srv")gates(role,v);restoreW(W);if(W2)mRest(W2)}};
  /* shared gates: TW deeds and ACT deeds — the same req/ok function decides for her and an NPC */
@@ -190,7 +241,10 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   finally{Object.assign(L,b);HA.here=h0}return hit};
  const gates=(role,a)=>{const T=liveRivals(true).filter(x=>x&&x!==a&&x!==S&&x!==window.__rpV&&!x.out&&x.alive!==false);for(const k in TW){const D=TW[k];if(!D.req){addGate(role,a,k);continue}let f=false;for(const t of T.concat([null])){try{if(D.req(a,t)){f=true;break}}catch(e){}}
    if(f||ladder(a,T,t=>D.req(a,t)))addGate(role,a,k)}
-  for(const k in ACT){const A=ACT[k];if(!A||!A.ok)continue;let f=false;for(const t of T){try{if(A.ok(a,t)){f=true;break}}catch(e){}}if(f||ladder(a,T,t=>A.ok(a,t)))addGate(role,a,"harm:"+k)}};
+  /* E22h r4 (drift-2 method): «Phóng hỏa kho đồ» opens on a target whose store holds something that burns (jtsb tsbBurnable); the drawn stores decided it
+     (t1 P-ONLY harm:phonghoa by draw). Every target holds one burnable piece while the gates are asked (the same world as the NPC target loop), taken out after */
+  const IV=T.map(t=>[t,t.inv]);for(const t of T)t.inv=(t.inv||[]).concat([{k:"tuithom",rp:1}]);
+  try{for(const k in ACT){const A=ACT[k];if(!A||!A.ok)continue;let f=false;for(const t of T){try{if(A.ok(a,t)){f=true;break}}catch(e){}}if(f||ladder(a,T,t=>A.ok(a,t)))addGate(role,a,"harm:"+k)}}finally{for(const [t,iv] of IV)t.inv=iv}};
  const addGate=(role,a,k)=>{if(a===S){addP(role,"§"+k,"gate");return}const h=/^harm:(.+)$/.exec(k);if(h?!OFF.H.has(h[1]):!OFF.T.has(k))return;addN(role,"§"+k,"gate")};
  /* B3: a tab builder shows ONE sub-tab (KTSUB: Tứ đức / Cầm kỳ thi họa …) and ONE person page (PG[tab]: data-pg/data-pi) at a time —
     walk every sub-tab and every page it offers (two levels), so a button on a later sub-tab / person page is not a P-side probe limit */
@@ -213,11 +267,15 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   for(const k of PLS()){richK(S);Q.length=0;const e0=S.ent;try{S.place="home";if(typeof j95sDay==="function")S.ent={d:j95sDay(),ids:[],at:k};goTo(k);Q.length=0}catch(e){E("goTo "+k,e)}finally{if(e0===undefined)delete S.ent;else S.ent=e0}
    for(const pp of (S.visit&&S.visit.people)||[]){try{for(const a of talkOpts(pp)||[])addP(role,a.n,"talk:"+pp.kind)}catch(e){E("talk "+pp.kind,e)}}}
   S.place="home";Q.length=0;
+  /* m-meet world: the Hoàng hậu before her (the same person entry j42 srvVisitOf builds: kind srv, sk hh) */
+  if(isSrv()&&window.__rpMeetHH){const q=window.__rpMeetHH;try{for(const a of talkOpts({kind:"srv",sk:"hh",ref:q,name:"Hoàng hậu "+q.name,ini:q.name.split(" ").pop()[0]})||[])addP(role,a.n,"talk:hh")}catch(e){E("talk hh",e)}}
   if(!isSrv()){for(let i=0;i<rivals.length;i++){const v=rivals[i];if(v===S)continue;try{for(const n of lab(rvCard(v,i)))addP(role,n,"rv")}catch(e){E("rv",e)}try{for(const a of topicOpts(v)||[])addP(role,a.n,"topic")}catch(e){E("topic",e)}}
    for(const f of ["staffTabHTML","staffHTML","facHTML","artTabHTML","invHTML","wkTabHTML","petPanelHTML","kidTabHTML"])try{for(const h of tabAll(f))for(const n of lab(h))addP(role,n,f)}catch(e){E(f,e)}
    /* B3: the item-detail menu (jinv kinvOpen: Dùng / Bán / Nghiệm độc / Tặng …) opens per item in a kit modal — read each item's buttons */
    try{const M0=window.kitModal;let mh="";window.kitModal=o=>{mh+=(o&&o.html)||""};try{for(const it of kinvItems()||[]){mh="";try{kinvOpen(it)}catch(e){}for(const n of lab(mh))addP(role,n,"kinvOpen")}}finally{window.kitModal=M0}}catch(e){E("kinvOpen",e)}}
-  else{try{for(const c of srvCards()||[])addP(role,c.n,"srvCards")}catch(e){E("srvCards",e)}try{for(const n of lab(srvStaffHTML()))addP(role,n,"srvStaff")}catch(e){E("srvStaff",e)}}
+  /* E22e round C: the master has an errand for her this buổi (explicit world, the twin of the NPC j95 errand gate in npcOpts): SRVA.errand.offer
+     forced for this read only, her drawn errand cleared before and restored after (the card was there only when the seeded draw came up) */
+  else{const E0=SRVA.errand.offer,R0=S.srv&&S.srv.err;try{SRVA.errand.offer=100;if(S.srv)S.srv.err=null;for(const c of srvCards()||[])addP(role,c.n,"srvCards")}catch(e){E("srvCards",e)}finally{SRVA.errand.offer=E0;if(S.srv)S.srv.err=R0}try{for(const n of lab(srvStaffHTML()))addP(role,n,"srvStaff")}catch(e){E("srvStaff",e)}}
   if(!isSrv())gates(role,S)};
  const playerLabels=(role,VL)=>{for(const [vn,f] of (VL||VAR)){const W=snapW(),W2=/^m-/.test(vn)?mSnap():null;SEED(7);try{rich(S);f(S)}catch(e){E("pvar "+vn,e)}playerOnce(role);restoreW(W);if(W2)mRest(W2)}};
  if(phase==="consort"){
