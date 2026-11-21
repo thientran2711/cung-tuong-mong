@@ -1055,13 +1055,13 @@ def out1_fails(text):
     return f, w
 
 # G43 MAIDS NO JADE PENDANT (owner L1608 21/11, verbatim: "Sửa lại là cung nữ là sẽ không có đeo ngọc bội, nhưng mà đổi lại thì cung nữ có thể đeo túi thơm nha."):
-# a maid prompt (cung nữ any grade, thân cận, chưởng sự cô cô, ma ma) with a jade pendant / jade disc / ngọc bội = FAIL; a fragrant sachet (túi thơm) at the sash is OK.
+# a maid prompt (cung nữ any grade, thân cận, chưởng sự cô cô, ma ma) with a jade pendant / jade disc / ngọc bội = FAIL; (G59, owner L1874: sachets are gone too - no sachet at the sash either)
 G43_MAID_RX = re.compile(r"\b[Cc]ung n[uữ]\b|\bA (?:[\w-]+ ){0,3}palace maid\b|\bA palace ma ma\b|\b[Cc]huong su co co\b|\b[Cc]hưởng sự\b|\bmistress of servants\b")   # subject words only (case-sensitive "A ..."): a consort line "finer than a palace maid's" is not a maid
 G43_JADE_RX = re.compile(r"\bjade (?:or tassel )?pendants?\b|\bjade discs?\b|\bngọc bội\b|\bngoc boi\b", re.I)
 def g43_fails(text, scope=None):
     if not (scope == "mama" or G43_MAID_RX.search(text)): return []
     m = G43_JADE_RX.search(text)
-    return [("G43", "MAID JADE PENDANT", f"maids wear no jade pendant (owner L1608: a small embroidered fragrant sachet / túi thơm at the sash instead): …{text[max(0, m.start()-60):m.end()+30]}…")] if m else []
+    return [("G43", "MAID JADE PENDANT", f"maids wear no jade pendant (owner L1608) and no sachet (G59, owner L1874): …{text[max(0, m.start()-60):m.end()+30]}…")] if m else []
 
 # G45 JADE PENDANT VISIBLE (owner L1622 21/11, verbatim: "... cái tay để đó ok, miễn sao rằng là không có cái tà áo hay cái gì đó nó che cái ngọc bội hết ..."):
 # hands / the held item in front of the waist are FINE (the pendant is a layer behind the hands in game); words that put a SLEEVE, robe flap, shawl,
@@ -1086,6 +1086,13 @@ def g57_fails(text):
     m = G57_RX.search(t)
     return [("G57", "JADE PENDANT", f"no jade pendant / ngọc bội in any prompt (owner L1851: the game attaches pendants later; nothing hanging from the belt): …{t[max(0, m.start()-50):m.end()+30]}…")] if m else []
 
+# G59 NO SACHET ANYWHERE (owner L1874 21/11, verbatim: "Túi thơm là dẹp hết nha. Tất cả các prompt của các người túi thơm nè, ngọc bội là dẹp hết."):
+# NO people prompt (any scope: consorts, maids, mama, all seasons) may name a sachet / túi thơm / scent pouch / perfume bag / hà bao / embroidered pouch. Supersedes the sachet-OK part of G43/G57.
+G59_RX = re.compile(r"\bsachets?\b|\btúi thơm\b|\btui thom\b|\bscent(?:ed)? pouch\b|\bperfume bag\b|\bhà bao\b|\bha bao\b|\bfragrant pouch\b|\bembroidered pouch\b", re.I)
+def g59_fails(text):
+    m = G59_RX.search(text)
+    return [("G59", "SACHET", f"no sachet / túi thơm in any prompt (owner L1874): …{text[max(0, m.start()-50):m.end()+30]}…")] if m else []
+
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail). pid = person id (sNN/mNN/cNN) for the face root-hex check."""
     if S is None: S, X = load_registry()
@@ -1099,6 +1106,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     fails += fruit_fails(text, scope, pid)
     fails += vase_fails(text)   # F19 NOVASE (owner L1438/L1642)
     fails += g43_fails(text, scope)   # G43 maids: no jade pendant (owner L1608)
+    fails += g59_fails(text)   # G59 no sachet anywhere (owner L1874)
     fails += g57_fails(text)   # G57 no jade pendant anywhere (owner L1851)
     fails += g45_fails(text)   # G45 jade pendant visible: no cloth over the waist (owner L1622)
     _f, _w = out1_fails(text); fails += _f; warns += _w   # G40 OUT1 (owner L1590)   # F16 NOFRUIT (owner Lượt 1052/1054): no fruit as a held item, except the frozen drawn thiếu nữ s44 / s64
@@ -1186,7 +1194,7 @@ def selftest():
         if bool(vase_fails(norm(t))) != bool(want): print("NOVASE SELFTEST", want, t); bad += 1
     for t, sc, want in [("A palace maid (cung nu, tam dang). a decorative sash with a small jade or tassel pendant.", "tp1", 1),
                         ("A palace ma ma. a wide silk sash, a jade pendant on a silk cord.", "mama", 1),
-                        ("A palace maid (cung nu, nhi dang). an embroidered silk sash with a small embroidered silk fragrant sachet (túi thơm).", "mama", 0),
+                        ("A palace maid (cung nu, nhi dang). an embroidered silk sash.", "mama", 0),
                         ("A consort. a soft silk sash with a small jade pendant.", "tp2", 0)]:   # G43 maids no jade pendant (owner L1608)
         if bool(g43_fails(norm(t), sc)) != bool(want): print("G43 SELFTEST", want, sc, t); bad += 1
     for t, want in [("Pose: hands folded at her waist under the long sleeves, the item held between them.", 1), ("Pose: one hand adjusting her belt pendant, the item in the other hand.", 1),
@@ -1197,6 +1205,8 @@ def selftest():
     for t, want in [("a soft silk sash with a small jade pendant on a silk cord.", 1), ("belt pendants and tassels", 1), ("a set of jade discs and pearl strands (zupei)", 1), ("a carved jade pendant set (ngọc bội)", 1),
                     ("a small jade clasp at the chest", 1), ("a silk ball with jade tassels", 1), ("no belt plaque, no pendants; a plain silk sash tied flat.", 0), ("red gems ONLY on the crown, NEVER on the robe, collar, belt or pendants", 0)]:   # G57 (owner L1851)
         if bool(g57_fails(norm(t))) != bool(want): print("G57 SELFTEST", want, t); bad += 1
+    for t, want in [("a sash with a small embroidered silk fragrant sachet (túi thơm) hanging from it.", 1), ("she holds a sachet of silk brocade", 1), ("a hà bao at the waist", 1), ("a plain embroidered silk sash tied in a bow.", 0)]:   # G59 (owner L1874)
+        if bool(g59_fails(norm(t))) != bool(want): print("G59 SELFTEST", want, t); bad += 1
     sys.path.insert(0, os.path.join(ART, "t8-prompt-B")); import pets as _PETS
     for b in _PETS.check(): print("PETS TABLE", b); bad += 1
     for t, sc, ag, want in [("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a18", 0), ("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a36", 1),
