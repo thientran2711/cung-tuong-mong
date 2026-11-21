@@ -186,8 +186,8 @@ function kcTalk(p){const A=[];const m=kcF(p.fid);const all=deck.map((a,i)=>[a,i]
 
 /* ---------- moving (house free; city 1 khắc each way, needs her maid; nights: sneaking only) ---------- */
 function kcCity(k){return KCPL[k]&&!KCPL[k][2]}
-function kcGoWhy(k){if(k===S.place)return"Đang ở đây";if(kcCity(k)){if((S.buoi||0)===3)return"Khuê nữ không ra phố buổi tối";if(!S.maid)return"Không có tỳ nữ đi cùng";if(!can(1))return"Hết khắc buổi này"}return""}
-function kcGo(k){const w=kcGoWhy(k);if(w||Q.length||S.dead)return false;if(kcCity(k)||kcCity(S.place))spend(1);S.place=k;S.visit=kcVisit(k);popIdx=null;popMsg="";deal();
+function kcGoWhy(k){if(k===S.place)return"Đang ở đây";if(kcCity(k)){if((S.buoi||0)===3)return"Khuê nữ không ra phố buổi tối";if(!S.maid)return"Không có tỳ nữ đi cùng";if(!can(BAL.walk.near))return"Hết khắc buổi này"}return""}
+function kcGo(k){const w=kcGoWhy(k);if(w||Q.length||S.dead)return false;if(kcCity(k)||kcCity(S.place))spend(BAL.walk.near);S.place=k;S.visit=kcVisit(k);popIdx=null;popMsg="";deal();
  if(kcCity(k)&&roll(BAL.odb.jkc.rlKcGo)){S.kld+=3;log("Có kẻ nhìn ngươi lâu ở chốn đông người.")}return true}
 (function(){const g0=goTo;goTo=function(k){if(!isKc())return g0.apply(this,arguments);const ok=kcGo(k);if(ok){tab="act";render()}return ok}})();
 
@@ -625,12 +625,14 @@ function kcMapHTML(){const B=(k)=>{const P=KCPL[k];const w=kcGoWhy(k);const ppl=
 try{KIT_GLOSS["Ra phố"]="Ra phố tốn một khắc mỗi chiều đi, phải có tỳ nữ đi cùng; buổi tối khuê nữ không ra ngoài. Chốn đông người dễ sinh lời đồn."}catch(e){}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kcgo]");if(!b||!isKc())return;e.stopPropagation();e.preventDefault();if(b.disabled)return;if(kcGo(b.dataset.kcgo)){tab="act";render()}},true);
 /* Mệnh truyện ngoài cung: one kit skill card per thread (chapter label "Chương · Hồi", owner 15/11 20:30Z), then the facts table */
+/* chapter-card-2 (owner #29 «every chapter place»): the khuê các threads (Chương ngoài cung / Tuyển tú / Thanh mai) are ONE kitSlide, not stacked cards; L = [{kicker,title,sub,desc,done}] */
+function kcSlideHTML(L){let im="";try{im=typeof kitOriginWide==="function"?kitOriginWide(S.origin.k):kitOriginArt(S.origin.k)}catch(e){}
+ return kitSlide("story-kc",L.map(x=>({kicker:x.kicker,title:x.title,sub:x.sub,img:im,body:kitRows([[x.rl||"Việc",x.desc]]),toc:[x.done?"done":"now",x.title,x.sub]})),{tocTitle:"Mục lục chương"})}
 function kcStoryHTML(){const k=S.origin.k;const n=[4,10,16].filter(x=>S.turn>=x).length;const bk=(()=>{try{return RARE97.book()}catch(e){return{}}})();const found=Object.keys(KCRARE).filter(x=>bk[x]).length;
  const nxt=[4,10,16].find(x=>S.turn<x);const tm=S.tm96&&kcTmMan();const left=Math.max(0,kcMonthsLeft());
  const step=S.kc.tt?(S.kc.tt.art?3:2):S.kc.soOk?2:S.kc.so?1:0;
- return kitSkillCard({kind:"story",k:"kco",name:KCO[k].t,kicker:"Chương ngoài cung",level:n,max:3,word:"Hồi",bar:false,next:"",desc:n>=3?"Đã trọn ba hồi.":`Hồi tới: sau ${Math.max(0,nxt-S.turn)} tháng nữa.`})
-  +kitSkillCard({kind:"story",k:"kty",name:"Tuyển tú",kicker:S.kc.tt?"Đang tuyển":`Còn ${left} tháng`,level:step,max:3,word:"Vòng",bar:false,next:"",desc:"Sơ tuyển · Phúc tuyển · Điện tuyển. Qua cả ba thì vào cung, phong tới Quý nhân."})
-  +(tm?kitSkillCard({kind:"story",k:"tm96",name:"Thanh mai trúc mã",kicker:tm.name,max:0,bar:false,desc:S.tm96.tok?"Ta giữ tín vật của chàng.":"Chưa trao tín vật."}):"")
+ return kcSlideHTML([{kicker:"Chương ngoài cung",title:KCO[k].t,sub:`Hồi ${n}/3`,rl:"Hồi tới",desc:n>=3?"Đã trọn ba hồi.":`sau ${Math.max(0,nxt-S.turn)} tháng nữa.`,done:n>=3},
+   {kicker:S.kc.tt?"Đang tuyển":`Còn ${left} tháng`,title:"Tuyển tú",sub:`Vòng ${step}/3`,rl:"Các vòng",desc:"Sơ tuyển · Phúc tuyển · Điện tuyển. Qua cả ba thì vào cung, phong tới Quý nhân.",done:step>=3}].concat(tm?[{kicker:tm.name,title:"Thanh mai trúc mã",sub:S.tm96.tok?"giữ tín vật":"chưa trao tín vật",rl:"Tín vật",desc:S.tm96.tok?"Ta giữ tín vật của chàng.":"Chưa trao tín vật.",done:!!S.tm96.tok}]:[]))
   +kitRows([["Kết hiếm ngoài cung đã gặp",`${found} trên ${Object.keys(KCRARE).length}`,"t"],["Phúc duyên khi qua tuyển tú","qua Sơ tuyển +5 · vào cung +5, Quý nhân +10","t"]])}
 /* her own card */
 (function(){const s0=selfCardHTML;selfCardHTML=function(){if(!isKc())return s0.apply(this,arguments);

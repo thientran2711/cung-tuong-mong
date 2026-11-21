@@ -268,6 +268,15 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
     while a p75 round is still inside the window at her matching board; xa keep .1 → .4 (same proposal); law 5: fast still falls as the board hardens. */
  blend:{w:.32,star:[.25,.55,.85]},
  pace:{fast:[.2,.4],keep:[.5,.8]},word:[3,5,7,9],aid:[3.5,1.5],lesson:[5,8],lessonPts:[2,5,8],fullAt:4,gamma:1,tol:[.45,1,.4],more:2,npc:[4,.4],wk:{lvQ:[0,0,1,1,2,2],th:[6,10,15],cong:[3,2]}}});
+/* GAP MG11 (jmgx; owner OD 20/11 ~08:40Z scan, MAIN ROOT-79 16:25Z): the seven boards that joined «Thử tay» read the board ease like every kind (mgLev:
+   [value at ease 0 = hardest, value at ease 5 = easiest], linear). Each pair is set so the MIDDLE ease (BAL.mgTier.mid = 2, a rank-0 hoc board) gives the
+   board exactly as it was before MG11 (old typed numbers in brackets), so a matching play is unchanged and law 5 (harder as she climbs) / the Thử tay ladder move round it:
+   nghe.cross   ms a line takes to cross the screen (6500)          truyen.lim  ms per round (12000)      mac.lim  ms per round (10000)    thoico.lim  ms per round (8000)
+   thu_choi     ms = first step of the ball (820), dec = faster per tap (140), min = floor (420), n = taps (3)
+   thu_tam      k = strictness of «đều tay» (1.6: score 1 − k·sd/mean of the stroke lengths), n = strokes (5)
+   tuoi         f = × the pour pace BAL.shelf.plant.game.ms (1 = the old pace; bigger = slower water = easier) */
+Object.assign(BAL.mgTier.lev,{nghe:{cross:[5600,7850]},truyen:{lim:[10000,15000]},mac:{lim:[8500,12250]},thoico:{lim:[6800,9800]},
+ thu_choi:{ms:[700,1000],dec:[160,110],min:[370,495],n:[3,3]},thu_tam:{k:[1.9,1.15],n:[5,5]},tuoi:{f:[.8,1.3]}});
 /* mg-ready-guide (owner OD 20/11 ~00:20Z «Sẵn sàng» + «Hướng dẫn», KIT §13.7): the guided tutorial round, played on the EASIEST board = the lowest gap of the
    calibration ladder BAL.ag.mg2.cal.d (read at play time, no second number here); part = it ends once this share of the engine's rounds is done
    (round a/b: a−1 ≥ max(1, ceil(b·part))) or when the engine ends; ms = the longest it may run; back = the pause on «Xong» before the rules screen returns. */
@@ -1762,6 +1771,17 @@ BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400
  greet:{delay:900,wait:1500,tries:20},w:{hap:1,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
 /* kitGameVs (K-PM-1, owner OD 20/11 ~01:00Z item 1, KIT §13.8): the live head-to-head split board «Thách đấu»; knobs only, the game that mounts it owns every rule number */
 BAL.gameVs={pop:320,warn:.2,end:900};/* pop = ms of the score bump; warn = share of the round clock left at which a clock chip turns red; end = ms the result banner takes to settle (all three still under reduced motion) */
+/* GAP IT03 wear slots «Hoa tai» + «Giày» (owner OD L175 "more wear slots with real rules … using existing item art; rank + luxury rules per slot";
+   owner 20/11 ~06:55Z «Đeo» from Tư trang; 20/11 Lượt 1054: consorts enter the palace WITHOUT earrings and get them later as rewards; girls on the home road need none).
+   Same model as Đeo tay / Đeo eo / Túi thơm (jinv): one item per slot; w = stat while worn (×1.5 above her rank, as every worn piece); rk = lowest rank
+   that may wear it (above = vượt phẩm, the one j8/jwdinv rule); pr = price (luxury = the one luxVal: grade of the painting + pr/10); tg = gift likes.
+   best = the j8 BEST reward lists (the Emperor's rewards, player and NPC alike) that may hand it out; shop = sold by Nội vụ phủ (SHOP_ALL).
+   Earrings are REWARDS only (shop 0, owner Lượt 1054 'được thưởng những cái hoa tai'); shoes are sold too. */
+BAL.wearSlots={
+ ear:{hoatai:{n:"Hoa tai ngọc trắng",pr:40,rk:0,w:{sac:2},tg:["hh","rv"],best:["night","birthday"],shop:0},
+      hoataivang:{n:"Hoa tai vàng khảm trân châu",pr:130,rk:3,w:{sac:3,danh:2},tg:["rv"],best:["contest","promo"],shop:0}},
+ shoe:{giayhoa:{n:"Giày thêu hoa mai",pr:15,rk:0,w:{sac:1},tg:["rv"],best:["night"],shop:1},
+       giaygam:{n:"Giày gấm mẫu đơn đính trân châu",pr:70,rk:2,w:{sac:2,danh:1},tg:["hh","rv"],best:["birthday","promo"],shop:1}}};
 /* CUNG NỮ THÂN CẬN (jtc, owner OD 20/11 ~15:55Z, review/thancan): rk = the maid rungs that may be raised (SRK.maid 1 tam đẳng … 3 nhất đẳng); the trust
    bar is BAL.loy.trust. pick: her lòng +loy, Bạc -bac (her master's thân cận uniform is sewn), every other maid of the house lòng -envy (law 3: gain and loss);
    drop: the dismissed maid lòng +loy (negative), the others lòng +calm. npc: an NPC master with none picks her most loyal trusted maid at p (in 100)
