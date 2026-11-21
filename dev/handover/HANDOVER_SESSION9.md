@@ -1915,3 +1915,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (08:22Z) rv MSxp FAIL kit-badge 36b6071e (⏸ 10 px unreadable) → keeper: badge fix first, then kit-mark-fix, then K-FOCUS-1.
 - (08:28Z) maid-acts-a merged 561e3f47 → 90c83c93; rv KbS4 told to review that sha (+ rerun coop-e2e).
 - (08:32Z) Keeper SSK kit-mark-fix r2 b5dbeb7e5 (review/kit-mark-fix-r2; shrink removed, kpmore fade cue) → rv MSxp. Asked keeper whether kit-badge fix done (before K-FOCUS-1).
+- (08:34Z) hao-huu-2 SSK r3 8bcba06b (A fixed via kitName + data-k61skip; N1/N2 done; coop-haohuu 311/311) → rv JeK8 re-check (cc'd). Root cause (guest k61 mask vs shared-world friend not in k61All; jnamefix host-only sweep) = pre-existing name core → ORDER to B (co-op names family).
