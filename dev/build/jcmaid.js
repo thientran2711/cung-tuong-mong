@@ -21,7 +21,7 @@ window.__cmN=window.__cmN||{};
 function cmC(k,n){const N=window.__cmN;N[k]=(N[k]||0)+(n==null?1:n)}
 function cmB(){return BAL.cmaid}
 function cmOff(){try{return !S||window.__cmoff||!BAL.cmaid||(typeof isSrv==="function"&&isSrv())||(typeof isKc==="function"&&isKc())}catch(e){return true}}
-const CM_SRC={tt:"home",dtq:"home",muoi:"home",nc:"land",bd:"land",ch:"th",thd:"pick",cnv:"pick",td:"palace",cn:"room"};
+const CM_SRC={tt:"home",dtq:"home",muoi:"home",nc:"land",bd:"land",pf:"land",ch:"th",thd:"pick",cnv:"pick",td:"palace",cn:"room"};
 const CM_LBL={home:"từ nhà",land:"từ cố quốc",th:"người Thái hậu ban",pick:"tự tay chọn",palace:"Nội vụ phủ cắt cử",old:"gia nhân cũ",room:"bạn cùng phòng thuở làm cung nữ",noi:"Nội vụ phủ cắt cử"};
 const CM_TAL={theu:"khéo thêu thùa",nghe:"thính tai",thuoc:"biết thuốc",kin:"kín miệng"};
 const CM_SEC={lover:"đối thực với một thái giám",debt:"nợ cờ bạc ngoài cung",family:"mẹ già bệnh ở quê",spy:"từng nhận bạc của người cung khác"};
@@ -103,7 +103,7 @@ function cmGuard(t,p){try{if(t!==S||cmOff()||!S.maid||S.maid.src!=="home"||!S.or
    and not, weighted by the same % (talSpy / secOut) × her lòng (ag2Ch, as the other servant inclinations of AG-ALL-2): a loyal maid listens for her mistress more and leaks less, a disloyal one the
    other way (BAL.ag.stf2.cm: spy × lòng / talLoy, leak × (100 − lòng) / (100 − secTrust)). A secret affair FOUND by Cung Chính ti (lover)
    is not her choice: it stays the old witness roll. Loop off → the old rolls. */
-function cmCh(m,w){if(!(window.agOn&&agOn()&&typeof ag2Ch==="function"))return null;return !!ag2Ch(m,cl(w,0,100))}/* a weighted draw of her inclination (j8 ag2Ch), no jmind slip: a slip would bend a rare monthly rate (3 %) several times over */
+function cmCh(m,w){if(!(window.agSelf&&agSelf(m&&S&&m===S.maid?S:null)&&typeof ag2Ch==="function"))return null;/* coop-guest-agent: her own chief maid on a co-op guest's seat = the same agent odds as solo */return !!ag2Ch(m,cl(w,0,100))}/* a weighted draw of her inclination (j8 ag2Ch), no jmind slip: a slip would bend a rare monthly rate (3 %) several times over */
 function cmSpyCh(m){const B=cmB(),K=BAL.ag.stf2.cm;const c=cmCh(m,B.talSpy*K.spy*(m.loyal||0)/B.talLoy);return c==null?(!!npcWhy("cmSpy",{p:m},()=>roll(B.talSpy))):c}/* npc-purpose G2a: she listens for her mistress out of loyalty */
 function cmLeakCh(m,s){const B=cmB(),K=BAL.ag.stf2.cm;if(!s||s.k==="lover")return !!npwPick(liveRivals(true).filter(v=>v!==S&&eyes(v)>0),v=>hostility(v,S)-BAL.ag.why.tell.host)&&roll(B.secOut);/* npc-purpose G2a: Cung Chính ti hears of it only from a rival with tai mắt and a grudge against her mistress */const c=cmCh(m,B.secOut*K.leak*(100-(m.loyal||0))/Math.max(1,100-B.secTrust));return c==null?(!!npcWhy("cmLeak",{p:m,s},()=>roll(B.secOut))):c}
 /* ---------- the month ---------- */
