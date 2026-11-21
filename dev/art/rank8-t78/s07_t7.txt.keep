@@ -1,0 +1,5 @@
+base: dev/art/g45_base/rank8-t78/s07_t7.txt.old
+allow: Pose: hands folded at her waist under the long sleeves  # owner L1622 G45 (no cloth over the jade pendant) + L1667, Foreman C #17: pose M6/C3 dropped by POSEFIX1 -> builder re-pick pose, DESIGN21
+allow: an imperial round fan with a gold filigree frame and gems held between them  # owner L1622 G45 (no cloth over the jade pendant) + L1667, Foreman C #17: pose M6/C3 dropped by POSEFIX1 -> builder re-pick pose, DESIGN21
+allow: the robe falling still and straight  # owner L1622 G45 (no cloth over the jade pendant) + L1667, Foreman C #17: pose M6/C3 dropped by POSEFIX1 -> builder re-pick pose, DESIGN21
+allow: Pose: hands folded at her waist under the long sleeves, an imperial round fan with a gold filigree frame and gems held between them, with stately grace, the robe falling still and straight  # owner L1622 G45 (no cloth over the jade pendant) + L1667, Foreman C #17: pose M6/C3 dropped by POSEFIX1 -> builder re-pick pose, DESIGN21

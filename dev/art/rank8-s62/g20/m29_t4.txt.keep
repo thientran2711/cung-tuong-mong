@@ -1,0 +1,3 @@
+base: dev/art/g45_base/rank8-s62/g20/m29_t4.txt.old
+allow: Pose: one hand adjusting her belt pendant  # owner L1622 G45 (no cloth over the jade pendant) + L1667, Foreman C #17: pose M6/C3 dropped by POSEFIX1 -> builder re-pick pose, DESIGN21
+allow: Pose: one hand adjusting her belt pendant, a small white-jade lotus lamp in the other hand, the robe hem stirring slightly  # owner L1622 G45 (no cloth over the jade pendant) + L1667, Foreman C #17: pose M6/C3 dropped by POSEFIX1 -> builder re-pick pose, DESIGN21

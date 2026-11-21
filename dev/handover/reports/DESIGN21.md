@@ -24,3 +24,16 @@ t7 v8j vs v8c:
 ## Open
 - Owner to confirm: keep G40 (outer robe held in at the waist) off t6/t7? Revert removes it (OUT1 WARN only).
 - CHECK1 diff-only check sent.
+
+# JOB 2 — G45 stored-prompt pose fix (Foreman C #17, owner L1622/L1667) · 0 cr, no gens
+- Scan: check_store.g45_fails on EVERY *.txt prompt under dev/art (incl. dapung4, thu_comoi, seasons4, dong_hientai, phi_cape_l1596 …) → exactly 7 FAIL = the 7 POSEFIX1 listed; **0 hand-made season files FAIL**.
+- Fix (dev/art/posefix_g45_stored.py): ONLY the Pose sentence swapped for the pose build_all.py now re-picks for that cell (M6/C3 dropped), stored item words kept, no JADE_CLEAR added (not needed for G45). Pre-edit files kept as dev/art/g45_base/<path>.old = .keep base.
+  | file | old pose | new pose (builder re-pick) |
+  |---|---|---|
+  | rank8-old4/m29_t4, rank8-s62/g20/m29_t4 | adjusting her belt pendant | one hand drawing back her long sleeve, lamp at her chest |
+  | rank8-t78/s07_t7 | hands folded under sleeves | walking mid-step, fan held open at her side (tail → hem swaying, G23) |
+  | rank8-t78/s54_t7 | hands folded under sleeves | one hand touching her hairpin, letter in the other hand at her waist |
+  | rank8-t78/s59_t8 | hands folded under sleeves | mid-step adjusting a hairpin with one raised hand, drum in the other (tail → hem swaying) |
+  | rank8-t78/s23_t7 | adjusting her belt pendant | three-quarter turn looking at the viewer, hoop near her shoulder |
+  | rank8-t78/s17_t8 | adjusting her belt pendant | raising the hairpin between her fingers beside her cheek, glancing at it |
+- Gates: keep_check --all 365 PASS. check_store (--scope tpN --age a18) before→after: G45 FAIL gone ×7, 0 new FAIL. Old FAILs untouched (older stored text): m29_t4 ×2 B26/M06/S13/S19; s07/s54/s23 t7 S14; s59/s17 t8 now fully PASS.

@@ -1,0 +1,4 @@
+base: dev/art/g45_base/rank8-t78/s23_t7.txt.old
+allow: Pose: one hand adjusting her belt pendant  # owner L1622 G45 (no cloth over the jade pendant) + L1667, Foreman C #17: pose M6/C3 dropped by POSEFIX1 -> builder re-pick pose, DESIGN21
+allow: an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene in the other hand  # owner L1622 G45 (no cloth over the jade pendant) + L1667, Foreman C #17: pose M6/C3 dropped by POSEFIX1 -> builder re-pick pose, DESIGN21
+allow: Pose: one hand adjusting her belt pendant, an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene in the other hand, with stately grace, the robe falling still and straight  # owner L1622 G45 (no cloth over the jade pendant) + L1667, Foreman C #17: pose M6/C3 dropped by POSEFIX1 -> builder re-pick pose, DESIGN21
