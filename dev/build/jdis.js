@@ -66,9 +66,9 @@ window.disOf=disOf;window.disInit=disInit;window.disKnown=known;window.disUnk=p=
  try{if(a===S&&e&&!e.h&&r&&r!==S&&r!=="maid"&&(r==="emp"||r==="th"||typeof r==="object"))k=hit(r,e)}catch(x){}
  if(!k){const out0=g0.apply(this,arguments);try{if(a===S&&e&&out0&&r&&r!=="emp"&&r!=="th"&&r!=="maid"&&typeof r==="object"&&r!==S){const lk=likeKeys(r),gk=giftKeys(e).find(x=>lk.includes(x));if(gk)likeLearn(r,gk,"Dâng quà hợp ý")}}catch(x){}return out0}
  const emp=r==="emp",th=r==="th",who=emp?"Hoàng thượng":th?"Thái hậu":`${rkName(r)} ${r.name}`,en=entry(k).n,nm=iname(e),pr=emp?"ngài":th?"người":"nàng",key=emp||th?r:r;
- const loss=(n)=>emp?`Sủng -${n}`:th?`Thái hậu -${n}`:`thiện cảm của nàng -${n}`;
+ const loss=(n)=>emp?sgStat(-n):th?`Thái hậu -${n}`:`thiện cảm của nàng -${n}`;
  if(roll(BAL.dis.refuse)){learn(key,k,"Bị từ chối quà");if(emp)ap(S,{sung:-BAL.dis.refSung});else if(th)ap(S,{th:-BAL.dis.refAff});else affAdd(r,S,-BAL.dis.refAff);
-  return `<span class="r">${who} không nhận ${nm}: ${pr} không ưa ${en}.</span> ${emp?`Sủng -${BAL.dis.refSung}`:th?`Thái hậu -${BAL.dis.refAff}`:`Thiện cảm của nàng -${BAL.dis.refAff}`}. Món quà vẫn còn trong rương. `}
+  return `<span class="r">${who} không nhận ${nm}: ${pr} không ưa ${en}.</span> ${emp?sgStat(-BAL.dis.refSung):th?`Thái hậu -${BAL.dis.refAff}`:`Thiện cảm của nàng -${BAL.dis.refAff}`}. Món quà vẫn còn trong rương. `}
  const out=g0.apply(this,arguments);if(!out)return out;learn(key,k,"Dâng quà sai ý");
  if(emp)ap(S,{sung:-BAL.dis.sung});else if(th)ap(S,{th:-BAL.dis.aff});else affAdd(r,S,-BAL.dis.aff);
  return out+`<span class="r">Nhưng ${pr} không ưa ${en}: ${loss(emp?BAL.dis.sung:BAL.dis.aff)}.</span> `}})();
@@ -85,5 +85,5 @@ window.disLikeRow=likeRow;window.disLikeLearn=likeLearn;window.disLikeKnown=like
 (function(){if(typeof j78facts!=="function")return;const f0=j78facts;j78facts=function(v){const F=f0.apply(this,arguments);try{const k=likeUnk(v)[0];if(k)F.push({k:"lk:"+k,kind:"lk",pri:BAL.dis.spyPri,txt:`${j78Who(v)} thích ${entry(k).n}.`,go:()=>{const K=likeKnown(v);if(!K.includes(k))K.push(k);return""}})}catch(e){}return F}})();
 /* the gift dialog tells her only what she already knows */
 (function(){if(typeof giftEval!=="function")return;const g0=giftEval;giftEval=function(e,t){const r=g0.apply(this,arguments);try{if(r&&r.ok&&t&&t!=="maid"&&e&&!e.h){const who=t==="emp"?"emp":t,k=hit(who,e);
-  if(k&&known(who).includes(k))r.x=(r.x||"")+` · kèm: ${t==="emp"?"ngài":t==="th"?"người":"nàng"} không ưa ${entry(k).n}, ${t==="emp"?`Sủng -${BAL.dis.sung}`:t==="th"?`Thái hậu -${BAL.dis.aff}`:`thiện cảm của nàng -${BAL.dis.aff}`}; có thể không nhận: ${chanceW(BAL.dis.refuse)}`}}catch(x){}return r}})();
+  if(k&&known(who).includes(k))r.x=(r.x||"")+` · kèm: ${t==="emp"?"ngài":t==="th"?"người":"nàng"} không ưa ${entry(k).n}, ${t==="emp"?sgStat(-BAL.dis.sung):t==="th"?`Thái hậu -${BAL.dis.aff}`:`thiện cảm của nàng -${BAL.dis.aff}`}; có thể không nhận: ${chanceW(BAL.dis.refuse)}`}}catch(x){}return r}})();
 })();

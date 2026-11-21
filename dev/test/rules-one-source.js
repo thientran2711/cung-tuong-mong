@@ -55,7 +55,7 @@ const fresh=()=>{try{localStorage.clear()}catch(e){}window.__nlInner=1;for(const
    has('gloss Quẻ',KIT_GLOSS["Quẻ"],/13 bạc và 3 khắc/);has('HX.lot',HX.lot,/13 bạc và 3 khắc/);has('gloss khắc',KIT_GLOSS["khắc"],/7 khắc/);has('HX.buoi',HX.buoi,/7 khắc/);
    has('gloss Bổng lộc',KIT_GLOSS["Bổng lộc"],/\(41–/);
    {/* ghen-shown-r1 nx(): best night = nightGain(q+v+2), worst = nightGain(q+v) with q 1, v = b + his mood (j8) */const v=1+[1,0,-1,-2][S.emp.mood],hi=nightGain(1+v+2),lo=nightGain(1+v);if(lo.sung<9||lo.an<6)bad.push(['night floor not from BAL.night',lo]);
-    has('night card',nx(1),new RegExp('Sủng \\+'+hi.sung+', Ân tình \\+'+hi.an+'.*Sủng \\+'+lo.sung+', Ân tình \\+'+lo.an))}if(nightG(0)!==9||nightA(0)!==6)bad.push(['nightG/A',nightG(0),nightA(0)]);
+    has('night card',nx(1),new RegExp('Sủng[ \u00a0]\\+'+sg(hi.sung)+', Ân tình \\+'+hi.an+'.*Sủng[ \u00a0]\\+'+sg(lo.sung)+', Ân tình \\+'+lo.an))/* sg-card (law 4 shown == applied): the card draws her Sủng as nightFx applies it, apply → sg(nightGain) (Hoàng thượng nồng nàn / lạnh lùng), marked with the no-break space (j1 SG_NB) */}if(nightG(0)!==9||nightA(0)!==6)bad.push(['nightG/A',nightG(0),nightA(0)]);
    has('sneak pen',accSneakPen("vuon").txt,/Danh -17/);has('sneak pen heavy',accSneakPen("dtd").txt,/Danh -23/);if(accSneakPen("vuon").danh!==-17)bad.push(['sneak rule',accSneakPen("vuon")]);
    has('walk',travel(S.place==="home"?"home":S.place,S.place==="home"?"vuon":"home")+'',/^[56]$/);has('walk text',typeof walkFarK==="function"?walkFarK():'',/^6$/);
    used=7;if(can(1))bad.push(['can(1) with the buổi spent (BAL.time.khac)']);used=6;if(!can(1))bad.push(['can(1) with 1 khắc left (BAL.time.khac)']);

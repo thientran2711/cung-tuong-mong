@@ -108,7 +108,7 @@ function aaHealthO(v){return oddsCl(Math.round(45+aff(v,S)/2-((typeof traitsOf==
   let t=`${v.name} cảm động vì được hỏi han.`;const I=illOf(v);if(I&&!illKnown(v)){if(roll(aaHealthO(v))){I.known=true;t+=` Nàng kể đang mắc ${illName(v)}.`}else t+=" Nàng chỉ cười, giấu chuyện bệnh tật."}else if(I)t+=` Nàng vẫn đang ${illName(v)}.`;else t+=` Nàng khỏe mạnh (Sức ${v.suc>=BAL.sucLv.ask[1]?"tốt":v.suc>=BAL.sucLv.ask[0]?"vừa":"yếu"}).`;return t}});return A}catch(e){console.error(e);return A}}})();
 
 /* 9. "ban chết" on cards = what deathSentence (j8) really does; the odds word is the real one (it was forced to "Liều") */
-function aaDeathTxt(){if(S.turn<12&&!S.mercy)return"tội chết — năm đầu được tha một lần: giáng một bậc, cấm túc 3 tháng, Danh -10, Sủng -10";return has("nhantu")?"tội chết (Hoàng thượng nhân từ: có khi chỉ đày vào lãnh cung)":"tội chết: mất mạng"}
+function aaDeathTxt(){/* law4-typed: prints the BAL keys deathSentence (j8) applies — her Sủng drawn once (sgStat) */const E=BAL.eff.j8;if(typeof S==="object"&&S&&S.turn<E.mercyTurn&&!S.mercy)return`tội chết — năm đầu được tha một lần: giáng một bậc, cấm túc ${E.mercyConfine} tháng, Danh ${balSg(E.danhDeathSentence)}, ${sgStat(E.sungDeathSentence)}`;return has("nhantu")?"tội chết (Hoàng thượng nhân từ: có khi chỉ đày vào lãnh cung)":"tội chết: mất mạng"}
 (function(){for(const k in ACT){const A=ACT[k];if(A&&typeof A.x==="string"&&/ban chết/.test(A.x)){const x0=A.x;Object.defineProperty(A,"x",{configurable:true,get(){return x0.replace(/ban chết/,aaDeathTxt())},set(v){}})}}
  if(typeof actLineRaw==="function"){const a0=actLineRaw;actLineRaw=function(){const h=a0.apply(this,arguments);return typeof h==="string"?h.replace(/(bị (?:tra ra|lộ)): ban chết/g,(m,p)=>`${p}: ${aaDeathTxt()}`):h}}})();
 
@@ -176,7 +176,7 @@ window.kitThey=kitThey;
 /* 15. her own Sủng on act-card outcome texts goes through sg() like the real change (j1 apply: Hoàng thượng nóng nảy ×1.3,
    lạnh lùng ×0.7 on gains) — "Sủng -8" on a static outcome text is drawn as the real −10 */
 (function(){if(typeof actLineRaw!=="function"||typeof sg!=="function")return;const a0=actLineRaw;actLineRaw=function(){const h=a0.apply(this,arguments);if(typeof h!=="string")return h;
- return h.replace(/(^|[^\p{L}])(Sủng(?: ngươi| ta)?) ([+\-−])(\d+)/gu,(m,p,l,g,n,off,all)=>{if(/nàng(?: ta)?\s*$|nàng ta mất|nàng mất|của nàng/.test(all.slice(Math.max(0,off-14),off+p.length)))return m;const v=sg((g==="+"?1:-1)*+n);return `${p}${l} ${v>0?"+":"-"}${Math.abs(v)}`})}})();
+ return sgTxt(h)/* SG-CARD: the ONE rewrite (j1 sgTxt) — the same one every option card reads through kitParse */}})();
 
 /* 16. THIẾU LỄ (owner): at formal moments (thỉnh an Thái hậu / Hoàng hậu, gặp Hoàng thượng) a consort who wears nothing proper for
    her rank (nothing worn, or what she wears is clearly below her rank: worn luxury < BAL.thieuLe.frac × her rank's allowance)
