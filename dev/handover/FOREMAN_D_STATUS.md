@@ -657,3 +657,7 @@ Hourly wake: D #13 trigger trig_014ZYA8cuxME4MXPMmqt99Zy deleted at rollover; D 
   - drop the BAL.grow curve;
   - start values, deck and stUp = LIVE.
   Land condition for nobc: knob-bot HH ≥ ~25 % (sampler GMDXZAV9 measures the nobc sha).
+- (21/11 06:10Z, D #14) NIGHT LAND CHAIN #8 C9SFcrz6 rolled over (28 %) at review/night-final-r3-coop 57e82acf; handover f8923564. coop-night case 4 is a REAL jnf wait: the choice is held by scene() cfBusy while jflip cfPlay waits on COOPW.pend||busy(), up to 180 s > waitMs. To meet the deadline the job is split into 2 parallel opus workers on separate files (OD:L1237):
+  - **NIGHT LAND CHAIN #9 = session_01964izEeSaDYxdhm1XHe4hc:** jnf/jflip co-op stall fix (whole group) + gates on -coop.
+  - **NOBC BUILDER = session_01964izGHyaHxissgvBFzqLH:** review/night-final-r3-nobc with D ruling «A + drop growth/start», then merges #9's fix. The sampler measures HH on the nobc sha (land condition ≥ ~25 %).
+  #8 is archived after it sends probe 2. night-final LAND READY ETA ~12:00–13:00Z.
