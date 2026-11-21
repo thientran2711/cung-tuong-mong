@@ -60,3 +60,15 @@ S14 still FAIL at t7: the gate accepts only S14_L1794 verbatim, which contains "
 S14 WAIVER (Hán LADDER5 t7) granted by Foreman C #23 21/11 ~07:17Z: Hán has no cape; owner L1794 wants nothing covering the collar; "cape edges" words NOT added.
 ## LADDER5 update 3 (owner L1805 via #22/#23): hair untouched
 Removed "nothing covers the collar or shoulder line: loose hair falls BEHIND the shoulders," from the COLLAR sentence ×8 → "…soft sloping shoulders; the hands and held item stay below the collar, any bead yoke lies flat along the collar edge." All hair sentences byte-identical to LADDER4 (checked t1–t8). Hair is struck from the "why" list (owner: not a reason). ch 9667/9808/9696/9428/9345/9721/9907/9903; keep PASS ×8; check_store same waivers (t7 S14 waived by #23).
+## LADDER5 update 4 (owner L1806 via #22/#23): pose/angle/hair = LADDER4, fix COLLAR WORDS only
+- Hair, ANGLE, Pose, GRACE, hair-flower sentences byte-identical to LADDER4 ×8 (script-checked); only t7/t8 item swapped inside the LADDER4 pose (basket → t7 kingfisher parasol / t8 phoenix fan, item-rank-age "t6+ never basket"). t6 pose back incl. its stole words.
+- Extra COLLAR AND SHOULDERS sentence REMOVED (not Phi's words). "Why" list: hair/pose/angle/props struck.
+- Collar/shoulder word differences found vs Phi t5 (LADDER4) and fixes:
+  1. Front-opening border: Phi "border along the whole hem and front opening" (the band running up the collar edge); t1–t4 had hem only → now t1 narrow / t2 plain / t3 wide "embroidered border along the hem and front opening", t4 "deep … whole hem and front opening" (= Phi).
+  2. Shoulder tail: t1–t3 "no cape, no cloud collar, no shoulder piece, no shawl;" vs Phi "no cape, no cloud collar, no shawl;" → Phi tail ×8.
+  3. Fringe clause: Phi ", lying outside the collar, never touching or hiding the collar;"; LADDER4 t7/t8 had ", outside the collar;" (LADDER5 v1 had cut it t4–t6 too) → Phi clause restored t4–t8.
+  4. "RANK BLOCK, clearly visible at game size:" label before the bands: Phi has it, t6–t8 had lost it → restored ×8.
+  5. Fringe shape: Phi = one fringe; t7/t8 "layered … fringes" → "a long fringe of small pearls and tiny jade drops".
+  6. t7 colour list "the yellow collar band" (Phi has no extra collar band in the colour sentence) → removed (yellow band still in the bands phrase).
+  NOT changed, owner to decide: (a) band count t1–t3 TWO / t7–t8 FOUR (L1772); (b) t1–t3 have NO bead yoke at all (Phi's yoke lies on the collar edge; fringe is t4+ in the ladder); (c) t8 outer collar yellow, inner plum (HH yellow order); (d) t1–t3 colours ivory-in-pink vs pink-in-plum (rank colours).
+ch 9460/9636/9690/9549/9203/9779/9987/9995; keep PASS ×8; check_store same waivers (t7 S14 waived by #23).
