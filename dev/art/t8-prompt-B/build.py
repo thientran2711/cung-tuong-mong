@@ -193,10 +193,25 @@ def e6_kind(item):
         if _re.search(rx,item): return k
     return item
 _E6_CACHE={}
+_J53=None
+def _items_L2053():
+    global _J53
+    if _J53 is None:
+        _f=_os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))),"items_per_person_L2053_DRAFT.json")
+        _J53={k:v for k,v in _json.load(open(_f,encoding="utf-8")).items() if not k.startswith("_")} if _os.path.exists(_f) else {}
+    return _J53
 def _e6_picks(c,age):
     key=(c,age)
     if key in _E6_CACHE: return _E6_CACHE[key]
     n=int(c[1:]) if c[1:].isdigit() else sum(map(ord,c)); j=(n-1)%5; L=_E11_LISTS(); used=set(); out={}
+    _J=_items_L2053()
+    if age=="a18" and c in _J:   # BUILDFIX2 (owner L2053, ITEMS1): her OWN a18 ladder t1-t8 from dev/art/items_per_person_L2053_DRAFT.json (index into the same E11 lists)
+        for t in _E6_TIERS:
+            it=L[t][0][_J[c][t]["idx"]]; assert (it[0] if isinstance(it,(tuple,list)) else it)==_J[c][t]["item"],("items_L2053 mismatch",c,t)
+            out[t]=it
+        lst,d=L["nude"]; k8=e6_kind(out["t8"][0])
+        out["nude"]=lst[next((d[age][(j+k)%5] for k in range(5) if e6_kind(lst[d[age][(j+k)%5]][0])!=k8),d[age][j])]
+        _E6_CACHE[key]=out; return out
     gs=group_slot(c)
     if gs:   # E12: look-group member -> her slot's colour class (8 different items per rank inside the group, 8 different kinds per person)
         GI=_group_items(gs[0],age)
