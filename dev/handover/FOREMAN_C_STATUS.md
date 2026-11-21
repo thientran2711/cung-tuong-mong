@@ -1024,3 +1024,4 @@ NEWACCT#15 ~02:35Z: HAIR1 2b3c43f6a 8 ChatGPT hair-sheet prompts sent L1632 (fil
 NEWACCT#15 ~02:40Z: DESIGN20 d13d7ed t4 COMOIf + t5 COMOIe (OUTER_TIED, G46 CAPE5_V4, G47) → CHECK1 → GEN1 110 cr. DESIGN20 ROLLED (~24 %, handover in report). LADDER2 owns remaining gaps t1–t3 text, xuân v6, t6–t8.
 NEWACCT#15 ~02:42Z: HAIR1 83d55ab44 hair table per season (90×8×4, check PASS, 10 shapes/rank kept) → told owner L1633. JOB2 waits owner.
 NEWACCT#15 ~02:45Z: OWNER L1634 'B05 bật thực tại, 6 bỏ' → read as t2 Thường tại drop B05+B06 → HAIR1 replace with 2 new shapes.
+NEWACCT#15 ~02:48Z: OWNER L1635 CANCELLED hair project (angry: 'gớm'); prompts unchanged (no builder used hair table); G48 set CANCELLED; HAIR1 stopped.
