@@ -19,3 +19,11 @@ OPEN: draw 3@135 (s63/s64/s65, refs nVsrRMPYQD, gpt-2-6 2k medium 9:16 seed 7172
 ## STEP 3 — ROOT-B2 chest position refinement (VE12 L2088: cluster sat low / item covered it) · words only
 All L2079 files: "in the middle of the chest panel, centred between the neckline band and the sash," → "in the UPPER middle of the chest panel, just under the neckline band," (+ " never hidden by the held item," on Phi ×4 (letter at chest) and HQP). Lens: Tần 9979/9985/9981, Phi 9736–9927, HQP 10000. keep PASS all (--all PASS); store sets unchanged (HQP PASS).
 Owner L2088: drafts @55 (1k), never 135. Draw plan when lifted: 5×55 = 275 cr. BUILDFIX2 gets the words only after pictures prove them.
+## STEP 4 — owner L2110 / law A53: NO Magnific gens; 5×55 draws CANCELLED (0 cr total this session)
+Ready prompt files for the owner to paste into ChatGPT (+ images to attach, in this order; "image 2/3" in the text = these):
+| file | attach |
+|---|---|
+| dev/art/thu_comoi/s63_t4_THU_L2079.txt · s64_… · s65_… (Tần edge test) | style ref nVsrRMPYQD |
+| dev/art/thu_comoi/s62_t5_THU_L2079.txt (+ s63–s65) (Phi) | 1 nVsrRMPYQD · 2 Phi collar crop w4asVae7EI |
+| dev/art/thu_comoi/s62_t7_THU_vankien2_L2079.txt (HQP) | 1 nVsrRMPYQD · 2 TdwDfOyVNR (royal-yellow colour ref) · 3 kseQCFw16B (collar shape) |
+Note: the files still carry a top-left CAPTION line (test label); drop it if ChatGPT should not write text.
