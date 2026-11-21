@@ -58,3 +58,13 @@ Word diffs vs the last texts, checked against Set A dev/art/rank8-s62/s62_tN.txt
   - Gates PASS, but I HOLD these two for the Foreman: re-add ", NO bow" (G44, a standing owner rule), or accept as Set A?
 - Released to GEN1: t3 v11 + t8 v10k = 2 × 55 = 110 cr. t4/t5 wait for the Foreman.
 - 04:20Z CHANGE (Foreman 04:17Z, crossed my release): NO GEN1 release for job 6+7 until the owner picks the quality (55 cr 1k / 135 cr 2k). I sent GEN1 a STOP/CANCEL for t3 v11 + t8 v10k. Job 6+7 results go to the Foreman only.
+- Foreman 04:19Z: answer (a). Re-add ", NO bow" on t4/t5 (G44), and t8's held-in clause must name the belt. I told DESIGN22 to put both into job 7. From now on NOTHING is released to GEN1; PASS reports go to the Foreman only.
+
+## Job 7 — DESIGN22 12ecb65 palette (owner L1674, G50 PAL3: olive #9FB577 + pale pink-violet) — colour-only PASS; t4/t5/t8 fixes pending (04:25Z)
+- Files: t1 v11, t2 v11, t3 v12 (dapung4); t4/t5/t6 COMOIn, t7 v8m, t8 v10l (thu_comoi).
+- The word diff vs each job-6 text holds ONLY plum→olive, blush→lilac (t1 "pale lilac"), #DF9ED9→#9FB577 and "deeper light plum"→"deeper olive". I filtered out all colour tokens and nothing else is left in any of the 8 files.
+- No "plum" left except "plumage"; no "blush" left except "blushed cheeks"; no #DF9ED9. The yellow hexes (t6 #F2BC61, t7/t8 #EFBD69) are unchanged.
+- No conflict markers; all ≤ 10 000 (max 9999, t3).
+- tpN a22 PASS ×8; keep --sidecar PASS ×8.
+- Note: the pale pink-violet is given by the word "lilac" only (no #FBE8F8 hex); the old blush had no hex either.
+- Still to come: the G44 ", NO bow" on t4/t5 and the t8 belt wording. I'll recheck those lines when DESIGN22 pushes.
