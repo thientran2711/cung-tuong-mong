@@ -18,3 +18,12 @@ OPEN / FLAGS
 
 GATES: quickcheck 622a09ae CORE GATES PASS + TIME-SPILL PASS + old save OK (0 errors); coop-e2e 94/94; mg-ui-rest 39/39 (also after merge); Fold + iPad shots LOOKED (rules screens, Hoàng tự kin, scheme rumor).
 Shots are local only (not committed, not on CDN).
+
+## REVIEW r1 (sonnet small reviewer, 21/11)
+Verdict: PASS ui-leftover-fold a6b5fd3c (= worker b98bb227 + merge of newest origin/main 31fcfe30; branch review/ui-leftover-fold-rv).
+- SMALL confirmed: diff = jk4.js (3 CSS lines), jtoil.js, 5 tests, built index.html/sw.js. No BAL / save / co-op / time / progression.
+- M17 (KIT FIRST): rule already in KIT.md §6.3e ("mother block ABOVE facts, Fold and iPad"); the fix is the shared CSS in jk4 kit-pc-fill, no per-screen variant. Scan of every person tab (kid/kvo/kin/hon/qt/staff/court/rv…, 4 faces each) at Fold 755x1000@2 + iPad 1180x820@2: the only card kind with `.kpl` directly in `.pcb` is Hoàng tự kin; 8/8 cards mother above facts, same column (mom x = facts x). No other card changed. Shots LOOKED 3× (Fold, iPad 1180, 1366 shots).
+- MG12: Fold + iPad: toilOpen → kit rules screen (Luật chơi + demo + «Sẵn sàng»), used=0 before «Sẵn sàng», then Hồi 1 dress. No overflow, 0 page errors. Shots LOOKED 3×.
+- KP05: mg-ui-rest 39/39 on merged build. KP14: kit-opt-text 5/5; own scan 791 option tiles (event modals over 14 turns + 6 panel tabs) at Fold 755x1000: 0 tile <150 px, 0 clipped.
+- Tests: hoa-dien, item-info, kit-dress-picker (19), mg-signs-preplay (6), monthly-ration OK. quickcheck a6b5fd3c PASS (core gates, time-spill, old save, perf), coop-e2e 94/94.
+FLAGS (not blockers for SMALL, for MAIN): (1) Điểm trang rules screen has no «Hướng dẫn» and no «Để trời định» (brief asked for the pet/plant parity); (2) its demo picture is the generic 3-dot hand (pic:""), no makeup picture; a tutor engine exists for kind «chai» (j-kg92Groom) and could be reused. (3) ART REQUEST for Foreman C (mg-nghe/truyen/mac/thoico-bg) stands from the worker report.
