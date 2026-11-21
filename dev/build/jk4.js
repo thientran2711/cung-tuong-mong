@@ -1128,11 +1128,11 @@ document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.
  const pc=t.closest(".pc"),nm=((pc.querySelector(".pcname")||{}).textContent||"").trim();if(typeof kitModal==="function")kitModal({kind:"info",title:nm,sub:"",sections:[{h:"",html:`<div class="kpnote kbl-pop">${pc.__kpnote||""}</div>`}]})}catch(x){console.error(x)}},true);
 (function(){const st=document.createElement("style");st.id="kit-pc-bang";st.textContent=`
 .pc>.pcl>.pcp.kit{position:relative}
-.pc>.pcl>.pcp>.kpcbang{position:absolute;top:-6px;right:-4px;margin:0;z-index:6;cursor:pointer}
+.pc>.pcl>.pcp>.kpcbang{position:absolute;top:5.5%;right:6%;margin:0;z-index:6;cursor:pointer}/* on the visible top-right corner of the framed figure (proportional, never clipped by the name tag) */
 .pc>.pcr>.pcn.kpcnote{display:none!important}
 /* KIT §6.3b-2 (owner 21/11 ~02:14Z): the rank + name tag at the top of the left column is CENTRED over the figure, in every left-avatar tab */
 html body .pc[data-k2].kpwide>.pcl>:is(.pcname,.pcrk,b:first-of-type){text-align:center!important;justify-content:center!important;align-self:stretch!important}
-html body .pc[data-k2].kpwide>.pcl>.pcrk{display:block!important}
+html body .pc[data-k2].kpwide>.pcl>.pcrk{display:block!important;width:100%!important;text-align:center!important;margin-left:0!important;margin-right:0!important}
 `;document.head.appendChild(st)})();
 (function(){let t=0;try{new MutationObserver(()=>{if(!t)t=setTimeout(()=>{t=0;kitPcNoteScan(document)},25)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
