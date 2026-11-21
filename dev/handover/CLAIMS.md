@@ -941,3 +941,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | RELAND podium-wire r2 (opus BIG; OR09/J8) | review/podium-wire-r2 34ddce9a | MAIN CHÍNH 99 | session_01Rc5AsJzz5VENRwKX6fKout | LAND READY 34ddce9a → LRRY (archived) | 21/11 19:05Z |
 | FRAME RE-CUT M99b (sonnet art utility; Magnific bg removal only, A53; owner OD 21/11 18:55Z+19:30Z; C has no seat) | CDN img/ frames; briefs/M99-frame-recut.md; reports/frame-recut.md | MAIN CHÍNH 99 | session_01Rc5AsJNwuCghi2sd5KmpJZ | RUNNING | 21/11 19:45Z |
 | rel-men-servants r6 (opus; F5 relMaster=loyal for every master + NPC maid poison gate, N6 j84 «Ta tin cậy» wrong person) | review/rel-men-servants-r6 (from -r5rv fafbf719) | B | session_01N1tNP6hxgweGtRvQKBsdGp | RUNNING | 21/11 19:51Z |
+| rv-kit-pframe-overlay | PASS | review/kit-pframe-overlay-rv 042d2b43724ce0efe8a091a19b838f234b389a71 | kit-pframe-overlay.js ALL PASS Fold+iPad, leftcol-read, quickcheck, coop-e2e 124/124 (one flake) |
