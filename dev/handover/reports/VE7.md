@@ -78,3 +78,8 @@ gpt-2-6 1k low 9:16 seed 7172 · ref nVsrRMPYQD · file s62_t3_HAN_BOW_L1953.txt
 Zoomed read: bow centred at the front of the waist, loops flat, two ends hanging straight down, pearl-edged ivory girdle kept; collar unchanged (wide V flat on the shoulders, three bands). Looks only.
 Note: HAN6 later (L1955) put the file on hold for a deeper outer collar band; the gen was already done from commit 0e6b273, so this picture does NOT have the deeper band; not redrawn.
 VE7 total: 3900 + 55 = 3955 cr.
+
+## JOB 7 — Hán t6 Quý phi A49 sample (L1965, HAN6 via #27, commit 07bde0f) — 1 × 55 = 55 cr
+gpt-2-6 1k low 9:16 seed 7172 · refs nVsrRMPYQD + TdwDfOyVNR (same as L1915 t6 SyhrsOsUb8) · file s62_t6_HAN_COLLAR_L1965.txt = L1915 t6 with 7 edits (cloud scrolls + small birds instead of large flowers, cuffs = widest trim, hem border narrower than the cuffs and wider than the collar, bu yao hairpins with pearl dangles; the "small embroidered motifs" clause and one head-turn sentence dropped); checked equal byte-for-byte; grep clean · id dt4THLQXSL · sheet dev/handover/review-sheets/han_t6_L1965.png (CŨ L1915 SyhrsOsUb8 | MỚI L1965 dt4THLQXSL)
+Look: birds in flight read clearly, cloud scrolls faint but present, no large flowers on the body (small flowers only in the border bands); cuffs are the widest trim; hem border narrower than the cuffs and wider than the collar; gold bu yao with long pearl dangles at both sides of the headdress; collar unchanged (wide V, three bands). Front waist: the belt and its gold plaque stay clear, but one hand rests at waist level to the side of the belt. Looks only.
+VE7 total: 3955 + 55 = 4010 cr.
