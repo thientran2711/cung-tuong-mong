@@ -1950,3 +1950,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (09:11Z) keeper SSK K-OPT-KEM 79a5a451 (review/kit-opt-kem) → rv MSxp (verify Sủng sg() display==applied claim). Keeper re-told: report to 92; kit-badge fix NOW, then kit-focus fix.
 - (09:14Z) mg-intro-2 Ji75 SSK 570ec621 (re-merge on 74cea8bf) → opened SONNET SMALL rv session_01Rc5AsMBXtN7JoHpTB9zpvY (review/mg-intro-2-rv3). Pre-existing LIVE mg-noword-kit FAIL 3 kinds → ORDER B.
 | REVIEW mg-intro-2 r3 re-merge (SONNET SMALL) 570ec621 | review/mg-intro-2-rv3 | MAIN CHÍNH 92 | session_01Rc5AsMBXtN7JoHpTB9zpvY | RUNNING | 21/11 09:14Z |
+- (09:20Z) keeper SSK kit-badge fix 8bf7b164c → rv MSxp (first, before K-OPT-KEM); hao-huu-2 told to merge it now. Keeper now on kit-focus fixes.
