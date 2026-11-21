@@ -714,7 +714,16 @@ BANNED = [{'id': 'X01',
   'unless': '',
   'negation': 'no',
   'luot': '800 (F14, via ROOT-58; MG3)',
-  'why': "owner Lượt 800: no black two-wing board headdress (liangbatou, 'cái cục trên đầu') and no Qing look on ANY person; the words are banned in every scope, even negated (seal prompts included)"}]
+  'why': "owner Lượt 800: no black two-wing board headdress (liangbatou, 'cái cục trên đầu') and no Qing look on ANY person; the words are banned in every scope, even negated (seal prompts included)"},
+ {'id': 'X20',
+  'title': "Quý nhân t3 spiky hairpins (pearl-tipped hairpins = 'con nhím')",
+  'regex': r'pearl-tipped hairpins',
+  'slot': '',
+  'scope': 'tp3 pr3',
+  'unless': '',
+  'negation': 'no',
+  'luot': 'owner L1566 + L1568 (G39, via Foreman C #13, DESIGN17)',
+  'why': "owner L1566: the Quý nhân hairpins look like a hedgehog (many straight pins fanning out) = a prompt fault; L1568: fix it in the common prompt for everyone. Store TIER_LOW[3] now: two or three slim pearl hairpins set INTO her gathered hair at natural angles, mostly hidden, small dangling pearl ornaments, never a radiating crown"}]
 
 # G15 (owner Lượt 559): QUÝ NHÂN t3 DESIGN = option B v2. The t3 outfit-design words of the store (TIER_LOW[3] robe in t8-prompt-B/build.py) are REPLACED
 # by the Outfit words of dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt, copied verbatim; slots only: lilac -> {main}, deep teal -> {sec}
@@ -799,7 +808,7 @@ def store_check(pf, prompt, args):
         if best<0.9: bad.append((round(best,2),s[:160]))
     return bad
 # SLOT sentences: per-person / per-pose / ref-order / background lines that the builder itself swaps (allowed to differ)
-SLOT=('Her face:','Pose:','she holds','Her hands','pretty silver hairpins','silver and pearl hairpins','pearl-tipped hairpins','her signature colour','her ORIGINAL robe colour','Hair:','face clearly visible','From the identity reference','From image 1','do NOT copy','The style reference','Image 2 is','The first reference image','the background is completely transparent','Image 3 is','the royal yellow in the robe','Her eyes','Eyes soft','the robe itself is clearly')
+SLOT=('Her face:','Pose:','she holds','Her hands','pretty silver hairpins','silver and pearl hairpins','pearl-tipped hairpins','two or three slim pearl hairpins','her signature colour','her ORIGINAL robe colour','Hair:','face clearly visible','From the identity reference','From image 1','do NOT copy','The style reference','Image 2 is','The first reference image','the background is completely transparent','Image 3 is','the royal yellow in the robe','Her eyes','Eyes soft','the robe itself is clearly')
 
 
 def norm(s): return re.sub(r"\s+", " ", s).strip()
