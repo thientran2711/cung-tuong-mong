@@ -5,11 +5,11 @@
    carry NCW(k), Bắc Địch openings BDW(k) (the bd premise ended differently). Helpers RDW / rdRel / rdOan come from jrd_tt.js (same script). */
 const ncBd=()=>{try{return S.origin.k==="bd"}catch(e){return false}};
 RDQ.ncvBL=()=>RD_FL("nc_vuong.bought")||RD_FL("nc_vuong.loser");/* named predicate an odds term in BAL.road.fx reads (rdOdds "q") */
-const NCL={nc:{land:"Cao Ly",pv:"Phụ vương",mh:"Vương hậu",quan:"Quốc vương",pa:"Thế tử huynh",pb:"Vương thúc",canh:"canh rong biển",laq:"lá tía tô dại",nden:"thắp đèn Nhiên Đăng",kha:"Phác"},
- bd:{land:"Bắc Địch",pv:"Phụ hãn",mh:"Khả đôn",quan:"Khả hãn",pa:"Đại huynh",pb:"nhị huynh",canh:"canh sữa dê",laq:"cỏ thảo nguyên",nden:"thắp đèn bơ quanh chùa",kha:"Kha"}};
+const NCL={nc:{land:"Cao Ly",pv:"Phụ vương",mh:"Vương hậu",quan:"Quốc vương",pa:"Thế tử huynh",pb:"Vương thúc",canh:"canh rong biển",laq:"lá tía tô dại",nden:"thắp đèn Nhiên Đăng",kha:"Phác",dien:"vương điện",huong:"phương đông"},
+ bd:{land:"Bắc Địch",pv:"Phụ hãn",mh:"Khả đôn",quan:"Khả hãn",pa:"Đại huynh",pb:"nhị huynh",canh:"canh sữa dê",laq:"cỏ thảo nguyên",nden:"thắp đèn bơ quanh chùa",kha:"Kha",dien:"kim trướng",huong:"phương bắc"}};
 if(typeof TOK67==="object")Object.assign(TOK67,{land:()=>NCL[ncBd()?"bd":"nc"].land,pv:()=>NCL[ncBd()?"bd":"nc"].pv,mh:()=>NCL[ncBd()?"bd":"nc"].mh,
  quan:()=>NCL[ncBd()?"bd":"nc"].quan,pa:()=>NCL[ncBd()?"bd":"nc"].pa,pb:()=>NCL[ncBd()?"bd":"nc"].pb,
- canh:()=>NCL[ncBd()?"bd":"nc"].canh,laq:()=>NCL[ncBd()?"bd":"nc"].laq,nden:()=>NCL[ncBd()?"bd":"nc"].nden,kha:()=>NCL[ncBd()?"bd":"nc"].kha});
+ canh:()=>NCL[ncBd()?"bd":"nc"].canh,laq:()=>NCL[ncBd()?"bd":"nc"].laq,nden:()=>NCL[ncBd()?"bd":"nc"].nden,kha:()=>NCL[ncBd()?"bd":"nc"].kha,dien:()=>NCL[ncBd()?"bd":"nc"].dien,huong:()=>NCL[ncBd()?"bd":"nc"].huong});
 /* opening filters of chapter .5: NCW after a Nam Chiếu premise, BDW after a Bắc Địch premise (k as RDW) */
 const NCW=k=>()=>!ncBd()&&RDW(k)();
 /* months of cấm túc a road ending applies (S.confined, j3 counts it down): BAL.road.ncConf (jbal2.js) */
@@ -410,7 +410,7 @@ rdDef("nc_su",9,{t:"Điều ước chợ biên",w:"emp",sj:"điều ước chợ
  B:{s1:{h:"Bộ Hộ hỏi ý ngươi",w:"emp",if:RDW(1),t:"Sau đại yến, Hoàng thượng mang bản thảo điều ước của bộ Hộ về cung ngươi, bảo ngươi xem trước một lượt.",o:[
   {n:"Đọc kỹ, ghi chú từng điều",f:"terms",wx:"biết rõ chỗ nào lệch",lx:"mỏi mắt, mất sức",rt:"Ngươi ghi chú ba chỗ: giá muối, cân sắt, ngày mở chợ."},
   {n:"Gửi bản thảo cho {pa} xem",f:"home",wx:"{pa} biết trước để bàn",lx:"bộ Hộ biết ngươi đưa bản thảo ra",rt:"{pa} gửi lại lời cảm tạ và hai điều xin sửa.",rf:"Bộ Hộ biết, hỏi ngươi đứng về phía ai."},
-  {n:"Trả lại, xin không xem",wx:"không ai nói ngươi xen việc nước",lx:"bỏ lỡ một lần nói được",rt:"Ngươi trả bản thảo nguyên niêm."}]},
+  {n:"Trả lại, xin không xem",wx:"không ai nói ngươi xen việc nước",lx:"bỏ lỡ một lần nói được",rt:"Ngươi trả lại bản thảo, niêm phong như cũ."}]},
  s2:{h:"Hai bên không chịu nhau",w:"emp",if:RDW(0),t:"Bàn đã mười ngày mà chưa xong điều nào. Bộ Hộ chê {land} đòi nhiều, {pa} chê Đại Hy cân thiếu. Tiết Sương giáng chỉ còn một tháng.",o:[
   {n:"Gửi trà và một lời khuyên nhường cho cả hai bên",f:"bridge",wx:"hai bên dịu lại",lx:"bị nói là phi tần xen việc nước",rt:"Thượng thư và {pa} cùng nhận trà; buổi bàn hôm sau bớt gắt.",rf:"Thượng thư trả trà về: việc nước không nhận quà hậu cung."},
   {n:"Xin Hoàng thượng định một hạn",wx:"hai bên phải gấp",lx:"ngài thấy ngươi giục",rt:"Hoàng thượng phán: “Trước Sương giáng phải xong.”",rf:"Hoàng thượng bảo: “Việc của bộ Hộ.”"},
@@ -418,7 +418,7 @@ rdDef("nc_su",9,{t:"Điều ước chợ biên",w:"emp",sj:"điều ước chợ
  c1:{h:"Thượng thư bộ Hộ",w:"emp",t:"Hoàng thượng kể lời Thượng thư bộ Hộ: Đại Hy không bán sắt cho nước ngoài. Sắt thành nông cụ hôm nay, mai có thể thành giáo mác.",o:[
   {n:"Đề nghị chỉ bán nông cụ đã rèn",f:"terms",wx:"có sắt mà không có giáo",lx:"{pa} chê ít",rt:"Hoàng thượng đem ý ấy hỏi Thượng thư; ông vuốt râu: “Thế thì được.”",rf:"Thượng thư lắc đầu."},
   {n:"Thưa: Thượng thư nói phải",f:"law",wx:"Hoàng thượng thấy ngươi lo cho Đại Hy",lx:"{land} không có sắt",rt:"Hoàng thượng gật đầu."},
-  {n:"Xin đổi sắt lấy ngựa theo giá định sẵn",f:"home",wx:"{land} có sắt, Đại Hy có ngựa",lx:"Thượng thư cho là ngươi bênh cố quốc",rt:"Hoàng thượng sai bộ Hộ tính lại theo ý ấy.",rf:"Hoàng thượng không đáp."}]},
+  {n:"Xin đổi sắt lấy ngựa theo giá định sẵn",f:"home",wx:"{land} có ngựa, Đại Hy có sắt",lx:"Thượng thư cho là ngươi bênh cố quốc",rt:"Hoàng thượng sai bộ Hộ tính lại theo ý ấy.",rf:"Hoàng thượng không đáp."}]},
  c2:{h:"Nhà {v} buôn muối",w:"v",need:["v"],t:"Nhà {v} giữ giấy phép buôn muối ở biên ải. Chợ biên mở thì muối của họ mất giá. Cha nàng ta đã dâng sớ: chợ biên là cửa cho gian tế.",o:[
   {n:"Tâu rõ nhà {v} có lợi riêng",wx:"sớ của nhà {v} mất sức nặng",lx:"hai nhà thành thù",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"Hoàng thượng gác sớ của nhà {v}.",rf:"Hoàng thượng chán chuyện bè phái."},
   {n:"Chia cho nhà {v} một phần chợ muối",wx:"nhà {v} thôi cản",lx:"chợ biên có thêm một kẻ ăn chia",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"Nhà {v} rút sớ.",rf:"Nhà {v} nhận phần, rồi vẫn cản."},
