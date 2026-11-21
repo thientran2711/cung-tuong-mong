@@ -77,7 +77,7 @@ function kitFactDetail(d){if(!d)return"";if(typeof d==="string")return d;const R
  return R.map(r=>`<div class="kpopx"><b>${r[0]}:</b> ${r[1]}</div>`).join("")}
 function kitFactTap(f,d){const det=kitFactDetail(d);return det?`<span class="kgl kfx" tabindex="0" data-kfx="${kpEsc(det)}">${f}</span>`:f}
 /* KIT §73.2 TAP-WORD (owner 21/11 ~03:40Z CANON, review/kit-tap-word): a WORD with the kit dotted underline (.kgl.kfx); tap → the small kit popup with ONLY that word's meaning (the word as its title). Used for the traits in the person header
-   («Tính cách | Đa nghi, Hiếu thảo», «Trọng | tài nghệ, sắc») — no bullet trait box, no avatar «!» for them. ONE word per trait game-wide (the word comes from ETRAITS, never a variant).
+   («Tính nết | Đa nghi, Hiếu thảo», «Trọng | tài nghệ, sắc») — no bullet trait box, no avatar «!» for them. ONE word per trait game-wide (the word comes from ETRAITS, never a variant).
    kitTapWord(word, meaning) = one tap-word (meaning = plain text or HTML; empty → the plain word); kitTraitWords(keys|words) = «Đa nghi, Hiếu thảo» — each trait (ETRAITS key «danghi» or its word «Đa nghi») as a tap-word, comma-joined. */
 function kitTapWord(word,meaning){return meaning?kitFactTap(word,String(meaning)):String(word==null?"":word)}
 function kitTraitWords(list){const E=typeof ETRAITS==="object"&&ETRAITS?ETRAITS:{};const by={};Object.keys(E).forEach(k=>{by[k]=E[k];by[E[k][0]]=E[k]});
@@ -1222,9 +1222,11 @@ function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.le
  const next=o.next!=null?o.next:((o.levels||[])[l]||"");
  const bar=o.bar===false||!max?"":l<max?(need?kitBar("Tiến bộ",cur,need):""):`<span class="kchip g">Đã tinh thông</span>`;
  const acts=(o.acts||[]).filter(Boolean);
- return `<div class="kskill${o.can===false?" kdone":""}" data-skill="${o.kind||"art"}-${o.k||""}"><div class="kskh2">${img?kitSceneArt(img,o.name||"",{shape:"tall",size:"thumb",cap:false}):""}`+
+ /* chapter-card (owner 21/11 marks #26/#27): o.big = the BIG card of the Mệnh truyện sub-tabs: the picture at the big Hành sự act-card size (3:4, --kbw),
+   title/steps/o.body (kit rows) in the column right of it. No big picture = the small one, as before. */
+ return `<div class="kskill${o.can===false?" kdone":""}${o.big?" kbig":""}" data-skill="${o.kind||"art"}-${o.k||""}"><div class="kskh2">${img?kitSceneArt(img,o.name||"",o.big?{shape:"tall",cap:false,cls:"kbigart"}:{shape:"tall",size:"thumb",cap:false}):""}`+
   `<div class="kskinfo">${o.kicker?`<small class="kskk">${o.kicker}</small>`:""}<div class="kskh"><b>${o.name||""}</b>${max?kitSteps(l,max,o.stepsAttr,o.word):""}</div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}`+
-  `${max&&l<max&&next?`<span class="kskx"><span class="kchip n">${o.word||"Bậc"} ${l+1} mở</span> ${next}</span>`:""}</div></div>`+
+  `${max&&l<max&&next?`<span class="kskx"><span class="kchip n">${o.word||"Bậc"} ${l+1} mở</span> ${next}</span>`:""}${o.body||""}</div></div>`+
   `${acts.length?`<div class="kskacts pcb">${acts.map(a=>`<div class="kpanec">${a}</div>`).join("")}</div>`:""}${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`}
 /* kitEmpty(title,lines,o) = THE empty state (owner 21/11 "Nhìn cái trang cho nó đỡ trống"; the form of «Ta chưa có con»): the topic's painted picture LEFT
    (o.art = an img path, else kitInfoArt(o.topic||title), else the kit's neutral tile), the title «Ta chưa có …» / «Chưa có …», 2–3 short hint bullets
@@ -1244,6 +1246,11 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .kskills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,460px),1fr));gap:10px}
 .kskill{display:flex;flex-direction:column;gap:8px;padding:10px;margin:0 0 8px;border:1px solid var(--line);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0)}
 .kskills>.kskill{margin:0}.kskill.kdone{opacity:.92}
+/* chapter-card: the BIG card (kitSkillCard o.big): one picture size for every Mệnh truyện sub-tab = the big Hành sự act-card picture (170 x 227, 3:4) */
+:root{--kbw:170px}
+.kskill.kbig .kskh2{grid-template-columns:var(--kbw) minmax(0,1fr);gap:12px;align-items:stretch}.kskill.kbig .kskh2:not(:has(>.ksart)){grid-template-columns:minmax(0,1fr)}
+.kskill.kbig .ksart.kbigart{width:var(--kbw);height:auto;aspect-ratio:3/4;align-self:start}
+.kskill.kbig .kskinfo{gap:6px}.kskill.kbig .kskh b{font-size:1.2rem}.kskill.kbig .kskinfo>.kb{margin:0}
 .kskh2{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start}.kskh2:not(:has(>.ksart)){grid-template-columns:minmax(0,1fr)}
 .kskinfo{display:flex;flex-direction:column;gap:5px;min-width:0}.kskk{color:var(--dim);font-size:.78rem}
 .kskh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 10px}.kskh:has(>b:empty){justify-content:flex-end}.kskh b{font-family:var(--display);font-size:1.05rem;color:var(--gold)}
