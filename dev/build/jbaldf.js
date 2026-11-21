@@ -20,7 +20,7 @@ Object.assign(BAL,{df:{
  words:{ms:6000,n:6,good:[.4,.65],spd:[.35,.15],goal:5,size:.07,hit:.75,spread:2.5}/* spread = how wide around her the signs rise (× amp) */,/* n glyphs at once; good = share of fitting ones; goal = good taps for raw 10 (2 per tap, −2 per wrong) */
  stare:{ms:4000,band:[.16,.30],mid:.6,rise:.6,fall:.5,push:[.9,.4],wob:1.3},/* hold = rise per s, release = fall per s; her push-back amplitude; raw = share of time in the band */
  walk:{in:700,out:600,veil:360,stagger:40},/* motion ms (MOTION.md: 0.3–2 s); the kit part kitFocus owns its own timings, these feed the fallback */
- react:1600,
+ react:1600,reactChars:60,/* the reaction line on the figure: the first sentence of the result, at most this many letters */
  idle:{every:[20000,40000],first:8000}/* mood bubble on the place stage: one person, at most once per this many ms (random in range); first = earliest after arriving */}});
 /* the new occasion + kinds in the ONE tier table (jmgt): her rank raises the stake (0 at Đáp ứng … 2.1 at the top: ease 2 → about 0.3, spread over the whole climb) */
 try{BAL.mgTier.occ.df=BAL.mgTier.occ.df||[0,.3];for(const k of ["df_swipe","df_tug","df_bow","df_drag","df_ear","df_words","df_stare"])if(BAL.mgTier.kAdj[k]==null)BAL.mgTier.kAdj[k]=0}catch(e){}
