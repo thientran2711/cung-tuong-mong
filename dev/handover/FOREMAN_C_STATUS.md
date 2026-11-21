@@ -1383,3 +1383,4 @@ Next Lượt 1953.
 #27 ~12:08Z: OWNER L2006: Tần L1994 VX7nsw2MMU APPROVED ('rất đẹp… giữ mật độ thêu của Tần') → lock density into store/builder for all Tần + rule → VE6. Flower colour TABLE CANCELLED (keep current way). VE7 asked to open THUROOT1 (depth 8 child) for the QP root job. Next Lượt 2007.
 #27 ~12:10Z: VE7 create_session denied (classifier) → THUROOT1 not opened. ROOT job → VE6 (via its helper agent) after Tần lock.
 #27 ~12:12Z: OWNER L2008: Đáp ứng t1 (thu) add small embroidered flower at chest centre → common store/builder + rule → VE6 queue. Sent owner the ROOT foreman opening prompt (L2007). Next Lượt 2009.
+#27 ~12:15Z: OWNER L2009: L1989 thu s62 t1–t6 APPROVED → into game store (+ Tần VX7nsw2MMU). Draw 3 more persons thu t1–t5 (no QP) = 15@135 = 2025 cr → VE11. Owner going to sleep. Next Lượt 2010.
