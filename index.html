@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"44b3418d+","t":"2026-11-21T09:28Z","c":"hao-huu r4: report","b":"e3bfd414fddc","h":[{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"}]};
+window.CTM_BI={"s":"1f08d99a+","t":"2026-11-21T10:03Z","c":"hao-huu r4: report","b":"f22a5c4a32c3","h":[{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5248,9 +5248,15 @@ function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung
 /* on a narrow screen the zoomed map opens centred on where she stands */
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(tab==="go"&&!document.querySelector(".game.maptab")){const sc=document.querySelector(".mapsc");const h=sc&&(sc.querySelector(".mspot.here")||sc.querySelector('[data-go="home"]'));const key=S.place+"|"+(window.__mapZ||0);if(sc&&h&&sc.scrollWidth>sc.clientWidth){const img=sc.querySelector(".mapimg");const go=()=>{sc.scrollLeft=h.offsetLeft+h.offsetWidth/2-sc.clientWidth/2;sc.scrollTop=h.offsetTop+h.offsetHeight/2-sc.clientHeight/2};if(img&&!img.complete)img.addEventListener("load",go,{once:true});else go();if(window.__mapCtr===key&&window.__mapPos){sc.scrollLeft=window.__mapPos[0];sc.scrollTop=window.__mapPos[1]}window.__mapCtr=key;sc.addEventListener("scroll",()=>{window.__mapPos=[sc.scrollLeft,sc.scrollTop]},{passive:true})}}}catch(e){}return r}})();
 /* the Phi tần face strip, grouped by palace (12-16 consorts): Càn Ninh first, then each palace by rank, fallen and dead last */
+/* rvOrd() = the strip order (rivals indexes); PG.rv is a STRIP position, so «open X's card» (kitCourtOpen: Hoàng hậu, a cung nữ's chủ) sets PG.rv = rvPgOf(X), never rivals.indexOf(X)
+   (maid-8tabs #34: the chủ row opened another consort's card) */
+function rvOrd(){const ordG=v=>!v.alive?99:v.out?98:palaceOf(v)==="kn"?0:palaceOf(v)==="home"?1:2+(palSlot(palaceOf(v))??9);
+ return rivals.map((v,i)=>i).sort((a,b)=>ordG(rivals[a])-ordG(rivals[b])||rkOf(rivals[b])-rkOf(rivals[a]))}
+function rvPgOf(v){try{const i=rivals.indexOf(v);if(i<0)return -1;return rvOrd().indexOf(i)}catch(e){return rivals.indexOf(v)}}
+window.rvPgOf=rvPgOf;
 (function(){const p0=pager;pager=function(key,items,mk){if(key!=="rv"||!rivals||items.length<rivals.length)return p0.apply(this,arguments);const n=rivals.length;
- const grp=v=>!v.alive?"Đã mất":v.out?"Lãnh cung":palName(palaceOf(v));const ordG=v=>!v.alive?99:v.out?98:palaceOf(v)==="kn"?0:palaceOf(v)==="home"?1:2+(palSlot(palaceOf(v))??9);
- const ord=rivals.map((v,i)=>i).sort((a,b)=>ordG(rivals[a])-ordG(rivals[b])||rkOf(rivals[b])-rkOf(rivals[a]));let last=null;
+ const grp=v=>!v.alive?"Đã mất":v.out?"Lãnh cung":palName(palaceOf(v));
+ const ord=rvOrd();let last=null;
  const it2=ord.map(i=>{const g=grp(rivals[i]);const x=Object.assign({},items[i]);if(g!==last){x.sep=g;last=g}return x}).concat(items.slice(n));const map=ord.concat(items.slice(n).map((_,j)=>n+j));
  return p0.call(this,key,it2,i=>mk(map[i]))}})();
 /* old saves: anyone living under the Hoàng hậu / Hoàng quý phi is moved out on load (palFix logs each move) */
@@ -6311,7 +6317,7 @@ function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3
    tsDanger= "Nguy hiểm chung" (jts): hot ≥ 30 shown red, act ≥ 35 the NPC acts on it, calm < 10 shown green.
    age.adult = the youngest adult in the game (owner OD:L104 18+; jage AGE_MIN lifts every adult below it). */
 Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},tinLv:{lo:30,hi:60,watch:60},rareLv:[6,9],
- sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10}});BAL.age.adult=18;
+ sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});BAL.age.adult=18;
 /* part 3 (review/one-core-dup2): single-copy cut ladders that were typed in their module, now named here (values unchanged):
    rhythm = rhythm game hits for grade 2 / 3 (j5) · facRel = faction standing ±: thân / thù (j10) · tuanDays = day of month → tuần
    (j31) · clanRel = clan relation ±: Đồng minh / Đối đầu (j55) · form = sports form words (j71) · virCong = công virtue level for
@@ -6326,8 +6332,8 @@ Object.assign(BAL,{
  ngocboiSung:15,           /* the Ngọc bội ngự ban keeps its owner's Sủng from falling below this (j8; item text, jinv) */
  sinhThanSung:50,          /* her birthday is bestowed only when Sủng is at least this (j20; ban thưởng list) */
  m30:{tocaoEv:1,exposeEv:2,xinhhAff:40},     /* j30: chứng cứ for «Tố tội thật» / «Bóc chuyện tư tình»; Hoàng hậu thiện cảm for «Xin Hoàng hậu giáng» */
- srvx:{tinOut:10,keepTin:60,secNeed:2,friendAf:30,colN:10}, /* cung nữ road (j42): Chủ tin below tinOut = sent to Tân Giả khố; from keepTin the chủ keeps her past
-                           the age; secNeed = secrets of the chủ she must know to betray; friendAf = quý from which a colleague counts as a friend  colN = rows in her Đồng liêu list (j42 srvColleagues: her palace first, then friends, ill-wishers, the rest). */
+ srvx:{tinOut:10,keepTin:60,secNeed:2,friendAf:30,colN:10,tinUp:35}, /* cung nữ road (j42): Chủ tin below tinOut = sent to Tân Giả khố; from keepTin the chủ keeps her past
+                           the age; secNeed = secrets of the chủ she must know to betray; friendAf = quý from which a colleague counts as a friend  tinUp = the Chủ tin she needs to rise a rung (j42 srvMonth; jts Xét phẩm box prints it)  colN = rows in her Đồng liêu list (j42 srvColleagues: her palace first, then friends, ill-wishers, the rest). */
  virx:{hanhCap:80,camSung:40},               /* j85: Hạnh bậc 3 monthly Đức +1 stops at hanhCap; Cầm bậc 5 cheers the Emperor when Sủng is at least camSung */
  tsx:{empSung:30,denSung:20},                /* jts: at a birth the Emperor bestows when Sủng is at least empSung; he sees the lake lantern from denSung */
  sucNeed:{self:25,wk:15,rcp:10,kid:5,yKid:15}, /* Sức an act needs (the lock, its «Sức dưới N» word and the act's own check read the same key): self = «Tự học»
@@ -7055,6 +7061,9 @@ function srvM(){return S&&S.srv?RV(S.srv.mid):null}
 function bid(){return wk()*B4N+(S.buoi||0)}
 function srvTitle(){if(!S||!S.srv)return"";if(S.srv.lau>0)return"Cung nữ Tân Giả khố";const m=srvM();const n=S.srv.mama?"Ma ma":SRK.maid[S.srv.rk]||"Cung nữ";return m?`${n} của ${m.name}`:n}
 function srvRkN(){return S.srv.lau>0?"Cung nữ Tân Giả khố":S.srv.mama?"Ma ma":SRK.maid[S.srv.rk]||"Cung nữ"}
+/* maid-8tabs: the consort panels open on her road too (Ân oán, Chí tôn …): her own title there is her servant rung, never «Đáp ứng» (as jkc says «Tiểu thư») */
+(function(){const r0=rkName;rkName=function(p){if(p===S&&isSrv())return srvRkN();return r0.apply(this,arguments)}})();
+(function(){const r0=rkOfFace;rkOfFace=function(kind,o){const g=r0.apply(this,arguments);if(o===S&&kind==="consort"&&isSrv()&&g)return[g[0],srvRkN()];return g}})();
 function srvW(f){if(!isSrv())return f();const o=S.out;S.out=1;try{return f()}catch(e){console.error(e);return""}finally{S.out=o}}
 function srvMerit(n){S.srv.mp=(S.srv.mp||0)+n}
 /* công lao of an order done for the master (srvDoOrder; shown on every order card: ordRow, jptime receiver row) — ONE reader of the BAL key */
@@ -7140,7 +7149,7 @@ function srvInit(){const L=liveRivals(true);if(!L.length)return;const m=pick(L.f
  /* review/newgame-ui: event frame — palace-maid entering picture + her figure (KIT 32.2) */Q=[{t:"Nhập cung làm cung nữ",stage:[S],headArt:{src:"https://ctm-img.victoria-tntt.workers.dev/img/ev-nhap-cung-cn.webp",label:"Nhập cung"},h:`<p>${S.name}, ${S.age} tuổi, con nhà thường dân. Qua kỳ tuyển cung nữ, Nội vụ phủ chia ngươi về hầu <b>${rkName(m)} ${m.name}</b> ở ${palName(palaceOf(m))}.</p>
   ${kitRows([["Tính chủ",`${netTxt(m)}`,"t"],["Chủ tin ngươi",S.tin,"t"],["Lương tháng",`${CNV_WAGE[1]} bạc`,"t"],
    ["Đường lên","được Hoàng thượng để mắt mà phong Đáp ứng; lên Chưởng sự cô cô; được ban gả","t"],["Đường xuống","bị phạt, đày Tân Giả khố, chết trong mưu của người khác","t"]])}
-  <p class="past">Mỗi buổi ${BAL.time.khac} khắc. Mục Việc: việc nặng và việc chủ sai. Bản đồ: chỉ nơi cung nữ được đến. Đồng liêu: kết bạn, đề phòng kẻ vu cáo.</p>`}];
+  <p class="past">Mỗi buổi ${BAL.time.khac} khắc. Mục Hành sự: việc nặng và việc chủ sai. Dư đồ: chỉ nơi cung nữ được đến. Hậu cung › Đồng liêu: kết bạn, đề phòng kẻ vu cáo.</p>`}];
  log(`Ngươi vào cung làm cung nữ, hầu ${rkName(m)} ${m.name}.`)}
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&S.origin&&S.origin.k==="cnv"&&!S.srv){quiet=true;srvInit();quiet=false;deal();showModal();render()}}catch(e){console.error(e)}return r}})();
 
@@ -7313,8 +7322,8 @@ function srvMonth(){let ev="";S.turn++;const rk=S.srv.rk;apply({bac:CNV_WAGE[rk]
  ev+=srvW(()=>{let e="";for(const v of liveRivals(true))stipend(v);e+=rivalsMonth()||"";e+=servRanks()||"";e+=servMonth()||"";oanMonth();restock();e+=heirMonth()||"";e+=moodMonth()||"";e+=srvIllWorld();return e})||"";
  if(S.dead)return ev;srvMisCheck();const m=srvM();
  if(isSrv()&&S.srv.lau<=0&&m){S.srv.mp+=1+Math.floor(rkOf(m)/3);const need=srvMpNeed(S.srv.rk),mx=srvMax();
-  if(S.srv.mp>=need&&S.srv.rk<mx&&S.tin>=35&&typeof exSrvGate==="function"&&exSrvGate(S.srv.rk+1)){S.srv.mp=need}
-  else if(S.srv.mp>=need&&S.srv.rk<mx&&S.tin>=35){S.srv.rk++;S.srv.mp=0;S.tin=cl(S.tin+BAL.eff.j42.tinSrvMonth,0,100);log(`<b class="g">Được thăng ${SRK.maid[S.srv.rk]}.</b>`);Q.push({t:"Thăng bậc",who:pMe(),h:`<p>Nội vụ phủ ghi công: ngươi được thăng <b>${SRK.maid[S.srv.rk]}</b> trong cung ${m.name}.</p><p class="past">Lương tháng ${CNV_WAGE[S.srv.rk]} bạc.</p>`})}
+  if(S.srv.mp>=need&&S.srv.rk<mx&&S.tin>=BAL.srvx.tinUp&&typeof exSrvGate==="function"&&exSrvGate(S.srv.rk+1)){S.srv.mp=need}
+  else if(S.srv.mp>=need&&S.srv.rk<mx&&S.tin>=BAL.srvx.tinUp){S.srv.rk++;S.srv.mp=0;S.tin=cl(S.tin+BAL.eff.j42.tinSrvMonth,0,100);log(`<b class="g">Được thăng ${SRK.maid[S.srv.rk]}.</b>`);Q.push({t:"Thăng bậc",who:pMe(),h:`<p>Nội vụ phủ ghi công: ngươi được thăng <b>${SRK.maid[S.srv.rk]}</b> trong cung ${m.name}.</p><p class="past">Lương tháng ${CNV_WAGE[S.srv.rk]} bạc.</p>`})}
   else if(S.srv.mp>need)S.srv.mp=need;
   if(!amOn()&&S.srv.rk>=BAL.srvRk.dai&&S.age>=18&&roll(BAL.odb.j42.rbSrvMonth+S.nt/25))/* AG3: no monthly dice while the loop is on (jagmaid) */pushDil(mkP("cnvName",{src:"month"}),"Hoàng thượng để mắt");
   else if(S.srv.rk>=BAL.srvRk.dai){const ob=npcWhy("srvBuy",{m},()=>roll(1.5));const big=ob?ob.who:null;/* npc-purpose G2a: a higher consort who wants a skilled maid (or hates her mistress) buys her */if(big){ap(big,{bac:-40});srvReassign(`${big.name} ${ob.why}, bỏ bạc mua ngươi về cung mình.`,big)}}
@@ -7486,12 +7495,9 @@ function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin
   if(Q[0]&&Q[0].h){Q[0].h=Q[0].h.replace(/<span>Phẩm cao nhất<\/span><b>[^<]*<\/b>/,`<span>Thân phận</span><b>${nm}</b>`).replace(/<span>Con cái<\/span><b>[^<]*<\/b>/,"<span>Con cái</span><b>không</b>");showModal()}}catch(e){}}return r}})();
 
 /* ---------- UI: HUD, tabs, panels, self card, map ---------- */
-const SRVTABS={act:"Việc",go:null,staff:"Đồng liêu",story:"Thân phận",log:null};
-function srvTabs(){const on=isSrv();document.querySelectorAll("#tabs button").forEach(b=>{const t=b.dataset.tab;if(b.dataset.l0==null){b.dataset.l0=b.textContent;b.dataset.s0=b.dataset.s||""}
- /* oi-render: write only what differs, and a tab-group head (j79 kgBar, data-kg) keeps the group's label: this reset it to its own label on
-    every render and kgBar put the group label back right after — two text changes per render, so the tab bar was re-measured (tabsFit) twice */
- const set=(d,l,s)=>{if(b.style.display!==d)b.style.display=d;if(b.dataset.kg&&!on)return;if(b.textContent!==l)b.textContent=l;if(b.dataset.s!==s)b.dataset.s=s};
- if(on){const L=SRVTABS[t];set(t in SRVTABS?"":"none",L||b.dataset.l0,L||b.dataset.s0)}else set("",b.dataset.l0,b.dataset.s0)})}
+/* maid-8tabs (owner 21/11 ~03:15Z mark #32, ~03:22Z mark #35 ONE SHELL): the cung nữ road shows the consort's 8 bottom tabs (Hành sự · Dư đồ · Hậu cung · Giao tình ·
+   Hoàng tự · Tư trang · Tài nghệ · Mệnh truyện) with the same groups and sub-tabs; what each tab shows on her road = ONE table, ROAD8 in jroad8.js
+   (Đồng liêu = Hậu cung › sub-tab, Thân phận = Mệnh truyện › sub-tab). No servant tab bar, no servant tab names left here. */
 function srvHud(){const e=$("hud-sung");if(!e)return;const sm=e.querySelector("small");if(sm&&sm.dataset.o0==null)sm.dataset.o0=sm.innerHTML;
  if(isSrv()){$("me-r").textContent=srvTitle();if(sm)sm.innerHTML=sm.dataset.o0.replace("Sủng","Chủ tin");e.querySelector("span").textContent=S.tin;const u=e.querySelector("u");if(u)u.style.width=S.tin+"%";e.title=HX.tin}
  else if(sm&&sm.innerHTML!==sm.dataset.o0){sm.innerHTML=sm.dataset.o0;e.title=""}}
@@ -7503,16 +7509,13 @@ function srvHud2(){const el=$("hud2");if(!el)return;const col=el.classList.conta
   +c("tin","Chủ tin",S.tin,S.tin<BAL.tinLv.lo?"hot":S.tin>=BAL.tinLv.hi?"ok":"")+c("nt","Hoàng thượng để ý",S.nt,S.nt>=BAL.ntRise.at?"ok":"")+c("sac","Sắc",S.sac)+c("tai","Tài",S.tai)+c("tamco","Tâm cơ",S.tamco)+c("duc","Đức",S.duc)
   +c("merit","Công lao",`${Math.floor(S.srv.mp)}/${srvMpNeed(S.srv.rk)}`)+c("wage","Lương tháng",`${CNV_WAGE[S.srv.rk]} bạc`)+c("age","Tuổi",`${S.age} · xuất cung ${S.srv.mama?BAL.srvAge.mama:BAL.srvAge.ask}`)
   +(S.srv.lau>0?c("lau","Tân Giả khố",`${S.srv.lau} tuần`,"hot"):"")+(S.srv.sec?c("sec","Biết chuyện của chủ",S.srv.sec,"hot"):"")+(S.srv.spyFor!=null?c("spy","Tai mắt cho người khác","","hot"):"")+(m?c("mis",`Chủ: ${m.name}`,netTxt(m)):"")}
-(function(){const r0=render;render=function(){if(isSrv()&&!(tab in SRVTABS))tab="act";const r=r0.apply(this,arguments);try{srvTabs();if(isSrv()&&tab==="go")srvMapFix()}catch(e){console.error(e)}return r}})();
+(function(){const r0=render;render=function(){/* maid-8tabs: every consort tab is hers too (jroad8 guards unknown keys) */const r=r0.apply(this,arguments);try{if(isSrv()&&tab==="go")srvMapFix()}catch(e){console.error(e)}return r}})();
 function srvMapFix(){const m=srvM(),mk=m&&palaceOf(m);document.querySelectorAll('#panel .mspot[data-go="home"]').forEach(b=>b.remove());
  document.querySelectorAll("#panel button.mspot[data-go]").forEach(b=>{const k=b.dataset.go;if(k===mk){b.classList.add("srvmine");if(S.place==="home")b.classList.add("here");const l=b.querySelector(".mlab");if(l&&!l.querySelector(".srvtag"))l.insertAdjacentHTML("beforeend",' <i class="srvtag">cung chủ</i>');b.disabled=false;return}
   const h=window.placeEnterHook(S,k);if(h&&!h.ok&&!b.disabled){b.disabled=true;b.classList.add("off","srvno");b.title=`${b.title.split(":")[0]}: ${h.why}`;let mt=b.querySelector(".mmeta");if(!mt){mt=document.createElement("span");mt.className="mmeta";b.appendChild(mt)}mt.innerHTML=`<em>${h.why}</em>`}})}
 (function(){const p0=renderPanel0;renderPanel0=function(){if(!isSrv()||!["staff","story","act"].includes(tab))return p0.apply(this,arguments);
- const el=$("panel");if(tab==="act"){const r=p0.apply(this,arguments);try{el.insertAdjacentHTML("afterbegin",srvHead())}catch(e){}return r}
- const gm=document.querySelector(".game");if(gm)gm.classList.remove("cardtab","maptab");const keep=el.dataset.tab===tab?el.scrollTop:0;el.innerHTML=tab==="staff"?srvStaffHTML():srvRoadHTML();el.dataset.tab=tab;el.dataset.pg="";kitFix(el);panelScrollKeep(el,keep)}})();
-function srvHead(){const m=srvM();if(!m)return"";const w=srvWhere(m),mk=palaceOf(m);const sn=S.srv.sent&&!S.srv.sent.done&&S.srv.sent.until>=bid()?S.srv.sent:null;
- if(S.srv.lau>0)return `<div class="srvhead">${mdH(pMe(),"sm")}<span><b>Cung nữ Tân Giả khố</b> · <b class="r">còn ${S.srv.lau} tuần</b> · giặt đủ thì được về sớm; hết hạn, Nội vụ phủ chia về hầu chủ mới.</span></div>`;
- return `<div class="srvhead">${mdH(pv(m),"sm")}<span><b>${srvTitle()}</b> · chủ ${netTxt(m)} · ${w===mk?"đang ở cung":"đang ở "+placeOf(w).n} · Chủ tin <b class="${S.tin<BAL.tinLv.lo?"r":S.tin>=BAL.tinLv.hi?"g":""}">${S.tin}</b>${sn?` · <b class="g">Việc chủ sai: ${sn.n} (đến ${placeOf(sn.k).n})</b>`:""}${S.srv.lau>0?` · <b class="r">Tân Giả khố còn ${S.srv.lau} tuần</b>`:""}</span></div>`}
+ const el=$("panel");if(tab==="act")return p0.apply(this,arguments);/* owner 21/11 ~03:18Z mark #33: no «Cung nữ … của … · Chủ tin» strip under the tabs (the header already says it; Chủ tin = stage right column, jk3) */
+ const gm=document.querySelector(".game");if(gm)gm.classList.remove("cardtab","maptab");const keep=el.dataset.tab===tab?el.scrollTop:0;el.innerHTML=tab==="staff"?srvStaffTabHTML():srvRoadHTML();el.dataset.tab=tab;el.dataset.pg="";kitFix(el);panelScrollKeep(el,keep)}})();
 function srvRows(){const m=srvM();const need=srvMpNeed(S.srv.rk),mx=srvMax();const row=(a,b)=>[a,b,"t"];/* KIT §51: kit table rows (pcard group → kitRows) */
  return [row("Thân phận",srvTitle()),row("Công lao",`${Math.floor(S.srv.mp)}/${need}${S.srv.rk>=mx?` · bậc cao nhất cung ${m?m.name:""} cho phép`:` · đủ thì lên ${SRK.maid[S.srv.rk+1]||""}`}`),row("Lương tháng",`${CNV_WAGE[S.srv.rk]} bạc · đang có ${S.bac}`),
   row("Hoàng thượng để ý",amOn()?`${S.nt}/100 · ngài nhớ việc ngươi làm gần ngài trong ${BAL.ag.emp.met.keep} tuần; càng để ý, càng dễ được ngài cho gọi đến hầu`:`${S.nt}/100 · từ ${BAL.ntRise.at}, mỗi lần để ý ngươi ngài hỏi tên, phong ${RANKS[0].n}: ${chanceW(ntRiseOdds())}`),row("Ban gả",S.srv.rk>=BAL.srvRk.dai?`Danh ${S.danh}/20 · đủ thì có người xin cưới`:`cần ${SRK.maid[BAL.srvRk.dai]}, Danh 20`),
@@ -7527,14 +7530,33 @@ function srvLadderHTML(){const K=BAL.srvRk,r=S.srv.lau>0?-1:S.srv.mama?K.mama:(S
  T.push({k:"Ở lại",n:"Ma ma",c:S.srv.mama?"g":"",on:!!S.srv.mama,d:`Đến ${BAL.srvAge.ask} tuổi, từ ${SRK.maid[K.cs]} trở lên, đỗ khảo hạch Nội vụ phủ thì ở lại làm ma ma đến ${BAL.srvAge.mama} tuổi; không thì xuất cung`});
  return `<div class="kpsec"><h4 class="kpst">Thang bậc cung nữ</h4>${kitTiers(T)}</div>`}
 function srvRoadHTML(){const m=srvM();return `<div class="story"><h3>Thân phận cung nữ</h3><p style="margin:0 0 4px">Ngươi là ${srvTitle()}${m?` (${rkName(m)}, tính ${netTxt(m)})`:""}. Leo lên bằng công lao và lòng tin của chủ; được Hoàng thượng để mắt thì thành phi tần.</p></div>${kitRows(srvRows())}${srvLadderHTML()}`}/* tut-followups: srvRows returns kit rows (§51) since the kit table switch; the road tab printed the raw array */
-function srvStaffHTML(){const L=srvColleagues();const m=srvM();const oc=od(SRVA.chat.o(S)),of=od(SRVA.frame.o(S));
- return `<h3>Đồng liêu</h3><p class="past">Kẻ hầu cùng cung và người ngươi đã quen. Bạn (quý ngươi từ ${BAL.srvx.friendAf}) làm chứng khi ngươi bị vu, mách tin; kẻ ghét ngươi (dưới 0) tìm dịp vu cáo.</p>`+(L.map(s=>{const a=S.srv.af[s.sid]||0;const o=ownerOf(s);const kn=S.srv.know[s.sid];const t1=!can(1)?"Hết khắc buổi này":"";
-  return `<div class="srvrow">${mdH(pServ(s),"sm")}<div class="srvi"><b>${s.name}</b><span class="past">${srkName(s)} · ${o?(o===m?"cùng cung":"người của "+o.name):"Nội vụ phủ"} · ${kn?"tính "+netTxt(s):"chưa rõ tính"}</span><span>Thiện cảm <b class="${a>=30?"g":a<0?"r":""}">${a}</b></span></div><div class="srvb">`
-   +pbtn(`class="opt" data-cnv="chat" data-sid="${s.sid}"`,"Trò chuyện",`${word(oc)} · tốn: 1 khắc · thành: người ấy quý ngươi +10 · hỏng: người ấy quý ngươi -3`,t1)
-   +pbtn(`class="opt" data-cnv="gift" data-sid="${s.sid}"${capAt(BAL.btn.cnv,BAL.bacFee.cnvGift)}`,"Biếu quà",`${capW()} · tốn: Bạc -${BAL.bacFee.cnvGift}, ${BAL.btn.cnv.k} khắc · thành: người ấy quý ngươi +12`,S.bac<BAL.bacFee.cnvGift?"Thiếu bạc (cần "+BAL.bacFee.cnvGift+")":t1)
-   +pbtn(`class="opt" data-cnv="ask" data-sid="${s.sid}"${capAt(BAL.btn.cnv)}`,"Nhờ dò tin",`${capW()} · tốn: ${BAL.btn.cnv.k} khắc · thành: có tin để bẩm chủ`,a<BAL.srvx.friendAf?`Cần người ấy quý ngươi từ ${BAL.srvx.friendAf}`:t1)
-   +pbtn(`class="opt" data-cnv="frame" data-sid="${s.sid}"`,"Tố lỗi với chủ",`${word(of)} · tốn: 1 khắc · thành: ${s.name} bị phạt, Chủ tin ${balSg(SRVA.frame.w.tin)} · hỏng: người ấy quý ngươi ${balSg(SRVA.frame.afL)}, Chủ tin ${balSg(SRVA.frame.l.tin)}`,o!==m?"Chỉ tố người cùng cung":S.srv.lau>0?"Đang ở Tân Giả khố":t1)
-   +(o&&o!==m&&s.role==="maid"?pbtn(`class="opt" data-cnv="poison" data-sid="${s.sid}"`,"Bỏ độc vào bát cơm",`${word(od(SRVA.poison.o(S,m)))} · tốn: Bạc ${srvCa("poison",S,m).bac}, ${SRVA.poison.k} khắc · thành: không ai tra ra · hỏng: Thái y tra ra, ngươi bị giải sang Thận hình ti · kèm: ${s.name} trúng độc; không qua khỏi: ${chanceW(BAL.mline.poisonDie)}`,!stfPoisonOk(S,m,s)?(S.bac<-srvCa("poison",S,m).bac?"Thiếu bạc":"Cung ấy không thù cung chủ"):!can(SRVA.poison.k)?"Hết khắc buổi này":""):"")+`</div></div>`}).join("")||`<p class="past">Chưa quen ai.</p>`)}
+/* owner 21/11 ~03:22Z mark #35 (verbatim in OD): «cái đồng liêu này mình đưa qua bên hậu cung … cung nhân thì mình sẽ đổi thành là đồng liêu … cái khung của nhân vật
+   … phải để hiển thị những cái thông tin, những cái khung đó cho giống chứ». Hậu cung › Đồng liêu = the SAME person-tab layout as Cung nhân (j15 staffTabHTML):
+   kit pager strip (faces, ‹ ›, n/N) + ONE kit person card (pcard) for the chosen colleague, with her act buttons (data-cnv, srvStaffAct) in card groups.
+   Order and rows = srvColleagues (her palace first, then the people she knows). Nothing yet = the kit empty card. */
+function srvStaffTabHTML(){const L0=srvColleagues();const m=srvM();if(!L0.length)return kitEmpty("Đồng liêu","Chưa quen ai.");
+ const oc=od(SRVA.chat.o(S)),of=od(SRVA.frame.o(S));let s0=false,s1=false;
+ const L=L0.map(s=>{const own=ownerOf(s)===m&&!!m;const sep=own&&!s0?(s0=true,"Cùng cung"):!own&&!s1?(s1=true,"Người quen"):"";return{s,f:pServ(s),name:shortN(s.name),sep}});
+ const mk=i=>{const s=L[i].s;const a=S.srv.af[s.sid]||0;const o=ownerOf(s);const kn=S.srv.know[s.sid];const t1=!can(1)?"Hết khắc buổi này":"";
+  const B=[pbtn(`data-cnv="chat" data-sid="${s.sid}"`,"Trò chuyện",`${word(oc)} · tốn: ${SRVA.chat.k} khắc · thành: người ấy quý ngươi ${balSg(SRVA.chat.af)} · hỏng: người ấy quý ngươi ${balSg(SRVA.chat.afL)}`,t1),
+   pbtn(`data-cnv="gift" data-sid="${s.sid}"${capAt(BAL.btn.cnv,BAL.bacFee.cnvGift)}`,"Biếu quà",`${capW()} · tốn: Bạc -${BAL.bacFee.cnvGift}, ${BAL.btn.cnv.k} khắc · thành: người ấy quý ngươi ${balSg(SRVA.gift.af)}`,S.bac<BAL.bacFee.cnvGift?"Thiếu bạc (cần "+BAL.bacFee.cnvGift+")":t1),
+   pbtn(`data-cnv="ask" data-sid="${s.sid}"${capAt(BAL.btn.cnv)}`,"Nhờ dò tin",`${capW()} · tốn: ${BAL.btn.cnv.k} khắc · thành: có tin để bẩm chủ`,a<BAL.srvx.friendAf?`Cần người ấy quý ngươi từ ${BAL.srvx.friendAf}`:t1)];
+  const H=[pbtn(`data-cnv="frame" data-sid="${s.sid}"`,"Tố lỗi với chủ",`${word(of)} · tốn: ${SRVA.frame.k} khắc · thành: ${s.name} bị phạt, Chủ tin ${balSg(SRVA.frame.w.tin)} · hỏng: người ấy quý ngươi ${balSg(SRVA.frame.afL)}, Chủ tin ${balSg(SRVA.frame.l.tin)}`,o!==m?"Chỉ tố người cùng cung":S.srv.lau>0?"Đang ở Tân Giả khố":t1),
+   (o&&o!==m&&s.role==="maid"?pbtn(`data-cnv="poison" data-sid="${s.sid}"`,"Bỏ độc vào bát cơm",`${word(od(SRVA.poison.o(S,m)))} · tốn: Bạc ${srvCa("poison",S,m).bac}, ${SRVA.poison.k} khắc · thành: không ai tra ra · hỏng: Thái y tra ra, ngươi bị giải sang Thận hình ti · kèm: ${s.name} trúng độc; không qua khỏi: ${chanceW(BAL.mline.poisonDie)}`,!stfPoisonOk(S,m,s)?(S.bac<-srvCa("poison",S,m).bac?"Thiếu bạc":"Cung ấy không thù cung chủ"):!can(SRVA.poison.k)?"Hết khắc buổi này":""):"")].filter(Boolean);
+  return pcard({f:L[i].f,name:s.name,rank:srkName(s),lines:[tuoi(s.age),`${o?(o===m?"Cùng cung":"Người của "+o.name):"Nội vụ phủ"} · ${kn?"tính "+netTxt(s):"chưa rõ tính"}`,`Thiện cảm <b class="${a>=BAL.srvx.friendAf?"g":a<0?"r":""}">${a}</b>`],
+   chips:[a>=BAL.srvx.friendAf?chip("bạn của ngươi","ok"):"",a<0?chip("ghét ngươi","hot"):""],
+   note:`Bạn (quý ngươi từ ${BAL.srvx.friendAf}) làm chứng khi ngươi bị vu, mách tin; kẻ ghét ngươi (dưới 0) tìm dịp vu cáo.`,groups:[["Giao thiệp",B],["Mưu kế",H]]})};
+ return `<div class="pgwrap">`+pager("staff",L,mk)+`</div>`}
+/* owner 21/11 ~03:20Z mark #34 (verbatim in OD): «khi mà tôi bấm vào cái thông tin của thường tại … ở cái cột bên phải … thì thường nó sẽ để là chủ tin 50.
+   Tôi bấm vào thì nó hiện những cái thông tin của người chủ đó». Her chủ is the FIRST row of the stage right column's court box (kit .kcrow, jk3 k3court; the
+   portrait status sheet's «Trong cung» too): face · «<phẩm> <tên>» · «Chủ tin N»; tap = her chủ's kit person card (Hậu cung › Chủ tử pager), like Hoàng hậu's row. */
+/* rv maid-8tabs (owner 21/11 ~03:20Z mark #34 verbatim: «chủ kín đáo, thật thà, ham vui … Tôi bấm vào thì nó hiện những cái thông tin của người chủ đó»): the removed strip
+   printed her chủ's nature (netTxt); her chủ's card keeps it — a cung nữ knows the nature of the one she serves (same as k61Own: her chủ is known) */
+(function(){const t0=trKnown;trKnown=function(v){try{if(typeof isSrv==="function"&&isSrv()&&v&&v===srvM())return traitsOf(v).slice()}catch(e){}return t0.apply(this,arguments)}})();
+function srvCourtRow(){const m=srvM();if(!m)return null;const t=S.tin|0;return{k:"mis",who:`${rkName(m)} ${shortN(m.name)}`,f:pv(m),mood:[`Chủ tin ${t}`,t<BAL.tinLv.lo?"r":t>=BAL.tinLv.hi?"g":"n"],att:null,ref:m}}
+(function(){const k0=kitCourtRows;kitCourtRows=function(){const R=k0.apply(this,arguments);try{if(isSrv()&&!S.dead){const r=srvCourtRow();if(r)R.unshift(r)}}catch(e){console.error("srvCourtRow",e)}return R}})();
+(function(){const o0=kitCourtOpen;kitCourtOpen=function(k){if(k!=="mis")return o0.apply(this,arguments);try{if(Q.length&&!/pcm/.test(Q[0].cls||""))return;const m=srvM();const i=typeof rvPgOf==="function"?rvPgOf(m):rivals.indexOf(m);/* strip position (j27) */if(i>=0)PG.rv=i;
+ const b=document.querySelector('[data-tab="rv"]');if(b)b.click();else{tab="rv";render()}}catch(e){console.error("kitCourtOpen mis",e)}}})();
 function srvStaffAct(k,s){if(!can(1))return null;const m=srvM();
  if(k==="chat"){const o=od(SRVA.chat.o(S));/* odds read before the spend (shown-odds r2) */spend(1);const ok=roll(o);srvAf(s,ok?SRVA.chat.af:SRVA.chat.afL);if(roll(SRVA.chat.know))S.srv.know[s.sid]=1;log(`Trò chuyện với ${s.name}: ${ok?"thân hơn":"bị lạnh nhạt"}.`);return ok}
  if(k==="gift"){if(S.bac<-SRVA.gift.c.bac)return null;spend(BAL.btn.cnv.k);apply(SRVA.gift.c);srvAf(s,SRVA.gift.af);log(`Biếu ${s.name} chút quà.`);return true}
@@ -7553,10 +7575,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 (function(){const s0=selfCardHTML;selfCardHTML=function(){if(!isSrv())return s0.apply(this,arguments);const m=srvM();
  return pcard({f:pMe(),col:"#b9a48a",name:S.name,rank:srvTitle(),lines:[`${S.age} tuổi · ${S.origin.n}`,`Sắc ${S.sac} · Tài ${S.tai} · Tâm cơ ${S.tamco} · Đức ${S.duc}`,`Sức ${S.suc} · Bạc ${S.bac} · Danh ${S.danh}`,`Chủ tin ${S.tin} · Hoàng thượng để ý ${S.nt}`],note:m?`Chủ: <b>${rkName(m)} ${m.name}</b>, tính ${netTxt(m)}.`:"",groups:[["Đường đi",srvRows()]].concat(typeof kcuHonorRows==="function"&&kcuHonorRows(1).length?[["Danh hiệu thi tài",kcuHonorRows(5)]]:[]),empty:""})}})();
 /* the Chọn sổ rows say who the sổ is through j74 slotWho (one place, srv lives included); the old #slots .slot text patch is gone with the old rows */
-(function(){const st=document.createElement("style");st.textContent=`.srvhead{display:flex;gap:8px;align-items:center;padding:6px 8px;margin:0 0 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);font-size:.82rem;line-height:1.4}
-.srvrow{display:flex;gap:8px;align-items:flex-start;padding:8px 2px;border-bottom:1px solid var(--line);flex-wrap:wrap}.srvrow .srvi{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1 1 160px;font-size:.85rem}
-.srvrow .srvb{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;flex:1 1 100%}.srvrow .srvb .opt{min-width:0}
-.mspot .srvtag{font-style:normal}`;document.head.appendChild(st)})();
+(function(){const st=document.createElement("style");st.textContent=`.mspot .srvtag{font-style:normal}`;document.head.appendChild(st)})();
 (function(){const h0=hudTween;hudTween=function(){if(!isSrv())return h0.apply(this,arguments);const s=S.sung;S.sung=S.tin;try{return h0.apply(this,arguments)}finally{S.sung=s}}})();
 
 /* ================= CUNG NỮ II: the palace men (j22), forbidden love and marriage roads for a maid =================
@@ -27754,7 +27773,7 @@ function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="obje
    new servants were "Thái giám ???" in her own guard-order and spy dialogs) */
 /* kc-roads fix: her own family while she still lives at home (S.kc.fam, !S.kc.inPal) are her own people — known, mood and nature seen (all nine home roads) */
 function k61Kin(e){try{return !!(e&&S&&S.kc&&!S.kc.inPal&&(S.kc.fam||[]).includes(e))}catch(x){return false}}
-function k61Own(e){try{return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)||k61Kin(e)}catch(x){return false}}
+function k61Own(e){try{return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)||k61Kin(e)||(typeof isSrv==="function"&&isSrv()&&(e===srvM()||(e&&e.sid!=null&&((S.srv.met||[]).includes(e.sid)||ownerOf(e)===srvM()))))/* maid-8tabs #34/#35 (law 6b): a cung nữ knows her own chủ and the colleagues she serves with or has met (S.srv.met = her Đồng liêu) — never a grey «Người lạ» on the stage, the chủ row, the Đồng liêu pager, nor a card whose buttons the stranger rule greys out */}catch(x){return false}}
 function k61St(e){if(!e||!S||e===S)return 3;{const d=k61StageDesc(e);if(d===null)return 3;if(d)e=d;if(e===S)return 3}const K=k61S();if(!K)return 3;if(k61Own(e))return 3;return +K[kOf61(e)]||0}
 /* owner 11/15 (stranger rule, KIT §49.3): a consort Ta has NOT MET is a grey silhouette everywhere (portraits, strips, news rows, figures,
    the week book) — her name may be known, her face is not. Met = she talked / acted with her (S.met), or lives in the same palace
@@ -29767,17 +29786,21 @@ function kitTgt(){try{if(typeof J78==="object"&&J78.cardV)return J78.cardV}catch
    group and the panel gets the kit SUB-TABS (segmented control .ksub); the last sub-tab of each group is remembered. Servant mode keeps its tabs. */
 const KG={hc:{keys:["rv","rel","fac"],l:"Hậu cung",s:"Hậu cung"},mt:{keys:["story","nho","quest","req","log"],l:"Mệnh truyện",s:"Mệnh truyện"}};
 function kgOf(t){for(const g in KG)if(KG[g].keys.includes(t))return g;return null}
-function kgOn(){try{return !(typeof isSrv==="function"&&isSrv())&&!(S&&S.dead)}catch(e){return true}}
+/* maid-8tabs (owner 21/11 ~03:15Z mark #32): every road (cung nữ, tiểu thư ngoài cung) has the SAME groups / sub-tabs as the consort; only death turns them off */
+function kgOn(){try{return !(S&&S.dead)}catch(e){return true}}
 function kgLast(g){let v=null;try{v=localStorage.getItem("hclh-kg-"+g)}catch(e){}const ks=kgKeys(g);return ks.includes(v)?v:ks[0]}
-function kgKeys(g){return KG[g].keys.filter(k=>document.querySelector(`#tabs [data-tab="${k}"]`))}
-function kgLabel(k){const b=document.querySelector(`#tabs [data-tab="${k}"]`);if(!b)return k;return (b.dataset.kl0||b.dataset.l0||b.textContent).trim()}
+function kgKeys(g){return KG[g].keys.filter(k=>document.querySelector(`#tabs [data-tab="${k}"]`)&&!(typeof road8Hide==="function"&&road8Hide(k)))}/* jroad8 ROAD8: a key that is not a sub-tab on her road */
+function kgLabel(k){const r8=typeof road8Label==="function"?road8Label(k):"";if(r8)return r8;/* jroad8 ROAD8: her road's sub-tab label */const b=document.querySelector(`#tabs [data-tab="${k}"]`);if(!b)return k;return (b.dataset.kl0||b.dataset.l0||b.textContent).trim()}
 function kgBar(){const T=$("tabs");if(!T)return;const on=kgOn();
- for(const g in KG){const ks=kgKeys(g);ks.forEach((k,i)=>{const b=T.querySelector(`[data-tab="${k}"]`);if(!b)return;
+ for(const g in KG){const vis=kgKeys(g);/* every member button of the group: the first one shown on her road is the head, the rest (and keys her road leaves out, jroad8) hide */
+  KG[g].keys.forEach(k=>{const i=vis.indexOf(k);const b=T.querySelector(`[data-tab="${k}"]`);if(!b)return;
   if(!on){if(b.dataset.kg){b.textContent=b.dataset.kl0;b.dataset.s=b.dataset.ks0;delete b.dataset.kg}b.classList.remove("kghide");return}
   if(i===0){if(!b.dataset.kg){b.dataset.kl0=b.textContent;b.dataset.ks0=b.dataset.s||"";}b.dataset.kg=g;b.classList.remove("kghide");/* a group head is always shown (a key that was a member of another group before KG changed keeps no stale kghide — review 11/15: Giao tình vanished) */if(b.textContent!==KG[g].l)b.textContent=KG[g].l;if(b.dataset.s!==KG[g].s)b.dataset.s=KG[g].s;const sel=String(kgOf(tab)===g);if(b.getAttribute("aria-selected")!==sel)b.setAttribute("aria-selected",sel);b.classList.toggle("kgon",kgOf(tab)===g)}
-  else b.classList.add("kghide")})}}
+  else{b.classList.add("kghide");/* maid-8tabs #34: a member that was a group head before (KG rebuilt by jhc: rv headed Hậu cung) drops its stale head mark — else a tap on it
+   (kitCourtOpen: Hoàng hậu / her chủ → rv) ran the head click and opened the group's LAST sub-tab (Cung nhân / Đồng liêu) instead of rv */if(b.dataset.kg){if(b.dataset.kl0!=null)b.textContent=b.dataset.kl0;if(b.dataset.ks0!=null)b.dataset.s=b.dataset.ks0;delete b.dataset.kg}}})}}
 function kgSub(){const P=$("panel");if(!P)return;const g=kgOf(tab);let nav=P.querySelector(":scope > .ksub:not(.kpgsub), :scope > .kpbar > .ksub:not(.kpgsub)");if(!g||!kgOn()){if(nav)nav.remove();return}
  try{localStorage.setItem("hclh-kg-"+g,tab)}catch(e){}
+ if(kgKeys(g).length<2){if(nav)nav.remove();return}/* one sub-tab only (a road with one member in this group, jroad8): no sub-tab row */
  const html=kgKeys(g).map(k=>`<button class="ksubb${k===tab?" on":""}" role="tab" aria-selected="${k===tab}" data-ksub="${k}">${kgLabel(k)}</button>`).join("");
  if(!nav){nav=document.createElement("nav");nav.className="ksub";nav.setAttribute("role","tablist");P.prepend(nav)}nav.innerHTML=html}
 document.addEventListener("click",e=>{const s=e.target.closest&&e.target.closest("[data-ksub]");if(s){e.preventDefault();e.stopPropagation();tab=s.dataset.ksub;render();return}
@@ -39645,7 +39668,7 @@ function kitCourtRows(){const out=[];if(!S||S.dead)return out;const mood=w=>{try
 function kitCourtHTML(cls){const R=kitCourtRows();if(!R.length)return"";const v=(x,l)=>x?`<span class="ef ${x[1]==="g"?"g":x[1]==="r"?"r":"n"}">${x[0]}</span>`:`<span class="ef n">chưa rõ</span>`;
  return `<div class="kcourt ${cls||""}"><b class="khh">Trong cung</b>`+R.map(r=>`<button class="kcrow" data-kc="${r.k}" title="Chạm để xem thẻ ${r.who}">${mdH(r.f,"xs")}<span class="kcn">${r.who}</span><span class="kcv"><small>Tâm trạng</small>${v(r.mood)}<small>Với ngươi</small>${v(r.att)}</span></button>`).join("")+`</div>`}
 function kitCourtOpen(k){try{if(Q.length&&!/pcm/.test(Q[0].cls||""))return;if(k==="emp"){showEmp();return}
- const tb=k==="th"?"rel":"rv";if(k==="th")relSel="th";else{const q=queenP();const i=rivals.indexOf(q);if(i>=0)PG.rv=i}
+ const tb=k==="th"?"rel":"rv";if(k==="th")relSel="th";else{const q=queenP();const i=typeof rvPgOf==="function"?rvPgOf(q):rivals.indexOf(q);/* strip position (j27 groups the strip by palace) */if(i>=0)PG.rv=i}
  const b=document.querySelector(`[data-tab="${tb}"]`);if(b)b.click();else{tab=tb;render()}}catch(e){console.error("kitCourtOpen",e)}}
 addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".kcrow[data-kc]");if(!b||e.target.closest("img.kemo"))return; /* a tap on the mood seal = its popover (jemo), not the card */e.stopPropagation();const el=$("hud2");if(el&&!el.classList.contains("col")&&b.closest("#hud2")){const x=el.querySelector(".khx");if(x)x.click()}kitCourtOpen(b.dataset.kc)},true);
 function kitCourtStage(){try{const st=$("stage"),ks=$("kstat");let o=$("kcourt");const land=kitView().pages===2;
@@ -40331,7 +40354,7 @@ function kitWearSlots(p,opts){try{if(!p||typeof wdSlots!=="function")return"";co
  return `<div class="kwear${opts&&opts.cls?" "+opts.cls:""}">`+L.map((x,i)=>kitItem({src:x.empty?"":kitItemSrc(x.k,x.icon),name:x.empty?x.name:x.name,grade:x.grade,empty:x.empty,size:(opts&&opts.size)||"sm",
   data:`data-kwear="${x.slot}" data-kwho="${me?"me":(p.id!=null?p.id:"")}" role="button" tabindex="0"`,tip:`${x.slot==="tram"?"Trâm cài":"Y phục"}: ${x.name}${x.empty?"":" · "+x.gradeName}${x.giver?" · "+x.giver+" ban":""}`})).join("")+(lab?`<span class="kwearl">${kitItem({}).slice(0,0)}<span class="kitl kitl-${lab[1]}">${lab[0]}</span></span>`:"")+`</div>`}catch(e){return""}}
 function kitPersonByName(nm){nm=String(nm||"").replace(/<[^>]*>/g,"").trim();if(!nm||typeof S==="undefined"||!S)return null;if(nm===S.name)return S;
- const pools=[typeof rivals!=="undefined"?rivals:[],[S.maid],S.staff||[],S.servants||[],S.srv||[]];for(const P of pools)for(const v of (P||[]))if(v&&v.name===nm)return v;
+ const pools=[typeof rivals!=="undefined"?rivals:[],[S.maid],S.staff||[],S.servants||[],S.srv||[]];for(const P of pools)for(const v of (Array.isArray(P)?P:[]))if(v&&v.name===nm)return v;
  try{if(S.thO&&S.thO.name===nm)return S.thO}catch(e){}return null}
 document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kwear]");if(!t)return;ev.stopPropagation();const sl=t.dataset.kwear,who=t.dataset.kwho;
  if(who==="me"){window.__kwdTab=sl;const b=document.querySelector('[data-tab="inv"]');if(b)b.click();return}
@@ -42149,25 +42172,33 @@ function k3court(){let R=[];try{R=typeof kitCourtRows==="function"?kitCourtRows(
 function kitGroupFold(key,label,n,items){if(!n||!items||window.__kgfOpen!==key)return"";
  return `<div class="k3p kgf kgfopen" data-kgfbox="${key}"><button type="button" class="k3h kgf-t" data-kgf="${key}" title="${esc(label)} · ${n} · chạm để thu lại"><span>${esc(label)} · ${n}</span><b>‹</b></button><div class="kgf-l">${items}</div></div>`}
 /* the two small group buttons (right column: top of #kshR on the stage and the iPad map): number over label, same square kit button as the rail; tap = drop list under them */
-function kitGroupBtns(){const d=[["cn","Cung nhân"],["ct","Chí tôn"]].map(([k,l])=>[k,l,kgfCount(k)]).filter(x=>x[2]>0);if(!d.length)return"";
+/* maid-8tabs #33/#34/#36 (owner 21/11 ~03:18Z «layout của mọi thứ copy phải y chang nhau hết», ~03:25Z «chỉ là những cái thay đổi của cái tên thôi»): every road shows
+   the SAME two buttons; the words come from ONE label table (jroad8 ROAD8_LAB: cung nữ «Đồng liêu» in the Cung nhân place). Her chủ («Chủ tin N») is a row of the
+   court box, where the consort has Hoàng thượng (kitCourtRows, j42 srvCourtRow) — tap = her chủ's person card */
+function kgfLab(k){return typeof road8Lab==="function"?road8Lab(k):k==="cn"?"Cung nhân":"Chí tôn"}
+function kitGroupBtns(){const d=["cn","ct"].map(k=>[k,kgfLab(k),kgfCount(k)]).filter(x=>x[2]>0);
+ if(!d.length)return"";
  return `<div class="kgfbtns">${d.map(([k,l,n])=>{const on=window.__kgfOpen===k;return `<button type="button" class="krailb krailt kgfbtn${on?" kopen":""}" data-kgf="${k}" aria-pressed="${on}" title="${l} · ${n} · chạm để ${on?"thu lại":"mở"}"><b>${n}</b><span>${l}</span></button>`}).join("")}</div>`}
 window.kitGroupFold=kitGroupFold;window.kitGroupBtns=kitGroupBtns;
-/* «Cung nhân» = her household: the personal maid + every maid / eunuch of S.staff (same person cards as the Cung nhân tab; tap = that tab) */
-function k3crewChip(f,name,loy,tip){const n=+loy;return `<button type="button" class="k3c" data-k3go="staff" title="${esc(tip)} · chạm để xem">${f}<span class="k3ct"><b>${esc(name)}</b><span class="k3v"><small>Lòng</small> <span class="ef ${n>=BAL.loy.close?"g":n<BAL.loy.warn?"r":"n"}">${esc(String(loy))}</span></span></span></button>`}
-function k3crewList(){if(!S||(typeof isSrv==="function"&&isSrv()))return"";let h="";
+/* «Cung nhân» = her household: the personal maid + every maid / eunuch of S.staff (same person cards as the Cung nhân tab; tap = that tab).
+   Cung nữ road (#36): the same box = «Đồng liêu», her colleagues (j42 srvColleagues, the people of her Hậu cung › Đồng liêu pager), value = Thiện cảm */
+function k3crewChip(f,name,loy,tip,lab,cls){const n=+loy;return `<button type="button" class="k3c" data-k3go="staff" title="${esc(tip)} · chạm để xem">${f}<span class="k3ct"><b>${esc(name)}</b><span class="k3v"><small>${lab||"Lòng"}</small> <span class="ef ${cls||(n>=BAL.loy.close?"g":n<BAL.loy.warn?"r":"n")}">${esc(String(loy))}</span></span></span></button>`}
+function k3crewList(){if(!S)return"";let h="";
+ if(typeof isSrv==="function"&&isSrv()){try{srvColleagues().forEach((s,j)=>{const a=S.srv.af[s.sid]|0;let f="";try{f=mdH(pServ(s),"xs")}catch(e){}
+   h+=k3crewChip(f,typeof shortN==="function"?shortN(s.name):s.name,a,srkName(s),"Thiện cảm",a>=BAL.srvx.friendAf?"g":a<0?"r":"n").replace('data-k3go="staff"',`data-k3go="staff" data-k3pi="${j}"`)})}catch(e){}return h}
  if(S.maid){let f="";try{f=mdH(pMaid(),"xs")}catch(e){}h+=k3crewChip(f,S.maid.name,S.maid.loyal|0,"Cung nữ thân tín")}
  (S.staff||[]).forEach(s=>{if(!s||s===S.maid)return;let f="";try{f=mdH(pServ(s),"xs")}catch(e){}h+=k3crewChip(f,typeof shortN==="function"?shortN(s.name):s.name,s.loyal|0,s.role==="eunuch"?"Thái giám":"Cung nữ")});
  return h}
 function k3crewN(){return kgfCount("cn")}
-function k3crew(){return kitGroupFold("cn","Cung nhân",kgfCount("cn"),k3crewList())}
-function k3chitonG(){let R=[];try{R=typeof kitCourtRows==="function"?kitCourtRows():[]}catch(e){}return kitGroupFold("ct","Chí tôn",R.length,k3court())}
+function k3crew(){return kitGroupFold("cn",kgfLab("cn"),kgfCount("cn"),k3crewList())}
+function k3chitonG(){let R=[];try{R=typeof kitCourtRows==="function"?kitCourtRows():[]}catch(e){}return kitGroupFold("ct",kgfLab("ct"),R.length,k3court())}
 /* PHONE DƯ ĐỒ (owner 18/11 ~21:40Z): no full-width group bars. «Cung nhân» / «Chí tôn» = TWO small kit rail buttons (number over label) right under the book / scroll icons;
    tap = that group's people list drops down in the empty left strip of the map under the buttons (#kgfdrop, one open at a time, tap again closes). */
 function kgfPhoneMap(){try{const m=kitSideHost();return !!m&&m.classList.contains("mapv")&&kitView().pages===1}catch(e){return false}}
-function kgfCount(k){try{if(!S||S.dead)return 0;if(k==="cn"){if(typeof isSrv==="function"&&isSrv())return 0;return(S.maid?1:0)+(S.staff||[]).filter(s=>s&&s!==S.maid).length}return(typeof kitCourtRows==="function"?kitCourtRows():[]).length}catch(e){return 0}}
+function kgfCount(k){try{if(!S||S.dead)return 0;if(k==="cn"){if(typeof isSrv==="function"&&isSrv())return srvColleagues().length;return(S.maid?1:0)+(S.staff||[]).filter(s=>s&&s!==S.maid).length}return(typeof kitCourtRows==="function"?kitCourtRows():[]).length}catch(e){return 0}}
 function kgfDrop(){try{let d=document.getElementById("kgfdrop");const k=window.__kgfOpen,mv=kitSideHost();
  if(!k||!kgfPhoneMap()||!mv||!S||S.dead){if(d)d.remove();kgfTags(null);return}
- const lab=k==="cn"?"Cung nhân":"Chí tôn",n=kgfCount(k);if(!n){if(d)d.remove();kgfTags(null);return}
+ const lab=kgfLab(k),n=kgfCount(k);if(!n){if(d)d.remove();kgfTags(null);return}
  const items=k==="cn"?k3crewList():k3court();
  if(!d){d=document.createElement("div");d.id="kgfdrop";d.className="ksh kgfdrop"}if(d.parentNode!==mv)mv.appendChild(d);
  const h=`<div class="k3p kgf kgfopen"><div class="k3h kgf-t" style="cursor:default"><span>${esc(lab)} · ${n}</span></div><div class="kgf-l">${items}</div></div>`;if(d.__h!==h){d.innerHTML=h;d.__h=h}
@@ -42191,7 +42222,13 @@ function kgfTags(d){try{document.querySelectorAll(".mspot[data-kgft]").forEach(t
  setInterval(()=>{if(!document.hidden&&document.getElementById("kgfdrop"))go()},300);
  if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{go();setTimeout(go,350)}catch(e){}return r}}})();
 function kgfRail(){try{if(kgfRail.done||typeof kitStageRail!=="object")return;kgfRail.done=1;
- [["cn","Cung nhân",1],["ct","Chí tôn",2]].forEach(([k,lab,o])=>kitStageRail.add({id:"kgf-"+k,order:60+o,label:lab,title:lab+" · chạm để mở danh sách",count:()=>kgfCount(k),active:()=>window.__kgfOpen===k,when:()=>kgfPhoneMap()&&kgfCount(k)>0,onTap:()=>{window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();kgfDrop()}}))}catch(e){}}
+ /* one rail item per label of the ONE label table (jroad8 ROAD8_LAB; the kit rail prints a fixed label): it shows on the road whose word it is */
+ ["cn","ct"].forEach((k,o)=>{const T0=window.ROAD8_LAB||{"":{}};const labs=[...new Set(Object.keys(T0).map(r=>(T0[r]||{})[k]||(T0[""]||{})[k]||kgfLab(k)))];
+  labs.forEach((lab,j)=>kitStageRail.add({id:"kgf-"+k+(j?"-"+j:""),order:61+o,label:lab,title:lab+" · chạm để mở danh sách",count:()=>kgfCount(k),active:()=>window.__kgfOpen===k,when:()=>kgfPhoneMap()&&kgfLab(k)===lab&&kgfCount(k)>0,onTap:()=>{window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();kgfDrop()}}))})}catch(e){}}
+/* a tap on a person IN the open fold goes to that person's card: the fold shuts first (no repaint), so the tab click it sends is not taken as a «tap outside» (maid-8tabs:
+   the Cung nhân / Đồng liêu chips and the court rows — Hoàng hậu, her chủ — only closed the fold) */
+function kgfShut(){if(!window.__kgfOpen)return;window.__kgfOpen=null;const R=$$("kshR");if(R)R.dataset.full=""}
+(function(){if(typeof kitCourtOpen!=="function")return;const o0=kitCourtOpen;kitCourtOpen=function(){try{kgfShut()}catch(e){}return o0.apply(this,arguments)}})();
 /* owner ruling via ROOT-56: an open group list closes with ONE tap anywhere outside it (map, tag, figure) — that tap only closes — and with Esc */
 function kgfClose(){if(!window.__kgfOpen)return false;window.__kgfOpen=null;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();try{kitStageRail.paint()}catch(e){}return true}
 document.addEventListener("click",e=>{if(!window.__kgfOpen)return;const t=e.target;if(t&&t.closest&&t.closest("#kgfdrop,#kshR .kgfopen,[data-kgf],#krail [data-rail^=kgf-]"))return;if(kgfClose()){e.stopPropagation();e.preventDefault()}},true);
@@ -42202,7 +42239,12 @@ function kgfClearEmo(){try{if(typeof kitFigSealAll==="function")kitFigSealAll()}
 window.kgfClearEmo=kgfClearEmo;
 /* Ân sủng chips (owner 11/15 04:05Z): Tai mắt + the Ân sủng facts under the court chips, same plaque card and column width, one value per line,
    labels never cut. Có thai / Lật thẻ on the chance scale (chanceLvl, j1: Rất thấp…Rất cao), never the act ladder. Bổng lộc lives only here. */
-function k3AsRows(){/* consort-only facts (Lật thẻ, Có thai, Bổng lộc…): none on the cung nữ road nor in lãnh cung (review/small-bugs-2) */if(!S||S.dead||(window.kitRoad&&kitRoad()))return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
+/* maid-8tabs #33: the cung nữ road keeps the same Ân sủng card: Tai mắt + her own facts (Hoàng thượng để ý, Công lao, Lương tháng; Tân Giả khố,
+   chuyện của chủ, tai mắt cho người khác when they apply) — the facts that sat in a separate servant box (srk = the header's title, not repeated) */
+const K3_SRVAS=["nt","merit","wage","lau","sec","spy"];
+function k3AsRows(){if(!S||S.dead)return[];const rd=window.kitRoad&&kitRoad();
+ if(rd==="srv"){const L=[["mat","Tai mắt",S.mat|0]];K3_SRVAS.forEach(k=>{const b=k3hc(k);if(b)L.push([k,k==="nt"?"Ngài để ý"/* the column width (KIT_RCOLW 140 px) cuts «Hoàng thượng để ý»; «Ngài» = Hoàng thượng as in «Ngài sủng ngươi»; tap = the full HX text */:k3lab(b),k3val(b)])});return L}
+ /* consort-only facts (Lật thẻ, Có thai, Bổng lộc…): none in lãnh cung nor at home (review/small-bugs-2) */if(rd)return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
  L.push(["mat","Tai mắt",S.mat|0]);
  let c="",n="";try{c=chanceLvl(conceiveCh())}catch(e){}try{n=chanceLvl(nightCh())}catch(e){}
  if(c)L.push(["con","Có thai",c]);if(n)L.push(["dem","Lật thẻ",n]);
@@ -42247,7 +42289,7 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
  const hL="";{const tr=k3TopRow();const tt=tr&&tr.querySelector("#k3tt");const ht=`<span class="kstl k3l1">${t1}${x}</span><span class="kstv k3l2">${t}</span>`;if(tt&&tt.dataset.h!==ht){tt.innerHTML=ht;tt.dataset.h=ht}}
  if(L.dataset.h!==hL){L.innerHTML=hL;L.dataset.h=hL}
  /* right: court chips · servant · servant-road facts */
- let y="";K3_RIGHT.forEach(k=>{const b=k3hc(k);if(!b)return;y+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":b.classList.contains("ok")?"ok":"")});
+ let y="";const rdS=window.kitRoad&&kitRoad()==="srv";K3_RIGHT.forEach(k=>{if(rdS&&(k==="srk"||K3_SRVAS.includes(k)))return;/* #33: in the Ân sủng card / the header */const b=k3hc(k);if(!b)return;y+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":b.classList.contains("ok")?"ok":"")});
  const phoneMap=!!mv&&kgfPhoneMap();const hR0=phoneMap?"":kitGroupBtns()+k3crew()+k3chitonG(),hY=y?`<div class="k3p k3py">${y}</div>`:"";
  const full=hR0+k3AnSung(false)+hY;
  /* Ân sủng under the court chips; when the column would run past the stage floor or onto a figure / name tag -> ONE "Ân sủng ›" chip */
@@ -42282,7 +42324,7 @@ function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W
  if((ol!==gl+"px"||or!==gr+"px")&&typeof window.j59lay==="function"){try{window.j59lay()}catch(e){}}}
 document.addEventListener("click",e=>{const p=e.target.closest&&e.target.closest("#kshL [data-k3], #kshR [data-k3], #kshR [data-k3go], #kgfdrop [data-k3go], .k3p[data-k3sheet], #k3tt [data-k3]");if(!p)return;
  if(p.classList.contains("kmwx"))return;e.stopPropagation();
- if(p.dataset.k3go){const b=document.querySelector(`[data-tab="${p.dataset.k3go}"]`);if(b)b.click();return}
+ if(p.dataset.k3go){if(p.dataset.k3pi!=null&&typeof PG==="object")PG[p.dataset.k3go]=+p.dataset.k3pi;/* #36: that colleague's card in the Đồng liêu pager */kgfShut();/* the open fold's «tap outside closes» guard (kgfClose) would eat this tab click */const b=document.querySelector(`[data-tab="${p.dataset.k3go}"]`);if(b)b.click();return}
  const k=p.dataset.k3,h=$$("hud2");if(!h)return;
  if(k==="lot"){const b=k3hc("lot");if(b){const c=h.classList.contains("col");h.classList.remove("col");b.click();if(c&&$$("hud2"))$$("hud2").classList.add("col")}return}
  k3Explain(k)},true);
@@ -48612,7 +48654,7 @@ const capL=s=>s==="ta"?"Ta":s;
 /* KIT §49.3 relPerson(k): ONE helper — the person object, the face drawn from THAT object, the name, the rank, the colour. Strangers
    (not met: knows(v) false — the same test that writes "Ta chưa gặp …") get the shared grey silhouette (kitStrangerOf, j61), the name stays. */
 function relPerson(k){
- if(k==="me"){const f=pMe();return{k,p:S,f,name:"Ta",rank:S.out?"Phế phi":RANKS[S.rank].n,col:fcol(f),pid:"me"}}
+ if(k==="me"){const f=pMe();return{k,p:S,f,name:"Ta",rank:S.out?"Phế phi":(typeof isSrv==="function"&&isSrv())?srvRkN()/* cung nữ road (maid-8tabs) */:RANKS[S.rank].n,col:fcol(f),pid:"me"}}
  if(k==="emp"){const f=pEmp();return{k,p:"emp",f,name:"Hoàng thượng",rank:"",col:fcol(f),pid:"emp"}}
  if(k==="th"){const f=pTH();return{k,p:"th",f,name:"Thái hậu",rank:"",col:fcol(f),pid:"th"}}
  const v=(rivals||[]).find(x=>String(x.id)===String(k));if(!v)return null;const met=typeof isKnown61==="function"?isKnown61(v):knows(v);const f=met?pv(v):kitStrangerOf(v);
@@ -48691,14 +48733,13 @@ function mkTab(k,l,s,before){const T0=$("tabs");if(!T0||T0.querySelector(`[data-
  /* staff (Cung nhân) belongs to Hậu cung: place its button inside the group (after men) so the bar order stays Hậu cung · Giao tình */
  const st=T0.querySelector('[data-tab="staff"]'),mn=T0.querySelector('[data-tab="men"]');if(st&&mn)mn.after(st);
  const rl=T0.querySelector('[data-tab="rel"]'),fc=T0.querySelector('[data-tab="fac"]');if(rl&&st)st.after(rl);if(fc&&rl)rl.after(fc);
- /* servant road: its own tabs (j42 SRVTABS) — the new keys are not servant tabs */
 })();
 try{const mt0=KG.mt&&KG.mt.keys?KG.mt.keys.slice():[];for(const k in KG)delete KG[k];Object.assign(KG,{hc:{keys:["court","rv","men","staff"],l:"Hậu cung",s:"Hậu cung"},gt:{keys:["rel","fac"],l:"Giao tình",s:"Giao tình"},mt:{keys:["story","nho","quest","req","log"],l:"Mệnh truyện",s:"Mệnh truyện"}});/* keep Mệnh truyện members other modules added earlier (jbal2 "q72" Việc nhờ) */mt0.forEach((k,i)=>{if(!KG.mt.keys.includes(k)&&!["rv","rel","fac","staff","court","men"].includes(k))KG.mt.keys.splice(Math.min(i,KG.mt.keys.length),0,k)})}catch(e){}
 try{if(window.VP&&VP.tabs)Object.assign(VP.tabs,{court:["Chí tôn","Chí tôn"],men:["Nam nhân","Nam nhân"],rel:["Ân oán","Ân oán"]})}catch(e){}
 /* the sub-tab label: long on wide panels, short ("Thánh thượng") where four segments are tight */
-(function(){if(typeof kgSub!=="function")return;const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);try{const P=$("panel");const b=P&&P.querySelector('.ksub [data-ksub="court"]');
+(function(){if(typeof kgSub!=="function")return;const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);try{const P=$("panel");const r8=k=>typeof road8Label==="function"&&road8Label(k);/* her road names its own sub-tab (jroad8 ROAD8) */const b=!r8("court")&&P&&P.querySelector('.ksub [data-ksub="court"]');
   if(b){/* oi-render: both widths say "Chí tôn": no width read (it forced a layout), no rewrite when equal */if(b.innerHTML!=="Chí tôn")b.innerHTML="Chí tôn";if(b.title!=="Chí tôn")b.title="Chí tôn"}
-  const r2=P&&P.querySelector('.ksub [data-ksub="rel"]');if(r2&&T(r2.textContent)!=="Ân oán")r2.textContent="Ân oán"}catch(e){}return r}})();
+  const r2=!r8("rel")&&P&&P.querySelector('.ksub [data-ksub="rel"]');if(r2&&T(r2.textContent)!=="Ân oán")r2.textContent="Ân oán"}catch(e){}return r}})();
 
 /* court sub-tab: Hoàng thượng + Thái hậu, the same pager + person card; their acts = the day's act cards about them (from the Hành sự deck) */
 function deckFor(re){try{return (deck||[]).map((a,i)=>[a,i]).filter(([a])=>a&&!a.done&&re.test((a.n||"")+" "+(a.x||""))).map(([a,i])=>cardH(a,i))}catch(e){return[]}}
@@ -48736,7 +48777,7 @@ if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function
   const el=$("panel");faceInit();const gm=document.querySelector(".game");if(gm)gm.classList.add("cardtab");const h=tab==="court"?courtTabHTML():menTabHTML();
   const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);kitFix(el);panelScrollKeep(el,keep)}}
 /* servant road keeps its own tab set */
-(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const srv=typeof isSrv==="function"&&isSrv();document.querySelectorAll('#tabs [data-tab="court"],#tabs [data-tab="men"]').forEach(b=>{if(srv)b.style.display="none"})}catch(e){}return r}})();
+/* maid-8tabs (owner 21/11 ~03:15Z): Chí tôn and Nam nhân are sub-tabs on the cung nữ road too (no servant-only hiding) */
 
 /* ---------- 4. Người chạy việc ---------- */
 if(typeof bestSent==="function"){const b0=bestSent;bestSent=function(p){try{if(p===S&&S.runner!=null){const s=(S.staff||[]).find(x=>x.sid===S.runner&&!x.spyFor);if(s)return s;S.runner=null}}catch(e){}return b0.apply(this,arguments)}}
@@ -49019,8 +49060,8 @@ const HTRO=typeof ResizeObserver==="function"?new ResizeObserver(()=>htFitSub())
 (function(){const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);htFitSub();requestAnimationFrame(htFitSub);
  try{const nav=$("panel").querySelector(":scope > .ksub, :scope > .kpbar > .ksub");if(HTRO&&nav&&!nav.__htro){nav.__htro=1;HTRO.observe(nav)}}catch(e){}return r}})();
 addEventListener("resize",()=>requestAnimationFrame(htFitSub));
-/* servant road / after death: the extra keys are not tabs */
-(function(){const r0=render;render=function(){const x=r0.apply(this,arguments);try{const off=(typeof isSrv==="function"&&isSrv())||!kgOn();HTK.slice(1).forEach(k=>{const b=document.querySelector(`#tabs [data-tab="${k}"]`);if(b)b.style.display=off?"none":""});
+/* after death: the extra keys are not tabs (maid-8tabs, owner 21/11 ~03:15Z: the cung nữ road has the same Hoàng tự sub-tabs) */
+(function(){const r0=render;render=function(){const x=r0.apply(this,arguments);try{const off=!kgOn();HTK.slice(1).forEach(k=>{const b=document.querySelector(`#tabs [data-tab="${k}"]`);if(b)b.style.display=off?"none":""});
   if(off&&HTK.slice(1).includes(tab))tab="kid"}catch(e){}return x}})();
 
 /* the empty card = the kit's kitEmpty (j79): picture + title + hint lines (never a blank page) */
@@ -49124,7 +49165,7 @@ function qtTab(){const L=qtList();const head=`<div class="ph"><span>Con các nh�
  if(!L.length)return head+htEmpty("https://ctm-img.victoria-tntt.workers.dev/img/act-cat-trieu-chinh.webp","Chưa có mối nào",["Mỗi tháng các nhà quyền thần đưa con đến tuổi vào danh sách kén rể, kén dâu."]);
  return head+pager("qt",L.map(it=>({f:it.kind==="q"?qnFace(it.x):h54Face(it.x),name:htKn(it.x)?shortN(it.x.name):"Người lạ",sep:it.sep})),i=>qtCard(L[i]))}
 window.htTabHTML=function(t){return `<div class="pgwrap kht">`+({kid:kidTab,kvo:kvTab,kin:kinTab,hon:honTab,qt:qtTab}[t]||kidTab)()+`</div>`};
-if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function(){if(!HTK.includes(tab)||!S||S.dead||(typeof isSrv==="function"&&isSrv()))return p0.apply(this,arguments);
+if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function(){if(!HTK.includes(tab)||!S||S.dead)return p0.apply(this,arguments);/* the cung nữ road too (maid-8tabs) */
   const el=$("panel");faceInit();const gm=document.querySelector(".game");if(gm)gm.classList.add("cardtab");const h=htTabHTML(tab);
   const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);kitFix(el);panelScrollKeep(el,keep)}}
 /* ---------- CSS ---------- */
@@ -49977,13 +50018,13 @@ function petCareW(P){const c=P.care||0;return c>=BAL.pet.life.careOk?["Khỏe","
    Shows the pet that follows her (else the first); 0 pets = one empty slot + "Chưa nuôi con nào". Tap = the Thú cưng sub-tab of Tư trang. */
 function petStageTxt(P){return typeof petStage==="function"&&BAL.pet&&BAL.pet.stages?BAL.pet.stages[petStage(P)]:""}
 function petAgeTxt(P){const w=Math.max(0,tsbWk()-(P.at||0));return (w>=48?Math.floor(w/48)+" tuổi":Math.floor(w/4)+" tháng tuổi")}
-function petSideHTML(){if(!S||!tsbOn()||(typeof isSrv==="function"&&isSrv()))return"";const L=tsbPets(S);const i=Math.max(0,L.findIndex((P,j)=>j===S.petOn)),P=L[i];let slot;
+function petSideHTML(){const sv=typeof isSrv==="function"&&isSrv();if(!S||!(tsbOn()||sv))return"";/* the cung nữ road too: the same (empty) pet slot (maid-8tabs) */const L=sv?[]:tsbPets(S);const i=Math.max(0,L.findIndex((P,j)=>j===S.petOn)),P=L[i];let slot;
  if(P){const T=petT(P),cw=petCareW(P);slot={k:"p"+i,label:T.n,lc:KIT_GRADE[T.tr].c,i,item:{src:petPSrc(P),name:T.n,grade:T.tr,lux:petLux(P.t),tip:`${T.n} · ${PET_TIER[T.tr]} · chạm để mở Thú cưng`},
    info:`<span>${petAgeTxt(P)}</span>${S.petOn===i?kitChip(PET_SN[T.st],1+(T.sacX||0)):"<span>ở tẩm cung</span>"}${L.length>1?`<span>+${L.length-1} con nữa</span>`:""}`}}
  else slot={k:"e0",label:"Chưa nuôi con nào",i:0,item:null,ghost:petSrc("cho")};
  return kitEquipSlots({key:"pets",title:"Thú cưng",slots:[slot],onPick:()=>{KINV_SUB="thu";try{localStorage.setItem("hclh-inv-sub","thu")}catch(e){}try{renderPanel()}catch(e){render()}},col:true})}
 /* Tư trang › Thú cưng sub-tab: every pet as a kit card (kitSkillCard) + Chăm (jpetcare) / Cho theo hầu / Gửi về, and the shop button */
-function petPanelHTML(){if(!S||!tsbOn()||(typeof isSrv==="function"&&isSrv()))return"";const L=tsbPets(S),free=petMax(S)-L.length;
+function petPanelHTML(){if(!S||S.dead)return"";/* maid-8tabs (owner 21/11 ~03:15Z): the cung nữ sees the same Tư trang sub-tabs; no pets yet = the kit empty card, never a missing tab */if(typeof isSrv==="function"&&isSrv())return kitEmpty("Thú cưng","Phận cung nữ chưa được nuôi thú cưng; được phong phi tần mới nuôi được.");if(!tsbOn())return"";const L=tsbPets(S),free=petMax(S)-L.length;
  const shop=pbtn(`data-petshop="1"`,"Nhờ thái giám tìm thú nuôi",free>0?`tốn: 1 khắc, Bạc · thành: một con thú nhỏ về tẩm cung (còn ${free} ô)`:"",free>0?(typeof whyTime==="function"?whyTime(1):""):"hết ô nuôi");
  const cards=L.map((P,i)=>{const T=petT(P),cw=petCareW(P),cur=tsbPetOn(S),B=[];
   B.push(pbtn(`data-pet="care" data-i="${i}"`,`Chăm ${T.n.replace(/^./,c=>c.toLowerCase())}`,`thành: cho ăn, tắm chải, chơi (mỗi việc ${BAL.pet.khac} khắc) · No, Sạch, Vui, Tình cảm tăng`,""));
@@ -52862,7 +52903,7 @@ function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n
 
 /* ================= SERVANT / MA MA ROAD (owner 15/11 20:05Z): the merit rise of a cung nữ goes through an exam too =================
    Her: when j42 srvMonth finds the merit and the mistress's trust enough for the next maid rank, the rise is NOT given: a window of BAL.ex.win
-   tuần opens (card «Khảo hạch Nội vụ phủ» in Phận sự); pass = the rise at once (the old j42 rise: rank, merit 0, Chủ tin +5, «Thăng bậc»);
+   tuần opens (card «Khảo hạch Nội vụ phủ» in Hành sự); pass = the rise at once (the old j42 rise: rank, merit 0, Chủ tin +5, «Thăng bậc»);
    fail / missed window = wait BAL.ex.srvCd[to] months. The choice «Ở lại làm ma ma» (age 25) is an exam the same way (target "mama").
    Rounds = the low-rank exam (lễ nghi + nữ công, exRounds tier 0); examiner = a ma ma of Nội vụ phủ; her mistress's trust (Chủ tin) moves
    the bar like the examiner's liking (BAL.ex.attDiv). Bar BAL.ex.srvBar[to] (to 1..BAL.srvRk.nq, BAL.srvRk.mama = ma ma; maid-ladder-6).
@@ -52885,7 +52926,7 @@ function exSrvChance(P){const rnd=exRng(((S.turn||0)*131+exSrvIx(P.to)*17+P.vir*
 function exSrvGate(to){if(!exOn()||!isSrv())return false;const e=exSrvS();if(e.to==="mama"&&(e.w1!=null||e.pend))return true;if(e.to!==to){S.srv.ex={to};return exSrvOpen(to)}
  if(e.pend||e.w1!=null)return true;if(e.cd>S.turn)return true;return exSrvOpen(to)}
 function exSrvOpen(to){const e=exSrvS();const w=wk();e.to=to;e.w0=w;e.w1=w+BAL.ex.win-1;e.lapse=0;
- log(`<b class="g">Được dự khảo hạch ${exSrvName(to)}</b>: ma ma Nội vụ phủ khảo, hạn đến hết ${exDateW(e.w1)}. Thẻ «Khảo hạch Nội vụ phủ» ở Phận sự.`);exSrvAdd();return true}
+ log(`<b class="g">Được dự khảo hạch ${exSrvName(to)}</b>: ma ma Nội vụ phủ khảo, hạn đến hết ${exDateW(e.w1)}. Thẻ «Khảo hạch Nội vụ phủ» ở Hành sự.`);exSrvAdd();return true}
 /* the rise itself (the old j42 lines), given on a pass */
 function exSrvRise(to){if(to==="mama"){S.srv.mama=1;log("Ngươi ở lại cung làm ma ma.");return}
  const m=srvM();S.srv.rk=Math.max(S.srv.rk||0,to);S.srv.mp=0;S.tin=cl(S.tin+BAL.eff.jexam.tinExSrvRise,0,100);log(`<b class="g">Được thăng ${SRK.maid[S.srv.rk]}.</b>`);
@@ -60686,6 +60727,19 @@ function bacFairList(L){const F=BAL.bacFair,vb=bacV1("bac");const free=L.filter(
 const TSA={};
 function tsS(){S.ts=S.ts||{};return S.ts}
 function tsOn(){return !!(typeof S!=="undefined"&&S&&!S.dead&&!(typeof isSrv==="function"&&isSrv()))}
+/* owner 21/11 ~03:25Z mark #36 (verbatim in OD): «cột ở bên phải của cái màn hình nền sân khấu đó còn có cái thông tin như là nguy hiểm … bên cung nữ cũng phải có những cái
+   cột thông tin đó». The two right-column boxes (Nguy hiểm chung, Xét phẩm) stand on the cung nữ road too, same kit rows, same panels; only what they read is hers:
+   Nguy hiểm chung = the same sum over the consorts (tsDangerOf, every person the same rule), Xét phẩm = the conditions of HER next rung (j42 srvMonth, one gate). */
+function tsBoxOn(){return !!(typeof S!=="undefined"&&S&&!S.dead&&!S.out)}
+function tsSrv(){return typeof isSrv==="function"&&isSrv()}
+/* her next rung: the srvMonth gate, row by row (Công lao · bậc cung chủ cho phép · Chủ tin; then the Nội vụ phủ exam, jexam exSrv*) */
+function tsSrvNext(){try{const r=S.srv.rk|0;if(S.srv.mama||r>=SRK.maid.length-1)return null;return SRK.maid[r+1]}catch(e){return null}}
+function tsSrvRows(){const r=S.srv.rk|0,need=srvMpNeed(r),mx=srvMax(),nx=SRK.maid[r+1];const L=[];
+ L.push([Math.floor(S.srv.mp)>=need,`Công lao ${Math.floor(S.srv.mp)}/${need}`]);
+ L.push([r<mx,r<mx?`Cung chủ cho lên tới ${SRK.maid[mx]}`:`Cung chủ phẩm này chỉ cho tới ${SRK.maid[mx]||SRK.maid[r]}`]);
+ L.push([(S.tin|0)>=BAL.srvx.tinUp,`Chủ tin ${S.tin|0}/${BAL.srvx.tinUp}`]);
+ if(S.srv.lau>0)L.push([false,`Đang ở Tân Giả khố (còn ${S.srv.lau} tuần)`]);
+ return L}
 /* palace voice: the maid's warning is a pool (jvoice kLine, no repeat within BAL.voice.noRepeat tuần); {V} = who asks around */
 const TS_WARN=["“Dạo này người các cung nhìn {goi} không thiện ý. Nô tỳ nghe bên {V} hỏi giờ giấc cung ta.”","“{Goi}, người bên {V} cứ lảng vảng quanh cửa cung mình. Nô tỳ thấy không yên.”",
  "“Tai vách mạch rừng, {goi} ạ. Bên {V} vừa dò hỏi chuyện ăn uống của cung ta.”","“Nô tỳ nghe phong thanh, {V} đang để mắt đến {goi}. Mấy hôm nay {goi} nên cẩn trọng.”",
@@ -60808,12 +60862,18 @@ function tsDWord(n){let w=TS_DW[0][1];for(const [a,b] of TS_DW)if(n>=a)w=b;retur
 function tsDangerPanel(){if(!S||S.dead)return;const D=tsDangerOf(S,true);
  const facts=D.top.slice(0,6).map(x=>({who:x.v,text:`${kitName?kitName(x.v):x.v.name}: mức ${BANDS[x.b][1]} · đang ghen ${x.v.ghen||0} · oán ${Math.round(oan(x.v,S)||0)}`}));
  const sec=`<div class="kpsec"><h4 class="kpst">Thanh chung</h4>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,D.n>=BAL.tsDanger.hot?"r":"t"],["Gộp từ",`${D.top.length} người ngươi đã rõ lòng`,"n"],D.unk?["Chưa rõ",`${D.unk} người ngươi chưa rõ lòng (dò la, tai mắt để biết)`,"n"]:null].filter(Boolean))}</div>`+
-  `<div class="kpsec"><h4 class="kpst">Cách tính</h4>${tsRows([["Mỗi người","Ghen, Oán hoặc ghét (lấy cao nhất) + tính nết → mức hại (thang nguy hiểm)","n"],["Gộp","cơ một tháng có ít nhất một người ra tay với ngươi, từ 0 đến 100","n"],["Áp cho","mọi phi tần, cùng một cách tính","n"]])}</div>`+
+  `<div class="kpsec"><h4 class="kpst">Cách tính</h4>${tsRows([["Mỗi người","Ghen, Oán hoặc ghét (lấy cao nhất) + tính nết → mức hại (thang nguy hiểm)","n"],["Gộp","cơ một tháng có ít nhất một người ra tay với ngươi, từ 0 đến 100","n"],["Áp cho",tsSrv()?"mọi người trong cung, phi tần hay cung nữ, cùng một cách tính":"mọi phi tần, cùng một cách tính","n"]])}</div>`+
   (facts.length?`<div class="kpsec"><h4 class="kpst">Người nặng lòng nhất</h4>${tsFacts(facts)}</div>`:"");
  const g=tsS().guard>wk();const opts=[tsOptGuard(),tsOptGifts(D),{n:"Thôi",fx:{}}].filter(Boolean);/* "Thôi" = the kit ✕ (KIT 32.10), never a button */
  Q.unshift({t:"Nguy hiểm chung",h:sec,opts,showOut:true,tsk:"danger"});showModal()}
-function tsOptGuard(){const s=tsS();if(s.guard>wk())return tsOpt({n:"Đóng cửa giữ mình",need:[{t:`chưa giữ mình (còn ${s.guard-wk()} tuần)`,ok:false}],duoc:["kẻ muốn hại khó ra tay"]});
- return tsOpt({n:"Đóng cửa giữ mình",fx:{sung:-2},need:[{t:"không cấm túc",ok:!S.confined}],duoc:["2 tuần: mưu hại nhắm vào ngươi thành ít đi một nửa"],kem:["ít gặp Hoàng thượng"],go:()=>{s.guard=wk()+2;log("Ngươi đóng cửa cung, dặn kẻ hầu canh giữ nghiêm, hai tuần không ra ngoài nhiều.")}})}
+/* ONE act, two roads (rv maid-8tabs FAIL 1, laws 2/3/4/6): a consort shuts her palace door (cost Sủng, sees the Emperor less); a cung nữ has no palace
+   door, no servants and no Sủng — she keeps to the hạ nhân room and her chủ's side (cost Chủ tin, her Sủng bar: the chủ gets less of her). Same gain
+   (s.guard: jts npcAct wrapper + jagharm haGuardW read it for S on every road), same weeks; numbers from BAL.tsGuard. */
+function tsGuardW(){const G=BAL.tsGuard,srv=tsSrv();return srv?{n:"Nép mình theo hầu chủ",fx:{tin:-G.tin},need:{t:"không ở Tân Giả khố",ok:!(S.srv.lau>0)},kem:"chủ ít thấy mặt ngươi",
+  log:`Ngươi ở yên trong phòng hạ nhân, chỉ theo sát bên chủ, ${G.wk} tuần không đi đâu một mình.`}
+ :{n:"Đóng cửa giữ mình",fx:{sung:-G.sung},need:{t:"không cấm túc",ok:!S.confined},kem:"ít gặp Hoàng thượng",log:`Ngươi đóng cửa cung, dặn kẻ hầu canh giữ nghiêm, ${G.wk} tuần không ra ngoài nhiều.`}}
+function tsOptGuard(){const s=tsS(),A=tsGuardW(),G=BAL.tsGuard;if(s.guard>wk())return tsOpt({n:A.n,need:[{t:`chưa giữ mình (còn ${s.guard-wk()} tuần)`,ok:false}],duoc:["kẻ muốn hại khó ra tay"]});
+ return tsOpt({n:A.n,fx:A.fx,need:[A.need],duoc:[`${G.wk} tuần: mưu hại nhắm vào ngươi thành ít đi một nửa`],kem:[A.kem],go:()=>{s.guard=wk()+G.wk;log(A.log)}})}
 /* =============== D19 (owner OD:L752) · BIẾU QUÀ LÀM LÀNH — ONE act, three roads (review/d19-gift-work) ===============
    The act "Biếu quà làm lành" (Nguy hiểm chung panel + the maid's warning) opens ONE choice of three kit option cards:
    · Lễ bạc — as before: every person who bears her ill will (≤ 4) gets BAL.tsGift.bac bạc of gifts;
@@ -60879,27 +60939,32 @@ function tsNpcGift(a,D){const L=tsGiftL(D);if(!L.length)return"";const G=BAL.tsG
 /* the guard: same rule for everyone (a target who keeps to herself is harder to reach) */
 (function(){if(typeof npcAct!=="function")return;const n0=npcAct;npcAct=function(v,t){try{const g=t===S?tsS().guard:t&&t.tsGuard;if(g>wk()&&roll(50))return""}catch(e){}return n0.apply(this,arguments)}})();
 /* NPC side: a consort whom many want to harm closes her doors / sends gifts, by her own nature (same costs) */
-function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.tsGuard>wk())continue;if(!npcWhy("tsGuard",{v}))continue;v.tsGuard=wk()+2;v.sung=cl((v.sung||0)-2,0,100);
+function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.tsGuard>wk())continue;if(!npcWhy("tsGuard",{v}))continue;v.tsGuard=wk()+BAL.tsGuard.wk;v.sung=cl((v.sung||0)-BAL.tsGuard.sung,0,100);/* the same act and cost as hers (law 1, BAL.tsGuard) */
   /* D19: and she sends a peace gift by the same rule as the player (tsNpcGift) */try{const t=tsNpcGift(v,tsDangerOf(v,false));if(t&&typeof newsAdd==="function")newsAdd(v,"gift",t)}catch(e){console.error("tsNpcGift",e)}}}
 /* the HUD chip (Tình trạng row) + điềm báo when her own known bar climbs a step */
 /* review ts-a FAIL 2: the chip sits in the stage's right column (K3_RIGHT), never on the top bar's buổi line (it broke the date line on Fold) */
 if(window.K3_RIGHT)window.K3_RIGHT.push("tsnh");
-(function(){if(typeof renderHud2!=="function")return;const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{const el=$("hud2");if(el&&tsOn()&&!S.out){const D=tsDangerOf(S,true);
+(function(){if(typeof renderHud2!=="function")return;const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{const el=$("hud2");if(el&&tsBoxOn()){const D=tsDangerOf(S,true);
   el.insertAdjacentHTML("beforeend",`<button class="hc ${D.n>=BAL.tsDanger.hot?"hot":D.n<BAL.tsDanger.calm?"ok":""}" data-hx="tsnh">Nguy hiểm chung: ${D.n}</button>`)}}catch(e){}return r}})();
-document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsnh"],[data-k3="tsnh"]');if(!b||!tsOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsDangerPanel()},true);
+document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsnh"],[data-k3="tsnh"]');if(!b||!tsBoxOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsDangerPanel()},true);
 function tsDangerOmen(){const s=tsS();const D=tsDangerOf(S,true);const st=TS_DW.filter(x=>D.n>=x[0]).length-1;const was=s.dStep||0;s.dStep=st;if(st<=was||st<2||!D.top.length)return;
  const x=D.top[0];tsPanel({t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} khẽ thưa: ${kLine("ts:warn",kTP("ts:warn")||TS_WARN,{sp:{srv:"f"},ls:S,t:kToneSt(S.maid,S.maid&&S.maid.name)}).replace(/\{V\}/g,x.v.name)}</p>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,"r"]])}`,
   opts:[tsOptGuard(),tsOptGifts(D),tsOpt({n:"Ghi nhớ, cứ như thường",duoc:[`Sức +${BAL.cv.rest}`],kem:["kẻ muốn hại vẫn rình"],go:()=>apply({suc:BAL.cv.rest})})].filter(Boolean)})}
 
 /* =============== Ý 5 · NGƯỠNG XÉT PHẨM HIỆN TRƯỚC (promoReqP j8: cùng điều kiện cho mọi phi tần) =============== */
 function tsPromoRows(){const L=promoReqP(S);return L.map(([ok,t])=>[ok?"Đủ":"Thiếu",t,ok?"g":"r"])}
-function tsPromoPanel(pre){if(!tsOn()||S.out||S.rank>=7)return;const L=promoReqP(S);if(!L.length)return;const miss=L.filter(x=>!x[0]).length;const nx=RANKS[S.rank+1].n;
+function tsPromoPanel(pre){if(tsSrv()){if(!pre)tsSrvPromoPanel();return}if(!tsOn()||S.out||S.rank>=7)return;const L=promoReqP(S);if(!L.length)return;const miss=L.filter(x=>!x[0]).length;const nx=RANKS[S.rank+1].n;
  const m={t:`Xét phẩm cuối tháng · ${nx}`,h:`${pre?`<p>Cuối tháng này Nội vụ phủ dâng danh sách lên Hoàng thượng xét tấn phong. Còn ${3-S.tuan} tuần.</p>`:""}<div class="kpsec"><h4 class="kpst">Điều kiện lên ${nx}</h4>${tsRows(tsPromoRows())}</div>${tsRows([["Ghi chú",miss?`thiếu ${miss} điều: đủ hết thì cuối tháng được sắc phong`:"đủ cả: cuối tháng được sắc phong nếu không gì đổi","n"]])}`,btn:"Đã hiểu",tsk:"promo"};
  if(pre)Q.push(m);else{Q.unshift(m);showModal()}}
+/* cung nữ: the same panel (title, kit rows «Đủ / Thiếu», note) on her next rung */
+function tsSrvPromoPanel(){if(!tsBoxOn()||!tsSrv())return;const nx=tsSrvNext();if(!nx)return;const L=tsSrvRows();const miss=L.filter(x=>!x[0]).length;
+ const ex=typeof exOn==="function"&&exOn();
+ Q.unshift({t:`Xét phẩm cuối tháng · ${nx}`,h:`<div class="kpsec"><h4 class="kpst">Điều kiện lên ${nx}</h4>${tsRows(L.map(([ok,t])=>[ok?"Đủ":"Thiếu",t,ok?"g":"r"]))}</div>${tsRows([["Ghi chú",(miss?`thiếu ${miss} điều: đủ hết thì cuối tháng Nội vụ phủ ghi công`:"đủ cả: cuối tháng Nội vụ phủ ghi công")+(ex?", rồi ngươi dự khảo hạch Nội vụ phủ (Hành sự); đỗ thì được thăng":", được thăng"),"n"]])}`,btn:"Đã hiểu",tsk:"promo"});showModal()}
 if(window.K3_RIGHT)window.K3_RIGHT.push("tsxp");
-(function(){if(typeof renderHud2!=="function")return;const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{const el=$("hud2");if(el&&tsOn()&&!S.out&&S.rank<7){const L=promoReqP(S);if(L.length){const miss=L.filter(x=>!x[0]).length;
+(function(){if(typeof renderHud2!=="function")return;const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{const el=$("hud2");if(el&&tsBoxOn()&&tsSrv()&&tsSrvNext()){const miss=tsSrvRows().filter(x=>!x[0]).length;
+  el.insertAdjacentHTML("beforeend",`<button class="hc ${miss?"":"ok"}" data-hx="tsxp">Xét phẩm: ${miss?`thiếu ${miss}`:"đủ"}</button>`)}else if(el&&tsOn()&&!S.out&&S.rank<7){const L=promoReqP(S);if(L.length){const miss=L.filter(x=>!x[0]).length;
   el.insertAdjacentHTML("beforeend",`<button class="hc ${miss?"":"ok"}" data-hx="tsxp">Xét phẩm: ${miss?`thiếu ${miss}`:"đủ"}</button>`)}}}catch(e){}return r}})();
-document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsxp"],[data-k3="tsxp"]');if(!b||!tsOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsPromoPanel(false)},true);
+document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsxp"],[data-k3="tsxp"]');if(!b||!tsBoxOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsPromoPanel(false)},true);
 /* festivals (j3/j8 festival): the two judged banquets say beforehand what is judged and where she stands */
 const TS_FEST={1:["Yến tiệc đầu xuân","sac","Sắc và điệu múa"],7:["Thi tài ngày Thất tịch","tai","Tiếng đàn, lời thơ"]};
 function tsFestScore(p,k){return k==="sac"?effSac(p)+artW2(p,"vu")*6:p.tai+(artW2(p,"cam")+artW2(p,"thi"))*3}
@@ -63135,10 +63200,11 @@ const INTRO=[
    ["Mệnh truyện","truyện riêng của thân phận, mở từng chương; cuộn chiếu Mục tiêu ở cột nút bên trái màn luôn cho biết chương này cần gì"],
    ["Kết cục","mỗi kiếp khép lại bằng một kết: kết hay, kết dở, và những kết hiếm khó gặp"]])},
  {t:"Chơi thế nào",p:()=>ia("Hành sự"),h:()=>rows([["Buổi · khắc","mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi tháng ba tuần; mỗi buổi "+(BAL.time.khac)+" khắc, việc nào cũng tốn khắc; làm được hay không là tính theo tổng số khắc còn lại trong ngày, việc dài hơn buổi thì kéo sang buổi sau"],
-   [srv()?"Phận sự":"Hành sự","chọn việc mà làm; thẻ ghi cơ may, cái giá, cái được"],["Dư đồ","đi tới các nơi trong cung, gặp người"],
-   srv()?["Đồng liêu","người làm cùng: kết bạn, đề phòng kẻ vu cáo"]:["Hậu cung · Giao tình","người trong cung; ai thương, ai ghen, ai oán {x}"],
-   srv()?null:["Tài nghệ","học cầm kỳ thi họa, nữ công; mỗi bài là một trò nhỏ"],
-   srv()?null:["Tư trang","y phục, trang sức; sáng sáng điểm trang trước khi gặp người"],
+   /* maid-8tabs (owner 21/11 ~03:15Z): the same 8 tabs on every road; the cung nữ finds her Đồng liêu under Hậu cung */
+   ["Hành sự","chọn việc mà làm; thẻ ghi cơ may, cái giá, cái được"],["Dư đồ","đi tới các nơi trong cung, gặp người"],
+   ["Hậu cung · Giao tình",srv()?"người trong cung; đồng liêu ở Hậu cung: kết bạn, đề phòng kẻ vu cáo":"người trong cung; ai thương, ai ghen, ai oán {x}"],
+   ["Tài nghệ","học cầm kỳ thi họa, nữ công; mỗi bài là một trò nhỏ"],
+   ["Tư trang","y phục, trang sức; sáng sáng điểm trang trước khi gặp người"],
    ["Sự việc","tin trong cung, sự kiện, lời mời tự tìm đến; {x} chọn cách đáp"],["Sang buổi","hết khắc thì qua buổi; qua buổi tối là sang ngày mới, cũng là sang tuần mới"]].filter(Boolean))},
  {t:"Được · mất",p:()=>ia("Luân hồi")||ia("Mệnh truyện"),h:()=>rows([["Mất","bệnh nặng, sinh nở gặp nạn, bị người hại thì hết kiếp","r"],
    ["Lãnh cung","bị phế vào lãnh cung là mất phẩm vị; còn sống là còn đường về","r"],
@@ -63333,7 +63399,7 @@ const bot=()=>{try{return screenOff()}catch(e){return false}};
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const plain=s=>String(s==null?"":s).replace(/<[^>]+>/g,"");
 /* where a tab lives in today's bottom bar (Hành sự / Dư đồ / Hậu cung / Giao tình / Hoàng tự / Tư trang / Tài nghệ / Mệnh truyện) */
-function tabName(k){try{if(k==="act")return isS()?"Phận sự":"Hành sự";if(isS()&&typeof SRVTABS==="object"&&SRVTABS&&SRVTABS[k])return SRVTABS[k];const b=document.querySelector(`#tabs [data-tab="${k}"]`);
+function tabName(k){try{{const r8=typeof road8Name==="function"?road8Name(k):"";if(r8)return r8}/* cung nữ / home road: the same 8 tabs, her sub-tab names (jroad8) */if(k==="act")return "Hành sự";const b=document.querySelector(`#tabs [data-tab="${k}"]`);
   if(b&&b.offsetParent)return (b.dataset.l0||b.textContent).trim();if(typeof KG==="object")for(const g in KG)if(KG[g].keys.includes(k))return KG[g].l;
   return b?(b.dataset.l0||b.textContent).trim():k}catch(e){return k}}
 /* ---------- data ---------- */
@@ -63348,7 +63414,7 @@ function chapter(){try{/* a road with its own chapter (jkc at home before the tu
  const s=typeof STORY==="object"&&S.origin&&STORY[S.origin.k];if(s){let hn="";try{hn=s.hint?s.hint():""}catch(e){}return{kind:"v1",n:1,max:s.n||0,t:s.t,g:plain(s.goal),next:hn}}}catch(e){console.error("goal",e)}return null}
 /* act: matched anywhere in the card title (.kan may start with a small portrait label, e.g. "Hoàng hậu")
    the 2–3 concrete things to do next, each with where to tap (tab + act card) */
-function nextSteps(C){if(C&&C.todo)return C.todo.slice(0,3).map(x=>Object.assign({},x,{where:(x.tl||tabName(x.tab))+(x.card?` › thẻ ${x.card}`:"")}));const L=[];const when=(S.buoi||0)===0?"sáng nay":"sáng mai";
+function nextSteps(C){if(C&&C.todo)return C.todo.slice(0,3).map(x=>Object.assign({},x,{where:((typeof road8Name==="function"&&road8Name(x.tab))||x.tl||tabName(x.tab))+(x.card?` › thẻ ${x.card}`:"")}));const L=[];const when=(S.buoi||0)===0?"sáng nay":"sáng mai";
  const hh=(()=>{try{return typeof qOn==="function"&&qOn()&&rivals[0]&&rivals[0].alive}catch(e){return false}})();
  if(C&&C.kind==="arc"&&C.wait)L.push({t:"Quyết hồi truyện đang chờ",why:"hồi truyện chờ lựa chọn của ngươi",tab:"story"});
  if(isS()){
@@ -63998,7 +64064,7 @@ const RULES=[
  ["người bạn","người quen"],["Bạn trong cung","Người quen trong cung"],["Bạn (thiện","Người quen (thiện"],["cần bạn ","cần người quen "],
  ["nghe bạn là","nghe người quen là"],["bạn mạnh","kẻ mạnh"],["bỏ bạn ","bỏ người quen "],
  /* the player's own acts: narration calls her "ngươi" */
- ["Mời đến cung ta","Mời nàng sang cung"],["Mục Việc:","Mục Phận sự:"],
+ ["Mời đến cung ta","Mời nàng sang cung"],
  /* owner 11/15 (final names): narrator / UI text names the player in the FIRST person — "ngươi" → "ta" ("Con của ta", "Hoàng hậu
     với ta", "Ta với Quý phi"). NPC speech keeps "ngươi": anything inside “…” (also a quote that opens or closes in another text node)
     is left as it is. Applied on screen only, so code that matches "ngươi" in logs (and old saves) is unchanged. List: NAMING_APPLIED.md */
@@ -64071,7 +64137,7 @@ function fixEl(el){if(el.nodeType===3)return fixText(el);if(el.nodeType!==1||SKI
 const TABS={act:["Hành sự","Hành sự"],go:["Dư đồ","Dư đồ"],rv:["Phi tần","Phi tần"],rel:["Ân oán","Ân oán"],court:["Chí tôn","Chí tôn"],men:["Nam nhân","Nam nhân"],fac:["Phe phái","Phe"],staff:["Cung nhân","Cung nhân"],kid:["Hoàng tự","Hoàng tự"],inv:["Tư trang","Tư trang"],art:["Tài nghệ","Tài nghệ"],story:["Mệnh truyện","Mệnh"],log:["Sổ ghi","Sổ ghi"]};
 function patchTabs(){document.querySelectorAll("#tabs button[data-tab]").forEach(b=>{const T=TABS[b.dataset.tab];if(!T)return;
   if(b.dataset.l0!=null){b.dataset.l0=T[0];b.dataset.s0=T[1]}if(!(typeof isSrv==="function"&&isSrv())){b.textContent=T[0];b.dataset.s=T[1]}})}
-try{if(typeof SRVTABS==="object"&&SRVTABS){if(SRVTABS.act==="Việc")SRVTABS.act="Phận sự";if(SRVTABS.story==="Thân phận")SRVTABS.story="Thân phận"}}catch(e){}
+/* maid-8tabs: the cung nữ tab names live in jroad8 ROAD8 (the SRVTABS rename is gone) */
 try{if(typeof HX==="object"){HX.hh="Lòng Hoàng hậu đối với ngươi. Càng cao càng được che chở; thấp quá sẽ bị làm khó, chặn đường thăng phẩm.";
   HX.date="Ngày tháng trong cung. Mỗi tháng ba tuần (thượng, trung, hạ tuần), mỗi tuần bốn buổi.";
   /* jreg: help texts added by later modules get the same wording fix */
@@ -72410,11 +72476,9 @@ function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.y
    kitRows §51, kitSkillCard §21, pbtn / cardH act cards §6, k3row top-bar chip §31.12) ---------- */
 const KCTABS={act:"Khuê phòng",go:"Dư đồ",rv:"Gia tộc",staff:"Giao du",art:"Tài nghệ",kid:"Thư từ",inv:"Tư trang",story:"Mệnh truyện"};/* 8 tabs = today's 8-column bar (Sổ ghi stays reachable through its links) */
 const KCG={act:"khue",rv:"fam",staff:"soc",art:"art",kid:"mail"};
-function kcTabs(){const on=isKc();document.querySelectorAll("#tabs button").forEach(b=>{const t=b.dataset.tab;if(!t)return;if(b.dataset.kl0==null){b.dataset.kl0=b.textContent;b.dataset.ks0=b.dataset.s||""}
- if(on){b.style.display=t in KCTABS?"":"none";const L=KCTABS[t];b.textContent=L||b.dataset.kl0;b.dataset.s=L||b.dataset.ks0}else if(b.dataset.kon){b.style.display="";b.textContent=b.dataset.kl0;b.dataset.s=b.dataset.ks0}b.dataset.kon=on?"1":""})}
-(function(){const r0=render;render=function(){if(isKc()&&!(tab in KCTABS))tab="act";const r=r0.apply(this,arguments);
- try{kcTabs();if(typeof tabsFitR==="function")tabsFitR();/* fit after the home tabs are shown / hidden */if(isKc()){kcHud();document.querySelectorAll("#tokens > p.empty").forEach(e=>e.remove());/* the scene line already says "Không gặp ai" */
-  const P=$("panel");const n=P&&P.querySelector(":scope > nav.ksub, :scope > .kpbar > nav.ksub");if(n&&!n.querySelector("[data-kcsub]"))n.remove()}kcChipPaint()}catch(e){console.error(e)}return r}})();
+(function(){const r0=render;render=function(){/* unknown keys at home: jroad8 */const r=r0.apply(this,arguments);
+ try{if(typeof tabsFitR==="function")tabsFitR();if(isKc()){kcHud();document.querySelectorAll("#tokens > p.empty").forEach(e=>e.remove());/* the scene line already says "Không gặp ai" */
+}kcChipPaint()}catch(e){console.error(e)}return r}})();
 function kcHud(){const r=$("me-r");if(r)r.textContent=kcTitle();const e=$("hud-sung");if(e){const sm=e.querySelector("small");if(sm){if(sm.dataset.ko0==null)sm.dataset.ko0=sm.innerHTML;sm.innerHTML=sm.dataset.ko0.replace(/Sủng|Chủ tin/,"Gia thanh")}const sp=e.querySelector("span");if(sp)sp.textContent=S.kgt;const u=e.querySelector("u");if(u)u.style.width=S.kgt+"%";e.title=HX.kgt}}
 (function(){const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{if(isKc())kcHud2()}catch(e){console.error(e)}return r}})();
 /* #hud2 = the state cells the k3 top bar reads (rule glosses on tap): her home numbers instead of the palace ones */
@@ -72431,7 +72495,7 @@ function kcChipPaint(){try{const tt=document.getElementById("k3tt");if(!tt)retur
  const cur=[...l1.querySelectorAll('[data-k3^="kc"]')].map(e=>e.outerHTML).join("");if(cur===h)return;l1.querySelectorAll('[data-k3^="kc"]').forEach(e=>e.remove());l1.insertAdjacentHTML("beforeend",h)}catch(e){}}
 (function(){let mo=null;const hook=()=>{const tt=document.getElementById("k3tt");if(!tt||mo)return;mo=new MutationObserver(()=>{if(isKc()&&!tt.querySelector('[data-k3^="kc"]'))kcChipPaint()});mo.observe(tt,{childList:true,subtree:true})};
  if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);hook();kcChipPaint();return r}}})();
-window.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-k3="kcty"],[data-k3="kcap"]');if(!b||!isKc())return;e.stopImmediatePropagation();e.preventDefault();tab=b.dataset.k3==="kcty"?"story":"staff";render()},true);
+window.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-k3="kcty"],[data-k3="kcap"]');if(!b||!isKc())return;e.stopImmediatePropagation();e.preventDefault();tab=b.dataset.k3==="kcty"?"story":"rel"/* Giao du = Giao tình at home (jroad8) */;render()},true);
 try{if(typeof toilOn==="function"){const t0=toilOn;toilOn=function(){if(isKc())return false;return t0.apply(this,arguments)}}}catch(e){}
 /* stage plaques: her family instead of the court (relations live on the person's card in Gia tộc) */
 (function(){const k0=kitCourtRows;kitCourtRows=function(){if(!isKc())return k0.apply(this,arguments);if(!S||S.dead)return[];
@@ -72525,8 +72589,7 @@ window.kcDressSrc=kcDressSrc;
 (function(){const k0=kcPor;kcPor=function(m,kind){try{if(isKc()&&m&&m.fid&&(m.r==="muoi"||/^ban/.test(m.r))){const s=kcDressSrc(m.fid,kind==="fig"?"fig":"por",m.r==="muoi"?kcDress():"kc",m.age);if(s)return s}}catch(e){}return k0.apply(this,arguments)}})();
 
 /* ---------- re-port onto the 11/15 main (review/outside-r2): palace-only parts of today's UI stay off while she is at home ---------- */
-/* bottom tabs: the home road has its own 8 tabs (KCTABS), like the servant road: no Hậu cung / Giao tình / Mệnh truyện groups */
-(function(){if(typeof kgOn!=="function")return;const k0=kgOn;kgOn=function(){if(isKc())return false;return k0.apply(this,arguments)}})();
+/* bottom tabs: the consort's 8 tabs and groups at home too (maid-8tabs; jroad8 ROAD8 says what each shows) */
 /* stage right column: the Ân sủng facts (Tai mắt, Có thai, Lật thẻ, Ân tình) and the Đức "!" goal belong to a consort: jk3 reads kitRoad() (j79), which says "kc" at home */
 (function(){if(typeof kitRoad!=="function")return;const r0=kitRoad;kitRoad=function(){try{if(isKc())return"kc"}catch(e){}return r0.apply(this,arguments)};window.kitRoad=kitRoad})();
 /* family members are kit people (kitStagePeople / kitEventDp §50, kitName §48, figures §33): role, title, face, full-body figure */
@@ -87829,6 +87892,50 @@ function walkNpcPass(R,kh,fresh,first){if(!walkNpcOn()||!R||!R.P)return 0;let n=
  /* round 4 (review/jagday-walk-rv): the deed-road guard runs here, after every row writer of the chain (j95sPass retinue / j95sGuard), then the road pass */
  try{if(typeof agWalkGuard==="function")n+=agWalkGuard(R,k0,fresh)||0}catch(e){if(JWALK.errs.length<20)JWALK.errs.push("guard: "+(e&&e.message||String(e)))}
  try{n+=walkNpcPass(R,k0,fresh,first)}catch(e){if(JWALK.errs.length<20)JWALK.errs.push(e&&e.message||String(e))}return n}})();
+/* ================= jroad8: ONE 8-TAB BAR ON EVERY ROAD (owner 21/11 ~03:15Z, mark #32; MAIN CHÍNH 85 brief maid-8tabs) =================
+   Owner (verbatim, OD 21/11 ~03:15Z): "Mình vẫn giữ đủ 8 cái tab, nhưng mà mỗi một cái tab mình để y chang luôn … tôi nghĩ là mình không có nên thay đổi
+   những cái tab này … trước mắt là cứ làm cái layout là 8 cái tab. Còn mà đổi cái gì vào trong cái tab gì cho nó đúng thì tôi sẽ báo bạn sau."
+   Every road — consort, cung nữ (isSrv, j42), tiểu thư ngoài cung (isKc, jkc/jkc2) — shows the SAME 8 bottom tabs (Hành sự · Dư đồ · Hậu cung · Giao tình ·
+   Hoàng tự · Tư trang · Tài nghệ · Mệnh truyện) with the same groups and sub-tabs (j79 KG, kit sub-tab row .ksub). No locks.
+   ROAD8 = the ONE mapping table (change only this when she rules the final mapping): per road, consort tab key → what her road shows there:
+     (key not listed)      the consort panel as it is (it works on her road: Chí tôn, Phi tần, Ân oán, Hoàng tự, Tư trang, Tài nghệ, Sổ ghi …)
+     {k:"<her key>"}       her road's own panel, rendered with tab = that key (the road modules keep their own panels)
+     {l:"label" | ()=>…}   the sub-tab label on her road
+     {empty:[topic,line]}  the kit empty card (kitEmpty, KIT §21): a tab with nothing yet, never a lock
+     {hide:1}              not a sub-tab on her road (the bottom tab itself always opens) */
+const ROAD8={
+ /* cung nữ: Phận sự → Hành sự (act), Dư đồ → Dư đồ (go), Đồng liêu → Hậu cung › Đồng liêu (staff: the shared person pager, j42 srvStaffTabHTML),
+    Thân phận → Mệnh truyện › Thân phận (story), Sổ ghi → Mệnh truyện › Sổ ghi (log); Phi tần → «Chủ tử» (owner 21/11 ~03:25Z mark #36); every other tab = the consort panel */
+ srv:{rv:{l:"Chủ tử"},staff:{l:"Đồng liêu"},story:{l:"Thân phận"}},
+ /* tiểu thư ngoài cung (KCTABS names follow her variant, jkc2 KC2W): Khuê phòng → Hành sự, Thư từ → Hậu cung › first sub-tab, Gia tộc → Hậu cung › second,
+    Giao du → Giao tình, Hoàng tự = empty card; Dư đồ / Tư trang / Tài nghệ / Mệnh truyện = hers */
+ kc:{court:{k:"kid",l:()=>KCTABS.kid},rv:{l:()=>KCTABS.rv},men:{hide:1},staff:{hide:1},rel:{k:"staff",l:()=>KCTABS.staff},fac:{hide:1},
+  kid:{empty:["Hoàng tự","Ngươi chưa vào cung, chưa có con."]},kvo:{hide:1},kin:{hide:1},hon:{hide:1},qt:{hide:1},
+  q72:{hide:1},nho:{hide:1},quest:{hide:1},req:{hide:1},log:{hide:1}}};
+/* ROAD8_LAB = the ONE label table of the stage right column groups (owner 21/11 ~03:25Z mark #36: "bất kỳ một cái gì thông tin nào ở bên phi tần có thì bên
+   cung nữ đều có, nhưng mà mình có thể linh động đổi tên lại … cung nhân ở bên phi tần thì mình có thể đổi lại là đồng liêu ở bên cung nữ … chủ tử").
+   Same boxes, same kit parts on every road; only these words change. cn = the household box (kit square button + fold + phone rail), ct = the court box. */
+const ROAD8_LAB={"":{cn:"Cung nhân",ct:"Chí tôn"},srv:{cn:"Đồng liêu"},kc:{}};
+function road8Lab(k){const r=road8();const L=ROAD8_LAB[r]||{};return L[k]||ROAD8_LAB[""][k]||""}
+window.ROAD8_LAB=ROAD8_LAB;window.road8Lab=road8Lab;
+function road8(){try{if(!S||S.dead)return"";if(typeof isKc==="function"&&isKc())return"kc";if(typeof isSrv==="function"&&isSrv())return"srv"}catch(e){}return""}
+function road8E(k){const r=road8();return r&&ROAD8[r]&&ROAD8[r][k]||null}
+function road8Hide(k){const e=road8E(k);return !!(e&&e.hide)}
+function road8Label(k){const e=road8E(k);if(!e||!e.l)return"";try{return typeof e.l==="function"?e.l()||"":e.l}catch(x){return""}}
+/* where a key lives on her road, for help / goal lines: "Hậu cung › Đồng liêu"; "" on the consort road (the callers keep their own words) */
+function road8Name(k){try{if(!road8()||road8Hide(k))return"";const g=typeof kgOf==="function"?kgOf(k):null;
+  if(g&&KG[g]){const L=kgKeys(g);if(L.length<2)return KG[g].l;return `${KG[g].l} › ${kgLabel(k)}`}
+  const b=document.querySelector(`#tabs [data-tab="${k}"]`);return b?(b.dataset.l0||b.textContent).trim():""}catch(e){return""}}
+window.ROAD8=ROAD8;window.road8=road8;window.road8Hide=road8Hide;window.road8Label=road8Label;window.road8Name=road8Name;
+/* a key with no bar button, or one her road leaves out, opens Hành sự (old saves / old links of the old servant and home bars) */
+(function(){const r0=render;render=function(){try{if(road8()){const b=document.querySelector(`#tabs [data-tab="${tab}"]`);if(!b||road8Hide(tab))tab="act"}}catch(e){}return r0.apply(this,arguments)}})();
+(function(){const p0=renderPanel0;renderPanel0=function(){const e=road8E(tab);const el=$("panel");if(!e||e.hide){if(el)el.__r8=null;return p0.apply(this,arguments)}
+ if(e.empty){const gm=document.querySelector(".game");if(gm)gm.classList.remove("cardtab","maptab");const h=kitEmpty(e.empty[0],e.empty[1]);
+  if(el.dataset.tab!==tab||el.__r8!==h){el.innerHTML=h;el.__r8=h;el.dataset.tab=tab;el.dataset.pg="";try{kitFix(el)}catch(x){}}return}
+ el.__r8=null;
+ /* her own panel: the road module draws it under its own key; the bar, groups and sub-tabs keep the consort key */
+ if(e.k&&e.k!==tab){const t0=tab;tab=e.k;try{return p0.apply(this,arguments)}finally{tab=t0}}
+ return p0.apply(this,arguments)}})();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -89430,7 +89537,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e3bfd414fddc";window.CTM_BUILD=BUILD;
+const BUILD="f22a5c4a32c3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
