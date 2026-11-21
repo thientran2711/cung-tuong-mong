@@ -29,3 +29,8 @@ Local branch ref in this container was stale (dc910d7, diverged); reset to origi
 ## Result (VE4, 9bacaef, 110 cr)
 THU cauvai 8aiDOoYIrU · ĐÔNG 79fL875JAL · sheet dev/handover/review-sheets/hh_t8_thu_dong_L1840.png.
 VE4: stiff cloud shoulder piece OK on both; red only on crown (+ casket on ĐÔNG, held item, untouched per A47). Faults: outer robe still flares at the hem on both; ĐÔNG fur a bit less plush. No further fix made (needs owner word, A18/A20).
+
+## HANDOVER (stop, per #24 07:56Z)
+depth 6 · START_CTX ≈ 4 %, now well under +25 %. State: L1840 prompts done + drawn; waiting on owner verdict for 8aiDOoYIrU / 79fL875JAL.
+Open for a successor (only on owner word): (1) outer robe hem still flares on both — likely "thick gold-embroidered brocade" + winter Lông 3 hem fur; a fix would need owner-approved wording (fur W03 is approved verbatim, do not edit it); (2) red stones on the winter held casket ("gold lidded jewel casket") — held-item words, A47, needs owner yes.
+Bases for any next step: dev/art/thu_comoi/s62_t8_THU_cauvai_L1840.txt, dev/art/winter1/s62_t8_dong_L1840.txt (both PASS check_store tp8 a22 + keep_check).
