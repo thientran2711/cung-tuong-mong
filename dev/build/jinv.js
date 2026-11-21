@@ -365,7 +365,7 @@ if(typeof invHTML==="function"){const inv0=invHTML;invHTML=function(){let h=inv0
 let KINV_SUB=(()=>{try{return localStorage.getItem("hclh-inv-sub")||"tui"}catch(e){return"tui"}})();
 function kinvSubHTML(acts,bag){const pets=typeof petPanelHTML==="function"?petPanelHTML():"";const cur=KINV_SUB==="viec"&&acts.trim()?"viec":KINV_SUB==="thu"&&pets?"thu":"tui";const P=[["tui","Túi đồ"]].concat(pets?[["thu","Thú cưng"]]:[],[["viec","Việc"]]);
  const nav=`<div class="kinvsubw"><nav class="ksub kinvsub" role="tablist">${P.map(([k,l])=>`<button type="button" class="ksubb${k===cur?" on":""}" role="tab" aria-selected="${k===cur}" data-kinvsub="${k}">${l}</button>`).join("")}</nav></div>`;
- return nav+`<div class="kinvpane" data-kinvpane="tui"${cur==="tui"?"":" hidden"}>${bag}</div>${pets?`<div class="kinvpane" data-kinvpane="thu"${cur==="thu"?"":" hidden"}>${pets}</div>`:""}<div class="kinvpane kdoable" data-kinvpane="viec"${cur==="viec"?"":" hidden"}>${acts}</div>`}
+ return nav+`<div class="kinvpane" data-kinvpane="tui"${cur==="tui"?"":" hidden"}>${bag}</div>${pets?`<div class="kinvpane" data-kinvpane="thu"${cur==="thu"?"":" hidden"}>${pets}</div>`:""}<div class="kinvpane kdoable kpanec" data-kinvpane="viec"${cur==="viec"?"":" hidden"}>${acts}</div>`}
 function kinvDoable(){try{const pane=document.querySelector('#panel [data-kinvpane="viec"]');if(!pane)return;
  const first=typeof kitDoableFirst==="function"?kitDoableFirst:function(box,sel){const L=[...box.children].filter(c=>!sel||c.matches(sel));if(L.length<2)return;
    const off=e=>e.disabled||e.classList.contains("kdis")||e.getAttribute("aria-disabled")==="true"||(!/^(BUTTON|A)$/.test(e.tagName)&&!!(e.querySelector("button")&&e.querySelector("button").disabled));
