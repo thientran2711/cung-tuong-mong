@@ -79,3 +79,5 @@ dev/art/seasons4/s62_t5_HAN_PHISIMPLE_L1880.txt (make_han_phisimple_L1880.py) = 
 - NEW early sentence (after the light sentence): "NECKLINE (most important): her crossed collar opens WIDE, its edges lying ON the shoulders out to the OUTER ENDS of both collarbones, the WHOLE collarbone fully bare on both sides, never off the shoulders."
 - Collar clause: "the lapels sweep out toward the edge of the SHOULDERS and meet low at the chest in a broad V, showing her neck and collarbones fully but modestly (…)" → "the collar edges lie ON the shoulders out to the OUTER ENDS of both collarbones and meet low at the chest in a broad V, the WHOLE collarbone fully bare on both sides, the three bands lying flat along this wide opening over the shoulders (never narrow near the neck, never a tight high crossing, never off the shoulders)".
 9172 ch; keep PASS; check_store M06/M07 (= Phi).
+### PHISIMPLE_PEARL_L1884 (owner L1884 via #25): PHISIMPLE_L1861 + ONE addition only
+Added after the band colours: ", small pearls stitched along the collar bands on the crossed collar edge itself" (no yoke, no fringe, not the L1880 words). keep PASS; check_store M06/M07.
