@@ -8,3 +8,8 @@ allow: never wall-eyed  # trim to fit 10 000: same
 allow: never a stretched grin  # trim to fit 10 000: the MOUTH sentence keeps 'never a grin'
 allow: (pose variety, every rank its own)  # trim to fit 10 000: label text only
 allow: in LARGE bold letters, top-left corner, on the plain background, never over her body, write exactly this Vietnamese text WITH accents:  # trim to fit 10 000: short caption form (as s65 NECK)
+allow: bold  # A53 owner L2110: ChatGPT paste file, no test-label caption
+allow: top-left  # A53 owner L2110: ChatGPT paste file, no test-label caption
+allow: never over her  # A53 owner L2110: ChatGPT paste file, no test-label caption
+allow: with accents  # A53 owner L2110: ChatGPT paste file, no test-label caption
+allow: "Mùa Thu · Tần · cổ vuông · s64"  # A53 owner L2110: ChatGPT paste file, no test-label caption

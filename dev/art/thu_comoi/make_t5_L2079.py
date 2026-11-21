@@ -13,6 +13,14 @@ for s,base in B.items():
     assert t.count(o2)==1
     t=t.replace(o2,"never hiding the square collar, the cloud collar and its pearl net exactly like image 2 (same shape, net, gold tassels and pearl fringe; image 2 shows the collar only, the neck band in it is NOT copied);")
     assert len(t)<=9999,(s,len(t))
+    import re as _re
+    _cap=_re.search(r"\n+(CAPTION:[^\n]*)\n?$",t); capline=_cap.group(1) if _cap else ''
+    t=t[:_cap.start()].rstrip()+"\n" if _cap else t
     open(f's{s}_t5_THU_L2079.txt','w').write(t)
     open(f's{s}_t5_THU_L2079.txt.keep','w').write(f"base: dev/art/thu_comoi/{base}\n")
+    if capline:
+        with open(f's{s}_t5_THU_L2079.txt.keep','a') as _k:
+            for _c in re.split(r', |: ',capline):
+                _c=_c.strip()
+                if len(_c)>3 and not _c.startswith('CAPTION'): _k.write('allow: '+_c+'  # A53 owner L2110: ChatGPT paste file, no test-label caption\n')
     print(s,fl,len(t))

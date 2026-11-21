@@ -1,1 +1,7 @@
 base: dev/art/thu_comoi/s64_t5_THU_L2026.txt
+allow: in LARGE bold letters  # A53 owner L2110: ChatGPT paste file, no test-label caption
+allow: top-left corner  # A53 owner L2110: ChatGPT paste file, no test-label caption
+allow: on the plain background  # A53 owner L2110: ChatGPT paste file, no test-label caption
+allow: never over her body  # A53 owner L2110: ChatGPT paste file, no test-label caption
+allow: write exactly this Vietnamese text WITH accents  # A53 owner L2110: ChatGPT paste file, no test-label caption
+allow: "Mùa Thu · Phi · cổ vuông + vân kiên · s64"  # A53 owner L2110: ChatGPT paste file, no test-label caption

@@ -21,6 +21,9 @@ for s,fl in FL.items():
         for a in (', youthful adult.',', clearly adult;'):
             t=t.replace(a,a[-1],1)
         extra='allow: youthful adult  # trim to fit 10 000 (s65 only): "about 22" + adult body proportions kept\nallow: clearly adult  # trim to fit 10 000 (s65 only)\n'
+    import re as _re
+    _cap=_re.search(r"\n+(CAPTION:[^\n]*)\n?$",t); capline=_cap.group(1) if _cap else ''
+    t=t[:_cap.start()].rstrip()+"\n" if _cap else t
     open(f's{s}_t4_THU_L2079.txt','w').write(t)
     open(f's{s}_t4_THU_L2079.txt.keep','w').write(f"""base: dev/art/thu_comoi/s{s}_t4_THU_NECK.txt
 allow: its lower edge cut into 5 or 6 LARGE round petal lobes  # owner L2070/L2072: back to L2041 edge words
@@ -33,4 +36,9 @@ allow: never a stretched grin  # trim to fit 10 000: the MOUTH sentence keeps 'n
 allow: (pose variety, every rank its own)  # trim to fit 10 000: label text only
 {extra}allow: in LARGE bold letters, top-left corner, on the plain background, never over her body, write exactly this Vietnamese text WITH accents:  # trim to fit 10 000: short caption form (as s65 NECK)
 """.replace("{extra}",extra))
+    if capline:
+        with open(f's{s}_t4_THU_L2079.txt.keep','a') as _k:
+            for _c in re.split(r', |: ',capline):
+                _c=_c.strip()
+                if len(_c)>3 and not _c.startswith('CAPTION'): _k.write('allow: '+_c+'  # A53 owner L2110: ChatGPT paste file, no test-label caption\n')
     print(s,len(t))
