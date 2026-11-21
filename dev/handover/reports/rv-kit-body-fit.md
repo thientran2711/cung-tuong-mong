@@ -1,0 +1,7 @@
+# rv: kit-body-fit (f6b01506, keeper #6; KP09 body-fit box)
+PRIORITY #1 CHECK: KIT_REQUESTS.md:56 + GAP v4 J7; jlooks/jcloth own mask kept; reuse of kitFigBody + KIT_VEIL fit; merged LIVE into review/kit-body-fit-rv (821727de1736b51cc7d10dba8c2e3770212a664c; assemble.py module list resolved by union, jbody.js kept).
+- New jbody.js KIT_BODY: zones hair/head/chest/waist/sleeveL/sleeveR/skirt/hem per por-/fig- picture (img/body-fit.json wins, else measured; no data = nothing). One kit part, layers inside the one kitFxLayers stack; looks-2 lkhair / jcloth wired; draws only when LOOKS_ART lists the file → no in-play visual change until Foreman C art. No player-visible wording (dev kit page only).
+- kit-body-fit.js Fold + iPad: A 48 pictures PASS, B 6 sample pictures PASS, C stack layers off 0 px PASS, 0 page errors. Only line «h-overflow 40» on the iPad kit page (keeper: from §59/§86 samples, pre-existing; the §28.8e sample row itself wraps).
+- Looked at the iPad kit-page shot: zones sit correctly on woman, maid, eunuch, emperor, child and on the portrait (head/hair/chest/waist/sleeves/skirt/hem). The Fold stage shot of the harness was a full-screen splash (not usable); the in-play path is covered by test C (0 px) and by no art being listed.
+- quickcheck PASS; coop-e2e 124/124.
+- VERDICT: PASS (no gameplay change until art lands; re-look at a real worn hair/cloth when Foreman C art arrives).
