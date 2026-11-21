@@ -84,3 +84,8 @@ PROPOSED (words only, needs #25/owner yes): (1) "…the upper tier appliquéd ON
 # L1879 prep (#25: file only, NO redraw until owner comments on L1879)
 - dev/art/thu_comoi/s62_t6_THU_vankien2_L1879.txt (base vankien2_L1856): "a few strands of pearls across the chest with a little jade: small green jade beads set among the pearls," → "a few strands of pearls across the chest, small round pearls only," (= cause of the jade disc on aFGoYlufSh). Caption "Thu · Quý phi · L1879". keep + store PASS (note: the G57 gate also rejects the negative words "NO pendant", so none written). Tier words NOT changed yet (waiting for owner).
 - túi thơm (G59): none in any of my files (thu t1/t3/t5/t6, xuân t6, winter t1) — grep sachet/pouch/túi thơm = 0. G57/G59 gate lines clean on all current files.
+
+# L1879b (#25 GO, A49) — thu + xuân, draw ONLY thu
+- dev/art/thu_comoi/s62_t6_THU_vankien2_L1879b.txt (base vankien2_L1879: chest = "small round pearls only", no jade) + dev/art/seasons4/s62_t6_XUAN_vankien2_L1879b.txt (base vankien2_L1856):
+  "the upper tier appliquéd ON the lower, which shows only as a thin scalloped edge, never two stacked layers," → "the upper tier appliquéd ON a slightly larger lower tier whose scalloped edge clearly shows below it as a second row,". Captions "… L1879b". keep + store PASS (9 967 / 9 966 chars). túi thơm/sachet/pouch: 0.
+- Thu sent to VE9 @55 (after its hạ t1–t3); xuân NOT drawn.

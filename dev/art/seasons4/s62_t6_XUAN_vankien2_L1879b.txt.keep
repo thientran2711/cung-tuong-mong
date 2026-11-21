@@ -1,0 +1,4 @@
+base: dev/art/seasons4/s62_t6_XUAN_vankien2_L1856.txt
+allow: which shows only as a thin scalloped edge, never two stacked layers   # owner L1879 (via #25 GO): 2 tiers not readable on aFGoYlufSh/jUobt0wLD0 → lower tier slightly larger, its scalloped edge clearly a second row
+allow: "Mùa Xuân · Quý phi · L1856"   # caption
+allow: the upper tier appliquéd ON the lower   # owner L1879: now 'appliquéd ON a slightly larger lower tier'
