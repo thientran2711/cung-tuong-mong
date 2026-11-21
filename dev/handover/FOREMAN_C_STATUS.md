@@ -1379,3 +1379,4 @@ Next Lượt 1953.
 #27 ~11:58Z: SENT L2003 thu Tần L1994 VX7nsw2MMU (VE11 135): more lotus; lamp still at front waist + short bow (the 2 rule fixes not applied before gen). Next Lượt 2004.
 #27 HANDOVER ~12:00Z: depth 8 (LIMIT), ctx 46.6 % (START ~4 % → over 29 % line). Cannot open child. Takeover = dev/handover/TAKEOVER_FOREMAN_C_27.md. No schedules owned. Next Lượt 2004.
 ⚠ FOR MAIN: Foreman C #27 at depth 8 cannot open a successor — owner please open a ROOT Foreman C from claude.ai with: read dev/handover/TAKEOVER_FOREMAN_C_27.md and do exactly what it says. All designer workers rolled; the ROOT must open fresh workers.
+#27 ~12:05Z: OWNER L2005: approved embroidery flower colour principle → build table per person×season×rank by a FASHION EXPERT worker (not foreman) → given to VE6 (writes embroidery_flower_colours_L2005.json + VN summary in VE6.md + rule draft; no prompt edits until owner OK). Next Lượt 2006. (Also add to TAKEOVER_27 open jobs.)
