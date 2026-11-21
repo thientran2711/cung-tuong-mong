@@ -122,7 +122,7 @@ function rtCaughtBy(v,m,what){const T=rtS();rtStat("tt_caught");
  rtReport(v,m)}
 function rtReport(v,m){const T=rtS();rtStat("tt_report");{const kk=rtKidsAlive().find(k=>k.tf&&!k.tfOk);if(kk&&!T.ng){log(`<span class="r">${rtVn(v)} tâu: ${kk.name} không phải cốt nhục hoàng gia, xin trích huyết nghiệm thân.</span>`);rtNgSet(kk,v.id,false);return}}const ev=(typeof evG==="function"?evG(v,S):2)||2;
  if(roll(cl(35+ev*8+T.heat/4,10,90))){rtExpose(m,`${rtVn(v)} tố giác ngươi tư thông với ${m.name}.`)}
- else{if(v&&v!==S&&v.alive){ap(v,{danh:-BAL.tw.g.accFail[0]});oanAdd(S,v,BAL.tw.g.accFail[1]);affAdd(S,v,-BAL.tw.g.accFail[2]);punish(v,"vu cáo người khác tư thông",1)}/* two-way law: the failed accuser pays like her (j95accuse) */apply(BAL.route.accused);rtHeat(15);m.ban=wk()+24;log(`<span class="r">${rtVn(v)} tố ngươi tư thông với ${rtMnm(m)}; chứng cứ chưa đủ. Hoàng thượng quở trách, cấm y vào hậu cung. Sủng ${BAL.route.accused.sung} · Danh ${BAL.route.accused.danh}.</span>`)}}
+ else{if(v&&v!==S&&v.alive){ap(v,{danh:-BAL.tw.g.accFail[0]});oanAdd(S,v,BAL.tw.g.accFail[1]);affAdd(S,v,-BAL.tw.g.accFail[2]);punish(v,"vu cáo người khác tư thông",1)}/* two-way law: the failed accuser pays like her (j95accuse) */apply(BAL.route.accused);rtHeat(15);m.ban=wk()+24;log(`<span class="r">${rtVn(v)} tố ngươi tư thông với ${rtMnm(m)}; chứng cứ chưa đủ. Hoàng thượng quở trách, cấm y vào hậu cung. ${sgStat(BAL.route.accused.sung)} · Danh ${BAL.route.accused.danh}.</span>`)}}
 function rtExpose(m,how){const T=rtS();T.exposed=1;rtEnd("tt_lo");T.tt=null;T.bm=null;rtStat("tt_exposed");log(`<span class="r">${how}</span>`);
  try{affairExposed(m,"Chuyện tư tình bị lộ:")}catch(e){m.alive=false;deathSentence("Bị ban chết vì tư thông")}}
 /* ---------- 2. TRỐN KHỎI CUNG ---------- */
@@ -354,7 +354,7 @@ PEND.rtNg2=pp=>{const T=S&&S.rt;const k=rtNgKid();if(!T||!T.ng||!k)return null;c
   rtOpt("Nhận tội",{},rtX(100,"giữ được mạng (lãnh cung)","",`${k.name} bị đưa ra khỏi cung`),()=>rtNgLose(true,!k.tf)),
   rtOpt("Kêu oan rồi cúi đầu chịu tội",{},rtX(100,"","",`bị xử như tư thông: ban chết hay lãnh cung · ${k.name} bị đưa ra khỏi cung`),()=>rtNgLose(false,!k.tf))]}};
 function rtNgWin(vach){const T=S.rt,N=T.ng,k=rtNgKid();const v=RV(N.acc);if(k)k.tfOk=1;T.ng=null;apply(BAL.route.ngWin);rtHeat(-20);rtEmo("vui",50,"giọt máu hòa");rtStat(vach?"ng_vach":"ng_win");
- if(vach)rtEnd("ng_vach");log(`<span class="g">${vach?"Bát nước có dầu bị vạch trần trước điện.":"Hai giọt máu hòa làm một."} Hoàng thượng ôm ${k?k.name:"con"} vào lòng. Sủng +${BAL.route.ngWin.sung} · Danh +${BAL.route.ngWin.danh}.</span>`);
+ if(vach)rtEnd("ng_vach");log(`<span class="g">${vach?"Bát nước có dầu bị vạch trần trước điện.":"Hai giọt máu hòa làm một."} Hoàng thượng ôm ${k?k.name:"con"} vào lòng. ${sgStat(BAL.route.ngWin.sung)} · Danh +${BAL.route.ngWin.danh}.</span>`);
  if(v&&v.alive){oanAdd(v,S,BAL.route.oan.ngWin);if(vach||N.oil)deathSentence(v,"gian lận khi trích huyết nghiệm thân");else punish(v,"vu cáo phi tần",2)}}
 function rtNgLose(confess,innocent,why){const T=S.rt,N=T.ng,k=rtNgKid();const m=k&&k.tf&&(S.men||[]).find(x=>x.id===k.tf&&x.alive);T.ng=null;rtStat(innocent?"ng_oan":"ng_lose");
  rtEnd(innocent?"ng_oan":"tt_lo");if(!innocent)T.exposed=1;if(m){m.alive=false;log(`<span class="r">${m.name} bị xử trảm.</span>`)}

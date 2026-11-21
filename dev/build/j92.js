@@ -269,7 +269,7 @@ function wdRemark(p,st){const r=wdRemarker(p,st);if(!r)return"";const view=r.sur
  /* being looked down on only costs Danh when she really is too plain (a wrong sneer falls flat) */
  if(view==="under"&&st==="under"){ap(p,{danh:-(WD.underDanh+(wdFest()?WD.festUnderDanh:0))});fx=` Danh -${WD.underDanh+(wdFest()?WD.festUnderDanh:0)}.`}
  if(view==="ok"&&wdFest()){ap(p,{danh:WD.festOkDanh});fx=` Danh +${WD.festOkDanh}.`}
- if(view==="tang"){ap(p,{danh:BAL.eff.j92.danhWdRemark,sung:BAL.eff.j92.sungWdRemark});punish(p,"mặc đồ đỏ vàng giữa quốc tang",WD.tangPunish);fx=` Danh ${balSg(BAL.eff.j92.danhWdRemark)}, Sủng ${balSg(BAL.eff.j92.sungWdRemark)}.`}
+ if(view==="tang"){ap(p,{danh:BAL.eff.j92.danhWdRemark,sung:BAL.eff.j92.sungWdRemark});punish(p,"mặc đồ đỏ vàng giữa quốc tang",WD.tangPunish);fx=` Danh ${balSg(BAL.eff.j92.danhWdRemark)}, ${sgOf(p,BAL.eff.j92.sungWdRemark)}.`}
  if(p===S){if(r.sure)wdKnowAll(S,S);S.wdSelf={st:view,w:wk(),by:r.name,sure:r.sure,it:wdCur(S)};
   const how=r.sure?"":" (chỉ là lời nàng ấy nói, chưa chắc đúng)";Q.push({t:"Lời nhận xét",who:r.face,h:`<p>${said}${fx}</p><p class="past">Đã ghi vào Sổ ghi${how}.</p>`});log(said+fx+how)}
  else{const heard=S.wdSeen&&S.wdSeen[wdKey(p)]&&S.wdSeen[wdKey(p)].w===wk();if(heard){const t=`${said}${r.sure?"":" (lời của "+r.name+", chưa chắc đúng)"}`;try{noteAdd(p.id,t)}catch(e){}
@@ -294,7 +294,7 @@ function wdAccuse(a,t){const c=wdCause(a,t);const truth=wdStatus(t);const judge=
  if(truth==="over"){const gone=[];for(const sl of ["tram","y"]){const e=w[sl],it=wdItem(e);if(it&&wdP(e,t)>wdPOf(t)&&!(it.nt&&e.own===wdKey(t))){gone.push(it.n);w[sl]=null;const k=wdDefault(t,sl);if(k)w[sl]={k,from:"base"}}}
   ap(t,{danh:BAL.eff.j92.danhWdAccuse_3});punish(t,"ăn mặc vượt phẩm",1);return `${A0} hặc ${T0} vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${gone.length?gone.join(", ")+" bị tịch thu. ":""}${wdNmC(t)} Danh ${balSg(BAL.eff.j92.danhWdAccuse_3)}. `}
  if(truth==="under"){ap(t,{danh:BAL.eff.j92.danhWdAccuse_4});return `${A0} hặc ${T0} ăn vận quá giản dị, làm mất thể diện hoàng gia: <span class="${t===S?"r":"g"}">thành</span>. ${wdNmC(t)} bị quở, Danh ${balSg(BAL.eff.j92.danhWdAccuse_4)}. `}
- ap(t,{danh:BAL.eff.j92.danhWdAccuse,sung:BAL.eff.j92.sungWdAccuse});punish(t,"mặc đồ đỏ vàng giữa quốc tang",2);return `${A0} hặc ${T0} mặc đồ đỏ vàng giữa quốc tang: <span class="${t===S?"r":"g"}">thành</span>. ${wdNmC(t)} Danh ${balSg(BAL.eff.j92.danhWdAccuse)}, Sủng ${balSg(BAL.eff.j92.sungWdAccuse)}. `}
+ ap(t,{danh:BAL.eff.j92.danhWdAccuse,sung:BAL.eff.j92.sungWdAccuse});punish(t,"mặc đồ đỏ vàng giữa quốc tang",2);return `${A0} hặc ${T0} mặc đồ đỏ vàng giữa quốc tang: <span class="${t===S?"r":"g"}">thành</span>. ${wdNmC(t)} Danh ${balSg(BAL.eff.j92.danhWdAccuse)}, ${sgOf(t,BAL.eff.j92.sungWdAccuse)}. `}
 A("vp","Hặc ăn mặc sai phẩm",{c:{},ok:(a,t)=>!!wdCause(a,t),o:a=>oWd(a),x:"cần nguyên cớ: đã nghe người nhận xét, hoặc tai mắt báo nàng mặc sai phẩm",f:(a,t)=>wdAccuse(a,t)});
 try{AOUT.vp=["nàng bị quở (đồ vượt phẩm bị tịch thu; phạm tang thì bị phạt nặng); Danh +2",`nàng hóa ra đúng phẩm: Danh -5, thù ${balSg(BAL.eff.j92.wdAccuse)} · hoặc bị bỏ qua: Danh -2`]}catch(e){}
 try{LACK.vp=t=>{if(wdCause(S,t))return"";const r=S.wdSeen&&S.wdSeen[wdKey(t)];return r&&r.st!=="ok"&&r.it!==wdCur(t)?"nàng đã thay bộ khác từ lúc bị nhận xét":"chưa có nguyên cớ: chưa ai nhận xét, tai mắt chưa báo nàng mặc sai phẩm"}}catch(e){}
@@ -335,7 +335,7 @@ function wdFrameResolve(a,t){if(typeof lostUnwear==="function")lostUnwear(t,a);c
  if(roll(o)){wdFrameTake(t,i);
   if(cu){evA(t,cu,BAL.eff.j92.evWdFrameResolve);ap(cu,{danh:BAL.eff.j92.danhWdFrameResolve});punish(cu,"giá họa vu oan",2);return `${wdNmC(a)} tố ${wdNm(t)} ${lo?"giữ":"ăn trộm"} ${nm}; ${wdNm(t)} minh oan được, tra ra ${wdNm(cu)} giá họa. ${wdNmC(cu)} Danh ${balSg(BAL.eff.j92.danhWdFrameResolve)}, bị phạt. `}
   return `${wdNmC(a)} báo ${nm} thất lạc ở chỗ ${wdNm(t)}; ${wdNm(t)} minh oan được: món đồ chỉ thất lạc, không ai lấy trộm. ${nm} về lại với ${wdNm(a)}. `}
- wdFrameTake(t,i);ap(t,{danh:BAL.eff.j92.danhWdFrameResolve_2,sung:BAL.eff.j92.sungWdFrameResolve});if(cu)t.framedBy=key(cu);punish(t,"lấy trộm đồ",1);return `<span class="r">Cung Chính ti tìm thấy ${nm} của ${wdNm(a)} trong phòng ${wdNm(t)}.</span> ${wdNmC(t)} mang tội ăn trộm: Danh ${balSg(BAL.eff.j92.danhWdFrameResolve_2)}, Sủng ${balSg(BAL.eff.j92.sungWdFrameResolve)}, bị phạt. `}
+ wdFrameTake(t,i);ap(t,{danh:BAL.eff.j92.danhWdFrameResolve_2,sung:BAL.eff.j92.sungWdFrameResolve});if(cu)t.framedBy=key(cu);punish(t,"lấy trộm đồ",1);return `<span class="r">Cung Chính ti tìm thấy ${nm} của ${wdNm(a)} trong phòng ${wdNm(t)}.</span> ${wdNmC(t)} mang tội ăn trộm: Danh ${balSg(BAL.eff.j92.danhWdFrameResolve_2)}, ${sgOf(t,BAL.eff.j92.sungWdFrameResolve)}, bị phạt. `}
 /* her side of it: choices show only their cost; the result card tells the truth after */
 PEND.wdframe=pp=>{const a=byKey(pp.a);if(!a)return null;const nm=wdFrameNm(pp.k);const tr=!!pp.tr;const lo=!!pp.lo;
  const cur=()=>{if(typeof lostUnwear==="function")lostUnwear(S,a);const i=wdFrameIx(a,S);return{i,e:S.inv[i]||null}};const E0=cur().e;const cu=wdFrameCulprit(a,E0);const ev=E0?wdFrameEv(S,a,E0):(a.ev||0);
@@ -346,7 +346,7 @@ PEND.wdframe=pp=>{const a=byKey(pp.a);if(!a)return null;const nm=wdFrameNm(pp.k)
   Q.push({t:"Minh oan",who:pMe(),h:`<p>${how} Tra ra ${wdNm(cu)} sai người lén đặt ${nm} vào phòng ngươi.</p><p class="past">${wdNmC(cu)}: Danh -10, bị phạt.</p>`});log(`Ngươi minh oan được: ${wdNm(cu)} giá họa, Danh -10, bị phạt.`)};
  const guilty=(light)=>{const x=cur();if(x.i>=0)wdFrameTake(S,x.i);if(cu)S.framedBy=key(cu);
   if(light){apply({danh:BAL.eff.j92.danhGuilty_2});log(`Ngươi nhận lỗi, xin khoan hồng: trả lại đồ, Danh ${balSg(BAL.eff.j92.danhGuilty_2)}.`);Q.push({t:"Nhận lỗi",who:pMe(),h:`<p>${nm} được trả về cho ${wdNm(a)}. Ngươi bị quở, Danh ${balSg(BAL.eff.j92.danhGuilty_2)}.</p>`});return}
-  apply({danh:BAL.eff.j92.danhGuilty,sung:BAL.eff.j92.sungGuilty});punish(S,"lấy trộm đồ",1);Q.push({t:"Mang tội ăn trộm",who:pMe(),h:`<p class="r">Không minh oan được: ngươi mang tội lấy trộm ${nm} của ${wdNm(a)}. Danh ${balSg(BAL.eff.j92.danhGuilty)}, Sủng ${balSg(BAL.eff.j92.sungGuilty)}, bị phạt.</p>`})};
+  apply({danh:BAL.eff.j92.danhGuilty,sung:BAL.eff.j92.sungGuilty});punish(S,"lấy trộm đồ",1);Q.push({t:"Mang tội ăn trộm",who:pMe(),h:`<p class="r">Không minh oan được: ngươi mang tội lấy trộm ${nm} của ${wdNm(a)}. Danh ${balSg(BAL.eff.j92.danhGuilty)}, ${sgStat(BAL.eff.j92.sungGuilty)}, bị phạt.</p>`})};
  const spendEv=()=>{const x=cur();if(x.e&&x.e.lo&&typeof lostEvUse==="function"&&lostEvUse(x.e.lo))return true;if(cu&&evG(S,cu)>0){evA(S,cu,BAL.eff.j92.evSpendEv);return true}return false};
  const O=[];
  O.push({n:"Trình chứng cứ minh oan",fx:{},p:o1,j67:lo?`tốn: ${balAb(BAL.eff.jlost.evLostEvUse)} chứng cứ đã tra xét`:`tốn: ${balAb(BAL.eff.j92.evSpendEv)} chứng cứ về ${a.name}`,go:()=>{if(!spendEv()){guilty(false);return}if(roll(o1))clear(lo?"Ngươi trình chứng cứ đã tra xét.":`Ngươi trình chứng cứ về ${wdNm(a)}.`);else guilty(false)}});
@@ -382,14 +382,14 @@ function wdNtHeld(p){const L=[];const w=wdOf(p);for(const sl of ["tram","y"])if(
 function wdNtRemove(p,e,how){const w=wdOf(p);let done=false;for(const sl of ["tram","y"])if(w[sl]===e){w[sl]=null;const k=wdDefault(p,sl);if(k)w[sl]={k,from:"base"};done=true;break}if(!done){const i=(p.inv||[]).indexOf(e);if(i>=0)p.inv.splice(i,1)}
  /* item conservation (jil): never gone for good */if(typeof ilGone==="function")ilGone(p,e,how==="bị mất"?"lost":"fix",{cause:"srv"})}
 function wdNtMonth(p){const H=wdNtHeld(p);if(!H.length)return"";const clumsy=[p.maid].concat(p.staff||[]).find(s=>s&&(netIs(s,"timid")||netIs(s,"greed")));
- if(p===S&&S.wdNtHide&&wk()>=S.wdNtHide.due){const h=S.wdNtHide;S.wdNtHide=null;if(roll(45)){apply({sung:BAL.eff.j92.sungWdNtMonth});punish(S,"làm mất đồ ngự tứ mà giấu, tội bất kính",2);Q.push({t:"Tội bất kính",who:pEmp(),h:`<p class="r">Chuyện ${h.n} ngự tứ ${h.how} bị lộ. Hoàng thượng giận ngươi giấu giếm. Sủng ${balSg(BAL.eff.j92.sungWdNtMonth)}, bị phạt.</p>`})}}
+ if(p===S&&S.wdNtHide&&wk()>=S.wdNtHide.due){const h=S.wdNtHide;S.wdNtHide=null;if(roll(45)){apply({sung:BAL.eff.j92.sungWdNtMonth});punish(S,"làm mất đồ ngự tứ mà giấu, tội bất kính",2);Q.push({t:"Tội bất kính",who:pEmp(),h:`<p class="r">Chuyện ${h.n} ngự tứ ${h.how} bị lộ. Hoàng thượng giận ngươi giấu giếm. ${sgStat(BAL.eff.j92.sungWdNtMonth)}, bị phạt.</p>`})}}
  if(!roll(clumsy?2.5:.8))return"";const x=pick(H);const it=wdItem(x.e);const how=clumsy&&netIs(clumsy,"greed")?"bị mất":"bị làm vỡ";
  if(p===S){pushDil(mkP("wdnt",{k:x.e.k,how,by:clumsy?clumsy.name:""}),"Đồ ngự tứ");return""}
  wdNtRemove(p,x.e,how);const tl=npcTell(p,{from:npwIn(p),to:S.emp||S});/* npc-purpose: only one who sees inside her house knows it is gone */if(tl){ap(p,{sung:-6});punish(p,"làm mất đồ ngự tứ, tội bất kính",1);try{newsAdd(p,"wd",`${wdNmC(p)} để ${it.n} ngự tứ ${how}; ${npwNm(tl.who)} tâu lên, mang tội bất kính.`)}catch(e){}}return""}
 PEND.wdnt=pp=>{const it=WD_ITEMS[pp.k];if(!it)return null;const find=()=>wdNtHeld(S).find(x=>x.e.k===pp.k);
  const o=oddsCl(50+eyes(S)*5);
  return{t:`<p><b>${it.n}</b>${/ngự tứ/.test(it.n)?"":" (ngự tứ)"} ${pp.how}${pp.by?`; ${pp.by} run rẩy quỳ xin tội`:""}.</p><p class="past">Làm mất hay làm hỏng đồ ngự tứ là tội bất kính.</p>`,who:pMe(),o:[
-  {n:"Tự thú với Hoàng thượng",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);apply({sung:BAL.eff.j92.sungGo,danh:BAL.eff.j92.danhGo});Q.push({t:"Tự thú",who:pEmp(),h:`<p>Hoàng thượng phật ý nhưng niệm tình ngươi thành thật, không phạt nặng. Sủng ${balSg(BAL.eff.j92.sungGo)}, Danh ${balSg(BAL.eff.j92.danhGo)}.</p>`})}},
+  {n:"Tự thú với Hoàng thượng",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);apply({sung:BAL.eff.j92.sungGo,danh:BAL.eff.j92.danhGo});Q.push({t:"Tự thú",who:pEmp(),h:`<p>Hoàng thượng phật ý nhưng niệm tình ngươi thành thật, không phạt nặng. ${sgStat(BAL.eff.j92.sungGo)}, Danh ${balSg(BAL.eff.j92.danhGo)}.</p>`})}},
   {n:pp.how==="bị mất"?"Sai người lùng tìm":"Sai thợ lén sửa",fx:{bac:BAL.eff.j92.bacFx},p:o,j67:`tốn: Bạc ${balSg(BAL.eff.j92.bacFx)}`,go:()=>{if(roll(o)){Q.push({t:"Đồ ngự tứ",who:pMe(),h:`<p>${pp.how==="bị mất"?"Tìm lại được":"Thợ sửa khéo, không ai nhận ra"} ${it.n}.</p>`});log(`${it.n} ngự tứ đã ${pp.how==="bị mất"?"tìm lại được":"sửa xong"}.`)}
     else{const x=find();if(x)wdNtRemove(S,x.e,pp.how);S.wdNtHide={n:it.n,how:pp.how,due:wk()+3+R(4)};Q.push({t:"Đồ ngự tứ",who:pMe(),h:`<p class="r">${pp.how==="bị mất"?"Lùng khắp nơi không thấy":"Thợ sửa hỏng hẳn"} ${it.n}. Chuyện này còn có thể lộ ra.</p>`})}}},
   {n:"Giấu đi, im lặng",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=find();if(x)wdNtRemove(S,x.e,pp.how);S.wdNtHide={n:it.n,how:pp.how,due:wk()+2+R(5)};log(`Ngươi giấu chuyện ${it.n} ngự tứ ${pp.how}.`)}}]}};
@@ -411,7 +411,7 @@ function wdMonth(pre){let ev="";S.wdk=S.wdk||{};
  if(!window.PROMO_SET)for(const p of consorts()){const P=wdPOf(p);const p0=p===S?pre.P:p.wdP0;if(p0!=null&&P>p0){const k1=wdPickAt(P,"y",1),k2=wdPickAt(P,"tram",1);for(const k of [k1,k2])if(k)wdGain(p,k,{from:"nvp",giver:"Nội vụ phủ",nvp:1});
    if(p===S&&(k1||k2))log(`Nội vụ phủ đưa y phục theo phẩm mới: ${[k1,k2].filter(Boolean).map(k=>WD_ITEMS[k].n).join(", ")}.`)}if(p!==S)p.wdP0=P}
  for(const p of consorts()){if(p!==S){wdNpcInit(p);wdNpcDress(p)}const st=wdStatus(p);
-  if(st==="over"){if(npcWhy("wdNotice",{p})){ap(p,{sung:WD.overSung});if(p===S)log(`Hoàng thượng để mắt tới y phục rực rỡ của ngươi. Sủng +${WD.overSung}.`)}/* rivals' jealousy: the approved luxury law (jinv luxMonth) */}
+  if(st==="over"){if(npcWhy("wdNotice",{p})){ap(p,{sung:WD.overSung});if(p===S)log(`Hoàng thượng để mắt tới y phục rực rỡ của ngươi. ${sgStat(WD.overSung)}.`)}/* rivals' jealousy: the approved luxury law (jinv luxMonth) */}
   if(!p.confined)ev+=wdRemark(p,st)} /* npc-purpose: wdRemark asks npcWhy("wdRemark") — a remark only from one with a reason */
  ev+=wdTaimat();ev+=wdPawnMonth(S);for(const p of consorts())wdNtMonth(p);
  /* NPCs short of silver sell quietly too */

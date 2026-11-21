@@ -129,10 +129,13 @@ function sg(n){if(!n)return 0;let f=has("nongnay")?1.3:1;if(n>0&&has("lanhlung")
    hint model (jk2b kitOptModel) and the act lines (jaudit 15). */
 const SG_NB="\u00a0";
 function sgTxt(h){if(typeof h!=="string"||h.indexOf("Sủng")<0||typeof S!=="object"||!S||!S.emp)return h;
- return h.replace(/(^|[^\p{L}])(Sủng(?: ngươi| ta)?) ([+\-−])(\d+)/gu,(m,p,l,g,n,off,all)=>{const pre=all.slice(Math.max(0,off-40),off+p.length);
+ /* r2: a RANGE «Sủng +2 đến +4» (also «..» / «–») scales BOTH ends — the first build scaled only the number after «Sủng» */
+ return h.replace(/(^|[^\p{L}])(Sủng(?: ngươi| ta)?) ([+\-−])(\d+)(?:(\s*(?:đến|\.\.|–)\s*)([+\-−]?)(\d+))?/gu,(m,p,l,g,n,sep,g2,n2,off,all)=>{const pre=all.slice(Math.max(0,off-40),off+p.length);
   if(/nàng(?: ta)? mất|của nàng|nàng ta\s*$/.test(pre))return m;const w=pre.replace(/<[^>]*>/g,"").match(/(\p{L}+)\s*$/u);
   if(w&&(/^(nàng|hắn|y|thị)$/.test(w[1])||/^\p{Lu}/u.test(w[1])))return m;
-  const v0=(g==="+"?1:-1)*+n,v=sg(v0);return v===v0?m:`${p}${l}${SG_NB}${v>0?"+":"-"}${Math.abs(v)}`})}
+  const sv=x=>`${x>0?"+":x<0?"-":""}${Math.abs(x)}`,v0=(g==="+"?1:-1)*+n,v=sg(v0);
+  if(sep==null)return v===v0?m:`${p}${l}${SG_NB}${sv(v)}`;
+  const u0=(g2?(g2==="+"?1:-1):(g==="+"?1:-1))*+n2,u=sg(u0);return v===v0&&u===u0?m:`${p}${l}${SG_NB}${sv(v)}${sep}${sv(u)}`})}
 /* KLOW: numbers where a FALL is good for her (Áp lực hôn sự / Nợ nhà / Phe chủ chiến, Lời đồn) — coloured by meaning (OD:L908), here and in the result card (j63) */
 const KLOW={kap:1,kld:1};function kGood(k,v){return KLOW[k]?v<=0:v>=0}
 /* AG-ALL-2f3: ONE stat-preview text. A Tai mắt GAIN is not a number handed over (OD 17/11 ~16:50Z / ~17:00Z): it is N approaches to real people who each
@@ -144,6 +147,11 @@ function eyes(p){if(!p)return 0;const n=+p.mat||0;if(window.__tmOff)return n;try
 function statTxt(k,v,lbl){const n=lbl||NAMES[k]||k;if(k==="mat"&&v>0)return `${n}: ngỏ lời ${v} người`;return `${n} ${v>0?"+":""}${v}`}
 /* SG-CARD: her Sủng change v drawn through sg() — the no-break space marks it as already drawn, so sgTxt never scales it again */
 function sgStat(v,lbl){const w=sg(v),t=statTxt("sung",w,lbl);return w!==v?t.replace(/ (?=[+\-−]?\d+$)/,SG_NB):t}
+/* r2 (rv sg-card): the ONE printer of a Sủng change in a result / log line. sgOf(p,v): HER change is applied through sg() (apply / ap(S,…)) →
+   print sg(v) (marked); someone else's (ap(v,…) raw) → print v. Never pass a MEASURED delta (S.sung after − before): print that as it is.
+   sgRange(a,b): «Sủng +sg(a) đến +sg(b)» — both ends of a range drawn as applied (one number when they meet). */
+function sgOf(p,v,lbl){return p===S?sgStat(v,lbl):statTxt("sung",v,lbl)}
+function sgRange(a,b,lbl){const x=sg(a),y=sg(b),sv=z=>`${z>0?"+":z<0?"-":""}${Math.abs(z)}`;if(x===y)return sgStat(a,lbl);return `${lbl||NAMES.sung}${x!==a||y!==b?SG_NB:" "}${sv(x)} đến ${sv(y)}`}
 function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{const t=k==="sung"?sgStat(v):statTxt(k,v);if(k==="sung")v=sg(v);return `<span class="${kGood(k,v)?"g":"r"}">${t}</span>`}).join(" · ")}
 function apply(o){const pops=[];
   for(const k in o){let v=o[k];if(!v)continue;

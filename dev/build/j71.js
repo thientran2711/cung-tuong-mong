@@ -366,9 +366,9 @@ function cFin7(k,kind,L,shown){const w=L[0].p,pz=prize7(k);ap(w,pz);const cu=win
  const mi=L.findIndex(x=>x.p===S);let me="";if(mi>0){if(mi<=2){apply({danh:BAL.eff.j71.danhCFin7});me=` Ngươi hạng ${mi+1}: Danh ${balSg(BAL.eff.j71.danhCFin7)}.`}else me=` Ngươi hạng ${mi+1}/${L.length}.`;if(mi===L.length-1&&L.length>2){apply({danh:BAL.eff.j71.danhCFin7_2});me+=` Đứng chót: Danh ${balSg(BAL.eff.j71.danhCFin7_2)}.`}}
  log(`${fName7(k)}: ${w===S?G7(`Ngươi đoạt giải ${SC7[kind].n}: ${pz7(pz)}.`):`${R7("Không thành:")} ${w.name} đoạt giải ${SC7[kind].n} (${pz7(pz)}).`}${me}`);
  if(!shown)Q.push({t:`${fShort7(k)} · Hội thi ${SC7[kind].n}: kết quả`,h:rowsH7(L,`${fName7(k)} · bảng phần thi`),who:pEmp(),must:1})}
-function fxFin7(title,L,shown){if(!L.length)return;const w=L[0].p;ap(w,{sung:8,danh:3});const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&empGive(w,50,"contest"))try{bestow(w,"contest")}catch(e){}const mi=L.findIndex(x=>x.p===S);if(cu&&mi>=1&&mi<=2){apply({danh:1})}
+function fxFin7(title,L,shown){if(!L.length)return;const w=L[0].p;ap(w,{sung:BAL.eff.j71.winSung,danh:BAL.eff.j71.winDanh});const cu=window.CU&&CU.did;if(window.CU)CU.did=false;if(!cu&&empGive(w,50,"contest"))try{bestow(w,"contest")}catch(e){}const mi=L.findIndex(x=>x.p===S);if(cu&&mi>=1&&mi<=2){apply({danh:1})}
  if(w===S){ghenAll(BAL.ghen.contestTop,"ngươi đứng đầu cuộc thi");log(`<span class="g">${title}: ${SC7[L[0].kind].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3.`)}
- else{let r=`${mi>=0?R7("Không thành:")+" ":""}${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (Sủng +8, Danh +3).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""}`;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:BAL.eff.j71.danhFxFin7});r+=` Ngươi đứng chót: Danh ${balSg(BAL.eff.j71.danhFxFin7)}.`}log(r)}
+ else{let r=`${mi>=0?R7("Không thành:")+" ":""}${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (${sgOf(w,BAL.eff.j71.winSung)}, Danh +${BAL.eff.j71.winDanh}).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""}`;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:BAL.eff.j71.danhFxFin7});r+=` Ngươi đứng chót: Danh ${balSg(BAL.eff.j71.danhFxFin7)}.`}log(r)}
  if(mi>=0&&!shown)Q.push({t:`${title}: kết quả`,h:rowsH7(L,`${title}: bảng phần thi`),who:pEmp(),must:1})}
 /* ---------- the old automatic feast contests (Yến tiệc đầu xuân, Thi tài ngày Thất tịch): now an invitation a month before, her talent of choice ---------- */
 const FX7={sac:{f:"xuan",n:"Yến tiệc đầu xuân",m:1,arts:["mua","hat","dan"]},tai:{f:"tt",n:"Thi tài ngày Thất tịch",m:7,arts:["dan","tho","kim"]}};
@@ -392,10 +392,10 @@ function fxInvite7(){const j=j7s();for(const kk in FX7){const F=FX7[kk];const m0
     opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đứng đầu, Sủng ${balSg(BAL.eff.j71.sungStakes)}, Danh ${balSg(BAL.eff.j71.danhStakes)}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh +1 và quà nhỏ · hỏng: đứng chót thì Danh -1 · kèm: đứng đầu thì các phi tần ghen +${ghenN(BAL.ghen.contestTop)}`,go:()=>mgRun7({title,big:true,fk:F.f,art:me.a,E,kindOf:p=>p===S?me.a:fxBest7(p,F.arts),pr:[],meB,stakes:stk7({sung:BAL.eff.j71.sungStakes,danh:BAL.eff.j71.danhStakes},50),done:(L,sh)=>fxFin7(title,L,sh)})},
      {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>fxFin7(title,mgX7(true,()=>cScore7(E.filter(p=>p!==S),p=>fxBest7(p,F.arts),[],0)))}]});return ""}
   if(me)apply({suc:-J71.cost});
-  const L=capRank7(cScore7(E,p=>p===S?me.a:fxBest7(p,F.arts),[],meB));const w=L[0].p;ap(w,{sung:8,danh:3});if(empGive(w,50,"contest"))try{bestow(w,"contest")}catch(e){}
+  const L=capRank7(cScore7(E,p=>p===S?me.a:fxBest7(p,F.arts),[],meB));const w=L[0].p;ap(w,{sung:BAL.eff.j71.winSung,danh:BAL.eff.j71.winDanh});if(empGive(w,50,"contest"))try{bestow(w,"contest")}catch(e){}
   let r="";const mi=L.findIndex(x=>x.p===S);
   if(w===S){ghenAll(BAL.ghen.contestTop,"ngươi đứng đầu cuộc thi");r=`<span class="g">${title}: ${SC7[me.a].n} của ngươi đứng đầu, Hoàng thượng ban thưởng.</span> Sủng +8 · Danh +3. `}
-  else{r=`${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (Sủng +8, Danh +3).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""} `;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:BAL.eff.j71.danhTop});r+=`Ngươi đứng chót: Danh ${balSg(BAL.eff.j71.danhTop)}. `}}
+  else{r=`${title}: ${w.name} dâng ${SC7[L[0].kind].n} đứng đầu (${sgOf(w,BAL.eff.j71.winSung)}, Danh +${BAL.eff.j71.winDanh}).${mi>=0?` Ngươi hạng ${mi+1}/${L.length}.`:""} `;if(mi>=0&&mi===L.length-1&&L.length>2){apply({danh:BAL.eff.j71.danhTop});r+=`Ngươi đứng chót: Danh ${balSg(BAL.eff.j71.danhTop)}. `}}
   if(me)Q.push({t:`${title}: kết quả`,h:rowsH7(L,`${title}: bảng phần thi`),who:pEmp(),must:1});
   /* j54: married daughters come back, princesses perform (same as before) */
   try{const V=[];h54Daus().forEach(([k,p])=>{if(k.hW&&k.hW.kind!=="hoa"&&h54Live(p)){k.hM=cl(k.hM+2,0,100);if((k.hW.joy||50)>=40){ap(p,{sung:1});if(p===S)V.push(h54Name(k))}}});

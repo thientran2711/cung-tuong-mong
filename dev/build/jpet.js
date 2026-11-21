@@ -92,7 +92,7 @@ petWrapAct("kpoison",a=>{a.schemes=(a.schemes||0)+1;ap(a,{duc:-20})});
 (function(){try{const A0=ACT.thathu;if(!A0||A0.__petb)return;const o0=A0.o;A0.o=function(a,t){const o=o0.apply(this,arguments);try{const b=petBest(t,"beast");if(b)return oddsCl(o-b)}catch(e){}return o};A0.__petb=1}catch(e){}})();
 /* night with the Emperor: songbird / peacock sing and spread their tails; mandarin ducks bring closeness */
 if(typeof nightFx==="function"){const nf0=nightFx;nightFx=function(){const r=nf0.apply(this,arguments);try{const s=petBest(S,"sungN"),an=petBest(S,"anN");
- if(s){apply({sung:s});log(`<span class="g">Thú nuôi trong cung đón giá (Sủng +${s}).</span>`)}if(an){S.an=cl((S.an||0)+an,0,100);log(`<span class="g">Đôi uyên ương trước điện, Hoàng thượng thêm tình (Ân tình +${an}).</span>`)}}catch(e){}return r}}
+ if(s){apply({sung:s});log(`<span class="g">Thú nuôi trong cung đón giá (${sgStat(s)}).</span>`)}if(an){S.an=cl((S.an||0)+an,0,100);log(`<span class="g">Đôi uyên ương trước điện, Hoàng thượng thêm tình (Ân tình +${an}).</span>`)}}catch(e){}return r}}
 
 /* ---------------- ĐỠ MỘT MẠNG (thần thú) ---------------- */
 function petRescuer(p){const L=tsbPets(p);let j=-1;L.forEach((P,i)=>{if(petT(P).rescue&&(P.care||0)>0&&(j<0||i===p.petOn))j=i});return j}
