@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"fe5eb0b5+","t":"2026-11-21T15:05Z","c":"law4-typed: j34 sabotage/backer points stored where they are applied (core gate g1-bind) — cut / bp read BAL sabCut / backerPt; old-save sa…","b":"3f3be44d7214","h":[{"s":"8527f09c+","t":"2026-11-21T11:35Z","c":"Đồ thất lạc / kỳ ngộ (E)"},{"s":"ceb5213a+","t":"2026-11-21T11:50Z","c":"Phe thất sủng + cân tiền công việc vặt (E)"},{"s":"d45076b6+","t":"2026-11-21T12:52Z","c":"Chơi chung: tên khách đúng hai bên (B)"},{"s":"da3aa72d+","t":"2026-11-21T12:27Z","c":"Hội thi / trò tài nghệ: giới thiệu tranh trên cùng, đối thủ không bị cắt (#55)"},{"s":"29bc6813+","t":"2026-11-21T11:04Z","c":"Chơi chung: cảm xúc đúng ghế hai bên (D)"},{"s":"c2b10901+","t":"2026-11-21T10:49Z","c":"Hộp thoại: một ô trái, Tốn/Được/Mất đủ, tiêu đề thẳng hàng; bỏ «ma ma» nói thay (#71 #75 #76 #80 #82 #58 #59)"},{"s":"5e7dae26+","t":"2026-11-21T13:05Z","c":"Dư đồ: bấm người → cảnh tập trung, nút hành động hai bên (Bước 1)"},{"s":"3f08f4f2+","t":"2026-11-21T10:56Z","c":"Màn kết cục phần 2 + Sang buổi toàn màn (#52 #84)"},{"s":"352b2b18+","t":"2026-11-21T10:54Z","c":"Màn kết cục / kiếp này: một khung chung (#48 #50 #51)"},{"s":"c5bbde7e+","t":"2026-11-21T11:14Z","c":"Thẻ hoàng tự: dòng thông tin bấm được, gọn"}]};
+window.CTM_BI={"s":"9b93a646+","t":"2026-11-21T15:06Z","c":"law4-typed: j34 sabotage/backer points stored where they are applied (core gate g1-bind) — cut / bp read BAL sabCut / backerPt; old-save sa…","b":"e1497dc8f3ad","h":[{"s":"8527f09c+","t":"2026-11-21T11:35Z","c":"Đồ thất lạc / kỳ ngộ (E)"},{"s":"ceb5213a+","t":"2026-11-21T11:50Z","c":"Phe thất sủng + cân tiền công việc vặt (E)"},{"s":"d45076b6+","t":"2026-11-21T12:52Z","c":"Chơi chung: tên khách đúng hai bên (B)"},{"s":"da3aa72d+","t":"2026-11-21T12:27Z","c":"Hội thi / trò tài nghệ: giới thiệu tranh trên cùng, đối thủ không bị cắt (#55)"},{"s":"29bc6813+","t":"2026-11-21T11:04Z","c":"Chơi chung: cảm xúc đúng ghế hai bên (D)"},{"s":"c2b10901+","t":"2026-11-21T10:49Z","c":"Hộp thoại: một ô trái, Tốn/Được/Mất đủ, tiêu đề thẳng hàng; bỏ «ma ma» nói thay (#71 #75 #76 #80 #82 #58 #59)"},{"s":"5e7dae26+","t":"2026-11-21T13:05Z","c":"Dư đồ: bấm người → cảnh tập trung, nút hành động hai bên (Bước 1)"},{"s":"3f08f4f2+","t":"2026-11-21T10:56Z","c":"Màn kết cục phần 2 + Sang buổi toàn màn (#52 #84)"},{"s":"352b2b18+","t":"2026-11-21T10:54Z","c":"Màn kết cục / kiếp này: một khung chung (#48 #50 #51)"},{"s":"c5bbde7e+","t":"2026-11-21T11:14Z","c":"Thẻ hoàng tự: dòng thông tin bấm được, gọn"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4339,7 +4339,7 @@ function coldFacActs(p){const me=p===S,L=BAL.ag.par3.cold.lt,F=BAL.ag.par3.fac,o
  if(f){A.push(...card(`Gửi thư xin rời ${f.name}`,"Viết thư báo với phe rằng ngươi không muốn liên lụy ai nữa.",`rời phe, không dính bè phái: Danh ${balSg(BAL.rcv.prop.danh)} · đồng đảng quý ${me?"ngươi":p.name} ${balSg(-F.leave.rel)}`,F.gLeave,
    ()=>leaveFacSelf(p)));
   if(facRoll(f).some(x=>x!==p)){const q=queenP()&&queenP()!==p?queenP():null;
-   A.push(...card(`Gửi thư tố ${f.name}`,`Kể hết chuyện của phe trong thư, nhờ người dâng lên ${q?(q===S?"ngươi":"Hoàng hậu"):"Hoàng thượng"}.`,`Danh ${balSg(F.sell.danh)}, Sủng ${balSg(F.sell.sung)} · cả phe oán ${balSg(F.sell.oan)}`,F.gSell,()=>sellOut(p)))}}
+   A.push(...card(`Gửi thư tố ${f.name}`,`Kể hết chuyện của phe trong thư, nhờ người dâng lên ${q?(q===S?"ngươi":"Hoàng hậu"):"Hoàng thượng"}.`,`Danh ${balSg(F.sell.danh)}, ${sgOf(p,F.sell.sung)} · cả phe oán ${balSg(F.sell.oan)}`,F.gSell,()=>sellOut(p)))}}
  else{const G=(S.facs||[]).map(g=>({g,l:facLeader(g)})).filter(o=>o.l&&o.l!==p&&facIn(o.l)&&aff(o.l,p)>=F.clanAff).sort((a,b)=>aff(b.l,p)-aff(a.l,p));const o=G[0];
   if(o)A.push(...card(`Gửi thư xin vào ${o.g.name}`,`Xin ${o.l===S?"ngươi":o.l.name} cho đứng cùng phe, để có người bên ngoài nói giúp.`,`${o.l===S?"ngươi":o.l.name} tự quyết (${rcvWord(o.l,p)}) · vào phe thì nhờ phe vận động được`,F.gJoin,()=>rcvAsk("facJoin",p,o.l,o.g.id)))}
  return A}
@@ -5640,7 +5640,7 @@ function judgeVirtue(){const th=traitsOf("th")[0];const e=S.emp.traits;if(e.incl
 function dScore(p,v){const b=judgeVirtue();const m=v===b?6:3;return cl(Math.round(m+(p.duc||0)/25+(p.tamco||0)/30),0,10)}
 function backers(p){const L=[];const q=queenP();if(q&&q!==p&&aff(q,p)>=30)L.push("Hoàng hậu");if((p.th||0)>=50&&!S.thDead)L.push("Thái hậu");const f=facOf(p);if(f)L.push(`phe ${f.name} (${facMembers(f).length})`);if((p.dad||(p===S?S.origin.dad:0)||40)>=60)L.push("nhà mẹ đẻ quyền thế");for(const x of (ct().bk[key(p)]||[]))L.push(x);return L}
 /* law4-typed: a backer won between rounds stores the Thế lực points it adds (ctBackerAdd writes BAL backerPt); bk keeps the names for the table */
-function ctBackerAdd(c,k,bk){(c.bk[k]=c.bk[k]||[]).push(bk);(c.bp=c.bp||{})[k]=(c.bp[k]||0)+BAL.eff.j34.backerPt}
+function ctBackerAdd(c,k,bk){const L=c.bk[k]=c.bk[k]||[],P=c.bp=c.bp||{};/* rv: an old save mid-contest has names but no points yet → seed from the names it already won */if(P[k]==null)P[k]=L.length*BAL.eff.j34.backerPt;L.push(bk);P[k]+=BAL.eff.j34.backerPt}
 function fScore(p){const c=ct(),k=key(p),own=c.bk[k]||[];const A=backers(p);const L=A.slice(0,A.length-own.length);let n=c.bp&&c.bp[k]!=null?c.bp[k]:own.length*BAL.eff.j34.backerPt;for(const b of L)n+=/^phe/.test(b)?Math.min(4,1+(+(b.match(/\d+/)||[1])[0])/2):BAL.eff.j34.backerPt;return cl(Math.round(n),0,10)}
 /* between rounds: each candidate acts (practise, lobby, scheme); her choice is a card, theirs by traits */
 function npcContestAct(p){const c=ct();const R2=c.c.map(byKey).filter(x=>x&&x!==p&&!c.dq.includes(key(x)));const k=key(p);
@@ -90690,7 +90690,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="3f3be44d7214";window.CTM_BUILD=BUILD;
+const BUILD="e1497dc8f3ad";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

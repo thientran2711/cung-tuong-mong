@@ -19,7 +19,7 @@ function judgeVirtue(){const th=traitsOf("th")[0];const e=S.emp.traits;if(e.incl
 function dScore(p,v){const b=judgeVirtue();const m=v===b?6:3;return cl(Math.round(m+(p.duc||0)/25+(p.tamco||0)/30),0,10)}
 function backers(p){const L=[];const q=queenP();if(q&&q!==p&&aff(q,p)>=30)L.push("Hoàng hậu");if((p.th||0)>=50&&!S.thDead)L.push("Thái hậu");const f=facOf(p);if(f)L.push(`phe ${f.name} (${facMembers(f).length})`);if((p.dad||(p===S?S.origin.dad:0)||40)>=60)L.push("nhà mẹ đẻ quyền thế");for(const x of (ct().bk[key(p)]||[]))L.push(x);return L}
 /* law4-typed: a backer won between rounds stores the Thế lực points it adds (ctBackerAdd writes BAL backerPt); bk keeps the names for the table */
-function ctBackerAdd(c,k,bk){(c.bk[k]=c.bk[k]||[]).push(bk);(c.bp=c.bp||{})[k]=(c.bp[k]||0)+BAL.eff.j34.backerPt}
+function ctBackerAdd(c,k,bk){const L=c.bk[k]=c.bk[k]||[],P=c.bp=c.bp||{};/* rv: an old save mid-contest has names but no points yet → seed from the names it already won */if(P[k]==null)P[k]=L.length*BAL.eff.j34.backerPt;L.push(bk);P[k]+=BAL.eff.j34.backerPt}
 function fScore(p){const c=ct(),k=key(p),own=c.bk[k]||[];const A=backers(p);const L=A.slice(0,A.length-own.length);let n=c.bp&&c.bp[k]!=null?c.bp[k]:own.length*BAL.eff.j34.backerPt;for(const b of L)n+=/^phe/.test(b)?Math.min(4,1+(+(b.match(/\d+/)||[1])[0])/2):BAL.eff.j34.backerPt;return cl(Math.round(n),0,10)}
 /* between rounds: each candidate acts (practise, lobby, scheme); her choice is a card, theirs by traits */
 function npcContestAct(p){const c=ct();const R2=c.c.map(byKey).filter(x=>x&&x!==p&&!c.dq.includes(key(x)));const k=key(p);
