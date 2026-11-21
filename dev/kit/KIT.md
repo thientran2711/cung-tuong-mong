@@ -652,6 +652,8 @@ Owner OD 21/11 ~04:17Z: an intro / contest frame shows SHORT essentials; "nhữn
 - Co-op: the read time is on her own screen only; the shared buổi clock is never paused (the steal game's host hold `BAL.steal.mg.coopMs` still counts while the friend reads).
 - Test: `node dev/test/mg-ready-guide.js` (every kind × every caller, scan table). Kit page sample «§13.7».
 
+#### 13.7.3 NWB — word-free play-area parts (jnwb.js; owner OD 20/11 ~05:10Z «không có một cái mini game nào mà có chữ») — documented by the kit keeper 21/11
+`NWB.ic(name)` svg icon (stroke = currentColor) · `NWB.btn(id, icon, {alt,cls,label})` icon-only button (the label is only aria-label / tooltip) · `NWB.pips(n,on)` a row of dots (`.nwb-pips`, `.nwb-pip.on`) · `NWB.POP` symbol pops (✓ ✗ ★) for canvas feedback · `.nwb-cap` the ONE-LINE guiding caption BESIDE pips (huong-cue-2: td_hanh «còn N phần để chia», «<tên> · cần X phần · nhận Y»; .75rem bold, ink, centred, wraps, no px size). It is the DOM counterpart of the canvas pill `kg82Guide` (§13.7.2): the same rule «one short state-driven line», drawn in the DOM where the play area is DOM. A caption is never a rule paragraph; no other class may carry a play-area sentence.
 #### 13.7.1 MINI-GAME CUE KIT · BAL.mgFx (review/mg-visual base + review/mg-play2 extensions, owner OD 20/11 ~08:05Z) — `dev/build/j82.js`, numbers `BAL.mgFx` (jbal2)
 ONE look for every in-play cue on any mini-game canvas (every engine family calls these; no engine draws its own glow, lane or danger mark):
 - `kg82FxPop(since,now)` / `kg82FxRing(g,x,y,r,since,now)` (mg-visual): the press pop scale + the blooming press ring (`pop, ms, glow, ring, blur, pass, ringW, dim`).
