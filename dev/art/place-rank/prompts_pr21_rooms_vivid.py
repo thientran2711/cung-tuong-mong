@@ -1,4 +1,5 @@
 # PR21 v2 LIVE (CL target = 'rất nhẹ', owner L1669, rule L28) (owner 21/11 via Foreman C #17, V3-B REJECTED: "không ra một chút gì gọi là Trung Hoa hết trơn, nhìn cứ như là phương Tây ...
+# PR21 v2 LIVE (owner 21/11 via Foreman C #17, V3-B REJECTED: "không ra một chút gì gọi là Trung Hoa hết trơn, nhìn cứ như là phương Tây ...
 #   hình cũ ... có một cái màu trầm nó phủ lên, nó cứ bạc bạc bạc cái hình ... tao muốn nó tươi tắn hơn, chứ không có nghĩa là đổi cả cái
 #   tông màu ... đổi cái saturate chẳng hạn.")
 # A17 diff vs prompts_pr20_rooms_tone.py (TONE v2, dark Chinese woods kept): ONLY the COLOUR LEVEL sentence (A18: saturation / grey veil).
@@ -15,6 +16,9 @@ CL_NEW = ("COLOUR LEVEL (owner L1669: the 'rất nhẹ' look, the same colours o
           "image 2, the same colours as the room in image 1, only a little fresher and richer: every colour clearly readable, no grey veil, "
           "no dull haze and no muted wash over the picture; never faded, never washed out, never grey or dull, never over-saturated, never "
           "neon or glaring.")   # rule L28: after the gen, grade with room_vivid.py ratnhe (0 cr)
+CL_NEW = ("COLOUR LEVEL (owner: fresh and vivid, same colours): rich, clear, saturated colours like the girl in image 2, the same colours as "
+          "the room in image 1 but fresher: every colour clean, vivid and clearly readable, with crisp contrast; no grey veil, no dull haze "
+          "and no muted wash over the picture; never faded, never washed out, never grey or dull, and never neon or glaring.")
 def fix(p):
     assert p.count(CL_OLD) == 1; return p.replace(CL_OLD, CL_NEW)
 OUT = {k: dict(prompt=fix(v['prompt']), refs=[*v['refs'][:3], SWATCH]) for k, v in T.OUT.items()}

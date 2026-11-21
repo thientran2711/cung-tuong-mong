@@ -643,6 +643,7 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | mood-seal (sonnet; OWNER mark #39 21/11 ~03:35Z: mood dialogs show the emotion seal in the corner) | review/mood-seal; briefs/main85-mood-seal.md | MAIN CHÍNH 85 | session_01Rc5AsMBnmtrbTbNUDqJf9M | RUNNING | 21/11 03:01Z |
 | REVIEW bag-inline (SMALL sonnet) of a8ef23ce + merge LIVE | review/bag-inline-rv; briefs/main85-rv-bag-inline.md | MAIN CHÍNH 85 | session_01Rc5AsNNxkaFhociEYPGYWR | RUNNING | 21/11 03:02Z |
 | kit-rel2-span KIT KEEPER (sonnet; MAIN 85 follow-up, lone kitRel2 box spans the row) | review/kit-rel2-span; reports/kit-rel2-span.md | MAIN CHÍNH 85 | session_01Rc5AsMtjP4KTgBZVjENGLs | LANDED d3fa26d3 (rv PASS 181f35de) | 21/11 |
+| kit-rel2-span KIT KEEPER (sonnet; MAIN 85 follow-up, lone kitRel2 box spans the row) | review/kit-rel2-span; reports/kit-rel2-span.md | MAIN CHÍNH 85 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 23afdbea (small; quickcheck PASS) | 21/11 |
 | MAIN CHÍNH 86 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 86 | session_01Rc5AsMD1wiu8K7eDmipUR4 | DONE → MAIN CHÍNH 87 session_01Rc5AsLqvvursHGF726bgwU | 21/11 03:15Z |
 | calendar (sonnet; OWNER mark #42 21/11 ~03:43Z: Lịch tháng = phone-calendar month view) | review/calendar; briefs/main86-calendar.md | MAIN CHÍNH 86 | session_01Rc5AsKtxDx5RQDYwoX6exA | RUNNING | 21/11 03:10Z |
 | dialog-stack (sonnet; OWNER mark #46 21/11 ~03:52Z: never two dialogs overlapping) | review/dialog-stack; briefs/main86-dialog-stack.md | MAIN CHÍNH 86 | session_01Rc5AsMKqxj4qxqFG31WLXb | RUNNING | 21/11 03:10Z |
@@ -650,6 +651,9 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | SẴN SÀNG KIỂM d4c723d4 (reports/map-places.md MEM FIX r2) | 21/11 03:14Z |
 | dialog-stack (sonnet; OWNER mark #46: death dialog under open person dialog; ONE kit stacking rule) | review/dialog-stack; briefs/main86-dialog-stack.md; reports/dialog-stack.md | MAIN CHÍNH 86 | session_01Rc5AsMKqxj4qxqFG31WLXb | RUNNING | 21/11 03:14Z |
 | kit-tap-word KIT KEEPER (sonnet; OD 21/11 ~03:40Z trait tap-words) | review/kit-tap-word; reports/kit-tap-word.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | LANDED (rv PASS 0d60ae54, LIVE with tap-word) | 21/11 |
+| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | RUNNING | 21/11 03:14Z |
+| dialog-stack (sonnet; OWNER mark #46: death dialog under open person dialog; ONE kit stacking rule) | review/dialog-stack; briefs/main86-dialog-stack.md; reports/dialog-stack.md | MAIN CHÍNH 86 | session_01Rc5AsMKqxj4qxqFG31WLXb | RUNNING | 21/11 03:14Z |
+| kit-tap-word KIT KEEPER (sonnet; OD 21/11 ~03:40Z trait tap-words) | review/kit-tap-word; reports/kit-tap-word.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 410c4f44 (small; quickcheck PASS) | 21/11 |
 | kit-dialog (sonnet; OWNER marks #44 seal, #47 figure size, #49 option card/fixed dialog — split from keeper) | review/kit-dialog; briefs/main86-kit-dialog.md | MAIN CHÍNH 86 | session_01Rc5AsMcXo2ivEx1p5K5Ysh | RUNNING | 21/11 03:15Z |
 | REVIEW chiton-name rv2 (SMALL sonnet) | review/chiton-name-rv2; briefs/main86-rv-chiton-name.md | MAIN CHÍNH 86 | session_01Rc5AsJz4mUrjazcfdR5JPr | RUNNING | 21/11 03:15Z |
 | REVIEW menu-panel (SMALL sonnet) | review/menu-panel-rv; briefs/main86-rv-menu-panel.md | MAIN CHÍNH 86 | session_01Rc5AsLEtGvABQjjGRj13hB | RUNNING | 21/11 03:13Z |
@@ -671,6 +675,10 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | E39 story-voice LITERATURE EXPERT (opus; ORDER MAIN CHÍNH 86 04:20Z, owner mark #61 parts 2+3; briefs/E39-story-voice.md) | review/story-voice; reports/story-voice.md | FOREMAN E #25 | session_01DgYSWmTZftqSHzNfaNSkze | SSK fc4cd224 | 21/11 03:50Z |
 | REVIEW story-voice E39r (opus BIG; briefs/E39r-review-story-voice.md) of fc4cd224 | review/story-voice-r1; reports/story-voice-review.md | FOREMAN E #25 | session_01DgYSWmZAn1p5vC81Fitfpw | RUNNING | 21/11 04:40Z |
 | REVIEW empty-states r2 (SMALL sonnet) 892976db | review/empty-states-rv2; briefs/main87-rv-empty-states.md | MAIN CHÍNH 87 | session_01Rc5AsMCJmZryqUCw8ZbtnY | DONE PASS ee8847b0 | 21/11 03:50Z |
+| kit-leftcol-read KIT KEEPER (sonnet; addendum 9 left column readable, no empty band) | review/kit-leftcol-read; reports/kit-leftcol-read.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5fc1b026 (small; quickcheck PASS on rerun) | 21/11 |
+| MAIN CHÍNH 87 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 87 | session_01Rc5AsLqvvursHGF726bgwU | RUNNING | 21/11 03:45Z |
+| E39 story-voice LITERATURE EXPERT (opus; ORDER MAIN CHÍNH 86 04:20Z, owner mark #61 parts 2+3; briefs/E39-story-voice.md) | review/story-voice; reports/story-voice.md | FOREMAN E #25 | session_01DgYSWmTZftqSHzNfaNSkze | RUNNING | 21/11 03:50Z |
+| REVIEW empty-states r2 (SMALL sonnet) 892976db | review/empty-states-rv2; briefs/main87-rv-empty-states.md | MAIN CHÍNH 87 | session_01Rc5AsMCJmZryqUCw8ZbtnY | RUNNING | 21/11 03:50Z |
 | REVIEW chapter-card r2 (SMALL sonnet) 52657663 | review/chapter-card-rv; briefs/main87-rv-chapter-card.md | MAIN CHÍNH 87 | session_01Rc5AsNH8m96AMdWBf7vREp | RUNNING | 21/11 03:50Z |
 | bag-inline-3 worker (sonnet; F1 F2 of bag-inline-2; succeeds JTtZ) | review/bag-inline-2; briefs/main87-bag-inline-3.md | MAIN CHÍNH 87 | session_01Rc5AsJuyCsaNqz1pfQgV8q | RUNNING | 21/11 03:50Z |
 | fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | RUNNING | 21/11 05:52Z |
@@ -714,3 +722,12 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | MAIN CHÍNH 88 (coordinator; land queue + owner marks) | handover branch | MAIN CHÍNH 88 | session_01Rc5AsL9RckY86bdwv8NheC | RUNNING | 21/11 04:25Z |
 kit-rankunit rv2 | review/kit-rankunit-rv2 d3f5ea28 | rv session | PASS | 21/11
 | REVIEW map-places-r2 r1 (opus BIG) of d4c723d4 | review/map-places-r2-r1 | B | session_01N1tNP6yVqCugi1vTEyrEka | RUNNING | 21/11 04:43Z |
+| map-places mem fix (opus; consort role-parity OOM on land branch; brief briefs/b-map-places-mem.md) | review/map-places-r2-land | B | session_01N1tNP2WuK5mpdfoK3vLBAr | RUNNING | 21/11 03:14Z |
+econ-tamco F2/F3 fix | review/econ-tamco | session_01964izEeakvu1zSofrTWNJJ | RUNNING | 21/11 03:35Z (D #13; succeeds CiU7bSoQ)
+kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
+| kit-leftcol-read KIT KEEPER (sonnet; addendum 9 left column readable, no empty band) | review/kit-leftcol-read; reports/kit-leftcol-read.md | MAIN CHÍNH 86 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 5fc1b026 (small; quickcheck PASS on rerun) | 21/11 |
+| MAIN CHÍNH 87 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 87 | session_01Rc5AsLqvvursHGF726bgwU | RUNNING | 21/11 03:45Z |
+| E39 story-voice LITERATURE EXPERT (opus; ORDER MAIN CHÍNH 86 04:20Z, owner mark #61 parts 2+3; briefs/E39-story-voice.md) | review/story-voice; reports/story-voice.md | FOREMAN E #25 | session_PENDING_E39 | RUNNING | 21/11 03:50Z |
+| fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | (opening) | RUNNING | 21/11 05:52Z |
+| hao-huu (OPUS; owner mark #2 decision 21/11 ~06:05Z: Hảo hữu icon bottom of left room-stage column → partner panel) | review/hao-huu; briefs/main87-hao-huu.md | MAIN CHÍNH 87 | session_01Rc5AsKMNBVnS15FJkKKYgv | RUNNING | 21/11 04:04Z |
+| REVIEW dialog-person part 1 (SMALL sonnet) de1d7e11 (#58 #59 #67 ma-ma gone) | review/dialog-person-rv; briefs/main87-rv-dialog-person.md | MAIN CHÍNH 87 | session_01Rc5AsN3rZiBn3phiQQMFeK | RUNNING | 21/11 04:08Z |
