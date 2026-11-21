@@ -663,6 +663,9 @@ ONE look for every in-play cue on any mini-game canvas (every engine family call
 - Rules-screen demos `NWB_DEMO.aim / slapbar(kind) / cook / tspluck / doiline / hoadien` (jnwb): the object, a hand doing the move, the ✓ (still under Cảnh động off).
 - Used by: ban, tat, ne, banh, duho, doi, hoadien, td_ngon. Tests: `mg-noword-a/b` whitelist exactly these strings (GUIDE table).
 
+#### 13.7.3 FIGURE-COLUMN BACKDROP PER SUBJECT (owner OD 21/11 ~03:48Z + ~03:50Z, review/mg-5s-clear) — `dev/build/j82.js` KG82_MGBG, `j79.js` kitGameFig
+On the wide screen (html.kv2) the figure column of every mini-game frame (intro AND playing) stands on a NEW tall painting per subject, not the board picture, not the flat yellow. ONE table `KG82_MGBG[kind]` → `img/mgbg-<kind>.webp` (art: Foreman C). `kg82Pic(kind)` records the kind, `kg82Open` passes it, `kitGameFig` sets `--mgbg` + `.kgf-bg`; a missing file = the old cream gradient (CSS layered fallback). Fold (html.kv1) has no figure column: unchanged.
+
 ### 13.8 HEAD-TO-HEAD SPLIT BOARD «Thách đấu» · kitGameVs (owner OD 20/11 ~01:00Z item 1, K-PM-1, review/kit-gamevs) — `dev/build/jgamevs.js`, knobs `BAL.gameVs` (jbal2)
 ONE shared live board for EVERY person-minigame art (đàn, cờ, hát, múa, thư pháp, họa, thêu, hương … any KG82 / person game that plays against a living NPC or friend): her board + the opponent's live score and clock side by side. Display only: no game logic, no rule numbers (the game owns them; the part only has `BAL.gameVs` = pop / warn / end knobs).
 - `kitGameVs({box, me:{p|face,name}, opp:{p|face,name}, unit:"phần", round, total, oppBoard})` → controller; mounts at the top of `box` (default `kg82Box()`), after `kgReady` (§13.7). Portrait = `kitFaceH` (kit portrait), score and clock = kit chips (`.kchip`), panes use `--k-hair / --k-card / --gold`.
@@ -945,7 +948,7 @@ ladder words from the real formulas; "có thể gặp người" → real words.
 ## 21. SKILL CARD = THE ONE HEAD CARD (kit 2; one form since review/tabs-kit r7, owner 11/15) — `dev/build/j79.js`
 `kitSkillCard({kind, k, name, kicker, level, max, word:"Bậc", prog:[cur,need] | prog:cur+need:n, bar:false, desc, next, levels:[text per level], acts:[pbtn…], img, stepsAttr, can})` → `.kskill`
 - ONE card for every art and Tứ đức course (Tài nghệ), every Tác phẩm line, the Mệnh truyện chapter head and the Sắc phong head, and every
-  empty state (`kitEmpty(title,line)` = this card with `max:0`, the topic's kitInfoArt picture and one short line). No other head / empty frame.
+  empty state (`kitEmpty(title,lines,o)` = the big empty card of §37.2). No other head / empty frame.
 - LEFT: the painted picture as `kitSceneArt(src,name,{size:"thumb"})` (§28.19: 64 px square, 56 px on phones). `img` default = `kitSkillArt(kind,k)`
   (`img/art-<k>.webp` / `img/vir-<k>.webp` when in INFO.json have; else act-category art).
 - RIGHT: kicker (small, e.g. "Chương 2", "Điều kiện sắc phong"), name + **kitSteps** (`max` segments + "<word> l/max"; with `stepsAttr` the steps are a
@@ -2851,9 +2854,12 @@ for a living player; nothing is lost: each fact now sits on a person card.
 - **Quý tộc kén rể · kén dâu** (`qt`): unpromised công tử (`S.hPool`) then quý nữ (`S.qPool`); card = Nhà (con trai/gái <chức>), Phe, Tuổi,
   Sắc · Tài (or "chưa rõ"), "Hỏi được cho: <con>" when a match fits her child; act "Dò hỏi gia thế" (1 khắc, Bạc -5, sure) for a stranger.
 
-### 37.2 Empty sub-tab = ONE kit card (`htEmpty(art, title, lines)` → `.khtempty`)
-`kitArtFrame` picture (act-cat-cham-con / act-phong-tuoc / act-hon-su / act-cat-trieu-chinh) + title (seal colour) + 2–3 bullet lines
-saying how the tab fills. Never a blank panel, never a run-on paragraph. Narrow container (≤ 420 px): picture over text.
+### 37.2 Empty tab / sub-tab / panel = ONE kit card (`kitEmpty(title, lines, {art|topic, acts})` → `.kempty`, j79 §21; `htEmpty` = thin alias)
+Owner 21/11: "khi không có thông tin thì hiện như «Ta chưa có con»: nhìn cái trang cho nó đỡ trống". Picture LEFT (`o.art` path, else
+`kitInfoArt(o.topic||title)`, else neutral tile; narrow container ≤ 420 px: picture over text) + title «Ta chưa có …» / «Chưa có …» (seal colour) +
+2–3 hint bullets saying how it fills. Never a blank panel, a lone `<p class="past">` or a run-on paragraph. Used by every empty state: Phe phái hậu cung,
+Nam nhân, Hoàng tự (Con của ta / Kế vị / Hoàng tự trong cung / Hôn sự / Kén rể), Thư từ, Mệnh truyện (Chương / Sắc phong / Đã qua), Việc nhờ (3 tabs), Gia tộc,
+Phụ tuyến, Triều cục, bảng xếp hạng. Scan: `node dev/test/empty-scan.js`; forced-empty shots: `node dev/test/empty-shots.js`.
 
 ### 37.3 Strangers (owner "mọi tên có mặt", "Người lạ")
 Công tử / quý nữ are strangers until seen in a marriage talk, met by a daughter, promised / married, or asked about: grey kit silhouette
@@ -4040,6 +4046,7 @@ Old list (kept for the right panel): 3. **Sở trọng** `kitRows`: known tính 
 Not filled: her own card, children, "Người lạ". Dislikes/likes (review/pcard-dislikes, `jdis.js`) are rows of the Sở trọng block; `kitPcKey` lifts the known ones to the left.
 **Event dialogs (ksz3 "Có người đến" / kdper, §32.7)**: NOT changed here. The figure there is the event stage column (§32.7b/§33.6, ladder `kszLivePick3`), a taller left column makes the ladder jump to XL; a key strip needs its own kit task (see reports/person-leftcol.md).
 **73.1 Fact rows (owner 17/11 ~14:15Z + ~14:40Z, review/pcard-facts) — kit part `kitFactRows` / `kitFactTap` (`j79.js`, next to `kitRows`)**: a known-fact row (Sở trọng / Đã biết / Dạo này, the Hậu cung / Giao tình / Nam nhân / Cung nhân / NPC cards, and the "Đã biết về X" column of the relation card) shows the FACT itself first, short ("Thích Cầm", "Ghét …", "Ta đã biết: đó là Quý phi …"): no "Tháng …, năm …: Dò được:" prefix and no "…" cut-off (the `.krv` line-clamp is gone). When / how / who found it open in a kit pop-up (`kpPop`) on tapping the fact; a tappable fact carries the kit dotted underline (`.kgl.kfx`, same look as the glossary tip). `kitFactRows([{l:label, f:fact html | [facts], d:{when,how,src}|null, c:cls}])`; `kitFactTap(fact, detail)` for one fact; no detail → plain text, nothing to open. `kitKnownList(p)` (jhc) now also returns `how` (Dò được / Chuyện trò / Dâng quà …). Test: `node dev/test/pcard-facts.js <url> <outdir> [WxH@dpr]`.
+**62.1 NO VISIBLE «Ghi chú» ROW (owner 21/11 ~04:30Z «Mấy cái ghi chú như vậy là để thành cái dấu chấm than ở kế bên cái sự việc của nó», repeat of OD L1867; review/kit-ghichu-bang) — `kitRows` / `kitNoteBang` (`j79.js`)**: in every kit row table (dialog info frames such as «Bổng lộc tháng ba», item cards, results, books) a row labelled «Ghi chú» is NOT drawn: its text goes behind the kit yellow round «!» (`.khap.kgnb`) at the END of the row just above it (the line it explains: «Bị cắt xén … (!)»); tap → the kit pop-up titled «Ghi chú» with that text. A Ghi chú with no row above it stays a row. One place (kitRows), no caller changes. Act-card Ghi chú (person-card info box §6.3, option cards behind their own «!» §6.2b) are separate approved forms. Test `node dev/test/kit-ghichu.js <url>`.
 **73.2 TAP-WORD (owner 21/11 ~03:40Z CANON, review/kit-tap-word) — `kitTapWord(word, meaning)` / `kitTraitWords(keys)` (`j79.js`, next to `kitFactTap`)**: a trait is NOT a bullet box and NOT behind the avatar «!»: it is a short WORD with the kit dotted underline; tapping it opens the small kit popup with ONLY that word's meaning (word as the title). The person header rows read «Tính cách | Đa nghi, Hiếu thảo», «Trọng | tài nghệ, sắc». One word per trait game-wide (ETRAITS: «Đa nghi», never «dễ nghi»). `kitTraitWords(["danghi","hieuthao"])` (or the words) → the comma-joined tap-words, meaning from ETRAITS. The avatar «!» (§6.3b-1) stays only for non-word info (e.g. «Người chạy việc của cung…»). Test: `node dev/test/kit-tap-word.js <url>`; kit sample «§73.2».
 `pcfBlocks(person, o, quick)` returns the HTML (kit sample §73). `window.__pcfOff=true` disables. Test: `node dev/test/pcard-fill.js <url> <outdir> [sizes]`.
 
