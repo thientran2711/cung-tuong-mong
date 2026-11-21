@@ -40,3 +40,23 @@ Family (all ranks): 2 robes; ONE quju wrap sentence "wrapped outer robe (quju, k
 | t8 HH | t8_HAN_BAC_fromhqp_L1732 | Phi/QP collar + quju + inner pink, richest gold-and-pearl yoke w/ cabochon ruby & jade drops, nine-phoenix crown (kept) | small gold phoenix roundels along collar bands + wrap edge | 9989 | PASS |
 Trims to fit 10 000 (listed in each .keep): repeated "Full-body standing figure…" line (S18 smile kept), dup Image-2 sentence (t6), Image-2 folded into the yellow phrase (t7/t8), dup sleeve-layer words, dup floor-length words (t8).
 Not changed: each rank's face, colours, item, pose (except "skirt swirling/swinging" → "robe hem stirring slightly" at t3/t4 for crisp cloth), angle, captions now "Khúc cư …".
+
+# HAN3 job 7 REDO — LADDER3 t1–t8 (owner L1766/L1767/L1769 via #21; supersedes LADDER2 bb3f782). 0 gens.
+Files dev/art/seasons4/s62_t{1..8}_HAN_LADDER3_L1769.txt + .keep (base = Phi han_bac_base/s62_t5_HAN_BAC_02cd263.txt for all 8; keep PASS all). Generator: seasons4/make_han_ladder3_L1769.py (rank slots taken from s62_t1_HAN_BAC / LADDER2 t2–t8).
+BYTE-IDENTICAL in all 8 (checked by script, count = 1 each):
+- fabric: "The FABRIC is medium-weight silk SATIN (đoạn): clearly thicker and more opaque than thin silk gauze … NOT heavy stiff brocade like the Empress; … (thướt tha); the small embroidered motifs are stitched in fine gold thread." + "The satin has real weight, a little more than thin silk: …"
+- stiff collar core: "open WIDE: the lapels sweep out toward the edge of the SHOULDERS and meet low at the chest in a broad V, showing her neck and collarbones fully but modestly (never narrow near the neck, never a tight high crossing)" (prefix "the crossed collars of BOTH / ALL THREE / ALL FOUR robes")
+- "… showing as a wide layered edge(s) inside the … outer collar" + "stacked WIDE gold-edged collar bands in the wide V … one for each robe"
+- straight hem "a long straight-hem outer robe (zhiju) … reaching the floor"; no wrap words anywhere; no cape/cloud collar/shawl.
+These are the words that carry the stiff collar (with "no shoulder piece/cape" at t1–t3 and the fringe kept OUTSIDE the collar at t4+).
+| rank | layers/bands | changes | ch | check_store |
+|---|---|---|---|---|
+| t1 Đáp ứng | 2/2 | peach/ivory, small sparse lilac sprays, narrow hem band, soft sash no pendants, silver pins, lilac flower | 9093 | M06/M07/S06 fabric waiver |
+| t2 Thường tại | 2/2 | peach/ivory, small tiger lilies, sash + 1 jade disc, silver+pearl pins, pale-jade drum | 9264 | same |
+| t3 Quý nhân | 2/2 | peach/ivory, small-medium China roses, wide hem band, girdle + jade pendant sets, pearl pins, flute | 9296 | same |
+| t4 Tần | 3/3 | plum/blush, medium peach blossoms/magnolias/swallows, buckle belt + 1 zupei, short pearl fringe yoke, bu yao | 9580 | M06/M07 + S13 capelet (none in Hán) |
+| t5 Phi | 3/3 | Phi itself; peony medallions → magnolia (peony only t7/t8), longer fringe; layers 2→3 per L1769 | 9386 | M06/M07 = liked Phi |
+| t6 Quý phi | 3/3 | large camellias/osmanthus, more sleeve embroidery, buckle belt + long zupei, fringe + gold tassels, BIG headdress, royal yellow panel/sash/borders | 9950 | B12/S07 brocade + M07 → waiver (owner: same fabric for 8) |
+| t7 HQP | 4/4 (yellow 2nd robe) | large peonies + clouds thick gold, jade-gold belt 2 zupei, layered fringe + jade drops, phoenix crown, necklace (S14), 3-colour rule, cabochon | 9979 | B12/S07/M07 + S14 |
+| t8 HH | 4/4 | MOST yellow, largest densest embroidery + phoenix roundels, richest gold-pearl yoke w/ cabochon ruby/jade drops, nine-phoenix crown | 9993 | B12/S07/M07 |
+Trims t7/t8 to fit 10 000 (in .keep): label tail "clearly much richer…", dup sleeve-layer parenthesis, "RANK BLOCK…" label, "a NEW outfit", dup signature-colour sentence (colour paragraph already says it), GRACE line (t7 and t8 had the same one), shorter crown wording (kingfisher inlay dropped), shorter yellow parts list. All ranks: repeated "Full-body standing figure…" line dropped, S18 smile merged into the Expression line.
