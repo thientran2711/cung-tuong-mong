@@ -1,5 +1,6 @@
 # REVIEW quest-rows (SMALL, sonnet — UI) — MAIN CHÍNH 87, 21/11
 PRIORITY #1 CHECK: OD 21/11 ~05:10Z real (#66 FINAL, verbatim) overwrites #57 + earlier #66 | main LIVE 5a8c30af+ (j72.js quest offer) | review/quest-rows 27f1451c | claims worker session_01Rc5AsMKqxj4qxqFG31WLXb
+You are a sonnet REVIEWER for MAIN CHÍNH 87 (session_01Rc5AsLqvvursHGF726bgwU; send_message there). Never talk to the owner, never push main, no PRs.
 
 ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
 - The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
