@@ -95,6 +95,10 @@ function facePool(filter,who){who=who||S;return f88Keys(filter||"all").map(id=>(
    every other life → "all" = the whole pool of 84 painted women (every id has rank-ladder art, F88_NEED_C). Used by the ONE kit face picker (j86 fpHTML), solo and co-op alike. */
 function kitFaceScope(){try{if((typeof isSrv==="function"&&isSrv())||(S&&S.origin&&S.origin.k==="cnv"))return"maid"}catch(e){}return"all"}
 /* she may choose now: the identity card is open (new life rolled, not yet accepted) */
+/* coop-room-faces (MAIN 95 (2)): true when someone else in the co-op room already wears face id (the room's world, the friend and all her
+   people: COOPW.roomFaces). DATA ONLY for the kit picker: the grey "taken" look of a picker tile is a KIT REQUEST (kit §23 has no
+   disabled-tile state yet); until the kit keeper ships it, a pick of a taken face is still moved to the next free face (j66 pidRoomFix). */
+function faceTaken(id){try{if(!id||!(window.COOPW&&COOPW.on&&COOPW.roomFaces)||(S&&S.pid===id))return false;return COOPW.roomFaces().has(id)}catch(e){return false}}
 function faceOn(){try{return !!(typeof NLP!=="undefined"&&NLP&&S&&S.pid&&f88List(S.pid).length)}catch(e){return false}}
 /* she takes face id: a consort holding it gets her previous face (swap, both stay unique); a servant holding it is cleared and
    draws a fresh maid face later; the stored roll (ctm-nextlife: d.pid + face snapshot) is rewritten so a reload shows the same.
