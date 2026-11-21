@@ -84,3 +84,26 @@ No UI change → no shots needed (VANPHONG: no new player words; KIT: none).
 Minor (not blocking): nmBirth may rename the new player's own drawn name; she sees it first after attach (freshName is drawn after the identity pick), so no shown name changes.
 
 **LAND ORDER:** names-unique-r2-r1 → coop-staff-split-r1 → **coop-name-clash-r1 44cf5202** (contains both + LIVE f6866eb8; landing it lands all three; the role-parity fix 75413e37 is inside) → coop-host-lag-r1 (re-merge: assemble.py list + jkc2 + coop-e2e hunks, as resolved above).
+
+## role-parity 463 (b-nameclash-rp, opus worker session_01N1tNP4qZ3DWxjmCbaKiPNd) — READY 91216b96, cause (a) SCAN artifact
+PRIORITY #1 CHECK ('rougeSteal role-parity hh chest'): OD 0 | ledger 0 | claims 1 (this item) | main 0 | review/* 0 | same pattern as 75413e37 (maid accuse).
+Branch review/coop-name-clash-r1-land463 @ 91216b96 = b6fcaba5 + merge of newest LIVE origin/main b1033eb0 (coop-e2e conflict: COOP_NC_FORCE and COOP_GE checks both kept; index.html/sw.js rebuilt by build_site.sh) + scan fix.
+
+Cause (proved with a source dump of the scan's player side, P[role][label] → source):
+| build | hh player «Lục rương tìm chứng cứ» / «Lấy trộm son phấn» | t1 player | hh gaps |
+|---|---|---|---|
+| LIVE 463d3d70 alone | absent | present (src talk:chest) | N-ONLY cx2:chest, cx4:rougeSteal — LISTED in LIVE's role-parity-open.json → PASS |
+| b6fcaba5 (name-clash + 463) | absent | present (src talk:chest) | same 2 gaps — name-clash r1 had TRIMMED them from the open list (closed on its 548dcd0d base) → FAIL |
+- The player's two cards sit only on the chest person j2 goTo adds in a palace whose owner is away (`P.v && !here.includes(P.v)`); jration adds «Lấy trộm son phấn» on the same person. No rank gate (j2 talkOpts chest). Which palace was empty in the probe hung on the seeded day plan (names draw shifts the RNG), so hh/t6/t7 met every owner at home.
+- NPC side (jagacts2 cx2:chest, jagacts4 p4StealT) picks a target by rule and walks to her palace. Game holds the act on both sides → law 1 intact, no game change.
+Fix (dev/tools/role-parity-scan.js playerOnce, consort side): ask every other live consort's chest directly (`talkOpts({kind:"chest",ref:v,…})`, src talk:chest-direct), the twin of 75413e37's srv-hh probe. Side effect: «up cx2:chest» / «up cx4:rougeSteal» (open N-ONLY) now held by both → trimmed from role-parity-open.json, OPEN_MAX 17 → 13 (list 15 → 13). No exemption added.
+
+Gates on 91216b96:
+| gate | result |
+|---|---|
+| role-parity.test | ALL PASS ×2 (run 1 before the trim noted up chest/rougeSteal closed; run 2 after trim clean) |
+| quickcheck (vs live b1033eb0) | PASS · core gates PASS · time-spill PASS · old save ok · perf new/live render 289/272, tab 552/488, buổi 1831/1390 ms (noise range of earlier runs) |
+| coop-e2e unforced, Fold host | 92/92 |
+| coop-e2e COOP_NC_FORCE=1 COOP_SWAP=1, iPad host | 94/94 · F1 / F2 / F3 ok |
+No UI / wording change → no shots.
+NEXT (Foreman B): re-merge coop-host-lag on top of 91216b96.
