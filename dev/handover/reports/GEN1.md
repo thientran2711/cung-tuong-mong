@@ -238,3 +238,18 @@ gpt-2-6, 9:16, 1k, seed 7172, quality low, 55 cr each (110 total). Refs: face nV
 | t7 Hoàng quý phi | s62_t7_THU_COMOI_v8h | 5jDfVT5Kxe | https://www.magnific.com/app/creation/5jDfVT5Kxe |
 Sheets: dev/handover/review-sheets/thu_t6_t7_earfree_job/sheet_t6.png, sheet_t7.png (label + model + cr + Tổng 110).
 Look: t6 – no earrings, slight left turn, one big chrysanthemum, tú cầu held, yellow sash flat no bow, one-tier scalloped collar with pearl-jade net, two apron panels; a couple of thin loose strands at the ears. t7 – no earrings, frontal, jade flute low, sash flat with NO bow (v8g fault fixed), phoenix crown, small cape with pearl strands, sleeves to the floor. No other faults seen.
+
+## MAID SACHET REDRAW (Foreman C #16, owner L1645 "cung nữ đeo ngọc bội thì phải vẽ lại" — G43)
+#16 answers: (a) 135 cr finals, same settings as originals; (b) ORIGINAL test files + ONLY the G43 sachet swap (make7_gpt g43()), new files + .keep; (3) ma ma skipped (no gen id, can't look / can't copy settings).
+Originals (gen_ledger 3271/3288/3289 + creations_get): gpt-2-6, seed 7172, 2k, ref s7IPw0Ll8e (m18 face), no quality override, 135 cr. New: gpt-2-6 1024x2304 2k seed 7172, same ref, 135 cr each (simulate exact 135). Total 405 cr.
+New prompt files (dev/art/maid7/, each + .keep, keep_check PASS ×3 – only the pendant phrase dropped; the rest of the original text unchanged):
+- test3_tm1_g43.txt (6698 chars; check_store PASS --scope tm1/tm2/maid a18; --scope mama shows only the usual S01/S32 scope noise)
+- test5_nhi_g43.txt (6218; PASS scope tm1/tm2/maid)
+- test5_nhat_g43.txt (7433; PASS --scope mama a18; the OLD file FAILS G43)
+| rank | OLD | NEW | link |
+|---|---|---|---|
+| tam đẳng | Tdw9BE8VNR | eIPYP1ZdqL | https://www.magnific.com/app/creation/eIPYP1ZdqL |
+| nhị đẳng | dt4ZloSXSL | 8aiVighIrU | https://www.magnific.com/app/creation/8aiVighIrU |
+| nhất đẳng | ov6GUhR829 | kseEeAm16B | https://www.magnific.com/app/creation/kseEeAm16B |
+Sheets (OLD | NEW, labels on image + TỔNG 405): dev/handover/review-sheets/maid_sachet_redraw/sheet_tam.png, sheet_nhi.png, sheet_nhat.png
+Look: all three NEW show a small embroidered fragrant sachet (túi thơm) with a tassel at the sash and NO jade disc. Same outfit/colours/hair-up/item as OLD. Differences from OLD (new draw, not only the sachet): tam – jacket a bit longer (past the waist), sash ribbon hangs at the centre; nhị – envelope is mauve instead of cream, jacket gets knot buttons, two-tier short sleeves; nhất – almost identical, cuffs/peonies slightly different. No new faults seen.
