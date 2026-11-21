@@ -17,14 +17,14 @@ function kitPane(){try{const P=$("panel");if(!P)return;let bar=P.querySelector("
  /* the page's own sub-tab row (e.g. Tư trang "Túi đồ · Việc", jinv .kinvsub) — tabs-kit r7 */
  const pg=[...P.querySelectorAll(".ksub")].find(r=>r!==sub&&free(r)&&(r.parentElement!==P))||null;if(pg)pg.classList.add("kpgsub");
  const cat=[...P.querySelectorAll(".kcattabs")].find(r=>free(r)&&!r.classList.contains("ksub"))||null;
- if(!sub&&!pg&&!cat){if(bar)bar.remove();P.classList.remove("kpane");P.style.removeProperty("--kpbarh");return}
+ if(!sub&&!pg&&!cat){if(bar)bar.remove();P.classList.remove("kpane","kpcol");P.style.removeProperty("--kpbarh");return}
  if(!bar){bar=document.createElement("div");bar.className="kpbar";}
  if(P.firstElementChild!==bar)P.prepend(bar);
  const want=[sub,pg,cat].filter(Boolean);
  want.forEach((r,i)=>{const w=r.parentElement;if(bar.children[i]!==r)bar.insertBefore(r,bar.children[i]||null);
   if(w&&w!==bar&&w!==P&&!w.children.length&&!w.textContent.trim())w.remove()});
  [...bar.children].forEach(c=>{if(!want.includes(c))c.remove()});
- P.classList.add("kpane");
+ P.classList.add("kpane");P.classList.toggle("kpcol",!!P.querySelector(":scope > .pgwrap"));/* JS class, not :has() (perf: keeper found :has on #panel failed quickcheck) */
  /* oi-render: the bar's padding / height are READ (computed style + box) — inside a render once at its end (jlag2 renderAfter), the moves above stay at once */
  (window.renderAfter||((k,g)=>g()))("kitPaneM",()=>{try{if(!bar.isConnected||bar.parentElement!==P)return;
  const cs=getComputedStyle(P),pl=cs.paddingLeft,pr=cs.paddingRight;/* lag-play-2: write only what changed (an equal write still dirties style) */if(bar.style.marginLeft!=="-"+pl)bar.style.setProperty("margin-left","-"+pl,"important");if(bar.style.marginRight!=="-"+pr)bar.style.setProperty("margin-right","-"+pr,"important");if(bar.style.paddingLeft!==pl)bar.style.paddingLeft=pl;if(bar.style.paddingRight!==pr)bar.style.paddingRight=pr;const h=Math.round(bar.getBoundingClientRect().height);if(h&&P.style.getPropertyValue("--kpbarh")!==h+"px")P.style.setProperty("--kpbarh",h+"px")}catch(e){console.error("kitPane",e)}})}catch(e){console.error("kitPane",e)}}
@@ -39,7 +39,7 @@ window.kitPane=kitPane;
 #panel.kpane{padding-top:0!important;scroll-padding-top:calc(var(--kpbarh,0px) + 6px)}
 /* NO SCROLL WHEN IT FITS (owner 21/11 "Đứng yên một cái khung hình khi mà không có thông tin dư"): .pgwrap was height:100% of the panel UNDER the sticky tab bar, so every
    card tab / empty card overflowed by the bar's height (65 px) and the panel scrolled for nothing. The panel is a column; the card wrap takes what is left of it. */
-#panel.kpane:has(>.pgwrap){display:flex;flex-direction:column}
+#panel.kpane.kpcol{display:flex;flex-direction:column}
 #panel.kpane>.kpbar{flex:0 0 auto}
 #panel.kpane>.pgwrap{height:auto;flex:1 0 auto;min-height:0}/* grows to fill, NEVER shrinks below its content (rv fail: Ân oán / Chí tôn cards overlapped) */
 #panel.kpane>.kinvpane>.kinv:last-child{margin-bottom:0}/* the bag fits the panel: its 10 px bottom margin + padding made it scroll 3 px */

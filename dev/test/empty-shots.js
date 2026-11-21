@@ -23,6 +23,7 @@ const STATES={
  log:{t:'Sổ ghi (không có dòng)',s:`S.logs=[];tab='log';render()`},
  tdnews:{t:'Phe phái › Triều đình (chưa có tin)',s:`tab='fac';window.__tdV='td';try{S.td&&(S.td.news=[])}catch(e){}render()`},
  staff:{t:'Hậu cung › Cung nhân (không có kẻ hầu)',s:`tab='staff';render()`},
+ court:{t:'Hậu cung › Chí tôn',s:`tab='court';render()`},
  ao:{t:'Giao tình › Ân oán',s:`tab='rel';render()`}
 };
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
