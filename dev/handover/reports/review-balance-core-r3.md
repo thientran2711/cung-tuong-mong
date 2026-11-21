@@ -194,3 +194,17 @@ Other gaps, not Danh: start Tài 60 on LIVE vs 25–32 (BAL.start / one start-ar
 
 ### Handover (knob sample)
 Data and tools stay in the container at /home/user/wt/rv-bot: outk/, runk.sh, sup2.sh `<arm> <N>`, tablek.py (env ARMS, OUT), net36.py, s36.py, indt.js (records l36). Arm worktrees: /home/user/wt/{rst,nf,rmain,kk} (kk = FIX). No knob branch was pushed.
+
+### Last probes (21/11 06:50Z / 07:31Z, for D #14)
+| arm | lives | HH | avg max rank | Danh m0/12/24/36 | Tài m36 | net Danh m0–36 |
+|---|---|---|---|---|---|---|
+| LIVE 8c8b8b6b | 11 | 4/11 = 36 % | 5.00 | 18/51/84/85 | 96 | +53 |
+| tp = ed977bf4 + LIVE start Tài (BAL.start tai = LIVE m0 means ±12) + BAL.art.stUp 2 | 11 | 0/11 = 0 % | 4.00 | 21/12/12/10 | 77 | −10 |
+| nobc e5029d1b (night-final-r3-nobc: LIVE leaves, no growth curve, LIVE start, stUp 2; §4 night and §7 ladder kept) | 10 | 2/10 = 20 % (month 107) | 4.40 | 19/9/10/10 | 88 | −8 |
+
+- tp: start Tài and stUp are not the lever.
+- nobc: HH 20 % is near the ~25 % bar (n=10, ±13 %). Danh m36 10 is far from LIVE's 85.
+- What still separates nobc from LIVE: the §7 ladder (art bậc max 3 at m36 vs 5 at m12). It shows as late bậc-3 cards (Đánh cờ +18 vs +41, Kinh hồng vũ +6 vs +25) and late bậc Danh.
+- The bot's Danh sinks are also larger on nobc: Nhún nhường −168 vs −134, stayRoll −108 vs −85.
+- Đức m36 is 99 on nobc vs 68 on LIVE (night model).
+- The sampler stops here. Data stays in /home/user/wt/rv-bot/outk (arms rmain nf rst kk tp nobc k1 k2).

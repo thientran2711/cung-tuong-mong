@@ -704,3 +704,4 @@ Hourly wake: D #13 trigger trig_014ZYA8cuxME4MXPMmqt99Zy deleted at rollover; D 
   (b) hold night-final until balance-final lands with it;
   (c) ask the owner whether HH reach may drop for a studying player.
   D recommends (a): the night/co-op fixes reach LIVE today, and the re-tune follows in balance-final (ETA ~16–18Z). Reply «a» / «b» / «c» here.
+- (21/11 07:35Z) KNOB SAMPLER GMDXZAV9 → D #14: tp (LIVE start Tài + stUp 2) HH 0/11, Danh m36 10; nobc e5029d1b HH 2/10 = 20 %, Danh m36 10 (LIVE 36 %, 85). Remaining gap = §7 ladder (late bậc-3 cards and bậc Danh) + bot Danh sinks. Report § Last probes. Sampler stopped.
