@@ -31,7 +31,6 @@ Q2 Tam đẳng giờ cũng là áo hồng tay ngắn + đai quấn quanh → g�
  B. Tam đổi kiểu khác (ví dụ quay lại prompt thô sử live tm0 như luật 19/11) — chị chọn kiểu.
  C. Áo hồng tam ngắn tới eo, nhị dài hơn chút qua hông (nhưng vẫn một lớp, đai buộc ngoài áo).
 Q3 Nhất đẳng — tà sau: A. một tà sau liền, dài bằng tà trước · B. hai tà sau (xẻ giữa lưng) như hai tà trước.
-<<<<<<< HEAD
 
 ## ROUND 2 — owner L1656 via Foreman C #17 ("no more questions, decide from history"). 0 gens.
 History (briefs maid7b/maid7c/maid-edits-1162/maid-L1352, ledger 3014–3289): the run she OK'd = the L1352 DUYỆT set → tam Tdw9BE8VNR (test3_tm1, "Tam đẳng ok" 20/11 16:40Z after her v2 fixes: same outer fabric, vạt not cut by the sleeve, hem embroidery), nhị dt4ZloSXSL (test5_nhi = round-1 prompt), nhất ov6GUhR829 (test5_nhat). Later explicit fixes only: G43 sachet (L1608), K29 (L1653).
@@ -41,5 +40,3 @@ History (briefs maid7b/maid7c/maid-edits-1162/maid-L1352, ledger 3014–3289): t
 | Nhị đẳng | **dev/art/maid7/test7_nhi_L1656.txt** (new, .keep) | test5_nhi_g43 + ONE added clause: "the pink jacket is the ONLY layer over the blue ruqun and ends at the waist: the sash wraps AROUND the pink jacket, nothing of the jacket hangs below the sash (no front panels, no vạt, no second layer), no long robe or long coat over the skirt, the sash ends short;" — 0 words cut; sleeves (layered half-sleeves + blue sleeves ~2 spans), collar, colours = dt4ZloSXSL prompt. No front panels → vest logic n/a. test6_nhi = WITHDRAWN. | keep PASS (0 drops); S01+S32 = same as base |
 | Nhất đẳng | **dev/art/maid7/test6_nhat_L1653.txt** (round 1, kept) | vest logic: S32 front hai tà verbatim + back tà SAME length/cloth/border/embroidery, never front-only; embroidery + colour lines name the back tà | check_store PASS |
 OLD|NEW sheet — OLD gen ids: tam **Tdw9BE8VNR**, nhị **dt4ZloSXSL**, nhất **ov6GUhR829** (sachet redraws to retire: eIPYP1ZdqL, 8aiVighIrU, kseEeAm16B). keep_check --all 346 PASS. §4 questions withdrawn.
-=======
->>>>>>> f29c8990 (rv-chiton-name rv2 report)
