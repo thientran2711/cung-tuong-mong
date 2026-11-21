@@ -124,9 +124,11 @@ function kszBtn(o){const R=o.rows||[],hint=R.filter(r=>/^gợi ý$/i.test(r[0]))
 /* rank + name of a person for the tag (kitTitle = the one rank / role word; Thái hậu / Hoàng thượng carry no own name) */
 function kszRankName(p){if(!p)return["",""];if(typeof S!=="undefined"&&p===S)return[S.out?"Phế phi":RANKS[S.rank].n,S.name];let r="";try{r=kitTitleOf(p)}catch(e){}if(!r&&(p.kind==="th"||(S&&p===S.thO)))r="Thái hậu";if(!r&&S&&p===S.emp)r="Hoàng thượng";if(!r&&p.queen)r="Hoàng hậu";if(!r&&typeof p.rank==="number"&&typeof RANKS!=="undefined"&&RANKS[p.rank]&&rivals&&rivals.includes(p))r=RANKS[p.rank].n;
  let n=(S&&(p===S.emp||p===S.thO||p.kind==="th"))?"":(p.name||"");try{if(r&&n)n=kitTitledName(r,n)}catch(e){}/* review r1: a person whose name she does not know yet prints "???" on line 2 (as the 32.7 column does); never the half-masked "Bùi Thị vệ ???" the global name mask made of a bare name */try{if(n&&!(S&&(p===S||p===S.emp||p===S.thO||p.kind==="th"))&&typeof kitKnownName==="function"&&!kitKnownName(p))n="???"}catch(e){}return[r,n]}
+/* owner 21/11 #81: when the left subject is HER, her rank / name tag gets «(ta)» under the name — she does not remember her own name */
+function kszTa(tag,p){try{if(p!==S||!tag)return tag;const t='<small class="knr-ta">(ta)</small>';if(/<\/div><\/div>$/.test(tag))return tag.replace(/<\/div><\/div>$/,t+"</div></div>");if(/<\/div>$/.test(tag))return tag.replace(/<\/div>$/,t+"</div>")}catch(e){}return tag}
 function kszFigHtml(p){let src=kitFigOf(p);if(p&&p.kind==="th"&&(!src||/unknown|sil/.test(src)))src=kszImg("img/fig-thaihau-h1-a51.webp");
  const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p)}catch(e){}if(p&&(p.kind==="th"||(S&&(p===S.thO||p===S.emp)))&&typeof kitRankCol==="function")col=kitRankCol(7);
- const tag=typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col);const age=p&&typeof p.age==="number"?p.age:null;
+ const tag=kszTa(typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col),p);const age=p&&typeof p.age==="number"?p.age:null;
  return `<div class="kszfig">${tag}<span class="kszfs"><img src="${src}" alt="" crossorigin="anonymous" data-age="${age==null?"":age}"></span></div>`}
 /* (6) ONE figure scale: the measured BODY (kitFigBody ht → b) of every figure = the layout's body height × KIT_FIG.fac (never the picture box) */
 function kszFigFit(root){(root||document).querySelectorAll(".kszf .kszfig>.kszfs>img").forEach(im=>{const f=im.closest(".kszf");const lay=KIT_SIZE.lay[f.dataset.lay||"big"]||KIT_SIZE.lay.big;
@@ -248,7 +250,7 @@ function kszItemsSheet(){const ks=["tramngoc","vongngoc","luahang","nhansam","th
 
 /* ================= v3 · kit-size #3 (owner 16/11 16:45Z s20, OD "(16/11 16:45Z, s20 chat)" (1)–(6)) =================
    (1) EVERY frame shows BOTH the person AND the event picture (the event picture = the real game path: the event's own picture, else
-       kitDefaultBanner(m,kind), jk4 §50.3 OD:L448). A frame with no person of its own gets its NARRATOR (BAL.staff.narrator, owner 16/11 19:23Z: the named
+       kitDefaultBanner(m,kind), jk4 §50.3 OD:L448). A frame with no person of its own shows its MAIN SUBJECT, else the event picture (owner 21/11 canon overwrite: the palace-official narrator is gone; was owner 16/11 19:23Z: the named
        palace official whose office covers the topic — Quản sự ma ma, Chưởng sự cô cô, Tổng quản thái giám, Kính sự phòng; jstaff).
    (2) every kind comes in S / M / L / XL and EACH SIZE HAS ITS OWN PRESENTATION (KIT_SIZE.v3.pres):
        S  = "one": ONE main picture LEFT, chosen by what the frame is about (KIT_SIZE.v3.focus):
@@ -266,9 +268,6 @@ function kszItemsSheet(){const ks=["tramngoc","vongngoc","luahang","nhansam","th
 KIT_SIZE.v3={
  focus:{news:"event",rule:"event",notice:"event",night:"event",intel:"event",evidence:"event",reward:"event",week:"event",
         info:"person",result:"person",choice:"person",threat:"person",person:"person",end:"person"},
- /* narrator map = BAL.staff.narrator (jbal, one core; owner 16/11 19:23Z: the palace official whose office covers the topic); this is only the
-    fallback when BAL has no map */
- narrator:{news:"kn",notice:"kn",week:"kn",choice:"kn",rule:"tn",info:"tn",evidence:"tn",night:"ksp",reward:"tq",intel:"maid",threat:"maid",person:"maid",end:"me",result:"me"},
  pres:{S:"one",M:"fig",L:"fig",XL:"fig"},
  /* S = small content: body up to bodyS, body + its button rows up to capS */
  bodyS:200,capS:{kv1:340,kv2:340},
@@ -297,7 +296,7 @@ window.kitPicSubj=kitPicSubj;
 .ksz3[data-pres="fig"] .k3body>.kszfig{align-self:flex-start}
 .ksz3 .k3main{flex:none;width:${V.colS}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
 .ksz3 .k3main>.kt3{text-align:center;width:max-content;max-width:${V.colS+24}px}
-.ksz3 .k3mpor{align-self:center}.ksz3 .k3mpor>.pcp{width:${V.porS}px;flex:none}
+.ksz3 .k3mpor{align-self:center}.ksz3 .k3mitem{flex:none;align-self:center;width:${V.colS}px;min-height:${Z.pic[V.picS].h}px;display:flex;align-items:center;justify-content:center}.ksz3 .k3mitem>.kiev{margin:0;max-width:100%}.ksz3 .k3mpor>.pcp{width:${V.porS}px;flex:none}
 .ksz3 .k3mpic,.ksz3 .k3ev{position:relative;overflow:hidden;border-radius:6px;border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 1px #fffaf0;box-sizing:border-box}
 /* S event picture = ONE standard kit size (owner 16/11 19:54Z: no stretched ratio): KIT_SIZE.pic[V.picS] (PM 120x160, 3:4), centred in the body */
 .ksz3 .k3main.k3mpic{flex:none;width:${Z.pic[V.picS].w}px;height:${Z.pic[V.picS].h}px;min-height:0;align-self:center}
@@ -312,23 +311,63 @@ window.kitPicSubj=kitPicSubj;
 .ksz3 .kszfig>.kt3{max-width:calc(var(--kszcw) + 24px)}
 .ksz3.kszf{max-height:none}`);
  const st=document.createElement("style");st.id="k-size3";st.textContent=css.join("\n");document.head.appendChild(st)})();
-/* narrator (owner 16/11 19:23Z): BAL.staff.narrator (one core) → the named palace official of that office (jstaff elderBy / S.court) */
-function kszWho3(sp){if(sp.who)return sp.who;const N=(typeof BAL!=="undefined"&&BAL.staff&&BAL.staff.narrator)||KIT_SIZE.v3.narrator;const n=N[sp.kind]||"maid";
- try{if(n==="me")return S;if(n==="emp")return S.emp;if(n==="maid")return S.maid;if(n==="tq"||n==="ksp")return S.court&&S.court[n]||S.maid;
-  if(typeof elderBy==="function"){let st=elderBy(n);if(!st&&typeof elderInit==="function"){elderInit();st=elderBy(n)}if(st)return st}return S.maid}catch(e){return null}}
+/* THE LEFT SLOT = THE MAIN SUBJECT (owner 21/11: #58 #67 #70 #76 #77, law 6b REAL PEOPLE; the default ma-ma narrator is GONE from every dialog):
+   ONE helper, every frame goes through it (kitFrameLive3 + the kit sample frames). The left slot shows, first match wins:
+   (1) the person the dialog names (sp.who / kitStagePeople) — an Emperor who judges, a thái y who is overheard…;
+   (2) a choice she makes ALONE (a picker she opened: KIT_ACT_PIDS, the entourage picker, an act, a shop) → HER OWN figure;
+   (3) the one person the lines are about (exactly ONE other person named in the text) → that person; many people (a list of visitors) → nobody in particular;
+   (4) only her ("ta"), no other person → HER OWN figure (her own event: fear, tears…);
+   (5) nobody → the event picture (the person-less frame: small frames keep the picture on the left).
+   No palace official stands in a frame because of her office: a person is there only when the scene names her. */
+function kszOwnAct3(m){try{if(!m)return false;return !!(m.entp||m.act||m.shop||m.ownAct||(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid)))}catch(e){return false}}
+function kszNormP(p){return p&&(p.__kp||p)}
+function kszWho3(sp){if(sp.who)return sp.who;if(sp.m&&kszOwnAct3(sp.m))return S;return null}
+function kszSubject3(m,main){try{if(m&&m.subject==="matter")return null;/* #76 the dialog forces "the matter itself" */let P=[];try{P=kitStagePeople(m)}catch(e){}if(P[0])return P[0];if(m&&m.kit&&m.kit.who)return m.kit.who;/* a kitPanel spec names its person */if(kszOwnAct3(m))return S;
+ const ps=[];if(main)main.querySelectorAll(".kfact[data-kfp]").forEach(r=>{const p=typeof kfpGet==="function"?kfpGet(r.dataset.kfp):null;if(p&&!ps.some(q=>kszNormP(q)===kszNormP(p)))ps.push(p)});
+ const oth=ps.filter(p=>kszNormP(p)!==S);if(oth.length===1)return oth[0];if(oth.length>1)return null;
+ if(ps.length===1)return S;/* only she is named */
+ const tx=main?String(main.textContent||""):"";if(/(^|[\s,.;:(])ta([\s,.;:)]|$)/i.test(tx))return S;return null}catch(e){return null}}
+/* the player is the figure: her own small avatar beside her own line is a second copy of the same person (owner 21/11) — see kszAvatarRule3 */
+function kszDropMe3(root){try{if(!root)return;root.querySelectorAll(".kfact.kfme > .md").forEach(x=>{const f=x.closest(".kfact");x.remove();if(f)f.classList.add("kfnodot")})}catch(e){}}
+/* ONE AVATAR RULE (owner 21/11 #62 #64 #65 #78 #79, whole game; run at every layout of a live frame):
+   - a line naming MANY people (≥ 2) → NO avatar (a list of visitors);
+   - the left slot already shows a person (figure / framed portrait) → that same person NEVER again (no line avatar);
+   - a SECOND person (not the left subject) in a frame whose left slot shows a person → her kit avatar sits ON the event picture (top-left corner overlay), never in the text;
+   - left slot = the event picture (no subject): the one person who acts keeps her avatar beside her line (small picture-only notice), the same on Fold and iPad.
+   An unnamed carrier ("thái giám mang bạc đến") has no person object → no avatar. */
+function kszAvatarRule3(dlg){try{const X=dlg.__ksz3;if(!X||!X.right)return;const R=X.right;const leftPerson=!!X.who&&X.slot!=="item"&&X.slot!=="matter";const sub=kszNormP(X.who);const sec=[];
+ R.querySelectorAll(".kfact[data-kfp]").forEach(row=>{const chip=row.querySelector(":scope > .md");row.classList.remove("kfav-off");if(!chip)return;const p=typeof kfpGet==="function"?kfpGet(row.dataset.kfp):null;const n=+row.dataset.kfn||1;let off=false;
+  if(n>=2)off=true;else if(leftPerson&&p&&kszNormP(p)===sub)off=true;else if(leftPerson){off=true;if(p&&!sec.some(q=>kszNormP(q)===kszNormP(p)))sec.push(p)}
+  row.classList.toggle("kfav-off",off)});
+ R.querySelectorAll(":scope>.k3ev .kevav").forEach(x=>x.remove());const ev=R.querySelector(":scope>.k3ev");
+ if(ev&&sec.length&&typeof kitFaceH==="function"){const h=sec.slice(0,2).map(p=>{let f="";try{f=kitFaceH(p,"big")}catch(e){}return f}).join("");if(h)ev.insertAdjacentHTML("beforeend",`<span class="kevav">${h}</span>`)}
+ else if(sec.length)R.querySelectorAll(".kfact.kfav-off").forEach(r=>{/* no picture in this layout: the line keeps its avatar rather than losing the person */const c=r.querySelector(":scope > .md");if(c&&+r.dataset.kfn<2)r.classList.remove("kfav-off")})}catch(e){console.error("kszAvatarRule3",e)}}
 /* the event picture = the real game path: the event's own picture, else kitDefaultBanner (kitInfoArt of the title, else one per kind) */
 function kszEvSrc3(sp){if(sp.pic)return kszImg(sp.pic);let b=null;try{b=kitDefaultBanner({t:sp.title},sp.kind)}catch(e){}return b&&b.src?kszImg(b.src):""}
 function kszPic3(src,cls,mk){const sj=kitPicSubj(src);return `<div class="${cls}"${sj?` data-subj="${sj.join(",")}"`:""}>${kitSceneArt(src,"",Object.assign({shape:"wide",cap:false},mk&&mk.mark?{mark:mk.mark,markAlt:mk.markAlt||""}:{})).replace(/ loading="lazy"/g,"")}</div>`/* a frame picture is on screen: never lazy */}
+/* ---- #76 LEFT-SLOT KIT PART (owner 21/11 ~05:21Z «Đồ thất lạc»; one part for the builder kszFrame3 and the live frame kszLiveLay3) ----
+   The left slot of a small ("one") frame holds the MAIN SUBJECT of the dialog: a PERSON (portrait frame + tag), an ITEM (the item tile) or a MATTER (the event picture itself).
+   The event picture is only the left slot when there is no person or item; with a person or an item the event picture is the TOP of the right column (owner #80).
+   WHO is decided by the dialog (dialog-person): `spec.subject` = "person" | "item" | "matter" (forces it), `spec.who` (explicit person), `spec.item` (item info of kitItemInfo, or {k}),
+   or a leading item tag (.kiev) in the body text. Without any of them: the frame kind (KIT_SIZE.v3.focus) decides as before (person-centred kinds → the person, else the matter).
+   kszSubject3(m,main) (dialog-person) resolves WHO the person is; kszSlotType3({who,item,subject}) -> "person" | "item" | "matter" decides what fills the slot (an item beats a person, `subject` forces).
+   kszSlot3(type,{who,item,src,mk}) -> {left,evTop}: the left column html and whether the event picture goes to the top of the right column. */
+function kszSlotType3(o){if(o.subject==="matter")return"matter";if(o.item&&o.subject!=="person")return"item";if(o.who)return"person";return"matter"}
+function kszItemSlot3(item){let el=null;if(item&&item.nodeType===1)el=item;else if(item){try{el=document.createElement("div");el.innerHTML=kitItemTag(item.name?item:(typeof kitItemInfo==="function"?kitItemInfo(item):item));el=el.firstElementChild}catch(e){el=null}}
+ return el}
+function kszSlot3(type,o){if(type==="item"&&o.item){const el=kszItemSlot3(o.item);if(el){el.classList.remove("kiev-txt","kiev-ban");el.classList.add("kiev-slot");const w=document.createElement("div");w.className="k3main k3mitem";w.appendChild(el);return{left:w.outerHTML,evTop:!!o.src}}}
+ if(type==="person"&&o.who)return{left:kszPor3(o.who),evTop:!!o.src};
+ return{left:kszPic3(o.src,o.fill?"k3main k3mpic k3fill":"k3main k3mpic",o.mk),evTop:false}}
 function kszPor3(p){const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p)}catch(e){}
  if(p&&(p.kind==="th"||(S&&(p===S.thO||p===S.emp)))&&typeof kitRankCol==="function")col=kitRankCol(7);
- const tag=typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col);let f;try{f=p&&p.kind==="th"?pTH():kitFace(p)}catch(e){f={src:"",ini:"?"}}
+ const tag=kszTa(typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col),p);let f;try{f=p&&p.kind==="th"?pTH():kitFace(p)}catch(e){f={src:"",ini:"?"}}
  return `<div class="k3main k3mpor">${tag}${pcPort(f)}</div>`}
 /* spec {kind,title,sub,who?,pic?,facts,rows,opts} + size K → frame html (kitFrameApply3 after mount) */
 function kszFrame3(sp,K){const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[sp.kind]||"person",who=sp.noWho?null:kszWho3(sp),ev=kszEvSrc3(sp);
  const R=[];let left="";
  /* KIT 84c PERSON-LESS frame (sp.noWho / a place card): the main picture is the left column — standard size in "one" (S / narrow), FILLING the column (cover-crop, true ratio, k3fill) in "fig" (M/L/XL); no narrator, no second picture */
  if(!who)left=kszPic3(ev,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill",sp.mk);
- else if(pres==="one"){if(foc==="event")left=kszPic3(ev,"k3main k3mpic",sp.mk);else{left=who?kszPor3(who):"";R.push(kszPic3(ev,"k3ev",sp.mk))}}
+ else if(pres==="one"){const T=kszSlotType3({who,item:sp.item,subject:sp.subject}),SL=kszSlot3(T,{who,item:sp.item,src:ev,mk:sp.mk});left=SL.left;if(SL.evTop)R.push(kszPic3(ev,"k3ev",sp.mk))}/* #76 left slot = the main subject; #80 the event picture on top of the right column */
  else{left=who?kszFigHtml(who):"";R.push(kszPic3(ev,"k3ev",sp.mk))}
  let facts=(sp.facts||[]).slice();
  /* event-centred S: a person is a small avatar INSIDE the info → when no fact row carries anyone, the narrator's line is added */
@@ -371,10 +410,10 @@ function kszBtnGrid3(root){root.querySelectorAll(".k3btns").forEach(g=>{const B=
  need=kszNeedTxt(bs,need,B);const nar=g.closest(".dlg")&&g.closest(".dlg").dataset.narrow==="1";const cols=nar?1:Math.max(1,Math.floor((w+B.gap)/(need+B.gap)));const cell=(w-(cols-1)*B.gap)/cols,long=Math.min(cols,Math.ceil((B.cellLong+B.gap)/(cell+B.gap)));g.style.setProperty("--k3c",cols);
  bs.forEach(b=>b.style.setProperty("--k3s",b.dataset.kbs==="S"?1:long))})}
 /* the left column decides the body height; the event picture in the info grows into what the text leaves */
-function kitFrameApply3(dlg){try{kszFigFit(dlg)}catch(e){}kszBtnGrid3(dlg);const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor");
+function kitFrameApply3(dlg){try{kszFigFit(dlg)}catch(e){}kszBtnGrid3(dlg);const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor,.k3body>.k3mitem");
  if(R){R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");/* XL: the body stays the figure's height, more text scrolls inside the info column */if(dlg.dataset.ksz==="XL"&&L){R.style.maxHeight=L.offsetHeight+"px";R.style.overflow="auto"}}kszPicFit3(dlg);kszPicFit3(dlg);kszPicStep3(dlg);return dlg.dataset.ksz}
 /* does the content fit this size? (info column measured with the event picture at its smallest) */
-function kitFrameFits3(dlg,strict){const K=dlg.dataset.ksz,m=kitSzMode();if(K==="XL"&&!strict)return true;const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor"),ev=R&&R.querySelector(":scope>.k3ev");
+function kitFrameFits3(dlg,strict){const K=dlg.dataset.ksz,m=kitSzMode();if(K==="XL"&&!strict)return true;const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor,.k3body>.k3mitem"),ev=R&&R.querySelector(":scope>.k3ev");
  const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";const ef=ev&&ev.style.flex,eh=ev&&ev.style.height,em=ev&&ev.style.minHeight;if(ev){ev.style.flex="none";ev.style.minHeight="";ev.style.height=kszEvMin3(ev)+"px"}
  const need=R.offsetHeight;if(ev){ev.style.flex=ef;ev.style.height=eh;ev.style.minHeight=em}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
  if(dlg.dataset.pres==="fig")return L||!dlg.querySelector(".k3fill")?need<=lh+2:true;const btn=dlg.querySelector(":scope>.k3btns");
@@ -492,7 +531,7 @@ Object.assign(window,{kszItemTile3,kszItemsSheet3,kszItemsSheet3Show,kszWearRow3
    kitFrameLive3(m) = the LAST step of showModal (outermost wrapper): every #modal kit panel (kpBuild) of a KP_SEAL kind is re-laid as the v3 frame,
    KEEPING the nodes the game made (its info blocks .kpmain, its option buttons .opts with their handlers, the header .kph with its ✕):
    #mb > .k3body(left + .k3right[event picture .k3ev · .kpmain · (M/L/XL) .opts.k3btns]) + (S) .opts.k3btns.
-   left = the event's own person (kitStagePeople) or the NARRATOR of the kind (kszWho3, BAL.staff.narrator), full figure at M/L/XL, portrait pendant
+   left = the MAIN SUBJECT of the event (kszSubject3: named person / her own act / the one person the lines are about / her own event), else the event picture; full figure at M/L/XL, portrait pendant
    at S (person-centred kinds) or the event picture (event-centred kinds). Event picture = the dialog's own band / tall slot, else kitEvArt / kszEvSrc3.
    Size = the smallest of S/M/L/XL whose presentation holds the content (kitFrameFitsLive3); XL: more text scrolls inside the info column.
    NOT converted (pages, not event frames): identity card .kpid, person card (pcm), scene panels without a kind, and bodies holding a page part
@@ -551,7 +590,7 @@ window.kszFeetFit=kszFeetFit;
 /* KIT 56.4: the height a worn-title plate adds to the name tag (measured once); the room of every frame is reckoned WITH the plate, so a person with a title and one without get the same body */
 let KSZ_PLATEH=null;function kszPlateH(){if(KSZ_PLATEH!=null)return KSZ_PLATEH;let h=0;try{const T=typeof KIT_TITLES!=="undefined"&&KIT_TITLES[0],pl=T&&typeof kitTitlePlate==="function"?kitTitlePlate(T,{cls:"kdh-cap"}):"";if(pl){const x=document.createElement("div");x.className="kszf";x.style.cssText="position:absolute;visibility:hidden;left:-9999px;top:0";x.innerHTML=`<div class="kszfig"><div class="kt3">${pl}</div></div>`;document.body.appendChild(x);h=x.querySelector(".kt3").offsetHeight+2;x.remove()}}catch(e){}return KSZ_PLATEH=h}
 function kitFrameApplyLive3(dlg){try{kszFeetFit(dlg)}catch(e){}const g=dlg.querySelector(".opts.k3btns");if(g)kszBtnGridLive3(g);
- const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor");
+ const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor,.k3body>.k3mitem");
  if(R){R.style.maxHeight="";R.style.overflow="";R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");if(dlg.dataset.ksz==="XL"&&L){/* XL (approved #3): the body stays the figure's height; more content scrolls inside the info column */
   {const kb=dlg.querySelector(".k3body");R.style.maxHeight=Math.max(L.offsetHeight,kb?kb.clientHeight:0)+"px"}/* tall phone frame (kit §6.2c): the info column may use the whole grown body, not only the figure height */R.style.overflow="auto"}}
  kszPicFit3(dlg);kszPicFit3(dlg);kszPicStep3(dlg);kszEvLaw10(dlg);clearTimeout(dlg.__evT);dlg.__evT=setTimeout(()=>{if(dlg.isConnected){try{kszEvLaw10(dlg)}catch(e){}}},350);return dlg.dataset.ksz}
@@ -563,7 +602,7 @@ function kszEvLaw10(dlg){const R=dlg.querySelector(".k3right"),ev=R&&R.querySele
  delete dlg.dataset.evfit;if(!sc())return;const h=kszEvStrip3(ev);if(ev.dataset.pstep&&ev.offsetHeight<=h+1)return;/* the 56.6 step already made it the strip or smaller */
  dlg.dataset.evfit="s";ev.dataset.pstep="1";ev.style.flex="none";ev.style.minHeight="0px";ev.style.height=h+"px";dlg.dataset.picc="strip";const im=ev.querySelector("img");if(im&&im.naturalWidth)kitPicFocus(ev,im)}
 window.kszEvStrip3=kszEvStrip3;
-function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!strict)return true;if(/^N/.test(K)){const mb=document.getElementById("mb");return !mb||mb.scrollHeight<=mb.clientHeight+1}/* narrow: only the screen limits the stack: nothing may scroll inside the frame body */const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor"),ev=R&&R.querySelector(":scope>.k3ev");if(!R)return true;
+function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!strict)return true;if(/^N/.test(K)){const mb=document.getElementById("mb");return !mb||mb.scrollHeight<=mb.clientHeight+1}/* narrow: only the screen limits the stack: nothing may scroll inside the frame body */const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor,.k3body>.k3mitem"),ev=R&&R.querySelector(":scope>.k3ev");if(!R)return true;
  const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";const ef=ev&&ev.style.flex,eh=ev&&ev.style.height,em=ev&&ev.style.minHeight;if(ev){ev.style.flex="none";ev.style.minHeight="";ev.style.height=kszEvMin3(ev)+"px"}
  const need=R.offsetHeight;if(ev){ev.style.flex=ef;ev.style.height=eh;ev.style.minHeight=em}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
  /* the frame must also stay inside the screen (modal box): Fold / iPad */
@@ -575,15 +614,20 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,
  if(nar&&KIT_SIZE.fig[K+"3"]){const Z=V.narrow[K],F=KIT_SIZE.fig[K+"3"],Mm=document.getElementById("modal"),mh=Mm?Mm.clientHeight:900;F.h=Math.round(Math.min(Z.max,Z.f*mh));F.cw=Z.cw;dlg.style.setProperty("--kszfh",F.h+"px");dlg.style.setProperty("--kszcw",F.cw+"px")}else{dlg.style.removeProperty("--kszfh");dlg.style.removeProperty("--kszcw")}
  const body=X.body,right=X.right;const keepMk=dlg.querySelector(".k3ev .ksart>img.kemo.ksart-mark,.k3mpic .ksart>img.kemo.ksart-mark");if(keepMk)keepMk.remove();/* mark #68: the live corner seal keeps its own element through every re-lay (size pick, picture step), so its motion is never restarted */
  [...body.children].forEach(c=>{if(c!==right)c.remove()});right.querySelectorAll(":scope>.k3ev").forEach(c=>c.remove());
- let left="",ev=true;if(!X.who){left=kszPic3(X.src,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill",X.mk);ev=false}/* KIT 84c person-less frame (place card): its picture is the left main picture; fills the column in fig sizes */else if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic",X.mk);ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
- if(left)body.insertAdjacentHTML("afterbegin",left);if(ev&&X.src)right.insertAdjacentHTML("afterbegin",kszPic3(X.src,"k3ev",X.mk));
+ let left="",ev=true;X.slot="matter";
+ /* #76 ONE left-slot part (kszSlot3): the MAIN SUBJECT (item / person / matter); a person who is the subject = framed portrait on the left and the event picture on TOP of the right column (#80, approved small frame) */
+ if(pres==="one"&&(X.who||X.item)){const T=kszSlotType3({who:X.who,item:X.item,subject:X.subject}),SL=kszSlot3(T,{who:X.who,item:X.item,src:X.src,mk:X.mk});left=SL.left;ev=SL.evTop;X.slot=T}
+ else if(!X.who){left=kszPic3(X.src,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill",X.mk);ev=false}/* KIT 84c person-less frame (place card): its picture is the left main picture; fills the column in fig sizes */
+ else{left=kszFigHtml(X.who);X.slot="person"}
+ right.querySelectorAll(".kiev-back").forEach(x=>x.remove());if(pres!=="one"&&X.item&&X.item.nodeType===1){/* #76 the item is the left slot of a small frame only; a figure frame keeps it at the top of the text as before */const c=X.item.cloneNode(true);c.classList.remove("kiev-slot");c.classList.add("kiev-back","kiev-txt");(right.querySelector(".kpmain")||right).insertAdjacentElement("afterbegin",c)}
+ if(left)body.insertAdjacentHTML("afterbegin",left);if(ev&&X.src)right.insertAdjacentHTML("afterbegin",kszPic3(X.src,"k3ev",X.mk));kszAvatarRule3(dlg);
  if(keepMk){const nu=dlg.querySelector(".k3ev .ksart,.k3mpic .ksart");if(nu){const m0=nu.querySelector(":scope>img.kemo.ksart-mark");if(m0)m0.replaceWith(keepMk);else nu.appendChild(keepMk)}}
  if(X.opts){if(pres==="one"||nar)X.mb.appendChild(X.opts);else right.appendChild(X.opts);/* narrow: option cards BELOW the figure row, full width; else kit-option-rows r2: stack label over value when the column is too narrow */const bs=[...X.opts.querySelectorAll(":scope>button")],w=X.opts.clientWidth;X.opts.classList.remove("kszstk")}
  /* KIT 56.19: an option card's picture sits in its fixed kit box (.kaart, KIT_OPT tier sizes), so its late (lazy) load changes no frame size and must not re-pick
     the frame: scrolling the list revealed lazy card pictures, their load re-picked the frame in the middle of her wheel and the wheel was lost */
  body.querySelectorAll("img").forEach(im=>{if(!im.complete&&!im.closest(".opts"))im.addEventListener("load",()=>kszLiveRepick3(dlg),{once:true})});
  right.querySelectorAll(":scope>.k3ev img:not(.ksart-mark)").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kitFrameApplyLive3(dlg),{once:true})});
- kitFrameApplyLive3(dlg)}
+ kszListCols3(dlg);kitFrameApplyLive3(dlg)}
 /* NARROW T3 (owner 17/11, 412x1058 Fold cover / 390x844 phone): at a frame width where even the smallest figure column (the M figure column) would leave the right column
    under the kit minimum (V.narrow.minRight = the option-card minimum, kitOptFit0), the frame STACKS: a reduced figure (+ the picture strip and text) on top,
    the option cards BELOW it full width, 1 column (kszBtnGridLive3), cards = ONE size per dialog (kitOptFill, tall 3:4 for person dialogs). The figure ladder
@@ -594,7 +638,7 @@ function kszNarrow3(dlg){const V=KIT_SIZE.v3,M=document.getElementById("modal"),
 function kszLivePick3(dlg){const SC=[];try{const mb=document.getElementById("mb");[...dlg.querySelectorAll(".opts,.k3right,.k3body"),mb].forEach(e=>{if(e&&e.scrollTop>0)SC.push([e,e.scrollTop])})}catch(e){}
  const P=kszLivePick3_0(dlg);SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});return P}
 function kszLivePick3_0(dlg){dlg.__kszFill=0;if(kszNarrow3(dlg)){for(const K of["NL","NM","NS"]){kszLiveLay3(dlg,K);if(K==="NS"||kitFrameFitsLive3(dlg))return K}}
- let P="XL";for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg)){P=K;break}}
+ let P="XL";for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg)&&(K==="XL"||!kszListWantsWide3(dlg))){P=K;break}}
  /* KIT 56.17: the size is picked; now the figure fills the frame body (every later re-apply keeps it) */dlg.__kszFill=1;kitFrameApplyLive3(dlg);return P}
 let kszRepT=0;function kszLiveRepick3(dlg){clearTimeout(kszRepT);kszRepT=setTimeout(()=>{try{if(dlg.isConnected&&dlg.__ksz3)kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}},30)}
 function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=document.getElementById("mb");if(!M||M.hidden||!mb)return false;const dlg=M.querySelector(".dlg.kpanel");
@@ -604,13 +648,15 @@ function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=docume
  const main=body.querySelector(":scope > .kpmain");if(!main||main.querySelector(KSZ_LIVE_SKIP)||body.querySelector(":scope > .kpsubj.kes2"))return false;
  /* menus and pages are not event frames: a pick-list (≥ KIT_SIZE.v3.live.maxOpts options) or a sectioned page (≥ maxSecs headed sections) keeps its page layout */
  const LV=KIT_SIZE.v3.live,o0=mb.querySelector(":scope > .opts");if(o0&&o0.querySelectorAll(":scope > button").length>=LV.maxOpts)return false;if(main.querySelectorAll(":scope > .kpsec > .kpst").length>=LV.maxSecs)return false;
- let P=[];try{P=kitStagePeople(m)}catch(e){}const who=m&&m.placeK?null:(P[0]||kszWho3({kind}));/* a place card (jplace) has no person column: the narrator never stands on it (owner 18/11 map-tap-go) */const src=kszLiveSrc3(m,mb,kind),mk=kszLiveMark3(m,mb);const opts=mb.querySelector(":scope > .opts");
+ let P=[];try{P=kitStagePeople(m)}catch(e){}const who=m&&m.placeK?null:kszSubject3(m,main);/* a place card (jplace) has no person column (owner 18/11 map-tap-go) */const src=kszLiveSrc3(m,mb,kind),mk=kszLiveMark3(m,mb);const opts=mb.querySelector(":scope > .opts");
  /* the old layout classes go (their fit passes then find nothing to do); the game's nodes are moved, never rebuilt */
  dlg.classList.remove("kesdlg","kdper","kdpbanner","kdscroll");dlg.classList.add("kszf","ksz3","kszlive");dlg.style.removeProperty("--dart");dlg.style.removeProperty("height");dlg.style.removeProperty("--kdpic");
+ /* #76 an item tag leading the text (.kiev: Đồ thất lạc, Tìm thấy đồ …) or m.item is the main subject: it leaves the text and fills the left slot of a small frame */
+ let itemEl=null;try{const k0=main.querySelector(":scope > .kiev, :scope > .kiev-txt");if(k0&&k0.matches(".kiev")){itemEl=k0;k0.remove()}else if(m&&m.item)itemEl=m.item}catch(e){}
  const B=document.createElement("div");B.className="k3body";const R=document.createElement("div");R.className="k3right";B.appendChild(R);R.appendChild(main);
  if(opts){opts.classList.add("k3btns");opts.classList.remove("k3grid","kdpo2")}
  [...mb.children].forEach(c=>{if(c!==opts)c.remove()});mb.prepend(B);
- dlg.__ksz3={kind,who,src,mk,mb,body:B,right:R,opts,m};kszLivePick3(dlg);return true}catch(e){console.error("kitFrameLive3",e);return false}}
+ dlg.__ksz3={kind,who,src,mk,mb,body:B,right:R,opts,m,item:itemEl,subject:m&&m.subject};kszLivePick3(dlg);return true}catch(e){console.error("kitFrameLive3",e);return false}}
 Object.assign(window,{kitFrameLive3,kszLivePick3,kitFrameApplyLive3,kitFrameFitsLive3,kszBtnGridLive3});
 (function(){const st=document.createElement("style");st.id="k-size3-live";st.textContent=`
 html body #modal .dlg.kszlive.kszlive{width:var(--kszw)!important;max-width:calc(100% - 16px)!important;height:auto!important;min-height:0!important;max-height:calc(100% - 16px);padding:0;display:flex;flex-direction:column;overflow:hidden}
@@ -618,7 +664,7 @@ html body #modal .dlg.kszlive.kszlive{width:var(--kszw)!important;max-width:calc
 /* r4 (owner 17/11): option rows are label LEFT + value RIGHT at every size; the stacked label-over-value layout (r2 .kszstk) is gone */
 #modal .dlg.kszlive>#mr:not(:has(button:not([hidden]))){display:none}
 #modal .dlg.kszlive[data-narrow="1"]{overflow-x:hidden;overflow-y:auto}
-#modal .dlg.kszlive[data-pres="one"] .k3right{justify-content:center}
+#modal .dlg.kszlive[data-pres="one"] .k3right{justify-content:flex-start}#modal .dlg.kszlive[data-pres="one"] .k3right:not(:has(>.k3ev)){justify-content:center}/* #80 the event picture is the TOP of the right column (never centred with an empty band above); a frame with no picture there keeps its text centred */
 #modal .dlg.kszlive .k3right>.kpmain{flex:none;min-width:0;display:block;padding:0;margin:0}
 /* KIT §6.2 FINAL / frame rule (owner 18/11 07:25Z, EVERY layout): the portrait + the info (event picture, text, chips) STAND STILL; only the option list scrolls. The right column never scrolls as a whole. */
 html.kv1 body #modal .dlg.kszlive:is([data-ksz="L"],[data-ksz="XL"]){--kph:calc(100*var(--kvh,1vh) - 24px)}/* VARIANT B: tall frames get the TALL height limit but no screen-ratio rectangle: frame height = content up to the screen */
@@ -678,3 +724,41 @@ window.kitScrollCues=kitScrollCues;
 .kscue.sib{position:static;height:auto;width:auto;text-align:center;padding:1px 0 0;pointer-events:none}.kscue.sib.on{display:block}.kscue.sib .kscc{position:static;transform:none;display:inline-block;font-size:.64rem}
 .kscue .kscg{position:absolute;left:0;right:0;bottom:0;height:36px;background:linear-gradient(to bottom,rgba(253,249,238,0),rgba(253,249,238,1) 42%)}/* r4: the chip sits in the SOLID lower part of the fade (never over readable text) */
 .kscue .kscc{position:absolute;left:50%;bottom:2px;transform:translateX(-50%);font-size:.66rem;line-height:1.25;font-weight:700;color:#7a5a1e;background:#fbf1d6;border:1px solid #c9a24a;border-radius:999px;padding:0 9px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.18)}`;document.head.appendChild(st)})();
+
+/* ================= #71 EVERY DIALOG = A KIT FRAME SIZE (owner 21/11 ~05:02Z, kit-dialog-2) =================
+   Owner (Fold «Sai … Bạch Lan đi dò la», a narrow dialog with one word per line): a dialog never has a size of its own; every dialog is S / M / L / XL (law 10).
+   The live v3 frame (kszlive) picks its size by content. Every OTHER dialog (page frames: pick-lists, sectioned pages, the item card, tutorial coach / tips, co-op rooms,
+   shop, the loading cover …, all of them "the one pop-up frame" of KIT §8.1) is a LEGACY page frame = KIT_SIZE.legacy.size (L), width from the SAME table:
+   `--kszW-S/M/L/XL` (html.kv1 / html.kv2) is generated from KIT_SIZE.frame, and the pop-up width `--kpw` is min(--kszW-L, screen − 28) (j79 :root). Nothing types 560 any more.
+   kitFrameTagAll() writes data-ksz on every .dlg / .dbox.kpanel that has none (one MutationObserver pass); the test dev/test/dialog-fixed.js (i) opens every dialog kind and fails on a
+   dialog without a kit size or whose width is not its size's width. */
+KIT_SIZE.legacy={size:"L"};
+(function(){const css=[];css.push("html body .modal.kpscene .dlg.kpsc:not(.kszf)[data-ksz]{width:var(--kpw)!important;max-width:var(--kpw)!important}");/* the scene cover frames (loading cover …): the kit width, never a width of their own */for(const m of["kv1","kv2"])css.push(`html.${m}{${["S","M","L","XL"].map(k=>`--kszW-${k}:${KIT_SIZE.frame[k].w[m]}px`).join(";")}}`);
+ const st=document.createElement("style");st.id="k-size-every";st.textContent=css.join("\n");document.head.appendChild(st)})();
+function kitFrameTagAll(){try{document.querySelectorAll(".dlg:not([data-ksz]),.dbox.kpanel:not([data-ksz])").forEach(d=>{d.dataset.ksz=KIT_SIZE.legacy.size});if(typeof kszListCols3==="function")document.querySelectorAll(".dlg:not(.kszlive) .kfacts:not([data-kcols])").length&&kszListCols3(document.querySelector(".dlg:not(.kszlive)")||document)}catch(e){}}
+window.kitFrameTagAll=kitFrameTagAll;
+(function(){const go=()=>{kitFrameTagAll();try{new MutationObserver(()=>{kitFrameTagAll()}).observe(document.body,{childList:true,subtree:true})}catch(e){}};if(document.body)go();else addEventListener("DOMContentLoaded",go)})();
+
+/* ================= #82 KIT LIST RULE (owner 21/11 ~05:37Z, «Sổ nguyệt sự», people lists) =================
+   A list of SHORT rows (kit facts: .kfacts > .kfact, one person / one line each) on the iPad (kv2: the frame's text column is wide) is laid in TWO columns so it does not scroll
+   a long way for nothing; the phone (kv1) keeps ONE column. Rule (KIT_SIZE.list): kv2 only · the list has at least minRows rows · every row is at most maxChars characters ·
+   the list is wide enough for two columns of colMin px + gap. The whole group = every .kfacts in every frame (kszLiveLay3 runs it before the frame size is picked, so the
+   smaller height can choose a smaller frame; the tag pass runs it for page frames). Test: dialog-fixed (k). */
+KIT_SIZE.list={colMin:260,gap:12,minRows:3,maxChars:110};
+function kszListCols3(root){try{const L=KIT_SIZE.list,two=kitSzMode()==="kv2";(root||document).querySelectorAll(".kfacts").forEach(f=>{f.removeAttribute("data-kcols");if(!two)return;const rows=[...f.children].filter(c=>c.classList.contains("kfact"));
+ if(rows.length>=L.minRows&&f.clientWidth>=2*L.colMin+L.gap&&rows.every(r=>(r.textContent||"").replace(/\s+/g," ").trim().length<=L.maxChars))f.setAttribute("data-kcols","2")})}catch(e){}}
+/* #82: on the iPad a long list of short rows that would scroll in a narrow text column takes the next size (wide enough for two columns) instead of scrolling */
+function kszListWantsWide3(dlg){try{if(kitSzMode()!=="kv2")return false;const L=KIT_SIZE.list,R=dlg.querySelector(".k3right");if(!R||![dlg,...dlg.querySelectorAll("*:not(img):not(figure)")].some(e=>e.scrollHeight>e.clientHeight+8&&/(auto|scroll|hidden|clip)/.test(getComputedStyle(e).overflowY)))return false;
+ return [...dlg.querySelectorAll(".kfacts")].some(f=>{const rows=[...f.children].filter(c=>c.classList.contains("kfact"));return !f.dataset.kcols&&rows.length>=L.minRows&&f.clientWidth<2*L.colMin+L.gap&&rows.every(r=>(r.textContent||"").replace(/\s+/g," ").trim().length<=L.maxChars)})}catch(e){return false}}
+window.kszListCols3=kszListCols3;
+(function(){const st=document.createElement("style");st.id="k-list-cols";st.textContent=`.kfacts[data-kcols="2"]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:${KIT_SIZE.list.gap}px;align-items:start}`;document.head.appendChild(st)})();
+/* dialog-person CSS: «(ta)» line, hidden duplicate avatar, the second person's avatar ON the event picture (top-left overlay; phone: smaller) */
+(function(){const st=document.createElement("style");st.id="k-dialog-person";st.textContent=`
+.knr .knr-ta{display:block;font-size:.76rem;font-weight:700;letter-spacing:.02em;opacity:.85;line-height:1.1}
+#mb .kfact.kfav-off>.md{display:none!important}
+#mb .kfact.kfav-off{grid-template-columns:minmax(0,1fr)}
+#mb .kfact.kfav-off:not(.kfnodot){padding-left:0}
+.k3ev{position:relative}
+.k3ev>.kevav{position:absolute;left:6px;top:6px;z-index:3;display:flex;gap:4px;pointer-events:none}
+.k3ev>.kevav>span.md.kmini.kmini{width:clamp(34px,11%,62px)!important;max-width:62px;filter:drop-shadow(0 2px 4px #0006)}
+`;document.head.appendChild(st)})();
