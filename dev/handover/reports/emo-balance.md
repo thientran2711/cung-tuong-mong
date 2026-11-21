@@ -40,3 +40,15 @@ Keep 150/arm. Early stop allowed: once ON ≥ 75 lives, if every key metric's OF
 OFF (LIVE 30e8714e, whole emotion layer off; seeds 501–505 run5b + 601–608 run4c): n=145  HH 37 % ±4 (per-seed files 11–62)  early death 43 % ±4 (24–67)  childbirth deaths 28 % ±4  NPC harm acts/yr 141  kind acts/yr 271. (±= binomial SE; tool dev/measure/emocmp.py on review/emo-balance.)
 "Early death" = anemo.py definition (counts nun / sent home / Tuổi trời rows too) — same rule both arms.
 ON arm started 18:00Z: run4c seeds 601–604 × 10, then 605–608 × 10; early-stop check at ≥75 (D #10 rule).
+
+## 2026-11-21 00:55Z: OFF vs ON final (LIVE 30e8714e, seeded, HHSTOP, 9-origin rotation)
+
+| arm | n | HH | early death | childbirth deaths | NPC harm/yr (95% bootstrap CI, lives with act counters) | NPC kind/yr |
+|---|---|---|---|---|---|---|
+| OFF (__emoOff+__feelOff+__eaOff) | 145 | 37% ±4 (per-seed 11-62) | 43% ±4 (24-67) | 28% ±4 | 141 (132-149, n=91) | 271 |
+| ON (LIVE as shipped) | 145 | 38% ±4 (10-60) | 39% ±4 (10-60) | 28% ±4 | 162 (150-173, n=90) | 255 |
+
+Read: HH, early death and childbirth gaps are 1-4 points against a ±4 SE and a 10-60% seed-to-seed spread, so emotions are balance-neutral on survival/rank (inside EMOTION_PLAN §7 ±3 for HH, early death within noise).
+NPC harm is +15% with emotions ON and the CIs do not overlap: a real effect. Per kind (per year): provoke 78 -> 90, humiliate 36 -> 41, block 4.0 -> 5.4, trip 2.4 -> 3.1, the rest within ±1.
+Source: angry (gian) and jealous (ghen) NPC weights plus the danger bonus toward the target.
+Tuning (BAL.feel only): w.gian harm 1.6->1.35, provoke/humiliate 1.3->1.15; w.ghen harm 1.3->1.15; dg.cap 8->5. Tuned arm runs on seeds 601-608 (80 lives) for a same-seed before/after.
