@@ -32,7 +32,7 @@ Reviewer branch `review/bongloc-options-r2`, final sha **c7ae6d07** = 874e8270 +
 ## Gates
 - On 79988d42 + main 3fc8a93a: quickcheck PASS (G1, old save) · bongloc ×3 14/14 · law4 0 · stipend PASS 2 sizes · ptime2 ALL OK · coop-e2e 124/124 · role-parity ×2 ALL PASS · bongloc-coop ×6 3 PASS / 3 FAIL (10-bạc one-world, see below).
 - On 874e8270 + LIVE e804edfc (5c20774a): quickcheck PASS · bongloc 14/14 · law4 0 · coop-e2e 124/124 · bongloc-coop ×2 15/15.
-- On 874e8270 + LIVE 04afaeb7 (c7ae6d07, coop-cyhold landed): bongloc 14/14 · bongloc-coop ×2 15/15 · law4 0 · quickcheck PASS (old save ok, perf 226/215 render) · coop-e2e: see STATUS line.
+- On 874e8270 + LIVE 04afaeb7 (c7ae6d07, coop-cyhold landed): bongloc 14/14 · bongloc-coop ×2 15/15 · law4 0 · quickcheck PASS (old save ok) · coop-e2e run 1 118/124 (live-worker flake), re-run 124/124. Newer LIVE ea112384 (mg-craft): trial merge = index.html/sw.js conflicts only → MAIN self-merge.
 ## Co-op one-world lag — PRE-EXISTING (not this branch)
 Catch-up probe = bongloc-coop.js + N more merged weeks, guest bạc on her phone vs host copy (withSeat b):
 | build | runs | gaps seen (host − phone) | healed next week? |
