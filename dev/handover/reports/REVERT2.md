@@ -34,3 +34,6 @@ Rule G56 added (cites L1801/L1804/L1805; exception to B20/A31 for phi bạch onl
 | seasons4/s62_t5_ha_DUONG_L1804 | s62_t5_ha_DUONG | 9 327 | FAIL B26/M06 — same as base |
 | seasons4/s62_t6_ha_DUONG_L1804 (thick form) | s62_t6_ha_DUONG_L1801 | 9 914 | PASS |
 No new gate failure from the ivory colour (TWO-COLOUR/B20 checks did not flag it → no accepted form needed). t7/t8: thu fix5/fix7_L1794 have no phi bạch, winter L1803 none, no hạ t7/t8 files. Old hạ s62_t6_ha_DUONG (pre-L1801) left as is. keep_check PASS (--all 534). Builder phi_bach() + gate S12 text still say "secondary colour" (not changed).
+
+## L1814 follow-up
+Owner L1814: t1–t3 fabric = G28 opaque → the _g28 twins became s62_t{1,2,3}_dong_L1803.txt (gauze versions dropped). All 8 winter _L1803 files gate PASS. No cloaks. t8 fur = sheet sentence (owner: HH keep).

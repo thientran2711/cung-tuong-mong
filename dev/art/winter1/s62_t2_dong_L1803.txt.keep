@@ -1,4 +1,7 @@
 base: dev/art/winter1/s62_t2_dong.txt
+allow: The FABRIC is thin   # owner L1814: t1-t3 fabric = G28 opaque soft silk
+allow: flowing silk and gauze with a soft sheen and fine delicate embroidery   # owner L1814: t1-t3 fabric = G28 opaque soft silk
+allow: thin flowing silk   # owner L1814: t1-t3 fabric = G28 opaque soft silk
 allow: the sheer shawl draped behind her back and over her arms is a very sheer   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
 allow: highly translucent gauze shawl in mint mist   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
 allow: clearly different from her main robe colour ice blue   # owner L1803 pt1 + G34/G36: NO phi bạch in winter

@@ -1,9 +1,12 @@
 base: dev/art/thu_comoi/s62_t1_THU_fix_L1794.txt
+allow: The FABRIC is thin   # owner L1814: t1-t3 fabric = G28 opaque soft silk
+allow: flowing silk and gauze with a soft sheen and fine delicate embroidery   # owner L1814: t1-t3 fabric = G28 opaque soft silk
 allow: a snug upper garment with a straight SQUARE collar   # owner L1803 pt2: current t1 (thu fix_L1794) turned into winter like t2/t3: G25 crossed collar, winter palette ice blue/mint mist + plum blossom, caption
 allow: no crossed collar   # owner L1803 pt2: current t1 (thu fix_L1794) turned into winter like t2/t3: G25 crossed collar, winter palette ice blue/mint mist + plum blossom, caption
 allow: a LOW open square neckline across the upper chest   # owner L1803 pt2: current t1 (thu fix_L1794) turned into winter like t2/t3: G25 crossed collar, winter palette ice blue/mint mist + plum blossom, caption
 allow: neck and collarbones bare   # owner L1803 pt2: current t1 (thu fix_L1794) turned into winter like t2/t3: G25 crossed collar, winter palette ice blue/mint mist + plum blossom, caption
 allow: edged by a wide flat lilac band embroidered with lilac flowers   # owner L1803 pt2: current t1 (thu fix_L1794) turned into winter like t2/t3: G25 crossed collar, winter palette ice blue/mint mist + plum blossom, caption
+allow: with long wide flowing sleeves and wide embroidered cuffs showing a sheer thin undersleeve   # owner L1814: t1-t3 fabric = G28 opaque soft silk
 allow: the lilac inner layer at the square neckline clearly visible above it   # owner L1803 pt2: current t1 (thu fix_L1794) turned into winter like t2/t3: G25 crossed collar, winter palette ice blue/mint mist + plum blossom, caption
 allow: the skirt in a lighter tone of the same colour with a wide embroidered lilac flowers hem band   # owner L1803 pt2: current t1 (thu fix_L1794) turned into winter like t2/t3: G25 crossed collar, winter palette ice blue/mint mist + plum blossom, caption
 allow: small sprays of embroidered lilac flowers on the upper garment   # owner L1803 pt2: current t1 (thu fix_L1794) turned into winter like t2/t3: G25 crossed collar, winter palette ice blue/mint mist + plum blossom, caption
@@ -12,6 +15,7 @@ allow: her signature colour family light olive and lilac stays the MAIN robe col
 allow: the robe itself is clearly light olive silk   # owner L1803 pt2: current t1 (thu fix_L1794) turned into winter like t2/t3: G25 crossed collar, winter palette ice blue/mint mist + plum blossom, caption
 allow: light olive silk like #9FB577 is the main colour of the robe   # owner L1803 pt2: current t1 (thu fix_L1794) turned into winter like t2/t3: G25 crossed collar, winter palette ice blue/mint mist + plum blossom, caption
 allow: with lilac in the inner robe and linings   # owner L1803 pt2: current t1 (thu fix_L1794) turned into winter like t2/t3: G25 crossed collar, winter palette ice blue/mint mist + plum blossom, caption
+allow: thin flowing silk   # owner L1814: t1-t3 fabric = G28 opaque soft silk
 allow: exactly ONE fresh pure white lilac in her hair   # owner L1803 pt2: current t1 (thu fix_L1794) turned into winter like t2/t3: G25 crossed collar, winter palette ice blue/mint mist + plum blossom, caption
 allow: the MAIN colour light olive and the SECONDARY colour lilac   # owner L1803 pt2: current t1 (thu fix_L1794) turned into winter like t2/t3: G25 crossed collar, winter palette ice blue/mint mist + plum blossom, caption
 allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour light olive and her secondary colour lilac   # owner L1803 pt2: current t1 (thu fix_L1794) turned into winter like t2/t3: G25 crossed collar, winter palette ice blue/mint mist + plum blossom, caption
