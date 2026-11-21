@@ -51,3 +51,20 @@ Scan dev/art (*.txt/.json/.py/.keep/.md/.jsonl/.tsv): conflict markers 0 · inva
 ## For MAIN / foreman (not restored: not glued, pre-existing, not merge victims)
 - Prompt .txt > 10 000 chars, single prompt, unchanged since b007228b (20/11) or older: dong_hientai/s62_t8_DONG_HIENTAI (10387), m02_t8_DONG_HIENTAI (10370), s62_t8_DONG_HIENTAI_cloak7_LUAMONG_test (10345), s62_t7_DONG_HIENTAI (10306), s62_t6 (10056), s62_t4 (10024), s62_t8_cloak5 (10001); winter1/s62_t4_dong (10186); seasons4/s62_t8_dong_LONG3moi (10036). Big non-prompt logs (b26/proof, store-all/samples_a18, palaudit1, emo-anim clipurls) = OK by nature.
 - Non-art files touched by the same bad merges (MAIN's): dev/handover/reports/rv-kit-pcrow-square.md, rv-menu-panel.md, rv-mg-5s-clear.md, econ-tamco.md, menu-panel.md, review-*.md, dev/art/SKINS.md — no markers left; MAIN to check content.
+
+# §L1679 — palette variety fix (Foreman C #18, owner L1679) · 0 cr, no gens
+**WHY (cho chủ):**
+- Bảng cũ L1583 có máy kiểm "cảm giác mùa" chỉ biết MỘT họ màu cho mỗi mùa: Hạ chỉ có mẫu cam/vàng → ai cũng ra cam đào/cam san hô; nhóm đậm không được vàng (dễ ra vàng hoàng gia/mù tạt) nên s10–s50 toàn cam.
+- Thu: nhóm Kiêu kỳ/Sắc sảo phải màu đậm, nhưng luật cấm cam/ô liu đậm (ra nâu), nên chỉ còn đúng mẫu "đỏ rượu trầm thẫm" → cả nhóm cùng một mã.
+- Máy chỉ đòi "mỗi người khác mã hex" (ΔE ≥ 8 cả mùa), không đòi khác hẳn trong cùng nhóm, nên 8 người đứng cạnh nhau vẫn cùng một màu.
+**FIX:** dev/art/palettes3/four_season_L1679.py → NEW dev/art/face-common/palettes_season_L1679.json (L1583 untouched).
+- 5–7 colour families per season (each reads as its season; pink only Xuân, capped 30 %; no family > 24/90):
+  Xuân hồng hoa đào 24 · xanh lá non 23 · xanh trời xuân 16 · xanh ngọc non 14 · đỏ son Tết 13 |
+  Hạ xanh ngọc lam biển 24 · xanh lá sen 21 · cam đào 12 · cam san hô đậm 12 · tím oải hương 11 · đỏ dưa hấu 8 · vàng chanh 2 |
+  Thu ô liu 31 · đỏ lá phong 22 · xanh cổ vịt trầm 20 · cam quả hồng 9 · đất nung 8 |
+  Đông tím mận 29 · chàm 24 · xanh băng 19 · xanh tùng 16 · đỏ thẫm mai đông 2.
+- Inside every group+season the members are spread over the families the A32 band allows (quota), then a maximin local search pushes apart the closest mains (group ΔE target 10, season 5–6, A31 20).
+- Kept: A32 tone bands (L/C per group, season notch), bad_colour (no grey/brown/royal yellow/mustard), all ★GỐC roots (drawn), s62 Thu olive.
+- Gates: check_unique FAIL **0** (phụ re-picked by four_season_L1583.sec_cands when needed). Same-group pairs ΔE < 8: 27 are ★GỐC-vs-★GỐC (drawn, unchanged, e.g. m28/m29 Xuân same root #B96899, s59/s61 Hạ same root #E6976E), free pairs 7 (< 6) + 41 (6–8). A31 4 mains < 20: 25 people (L1583 also relaxed A31). 269/360 mains changed vs L1583.
+- Sheets (LOOKED tờ 1, tờ 3, Hạ): dev/handover/review-sheets/pal_L1679/bangmau_L1679_to1..3.png + ha_s10_s50_cu_moi.png (sheet_L1679.py).
+- Open for owner/foreman: roots that collide (list above) can only change with a G50-style release; Hạ for deep groups (Kiêu kỳ/Sắc sảo) is now mostly sea-teal / lotus green / deep coral (no deep orange or yellow exists without reading brown).
