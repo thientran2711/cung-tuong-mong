@@ -199,3 +199,25 @@ ROLLOVER RULES (copy verbatim into every takeover prompt):
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 - LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+
+### NIGHT LAND CHAIN #5 — balance-core STUDYING-BOT MEASURE (21/11 ~00:35Z; rvbot method, seeds 21–25, same study policy dev/measure/instudy.js both arms: 1 lesson/tuần in her identity art, teacher if Bạc ≥ fee+20 else self)
+main = LIVE 983a9436 · branch = review/balance-core-r3 812a1f39 build (8939c663 only adds a test fix) · BAL.art.gain untouched
+
+| | main LIVE 983a9436 | branch balance-core-r3 |
+|---|---|---|
+| lives (timeout/crash) | 40 (0) | 30 (0) |
+| HH % (reached Hoàng hậu) | 14/40 = 35 % | 5/30 = 17 % |
+| HH month (median) | 84 | 197 |
+| first bậc 3 month (median) | 6 | 21 |
+| reached bậc 5 (median month) | 39/40 (m12) | 4/30 (m185) |
+| avg max rank / rank ≥ 4 | 5.30 / 32 | 3.77 / 15 |
+| Danh m0/12/24/36 | 21/47/66/75 | 19/11/9/11 |
+| early deaths (< 3 years, not HH) | 6/40 | 4/30 |
+| lessons per life (self / teacher) | 21.5 / 0.3 | 78.5 / 0.2 |
+
+Reading: on the branch, art progress slows by design: first bậc 3 moves from m6 to m21, and bậc 5 is almost never reached. Danh then flattens at about 10 after m12 (whole-life gain 2466 vs loss 2452: Danh earned ≈ Danh lost). Max rank stalls around 3–4, and HH falls to 17 %, well below the ~32 % target.
+PROPOSAL (not applied, NOT yet sampled — #5 ran out of context; a 30-life sample per knob takes ~4 h of bot time):
+- K1: lower the RANKS Danh thresholds for the ranks above 3. Danh m36 is 11 on the branch vs 75 on main, so the rank gate is Danh, not art bậc.
+- K2: the bậc-3 cards open at bậc 2 (D.vu.lv / D.ky.lv). This brings the Danh +BAL.art.danh[3] cards forward without changing BAL.art.gain or §7's bậc times.
+Recommended first try: K1, sampled with the same rvbot run (seeds 21–25, ≥30 lives) against the table above.
+Raw: /home/user/wt/botout (lost with the #5 container); this table is the record.
