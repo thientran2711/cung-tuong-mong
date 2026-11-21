@@ -629,3 +629,4 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | REVIEW menu-panel (sonnet SMALL; every ☰ menu panel = wide kit frame, Fold+iPad) | review/menu-panel-rv | MAIN CHÍNH 86 | session_01Rc5AsLEtGvABQjjGRj13hB | RUNNING | 21/11 03:15Z |
 | ending-screens (OPUS; OWNER marks #48 #50 #51 full-screen endings) | review/ending-screens; briefs/main86-ending-screens.md | MAIN CHÍNH 86 | session_01Rc5AsKeKeU4YfrthgxjKW7 | RUNNING | 21/11 03:17Z |
 | kit-dialog (sonnet; OWNER marks #44 seal, #47 figure, #49 option card/fixed picture) | review/kit-dialog; briefs/main86-kit-dialog.md; reports/kit-dialog.md | MAIN CHÍNH 86 | session_01Rc5AsMcXo2ivEx1p5K5Ysh | RUNNING | 21/11 03:16Z |
+| REVIEW mood-seal (SMALL sonnet) | review/mood-seal-rv; briefs/main86-rv-mood-seal.md | MAIN CHÍNH 86 | session_01Rc5AsNSULxyLkcFZCVytcA | RUNNING | 21/11 03:20Z |
