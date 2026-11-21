@@ -61,3 +61,18 @@ E13 + `check_store --maid-items` (items differ per rank inside a person, thân c
 - **t6 Quý phi bell cape**: the bell fix was NEVER in t6. HHCOL1 L1840 fixed only t8 (floor mantle → "skirt STRAIGHT, never bell-shaped"). t6 says "TWO layered … SHORT shoulder capes, one over the other (… the lower cape a little longer …)" with no shape limit → stacked capes flare into a bell. FIX file s62_t6_dong_L1971.txt: added "both capes lie FLAT and close along the shoulder line, their lower edges soft curves that follow the body, never flaring out, never bell-shaped or cone-shaped, never standing away from the shoulders". The two tiers stay (G1/G3 later than G37). keep PASS; store = same W02 fail as base.
 - **TRUE-prompt check t3–t8** (gen-time git version vs the L1952 files that are now the base). Besides the phi bạch cut, the L1952 files differ from the approved prompts because later rule sweeps went into them: t3 jade pendant removed (G57), hairpin sentence rewritten ("pearl-tipped hairpins" → "two or three slim pearl hairpins … never a radiating crown"), item hand "at waist" → "held out to side" (G61); t4 jade belt pendants → "tied flat at the centre front", vase → lotus lamp (F19), jade → gold; t5 jade pendants removed, hands → "raised at chest height" (G61), "sheer silk shawl" cut; t6 "stole" → "sleeves", jade → silk; t7/t8 jade-and-gold belt + pendants/tassels → "plain gold belt" (G57). So a redraw of any L1952 file will NOT match the approved picture exactly: pose (G61), item (F19) and waist details changed by rule. Each change is an owner rule, so nothing to undo. Tell her before any redraw. Note: G57b "no tassel" was reverted by NGOCBOI1 (L1971), so the "long tassels" on t7/t8 belts could come back, but the pendants stay banned.
 - W02 (G26 fur v2) FAILs on t4–t6 L1952/L1971 = the approved pictures used fur v1; same waiver as the base.
+
+## OWNER L1979/L1980 (via #27) — thu t7 L1973 + t8 OLD_clasp L1976 re-checked against the current rules (words only)
+| rule | t7 s62_t7_THU_vankien2_L1973 | t8 s62_t8_THU_vankien2_OLD_clasp_L1976 |
+|---|---|---|
+| L1979 held item exactly L1903 | FIXED: "(no jade ornament)" removed → flute = L1903 "a jade flute with gold-filigree bands and gem tassels held low at her side" | phoenix hairpin = L1903 already |
+| G60 bow centre + long ties | FIXED: "a wide yellow sash" → "a wide yellow sash tied at the centre front with long ties" | no sash/bow in the outfit → n/a |
+| G61 front waist free | OK (flute low at her side). Note: the store sentence S37 "Even while her hands are raised … at chest height" stays (gate requires it), slightly at odds with the low flute | OK (hairpin raised, other hand beneath) |
+| G57 ngọc bội on the body banned | OK (no pendant words; tassels on the held flute allowed) | OK |
+| G59 no túi thơm | OK | OK |
+| G65 big flowers t4+ | OK (exempt) | OK (large phoenix motifs allowed) |
+| G53 thu square collar | OK (square neckline + vân kiên + clasp) | OK (square neckline + vân kiên + clasp) |
+| caption names collar type | OK "Thu · Hoàng quý phi · cổ vuông + vân kiên + khuy cài L1973" | FIXED: "Mùa Thu · Hoàng hậu · vân kiên L1976" → "Thu · Hoàng hậu · cổ vuông + vân kiên + khuy cài L1976" (shorter caption-instruction form, as t7) |
+| G63 / G64 frozen | untouched (t6 QP / winter t1 files not edited) | untouched |
+| length | A38 trim "An imperial consort." (as HHCOL2 L1971) → 9995 | 9983 |
+Gates: keep PASS ×2, check_store tp7/tp8 PASS ×2. Old pictures 0eUA2SkTfW / CqnI8nxEEy were 1k low @55 (refs nVsrRMPYQD, TdwDfOyVNR, kseQCFw16B, seed 7172).

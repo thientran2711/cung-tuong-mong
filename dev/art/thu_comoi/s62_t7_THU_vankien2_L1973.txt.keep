@@ -4,3 +4,4 @@ allow: its front CUT AWAY square so the chest and square neckline stay open  # o
 allow: beautiful/handsome romantic-lead looks for everyone.  # boilerplate trimmed for 10 000 (as L1924)
 allow: CAPTION: large bold, top-left, never over her, exactly (with accents): "Mùa Thu · Hoàng quý phi · vân kiên L1903"  # caption renamed L1973 with collar type (G63)
 allow: a jade flute with gold-filigree bands and gem tassels held low at her side  # G57 (owner L1851 + L1973): "(no jade ornament)" added, tassels kept
+allow: An imperial consort   # owner L1979/L1980 via #27: re-check current rules (see MAIDFIX4.md)
