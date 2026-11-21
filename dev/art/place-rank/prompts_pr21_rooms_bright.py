@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 # REJECTED by owner 21/11 ("không ra một chút gì gọi là Trung Hoa hết trơn, nhìn cứ như là phương Tây") — do NOT use; live = prompts_pr21_rooms_vivid.py
-=======
->>>>>>> f29c8990 (rv-chiton-name rv2 report)
 # PR21 COLOUR FIX (owner L1637 verbatim, on pr20/rooms-batch2-tan-tone-lbl.jpg: "Có cách nào cho mấy cái phòng này màu nó tươi tắn hơn không?
 #   Game của mình mấy cái màu cũng tươi mà."; earlier: v1 too pale "nhạt hơn", rooms too brown "nâu nâu"). Foreman C #15: V3-B direction.
 # A17 diff vs prompts_pr20_rooms_tone.py (TONE v2), A18 = only colour / wood / floor colour words (what the owner raised):
