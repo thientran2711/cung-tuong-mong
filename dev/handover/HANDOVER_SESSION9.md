@@ -1946,3 +1946,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (08:54Z) 89: FAIL dialog-person-3 b187ecdc (jksize) → ORDER B re-merge after kit-dialog-2 lands. Chain landq13 (14 lines from perf-ci).
 - (08:59Z) KIT READY K-FOCUS-1+1b 05332db8c (review/kit-focus) → rv MSxp + duodo-focus N9Yc wire now. Keeper told: kit-badge fix FIRST, then K-OPT-KEM.
 - (09:04Z) duodo-focus N9Yc ROLLED (4f759a76; kitFocus wired, 4 kit faults sent to keeper) → opened OPUS successor session_01Rc5AsLtG4rLx87Rv3pd1ej; N9Yc ARCHIVED. Keeper order: kit-badge fix → kit-focus 4 faults → K-OPT-KEM.
+- (09:09Z) rv MSxp FAIL kit-focus 05332db8 (merged base afd85abf): all owner words match EXCEPT Fold fan button 64 px fixed → long act names wrap 5 lines, clipped (= duodo fault #4) → keeper fixes (line-clamp 2 + sub-line, test on button box with long names); nit iPad SAY box covers legs/name plate. Keeper queue: kit-badge → kit-focus faults → K-OPT-KEM.
