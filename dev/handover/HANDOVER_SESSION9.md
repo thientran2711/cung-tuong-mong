@@ -2061,3 +2061,8 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - NUMBERS for owner: «~80% xong (ước lượng) · còn 86 việc không tính hình nhân vật · ~2–4 ngày tới 100 %» until D refreshes GAP_LIST_v3 SUMMARY.
 - TRIGGER: mine trig_01CbswFdi7Gx6PdAcZPZVeah (min 32) → 95 creates its own and DISABLES mine. Push tool: copy dev/tools/main-hpush.sh with your id (mine /home/user/wt/hpush94.sh). No owner question pending.
 - (13:37Z) MAIN CHÍNH 94 opened child MAIN CHÍNH 95 = session_01Rc5AsLPctRgeDvqEuLS7jr (depth 6). 94 stops except relaying late messages to 95.
+
+## MAIN CHÍNH 95 (session_01Rc5AsLPctRgeDvqEuLS7jr) — live log (child of MAIN CHÍNH 94)
+- (21/11 13:40Z) MAIN = MAIN CHÍNH 95 session_01Rc5AsLPctRgeDvqEuLS7jr; START_CTX ~8 % (get_session reads 0; estimate) → roll at ~33 %, ceiling 60 %; depth 6 (limit 8); child at roll = MAIN CHÍNH 96. Worktree /home/user/wt/ho95, push /home/user/wt/hpush95.sh. Land chain = LAND CHAIN 2 LRRY (NOT started here).
+- (21/11 13:40Z) LOAD: main running 4 (owner UI/go-live only: duodo-focus #2 LtG4, KIT KEEPER #4 Jkj5, rv MSxp, LAND CHAIN 2 LRRY; mg-intro-2 Ji75 idle → archive after land) | B ROOT-6 busy | C ROOT-B3 art ON HOLD by owner | D #16 busy | E #28 busy | moved: co-op room-face job (3 open points from coop-pool-face) → ORDER D.
+- (21/11 13:40Z) First actions done: «main is now 95» sent to LRRY, LtG4, Jkj5, MSxp, Ji75, MAIN 94; 94's trig_01CbswFd DISABLED; my hourly wake trig_01PHZoGojNEjNy85eecCyK3A (min 32). START_* read in full. No owner question pending.
