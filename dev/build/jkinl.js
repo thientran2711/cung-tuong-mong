@@ -20,9 +20,11 @@ function kinlSpec(o){const key=o.key||"bag",v=KINL.sel[key];if(v==null)return nu
  if(typeof v==="object"){const q=kinlSlotReg(o),x=q&&q.slots&&q.slots[v.slot];return x&&q.onPick?kinlCapture(q,x):null}
  const x=(o.items||[]).find(y=>kinlId(y)===v);return x?kinlCapture(o,x):null}
 function kinlStrip(o){const key=o.key||"bag";let spec=kinlSpec(o);if(!spec)delete KINL.sel[key];
- const body=spec?`<div class="kinlpic">${spec.itemPic||""}</div><div class="kinlinfo"><b class="kinln">${spec.title||""}</b>${spec.sub?`<span class="kinlsub">${spec.sub}</span>`:""}${spec.html||""}</div>`
+ /* F3 (rv bag-inline): the act buttons leave the narrow info column and take the FULL strip width under the picture / info / chips row (2-3 per row), so the strip is short */
+ let acts="",info=spec?spec.html||"":"";if(spec&&info){const t=document.createElement("div");t.innerHTML=info;const a=t.querySelector(".kinvacts");if(a){acts=a.outerHTML;a.remove();info=t.innerHTML}}
+ const body=spec?`<div class="kinlpic">${spec.itemPic||""}</div><div class="kinlinfo"><b class="kinln">${spec.title||""}</b>${spec.sub?`<span class="kinlsub">${spec.sub}</span>`:""}${info}</div>`
   :`<div class="kinlempty">Chạm một món để xem.</div>`;
- return `<div class="kidet kidet-inline kinldet" data-kinl="${key}">${body}${o.sum?`<div class="kinlchips">${o.sum}</div>`:""}</div>`}
+ return `<div class="kidet kidet-inline kinldet" data-kinl="${key}">${body}${o.sum?`<div class="kinlchips">${o.sum}</div>`:""}${acts?`<div class="kinlacts">${acts}</div>`:""}</div>`}
 function kinlPaint(o){const key=o.key||"bag";const old=document.querySelector(`.kinldet[data-kinl="${key}"]`);if(old){const t=document.createElement("div");t.innerHTML=kinlStrip(o);old.replaceWith(t.firstElementChild)}
  const v=KINL.sel[key];document.querySelectorAll(`.kinv[data-kinv="${key}"] .kinvg > .kitem`).forEach(e=>{const on=typeof v==="string"&&e.dataset.kinvi!=null&&kinlId((o.items||[])[+e.dataset.kinvi]||{})===v;e.classList.toggle("kitem-sel",on)});
  document.querySelectorAll(`[data-keqk="${key}"][data-keqi]`).forEach(e=>e.classList.toggle("kitem-sel",!!v&&typeof v==="object"&&+e.dataset.keqi===v.slot));
@@ -36,12 +38,14 @@ function kinlPickSlot(q,i){const o=KINV.reg[q.key];if(!o||!o.inline||!document.q
 (function(){if(typeof kitModal!=="function")return;const k0=kitModal;kitModal=function(spec){if(KINL.cap&&spec&&spec.kind==="info"&&!KINL.cap.spec){KINL.cap.spec=spec;return null}return k0.apply(this,arguments)};window.kitModal=kitModal})();
 (function(){const st=document.createElement("style");st.id="kinl-css";st.textContent=`
 .kinldet{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:start;margin:8px 0 0;padding:8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:10px;background:#fbf3e3;box-shadow:inset 0 1px 3px #5a3a2018;min-width:0}
-.kinldet .kinlpic{width:var(--kinlsz,88px);aspect-ratio:1/1;flex:none}
+.kinldet .kinlpic{width:var(--kinlsz,120px);aspect-ratio:1/1;flex:none}
 .kinldet .kinlpic .kitem{--isz:100%;width:100%}
 .kinldet .kinlinfo{min-width:0;display:flex;flex-direction:column;gap:3px}
 .kinldet .kinln{font-family:var(--font-d,inherit);font-size:1.02rem;line-height:1.2}
 .kinldet .kinlsub{font-size:.78rem;opacity:.75}
-.kinldet .kinvacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:6px;margin-top:6px}
+.kinldet .kinlacts{grid-column:1/-1}
+.kinldet .kinlacts .kinvacts.rbtn{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))!important;gap:6px;margin-top:6px}
+.kinldet .kinlacts .kinvacts>button{height:auto!important;min-height:0!important;align-self:start}
 .kinldet .kinlchips{display:flex;flex-direction:column;gap:5px;align-items:stretch;font-size:.78rem;max-width:132px;padding:6px;border:1px solid var(--k-hair,#e6d3ac);border-radius:8px;background:#f4ead8}
 .kinldet .kinlchips .chip{white-space:normal}
 .kinldet .kinlempty{grid-column:1/2;align-self:center;padding:10px 4px;opacity:.7}
