@@ -2071,3 +2071,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (13:37Z) LAND CHAIN 2: FAIL kit-mark-fix 123c4572 REAL CONFLICT jk4.js vs LIVE 419079d7 → back to reviewer via MAIN 95. Chain continues (q1b).
 - (21/11 13:45Z) LRRY: LANDED duodo-focus 419079d7 → LtG4 told to record LIVE mp4. FAIL kit-mark-fix 123c4572 (jk4.js conflict) → KIT KEEPER #4 re-merge → review/kit-mark-fix-r5 → rv MSxp.
 - (21/11 13:48Z) rv MSxp PASS kit-relrows-ms 1641927e → LRRY q2 (before rel-men-servants r2).
+- (13:49Z) LAND CHAIN 2: LANDED kit-dialog-2 f85cba97 (QC ok at 1500 s timeout).
