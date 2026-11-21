@@ -637,6 +637,22 @@ function famLostCase(o,f){if(!o.iu)return false;const c=(S.lost||[]).find(c=>c&&
    A piece of another kind is never that case's piece: no entry (c.at kept) */
 (function(){if(typeof loEntry!=="function")return;const f0=loEntry;loEntry=function(c){const at=c&&c.at;const x=f0.apply(this,arguments);
  try{if(x&&CW.on&&c&&x.e){const k=(c.e&&c.e.k)||c.k;if(k&&x.e.k!==k){c.at=at;return null}}}catch(z){}return x};window.loEntry=loEntry})();
+/* E44b (c) whole group (law 6c / law 11; seed 4242: 148 «di vật» into MY box w35 → sold; 1173 / 576 / 1182 seized from my chest as tang
+   vật → «trả kho» → sold — each time the owner's case on her seat stayed «held by me» = vanish): a piece OWNED by the friend (box own = her
+   key, or the piece's gh / my case of it names her) that leaves my hands through the ONE box rule (jil ilGone) reaches her seat:
+   - «di vật» (nobody here to take it): it goes home to her as «ret» (b4Send), my census routes it «sang hảo hữu»;
+   - any other road (tang vật, tịch thu, bán, cầm cố, đem sửa, kẻ hầu bớt xén …): the piece is really in MY box now (counted here); it is no
+     longer hers to reclaim through my box (own cleared), my case of it closes «mất dấu», and her case closes the same way («gone», by id).
+   «thất lạc» (loLose) keeps its own road. Two-way: either seat. */
+(function(){if(typeof ilGone!=="function")return;const g0=ilGone;ilGone=function(p,e,how,o){
+ let F=null,c=null,ids=[];
+ try{if(CW.on&&!CW.ctx&&how!=="lost"&&e&&typeof e==="object"&&e.k){F=String(fp());try{c=typeof loCaseOf==="function"?loCaseOf(e):null}catch(z){c=null}if(c&&String(c.own)!==F)c=null;
+  const fo=(o&&o.own!=null&&String(o.own)===F)||(e.gh!=null&&String(e.gh)===F)||!!c;if(!fo)F=null;else ids=[e.iu,e.hiu,c&&c.e&&c.e.iu,c&&c.e&&c.e.hiu].filter(Boolean)}}catch(z){F=null}
+ if(F&&how==="dead"){try{if(c&&c.st!=="done"){c.st="done";c.end=wk();c.how="nha"}b4Send([famRet(e)],{});if(typeof ilSent==="function")ilSent(e,friendEntry());return null}catch(z){console.error("famops dead",z)}}
+ const r=g0.apply(this,arguments);
+ if(F&&r&&typeof r==="object"&&r.e){try{if(String(r.own)===F)r.own="";if(c&&c.st!=="done"){c.st="done";c.end=wk();c.how="matdau";c.__fs=1}
+  const iu=ids[0]||r.e.iu;b4Send([Object.assign({op:"gone",k:e.k,how:"matdau"},iu?{iu}:{},ids.length>1?{alt:ids.slice(1)}:{})],{})}catch(z){console.error("famops box",z)}}
+ return r};window.ilGone=ilGone})();
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
  const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
  const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f))famMiss(o,"not hers");return [o,e]}).filter(x=>x[1]);
@@ -685,7 +701,7 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
    her seat closes HER case of that piece the same way («gone»), by identity. Checked after every act, buổi and week end on the host. */
 function famSweep(){try{if(!CW.on||!host()||CW.ctx||!S||!Array.isArray(S.lost)||typeof fp!=="function")return;
  const F=String(fp()),RET={nha:1,tra:1,soat:1,nop:1,xet:1},st=CW.famSt||(CW.famSt={}),first=!CW.famSw;CW.famSw=1;const ops=[];
- for(const c of S.lost){if(!c||String(c.own)!==F)continue;if(c.st!=="done"){st[c.id]=1;continue}if(st[c.id]===2)continue;const was=st[c.id]===1;st[c.id]=2;
+ for(const c of S.lost){if(!c||String(c.own)!==F)continue;if(c.st!=="done"){st[c.id]=1;continue}if(st[c.id]===2)continue;if(c.__fs){st[c.id]=2;continue}/* E44b: closed by the box rule, which sent its own «gone» */const was=st[c.id]===1;st[c.id]=2;
   if((first&&!was)||RET[c.how])continue;ops.push(Object.assign({op:"gone",k:c.k,how:c.how==="mat"?"mat":"matdau"},c.e&&c.e.iu?{iu:c.e.iu}:{}))}
  if(ops.length)b4Send(ops,{})}catch(e){console.error("famSweep",e)}}
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(){const r=r0.apply(this,arguments);if(CW.on&&!CW.famIn)famSweep();return r}})();
