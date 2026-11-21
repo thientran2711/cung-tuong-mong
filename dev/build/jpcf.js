@@ -32,7 +32,10 @@ function pcfTaste(e){try{const rows=[];const L=KNOWN(e);
  if(isEmp(e)){const E=S.emp,K=E.known||{},Lk=E.likes||{};const like=[["flower","hoa"],["music","khúc nhạc"],["dish","món ăn"]].filter(([k])=>K[k]).map(([k,w])=>`${w} ${Lk[k]}`);
   rows.push({l:"Thích",f:like.length?like.join(" · "):"chưa biết (trò chuyện với ngài để biết)",c:like.length?"t":"n"});
   try{rows.push(pcfDisRow(e,L))}catch(x){}
-  const T=(E.traits||[]).map(t=>PERS[t]&&PERS[t].tend?PERS[t].tend:"").filter(Boolean);if(T.length)rows.push({l:"Hay",f:T.join("; ")})}
+  /* owner 21/11: «Trọng» = what he values (his tend phrases «trọng X», one comma list, «trọng» never repeated); «Hay» = the rest (the trait box → «!» is the kit keeper's, review/kit-pcrow-square) */
+  const tr=[],hay=[];for(const t of (E.traits||[])){const tend=PERS[t]&&PERS[t].tend;if(!tend)continue;
+   for(const w of tend.split(/\s*[;,]\s*/).filter(Boolean)){const m=/^trọng\s+(.+)$/i.exec(w);if(m)tr.push(m[1]);else hay.push(w)}}
+  if(tr.length)rows.push({l:"Trọng",f:tr.join(", ")});if(hay.length)rows.push({l:"Hay",f:hay.join(", ")})}
  else if(isTh(e)){/* jtrong (D7 r1): the same answer as the card chip — her archetype once met at thỉnh an, else "chưa rõ" (stranger rule) */
   if(typeof thArch==="function"){const k=S.thO&&S.thO.archK;rows.push({l:"Tính nết",f:k?thArch().n:"chưa rõ",c:k?"t":"n"})}else rows.push({l:"Tính nết",f:traitsOf("th").join(" · ")||"chưa rõ"});
   try{rows.push(pcfDisRow(e,L))}catch(x){}}
@@ -42,20 +45,20 @@ function pcfTaste(e){try{const rows=[];const L=KNOWN(e);
     const r=kn_.length?pcfPrefRow(e,L,"Thích",kn_.map(k=>disEntry(k).n),keys.length,"thích"):(keys.length?{l:"Thích",f:"chưa rõ",c:"n"}:null);if(r)rows.push(r)}}catch(x){}
   try{rows.push(pcfDisRow(e,L))}catch(x){}
   const tend=K.map(t=>PERS[t]&&PERS[t].tend).filter(Boolean);if(tend.length)rows.push({l:"Hay",f:tend.join("; ")})}
- const R=rows.filter(Boolean);if(!R.length)return"";return `<div class="kpsec"><h4 class="kpst">Sở trọng</h4>${kitFactRows(R)}</div>`}catch(x){return""}}
+ const R=rows.filter(Boolean);if(!R.length)return"";return `<div class="kpsec">${kitFactRows(R)}</div>`}catch(x){return""}}
 const PREF=/^(thích|không ưa|ghét)\b/i;
 function pcfIntel(e){try{if(e.id==null||typeof kitRows!=="function")return"";const L=KNOWN(e).filter(x=>!PREF.test(x.f));/* likes / dislikes already sit in Sở trọng */const n=KNOWN(e).length;const ev=e.ev||0;
- const rows=L.slice(0,2).map(x=>({l:"Tin",f:x.f,d:x}));
+ const rows=L.slice(0,2).map(x=>({l:"Đã biết",f:x.f,d:x}));
  const chips=[n?`<button class="chip kchipb" data-kintel="${e.id}">Đã biết: ${n} tin ›</button>`:"",ev?`<button class="chip hot kchipb" data-kev="${e.id}" title="Xem chứng cứ">Chứng cứ ${ev} ›</button>`:""].filter(Boolean);
- return `<div class="kpsec pcf-i"><h4 class="kpst">Đã biết</h4>${rows.length?kitFactRows(rows):`<div class="kpnote">Chưa biết gì thêm. Dò la, hỏi kẻ hầu để biết.</div>`}${chips.length?`<div class="kchips">${chips.join(" ")}</div>`:""}</div>`}catch(x){return""}}
+ return `<div class="kpsec pcf-i">${rows.length?kitFactRows(rows):kitFactRows([{l:"Đã biết",f:"chưa biết gì thêm; dò la, hỏi kẻ hầu để biết",c:"n"}])}${chips.length?`<div class="kchips">${chips.join(" ")}</div>`:""}</div>`}catch(x){return""}}
 /* greet-stranger (owner 18/11 01:38Z: the result read twice): the line the open result note (popMsg) already shows is not repeated as "Dạo này" */
 function pcfShown(t){try{/* person-dialog-restore (OD:L1852): popMsg is the result shown in the BOTTOM result card now (not a note in this column); the line it already says is still not repeated here as "Dạo này" (the result read twice, owner 18/11 01:38Z) */const P=typeof popMsg==="string"&&popMsg?plain(popMsg).replace(/\s+/g," "):"";if(!P)return false;const s=String(t).replace(/\s+/g," ").trim().split(/(?<=[.!?])\s/)[0].replace(/[.!?]+$/,"").replace(/^[^:]{1,40}:\s*/,"").trim();return s.length>=8&&P.includes(s)}catch(x){return false}}
 function pcfLog(e){try{const nm=pcfName(e);if(!nm||!S.logs)return"";const parts=nm.split(" ");const key=isEmp(e)||isTh(e)?nm:parts.slice(-2).join(" ");const mark=`T${S.month}/${S.year} `;const rows=[];let sk=0;
  for(const h of S.logs){const m=/^<span class="ld">(T\d+\/\d+) ([^<]*)<\/span>([\s\S]*)$/.exec(h);if(!m||(m[1]+" ")!==mark)continue;const t=plain(m[3]);if(!t.includes(key)&&!(isEmp(e)&&/Hoàng thượng|ngài /i.test(t)))continue;if(pcfShown(t)){sk=1;continue}
-  rows.push({l:"Chuyện",f:m[3],d:{when:`${m[1]} ${m[2]}`}});if(rows.length>=1)break}
+  rows.push({l:"Dạo này",f:"Trong cung: "+m[3],d:{when:`${m[1]} ${m[2]}`}});if(rows.length>=1)break}
  if(!rows.length&&sk)return"";/* the only story is the result shown above */
- if(!rows.length)return `<div class="kpsec"><h4 class="kpst">Dạo này</h4><div class="kpnote">Tháng này ngươi chưa có chuyện gì với ${isEmp(e)||isTh(e)?"người":typeof nrHe==="function"?nrHe(e):"nàng"}.</div></div>`;
- return `<div class="kpsec"><h4 class="kpst">Dạo này</h4>${kitFactRows(rows)}</div>`}catch(x){return""}}
+ if(!rows.length)return `<div class="kpsec">${kitFactRows([{l:"Dạo này",f:`Tháng này ngươi chưa có chuyện gì với ${isEmp(e)||isTh(e)?"người":typeof nrHe==="function"?nrHe(e):"nàng"}`,c:"n"}])}</div>`;
+ return `<div class="kpsec">${kitFactRows(rows)}</div>`}catch(x){return""}}
 /* quick acts: only for a rival, only when her card has no act (the pop-up after the one talk of the visit) */
 function pcfQuick(e){try{if(typeof rivals==="undefined"||typeof rvGroups!=="function")return"";const i=rivals.indexOf(e);if(i<0||!e.alive||e.out||typeof pbtn!=="function")return"";
  const B=[];const push=b=>{if(b&&/<button(?![^>]*disabled)/.test(b))B.push(b)};
