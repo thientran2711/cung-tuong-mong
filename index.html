@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a1498983+","t":"2026-11-21T03:19Z","c":"outside-coop: OR13 co-op half — friend at home \u003c-> friend in the palace: letter / gift / sớ / rumour / join, both ways (jkcco.js, BAL.kcco)","b":"c55a4bcb8bd0","h":[{"s":"61fdc000+","t":"2026-11-21T04:32Z","c":"Hộp thoại: bỏ câu lặp lại hai lần"},{"s":"5ebfff2f+","t":"2026-11-21T05:49Z","c":"hoangthuong-gold FAIL fix: bright imperial yellow ONLY for Hoang thuong (Thai hau unchanged, KIT 33.5); scan checks both"},{"s":"38e0fd93+","t":"2026-11-21T04:21Z","c":"Dấu cảm xúc ở góc trên-phải tranh sự kiện, hiện ngay"},{"s":"31114358+","t":"2026-11-21T03:20Z","c":"Đồ mặc: các ô mặc đồ (chơi chung khớp hai bên)"},{"s":"6fb2f34a+","t":"2026-11-21T03:59Z","c":"Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»"},{"s":"8d4f9919+","t":"2026-11-21T04:05Z","c":"Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)"},{"s":"ee8847b0+","t":"2026-11-21T04:13Z","c":"Tab trống: thẻ tranh «Ta chưa có…»; khung không cuộn khi đủ chỗ"},{"s":"0f9d0f77+","t":"2026-11-21T02:52Z","c":"Công chúa ngoại bang: thêm các đường Phù Tang"},{"s":"0b2bbd82+","t":"2026-11-21T03:25Z","c":"Chí tôn: tên «Hoàng thượng» giữa, niên hiệu dòng dưới; Sở trường · Trọng · Dạo này một cột"},{"s":"8da94cef+","t":"2026-11-21T03:27Z","c":"Mini-game: luật gọn 5 giây, bỏ chữ thừa"}]};
+window.CTM_BI={"s":"eff78fd8+","t":"2026-11-21T06:22Z","c":"outside-coop: OR13 co-op half — friend at home \u003c-> friend in the palace: letter / gift / sớ / rumour / join, both ways (jkcco.js, BAL.kcco)","b":"a5bc8649ed56","h":[{"s":"6ada1cb7+","t":"2026-11-21T04:09Z","c":"Đi lại trong cung: tốn khắc theo đường đi (D)"},{"s":"1fa28148+","t":"2026-11-21T04:36Z","c":"Hộp thoại kit: bảng Danh hiệu trên tranh, dòng «Mất» riêng, các sửa #44 #47 #49 #56"},{"s":"61fdc000+","t":"2026-11-21T04:32Z","c":"Hộp thoại: bỏ câu lặp lại hai lần"},{"s":"5ebfff2f+","t":"2026-11-21T05:49Z","c":"hoangthuong-gold FAIL fix: bright imperial yellow ONLY for Hoang thuong (Thai hau unchanged, KIT 33.5); scan checks both"},{"s":"38e0fd93+","t":"2026-11-21T04:21Z","c":"Dấu cảm xúc ở góc trên-phải tranh sự kiện, hiện ngay"},{"s":"31114358+","t":"2026-11-21T03:20Z","c":"Đồ mặc: các ô mặc đồ (chơi chung khớp hai bên)"},{"s":"6fb2f34a+","t":"2026-11-21T03:59Z","c":"Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»"},{"s":"8d4f9919+","t":"2026-11-21T04:05Z","c":"Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)"},{"s":"ee8847b0+","t":"2026-11-21T04:13Z","c":"Tab trống: thẻ tranh «Ta chưa có…»; khung không cuộn khi đủ chỗ"},{"s":"0f9d0f77+","t":"2026-11-21T02:52Z","c":"Công chúa ngoại bang: thêm các đường Phù Tang"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1436,7 +1436,7 @@ function stageCapFix(V){/* the caption is written AFTER the people are reconcile
   const n=V.people.filter(p=>p.kind!=="chest").length;const cnt=n?`Ở đây có ${n} người.`:"Không gặp ai.";
   if(/Ở đây có \d+ người\./.test(V.msg))V.msg=V.msg.replace(/Ở đây có \d+ người\./,cnt);else if(V.msg==="Không gặp ai."&&n)V.msg=cnt}catch(e){}}
 function goTo(k){if(S.dead||Q.length||S.out)return;popIdx=null;popMsg="";
- if(k==="home"){S.place="home";S.visit={k,people:homePeople(),talked:false,tk:{}};render();return}
+ if(k==="home"){if(S.place!=="home"&&!window.__walkFree){const th=travel(S.place,"home");if(!walkOk(th))return;spend(th)}S.place="home";S.visit={k,people:homePeople(),talked:false,tk:{}};render();return}
  const tc=travel(S.place,k);if(!walkOk(tc)||S.confined)return;const P=placeOf(k);spend(tc);S.place=k;const W=S.where||{};
  const ppl=[];let msg="";const emp={kind:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:`niên hiệu ${empEra()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
  const at=(id,w)=>{const r=recAt(id,k);return r==null?w===k:r};const here=liveRivals(true).filter(v=>at("v"+v.id,W[v.id]));const empHere=at("emp",W.emp);const cap={};
@@ -3658,8 +3658,8 @@ function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(he
 
 /* the palace map */
 const MAPL=[["thu","dtd","tn"],["kn","vuon","ksp"],["tyv","lc","home"]];
-function mapHTMLgrid(){const W=S.where||{};const dis=k=>!walkOk(travel(S.place,k))||S.confined||S.dead||S.place===k;
- const tile=(k,n,sc,sub)=>`<button class="mtile" data-go="${k}" ${k==="home"?(S.place==="home"?"disabled":""):(dis(k)?"disabled":"")} style="${(SCIMG[sc]||k==="home")?`background-image:url(https://ctm-img.victoria-tntt.workers.dev/img/${k==="home"&&sc!=="maid"?"tam-cung-dem":SCIMG[sc]}.webp)`:""}"><span class="mband">${k!=="home"&&S.place!==k&&!walkOk(travel(S.place,k))?`<span class="mchip">${used>=BAL.time.khac?"hết khắc":`đi ${travel(S.place,k)} khắc`}</span>`:""}<b>${n}</b><span>${countAt(k)?silChip(countAt(k)):"vắng"} · ${k==="home"?"không tốn khắc":travel(S.place,k)+" khắc"}</span>${sub&&k!=="home"?`<small>${sub}</small>`:""}</span></button>`;
+function mapHTMLgrid(){const W=S.where||{};const dis=k=>!walkOk(travel(S.place,k))||(S.confined&&k!=="home")||S.dead||S.place===k;
+ const tile=(k,n,sc,sub)=>`<button class="mtile" data-go="${k}" ${dis(k)?"disabled":""} style="${(SCIMG[sc]||k==="home")?`background-image:url(https://ctm-img.victoria-tntt.workers.dev/img/${k==="home"&&sc!=="maid"?"tam-cung-dem":SCIMG[sc]}.webp)`:""}"><span class="mband">${S.place!==k&&!walkOk(travel(S.place,k))?`<span class="mchip">${used>=BAL.time.khac?"hết khắc":`đi ${travel(S.place,k)} khắc`}</span>`:""}<b>${n}</b><span>${countAt(k)?silChip(countAt(k)):"vắng"} · ${S.place===k?"đang ở đây":typeof accWalkTxt==="function"?accWalkTxt(k):travel(S.place,k)+" khắc"}</span>${sub&&k!=="home"?`<small>${sub}</small>`:""}</span></button>`;
  let h=`<div class="ph"><span>Đi gần ${BAL.walk.near} khắc, xa ${walkFarK()} khắc · còn <b>${BAL.time.khac-used}</b> ${pips(BAL.time.khac-used)}. Đường xa hơn số khắc còn trong buổi thì đi tiếp sang buổi sau, miễn trong ngày còn đủ khắc; riêng buổi tối không đi qua đêm.</span>${S.confined?`<span class="r">Cấm túc ${S.confined} tháng</span>`:""}</div><div class="pmap">`;
  for(const row of MAPL)for(const k of row){if(k==="kn"&&!qOn()){h+=`<div class="mtile off"><b>Càn Ninh cung</b><span>bỏ trống</span></div>`;continue}const P=placeOf(k);h+=tile(k,k==="home"?"Tẩm cung":P.n,P.sc,k==="home"?"không tốn việc":"")}
  h+=`</div><div class="pmap two">`+liveRivals(false).filter(v=>palaceOf(v)!=="home").map(v=>{const k="r"+v.id;return tile(k,typeof palName==="function"?palName(k):"Cung phi tần","rv","")}).filter((x,i,a)=>a.indexOf(x)===i).join("")+`</div>`;
@@ -3678,7 +3678,7 @@ function walkWhy(tc){const left=Math.max(0,BAL.time.khac-used);return left<=0?"h
    the new buổi, seeing who is there then (1 khắc left in the morning, 3-khắc walk → 1 now + 2 in the afternoon, arrives with 2 left).
    Not across the night: from buổi tối the existing night rule stands (wait until morning). The place must be open in the new buổi.
    While the walk is under way, travel(from,k) in the new buổi returns the part still to walk. NPCs do not pay walk costs (placeWhere). */
-function walkSpill(k,o){if(!S||S.dead||S.out||S.confined||S.mg||!k||k==="home"||k===S.place)return null; /* co-op too (time-spill sweep 16/11): her buổi ends with `bend`, the walk finishes when the room turns (walkSpillTick waits for it) */
+function walkSpill(k,o){if(!S||S.dead||S.out||S.confined||S.mg||!k||k===S.place)return null; /* co-op too (time-spill sweep 16/11): her buổi ends with `bend`, the walk finishes when the room turns (walkSpillTick waits for it) */
  const b=S.buoi||0;if(b>=BUOI.length-1)return null;const tc=travel(S.place,k),left=Math.max(0,BAL.time.khac-used),pre=(o&&o.pre)||0;if(pre+tc<=left)return null;
  let a={ok:true};if(!(o&&o.pass)&&typeof accessOf==="function"){try{S.buoi=b+1;a=accessOf(S,k)||{ok:true}}catch(e){}finally{S.buoi=b}}
  const now=Math.max(0,left-pre);return{k,tc,now,rest:tc-now,b:b+1,ok:!!a.ok,why:a.why||""}}
@@ -3691,7 +3691,7 @@ function walkSpillGo(k,o){const P=walkSpill(k,o);if(!P||!P.ok||Q.length)return;w
    next buổi; walkGo(k) = go now, or spill into the next buổi. */
 function walkBlock(k,tc){if(tc==null)tc=travel(S.place,k);if(walkOk(tc))return"";const P=walkSpill(k);return P&&P.ok?"":walkWhy(tc)}
 function walkLate(k,tc){if(tc==null)tc=travel(S.place,k);if(walkOk(tc))return false;const P=walkSpill(k);return !!(P&&P.ok)}
-function walkGo(k){if(!S||S.dead||Q.length)return;if(k==="home"||k===S.place||S.confined||S.out){goTo(k);return}const tc=travel(S.place,k);if(walkOk(tc)){goTo(k);return}if(walkLate(k,tc))walkSpillGo(k)}
+function walkGo(k){if(!S||S.dead||Q.length)return;if(k===S.place||S.confined||S.out){goTo(k);return}const tc=travel(S.place,k);if(walkOk(tc)){goTo(k);return}if(walkLate(k,tc))walkSpillGo(k)}
 function walkSpillTick(){const W=window.__walkSpill;if(!W)return;if(!S||S.dead){window.__walkSpill=null;return}
  const md=document.getElementById("modal");if(Q.length||(md&&!md.hidden)||S.mg){setTimeout(walkSpillTick,300);return}
  const b=S.buoi||0;
@@ -3705,7 +3705,11 @@ function walkSpillTick(){const W=window.__walkSpill;if(!W)return;if(!S||S.dead){
  else if(!Q.length){window.__walkSpill=null;try{if(typeof j77Card==="function")j77Card(W.k)}catch(e){}}}
 /* khắc of a far walk right now (one-core: texts print this, BAL.walk) */
 function walkFarK(){return BAL.walk.far}
-function travel(a,b){if(a===b)return 0;{const W=window.__walkSpill;if(W&&S&&(S.buoi||0)===W.b&&a===W.from&&b===W.k)return W.rest}const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);const far=Math.abs(r1-r2)+Math.abs(c1-c2)>1;return far?BAL.walk.far:BAL.walk.near}
+/* travel(a,b,p): the walk a→b for walker p (default: her, S; NPC callers pass the person, or null for a bare map distance).
+   walk-cost r3 (law 1, law 4): a walker under punishment (jface «đi chậm») walks BAL.walk.pen khắc longer — per person, never her penalty
+   on an NPC's road; the half-walk still owed after a spill (__walkSpill rest) already holds it. */
+function walkSlow(p){return 0}
+function travel(a,b,p){if(a===b)return 0;if(p===undefined)p=S;{const W=window.__walkSpill;if(W&&S&&p===S&&(S.buoi||0)===W.b&&a===W.from&&b===W.k)return W.rest}const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);const far=Math.abs(r1-r2)+Math.abs(c1-c2)>1;let s=0;try{s=walkSlow(p)||0}catch(e){s=0}return (far?BAL.walk.far:BAL.walk.near)+s}
 function nextBuoi(){if(!S||S.dead||Q.length||S.mg)return;if((S.buoi||0)>=B4L){S.buoi=0;endTurn();return}
  S.buoi=(S.buoi||0)+1;used=0;const ev=b4NpcActs()?rivalsBuoi():"";if(S.dead){render();return}placeWhere();popIdx=null;popMsg="";
  if(S.out)coldVisit();else if(S.place!=="home"){const k=S.place;S.place="home";const u=used;/* review stage-here r4 (OD 18/11 ~19:45Z: her room comes back only at a new day or when she walks home): a card the buổi turn already queued (rivalsBuoi) must not make goTo refuse and leave her at home — hold the queue aside for this refresh, then put it back first */const q0=Q.splice(0);try{goTo(k)}finally{Q.unshift(...q0)}used=u}else S.visit={k:"home",people:homePeople(),talked:false,tk:{}};
@@ -4372,7 +4376,7 @@ function kidCard(k){const lines=k.alive?[tuoi(k.age),`Sức khỏe <b>${k.hp}</b
  const chips=[k.heir?chip("Thái tử","ok"):"",k.alive&&k.hp<40?chip("Yếu ớt","hot"):""];
  const home=S.place==="home";
  return pcard({f:kidFace(k),name:k.name,rank:`${ic("con",16)}${k.sex==="m"?"Hoàng tử":"Công chúa"} · ${k.alive?k.age+" tuổi":"đã mất"}`,status:k.alive?"":"Đã mất",out:!k.alive,lines,chips,
-  groups:k.alive?[["",[pbtn(`data-go="home"`,"Về tẩm cung thăm con","tốn: 1-2 khắc · thành: gặp các con, chăm con tại tẩm cung",home?"đang ở tẩm cung":S.out?"đang ở lãnh cung":S.confined?"đang cấm túc":"")]]]:[],empty:"Con đã mất."})}
+  groups:k.alive?[["",[pbtn(`data-go="home"`,"Về tẩm cung thăm con",`tốn: ${home?0:travel(S.place,"home")} khắc đi đường · thành: gặp các con, chăm con tại tẩm cung`,home?"đang ở tẩm cung":S.out?"đang ở lãnh cung":S.confined?"đang cấm túc":walkBlock("home"))]]]:[],empty:"Con đã mất."})}
 function kidTabHTML(hl){return `<div class="pgwrap"><div class="ph"><span>${hl}</span><span>${ic("con",14)}${mySons().length} hoàng tử · ${myDaus().length} công chúa</span></div>`+(S.kids.length?pager("kid",S.kids.map(k=>({f:kidFace(k),name:shortN(k.name),dim:!k.alive})),i=>kidCard(S.kids[i])):`<p class="past">Chưa có con. Chỉ được thị tẩm mới mang thai.</p>`)+`</div>`}
 
 /* ---- servants and palace people (Kẻ hầu tab) ---- */
@@ -5224,7 +5228,7 @@ function mapSpots(){palFix();const L=[];
  PALN.forEach((nm,i)=>{const s=MAPH.rivalSlots[i];const k=houses[i];if(k){L.push({k,box:s.box,n:nm,fn:palFn(k),res:residents(k),small:true})}else L.push({k:null,box:s.box,n:nm,fn:"cung trống",res:[],small:true,empty:true})});
  /* lower consorts whose head has no slot yet (more heads than palaces) live with no plan spot: listed under the nearest head */
  return L}
-function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung":S.confined?`đang cấm túc (${S.confined} tháng)`:S.place===k?"đang ở đây":k!=="home"&&!walkOk(travel(S.place,k))?(used>=BAL.time.khac?"hết khắc":`đi ${travel(S.place,k)} khắc`):"";
+function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung":S.confined?`đang cấm túc (${S.confined} tháng)`:S.place===k?"đang ở đây":!walkOk(travel(S.place,k))?(used>=BAL.time.khac?"hết khắc":`đi ${travel(S.place,k)} khắc`):"";
  if(window.__mapList){return `<div class="ph"><button class="btn" data-maplist="0">Xem bản đồ hoàng cung<small>toàn cảnh</small></button></div>`+mapHTMLgrid()}
  const z=window.__mapZ||1; /* KIT §85.7: fit-all is the default on every size (mapFit, j38, sets the real width) */
  return `<div class="mapv"><div class="maptools"><span class="past">${SEASON[S.month-1]} · ${BUOI[S.buoi||0]} · còn ${BAL.time.khac-used} khắc<span class="mleg"> · đi gần ${BAL.walk.near} khắc, xa ${walkFarK()} · mặt nhỏ: người ở cung · bóng: người đang có mặt</span></span><span><button class="btn mz" data-mapz="-1" aria-label="Thu nhỏ">−</button><button class="btn mz" data-mapz="1" aria-label="Phóng to">+</button><button class="btn mz" data-maplist="1">Danh sách</button></span></div>
@@ -5232,8 +5236,8 @@ function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung
  ${mapSpots().map(s=>{const b=s.box;const pos=`left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%`;
   if(s.empty)return `<div class="mspot sm off empty mgrey" title="${s.n}: ${s.fn}" style="${pos}"><span class="mlab">${s.n.replace(/ cung$/,"")}</span>${s.fn==="cung trống"?"":`<span class="mmeta">${s.fn}</span>`}</div>`; /* owner 18/11 ~21:50Z: an empty palace shows ONLY its name (grey look kept), no second line; Ngoại triều keeps its reason line */
   const why=disR(s.k);const n=countAt(s.k);const fs=s.res.slice(0,s.small?3:4).map(p=>`<span class="mres">${mdH(p===S?pMe():pv(p),"xs")}</span>`).join("")+(s.res.length>(s.small?3:4)?`<span class="mres more">+${s.res.length-(s.small?3:4)}</span>`:"");
-  return `<button class="mspot${s.small?" sm":""}${why?" off":""}${S.place===s.k?" here":""}" data-go="${s.k}" ${why?"disabled":""} title="${s.n}: ${s.fn}${n?` · ${n} bóng`:""}${why?` · ${why}`:s.k!=="home"&&S.place!==s.k?` · đi ${travel(S.place,s.k)} khắc`:""}${s.res.length?" · ở: "+s.res.map(p=>p===S?"ngươi":p.name).join(", "):""}" style="${pos}"><span class="mlab">${S.place===s.k&&!S.out&&!S.dead&&typeof kitMeMapMark==="function"?kitMeMapMark():""}${s.small?s.n.replace(/ cung$/,""):s.n}</span>${(()=>{const mine=S.place===s.k&&!S.out&&!S.dead; /* KIT §41.2 (owner 17/11 ~12:30Z, picked "1"): her place counts HER: "Ta + N bóng · K khắc" (N = the others there), alone "Chỉ có ta · K khắc"; K = khắc she has left this buổi */
- const bits=mine?[n?`Ta + ${n} bóng`:"Chỉ có ta",`<em class="ok">còn ${Math.max(0,BAL.time.khac-used)} khắc</em>`]:[n?`${n} bóng`:"",why&&why!=="đang ở đây"?`<em>${why}</em>`:s.k!=="home"&&S.place!==s.k?`<em class="ok">${travel(S.place,s.k)} khắc</em>`:""].filter(Boolean);return bits.length?`<span class="mmeta">${bits.join(" · ")}</span>`:""})()}${fs?`<span class="mfaces">${fs}</span>`:""}</button>`}).join("")}
+  return `<button class="mspot${s.small?" sm":""}${why?" off":""}${S.place===s.k?" here":""}" data-go="${s.k}" ${why?"disabled":""} title="${s.n}: ${s.fn}${n?` · ${n} bóng`:""}${why?` · ${why}`:S.place!==s.k?` · đi ${travel(S.place,s.k)} khắc`:""}${s.res.length?" · ở: "+s.res.map(p=>p===S?"ngươi":p.name).join(", "):""}" style="${pos}"><span class="mlab">${S.place===s.k&&!S.out&&!S.dead&&typeof kitMeMapMark==="function"?kitMeMapMark():""}${s.small?s.n.replace(/ cung$/,""):s.n}</span>${(()=>{const mine=S.place===s.k&&!S.out&&!S.dead; /* KIT §41.2 (owner 17/11 ~12:30Z, picked "1"): her place counts HER: "Ta + N bóng · K khắc" (N = the others there), alone "Chỉ có ta · K khắc"; K = khắc she has left this buổi */
+ const bits=mine?[n?`Ta + ${n} bóng`:"Chỉ có ta",`<em class="ok">còn ${Math.max(0,BAL.time.khac-used)} khắc</em>`]:[n?`${n} bóng`:"",why&&why!=="đang ở đây"?`<em>${why}</em>`:S.place!==s.k?`<em class="ok">${travel(S.place,s.k)} khắc</em>`:""].filter(Boolean);return bits.length?`<span class="mmeta">${bits.join(" · ")}</span>`:""})()}${fs?`<span class="mfaces">${fs}</span>`:""}</button>`}).join("")}
  </div></div></div>`}
 /* the palace screen: residents present stand in the scene; absent ones named 'đi vắng' only if known */
 (function(){const g=goTo;goTo=function(k){const r=g.apply(this,arguments);try{if(S.place===k&&S.visit&&(k==="home"||k==="kn"||k[0]==="r")){const R2=residents(k).filter(p=>p!==S);const here=R2.filter(p=>whereOf(p)===k);const away=R2.filter(p=>whereOf(p)!==k);
@@ -5980,7 +5984,7 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
    is married (princes and princesses alike); matchShow = a child shows in the match lists from this age; matchMax = oldest prince offered as a match; age.reign = the young Emperor rules alone from this age (no regency).
    seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table. res / harem: see below.
    night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
-Object.assign(BAL,{time:{khac:4,sucMin:5,/* khắc a deed costs, ONE source for the player and every NPC (AG-ALL-2 G8): talk option (j2 talk), talk that is an act, a harm act (j8 doAct) */cost:{talk:1,talkAct:2,harm:2}},lot:{bac:10,k:1},walk:{near:1,far:2},sneak:{danh:8,heavy:15,seen:2,lead:15},srvAge:{ask:25,out:30,mama:45,old:45},
+Object.assign(BAL,{time:{khac:4,sucMin:5,/* khắc a deed costs, ONE source for the player and every NPC (AG-ALL-2 G8): talk option (j2 talk), talk that is an act, a harm act (j8 doAct) */cost:{talk:1,talkAct:2,harm:2}},lot:{bac:10,k:1},walk:{near:1,far:2,npc:1,pen:1/* jface «đi chậm»: extra khắc per walk while punished (per walker, j9 walkSlow) */},sneak:{danh:8,heavy:15,seen:2,lead:15},srvAge:{ask:25,out:30,mama:45,old:45},
  age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:1,4:2,3:3}, /* owner 17/11 04:30Z: halved (was {7:1,6:1,5:2,4:4,3:6}) */
  /* RESIDENCE (owner 17/11 04:20Z + 04:32Z): every chủ vị (Tần, Phi, Quý phi; the player too) takes at most side co-residents in each
     of the halls (Đông phối điện, Tây phối điện), one room each; Hoàng hậu and Hoàng quý phi live alone. harem.cap = most consorts alive at once
@@ -6831,9 +6835,9 @@ function accName(k){try{return k==="home"?palName("home"):(typeof palName==="fun
 /* the full state of a map place for her right now: grey reason (access first, then khắc / confinement) */
 function accState(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:1};
  if(S.out)return{why:"đang ở lãnh cung"};if(S.confined)return{why:`cấm túc ${S.confined} tháng`};
- const a=accessOf(S,k);const tc=k==="home"?0:travel(S.place,k);
+ const a=accessOf(S,k);const tc=k===S.place?0:travel(S.place,k);
  if(!a.ok){const st={why:a.why,kind:a.kind,ask:a.ask,tc};st.sneakOk=can(tc+2);if(a.ask==="yk")st.empAway=(S.where||{}).emp!==k;st.askOk=can(1)&&!st.empAway;return st}
- if(k!=="home"&&!walkOk(tc))return{why:walkWhy(tc)};
+ if(!walkOk(tc))return{why:walkWhy(tc)}; /* the road home is a walk like any other (OD L1976) */
  return{why:"",tc}}
 function accSneakLine(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+1} khắc · thành: vào được${typeof j77When==="function"?j77When(tc+1):" buổi này"} · hỏng: Danh -${BAL.sneak.danh}, bị phạt`} /* replaced by j77; same words */
 function accAskLine(k){return `${word(accAskO(k))} · tốn: 1 khắc · thành: được vào${typeof j77When==="function"?j77When(1):" buổi này"} · hỏng: không mất gì thêm`} /* replaced by j77 */
@@ -6855,7 +6859,7 @@ function accSneak(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=
  spend(tc);apply({danh:-BAL.sneak.danh});log(`<span class="r">Lẻn vào ${nm}, bị thị vệ bắt được: Danh -${BAL.sneak.danh}.</span>`);punish(S,`tự tiện lẻn vào ${nm}`,1);
  Q.push({t:"Bị bắt",h:`<p>Thị vệ ${nm} bắt được ngươi ở cửa hông. Chuyện truyền khắp lục cung.</p><p class="r">Danh -${BAL.sneak.danh} ·${S.confined?`cấm túc ${S.confined} tháng`:"bị phạt"}</p>`});showModal();render()}
 function accAsk(k){if(!S||S.dead||Q.length||!can(1))return;const st=accState(k);if(!st.ask||st.empAway)return;const nm=accName(k);const o=accAskO(k);spend(1);
- if(roll(o)){accGrant(S,k);const aw=typeof j77When==="function"?j77When(k==="home"?0:travel(S.place,k)):" buổi này";/* the walk may spill: say the arrival buổi (day-khắc r2) */log(`Xin vào ${nm}: được cho vào${aw}.`);Q.push({t:st.ask==="yk"?"Được yết kiến":"Được mời vào",h:`<p>${st.ask==="yk"?"Thái giám truyền khẩu dụ: Hoàng thượng cho ngươi vào.":"Cung nữ ra cửa mời ngươi vào."}</p><p class="g">Được vào ${nm}${aw}.</p>`});}
+ if(roll(o)){accGrant(S,k);const aw=typeof j77When==="function"?j77When(k===S.place?0:travel(S.place,k)):" buổi này";/* the walk may spill: say the arrival buổi (day-khắc r2) */log(`Xin vào ${nm}: được cho vào${aw}.`);Q.push({t:st.ask==="yk"?"Được yết kiến":"Được mời vào",h:`<p>${st.ask==="yk"?"Thái giám truyền khẩu dụ: Hoàng thượng cho ngươi vào.":"Cung nữ ra cửa mời ngươi vào."}</p><p class="g">Được vào ${nm}${aw}.</p>`});}
  else{log(`Xin vào ${nm}: bị từ chối.`);Q.push({t:"Bị từ chối",h:`<p>${st.ask==="yk"?`Thái giám ra cửa: “Hoàng thượng đang ${S.emp.mood>=2?"không vui":"bận"}, ${kSay({srv:"m"},S,"{goi}")} xin hồi cung.”`:"Cung nữ ra cửa: “Chủ tử nhà nô tỳ không tiện tiếp.”"}</p>`})}
  showModal();render()}
 document.addEventListener("click",e=>{const s=e.target.closest("[data-acsneak]");if(s){e.preventDefault();e.stopImmediatePropagation();if(!s.disabled)accSneak(s.dataset.acsneak);return}
@@ -7180,7 +7184,7 @@ function accHostK(k){if(k==="kn")return rivals.find(v=>v.queen&&v.alive&&!v.out)
  if(p.sk==="sv"){const s=servById(p.sid);return s?pServ(s):{src:"",ini:p.ini,col:p.col}}if(p.ref&&p.ref.id!=null){const v=RV(p.ref.id);if(v)return pv(v)}return{src:"",ini:p.ini,col:p.col}}return f0(p)}})();
 function srvGoTo(k){if(!S||S.dead||Q.length)return false;popIdx=null;popMsg="";const m=srvM();if(m&&k===palaceOf(m))k="home";
  if(S.srv.lau>0||k==="tgk"){S.place="tgk";S.visit=srvVisitOf("tgk");if(k!=="tgk")srvToast("Đang chịu phạt ở Tân Giả khố");render();return k==="tgk"}
- if(k==="home"){S.place="home";S.visit=srvVisitOf("home");render();return true}
+ if(k==="home"){if(S.place!=="home"&&m&&!window.__walkFree){const th=travel(S.place,palaceOf(m));if(!walkOk(th)&&!(typeof dayFit==="function"&&dayFit(th))){if(!S.visit||S.visit.k!==S.place)S.visit=srvVisitOf(S.place);srvToast((typeof dayWhy==="function"&&dayWhy(th))||walkWhy(th));render();return false}spend(th)}S.place="home";S.visit=srvVisitOf("home");render();return true}
  const h=window.placeEnterHook(S,k);if(h&&!h.ok){if(!S.visit||S.visit.k!==S.place)S.visit=srvVisitOf(S.place);srvToast(`${placeOf(k).n}: ${h.why}`);render();return false}
  const from=S.place==="home"&&m?palaceOf(m):S.place;const tc=travel(from,k);if(!walkOk(tc)&&!(typeof dayFit==="function"&&dayFit(tc))){if(!S.visit||S.visit.k!==S.place)S.visit=srvVisitOf(S.place);srvToast((typeof dayWhy==="function"&&dayWhy(tc))||walkWhy(tc));render();return false}
  /* a walk longer than this buổi runs on into the next one (time-spill sweep 16/11: j76 carry); she is there when the buổi turns */
@@ -26321,7 +26325,7 @@ function q72Card(x){const X=q72X(x);if(!X)return`<p class="past">Người nhờ 
  const ok=q72OutTok(q72OkDef(X),X,"ok"),no=q72OutTok(q72NoDef(X),X,"no"),bad=T.bad?q72OutTok(T.bad,X,"bad"):[];
  let B=[];const pl=q72StepPl(st,X);
  if(st.w)B.push([q72Txt(st.n,X),`còn ${Math.max(0,(x.wt||wk())-wk())} tuần`,"t"]);
- else{if(pl&&S.place!==pl&&!S.out){const tc=pl==="home"?0:travel(S.place,pl);const why=S.confined&&pl!=="home"?`đang cấm túc`:Q.length?"đang có việc chờ":pl!=="home"&&!can(tc+1)?"hết khắc":typeof accessOf==="function"&&pl!=="home"&&!q72Host(pl,X)&&!accessOf(S,pl).ok?accessOf(S,pl).why:"";
+ else{if(pl&&S.place!==pl&&!S.out){const tc=travel(S.place,pl);const why=S.confined&&pl!=="home"?`đang cấm túc`:Q.length?"đang có việc chờ":!(pl==="home"?walkBlock(pl,tc)==="":can(tc+1))?"hết khắc":typeof accessOf==="function"&&pl!=="home"&&!q72Host(pl,X)&&!accessOf(S,pl).ok?accessOf(S,pl).why:"";
    B.push(pbtn(`data-q72g="${pl}"`,`Đến ${q72PlN(pl)}`,`tốn: ${tc} khắc đi đường · thành: tới nơi làm bước này`,why))}
   if(st.ch)st.ch.forEach((o,i)=>B.push(pbtn(`data-q72d="${x.u}" data-q72o="${i}"`,q72Txt(o.n,X),q72Line(x,X,st,o),q72Why(x,X,st,o))));
   else B.push(pbtn(`data-q72d="${x.u}"`,q72Txt(st.n,X),q72Line(x,X,st,null),q72Why(x,X,st,null)))}
@@ -26354,12 +26358,12 @@ function q72HTML(){const q=q72();const mo=q.mo[S.turn]||0;
  const same=el.dataset.tab===tab,keep=same?el.scrollTop:0,rc=el.querySelector(".pcr"),rk=same&&rc?rc.scrollTop:0;el.innerHTML=q72HTML();el.dataset.tab=tab;el.dataset.pg=String(PG.q72);kitFix(el);panelScrollKeep(el,keep,rk)}})();
 document.addEventListener("click",e=>{const b=e.target.closest("[data-q72d],[data-q72x],[data-q72a],[data-q72c],[data-q72g]");if(!b||b.disabled)return;e.stopPropagation();try{
  if(b.dataset.q72d!=null)q72Do(+b.dataset.q72d,b.dataset.q72o!=null?+b.dataset.q72o:null);else if(b.dataset.q72x!=null)q72Drop(+b.dataset.q72x);else if(b.dataset.q72a)q72Ask();else if(b.dataset.q72c)q72Call(b.dataset.q72c);
- else if(b.dataset.q72g){const k=b.dataset.q72g;if(k==="home")goTo("home");else{q72Pass(k);goTo(k)}tab="q72";render()}}catch(x){console.error(x)}},true);
+ else if(b.dataset.q72g){const k=b.dataset.q72g;if(k==="home")walkGo("home");else{q72Pass(k);goTo(k)}tab="q72";render()}}catch(x){console.error(x)}},true);
 /* test hooks (in-page): q72Test(id) offers that template now; q72Count() counts; q72Bot() plays one open step like a careful player */
 window.q72Test=function(id,force){const T=T72I[id];if(!T)return false;const q=q72();if(force)q.cd={};const x=q72Make(T);if(!x)return false;q72Offer(x,"");showModal();return true};
 window.q72Count=function(){const by={};for(const T of T72)by[T.kind]=(by[T.kind]||0)+1;return{templates:T72.length,followUps:T72.filter(t=>t.fu).length,byKind:by,steps:T72.reduce((a,t)=>a+t.s.length,0)/T72.length}};
 window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=q72();for(const x of q.a){const X=q72X(x);if(!X)continue;const st=X.T.s[x.st];if(!st||st.w)continue;const pl=q72StepPl(st,X);
-  if(pl&&S.place!==pl){if(pl==="home"){goTo("home");}else if(can(travel(S.place,pl)+1)&&!S.confined&&(q72Host(pl,X)||typeof accessOf!=="function"||accessOf(S,pl).ok)){q72Pass(pl);goTo(pl)}else continue}
+  if(pl&&S.place!==pl){if(pl==="home"){walkGo("home");if(S.place!=="home")continue}else if(can(travel(S.place,pl)+1)&&!S.confined&&(q72Host(pl,X)||typeof accessOf!=="function"||accessOf(S,pl).ok)){q72Pass(pl);goTo(pl)}else continue}
   if(st.ch){let bi=-1,bv=-1;st.ch.forEach((o,i)=>{if(q72Why(x,X,st,o))return;const v=(o.p==null?100:q72Odds(o.p,o.sk,X))-(o.c&&o.c.bac?-o.c.bac/4:0)-((o.lto==="bad")?20:0);if(v>bv){bv=v;bi=i}});if(bi>=0){q72Do(x.u,bi);return true}}
   else if(!q72Why(x,X,st,null)){q72Do(x.u,null);return true}}return false};
 
@@ -27107,13 +27111,13 @@ function j77In(k){if(!S||S.dead||S.place===k)return;let tc=1;try{tc=travel(S.pla
 /* the map state of a place (same shape as j41's; prices: walk tc, ask 1+tc, sneak 1+tc) */
 accState=function(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:1};
  if(S.out)return{why:"đang ở lãnh cung"};if(S.confined)return{why:`cấm túc ${S.confined} tháng`};
- const a=accessOf(S,k);const tc=k==="home"?0:travel(S.place,k);
+ const a=accessOf(S,k);const tc=k===S.place?0:travel(S.place,k);
  if(!a.ok){const st={why:a.why,kind:a.kind,ask:a.ask,tc};st.sneakOk=dayFit(tc+1);if(a.ask==="yk")st.empAway=(S.where||{}).emp!==k;st.askOk=dayFit(tc+1)&&!st.empAway;return st}
- if(k!=="home"&&!j77Kh(tc)){const P=typeof walkSpill==="function"?walkSpill(k):null;return{why:j77WalkWhy(tc,k),tc,walk:1,spill:!!(P&&P.ok)}} /* spill: the walk only runs on into the next buổi = OPEN (day-khắc r2); every reader asks accSpillOk(k,st), never !st.why alone */
+ if(!j77Kh(tc)){const P=typeof walkSpill==="function"?walkSpill(k):null;return{why:j77WalkWhy(tc,k),tc,walk:1,spill:!!(P&&P.ok)}} /* home too (OD L1976): a long road home spills like every walk; spill: the walk only runs on into the next buổi = OPEN (day-khắc r2); every reader asks accSpillOk(k,st), never !st.why alone */
  return{why:"",tc}};
 /* sneaking: 1 khắc at the side gate, then the walk; the Emperor's halls are a serious offence */
 function accSneakPen(k){return typeof ACC_ETQ!=="undefined"&&ACC_ETQ.sneakHeavy[k]?{danh:-BAL.sneak.heavy,sev:2,txt:`Danh -${BAL.sneak.heavy}, ${typeof aaPunishTxt==="function"?aaPunishTxt(2):"tội nặng (có thể bị giáng phẩm)"}`}:{danh:-BAL.sneak.danh,sev:1,txt:`Danh -${BAL.sneak.danh}, ${typeof aaPunishTxt==="function"?aaPunishTxt(1):"bị phạt"}`}}
-function j77Tc(k){try{return k==="home"?0:travel(S.place,k)}catch(e){return 1}}
+function j77Tc(k){try{return k===S.place?0:travel(S.place,k)}catch(e){return 1}}
 /* where she ends up when asking / sneaking / being led in costs n khắc (the ask + the walk): this buổi, or the buổi the walk spills into (j76arrive) — VANPHONG true words (day-khắc r2) */
 function j77When(n){return used+n<=BAL.time.khac?" buổi này":` (đến nơi vào ${j76arrive(n)})`}
 accAskLine=function(k){return `${word(accAskO(k))} · tốn: ${j77Tc(k)+1} khắc · thành: được vào${j77When(j77Tc(k)+1)} · hỏng: không mất gì`};
@@ -27300,9 +27304,16 @@ function accLead(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=t
   else m.h+=`<p class="past">Nhờ thái giám dẫn vào: ${!dayFit(tc+1)?j77Bound(tc+1):`cần ${accLeadCost()} bạc (có ${S.bac})`}.</p>`;
   m.h+=`<p class="past">Hoặc chờ được triệu.</p>`;showModal()}catch(e){}}})();
 /* map tiles: a palace whose chủ vị outranks her shows the greeting in its price */
+/* one source for a printed walk price (walk-cost r3): "home" (her own phối điện too, jres resMeHoused) = the walk home only, no greeting;
+   a palace whose chủ vị outranks her and is in = walk + the greeting (accEtq) — also the chủ vị's halls of the palace she lives in.
+   Used by the Dư đồ spot (her home spot prints accWalkTxt("home")) and the palace-view hall rows (jpm). */
+function accResHomeK(){try{const r=typeof resMeHoused==="function"&&resMeHoused();return r?palaceOf(r.head):null}catch(e){return null}}
+function accWalkCost(k){if(!S||!k)return{tc:0};const tc=k===S.place?0:travel(S.place,k);const who=k==="home"?null:accEtq(S,k);return{tc,who,n:tc+(who?ACC_ETQ.khac:0)}}
+function accWalkTxt(k){const c=accWalkCost(k);return `${c.n} khắc${c.who?" · bái kiến":""}`}
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);if(window.__mapList)return h;
  try{h=h.replace(/(<button class="mspot[^"]*" data-go="([^"]+)"[^>]*>)([\s\S]*?)(<\/button>)/g,(all,open,k,inner,close)=>{const who=accEtq(S,k);if(!who)return all;
-   const tc=travel(S.place,k);inner=inner.replace(/<em class="ok">\d+ khắc<\/em>/,`<em class="ok">${tc+ACC_ETQ.khac} khắc · bái kiến</em>`);
+   if(k===accResHomeK())return open.replace(/title="([^"]*)"/,(m,t)=>`title="${t} · vào chính điện: bái kiến ${accRkName(who)} ${who.name} (+${ACC_ETQ.khac} khắc)"`)+inner.replace(/<em class="ok">\d+ khắc<\/em>/,`<em class="ok">${accWalkTxt("home")}</em>`)+close; /* her home: the label is the walk home goTo("home") charges */
+   const tc=travel(S.place,k);inner=inner.replace(/<em class="ok">\d+ khắc<\/em>/,`<em class="ok">${accWalkTxt(k)}</em>`);
    open=open.replace(/title="([^"]*)"/,(m,t)=>`title="${t} · bái kiến ${accRkName(who)} ${who.name} (+${ACC_ETQ.khac} khắc)"`);return open+inner+close})}catch(e){}return h}})();
 /* TRA CỨU: the rules as they now stand */
 accInfo=function(){if(!S||Q.length)return;const R=n=>`<b>${n}</b>`;
@@ -41088,7 +41099,7 @@ KIT_FACEFX.add({id:"phat",z:90,ready:true,                 /* no picture: chip a
  state:p=>p&&p.pen&&p.pen.until>wk()?p.pen:null,
  seen:(p,st)=>fxSeen(p),
  chip:(p,st)=>[`${PEN_N[st.k]||PEN_N.quy} · đi chậm · còn ${fxLeft(st.until)} tuần`,"hot"]});
-(function(){const t0=travel;travel=function(a,b){const r=t0.apply(this,arguments);try{if(r>0&&S&&S.pen&&S.pen.until>wk())return r+1}catch(e){}return r}})();
+walkSlow=function(p){try{return p&&p.pen&&p.pen.until>wk()?BAL.walk.pen:0}catch(e){return 0}}; /* «đi chậm»: j9 travel adds it per walker (walk-cost r3; was a travel wrapper that jclose overwrote) */
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(v&&v.pen&&v.pen.until>wk()&&npwPick(["go","low"],k=>fxPenW(v,t,k))==="low")return[]}/* npc-purpose G2c: while punished she lies low unless her grudge outweighs her fear */catch(e){}return O}})();
 
 /* ---------- causes for slap + punishment ---------- */
@@ -42465,7 +42476,7 @@ function k3IsLong(b){if(b.querySelector(".kr-can,.kr-duoc,.kr-mat,.kr-thanh,.kr-
 function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:null;const want=m&&(m.optLayout||(m.kit&&m.kit.optLayout));
  document.querySelectorAll("#modal .opts:has(> button.ka), #modal .kpscopts").forEach(g=>{const dl=g.closest(".dlg");if(dl&&dl.querySelector(".kpid"))return;
   const B=[...g.querySelectorAll(":scope > button.ka")];g.classList.remove("k3rows","k3grid","k3g3","k3tight");B.forEach(x=>{x.classList.remove("k3long");const a=x.querySelector(":scope>.kaart");if(a&&a.dataset.k3t){a.style.removeProperty("flex");a.style.removeProperty("width");a.style.removeProperty("height");delete a.dataset.k3t}});
-  if(g.clientWidth>0&&g.clientWidth<540){g.classList.add("k3rows");if(g.clientWidth<340){g.classList.add("k3tight");B.forEach(x=>{const a=x.matches(".kart")&&x.querySelector(":scope>.kaart");if(a){a.style.setProperty("flex","0 0 62px","important");a.style.setProperty("width","62px","important");a.style.setProperty("height","84px","important");a.dataset.k3t="1"}})}/* kit-opt-text KP14: a narrow option column gives its width to the TEXT, the card picture shrinks */return}/* two columns need >= 270 px per card (a 304 px right column made 149 px cards: one word per line) */
+  if(g.clientWidth>0&&g.clientWidth<540){g.classList.add("k3rows");if(g.clientWidth<340){g.classList.add("k3tight");B.forEach(x=>{const a=x.matches(".kart")&&x.querySelector(":scope>.kaart");if(a){a.style.setProperty("flex","0 0 62px","important");a.style.setProperty("width","62px","important");a.dataset.k3t="1"/* #49c: the height is the card height (kitOptTier), never a fixed 84 */}})}/* kit-opt-text KP14: a narrow option column gives its width to the TEXT, the card picture shrinks */return}/* two columns need >= 270 px per card (a 304 px right column made 149 px cards: one word per line) */
   if(want==="rows"){g.classList.add("k3rows");return}if(want==="grid"){g.classList.add("k3grid");if(W>=1000&&B.length>=3)g.classList.add("k3g3");return}
   g.classList.add("k3rows");const L=B.map(k3IsLong);if(L.every(Boolean))return;g.classList.remove("k3rows");g.classList.add("k3grid");if(W>=1000&&B.filter((x,i)=>!L[i]).length>=3)g.classList.add("k3g3");
   B.forEach((x,i)=>{if(L[i])x.classList.add("k3long")});
@@ -42479,7 +42490,7 @@ function k3OptCols(){try{const W=innerWidth;const m=typeof Q!=="undefined"?Q[0]:
  const st=document.createElement("style");st.id="k3-opts";st.textContent=`
 html body #modal .opts.k3rows:has(> button.ka),html body #modal .kpscopts.k3rows{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto!important}
 html body #modal .opts.k3rows>button.ka,html body #modal .kpscopts.k3rows>button.ka{min-height:0!important}
-html body #modal .opts.opts.opts.opts.k3tight>button.ka.kart>.kaart.kaart,html body #modal .kpscopts.kpscopts.kpscopts.k3tight>button.ka.kart>.kaart.kaart{flex:0 0 62px!important;width:62px!important;height:84px!important}html body #modal .opts.k3tight>button.ka.kart,html body #modal .kpscopts.k3tight>button.ka.kart{gap:7px!important}
+html body #modal .opts.opts.opts.opts.k3tight>button.ka.kart>.kaart.kaart,html body #modal .kpscopts.kpscopts.kpscopts.k3tight>button.ka.kart>.kaart.kaart{flex:0 0 62px!important;width:62px!important}html body #modal .opts.k3tight>button.ka.kart,html body #modal .kpscopts.k3tight>button.ka.kart{gap:7px!important}
 html body #modal .opts.k3grid:has(> button.ka),html body #modal .kpscopts.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:auto!important;align-items:stretch!important}
 html body #modal .opts.k3grid.k3g3:has(> button.ka),html body #modal .kpscopts.k3grid.k3g3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 html body #modal .k3grid>button.ka.k3long{grid-column:1/-1;order:1}html body #modal .k3grid>button.ka.k3odd{grid-column:1/-1}
@@ -45304,10 +45315,8 @@ try{kitSealHud()}catch(e){}
    Every event dialog (#modal showing an event of the queue: kitEventDp person dialogs, the 32.7 person dialog, place-event frames, event stages,
    plain event cards, news / intel / result / night / end / reward cards — kpKind in KSEAL_EV.kinds; tool panels such as rules, info, the person
    card, shop, act pickers, the calendar are not events) wears ONE kitSeal in a corner of its frame. A mark only (aria-hidden, no tap).
-   Placement is MEASURED every time the dialog renders, resizes or its content changes: the first corner (bottom-right, bottom-left, top-right,
-   top-left) at the first size (KSEAL_EV.sz) whose box touches no text line, button, picture, chip or scrolling area of the dialog; if no corner
-   is free at any size, the frame grows a bottom strip (.kseal-room) and the seal sits in it — it never covers text or buttons. */
-const KSEAL_EV={sz:[40,34,28,24],pad:6,gap:3,kinds:new Set(["choice","notice","news","intel","result","night","end","threat","evidence","reward","honor"])};
+   Placement (owner 21/11 ~03:47Z, #44): ONE fixed place on every frame, never measured: the top-right corner of the header bar (.kph), one size (KSEAL_EV.fix); the header reserves the room. */
+const KSEAL_EV={fix:34,padT:4,padR:52,sz:[34],pad:6,gap:3,kinds:new Set(["choice","notice","news","intel","result","night","end","threat","evidence","reward","honor"])};
 function kitSealEvIs(m,dlg){try{if(!m||!dlg)return false;if(/pcm/.test(m.cls||"")||m.act||m.shop)return false;
  if(m.pid&&typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(m.pid))return false;
  const k=dlg.dataset.kind||(typeof kpKind==="function"?kpKind(m):"");const own=m.kit&&m.kit.kind;
@@ -45327,17 +45336,9 @@ function kitSealEvPlace(){const M=document.getElementById("modal");const dlg=M&&
  if(dlg.__ksM!==m){dlg.__ksM=m;dlg.classList.remove("kseal-room")}
  if(!s){dlg.insertAdjacentHTML("beforeend",kitSeal({cls:"kseal-ev"}));s=dlg.querySelector(":scope > .kseal-ev")}
  if(getComputedStyle(dlg).position==="static")dlg.style.position="relative";
- const D=dlg.getBoundingClientRect(),bl=dlg.clientLeft,bt=dlg.clientTop,iw=dlg.clientWidth,ih=dlg.clientHeight;const occ=kitSealOcc(dlg,s);const P=KSEAL_EV.pad,G=KSEAL_EV.gap;
- const free=(x,y,z)=>{const a={l:D.left+bl+x-G,t:D.top+bt+y-G,r:D.left+bl+x+z+G,b:D.top+bt+y+z+G};if(a.l<0||a.t<0||a.r>innerWidth||a.b>innerHeight)return false;
-  for(const r of occ)if(Math.min(a.r,r.right)>Math.max(a.l,r.left)&&Math.min(a.b,r.bottom)>Math.max(a.t,r.top))return false;return true};
- /* anchored to its corner (right / bottom), so a frame that later grows or shrinks keeps the seal in the same corner */
- const put=(x,y,z,c)=>{s.style.setProperty("--kseal",z+"px");const R=c==="br"||c==="tr"||c==="room",B=c==="br"||c==="bl"||c==="room";
-  s.style.left=R?"auto":x+"px";s.style.right=R?P+"px":"auto";s.style.top=B?"auto":y+"px";s.style.bottom=B?P+"px":"auto";s.dataset.c=c;s.dataset.sz=z;
-  try{if(window.__ksRO&&dlg.__ksRO!==1){dlg.__ksRO=1;window.__ksRO.observe(dlg)}}catch(e){}};
- const big=KSEAL_EV.sz;
- if(!dlg.classList.contains("kseal-room"))for(const z of big){const C=[["br",iw-z-P,ih-z-P],["bl",P,ih-z-P],["tr",iw-z-P,P],["tl",P,P]];for(const [c,x,y] of C)if(free(x,y,z)){put(x,y,z,c);return}}
- const z=big[big.length-1];if(!dlg.classList.contains("kseal-room")){dlg.style.setProperty("--ksealroom",(z+P*2)+"px");dlg.classList.add("kseal-room")}
- const ih2=dlg.clientHeight;put(iw-z-P,ih2-z-P,z,"room")}
+ /* OWNER 21/11 ~03:47Z (#44): "chỗ có, chỗ không" — ONE rule, ONE place, ONE size on EVERY dialog frame, Fold + iPad: the TOP-RIGHT corner of the frame's header bar (.kph),
+    size KSEAL_EV.fix; the header reserves the room (padding-right), so it never covers a word. No measuring, no corner search, no bottom strip. */
+ dlg.classList.remove("kseal-room");s.style.setProperty("--kseal",KSEAL_EV.fix+"px");s.style.left="auto";s.style.bottom="auto";s.style.right=KSEAL_EV.padR+"px";s.style.top=KSEAL_EV.padT+"px";s.dataset.c="tr";s.dataset.sz=KSEAL_EV.fix}
 window.kitSealEvPlace=kitSealEvPlace;
 (function(){let tm=0;const later=()=>{if(tm)return;tm=setTimeout(()=>{tm=0;try{kitSealEvPlace()}catch(e){}},90)};window.__ksealLater=later;
  if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{requestAnimationFrame(()=>{try{kitSealEvPlace()}catch(e){}});setTimeout(later,400);setTimeout(later,1200)}catch(e){}return r}}
@@ -45349,7 +45350,7 @@ window.kitSealEvPlace=kitSealEvPlace;
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",hook);else hook()})();
 (function(){const st=document.createElement("style");st.id="kseal-ev-css";st.textContent=`
 #modal .dlg>.kseal-ev{position:absolute;width:var(--kseal,36px);height:var(--kseal,36px);z-index:3;pointer-events:none;opacity:.9;mix-blend-mode:multiply}
-#modal .dlg.kseal-room{padding-bottom:calc(var(--ksealroom,36px) + 2px)!important}`;document.head.appendChild(st)})();
+#modal .dlg:has(>.kseal-ev)>.kph{padding-right:calc(var(--kseal,34px) + 62px)!important;box-sizing:border-box}`;document.head.appendChild(st)})();
 /* ---- jsl: KIT ÁNH SÁNG NHÂN VẬT THEO BUỔI (review/scene-light, sếp 11/15 10:10Z) ----
    Tranh nhân vật vẽ ở ánh sáng ban ngày; đặt lên nền trưa/chiều/tối thì lạc quẻ. Kit này cho mọi nhân vật đứng trên sân khấu
    (#mefig, #tokens .tok.fig .figimg) và trong hộp thoại sự kiện (.kesimg) nhận MỘT lớp sáng nhẹ khớp buổi + mùa:
@@ -45626,7 +45627,7 @@ function menNtCard(){if(!S||S.dead||Q.length)return;const T=(typeof trS==="funct
 function menWatch(k,from){if(!menRoad()||S.dead)return;const Y=S.menWhy||{};S.menMet=S.menMet||{};const now=used,arr=S.menArr&&S.menArr.k===S.place?S.menArr.t:now;
  for(const id in Y){const y=Y[id];const m=manById(id);if(!m||y.w!=="stray"||(S.menW||{})[id]!==y.k)continue;const kk=bkey()+":"+id;if(S.menMet[kk])continue;const h=y.h||2;
   const at=S.place===y.k&&now>=h-1&&arr<h+1;
-  const on=!at&&from&&from.k!=null&&k!==y.k&&from.t<h&&now>=h-1&&(travel(y.k,k)===1||travel(y.k,from.k||"home")===1)&&menZone(y.k)==="hc";
+  const on=!at&&from&&from.k!=null&&k!==y.k&&from.t<h&&now>=h-1&&(travel(y.k,k,null)===1||travel(y.k,from.k||"home",null)===1)&&menZone(y.k)==="hc";
   if(!at&&!on)continue;S.menMet={[kk]:1};
   const v=y.v!=null?RV(y.v):null;if(v&&(!v.alive||v.out))continue;menStat(at?"enc":"encPath");
   const sees=menEye(S)>=(y.hide||0);menStat(sees?"recog":"blur");menCard(m,sees?v:null,Object.assign({},y,{p:on?1:0,hv:!sees&&v?v.id:null}),0);break}}
@@ -46300,7 +46301,7 @@ function tyRob(k){const T=BAL.ty;const w=wdOf(S);const e=w.y;if(!e||!wdItem(e))r
  Q.unshift({t:"Bị giật y phục giữa đường",kind:"notice",act:1,h:`<p class="past">${when()}</p><p>${(S.buoi||0)>=(typeof B4L==="number"?B4L:3)?"Trời tối":"Nơi vắng người"}, ở ${nm} có kẻ bịt mặt xông ra giật mất ${it.n} của ngươi rồi chạy biến.</p><p>Ngươi mất ${it.n}, chỉ còn trung y, đành cúi đầu đi về tẩm cung.</p><p>Nội vụ phủ sẽ cấp lại áo sau ${T.reissueWk} tuần; muốn sớm hơn thì mặc áo khác trong Tư trang.</p>${plot?`<p>Cung nhân thì thầm: kẻ ấy hình như là người của ${plot.name}.</p>`:""}`,
   opts:[{n:"Về tẩm cung",fx:{},x:`(Danh -${T.robDanh+T.robWalk} đã mất trên đường)`,go:()=>{}}]});
  try{for(const v of liveRivals(true).slice(0,2))newsAdd(v,"ty",`Nghe nói ${S.name} bị giật y phục giữa đường, phải mặc trung y về cung`,true)}catch(x){}
- window.__tyGo=1;try{const a=window.__accSilent;window.__accSilent=1;goTo("home");window.__accSilent=a}finally{window.__tyGo=0}return true}
+ window.__tyGo=1;try{const a=window.__accSilent;window.__accSilent=1;window.__walkFree=1;goTo("home");window.__accSilent=a}finally{window.__tyGo=0;window.__walkFree=0}return true}
 (function(){if(typeof goTo!=="function")return;const g0=goTo;goTo=function(k){const p0=S&&S.place;const r=g0.apply(this,arguments);
   try{if(S&&!S.dead&&k&&k!=="home"&&S.place===k&&p0!==k&&!tyOn(S)&&!window.__tyGo&&!S.out&&!(typeof isSrv==="function"&&isSrv())){const o=tyRobOdds(k);if(o>0&&roll(o)){tyRob(k);render()}}}catch(e){console.error(e)}return r};window.goTo=goTo})();
 /* the omen: an enemy plans it; her people warn her (a card) — then night walks to lonely places are dangerous for omenWk weeks */
@@ -51730,7 +51731,8 @@ window.kitLine=kitLine;
 /* ---------- 7. WEATHER NEVER ADDS WALKING KHẮC (owner 15/11 06:40Z, found again by the khắc-gate scan) ----------
    "KHÔNG thêm khắc đi đường (đã có Sức hồi chậm, không phạt 2 lần)": a far walk is 2 khắc in every weather (was 3 when wet).
    Bad weather keeps its real costs elsewhere (Sức recovery, outdoor acts' own Mất lines). */
-travel=function(a,b){if(a===b)return 0;{const W=window.__walkSpill;if(W&&S&&(S.buoi||0)===W.b&&a===W.from&&b===W.k)return W.rest}const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);return Math.abs(r1-r2)+Math.abs(c1-c2)>1?BAL.walk.far:BAL.walk.near};
+/* walk-cost r3: the base rule (j9 travel) has no weather term; the old wholesale `travel=` copy here is gone — it also threw away every
+   modifier set before it (jface «đi chậm»). Guard: dev/test/walk-cost.test.js checks travel has no weather term and the penalty applies. */
 (function(){if(typeof kitWxEffects!=="function")return;const e0=kitWxEffects;kitWxEffects=function(){return e0.apply(this,arguments).filter(x=>!/^Đi đến nơi xa tốn/.test(x[1]))}})();
 /* the gate's own words match the Cần chip, so the card shows ONE Sức line (kaNorm1 merges equal needs): "cần Sức trên 20 (có 17)" /
    "cần Sức ≥5 (có 3)" — was "kiệt sức (Sức 3, cần 5) — nghỉ ngơi trước" beside the chip "Sức ≥5 (có 3)" */
@@ -64197,7 +64199,7 @@ window.kitOptStackTitle=kitOptStackTitle;
 function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.kopt==="1"&&b.querySelector(":scope > .kaart"))return;
  const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");if(!kan)return;
  const name=typeof kpActName==="function"?kpActName(kan):kitOptPlain(kan.textContent);
- let p=kitOptPic(name,b);if(!p.src&&b.__koph&&typeof KIT_PH!=="undefined"&&KIT_PH.act){let tn="light";try{if(typeof kitPhTone==="function")tn=kitPhTone(name)}catch(e){}p={src:KIT_PH.act[tn]||KIT_PH.act.light,key:"",how:"ph",tone:tn}}
+ let p=kitOptPic(name,b);if(!p.src&&typeof KIT_PH!=="undefined"&&KIT_PH.act)/* OD 21/11 ~04:20Z (#56): EVERY option card shows a picture — no art of its own → the §59 stand-in, even when no sibling has one */{let tn="light";try{if(typeof kitPhTone==="function")tn=kitPhTone(name)}catch(e){}p={src:KIT_PH.act[tn]||KIT_PH.act.light,key:"",how:"ph",tone:tn}}
  /* the tiny portrait / icon beside the title goes: the picture on the left replaces it (owner) */
  kan.querySelectorAll(":scope > .md, :scope > img").forEach(e=>e.remove());b.querySelectorAll(":scope > .md").forEach(e=>e.remove());
  if(!p.src){b.classList.add("kopt");b.dataset.kopt="1";return}
@@ -64265,20 +64267,20 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  /* LAW 3 (review/odds-meter-back): a card with NO roll (no odds of its own; the «Nắm chắc» meter kitOptOdds adds is data-ksure) cannot fail — its
     «mất: …» (parsed as a Bại row beside Thành) is a CERTAIN loss and stands in Tốn like a Mất row, never folded behind «!» */
  const sure=!b.querySelector(".kat .kodds:not([data-ksure])");if(sure)mats=mats.concat(R("bai"));
- if(!ton){if(mats.length){ton=row("kr-ton kdup0","Tốn",[]);ton.querySelector(".krv").append(...chipsOf(mats[0]).map(dupOf));mats=[];/* the Mất row folds below; its chips already stand in Tốn */ kb.dataset.komat="1"}
-  else{ton=row("kr-ton kfill","Tốn",[]);const e=document.createElement("span");e.className="ef n";e.textContent="không";ton.querySelector(".krv").appendChild(e)}}
- else if(mats.length){const v=ton.querySelector(".krv");mats.forEach(m=>chipsOf(m).forEach(c=>{if(v.querySelector(".ef,.kwhy")){const sp=document.createElement("span");sp.className="ksep kdup";sp.textContent="·";v.append(sp)}v.append(dupOf(c))}))}
+ /* OD 21/11 ~05:0xZ (#72): the LOSS has its own «Mất» row (Tốn = the price, Được = the gain, Mất = what can be lost), never folded into Tốn */
+ const loss=[];if(!ton){ton=row("kr-ton kfill","Tốn",[]);const e=document.createElement("span");e.className="ef n";e.textContent="không";ton.querySelector(".krv").appendChild(e)}
+ mats.forEach(m=>chipsOf(m).forEach(c=>loss.push(dupOf(c))));
  if(gain){const v=gain.querySelector(".krv");gains.slice(1).forEach(g=>chipsOf(g).forEach(c=>{const sp=document.createElement("span");sp.className="ksep kdup";sp.textContent="·";v.append(sp,dupOf(c))}))}
  else{gain=row("kr-duoc kfill","Được",[]);
   /* LAW 3 (no hidden gain / loss): an option whose value is worded only as a GỢI Ý («được lòng bề trên», «giữ trọn khắc và Sức buổi này; nhưng mất lòng bề trên») shows that wording in Được (the part before «nhưng») and Tốn (the part after it) instead of «không» */
   const hr=R("hint")[0],ht=hr?(hr.querySelector(".krv")||hr).textContent.trim():"";const cp=(t,c)=>{const e=document.createElement("span");e.className="ef "+c+" kdup";e.textContent=t;return e};
   if(ht&&!/^(không|chưa rõ|không được mất gì)\.?$/i.test(ht)){/* only the EMPTY hints; «không dính vào thù oán …; nhưng …» is a real gain + loss (review/odds-meter-back) */const parts=ht.split(/\s*;\s*nhưng\s+|\s+nhưng\s+/),g0=parts[0].trim(),l0=parts.slice(1).join("; ").trim();gain.querySelector(".krv").appendChild(cp(g0,"g"));
-   if(l0){const tv=ton.querySelector(".krv");if(ton.classList.contains("kfill"))tv.innerHTML="";else{const sp=document.createElement("span");sp.className="ksep kdup";sp.textContent="·";tv.appendChild(sp)}tv.appendChild(cp(l0,"r"));ton.classList.remove("kfill");ton.classList.add("kdup0")}}
+   if(l0)loss.push(cp(l0,"r"))}
   else{const e=document.createElement("span");e.className="ef n";e.textContent="không";gain.querySelector(".krv").appendChild(e)}}
- const keep=new Set([ton,gain]);const dis=b.classList.contains("kdis");
+ const matRow=loss.length?row("kr-mat2 kdup","Mất",loss):null;if(matRow)kb.appendChild(matRow);const keep=new Set([ton,gain,matRow]);const dis=b.classList.contains("kdis");
  let extra=false;[...kb.children].forEach(r=>{if(keep.has(r)||r.classList.contains("kdup0"))return;r.classList.add("kofold");if(!(r.classList.contains("kr-mat")||(sure&&r.classList.contains("kr-bai"))||gains.includes(r)))extra=true});
  /* order: Tốn · Được · the folded rest; the Được slot is ALWAYS labelled Được (a rolled card's Thành row, Được ngay …) */
- {const l=gain.querySelector(":scope > .krl");if(l)l.textContent="Được"}kb.insertBefore(ton,kb.firstChild);ton.after(gain);
+ {const l=gain.querySelector(":scope > .krl");if(l)l.textContent="Được"}kb.insertBefore(ton,kb.firstChild);ton.after(gain);if(matRow)gain.after(matRow);
  const lead=b.querySelector(".klead");if(lead){lead.classList.add("kofold");extra=true}
  if(extra){const m=document.createElement("span");m.className="kobang";m.setAttribute("role","button");m.setAttribute("aria-label","Xem thêm");m.title="Xem thêm";m.textContent="!";b.appendChild(m)}
  b.dataset.kofin="1";b.__kofSig=kitOptSig(b,kb)}catch(e){console.error("kitOptFinal",e)}}
@@ -64293,7 +64295,7 @@ window.kitOptFinal=kitOptFinal;
    Order of work: frame class (KIT_SIZE S/M/L/XL) -> layout -> button tier. Tier S / M / L = ONE card size each (picture box + card height; the width is the cell). Never a variant inside a tier.
    Each tier size = the LARGEST card that tier needs over every layout phone -> iPad (table in KIT.md §6.2d, scan dev/test/opt-card-scan.js). kitOptTier(g) picks, per dialog, the first of
    [2 columns S] [1 column M] [1 column L] whose cards ALL fit their tier (no card taller than the tier, nothing cut sideways). */
-const KIT_OPT={tiers:{S:{pw:54,ph:72,h:88},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:140}},gap:8};window.KIT_OPT=KIT_OPT;
+const KIT_OPT={tiers:{S:{pw:60,ph:80,h:132},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:140}},gap:8,stackW:430};window.KIT_OPT=KIT_OPT;
 const KIT_OPT_CSS=(()=>{const T=KIT_OPT.tiers;let c="html body #modal,html body .kitpg-opts{--ko-pw:"+T.M.pw+"px;--ko-ph:"+T.M.ph+"px;--ko-h:"+T.M.h+"px}\n";
  for(const k in T)c+=`html body #modal .opts[data-kot="${k}"],html body .kitpg-opts[data-kot="${k}"]{--ko-pw:${T[k].pw}px;--ko-ph:${T[k].ph}px;--ko-h:${T[k].h}px}\n`;
  c+=`html body #modal#modal button.ka.kopt.kopt:not(.kart) :is(.kofold,small.kb>.kr-hint,small.kb>.kr-why){display:none!important}
@@ -64312,11 +64314,11 @@ function kitOptCut(b){const R=b.getBoundingClientRect();const bd=b.querySelector
    (1) Nothing changed since the last pick (list width, the cards, their classes, text and heights under the picked tier) → keep the pick, touch nothing.
    (2) A real re-pick keeps the scroll position of the list and its scrolling ancestors. */
 function kitOptTierSig(g,bs){return Math.round(g.clientWidth)+"|"+(g.dataset.kol||"")+(g.dataset.kot||"")+"|"+bs.map(b=>b.className+":"+b.textContent.length+":"+Math.round(b.getBoundingClientRect().height)).join(",")}
-function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)return;if(g.__kotSig&&g.dataset.kot&&g.__kotSig===kitOptTierSig(g,bs))return g.dataset.kol+g.dataset.kot;
+function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)return;if(g.__kotSig&&g.dataset.kot&&g.__kotSig===kitOptTierSig(g,bs)){g.style.setProperty("--k3c",g.dataset.kol);/* kszBtnGridLive3 rewrote --k3c from its own width rule: the picked layout wins (OD 21/11 ~04:00Z #49b, iPad 2 columns) */return g.dataset.kol+g.dataset.kot}
  const SC=[];for(let e=g;e&&e.nodeType===1;e=e.parentElement)if(e.scrollTop>0)SC.push([e,e.scrollTop]);
  g.__kotBusy=1;const T=KIT_OPT.tiers;
  bs.forEach(b=>{const m=b.querySelector(".kobang");if(m&&m.parentElement!==b)b.appendChild(m)});/* the "!" is always the card's own corner child (a picture-less hide-out card had it inside the title) */
- const set=(lay,t)=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>b.style.removeProperty("min-height"));void g.offsetHeight};
+ const set=(lay,t)=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>{b.style.removeProperty("min-height");const a=b.querySelector(":scope > .kaart");if(a)a.style.removeProperty("height")});void g.offsetHeight;bs.forEach(b=>b.classList.toggle("kodstk",b.clientWidth<KIT_OPT.stackW));void g.offsetHeight};
  const band=t=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");void g.offsetHeight;const kh=Math.max(0,...bs.map(b=>{const k=b.querySelector(".kat");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kat-h",kh+"px");void g.offsetHeight;
   const mb=Math.max(0,...bs.map(b=>{const k=b.querySelector(":scope > .kabody");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kbtop",Math.max(0,Math.floor((KIT_OPT.tiers[t].h-mb-14)/2))+"px");void g.offsetHeight};
  const fit=(lay,t)=>{set(lay,t);band(t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]);(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
@@ -64324,6 +64326,7 @@ function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)re
  set(pick[0],pick[1]);bs.forEach(b=>{b.dataset.kapic="eq"});
  /* OWNER 18/11 ~21:20Z: the title sits in the card's TOP BAND, vertically centred there, the SAME in every card of the frame: one band height (the tallest title band), the card's text block starts at ONE top offset (the tallest block centred in the tier height) */
  band(pick[1]);
+ bs.forEach(b=>{const a=b.querySelector(":scope > .kaart");if(a&&b.clientHeight>0)a.style.setProperty("height",b.clientHeight+"px","important")});/* #49c: the picture is as tall as its card (top to bottom) */
  g.__kotBusy=0;try{const dl=g.closest(".dlg");if(dl&&typeof kszEvLaw10==="function")kszEvLaw10(dl)}catch(e){}
  SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});
  /* late changes (fonts, pictures, a frame re-pick, a resize) re-run the choice: the grid or a card changed size under the picked tier */
@@ -64354,10 +64357,12 @@ document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.
 #kpinfo>.knumpop{width:min(560px,92vw);box-sizing:border-box;padding:12px 14px;background:var(--k-card,#fffaf0);border:1px solid var(--gold,#8f5f0c);border-radius:10px;color:var(--ink,#2a1a12);cursor:zoom-out;font-size:.9rem}
 #kpinfo>.knumpop p{margin:0 0 6px}`;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.id="kit-opt-final";const mk=O=>`${O}{--kaw:var(--ko-pw,66px)!important;--kah:var(--ko-ph,88px)!important;min-height:var(--ko-h,104px)!important;height:auto!important;align-items:center!important;box-sizing:border-box;position:relative;padding-top:6px!important;padding-bottom:6px!important}
-${O}>.kaart{flex:0 0 var(--ko-pw,66px)!important;width:var(--ko-pw,66px)!important;height:var(--ko-ph,88px)!important;align-self:center!important}
-${O} .kat{flex-wrap:wrap!important;padding-right:24px}
+${O}>.kaart{flex:0 0 var(--ko-pw,66px)!important;width:var(--ko-pw,66px)!important;height:auto!important;min-height:var(--ko-ph,88px)!important;align-self:stretch!important;margin-block:-6px!important}/* OD 21/11 ~04:00Z (#49c): the picture FILLS the card height (top to bottom), never a small box with a gap */
+${O} .kat{flex-wrap:nowrap!important;align-items:center!important;padding-right:24px}/* OD 21/11 ~04:00Z (#49a): the odds word sits ON THE TITLE ROW, never its own row */
 ${O} .kat>.kan{line-height:1.15}
-${O} .kat>.kan{flex:1 1 100%!important;min-width:0!important}
+${O} .kat>.kan{flex:1 1 0!important;min-width:0!important}
+${O} .kat>.kodds{flex:0 0 auto!important;margin-left:auto}
+${O}.kodstk .kat>.kodds .kodm{flex-direction:column;align-items:flex-end;gap:1px}/* narrow card: the meter stacks (bar over word) so the title keeps its width and the odds stay on the title row */
 ${O} small.kb{row-gap:1px!important}
 ${O} small.kb>.kr>.krv{display:block!important}
 ${O} small.kb>.kr>.krv>*{display:inline!important}
@@ -65063,6 +65068,13 @@ function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")
  kitPanel({kind:"reward",title:up?"Danh hiệu lên bậc":"Danh hiệu mới",sub:o.when,dh:1,
   sections:[{h:"",html:`<div class="kt3">${kitTitlePlate(o)}</div>`},{h:"",rows:[["Cách có",esc(o.how)],["Khi đeo",esc(chTxt(key,S.dh[key].i)||o.fx||"chỉ để làm đẹp")],["Xem lại","Nhiệm vụ › Danh hiệu"]]}],
   opts:worn?[{n:"Đã hiểu",fx:{},x:"",go:()=>dhApplyFx(S)}]:[{n:"Đeo ngay",fx:{},x:chTxt(key,S.dh[key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(key)},{n:"Để sau",fx:{},x:"",go:()=>{}}]})}
+/* OD 21/11 ~04:14Z (#54): the new-title plate sits ON the event picture (caption at its bottom centre, like the chapter slide title), not as its own band under it.
+   Applies to every title dialog (Danh hiệu mới / lên bậc / đeo): the .kt3 plate of the info column moves into the picture (.k3ev). The drawn title art is parked. */
+function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev"),src=d.querySelector(".k3right .kt3:not(.kdhcap)");if(!ev||!src||!src.querySelector(".kdh,.kdh-cap,.j59t"))return;
+ if(!ev.querySelector(":scope>.kdhcap")){const c=src.cloneNode(true);c.classList.add("kdhcap");c.style.display="";ev.appendChild(c)}src.style.display="none"}catch(e){}}
+window.kitDhCap=kitDhCap;
+(function(){const st=document.createElement("style");st.id="kdh-cap-css";st.textContent=`.ksz3 .k3ev>.kt3.kdhcap{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;margin:0!important;width:max-content;max-width:calc(100% - 16px);text-align:center;filter:drop-shadow(0 2px 4px #2a1a1288)}`;document.head.appendChild(st);
+ if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{requestAnimationFrame(kitDhCap);setTimeout(kitDhCap,300);setTimeout(kitDhCap,900)}catch(e){}return r}}})();
 /* ---------- the bonus picker: wear a title and choose its ONE bonus (kit info panel + option cards) ---------- */
 function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=choices(key,e.i);
  if(L.length<2){if(L.length)e.pick=L[0];dhWear(S,key);if(back)dhPanel();return}
@@ -67360,12 +67372,14 @@ function kitPalaceMap(o){const slot=o.slot,k=o.k;const A=kpmArt(slot);const nm=k
  const PARTS=kpmParts(slot,k,nm);
  const role=h=>h==="cungnhan"||!kpmIsPlace(slot)?hallRole(h):"";const chip=(n,h)=>h==="cungnhan"?`<i>${n} cung nhân</i>`:n?`<i>${n} bóng người</i>`:`<i>vắng</i>`;
  const here=h=>(!!k&&S.place===k&&kpmHall()&&kpmHall().part===h)||(S.place==="home"&&kpmMine(slot)===h);
+ /* walk-cost r3: each hall row prints its walk price, the one source j77 accWalkTxt (her own phối điện = the walk home, no greeting) */
+ const cost=h=>{try{if(here(h))return"";const t=kpmMine(slot)===h?"home":k;if(!t||S.place===t||S.out||S.confined)return"";return `tốn: ${accWalkTxt(t)}`}catch(e){return""}};
  return `<div class="mapv kpmv" data-kpm="${slot}"><div class="maptools"><span><button class="btn mz kpm-back" data-kpmback="1" aria-label="Về Dư đồ">‹ Dư đồ</button></span><span class="past kpm-t"><b>${nm}</b>${why?` · <em>${why}</em>`:""}</span></div>
  <div class="mapsc"><div class="mapw" style="width:100%">${A?`<img class="mapimg" src="${A.src}" alt="Sân ${nm} nhìn từ trên cao">`:`<img class="mapimg" src="${mapImg()}" alt="${nm}">`}
  ${PARTS.map(([h,hn])=>{const b=spots[h];if(!b||!(KPM_HALLS[A.dir]||[]).includes(h))return"";const s=SP[h]; /* only halls painted in this picture get a hotspot; the others stay in the kit list below */
   return `<button class="mspot kpm-spot${here(h)?" here":""}${kpmGrey(k,h,here)?" mgrey":""}" data-go="kpm:${h}" title="${hn}${role(h)?" ("+role(h)+")":""}${s.res.length?" · ở: "+s.res.map(kpmResLine).join(", "):""}" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${hn}${chip(s.n,h)}</span>${h==="cungnhan"?"":kpmSil(s.n,s.ppl)}</button>`}).join("")}
  ${kitTam(!A||A.tam)}</div></div>
- <div class="kpm-list${PARTS.length===1?" one":""}">${PARTS.map(([h,hn])=>{const s=SP[h];return `<button class="btn kpm-row${here(h)?" sel":""}" data-kpmpart="${h}"><b class="kpm-rn">${hn}</b><span class="kpm-rs">${role(h)?role(h)+" · ":""}${h==="cungnhan"?`${s.n} cung nhân của ngươi`:s.n?`${s.n} bóng người`:"vắng người"}</span>${kpmIsPlace(slot)||h==="cungnhan"?"":`<span class="kpm-rs">${s.res.length?"Người ở: "+s.res.map(kpmResLine).join(", "):"Chưa ai ở"}</span>`}</button>`}).join("")}</div></div>`}
+ <div class="kpm-list${PARTS.length===1?" one":""}">${PARTS.map(([h,hn])=>{const s=SP[h];return `<button class="btn kpm-row${here(h)?" sel":""}" data-kpmpart="${h}"><b class="kpm-rn">${hn}</b><span class="kpm-rs">${role(h)?role(h)+" · ":""}${h==="cungnhan"?`${s.n} cung nhân của ngươi`:s.n?`${s.n} bóng người`:"vắng người"}</span>${kpmIsPlace(slot)||h==="cungnhan"?"":`<span class="kpm-rs">${s.res.length?"Người ở: "+s.res.map(kpmResLine).join(", "):"Chưa ai ở"}</span>`}${cost(h)?`<span class="kpm-rs">${cost(h)}</span>`:""}</button>`}).join("")}</div></div>`}
 
 /* ---------- state + navigation ---------- */
 /* __kpm = the detail map open on the Dư đồ tab ({slot,k}); S.hall = the room she stands in ({k,part,t}) for this buổi only */
@@ -69343,6 +69357,8 @@ function j95secApply(R){const z=j95z();const c=R.c;
  for(const s of z.sec){if(s.c!==c||s.wk!==wk())continue;s.key=R.key;const A=R.P[s.a];if(!A)continue;
   for(const i of s.kh){A[i]=[s.k,s.kind,s.b,s.why];if(s.b){if(!R.P[s.b]){const m=manById(s.b);if(m)R.who[s.b]=[m.name,m.role];R.P[s.b]=[0,1,2,3].map(()=>[null,"go",null,""])}
     if(R.P[s.b])R.P[s.b][i]=[s.k,s.kind,s.a,s.kind==="tryst"?"tư tình":"chủ sai việc kín"]}}
+  /* jwalk walkLeadIn (review/jagday-walk final gate): the khắc before the meeting are her road there (and her servant's) */
+  try{if(typeof walkLeadIn==="function"&&s.kh.length){const i0=Math.min.apply(null,s.kh);walkLeadIn(R,s.a,i0,s.k,s.why,s.b);if(s.b&&/^s\d+$/.test(s.b))walkLeadIn(R,s.b,i0,s.k,"chủ sai việc kín",s.a)}}catch(e){}
   /* men only in the palace for the meeting: outside at the other khắc → drop them out of the record those khắc by putting them at the meeting spot only */
   if(s.b&&R.P[s.b]){for(let i=0;i<4;i++)if(R.P[s.b][i][0]==null)R.P[s.b][i]=[s.k,"go",null,"lặng lẽ đến chỗ hẹn"]}
   /* NPC passers-by at the same place and khắc may see (same odds as hers) */
@@ -69374,8 +69390,8 @@ if(typeof hsvList==="function"){const hl0=hsvList;hsvList=function(){const L=hl0
  const R=S.roster,kh=j95kh(),k=S.out?"lc":"home";return L.filter(s=>{const e=R.P["s"+s.sid];return !e||!e[kh]||e[kh][0]===k})}catch(e){return L}}}
 const J95OUT_="ngoai";
 /* the khắc she would ARRIVE at k (walking costs travel(): the map number is the number she meets on arrival, main rule review/stage-slots) */
-function j95arrKh(k){const kh=j95kh();try{if(!k||k===S.place||k==="home")return kh;let from=S.place||"home";
- if(typeof isSrv==="function"&&isSrv()){const m=srvM();if(m&&k===palaceOf(m))return kh;if(from==="home"&&m)from=palaceOf(m)}/* j42 srvGoTo walks from her mistress's palace */
+function j95arrKh(k){const kh=j95kh();try{if(!k||k===S.place)return kh;/* walk-cost: the road home is a walk too (j2 goTo pays it) */let from=S.place||"home";
+ if(typeof isSrv==="function"&&isSrv()){const m=srvM();if(m&&(k===palaceOf(m)||k==="home")){if(S.place==="home")return kh;k=palaceOf(m)}if(from==="home"&&m)from=palaceOf(m)}/* j42 srvGoTo walks from her mistress's palace */
  return Math.min(J95.KH-1,kh+Math.max(0,travel(from,k)||0))}catch(e){return kh}}
 function j95elderK(x){if(x.eid==="kn")return"kn";if(x.eid==="gt"&&gtAtHome())return"home";return"tn"}
 function j95counts(R,kh){const C={};for(const id in R.P){const k=R.P[id][kh][0];if(k&&j95vis(id,k))C[k]=(C[k]||0)+1}return C}
@@ -71474,8 +71490,8 @@ function kcTalk(p){const A=[];const m=kcF(p.fid);const all=deck.map((a,i)=>[a,i]
 
 /* ---------- moving (house free; city 1 khắc each way, needs her maid; nights: sneaking only) ---------- */
 function kcCity(k){return KCPL[k]&&!KCPL[k][2]}
-function kcGoWhy(k){if(k===S.place)return"Đang ở đây";if(kcCity(k)){if((S.buoi||0)===3)return"Khuê nữ không ra phố buổi tối";if(!S.maid)return"Không có tỳ nữ đi cùng";if(!can(1))return"Hết khắc buổi này"}return""}
-function kcGo(k){const w=kcGoWhy(k);if(w||Q.length||S.dead)return false;if(kcCity(k)||kcCity(S.place))spend(1);S.place=k;S.visit=kcVisit(k);popIdx=null;popMsg="";deal();
+function kcGoWhy(k){if(k===S.place)return"Đang ở đây";if(kcCity(k)){if((S.buoi||0)===3)return"Khuê nữ không ra phố buổi tối";if(!S.maid)return"Không có tỳ nữ đi cùng";if(!can(BAL.walk.near))return"Hết khắc buổi này"}return""}
+function kcGo(k){const w=kcGoWhy(k);if(w||Q.length||S.dead)return false;if(kcCity(k)||kcCity(S.place))spend(BAL.walk.near);S.place=k;S.visit=kcVisit(k);popIdx=null;popMsg="";deal();
  if(kcCity(k)&&roll(4)){S.kld+=3;log("Có kẻ nhìn ngươi lâu ở chốn đông người.")}return true}
 (function(){const g0=goTo;goTo=function(k){if(!isKc())return g0.apply(this,arguments);const ok=kcGo(k);if(ok){tab="act";render()}return ok}})();
 
@@ -73837,7 +73853,7 @@ function agMW(v,tag){const C=AG.mwc=AG.mwc||{};const k=(v===S?"me":v.id)+":"+tag
 /* a khắc the words of a card or a told deed already put her somewhere (j95b bind / turn-of-buổi act) is hers to keep: the loop never overwrites it */
 function agBound(id,kh,key){try{return typeof J95B!=="undefined"&&J95B.bind.some(b=>b.id===id&&b.kh===kh&&b.key===key)}catch(e){return false}}
 function agSlot(v,at,t,c){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<J95.KH;kh++){if(c&&typeof agFitDay==="function"&&typeof agKhC==="function"&&!agFitDay(kh,agKhC(c,v)))continue;/* the DAY must hold the whole deed (review ag-all-2 r2 B3) */const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
-  if(v.confined&&k!==palaceOf(v))continue;if(!j95acc(v,k)&&k!=="home"&&k!==palaceOf(v))continue;if(R&&R.P[id]&&R.P[id][kh]&&(R.P[id][kh][1]==="tryst"||R.P[id][kh][1]==="meet"))continue;if(R&&agBound(id,kh,R.key))continue;L.push([kh,k])}
+  if(v.confined&&k!==palaceOf(v))continue;if(!j95acc(v,k)&&k!=="home"&&k!==palaceOf(v))continue;if(R&&R.P[id]&&R.P[id][kh]&&(R.P[id][kh][1]==="tryst"||R.P[id][kh][1]==="meet"))continue;if(R&&agBound(id,kh,R.key))continue;/* the walk to it and on from it fits (jagday agWalkOk: kept rows are never rewritten by jwalk) */if(R&&typeof agWalkOk==="function"&&!agWalkOk(R,id,kh,c&&typeof agKhC==="function"?agKhC(c,v):1,k,v,k0))continue;L.push([kh,k])}
  /* NPC-PURPOSE G3: she does what she wants SOON — the near-best khắc from now (BAL.ag.why.g3.soon), never a random khắc */
  return L.length?npwPick(L,x=>agSoon(x[0],k0)):null}
 function agSoon(kh,k0){return Math.max(1,100-(kh-k0)*BAL.ag.why.g3.soon)}
@@ -73986,7 +74002,7 @@ function agReact(p,v,t){const O=[];const B=BAL.ag.wit;const harm=AGHOST.has(p.k)
  const D=TW[p.k],J=AGJOIN[p.k];if(D&&J&&!(typeof isSrv==="function"&&isSrv())&&(!D.req||D.req(S,p.k==="thHH"?queenP():t))&&twCanPay(S,p.k)&&!(p.k==="thHH"&&queenP()===S)){const oj=D.o?D.o(S,t):100;const c=twCost(p.k);
   const ct=Object.keys(c).map(f=>`${(typeof NAMES==="object"&&NAMES[f])||(typeof HXN==="object"&&HXN[f])||f} ${c[f]}`).join(", ");
   O.push({n:J.n,r:"join",fx:{},x:`${word(oj)} · tốn: ${ct?ct+", ":""}${kh} khắc · cùng nàng · ${J.x()}`,go:()=>{if(!agSpendKh()){agLand(p);return}const r=twDo(S,p.k==="thHH"?queenP():t,p.k);if(r)log(`${r}.`);agLand(p)}})}/* her deed: the twDo wrapper lets the others there see it */
- O.push({n:"Thôi, lui về cung",r:"leave",fx:{},x:"thành: ngươi lui về cung, nàng không thấy ngươi",go:()=>{agLand(p);try{if(S.place!=="home"&&!S.out)goTo("home")}catch(e){}}});
+ O.push({n:"Thôi, lui về cung",r:"leave",fx:{},x:(()=>{let th=0,wb="";try{if(S.place!=="home"&&!S.out){th=travel(S.place,"home");wb=walkBlock("home",th)}}catch(e){}return `tốn: ${th} khắc đi đường · thành: ${wb?`chỉ tránh mặt, chưa về được cung (${wb})`:"ngươi lui về cung"}, nàng không thấy ngươi`})(),/* shown = charged (walk-cost r3): the walk home walkGo pays, spill included */go:()=>{agLand(p);try{if(S.place!=="home"&&!S.out)walkGo("home")}catch(e){}}});
  O.push({n:"Mặc kệ",r:"ignore",fx:{},x:"thành: không dính vào chuyện",go:()=>{agLand(p);log(`Ngươi mặc kệ ${v.name}.`)}});
  /* no khắc left in the day (j76 can, spill allowed): the kit GREYED OPTION (KIT §84 kitOff, jgrey) — one form with every other locked option */
  if(lock)O.forEach(c=>{if(c.r==="hear"||c.r==="join")kitOff(c,lock,"")});
@@ -75184,7 +75200,8 @@ function kszFigFill3(dlg,cap,lay,cRef){const B=dlg.querySelector(".k3body"),L=B&
  const mbx=document.getElementById("mb");let fixed=2;[...dlg.children].forEach(c=>{if(c!==mbx&&c.getClientRects().length&&getComputedStyle(c).position!=="absolute")fixed+=c.offsetHeight});if(mbx)[...mbx.children].forEach(c=>{if(c!==B&&c.getClientRects().length)fixed+=c.offsetHeight});
  const pad=(parseFloat(getComputedStyle(B).paddingTop)||0)+(parseFloat(getComputedStyle(B).paddingBottom)||0);const M=document.getElementById("modal");if(!(cap>0))cap=M?M.clientHeight-24:0;if(!(cap>0))return;const room=cap-fixed-pad-4;
  const mh=R.style.minHeight,mx=R.style.maxHeight,ov=R.style.overflow;R.style.minHeight="";R.style.maxHeight="";R.style.overflow="visible";const want=Math.ceil(R.scrollHeight);R.style.minHeight=mh;R.style.maxHeight=mx;R.style.overflow=ov;
- const lh=L.offsetHeight,target=Math.min(room,want);if(target<=lh+2)return;
+ const tall=dlg.dataset.ksz==='XL'||dlg.dataset.ksz==='L';/* OD 21/11 ~03:54Z (#47): every L / XL frame of a device has the SAME figure size + position: the figure column always fills the room the frame cap leaves, whatever the info / options say */
+ const lh=L.offsetHeight,target=tall?room:Math.min(room,want);if(target<=lh+2)return;
  const tg=L.querySelector(":scope>.kt3"),part=lh-fs.offsetHeight+(tg&&!tg.querySelector(".kdh,.kdh-cap")?kszPlateH():0),body0=KIT_SIZE.fig[lay.fig].h*(dlg.__kszKid||1),allow=(target-part)/(1+cRef);
  if(allow>body0*dlg.__kszShrink+.5){dlg.__kszShrink=allow/body0;kszFigFit(dlg)}}
 window.kszFigFill3=kszFigFill3;
@@ -77154,7 +77171,7 @@ function agLzRun(){const Q=AGD.lz;if(!Q)return;if(Q.w!==S||!agDOn()){AGD.lz=null
   if(rp&&agRdcFar(p)){const prev=D.P[id]&&D.P[id][b-1];const c=agRdcCause(p,id,prev,"",rp===2?{[id]:1}:{});if(!c||agRdcN>=BAL.ag.day.redecideCap){agRdcKeep(p,id,b,c,kind);done.push(id);continue}agRdcN++;agRdcMark("far:"+c)}
   if(intent||!D.I||!D.I[id])agIntent(p,id);agDrawPerson(p,id,b,kind,b);done.push(id)}catch(e){agdErr("lz",e)}}
  try{const R=agRec();if(R){const k0=agKh();for(const id of done){const s=agDaySlot(id);const row=R.P[id];if(!s||!row)continue;const nr=agRow(s);
-   for(let kh=k0;kh<J95.KH;kh++){const e=row[kh];if(!e||e[1]==="go"&&!agBound(id,kh,R.key))row[kh]=nr[kh]}}}
+   for(let kh=k0;kh<J95.KH;kh++){const e=row[kh];if(!e||e[1]==="go"&&!agBound(id,kh,R.key)&&!(typeof walkIsRoad==="function"&&walkIsRoad(e)))row[kh]=nr[kh]}}}/* round 4: a road (jwalk / meeting lead-in / errand) is never repainted */
   if(done.length)agTickX()}catch(e){agdErr("lzPaint",e)}
  const ms=performance.now()-t0;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift();
  if(done.length)agLater("sync",agSyncNow)
@@ -77227,9 +77244,9 @@ function agPlanX(id,s,kh){const z=agZ(),R=agRec();const p={key:agKey(),id,vid:nu
  AG.stat.by[s.k]=(AG.stat.by[s.k]||0)+1;const L={w:wk(),b:S.buoi||0,kh,id,k:s.k,t:s.t||null,pl:s.pl,why:p.why};z.log.push(L);if(z.log.length>60)z.log.shift();return p}
 function agTickX(){if(!agDOn())return;const D=agDz();if(D.d!==wk())return;const z=agZ(),key=agKey();const k0=agKh();
  for(const id in D.P){if(/^v\d/.test(id))continue;const s=agDaySlot(id);if(!s||!s.k||!AGRUN[s.k])continue;if(z.pend.some(p=>p.id===id&&p.key===key)||(z.didX&&z.didX[id]===key))continue;
-  (z.didX=z.didX||{})[id]=key;
+  (z.didX=z.didX||{})[id]=key;let dX=null;try{dX=agDoer({id,vid:null})}catch(e){}
   /* the khắc she can do it: from now on, not one a card / told deed / secret meeting already holds (same rule as a consort's agSlot) */
-  const R=agRec();const free=[];for(let kh=k0;kh<J95.KH;kh++){const e=R&&R.P[id]&&R.P[id][kh];if(e&&(e[1]==="tryst"||e[1]==="meet"||e[1]==="offduty"||e[1]==="laundry"))continue;/* off duty / punished: her khắc is not hers */if(R&&agBound(id,kh,R.key))continue;free.push(kh)}
+  const R=agRec();const free=[];for(let kh=k0;kh<J95.KH;kh++){const e=R&&R.P[id]&&R.P[id][kh];if(e&&(e[1]==="tryst"||e[1]==="meet"||e[1]==="offduty"||e[1]==="laundry"))continue;/* off duty / punished: her khắc is not hers */if(R&&agBound(id,kh,R.key))continue;if(R&&!agWalkOk(R,id,kh,agKhC(s,dX),s.pl,dX,k0))continue;/* the walk to it and on from it fits (DEED WALKS) */free.push(kh)}
   if(!free.length){AGD.stat.miss++;continue}/* G3: the near-best khắc from now (agSoon), never a random one */agPlanX(id,s,npwPick(free,kh=>agSoon(kh,k0)));AGD.stat.land++}
  if(!agRec()){for(const p of z.pend.slice())if(p.key===key&&p.vid==null)agLand(p)}}
 (function(){
@@ -77303,8 +77320,8 @@ function agMore(d,id,prev,max){const A=BAL.ag.kh2;const R=agRec();if(!R||!R.P[id
   const O=agOptsG(d,N,need).filter(o=>o.k!==last&&(cons||AGRUN[o.k]));if(!O.length)break;
   const o=mindPick(O.map(x=>[x,x.u]),d);if(!o)break;let at=null;try{at=o.at(k0,d,o.t)}catch(e){}if(!at)break;
   if(cons){if(d.confined&&at!==palaceOf(d))break;if(!j95acc(d,at)&&at!=="home"&&at!==palaceOf(d))break}
-  let w=0;try{w=at===pl?0:travel(pl,at)}catch(e){w=0}const kh=k0+w,kc=Math.max(1,agKhC(o,d));if(!agFitDay(kh,kc))break;/* no time left in the DAY for it (OD L852: a deed may run on into the next buổi): she keeps her schedule */
-  let free=true;for(let q=kh;q<Math.min(kh+kc,J95.KH);q++)if(!agKhFree(R,id,q)){free=false;break}if(!free)break;
+  let w=0;try{w=at===pl?0:travel(pl,at,d)}catch(e){w=0}const kh=k0+w,kc=Math.max(1,agKhC(o,d));if(!agFitDay(kh,kc))break;/* no time left in the DAY for it (OD L852: a deed may run on into the next buổi): she keeps her schedule */
+  let free=true;for(let q=kh;q<Math.min(kh+kc,J95.KH);q++)if(!agKhFree(R,id,q)){free=false;break}if(!free)break;if(!agWalkOk(R,id,kh,kc,at,d))break;/* and on to her next kept row (DEED WALKS) */
   o.need=need;let p;if(cons){agPlan(d,o,N,kh,at);p=agZ().pend[agZ().pend.length-1]}else p=agPlanX(id,{k:o.k,t:o.t?ledgerId(o.t):null,pl:at,act:o.act,why:agWhyN(o,need)},kh);
   if(!p)break;n++;AGD.stat.more=(AGD.stat.more||0)+1;end=agK1(p);pl=at;last=o.k}
  return n}
@@ -77335,7 +77352,7 @@ function agSeeNpc(p,doer){if(!agKhOn()||!BAL.ag.kh2.see.on)return;const R=agRec(
 /* the reaction deed: kh = the khắc after she saw it, at that place; it must fit the DAY (agFitDay) and her khắc must be free, else she lets it go
    (agTouch: she re-thinks next buổi). Row "ag_see:<c>" = the khắc she spends on it. p.seen / p.sh: a reaction is not a new scene or meeting. */
 function agSeePlan(v,R,kh,pl,k,kd,tid,act,why){if(!v||!R)return false;const id=ledgerId(v);if(!id||!R.P[id])return false;
- if(!agFitDay(kh,1)||kh>=J95.KH){agTouch(v);return false}const e=R.P[id][kh];if(e&&(e[1]==="tryst"||e[1]==="meet"||e[1]==="offduty"||e[1]==="laundry"||/^ag_/.test(e[1]||""))||agBound(id,kh,R.key))return false;
+ if(!agFitDay(kh,1)||kh>=J95.KH){agTouch(v);return false}if(!agWalkOk(R,id,kh,1,pl,v,kh-1)){agTouch(v);return false}/* DEED WALKS: and on to her next kept row */const e=R.P[id][kh];if(e&&(e[1]==="tryst"||e[1]==="meet"||e[1]==="offduty"||e[1]==="laundry"||/^ag_/.test(e[1]||""))||agBound(id,kh,R.key))return false;
  const z=agZ();const p={key:R.key,id,vid:v.id,k,kd:kd||"",t:tid||null,kh,pl,act:act||"",why:why||"",seen:1,sh:1};z.pend.push(p);R.P[id][kh]=[pl,"ag_"+k,tid||null,why||""];
  try{const L=R.acts=R.acts||[];L.push({id,kh,k:"ag:"+k,t:tid||null,why:why||"",ok:1,ag:1,pl});if(L.length>60)L.shift()}catch(x){}
  try{const L={w:wk(),b:S.buoi||0,kh,id,k,t:tid||null,pl,why:why||""};z.log.push(L);if(z.log.length>60)z.log.shift()}catch(x){}return true}
@@ -77372,8 +77389,9 @@ function agHeard(v,info){if(!agRdOn()||!v||v===S||typeof v!=="object"||!v.alive|
  /* OD L1638/L1641 (one shared clock): she hears at the START of khắc k0 and decides + walks IN k0; she is at the place from k0 + walk (≥ 1).
     A deed of hers already running in k0 ends first (she starts after its last khắc). */
  let s0=k0;for(const p of agZ().pend)if(p.id===id&&p.key===R.key&&!p.drop&&p.kh<=s0&&s0<=agK1(p))s0=agK1(p)+1;
- const from=(R.P[id][Math.max(0,s0-1)]&&R.P[id][Math.max(0,s0-1)][0])||palaceOf(v);let w=0;try{w=at===from?0:travel(from,at)}catch(e){}const kh=s0+Math.max(1,w),kc=Math.max(1,agKhC(c,v));if(!agFitDay(kh,kc)){if(kh>=J95.KH&&kc<=j76left(S.buoi||0,kh))agTouch(v);return 0}/* the DAY gate (OD L852), never the buổi: a start past this buổi's record = she acts on it next buổi (agTouch re-plans her day, same as a late news) */
+ const from=(R.P[id][Math.max(0,s0-1)]&&R.P[id][Math.max(0,s0-1)][0])||palaceOf(v);let w=0;try{w=at===from?0:travel(from,at,v)}catch(e){}/* her road, her penalty (j9 per walker) */const kh=s0+Math.max(1,w),kc=Math.max(1,agKhC(c,v));if(!agFitDay(kh,kc)){if(kh>=J95.KH&&kc<=j76left(S.buoi||0,kh))agTouch(v);return 0}/* the DAY gate (OD L852), never the buổi: a start past this buổi's record = she acts on it next buổi (agTouch re-plans her day, same as a late news) */
  for(let q=s0;q<Math.min(kh+kc,J95.KH);q++){const e=R.P[id][q];if(!e||e[1]==="tryst"||e[1]==="meet"||/^ag_(see:|with$)/.test(e[1]||"")||agBound(id,q,R.key))return 0}
+ if(agWalkShort(R,id,kh,kc,at,v,kh-1,1)>0){AGD.stat.walkWait=(AGD.stat.walkWait||0)+1;agTouch(v);return 0}/* the walk on to her next kept row fits (DEED WALKS; the road there is the «go» rows below) */
  /* she changes her mind: the deeds of hers not yet started in that time are dropped */
  const z=agZ();for(const p of z.pend.slice())if(p.id===id&&p.key===R.key&&p.kh>=s0&&p.kh<kh+kc){p.drop=1;z.pend.splice(z.pend.indexOf(p),1);AG.stat.drop++}
  for(let q=s0;q<kh;q++)R.P[id][q]=[at,"go",null,info.why||""];/* on her way (this khắc is spent walking) */
@@ -77385,8 +77403,8 @@ function agHeard(v,info){if(!agRdOn()||!v||v===S||typeof v!=="object"||!v.alive|
    person reaches the master after the bearer's REAL Dư đồ walk from where she saw it to where the master is — the same travel() the player walks
    (BAL.walk near 1 / far 2; never a second distance table): seen at khắc k → near: known from k + 1, far: from k + 2 (later if the bearer is busy).
    agWalk = that walk, at least 1 khắc (the bearer must go); 0 when the relay is switched off (BAL.ag.kh2.rd.on / see + go = 0, the tests' knob). */
-function agWalk(a,b){try{const B=BAL.ag.kh2.rd;if(!agRdOn()||!((B.see||0)+(B.go||0)))return 0}catch(e){return 0}if(!a||!b||a===b)return 1;
- const W=window.__walkSpill;window.__walkSpill=null;/* her own half-walk (travel's special case) is not the bearer's road */let w=1;try{w=travel(a,b)}catch(e){}finally{window.__walkSpill=W}return Math.max(1,w||1)}
+function agWalk(a,b,who){try{const B=BAL.ag.kh2.rd;if(!agRdOn()||!((B.see||0)+(B.go||0)))return 0}catch(e){return 0}if(!a||!b||a===b)return 1;
+ const W=window.__walkSpill;window.__walkSpill=null;/* her own half-walk (travel's special case) is not the bearer's road */let w=1;try{w=travel(a,b,who||null)}catch(e){}/* the bearer's own road (her «đi chậm» too, j9 per walker; review/jagday-walk) */finally{window.__walkSpill=W}return Math.max(1,w||1)}
 /* a servant who stands at pl in khắc kh tells her master (not the player — her own servants are part 2c's TIN BÁO) by her own choice */
 function agTell(R,pl,kh,why0,who,interest){const B=BAL.ag.kh2.rd;let n=0;let why=null;const wy=()=>why!=null?why:(why=typeof why0==="function"?why0():why0);/* ag-deed-perf: the line (a place name: places() through every wrapper) is built only when a servant tells */
  for(const id in R.P){if(!/^s\d+$/.test(id))continue;const e=R.P[id][kh];if(!e||e[0]!==pl)continue;const s=servById(+id.slice(1));if(!s||s.out)continue;const m=ownerOf(s);
@@ -77395,7 +77413,7 @@ function agTell(R,pl,kh,why0,who,interest){const B=BAL.ag.kh2.rd;let n=0;let why
   const busy=q=>R.P[id][q]&&(/^ag_(?!tell$)/.test(R.P[id][q][1]||"")||AG_NOTFREE.has(R.P[id][q][1]));
   let ks=kh;while(ks+1<J95.KH&&busy(ks+1))ks++;/* busy with her own deed (or not hers): she sets off when it ends, never over a deed row (ag-kh2 G9) */
   let mp=null;try{mp=R.P["v"+m.id]&&R.P["v"+m.id][Math.min(ks,J95.KH-1)]?R.P["v"+m.id][Math.min(ks,J95.KH-1)][0]:palaceOf(m)}catch(e){}mp=mp||palaceOf(m);
-  const due=ks+Math.max(1,agWalk(pl,mp));/* OD 17/11 ~17:55Z (3): she sets off from pl the khắc she saw it; her REAL walk to her master (near 1 / far 2); he hears at the start of khắc due */
+  const due=ks+Math.max(1,agWalk(pl,mp,s));/* OD 17/11 ~17:55Z (3): she sets off from pl the khắc she saw it; her REAL walk to her master (near 1 / far 2); he hears at the start of khắc due */
   let kg=J95.KH;/* the khắc rows she spends on the road (a far walk: the khắc between); none for a near one */
   for(let q=ks+1;q<due&&q<J95.KH;q++){const e=R.P[id][q];if(!e||busy(q)||e[1]==="tryst"||e[1]==="meet")break;if(kg===J95.KH)kg=q;R.P[id][q]=[mp,"ag_tell",ledgerId(m),wy()]}
   agRdLog(R,id,kh,"ag:tell",ledgerId(m),wy(),pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;
@@ -77457,6 +77475,7 @@ function agShDecl(p,v){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.sp
 function agShNpc(p,d){if(!agShOn()||!p||p.vid==null||!p.t||p.t[0]!=="v")return 1;const R=agRec();if(!R||p.key!==R.key)return 1;const t=agTgt(p.t);if(!t||t===S||typeof t!=="object"||t===d)return 1;
  const id="v"+t.id,row=R.P[id];if(!row)return 1;const A=BAL.ag.kh2.sh;let here=true;const k1=Math.min(J95.KH-1,agK1(p));
  for(let q=p.kh;q<=k1;q++)if(!row[q]||row[q][0]!==p.pl||!agKhFree(R,id,q)){here=false;break}
+ if(here&&typeof agWalkShort==="function"&&agWalkShort(R,id,p.kh,k1-p.kh+1,p.pl,t,p.kh-1)>0)here=false;/* DEED WALKS: still on her road there (a deed / binding just before) = not home to receive */
  if(here&&agK1(p)>=J95.KH){/* the spilled part (review ag-all-2 r2 B3): the next buổi's record does not exist yet, so read her own day plan for that buổi */
   try{const nb=(S.buoi||0)+1;const sl=nb<4?agDaySlot(id,nb):null;if(sl&&sl.pl&&sl.pl!==p.pl)here=false}catch(e){}}
  let c="dec";if(here){const ho=Math.max(0,hostility(t,d))/BAL.ag.wit.hoD;try{c=mindPick([["rec",A.rec],["dec",A.dec*ho]].filter(x=>x[1]>0),t)||"rec"}catch(e){c="rec"}}
@@ -77481,6 +77500,9 @@ function agWhyDay(n){if(agCanDay(n))return"";const w=typeof dayWhy==="function"?
 function agSpill(p){try{if(!p||!(p.sp>0)||p.drop||p.gone)return false;const R=agRec();if(!R||!R.P[p.id]||p.key===R.key)return false;
   const [w0,b0]=String(p.key).split("-"),[w1,b1]=String(R.key).split("-");if(w0!==w1||+b0+1!==+b1)return false;/* only into the very next buổi of the same day */
   const row=R.P[p.id];const k1=Math.min(J95.KH-1,p.sp-1);for(let q=0;q<=k1;q++){const e=row[q];if(!e||e[1]==="tryst"||e[1]==="meet"||AG_NOTFREE.has(e[1])||agBound(p.id,q,R.key))return false}
+  /* round 4 (b, DEED WALKS): the carried part must leave her the road on to the next kept row of the new buổi (a meeting, a binding) — like a khắc
+     that is not free, no road = not carried (agWalkShort, travel per walker; khắc 0 has no row before it) */
+  try{let d=null;try{d=agDoer(p)}catch(e){}if(typeof agWalkShort==="function"&&agWalkShort(R,p.id,0,k1+1,p.pl,d,0,1)>0){AGD.stat.walkSpill=(AGD.stat.walkSpill||0)+1;return false}}catch(e){}
   p.key=R.key;p.kh=0;p.k1=k1;p.cont=1;{const rest=p.sp-J95.KH;if(rest>0)p.sp=rest;else delete p.sp}/* longer than a buổi: runs on again (the day function allowed it) */p.seen=0;for(let q=0;q<=k1;q++)row[q]=[p.pl,"ag_"+p.k,p.t||null,p.why||""];
   AGD.stat.spill=(AGD.stat.spill||0)+1;return true}catch(e){agdErr("spill",e);return false}}
 (function(){const l0=agLand;agLand=function(p){if(agKhOn()&&agSpill(p))return"";return l0.apply(this,arguments)};
@@ -77491,9 +77513,69 @@ function agSpill(p){try{if(!p||!(p.sp>0)||p.drop||p.gone)return false;const R=ag
 /* the spill runs FIRST, at the first sight of the new record (j95sync → agRdTick, agTickX, agTick): it must hold its khắc 0 … before the re-deciders
    (agHeard), the staff plan (agTickX) or the deciders book them — the sliced landing (BAL.ag.perf.slice) may come frames later on a slow phone */
 function agSpillAll(){const R=agRec();if(!R||!agKhOn())return 0;let n=0;for(const p of agZ().pend.slice())if(p.sp>0&&p.key!==R.key&&!p.drop&&!p.gone&&agSpill(p))n++;
- if(n)agLater("sync",agSyncNow);/* the view of the khắc now shows her there */return n}
+ if(n){try{if(typeof agWalkGuard==="function")agWalkGuard(R,agKh())}catch(e){agdErr("walkGuard0",e)}/* her deeds planned before the spill took khắc 0 … keep their road (DEED WALKS) */agLater("sync",agSyncNow)}/* the view of the khắc now shows her there */return n}
 (function(){const k0=agTick;agTick=function(){try{agSpillAll()}catch(e){agdErr("spillAll",e)}return k0.apply(this,arguments)}})();
 Object.assign(window,{agFitDay,agCanDay,agWhyDay,agSpill,agSpillAll});
+/* ================= DEED WALKS (review/jagday-walk, FOLLOW-UP GAP of walk-cost; owner OD L1976 walks cost khắc, law 1 / 6b NPCs live by her rules) =================
+   A deed is a KEPT row (j95sKeep): jwalk.js never rewrites it, so the walk between two kept rows must be reserved when the deed is PLACED.
+   ONE rule for every place a deed (or a reaction) gets its start khắc — agSlot (jagent: day deed, jshelf call, jagknow react), agTickX (staff,
+   Emperor, Thái hậu), agMore (G8 next deed), agHeard (re-decide), agSeePlan (react next khắc): the deed [kh, kh+kc−1] at `at` fits only when
+   - from the place she is bound to before it — the last kept row before kh (a deed, meeting, forced list) or, at the latest, the khắc now —
+     she can walk there: travel(from, at, walker) khắc between them (after a kept row: whole khắc after it ends, as agMore always reserved;
+     from the khắc now: this khắc is spent walking, as agHeard), and
+   - from its last khắc she can walk on to the next kept row after it (same count).
+   The free rows in between become «on the way» rows (jwalk pass). travel() per walker = BAL.walk.near / far + BAL.walk.pen of THAT person (j9).
+   BAL.walk.npc = 0 → off (the old placing). No new number. */
+function agWalkFix(x){if(!x)return false;const a=x[1]||"";return /^ag_/.test(a)||a==="tryst"||a==="meet"||a==="offduty"||a==="laundry"||a==="confined"||a==="cold"||a==="called"}
+/* HELD row q of id: a card binding (J95B), a forced list / meeting (agWalkFix), or a deed that really holds the khắc (a pending deed's window,
+   a reaction, a bearer on her road). The day plan labels her whole buổi «ag_<deed>» (agRow) before the deed is placed: where no deed holds the
+   khắc that label is only the plan — a free row (jwalk may walk her through it). */
+function agWalkHeld(R,id,q){const row=R&&R.P&&R.P[id];const x=row&&row[q];if(!x)return false;try{if(agBound(id,q,R.key))return true}catch(e){}const a=x[1]||"";
+ if(!/^ag_/.test(a))return agWalkFix(x);if(a==="ag_tell"||a==="ag_with"||/^ag_see:/.test(a))return true;
+ for(const p of agZ().pend||[])if(p.id===id&&p.key===R.key&&!p.drop&&!p.gone&&p.kh<=q&&q<=agK1(p))return true;
+ /* round 4: every deed row is written with its pend entry (agPlan / agPlanX / agSpan / agSeePlan / agSpill / agReapply), so an «ag_» row no pend deed
+    holds is only the day plan's label (agRow: her own deed's label, a world-forced buổi «ag_routine» with k null, a label the staff slice agLzRun
+    repainted over a road) or a deed already landed / dropped — free (was: held unless it matched slot.k → a held plan label nobody could walk) */
+ return false}
+/* round 4 (MEETING ROADS, whole group): a secret meeting written later (j95secApply re-applied by placeWhere) right after a deed she already
+   started: she leaves that deed one khắc early to walk there (the deed still lands, at its new end) — never a meeting reached with no road */
+function agWalkCut(R,id,q){try{for(const p of agZ().pend||[]){if(p.id!==id||p.key!==R.key||p.drop||p.gone||p.sp>0||!(p.kh<q)||agK1(p)!==q)continue;
+  p.k1=q-1;AGD.stat.walkCut=(AGD.stat.walkCut||0)+1;return true}}catch(e){agdErr("walkCut",e)}return false}
+function agWalkReal(k){return !!k&&typeof k==="string"&&k!==(typeof J95OUT_!=="undefined"?J95OUT_:"__out")}
+function agWalkT(a,b,d){if(!agWalkReal(a)||!agWalkReal(b)||a===b)return 0;try{return travel(a,b,d===undefined?null:d)||0}catch(e){return 0}}
+/* the khắc short (0 = it fits) for a deed of `id` at `at`, khắc kh … kh+kc−1, walker d; cur = the khắc now (rows before it are past) */
+function agWalkShort(R,id,kh,kc,at,d,cur,after){try{if(!(typeof walkNpcOn==="function"?walkNpcOn():BAL.walk.npc!==0))return 0;const row=R&&R.P&&R.P[id];if(!row||!agWalkReal(at))return 0;
+  const K=J95.KH,k1=Math.min(K-1,kh+Math.max(1,kc||1)-1);if(cur==null)cur=R.kh!=null?R.kh:agKh();let s=0;
+  const fx=q=>agWalkHeld(R,id,q);/* a deed, a card binding (J95B: a card said she was there), a forced list */
+  /* before: the last kept row before kh (whole khắc after it), else the khắc now (spent walking unless a kept row holds it) */
+  let q=kh-1;while(q>cur&&!fx(q))q--;if(q<cur)q=kh>0?Math.min(cur,kh-1):0;/* round 4 (b): a deed AT the khắc now (or a fresh khắc's guard, cur = the khắc before) starts from row kh−1 = where she was, never from its own row; khắc 0 has no row before: where she stands at the start */
+  if(!after&&q>=0&&q<K&&row[q]){const t=agWalkT(row[q][0],at,d);if(t>0){const gap=q>=kh?0:kh-q-(fx(q)?1:0);s=Math.max(s,t-gap)}}
+  /* after: the next kept row after the deed */
+  let a=k1+1;while(a<K&&!fx(a))a++;
+  if(a<K&&row[a]){const t=agWalkT(at,row[a][0],d);if(t>0)s=Math.max(s,t-(a-k1-1))}
+  return Math.max(0,s)}catch(e){agdErr("walkShort",e);return 0}}
+function agWalkOk(R,id,kh,kc,at,d,cur){const n=agWalkShort(R,id,kh,kc,at,d,cur);if(n>0){AGD.stat.walkWait=(AGD.stat.walkWait||0)+1;return false}return true}
+/* GUARD: a deed placed earlier can lose its road when a later write fixes a row next to it (a deed run on from the last buổi, agSpill; a card
+   binding her, J95B; a forced list). Every khắc (j95fixHouse chain, before the jwalk pass) each deed of this buổi NOT YET STARTED is checked:
+   no road → it moves to the first later khắc that has the road and is free (same deed, same cost, same place); none → dropped, she re-plans
+   (agTouch), as a deed she can no longer do. A started deed never moves. */
+/* round 4 (whole group, law 11): rows next to a deed can still change AFTER the guard of a khắc ran — a mistress's later move rewrites her maid's
+   retinue row (j95sPass), a deed slice / reaction lands frames after j95sync (AGL). So (1) the guard runs AFTER every row writer of the chain
+   (j95sPass / j95sGuard), right before the road pass (jwalk wrapper); (2) at the FIRST pass of a new khắc (fresh: R.kh still the khắc before)
+   the khắc now is not shown yet: the deeds starting NOW are checked too, from row cur−1 = where she really was, and the khắc now may be her
+   road (jwalk walks it the same way). A started or seen deed never moves. */
+function agWalkGuard(R,cur,fresh){if(!R||!R.P||!agKhOn())return 0;if(!(typeof walkNpcOn==="function"?walkNpcOn():BAL.walk.npc!==0))return 0;const z=agZ();let n=0;
+ const lo=fresh?cur:cur+1,base=fresh&&cur>0?cur-1:cur;/* khắc 0 of a buổi: no row before it — she starts where row 0 stands (jwalk never rewrites khắc 0) */
+ for(const p of (z.pend||[]).slice()){if(p.key!==R.key||p.drop||p.gone||p.kh<lo||(p.kh<=cur&&p.seen)||!R.P[p.id]||p.cont)continue;let d=null;try{d=agDoer(p)}catch(e){}
+  const kc=Math.max(1,p.kc||agK1(p)-p.kh+1);if(!agWalkShort(R,p.id,p.kh,agK1(p)-p.kh+1,p.pl,d,base))continue;
+  agShClear(p,p.kh,agK1(p));p.drop=1;let to=-1;
+  for(let kh=p.kh+1;kh<J95.KH;kh++){if(!agFitDay(kh,kc))continue;let ok=true;for(let q=kh;q<Math.min(kh+kc,J95.KH);q++)if(!agKhFree(R,p.id,q)){ok=false;break}if(!ok)continue;
+   if(agWalkShort(R,p.id,kh,Math.min(kc,J95.KH-kh),p.pl,d,base))continue;to=kh;break}
+  if(to>=0){delete p.drop;p.kh=to;R.P[p.id][to]=[p.pl,"ag_"+p.k,p.t||null,p.why||""];agSpan(p,{k:p.k,kc},d);AGD.stat.walkMove=(AGD.stat.walkMove||0)+1;n++}
+  else{const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);AG.stat.drop++;AGD.stat.walkDrop=(AGD.stat.walkDrop||0)+1;if(d&&typeof d==="object")agTouch(d);n++}}
+ return n}
+/* the guard's call sits in the jwalk j95fixHouse wrapper (after j95sPass, before walkNpcPass) */
+Object.assign(window,{agWalkFix,agWalkShort,agWalkOk,agWalkGuard,agWalkCut});
 /* ================= jagacts: AG-ALL part A — the acts of Hoàng hậu, Thái hậu and the consort acts the loop lacked =================
    Owner OD 17/11 ~13:20Z (L1588) + ~13:55Z: every group of NPCs gets the whole option set the player of that group has; missing acts are
    added without asking. Gap table: dev/handover/reports/ag-all.md §1 (consort), §5 (Thái hậu), §6 (Hoàng hậu). Core: jagday.js.
@@ -78020,10 +78102,10 @@ function j95sPass(R,kh,ppl){if(!j95sOn())return 0;const t0=performance.now();let
   const away=i=>{const k=op[i]&&op[i][0];return !!k&&k!==hk0&&k!=="lc"&&k!==J95OUT_&&hk0!=="lc"};
   const ret={};/* id → [i...] */const why={};
   for(let i=kh;i<4;){if(!away(i)){i++;continue}const k=op[i][0];let s0=i;while(s0>0&&op[s0-1]&&op[s0-1][0]===k)s0--;let e0=i;while(e0+1<4&&op[e0+1]&&op[e0+1][0]===k)e0++;
-   let prev=null;if(s0<kh){prev=hh.filter(q=>{const x=R.P[q.id]&&R.P[q.id][kh-1];return x&&x[1]==="follow"&&x[2]===oid}).map(q=>q.id)}
+   let prev=null;if(s0<kh){prev=hh.filter(q=>{const x=R.P[q.id]&&R.P[q.id][kh-1];return x&&(x[1]==="follow"||x[1]==="go"&&x[0]===k)&&x[2]===oid}).map(q=>q.id)/* on her way to her (jwalk, review/jagday-walk) = in the retinue */}
    const P=j95sPick(R,o,oid,hh,k,s0,base,kh,prev);const ow=j95sOw(o);
    for(const q of P.mem){const w=prev&&prev.length?`theo hầu ${ow} ở ${j95sPn(k)} (đi cùng từ đầu)`:`${ow} sang ${j95sPn(k)}: ${P.why}`;
-    for(let j=Math.max(i,kh);j<=e0;j++){if(j95sKeep(base[q.id][j]))break;/* only a deed / meeting takes her away mid-outing; her own day waits */(ret[q.id]=ret[q.id]||{})[j]=[k,"follow",oid,w]}
+    for(let j=Math.max(i,kh);j<=e0;j++){const bj=base[q.id][j];if(bj&&bj[1]==="go"&&bj[0]===k&&bj[2]===oid){(ret[q.id]=ret[q.id]||{})[j]=bj;continue}/* still on her way to her (jwalk) */if(j95sKeep(bj))break;/* only a deed / meeting takes her away mid-outing; her own day waits */(ret[q.id]=ret[q.id]||{})[j]=[k,"follow",oid,w]}
     st.ret++;if(q.close)st.close++}
    i=e0+1}
   /* write: retinue rows, else her day (while her mistress is out, serving = staying behind to keep the palace) */
@@ -78474,7 +78556,7 @@ function knMemo(){const k=agKey();if(!KN.m||KN.m.key!==k)KN.m={key:k,x:{},t:{},a
    where she saw it to where her master stands — knWalkTo. knRelay = the LONGEST such walk (BAL.walk.far; 0 = relay off), used only to bound the
    buổi-end carry. */
 function knRelay(){try{const B=BAL.ag.kh2.rd;return agRdOn()&&((B.see||0)+(B.go||0))?Math.max(BAL.walk.near||1,BAL.walk.far||1):0}catch(e){return 0}}
-function knWalkTo(from,id,kh){if(!knRelay())return 0;let to=null;try{to=knAt(id,Math.max(0,Math.min(kh,J95.KH-1)))}catch(e){}return agWalk(from,to||"home")}
+function knWalkTo(from,id,kh,who){if(!knRelay())return 0;let to=null;try{to=knAt(id,Math.max(0,Math.min(kh,J95.KH-1)))}catch(e){}return agWalk(from,to||"home",who)}/* who = the bearer when known (her own road, j9 per walker); a passer-by / messenger: null */
 function knSrvFrom(s,how,h){if(how==="listen"){const k=s&&s.sid!=null?knSlotK(s):"";const pl=String(k||"").split(":")[0];if(pl&&pl!=="listen")return pl}return h.k}
 function knFirst(id,h,w){for(let kh=w[0];kh<=w[1];kh++)if(knAt(id,kh)===h.k)return kh;return -1}
 function knId(x){return x===S?"me":x&&x.sid!=null?"s"+x.sid:x&&x.id!=null?"v"+x.id:""}
@@ -78524,7 +78606,7 @@ function knFor(x,h,noFriend){if(!x)return null;const hid=knHid(h);const M=knMemo
  const now=agKh(),D=knRelay();
  if(!r){for(const s of knStaff(x)){const how=knSrvKnows(s,x,h,w,hid);if(!how)continue;const q=Math.max(how==="here"&&s.sid!=null?knFirst("s"+s.sid,h,w):w[0],w[0]);
    /* the confidant maid walks with her mistress (one khắc to step aside and tell); any other servant walks from where she saw / heard it */
-   const at=q+(s.sid==null&&!knwMid(s,x)?Math.min(1,D):knWalkTo(knSrvFrom(s,how,h),id,q));if(at>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s,at};break}}}
+   const at=q+(s.sid==null&&!knwMid(s,x)?Math.min(1,D):knWalkTo(knSrvFrom(s,how,h),id,q,s&&s.sid!=null?s:null));if(at>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s,at};break}}}
  if(!r){let o=0;try{o=oSee(x,false)*knB().eye/100}catch(e){}if(knHit("e"+id+"|"+hid,o)){const at=w[0]+knWalkTo(h.k,id,w[0]);/* her Tai mắt / a passer-by walks from the place to her */if(at<=now){r=knEye(x,h,hid);if(r)r.at=at}}}
  if(!r&&!noFriend){const F=knB().friend;for(const v of liveRivals(true)){if(v===x||!v.alive||v.out)continue;const a=aff(v,x);if(a<F)continue;/* the news travels when they meet (same place this khắc), or a close friend sends word (aff ≥ close) */const meet=(()=>{const nw=agKh();return knAt(id,nw)!=null&&knAt("v"+v.id,nw)===knAt(id,nw)})();if(a<knB().close&&!meet)continue;const k=knFor(v,h,true);if(!k||k.by==="le"||k.how==="self")continue;
    let fa=now;if(!meet&&D>0){const ka=M.at["v"+v.id+"|"+hid+"|n"];if(ka==null)continue;fa=ka+knWalkTo(knAt("v"+v.id,ka),id,ka);if(fa>now)continue}/* sending word: her messenger's real walk from where she was when she knew to x (AG-ALL-2d4) */
@@ -78558,7 +78640,11 @@ function knLine(r,h){const W=agPlaceTxt(h.k),what=knWhat(h);const fill=t=>String
   const P=KN_POOL[r.how==="self"?"here":r.by]||KN_POOL.mat;let t=fill(kLine("tinbao:"+r.by,P,{m:"cool"}));
   if(r.e){const o=ownerOf(r.e);t=t.replace(/\{N\}/g,r.e.name).replace(/\{P\}/g,o?(o===S?"ta":NM(o)):"khác")}return t}catch(e){return `Ở ${W} ${what}.`}}
 /* ---------- her TIN BÁO list ---------- */
-function knTb(){let b="";try{b=bkey()}catch(e){}S.tb=S.tb||{};if(S.tb.b!==b){S.tb.b=b;S.tb.K={};knCarryIn(S.tb)}else if(S.tb.W&&S.tb.W.length)knCarryTick(S.tb);if(!S.tb.R||S.tb.d!==wk()){S.tb.d=wk();S.tb.R=[]}S.tb.K=S.tb.K||{};return S.tb}
+/* jagday-walk r5 (law 6c, law 11 — the carry group): during the buổi turn (nextBuoi → endTurn) bkey() passes through half-turned keys
+   (S.buoi already 0, wk() not yet moved; the khắc still the old one). A rebuild there landed the carried items into a list the real
+   new key wiped a moment later (and landed them at the old khắc, before their bearer arrives). So: no rebuild while KN.turn; the
+   nextBuoi wrapper rebuilds once the turn is done, at the real key and khắc. */
+function knTb(){let b="";try{b=bkey()}catch(e){}S.tb=S.tb||{};if(KN.turn&&S.tb.b!=null){S.tb.K=S.tb.K||{};if(!S.tb.R)S.tb.R=[];return S.tb}if(S.tb.b!==b){S.tb.b=b;S.tb.K={};knCarryIn(S.tb)}else if(S.tb.W&&S.tb.W.length)knCarryTick(S.tb);if(!S.tb.R||S.tb.d!==wk()){S.tb.d=wk();S.tb.R=[]}S.tb.K=S.tb.K||{};return S.tb}
 function knRaw(){return KN.raw||[]}
 function knScan(L){if(!S||S.dead||S.out)return[];try{knFlush()}catch(e){agErr("knFlush",e)}const T=knTb();KN.stat.scan++;const out=[];const now=agKh();
  for(const h of L){if(h.done)continue;const hid=knHid(h);const w=knWin(h);const ended=w[1]<now&&!knFixed(h)?1:0;/* AG-ALL-2d2: an ENDED happening still reaches her (late news down the khắc chain), flagged ended */
@@ -78579,18 +78665,24 @@ function tinBaoList(){if(!knOn()||!S||S.dead||S.out)return[];let L=[];try{L=adHa
    arrive (last khắc of the buổi + knRelay); what would reach her is carried into the next buổi as an ENDED TIN BÁO item (knEnd: "vừa …" + "đã
    xong"), with the same informer. Hidden news stays hidden; fixed happenings (lễ) are known anyway; deeds that run on into the next buổi are in
    its list already (agSpan carry). */
-function knCarryOut(){if(!knOn()||!S||S.dead||S.out)return 0;const D=knRelay();if(!D)return 0;let L=[];try{adHapNow();L=KN.raw||[]}catch(e){return 0}
+/* jagday-walk r5: the carry reads the WHOLE ending buổi — first land the world work still waiting (AGL later jobs: the last khắc's deeds),
+   else a deed landed after this read has no tin báo at all (law 6c). In nextBuoi the outer agDrain already ran: a no-op there. */
+function knCarryOut(){if(!knOn()||!S||S.dead||S.out)return 0;const D=knRelay();if(!D)return 0;try{if(typeof agDrain==="function")agDrain()}catch(e){agErr("drain",e)}let L=[];try{adHapNow();L=KN.raw||[]}catch(e){return 0}
  const T=knTb();const KH=J95.KH,real=agKh;const C=[];
  for(const h of L){if(!h||h.done||knFixed(h))continue;const hid=knHid(h);if(T.K[hid]||C.some(x=>x.id===hid+":c"))continue;const w=knWin(h);if(!w||w[1]+D<KH||w[1]>=KH)continue;/* runs on: in the next buổi list already *//* its news could not come inside this buổi */
   let r=null;agKh=()=>Math.max(real(),w[1])+D;try{r=knFor(S,h)}catch(e){agErr("knCarry",e)}finally{agKh=real}
   if(!r)continue;/* AG-ALL-2d4: the same walk — it reaches her in the next buổi at khắc (arrival − KH): a far informer comes later than a near one */
   const due=Math.max(0,(r.at!=null?r.at:w[1]+D)-KH);const it={id:hid+":c",k:h.id,place:h.k,k0:-1,k1:-1,/* its window lay in the buổi before: over before khắc 0 of this one */who:knWho(h),line:knLine(r,h),by:r.by,inf:knInf(r),infName:knInfName(r),seen:0,ended:0,carry:1,due};C.push(it)}
- S.tb.C=C;KN.stat.carry=(KN.stat.carry||0)+C.length;return C.length}
-function knCarryIn(T){T.W=(T.C||[]).slice();T.C=[];knCarryTick(T)}
+ /* a turn refused (a scene still waiting, j9) asks again on the next press: keep what is already carried (same buổi key), never drop it */
+ let b="";try{b=bkey()}catch(e){}const old=S.tb.Cb===b?(S.tb.C||[]).filter(x=>!C.some(y=>y.id===x.id)&&!T.K[x.id]):[];
+ S.tb.C=C.concat(old);S.tb.Cb=b;KN.stat.carry=(KN.stat.carry||0)+C.length;return S.tb.C.length}
+/* items still on the road when a buổi turns (W, due not reached: she ended the buổi early) are not dropped: their bearer has
+   arrived by now, so they land at once in the new buổi, with the new carry after them */
+function knCarryIn(T){const W=(T.W||[]).map(it=>(it.due=0,it));const C=(T.C||[]).filter(x=>!W.some(y=>y.id===x.id));T.W=W.concat(C);T.C=[];T.Cb="";knCarryTick(T)}
 /* a carried item lands when its bearer arrives (its khắc in this buổi), not all at the buổi's start */
 function knCarryTick(T){if(!T.W||!T.W.length)return;let now=0;try{now=agKh()}catch(e){}const keep=[];
  for(const it of T.W){if((it.due||0)>now){keep.push(it);continue}delete it.due;it.b=S.buoi||0;knEnd(it);T.K[it.id]=it;for(const f of KN.cb)try{f(Object.assign({},it))}catch(e){console.error("tinBao cb",e)}}T.W=keep}
-(function(){const n0=nextBuoi;nextBuoi=function(){try{knCarryOut()}catch(e){agErr("knCarry",e)}return n0.apply(this,arguments)}})();
+(function(){const n0=nextBuoi;nextBuoi=function(){try{knCarryOut()}catch(e){agErr("knCarry",e)}KN.turn=(KN.turn||0)+1;try{return n0.apply(this,arguments)}finally{KN.turn--;if(!KN.turn)try{if(S&&!S.dead&&knOn())knTb()}catch(e){agErr("knTb",e)}}}})();
 function tinBaoNew(){return tinBaoList().filter(x=>!x.seen).length}
 function tinBaoOn(fn){if(typeof fn==="function")KN.cb.push(fn);return ()=>{const i=KN.cb.indexOf(fn);if(i>=0)KN.cb.splice(i,1)}}
 function tinBaoSeen(id){const T=knTb();for(const it of Object.values(T.K).concat(T.R||[]))if(id==null||it.id===id)it.seen=1}
@@ -80691,8 +80783,9 @@ function ptLedger(){if(!S||typeof j95on!=="function"||!j95on())return false;cons
      "errand" — the stage keeps her token (hidden + the kit chip «đang đi …») so she is SEEN walking off and back (OD 18/11 ~20:05Z); she is still busy
      (j95sBusy "errand"), never followed nor sent again, and the target stays in the row. NPC senders keep the target place (their stage is not hers). */
   const mine=a.by==="me";
-  for(let i=0;i<e.length;i++){const K=b0+i;if(K>=a.t0&&K<a.due){const why=`${mine?"ngươi":a.byNm||"chủ"} sai ${a.lbl||"đi việc"}`;const x=[mine?((e[i]&&e[i][0])||J95OUT_):(a.place||e[i][0]),"errand",a.tgt||null,why];
-    if(!e[i]||e[i][0]!==x[0]||e[i][1]!=="errand"){e[i]=x;ch=true}}}}
+  for(let i=0;i<e.length;i++){const K=b0+i;if(K>=a.t0&&K<a.due){const why=`${mine?"ngươi":a.byNm||"chủ"} sai ${a.lbl||"đi việc"}`;if(mine&&(!a.mpl||a.mpl.b!==b0))a.mpl={b:b0,k:(e[i]&&e[i][0])||J95OUT_};/* round 4: one place for the whole window of this buổi (her slot when it began) — a later slot repaint never makes her jump while away */let x=[mine?a.mpl.k:(a.place||e[i][0]),"errand",a.tgt||null,why];
+    /* NPC senders: her road there / back inside the window (jwalk walkErrRow, review/jagday-walk; n includes the walk, OD 18/11 ~20:00Z) */if(!mine&&typeof walkErrRow==="function")x=walkErrRow(e,b0,a,i,x[0],x);
+    if(!e[i]||e[i][0]!==x[0]||e[i][1]!==x[1]||e[i][3]!==x[3]){e[i]=x;ch=true}}}}
  if(ch)try{const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){ptErr("view",e)}
  return ch}
 /* ---------- wiring: the clock ---------- */
@@ -80746,7 +80839,7 @@ ptReg("scout",a=>{const v=RV(a.a.v);const m=ptPerson(a.a);const nm=m?m.name:"Ng�
 /* ---- 4. Mời đến cung ta (j21): the messenger goes, the answer (and the guest) comes at the due khắc ---- */
 function ptInvPend(id){return ptZ().some(a=>a.kind==="invite"&&!a.back&&a.a&&a.a.v===id)}
 ptReg("invite",a=>{const v=RV(a.a.v);const m=ptPerson(a.a);const nm=m?m.name:"Người được sai";if(!v||!v.alive||v.out||v.confined){log(`${nm} trở về: ${v?v.name:"nàng"} không thể nhận lời lúc này.`);return{ok:null}}
- /* two-way: the guest answers with the SAME 4 answers as every receiver (receiver-choice jrcv rcvInviteGo, guarded) */if(typeof rcvInviteGo==="function"?rcvInviteGo(S,v):roll(a.a.o)){try{S.where[v.id]="home";seeLoc(v,"home");const R=S.roster;if(R&&R.P&&R.P["v"+v.id]&&typeof j95kh==="function"){for(let i=j95kh();i<R.P["v"+v.id].length;i++)R.P["v"+v.id][i]=[S.out?"lc":"home","visit","me","nhận lời mời sang chơi"];if(typeof j95sync==="function")j95sync()}}catch(e){ptErr("inviteLand",e)}
+ /* two-way: the guest answers with the SAME 4 answers as every receiver (receiver-choice jrcv rcvInviteGo, guarded) */if(typeof rcvInviteGo==="function"?rcvInviteGo(S,v):roll(a.a.o)){try{S.where[v.id]="home";seeLoc(v,"home");const R=S.roster;if(R&&R.P&&R.P["v"+v.id]&&typeof j95kh==="function"){for(let i=j95kh();i<R.P["v"+v.id].length;i++)R.P["v"+v.id][i]=[S.out?"lc":"home","visit","me","nhận lời mời sang chơi"];iwBind("v"+v.id,j95kh());if(typeof j95sync==="function")j95sync()}}catch(e){ptErr("inviteLand",e)}
   log(`${v.name} nhận lời, sang cung ngươi.`);return{ok:true,t:`${nm} mời ${v.name} trở về`}}
  relAdd(S,v,BAL.eff.j21.top);log(`${v.name} từ chối lời mời.`);return{ok:false,t:`${nm} mời ${v.name} trở về`}});
 /* ---- 4b. HOST-ABSENT RULE (owner OD L1976, 19/11 ~22:00Z) — every invitation, every direction (law 1):
@@ -80764,13 +80857,29 @@ ptReg("invite",a=>{const v=RV(a.a.v);const m=ptPerson(a.a);const nm=m?m.name:"Ng
 function iwZ(){if(!S)return[];if(!Array.isArray(S.invW))S.invW=[];return S.invW}
 function iwId(p){return p===S?"me":p&&p.id!=null?"v"+p.id:null}
 function iwP(id){if(id==="me")return S;try{return RV(+String(id).slice(1))}catch(e){return null}}
-let iwDest=null;/* while she walks (goTo spends the walk before S.place moves) she is already gone from where she was */
-function iwHere(p,k){if(!p)return false;if(p===S)return(S.out?"lc":iwDest!=null?iwDest:S.place)===k;try{const R=S.roster,i=ptNow()-bid()*ptKH(),e=R&&R.P&&R.P["v"+p.id];if(e&&e[i]&&e[i][0]!=null)return e[i][0]===k&&e[i][1]!=="back"}catch(e){}return !!(S.where&&S.where[p.id]===k)}
+let iwDest=null,iwRoad=0;/* while she walks (goTo spends the walk before S.place moves) she is already gone from where she was */
+/* where SHE stands for this rule (OD L1976 «tôi bấm về nhà là tốn một khắc, khắc thứ tư tôi đã ở nhà»): she leaves a place at the khắc she taps
+   (walking off = no longer there) and is at the new place only once the walk is paid. null = on the road: the moment she taps (iwRoad, before
+   any khắc of the walk passes) and the whole of a walk that runs on into the next buổi (j9 walkSpill, until it lands) */
+function iwSpillOn(){const W=window.__walkSpill;return !!(W&&S&&W.from===S.place&&W.k!==S.place)}
+function iwMe(){if(S.out)return"lc";if(iwRoad)return null;if(iwDest!=null)return iwDest;if(iwSpillOn())return null;return S.place}
+function iwHere(p,k){if(!p)return false;if(p===S)return iwMe()===k;try{const R=S.roster,i=ptNow()-bid()*ptKH(),e=R&&R.P&&R.P["v"+p.id];if(e&&e[i]&&e[i][0]!=null)return e[i][0]===k&&e[i][1]!=="back"}catch(e){}return !!(S.where&&S.where[p.id]===k)}
 /* the guest's odds of staying one more khắc (law 4: every number from BAL; law 7: shown only as a ladder word) */
 function iwStayO(g,h){const W=BAL.invite.wait;let n=0;try{n=tv(W.net,g,0)}catch(e){}return od(W.o+aff(g,h)/W.affD+(rkOf(h)-rkOf(g))*W.rk+n)}
 function iwDraw(w,K){const s=w.id+"|"+K;let x=2166136261;for(let i=0;i<s.length;i++){x^=s.charCodeAt(i);x=Math.imul(x,16777619)>>>0}return x%100}
+/* law 6b (one person, one place): an accepted invitation BINDS the guest's rows of this buổi the way a told text does — jagent agBound (read by
+   every deed placer: agReapply, jagday span / slot / go rows) also answers true for them, so a deed planned earlier no longer puts her back at
+   the deed's place while S.invW / the roster has her at the host's palace (WALK-COST #4: «cx2:fert» re-applied over a waiting guest → seen at
+   Thái y viện). Own list (not J95B.bind: j95b counts its text binds there). */
+const IWB=[];
+function iwBind(id,from,to){try{const R=S.roster,e=R&&R.P&&R.P[id];if(!e)return;const t=to==null?e.length-1:Math.min(to,e.length-1);for(let i=Math.max(0,from);i<=t;i++){const b=id+"|"+i+"|"+R.key;if(IWB.indexOf(b)<0)IWB.push(b)}if(IWB.length>200)IWB.splice(0,IWB.length-200)}catch(e){ptErr("iwBind",e)}}
+/* review walk-cost r4: the bind lasts only while the invitation holds — when the guest leaves, only her walk-back khắc stays bound; the rest of the
+   buổi is hers again (a deed may be planned / re-applied there), never a «stay» row nobody can move */
+function iwUnbind(id,from){try{const R=S.roster;if(!R)return;for(let j=IWB.length-1;j>=0;j--){const x=IWB[j].split("|");if(x[0]===id&&x[2]===String(R.key)&&+x[1]>=from)IWB.splice(j,1)}}catch(e){ptErr("iwUnbind",e)}}
+(function(){if(typeof start==="function"){const st0=start;start=function(){IWB.length=0;return st0.apply(this,arguments)}}/* a new life starts with no binds (as J95B.bind) */
+if(typeof agBound!=="function")return;const f0=agBound;agBound=function(id,kh,key){return f0.apply(this,arguments)||IWB.indexOf(id+"|"+kh+"|"+key)>=0}})();
 /* the guest's rows of this buổi: waiting at the host's place / walking back home */
-function iwRows(g,from,row,rest){try{const R=S.roster,e=R&&R.P&&R.P["v"+g.id];if(!e)return;const i0=Math.max(0,from-bid()*ptKH());for(let i=i0;i<e.length;i++)e[i]=i===i0?row:(rest||row);
+function iwRows(g,from,row,rest){try{const R=S.roster,e=R&&R.P&&R.P["v"+g.id];if(!e)return;const i0=Math.max(0,from-bid()*ptKH());for(let i=i0;i<e.length;i++)e[i]=i===i0?row:(rest||row);if(rest){iwUnbind("v"+g.id,i0);iwBind("v"+g.id,i0,i0)}else iwBind("v"+g.id,i0);
   const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){ptErr("iwRows",e)}}
 /* a co-op friend seat (rival entry coop:true, jcoopworld) is a PLAYER, never rolled as an NPC: on her side of the visit the rule does not run (review FAIL 1) */
 function iwCoop(p){return !!(p&&p!==S&&p.coop)}
@@ -80790,7 +80899,7 @@ function iwTick(){if(iwBusy||!S||S.dead||!Array.isArray(S.invW)||!S.invW.length)
   if(!g||!h||iwCoop(g)||iwCoop(h)||g.alive===false||h.alive===false||g.out||(g!==S&&g.confined)){drop("gone");continue}
   if(w.b!==b){/* the buổi ended and the host never came */if(w.t!=null)iwLeave(w,now,"buoi");drop("buoi");continue}
   if(g===S){/* SHE is the guest: arrival when she stands there; host there = visit; walking off first = leaving */
-   const at=(S.out?"lc":S.place)===w.k;if(w.t==null){if(at){w.t=now;w.last=now}else continue}
+   const at=iwMe()===w.k;if(w.t==null){if(at){w.t=now;w.last=now}else continue}
    if(at&&iwHere(h,w.k)){PT.stat.iwMet=(PT.stat.iwMet||0)+1;drop();continue}if(!at){iwLeave(w,now);drop("walked")}continue}
   /* an NPC guest: one decision per khắc after the arrival khắc, taken AT that khắc */
   /* the last khắc of the buổi is the last decision; the buổi end itself is handled above */const end=Math.min(now,b*ptKH()+ptKH()-1);let done=false;for(let K=w.last+1;K<=end&&!done;K++){w.last=K;
@@ -80801,7 +80910,9 @@ function iwTick(){if(iwBusy||!S||S.dead||!Array.isArray(S.invW)||!S.invW.length)
 (function(){try{
  if(typeof rcvInvAt==="function"){const a0=rcvInvAt;rcvInvAt=function(h,g){const r=a0.apply(this,arguments);try{iwAdd(h,g)}catch(e){ptErr("iwAdd",e)}return r};window.rcvInvAt=rcvInvAt}
  const l1=ptLand;ptLand=function(a){const d0=PT.iwDue;PT.iwDue=a&&a.due;try{return l1.apply(this,arguments)}finally{PT.iwDue=d0}};
- const sp1=spend;spend=function(){const r=sp1.apply(this,arguments);iwTick();return r};
+ const sp1=spend;spend=function(){/* the first khắc of her walk: she has left the place she tapped away from AT the tap khắc (a guest of hers
+   leaves with the loss then; a host coming back during her walk no longer meets her there) — before any khắc passes */
+  if((iwDest!=null&&iwDest!==S.place)||iwSpillOn()){iwRoad=1;try{iwTick()}finally{iwRoad=0}}const r=sp1.apply(this,arguments);iwTick();return r};
  const g1=goTo;goTo=function(k){const d0=iwDest;iwDest=k;let r;try{r=g1.apply(this,arguments)}finally{iwDest=d0}iwTick();return r};
  if(typeof nextBuoi==="function"){const nb1=nextBuoi;nextBuoi=function(){iwTick();const old=iwZ().slice();const r=nb1.apply(this,arguments);/* a guest placed while the new buổi was drawn (j21 placeWhere) belongs to the new buổi */
   try{const now=ptNow();for(const w of iwZ())if(!old.includes(w)){w.b=bid();w.last=now;if(w.t!=null)w.t=now}}catch(e){ptErr("iw buoi",e)}iwTick();return r}}
@@ -85022,7 +85133,7 @@ const ACT_PLACE={"Thỉnh an Thái hậu":"tn","Nhờ Thái hậu nói giúp":"t
  /* r2 (MAIN ROOT-55 20:08Z (b)): places not on Dư đồ → the nearest EXISTING map place: the ancestral incense hall → Đức Thọ cung (incense,
     the Thái hậu's prayers); the court banquet → Cần Chính điện (the festival banquets already sit there, jact2 AS_FPLACE newyear/giaothua) */
  "Cầu tự ở Phụng Tiên điện":"tn","Múa trong yến tiệc":"thu",
- /* r2 (a): acts done in her own palace (her bed, mirror, books, her own maids) bring her home; goTo("home") is the free walk (j2), so one cost */
+ /* r2 (a): acts done in her own palace (her bed, mirror, books, her own maids) bring her home; the trip home is free here (window.__walkFree, j2) because the act price holds it (OD L1907), so one cost */
  "Nghỉ ngơi một lát":"home","Điểm trang":"home","Đọc sách giải khuây":"home","Dưỡng nhan":"home","Giả bệnh":"home","Trò chuyện với cung nữ":"home",
  "Đọc binh thư, sử sách":"home","Nghỉ ngơi dưỡng sức":"home","Nghĩ cách trốn khỏi cung":"home","Dâng biểu xin xuất gia":"home",
  /* r3 — MAIN ROOT-56 20:50Z gap rulings */
@@ -85052,7 +85163,7 @@ function stayRoll(k,bk0){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S
  if(typeof accessOf!=="function"||accessOf(S,k).ok||typeof accSneakO!=="function")return;S.stayRoll=bk+"|"+k;
  const n=nm(k);if(roll(accSneakO(k))){log(`Ở lại ${n} sau giờ đóng cửa: không ai hay.`);return}
  apply({danh:-BAL.sneak.danh});log(`<span class="r">Ở lại ${n} sau giờ đóng cửa, bị thị vệ bắt gặp: Danh -${BAL.sneak.danh}.</span>`);punish(S,`ở lại ${n} sau giờ đóng cửa`,1);
- window.__actPend=null;try{goTo("home")}catch(e){}
+ window.__actPend=null;window.__walkFree=1;try{goTo("home")}catch(e){}finally{window.__walkFree=0}
  Q.push({t:"Bị bắt",h:`<p>Thị vệ ${n} bắt gặp ngươi còn nán lại sau giờ đóng cửa, giải về tẩm cung. Chuyện truyền khắp lục cung.</p><p class="r">Danh -${BAL.sneak.danh} ·${S.confined?` cấm túc ${S.confined} tháng`:" bị phạt"}</p>`});
  try{showModal()}catch(e){}}catch(e){console.error("stayRoll",e)}}
 window.stayRoll=stayRoll;
@@ -87092,6 +87203,78 @@ window.nmBirth=nmBirth;window.nmOrdApply=nmOrdApply;window.NM_ORD=NM_ORD;window.
  if(typeof render==="function"){const r0=render;render=function(){try{const W=window.COOPW;if(W&&W.on&&S&&S.nmOrd&&!nmOwner()){const L=S.nmOrd[nmPidMe()];if(Array.isArray(L)&&L.length){W.inFC=(W.inFC||0)+1;try{nmOrdApply("relay")}finally{W.inFC--}}}}catch(e){}return r0.apply(this,arguments)}}
  if(typeof monthTick==="function"){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{nmFix("month")}catch(e){}return r}}
 })();
+/* ================= jwalk — WALK COST, ONE RULE FOR EVERYONE (review/walk-cost, ORDER MAIN ROOT-76 20/11; owner OD 19/11 ~22:00Z
+   «tôi đang ở Ngự Hoa Viên khắc ba nè, tôi bấm về nhà là tốn một khắc, tức là khắc thứ tư là tôi đã ở nhà rồi»; law 1 two-way, law 4 one core).
+   Her: j2 goTo("home") / j42 srvGoTo home pay travel(place,home) like every other walk (j9 travel, BAL.walk.near / far), spill included (j9).
+   NPCs (this file): a person in the record (j95 R.P rows, one per khắc) who changes place walks the same road: a walk of t khắc (travel) needs
+   t − 1 khắc «on the way» rows before she stands at the new place — the jagday convention [dest,"go",…] (j95s prints «đang đi đến …»).
+   The pass runs last in the j95fixHouse chain (every khắc, rows from the current khắc on); it leaves earlier when the khắc before is free,
+   otherwise arrives later; kept rows (deeds, meetings, forced lists: j95sKeep) and the current khắc are never rewritten.
+   BAL.walk.npc = 0 turns the NPC part off (tests / rollback). */
+/* the walker of a record row (her penalty never lengthens an NPC's road; theirs does — law 1) */
+function walkWho(id){try{const c=String(id)[0];if(c==="v")return (typeof RV==="function"&&RV(+String(id).slice(1)))||null;if(c==="s"&&typeof j95sv==="function")return j95sv(id)||null}catch(e){}return null}
+/* ERRAND LEDGER ROADS (review/jagday-walk r1, owner OD 18/11 ~20:00Z: an errand's n khắc INCLUDE the walk; ~20:05Z: seen walking off and back):
+   inside the away window [t0, due) of a person sent on an errand, the first travel(from, place)−1 khắc are her road there and the last
+   travel(place, from)−1 khắc her road back («go» rows with a why = busy, j95sKeep); the khắc between stay "errand" at the place. due and the
+   cost never change: when n is shorter than both roads the window is split by the roads (no khắc added). from = where she stood before t0
+   (kept on the task: a.wfr). Walker = the person sent (j9 travel per walker). BAL.walk.npc = 0 → the old rows. */
+function walkErrRow(e,b0,a,i,place,x){if(!walkNpcOn()||!a||!x||!place)return x;try{const OUT=typeof J95OUT_!=="undefined"?J95OUT_:"__out";const real=k=>!!k&&typeof k==="string"&&k!==OUT&&k!=="ngoai";
+  if(a.wfr==null){const q=a.t0-b0-1;const y=q>=0&&q<e.length?e[q]:null;a.wfr=y&&real(y[0])?y[0]:""}
+  const fr=a.wfr;if(!real(place))return x;const D=a.due-b0,y=D>=0&&D<e.length?e[D]:null;const bk=y&&real(y[0])&&y[1]!=="errand"?y[0]:fr;/* back = where her day goes on at due (this buổi), else where she came from */
+  const w=walkWho(a.who),n=Math.max(0,a.due-a.t0);let tO=0,tB=0;try{if(real(fr)&&fr!==place)tO=travel(fr,place,w);if(real(bk)&&bk!==place)tB=travel(place,bk,w)}catch(z){}if(!tO&&!tB)return x;const gO=Math.min(Math.max(0,tO-1),n),gB=Math.min(Math.max(0,tB-1),n-gO);
+  const K=b0+i,why=x[3]||"đi việc";if(K-a.t0<gO)return[place,"go",x[2],why+" · đang trên đường"];if(K>=a.due-gB)return[bk,"go",x[2],why+" · đang trên đường về"];return x}catch(z){return x}}
+/* MEETING ROADS (final gate of review/jagday-walk, law 11 whole group): a secret meeting / tryst (j95secApply) is written straight into the
+   record at its khắc; jwalk never rewrites that kept row and never the khắc 0 of a fresh record, so she was at the meeting spot with no road.
+   The khắc right before it become her road (same rule as walkNpcPass «leave earlier»: free, not kept, not yet shown), travel per walker. */
+function walkLeadIn(R,id,i0,place,why,tgt){if(!walkNpcOn()||!R||!R.P||!(i0>0))return 0;const row=R.P[id];if(!Array.isArray(row))return 0;const OUT=typeof J95OUT_!=="undefined"?J95OUT_:"__out";
+ const real=k=>!!k&&typeof k==="string"&&k!==OUT&&k!=="ngoai";if(!real(place))return 0;let q=i0-1,g=0;while(q>=0&&row[q]&&row[q][0]===place&&row[q][1]==="go"){g++;q--}
+ if(q<0||!row[q]||!real(row[q][0])||row[q][0]===place)return 0;let t=0;try{t=travel(row[q][0],place,walkWho(id))}catch(e){t=0}let need=t-1-g,n=0;
+ let k0=-1;try{if(JWALK.seen&&JWALK.seen.key===R.key&&typeof j95kh==="function")k0=j95kh()}catch(e){}/* a record already shown: never the khắc now or before */
+ /* round 4: a record not shown yet (k0 −1: the meeting is applied as the buổi's record is drawn) is all plan — only a deed / meeting / binding
+    (agWalkHeld) holds a khắc there, a planned «go» row of her day yields to the meeting's road */
+ const kp=q=>k0<0&&typeof agWalkHeld==="function"?agWalkHeld(R,id,q):walkKeepRow(row[q],id,q,R);
+ while(need>0&&q>k0&&q>=0&&(!kp(q)||/^ag_/.test(row[q][1]||"")&&typeof agWalkCut==="function"&&agWalkCut(R,id,q)&&!kp(q))){row[q]=[place,"go",tgt==null?null:tgt,walkRoadWhy(why)];need--;n++;JWALK.stat.lead=(JWALK.stat.lead||0)+1;q--}
+ if(need>0)JWALK.stat.miss++;return n}
+function walkNpcOn(){try{return BAL.walk.npc!==0}catch(e){return false}}
+const JWALK={stat:{fix:0,late:0,miss:0,now:0},errs:[],seen:null};
+/* review/jagday-walk r2: a row turned into «on the way» keeps its own why and target (a guest's leave reason, whom a follower follows) */
+/* round 4: a road row (jwalk / walkLeadIn / walkErrRow: «go» + the «đang trên đường» why) — a repaint of placeholder «go» rows never takes it */
+function walkIsRoad(x){return !!x&&x[1]==="go"&&/đang trên đường/.test(x[3]||"")}
+function walkRoadWhy(w,pre){const s=w&&!/^\s*$/.test(w)?String(w):(pre||"");if(/đang trên đường/.test(s))return s;return s?s+" · đang trên đường":"đang trên đường"}
+/* r2 (final gate): a jptime task skips only the khắc INSIDE its away window [t0, due) — once due has come her day's next move walks like any other
+   (the task stays open until it settles, so ptAwayOf alone also held the khắc after due: a servant sent on to her own errand jumped there) */
+function walkTimed(id,x,kh){if(x&&(x[1]==="visit"||x[1]==="back"))return true;try{const a=typeof ptAwayOf==="function"?ptAwayOf(id):null;if(!a)return false;if(kh==null||typeof bid!=="function"||typeof ptKH!=="function")return true;const K=bid()*ptKH()+kh;return K>=a.t0&&K<a.due}catch(e){return false}}
+const walkSig=x=>x?x[0]+"|"+x[1]+"|"+(x[2]||""):"";
+function walkKeepRow(x,id,q,R){if(!x)return true;const a=x[1]||"";
+ /* review/jagday-walk: an «ag_» row is kept only while a deed / binding really holds it (jagday agWalkHeld); the day plan's label alone is free */
+ if(/^ag_/.test(a)&&R&&id!=null&&typeof agWalkHeld==="function"){try{return agWalkHeld(R,id,q)}catch(e){return true}}
+ try{if(typeof j95sKeep==="function"&&j95sKeep(x))return true}catch(e){}if(/^ag_/.test(a))return true;
+ /* a card-bound row (J95B: a card said she was there, review/jagday-walk) is never rewritten either */try{if(R&&id!=null&&typeof agBound==="function"&&agBound(id,q,R.key))return true}catch(e){}return false}
+function walkNpcPass(R,kh,fresh,first){if(!walkNpcOn()||!R||!R.P)return 0;let n=0;const K=(typeof J95!=="undefined"&&J95.KH)||4,OUT=typeof J95OUT_!=="undefined"?J95OUT_:"__out";
+ const real=k=>k&&k!==OUT&&typeof k==="string";
+ /* review/jagday-walk: a move decided IN the khắc now (a servant sent on an errand, joining her mistress's outing: the j95s day writes the
+    current khắc) starts its walk now — the row of the khắc now is new since the last pass (JWALK.seen) and becomes «on the way» like a later
+    arrival; a row the record already showed at this khắc is never rewritten. */
+ const SN=JWALK.seen&&JWALK.seen.key===R.key&&JWALK.seen.kh<=kh?JWALK.seen.P:null;
+ for(const id in R.P){if(id==="me"||/^mm:me$/.test(id))continue;const row=R.P[id];if(!Array.isArray(row)||row.length<K)continue;
+  /* r2: never a row the timed ledger wrote — an invite guest arriving («visit») / leaving («back»), a person on a jptime task: their khắc
+     already hold the walk (the task's due = after the road, jptime) */
+  const now=kh>=1&&kh<K&&(fresh||SN&&SN[id]&&SN[id][kh]!==walkSig(row[kh]))&&!walkTimed(id,row[kh],kh);/* round 4: the first pass of a khắc (fresh) — the khắc now is not shown yet */
+  const lo=now&&fresh?kh-1:first?-1:kh;/* round 4: the record's very first pass (nothing shown yet) may make khắc 0 her road too (a meeting / deed at khắc 1) *//* round 4: fresh → she may leave in the khắc now (agWalkGuard counts it as road the same way) */
+  for(let j=Math.max(1,now?kh:kh+1);j<K;j++){const x=row[j];if(!x||!real(x[0])||x[1]==="go")continue;if(x[1]==="follow"&&x[2]==="me")continue;
+   let q=j-1,g=0;while(q>=0&&row[q]&&row[q][0]===x[0]&&row[q][1]==="go"){g++;q--}if(q<0||!row[q]||!real(row[q][0])||row[q][0]===x[0])continue;
+   let t=0;try{t=travel(row[q][0],x[0],walkWho(id))}catch(e){t=0}let need=t-1-g;if(need<=0)continue;
+   /* leave earlier: the free khắc right before the walk (never the current khắc, never a kept row) */
+   while(need>0&&q>lo&&!walkKeepRow(row[q],id,q,R)){row[q]=[x[0],"go",x[2]==null?null:x[2],walkRoadWhy(x[3])];need--;n++;JWALK.stat.fix++;q--}
+   /* else arrive later: the arrival khắc (and on) become «on the way», when free */
+   let a=j;while(need>0&&a<K&&!walkKeepRow(row[a],id,a,R)&&row[a][0]===x[0]){const y=row[a];row[a]=[x[0],"go",y[2]==null?null:y[2],walkRoadWhy(y[3],y[1]==="follow"?"đi theo hầu":"")];need--;n++;JWALK.stat[a===kh?"now":"late"]++;a++}/* a follower keeps whom she follows (j95s retinue) */
+   if(need>0)JWALK.stat.miss++;}}
+ {const P={};for(const id in R.P){const row=R.P[id];if(Array.isArray(row))P[id]=row.map(walkSig)}JWALK.seen={key:R.key,kh,P}}
+ return n}
+(function(){if(typeof j95fixHouse!=="function")return;const f0=j95fixHouse;j95fixHouse=function(R,kh){const k0=R&&R.kh==null?0:kh,fresh=!!R&&(R.kh==null||R.kh<kh),first=!!R&&R.kh==null;let n=f0.apply(this,arguments)||0;
+ /* round 4 (review/jagday-walk-rv): the deed-road guard runs here, after every row writer of the chain (j95sPass retinue / j95sGuard), then the road pass */
+ try{if(typeof agWalkGuard==="function")n+=agWalkGuard(R,k0,fresh)||0}catch(e){if(JWALK.errs.length<20)JWALK.errs.push("guard: "+(e&&e.message||String(e)))}
+ try{n+=walkNpcPass(R,k0,fresh,first)}catch(e){if(JWALK.errs.length<20)JWALK.errs.push(e&&e.message||String(e))}return n}})();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -88672,7 +88855,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c55a4bcb8bd0";window.CTM_BUILD=BUILD;
+const BUILD="a5bc8649ed56";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
