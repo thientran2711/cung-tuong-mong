@@ -2208,3 +2208,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (18:46Z) podium-wire-r1 FAILED at LRRY (real conflict jentry.js). Opened re-lander M99 session_01Rc5AsJzz5VENRwKX6fKout (opus) → review/podium-wire-r2. LRRY queue now: ge-phutang-land3 4ee581db only.
 - (18:50Z) rv MSxp PASS kit-mark-fix r6 → review/kit-mark-fix-rv7 8c480114 LAND READY → relayed to LRRY (after ge-phutang-land3). MSxp next: kitRelRows one-word, KP09 body-fit.
 - (18:52Z) KIT KEEPER #6 confirmed; KP09 body-fit SSK review/kit-body-fit f6b01506 → rv MSxp. KIT KEEPER #5 Jexz ARCHIVED. C art order (fx-hair-*/fx-cloth-* + body-fit.json) goes with J-art batch to C.
+- (18:50Z) LAND CHAIN 2 (reports to MAIN 99): LANDED ge-phutang-land3 b7041e67. Queued kit-mark-fix-rv7 8c480114.
