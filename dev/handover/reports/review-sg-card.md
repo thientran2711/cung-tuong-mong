@@ -50,3 +50,38 @@ Merged with LIVE: review/sg-card-rv @ 7786935c = 03efb828 + origin/main e391b85f
 
 Shots: scratch only (/home/user/wt/sgrv-scratch), nothing in git, no CDN folder made.
 VERDICT: FAIL — items 1–3 to worker session_01964izDpmefTHJeFavzFYEQ; re-review on the fix (scan + quickcheck + coop-e2e + Fold/iPad shots).
+
+# review-sg-card — round 3: PASS (sg-card + kit-opt-sg, one land)
+
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims SG-CARD r3 session_01964izEfJv1yRsyJaCGF1fH | main 0 | review/* review/sg-card, review/kit-opt-sg (merged in, joptsg dropped) | archive 0
+Reviewed: review/sg-card @ e73cdf8f (r3). LIVE had moved to 419079d7 → merged it on review/sg-card-rv = **625b7601** (conflict j97.js:280:
+kept LIVE's kitEndNext("rare") + the branch's sgStat log line; index.html/sw.js rebuilt). Ancestor of origin/main 419079d7: yes.
+
+Round-1 fix list:
+1. Ranges: both ends drawn as applied — kmEmpLine nồng nàn «Sủng +3 đến +5» (real 3..5), lạnh lùng «+1 đến +3» (real 1..3); a «+a..+b» range card
+   nồng nàn «+3..+5» (real 3..5). sgTxt range form + sgRange; a second pass changes nothing. ✓
+2. Result / log: empTeaCard nồng nàn log «Sủng +3» = card +3 = applied +3; j8:343 «Thị tẩm. ${sgStat(g)}». No her-Sủng log/txt literal left raw
+   in dev/build (only measured «b → S.sung» / level texts remain, correct). Scan DIR pass (printed vs applied per trait) all equal. ✓
+3. j7:32 guardrumour: BAL.eff.j7.sungGuardOk / danhGuardFail on the card and in apply. ✓
+kit-opt-sg merge: joptsg.js gone (not in assemble.py / index.html, optSgTxt undefined); ONE rewrite = j1 sgTxt. Probe: dilLine «Sủng +4 / -8» →
++5 / −10 once; kitParse(dilLine(c)) again → still +5 / −10; sgTxt twice = once; «Lý Tần Sủng +4 · nàng Sủng -3» raw. No double path. ✓
+Extra (r3): typed card Sủng → BAL (j34 sabotage, j25, j30, j53, j8/j17 frame); rule texts as BAL tokens (sgRule; thơ monthly applied raw →
+sgFix = marked, never rescaled ✓). rules-one-source.js:58 edit checked: still reads nightGain from BAL, now expects sg(·) as nightFx applies
+(identity with no trait) — not weakened ✓.
+
+Gates on 625b7601:
+- sg-card-scan: PASS — SG family 0, unit all pass, DIR (result/log) all equal, static CARD 57 · VALUE 24 · NPC 7 · OK 23 (TYPED/RANGE 0);
+  105/254 dialogs drawn; undrawn-with-Sủng: coldvisit, rtBm, rtKid, tsbPetHunt, vuoan, kcco (all re-checked by hand in r1: apply/NPC raw).
+- NBSP marker: 756 option renders (none / nồng nàn / lạnh lùng), number-blind: rows, labels, hint model and hint signs identical (only trait odds /
+  notes differ). Saves/logs: no marker in r1 bot play; logs now carry it only through sgStat (invisible, valid char).
+- quickcheck: PASS 572 s (render 266/312, tab 484/591, buổi 1597/1825 ms; old save ok; core gates PASS).
+- coop-e2e: 94/94. Co-op: one rule over S.emp.traits of the one world, nothing new synced.
+- LIVE-revert audit origin/main..625b7601: 54 files, every hunk a topic line (no LIVE line lost).
+- Shots (scratch only): iPad 1180x820@2 Hành sự «Giả bệnh» draws «Sủng +4» (BAL 3, nồng nàn) cleanly, no visible marker; Fold 755x1000@2 home,
+  0 page errors / 0 overflow on both; worker's r3 shots (Vu oan −8→−10, Ly gián −4→−5, hầu cờ +3 đến +5, NPC raw) consistent with my probes.
+Laws: 4 one core (one rewrite, BAL numbers) ✓ · 11 whole family (cards + ranges + results/logs + rule texts, scan + table) ✓ · 1 two-way (NPC raw
+both ways) ✓ · 7 wording ✓ · 9/12 no new UI part, two devices ✓.
+For the foreman (not blocking, unchanged from r1): «+a..+b» code-style range wording on the tsSummon card (VANPHONG) if still drawn with «..».
+
+VERDICT r3: PASS → LAND READY review/sg-card-rv 625b7601b2dbc0d3b0858627f0c0eb972a51466e (merged on LIVE 419079d7), coop-e2e PASS
+(one land for sg-card + kit-opt-sg).
