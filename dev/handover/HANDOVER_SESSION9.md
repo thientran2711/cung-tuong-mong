@@ -2000,3 +2000,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (11:26Z) Stale-status pings from Ji75/KzCE/J4dp answered (all PASS, in 89 chain; idle → archive after land). Keeper #2 confirmed: kit-mark-fix r3 re-merge now; then kit-ef-unit 9fd26c14 («Bạc -94» no split), kit-focus r5 (Fold 2-cost sub-line clip).
 - (11:28Z) rv MSxp PASS kit-info-tap → LAND READY c5bbde7e (review/kit-info-tap-rv) → appended to 89 chain. LIVE a4ee93d7 (kit-opt-kem landed). rv MSxp waits keeper's kit-mark-fix r3.
 - (11:29Z) rv MSxp ack: all its LAND READYs (kit-focus r4, kit-info-tap, kit-chip-pause, kit-badge r2) confirmed in 89 chain; waits kit-mark-fix r3.
+- (11:30Z) 89: LANDED kit-opt-kem a4ee93d7, kit-badge r2 ba9b6243. FAIL mg-intro-2 847a5934 (j82.js vs pm-c) → Ji75 re-merge → review/mg-intro-2-land. Chain landq22 from maid-acts-a (+kit-info-tap last).
