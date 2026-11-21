@@ -21,7 +21,7 @@ const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const DEV={fold:[755,1000],ipad:[1180,820]};
 const DCL={waitUntil:'domcontentloaded'};
-async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:1,hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
+async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:+(process.env.HH_DSF||1),hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
  await serve(ctx);
  await ctx.addInitScript(()=>{document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='.kcf,#kroul,#kroulw,.kroul{display:none!important}';document.head.appendChild(s)})});
  await ctx.addInitScript(()=>{window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const on=typeof c.on==='boolean'?c.on:!!(s.playing||(s.status&&s.status!=='off'));
