@@ -335,7 +335,7 @@ rdDef("dtq_vu",6,{t:"Kẻ đưa thư",w:"maid",sj:"người lính trạm đã ma
   {n:"Báo Hoàng hậu: thái giám xuất cung quá nhiều",need:["hh"],wx:"{v} bị giữ chân",lx:"Hoàng hậu thấy ngươi soi mói",go:(A,ok,G)=>{if(ok)rdOan(A,"v",G[0])},rt:"Hoàng hậu cấm thái giám ấy xuất cung một tháng.",rf:"Hoàng hậu nói: “Việc cung nào cung ấy lo.”"},
   {n:"Mặc kệ",wx:"không lộ ý",lx:"bên kia đi trước một bước",rt:"Ngươi giả như không biết."}]},
  t1:{h:"Chùa đổ phía tây",w:"maid",t:"Lính trạm trốn trong một ngôi chùa đổ phía tây thành. Hắn run rẩy: “Ai bắt tiểu nhân về, tiểu nhân chết chắc.”",o:[
-  {n:"Hứa bảo toàn cả nhà hắn",f:"tin",wx:"hắn chịu theo ngươi",lx:"hắn không tin, bỏ chạy lần nữa",rt:"Hắn quỳ xuống: “Nô tài theo nương nương.”",rf:"Hắn trèo tường sau chùa, chạy mất."},
+  {n:"Hứa bảo toàn cả nhà hắn",f:"tin",wx:"hắn chịu theo ngươi",lx:"hắn không tin, bỏ chạy lần nữa",rt:"Hắn quỳ xuống: “Tiểu nhân xin theo {N}.”",rf:"Hắn trèo tường sau chùa, chạy mất."},
   {n:"Nhờ gia đinh nhà canh chùa, chờ",wx:"hắn không thoát được",lx:"tốn bạc nuôi người, bên kia có thể ra tay trước",rt:"Hai gia đinh nhà ngươi giả làm khất cái ngồi trước cổng chùa."},
   {n:"Ép hắn viết lời khai ngay",f:"khai",wx:"có lời khai trên giấy",lx:"lời khai bị ép, dễ bị bác",rt:"Hắn viết: nhận thư từ ký thất, giao cho một thái giám ở cửa hông hoàng thành.",rf:"Hắn viết rồi xé, khóc không thành tiếng."}]},
  x1:{h:"Đưa hắn về",w:"maid",t:"Bên kia đã biết chỗ chùa đổ. Đêm nay phải đưa lính trạm đi, hoặc mất hắn.",o:[
@@ -804,7 +804,7 @@ rdDef("dtq_huynh",5,{t:"Tiền chuộc",w:"dad",sj:"tiền chuộc người nhà
   {n:"Gửi hết bạc riêng về nhà",wx:"nhà có một phần tiền chuộc",lx:"kho riêng của ngươi trống trơn",rt:"Bạc ra khỏi cung trong hộp đựng kinh."},
   {n:"Xin Hoàng thượng cho chuộc công khai",f:"permit",wx:"việc chuộc có chiếu, không ai bắt lỗi",lx:"phe đánh thấy ngươi xin vua làm nhục nước",rt:"Hoàng thượng phê một chữ “Chuẩn”.",rf:"Hoàng thượng gạt tấu đi."},
   {n:"Hồi thư: chờ triều đình",wx:"nhà không làm liều",lx:"thời gian trôi, sông sắp đông, ngươi lo nghĩ hao sức",rt:"Cha không hồi âm nữa."}]},
- c1:{h:"Tổng quản cho vay",w:"eun",t:"{eun} khẽ nói: Nội vụ phủ có một khoản bạc chưa vào sổ, có thể cho mượn. Lãi thì tính sau, “nương nương nhớ ơn là được”.",o:[
+ c1:{h:"Tổng quản cho vay",w:"eun",t:"{eun} khẽ nói: Nội vụ phủ có một khoản bạc chưa vào sổ, có thể cho mượn. Lãi thì tính sau, “{N} nhớ ơn là được”.",o:[
   {n:"Mượn bạc của {eun}",f:"no",wx:"có bạc ngay để lo việc chuộc",lx:"hết hồi này {eun} đòi lại cả vốn lẫn lãi",rt:"{eun} đưa bạc trong đêm, không có giấy: “Cuối mùa nô tài xin lại, kèm chút lãi.”"},
   {n:"Gửi trang sức nhờ {eun} bán",wx:"có bạc mà không mang nợ",lx:"{eun} ăn bớt, cung nhân đồn ngươi bán đồ ngự ban",rt:"Trâm ngọc thành bạc trong ba ngày.",rf:"{eun} trả về ít hơn một nửa giá."},
   {n:"Từ chối, nhắc hắn về sổ sách",wx:"{eun} biết ngươi nắm thóp hắn",lx:"{eun} oán, đường Nội vụ phủ khó đi",rt:"{eun} cười gượng, lui ra.",rf:"{eun} cười: “Sổ nào? Nô tài không biết.”"}]},
@@ -832,7 +832,7 @@ rdDef("dtq_huynh",6,{t:"Sứ giả bên giặc",w:"man",sj:"điều kiện riên
  g:"Sứ giặc vào kinh lần nữa, mang theo một tờ giấy có ấn của huynh trưởng: thư xin hàng, huynh bị ép ký dưới lưỡi đao. Hắn muốn nói chuyện riêng với ngươi.",
  p:[["s1","s2"],["c1","c2","c3"],["t1"],["x1"]],
  B:{s1:{h:"Giặc thả một nửa",w:"man",if:RDW(1),t:"Bạc đã qua ải, giặc thả năm mươi người. Nửa còn lại, sứ giặc nói, “còn tùy một chuyện riêng”. {man}, người được giao tiếp sứ, chuyển lời ấy đến cung ngươi.",o:[
-  {n:"Nhờ {man} dò xem chuyện riêng là gì",f:"know",wx:"biết trước giặc muốn gì",lx:"{man} nhận bạc, nói nửa vời",rt:"{man} thì thầm: sứ giặc giữ một tờ hàng thư có ấn của huynh.",rf:"{man} chỉ nói: “Hắn muốn gặp nương nương.”"},
+  {n:"Nhờ {man} dò xem chuyện riêng là gì",f:"know",wx:"biết trước giặc muốn gì",lx:"{man} nhận bạc, nói nửa vời",rt:"{man} thì thầm: sứ giặc giữ một tờ hàng thư có ấn của huynh.",rf:"{man} chỉ nói: “Hắn muốn gặp {N}.”"},
   {n:"Báo ngay cho Hoàng thượng",f:"open",wx:"vua biết ngươi không giấu",lx:"vua thêm một mối lo về nhà ngươi",rt:"Hoàng thượng gật: “Nàng làm đúng.”",rf:"Hoàng thượng nói: “Lại chuyện nhà nàng.”"},
   {n:"Đón năm mươi người về trước",wx:"năm mươi gia đình mang ơn nhà ngươi",lx:"chậm một bước với sứ giặc",rt:"Năm mươi lính về kinh, lạy trước cổng phủ."}]},
  s2:{h:"Sứ giặc tự tìm đến",w:"man",if:RDW(0),t:"Bạc kẹt ở ải, nhưng sứ giặc vẫn vào kinh. Qua {man}, hắn gửi đến cung ngươi một hộp trầm hương, dưới đáy có bản chép một tờ hàng thư mang ấn của huynh.",o:[
