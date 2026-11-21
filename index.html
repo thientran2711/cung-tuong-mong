@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"470f0519+","t":"2026-11-21T05:15Z","c":"coop-e2e fixture (WIP): end the Luân hồi roulette and the flip scene like a player instead of hiding them (jnf choice waits for the scene);…","b":"415db2fc268b","h":[{"s":"0f9d0f77+","t":"2026-11-21T02:52Z","c":"Công chúa ngoại bang: thêm các đường Phù Tang"},{"s":"0b2bbd82+","t":"2026-11-21T03:25Z","c":"Chí tôn: tên «Hoàng thượng» giữa, niên hiệu dòng dưới; Sở trường · Trọng · Dạo này một cột"},{"s":"8da94cef+","t":"2026-11-21T03:27Z","c":"Mini-game: luật gọn 5 giây, bỏ chữ thừa"},{"s":"0266713d+","t":"2026-11-21T03:45Z","c":"Khung người: cột trái hết dải trống, chữ đủ to"},{"s":"181f35de+","t":"2026-11-21T03:25Z","c":"Ô quan hệ lẻ trải hết hàng"},{"s":"087794b3+","t":"2026-11-21T03:48Z","c":"Lịch tháng kiểu lịch điện thoại: ‹ tháng ›, ô ngày vuông, chạm ngày xem việc"},{"s":"8aba426a+","t":"2026-11-21T03:43Z","c":"Không bao giờ hai khung chồng lên nhau (khung «Kiếp này» đóng khung cũ)"},{"s":"607a6b12+","t":"2026-11-21T03:22Z","c":"Tâm trạng: khung nào cũng có tranh nguyên do + ấn cảm xúc ở góc"},{"s":"878eba18+","t":"2026-11-21T03:32Z","c":"Menu ☰: mọi bảng (Chọn sổ, Sổ luân hồi…) mở trong khung rộng chuẩn"},{"s":"410c4f44+","t":"2026-11-21T03:07Z","c":"kit-tap-word: kitTapWord / kitTraitWords (KIT §73.2), sample, test"}]};
+window.CTM_BI={"s":"370b72b4","t":"2026-11-21T07:18Z","c":"coop-night fixture: take a reward box like a player (tap it open, then «Nhận»)","b":"deb620a4b6fd","h":[{"s":"5ebfff2f+","t":"2026-11-21T05:49Z","c":"hoangthuong-gold FAIL fix: bright imperial yellow ONLY for Hoang thuong (Thai hau unchanged, KIT 33.5); scan checks both"},{"s":"38e0fd93+","t":"2026-11-21T04:21Z","c":"Dấu cảm xúc ở góc trên-phải tranh sự kiện, hiện ngay"},{"s":"31114358+","t":"2026-11-21T03:20Z","c":"Đồ mặc: các ô mặc đồ (chơi chung khớp hai bên)"},{"s":"6fb2f34a+","t":"2026-11-21T03:59Z","c":"Bỏ dòng «Ghi chú» lộ ra; ghi chú nằm sau dấu «!»"},{"s":"8d4f9919+","t":"2026-11-21T04:05Z","c":"Mini-game iPad: cột nền bên trái gọn (chờ tranh nền mới)"},{"s":"ee8847b0+","t":"2026-11-21T04:13Z","c":"Tab trống: thẻ tranh «Ta chưa có…»; khung không cuộn khi đủ chỗ"},{"s":"0f9d0f77+","t":"2026-11-21T02:52Z","c":"Công chúa ngoại bang: thêm các đường Phù Tang"},{"s":"0b2bbd82+","t":"2026-11-21T03:25Z","c":"Chí tôn: tên «Hoàng thượng» giữa, niên hiệu dòng dưới; Sở trường · Trọng · Dạo này một cột"},{"s":"8da94cef+","t":"2026-11-21T03:27Z","c":"Mini-game: luật gọn 5 giây, bỏ chữ thừa"},{"s":"0266713d+","t":"2026-11-21T03:45Z","c":"Khung người: cột trái hết dải trống, chữ đủ to"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -61837,7 +61837,7 @@ function resHTML(o,d){const tp=o.turned?byId(o.turned):null,fp=o.pick?byId(o.pic
 let inFlip=false,stoleFrom=null;(window.THIN_REG=window.THIN_REG||[]).push(["inFlip",()=>inFlip,v=>{inFlip=v}],["stoleFrom",()=>stoleFrom,v=>{stoleFrom=v}]);/* per-player state for the co-op host (jcoopthin TH.reg) */
 /* life token + the scene on screen: a new life / loaded slot / title (j93 kmReset) voids every waiting go() and closes the scene (review/flip-newlife) */
 let life=0,cur=null;
-try{if(typeof lifeStore==="function")lifeStore("flip scene",()=>{life++;CFN=0;try{cur&&cur.close&&cur.close()}catch(e){}cur=null})}catch(e){}
+try{if(typeof lifeStore==="function")lifeStore("flip scene",()=>{life++;CFN=0;JOBS.clear();try{cur&&cur.close&&cur.close()}catch(e){}cur=null})}catch(e){}
 if(typeof stealNight==="function"){const s0=stealNight;stealNight=function(v,t){if(inFlip&&stoleFrom==null&&t)stoleFrom=t===S?"me":t.id;return s0.apply(this,arguments)}}
 if(typeof kitFlipTablet==="function"){const a0=kitFlipTablet;kitFlipTablet=function(){if(inFlip)return;return a0.apply(this,arguments)}}
 if(typeof kitFlipNote==="function"){const b0=kitFlipNote;kitFlipNote=function(){if(inFlip)return;return b0.apply(this,arguments)};window.kitFlipNote=kitFlipNote}
@@ -61851,13 +61851,23 @@ function busy(){if(typeof NLP!=="undefined"&&NLP)return true;/* the Luân hồi 
  if([...document.querySelectorAll(".kbk")].some(e=>e.offsetParent||e.getClientRects().length))return true;const ti=document.getElementById("title");return !!(ti&&!ti.hidden)}
 const DBG=window.__cfdbg=[];const dbg=x=>{DBG.push(x);if(DBG.length>30)DBG.shift()};
 /* cfBusy(): a card-flip scene is queued or on screen (jnf opens the flip choice only after it, owner OD 16/11 22:45Z) */
-let CFN=0;window.cfBusy=()=>CFN>0;
-function cfPlay(plan){dbg('push '+plan.wk);const gen=life;CFN++;let out=0;kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1)}done0()};dbg('run');const go=()=>{try{
+let CFN=0;
+/* every scene job (queued in j93 KMQ or on screen): {t: pushed at, v: void}. A queued job may wait behind a blocker the player has not cleared
+   (#dawn morning panel, podium, roulette, reward — j93 kmFree; the co-op merged week; busy()): an AFK seat never starts it. jnf holds the flip
+   choice / the night step only while a LIVE job is younger than its bound (jnf scene(): BAL.steal.choice.waitMs − choice.ms), then cfDrop():
+   the scene on screen closes, queued ones turn void and finish unplayed when j93 reaches them — never a scene after the choice (NLC #9). */
+const JOBS=new Set();
+window.cfBusy=()=>{for(const j of JOBS)if(!j.v)return true;return false};
+window.cfAge=()=>{let a=0;const n=Date.now();for(const j of JOBS)if(!j.v)a=Math.max(a,n-j.t);return a};
+window.cfDrop=()=>{dbg('drop');for(const j of JOBS)j.v=1;try{cur&&cur.close&&cur.close()}catch(e){console.error(e)}};
+function cfJob(){const j={t:Date.now(),v:0};JOBS.add(j);return j}
+function cfPlay(plan){dbg('push '+plan.wk);const gen=life;CFN++;let out=0;const j=cfJob();kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1);JOBS.delete(j)}done0()};dbg('run');const go=()=>{try{
    if(gen!==life){dbg('life');done();return}
+   if(j.v){dbg('void');done();return}   /* jnf dropped it (the choice went up without it): never a flip scene after the choice */
    const cw=window.COOPW;if((cw&&cw.on&&cw.pend)||busy()){setTimeout(go,300);return}   /* co-op: wait for the merged week, both players see it together */
    if(!S||S.dead||(S.nightWhy&&S.nightWhy.wk!==plan.wk)){dbg('stale');done();return}
    const deck=deckOf(S.nightWhy);if(!deck.length){dbg('nodeck');done();return}dbg('play '+deck.length);
-   Promise.all([ART.a,ART.b,ART.hand,ART.seal].map(preload)).then(()=>{try{if(gen!==life){done();return}const sc=kitCardFlip({deck,pick:plan.pick,turned:plan.turned,resHTML:resHTML(plan,plan),seal:!plan.pending,onEnd:()=>{if(cur===sc)cur=null;done()}});cur=sc||null;window.cfLast=plan}catch(e){console.error(e);done()}})}catch(e){console.error(e);done()}};go()})}
+   Promise.all([ART.a,ART.b,ART.hand,ART.seal].map(preload)).then(()=>{try{if(gen!==life){done();return}if(j.v){done();return}const sc=kitCardFlip({deck,pick:plan.pick,turned:plan.turned,resHTML:resHTML(plan,plan),seal:!plan.pending,onEnd:()=>{if(cur===sc)cur=null;done()}});cur=sc||null;window.cfLast=plan}catch(e){console.error(e);done()}})}catch(e){console.error(e);done()}};go()})}
 if(typeof flip==="function"){const f0=flip;flip=function(){inFlip=true;stoleFrom=null;let r;try{r=f0.apply(this,arguments)}finally{inFlip=false}
  try{if(want()){const plan=cfPlan();if(plan)cfPlay(plan)}}catch(e){console.error(e)}return r}}
 setTimeout(function warm(){try{if(typeof S==="undefined"||!S){setTimeout(warm,7000);return}[ART.a,ART.b,ART.hand,ART.seal].forEach(preload)}catch(e){}},12000);
@@ -61866,9 +61876,9 @@ window.cfShow=function(){try{if(want()){const plan=cfPlan();if(plan)cfPlay(plan)
 window.kitCardFlip=kitCardFlip;window.cfDeckOf=deckOf;window.cfGrid=grid;
 /* the seal AFTER the flip choice (main s26 23:39Z, night-final): she kept her flipped night or won it → her card alone, at rest, gets the painted
    "THỊ TẨM" seal (same scene, final still, KIT §81 ONE button "Chuẩn bị thị tẩm"); robbed → nothing (the winner's seat stamps hers). Once a day. */
-window.cfSeal=function(){try{if(!want()||!S||S.dead)return false;const d=typeof wk==="function"?wk():0;if(S.cfSl===d)return false;S.cfSl=d;const gen=life;CFN++;let out=0;
- kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1)}done0()};const go=()=>{try{if(gen!==life||!S||S.dead){done();return}if(busy()){setTimeout(go,300);return}
-   Promise.all([ART.a,ART.b,ART.seal].map(preload)).then(()=>{try{if(gen!==life){done();return}const sc=kitCardFlip({deck:[{id:"me",p:S,bar:false}],pick:"me",turned:"me",still:true,seal:true,
+window.cfSeal=function(){try{if(!want()||!S||S.dead)return false;const d=typeof wk==="function"?wk():0;if(S.cfSl===d)return false;S.cfSl=d;const gen=life;CFN++;let out=0;const j=cfJob();
+ kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1);JOBS.delete(j)}done0()};const go=()=>{try{if(gen!==life||!S||S.dead||j.v||(typeof wk==="function"&&wk()!==d)/* dropped, or the day moved on: no seal of an old night */){done();return}if(busy()){setTimeout(go,300);return}
+   Promise.all([ART.a,ART.b,ART.seal].map(preload)).then(()=>{try{if(gen!==life||j.v){done();return}const sc=kitCardFlip({deck:[{id:"me",p:S,bar:false}],pick:"me",turned:"me",still:true,seal:true,
     resHTML:resHTML({pick:"me",turned:"me"},{}),end:"Chuẩn bị thị tẩm",onEnd:()=>{if(cur===sc)cur=null;done()}});cur=sc||null}catch(e){console.error(e);done()}})}catch(e){console.error(e);done()}};go()});return true}catch(e){console.error(e);return false}};
 /* demo (kit page / tests): n cards from the live court, k of them barred; who = "me" | index | null */
 window.cfDemo=function(n,k,who){const L=[S].concat(typeof rivals!=="undefined"?rivals.filter(v=>v.alive&&!v.out):[]);const deck=[];n=Math.min(n,L.length);/* one card per person, never a duplicate or a fake extra */for(let i=0;i<n;i++){const p=L[i];deck.push({id:i===0?"me":"x"+i,p,bar:i>0&&i<=k})}
@@ -77002,7 +77012,15 @@ function roleOf(a,t){if(!t)return null;if(a===t)return "def";return canAtt(a,t)?
 const VALID=v=>v==="feign"||v==="road"||v==="keep"?v:null;
 /* S.nfX: st "wait" (flip done, the dialogs it pushed first) → "open" (choices running) → "done" */
 function X(){const x=S&&S.nfX;return x&&x.d===day()?x:null}
-const scene=()=>{try{return (typeof window.cfBusy==="function"&&window.cfBusy())||!!document.querySelector(".kmov.kcf:not(.km-out)")/* a closing scene (km-out fade, removed 240 ms later) no longer holds the choice back */}catch(e){return false}};
+/* a card-flip scene (the flip, the seal) holds the choice / the night step only while it is LIVE and younger than BAL.steal.choice.waitMs −
+   choice.ms (NLC #9, coop-night case 4): a scene queued behind something an AFK seat never clears (the #dawn morning panel the room clock
+   walked past, the co-op merged week) or left on screen is dropped at that bound (jflip cfDrop: closed / voided, never played after the
+   choice) → her choice shows and its 10-second clock ends it, so every seat's choice is in by waitMs from the flip and the host resolves then */
+const CAP=()=>Math.max(0,B().choice.waitMs-B().choice.ms);
+const scene=()=>{try{const on=()=>!!document.querySelector(".kmov.kcf:not(.km-out)")/* a closing scene (km-out fade, removed 240 ms later) no longer holds the choice back */;
+ const q=typeof window.cfBusy==="function"&&window.cfBusy();
+ if(q&&typeof window.cfAge==="function"&&window.cfAge()>=CAP()){if(typeof window.cfDrop==="function")window.cfDrop();return on()&&window.cfBusy()}
+ return q||on()}catch(e){return false}};
 /* no dialog may cover the flip choice (night-final #4, coop-steal family): while the card-flip scene or the choice is on screen, a tap on a
    look-up opener (mood seal → "Tâm trạng · X" jevb/jpcf, servant look j29) does nothing — the scene / the choice owns the screen; the seal's
    own popover (jemo emoTip) is a tooltip, not a dialog, and is not what is stopped here: the whole tap is. Window capture = before every other listener. */
@@ -77024,9 +77042,9 @@ function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(!x||x.
   if(CO()&&COOPW.cyHold!=null&&Date.now()-(x.at||0)<B().choice.waitMs)return;
   openChoice()}
  if(x.st!=="open")return;
- if(x.me===undefined&&!x.dlg){if(scene()&&Date.now()-(x.at||0)<B().choice.waitMs*2)return;showChoice()}
+ if(x.me===undefined&&!x.dlg){if(scene())return;showChoice()}   /* scene() is bounded (CAP): never a choice held past it */
  if(guest())return;
- if(x.me!==undefined&&x.fr===undefined&&x.myAt&&Date.now()-x.myAt>B().choice.waitMs)x.fr=null;   /* the friend never answered: Thôi */
+ if(x.me!==undefined&&x.fr===undefined&&Date.now()-(Math.max(x.at||0,x.mgAt||0)||x.myAt||0)>B().choice.waitMs)x.fr=null;   /* the friend never answered: Thôi — counted from the moment the choice opened (x.at) or a steal game ended / ran (jsmg x.mgAt: active play), never from the host's own answer: an AFK friend holds the night at most waitMs (NLC #9) */
  if(x.me!==undefined&&x.fr!==undefined)resolveAll()}catch(e){console.error(e)}}
 /* the tablet's result is out and no other dialog waits: the choices open (host / single player) */
 function openChoice(){const x=X();if(!x)return;x.st="open";x.at=Date.now();
@@ -85690,7 +85708,7 @@ if(typeof doAct==="function"){const d0=doAct;doAct=function(i,k){if((k!=="steal"
 /* CO-OP (host-authoritative, jnf relay "ctm-nf"): each player plays HER OWN game on her own seat; the rung she wins reaches the one resolve on the host.
    GUEST: her pick tells the host at once that she is playing (SMG "mg"); jnf's "ch" message is held until her game ends, then sent right after a
    SMG "up" message {mode, up} (same socket, so the host has her rung before it has her choice). HOST: a friend's "ch" that arrives while the host is
-   in her own game (S.nfX.st "mg", which jnf's own handler skips) is taken here; jnf's friend timeout (choice.waitMs from x.myAt) restarts when the
+   in her own game (S.nfX.st "mg", which jnf's own handler skips) is taken here; jnf's friend timeout (choice.waitMs from the choice opening x.at, or from x.mgAt) restarts (x.mgAt) when the
    host's game ends and is held open while the friend's game runs (at most BAL.steal.mg.coopMs). The friend's try then reads her rung (FRUP) through
    the same oSteal hook. jnf.js itself is unchanged. */
 let NFUP=null,FRUP=null,FRW=null,GHOLD=0,HELD=null,PEND=0;   /* PEND: her pick is being recorded (chooseM renders inside), the game opens next */const NPCR=new Map();let PASS=0;
@@ -85711,7 +85729,7 @@ function nfCtxUp(a,mode){if(typeof window.nfStep!=="function"||!a)return null;
 function smgSend(m){try{COOP.send(Object.assign({t:"act",k:SMG,mode:isHost()?"h":"g",d:day(),week:COOP.state&&COOP.state.week,id:SMG+Date.now().toString(36)+Math.random().toString(36).slice(2,6)},m))}catch(e){console.error(e)}}
 /* host: keep jnf's friend wait open while her game runs (bounded) */
 let FRT=null;function frHold(on){if(FRT){clearInterval(FRT);FRT=null}if(!on)return;
- FRT=setInterval(()=>{try{const x=nfX();if(!FRW||FRW.d!==day()||Date.now()>FRW.until||!x||x.fr!==undefined||x.st==="done"){FRW=null;clearInterval(FRT);FRT=null;return}if(x.myAt)x.myAt=Date.now()}catch(e){}},250)}
+ FRT=setInterval(()=>{try{const x=nfX();if(!FRW||FRW.d!==day()||Date.now()>FRW.until||!x||x.fr!==undefined||x.st==="done"){FRW=null;clearInterval(FRT);FRT=null;return}x.mgAt=Date.now();if(x.myAt)x.myAt=Date.now()}catch(e){}},250)}
 let NFON=0;function nfInstall(){if(NFON||typeof window.nfStep!=="function"||typeof chooseM!=="function")return;NFON=1;
  const cm0=chooseM;chooseM=function(j){const m=Q[0],op=m&&m.pid==="nfch"&&m.opts&&m.opts[j];const mode=op&&(op.n==="Tranh sủng"?"feign":op.n==="Chặn ngự giá"?"road":null);
   const x=nfX();if(!mode||!x||x.st!=="open"||BUSY||!M().on)return cm0.apply(this,arguments);
@@ -85720,7 +85738,7 @@ let NFON=0;function nfInstall(){if(NFON||typeof window.nfStep!=="function"||type
   x.st="mg";PEND=1;let r;try{r=cm0.apply(this,arguments)}catch(e){x.st="open";GHOLD=0;PEND=0;throw e}
   PEND=0;herGame(mode,o,up=>{NFUP=up?{d:day(),mode,up}:null;const y=nfX();if(y&&y.st==="mg")y.st="open";
    if(gst){GHOLD=0;smgSend({ph:"up",v:mode,up:up||0});const h=HELD;HELD=null;if(h)try{COOP.send(h)/* GHOLD is 0 now: goes out */}catch(e){console.error(e)}return}
-   if(y&&y.myAt)y.myAt=Date.now();   /* the friend's wait restarts after the host's own game */
+   if(y){y.mgAt=Date.now();if(y.myAt)y.myAt=Date.now()};   /* the friend's wait restarts after the host's own game */
    try{window.nfStep()}catch(e){console.error(e)}});
   return r};
  /* guest: jnf's "ch" waits for her game (sent after the SMG "up") */
@@ -85728,7 +85746,7 @@ let NFON=0;function nfInstall(){if(NFON||typeof window.nfStep!=="function"||type
  /* host: the friend's game notice / rung, and her "ch" while the host is in her own game */
  try{if(typeof COOP==="object"&&typeof COOP.on==="function")COOP.on("act",m=>{try{const c=CO();if(!m||!c||m.from===c.seat||!isHost()||!S||m.d!==day()||m.mode!=="g")return;
   if(m.k===SMG){if(m.ph==="mg"){FRW={d:day(),until:Date.now()+(M().coopMs||120000)};FRUP=null;frHold(true)}
-   else if(m.ph==="up"){FRUP={d:day(),mode:VALIDM(m.v),up:Math.max(0,Math.min(M().rung||1,m.up|0))};FRW=null;frHold(false);const x=nfX();if(x&&x.myAt)x.myAt=Date.now()}return}
+   else if(m.ph==="up"){FRUP={d:day(),mode:VALIDM(m.v),up:Math.max(0,Math.min(M().rung||1,m.up|0))};FRW=null;frHold(false);const x=nfX();if(x){x.mgAt=Date.now();if(x.myAt)x.myAt=Date.now()}}return}
   if(m.k===NFK&&m.ph==="ch"){const x=nfX();if(x&&x.st==="mg"&&x.fr===undefined){x.fr=m.ch?VALIDM(m.ch.v):null;FRW=null;frHold(false)}}}catch(e){console.error(e)}})}catch(e){}
  /* a save made while the game was open: the choice stands, the step resumes (no rung) */
  if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const x=nfX();if(x&&x.st==="mg"&&!BUSY&&!PEND){x.st="open";setTimeout(()=>{try{window.nfStep()}catch(e){}},0)}}catch(e){}return r}}
@@ -88482,7 +88500,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="415db2fc268b";window.CTM_BUILD=BUILD;
+const BUILD="deb620a4b6fd";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
