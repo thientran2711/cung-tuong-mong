@@ -926,7 +926,7 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | GAP v4 recount (read-only) | GAP_LIST_v4.md 01df2e49 | MAIN CHÍNH 98 | session_01Rc5AsJNTe7U11fSBhJ4DhG | DONE | 21/11 18:04Z |
 | REVIEW ksz-lost-tap (sonnet SMALL reviewer-lander) of 3bcc7e13 | review/ksz-lost-tap-rv | B | session_01N1tNP2Zz7SKdJfLpjrSzuw | PASS 9343d8c456ddd6ff70ce2ec14f15510dbdd8a697 | 21/11 18:10Z |
 | KIT KEEPER #6 (opus; successor of #5 Jexz; KP09 body-fit PASS → land queue; pframe-overlay r1 1f90a2b8 with rv) | review/kit-body-fit, review/kit-pframe-overlay; reports/kit-keeper-6.md | MAIN CHÍNH 100 | session_01Rc5AsMcbXamjsY8CHXdjGN | RUNNING | 21/11 18:11Z |
-| E44b coop-famops fixer (opus BIG co-op; successor of E44; seed 4242 vanish + res no-retry lead) | review/coop-famops; briefs/E44b-coop-famops-fixer.md | FOREMAN E #29 | session_01DgYSWpsqWVG7nn7zh9VgW3 | RUNNING | 21/11 18:20Z |
+| E44b coop-famops fixer (opus BIG co-op; successor of E44; seed 4242 vanish + res no-retry lead) | review/coop-famops; briefs/E44b-coop-famops-fixer.md | FOREMAN E #29 | session_01DgYSWpsqWVG7nn7zh9VgW3 | ROLLED → E44c; ARCHIVED | 21/11 18:20Z |
 | RELAND podium-wire r2 (opus BIG; OR09/J8; LRRY FAIL jentry.js vs 70375dbf) | review/podium-wire-r2; briefs/M99-podium-wire-relander.md | MAIN CHÍNH 99 | session_01Rc5AsJzz5VENRwKX6fKout | RUNNING | 21/11 18:46Z |
 | rv-kit-mark-fix r7 | PASS | review/kit-mark-fix-rv7 8c48011473992f70d4e8b159826d30ce730a30cd | ~30 runs 0 mark FAIL; only harness splash «cards 0»; quickcheck + coop-e2e 124/124 |
 | RELAND r2 ui-leftover-fold (opus reviewer-lander; perf FAIL root cause = probe noise) | review/ui-leftover-fold-r2 da27c7e2; reports/ui-leftover-fold.md | B | session_01N1tNP51qRC8xGqzqkrCEq7 | LAND READY | 21/11 18:48Z |
@@ -951,3 +951,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | coop-home-tabs (sonnet; MAIN 100 ORDER 19:42Z, coop-home 50/51 «A has the home tabs» on LIVE) | review/coop-home-tabs; briefs/b7-coop-home-tabs.md | B | session_01N1tNP4bvkJPNpw5jHcE7Uq | READY 92df9b086 (SMALL) | 21/11 21:18Z |
 | coop-guest-week-lag (opus BIG; OWNER-BUG LANE MAIN 100 ORDER 20:35Z, thin guest month card/bạc one week late on host) | review/coop-guest-week-lag; briefs/b7-coop-guest-week-lag.md | B | session_01N1tNP46DparCmsaQ6RRX48 | RUNNING | 21/11 21:18Z |
 | REVIEW coop-home-tabs (sonnet SMALL test-only) of 92df9b08 | review/coop-home-tabs-rv | B | session_01N1tNP3mBaymnqffHRXNNdB | RUNNING | 21/11 21:43Z |
+| E44c coop-famops-c2 fixer (opus BIG co-op; successor of E44b, opened by E44b depth 3) | review/coop-famops-c2; reports/coop-famops.md | FOREMAN E #30 | session_01DgYSWpbxnb51GjUhBoeY8R | RUNNING | 21/11 22:12Z |
