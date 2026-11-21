@@ -214,3 +214,28 @@ Ladder (G42): t5 now carries everything t1–t3 v5 have (edges, neckline band, c
 10. G44: a bow only if centred, or no bow (thu t3 = girdle medallion, no bow).
 11. G45: no cloth, sleeve, cape, shawl or flap over the jade/sash front.
 Also: the gates (check_store, keep_check), ≤ 10 000 chars, palette, F2, B29, G39.
+
+## JOB 8 (DESIGN20 d13d7ed) — thu s62 t4 COMOIf + t5 COMOIe, standing checklist · checked at 83d55ab · 0 gens
+Gates:
+- tp4 / tp5 a22 approved + master PASS; keep PASS. Chars: 9972 / 9980.
+- Store mode: only the Outfit sentence [0.70] / [0.73] = the COMOI exemption.
+- Phi bạch kept (thu).
+
+Checklist, t4 / t5:
+1. G40 master_common.OUTER_TIED ("front edges meet at the waist under the sash, which wraps over BOTH layers") ✓ / ✓
+2. Neckline band embroidered straight ACROSS the chest ✓ / ✓
+3. Chest embroidery ("small lotus flowers embroidered below it" / "many small double hollyhocks embroidered below it") ✓ / ✓
+4. Long vertical embroidered front-edge panel shoulder→hem ✓ / ✓ (gold-edged)
+5. Outer hem band ("WIDE … borders … at sleeves and hem" / "WIDE … hem bands on the outer and the inner robe") ✓ / ✓
+6. Inner robe hem embroidered ✓ / ✓
+7. Sleeves / cuffs embroidered (wide borders + "a few small lotus flowers on them" / "deep embroidered … cuff bands, a few small … on the sleeves") ✓ / ✓
+8. Jade: one jade pendant set in front / two long jade pendant sets in front ✓ / ✓
+9. G46 / G47:
+   - t4 capelet + jade clasp on a short silk cord across the chest, verbatim ✓
+   - t5 has that same 576-char t4 capelet text verbatim + CAPE5_V4_EXTRA (small soft pearl-edged layer with tassel fringe on each shoulder) ✓
+   - t5 carries every t4 item (panels, inner hem, chest, sleeves, jade, LARGE motifs → large medallions), denser ✓
+10. G44: sash / girdle flat at the CENTRE, NO bow ✓ / ✓
+11. G45: "never covered by sleeve or shawl" ✓ / ✓
+
+Verdict: **t4 PASS · t5 PASS.**
+Old note, not blocking: t5 "broad gold brocade girdle" sits next to B_LIGHT "NOT brocade".
