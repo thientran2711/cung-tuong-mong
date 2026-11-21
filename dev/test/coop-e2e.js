@@ -133,6 +133,12 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  {const t0=Date.now();while(Date.now()-t0<60000){await clear(A);await clear(B);const a=await A.p.evaluate(()=>__co().world),c=await B.p.evaluate(()=>__co().world);if(a&&c)break;await sleep(500)}}
  {const wd=o=>o.p.evaluate(()=>{const m=document.getElementById('modal'),t=document.getElementById('title'),k=document.getElementById('kroul');return{S:typeof S!=='undefined'&&!!S,n:typeof S!=='undefined'&&S&&S.name,base:!!(window.COOPW&&COOPW.base),inLife:COOPW.inLife,ww:COOPW.waitWorld,st:COOP.state.status,C:!!COOP.state.C,title:t&&!t.hidden,kroul:!!k,modal:m&&!m.hidden?m.textContent.slice(0,120):'',you:COOP.state.you,pid:COOP.pid,ws:window.__wsLog,tr:COOPW.tr.slice(-16)}}).catch(e=>e.message);
  const wa=await A.p.evaluate(()=>__co().world),wb=await B.p.evaluate(()=>__co().world);ok(wa&&wb,'both players are in the shared world',wa&&wb?undefined:{A:await wd(A),B:await wd(B)})}await clear(A);await clear(B);
+ /* maid-8tabs (owner 21/11 ~03:15Z): both seats show the SAME 8 bottom tabs; each seat sees her own road in them (cung nữ: Hậu cung › Đồng liêu, Mệnh truyện › Thân phận;
+    consort: Cung nhân, Mệnh truyện). Run with COOP_B_ORIGIN=cnv for one maid seat + one consort seat. */
+ {const T8='Hành sự · Dư đồ · Hậu cung · Giao tình · Hoàng tự · Tư trang · Tài nghệ · Mệnh truyện';
+  for(const o of [A,B]){const r=await o.p.evaluate(()=>({bar:[...document.querySelectorAll('#tabs [data-tab]')].filter(x=>x.getClientRects().length).map(x=>x.textContent.trim()).join(' · '),
+    srv:typeof isSrv==='function'&&isSrv(),st:typeof kgLabel==='function'?kgLabel('staff'):'',sy:typeof kgLabel==='function'?kgLabel('story'):''}));
+   ok(r.bar===T8&&r.st===(r.srv?'Đồng liêu':'Cung nhân')&&r.sy===(r.srv?'Thân phận':'Mệnh truyện'),o.name+': the 8 bottom tabs, her own road in them'+(r.srv?' (cung nữ)':' (phi tần)'),r)}}
  /* coop-staff-split: on a names split, dump every world consort's staff (id,name,role,coop) on both seats + where the extra person lives on the other seat */
  const staffDiff=async tag=>{const g=o=>o.p.evaluate(()=>({seat:COOP.state.you,wk:__co().week,d:[S.year,S.month,S.tuan,S.buoi],V:rivals.filter(v=>!v.coop).map(v=>({id:v.id,n:v.name,st:(v.staff||[]).map(x=>[x.id,x.sid,x.name,x.role,!!x.coop,x.mid])})),me:(S.staff||[]).map(x=>[x.id,x.sid,x.name,x.role]),tr:COOPW.tr.slice(-24)}));
   const a=await g(A),b=await g(B);const out={tag,A:{d:a.d,wk:a.wk},B:{d:b.d,wk:b.wk},diff:[]};
