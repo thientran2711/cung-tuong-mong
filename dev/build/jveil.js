@@ -178,8 +178,8 @@ function vlInvHTML(){if(!S||S.dead)return"";const L=vlChest(S);if(!vlNeed(S)&&!L
    B.push(pbtn(`data-it="gift" data-ix="${x.ix}"`,"Tặng",`tốn: 2 khắc · thành: chọn người nhận`,e.k==="mcnt"?"đồ ngự tứ: không được đem tặng":whyTime(2)));
    B.push(pbtn(`data-it="sell" data-ix="${x.ix}"`,"Bán",`thành: Bạc +${Math.floor((it.pr||0)/2)}`,e.k==="mcnt"?"đồ ngự tứ: bán là bất kính":""));
    /* KIT §70: the picked veil = the shared item detail (picture, name, grade, Được, Lai lịch, Ghi chú) with its acts */
-   h+=typeof kitItemDetail==="function"?kitItemDetail({e},{cls:"kidet-strip",acts:B}):`<div class="kwdsel">${kitItem({src:vlSrc(e.k),name:it.n,grade:g,size:"md"})}<div>${kitFacts([`Mạng che mặt · ${WD_GRADE[g]} · ${VL_COVER[g]}`,typeof wdSrcTxt==="function"?vlSrcTxt(e):"",vlKnows(S,e)?`Đồ phẩm ${wdPName(vlP(e,S))}`:"Chưa rõ phẩm"].filter(Boolean))}</div></div><div class="rbtn">${B.join("")}</div>`}
-  else h+=`<p class="past">Chạm một chiếc mạng để xem; đeo, tặng hay bán bằng nút dưới thông tin.</p>`}
+   h+=typeof kinlDetail==="function"?kinlDetail({e},{key:"veil",acts:B}):`<div class="kwdsel">${kitItem({src:vlSrc(e.k),name:it.n,grade:g,size:"md"})}<div>${kitFacts([`Mạng che mặt · ${WD_GRADE[g]} · ${VL_COVER[g]}`,typeof wdSrcTxt==="function"?vlSrcTxt(e):"",vlKnows(S,e)?`Đồ phẩm ${wdPName(vlP(e,S))}`:"Chưa rõ phẩm"].filter(Boolean))}</div></div><div class="rbtn">${B.join("")}</div>`}
+  else h+=typeof kinlDetail==="function"?kinlDetail(null,{key:"veil"}):""}
  return h+`</div></div>`}
 function vlSrcTxt(e0){if(!e0)return"";const e=Object.assign({},e0,{from:e0.src||e0.from});if(e.from&&!VL_OWN[e.from]&&!e.giver&&e.from!=="emp"&&e.from!=="hh"&&e.from!=="th"){const v=typeof byKey==="function"?byKey(e.from):null;if(v&&v.name)return `${v.name} tặng`}if(e.from==="tay")return`tự tay kết${e.d?", "+e.d:""}`;if(e.from==="nvp")return`đặt ở Nội vụ phủ${e.d?", "+e.d:""}`;if(e.from==="ngoai")return`mua lén ngoài cung${e.d?", "+e.d:""}`;if(e.from==="cu")return"mạng đang đeo từ trước";if(e.giver)return`${e.giver} ban${e.d?", "+e.d:""}`;
  const v=typeof byKey==="function"&&e.from?byKey(e.from):null;return v&&v.name?`${v.name} tặng`:"đồ trong rương"}
