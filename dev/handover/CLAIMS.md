@@ -830,3 +830,4 @@ kit-focus rv | review/kit-focus-rv afd85abf | rv session | FAIL (Fold act text c
 kit-opt-kem rv | review/kit-opt-kem-rv e09fd19a | rv session | PASS (+law-4 finding for MAIN) | 21/11
 | SG-CARD (opus; MAIN 92 09:43Z: option-line Sủng literal not run through sg() — whole family j7/j8/jact/jdis + shown-vs-applied scan) | review/sg-card (base review/kit-opt-kem-rv e09fd19a); reports/sg-card.md | FOREMAN D #15 | session_01964izDpmefTHJeFavzFYEQ | RUNNING | 21/11 09:46Z |
 | GAP SPREAD (sonnet; MAIN 92 09:40Z: 27 no-branch OTHER rows of GAP_LIST_v3 → ORDER lines in owners' STATUS) | handover branch only; dev/handover/GAP_LIST_v3.md | FOREMAN D #15 | session_01964izFUmgHDvrDQQXoo4Ki | RUNNING | 21/11 09:46Z |
+kit-badge rv2 | review/kit-badge-rv2 9a05a707 | rv session | PASS | 21/11
