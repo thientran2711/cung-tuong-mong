@@ -244,6 +244,7 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 
 ### S14 · HOÀNG QUÝ PHI LUXURY t7
 - text: `HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), a layered pearl-and-gold necklace, pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress.`
+  - NOTE (ROOT, G67, 21/11): where t7 wears no cape (thu vân kiên), write "pearl and jade trims along the vân kiên edges"; check_store S14_VK accepts it.
 - scope: tp7 pr7
 - confirm: -
 - ages: all
