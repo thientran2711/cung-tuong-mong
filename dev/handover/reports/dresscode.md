@@ -112,3 +112,34 @@ Head: review/dresscode 94abcf8366eefe9e3270f57711d9cff93dc9b72f.
 Not built (unchanged): item 12 (KIT, MAIN kit keeper), 11c robe recolour (waits owner OK on Foreman C sample).
 
 SẴN SÀNG KIỂM dresscode 94abcf8366eefe9e3270f57711d9cff93dc9b72f
+
+## r4 — FIX «4 back» (law 6c), E30b · FOREMAN E #24 · 21/11 ~02:30Z · branch review/dresscode-land-fix ee44f91e8d38852b5fff9f13755e6dd42cc3d46b
+PRIORITY #1 CHECK: dresscode r2 PASS 8b46c3f0 | review/dresscode-land 4e5efcb1 (E37 re-gate) | jil item ledger (S.il box / census) reused for the search — nothing new built beside the loan book.
+Base: review/dresscode-land 4e5efcb1 + LIVE origin/main 4f34f461 (index.html/sw.js rebuilt, 149a08fa).
+ROOT CAUSE (E37: coop-dresscode 34/35, step «4 back», piece on no one): the guest took back what she lent ONLY when HER copy of the NPC still
+showed it at her tuần end (holder scan). Her copy is the host's world of an earlier moment; when it did not show the piece, the host removed it
+on its side (dcOther) and she never took it back → gone. Same family, found by dresscode-loans.js (every festival × 4 paths, 5+ runs):
+| # | path | before | after |
+|---|---|---|---|
+| 1 | guest's stale copy of the NPC at the return | piece lost (E37 1/5) | loan book on the lender: settled after the scan, piece taken from wherever it is, else the book's copy (once: S.dcGot) |
+| 2 | due date | S.turn = MONTHS (loan out a whole month, «qua tuần sau trả» wrong) | dcWk() = S.turn*10+S.tuan: back the next tuần |
+| 3 | her key "me:"+pid | a new pid → piece stayed with the NPC for good | key "me" (old "me:<pid>" still her) |
+| 4 | one odd chest | an exception in one scan stopped every return | try per chest |
+| 5 | tuần she dies | dcTurn returned early → no returns | returns run first (NPC settle still before them) |
+| 6 | piece moved / confiscated (box) / netted by the ledger census | out of reach | found by loan id or ledger id (ilUid given at lend), net stub gets the book copy |
+| 7 | guest lending to an NPC | she also put the piece on HER copy of the NPC: the merge kept her act over the host's return → NPC wore it one tuần more on both seats | her copy left alone; the host does it («dcin»), host keeps the NPC's book for her «dcout» and clears it on her «dcin» (rb) |
+Code: dev/build/jdc.js (dcLent book, dcLedger/dcFind/dcTake, dcWk, key, dcTurn order), jbal2 BAL.dc.bor.wait 4. Not touched: season cost still once per MONTH (S.dcSw=S.turn) — pre-existing, flagged for the reviewer, not changed (balance).
+Tests: NEW dev/test/dresscode-loans.js (fixed cases: every festival × none / move to a third chest / confiscated box / gone from the world; real endTurn; exactly one copy home, book empty); coop-dresscode round 5 = the failing path (guest's copy stale at return) + round 4 one-tuần loan + lender holds red AND yellow (her painted robe may already show red).
+Gates on ee44f91e:
+| gate | result |
+|---|---|
+| dresscode.test.js | ALL PASS (also 4/4 with the old test file on the new build) |
+| dresscode-loans.js | ALL PASS (×6 during the work; last fixes ×5 clean) |
+| coop-dresscode.js ×12 | 11 × 38/38; run 6 = 37/38: «5: week advanced for both» timed out (90 s, LIVE Worker week turn), every object check of that run passed |
+| coop-e2e | 68/68 |
+| kit-dress-picker | PASS 19 |
+| role-parity ×2 | ALL PASS both |
+| one-core-guard | PASS |
+| quickcheck (alone) | PASS 419 s · old save ok · perf new/live render 222/266, tab 399/449, buổi 1109/1178 ms |
+
+SẴN SÀNG KIỂM dresscode-fix ee44f91e8d38852b5fff9f13755e6dd42cc3d46b
