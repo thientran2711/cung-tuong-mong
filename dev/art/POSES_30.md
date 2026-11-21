@@ -22,7 +22,7 @@ M2 the item held at her chest, the other hand lightly holding the edge of her sl
 M3 walking slowly, one foot ahead, the item held low at her side, gaze to the viewer
 M4 weight on one leg, the item raised and admired, the other hand beneath it
 M5 a three-quarter turn looking at the viewer, the item held near her shoulder
-M6 [DROPPED G45 owner L1622: never drawn] one hand adjusting her belt pendant, the item in the other hand
+M6 [DROPPED G45 owner L1622: never drawn] one hand resting lightly at her belt, the item in the other hand
 M7 the item held slightly forward as if presenting it, a gentle smile, her sleeves kept clear of the front of her waist
 M8 one hand resting on her draped shawl, the item in the other hand at her hip
 M9 a slight lean on one hip, the item held across her body with both hands, her sleeves kept clear of the front of her waist

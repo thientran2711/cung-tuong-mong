@@ -64,7 +64,7 @@ TP={
 "mua":["a sheet of plain paper with simple ink diagrams of dance footsteps and arrows, beside a plain paper folding fan",
  "a neat booklet of dance step diagrams beside a pale pink silk folding fan",
  "an album of dance step diagrams with silk cover beside a pair of painted silk fans and a neatly coiled long ribbon of pale silk",
- "a silk scroll of dance step diagrams with cloud motifs and vermilion seals, beside a pair of gold-ribbed feather-and-silk dance fans with jade pendants and a coil of iridescent rainbow silk ribbon, a precious treasure"],
+ "a silk scroll of dance step diagrams with cloud motifs and vermilion seals, beside a pair of gold-ribbed feather-and-silk dance fans with jade tassels and a coil of iridescent rainbow silk ribbon, a precious treasure"],
 "ao":["a plain undyed cotton dance garment, simply folded, uneven seams, humble",
  "a light pastel silk dance robe neatly folded, with a simple embroidered hem",
  "a folded gauze dance costume with layered pastel sleeves and embroidered cloud borders",

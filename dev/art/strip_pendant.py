@@ -43,6 +43,8 @@ R=[ # (regex, replacement) – ordered, specific first
  (r"ONE jade disc at the centre and a long (?:ceremonial )?jade pendant set on each side down to the knees: small carved jade plaques linked by strings of pearls, ending in (?:ivory )?silk tassels", "no pendant"),
  (r"a long (?:ceremonial )?jade pendant set on each side down to the knees: small carved jade plaques linked by strings of pearls, ending in (?:ivory )?silk tassels", "no pendant"),
  (r"a jade belt", "a plain gold belt"),
+ (r"(sash|girdle|belt) with a (?:small|little) [a-z ]{0,25}(?:pendant|disc pendant)", r"\1"),
+ (r"dance fans with jade pendants", "dance fans with jade tassels"),
  (r"on each outer side of the two panels hangs a long (?:ceremonial )?jade pendant set down to the knees: small carved jade plaques linked by strings of pearls, ending in (?:ivory )?silk tassels"+S, "the two panels hang plain to the knees"),
  (r"a soft silk sash with a small carved jade pendant \(ngọc bội\) on a silk cord with a silk tassel at each side", "a soft silk sash tied flat at the waist"),
  (r"a wide gold-and-jade belt with long tassels and jade pendants hanging at the front", "a wide plain gold belt"),

@@ -221,7 +221,7 @@ APPROVED = [{'id': 'W01', 'title': 'WINTER FUR Lông 1 t1-t3 (G26)', 'text': "WI
  {'id': 'S14',
   'title': 'HOÀNG QUÝ PHI LUXURY t7',
   'text': 'HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jewels on the phoenix crown (rubies, sapphires, pearls and jade), pearl and jade trims along '
-          'the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress.',
+          'the cape edges; still clearly simpler and less golden than the Empress.',
   'scope': 'tp7 pr7',
   'confirm': '',
   'ages': '',
@@ -733,7 +733,7 @@ G15_T3_OLD=re.compile(r"a fine silk robe with wide embroidered (.+?) bands at th
 G15_T3_OPTB=("a structured, rich COURTLY palace consort dress (cung đình), never plain, never a simple wrap robe, NO crossed wrap collar, NO high-waisted chest-wrap skirt: "
  "an ankle-length {main} silk court robe with a straight SQUARE NECKLINE framed by a wide stiff {sec} embroidered {motif} band; a wide stiff {sec} brocade girdle at the natural waist, "
  "from which hangs down the centre front an embroidered {sec} APRON PANEL (a long narrow ceremonial front panel, {motif} embroidery, gold-braid edge) reaching to the ankles; "
- "on each side of the apron hangs a long ceremonial jade pendant set down to the knees: small carved jade plaques linked by strings of pearls, ending in silk tassels; "
+ "the apron hangs plain to the knees; "
  "wide embroidered {motif} bands at the sleeve ends and the hem")   # G36 (owner L1446): '; a sheer silk shawl' removed (no phi bạch in xuân/đông)
 # G21 (owner 20/11, ROOT-67 chat Lượt 1128: 'Cái cổ áo từ 36, 51 và 65 tuổi á, là phải là cái cổ xéo kín đáo ... copy cái cổ này qua cho bên quý nhân'):
 # at a36/a51/a65 the t3 option-B words keep everything except the collar: the square neckline becomes the same snug crossed collar as the old (pre-G17) Đáp ứng words.
@@ -861,7 +861,7 @@ def negated(text, a, b):
     return bool(NEG.search(text[lo + 1:hi]))
 
 
-S14_L1794 = 'HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jade, pearls, gold and a few smooth red gems on the phoenix crown, pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress.'   # owner L1794 + L1799: jade/pearl/gold; red gems only on the crown, never on clothing; S14 override OK'd by Foreman C #22
+S14_L1794 = 'HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jade, pearls, gold and a few smooth red gems on the phoenix crown, pearl and jade trims along the cape edges; still clearly simpler and less golden than the Empress.'   # owner L1794 + L1799: jade/pearl/gold; red gems only on the crown, never on clothing; S14 override OK'd by Foreman C #22
 # SUPERSEDED (owner L1825: approved G26 ladder W01/W02/W03 verbatim, t8 = t7 width); kept only so the old _L1803 files still read. owner L1803 (winter1 sheet s62_dong_coLong): fur t1-t3 DOUBLE, t4-t6 DOUBLE AGAIN, t7 a little thicker, t8 keep the sheet sentence; accepted forms in the W01/W02/W03 slots, OK'd by Foreman C #23 (REVERT2)
 W01_L1803 = "WINTER: a THICK band of soft plain ivory-white fur trim, DOUBLE the width and thickness of a slim trim, about four fingers wide, along her collar, the front edges and hem of her outer garment, and her cuffs, visibly warm and cosy, yet lying smooth and close, never puffy or bulky; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape."
 W02_L1803 = "WINTER: a VERY THICK, luxurious band of soft plain ivory-white fur trim, twice as wide and twice as thick as at the three lower ranks, about two hands wide, along her collar, the front edges and hem of her outer garment, and her cuffs, rich, warm and cosy, yet lying smooth and close, never puffy or bulky; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape."
@@ -1077,6 +1077,15 @@ def g45_fails(text):
         return [("G45", "CLOTH OVER JADE", f"cloth over the waist / jade pendant (G45, owner L1622: hands are OK, no sleeve, robe flap, shawl or cloth over the pendant): …{text[max(0, m.start()-40):m.end()+30]}…")]
     return []
 
+# G57 NO JADE PENDANT ANYWHERE (owner L1851 21/11, verbatim: "tất cả các cái prompt loại bỏ hết ngọc bội, không có cái prompt nào có ngọc bội để cho sau này mình chơi cái game gắn ngọc bội"):
+# NO prompt (any scope / rank / season) may name a jade pendant / yupei / zupei / jinbu / ngọc bội / jade disc|plaque|ring on cords / jade(-and-gold) belt / belt pendant.
+# Negated wording ("no pendants", "never on ... belt or pendants") passes. The hà bí chui (bí trụy) of the trieu block is a cape-band tip, not a waist pendant: exempt (foreman to confirm).
+G57_RX = re.compile(r"\b(?:yu ?pei|zupei|jinbu|ngọc bội|ngoc boi)\b|(?<!\bno )(?<!\bor )(?<!\bear )(?<!\bear drop/)\bpendants?\b|\bjade (?:discs?|plaques? linked|rings?)\b", re.I)
+def g57_fails(text):
+    t = re.sub(r"\bbí trụy \(帔坠\) pendant\b|\bthe pendant\b(?= hanging| hangs)|\bbelow the pendant\b", "", text)
+    m = G57_RX.search(t)
+    return [("G57", "JADE PENDANT", f"no jade pendant / ngọc bội in any prompt (owner L1851: the game attaches pendants later; nothing hanging from the belt): …{t[max(0, m.start()-50):m.end()+30]}…")] if m else []
+
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail). pid = person id (sNN/mNN/cNN) for the face root-hex check."""
     if S is None: S, X = load_registry()
@@ -1090,6 +1099,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
     fails += fruit_fails(text, scope, pid)
     fails += vase_fails(text)   # F19 NOVASE (owner L1438/L1642)
     fails += g43_fails(text, scope)   # G43 maids: no jade pendant (owner L1608)
+    fails += g57_fails(text)   # G57 no jade pendant anywhere (owner L1851)
     fails += g45_fails(text)   # G45 jade pendant visible: no cloth over the waist (owner L1622)
     _f, _w = out1_fails(text); fails += _f; warns += _w   # G40 OUT1 (owner L1590)   # F16 NOFRUIT (owner Lượt 1052/1054): no fruit as a held item, except the frozen drawn thiếu nữ s44 / s64
     if scope == "face":   # MG3 L784 item 6 (B20 / Lượt 763/769/770)
@@ -1184,6 +1194,9 @@ def selftest():
                     ("Pose: the item held at her waist with both hands, her sleeves kept clear of the front of her waist.", 0),
                     ("the jade pendant at her waist stays fully visible, no sleeve, robe flap or cloth over it.", 0), ("no shawl or stole draped across her waist.", 0)]:   # G45 (owner L1622)
         if bool(g45_fails(norm(t))) != bool(want): print("G45 SELFTEST", want, t); bad += 1
+    for t, want in [("a soft silk sash with a small jade pendant on a silk cord.", 1), ("belt pendants and tassels", 1), ("a set of jade discs and pearl strands (zupei)", 1), ("a carved jade pendant set (ngọc bội)", 1),
+                    ("no belt plaque, no pendants; a plain silk sash tied flat.", 0), ("red gems ONLY on the crown, NEVER on the robe, collar, belt or pendants", 0)]:   # G57 (owner L1851)
+        if bool(g57_fails(norm(t))) != bool(want): print("G57 SELFTEST", want, t); bad += 1
     sys.path.insert(0, os.path.join(ART, "t8-prompt-B")); import pets as _PETS
     for b in _PETS.check(): print("PETS TABLE", b); bad += 1
     for t, sc, ag, want in [("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a18", 0), ("Pose: holding a small white rabbit cradled gently in her arms.", "tp2", "a36", 1),
