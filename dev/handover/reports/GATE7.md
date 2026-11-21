@@ -80,3 +80,14 @@ Sweep tool: per file `python3 dev/art/check_store.py <file> --scope tpN --age a1
 2. Live file word fixes listed above — owner already ordered these rules, so they are fixes, not new design (A18); still no redraw without her yes (A20/A21).
 3. rule.py add for L1996 + L1990 (text above); correct the #27 note about A42.
 4. G63/G64 frozen-file diff step, B31 sentence per rank — when wanted.
+
+## JOB 2 (ROOT → GATE7 ~10:40Z): rules + BUILDER ROOT FIX — part done, HANDOVER
+Done (commit below): rule.py add **G70** (L1996 t7/t8 chest) + **G71** (L1990 square frame); check_store ids renamed L1996→G70, L1990→G71 (self-test still 29/29); one line in FOREMAN_C_STATUS: G35 revoked A42.
+NOT done (context line reached: START ~5 % + 25 % = 30 %, now ~25–26 % with no room for a 4480-prompt rebuild loop): the builder root fix, F20 flower-colour wiring, AUDIT1 hand-off.
+Leads found for the successor (0 gens):
+- **G69 dropped = duplicate dict key.** dev/art/t8-prompt-B/build.py TIER_LOW has TWO `1:(` entries (lines ~686 and ~687). Python keeps the LAST one; VE6 (d05cc7ed) edited only the first → the 'CENTRE of the chest' cluster never reaches output. Fix: one t1 entry carrying the G69 words.
+- **G68 dropped:** `build.py c06 v0 --low 4 --age a18` still prints '… a few LARGE embroidered butterflies on the robe (fewer than Phi), a crossed collar …' → a different t4 path wins over VE6's _G20B replace (line ~1233), probably a per-person / TIER override that runs first or a square/crossed branch. Trace where 'a few LARGE' is still written (grep 'a few LARGE' in build.py + build_all.py).
+- Other builder faults to fix in store words (counts in the table above): F19 'bloom only, no leaves' words in the hair-flower sentence t1–t6; chrysanthemum still in the F2/F19 t6 flower list for some persons (m02 t6); hair-flower leaves (m02 t1); t7 hqp_layer() in check_store.py + builder 'LAYERED NECKLINE … inner top … OPEN outer robe' (G67/G70) and t7/t8 pearl swags (G70) and t8 mantle (G67) → copy the thu t7/t8 L1973/L1976 two-layer words (without 'hint of cleavage', G35); t7 square frame full words (G71); t2 a18/a26 square neckline needs 'framed/edged … band' (G71); maid-person short bows (G60 long ties).
+- Measure: rerun the sweep (per-person gate7_fails over build_all.build(p,t,a), p in PEOPLE, t1–t8, 5 ages = 4480; ~5 min) before/after; then `check_store.py --audit`.
+- Do NOT touch frozen files (G62/G63/G64/G66). Coordinate with AUDIT1 session_01D3E3NWuaiQprFBU483pCBa (colours/flowers) — not contacted by me. F20 = dev/art/face-common/flower_colours_L2013.json (not opened by me).
+Successor brief: copy this section + the job text from ROOT's message; COORDINATOR opens the successor (worker rule).

@@ -1174,7 +1174,7 @@ def g96_fails(text, scope):
     for rx, kind, why in ((G96_INNER, "INNER TOP", "no layered neckline / inner top / bodice words at t7/t8: copy the lower-rank neckline"), (G96_PEARL, "PEARL SWAG", "no pearl swags / strands across the chest at t7/t8 (pearls may lie on the vân kiên)")):
         for m in rx.finditer(text):
             if negated(text, m.start(), m.end()): continue
-            out.append(("L1996", kind, f"{why} (owner L1996): …{_ctx(text, m)}…")); break
+            out.append(("G70", kind, f"{why} (owner L1996): …{_ctx(text, m)}…")); break
     return out
 
 # G67 NO OUTER CLOAK FOR QP / HQP / HH (owner L1982 + L1714 row 15 + L1971 'only 2 layers'): t6/t7/t8 everyday, every season/era = the one robe over the inner dress;
@@ -1238,8 +1238,8 @@ def l1990_fails(text, scope, winter=False):
     out = []
     if winter and r <= 5: out.append(("G25", "WINTER SQUARE NECK", f"winter = crossed collar (cổ chéo) for t1–t5, never a square neckline (G25; owner L1971 #4 'winter t4 square collar WRONG'): …{_ctx(text, m)}…")); return out
     s = next((x for x in _sentences(text) if _square_neck(x)), "")
-    if not SQFRAME_RX.search(s): out.append(("L1990", "SQUARE NOT FRAMED", f"the square neckline must be framed by an embroidered band (owner L1990/L1992): …{_ctx(text, m, 10, 160)}…"))
-    elif r in (7, 8) and not SQFULL_RX.search(s): out.append(("L1990", "SQUARE FRAME NOT FULL", "t7/t8 square neckline = FULL frame: 'framed on ALL sides (across the chest AND up both sides to the shoulders)' (owner L1990)"))
+    if not SQFRAME_RX.search(s): out.append(("G71", "SQUARE NOT FRAMED", f"the square neckline must be framed by an embroidered band (owner L1990/L1992): …{_ctx(text, m, 10, 160)}…"))
+    elif r in (7, 8) and not SQFULL_RX.search(s): out.append(("G71", "SQUARE FRAME NOT FULL", "t7/t8 square neckline = FULL frame: 'framed on ALL sides (across the chest AND up both sides to the shoulders)' (owner L1990)"))
     return out
 
 # G60b LONG TRAILING BOW TIES (owner L1971 #2: 'everyone with a bow in game -> long trailing ties, thướt tha'): a prompt that ties a (non-negated) bow must
@@ -1399,10 +1399,10 @@ def selftest():
         if bool(g61_fails(norm(t))) != bool(want): print("G61 SELFTEST", want, t); bad += 1
     # GATE7 (owner L2021): each new check fires on the owner's fault words and stays quiet on the fixed words
     for t, sc, age, ids in [
-        ("the square neckline shows a soft, natural hint of cleavage, tasteful and elegant.", "tp6", "a18", {"G35", "L1990"}),   # G35 (L1442/L1996)
+        ("the square neckline shows a soft, natural hint of cleavage, tasteful and elegant.", "tp6", "a18", {"G35", "G71"}),   # G35 (L1442/L1996)
         ("a modest neckline (no cleavage).", "maid", "a18", {"G35"}),   # G35: not even negated
-        ("a LAYERED NECKLINE: a lilac inner top with a low square neckline framed on ALL sides (across the chest AND up both sides to the shoulders) by a wide band.", "tp7", "a18", {"L1996"}),
-        ("strands of pearls swagged across the chest from collar edge to collar edge.", "tp8", "a18", {"L1996"}),
+        ("a LAYERED NECKLINE: a lilac inner top with a low square neckline framed on ALL sides (across the chest AND up both sides to the shoulders) by a wide band.", "tp7", "a18", {"G70"}),
+        ("strands of pearls swagged across the chest from collar edge to collar edge.", "tp8", "a18", {"G70"}),
         ("many pearl strands lying flat on the vân kiên.", "tp8", "a18", set()),
         ("strands of pearls across the chest.", "tp5", "a18", set()),   # L1996 is t7/t8 only
         ("over it a long ceremonial silk mantle falling from the shoulders to the floor.", "tp8", "a18", {"G67"}),   # G67 (L1982)
@@ -1419,8 +1419,8 @@ def selftest():
         ("silver hairpins and a fresh flower (a tiger lily).", "tp2", "a18", {"F19"}),   # no 'bloom only' words
         ("silver hairpins and a fresh flower (a tiger lily, bloom only, no leaves); embroidered lilies with leaves on the hem.", "tp2", "a18", set()),   # L2015: embroidery leaves OK
         ("embroidered golden chrysanthemums on the hem.", "tp5", "a18", {"F19"}),
-        ("a LOW open square neckline across the upper chest, neck and collarbones bare.", "tp5", "a18", {"L1990"}),   # L1990/L1992
-        ("a LOW open square neckline across the upper chest, framed by a wide flat lilac band.", "tp7", "a18", {"L1990"}),   # t7/t8 need the full frame
+        ("a LOW open square neckline across the upper chest, neck and collarbones bare.", "tp5", "a18", {"G71"}),   # L1990/L1992
+        ("a LOW open square neckline across the upper chest, framed by a wide flat lilac band.", "tp7", "a18", {"G71"}),   # t7/t8 need the full frame
         ("a LOW open square neckline, framed on ALL sides (across the chest AND up both sides to the shoulders) by a wide flat embroidered lilac band.", "tp8", "a18", set()),
         ("WINTER: a WIDE band of soft plain ivory-white fur trim. a straight SQUARE collar framed by a wide band.", "tp4", "a18", {"G25"}),   # winter = crossed collar
         ("the sash tied at the front in a small, pretty bow.", "maid", "a18", {"G60"}),   # G60b (L1971)
