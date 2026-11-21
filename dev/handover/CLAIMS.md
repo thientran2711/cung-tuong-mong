@@ -967,3 +967,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | FOREMAN E #30 (opus; child of E #29, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #29 | session_01DgYSWn34K38PMxUZdZc9yb | RUNNING | 21/11 20:50Z |
 | rv mg-craft-r4 (OPUS BIG reviewer-lander, MAIN 97 ORDER 17:02Z) | PASS | review/mg-craft-r4 c674cd021716bf5bf39a8239a8ad05076d6a544f | jtd.js both sides; quickcheck + coop-e2e 124/124 + coop-craft-hand both seats | session_01N1tNP3ZWMeRDarhzz276Yb | 21/11 |
 | rv-kit-pframe-overlay r3 | PASS | review/kit-pframe-overlay-rv4 95fd1253f13a033fbb343010367cdf8ce054fb9c | band within 3 units of independent measure; gap 10-12 px all cards; no halo; quickcheck + coop-e2e 124/124 |
+| REVIEW E48r coop-famops RELAND on LIVE 04afaeb7 + coop-famops-c2 BIG review (opus; briefs/E48r-review-coop-famops-reland-c2.md) | review/coop-famops-r2, review/coop-famops-c2-r | FOREMAN E #30 | session_01DgYSWpBzP3A6Bn8pRU8jcw | RUNNING | 21/11 21:17Z |
