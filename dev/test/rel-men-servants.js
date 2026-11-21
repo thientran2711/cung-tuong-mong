@@ -54,17 +54,24 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    ok("C1 co-op MEN_P carries oan",c1);
   }
   /* UI */
-  const u=await p.evaluate(()=>{const R=window.__rms;tab="rel";relSel=R.m;PG.rel=null;PG.relY=null;render();
-   const P=document.getElementById('panel');const subs=[...P.querySelectorAll('.krelpk')].map(k=>[...k.querySelectorAll('.kcattabs button,.kcattabs [data-ktsub],.kcattabs .ktab')].map(b=>b.textContent.trim()));
-   const head=(P.querySelector('.krelh')||{}).textContent||"";const txt=(P.querySelector('.krpair .kr3m')||{}).textContent||"";const m=S.men.find(x=>x.id===R.m);
+  const u=await p.evaluate(async()=>{const R=window.__rms;tab="rel";relSel=R.m;PG.rel=null;PG.relY=null;render();
+   const P=document.getElementById('panel');const sl=document.querySelector('#panel [data-relslot="x"]');if(sl)sl.click();await new Promise(r=>setTimeout(r,700));
+   const subs=[[...document.querySelectorAll('#modal .krpop .kcattabs button')].map(b=>b.textContent.trim())];try{kitModalClose()}catch(e){}
+   const head=(P.querySelector('.krelh')||{}).textContent||"";const txt=(P.querySelector('.krelpair .kr3r')||{}).textContent||"";const m=S.men.find(x=>x.id===R.m);
    const exp=`→ taThiện cảm${Math.round(aff(m,S))}Oán${Math.round(oan(m,S))}`,exp2=`Thiện cảm${Math.round(aff(S,m))}Oán${Math.round(oan(S,m))}`;return{subs,head,txt,ok:txt.includes(exp)&&txt.includes(exp2)&&/Ta →/.test(txt)}});
-  ok(`U1 ${wh} groups`,u.subs.length===2&&u.subs[0].some(t=>/Nam nhân/.test(t))&&u.subs[0].some(t=>/Cung nhân/.test(t)),JSON.stringify(u.subs[0]));
+  ok(`U1 ${wh} groups`,u.subs.length===1&&u.subs[0].some(t=>/Nam nhân/.test(t))&&u.subs[0].some(t=>/Cung nhân/.test(t)),JSON.stringify(u.subs[0]));
   ok(`U1 ${wh} man rows both ways`,u.ok,u.head+" | "+u.txt.slice(0,160));
   if(OUT){await p.evaluate(()=>{document.querySelectorAll('#kboot,.kload,#klife').forEach(e=>e.remove());document.body.classList.remove('kdlg-on');Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;render();const P=document.getElementById('panel');if(P)P.scrollTop=0});await p.evaluate(()=>Promise.all([...document.querySelectorAll('#panel img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,8000)}))));await sleep(2500)}if(OUT)await p.screenshot({path:`${OUT}/rms-man-${wh}.jpg`,type:'jpeg',quality:72});
   const u2=await p.evaluate(()=>{const R=window.__rms;const tg=servById(R.s)||S.staff[0]||S.maid;relSel=relKey(tg);PG.rel=null;PG.relY=null;render();const P=document.getElementById('panel');
-   const q=relPerson(relSel),s=q&&q.p&&q.p!==S&&relMS(q.p)?q.p:null;const txt=(P.querySelector('.krpair .kr3m')||{}).textContent||"";return{head:(P.querySelector('.krelh')||{}).textContent||"",txt:txt+' EXP '+(s?`→ taThiện cảm${Math.round(aff(s,S))}Oán${Math.round(oan(s,S))}Lòng${Math.round(s.loyal)}`:'none '+JSON.stringify([relSel,R.s,q&&q.k,q&&q.name,q&&relMS(q.p)])),ok:!!s&&txt.includes(`→ taThiện cảm${Math.round(aff(s,S))}Oán${Math.round(oan(s,S))}Lòng${Math.round(s.loyal)}`)}});
+   const q=relPerson(relSel),s=q&&q.p&&q.p!==S&&relMS(q.p)?q.p:null;const txt=(P.querySelector('.krelpair .kr3r')||{}).textContent||"";return{head:(P.querySelector('.krelh')||{}).textContent||"",txt:txt+' EXP '+(s?`→ taThiện cảm${Math.round(aff(s,S))}Oán${Math.round(oan(s,S))}Lòng${Math.round(s.loyal)}`:'none '+JSON.stringify([relSel,R.s,q&&q.k,q&&q.name,q&&relMS(q.p)])),ok:!!s&&txt.includes(`→ taThiện cảm${Math.round(aff(s,S))}Oán${Math.round(oan(s,S))}Lòng${Math.round(s.loyal)}`)}});
   const u4=await p.evaluate(()=>{const o=relMSAll().find(x=>!relMan(x)&&!relMSMet(x)&&true);if(!o)return{skip:1};tab="rel";relSel=relKey(o);PG.rel=null;PG.relY=null;render();
-   const t=(document.querySelector('#panel .krpair .kr3m')||{}).textContent||"";return{t,ok:/chưa rõ/.test(t)}});
+   const t=(document.querySelector('#panel .krelpair .kr3r')||{}).textContent||"";return{t,ok:/chưa rõ/.test(t)}});
+  /* S1 whole-group scan (law 11): every met man + servant — the kit relation rows (person card pcfKey, Tuần lục j87 and the man card all read kitRelRows) = Ân oán = j9 aff/oan; loyal only under «Lòng» */
+  const sc=await p.evaluate(()=>{const bad=[];let n=0,m2=0;for(const o of relMSAll().concat(S.men.filter(m=>m.alive&&relMSMet(m)))){if(!relMSMet(o))continue;n++;const R=kitRelRows(o);const f=l=>(R.find(r=>r.w===l&&r.dir==="them")||{}).now;
+    const A=Math.round(aff(o,S)),O=Math.round(oan(o,S));if(f("Thiện cảm")!==A)bad.push(o.name+" kit aff "+f("Thiện cảm")+" vs "+A);if(f("Oán")!==O)bad.push(o.name+" kit oán "+f("Oán")+" vs "+O);
+    if(typeof o.loyal==="number"&&f("Thiện cảm")===Math.round(o.loyal)&&A!==Math.round(o.loyal))bad.push(o.name+" loyal printed as Thiện cảm");
+    tab="rel";relSel=relKey(o);PG.rel=null;PG.relY=null;render();if(relSel!==relKey(o))continue;m2++;const t=(document.querySelector('#panel .krelpair .kr3r')||{}).textContent||"";if(!t.includes("→ taThiện cảm"+A+"Oán"+O)&&!t.includes("→ taThiện cảm"+A+"Oán"+O+"Lòng"))bad.push(o.name+" Ân oán row != "+A+"/"+O+" :: "+t.slice(0,80))}return{n,m2,bad}});
+  ok(`S1 ${wh} scan ${sc.n} men/servants (${sc.m2} in Ân oán): kit rows = Ân oán = j9`,sc.n>0&&!sc.bad.length,sc.bad.slice(0,3).join(" | "));
   ok(`U4 ${wh} stranger servant → chưa rõ`,u4.skip||u4.ok,u4.skip?"no stranger in this start":u4.t.slice(0,120));
   /* F2: a stranger official / servant has ONE name on the whole screen ("Người lạ", the strip's label): strip, pair heading, side label, row heads; no "???", no real name; both stranger stages (0 no face, 1 face seen) */
   const f2=await p.evaluate(()=>{const c=(S.court&&(S.court.tq||Object.values(S.court).find(Boolean)))||relMSAll().find(x=>!relMan(x));const real=c.name.split(" ").slice(-1)[0],bad=[];const st0=S.known[kOf61(c)];
@@ -76,9 +83,10 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   await p.evaluate(()=>{const t=servById(window.__rms.s)||S.staff[0]||S.maid;tab="rel";relSel=relKey(t);PG.rel=null;PG.relY=null;render()});
   ok(`U2 ${wh} servant rows + Lòng`,u2.ok,u2.head+" | "+u2.txt.slice(0,160));
   if(OUT){await p.evaluate(()=>{const k=document.getElementById('kboot');if(k)k.remove()});await p.evaluate(()=>Promise.all([...document.querySelectorAll('#panel img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,8000)}))));await sleep(2500)}if(OUT)await p.screenshot({path:`${OUT}/rms-srv-${wh}.jpg`,type:'jpeg',quality:72});
-  if(first){const u3=await p.evaluate(()=>{const R=window.__rms;const m=S.men.find(x=>x.id===R.m);const h=manCard(m);const t=h.replace(/<[^>]+>/g," ").replace(/\s+/g," ");
-    return t.match(/Hắn quý ngươi:[^·]*· -?\d+/)+" | "+t.match(/Ngươi quý hắn:[^·]*· -?\d+/)+" | "+t.match(/Hắn oán ngươi:[^·]*· \d+/)});
-   ok("U3 man card = same model",u3.includes("· "+r.rms.mAff[0])&&u3.includes("· "+r.rms.mAff[1])&&u3.includes("· "+r.rms.mOan[0]),u3)}
+  if(first){const u3=await p.evaluate(()=>{const R=window.__rms;const m=S.men.find(x=>x.id===R.m);const h=manCard(m);const d=document.createElement("div");d.innerHTML=h;const k=d.querySelector(".kpkey");const t=(k?k.innerText||k.textContent:"").replace(/\s+/g," ");const own=d.textContent.replace(/\s+/g," ");
+    return JSON.stringify({kit:t,custom:/Hắn quý ngươi|Ngươi quý hắn|Hắn oán ngươi|Ngươi oán hắn/.test(own),loyalAsAff:false})});
+   const j=JSON.parse(u3);const nums=(j.kit.match(/-?\d+/g)||[]).map(Number);
+   ok("U3 man card: kit block carries the SAME numbers (aff both ways, oán), no custom lines, no second number",!j.custom&&j.kit.includes("Thiện cảm")&&nums.includes(r.rms.mAff[0])&&nums.includes(r.rms.mAff[1])&&nums.includes(r.rms.mOan[0]),u3)}
   ok(`E ${wh} no page errors`,!errs.length,errs.join(" | ").slice(0,300));
   first=false;await ctx.close()}
  await b.close();console.log(res.join("\n"));console.log(`rel-men-servants: ${fail?"FAIL":"PASS"} (${res.length-fail}/${res.length})`);process.exit(fail?1:0)})();
