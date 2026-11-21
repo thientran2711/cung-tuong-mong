@@ -1661,3 +1661,5 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - (21/11 00:47Z) LANDED mgcal-redo r2 a4fdb642 (rv PASS: mgcal-redo 12/12, coop-e2e 68/68, quickcheck PASS) → LIVE a4fdb642 (rollback f15146ea). Next: review/mgcal-batch4 28cf7c6d (FF on a4fdb642; mua 8.3, hoadien 8.9, banh 7.3, chai 8.7) — main gates running.
 SẴN SÀNG KIỂM huong-cue 54c3adfd
 - (21/11 01:00Z) LANDED mgcal batch 4 4f34f461 (her post-fix re-tests mua 8.3, hoadien 8.9, banh 7.3, chai 8.7, den 9.3; main gates on that sha: mgcal-redo 12/12, quickcheck PASS 216 s, coop-e2e 68/68) → LIVE 4f34f461 (rollback a4fdb642). huong-cue 54c3adfd sent back (missed widened brief: guiding words).
+
+SẴN SÀNG KIỂM td-dung-clear 03ba85c3b

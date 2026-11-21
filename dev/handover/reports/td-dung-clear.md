@@ -19,7 +19,7 @@ Old rules picture = one empty bowl + one red arrow; old play = a big clay stew p
 Test updated: dev/test/mg-noword-b.js whitelists exactly these td_dung guiding strings (old test enforced the pre-1998 "no word in play").
 
 ## Tests (755x1000 + 1180x820, file build of assemble.py)
-- mg-noword-b: td_dung play ok (only the whitelisted guiding words). mg-ui-rest: 39 ok, 0 FAIL. quickcheck: see line at the end. No page errors in all shot runs.
+- mg-noword-b: td_dung play ok (only the whitelisted guiding words). mg-ui-rest: 39 ok, 0 FAIL. quickcheck: CORE GATES PASS (one-core-guard, rules-one-source, kit-conform, coop-one-world, hooks 6). No page errors in all shot runs.
 - NOT run: mgcal-redo.js / ag-mgcal / coop-e2e (mgcal-redo.js is on review/mgcal-redo, not on this base; physics unchanged so cal numbers cannot move; the scene change is canvas-only and not synced in co-op). Main/reviewer please run them on the merge.
 - Shots (scratch, not in git): /home/user/wt/tdc-shots/{b,a}-dung-*-755x1000.png and *-1180x820.png; looked.
 
