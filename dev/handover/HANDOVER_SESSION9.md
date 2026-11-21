@@ -1958,3 +1958,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (09:40Z) Note: worktree rebase broke on shallow history (add/add art files) → aborted + reset to origin (all 92 lines were already pushed).
 - (09:41Z) 89: LANDED perf-ci f3353128, map-places-r2 ce99b707, econ-tamco f13dc915, ge-npc a2eb51cb; appended pm-c, bang-words, home-chapters, ge-phutang; skipped or20-j68q 88205658 (in LIVE), story-voice (in self-word). hao-huu-2 SSK f21bd515 (+ kit-badge r2) → rv JeK8. Keeper #2: kchip ⏸ glyph family (low prio).
 - (09:43Z) rv MSxp PASS kit-opt-kem e09fd19a → 89 chain. Law-4 option-literal Sủng family (pre-existing) → ORDER D. MSxp re-told keeper #2 id + kit-badge 8bf7b164 ready.
+- (09:47Z) keeper #2 SSK kit-focus r2 d3f02bcc (5 items: Fold clamp 2 + «!», cols 236; iPad say lifts figure; F.play skip slot; F.setGroups; blurred place backdrop) → rv MSxp + duodo-focus #2 pinged. Keeper next: kit-info-tap subGo, kchip ⏸.
