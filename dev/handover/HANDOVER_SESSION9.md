@@ -2282,3 +2282,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (20:56Z) LC3: LANDED coop-cyhold 2fd4e0b4 = LIVE. Queue empty. Keeper #6 r3 7196bc19 with rv MSxp.
 - (20:59Z) rv MSxp PASS pframe-overlay r3 7196bc19 (rv4 95fd1253) → LAND READY relayed to LC3. Main looked at rv shots: Fold ok; iPad act pictures not loaded → asked rv for retake rv-r3b-* after land; then owner shots.
 - (21:11Z) LAND CHAIN 3: LANDED kit-pframe-overlay 04afaeb7 = LIVE (rv4 95fd1253, keeper 7196bc19; 042d2b43 not contained). Idle.
+- (21:11Z) LC3: LANDED kit-pframe-overlay 04afaeb7 = LIVE (owner item OD 21/11 18:55Z/19:25Z/19:30Z). Owner shots sent (rv-r3b Fold + iPad, looked 3×). rv MSxp ARCHIVED; keeper #6 kept for owner feedback.
