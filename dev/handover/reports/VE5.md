@@ -1,0 +1,3 @@
+## Han LADDER6 t2+t8 (L1832) — VE5, depth unchecked, ctx ~12 %
+Thu t7/t8 job cancelled by #23 (0 gens). LADDER6: gate = LADDER5 waivers only. t2 kseQG8Z16B, t8 KLpuAI0kqp, gpt-2-6 1k low 9:16 seed 7172, 110 cr. Sheet dev/handover/review-sheets/han_ladder6_t2_t8_L1832.png.
+Faults: t2 held item reads as a round pale-jade fan/mirror on a handle, not a deep pellet drum with pellets; collar V wider, bands read as pink + 2 ivory but thin. t8 not three-quarter (near frontal, same as L5); shoulder bead yoke is gone (flat, no pearl fringe), plum collar band barely visible, three bands not clearly separate; fan OK.
