@@ -56,6 +56,7 @@ A47 | NO BLAME ON HAIR/POSE/ANGLE (owner L1805+L1806, angry; same happened with 
 A48 | LATER WORD WINS (owner L1814, angry at a 'dumb' question): when two owner orders conflict, the LATER one always overrides the earlier one. Never ask the owner which of two of her orders applies — apply the later one. | Lượt 1814 (21/11) | FG -
 A49 | AUTO SAMPLE (owner L1820, angry at waiting): as soon as a prompt fix the owner ordered is finished, DRAW a sample picture right away (same price tier as that set) and send it for her approval; never wait for her to ask, never just offer. | Lượt 1820 (21/11) | FG -
 A50 | NEVER HOLD A SAMPLE FOR A SIDE ISSUE (owner L1828): a finished prompt is drawn and sent even if a colour (or other detail) is still being redesigned — the owner checks the outfit DESIGN; colour can be fixed later. Never pause drawing for that reason. | Lượt 1828 (21/11) | FG -
+A51 | PARALLEL DRAWING (owner L1832): when several prompts are ready, draw them AT THE SAME TIME — split across several picture workers (open new VE workers as needed) and start all gens of a job at once; never queue one outfit after another. | Lượt 1832 (21/11) | FG -
 
 ## B. Prompt build (store, shared vs own, method)
 B1 | LAW #1: the 19/11 store prompts (dev/art/store-all/build_all.py f73a457 / dev/art/t8-prompt-B/build.py) are APPROVED; never rewrite or "improve" their fabric/brushwork sentences. | Lượt 397, 395 | FG 6-7
