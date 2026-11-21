@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9ea5b6e0+","t":"2026-11-21T19:04Z","c":"rel-men-servants r5: rebuild index/sw","b":"92b5cce08a5e","h":[{"s":"8c480114+","t":"2026-11-21T17:52Z","c":"Thẻ người: mẹ hoàng tử luôn ở trên; cột trái không bị cắt; chức vị + tên một màu (#17 #38)"},{"s":"4ee581db+","t":"2026-11-21T18:08Z","c":"Phủ tặng: quà cáp các phủ theo luật hai chiều (E)"},{"s":"203cd559+","t":"2026-11-21T13:18Z","c":"Thành: chip đỏ «khi thành» trên thẻ đã gieo"},{"s":"fd8280fa+","t":"2026-11-21T17:26Z","c":"Bộ khung chung: đơn vị hiệu ứng một kiểu"},{"s":"0620c318+","t":"2026-11-21T17:27Z","c":"Lệ phục: mặc đúng phép theo dịp (E)"},{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"},{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"}]};
+window.CTM_BI={"s":"a1a90fc0+","t":"2026-11-21T19:08Z","c":"rel-men-servants r5: law 11 — every servant-facing «Lòng/lòng» → one word Thiện cảm (54 files), servant-long-scan.js, j79 gloss, j65 label …","b":"62e760f0e186","h":[{"s":"8c480114+","t":"2026-11-21T17:52Z","c":"Thẻ người: mẹ hoàng tử luôn ở trên; cột trái không bị cắt; chức vị + tên một màu (#17 #38)"},{"s":"4ee581db+","t":"2026-11-21T18:08Z","c":"Phủ tặng: quà cáp các phủ theo luật hai chiều (E)"},{"s":"203cd559+","t":"2026-11-21T13:18Z","c":"Thành: chip đỏ «khi thành» trên thẻ đã gieo"},{"s":"fd8280fa+","t":"2026-11-21T17:26Z","c":"Bộ khung chung: đơn vị hiệu ứng một kiểu"},{"s":"0620c318+","t":"2026-11-21T17:27Z","c":"Lệ phục: mặc đúng phép theo dịp (E)"},{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"},{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -6600,7 +6600,7 @@ Object.assign(BAL,{eff:{
  jroute:{evFail:1,evRtSeen:[3,2],evFail_2:2,evRtMonth:1,loyalFail:15},
  jsgame:{},
  jstaff:{meAct:1},
- jstip:{go:5,go_2:10,evN:1,loyalGo:5,sucUse:3,sucUse_2:4,ducUse:1,sucUse_3:1,sucUse_4:3,sucUse_5:4,sacUse:3,sucUse_6:5,danhGo:-1},
+ jstip:{maidUse:3,go:5,go_2:10,evN:1,loyalGo:5,sucUse:3,sucUse_2:4,ducUse:1,sucUse_3:1,sucUse_4:3,sucUse_5:4,sacUse:3,sucUse_6:5,danhGo:-1},
  jthaiy:{npcMonth:8,evNpcMonth:1},
  jtin:{loyalTop:1,loyalTop_2:1},
  jtruth:{frameExpose:-20,evN:1,evFrameExpose:2,evGo:-1,bacFx:-10,danhGuilty:-6},
@@ -44199,7 +44199,7 @@ Object.assign(BAL,{stip:{
 /* ---------- the items (art: dev/art/ITEM_ART.md §3, 16 icons gpt-2-6) ---------- */
 (function(){const N={
  vaibong:{n:"Vải bông",kd:"Vải vóc",d:"May áo thường: Sắc +1 trong 3 tháng · tặng, bán được",pr:8,rk:0,dr:1,tg:["rv"]},
- vaitho:{n:"Vải thô (hàng kém)",kd:"Vải vóc",d:"Hàng kém Nội vụ phủ phát: may áo cho cung nữ thân tín, thiện cảm +3",pr:2,use:{maid:3},tg:[]},
+ vaitho:{n:"Vải thô (hàng kém)",kd:"Vải vóc",d:`Hàng kém Nội vụ phủ phát: may áo cho cung nữ thân tín, thiện cảm ${balSg(BAL.eff.jstip.maidUse)}`,pr:2,use:{maid:BAL.eff.jstip.maidUse},tg:[]},
  tragoi:{n:"Trà Long Tĩnh",kd:"Trà",d:`Pha mời phi tần đến chơi: thiện cảm +3 · uống: Sức ${balSg(BAL.eff.jstip.sucUse)} · tặng được`,pr:6,use:{suc:BAL.eff.jstip.sucUse},host:3,tg:["rv","th"]},
  trahop:{n:"Trà Quân Sơn ngân châm",kd:"Trà",d:`Trà thượng hạng: mời khách thiện cảm +5 · uống: Sức ${balSg(BAL.eff.jstip.sucUse_2)}, Đức ${balSg(BAL.eff.jstip.ducUse)} · tặng Thái hậu, Hoàng thượng`,pr:25,use:{suc:BAL.eff.jstip.sucUse_2,duc:BAL.eff.jstip.ducUse},host:5,gv:4,tg:["rv","th","emp","hh"]},
  tramoc:{n:"Trà mốc (hàng kém)",kd:"Trà",d:`Trà cũ ẩm mốc Nội vụ phủ phát: mời khách thì bị chê (thiện cảm -2) · uống: Sức ${balSg(BAL.eff.jstip.sucUse_3)}`,pr:0,use:{suc:BAL.eff.jstip.sucUse_3},host:-2,tg:[]},
@@ -91673,7 +91673,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="92b5cce08a5e";window.CTM_BUILD=BUILD;
+const BUILD="62e760f0e186";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
