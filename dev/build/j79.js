@@ -943,7 +943,7 @@ button.ka.kodrow .kat:is(#kodrow1,.kat):is(#kodrow2,.kat):is(#kodrow3,.kat){flex
 button.ka.kodrow .kat>.kan:is(#kodrow1,.kan):is(#kodrow2,.kan):is(#kodrow3,.kan){flex:1 0 100%!important}
 button.ka.kodrow .kat>.kodds.kodds{margin-left:auto!important}`;document.head.appendChild(st)})();
 /* Tranh sủng / Chặn ngự giá: no ranges, no "có thể" — the night's floor (nightFx: Sủng +3, Ân tình +2 at least) and the reward chance on the ladder (roll 10+4s, s≤3) */
-if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}const NG=nightGain(0),BN=BAL.night;return `thị tẩm đêm nay: Sủng +${NG.sung}, Ân tình +${NG.an} trở lên${S.preg?"":` · có thai: ${chanceW(c)}`} · ban thưởng: ${chanceW(BN.bestow+BN.bestowS*BN.stealS)} · kèm: ${stealKem(v)}`}}
+if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}const NG=nightGain(0),BN=BAL.night;return `thị tẩm đêm nay: ${sgStat(NG.sung)}, Ân tình +${NG.an} trở lên${S.preg?"":` · có thai: ${chanceW(c)}`} · ban thưởng: ${chanceW(BN.bestow+BN.bestowS*BN.stealS)} · kèm: ${stealKem(v)}`}}
 /* wording guide fixes in merged copies */
 (function(){const fix=root=>{try{root.querySelectorAll&&root.querySelectorAll(".kalog").forEach(e=>{if(/Nhật ký/.test(e.textContent))e.textContent="Xem đầy đủ trong Sổ ghi"})}catch(e){}};new MutationObserver(ms=>{for(const m of ms)m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.classList&&n.classList.contains("kalog"))fix(n.parentNode);else fix(n)}})}).observe(document.documentElement,{childList:true,subtree:true})})();
 /* Tài nghệ rows "Bậc 3: Mở «…»": wrap, never cut */

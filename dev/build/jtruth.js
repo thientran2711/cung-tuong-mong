@@ -107,7 +107,7 @@ PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;cons
  const guilty=light=>{try{window.__framesMe=(window.__framesMe||0)+1}catch(e){}S.framedBy=pp.a;
   if(light){apply({danh:BAL.eff.jtruth.danhGuilty});const t=`Ngươi nhận tội, xin khoan hồng: Danh ${balSg(BAL.eff.jtruth.danhGuilty)}. Kẻ vu oan vẫn chưa lộ mặt.`;log(t);Q.push({t:"Nhận tội",who:pMe(),h:`<p>${t}</p>`});return}
   const A0=ACTX.a;ACTX.a=a;let d=0;window.__truthAuto=1;try{d=framed(S,why)}finally{window.__truthAuto=0;ACTX.a=A0}
-  const t=`Không minh oan được: ngươi mang tội ${why.replace(/^bị /,"")}. Danh -${d}, Sủng -10, bị phạt.`;log(t);Q.push({t:"Mang tội",who:pMe(),h:`<p class="r">${t}</p>`});};
+  const t=`Không minh oan được: ngươi mang tội ${why.replace(/^bị /,"")}. Danh -${d}, ${sgStat(-BAL.eff.j8.framedSung)}, bị phạt.`;log(t);Q.push({t:"Mang tội",who:pMe(),h:`<p class="r">${t}</p>`});};
  const go=(o,how)=>()=>{if(roll(clamp(o)))clear(how);else guilty(false)};
  const H="minh oan được thì kẻ vu oan bị lộ, bị phạt; hỏng thì ngươi mang tội: mất Danh, Sủng, bị phạt",RK="có rủi ro";
  const O=[];
