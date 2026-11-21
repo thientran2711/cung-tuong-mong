@@ -82,7 +82,9 @@ function dcInv(p){p.inv=Array.isArray(p.inv)?p.inv:[];return p.inv}
 /* her pieces / an NPC's pieces of slot sl whose MAIN colour is one of fams, not worn, not borrowed */
 /* r3 review: not a lost case's piece either (e.lo: jlost «giữ lại» — someone else's, kept): lent away, the case could not find it at its holder and
    wrote a second copy to the ledger box (coop-dresscode-scan); nor is it «của mình» to wear for a festival */
-function dcOwnFit(p,fams,sl){const out=[];dcInv(p).forEach((e,i)=>{if(!e||e.h||e.bor||e.dcPrev||e.lo||e.tsB)return;/* e.tsB: borrowed for the Hội phối đồ (jts) — not hers to lend on */const w=WD_ITEMS[e.k];if(!w||w.sl!==sl||w.nt)return;const c=dcPiece(e.k);if(c&&fams.includes(c[0]))out.push({e,i,f:c[0],w})});return out}
+/* r4b (F1): a piece its holder may lend / wear as «của mình»: not hidden, not on loan (e.bor: every loan, the Hội phối đồ one too), not a trâm put aside for a loan, not a lost case's */
+function dcFree(e){return !!e&&typeof e==="object"&&!e.h&&!e.bor&&!e.dcPrev&&!e.lo}
+function dcOwnFit(p,fams,sl){const out=[];dcInv(p).forEach((e,i)=>{if(!dcFree(e))return;const w=WD_ITEMS[e.k];if(!w||w.sl!==sl||w.nt)return;const c=dcPiece(e.k);if(c&&fams.includes(c[0]))out.push({e,i,f:c[0],w})});return out}
 /* co-op: NPC loops roll once, on the host (review r1 fix 9) */
 function dcWorld(){return typeof worldOn!=="function"||worldOn()}
 /* the guest seat in an ordinary room: her NPC borrow / lend goes to the host as requests (jcoopask H kinds dcout / dcin) */
@@ -109,16 +111,19 @@ function dcBuy(p,b){if(!b)return false;const bac=p===S?S.bac:(p.bac||0);if(bac<b
 function dcLenders(to,fams){const D=BAL.dc.bor;const L=[];if(typeof rivals==="undefined"||!(to===S?dcLend():dcWorld()))return L;
  for(const v of rivals){if(!v||v===to||!v.alive||v.out||v.confined||v.coop)continue;if(aff(v,to)<D.fav)continue;
   for(const sl of D.sl){const c=dcOwnFit(v,fams,sl);if(c.length){L.push({v,...c[0]});break}}if(L.length>=D.max)break}return L}
-function dcBorrow(to,from,e){const D=BAL.dc;const inv=dcInv(from);const i=inv.indexOf(e);if(i<0)return false;inv.splice(i,1);
+/* THE ONE LOAN RULE (r4b, F1: the Hội phối đồ «Mượn» and the «Cho mượn» visit go through here too). o (optional): due = the last tuần of the loan
+   (default this tuần → back the next one; the Hội phối đồ: the contest tuần), why = what it is for ("ts" Hội phối đồ, "ev" a visit), chest = never
+   worn on the hair (the contest dresses from the chest), aff:false = the caller's own goodwill numbers (shown on its option) instead of BAL.dc.bor */
+function dcBorrow(to,from,e,o){o=o||{};const D=BAL.dc;const inv=dcInv(from);const i=inv.indexOf(e);if(i<0)return false;inv.splice(i,1);
  try{if(typeof ilUid==='function')ilUid(e,from)}catch(x){}/* every lent piece carries its ledger id: the book finds it by id when another rule strips the loan mark */
- const b=Object.assign({},e);delete b.w;b.bor={from:dcOwnKey(from),to:dcOwnKey(to),due:dcWk(),id:`${dcWk()}:${b.k}:${dcOwnKey(from)}>${dcOwnKey(to)}`};const w=wdOf(to);const sl=(WD_ITEMS[b.k]||{}).sl;
+ const b=Object.assign({},e);delete b.w;b.bor={from:dcOwnKey(from),to:dcOwnKey(to),due:o.due!=null?Math.max(dcWk(),o.due|0):dcWk(),id:`${dcWk()}:${b.k}:${dcOwnKey(from)}>${dcOwnKey(to)}`};if(o.why)b.bor.why=o.why;const w=wdOf(to);const sl=o.chest?null:(WD_ITEMS[b.k]||{}).sl;const dur=b.bor.due-dcWk();
  /* the guest lending to an NPC: the NPC side is the HOST's («dcin» below). Her copy of the NPC is left alone: a piece put on it was her
     dialog act, the week merge kept it over the host's return and the NPC wore it one tuần more on both seats (r4) */
  const gLend=dcGuest()&&from===S&&to!==S&&!to.coop;
  if(!gLend){if(sl==="tram"){const prev=w.tram;if(prev)dcInv(to).push(Object.assign(prev,{dcPrev:1}));w.tram=b}else dcInv(to).push(b)}
  dcRec(from,b);
- if(dcGuest()){if(to===S&&from!==S&&!from.coop)dcAsk("dcout",{bid:b.bor.id,from:from.id,pk:e.k,due:b.bor.due,cw:dcCW(),b:dcSnap(b)});else if(from===S&&to!==S&&!to.coop)dcAsk("dcin",{bid:b.bor.id,to:to.id,e:b,cw:dcCW(),wear:sl==="tram"?1:0})}
- try{affAdd(from,to,-D.bor.use);affAdd(to,from,D.bor.thanks)}catch(x){}/* the same for everyone: the lender spends goodwill, the borrower owes thanks */
+ if(dcGuest()){if(to===S&&from!==S&&!from.coop)dcAsk("dcout",{bid:b.bor.id,from:from.id,pk:e.k,due:b.bor.due,dur,cw:dcCW(),b:dcSnap(b)});else if(from===S&&to!==S&&!to.coop)dcAsk("dcin",{bid:b.bor.id,to:to.id,e:b,dur,cw:dcCW(),wear:sl==="tram"?1:0})}
+ if(o.aff!==false)try{affAdd(from,to,-D.bor.use);affAdd(to,from,D.bor.thanks)}catch(x){}/* the same for everyone: the lender spends goodwill, the borrower owes thanks */
  return true}
 /* give back every piece whose festival tuần has passed (her seat handles the pieces she holds and the pieces she lent) */
 function dcGiveBack(holder,e,where){const e0from=e.bor&&e.bor.from;const own=dcByKey(e0from);const w=wdOf(holder);const bid=dcBid(e);
@@ -128,7 +133,18 @@ function dcGiveBack(holder,e,where){const e0from=e.bor&&e.bor.from;const own=dcB
  if((own&&own.coop)||dcOther(e0from))return own;/* lent by the other seat's player (found or not in the list this moment): she takes it back on her own seat */
  if(own===S&&bid&&dcCoop()){S.dcGot=Array.isArray(S.dcGot)?S.dcGot:[];if(S.dcGot.includes(bid))return own;S.dcGot=S.dcGot.slice(-19).concat([bid])}/* once, whatever the merge timing */
  if(dcGuest()&&own&&own!==S&&holder===S)dcAsk("dcin",{bid:"b"+bid,rb:bid,to:own.id,e,wear:0});
+ if(!own&&typeof ilGone==="function"){/* r4b: the lender is no longer in the world (as the old Hội phối đồ return did): the piece goes to the ledger as her effects, never kept by the borrower */const ok=/^id:/.test(e0from||"")?e0from.slice(3):"";ilGone(holder,e,"dead",{own:ok});return null}
  dcInv(own||holder).push(e);return own}
+/* r4b (F1) OLD SAVES: before r4b the Hội phối đồ lent with its own mark e.tsB (lender id) and its own return. Migrated once to the one
+   loan mark: e.bor {from, to: her, due: the contest tuần (or past: back at the next tuần), why "ts"} + the lender's book (where the world is kept).
+   The co-op guest's old e.tsB piece was spliced from HER copy of the NPC only — the host's NPC still holds it: her copy is the second one and goes. */
+function dcMigTs(){if(!S||!Array.isArray(S.inv)||!S.inv.some(e=>e&&e.tsB!=null))return 0;let n=0;let D=null;try{D=typeof tsS==="function"?tsS().dress:null}catch(x){}
+ const due=D&&D.m?dcWk()+Math.max(0,3*((D.y*12+D.m)-(S.year*12+S.month)))+(1-(S.tuan|0)):dcWk()-1;const drop=dcCoop()&&!dcWorld();
+ for(const e of S.inv.slice()){if(!e||e.tsB==null)continue;const from="id:"+e.tsB;delete e.tsB;n++;
+  if(drop){S.inv.splice(S.inv.indexOf(e),1);continue}if(e.bor)continue;
+  try{if(typeof ilUid==="function")ilUid(e,S)}catch(x){}e.bor={from,to:dcOwnKey(S),due,id:`ts${dcWk()}:${e.k}:${from}>${dcOwnKey(S)}`,why:"ts"};
+  const v=dcByKey(from);if(v&&v!==S)dcRec(v,e)}return n}
+(function(){if(typeof deser!=="function")return;const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{dcMigTs()}catch(e){console.error("dcMigTs",e)}return r}})();
 /* ---------- the loan book (law 6c: a lent piece is never lost) ----------
    Every loan is written on the LENDER (her S, or the NPC: world state on the host): {bid, k, iu, to, due, e: a copy of the piece}.
    The holder scan above gives back what each seat sees; then the book is settled: a loan past its tuần whose piece the scan did not
@@ -172,7 +188,7 @@ function dcReturn(){if(!S)return;const me=dcOwnKey(S);const back=[];
     world is kept (the guest never writes her copy of an NPC: r4 lesson). Only the mark goes: what she wears is her own choice. */
  const heal=p=>{try{const w=wdOf(p);if(!w||(w.tram&&w.tram.bor))return;const inv=dcInv(p);for(const e of inv)if(e&&e.dcPrev&&!e.bor)delete e.dcPrev}catch(x){}};
  heal(S);if(dcWorld())for(const v of (typeof rivals!=="undefined"?rivals:[]))if(v&&!v.coop)heal(v);
- for(const [e,p,o] of back){try{log(`${(WD_ITEMS[e.k]||{}).n||"Món đồ"} đã trả về cho ${dcName(o||p)}.`)}catch(x){}}}
+ for(const [e,p,o] of back){try{log(o?`${dcNm(e.k)} đã trả về cho ${dcName(o)}.`:`${dcNm(e.k)} không còn chủ để trả, đã nộp về Nội vụ phủ.`)}catch(x){}}}
 /* ---------- the gate frame (her) ---------- */
 function dcFacts(st,f){const F=[];F.push(`${f.name} cần y phục có màu: ${dcFamList(st.code.need)}.`);
  const rn=dcRankN(S);if(st.needN<st.code.need.length)F.push(`Phẩm ${rn} chỉ cần có một trong các màu ấy.`);else F.push(`Phẩm ${rn} phải có đủ các màu ấy.`);
@@ -207,7 +223,7 @@ function dcGateItem(f,st){const D=BAL.dc;const opts=[];const need=st.missing.len
  const it={t:`Y phục dự ${f.name}`,h:dcFacts(st,f).map(s=>`<p>${s}</p>`).join(""),opts,ev:"dc",evId:"dc:"+f.k,must:1};
  DC_CUR=it;return it}
 /* called by jdc0 inside the endTurn chain, after the new tuần began and before the festival events are queued */
-function dcTurn(){if(!dcOn()||!S)return;/* loans come home even in a tuần she dies (the NPCs' loans, and hers into her effects): law 6c */if(!S.dead)try{dcNpcSettle()}catch(e){console.error("dcNpcSettle",e)}/* mocked as they went in, before the pieces go back */try{dcReturn()}catch(e){console.error("dcReturn",e)}if(S.dead)return;
+function dcTurn(){if(!S)return;try{dcMigTs()}catch(e){console.error("dcMigTs",e)}if(!dcOn()){/* r4b: loans come home whatever the dress-code switch (the Hội phối đồ lends through the same book) */try{dcReturn()}catch(e){console.error("dcReturn",e)}return}/* loans come home even in a tuần she dies (the NPCs' loans, and hers into her effects): law 6c */if(!S.dead)try{dcNpcSettle()}catch(e){console.error("dcNpcSettle",e)}/* mocked as they went in, before the pieces go back */try{dcReturn()}catch(e){console.error("dcReturn",e)}if(S.dead)return;
  const f=dcFestNow();if(!f||!dcHerOn())return;const F=dcHer();const key=dcKey(f);if(F.key===key)return;
  const st=dcStat(S,f.k);S.dcF={key,ch:null};if(!st||(!st.miss&&!st.refused)){S.dcF.ch="ok";return}
  Q.push(dcGateItem(f,st))}
@@ -269,7 +285,8 @@ try{if(typeof giveTo==="function"&&window.giveTo!==giveTo){giveTo=window.giveTo;
 (function(){try{if(typeof loOk==="function"){const o0=loOk;loOk=function(e){if(e&&e.bor)return false;return o0.apply(this,arguments)}}
  if(typeof loLoseE==="function"){const l0=loLoseE;loLoseE=function(p,e){if(e&&e.bor)return null;return l0.apply(this,arguments)}}}catch(e){}})();
 (function(){if(typeof wdActBtns!=="function")return;const b0=wdActBtns;wdActBtns=function(e){try{if(e&&e.bor)return[]}catch(x){}return b0.apply(this,arguments)};window.wdActBtns=wdActBtns})();
-function dcLoanRow(e){if(!e||!e.bor)return null;const o=dcByKey(e.bor.from);return["Mượn",`của ${o?dcName(o):"người khác"} · qua tuần sau trả`,"n"]}
+function dcNm(k){try{return (WD_ITEMS[k]||{}).n||itm(k).n||"Món đồ"}catch(x){return"Món đồ"}}
+function dcLoanRow(e){if(!e||!e.bor)return null;const o=dcByKey(e.bor.from);return["Mượn",`của ${o?dcName(o):"người khác"} · ${e.bor.why==="ts"?"xong hội phối đồ thì trả":"qua tuần sau trả"}`,"n"]}
 /* ---------- co-op host: the guest's requests (jcoopask H, PROTOCOL §4.1); 1 = done, 0 = refused ---------- */
 (function(){const CW=window.COOPW;if(!CW||!CW.askH)return;
  const npc=id=>(typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===id&&!v.coop)||null;
@@ -282,10 +299,10 @@ function dcLoanRow(e){if(!e||!e.bor)return null;const o=dcByKey(e.bor.from);retu
   for(const t of (a.b?[e=>!!iu&&e.iu===iu,e=>!e.iu]:[()=>true])/* a request without the piece (old client): any of that kind, as before */){const i=inv.findIndex(e=>m(e)&&t(e));if(i>=0){inv.splice(i,1);ok=1;break}if(w&&m(w.tram)&&t(w.tram)){w.tram=null;ok=1;break}}
   if(!ok&&a.bid)v.dcNo=(Array.isArray(v.dcNo)?v.dcNo:[]).slice(-19).concat([a.bid]);
   if(ok&&a.b&&a.bid){/* the NPC's loan book (the guest's copy of the NPC is not the world): the piece comes back through her «dcin» */const L=v.dcLent=Array.isArray(v.dcLent)?v.dcLent:[];
-   if(!L.some(r=>r&&r.bid===a.bid))L.push({bid:a.bid,k:a.pk,iu:a.b.iu||0,to:"id:"+(window.COOPW.seat==="a"?902:901),due:dcDueIn(a),e:a.b})}return ok};
+   if(!L.some(r=>r&&r.bid===a.bid))L.push({bid:a.bid,k:a.pk,iu:a.b.iu||0,to:"id:"+(window.COOPW.seat==="a"?902:901),due:dcDueIn(a)+(a.dur|0),e:a.b})}return ok};
  /* dcin: a piece goes into the NPC's chest; a loan TO the NPC is worn (her own trâm kept aside, dcPrev, as dcBorrow does) */
  CW.askH.dcin=function(a){const v=npc(a.to);if(!v||!a.e||!a.e.k)return 0;const e=JSON.parse(JSON.stringify(a.e));
-  if(e.bor&&!a.rb){e.bor.due=dcDueIn(a);if(e.bor.due<dcWk())return 1}/* r3: a loan TO the NPC on this seat's clock; arrived after its tuần (at the merge): it is over, the lender's book takes it home on her seat */const w=wdOf(v);const bid=dcBid(e);
+  if(e.bor&&!a.rb){e.bor.due=dcDueIn(a)+(a.dur|0);if(e.bor.due<dcWk())return 1}/* r3: a loan TO the NPC on this seat's clock; arrived after its tuần (at the merge): it is over, the lender's book takes it home on her seat */const w=wdOf(v);const bid=dcBid(e);
   if(a.rb)dcUnrec(v,a.rb);/* the guest gave back what she borrowed: off the NPC's book */
   if(a.rb&&Array.isArray(v.dcNo)&&v.dcNo.includes(a.rb))return 1;/* r3: that loan was refused here (dcout above): the piece never left this NPC, nothing comes back */
   if(bid&&((w.tram&&dcBid(w.tram)===bid)||dcInv(v).some(x=>dcBid(x)===bid)))return 1;
@@ -294,14 +311,14 @@ function dcLoanRow(e){if(!e||!e.bor)return null;const o=dcByKey(e.bor.from);retu
  CW.askBack=CW.askBack||{};CW.askBack.dcout=function(d,a,res){if(res[0]!==0||!d||!d.S)return;const bid=a.bid;const w=d.S.wd;const inv=Array.isArray(d.S.inv)?d.S.inv:[];
   if(w&&w.tram&&dcBid(w.tram)===bid){const pi=inv.findIndex(x=>x&&x.dcPrev);if(pi>=0){const p=inv.splice(pi,1)[0];delete p.dcPrev;w.tram=p}else w.tram=null}
   else{const i=inv.findIndex(x=>dcBid(x)===bid);if(i>=0)inv.splice(i,1)}
-  d.S.askNote=(d.S.askNote||[]).concat(["Món trâm định mượn đã không còn trong rương người cho mượn; ngươi cài lại trâm của mình."])}})();
+  const nm=(()=>{try{return itm(a.pk).n}catch(x){return"Món đồ"}})();d.S.askNote=(d.S.askNote||[]).concat([`${nm} định mượn đã không còn trong rương người cho mượn${a.dur?"":"; ngươi cài lại trâm của mình"}.`])}})();
 /* ---------- kit surfaces: item rows (Tư trang), wear-slot label, calendar popover ---------- */
 function dcItemRows(k){const w=WD_ITEMS[k];if(!w)return"";const R=[];
  if(w.sl==="y"){const sn=BAL.dc.season.n;R.push(["Màu",dcPair(dcRobe(S)).concat(["theo tranh dáng người đang mặc"]),"n"]);
   R.push(["Hợp mùa",`${dcYSeasons(k).map(i=>sn[i]).join(", ")} (${BAL.dc.season.fabN[dcYFab(k)]||"vải"})`,"n"])}
  else R.push(["Màu",dcPair(dcPiece(k)),"n"]);return kitRows(R)}
 /* KIT §70: the ONE item detail (kitItemDetailRows) used by every item cell (Tư trang, Bên mình, shop, reward box…) */
-(function(){if(typeof kitItemDetailRows!=="function")return;const r0=kitItemDetailRows;kitItemDetailRows=function(ref){const h=r0.apply(this,arguments);try{if(!dcOn()||!h||/>Màu</.test(h))return h;const R=typeof kitItemRef==="function"?kitItemRef(ref):null;if(!R||!WD_ITEMS[R.k])return h;const lr=dcLoanRow(R.e);const x=dcItemRows(R.k)+(lr?kitRows([lr]):"");return x?(typeof kitRowsJoin==="function"?kitRowsJoin(h,x):h+x):h}catch(err){console.error("dc rows",err);return h}};window.kitItemDetailRows=kitItemDetailRows})();
+(function(){if(typeof kitItemDetailRows!=="function")return;const r0=kitItemDetailRows;kitItemDetailRows=function(ref){const h=r0.apply(this,arguments);try{if(!dcOn()||!h||/>Màu</.test(h))return h;const R=typeof kitItemRef==="function"?kitItemRef(ref):null;if(R&&!WD_ITEMS[R.k]&&R.e&&R.e.bor){/* r4b: a borrowed piece of any kind (the Hội phối đồ lends vòng, lụa, hương) says whose it is */const lr=dcLoanRow(R.e);return lr?(typeof kitRowsJoin==="function"?kitRowsJoin(h,kitRows([lr])):h+kitRows([lr])):h}if(!R||!WD_ITEMS[R.k])return h;const lr=dcLoanRow(R.e);const x=dcItemRows(R.k)+(lr?kitRows([lr]):"");return x?(typeof kitRowsJoin==="function"?kitRowsJoin(h,x):h+x):h}catch(err){console.error("dc rows",err);return h}};window.kitItemDetailRows=kitItemDetailRows})();
 (function(){if(typeof wdItemRowsE!=="function")return;const r0=wdItemRowsE;wdItemRowsE=function(e){const h=r0.apply(this,arguments);try{if(!dcOn()||!e||!WD_ITEMS[e.k]||/>Màu</.test(h))return h;const x=dcItemRows(e.k);return x?(typeof kitRowsJoin==="function"?kitRowsJoin(h,x):h+x):h}catch(err){console.error("dc rows",err);return h}}})();
 (function(){if(typeof kitWearSlots!=="function")return;const k0=kitWearSlots;kitWearSlots=function(p){const h=k0.apply(this,arguments);try{if(!dcOn()||!p||!h||!dcOffSeason(p))return h;
  const lab=`<span class="kitl kitl-no">Trái mùa</span>`;return h.indexOf('<span class="kwearl">')>=0?h.replace('<span class="kwearl">','<span class="kwearl">'+lab+" "):h.replace(/<\/div>$/,`<span class="kwearl">${lab}</span></div>`)}catch(e){return h}}})();

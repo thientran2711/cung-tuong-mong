@@ -18,7 +18,7 @@ const HTML=process.argv[2]||'dev/index.html';const NT=+process.argv[3]||108;let 
  const R=await p.evaluate(async NT=>{let rs=777;const rnd=()=>{rs=(rs*48271)%2147483647;return rs/2147483647};
   const st={loans:0,her:0,lend:0,npc:0,move:0,box:0,pid:0,off:0,weeks:0,fest:0,trans:[]};const bad=[];const T={};let seq=0;
   /* tag every lent piece at the moment it is lent (the copy the borrower gets carries the tag; so does the book's copy — a restored copy beside the real one counts 2) */
-  const b0=dcBorrow;dcBorrow=function(to,from,e){if(e&&!e.sc)e.sc='s'+(++seq);const r=b0.apply(this,arguments);if(r){const t=T[e.sc]=T[e.sc]||{k:e.k,n:0};t.n++;t.lender=from===S?'me':from.id;t.due=dcWk();st.loans++;if(to===S)st.her++;else if(from===S)st.lend++;else st.npc++}return r};
+  const b0=dcBorrow;dcBorrow=function(to,from,e){if(e&&!e.sc)e.sc='s'+(++seq);const r=b0.apply(this,arguments);if(r){const t=T[e.sc]=T[e.sc]||{k:e.k,n:0};t.n++;t.lender=from===S?'me':from.id;t.due=dcWk();st.loans++;{const o=arguments[3];if(o&&o.why)st['w_'+o.why]=(st['w_'+o.why]||0)+1}if(to===S)st.her++;else if(from===S)st.lend++;else st.npc++}return r};
   const a0=aff;aff=(x,y)=>Math.max(a0(x,y),45);
   const TRC=[];window.__trc=TRC;const tw=(n)=>{const f0=window[n]||eval(n);const g=function(){const a=[...arguments];const r=f0.apply(this,a);try{const e=a.find(x=>x&&typeof x==='object'&&x.sc==='s15'||x&&x.e&&x.e.sc==='s15');if(e)TRC.push([dcWk(),n,JSON.stringify(a.map(x=>x===S?'S':x&&x.id!=null&&x.name?'v'+x.id:x&&x.k?{k:x.k,sc:x.sc,bor:x.bor,dcPrev:x.dcPrev}:typeof x==='object'?'obj':x)).slice(0,300)])}catch(z){}return r};eval(n+'=g')};
   ['dcGiveBack','dcTake','ilGone','loLose','dcBuy'].forEach(n=>{try{tw(n)}catch(z){}});
@@ -58,9 +58,19 @@ const HTML=process.argv[2]||'dev/index.html';const NT=+process.argv[3]||108;let 
    {const h=held().find(h=>!h.sl);if(h&&rnd()<.7&&typeof loLose==='function'){const all=h.q.inv;h.q.inv=[h.e];let c=null;try{c=loLose(h.q,{cause:'srv'})}catch(x){}finally{h.q.inv=c?all.filter(x=>x!==h.e):all}st.lose=(st.lose||0)+1;if(c)st.lost=(st.lost||0)+1}}
    if(rnd()<.1){const ids=Object.keys(BAL.dc.who).filter(k=>/^c/.test(k));S.pid=ids[Math.floor(rnd()*ids.length)];st.pid++}
    {const w=wdOf(S);if(w.tram&&w.tram.bor&&rnd()<.5){S.inv.push(w.tram);w.tram=null;st.off++}}/* she takes the borrowed trâm off (dress change in Tư trang) */
+   /* r4b (F1): the Hội phối đồ loan road (the contest announced: month 4 / 10) and the «Cho mượn» visit (j68g borrowDress) — both through dcBorrow */
+   try{const s=tsS();if(!s.dress){const m=S.month<4?4:S.month<10?10:16;const ths=Object.keys(TS_THEME);s.dress={th:ths[Math.floor(rnd()*ths.length)],m:(m-1)%12+1,y:S.year+(m>12?1:0)}}
+    if(!s.borrow&&rnd()<.5){const T=TS_THEME[s.dress.th];const L=rivals.filter(v=>v&&!v.coop&&v.alive&&!v.out);const v=L[Math.floor(rnd()*L.length)];const k=T.tags[Math.floor(rnd()*T.tags.length)];
+     if(v&&IT[k]){S.inv=S.inv.filter(e=>!(e&&e.k===k&&!e.bor&&!e.sc));v.inv=v.inv||[];if(!v.inv.some(e=>e&&e.k===k))v.inv.push({k,from:'emp'})}const o=tsBorrowOpts(s.dress.th).find(o=>!o.tsDis);if(o)o.go()}}catch(x){bad.push({wk:dcWk(),go:'ts '+String(x).slice(0,160)})}
+   try{if(rnd()<.25){const L=rivals.filter(v=>v&&!v.coop&&v.alive&&!v.out);const v=L[Math.floor(rnd()*L.length)];const vi=Math.floor(rnd()*3);
+     const kd={0:Object.keys(IT).find(k=>IT[k].kd==='Y phục'),1:'dancoc',2:Object.keys(IT).find(k=>IT[k].kd==='Trâm cài')}[vi];
+     const has=S.inv.some(e=>e&&!e.bor&&!e.w&&!e.h&&IT[e.k]&&(vi===0?itm(e.k).kd==='Y phục':vi===1?e.k==='dancoc':(itm(e.k).kd==='Trâm cài'||itm(e.k).sl==='hair')));if(!has&&kd)S.inv.push({k:kd,from:'emp'});
+     const d=v&&PEND.e68borrowDress({a0:v.id,vi});if(d&&d.o)d.o[rnd()<.5?0:1].go()}}catch(x){bad.push({wk:dcWk(),go:'ev '+String(x).slice(0,160)})}
    const n0=Q.length;try{endTurn()}catch(x){bad.push({wk:dcWk(),err:String(x).slice(0,200)})}
    /* her answers: the gate takes a loan road when one is offered, the NPC ask is lent 80 % */
-   for(let pass=0;pass<3;pass++)for(const q of Q.splice(0)){if(!q||q.ev!=='dc'||!Array.isArray(q.opts))continue;/* a road gone meanwhile re-opens the gate (Q.unshift): up to 3 passes */let o=null;
+   for(let pass=0;pass<3;pass++)for(const q of Q.splice(0)){/* r4b: the contest itself — away (finish → the contest loan goes home) or the dialog dropped (the loan book brings it home after its tuần) */if(q&&/^Hội phối đồ ·/.test(q.t||'')&&Array.isArray(q.opts)){const o=q.opts.find(o=>/^Cáo bệnh/.test(o.n));st.tsHeld=(st.tsHeld||0)+1;if(o&&rnd()<.6){try{o.go()}catch(x){bad.push({wk:dcWk(),go:'tsHold '+String(x).slice(0,160)})}st.tsAway=(st.tsAway||0)+1}continue}
+    if(q&&/^Hội phối đồ: báo đề/.test(q.t||'')&&Array.isArray(q.opts)){const o=q.opts.find(o=>/^Mượn /.test(o.n)&&!o.tsDis);if(o)try{o.go()}catch(x){}continue}
+    if(!q||q.ev!=='dc'||!Array.isArray(q.opts))continue;/* a road gone meanwhile re-opens the gate (Q.unshift): up to 3 passes */let o=null;
     if(q.evId==='dc:ask')o=q.opts[rnd()<.8?0:1];else if(/^dc:/.test(q.evId)&&q.evId!=='dc:season'&&q.evId!=='dc:season0')o=q.opts.find(o=>/^Mượn /.test(o.n))||q.opts.find(o=>/^Cài /.test(o.n))||q.opts[0];
     if(/^dc:/.test(q.evId)&&q.evId!=='dc:ask'&&!/season/.test(q.evId)){st.gate=(st.gate||0)+1;if(q.opts.some(o=>/^Mượn /.test(o.n)))st.gm=(st.gm||0)+1;else (st.gx=st.gx||[]).length<4&&st.gx.push(q.opts.map(o=>o.n.slice(0,14)))}if(o&&o.go)try{o.go()}catch(x){bad.push({wk:dcWk(),go:String(x).slice(0,160)})}}
    /* the scan clears the queue each tuần: a dialog still holding a piece (a gift on its way, a found piece …) would be destroyed by the TEST, not the game — drop that tag */
@@ -69,7 +79,7 @@ const HTML=process.argv[2]||'dev/index.html';const NT=+process.argv[3]||108;let 
    await new Promise(r=>setTimeout(r,0))}
   /* a tuần she dies: one loan each way, both come home in the death tuần */
   const dz={};{FK=null;S.dead=false;const v=rivals.find(v=>v&&!v.coop&&v.alive&&(v.inv||[]).some(e=>e&&!e.bor&&!e.dcPrev&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].sl==='tram'));
-   const mine=(S.inv||[]).find(e=>e&&!e.bor&&!e.dcPrev&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].sl==='tram');const u=rivals.find(x=>x&&!x.coop&&x.alive&&x!==v);
+   let mine=(S.inv||[]).find(e=>e&&!e.bor&&!e.dcPrev&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].sl==='tram');if(!mine){mine={k:TR[0],from:'emp'};S.inv.push(mine)}/* r4b: the visit loans may have her trâm out this tuần */const u=rivals.find(x=>x&&!x.coop&&x.alive&&x!==v);
    const theirs=v.inv.find(e=>e&&!e.bor&&!e.dcPrev&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].sl==='tram');dz.b=dcBorrow(S,v,theirs);dz.l=dcBorrow(u,S,mine);
    S.tuan=S.tuan===2?0:S.tuan+1;if(S.tuan===0)S.turn++;S.dead=true;dcTurn();S.dead=false;
    const M=census();dz.borHome=(M[theirs.sc]||[]).filter(place);dz.lendHome=(M[mine.sc]||[]).filter(place);dz.ok=dz.borHome.length===1&&dz.borHome[0].startsWith('v'+v.id)&&dz.lendHome.length===1&&dz.lendHome[0].startsWith('me')}
@@ -84,6 +94,7 @@ const HTML=process.argv[2]||'dev/index.html';const NT=+process.argv[3]||108;let 
  console.log(JSON.stringify(R.st));if(process.env.TRC)console.log('TRC',JSON.stringify(R.trc));
  ck(`≥ 2 bot years (${R.st.weeks} tuần, 36 a year) with real endTurn`,R.st.weeks>=72);
  ck(`many loans on every road (${R.st.loans}: her ${R.st.her} · she lends ${R.st.lend} · NPC↔NPC ${R.st.npc}; ${R.tags} pieces)`,R.st.her>=3&&R.st.lend>=3&&R.st.npc>=10);
+ ck(`r4b: the Hội phối đồ loans (${R.st.w_ts||0}, contest dialogs ${R.st.tsHeld||0}, away ${R.st.tsAway||0}) and the «Cho mượn» visit loans (${R.st.w_ev||0}) went through the one loan rule`,(R.st.w_ts||0)>=3&&(R.st.w_ev||0)>=5);
  ck(`disturbances ran (moved ${R.st.move}, confiscated ${R.st.box}, «thất lạc» tried ${R.st.lose||0} (taken ${R.st.lost||0}), pid changed ${R.st.pid}, taken off ${R.st.off})`,R.st.move>0&&R.st.box>0&&R.st.pid>0&&(R.st.lose||0)>0);
  ck(`every lent piece in exactly ONE place every tuần, no loan / book line past due, no stale dcPrev (${R.nbad} bad ${JSON.stringify(R.by)})`,R.nbad===0,R.bad);
  ck('a tuần she dies: the piece she borrowed is the NPC\'s again, the piece she lent is hers again',R.dz.ok,R.dz);
