@@ -560,7 +560,7 @@ rdDef("bd_hen",11,{t:"Lời thề sau cùng",w:"emp",sj:"lời thề trước l�
   {n:"Giữ chiếc nhẫn trong tay áo suốt đời",f:"tinh",wx:"lời thề ở với ngươi",lx:"một vật có thể thành chứng cớ",go:()=>{bdO("da","ta")},rt:"Chiếc nhẫn nằm trong tay áo ngươi."},
   {n:"Dâng chiếc nhẫn vào lửa thánh",f:"uy",wx:"lời thề nằm yên",lx:"lòng ngươi đóng lại",go:()=>{bdO("da","chon")},rt:"Lò lửa ở đền Hỏa Tiên nuốt chiếc nhẫn, không để lại tro."}]},
  c2:{h:"{v} đến tiễn sứ đoàn",w:"v",need:["v"],t:"{v} cũng đến tiễn sứ đoàn, đứng cạnh ngươi trên lầu cổng: “Tỷ tỷ buồn sao?”",o:[
-  {n:"Đáp: buồn, và tỷ biết ai làm tỷ buồn",f:"uy",wx:"{v} biết ngươi không quên",lx:"thù hai cung đi đến cuối đời",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} không cười nữa."},
+  {n:"Đáp: buồn, và {tg} biết ai làm {tg} buồn",f:"uy",wx:"{v} biết ngươi không quên",lx:"thù hai cung đi đến cuối đời",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} không cười nữa."},
   {n:"Đáp: không buồn, chỉ nhớ quê",f:"an",wx:"{v} không còn gì để soi",lx:"{v} nghĩ ngươi đã thua",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} khẽ gật đầu."},
   {n:"Không đáp",wx:"không lỡ lời",lx:"{v} đứng đó đến cuối",rt:"Ngươi nhìn theo sứ đoàn."}]},
  t1:{h:"Thư gửi {pv}",w:"emp",t:"Sứ đoàn mang theo thư nhà của ngươi gửi {pv}. Dòng cuối, ngươi phải viết về Mật Hồ Đạt.",o:[/*bd6b: the letter speaks of him alive or dead (both options fit either)*/

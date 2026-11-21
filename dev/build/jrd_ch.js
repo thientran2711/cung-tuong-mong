@@ -80,7 +80,7 @@ rdDef("ch_co",6,{t:"Tai mắt bị lộ",w:"me",sj:"những tai mắt bị lộ"
  c1:{h:"Hoàng hậu mời trà",w:"hh",need:["hh","th"],t:"Hoàng hậu {hh} mời riêng ngươi: “Muội vào cung là để làm cái bóng của Thái hậu sao? Bóng thì không có ngày mai.”",o:[
   {n:"Ngầm nhận một mối giao hảo",f:"two",wx:"có đường lui ở Càn Ninh cung",lx:"Đức Thọ cung biết ngươi ngồi uống trà lâu",rt:"Hoàng hậu cười, đổi chén trà nguội lấy chén nóng.",rf:"Thái hậu biết ngay trong chiều."},
   {n:"Đáp khéo, không nhận không chối",wx:"không mắc lời nào",lx:"Hoàng hậu thấy ngươi khó nắm thóp",rt:"Hoàng hậu gật đầu: “Muội giỏi lắm.”"},
-  {n:"Thưa thẳng: thiếp là cháu Thái hậu",f:"obey",wx:"giữ trọn một lòng",lx:"Hoàng hậu thôi ngọt",go:()=>{if(!S.thDead)ap67({th:CHTH("ch_co_6.c1.2.th")})},rt:"Hoàng hậu đặt chén xuống, tiễn ngươi ra tận cửa."}]},
+  {n:"Thưa thẳng: thần thiếp là cháu Thái hậu",f:"obey",wx:"giữ trọn một lòng",lx:"Hoàng hậu thôi ngọt",go:()=>{if(!S.thDead)ap67({th:CHTH("ch_co_6.c1.2.th")})},rt:"Hoàng hậu đặt chén xuống, tiễn ngươi ra tận cửa."}]},
  c2:{h:"{v} ra mặt làm chứng",w:"v",need:["v"],t:"{v} nói với cả cung rằng nàng thấy người của ngươi ra vào Nội vụ phủ lúc nửa đêm.",o:[
   {n:"Đòi {v} đối chất",wx:"lời gièm bị lật",lx:"thành ra cãi nhau",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"{v} không nói được giờ nào, người nào.",rf:"{v} đưa ra một thái giám chịu làm chứng."},
   {n:"Mời {v} đến, hỏi nàng muốn gì",wx:"{v} thôi nói",lx:"{v} thấy ngươi sợ",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} chỉ muốn một chỗ ngồi gần Thái hậu hơn.",rf:"{v} cười, không đáp."},
@@ -299,7 +299,7 @@ rdDef("ch_co",11,{t:"Cô cháu",w:"th",sj:"cô cháu Đức Thọ cung",cast(A){
  c3:{h:"Hoàng thượng hỏi về họ ngoại",w:"emp",t:"Hoàng thượng hỏi: “Họ ngoại của mẫu hậu, sau này nàng định để họ thế nào?”",o:[
   {n:"Xin ngài giữ họ, ngươi gánh",wx:"họ ngoại còn chỗ",lx:"ngài thấy ngươi giữ phe",rt:"Hoàng thượng gật: “Có nàng thì được.”",rf:"Hoàng thượng không đáp."},
   {n:"Xin ngài xử theo phép",wx:"ngài tin ngươi",lx:"họ ngoại có kẻ mất ghế",rt:"Hoàng thượng cười, nắm tay ngươi."},
-  {n:"Thưa: việc triều thiếp không dám bàn",wx:"giữ phép",lx:"không giúp ai",rt:"Ngài gật đầu."}]},
+  {n:"Thưa: việc triều thần thiếp không dám bàn",wx:"giữ phép",lx:"không giúp ai",rt:"Ngài gật đầu."}]},
  t1:{h:"Câu hỏi cuối của cô mẫu",w:"th",need:["th"],t:"Thái hậu hỏi: “Cả đời ai gia dạy con đánh cờ. Giờ con muốn làm cháu, làm quân cờ, hay làm người ngồi bên kia bàn?”",o:[
   {n:"Làm người ngồi bên kia bàn",f:"own",wx:"bà nể ngươi",lx:"gánh nặng như bà",rt:"Thái hậu đẩy hộp gỗ về phía ngươi một tấc."},
   {n:"Làm cháu của cô mẫu",f:"obey",wx:"bà cười",lx:"vẫn trong ván cờ của bà",rt:"Thái hậu xoa đầu ngươi như ngày ngươi mới vào cung."},
@@ -746,7 +746,7 @@ rdDef("ch_ho",7,{t:"Lời gièm",w:"v",sj:"lời gièm đến tai Thái hậu",c
   {n:"Tung một lời đồn khác đè lên",wx:"cả cung nói chuyện khác",lx:"bị lộ là ngươi tung",rt:"Ba ngày sau, cả cung chỉ nói chuyện một con mèo lạc vào Dưỡng Tâm điện.",rf:"Có kẻ nhận ra lời đồn mới đến từ cung ngươi."}]},
  c2:{h:"{v} đến thăm",w:"v",need:["v"],t:"{v} mang trà sang, nói như vô tình: “Muội cũng nghe người ta nói xấu tỷ. Tỷ đừng để bụng.”",o:[
   {n:"Cảm ơn, giữ lại nói chuyện",wx:"{v} lỡ lời",lx:"nàng ra về mà ngươi không biết thêm gì",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"Nói một hồi, {v} lỡ lời nhắc đúng câu ngươi nói với {maid}.",rf:"{v} nói chuyện khác, rồi về."},
-  {n:"Đáp thẳng: lời ấy từ cung muội ra",wx:"{v} biết ngươi đã biết",lx:A=>S.thDead?"thành ra cãi nhau, đến tai nhà ngoại":"thành ra cãi nhau, đến tai Thái hậu",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} tái mặt, đặt chén trà xuống.",rf:A=>S.thDead?"{v} khóc, viết thư về nhà ngoại.":"{v} khóc chạy sang Đức Thọ cung."},
+  {n:"Đáp thẳng: lời ấy từ cung {tg} ra",wx:"{v} biết ngươi đã biết",lx:A=>S.thDead?"thành ra cãi nhau, đến tai nhà ngoại":"thành ra cãi nhau, đến tai Thái hậu",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} tái mặt, đặt chén trà xuống.",rf:A=>S.thDead?"{v} khóc, viết thư về nhà ngoại.":"{v} khóc chạy sang Đức Thọ cung."},
   {n:"Tiếp trà, không nói gì",wx:"không lộ ý",lx:"{v} cho là ngươi chưa biết",rt:"Ngươi rót thêm trà, mỉm cười."}]},
  t1:{h:"Chiếc trâm bạc",w:"maid",t:"Chiếc trâm bạc trả cho kẻ tung tin có khắc hoa văn của Nội vụ phủ, chỉ phát cho cung có phẩm từ bậc nhất định trở lên.",o:[
   {n:"Tra sổ phát trâm của Nội vụ phủ",wx:"có chứng cứ",lx:"Nội vụ phủ báo lên",f:"proof",rt:"Sổ ghi: trâm ấy phát cho cung {v} mùa xuân năm ngoái.",rf:"Quản sự Nội vụ phủ nói sổ đã nộp lên."},
@@ -1056,7 +1056,7 @@ rdDef("ch_bi",9,{t:"Bảo vệ hay dùng",w:"emp",sj:"lá thư cũ và người 
  c1:{h:"Hoàng thượng hỏi riêng",w:"emp",t:"Đêm khuya, Hoàng thượng hỏi khẽ: “Mẫu hậu năm xưa có làm gì không? Trẫm muốn nghe từ nàng.”",o:[
   {n:"Thưa thật cả hai phía",wx:"ngài tin ngươi không giấu ngài",lx:A=>S.thDead?"họ ngoại trách ngươi kể":"Thái hậu biết ngươi kể",f:"just",rt:"Hoàng thượng nghe xong, ngồi rất lâu: “Mẫu hậu đã sợ vì trẫm.”",rf:"Hoàng thượng đứng dậy, ra khỏi cung không nói gì."},
   {n:"Thưa: mẫu hậu chỉ tự vệ",f:"protect",wx:"che được cho bà",lx:"ngài biết ngươi chỉ nói một nửa",rt:"Hoàng thượng gật đầu, không hỏi thêm."},
-  {n:"Thưa: thiếp không dám bàn chuyện tiên đế",wx:"không sai lời",lx:"ngài thấy ngươi lảng",rt:"Hoàng thượng cười nhạt."}]},
+  {n:"Thưa: thần thiếp không dám bàn chuyện tiên đế",wx:"không sai lời",lx:"ngài thấy ngươi lảng",rt:"Hoàng thượng cười nhạt."}]},
  c2:{h:"{v} ra giá",w:"v",need:["v"],t:"{v} nhắn: nàng còn giữ một trang chép từ hộp gấm. Trước rằm, đưa một món bạc lớn thì trang ấy về tay ngươi; qua rằm, nó sang Ngự sử đài.",o:[
   {n:"Trả bạc trước rằm",wx:"trang chép về tay ngươi",lx:"tốn bạc lớn, {v} biết ngươi chịu trả",f:"use",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Trang chép được gói trong khăn lụa gửi sang."},
   {n:"Tìm chứng {v} đưa bạc ra cung để đổi lại",wx:"hai bên cùng cầm thóp nhau",lx:"không đủ chứng thì nàng làm thật",f:"use",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"{v} thấy sổ bạc của nàng trong tay ngươi, gửi trang chép sang không đòi gì.",rf:"{v} cười: “Rằm.”"},

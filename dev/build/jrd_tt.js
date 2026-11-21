@@ -111,7 +111,7 @@ rdDef("tt_co",8,{t:"Ái phi hay con gái Tể tướng",w:"emp",sj:"lòng ngươ
  s2:{h:"Hoàng thượng thôi kể chuyện triều",w:"emp",if:RDW(0),t:"Đã ba tháng Hoàng thượng không nhắc một lời việc triều khi ở cung ngươi. Ngài vẫn đến, nhưng chỉ nói chuyện hoa cỏ.",o:[
   {n:"Cũng chỉ nói chuyện hoa cỏ",wx:"ngài thấy nhẹ lòng",lx:"ngươi mù tịt việc triều, mưu gì cũng thiếu tin tức",rt:"Hoàng thượng ở lại lâu hơn mọi khi."},
   {n:"Khéo hỏi một chuyện nhỏ",wx:"biết được hướng gió",lx:"ngài thấy ngươi dò",rt:"Ngài kể một chuyện ở bộ Binh, không giấu.",rf:"Ngài đặt chén trà xuống: “Nàng hỏi cho ai?”"},
-  {n:"Thưa thật: thiếp không muốn ngài nghi",wx:"ngài cảm động",lx:"ngài cho là lời khéo",rt:"Hoàng thượng nắm tay ngươi rất lâu.",rf:"Hoàng thượng chỉ gật đầu."}]},
+  {n:"Thưa thật: thần thiếp không muốn ngài nghi",wx:"ngài cảm động",lx:"ngài cho là lời khéo",rt:"Hoàng thượng nắm tay ngươi rất lâu.",rf:"Hoàng thượng chỉ gật đầu."}]},
  c1:{h:"Cha đòi tin",w:"dad",t:"{dad} nhắn: “Lễ bộ sắp mở kỳ tuyển tú. Con hỏi Hoàng thượng xem ngài muốn tuyển nhà nào.”",o:[
   {n:"Hỏi cho cha",f:"obey",wx:"cha có tin",lx:"Hoàng thượng biết ngươi hỏi cho ai",go:(_A,_ok,G)=>e67dad(G[0]),rt:"Ngươi biết được hai nhà trong danh sách.",rf:"Hoàng thượng hỏi lại: “Ai muốn biết?”"},
   {n:"Đáp cha: con không hỏi được",f:"own",wx:"giữ lòng Hoàng thượng",lx:"cha lạnh nhạt, phủ thôi nói giúp ngươi",go:(_A,_ok,G)=>e67dad(G[0]),rt:"Cha không hồi âm."},
@@ -127,7 +127,7 @@ rdDef("tt_co",8,{t:"Ái phi hay con gái Tể tướng",w:"emp",sj:"lòng ngươ
  x1:{h:"Phép thử cuối",w:"emp",t:"Hoàng thượng sắp đi tế Giao. Ngài giao ngươi một hộp tấu niêm phong về phủ Tể tướng, dặn: “Hộp này nàng trông giúp trẫm ba ngày. Chìa trẫm giữ.”",o:[
   {n:"Giữ nguyên niêm, trả lại sau ba ngày",lx:"canh hộp ba ngày ba đêm, mất ăn mất ngủ",e:["win","mid"],rt:"Niêm nguyên vẹn. Hoàng thượng nhìn ngươi rất lâu rồi nói: “Trẫm tin nàng.”",rf:"Niêm nguyên vẹn, nhưng có kẻ báo ngươi đã mở hộp xem."},
   {n:"Mở xem, báo cha",wx:"cha biết trước, nợ ngươi một lần",lx:"phá niêm hộp tấu của vua là tội lớn",go:(A,ok,G)=>ok?e67dad(G[0]):"",e:["mid","lose"],rt:"Cha kịp lo trước, Hoàng thượng không biết.",rf:"Niêm bị động. Hoàng thượng biết."},
-  {n:"Xin Hoàng thượng đừng giao cho thiếp",e:"mid",lx:"phép thử bỏ dở, ngài thấy ngươi né",rt:"Hoàng thượng thu lại hộp tấu."}]}},
+  {n:"Xin Hoàng thượng đừng giao cho thần thiếp",e:"mid",lx:"phép thử bỏ dở, ngài thấy ngươi né",rt:"Hoàng thượng thu lại hộp tấu."}]}},
  E:{win:{tag:"Hoàng thượng tin ngươi",w:"emp",t:"Từ đây Hoàng thượng kể việc triều với ngươi như với một người tri kỷ. Cha biết, và cha bắt đầu sợ ngươi."},
   mid:{tag:"Ngờ vực chưa tan",t:"Hoàng thượng vẫn thương ngươi, nhưng có những đêm ngài im lặng khi ngươi nhắc đến nhà."},
   lose:{tag:"Hoàng thượng đề phòng ngươi",t:"Niêm tấu bị động. Hoàng thượng không nói ra, nhưng ngài thôi đến cung ngươi một mùa.",go:(_A,G)=>e67dad(G[0])}}});
@@ -298,7 +298,7 @@ rdDef("tt_oan",7,{t:"Ai được lợi",w:"v",sj:"nhà được lợi từ cái 
  B:{s1:{h:"{v} ghé thăm",w:"v",if:RDW(1),t:"{v} mang trà ngon đến cung ngươi, nói như vô tình: “Nghe nói muội đang giữ một người họ Triệu.”",o:[
   {n:"Đáp thẳng: phải",wx:"{v} biết ngươi không sợ",lx:"lộ hết bài",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} đặt chén xuống, không cười nữa.",rf:"{v} cười: “Gan thật.”"},
   {n:"Giả không hiểu",wx:"{v} không đoán được",lx:"{v} biết ngươi giả",rt:"{v} ra về với nửa câu hỏi.",rf:"{v} nhìn ngươi như nhìn kẻ dối."},
-  {n:"Hỏi lại: tỷ nghe từ ai",wx:"biết đường tin của {v}",lx:"{v} cảnh giác, rêu rao ngươi giữ người trái phép",rt:"{v} buột miệng một cái tên thái giám.",rf:"{v} chối."}]},
+  {n:"Hỏi lại: {tg} nghe từ ai",wx:"biết đường tin của {v}",lx:"{v} cảnh giác, rêu rao ngươi giữ người trái phép",rt:"{v} buột miệng một cái tên thái giám.",rf:"{v} chối."}]},
  s2:{h:"{v} lên cao",w:"v",if:A=>RDW(0)()&&TT_VUP(A),t:"{v} được tấn phong, nhà nàng được ban thưởng. Ai cũng biết phần thưởng ấy là phần của cha ngươi ngày trước.",o:[
   {n:"Đến chúc mừng",wx:"giữ lễ",lx:"nuốt giận",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} nhận lễ, nụ cười rất mỏng."},
   {n:"Không đến",wx:"không cúi",lx:"bị nói là ghen",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Ngươi đóng cửa cung."},
@@ -600,7 +600,7 @@ rdDef("tt_tranh",9,{t:"Gia ấn phủ Tể tướng",w:"emp",sj:"cuộc tranh gi
   {n:"Chờ",wx:"giữ mình",lx:"xa ngài thêm",rt:"Ngươi chờ."},
   {n:"Tìm cách gặp ở Ngự hoa viên",wx:"được gặp",lx:"bị nói là đón đường",rt:"Hoàng thượng dừng lại nói chuyện.",rf:"Ngài đi qua."}]},
  c1:{h:"Triều thần bàn",w:"emp",t:"Ngự sử nói: gia ấn phủ Tể tướng là việc nhà, nhưng nhà ấy dính đến hậu cung thì là việc nước.",o:[
-  {n:"Lùi lại, nói không tranh",wx:"triều yên",lx:"lùi là mất: triều thôi coi ngươi là người của phủ",rt:"Ngươi nhắn ra ngoài: “Thiếp không tranh ấn.”"},
+  {n:"Lùi lại, nói không tranh",wx:"triều yên",lx:"lùi là mất: triều thôi coi ngươi là người của phủ",rt:"Ngươi nhắn ra ngoài: “Thần thiếp không tranh ấn.”"},
   {n:"Nhờ người nói giúp ở triều",wx:"có tiếng nói",lx:"lộ ngươi có người",rt:"Một Thị lang nói đỡ.",rf:"Thị lang bị hặc."},
   {n:"Im lặng",wx:"không động",lx:"triều tự bàn, tên ngươi bị nhắc mà không ai bênh",rt:"Ngươi im."}]},
  c2:{h:"{v} tâu",w:"v",need:["v"],t:"{v} tâu với Hoàng thượng: con gái Tể tướng muốn nắm cả phủ cha lẫn hậu cung.",o:[
@@ -635,7 +635,7 @@ rdDef("tt_tranh",10,{t:"Gia yến đoàn viên",w:"dad",sj:"bữa gia yến cu�
   {n:"Mời lại huynh một chén",wx:"ngươi là người mời",lx:"huynh tự ái đặt chén xuống, cả bàn ngượng",rt:"Cả bàn vỗ tay.",rf:"Huynh đặt chén xuống."},
   {n:"Xin dùng trà thay rượu",wx:"giữ mình",lx:"huynh thấy bị từ chối trước mặt cả nhà",rt:"Huynh cười gượng."}]},
  c2:{h:"{v} kể chuyện cũ",w:"v",need:["v"],t:"{v} kể chuyện món điểm tâm năm trước, như vô tình.",o:[
-  {n:"Đáp nhẹ nhàng",wx:"{v} mất mặt",lx:"không ai cười, ngươi thành kẻ bắt bẻ",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Ngươi nói: “Chuyện cũ, tỷ còn nhớ kỹ thật.” Cả bàn cười.",rf:"Không ai cười."},
+  {n:"Đáp nhẹ nhàng",wx:"{v} mất mặt",lx:"không ai cười, ngươi thành kẻ bắt bẻ",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Ngươi nói: “Chuyện cũ, {tg} còn nhớ kỹ thật.” Cả bàn cười.",rf:"Không ai cười."},
   {n:"Im lặng",wx:"giữ hòa khí",lx:"{v} đắc ý",rt:"Ngươi gắp thức ăn cho mẹ."},
   {n:"Nhờ cha lên tiếng",wx:"cha bênh",lx:"cha giả như không nghe, ngươi mất mặt",rt:"Cha nói: “Chuyện ấy đã xong.”",rf:"Cha giả như không nghe."}]},
  t1:{h:"Mẹ khóc",w:"dad",t:"Cuối bữa, mẹ ngươi khóc: “Nhà mình lại ngồi chung một mâm.”",o:[
@@ -951,11 +951,11 @@ rdDef("tt_mat",10,{t:"Giữ hay phá",w:"hh",sj:"số phận của mật ước"
  t1:{h:"Đêm cuối",w:"emp",need:["hh"],t:"Hoàng thượng hỏi: “Nàng có biết gì về Hoàng hậu mà trẫm nên biết?”",o:[
   {n:"Không, thưa Hoàng thượng",f:"keep",wx:"giữ ước",lx:"giấu vua; nếu sau này lộ, ngài nhớ đêm nay",rt:"Hoàng thượng gật đầu."},
   {n:"Có, và kể",f:"break",wx:"vua tin ngươi",lx:"bội ước, Hoàng hậu sẽ biết ai đã kể",go:A=>{A.f.told=1},rt:"Hoàng thượng nghe đến hết."},
-  {n:"Thiếp không nên nói",wx:"giữ phận phi tần",lx:"vua đoán ngươi biết mà giấu",rt:"Hoàng thượng nhìn ngươi rất lâu."}]},
+  {n:"Thần thiếp không nên nói",wx:"giữ phận phi tần",lx:"vua đoán ngươi biết mà giấu",rt:"Hoàng thượng nhìn ngươi rất lâu."}]},
  t2:{h:"Đêm cuối",w:"emp",if:()=>!MATQ(),t:"Hoàng thượng hỏi: “Nhà nàng và nhà Trung cung cũ có điều gì trẫm nên biết?”",o:[
   {n:"Không, thưa Hoàng thượng",f:"keep",wx:"giữ ước",lx:"giấu vua; nếu sau này lộ, ngài nhớ đêm nay",rt:"Hoàng thượng gật đầu."},
   {n:"Có, và kể",f:"break",wx:"vua tin ngươi",lx:"bội ước, nhà ấy sẽ biết ai đã kể",go:A=>{A.f.told=1},rt:"Hoàng thượng nghe đến hết."},
-  {n:"Thiếp không nên nói",wx:"giữ phận phi tần",lx:"vua đoán ngươi biết mà giấu",rt:"Hoàng thượng nhìn ngươi rất lâu."}]},
+  {n:"Thần thiếp không nên nói",wx:"giữ phận phi tần",lx:"vua đoán ngươi biết mà giấu",rt:"Hoàng thượng nhìn ngươi rất lâu."}]},
  x1:{h:"Giữ hay phá",w:"hh",need:["hh"],t:"Ngày triều đình định chuyện Trung cung. Mật ước nằm trong tay ngươi.",o:[
   {n:"Giữ ước, cứu Hoàng hậu",e:["win","lose"],rt:"Hoàng hậu giữ được ngôi. Nàng nợ ngươi cả đời.",rf:"Ngươi giữ ước mà Hoàng hậu vẫn bị phạt."},
   {n:"Phá ước, dâng vua",e:["win","lose"],rt:"Hoàng thượng thấy ngươi trung. Trung cung lung lay.",rf:"Hoàng thượng thấy ngươi là kẻ bán đứng người cùng ước."},

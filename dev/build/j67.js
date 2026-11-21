@@ -59,6 +59,14 @@ const TOK67={
  eun:()=>eun67(),k:()=>{const s=son67();return s?s.name:"hoàng tử"},d:()=>{const d=dau67();return d?d.name:"công chúa"},
  mis:()=>{const m=srvMis67();return m?m.name:"chủ nhân"},foe:()=>S.foe||"kẻ thù",foed:()=>S.foeDad||"kẻ thù của cha",
  sj:A=>A.sj||"chuyện này",/* {N}/{Nc} = what a servant calls her (was {xung}) — the one address core (jvoice) */N:()=>kSay({srv:"f"},S,"{goi}"),Nc:()=>kSay({srv:"f"},S,"{Goi}"),n1:A=>A.n1||"",n2:A=>A.n2||"",emp:()=>"Hoàng thượng"};
+/* self-word (E39r follow-up, VANPHONG §2, one address core jvoice kAddr): HER words to the peer consort of the beat — {tx}/{Tx} = what she calls
+   herself (muội / tần thiếp / tỷ / bổn cung / ta by rank and mood), {tg}/{Tg} = what she calls that consort (muội muội / tỷ tỷ / title…).
+   The peer = the beat's rival {v}, else her old mistress {mis}; no such person → «ta» / «tỷ tỷ». Never typed by hand in a road line. */
+function peer67(A){try{return rv67(A,"v")||srvMis67()||null}catch(e){return null}}
+function my67(A,k){const p=peer67(A);try{if(p&&typeof kAddr==="function"){const a=kAddr(S,p);if(a&&a[k])return a[k]}}catch(e){}return k==="xung"?"ta":"tỷ tỷ"}
+const cap67=s=>s?s.charAt(0).toUpperCase()+s.slice(1):s;
+/* {tsv}: her self word to a servant / eunuch (bổn cung from Tần up, ta below — kAddr) */
+Object.assign(TOK67,{tsv:()=>{try{return kAddr(S,{srv:"m"}).xung||"ta"}catch(e){return"ta"}},tx:A=>my67(A,"xung"),Tx:A=>cap67(my67(A,"xung")),tg:A=>my67(A,"goi"),Tg:A=>cap67(my67(A,"goi"))});
 /* a goal / step text that names the arc's people tells HER who they are (D47: the Mục tiêu row showed "Quý nhân ???" for the very woman the chapter says she found out): name + face known (j61 stage 2), nothing logged */
 function arcReveal67(t,A){try{if(typeof k61Know!=="function"||!A||typeof t!=="string")return;const L=[];for(const k of ["v","v2"])if(t.includes("{"+k+"}")){const v=rv67(A,k);if(v)L.push(v)}if(t.includes("{foe}")){const v=foe67();if(v)L.push(v)}if(L.length)k61Know(L,"",true,2)}catch(e){}}
 /* palace voice: {goi}/{Goi} = how the beat's speaker w calls her, {xung}/{Xung} = the speaker's self word (jvoice kAddr, one core) */
@@ -1189,7 +1197,7 @@ ARC67.thd_tro=arcFx("thd_tro",{o:"thd",t:"Học trò của cha",w:"maid",sj:"chu
  x1:{h:"Định đoạt khoa án",w:"emp",t:"Hoàng thượng hỏi ngươi: nên xử khoa án này thế nào?",o:[
   {n:"Tâu: xử nghiêm kẻ mua đề, trả công bằng cho sĩ tử",e:["win","lose"],rt:"Kẻ mua đề bị trị tội, {n1} được ghi tên bảng vàng.",rf:"Chứng cứ không đủ, ngươi bị trách xen việc triều."},
   {n:"Tâu: chỉ cần trả lại tên cho người bị oan",e:["mid","lose"],rt:"{n1} được ghi tên, không ai bị xử.",rf:"Án bị gác lại."},
-  {n:"Thưa: việc triều, thiếp không dám bàn",e:"mid",lx:"học trò cha chịu thiệt",rt:"Ngươi im lặng."}]}},
+  {n:"Thưa: việc triều, thần thiếp không dám bàn",e:"mid",lx:"học trò cha chịu thiệt",rt:"Ngươi im lặng."}]}},
  E:{win:{tag:"Trả công bằng cho sĩ tử",w:"emp",t:"Khoa án được xử công minh. Sĩ tử khắp nơi truyền tụng tên ngươi; {n1} làm quan, nhớ ơn cha con ngươi."},
   mid:{tag:"Học trò được ghi tên",t:"{n1} được ghi tên bảng vàng. Kẻ mua đề vẫn ung dung, nhưng học trò của cha đã có đường."},
   lose:{tag:"Bị trách xen việc triều",t:"Hoàng thượng trách ngươi xen chuyện khoa cử. Nhà quan mua đề thù ngươi.",go:(A,_ok,G)=>e67foe(rv67(A,"v"),G[0])}}});

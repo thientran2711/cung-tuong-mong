@@ -650,7 +650,7 @@ rdDef("td_song",7,{t:"Kẻ nghi ngờ",w:"maid",sj:"người nhận ra gương m
   {n:"Rỉ tin để lão quan bộ Lễ nói trước",if:A=>A.f.elder,wx:"lời tốt đến ngự án trước lời xấu",lx:"lão quan dính vào chuyện nhà ngươi",rt:"Lão quan tâu về một người lính trung dũng ở Nhạn Môn."}]},
  x1:{h:"Câu hỏi giữa bữa",w:"emp",t:"Hoàng thượng hỏi giữa bữa: “Có người tâu tên lính Tiểu Thạch là con tội thần, đang kết bè trong quân để báo thù. Nàng có nghe gì không?”",o:[
   {n:"Dâng bản ghi công của em",e:["win","lose"],rt:"Hoàng thượng đọc bản ghi công, nói: “Kết bè gì mà cõng phó tướng ra khỏi vòng vây.”",rf:"Hoàng thượng đặt bản ghi công xuống: “Nàng biết nhiều quá.”"},
-  {n:"Thưa: người tâu có thù với nhà thiếp",e:["mid","lose"],go:(A,ok,G)=>{if(ok)rdOan(A,"foe",G[0])},rt:"Hoàng thượng gật đầu, lời tâu bị gác lại.",rf:"Hoàng thượng thấy ngươi lại lôi thù cũ ra."},
+  {n:"Thưa: người tâu có thù với nhà thần thiếp",e:["mid","lose"],go:(A,ok,G)=>{if(ok)rdOan(A,"foe",G[0])},rt:"Hoàng thượng gật đầu, lời tâu bị gác lại.",rf:"Hoàng thượng thấy ngươi lại lôi thù cũ ra."},
   {n:"Giả không biết",e:["mid","lose"],rt:"Hoàng thượng chuyển sang chuyện khác.",rf:"Hoàng thượng nhìn ngươi rất lâu."}]}},
  E:{win:{tag:"Lời đồn hóa lời khen",w:"emp",t:"Lời tâu bị gạt đi, và Hoàng thượng nhớ đến tên lính ấy như một người lính giỏi. Nhà {foed} mất một nước cờ.",go:(A,G)=>{rdOan(A,"foe",G[0]);return""}},
   mid:{tag:"Lời đồn bị gác",t:"Lời tâu bị gác lại, chưa bị bác. Nó vẫn nằm đâu đó trong ngự thư phòng."},
@@ -760,7 +760,7 @@ rdDef("td_song",10,{t:"Đưa em về",w:"emp",sj:"chỗ đứng của em",cast(A
  x1:{h:"Chỗ đứng của em",w:"emp",t:"Binh bộ trình danh sách đổi phiên. Một dòng có tên em, để trống chỗ đến. Hoàng thượng hỏi ngươi: “Nghe nói nàng biết người lính này?”",o:[
   {n:"Thưa: xin cho y về cấm quân",e:["win","lose"],rt:()=>TDSW()?"Hoàng thượng viết vào chỗ trống: “Cấm quân, cửa Đông.”":"Hoàng thượng viết vào chỗ trống: “Cấm quân, coi ngựa ở cửa Đông.”",rf:"Hoàng thượng viết: “Đồn Ngọc Lĩnh.” Nơi xa nhất."},
   {n:"Thưa: y nên ở lại ải",e:["mid","lose"],rt:"Em ở lại Nhạn Môn, dưới trướng người quen.",rf:"Em bị điều sang một đồn xa không ai quen."},
-  {n:"Thưa: thiếp không biết",e:["mid","lose"],rt:"Hoàng thượng để Binh bộ tự xếp. Em ở lại ải.",rf:"Binh bộ, có người nhà {foed}, xếp em đi xa."}]}},
+  {n:"Thưa: thần thiếp không biết",e:["mid","lose"],rt:"Hoàng thượng để Binh bộ tự xếp. Em ở lại ải.",rf:"Binh bộ, có người nhà {foed}, xếp em đi xa."}]}},
  E:{win:{tag:"Em về kinh",w:"emp",t:()=>(TDSW()?"Em về cấm quân, giữ cửa Đông. Mỗi tháng có một ngày em đứng gác gần cung ngươi.":"Em về cấm quân, coi ngựa ở cửa Đông. Mỗi tháng có một ngày em dắt ngựa qua gần cung ngươi.")+" Hai chị em chưa thể nhận nhau, nhưng đã thấy nhau."},
   mid:{tag:"Em ở lại ải",t:"Em ở lại biên ải, yên ổn mà xa. Thư vẫn đi, mỗi mùa một lá."},
   lose:{tag:"Em bị điều đi xa",t:"Em bị điều đến một đồn xa tít, thư đi ba tháng mới tới. Nhà {foed} đã chọn chỗ cho em thay ngươi.",go:(A,G)=>{rdOan(A,"foe",G[0]);return""}}}});
