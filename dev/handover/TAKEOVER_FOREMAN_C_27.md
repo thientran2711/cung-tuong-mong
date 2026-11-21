@@ -11,7 +11,7 @@ HARD LESSONS FROM #27 (she was furious at each):
 - Drawers race your stop messages: send STOP to the drawer FIRST, then edit.
 - Rule G67: QP/HQP/HH everyday prompts = 2 layers, no open outer robe/cloak (triều phục keeps cloak). Every bow = LONG trailing ties (G60). Big flowers allowed t4+, banned t1–t3 (G65).
 OPEN JOBS (details in FOREMAN_C_STATUS #27 lines):
-1. THU ROOT FIX (urgent, L2002): t6 QP words must give approved eIPcGThdqL look at @135 (two separate flat tiers, pearl fringes, full square frame) — fix in store/builder for all 90; t7/t8 = MAIDFIX4 b80f839 words (L1997 YMlZKpqWeC/Lw8KMzOswO OK'd); draw t6+t7+t8 @135 (405) + sheet approved|t6|t7|t8. Full brief at end of dev/handover/reports/VE10.md. Offered to VE7 (check VE7.md whether it took it).
+1. THU ROOT FIX (urgent, L2002): t6 QP words must give approved eIPcGThdqL look at @135 (two separate flat tiers, pearl fringes, full square frame) — fix in store/builder for all 90; t7/t8 = MAIDFIX4 b80f839 words (L1997 YMlZKpqWeC/Lw8KMzOswO OK'd); draw t6+t7+t8 @135 (405) + sheet approved|t6|t7|t8. Full brief at end of dev/handover/reports/VE10.md. VE7 could not take it; given to VE6 (session_01D3E3NavF2AADAvmzPDhZC5) after the Tần lock — check VE6.md.
 2. Thu Tần L1994 VX7nsw2MMU sent L2003: lamp still at front waist + short bow → ask owner whether to redraw (file fixes: sash long ties, lamp at her side).
 3. Thu t1/t3 drawn with short bows (owner L1987: no redraw).
 4. Flower colour table CANCELLED by owner L2006. Tần L1994 VX7nsw2MMU APPROVED — VE6 locking Tần density into store/builder + rule.
