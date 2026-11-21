@@ -834,3 +834,4 @@ kit-badge rv2 | review/kit-badge-rv2 9a05a707 | rv session | PASS | 21/11
 | OD03 FAV-ART (opus; emperor monthly favoured/disfavoured art + flip odds; GAP OD03) | review/od03-favart (base night-balance-bundle); reports/od03-favart.md | FOREMAN D #15 | session_01964izDQzR1Uo3Ssiwer1sk | RUNNING | 21/11 09:52Z |
 | BAL PROOF (opus; GAP OR12 HH ±5 + EM01 emotion 150v150) | review/bal-proof; reports/bal-proof.md | FOREMAN D #15 | session_01964izFzGxSL8HNQXDXiA9R | RUNNING | 21/11 09:52Z |
 kit-focus rv2 | review/kit-focus-rv2 6291a355 | rv session | FAIL (Fold sub-line cuts the cost) | 21/11
+| mg-noword-care (sonnet SMALL; MAIN CHÍNH 92) | review/mg-noword-care; briefs/b5-mg-noword-care.md | B | session_01N1tNP4xiA2xLsJRTgEi9xb | READY 5fde6816 | 21/11 |
