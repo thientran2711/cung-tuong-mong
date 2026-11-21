@@ -24,7 +24,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
    res.months=n;res.dead=!!S.dead;res.inPal=!!(S.kc&&S.kc.inPal);
    const ar=S.kc.ar;res.done=ar.done.map(d=>d.a+':'+d.e+':'+d.seed);res.seed=S.kc.seed3||null;
    if(!S.dead&&res.inPal){const miss=S.kc.early3?[]:ar.plan.filter(id=>!ar.done.some(d=>d.a===id));res.early=S.kc.early3||'';if(miss.length)F.push('chapters not ended '+miss);
-    if(S.kc.seed3&&S.st&&S.st.ch){const c=S.st.ch;res.road=(S.st.f14&&S.st.f14.road)||c.pool[0];if(hit&&arcOk67(ARC67[S.kc.seed3.id])&&res.road!==S.kc.seed3.id&&!(S.st.f14&&S.st.f14.r0))F.push('road '+res.road+' != seed '+S.kc.seed3.id)}}
+    if(S.kc.seed3&&S.st&&S.st.ch){const c=S.st.ch;res.road=(S.st.f14&&S.st.f14.road)||c.pool[0];if(hit&&!S.kc.seed3.off&&arcOk67(ARC67[S.kc.seed3.id])&&res.road!==S.kc.seed3.id&&!(S.st.f14&&S.st.f14.r0))F.push('road '+res.road+' != seed '+S.kc.seed3.id)}}
    res.sx=S.kc.fam.filter(m=>/^sx/.test(m.r)).length;res.suits=(S.kc.suit||[]).length;
    if(S.kc.fam.some(m=>m.r==='me'&&m.dead)&&!(S.inv||[]).some(e=>e.k==='divat'))F.push('mother died, no keepsake');
    res.divat=(S.inv||[]).some(e=>e.k==='divat');

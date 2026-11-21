@@ -63,7 +63,7 @@ kc3Reg("kc_hon",{t:"Hôn sự",w:"ba",g:"{baN} ra vào chính sảnh, các nhà 
   {n:"Thưa: con muốn vào cung làm rạng danh nhà",f:"cha",wx:"cha nhìn ngươi khác đi",lx:"cha thấy ngươi cao vọng",rt:"Cha cười lớn: “Được. Con gái ta có chí.”",rf:"Cha lắc đầu: “Đàn bà mà mơ chuyện lớn.”",go:(A,ok,G)=>{kc3Af("cha",ok?G[0]:G[1])}},
   {n:"Im lặng, để cha tự quyết",wx:"không trái ý cha",lx:"cha giục bà mối",rt:"Cha nhìn ngươi rất lâu rồi phẩy tay.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
  x1:{h:"Ngày sính lễ",w:"ba",t:"Bà mối dẫn người nhà {suitN} đến, mâm sính lễ phủ lụa đỏ bày trước chính sảnh. Cả nhà chờ ngươi một lời.",o:[
-  {n:"Nhận lời nhà {suitN}",if:()=>S.kc.suit.length>0,wx:"thành thân, yên bề gia thất",lx:"thôi đường vào cung, kiếp này dừng ở đây",rt:"Ngươi cúi đầu nhận lễ.",go:A=>{A.done=1;kcMarry(S.kc.suit[0])}},
+  {n:"Nhận lời nhà {suitN}",if:()=>S.kc.suit.length>0,wx:"thành thân, yên bề gia thất",lx:"thôi đường vào cung, kiếp này dừng ở đây",rt:"Ngươi cúi đầu nhận lễ.",go:A=>{A.done=1;const s=S.kc.suit[0];if(s)kcMarry(s)}},
   {n:"Trả sính lễ, xin cha cho đi tuyển tú",e:["win","lose"],wx:"giữ mình cho kỳ tuyển",lx:"cha giận, tự định hôn",rt:"Cha trả sính lễ, nói: vậy thì vào cung cho xứng.",rf:"Cha đập bàn: “Sính lễ đã nhận thì không trả.”"},
   {n:"Xin hoãn hôn ước đến sau kỳ tuyển",e:"mid",wx:"cả hai đường vẫn còn",lx:"nhà trai chờ, lời ra tiếng vào",rt:"Nhà trai miễn cưỡng chịu chờ."}]}},
  E:{

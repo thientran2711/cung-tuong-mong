@@ -43,9 +43,9 @@ function kc3Faces(){const bad=k=>BAL.kc3.ros.noFid.some(x=>String(k).startsWith(
 function kc3Pref(art){return (BAL.kc3.ros.pref||{})[art]||[]}
 function kc3Mk(r,t,name,age,role,tr,af,grp,pref){return{id:"f"+r,r,t,name,age,role3:role,fid:kc3Fid(role,pref),tr,af,me:BAL.kc3.ros.me[0]+R(BAL.kc3.ros.me[1]),oan:0,alive:1,grp}}
 function kc3Roster(){const F=S.kc.fam,B=BAL.kc3.ros,used=()=>F;
- F.push(kc3Mk("nm","Nhũ mẫu",`${pick(SURN)} thị`,B.age.nm[0]+R(B.age.nm[1]),"mama",pick(["Ân cần","Kín đáo","Cương trực"]),B.nm[0]+R(B.nm[1])));
- F.push(kc3Mk("ba","Bà mối",`Bà mối ${pick(SURN)}`,B.age.ba[0]+R(B.age.ba[1]),"mama",pick(["Ba phải","Tham lam","Ân cần","Kín đáo"]),B.ba[0]+R(B.ba[1]),"soc"));
- KC3THAY.forEach(([art,t,role,man],i)=>{const name=kcFreeName(()=>man?`${pick(SURN)} ${pick(KCMN)}`:art==="le"?`${pick(SURN)} ma ma`:`${pick(SURN)} ${pick(KCFN)}`,used());
+ F.push(kc3Mk("nm","Nhũ mẫu",nmNew("mo",{more:F}),B.age.nm[0]+R(B.age.nm[1]),"mama",pick(["Ân cần","Kín đáo","Cương trực"]),B.nm[0]+R(B.nm[1])));
+ F.push(kc3Mk("ba","Bà mối",`Bà mối ${nmSurOf(nmNew("mo",{more:F}))}`,B.age.ba[0]+R(B.age.ba[1]),"mama",pick(["Ba phải","Tham lam","Ân cần","Kín đáo"]),B.ba[0]+R(B.ba[1]),"soc"));
+ KC3THAY.forEach(([art,t,role,man],i)=>{/* names from the one name core (jname.js nmNew, LIVE 1ecdfb9d; replaces the removed kcFreeName) */const name=man?nmNew("m",{more:used()}):art==="le"?`${nmSurOf(nmNew("mo",{more:used()}))} ma ma`:nmNew("f",{more:used()});
   const m=kc3Mk("thay"+i,t,name,B.age[art==="le"?"le":"thay"][0]+R(B.age[art==="le"?"le":"thay"][1]),role,pick(["Nghiêm khắc","Ân cần","Kiêu ngạo","Kín đáo"]),B.thay[0]+R(B.thay[1]),"thay",kc3Pref(art));m.art=art;F.push(m)})}
 Object.assign(KCHAB,{nm:[["kc_khue",3],["kc_me",2],["kc_vuon",1]],ba:[["",5],["kc_sanh",1]]});
 for(let i=0;i<KC3THAY.length;i++)KCHAB["thay"+i]=[["kc_hoc",3],["",2]];
@@ -65,7 +65,7 @@ function kc3Teach(art){return S.kc.fam.find(m=>m.alive&&m.grp==="thay"&&m.art===
 (function(){const a0=addArt;addArt=function(k,g){try{if(kc3On()){const m=kc3Teach(k);if(m)g=Math.round(g*BAL.kc3.thay.mul[kc3Tier(m)])}}catch(e){}return a0.call(this,k,g)}})();
 /* suitors: the house that asks for her is a man who exists (his face, his age, his nature) */
 (function(){const s0=kcSuitor;kcSuitor=function(x){const s=s0.apply(this,arguments);try{if(S&&S.kc&&S.kc.c3&&!s.pid){const n=S.kc.fam.filter(m=>/^sx/.test(m.r)).length;const A=BAL.kc3.ros.sxAge[s.k]||BAL.kc3.ros.sxAge.def;
- const sur=pick(SURN);const m=kc3Mk("sx"+n,s.n[0].toUpperCase()+s.n.slice(1),kcFreeName(()=>`${sur} ${pick(KCMN)}`,S.kc.fam),A[0]+R(A[1]),s.k==="lao"||s.k==="quan"?"official":"man",pick(["Phong lưu","Trung hậu","Kiêu ngạo","Cẩn trọng","Ham chơi"]),BAL.kc3.ros.sx[0]+R(BAL.kc3.ros.sx[1]),"soc");
+ const sur=pick(SURN);const m=kc3Mk("sx"+n,s.n[0].toUpperCase()+s.n.slice(1),nmNew("m",{sur,more:S.kc.fam}),A[0]+R(A[1]),s.k==="lao"||s.k==="quan"?"official":"man",pick(["Phong lưu","Trung hậu","Kiêu ngạo","Cẩn trọng","Ham chơi"]),BAL.kc3.ros.sx[0]+R(BAL.kc3.ros.sx[1]),"soc");
  m.house=s.n;S.kc.fam.push(m);s.pid=m.id}}catch(e){console.error("kc3 suitor",e)}return s}})();
 function kc3Sx(s){return s&&s.pid?S.kc.fam.find(m=>m.id===s.pid):null}
 /* ---------- roster acts ---------- */
@@ -135,7 +135,7 @@ function kc3Month(){const ar=S.kc.ar;if(!ar)return;const left=kcMonthsLeft();if(
 /* entry: the open chapter closes on its score, the ending seeds the palace road */
 (function(){const e0=kcEnter;kcEnter=function(rank){const c3=S&&S.kc&&S.kc.c3;if(c3){try{const ar=S.kc.ar;if(ar&&ar.A&&!ar.A.done)kc3End(ar.A,kc3ScEnd(ar.A),1)}catch(e){console.error(e)}}
  const r=e0.apply(this,arguments);if(c3)try{kc3Tt3(S.kc.early3||(S.kc.tt&&S.kc.tt.early)?"early":"in");kc3Seed()}catch(e){console.error("kc3 enter",e)}return r}})();
-function kc3Seed(){const s=S.kc.seed3;if(!s||!S.st||!S.st.ch)return;const c=S.st.ch;if(!ARC67[s.id]||!arcOk67(ARC67[s.id]))return;
+function kc3Seed(){const s=S.kc.seed3;if(!s||!S.st||!S.st.ch)return;const c=S.st.ch;if(!ARC67[s.id]||!arcOk67(ARC67[s.id])){s.off=1;return}/* E25r2: the seeded arc is not open at entry (its own world rule, e.g. thd_hoc needs a royal child of vỡ lòng age): the seed is not used, recorded */
  if(c.pool&&c.pool.includes(s.id))c.pool=[s.id].concat(c.pool.filter(x=>x!==s.id));if(S.st.f14&&!S.st.f14.r0&&c.pool.includes(s.id))S.st.f14.road=s.id}
 (function(){const n0=newThread67;newThread67=function(id){const A=n0.apply(this,arguments);try{const s=S&&S.kc&&S.kc.seed3;if(A&&s&&s.id===id&&!s.used){s.used=1;A.sc=(A.sc||0)+(s.sc||0);A.kc3=s.from}
  if(A&&id==="tm96a"&&S.tm96&&S.tm96.endZ){S.tm96.tok=S.tm96.endZ.tok?1:0}}catch(e){console.error(e)}return A}})();
