@@ -914,7 +914,7 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | REVIEW dresscode r4 E30r4 (opus BIG; briefs/E30r4-review-dresscode-fix-r4.md) of cabfcad8 | review/dresscode-r4-land 0620c318; reports/dresscode-review.md «ROUND 4» | FOREMAN E #28 | session_01DgYSWo5nZ3yPQ2hdAEtXFQ | PASS 0620c318 → LAND READY (MAIN CHÍNH 97) | 21/11 17:40Z |
 | rv-kit-ef-unit r3 | PASS | review/kit-ef-unit-rv3 fd8280fa3fd7eddef4245084fb86a557d3dd3326 | cache only; tests + quickcheck + coop-e2e 124/124 |
 | FOREMAN E #29 (opus; child of E #28, depth 1) | handover FOREMAN_E_STATUS | FOREMAN E #28 | session_01DgYSWmB7DJvWBvRAWFudEC | RUNNING | 21/11 17:52Z |
-| REVIEW home-chapters-land3 E46r (opus BIG; briefs/E46r-review-home-chapters-land3.md) | review/home-chapters-land3-r; reports/home-chapters-land3-review.md | FOREMAN E #29 | session_01DgYSWpgAJ7hHV2ztUjAusX | RUNNING (prep → gates at E46 SSK) | 21/11 17:56Z |
+| REVIEW home-chapters-land3 E46r (opus BIG; briefs/E46r-review-home-chapters-land3.md) | review/home-chapters-land3-r; reports/home-chapters-land3-review.md | FOREMAN E #29 | session_01DgYSWpgAJ7hHV2ztUjAusX | PASS 8e452f06 → LAND READY (MAIN 99) | 21/11 17:56Z |
 | REVIEW coop-famops E44r (opus BIG co-op; briefs/E44r-review-coop-famops.md) | review/coop-famops-r; reports/coop-famops-review.md | FOREMAN E #29 | session_01DgYSWkYVK6ksd1qvq815dc | RUNNING (prep → gates at E44 SSK) | 21/11 17:56Z |
 | GAP v4 recount + SPREAD table (sonnet, read-only; owner 18:00Z 'tại sao không chia hết') | dev/handover/GAP_LIST_v4.md | MAIN CHÍNH 98 | session_01Rc5AsJNTe7U11fSBhJ4DhG | RUNNING | 21/11 17:57Z |
 | GAP v4 recount (read-only) | GAP_LIST_v4.md 01df2e49 | MAIN CHÍNH 98 | session_01Rc5AsJNTe7U11fSBhJ4DhG | DONE | 21/11 18:04Z |
