@@ -1,0 +1,42 @@
+base: dev/art/rank8-s62/s62_t4.txt
+# REVERT1 owner L1714: back to the old Set A prompt; drops only per the L1714 rows
+allow: Full-body standing figure head to feet  # owner L1714 row 24 repeat of the opening sentence
+allow: soft even light  # owner L1714 row 24 repeat of the opening sentence
+allow: fair porcelain skin  # owner L1714 row 24 repeat of the opening sentence
+allow: 3/4 or frontal view  # owner L1714 row 23/24 angle repeat
+allow: a layered silk robe of two or three visible layers with WIDE gold-thread embroidered borders of plum blossoms at collar  # owner L1714 row 20 lotus (F2 t4 s62)
+allow: a crossed collar  # owner L1714 row 3 square-collar TEST
+allow: a short round capelet covering only the shoulders and upper chest  # owner L1714 row 3 square-collar TEST
+allow: fastened at the throat with a jade clasp  # owner L1714 row 3 square-collar TEST
+allow: the pearl net starts right at the collar at the throat and hangs down over the WHOLE capelet  # owner L1714 row 3 square-collar TEST
+allow: her signature colour family ice blue and mint mist stays the MAIN robe colour  # owner L1714 row 21 thu palette olive #9FB577 + lilac
+allow: the robe itself is clearly ice blue silk  # owner L1714 row 21 thu palette olive #9FB577 + lilac
+allow: her ORIGINAL robe colour is kept exactly as in image 1  # owner L1714 row 21 thu palette olive #9FB577 + lilac
+allow: her first reference  # owner L1714 row 21 thu palette olive #9FB577 + lilac
+allow: ice blue silk like #71B5D7 is the main colour of the robe  # owner L1714 row 21 thu palette olive #9FB577 + lilac
+allow: with mint mist in the inner robe and linings  # owner L1714 row 21 thu palette olive #9FB577 + lilac
+allow: decorated with ONE fresh flower and several gold hairpins  # owner L1714 row 20 lotus hair flower
+allow: exactly ONE fresh flower in her hair  # owner L1714 row 20 lotus hair flower
+allow: a SLIGHT turn to the RIGHT  # owner L1714 row 23 new angle/grace
+allow: about 15 degrees  # owner L1714 row 23 new angle/grace
+allow: body almost frontal  # owner L1714 row 23 new angle/grace
+allow: face toward the viewer  # owner L1714 row 23 new angle/grace
+allow: never in profile  # owner L1714 row 23 new angle/grace
+allow: her shoulders soft and relaxed  # owner L1714 row 23 new angle/grace
+allow: one shoulder a touch lower than the other  # owner L1714 row 23 new angle/grace
+allow: the MAIN colour ice blue and the SECONDARY colour mint mist  # owner L1714 row 21 thu palette olive #9FB577 + lilac
+allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist  # owner L1714 row 21 thu palette olive #9FB577 + lilac
+allow: highly translucent gauze shawl in mint mist  # owner L1714 row 21 thu palette olive #9FB577 + lilac
+allow: clearly different from her main robe colour ice blue  # owner L1714 row 21 thu palette olive #9FB577 + lilac
+allow: the capelet stays the same short round shoulder capelet  # owner L1714 row 24 approved S13 wording (fallback) / row 3 S13_COMOI (sqtest)
+allow: but its lower edge and the collar lines are soft CURVES  # owner L1714 row 24 approved S13 wording (fallback) / row 3 S13_COMOI (sqtest)
+allow: never flat horizontal edges  # owner L1714 row 24 approved S13 wording (fallback) / row 3 S13_COMOI (sqtest)
+allow: the front is NOT closed or buttoned from top to bottom  # owner L1714 row 24 approved S13 wording (fallback) / row 3 S13_COMOI (sqtest)
+allow: the robe is closed only at the throat clasp and its front opens gradually from the collar downward in a long soft V  # owner L1714 row 24 approved S13 wording (fallback) / row 3 S13_COMOI (sqtest)
+allow: the two front panels parting more and more toward the hem  # owner L1714 row 24 approved S13 wording (fallback) / row 3 S13_COMOI (sqtest)
+allow: flowing and graceful  # owner L1714 row 24 approved S13 wording (fallback) / row 3 S13_COMOI (sqtest)
+allow: never cramped or boxy  # owner L1714 row 24 approved S13 wording (fallback) / row 3 S13_COMOI (sqtest)
+allow: a three-quarter turn looking at the viewer  # owner L1714 row 23 new pose/held item
+allow: a silver-mounted book box held near her shoulder  # owner L1714 row 23 new pose/held item
+allow: the robe hem stirring slightly  # owner L1714 row 23 new pose/held item
+allow: floor-length robe with slippers visible  # owner L1714 row 22 toe tips only
