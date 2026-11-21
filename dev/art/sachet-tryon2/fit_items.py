@@ -16,7 +16,7 @@ for n, p in P.items():
     for poly in p['occ'].values(): d.polygon([tuple(q) for q in poly], fill=255)
     occ = occ.filter(ImageFilter.GaussianBlur(0.9))
     json.dump(p['occ'], open(os.path.join(D, 'out', n + '_occ.json'), 'w'))
-    rec = {k: v for k, v in p.items() if k not in ('occ', 'sash', 'top')}; rec.update(base=n + '_base.webp', W=W, H=H)
+    rec = {k: v for k, v in p.items() if k not in ('occ', 'sash', 'top', 'painted_bbox')}; rec.update(base=n + '_base.webp', W=W, H=H)
     for key, (spr, cord, cut) in SP.items():
         spr = spr.crop((0, cut, spr.width, spr.height))   # drop the top loop; the cord is drawn from the sash instead
         s = p['scale']; it = spr.resize((round(spr.width * s), round(spr.height * s)), Image.LANCZOS)
@@ -36,6 +36,9 @@ for n, p in P.items():
         comb = Image.alpha_composite(sh2, layer)
         al = comb.split()[3]; al = Image.composite(Image.new('L', (W, H), 0), al, occ); comb.putalpha(al)
         bb = comb.getbbox(); crop = comb.crop(bb); fn = f'{n}_{key}.png'; crop.save(os.path.join(D, 'out', fn))
+        pb = p['painted_bbox']; band = al.point(lambda v: 255 if v > 20 else 0).crop((0, pb[1], W, pb[3])).getbbox()  # item pixels only in the painted sachet's rows
+        gap = 999 if band is None else max(pb[0] - band[2], band[0] - pb[2])
+        print(n, key, 'item bbox', bb, 'painted', pb, 'gap px', gap, 'OK' if gap >= 20 else 'FAIL (<20 or intersect)')
         rec[key] = {'src': fn, 'x': bb[0], 'y': bb[1], 'w': bb[2] - bb[0], 'h': bb[3] - bb[1]}
     out[n] = rec
 json.dump(out, open(os.path.join(D, 'out', 'fit.json'), 'w'), ensure_ascii=False, indent=1)

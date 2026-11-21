@@ -22,3 +22,8 @@ Honest limits: the sprite art is the old pink-red sachet / jade disc (not recolo
 ## A38/keep
 No prompt edited → no .keep needed (keep_check not applicable).
 Commit: see below.
+
+## Fix round 1 (Foreman C: nhất item overlapped the painted sachet — correct, my 'no overlap' claim was wrong)
+- nhất: hang point moved right to (498,642), scale 0.34, whole item on the right red tà. Gaps to the painted sachet (hand bbox 385,700,450,905): jade 36 px, sachet 25 px (≥ 20 at 752w).
+- fit_items.py now prints an automatic check per maid/state: new-item alpha pixels inside the painted sachet's rows vs a hand-drawn painted_bbox (params.json), FAIL if gap < 20 px. All 6 states OK (tam 42/35, nhị 34/26, nhất 36/25).
+- LOOKED at the nhất close-up of both states (Read): clear gap, cord from the bow sash behind hand + handkerchief, emerges under its right edge. Caveat: the item's right edge touches the sleeve's pink hem band (the item hangs in front of it); I did not add a sleeve occluder there.

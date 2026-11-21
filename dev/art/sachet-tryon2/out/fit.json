@@ -61,7 +61,7 @@
    640
   ],
   "painted": "Hình gốc đã vẽ sẵn 1 túi thơm ở giữa (dưới khăn tay). Không xoá, không vẽ đè; món thử treo bên phải.",
-  "scale": 0.38,
+  "scale": 0.34,
   "base": "nhat_base.webp",
   "W": 752,
   "H": 1344,
@@ -69,15 +69,15 @@
    "src": "nhat_ngoc.png",
    "x": 446,
    "y": 453,
-   "w": 55,
-   "h": 360
+   "w": 77,
+   "h": 343
   },
   "tui": {
    "src": "nhat_tui.png",
-   "x": 445,
+   "x": 446,
    "y": 453,
-   "w": 63,
-   "h": 355
+   "w": 83,
+   "h": 338
   }
  }
 }
