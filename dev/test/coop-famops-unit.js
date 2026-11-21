@@ -73,6 +73,11 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
   try{r16b=ilGone(S,pe,"evid",{})}finally{CW.on=on2;COOP.send=s0}
   const g16=sn.flatMap(m=>m.fam||[]).find(o=>o.op==="gone");
   ck("16b friend's piece seized here: in my box (not hers to reclaim), «gone» sent to her seat",r16b&&r16b.at==="cct"&&String(r16b.own)!=="901"&&g16&&g16.iu===pe.iu,{at:r16b&&r16b.at,own:r16b&&r16b.own,sent:sn.map(m=>m.fam)});
+  /* 16c (E48r): «dead» of a friend-owned piece that still sits in a living slot (ilAt) never goes home as «ret»: the ONE box rule's guard holds */
+  reset();const sn3=[];const s3=COOP.send;COOP.send=m=>sn3.push(m);const on3=CW.on;CW.on=true;const pz={k:P,iu:++n};S.inv.push(pz);let r16c;
+  try{r16c=ilGone(S,pz,"dead",{own:901})}finally{CW.on=on3;COOP.send=s3}
+  const rt16c=sn3.flatMap(m=>m.fam||[]).filter(o=>o.op==="ret");
+  ck("16c friend-owned piece still in my chest: no «ret» home, the piece stays (no 2nd copy)",r16c==null&&!rt16c.length&&S.inv.indexOf(pz)>=0,{sent:sn3.map(m=>m.fam),inv:S.inv.length});
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}

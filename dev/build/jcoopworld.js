@@ -648,6 +648,9 @@ function famLostCase(o,f){if(!o.iu)return false;const c=(S.lost||[]).find(c=>c&&
  let F=null,c=null,ids=[];
  try{if(CW.on&&!CW.ctx&&how!=="lost"&&e&&typeof e==="object"&&e.k){F=String(fp());try{c=typeof loCaseOf==="function"?loCaseOf(e):null}catch(z){c=null}if(c&&String(c.own)!==F)c=null;
   const fo=(o&&o.own!=null&&String(o.own)===F)||(e.gh!=null&&String(e.gh)===F)||!!c;if(!fo)F=null;else ids=[e.iu,e.hiu,c&&c.e&&c.e.iu,c&&c.e&&c.e.hiu].filter(Boolean)}}catch(z){F=null}
+ /* E44c (asked by E48r): «dead» goes home only past jil ilGone's own guards — a piece still in a living slot / the box (ilAt), already in
+    the friend's slot (ilToFriend → ilSent) or not durable (ilDur) is left to the ONE box rule, never sent as «ret» (would be a 2nd copy) */
+ if(F&&how==="dead"){try{if((typeof ilAt==="function"&&ilAt(e))||(typeof ilToFriend==="function"&&ilToFriend(e))||(typeof ilDur==="function"&&!ilDur(e)))F=null}catch(z){F=null}}
  if(F&&how==="dead"){try{if(c&&c.st!=="done"){c.st="done";c.end=wk();c.how="nha"}b4Send([famRet(e)],{});if(typeof ilSent==="function")ilSent(e,friendEntry());return null}catch(z){console.error("famops dead",z)}}
  const r=g0.apply(this,arguments);
  if(F&&r&&typeof r==="object"&&r.e){try{if(String(r.own)===F)r.own="";if(c&&c.st!=="done"){c.st="done";c.end=wk();c.how="matdau";c.__fs=1}
