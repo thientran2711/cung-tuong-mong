@@ -5,3 +5,4 @@ allow: a little LONGER and STIFF, standing slightly OUT past the shoulders, neve
 allow: FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.  # B32 owner L2122 chốt: thu t1–t8 thường phục = exactly the t1–t5 thu fabric sentence (master 'The FABRIC is thin, light, flowing silk and gauze …' added)
 allow: CAPTION: top-left, with accents: "Thu · Hoàng quý phi · L2079"  # A53 owner L2110: ChatGPT paste file, no test-label text
 allow: NEVER on the robe, cape, collar or belt  # owner L2111 via ROOT-B2/B3: no "cape" word (t7 has no cape); same as L2106 gem line
+allow: a near-empress ceremonial robe  # B32 owner L2122: no "ceremonial" in thu thường phục t6–t8
