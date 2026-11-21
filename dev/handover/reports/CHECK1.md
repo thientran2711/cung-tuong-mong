@@ -438,3 +438,4 @@ Notes:
 - `--self` reports 2 problems, both PROOF MISMATCH: S14 c06_t7_a18 and S19 pr_cl_t2_V2. The same 2 problems are there before the commit, so they are pre-existing, not caused by F19.
 - My own regex scan of every dev/art/**/*.txt for vase / bình hoa / lọ hoa within a hold/held/carry/in-hand context, excluding "no vase": **0 held vases left**.
 Verdict: **PASS.** t4 COMOIi is unchanged (it passed in job 15).
+- JOB 15 re-check 2 (DESIGN20 57ddfa0): t4 COMOIi flower "(never two, never a pair, no cluster)" = the shared wording; "on them" dropped from the sleeves. Gates + keep PASS, 9990 chars. **PASS**, text only. Current thu set (Foreman C #16): t4 COMOIi, t5 COMOIh, t6 COMOIj, t7 v8i, t8 v10h.
