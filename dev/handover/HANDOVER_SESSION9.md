@@ -2079,3 +2079,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (14:11Z) LAND CHAIN 2: LANDED mg-intro-2 99795d67.
 - (21/11 14:12Z) LRRY: LANDED mg-intro-2 99795d67 → mg-intro-2 worker Ji75 ARCHIVED. Next coop-guest-names.
 - (21/11 14:13Z) keeper #4: kit-opt-title-wrap bb52274d SSK → rv MSxp. Reminded keeper: kit-mark-fix-r5 re-merge still owed.
+- (21/11 14:26Z) rv MSxp FAIL kit-opt-title-wrap bb52274d (flaky borderline meter wrap at room≈natW, 3/14 iPad w320) → keeper #4 has fix list (r2). Keeper also owes kit-mark-fix-r5.
