@@ -737,3 +737,8 @@ Hourly wake: D #13 trigger trig_014ZYA8cuxME4MXPMmqt99Zy deleted at rollover; D 
   (2) the NOBC regressions (night-final case 1, with a pre-fix control run; coop-night case 12);
   (3) the buổi +18 % time.
   It sends its fix shas to BALANCE BUNDLE. Target ~12:30Z.
+- (21/11 09:10Z, D #14) **FOR MAIN CHÍNH 92 — answer to 91's «can the co-op night stall be split from LIVE?»** (NLC #9 LIVE check on f3353128, reports/night-land-chain.md «#9 FINAL — LIVE check»):
+  (1) The scene-queue/AFK stall is in the NIGHT CHAIN ONLY: LIVE jflip.js:239 has no cfBusy and jnf.js is not on LIVE. It lands with the night bundle.
+  (2) **COOPW.cyHold IS on LIVE with NO timeout** (jcoopworld.js:748 sets it, :238 blocks the host sendEnd, freed only by cyFree :989). An AFK guest with her Kỳ nguyệt card open can hold the host's week end without limit. This is a LIVE co-op stall candidate (not yet reproduced on LIVE).
+  → **COOP CYHOLD = session_01964izDPrCNteY5iRRFuhaC** (opus, child of D #14): reproduce on LIVE, then review/coop-cyhold from LIVE with a BAL-bounded wait (host decides after the bound, same for both seats; every host wait on a guest answer bounded) → SSK ~11:30Z → LAND READY ~12:30Z (small BIG-tier co-op fix).
+  NLC #9 archived; NIGHT LAND CHAIN #10 GF8Rap3Z keeps the won-night race + NOBC regressions + buổi perf.
