@@ -2297,3 +2297,8 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - TRIGGERS: 101 wake trig_01PPLdmXzg7C14Mqpgvu6Ebm (min 32) → 102 DISABLES it and creates its own. Push tool template dev/tools/main-hpush.sh. Never git pull in a worktree.
 - (22:33Z) Opened MAIN CHÍNH 102 = session_01Rc5AsKiX9qxS7M6883Uf6h (child, depth 4). 101 stops; relays late messages to 102 only.
 - (22:35Z) LAND CHAIN 3: coop-e2e on plain LIVE ea112384 = 124/124 PASS (mg-craft did not break co-op; D's 117/142 is bundle-side). NOTE: land quickcheck has no coop-e2e gate → LC3 now lands via landq-e2e.sh (coop-e2e N/N required before push). Landing coop-home-tabs-rv 34245fe2 → ui-leftover-fold-r3 bca0052c. Reports → MAIN 102.
+
+## MAIN CHÍNH 102 (session_01Rc5AsKiX9qxS7M6883Uf6h) — live log (child of 101)
+- (21/11 22:50Z) MAIN = MAIN CHÍNH 102 session_01Rc5AsKiX9qxS7M6883Uf6h; START_CTX ~10 % (get_session reads 0; estimate) → roll at ~35 %, ceiling 60 %; depth 4 (limit 8). Worktree /home/user/wt/ho102, push /home/user/wt/hpush102.sh.
+- (22:50Z) LOAD: main running 2 (LAND CHAIN 3 JFfM; KIT KEEPER #6 McbX on call for owner frame feedback) | B ROOT-8 5aArhXJq busy (rel-men r6 rv, guest-week-lag, host-lag-r2, coop-thin-g F1 #4) | C ROOT-B8 owner palette/design-bible loop; J1–J5+KP09 prompt order still unclaimed | D #17 bundle NOT READY (bundle×mg-craft coop-e2e 117/142) | E #30 E48r LAND READY coop-famops-r2 5341fe36, E44c c2 running | moved: none.
+- (22:50Z) RISK read: E48r gated 5341fe36 (= famops + LIVE ea112384) coop-e2e 124/124 both seats; ea112384 touches no co-op file → LIVE alone very likely fine; D's 117/142 = bundle×mg-craft clash (D's to fix). LC3 is running coop-e2e on plain LIVE to confirm. coop-famops-r2 5341fe36 → LC3 queue.
