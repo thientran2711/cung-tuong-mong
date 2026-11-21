@@ -771,3 +771,4 @@ bag-inline-2 rv | review/bag-inline-2-rv 72fc5dd1 | rv session | FAIL (ts strip 
 | REVIEW mg-intro-2 (sonnet SMALL; #55; MAIN 88 ORDER) of b21609fc | review/mg-intro-2-rv; briefs/b5-rv-mg-intro-2.md | B | session_01N1tNP4xiA2xLsJRTgEi9xb | RUNNING | 21/11 05:13Z |
 | dialog-person-3 (sonnet; #73 + eye checks; MAIN 88 ORDER) | review/dialog-person-3; briefs/b5-dialog-person-3.md | B | session_01N1tNP2WnsRXnfw6mNSQXFw | RUNNING | 21/11 05:13Z |
 | huong-cue-2-r2 fixer (sonnet; jnwp/mg-noword-b conflict vs mg-5s-clear; MAIN 88 ORDER) | review/huong-cue-2-r2; briefs/b5-huong-cue-2-r2.md | B | session_01N1tNP2UKo2mtcZUCmPW2tC | RUNNING | 21/11 05:13Z |
+kit-act-grid rv | review/kit-act-grid-rv d65e535b | rv session | PASS | 21/11
