@@ -1124,6 +1124,15 @@ PEND.thBribe=pp=>{if(!pp||!isSrvMe())return null;const mis=srvM(),B=BAL.coopBrib
   {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm} · kèm: ${nm} ghi hận ngươi, thiện cảm ${balSg(-B.grudge)}`,go:()=>ans({told:1})},
   {n:"Từ chối, im lặng",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${nm}, thiện cảm ${balSg(B.grudge)}`,go:()=>ans({})}]}};
 CW.dInit=function(T){
+ /* CO-OP HEIR FIX r2 (law 11, whole family): her OWN act that names the heir (j97 mật chiếu, jend14 ch14 win, any setHeir in her context on the
+    host). While she acts, her S.heir is the world's (S.hr), so "no Thái tử yet" / "my son is Thái tử" read the same court as the host's; a
+    Thái tử she makes goes back into S.hr (a world key: the host's copy takes it as withSeat closes) and the host resolves it at once, so his
+    heirMonth never names another over him. The Danh stays the jkidlife setHeir wrap's (her gain in her context; the mother put aside: none,
+    those roads need no Thái tử yet, as solo). */
+ {const ws=T.withSeat;T.withSeat=function(seat,fn){if(!CW.on||!host()||CW.ctx||seat===CW.seat||typeof fn!=="function")return ws.apply(this,arguments);let h0=null,ch=false;
+  const r=ws.call(this,seat,function(){try{h0=S.hr||null;const x=hrFind(h0);S.heir=x?{k:x.k,v:x.v}:null}catch(e){console.error("heir in",e)}
+   try{return fn.apply(this,arguments)}finally{try{const H=S.heir;if(H&&H.k&&!H.v&&H.k.alive!==false){const h=hrStr();if(h&&h!==h0){S.hr=h;ch=true}}}catch(e){console.error("heir out",e)}}});
+  if(ch)try{CW.hrApply();CW.dHr=S.hr||null}catch(e){console.error("heir host",e)}return r}}
  /* B r2: every D work into the other player's context, as data (jcoopthin D.kind): the card kinds and their answers */
  Object.assign(T.D.K,{inv:a=>pushDil(mkP("thInv",a),"Hảo hữu tìm đến"),
   bribe:a=>{const d=!S.dead&&isSrvMe()?mkP("thBribe",a):null;if(d)pushDil(d,"Bạc lạ");else T.D.after(()=>briberRes({rid:a.rid,o:a.o,no:1}))},
