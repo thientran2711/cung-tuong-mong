@@ -1748,3 +1748,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (21/11 04:05Z) LANDED kit-pcrow-square 9c1dd605 (keeper merge of rv PASS 6227bcdf + LIVE + 2 rv-asked follow-ups; quickcheck PASS) → LIVE 9c1dd605; marks #5–#9 #17 #18 #20 LIVE. #58/#59 → NEW sonnet worker dialog-person (briefs/main86-dialog-person.md).
 - (21/11 04:10Z) Self-merge set up: worktree /home/user/wt/live, script /home/user/wt/sland86.sh. Running bag-inline 1674d407 (rv PASS) + LIVE 9c1dd605. B lander sends gated shas; main self-merges. mg rv KWPA told to review 8caa9dcd (#45 slot).
 - (21/11 04:15Z) mg-5s-clear worker rolled over (archived) → #55 to successor mg-intro-2 session_01Rc5AsJi75sHocL2mwRsbkt. mg rv KWPA reviews review/mg-5s-clear tip (8caa9dcd+report).
+- (21/11 04:20Z) #60 keeper addendum 14 (by 84). #61 (1) rank+name colour unit → keeper; (2)(3) literature expert (opus) for ALL narration → Foreman E ORDER.
