@@ -1161,11 +1161,11 @@ function kitPcGrid(pc){try{if(!pc||pc.querySelector(".kpgrid"))return;const L=pc
        (it may be a few px wider than the column's content box; it overflows equally on both sides, never only to the right);
    (2) every row under the frame (.pcrows niên hiệu, .kpkey Biết tên / X → ta / Sủng, .kpgrid, .kpfacts, .kwear) starts ONE gap (KIT_PFO.gap) under the frame's
        carved BAND bottom = the frame's real bottom edge, so the rows lie over the pendant + tassel (no empty band); band = KIT_PFO.band[frame] in canvas units
-       (550x1037), measured on every frame picture (alpha: first row under the opening narrower than 60 % of the canvas). The frame stays ONE
+       (550x1037), measured on every frame picture (re-measured on the 34 Magnific re-cuts 21/11 ~20:00Z; alpha: first row under the opening narrower than 60 % of the canvas). The frame stays ONE
        whole picture (border + pendant + tassel; a later animation moves the whole frame, PARKING_LOT #12); the rows lie on top of it in the NORMAL kit text, no halo (owner 21/11 ~19:25Z / ~19:30Z). */
 const KIT_PFO={gap:10,dflt:770,band:{cold:763,"consort-0":751,"consort-1":750,"consort-2":756,"consort-3":760,"consort-4":763,"consort-5":775,"consort-6":775,"consort-7":786,emp:784,
- "eunuch-0":762,"eunuch-1":762,"eunuch-2":762,"eunuch-3":764,guard:760,heir:779,"maid-0":763,"maid-1":763,"maid-2":763,"maid-3":763,"maid-4":763,"mama-0":771,"mama-1":771,"mama-2":771,"mama-3":771,"mama-4":771,
- man:771,official:769,physician:774,prince:765,princess:760,royal:769,thaihau:771,unknown:764},
+ "eunuch-0":762,"eunuch-1":762,"eunuch-2":762,"eunuch-3":764,guard:760,heir:780,"maid-0":764,"maid-1":764,"maid-2":764,"maid-3":764,"maid-4":764,"mama-0":771,"mama-1":771,"mama-2":771,"mama-3":771,"mama-4":771,
+ man:771,official:769,physician:774,prince:766,princess:760,royal:769,thaihau:771,unknown:764},
  of:function(pcp){const im=pcp.querySelector(".kin img.kfr")||[...pcp.querySelectorAll(".kin img")].find(i=>/frame-/.test(i.getAttribute("src")||""));const m=im&&/frame-([a-z]+(?:-\d)?)(?:-w)?\.webp/.exec(im.getAttribute("src")||"");return m&&this.band[m[1]]||this.dflt},
  /* margin under the frame box so the next row starts at band bottom + gap (negative: the rows move up over the tassel) */
  fit:function(pc){try{const L=pc&&pc.querySelector(":scope > .pcl"),pcp=L&&L.querySelector(":scope > .pcp.kit");if(!pcp)return;const kin=pcp.querySelector(".kin")||pcp;
