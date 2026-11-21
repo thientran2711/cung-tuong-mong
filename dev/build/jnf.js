@@ -200,7 +200,7 @@ function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(!x||x.
  if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&(m.pid==="nfsum"||FLIPQ.has(m))))return;
   /* co-op host: the draw is held for the friend's Kỳ nguyệt answer (jcoopworld CW.cyHold; cyFree turns the card when it comes): the choice
      waits for that card, at most choice.waitMs (she never answers: the night goes on without a card, as the live night did) */
-  if(CO()&&COOPW.cyHold!=null&&Date.now()-(x.at||0)<B().choice.waitMs)return;
+  if(CO()&&COOPW.cyHold!=null&&Date.now()-(x.at||0)<BAL.coop.cyWaitMs)return;/* one key with jcoopworld cyHold bound (coop-cyhold) */
   openChoice()}
  if(x.st!=="open")return;
  if(x.me===undefined&&!x.dlg){if(scene())return;showChoice()}   /* scene() is bounded (CAP): never a choice held past it */
