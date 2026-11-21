@@ -25,3 +25,8 @@ PRIORITY #1 CHECK ('Cao Ly|thảo nguyên|trà sữa|foreign-bang|jrd_nc'): OD 3
 | jrd_bd2 bd_hen .11 (Ba Tư) | “…Xin phụ hãn giữ người ấy.” | “…Xin {pv} giữ người ấy.” (Phụ vương; Phụ hãn only on a legacy life) |
 | jrd_nc / jrd_bd NCL | — | new land tokens dien, huong for nc / bd / bt (TOK67, the one land table) |
 Checked and correct (no change): the Cao Ly beats with «trà sữa», «trướng», «thảo nguyên» in jrd_nc (L523 / L793 / L798) are BDW-only (Bắc Địch lives); no «Thường tại» in any land text; jkc2 home phase is per land already (Cao Ly Khai Kinh / Nhiên Đăng hội; Ba Tư Tô Lận / Nô Nhụ / đền lửa thánh).
+| jrd_nc chợ biên chapter (both lands), hint | {land} có sắt, Đại Hy có ngựa (backwards: the chapter trades Đại Hy salt / tea / iron for the land's horses / hides) | {land} có ngựa, Đại Hy có sắt |
+
+## SẴN SÀNG KIỂM bang-words 927ac123 (review/bang-words, from main 8b2e344d; site build committed)
+Code moved (BIG): jge.js geF (ending texts through fill67) + 2 land tokens in the one land table. Tests: bang-words/scan.js PASS (3 lands × all chapters + endings + home, 0 hits, 0 raw tokens; before 9) · quickcheck PASS (core gates, old save loads + plays a buổi, perf vs live) · ge-guard 8/8 · voice-core PASS · role-parity ALL PASS ×2 · coop-e2e 92/92. caoly-oldsave.js: its 2 «FAIL» are its own precondition (it needs a PRE-rename Nam Chiếu save from main; main is already Cao Ly) — obsolete test, not a regression.
+Not changed (checked): jrd_nc beats with «trà sữa / trướng / thảo nguyên» are BDW-only (Bắc Địch lives); no «Thường tại» in any land text.
