@@ -1603,3 +1603,4 @@ ROOT-B5 ~20:15Z: THUROOT7 M2206 @426765ec9 (L2206 only; not sent). OWNER L2210 n
 ROOT-B5 ~20:20Z: THUROOT7 pushed M2211-04..08 + M2209-01 @5961efe93 → retired (roll line). Opened THUROOT8 session_01D3E3NZ6VqwRvRYYJr4v2nV: M2213-03..08 + T7LOW (L2211/L2212). ROOT-B5 at ~26 % → ROLLING: takeover dev/handover/TAKEOVER_FOREMAN_C_ROOTB5.md; opening ROOT-B6 as my child. No schedules owned. Next Lượt 2213.
 ROOT-B5 ~20:22Z: OWNER L2213: YES fix duplicates + conflicts by her rules + latest confirmations → THUROOT8 (in M2213). Next Lượt 2214.
 ROOT-B5 ~20:25Z: ROLLED → Foreman C = ROOT-B6 session_01D3E3NXtm8S6rQovWp6m1iB. ROOT-B5 stops. Next Lượt 2214.
+ROOT-B6 ~19:10Z: CURRENT FOREMAN C = ROOT-B6 session_01D3E3NXtm8S6rQovWp6m1iB, depth 5, START_CTX ~3 % (roll at ~28 %, ceiling 60 %). Took over from ROOT-B5. THUROOT8 running M2213-03..08 + T7LOW. THUROOT7 last push @1eb0691 (M2211-03..08 + M2209-01). No schedules owned. Next Lượt 2214.
