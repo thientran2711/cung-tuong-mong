@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2431fe94+","t":"2026-11-21T00:08Z","c":"rv jagday-walk r6: post-turn knTb rebuild only when tin báo is on (no S.tb writes on a co-op guest / ag off)","b":"88fc4834a0d6","h":[{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"}]};
+window.CTM_BI={"s":"88412cb1+","t":"2026-11-21T00:08Z","c":"rv jagday-walk r6: post-turn knTb rebuild only when tin báo is on (no S.tb writes on a co-op guest / ag off)","b":"fce1e1bd445a","h":[{"s":"6d760d46+","t":"2026-11-21T00:22Z","c":"mgcal-redo: rebuild site (index.html/sw.js)"},{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -34109,7 +34109,7 @@ BAL.ag.mg2.hand={on:1,w:4,art:.2,ctr:{"":7},sd:{c:1.4,a:1.5,r:1.7,"":1.5},eqZ:.4
         dev/tools/mgcal_apply.py — ONE base for every player; it places HER on that kind's adult bell curve (BAL.ag.mg2.hand ctr / sd / eqZ above)
    A first try taken on a BROKEN board is dropped when that board is fixed, so her re-test is the first counted try (dauho cal-p2 b218d1d2; huong 4.5,
    mua 6.3, banh 6.1 dropped by review/cal-p2b-rv with the Điều hương / Múa / Nấu ăn fixes, owner OD 20/11 ~07:35Z «chỉnh mấy cái game bị lỗi lại thôi, rồi tôi test lại») */
-BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],k:{dan:{b:8.3,n:5,at:"11/19/2026"},co:{b:9.7,n:5,at:"11/19/2026"},ve:{b:9.5,n:5,at:"11/19/2026"},doi:{b:9.1,n:5,at:"11/19/2026"},hoa:{b:7.9,n:5,at:"11/19/2026"},hat:{b:8.1,n:5,at:"11/19/2026"},tho:{b:8.7,n:5,at:"11/19/2026"},theu:{b:9.7,n:5,at:"11/19/2026"},ban:{b:9.1,n:5,at:"11/19/2026"},kim:{b:7.7,n:5,at:"11/19/2026"},doden:{b:9.9,n:5,at:"11/19/2026"},tat:{b:4.9,n:5,at:"11/19/2026"},ne:{b:4.1,n:5,at:"11/19/2026"},td_cong:{b:10.0,n:5,at:"11/20/2026"},td_ngon:{b:6.7,n:5,at:"11/20/2026"},td_hanh:{b:9.3,n:5,at:"11/20/2026"},le:{b:9.9,n:5,at:"11/20/2026"},tc:{b:9.5,n:5,at:"11/20/2026"},xa:{b:9.5,n:5,at:"11/20/2026"},thq:{b:8.5,n:5,at:"11/20/2026"},duho:{b:7.9,n:5,at:"11/20/2026"},kinh:{b:9.9,n:5,at:"11/20/2026"},may:{b:10.0,n:5,at:"11/20/2026"}}};
+BAL.ag.mg2.cal={on:1,/* redo: games fixed after her Thử tay (owner 21/11, jmgcal stale()): her older record counts as not tried */redo:{dauho:"2026-11-20T15:00:00Z",hoadien:"2026-11-20T15:00:00Z",den:"2026-11-20T15:00:00Z",chai:"2026-11-20T15:00:00Z",td_dung:"2026-11-20T15:00:00Z",huong:"2026-11-20T15:00:00Z",mua:"2026-11-20T15:00:00Z",banh:"2026-11-20T15:00:00Z"},d:[-2,-1,0,1,2],k:{dan:{b:8.3,n:5,at:"11/19/2026"},co:{b:9.7,n:5,at:"11/19/2026"},ve:{b:9.5,n:5,at:"11/19/2026"},doi:{b:9.1,n:5,at:"11/19/2026"},hoa:{b:7.9,n:5,at:"11/19/2026"},hat:{b:8.1,n:5,at:"11/19/2026"},tho:{b:8.7,n:5,at:"11/19/2026"},theu:{b:9.7,n:5,at:"11/19/2026"},ban:{b:9.1,n:5,at:"11/19/2026"},kim:{b:7.7,n:5,at:"11/19/2026"},doden:{b:9.9,n:5,at:"11/19/2026"},tat:{b:4.9,n:5,at:"11/19/2026"},ne:{b:4.1,n:5,at:"11/19/2026"},td_cong:{b:10.0,n:5,at:"11/20/2026"},td_ngon:{b:6.7,n:5,at:"11/20/2026"},td_hanh:{b:9.3,n:5,at:"11/20/2026"},le:{b:9.9,n:5,at:"11/20/2026"},tc:{b:9.5,n:5,at:"11/20/2026"},xa:{b:9.5,n:5,at:"11/20/2026"},thq:{b:8.5,n:5,at:"11/20/2026"},duho:{b:7.9,n:5,at:"11/20/2026"},kinh:{b:9.9,n:5,at:"11/20/2026"},may:{b:10.0,n:5,at:"11/20/2026"},dauho:{b:9.7,n:5,at:"11/20/2026"}}};
 /* CAL-P2C · IDENTITY OFFSET + ROLLING HAND b (owner OD 20/11 ~07:35Z + ~07:55Z + ~08:00Z, ROOT-74 chat; jmgid.js). Verbatim key words:
    ~07:35Z "Những cái môn sở trường của tôi á, khi vào game á, nếu như cái môn đó là cái môn bình thường là phải là ở mức 8, tức là phải automatic trừ 2. Còn nếu mà
    sở đoản là phải trừ thêm nữa ... sở đoản là phải đâu đó 6 điểm ... sở trường là chẳng hạn như là 9 điểm hoặc 10 điểm ... mình không có cần phải điều chỉnh cái điểm gì hết trơn á."
@@ -79370,29 +79370,33 @@ function mgCalShare(kind){const H=BAL.ag.mg2.hand,c=C(),e=c.on&&c.k&&c.k[kind];i
 function erf(x){const t=1/(1+.3275911*Math.abs(x)),y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-.284496736)*t+.254829592)*t*Math.exp(-x*x);return x<0?-y:y}
 /* the kinds she can test: every KG82 kind whose engine is in the game */
 function mgCalKinds(){try{return Object.keys(KG82_KIND).filter(k=>{const K=KG82_KIND[k];return K&&K.n&&typeof KG82_ENG!=="undefined"&&typeof KG82_ENG[K.e]==="function"})}catch(e){return[]}}
+/* owner 21/11 ~00:25Z (verbatim): "mấy cái nút đó đỏ lại đi. Mấy cái nút mà của mấy cái game tao chưa có thử xong á" — kinds whose game was FIXED after her try
+   (BAL.ag.mg2.cal.redo {kind: ISO time of the fix}) count as NOT tried until she plays them again after that time: red button, in «Chưa thử», in «Thử tiếp». */
+function stale(L,k){const R=C().redo||{};return !!(L&&R[k]&&(+L.t||0)<Date.parse(R[k]))}
+function ok(r,k){return !!r[k]&&!stale(r[k],k)}
 function rec(){try{return JSON.parse(LS.get(KEY)||"{}")||{}}catch(e){return{}}}
 function recSet(kind,raws,ds){const r=rec();r[kind]={raws,ds,b:mgCalBase(raws,ds),t:Date.now()};LS.set(KEY,JSON.stringify(r));return r[kind]}
 function mmdd(t){const d=new Date(t||Date.now()),p=n=>String(n).padStart(2,"0");return `${p(d.getMonth()+1)}/${p(d.getDate())}/${d.getFullYear()}`}
 /* the code line for the coordinator: CTM-CAL kind:b/rounds@mm/dd/yyyy … */
 function mgCalCode(r){r=r||rec();return "CTM-CAL "+Object.keys(r).filter(k=>r[k]&&r[k].b!=null).map(k=>`${k}:${r[k].b}/${(r[k].raws||[]).length}@${mmdd(r[k].t)}`).join(" ")}
 function nm(k){const K=KG82_KIND[k];return K&&K.n||k}
-function stat(k){const L=rec()[k],c=C().k||{};const a=L?`đã thử, tay ${mgWord(L.b)}`:"chưa thử";return c[k]?`${a} · đã ghi vào sổ chung`:a}
+function stat(k){const L=rec()[k],c=C().k||{};const a=L?(stale(L,k)?"đã sửa trò, cần thử lại":`đã thử, tay ${mgWord(L.b)}`):"chưa thử";return c[k]?`${a} · đã ghi vào sổ chung`:a}
 /* ---- the test (kit game frame only) ---- */
 function pick(){const ks=mgCalKinds();if(typeof kg82Open!=="function")return;
  const d=kg82Open({art:"Thử tay",title:"Tài nghệ các môn",how:`Mỗi môn ${C().d.length} hồi, hồi sau khó hơn hồi trước. Phần của người thành mức chuẩn cho tay nghề của mọi người trong cung.`,round:"Môn",roundV:`${ks.length}`});
  if(!d)return;KG82.back=()=>{};/* KIT §13.9: the kit ✕ «Quay lại» closes the list (back to Thiết lập) */const box=kg82Box();const r=rec();
- const dn=ks.filter(k=>r[k]),nd=ks.filter(k=>!r[k]);/* s34 MUST: one kind at a time, any order; đã thử / chưa thử in kit rows */
+ const dn=ks.filter(k=>ok(r,k)),nd=ks.filter(k=>!ok(r,k));/* s34 MUST: one kind at a time, any order; đã thử / chưa thử in kit rows */
  box.innerHTML=`<h4 class="kpst">Đã thử ${dn.length}/${ks.length} môn</h4>`+kg82Rows([["Đã thử",dn.length?dn.map(k=>`${nm(k)} (${mgWord(r[k].b)})`).join(", "):"chưa môn nào","t"],["Chưa thử",nd.length?nd.map(nm).join(", "):"đã thử đủ","n"]])+/* owner 17/11 ~17:10Z: ONE run through every kind in order (Thử lần lượt), progress kept; resumes at the next kind not yet done */
   `<div class="kg82act"><button class="${kg82Btn()}" id="mgcal-seq">${nd.length?(dn.length?`Thử tiếp các môn còn lại<small>từ môn ${nm(nd[0])} · còn ${nd.length} môn</small>`:`Thử hết cả ${ks.length} môn<small>dừng lúc nào cũng được, lần sau thử tiếp</small>`):`Thử lại hết từ đầu<small>đã thử đủ ${ks.length} môn</small>`}</button></div>`+
   `<h4 class="kpst">Hoặc chọn một môn</h4>`+
-  `<div class="kg82act">${ks.map(k=>`<button class="${kg82Btn(!!r[k])}" data-mgcal-k="${k}">${nm(k)}<small>${stat(k)}</small></button>`).join("")}</div>`+
+  `<div class="kg82act">${ks.map(k=>`<button class="${kg82Btn(ok(r,k))}" data-mgcal-k="${k}">${nm(k)}<small>${stat(k)}</small></button>`).join("")}</div>`+
   (Object.keys(r).length?`<h4 class="kpst">Mã kết quả</h4>`+kg82Rows([["Mã",mgCalCode(r),"n"]])+`<div class="kg82act"><button class="${kg82Btn(true)}" id="mgcal-copy">Chép mã</button></div>`:"");/* no «Thôi» row: the kit ✕ «Quay lại» (§13.9, 32.10) */
  box.querySelectorAll("[data-mgcal-k]").forEach(b=>b.onclick=()=>run(b.dataset.mgcalK));
  const sq=$("mgcal-seq");if(sq)sq.onclick=()=>run(nd.length?nd[0]:ks[0],nd.length?"seq":"all");
  const cp=$("mgcal-copy");if(cp)cp.onclick=()=>copy(cp)}
 function copy(b){const t=mgCalCode();const ok=()=>{b.textContent="Đã chép"};try{navigator.clipboard.writeText(t).then(ok,()=>{})}catch(e){}}
 /* the next kind of a run: "seq" = the next kind not yet done (resume), "all" = the next kind in order (a full redo) */
-function nextOf(kind,seq){const ks=mgCalKinds(),r=rec(),i=ks.indexOf(kind);const L=ks.slice(i+1);return seq==="all"?L[0]||null:L.find(k=>!r[k])||ks.find(k=>!r[k])||null}
+function nextOf(kind,seq){const ks=mgCalKinds(),r=rec(),i=ks.indexOf(kind);const L=ks.slice(i+1);return seq==="all"?L[0]||null:L.find(k=>!ok(r,k))||ks.find(k=>!ok(r,k))||null}
 function run(kind,seq){const K=KG82_KIND[kind],ds=C().d.slice(),n=ds.length,raws=[];let i=0;KG82.ctx="hoc";
  const round=()=>{const t=mgSet(kind,{occ:"hoc",lv:0,d:ds[i]});try{kg82Preload(kind)}catch(e){}
   const d=kg82Open({art:"Thử tay",title:`${K.n} · hồi ${i+1}/${n}`,how:K.how,round:"Hồi",roundV:`${i+1}/${n}`,pic:kg82Pic(kind)});if(!d)return;
@@ -85796,7 +85800,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="88fc4834a0d6";window.CTM_BUILD=BUILD;
+const BUILD="fce1e1bd445a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
