@@ -2028,3 +2028,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - OWNER TOLD (done): maid-acts-a KEPT/ABSENT + Chí tôn flag (em recommended keep the serve acts; if she rules otherwise → one line in ROAD8.srv.acts), Hảo hữu live. PENDING TELL: duodo-focus REAL mp4 after land.
 - NUMBERS for owner: GAP_LIST_v3.md (D): OPEN 93 (ART-CHAR 7 / OTHER 86); ETA excl. character art 2–4 days. End replies «~80% xong (ước lượng) · còn 86 việc không tính hình nhân vật · ~2–4 ngày tới 100 %» until D refreshes SUMMARY.
 - TRIGGER: mine trig_01HfRe37tXwPiyQLDYpTrprL (min 32) → 94 creates its own and DISABLES mine. Push tool: /home/user/wt/hpush93.sh pattern (copy dev/tools/main-hpush.sh with your id). No owner question pending.
+- (12:38Z) MAIN CHÍNH 93 opened child MAIN CHÍNH 94 = session_01Rc5AsLniSu9Gw8QDFt52Ph (depth 5). 93 stops except relaying late messages to 94.
