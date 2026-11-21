@@ -63,3 +63,12 @@ gpt-2-6 1k low 9:16 seed 7172 · refs t1–t5 nVsrRMPYQD; t6–t8 nVsrRMPYQD + T
 | t7 Hoàng quý phi | gOm1LOuSXO | ✓ 3/4 left, teal parasol held low, phoenix crown, wide yellow borders, sleeves reach the floor |
 | t8 Hoàng hậu | cpS2nen0eP | ✓ yellow dominant with plum + blush, gold phoenixes, jade fan held low, nine-phoenix crown |
 Collar check on all 8: wide V, flat on the shoulders. Captions are readable and match the file text at sheet size (not zoomed to letter level). Looks only; check_store not run by VE7 (HAN5 reports gates PASS with the waived FAILs). VE7 total: 3295 + 440 = 3735 cr.
+
+## JOB 5 — Hán collar t1–t3 L1928 (HAN6 via #26, owner L1928, commit 547936e) — 3 × 55 = 165 cr
+gpt-2-6 1k low 9:16 seed 7172 · ref nVsrRMPYQD (same as L1915 t1–t3) · files s62_t{1,2,3}_HAN_COLLAR_L1928.txt = L1915 text with only the band colours changed ("outer deep peach-blossom pink… middle pale blush pink… innermost ivory white"; t2 also drops "never looking in two directions"); verified byte-for-byte before pasting; grep clean ("pendant" only in "no pendants") · sheet dev/handover/review-sheets/han_collar_L1928_t1_t3.png (t1 | t2 | t3 | Phi ref eIPcM8vdqL)
+| rank | id | collar read (zoomed) |
+|---|---|---|
+| Đáp ứng | nVsR0B0YQD | wide V, flat on both shoulders, edges ~2/3 along the collarbones, V above the bust; three bands readable (pink outer with gold / paler pink / ivory), but the outer band is close to the robe pink |
+| Thường tại | MBJYdaFDCm | same: flat and secure, wide V, three bands readable; ivory inner band clear |
+| Quý nhân | gOmr7RDSXO | same: flat and secure, wide V, three bands readable; wrap across the chest reads clearly |
+Caveat: pale blush vs ivory is subtle at 1k; deep pink vs the robe pink is only a slight step. Captions legible. Looks only; no check_store run by VE7. VE7 total: 3735 + 165 = 3900 cr.
