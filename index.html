@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"62700508+","t":"2026-11-21T04:01Z","c":"chapter-card-2: khuê các chapter cards (kco / tuyển tú / thanh mai) become one kitSlide","b":"cb9ea101bde7","h":[{"s":"878eba18+","t":"2026-11-21T03:32Z","c":"Menu ☰: mọi bảng (Chọn sổ, Sổ luân hồi…) mở trong khung rộng chuẩn"},{"s":"410c4f44+","t":"2026-11-21T03:07Z","c":"kit-tap-word: kitTapWord / kitTraitWords (KIT §73.2), sample, test"},{"s":"1674d407+","t":"2026-11-21T03:15Z","c":"Túi đồ: bấm đồ hiện ngay dưới lưới, Việc có hình"},{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"}]};
+window.CTM_BI={"s":"ea48b2fe+","t":"2026-11-21T04:10Z","c":"rv chapter-card-2: fix khuê các facts «NaN» (stray + in kcStoryHTML) and Fold chapter-dialog picture collapsed to 11px (kv1 .ksart width); …","b":"3e67795ee3ac","h":[{"s":"087794b3+","t":"2026-11-21T03:48Z","c":"Lịch tháng kiểu lịch điện thoại: ‹ tháng ›, ô ngày vuông, chạm ngày xem việc"},{"s":"8aba426a+","t":"2026-11-21T03:43Z","c":"Không bao giờ hai khung chồng lên nhau (khung «Kiếp này» đóng khung cũ)"},{"s":"607a6b12+","t":"2026-11-21T03:22Z","c":"Tâm trạng: khung nào cũng có tranh nguyên do + ấn cảm xúc ở góc"},{"s":"878eba18+","t":"2026-11-21T03:32Z","c":"Menu ☰: mọi bảng (Chọn sổ, Sổ luân hồi…) mở trong khung rộng chuẩn"},{"s":"410c4f44+","t":"2026-11-21T03:07Z","c":"kit-tap-word: kitTapWord / kitTraitWords (KIT §73.2), sample, test"},{"s":"1674d407+","t":"2026-11-21T03:15Z","c":"Túi đồ: bấm đồ hiện ngay dưới lưới, Việc có hình"},{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -40672,7 +40672,7 @@ window.kitTabRowHTML=function(list,cur,attr){return list.map(x=>`<button class="
 function kitTabStick(){try{const P=$$("panel");if(!P)return;const long=P.scrollHeight>P.clientHeight*1.5;P.querySelectorAll(".kcattabs").forEach(r=>r.classList.toggle("kstick",long))}catch(e){}}
 addEventListener("resize",()=>{clearTimeout(window.__ktsT);window.__ktsT=setTimeout(kitTabStick,80)});
 /* tab-underline (C39): chip/tab rows that scroll sideways show NO scrollbar track or thumb (the grey bar / brown stub the owner saw); the overflow is hinted by a soft edge fade on the side that has more chips (.kfl / .kfr, set by kitTabFade) */
-const KIT_CHIPROWS=".pctabs,.kcattabs,.ksub,.ksubs,.kmc-tabs,.kchips,.chips,.relsel,.hud2,.j59strip";
+const KIT_CHIPROWS=".pctabs,.kcattabs,.ksub,.ksubs,.kchips,.chips,.relsel,.hud2,.j59strip";
 function kitTabFade(){try{document.querySelectorAll(KIT_CHIPROWS).forEach(r=>{const o=r.scrollWidth>r.clientWidth+2&&getComputedStyle(r).overflowX!=="visible";r.classList.toggle("kfl",o&&r.scrollLeft>2);r.classList.toggle("kfr",o&&r.scrollLeft+r.clientWidth<r.scrollWidth-2)})}catch(e){}}
 let kitTfQ=0;function kitTabFadeSoon(){if(kitTfQ)return;kitTfQ=requestAnimationFrame(()=>{kitTfQ=0;kitTabFade()})}
 document.addEventListener("scroll",e=>{const r=e.target;if(r&&r.matches&&r.matches(KIT_CHIPROWS))kitTabFadeSoon()},true);addEventListener("resize",kitTabFadeSoon);
@@ -40710,7 +40710,7 @@ const cssC=document.createElement("style");cssC.id="k3-cattabs";cssC.textContent
 #panel .cards>button.ka[hidden]{display:none!important}
 html body #panel .kcattabs{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important}#panel .kcattabs .pct{flex:0 0 auto}
 /* tab-underline (C39): no scrollbar on any chip row; edge fade instead */
-.pctabs,.kcattabs,.ksub,.ksubs,.kmc-tabs,.kchips,.chips,.relsel,.hud2,.j59strip,html body header.hud>.hud2,html body #panel .kcattabs,.pc.kpnar[data-k2] .kpstick .pctabs{scrollbar-width:none!important;-ms-overflow-style:none!important}
+.pctabs,.kcattabs,.ksub,.ksubs,.kchips,.chips,.relsel,.hud2,.j59strip,html body header.hud>.hud2,html body #panel .kcattabs,.pc.kpnar[data-k2] .kpstick .pctabs{scrollbar-width:none!important;-ms-overflow-style:none!important}
 .pctabs::-webkit-scrollbar,.kcattabs::-webkit-scrollbar,.ksub::-webkit-scrollbar,.ksubs::-webkit-scrollbar,.kmc-tabs::-webkit-scrollbar,.kchips::-webkit-scrollbar,.chips::-webkit-scrollbar,.relsel::-webkit-scrollbar,.hud2::-webkit-scrollbar,.j59strip::-webkit-scrollbar{display:none!important;width:0!important;height:0!important;background:transparent!important}
 .kfr:not(.kfl){-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent)}
 .kfl:not(.kfr){-webkit-mask-image:linear-gradient(90deg,transparent,#000 22px);mask-image:linear-gradient(90deg,transparent,#000 22px)}
@@ -43026,6 +43026,24 @@ document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;setTimeout(()
  if(L.length){e.preventDefault();L[0].__kxl.close();return}
  if(kitModalClose()){e.preventDefault();return}
  const px=document.getElementById("popx");if(px&&px.offsetParent){e.preventDefault();px.click()}},0)});
+/* KIT 8.9 ONE DIALOG STACK (owner 21/11, mark #46: the «Kiếp này» death card opened with a person pop-up still open ON TOP of its bottom part).
+   ONE rule for the kit modal layer (#modal / Q), applied from showModal, for every dialog opener (kitModal, kitConfirm, kitPanel, resultShow, over(), events, PEND cards):
+   (1) a newer dialog is always the TOP layer: #modal sits above the room pop-up card (#popw) and every second-layer pop-up (kitCloseLayer layers, .kpop) — never under them (CSS below);
+   (2) a WINNING dialog (death / era end «Kiếp này», night, life card, any dialog while S.dead) closes every other open second-layer pop-up first: the room person card (popIdx),
+       the kit layers (game result #ov and other kitCloseLayer layers), the word pop-up #kpop, the podium #kpodov, an open kit book (.kbk). Nothing is left floating over or behind it.
+   Never two dialogs overlapping: a new dialog never opens on top of an older dialog of its own layer (Q is one queue: the older one waits its turn, shown one at a time). */
+function kitDialogWins(m){try{if(!m)return false;if(typeof S!=="undefined"&&S&&S.dead)return true;const c=String(m.cls||""),k=m.kit&&m.kit.kind;return /\b(end|night|klife)\b/.test(c)||k==="end"||k==="night"}catch(e){return false}}
+function kitCloseOthers(){let n=0;
+ try{if(typeof popIdx!=="undefined"&&popIdx!=null){popIdx=null;popMsg="";n++;if(typeof renderStage==="function")renderStage()}}catch(e){}
+ try{KIT_LAYERS.slice().forEach(r=>{if(r.isConnected&&!r.hidden&&getComputedStyle(r).display!=="none"&&r.__kxl&&r.__kxl.box()){try{r.__kxl.close()}catch(e){}n++}})}catch(e){}
+ try{document.querySelectorAll(".kpop").forEach(x=>{if(!x.hidden){x.hidden=true;n++}})}catch(e){}
+ try{if(document.getElementById("kpodov")){typeof kitPodiumClose==="function"?kitPodiumClose(true):document.getElementById("kpodov").remove();n++}}catch(e){}
+ try{if(document.body.classList.contains("kbk-open")){const x=document.querySelector(".kbk>.kbk-x");if(x){x.click();n++}}}catch(e){}
+ return n}
+function kitDialogStack(){try{const m=typeof Q!=="undefined"?Q[0]:null;if(!m)return 0;return kitDialogWins(m)?kitCloseOthers():0}catch(e){console.error("kitDialogStack",e);return 0}}
+window.kitDialogStack=kitDialogStack;window.kitCloseOthers=kitCloseOthers;window.kitDialogWins=kitDialogWins;
+(function(){const st=document.createElement("style");st.id="kit-dialog-stack";st.textContent=`html body:not(.kg82cf) #modal:not(.kptitle){z-index:42}`;document.head.appendChild(st);
+ setTimeout(()=>{const s1=showModal;showModal=function(){const r=s1.apply(this,arguments);kitDialogStack();return r}},0)})();
 /* game / lesson results in #ov (kg82 "Đã hiểu", j92 Chải chuốt, the old j5 "Xong"): the result card closes with ✕ / tap outside / Esc,
    which press that button (its own handler applies the result as before); while the game runs there is no ✕ */
 /* (review kit-fig2 11/15, LUẬT SỬA CẢ NHÓM "overlay never closes"): only the result button of the panel ON SCREEN counts — a button left in a
@@ -59284,7 +59302,7 @@ window.slapNpcDraw=slapNpcDraw;window.slapNeOdds=slapNeOdds;
   const m=`${NMc(a)} giơ tay tát ${NM(t)} nhưng ${NM(t)} né kịp, cái tát hụt.`;return a===S?`<span class="r">${m}</span> `:m+" "}}
  SLAP.next=sev;try{return r0.apply(this,arguments)}finally{SLAP.next=0}}})();
 /* ================= jmcal: LỊCH THÁNG · kitMonthCal + kitDeskCal (owner 15/11 ~18:30Z, KIT §58) =================
-   A wall calendar: one month = 3 rows (thượng / trung / hạ tuần) x 10 squares (days 1-30). Only the FIXED YEARLY festivals of the game
+   A wall calendar: one month = 3 tuần (thượng / trung / hạ), each a light label + 2 rows x 5 equal squares (days 1-30), a normal phone month view (owner 21/11 #42): header with arrows + swipe, no month chips. Only the FIXED YEARLY festivals of the game
    calendar (FEST, j31 + j71 Thánh thọ Thái hậu while she lives) are marked; private contests, tea parties, private banquets and every other
    surprise event never appear (they are not in FEST).
    TIME MODEL: the game has no day of the month; a turn is a tuần (S.tuan 0/1/2). Day squares map to tuần as 1-10 = thượng, 11-20 = trung,
@@ -59448,24 +59466,22 @@ function mcDayBox(o,d){const n=mcNow();const {m,y}=mcMY(o);const t=mcTuanOf(d);c
 /* ---------- the calendar (pure HTML; o = months from the current month, -1 = last month (her log), 0..11 ahead; sel = the tapped day) ---------- */
 function kitMonthCal(opt){opt=opt||{};const n=mcNow();const o=Math.max(-1,Math.min(11,opt.o|0));const {m,y}=mcMY(o);const F=mcFests(m);const X=mcExtra(o);const sel=+opt.sel||0;
  const at={};F.forEach(f=>f.days.forEach(d=>{(at[d]=at[d]||[]).push(f)}));
- const tabs=[];for(let i=-1;i<12;i++){const mm=mcMY(i).m;const c=i<0?0:mcFests(mm).length;tabs.push({k:String(i),label:i<0?"Tháng trước":`Tháng ${typeof KP_MON!=="undefined"?KP_MON[mm-1]:mm}`,n:c||null,tip:c?`${c} lễ hội`:""})}
- const tabRow=typeof kitTabRowHTML==="function"?kitTabRowHTML(tabs,String(o),"data-kmcm"):"";
- let g="";for(let t=0;t<3;t++){const now=o===0&&t===n.t;const T=(typeof TUAN!=="undefined"?TUAN[t]:["thượng tuần","trung tuần","hạ tuần"][t]).split(" ");const q=mcQue(o,t);
-  g+=`<div class="kmc-row${now?" on":""}"><div class="kmc-tl"><span>${T[0][0].toUpperCase()+T[0].slice(1)}</span><span>${T[1]}</span>${now?`<span class="kchip g kmc-now">Tuần này</span>`:""}${mcQueChip(q)}</div>`;
+ let g="";for(let t=0;t<3;t++){const now=o===0&&t===n.t;const q=mcQue(o,t);
+  g+=`<div class="kmc-row${now?" on":""}"><div class="kmc-tl"><span>${mcCap(typeof TUAN!=="undefined"?TUAN[t]:["thượng tuần","trung tuần","hạ tuần"][t])}</span>${now?`<span class="kchip g kmc-now">Tuần này</span>`:""}${mcQueChip(q)}</div><div class="kmc-cells">`;
   for(let d=t*10+1;d<=t*10+10;d++){const past=o<0||(o===0&&t<n.t);const L=at[d];const E=(X[d]||[]).filter(x=>x.k!=="cy");const cy=(X[d]||[]).some(x=>x.k==="cy");
    const mo=MCX.moon[d]?`<span class="kmc-mo p${d}" aria-hidden="true"></span>`:"";const cnt=(L?L.length-1:0)+E.length-(L?0:1);
    const badge=cnt>0?`<span class="kmc-c">+${cnt}</span>`:"";const cls=`kmc-d${L?" f":""}${E.length?" x":""}${cy?" cy":""}${past?" past":""}${sel===d?" sel":""}`;
    const lab=[mcDayName(d)].concat((L||[]).map(x=>x.name),E.map(x=>x.txt),cy?["Nguyệt tín"]:[]).join(": ");
    if(L){const f=L[0];g+=`<button type="button" class="${cls}" data-kmcd="${d}" data-kmcf="${f.k}" data-kmco="${o}" aria-label="${mcEsc(lab)}"><img src="https://ctm-img.victoria-tntt.workers.dev/img/ev-fest-${f.k}.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()"><span class="kmc-n">${d}</span>${badge}${mo}<span class="kmc-fn">${mcEsc(f.short)}</span></button>`}
    else g+=`<button type="button" class="${cls}" data-kmcd="${d}" data-kmco="${o}" aria-label="${mcEsc(lab)}"><span class="kmc-n">${d}</span>${badge}${mo}${E.length?`<span class="kmc-tg t-${E[0].k}">${MCX.tag[E[0].k]||""}</span>`:""}</button>`}
-  g+=`</div>`}
+  g+=`</div></div>`}
  const rows=[];for(let d=1;d<=30;d++){(at[d]||[]).forEach(f=>{if(f.days[0]===d)rows.push([d,mcDaysName(f.days),`<span class="kmc-lk" role="button" tabindex="0" data-kmcf="${f.k}" data-kmco="${o}">${mcEsc(f.name)}</span> · ${mcLeftText(o,f)}`])});
   (X[d]||[]).forEach(x=>{if(x.k!=="cy"&&x.k!=="bong")rows.push([d,mcDayName(d),mcEsc(x.txt)])})}
  const rr=rows.map(r=>[r[1],r[2]]);
  const list=rr.length?(typeof kitRows==="function"?kitRows(rr):rr.map(r=>`<div>${r[0]} · ${r[1]}</div>`).join("")):`<div class="kmc-none">${o<0?"Tháng trước không có lễ hội lớn.":"Tháng này không có lễ hội lớn."}</div>`;
- return `<div class="kmc" data-kmc="${o}"><div class="pctabs kcattabs kmc-tabs" role="tablist">${tabRow}</div>`+
-  `<div class="kmc-head"><b>${mcMonName(m).replace(/^t/,"T")}</b> · ${mcYearName(y)}${o===0?"":` <span class="kmc-ahead">(${o<0?"đã qua":o===1?"tháng sau":`${o} tháng nữa`})</span>`}</div>`+
-  `<div class="kmc-grid">${g}</div>${sel?mcDayBox(o,sel):`<div class="kmc-hint">Chạm vào một ngày để xem việc ngày ấy, ghi sổ hẹn.</div>`}<div class="kmc-list">${list}</div></div>`}
+ const ar=(to,cap,sym)=>`<button type="button" class="kbtn alt kmc-ar" data-kmcm="${to}" aria-label="${cap}" title="${cap}"${to<-1||to>11?" disabled":""}>${sym}</button>`;
+ return `<div class="kmc" data-kmc="${o}"><div class="kmc-nav">${ar(o-1,"Tháng trước","‹")}<div class="kmc-head"><b>${mcMonName(m).replace(/^t/,"T")}</b> · ${mcYearName(y)}${o===0?"":` <span class="kmc-ahead">(${o<0?"đã qua":o===1?"tháng sau":`${o} tháng nữa`})</span>`}</div>${ar(o+1,"Tháng sau","›")}</div>`+
+  `<div class="kmc-grid">${g}</div>${sel?mcDayBox(o,sel):`<div class="kmc-hint">Chạm vào một ngày để xem việc ngày ấy, ghi sổ hẹn. Lướt ngang hoặc bấm mũi tên để đổi tháng.</div>`}<div class="kmc-list">${list}</div></div>`}
 /* the popover of one festival (kit kpPop) */
 function mcPopHTML(k,o){const mm=mcMY(o).m;const f=mcFests(mm).find(x=>x.k===k);if(!f)return"";const A=mcActs(k),pz=mcPrize(k);
  const T=f.t.map(t=>typeof TUAN!=="undefined"?TUAN[t]:"").filter(Boolean).join(", ");const P=o<0?[]:mcPrep(k);const ok=P.filter(x=>x[0]).length;
@@ -59476,12 +59492,12 @@ function kitMonthCalOpen(){try{if(typeof kitModal!=="function")return;kitModal({
 try{KP_SEAL.cal="LỊCH"}catch(e){}
 window.kitMonthCal=kitMonthCal;window.kitMonthCalOpen=kitMonthCalOpen;
 /* re-draw the calendar in place (month tab, tapped day, a note saved), keeping the tab row's scroll */
-function mcRedraw(c,o,sel,focusDay){const sx=(c.querySelector(".kmc-tabs")||{}).scrollLeft||0;const w=document.createElement("div");w.innerHTML=kitMonthCal({o,sel});const nc=w.firstElementChild;c.replaceWith(nc);
- const tr=nc.querySelector(".kmc-tabs");if(tr){tr.scrollLeft=sx;const on=tr.querySelector(".pct.on");if(on&&on.scrollIntoView&&!sel)on.scrollIntoView({block:"nearest",inline:"nearest"})}
+function mcRedraw(c,o,sel,focusDay,dir){const w=document.createElement("div");w.innerHTML=kitMonthCal({o,sel});const nc=w.firstElementChild;c.replaceWith(nc);
+ if(dir){const g=nc.querySelector(".kmc-grid");if(g)g.classList.add(dir>0?"kmc-in-r":"kmc-in-l")}
  if(sel&&focusDay!==false){const b=nc.querySelector(".kmc-day");if(b&&b.scrollIntoView)b.scrollIntoView({block:"nearest"})}return nc}
-/* month tabs, day taps, festival popover, sổ hẹn (delegated; the capture-phase kit popover closer runs first, so a tap on another square re-opens it) */
+/* month arrows + swipe, day taps, festival popover, sổ hẹn (delegated; the capture-phase kit popover closer runs first, so a tap on another square re-opens it) */
 document.addEventListener("click",e=>{const T=e.target.closest&&e.target;if(!T)return;const c=T.closest(".kmc");
- const tb=T.closest("[data-kmcm]");if(tb&&c){e.stopPropagation();e.preventDefault();mcRedraw(c,+tb.dataset.kmcm,0);return}
+ const tb=T.closest("[data-kmcm]");if(tb&&c){e.stopPropagation();e.preventDefault();if(tb.disabled)return;const to=+tb.dataset.kmcm;mcRedraw(c,to,0,false,to>+c.dataset.kmc?1:-1);return}
  const pre=T.closest("[data-kmcpre]");if(pre&&c){e.preventDefault();const i=c.querySelector("#kmc-note");if(i){i.value=pre.dataset.kmcpre;i.focus()}return}
  const sv=T.closest("[data-kmcsave]");if(sv&&c){e.preventDefault();const i=c.querySelector("#kmc-note");const d=+sv.dataset.kmcsave,o=+sv.dataset.kmco;if(i&&mcNoteAdd(o,d,i.value)){const sh=c.querySelector("#kmc-share");if(sh&&sh.checked){const x=S.calNotes[S.calNotes.length-1];if(x)x.share=1}try{if(typeof save==="function")save()}catch(x){}mcRedraw(c,o,d)}return}
  const dl=T.closest("[data-kmcdel]");if(dl&&c){e.preventDefault();e.stopPropagation();mcNoteDel(dl.dataset.kmcdel);const b=c.querySelector(".kmc-day");try{if(typeof save==="function")save()}catch(x){}mcRedraw(c,+c.dataset.kmc,b?+b.dataset.kmcday:0);return}
@@ -59490,6 +59506,10 @@ document.addEventListener("click",e=>{const T=e.target.closest&&e.target;if(!T)r
  const f=T.closest("[data-kmcf]");if(f&&typeof kpPop==="function"){e.stopPropagation();e.preventDefault();const h=mcPopHTML(f.dataset.kmcf,+f.dataset.kmco||0);if(h)kpPop(f,h)}});
 document.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;const f=e.target.closest&&e.target.closest(".kmc-lk[data-kmcf]");if(f){e.preventDefault();f.click()}
  if(e.key==="Enter"&&e.target&&e.target.id==="kmc-note"){const c=e.target.closest(".kmc");const b=c&&c.querySelector("[data-kmcsave]");if(b){e.preventDefault();b.click()}}});
+/* swipe the grid sideways = the next / last month (a tap is not a swipe: no click is made after a drag, so the day squares keep working) */
+(function(){let x0=0,y0=0,live=null;document.addEventListener("touchstart",e=>{const t=e.touches&&e.touches[0];const c=e.target.closest&&e.target.closest(".kmc-grid,.kmc-nav");live=t&&c?c.closest(".kmc"):null;if(t){x0=t.clientX;y0=t.clientY}},{passive:true});
+ document.addEventListener("touchend",e=>{const c=live;live=null;const t=e.changedTouches&&e.changedTouches[0];if(!c||!t||!c.isConnected)return;const dx=t.clientX-x0,dy=t.clientY-y0;if(Math.abs(dx)<48||Math.abs(dx)<Math.abs(dy)*1.5)return;
+  const o=+c.dataset.kmc,to=o+(dx<0?1:-1);if(to<-1||to>11)return;mcRedraw(c,to,0,false,dx<0?1:-1)},{passive:true})})();
 /* hover (mouse) shows the same popover */
 document.addEventListener("mouseover",e=>{try{if(!matchMedia("(hover:hover) and (pointer:fine)").matches)return;const f=e.target.closest&&e.target.closest(".kmc-d[data-kmcf]");if(!f||f.__kmh)return;f.__kmh=1;
  const h=mcPopHTML(f.dataset.kmcf,+f.dataset.kmco||0);if(h)kpPop(f,h);f.addEventListener("mouseleave",()=>{f.__kmh=0;const p=document.getElementById("kpop");if(p)p.hidden=true},{once:true})}catch(x){}});
@@ -59517,15 +59537,21 @@ window.kitDeskCal=kitDeskCal;
 (function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kitDeskCal();return r}})();
 addEventListener("resize",()=>{clearTimeout(window.__kdcT);window.__kdcT=setTimeout(kdcPlace,150)});
 (function(){const st=document.createElement("style");st.id="kmc-css";st.textContent=`
-.kmc{display:grid;gap:8px;min-width:0}
-.kmc-tabs{display:flex!important;flex-wrap:wrap!important;gap:5px;overflow:visible!important}
-.kmc-head{font-family:var(--display);color:var(--ink);font-size:.95rem}.kmc-head b{color:var(--gold)}.kmc-ahead{color:var(--dim);font-size:.8rem}
-.kmc-grid{display:grid;grid-template-columns:auto repeat(10,minmax(0,1fr));gap:3px;min-width:0}
-.kmc-row{display:contents}
-.kmc-tl{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;text-align:center;font-family:var(--display);font-size:.72rem;line-height:1.1;color:var(--dim);padding:0 4px;border-radius:6px}
+.kmc{display:grid;gap:8px;min-width:0;container-type:inline-size}
+.kmc-nav{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:8px}
+.kmc-ar{min-width:44px;min-height:44px;padding:0;font-size:1.5rem;line-height:1;font-weight:700}.kmc-ar[disabled]{opacity:.35;cursor:default}
+.kmc-head{font-family:var(--display);color:var(--ink);font-size:1rem;text-align:center}.kmc-head b{color:var(--gold)}.kmc-ahead{color:var(--dim);font-size:.8rem}
+.kmc-grid{display:grid;gap:6px;min-width:0;max-width:560px;width:100%;justify-self:center}
+.kmc-grid.kmc-in-r{animation:kmcInR .2s ease both}.kmc-grid.kmc-in-l{animation:kmcInL .2s ease both}
+@keyframes kmcInR{from{opacity:.3;transform:translateX(18px)}to{opacity:1;transform:none}}@keyframes kmcInL{from{opacity:.3;transform:translateX(-18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.kmc-grid.kmc-in-r,.kmc-grid.kmc-in-l{animation:none}}
+.kmc-row{display:grid;gap:4px;min-width:0}
+.kmc-cells{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;min-width:0}
+@container (min-width:470px){.kmc-cells{grid-template-columns:repeat(10,minmax(0,1fr))}}
+.kmc-tl{display:flex;align-items:center;gap:6px;font-family:var(--display);font-size:.76rem;line-height:1.2;color:var(--dim);padding:1px 4px;border-radius:6px}
 .kmc-row.on .kmc-tl{color:var(--gold);background:#f0d07033;box-shadow:inset 0 0 0 1px var(--gold)}
 .kmc-now{font-size:.62rem!important;white-space:nowrap}
-.kmc-d{position:relative;min-width:0;aspect-ratio:1/1.08;min-height:46px;max-height:96px;display:flex;flex-direction:column;justify-content:flex-end;margin:0;padding:0;border:1px solid var(--k-hair);border-radius:6px;background:var(--k-card);color:var(--ink);font:inherit;overflow:hidden}
+.kmc-d{position:relative;min-width:0;min-height:0;aspect-ratio:1/1;display:flex;flex-direction:column;justify-content:flex-end;margin:0;padding:0;border:1px solid var(--k-hair);border-radius:6px;background:var(--k-card);color:var(--ink);font:inherit;overflow:hidden}
 .kmc-row.on .kmc-d{border-color:var(--gold);box-shadow:inset 0 0 0 1px #f0d07088}
 .kmc-d.past{opacity:.5}
 .kmc-n{position:absolute;top:2px;left:3px;font-weight:700;font-size:.74rem;line-height:1.1}
@@ -59564,7 +59590,7 @@ button.kmc-d{cursor:pointer;text-align:left;-webkit-tap-highlight-color:transpar
 `;document.head.appendChild(st)})();
 /* ---------- kit sample page (§47) ---------- */
 if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(
- {id:"§58",title:"kitMonthCal: lịch tháng (3 tuần × 10 ngày, lễ hội cố định)",html:()=>kitMonthCal({o:0})},
+ {id:"§58",title:"kitMonthCal: lịch tháng (mũi tên đổi tháng, ô vuông đều, 3 tuần × 10 ngày, lễ hội cố định)",html:()=>kitMonthCal({o:0})},
  {id:"§58.1",title:"kitMonthCal: tháng có lễ hội (tháng giêng)",html:()=>{const n=mcNow();return kitMonthCal({o:(13-n.m)%12})}},
  {id:"§58.3",title:"kitMonthCal: những ngày ngươi biết (bổng lộc, sinh thần, sổ hẹn, quẻ, trăng) và ô ngày đã chọn",html:()=>{const n=mcNow();return kitMonthCal({o:0,sel:n.t*10+1})}},
  {id:"§58.2",title:"kitDeskCal: lịch để bàn ở góc phòng (thường · lãnh cung)",html:()=>`<div class="kmc-strow"><button type="button" class="kmcdesk kmc-st" aria-label="Lịch tháng"><img src="https://ctm-img.victoria-tntt.workers.dev/img/kit/desk-cal.webp" alt=""></button><button type="button" class="kmcdesk kmc-st" aria-label="Lịch tháng"><img src="https://ctm-img.victoria-tntt.workers.dev/img/kit/desk-cal-plain.webp" alt=""></button></div>`});
@@ -73188,7 +73214,7 @@ function kszWho3(sp){if(sp.who)return sp.who;const N=(typeof BAL!=="undefined"&&
   if(typeof elderBy==="function"){let st=elderBy(n);if(!st&&typeof elderInit==="function"){elderInit();st=elderBy(n)}if(st)return st}return S.maid}catch(e){return null}}
 /* the event picture = the real game path: the event's own picture, else kitDefaultBanner (kitInfoArt of the title, else one per kind) */
 function kszEvSrc3(sp){if(sp.pic)return kszImg(sp.pic);let b=null;try{b=kitDefaultBanner({t:sp.title},sp.kind)}catch(e){}return b&&b.src?kszImg(b.src):""}
-function kszPic3(src,cls){const sj=kitPicSubj(src);return `<div class="${cls}"${sj?` data-subj="${sj.join(",")}"`:""}>${kitSceneArt(src,"",{shape:"wide",cap:false}).replace(/ loading="lazy"/g,"")}</div>`/* a frame picture is on screen: never lazy */}
+function kszPic3(src,cls,mk){const sj=kitPicSubj(src);return `<div class="${cls}"${sj?` data-subj="${sj.join(",")}"`:""}>${kitSceneArt(src,"",Object.assign({shape:"wide",cap:false},mk&&mk.mark?{mark:mk.mark,markAlt:mk.markAlt||""}:{})).replace(/ loading="lazy"/g,"")}</div>`/* a frame picture is on screen: never lazy */}
 function kszPor3(p){const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p)}catch(e){}
  if(p&&(p.kind==="th"||(S&&(p===S.thO||p===S.emp)))&&typeof kitRankCol==="function")col=kitRankCol(7);
  const tag=typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col);let f;try{f=p&&p.kind==="th"?pTH():kitFace(p)}catch(e){f={src:"",ini:"?"}}
@@ -73197,9 +73223,9 @@ function kszPor3(p){const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p
 function kszFrame3(sp,K){const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[sp.kind]||"person",who=sp.noWho?null:kszWho3(sp),ev=kszEvSrc3(sp);
  const R=[];let left="";
  /* KIT 84c PERSON-LESS frame (sp.noWho / a place card): the main picture is the left column — standard size in "one" (S / narrow), FILLING the column (cover-crop, true ratio, k3fill) in "fig" (M/L/XL); no narrator, no second picture */
- if(!who)left=kszPic3(ev,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill");
- else if(pres==="one"){if(foc==="event")left=kszPic3(ev,"k3main k3mpic");else{left=who?kszPor3(who):"";R.push(kszPic3(ev,"k3ev"))}}
- else{left=who?kszFigHtml(who):"";R.push(kszPic3(ev,"k3ev"))}
+ if(!who)left=kszPic3(ev,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill",sp.mk);
+ else if(pres==="one"){if(foc==="event")left=kszPic3(ev,"k3main k3mpic",sp.mk);else{left=who?kszPor3(who):"";R.push(kszPic3(ev,"k3ev",sp.mk))}}
+ else{left=who?kszFigHtml(who):"";R.push(kszPic3(ev,"k3ev",sp.mk))}
  let facts=(sp.facts||[]).slice();
  /* event-centred S: a person is a small avatar INSIDE the info → when no fact row carries anyone, the narrator's line is added */
  if(pres==="one"&&foc==="event"&&who&&!facts.some(f=>f&&typeof f==="object"&&f.who)&&sp.say)facts.unshift({who,text:sp.say});
@@ -73369,6 +73395,10 @@ Object.assign(window,{kszItemTile3,kszItemsSheet3,kszItemsSheet3Show,kszWearRow3
    (KSZ_LIVE_SKIP: calendars, pickers, inventories, shops, relation tables, stat grids, tables, exam / card-flip pages). */
 const KSZ_LIVE_SKIP=".kpt-mount,.kpid,.kmc,.kpick,.kpicks,.kinv,.kshg,.kshop,.kreltab,.krelt,.kstgrid,.kip,table,.kexam,.kflip,.kpl,.kmlist,.kslot,.kpets,.kgift,.kpkgrid";
 KIT_SIZE.v3.live={maxOpts:7,maxSecs:4};/* kit-rank-name (OD:L1351): the tag's rank line is the RANK (Thái giám), never the office (Kính sự phòng) — the old office override is deleted */
+/* owner 21/11 (mood-seal): the picture of a look-up frame (Tâm trạng · X) carries the mood seal in its corner (kitSceneArt o.mark, KIT 28.19b); the live frame rebuilds its picture, so it takes the seal along (from the dialog's own band, else the headArt) */
+function kszLiveMark3(m,mb){let mark="",alt="";try{const i=mb.querySelector(":scope > .kdlgart .ksart-mark");if(i){const u=/url\(["']?([^"')]+)/.exec(i.style.backgroundImage||"");if(u)mark=u[1];alt=i.getAttribute("aria-label")||""}}catch(e){}
+ if(!mark){const h=m&&m.headArt;if(h&&typeof h!=="string"&&h.mark){mark=h.mark;alt=h.markAlt||""}}
+ return mark?{mark,markAlt:alt}:null}
 function kszLiveSrc3(m,mb,kind){let src="";const im=mb.querySelector(":scope > .kdlgart img, :scope > .kpb > .kpsubj.kpev img, :scope > .kpb > .kpsubj.kpiart img");if(im)src=im.getAttribute("src")||"";
  if(!src&&m&&m.kit&&m.kit.pic)src=m.kit.pic;if(!src&&m&&m.headArt&&m.headArt.src)src=m.headArt.src;
  if(!src){try{const a=typeof kitEvArt==="function"?kitEvArt(m):null;if(a&&a.src)src=a.src}catch(e){}}
@@ -73438,8 +73468,8 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,
  Object.assign(dlg.dataset,{ksz:K,pres,focus:foc,lay:K});if(nar)dlg.dataset.narrow="1";else delete dlg.dataset.narrow;
  if(nar&&KIT_SIZE.fig[K+"3"]){const Z=V.narrow[K],F=KIT_SIZE.fig[K+"3"],Mm=document.getElementById("modal"),mh=Mm?Mm.clientHeight:900;F.h=Math.round(Math.min(Z.max,Z.f*mh));F.cw=Z.cw;dlg.style.setProperty("--kszfh",F.h+"px");dlg.style.setProperty("--kszcw",F.cw+"px")}else{dlg.style.removeProperty("--kszfh");dlg.style.removeProperty("--kszcw")}
  const body=X.body,right=X.right;[...body.children].forEach(c=>{if(c!==right)c.remove()});right.querySelectorAll(":scope>.k3ev").forEach(c=>c.remove());
- let left="",ev=true;if(!X.who){left=kszPic3(X.src,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill");ev=false}/* KIT 84c person-less frame (place card): its picture is the left main picture; fills the column in fig sizes */else if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic");ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
- if(left)body.insertAdjacentHTML("afterbegin",left);if(ev&&X.src)right.insertAdjacentHTML("afterbegin",kszPic3(X.src,"k3ev"));
+ let left="",ev=true;if(!X.who){left=kszPic3(X.src,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill",X.mk);ev=false}/* KIT 84c person-less frame (place card): its picture is the left main picture; fills the column in fig sizes */else if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic",X.mk);ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
+ if(left)body.insertAdjacentHTML("afterbegin",left);if(ev&&X.src)right.insertAdjacentHTML("afterbegin",kszPic3(X.src,"k3ev",X.mk));
  if(X.opts){if(pres==="one"||nar)X.mb.appendChild(X.opts);else right.appendChild(X.opts);/* narrow: option cards BELOW the figure row, full width; else kit-option-rows r2: stack label over value when the column is too narrow */const bs=[...X.opts.querySelectorAll(":scope>button")],w=X.opts.clientWidth;X.opts.classList.remove("kszstk")}
  /* KIT 56.19: an option card's picture sits in its fixed kit box (.kaart, KIT_OPT tier sizes), so its late (lazy) load changes no frame size and must not re-pick
     the frame: scrolling the list revealed lazy card pictures, their load re-picked the frame in the middle of her wheel and the wheel was lost */
@@ -73466,13 +73496,13 @@ function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=docume
  const main=body.querySelector(":scope > .kpmain");if(!main||main.querySelector(KSZ_LIVE_SKIP)||body.querySelector(":scope > .kpsubj.kes2"))return false;
  /* menus and pages are not event frames: a pick-list (≥ KIT_SIZE.v3.live.maxOpts options) or a sectioned page (≥ maxSecs headed sections) keeps its page layout */
  const LV=KIT_SIZE.v3.live,o0=mb.querySelector(":scope > .opts");if(o0&&o0.querySelectorAll(":scope > button").length>=LV.maxOpts)return false;if(main.querySelectorAll(":scope > .kpsec > .kpst").length>=LV.maxSecs)return false;
- let P=[];try{P=kitStagePeople(m)}catch(e){}const who=m&&m.placeK?null:(P[0]||kszWho3({kind}));/* a place card (jplace) has no person column: the narrator never stands on it (owner 18/11 map-tap-go) */const src=kszLiveSrc3(m,mb,kind);const opts=mb.querySelector(":scope > .opts");
+ let P=[];try{P=kitStagePeople(m)}catch(e){}const who=m&&m.placeK?null:(P[0]||kszWho3({kind}));/* a place card (jplace) has no person column: the narrator never stands on it (owner 18/11 map-tap-go) */const src=kszLiveSrc3(m,mb,kind),mk=kszLiveMark3(m,mb);const opts=mb.querySelector(":scope > .opts");
  /* the old layout classes go (their fit passes then find nothing to do); the game's nodes are moved, never rebuilt */
  dlg.classList.remove("kesdlg","kdper","kdpbanner","kdscroll");dlg.classList.add("kszf","ksz3","kszlive");dlg.style.removeProperty("--dart");dlg.style.removeProperty("height");dlg.style.removeProperty("--kdpic");
  const B=document.createElement("div");B.className="k3body";const R=document.createElement("div");R.className="k3right";B.appendChild(R);R.appendChild(main);
  if(opts){opts.classList.add("k3btns");opts.classList.remove("k3grid","kdpo2")}
  [...mb.children].forEach(c=>{if(c!==opts)c.remove()});mb.prepend(B);
- dlg.__ksz3={kind,who,src,mb,body:B,right:R,opts,m};kszLivePick3(dlg);return true}catch(e){console.error("kitFrameLive3",e);return false}}
+ dlg.__ksz3={kind,who,src,mk,mb,body:B,right:R,opts,m};kszLivePick3(dlg);return true}catch(e){console.error("kitFrameLive3",e);return false}}
 Object.assign(window,{kitFrameLive3,kszLivePick3,kitFrameApplyLive3,kitFrameFitsLive3,kszBtnGridLive3});
 (function(){const st=document.createElement("style");st.id="k-size3-live";st.textContent=`
 html body #modal .dlg.kszlive.kszlive{width:var(--kszw)!important;max-width:calc(100% - 16px)!important;height:auto!important;min-height:0!important;max-height:calc(100% - 16px);padding:0;display:flex;flex-direction:column;overflow:hidden}
@@ -86290,7 +86320,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="cb9ea101bde7";window.CTM_BUILD=BUILD;
+const BUILD="3e67795ee3ac";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
