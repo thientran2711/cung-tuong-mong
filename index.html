@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"db6ae2a0+","t":"2026-11-21T03:24Z","c":"SELF-MERGE LAND bag-inline: merge LIVE 9c1dd605f (index.html/sw.js rebuilt)","b":"b75dd25dce6f","h":[{"s":"1674d407+","t":"2026-11-21T03:15Z","c":"Túi đồ: bấm đồ hiện ngay dưới lưới, Việc có hình"},{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"}]};
+window.CTM_BI={"s":"410c4f44+","t":"2026-11-21T03:07Z","c":"kit-tap-word: kitTapWord / kitTraitWords (KIT §73.2), sample, test","b":"f57df48dc9e3","h":[{"s":"1674d407+","t":"2026-11-21T03:15Z","c":"Túi đồ: bấm đồ hiện ngay dưới lưới, Việc có hình"},{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -24671,10 +24671,7 @@ function q72OkDef(X){return X.T.ok||{}}
 function q72NoDef(X){const n=X.T.no||{};return Object.assign({r:-6},n)}
 /* rough chance of finishing (only rolled steps that can end it), for the ladder word on the offer */
 function q72Est(X){let p=1;for(const st of X.T.s){if(st.ch){const os=st.ch.filter(o=>o.p!=null);if(os.length===st.ch.length){p*=Math.max(...os.map(o=>q72Odds(o.p,o.sk,X)))/100}}else if(!st.w){const o=q72Odds(st.b,st.sk,X)/100;p*=st.f==="r"?Math.min(1,o+.35):o}}return Math.round(p*100)}
-function q72StepTxt(st,X){const pl=q72StepPl(st,X);return `${q72Txt(st.n,X)}${st.w?` (đợi ${st.w} tuần)`:pl?` · tại ${q72PlN(pl)}`:st.emp?" · lúc ở cạnh Hoàng thượng":""}${st.sk&&!st.w?` · cần ${SK72[st.sk]||"quen biết"}`:""}`}
-function q72Steps(X){return X.T.s.map((st,i)=>`${i+1}. ${q72StepTxt(st,X)}`).join("<br>")}
-/* owner 21/11 #66: the offer's kind / deadline / steps are kit label|value rows (never a chip cloud) */
-function q72InfoRows(X){const T=X.T;return `<div class="kpsec">${kitRows([["Loại",KIND72[T.kind]],["Hạn",`${T.dl||6} tuần`]].concat(T.s.map((st,i)=>[`Bước ${i+1}`,q72StepTxt(st,X)])))}</div>`}
+function q72Steps(X){return X.T.s.map((st,i)=>{const pl=q72StepPl(st,X);return `${i+1}. ${q72Txt(st.n,X)}${st.w?` (đợi ${st.w} tuần)`:pl?` · tại ${q72PlN(pl)}`:st.emp?" · lúc ở cạnh Hoàng thượng":""}${st.sk&&!st.w?` · cần ${SK72[st.sk]||"quen biết"}`:""}`}).join("<br>")}
 
 /* ---------- candidates ---------- */
 function q72Ctx(){return{sea:SEASON[S.month-1],m:S.month,rank:S.rank,place:S.place,or:S.origin&&S.origin.k,bac:S.bac,sung:S.sung,kids:(S.kids||[]).length,fest:(()=>{try{return festToday()}catch(e){return null}})()}}
@@ -24707,7 +24704,7 @@ PEND.q72o=pp=>{try{const x=pp.x;const X=q72X(x);if(!X)return null;const T=X.T;co
   const owe=q72Debt(X.A)<0;const dec=Math.min(-2,-(T.dec||3)*(owe?2:1));const est=q72Est(X);
   const pre=pp.how==="ask"?`<p class="past">Ngươi hỏi han, ${X.A.n} ngỏ lời.</p>`:pp.how==="fu"?`<p class="past">Lại là ${X.A.n}: chuyện lần trước còn tiếp.</p>`:"";
   const tr=T.tr?`<p class="past">${q72Txt(T.tr,X)}</p>`:"";
-  const h=`${pre}<p>${q72Lead(X,q72Txt(T.h,X))}</p>${tr}${q72InfoRows(X)}${owe?`<p class="r">Ngươi đang nợ ${q72Short(X.A)} một ân: từ chối lần này mếch lòng gấp đôi.</p>`:""}`;
+  const h=`${pre}<p>${q72Lead(X,q72Txt(T.h,X))}</p>${tr}<p class="past"><b>${KIND72[T.kind]}</b> · hạn ${T.dl||6} tuần · ${T.s.length} bước:<br>${q72Steps(X)}</p>${owe?`<p class="r">Ngươi đang nợ ${q72Short(X.A)} một ân: từ chối lần này mếch lòng gấp đôi.</p>`:""}`;
   const accX=`${est>=95?"":word(est)+" · "}thành: ${ok.join(", ")||"êm chuyện"} · hỏng: ${no.join(", ")}${bad.length?` · kèm: nếu bại lộ: ${bad.join(", ")}`:""}`;
   const decX=`giữ sức, không mắc thêm ân tình · tốn: ${[q72Tok(X.A,dec)||R72(`${X.A.n} phật ý`)].concat(owe?[R72("nợ ân vẫn còn")]:[]).join(", ")}`;
   const o=[{n:"Nhận lời",fx:{},x:accX,go:()=>{const q=q72();if(q.a.length>=Q72CFG.max){log("Ngươi đang bận quá nhiều việc, đành khất.");return}x.t0=wk();x.dl=wk()+(T.dl||6);q.a.push(x);q.n.acc++;if(T.acc)try{T.acc(X)}catch(e){}q72Enter(x,X);log(`Ngươi nhận lời ${X.A.n}: ${q72Title(X)}. Hạn ${T.dl||6} tuần. ${T.acc?q72Txt(T.accX||"",X):""}`)}},
@@ -27004,6 +27001,13 @@ function kitRowsJoin(){return [...arguments].filter(Boolean).join("").replace(/(
 function kitFactDetail(d){if(!d)return"";if(typeof d==="string")return d;const R=[["Khi nào",d.when&&typeof kpDateText==="function"?kpDateText(String(d.when)):d.when],["Cách biết",d.how],["Nguồn",d.src&&typeof d.src==="object"?d.src.name:d.src]].filter(r=>r[1]);
  return R.map(r=>`<div class="kpopx"><b>${r[0]}:</b> ${r[1]}</div>`).join("")}
 function kitFactTap(f,d){const det=kitFactDetail(d);return det?`<span class="kgl kfx" tabindex="0" data-kfx="${kpEsc(det)}">${f}</span>`:f}
+/* KIT §73.2 TAP-WORD (owner 21/11 ~03:40Z CANON, review/kit-tap-word): a WORD with the kit dotted underline (.kgl.kfx); tap → the small kit popup with ONLY that word's meaning (the word as its title). Used for the traits in the person header
+   («Tính cách | Đa nghi, Hiếu thảo», «Trọng | tài nghệ, sắc») — no bullet trait box, no avatar «!» for them. ONE word per trait game-wide (the word comes from ETRAITS, never a variant).
+   kitTapWord(word, meaning) = one tap-word (meaning = plain text or HTML; empty → the plain word); kitTraitWords(keys|words) = «Đa nghi, Hiếu thảo» — each trait (ETRAITS key «danghi» or its word «Đa nghi») as a tap-word, comma-joined. */
+function kitTapWord(word,meaning){return meaning?kitFactTap(word,String(meaning)):String(word==null?"":word)}
+function kitTraitWords(list){const E=typeof ETRAITS==="object"&&ETRAITS?ETRAITS:{};const by={};Object.keys(E).forEach(k=>{by[k]=E[k];by[E[k][0]]=E[k]});
+ return (list||[]).map(x=>{const e=by[x];return e?kitTapWord(e[0],e[1]):(typeof x==="string"?x:"")}).filter(Boolean).join(", ")}
+window.kitTapWord=kitTapWord;window.kitTraitWords=kitTraitWords;
 function kitFactTipHtml(el){return `<div class="kpopt">${el.innerHTML}</div>${el.dataset.kfx}`}
 function kitFactRows(items){return kitRows((items||[]).filter(x=>x&&x.f).map(x=>[x.l||"",Array.isArray(x.f)?x.f:kitFactTap(x.f,x.d),x.c||"t"]))}
 /* KIT §51 kitReqRows([[ok, "Sủng 8 (cần 15)"], ...]) -> a requirement list as ONE kit table: label = what is needed, value = ✓/✗ + the
@@ -66297,6 +66301,7 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
  window.pcfStatWatch={scan,MEM}})();
 /* kit sample (KIT §73) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73",title:"Thẻ người: bảng thông tin bên phải (sở trọng, đã biết, dạo này) + khối chính bên trái (lòng người gọn)",html:()=>{
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§73.2",title:"Chữ chạm được: tính cách là từ gạch chân chấm, chạm hiện nghĩa riêng",html:()=>kitRows([["Tính cách",kitTraitWords(["danghi","hieuthao"]),"t"],["Trọng",kitTapWord("tài nghệ","Cầm, Kỳ, Thi, Họa nặng gấp đôi.")+", "+kitTapWord("sắc","Sắc đẹp và tài múa nặng gấp đôi khi chọn thị tẩm."),"t"]])})}catch(e){}
  try{const v=S&&(typeof rivals!=="undefined"&&rivals[0])||null;if(v){const h=pcfBlocks(v,{},true),k=pcfKey(v);if(h||k)return `<div class="kitpg-row" style="width:min(100%,520px);display:flex;gap:10px"><div style="flex:0 0 172px">${k}</div><div style="flex:1;min-width:0">${h}</div></div>`}
   /* no game open (#kit): the same blocks built from kit parts with demo data (owner 11/16 15:00Z 3.6: the sample was EMPTY) */
   return `<div class="kitpg-row" style="width:min(100%,520px);display:flex;gap:10px"><div class="kpkey" style="flex:0 0 172px">${kitRelTable([{dir:"them",label:"Nàng → ta: thiện cảm",w:"Thiện cảm",sj:"Nàng",ob:"nàng",now:12,d:0,kind:"good"},{dir:"them",label:"Nàng oán ta",w:"Oán",sj:"Nàng",ob:"nàng",now:3,d:0,kind:"bad"},{dir:"them",label:"Nàng ghen",w:"Ghen",sj:"Nàng",ob:"nàng",now:8,d:0,kind:"bad"},{dir:"me",label:"Ta → nàng: thiện cảm",w:"Thiện cảm",sj:"Nàng",ob:"nàng",now:20,d:0,kind:"good"}],{compact:true})}</div><div style="flex:1;min-width:0">${kitRows([["Sở trường","Thi họa"],["Tính nết","Hay giúp người"],["Tin","Hay giúp người, giận khó nói"],["Dạo này","Được ban thưởng ở Ngự hoa viên"]])}</div></div>`}catch(e){return""}}})}catch(e){}
@@ -86197,7 +86202,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b75dd25dce6f";window.CTM_BUILD=BUILD;
+const BUILD="f57df48dc9e3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
