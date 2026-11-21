@@ -278,40 +278,9 @@ B29_S_CREPE = "The FABRIC is thin, light, flowing matte silk crepe (lụa tơ t�
 B29_S_SCOPES = {"maid"}
 
 
-# B27/B28 WIRING (BUILDFIX4, ROOT-B3 brief 21/11 after owner L2099/L2100: "Ủa mà tôi nhớ là đã đổi Hoàng Quý Phi và Hoàng hậu đi về cái loại gấm lụa nhẹ nhất có thể mà."):
-# t6-t8 every season = ONE light gấm (B28 L1534), never thick / heavy / stiff brocade (B27 L1524). ONE copy, used by build_all (b27_post) and check_store (store swap).
-# B27_FABRIC = the sentence put in the BROCADE slot (must be one of b29_alts(high)). B27_SWAPS = other heavy-brocade words -> light words (owner meaning only).
-B27_SHORT = "FABRIC: the LIGHTEST thin, supple brocade (gấm) with a soft matte finish, never thick, stiff or heavy, with a graceful, flowing drape."
-B27_FABRIC = B27_SHORT   # ROOT-B3 choice pending: B27_SHORT (fits length) or B29_C_GAM (owner text, much longer)
-B27_SWAPS = [   # (old, new, ranks)
- ("a HEAVY silk brocade robe", "a light silk brocade robe", (6, 7, 8)),          # t6 QP store outfit (SATURATED colour word kept)
- (", matching the weight of her brocade", "", (6,)),                             # t6 phi bạch (the L1847 'slightly THICKER … a little LESS see-through' words stay: owner)
- ("TWO-TIER cloud collar (vân kiên hai tầng)", "SINGLE-TIER cloud collar of ONE layer only (vân kiên một tầng, never two tiers)", (7,)),   # owner L2099: HQP one tier, only HH two
-]
-# B27_RX: robe / fabric words only; a 'stiff brocade girdle' (G15 t3 owner design, Lượt 559) is an accessory -> not banned here (asked ROOT-B3)
-B27_RX = re.compile(r"\b(?:thick|thicker|heavy|heavier|stiff)\b[^.;:,]{0,30}?\bbrocade\b(?!\s+(?:girdle|belt|waistband|band|sash))|\bweight of her brocade\b", re.I)
-
-
-def b27_post(text, rank):
-    """builder: t6-t8 (any season) heavy-brocade words -> B27/B28 light words. -> (text, notes)."""
-    notes = []
-    if not (isinstance(rank, int) and 6 <= rank <= 8): return text, notes
-    if BROCADE in text and B27_FABRIC != BROCADE: text = text.replace(BROCADE, B27_FABRIC, 1); notes.append("B27 light gấm fabric sentence")
-    for old, new, rr in B27_SWAPS:
-        if rank in rr and old in text: text = text.replace(old, new, 1); notes.append("B27 " + (new or "drop")[:28])
-    return text, notes
-
-
-def b27_store_swap(store, prompt):
-    """store gate: the store's heavy words are read as the B27 light words when the prompt carries the light form."""
-    for old, new, rr in B27_SWAPS:
-        if old in store and old not in prompt and (not new or new in prompt): store = store.replace(old, new, 1)
-    return store
-
-
 def b29_alts(scope, high=False, doan=False, winter=False):
     """B29: the alternative fabric sentences accepted for this scope (empty = only the old slot sentence)."""
-    if high: return [B29_C_GAM] + ([B27_FABRIC] if B27_FABRIC not in (B29_C_GAM, BROCADE) else [])   # BUILDFIX4: + the B27 short light-gấm form
+    if high: return [B29_C_GAM]
     if doan: return [] if winter else [B29_B_LIGHT]
     if scope in B29_A_SCOPES: return [B29_A_HEAVY] + ([] if winter else [B29_A_LIGHT])
     if scope in B29_S_SCOPES: return [B29_S_CREPE]
