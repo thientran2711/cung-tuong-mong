@@ -1195,23 +1195,16 @@ window.kitInfoOneLine=kitInfoOneLine;
 /* dialog hosts (pop-up card with the ✕ .pcx in the corner, which follows the scroll): the «!» of a long row stands LEFT of the ✕ lane, never under it (a tap on it would close the dialog) */
 .pcpop .pc .pcf .kr>.krv.kone{padding-right:72px}
 .pcpop .pc .pcf .kr>.krv>.kgnb{right:46px}
-`;document.head.appendChild(st);try{addEventListener("resize",()=>{clearTimeout(window.__k1S);window.__k1S=setTimeout(()=>{kitInfoOneLine();try{document.querySelectorAll(".pc.kpwide[data-k2]").forEach(kitPcKeyFit)}catch(e){}},100)})}catch(e){}})();
+`;document.head.appendChild(st);try{addEventListener("resize",()=>{clearTimeout(window.__k1S);window.__k1S=setTimeout(()=>{kitInfoOneLine();kitPcMore()},100)})}catch(e){}})();
 /* KIT §6.3j RANK + NAME = ONE COLOUR on the person-card tag (owner OD 16/11 16:10Z «rank+name one colour: OK» + 21/11 04:33Z; MAIN 89 check #3): the name under the rank line takes the rank colour (--rt of .pcrk). The same unit as the story text (§48.3). */
 function kitPcTagColour(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc > .pcl > .pcrk").forEach(r=>{const n=r.parentElement.querySelector(":scope > .pcname");if(!n||n.classList.contains("krt"))return;const c=r.style.getPropertyValue("--rt")||getComputedStyle(r).color;if(!c)return;if(n.style.getPropertyValue('color')!==c)n.style.setProperty('color',c,'important')})}catch(e){}}
 window.kitPcTagColour=kitPcTagColour;
+function kitPcMore(){try{document.querySelectorAll(".pc.kpwide[data-k2]").forEach(pc=>{const m=pc.scrollHeight>pc.clientHeight+3&&pc.scrollTop+pc.clientHeight<pc.scrollHeight-3;if(pc.classList.contains("kpmore")!==m)pc.classList.toggle("kpmore",m)})}catch(e){}}
+window.kitPcMore=kitPcMore;document.addEventListener("scroll",e=>{const pc=e.target;if(pc&&pc.classList&&pc.classList.contains("kpwide"))kitPcMore()},{capture:true,passive:true});
 /* ONE observer for the person-card kit scans (act split, note «!», intro «!»): only mutations inside the panel / pop-up / dialog count, one pass per frame burst (perf: quickcheck tab time) */
 /* KIT §6.3e (owner 21/11 ~02:12Z / ~02:30Z, her Cung nhân + Hoàng tự shots): the figure in the left column ALWAYS fills the column width — kitPcKeyFit no longer shrinks it to fit the key lines under it (that left a 100 px portrait with empty bands);
    the left column is part of the card and scrolls WITH it inside the one person-tab frame (no sticky / max-height box of its own). The mother block (.kpl) always stands ABOVE the facts table in the info group, Fold and iPad alike. */
-(function(){if(typeof kitPcKeyFit==="function")kitPcKeyFit=function(pc){try{if(!pc.classList.contains("kpwide"))return;
- /* KIT §6.3i (owner 21/11 «rows UP, nothing wasted, NOT cut», mark #38): the left column = figure + key rows + wear slots must FIT the card height; only the FIGURE gives back the missing height (--kpcw on the figure, --kpcl keeps the column width; centred, never below 170 px wide); the column keeps its width so the slots stay on one row.
-    Whatever still does not fit scrolls with the card (the card is its own scroller, thin bar always visible). */
- const L=pc.querySelector(":scope > .pcl"),pcp=L&&L.querySelector(":scope > .pcp");if(!L||!pcp)return;if(pc.offsetParent===null&&getComputedStyle(pc).position!=="fixed")return;const sig=pc.clientHeight+"|"+pc.clientWidth+"|"+L.scrollHeight+"|"+L.innerHTML.length;if(pc.__kfs===sig)return;pc.style.removeProperty("--kpcl");pc.style.removeProperty("--kpcw");
- const avail=pc.clientHeight||parseFloat(pc.style.getPropertyValue("--kpcmax"))||0;if(avail<200)return;
- const need=()=>{let b=0;[...L.children].forEach(c=>{if(c.offsetParent!==null||getComputedStyle(c).position==="absolute")b=Math.max(b,c.offsetTop+c.offsetHeight)});return b+6};
- const nat=Math.round(pcp.getBoundingClientRect().width),col=Math.round(L.getBoundingClientRect().width);if(!nat)return;pc.style.setProperty("--kpcl",col+"px");
- for(let i=0;i<3;i++){const over=need()-avail;if(over<=1)break;const cw=parseFloat(pc.style.getPropertyValue("--kpcw"))||nat;const w=Math.max(170,Math.min(cw,Math.floor((pcp.offsetHeight-over)*550/1037)));if(Math.abs(w-cw)<1)break;pc.style.setProperty("--kpcw",w+"px")};pc.__kfs=pc.clientHeight+"|"+pc.clientWidth+"|"+L.scrollHeight+"|"+L.innerHTML.length
- }catch(e){}};
-window.kitPcKeyFit=kitPcKeyFit;
+(function(){if(typeof kitPcKeyFit==="function")kitPcKeyFit=function(pc){try{const nat=+pc.dataset.kpcw0||0;if(nat&&pc.classList.contains("kpwide"))pc.style.setProperty("--kpcw",nat+"px")}catch(e){}};window.kitPcKeyFit=kitPcKeyFit;
  const st=document.createElement("style");st.id="kit-pc-fill";st.textContent=`
 html body .pc.kpwide[data-k2]>.pcl{position:static!important;max-height:none!important;overflow:visible!important}
 html body .pc>.pcr .pcg.on{display:block!important}
@@ -1220,8 +1213,9 @@ html body .pc>.pcr .pcg.on>.kpl{width:100%!important;margin:0 0 8px!important}
 html body .pc>.pcr>.pcb{align-content:start!important}
 html body .pc>.pcr>.pcb>:not(button.ka){grid-column:1/-1!important;min-width:0}
 /* a card that still does not fit scrolls: make the scroller visible (thin always-on bar) so nothing looks cut (mark 38) */
-html body .pc.kpwide[data-k2]>.pcl>.pcp.kit{margin-left:auto!important;margin-right:auto!important;float:none!important}
 html body .pc.kpwide[data-k2]{scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent}
+/* explicit «more below» cue (scrollbars are not reliable on phones): a card that scrolls and is not at its end gets a bottom fade (class kpmore, set by kitPcMore) */
+html body .pc.kpwide[data-k2].kpmore::after{content:"";display:block;grid-column:1/-1;position:sticky;bottom:0;height:26px;margin-top:-26px;pointer-events:none;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 85%);z-index:5}
 `;document.head.appendChild(st)})();
 /* the frame class is set by JS (no :has() on #panel: it cost +30 % tab time in quickcheck): after every render and every panel mutation */
 function kitPcFrameMark(){try{const P=document.getElementById("panel");if(!P)return;const on=!!P.querySelector(":scope > .pgwrap > .pc, :scope > .pgwrap.krelpg");if(P.classList.contains("kpfr")!==on)P.classList.toggle("kpfr",on)}catch(e){}}
@@ -1231,7 +1225,7 @@ window.kitPcFrameMark=kitPcFrameMark;
 function kitActPicSize(){try{const P=document.getElementById("panel");if(!P||!P.clientWidth)return;const n=!document.documentElement.classList.contains("kv2")&&P.clientWidth<480;if(document.documentElement.classList.contains("kpnarrow")!==n)document.documentElement.classList.toggle("kpnarrow",n)}catch(e){}}
 window.kitActPicSize=kitActPicSize;try{addEventListener("resize",()=>{clearTimeout(window.__kpaS);window.__kpaS=setTimeout(kitActPicSize,80)})}catch(e){}
 (function(){let t=0;const hit=r=>{for(let i=0;i<r.length;i++){const e=r[i].target;if(e&&e.nodeType===1&&e.closest&&e.closest("#panel,#popw,#modal,.pcpop,.j59dock"))return true}return false};
- try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitActPicSize();kitPcTagColour(document);try{document.querySelectorAll('.pc.kpwide[data-k2]').forEach(kitPcKeyFit)}catch(e){}kitInfoOneLine(document);kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
+ try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitActPicSize();kitPcTagColour(document);kitPcMore();kitInfoOneLine(document);kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
  try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
 /* KIT §6.2b: every dialog shown → its option cards pick their picture form (tall / square) once laid out; the ResizeObserver keeps them right after */

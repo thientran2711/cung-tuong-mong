@@ -1,4 +1,4 @@
-/* review/kit-mark-fix (KIT §6.3i/j, MAIN 89 mark-verify #38 + #3 + #17): left column fits the card (figure >= 170 px wide, rows + wear slots not cut), rank + name one colour, mother block above the rows. Clone of the pcrow-square harness. usage: node dev/test/kit-mark-fix.js <url> <out> [WxH,...] [scene,...]
+/* review/kit-mark-fix (KIT §6.3i/j, MAIN 89 mark-verify #38 + #3 + #17): left column fits the card (the figure fills the column = NOT shrunk; what does not fit scrolls and shows a bottom-fade cue), rank + name one colour, mother block above the rows. Clone of the pcrow-square harness. usage: node dev/test/kit-mark-fix.js <url> <out> [WxH,...] [scene,...]
    (clone of:) review/kit-pcrow-square (KIT §6.3 + §6.3b): SQUARE act picture (one size) + title + Tốn/Được only beside it, ONE full-width info box under (Cần/Bại/Mất/Kèm/Ghi chú/lead), no bullet note box on the card but a «!» on the avatar corner that opens it, rank + name tag centred over the left figure.
    Harness cloned from pcard-actrow.js (same scenes). usage: node dev/test/pcrow-square.js <url> <outdir> [WxH,...] [scene,...]
    (older header:) review/pcard-actrow (KIT §6.3): every act a person card offers is the long row — one per line, full width, picture slot, nothing clipped;
@@ -39,13 +39,13 @@ const cdn={};const TOPS={};
     for(const pc of [...document.querySelectorAll('.pc')].filter(vis)){const L=pc.querySelector(':scope>.pcl'),pcp=L&&L.querySelector(':scope>.pcp');if(!pcp||!pc.classList.contains('kpwide'))continue;
      const pr=R(pc);let bottom=0;[...L.children].forEach(c=>{if(vis(c))bottom=Math.max(bottom,R(c).bottom)});const rk=L.querySelector(':scope>.pcrk'),nm=L.querySelector(':scope>.pcname');
      const kpl=pc.querySelector('.kpl'),kb=kpl&&kpl.parentElement.querySelector('.kb.kpkb');
-     out.push({name:(nm?nm.textContent.trim():'').slice(0,14),figW:Math.round(R(pcp).width),cut:Math.round(bottom-pr.bottom),scrollable:pc.scrollHeight>pc.clientHeight+2&&/auto|scroll/.test(getComputedStyle(pc).overflowY),
+     out.push({name:(nm?nm.textContent.trim():'').slice(0,14),figW:Math.round(R(pcp).width),colW:Math.round(R(L).width),more:pc.classList.contains('kpmore'),atEnd:pc.scrollTop+pc.clientHeight>=pc.scrollHeight-3,cut:Math.round(bottom-pr.bottom),scrollable:pc.scrollHeight>pc.clientHeight+2&&/auto|scroll/.test(getComputedStyle(pc).overflowY),
       rankCol:rk?getComputedStyle(rk).color:'',nameCol:nm?getComputedStyle(nm).color:'',same:nm&&rk?(nm.classList.contains('krt')||getComputedStyle(nm).color===getComputedStyle(rk).color):true,
       kplAbove:kpl&&kb?(R(kpl).bottom<=R(kb).top+2&&Math.abs(R(kpl).left-R(kb).left)<6&&(!/grid/.test(getComputedStyle(kpl.parentElement).display)||getComputedStyle(kpl).gridColumnStart==='1'&&getComputedStyle(kpl).gridColumnEnd==='-1')):null})}
     return out});
-   const fails=m.filter(x=>x.figW<168||(x.cut>2&&!x.scrollable)||!x.same||x.kplAbove===false).map(x=>JSON.stringify(x));
+   const fails=m.filter(x=>Math.abs(x.figW-x.colW)>3||(x.cut>2&&!x.scrollable)||(x.scrollable&&!x.atEnd&&!x.more)||!x.same||x.kplAbove===false).map(x=>JSON.stringify(x));
    const ok=m.length>0&&!fails.length;if(!ok)bad++;
-   console.log(wh,sc,'cards',m.length,JSON.stringify(m.map(x=>({fig:x.figW,cut:x.cut,sc:x.scrollable,same:x.same,kplAbove:x.kplAbove}))),ok?'PASS':'FAIL '+fails.join(' ').slice(0,900));
+   console.log(wh,sc,'cards',m.length,JSON.stringify(m.map(x=>({fig:x.figW,col:x.colW,more:x.more,cut:x.cut,sc:x.scrollable,same:x.same,kplAbove:x.kplAbove}))),ok?'PASS':'FAIL '+fails.join(' ').slice(0,900));
    await p.screenshot({path:`${OUT}/${wh}-${sc}.jpg`,type:'jpeg',quality:60})}
   if(errs.length){bad++;console.log(wh,'ERRORS',errs)}
   await ctx.close()}
