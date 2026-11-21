@@ -16,7 +16,7 @@ const KB=()=>BAL.kyngo;
 const KY={stat:{elig:0,roll:0,hit:0,npcHit:{},npcB:{},buo:{},lastB:-1,ids:{}},errs:[]};window.KY=KY;
 function kerr(w,e){try{KY.errs.push(w+": "+(e&&e.message||e));if(KY.errs.length>30)KY.errs.shift();console.error("jky",w,e)}catch(x){}}
 const coop=()=>{try{return !!(window.COOPW&&COOPW.on)}catch(e){return false}};
-const guest=()=>{try{return coop()&&COOPW.seat!=="a"}catch(e){return false}};
+const guest=()=>{try{return coop()&&!!(window.coopGuest&&coopGuest())}catch(e){return false}};/* seat-guard family (coop-thin-g §0d, r1: the 30th site): her week end on the host = her phone's branch */
 const bk=()=>wk()*B4N+(S.buoi||0);
 const kz=p=>{let z=p.ky;if(!z||typeof z!=="object")z=p.ky={m:0,cd:-1,seen:{},got:[],last:-1};z.seen=z.seen||{};z.got=z.got||[];return z};
 function band(p){try{if(p===S&&typeof isSrv==="function"&&isSrv())return 0}catch(e){}const r=p.queen?7:(p.rank|0),T=KB().bandR;return r>=T[1]?3:r>=T[0]?2:1}
