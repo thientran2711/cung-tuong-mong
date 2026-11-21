@@ -863,3 +863,5 @@ kit-mark-fix rv4 | review/kit-mark-fix-rv4 123c4572 | rv session | PASS (re-merg
 kit-g4-plate rv | review/kit-g4-plate-rv 42d5985e | rv session | PASS (flaky G4 reproduced under load, fixed) | 21/11
 kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap overridden by !important .kart/.kopt rule) | 21/11
 | KIT KEEPER #3 (OPUS; successor of keeper #2) | review/kit-*; reports/kit-keeper-3.md | MAIN CHÍNH 93 | session_01Rc5AsKoUpGuLNJz1quYU61 | RUNNING | 21/11 12:19Z |
+| SG-CARD r3 (opus; successor of r2 CCuc9zLt; + kit-opt-sg 64b61d37 merge + j34 → BAL) | review/sg-card (from 587ec407); reports/sg-card.md | FOREMAN D #16 | session_01964izEfJv1yRsyJaCGF1fH | RUNNING | 21/11 12:20Z |
+| REVIEW coop-pool-face (opus BIG co-op) | review/coop-pool-face-rv; reports/review-coop-pool-face.md | FOREMAN D #16 | session_01964izF6yWRxrNN3RCvPXFx | RUNNING | 21/11 12:21Z |
