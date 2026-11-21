@@ -783,3 +783,4 @@ kit-ghichu-sections rv2 | review/kit-ghichu-sections-rv2 cfde1cc4 | rv session |
 | REVIEW dialog-person-3 (sonnet SMALL; lands r86 too) of 8803d6b9 | review/dialog-person-3-rv | B | session_01N1tNP5SDchEK7HTZ41UWDQ | RUNNING | 21/11 05:50Z |
 | REVIEW chapter-card-3 (SMALL sonnet) 4771570e (#27 rest) | review/chapter-card-3-rv; briefs/main89-rv-chapter-card-3.md | MAIN CHÍNH 89 | session_01Rc5AsLEAMwsLLk9M3n7ZPx | RUNNING | 21/11 05:50Z |
 kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! under dialog close on Fold) | 21/11
+| REVIEW hao-huu (BIG opus) f654456a (#2) | review/hao-huu-rv; briefs/main89-rv-hao-huu.md | MAIN CHÍNH 89 | PENDING | RUNNING | 21/11 05:54Z |
