@@ -2116,3 +2116,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (15:54Z) LAND CHAIN 2: LANDED dialog-person-3 d541add9.
 - (15:54Z) LAND CHAIN 2: LANDED dialog-person-3 d541add9 (ma ma no longer speaks for the player; M58/M67/M77 family). LIVE d541add9. Next kit-relrows-ms (then rel-men-servants r2 B may follow).
 - (16:04Z) LAND CHAIN 2: LANDED kit-relrows-ms 08e1e934.
+- (16:05Z) LAND CHAIN 2: LANDED kit-relrows-ms 08e1e934. LIVE 08e1e934. Next coop-arrive-see.
