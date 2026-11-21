@@ -766,3 +766,8 @@ bag-inline-2 rv | review/bag-inline-2-rv 72fc5dd1 | rv session | FAIL (ts strip 
 | kit-act-grid KIT KEEPER (sonnet; #24 act cards one form one size per device) | review/kit-act-grid; reports/kit-act-grid.md | MAIN CHÍNH 88 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM 39cc5bc7 (quickcheck PASS, coop-e2e 92/92) | 21/11 |
 | kit-ghichu-sections KIT KEEPER (sonnet; Ghi chú SECTION → «!», kitNoteBang title, popup layer 9995) | review/kit-ghichu-sections | MAIN CHÍNH 88 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM b6261240 r2 (waits rv) | 21/11 |
 | REVIEW palace-life-gaps r2 (opus BIG) of 0ef1b097 | review/palace-life-gaps-r2-r1 | B | session_01N1tNP5VDCiGrxWWA9cibrc | RUNNING | 21/11 05:06Z |
+| REVIEW ending-screens rv (opus BIG; MAIN 88 ORDER 04:46Z) of bffc0a56 | review/ending-screens-rv; briefs/b5-rv-ending-screens.md | B | session_01N1tNP2Z5YHxBZcLFzY5BEH | RUNNING | 21/11 05:13Z |
+| ending-screens-2 (opus; owner marks #52 #84; MAIN 88 ORDER) | review/ending-screens-2; briefs/b5-ending-screens-2.md | B | session_01N1tNP62bqNSeKx77seTxeP | RUNNING | 21/11 05:13Z |
+| REVIEW mg-intro-2 (sonnet SMALL; #55; MAIN 88 ORDER) of b21609fc | review/mg-intro-2-rv; briefs/b5-rv-mg-intro-2.md | B | session_01N1tNP4xiA2xLsJRTgEi9xb | RUNNING | 21/11 05:13Z |
+| dialog-person-3 (sonnet; #73 + eye checks; MAIN 88 ORDER) | review/dialog-person-3; briefs/b5-dialog-person-3.md | B | session_01N1tNP2WnsRXnfw6mNSQXFw | RUNNING | 21/11 05:13Z |
+| huong-cue-2-r2 fixer (sonnet; jnwp/mg-noword-b conflict vs mg-5s-clear; MAIN 88 ORDER) | review/huong-cue-2-r2; briefs/b5-huong-cue-2-r2.md | B | session_01N1tNP2UKo2mtcZUCmPW2tC | RUNNING | 21/11 05:13Z |
