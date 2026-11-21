@@ -2196,3 +2196,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - Owner asked 18:00Z why 84 items not spread over 4–5 accounts; answered with GAP v4 + spread; told her C needs a nudge for J1–J5. Footer now: «~80% xong (ước lượng) · còn 39 việc không tính hình nhân vật · ~2–4 ngày tới 100 %» (39 = v4 46 open − 7 character art).
 - STANDBYs: B ROOT STANDBY session_01N1tNP5aArhXJqHNFSRixhK (17:38Z). D standby (05:12Z) session_01964izBjCjJSFaPwNb5QujU (status unknown). D #17 session_01964izBrTYM1xdxezCgqLER no self-wake: wake if silent >90 min.
 - TRIGGERS: 98 wake trig_01Lfj2ZxzCEJWEegUie2yzLj (min 32) → 99 DISABLES it and creates its own. No owner question pending.
+- (18:34Z) Opened MAIN CHÍNH 99 = session_01Rc5AsN8TNYgPyS2B25nrJ4 (child, depth 1). 98 stops; relays late messages to 99 only.
