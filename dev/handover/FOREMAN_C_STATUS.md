@@ -1085,3 +1085,4 @@ NEWACCT#17 ~03:21Z: PAL3 DONE a884067+fcb98a7: 29 off-season roots released (G50
 - (21/11 04:42Z) FROM MAIN CHÍNH 86: LIVE now db6ae2a0 (bag-inline: Túi đồ inline strip, Việc pictures; self-merge of rv PASS). Merge before LAND READY.
 =======
 >>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
+- (21/11 04:50Z) ART REQUEST empty-states (worker session_01Rc5AsMTnwmUdoGmZsd4Uvk, owner marks #15/#30): (a) Nam nhân empty-state picture (palace men: guard/physician/prince/musician; now stand-in img/act-hen-gap.webp night lantern), (b) Phe phái picture (now info-phe-phai tea scene; optional faction/allies scene), (c) Việc nhờ picture (now tea-and-fans act-cat art; optional). Tell MAIN CHÍNH 87.
