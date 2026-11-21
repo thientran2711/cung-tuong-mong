@@ -1,0 +1,138 @@
+{
+ "_note": "L2040 SEASON BIRD TABLE — DRAFT (owner OK pending; no prompt edits, 0 gens). Research: web search found NO canonical 'one bird per season' set in Chinese embroidery; only 喜鹊登梅 (magpie + plum) is firmly attested as a fixed motif (bird of joy + flower of spring). The pairs below are built from classical seasonal imagery (poetry: 燕/黄莺 spring, 荷塘鸳鸯/翠鸟 summer, 雁/鹤 autumn migration + 秋词, 喜鹊+梅 winter) = a design convention, not a museum canon. Sources checked: chinasage.info/symbols/birds, theworldofchinese birds-and-their-meanings, Nelson-Atkins four-seasons flower-and-bird embroidery (no species named).",
+ "ranks": {
+  "t1-t4": "no birds (as now)",
+  "t5-t6": "ONE small pair of birds, picked from the season's list, small & clear (F13 spirit: not cluttered)",
+  "t7-t8": "phoenix is the only bird (I3); no season birds on t7/t8 or triều phục",
+  "never": "no phoenix on t1-t6; season birds never long-tailed or gold-multicolour (phoenix look); never on maids' sleeves/skirts (keep maid ranks simple)"
+ },
+ "colour_logic": "Same tone logic as F20. Plumage body = the embroidery-flower colour of that outfit (flower_colours_L2013.json embroidery_hex) so bird and flower belong together; one small accent (beak/breast/cheek) from the species' natural hue CLAMPED to the outfit's tone class (soft outfit → pale accent); gold-thread outline on every bird; bird never darker than the robe pattern around it and never the main robe colour. Winter/dark robes: bird lighter than robe, as flowers.",
+ "xuan": [
+  {
+   "id": "en",
+   "vi": "chim én",
+   "zh": "燕",
+   "status": "strong (poetry + 'xuân về')",
+   "motif": "pair flying low among blossom, forked tail",
+   "natural": {
+    "body": "#3C4A63",
+    "belly": "#F3E9DC",
+    "accent": "#C9776B"
+   },
+   "en_words": "a small pair of swallows in flight with short forked tails and pale cream bellies, tiny and clear, tone-on-tone with the robe, outlined in gold thread, not long-tailed, not a phoenix",
+   "status_vi": "mạnh — ý thơ mùa xuân",
+   "motif_vi": "một đôi bay thấp giữa hoa, đuôi chẻ"
+  },
+  {
+   "id": "oanh",
+   "vi": "chim oanh (hoàng oanh)",
+   "zh": "黄莺",
+   "status": "medium (poem 两个黄鹂鸣翠柳)",
+   "motif": "one bird on a blossom branch",
+   "natural": {
+    "body": "#E7C25A",
+    "belly": "#F7E7B0",
+    "accent": "#2F2F35"
+   },
+   "en_words": "a small round oriole perched on a blossoming branch, soft apricot-gold plumage with a dark eye-stripe, short tail, outlined in gold thread, small and clear",
+   "status_vi": "vừa — ý thơ «hoàng oanh hót liễu xanh»",
+   "motif_vi": "một con đậu trên cành hoa"
+  }
+ ],
+ "ha": [
+  {
+   "id": "uyen_uong",
+   "vi": "uyên ương",
+   "zh": "鸳鸯",
+   "status": "strong (lotus pond, summer; faithful love)",
+   "motif": "pair swimming beside a lotus",
+   "natural": {
+    "body": "#C9774A",
+    "belly": "#F3E8D8",
+    "accent": "#2E7F7A"
+   },
+   "en_words": "a small pair of mandarin ducks swimming beside a lotus leaf, rounded duck bodies with a soft sail-like wing, short tail, outlined in gold thread, compact and clear, not a phoenix",
+   "status_vi": "mạnh — ao sen mùa hạ, tình chung thủy",
+   "motif_vi": "một đôi bơi cạnh lá sen"
+  },
+  {
+   "id": "boi_ca",
+   "vi": "chim bói cá (thúy điểu)",
+   "zh": "翠鸟",
+   "status": "medium (lotus pond, kingfisher feather)",
+   "motif": "one bird on a lotus stem",
+   "natural": {
+    "body": "#2FA3A8",
+    "belly": "#E9A072",
+    "accent": "#2B4A5A"
+   },
+   "en_words": "a small kingfisher perched on a lotus stem, short body, long thin beak, soft turquoise back and pale apricot breast, short tail, outlined in gold thread, small and clear",
+   "status_vi": "vừa — ao sen, lông thúy",
+   "motif_vi": "một con đậu trên cuống sen"
+  }
+ ],
+ "thu": [
+  {
+   "id": "nhan",
+   "vi": "chim nhạn (hồng nhạn)",
+   "zh": "雁",
+   "status": "strong (autumn migration, 秋雁)",
+   "motif": "two or three wild geese flying in a line high on the robe",
+   "natural": {
+    "body": "#8A7F78",
+    "belly": "#E8DFD2",
+    "accent": "#3A3A40"
+   },
+   "en_words": "two small wild geese in flight, wings spread, long necks, short tails, soft grey-brown with pale bellies, outlined in gold thread, small and clear, not a phoenix",
+   "status_vi": "mạnh — nhạn bay về mùa thu",
+   "motif_vi": "hai ba con bay thành hàng ở phía cao áo"
+  },
+  {
+   "id": "hac",
+   "vi": "hạc trắng",
+   "zh": "鹤",
+   "status": "medium (秋词 'a crane up the clear sky'; longevity)",
+   "motif": "one crane standing or in flight, t6 only",
+   "natural": {
+    "body": "#F2EEE6",
+    "belly": "#F2EEE6",
+    "accent": "#B8473E"
+   },
+   "en_words": "one small white crane with a long thin neck and long thin legs, short plain tail feathers (no ornate tail), tiny red crown, outlined in gold thread, small and clear, not a phoenix",
+   "status_vi": "vừa — «một hạc lên trời xanh», trường thọ",
+   "motif_vi": "một con đứng hoặc bay; chỉ cấp 6"
+  }
+ ],
+ "dong": [
+  {
+   "id": "hi_thuoc",
+   "vi": "chim hỉ thước (khách thước)",
+   "zh": "喜鹊",
+   "status": "strong (喜鹊登梅 = joy + early plum)",
+   "motif": "one or two magpies on a plum branch",
+   "natural": {
+    "body": "#2D3A4E",
+    "belly": "#F4EFE8",
+    "accent": "#5C7FA0"
+   },
+   "en_words": "a small pair of magpies perched on a plum-blossom branch, dark blue-black wings with a white belly, medium tail, outlined in gold thread, small and clear, not a phoenix",
+   "status_vi": "mạnh — «hỉ thước đăng mai», mô-típ cố định",
+   "motif_vi": "một hai con đậu trên cành mai"
+  },
+  {
+   "id": "se_tuyet",
+   "vi": "chim sẻ trên cành tuyết",
+   "zh": "雀",
+   "status": "weak (design choice, no fixed canon)",
+   "motif": "one small round sparrow on a snowy pine or plum twig",
+   "natural": {
+    "body": "#9A8068",
+    "belly": "#EFE7DB",
+    "accent": "#5A4636"
+   },
+   "en_words": "one small round sparrow on a snowy plum twig, plump body, short tail, soft brown with a pale belly, outlined in gold thread, tiny and clear",
+   "status_vi": "yếu — lựa chọn thiết kế, không có chuẩn cổ",
+   "motif_vi": "một con sẻ tròn trên cành mai/thông có tuyết"
+  }
+ ]
+}

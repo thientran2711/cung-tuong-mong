@@ -33,3 +33,6 @@ Khuyến nghị: tông (đậm/nhạt của áo) quyết định độ sáng; s�
 
 ## L2025 fix (AUDIT1: hair darker than embroidery in 12 cells)
 Thêm enforce(): hoa tóc luôn sáng hơn hoa thêu (OKLCH L, chênh >=0.02) cho cả 360 bộ và cả dãy t1–t6; kiểm lại: 0 vi phạm. Trang màu republish.
+
+## L2040 — chim theo mùa (0 gen, không sửa prompt)
+dev/art/face-common/season_birds_L2040.json (bản nháp: 8 loài, 2/mùa, cấp 5–6 một đôi, t7/t8 chỉ phượng, màu chim theo F20) + PNG dev/handover/review-sheets/season_birds_L2040/season_birds_L2040.png. Tìm web: KHÔNG có bộ chim–mùa cổ chuẩn; chỉ hỉ thước + mai là mô-típ cố định; còn lại là quy ước thiết kế từ ý thơ mùa.
