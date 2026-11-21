@@ -2115,3 +2115,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (15:42Z) LAND CHAIN 2: LANDED coop-pool-face 270c6251. LIVE 270c6251. PERF WATCH: LRRY buổi new/live 3662/2356 ms (PASS but headroom shrinking; ef-unit failed perf 15:19Z) → if next 2 lands show same trend, ORDER a perf-audit job (B) on LIVE buổi render.
 - (15:54Z) LAND CHAIN 2: LANDED dialog-person-3 d541add9.
 - (15:54Z) LAND CHAIN 2: LANDED dialog-person-3 d541add9 (ma ma no longer speaks for the player; M58/M67/M77 family). LIVE d541add9. Next kit-relrows-ms (then rel-men-servants r2 B may follow).
+- (16:04Z) LAND CHAIN 2: LANDED kit-relrows-ms 08e1e934.
