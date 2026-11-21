@@ -19,3 +19,18 @@ Fabric lines (pt7): t1–t3 _L1803 = "thin, light, flowing silk and gauze" + "Li
 Fur forms (check_store W_L1803, skip line next to S13): t1–t3 "THICK … DOUBLE the width and thickness of a slim trim, about four fingers wide"; t4–t6 "VERY THICK … twice as wide and twice as thick as at the three lower ranks, about two hands wide"; t7 "WIDE, THICK … a little wider and fuller than at the ranks below, about two and a half hands"; t8 sheet sentence. RISK: t8 keeps the plain sheet sentence while t4–t7 get number widths → t8 fur may come out thinner than t4–t7; owner may want t8 = old W03.
 Rules: G1 set (SWAP56 CANCELLED, L1803: t5 Phi = vân kiên cloud collar, t6 QP = two layered short capes, all seasons); G55 added (fur L1803). No cloak added (owner being asked).
 Files still carrying the swap (NOT edited): builder dev/art/t8-prompt-B/build.py (t5 branch CAPE5 capelet/pearl net, CAPE6_TWO = cloud collar on t6, SWAP56 comments ~l.1081-1098); dev/art/seasons4/make_comoi.py l.40-43; thu_comoi t5 s62_t5_THU_COMOI, COMOIc, fix_L1797 (cape/stole + pearl yoke) and t6 COMOI, COMOIc–n, revert_L1714, revert_sq_L1719, fix_L1723, fix2_L1726, fix_L1776, fix_L1794, fix_L1801 (yunjian cape); seasons4 s62_t5/t6_HAN_BAC*, s62_t6_HAN_BAC_gon/open/vai*, s62_t5/t6_XUAN_COMOI; dong_hientai s62_t5_DONG_HIENTAI(_cloak,_vk), s62_t6_DONG_HIENTAI(_cloak..cloak6,_vk); also b26, capes, f2, flower, swap56, owner-copy (old tests). Not affected: seasons4 HAN_LADDER5_L1794 t5/t6 (no cape piece), hạ s62_t6_ha_DUONG_L1801 ("no cape, no cloud collar").
+
+## JOB 2 — PHI BẠCH IVORY + THIN GOLD EDGE (owner L1804, L1805) — DONE (0 gens)
+Rule G56 added (cites L1801/L1804/L1805; exception to B20/A31 for phi bạch only; t1–t6 only, t7/t8 none in any season, t6 thicker). Change = ONE sentence per file (the "PHI BẠCH:" sentence; PLACEMENT sentence untouched) + caption " · phi bạch ngà L1804" where a caption exists.
+| file (new) | base | chars | gate |
+|---|---|---|---|
+| thu_comoi/s62_t1_THU_fix_L1804 | s62_t1_THU_fix_L1794 | 9 143 | PASS |
+| thu_comoi/s62_t2_THU_fix_L1804 | s62_t2_THU_fix_L1776 | 8 801 | PASS |
+| thu_comoi/s62_t3_THU_fix_L1804 | s62_t3_THU_fix_L1776 | 9 722 | PASS |
+| thu_comoi/s62_t4_THU_sqtest_L1804 | s62_t4_THU_revert_sqtest_L1714 | 9 743 | FAIL B26/M06/S13 — same as base (pre-existing, fabric/capelet; not touched) |
+| thu_comoi/s62_t5_THU_fix_L1804 | s62_t5_THU_fix_L1797 | 9 414 | FAIL B26/M06 — same as base (pre-existing gauze on t5) |
+| thu_comoi/s62_t6_THU_fix_L1804 (thick form) | s62_t6_THU_fix_L1801 | 9 951 | PASS |
+| seasons4/s62_t4_ha_DUONG_L1804 | s62_t4_ha_DUONG | 9 530 | FAIL B26/M06/S13 — same as base |
+| seasons4/s62_t5_ha_DUONG_L1804 | s62_t5_ha_DUONG | 9 327 | FAIL B26/M06 — same as base |
+| seasons4/s62_t6_ha_DUONG_L1804 (thick form) | s62_t6_ha_DUONG_L1801 | 9 914 | PASS |
+No new gate failure from the ivory colour (TWO-COLOUR/B20 checks did not flag it → no accepted form needed). t7/t8: thu fix5/fix7_L1794 have no phi bạch, winter L1803 none, no hạ t7/t8 files. Old hạ s62_t6_ha_DUONG (pre-L1801) left as is. keep_check PASS (--all 534). Builder phi_bach() + gate S12 text still say "secondary colour" (not changed).
