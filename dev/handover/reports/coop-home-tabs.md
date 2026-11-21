@@ -21,3 +21,11 @@ dev/test/outside/coop-home.js + coop-kcco.js (identical stale check): st() now a
 
 ## Gates
 coop-home 51/51 ×2 · coop-kcco 65/65 · coop-e2e (A=tt B=nc) 124/124 · quickcheck PASS (old save ok, perf new≈live) · UI untouched → no Fold/iPad shots.
+
+## REVIEW r1 (sonnet SMALL reviewer-lander session_01N1tNP3mBaymnqffHRXNNdB) — PASS 34245fe24
+PRIORITY #1 CHECK ('coop-home'): OD 0 | ledger 0 | claims B coop-home-tabs | main dev/test/outside/coop-home.js | review/* coop-home-tabs | archive 15.
+Branch review/coop-home-tabs-rv 34245fe24 = worker 92df9b086 + newest LIVE ea1123841 merged clean + 1 own commit (route.js). Diff vs LIVE: 3 test files only (outside/coop-home.js, outside/coop-kcco.js, kc-roads/route.js); no BAL/save/co-op/time/game file → SMALL confirmed. FF of newest LIVE ea1123841.
+- Root cause confirmed: TEST DRIFT. Seat A (road8()=='kc') shows the 8-tab bar (first id 'act'); game is right. Mutation: hiding bar tab data-tab=story in dev/index.html → coop-home 49/51 (home-tabs + palace-tabs checks FAIL); restored → 51/51. (Hiding 'rv' changed nothing because 'rv' is not on the home bar.)
+- Whole family: kc-roads/route.js:78 regexes were vacuous (Hậu cung is on every road; the 'home tabs in the palace' words no longer exist) → FIXED by me: palace check = road8()==='' and 8 tab ids, plus 'home road in the palace' = road 'kc'. route.js nc + bd 755x1000@2: fail [] (new check active). No other stale home-tab words in dev/test (act-audit-sum.py matches are unrelated).
+- Gates: coop-home 51/51 ×3 (one earlier run 43/57: 'A sees B' / next-enabled / entry-week FAIL — live Worker co-op flake, none are tab checks; re-runs clean), coop-kcco 65/65, coop-e2e (A=tt B=nc) 124/124, quickcheck PASS (old save ok, perf new≈live).
+- UI untouched → no Fold/iPad shots. 18 laws: none touched (test-only). VANPHONG: no player words.
