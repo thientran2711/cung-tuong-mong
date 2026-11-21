@@ -147,8 +147,14 @@ function tsDangerPanel(){if(!S||S.dead)return;const D=tsDangerOf(S,true);
   (facts.length?`<div class="kpsec"><h4 class="kpst">Người nặng lòng nhất</h4>${tsFacts(facts)}</div>`:"");
  const g=tsS().guard>wk();const opts=[tsOptGuard(),tsOptGifts(D),{n:"Thôi",fx:{}}].filter(Boolean);/* "Thôi" = the kit ✕ (KIT 32.10), never a button */
  Q.unshift({t:"Nguy hiểm chung",h:sec,opts,showOut:true,tsk:"danger"});showModal()}
-function tsOptGuard(){const s=tsS();if(s.guard>wk())return tsOpt({n:"Đóng cửa giữ mình",need:[{t:`chưa giữ mình (còn ${s.guard-wk()} tuần)`,ok:false}],duoc:["kẻ muốn hại khó ra tay"]});
- return tsOpt({n:"Đóng cửa giữ mình",fx:{sung:-2},need:[{t:"không cấm túc",ok:!S.confined}],duoc:["2 tuần: mưu hại nhắm vào ngươi thành ít đi một nửa"],kem:["ít gặp Hoàng thượng"],go:()=>{s.guard=wk()+2;log("Ngươi đóng cửa cung, dặn kẻ hầu canh giữ nghiêm, hai tuần không ra ngoài nhiều.")}})}
+/* ONE act, two roads (rv maid-8tabs FAIL 1, laws 2/3/4/6): a consort shuts her palace door (cost Sủng, sees the Emperor less); a cung nữ has no palace
+   door, no servants and no Sủng — she keeps to the hạ nhân room and her chủ's side (cost Chủ tin, her Sủng bar: the chủ gets less of her). Same gain
+   (s.guard: jts npcAct wrapper + jagharm haGuardW read it for S on every road), same weeks; numbers from BAL.tsGuard. */
+function tsGuardW(){const G=BAL.tsGuard,srv=tsSrv();return srv?{n:"Nép mình theo hầu chủ",fx:{tin:-G.tin},need:{t:"không ở Tân Giả khố",ok:!(S.srv.lau>0)},kem:"ít được chủ sai việc, chủ ít thấy mặt ngươi",
+  log:`Ngươi ở yên trong phòng hạ nhân, chỉ theo sát bên chủ, ${G.wk} tuần không đi đâu một mình.`}
+ :{n:"Đóng cửa giữ mình",fx:{sung:-G.sung},need:{t:"không cấm túc",ok:!S.confined},kem:"ít gặp Hoàng thượng",log:`Ngươi đóng cửa cung, dặn kẻ hầu canh giữ nghiêm, ${G.wk} tuần không ra ngoài nhiều.`}}
+function tsOptGuard(){const s=tsS(),A=tsGuardW(),G=BAL.tsGuard;if(s.guard>wk())return tsOpt({n:A.n,need:[{t:`chưa giữ mình (còn ${s.guard-wk()} tuần)`,ok:false}],duoc:["kẻ muốn hại khó ra tay"]});
+ return tsOpt({n:A.n,fx:A.fx,need:[A.need],duoc:[`${G.wk} tuần: mưu hại nhắm vào ngươi thành ít đi một nửa`],kem:[A.kem],go:()=>{s.guard=wk()+G.wk;log(A.log)}})}
 /* =============== D19 (owner OD:L752) · BIẾU QUÀ LÀM LÀNH — ONE act, three roads (review/d19-gift-work) ===============
    The act "Biếu quà làm lành" (Nguy hiểm chung panel + the maid's warning) opens ONE choice of three kit option cards:
    · Lễ bạc — as before: every person who bears her ill will (≤ 4) gets BAL.tsGift.bac bạc of gifts;
@@ -214,7 +220,7 @@ function tsNpcGift(a,D){const L=tsGiftL(D);if(!L.length)return"";const G=BAL.tsG
 /* the guard: same rule for everyone (a target who keeps to herself is harder to reach) */
 (function(){if(typeof npcAct!=="function")return;const n0=npcAct;npcAct=function(v,t){try{const g=t===S?tsS().guard:t&&t.tsGuard;if(g>wk()&&roll(50))return""}catch(e){}return n0.apply(this,arguments)}})();
 /* NPC side: a consort whom many want to harm closes her doors / sends gifts, by her own nature (same costs) */
-function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.tsGuard>wk())continue;if(!npcWhy("tsGuard",{v}))continue;v.tsGuard=wk()+2;v.sung=cl((v.sung||0)-2,0,100);
+function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.tsGuard>wk())continue;if(!npcWhy("tsGuard",{v}))continue;v.tsGuard=wk()+BAL.tsGuard.wk;v.sung=cl((v.sung||0)-BAL.tsGuard.sung,0,100);/* the same act and cost as hers (law 1, BAL.tsGuard) */
   /* D19: and she sends a peace gift by the same rule as the player (tsNpcGift) */try{const t=tsNpcGift(v,tsDangerOf(v,false));if(t&&typeof newsAdd==="function")newsAdd(v,"gift",t)}catch(e){console.error("tsNpcGift",e)}}}
 /* the HUD chip (Tình trạng row) + điềm báo when her own known bar climbs a step */
 /* review ts-a FAIL 2: the chip sits in the stage's right column (K3_RIGHT), never on the top bar's buổi line (it broke the date line on Fold) */

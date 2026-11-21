@@ -79,12 +79,16 @@ const walk=p=>p.evaluate(()=>{const out=[];const heads=[...document.querySelecto
   ok(c35.tab==='staff'&&c35.strip&&c35.faces===c35.want&&c35.pc===1&&!c35.row&&c35.btn>=2,sz+' #35: Hậu cung › Đồng liêu = kit pager strip + ONE kit person card with her act buttons (no private list)',c35);
   ok(c35.spent==null||c35.spent>=1,sz+' #35: «Trò chuyện» from the card spends its khắc',c35.spent);
   /* #36: Nguy hiểm chung + Xét phẩm boxes on her road (hud2 chip + right-column row), Xét phẩm = her next rung */
+  const BAL_TIN=await p.evaluate(()=>BAL.tsGuard.tin);
   const cts=await p.evaluate(()=>{document.querySelector('#tabs [data-tab="act"]').click();render();k3Stage();const h=document.getElementById('hud2');
    const o={nh:!!(h&&h.querySelector('[data-hx="tsnh"]')),xp:!!(h&&h.querySelector('[data-hx="tsxp"]')),col:[...document.querySelectorAll('#kshR [data-k3="tsnh"],#kshR [data-k3="tsxp"],#kshR [data-k3sheet]')].map(x=>x.dataset.k3||'sheet'),nx:SRK.maid[(S.srv.rk|0)+1]};
    Q.length=0;tsSrvPromoPanel();o.t=Q[0]&&Q[0].t;o.h=Q[0]&&Q[0].h||'';Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
-   tsDangerPanel();o.d=Q[0]&&Q[0].t;Q.length=0;if(m)m.hidden=true;render();return o});
+   tsDangerPanel();o.d=Q[0]&&Q[0].t;{const O=(Q[0]&&Q[0].opts)||[];const txt=JSON.stringify(O.map(x=>({n:x.n,fx:x.fx,x:x.x,sub:x.sub,d:x.d})))+(Q[0]&&Q[0].h||'');
+    o.dOpts=O.map(x=>x.n);o.sung=/\bS\u1ee7ng\b|"sung"/.test(txt);o.door=/c\u1eeda cung|k\u1ebb h\u1ea7u/.test(txt);const g=O.find(x=>/N\u00e9p m\u00ecnh/.test(x.n));o.gfx=g&&g.fx;
+    if(g&&g.go){const t0=S.tin,s0=tsS().guard;g.go();o.gGuard=tsS().guard-wk();o.gWk=BAL.tsGuard.wk;S.tin=t0;tsS().guard=s0}}Q.length=0;if(m)m.hidden=true;render();return o});
   ok(cts.nh&&cts.xp,sz+' #36: Nguy hiểm chung + Xét phẩm chips on her road (the right column reads them)',cts);
   ok(cts.t===`Xét phẩm cuối tháng · ${cts.nx}`&&/Công lao/.test(cts.h)&&/Chủ tin/.test(cts.h)&&cts.d==='Nguy hiểm chung',sz+' #36: Xét phẩm panel = her next rung (Công lao, bậc cung chủ cho phép, Chủ tin); Nguy hiểm chung panel opens',{t:cts.t,d:cts.d});
+  ok(!cts.sung&&!cts.door&&cts.gfx&&cts.gfx.tin===-BAL_TIN&&cts.gGuard===cts.gWk,sz+' rv FAIL 1: Nguy hiểm chung on her road = maid-true guard «Nép mình theo hầu chủ» (Chủ tin −BAL.tsGuard.tin, same guard weeks), no Sủng cost, no palace door / servants',{opts:cts.dOpts,sung:cts.sung,door:cts.door,gfx:cts.gfx,gGuard:cts.gGuard,gWk:cts.gWk});
   ok(!c33.as||(c33.as[0]==='Tai mắt'&&c33.as.includes('Ngài để ý')&&c33.as.includes('Công lao')&&c33.as.includes('Lương tháng')),sz+' #33: the Ân sủng card holds Tai mắt + her facts',c33.as);
   ok(!c33.py||!c33.py.some(k=>['srk','nt','wage','merit'].includes(k)),sz+' #33: no separate servant box',c33.py);
   ok(c33.rk!=='Đáp ứng'&&/Cung nữ|Ma ma/.test(c33.rk),sz+' her own title in consort panels = her servant rung',c33.rk);
