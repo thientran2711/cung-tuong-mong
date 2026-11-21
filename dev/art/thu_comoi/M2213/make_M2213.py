@@ -76,6 +76,39 @@ A = {3: ["of small plain gold", "an ankle-length light olive silk court robe", "
          "Nothing around the neck", "no stand collar, no necklace", "the head inclined slightly to one side",
          "the MAIN colour light olive and the SECONDARY colour lilac", "the secondary clearly visible in large areas", "inner robe or skirt, wide borders, sash, cuffs, linings",
          "inner robe, wide borders and a few panels"] + HBA}
+
+# ---- L2214 (one COMMON fabric block, same words + same place t1..t8) + L2215 (sleeve ladder) ----
+FAB_OLD = [
+ "The FABRIC is thin, light, flowing silk and gauze with a soft sheen and fine delicate embroidery, long soft graceful drapery that sways and trails elegantly (thướt tha); the small embroidered motifs are stitched in fine gold thread.",
+ "The silk has real weight: the wide sleeves and robe hang and fold naturally under their own weight, with natural creases, never stiff, flat or board-like.",
+ "The silk is light and supple: the wide sleeves and robe fold softly and naturally, with natural creases, never stiff, flat or board-like.",
+ "The fabric is exactly the cloth written in her outfit, real cloth with natural weight and soft natural folds, never stiff or board-like; no sheer floating scarf, stole, shawl or veil unless her outfit names one.",
+ "No sheer floating scarf, stole, shawl or veil unless her outfit names one.",
+ "Light, soft, thin flowing silk: the long sleeves, skirt and sash are supple and airy, drifting softly as in a gentle breeze, with soft natural folds, never stiff, flat or board-like."]
+FAB = ("The FABRIC is thin, light, flowing silk and gauze with a soft sheen and fine delicate embroidery, long soft graceful drapery that sways and trails elegantly (thướt tha). "
+       "The silk is light and supple: the wide sleeves and robe fold softly and naturally, with natural creases, never stiff, flat or board-like. "
+       "Light, soft, thin flowing silk: the long sleeves, skirt and sash are supple and airy, drifting softly as in a gentle breeze. "
+       "No sheer floating scarf, stole, shawl or veil unless her outfit names one.")
+FAB_A = ["the small embroidered motifs are stitched in fine gold thread", "The silk has real weight", "the wide sleeves and robe hang and fold naturally under their own weight",
+         "The fabric is exactly the cloth written in her outfit", "real cloth with natural weight and soft natural folds", "never stiff or board-like", "with soft natural folds"]
+SLV2 = {4: [("very long, wide, flowing sleeves that hang down to her ANKLES, never shorter, never touching the floor.", "very long, wide, flowing sleeves that hang down to MID-CALF, halfway between the knees and the ankles."),
+            ("long trailing wide sleeves,", "long wide sleeves,")],
+        7: [("very long, wide, flowing sleeves that hang down to her ANKLES: the sleeve ends really reach the level of her ankles, clearly lower than her knees and shins, never shorter, and never touching the floor. Even while her hands are raised to hold her item, the long wide sleeves flow softly and lightly down to her ankles, lifting a little with her movement; the sleeve hem is NEVER at knee or shin height.",
+             "very long, wide, flowing sleeves that hang down to her ANKLES, never touching the floor; even while her hands are raised to hold her item, they flow softly down to her ankles, lifting a little with her movement, the sleeve hem NEVER at knee or shin height.")]}
+SLV2[5] = SLV2[4]; SLV2[6] = SLV2[4][:1]; SLV2[8] = SLV2[7]
+SLV2_A = {4: ["hang down to her ANKLES", "never shorter", "never touching the floor", "long trailing wide sleeves"],
+          7: ["the sleeve ends really reach the level of her ankles", "clearly lower than her knees and shins", "never shorter, and never touching the floor",
+              "Even while her hands are raised to hold her item", "the long wide sleeves flow softly and lightly down to her ankles", "the sleeve hem is NEVER at knee or shin height"]}
+SLV2_A[5] = SLV2_A[4]; SLV2_A[6] = SLV2_A[4][:3]; SLV2_A[8] = SLV2_A[7]
+def stage2(n, s):
+    for o in FAB_OLD:
+        s = s.replace(" " + o, "") if (" " + o) in s else s.replace(o, "")
+    assert not any(o in s for o in FAB_OLD[:4] + FAB_OLD[5:]), n
+    anchor = "never a tiny head. "; assert s.count(anchor) == 1, n
+    s = s.replace(anchor, anchor + FAB + " ", 1); assert s.count(FAB) == 1
+    for o, w in SLV2.get(n, []):
+        assert s.count(o) == 1, (n, o[:70]); s = s.replace(o, w, 1)
+    return s
 def blocks(s):
     out = []
     for k in ("ANGLE:", "Pose:", "GRACE"):
@@ -88,6 +121,7 @@ def build(n, base, code, edits, allows, tag, common=True):
         ed = C + [x for x in C_OPT if x[0] in s] + ed
     for o, w in ed:
         assert s.count(o) == 1, (code, o[:80], s.count(o)); s = s.replace(o, w, 1)
+    s = stage2(n, s)
     assert blocks(s) == keep, (code, "ANGLE/Pose/GRACE changed")
     s = re.sub(r'"M22\d\d-0\d"', f'"{code}"', s); assert s.rstrip().endswith(f'"{code}"'), code
     out = f"{code}_s62_t{n}_thu.txt"; (D / out).write_text(s); (P / out).write_text(s)
@@ -96,7 +130,9 @@ def build(n, base, code, edits, allows, tag, common=True):
     return s
 for n in range(3, 9):
     base = "M2203-03_s62_t3_thu.txt" if n == 3 else f"M2211-0{n}_s62_t{n}_thu.txt"
-    build(n, base, f"M2213-0{n}", E[n], CA + A[n], TAG13 if n > 3 else TAG12 + " + " + TAG13)
+    build(n, base, f"M2213-0{n}", E[n], CA + A[n] + FAB_A + SLV2_A.get(n, []), (TAG13 if n > 3 else TAG12 + " + " + TAG13) + " + L2214 fabric / L2215 sleeves via ROOT-B6")
+for n in (1, 2):  # L2214 only (fabric block); nothing else touched in t1/t2
+    build(n, f"M2206-0{n}_s62_t{n}_thu.txt", f"M2213-0{n}", [], FAB_A, "owner L2214 fabric via ROOT-B6", common=False)
 # T7LOW: same neck cuts as M2209-01 (L2209), now on M2213-07
 T = [("ONE straight SQUARE collar only (no crossed collar, nothing layered under it): a LOW open square neckline just below the collarbones, neck and collarbones bare, NEVER a high stand collar or mandarin collar, framed by ONE wide flat band in her second colour embroidered with bomb-form herbaceous peonies (the square band stops at the shoulders, nothing rises up the neck, neck bare), always fully visible;", "a low neckline;"),
      ("embroidered on the front of the robe below the collar,", "embroidered on the front of the robe,"),
