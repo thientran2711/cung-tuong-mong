@@ -60,3 +60,5 @@ KEPT (old file): none. NOT DONE: in-game before/after shots (Fold 755x1000 + iPa
 
 ## Handover
 START_CTX ~5 %; at report ~25 %; no rollover needed.
+
+PUBLISHED by MAIN 100 (21/11 ~19:58Z), backup old/ at img/_review/frame-recut/old/ (per MAIN 100's message; I did not upload to live myself).
