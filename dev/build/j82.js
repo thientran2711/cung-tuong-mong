@@ -375,7 +375,7 @@ function kg82Steps(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const V=[["�
    (BAL.mgArt.ban, measured on the picture); the arrow is drawn where it truly lands (no squeeze toward the centre); the board eases by the picture size
    (BAL.mgTier.lev.ban.size, law 5: smaller target on a harder board). Đầu hồ has its own engine (j91 k91Fling); a dauho call here goes there. */
 function kg82Aim(box,env){if(env.kind==="dauho"&&typeof KG82_ENG.fling==="function")return KG82_ENG.fling(box,env);
- const C=kg82Canvas(box,.95,420),{g,W,H}=C;const N=6,T=BAL.mgArt.ban;let k=0,pts=0,stop=false,raf=0,t0=performance.now(),lock=false,shots=[],cC=0,cP=0,cM=0;const pops=[];/* cC/cP/cM = centre / grazed / missed (the «Vì sao» row, mg-5s-clear) */
+ const C=kg82Canvas(box,.95,420),{g,W,H}=C;const N=6,T=BAL.mgArt.ban;let k=0,pts=0,stop=false,raf=0,t0=performance.now(),lock=false,shots=[],cC=0,cP=0,cM=0;const pops=[];/* cC/cP/cM = centre / grazed / missed (the «Vì sao» row) */
  const cx=W/2,ty=H*.58,A=W*.38;const pos=now=>{const w=.0021+k*.00028;return cx+A*Math.sin((now-t0)*w)};let flyAt=0,flyX=0;
  const Pw=Math.min(W*.96,T.fit*H*(mgLev(env,"ban","size")||1));/* picture width; the face centre sits on (cx, ty) */const ring=i=>T.ring[i]*Pw;
  const zone=x=>{const d=Math.abs(x-cx);for(let i=0;i<T.ring.length;i++)if(d<=ring(i))return i;return -1};
@@ -386,9 +386,9 @@ function kg82Aim(box,env){if(env.kind==="dauho"&&typeof KG82_ENG.fling==="functi
   g.strokeStyle="#d2b071";g.lineWidth=2;g.beginPath();g.moveTo(cx-A,H*.16);g.lineTo(cx+A,H*.16);g.stroke();g.fillStyle=kg82Col("--good","#2d7a52");g.fillRect(cx-ring(0),H*.16-3,ring(0)*2,6);
   const x=lock?flyX:pos(now);{const pz=lock?kg82FxPop(flyAt,now):1;g.save();g.translate(x,H*.16);g.scale(pz,pz);g.fillStyle="#8a2a1e";if(pz>1){g.shadowColor=BAL.mgFx.glow;g.shadowBlur=BAL.mgFx.blur}g.beginPath();g.moveTo(0,4);g.lineTo(-9,-12);g.lineTo(9,-12);g.closePath();g.fill();g.restore();if(lock)kg82FxRing(g,x,H*.16-4,16,flyAt,now)}
   if(lock&&now<flyAt+350){const kk=(now-flyAt)/350;const yy=H*.16+(ty-H*.16)*kk;if(!kg82Spr(g,"ban-arrow",flyX,yy,L*1.05,null,{rot:Math.PI/2,ax:1,ay:.5})){g.strokeStyle="#4a3010";g.lineWidth=2;g.beginPath();g.moveTo(flyX,yy-20);g.lineTo(flyX,yy);g.stroke()}}
-  {/* owner 21/11 ~00:50Z: the moving aim is traced down onto the target + one guiding line (mg-5s-clear) */const near=!lock&&Math.abs(x-cx)<ring(0);
-   g.save();g.setLineDash([4,5]);g.strokeStyle=lock?"rgba(138,42,30,.25)":near?kg82Col("--good","#2d7a52"):"rgba(138,42,30,.55)";g.lineWidth=2;g.beginPath();g.moveTo(x,H*.16+8);g.lineTo(x,ty-ring(T.ring.length-1));g.stroke();g.restore();
-   if(!lock)kg82Guide(g,near?"Chạm ngay!":k===0?"Chờ mũi ngắm vào giữa hồng tâm, rồi chạm":"Chạm khi mũi ngắm ở giữa hồng tâm",W/2,H*.065,near?"go":"wait",14,W-16)}
+  {/* owner 21/11 ~00:50Z (mg-5s-clear): the moving aim is traced down onto the target + one guiding line */const near=!lock&&zone(x)===0,gd=kg82Col("--good","#2d7a52");
+   g.save();g.setLineDash([4,5]);g.strokeStyle=lock?"rgba(138,42,30,.25)":near?gd:"rgba(138,42,30,.55)";g.lineWidth=2;g.beginPath();g.moveTo(x,H*.16+8);g.lineTo(x,ty-ring(T.ring.length-1)-4);g.stroke();g.restore();
+   if(!lock)kg82Guide(g,near?"Chạm ngay!":k===0?"Chờ mũi ngắm vào giữa hồng tâm, rồi chạm":"Chạm khi mũi ngắm ở giữa hồng tâm",W/2,H*.065,near?gd:"wait",14,W-16)}
   kg82DrawPops(g,pops,now)}
  function frame(now){if(stop)return;env.hud({score:mgLive(env,10*(pts+N-k)/N),round:`Hồi ${Math.min(k+1,N)}/${N}`,time:`${N-k} phát`});draw(now);raf=requestAnimationFrame(frame)}
  function shoot(xT){if(lock||stop)return;const now=performance.now();const x=xT!=null?xT:pos(now);/* xT: test hook only (KG82.aimGeo) */const z=zone(x),q=z<0?0:T.q[z];lock=true;flyAt=now;flyX=x;
