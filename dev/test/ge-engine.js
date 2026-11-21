@@ -16,7 +16,7 @@ const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JS
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,300)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof geS==='function'&&typeof ROAD14==='object',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(()=>{document.getElementById('title').hidden=true;localStorage.removeItem('ctm-ge');
-  window.__life=async road=>{const k=road.split('_')[0];quiet=true;const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==road);
+  window.__life=async road=>{const k=typeof geOrig==='function'?geOrig(road):road.split('_')[0];quiet=true;/* the branch's origin = its road's own ARC67 o (pt_* → pf) */const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==road);
    localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));localStorage.setItem('ctm-tm96','1');window.__forceOrigin=k;start();quiet=false;
    await new Promise(r=>{let n=0;const t=()=>{if((typeof S!=='undefined'&&S&&S.origin&&S.st&&S.st.f14&&S.st.f14.rd===road)||++n>150)r();else setTimeout(t,100)};t()});Q.length=0;return S.st.f14.rd}});
  const RA=process.argv[3]||process.env.GE_ROADS||'tt_co,cnv_mat,nc_tuc';/* E11: one switch for every wave — CLI arg first, env GE_ROADS as fallback */

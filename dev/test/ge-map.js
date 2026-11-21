@@ -1,6 +1,6 @@
 /* ge-map (GE03, review/ge-map) — node dev/test/ge-map.js [dev/index.html] [outdir]
    The «Sơ đồ nhánh» page in Sổ luân hồi (jge.js geMapPageHTML, BAL.ge.mapOn): kit parts only (kitTabRowHTML × 2 + kitBranchMap + kitRows).
-   A  title screen › Sổ luân hồi: page opens, identity tab row (10) × road row (4), chart of the picked branch drawn (spine 13, rare 2, ends 4), counts, whole-book totals row;
+   A  title screen › Sổ luân hồi: page opens, identity tab row (one per identity, from the data) × road row (4), chart of the picked branch drawn (spine 13, rare 2, ends 4), counts, whole-book totals row;
       a branch never played = all «?» (no unseen name leaks into the page text); tap an earned end → kit card (pair, condition words, lives, no digit/%); tap «?» end → «Chưa ai biết…»; tab clicks switch identity / road;
    B  scan of all branches that have GE_DATA with every title earned: every «Điều cần» line has no digit, no %; every card has its two ngã rẽ words;
    C  a live life: the page opens on the branch of that life (her chip on the chapter she is in, end states of this life);
@@ -17,7 +17,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    const R=ROAD14[b]||{};localStorage.setItem('ctm-gech',JSON.stringify({[b]:[b,R[5]].filter(Boolean)}));localStorage.setItem('ctm-shotlife','1')});
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof geMap==='function'&&!!document.querySelector('button[data-tgo="past"]'),null,{timeout:60000});await p.waitForTimeout(2500);
   await p.evaluate(()=>{const k=document.getElementById('kload');if(k)k.remove();document.querySelector('button[data-tgo="past"]').click()});await p.waitForTimeout(900);
-  const A=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const o={};const live=()=>document.querySelector('#modal .kpt-mount [data-kgm]');const M=document.getElementById('modal');const mt=M.querySelector('.kpt-mount');
+  const A=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const o={};/* expected sizes read from the data (one core: 11 identities / 44 branches since pf's pt_* roads went live via geOrig) */o.exp={ids:Object.keys(GE_ID).filter(id=>Object.keys(GE_CAT).some(k=>geOrig(k)===id)).length,nb:Object.keys(GE_CAT).length,g:BAL.ge.n.grand,r:BAL.ge.n.rare};const live=()=>document.querySelector('#modal .kpt-mount [data-kgm]');const M=document.getElementById('modal');const mt=M.querySelector('.kpt-mount');
    const pg=mt&&mt.querySelector('[data-kgm]');o.page=!!pg;if(!pg)return o;
    const h3=[...mt.querySelectorAll('h3')].map(x=>x.textContent);o.h3=h3.includes('Sơ đồ nhánh');
    const ids=pg.querySelectorAll('.kgmtabs .pct'),rds=pg.querySelectorAll('.kgmroads .pct');o.tabs=[ids.length,rds.length];o.onId=pg.querySelector('.kgmtabs .pct.on').textContent.trim();o.onRd=pg.querySelector('.kgmroads .pct.on').textContent.trim();
@@ -42,10 +42,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    return o});
   ok(A.page&&A.h3,`${tag} A page «Sơ đồ nhánh» opens in the title Sổ luân hồi`,[A.page,A.h3]);
   if(A.page){
-   ok(A.tabs[0]===10&&A.tabs[1]===4,`${tag} A identity tabs 10 × road row 4`,A.tabs);
+   ok(A.tabs[0]===A.exp.ids&&A.exp.ids>=11&&A.tabs[1]===4,`${tag} A identity tabs (one per identity with roads, ${A.exp.ids}) × road row 4`,[A.tabs,A.exp]);
    ok(A.c1.spine===13&&A.c1.rare===2&&A.c1.ends===4,`${tag} A nodes drawn: spine 13 · rare 2 · ends 4`,[A.c1.spine,A.c1.rare,A.c1.ends]);
    ok(/Đại kết cục 1\/4/.test(A.c1.count||''),`${tag} A counts chip`,A.c1.count);
-   ok(/Đại kết cục 1\/160 · Danh hiệu 1\/320 · Kỳ ngộ \d+\/80/.test(A.totals),`${tag} A whole-book totals row`,A.totals);
+   ok(A.totals.includes(`Đại kết cục 1/${A.exp.nb*A.exp.g} · Danh hiệu 1/${A.exp.nb*A.exp.g*2} · Kỳ ngộ `)&&new RegExp(`Kỳ ngộ \\d+/${A.exp.nb*A.exp.r}`).test(A.totals),`${tag} A whole-book totals row`,A.totals);
    ok(A.c1.names[0]!=='?'&&A.c1.names.slice(1).every(x=>x==='?'),`${tag} A only the earned end is named, the other 3 are «?»`,A.c1.names);
    ok(A.c1.fails[1].replace('thua','').trim()!=='?'&&A.c1.fails[0].replace('thua','').trim()==='?',`${tag} A fail node named only once reached`,A.c1.fails);
    ok(!/%/.test(A.c1.txt),`${tag} A no %`);
@@ -64,7 +64,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    localStorage.setItem('ctm-ge',JSON.stringify(g));
    const noData=[];for(const b of Object.keys(GE_CAT)){if(!(typeof GE_DATA==='object'&&GE_DATA[b])){noData.push(b);continue}const m=geMap(b);m.ends.forEach(e=>{n++;const c=e.card||{};if(!c.r1||!c.r2||!c.cw||/\d|%/.test(c.cw))bad.push([b,e.i,c.cw]);if(e.n==='?')bad.push([b,e.i,'unnamed']);})}
    return {n,bad:bad.slice(0,8),nb:bad.length,branches:Object.keys(GE_CAT).length,withData:Object.keys(GE_CAT).length-noData.length,noData:noData.length}});
-  ok(B.branches===40&&B.n===B.withData*4&&B.withData>0&&B.nb===0,`${tag} B scan every branch that has data (the engine runs on those only; the rest cannot be earned yet): condition words without digit/%, both ngã rẽ present`,B);
+  ok(B.branches===B.withData&&B.noData===0&&B.n===B.withData*4&&B.withData>0&&B.nb===0,`${tag} B scan every branch that has data (the engine runs on those only; the rest cannot be earned yet): condition words without digit/%, both ngã rẽ present`,B);
   /* C live life: the page opens on the branch of the life she plays */
   await p.evaluate(()=>{localStorage.removeItem('ctm-ge')});
   const C=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const o={};try{
