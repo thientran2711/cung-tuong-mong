@@ -6,7 +6,7 @@
    lev.peek ms), a row of silk spools (the right shades shuffled + lev.alike decoys half a shade step off). Per band: tap the spool of that band's shade,
    then lev.st stitches: the needle dips on a steady beat (lev.beat ms); tap the hoop as it dips onto the lit dot (±lev.win ms = on-beat 1, ±near·win = 0.6,
    else a loose loop 0 that must be re-stitched). 3 pieces (mai 3 · mẫu đơn 4 · phượng 5 bands, + mgMore with rank).
-   Score per piece = 10/3 · (wC · right-colour share + wS · mean stitch quality) · mgPace(env, kind, el, lim); levers BAL.mgTier.lev.<kind> (td_cong). No words in play: ★ / ✗ signs only. */
+   Score per piece = 10/3 · (wC · right-colour share + wS · mean stitch quality) · mgPace(env, kind, el, lim); levers BAL.mgTier.lev.<kind> (td_cong). In play: ★ / ✗ signs + ONE short guiding line (kit kg82Guide, KIT §13.7.2) and the «Mẫu» tag (owner OD 21/11 ~00:50Z «guiding words stay»; LIVE huong-cue-2 gave the old Công board «Chỉ mẫu» / «Chạm sợi chỉ cùng màu», carried here by review/mg-craft-r3). */
 const CRT_PCS=[/* [petals, base bands, dark rgb, light rgb] mai (pink) · mẫu đơn (rose) · phượng (gold) */[5,3,[150,28,58],[255,214,224]],[8,4,[128,18,40],[255,206,206]],[6,5,[150,78,8],[255,234,170]]];
 function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.22:.98,500),{g,W,H}=C;const K=env.kind||"td_cong",L=n=>crLev(env,K,n);
  const NP=CRT_PCS.length,BEAT=L("beat"),WIN=L("win"),NEAR=L("near"),ALIKE=Math.round(L("alike")),SWAY=L("sway"),PEEK=L("peek"),ST=Math.max(1,Math.round(L("st"))),LIM=L("lim"),wC=L("wC"),wS=L("wS");
@@ -54,6 +54,11 @@ function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.
     g.fillStyle="#b88a3a";g.fillRect(-s.r*.95,-s.r*1.15,s.r*1.9,s.r*.3);g.fillRect(-s.r*.95,s.r*.85,s.r*1.9,s.r*.3);g.fillStyle=crRGB(s.c);g.fillRect(-s.r*.8,-s.r*.85,s.r*1.6,s.r*1.7);
     g.globalAlpha=.22;g.strokeStyle="#000";g.lineWidth=1;for(let k=-3;k<=3;k++){g.beginPath();g.moveTo(-s.r*.8,k*s.r*.24);g.lineTo(s.r*.8,k*s.r*.24+2);g.stroke()}g.restore()});
    if(P.pk===i)kg82FxRing(g,s.x,s.y,s.r*1.2,P.litAt,now)});
+  /* the «Mẫu» tag under the sample + ONE kit guiding line between the hoop and the spools: pick = which spool, stitch = when to tap (green when the lit dot glows) */
+  g.textAlign="center";g.textBaseline="alphabetic";g.fillStyle=kg82Col("--k-lab","#6b4a1c");g.font=`700 12px ${kg82Col("--body","sans-serif")}`;kg82Lbl(g,"Mẫu",sr*1.35,sr*2.47+13,70);
+  if(phase==="play"&&P.ph!=="end"){const top=Math.min(...P.sp.map(s=>s.y-s.r*1.2)),gy=(HY+R0*1.12+top)/2;
+   if(P.ph==="pick")kg82Guide(g,"Chạm cuộn chỉ cùng sắc dải sáng",W/2,gy,"wait",13,W-16);
+   else if(P.ph==="stitch"&&P.k<ST){const go=1-Math.min(1,Math.abs(now-dipAt(dipIdx(now)))/(BEAT*.5))>.75;kg82Guide(g,go?"Chạm khung ngay!":"Chạm khung khi kim chúc xuống",W/2,gy,go?"go":"wait",13,W-16)}}
   kg82DrawPops(g,pops,now);crHud(env,reach(now),pi,NP,phase==="play"?LIM-(now-t0):null);
   if(phase==="play"&&P.ph!=="end"&&now-P.start>LIM)endPiece(now)}
  /* the raw float if the rest goes perfectly: pieces done + the open piece's reach (wrong spools / loose stitches so far stay lost, its time part now) + pieces to come */

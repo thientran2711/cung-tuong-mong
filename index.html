@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"25d5775d+","t":"2026-11-21T07:36Z","c":"mg-craft-r2-land: index.html/sw.js rebuilt","b":"afa007b25bef","h":[{"s":"e09fd19a+","t":"2026-11-21T09:11Z","c":"Thẻ lựa chọn: kiểu chung bộ khung (kit)"},{"s":"ffedf4f4+","t":"2026-11-21T06:50Z","c":"Trò tài nghệ với người: phần C (E)"},{"s":"ffc7c1d4+","t":"2026-11-21T07:34Z","c":"Lời xưng hô của ta trong truyện (E; gồm story-voice)"},{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"}]};
+window.CTM_BI={"s":"c3b5e23b+","t":"2026-11-21T11:25Z","c":"mg-craft-r2-land: index.html/sw.js rebuilt","b":"09d4ab8249a7","h":[{"s":"e09fd19a+","t":"2026-11-21T09:11Z","c":"Thẻ lựa chọn: kiểu chung bộ khung (kit)"},{"s":"ffedf4f4+","t":"2026-11-21T06:50Z","c":"Trò tài nghệ với người: phần C (E)"},{"s":"ffc7c1d4+","t":"2026-11-21T07:34Z","c":"Lời xưng hô của ta trong truyện (E; gồm story-voice)"},{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -33227,7 +33227,7 @@ window.CRAFT=CRAFT;window.crReg=crReg;window.crOn=crOn;window.crLev=crLev;window
    lev.peek ms), a row of silk spools (the right shades shuffled + lev.alike decoys half a shade step off). Per band: tap the spool of that band's shade,
    then lev.st stitches: the needle dips on a steady beat (lev.beat ms); tap the hoop as it dips onto the lit dot (±lev.win ms = on-beat 1, ±near·win = 0.6,
    else a loose loop 0 that must be re-stitched). 3 pieces (mai 3 · mẫu đơn 4 · phượng 5 bands, + mgMore with rank).
-   Score per piece = 10/3 · (wC · right-colour share + wS · mean stitch quality) · mgPace(env, kind, el, lim); levers BAL.mgTier.lev.<kind> (td_cong). No words in play: ★ / ✗ signs only. */
+   Score per piece = 10/3 · (wC · right-colour share + wS · mean stitch quality) · mgPace(env, kind, el, lim); levers BAL.mgTier.lev.<kind> (td_cong). In play: ★ / ✗ signs + ONE short guiding line (kit kg82Guide, KIT §13.7.2) and the «Mẫu» tag (owner OD 21/11 ~00:50Z «guiding words stay»; LIVE huong-cue-2 gave the old Công board «Chỉ mẫu» / «Chạm sợi chỉ cùng màu», carried here by review/mg-craft-r3). */
 const CRT_PCS=[/* [petals, base bands, dark rgb, light rgb] mai (pink) · mẫu đơn (rose) · phượng (gold) */[5,3,[150,28,58],[255,214,224]],[8,4,[128,18,40],[255,206,206]],[6,5,[150,78,8],[255,234,170]]];
 function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.22:.98,500),{g,W,H}=C;const K=env.kind||"td_cong",L=n=>crLev(env,K,n);
  const NP=CRT_PCS.length,BEAT=L("beat"),WIN=L("win"),NEAR=L("near"),ALIKE=Math.round(L("alike")),SWAY=L("sway"),PEEK=L("peek"),ST=Math.max(1,Math.round(L("st"))),LIM=L("lim"),wC=L("wC"),wS=L("wS");
@@ -33275,6 +33275,11 @@ function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.
     g.fillStyle="#b88a3a";g.fillRect(-s.r*.95,-s.r*1.15,s.r*1.9,s.r*.3);g.fillRect(-s.r*.95,s.r*.85,s.r*1.9,s.r*.3);g.fillStyle=crRGB(s.c);g.fillRect(-s.r*.8,-s.r*.85,s.r*1.6,s.r*1.7);
     g.globalAlpha=.22;g.strokeStyle="#000";g.lineWidth=1;for(let k=-3;k<=3;k++){g.beginPath();g.moveTo(-s.r*.8,k*s.r*.24);g.lineTo(s.r*.8,k*s.r*.24+2);g.stroke()}g.restore()});
    if(P.pk===i)kg82FxRing(g,s.x,s.y,s.r*1.2,P.litAt,now)});
+  /* the «Mẫu» tag under the sample + ONE kit guiding line between the hoop and the spools: pick = which spool, stitch = when to tap (green when the lit dot glows) */
+  g.textAlign="center";g.textBaseline="alphabetic";g.fillStyle=kg82Col("--k-lab","#6b4a1c");g.font=`700 12px ${kg82Col("--body","sans-serif")}`;kg82Lbl(g,"Mẫu",sr*1.35,sr*2.47+13,70);
+  if(phase==="play"&&P.ph!=="end"){const top=Math.min(...P.sp.map(s=>s.y-s.r*1.2)),gy=(HY+R0*1.12+top)/2;
+   if(P.ph==="pick")kg82Guide(g,"Chạm cuộn chỉ cùng sắc dải sáng",W/2,gy,"wait",13,W-16);
+   else if(P.ph==="stitch"&&P.k<ST){const go=1-Math.min(1,Math.abs(now-dipAt(dipIdx(now)))/(BEAT*.5))>.75;kg82Guide(g,go?"Chạm khung ngay!":"Chạm khung khi kim chúc xuống",W/2,gy,go?"go":"wait",13,W-16)}}
   kg82DrawPops(g,pops,now);crHud(env,reach(now),pi,NP,phase==="play"?LIM-(now-t0):null);
   if(phase==="play"&&P.ph!=="end"&&now-P.start>LIM)endPiece(now)}
  /* the raw float if the rest goes perfectly: pieces done + the open piece's reach (wrong spools / loose stitches so far stay lost, its time part now) + pieces to come */
@@ -90100,7 +90105,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="afa007b25bef";window.CTM_BUILD=BUILD;
+const BUILD="09d4ab8249a7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
