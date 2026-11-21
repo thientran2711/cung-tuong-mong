@@ -1952,3 +1952,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 | REVIEW mg-intro-2 r3 re-merge (SONNET SMALL) 570ec621 | review/mg-intro-2-rv3 | MAIN CHÍNH 92 | session_01Rc5AsMBXtN7JoHpTB9zpvY | RUNNING | 21/11 09:14Z |
 - (09:20Z) keeper SSK kit-badge fix 8bf7b164c → rv MSxp (first, before K-OPT-KEM); hao-huu-2 told to merge it now. Keeper now on kit-focus fixes.
 - (09:21Z) Keeper MtjP at 782k/1M (78 %, above ceiling) → told to stop, push WIP, write HANDOVER in reports/kit-keeper-1.md. Opened OPUS keeper #2 session_01Rc5AsMF9SLrWM4NQM9zGGz (job 1: kit-focus 5 faults; then old queue). duodo-focus #2 + rv MSxp told.
+- (09:22Z) old keeper HANDOVER DONE 0ba1eb7e (reports/kit-keeper-1.md; no WIP) → ARCHIVED MtjP; keeper #2 told.
