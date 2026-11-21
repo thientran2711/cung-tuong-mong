@@ -27,3 +27,8 @@ Also 1000x755 PASS. Nam nhân / Hoàng tự tabs: no frame column in that world 
 - Regression: kit-leftcol-read.js Fold + iPad 5 scenes PASS (readable ≥ 11.5 px); kit-page.js Fold PASS, iPad only the pre-existing §59/§86 40 px overflow. quickcheck ×2 PASS (run 2 new/live: render 226/249, tab 480/477, buổi 1245/1293; run 1 buổi 1722/1158 = noise).
 - Shots looked at ×3 (CDN img/_review/kit-pframe-overlay/: after-755x1000/1180x820 tab-court, tab-rv, tab-staff + sample-755): Chí tôn «Niên hiệu / Đã quen / Hoàng thượng → ta · Sủng 7» start right under the band over the pendant + tassel, name centred over the frame.
 - r1 @ 1f90a2b8 (owner corrections via MAIN 99, 21/11 ~19:25Z + ~19:30Z): halo CSS removed — rows over the tassel use the NORMAL kit text; frame = ONE whole picture (no pendant/tassel layer split; future animation moves the whole frame); KIT §4.1c + jk2b §20b overwritten in place. kit-pframe-overlay.js Fold + iPad 4 scenes PASS (label 0, gap 10–11); shot looked at (plain text on the tassel, readable). CSS-only removal: quickcheck not re-run.
+
+## State 21/11 ~19:45Z (MAIN 100)
+- kit-relrows-ms1word PASS → LANDED f44060d4; kit-body-fit PASS (rv 821727de) → LAND CHAIN 2 queue; kit-pframe-overlay r1 1f90a2b8 with rv MSxp (niên hiệu stays an info row under the frame: MAIN 99/100 decision, no r2).
+- CDN review folders wiped: kit-relrows-ms1word, kit-opt-title-wrap, kit-ef-unit (queue item 4 of #5). To wipe after their verdict/land: kit-body-fit, kit-pframe-overlay.
+- Worktrees: /home/user/wt/kbf (body-fit, server :8797), /home/user/wt/kpf (pframe-overlay, server :8798), handover /home/user/wt/ho.
