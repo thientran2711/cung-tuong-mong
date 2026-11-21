@@ -14,6 +14,13 @@ Owner: "... tôi cần ở cái thanh trên cùng, tức là cái thanh nhân v�
 - KIT.md §69.2 rewritten IN PLACE (canon overwrite); the §77 (4) line removed; KIT_REQUESTS K-ICO-HAOHUU line says KIT READY + top-bar user.
 - Tests updated (fix the whole group): coop-chat (header label = aria label now), coop-sleep (tap icon → partner sheet, close by ✕); coop-timer reads textContent (hidden span keeps the words).
 
+### r1 tests (sha f207807d; build commit e64263a5)
+- `COOP_A_ORIGIN=tt COOP_B_ORIGIN=nc node dev/test/coop-haohuu.js <out>`: **178/178 ok** (solo no icon; host + guest × Fold 755x1000 + iPad 1180x820 × stranger + met: icon in the top bar, square, no words on screen, badge = her status, away markup grey/no badge, ready ✓, busy …, stranger = painted icon / met = portrait, no rail item, room not held; sheet seal + ✕, Hảo hữu / Ta rows, «Tạm dừng» option, stranger masking, met real numbers; ✕ + Esc close; no overflow; no page errors).
+- `coop-e2e` (tt/nc): **92/92 passed**. `coop-chat`: **ALL OK 55 checks**.
+- `coop-sleep`: FAILS — the SAME 3 FAILs + the same click timeout on unchanged origin/main d31c8ec0 (baseline run in a throw-away worktree): pre-existing (status «Đang bận» while a story card .kmov is open, then the card blocks the click), not from this branch.
+- `quickcheck HEAD`: **PASS** · open 1763 ms · old save ok · perf new/live render 245/228, tab 450/530, buổi 1433/2042 · core gates PASS.
+- Shots (looked 3×, CDN `img/_review/hao-huu/`, 16): hh-{host,guest}-{fold,ipad}-{stranger,met}[-end].jpg (-end = the sheet scrolled to «Lúc này» + «Tạm dừng»; the top-bar icon is visible in every shot).
+
 ## r0 (superseded placement; the sheet itself is kept)
 ### What changed (r0)
 - NEW `dev/build/jhaohuu.js` (after jstatus in assemble.py): kitStageRail item `haohuu`, `order:90` = BOTTOM of the stage's left icon column, `when` = co-op on (solo: absent), both seats. Icon `img/kit/ico-friend.webp` = KIT REQUEST K-ICO-HAOHUU, painted by the kit keeper (KIT READY 21/11, two crossed gold hairpins, on the CDN; their KIT_REQUESTS row is on review/kit-test-defaults 2e74ba49).
