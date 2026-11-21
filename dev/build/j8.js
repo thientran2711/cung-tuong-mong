@@ -436,7 +436,7 @@ const SEEN_BAD=kRx("(?<![\\p{L}])(độc|xạ hương|bùa|hình nhân|vu oan|vu
 function seenBad(txt){return SEEN_BAD.test(String(txt||"").replace(/<[^>]+>/g,""))||(/tặng|dâng/.test(String(txt||""))&&!!window.__giftTaint)}
 function seenNPC(v,t,txt){const bad=seenBad(txt);window.__giftTaint=0;if(!txt)return"";if(t===S||v===S)return txt;if(roll(BAL.odb.j8.rbSeenNPC+eyes(S)*6)){if(!bad)return `Tai mắt thấy: ${txt}`;evA(S,v,BAL.eff.j8.evSeenNPC);return""}return""}
 function npcMonthly(v){let ev="";const cost=k=>artFee(v.arts[k]);const agd=window.agDOn&&agDOn();/* AG-ALL: study / shop / gifts / ally / favour are the day plan's choices (jagacts) */
- if(!agd&&roll(30)){const k=pick(Object.keys(v.arts));if(v.arts[k]<5&&(v.bac>=cost(k)||v.suc>=40)){if(v.bac>=cost(k)){ap(v,{bac:-cost(k),suc:-10});v.artp[k]+=1+R(3)}else{ap(v,{suc:-15});v.artp[k]+=1};while(v.arts[k]<5&&v.artp[k]>=v.arts[k]+2){v.artp[k]-=v.arts[k]+2;v.arts[k]++}}}
+ if(!agd&&roll(30)){const k=pick(Object.keys(v.arts));if(v.arts[k]<5&&(v.bac>=cost(k)||v.suc>=40)){/* the same lesson as hers: teacher (bạc) 1–3, alone 1; points through the one course ladder (addArtP → jbalcore crsPush, review/balance-core) */if(v.bac>=cost(k)){ap(v,{bac:-cost(k),suc:-10});addArtP(v,k,1+R(3))}else{ap(v,{suc:-15});addArtP(v,k,1)}}}
  if(!agd&&roll(25)&&S.shop.length){const k=pick(S.shop);if(IT[k]&&v.bac>=itm(k).pr+20&&(!itm(k).il||v.malice>60))buy(v,k)}
  if(!(typeof haOn==="function"&&haOn())&&v.malice>60&&roll(8)&&v.bac>=45&&!v.inv.some(e=>e.t)){buy(v,"tuithom");taintItem(v,v.inv.length-1,v.inv.some(e=>e.k==="xahuong")?"xa":"bua")}
  npcCourt(v);if(!agd&&roll(15)){const i=v.inv.findIndex(e=>e&&IT[e.k]&&itm(e.k).gv&&!e.t);if(i>=0)giveTo(v,roll(50)?"emp":"th",i)}

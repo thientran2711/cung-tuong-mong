@@ -9,7 +9,7 @@ function start(){
      preg:0,hidden:false,fake:0,fert:0,anthai:0,doctor:0,pray:0,kids:[],heir:null,lastPromo:0,turn:0,dead:false,
      arts:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},artp:{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0},master:0,confined:0,shield:0,tablet:0,
      place:"home",visit:null,tonight:null,inv:[],an:0,nightLog:[],evm:{},rl:{},hieu:"",block:0,dress:null,asthma:false,shop:[],seen:{},emp:mkEmp(),st:{step:0,done:0,tag:""},recorded:false,nights:0,thDead:false,logs:[],caseEv:0,avenged:false,lad6:1/* maid-ladder-6: born on the six-rung maid ladder */};
-  if(typeof tmInstall==="function")tmInstall(S);rivals=[];S.name=freshName();apply(o.o);S.ally=o.ally?1:0;
+  if(typeof tmInstall==="function")tmInstall(S);rivals=[];S.name=freshName();origSet(S,o.k);/* every start value from BAL.start (one table, jbalcore); o.x = what the origin brings beyond the table (td: thu) */if(o.x)apply(o.x);S.ally=o.ally?1:0;
   for(const [r,q] of BAL.ps.harem)rivals.push(newRival(r,q));
   /* palace-start: a young harem (the Emperor's household from before the throne + the first draft), 3–5 small children (psSeedKids), court still weak (S.reign: hook for the Emperor's side story, D5) */
   rivals.forEach(v=>{v.age=BAL.ps.consAge[0]+R(BAL.ps.consAge[1]+1)+(v.queen||v.rank>=4?BAL.ps.consAge[2]:0)});psSeedKids();S.ps=1;S.reign={y0:S.year,power:BAL.ps.power0,ch:0,side:null};/* D5 hook: Emperor side story chapters (ch) and her side road: side = "emp" | "th" | "quyen" */spreadTraits();
