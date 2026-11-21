@@ -1,11 +1,12 @@
 # T1QP1 — owner L1840 (child of Foreman C #24) — depth 6, START_CTX ~3 %
 Prompts only, no gens by me. Draw = VE3 (A49) @55, seed 7172, same settings as its thu samples.
 
-## (1) THU Đáp ứng t1 collar → dev/art/thu_comoi/s62_t1_THU_fix_L1840.txt (base fix_L1834, tím tuyết phi bạch kept)
-WHY t1 collar ≠ t2 (6AbJANKiJO, s62_t2_THU_fix_L1776): t2 says "framed by a wide flat lilac band, delicate embroidered tiger lilies AT THE COLLAR"; t1 said "edged by a wide flat lilac band" and later "the lilac INNER LAYER at the square neckline clearly visible above it" → model drew a thin inner-layer edge, not a collar (same trap as A40).
-- "edged by a wide flat lilac band embroidered with lilac flowers," → "framed by a WIDE, thick, flat lilac collar band (a real collar, broad and solid, never a thin strip or a thin layer edge) with delicate embroidered lilac flowers on the collar band,"
-- "the lilac inner layer at the square neckline clearly visible above it" → "the wide lilac collar band at the square neckline clearly visible above it"
-- caption + "· cổ bản to L1840". Old pics: vQABJFua47 (L1804), fHz8PhrCDY (L1834).
+## (1) THU Đáp ứng t1 collar → dev/art/thu_comoi/s62_t1_THU_fix_L1840.txt (base fix_L1834, tím tuyết phi bạch kept) — REDONE v2 after #24 sheet review-sheets/thu_t1_vs_t2_L1840.png
+WHY t1 ≠ t2: t2 (6AbJANKiJO, s62_t2_THU_fix_L1776) = "framed by a wide flat lilac band, delicate embroidered tiger lilies AT THE COLLAR" and nothing about an inner layer → drawn as a thin embroidered edge, one piece with the bodice. t1 = "edged by a wide flat lilac band embroidered with lilac flowers" + "the lilac INNER LAYER at the square neckline clearly visible above it" → drawn as a separate flat band like a bib on a plain bodice (owner: "thin, just a layer"; same trap as A40).
+(v1 made the band wider/thicker = wrong direction; replaced before any gen.)
+- "edged by a wide flat lilac band embroidered with lilac flowers," → "framed by a wide flat lilac band, delicate embroidered lilac flowers at the collar, the collar edge sewn as one piece with the upper garment, never a separate collar piece or bib,"
+- ", the lilac inner layer at the square neckline clearly visible above it," → "," (cut, t2 has none)
+- caption + "· cổ như t2 L1840". Old pics: vQABJFua47, Lw85wx5swO, fHz8PhrCDY.
 
 ## (2) WINTER Đáp ứng t1 coat → dev/art/winter1/s62_t1_dong_L1840.txt (base dong_L1825)
 WHY coat: no coat/jacket word was in it; cause = the W01 fur sentence puts fur on "the front edges and hem of her outer garment" — on a short two-piece ruqun top that = a fur-trimmed jacket at the hips. W01 is gate-locked (rewrite → FAIL W01), so kept verbatim and clarified:
