@@ -1,13 +1,14 @@
-/* ================= jcraft_theu: Thêu «Thêu lướt sắc» (kind theu, engine "stitch"; MG_CRAFTS.md §1; owner OD 20/11 ~08:15Z: «choose the right thread
+/* ================= jcraft_theu: the stitch board, Công «Thêu theo nét» (kind td_cong, engine "stitch"; MG_CRAFTS.md §1 — built for Thêu, moved to the Công
+   lesson by the owner 21/11 ~01:05Z: Thêu keeps the j82 memory game «Nhớ mẫu thêu»; registered by jtd: crReg("td_cong","stitch",tdWrap(crtStitch)). owner OD 20/11 ~08:15Z: «choose the right thread
    colour and stitch along a lit pattern in rhythm») =================
    Real craft (Su xiu long-and-short shading): a petal is built from bands of ONE hue, dark at the rim to light at the heart; the colour order is the skill,
    the even stitch rhythm is the hand. Board: the hoop with the flower cut into bands, the finished sample in the corner (covered by its cloth after
    lev.peek ms), a row of silk spools (the right shades shuffled + lev.alike decoys half a shade step off). Per band: tap the spool of that band's shade,
    then lev.st stitches: the needle dips on a steady beat (lev.beat ms); tap the hoop as it dips onto the lit dot (±lev.win ms = on-beat 1, ±near·win = 0.6,
    else a loose loop 0 that must be re-stitched). 3 pieces (mai 3 · mẫu đơn 4 · phượng 5 bands, + mgMore with rank).
-   Score per piece = 10/3 · (wC · right-colour share + wS · mean stitch quality) · mgPace(env, "theu", el, lim). No words in play: ★ / ✗ signs only. */
+   Score per piece = 10/3 · (wC · right-colour share + wS · mean stitch quality) · mgPace(env, kind, el, lim); levers BAL.mgTier.lev.<kind> (td_cong). No words in play: ★ / ✗ signs only. */
 const CRT_PCS=[/* [petals, base bands, dark rgb, light rgb] mai (pink) · mẫu đơn (rose) · phượng (gold) */[5,3,[150,28,58],[255,214,224]],[8,4,[128,18,40],[255,206,206]],[6,5,[150,78,8],[255,234,170]]];
-function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.22:.98,500),{g,W,H}=C;const K="theu",L=n=>crLev(env,K,n);
+function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.22:.98,500),{g,W,H}=C;const K=env.kind||"td_cong",L=n=>crLev(env,K,n);
  const NP=CRT_PCS.length,BEAT=L("beat"),WIN=L("win"),NEAR=L("near"),ALIKE=Math.round(L("alike")),SWAY=L("sway"),PEEK=L("peek"),ST=Math.max(1,Math.round(L("st"))),LIM=L("lim"),wC=L("wC"),wS=L("wS");
  /* the hoop above, the spool rows below it (two rows when crowded), never overlapping */
  const R0=Math.min(W*.34,H*.27),HX=W*.5,HY=H*.36,SY=H*.85;const pops=[];
@@ -35,7 +36,7 @@ function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.
   else{/* the silk cloth over the sample (memory at high rank) */g.save();g.beginPath();g.arc(x,y,R*1.1,0,Math.PI*2);g.fillStyle="#c9a77a";g.fill();g.clip();g.globalAlpha=.3;g.strokeStyle="#6e4d0e";g.lineWidth=1;
    for(let k=-3;k<=3;k++){g.beginPath();g.moveTo(x-R*1.1,y+k*R*.28);g.quadraticCurveTo(x,y+k*R*.28+R*.12,x+R*1.1,y+k*R*.28);g.stroke()}g.restore()}
   crTmp(g,x-R*1.12,y-R*1.12,R*2.24,R*2.24);return hid}
- function draw(now){kg82Bg(g,W,H,"theu",.1,.6);if(!P)return;const x=hx(now),y=HY;
+ function draw(now){kg82Bg(g,W,H,K,.1,.6);if(!P)return;const x=hx(now),y=HY;
   /* hoop: stand-in wooden ring + silk */
   crArt(g,"theu-hoop",x,y,R0*2.3,R0*2.3,{},()=>{g.save();g.beginPath();g.arc(x,y,R0*1.08,0,Math.PI*2);g.fillStyle="#fffaf0";g.fill();g.lineWidth=R0*.07;g.strokeStyle="#a8743a";g.stroke();g.restore();crTmp(g,x-R0*1.12,y-R0*1.12,R0*2.24,R0*2.24)});
   /* the bands: stitched ones in the chosen silk, the band being stitched half filled, the next one lit, the rest a faint outline */
@@ -81,4 +82,4 @@ function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.
  KG82.hint=()=>{if(phase!=="play"||!P||P.ph!=="stitch"||P.k>=ST)return null;const now=crNow();let di=Math.ceil((now-WIN*.25-P.dip0)/BEAT);if(di<=P.used)di=P.used+1;if(di<0)di=0;
   const d=dots(P.band,hx(now),HY)[P.k];if(!d)return null;const c=C.client(d[0],d[1]);return{x:c.x,y:c.y,soon:dipAt(di)-now<BAL.mgTier.tut.lead}};
  piece();stop=crLoop(draw);return()=>{done=true;KG82.hint=null;if(stop)stop()}}
-crReg("theu","stitch",crtStitch);
+window.crtStitch=crtStitch;/* registered by jtd (loads later): crReg("td_cong","stitch",tdWrap(crtStitch,"stitch")) */

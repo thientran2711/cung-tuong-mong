@@ -1,5 +1,5 @@
-/* coop-craft-hand (B LANDER, CO-OP LAND GATE for review/mg-craft-r2; copy of coop-mg11-hand): both seats list the 4 craft kinds (Thêu, Khéo tay, Vẽ, Cắm hoa);
-   each player plays crafts through the kinds' ONE result path (kg82Play end: mgGrade → mgIdRes) (host Thêu + Khéo tay, guest Vẽ + Cắm hoa) → her OWN hand b (S.mgB) learns it, the other's does not
+/* coop-craft-hand (B LANDER, CO-OP LAND GATE for review/mg-craft-r2; copy of coop-mg11-hand): both seats list the craft kinds (Khéo tay, Vẽ, Cắm hoa, Công «Thêu theo nét» = the stitch board) and Thêu «Nhớ mẫu thêu» (kept, owner 21/11 ~01:05Z);
+   each player plays crafts through the kinds' ONE result path (kg82Play end: mgGrade → mgIdRes) (host Công + Khéo tay, guest Vẽ + Cắm hoa + Thêu) → her OWN hand b (S.mgB) learns it, the other's does not
    (law 1 two-way: the same rule on each seat); after two merged weeks each hand is still her own. Boot = wear-slots-coop.js (host Fold, guest iPad, live Worker).
    usage: python3 dev/build/assemble.py && node dev/test/coop-mg11-hand.js [workerURL] [level=9]. Exit 1 on a miss. */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
@@ -41,13 +41,13 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await inW();
  for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=3;S.sung=Math.max(S.sung||0,40);S.kpWarn=1;render()});
 
- const NEW=["theu","kim","ve","hoa"];
- for(const o of [H,G]){const ks=await o.p.evaluate(()=>typeof mgCalKinds==="function"?mgCalKinds():[]);const miss=NEW.filter(k=>!ks.includes(k));ok(!miss.length,o.name+': Thử tay lists the 4 craft kinds',miss.length?{miss,n:ks.length}:ks.length)}
+ const NEW=["theu","kim","ve","hoa","td_cong"];
+ for(const o of [H,G]){const ks=await o.p.evaluate(()=>typeof mgCalKinds==="function"?mgCalKinds():[]);const miss=NEW.filter(k=>!ks.includes(k));ok(!miss.length,o.name+': Thử tay lists the craft kinds + Thêu',miss.length?{miss,n:ks.length}:ks.length)}
  const snap=o=>o.p.evaluate(()=>JSON.parse(JSON.stringify(S.mgB||{})));
  const play=(o,kind,raw,how)=>o.p.evaluate(([kind,raw,how])=>{for(let i=0;i<3;i++){if(how==="learn")mgPlayLearn(kind,raw);else mgIdRes(kind,mgGrade(raw,kind))}return{b:mgIdB(kind,S),e:S.mgB&&S.mgB[kind]?JSON.parse(JSON.stringify(S.mgB[kind])):null}},[kind,raw,how]);
  const h0=await snap(H),g0=await snap(G);
  /* host plays a scheme board (live path mgPlayLearn, jsgame), guest plays the plant board (live path mgPlayRes, jshelf) — two different new kinds */
- const HK=["theu","kim"],GK=["ve","hoa"];for(const k of HK)await play(H,k,9,"res");for(const k of GK)await play(G,k,2,"res");
+ const HK=["td_cong","kim"],GK=["ve","hoa","theu"];for(const k of HK)await play(H,k,9,"res");for(const k of GK)await play(G,k,2,"res");
  const h1=await snap(H),g1=await snap(G);
  const n=(m,k)=>m&&m[k]?(m[k].n|0):0;
  for(const k of HK){ok(n(h1,k)===n(h0,k)+3,'host: her own hand b for '+k+' learns her 3 plays',{before:h0[k]||null,after:h1[k]||null});ok(JSON.stringify(g1[k]||null)===JSON.stringify(g0[k]||null),'guest: the host\'s '+k+' plays do not touch the guest\'s hand',[g0[k]||null,g1[k]||null])}

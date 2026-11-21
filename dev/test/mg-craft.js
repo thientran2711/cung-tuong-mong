@@ -1,4 +1,4 @@
-/* mg-craft (owner OD 20/11 ~08:15Z: each craft its OWN mechanic; dev/design/MG_CRAFTS.md) — node dev/test/mg-craft.js [dev/index.html] [WxH] [--kinds=theu,kim] [--runs=N] [--speed=S] [--measure]
+/* mg-craft (owner OD 20/11 ~08:15Z: each craft its OWN mechanic; dev/design/MG_CRAFTS.md) — node dev/test/mg-craft.js [dev/index.html] [WxH] [--kinds=td_cong,kim,theu] [--runs=N] [--speed=S] [--measure]
    For each craft kind whose new engine is registered (crOn(kind); a kind still on its old engine is listed as «not built» and skipped):
    1 every caller opens it on the NEW engine, first screen = kgReady rules (+ «Hướng dẫn»), «Sẵn sàng» starts a canvas board:
        playArt · startContest · Thử tay mgCalRun · khảo hạch exRun · tuyển chọn kcEntryExam · lesson kg82Lesson (lesson kinds) · works (openMG → playArt, j83)
@@ -16,7 +16,10 @@ const URL0=pos[0]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:
 const [VW,VH]=(pos[1]||'755x1000').split('x').map(Number);const RUNS=+(opt('runs')||2),SPEED=+(opt('speed')||2),MEASURE=A.includes('--measure');
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 /* per-kind extra checks (in-page source, returns {ok, info}); builders add theirs */
-const KIND_CASES={/* ve (mg-craft-ve): the Thủy mặc levers exist and get harder toward ease 0; the stand-in motifs are listed as missing pictures (the «tạm» marker) */
+const KIND_CASES={/* td_cong (owner 21/11 ~01:05Z): the stitch levers live in BAL.mgTier.lev.td_cong (none left under theu), Thêu is back on the j82 pattern engine, the old dotted-line engine is gone */
+ td_cong:()=>{const L=BAL.mgTier.lev.td_cong||{},need=["beat","win","near","st","alike","sway","peek","wC","wS","lim"],miss=need.filter(n=>!Array.isArray(L[n]));
+  return{ok:!miss.length&&!BAL.mgTier.lev.theu&&KG82_KIND.theu.e==="pattern"&&typeof KG82_ENG.pattern==="function"&&!KG82_ENG.tdthread&&KG82_KIND.td_cong.t==="Thêu theo nét",miss,theu:KG82_KIND.theu.e}},
+/* ve (mg-craft-ve): the Thủy mặc levers exist and get harder toward ease 0; the stand-in motifs are listed as missing pictures (the «tạm» marker) */
  ve:`(()=>{const L=BAL.mgTier.lev.ve,need=["place","tones","ramp","dry","peek","bleed","lim","limBase"];const m=(window.CTM_MISSING_PICS&&JSON.stringify(window.CTM_MISSING_PICS))||"";
   return{ok:typeof k91Ve==="function"&&need.every(k=>Array.isArray(L[k]))&&L.place[0]<L.place[1]&&L.tones[0]>L.tones[1]&&L.ramp[0]<L.ramp[1]&&L.dry[0]<L.dry[1]&&L.peek[0]<L.peek[1],info:{lev:Object.keys(L),missing:m.slice(0,80)}}})()`,
  /* hoa (review/mg-craft-hoa): every lever the engine reads sits in the lead's BAL.mgTier.lev.hoa block as [ease0, ease5] (ONE CORE), the score weights add to 1, the tray has 6 slots;
@@ -24,9 +27,9 @@ const KIND_CASES={/* ve (mg-craft-ve): the Thủy mặc levers exist and get har
  hoa:()=>{const L=BAL.mgTier.lev.hoa,H=BAL.mgTier.hoa,need=["ghost","cutTol","angTol","alike","sway","limStem"],miss=need.filter(n=>!Array.isArray(L[n])||L[n].length!==2);
   const ws=Object.values(H.w).reduce((a,b)=>a+b,0);return{ok:!miss.length&&Math.abs(ws-1)<1e-9&&H.n.length===3&&L.alike[0]<=3&&L.alike[0]+1<=6&&L.limStem[0]<L.limStem[1],miss,ws,n:H.n}}};
 /* the engine names the kinds must reach (mirror of KG82_CRAFT; a mismatch = the wiring moved) */
-const KG82_CRAFT_E={theu:"stitch",kim:"papercut",ve:"inkwash",hoa:"ikebana"};
+const KG82_CRAFT_E={td_cong:"stitch",kim:"papercut",ve:"inkwash",hoa:"ikebana"};/* owner 21/11 ~01:05Z: Thêu keeps the j82 pattern game; the stitch board = Công «Thêu theo nét» */
 /* the plain play of a kind: playArt (Cắm hoa has no plain art key — the plain "hoa" is Họa/Vẽ — so it opens by startContest) */
-const SRC0=k=>k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}})`:`playArt({art:${JSON.stringify(k)},onDone:()=>{}})`;
+const SRC0=k=>k==='td_cong'?`(TDS.busy=false,tdPlay("cong","self"))`:k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}})`:`playArt({art:${JSON.stringify(k)},onDone:()=>{}})`;
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:VW,height:VH}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.addInitScript(()=>{window.__ct=null;const okT=t=>/^[^\p{L}]*$/u.test(t);
   for(const f of['fillText','strokeText']){const o=CanvasRenderingContext2D.prototype[f];CanvasRenderingContext2D.prototype[f]=function(t){if(window.__ct&&!okT(String(t).trim()))window.__ct.add(String(t).trim());return o.apply(this,arguments)}}});
@@ -48,7 +51,7 @@ const SRC0=k=>k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}
   const fire=(type,x,y,id)=>{const box=kg82Box();const cv=box&&[...box.querySelectorAll('canvas')].find(c=>{const q=c.getBoundingClientRect();return x>=q.left-40&&x<=q.right+40&&y>=q.top-40&&y<=q.bottom+40});
    const el=cv||document.elementFromPoint(x,y);if(el)el.dispatchEvent(new PointerEvent(type,{clientX:x,clientY:y,pointerId:id||1,pointerType:'touch',isPrimary:true,bubbles:true,cancelable:true}))};
   /* the bot: follows KG82.peek (the oracle). noise = {px: drop error as a share of the board width, ms: reaction spread}. mode "random" = random taps/drags */
-  window.__bot=async(o)=>{o=o||{};const end=performance.now()+(o.ms||100000);let busy=false,acts=0;
+  window.__cbot=async(o)=>{o=o||{};const end=performance.now()+(o.ms||100000);let busy=false,acts=0;
    while(performance.now()<end&&KG82.phase==='play'&&KG82.run){await sleep(8);if(busy)continue;
     const box=kg82Box();const cv=box&&box.querySelector('canvas');if(!cv)continue;const R=cv.getBoundingClientRect();
     if(o.random){busy=true;const x=R.left+Math.random()*R.width,y=R.top+Math.random()*R.height;
@@ -74,7 +77,7 @@ const SRC0=k=>k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}
    r.rules=!!box.querySelector('.kgr .kgr-demo');r.tut=!!box.querySelector('#kgrtut');const go=box.querySelector('.kgr-go');if(!go){r.nogo=1;return r}
    if(o.ease!=null){/* the board ease of this play (law 5 measure) */const k0=kg82Play;kg82Play=function(kind,cb){KG82.lv=o.ease;kg82Play=k0;return k0.apply(this,arguments)}}
    window.__ct=new Set();go.click();await sleep(1600);r.eng=KG82_KIND[o.kind].e;r.canvas=!!box.querySelector('canvas');r.play=KG82.phase==='play';r.words=[...new Set(__words(box))];
-   if(o.bot){r.acts=await __bot(o.bot);await sleep(1200);r.rawF=KG82.rawF;r.res=!!document.querySelector('#kg82box-res:not([hidden])')||!!document.getElementById('kg82ok')}
+   if(o.bot){r.acts=await __cbot(o.bot);await sleep(1200);r.rawF=KG82.rawF;r.res=!!document.querySelector('#kg82box-res:not([hidden])')||!!document.getElementById('kg82ok')}
    r.words.push(...[...window.__ct].map(t=>t+' «canvas»'));window.__ct=null;
    if(o.close){r.closed=(()=>{try{kg82Close()}catch(e){return false}return !KG82.run&&!document.querySelector('#kg82 canvas')})()}
    return r};
@@ -93,6 +96,7 @@ const SRC0=k=>k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}
    ['Thử tay mgCalRun',`mgCalRun(${JSON.stringify(k)})`],['khảo hạch exRun',`(()=>{const P=exPlan(S);P.rounds=[${JSON.stringify(k)}];exRun(P,{},()=>{})})()`],
    ['tuyển chọn kcEntryExam',`kcEntryExam(${JSON.stringify(k)},()=>{},{})`],['works openMG→playArt',`(S.mg={k:${JSON.stringify(mgl||k)},pa:1},openMG(${JSON.stringify(mgl||k)},1,()=>{}))`]];
   if(k==='hoa')callers.shift();/* no plain playArt road to Cắm hoa */
+  if(k==='td_cong')callers.splice(0,callers.length,['Công lesson tdPlay self','(TDS.busy=false,tdPlay("cong","self"))'],['Công lesson tdPlay master','(TDS.busy=false,tdPlay("cong","master"))'],['Thử tay mgCalRun','mgCalRun("td_cong")'],['khảo hạch exRun','(()=>{const P=exPlan(S);P.rounds=["td_cong"];exRun(P,{},()=>{})})()']);/* the Tứ đức lesson roads */
   for(const [lab,src] of callers){if(lab.startsWith('works')&&!mgl)continue;
    const r=await ev(([s,k])=>window.__open(s,{kind:k,close:true}),[src,k]);
    const good=!r.err&&r.rules&&r.tut&&r.canvas&&r.play&&r.eng===(KG82_CRAFT_E[k])&&!r.words.length&&r.closed;
@@ -112,6 +116,14 @@ const SRC0=k=>k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}
   table.push([k,mean(row.e5),mean(row.e2),mean(row.e0),mean(row.r5)]);
   if(!MEASURE){ok(mean(row.e5)>=9,`5 ${k} skilled bot ≥ 9 raw at ease 5`,row.e5);ok(mean(row.e0)<mean(row.e5),`5 ${k} lower at ease 0 than at ease 5 (law 5)`,{e0:row.e0,e5:row.e5});ok(mean(row.r5)<mean(row.e5)-2,`5 ${k} random bot well below skilled`,row.r5)}
   if(KIND_CASES[k]){const r=await ev(KIND_CASES[k]);ok(r&&r.ok,`${k} own case`,r)}}
+ /* owner 21/11 ~01:05Z "Cái trò đó hay nha, không bỏ nha": Thêu keeps «Nhớ mẫu thêu» (j82 pattern) on every road: Tài nghệ lesson, contests, Thử tay, khảo hạch, works */
+ if(!want.length||want.includes('theu')){const srcT=[['playArt','playArt({art:"theu",onDone:()=>{}})'],['startContest','startContest({art:"theu",title:"Hội thi",onDone:()=>{}})'],['Thử tay mgCalRun','mgCalRun("theu")'],
+   ['khảo hạch exRun','(()=>{const P=exPlan(S);P.rounds=["theu"];exRun(P,{},()=>{})})()'],['works openMG→playArt','(S.mg={k:"theu",pa:1},openMG("theu",1,()=>{}))']];
+  for(const [lab,src] of srcT){const r=await ev(([s])=>window.__open(s,{kind:'theu',close:true}),[src]);const good=!r.err&&r.rules&&r.canvas&&r.play&&r.eng==='pattern'&&r.closed;
+   ok(good,`theu via ${lab}: «Nhớ mẫu thêu» (pattern engine) plays, ✕ stops`,good?undefined:r)}
+  const L=await ev(async()=>{const d=document.createElement('div');d.style.width='600px';d.className='kgbox';document.body.appendChild(d);const L=kg82Lesson('theu');const stop=L[2](d,2,()=>{});await __sleep(1500);
+   const o={t:L[0],can:!!d.querySelector('canvas'),eng:KG82_KIND.theu.e,t2:KG82_KIND.theu.t};try{stop()}catch(e){}d.remove();return o});
+  ok(L.can&&L.eng==='pattern'&&/nhớ mẫu thêu/i.test(L.t)&&L.t2==='Nhớ mẫu thêu',`theu Tài nghệ lesson kg82Lesson("theu") = «Nhớ mẫu thêu» on the pattern engine`,L)}
  /* 7 old save loads */
  const os=await ev(async([ks,srcs])=>{try{localStorage.setItem('ctm_slot3',window.__oldSave)}catch(e){}let o={};try{const s=JSON.parse(window.__oldSave);Object.assign(S,s);render();o.loaded=true;
    for(const k of ks){(0,eval)(srcs[k]);await __sleep(700);const g=document.querySelector('.kgr-go');if(g)g.click();await __sleep(1200);o[k]=!!document.querySelector('#kg82 canvas');kg82Close()}}catch(e){o.err=String(e.message||e)}return o},[KINDS,Object.fromEntries(KINDS.map(k=>[k,SRC0(k)]))]);

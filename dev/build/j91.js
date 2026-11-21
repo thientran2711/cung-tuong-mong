@@ -2,7 +2,7 @@
    Every contest kind of j82 / j71 (and every lesson art) now has its OWN mechanic; no two kinds share one.
    Table (dev/MINIGAMES.md):  dan rhythm · hat hold (giữ hơi theo giai điệu) · co go · dauho fling (kéo thả ném tên) · ban aim ·
      tho verse (kéo chữ vào câu bát, đúng vần) · doi pair (nối chữ đối) · doden lamp (jlant.js: thắp đèn theo mẫu) ·
-     ve trace (đồ nét) · hoa arrange (cắm hoa thiên–nhân–địa) · theu stitch (jcraft_theu) · kim papercut (jcraft_kim) · mua steps ·
+     ve trace (đồ nét) · hoa arrange (cắm hoa thiên–nhân–địa) · theu pattern (nhớ mẫu thêu, j82) · kim papercut (jcraft_kim) · mua steps ·
      banh cook (giữ lửa + thứ tự nguyên liệu) · huong blend (thanh trượt pha hương).
    Engines follow the j82 contract: eng(box, env{kind, lv 0–5, hud(o), end(raw0to10)}) -> stop(); KG82.peek() is the test oracle:
      {x,y} tap · {sel} click · {drag:[[x,y],…]} drag path (client px) · {hold:bool, hsel|x,y} keep a pointer down or not.
@@ -299,22 +299,23 @@ Object.assign(KG82_KIND,{
  hoa:{e:"arrange",n:"Cắm hoa",t:"Cắm thế thiên – nhân – địa",how:"Kéo từng cành vào bình, đặt đóa hoa vào vòng của nó: cành dài nhất là Thiên, cành vừa là Nhân, cành ngắn là Địa. Giữ thế hoa cân. 3 bình."},
  banh:{e:"cook",n:"Nấu ăn",t:"Canh lửa nấu món",how:"Giữ nút Quạt lửa cho lửa nằm trong vùng xanh của từng bước, kéo nguyên liệu vào nồi đúng thứ tự công thức và chờ ninh xong. Lửa lên xuống chậm sau tay quạt, lại có gió lùa: buông tay sớm một chút."},
  huong:{e:"blend",n:"Điều hương",t:"Pha hương theo mẫu",how:"Kéo ba thanh trượt để pha ba vị hương cho màu khói giống hương mẫu, rồi chạm Dâng hương. 3 lư hương."}});
+KG82_KIND.theu.how="Mũi thêu hiện trên khung rồi khuất. Chạm lại đúng những ô có mũi thêu. 5 hồi.";
 /* lessons (Tài nghệ tab): every art plays its own contest game (cam→đàn, ky→cờ, thi→thơ, hoa→vẽ, vu→múa, y→điều hương, theu→thêu, nau→nấu ăn) */
 Object.assign(KG82_MGL,{cam:["Cầm: tấu khúc","dan"],ky:["Kỳ: ăn quân","co"],thi:["Thi: điền câu lục bát","tho"],hoa:["Họa: đồ nét bút","ve"],vu:["Vũ: theo bước múa","mua"],
  y:["Y thuật & điều hương: pha hương","huong"],theu:["Thêu: nhớ mẫu thêu","theu"],nau:["Nấu nướng: canh lửa nấu món","banh"]});
 /* ---------- mg-craft (owner OD 20/11 ~08:15Z: each craft its OWN real mechanic, tracing only for Chép kinh; dev/design/MG_CRAFTS.md) ----------
-   THE ONE PLACE that maps the four craft kinds to their new engines. A kind switches the moment its engine registers (jcraft.js crReg, called by
-   jcraft_theu / jcraft_kim / jcraft_ve / jcraft_hoa); until then it keeps the engine above. Kind KEYS stay (theu, ve, hoa, kim): every caller (startContest,
+   THE ONE PLACE that maps the craft kinds to their new engines. A kind switches the moment its engine registers (jcraft.js crReg, called by
+   jcraft_kim / jcraft_ve / jcraft_hoa, and by jtd for td_cong = the stitch board of jcraft_theu; owner 21/11 ~01:05Z: Thêu keeps the j82 pattern game); until then it keeps the engine above. Kind KEYS stay (ve, hoa, kim, td_cong): every caller (startContest,
    playArt, lessons, jexam, jentry, Thử tay, works j83) and old saves keep working. e = engine · t / how = the rules screen (kgReady; text is allowed there,
    never in play, OD 20/11 ~05:10Z) · demo = the KG82_DEMO move picture · mgl = the lesson label (KG82_MGL) when the kind is a lesson art · spr = the sprites preloaded (KG82_SPR; [] while the board draws stand-ins). */
 const KG82_CRAFT={
- theu:{e:"stitch",t:"Thêu lướt sắc",demo:"tap",spr:[],mgl:"Thêu: thêu lướt sắc",
-  how:"Mẫu thêu nhỏ ở góc khung. Dải sáng trên khung là chỗ thêu kế: chạm cuộn chỉ cùng sắc với dải ấy trong mẫu, rồi chạm khung đúng lúc kim chúc xuống chấm sáng để gieo mũi. Lệch nhịp thì mũi lỏng, phải gieo lại. Thêu từ dải đậm ở mép vào dải nhạt ở lòng hoa. 3 tấm."},
  kim:{e:"papercut",t:"Cắt hoa giấy",demo:"drag",spr:[],
   how:"Hoa giấy mẫu treo bên trái; bên phải là tờ giấy đỏ đã gấp. Kéo hình kéo cắt (trăng, tam giác, giọt) đặt lên tờ gấp ở chỗ mở ra sẽ thành lỗ của mẫu, rồi chạm ✓ để mở giấy. Lỗ trùng mẫu sáng lên, lỗ thừa bị trừ. 3 tờ."},
  ve:{e:"inkwash",t:"Thủy mặc",demo:"drag",mgl:"Họa: thủy mặc",
   how:"Bức mẫu của thầy ghim ở góc. Kéo núi, nước, thuyền, tùng đặt lên cuộn lụa đúng chỗ như mẫu: càng cao càng xa, càng nhỏ và nhạt. Rồi chạm ✓: giữ bút trên nghiên cho mực đậm dần, buông đúng sắc mực của lớp đang sáng và quệt lên lớp ấy. Mực lan vào chỗ trống thì thành vết. 3 bức."},
  hoa:{e:"ikebana",t:"Chọn mùa · cắt cành · nghiêng thế",demo:"drag",
-  how:"Chạm đúng loài hoa của mùa trong cửa sổ (đông mai, hạ sen, thu cúc, xuân đào); hoa trái mùa sẽ héo. Vuốt ngang cành nằm trên khăn để cắt cho dài đúng so với bình: Thiên cao nhất, Nhân kém ba phần tư, Địa lại kém ba phần tư nữa. Kéo cành đã cắt vào miệng bình, rồi kéo ngọn cho nghiêng đúng thế. 3 bình."}};
+  how:"Chạm đúng loài hoa của mùa trong cửa sổ (đông mai, hạ sen, thu cúc, xuân đào); hoa trái mùa sẽ héo. Vuốt ngang cành nằm trên khăn để cắt cho dài đúng so với bình: Thiên cao nhất, Nhân kém ba phần tư, Địa lại kém ba phần tư nữa. Kéo cành đã cắt vào miệng bình, rồi kéo ngọn cho nghiêng đúng thế. 3 bình."},
+ td_cong:{e:"stitch",t:"Thêu theo nét",demo:"tap",spr:[],/* owner 21/11 ~01:05Z: Thêu keeps «Nhớ mẫu thêu»; the stitch board serves the Công lesson (jtd registers it) */
+  how:"Mẫu thêu nhỏ ở góc khung. Dải sáng trên khung là chỗ thêu kế: chạm cuộn chỉ cùng sắc với dải ấy trong mẫu, rồi chạm khung đúng lúc kim chúc xuống chấm sáng để gieo mũi. Lệch nhịp thì mũi lỏng, phải gieo lại. Thêu từ dải đậm ở mép vào dải nhạt ở lòng hoa. 3 tấm."}};
 /* jreg: engines is read when asked, so engines of later modules (jnwp, jwkg…) are listed */
 window.K91={get engines(){return Object.keys(KG82_ENG)},kinds:()=>Object.fromEntries(Object.entries(KG82_KIND).map(([k,v])=>[k,v.e]))};

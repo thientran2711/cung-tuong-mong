@@ -22,9 +22,9 @@ const KG82_KIND={
  tho:{e:"calli"},/* filled by jnwp (no-word thư pháp); key kept here so the kind order stays */
  doi:{e:"doiline"},/* filled by jnwp */
  doden:{e:"lamp",n:"Thắp đèn",t:"Thắp đèn theo mẫu",how:"Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn: chạm mọi chiếc đèn giống đèn mẫu; chạm để thắp đèn cho giống hình mẫu; chạm đèn theo thứ tự dải mẫu. Chạm nhầm thì chọn lại. Có nút Gợi ý. Làm nhanh thì được trọn phần."},
- ve:{e:"trace",n:"Vẽ",t:"",how:""},/* the live engine + rules text of the four craft kinds: j91 KG82_CRAFT (review/mg-craft) */
+ ve:{e:"trace",n:"Vẽ",t:"",how:""},/* the live engine + rules text of the craft kinds ve / hoa / kim: j91 KG82_CRAFT (review/mg-craft); Thêu keeps «Nhớ mẫu thêu» (owner 21/11 ~01:05Z) */
  hoa:{e:"arrange",n:"Cắm hoa",t:"",how:""},
- theu:{e:"stitch",n:"Thêu",t:"",how:""},
+ theu:{e:"pattern",m:"silk",n:"Thêu",t:"Nhớ mẫu thêu",how:"Mũi thêu hiện trên khung rồi khuất. Chạm lại đúng những ô có mũi thêu. 5 hồi."},
  kim:{e:"papercut",n:"Khéo tay",t:"",how:""},
  mua:{e:"steps",n:"Múa",t:"Theo bước múa",how:"Xem các bước sáng lên theo thứ tự rồi chạm lại đúng thứ tự. 5 hồi, hồi sau dài hơn. Mỗi bước phải chạm kịp nhịp, chậm nhịp là hồi ấy dừng; bàn dễ cho lỡ một bước mỗi hồi."},
  banh:{e:"cook"},/* filled by j91 */
@@ -301,8 +301,41 @@ function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Ma
  /* think = how long a player needs to find the spot: more white groups to read, no gold ring at Khó (dev/measure/mg-bots.js) */
  KG82.peek=()=>phase==="play"&&P?Object.assign(C.client(px(P.L),py(P.L)),{think:(1+.45*Math.max(0,(P.wg||1)-1))*(tier>=2?1.5:tier?1.15:1)*(hintAt?.5:1)}):null;next();raf=requestAnimationFrame(frame);return()=>{stop=true;fade=null;cancelAnimationFrame(raf)}}
 
-/* 4. (was PATTERN, remember the lit cells — vẽ / cắm hoa / thêu / khéo tay): removed by review/mg-craft; no kind used it any more (caller scan in
-   dev/handover/reports/mg-craft.md). Thêu → jcraft_theu "stitch", Khéo tay → jcraft_kim "papercut", Vẽ / Cắm hoa → j91 then jcraft_ve / jcraft_hoa (KG82_CRAFT). */
+/* 4. PATTERN (Thêu «Nhớ mẫu thêu»; once also vẽ / cắm hoa / khéo tay): remember which cells were painted. review/mg-craft removed it; the owner kept it
+   (21/11 ~01:05Z "Cái trò đó hay nha, không bỏ nha"): Thêu plays it everywhere (Tài nghệ, contests, Thử tay); the craft stitch board went to Công «Thêu theo nét» (jtd). */
+function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const S0=Math.min(W,H)-8,ox=(W-S0)/2,oy=(H-S0)/2,c=S0/n;const mot=KG82_KIND[env.kind].m;
+ const R0=[3,4,4,5,6].map(n=>n+mgMore(env));let round=0,pts=0,pat=[],tapped=[],phase="",t0=0,stop=false,raf=0;const pops=[],press={};const LIM=9000,SHOW=2300+(env.lv||0)*160;
+ const cx=i=>ox+(i%n+.5)*c,cy=i=>oy+(Math.floor(i/n)+.5)*c;
+ function motif(i,a,ghost){g.save();g.globalAlpha=a;const x=cx(i),y=cy(i),r=c*.34*(ghost?1:kg82FxPop(press[i],performance.now()));if(!ghost&&press[i])kg82FxRing(g,x,y,c*.4,press[i],performance.now());
+  if(ghost){g.strokeStyle=kg82Col("--good","#2d7a52");g.setLineDash([5,4]);g.lineWidth=2;g.strokeRect(x-r,y-r,r*2,r*2);g.restore();return}
+  if(kg82Spr(g,["theu-peony","theu-butterfly","theu-crane","theu-cloud"][i%4],x,y,r*2.3,r*2.3)){g.restore();return}
+  if(mot==="ink"){/* three bamboo leaves in one brush stroke each, tapered, ink wash */
+   g.lineCap="round";g.strokeStyle="#3a2a1e";g.lineWidth=Math.max(1.5,r*.06);g.beginPath();g.moveTo(x-r*.9,y+r*.95);g.quadraticCurveTo(x-r*.2,y+r*.1,x+r*.05,y-r*.2);g.stroke();
+   [[-.15,1.0,.0],[.55,.9,-.9],[-.85,.85,-2.0]].forEach(([ang,len,rot],j)=>{g.save();g.translate(x+r*.05,y-r*.2);g.rotate(ang+rot*.35);const L=r*1.05*len,w=r*.24;
+    const gr=g.createLinearGradient(0,0,L,0);gr.addColorStop(0,"#1e140e");gr.addColorStop(1,"#5a4636");g.fillStyle=gr;g.globalAlpha=a*(j===2?.7:1);
+    g.beginPath();g.moveTo(0,0);g.quadraticCurveTo(L*.45,-w,L,0);g.quadraticCurveTo(L*.45,w*.55,0,0);g.fill();g.restore()});
+   g.globalAlpha=a;g.fillStyle="#c23b22";g.fillRect(x+r*.62,y+r*.55,r*.26,r*.26)}
+  else if(mot==="flower"){kg82Blossom(g,x,y,r*.95,kg82Col("--peony","#e48aa4"),false);g.strokeStyle="#5fa58c";g.lineWidth=3;g.beginPath();g.moveTo(x,y+r*.5);g.quadraticCurveTo(x+r*.4,y+r,x+r*.1,y+r*1.2);g.stroke()}
+  else{g.strokeStyle="#c23b22";g.lineWidth=r*.16;g.lineCap="round";for(const d of[-.5,0,.5]){g.beginPath();g.moveTo(x-r*.7+d*r,y-r*.7);g.lineTo(x+r*.7+d*r,y+r*.7);g.stroke()}g.strokeStyle="#c9a03a";for(const d of[-.5,0,.5]){g.beginPath();g.moveTo(x+r*.7+d*r,y-r*.7);g.lineTo(x-r*.7+d*r,y+r*.7);g.stroke()}}
+  g.restore()}
+ function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}pat=kg82Shuf([...Array(n*n).keys()]).slice(0,R0[round]);tapped=[];phase="show";t0=performance.now()}
+ function judge(){phase="judge";const ok=tapped.filter(i=>pat.includes(i)).length;const got=2*ok/pat.length;pts+=got;
+  kg82Pop(pops,W/2,oy+18,ok===pat.length?"Đúng cả!":`Đúng ${ok}/${pat.length}`,ok===pat.length?kg82Col("--good","#2d7a52"):kg82Col("--gold","#8f5f0c"));round++;setTimeout(next,1100)}
+ function draw(now){kg82Bg(g,W,H,env.kind,0,1);
+  /* stitch guide on the painted silk: hairline cells only */
+  g.save();g.strokeStyle="#b8935588";g.lineWidth=1;g.setLineDash([3,4]);for(let i=0;i<n*n;i++){const x=ox+(i%n)*c,y=oy+Math.floor(i/n)*c;g.fillStyle=KG82.ctx==="hoc"?"rgba(255,250,236,.5)":"rgba(255,252,240,.3)";g.fillRect(x+3,y+3,c-6,c-6);g.strokeRect(x+3,y+3,c-6,c-6)}g.restore();
+  if(phase==="show"){const k=(now-t0)/SHOW;const a=k<.1?k*10:k>.85?Math.max(0,(1-k)/.15):1;pat.forEach(i=>motif(i,a))}
+  else{tapped.forEach(i=>motif(i,pat.includes(i)||phase==="play"?1:.35));if(phase==="judge")pat.filter(i=>!tapped.includes(i)).forEach(i=>motif(i,1,true));
+   if(phase==="judge")tapped.filter(i=>!pat.includes(i)).forEach(i=>{g.strokeStyle=kg82Col("--red","#c23b22");g.lineWidth=3;const x=cx(i),y=cy(i),d=c*.18;g.beginPath();g.moveTo(x-d,y-d);g.lineTo(x+d,y+d);g.moveTo(x+d,y-d);g.lineTo(x-d,y+d);g.stroke()})}
+  kg82DrawPops(g,pops,now)}
+ function frame(now){if(stop&&phase!=="judge")return;let left=0;if(phase==="show"&&now-t0>SHOW){phase="play";t0=now}
+  if(phase==="play"){left=LIM-(now-t0);if(left<=0)judge()}
+  env.hud({score:mgLive(env,mgReach(pts,round,R0.length)),round:`Hồi ${Math.min(round+1,5)}/5`,time:phase==="show"?"nhìn kỹ":phase==="play"?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"});draw(now);raf=requestAnimationFrame(frame)}
+ C.cv.addEventListener("pointerdown",e=>{e.preventDefault();if(phase!=="play")return;const [x,y]=C.at(e);const cc=Math.floor((x-ox)/c),rr=Math.floor((y-oy)/c);if(cc<0||rr<0||cc>=n||rr>=n)return;const i=rr*n+cc;if(tapped.includes(i))return;
+  tapped.push(i);press[i]=performance.now();kg82Pluck(tapped.length,pat.includes(i));if(tapped.length>=pat.length)judge()});
+ KG82.peek=()=>{if(phase!=="play")return null;const i=pat.find(k=>!tapped.includes(k));return i==null?null:C.client(cx(i),cy(i))};
+ next();raf=requestAnimationFrame(frame);return()=>{stop=true;phase="";cancelAnimationFrame(raf)}}
+
 /* 5. STEPS (múa): watch the steps light up, then repeat them */
 function kg82Steps(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const V=[["↑","Giơ tay áo"],["←","Xoay trái"],["→","Xoay phải"],["↓","Cúi mình"]];
  const mx=W/2,my=H/2,D=Math.min(W,H)*.31,pr=Math.min(W,H)*.15;const pos=[[mx,my-D],[mx-D,my],[mx+D,my],[mx,my+D]];
@@ -352,7 +385,7 @@ function kg82Aim(box,env){const C=kg82Canvas(box,.95,420),{g,W,H}=C;const pot=en
  /* hint hook (KIT §13.7 guided round): tap anywhere on the board; soon = the marker reaches the centre within a reaction time */
  KG82.hint=()=>{if(lock||stop)return null;const now=performance.now(),w=.0021+k*.00028,th=((now-t0)*w)%Math.PI,c=C.client(W/2,H*.8);return{x:c.x,y:c.y,soon:(Math.PI-th)/w<BAL.mgTier.tut.lead||th/w<40}};
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf);document.removeEventListener("keydown",kd)}}
-const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,steps:kg82Steps,aim:kg82Aim};
+const KG82_ENG={rhythm:kg82Rhythm,go:kg82Go,pattern:kg82Pattern,steps:kg82Steps,aim:kg82Aim};
 
 /* ---------- running one game inside the frame ---------- */
 function kg82Play(kind,onEnd,po){KG82.setup=0;kgPay();const box=kg82Box();if(!box)return;box.classList.remove("kgintro");box.innerHTML="";box.hidden=false;const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";{const d=kg82El();if(d){d.classList.add("kg-run");d.classList.remove("kg-idle")}}

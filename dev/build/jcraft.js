@@ -2,7 +2,7 @@
    design dev/design/MG_CRAFTS.md; review/mg-craft lead + review/mg-craft-ve + review/mg-craft-hoa) =================
    Engines (same KG82 contract as j82 / j91: eng(box, env{kind, lv = board ease, hud, end(raw 0..10)}) → stop; KG82.peek = the test oracle / the guided round's
    hand; KG82.hint = a timing game's «tap now» point):
-     jcraft_theu.js  theu  «Thêu lướt sắc»   engine "stitch"    (lead)
+     jcraft_theu.js  td_cong «Thêu theo nét» engine "stitch" (lead; owner 21/11 ~01:05Z: Thêu keeps the j82 memory game, the stitch board serves Công, jtd registers it)
      jcraft_kim.js   kim   «Cắt hoa giấy»    engine "papercut"  (lead)
      jcraft_ve.js    ve    «Thủy mặc»        engine "inkwash"   (review/mg-craft-ve)
      jcraft_hoa.js   hoa   «Chọn mùa · cắt cành · nghiêng thế»  engine "ikebana" (review/mg-craft-hoa)
@@ -36,13 +36,13 @@ function crLoop(fn){let stop=false,raf=0;const L=()=>{if(stop)return;fn(crNow())
 function crLater(f,ms){return setTimeout(f,Math.max(0,ms/(CRAFT.speed||1)))}
 /* the HUD of a round-based craft board (kit chips). x = the raw float if the rest of the play goes perfectly (mgReach + the open round's reach): the score
    cell shows the ONE grade mgLive(env, x) like every other mini-game (review/mg-score-same, owner bug 20/11 ~06:50Z; dev/test/mg-score-same-scan.py) */
-function crHud(env,x,r,NR,left){env.hud({score:mgLive(env,x),round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:left!=null?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})}
+function crHud(env,x,r,NR,left){env.hud({score:mgLive(env,Math.max(0,x-(env.hintCut?env.hintCut():0))),/* hintCut: the hints taken in the Tứ đức wrapper (jtd tdWrap), as its env.end */round:`Hồi ${Math.min(r+1,NR)}/${NR}`,time:left!=null?`${Math.max(0,Math.ceil(left/1000))} giây`:"–"})}
 /* the pop colour of a judged round (one rule for the family, review/mg-score-same C-AG #29): good work the time part cut shows gold, not green */
 function crCol(q,sp){return q>=.55?(sp<.995?K91C.gold():K91C.good()):q>=.3?K91C.gold():K91C.red()}
 const crStars=q=>q>=.85?"★★★":q>=.55?"★★":q>=.3?"★":"✗";
 /* colour helpers (stand-in drawing) */
 function crMix(a,b,t){return a.map((x,i)=>Math.round(x+(b[i]-x)*t))}
 const crRGB=c=>`rgb(${c.join(",")})`;
-/* a small stand-in spool of silk (theu) / a stand-in shape (kim) is drawn by each engine; a dashed hairline marks a stand-in picture on the board (no word) */
+/* a small stand-in spool of silk (stitch) / a stand-in shape (kim) is drawn by each engine; a dashed hairline marks a stand-in picture on the board (no word) */
 function crTmp(g,x,y,w,h){g.save();g.setLineDash([3,3]);g.strokeStyle="rgba(143,95,12,.45)";g.lineWidth=1;g.strokeRect(x,y,w,h);g.restore()}
 window.CRAFT=CRAFT;window.crReg=crReg;window.crOn=crOn;window.crLev=crLev;window.crNow=crNow;
