@@ -71,9 +71,20 @@ window.entExam=entExam;window.entScore=entScore;window.entTier=entTier;
 /* tiểu thư road (jkc): Phúc tuyển offers her best NON-word art and plays it in the same exam frame */
 kcBestArt=function(){return entBest()};
 kcPhucPlay=function(k,skip){if(!isKc()||!S.kc.tt||S.kc.tt.done)return;S.kc.tt.play=1;
- const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");try{showModal()}catch(e){}};
+ const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;let foul=null;try{foul=kcFoulBack();kcPhucPod()}catch(e){console.error(e)}
+  pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");/* review/podium-wire (OR09, KIT §20.1): the thứ muội + khuê hữu competed under the same rule — the podium first, then Điện tuyển */
+  let ov=null;if(!window.__bot)try{ov=kcPhucShow(k,foul,()=>{try{showModal()}catch(e){}})}catch(e){console.error(e)}if(!ov)try{showModal()}catch(e){}};
  if(skip||window.__bot||typeof kg82Open!=="function"){fin(skip?entSkipRaw():entBotRaw());return}/* reviewer r1: one "not playing" value (entSkipRaw) on every road */
  try{window.kcEntryExam("kc",raw=>fin(raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"điểm màn chơi cộng vào Điện tuyển",phuc:1})}catch(e){console.error(e);fin(entSkipRaw())}};
+/* review/podium-wire (OR09): the Phúc tuyển podium = the ONE stored result S.kc.tt.pod (jkc kcPhucPod), on the kit podium (KIT §20.1:
+   family records carry fig / face / nameH / sub / score); faces through kcFace, never a private frame. */
+function kcPhucPod2List(k,foul){const T=S.kc.tt;const pod=T.pod||kcPhucPod();const A=(typeof ARTS!=="undefined"?ARTS:[]).find(a=>a.k===(k||T.art));
+ return pod.map(x=>{if(x.id==="me")return{who:S,place:x.place,score:`${x.raw} phần`,sub:foul?`bị ${foul.t.toLowerCase()} ngáng chân`:A?`dâng ${A.n}`:"dâng tài nghệ",you:"Ngươi"};
+  const m=kcF(x.id);if(!m)return null;let face="";try{face=kitFaceH(kcFace(m),"lg")}catch(e){}/* KIT §20.1 face = kitFaceH */
+  let nameH="";try{nameH=kitName(m)}catch(e){}if(!nameH)nameH=`<b class="kname">${m.name}</b>`;
+  return{who:m,place:x.place,score:`${x.raw} phần`,sub:/^(thứ muội|khuê hữu)$/i.test(m.t||"")?"":m.r==="muoi"?"thứ muội":"khuê hữu",fig:(()=>{try{return kitFigOf(m)||""}catch(e){return""}})()/* her own full-body home figure (fig-<fid>-kc-a18, same set as hers); "" = face only *//* the role is already the title of kitName (m.t): never twice */,face,nameH}}).filter(Boolean)}
+function kcPhucShow(k,foul,onNext){if(typeof kitPodiumShow!=="function")return null;return kitPodiumShow(kcPhucPod2List(k,foul),{title:"Phúc tuyển",sub:"Tuyển tú · Nội vụ phủ",next:"Tiếp",onNext})}
+window.kcPhucShow=kcPhucShow;window.kcPhucPod2List=kcPhucPod2List;
 /* the result's own gain / loss on every road (rank is set by jkc2), and no "demotion" scene for a rank set at entry */
 function entSnap(){try{if(typeof kmSnap==="function"){KMS=S;KMSNAP=kmSnap()}}catch(e){}}
 (function(){const d0=kc2SelDo;kc2SelDo=function(raw){const r=d0.apply(this,arguments);try{if(S&&S.selx&&S.selx.tier!=null&&!S.selx.fx){S.selx.fx=1;entFx(S.selx.tier)}}catch(e){console.error(e)}entSnap();return r}})();
