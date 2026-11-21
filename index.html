@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"8e4da816+","t":"2026-11-21T17:55Z","c":"review E45r: coop-ge-npc GE_BR=\u003croad> (origin by geOrig) so a Phù Tang road runs on both seats","b":"fe5f0666f90f","h":[{"s":"0620c318+","t":"2026-11-21T17:27Z","c":"Lệ phục: mặc đúng phép theo dịp (E)"},{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"},{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"},{"s":"a1c0a55e+","t":"2026-11-21T13:44Z","c":"Chơi chung: người đến sau thấy hảo hữu đã có mặt (B)"},{"s":"1641927e+","t":"2026-11-21T13:33Z","c":"Bộ khung chung: hàng quan hệ một kiểu"},{"s":"037d2c1f+","t":"2026-11-21T15:20Z","c":"Hộp thoại: ma ma không nói thay nàng nữa"}]};
+window.CTM_BI={"s":"4ee581db+","t":"2026-11-21T18:08Z","c":"Phủ tặng: quà cáp các phủ theo luật hai chiều (E)","b":"59be9384e02b","h":[{"s":"203cd559+","t":"2026-11-21T13:18Z","c":"Thành: chip đỏ «khi thành» trên thẻ đã gieo"},{"s":"fd8280fa+","t":"2026-11-21T17:26Z","c":"Bộ khung chung: đơn vị hiệu ứng một kiểu"},{"s":"0620c318+","t":"2026-11-21T17:27Z","c":"Lệ phục: mặc đúng phép theo dịp (E)"},{"s":"500dffbd+","t":"2026-11-21T16:25Z","c":"Chơi chung: mặt người trong phòng đúng cả hai bên (D)"},{"s":"a646c789+","t":"2026-11-21T16:38Z","c":"Số cảm xúc lấy từ một lõi số (BAL), hiện đúng số được (D)"},{"s":"3d8e8947+","t":"2026-11-21T16:25Z","c":"Bộ khung chung: tiêu đề lựa chọn xuống dòng gọn"},{"s":"976ea752+","t":"2026-11-21T14:48Z","c":"Bảng chữ: lời lẽ cổ trang thống nhất (E)"},{"s":"041578b9","t":"2026-11-21T16:26Z","c":"Kiểm thử: tắm thú cưng đúng bản mới (B)"},{"s":"625b7601+","t":"2026-11-21T13:46Z","c":"Thẻ Sủng: số hiện đúng số được (D)"},{"s":"a1c0a55e+","t":"2026-11-21T13:44Z","c":"Chơi chung: người đến sau thấy hảo hữu đã có mặt (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -28281,7 +28281,9 @@ const KA_NOTHING=/^(chắc chắn · )?(không (được )?(không )?mất( khô
 const KA_RISK=/^(có thể bị|bị người của nàng phát giác|bị lộ|bị khám|Đức \d+ → \d+|dễ lộ|có khi bị)/i;
 /* place every value in its row by meaning */
 function kaRows(M){const R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[],one:true};
- /* kit-thanh-bai: every Được / Mất / Kèm value carries its block b: "t" THÀNH, "b" BẠI, "a" gained either way ("được ngay"); Cần / Tốn / Ghi chú carry none (Tốn = paid either way, shown once above both blocks).
+ /* kaEfTag(html): add .kef1 to a pre-built «<span class="ef X">…</span>» item whose text is a stat unit (used by kitRows info rows, j79) */
+function kaEfTag(x){x=String(x);return /^\s*<span class="ef [^"]*"/.test(x)&&!/kef1/.test(x.slice(0,60))&&kaUnit(x)?x.replace(/^(\s*<span class="ef [^"]*)"/,'$1 kef1"'):x}
+/* kit-thanh-bai: every Được / Mất / Kèm value carries its block b: "t" THÀNH, "b" BẠI, "a" gained either way ("được ngay"); Cần / Tốn / Ghi chú carry none (Tốn = paid either way, shown once above both blocks).
     A sure act (no roll, nothing under "hỏng") has ONE block: every b collapses to "t". */
  const real=h=>{const p=kaPlain(h);return p&&!KA_NOTHING.test(p)};
  /* a no-roll card with a hỏng part is ONE block when it has no thành part (only a certain loss: "Cáo bệnh, không dự" Danh -1 — nothing to win, nothing to fail); with both parts it still shows both */
@@ -28319,7 +28321,11 @@ function kaOdds(M){if(!M.odds)return"";/* review/odds-no-unknown: only the 7 lad
 function kaNoteDedup(R){try{if(!R.note||!R.note.length)return;const why=R.why.map(x=>kaPlain(x.h).toLowerCase()).join(" ");
  R.note=R.note.filter(x=>{const p=kaPlain(x.h).toLowerCase().replace(/^[(\s]+|[)\s.]+$/g,"");const m=p.match(/^(?:chỉ )?(buổi (?:sáng|trưa|chiều|tối))$/);return !(m&&why.includes(m[1]))})}catch(e){}}
 const KA_BLK=[["duoc","Được"],["mat","Mất"],["kem","Kèm"]];
-function kaRowH(k,lab,L,b){return `<span class="kr kr-${k}${b?" kb-"+b:""}"><span class="krl">${lab}</span><span class="krv">${L.map(x=>k==="why"?`<span class="kwhy${x.c==="g"?" kok":""}">${x.c==="g"?"✓":"✗"} ${String(x.h).replace(/^[✓✗]\s*/,"")}</span>`:`<span class="ef ${x.c}">${x.h}</span>`).join('<span class="ksep">·</span>')}</span></span>`}
+function kaRowH(k,lab,L,b){return `<span class="kr kr-${k}${b?" kb-"+b:""}"><span class="krl">${lab}</span><span class="krv">${L.map(x=>k==="why"?`<span class="kwhy${x.c==="g"?" kok":""}">${x.c==="g"?"✓":"✗"} ${String(x.h).replace(/^[✓✗]\s*/,"")}</span>`:`<span class="ef ${x.c}${kaUnit(x.h)?" kef1":""}">${x.h}</span>`).join('<span class="ksep">·</span>')}</span></span>`}
+/* K-EF-UNIT (KIT_REQUESTS 21/11 econ-tamco RE-CHECK #2): a STAT item («Bạc -94», «Tâm cơ -3», «Sủng +2», «2 khắc») is ONE unbreakable unit on every option/act card row — it never splits «Bạc» / «-94» at a line end; items still wrap as wholes. Long word items keep wrapping. */
+/* r3 perf (LAND CHAIN 2 QC): one result per item text, cached — the same items are re-rendered every render()/buổi (5.8k calls ≈ 86 ms at CPU x4 before) */
+function kaUnit(h){const C=kaUnit.c||(kaUnit.c=new Map()),k=String(h);let v=C.get(k);if(v===undefined){if(C.size>3000)C.clear();v=kaUnit0(k);C.set(k,v)}return v}
+function kaUnit0(h){const t=kaPlain(h).trim();return t.length<=28&&(/^[\p{L}][\p{L}\s]{0,22}(?:\s*[+\-−]\s?|\s)\d+(?:\s*khắc)?$/u.test(t)||/^\d+\s*khắc$/u.test(t)||/^[\p{L}][\p{L}\s]{0,22}\s\d+\s*→\s*\d+(\s*\([+\-−]\d+\))?$/u.test(t))}
 /* kit-thanh-bai: [Cần][Tốn] once, then THÀNH block (Được/Mất/Kèm), then BẠI block; a sure act (R.one) has the THÀNH block only; an empty BẠI says so in one dim line */
 function kaBody(R,dis){kaNoteDedup(R);const one=R.one!==false;let h="";
  for(const [k,lab] of [["why","Cần"],["ton","Tốn"]])if(R[k].length)h+=kaRowH(k,lab,R[k]);
@@ -28392,6 +28398,9 @@ button.ka .kr{display:contents}
 button.ka .krl{font-size:.64rem;font-weight:700;letter-spacing:.02em;color:#8a7350;text-transform:uppercase;padding-top:.12rem;white-space:nowrap}
 button.ka .krv{min-width:0;overflow-wrap:anywhere}
 button.ka .krv .ef{font-weight:600}
+button.ka .krv .ef.kef1,.kr .krv .ef.kef1{white-space:nowrap}
+/* rv-kit-ef-unit FAIL fix: the §6.3 square-card / compact-card / Fold rules (jk4 kitCompactCSS «small.kb>.kr>.krv>*{white-space:normal!important}», jk4 .kpabox, j79 .art …) set normal !important on EVERY value item of .kart / .kopt cards, so the unit split again. ONE rule that wins over the whole family: !important + an id-weighted :is() (specificity 1,x,x, matches the same elements) so no card host can undo it; overflow-wrap normal so «anywhere» cannot cut inside the unit either. */
+.kr>.krv>.ef.kef1:is(#kef1-unit,.kef1),.kr .krv .ef.kef1:is(#kef1-unit,.kef1){white-space:nowrap!important;overflow-wrap:normal!important;word-break:normal!important}
 button.ka .krv .ef.g{color:var(--good)}
 button.ka .krv .ef.r{color:var(--bad)}
 button.ka .krv .ef.t{color:var(--ink);font-weight:600}
@@ -28847,7 +28856,7 @@ function kitRows(rows){const R=[];(rows||[]).filter(r=>r&&r[1]!=null&&r[1]!==""&
   if(/^\s*ghi chú\s*$/i.test(String(r[0]))&&R.length){const v=Array.isArray(r[1])?r[1]:[r[1]];const prev=R[R.length-1];prev.bang=(prev.bang?prev.bang+" · ":"")+v.join(" · ");return}
   R.push({l:r[0],v:r[1],c:r[2]})});
  return `<span class="kb kpkb">`+R.map(({l,v,c,bang})=>{const vals=Array.isArray(v)?v:[v];
- return `<span class="kr"><span class="krl">${l}</span><span class="krv">${vals.map(x=>/^\s*<span class="(kchip|ef|kname)/.test(x)||/^\s*<b class="kname/.test(x)?x:`<span class="ef ${c||"n"}">${x}</span>`).join(vals.every(x=>/^\s*<span class="kchip/.test(x))?'':'<span class="ksep">·</span>')/* chips carry their own border: no "·" between them (a wrapped line never starts with a stray "·", owner kit review 15:00Z) */}${bang?kitNoteBang(bang):""}</span></span>`}).join("")+`</span>`}
+ return `<span class="kr"><span class="krl">${l}</span><span class="krv">${vals.map(x=>/^\s*<span class="(kchip|ef|kname)/.test(x)||/^\s*<b class="kname/.test(x)?(typeof kaEfTag==="function"?kaEfTag(x):x):`<span class="ef ${c||"n"}${typeof kaUnit==="function"&&kaUnit(x)?" kef1":""}">${x}</span>`).join(vals.every(x=>/^\s*<span class="kchip/.test(x))?'':'<span class="ksep">·</span>')/* chips carry their own border: no "·" between them (a wrapped line never starts with a stray "·", owner kit review 15:00Z) */}${bang?kitNoteBang(bang):""}</span></span>`}).join("")+`</span>`}
 /* KIT §51 kitRowsJoin(kitRows(a), kitRows(b), …) -> ONE table: kit tables written one after another (price rows + the item's rows)
    are merged into a single grid, so their values line up too. Pass only kitRows / kitItemRows output (or ""). */
 function kitRowsJoin(){return [...arguments].filter(Boolean).join("").replace(/(<\/span><\/span>)<\/span>\s*<span class="kb kpkb">/g,"$1")}
@@ -65277,6 +65286,7 @@ window.kitPicZoom=kitPicZoom;
 document.addEventListener("click",e=>{try{const a=e.target&&e.target.closest&&e.target.closest("button.ka.kopt > .kaart[data-kzoom]");if(!a)return;
  e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();kitPicZoom(a.dataset.kzoom)}catch(x){}},true);
 (function(){const st=document.createElement("style");st.id="kit-opt-pic";st.textContent=`
+button.ka .kr.kwinrow>.krv>.ef.r:not(.kdup)::after{content:" khi thành";font-weight:400;white-space:nowrap}
 #kpzoom{position:fixed;inset:0;z-index:100000;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
 #kpzoom[hidden]{display:none!important}
 #kpzoom .kpzf{width:min(78vw,calc(calc(82*var(--kvh,1vh)) * 3 / 4),506px)}
@@ -65337,7 +65347,7 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  const matRow=loss.length?row("kr-mat2 kdup","Mất",loss):null;if(matRow)kb.appendChild(matRow);const keep=new Set([ton,gain,matRow]);const dis=b.classList.contains("kdis");
  let extra=false;[...kb.children].forEach(r=>{if(keep.has(r)||r.classList.contains("kdup0"))return;r.classList.add("kofold");if(!(r.classList.contains("kr-mat")||(sure&&r.classList.contains("kr-bai"))||gains.includes(r)))extra=true});
  /* order: Tốn · Được · the folded rest; the Được slot is ALWAYS labelled Được (a rolled card's Thành row, Được ngay …) */
- {const l=gain.querySelector(":scope > .krl");if(l)l.textContent="Được"}kb.insertBefore(ton,kb.firstChild);ton.after(gain);if(matRow)gain.after(matRow);
+ {const l=gain.querySelector(":scope > .krl");if(l)l.textContent="Được"}gain.classList.toggle("kwinrow",!sure&&gain.classList.contains("kr-thanh"))/* K-WIN-PAY (KIT_REQUESTS 21/11 econ-tamco F1): on a rolled card the Được slot IS the Thành row, so a red item there (a price paid only when it works, §88 THÀNH Mất) reads «… khi thành» */;kb.insertBefore(ton,kb.firstChild);ton.after(gain);if(matRow)gain.after(matRow);
  const lead=b.querySelector(".klead");if(lead){lead.classList.add("kofold");extra=true}
  if(extra){const m=document.createElement("span");m.className="kobang";m.setAttribute("role","button");m.setAttribute("aria-label","Xem thêm");m.title="Xem thêm";m.textContent="!";b.appendChild(m)}
  b.dataset.kofin="1";b.__kofSig=kitOptSig(b,kb)}catch(e){console.error("kitOptFinal",e)}}
@@ -91575,7 +91585,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fe5f0666f90f";window.CTM_BUILD=BUILD;
+const BUILD="59be9384e02b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
