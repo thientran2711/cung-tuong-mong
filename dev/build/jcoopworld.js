@@ -550,7 +550,7 @@ function famBack(o){const c=famCase(o);const iu=o.iu||(c&&c.e&&c.e.iu)||0;
    (st done «mat») — the thief's «Lén trả lại» / «Trả lại» left Tư trang › Việc a week after every theft from her. Her own seat keeps her
    side of the case; here such a case only waits (the expiry still ends it). */
 (function(){if(typeof loWeek!=="function")return;const f0=loWeek;loWeek=function(){if(!CW.on||!S)return f0.apply(this,arguments);
- const F=String(fp()),ex=typeof LO==="object"&&LO.expire||54;const L=(S.lost||[]).filter(c=>c&&c.st!=="done"&&String(c.own)===F&&wk()-c.w<=ex);
+ const F=String(fp()),ex=typeof LO==="object"&&LO.expire||54;const L=(S.lost||[]).filter(c=>c&&c.st!=="done"&&(String(c.own)===F||String(c.at)===F)&&wk()-c.w<=ex);/* r2: also MY piece HELD by the friend (her entry is pulled out → «mất dấu»: vanish) */
  const sv=L.map(c=>[c.st,c.end]);for(const c of L){c.st="done";c.end=wk()}try{return f0.apply(this,arguments)}finally{L.forEach((c,i)=>{c.st=sv[i][0];c.end=sv[i][1];if(c.end===undefined)delete c.end;if(S.lost&&!S.lost.includes(c))S.lost.push(c)})}};window.loWeek=loWeek})();
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
  const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
@@ -579,7 +579,9 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
   const c=famCase(o);if(!c){famMiss(o,"gone: no open case");continue}let x=null;try{x=typeof loEntry==="function"?loEntry(c):null}catch(z){}
   if(x&&x.h===S){famMiss(o,"gone: the piece is with her");continue}
   if(x){const L=x.h.inv||[];const i=L.indexOf(x.e);if(i>=0)L.splice(i,1);else{const w=x.h.wd;if(w)for(const sl of ["tram","y"])if(w[sl]===x.e)w[sl]=null}}
-  c.st="done";c.end=wk();c.how=o.how==="mat"?"mat":"matdau"}
+  c.st="done";c.end=wk();c.how=o.how==="mat"?"mat":"matdau";
+  /* r2: my census: the piece left this case for the friend's world (it sits in his box), routed, never netted */
+  try{if(typeof ilLog==="function"){ilLog(c.e,"lo"+c.id,"coop:"+((f&&f.id)||""),"mất dấu bên hảo hữu");const I=typeof ilS==="function"?ilS():null;if(I&&I.at&&c.e.iu)delete I.at[c.e.iu]}}catch(z){}}
  for(const o of ops){if(o.op==="preg0"){if(S.preg){S.preg=0;S.hidden=false;loud=1;out.push(`<span class="r">Ngươi sảy thai.</span> Thái y nói trong thuốc có xạ hương.`)}continue}
   const kd=o.n&&kidBy(o.n);if(!kd)continue;loud=1;
   if(o.op==="kdie"){try{out.push(kidDie(kd,o.why||"mất sớm",true))}catch(x){kd.alive=false}continue}

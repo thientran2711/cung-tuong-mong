@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"b4e24258+","t":"2026-11-21T14:43Z","c":"coop-famops r2: host-id alias (hiu) when her piece was numbered on both seats (coop-b1 1 laydo regression); «gone» op: the host's side of h…","b":"5ac5f85ae732","h":[{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"}]};
+window.CTM_BI={"s":"e3282a03+","t":"2026-11-21T16:16Z","c":"coop-famops r2: a lost-case piece of hers that leaves MY slots inside a host NPC turn is routed «sang hảo hữu» in my census (COOP_SKEW: her…","b":"9a1e8eccf326","h":[{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -47743,7 +47743,7 @@ function famBack(o){const c=famCase(o);const iu=o.iu||(c&&c.e&&c.e.iu)||0;
    (st done «mat») — the thief's «Lén trả lại» / «Trả lại» left Tư trang › Việc a week after every theft from her. Her own seat keeps her
    side of the case; here such a case only waits (the expiry still ends it). */
 (function(){if(typeof loWeek!=="function")return;const f0=loWeek;loWeek=function(){if(!CW.on||!S)return f0.apply(this,arguments);
- const F=String(fp()),ex=typeof LO==="object"&&LO.expire||54;const L=(S.lost||[]).filter(c=>c&&c.st!=="done"&&String(c.own)===F&&wk()-c.w<=ex);
+ const F=String(fp()),ex=typeof LO==="object"&&LO.expire||54;const L=(S.lost||[]).filter(c=>c&&c.st!=="done"&&(String(c.own)===F||String(c.at)===F)&&wk()-c.w<=ex);/* r2: also MY piece HELD by the friend (her entry is pulled out → «mất dấu»: vanish) */
  const sv=L.map(c=>[c.st,c.end]);for(const c of L){c.st="done";c.end=wk()}try{return f0.apply(this,arguments)}finally{L.forEach((c,i)=>{c.st=sv[i][0];c.end=sv[i][1];if(c.end===undefined)delete c.end;if(S.lost&&!S.lost.includes(c))S.lost.push(c)})}};window.loWeek=loWeek})();
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
  const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
@@ -47772,7 +47772,9 @@ function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {ou
   const c=famCase(o);if(!c){famMiss(o,"gone: no open case");continue}let x=null;try{x=typeof loEntry==="function"?loEntry(c):null}catch(z){}
   if(x&&x.h===S){famMiss(o,"gone: the piece is with her");continue}
   if(x){const L=x.h.inv||[];const i=L.indexOf(x.e);if(i>=0)L.splice(i,1);else{const w=x.h.wd;if(w)for(const sl of ["tram","y"])if(w[sl]===x.e)w[sl]=null}}
-  c.st="done";c.end=wk();c.how=o.how==="mat"?"mat":"matdau"}
+  c.st="done";c.end=wk();c.how=o.how==="mat"?"mat":"matdau";
+  /* r2: my census: the piece left this case for the friend's world (it sits in his box), routed, never netted */
+  try{if(typeof ilLog==="function"){ilLog(c.e,"lo"+c.id,"coop:"+((f&&f.id)||""),"mất dấu bên hảo hữu");const I=typeof ilS==="function"?ilS():null;if(I&&I.at&&c.e.iu)delete I.at[c.e.iu]}}catch(z){}}
  for(const o of ops){if(o.op==="preg0"){if(S.preg){S.preg=0;S.hidden=false;loud=1;out.push(`<span class="r">Ngươi sảy thai.</span> Thái y nói trong thuốc có xạ hương.`)}continue}
   const kd=o.n&&kidBy(o.n);if(!kd)continue;loud=1;
   if(o.op==="kdie"){try{out.push(kidDie(kd,o.why||"mất sớm",true))}catch(x){kd.alive=false}continue}
@@ -89760,7 +89762,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5ac5f85ae732";window.CTM_BUILD=BUILD;
+const BUILD="9a1e8eccf326";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
