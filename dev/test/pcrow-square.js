@@ -50,7 +50,7 @@ const cdn={};const TOPS={};
        boxUnder:box?R(box).top>=Math.max(ar?ar.bottom:0,br?br.bottom:0)-1:true,boxFull:box?R(box).width>=r.width*0.88:true,over:r.right>R(e.parentElement).right+1,tallPic:ar?ar.height>ar.width+1:false,cut:!!(box&&box.scrollWidth>box.clientWidth+2)})}}
      return out});
    const A=m.acts,C=m.cards;const sizes=new Set(A.map(x=>x.aw+'x'+x.ah));
-   const fails=[...A.filter(x=>x.aw!==x.ah||x.tallPic||x.bad.length||!x.boxUnder||!x.boxFull||x.over||x.cut).map(x=>'act '+JSON.stringify(x)),...C.filter(x=>x.cenName>3||x.cenRank>3||x.noteShown||(x.hasNote&&!x.bang)).map(x=>'card '+JSON.stringify(x))];
+   const fails=[...A.filter(x=>x.aw!==x.ah||![68,84,96].includes(x.aw)||x.tallPic||x.bad.length||!x.boxUnder||!x.boxFull||x.over||x.cut).map(x=>'act '+JSON.stringify(x)),...C.filter(x=>x.cenName>3||x.cenRank>3||x.noteShown||(x.hasNote&&!x.bang)).map(x=>'card '+JSON.stringify(x))];
    if(m.frame&&(m.frame.moved||m.frame.lastCut||m.frame.panelScrolled))fails.push('frame '+JSON.stringify(m.frame));
    if(m.intro&&(m.intro.phShown||(m.intro.ph&&!m.intro.bang)||(m.intro.bang&&!m.intro.bangIn)))fails.push('intro '+JSON.stringify(m.intro));
    if(m.intro&&m.intro.ph&&m.intro.stripTop!=null)(TOPS[wh]=TOPS[wh]||{})[sc]=m.intro.stripTop;

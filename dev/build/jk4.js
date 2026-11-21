@@ -1086,11 +1086,11 @@ ${kitCompactCSS("button.ka.kart",84,112)}
 .pc>.pcr .pcb:has(> button.ka),.pc>.pcr .rbtn:has(> button.ka){display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:8px!important;grid-template-columns:none!important;align-items:stretch!important}
 .pc>.pcr .pcb>button.ka,.pc>.pcr .rbtn>button.ka{width:100%!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;flex:0 0 auto!important;box-sizing:border-box}
 .pc>.pcr button.ka.kanoart>.kaart{display:none!important}
-${kitCompactCSS(".pc>.pcr button.ka.kart",76,76)}
-/* KIT §6.3 (owner 21/11 ~02:08Z, review/kit-pcrow-square): the act picture is ONE fixed SQUARE (76x76, never stretched by the text); to its right the title + odds and ONLY the Tốn / Được rows;
+${kitCompactCSS(".pc>.pcr button.ka.kart",84,84)}
+/* KIT §6.3 (owner 21/11 ~02:08Z, review/kit-pcrow-square): the act picture is ONE fixed SQUARE (per-device size: 68 on a narrow pane, 84 normal, 96 on a wide pane — the sizing of the approved «Dò hỏi gia thế» card; one size per device, never stretched by the text); to its right the title + odds and ONLY the Tốn / Được rows;
    UNDER both, ONE full-width info box (.kpabox: the lead sentence, Cần, Bại, Mất, Kèm, Ghi chú, Vì sao, every other row). kitPcActSplit builds the box. */
-html body .pc>.pcr button.ka.kart{display:grid!important;grid-template-columns:76px minmax(0,1fr)!important;column-gap:10px!important;row-gap:6px!important;align-items:start!important;--kaw:76px!important;--kah:76px!important;min-height:0!important}
-html body .pc>.pcr button.ka.kart>.kaart{grid-column:1!important;grid-row:1!important;width:76px!important;height:76px!important;flex:none!important;align-self:start!important}
+html body .pc>.pcr button.ka.kart{--kpa:84px;display:grid!important;grid-template-columns:var(--kpa) minmax(0,1fr)!important;column-gap:10px!important;row-gap:6px!important;align-items:start!important;--kaw:var(--kpa)!important;--kah:var(--kpa)!important;min-height:0!important}
+html body .pc>.pcr button.ka.kart>.kaart{grid-column:1!important;grid-row:1!important;width:var(--kpa)!important;height:var(--kpa)!important;flex-basis:var(--kpa)!important;flex:none!important;align-self:start!important}
 html body .pc>.pcr button.ka.kart>.kabody{grid-column:2!important;grid-row:1!important;min-width:0!important}
 html body .pc>.pcr button.ka.kart>.kpabox{grid-column:1/-1!important;grid-row:2!important;display:flex!important;flex-direction:column!important;gap:3px!important;min-width:0!important;padding:6px 8px!important;border:1px solid var(--k-hair,#e6d3ac)!important;border-radius:6px!important;background:var(--k-card2,rgba(255,250,235,.7))!important;font-size:.78rem!important}
 html body .pc>.pcr button.ka.kart>.kpabox .klead{display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important}
@@ -1099,6 +1099,8 @@ html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krl{font-size:.66rem!imp
 html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
 html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krv>*{white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
 html body .pc>.pcr button.ka.kart>.kpabox:empty{display:none!important}
+@container kpane (max-width:420px){html body .pc>.pcr button.ka.kart{--kpa:68px}}
+@container kpane (min-width:600px){html body .pc>.pcr button.ka.kart{--kpa:96px}}
 `;document.head.appendChild(st)})();
 /* KIT §6.3 — kitPcActSplit(b): the row that is NOT Tốn / Được (Cần, Bại, Mất, Kèm, Ghi chú, Vì sao, hint) and the lead sentence move into ONE full-width box (.kpabox) under the picture + title block.
    Idempotent; runs after every normalisation / render (scan below), so no host calls it by hand. */
