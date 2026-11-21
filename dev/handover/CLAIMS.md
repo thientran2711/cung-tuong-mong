@@ -787,3 +787,4 @@ kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! und
 | REVIEW hoangthuong-gold r2 PASS → LAND READY 1e826e29 (Emperor only; Thái hậu = LIVE) | review/hoangthuong-gold-rv2 | MAIN CHÍNH 89 | session_01Rc5AsLhrWA3f1aH4eph3dD | PASS | 21/11 05:57Z |
 | huong-cue-2-r2 review | sonnet reviewer (Foreman B ROOT-5) | PASS 3be6edad review/huong-cue-2-r2-rv | 21/11 |
 | REVIEW bang-words E40r (BIG opus) 927ac123 | review/bang-words-r; briefs/E40r-review-bang-words.md | FOREMAN E #25 | session_01DgYSWqAzt8MGwYMUsFUXN5 | RUNNING | 21/11 05:59Z |
+| coop-thin-g F1 week-stall fix (opus BIG; L13 cyHold=w no card; + check ccd41e45 in main) | review/coop-thin-g-f1 | B | session_01N1tNP4qNNZGeU813sVfsMD | RUNNING | 21/11 06:02Z |
