@@ -21,3 +21,6 @@ Branch review/coop-emo-seat c09e3a5d (pushed), from LIVE aee7ff84. WIP, NOT read
 
 ## Suggested root fix (for the successor to verify)
 p.emo of a world person should not be numerically merged. Make it host-authoritative in the merged week: in toCanon on the guest (or in the server merge), carry the BASE p.emo for every NPC, as HOST_ONLY does for world S keys. Her own act's feeling on an NPC then reaches the host as an op (or is dropped: decide with D). Keep the emoSet guard only if it is still needed after that. Then run coop-emo-seat 12× (4 in parallel is fine), coop-e2e, coop-hl tests, quickcheck, emo BIG tests (emo-men, emo-seal-persist, feel-shown, feelings18, game-feel).
+
+## COOP-EMO-SEAT #2 start (21/11 ~08:05Z)
+session_01964izG1vuu39FQLbioHU1N, depth 6, START_CTX ~4% of 1M (roll at 29%, ceiling 60%). Taking over review/coop-emo-seat c09e3a5d. Plan: make NPC p.emo host-authoritative in toCanon/merge.
