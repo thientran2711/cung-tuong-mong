@@ -42,3 +42,6 @@ Source copied from: dev/art/rank8-s62/s62_t8.txt = the ORIGINAL t8 prompt (store
 - Gates: check_store tp8 a22 PASS + keep_check PASS on both. Commit 9cd5fdf.
 - Risk: the verbatim words contain "jewelled" (the L1840 red-on-clothing cause); now the A46 sentence "red gems ONLY on the crown" sits beside it in both.
 - Draw: VE4 blocked (needs approval for maid gens) → sent to VE6 session_01D3E3NavF2AADAvmzPDhZC5, 2×55 cr, same settings; VE6 reports ids to #24.
+
+## HANDOVER 2 (idle, per #25 08:05Z)
+depth 6 · coordinator now Foreman C #25 session_01D3E3NYNncNzWuep6yvbxRe (#24 stopped). L1855 prompts done (9cd5fdf). Drawing: sent to VE6 session_01D3E3NavF2AADAvmzPDhZC5; #25 moved it to VE9 session_01D3E3NY6tdajnq7tHvQhexg unless VE6 already started — #25 to check for a double draw. Open: owner verdict on L1855 pair; "jewelled" in the original verbatim collar words may bring back red on clothing.
