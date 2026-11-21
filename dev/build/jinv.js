@@ -443,7 +443,7 @@ function kitShopDet(o){const x=(o.list||[]).find(y=>y.k===o.det);if(!x)return"";
 function kitShopBody(o){const key=o.key||"shop";const money=o.money?o.money():0;o.list=kitShopList(o);o.q=o.q||{};
  const tabs=o.sell?`<div class="pctabs kcattabs kshtabs" role="tablist">${kitTabRowHTML([{k:"buy",label:"Mua"},{k:"sell",label:"Bán"}],o.mode==="sell"?"sell":"buy",`data-kshop="${key}" data-kshtab`)}</div>`:"";
  const kinds=o.kinds.length?`<div class="pctabs kcattabs kshkinds" role="tablist">${kitTabRowHTML(o.kinds.map(t=>({k:t.k,label:t.label,n:t.n,tip:`${t.n} món`})),o.cat[o.mode],`data-kshop="${key}" data-kshkind`)}</div>`:"";
- const empty=o.mode==="sell"&&!o.list.length?`<p class="past kshempty">${(o.sell&&o.sell.empty)||"Chưa có gì để bán."}</p>`:"";
+ const empty=o.mode==="sell"&&!o.list.length?kitEmpty("Ta chưa có gì để bán",[(o.sell&&o.sell.empty)||"Đồ thêu, tranh, chữ… làm ra khi luyện tài nghệ; đồ trong rương Tư trang cũng bán được."],{topic:"Bạc"}):"";
  return `<div class="kshop" data-kshop="${key}"><div class="kshl">${o.info||""}</div>${tabs}${kinds}`+
   (empty||`<div class="kshg">${o.list.map((x,i)=>kitShopTile(o,x,i)).join("")}</div>`)+(o.det!=null?kitShopDet(o):"")+`</div>`}
 function kitShop(o){o=o||{};const key=o.key||"shop";o.q={};o.det=null;o.mode="buy";if(window.__kshData)return o;/* coop-thin F3: the shop's DATA only (kitShopBuy on the host, her context): no modal, the open shop (KSHOP.reg) untouched */KSHOP.reg[key]=o;
@@ -562,5 +562,5 @@ function kitShopNvp(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";
  return kitShop({key:"nvp",title:"Nhờ thái giám mua đồ",carry:9,
   info:"",
   stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:nm,__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],items,money:()=>S.bac,
-  sell:{items:kitShopSellItems,empty:"Chưa có gì để bán. Đồ thêu, tranh, chữ… làm ra khi luyện tài nghệ (mục Tài nghệ); đồ trong rương Tư trang cũng bán được."}})}
+  sell:{items:kitShopSellItems,empty:"Đồ thêu, tranh, chữ… làm ra khi luyện tài nghệ (mục Tài nghệ); đồ trong rương Tư trang cũng bán được."}})}
 if(typeof invAct==="function"){const ia0=invAct;invAct=function(a){if(a==="shop"&&S&&!S.dead&&!Q.length&&typeof kitShop==="function"){try{kitShopNvp();render();return}catch(e){console.error("kitShop",e)}}return ia0.apply(this,arguments)}}
