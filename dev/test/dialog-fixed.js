@@ -57,6 +57,24 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
   {const r=await p.evaluate(async()=>{Q.length=0;Q.push({t:'Thử mất',h:'<p>Một việc có giá, có lợi và có thể mất.</p>',opts:[{n:'Nhận lời nàng',fx:{},x:'tốn: 1 khắc · thành: Sủng +2 · mất: Danh -3',go:()=>{}},{n:'Từ chối khéo',fx:{},x:'tốn: không · mất: Đức -2',go:()=>{}}]});showModal();await new Promise(r=>setTimeout(r,700));const d=document.querySelector('#modal .dlg');return [...d.querySelectorAll('.opts>button.ka')].filter(b=>b.offsetParent).map(b=>{const rows=[...b.querySelectorAll('small.kb>.kr')].filter(x=>x.querySelector('.krl').getClientRects().length).map(x=>[(x.querySelector('.krl')||{}).textContent,(x.querySelector('.krv')||{}).textContent.trim()]);return rows})});
    await p.screenshot({path:`${OUT}/${tag}-72-mat-row.png`});
    chk(`${tag} (#72) cards show Tốn / Được / Mất rows, the loss not inside Tốn`,r.length===2&&r.every(rows=>Array.isArray(rows)&&rows.some(x=>x[0]==='Mất')&&rows.some(x=>x[0]==='Tốn'&&!/Danh|Đức/.test(x[1]))),r)}
+  /* (i) #71 owner 21/11 ~05:02Z: EVERY dialog uses a kit frame size S / M / L / XL (data-ksz) and has that size's width (law 10) - the Fold «Sai … đi dò la» dialog had a size of its own. Every kind is opened for real. */
+  {const rows=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const res=[];const FW=KIT_SIZE.frame,mode=kitSzMode();
+    const meas=async(name)=>{await sleep(1500);const L=[...document.querySelectorAll('.dlg,.dbox.kpanel')].filter(d=>{const r=d.getBoundingClientRect();return r.width>5&&r.height>5&&!d.closest('[hidden]')&&!d.closest('#kload')&&getComputedStyle(d).visibility!=='hidden'});
+     L.forEach(d=>{const r=d.getBoundingClientRect(),k=d.dataset.ksz||'';const want=FW[k]?Math.min(FW[k].w[mode],innerWidth-16):null;res.push({name,cls:d.className.slice(0,50),ksz:k,w:Math.round(r.width),want,ok:!!FW[k]&&Math.abs(r.width-want)<=2})});if(!L.length)res.push({name,none:1});
+     Q.length=0;document.getElementById('modal').hidden=true;['kidfl','ktip'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});try{kitCoachOff()}catch(e){}};
+    const who=pMaid(),nm='Cung nữ thân tín tam đẳng Bạch Lan';const mk=n=>Array.from({length:n},(_,i)=>({n:'Lựa chọn '+(i+1),fx:{},x:'tốn: 1 khắc · thành: biết thêm',go:()=>{}}));
+    for(const k of['notice','news','intel','result','threat','reward','info','rule']){try{kitPanel({kind:k,title:'Thử '+k,rows:[['Việc','Thử ấn']],facts:['Điều thử.'],sections:[{h:'',rows:[['a','b']]}]},true);showModal();await meas('kitPanel '+k)}catch(e){res.push({name:'kitPanel '+k,err:e.message})}}
+    for(const [nme,w,o,h] of[['choice',null,mk(2),'<p>Một việc.</p>'],['choice+person',who,mk(2),'<p>Một việc.</p>'],['pick-list+person',who,mk(9),'<p>Ngươi muốn dò la ai?</p>'],['long text',null,[],'<p>'+'Một đoạn rất dài. '.repeat(70)+'</p>'],['person+text',who,[],'<p>Có người.</p>']]){Q.length=0;Q.push({t:'Sai '+nm+' đi dò la',who:w,h,opts:o});showModal();await meas(nme)}
+    try{S.maid=S.maid||{};S.maid.name='Bạch Lan';S.bac=500;spyPick(2);await meas('spyPick (real pick-list)')}catch(e){res.push({name:'spyPick',err:e.message})}
+    try{kitConfirm({title:'Chắc chăng?',lines:['Một dòng.'],yes:'Có',no:'Thôi'});await meas('kitConfirm')}catch(e){res.push({name:'kitConfirm',err:e.message})}
+    try{kitItemCard({e:S.inv.find(x=>x&&IT[x.k])});await meas('item card')}catch(e){res.push({name:'item card',err:e.message})}
+    try{kitTip({id:'scan',title:'Lời dặn thử',html:'<p>Một lời dặn ngắn.</p>'});await meas('tip')}catch(e){res.push({name:'tip',err:e.message})}
+    try{kitCoach({title:'Dặn thử',html:'<p>Một lời.</p>'});await meas('coach')}catch(e){res.push({name:'coach',err:e.message})}
+    try{S.shop=Object.keys(IT).filter(k=>IT[k].pr).slice(0,12);kitShopNvp();await meas('shop')}catch(e){res.push({name:'shop',err:e.message})}
+    return res});
+   const bad=rows.filter(r=>r.err||r.none||!r.ok);
+   console.log(tag,'(#71) dialogs measured:',rows.map(r=>`${r.name}:${r.ksz}/${r.w}`).join(' | '));
+   chk(`${tag} (#71) every dialog (${rows.length} opened, ${new Set(rows.map(r=>r.name)).size} kinds) uses a kit frame size S/M/L/XL and its width`,!bad.length,bad.slice(0,6))}
   chk(`${tag} (#56) ${evs.length} dialogs with unlisted option titles, ${nCards} option cards: none without a picture`,!noPic.length,noPic.slice(0,6));
   console.log(tag,'summary',JSON.stringify(R.map(m=>[m.name,m.ksz,m.D.w+'x'+m.D.h,m.kol,m.fig&&m.fig.w+'x'+m.fig.h+'@'+(m.fig.y-m.D.y)])));
   chk(`${tag}: no page errors`,!errs.length,errs.slice(0,3));await ctx.close()}

@@ -675,3 +675,17 @@ window.kitScrollCues=kitScrollCues;
 .kscue.sib{position:static;height:auto;width:auto;text-align:center;padding:1px 0 0;pointer-events:none}.kscue.sib.on{display:block}.kscue.sib .kscc{position:static;transform:none;display:inline-block;font-size:.64rem}
 .kscue .kscg{position:absolute;left:0;right:0;bottom:0;height:36px;background:linear-gradient(to bottom,rgba(253,249,238,0),rgba(253,249,238,1) 42%)}/* r4: the chip sits in the SOLID lower part of the fade (never over readable text) */
 .kscue .kscc{position:absolute;left:50%;bottom:2px;transform:translateX(-50%);font-size:.66rem;line-height:1.25;font-weight:700;color:#7a5a1e;background:#fbf1d6;border:1px solid #c9a24a;border-radius:999px;padding:0 9px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.18)}`;document.head.appendChild(st)})();
+
+/* ================= #71 EVERY DIALOG = A KIT FRAME SIZE (owner 21/11 ~05:02Z, kit-dialog-2) =================
+   Owner (Fold «Sai … Bạch Lan đi dò la», a narrow dialog with one word per line): a dialog never has a size of its own; every dialog is S / M / L / XL (law 10).
+   The live v3 frame (kszlive) picks its size by content. Every OTHER dialog (page frames: pick-lists, sectioned pages, the item card, tutorial coach / tips, co-op rooms,
+   shop, the loading cover …, all of them "the one pop-up frame" of KIT §8.1) is a LEGACY page frame = KIT_SIZE.legacy.size (L), width from the SAME table:
+   `--kszW-S/M/L/XL` (html.kv1 / html.kv2) is generated from KIT_SIZE.frame, and the pop-up width `--kpw` is min(--kszW-L, screen − 28) (j79 :root). Nothing types 560 any more.
+   kitFrameTagAll() writes data-ksz on every .dlg / .dbox.kpanel that has none (one MutationObserver pass); the test dev/test/dialog-fixed.js (i) opens every dialog kind and fails on a
+   dialog without a kit size or whose width is not its size's width. */
+KIT_SIZE.legacy={size:"L"};
+(function(){const css=[];css.push("html body .modal.kpscene .dlg.kpsc:not(.kszf)[data-ksz]{width:var(--kpw)!important;max-width:var(--kpw)!important}");/* the scene cover frames (loading cover …): the kit width, never a width of their own */for(const m of["kv1","kv2"])css.push(`html.${m}{${["S","M","L","XL"].map(k=>`--kszW-${k}:${KIT_SIZE.frame[k].w[m]}px`).join(";")}}`);
+ const st=document.createElement("style");st.id="k-size-every";st.textContent=css.join("\n");document.head.appendChild(st)})();
+function kitFrameTagAll(){try{document.querySelectorAll(".dlg:not([data-ksz]),.dbox.kpanel:not([data-ksz])").forEach(d=>{d.dataset.ksz=KIT_SIZE.legacy.size})}catch(e){}}
+window.kitFrameTagAll=kitFrameTagAll;
+(function(){const go=()=>{kitFrameTagAll();try{new MutationObserver(()=>{kitFrameTagAll()}).observe(document.body,{childList:true,subtree:true})}catch(e){}};if(document.body)go();else addEventListener("DOMContentLoaded",go)})();
