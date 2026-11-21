@@ -420,3 +420,36 @@ Family scan (law 11): `grep "Đã hiểu|Tiếp|Đóng)/.test(b.textContent.trim
 | f108a7da | **KIT REQUEST** (dev/kit/KIT_REQUESTS.md): night card (jne kitNightEnd) has NO end button in reduced motion — j93 kmStage red → finish() at 0 clears `T`, which held jne's `st.later(0, fin)` (.km-done shows the button); manual scene = no hint. Scan: 5 manual kmStage scenes, only jne uses st.later → 1 site. Kit keeper's part (law 9), not changed here. | KIT (FOR B) |
 static @34052c15: one-core guard PASS · undef-scan PASS.
 Full lane (night ×5, TRIP ×5, g4/g4s, e2e level-0 tt/nc ×3 both orders, e2e THIN13 both, cyc/cycs, f3s–f6bs, timer, perf) RUNNING @f108a7da (detached; logs /home/user/wt/lane).
+
+### F1 FIX #2 — lane results @f108a7da (main 35232176), detached, one Worker (THINMAX 13)
+| suite | result |
+|---|---|
+| night THIN=13 ×5 (new bot b07ec7ea) | **5/5 105/105, 0 stall** (first lane, old bot: run 4 stall = night card kne-ov over her dress board, see KIT REQUEST) |
+| TRIP=1 WEEKS=36 swap ×5 | **5/5 82/82, 0 stall, 0 seat desync** (180 stress weeks; + 1 earlier run 82/82). The F1 #1 «wk9 desync» did NOT come back — not reproduced in 6 runs |
+| g4 / g4s | 18/18 · 18/18 |
+| coop-e2e level 0 tt/nc ×3 both orders | 6/6 92/92 |
+| coop-e2e THIN13 / swap | 92/92 · 90/92 under 2-lane load (Thái hậu picture not yet on one seat in 20 s) → alone 92/92 |
+| cyc / cycs THIN=13 | 66/66 · 66/66 (also 2× each earlier) |
+| timer THIN=13 | 43/43 (alone) |
+| f3s / f4s / f5s | 37/37 · 18/18 · 30/30 |
+| f6s | A-dup red 4× (her phone had 2 open cards from the new deal → act refused) → **fixed 097a8e91** (staging: answer them / re-deal); 9 more runs: A-dup 0 red; 2 single flakes on other rows: S1 «Mua chuộc» (servant first-meeting, no cost: random servant) and «Múa trong yến tiệc» (twin khắc `left` 6 vs host 9 in the mood log line = solo twin clock) — TEST TWIN / staging, intermittent ~1/9 each, not game |
+| f6 (no swap) | 41/41 |
+| f6bs | L3 (review r1 FOR worker) **fixed 097a8e91** (snapshot counts the sit e.ex.n) → 41/41 |
+| perf MONTH=1 CPU=4 | her week end in ctx b **+33.1 %** (≤ 40 %) PASS |
+| role-parity | ALL PASS |
+| one-core / undef-scan | PASS @34052c15 and @066ef17d |
+| quickcheck 097a8e91 | old save loads + plays (Đào Dao Quang) PASS; G4 mk-layer / anchor red = sparse worktree without dev/art (r1 same note); **perf buổi 4344 vs live 1354 ms (limit 2854) RED — 2 of 3 runs slow (1259 / 4787 / ~4344)** → RECHECK on the new merge (not yet known if noise; render / tab / open fine) |
+
+### Merges after the lane
+| sha | what |
+|---|---|
+| 097a8e91 | test staging f6 A-dup + f6b L3 (above) |
+| 066ef17d | **merge LIVE origin/main d541add9** (109 build files). Conflicts: jentry / jkc (our kcPhucEnd / kcPhucGame seams kept, main's entBotRaw / entSkipRaw values taken), jrcv (our coopAccepted road kept + main's cold-faction PEND.rcvAsk), KIT_REQUESTS (both). one-core + undef PASS. **NO suite run yet on 066ef17d.** |
+
+## ROLLOVER HANDOVER F1 #2 → #3 (11/21/2026; context ≈ START 4 % + 25 %) — Foreman B opens the successor
+Branch **review/coop-thin-g-f1 @066ef17d** (pushed; contains LIVE d541add9). F1 fixed (56828ae6); the 3 post-LIVE reds were TEST BOT family (fixed e6a5feeb / b07ec7ea), proven on the full lane above @f108a7da. Successor:
+1. **Seat-guard family (law 11, G) on the NEW main code** — d541add9 added raw seat reads that at L13 run on the host in her context (CW.gWk, her week end) and so must follow coopGuest() / ctx like the 30 earlier sites: scan `git diff 35232176 066ef17d -- dev/build ':!dev/build/all.js' | grep '^+' | grep -n 'seat[!=]=="a"\|guest()'` → j61 k61GuestOwn / k61HostCopy / k61CoopFr / k61Shared (5 `W.seat`), jbancung bcNpcAsk `hostOK=!cw||COOPW.seat==="a"` (host runs every NPC ask; inside her week end on the host = a second NPC ask?), emo guest() / emoOff / emoRec / mkSync wrap (emo-balance, COOPW.inFC/emoHost), jcooptimer +134, jcoopone +58, jcoopworld +49. For each: old vs new value at CW.gWk; change only where her week end on the host would run host-only work or skip hers (before/after table).
+2. Rebuild is in the commit; run on 066ef17d: g4 / g4s, night ×2, TRIP swap ×2, e2e THIN13 both, cyc / cycs, timer, f3s–f6bs, e2e level-0 tt/nc both, perf, role-parity, **quickcheck perf buổi recheck** (if still > limit: compare with origin/main d541add9 itself to see if it is G or main).
+3. Then '## F1 FIX' verdict + SẴN SÀNG KIỂM coop-thin-g-f1 <sha> TIER BIG to Foreman B ROOT-6 session_01N1tNP4cmMULveQru19PTCj (+ FOREMAN_B_STATUS line).
+FOR B: KIT REQUEST night card (jne kitNightEnd) no end button in reduced motion — kit keeper (dev/kit/KIT_REQUESTS.md on the branch).
+Setup: local Worker `cd coop/worker && npm install && setsid nohup npx wrangler dev --port 8787 --ip 127.0.0.1 &` (detached: background tool jobs are cut at 2 h); build `python3 dev/build/assemble.py && bash dev/site/build_site.sh` (tests read dev/index.html); lane script pattern = dev/test/coop-thin-g-reg.sh (2 parallel queues max on 4 cores; TRIP runs ≈ 40 min each under load, cap ≥ 6000 s). Never rebuild while a suite runs in the same worktree.
