@@ -390,3 +390,4 @@ The diff is only:
   - jade-set wording.
 Verdict: **PASS** (t5 COMOIh = PASS in job 14). Not sent to GEN1; Foreman C #16 releases.
 Note: the t4 front-panel words lost "embroidery". The master "all flowers … are fine silk-thread embroidery" still covers it, but "lotus-embroidered panel" would be safer.
+- JOB 15 re-check (DESIGN20 702cdfe): t4 COMOIi front panel = "lotus-embroidered blush panel" ✓; "a few small" → "small" lotus on the sleeves; "small" dropped from the lamp. Gates + keep PASS, 9986 chars. **PASS**, text only (Foreman C #16: no gen).
