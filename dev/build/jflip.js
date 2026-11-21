@@ -248,7 +248,10 @@ window.cfBusy=()=>{for(const j of JOBS)if(!j.v)return true;return false};
 window.cfAge=()=>{let a=0;const n=Date.now();for(const j of JOBS)if(!j.v)a=Math.max(a,n-j.t);return a};
 window.cfDrop=()=>{dbg('drop');for(const j of JOBS)j.v=1;try{cur&&cur.close&&cur.close()}catch(e){console.error(e)}};
 function cfJob(){const j={t:Date.now(),v:0};JOBS.add(j);return j}
-function cfPlay(plan){dbg('push '+plan.wk);const gen=life;CFN++;let out=0;const j=cfJob();kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1);JOBS.delete(j)}done0()};dbg('run');const go=()=>{try{
+/* the flip scene ends (closed, voided, stale): jnf's step runs right after (next task), not on its own 250 ms tick — the choice due now goes up
+   in front of any dialog that waited behind the scene (a gift, a person met) (night-final case 7, NLC #10). Never inside the closing tap itself:
+   the choice shown while that tap is still dispatched was answered by it (tap-through, Thôi at once) */
+function cfPlay(plan){dbg('push '+plan.wk);const gen=life;CFN++;let out=0;const j=cfJob();kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1);JOBS.delete(j);setTimeout(()=>{try{if(typeof window.nfStep==="function")window.nfStep()}catch(e){console.error(e)}},0)}done0()};dbg('run');const go=()=>{try{
    if(gen!==life){dbg('life');done();return}
    if(j.v){dbg('void');done();return}   /* jnf dropped it (the choice went up without it): never a flip scene after the choice */
    const cw=window.COOPW;if((cw&&cw.on&&cw.pend)||busy()){setTimeout(go,300);return}   /* co-op: wait for the merged week, both players see it together */
