@@ -1124,3 +1124,4 @@ NEWACCT#18 ~07:25Z: OWNER L1701: try-on page sloppy (not fitted per flap/hand; l
 NEWACCT#18 ~07:30Z: L1703 sent per-season family sheet pal_L1679/bangmau_theomua.png (0 cr). Next Lượt 1704.
 NEWACCT#18 ~07:35Z: OWNER L1704: L1679 palette too vivid/garish ('rực kinh khủng', esp. s33–s42), drifting from game style → NOT approved; rework spec added to ROOT19 takeover. Next Lượt 1705.
 NEWACCT#18 ~07:40Z: OWNER L1705 palette distribution (hạ = yellow+orange, blue→đông, even spread) added to ROOT19 takeover. Next Lượt 1706.
+NEWACCT#18 ~07:45Z: OWNER L1706: do NOT bulk-revert t4–t8 — first list every change made after the m19/m29/s65 sets, with before|after pictures, she picks per change; revert step by step. Added as STEP 0 in ROOT19 takeover. Next Lượt 1707.
