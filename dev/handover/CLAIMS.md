@@ -770,13 +770,13 @@ bag-inline-2 rv | review/bag-inline-2-rv 72fc5dd1 | rv session | FAIL (ts strip 
 | ending-screens-2 (opus; owner marks #52 #84; MAIN 88 ORDER) | review/ending-screens-2; briefs/b5-ending-screens-2.md; reports/ending-screens-2.md | B | session_01N1tNP62bqNSeKx77seTxeP | SẴN SÀNG KIỂM e8847011 (BIG; base 666def0c; ART REQUEST posted to C) | 21/11 06:05Z |
 | REVIEW mg-intro-2 (sonnet SMALL; #55; MAIN 88 ORDER) of b21609fc | review/mg-intro-2-rv; briefs/b5-rv-mg-intro-2.md | B | session_01N1tNP4xiA2xLsJRTgEi9xb | PASS 18d1b014 | 21/11 05:13Z |
 | dialog-person-3 (sonnet; #73 + eye checks; MAIN 88 ORDER) | review/dialog-person-3; briefs/b5-dialog-person-3.md | B | session_01N1tNP2WnsRXnfw6mNSQXFw | RUNNING | 21/11 05:13Z |
-| huong-cue-2-r2 fixer (sonnet; jnwp/mg-noword-b conflict vs mg-5s-clear; MAIN 88 ORDER) | review/huong-cue-2-r2; briefs/b5-huong-cue-2-r2.md | B | session_01N1tNP2UKo2mtcZUCmPW2tC | RUNNING | 21/11 05:13Z |
+| huong-cue-2-r2 fixer (sonnet; jnwp/mg-noword-b conflict vs mg-5s-clear; MAIN 88 ORDER) | review/huong-cue-2-r2; briefs/b5-huong-cue-2-r2.md | B | session_01N1tNP2UKo2mtcZUCmPW2tC | PASS 3be6edad (handed to MAIN) | 21/11 05:13Z |
 kit-act-grid rv | review/kit-act-grid-rv d65e535b | rv session | PASS | 21/11
 bag-inline-2 rv2 | review/bag-inline-2-rv2 c1f7733b | rv session | PASS | 21/11
 | kit-info-fixed KIT KEEPER (sonnet; #86 option A person info block fixed height, one line per row, «!» for long text) | review/kit-info-fixed; reports/kit-info-fixed.md | MAIN CHÍNH 88 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM d7adcc1b (quickcheck PASS, coop-e2e 92/92) | 21/11 |
 | REVIEW hoangthuong-gold (#3 gold regression) PASS → LAND READY c2857875 | review/hoangthuong-gold-rv | MAIN CHÍNH 89 | session_01Rc5AsLhrWA3f1aH4eph3dD | PASS | 21/11 05:33Z |
 | huong-cue-2-r2 FIXER (sonnet; merge LIVE 666def0c keeping mg-5s-clear + huong-cue-2) | review/huong-cue-2-r2; reports/huong-cue-2-r2.md | FOREMAN B ROOT-5 | session_01N1tNP2UKo2mtcZUCmPW2tC | SẴN SÀNG KIỂM 77935d60 (quickcheck PASS, coop-e2e 92/92) | 21/11 |
-| REVIEW huong-cue-2-r2 (sonnet SMALL) of 77935d60 | review/huong-cue-2-r2-rv | B | session_01N1tNP3cbtr6FBfRzT1sJqn | RUNNING | 21/11 05:36Z |
+| REVIEW huong-cue-2-r2 (sonnet SMALL) of 77935d60 | review/huong-cue-2-r2-rv | B | session_01N1tNP3cbtr6FBfRzT1sJqn | PASS 3be6edad | 21/11 05:36Z |
 kit-ghichu-sections rv2 | review/kit-ghichu-sections-rv2 cfde1cc4 | rv session | PASS | 21/11
 | REVIEW kit-dialog-2 (SMALL sonnet) 198825c5 (#71 #75 #76 #80 #82) | review/kit-dialog-2-rv; briefs/main89-rv-kit-dialog-2.md | MAIN CHÍNH 89 | session_01Rc5AsMaLLvZ2wrtmc2Tjti | RUNNING | 21/11 05:41Z |
 | REVIEW ending-screens-2 r1 (opus BIG) of e8847011 | review/ending-screens-2-r1 | B | session_01N1tNP2Qz7ZpRucbeYRu2hN | RUNNING | 21/11 05:45Z |
