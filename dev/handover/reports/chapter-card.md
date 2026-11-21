@@ -27,3 +27,11 @@ Not changed: Việc nhờ / Sổ ghi cards (q72Card option cards = a different k
 
 ## Handover / open
 No art request (reused kitOriginArt / kitInfoArt). Kit keeper OK of the draft part pending. ~95% xong / ~95% chơi được.
+
+## ROUND 2 (addenda marks #28/#29 from MAIN 85, #43 from MAIN 86) — sha 52657663, base LIVE 56ff0db0 merged
+PRIORITY #1 CHECK: OD rows «21/11 ~03:05Z/~03:07Z/~03:45Z real» | main none | review/* only this branch | claims chapter-card. Note: r1 (3d52f838) missed the ~02:43Z addenda (they reached me while I was busy); fixed here.
+- NEW kit part `kitSlide` (dev/build/jkslide.js, KIT.md §21c, kit sample §21c, DRAFT for the kit keeper): wide 21:9 picture with «Chương N / tên / Hồi x/y» written on it, arrows + swipe, rows below follow the slide, «Mục lục» button in the bottom-right corner opens the chapter list (done/now/next), no chapter list printed.
+- Applied: Mệnh truyện › Chương này (past chapters + current slide; Đi làm inside the current slide), Đã qua (every closed chapter + rare endings), Triều cục (the six chapters, hồi checks inside the slide, the «Chương 1…6» list removed).
+- #43: info/chapter dialog (kitGoalDetail + every `.kpb.kpinfo>.kpsubj.kpiart.kpev`): picture fills its column (kv2: 40 % column, 1.5x act height, cover); kv1 (Fold) stacks a 16:9 band over the rows (the dialog is ~250 px, the 170 px tile had squeezed the text to 64 px). KIT.md §21d.
+- Chapter-place scan (whole group): slide = Chương này, Đã qua, Triều cục. Big card (not a slide, one chapter only) = Sắc phong, Tâm nguyện, Phụ tuyến card. NOT converted (not a chapter list, single cards): khuê các «Chương ngoài cung / Tuyển tú / Thanh mai» (jkc.js:631, jkc2.js:454), home chapters. Open for MAIN: say if those should become a slide too.
+- Tests @52657663: QUICKCHECK PASS (core gates PASS, old save ok); coop-e2e tt/nc 92/92; chapter-detail.js all ok (selectors updated to the slide); shots Fold + iPad of ms, past, rg, rg2 (swiped), rgm (Mục lục popup), dlg looked.
