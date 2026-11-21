@@ -106,8 +106,10 @@ function dcLenders(to,fams){const D=BAL.dc.bor;const L=[];if(typeof rivals==="un
 function dcBorrow(to,from,e){const D=BAL.dc;const inv=dcInv(from);const i=inv.indexOf(e);if(i<0)return false;inv.splice(i,1);
  try{if(typeof ilUid==='function')ilUid(e,from)}catch(x){}/* every lent piece carries its ledger id: the book finds it by id when another rule strips the loan mark */
  const b=Object.assign({},e);delete b.w;b.bor={from:dcOwnKey(from),to:dcOwnKey(to),due:dcWk(),id:`${dcWk()}:${b.k}:${dcOwnKey(from)}>${dcOwnKey(to)}`};const w=wdOf(to);const sl=(WD_ITEMS[b.k]||{}).sl;
- if(sl==="tram"){const prev=w.tram;if(prev)dcInv(to).push(Object.assign(prev,{dcPrev:1}));w.tram=b}else dcInv(to).push(b);
- /* the guest: the NPC side is the host's (her copy of the NPC is replaced at the week merge) */
+ /* the guest lending to an NPC: the NPC side is the HOST's («dcin» below). Her copy of the NPC is left alone: a piece put on it was her
+    dialog act, the week merge kept it over the host's return and the NPC wore it one tuần more on both seats (r4) */
+ const gLend=dcGuest()&&from===S&&to!==S&&!to.coop;
+ if(!gLend){if(sl==="tram"){const prev=w.tram;if(prev)dcInv(to).push(Object.assign(prev,{dcPrev:1}));w.tram=b}else dcInv(to).push(b)}
  dcRec(from,b);
  if(dcGuest()){if(to===S&&from!==S&&!from.coop)dcAsk("dcout",{bid:b.bor.id,from:from.id,pk:e.k,due:b.bor.due,b:dcSnap(b)});else if(from===S&&to!==S&&!to.coop)dcAsk("dcin",{bid:b.bor.id,to:to.id,e:b,wear:sl==="tram"?1:0})}
  try{affAdd(from,to,-D.bor.use);affAdd(to,from,D.bor.thanks)}catch(x){}/* the same for everyone: the lender spends goodwill, the borrower owes thanks */

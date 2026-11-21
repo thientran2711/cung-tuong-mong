@@ -105,7 +105,8 @@ async function weeks(A,B,n,tag){for(let i=0;i<n;i++)await weekAll(A,B,tag+'.'+i)
  /* set-up on the HOST (the world's owner): NPC L lends, NPC K will ask; one trâm of a needed colour in L's chest */
  const P=await A.p.evaluate(()=>{const R=rivals.filter(v=>v&&v.alive&&!v.out&&!v.confined&&!v.coop&&v.id<900);const L=R[0],K=R[1];
    const k=Object.keys(BAL.dc.piece).find(k=>WD_ITEMS[k]&&WD_ITEMS[k].sl==='tram'&&!WD_ITEMS[k].nt&&BAL.dc.piece[k][0]==='do');
-   L.inv=(L.inv||[]).filter(e=>!(WD_ITEMS[e.k]&&WD_ITEMS[e.k].sl==='tram'));L.inv.push({k,from:'emp',tg:2});return{L:L.id,K:K.id,k}});
+   L.inv=(L.inv||[]).filter(e=>!(WD_ITEMS[e.k]&&WD_ITEMS[e.k].sl==='tram'));L.inv.push({k,from:'emp',tg:2});/* r4: and a yellow one — her own painted robe may already show red; the gate offers a loan only for a colour she lacks */
+   const k2=Object.keys(BAL.dc.piece).find(k=>WD_ITEMS[k]&&WD_ITEMS[k].sl==='tram'&&!WD_ITEMS[k].nt&&BAL.dc.piece[k][0]==='vang');if(k2)L.inv.push({k:k2,from:'emp',tg:2});return{L:L.id,K:K.id,k,k2}});
  ok(P.k&&P.L!=null&&P.K!=null,'set-up on the host: NPC lender with a red trâm',P);
  await weekAll(A,B,'0');
  ok((await npcHas(B,P.L,P.k)||{}).inv===1,'set-up reached the guest (NPC chest from the host world)',await npcHas(B,P.L,P.k));
@@ -114,14 +115,16 @@ async function weeks(A,B,n,tag){for(let i=0;i<n;i++)await weekAll(A,B,tag+'.'+i)
    S.inv=(S.inv||[]).filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='tram'||e.dcPrev);wdOf(S).tram=null;
    const G=dcGateItem(Object.assign({k:'newyear'},FEST.newyear),dcStat(S,'newyear'));const o=G.opts.find(o=>/^Mượn /.test(o.n)&&o.n.includes(v.name));if(!o)return{no:G.opts.map(o=>o.n)};
    o.go();const w=wdOf(S);return{road:o.n,worn:w.tram&&w.tram.k,bor:w.tram&&w.tram.bor,ask:(S.coopAsk||[]).filter(a=>a.k==='dcout').map(a=>a.id),npcLocal:(v.inv||[]).filter(e=>e.k===k).length}}finally{aff=a0;Q.length=0}},[P.L,P.k]);
- ok(bw.road&&bw.worn===P.k&&bw.bor&&bw.bor.from==='id:'+P.L,'2 guest: «Mượn …» road offered and taken, she wears it',bw);
+ if(bw.worn)P.k=bw.worn;/* the piece she took (red or yellow) is the one followed below */
+ ok(bw.road&&bw.worn&&bw.bor&&bw.bor.from==='id:'+P.L,'2 guest: «Mượn …» road offered and taken, she wears it',bw);
  ok(bw.ask&&bw.ask.length===1,'2 guest: request dcout in her blob',bw.ask);
  ok(await until(A,([L,k])=>{const v=rivals.find(x=>x.id===L);return v&&!(v.inv||[]).some(e=>e.k===k)},[P.L,P.k],20000),'2 host: took the piece out of the NPC chest (relay, same week)');
- await weekAll(A,B,'2');
- {const ha=await npcHas(A,P.L,P.k),hb=await npcHas(B,P.L,P.k),me=await herHas(B,P.k);
-  ok(ha.inv===0&&hb.inv===0&&!ha.worn&&!hb.worn,'2 both seats after the merge: the NPC no longer has it',{ha,hb});
-  ok(me.worn&&me.bor||me.inv===1,'2 guest: she holds it (loan) after the merge',me);
+ /* during the festival tuần (r4: a loan lasts ONE tuần, «qua tuần sau trả»): she wears it, the host's NPC no longer has it */
+ {const ha=await npcHas(A,P.L,P.k),me=await herHas(B,P.k);
+  ok(ha.inv===0&&!ha.worn,'2 host during the tuần: the NPC no longer has it',ha);
+  ok(me.worn&&me.bor,'2 guest during the tuần: she wears it (loan)',me);
   const row=await B.p.evaluate(()=>{const e=wdOf(S).tram;return e&&e.bor?dcLoanRow(e):null});ok(row&&/^của /.test(row[1]),'2 guest: item detail loan row «Mượn của …»',row)}
+ await weekAll(A,B,'2');
  /* 3 next tuần it goes back: wait until her loan is gone, then the NPC has it on both seats */
  {let back=false;for(let i=0;i<4&&!back;i++){await weekAll(A,B,'3.'+i);const me=await herHas(B,P.k);back=!me.bor&&!me.worn&&me.inv===0}
   ok(back,'3 guest: the borrowed piece left her (given back)',await herHas(B,P.k));
@@ -140,7 +143,7 @@ async function weeks(A,B,n,tag){for(let i=0;i<n;i++)await weekAll(A,B,tag+'.'+i)
  ok(await until(A,([K,k])=>{const v=rivals.find(x=>x.id===K);const w=v&&wdOf(v);return !!(w&&w.tram&&w.tram.k===k&&w.tram.tg&&w.tram.bor&&w.tram.bor.from==='id:902')},[P.K,ak.k],20000),T+' host: the NPC wears the guest\'s piece (relay, same week)');
  if(stale){/* r4 fixed case (coop-dresscode «4 back», E37 run 1/5): HER copy of the NPC no longer shows the piece when her tuần ends (the host's world of an earlier moment); the book brings it home */
   const s=await B.p.evaluate(([K,k])=>{const v=rivals.find(x=>x.id===K);const w=wdOf(v);let n=0;if(w.tram&&w.tram.k===k&&w.tram.tg){w.tram=null;n++}v.inv=(v.inv||[]).filter(e=>!(e&&e.k===k&&e.tg&&++n));return{n,book:(S.dcLent||[]).map(r=>r.bid)}},[P.K,ak.k]);
-  ok(s.n===1&&s.book.length>=1,T+' guest: her copy of the NPC lost the piece (stale world), her loan book holds it',s)}
+  ok(s.n<=1&&s.book.length>=1,T+' guest: her copy of the NPC does not show the piece (stale world), her loan book holds it',s)}
  await weekAll(A,B,T);
  {const hb=await npcHas(B,P.K,ak.k);const me=await herHas(B,ak.k);ok((hb.worn||me.inv===1)&&!(hb.worn&&me.inv===1),T+' guest after the merge: either the NPC wears it or it already came back — never both',{hb,me})}
  {let done=false;for(let i=0;i<4&&!done;i++){const me=await herHas(B,ak.k),ha=await npcHas(A,P.K,ak.k),hb=await npcHas(B,P.K,ak.k);done=(me.inv+(me.worn?1:0))===1&&!me.bor&&!ha.worn&&!hb.worn&&ha.inv===0;if(!done)await weekAll(A,B,T+'b.'+i)}
