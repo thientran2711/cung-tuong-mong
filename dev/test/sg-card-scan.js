@@ -9,10 +9,34 @@
    An option is in the SG family when shown == applied with NO trait (its number is right) but differs with a trait (the multiplier
    was not drawn). FAIL on any SG-family row. Options that differ even with no trait are another fault (listed, not this family).
    Also the STATIC family list (every literal «Sủng ±N» text of the build) is printed with --static.
-   usage: node dev/test/sg-card-scan.js <url> [--table] [--static]      exit 1 when any SG-family row is left */
-const {chromium}=require('playwright');const URL=process.argv[2];const TABLE=process.argv.includes('--table');
+   usage: node dev/test/sg-card-scan.js <url | worktree dir (served from disk via coop-serve, no http server)> [--table] [--static]      exit 1 when any SG-family row is left */
+const {chromium}=require('playwright');const ARG=process.argv[2]||'.';const LOCAL=!/^https?:/.test(ARG);const URL=LOCAL?'http://ctm.local/':ARG;
+/* serve a built worktree from disk inside Playwright (no local http server; the root index.html the site build writes) */
+const serveDir=async(ctx,root)=>{const fs=require('fs'),path=require('path');root=path.resolve(root);const M={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.css':'text/css','.svg':'image/svg+xml','.mp3':'audio/mpeg'};
+ await ctx.route('http://ctm.local/**',route=>{let q=decodeURIComponent(new (require("url").URL)(route.request().url()).pathname);if(q.endsWith('/'))q+='index.html';const f=path.join(root,q);
+  if(!f.startsWith(root)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return route.fulfill({status:404,body:''});route.fulfill({status:200,contentType:M[path.extname(f)]||'application/octet-stream',body:fs.readFileSync(f)})})};const TABLE=process.argv.includes('--table');
+/* r2/r3 STATIC pass, also alone: node dev/test/sg-card-scan.js --static-only (no browser) */
+const staticPass=()=>{const fs=require('fs'),path=require('path');const D=path.join(__dirname,'../build');const rows=[];
+  const VER=[['jtoil.js','Sủng +1":"Sủng -1','±1: sg(±1) = ±1 for every trait'],['jtoil.js','?`Sủng ${f.aff>0?"+1"','±1 (aff>0) / NPC host'],['jmkt.js','Sủng ${n>0?"+":"-"}${Math.abs(Math.sign(n))}','±1 sign only: sg(±1) = ±1'],
+   ['j54.js','Sủng +${V.length}','each child ap(p,{sung:1}) once: sg(1) = 1 → sum = V.length'],['j71.js','Sủng +${V.length}','each child ap(p,{sung:1}) once: sg(1) = 1'],
+   ['j68.js','`Sủng ${n>0?"+":""}${n}`','e68 «emp» line: n = the measured/sgStat number of the e68 row (j68 fx6, rv r1)'],['jemoact.js','`Sủng của ${who} ${v}`:`Sủng ${v}`','label formatter: v comes in already drawn (eaN / sgStat)'],
+   ['jkitpage.js','','kit sample page (demo cards, kitParse draws them)'],['jstatfx.js','Sủng −3</button>','kit sample button (kitStatFx demo)'],['j87.js','Sủng ${wkeSign(d)}','measured week delta'],
+   ['jlost.js','${wdNmC(h)} mang tội lấy trộm: Danh ${LO.thief.danh}, Sủng ${LO.thief.sung}','NPC branch (h !== S)'],['j75.js','mỗi +2: Sủng +1','a ratio rule (Ân tình steps), not a change'],
+   ['jgift.js','thành: Sủng +2 đến +4, Ân tình +1, then','comment'],
+   ['j54.js','`Sủng mẹ +${g.sung}`','the mother is an NPC (x.p !== S): ap raw'],['j67.js','return `${v.name}: Sủng -${n}.`','NPC (v.sung -= n)'],['j92.js','AOUT.giahoa=["nàng mang tội','NPC act-outcome text (nàng …)'],
+   ['jface.js','a===S?"Sủng ngươi":`Sủng ${NM(a)}`','the label of sgOf(a, …) — the number is drawn by sgOf'],['j30.js','ốm 3 tháng (Sủng -4 mỗi tháng','the target (nàng) falls ill: NPC monthly rule']];
+  for(const f of fs.readdirSync(D).filter(f=>/^j.*\.js$/.test(f)&&f!=='jaudit.js'&&!/^jbal/.test(f))){const src=fs.readFileSync(path.join(D,f),'utf8').replace(/\/\*[\s\S]*?\*\//g,m=>m.replace(/[^\n]/g,' '));
+   src.split('\n').forEach((l,i)=>{const re=/Sủng(?: ngươi| ta| mẹ)? (?:[+\-−]\d|[+\-−]?\$\{)/g;let m;while((m=re.exec(l))){const pre=l.slice(Math.max(0,m.index-240),m.index),sn=l.slice(Math.max(0,m.index-60),m.index+40);let k;
+    const v=VER.find(([vf,vs])=>vf===f&&(!vs||l.includes(vs)&&sn.includes(vs.slice(0,8))||l.slice(Math.max(0,m.index-80),m.index+80).includes(vs)));
+    if(v)k='OK';else if(/(nàng(?: ta)?|của nàng|\$\{(?:v\.name|W|w\.name|NM\([^)]*\)|who|row\.name)\}|\p{Lu}\p{Ll}+)\s*$/u.test(pre.replace(/<[^>]*>/g,'')))k='NPC';
+    else if(/^Sủng \$\{(?:S|p|v|k|row|x)\.(?:sung|s)\b|^Sủng \$\{(?:Math\.round\(v\.sung|p\.sung\|0|N\.sung|RANKS|BAL\.st14|F14G|S\.sung)/.test(l.slice(m.index))||/cần Sủng|Sủng \$\{[^}]*\}\/\$\{|Sủng \$\{[^}]*\} →/.test(l.slice(m.index,m.index+40)))k='VALUE';
+    else if(/(?:\b(?:x|lx|duoc|mat|kem|need|gain|loss|use|u)\s*:\s*\[?\s*[`"]|R6\(|G6\(|kitParse\(|\bx=`|aoLz\(|rtX\(|get x\(\)\{return `|return `\$\{w\} · thành|const risk=`|r\.x=\(r\.x\|\|""\)\+`|pbtn\()[^]*$/.test(pre)&&!/(?:log\(|Q\.push\(|txt:`|L\.push\(`)[^]*$/.test(pre.slice(pre.search(/(?:\b(?:x|lx|duoc|mat|kem|need|gain|loss)\s*:\s*\[?\s*[`"]|R6\(|G6\(|kitParse\(|\bx=`|aoLz\(|rtX\(|pbtn\()[^]*$/)>=0?pre.search(/(?:\b(?:x|lx|duoc|mat|kem|need|gain|loss)\s*:\s*\[?\s*[`"]|R6\(|G6\(|kitParse\(|\bx=`|aoLz\(|rtX\(|pbtn\()[^]*$/):0)))k=/^Sủng(?: ngươi| ta| mẹ)? [+\-−]\d/.test(l.slice(m.index))?'TYPED':'CARD';else k='CHECK';
+    rows.push({k,at:`${f}:${i+1}`,t:sn.replace(/\s+/g,' '),why:v&&v[2]})}
+    const rg=/Sủng [+\-−]?\$\{[^}]*\}\s*(?:đến|\.\.|–)\s*[+\-−]?\$\{/.exec(l);if(rg)rows.push({k:'RANGE',at:`${f}:${i+1}`,t:rg[0]})})}
+  return rows};
+if(process.argv.includes('--static-only')){const ST=staticPass();const c={};ST.forEach(x=>c[x.k]=(c[x.k]||0)+1);const bad=ST.filter(x=>['CHECK','RANGE','TYPED'].includes(x.k));bad.forEach(x=>console.log(x.k.padEnd(5),x.at,x.t));console.log('static raw «Sủng ±» sites: '+Object.entries(c).map(([k,v])=>`${k} ${v}`).join(' · '));console.log(bad.length?'FAIL '+bad.length:'PASS');process.exit(bad.length?1:0)}
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
- const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
+ const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});if(LOCAL)await serveDir(ctx,ARG);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
  await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));await p.goto(URL,{waitUntil:'domcontentloaded'});
  await p.waitForFunction(()=>typeof start==='function'&&typeof PEND==='object'&&typeof kitParse==='function',null,{timeout:240000});await p.waitForTimeout(1500);
@@ -21,12 +45,12 @@ const {chromium}=require('playwright');const URL=process.argv[2];const TABLE=pro
   const T=[[],['nongnay'],['lanhlung'],['nongnay','lanhlung']];
   /* her Sủng in a row text: the same reading as the card law — «nàng / nàng ta / hắn / <Tên> Sủng», «của nàng», «nàng mất» are someone else's */
   const herS=t=>{let s=0,f=false;String(t||"").replace(/(^|[^\p{L}])(Sủng(?: ngươi| ta)?)[  ]([+\-−])(\d+)(?!\s*(?:\.\.|–|mỗi|\/))/gu,(m,pp,l,g,n,off,all)=>{const pre=all.slice(Math.max(0,off-40),off+pp.length);
-    if(/nàng(?: ta)? mất|của nàng|nàng ta\s*$/.test(pre))return m;const w=pre.match(/(\p{L}+)\s*$/u);if(w&&(/^(nàng|hắn|y|thị)$/.test(w[1])||/^\p{Lu}/u.test(w[1])))return m;
+    if(/nàng(?: ta)? mất|của nàng|nàng ta\s*$|đứng đầu \($/.test(pre))return m;/* «<Tên> dâng … đứng đầu (Sủng +N…)» = the winner's (j71 sgOf) */const w=pre.match(/(\p{L}+)\s*$/u);if(w&&(/^(nàng|hắn|y|thị)$/.test(w[1])||/^\p{Lu}/u.test(w[1])))return m;
     f=true;s+=(g==="+"?1:-1)*+n;return m});return f?s:null};
   const card=c=>{const d=document.createElement('div');d.innerHTML=dilLine(c);const R={};d.querySelectorAll('.kr').forEach(x=>{const k=(x.className.match(/kr-(\w+)/)||[])[1];const v=x.querySelector('.krv');R[k]=(R[k]?R[k]+' · ':'')+(v?v.textContent:'')});return R};
   const sum=(R,ks)=>{let s=0,f=false;for(const k of ks){const v=herS(R[k]);if(v!=null){s+=v;f=true}}return f?s:null};
   /* the ONE rewrite (j1 sgTxt) by hand, Hoàng thượng nồng nàn: her literal is scaled once; fmt / a second pass never scale again; someone else's Sủng stays raw */
-  const unit=[];{const k=S.emp.traits.slice();S.emp.traits=['nongnay'];const P=h=>kaPlainU(h);const kaPlainU=h=>String(h).replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+  const unit=[];{const k=S.emp.traits.slice();try{S.emp.traits=['nongnay'];const P=h=>kaPlainU(h);const kaPlainU=h=>String(h).replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
    const C=[['thành: Sủng +4','thành: Sủng +5'],['hỏng: Sủng -8','hỏng: Sủng -10'],['thành: nàng Sủng -3','thành: nàng Sủng -3'],['thành: nàng ta Sủng +3','thành: nàng ta Sủng +3'],['Lý Tần Sủng +3 · Hoàng thượng nghi ngươi','Lý Tần Sủng +3 · Hoàng thượng nghi ngươi'],['đêm vui, Sủng +3','đêm vui, Sủng +4'],['ngài lơ đãng: chỉ Sủng +1','ngài lơ đãng: chỉ Sủng +1']];
    for(const [a,w] of C){const g=P(sgTxt(a));if(g!==w)unit.push(`sgTxt «${a}» → «${g}», want «${w}»`);if(sgTxt(sgTxt(a))!==sgTxt(a))unit.push(`sgTxt twice scales again: «${a}»`)}
    const f4=fmt({sung:4});if(sgTxt(f4)!==f4)unit.push('fmt Sủng scaled twice by sgTxt: '+P(sgTxt(f4)));if(!/\+5/.test(P(f4)))unit.push('fmt({sung:4}) not +5: '+P(f4));
@@ -42,6 +66,17 @@ const {chromium}=require('playwright');const URL=process.argv[2];const TABLE=pro
    if(sgTxt(sgFix(2))!==sgFix(2)||P(sgFix(2))!=='Sủng +2')unit.push('sgFix (applied as is) rescaled: '+P(sgTxt(sgFix(2))));
    if(P(sgRule('x {sg:deck.cam.w.sung} y'))!==`x Sủng +${sg(BAL.deck.cam.w.sung)} y`)unit.push('sgRule deck token: '+P(sgRule('x {sg:deck.cam.w.sung} y')));
    if(P(sgRule('{sgRaw:tho.sung5} (thay {n:tho.sung})'))!==`Sủng +${BAL.tho.sung5} (thay +${BAL.tho.sung})`)unit.push('sgRule raw token: '+P(sgRule('{sgRaw:tho.sung5} (thay {n:tho.sung})')));
+   /* folded from review/kit-opt-sg (kit keeper, dev/test/kit-opt-sg.js): optLine + dilLine on synthetic options × traits — her literal x Sủng
+      scaled ONCE (no 2nd rewrite: 4 → 5, never 7), fmt(w)/fmt(fx) Sủng scaled once, someone else's («nàng Sủng -5», «Hoàn Bích Sủng -15») raw,
+      o.x left as written; then the real j7 «Tự trình lên Hoàng thượng» line: card == apply() */
+   for(const tr of [[],['nongnay'],['lanhlung']]){S.emp.traits=tr;const want=v=>(sg(v)>0?'+':'-')+Math.abs(sg(v));
+    const a={n:'Thử',x:'Khá chắc · thành: Sủng +4 · hỏng: Sủng -3 · kèm: nàng Sủng -5, Hoàn Bích Sủng -15',w:{sung:2}},c={n:'Thử',x:'Khó · thành: Danh +2, Sủng +3',fx:{sung:-2}};
+    const t1=P(optLine(a)),t2=P(kitParse(dilLine(c)));
+    if(!(t1.includes('Sủng '+want(4))&&t1.includes('Sủng '+want(-3))&&t1.includes('nàng Sủng -5')&&t1.includes('Hoàn Bích Sủng -15')&&t1.includes('Sủng '+want(2))&&a.x.includes('Sủng +4')))unit.push(`optLine ${tr} «${t1.slice(0,170)}»`);
+    if(!(t2.includes('Sủng '+want(3))&&t2.includes('Sủng '+want(-2))&&c.x.includes('Sủng +3')))unit.push(`dilLine ${tr} «${t2.slice(0,140)}»`);
+    const v=BAL.eff.j7.sungGo,s0=S.sung;const sh=+(/thành: Sủng ([+\-]\d+)/.exec(P(optLine({n:'Tự trình lên Hoàng thượng',x:`Khá chắc · thành: Sủng ${balSg(v)} · hỏng: Sủng ${balSg(BAL.eff.j7.sungGo_2)}`,fx:{danh:-3}})))||[])[1];
+    S.sung=50;apply({sung:v});const ap1=S.sung-50;S.sung=s0;if(sh!==ap1)unit.push(`real j7 ${tr}: card ${sh}, applied ${ap1}`)}
+   }catch(e){unit.push('unit threw (helper missing in this build?): '+e.message)}
    S.emp.traits=k}
   const S0=structuredClone(S),RV0=structuredClone(rivals),rnd=Math.random,q0=quiet,lg=console.error;const out=[],unb=[];let ids=Object.keys(PEND),built=0;
   const fresh=()=>{S=structuredClone(S0);rivals.length=0;structuredClone(RV0).forEach(x=>rivals.push(x));Q.length=0;quiet=true};
@@ -63,8 +98,10 @@ const {chromium}=require('playwright');const URL=process.argv[2];const TABLE=pro
      row.t[tr.join('+')||'-']=res}
     if(any)out.push(row)}}}finally{console.error=lg;Math.random=rnd;fresh();quiet=q0;S=S0}
   /* r2 DIRECT pass: result functions that are not a dialog option (their own log / result card) × traits: printed == measured */
-  const direct=[];const DF=[['empTeaCard',()=>{const r=empTeaCard();return r&&r.h}],['nightFx',()=>{nightFx(2)}],['kmEmpAct ky',()=>{S.arts.ky=4;const r=kmEmpAct(S,'ky');return r&&r.txt}],
-   ['kmEmpAct walk',()=>{const r=kmEmpAct(S,'walk');return r&&r.txt}],['visAfter',()=>{const r=visAfter();return Array.isArray(r)?r.join(' '):r}],['festival',()=>festival('Hội',"tai","Tài")]];
+  /* kmEmpAct: open its day / time / weather gate (a fresh game has none of it) so the act itself runs, thành and hỏng */
+  const KMO=f=>{const w=kmEmpWhy;kmEmpWhy=()=>'';S.suc=100;try{return f()}finally{kmEmpWhy=w}};
+  const direct=[];const DF=[['empTeaCard',()=>{const r=empTeaCard();return r&&r.h}],['nightFx',()=>{nightFx(2)}],['kmEmpAct ky',()=>KMO(()=>{S.arts.ky=4;const r=kmEmpAct(S,'ky');return r&&r.txt})],['kmEmpAct ky hỏng',()=>KMO(()=>{S.arts.ky=4;Math.random=()=>.99999;const r=kmEmpAct(S,'ky');return r&&r.txt})],
+   ['kmEmpAct walk',()=>KMO(()=>{const r=kmEmpAct(S,'walk');return r&&r.txt})],['visAfter',()=>{const r=visAfter();return Array.isArray(r)?r.join(' '):r}],['festival',()=>festival('Hội',"tai","Tài")],['festival (she wins)',()=>{const t0=S.tai,a0=Object.assign({},S.arts);S.tai=999;for(const k in S.arts)S.arts[k]=9;window.__j71off=1;/* the base j8 contest (j71 needs her signed up) */try{return festival('Hội',"tai","Tài")}finally{window.__j71off=0;S.tai=t0;Object.assign(S.arts,a0)}}]];
   for(const [nm,f] of DF){if(typeof window[nm.split(' ')[0]]!=='function'){direct.push({ok:true,t:`${nm}: not in this build`});continue}const per=[];let bad=0;
    for(const tr of T){fresh();S.emp.traits=tr.slice();S.sung=50;Math.random=()=>0;const l0=S.logSeq||0,q0=Q.length;let ret='';try{ret=f()||''}catch(e){ret='err '+e.message}Math.random=rnd;
     const d=S.sung-50,nl=Math.min(150,(S.logSeq||0)-l0),txt=[String(ret)].concat(S.logs.slice(0,nl),Q.slice(q0).map(q=>q&&q.h||'')).map(x=>String(x).replace(/<[^>]+>/g,' ')).join(' · ');
@@ -94,27 +131,11 @@ const {chromium}=require('playwright');const URL=process.argv[2];const TABLE=pro
     VALUE a level or threshold, not a change (Sủng ${p.sung}, cần Sủng ${N.sung});
     CARD  an option / card line (x / lx / duoc / mat / kem / R6 / kitParse …) — drawn through kitParse → sgTxt (walk above = 0 SG rows);
     OK    hand-verified (VERIFIED list: ±1 steps sg can't change, a measured delta, a sample page);
+    TYPED a CARD line whose Sủng is a typed digit (law 4 one core: «Sủng -8» → BAL key + sgStat / balSg) → FAIL (r3, MAIN 92 whole family);
     anything else = CHECK → FAIL. Plus: no «Sủng ±A ..|đến|– ±B» range built from a template (must be sgRange). */
- const ST=(()=>{const fs=require('fs'),path=require('path');const D=path.join(__dirname,'../build');const rows=[];
-  const VER=[['jtoil.js','Sủng +1":"Sủng -1','±1: sg(±1) = ±1 for every trait'],['jtoil.js','?`Sủng ${f.aff>0?"+1"','±1 (aff>0) / NPC host'],['jmkt.js','Sủng ${n>0?"+":"-"}${Math.abs(Math.sign(n))}','±1 sign only: sg(±1) = ±1'],
-   ['j54.js','Sủng +${V.length}','each child ap(p,{sung:1}) once: sg(1) = 1 → sum = V.length'],['j71.js','Sủng +${V.length}','each child ap(p,{sung:1}) once: sg(1) = 1'],
-   ['j68.js','`Sủng ${n>0?"+":""}${n}`','e68 «emp» line: n = the measured/sgStat number of the e68 row (j68 fx6, rv r1)'],['jemoact.js','`Sủng của ${who} ${v}`:`Sủng ${v}`','label formatter: v comes in already drawn (eaN / sgStat)'],
-   ['jkitpage.js','','kit sample page (demo cards, kitParse draws them)'],['jstatfx.js','Sủng −3</button>','kit sample button (kitStatFx demo)'],['j87.js','Sủng ${wkeSign(d)}','measured week delta'],
-   ['jlost.js','${wdNmC(h)} mang tội lấy trộm: Danh ${LO.thief.danh}, Sủng ${LO.thief.sung}','NPC branch (h !== S)'],['j75.js','mỗi +2: Sủng +1','a ratio rule (Ân tình steps), not a change'],
-   ['jgift.js','thành: Sủng +2 đến +4, Ân tình +1, then','comment'],
-   ['j54.js','`Sủng mẹ +${g.sung}`','the mother is an NPC (x.p !== S): ap raw'],['j67.js','return `${v.name}: Sủng -${n}.`','NPC (v.sung -= n)'],['j92.js','AOUT.giahoa=["nàng mang tội','NPC act-outcome text (nàng …)'],
-   ['jface.js','a===S?"Sủng ngươi":`Sủng ${NM(a)}`','the label of sgOf(a, …) — the number is drawn by sgOf'],['j30.js','ốm 3 tháng (Sủng -4 mỗi tháng','the target (nàng) falls ill: NPC monthly rule']];
-  for(const f of fs.readdirSync(D).filter(f=>/^j.*\.js$/.test(f)&&f!=='jaudit.js'&&!/^jbal/.test(f))){const src=fs.readFileSync(path.join(D,f),'utf8').replace(/\/\*[\s\S]*?\*\//g,m=>m.replace(/[^\n]/g,' '));
-   src.split('\n').forEach((l,i)=>{const re=/Sủng(?: ngươi| ta| mẹ)? (?:[+\-−]\d|[+\-−]?\$\{)/g;let m;while((m=re.exec(l))){const pre=l.slice(Math.max(0,m.index-240),m.index),sn=l.slice(Math.max(0,m.index-60),m.index+40);let k;
-    const v=VER.find(([vf,vs])=>vf===f&&(!vs||l.includes(vs)&&sn.includes(vs.slice(0,8))||l.slice(Math.max(0,m.index-80),m.index+80).includes(vs)));
-    if(v)k='OK';else if(/(nàng(?: ta)?|của nàng|\$\{(?:v\.name|W|w\.name|NM\([^)]*\)|who|row\.name)\}|\p{Lu}\p{Ll}+)\s*$/u.test(pre.replace(/<[^>]*>/g,'')))k='NPC';
-    else if(/^Sủng \$\{(?:S|p|v|k|row|x)\.(?:sung|s)\b|^Sủng \$\{(?:Math\.round\(v\.sung|p\.sung\|0|N\.sung|RANKS|BAL\.st14|F14G|S\.sung)/.test(l.slice(m.index))||/cần Sủng|Sủng \$\{[^}]*\}\/\$\{|Sủng \$\{[^}]*\} →/.test(l.slice(m.index,m.index+40)))k='VALUE';
-    else if(/(?:\b(?:x|lx|duoc|mat|kem|need|gain|loss|use|u)\s*:\s*\[?\s*[`"]|R6\(|G6\(|kitParse\(|\bx=`|aoLz\(|rtX\(|get x\(\)\{return `|return `\$\{w\} · thành|const risk=`|r\.x=\(r\.x\|\|""\)\+`|pbtn\()[^]*$/.test(pre)&&!/(?:log\(|Q\.push\(|txt:`|L\.push\(`)[^]*$/.test(pre.slice(pre.search(/(?:\b(?:x|lx|duoc|mat|kem|need|gain|loss)\s*:\s*\[?\s*[`"]|R6\(|G6\(|kitParse\(|\bx=`|aoLz\(|rtX\(|pbtn\()[^]*$/)>=0?pre.search(/(?:\b(?:x|lx|duoc|mat|kem|need|gain|loss)\s*:\s*\[?\s*[`"]|R6\(|G6\(|kitParse\(|\bx=`|aoLz\(|rtX\(|pbtn\()[^]*$/):0)))k='CARD';else k='CHECK';
-    rows.push({k,at:`${f}:${i+1}`,t:sn.replace(/\s+/g,' '),why:v&&v[2]})}
-    const rg=/Sủng [+\-−]?\$\{[^}]*\}\s*(?:đến|\.\.|–)\s*[+\-−]?\$\{/.exec(l);if(rg)rows.push({k:'RANGE',at:`${f}:${i+1}`,t:rg[0]})})}
-  return rows})();
+ const ST=staticPass();
  const stc={};ST.forEach(x=>stc[x.k]=(stc[x.k]||0)+1);console.log('static raw «Sủng ±» sites: '+Object.entries(stc).map(([k,v])=>`${k} ${v}`).join(' · '));
- ST.filter(x=>x.k==='CHECK'||x.k==='RANGE').forEach(x=>{console.log(x.k.padEnd(5),x.at,x.t);fam.push(x.at)});if(TABLE)ST.filter(x=>x.k==='OK').forEach(x=>console.log('OK   ',x.at,x.why));
+ ST.filter(x=>x.k==='CHECK'||x.k==='RANGE'||x.k==='TYPED').forEach(x=>{console.log(x.k.padEnd(5),x.at,x.t);fam.push(x.at)});if(TABLE)ST.filter(x=>x.k==='OK').forEach(x=>console.log('OK   ',x.at,x.why));
  if(process.argv.includes('--static')){const fs=require('fs'),path=require('path');const D=path.join(__dirname,'../build');let n=0;for(const f of fs.readdirSync(D).filter(f=>/^j.*\.js$/.test(f))){fs.readFileSync(path.join(D,f),'utf8').split('\n').forEach((l,i)=>{const m=l.match(/Sủng(?: ngươi| ta)? (?:[+\-−]|\$\{)/g);if(m){n+=m.length}})}console.log('static: literal «Sủng ±» texts in dev/build/j*.js: '+n)}
  if(errs.length)console.log('page errors (not fatal for the scan): '+[...new Set(errs)].slice(0,5).join(' | '));
  console.log(fam.length?`FAIL ${fam.length} option(s) show a Sủng that is not the applied one`:'PASS');await b.close();process.exit(fam.length?1:0)})();

@@ -147,7 +147,9 @@ const KLOW={kap:1,kld:1};function kGood(k,v){return KLOW[k]?v<=0:v>=0}
 function eyes(p){if(!p)return 0;const n=+p.mat||0;if(window.__tmOff)return n;try{const E=BAL.ag.eye;return Math.min(E.cap,n*E.w)}catch(e){return n}}
 function statTxt(k,v,lbl){const n=lbl||NAMES[k]||k;if(k==="mat"&&v>0)return `${n}: ngỏ lời ${v} người`;return `${n} ${v>0?"+":""}${v}`}
 /* SG-CARD: her Sủng change v drawn through sg() — the no-break space marks it as already drawn, so sgTxt never scales it again */
-function sgStat(v,lbl){const w=sg(v),t=statTxt("sung",w,lbl);return w!==v?t.replace(/ (?=[+\-−]?\d+$)/,SG_NB):t}
+/* sgNow(v): sg(v) when a game is loaded; before one (a card getter read at load, title screen) the number as written */
+function sgNow(v){return typeof S==="object"&&S&&S.emp?sg(v):v}
+function sgStat(v,lbl){const w=sgNow(v),t=statTxt("sung",w,lbl);return w!==v?t.replace(/ (?=[+\-−]?\d+$)/,SG_NB):t}
 /* r2 (rv sg-card): the ONE printer of a Sủng change in a result / log line. sgOf(p,v): HER change is applied through sg() (apply / ap(S,…)) →
    print sg(v) (marked); someone else's (ap(v,…) raw) → print v. Never pass a MEASURED delta (S.sung after − before): print that as it is.
    sgRange(a,b): «Sủng +sg(a) đến +sg(b)» — both ends of a range drawn as applied (one number when they meet). */
@@ -156,12 +158,12 @@ function sgFix(v,lbl){const t=statTxt("sung",v,lbl);return t.replace(/ (?=[+\-�
 /* sgRule: typed Sủng in a static RULE text (arts tiers ARTFX/ARTMS, ARTS.u) is a token read from BAL when the text is READ (tables load
    before BAL.deck): «{sg:deck.cam.w.sung}» = a change applied through sg (apply), «{sgRaw:tho.sung}» = applied as is, «{n:tho.sung}» = the
    bare signed number. sgRuleArr / sgRuleObj turn every element holding a token into a getter, so every reader gets the live number. */
-function sgRule(s){return typeof s!=="string"||s.indexOf("{")<0?s:s.replace(/\{(sg|sgRaw|n):([\w.]+)\}/g,(m,f,p)=>{let v=window.BAL;for(const k of p.split("."))v=v&&v[k];v=+v||0;
+function sgRule(s){return typeof s!=="string"||s.indexOf("{")<0?s:s.replace(/\{(sg|sgRaw|n):([\w.]+)\}/g,(m,f,p)=>{let v=typeof BAL!=="undefined"?BAL:null;for(const k of p.split("."))v=v&&v[k];v=+v||0;
  return f==="sg"?(typeof S==="object"&&S&&S.emp?sgStat(v):statTxt("sung",v)):f==="sgRaw"?sgFix(v):`${v>0?"+":v<0?"-":""}${Math.abs(v)}`})}
 function sgRuleArr(a){if(Array.isArray(a))a.forEach((s,i)=>{if(typeof s==="string"&&/\{(sg|sgRaw|n):/.test(s))Object.defineProperty(a,i,{get:()=>sgRule(s),enumerable:true,configurable:true})});return a}
 function sgRuleObj(o,k){const s=o&&o[k];if(typeof s==="string"&&/\{(sg|sgRaw|n):/.test(s))Object.defineProperty(o,k,{get:()=>sgRule(s),enumerable:true,configurable:true});return o}
 function sgOf(p,v,lbl){return p===S?sgStat(v,lbl):statTxt("sung",v,lbl)}
-function sgRange(a,b,lbl){const x=sg(a),y=sg(b),sv=z=>`${z>0?"+":z<0?"-":""}${Math.abs(z)}`;if(x===y)return sgStat(a,lbl);return `${lbl||NAMES.sung}${x!==a||y!==b?SG_NB:" "}${sv(x)} đến ${sv(y)}`}
+function sgRange(a,b,lbl){const x=sgNow(a),y=sgNow(b),sv=z=>`${z>0?"+":z<0?"-":""}${Math.abs(z)}`;if(x===y)return sgStat(a,lbl);return `${lbl||NAMES.sung}${x!==a||y!==b?SG_NB:" "}${sv(x)} đến ${sv(y)}`}
 function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([k,v])=>{const t=k==="sung"?sgStat(v):statTxt(k,v);if(k==="sung")v=sg(v);return `<span class="${kGood(k,v)?"g":"r"}">${t}</span>`}).join(" · ")}
 function apply(o){const pops=[];
   for(const k in o){let v=o[k];if(!v)continue;
