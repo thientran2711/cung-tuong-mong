@@ -170,8 +170,8 @@ const HTRO=typeof ResizeObserver==="function"?new ResizeObserver(()=>htFitSub())
 (function(){const k0=kgSub;kgSub=function(){const r=k0.apply(this,arguments);htFitSub();requestAnimationFrame(htFitSub);
  try{const nav=$("panel").querySelector(":scope > .ksub, :scope > .kpbar > .ksub");if(HTRO&&nav&&!nav.__htro){nav.__htro=1;HTRO.observe(nav)}}catch(e){}return r}})();
 addEventListener("resize",()=>requestAnimationFrame(htFitSub));
-/* servant road / after death: the extra keys are not tabs */
-(function(){const r0=render;render=function(){const x=r0.apply(this,arguments);try{const off=(typeof isSrv==="function"&&isSrv())||!kgOn();HTK.slice(1).forEach(k=>{const b=document.querySelector(`#tabs [data-tab="${k}"]`);if(b)b.style.display=off?"none":""});
+/* after death: the extra keys are not tabs (maid-8tabs, owner 21/11 ~03:15Z: the cung nữ road has the same Hoàng tự sub-tabs) */
+(function(){const r0=render;render=function(){const x=r0.apply(this,arguments);try{const off=!kgOn();HTK.slice(1).forEach(k=>{const b=document.querySelector(`#tabs [data-tab="${k}"]`);if(b)b.style.display=off?"none":""});
   if(off&&HTK.slice(1).includes(tab))tab="kid"}catch(e){}return x}})();
 
 /* the empty card = the kit's kitEmpty (j79): picture + title + hint lines (never a blank page) */
@@ -275,7 +275,7 @@ function qtTab(){const L=qtList();const head=`<div class="ph"><span>Con các nh�
  if(!L.length)return head+htEmpty("img/act-cat-trieu-chinh.webp","Chưa có mối nào",["Mỗi tháng các nhà quyền thần đưa con đến tuổi vào danh sách kén rể, kén dâu."]);
  return head+pager("qt",L.map(it=>({f:it.kind==="q"?qnFace(it.x):h54Face(it.x),name:htKn(it.x)?shortN(it.x.name):"Người lạ",sep:it.sep})),i=>qtCard(L[i]))}
 window.htTabHTML=function(t){return `<div class="pgwrap kht">`+({kid:kidTab,kvo:kvTab,kin:kinTab,hon:honTab,qt:qtTab}[t]||kidTab)()+`</div>`};
-if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function(){if(!HTK.includes(tab)||!S||S.dead||(typeof isSrv==="function"&&isSrv()))return p0.apply(this,arguments);
+if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function(){if(!HTK.includes(tab)||!S||S.dead)return p0.apply(this,arguments);/* the cung nữ road too (maid-8tabs) */
   const el=$("panel");faceInit();const gm=document.querySelector(".game");if(gm)gm.classList.add("cardtab");const h=htTabHTML(tab);
   const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);kitFix(el);panelScrollKeep(el,keep)}}
 /* ---------- CSS ---------- */
