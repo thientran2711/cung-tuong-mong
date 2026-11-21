@@ -1543,3 +1543,4 @@ ROOT-B4 ~17:40Z: SENT L2157 M2150-01..03 (+ mau_net_ve.jpg) to owner. All live w
 ROOT-B4 ~17:45Z: SENT L2158 M2150-04..08 + refs (Phi, vàng hoàng gia, HQP). Asked owner: t4 is s64 Tần (other person) — keep or rebuild on s62? Next Lượt 2159.
 ROOT-B4 ~17:55Z: OWNER L2159/2160: send prompt files with SendUserFile display=render (opens in right panel to copy), NEVER display=attach, never paste text in chat. Resent M2150-01..08 render. Next Lượt 2161.
 ROOT-B4 ~17:57Z: OWNER L2161: CANCEL the line above — she can download fine; keep sending files exactly as before (as M2150 L2157/L2158), change NOTHING, never paste text in chat. Next Lượt 2162.
+ROOT-B4 ~18:00Z: OWNER L2162: do NOT send reference jpgs (refs/) with prompt files any more — she has them saved. Send prompt files only. Next Lượt 2163.
