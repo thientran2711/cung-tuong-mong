@@ -19,3 +19,5 @@ Verdict: PASS 5fa9aa87 (pushed review/huong-cue-2-rv) = huong-cue-2 fffd3f59 + r
 - Shots Fold + iPad of doi, thq, xa, tho, td_cong, td_dung, td_hanh looked: words legible, no overflow.
 
 Final: LIVE moved again (train 2 landed huong-cue 9234a983); re-merged origin/main 64d2e094 → PASS 7af73d06 (review/huong-cue-2-rv). Re-ran noword-a/b/kit, allkinds, mgcal-redo, coop-e2e 68/68, quickcheck PASS.
+
+Final sha for huong-cue-2: 710b8fe6 (review/huong-cue-2-rv) = merged with LIVE a88b14f0, verified there: noword-a/b/kit, allkinds 7/7, mgcal-redo 12/12, coop-e2e 92/92 (this LIVE adds coop-name-clash tests), quickcheck PASS on the previous merge 7af73d06. origin/main kept moving (rv kit-ton-row-2 merge commits, built files only) so it is not a strict FF: coordinator merges main once more (only index.html/sw.js conflict → build_site.sh).
