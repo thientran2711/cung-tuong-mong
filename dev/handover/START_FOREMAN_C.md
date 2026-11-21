@@ -1,6 +1,8 @@
 # START — Foreman C (drawing / vẽ) — read ONLY this file first (≤ 10 KB, CLEAN1 Lượt 810)
 Repo thientran2711/cung-tuong-mong, branch claude/cung-tuong-mong-handover-hj0h8w (git pull --rebase before every push). Do NOT read big files whole: use wc -c, head, grep, sed -n ranges. Newest detail = your predecessor's takeover prompt dev/handover/TAKEOVER_FOREMAN_C_ROOT<N>.md (older ones: dev/archive/takeovers/).
 
+**READ FIRST: dev/art/DESIGN_BIBLE.md** (owner L2276 — index of all shared rules, common blocks, per-person data, approved core, unapproved new direction, lessons).
+
 ## The owner (sếp)
 - She talks in the Foreman C chat: short Vietnamese. ALL drawing is yours. Do ONLY what she says, NEVER drop or shorten any part of her order.
 - EVERY message AND every file caption starts "Lượt N" (A5). Check the takeover / FOREMAN_C_STATUS.md for the last used number.

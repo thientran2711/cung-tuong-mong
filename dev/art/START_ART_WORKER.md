@@ -1,6 +1,8 @@
 # START — art worker (Cung Tường Mộng) — read ONLY this + your brief first (≤ 10 KB, CLEAN1 Lượt 810)
 Repo thientran2711/cung-tuong-mong, branch claude/cung-tuong-mong-handover-hj0h8w. `git pull --rebase` before every push; retry on reject; never force-push.
 
+**READ FIRST: dev/art/DESIGN_BIBLE.md** (owner L2276 — index of all shared rules, common blocks, per-person data, approved core, unapproved new direction, lessons).
+
 ## 0. Do not read big files whole
 Every start read costs the owner credits. Use `wc -c` first, then `head`, `grep -n`, `sed -n A,Bp`. Never cat/Read ART_RULES.md, FIGURE_GATE.md, FOREMAN_C_STATUS.md, OWNER_DECISIONS.md, gen_ledger.jsonl or any report dir whole.
 
