@@ -11,3 +11,4 @@ allow: framing the bordered square neckline  # closed crossed wrap collar replac
 allow: NO crossed wrap collar  # closed crossed wrap collar replaces open/square neckline + A42 cleavage (owner L1421)
 allow: never covering the neck or the square inner neckline  # closed crossed wrap collar replaces open/square neckline + A42 cleavage (owner L1421)
 allow: "Mùa Thu · Thiết kế hiện tại · Hoàng hậu · Áo choàng lễ + vân kiên ngọc trai + cổ mở"  # season word Thu→Đông in caption (owner L1421)
+allow: a plain gold belt   # G57 owner L1851: no jade pendant anywhere (pendant removal only)
