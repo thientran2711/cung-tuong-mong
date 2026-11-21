@@ -48,3 +48,6 @@ Shots at the moment the wait runs out (cyhold-note-host-755x1000, cyhold-note-gu
 
 ## For Night chain #10
 jnf.js:195 waits on COOPW.cyHold up to choice.waitMs; with this branch cyHold ends after BAL.coop.cyWaitMs (same 90 s) and a reload re-asks at once. Night chain + this branch merge: assemble.py list (union: night jbalcore.js + jnf.js into the LIVE list), KIT_REQUESTS.md (keep both), index/sw rebuild; coop-night 111/111 on that merge. Option: jnf reads BAL.coop.cyWaitMs for the cyHold wait (one key).
+
+## STATUS 21/11 ~16:30Z (D #16/#17 HOLD check: bundle 35b3a3f5 coop-night case-1 cascade)
+coop-night on review/coop-cyhold-rv 3e65dbe7 ALONE: 105/105, 104/105, 105/105, 105/105 (4 runs) · LIVE fc7f98f6: 105/105, 105/105. Case 1 green in every run → the bundle's case-1 cascade is not from cyhold alone. The one miss = case 4 run 2 (guest night not started within the test's 40 s window, st=-1; the week still merged right); 3 reruns with a temporary trace of the host's cy* lines in case 4: no cyHold / cyTimeout / cyq in any run (fix or LIVE), all 105/105 → timing flake. VERDICT unchanged: PASS, LAND READY review/coop-cyhold-rv 3e65dbe7 (merged on LIVE fc7f98f6); recommend lifting the HOLD.
