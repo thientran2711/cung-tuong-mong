@@ -35,3 +35,6 @@ Re-run on 31ebca8a+: mg-intro-2 ALL OK (Fold + iPad), mg-ui-rest 39/39, mg-allki
 ## Re-merge (MAIN 92, LIVE 74cea8bf incl. mg11 a66b5a49)
 Merged origin/main 74cea8bf (real conflicts: j79.js kitNoteBang → main's version (has `title` already); jshelf.js → both: `ev:false` + main's `W,env`; jnwb.js merged clean — NWB_DEMO demos stay deleted, nothing else of mg11 lost; index.html/sw.js rebuilt). Gates on 2bff694c: mg-intro-2 ALL OK · mg-ui-rest 39/39 · mg-allkinds 13/13 · mg-noword-b ALL OK · mg-ready-guide 9/9 · coop-e2e 92/92 · quickcheck PASS · mg-noword-a 0 FAIL.
 mg-noword-kit prints «FAIL 3 kinds» (thu_tam, thu_choi, tuoi = pet/plant care text) — SAME on pristine origin/main 74cea8bf (verified in a clean worktree), not from this branch.
+
+## Land re-merge (MAIN 93): review/mg-intro-2-land
+Base rv3 847a5934 + origin/main ba9b6243 (pm-c 75ad237d, kit-opt-kem a4ee93d7, kit-badge). Real conflict only dev/build/j82.js (startContest end + playArt intro): both sides kept — my event picture `ev` (startContest / playArt / EG engine games) + `kgBangRows`, main's `onGo(rows)`, EG engine spec, `quick.raw`. index.html/sw.js rebuilt. Gates: mg-intro-2 ALL OK · mg-ui-rest 39/39 · mg-allkinds 13/13 · mg-noword-b ALL OK · mg-ready-guide 9/9 · coop-e2e 94/94 · quickcheck PASS (core gates PASS) · mg-noword-a 0 FAIL.
