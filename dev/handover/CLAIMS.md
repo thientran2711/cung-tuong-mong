@@ -597,3 +597,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | rel-picker-r3 (sonnet; OWNER BUG 3rd time 21/11 02:12Z: Ân oán picker space) | review/rel-picker-r3; briefs/main84-rel-picker-r3.md | MAIN CHÍNH 84 | (opening) | RUNNING | 21/11 02:15Z |
 | ui-tour-states (opus; owner 21/11 02:20Z: show every frame state, separate PDF) | review/ui-tour-states; briefs/main84-ui-tour-states.md | MAIN CHÍNH 84 | session_01Rc5AsMRxZnFfU6zhm7mvad | RUNNING | 21/11 02:22Z |
 | empty-states (sonnet; owner 21/11 02:22Z: every empty tab = kitEmpty picture card) | review/empty-states; briefs/main84-empty-states.md | MAIN CHÍNH 84 | (opening) | RUNNING | 21/11 02:24Z |
+| REVIEW dresscode r3 loan fix E30r3 (opus BIG; briefs/E30r3-review-dresscode-fix.md) of ee44f91e | review/dresscode-land-fix-r1; reports/dresscode-review.md «ROUND 3» | FOREMAN E #24 | session_01DgYSWon2yx2VxkSP87VchV | RUNNING | 21/11 02:18Z |
