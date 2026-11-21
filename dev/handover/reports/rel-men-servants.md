@@ -128,3 +128,22 @@ F4 (OD:L352 verbatim "Everyone's attitude to her (servants included) uses only O
  Fix (the branch's own rule "reuse the store the game already writes"): j9 msAff / msAffAdd — a servant toward ITS master (S.maid / ownerOf(s)===S → S; NPC staff → ownerOf(s)) reads / writes s.loyal (clamp 0..100); drop jhc relRows loy() «Lòng»; KIT §52 kitRelRows isMS «lòng» row removed by the kit keeper (filed KIT_REQUESTS «21/11 rel-men-servants r3»); then the scan table: every place printing a servant's attitude to her master (j2 homePeople, j95 mm:me, j8, jeitem 70–86, jts 437, kit block, Ân oán) = one «Thiện cảm» = loyal; test U2/S1 updated (no «Lòng», Thiện cảm = loyal).
 Notes (not blocking, Foreman B): N4 «Lòng» is already on LIVE in other places against OD:L352 (bondBars jtin.js «Lòng / Chủ tin», HUD Nhân tâm «Lòng», KIT.md 1812/1813) — pre-existing family, worth one owner-rule sweep. N5 j42 «Bạc lạ» take now also gives regard +bribe (and the servant-road threat oán +threat) not shown on the option text (law 3 visible gain; small).
 CDN: shots stay for r4 (worker re-shoots and wipes after the verdict).
+
+## r4 (fix worker, sonnet) — F4 DONE
+PRIORITY #1 CHECK: OD:L352 «servants use only ONE word Thiện cảm; drop Lòng» + VANPHONG line 55 | ledger 0 | claims 8 | main: kit-relrows-ms LIVE; kitRelRows isMS «lòng» row removal filed in KIT_REQUESTS 21/11 for the kit keeper (jkrel.js NOT edited) | review/* 1. Started from review/rel-men-servants-r1 11b1f3f2 (origin/main c9ae030e merged). START_CTX ~3 %.
+- j9: new relMaster(x,y) — HER servant (S.maid / ownerOf(s)===S; not a man, not a court official) toward HER reads / writes s.loyal (clamp 0..100) in msAff / msAffAdd: ONE store, the number the game already writes. Servant road (isSrv, S.srv.af) unchanged. Old saves: nothing to migrate (loyal exists; the unused s.af.me of household servants is simply no longer read for their master).
+- jhc relRows: loy() «Lòng» line removed.
+Before / after (law 11 scan: every place printing a servant's attitude to her master):
+| Place | Before (r3 branch) | After |
+|---|---|---|
+| j2 homePeople / j95 mm:me info | «thiện cảm» = loyal | same (= aff now) |
+| Kit person block (kitRelRows isMS) «Thiện cảm» | aff = s.af.me = 0 | = loyal. (its «lòng» row stays until the kit keeper lands the filed request; same number) |
+| Ân oán (jhc relRows) | «Thiện cảm 0 · Oán 30 · Lòng 26» | «Thiện cảm 46 · Oán 30» (= loyal; no «Lòng») |
+| j15 court card / j2 / j8 oddsmakers reading loyal | loyal | unchanged |
+| NPC consort's servant → its mistress (aff) | s.af["r"+id] ≈ 0 | UNCHANGED (s.af). Reviewer F4 asked for NPC masters too; I tried it and role-parity FAILS «maid:P-ONLY:maid:poison» (deterministic, ×2; PASS on pre-r4 11b1f3f2, on main c9ae030e and with the HER-only variant; with also npwRegard=0 still FAIL) — reading loyal for NPC servants shifts the NPC world. The player never sees a second number for that pair (no Lòng row any more), so the visible F4 is closed; if the reviewer wants NPC masters too, the scan's draw needs a look by whoever owns role-parity |
+| «Lòng» in other places (bondBars jtin.js, HUD Nhân tâm, j10 rows) | pre-existing family, reviewer N4 | NOT touched (outside this topic; one owner-rule sweep recommended) |
+Test: rel-men-servants.js U2 now «Thiện cảm = s.loyal, no Lòng» (aff(s,S)===loyal), S1 scan also asserts master aff = loyal and no «Lòng» in Ân oán: 26/26 (×3 + 8 more; one unexplained single FAIL 25/26 while quickcheck was loading the CPU, not reproduced in 8 reruns).
+Gates on f7953cc6 (r4 first cut): quickcheck PASS (render 284/285, tab 621/571, buổi 1161/1496 ms, tasks>200 21/23, old save ok) · one-core-guard PASS · coop-e2e 124/124 · role-parity + undef-scan: see last line. coop-home not rerun (50/51 «Khuê phòng» pre-existing, confirmed on LIVE by reviewer r3).
+Shots LOOKED 3× (Fold 755x1000@2 + iPad 1180x820@2; servant Thiện cảm 46 / 40 · Oán, no Lòng): https://ctm-img.victoria-tntt.workers.dev/img/_review/rel-men-servants/ rms-man / rms-srv / rms-stranger × both. Wipe: python3 dev/site/cdn_sync.py --wipe-review rel-men-servants.
+FINAL (HER-only relMaster) 1142d04e: rel-men-servants 26/26 ×2 · role-parity ALL PASS · quickcheck PASS (render 238/294, tab 436/459, buổi 1111/1458 ms, tasks>200 19/20, old save ok) · coop-e2e 124/124 · undef-scan PASS (277) · one-core-guard PASS.
+READY: review/rel-men-servants 1142d04e.
