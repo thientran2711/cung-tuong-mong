@@ -1,0 +1,57 @@
+<title>Thử đeo túi thơm &amp; ngọc bội — cung nữ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* layout: one card per maid, buttons on top, zoomable stage (same as the necklace try-on page) */
+:root{--bg:#f6efe6;--card:#fffaf3;--ink:#3a2a22;--muted:#7a6558;--line:#e3d3c2;--accent:#9c3d2e;--btn:#fff;--on:#9c3d2e;--onink:#fff;--warnbg:#fbe9d6;--warnink:#7a3b12;--stage:#efe6da}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1714;--card:#282019;--ink:#f3e7da;--muted:#bba796;--line:#4a3a2f;--accent:#e08a6f;--btn:#33291f;--on:#e08a6f;--onink:#1d1714;--warnbg:#3a2618;--warnink:#f0c79c;--stage:#2e251e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1d1714;--card:#282019;--ink:#f3e7da;--muted:#bba796;--line:#4a3a2f;--accent:#e08a6f;--btn:#33291f;--on:#e08a6f;--onink:#1d1714;--warnbg:#3a2618;--warnink:#f0c79c;--stage:#2e251e;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1180px;margin:0 auto;padding-block:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font-size:30px;margin:6px 0 4px;text-wrap:balance}p.sub{margin:0 0 10px;color:var(--muted);font-size:17px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.tag{border:2px solid var(--accent);border-radius:999px;padding:6px 14px;font-weight:700;font-size:18px}
+.tag.total{background:var(--on);color:var(--onink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;min-width:0}
+.card h2{font-size:22px;margin:0 0 10px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+button{font-family:inherit;font-weight:600;font-size:19px;line-height:1.1;padding:13px 16px;border-radius:10px;border:2px solid var(--accent);background:var(--btn);color:var(--ink);cursor:pointer;min-height:48px;flex:1 1 auto}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button.on{background:var(--on);color:var(--onink)}
+.stage{position:relative;width:100%;overflow:hidden;border-radius:10px;background:var(--stage)}
+.inner{position:absolute;left:0;top:0;transform-origin:0 0}
+.inner img{position:absolute;display:block;max-width:none}.inner .it{display:none}.inner .it.show{display:block}
+.warn{background:var(--warnbg);color:var(--warnink);border-radius:8px;padding:8px 10px;font-size:16px;margin:10px 0 0;font-weight:600}
+.note{color:var(--muted);font-size:15px;margin:14px 0 0;max-width:70ch}
+</style>
+<main>
+<h1>Thử đeo túi thơm &amp; ngọc bội — cung nữ</h1>
+<p class="sub">Ba cô cung nữ (tam · nhị · nhất đẳng). Bấm <b>Đeo túi thơm</b> hoặc <b>Đeo ngọc bội</b> để thử, bấm <b>Cận eo</b> để xem gần. Món đeo treo từ dây lưng, nằm <b>sau</b> tay và món đang cầm (luật G45).</p>
+<div class="tags"><span class="tag">Hình gốc: GPT 2.6 · 1k</span><span class="tag">0 cr / hình</span><span class="tag total">TỔNG 0 cr</span><span class="tag">Không vẽ mới</span></div>
+<div class="grid" id="grid"></div>
+<p class="note">Cách làm: túi thơm và ngọc bội là hình CŨ đã vẽ (cắt sẵn từ bản thử hoa tai hôm trước), thu nhỏ theo từng cô, buộc vào dây lưng bên hông phải; dây đi phía sau tay và món đang cầm (hộp / phong thư / khăn tay) rồi lòi ra phía dưới, nằm trên vạt áo và váy. Vị trí, dây lưng, từng bàn tay và món cầm đều đo tay trên từng hình (bản làm lại L1701). Có bóng đổ nhẹ trên vải. 0 credit, không gen.</p>
+</main>
+<script>
+const DATA=/*DATA*/null;
+const grid=document.getElementById('grid');
+for(const [id,f] of Object.entries(DATA)){
+  const c=document.createElement('section');c.className='card';c.id='card-'+id;
+  const L=(k,a)=>`<img class="it" data-k="${k}" src="${f[k].src}" style="left:${f[k].x}px;top:${f[k].y}px;width:${f[k].w}px;height:${f[k].h}px" alt="${a}">`;
+  c.innerHTML=`<h2>${f.label}</h2><div class="bar">
+  <button data-k="tui">Đeo túi thơm</button><button data-k="ngoc" class="on">Đeo ngọc bội</button></div>
+  <div class="bar"><button data-v="full">Toàn thân</button><button data-v="close" class="on">Cận eo</button></div>
+  <div class="stage"><div class="inner" style="width:${f.W}px;height:${f.H}px"><img src="${f.base}" width="${f.W}" height="${f.H}" alt="${f.label}">${L('tui','túi thơm')}${L('ngoc','ngọc bội')}</div></div>
+  <p class="warn">⚠ ${f.painted}</p>`;
+  grid.appendChild(c);
+  const st=c.querySelector('.stage'),inn=c.querySelector('.inner');let view='close',cur='ngoc';
+  const V={full:[0,0,f.W,f.H],close:[f.zoom[0]-150,f.zoom[1]-170,300,340]};
+  function show(){c.querySelectorAll('.it').forEach(i=>i.classList.toggle('show',i.dataset.k===cur));
+    c.querySelectorAll('[data-k]').forEach(b=>{if(b.tagName==='BUTTON'){const on=b.dataset.k===cur;b.classList.toggle('on',on);b.textContent=(on?'Tháo ':'Đeo ')+(b.dataset.k==='tui'?'túi thơm':'ngọc bội');}});}
+  function lay(){const [x,y,w,h]=V[view];const W=st.clientWidth;let H=W*h/w;const maxH=Math.max(320,innerHeight*0.72);
+    let s=W/w;if(H>maxH){H=maxH;s=H/h;}st.style.height=H+'px';const ox=(W-w*s)/2;
+    inn.style.transform=`translate(${ox-x*s}px,${-y*s}px) scale(${s})`;}
+  c.querySelectorAll('button[data-k]').forEach(b=>b.onclick=()=>{cur=(cur===b.dataset.k)?null:b.dataset.k;show();});
+  c.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{view=b.dataset.v;c.querySelectorAll('[data-v]').forEach(x=>x.classList.toggle('on',x===b));lay();});
+  addEventListener('resize',lay);show();lay();
+}
+</script>

@@ -1,0 +1,14 @@
+const {chromium}=require('playwright');const path=require('path');
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1180,height:900}});
+const f='file://'+path.resolve(__dirname,'sachet-tryon2.html');
+const html=require('fs').readFileSync(path.resolve(__dirname,'sachet-tryon2.html'),'utf8');
+await p.setContent('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>'+html+'</body></html>');
+await p.waitForTimeout(500);const S=process.argv[2];
+await p.screenshot({path:S+'/pg_close_ngoc.png',fullPage:true});
+for(const id of ['tam','nhi','nhat']) await p.click(`#card-${id} button[data-k="tui"]`);
+await p.screenshot({path:S+'/pg_close_tui.png',fullPage:true});
+for(const id of ['tam','nhi','nhat']) await p.click(`#card-${id} button[data-v="full"]`);
+await p.screenshot({path:S+'/pg_full_tui.png',fullPage:true});
+await p.setViewportSize({width:400,height:850});await p.waitForTimeout(300);
+await p.screenshot({path:S+'/pg_phone.png'});
+await b.close();})();
