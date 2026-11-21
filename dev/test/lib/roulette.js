@@ -53,7 +53,7 @@ async function closeResult(page){
     await page.waitForTimeout(700);
   }
   await clearMoments(page);
-  const x=page.locator('#kg82 .kit-x[data-kitx="ov"]');
+  const x=page.locator('#kg82 .kit-x[data-kitx="ov"],#kg82 .kit-x[data-kitx="kgback"]');
   await x.first().waitFor({state:'visible',timeout:8000}).catch(()=>{});
   if(await x.count()&&await x.first().isVisible())await x.first().tap({timeout:8000});
   else await page.evaluate(()=>{const o=document.getElementById('kg82ok');if(o)o.click()});
