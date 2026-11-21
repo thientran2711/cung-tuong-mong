@@ -14,6 +14,9 @@ START_CTX ~6 % (1M window).
 
 Kept acts and costs: walking acts cost only khắc (same `travel()` on every road, no consort currency); «Hỏi người hầu: đó là ai?» 1 khắc (j61, same function). Her acts on meeting a consort are the existing maid acts with SRVA costs (j42 srvTalk: greet / betray / accuse) — unchanged.
 
+## UPDATE — merged maid-8tabs LAND READY 561e3f47 → review/maid-acts-a @ **90c83c93** (MAIN 91 order)
+One merge commit (only index.html / sw.js conflicted = generated, rebuilt). Gates on 90c83c93: maid-8tabs.js 70/70 (old save ok) · quickcheck PASS (render 248/293, buổi 1554/1287, core gates PASS) · role-parity ALONE ALL PASS. coop-e2e not re-run (94/94 on 90931482; the merge brings only maid-8tabs-rv + LIVE main).
+
 ## Gates
 - maid-8tabs.js 70/70 (Fold 755x1000 + iPad 1180x820; old save from LIVE main build served locally: PASS).
 - role-parity ALONE on 2b15ba0d (= code of 90931482): ALL PASS (no new gap, open 13/13, promotion sets equal, no page error).
