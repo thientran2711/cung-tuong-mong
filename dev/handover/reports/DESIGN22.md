@@ -93,3 +93,17 @@ RANK8-A (worker of ROOT-68), 20/11 07:31–07:38Z, gpt-2-6 1024x2304 2k seed 717
 t1 mEZiZ8ShJQ · t2 9ZHuqIGNYZ · t3 vQARGIUa47 · t4 SyhIap2Ub8 · t5 xSBe8KVjfW · t6 1ldDonjr4r · t7 nVsxSZNYQD · t8 KLpVBAXkqp.
 Owner use, 20/11 morning (no verbatim "đẹp" stored): ROOT-68 cut every rank (RANK8-CUT 07:43Z, "owner via ROOT-68: combined transparent image per rank"); t1/t2 kept as skins ("kept as skin (owner 20/11)"); square-neck follow-ups the same morning (kiểu 1 OK → G17).
 The original commit is outside this shallow clone (the oldest visible commit for those files is 93790a6).
+
+## Job 6 — owner L1673: sash per tier = 20/11 Set A (rank8-s62/s62_tN.txt). Builder thu_comoi/make_design22_L1673.py
+| tier | Set A sash words | current OLD | NEW file → words |
+|---|---|---|---|
+| t1 | "a long softly pleated skirt tied high above the waist at the chest with a broad ribbon band whose two long ribbons fall down the front" (Tang ruqun) | "a soft silk sash with a small carved jade pendant (ngọc bội) on a silk cord…" | NOT changed. Owner G41 changed the whole t1 design (mẫu C, not Tang); the chest-high ribbon band is the rejected Tang look. Owner decides. |
+| t2 | "a soft silk sash" | "a wide soft blush silk girdle at the natural waist" (+ apron panel) | NOT changed. Owner G41: t2 = the old Quý nhân look; owner L1653 praised this Thường tại sash. Owner decides. |
+| t3 | "a wide stiff mint mist brocade girdle at the natural waist" | "a wide soft blush silk girdle at the natural waist" | dapung4/s62_t3_COMOI_v11 → "a wide stiff blush brocade girdle at the natural waist" (mint mist → blush = COLORFIX1 palette swap) |
+| t4 | "an embroidered silk sash with hanging jade belt pendants and tassels" | "an embroidered silk sash tied flat at the CENTRE front, NO bow, with a carved jade pendant set (ngọc bội) and tassels in front, never covered by sleeve or shawl" | thu_comoi/s62_t4_THU_COMOIm → Set A words + ", never covered by sleeve or shawl" (G45 kept) |
+| t5 | (swap source = t4 Set A, owner L1668) | same as t4 but "two long … pendant sets" | thu_comoi/s62_t5_THU_COMOIm → same as t4 |
+| t6 | "a yellow sash and narrow yellow borders" | same | no change (COMOIm stays) |
+| t7 | "a jade-and-gold belt with long tassels" + "a wide yellow sash" | same | no change (v8l stays) |
+| t8 | "a jade-and-gold belt with long tassels and jade pendants" (no yellow sash) | "a wide yellow sash" in the colour list, belt missing (LADDER2 cut it as a repeat) | thu_comoi/s62_t8_THU_COMOI_v10k → yellow sash removed from the colour list, Set A belt put back in the outfit |
+Held-in clauses unchanged; t3/t8 keep "WRAP robe HELD IN by the sash", t4/t5 keep "HELD IN by the sash tied OVER it". Bow: the G44 "tied flat at the CENTRE front, NO bow" words are gone from t4/t5 because Set A has no knot words. No bow words added; owner to say if a bow comes back.
+t8 length trims: outfit "floor-length robe," → "robe" (S19 tail repeat), "Pose: weight on one leg," (as in job 1), "(t7/t8)" label. check_store ×4 PASS, keep --all 370 PASS. 0 gens.
