@@ -27,3 +27,50 @@ PRIORITY #1 CHECK: OD §7 learning times (owner rule, law 16: unchanged) + night
 | k3 = FINAL + RANKS HH 78 + hhThNoSon 80/70 (LIVE, D #15 ruling) | 12 (2 timeouts) | 58 % | 29/39/76/73 | +48 | 1/12 |
 | k4 = k3 + outQ 60 (whole HH gate = LIVE) | 10 | 70 % | 22/41/66/84 | +60 | 0/10 |
 - HH sits above the 28–40 % band in every arm with the re-tune, whatever the HH gate. The LIVE row is an OLD-LIVE 11-life sample → measuring CURRENT LIVE 94cbe0cd with the same bot now (12 lives).
+
+## SSK — review/night-balance-bundle fe634e0f (21/11 ~19:50Z; coordinator D #17 session_01964izBrTYM1xdxezCgqLER; BIG reviewer session_01964izF4zCJPJBUmUsHpksK)
+PRIORITY #1 CHECK: night-final-r3 nobc + balance-final §7 Danh re-tune land TOGETHER (MAIN 91); §7 learning times unchanged (law 16); NPCs on the same rules; no shields; every changed number is a BAL key.
+
+**Head fe634e0f** = nobc 9a06cea8 + balance-final 40775131 (+ cal-p2c N1) + §7 re-tune (k4) + NLC #10 + coop-cyhold-rv 3e65dbe7 + LIVE main 9c5b6de3 (merges 419079d7 → 270c6251 → 9c5b6de3) + reviewer fixes (cnv origin restored; dead odb.j42.rlGo/rlFail deleted) + npc-purpose row j54 hEmpWed → roll(H54.ask) + reviewer FAIL #3 (her Sủng text through sgStat in jnf; ARTFX rewrite wraps LIVE's sg getters, so the re-tune Danh text is shown again).
+
+### Balance table (knobbot, HHSTOP, seeds 21+, same seeds per arm)
+| arm | lives | HH | Danh m0/12/24/36 | net Danh m0–36 | died<3y |
+|---|---|---|---|---|---|
+| current LIVE 94cbe0cd | 12 | 42 % (5/12; 5/9 = 56 % of 3-yr survivors) | 17/47/73/71 | +45 | 3/12 |
+| old LIVE 8c8b8b6b | 11 | 36 % | 18/51/84/85 | +53 | 2/11 |
+| nobc e5029d1b | 10 | 20 % | 19/9/10/10 | −8 | – |
+| b0 bundle, no re-tune | 9 | 0 % | 21/20/36/36 | +9 | 0/9 |
+| k1 | 6 | 33 % | 22/30/48/37 | +24 | 1/6 |
+| k2 | 6 | 33 % | 24/59/82/56 | +35 | 0/6 |
+| FINAL re-tune, balance-2 HH gate | 16 | 56 % | 21/54/76/71 | +51 | 0/16 |
+| k3 = FINAL + HH Danh 78 + hhThNoSon 80/70 | 12 (2 t/o) | 58 % | 29/39/76/73 | +48 | 1/12 |
+| **k4 = SHIPPED (k3 + outQ 60: whole HH gate = LIVE)** | 10 | **70 %** | 22/41/66/84 | **+60** | **0/10** |
+
+Survivor-adjusted: current LIVE loses 3/12 lives before 3 years, so its 42 % is 56 % of the lives that reach year 3. **HH is +14…+28 points vs current LIVE, with fewer early deaths (0/10 vs 3/12), within small-n noise.** Danh m36 84 (target ≥ ~60 ✔). Brief target HH 28–40 %: k4 is above it. The only HH lever left is the HH gate, which is now exactly LIVE (D #16 approved k4). «Nhún nhường» Danh sink = bot habit (inpage6 talkScore); game cost unchanged (BAL.ag.cx.humble); not tuned.
+
+### §7 re-tune (BAL only)
+par3.dance w/g danh 4→6; deck vu lv 2, w danh 4; art.danh {2:3,3:5,4:6,5:8}; tw.g.ky [3,1] (Đánh cờ Danh 2→3); careYt 1, art.care 6. The texts read the keys (jbalcore rewriter, j85 «Lên bậc»). §7 learning times unchanged.
+
+### BAL scan vs LIVE 9c5b6de3
+leaves 61279/61384, missing 2 (only the dead BAL.odb.j42.rlGo / rlFail, deleted on purpose: j42 reads BAL.rk.riseKill / abortDieSrv, same values 25 / 20), fnMissing 0, added 107, changed 20 (the same 20 keys at every LIVE merge), each with a reason: tw.g.ky.0 (re-tune), mort.life.careYt (balance-final careY), steal.cost.feign.duc / road.suc (balance-final steal costs), ag.par3.dance.o / w.danh / g.danh (re-tune), deck.vu.lv/o.0/w.danh, deck.cam.lv/o.0, deck.ky.lv/o.0 (balance-final deck + re-tune), odb.j2.odO_3/odO_7, j68e.odP_5, j68f.odP_2 (balance-final odds), ctxTaste/ctxCap (nobc night-final).
+
+### Audits
+LIVE-revert audit: none of LIVE's lines are lost except the intentional ones listed in step 1. Reverse audit nobc→head: every lost line is intentional (assemble list, careY replacing artO(y), NLC #10 jnf/jflip fixes, cyWaitMs, coop-steal fixtures, art.danh text). coop-cyhold-rv→head: only the cyMs line (reviewer fix kept). Static guards one-core-guard / bind / text / text-rule / time-spill: PASS.
+
+### Gates on 35b3a3f5
+Serial run on fe634e0f (started 18:13Z, one runner, no parallel load):
+- PASS: balance-core, steal-mg-unit, night-steal-unit, night-multi, night-coop-park 7/7, flip-entry, steal-mg-nf, night-final ×10 (10/10), coop-e2e 124/124, coop-night run 1 111/111; static guards ×5, sg-card-scan, npc-purpose-scan (419 rows).
+- FAIL: coop-night run 2: case-1 week-step split (timeout 2400 s, 18 ok / 13 fail). Host trace cyHold 1 → cyTimeout 1 → cyFree 1, host into the next week, guest at tối ready and waiting for fin. Root cause + fix below.
+- still running / not yet run on this sha: coop-night run 3, coop-steal, coop-cyhold, quickcheck.
+
+### CO-OP BLOCKER (no LAND READY yet)
+1. **jnf late fin (mine, D #17):** jcoopworld cyFree runs flip() then soonEnd(), so the host's day can move on before its choice of day d ends: no fin for d, and the guest (S.nfFin!==d → ask) waits for ever. Fix 2180b429 (local, being tested): the host records its draw per day (S.nfH), again(d) answers a past day without a kept fin from that draw, the host pushes that late fin once (finLate), and the guest re-asks every BAL.steal.choice.ms while she waits. Next: coop-night ×3 serial red→green, then push.
+2. **jsmg intro-✕ stall (GRwYL14Z, review/bundle-nfstall):** the steal mini-game closed by ✕ on its intro screen never runs onDone (BUSY stuck, nfX.st "mg"), solo too (static read). Fix + coop-cyhold clear() + coop-nf-stall.js come as a sha to cherry-pick.
+After both: night-final ×10 (≥3), steal-mg-unit, steal-mg-nf (+ solo ✕ case), coop-night, coop-cyhold ×3, coop-nf-stall ×3, coop-steal, quickcheck on the final head; then LAND READY.
+
+### Not bundled / owner flags
+- night-ledger r1 (B's) not taken; balance-final's night case 6 fix not ported (superseded by night-final r3), so a reviewer should check it.
+- balance-final OWNER FLAGS carry over (kids/y, seat vacancy).
+- LIVE merges 270c6251 and 9c5b6de3: conflicts were jemo-bal typed→BAL moves, and every line keeps both sides (commit messages 5181eecc / fe634e0f list each line). Reviewer FAIL #1 (cnv o/hh/th) fixed; my LIVE-revert audit had missed it because the loss was older than the audited merge range.
+- After the 9c5b6de3 merge, LIVE's sg tokens made ARTFX elements getter-only and the bundle's text rewrite was silently dropped (course-card / bậc Danh showed LIVE numbers). Fixed in fe634e0f; runtime: Đánh cờ Sủng +5, Danh +3, Tâm cơ +1; Kinh hồng vũ Sủng +15, Danh +4; bậc 2/3 Danh +3/+5.
+- co-op flakes seen (not bundle regressions; same on LIVE/3e65dbe7 per the coop-cyhold reviewer): coop-night case 1/2 week-step desync, case 4 guest-night timing.
