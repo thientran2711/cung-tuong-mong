@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1bf2d07b+","t":"2026-11-21T07:48Z","c":"coop-palace-life: P4 her own act names her son in her context (world S.hr + host S.heir follow, Danh once)","b":"4a391466c401","h":[{"s":"e09fd19a+","t":"2026-11-21T09:11Z","c":"Thẻ lựa chọn: kiểu chung bộ khung (kit)"},{"s":"ffedf4f4+","t":"2026-11-21T06:50Z","c":"Trò tài nghệ với người: phần C (E)"},{"s":"ffc7c1d4+","t":"2026-11-21T07:34Z","c":"Lời xưng hô của ta trong truyện (E; gồm story-voice)"},{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"}]};
+window.CTM_BI={"s":"10055501+","t":"2026-11-21T11:24Z","c":"coop-palace-life: P4 her own act names her son in her context (world S.hr + host S.heir follow, Danh once)","b":"1740cc85aebb","h":[{"s":"0409cdb1+","t":"2026-11-21T10:21Z","c":"Mini-game chăm sóc: bớt chữ thừa (B)"},{"s":"4c1105d8+","t":"2026-11-21T10:49Z","c":"Bộ khung chung: cảnh tập trung một người (nền tối, người tiến lại gần)"},{"s":"4cabe30f+","t":"2026-11-21T09:39Z","c":"Đường cung nữ: hành động riêng phần A (BIG)"},{"s":"9a05a707+","t":"2026-11-21T09:40Z","c":"Dấu trạng thái nhỏ trên icon (bộ khung chung, cho Hảo hữu)"},{"s":"e09fd19a+","t":"2026-11-21T09:11Z","c":"Thẻ lựa chọn: kiểu chung bộ khung (kit)"},{"s":"ffedf4f4+","t":"2026-11-21T06:50Z","c":"Trò tài nghệ với người: phần C (E)"},{"s":"ffc7c1d4+","t":"2026-11-21T07:34Z","c":"Lời xưng hô của ta trong truyện (E; gồm story-voice)"},{"s":"6aac0a54+","t":"2026-11-21T07:57Z","c":"Việc nhờ: bỏ chip; 2 nhãn Loại + Hạn trên tranh, các bước ghi thành dòng (#66)"},{"s":"561e3f47+","t":"2026-11-21T07:43Z","c":"Đường cung nữ: cùng 8 tab như phi tần, chủ tử trong khung cung, Đồng liêu (#32–#36)"},{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4340,7 +4340,7 @@ function pcHead(o){const rk=String(o.rank||"").replace(/<[^>]*>/g,"").trim();con
  const nm=same?raw:(typeof kitDedupRank==="function"?kitDedupRank(rk,raw):raw);const kmy=o.me||(o.f&&typeof pMe==="function"&&o.name===S.name);const tone=typeof kitRankTone==="function"&&o.rank?kitRankTone(rk,o.col):"";
  const tonly=!same&&/^hoàng thượng$/i.test(raw.replace(/<[^>]*>/g,"").trim());/* OD:L1362: ONLY the Emperor's name is the bright imperial yellow (Thái hậu keeps her own look, KIT 33.5 amber / 83.1) */
  return `<b class="pcname${kmy?" kmy":""}${same||tonly?" krt":""}" data-krn-skip${same||tonly?` style="--rt:${tone}"`:""}${/^hoàng thượng$/i.test(raw.replace(/<[^>]*>/g,"").trim())?" data-imp=\"emp\"":""}>${nm}</b>${o.rank&&!same?`<span class="pcrk" style="--rt:${tone}">${o.rank}</span>`:""}`}
-function pcard(o){const f=o.f||{};const L=(o.lines||[]).filter(Boolean);const C=(o.chips||[]).filter(Boolean);
+function pcard(o){/* the road act table (jroad8 road8Acts, owner 21/11 ~03:15Z «chả cần phải khóa»): on the cung nữ road a person card keeps only the acts she really has; innermost, so every wrapper's added button passes it */try{if(typeof road8Acts==="function")o=road8Acts(o)}catch(e){}const f=o.f||{};const L=(o.lines||[]).filter(Boolean);const C=(o.chips||[]).filter(Boolean);
  const G=(o.groups||[]).filter(g=>g&&g[1]&&g[1].filter(Boolean).length);
  const role=o.tabKey||"p";window.__pcTab=window.__pcTab||{};let act=window.__pcTab[role];if(!G.some(g=>g[0]===act))act=(G.find(g=>g[1].some(b=>/<button(?![^>]*disabled)/.test(b)))||G[0]||[])[0];
  const tabs=G.length>1?`<div class="pctabs">${G.map(([hd,B])=>{const n=B.filter(b=>/<button(?![^>]*disabled)/.test(b)).length,tot=B.filter(b=>/<button/.test(b)).length;return `<button class="pct${hd===act?" on":""}" data-pct="${hd}" data-role="${role}">${hd||"Việc"}${tot?` <i title="làm được ${n} trên ${tot} việc">${n}/${tot}</i>`:""}</button>`}).join("")}</div>`:"";
@@ -9102,6 +9102,7 @@ setTimeout(()=>{try{const c0=countAt;countAt=function(k){try{if(S&&S.visit&&k===
 try{const st=document.getElementById("stage");if(st&&window.ResizeObserver)new ResizeObserver(j59sched).observe(st)}catch(e){}
 addEventListener("resize",j59sched);
 window.j59lay=j59lay;
+window.j59tagHTML=j59tagHTML;window.j59col=j59col;window.j59fac=j59fac;
 })();
 /* j62: kid card shows age once (in the header "Hoàng tử · 11 tuổi"); the adult age band (18–25…) is shown only for adults (owner 11/14) */
 (function(){const t0=tuoi;tuoi=function(n){return n>=18?t0(n):(n>0?`Tuổi <b>${n}</b>`:"")};
@@ -37230,6 +37231,8 @@ const NWB={
  /* the hint / done buttons are the SAME signs as group a (j91 k91Btns): «?» and «✓» on .kgbtn, the word only in the tooltip (mg-noword-a); other signs are the svg icons */
  btn(id,k,o){o=o||{};const lab=o.label||"",inner=k==="hint"?"?":k==="check"?"✓":NWB.ic(k);return `<button type="button" class="${o.cls||"kgbtn"} nwb-btn" id="${id}" aria-label="${lab}" title="${lab}">${inner}</button>`},
  pips(n,on,cls){let s="";for(let i=0;i<n;i++)s+=`<i class="nwb-pip${i<on?" on":""}"></i>`;return `<span class="nwb-pips${cls?" "+cls:""}" aria-hidden="true">${s}</span>`},
+ /* care games (thu_tam / thu_choi / tuoi): the progress line is dots, not words. n dots, on filled; band [lo,hi] = the right zone drawn as green-ringed dots (a sign, never text) */
+ cnt(n,on,_h,band){let s="";for(let i=0;i<n;i++){const b=band&&i+1>=band[0]&&i+1<=band[1];s+=`<i class="nwb-pip${i<on?" on":""}${b?" band":""}"></i>`}return `<div class="nwb-pool nwb-cnt"><span class="nwb-pips" aria-hidden="true">${s}</span></div>`},
  who(name){return/già|lão|góa|cao|ma ma/i.test(name)?"elder":/nhỏ|tiểu|mới|còn nhỏ/i.test(name)?"child":/ốm|yếu|đói/i.test(name)?"sick":"adult"},
  POP:{ok:"✓",bad:"✗",s3:"★★★",s2:"★★",s1:"★"}};
 (function(){const st=document.createElement("style");st.id="nwb-css";st.textContent=`
@@ -37238,6 +37241,7 @@ const NWB={
 .nwb-i{width:1.5em;height:1.5em;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .nwb-btn{display:inline-flex;align-items:center;justify-content:center;min-width:56px;min-height:48px}.nwb-btn .nwb-i{width:1.8em;height:1.8em}
 .nwb-pips{display:inline-flex;gap:5px;align-items:center;vertical-align:middle}.nwb-pip{width:13px;height:13px;border-radius:50%;border:2px solid var(--k-hair,#b59a6a);box-sizing:border-box;background:transparent}
+.nwb-pip.band{border-color:#2f8f4e;border-width:3px}.nwb-cnt{display:flex;justify-content:center;padding:6px 0}
 .nwb-pip.on{background:var(--gold,#d99a1e);border-color:var(--gold,#d99a1e)}
 .nwb-cap{font:700 .75rem/1.25 var(--body,sans-serif);color:var(--ink,#3a1a0c);text-align:center;overflow-wrap:anywhere}/* huong-cue-2: the one-line guiding caption beside pips (needs / left) */
 .nwb-row{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:6px 0}.nwb-row .nwb-mid{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
@@ -50281,8 +50285,8 @@ function petcTutFeed(b,env){const P=tsbPets(S)[PETC.i];const ok=PETC_FOOD[petcKi
  b.querySelectorAll("[data-food]").forEach(x=>x.addEventListener("click",pickEl));if(fig)fig.addEventListener("click",eat);
  KG82.peek=()=>{if(dead)return null;if(!sel)return{sel:`[data-food="${ok}"]`};const f=petcFig();if(!f)return null;const r=f.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height*.55}};
  return()=>{dead=true;KG82.peek=()=>null;if(fig)fig.removeEventListener("click",eat)}}
-function petcTutBath(b,env){const st=petcFig();if(!st)return()=>{};let n=0,a=null,dead=false;b.innerHTML=kitFacts(["Đã vuốt 0/2"]);st.style.touchAction="none";
- const dn=e=>{e.preventDefault();try{st.setPointerCapture(e.pointerId)}catch(x){}a={x:e.clientX,y:e.clientY}},up=e=>{if(!a||dead)return;const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);a=null;if(d<20)return;n++;b.innerHTML=kitFacts([`Đã vuốt ${n}/2`]);if(n>=2){dead=true;KG82.peek=()=>null;setTimeout(()=>env.end(),500)}};
+function petcTutBath(b,env){const st=petcFig();if(!st)return()=>{};let n=0,a=null,dead=false;b.innerHTML=NWB.cnt(2,0);st.style.touchAction="none";
+ const dn=e=>{e.preventDefault();try{st.setPointerCapture(e.pointerId)}catch(x){}a={x:e.clientX,y:e.clientY}},up=e=>{if(!a||dead)return;const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);a=null;if(d<20)return;n++;b.innerHTML=NWB.cnt(2,n);if(n>=2){dead=true;KG82.peek=()=>null;setTimeout(()=>env.end(),500)}};
  st.addEventListener("pointerdown",dn);st.addEventListener("pointerup",up);
  KG82.peek=()=>{if(dead)return null;const r=st.getBoundingClientRect();return{drag:[[r.left+r.width*.5,r.top+r.height*.3],[r.left+r.width*.5,r.top+r.height*.75]]}};
  return()=>{dead=true;KG82.peek=()=>null;st.style.touchAction="";st.removeEventListener("pointerdown",dn);st.removeEventListener("pointerup",up)}}
@@ -50319,10 +50323,10 @@ function petcFeed(){const P=tsbPets(S)[PETC.i];const ok=PETC_FOOD[petcKind(P.t)]
    Cho ăn stays outside: picking the food a species eats is knowledge, not a hand (dev/handover/reports/mg11-thutay.md). */
 /* engine: N even strokes along the pet's coat; env.fig = the picture to stroke (her pet on the care screen); none (Thử tay) = her first pet, or a kitten, drawn in the board (kitItem) */
 function petcStrokeEng(box,env){const N=Math.round(mgLev(env,"thu_tam","n")),K=mgLev(env,"thu_tam","k");let st=env.fig||null;
- const fx=c=>kitFacts([`Đã vuốt ${c}/${N}`]);
+ const fx=c=>NWB.cnt(N,c);
  if(!st){let src="";try{const P=(typeof S!=="undefined"&&S)?tsbPets(S)[0]:null;src=P?petcStageSrc(P,1).src:petSrc(Object.keys(PET)[0],1)}catch(e){}
-  box.innerHTML=kitItem({src,name:"",grade:0,size:"lg"}).replace('<span class="kitn"></span>','')+fx(0);st=box.firstElementChild}else box.innerHTML=fx(0);
- const facts=()=>box.querySelector(".kfacts");const lens=[];let a=null,dead=false;st.style.touchAction="none";
+  box.innerHTML=kitItem({src,name:"",grade:null,size:"lg"}).replace('<span class="kitn"></span>','')+fx(0);st=box.firstElementChild}else box.innerHTML=fx(0);
+ const facts=()=>box.querySelector(".nwb-cnt");const lens=[];let a=null,dead=false;st.style.touchAction="none";
  const dn=e=>{if(dead)return;e.preventDefault();try{st.setPointerCapture(e.pointerId)}catch(x){}a={x:e.clientX,y:e.clientY}},
   up=e=>{if(!a||dead)return;const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);a=null;if(d<20)return;lens.push(d);
    const f=facts();if(f)f.outerHTML=fx(lens.length);env.hud({round:`${lens.length}/${N}`});
@@ -50333,13 +50337,13 @@ function petcStrokeEng(box,env){const N=Math.round(mgLev(env,"thu_tam","n")),K=m
  return off}
 /* engine: the ball lights up under one of three kit buttons in turn; tap the lit one before it moves (N rounds) */
 function petcBallEng(box,env){const L=n=>mgLev(env,"thu_choi",n),N=Math.round(L("n")),M0=L("ms"),DEC=L("dec"),MIN=L("min"),B0=["Trái","Giữa","Phải"];
- box.innerHTML=`<div class="rbtn">${B0.map((x,i)=>`<button type="button" class="kgbtn" data-ball="${i}">${x}</button>`).join("")}</div>`+kitFacts([`Lượt 0/${N} · trúng 0`]);
+ box.innerHTML=`<div class="rbtn">${B0.map((x,i)=>`<button type="button" class="kgbtn" data-ball="${i}">${x}</button>`).join("")}</div>`+NWB.cnt(N,0);
  let lit=-1,n=0,hits=0,tm=0,dead=false;const B=[...box.querySelectorAll("[data-ball]")];
  const step=()=>{if(dead||!document.body.contains(box)){clearTimeout(tm);return}let j;do{j=Math.floor(Math.random()*3)}while(j===lit);lit=j;B.forEach((b,i)=>b.classList.toggle("on",i===lit));tm=setTimeout(step,Math.max(MIN,M0-n*DEC))};
  const off=()=>{dead=true;clearTimeout(tm);KG82.peek=()=>null};env.hud({round:`0/${N}`});step();
  KG82.peek=()=>dead?null:{sel:`[data-ball="${lit}"]`};
  B.forEach((b,i)=>b.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();if(dead)return;if(i===lit)hits++;n++;
-  const f=box.querySelector(".kfacts");if(f)f.outerHTML=kitFacts([`Lượt ${n}/${N} · trúng ${hits}`]);env.hud({round:`${n}/${N}`});if(n>=N){off();env.end(10*hits/N)}else{clearTimeout(tm);step()}}));
+  const f=box.querySelector(".nwb-cnt");if(f)f.outerHTML=NWB.cnt(N,n,hits);env.hud({round:`${n}/${N}`});if(n>=N){off();env.end(10*hits/N)}else{clearTimeout(tm);step()}}));
  return off}
 function petcHow(k){const L=n=>Math.round(mgLev({lv:BAL.mgTier.mid},k,n));return k==="thu_tam"?`Vuốt dọc lông nó ${L("n")} lần, đều tay (vuốt trên hình nó).`:`Quả cầu sáng lên ở một ô rồi lăn sang ô khác: chạm đúng ô đang sáng (${L("n")} lần).`}
 /* game 2: even strokes along the pet's coat (on its picture) */
@@ -63941,9 +63945,18 @@ const css=document.createElement("style");css.id="kit-rail";css.textContent=`
 .krail.kstdock{position:fixed;left:calc(env(safe-area-inset-left,0px) + 8px);top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);z-index:8700}
 body:has(#modal:not([hidden])) .krail.kstdock,body:has(#ov:not([hidden])) .krail.kstdock,body.kbk-open .krail.kstdock{visibility:hidden}
 .krailb.kbadge:after{content:"";position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:var(--k-seal,#9a2c1c);box-shadow:0 0 0 2px var(--k-card,#fffaf0)}
+/* KIT §77b kitStBadge: the round STATUS BADGE at the bottom-right corner of a kit square rail button (.krailb): ✓ green = ready, … grey = busy, ⏸ amber = paused; none = no badge. Offline = class koff on the button (picture goes grey). K-BADGE-HAOHUU */
+.krailb .kbdg{position:absolute;right:-7px;bottom:-7px;min-width:20px;height:20px;padding:0 3px;border-radius:50%;box-sizing:border-box;font:800 14px/20px system-ui,sans-serif;text-align:center;color:#fff;background:#8a7350;box-shadow:0 0 0 2px var(--k-card,#fffaf0);pointer-events:none;z-index:2;display:flex;align-items:center;justify-content:center}
+.krailb .kbdg.ok{background:#2f8a4a}.krailb .kbdg.pause{background:#b07a18;font-size:0;gap:3px}.krailb .kbdg.busy{background:#7a6a58;letter-spacing:-1px}
+/* ⏸ is drawn as two CSS bars (font independent): each 3 x 10 px */
+.krailb .kbdg.pause::before,.krailb .kbdg.pause::after{content:"";display:block;width:3px;height:10px;border-radius:1px;background:#fff}
+.krailb.koff>:not(.kbdg){filter:grayscale(1) brightness(.92);opacity:.7}
 `;document.head.appendChild(css);
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77",title:"kitStageRail · cột nút vuông bên trái sân khấu (Lịch · Chat · Mục tiêu)",
  html:()=>`<div class="kitpg-row" style="position:relative;height:150px"><nav class="krail" style="position:static">${[["ico-cal","Lịch tháng",0],["ico-chat","Chat",0],["ico-goal","Mục tiêu chương",1]].map(([i,t,b])=>`<button type="button" data-g="${t.charAt(0)}" class="krailb${b?" kbadge":""}" title="${t}"><img src="https://ctm-img.victoria-tntt.workers.dev/img/kit/${i}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
+function kitStBadge(st){const m={ok:"✓",busy:"…",pause:"⏸"};return m[st]?`<b class="kbdg ${st}" aria-hidden="true">${m[st]}</b>`:""}window.kitStBadge=kitStBadge;
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77b",title:"kitStBadge · huy hiệu trạng thái ở góc nút vuông (✓ sẵn sàng · … đang bận · ⏸ tạm dừng · xám = ngoại tuyến)",
+ html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;padding:8px">${[["ok",""],["busy",""],["pause",""],["","koff"]].map(([st,c])=>`<button type="button" class="krailb ${c}" aria-label="${st||"ngoại tuyến"}"><span class="krailg">♥</span>${kitStBadge(st)}</button>`).join("")}</div>`})}catch(e){}
 }catch(e){console.error("jrail",e)}})();
 /* ================= jstatus: kitStatusIcon — ONE status icon (KIT §77.1, owner 16/11 16:25Z, review/status-icons) =================
    Owner: "nhiều game bây giờ nó làm rất là đơn giản. Nó chỉ là một cái icon biểu tượng download nằm ở một cái góc nhỏ … có animation sao đó để cho người chơi
@@ -84495,7 +84508,7 @@ window.shelfPlantOpen=shelfPlantOpen;
 /* the care minigame (also the Thử tay calibration entry): water rises step by step; stop it inside the band; score = closeness over the rounds */
 /* MG11: env (optional) = the board ease (BAL.mgTier.lev.tuoi f × the pour pace; middle ease = the old pace, law 5) + the round on the HUD; the SAME board is the Thử tay kind tuoi (jmgx) */
 function shelfWaterGame(box,done,W,env){W=W||SHELF_CARE.cay;const G=BAL.shelf.plant.game,F=env?mgLev(env,"tuoi","f"):1;let r=0,lv=0,tm=0,sum=0;const stop=()=>clearTimeout(tm);const hr=()=>{if(env&&env.hud)env.hud({round:`${Math.min(r+1,G.rounds)}/${G.rounds}`})};
- const draw=()=>{box.innerHTML=`<div class="rbtn"><button type="button" class="kgbtn" data-shw="stop">${W.stop}</button></div>`+kitFacts([`Lần ${r+1}/${G.rounds} · đã đổ ${lv}/${G.steps} · vừa đủ: ${G.band[0]}–${G.band[1]}`])};
+ const draw=()=>{box.innerHTML=`<div class="rbtn"><button type="button" class="kgbtn" data-shw="stop" aria-label="${W.stop}" title="${W.stop}" data-kgsign="●">●</button></div>`+NWB.cnt(G.steps,lv,0,G.band)};
  const tick=()=>{if(!document.body.contains(box)){stop();return}lv++;if(lv>G.steps){end(0);return}draw();tm=setTimeout(tick,F*(G.ms[0]-(G.ms[0]-G.ms[1])*r/Math.max(1,G.rounds-1)))};
  const end=s=>{stop();sum+=s;r++;lv=0;hr();if(r>=G.rounds){SHPC.game=null;done(sum/G.rounds);return}draw();tm=setTimeout(tick,F*G.ms[0])};
  box.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-shw]");if(!b)return;ev.preventDefault();ev.stopPropagation();
@@ -88078,6 +88091,207 @@ window.nmBirth=nmBirth;window.nmOrdApply=nmOrdApply;window.NM_ORD=NM_ORD;window.
  if(typeof render==="function"){const r0=render;render=function(){try{const W=window.COOPW;if(W&&W.on&&S&&S.nmOrd&&!nmOwner()){const L=S.nmOrd[nmPidMe()];if(Array.isArray(L)&&L.length){W.inFC=(W.inFC||0)+1;try{nmOrdApply("relay")}finally{W.inFC--}}}}catch(e){}return r0.apply(this,arguments)}}
  if(typeof monthTick==="function"){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{nmFix("month")}catch(e){}return r}}
 })();
+/* ================= jfocus: kitFocus — Dư đồ FOCUS VIEW (KIT §92; K-FOCUS-1 + K-FOCUS-1b; owner OD 21/11 ~06:20Z, ~06:50Z, ~06:55Z) =================
+   ONE full-canvas focus layer for a person standing on the place stage: DIM + BLUR veil over the painting, the person's stage figure walks to the centre at
+   the one XL size, group tabs above the head (same look as the person-card tabs), the acts fan out left/right of the figure as ONE button size per mode,
+   the stage name tag (plate) under the feet, a SAY box at the bottom for NPC-initiated encounters, a PLAY layer over the figure for a mini-game.
+   PURE DISPLAY: no game logic, no numbers of its own — counts / odds words / costs come in the data. Every knob is in KIT_FOC (like KIT_EMOSEAL).
+   kitIdle  (K-FOCUS-1b): CSS-only idle life on every stage figure (breath / sway / rare head turn), per kind, off with reduced motion / «Cảnh động» off / Gọn.
+   kitMoodSay(figEl,text,{seal}) (K-FOCUS-1b): ONE short rare bubble beside a figure's head.
+   API:  const F=kitFocus.open({p,fig,from,plate,groups,group,onAct,onClose});  F.setGroup(k) · F.setGroups(G) · F.say(lines,{onDone}) · F.choices(list,onPick) · F.play({skip:{n,sub,onSkip},onBack}) · F.hud(mark,clock)
+         · F.endPlay() · F.react({seal,line,deltas}) · F.close() (animated) · F.destroy() (instant) · F.figRect().
+   groups:[{k,n,can,tot,acts:[{id,n,pic,word,ton,off,why,info}]}]  (info = §6.3 rows html shown by the «!» popover; why = reason shown when the act is off).
+   Test: dev/test/kit-focus.js. */
+(function(){try{
+const KIT_FOC=window.KIT_FOC=window.KIT_FOC||{
+ veilMs:360,walkMs:700,tabsAt:600,tabsMs:200,fanMs:220,fanStagger:40,foldOpenMs:120,foldCloseMs:160,closeMs:600,veilOutMs:300,fadeMs:150,reactMs:1600,sayRiseMs:220,
+ col:{kv1:236,kv2:300},btnH:{kv1:64,kv2:72},pic:{kv1:56,kv2:64},floorPad:{kv1:64,kv2:56},tabH:34,tabGap:8,headGap:8,colGap:12,
+ motion:null /* test hook: true = ignore reduced motion */,
+ idle:{breath:[3.6,4.4],breathKid:[2.8,3.2],sway:[7,9],turnEvery:[9000,15000],turnGapMs:4000,turnMs:1200,sayMs:3500,sayFadeMs:300,sayMax:22}};
+const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
+const still=()=>{if(KIT_FOC.motion===true)return false;try{return matchMatchMedia()}catch(e){}return false};
+function matchMatchMedia(){return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)||document.documentElement.classList.contains("kf-still")}
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let CUR=null;
+function area(){const g=document.getElementById("game")||document.body,gr=g.getBoundingClientRect();const st=document.getElementById("stage"),bar=document.querySelector("nav.bar,.bar");
+ const sr=st?st.getBoundingClientRect():{top:gr.top+163};const br=bar&&bar.getBoundingClientRect().height?bar.getBoundingClientRect():null;
+ const top=Math.max(sr.top,gr.top)-gr.top,bot=(br?br.top:gr.bottom)-gr.top-6;return {g,left:4,top,w:gr.width-8,h:Math.max(200,bot-top)}}
+function picHTML(a){const u=a.pic;if(u&&/^(https?:|img\/|data:)/.test(u))return `<img class="kfoc-pic" alt="" src="${esc(u)}" draggable="false">`;if(u&&/^</.test(u))return `<span class="kfoc-pic">${u}</span>`;return `<span class="kfoc-pic kfoc-ph" aria-hidden="true"></span>`}
+function btnHTML(a,i){const sub=[a.word,a.ton?("Tốn "+a.ton):""].filter(Boolean).join(" · ");
+ const full=[a.n,sub].filter(Boolean).join(" · ");return `<button type="button" class="kfoc-b${a.off?" kfoc-off kitoff":""}${(a.info||a.off&&a.why)?" kfoc-hasi":""}" data-i="${i}" data-id="${esc(a.id)}" aria-label="${esc(full)}" title="${esc(full)}">${picHTML(a)}<span class="kfoc-t"><b>${esc(a.n)}</b>${sub?`<small>${[a.word,a.ton?("Tốn "+a.ton):""].filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join(" · ")}</small>`:""}</span>${(a.info||a.off&&a.why)?`<span class="khap kfoc-i" role="button" tabindex="0" aria-label="Chi tiết">!</span>`:""}</button>`}
+function fac(F){try{if(typeof j59fac==="function")return j59fac(F.src,F.p)||1}catch(e){}return 1}
+function open(o){if(CUR)CUR.destroy();const A=area(),K=KIT_FOC,m=kv(),src=(o.fig&&(o.fig.currentSrc||o.fig.src))||(typeof o.fig==="string"?o.fig:"")||"";
+ const F={o,A,m,src,p:o.p,groups:o.groups||[],group:o.group||(o.groups&&o.groups[0]&&o.groups[0].k),anims:[],open:true,playing:false};CUR=F;
+ const el=F.el=document.createElement("div");el.className="kfoc kfoc-"+m;el.setAttribute("role","dialog");el.setAttribute("aria-label","Gặp riêng");
+ el.style.cssText=`left:${A.left}px;top:${A.top}px;width:${A.w}px;height:${A.h}px`;
+ el.innerHTML=`<div class="kfoc-bg" aria-hidden="true"></div><div class="kfoc-veil"></div><img class="kfoc-fig" alt="" draggable="false"><div class="kfoc-tabs pctabs"></div><div class="kfoc-col kfoc-l"></div><div class="kfoc-col kfoc-r"></div><div class="kfoc-plate"></div><div class="kfoc-play" hidden></div><div class="kfoc-hud kgame" hidden><span class="kgmk"></span><span class="kgclk"></span></div><div class="kfoc-say" hidden></div><div class="kfoc-skipw" hidden></div><button type="button" class="kit-x kfoc-x" aria-label="Lui" title="Lui">✕</button>`;
+ try{const tk=o.fig&&o.fig.closest&&o.fig.closest(".tok");if(tk){F.tok=tk;F.tokVis=tk.style.visibility;tk.style.visibility="hidden"}}catch(e){}
+ try{const si=document.getElementById("scimg");const bi=si&&(si.style.backgroundImage||getComputedStyle(si).backgroundImage);if(bi&&bi!=="none"){el.querySelector(".kfoc-bg").style.backgroundImage=bi;el.classList.add("kfoc-hasbg")}}catch(e){}
+ if(still())el.classList.add("kfoc-still");
+ A.g.appendChild(el);F.q=s=>el.querySelector(s);F.img=F.q(".kfoc-fig");F.tabs=F.q(".kfoc-tabs");F.cl=F.q(".kfoc-l");F.cr=F.q(".kfoc-r");F.plate=F.q(".kfoc-plate");
+ F.img.src=src;
+ const plate=o.plate||{};try{const p=o.p;F.plate.innerHTML=plate.html||(typeof j59tagHTML==="function"&&p?`<span class="kfoc-tag" style="--tc:${typeof j59col==="function"?j59col(p):"#5a6878"}">${j59tagHTML(p,p.name)}</span>`:`<span class="kfoc-tag"><span class="j59n">${esc(plate.name||"Người lạ")}</span></span>`)}catch(e){}
+ const body=typeof kitFigBody==="function"&&src?kitFigBody(src,()=>{if(CUR===F&&F.open)layout(F)}):null;F.body=body;
+ layout(F);build(F);
+ F.q(".kfoc-x").addEventListener("click",()=>{if(F.playing){const ob=F.playO&&F.playO.onBack;if(ob){try{ob()}catch(e){}}if(F.playing)F.endPlay()}else F.close()});
+ el.addEventListener("click",e=>{const b=e.target.closest(".kfoc-b");if(!b)return;const a=F.cur[+b.dataset.i];if(!a)return;
+  if(e.target.closest(".kfoc-i")){e.stopPropagation();const sub=[a.word,a.ton?("Tốn "+a.ton):""].filter(Boolean).join(" · ");const head=b.classList.contains("kfoc-clamp")?`<div class="kpopt">${esc(a.n)}</div>${sub?`<p>${esc(sub)}</p>`:""}`:"";try{kpPop(b,head+(a.off&&a.why?`<div class="kpopt">${esc(a.why)}</div>`:"")+(a.info||""),{})}catch(x){}return}
+  if(a.off){try{kpPop(b,`<div class="kpopt">${esc(a.why||"Chưa làm được")}</div>`,{})}catch(x){}return}
+  if(F.pick){const f=F.pick;F.pick=null;f(a.id);return}
+  if(o.onAct)o.onAct(a.id)});
+ el.addEventListener("click",e=>{if(F.opening&&e.target.closest(".kfoc"))F.skipOpen()},true);
+ F.setGroup=k=>setGroup(F,k);F.setGroups=G=>setGroups(F,G);F.say=(L,oo)=>say(F,L,oo||{});F.choices=(L,cb)=>choices(F,L,cb);F.play=oo=>playOn(F,oo||{});F.endPlay=()=>playOff(F);F.hud=(mk,ck)=>hud(F,mk,ck);F.react=r=>react(F,r);
+ F.close=()=>close(F);F.destroy=()=>destroy(F);F.figRect=()=>F.img.getBoundingClientRect();F.skipOpen=()=>{F.opening=false;[...F.anims].forEach(a=>{try{a.finish()}catch(e){}})};
+ animateOpen(F);return F}
+function layout(F){const K=KIT_FOC,A=F.A,m=F.m,v=F.body||{t:.02,b:.99,ar:.42,ht:.05},Z=typeof KIT_SIZE==="object"?KIT_SIZE.fig.XL:{h:398,cw:220};
+ const H=Z.h*fac(F),ih=H/Math.max(.2,(v.b-v.t)),iw=ih*(v.ar||.42),cx=A.w/2,floor=A.h-K.floorPad[m];let top=floor-v.b*ih;
+ const ht=(typeof kitFigTop==="function"?kitFigTop(v):v.t);const need=K.tabH+K.headGap+44;let head=top+ht*ih;if(head<need){top+=need-head;head=need}
+ F.geo={cx,floor,ih,iw,top,head,cw:Z.cw,H};
+ const s=F.img.style;s.left=(cx-iw/2)+"px";s.top=top+"px";s.width=iw+"px";s.height=ih+"px";
+ const tb=F.tabs.style;tb.left="0";tb.right="0";tb.bottom=(A.h-(head-K.headGap))+"px";
+ const cw=Math.min(K.col[m],Math.max(90,cx-(Z.cw/2+K.colGap)-4)),ctop=head-K.headGap+K.colGap-K.headGap;
+ for(const [side,c] of [["l",F.cl],["r",F.cr]]){const cs=c.style;cs.width=cw+"px";cs.top=Math.max(0,head+4)+"px";cs.height=Math.max(60,floor-head-4)+"px";
+  if(side==="l")cs.left=(cx-(Z.cw/2+K.colGap)-cw)+"px";else cs.left=(cx+(Z.cw/2+K.colGap))+"px"}
+ F.plate.style.top=(floor+6)+"px";F.plate.style.left=cx+"px";
+ const pl=F.q(".kfoc-play").style;pl.left=Math.max(0,cx-iw/2-40)+"px";pl.width=(iw+80)+"px";pl.top=top+"px";pl.height=ih+"px";
+ el_btn(F);if(F.cur)clampMark(F)}
+function el_btn(F){const h=KIT_FOC.btnH[F.m],p=KIT_FOC.pic[F.m];F.el.style.setProperty("--kfh",h+"px");F.el.style.setProperty("--kfp",p+"px")}
+function build(F){const G=F.groups,g=G.find(x=>x.k===F.group)||G[0];F.cur=g?g.acts:[];
+ F.tabs.innerHTML=G.length>1?G.map(x=>`<button type="button" class="pct${x.k===(g&&g.k)?" on":""}" data-k="${esc(x.k)}">${esc(x.n)}${x.tot!=null?` ${x.can!=null?x.can+"/":""}${x.tot}`:""}</button>`).join(""):"";
+ F.tabs.onclick=e=>{const b=e.target.closest(".pct");if(b&&b.dataset.k!==F.group)setGroup(F,b.dataset.k)};
+ fill(F,F.cur)}
+function fill(F,list){const L=[],R=[];list.forEach((a,i)=>(i%2?R:L).push(btnHTML(a,i)));F.cl.innerHTML=L.join("");F.cr.innerHTML=R.join("");clampMark(F)}
+/* text never cut: title max 2 lines (clamp) + the sub-line «odds word · Tốn N khắc» whose two parts never break inside (nowrap spans), so on a narrow column it takes 2 lines and the price is never cut; a clamped button gets the «!» so the full name + sub-line show in the popover (aria/title carry it too) */
+function clampMark(F){F.el.querySelectorAll(".kfoc-b:not(.kfoc-skip)").forEach(b=>{const t=b.querySelector("b"),s=b.querySelector("small");const cut=(t&&t.scrollHeight>t.clientHeight+1)||(s&&s.scrollWidth>s.clientWidth+1);
+  b.classList.toggle("kfoc-clamp",!!cut);if(cut&&!b.querySelector(".kfoc-i")){b.classList.add("kfoc-hasi");b.insertAdjacentHTML("beforeend",`<span class="khap kfoc-i" role="button" tabindex="0" aria-label="Chi tiết">!</span>`)}})}
+/* replace the groups (caller's live counts); keeps the current group if it still exists; no fold animation; during choices/play the acts wait until play/choices end */
+function setGroups(F,G){F.groups=G||[];if(!F.groups.find(x=>x.k===F.group))F.group=F.groups[0]&&F.groups[0].k;if(F.pick||F.playing){F.saved=1;return}build(F)}
+function wa(F,el,kf,opt){if(!el.animate)return null;const a=el.animate(kf,Object.assign({fill:"both"},opt));F.anims.push(a);a.onfinish=()=>{const i=F.anims.indexOf(a);if(i>=0)F.anims.splice(i,1)};return a}
+function feetDelta(F){const f=F.o.from,r=F.img.getBoundingClientRect();if(!f)return null;const s=f.height/Math.max(1,r.height);return {dx:(f.left+f.width/2)-(r.left+r.width/2),dy:f.bottom-r.bottom,s}}
+function animateOpen(F){const K=KIT_FOC,veil=F.q(".kfoc-veil");F.opening=true;const done=()=>{F.opening=false};
+ if(still()){wa(F,F.el,[{opacity:0},{opacity:1}],{duration:K.fadeMs}).onfinish=done;return}
+ wa(F,veil,[{opacity:0},{opacity:1}],{duration:K.veilMs,easing:"ease-out"});
+ const d=feetDelta(F);F.img.style.transformOrigin="50% 100%";
+ if(d){const P=n=>({dx:d.dx*(1-n),dy:d.dy*(1-n),s:d.s+(1-d.s)*n}),T=(n,up)=>{const q=P(n);return `translate(${q.dx}px,${q.dy-(up||0)}px) scale(${q.s})`};
+  wa(F,F.img,[{transform:T(0),offset:0},{transform:T(.25,8),offset:.25},{transform:T(.5),offset:.5},{transform:T(.75,8),offset:.75},{transform:T(1),offset:1}],{duration:K.walkMs,easing:"cubic-bezier(.2,.7,.2,1)"})}
+ else wa(F,F.img,[{opacity:0},{opacity:1}],{duration:K.walkMs});
+ wa(F,F.plate,[{opacity:0},{opacity:1}],{duration:K.tabsMs,delay:K.walkMs*.85});
+ wa(F,F.tabs,[{opacity:0,translate:"0 -6px"},{opacity:1,translate:"0 0"}],{duration:K.tabsMs,delay:K.tabsAt});
+ fan(F,K.walkMs*.85);setTimeout(done,K.walkMs+K.fanStagger*8+K.fanMs)}
+function fan(F,delay){const K=KIT_FOC;if(still())return;const bs=[...F.cl.querySelectorAll(".kfoc-b"),...F.cr.querySelectorAll(".kfoc-b")].sort((a,b)=>(+a.dataset.i)-(+b.dataset.i));
+ const cx=F.geo.cx;bs.forEach((b,n)=>{const r=b.getBoundingClientRect(),er=F.el.getBoundingClientRect();const dx=(er.left+cx)-(r.left+r.width/2);wa(F,b,[{opacity:0,transform:`translateX(${dx}px) scale(.85)`},{opacity:1,transform:"none"}],{duration:K.fanMs,delay:delay+n*K.fanStagger,easing:"cubic-bezier(.2,.7,.2,1)"})})}
+function setGroup(F,k){if(!F.open||k===F.group)return;const K=KIT_FOC;F.group=k;const swap=()=>{build(F);fan2(F)};
+ if(still()){swap();return}
+ const bs=[...F.el.querySelectorAll(".kfoc-b")];bs.forEach(b=>wa(F,b,[{opacity:1},{opacity:0,transform:"scale(.9)"}],{duration:K.foldOpenMs}));setTimeout(()=>{if(F.open)swap()},K.foldOpenMs)}
+function fan2(F){const K=KIT_FOC;if(still())return;[...F.el.querySelectorAll(".kfoc-b")].forEach((b,n)=>wa(F,b,[{opacity:0,transform:"scale(.9)"},{opacity:1,transform:"none"}],{duration:K.fanMs,delay:n*K.fanStagger*.5}))}
+function say(F,L,oo){const box=F.q(".kfoc-say");const lines=(L||[]).slice();let i=0;F.cl.classList.add("kfoc-fold");F.cr.classList.add("kfoc-fold");F.plate.hidden=true;
+ const show=()=>{const l=lines[i];if(!l){box.hidden=true;F.plate.hidden=false;F.cl.classList.remove("kfoc-fold");F.cr.classList.remove("kfoc-fold");sayLift(F,0);if(oo.onDone)oo.onDone();return}
+  const face=l.face&&typeof kitFaceH==="function"?kitFaceH(l.face,"xs"):"";const last=i===lines.length-1;
+  box.innerHTML=`<span class="kfoc-sayf">${face}</span><span class="kfoc-sayn">${esc(l.who||"")}</span><p>${esc(l.text)}</p><button type="button" class="kfoc-next">${last?"Tiếp ▸":"Tiếp ▸"}</button>`;box.hidden=false;
+  if(!still())wa(F,box,[{opacity:0,translate:"0 12px"},{opacity:1,translate:"0 0"}],{duration:KIT_FOC.sayRiseMs});
+  sayLift(F,1);box.querySelector(".kfoc-next").onclick=()=>{i++;show()}};
+ const go=()=>show();if(F.opening)setTimeout(go,KIT_FOC.walkMs);else go()}
+/* SAY box never covers the figure: while it shows, the tabs hide and the figure (individual `translate`, composes with the walk transform) rises by the overlap, never above the layer top */
+function sayLift(F,on){const box=F.q(".kfoc-say");let dy=0;if(on&&!box.hidden){const bt=box.offsetTop,feet=F.geo.floor+4;dy=Math.max(0,Math.min(feet-bt,F.geo.top+F.geo.ih*(F.body?F.body.t:.02)-4))}
+  F.tabs.style.visibility=dy?"hidden":"";F.img.style.translate=dy?`0 ${-dy}px`:"";F.lift=dy}
+function choices(F,L,cb){sayLift(F,0);const box=F.q(".kfoc-say");box.hidden=true;F.plate.hidden=false;F.cur=L;F.pick=cb;fill(F,L);F.cl.classList.remove("kfoc-fold");F.cr.classList.remove("kfoc-fold");fan2(F)}
+function playOn(F,oo){F.playing=true;F.playO=oo;const sw=F.q(".kfoc-skipw");sw.innerHTML="";sw.hidden=true;
+  if(oo.skip){const k=oo.skip;sw.innerHTML=`<button type="button" class="kfoc-b kfoc-skip" aria-label="${esc([k.n,k.sub].filter(Boolean).join(" · "))}"><span class="kfoc-t"><b>${esc(k.n||"Làm luôn")}</b>${k.sub?`<small>${esc(k.sub)}</small>`:""}</span></button>`;sw.hidden=false;
+   sw.firstChild.onclick=e=>{e.stopPropagation();try{if(k.onSkip)k.onSkip()}catch(x){}}}
+F.cl.classList.add("kfoc-fold");F.cr.classList.add("kfoc-fold");F.tabs.hidden=true;F.plate.hidden=true;const pl=F.q(".kfoc-play");pl.hidden=false;pl.innerHTML="";
+ const x=F.q(".kfoc-x");x.classList.add("kfoc-back");x.textContent="◂";x.setAttribute("aria-label","Quay lại");x.title="Quay lại";return pl}
+function playOff(F){if(!F.playing)return;F.playing=false;F.playO=null;const sw=F.q(".kfoc-skipw");sw.hidden=true;sw.innerHTML="";if(F.saved&&!F.pick){F.saved=null;build(F)}const pl=F.q(".kfoc-play");pl.hidden=true;pl.innerHTML="";F.q(".kfoc-hud").hidden=true;F.cl.classList.remove("kfoc-fold");F.cr.classList.remove("kfoc-fold");F.tabs.hidden=false;F.plate.hidden=false;
+ const x=F.q(".kfoc-x");x.classList.remove("kfoc-back");x.textContent="✕";x.setAttribute("aria-label","Lui");x.title="Lui"}
+function hud(F,mk,ck){const h=F.q(".kfoc-hud");h.hidden=false;try{if(mk!=null)kitGameMark(mk);if(ck!=null)kitGameClock(ck)}catch(e){}}
+function react(F,r){r=r||{};try{if(r.seal&&typeof kitEmoSeal==="object"&&kitEmoSeal.lean)kitEmoSeal.lean(F.img)}catch(e){}
+ if(r.line)kitMoodSay(F.img,r.line,{seal:r.seal,hold:KIT_FOC.reactMs});
+ (r.deltas||[]).forEach((d,i)=>{const s=document.createElement("span");s.className="kfoc-delta";s.innerHTML=typeof chip==="function"?chip(esc(d.t||d),d.cls||""):esc(d.t||d);const g=F.geo;s.style.left=(g.cx+(i-(r.deltas.length-1)/2)*70)+"px";s.style.top=(g.top+g.ih*.45)+"px";F.el.appendChild(s);
+  if(still()||!s.animate){setTimeout(()=>s.remove(),KIT_FOC.reactMs);return}
+  const a=s.animate([{opacity:0,transform:"translate(-50%,0)"},{opacity:1,transform:"translate(-50%,-18px)",offset:.2},{opacity:1,transform:"translate(-50%,-46px)",offset:.75},{opacity:0,transform:"translate(-50%,-60px)"}],{duration:KIT_FOC.reactMs,delay:i*120});a.onfinish=()=>s.remove()})}
+function close(F){if(!F.open)return;const K=KIT_FOC;F.open=false;F.skipOpen();
+ if(still()){const a=wa(F,F.el,[{opacity:1},{opacity:0}],{duration:K.fadeMs});if(a)a.onfinish=()=>destroy(F,1);else destroy(F,1);return}
+ [...F.el.querySelectorAll(".kfoc-b")].forEach(b=>wa(F,b,[{opacity:1},{opacity:0,transform:"scale(.85)"}],{duration:K.foldCloseMs}));wa(F,F.tabs,[{opacity:1},{opacity:0}],{duration:K.foldCloseMs});wa(F,F.plate,[{opacity:1},{opacity:0}],{duration:K.foldCloseMs});
+ const d=feetDelta(F);F.img.style.transformOrigin="50% 100%";
+ if(d){const T=(n,up)=>`translate(${d.dx*n}px,${d.dy*n-(up||0)}px) scale(${1+(d.s-1)*n})`;wa(F,F.img,[{transform:T(0),offset:0},{transform:T(.25,8),offset:.25},{transform:T(.5),offset:.5},{transform:T(.75,8),offset:.75},{transform:T(1),offset:1}],{duration:K.closeMs,delay:K.foldCloseMs*.5,easing:"cubic-bezier(.2,.7,.2,1)"})}
+ wa(F,F.q(".kfoc-veil"),[{opacity:1},{opacity:0}],{duration:K.veilOutMs,delay:Math.max(0,K.closeMs-K.veilOutMs)});
+ setTimeout(()=>destroy(F,1),K.closeMs+K.foldCloseMs*.5+40)}
+function destroy(F,fromClose){if(!F||F.gone)return;F.gone=true;F.open=false;[...F.anims].forEach(a=>{try{a.cancel()}catch(e){}});F.el.remove();try{if(F.tok)F.tok.style.visibility=F.tokVis||""}catch(e){}if(CUR===F)CUR=null;try{if(F.o.onClose)F.o.onClose()}catch(e){}}
+window.kitFocus={open,current:()=>CUR,reposition:()=>{if(CUR&&CUR.open){CUR.A=area();const A=CUR.A;CUR.el.style.cssText=`left:${A.left}px;top:${A.top}px;width:${A.w}px;height:${A.h}px`;layout(CUR)}}};
+try{addEventListener("resize",()=>kitFocus.reposition())}catch(e){}
+
+/* ---------- kitMoodSay: ONE short bubble beside a figure's head (K-FOCUS-1b) ---------- */
+let SAYB=null,SAYT=0;
+function kitMoodSay(figEl,text,o){o=o||{};try{if(!figEl||!figEl.isConnected||!text)return null;const I=KIT_FOC.idle;if(SAYB){SAYB.remove();clearTimeout(SAYT);SAYB=null}
+ const host=figEl.closest("#game")||document.body,hr=host.getBoundingClientRect(),r=figEl.getBoundingClientRect();if(!r.width)return null;
+ let t=String(text);const b=document.createElement("div");b.className="kfoc-mood";b.setAttribute("role","status");b.textContent=t;host.appendChild(b);
+ const v=window.__KITFB&&window.__KITFB[figEl.currentSrc||figEl.src];const ht=v&&v.v&&typeof kitFigTop==="function"?kitFigTop(v.v):.06;
+ const hy=r.top+ht*r.height-hr.top,right=(r.left+r.width/2)<(hr.left+hr.width/2);const bw=Math.min(190,Math.max(90,t.length*8+24));
+ b.style.width="max-content";b.style.maxWidth=bw+"px";b.style.top=Math.max(8,hy-4)+"px";
+ if(right){b.style.left=(r.left+r.width*.62-hr.left)+"px";b.classList.add("kfoc-mr")}else{b.style.left=Math.max(4,(r.left+r.width*.38-hr.left)-b.offsetWidth)+"px";b.classList.add("kfoc-ml")}
+ const hold=o.hold||I.sayMs;if(!still()&&b.animate)b.animate([{opacity:0,transform:"translateY(6px)"},{opacity:1,transform:"none"}],{duration:220});
+ b.addEventListener("click",()=>{b.remove();if(SAYB===b)SAYB=null});SAYB=b;
+ try{if(o.seal&&typeof kitEmoSeal==="object"&&kitEmoSeal.lean)kitEmoSeal.lean(figEl)}catch(e){}
+ SAYT=setTimeout(()=>{if(!b.isConnected)return;if(b.animate&&!still()){const a=b.animate([{opacity:1},{opacity:0}],{duration:I.sayFadeMs});a.onfinish=()=>b.remove()}else b.remove();if(SAYB===b)SAYB=null},hold);return b}catch(e){return null}}
+window.kitMoodSay=kitMoodSay;
+
+/* ---------- kitIdle: CSS idle life on every stage figure (K-FOCUS-1b) ---------- */
+const rnd=(a,b)=>a+Math.random()*(b-a);
+function kindOf(tok){let p=null;try{const ps=typeof curPeople==="function"?curPeople():null;p=ps&&ps[+tok.dataset.p]}catch(e){}if(!p)return "woman";if(p.kind==="emp")return "emp";const age=+p.age||0;if(p.kind==="kid"||p.kid||(age&&age<12))return "kid";if(p.sex==="m"||p.male||/^(eun|tg|ofc|off|min|gd|guard|th)/.test(String(p.kind||""))&&p.kind!=="th")return "man";return "woman"}
+function idleScan(){try{const I=KIT_FOC.idle;document.querySelectorAll("#tokens .tok.fig img.figimg").forEach(im=>{const tok=im.closest(".tok");if(!tok)return;const k=kindOf(tok);if(im.dataset.kidl===k)return;im.dataset.kidl=k;im.classList.add("kidl");
+  const b=k==="kid"?I.breathKid:I.breath,sw=I.sway;im.style.setProperty("--kidl-b",rnd(b[0],b[1]).toFixed(2)+"s");im.style.setProperty("--kidl-bd","-"+rnd(0,4).toFixed(2)+"s");im.style.setProperty("--kidl-s",rnd(sw[0],sw[1]).toFixed(2)+"s");im.style.setProperty("--kidl-sd","-"+rnd(0,8).toFixed(2)+"s");im.classList.toggle("kidl-sway",k==="woman"||k==="kid")})}catch(e){}}
+let TURN=0,LASTTURN=0;
+function turnLoop(){clearTimeout(TURN);const I=KIT_FOC.idle;TURN=setTimeout(()=>{try{if(!still()&&!CUR&&!document.hidden){const A=[...document.querySelectorAll("#tokens .tok.fig img.kidl")].filter(im=>im.getClientRects().length&&im.dataset.kidl!=="emp"&&im.dataset.kidl!=="kid"&&!document.querySelector(".kidl-turn")&&Date.now()-LASTTURN>I.turnGapMs);
+   if(A.length){const im=A[Math.floor(Math.random()*A.length)],r=im.getBoundingClientRect(),host=document.getElementById("stage").getBoundingClientRect(),dir=(r.left+r.width/2)<(host.left+host.width/2)?1:-1;im.style.setProperty("--kidl-dx",(2*dir)+"px");im.style.setProperty("--kidl-r",(.8*dir)+"deg");im.classList.add("kidl-turn");LASTTURN=Date.now();setTimeout(()=>im.classList.remove("kidl-turn"),I.turnMs)}}}catch(e){}turnLoop()},rnd(I.turnEvery[0],I.turnEvery[1]))}
+let IDT=0;try{const mo=new MutationObserver(()=>{clearTimeout(IDT);IDT=setTimeout(idleScan,300)});const st=document.getElementById("stage");if(st)mo.observe(st,{childList:true,subtree:true});idleScan();turnLoop()}catch(e){}
+window.kitIdle={scan:idleScan};
+
+const css=document.createElement("style");css.id="kit-focus";css.textContent=`
+.kfoc{position:absolute;z-index:46;overflow:hidden;border-radius:10px;touch-action:manipulation}
+.kfoc-bg{position:absolute;inset:-12px;background-size:cover;background-position:center;filter:blur(6px)}.kfoc-still .kfoc-bg,html.kf-still .kfoc-bg{filter:none;inset:0}
+.kfoc-veil{position:absolute;inset:0;background:rgba(20,12,8,.62);-webkit-backdrop-filter:blur(6px) brightness(.45);backdrop-filter:blur(6px) brightness(.45)}
+.kfoc-hasbg .kfoc-veil{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(20,12,8,.55)}
+html.kf-still .kfoc-veil{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(20,12,8,.62)}
+.kfoc-fig{position:absolute;display:block;max-width:none!important;max-height:none!important;user-select:none;-webkit-user-drag:none;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
+.kfoc-tabs{position:absolute;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:${KIT_FOC.tabGap}px;padding:0 10px;margin:0;z-index:3}
+.kfoc-tabs .pct{height:${KIT_FOC.tabH}px;white-space:nowrap}
+.kfoc-col{position:absolute;box-sizing:border-box;padding:9px 7px 4px 5px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;z-index:3;scrollbar-width:none}.kfoc-col::-webkit-scrollbar{display:none}
+.kfoc-col.kfoc-fold{display:none}
+.kfoc-b{position:relative;flex:none;display:flex;align-items:center;gap:8px;width:100%;height:var(--kfh,64px);min-height:var(--kfh,64px);box-sizing:border-box;padding:2px 8px 2px 4px;border-radius:10px;border:1px solid var(--gold,#b8892b);background:var(--k-card,#fffaf0);color:var(--ink,#3a2418);text-align:left;font:inherit;cursor:pointer;box-shadow:inset 0 0 0 2px var(--k-card,#fffaf0),0 2px 6px rgba(0,0,0,.25)}
+.kfoc-pic{flex:none;width:var(--kfp,56px);height:var(--kfp,56px);border-radius:8px;object-fit:cover;display:block;background:#efe3c8;overflow:hidden}
+.kfoc-ph{background:repeating-linear-gradient(45deg,#efe3c8,#efe3c8 6px,#e8d9b8 6px,#e8d9b8 12px)}
+.kfoc-t{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:0;line-height:1.1}.kfoc-t b{font-size:.84rem;font-weight:800;white-space:normal;overflow-wrap:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-height:2.2em}.kfoc-t small{display:block;font-size:.72rem;color:var(--dim,#7a6a58);white-space:normal;overflow:hidden;max-height:2.2em}.kfoc-t small span{white-space:nowrap}
+.kfoc-b.kfoc-hasi{padding-right:20px}
+.kfoc-skipw{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);z-index:6}.kfoc-skipw .kfoc-skip{width:auto;min-width:150px;max-width:280px;padding:4px 18px;justify-content:center;text-align:center;background:#fff3c4}
+.kfoc-b .kfoc-i{position:absolute;top:-6px;right:-4px}
+.kfoc-b.kfoc-off{filter:grayscale(.85);opacity:.78}
+.kfoc-plate{position:absolute;transform:translateX(-50%);z-index:2;pointer-events:none;text-align:center}
+.kfoc-tag{display:inline-block;width:max-content;max-width:90vw;text-align:center}
+.kfoc-tag .j59t{display:block;font-size:.66rem;line-height:1.15;font-weight:600;color:var(--ink,#3a2418);background:color-mix(in srgb,var(--tc,#5a6878) 22%,#fffaf0);box-shadow:inset 3px 0 0 var(--tc,#5a6878);border-radius:6px;padding:0 4px 0 7px;margin:0 -2px 1px}
+.kfoc-tag .j59n{display:block;line-height:1.2;font-weight:800;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.kfoc-play{position:absolute;z-index:4}
+.kfoc-hud{position:absolute;left:56px;right:56px;top:0;display:flex;justify-content:center;gap:10px;padding:6px;z-index:5}
+.kfoc-say{position:absolute;left:12px;right:12px;bottom:10px;margin:0 auto;max-width:760px;min-height:84px;max-height:132px;box-sizing:border-box;padding:18px 14px 10px 76px;border-radius:12px;border:1px solid var(--gold,#b8892b);background:var(--k-card,#fffaf0);color:var(--ink,#3a2418);z-index:6;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.kfoc-say p{margin:0;font-size:.95rem;line-height:1.35;}
+.kfoc-say p{max-height:none;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.kfoc-sayf{position:absolute;left:10px;top:12px}
+.kfoc-sayn{position:absolute;left:12px;top:-12px;padding:1px 10px;border-radius:999px;background:var(--gold,#b8892b);color:#fff;font-weight:800;font-size:.8rem}
+.kfoc-next{position:absolute;right:10px;bottom:8px;min-height:32px;padding:2px 14px;border-radius:8px;border:1px solid var(--gold,#b8892b);background:#fff3c4;font:700 .85rem inherit;color:var(--ink,#3a2418);cursor:pointer}
+.kfoc-x{position:absolute!important;top:6px;right:6px;z-index:8;min-width:44px;min-height:44px}
+.kfoc-delta{position:absolute;z-index:7;pointer-events:none;transform:translate(-50%,0)}
+.kfoc-mood{position:absolute;z-index:47;padding:5px 10px;border-radius:12px;background:#fffaf0;border:1px solid var(--gold,#b8892b);color:var(--ink,#3a2418);font-size:.8rem;line-height:1.25;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer;overflow-wrap:anywhere}
+.kfoc-mood::after{content:"";position:absolute;bottom:-6px;width:10px;height:10px;background:#fffaf0;border:1px solid var(--gold,#b8892b);border-top:0;border-left:0;transform:rotate(45deg)}
+.kfoc-mr::after{left:12px}.kfoc-ml::after{right:12px}
+/* kitIdle: individual transform properties (the stage already pins transform:none on figures) */
+@keyframes kidl-b{from{scale:1 1}to{scale:1 1.006}}@keyframes kidl-s{from{rotate:-.35deg}to{rotate:.35deg}}@keyframes kidl-t{0%{rotate:0deg;translate:0 0}25%,70%{rotate:var(--kidl-r,.8deg);translate:var(--kidl-dx,2px) 0}100%{rotate:0deg;translate:0 0}}
+#tokens .tok.fig img.kidl{transform-origin:50% 100%;animation:kidl-b var(--kidl-b,4s) ease-in-out var(--kidl-bd,0s) infinite alternate}
+#tokens .tok.fig img.kidl.kidl-sway{animation:kidl-b var(--kidl-b,4s) ease-in-out var(--kidl-bd,0s) infinite alternate,kidl-s var(--kidl-s,8s) ease-in-out var(--kidl-sd,0s) infinite alternate}
+#tokens .tok.fig img.kidl.kidl-turn{animation:kidl-b var(--kidl-b,4s) ease-in-out var(--kidl-bd,0s) infinite alternate,kidl-t 1.2s ease-in-out 1}
+html.kf-still #tokens .tok.fig img.kidl,.kf-off #tokens .tok.fig img.kidl{animation:none!important}
+@media (prefers-reduced-motion:reduce){#tokens .tok.fig img.kidl{animation:none!important}}
+`;document.head.appendChild(css);
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§92",title:"kitFocus · gặp riêng một người trên sân khấu (khung focus + quạt nút trái/phải + bảng tên) · kitIdle · kitMoodSay",
+ html:()=>`<div class="kitpg-row"><p>Mở bằng <code>kitFocus.open({p,fig,from,plate,groups,onAct,onClose})</code> trên sân khấu Dư đồ; nút chỉ có một cỡ mỗi chế độ (cao 64 Fold / 72 iPad), tab nhóm đặt trên đầu, «!» mở chi tiết. Không có mẫu tĩnh: xem <code>dev/test/kit-focus.js</code>.</p></div>`})}catch(e){}
+}catch(e){console.error("jfocus",e)}})();
 /* ================= jwalk — WALK COST, ONE RULE FOR EVERYONE (review/walk-cost, ORDER MAIN ROOT-76 20/11; owner OD 19/11 ~22:00Z
    «tôi đang ở Ngự Hoa Viên khắc ba nè, tôi bấm về nhà là tốn một khắc, tức là khắc thứ tư là tôi đã ở nhà rồi»; law 1 two-way, law 4 one core).
    Her: j2 goTo("home") / j42 srvGoTo home pay travel(place,home) like every other walk (j9 travel, BAL.walk.near / far), spill included (j9).
@@ -88164,7 +88378,20 @@ function walkNpcPass(R,kh,fresh,first){if(!walkNpcOn()||!R||!R.P)return 0;let n=
 const ROAD8={
  /* cung nữ: Phận sự → Hành sự (act), Dư đồ → Dư đồ (go), Đồng liêu → Hậu cung › Đồng liêu (staff: the shared person pager, j42 srvStaffTabHTML),
     Thân phận → Mệnh truyện › Thân phận (story), Sổ ghi → Mệnh truyện › Sổ ghi (log); Phi tần → «Chủ tử» (owner 21/11 ~03:25Z mark #36); every other tab = the consort panel */
- srv:{rv:{l:"Chủ tử"},staff:{l:"Đồng liêu"},story:{l:"Thân phận"}},
+ srv:{rv:{l:"Chủ tử"},staff:{l:"Đồng liêu"},story:{l:"Thân phận"},
+  /* ACTS = the ONE allowlist of acts on a person card on her road (MAIN CHÍNH 90 option A, interim until the owner rules her mapping; brief main90-maid-acts-a):
+     per card kind (pcard tabKey; "rival" = Hậu cung › Chủ tử, every consort) → act key (road8ActKey) → {} kept as is | {r:[[from,to],…]} kept with her words.
+     A key NOT listed is simply ABSENT on her road (owner 21/11 ~03:15Z: "tôi nghĩ cũng chả cần phải khóa nữa") — no lock, no grey button.
+     Kept = what a cung nữ really does to a consort: walk to her (khắc only, the same cost on every road) and ask a servant who she is. Meeting her, the
+     cung nữ's own talk (j42 srvTalk sk rv/hh: Hành lễ thỉnh an · Mật báo chuyện của chủ · Tố cáo chủ trước Hoàng hậu, SRVA costs) = what an NPC maid does
+     to a consort (jagstaff asOpts greet / betray / accuse: law 1 two-way). The consort acts (cost Sủng, need her own palace, servants, tai mắt, phẩm, bạc
+     sai người: Kết giao, Tranh sủng, Ly gián, Phạt quỳ, Rút thẻ bài, Mời đến cung ta …) are absent. Full kept / absent list: reports/maid-acts-a.md. */
+  acts:{rival:{
+   visit:{r:[["Đến cung nàng thăm","Đến cung nàng thỉnh an"]]},
+   see:{r:[["mọi việc làm tại chỗ, dễ hơn sai người","hành lễ, hầu chuyện tại chỗ"]]},
+   "k61:ask":{}},
+   /* the card's side note on her road (the consort's «phải sai người» / «làm tại chỗ» lines speak of a consort's means) */
+   note:{rival:"Gặp mặt: hành lễ thỉnh an; biết chuyện của chủ thì có thể mật báo."}}},
  /* tiểu thư ngoài cung (KCTABS names follow her variant, jkc2 KC2W): Khuê phòng → Hành sự, Thư từ → Hậu cung › first sub-tab, Gia tộc → Hậu cung › second,
     Giao du → Giao tình, Hoàng tự = empty card; Dư đồ / Tư trang / Tài nghệ / Mệnh truyện = hers */
  kc:{court:{k:"kid",l:()=>KCTABS.kid},rv:{l:()=>KCTABS.rv},men:{hide:1},staff:{hide:1},rel:{k:"staff",l:()=>KCTABS.staff},fac:{hide:1},
@@ -88194,6 +88421,20 @@ window.ROAD8=ROAD8;window.road8=road8;window.road8Hide=road8Hide;window.road8Lab
  /* her own panel: the road module draws it under its own key; the bar, groups and sub-tabs keep the consort key */
  if(e.k&&e.k!==tab){const t0=tab;tab=e.k;try{return p0.apply(this,arguments)}finally{tab=t0}}
  return p0.apply(this,arguments)}})();
+/* ---- the act table on her road (ROAD8.<road>.acts): which act buttons a person card shows ---- */
+/* act key of one act button: data-a (ACT, j15 rvGroups) · data-e + data-k (Quyền Hoàng hậu: "hh:<k>") · data-see / data-visit / data-scout / data-invite (j21) ·
+   data-pma (jpma: "pm:<a>") · data-k61 (j61: "k61:<v>") · else "?<first data name>" (unknown = not listed = absent) */
+function road8ActKey(h){h=String(h||"");const m=h.match(/^\s*<button([^>]*)>/);if(!m)return"";const a=m[1];let x;
+ if((x=a.match(/\bdata-a="([^"]+)"/)))return x[1];if((x=a.match(/\bdata-e="[^"]*"[^>]*\bdata-k="([^"]+)"/)))return"hh:"+x[1];
+ for(const k of ["see","visit","scout","invite"])if(new RegExp("\\bdata-"+k+"=").test(a))return k;
+ if((x=a.match(/\bdata-pma="([^"]+)"/)))return"pm:"+x[1];if((x=a.match(/\bdata-k61="([^"]+)"/)))return"k61:"+x[1];
+ x=a.match(/\bdata-([a-z0-9]+)=/);return x?"?"+x[1]:"?"}
+function road8Acts(o){const r=road8();const T=r&&ROAD8[r]&&ROAD8[r].acts;if(!T||!o||!o.tabKey||!T[o.tabKey])return o;const A=T[o.tabKey];
+ const keep=h=>{if(typeof h!=="string"||!/^\s*<button/.test(h))return h;const e=A[road8ActKey(h)];if(!e)return"";let y=h;for(const [f,t] of e.r||[])y=y.split(f).join(t);return y};
+ const groups=(o.groups||[]).map(g=>g&&Array.isArray(g[1])?[g[0],g[1].map(keep).filter(Boolean)]:g).filter(g=>g&&Array.isArray(g[1])&&g[1].length);
+ const n=T.note&&T.note[o.tabKey];const note=o.note&&/^(Cùng chỗ: làm tại chỗ|Không gặp mặt: phải sai người)/.test(o.note)?(n||""):o.note;
+ return Object.assign({},o,{groups,note})}
+window.road8ActKey=road8ActKey;window.road8Acts=road8Acts;
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -89795,7 +90036,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4a391466c401";window.CTM_BUILD=BUILD;
+const BUILD="1740cc85aebb";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
