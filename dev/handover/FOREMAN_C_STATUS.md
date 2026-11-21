@@ -1235,3 +1235,4 @@ CURRENT FOREMAN C = #25 session_01D3E3NYNncNzWuep6yvbxRe (child of #24; depth 6,
 #25 ~08:16Z: OWNER L1861: Hán test = take Phi t5 prompt as-is (same fabric), DON'T mention Đáp ứng, only DELETE luxury details (minimal) → HAN5 han_phi_simplified_L1861 → VE9 @55. LADDER8 cancelled (VE6 told skip). Next Lượt 1862.
 #25 ~08:19Z: SENT L1862 thu s62 t1–t4 L1847 VE6 sheet (300 cr; t4 jade disc G57 ✗). VE6 now: t1 L1852 + 6 m18 maids. Next Lượt 1863.
 #25 ~08:20Z: OWNER L1863: Hán collar innermost band = TRUNG Y colour = person's RANK colour (not white; corrects L1859). → HAN5.
+#25 ~08:22Z: NGOCBOI1 G57 DONE a7be91c0a (~530 files, gate FAIL all scopes). Open: Triệu Hà Bí ankle bí trụy pendant exempt? PALBACH1 idle.
