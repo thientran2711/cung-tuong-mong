@@ -69,3 +69,15 @@ Branch review/econ-tamco @ 60703f26d71bf8f9f1d11a75e0ca9d4af843944c (final-merge
 - Shots (not in git): /home/user/wt/econ-tamco-shots/roadpick-755x1000.jpg + roadpick-1180x820.jpg (the 3 roads with their kit Tốn rows).
 
 SẴN SÀNG KIỂM review/econ-tamco 60703f26d71bf8f9f1d11a75e0ca9d4af843944c (TIER BIG)
+
+## ECON TAMCO #2 — review F1 round (21/11) + HANDOVER (rollover reached)
+Reviewer F1 (reports/review-econ-tamco.md «RE-CHECK 21/11»): ECON_WIN schemes (bribe/block/xinhh/thathu) pay the price ONLY on success; the card put the price in Tốn (= paid either way).
+Done on review/econ-tamco @ bce5629534743e1216f72615603e9b76a8003788 (WIP, NOT ready, LIVE 64d2e094 not merged yet):
+- jecon.js: `ECON_WIN_FAIL="không mất bạc"` = the ONE failure wording; j17 actLine uses it (was typed).
+- jtamco.js PEND.roadpick: for ECON_WIN k: Tốn keeps only what is paid either way (tc road: Tâm cơ; hire road: Bạc −hire; plain: nothing); the price goes on «thành» (`wT`), and each road gets «hỏng: …» (`wH`: plain/tc «không mất bạc», hire «chỉ mất tiền thuê, không mất bạc giá mưu kế»).
+- econ-tamco.test.js: §3c forced fail/success per road for an ECON_WIN scheme. NB bribe's outcome is the maid's own choice (rcvMaidBribe, receiver choice), not the frozen roll, so each run must be one of the two honest outcomes (road only / road + price): it PASSES (charges match). Card checks are win-aware; a rendered check waits for the modal.
+OPEN (the only thing left):
+1. The rendered card: the kit word-map (j63 kaRows / kitParse) turns my «thành: …, thành mới trả N bạc» into «có thêm bạc» (it reads it as a GAIN) — WRONG. With `fmt({bac:-N})` inside «( … )» the part was dropped entirely. Shots: /home/user/wt/econ-tamco-shots/roadpick-*.jpg. Options: (a) find a kit grammar that prints a price paid on success (check KIT.md §13.16 / j63 for a «trả khi thành» or «thành: Bạc −N» form: try «thành: … · Bạc -N» as its own part so kaRows puts it in the Được/Thành row as a cost) — test quickly with one page eval of `dilLine(o)` + the rendered `.kb`; (b) if the kit has no form → KIT REQUEST to MAIN's kit keeper («option field for a price paid only on success», like `ton` but shown on the THÀNH row), mark «KIT-BLOCKED» and tell D. Law 9: do not hack the kit.
+2. The plain road shows «Tốn: không» (kit default for a cost-free option in an open card; it was the same on c45265d6 and passed review; KIT 28.6 drop is for hidden-outcome cards). Mention it to the reviewer; a kit question, not ours.
+3. Then: final-merge LIVE 64d2e094 (index.html/sw.js: take theirs, assemble.py keeps jtamco.js after jecon.js, build_site.sh), run econ-tamco.test.js (server: node dev/test/sw-serve.js 8931 <wt>), econ-tamco-coop.js (live worker), quickcheck, tier → «SẴN SÀNG KIỂM» to reviewer session_01964izCjh2dKcmvL4sSYKMG + D #13 session_01964izC63Mgk7VPcriQTwU7.
+Worktree: /home/user/wt/econ-tamco (sparse). Everything else in the reviewer's re-check PASSED.
