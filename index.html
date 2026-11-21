@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"5f73f84d+","t":"2026-11-20T23:18Z","c":"jagday-walk r5: tin báo carry never lost at the buổi turn (law 6c, whole carry group)","b":"2c25436a00d9","h":[{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"},{"s":"9f673ab2+","t":"2026-11-20T14:24Z","c":"Trên màn gập, chữ lựa chọn rộng hơn, hình nhỏ lại"}]};
+window.CTM_BI={"s":"2431fe94+","t":"2026-11-21T00:08Z","c":"rv jagday-walk r6: post-turn knTb rebuild only when tin báo is on (no S.tb writes on a co-op guest / ag off)","b":"88fc4834a0d6","h":[{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5230,7 +5230,7 @@ let ACTK=null;
   /* trung thành refuses (or begs against) a dishonourable order: the act does not happen */
   if(a&&k&&DIRTY.includes(k)&&!together(a,t)){sv=(DIRTY_SENT[k]||bestSent)(a);/* AG-ALL-2 G10: with the loop on the sent servant CHOOSES among the player maid's own "Lệnh của chủ" options (j42 cnvOrdOpts: Vâng lệnh / Từ chối / Mật báo) by her lòng and nết (jagstf2 stf2Ord); off → the old trung thành roll */
    oc=sv&&typeof stf2Ord==="function"?stf2Ord(a,sv,t,k):null;if(oc&&oc!=="obey"&&oc!=="half"){sv.kn=a===S?1:sv.kn;if(a===S&&oc==="refuse")servLearn(sv,"Từ chối việc bẩn");return a===S?(oc==="refuse"?`${sv.name} quỳ xin nương nương đừng làm việc thất đức; việc không thành. `:`${sv.name} viện cớ thoái thác; việc không thành. `):""}
-   if(!oc&&sv&&netIs(sv,"loyal")&&roll(30)){sv.kn=a===S?1:sv.kn;const m=`${sv.name} quỳ xin ${a===S?"nương nương":NM(a)} đừng làm việc thất đức; việc không thành. `;if(a===S)servLearn(sv,"Từ chối việc bẩn");return a===S?m:""}}
+   if(!oc&&sv&&netIs(sv,"loyal")&&roll(30)){sv.kn=a===S?1:sv.kn;const m=`${sv.name} quỳ xin ${a===S?kSay({srv:"f"},S,"{goi}",{m:"cool"}):NM(a)} đừng làm việc thất đức; việc không thành. `;if(a===S)servLearn(sv,"Từ chối việc bẩn");return a===S?m:""}}
   const r=oc==="half"?(a===S?`${sv.name} làm qua loa cho xong việc. `:"")+ordHalf(()=>r0.apply(this,arguments)):r0.apply(this,arguments);
   /* nhát gan: rivals' spies never notice him; a trail he leaves is lost */
   if(a&&k&&!together(a,t)){const sv=bestSent(a);if(sv&&netIs(sv,"timid")&&roll(35)&&t!==S&&t.evm&&t.evm[key(a)]>0)t.evm[key(a)]--}
@@ -34713,8 +34713,9 @@ BAL.ge={
  quietLoss:false,      /* D8 */
  mapOn:true,           /* K-GE-1 kitBranchMap landed (90b7e797): the Sơ đồ nhánh page in Sổ luân hồi is on */
  pull:{step:1,push:1}, /* a Chuỗi option adds step to its ending's pull; a push option takes push away (never below 0) */
- /* odds of the open ending her pair points to: base + pull × per, clamped [min, max]; its condition not met → capped at noCond */
- odds:{base:22,per:9,min:5,max:88,noCond:12},
+ /* odds of the open ending her pair points to: base + pull × per − rank × her rank step (law 5, harder as she climbs: 0 Đáp ứng … 7 Hoàng hậu,
+    ONE key for every branch of every wave, brief E35), clamped [min, max]; its condition not met → capped at noCond */
+ odds:{base:22,per:9,rank:2,min:5,max:88,noCond:12},
  /* option C shading lean: lean = Σ option tags × tag + (Đức now − Đức at life start) × duc + Ngã rẽ 2 sign × last; ≥ cut → thiện, ≤ −cut → ác, else natural */
  var:{tag:4,duc:.05,last:3,cut:8},/* run 3 (sensible bot): Đức climbs +19..+70 in every mode, so .25 drowned the arc choices; tag 4 + duc .05 lets the choices lead */
  /* "người ấy" for «Theo người ấy đi»: the strongest real bond — a man's tình ≥ men, or a consort's thiện cảm ≥ sis */
@@ -55561,7 +55562,7 @@ function nrMMonth(news){const B=nrB();let n=news||0;
   if(mine||n<B.newsMo){log(line);n++}}catch(e){console.error(e)}}
  return n}
 /* the voice of the asker in the help hồi (VANPHONG §2): maids nô tỳ + tiểu chủ/nương nương; men are added by U3 (nrVoiceM) */
-function nrVoice(X){const k=X&&X.A&&X.A.k;const goi=()=>{try{return tsGoi(S)}catch(e){return S.rank>=3?"nương nương":"tiểu chủ"}};
+function nrVoice(X){const k=X&&X.A&&X.A.k;const goi=()=>{try{return tsGoi(S)}catch(e){try{return kAddr({srv:"f"},S,{m:"cool"}).goi}catch(e2){return"tiểu chủ"}}};
  if(k==="sv"||k==="rsv"||k==="maid")return{me:X.A.o&&X.A.o.role==="eunuch"?"nô tài":"nô tỳ",call:goi(),sv:1};
  if(typeof nrVoiceM==="function")return nrVoiceM(X,goi);return null}
 /* a maid raised to consort keeps who she was: her road state goes on as a cn road from her next chapter (same help chapter, same log) */
@@ -64796,7 +64797,11 @@ window.geNote=geNote;
 function geLean(s){const V=GB().var;const last=s.r2===0?1:s.r2===1?-1:0;return s.lt*V.tag+((S.duc|0)-(s.d0|0))*V.duc+last*V.last}
 function geShade(s,i){const L=geLean(s),c=GB().var.cut;if(L>=c)return"t";if(L<=-c)return"a";return C(s).e[i][2]==="A"?"a":"t"}
 /* ---------- odds ---------- */
-function geOdds(s,i){const O=GB().odds;let p=O.base+s.pull[i]*O.per;p=Math.max(O.min,Math.min(O.max,p));if(!geCond(s,i))p=Math.min(p,O.noCond);return Math.round(p)}
+/* law 5 (harder as she climbs, OD:L1254; brief E35): ONE key BAL.ge.odds.rank = odds lost per rank step, read here for every branch of every wave;
+   her rank step = rkOf(S) (the one rank reader, j8), 0 Đáp ứng … 7 Hoàng hậu; a servant life (isSrv) climbs the maid ladder instead: step = S.srv.rk */
+function geRk(){try{const r=typeof isSrv==="function"&&isSrv()?S.srv.rk:typeof rkOf==="function"?rkOf(S):S.rank;return Math.max(0,Math.min(RANKS.length-1,r|0))}catch(e){return 0}}
+window.geRk=geRk;
+function geOdds(s,i){const O=GB().odds;let p=O.base+s.pull[i]*O.per-geRk()*(O.rank||0);p=Math.max(O.min,Math.min(O.max,p));if(!geCond(s,i))p=Math.min(p,O.noCond);return Math.round(p)}
 window.geOdds=geOdds;
 /* ---------- the Hồi kết nhánh ---------- */
 function geReady(){const s=geS();if(!s||s.done||S.dead||S.out)return false;try{if(GB().when==="r11")return !!(typeof rdEnd==="function"&&rdEnd(BAL.road.last));return !!S.st.ch.all}catch(e){return false}}
@@ -68803,8 +68808,8 @@ const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",
 const nv=n=>typeof kitNumVi==="function"?kitNumVi(n):String(n);
 const lc=s=>String(s).charAt(0).toLowerCase()+String(s).slice(1);
 /* how the narrator speaks to her (VANPHONG §2): a maid is "ngươi" and the ma ma says "ta"; a consort below Tần "tiểu chủ", Tần and up "nương nương" */
-function X(cap){/* j84 lowRank: below Tần (one rule for every speaker) */const w=srvNow()?"ngươi":(typeof lowRank==="function"&&!lowRank()?"nương nương":"tiểu chủ");return cap?w.charAt(0).toUpperCase()+w.slice(1):w}
-function ME(){return srvNow()?"ta":"nô tỳ"}
+function X(cap){/* ONE address core (jvoice kAddr, VANPHONG §2): the narrator calls a maid "ngươi"; a consort is called as her own servant calls her (tiểu chủ / nương nương / Hoàng hậu nương nương) */let w;try{w=srvNow()?kAddr(null,{srv:"f"},{name:"ngươi"}).goi:kAddr({srv:"f"},S,{m:"cool"}).goi}catch(e){w=srvNow()?"ngươi":"tiểu chủ"}return cap?w.charAt(0).toUpperCase()+w.slice(1):w}
+function ME(){/* the narrator's self word: the ma ma says "ta" to a maid (kAddr, no speaker); a consort's maid says "nô tỳ" */try{return srvNow()?kAddr(null,{srv:"f"},{name:"ngươi"}).xung:kAddr({srv:"f"},S,{m:"cool"}).xung}catch(e){return srvNow()?"ta":"nô tỳ"}}
 function say(s){return String(s).replace(/\{X\}/g,X(true)).replace(/\{x\}/g,X(false)).replace(/\{m\}/g,ME())}
 /* ---------- the quests: [variant][chapter] → list; need = how many times (BAL.st14.q.need[id] or 1) ---------- */
 const A=re=>d=>!!(d&&re.test(String(d.n||"")));
@@ -68903,7 +68908,7 @@ function roadSj(){try{const id=S.st.f14&&S.st.f14.road,a=id&&typeof ARC67!=="und
  const sj=String(a.sj||"").replace(/\{(v|foe|mis)\}/g,(m,k)=>SJ0[k]);if(!sj||/\{[^}]*\}/.test(sj))return "";return sj.replace(/\bngươi\b/g,"{x}")}catch(e){return ""}}
 function beatLine(m){try{const o=S.origin&&S.origin.k,t=BEAT[o]&&BEAT[o][m.id];if(!t)return "";
  let r=say(t);if(m.id==="nhap14"){const sj=roadSj();if(sj)r+=" "+say("Điều {x} canh cánh trong lòng là "+sj+".")}return r}catch(e){return ""}}
-window.tq14Beat=beatLine;window.tq14Intro=m=>introCard(m);
+window.tq14Beat=beatLine;window.tq14Say=say;window.tq14Intro=m=>introCard(m);
 function variant(){return srvNow()?"s":"c"}
 function defOf(v,ch,id){return ((TQ[v]||{})[ch]||[]).find(q=>q.id===id)||null}
 function need(id){const N=QB().need||{};return N[id]||1}
@@ -76375,7 +76380,7 @@ function knCarryIn(T){const W=(T.W||[]).map(it=>(it.due=0,it));const C=(T.C||[])
 /* a carried item lands when its bearer arrives (its khắc in this buổi), not all at the buổi's start */
 function knCarryTick(T){if(!T.W||!T.W.length)return;let now=0;try{now=agKh()}catch(e){}const keep=[];
  for(const it of T.W){if((it.due||0)>now){keep.push(it);continue}delete it.due;it.b=S.buoi||0;knEnd(it);T.K[it.id]=it;for(const f of KN.cb)try{f(Object.assign({},it))}catch(e){console.error("tinBao cb",e)}}T.W=keep}
-(function(){const n0=nextBuoi;nextBuoi=function(){try{knCarryOut()}catch(e){agErr("knCarry",e)}KN.turn=(KN.turn||0)+1;try{return n0.apply(this,arguments)}finally{KN.turn--;if(!KN.turn)try{if(S&&!S.dead)knTb()}catch(e){agErr("knTb",e)}}}})();
+(function(){const n0=nextBuoi;nextBuoi=function(){try{knCarryOut()}catch(e){agErr("knCarry",e)}KN.turn=(KN.turn||0)+1;try{return n0.apply(this,arguments)}finally{KN.turn--;if(!KN.turn)try{if(S&&!S.dead&&knOn())knTb()}catch(e){agErr("knTb",e)}}}})();
 function tinBaoNew(){return tinBaoList().filter(x=>!x.seen).length}
 function tinBaoOn(fn){if(typeof fn==="function")KN.cb.push(fn);return ()=>{const i=KN.cb.indexOf(fn);if(i>=0)KN.cb.splice(i,1)}}
 function tinBaoSeen(id){const T=knTb();for(const it of Object.values(T.K).concat(T.R||[]))if(id==null||it.id===id)it.seen=1}
@@ -85791,7 +85796,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2c25436a00d9";window.CTM_BUILD=BUILD;
+const BUILD="88fc4834a0d6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
