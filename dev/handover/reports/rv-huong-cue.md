@@ -17,3 +17,5 @@ Verdict: PASS 5fa9aa87 (pushed review/huong-cue-2-rv) = huong-cue-2 fffd3f59 + r
 - Kit (law 9): .nwb-cap ACCEPTED by kit keeper (rem font + wrap fix, KIT §13.7.3) — merged.
 - Tests on merged sha: mg-noword-a/b/kit, mg-allkinds 7/7, mgcal-redo 12/12, ag-mgcal, coop-e2e 68/68, quickcheck PASS (gates PASS, perf ok).
 - Shots Fold + iPad of doi, thq, xa, tho, td_cong, td_dung, td_hanh looked: words legible, no overflow.
+
+Final: LIVE moved again (train 2 landed huong-cue 9234a983); re-merged origin/main 64d2e094 → PASS 7af73d06 (review/huong-cue-2-rv). Re-ran noword-a/b/kit, allkinds, mgcal-redo, coop-e2e 68/68, quickcheck PASS.
