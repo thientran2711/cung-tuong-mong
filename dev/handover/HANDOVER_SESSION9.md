@@ -2100,3 +2100,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (21/11 14:38Z) rv MSxp status resend: all its PASSes already LIVE (kit-focus r5 3a2b81b1, mg-intro-2) or in LRRY queue (kit-ef-unit, kit-win-pay, kit-relrows-ms); waits on keeper #4 r2 + mark-fix-r5. No relay needed.
 - (21/11 14:39Z) LRRY ack: pet-bath-test queued; or20-j68q already LIVE (d6f23858). Queue: cold-faction (running) → jlost-kyngo → kit-ef-unit → ban-cung → kit-win-pay → coop-pool-face → coop-cyhold → kit-relrows-ms → coop-arrive-see → sg-card → pet-bath-test; od03-favart held for D bundle k4.
 - (21/11 14:40Z) via 95: keeper #4 SSK kit-mark-fix-r5 4a1b2450 → sent to rv MSxp (check merge on LIVE d3f44022). Told keeper: report to 96; kit-opt-title-wrap was FAILED 14:26Z → do r2 now (deterministic borderline wrap, ≥20 repeats w320).
+- (14:44Z) LAND CHAIN 2: LANDED cold-faction 1bf7e14d (carries errand-bal). LIVE 1bf7e14d. Next jlost-kyngo.
