@@ -82,7 +82,7 @@ function dcInv(p){p.inv=Array.isArray(p.inv)?p.inv:[];return p.inv}
 /* her pieces / an NPC's pieces of slot sl whose MAIN colour is one of fams, not worn, not borrowed */
 /* r3 review: not a lost case's piece either (e.lo: jlost «giữ lại» — someone else's, kept): lent away, the case could not find it at its holder and
    wrote a second copy to the ledger box (coop-dresscode-scan); nor is it «của mình» to wear for a festival */
-function dcOwnFit(p,fams,sl){const out=[];dcInv(p).forEach((e,i)=>{if(!e||e.h||e.bor||e.dcPrev||e.lo)return;const w=WD_ITEMS[e.k];if(!w||w.sl!==sl||w.nt)return;const c=dcPiece(e.k);if(c&&fams.includes(c[0]))out.push({e,i,f:c[0],w})});return out}
+function dcOwnFit(p,fams,sl){const out=[];dcInv(p).forEach((e,i)=>{if(!e||e.h||e.bor||e.dcPrev||e.lo||e.tsB)return;/* e.tsB: borrowed for the Hội phối đồ (jts) — not hers to lend on */const w=WD_ITEMS[e.k];if(!w||w.sl!==sl||w.nt)return;const c=dcPiece(e.k);if(c&&fams.includes(c[0]))out.push({e,i,f:c[0],w})});return out}
 /* co-op: NPC loops roll once, on the host (review r1 fix 9) */
 function dcWorld(){return typeof worldOn!=="function"||worldOn()}
 /* the guest seat in an ordinary room: her NPC borrow / lend goes to the host as requests (jcoopask H kinds dcout / dcin) */
