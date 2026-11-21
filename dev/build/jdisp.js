@@ -8,7 +8,7 @@
    - One shelf = one group label (kit chip) + the item as a CUT-OUT picture standing on the plank (NO item frame); empty shelf = a soft dashed placeholder.
    - Tap a shelf (her room) → a TƯ TRANG DRAWER rises from the bottom: "Đang bày" (the placed piece: tap → kit item card with "Cất xuống") + ONLY the owned items of
      that group in the Tư trang grid (kitItem "slot" on the `.kinvg` tray; Xa xỉ number; red "Vượt phẩm" corner mark when the piece is above her rank — imperial gifts may still be placed).
-     Tap an item → the kit item card (kitItemCard) with the ONE act "Trưng bày" → placed, the card and the drawer close.
+     Tap an item → the §70.6 inline strip (kinlDetail, under the drawer grid, no pop-up) with the ONE act "Trưng bày" → placed, the drawer closes.
    - Read-only (an NPC's room, opts.p ≠ S): same view, no drawer; a tap on a placed piece = the kit item card, no acts.
    API: kitDisplayRoomOpen(p,{fixture,known}) · kitDisplayRoomClose() · kitDisplayRoomHTML(model) (pure; the kit page sample) · rail id "disp" (kitStageRail, order 40).
    Old saves: nothing stored here. ================================================================================================================ */
@@ -101,7 +101,7 @@ function drawerHTML(g){const cur=placedOf(g),L=ownedOf(g),n=perN();
  const tiles=L.map(x=>tileHTML(x,g)).join("");
  const body=L.length?`<div class="kinv kdr-inv" data-min="1"><div class="kinvbody"><div class="kinvmain"><div class="kinvg" data-n="${L.length}">${tiles}</div></div></div></div>`
   :`<p class="kdr-none">Tư trang chưa có món nào thuộc nhóm này.</p>`;
- return head+on+`<div class="kdr-db">${body}</div>`}
+ return head+on+`<div class="kdr-db">${body}</div><div class="kdr-det" id="kdrdet">${typeof kinlDetail==="function"?kinlDetail(null,{key:"kdr"}):""}</div>`}
 /* ---------- the view ---------- */
 const $k=()=>document.getElementById("kdr");
 function box(){/* the area between the top bar and the bottom bar, inside the game frame */
@@ -122,6 +122,11 @@ function drawer(g,still){const el=$k();if(!el||KDR.ro)return;const d=el.querySel
  const calm=typeof reducedMotion==="function"&&reducedMotion();if(was&&!still&&!calm){d.classList.remove("kdr-up");void d.offsetWidth;d.classList.add("kdr-up")}}
 function drawerClose(){const el=$k();KDR.drawer=null;if(!el)return;const d=el.querySelector("#kdrdrw");if(d){d.hidden=true;d.innerHTML=""}el.querySelectorAll(".kdr-sh.sel").forEach(b=>b.classList.remove("sel"))}
 /* tap handling */
+/* bag-inline-3 F2: a drawer tile / a displayed piece opens the §70.6 strip UNDER the drawer grid (kinlDetail), no floating card; its one act is the strip's button */
+function kdrShow(cell,k,act){const el=$k(),host=el&&el.querySelector("#kdrdet");if(!host||typeof kinlDetail!=="function"){kitItemCard({k},{acts:[Object.assign({id:"a"},act)]});return}
+ KDR.act=act;host.innerHTML=kinlDetail({k},{key:"kdr",acts:[pbtn(`data-kdract="1"`,act.n,act.sub||"",act.why||"")]});
+ el.querySelectorAll(".kdr-db .kitem-sel,.kdr-on .kitem-sel").forEach(b=>b.classList.remove("kitem-sel"));if(cell)cell.classList.add("kitem-sel");
+ try{if(typeof kitFix==="function")kitFix(host)}catch(e){}try{host.scrollIntoView({block:"nearest"})}catch(e){}try{if(typeof sfx==="function")sfx("tap")}catch(e){}}
 function note(t){try{if(typeof kitLine==="function")kitLine(t)}catch(e){}}
 document.addEventListener("click",ev=>{const el=$k();if(!el)return;const t=ev.target;if(!t||!t.closest||!el.contains(t))return;
  if(t.closest("[data-kdrx]")){ev.stopPropagation();ev.preventDefault();kitDisplayRoomClose();return}
@@ -130,13 +135,15 @@ document.addEventListener("click",ev=>{const el=$k();if(!el)return;const t=ev.ta
  if(sh){ev.stopPropagation();ev.preventDefault();const g=sh.dataset.kdrg;
   if(KDR.ro){const pe=t.closest("[data-kdrp]"),L=placedOf(g),hit=(pe&&L.find(x=>x[0]===pe.dataset.kdrp))||L[0];if(hit)try{kitItemCard({k:hit[1].k})}catch(x){console.error(x)}return}
   drawer(g);return}
+ const ab=t.closest("[data-kdract]");
+ if(ab){ev.stopPropagation();ev.preventDefault();if(!ab.disabled&&KDR.act)try{KDR.act.go()}catch(x){console.error(x)}return}
  const on=t.closest("[data-kdron]");
  if(on){ev.stopPropagation();ev.preventDefault();const sl=on.dataset.kdron,e=placedOf(KDR.drawer).find(x=>x[0]===sl);if(!e)return;
-  kitItemCard({k:e[1].k},{acts:[{id:"take",n:"Cất xuống",sub:"thành: món về lại tư trang · kèm: chỗ này để trống",go:()=>{const n=doTake(sl);note(n?`Đã cất ${n} xuống.`:"Đã cất xuống.");drawerClose();paint()}}]});return}
+  kdrShow(on,e[1].k,{n:"Cất xuống",sub:"thành: món về lại tư trang · kèm: chỗ này để trống",go:()=>{const n=doTake(sl);note(n?`Đã cất ${n} xuống.`:"Đã cất xuống.");drawerClose();paint()}});return}
  const tile=t.closest("[data-kdrix]");
  if(tile){ev.stopPropagation();ev.preventDefault();const ix=+tile.dataset.kdrix,g=KDR.drawer;const row=ownedOf(g).find(x=>x.ix===ix);if(!row)return;const why=whyNot(row.e);const P=pc(row.e);
   const sub=`thành: bày lên kệ ${gName(g).toLowerCase()}${placedOf(g).length>=perN()?`, đã đủ ${perN()} món nên món kém nhất về lại tư trang`:""} · kèm: còn bày thì không tặng hay bán được${P.over?" · kèm: vượt phẩm, dễ bị tố":""}`;
-  kitItemCard({k:row.e.k},{acts:[{id:"put",n:"Trưng bày",sub,why,go:()=>{const R=doPut(ix);if(R&&R.ok){note(`Đã bày ${R.n}.`);drawerClose();paint()}}}]});return}
+  kdrShow(tile,row.e.k,{n:"Trưng bày",sub,why,go:()=>{const R=doPut(ix);if(R&&R.ok){note(`Đã bày ${R.n}.`);drawerClose();paint()}}});return}
 },true);
 document.addEventListener("keydown",ev=>{const el=$k();if(!el)return;if(ev.key==="Escape"&&!document.getElementById("kidfl")){const m=document.getElementById("modal");if(m&&!m.hidden)return;ev.stopPropagation();if(KDR.drawer)drawerClose();else kitDisplayRoomClose()}},true);
 const rp=()=>{cancelAnimationFrame(KDR.raf);KDR.raf=requestAnimationFrame(place)};addEventListener("resize",rp);addEventListener("orientationchange",rp);
@@ -200,6 +207,7 @@ html.kv2 .kdr-seg{width:min(100cqw,calc(100cqh*var(--ar)));margin:0 auto}
 .kdr-onn{display:flex;flex-direction:column;font-weight:600}.kdr-onn small{font-weight:400;opacity:.75}
 .kdr-db{flex:1 1 auto;min-height:0;overflow-y:auto}
 .kdr-inv .kinvg{grid-template-columns:repeat(auto-fill,minmax(68px,1fr))}
+.kdr-det{flex:0 0 auto}.kdr-det .kinldet{margin-top:6px}
 .kdr-none{margin:10px 4px;font-size:.85rem;opacity:.8}
 `;document.head.appendChild(css);
 /* ---------- kit page sample ---------- */
