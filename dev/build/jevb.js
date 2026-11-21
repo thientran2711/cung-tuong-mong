@@ -71,6 +71,13 @@ function emoBox(k){const p=emoByKey(k);if(!p||!S||S.dead)return;const m=window.k
  kitModal({kind:"info",look:1,title:`Tâm trạng · ${nm}`,sub:m.known?`Hiện nay: ${kitSealName(p,m)}${p===S&&typeof mbBand==="function"&&!window.__moodOff?` · ${mbBand().name}`:""}`:"chưa rõ",subject:p,headArt:art||undefined,
   sections:p===S&&typeof mbSecs==="function"&&!window.__moodOff?(M=>[M[0],M[1],{h:"Cảm xúc lúc này",rows},M[2]])(mbSecs()):[{h:"Đang tác động",rows},{h:"",rows:[["Ảnh hưởng",p===S?"tâm trạng của ngươi đổi cơ may của mọi việc một chút":"vui thì dễ chịu nghe, giận hay ghen thì khó nói chuyện, dễ ra tay hơn"]]}],btn:"Đã rõ"})}
 window.emoBox=emoBox;window.emoCauseArt=emoCauseArt;
+/* owner 21/11 (mark #68): an event that comes FROM a feeling (her outburst «Khóc suốt đêm», «Trốn trong phòng», an NPC's outburst, extreme mood) carries m.emoSeal={k:feeling key,who:person key}: its picture wears that feeling's seal in the TOP-RIGHT corner (kitSceneArt o.mark → live img.kemo) */
+function emoEvMark(m){try{const e=m&&m.emoSeal;if(!e||!e.k)return null;const p=(e.who!=null&&emoByKey(e.who))||S;const set=typeof emoArtSet==="function"?emoArtSet(p):"";let art=typeof feelArt==="function"?feelArt(e.k,set):e.k;
+ /* a feeling whose still is not painted yet (khoc) walks to its nearest painted one, so the corner is never an empty disc */
+ try{const have=typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&KIT_CDNHAVE.size?KIT_CDNHAVE:null;const FB={khoc:"buon"};for(let i=0;i<4&&have&&!have.has(`img/kit/emo-${set}${art}.webp`);i++){const nk=(typeof feelFb==="function"&&feelFb(art))||FB[art];if(!nk)break;art=nk}}catch(x){}
+ let nm="";try{nm=typeof feelName==="function"?feelName(e.k,1):""}catch(x){}nm=nm||EMO[e.k]||"";return{mark:`img/kit/emo-${set}${art}.webp`,markAlt:`Tâm trạng: ${nm}`}}catch(x){return null}}
+window.emoEvMark=emoEvMark;
+(function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){const r=k0.apply(this,arguments);try{if(r&&r.src&&!r.mark&&m&&m.emoSeal){const x=emoEvMark(m);if(x)return Object.assign({},r,x)}}catch(e){}return r};window.kitEvArt=kitEvArt})();
 /* LOOK-UP PANELS (kit.look: Tâm trạng · X, Đã biết về X, Chứng cứ về X — panels she opens herself) are not visits: they show only the picture
    they bring (headArt), never the person-dialog default "Có người đến chơi" (jk4) or a room picture (whole family, review/mood-dialog) */
 (function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){try{if(m&&m.kit&&m.kit.look){const h=m.kit.headArt;
