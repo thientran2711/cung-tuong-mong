@@ -286,3 +286,47 @@ Earlier (#6/#7, same code): ow seeds 1–10 PASS, gup 16/16, b/bs e/es f1/f1s f2
 ## coop-thin-f6b-r2 (Foreman B ROOT-3 ask 11/20: LAND BLOCKED F5..F6b 26f36042 vs LIVE kgDefer) — ONE BRANCH with G
 review/coop-thin-g @ 7fcae66b already CONTAINS review/coop-thin-f6b-r1 26f36042 (merged in #2 @0891e223) AND origin/main 24dd2c62 (git merge-base --is-ancestor both true). The kgDefer vs F6b host-run named-ends conflict was resolved in #5 d476d3b9 keeping BOTH (main's deferred charge wrapped around the split game part: j23 lessonMode, j83 wkPractice, jrcp teacher lesson, jveil vlCraftRun, jsgame sgServ, jtoil toilFinShow; in her context on the host the captured game opens nothing → kgDefer charges at once). kgDefer count per file = main's (j23 2, j83 2, jrcp 2, jveil 3, jsgame 3, jtoil 0). Lanes on 7fcae66b cover F5..F6b: f3s 37/37, f4s 18/18, f5s 30/30 + #6/#7 f6/f6s f6b/f6bs PASS, mg-back 755x1000 + 1180x820 12/12 (#5), quickcheck PASS. → land F5..F6b + G together from review/coop-thin-g (no separate -r2 branch); BIG re-review on 7fcae66b.
 Merge note: review/coop-guest-agent (b7648b65) conflicts in jagent.js 27–28 (ours agGuest→coopGuest, theirs agLive/agOn/agSelf): whoever lands second keeps both, reruns g4 / g4s / cycs.
+
+## REVIEW r1 — BIG reviewer session_01N1tNP33ttbcEgRGTF1Udhr (opus), 11/21/2026
+PRIORITY #1 CHECK ('coop-thin-g|thpn|E.base|gBlob|cyHold|nmPidMe'): OD 0 new | ledger 0 | main 5a8c30af: no G | review/* coop-guest-agent-r1 a00be4e5 NOT on main (jagent untouched here; whoever lands second keeps both + reruns g4/g4s/cycs) | claims CLAIMS:563 (this reviewer).
+START_CTX ≈ 6 % of 1M (own estimate).
+Branch **review/coop-thin-g-r1** = 7fcae66b + merges of LIVE b1033eb0 and 5a8c30af + r1 fixes. Verdict sha: see last line.
+
+### Fixes made on r1 (all pushed)
+| sha | what | class |
+|---|---|---|
+| e7b996f2 | **SEAT DESYNC (real G bug, law 1 / one core)**: her number differed host store vs her phone after a week and never settled (g4s bạc 7/67, 164/184; TRIP wk36 Sức 83/77 = same signature). Probe on both pages: after `week` her phone's diff baseline (jcoopthine E.base) came from the last VIEW = the host's PRE-week copy, so her first `erd` carried the week's own changes (his acts on her stand-in as toCanon gD deltas) as hers → host added them twice, her phone once. Fix: (1) jcoopthine: at `week` the guest baseline = her S just rebuilt from C (curP); E.base never takes a view of an older week. (2) jcoopthing gBlob: P.b carries thpn = part-D patch count in the blob → her phone applies only later patches. (3) jcoopthing gEmp: a part-D patch made after his `end` (not in C) is put on C before her store is rebuilt and kept in her queue (both seats hold it; before: host dropped it / phone kept it, or both lost it). | GAME (G) |
+| 56c7b6bf | coop-thin-f6b V2 «Kết nhanh» solo twin takes main's deferred charge (mg-back r3 kgDefer); real run charged once = correct | TEST TWIN |
+| 61cbfcae | seat-guard family: the **30th** site jky.js:19 (kỳ ngộ guest()) read COOPW.seat directly → coopGuest() (worker counted 29) | family scan |
+| 69a2d299 | coop-thin-g G2 solo twin waits her due-task landings (jptime ptTick → her ptTickHer intent, coop-ptime-reds) like the host; trip red danh +3 (ptOrdTick) was the twin | TEST TWIN |
+| 32d55bb6 | merge LIVE 5a8c30af; main's new jnamefix nmPidMe/nmPidF read COOPW.seat → follow ctx (identity family, as jvisit/jmem myPid) | family |
+
+| 695414cf | merge LIVE 666def0c (45 files, none co-op: 0 COOPW / coopGuest / worldOn refs); undef-scan + one-core PASS | merge |
+
+### Seat-desync proof (paired, same build, g4/g4s WEEKS=6 + probe)
+| build | weeks run | TRANSIENT (number differs host/phone) |
+|---|---|---|
+| bb885086 (merge only, no fix) | 4 (lane g4s) + 18 (3 probe runs) | 2 (bạc 7/67 wk4; bạc 164/184 + Thái hậu 11/9 wk6) |
+| e7b996f2+ (fix) | 48 (8 probe runs, both seat orders) + TRIP 36 (swap 0) + TRIP 31 (swap 1) + all lanes | **0** |
+
+### Checks
+- Moved/retired rows 1–16 read against code (jcoopthing / jcoopworld gW/gG / Worker tick(hostC), thinend): each her week end runs once on the host (G.done per week, G1 'host ran hers once' every week), her phone sends no `end` / seat copy; no lost act found except the desync above (fixed).
+- 29+1 seat-guard sites: old vs new value identical outside CW.gWk (COOPW.seat==="b" ≡ !=="a" for two seats; coopGuest needs c.on).
+- kgDefer per file = LIVE (j23 3, j83 3, jrcp 3, jveil 3 lines, jsgame 3, jtoil 0; jveil craftK now from VL, same 2); F6b named ends host-run (f6/f6s/f6b/f6bs green after the V2 twin fix).
+- Test-bot / twin fixes of the worker re-checked: G2 twin family (worldOn / coopGuest / now ptTick) = twin, host follows her phone's L≤12 branch; residual G2 'approaches +20 bạc' (NPC repay reason reads a world purse, 1/8 runs, seen pre-fix) = same twin family, open for the worker's test (not a game fault).
+- Perf `MONTH=1 CPU=4`: her week end in ctx b **+33.2 %** of his own (gate ≤ 40 %) PASS.
+- one-core guard PASS · undef-scan PASS · role-parity ALL PASS · quickcheck: core gates + old save (Cố Ngưng Sương loads, plays a buổi) + perf vs live PASS (G4 mk-layer-scan red only from my sparse worktree; rerun with dev/art: 12960 pictures, 0 bad).
+- LOOK Fold 755x1000@2 + iPad 1180x820@2 at the week turn (e2e THIN13, shots wk1–wk3 + 07-after3, scratch only, looked 3×): season cover «Bình minh mùa xuân / hạ» + «Tiếp theo», clean, no overflow, 74/74. Note (not G, shared season cover): iPad title wraps «Bình minh mùa / hạ».
+- Full lane @32d55bb6 (main 5a8c30af): g4 18/18 · g4s 18/18 · e2e / e2es / e2e0 92/92 · cyc / cycs 73/73 · night 105/105 · timer 43/43 · f3s / f4s / f5s / f6 / f6s PASS · quickcheck PASS (core gates, old save, perf render 238/233 ms, buổi 1093/1219 ms new/live) · role-parity ALL PASS.
+- f6b L3 (exam, her page gone) and f6bs A1 (Tự học deck card) red only in the full suite, green alone (L3 2/2, A1 1/1): order-dependent TEST STAGING — L3's outcome «Đã đỗ: chờ ghế Tần trống» (a valid seat-cap wait) changes neither ex nor rank, the row's chk wants one; A1's act() takes another deck card dealt in front after the earlier rows (kg82go null). Not game faults. FOR worker: make both rows stage their own state.
+- Timer intermittent (38/43 in my first lane) = CPU load from my parallel probe runs: alone 43/43 (twice).
+
+### FAIL item (G, not fixed here)
+- Lane @695414cf (main 666def0c): g4 18/18 · g4s 18/18 · e2e / e2es 92/92 · cyc / cycs 73/73 · timer 43/43 · f3s / f4s / f5s PASS · **night 99/101** (case 4/5 below).
+- **F1. PERMANENT WEEK STALL at level 13** (room never ends the week; seen 3×: worker #5 night case 4 '[3,3,3]', my night case 4 @695414cf, my TRIP swap week 31): host pend true, sent = week−1, her week end ran (G.done[w] true, log her-week w), gHold false, frPz false, her thq empty, her phone g-go done and waiting «Chờ hảo hữu…»; the host's sendEnd never fires. In the TRIP dump CW.cyHold = w (jcoopworld cyWait, eW host: her stored cyb has df = g, no rk, no cyrep card open anywhere). Detail of that one: (TRIP swap 1, week 31 of 36, 1 time in ~120 stress weeks): host pend true, sent 30, CW.cyHold=31 (cyWait: her stored cyb has df=g but no rk), her thq empty and no cyrep card on her phone → the room never ends the week (test timed out). Cause not found: herCy asks once per g (E.cyA); if her cyrep card is gone after df was set (PEND.cyrep returns null when her maid is gone → pick-stale, no D.GONE.cyrep; or any other card loss) nothing frees the hold. Not shown to come from G or r1 (cyb / thq are outside the patch and erd diff: SKIP / BAD). Suggest: in cyWait (eW host) when df===g, no rk, no open cyrep in her thq and nothing deferred → CW.cyNo=g (or re-ask). Owner: the G worker (level-13 path) with part E. Repro: `THIN=13 node dev/test/coop-night.js <out> <W>` (1 in ~2 full runs here) or `TRIP=1 WEEKS=36 node dev/test/coop-thin-g.js <W> 13 1`; dump CW.cyHold / E.cyA / her S.cyb / D.log at the stall.
+
+### OPEN — FOR B
+- Earlier FOR B items of the worker stand (agent layer for her servants: coop-guest-agent; TOIL.st/KG82.run at L9–12; coop-host-lag item 3).
+- FOR MAIN: deploy the Worker with THINMAX 13 at landing.
+
+**FAIL coop-thin-g → review/coop-thin-g-r1 @695414cf** (contains origin/main 666def0c): ONE item F1 (week stall at L13). Everything else checked is green; the r1 fixes (seat desync e7b996f2, family sites jky / jnamefix, test twins) stay on review/coop-thin-g-r1 — the worker continues from it. Scratch shots / probe copies deleted after the verdict (none in git).
