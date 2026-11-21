@@ -1123,3 +1123,4 @@ NEWACCT#18 ~07:20Z: CHECK2 also over roll (40 %) → L1699 job NOT started; spec
 NEWACCT#18 ~07:25Z: OWNER L1701: try-on page sloppy (not fitted per flap/hand; last maid worst). #18 admits it sent without its own LOOK. Added REDO spec to ROOT19 takeover. Next Lượt 1703.
 NEWACCT#18 ~07:30Z: L1703 sent per-season family sheet pal_L1679/bangmau_theomua.png (0 cr). Next Lượt 1704.
 NEWACCT#18 ~07:35Z: OWNER L1704: L1679 palette too vivid/garish ('rực kinh khủng', esp. s33–s42), drifting from game style → NOT approved; rework spec added to ROOT19 takeover. Next Lượt 1705.
+NEWACCT#18 ~07:40Z: OWNER L1705 palette distribution (hạ = yellow+orange, blue→đông, even spread) added to ROOT19 takeover. Next Lượt 1706.
