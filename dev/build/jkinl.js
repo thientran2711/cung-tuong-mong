@@ -35,14 +35,14 @@ function kinlPickSlot(q,i){const o=KINV.reg[q.key];if(!o||!o.inline||!document.q
 /* the capture: an info pop-up built while a pick is captured goes to the strip, nowhere else */
 (function(){if(typeof kitModal!=="function")return;const k0=kitModal;kitModal=function(spec){if(KINL.cap&&spec&&spec.kind==="info"&&!KINL.cap.spec){KINL.cap.spec=spec;return null}return k0.apply(this,arguments)};window.kitModal=kitModal})();
 (function(){const st=document.createElement("style");st.id="kinl-css";st.textContent=`
-.kinldet{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:start;margin:8px 0 0;padding:8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:10px;background:#fbf3e3;box-shadow:inset 0 1px 3px #5a3a2018;min-width:0}
-.kinldet .kinlpic{width:var(--kinlsz,88px);aspect-ratio:1/1;flex:none}
+.kinldet{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:start;margin:8px 0 0;padding:8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:10px;background:#fbf3e3;box-shadow:inset 0 1px 3px #5a3a2018;min-width:0}
+.kinldet .kinlpic{width:var(--kinlsz,76px);aspect-ratio:1/1;flex:none}
 .kinldet .kinlpic .kitem{--isz:100%;width:100%}
 .kinldet .kinlinfo{min-width:0;display:flex;flex-direction:column;gap:3px}
 .kinldet .kinln{font-family:var(--font-d,inherit);font-size:1.02rem;line-height:1.2}
 .kinldet .kinlsub{font-size:.78rem;opacity:.75}
-.kinldet .kinvacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:6px;margin-top:6px}
-.kinldet .kinlchips{display:flex;flex-direction:column;gap:5px;align-items:stretch;font-size:.78rem;max-width:132px;padding:6px;border:1px solid var(--k-hair,#e6d3ac);border-radius:8px;background:#f4ead8}
+.kinldet .kinvacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,118px),1fr));gap:6px;margin-top:6px}
+.kinldet .kinlchips{display:flex;flex-direction:column;gap:5px;align-items:stretch;font-size:.78rem;max-width:108px;padding:6px;border:1px solid var(--k-hair,#e6d3ac);border-radius:8px;background:#f4ead8}
 .kinldet .kinlchips .chip{white-space:normal}
 .kinldet .kinlempty{grid-column:1/2;align-self:center;padding:10px 4px;opacity:.7}
 .kinldet .kinlempty+.kinlchips{grid-column:3}
