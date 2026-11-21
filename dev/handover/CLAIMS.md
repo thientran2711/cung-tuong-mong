@@ -787,7 +787,7 @@ kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! und
 | REVIEW hao-huu (BIG opus) f654456a (#2) | review/hao-huu-rv; briefs/main89-rv-hao-huu.md | MAIN CHÍNH 89 | session_01Rc5AsL294sG5kphwVE5b5S | FAIL 6 items (reports/rv-hao-huu.md; merged base 6c38f01b) → worker | 21/11 05:54Z |
 | REVIEW hoangthuong-gold r2 PASS → LAND READY 1e826e29 (Emperor only; Thái hậu = LIVE) | review/hoangthuong-gold-rv2 | MAIN CHÍNH 89 | session_01Rc5AsLhrWA3f1aH4eph3dD | PASS | 21/11 05:57Z |
 | huong-cue-2-r2 review | sonnet reviewer (Foreman B ROOT-5) | PASS 3be6edad review/huong-cue-2-r2-rv | 21/11 |
-| REVIEW bang-words E40r (BIG opus) 927ac123 | review/bang-words-r; briefs/E40r-review-bang-words.md | FOREMAN E #25 | session_01DgYSWqAzt8MGwYMUsFUXN5 | RUNNING | 21/11 05:59Z |
+| REVIEW bang-words E40r (BIG opus) 927ac123 | review/bang-words-r; reports/bang-words-review.md | FOREMAN E #26 | session_01DgYSWqAzt8MGwYMUsFUXN5 | PASS cba883e0 (LAND READY) | 21/11 05:59Z |
 | coop-thin-g F1 week-stall fix (opus BIG; L13 cyHold=w no card; + check ccd41e45 in main) | review/coop-thin-g-f1 | B | session_01N1tNP4qNNZGeU813sVfsMD | RUNNING | 21/11 06:02Z |
 | rv-ending-screens OPUS BIG reviewer (Foreman B; MAIN 88 order) | review/ending-screens-rv; reports/rv-ending-screens.md | B | session_01N1tNP2Z5YHxBZcLFzY5BEH | PASS c073f8d4 → LAND READY (FF of 2021e23f) | 21/11 |
 | REVIEW tinh-net-word PASS → LAND READY 72b0bdb7 (#4 note) | review/tinh-net-word-rv | MAIN CHÍNH 89 | session_01Rc5AsLhrWA3f1aH4eph3dD | PASS (archived) | 21/11 06:06Z |
