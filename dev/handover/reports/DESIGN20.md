@@ -175,3 +175,4 @@ GEN1 told to HOLD v7 (COMOIg/COMOIf). New shared clause **master_common.OUTER_WR
 - winter1/s62_t4_dong_fur3.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
 - winter1/s62_t4_dong_noangle.txt | a small white-jade vase with blossoms -> a small white-jade lotus lamp
 - 75 files changed
+- JOB 7b (Foreman C #16 02:06Z): t4 COMOIi aligned to the LADDER2 81644d3 shared wording: flower "(never two, never a pair, no cluster)" (room: sleeves "with small lotus flowers"); 9 990 ch, tp4 PASS, store only Outfit exemption [0.68], keep PASS. t5 COMOIh already had it. master_common.EAR_FREE is marked superseded by this wording, so not added. LADDER2 t6 COMOIi / t7 v8h / t8 v10g contain no vase (scan).

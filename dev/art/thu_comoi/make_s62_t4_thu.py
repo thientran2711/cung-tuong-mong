@@ -112,11 +112,11 @@ if __name__ == "__main__":
 
 # ---- v9 = COMOIi (Foreman C #16 01:59Z, same fault as the t5 v8 draft on every tier: two hair flowers + jade drop earrings) ----
 V9 = [
-    ("in her hair (never two)", "in her hair (never two, never a pair)"),                     # A38 trim words put back
+    ("in her hair (never two)", "in her hair (never two, never a pair, no cluster)"),   # = LADDER2 81644d3 shared wording                     # A38 trim words put back
     ("gold and jade hairpins with small dangling gold bu yao tassels",
      "gold and jade hairpins with small dangling gold bu yao tassels in the bun, none at the ears"),
     ("blush panel of lotus embroidery from shoulder to hem)", "lotus-embroidered blush panel, shoulder to hem)"),   # own words compacted; "embroidered" kept (Foreman C #16 / CHECK1 job 15)
-    ("sleeves with a few small lotus flowers on them", "sleeves with small lotus flowers on them"),   # own words compacted
+    ("sleeves with a few small lotus flowers on them", "sleeves with small lotus flowers"),   # own words compacted
     ("walking with a small white-jade lotus lamp", "walking with a white-jade lotus lamp"),       # own words (v8 item) compacted
     ("a wide embroidered lotus band at the inner robe's hem too", "an embroidered lotus band at the inner robe hem"),
     ("of jade plaques on pearl strings with tassels", "of jade plaques, pearl strings and tassels"),
