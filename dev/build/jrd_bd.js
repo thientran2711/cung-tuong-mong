@@ -18,7 +18,7 @@ const bdTxt=(oldW,newW)=>bdLegacy()?oldW:newW;
 /* a text property that follows the switch (getter: every reader of o[k] gets the right words, nothing copied per screen) */
 const bdTxtProp=(o,k,oldW,newW)=>{try{Object.defineProperty(o,k,{get:()=>bdTxt(oldW,newW),enumerable:true,configurable:true})}catch(e){}return o};
 const bdCountry=()=>{try{return S.origin.k==="bd"?(bdLegacy()?"bd":"bt"):"nc"}catch(e){return"nc"}};
-if(typeof NCL==="object"){NCL.bt={land:"Ba Tư",pv:"Phụ vương",mh:"Vương hậu",quan:"Vương trung vương",pa:"Thế tử huynh",pb:"Vương thúc",canh:"cơm nấu thịt cừu, hạt dẻ và lựu",laq:"bụi gai sa mạc",nden:"giữ lửa thánh trong lò"};
+if(typeof NCL==="object"){NCL.bt={land:"Ba Tư",pv:"Phụ vương",mh:"Vương hậu",quan:"Vương trung vương",pa:"Thế tử huynh",pb:"Vương thúc",canh:"cơm nấu thịt cừu, hạt dẻ và lựu",laq:"bụi gai sa mạc",nden:"giữ lửa thánh trong lò",dien:"vương điện",huong:"phương tây"};
  if(typeof TOK67==="object")for(const k of Object.keys(NCL.bt))TOK67[k]=()=>NCL[bdCountry()][k]}
 /* a new life's premise pool (j67 arcIds67 → jst14 roll, j67 phase-1 frame): old bd premises out; saves keep the ids already written in their plan */
 (function(){if(typeof arcIds67!=="function")return;const a0=arcIds67;arcIds67=function(o){const r=a0.apply(this,arguments);if(o!=="bd")return r;const n=r.filter(id=>!BD_OLD.includes(id));return n.length?n:r}/* until a new road exists the old ones stay dealt (no empty pool) */})();
