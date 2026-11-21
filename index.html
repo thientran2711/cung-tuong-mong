@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9b67bfc0+","t":"2026-11-21T09:47Z","c":"ban-cung: two-seat odds parity test (coop-ban-cung.js)","b":"f799832519c8","h":[{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"}]};
+window.CTM_BI={"s":"12a40f80+","t":"2026-11-21T10:11Z","c":"ban-cung: two-seat odds parity test (coop-ban-cung.js)","b":"c8e168985bb2","h":[{"s":"0b0cf8a8+","t":"2026-11-21T07:23Z","c":"Khuê các: thất bại có hậu quả thật + ra ngoài cung (B)"},{"s":"191c94f4+","t":"2026-11-21T07:18Z","c":"Thẻ người: khối thông tin cố định, «Dạo này» một dòng + «!» (#86)"},{"s":"2fa343d1+","t":"2026-11-21T06:02Z","c":"Cảm xúc: cân lại mức vui buồn giận (D)"},{"s":"344a9fac+","t":"2026-11-21T06:41Z","c":"Đại kết cục: người trong cung có kết cục riêng (B)"},{"s":"079a147b+","t":"2026-11-21T05:38Z","c":"Kinh tế: tâm cơ và tiền bạc cân lại (D)"},{"s":"688a5667+","t":"2026-11-21T06:30Z","c":"Dư đồ: nơi chốn đầy đủ, đi lại đúng chỗ (B)"},{"s":"aa6924bf+","t":"2026-11-21T06:41Z","c":"Đo tốc độ tự động mỗi bản (B)"},{"s":"3be6edad+","t":"2026-11-21T05:40Z","c":"Điều hương: chỉ dẫn gọn theo luật chữ của mini-game"},{"s":"73808a61+","t":"2026-11-21T06:19Z","c":"Mệnh truyện: mọi tab nhỏ một tranh lớn ngang khung; sửa «NaN» (#26–#29)"},{"s":"465662b5+","t":"2026-11-21T05:47Z","c":"Mini-game: 11 trò chơi tay mới (B)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -34922,7 +34922,8 @@ Object.assign(BAL,{banCung:{
  rank:6,                  /* + per rank above the palace's need */
  rival:8,rivalMax:3,      /* − per consort who also wants it (a chủ vị of the needed rank living in a palace of lower standing) */
  opts:4,lockMax:2,        /* ask options shown, of which at most lockMax locked ones (so she sees why) */
- ok:{danhStep:3,ducHumble:3,ducTake:1},              /* granted: Danh + per step up; a humble ask Đức +; accepting the decree Đức + */
+ ok:{danhStep:3,danhNear:2,ducHumble:3,ducTake:1},   /* granted: Danh + per step up; same standing but nearer the Emperor: Danh + danhNear (nearness = prestige, research §1.2);
+                                                         a humble ask (lower standing, or same standing and not nearer) Đức +; accepting the decree Đức + */
  fail:{sung:2,sungStep:3,danh:1,danhStep:2,rel:6},  /* refused: Sủng −(sung + sungStep×steps up), Danh −(danh + danhStep×steps up), the first rival's relation −rel */
  npcLv:3                  /* an NPC asks only when her odds word is at least this ladder step (KIT_ODDS index: Khá chắc) */
 }});
@@ -34932,6 +34933,10 @@ function bcLocked(p,i){return rkOf(p)<bcNeed(i)}
 const bcDistOf=i=>{const s=MAPH.rivalSlots[i],e=MAPH.places.dtd;if(!s||!e)return 0;const a=s.anchor||s.box,b=e.anchor||e.box;return Math.hypot(a.x-b.x,a.y-b.y)};
 /* nearness 0..1: 1 = the palace nearest the Emperor's hall, 0 = the farthest, from the plan */
 function bcNear(i){const D=PALN.map((_,j)=>bcDistOf(j)),lo=Math.min(...D),hi=Math.max(...D);return hi>lo?(hi-D[i])/(hi-lo):0}
+/* THE gain of a granted ask (law 2/3: every ask has a gain; the card prints exactly what bcAsk applies), player and NPC alike */
+function bcGain(i,from){const B=BAL.banCung,st=bcDanh(i)-(from!=null?bcDanh(from):0);if(st>0)return{danh:B.ok.danhStep*st};if(st<0)return{duc:B.ok.ducHumble};
+ return from!=null&&bcNear(i)>bcNear(from)?{danh:B.ok.danhNear}:{duc:B.ok.ducHumble}}
+function bcGainTxt(g){const N={danh:"Danh",duc:"Đức"};return Object.keys(g).map(k=>`${N[k]} ${balSg(g[k])}`).join(", ")}
 function bcLive(p){return p===S?!!S&&!S.dead&&!S.out:!!p&&p.alive&&!p.out}
 /* who else wants palace i: living chủ vị (not the queen) of the rank it needs, now in a palace of lower standing (or none) — strongest first */
 function bcWanters(p,i){const L=[S].concat(typeof rivals!=="undefined"?rivals:[]).filter(q=>q!==p&&bcLive(q)&&!q.queen&&rkOf(q)>=PAL_HEAD&&rkOf(q)>=bcNeed(i)&&(q.pal==null||bcDanh(q.pal)<bcDanh(i)));
@@ -34943,7 +34948,7 @@ function bcOdds(p,i,from){const B=BAL.banCung;const st=bcDanh(i)-(from!=null?bcD
  return cl(Math.round(o),BAL.odds.lo,BAL.odds.hi)}
 /* the lock reason in cổ trang words (rank names read from RANKS) */
 function bcWhy(i){const d=bcDanh(i),rk=RANKS[bcNeed(i)].n;
- return d>=3?`Cung gần ngự tẩm, lệ chỉ dành cho bậc ${rk} trở lên; tâu xin là vượt phận.`:`Cung danh giá, xưa nay bậc ${rk} trở lên mới được ở; tâu xin là vượt phận.`}
+ return d>=3?`Cung bậc nhất lục cung, lệ chỉ dành cho bậc ${rk} trở lên; tâu xin là vượt phận.`:`Cung danh giá, xưa nay bậc ${rk} trở lên mới được ở; tâu xin là vượt phận.`}
 function bcOcc(p){const o={};for(const q of [S].concat(rivals||[]))if(q!==p&&q.pal!=null&&bcLive(q))o[q.pal]=1;return o}
 /* the decree (jpal palFix → every new chủ vị, player and NPC alike): a free palace her rank allows; her favour decides how good — 
    allowed free palaces ordered by standing then nearness, her Sủng picks the place in that list. -1 = none allowed (palFix falls back). */
@@ -34952,7 +34957,7 @@ function bcGrantIx(p,occ){try{const L=PALN.map((_,i)=>i).filter(i=>occ[i]==null&
 /* the outcome of an ask (same for player and NPC): returns true when granted */
 function bcAsk(p,i,from){const B=BAL.banCung,me=p===S,st=bcDanh(i)-(from!=null?bcDanh(from):0),up=Math.max(0,st);const top=bcWanters(p,i)[0]||null;
  const who=me?"Ngươi":`${RANKS[rkOf(p)].n} ${p.name}`;
- if(roll(bcOdds(p,i,from))){p.pal=i;const g=st>0?{danh:B.ok.danhStep*st}:st<0?{duc:B.ok.ducHumble}:{};
+ if(roll(bcOdds(p,i,from))){p.pal=i;const g=bcGain(i,from);
   if(me)apply(g);else for(const k in g)p[k]=cl((p[k]||0)+g[k],0,100);
   log(`${who} tâu xin ${PALN[i]}, Hoàng thượng chuẩn tấu, dời sang ${PALN[i]}.`);return true}
  const L={sung:-(B.fail.sung+B.fail.sungStep*up),danh:-(B.fail.danh+B.fail.danhStep*up)};
@@ -34973,7 +34978,7 @@ palCeremony=function(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const from=S.p
  for(const c of bcChoices(S,from)){const i=c.i;
   if(c.locked){opts.push(kitOff({n:`Xin ${PALN[i]}`,fx:{},x:`dời sang ${PALN[i]}`,go:()=>{}},bcWhy(i),kitWhenRank()));continue}
   const s=st(i),up=Math.max(0,s),top=bcWanters(S,i)[0];
-  const gain=s>0?`, Danh ${balSg(B.ok.danhStep*s)}`:s<0?`, Đức ${balSg(B.ok.ducHumble)}`:"";
+  const gain=`, ${bcGainTxt(bcGain(i,from))}`;
   const loss=`Sủng ${balSg(-(B.fail.sung+B.fail.sungStep*up))}, Danh ${balSg(-(B.fail.danh+B.fail.danhStep*up))}${top&&up>0?`, ${top.name} sinh oán`:""}`;
   opts.push({n:`Xin ${PALN[i]}`,fx:{},x:`${word(c.odds)} · thành: dời sang ${PALN[i]}${gain} · hỏng: ${loss}`,go:()=>{bcAsk(S,i,from)}})}
  Q.push({ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[from]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p><p>Cung càng gần ngự tẩm, càng danh giá, càng nhiều người muốn; tâu xin quá phận thì khó được chuẩn.</p>`,opts});
@@ -89364,7 +89369,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f799832519c8";window.CTM_BUILD=BUILD;
+const BUILD="c8e168985bb2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

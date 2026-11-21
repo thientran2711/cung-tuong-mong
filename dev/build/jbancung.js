@@ -16,7 +16,8 @@ Object.assign(BAL,{banCung:{
  rank:6,                  /* + per rank above the palace's need */
  rival:8,rivalMax:3,      /* − per consort who also wants it (a chủ vị of the needed rank living in a palace of lower standing) */
  opts:4,lockMax:2,        /* ask options shown, of which at most lockMax locked ones (so she sees why) */
- ok:{danhStep:3,ducHumble:3,ducTake:1},              /* granted: Danh + per step up; a humble ask Đức +; accepting the decree Đức + */
+ ok:{danhStep:3,danhNear:2,ducHumble:3,ducTake:1},   /* granted: Danh + per step up; same standing but nearer the Emperor: Danh + danhNear (nearness = prestige, research §1.2);
+                                                         a humble ask (lower standing, or same standing and not nearer) Đức +; accepting the decree Đức + */
  fail:{sung:2,sungStep:3,danh:1,danhStep:2,rel:6},  /* refused: Sủng −(sung + sungStep×steps up), Danh −(danh + danhStep×steps up), the first rival's relation −rel */
  npcLv:3                  /* an NPC asks only when her odds word is at least this ladder step (KIT_ODDS index: Khá chắc) */
 }});
@@ -26,6 +27,10 @@ function bcLocked(p,i){return rkOf(p)<bcNeed(i)}
 const bcDistOf=i=>{const s=MAPH.rivalSlots[i],e=MAPH.places.dtd;if(!s||!e)return 0;const a=s.anchor||s.box,b=e.anchor||e.box;return Math.hypot(a.x-b.x,a.y-b.y)};
 /* nearness 0..1: 1 = the palace nearest the Emperor's hall, 0 = the farthest, from the plan */
 function bcNear(i){const D=PALN.map((_,j)=>bcDistOf(j)),lo=Math.min(...D),hi=Math.max(...D);return hi>lo?(hi-D[i])/(hi-lo):0}
+/* THE gain of a granted ask (law 2/3: every ask has a gain; the card prints exactly what bcAsk applies), player and NPC alike */
+function bcGain(i,from){const B=BAL.banCung,st=bcDanh(i)-(from!=null?bcDanh(from):0);if(st>0)return{danh:B.ok.danhStep*st};if(st<0)return{duc:B.ok.ducHumble};
+ return from!=null&&bcNear(i)>bcNear(from)?{danh:B.ok.danhNear}:{duc:B.ok.ducHumble}}
+function bcGainTxt(g){const N={danh:"Danh",duc:"Đức"};return Object.keys(g).map(k=>`${N[k]} ${balSg(g[k])}`).join(", ")}
 function bcLive(p){return p===S?!!S&&!S.dead&&!S.out:!!p&&p.alive&&!p.out}
 /* who else wants palace i: living chủ vị (not the queen) of the rank it needs, now in a palace of lower standing (or none) — strongest first */
 function bcWanters(p,i){const L=[S].concat(typeof rivals!=="undefined"?rivals:[]).filter(q=>q!==p&&bcLive(q)&&!q.queen&&rkOf(q)>=PAL_HEAD&&rkOf(q)>=bcNeed(i)&&(q.pal==null||bcDanh(q.pal)<bcDanh(i)));
@@ -37,7 +42,7 @@ function bcOdds(p,i,from){const B=BAL.banCung;const st=bcDanh(i)-(from!=null?bcD
  return cl(Math.round(o),BAL.odds.lo,BAL.odds.hi)}
 /* the lock reason in cổ trang words (rank names read from RANKS) */
 function bcWhy(i){const d=bcDanh(i),rk=RANKS[bcNeed(i)].n;
- return d>=3?`Cung gần ngự tẩm, lệ chỉ dành cho bậc ${rk} trở lên; tâu xin là vượt phận.`:`Cung danh giá, xưa nay bậc ${rk} trở lên mới được ở; tâu xin là vượt phận.`}
+ return d>=3?`Cung bậc nhất lục cung, lệ chỉ dành cho bậc ${rk} trở lên; tâu xin là vượt phận.`:`Cung danh giá, xưa nay bậc ${rk} trở lên mới được ở; tâu xin là vượt phận.`}
 function bcOcc(p){const o={};for(const q of [S].concat(rivals||[]))if(q!==p&&q.pal!=null&&bcLive(q))o[q.pal]=1;return o}
 /* the decree (jpal palFix → every new chủ vị, player and NPC alike): a free palace her rank allows; her favour decides how good — 
    allowed free palaces ordered by standing then nearness, her Sủng picks the place in that list. -1 = none allowed (palFix falls back). */
@@ -46,7 +51,7 @@ function bcGrantIx(p,occ){try{const L=PALN.map((_,i)=>i).filter(i=>occ[i]==null&
 /* the outcome of an ask (same for player and NPC): returns true when granted */
 function bcAsk(p,i,from){const B=BAL.banCung,me=p===S,st=bcDanh(i)-(from!=null?bcDanh(from):0),up=Math.max(0,st);const top=bcWanters(p,i)[0]||null;
  const who=me?"Ngươi":`${RANKS[rkOf(p)].n} ${p.name}`;
- if(roll(bcOdds(p,i,from))){p.pal=i;const g=st>0?{danh:B.ok.danhStep*st}:st<0?{duc:B.ok.ducHumble}:{};
+ if(roll(bcOdds(p,i,from))){p.pal=i;const g=bcGain(i,from);
   if(me)apply(g);else for(const k in g)p[k]=cl((p[k]||0)+g[k],0,100);
   log(`${who} tâu xin ${PALN[i]}, Hoàng thượng chuẩn tấu, dời sang ${PALN[i]}.`);return true}
  const L={sung:-(B.fail.sung+B.fail.sungStep*up),danh:-(B.fail.danh+B.fail.danhStep*up)};
@@ -67,7 +72,7 @@ palCeremony=function(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const from=S.p
  for(const c of bcChoices(S,from)){const i=c.i;
   if(c.locked){opts.push(kitOff({n:`Xin ${PALN[i]}`,fx:{},x:`dời sang ${PALN[i]}`,go:()=>{}},bcWhy(i),kitWhenRank()));continue}
   const s=st(i),up=Math.max(0,s),top=bcWanters(S,i)[0];
-  const gain=s>0?`, Danh ${balSg(B.ok.danhStep*s)}`:s<0?`, Đức ${balSg(B.ok.ducHumble)}`:"";
+  const gain=`, ${bcGainTxt(bcGain(i,from))}`;
   const loss=`Sủng ${balSg(-(B.fail.sung+B.fail.sungStep*up))}, Danh ${balSg(-(B.fail.danh+B.fail.danhStep*up))}${top&&up>0?`, ${top.name} sinh oán`:""}`;
   opts.push({n:`Xin ${PALN[i]}`,fx:{},x:`${word(c.odds)} · thành: dời sang ${PALN[i]}${gain} · hỏng: ${loss}`,go:()=>{bcAsk(S,i,from)}})}
  Q.push({ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[from]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p><p>Cung càng gần ngự tẩm, càng danh giá, càng nhiều người muốn; tâu xin quá phận thì khó được chuẩn.</p>`,opts});

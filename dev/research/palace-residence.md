@@ -56,8 +56,8 @@ The ten askable palaces (PALN). "Distance" is measured on the plan from the pala
 
 | palace | where on the plan | history analogue | standing | who may ask (BAL.banCung.need) |
 |---|---|---|---|---|
-| Vĩnh Thọ cung | west, by Càn Ninh, near the Emperor's hall | Yongshou — nearest Yangxin, favourites | 3 | Quý phi and above |
-| Dực Khôn cung | west, by Càn Ninh, near the Emperor's hall | Yikun — favourites, Cixi's birthday palace | 3 | Quý phi and above |
+| Vĩnh Thọ cung | west, beside Càn Ninh (the queen) — mid-distance to the Emperor's hall on this plan; standing from its history | Yongshou — nearest Yangxin, favourites | 3 | Quý phi and above |
+| Dực Khôn cung | west, beside Càn Ninh (the queen) — mid-distance to the Emperor's hall on this plan; standing from its history | Yikun — favourites, Cixi's birthday palace | 3 | Quý phi and above |
 | Thừa Minh cung | inner east row, second from the Emperor | Chengqian — Donggo, the beloved | 2 | Phi and above |
 | Diên Huy cung | inner east row, beside the Emperor's hall | (nearest door on this plan) | 2 | Phi and above |
 | Trường Xuân cung | inner east row, far north | Changchun — Empress Xiaoxian, Cixi | 2 | Phi and above |
@@ -69,12 +69,13 @@ The ten askable palaces (PALN). "Distance" is measured on the plan from the pala
 
 Rules that follow (built in dev/build/jbancung.js, numbers in BAL.banCung):
 1. **Locks** — a palace whose standing needs a higher rank is shown but cannot be asked; the card says why in cổ trang words
-   («Cung gần ngự tẩm, lệ chỉ dành cho bậc Quý phi trở lên; ngươi xin là vượt phận.»).
+   («Cung bậc nhất lục cung, lệ chỉ dành cho bậc Quý phi trở lên; tâu xin là vượt phận.»).
 2. **Odds** (ladder word, never %) = base + favour + rank above the palace's need − standing − nearness to the Emperor's hall −
    rivals who want it (living chủ vị-rank consorts, the Empress's side, of a rank ≥ the palace's need who hold a palace of lower standing).
 3. **Refusal** (law 3 gain-and-loss, law 2 equal value): a higher palace = harder odds and a heavier refusal (Sủng, Danh down;
    the strongest rival who wanted it remembers — her ghét rises). A humbler palace (lower standing than the one granted) = easy,
-   with Đức up for modesty. «Nhận» (accept the decree) = sure, small Đức (gratitude), no loss. Success moves her to the palace.
+   with Đức up for modesty. Same standing: nearer the Emperor's hall = Danh + (BAL.banCung.ok.danhNear; nearness is prestige),
+   not nearer = the humble gain (Đức). «Nhận» (accept the decree) = sure, small Đức (gratitude), no loss. Success moves her to the palace.
 4. **Grant** (law 1 one rule for all): the decree itself now follows the same locks — the Emperor grants the best free palace her
    rank allows (NPC heads too; palFix). NPCs who rise to chủ vị petition with the same odds function and pay the same refusal.
 5. **Co-op**: odds are a pure function of the shared world (no dice in the odds), so both seats see the same word for the same ask.

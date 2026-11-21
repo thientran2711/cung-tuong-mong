@@ -31,6 +31,14 @@ const URL=process.argv[2]||'file://'+path.resolve(__dirname,'../../index.html');
   const al=xs.filter(o=>!o.off);ok(al.length>=1,'allowed asks shown');
   for(const o of al){const i=idx(o.n.replace(/^Xin /,""));ok(o.x.startsWith(word(bcOdds(S,i,HA))+" ·"),`${o.n}: word = ${word(bcOdds(S,i,HA))}`);
    ok(/hỏng: Sủng -\d+, Danh -\d+/.test(o.x),`${o.n}: refusal price shown`)}
+  /* law 2/3 + law 11 scan: EVERY (granted from, allowed i) pair, every rank 3..6: the card has a non-empty gain and shows exactly what bcAsk applies */
+  {let pairs=0,bad=[];const keep={rank:S.rank,pal:S.pal,sung:S.sung,danh:S.danh,duc:S.duc};const roll1=roll;const Bf=BAL.banCung.fail;
+   for(let rk=3;rk<=6;rk++)for(let f=0;f<PALN.length;f++){if(bcLocked({rank:rk,queen:false},f))continue;for(let i=0;i<PALN.length;i++){if(i===f||bcLocked({rank:rk,queen:false},i))continue;pairs++;
+    S.rank=rk;const g=bcGain(i,f);const txt=bcGainTxt(g);if(!Object.keys(g).length||!txt){bad.push([rk,PALN[f],PALN[i],'no gain']);continue}
+    S.pal=f;S.sung=50;S.danh=50;S.duc=50;roll=()=>true;bcAsk(S,i,f);roll=roll1;const got={danh:S.danh-50,duc:S.duc-50};
+    for(const k in got)if((g[k]||0)!==got[k])bad.push([rk,PALN[f],PALN[i],'shown '+txt+' applied '+JSON.stringify(got)])}}
+   Object.assign(S,keep);ok(pairs>40&&!bad.length,`every ask has a gain, shown = applied (${pairs} pairs)`+(bad.length?' '+JSON.stringify(bad.slice(0,4)):''))}
+  ok(al.every(o=>{const i=idx(o.n.replace(/^Xin /,""));return o.x.includes('thành: dời sang '+PALN[i]+', '+bcGainTxt(bcGain(i,HA)))}),'card «thành» prints bcGain');
   const take=d.opts[0];ok(/^Nhận /.test(take.n)&&take.fx.duc===B.ok.ducTake,'«Nhận» = sure, Đức + (gain-only)');
   /* (b) odds monotonic + one core */
   const o1=bcOdds(S,CT,HA);S.sung=80;const o2=bcOdds(S,CT,HA);S.sung=50;ok(o2>o1,`more Sủng → better odds (${o1}→${o2})`);
