@@ -262,7 +262,7 @@ OUTER_TIED = ("the outer robe HELD IN by the sash tied OVER it: its front edges 
 # the sash, the sash ON TOP of the outer fabric). Kept compatible with approved S13 (t4 "opening gradually in a long soft V toward the hem"). DESIGN20.
 # EAR_FREE (owner L1037 NOEAR + Foreman C #16 02:01Z after the t5–t7 v8 drafts drew jade drop earrings; owner L1627 'fix everywhere at once'):
 # ONE shared sentence put right after EAR_SENT in every consort prompt t1–t8 (thu + xuân). Our words, short (prompts sit at the 10 000 limit).
-EAR_FREE = "Nothing hangs from her ears."
+EAR_FREE = "Nothing hangs from her ears."   # SUPERSEDED 02:05Z by DESIGN20 1e330b0 wording (thu_comoi/make_no_ears2.py); kept so make_ears_free.py still runs
 OUTER_WRAP = ("the outer robe is a WRAP robe HELD IN by the sash: its front edges overlap at the waist, bound CLOSED under the sash lying ON TOP of it, "
               "outer robe fabric on both sides of the waist above and below the sash, never an open coat")
 B29_A_SCOPES = {"tp1", "tp2", "tp3", "pr1", "pr2", "pr3"}
