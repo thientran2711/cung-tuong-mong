@@ -2,6 +2,8 @@
    (Thái hậu, each consort, her maid, every staff member): the face the host holds is the face the guest holds at the start (within 20 s) and
    after one merged week (within 10 s), and no figure's face is re-drawn by the week. Before r2: 3/8 rooms bad (Thái hậu c29 on the host only
    at the start, re-drawn c22 after week 1; consort c16 on the host vs maid:m34 stored on the guest).
+   r2c: a world person given HER portrait (S.pid) before her person reached the host was wiped on her seat by j88 (r5 consort:c19 host / none
+   guest, 3/8 rooms on LIVE aee7ff84): now counted (guest-missing after week 1 = bad) and fixed in jcoophl reserveFriend.
    usage: python3 dev/build/assemble.py && N=8 node dev/test/coop-hl-faces.js [workerURL]  → exit 1 if any room is bad */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||9);const SWAP=+(process.argv[4]||0);
@@ -53,5 +55,5 @@ async function room(b,ri){const H=await mk(b,'host',[686,880],0),G=await mk(b,'g
  if(miss1.length||miss0.length){const ks=miss1.concat(miss0.map(x=>x.split(':')[0]));const info=async o=>o.p.evaluate(ks=>{const out={};for(const k of ks){if(k[0]!=='r')continue;const v=rivals.find(x=>x&&('r'+x.id)===k);const c=COOPW.hl.canon();out[k]={fid:v&&v.fid,canon:c.R[k.slice(1)]&&c.R[k.slice(1)].fid,name:v&&v.name}}return {out,stat:JSON.stringify(COOPW.hl.stat),log:JSON.stringify(COOPW.hl.log.slice(-10))}},ks);console.log('  HOSTI',JSON.stringify(await info(H)));console.log('  GUESTI',JSON.stringify(await info(G)))}
  console.log(`R${ri} w1 th host=${h1.th.slice(-22)} guest=${(g1.th||'').slice(-22)} redrawn=${redraw.length} ${redraw.slice(0,5).join(' ')} guest-missing=${miss1.length} ${miss1.slice(0,5).join(' ')}`);
  if(redraw.length)console.log('  HOSTHL1',h1.hl,h1.log);
- await H.ctx.close();await G.ctx.close();return {bad:(!h0.th||h0.th!==g0.th||redraw.length>0)}}
+ await H.ctx.close();await G.ctx.close();return {bad:(!h0.th||h0.th!==g0.th||redraw.length>0||miss1.length>0/* r2c: a face the guest still lacks or holds differently after the week = a split */)}}
 (async()=>{const b=await chromium.launch();let bad=0;const N=+(process.env.N||6);for(let i=0;i<N;i++){try{const r=await room(b,i);if(r.bad)bad++}catch(e){console.log('R'+i+' EXC',e.message.slice(0,200))}}console.log('coop-hl-faces rooms',N,'bad',bad);await b.close();process.exit(bad?1:0)})();

@@ -86,9 +86,18 @@ const POOLF=/^(consort|maid|mama|eunuch|man|kid|thaihau|th)[:-]/;
 function pFids(o,out,d){if(!o||typeof o!=="object"||d>6)return out;if(Array.isArray(o)){for(const x of o)pFids(x,out,d+1);return out}
  for(const k in o){const v=o[k];if((k==="fid"||k==="pid")&&typeof v==="string"&&POOLF.test(v))out.add(v);else if(v&&typeof v==="object"&&k!=="fidUsed"&&k!=="fidDead"&&k!=="usedFaces")pFids(v,out,d+1)}return out}
 function reserveFriend(){try{if(!CW.on||!host()||!S||typeof figUsed!=="function")return;const P=CW.base&&CW.base.P&&CW.base.P.b;if(!P||!P.S)return;
-  const U=figUsed();const F=pFids({pid:P.S.pid,maid:P.S.maid,staff:P.S.staff,kids:P.S.kids},new Set(),0);for(const f of F)if(!U.includes(f)){U.push(f);HL.stat.resv=(HL.stat.resv||0)+1}}catch(e){}}
+  const U=figUsed();const F=pFids({pid:P.S.pid,maid:P.S.maid,staff:P.S.staff,kids:P.S.kids},new Set(),0);for(const f of F)if(!U.includes(f)){U.push(f);HL.stat.resv=(HL.stat.resv||0)+1}
+  /* r2c (same family; probe 3/8 rooms on LIVE aee7ff84, 2/8 on db6ae2a0): a world person already holding a face the FRIEND owns (her own
+     portrait S.pid, her maid / servants / children) — given before her person reached the host — is wiped on HER seat by j88's figPick guard
+     (who.fid===S.pid -> null) and kept on the host: one consort, two faces for ever (r5 consort:c19 host / none guest). The host owns world
+     faces, so the world person yields: her face is dropped here and the host draws a new one (figFill), which the diff sends. */
+  /* only her portrait: j88 wipes nothing else (a world face equal to her maid's / servant's is a duplicate, not a split; left as a note) */
+  const pid=typeof P.S.pid==="string"&&POOLF.test(P.S.pid)?P.S.pid:null;
+  if(pid)for(const p of worldPeople())if(p&&p.fid===pid){const k=whoKey(p);HL.clashL=(HL.clashL||[]).concat([[k,p.fid,COOP.state.week||0]]).slice(-12);delete p.fid;
+   if(k){FLAST.delete(k);FID.delete(k)/* fidBack must not put her portrait back after the next merged week */}clash++;HL.stat.clash=(HL.stat.clash||0)+1}}catch(e){}}
+let clash=0;
 function check(why){if(!live()||!host())return;HL.stat.checks++;const t0=performance.now();let ops=[];reserveFriend();
- if(why!=="pick"&&why!=="nm")try{figFill()}catch(e){}
+ if(why!=="pick"&&why!=="nm"||clash)try{clash=0;figFill()}catch(e){}
  /* r2 (same family, another lazy write; e2e 1/5: R#10.mk A=undefined B=[]): a person's mood memory (jmoodknow mkMigrate) is made lazily when
    a seat first reads her mood; the guest's read made it on her seat only. The host makes it for every world person with a mood now, so both
    seats hold the same (the host's is sent) */
@@ -190,7 +199,7 @@ if(typeof hhBind==="function"){const b0=hhBind;hhBind=function(o){try{if(o&&type
 function worldPeople(){const L=[];try{if(S.thO&&!S.thDead)L.push(S.thO);for(const v of rivals||[]){if(!v||v.coop)continue;L.push(v);if(v.maid)L.push(v.maid);
   for(const s of v.staff||[])if(s&&!s.coop)L.push(s);for(const k of v.kids||[])if(k)L.push(k)}
   for(const s of (S.thO&&S.thO.staff)||[])L.push(s);for(const m of S.men||[])if(m)L.push(m)}catch(e){}return L}
-function figFill(){if(!CW.on||!host()||!S||S.dead||typeof figPick!=="function")return 0;reserveFriend();if(typeof figxReady==="function"&&!figxReady())return 0;let n=0;
+function figFill(){if(!CW.on||!host()||!S||S.dead||typeof figPick!=="function")return 0;reserveFriend();clash=0;if(typeof figxReady==="function"&&!figxReady())return 0;let n=0;
  for(const p of worldPeople()){try{if(p.alive===false||p.dead)continue;const a=p.fid;if(p===S.thO){if(typeof figThPick==="function")figThPick()}else if(typeof figRoles==="function"&&figRoles(p).length)figPick(p);if(p.fid&&p.fid!==a)n++}catch(e){}}
  HL.stat.fill=(HL.stat.fill||0)+n;return n}
 HL.figFill=figFill;
