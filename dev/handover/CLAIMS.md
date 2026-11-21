@@ -553,7 +553,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN ROOT-82 (opus; child of ROOT-81, depth 2) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsJos72R3tL6fXZRSLv | RUNNING | 20/11 22:58Z |
 | REVIEW errand-bal r1 E32r (opus BIG) of be6302f6 | review/errand-bal-r1; reports/errand-bal-review.md | FOREMAN E #23 | session_01DgYSWnWdzcdCQFZxCythQm | DONE PASS 0a707e656bc43c94ac4ee65a6d6a9e4d3daef22d | 20/11 22:43Z → 20/11 23:39Z |
 | E RE-GATE LANDER E37 (opus; re-merge PASS branches onto newest LIVE + coop-e2e → LAND READY; jtq14-addr then ge-rank; ORDER MAIN 22:40Z) | review/<topic>-land | FOREMAN E #23 | session_01DgYSWnqPc9TWWFNWckZKvC | RUNNING | 20/11 22:48Z |
-| FOREMAN E #24 (opus; child of E #23, depth 5) | handover FOREMAN_E_STATUS | FOREMAN E #23 | session_01DgYSWkpuYY1nYuAMVGQJVm | RUNNING | 20/11 22:50Z |
+| FOREMAN E #24 (opus; child of E #23, depth 5) | handover FOREMAN_E_STATUS | FOREMAN E #23 | session_01DgYSWkpuYY1nYuAMVGQJVm | DONE → E #25 session_01DgYSWmm3tPLnLMUtPofz2g | 20/11 22:50Z |
 | REVIEW cold-faction r1 E33r (opus BIG; briefs/E33r-review-cold-faction.md) of 29d9258e | review/cold-faction-r1; reports/cold-faction-review.md | FOREMAN E #24 | session_01DgYSWmyPJTrC9g68qSyay9 | RUNNING | 20/11 22:53Z |
 | REVIEW ge-phutang r1 E35br (opus BIG; briefs/E35br-review-ge-phutang.md) of fa820b35 | review/ge-phutang-r1; reports/ge-phutang-review.md | FOREMAN E #24 | session_01DgYSWobK4XTbVjoam1LAdP | RUNNING | 20/11 22:53Z |
 | rv-kit-dress-picker REVIEWER (sonnet; small kit/UI) | review/kit-dress-picker-rv; reports/rv-kit-dress-picker.md | MAIN ROOT-82 | rv-signs session | DONE PASS 24dd2c62ec24b3f970aeb92a32312a3e04815b7e | 20/11 22:57Z |
@@ -604,3 +604,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN85 E-LANDER (opus; E stale train: phutang 54e068e5 → errand-bal 0d3a4328 → cold-faction 2208d341) | review/main85-land-*; briefs/main85-e-lander.md | MAIN CHÍNH 85 | (opening) | RUNNING | 21/11 02:50Z |
 econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNING | 21/11 02:28Z (D #13; succeeds CzXkfovc)
 | kit-pcrow-square KIT KEEPER (sonnet; OWNER-URGENT person-card layout, MAIN 84/85 addenda 1–7) | review/kit-pcrow-square; reports/kit-pcrow-square.md | MAIN CHÍNH 85 | session_01Rc5AsMtjP4KTgBZVjENGLs | code done; quickcheck + coop-e2e running, then SẴN SÀNG KIỂM | 21/11 |
+| FOREMAN E #25 (opus; child of E #24, depth 6) | handover FOREMAN_E_STATUS | FOREMAN E #24 | session_PENDING_E25 | RUNNING | 21/11 02:55Z |
