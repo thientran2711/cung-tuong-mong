@@ -1067,3 +1067,4 @@ NEWACCT#16 ~02:42Z: GEN1 7972b90 t4 9ZHSjoTNYZ + t5 mEZp0UIhJQ (110 cr, from 31a
 NEWACCT#16 HANDOVER ~02:42Z: depth 6, ctx 31 % (START ~4 % + 25 % → roll). TAKEOVER_FOREMAN_C_NEWACCT17.md written; opening #17 as my child. No schedules owned. Next Lượt 1656.
 NEWACCT#16 ~02:43Z: opened #17 session_01D3E3NbYu9MiN4xLYHdYTL9. Workers told to report to #17. #16 stops.
 NEWACCT#17 ~02:45Z: START depth 7, START_CTX ~4 % (roll at ~29 %, ceiling 60 %). Took over from #16. Reports in: MAIDFIX1 e40bb3a (3 maid prompts ready, waits owner L1654), GEN1 idle, DESIGN22 4c07bdf (thu s62 set CHECK1 PASS), PR21 89b2587 (room33 V3-B test, batch waits owner). No schedules owned. Next Lượt 1656.
+NEWACCT#17 ~02:50Z: LOOKED + sent L1656 PR21 room33 V3-B sheet (CŨ|MỚI, 135 cr): no brown wood, ivory/pink/jade; floor mauve-pink not blond. Batch 6 rooms ~810 cr waits owner OK. Next Lượt 1657.
