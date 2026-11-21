@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"b1033eb0+","t":"2026-11-20T23:13Z","c":"Merge review/jtq14-addr-land 672e9841 (= LIVE 24dd2c62 + jtq14-addr) into ge-rank c5ebab9a (assemble = main's list; index.html/sw.js rebuil…","b":"0e8adf2ac94e","h":[{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"}]};
+window.CTM_BI={"s":"62f4b11e+","t":"2026-11-21T03:19Z","c":"mood-seal: scan test for the corner seal on every Tâm trạng dialog","b":"652b6f0f9750","h":[{"s":"410c4f44+","t":"2026-11-21T03:07Z","c":"kit-tap-word: kitTapWord / kitTraitWords (KIT §73.2), sample, test"},{"s":"1674d407+","t":"2026-11-21T03:15Z","c":"Túi đồ: bấm đồ hiện ngay dưới lưới, Việc có hình"},{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -37934,7 +37934,7 @@ function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src=
 (function(){const s0=showModal;showModal=function(){const m=Q[0];const r=s0.apply(this,arguments);try{const M=$("modal"),dlg=M&&M.querySelector(".dlg.kpanel");const body=M&&M.querySelector("#mb > .kpb");if(!m||!dlg||!body)return r;
   if(m.placeK)return r;/* kit-size #8 (place:tgk/ttp/night MIXED): a place card already carries its ONE place picture (headArt → kitOnePic); an inherited evId (cat:hinh-phat…) must never add a 2nd event picture */
   const kind=dlg.dataset.kind||"";const want=kitIsEventChoice(m)||kind==="news"||m.art||m.stArt||m.evId||kitEvFitWant(m,kind);if(!want||body.querySelector(":scope > .kpsubj"))return r;
-  const a=kitEvArt(Object.assign({kind},m));if(!a)return r;window.__kitLastEvArt=a;body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart kpev">${kitSceneArt(a.src,a.lab,{shape:"tall"})}</div>`)}catch(e){console.error("kitEvArt",e)}return r}})();
+  const a=kitEvArt(Object.assign({kind},m));if(!a)return r;window.__kitLastEvArt=a;body.classList.add("kphas","kpinfo");body.insertAdjacentHTML("afterbegin",`<div class="kpsubj kpiart kpev">${kitSceneArt(a.src,a.lab,Object.assign({shape:"tall"},a.mark?{mark:a.mark,markAlt:a.markAlt||""}:{}))}</div>`)}catch(e){console.error("kitEvArt",e)}return r}})();
 /* the result card right after an event choice shows the same picture, small, left of the rows */
 (function(){if(typeof runOpt!=="function"&&typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(){const r=r0.apply(this,arguments);try{const a=window.__kitLastEvArt;window.__kitLastEvArt=null;const t=$("rtoast");if(a&&t&&!t.querySelector(".kpev")){t.classList.add("kevres");t.insertAdjacentHTML("afterbegin",`<div class="kpev kpevr">${kitSceneArt(a.src,a.lab,{shape:"tall",cap:false})}</div>`)}else if(t&&!a){t.classList.remove("kevres");const o=t.querySelector(".kpevr");if(o)o.remove()}}catch(e){}return r}})();
 (function(){const c0=closeModal;closeModal=function(){const m=Q[0];const r=c0.apply(this,arguments);try{if(!(m&&kitIsEventChoice(m)))window.__kitLastEvArt=null}catch(e){}return r}})();
@@ -37967,15 +37967,21 @@ function kitSceneArt(src,label,o){o=o||{};const sh=o.shape==="tall"?"tall":"wide
  return `<figure class="ksart ksart-${sh}${src?" ksart-ld":""}${o.size==="thumb"?" ksart-thumb":""}${o.col?" ksart-cat":""}${o.cls?" "+o.cls:""}"${lab?` title="${lab}"`:""}${o.col?` style="--kcc:${o.col}"`:""}>`+
   (lab?`<span class="ksart-ph">${label}</span>`:"")+(src?`<img src="${src}" alt="" loading="lazy" onload="${ok}" onerror="${err}">`:"")+
   (label&&o.cap!==false?(o.col?`<em class="ksart-chip">${label}</em>`:`<figcaption>${label}</figcaption>`):"")+
-  (o.mark?`<i class="ksart-mark" role="img" aria-label="${o.markAlt?String(o.markAlt).replace(/"/g,"&quot;"):""}" style="background-image:url('${String(o.mark).replace(/["'()]/g,"")}')"></i>`:"")+`</figure>`}
+  (o.mark?kitMarkHtml(o.mark,o.markAlt):"")+`</figure>`}
+/* owner 21/11 (mood-seal-2, mark #68): the corner mark is the LIVE mood seal (img.kemo = the ONE kit seal part jemoseal: idle sway at once + the lean as the dialog opens, data-kemo-now); any other mark src stays a still <i> */
+function kitMarkHtml(mark,alt){const m=/emo-(?:m-|mo-)?([a-z0-9_-]+)\.webp/.exec(String(mark));const a=alt?String(alt).replace(/"/g,"&quot;"):"";const u=String(mark).replace(/["'()]/g,"");
+ if(m)return `<img class="kemo kemo-${m[1]} ksart-mark" data-kemo-now="1" role="img" aria-label="${a}" alt="${a}" draggable="false" src="${u}" onerror="this.remove()">`;
+ return `<i class="ksart-mark" role="img" aria-label="${a}" style="background-image:url('${u}')"></i>`}
 (function(){const st=document.createElement("style");st.id="k-sceneart";st.textContent=`
 .ksart{position:relative;margin:0;display:block;width:100%;overflow:hidden;border-radius:4px;background:#efe4cf;
  border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3px #e6d3ac}
 .ksart-wide{aspect-ratio:16/9}.ksart-tall{aspect-ratio:3/4}
 /* 28.19b corner mark (review/mood-dialog): o.mark = a small seal (the mood seal img/kit/emo-*.webp) in the TOP-RIGHT corner of the picture */
 /*   a background layer, not an <img>: the many "picture fills its frame" img rules of the slots (.kdpban, .kaart…) never stretch it */
-.ksart>i.ksart-mark{position:absolute;top:6px;right:6px;width:clamp(46px,24%,88px);aspect-ratio:1;background:center/contain no-repeat;z-index:3;filter:drop-shadow(0 1px 2px #000a);pointer-events:none}
-.ksart.ksart-thumb>i.ksart-mark{top:2px;right:2px;width:52%}/* owner 11/16 15:10Z 7.2: the round mood mark on picture corners a bit BIGGER (was 17 % / 40 %) */
+.ksart>i.ksart-mark,.ksart>img.kemo.ksart-mark{position:absolute;top:6px;right:6px;width:clamp(46px,24%,88px);aspect-ratio:1;background:center/contain no-repeat;z-index:3;filter:drop-shadow(0 1px 2px #000a);pointer-events:none}
+.ksart.ksart-thumb>i.ksart-mark{top:2px;right:2px;width:52%}
+html body .ksart>img.kemo.ksart-mark{position:absolute!important;inset:6px 6px auto auto!important;height:clamp(46px,9vmin,80px)!important;max-height:calc(100% - 10px)!important;width:auto!important;aspect-ratio:1!important;object-fit:contain!important;border:0!important;border-radius:0!important;margin:0!important;max-width:none!important;pointer-events:none!important;background:none!important}
+html body .ksart.ksart-thumb>img.kemo.ksart-mark{inset:2px 2px auto auto!important;width:52%!important;height:auto!important}/* owner 11/16 15:10Z 7.2: the round mood mark on picture corners a bit BIGGER (was 17 % / 40 %) */
 /* size "thumb" (tabs-kit r7, KIT 28.19): the same frame as a small square tile beside text (skill / chapter / empty cards): --ksth (64 px; 56 px
    on phones), 2 px mat, never stretched by its slot */
 .ksart.ksart-thumb{width:var(--ksth,64px);height:var(--ksth,64px);aspect-ratio:1;flex:0 0 auto;box-shadow:inset 0 0 0 1px #fffaf0,inset 0 0 0 2px #e6d3ac}
@@ -42092,6 +42098,7 @@ function kitEventStage(m){try{const M=$("modal"),mb=$("mb");const dlg=M&&M.query
  if(!mb.querySelector(":scope > .kdlgart")){let a=null;const ev=body.querySelector(":scope > .kpsubj.kpev");
   if(ev){const im=ev.querySelector("img"),fr=ev.querySelector(".ksart");if(im)a={src:im.getAttribute("src"),lab:(fr&&fr.title)||""}}
   if(!a&&typeof kitEvArt==="function")a=kitEvArt(m);
+  if(a&&a.src&&!a.mark&&typeof emoEvMark==="function"){const x=emoEvMark(m);if(x)a=Object.assign({},a,x)}/* mark #68: the seal of the feeling the event comes from */
   /* owner 16/11 07:35Z (OD:L448) + reviewer popup-fullbody-r1 #2: EVERY person pop-up has the event picture RIGHT TOP — a kind without its own picture (ĐIỀU / LUẬT / BÁO / KẾT QUẢ / ĐÊM / tai mắt) gets its default banner by kind */
   if(!a||!a.src)a=kitDefaultBanner(m,dlg.dataset.kind||"");
   if(a&&a.src){const d=document.createElement("div");d.className="kdlgart kesband";d.innerHTML=kitSceneArt(a.src,a.lab,Object.assign({shape:"wide",cap:!!a.lab},kitEvCat(m,a),a.mark?{mark:a.mark,markAlt:a.markAlt||""}:{}));mb.prepend(d)}}
@@ -42681,7 +42688,7 @@ html body .pc.kpwide[data-k2]>.pcl>.pcname{align-items:flex-start!important}
 #modal .dlg.kdper.kdpbanner>#mb{grid-template-rows:max-content max-content minmax(0,1fr)!important}
 #modal .dlg.kdper>#mb>.kdlgart.kdpban{grid-column:2!important;grid-row:1!important;margin:0 0 8px!important;padding:0!important;min-width:0;width:auto!important;height:auto!important;max-height:none!important}
 html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart{width:100%!important;height:clamp(96px,calc(24*var(--kvh,1vh)),190px)!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important;margin:0!important}
-html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart img{width:100%!important;height:100%!important;object-fit:cover!important}
+html body #modal .dlg.kdper>#mb>.kdlgart.kdpban>.ksart img:not(.ksart-mark){width:100%!important;height:100%!important;object-fit:cover!important}
 #modal .dlg.kdper.kdpbanner>#mb>.kpb>.kpmain,#modal .dlg.kdper.kdpbanner>#mb>.kdpr:not(.kdlgart){grid-column:2}
 html body #modal .dlg.kdper>#mb>.opts.kdpo2,html body #modal .dlg.kdper>#mb>.opts.kdpo2.k3grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start;gap:8px}
 /* KIT 32.7d (owner 15/11 end card "Kiếp này", D36; kit-keeper-1): a 32.7 dialog with NO option list (end card, Đã rõ cards) — the TEXT side scrolls by
@@ -42876,7 +42883,7 @@ function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
  ${B}>.kaart{flex:0 0 ${w}px!important;width:${w}px!important;height:${h}px!important;border-radius:6px!important;overflow:hidden!important;box-shadow:0 0 0 2px var(--kcc0,#b08a4a)!important;background:#efe4cc!important}
  ${B}>.kaart>.ksart{width:100%!important;height:100%!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
  ${B}>.kaart>.ksart>:not(img){display:none!important}
- ${B}>.kaart>.ksart>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
+ ${B}>.kaart>.ksart>img:not(.ksart-mark){position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border:0!important;border-radius:0!important;margin:0!important}
  ${B}>.kabody{flex:1 1 auto!important;min-width:0!important;gap:3px!important}
  ${B} .kat{flex-wrap:nowrap!important;align-items:flex-start!important;gap:6px!important}
  ${B} .kat>.kan{flex:1 1 auto!important;min-width:0!important}
@@ -43036,7 +43043,7 @@ html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;m
 .kpdlg .kpdr{position:relative;z-index:1;min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px}/* KIT 56.4: text drawn ON TOP of the figure */
 .kpdlg .kdpban{flex:none;margin:0;padding:0}
 .kpdlg .kdpban>.ksart{width:100%;height:clamp(84px,calc(17*var(--kvh,1dvh)),150px);aspect-ratio:auto}
-.kpdlg .kdpban>.ksart img{width:100%;height:100%;object-fit:cover}
+.kpdlg .kdpban>.ksart img:not(.ksart-mark){width:100%;height:100%;object-fit:cover}
 .kpdlg .kpdt{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;font-size:.9rem;line-height:1.45;color:var(--ink)}
 .kpdlg .kpdt p{margin:0 0 6px}
 .kpdlg .kpdt .kb{margin:4px 0 2px}
@@ -57653,6 +57660,13 @@ function emoBox(k){const p=emoByKey(k);if(!p||!S||S.dead)return;const m=window.k
  kitModal({kind:"info",look:1,title:`Tâm trạng · ${nm}`,sub:m.known?`Hiện nay: ${kitSealName(p,m)}${p===S&&typeof mbBand==="function"&&!window.__moodOff?` · ${mbBand().name}`:""}`:"chưa rõ",subject:p,headArt:art||undefined,
   sections:p===S&&typeof mbSecs==="function"&&!window.__moodOff?(M=>[M[0],M[1],{h:"Cảm xúc lúc này",rows},M[2]])(mbSecs()):[{h:"Đang tác động",rows},{h:"",rows:[["Ảnh hưởng",p===S?"tâm trạng của ngươi đổi cơ may của mọi việc một chút":"vui thì dễ chịu nghe, giận hay ghen thì khó nói chuyện, dễ ra tay hơn"]]}],btn:"Đã rõ"})}
 window.emoBox=emoBox;window.emoCauseArt=emoCauseArt;
+/* owner 21/11 (mark #68): an event that comes FROM a feeling (her outburst «Khóc suốt đêm», «Trốn trong phòng», an NPC's outburst, extreme mood) carries m.emoSeal={k:feeling key,who:person key}: its picture wears that feeling's seal in the TOP-RIGHT corner (kitSceneArt o.mark → live img.kemo) */
+function emoEvMark(m){try{const e=m&&m.emoSeal;if(!e||!e.k)return null;const p=(e.who!=null&&emoByKey(e.who))||S;const set=typeof emoArtSet==="function"?emoArtSet(p):"";let art=typeof feelArt==="function"?feelArt(e.k,set):e.k;
+ /* a feeling whose still is not painted yet (khoc) walks to its nearest painted one, so the corner is never an empty disc */
+ try{const have=typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&KIT_CDNHAVE.size?KIT_CDNHAVE:null;const FB={khoc:"buon"};for(let i=0;i<4&&have&&!have.has(`https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-${set}${art}.webp`);i++){const nk=(typeof feelFb==="function"&&feelFb(art))||FB[art];if(!nk)break;art=nk}}catch(x){}
+ let nm="";try{nm=typeof feelName==="function"?feelName(e.k,1):""}catch(x){}nm=nm||EMO[e.k]||"";return{mark:`https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-${set}${art}.webp`,markAlt:`Tâm trạng: ${nm}`}}catch(x){return null}}
+window.emoEvMark=emoEvMark;
+(function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){const r=k0.apply(this,arguments);try{if(r&&r.src&&!r.mark&&m&&m.emoSeal){const x=emoEvMark(m);if(x)return Object.assign({},r,x)}}catch(e){}return r};window.kitEvArt=kitEvArt})();
 /* LOOK-UP PANELS (kit.look: Tâm trạng · X, Đã biết về X, Chứng cứ về X — panels she opens herself) are not visits: they show only the picture
    they bring (headArt), never the person-dialog default "Có người đến chơi" (jk4) or a room picture (whole family, review/mood-dialog) */
 (function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){try{if(m&&m.kit&&m.kit.look){const h=m.kit.headArt;
@@ -72472,7 +72486,7 @@ window.kitBtnSize=kitBtnSize;window.kitFrameSize=kitFrameSize;window.kitFrameApp
 .kszpic{flex:none;width:var(--kszpw);height:var(--kszph)}
 .kszban{width:min(100%,var(--kszbw));height:var(--kszbh);align-self:center;flex:none}
 .kszpic>.ksart,.kszban>.ksart{width:100%;height:100%;aspect-ratio:auto}
-.kszpic>.ksart img,.kszban>.ksart img,.kszll>.ksart img,.kszbp img{width:100%;height:100%;object-fit:cover;display:block}
+.kszpic>.ksart img:not(.ksart-mark),.kszban>.ksart img:not(.ksart-mark),.kszll>.ksart img:not(.ksart-mark),.kszbp img{width:100%;height:100%;object-fit:cover;display:block}
 .kszll{flex:none;margin:10px 12px 0;height:var(--kszll)}.kszll>.ksart{height:100%;aspect-ratio:auto}
 .kszf.kszlong>.kszbody{flex-direction:column;align-items:stretch;max-height:calc(var(--kszcap) - var(--kszll,0px) - 10px)}
 .kpkb .krv>.kchip+.kchip{margin-left:4px}
@@ -72695,7 +72709,7 @@ window.kitPicSubj=kitPicSubj;
 .ksz3[data-pres="fig"] .k3body>.k3main.k3mpic.k3fill{align-self:stretch;height:auto;min-height:${Z.pic[V.picS].h}px}/* KIT 84c: person-less main picture fills its column */
 .ksz3 .k3ev{flex:1 1 auto;min-height:${V.evMin.fig}px}.ksz3[data-pres="one"] .k3ev{min-height:${V.evMin.one}px}
 .ksz3 .k3mpic>.ksart,.ksz3 .k3ev>.ksart{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;margin:0;border:0;box-shadow:none;border-radius:0}
-.ksz3 .k3mpic>.ksart img,.ksz3 .k3ev>.ksart img{width:100%;height:100%;object-fit:cover;display:block}
+.ksz3 .k3mpic>.ksart img:not(.ksart-mark),.ksz3 .k3ev>.ksart img:not(.ksart-mark){width:100%;height:100%;object-fit:cover;display:block}
 .ksz3 .k3btns{display:grid;grid-template-columns:repeat(var(--k3c,1),minmax(0,1fr));gap:${V.btn.gap}px;flex:none}
 .ksz3[data-pres="one"]>.k3btns{padding:0 12px 12px}
 .ksz3 .k3btns>.kszb{grid-column:span var(--k3s,1);width:auto;min-width:0}
@@ -72891,8 +72905,9 @@ Object.assign(window,{kszItemTile3,kszItemsSheet3,kszItemsSheet3Show,kszWearRow3
 const KSZ_LIVE_SKIP=".kpt-mount,.kpid,.kmc,.kpick,.kpicks,.kinv,.kshg,.kshop,.kreltab,.krelt,.kstgrid,.kip,table,.kexam,.kflip,.kpl,.kmlist,.kslot,.kpets,.kgift,.kpkgrid";
 KIT_SIZE.v3.live={maxOpts:7,maxSecs:4};/* kit-rank-name (OD:L1351): the tag's rank line is the RANK (Thái giám), never the office (Kính sự phòng) — the old office override is deleted */
 /* owner 21/11 (mood-seal): the picture of a look-up frame (Tâm trạng · X) carries the mood seal in its corner (kitSceneArt o.mark, KIT 28.19b); the live frame rebuilds its picture, so it takes the seal along (from the dialog's own band, else the headArt) */
-function kszLiveMark3(m,mb){let mark="",alt="";try{const i=mb.querySelector(":scope > .kdlgart .ksart-mark");if(i){const u=/url\(["']?([^"')]+)/.exec(i.style.backgroundImage||"");if(u)mark=u[1];alt=i.getAttribute("aria-label")||""}}catch(e){}
+function kszLiveMark3(m,mb){let mark="",alt="";try{const i=mb.querySelector(":scope > .kdlgart .ksart-mark");if(i){const u=i.tagName==="IMG"?[0,i.getAttribute("src")]:/url\(["']?([^"')]+)/.exec(i.style.backgroundImage||"");if(u)mark=u[1];alt=i.getAttribute("aria-label")||""}}catch(e){}
  if(!mark){const h=m&&m.headArt;if(h&&typeof h!=="string"&&h.mark){mark=h.mark;alt=h.markAlt||""}}
+ if(!mark&&typeof emoEvMark==="function"){const x=emoEvMark(m);if(x){mark=x.mark;alt=x.markAlt}}/* an event that comes from a feeling (mark #68): its seal on the picture even when the picture came from the left slot */
  return mark?{mark,markAlt:alt}:null}
 function kszLiveSrc3(m,mb,kind){let src="";const im=mb.querySelector(":scope > .kdlgart img, :scope > .kpb > .kpsubj.kpev img, :scope > .kpb > .kpsubj.kpiart img");if(im)src=im.getAttribute("src")||"";
  if(!src&&m&&m.kit&&m.kit.pic)src=m.kit.pic;if(!src&&m&&m.headArt&&m.headArt.src)src=m.headArt.src;
@@ -72962,14 +72977,16 @@ function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!str
 function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[X.kind]||"person",nar=/^N/.test(K);
  Object.assign(dlg.dataset,{ksz:K,pres,focus:foc,lay:K});if(nar)dlg.dataset.narrow="1";else delete dlg.dataset.narrow;
  if(nar&&KIT_SIZE.fig[K+"3"]){const Z=V.narrow[K],F=KIT_SIZE.fig[K+"3"],Mm=document.getElementById("modal"),mh=Mm?Mm.clientHeight:900;F.h=Math.round(Math.min(Z.max,Z.f*mh));F.cw=Z.cw;dlg.style.setProperty("--kszfh",F.h+"px");dlg.style.setProperty("--kszcw",F.cw+"px")}else{dlg.style.removeProperty("--kszfh");dlg.style.removeProperty("--kszcw")}
- const body=X.body,right=X.right;[...body.children].forEach(c=>{if(c!==right)c.remove()});right.querySelectorAll(":scope>.k3ev").forEach(c=>c.remove());
+ const body=X.body,right=X.right;const keepMk=dlg.querySelector(".k3ev .ksart>img.kemo.ksart-mark,.k3mpic .ksart>img.kemo.ksart-mark");if(keepMk)keepMk.remove();/* mark #68: the live corner seal keeps its own element through every re-lay (size pick, picture step), so its motion is never restarted */
+ [...body.children].forEach(c=>{if(c!==right)c.remove()});right.querySelectorAll(":scope>.k3ev").forEach(c=>c.remove());
  let left="",ev=true;if(!X.who){left=kszPic3(X.src,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill",X.mk);ev=false}/* KIT 84c person-less frame (place card): its picture is the left main picture; fills the column in fig sizes */else if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic",X.mk);ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
  if(left)body.insertAdjacentHTML("afterbegin",left);if(ev&&X.src)right.insertAdjacentHTML("afterbegin",kszPic3(X.src,"k3ev",X.mk));
+ if(keepMk){const nu=dlg.querySelector(".k3ev .ksart,.k3mpic .ksart");if(nu){const m0=nu.querySelector(":scope>img.kemo.ksart-mark");if(m0)m0.replaceWith(keepMk);else nu.appendChild(keepMk)}}
  if(X.opts){if(pres==="one"||nar)X.mb.appendChild(X.opts);else right.appendChild(X.opts);/* narrow: option cards BELOW the figure row, full width; else kit-option-rows r2: stack label over value when the column is too narrow */const bs=[...X.opts.querySelectorAll(":scope>button")],w=X.opts.clientWidth;X.opts.classList.remove("kszstk")}
  /* KIT 56.19: an option card's picture sits in its fixed kit box (.kaart, KIT_OPT tier sizes), so its late (lazy) load changes no frame size and must not re-pick
     the frame: scrolling the list revealed lazy card pictures, their load re-picked the frame in the middle of her wheel and the wheel was lost */
  body.querySelectorAll("img").forEach(im=>{if(!im.complete&&!im.closest(".opts"))im.addEventListener("load",()=>kszLiveRepick3(dlg),{once:true})});
- right.querySelectorAll(":scope>.k3ev img").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kitFrameApplyLive3(dlg),{once:true})});
+ right.querySelectorAll(":scope>.k3ev img:not(.ksart-mark)").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kitFrameApplyLive3(dlg),{once:true})});
  kitFrameApplyLive3(dlg)}
 /* NARROW T3 (owner 17/11, 412x1058 Fold cover / 390x844 phone): at a frame width where even the smallest figure column (the M figure column) would leave the right column
    under the kit minimum (V.narrow.minRight = the option-card minimum, kitOptFit0), the frame STACKS: a reduced figure (+ the picture strip and text) on top,
@@ -73278,7 +73295,7 @@ window.eaCards=eaCards;
 function eaScoldOne(m,c){loyAdd(m,-c.loy);const d=ventMe(c.mood,`mắng ${m.name}`,c.emo);try{if(typeof emoEv==="function")emoEv(m,"loyalDown",`bị chủ nhân quát mắng`)}catch(e){}
  log(`Ngươi quát mắng ${m.name} một trận; cơn giận nguôi đi (tâm trạng ${sgn(d||c.mood)}), ${m.name} cúi đầu chịu mắng (lòng −${c.loy}).`)}
 function eaScoldPick(L,c){if(L.length===1)return eaScoldOne(L[0],c);
- Q.push({ev:1,t:"Mắng cung nữ",art:"https://ctm-img.victoria-tntt.workers.dev/img/act-phat-vo-co-h.webp",h:`<p>Cơn giận chưa nguôi. Ngươi gọi cung nữ vào.</p><p>Mắng ai?</p>`,
+ Q.push({ev:1,t:"Mắng cung nữ",emoSeal:{k:"gian",who:"me"},art:"https://ctm-img.victoria-tntt.workers.dev/img/act-phat-vo-co-h.webp",h:`<p>Cơn giận chưa nguôi. Ngươi gọi cung nữ vào.</p><p>Mắng ai?</p>`,
   opts:L.map(m=>({n:`Mắng ${m.name}`,risk:"an toàn",hint:`hả giận; ${m.name} buồn lòng`,x:`thành: tâm trạng +${c.mood} · kèm: lòng ${m.name} −${c.loy} (nay ${m.loyal||0})`,fx:{},go:()=>eaScoldOne(m,c)}))})}
 /* the cards sit after the standing cards (j76), are rebuilt from the live mood on every deal / render, and never on the servant road */
 function eaSync(){try{if(!eaOn()||!Array.isArray(deck)||(typeof isSrv==="function"&&isSrv()))return;const want=eaCards();const keys=want.map(a=>a.ea).join(",");
@@ -73455,7 +73472,7 @@ function eaOwner(s){if(s===S.maid||(S.staff||[]).includes(s))return S;for(const 
 /* at most ONE event a tuần from other people's outbursts (BAL.ea.npc.meWk); the rest go to the log */
 function eaMeSlot(){const A=eaS(),w=W();if(A.hitW===w&&(A.hitN||0)>=E().npc.meWk)return false;if(A.hitW!==w){A.hitW=w;A.hitN=0}A.hitN++;return true}
 function eaHitMine(p,m){try{if(!m)return;const lower=rkOf(p)<S.rank&&!S.out;loyAdd(m,-E().hoi.hitLoy);EA_N.hoiMe++;
-  if(lower&&eaMeSlot()){Q.push({ev:1,t:"Cung nữ bị ức hiếp",who:eaWho(p),art:"https://ctm-img.victoria-tntt.workers.dev/img/act-phat-vo-co-h.webp",h:`<p>${m.name} chạy về, mắt đỏ hoe: ${nm(p)} gặp nàng ở hành lang, trút giận mắng nàng một trận chẳng vì lỗi gì.</p><p>${Nm(p)} phẩm vị thấp hơn ngươi.</p>`,
+  if(lower&&eaMeSlot()){Q.push({ev:1,t:"Cung nữ bị ức hiếp",emoSeal:{k:"gian",who:emoKey(p)},who:eaWho(p),art:"https://ctm-img.victoria-tntt.workers.dev/img/act-phat-vo-co-h.webp",h:`<p>${m.name} chạy về, mắt đỏ hoe: ${nm(p)} gặp nàng ở hành lang, trút giận mắng nàng một trận chẳng vì lỗi gì.</p><p>${Nm(p)} phẩm vị thấp hơn ngươi.</p>`,
    opts:[{n:`Sang hỏi tội ${nm(p)}`,risk:"an toàn",hint:"giữ thể diện cho cung mình",x:`thành: Danh +${E().hoi.go.danh}, lòng ${m.name} +${E().hoi.go.loy} · kèm: ${nm(p)} oán ngươi +${E().hoi.go.oan}`,fx:{danh:E().hoi.go.danh},go:()=>{loyAdd(m,E().hoi.go.loy);oanAdd(p,S,E().hoi.go.oan);log(`Ngươi sang hỏi tội ${nm(p)}; nàng đành cúi đầu nhận lỗi.`)}},
     {n:"Bỏ qua",risk:"an toàn",hint:"giữ hòa khí",x:`thành: Đức +${E().hoi.let.duc} · kèm: lòng ${m.name} −${E().hoi.let.loy}`,fx:{duc:E().hoi.let.duc},go:()=>{loyAdd(m,-E().hoi.let.loy);log(`Ngươi bảo ${m.name} nhịn đi cho êm chuyện.`)}}]})}
   else{log(`${Nm(p)} mắng cung nữ ${m.name} của ngươi; ${Nm(p)} phẩm vị cao hơn, ngươi đành nuốt giận.`);try{emoEv(S,"slight",`${nm(p)} mắng cung nữ của ngươi`,emoKey(p))}catch(e){}}}catch(e){}}
@@ -73471,13 +73488,13 @@ function eaHitMe(p,k,o){try{o=o||{};cnt(EA_N.hitMe,k);const F=BAL.ea.fx[k]||{};c
   evui:["Hoàng thượng sủng ái ra mặt",`<p>Hoàng thượng vui vẻ mấy tuần liền, ngày nào cũng gọi ngươi bầu bạn, ban thưởng không ngớt. Các cung nhìn ngươi bằng ánh mắt khác.</p>`,o.past||"","https://ctm-img.victoria-tntt.workers.dev/img/act-thuong.webp"],
   tgian:["Thái hậu quở cả hậu cung",`<p>Thái hậu giận đã mấy tuần; buổi thỉnh an hôm nay, người ${QUO_W[tk]} cả hậu cung, chẳng ai dám ngẩng đầu.</p>`,o.past||"","https://ctm-img.victoria-tntt.workers.dev/img/act-xu-toi-h.webp"],
   tvui:["Thái hậu thiên vị",`<p>Thái hậu vui vẻ mấy tuần liền, buổi thỉnh an nào cũng giữ ngươi lại trò chuyện. Các phi tần khác đứng nhìn, ai nấy đều để bụng.</p>`,o.past||"","https://ctm-img.victoria-tntt.workers.dev/img/act-thuong.webp"]}[k];if(!T)return;
-  Q.push({t:T[0],who:p===S.emp||p===S.thO?undefined:eaWho(p),art:T[3],hideOut:true,h:T[1]+(T[2]?`<p class="past">${T[2]}</p>`:""),opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]})}catch(e){}}
+  Q.push({t:T[0],emoSeal:{k:{cham:"gian",ban:"vui",noi:"gian",quo:"gian",nghi:"ghen",egian:"gian",evui:"vui",tgian:"gian",tvui:"vui"}[k],who:emoKey(p)},who:p===S.emp||p===S.thO?undefined:eaWho(p),art:T[3],hideOut:true,h:T[1]+(T[2]?`<p class="past">${T[2]}</p>`:""),opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]})}catch(e){}}
 /* her outburst: the kit event frame, no choice (owner: not a punishment, no damage control after the fact) */
 function eaMeOut(g){const P=eaPick(S,g);if(!P)return false;const r=P.r;const o=eaDo(S,r);if(!o)return false;cnt(EA_N.out,r.k);cnt(EA_N.outT,P.T.k+":"+g);
  const why={gian:"giận",buon:"buồn",so:"lo âu",ghen:EMO_GHEN.toLowerCase(),vui:"vui"}[g];
  log(`${r.n}: ${o.h}${o.res.length?` (${o.res.join(", ")})`:""}`);
  if(window.__bot||typeof Q==="undefined")return true;
- Q.push({t:r.n,who:o.target&&o.target!==S?eaWho(o.target):undefined,art:`https://ctm-img.victoria-tntt.workers.dev/img/act-${r.art||"trut-gian-h"}.webp`,hideOut:true,
+ Q.push({t:r.n,emoSeal:{k:window.KIT_EMOSEAL&&KIT_EMOSEAL.keys[r.k]?r.k:g,who:"me"},who:o.target&&o.target!==S?eaWho(o.target):undefined,art:`https://ctm-img.victoria-tntt.workers.dev/img/act-${r.art||"trut-gian-h"}.webp`,hideOut:true,
   h:`<p>${o.h}</p><p>Vì ${why} quá nên lòng không giữ được; muốn tránh thì nên giữ lòng bình thản từ sớm.</p>${o.res.length?`<p class="past">${o.res.join(" · ")}</p>`:""}`,
   opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]});return true}
 /* hỏi tội: the higher-rank mistress whose maid she scolded comes the next tuần (a real choice, gain and loss each) */
@@ -73486,8 +73503,8 @@ function eaHoi(){const A=eaS();if(!A.hoi.length)return;const x=A.hoi.shift();con
  const opts=[{n:"Tạ lỗi, đền bạc",risk:"an toàn",hint:"êm chuyện, nhưng mất thể diện",x:`thành: ${ttl} thiện cảm +${H.aff}, nguôi giận`,fx:{bac:-H.bac,danh:-H.danh},go:()=>{affAdd(v,S,H.aff);oanAdd(v,S,-H.oan);log(`Ngươi tạ lỗi với ${ttl}, đền bạc cho cung nữ của nàng.`)}}];
  if(S.maid)opts.push({n:"Đổ lỗi cho cung nữ hỗn hào",risk:"an toàn",hint:"giữ thể diện, cung nữ chịu tội thay",x:`thành: giữ thể diện · kèm: lòng ${S.maid.name} −${H.loy}`,fx:{},go:()=>{loyAdd(S.maid,-H.loy);log(`Ngươi đổ cho ${S.maid.name} hỗn hào; ${S.maid.name} quỳ chịu tội thay.`)}});
  opts.push({n:"Cãi lý",risk:"liều",hint:"có thể giữ được thể diện, có thể chuốc họa",x:`${word(o)} · thành: Danh +${H.win} · hỏng: Danh −${H.lose}, ${ttl} oán +${H.oan}`,fx:{},go:()=>{if(roll(o)){apply({danh:H.win});log(`Ngươi cãi lý với ${ttl}: cung nữ kia hỗn trước. ${ttl} đành bỏ qua.`)}else{apply({danh:-H.lose});oanAdd(v,S,H.oan);log(`<span class="r">Ngươi cãi lý với ${ttl}, không ai bênh; chuyện lan khắp hậu cung.</span>`)}}});
- Q.push({ev:1,t:`${ttl} đến hỏi tội`,who:eaWho(v),art:"https://ctm-img.victoria-tntt.workers.dev/img/act-xu-toi-h.webp",h:`<p>${{hot:`${ttl} dẫn theo cung nữ hôm trước xông vào cung ngươi, đập tay xuống án: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung, muội muội cũng dám mắng?”`,even:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, nghiêm giọng: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung làm gì sai mà muội muội phải mắng?”`,timid:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, khẽ nói: “Muội muội, người của ta có chỗ nào thất lễ, muội cứ bảo ta dạy lại. Mắng giữa hành lang thế, người ngoài cười cả hai cung.”`}[vk]}</p><p>Cung nữ kia đứng sau, mắt còn đỏ.</p>`,opts})}
-window.eaHoi=eaHoi;
+ Q.push({ev:1,t:`${ttl} đến hỏi tội`,emoSeal:{k:"gian",who:emoKey(v)},who:eaWho(v),art:"https://ctm-img.victoria-tntt.workers.dev/img/act-xu-toi-h.webp",h:`<p>${{hot:`${ttl} dẫn theo cung nữ hôm trước xông vào cung ngươi, đập tay xuống án: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung, muội muội cũng dám mắng?”`,even:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, nghiêm giọng: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung làm gì sai mà muội muội phải mắng?”`,timid:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, khẽ nói: “Muội muội, người của ta có chỗ nào thất lễ, muội cứ bảo ta dạy lại. Mắng giữa hành lang thế, người ngoài cười cả hai cung.”`}[vk]}</p><p>Cung nữ kia đứng sau, mắt còn đỏ.</p>`,opts})}
+window.eaHoi=eaHoi;window.eaHitMe=eaHitMe;window.eaMeOut=eaMeOut;window.eaS=eaS;/* test hooks: dev/test/mood-seal-ev.js */
 /* ======================= (2) EXTREME MOOD ======================= */
 function eaExtMe(){const M=eaMine(),A=eaS(),X=E().ext,w=W();const ext=Math.abs(M.i)>=2&&M.hv?M.g:null;
  if(ext&&A.xk===ext)A.xn=(A.xn||0)+1;else{A.xk=ext;A.xn=ext?1:0}
@@ -73498,7 +73515,7 @@ function eaExtMe(){const M=eaMine(),A=eaS(),X=E().ext,w=W();const ext=Math.abs(M
  else if(ext==="vui"){try{ghenAll(X.ghen,"ngươi đắc ý ra mặt")}catch(e){}A.smug=w+X.smugWk;t="Đắc ý quên mình";art="https://ctm-img.victoria-tntt.workers.dev/img/ev-tin-don.webp";h=`<p>Mấy tuần liền mọi chuyện thuận lợi, ngươi vui ra mặt, nói cười chẳng giữ ý. Kẻ ganh ghét bắt đầu thì thầm sau lưng.</p>`;past=`Kẻ ganh ghen +${X.ghen}; ${X.smugWk} tuần tới kẻ ganh ghen thêm`}
  else if(ext==="so"){catchIll(S,"matngu");t="Lo âu mất ngủ";art="https://ctm-img.victoria-tntt.workers.dev/img/act-xa-huong.webp";h=`<p>Lo âu mấy tuần liền, đêm nào ngươi cũng trằn trọc đến canh năm. Thái y nói ngươi mắc chứng mất ngủ.</p>`;past="Mắc Chứng mất ngủ"}
  log(`<span class="r">${t}.</span> ${past}.`);
- if(ui)Q.push({t,art,hideOut:true,h:`${h}<p>Cảm xúc cực độ kéo dài ${X.wk} tuần trở lên thì sinh chuyện.</p><p class="past">${past}</p>`,opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]});return true}
+ if(ui)Q.push({t,emoSeal:{k:ext,who:"me"},art,hideOut:true,h:`${h}<p>Cảm xúc cực độ kéo dài ${X.wk} tuần trở lên thì sinh chuyện.</p><p class="past">${past}</p>`,opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]});return true}
 /* smug: rivals grow more jealous of her for smugWk tuần */
 (function(){if(typeof ghenAll!=="function")return;const g0=ghenAll;ghenAll=function(n){try{if(n>0&&eaOn()&&S.ea&&S.ea.smug>W()){n=Math.round(n*E().ext.smugK);arguments[0]=n}}catch(e){}return g0.apply(this,arguments)}})();
 function eaExtNpc(p,g){const X=E().ext,w=W(),e=p.emo;const ext=e&&g&&eaBarOk(p,g,E().npc.bar.ext)?g:null;
@@ -77357,7 +77374,7 @@ function feelActTick(p){const A=fB().act;if(!p||feelActNow(p))return;const me=p=
 function eaS2(){S.fa2=S.fa2||{w:-1,n:0};return S.fa2}
 /* her act: the kit event frame (the same shape as every jemoact outburst) with only "Tiếp tục" */
 function feelMeShow(r,o,k){try{log(`${r.n}: ${o.h}${o.res.length?` (${o.res.join(", ")})`:""}`)}catch(e){}if(window.__bot||typeof Q==="undefined")return;
- Q.push({t:r.n,art:`https://ctm-img.victoria-tntt.workers.dev/img/act-${r.art||"xa-huong"}.webp`,hideOut:true,h:`<p>${o.h}</p><p>Vì ${feelName(k,3).toLowerCase()} quá nên lòng không giữ được; muốn tránh thì nên giữ lòng bình thản từ sớm.</p>${o.res.length?`<p class="past">${o.res.join(" · ")}</p>`:""}`,
+ Q.push({t:r.n,emoSeal:{k,who:"me"},art:`https://ctm-img.victoria-tntt.workers.dev/img/act-${r.art||"xa-huong"}.webp`,hideOut:true,h:`<p>${o.h}</p><p>Vì ${feelName(k,3).toLowerCase()} quá nên lòng không giữ được; muốn tránh thì nên giữ lòng bình thản từ sớm.</p>${o.res.length?`<p class="past">${o.res.join(" · ")}</p>`:""}`,
   opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]})}
 window.feelActTick=feelActTick;
 /* ---------- 6. VẺ MẶT: the ONE seal key (active act > strongest feeling; an intent is never shown, owner 20:15Z / 20:20Z) + the tap-card lines ---------- */
@@ -80686,7 +80703,7 @@ img.kemo.kfseal.kfseal-old{pointer-events:none;z-index:6}/* the previous still, 
        pointer-events none, removed when the lean ends or the seal leaves the screen. No file = no layer. Nothing is drawn in code (no code-drawn tears / smoke).
    KEYS: the seal map holds khoc + hon too (names "Khóc", "Hờn"); the mood logic (jemo EMO) decides when a person is in one — until then they never appear. ===== */
 window.KIT_EMOSEAL=window.KIT_EMOSEAL||{keys:{vui:{m:"sway",d:2.8},binh:{m:"nod",d:3.0},buon:{m:"droop",d:3.6},gian:{m:"shake",d:2.0},so:{m:"tremble",d:2.4},ghen:{m:"flicker",d:3.0},lo:{m:"bob",d:2.8},dau:{m:"wince",d:2.8},muu:{m:"glint",d:3.0},an:{m:"nod",d:3.0},khoc:{m:"droop",d:3.6,name:"Khóc"},hon:{m:"flicker",d:3.0,name:"Hờn"},chanh:{m:"flicker",d:3.0},phanno:{m:"shake",d:2.0},runso:{m:"tremble",d:2.4},matngu:{m:"droop",d:3.6},tutin:{m:"nod",d:3.0},hanghai:{m:"bob",d:2.8},tinhtu:{m:"sway",d:2.8},chuyentam:{m:"nod",d:3.0},hungkhoi:{m:"glint",d:3.0},tinhnghich:{m:"bob",d:2.8},hothen:{m:"droop",d:3.6},chan:{m:"droop",d:3.6},khochiu:{m:"flicker",d:3.0},choang:{m:"wince",d:2.8}},
- defaultMotion:"nod",defaultDur:3.0,idle:{deg:.6,per:[8,11]},lean:{stage:"img.kfseal",panel:"#modal,.krbox,.kmov,.dlg",deny:"header.hud,.hud",head:{f:.2,panel:.1},margin:.16,marginPx:4,grow:.5,shrink:1.8,holdMin:3,loops:0,open:".ksz3",openKey:".kszfig",openDelay:.7,parts:{out:"-out",back:"-back"},partLead:.12,overlapMs:150,bubblePad:10,bubbleRetry:900,modalIn:'#modal,[role="dialog"],.ksz3,.krbox,.kmov,.dlg',min:4,max:8,gap:1.2,z:9990},animKey:{gian:"gian",phanno:"gian",khoc:"khoc",buon:"khoc"},three:{gian:{out:1.65,back:2.64,c0:.569,c1:.833}},anim:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-anim/",fx:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-fx/",fxSpec:{khoc:{w:.24,x:.14,y:.52,m:"fall"},gian:{w:.3,x:.7,y:.0,m:"rise"},def:{w:.26,x:.66,y:.5,m:"rise"}}};
+ defaultMotion:"nod",defaultDur:3.0,idle:{deg:.6,per:[8,11]},lean:{stage:"img.kfseal",panel:"#modal,.krbox,.kmov,.dlg",deny:"header.hud,.hud",head:{f:.2,panel:.1},margin:.16,marginPx:4,grow:.5,shrink:1.8,holdMin:3,loops:0,open:".ksz3",openKey:".kszfig",openDelay:.7,nowDelay:.05,parts:{out:"-out",back:"-back"},partLead:.12,overlapMs:150,bubblePad:10,bubbleRetry:900,modalIn:'#modal,[role="dialog"],.ksz3,.krbox,.kmov,.dlg',min:4,max:8,gap:1.2,z:9990},animKey:{gian:"gian",phanno:"gian",khoc:"khoc",buon:"khoc"},three:{gian:{out:1.65,back:2.64,c0:.569,c1:.833}},anim:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-anim/",fx:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-fx/",fxSpec:{khoc:{w:.24,x:.14,y:.52,m:"fall"},gian:{w:.3,x:.7,y:.0,m:"rise"},def:{w:.26,x:.66,y:.5,m:"rise"}}};
 const KES_HAVE={};/* url -> true | false | "wait" (probe result) */
 function kesProbe(url,cb){const h=KES_HAVE[url];if(h===true||h===false){cb(h);return}
  if(h&&h.w){h.w.push(cb);return}const e={w:[cb]};KES_HAVE[url]=e;const im=new Image();const done=ok=>{KES_HAVE[url]=ok;e.w.forEach(f=>{try{f(ok)}catch(x){}})};im.onload=()=>done(true);im.onerror=()=>done(false);im.src=url}
@@ -80712,7 +80729,9 @@ function kesCan(el){const L=KIT_EMOSEAL.lean;try{if(el.closest(L.deny))return fa
 /* EVENT DIALOG (owner 19/11 ~07:25Z): a seal inside lean.open (the event / person dialog .ksz3) leans ONCE each time the dialog opens (lean.openDelay s after the seal shows, then still); stage / panel seals keep the random lean every min..max s. */
 function kesOpenRoot(el){try{const L=KIT_EMOSEAL.lean;return el.closest(L.open)&&(el.closest(L.openKey)||el.closest(L.open))}catch(e){return null}}/* the dialog may keep its .ksz3 shell between openings: the once-flag sits on the figure column (openKey), which is built anew at every opening */
 function kesPre(el){try{const U=kesPartsUrl(el,kesKey(el));if(U)[U.out,U.loop,U.back].forEach(u=>kesProbe(u,()=>{}))}catch(e){}}/* the painted set is fetched before the lean needs it */
-function kesSchedule(el){if(el.__ln)clearTimeout(el.__ln);kesPre(el);const L=KIT_EMOSEAL.lean,root=kesOpenRoot(el);if(root){if(root.__kl)return;el.__ln=setTimeout(()=>kesLean(el,true),L.openDelay*1000);return}/* a dialog opening takes the stage at once (ends a running stage lean) */el.__ln=setTimeout(()=>kesLean(el),kesR(L.min,L.max)*1000)}
+/* the dialog is still popping in (its box scales / moves): the lean starts the moment the corner seal stands still (two samples 50 ms apart, at most ~0.8 s), never later */
+function kesNowGo(el,n,px,py){el.__ln=setTimeout(()=>{el.__ln=0;if(!el.isConnected||!el.classList.contains("kemo-live"))return;const r=el.getBoundingClientRect(),still=px!=null&&Math.abs(r.left-px)<1.5&&Math.abs(r.top-py)<1.5&&r.width>2&&el.complete&&!el.classList.contains("kemo-wait");if(still||n>=16){kesLean(el,true);return}kesNowGo(el,n+1,r.left,r.top)},50)}
+function kesSchedule(el){if(el.__ln)clearTimeout(el.__ln);kesPre(el);const L=KIT_EMOSEAL.lean;/* owner 21/11 (mark #68): the seal in the corner of a dialog picture (data-kemo-now) leans AT ONCE when its dialog opens (once per opening, no wait), then keeps the random lean */if(el.dataset.kemoNow&&!el.__nowDone){el.__nowDone=1;kesNowGo(el,0);return}const root=kesOpenRoot(el);if(root&&!el.dataset.kemoNow&&root.querySelector("img.kemo[data-kemo-now]")){el.__ln=setTimeout(()=>kesLean(el),kesR(L.min,L.max)*1000);return}/* the figure seal of that dialog keeps to its own random lean: one seal leans at a time */if(root){if(root.__kl)return;el.__ln=setTimeout(()=>kesLean(el,true),L.openDelay*1000);return}/* a dialog opening takes the stage at once (ends a running stage lean) */el.__ln=setTimeout(()=>kesLean(el),kesR(L.min,L.max)*1000)}
 /* HEAD FRAME (owner 19/11 ~07:10Z, canon overwrite: NO per-figure measuring): ONE relative frame = lean.head.f x the stage's standard figure height (stage dataset kmlH = the one body height of the stage, the same value the
    head markers use; one typical figure's head as a fraction of its body, measured once, stored as data). The same for every seal; a seal outside a stage (panel / dialog) = lean.head.f x the dialog figure height, else lean.head.panel x the short screen side. */
 function kesHead(el,r){const L=KIT_EMOSEAL.lean.head;let H=0;try{const st=(el.__fig&&el.__fig.closest("#stage"))||(el.closest&&el.closest("#stage"));if(st){const h0=+st.dataset.kmlH,sc=st.offsetHeight?st.getBoundingClientRect().height/st.offsetHeight:1;if(h0>20)H=h0*sc}
@@ -80747,7 +80766,7 @@ function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains(
  kesCur=el;const k=kesKey(el),spec=kesSpec(k),d=(spec&&spec.d)||KIT_EMOSEAL.defaultDur,still=el.dataset.kemos;
  const U=kesPartsUrl(el,k),P3=kesPartsState(U)==="yes"?U.T:null;/* painted 3-part set present: grow = its out clip, shrink = its back clip */
  const grow=P3?P3.out:L.grow,shr=P3?P3.back:L.shrink,n=P3?1:+Math.max(L.loops,L.holdMin/d).toFixed(3),hold=P3?L.holdMin:n*d,/* hold = holdMin s exactly (n may be a fraction of a loop) */tot=grow+hold+shr;
- const hp=kesHead(el,r);if(Math.max(r.width,r.height)>hp*1.25){kesCur=null;kesSchedule(el);return}{const rt=kesOpenRoot(el);if(rt)rt.__kl=1}/* a seal already bigger than the head frame (box not laid out yet / mid-transition) never leans: it would pop BIGGER than the head */
+ const hp=kesHead(el,r);if(Math.max(r.width,r.height)>hp*1.25){kesCur=null;kesSchedule(el);return}{const rt=kesOpenRoot(el);if(rt&&!el.dataset.kemoNow)rt.__kl=1}/* a seal already bigger than the head frame (box not laid out yet / mid-transition) never leans: it would pop BIGGER than the head */
  const sm=Math.max(r.width,r.height),S=P3?Math.max(1,hp/P3.c1/sm):Math.max(1,hp/sm);/* big size = THE HEAD of that person on the stage (owner 19/11 ~06:55Z), never bigger; a 3-part set: its gold circle in the loop (c1 of the clip box) = the head frame, the clip box (hands may leave the circle) is never clipped */
  const bw=r.width*S,bh=r.height*S,/* big box never past the head, nor the screen */m=Math.round(Math.max(bw,bh)*L.margin)+L.marginPx,/* margin = room for the feeling motion (shake / sway amplitude) */ cx=r.left+r.width/2,cy=r.top+r.height/2,s0=P3?Math.min(1,sm/(P3.c0*bw)):1/S;/* start / end scale: the clip's own small circle (c0) sits exactly on the still seal */
  const bl=Math.max(m,Math.min(cx-bw/2,innerWidth-bw-m)),bt=Math.max(m,Math.min(cy-bh/2,innerHeight-bh-m));/* clamped inside the screen */
@@ -85618,7 +85637,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0e8adf2ac94e";window.CTM_BUILD=BUILD;
+const BUILD="652b6f0f9750";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
