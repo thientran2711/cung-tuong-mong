@@ -791,7 +791,7 @@ def store_check(pf, prompt, args):
         _wp=_ba.winter_pairs(args[0])
         if _wp: store=_ba.b20_winter_words(store,_wp)
     sys.path.insert(0,os.path.join(ART,"store-all")); import build_all as _ba
-    if not winter_g28.is_winter(prompt) and _ba.is_thu(prompt) and args and not args[0].startswith("-") and '--low' in args and int(args[args.index('--low')+1])<=5:   # BUILDFIX2 THU: palette + thu ladder words (G53) on the store text, as the builder
+    if not winter_g28.is_winter(prompt) and _ba.is_thu(prompt) and args and not args[0].startswith("-") and '--low' in args and int(args[args.index('--low')+1])<=6:   # BUILDFIX2 THU: palette + thu ladder words (G53) on the store text, as the builder
         store=_ba.season_store(store,args[0],int(args[args.index('--low')+1]),"thu")
         for _bp in _ba.THU_TRIMS:   # BUILDFIX2: thu length trims (boilerplate the approved thu files go without) are optional
             if _bp.strip() not in prompt: store=store.replace(_bp,"",1)

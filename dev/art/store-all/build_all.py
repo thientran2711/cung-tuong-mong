@@ -676,7 +676,7 @@ def season_post(S,person,season,strict=True):
     if m and any(g in m for g in ("green","celadon","jade","teal","mint","sage","aqua")):
         S,k=re.subn(r"\("+re.escape(m)+r", NOT green\)","("+m+")",S)
         if k: notes.append("season: NOT green dropped (green main)")
-    if season=="thu" and isinstance(_SP_RANK[0],int) and 1<=_SP_RANK[0]<=5: S,_n=thu_sentences(S,person,_SP_RANK[0],strict); notes+=_n
+    if season=="thu" and isinstance(_SP_RANK[0],int) and 1<=_SP_RANK[0]<=6: S,_n=thu_sentences(S,person,_SP_RANK[0],strict); notes+=_n
     if season=="thu" and strict:
         for bp in THU_TRIMS:   # length: the boilerplate the owner-approved thu files already go without (A38 trims listed in their .keep)
             if len(S)>10000 and bp in S: S=S.replace(bp,"",1); notes.append("thu trim "+bp[:30])
@@ -718,6 +718,7 @@ def thu_sentences(S,person,rank,strict=True):
             if h: S=S[:h.end()]+" "+sent+S[h.end():]; notes.append("thu ladder NO BIG FLOWERS (added)")
         elif strict: raise AssertionError(("thu: builder sentence not found",kind,person,rank))
     if rank==4: S=THU.capelet_thu(S); notes.append("thu L2041 CAPELET CUT (open front)")
+    if rank==6: S=THU.colour_t6(S); notes.append("thu L2088 COLOUR RULE cloud collar; refs "+" + ".join(THU.refs(6)))
     return S,notes
 def _build_season2(person,rank,age,season):
     assert isinstance(rank,int), "season: ranks 1-8 only"
