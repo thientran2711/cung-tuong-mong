@@ -44,3 +44,8 @@ STATUS: waiting for the owner's verdict via Foreman C #27 (session_01D3E3NaDamfS
   - keep PASS ×3. check_store shows only the waived M06/M07. ch 9812/9990/9941.
 - FROZEN file updated. Rule added with rule.py: **G66** (= "G62b"; rule.py auto-numbers).
 - Research §4 (embroidery placement and size by rank) added to HAN6_HAN_DRESS_RESEARCH_L1953.md. Embroidery prompts are ON HOLD until the owner has seen it.
+
+## t3 bow gen (VE7): WDg2oC9cXe (55 cr) was drawn from s62_t3_HAN_BOW_L1953.txt (bow only), BEFORE L1955.
+The deeper band (s62_t3_HAN_BOW_L1955.txt) is NOT drawn; it needs a new gen + the owner's/#27's OK.
+
+## OWNER L1958 (via #27): Tang drama vs history costume research → dev/handover/reports/HAN6_TANG_DRAMA_RESEARCH_L1958.md (VN, words only)
