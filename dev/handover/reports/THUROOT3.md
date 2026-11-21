@@ -39,3 +39,5 @@ B12/S07 gate = BUILDFIX4's job (B27/B28 update).
 ## STEP 7 — owner L2111 no 'cape' word (0 cr)
 HQP s62_t7_THU_L2105: gem line "NEVER on the robe, cape, collar or belt" → "NEVER on the robe, collar or belt" (= L2106 gem line). keep PASS.
 Tần/Phi L2079 grep: no 'cape' in gem/shawl lines. Only hit = COLOUR RULE "main colour of the robe, sleeves and any cape" (builder sentence, 158 files) — left as is (not a gem/shawl line; for Tần it keeps the capelet in the robe colour). Flag for ROOT/BUILDFIX if the owner wants it gone family-wide. CAPELET CUT (L2041) untouched.
+## STEP 8 — A54 (owner L2114) angle/pose check (0 cr)
+ANGLE / Pose / GRACE / HEAD AND BODY compared with each base: ANGLE + HEAD AND BODY identical everywhere. GRACE label "(pose variety, every rank its own)" had been trimmed for length (Tần ×3, HQP) → RESTORED verbatim (LEN is warning-only now). Tần Pose keeps "held upright by its base … no cord" (owner L2051 item-grip wording, already in the NECK base; ROOT-B2 said keep). Phi Pose identical to approved. keep PASS.
