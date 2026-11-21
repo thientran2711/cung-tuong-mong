@@ -35,3 +35,6 @@ Classes of change (all intended, none an unintended drop):
 Cost: 20 files x 135 = 2 700; drawable now without a36: 18 x 135 = 2 430.
 6. m09 vs m18 same rank (9 pairs): every differing hunk is a face-line or colour-name/hex token; 0 unexplained hunks. thô sử base test3_tm0 = the prompt_file of the drawn round-3 picture hu2cFrpvqL in gen_ledger (verified). ma ma a51 base mama_gpt_v6_a51 has no ledger row (ChatGPT-drawn); a36 build.py wording is the builder recipe (see 5).
 All DROPPED = none; all removed/changed phrases are ALLOWED (port / person swap / ChatGPT-only removal) and listed as allow lines in each .keep.
+
+## HANDOVER (MAIDFIX3, depth 1) — JOB 10 DONE, nothing pending
+Foreman C #24 decision: draw the 18 files (VE3/VE4/VE5); ma ma a36 + a65 NOT drawn now (a51 covers ma ma). Files in dev/art/maid7/prod/, builder make8_prod.py, audit audit8_prod.py. Refs: m18 s7IPw0Ll8e, m09 gOm4HrsSXO. 0 gens by this worker. If reopened: build a65 via mama_v6(); a36 gate/look conflict still open.
