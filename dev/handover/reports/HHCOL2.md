@@ -18,3 +18,4 @@ Insert (owner L1924, like image 3 kseQCFw16B): "the two fronts joined at the thr
 - Thu Quý phi t6 = L1893 eIPcGThdqL, prompt dev/art/thu_comoi/s62_t6_THU_vankien2_L1893.txt → frozen copy dev/art/thu_comoi/THU_QP_t6_L1933_FROZEN.txt; rule **G63** added (rule.py add, per #26).
 - t6 L1924 clasp CANCELLED (s62_t6_THU_vankien2_L1924.txt = do not draw; #26 told VE11). t7/t8 L1924 clasp continue at VE11.
 - Every sheet label names the collar type in Vietnamese (in G63; told VE11/VE6).
+- VE11 result: t7 hu2BC0ivqL, t8 Tdwzp62VNR (L1924 clasp), sheet dev/handover/review-sheets/thu_t7_t8_vankien_clasp_L1924.png (VE11 @e779fa2; ids sent to #27).
