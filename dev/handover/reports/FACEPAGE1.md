@@ -12,3 +12,5 @@ Bỏ mọi mặt nhóm Sắc sảo (trang 1: m09; trang 2: c17 c23 c29); Kiêu k
 
 ## L1971 update
 Trang 1 republish v3 cùng URL: đủ m01–m52 trừ nhóm ẩn = 51 mặt (m09 Sắc sảo ẩn; Kiêu kỳ 0, Lạnh lùng 0), tab lọc theo nhóm, 5 mặt đang dùng (m10 m11 m12 m13 m18) có nhãn «đang dùng», mặt trong kho ghi «· trong kho».
+
+L1925: m11 đổi nhãn «đang dùng» → «đã bỏ» (v4).

@@ -41,6 +41,7 @@ function draw(){
     const meta=document.createElement("div");meta.className="meta";
     const a=document.createElement("div");a.className="id";a.textContent=f.id;
     const g=document.createElement("div");g.className="g";g.textContent=f.group+(f.kho?" · trong kho":"");
+    if(f.dropped){const u=document.createElement("div");u.className="used";u.textContent="đã bỏ";u.style.cssText="display:inline-block;background:var(--muted)";a.append(" ",u);}
     if(f.used){const u=document.createElement("div");u.className="used";u.textContent="đang dùng";a.append(" ",u);u.style.display="inline-block";}
     const lab=document.createElement("label");const cb=document.createElement("input");cb.type="checkbox";cb.id="pick-"+f.id;cb.checked=on;cb.disabled=!canWrite;
     const sp=document.createElement("span");sp.textContent=MARK+" "+LABEL;cb.onchange=()=>save(f,cb.checked);
