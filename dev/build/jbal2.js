@@ -194,7 +194,7 @@ Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2
 Object.assign(BAL,{coopEmpY:12});
 /* co-op part 2 (review/coop-b1b5-p2): a player buys the friend who serves as a cung nữ (the same pay as an NPC's bribe card, j42 cnvBribe);
    tin = her Chủ tin gain when she refuses and tells her mistress */
-Object.assign(BAL,{coopBribe:{pay:20,tin:5}});
+Object.assign(BAL,{coopBribe:{pay:20,tin:5,grudge:5}});/* grudge: the briber's thiện cảm for the servant, −grudge when she tells her mistress, +grudge when she refuses quietly (law 2 «Bạc lạ», j42 + jcoopworld twins) */
 /* review/emperor-visit (owner OD:L603): the Emperor comes to HER palace and stays the night (event "empnight", j7 + jvisit).
    visit: a daily roll after the tablet flip, % = base + slope × (Sủng − minSung) + anK × Ân tình, × the Emperor's nature (datinh / lanhlung),
    capped; none within gap days of the last visit, none while she is pregnant, in lãnh cung, or he is gravely ill. On top of the night
@@ -434,7 +434,12 @@ Object.assign(BAL,{nroad:{
     the bond a man / court man / allied house needs to ask the player */
  men:{st:40,kidAge:15,men:{fx:{win:{loyal:3},mid:{loyal:-1},lose:{loyal:-4}},rv:{win:-2,lose:1}},court:{af:4,danh:1},
   off:{pow:{win:2,lose:-2},rv:{win:-1,lose:1},rel:3,ally:5},hz:{fx:{win:{fond:3,tal:2,hp:-2},mid:{tal:1,hp:-1},lose:{fond:-3,hp:-1}},rv:{win:-1,lose:1}},
-  askTinh:30,askAf:10,askRel:25}}});
+  askTinh:30,askAf:10,askRel:25,
+  /* GAP OR18 the Emperor's road (jnroade.js): st = his test stat with no reign line (else the throne's grip rg.p); hist = lives of template
+     history avoided; askSung = her Sủng for him to ask her help; biên ải: bien = Biên cương, gen = the Đại tướng quân house thế lực; cải cách:
+     kho = Kho lúa, old = thế lực the strongest other house loses (win) / gains (lose, as −); kế vị: age = a prince counts from this age,
+     fond = his regard for the prince closest to the succession and the next one [first, second] */
+  emp:{st:40,hist:1,askSung:60,age:6,bien:{win:6,mid:0,lose:-6},gen:{win:2,mid:0,lose:-2},kho:{win:6,mid:0,lose:-6},old:{win:2,mid:0,lose:-1},fond:{win:[3,-1],mid:[0,0],lose:[-2,-2]}}}}});
 /* QUESTLINE Q3 — HELPERS IN HER ROAD (owner D-Q1 = "1", OD 18/11 07:56Z; QUESTLINES_AUDIT §4 Q3; engine jroad.js rdHp*, tags + lines jrdhp.js).
    A «Nhờ …» option of her road tagged in RDHP asks a helper; the helper answers ONE of 4 ways, drawn by weight [full, half, no, sab]:
      full = giúp hết lòng (the option's own odds) · half = giúp qua loa (odds − half, never below min; a sure option then rolls at 100 − half)
@@ -1136,7 +1141,26 @@ BAL.ag.mg2.hand={on:1,w:4,art:.2,ctr:{"":7},sd:{c:1.4,a:1.5,r:1.7,"":1.5},eqZ:.4
         dev/tools/mgcal_apply.py — ONE base for every player; it places HER on that kind's adult bell curve (BAL.ag.mg2.hand ctr / sd / eqZ above)
    A first try taken on a BROKEN board is dropped when that board is fixed, so her re-test is the first counted try (dauho cal-p2 b218d1d2; huong 4.5,
    mua 6.3, banh 6.1 dropped by review/cal-p2b-rv with the Điều hương / Múa / Nấu ăn fixes, owner OD 20/11 ~07:35Z «chỉnh mấy cái game bị lỗi lại thôi, rồi tôi test lại») */
-BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],k:{dan:{b:8.3,n:5,at:"11/19/2026"},co:{b:9.7,n:5,at:"11/19/2026"},ve:{b:9.5,n:5,at:"11/19/2026"},doi:{b:9.1,n:5,at:"11/19/2026"},hoa:{b:7.9,n:5,at:"11/19/2026"},hat:{b:8.1,n:5,at:"11/19/2026"},tho:{b:8.7,n:5,at:"11/19/2026"},theu:{b:9.7,n:5,at:"11/19/2026"},ban:{b:9.1,n:5,at:"11/19/2026"},kim:{b:7.7,n:5,at:"11/19/2026"},doden:{b:9.9,n:5,at:"11/19/2026"},tat:{b:4.9,n:5,at:"11/19/2026"},ne:{b:4.1,n:5,at:"11/19/2026"},td_cong:{b:10.0,n:5,at:"11/20/2026"},td_ngon:{b:6.7,n:5,at:"11/20/2026"},td_hanh:{b:9.3,n:5,at:"11/20/2026"},le:{b:9.9,n:5,at:"11/20/2026"},tc:{b:9.5,n:5,at:"11/20/2026"},xa:{b:9.5,n:5,at:"11/20/2026"},thq:{b:8.5,n:5,at:"11/20/2026"},duho:{b:7.9,n:5,at:"11/20/2026"},kinh:{b:9.9,n:5,at:"11/20/2026"},may:{b:10.0,n:5,at:"11/20/2026"}}};
+BAL.ag.mg2.cal={on:1,/* redo: games fixed after her Thử tay (owner 21/11, jmgcal stale()): her older record counts as not tried */redo:{dauho:"2026-11-20T15:00:00Z",hoadien:"2026-11-20T15:00:00Z",den:"2026-11-20T15:00:00Z",chai:"2026-11-20T15:00:00Z",td_dung:"2026-11-20T15:00:00Z",huong:"2026-11-20T15:00:00Z",mua:"2026-11-20T15:00:00Z",banh:"2026-11-20T15:00:00Z"},d:[-2,-1,0,1,2],k:{dan:{b:8.3,n:5,at:"11/19/2026"},co:{b:9.7,n:5,at:"11/19/2026"},ve:{b:9.5,n:5,at:"11/19/2026"},doi:{b:9.1,n:5,at:"11/19/2026"},hoa:{b:7.9,n:5,at:"11/19/2026"},hat:{b:8.1,n:5,at:"11/19/2026"},tho:{b:8.7,n:5,at:"11/19/2026"},theu:{b:9.7,n:5,at:"11/19/2026"},ban:{b:9.1,n:5,at:"11/19/2026"},kim:{b:7.7,n:5,at:"11/19/2026"},doden:{b:9.9,n:5,at:"11/19/2026"},tat:{b:4.9,n:5,at:"11/19/2026"},ne:{b:4.1,n:5,at:"11/19/2026"},td_cong:{b:10.0,n:5,at:"11/20/2026"},td_ngon:{b:6.7,n:5,at:"11/20/2026"},td_hanh:{b:9.3,n:5,at:"11/20/2026"},le:{b:9.9,n:5,at:"11/20/2026"},tc:{b:9.5,n:5,at:"11/20/2026"},xa:{b:9.5,n:5,at:"11/20/2026"},thq:{b:8.5,n:5,at:"11/20/2026"},duho:{b:7.9,n:5,at:"11/20/2026"},kinh:{b:9.9,n:5,at:"11/20/2026"},may:{b:10.0,n:5,at:"11/20/2026"},dauho:{b:9.7,n:5,at:"11/20/2026"},mua:{b:8.3,n:5,at:"11/20/2026"},hoadien:{b:8.9,n:5,at:"11/20/2026"},banh:{b:7.3,n:5,at:"11/20/2026"},chai:{b:8.7,n:5,at:"11/20/2026"},den:{b:9.3,n:5,at:"11/20/2026"}}};
+/* CAL-P2C · IDENTITY OFFSET + ROLLING HAND b (owner OD 20/11 ~07:35Z + ~07:55Z + ~08:00Z, ROOT-74 chat; jmgid.js). Verbatim key words:
+   ~07:35Z "Những cái môn sở trường của tôi á, khi vào game á, nếu như cái môn đó là cái môn bình thường là phải là ở mức 8, tức là phải automatic trừ 2. Còn nếu mà
+   sở đoản là phải trừ thêm nữa ... sở đoản là phải đâu đó 6 điểm ... sở trường là chẳng hạn như là 9 điểm hoặc 10 điểm ... mình không có cần phải điều chỉnh cái điểm gì hết trơn á."
+   ~07:55Z "chính những cái lần mà họ chơi sẽ là những cái bài test với họ ... Qua mỗi một cái màn chơi nó cũng chính là những cái lần test tay của họ."
+   ~08:00Z "dù mà tôi có chơi 2 người, chơi 5 người, 10 người đi chăng nữa thì tất cả là đều dựa theo cái tay của cái người đó, chứ không phải là dựa theo cái tay của tôi".
+   on    1 = on; 0 = every result is the graded play as before (no offset, no b kept)
+   tgt   the level each identity class plays at, on a matching board: tr = sở trường (an art of her identity's BAL.orig.art row), "" = bình thường, doan = sở đoản
+         (BAL.orig.doan, jbal.js). trAt = the least bậc in the row that makes an art a sở trường.
+   HAND b per player per kind (S.mgB[kind] = {s, w, n}, saved with her; old saves start empty): b = s / w, a weighted mean of her plays brought back to a matching
+         board (graded − (mgMedD(d) − mgMedD(0)), the same shift jmgcal mgCalBase uses), newest weight 1, each older play × (1 − a);
+         prior = the default hand of a kind never played, worth pw plays (b = (pw·prior + Σw·x) / (pw + Σw)); age 1 = the prior ages like the oldest plays (so after many
+         plays b is her recent play), 0 = the prior keeps its full weight pw for ever.
+         SEED (her Thử tay, "first tries seed her b"): on the owner's device (jmgcal owner flag) a kind's first use adds BAL.ag.mg2.cal.k[kind].b worth seedW plays per
+         round taken (n); noSeed = kinds whose first try was on a broken board (owner OD 20/11: NOT COUNTED) — they start from the prior only.
+   OFFSET = tgt[class] − b (+ gap·(b − prior)), added to the graded result, clamp lo..hi, rounded. gap = the share of a player's real skill gap kept (OPEN, owner answer
+         pending: default 0, do not build on it). Study bậc keeps its board ease (mgTier); the offset sits on top of it.
+   npc   1 = an NPC's mini-game play (jmgt mgNpcRaw) moves by the same identity class shift tgt[class] − tgt[""] (law 1; her own hand curve, mg-fair-ratio, unchanged);
+         the player's skip / odds roll (mgSkipRaw, mgNpcRaw on her) = the same shift on her median play. */
+BAL.orig.id={on:1,tgt:{tr:9,"":7.5,doan:6},trAt:1,prior:7.5,pw:3,a:.2,age:1,seedW:1,noSeed:["dauho","td_dung","chai","den","hoadien"],gap:0,npc:1,lo:0,hi:10};
 /* j71 odds words under mg2: the same draw (mgNpcRaw, seeded by the plan) for every entrant, her included, on this contest's board (j71 mgX7) */
 (function(){if(typeof cOdds7!=="function"||typeof fxOdds7!=="function")return;const c0=cOdds7,f0=fxOdds7;
  const win=(E,base,kindAt,mi,r)=>{let w=0;const N=500;for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+mgNpcRaw(kindAt(i),E[i],{rnd:r})/10*J71.luck;if(x>b){b=x;bi=i}}if(bi===mi)w++}return oddsCl(Math.round(100*w/N))};
@@ -1362,7 +1386,7 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
    cd    tuần before the same person acts again in the same kind (_ = default; per kind: cd.<kind>)
    wit   witness rank: eye × eyes(p) + host × hostility toward the one watched
    tell  a witness carries a fact when her grudge against its subject ≥ host, or her liking for the one told ≥ friend */
-BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4},wit:{eye:10,host:1},tell:{host:40,friend:30}};
+BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4,hoi67:6/* jrtrig OR16: one person moves a hồi at most once every 6 tuần */},wit:{eye:10,host:1},tell:{host:40,friend:30}};
 /* npc-purpose G1 kinds (jagwhy1; the stray man; an NPC affair itself begins / is exposed through her day plan + proof: role-parity part 2).
    tryst: base + rove (roving man) − fear (Kín đáo), cd [roving, other] = the old 2 / 3 tuần cadence; letter: w per reason (old order of reasons; jealous = Sủng under jSung and ghen ≥ jGhen), cd 12 = once a season;
    seek: base (his fancy, ≥ ag.why.min) + her looks above sac, his gap = BAL.net menGap; tryst base 35 − fear 12 ≥ min (rates review: a careful pair still meets); menGrudge: s while his grudge lasts, cd 9 tuần = the old once every 3 months (monthly caller) */
@@ -1660,6 +1684,39 @@ BAL.ag.min={on:1,gT:[["Tham vọng","quyen"],["Vì gia tộc","nha"],["Vì mình
 /* TRIỀU ĐÌNH gift deed (j55 tdGift, her and every NPC consort, house heads and the censor alike): giftAf = regard a received gift adds;
    backs = regard from which an official stands behind / spares that consort (tdBacks). Were typed in j55 (+20, 40) — ONE CORE (review minister-agents r1). */
 BAL.tdCourt={giftAf:20,backs:40};
+/* PERSON MINIGAME ACTS (jpma, owner OD 19/11 ~23:55Z, PARKING_LOT #8; plan dev/handover/reports/person-minigame-acts.md) — «Cùng chơi» + «Thách đấu»
+   with any real person (her ↔ NPC ↔ NPC, co-op friend). ONE CORE: every number of jpma lives here.
+   occ pm = the board of a person duel / pastime (jmgt mgTier): base + perRank · R, R = the HIGHER rank of the two (one board for both; harder as she climbs, law 5).
+   kc: khắc the asker spends when she sends it (her talk card shows it; an NPC's day plan charges the same kc). luck: the skill range of the 1-vs-1 score (= j82 default).
+   play: «Cùng chơi» gain-only (law 3) — liking both ways by the game's mean raw: raw ≥ cut[i] → aff[i+1] (else aff[0]); suc = the receiver's Sức (her time);
+         xp = art practice points for both (addArt for her, the same on an NPC's artp); fade = the same pair again this month gives 1/(1+n) (the P3T idiom).
+   stake.bac[R] = V, the value of a duel stake by the higher rank (law 5: rises with rank); band = an item stake's price within V·(1 ± band);
+   val = the exchange rates the equal-value measure (dev/measure/pm-equal.js) uses: Danh in bạc (charity BAL.charity 35 bạc → Danh 5 + Đức 3),
+         one point of someone's liking in bạc («Giúp đỡ nàng» 20 bạc → thiện cảm 10 both ways), oán, khắc, Sức. eqTol = the most two answers / stakes may differ (bạc).
+   duel: pubDanh = Danh ± for winner / loser at a public place (pub); shame = extra Danh a HIGHER-rank loser loses per rank of gap (max shameMax); oan = her oán of the winner.
+   yield («Nhường», the challenged side when the challenger outranks her): no game, she pays the stake; the challenger's liking + round(V·yieldK/affBac), oán − yieldOan.
+   refuse: the challenger outranks the receiver → his/her liking of the refuser − up more (rank etiquette; the rcvNoO cost applies to every refusal).
+   npc: gapW = weeks between two pm acts of one NPC; me = at most per week aimed at her; g = the need weights of the day plan; minAff / spite = who they pick;
+        meShare = when she is among the people an NPC may pick, the share of picks that land on HER (hashed, no global dice; law 1 two-way + 6b: the court
+        watches the rising one, so NPCs really invite / challenge HER; the rest go to the other NPCs by liking / spite; meGap = weeks with no NPC asking her
+        after which an NPC who may pick her (likes or resents her, as for anyone) picks HER (S.pmMeL = the last week one did; old saves: none yet);
+        g ×2.5 (20/11) so the court plays / duels a few times a year each. Measured over 200 buổi (dev/test/person-minigame-acts.test.js (6), 4 runs):
+        NPC → her 6–18, NPC → NPC 13–38 (was her 0–3 with no meShare / meGap and g 4); foreman E #14 ruling 20/11: NPC → her ≥ 4).
+   oddsN = draws behind her ladder word (no %, law 7). */
+Object.assign(BAL.mgTier.occ,{pm:[1,.5]});
+BAL.pm={kc:1,luck:30,minLv:1,
+ play:{cut:[4,7],aff:[2,3,5],suc:6,xp:1,fade:1},
+ stake:{bac:[6,8,10,12,15,18,22,26],band:.3},
+ val:{danhBac:5,affBac:2,oanBac:1,khacBac:6,sucBac:1},eqTol:8,
+ duel:{pubDanh:2,shame:1,shameMax:3,oan:4,yieldK:.7,yieldOan:2},
+ refuse:{up:1},
+ pub:["vuon","kn","tn"],
+ mem:{pmplay:6,pmwin:10,pmyield:10},
+ npc:{gapW:2,me:1,meShare:.4,meGap:6,g:{play:{ally:10},duel:{spite:10,danh:3.75}},minAff:0,spite:3},
+ oddsN:120};
+/* receiver weights for a pastime / duel ask (jrcv rcvPick): no «mách lẻo» slot */
+BAL.pm.rcvOff=[3];/* receiver answer slots a pm ask does NOT have: slot 3 («mách lẻo»); Nhận · Nhường · Từ chối keep the help weights */
+BAL.rcv.k.pm=BAL.rcv.k.help.map((w,i)=>BAL.pm.rcvOff.includes(i)?0:w);
 /* PALACE CHATTER (PL#6 bubble talk, jchat.js; owner OD:L1627 (5) "every 1–2 min NPCs chat"): gap = seconds between two chatter ticks (real time),
    retry = seconds to look again when the stage is busy (dialog / hidden page), maxBub = bubbles on one stage at once, turnGap = ms between two lines of
    one exchange, say = how long a line stays (ms: base + ch per letter, clamped min..max), noRepeat = exchanges / greetings said before one may come back,

@@ -13,7 +13,7 @@ Thợ báo "KIT REQUEST" trong báo cáo → điều phối ghi vào đây → g
 | 16/11 | sếp (coop-chat) | Bong bóng thư + danh sách thư (kitChatBubble / kitChatList) + nút biểu tượng có huy hiệu chưa đọc (kitChatBtn) + khung Thư từ (kitChatPanel) | chơi cùng bạn: phòng của nàng | coop-chat | xong, KIT §76, chờ duyệt |
 
 ## 16/11 s19 — closed by review/kit-marks: "KIT REQUEST — cloud-del" items 1–2 built as KIT §83.9 (`.kbtn.kdanger`, `kitConfirm`); KIT number clash §72 verified resolved (KIT_NUMBERS.md).
-| 16/11 | origin-intros (Foreman C worker; logged by reviewer origin-intros-r1) | **K-OI-1 `kitEntryGate(o)`** — entry animation "palace gate → selection hall" (OD:L1244), a kmStage scene with KIT §81 end button, Gọn / reduced motion = final frame; kinds consort / bride / maid / corridor; `o.to` = name of the selection. Full spec + art rows G1–G7: dev/handover/reports/review-origin-intros.md (docs branch). Same request as entry-intro.md #1 | joi.js oiGate (caller ready, no-op until registered) | kit keeper (main coordinator) | chưa làm |
+| 16/11 | origin-intros (Foreman C worker; logged by reviewer origin-intros-r1) | **K-OI-1 `kitEntryGate(o)`** — entry animation "palace gate → selection hall" (OD:L1244), a kmStage scene with KIT §81 end button, Gọn / reduced motion = final frame; kinds consort / bride / maid / corridor; `o.to` = name of the selection. Full spec + art rows G1–G7: dev/handover/reports/review-origin-intros.md (docs branch). Same request as entry-intro.md #1 | joi.js oiGate (caller ready, no-op until registered) | kit keeper (main coordinator) | KIT READY (review/kit-podium-gate, KIT §81.1; art slots entry-gate-* for Foreman C) |
 
 ## 16/11 — npc-agent r1-fix (Foreman C worker): dialog option LOCKED state (register, no new look)
 | 16/11 | npc-agent r1 (fault 2a) | A Q-dialog option with `lock:true` + `why:"<reason>"` renders as the EXISTING kit locked-option form of `pbtn` (j15): `disabled` + `<span class="kwhy">reason</span>` in `<small>` → j63 kaNorm turns it into the §6 `.kdis` card with its Cần ✗ row. One line in j3 showModal (before: only "poor" options were disabled). Used by the AG1b reactions "Nghe lén" / join when no khắc is left (BAL.ag.kh). Kit keeper: please record it in KIT.md §6.2 (dialog options) / §8 | AG1b witness card (jagent agReact); any dialog option with a lock | npc-agent r1 | built (j3), chờ kit keeper ghi KIT.md |
@@ -119,3 +119,26 @@ Group b play areas now use plain inline SVG / glyph signs from dev/build/jnwb.js
 - icon-hint (lamp / «?» seal), icon-done (check seal), icon-voice (td_ngon Thưa hold button), icon-rotl / icon-rotr (hoa điền tilt), icon-shield (duho Hộ giá),
 - icon-bowl (Hạnh pool), person signs elder / child / sick / adult (td_hanh row), pips (filled / empty dot) — all in the kit stroke style.
 Rule sentences stay on the rules screen only; the frame «Cách chơi» row is hidden while a game runs (#kg82.kg-run .kghow).
+
+## 20/11 kit-cost-rows-home (MAIN ROOT-80 order; E25 «KR home-stat rows», E22t «quý nhau»)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | E25b home-chapters | **KR home-stat rows** — Gia thanh (kgt), Áp lực hôn sự (kap), Hồi môn (khm), Lời đồn (kld) in the act/option card rows Tốn / Được / Thành / Bại and in word mode | every home card (jkc kcCard, jkc2, jkc3 kc3/kcE) | kit keeper | **KIT READY** review/kit-cost-rows-home (KIT §13.14) |
+| 20/11 | E22t | **«quý nhau» in the word/hint map** (jk2b) — the decline row of a receiver choice (jrcv rcvNoO «mất: hai bên quý nhau −F») showed «Tốn: không» | jrcv, every «quý nhau» line | kit keeper | **KIT READY** review/kit-cost-rows-home (KIT §13.14) |
+
+## 20/11 kit-e-rows (MAIN ROOT-80 order; E30 `kitColDot`, E25b «KR thế lực nhà»)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | E30 dresscode | **`kitColDot` / `kitColDots`** read-only colour dot + family name | item rows «Màu», jmcal popover, festival gate | kit keeper | **KIT READY** review/kit-e-rows (KIT §60.1) |
+| 20/11 | E25b home-chapters | **«thế lực nhà ±n» in the word/hint map** | jkc3 E28 (kcE hac) | kit keeper | **KIT READY** review/kit-e-rows (KIT §13.15; built on top of review/kit-cost-rows-home 3332c63b — same file / lines) |
+
+## 20/11 kit-dress-picker (owner OD ~21:45Z via MAIN ROOT-81)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | owner via ROOT-81 | **dress picker** — her figure as a live preview on the left, choices on the right (KIT §60.2 kitDressPicker) | every dress picker (toilDressUI) | kit keeper | **KIT READY** review/kit-dress-picker |
+
+## 21/11 kit-ton-row (MAIN ROOT-82 deadline order; D econ-tamco L85, road-b2 L80 family)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | D econ-tamco (c45265d6 KIT-BLOCKED) | **«Tốn» row accepts a cost the fx does not pay itself** — `ton:{tamco:-n}` / `ton:{bac:-pr}` on an option; hidden-outcome cards keep the option's own prices | PEND.roadpick (jtamco) «Hao tâm cơ» / «Thuê người» / «Làm như thường»; any option with a price paid elsewhere | kit keeper | **KIT READY** review/kit-ton-row (KIT §13.16) |
+| 20/11 | road-b2 / E22t | **«quý nhau»** in the word/hint map | jrcv decline row | kit keeper | already KIT READY since review/kit-cost-rows-home (KIT §13.14, LIVE 27a7dcf5); re-checked in kit-ton-row.js |

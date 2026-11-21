@@ -28,8 +28,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const after=L.map(v=>mgHand(K,v));o.inBand=after.every(h=>h>=Bd.lo-1e-9&&h<=Bd.hi+1e-9);
   const ord=a=>a.map((h,i)=>[h,i]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]).join(",");o.order=ord(before)===ord(after)&&after.every((h,i)=>h===before[i]);o.otherKind=mgCalBand(K2).sig===def2;
   /* 4 */
-  const plays=[];for(let i=0;i<600;i++){const q={name:"T"+i,id:9000+i,rank:S.rank,arts:Object.assign({},S.arts),ag:{o:(S.origin&&S.origin.k)||"_"}};/* equal to her in art and upbringing: no lift */for(let j=0;j<3;j++)plays.push(mgNpcRaw(K,q,{d:0}))}plays.sort((a,b)=>a-b);
-  o.reach=plays.filter(x=>x>=7).length/plays.length;o.med=plays[plays.length>>1];o.max=plays[plays.length-1];
+  const ID=BAL.orig.id,npc0=ID&&ID.npc;if(ID)ID.npc=0;/* cal-p2c: the bare curve (the identity class shift, the same for her and the NPC, is checked in dev/test/cal-p2c.js) */const plays=[];for(let i=0;i<600;i++){const q={name:"T"+i,id:9000+i,rank:S.rank,arts:Object.assign({},S.arts),ag:{o:(S.origin&&S.origin.k)||"_"}};/* equal to her in art and upbringing: no lift */for(let j=0;j<3;j++)plays.push(mgNpcRaw(K,q,{d:0}))}plays.sort((a,b)=>a-b);
+  if(ID)ID.npc=npc0;o.reach=plays.filter(x=>x>=7).length/plays.length;o.med=plays[plays.length>>1];o.max=plays[plays.length-1];
   const hs=[];for(let i=0;i<600;i++)hs.push(mgHand(K,{name:"T"+i,id:9000+i})-H.w/2-7);o.up=hs.filter(x=>x>1).length;o.dn=hs.filter(x=>x<-1).length;o.loPlay=Math.min(...hs)+7;
   delete C.k[K];o.back=mgCalBand(K).sig===o.def.sig&&mgHand(K,v)===before[0];
   return o});

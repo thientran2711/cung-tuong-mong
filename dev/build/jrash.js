@@ -36,7 +36,7 @@ PEND.rashcard=pp=>{const r=S&&S.rash;if(!r)return null;const x=rshOf(S);const o=
   if(S.vl)o.push(ch70(`Tháo ${itm(S.vl.k).n}`,{wt:[G70("không còn vướng víu")],k:[R70(`Sắc mất trở lại ${RASH.d[r.sev]}`)],ok:()=>{vlOff(S);return "Ngươi tháo mạng che mặt."}}));
   else if(L.length){const b=L.slice().sort((a,c)=>vlG(c.e)-vlG(a.e))[0];const it=itm(b.e.k);o.push(ch70(`Đeo ${it.n}`,{wt:[G70(`Sắc mất còn ${Math.round(RASH.d[r.sev]*VL.cover[vlG(b.e)])}`)],ok:()=>{const j=S.inv.indexOf(b.e);return j>=0&&vlWear(S,j)?`Ngươi đeo ${it.n}.`:""}}))}
   else o.push({n:"Tìm mạng che mặt",fx:{},x:"chưa có mạng: tự tay kết, đặt mua hay xin ban",j67:"tốn: không tốn gì · thành: tự tay kết, đặt mua hay xin ban",go:()=>pushDil(mkP("vlget"),"Mạng che mặt")})}
- o.push(ch70("Để tự khỏi",{wt:[G70("không tốn gì")],k:[R70(`còn ${x.weeksLeft} tuần`)],ok:()=>"Ngươi để mẩn tự lặn."}));
+ o.push(ch70("Để tự khỏi",{wt:[G70(`Sức +${BAL.cv.rest}`)],k:[R70(`còn ${x.weeksLeft} tuần`)],ok:()=>{apply({suc:BAL.cv.rest});return "Ngươi nghỉ ngơi, để mẩn tự lặn."}}));
  return{who:pMe(),t:`<p>Mặt ngươi nổi mẩn đỏ (${x.name}${r.how?", vì "+r.how:""}): Sắc đang mất ${x.lost}; còn chừng ${x.weeksLeft} tuần mới lặn.</p>`,o}};
 /* ---------- causes ---------- */
 /* spring pollen event (j68f): each choice keeps its text; afterwards the face may break out (less with the physician) */
