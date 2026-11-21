@@ -82,7 +82,7 @@ function kgTdWalk(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const lv=tdEa
  const FEET=H*.74,LAND=H*.84,FIGH=H*.45,figSrc=(()=>{try{return kitFigOf(S)}catch(e){return ""}})(),fig=new Image();if(figSrc){fig.crossOrigin="anonymous";fig.src=figSrc}
  let fb=null;try{if(figSrc)fb=kitFigBody(figSrc,()=>{try{fb=kitFigBody(figSrc)}catch(e){}})}catch(e){}
  const BAD="#c23b22",FONT=kg82Col("--body","sans-serif");
- function pill(t,cx,cy,col,sz){/* kit canvas label (kg82Lbl: outlined text), no private chip */g.save();g.font=`700 ${sz||15}px ${FONT}`;g.fillStyle=col;g.textAlign="center";g.textBaseline="middle";kg82Lbl(g,t,cx,cy,W*.94);g.restore()}
+ function pill(t,cx,cy,tone,sz){kg82Guide(g,t,cx,cy,tone,sz,W-16)}/* the ONE kit guiding line (KIT §13.7.2) */
  function bowlAt(cx,cy,w,ang,hot){/* a porcelain bowl of water, drawn about its foot (cx,cy) */g.save();g.translate(cx,cy);g.rotate(ang);const h=w*.42;
   g.beginPath();g.moveTo(-w/2,-h);g.bezierCurveTo(-w/2,-h*.1,-w*.28,0,0,0);g.bezierCurveTo(w*.28,0,w/2,-h*.1,w/2,-h);g.closePath();const gr=g.createLinearGradient(-w/2,0,w/2,0);gr.addColorStop(0,"#d9cfb8");gr.addColorStop(.35,"#fbf6e8");gr.addColorStop(1,"#cfc3a8");g.fillStyle=gr;g.fill();g.strokeStyle="#3b62a0";g.lineWidth=2;g.stroke();
   g.fillStyle="#3b62a0";g.fillRect(-w*.42,-h*.62,w*.84,3);g.beginPath();g.ellipse(0,-h,w/2,w*.1,0,0,Math.PI*2);g.fillStyle="#7fb6d8";g.fill();g.strokeStyle="#3b62a0";g.stroke();
@@ -95,9 +95,9 @@ function kgTdWalk(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const lv=tdEa
   const nx=mx+mw/2+Math.max(-1,Math.min(1,x))*mw/2;g.fillStyle=col;g.strokeStyle="#fff6dc";g.lineWidth=1.5;g.beginPath();g.moveTo(nx,my+bh/2+1);g.lineTo(nx-8,my+bh/2+14);g.lineTo(nx+8,my+bh/2+14);g.closePath();g.fill();g.stroke();
   /* the guiding word: which way the bowl leans (or is about to) and which half to hold */
   const lean=Math.abs(x)>BAND*.5?Math.sign(x):soon;
-  if(t<2.3)pill("Mỗi bước chân làm bát nghiêng. Giữ nửa khung bên kia để đỡ.",W/2,H*.165,"#6b4a1c",Math.max(11,Math.min(14,W/38)));
-  else if(lean)pill(lean<0?"Bát nghiêng trái · giữ bên phải ▶":"◀ Bát nghiêng phải · giữ bên trái",W/2,H*.165,BAD,Math.max(12,Math.min(15,W/34)));
-  else pill("Bát đang thẳng · giữ vững",W/2,H*.165,good,Math.max(12,Math.min(15,W/34)));
+  if(t<2.3)pill("Mỗi bước chân làm bát nghiêng. Giữ nửa khung bên kia để đỡ.",W/2,H*.165,"wait",Math.max(11,Math.min(14,W/38)));
+  else if(lean)pill(lean<0?"Bát nghiêng trái · giữ bên phải ▶":"◀ Bát nghiêng phải · giữ bên trái",W/2,H*.165,"bad",Math.max(12,Math.min(15,W/34)));
+  else pill("Bát đang thẳng · giữ vững",W/2,H*.165,"go",Math.max(12,Math.min(15,W/34)));
   /* the path: step marks leave her feet and come down to the landing line; the arrow = the way that step leans the bowl */
   g.save();g.strokeStyle="rgba(143,95,12,.8)";g.lineWidth=3;g.beginPath();g.moveTo(W*.22,LAND);g.lineTo(W*.78,LAND);g.stroke();g.restore();
   for(let k=ki-1;k<KN;k++){if(k<0)continue;const kk=kicks[k],dtm=kk.t-t;if(dtm<-.4||dtm>2.4)continue;const u=1-dtm/2.4,y=FEET+H*.03+u*(LAND-FEET-H*.03),sc=.5+.5*u;kg82Spr(g,"mua-mat",W/2,y,W*.13*sc,null,{alpha:.92});
