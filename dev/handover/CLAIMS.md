@@ -779,7 +779,7 @@ bag-inline-2 rv2 | review/bag-inline-2-rv2 c1f7733b | rv session | PASS | 21/11
 | huong-cue-2-r2 FIXER (sonnet; merge LIVE 666def0c keeping mg-5s-clear + huong-cue-2) | review/huong-cue-2-r2; reports/huong-cue-2-r2.md | FOREMAN B ROOT-5 | session_01N1tNP2UKo2mtcZUCmPW2tC | SẴN SÀNG KIỂM 77935d60 (quickcheck PASS, coop-e2e 92/92) | 21/11 |
 | REVIEW huong-cue-2-r2 (sonnet SMALL) of 77935d60 | review/huong-cue-2-r2-rv | B | session_01N1tNP3cbtr6FBfRzT1sJqn | PASS 3be6edad | 21/11 05:36Z |
 kit-ghichu-sections rv2 | review/kit-ghichu-sections-rv2 cfde1cc4 | rv session | PASS | 21/11
-| REVIEW kit-dialog-2 (SMALL sonnet) 198825c5 (#71 #75 #76 #80 #82) | review/kit-dialog-2-rv; briefs/main89-rv-kit-dialog-2.md | MAIN CHÍNH 89 | session_01Rc5AsMaLLvZ2wrtmc2Tjti | RUNNING | 21/11 05:41Z |
+| REVIEW kit-dialog-2 (SMALL sonnet) 198825c5 (#71 #75 #76 #80 #82) | review/kit-dialog-2-rv; briefs/main89-rv-kit-dialog-2.md; reports/rv-kit-dialog-2.md | MAIN CHÍNH 89 | session_01Rc5AsMaLLvZ2wrtmc2Tjti | PASS review/kit-dialog-2-rv ab74a5d7 (FF of main aee7ff84; main d6f23858 only index/sw conflict) | 21/11 05:41Z |
 | REVIEW ending-screens-2 r1 (opus BIG) of e8847011 | review/ending-screens-2-r1 | B | session_01N1tNP2Qz7ZpRucbeYRu2hN | PASS da613d5a1cf086298eec3149bdd6e58244d6a533 (FF of main 068662ad; KIT OK pending keeper) | 21/11 07:10Z |
 | REVIEW dialog-person-3 (sonnet SMALL; lands r86 too) of 8803d6b9 | review/dialog-person-3-rv | B | session_01N1tNP5SDchEK7HTZ41UWDQ | PASS b187ecdc | 21/11 05:50Z |
 | REVIEW chapter-card-3 (SMALL sonnet) 4771570e (#27 rest) | review/chapter-card-3-rv; briefs/main89-rv-chapter-card-3.md | MAIN CHÍNH 89 | session_01Rc5AsLEAMwsLLk9M3n7ZPx | RUNNING | 21/11 05:50Z |
