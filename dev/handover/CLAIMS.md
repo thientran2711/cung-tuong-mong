@@ -607,3 +607,4 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | FOREMAN E #25 (opus; child of E #24, depth 6) | handover FOREMAN_E_STATUS | FOREMAN E #24 | session_01DgYSWmm3tPLnLMUtPofz2g | RUNNING | 21/11 02:55Z |
 | FOREMAN E #25 (opus; child of E #24, depth 6) | handover FOREMAN_E_STATUS | FOREMAN E #24 | session_PENDING_E25 | RUNNING | 21/11 02:55Z |
 | bag-inline (sonnet; OWNER mark #21 21/11 ~02:45Z: Túi đồ inline strip, no popup, whole group) | review/bag-inline; briefs/main85-bag-inline.md | MAIN CHÍNH 85 | session_01Rc5AsJTtZMnTMg6ibPv5H7 | RUNNING | 21/11 02:32Z |
+| REVIEW rel-picker-r3 (SMALL sonnet) of 295c7cb3 | review/rel-picker-r3-rv; briefs/main85-rv-rel-picker-r3.md | MAIN CHÍNH 85 | (opening) | RUNNING | 21/11 02:35Z |
