@@ -45,7 +45,7 @@ const ACT_PLACE={"Thỉnh an Thái hậu":"tn","Nhờ Thái hậu nói giúp":"t
  /* r2 (MAIN ROOT-55 20:08Z (b)): places not on Dư đồ → the nearest EXISTING map place: the ancestral incense hall → Đức Thọ cung (incense,
     the Thái hậu's prayers); the court banquet → Cần Chính điện (the festival banquets already sit there, jact2 AS_FPLACE newyear/giaothua) */
  "Cầu tự ở Phụng Tiên điện":"tn","Múa trong yến tiệc":"thu",
- /* r2 (a): acts done in her own palace (her bed, mirror, books, her own maids) bring her home; goTo("home") is the free walk (j2), so one cost */
+ /* r2 (a): acts done in her own palace (her bed, mirror, books, her own maids) bring her home; the trip home is free here (window.__walkFree, j2) because the act price holds it (OD L1907), so one cost */
  "Nghỉ ngơi một lát":"home","Điểm trang":"home","Đọc sách giải khuây":"home","Dưỡng nhan":"home","Giả bệnh":"home","Trò chuyện với cung nữ":"home",
  "Đọc binh thư, sử sách":"home","Nghỉ ngơi dưỡng sức":"home","Nghĩ cách trốn khỏi cung":"home","Dâng biểu xin xuất gia":"home",
  /* r3 — MAIN ROOT-56 20:50Z gap rulings */
@@ -75,7 +75,7 @@ function stayRoll(k,bk0){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S
  if(typeof accessOf!=="function"||accessOf(S,k).ok||typeof accSneakO!=="function")return;S.stayRoll=bk+"|"+k;
  const n=nm(k);if(roll(accSneakO(k))){log(`Ở lại ${n} sau giờ đóng cửa: không ai hay.`);return}
  apply({danh:-BAL.sneak.danh});log(`<span class="r">Ở lại ${n} sau giờ đóng cửa, bị thị vệ bắt gặp: Danh -${BAL.sneak.danh}.</span>`);punish(S,`ở lại ${n} sau giờ đóng cửa`,1);
- window.__actPend=null;try{goTo("home")}catch(e){}
+ window.__actPend=null;window.__walkFree=1;try{goTo("home")}catch(e){}finally{window.__walkFree=0}
  Q.push({t:"Bị bắt",h:`<p>Thị vệ ${n} bắt gặp ngươi còn nán lại sau giờ đóng cửa, giải về tẩm cung. Chuyện truyền khắp lục cung.</p><p class="r">Danh -${BAL.sneak.danh} ·${S.confined?` cấm túc ${S.confined} tháng`:" bị phạt"}</p>`});
  try{showModal()}catch(e){}}catch(e){console.error("stayRoll",e)}}
 window.stayRoll=stayRoll;
