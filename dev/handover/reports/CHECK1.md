@@ -72,3 +72,24 @@ Notes (not blocking):
 - t1 "a fresh flower (a lilac spray)": a spray is a cluster (F13).
 - t3 "ONE WIDE stiff ivory white collar band", "a wide stiff ivory white silk girdle": B29 says "nothing stiff", but G15 asks for these words (same open conflict as in job 1).
 - t3 "one hand touching her hairpin" is not the F18 "set in her hair … raised empty hand" form.
+
+## JOB 3 (Foreman C #14) — thu s62 t1–t3 COMOI_v4 (DESIGN18, make_thu_L1595.py) · checked at cd26445 · 0 gens
+Checks that hold for all 3:
+- Gates: check_store tpN a22 approved + store PASS; keep PASS. Chars: 9372 / 9979 / 9856.
+- Master: lines 1–5 and 7–14 verbatim; B29 A_LIGHT verbatim.
+- G40: OUTER_IN, short form, verbatim.
+- Palette: plum #DF9ED9 + blush only; no other-season colour.
+- Phi bạch: kept (G36 thu).
+- F2: lilac / tiger lily / semi-double China rose, size rising.
+- B29 "nothing stiff": the old G15 "wide stiff band / stiff brocade girdle" is now "wide soft band / wide soft silk girdle" (the conflict from job 1 is gone). The only "stiff" left is in the master "never stiff".
+
+G41 garment by tier:
+- t1 = the current thu Thường tại outfit (v2e t2 line, two-band neckline border) with t1's own flower, hairpins and TIER_LOW t1 density (hem band + small sprays). It is not ChatGPT mẫu C ✓.
+- t2 = the current Quý nhân court dress with ONE apron panel, plus t2's own tiger lilies, silver + pearl pins and t2 density ✓.
+- t3 = the same dress with TWO apron panels side by side, jade pendant set on each outer side ✓.
+- G39: t3 hairpin sentence verbatim ✓.
+- F18: the t3 pose now reads "a hairpin set in her hair with one raised empty hand" ✓ (job 1 note fixed). t1 flower is now "a lilac blossom" (F13 note fixed).
+- Captions match the new designs. The old t2 "hoa mai" caption is gone.
+
+Verdict: **t1 PASS · t2 PASS · t3 PASS.**
+Note: H12 says "never an apron panel", but here the owner orders the panels herself (G41, L1595/L1597), so the newer, specific owner order wins.
