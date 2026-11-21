@@ -47,3 +47,11 @@ Generator make_han_ladder8_L1859.py, built from LADDER7 files (G57 kept). Hair, 
 5. t7/t8 "no other colour" → "… except the white innermost collar band". t1–t6 TWO-COLOUR rule untouched (approved sentence S01).
 ch 9656/9800/9818/9474/9178/9706/9708/9813; keep PASS ×8 (CUT lines allowed, citing L1859); check_store shows only the waived FAILs.
 Risk: on t1–t3 the middle ivory band sits next to the innermost white band, so they may blend.
+
+## PHICOPY t1 (owner L1860 via #25, A48; LADDER8 superseded and on hold)
+dev/art/seasons4/s62_t1_HAN_PHICOPY_L1860.txt (generator make_han_phicopy_t1_L1860.py). BASE = the Phi t5 prompt that drew CqnIKlAEEy (s62_t5_HAN_LADDER4_L1773.txt, current file), copied byte-for-byte.
+- Removed (Phi-only): shoulder bead yoke/fringe, larger gold headdress, the Phi up-do and big flower, Phi colours, Phi item/pose.
+- Put in (Đáp ứng t1's own sentences): short hip-length vạt, sparse small lilac sprays, plain sleeves with narrow cuffs, narrow border, soft ivory sash (G57: no plaque, no pendants), silver pins + lilac, JEWELLERY no-red, loose hair, knee sleeves, small flower, her angle/grace/pose (book), Đáp ứng caption.
+- Collar = Phi's own words with her colours. 3 bands (L1859): "outer peach-blossom pink embroidered in gold, middle ivory white, innermost pure white".
+FINDING: the result is byte-identical to LADDER5 t1 except the band colours (LADDER5 was already built from the Phi base). The only Phi→t1 differences left are rank items (yoke, up-do, colours, flowers, item, pose).
+9504 ch; keep PASS; check_store M06/M07/S06 (the same t1 waivers).
