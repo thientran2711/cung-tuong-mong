@@ -36,3 +36,5 @@ NOTES for the Foreman:
 - (1) The t5 Phi girdle is gold again. L1657 says keep the original form; L1656 said the gold girdle is ugly. The newer owner word wins, but this is worth showing her on the OLD|NEW sheet.
 - (2) The t6 colour-clause cut is the only meaningful trim (A38 allow line present).
 No GEN1 release sent (not asked for job 3).
+- 04:12Z update: the Foreman ruled t5 COMOIk FAIL (owner: the gold girdle is not OK); a new t5 will come from DESIGN22.
+- Released to GEN1: t3 dapung4 v10, t4 COMOIl, t6 COMOIm, t7 v8l, t8 v10j = 5 × 55 = 275 cr. Re-checked: no conflict markers, all ≤ 10 000 ch, t3 tp3 PASS + keep PASS.
