@@ -35,3 +35,8 @@ Not done: no ghost hand at the first move in play (demo on the rules screen + th
 - dauho / huong / hoa / den / chai untouched (claims).
 
 ~100% xong (8 kinds) / ~88% chơi được (needs her re-test).
+
+## ROLLOVER HANDOVER (worker hit its context ceiling, 21/11 ~03:25Z) — for MAIN's successor
+- Branch review/mg-5s-clear @ 8caa9dcd = 8 kinds + td_dung on kg82Guide + figure-column backdrop slot (KG82_MGBG, KIT §13.7.3) + main 32c0e33b merged. coop-e2e 92/92. Worktree /home/user/wt/mg5s (sparse), shots/scripts in /home/user/wt/mg5s-shots (shot.js, why.js, bg.js; run with NODE_PATH=$(npm root -g)).
+- NOT started: owner mark #55 (MAIN 86 addendum, branch review/mg-intro-2 from LIVE 56ff0db0): contest / mini-game INTRO = event picture on top, REMOVE the rules-demo picture (NWB_DEMO / kgReadyDemo in j82 kgReady, the «Hướng dẫn» button teaches), long rules + «Phần của ta» rows behind the kit «!» / kitTapWord (keeper branch review/kit-tap-word), compact opponents list, whole-group scan + before/after table, Fold + iPad. Intro code: j82.js kgReady (rules screen), contest intro at j82 ~line 466 (`Phần của ngươi` rows), jsmg / steal-minigame intros.
+- Note for that work: my rules-screen demos (NWB_DEMO.aim/slapbar/cook/tspluck/doiline/hoadien) are the pictures #55 asks to remove from intros; delete them with the same change (or keep only for «Hướng dẫn»).
