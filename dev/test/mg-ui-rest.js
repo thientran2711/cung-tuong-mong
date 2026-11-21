@@ -18,7 +18,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const td=await p.evaluate(()=>({kind:!!KG82_KIND.td_dung,eng:typeof KG82_ENG[KG82_KIND.td_dung.e]==="function",can:typeof kgReadyCan==="function"&&kgReadyCan({kind:"td_dung"})}));
  ok(td.kind&&td.eng&&td.can,'td_dung: kind + tdwalk engine + guided round available',td);
  await p.evaluate(()=>{try{kg82Close()}catch(e){}Q.length=0;S.mg=null;TDS.busy=false;S.vir=S.vir||{};tdPlay("dung","self")});await sleep(900);
- const tdr=await p.evaluate(()=>{const bx=kg82Box();return bx?{rules:!!bx.querySelector('.kgr .kgr-demo'),go:(bx.querySelector('.kgr-go')||{}).textContent,tut:!!bx.querySelector('#kgrtut'),canvas:!!bx.querySelector('canvas'),run:!!KG82.run}:null});
+ const tdr=await p.evaluate(()=>{const bx=kg82Box();return bx?{rules:!!bx.querySelector('.kgr .kgbang'),go:(bx.querySelector('.kgr-go')||{}).textContent,tut:!!bx.querySelector('#kgrtut'),canvas:!!bx.querySelector('canvas'),run:!!KG82.run}:null});
  ok(tdr&&tdr.rules&&tdr.tut&&/Sẵn sàng/.test(tdr.go||"")&&!tdr.canvas&&!tdr.run,'td_dung: rules screen + Hướng dẫn + Sẵn sàng, nothing running',tdr);await shot('td_dung');
  await p.evaluate(()=>{try{kg82Close();TDS.busy=false}catch(e){}});
  /* 2 pet care */
@@ -29,7 +29,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   await p.evaluate(()=>{S.pets=[];petAdd(S,'meo','x','buy');S.petOn=0;Q.length=0;document.getElementById('modal').hidden=true;petcOpen(0)});await sleep(500);
   const u0=await khac();const pet0=await p.evaluate(()=>JSON.stringify(tsbPets(S)[0]));
   await p.evaluate(k=>document.querySelector(`[data-petc="${k}"]`).click(),kind);await sleep(500);
-  const r=await p.evaluate(()=>{const bx=document.getElementById('kpcgame');return bx?{rules:!!bx.querySelector('.kgr .kgr-demo'),go:(bx.querySelector('.kgr-go')||{}).textContent,tut:!!bx.querySelector('#kgrtut'),food:!!bx.querySelector('[data-food]'),ball:!!bx.querySelector('[data-ball]')}:null});
+  const r=await p.evaluate(()=>{const bx=document.getElementById('kpcgame');return bx?{rules:!!bx.querySelector('.kgr .kgbang'),go:(bx.querySelector('.kgr-go')||{}).textContent,tut:!!bx.querySelector('#kgrtut'),food:!!bx.querySelector('[data-food]'),ball:!!bx.querySelector('[data-ball]')}:null});
   ok(r&&r.rules&&r.tut&&/Sẵn sàng/.test(r.go||"")&&!r.food&&!r.ball,`pet ${kind}: rules screen (Luật chơi + Hướng dẫn + Sẵn sàng), game not started`,r);
   {const f=await fit('#kpcgame');ok(f.gook&&f.tutok&&f.quickok,`pet ${kind}: Sẵn sàng / Hướng dẫn / Để trời định inside the visible dialog`,f)}
   ok(await khac()===u0,`pet ${kind}: no khắc spent on the rules screen`,{u0,u:await khac()});await shot('pet-'+kind+'-rules');
@@ -50,7 +50,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   await p.evaluate(k=>{Q.length=0;document.getElementById('modal').hidden=true;shelfOf(S).g.mgp={k,pc:40};shelfPlantOpen('mgp')},pk);await sleep(500);
   const u0=await khac();const pc0=await p.evaluate(()=>shelfOf(S).g.mgp.pc);
   await p.evaluate(()=>document.querySelector('[data-shc="water"]').click());await sleep(500);
-  const r=await p.evaluate(()=>{const bx=document.getElementById('kshpgame');return bx?{rules:!!bx.querySelector('.kgr .kgr-demo'),go:(bx.querySelector('.kgr-go')||{}).textContent,tut:!!bx.querySelector('#kgrtut'),game:!!bx.querySelector('[data-shw]')}:null});
+  const r=await p.evaluate(()=>{const bx=document.getElementById('kshpgame');return bx?{rules:!!bx.querySelector('.kgr .kgbang'),go:(bx.querySelector('.kgr-go')||{}).textContent,tut:!!bx.querySelector('#kgrtut'),game:!!bx.querySelector('[data-shw]')}:null});
   ok(r&&r.rules&&r.tut&&/Sẵn sàng/.test(r.go||"")&&!r.game,'plant water: rules screen (Luật chơi + Hướng dẫn + Sẵn sàng), game not started',r);
   {const f=await fit('#kshpgame');ok(f.gook&&f.tutok&&f.quickok,'plant water: Sẵn sàng / Hướng dẫn / Để trời định inside the visible dialog',f)}
   ok(await khac()===u0,'plant water: no khắc spent on the rules screen');await shot('plant-rules');
