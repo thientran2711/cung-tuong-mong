@@ -82,3 +82,10 @@ Exact edits pass 2:
 
 ## Handover
 Worker stops here (context). Open items for C #13: S13 conflict (thu t4 + Hán t4), the t7/t8 + m02 đông fail lists above, m28 root-season file conflict. My _c files: thu s62 t1–t8 (dapung4 t1–t3, thu_comoi t4–t8), Hán xuân t4–t8, m02 đông t7/t8.
+
+## Pass 3 — S13 COMOI alternative (C #13 order, owner L1377 supersedes G25/S13 for COMOI thu)
+- check_store.py: `S13_COMOI` accepted in place of S13 (tp4/pr4) when the prompt carries the COMOI capelet sentence ("the outer robe closes only at the sash, never at the throat …").
+- Rule G38 added (rule.py add).
+- thu_comoi/s62_t4_THU_COMOIc: approved + master PASS → all 6 thu s62 t1–t6 PASS.
+- Regression, 129 t4 prompts (`--scope tp4 --age a22`): only 5 change, all just losing the S13 fail: thu_comoi s62_t4_THU_COMOI(+c), dong_hientai s62_t4_DONG_HIENTAI, _cloak, _cloak2, _vk (old versions with the same COMOI sentence). check_store --self: same 2 problems as before.
+- Hán t4 (collar bands, no capelet) is still S13 FAIL — not covered; needs its own decision.
