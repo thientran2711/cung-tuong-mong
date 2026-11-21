@@ -478,3 +478,20 @@ The diff is only what was asked:
   - gate repairs as in v8e: E1 "the LEFT side of the picture", G23 "robe falling still" cut, S19 slipper-toe tail ✓
 Verdict: **PASS ×2** (diff-only; the reverted base text itself was not judged, per the owner). Report only, no gen.
 Note for the Foreman: by the revert, both no longer carry the G45 "jade never covered" words (t7 pendants / belt). G45 is still a rule (L1622), so the draft should be watched.
+
+## JOB 21 (DESIGN22 31af161, owner L1653 smallest change) — thu s62 t1–t8, 8 files, diff-only · checked at d8c5856 · 0 gens
+Files: t1 v10, t2 v10, t3 v10, t4 COMOIk, t5 COMOIj, t6 COMOIl, t7 v8k, t8 v10i.
+All 8: gates + keep PASS; ≤ 9999 chars; no vase.
+
+The word-level diff vs base:
+- t1, t2: only G52 ", never over the edge, cuff or hem bands" ✓.
+- t3: G52 ✓ + trim ", framing the bordered square neckline" ✓.
+  - Note G51: the t3 girdle is still "a wide soft blush silk girdle" (no flowered/brocade word). G51 says t3–t8 carry the flowered brocade sash; DESIGN22 flagged it ("if the t3 draft shows a plain girdle, use 'flowered brocade'"). There is also a B29 "t1–t3 never brocade" tension, so this is for the rule owner.
+- t4: G52 ✓ + G51 "a flowered brocade sash" ✓. Trim: chest "small lotus flowers ~~embroidered~~ below it" (the word "embroidered" dropped, low risk).
+- t5: G52 ✓ + G51 "broad gold flowered brocade girdle" ✓ + G49 "a SHORT round-pearl strand swags ACROSS her chest, left capelet front to right" ✓. Trim: "many small ones below it".
+- t7, t8: only G51 "flowered brocade" ✓. t8 trim: pose "weight on one leg" dropped (the master legs line keeps it).
+- **t6 — 2 drops beyond G51/G52/trims (flag):**
+  1. `a pearl-edged collar trim` was removed (replaced by the G52 words). That is a real ornament detail, not a repeat.
+  2. `image 2 is only a colour reference;` was removed. This is the guard that stops the model copying anything but the colour from image 2. The swatch sentence "(image 2, a honey-gold close to hex #F2BC61 …)" stays, but the guard is gone.
+  - Otherwise G52 "the body motifs never over these bands" ✓ and G51 "a yellow flowered brocade sash" ✓.
+Verdict: **t1 · t2 · t3 · t4 · t5 · t7 · t8 PASS; t6 FAIL-minimal** — restore both phrases (trim elsewhere), or get the Foreman's OK.
