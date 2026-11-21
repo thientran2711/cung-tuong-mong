@@ -75,3 +75,4 @@ Word diffs vs the last texts, checked against Set A dev/art/rank8-s62/s62_tN.txt
 - No markers; tpN a22 PASS ×3; keep PASS ×3.
 - CURRENT SET (all PASS): t1 dapung4 v11, t2 v11, t3 v12, t4 COMOIo, t5 COMOIo, t6 COMOIn, t7 v8m, t8 v10m. Nothing released to GEN1 (the owner picks 55 cr 1k / 135 cr 2k first).
 - 04:23Z: Foreman C #17 rolled over → I now report to #18 session_01D3E3NbPQeExFnFGqi5RR2S. Order unchanged: release nothing to GEN1.
+- 04:23Z GEN1: the job 6 release was never received → 0 cr. Job 3b t5 COMOIl drawn once = Cqn8j8HEEy (55 cr), reported to #17 (now superseded by t5 COMOIo).
