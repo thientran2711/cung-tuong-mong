@@ -34,3 +34,5 @@ Belt-pendant words removed ×8 (folded into make_han_ladder7_L1847.py, same file
 - t5: "TWO long jade pendants" → ", no pendants".
 - t7/t8: the zupei sets → "WIDE jade-and-gold belt, no pendants"; "belt or pendants" → "belt"; LUXURY sentence ", long jade-and-gold belt pendants with pearl tassels" removed.
 ch 9690/9839/9878/9689/9379/9922/9877/9877; keep PASS ×8 (t5 +1 allow); check_store shows only the waived FAILs. No pendant/zupei/jade-disc words are left except "no pendants".
+### LADDER7 samples (VE4, f3e889d): t2 u5WmGriQLD, t8 1ldFM7Jr4r, 110 cr, sheet han_ladder7_t2_t8_L1847.png
+HAN5 read: the shape is closer to Phi (the collar now spreads wide across the shoulders, wide V, the t8 yoke is small and below the bands, no pendants). The bands still do not separate. Cause: same-colour neighbours — t2 has outer pink on a pink robe plus "inner two ivory", which reads as one ivory band; t8 has an outer yellow band on a yellow robe. In Phi the visible bands are pink on a plum robe, i.e. they contrast with the robe. The next lever is band colour order/contrast, but that is owner L1807 territory → asked #24 / the owner.
