@@ -762,3 +762,4 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | E39 story-voice LITERATURE EXPERT (opus; ORDER MAIN CHÍNH 86 04:20Z, owner mark #61 parts 2+3; briefs/E39-story-voice.md) | review/story-voice; reports/story-voice.md | FOREMAN E #25 | session_PENDING_E39 | RUNNING | 21/11 03:50Z |
 | fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111 b504870d (90 pp, 16 MB) | MAIN CHÍNH 84 → reports to 87 | session_01Rc5AsJwwnByo4hzkXcabXJ | READY (re-run on request) | 21/11 06:50Z |
 kit-ghichu-sections rv | review/kit-ghichu-sections-rv dd0e20e9 | rv session | FAIL (popup under avatar on Fold) | 21/11
+| REVIEW dialog-person part 1 DONE: PASS 642f056d FF of fafe0f62 | review/dialog-person-rv; reports/rv-dialog-person.md | MAIN CHÍNH 87 | session_01Rc5AsN3rZiBn3phiQQMFeK | DONE | 21/11 05:00Z |
