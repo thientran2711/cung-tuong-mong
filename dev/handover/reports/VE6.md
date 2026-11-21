@@ -38,3 +38,10 @@ Looked: no shawl/phi bạch, ice-blue robe now opaque with a heavier lined look 
 ## ĐÔNG Đáp ứng t1 L1924 (HHCOL2 via #26) — 55 cr
 KLpQriTkqp (gpt-2-6 1k low 9:16 seed 7172 ref nVsrRMPYQD). keep PASS; check_store fails only M06/W01/W04 (owner waiver). Sheet 3-up dev/handover/review-sheets/dong_t1_L1924_3up_VE6.png (duyệt 1ldmoUCr4r | L1912 rgXHHk0xtc | L1924 mới).
 Looked: mouth closed, no teeth (L1912 had a wide open smile), calm upright consort poise, thick opaque ice-blue top + mint skirt, bow at centre front of waist, ivory fur on collar/cuffs/hem only, no shawl, one plum flower. Faults: hairpins few (2–3) and thin, little pearl dangle; book is violet (differs from both robe colours, OK); right hand held out in a loose open pose; no CAPTION in file so no text.
+## WINTER t3–t6 minus phi bạch (L1952, HHCOL2 for #27) — 4 × 55 = 220 cr
+gpt-2-6 1k low 9:16 seed 7172; keep_check PASS ×4; check_store fails identical to the approved originals (t3 M06/W01/W04 · t4 M06/W02/S13 · t5 M06/W02 · t6 W02) = waiver. Prompt files have no CAPTION line → no text on pictures.
+t3 Quý nhân 1ldHJcCr4r (old jUoam4eLD0) · t4 Tần tCRdqPdmZJ (old cpSPN2P0eP) · t5 Phi mEZXb9YhJQ (old Lw8fhqlswO) · t6 Quý phi s7Ik9dfl8e (old 1ldmIAjr4r; refs +TdwDfOyVNR).
+Sheet dev/handover/review-sheets/dong_t3_t6_L1952_cu_moi_VE6.png (CŨ top | MỚI bottom; labels season+rank+collar type).
+Looked (sheet size, no zoom): all four have NO shawl/phi bạch; ivory fur on collar/front edges/cuffs/hem as in CŨ; mint/ice-blue two-colour kept; hair up for t4–t6, loose for t3.
+Notes/faults: t3 apron panel plainer than CŨ, fewer visible pins; t4 holds a white lotus lamp (per file) whereas CŨ cpSPN2P0eP held a vase with a plum branch; t5 cloud collar smaller/less scalloped and the fur sits high at the neck vs CŨ; t6 ball pink-coral, yellow panel+sash present, two pearl-edged capes. Collar-type labels follow the FILES (t4 = square neckline + short round capelet, t6 = two short capes), not HHCOL2's wording (t4 "cổ giao", t5/t6 "vân kiên"): t4 file says NO crossed collar; t6 file has no cloud collar.
+No redraws.
