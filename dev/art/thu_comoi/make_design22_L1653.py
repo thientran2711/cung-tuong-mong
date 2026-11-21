@@ -22,8 +22,7 @@ J={ # base, new, [(old,new,reason)]
  't6':('thu_comoi/s62_t6_THU_COMOIk.txt','thu_comoi/s62_t6_THU_COMOIl.txt',[
    ('cuffs and skirt-front medallions)','cuffs and skirt-front medallions), the body motifs never over these bands','G52'),
    ('a yellow sash and narrow','a yellow flowered brocade sash and narrow','G51'),
-   ('a pearl-edged collar trim, ','','A38'),
-   ('image 2 is only a colour reference; ','','A38')]),
+   ('across the chest, and a grander gold headdress with more gold ornaments, elegant','across the chest, elegant','A38')]),
  't7':('thu_comoi/s62_t7_THU_COMOI_v8j.txt','thu_comoi/s62_t7_THU_COMOI_v8k.txt',[
    ('a wide yellow sash,','a wide yellow flowered brocade sash,','G51')]),
  't8':('thu_comoi/s62_t8_THU_COMOI_v10h.txt','thu_comoi/s62_t8_THU_COMOI_v10i.txt',[
