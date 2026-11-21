@@ -166,7 +166,7 @@ rdDef("ch_co",8,{t:"Lệnh khó",w:"th",sj:"lệnh hại {v}",cast(A){return rdC
   {n:"Dò xem ai đặt người canh",wx:"biết lưới của ai",lx:"người của {v} thấy ngươi dò",rt:"Người canh là do chính {v} xin Nội vụ phủ: nàng đã sợ từ trước.",rf:"Người canh bắt gặp người của ngươi lảng vảng."},
   {n:"Gửi lễ mừng {v}",wx:"{v} bớt nghi ngươi",lx:"tốn bạc, cô mẫu cho là ngươi mềm",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} nhận lễ, cảm ơn khách sáo."},
   {n:"Không để tâm",wx:"không dao động",lx:"nếu bị bắt, tội càng nặng",rt:"Ngươi gạt chuyện ấy sang một bên."}]},
- c2:{h:"Cung nữ của ngươi biết",w:"maid",t:"{maid} thấy gói vải. Nàng quỳ: “{Xung}, việc này mà lộ thì cả cung ta chết.”",o:[
+ c2:{h:"Cung nữ của ngươi biết",w:"maid",t:"{maid} thấy gói vải. Nàng quỳ: “{Goi}, việc này mà lộ thì cả cung ta chết.”",o:[
   {n:"Bảo nàng giữ kín",wx:"không thêm ai biết",lx:"nàng sợ, có thể lỡ lời",rt:"{maid} gật đầu, tay run."},
   {n:"Cho nàng về quê một thời gian",wx:"nàng không bị liên lụy",lx:"tốn bạc lộ phí cho nàng",rt:"{maid} khóc khi lên xe."},
   {n:"Bảo nàng đi chôn thay",wx:"tay ngươi không dính",lx:"nàng bị bắt thì khai ra ngươi",rt:"Nàng đi rồi về trong đêm, không ai thấy.",rf:"Nàng bị thị vệ hỏi ở cửa hậu."}]},
@@ -261,7 +261,7 @@ rdDef("ch_co",10,{t:"Người đánh cờ",w:"hh",sj:"thọ yến Đức Thọ c
   {n:"Kể hết kế của mình",f:"own",wx:"bà gật đầu cho ngươi đi",lx:"bà muốn tự đi",rt:"Thái hậu nghe xong, cười: “Đi đi.”",rf:"Thái hậu bảo: “Để ai gia.”"},
   {n:"Xin bà tin, không kể",wx:"nước đi giữ kín",lx:"bà không thích bị giấu",rt:"Thái hậu nhìn ngươi lâu: “Được.”",rf:"Thái hậu cau mày."},
   {n:"Xin bà ra tay, con theo",f:"obey",wx:"bà vui",lx:"nước đi lại là của bà",rt:"Thái hậu gật đầu."}]},
- t2:{h:"Người cũ hỏi",w:"me",if:()=>S.thDead,t:"Ma ma già hỏi: “Nương nương định giữ chúng tôi, hay để chúng tôi đi?”",o:[
+ t2:{h:"Người cũ hỏi",w:"me",if:()=>S.thDead,t:"Ma ma già hỏi: “{Goi} định giữ bọn nô tỳ, hay để bọn nô tỳ đi?”",o:[
   {n:"Giữ, ta lo",f:"own",wx:"người cũ một lòng",lx:"gánh thêm người",rt:"Ma ma quỳ lạy."},
   {n:"Đi thì có bạc, ở thì có việc",wx:"ai cũng có đường",lx:"tốn bạc",rt:"Một nửa ở, một nửa đi."}]},
  x1:{h:"Giữa thọ yến",w:"emp",t:A=>S.thDead?`Giữa lễ giỗ, ${CHR_Q()} dâng sớ xin giải tán Đức Thọ cung. Hoàng thượng nhìn ngươi.`:"Giữa thọ yến, tờ sớ xin Thái hậu an dưỡng được dâng lên. Cả điện im lặng. Thái hậu nhìn ngươi.",o:[
@@ -472,7 +472,7 @@ rdDef("ch_benh",8,{t:"Hầu bệnh",w:"th",sj:"những đêm bên giường bệ
   {n:"Nhờ Hoàng thượng nhớ lại ngươi bằng một món quà",wx:"ngài nhớ",lx:"quà bị để quên",rt:"Hoàng thượng đeo túi thơm ngươi thêu.",rf:"Túi thơm nằm trên bàn, chưa mở."},
   {n:"Để {v} lên, ngươi giữ đạo hiếu",wx:"tiếng hiếu thảo",lx:"{v} chiếm chỗ",rt:"Ngươi không nói gì."},
   {n:"Cho {v} biết ngươi thấy",wx:"{v} biết dừng",lx:"{v} càng lấn",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"{v} cười gượng, rồi ít sang dần.",rf:"{v} đáp: “Tỷ cứ hầu Thái hậu cho trọn.”"}]},
- c2:{h:"Sức người có hạn",w:"maid",t:"{maid} quỳ khuyên: “{Xung} đã ba đêm không ngủ.”",o:[
+ c2:{h:"Sức người có hạn",w:"maid",t:"{maid} quỳ khuyên: “{Goi} đã ba đêm không ngủ.”",o:[
   {n:"Cho {maid} thay một đêm",wx:"lại sức",lx:"đêm ấy không phải ngươi",rt:"{maid} ngồi quạt thay ngươi."},
   {n:"Cố thêm",wx:"lòng hiếu",lx:"sức cạn",rt:"Ngươi ngủ gục bên giường."},
   {n:"Mua sâm bồi bổ",wx:"giữ sức",lx:"tốn bạc",rt:"Sâm vào, mắt đỡ quầng."}]},

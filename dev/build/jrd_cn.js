@@ -400,11 +400,11 @@ rdDef("cn_tinh",8,{t:"Lời đồn tư tình",w:"hh",sj:"lời đồn ngươi t�
 rdDef("cn_tinh",9,{t:"Kính sự phòng tra xét",w:"eun",sj:"cuộc tra xét của Kính sự phòng",cast(A){return CNTINH_G(A)&&rdCast(A,["v"])},
  g:"Kính sự phòng mở sổ: từng đêm ngươi được triệu, từng người ra vào cung ngươi. {eun} đứng đầu việc tra. Chỉ một dòng sai là đủ.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Tra cho có lệ",w:"eun",if:RDW(1),t:()=>`{eun} đến, giọng nhã nhặn: “${CN_Q()} đã dặn, tra để khép miệng thiên hạ. Nương nương chỉ cần đáp vài câu.”`,o:[
+ B:{s1:{h:"Tra cho có lệ",w:"eun",if:RDW(1),t:()=>`{eun} đến, giọng nhã nhặn: “${CN_Q()} đã dặn, tra để khép miệng thiên hạ. {Goi} chỉ cần đáp vài câu.”`,o:[
   {n:"Đáp đủ, không thừa",f:"calm",wx:"sổ ghi gọn",lx:"một câu đáp hớ, sổ ghi thêm",rt:"{eun} ghi ba dòng rồi gấp sổ.",rf:"Một câu đáp của ngươi khiến {eun} ghi thêm."},
-  {n:"Biếu {eun} chút lễ",wx:"{eun} nghiêng về ngươi",lx:"lễ này ghi vào lòng hắn, không vào sổ",rt:"{eun} nhận lễ, cười: “Nương nương chu đáo.”"},
+  {n:"Biếu {eun} chút lễ",wx:"{eun} nghiêng về ngươi",lx:"lễ này ghi vào lòng hắn, không vào sổ",rt:"{eun} nhận lễ, cười: “{Goi} chu đáo.”"},
   {n:"Xin tra kỹ cho sạch hẳn",f:"open",wx:"tỏ ra không giấu gì",lx:"tra kỹ thì lộ điều nhỏ",rt:"{eun} gật đầu kính phục.",rf:"Tra kỹ, {eun} thấy một đêm ngươi nói dối là ốm."}]},
- s2:{h:"Sổ mở trên án",w:"eun",if:RDW(0),t:"Sổ Kính sự phòng mở trên án. {eun} không ngẩng lên: “Đêm mười bốn tháng chín, nương nương cáo bệnh. Đêm ấy {n1} gác cửa.”",o:[
+ s2:{h:"Sổ mở trên án",w:"eun",if:RDW(0),t:"Sổ Kính sự phòng mở trên án. {eun} không ngẩng lên: “Đêm mười bốn tháng chín, {goi} cáo bệnh. Đêm ấy {n1} gác cửa.”",o:[
   {n:"Đưa ra lời Thái y đêm ấy",f:"calm",wx:"đêm ấy có người làm chứng",lx:"Thái y nhớ lờ mờ, sổ ghi ngờ",rt:"Thái y xác nhận đêm ấy ngươi sốt cao.",rf:"Thái y bảo không nhớ rõ."},
   {n:"Nói thẳng: thiếp ốm thật",f:"open",wx:"lời thật",lx:"lời không có chứng",rt:"{eun} ghi: “Lời khai rõ ràng.”",rf:"{eun} ghi: “Không có người chứng.”"},
   {n:"Lặng im, xin gặp Hoàng thượng",wx:"không để sổ dẫn mình đi",lx:"{eun} ghi: không chịu khai",rt:"{eun} gấp sổ, đi báo."}]},
@@ -414,7 +414,7 @@ rdDef("cn_tinh",9,{t:"Kính sự phòng tra xét",w:"eun",sj:"cuộc tra xét c�
   {n:"Không nói gì về sổ",wx:"không tỏ ra lo",lx:"con số mười lăm cứ nằm đó",rt:"Ngươi để {eun} đọc tiếp."}]},
  c2:{h:"{maid} bị gọi hỏi",w:"maid",t:"{maid} bị Kính sự phòng gọi đi hỏi riêng. Nàng là người duy nhất biết hết chuyện năm xưa.",o:[
   {n:"Dặn {maid} từng câu",wx:"lời khai khớp với ngươi",lx:"lời học thuộc nghe như học thuộc",rt:"{maid} khai khớp từng chữ.",rf:"{eun} hỏi một câu ngươi chưa dặn, {maid} lúng túng."},
-  {n:"Bảo nàng cứ nói thật",f:"open",wx:"{maid} không phải nói dối vì ngươi",lx:"lời thật làm Hoàng thượng chạnh lòng",rt:"{maid} khai: chuyện cũ là trước khi tiểu chủ được sủng hạnh, sau đó không còn gì."},
+  {n:"Bảo nàng cứ nói thật",f:"open",wx:"{maid} không phải nói dối vì ngươi",lx:"lời thật làm Hoàng thượng chạnh lòng",rt:"{maid} khai: chuyện cũ là trước khi {goi} được sủng hạnh, sau đó không còn gì."},
   {n:"Xin cho {maid} nghỉ bệnh",wx:"tránh được một buổi hỏi",lx:"{eun} cho là giấu người",rt:"{maid} được nghỉ, buổi hỏi bị hoãn.",rf:"{eun} sai Thái y đến xem, {maid} không ốm."}]},
  t1:{h:"Hoàng thượng đến giữa đêm",w:"emp",need:["nsrv"],t:"Giữa những ngày tra, Hoàng thượng đến cung ngươi một mình, không báo trước. Ngài ngồi rất lâu, không hỏi gì.",o:[
   {n:"Kể hết chuyện năm xưa",f:"open",wx:"ngài nghe từ miệng ngươi",lx:"ngài nghe điều không muốn nghe",rt:"Hoàng thượng nghe xong, nắm tay ngươi: “Trẫm biết rồi.”",rf:"Hoàng thượng đứng dậy đi, không nói lời nào."},
@@ -507,7 +507,7 @@ rdDef("cn_ban",5,{t:"Kẻ muốn Tố Nga câm lặng",w:"maid",sj:"kẻ muốn 
   {n:"Lặng lẽ đổ đi, giả như không biết",f:"quiet",wx:"kẻ hạ độc tưởng nàng đã ăn",lx:"ngươi thức canh nàng, hao sức; kẻ ấy sẽ thử lần nữa",rt:"Ngươi bảo Tố Nga giả ốm nằm liệt. Bên ngoài đồn nàng sắp chết."}]},
  s2:{h:"Tên nàng vẫn trong sổ tội nô",w:"eun",if:RDW(0),t:"Sau chuyện cái giếng, sổ tội nô của Nội vụ phủ vẫn còn tên Tố Nga. Chưởng sự mới của Tân Giả khố bắt nàng giặt áo trong nước đá từ canh tư.",o:[
   {n:"Biếu chưởng sự mới",wx:"Tố Nga được làm việc trong nhà",lx:"chưởng sự biết ngươi có chỗ yếu, sẽ còn đòi",rt:"Chưởng sự cất bạc, đổi Tố Nga sang khâu áo bên lò sưởi."},
-  {n:"Nhờ {eun} đổi chưởng sự",wx:"chưởng sự ác bị điều đi",lx:"Tổng quản cho là ngươi xen việc Nội vụ phủ",rt:"{eun} điều chưởng sự đi coi chuồng ngựa.",rf:"{eun} cười: “{Xung} lo việc trong cung mình là đủ.”"},
+  {n:"Nhờ {eun} đổi chưởng sự",wx:"chưởng sự ác bị điều đi",lx:"Tổng quản cho là ngươi xen việc Nội vụ phủ",rt:"{eun} điều chưởng sự đi coi chuồng ngựa.",rf:"{eun} cười: “{Goi} lo việc trong cung mình là đủ.”"},
   {n:"Tự xuống Tân Giả khố thăm nàng",f:"bond",wx:"Tố Nga biết ngươi chưa bỏ nàng",lx:"bị đồn phi tần lui tới chỗ tội nô",rt:"Tố Nga ôm lấy vạt áo ngươi, khóc không thành tiếng.",rf:"Có người thấy kiệu ngươi dừng trước Tân Giả khố; chuyện ấy đến tai cả lục cung."}]},
  s3:{h:"Tai mắt bị nhận ra",w:"maid",if:()=>rdPrev()==="win2",t:()=>`Tố Nga hầu bên ngươi được ba tháng thì có người nhận ra nàng hay đứng nghe ở cửa sau ${CN_QP()}.`,o:[
   {n:"Giấu nàng vào hậu viện một thời gian",f:"quiet",wx:"nàng tạm an",lx:"mất tai mắt một thời gian",rt:"Tố Nga lui về hậu viện, chỉ coi việc phơi áo."},
@@ -550,8 +550,8 @@ rdDef("cn_ban",6,{t:"Bí mật Càn Ninh cung",w:"maid",sj:"điều Tố Nga th�
   {n:"Mua người chép sổ Châm công cục",f:"book",wx:"có giấy trắng mực đen",lx:"kẻ giữ kho đi báo",rt:"Bản chép có dấu đỏ của Châm công cục.",rf:"Kẻ giữ kho nhận bạc rồi báo cho cung {v}."},
   {n:"Tự đến Châm công cục xem đồ",f:"book",wx:"tận mắt thấy mẫu thêu",lx:"cả Châm công cục biết ngươi dò",rt:"Ngươi chọn vải, tiện tay lật sổ cũ.",rf:"Sổ năm ấy đã bị ai mượn đi."},
   {n:"Chỉ ghi nhớ, không động",wx:"không ai biết ngươi để ý",lx:"không có giấy làm bằng; người dò của ngươi bị nghi, mất một tai mắt",rt:"Ngươi giữ chuyện đôi hài trong lòng."}]},
- c2:{h:()=>`${CN_Q()} triệu ngươi`,w:"hh",need:["hh"],t:()=>`${CN_Q()} gọi ngươi đến ${CN_QP()}, hỏi thẳng: “Tố Nga đã nói gì với {xung} về cung của ${CN_QI()}?”`,o:[
-  {need:["hh"],n:"Kể hết, cả chuyện mượn danh",f:"hh",wx:"Hoàng hậu biết mình bị đổ vạ",lx:"Hoàng hậu cho là ngươi bịa để lấy lòng",rt:"Hoàng hậu bóp chặt chuỗi hạt: “Kẻ nào dám mượn tên bổn cung?”",rf:"Hoàng hậu lạnh mặt: “Lời một tội nô, {xung} cũng tin?”"},
+ c2:{h:()=>`${CN_Q()} triệu ngươi`,w:"hh",need:["hh"],t:()=>`${CN_Q()} gọi ngươi đến ${CN_QP()}, hỏi thẳng: “Tố Nga đã nói gì với {goi} về cung của ${CN_QI()}?”`,o:[
+  {need:["hh"],n:"Kể hết, cả chuyện mượn danh",f:"hh",wx:"Hoàng hậu biết mình bị đổ vạ",lx:"Hoàng hậu cho là ngươi bịa để lấy lòng",rt:"Hoàng hậu bóp chặt chuỗi hạt: “Kẻ nào dám mượn tên bổn cung?”",rf:"Hoàng hậu lạnh mặt: “Lời một tội nô, {goi} cũng tin?”"},
   {need:["hh"],n:"Thưa nàng không nói gì",wx:"giữ bài trong tay",lx:"Hoàng hậu không tin, thiện cảm với ngươi giảm",rt:"Hoàng hậu nhìn ngươi rất lâu rồi cho lui."},
   {need:["hh"],n:"Hỏi lại Hoàng hậu về cái giếng",wx:"đọc được mặt Hoàng hậu",lx:"Hoàng hậu giận ngươi hỗn",rt:"Hoàng hậu thoáng sững sờ: bà thật không biết chuyện.",rf:"Hoàng hậu đập bàn: “Ngươi tra hỏi bổn cung?”"}]},
  c3:{h:"Sổ lĩnh thuốc của Thái y viện",w:"doc",t:()=>`Thái y viện cuối năm đốt sổ cũ. Trong sổ năm ấy có dòng lĩnh thuốc tuyệt tự, ký tên ${CN_QP()}. Phải lấy trước kỳ đốt sổ.`,o:[
@@ -576,7 +576,7 @@ rdDef("cn_ban",7,{t:"Kẻ vu Tố Nga",w:"v",sj:"cây trâm vàng trong chăn T�
  B:{s1:{h:"Hồ sơ án trộm",w:"eun",if:RDW(1),t:"Nhân lúc cung {v} bị để ý, {eun} chịu cho ngươi xem hồ sơ án trộm trâm năm xưa của Tố Nga.",o:[
   {n:"Đọc kỹ lời khai từng người",f:"file",wx:"thấy lời khai vênh nhau",lx:"đọc mãi không ra gì",rt:"Ba nhân chứng khai ba giờ khác nhau. Một người trong đó nay hầu cung {v}.",rf:"Lời khai trơn tru như đã học thuộc."},
   {n:"Biếu {eun} để mượn hồ sơ về",f:"file",wx:"hồ sơ trong tay",lx:"nợ {eun} một ân",rt:"Hồ sơ nằm trong tráp của ngươi ba đêm."}]},
- s2:{h:"Cánh cửa đóng",w:"eun",if:RDW(0),t:"Từ sau chuyện bí mật, Nội vụ phủ khóa hồ sơ cũ. {eun} nói: “Án đã xử, {xung} đừng lật.”",o:[
+ s2:{h:"Cánh cửa đóng",w:"eun",if:RDW(0),t:"Từ sau chuyện bí mật, Nội vụ phủ khóa hồ sơ cũ. {eun} nói: “Án đã xử, {goi} đừng lật.”",o:[
   {n:"Nhờ ma ma cũ ở Nội vụ phủ",f:"file",wx:"có người mở cửa sau",lx:"ma ma bị đuổi về quê",rt:"Ma ma lén đọc cho ngươi nghe từng dòng.",rf:"Ma ma bị bắt khi đang mở tủ."},
   {n:"Hỏi lại người cùng phòng năm xưa",wx:"có người nhớ đêm ấy",lx:"ký ức mờ, khó làm bằng",rt:"Một cung nữ cũ nhớ: đêm mất trâm, có người lạ vào phòng lúc canh ba."}]},
  c1:{h:"Nhân chứng thứ ba",w:"maid",need:["v"],t:"Một trong ba nhân chứng nay là cung nữ hầu trà của {v}. Năm ấy nàng ta khai thấy Tố Nga giấu trâm.",o:[
@@ -641,7 +641,7 @@ rdDef("cn_ban",9,{t:"Lời khai",w:"maid",sj:"lời khai của Tố Nga",cast(A)
   {n:"Hứa gánh cùng nàng",f:"own",wx:"nàng dám khai",lx:"ngươi buộc mình vào số phận nàng",rt:"Tố Nga nắm tay ngươi: “Vậy muội nói.”"},
   {n:"Cho nàng thêm thời gian",wx:"nàng không bị ép",lx:"ngươi lo đến mất ngủ; kẻ kia có thêm thời gian",rt:"Ngươi không nhắc lại chuyện ấy cả tháng."}]},
  c1:{h:"Thận hình ty muốn giữ người",w:"eun",t:"{eun} báo: nếu Tố Nga khai, nàng phải vào Thận hình ty chờ đối chất. Ở đó, chết một tội nô không ai hỏi.",o:[
-  {n:"Biếu {eun} để nàng ở cung ngươi",f:"keep",wx:"Tố Nga không vào Thận hình ty",lx:"{eun} nhận bạc mà không làm",rt:"{eun} ghi: nhân chứng giao cho cung {xung} trông giữ.",rf:"{eun} cất bạc, vẫn cho người đến bắt."},
+  {n:"Biếu {eun} để nàng ở cung ngươi",f:"keep",wx:"Tố Nga không vào Thận hình ty",lx:"{eun} nhận bạc mà không làm",rt:"{eun} ghi: nhân chứng giao cho cung ngươi trông giữ.",rf:"{eun} cất bạc, vẫn cho người đến bắt."},
   {n:"Xin Thái hậu cho nàng ở Đức Thọ cung",need:["th"],f:"keep",wx:"không ai dám vào Đức Thọ cung",lx:"Thái hậu không muốn dính vào",rt:"Thái hậu cho Tố Nga ở gian sau Phật đường.",rf:"Thái hậu nói: “Ai gia già rồi, không lo được việc ấy.”"},
   {n:"Để nàng vào, cho người canh",wx:"theo đúng phép, không ai bắt bẻ",lx:"Tố Nga ở giữa hang hổ",rt:"Hai thái giám của ngươi đứng ngoài cửa ngục suốt đêm."}]},
  c2:{h:"{v} mặc cả",w:"v",need:["v"],t:"{v} gửi lời: “Rút lời khai, ta xin Nội vụ phủ xóa tên Tố Nga khỏi sổ tội nô. Nàng ta được tự do, ngươi được yên.”",o:[
@@ -683,7 +683,7 @@ rdDef("cn_ban",10,{t:"Rửa oan",w:"hh",sj:"phiên xét lại án Tố Nga",cast
  t1:{h:"Tố Nga đứng lên",w:"maid",t:"Đến lượt Tố Nga. Nàng nhìn ngươi, chờ một cái gật đầu.",o:[
   {n:"Gật đầu, để nàng nói hết",wx:"lời nàng chạm lòng người nghe",lx:"nàng nghẹn, nói đứt quãng, người nghe xì xào",rt:"Tố Nga kể, giọng không run.",rf:"Tố Nga òa khóc giữa chừng."},
   {n:"Đứng lên nói thay nàng",wx:"lời gọn, đúng chỗ",lx:"người nghe cho là ngươi dạy nàng",rt:"Ngươi nói, Tố Nga chỉ gật đầu từng câu."}]},
- x1:{h:"Lời tâu cuối",w:"hh",t:()=>CN_QK()==="emp"?"Thận hình ty khép phiên xét, hỏi ngươi có lời gì muốn tâu lên ngự án. Mắt mọi người đổ về ngươi.":`${CN_Q()} khép phiên xét: “{Xung} có lời gì muốn ${CN_QI()} tâu lên Hoàng thượng?” Mắt cả điện đổ về ngươi.`,o:[
+ x1:{h:"Lời tâu cuối",w:"hh",t:()=>CN_QK()==="emp"?"Thận hình ty khép phiên xét, hỏi ngươi có lời gì muốn tâu lên ngự án. Mắt mọi người đổ về ngươi.":`${CN_Q()} khép phiên xét: “{Goi} có lời gì muốn ${CN_QI()} tâu lên Hoàng thượng?” Mắt cả điện đổ về ngươi.`,o:[
   {n:"Xin minh oan và trị tội kẻ vu",e:["win","lose"],go:(A,ok,G)=>{rdOan(A,"v",G[0]);if(ok)return CN_CAM(rv67(A,"v"),BAL.road.cn_ban.cam)},rt:()=>`${CN_PHE()}: Tố Nga vô tội, kẻ làm chứng gian bị đánh, {v} bị cấm túc.`,rf:()=>`${CN_PHE()}: chứng cứ chưa đủ, án giữ nguyên.`},
   {n:"Chỉ xin minh oan cho Tố Nga",e:["win","mid"],rt:()=>`${CN_PHE()}: Tố Nga vô tội, tên được xóa khỏi sổ tội nô.`,rf:()=>`${CN_PHE()}: Tố Nga được giảm tội, nhưng chưa xóa hẳn.`},
   {need:["hh"],n:"Xin Hoàng hậu xử nhẹ cho êm",e:"mid",lx:"Tố Nga chỉ được giảm tội",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"Hoàng hậu tâu xin, Hoàng thượng phê: Tố Nga ra khỏi Tân Giả khố, án để lại đó."}]}},
@@ -713,7 +713,7 @@ rdDef("cn_ban",11,{t:"Tình chị em",w:"maid",sj:"số phận của Tố Nga",c
  t1:{h:"Đêm trăng chung phòng",w:"maid",t:"Đêm rằm, hai người ngồi như thuở còn chung phòng ở Nội vụ phủ. Tố Nga hỏi: “Tỷ tỷ có hối hận vì đã cứu muội không?”",o:[
   {n:"Đáp: chưa bao giờ",wx:"tình chị em bền chặt",lx:"Tố Nga khóc, ngươi thức khuya dỗ nàng",rt:"Tố Nga dựa đầu vào vai ngươi."},
   {n:"Đáp thật: có lúc sợ",wx:"hai người thật lòng với nhau",lx:"Tố Nga áy náy, ngươi cũng chạnh lòng",rt:"Tố Nga cười: “Muội cũng sợ. Vậy mà vẫn qua.”"}]},
- x1:{h:"Ngày quyết",w:"maid",t:"Nội vụ phủ hỏi: Tố Nga ở lại cung làm cung nữ của {xung}, hay xuất cung? Tố Nga chờ ngươi nói trước.",o:[
+ x1:{h:"Ngày quyết",w:"maid",t:"Nội vụ phủ hỏi: Tố Nga ở lại cung làm cung nữ của ngươi, hay xuất cung? Tố Nga chờ ngươi nói trước.",o:[
   {n:"Xin Tố Nga làm chưởng sự cung ngươi",e:["win","lose"],rt:"Tố Nga nhận ấn chưởng sự, đứng sau ngươi từ đó.",rf:"Bệnh cũ trở lại giữa mùa đông. Tố Nga nắm tay ngươi mà đi, môi còn mỉm cười."},
   {n:"Để Tố Nga về quê với mẹ",wx:"Tố Nga đi với cái tên sạch",e:["mid","lose"],rt:"Tố Nga lạy ngươi ba lạy ở cổng Thần Vũ, rồi đi không ngoảnh lại.",rf:"Tố Nga lên đường giữa mùa rét. Tin về: nàng không qua khỏi trên đường."},
   {n:"Hỏi Tố Nga, theo ý nàng",e:"mid",lx:"có thể phải xa nàng mãi",rt:"Tố Nga chọn về quê, hẹn mỗi năm gửi một đôi hài tự khâu."}]}},
@@ -752,7 +752,7 @@ rdDef("cn_than",5,{t:"Di vật của ma ma",w:"maid",sj:"bọc di vật lão ma 
  c3:{h:"Kẻ lục phòng",w:"maid",t:"Đêm, có người lẻn vào phòng ngươi, lục rương. Cung nữ canh đêm chỉ thấy một bóng áo xám.",o:[
   {n:"Đổi chỗ giấu ngay trong đêm",wx:"bọc vải không mất",lx:"kẻ kia biết chắc ngươi có thứ đáng giấu",rt:"Ngươi giấu bọc vải trong hộp kinh Phật."},
   {n:"Bày bẫy, để rương mở",f:"who",wx:"bắt được kẻ lục",lx:"kẻ kia không quay lại, rương mở bị mất đồ",rt:"Đêm sau, kẻ lục bị túm tay. Hắn là người khiêng kiệu của cung {v}.",rf:"Đêm sau không ai đến."}]},
- t1:{h:"Ma ma còn dặn",w:"maid",t:"Một cung nữ già từng hầu bên giường lão ma ma đến gặp: “Ma ma dặn, nếu tiểu chủ mở được bọc vải, phải biết ai đang tìm nó.”",o:[
+ t1:{h:"Ma ma còn dặn",w:"maid",t:"Một cung nữ già từng hầu bên giường lão ma ma đến gặp: “Ma ma dặn, nếu {goi} mở được bọc vải, phải biết ai đang tìm nó.”",o:[
   {n:"Biếu bà, hỏi kỹ",wx:"biết thêm người đang tìm",lx:"bà sợ, nói nửa chừng",rt:"Bà nói: phủ lão Thái phó cho người vào cung hỏi từ tháng ma ma ốm.",rf:"Bà chỉ khóc, nói ma ma tội nghiệp."},
   {n:"Nhận bà về hầu cung ngươi",wx:"có người nhớ chuyện cũ bên cạnh",lx:"thêm miệng ăn, thêm người biết chuyện",rt:"Bà dập đầu, từ nay coi việc hương đèn."}]},
  x1:{h:"Kẻ đòi bọc vải",w:"v",if:A=>!!rv67(A,"v"),need:["v"],t:"{v} sai người đến, lời lẽ mềm mỏng: nhà nàng ta muốn mua lại “đồ cũ của một bà già”, giá bao nhiêu cũng được.",o:[
@@ -858,7 +858,7 @@ rdDef("cn_than",9,{t:"Nhận hay không",w:"emp",sj:"việc ngươi nhận họ 
  B:{s1:{h:"Đại Lý tự đã đọc",w:"emp",if:RDW(1),t:"Đại Lý tự tâu: trang sổ là thật. Hoàng thượng hỏi ngươi: “Nàng muốn trẫm xử thế nào?”",o:[
   {n:"Xin xét cho công bằng, không xin gì riêng",wx:"Hoàng thượng nể",lx:"ngài không hứa gì; người ngoài cho là ngươi chẳng có chỗ đứng",rt:"Hoàng thượng gật đầu: “Nàng khác người ta nghĩ.”"},
   {n:"Xin cho được thờ cha ruột",need:["nsrv"],f:"rite",wx:"có chỗ thắp hương cha",lx:"ngài chưa đáp",rt:"Hoàng thượng cho ngươi lập bài vị trong Phật đường cung mình.",rf:"Hoàng thượng nói: “Chờ án xong đã.”"}]},
- s2:{h:"Người ta khuyên",w:"maid",if:RDW(0),t:"Người hầu thân tín quỳ khuyên: “{Xung} đã có ân sủng, có cung riêng. Họ Thẩm cho được gì mà phải liều?”",o:[
+ s2:{h:"Người ta khuyên",w:"maid",if:RDW(0),t:"Người hầu thân tín quỳ khuyên: “{Goi} đã có ân sủng, có cung riêng. Họ Thẩm cho được gì mà phải liều?”",o:[
   {n:"Nghe khuyên, nghĩ lại",f:"calm",wx:"lòng bớt nóng",lx:"người hầu nghĩ ngươi đã nản, lòng ngươi thẹn với cha",rt:"Ngươi ngồi một mình đến khuya."},
   {n:"Đáp: không vì được gì, vì cha",wx:"người hầu càng tin ngươi",lx:"đường liều không lùi được, ngươi mất ngủ nhiều đêm",rt:"Người hầu lau nước mắt, đứng dậy."}]},
  c1:{h:"Tông phả họ Thẩm",w:"eun",t:"Muốn nhận họ, phải có tông phả. Tông phả họ Thẩm bị niêm cùng phủ cũ, nay nằm trong kho Lễ bộ.",o:[
@@ -896,7 +896,7 @@ rdDef("cn_than",10,{t:"Minh oan cho cha ruột",w:"emp",sj:"tờ trình minh oan
  c2:{h:"Lão Thái phó lên tiếng",w:"v",if:A=>!!rv67(A,"v"),need:["v"],t:"Lão Thái phó, ông nội {v}, chống gậy vào triều: “Lão phu làm quan bốn mươi năm, chẳng lẽ thua một trang giấy rách?”",o:[
   {n:"Xin cho lão quản gia đối mặt",f:"face",wx:"lão Thái phó lúng túng",lx:"lão quản gia run sợ",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Lão quản gia nhắc một đêm năm xưa, lão Thái phó đánh rơi gậy.",rf:"Lão quản gia cúi đầu không dám nhìn."},
   {n:"Gửi lời qua {v}: xin lão tự thú",wx:"có thể kết êm",lx:"lão Thái phó cười khẩy, kể khắp triều ngươi van xin",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} khóc, mang lời về. Lão Thái phó im lặng cả đêm.",rf:"Lão Thái phó đuổi người đưa tin."}]},
- c3:{h:()=>`${CN_Q()} hỏi han`,w:"hh",need:["hh"],t:()=>`${CN_Q()} gọi ngươi: “Án ngoài triều kéo vào hậu cung, lục cung không yên. {Xung} định khi nào thôi?”`,o:[
+ c3:{h:()=>`${CN_Q()} hỏi han`,w:"hh",need:["hh"],t:()=>`${CN_Q()} gọi ngươi: “Án ngoài triều kéo vào hậu cung, lục cung không yên. {Goi} định khi nào thôi?”`,o:[
   {need:["hh"],n:"Thưa: xin Hoàng hậu thêm thời gian",wx:"Hoàng hậu đứng ngoài",lx:"Hoàng hậu cho là ngươi gây rối",rt:"Hoàng hậu gật: “Bổn cung không xen vào.”",rf:"Hoàng hậu nói: “Bổn cung đã nhắc rồi.”"},
   {need:["hh"],n:"Hứa giữ hậu cung yên",wx:"Hoàng hậu yên tâm",lx:"ngươi phải nhịn mọi lời khiêu khích",rt:"Ngươi đóng cửa, không gặp ai ngoài người của án."}]},
  t1:{h:"Đêm trước ngày xét",w:"maid",t:"Đêm trước ngày Đại Lý tự xét, lão quản gia lên cơn ho. Lão nói: “Tiểu thư, lão chỉ còn sức nói một lần.”",o:[
