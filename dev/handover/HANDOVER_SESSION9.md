@@ -2212,3 +2212,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (18:58Z) OWNER UI (Lượt 6 chat, OD 21/11 ~18:55Z): pframe label centred + info rows over pendant/tassel → KIT KEEPER #6 review/kit-pframe-overlay; frame re-cut with Magnific → ORDER C (fallback MAIN at 19:30Z); frame animation → PARKING_LOT #12.
 - (19:00Z) LAND CHAIN 2: LANDED ge-phutang-land3 b7041e67 = LIVE. Next kit-mark-fix-rv7 8c480114.
 - (19:02Z) rv MSxp PASS kit-relrows-ms1word c37b7713 → LRRY queue (after kit-mark-fix-rv7); B told.
+- (21/11 18:57Z) M99: LAND READY podium-wire-r2 34ddce9aade3ea481479c0ee84a6e3ef76c582ba (re-merge LIVE 70375dbf, both-sides; gates green; coop-home 1 FAIL pre-existing on LIVE). Report dev/handover/reports/podium-wire-r2.md.
