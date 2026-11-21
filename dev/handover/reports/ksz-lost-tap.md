@@ -29,3 +29,10 @@ Synthetic scan dev/test/ksz-late-tap.js (12 dialog kinds x Fold/iPad x 6 tap tim
 quickcheck f8d18cc2 vs live a201d968: CORE GATES PASS (G1-G4 incl. 80-dialog-fixed hook), time-spill PASS, old save loads (errors 0). dialog-fixed 84 ok / all pass. dialog-person-scan PASS. coop-e2e 124/124.
 Shots: Fold 755x1000@2 + iPad 1180x820@2 Hồi kết dialog looked 3x, identical layout to LIVE (no visual change).
 HANDOVER: none needed (small task done).
+
+## REVIEW r1 (sonnet SMALL reviewer-lander) — PASS 9343d8c456ddd6ff70ce2ec14f15510dbdd8a697
+Branch review/ksz-lost-tap-rv = 3bcc7e13 + merge of newest origin/main 0faf7a05 (index.html/sw.js conflicts only: rebuilt with build_site.sh; source js merged clean). FF of LIVE.
+Diff SMALL: jksize.js +30/-5, jpdlg.js 1 line, KIT.md 56.20, 2 tests; no BAL/save/co-op/time/progression.
+Gates: quickcheck PASS (core gates, time-spill, old save ok, perf buổi 1398/1190 within limit; 3rd run outlier 3312 = noise, median ok); ksz-late-tap-real 6/6 (taps 79-242 ms after the move); MUTATION on LIVE index.html: 4/6 missed, one misroute to card 1 → test is real; ksz-late-tap scan lost 0; dialog-fixed all pass; dialog-person-scan PASS; coop-e2e 124/124; Fold 755x1000@2 + iPad 1180x820@2 Hồi kết shots looked 3x: no visual change, no cut text.
+Remap logic read: a tap on a card's OLD place goes to THAT card (what her eye aimed at); no double fire (synth flag, one-shot); keyboard Enter/pointercancel/scroll unaffected; reduced motion not involved.
+Notes (non-blocking): (1) AMBIGUOUS BAND: within 300 ms after a re-lay, a tap inside the overlap of old-A and new-B goes to A; a player who already saw the new layout and tapped B's top edge inside that ~20 px band gets A. Rare (one re-lay per dialog, narrow band), medium. If it ever shows, shorten kszGrace3 to ~200 ms. (2) ksz-late-tap.js finds a button in only 3 of the 12 kinds (the other 9 print "none"): code covers .k3btns/#mr, test does not tap them. Follow-up for a worker, not a blocker.
