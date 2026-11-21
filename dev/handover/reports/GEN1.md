@@ -229,3 +229,12 @@ gpt-2-6, 9:16, 1k, seed 7172, quality low, ref nVsrRMPYQD (face only), 55 cr. Fi
 | t5 Phi v9 | kseEMNa16B | https://www.magnific.com/app/creation/kseEMNa16B |
 Sheet: dev/handover/review-sheets/thu_t5_v9_job14/sheet_t5.png
 Look: frontal, ONE hollyhock in the hair, bare ears (no earrings), hair fully up, letter in both hands, square neckline + hollyhock band, capelet with net + small shoulder layers, two apron panels, jade plaques on pearl strings both sides, gold girdle (partly hidden by the hands, so the plum above/below the sash is hard to judge). No faults seen.
+
+## EAR_FREE redrafts (CHECK1 job 16, Foreman C #16) — thu t6 COMOIi + t7 v8h
+gpt-2-6, 9:16, 1k, seed 7172, quality low, 55 cr each (110 total). Refs: face nVsrRMPYQD + royal-yellow swatch TdwDfOyVNR (both prompts name "image 2" as the swatch). Both files CHECK1 PASS at b5436aa43 (ancestor, unchanged), check_store PASS tp6/tp7, "Nothing hangs from her ears." present in both.
+| pic | file | creation | link |
+|---|---|---|---|
+| t6 Quý phi | s62_t6_THU_COMOIi | UPv1mtdwny | https://www.magnific.com/app/creation/UPv1mtdwny |
+| t7 Hoàng quý phi | s62_t7_THU_COMOI_v8h | 5jDfVT5Kxe | https://www.magnific.com/app/creation/5jDfVT5Kxe |
+Sheets: dev/handover/review-sheets/thu_t6_t7_earfree_job/sheet_t6.png, sheet_t7.png (label + model + cr + Tổng 110).
+Look: t6 – no earrings, slight left turn, one big chrysanthemum, tú cầu held, yellow sash flat no bow, one-tier scalloped collar with pearl-jade net, two apron panels; a couple of thin loose strands at the ears. t7 – no earrings, frontal, jade flute low, sash flat with NO bow (v8g fault fixed), phoenix crown, small cape with pearl strands, sleeves to the floor. No other faults seen.
