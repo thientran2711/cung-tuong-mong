@@ -1,9 +1,9 @@
 /* ================= jnpcd: NPC DEATH → NEW FACES + PHẾ PHI HỌ LÝ (D4, orphan audit #18, review/npc-death) =================
    Owner 15/11 ~20:40Z (OD:L641–643):
-     - Lãnh cung: when a real rival is sent to the cold palace, Phế phi họ Lý STAYS too (two people there). She only leaves when she dies.
+     - Lãnh cung: when a real rival is sent to the cold palace, Phế phi họ Tần STAYS too (two people there). She only leaves when she dies.
      - ALL NPCs can die. After a death: maids and eunuchs are replaced right away by a NEW person (new face/picture — never reuse the dead
-       person's picture); some posts have no replacement (e.g. Phế phi họ Lý in lãnh cung: empty until a real person arrives).
-     - Phế phi họ Lý gets her own story line (a real side-story quest) → the 3-part Tâm nguyện line already lives in jreign (rgl_ly1–3).
+       person's picture); some posts have no replacement (e.g. Phế phi họ Tần in lãnh cung: empty until a real person arrives).
+     - Phế phi họ Tần gets her own story line (a real side-story quest) → the 3-part Tâm nguyện line already lives in jreign (rgl_ly1–3).
    Built ON jmort (BAL.mort lifespans; its kill() calls npcRetire / npcRoleGone / npcFreshName / lyDie below).
    1. RETIRED FACES (whole family, LUẬT SỬA CẢ NHÓM): a person who leaves for good (death in jmort, a servant beaten to death, a maid who
       flees, any servant who vanishes from every palace) has their portrait (fc), full-body figure (fid) and name retired:
@@ -21,11 +21,6 @@ const push=(k,v)=>{if(!v||!S)return;const L=S[k]=S[k]||[];if(!L.includes(v)){L.p
 /* retire one person's face, figure and name */
 window.npcRetire=function(p){try{if(!p||p===S)return;push("fdead",p.fc);push("fidDead",p.fid);push("dnames",p.name);
  if(p.fid&&typeof figUsed==="function"){const U=figUsed();if(!U.includes(p.fid))U.push(p.fid)}}catch(e){}};
-/* a name from L that no living or dead holder carries (prefix = title before the name, for officials) */
-window.npcFreshName=function(L,not,prefix){const D=new Set((S&&S.dnames)||[]);(not||[]).forEach(n=>D.add(n));const pre=prefix||"";
- const live=new Set();try{if(S.maid)live.add(S.maid.name);(typeof allServ==="function"?allServ():[]).forEach(s=>live.add(s.name));for(const k in (S.court||{}))live.add(S.court[k].name)}catch(e){}
- const ok=L.filter(n=>!D.has(n)&&!D.has(pre+n)&&!live.has(pre+n)&&!live.has(n));if(ok.length)return pick(ok);
- const ok2=L.filter(n=>!(not||[]).includes(n)&&!live.has(pre+n)&&!live.has(n));return pick(ok2.length?ok2:L)};
 /* the person in a post died: their requests and life-goal line end with them */
 window.npcRoleGone=function(k){try{if(!S||!k)return;if(S.rgL&&S.rgL[k])delete S.rgL[k];
  if(typeof q72!=="function")return;const q=q72();if(!q)return;const T=typeof T72I==="object"?T72I:{};
@@ -39,8 +34,6 @@ window.npcRoleGone=function(k){try{if(!S||!k)return;if(S.rgL&&S.rgL[k])delete S.
 /* children: a new child's figure variant avoids dead same-sex children's variants while one is free */
 (function(){if(typeof kidVar!=="function")return;const v0=kidVar;kidVar=function(k){const r=v0.apply(this,arguments);try{const all=allKids().map(([x])=>x).filter(x=>x!==k&&x.sex===k.sex&&x.fv);
  const live=new Set(all.filter(x=>x.alive).map(x=>x.fv)),dead=new Set(all.filter(x=>!x.alive).map(x=>x.fv));if(r&&dead.has(r)){const c=[1,2,3,4].filter(v=>!live.has(v)&&!dead.has(v));if(c.length)return pick(c)}}catch(e){}return r}})();
-/* new maids never take a dead maid's name (every newMaid caller: jmort, j8 flight, j42 new life) */
-(function(){if(typeof newMaid!=="function")return;const n0=newMaid;newMaid=function(name,loyal,age){try{if(S&&S.dnames&&S.dnames.includes(name))name=npcFreshName(MAIDS,[name])}catch(e){}return n0.call(this,name,loyal,age)}})();
 /* WHOLE FAMILY: a servant / maid who vanishes from every palace during a turn AND whose name the turn's text links to a death
    (beaten to death in Thận Hình ti, poisoned, any path outside jmort) is retired too. One who only moved palace, went back to the
    Nội vụ phủ pool, was married off or fled stays a living person: not retired (her face can come back with her). */
@@ -57,18 +50,18 @@ if(typeof monthTick==="function")window.monthTick=monthTick=watched(monthTick);
 /* a person with no portrait left whose fallback picture is a retired face shows the kit silhouette (img/kit/unknown-f|m), never the dead's face */
 (function(){const f0=fsrc;fsrc=function(fc,fb){const r=f0.apply(this,arguments);try{if(!fc&&fb&&S&&S.fdead&&S.fdead.length){const m=/^img\/(face-[^/]+)\.webp$/.exec(fb);
  if(m&&S.fdead.includes(m[1]))return (typeof KIT_DIR==="string"?KIT_DIR:"img/kit/")+(/maid|woman|mama|consort|th/.test(m[1])?"unknown-f":"unknown-m")+".webp"}}catch(e){}return r}})();
-/* r1 (whole family, names): new consorts (freshName → namesInUse) also avoid the j59 personal names of Phế phi họ Lý and the court officers and the
+/* r1 (whole family, names): new consorts (freshName → namesInUse) also avoid the j59 personal names of Phế phi họ Tần and the court officers and the
    names of the dead, so no two people share a given name (j61 masks a stranger's given name inside the other's: "Lý Đáp ứng ???") */
 (function(){if(typeof namesInUse!=="function")return;const n0=namesInUse;namesInUse=function(){const a=n0.apply(this,arguments);try{if(S){if(S.lcfPn)a.push(S.lcfPn);
  const C=S.court||{};for(const k in C)if(C[k]&&C[k].pn)a.push(C[k].pn);(S.dnames||[]).forEach(n=>{if(n&&String(n).split(" ").length>=3)a.push(n)})}}catch(e){}return a}})();
 /* old saves (and any start where Lý was named before the rivals): if her given name is a living consort's, she gets a fresh j59 name */
 window.lyNameFix=function(){try{if(!S||!S.lcfPn||typeof window.j59gen!=="function")return;const g=S.lcfPn.split(" ").slice(-2).join(" ");
- if((rivals||[]).some(v=>v&&v.name&&v.name!==S.lcfPn&&v.name.split(" ").length>=3&&v.name.endsWith(" "+g))){const o=S.lcfPn;delete S.lcfPn;S.lcfPn=window.j59gen(["Lý"],(window.J59N&&J59N.FAL)||[]);if(!S.lcfPn)S.lcfPn=o}}catch(e){}}
-/* ---------- Phế phi họ Lý ---------- */
+ if((rivals||[]).some(v=>v&&v.name&&v.name!==S.lcfPn&&v.name.split(" ").length>=3&&v.name.endsWith(" "+g))){const o=S.lcfPn;delete S.lcfPn;S.lcfPn=nmNew("f",{sur:"Tần"});if(!S.lcfPn)S.lcfPn=o}}catch(e){}}
+/* ---------- Phế phi họ Tần ---------- */
 window.lyDie=function(p,why){if(!p||p.dead)return "";p.dead=1;p.dY=S.year;const L=S.rgL&&S.rgL.ly;const cleared=p.cleared||(L&&L.done);
  /* a cold-palace death (the jmort accident texts — Nam Uyển, yến tiệc — do not fit a prisoner) */
  const how=pick(["lâm bệnh, không thuốc thang,","nhiễm phong hàn giữa đêm đông,","trượt chân bên giếng cạn trong viện,"]);
- const t=`Phế phi ${S.lcfPn||"họ Lý"} ${how} qua đời ở Trường Môn viện, thọ ${p.age} tuổi.`+(cleared?" Án oan năm xưa đã được rửa, bà nhắm mắt thanh thản.":L&&L.st?" Tâm nguyện rửa oan của bà chưa thành.":" Không ai đến nhận thi hài.");
+ const t=`Phế phi ${S.lcfPn||"họ Tần"} ${how} qua đời ở Trường Môn viện, thọ ${p.age} tuổi.`+(cleared?" Án oan năm xưa đã được rửa, bà nhắm mắt thanh thản.":L&&L.st?" Tâm nguyện rửa oan của bà chưa thành.":" Không ai đến nhận thi hài.");
  try{if(L&&!L.done)delete S.rgL.ly}catch(e){}
  return `<span class="r">${t}</span> `};
 /* she exists from the first day (so she ages and rolls a lifespan), on new games and old saves alike */

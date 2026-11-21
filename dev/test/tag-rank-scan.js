@@ -12,7 +12,7 @@ const {chromium}=require('playwright');const [,,URL,FLAG]=process.argv;const sle
  const rows=await p.evaluate(()=>{const L=[];const add=(g,w)=>{if(w)L.push([g,w])};add('player',S);add('emperor',S.emp);S.thO=S.thO||{};add('thai-hau',S.thO);const rv=rivals||[];rv.slice(0,4).forEach(v=>add(v.queen?'queen':'consort',v));
   (rv.flatMap(v=>v.kids||[]).concat(S.kids||[])).slice(0,3).forEach(k=>add('child',k));try{allServ().forEach(s=>add(s.eid?'staff':s.role==='maid'?'maid':'eunuch',s))}catch(e){}
   const C=S.court||{};['tq','ksp','ped','ty'].forEach(x=>add('court-'+x,C[x]));add('S.maid',S.maid);(S.men||[]).forEach(m=>add('man',m));
-  add('npc',{kind:'npc',name:'Quản sự Tân Giả khố',ini:'Quản',info:'Quản sự'});add('npc',{kind:'npc',name:'Phế phi họ Lý',ini:'Lý',info:'Phế phi'});add('npc',{kind:'npc',name:'Thầy dạy Thượng thư phòng',ini:'Thầy'});
+  add('npc',{kind:'npc',name:'Quản sự Tân Giả khố',ini:'Quản',info:'Quản sự'});add('npc',{kind:'npc',name:'Phế phi họ Tần',ini:'Tần',info:'Phế phi'});add('npc',{kind:'npc',name:'Thầy dạy Thượng thư phòng',ini:'Thầy'});
   add('npc',{__cap:'Tiểu Lý Tử',__role:'Thái giám',age:28,sex:'m'});
   const T=/^(tổng quản|thái giám|cung nữ|thái y|ma ma|cô cô|thị vệ|nữ quan|nhũ mẫu|nhạc sư|họa sư|vương gia|hoàng tử|công chúa|phế phi|quản sự)\b/i,OFF=/(phòng|viện|cung|điện|các|phủ|khố|đường|sảnh|môn|ty)$/i;
   return L.map(([g,w])=>{let r='',n='',cr='',cn='',err='';try{[r,n]=kszRankName(w)}catch(e){err='kszRankName '+e.message}
