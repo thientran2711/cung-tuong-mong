@@ -62,6 +62,9 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
   ck("14 ret with a split id: alt finds her case, it closes, one piece home",C14.st==="done"&&S.inv.length===1&&r14.loud,{st:C14.st,inv:S.inv.map(e=>[e.k,e.iu]),miss:CW.famMiss});
   reset();const q2=pc(P);const C14c=mkc(P,Object.assign({},q2));FA([{op:"ret",k:P,iu:99991,e:{k:P,iu:99991}}]);
   ck("14c ret whose ids all miss: the case of that kind the friend holds closes, one piece home",C14c.st==="done"&&S.inv.length===1,{st:C14c.st,inv:S.inv.map(e=>[e.k,e.iu])});
+  /* 15 a person carrying ANOTHER case's lo mark (the host's numbering) with a piece of another kind is not this case's holder */
+  reset();const u1=pc(P);const C15=mkc(P,Object.assign({},u1),"me");const other=Object.keys(IT).find(k=>k!==P&&loOk({k})&&ilDur({k}));S.inv.push({k:other,iu:++n,lo:C15.id});
+  const at0=C15.at,on0=CW.on;CW.on=true;const x15=loEntry(C15);CW.on=on0;ck("15 loEntry (co-op on): a piece of another kind with the same lo mark is no entry, case untouched",!x15&&C15.at===at0&&C15.e.iu===u1.iu,{at:C15.at,iu:C15.e.iu});
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}

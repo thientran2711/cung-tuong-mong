@@ -570,6 +570,12 @@ function famLostCase(o,f){if(!o.iu)return false;const c=(S.lost||[]).find(c=>c&&
  if(o.how==="lost"){const th=o.by!=null?RV(o.by):null;const fk=th?key(th):f?key(f):fp();Object.assign(c,{keep:1,by:fk,st:"held",at:fk})}else{c.st="done";c.end=wk();c.how="matdau"}
  try{if(typeof ilLog==="function"){ilLog(c.e,"lo"+c.id,"coop:"+((f&&f.id)||""),o.how==="lost"?"sang hảo hữu":"mất dấu bên hảo hữu");const I=typeof ilS==="function"?ilS():null;if(I&&I.at&&c.e.iu)delete I.at[c.e.iu]}}catch(z){}
  return true}
+/* E44b (COOP_SWAP seed 4242 w4: her case 1 «held» was read as host case 1's piece): the two seats number lost cases on their own (S.loSeq), and
+   the copies of the host's people on her seat carry HIS «lo» marks, so jlost loEntry (holder by c.at, else any consort's piece marked
+   lo === c.id) found another case's piece: her case took its id (census c.e.iu sync) and holder (c.at), and closed onto it (dup + vanish).
+   A piece of another kind is never that case's piece: no entry (c.at kept) */
+(function(){if(typeof loEntry!=="function")return;const f0=loEntry;loEntry=function(c){const at=c&&c.at;const x=f0.apply(this,arguments);
+ try{if(x&&CW.on&&c&&x.e){const k=(c.e&&c.e.k)||c.k;if(k&&x.e.k!==k){c.at=at;return null}}}catch(z){}return x};window.loEntry=loEntry})();
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
  const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
  const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f))famMiss(o,"not hers");return [o,e]}).filter(x=>x[1]);
