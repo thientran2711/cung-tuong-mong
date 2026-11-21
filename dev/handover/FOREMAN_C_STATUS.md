@@ -1632,3 +1632,4 @@ ROOT-B7 ~20:50Z: OWNER L2240 (pic M2227-08 HH): chest gap/sash looks slipped + v
 ROOT-B7 ~20:53Z: OWNER L2241: item F CANCELLED (she only asked; AI glitch) — no sash/vân kiên change. THUROOT9 told. Next Lượt 2242.
 ROOT-B7 ~20:55Z: OWNER L2242 angry: 'Tôi có kêu bạn sửa đâu mà bạn đi lanh chanh bạn sửa vậy trời.' LESSON: when she only ASKS (có…chưa? / có sửa gì không?), ANSWER ONLY — never order a change unless she says sửa/đổi/làm. Item F was cancelled before THUROOT9 touched files. Next Lượt 2243.
 ROOT-B7 ~20:58Z: THUROOT9 M2231-02..08 @272ba81 (keep_check PASS ×7); item E missing → asked to add. Send after fix.
+ROOT-B7 ~21:02Z: SENT L2244 M2231-02..08 (THUROOT9 @54bc8a7; keep_check sidecar PASS ×7; item E in; F cancelled). THUROOT9 idle (ctx ~14 %). Next Lượt 2245.
