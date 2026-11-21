@@ -394,7 +394,7 @@ function ptGLite(G){return(G||[]).map(g=>({k:g.k,k0:g.k0,n0:g.n0,kem:g.kem,lost:
 function ptGBack(L){/* the real pieces again (law 6c): by index when it still holds that piece, else the first pieces of that kind */const used=new Set();
  return(L||[]).map(g=>{const E=[];for(const i of g.E||[]){let e=i>=0?S.inv[i]:null;if(!e||e.k!==g.k||used.has(e))e=S.inv.find(x=>x&&x.k===g.k&&!used.has(x))||null;if(e){used.add(e);E.push(e)}}return Object.assign({},g,{E})})}
 (function(){try{if(typeof stipEvent!=="function")return;const s0=stipEvent;stipEvent=function(G,SK){const ev=s0.apply(this,arguments);try{if(!ptOn()||!ev||!Array.isArray(ev.opts)||!S.maid)return ev;const m=S.maid;
-  ev.opts=ev.opts.map(o=>{if(!o||o.n!==`Sai ${m.name} đi đòi`)return o;const why=ptLockWhy("mm:me");
+  ev.opts=ev.opts.map(o=>{if(!o||o.n!==`Sai ${m.name} đòi lại phần bị cắt xén`)return o;const why=ptLockWhy("mm:me");
    return Object.assign({},o,{x:ptX("ask",o.x)},why?{lock:true,x:why,go:()=>{}}:{go:()=>{ptSend({who:"mm:me",nm:m.name,kind:"ask",place:"nvp",a:{G:ptGLite(G),bac:SK.bac||0,sup:SK.sup?key(SK.sup):null},lbl:"đến Nội vụ phủ đòi phần"});if(ptRow("ask").o)spend(ptRow("ask").o)}})})}catch(e){ptErr("stipEvent",e)}return ev}}catch(e){ptErr("stip wire",e)}})();
 ptReg("ask",a=>{const m=S.maid;if(!m){return{ok:null}}const SK={bac:a.a.bac,sup:a.a.sup?byKey(a.a.sup):null};const od=stipAskOdds(m,SK);const eun=stipEunName();const st=stipSt(S);
  if(roll(od)){if(SK.bac)apply({bac:SK.bac});stipRestore(S,ptGBack(a.a.G));log(`${m.name} đến Nội vụ phủ đòi đủ phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`);return{ok:true,t:`${m.name} đi đòi trở về`}}

@@ -13,7 +13,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   window.__bot=1;Q.length=0;S.mg=0;const toB0=()=>{for(let i=0;i<12&&!((S.buoi||0)===0&&used===0);i++){Q.length=0;S.mg=0;try{nextBuoi()}catch(e){}Q.length=0}};
   const R=BAL.ptime.kinds;const land=k=>{const a=S.away.filter(x=>x.kind===k).pop();return a};
   /* 12 jstip */
-  E("stip",()=>{toB0();S.maid.loyal=80;S.maid.spyFor=null;const ev=stipEvent([],{bac:5,sup:null,why:"thử"});const op=ev.opts.find(x=>x.n===`Sai ${S.maid.name} đi đòi`);
+  E("stip",()=>{toB0();S.maid.loyal=80;S.maid.spyFor=null;const ev=stipEvent([],{bac:5,sup:null,why:"thử"});const op=ev.opts.find(x=>x.n===`Sai ${S.maid.name} đòi lại phần bị cắt xén`);
    const u0=used,b0=S.bac,l0=S.maid.loyal;op.go();const a=land("ask");const r={x:op.x,u:used-u0,away:!!PTIME.away("mm:me"),due:a&&a.due-ptNow()};spend(R.ask.n);r.back=!!(a&&a.back);r.rep=a&&a.rep&&a.rep.t;r.d=[S.bac-b0,S.maid.loyal-l0];return r});
   /* 13 jveil */
   E("veil",()=>{toB0();Q.length=0;S.bac=500;S.maid.loyal=90;const d=PEND.vlout({});const op=(d&&d.o||[]).find(x=>x.fx&&x.fx.bac<0);if(!op)return"no option";const ag=vlAgent(S);

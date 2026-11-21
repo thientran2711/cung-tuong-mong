@@ -39,7 +39,7 @@ CLS = [
  (r'^Sai cung nữ thân tín mua lén ngoài cung$', 'PARALLEL', 'buy · j83 illBuy maid route', [('jptime.js', r'illBuy=function'), ('jptime.js', r'ptReg\("buy"')]),
  (r'^Sai \$\{o\.m\.name\} đến Nội vụ phủ xin$', 'PARALLEL', 'clothes · jeitem eitReOpts (order = its Sức)', [('jptime.js', r'eitReOpts=function'), ('jptime.js', r'ptReg\("clothes"')]),
  (r'^Sai cung nữ dò la khẩu vị$', 'PARALLEL', 'taste · jrcp rcpAskQ maid → ptSend', [('jrcp.js', r'ptSend\(\{who:"mm:me".*run:"taste"'), ('jptime.js', r'ptReg\("taste"')]),
- (r'^Sai \$\{m\.name\} đi đòi$', 'PARALLEL', 'ask · jptime §12 (jstip stipEvent)', [('jptime.js', r'stipEvent=function'), ('jptime.js', r'ptReg\("ask"')]),
+ (r'^Sai \$\{m\.name\} đòi lại phần bị cắt xén$', 'PARALLEL', 'ask · jptime §12 (jstip stipEvent)', [('jptime.js', r'stipEvent=function'), ('jptime.js', r'ptReg\("ask"')]),
  (r'^Sai người mua lén ngoài cung$', 'PARALLEL', 'vlbuy · jptime §13 (jveil PEND.vlout)', [('jptime.js', r'PEND\.vlout=function'), ('jptime.js', r'ptReg\("vlbuy"')]),
  (r'^Sai tai mắt dò bên chủ hội$', 'PARALLEL', 'mktspy · jptime §14 (jmkt tsMkScoutOpts)', [('jptime.js', r'tsMkScoutOpts=function'), ('jptime.js', r'ptReg\("mktspy"')]),
  (r'^Truyền thái y$|^Mời thái y bắt mạch$', 'PARALLEL', 'summon · jptime §15 (illCards / courtAct bm / nausea notice)', [('jptime.js', r'c\.n==="Truyền thái y"'), ('jptime.js', r'Mời thái y bắt mạch'), ('jptime.js', r'ptReg\("thyPay"')]),
