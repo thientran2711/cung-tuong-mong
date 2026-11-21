@@ -801,3 +801,4 @@ kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! und
 | FOREMAN E #26 (opus; child of E #25, depth 7) | handover FOREMAN_E_STATUS | FOREMAN E #25 | session_01DgYSWmdwFouxeXFnpi6Nbb | RUNNING | 21/11 07:04Z |
 | quest-rows-2 re-merge (SONNET SMALL; #66; land FAIL jk2b.js conflict) | review/quest-rows-2; briefs/main90-quest-rows-remerge.md | MAIN CHÍNH 90 | (opening) | RUNNING | 21/11 07:05Z |
 | quest-rows-2 re-merge (SONNET SMALL; #66; land FAIL jk2b.js conflict) | review/quest-rows-2; briefs/main90-quest-rows-remerge.md | MAIN CHÍNH 90 | session_01Rc5AsKTU3gKXsto6MvXAze | RUNNING | 21/11 07:05Z |
+| maid-acts-a (OPUS; maid road act allowlist option A interim; successor of KY5r) | review/maid-acts-a; briefs/main90-maid-acts-a.md | MAIN CHÍNH 90 | (opening) | RUNNING | 21/11 07:15Z |
