@@ -13,15 +13,15 @@ carries the master common block B25, the store rank text, the F2 flower, the new
   D5 COLLAR CUT (flowing) sentence of the Hán set (t4 open5, 'wrap and belt' -> 'wrap and sash': t1–t3 have a sash)
   D6 CAPTION line (G31)
 DESIGN18 (owner L1577 via Foreman C #14, A39): INNER ROBE clause only: no crossed inner collar, straight horizontal top edge (no diagonal at the throat), same length budget (gate S01/M13 forbid more trims); LIMIT 9990->10000 (= check_store PROMPT_MAX).
-LADDER1 (owner L1590 DUYỆT via Foreman C #14, A39, files _v3): (1) OUT1 = master_common.OUTER_OUT clause in place of the DENSE sentence,
-collar edges fall down the front WITHOUT crossing ('cross high above the sash' out), COLLAR CUT 'the robe closes only by its wrap and sash' ->
-'the outer robe is never closed, wrapped or buttoned down the front' (ends the 'no wrap' vs 'closes by its wrap' contradiction);
+LADDER1 (owner L1590 + L1592 via Foreman C #14, A39, files _v3): (1) G40 = master_common.OUTER_IN clause in place of the DENSE sentence,
+COLLAR CUT 'the robe closes only by its wrap and sash' -> 'the outer robe is held in only by the sash' (ends the 'no wrap' vs 'closes by its wrap'
+contradiction; collar crossing above the sash kept = the L1577 liked t2 collar);
 (2) density = the approved common TIER_LOW words (the store G8 clause, already in); DENSE removed.
 Run from the repo root:  python3 dev/art/seasons4/make_han_xuan_t13.py   (writes the 3 files + prints lengths; gate = check_store + keep_check)."""
 import os, re, subprocess, sys
 D = os.path.dirname(os.path.abspath(__file__)); ART = os.path.dirname(D); ROOT = os.path.dirname(os.path.dirname(ART))
 sys.path.insert(0, ART); sys.path.insert(0, D)
-from master_common import B29_A_HEAVY, OUTER_OUT
+from master_common import B29_A_HEAVY, OUTER_IN
 # DENSE + CAP copied verbatim from make_han_bac.py (that script writes files at import, so it is not imported); asserted equal below
 DENSE = "the robe body densely embroidered ALL OVER (not only the borders) with many {sz} spring flowers spread over the whole garment, clearly more embroidery than any palace maid"
 CAP = '\nCAPTION: write this exact Vietnamese caption in LARGE bold letters at the top-left, on the plain background, never over her body: "{}"\n'
@@ -35,7 +35,7 @@ STORE_FABRIC = ("The FABRIC is thin, light, flowing silk and gauze with a soft s
                 "trails elegantly (thướt tha); the small embroidered motifs are stitched in fine gold thread.")
 HEAD = "OPEN-NECK LOOK: collar open OFF the neck to the shoulder points: bare neck and collarbones. "
 COLLAR = ("the collar is worn moderately OPEN: its two edges rest exactly ON the shoulder points, shoulders covered (never off the shoulder), "
-          "and fall softly down the front WITHOUT crossing, never a deep low V; INNER ROBE: opaque mint mist, NO crossed collar, its top edge "
+          "and curve down to cross high above the sash, never a deep low V; INNER ROBE: opaque mint mist, NO crossed collar, its top edge "
           "straight across below the collarbones; that edge edged by {inner} in ice blue and gold; all collar bands lie flat only along those edges; ")
 HAN = ("a NEW outfit, a Han-dynasty look in TWO visible layers, LONG garments only: a long floor-length straight-hem robe (zhiju) in ice blue over an inner "
        "robe in mint mist, the front edge falling straight down to an even hem (no wrap spiral, no curved wrap panel, never a short jacket); wide long sleeves "
@@ -64,7 +64,7 @@ CAPS = {1: "Mùa Xuân · Thiết kế thời Hán · Đáp ứng · Trực cư,
         2: "Mùa Xuân · Thiết kế thời Hán · Thường tại · Trực cư, cổ viền hai lớp hoa",
         3: "Mùa Xuân · Thiết kế thời Hán · Quý nhân · Trực cư, cổ viền thêu rộng"}
 HELD_END = "her secondary colour mint mist."
-COLLAR_CUT = (" COLLAR CUT (flowing): the collar lines are soft CURVES, never flat; the outer robe is never closed, wrapped or buttoned down the front, "
+COLLAR_CUT = (" COLLAR CUT (flowing): the collar lines are soft CURVES, never flat; the outer robe is held in only by the sash, never buttoned down the front, "
               "graceful (uyển chuyển), never boxy.")
 
 # TRIM (A38: only duplicated boilerplate, each stated elsewhere in the same prompt; the SAME list as DESIGN16's approved-draft trims and
@@ -88,7 +88,7 @@ def build(t):
     s = HEAD + s                                                            # D1
     s = sw(s, STORE_FABRIC, B29_A_HEAVY)                                    # D2
     m = list(re.finditer(r"a NEW outfit, .*?; " + HAIRCL, s)); assert len(m) == 1, ("store design", t)
-    design = COLLAR.format(inner=r["inner"]) + HAN.format(edge=r["edge"], g8=r["g8"], outer=OUTER_OUT, rest=r["rest"])
+    design = COLLAR.format(inner=r["inner"]) + HAN.format(edge=r["edge"], g8=r["g8"], outer=OUTER_IN, rest=r["rest"])
     s = s[:m[0].start()] + design + s[m[0].end():]                          # D3
     s = sw(s, HELD_END, HELD_END + COLLAR_CUT)                              # D5
     s = s.replace("ice blue", "peach-blossom pink").replace("#71B5D7", "#EB8186").replace("mint mist", "ivory white")   # D4

@@ -61,19 +61,16 @@ XUÂN HÁN (seasons4, latest t1–t3 _v2, t4 open5c, t5 open3c, t6 open5c, t7 op
 
 Open: sheet label t1 row B slightly clipped ("dải buộc ngực"). No commit of prompts.
 
-## JOB 2 — owner L1590 DUYỆT applied (0 gens, A39 only these 2 changes)
-Owner L1590: "Ok, áo ngoài của kiểu 1 là để ngoài hết cho 8 bậc rồi, ok, duyệt." + density = the common prompt.
-- **Rule G40** (rule.py add) OUTER ROBE OUTSIDE THE SASH, all 8 tiers; shared clause `master_common.OUTER_OUT`:
-  "the outer robe hangs OPEN and loose OUTSIDE the sash, girdle or ribbon band, straight down to the hem, never tucked in, never belted or tied under it, the sash, girdle or ribbon band tying ONLY the inner garment".
-- **H6 / H12** (rule.py set): L1590 ruling appended — t1–t3 embroidery = common TIER_LOW words only; make_han_bac.DENSE never on t1–t3.
-- **check_store OUT1** (check_text, every scope): FAIL = outer robe/garment/layer + tucked / under or inside the sash/girdle/belt; WARN = "closes only at/by … sash/belt" or "cross only LOW / high above (at) the sash". Tested: "outer robe is tucked into the sash" → FAIL.
-- **Thu** `dapung4/make_thu_L1590.py` → s62_t1_COMOI_v2e, s62_t2_COMOI_v2e, s62_t3_COMOI_v2f: DENSE sentence replaced by OUTER_OUT (same spot in the Outfit). t2 body untouched (DESIGN18 next).
-- **Xuân Hán** `seasons4/make_han_xuan_t13.py` → s62_t{1,2,3}_HAN_BAC_v3: DENSE → OUTER_OUT; collar "curve down to cross high above the sash" → "fall softly down the front WITHOUT crossing"; COLLAR CUT "the robe closes only by its wrap and sash" → "the outer robe is never closed, wrapped or buttoned down the front" (contradiction gone). Lengths 9501 / 9707 / 10000.
-- Gates: check_store --scope tpN --age a22 APPROVED+STORE PASS ×6 (no OUT1 warn); keep_check sidecars ×6 PASS (cuts = exactly the DENSE pieces + the 2 collar phrases); keep_check --all 244 PASS.
+## JOB 2 — owner L1590 (density) + L1592 (G40 outer robe HELD IN by the sash; L1592 reversed L1590's "outside") — 0 gens, A39
+- An "outside" version was built first and never pushed; it was replaced by this one after Foreman C's L1592 message (rebase kept Foreman's G40 text).
+- Shared clause `master_common.OUTER_IN`: "the outer robe's open front edges fall from the shoulders and are HELD IN by the sash, girdle or ribbon band tied OVER the outer robe, so the outer robe hugs the body, never a loose open coat hanging outside the sash".
+- Rules: G40 (Foreman, L1592) + "WIRED" note; H6 / H12 L1590 ruling appended (t1–t3 embroidery = common TIER_LOW words only; DENSE never on t1–t3).
+- check_store OUT1 (every scope): FAIL = outer robe hangs/falls/worn outside the sash; WARN = "outer robe worn OPEN at the front" without OUTER_IN. Tested FAIL path. --self: same 2 old PROOF MISMATCH (S14, S19) as before my change.
+- Thu `dapung4/make_thu_L1590.py` → s62_t1_COMOI_v2e, s62_t2_COMOI_v2e, s62_t3_COMOI_v2f: DENSE → OUTER_IN (same spot). t2 BODY untouched (DESIGN18 = mẫu C next).
+- Xuân Hán `seasons4/make_han_xuan_t13.py` → s62_t{1,2,3}_HAN_BAC_v3: DENSE → OUTER_IN; COLLAR CUT "the robe closes only by its wrap and sash" → "the outer robe is held in only by the sash" (contradiction gone); collar crossing above the sash kept (L1577 liked). 9476 / 9682 / 9975 chars (A38 trim list, 8 items).
+- Gates: check_store --scope tpN --age a22 STORE+APPROVED PASS ×6, no OUT1 warn; keep_check sidecars ×6 (cuts = DENSE pieces + the closes-by-wrap phrase); keep_check --all 244 PASS.
 
-### Still breaking G40 (LIST ONLY, next job)
-- thu t4 `thu_comoi/s62_t4_THU_COMOIc` + check_store **S13_COMOI** gate sentence: "the outer robe closes only at the sash" (WARN). Changing it needs the S13_COMOI gate form changed too.
-- xuân Hán t4–t8 (`seasons4/s62_t4_HAN_BAC_open5c`, `t5_open3c`, `t6_open5c`, `t7_open8c`, `t8_open11c`): "edges … cross only LOW at the sash" (+ t4 "closes only by its wrap and belt") = wrap robe closed at the sash → WARN ×5.
-- đông `dong_hientai/s62_t4_DONG_HIENTAI*.txt` (9 files): "closes only at the sash".
-- thu t5–t8: no tuck wording, pictures already outside; they do not carry OUTER_OUT yet (add for "same sentence for everyone" when next touched).
-- 51 .txt files in total hit OUT1 (old versions in seasons4 / thu_comoi / dong_hientai); scan: `out1_fails` in check_store.py.
+### Next job (LIST only) — G40 breakers
+- thu t4–t8 (`thu_comoi/s62_t4_THU_COMOIc`, `t5_COMOIc`, `t6_COMOId`, `t7_v8c`, `t8_v10c`): "outer robe worn OPEN at the front … straight down each side", no held-in clause; pictures show the robe outside → OUT1 WARN ×5. t4 also has the S13_COMOI "closes only at the sash" (fits G40, keep).
+- xuân Hán t4–t8 (open5c/open3c/open5c/open8c/open11c): wrap crossing low at the sash = already held in → OK.
+- đông dong_hientai t4 "closes only at the sash" = OK under G40.

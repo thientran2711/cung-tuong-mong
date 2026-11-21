@@ -1026,14 +1026,14 @@ def walk_still_fails(text):
 
 
 def out1_fails(text):
-    """G40 OUT1 (owner L1590 DUYỆT): the OUTER robe hangs OPEN OUTSIDE the sash/girdle on all 8 tiers. -> (fails, warns)."""
+    """G40 OUT1 (owner L1592, corrects L1590): the OUTER robe is HELD IN by the sash/girdle tied over it on all 8 tiers, never a loose open coat
+    hanging outside. -> (fails, warns)."""
     f, w = [], []
-    m = re.search(r"(outer (robe|garment|layer)|upper garment|over-?robe)[^.;]{0,120}\b(tucked|tuck(s|ed)? (in|into)|under the (sash|girdle|belt|ribbon)|inside the (sash|girdle|belt)|belted (in|at))", text, re.I)
-    if m and not re.search(r"never (tucked|belted)", m.group(0), re.I):
-        f.append(("OUT1", "OUTER TUCKED", f"outer layer tucked/belted (G40, owner L1590: outer robe OUTSIDE the sash, all 8 tiers): …{m.group(0)[:160]}…"))
-    for rx in (r"closes only (at|by)[^.;]{0,30}\b(sash|belt|girdle)", r"cross (only LOW|high above) (at )?the sash"):
-        m = re.search(rx, text, re.I)
-        if m: w.append(("OUT1", "OUTER CLOSED AT SASH?", f"wording may close/tuck the outer robe at the sash (G40, L1590): …{m.group(0)}…"))
+    m = re.search(r"(outer (robe|garment|layer)|upper garment|over-?robe)[^.;]{0,120}\b(hangs?|hanging|falls?|worn)[^.;]{0,40}\b(outside|over) the (sash|girdle|belt|ribbon band)", text, re.I)
+    if m and not re.search(r"never a loose open coat", m.group(0), re.I):
+        f.append(("OUT1", "OUTER OUTSIDE", f"outer layer hangs outside the sash (G40, owner L1592: held in by the sash, all 8 tiers): …{m.group(0)[:160]}…"))
+    if re.search(r"outer robe worn OPEN at the front", text) and not re.search(r"HELD IN by the sash", text):
+        w.append(("OUT1", "OUTER NOT HELD IN?", "open outer robe without the G40 clause master_common.OUTER_IN (owner L1592: held in by the sash, all 8 tiers)"))
     return f, w
 
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None):

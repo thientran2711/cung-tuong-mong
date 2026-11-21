@@ -1,6 +1,6 @@
 base: dev/art/dapung4/s62_t1_COMOI_v2d.txt
-allow: the robe body densely embroidered ALL OVER  # owner L1590 DUYỆT via Foreman C #14 (LADDER1): G40 outer robe OUTSIDE the sash (master_common.OUTER_OUT) + t1–t3 density back to common TIER_LOW (DENSE out, H6/H12 ruling)
-allow: not only the borders  # owner L1590 DUYỆT via Foreman C #14 (LADDER1): G40 outer robe OUTSIDE the sash (master_common.OUTER_OUT) + t1–t3 density back to common TIER_LOW (DENSE out, H6/H12 ruling)
-allow: with many small-size spring flowers spread over the whole garment  # owner L1590 DUYỆT via Foreman C #14 (LADDER1): G40 outer robe OUTSIDE the sash (master_common.OUTER_OUT) + t1–t3 density back to common TIER_LOW (DENSE out, H6/H12 ruling)
-allow: clearly more embroidery than any palace maid  # owner L1590 DUYỆT via Foreman C #14 (LADDER1): G40 outer robe OUTSIDE the sash (master_common.OUTER_OUT) + t1–t3 density back to common TIER_LOW (DENSE out, H6/H12 ruling)
-allow: lilac sprays in gold and blush  # owner L1590 DUYỆT via Foreman C #14 (LADDER1): G40 outer robe OUTSIDE the sash (master_common.OUTER_OUT) + t1–t3 density back to common TIER_LOW (DENSE out, H6/H12 ruling)
+allow: the robe body densely embroidered ALL OVER  # owner L1590 (t1–t3 density = common TIER_LOW, DENSE out) + L1592 G40 (outer robe held in by the sash, master_common.OUTER_IN) via Foreman C #14 (LADDER1)
+allow: not only the borders  # owner L1590 (t1–t3 density = common TIER_LOW, DENSE out) + L1592 G40 (outer robe held in by the sash, master_common.OUTER_IN) via Foreman C #14 (LADDER1)
+allow: with many small-size spring flowers spread over the whole garment  # owner L1590 (t1–t3 density = common TIER_LOW, DENSE out) + L1592 G40 (outer robe held in by the sash, master_common.OUTER_IN) via Foreman C #14 (LADDER1)
+allow: clearly more embroidery than any palace maid  # owner L1590 (t1–t3 density = common TIER_LOW, DENSE out) + L1592 G40 (outer robe held in by the sash, master_common.OUTER_IN) via Foreman C #14 (LADDER1)
+allow: lilac sprays in gold and blush  # owner L1590 (t1–t3 density = common TIER_LOW, DENSE out) + L1592 G40 (outer robe held in by the sash, master_common.OUTER_IN) via Foreman C #14 (LADDER1)
