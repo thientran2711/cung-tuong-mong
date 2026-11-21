@@ -3372,3 +3372,5 @@
 {"id": "fHz8PhrCDY", "prompt": "dev/art/thu_comoi/s62_t1_THU_fix_L1834.txt", "mode": "gpt-2-6", "res": "1k", "quality": "low", "seed": 7172, "refs": ["nVsrRMPYQD"], "cr": 55, "why": "#24 A49 PALBACH1 sample", "by": "VE3"}
 {"id": "jUobW1FLD0", "prompt": "dev/art/thu_comoi/s62_t2_THU_fix_L1834.txt", "mode": "gpt-2-6", "res": "1k", "quality": "low", "seed": 7172, "refs": ["nVsrRMPYQD"], "cr": 55, "why": "#24 A49 PALBACH1 sample", "by": "VE3"}
 {"id": "DoOYrVxpcl", "prompt": "dev/art/thu_comoi/s62_t3_THU_fix_L1834.txt", "mode": "gpt-2-6", "res": "1k", "quality": "low", "seed": 7172, "refs": ["nVsrRMPYQD"], "cr": 55, "why": "#24 A49 PALBACH1 sample", "by": "VE3"}
+{"id": "u5Wm60bQLD", "prompt": "dev/art/thu_comoi/s62_t5_THU_fix_L1833.txt", "mode": "gpt-2-6", "res": "1k", "quality": "low", "seed": 7172, "refs": ["nVsrRMPYQD"], "cr": 55, "why": "#24 via REVERT2 THU t5 L1833 sample (gate waiver B26/M06)", "by": "VE5"}
+{"id": "BhNVgiDoQR", "prompt": "dev/art/thu_comoi/s62_t6_THU_fix_L1833.txt", "mode": "gpt-2-6", "res": "1k", "quality": "low", "seed": 7172, "refs": ["nVsrRMPYQD", "TdwDfOyVNR"], "cr": 55, "why": "#24 via REVERT2 THU t6 L1833 sample", "by": "VE5"}

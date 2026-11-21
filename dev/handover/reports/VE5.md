@@ -1,3 +1,6 @@
 ## Han LADDER6 t2+t8 (L1832) — VE5, depth unchecked, ctx ~12 %
 Thu t7/t8 job cancelled by #23 (0 gens). LADDER6: gate = LADDER5 waivers only. t2 kseQG8Z16B, t8 KLpuAI0kqp, gpt-2-6 1k low 9:16 seed 7172, 110 cr. Sheet dev/handover/review-sheets/han_ladder6_t2_t8_L1832.png.
 Faults: t2 held item reads as a round pale-jade fan/mirror on a handle, not a deep pellet drum with pellets; collar V wider, bands read as pink + 2 ivory but thin. t8 not three-quarter (near frontal, same as L5); shoulder bead yoke is gone (flat, no pearl fringe), plum collar band barely visible, three bands not clearly separate; fan OK.
+## THU t5+t6 (L1833) — VE5 ctx ~18 %
+t5 u5Wm60bQLD (ref nVsrRMPYQD; gate fails only B26/M06 = waiver), t6 BhNVgiDoQR (refs nVsrRMPYQD+TdwDfOyVNR; gate PASS). gpt-2-6 1k low 9:16 seed 7172, 110 cr. Sheet dev/handover/review-sheets/thu_t5_t6_L1833.png.
+Looked: t5 vân kiên cloud collar with scalloped edge + small pearl net + short pearl strand, sheer snow-violet shawl with gold edge, square collar band OK. Faults: hair flower reads as a cluster of 2-3 hollyhock blooms (law: ONE); red tassel on the letter. t6 two short soft capes on shoulders, pearl-edged, OK; thick violet shawl OK; yellow inner panel+sash OK; one camellia OK; ball is peach-pink with pearl strands, jade tassels not clearly visible; jade pendants hang over the sash, fine.
