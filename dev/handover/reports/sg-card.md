@@ -176,3 +176,43 @@ TODO (successor):
 4. Gates: scan, quickcheck, old-save load, coop-e2e, LIVE-revert audit (merge newest origin/main; deepen first), Fold 755x1000 + iPad 1180x820 shots
    of 2–3 fixed cards with a visible number (scratch / CDN img/_review/sg-card, never git), before/after table here, then «SẴN SÀNG KIỂM <sha>» r2.
 Report to Foreman D #16 session_01964izEETBrWc48AZ1jsSvM + reviewer session_01964izEETgRxuNCdo5Vn7U2.
+
+## SG-CARD r3 — 21/11 ~13:55Z · depth 8 · START_CTX ~4 % · READY FOR REVIEW
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims SG-CARD (r1 DpmefTHJ → r2 CCuc9zLt → r3 EfJv1yRs) | main none | review/* review/sg-card 587ec407, review/kit-opt-sg 64b61d37 (merged) | archive 0
+Branch review/sg-card @ e73cdf8f81a8d4ef9e307760cb143211dde23a66 (on 587ec407; merges kit-opt-sg 64b61d37 + LIVE ee02e8c0). Worktree /home/user/wt/sgc3.
+### Done
+1. Runtime scan RUN. dev/test/sg-card-scan.js now serves a built worktree from disk inside Playwright (`node dev/test/sg-card-scan.js <dir>`,
+   no http server — the classifier block is gone); static pass also alone (`--static-only`, no browser). Sanity of the r2 log/direct passes:
+   kmEmpAct gate opened in the test (thành + hỏng run), festival «she wins» case (base contest), NPC contest winner «… đứng đầu (Sủng +N)» read as
+   the winner's; on 7786935c the passes catch the old faults (table below) → they work.
+   Real bug found by the run: j1 sgRule read `window.BAL` (BAL is a const) → every {sg:…}/{sgRaw:…} rule text (arts tiers, thơ) printed «Sủng 0». Fixed.
+   j1 sgNow: sgStat/sgRange print the number as written before a game exists (a card getter read at load — jaudit ban-chết pass — crashed the build).
+2. MERGED review/kit-opt-sg 64b61d37. ONE rewrite = sgTxt (kitParse): joptsg.js + its assemble line dropped (it double-scaled 4→5→7);
+   kit-opt-sg.js cases folded into the scan unit block (optLine/dilLine × 3 traits: hers scaled once, «nàng Sủng -5» / «Hoàn Bích Sủng -15» raw, o.x kept, real j7 card == apply).
+3. j34:32 «Danh -6, Sủng -8» → BAL.eff.j34.danhSabotage + sgStat(sungSabotage). Static pass: new TYPED class = a card's Sủng written as a digit → FAIL.
+   It found 4 more, all fixed card + apply → BAL: j25 kid greet (sucKidAct, fondKidAct, sungKidAct), j30 ly gián fail (sungLyFail), j53 «cử Đại học sĩ»
+   (sungFav), j8 A frame + j17 AOUT.frame (frameDanh/frameTam/frameFailDanh/frameFailSung).
+4. Core-gate fixes (r2 left them red): g1-text j17 AOUT rumor/accuse/vp typed Danh → BAL.eff.j8.rumorDanh/accuseDanh/accuseFailDanh/vpFailDanh (+ j8 apply);
+   g1-bind j71 tribute contest → win7() = the one winner gain, applied and printed (card + results); g1-guard BAL.cut.summonSung/An [1,2,3,4] arrays →
+   one band table BAL.cut.summonGain; G2 rules-one-source night card: expected the RAW nightGain, the card draws sg(nightGain) (what nightFx applies)
+   with the SG_NB marker → test now expects sg(…) and accepts the marker.
+### Before / after (scan on 7786935c vs e73cdf8f, same r3 scan script)
+| pass | before 7786935c | after e73cdf8f |
+|---|---|---|
+| option walk SG family (card ≠ applied only with a trait) | 6 (incl. LOG adStroll «Đánh đàn chờ ngự giá» log 7 / applied 9·5·6) | 0 |
+| direct: empTeaCard / kmEmpAct ky / walk / visAfter / festival she-wins | 2/3 · 4/5 · 2/3 · 3/4 · 8/10 (nồng nàn printed/applied) | 3/3 · 5/5 · 3/3 · 4/4 · 10/10 |
+| unit (sgTxt / ranges / helpers / kit-opt-sg cases) | FAIL 6 | all pass |
+| static raw «Sủng ±» | TYPED 12 · CHECK 98 · RANGE 2 | TYPED 0 · CHECK 0 · RANGE 0 (CARD 57 · VALUE 24 · NPC 7 · OK 23) |
+"other" rows (≠ even with no trait, not this family, unchanged): 10 — night1/vnight/empnight «Thắp đèn» (nightFx applies later), night2 «Xin ân cho gia đình».
+### Gates on e73cdf8f
+- sg-card-scan PASS · core gates PASS (one-core-guard · rules-one-source · kit-conform · coop-one-world · hooks 7)
+- quickcheck: run 1 FAIL only on perf longTaskMaxMs 5086 > 5000 (runs 5705/5086/2427 — noise); run 2 QUICKCHECK PASS · old save from live loads + plays a buổi · render 238/228, tab 495/472, buổi 1337/1074
+- coop-e2e 94/94 (host Fold + guest iPad; drawn Sủng = sg of the one shared S.emp.traits — nothing new synced or stored)
+- LIVE-revert audit: merge of origin/main ee02e8c0 — 0 main-only files differ from main; 6 overlap files, 0 main-added lines missing.
+- Shots (scratch only, never git): /tmp/claude-0/…/scratchpad/shots/{fold,ipad}-cards.png (+ acttab): Hoàng thượng nồng nàn, real AOUT/ACT/kmEmpLine text drawn by
+  the kit card: Vu oan bại Sủng -8 → -10, Ly gián bại -4 → -5 («Sủng ta»), Xin hầu cờ «Sủng +3 đến +5» (2..4), dạo vườn +3 (2); NPC «nàng ta Sủng -10» raw.
+  Note: event choices (pid/ev) hide outcome numbers by design (words-only hint), so the numbers are seen on act/talk cards.
+### For the foreman (not this family, listed only)
+- jaudit aaDeathTxt «Danh -10, Sủng -10» typed (jaudit is excluded from the static pass); j34 «vòng Tài nghệ +1,5» vs BAL.eff.j34.meGo 1 (shown ≠ applied?);
+  j17 AOUT ksab/pond «Danh -10», spy «Tâm cơ +2» typed; j25 kid greet card «Sức» now from BAL.
+SẴN SÀNG KIỂM e73cdf8f81a8d4ef9e307760cb143211dde23a66 (review/sg-card)
