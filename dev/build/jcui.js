@@ -67,7 +67,10 @@ window.kcuHonorRows=function(n){const H=(typeof S!=="undefined"&&S&&S.honors)||[
 .kg82.kg-idle .kghud{display:none}
 .kgrv{max-height:clamp(120px,calc(30*var(--kvh,1dvh)),260px);overflow-y:auto;overscroll-behavior:contain;margin:0 0 4px;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:#fffdf8;padding:0 6px}
 .kgrv .kfacts{margin:0}
-.kg82 .kg82act{position:sticky;bottom:0;background:linear-gradient(#fffaf000,var(--k-card) 22%);padding-top:10px;margin-bottom:0;z-index:2}
+/* kit-kg82-stack (owner Fold shot «Thử tay: Tài nghệ các môn»): EVERY .kg82act used to be sticky at the bottom, so a screen with several of them (a button, a heading, a 31-button grid, the copy button) pinned them all to the same bottom edge and the grid was drawn OVER the rows / heading / button above it.
+   Rule: only the LAST .kg82act of a screen is the sticky bottom bar, and only on a screen that has no grid block (a .kg82act with 4+ buttons, e.g. the list of 31 kinds) — a screen with a grid scrolls as ONE column, nothing is pinned over it; every other block stacks in the normal flow and takes its own height. */
+.kg82 .kg82act{position:relative;margin-bottom:0}
+.kg82:not(:has(.kg82act > button:nth-child(4))) .kg82act:not(:has(~ .kg82act)){position:sticky;bottom:0;background:linear-gradient(#fffaf000,var(--k-card) 22%);padding-top:10px;z-index:2}
 /* kv3:.kv1 */:where(.kv1) .kgame .kgbody.kgpic-on{display:block;overflow:visible}:where(.kv1) .kgpic{margin:8px 10px 0;min-height:0;height:104px}:where(.kv1) .kgpic img{object-position:50% 55%}
  :where(.kv1) .kg82:not(.kg-idle) .kgpic{display:none}:where(.kv1) .kginfo{max-height:none;overflow:visible}:where(.kv1) #ov .mg.kg82{overflow-y:auto}:where(.kv1) .kgrv{max-height:clamp(110px,calc(26*var(--kvh,1dvh)),220px)}
 
