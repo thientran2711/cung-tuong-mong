@@ -1303,3 +1303,4 @@ CURRENT FOREMAN C: #27 session_01D3E3NaDamfSozkn47q9kMK · depth 8 (LIMIT, canno
 #27 ~09:17Z: FACEPAGE1 L1938 done (v2 same URLs; m09, c17 c23 c29 hidden as Sắc sảo; group filter tabs). OWNER L1939 (in #26 chat): Tang thô sử boring → HADUONG2 deep research + 3 VN options to #27 before any drawing. Next Lượt 1943.
 #27 ~09:19Z: HHCOL2: t7 pendant = prompt words 'gem tassels' on flute; fixed t7 L1924b @fbe8719 (needs owner yes to redraw). NGOCBOI1 ordered G57b sweep (tassel words + regex). Next Lượt 1944.
 #27 ~09:20Z: OWNER L1940 (#26 chat): higher rank = thicker/richer fabric, not see-through gauze (Võ Tắc Thiên drama); wants history-expert research → HADUONG2 rank→fabric table (by #26). Next Lượt 1945.
+#27 ~09:22Z: SENT L1946 HADUONG2 Tang maid research (dev/art/research_tang_maids_L1939.md @ef95bf0) + 3 thô sử options A/B/C (A recommended). Waiting owner choice; rank→fabric table (L1940) still coming. Next Lượt 1947.
