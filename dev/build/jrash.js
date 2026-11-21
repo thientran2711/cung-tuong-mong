@@ -24,7 +24,7 @@ window.rshOf=rshOf;
 function rashNote(p){const r=rshOf(p);return r?[`Mặt nổi mẩn (${r.name}) · ${r.veiled?"đang che":"chưa che"}, Sắc mất ${r.lost}`,r.veiled?"n":"no"]:["Mặt lành, chưa cần đeo","ok"]}
 /* weekly healing, the same rule for everyone */
 function rashHeal(p){const r=p&&p.rash;if(!r)return;const me=p===S;let fast=false;
- if(r.tr>0){r.tr--;fast=true}else if(me?(S.arts&&S.arts.y>=2):((p.arts&&p.arts.y>=2)||roll(RASH.npcMed)))fast=true;
+ if(r.tr>0){r.tr--;fast=true}else if(me?(S.arts&&S.arts.y>=yCareT()):((p.arts&&p.arts.y>=yCareT())||roll(RASH.npcMed)))fast=true;
  if(fast)r.until--;if(wk()>=r.until){p.rash=null;if(me)log("Mẩn đỏ trên mặt ngươi đã lặn hết.");else if(fxSeen(p))log(`${fxName(p)} đã khỏi nổi mẩn.`)}}
 (function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&w0!=null&&wk()!==w0){rashHeal(S);for(const v of KIT_FACEFX.everyone())if(v&&v!==S&&v.rash)rashHeal(v);
   if(S.rash&&!Q.some(m=>m.pid==="rashcard")&&(typeof evCooldown!=="function"||evCooldown("rashcard",RASH.cd))){const d=mkP("rashcard",{});if(d){Q.push({t:"Nổi mẩn",h:d.t,opts:d.o,who:pMe(),pid:d.pid,pp:d.pp});if($("modal").hidden)showModal()}}}}catch(x){console.error(x)}return r}})();

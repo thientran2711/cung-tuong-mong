@@ -25,6 +25,9 @@ function crsSet(lv,pt,k,pts){const T=BAL.art.tier;pts=Math.max(0,Math.min(100,pt
 function artNm(l){return BAL.art.nm[Math.max(0,Math.min(BAL.art.nm.length-1,l|0))]}
 /* the ONE odds bonus of a course; artOE: when the Emperor himself judges (his trait Trọng tài / Mê sắc prizes it: × BAL.art.emp) */
 function artO(p,k){const l=((p&&p.arts)||{})[k]||0;return BAL.art.odds[Math.min(l,BAL.art.odds.length-1)]||0}
+/* Y thuật CARE family (review/balance-final): the Y bậc that counts as care (BAL.mort.life.careYt) and the care odds bonus (artO + BAL.art.care once at it) */
+function yCareT(){return (BAL.mort&&BAL.mort.life&&BAL.mort.life.careYt)||1}
+function careY(p){const l=((p&&p.arts)||{}).y||0;return artO(p,"y")+(l>=yCareT()?(BAL.art.care||0):0)}
 function artOE(p,k){let m=1;try{if((["cam","ky","thi","hoa"].includes(k)&&has("trongtai"))||(k==="vu"&&has("mesac")))m=BAL.art.emp}catch(e){}return Math.round(artO(p,k)*m)}
 function artFee(l){const F=BAL.art.fee;return F[0]+(l|0)*F[1]}
 /* the art a person shows the Emperor on her night (bestArt in j85 for her: no Thêu/Nấu, his trait doubles what he prizes): the same pick for an NPC */
@@ -96,5 +99,13 @@ function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let 
  {const Y=ARTFX.y,cure="tự bào chế thuốc an thai; chữa bệnh cho con: Sức khỏe con +30",gi=BAL.ag.par3.anthai.self.y-1;/* the gate the LIVE readers use (BAL.ag.par3.anthai.self.y = BAL.ag.cx2.kidHeal.y) */const at=Y.findIndex(t=>t.includes(cure));
   if(at>=0&&at!==gi&&Y[gi]){Y[at]=Y[at].replace(" · "+cure,"");Y[gi]+=" · "+cure}}
  for(const k of ["theu","nau"])if(ARTFX[k])ARTFX[k][0]=ARTFX[k][0].replace(/phẩm \+\d+ mỗi bậc \(thang 100\)/,`phẩm theo điểm môn, Tông sư +${Math.round(100*BAL.art.fx.q)} (thang 100)`);
+ /* Y thuật care family (review/balance-final): «nhận ra độc» sits at BAL.mort.life.careYt; the course's short line says it */
+ {const Y=ARTFX.y,mv=(re,gi)=>{const at=Y.findIndex(t=>re.test(t));if(at<0||at===gi||!Y[gi])return;const m=Y[at].match(new RegExp(" · ("+re.source+".*?)(?= · |$)"));if(!m)return;Y[at]=Y[at].replace(" · "+m[1],"");Y[gi]+=" · "+m[1]};
+  mv(/nhận ra độc/,yCareT()-1);
+  const a=ARTS.find(x=>x.k==="y");if(a&&a.u)a.u=a.u.replace(/^Bậc \d+: nhận ra độc/,`Bậc ${yCareT()}: nhận ra độc`)}
+ /* the deck art cards open at BAL.deck[k].lv (review/balance-2 r2): the «mở …» line sits at that bậc, the course's short line says that bậc */
+ for(const k of ["cam","vu","ky"]){const X=ARTFX[k],gi=BAL.deck[k].lv-1;const at=X?X.findIndex(t=>/ · mở «/.test(t)):-1;
+  if(at>=0&&at!==gi&&X[gi]){const m=X[at].match(/ · (mở «.*)$/);X[at]=X[at].replace(" · "+m[1],"");X[gi]+=" · "+m[1]}
+  const a=ARTS.find(x=>x.k===k);if(a&&a.u)a.u=a.u.replace(/^Bậc \d+/,`Bậc ${BAL.deck[k].lv}`)}
  for(const k of ["dung","ngon"])if(VIRFX[k])VIRFX[k].forEach((s,i,arr)=>arr[i]=s.replace(/(\(|thỉnh an |tố giác )\+(3|6|9|12|15)(?!\d)/,(m,a)=>`${a}+${O[i+1]}`));
 }catch(e){console.error("artfx text",e)}})();

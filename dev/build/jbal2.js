@@ -163,7 +163,7 @@ Object.assign(BAL,{dis:{n:[1,2],aff:4,sung:1,refuse:35,refAff:2,refSung:1,talk:2
    fate (Emperor dies, her son not the heir): phiRank+ or a daughter → Thái phi; a son → theo con ra phủ; childless: rank ≤ homeRank, age < homeAge → về quê (homeP %),
         else xuất gia; childless favourite (Sủng ≥ tuanSung) faces tuẫn táng (tuanP %), averted by Đức ≥ tuanDuc or Thái hậu ≥ tuanTh */
 BAL.mort={on:1,playerFloorYears:0,
- life:{show:0,care:1,careAdd:1,careMax:3,cureTy:40,careYt:2,cureOther:20,cureSuc:5,careSuc:70,careP:12,careLapse:40,careIll:15,floorMe:0,floorEmp:0,minMo:3,
+ life:{show:0,care:1,careAdd:1,careMax:3,cureTy:40,careYt:1,cureOther:20,cureSuc:5,careSuc:70,careP:12,careLapse:40,careIll:15,floorMe:0,floorEmp:0,minMo:3,
   dice:{adult:{mean:45,sd:15,lo:15,hi:85},me:"adult",emp:"adult",
         kid:{risk:12,early:[[1,3,5],[3,6,3],[6,10,2]],adult:"adult"}}},
  oldFloor:0,thIllKeep:30,sudden:15,omen:[2,6],omenSt:[1,3],oldAge:55,thDanh:5,maidLoy:40,repl:{young:[22,8],adult:[40,10]},pre:{mo:12,ill:6,suc:2,omenSuc:3},acc:{me:.05,npc:.08,emp:.15},oddP:30,
@@ -306,7 +306,7 @@ BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timin
    lãnh cung); fatherBook: j4 thầy đồ road "Xin khắc in sách của cha"; thdBook: j97 rare thd_sach; srvWed: j42 servant wedding offer;
    kcVihanh / kcR5: jkc outside-palace rare endings. succN.b* = Thái hậu buông rèm (p b), c* = Nhiếp chính (p c), th*: Thái hậu
    support / opposition, npc* = an NPC dowager's claim, rareCDanh: the rare end check of succRareOK. */
-Object.assign(BAL,{danhG:{forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
+Object.assign(BAL,{danhG:{srvRise:.2,/* review/balance-2: share of a serving maid's Danh kept when she is raised to Đáp ứng (j42 srvRise) */forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
  charity:{khac:1,bac:35,duc:3,danh:5},/* "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; two doors: Tài nghệ · Tứ đức button + Hành sự card jact adCharityCard, one lock S.charM). danh-p1 (owner P1 16/11 12:55Z): bac 20→35, danh 1→5 */
  succN:{bAge:BAL.age.reign/* one-core: same concept as age.reign */,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
 /* CLOSE MAID BY ORIGIN (jcmaid.js, D58 review/close-maid, owner approved table v2 16/11). % per month unless named; loy = loyalty range at
@@ -529,7 +529,7 @@ BAL.start={
    prizes it (Trọng tài: Cầm/Kỳ/Thi/Họa · Mê sắc: Vũ); side = share of it for passive weights (lật thẻ, mưu kế). stUp = Tài (Vũ/Y: Sắc) at each new
    bậc; danh = Danh at bậc 3 / 5. Old saves keep their bậc (points = floor of that bậc + the old progress share). */
 BAL.art={tier:[0,10,25,45,70,100],nm:["Chưa thạo","Nhập môn","Thuần thục","Tinh thông","Xuất chúng","Tông sư"],
- gain:[1.2,1,.8,.6,.4],odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:2,danh:{3:3,5:6},
+ gain:[1.2,1,.8,.6,.4],odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:2,danh:{3:3,5:6},care:6 /* review/balance-final: Y thuật care bonus once at BAL.mort.life.careYt (careY) */,
  flipX:2 /* Mê sắc: × of Sắc and Vũ in the card-flip chance (j8 nightCh) */,
  score:2.5 /* contest score per odds point (khuê các festival kcFest: score ≥ 60 first, ≥ 40 praised) */,
  fee:[5,5] /* teacher fee = fee[0] + bậc × fee[1] Bạc (artFee) */,
@@ -804,10 +804,15 @@ Object.assign(BAL,{mind:{seen:{cap:3,fade:.85}/* 2f3: a servant's record of her 
    (od for her, odA for an NPC). lv = art level the card needs; sucMin = Sức an NPC keeps before she spends on it (her card: the khắc / Sức rule);
    c / w / l = cost / gain / loss (vu's loss and side effects: BAL.tw.g.vu; ky's Danh / Tâm cơ: BAL.tw.g.ky).
    qf = a small gift to the Emperor (her "Dâng một cành hoa"): bac cost, o odds when his flower is not known, w gain (wKnown when it is) */
-Object.assign(BAL,{deck:{vu:{lv:3,sucMin:40,c:{suc:-20},o:[40,8],st:["sac",5],w:{sung:15,danh:3}},
- cam:{lv:3,sucMin:30,c:{suc:-10},o:[40,8],st:["tai",5],w:{sung:12},l:{sung:-2}},
- ky:{lv:3,sucMin:25,c:{suc:-5},o:[45,8],st:null,w:{sung:5},l:{sung:-1}},
+Object.assign(BAL,{deck:{vu:{lv:3,sucMin:40,c:{suc:-20},o:[48,8],st:["sac",5],w:{sung:15,danh:3}},
+ cam:{lv:2,sucMin:30,c:{suc:-10},o:[48,8],st:["tai",5],w:{sung:12},l:{sung:-2}},
+ ky:{lv:2,sucMin:25,c:{suc:-5},o:[53,8],st:null,w:{sung:5},l:{sung:-1}},
  qf:{bac:5,o:50,w:2,wKnown:6}}});
+/* SIDE CHANCES printed on cards (review/balance-2, ONE CORE OD:L1267): the card text (chanceW) and the roll read the SAME key.
+   treatStep j13 treat (an illness eases one stage) · abortDie j22 / abortDieSrv j42 (bleeding to death when the potion fails) · riseKill j42 «Cúi đầu thưa tên»
+   (the mistress kills her before the investiture) · maidRise j8 sendMaid (the maid sent in her place is raised) · vpTake j8 night1 (above-rank jewellery taken) ·
+   caught j34 sabotage (caught when the sabotage fails) · helpFall j7 «Giúp … một tay» (the target falls). (loanBack: LIVE's j24 repay is an NPC decision now, npcWhy) */
+Object.assign(BAL,{rk:{treatStep:50,abortDie:25,abortDieSrv:20,riseKill:25,maidRise:30,vpTake:40,caught:50,helpFall:50}});
 /* palace voice (jvoice, VANPHONG §2): mood of an address from the real relation (S.sung − sungMid, S.th / S.hh − favMid, aff()):
    ≥ warm → warm words (ái phi, con, muội muội, tỷ tỷ), ≤ cold → "ngươi"; nuong = first rank called "nương nương" / allowed "bổn cung" (Tần);
    noRepeat = tuần before a pooled line may come back; hi / hq = first rank index of the "hi" (Quý phi) / "hq" (Hoàng hậu) rank band of
@@ -1289,7 +1294,7 @@ Object.assign(BAL,{odb:{
  j10:{rbCourtAct:40},
  j13:{rbIllMonthP:30,rbIllMonthP_2:35},
  j14:{odO:10,odO_2:15,odO_3:35,odO_4:10,odO_5:15,odO_6:70},
- j2:{odO:35,odO_2:55,odO_3:30,odO_4:50,odO_5:80,odO_6:75,odO_7:30,odO_8:85,odO_9:92,odO_10:50,odO_11:70,odGoTo:40,odO_12:55,odO_13:45,odO_14:30,odO_15:35,odO_16:40,odO_17:45,odO_18:40,odO_19:70,odO_20:45,odO_21:45,odO_22:50,odO_23:40},
+ j2:{odO:35,odO_2:55,odO_3:42,odO_4:50,odO_5:80,odO_6:75,odO_7:40,odO_8:85,odO_9:92,odO_10:50,odO_11:70,odGoTo:40,odO_12:55,odO_13:45,odO_14:30,odO_15:35,odO_16:40,odO_17:45,odO_18:40,odO_19:70,odO_20:45,odO_21:45,odO_22:50,odO_23:40},
  j20:{odO:65},
  j21:{odO:50,odO_2:40},
  j22:{odO:55,odO_2:60,odO_3:55,odO_4:70},
@@ -1306,8 +1311,8 @@ Object.assign(BAL,{odb:{
  j54:{odO:30,odO2:55,odO_2:40},
  j55:{rbCorrupt:25,rbDadT:25,odO:15},
  j61:{odO:45},
- j68e:{odP:40,odP_2:55,odP_3:35,odP_4:45,odP_5:40,odP_6:30,odP_7:35,odP_8:25,odP_9:35,odP_10:40,odP_11:30,odP_12:30,odP_13:45,odP_14:35,odP_15:40,odP_16:35,odP_17:35,odP_18:40,odP_19:30,odP_20:40,odP_21:35,odP_22:30,odP_23:45,odP_24:25,odP_25:40,odP_26:25,odP_27:30,odP_28:55,odP_29:70,odP_30:30},
- j68f:{odP:35,odP_2:30,odP_3:35,odP_4:40,odP_5:30,odP_6:40,odP_7:35,odP_8:40,odP_9:35,odP_10:35,odP_11:40,odP_12:30,odP_13:40,odP_14:45,odP_15:50,odP_16:45,odP_17:50,odP_18:35,odP_19:40,odP_20:40},
+ j68e:{odP:40,odP_2:55,odP_3:35,odP_4:45,odP_5:46,odP_6:30,odP_7:35,odP_8:25,odP_9:35,odP_10:40,odP_11:30,odP_12:30,odP_13:45,odP_14:35,odP_15:40,odP_16:35,odP_17:35,odP_18:40,odP_19:30,odP_20:40,odP_21:35,odP_22:30,odP_23:45,odP_24:25,odP_25:40,odP_26:25,odP_27:30,odP_28:55,odP_29:70,odP_30:30},
+ j68f:{odP:35,odP_2:40,odP_3:35,odP_4:40,odP_5:30,odP_6:40,odP_7:35,odP_8:40,odP_9:35,odP_10:35,odP_11:40,odP_12:30,odP_13:40,odP_14:45,odP_15:50,odP_16:45,odP_17:50,odP_18:35,odP_19:40,odP_20:40},
  j68g:{odP:30,odP_2:40,odP_3:40,odP_4:55,odP_5:40,odP_6:35,odP_7:40,odP_8:50,odP_9:55,odP_10:35,odP_11:30},
  j68h:{odP:40,odP_2:50,odP_3:35,odP_4:40,odP_5:40},
  j7:{odO:35,odX:50,odO_2:40,odO_3:40,odX_2:45,odO_4:50,odO_5:40,odO_6:40,odO_7:30,odO_8:40,odO_9:35,odO_10:35,odO_11:35,odO_12:35,odO_13:30,odO_14:30,odO_15:45,odO_16:40},
