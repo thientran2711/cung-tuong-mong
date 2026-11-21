@@ -847,6 +847,7 @@ the `.pcb` / `.rbtn` / `.kskacts` auto-fill grids won.
 - §6.3c ONE PERSON-TAB FRAME (owner 21/11 ~02:36Z): in every person tab (Hậu cung ×4, Giao tình `.krelpg`, Hoàng tự ×5) the TOP BLOCK (pane bar, sub-tabs, face / mother strip) is FIXED, only the person card below scrolls INSIDE itself (`#panel.kpfr` set by `kitPcFrameMark` after every render / panel mutation; NO `:has()` on #panel — it cost +30 % tab time in quickcheck). The left column is part of the card and scrolls with it.
 - §6.3d INTRO LINES BEHIND «!» (owner 21/11 ~02:38Z): the intro / explanation line(s) above a person strip (`.pgwrap > .ph`: Hoàng tự tabs, counts) are not drawn; a round «!» (`.kppbang`) at the top-right of the top block opens them in the kit info popup (`kitPcIntroBang`), so the top block is ONE fixed height whatever the text (strip top 229 px in kin / kvo / qt, Fold + iPad).
 - §6.3e FIGURE FILLS THE LEFT COLUMN (owner 21/11, Cung nhân + Hoàng tự shots): the figure is always the full column width (`kitPcKeyFit` no longer shrinks it for the key lines; the old 100 px portrait with empty bands is gone); the mother block (`.kpl`) always stands ABOVE the facts table in the info group, Fold and iPad alike.
+- §6.3f LEFT COLUMN: NO EMPTY BAND, READABLE ROWS (owner 21/11 ~03:32Z, person dialog «Bảo Châu»: figure, an empty band, then tiny relation rows squeezed at the bottom): the relation / key rows (`.kpkey`: Nàng → ta, Ta → nàng, Thích, Ghét, status chip) sit RIGHT UNDER the figure (10 px) at a readable size (>= 11.5 px; was ≈ 9 px: `.kpkey` .92rem, `.kr2-cp` 1em, heads .8em, chips >= .8rem). Same rule in every person card / dialog (the stage pop-up, every tab). Test `node dev/test/kit-leftcol-read.js <url> <out> 755x1000,1180x820 pop-maid,tab-rv,tab-court,tab-staff,tab-kin`.
 - HOW (one place): CSS `#kit-pcard-actrow` (jk4) + `kaNorm` now ends with `kitActCompactOn(root)`, so any host that normalises its cards (pop-up, tabs, dialogs
   that embed a person card) gets the picture slot and the row form with no call of its own. Nobody writes act markup / grid CSS for a person card by hand.
 - NOT in this rule (own approved kit parts): the Hành sự deck (`.cards` in #panel, §6/§6.1 big card and its category tabs), dialog options (`.kopt`, §6.2), the
@@ -3099,7 +3100,7 @@ so the shop and a full person dialog share the same box; a two-choice visit is a
 ## 49. ÂN OÁN · RELATIONS (owner 11/15) — `dev/build/jhc.js`
 ### 49.1 kitRel2 — ONE relation component everywhere (owner 11/16 15:00Z 4.6–4.8; replaces kitRelRow + the 3-column kitRelTable; bars are gone)
 `kitRel2([{head, dir:"them"|"me"|"x", rows:[{w, now, d, kind:"good"|"bad"|"pos", gloss?, unk?}]}, …], {week})` (jkrel.js) → `.kr2`: TWO column boxes side by side —
-LEFT = that person → me ("Nàng → ta", purple tab), RIGHT = me → that person ("Ta → nàng", blue tab); one box when only one direction exists (Hoàng thượng → ta: Sủng, Ân tình; Thái hậu → ta).
+LEFT = that person → me ("Nàng → ta", purple tab), RIGHT = me → that person ("Ta → nàng", blue tab); one box when only one direction exists (Hoàng thượng → ta: Sủng, Ân tình; Thái hậu → ta) — a LONE box spans the WHOLE row width (owner 21/11 ~02:14Z: half a frame left empty is wrong; overwrites the 16/11 «one column wide» rule); test `dev/test/kit-rel2-span.js`.
 Rows use SHORT words only (Thiện cảm / Oán / Ghen / Sủng / Ân tình / Tin cậy; tap = kit gloss), the NUMBER in its meaning colour (thiện cảm > 10 green, < −10 red; oán/ghen ≥ 20 red; sủng green), NO bars, no mixed rows.
 `week:true` adds the "Hiện nay" and "Tuần này" columns, aligned inside each box (Tuần này = green/red change or "—"). Unknown value → "chưa rõ". Container < 260 px: the two boxes stack (left first).
 `kitRelTable(kitRelRows(p,snap),{head})` builds the two columns from the fixed rows of §52. Callers (the full list, all via kitRel2): Ân oán pair view (`relRows`, jhc), week-book person pages (j87), person-card left key block (`pcfKey`, compact), Gia tộc card (jkc), kit sample §49.1 / §52.
@@ -3555,11 +3556,14 @@ A wall calendar so she can prepare for the festivals ahead. Registry: §58 (coor
   A festival sits on its traditional day (`MCAL.days`: Nguyên đán 1–3, Thanh minh 5, Đoan ngọ 5, Thất tịch 7, Lạp bát 8, Trùng cửu 9,
   Nguyên tiêu / Vu Lan / Trung thu / Thánh thọ / Đông chí 15, Vạn thọ 25, Giao thừa 30) when that day is inside the tuần FEST holds it in
   (FEST.t, the tuần the festival event really fires); otherwise on the first day of each of its tuần (Hội Phượng 1, 11, 21 — all month).
-- `kitMonthCal({o})` → HTML; `o` = months ahead of the current month (0..11). Parts: 12 month tabs (`kitTabRowHTML` in `.pctabs.kcattabs`,
-  count = festivals in that month; wrapped = the year at a glance; one scrolling row when the screen is under 520 px tall), the month head
-  (`Tháng giêng · năm thứ hai (10 tháng nữa)`), the grid (3 rows × [tuần label + 10 squares]; current tuần row gold + `kchip g` "Tuần này";
-  earlier tuần of this month dimmed), festival squares = the festival painting `img/ev-fest-<k>.webp` (cover) + day number + short name
-  (`MCAL.short`), and under the grid one `kitRows` table (day | name · "còn N tuần" / "tuần này" / "đã qua").
+- `kitMonthCal({o})` → HTML; `o` = months from the current month (-1 = last month, 0..11 ahead). A normal PHONE MONTH VIEW (owner 21/11 ~03:43Z mark #42,
+  review/calendar; the old wall of 13 month chips is gone, nothing may bring a month chip row back): header row `‹  Tháng ba · năm thứ nhất  ›` (date text from
+  `mcMonName` / `mcYearName`, never typed; `(tháng sau)` / `(N tháng nữa)` / `(đã qua)` when not this month; two 44 px `kbtn alt .kmc-ar` arrows, `data-kmcm` = target
+  month, disabled at -1 / 11; SWIPE the grid sideways = next / last month, with a short slide that respects reduced motion), then the grid: per tuần one light label
+  strip (`Thượng tuần` + `kchip g` "Tuần này" + quẻ chip; the current tuần strip is gold = today, the game has no day inside a tuần) over 2 rows x 5 EQUAL SQUARE
+  cells (`aspect-ratio:1`, days 1–30; 5 columns by default because the Fold dialog is only ~290 px wide, 10 columns gave 27 px squares; a container query (`.kmc` width ≥ 470 px = iPad) switches to ONE row of 10 per tuần, ~50 px squares, whole month without scrolling; grid capped at 560 px wide),
+  festival cells = the festival painting `img/ev-fest-<k>.webp` (cover) + day number + short name (`MCAL.short`); other known days = tag + count + moon / cycle marks.
+  Tap a day = that day's box below the grid (`mcDayBox`, kit rows); under it one `kitRows` table of the month's festivals (day | name · "còn N tuần" / "tuần này" / "đã qua").
 - A festival square or list name opens the kit popover (`kpPop`, hover too with a mouse): name, day + tuần + time left, one line
   (`MCAL.line`), "Có thể thi" (the SC7 contests of its j71 pool FV7, same Thái hậu filter as fvPick), "Còn có" (wagers, banquets, gifts,
   rites), "Thắng thi" (`prize7`). Short; no paragraph.
@@ -3570,7 +3574,7 @@ A wall calendar so she can prepare for the festivals ahead. Registry: §58 (coor
   top-right; the first one that covers no name tag, side card, title, chip, "+N"/"‹" page chip or figure body (figure box at 60 % width) wins (`kdcPlace`,
   re-run after renderStage and on resize). One tap opens `kitMonthCalOpen()`.
 - No save data (old saves load unchanged). Samples on the kit page (#kit): §58 (this month), §58.1 (tháng giêng), §58.2 (both desk calendars).
-- Test: `node dev/test/month-cal.js <index.html> [outdir] [sizes]` (desk present, ≥ 44 px, inside the stage, 0 overlap; 12 tabs; no clipped
+- Test: `node dev/test/month-cal.js <index.html> [outdir] [sizes]` (opens from the rail "Lịch tháng" button; the room desk calendar is retired by jrail; 2 arrows ≥ 44 px, no chip row, 30 equal squares in 6 rows (narrow) or 3 rows (wide ≥ 470 px), swipe both ways, arrow disabled before last month; every month; no clipped
   text / overflow in any month; only FEST keys; popover on screen; Thánh thọ hides after Thái hậu dies; lãnh cung = plain; none away from home;
   390x844 = rotate prompt).
 
