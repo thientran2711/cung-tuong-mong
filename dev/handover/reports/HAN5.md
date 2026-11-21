@@ -36,3 +36,14 @@ Belt-pendant words removed ×8 (folded into make_han_ladder7_L1847.py, same file
 ch 9690/9839/9878/9689/9379/9922/9877/9877; keep PASS ×8 (t5 +1 allow); check_store shows only the waived FAILs. No pendant/zupei/jade-disc words are left except "no pendants".
 ### LADDER7 samples (VE4, f3e889d): t2 u5WmGriQLD, t8 1ldFM7Jr4r, 110 cr, sheet han_ladder7_t2_t8_L1847.png
 HAN5 read: the shape is closer to Phi (the collar now spreads wide across the shoulders, wide V, the t8 yoke is small and below the bands, no pendants). The bands still do not separate. Cause: same-colour neighbours — t2 has outer pink on a pink robe plus "inner two ivory", which reads as one ivory band; t8 has an outer yellow band on a yellow robe. In Phi the visible bands are pink on a plum robe, i.e. they contrast with the robe. The next lever is band colour order/contrast, but that is owner L1807 territory → asked #24 / the owner.
+
+## LADDER8 (owner L1859 via Foreman C #25): Hán silhouette re-think + 3 bands main / secondary / white
+Owner: L7 "does not look like Hán at all". Bands: OUTER = main colour (outer robe), MIDDLE = secondary (lining layer), INNERMOST = WHITE (inner garment).
+Generator make_han_ladder8_L1859.py, built from LADDER7 files (G57 kept). Hair, pose, angle, held item, crown, captions byte-identical. Garment words only:
+1. Silhouette ×8: "a long NARROW Han-dynasty wrapped robe (quju, khúc cư) … a SLIM close-fitting body that follows her figure, the front panel WRAPPING round her body in N spiral turns (t1–t2 one, t3–t5 two, t6–t8 three), each turn a wide <secondary> edge band winding diagonally round the hips and thighs, the hem flaring softly at the floor like a trumpet; every edge (collar, cuffs, wrap edge, hem) bordered with a wide <secondary> band; never loose or boxy". This replaces the per-rank WRAP CUT and its "no spiral" clause.
+2. Collar ×8: "the CROSSED COLLAR (right side over left) lies close round the neck and dips in a clear V to the middle of the chest … never off the shoulders". This replaces the L6/L7 shoulder-wide opening.
+3. Bands ×8: "THREE stacked WIDE layered collar bands, each clearly visible as its own separate stripe with a thin gold line between them: outer <main> (the outer robe), middle <secondary> (the lining layer), innermost pure WHITE (the white under-robe collar, the only white), never two". Main/secondary: t1–t3 pink/ivory, t4–t7 plum/blush pink, t8 yellow/plum.
+4. SHOULDER FRINGE bead yoke removed t4–t8 (not Han; it hid the bands).
+5. t7/t8 "no other colour" → "… except the white innermost collar band". t1–t6 TWO-COLOUR rule untouched (approved sentence S01).
+ch 9656/9800/9818/9474/9178/9706/9708/9813; keep PASS ×8 (CUT lines allowed, citing L1859); check_store shows only the waived FAILs.
+Risk: on t1–t3 the middle ivory band sits next to the innermost white band, so they may blend.
