@@ -1335,3 +1335,16 @@ Next Lượt 1953.
 #27 ~10:07Z: HAN6 Hán L1965 t1–t8 files (trims, clouds+birds t6–t8, bu yao ladder) → VE7 t6 sample @55. Weave vs embroidery research HAN6_WEAVE_VS_EMBROIDERY_L1965.md → SENT L1968; asks owner yes to drop 'embroidered all over' t1–t5 (+1 sample). Next Lượt 1969.
 #27 ~10:09Z: SENT L1969 Hán t6 L1965 dt4THLQXSL (VE7 55); flagged tassel on ball + hand at waist → HAN6 word fix. Next Lượt 1970.
 #27 ~10:12Z: HAN6 L1965 files G57/G61 word fix e692390; NGOCBOI1 G57b text in ART_RULES 2b462d400. Waiting owner on: L1956 face pages, L1961/1962/1964/1967/1968/1969, thô sử A/B/C + maid ladder L1966, thân cận hair. Next Lượt 1970.
+#27 ~10:20Z: OWNER L1971 (BIG, in full — she is tired; save for tomorrow; NOW focus = THU outfit set):
+ 1. Thu HQP t7: cause found → fix + redraw. L1964 rgXqyJlxtc "rất khiên cưỡng": robe = the OLD Quý phi robe, only ADD the square collar like Thường tại/Quý nhân; ONLY 2 layers, no thick extra outer layer; silhouette still not slim. Try @135 cr (2k medium).
+ 2. BOWS: Quý nhân Hán bow must be LONG trailing ties, thướt tha. GENERAL: everyone with a bow in game → long trailing ties.
+ 3. L1960 Hán embroidery recs → DO. History accuracy does NOT matter; beauty matters; add what she likes.
+ 4. L1961 winter: t4 prompt has SQUARE collar — WRONG, winter = crossed collar (cổ chéo); "copy without checking rules". QP t6 vân kiên/shoulder cape is BELL-shaped — was the prompt fixed? How did approved become these pictures?
+ 5. L1962 nhị: NOT the nhị she approved (3zKP2qZREY) — review the nhị prompt. Thân cận hair sample REJECTED: she likes maids' two side buns (cute); thân cận = a DIFFERENT bun style (not necessarily two side buns) but the single back bun is boring → other style.
+ 6. L1963 drama: Hoàng hậu chim trĩ OK, deep blue NO — main colour stays YELLOW. Neckline: keep current game design. Consort headpieces: she dislikes cluttered, but TRY Tang 5→9 hairpins as a test. Maids same (later). → TOMORROW.
+ 7. L1967 winter t2: why so different with only phi bạch removed → prompt does not reproduce the approved outfit; can't mass-draw while prompt output is wrong. (VE6 note: originals 2k, new 1k low.)
+ 8. L1968 density Hán + Đường: DO as proposed.
+ 9. Ball tassel is NOT an error, it's pretty. "No tassels on held items" rule — SHE NEVER MADE IT → REVERT G57b (keep only ngọc bội/jade pendant ban).
+ 10. Hán t6 Quý phi pretty but not Quý-phi enough: add jewellery/ngọc ngà châu báu from Tần (t4) up (Tần a little, Quý phi fairly much) — copy the common luxury/jewellery prompt. Clouds/birds are ADDITIONS; each rank keeps its FLOWER embroidery; big flowers allowed from t4 up (banned only t1–t3) → fix G65.
+ 11. Face page: I gave only 5 faces and never resent link after fix → need full maid face page link.
+ NOW: send her the THU outfit list (what we have).
