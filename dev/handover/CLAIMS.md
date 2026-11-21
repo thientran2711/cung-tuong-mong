@@ -888,3 +888,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | REVIEW night-balance-bundle (opus BIG, standby) | review/night-balance-bundle-rv | FOREMAN D #16→#17 | session_01964izF4zCJPJBUmUsHpksK | STANDBY | 21/11 15:23Z |
 | REVIEW coop-room-faces (opus BIG co-op, standby) | review/coop-room-faces-rv | FOREMAN D #16→#17 | session_01964izG9Y4kjoEj3uahaXBo | STANDBY | 21/11 15:23Z |
 | JEMO-BAL (opus; jemo + j8 kframe/frame/kpoison + j34 tScore/dScore → BAL, after bundle) | review/jemo-bal; reports/jemo-bal.md | FOREMAN D #16→#17 | session_01964izDeHsFp85JHdyFPDPs | PREP | 21/11 15:23Z |
+| REVIEW dialog-person-3-r2 (sonnet SMALL reland; ORDER MAIN CHÍNH 95) | review/dialog-person-3-r2 | B ROOT-6 | session_01N1tNP4cmMULveQru19PTCj-child | PASS 037d2c1f (merged main 99795d67; LAND READY) | 21/11 15:28Z |
