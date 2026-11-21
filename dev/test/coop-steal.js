@@ -125,6 +125,11 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  async function nextNight(tag){for(let i=0;i<40;i++){await clear(A);await clear(B);const a=await D(A),c=await D(B);if(a.b===0&&c.b===0&&!a.Q&&!c.Q&&a.w===c.w)break;
    const k=await A.p.evaluate(()=>COOPW.tm.myKey());await setTm(A,{buoiMs:120000});await reset(A);await press(A);await press(B);await bothPast(A,B,k,30000)}
   return toNight(tag)}
+ /* the forced card must be allowed on the tray tonight: in her Kỳ nguyệt tuần (jcycle cyBase(name).t — a random name puts ~1 night in 3 there)
+    Kính sự phòng rightly puts it away and the Emperor turns another card (case 3/4 red, NLC #7/#8/#9). A player's night there is no test of the
+    choice: play on to the next tối (at most 3 tuần) */
+ async function cycFree(who){for(let g=0;g<3;g++){const on=await A.p.evaluate(w=>{const p=w==="friend"?liveRivals(false).find(v=>v&&v.coop):S;return !!(p&&typeof window.cycOn==="function"&&window.cycOn(p))},who).catch(()=>false);
+   if(!on)return true;console.log('cycFree',who,'Kỳ nguyệt tuần: next night');if(!await nextNight('cyc'))return false}return true}
  /* the night record of day d on one seat, seat-neutral (host / guest / NPC id): the card turned, who holds the night, why */
  const rec=(o,d)=>o.p.evaluate(d=>{const SEAT=COOP.seat==="a"?"host":"guest",OTH=SEAT==="host"?"guest":"host";const f=liveRivals(false).find(v=>v&&v.coop);
    const n=id=>id==null?null:id==="me"?SEAT:(f&&id===f.id)?OTH:id;const w=S.nightWhy;if(!w||w.wk!==d)return{none:1,wk:w&&w.wk};return{flip0:n(w.flip0),pick:n(w.pick),cause:w.cause}},d);
@@ -163,7 +168,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  ok(g.sung+g.fade===s0&&/^(<[^>]*>[^<]*<\/span>)?Ngươi cũng mời được Hoàng thượng, nhưng ngài chọn sang cung /.test(g.line.replace(/<span class="ld">[^<]*<\/span>/,""))&&!/cung ngươi/.test(g.line),'2: guest: no Sủng loss, the "Ngươi cũng mời được … sang cung <host>" line (her view)',g);
  await unforce();
  /* 3. the GUEST is flipped: she presses Giữ chân Hoàng thượng (odds read on the host, forced to hold); the host's Tranh sủng fails → she keeps it + keepSung */
- ok(await nextNight('3'),'3: at tối again');
+ ok(await nextNight('3')&&await cycFree('friend'),'3: at tối again');
  await fitBoth('3');H=await force("friend");await noCyc(B);await A.p.evaluate(()=>{oSteal=()=>1;oKeep=()=>99});
  await endEvening();
  const [c3,h3]=await Promise.all([answer(B,"Giữ chân Hoàng thượng"),answer(A,"Tranh sủng")]);
@@ -175,7 +180,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  await unforce();
  /* 4. the HOST is flipped (mirror of 3): the host presses Giữ chân Hoàng thượng (forced to hold); the guest's Tranh sủng fails (odds read on the host)
     → the host keeps it + the defence gain line; the guest gets her own stealFail line on her seat; no night for her */
- ok(await nextNight('4'),'4: at tối again');
+ ok(await nextNight('4')&&await cycFree('host'),'4: at tối again');
  await fitBoth('4');H=await force("host");await noCyc(B);await A.p.evaluate(()=>{oSteal=()=>1;oKeep=()=>99});
  const n4=await B.p.evaluate(()=>(S.nightLog||[]).length);
  await endEvening();
