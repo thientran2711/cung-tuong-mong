@@ -784,7 +784,7 @@ kit-ghichu-sections rv2 | review/kit-ghichu-sections-rv2 cfde1cc4 | rv session |
 | REVIEW dialog-person-3 (sonnet SMALL; lands r86 too) of 8803d6b9 | review/dialog-person-3-rv | B | session_01N1tNP5SDchEK7HTZ41UWDQ | PASS b187ecdc | 21/11 05:50Z |
 | REVIEW chapter-card-3 (SMALL sonnet) 4771570e (#27 rest) | review/chapter-card-3-rv; briefs/main89-rv-chapter-card-3.md | MAIN CHÍNH 89 | session_01Rc5AsLEAMwsLLk9M3n7ZPx | RUNNING | 21/11 05:50Z |
 kit-info-fixed rv | review/kit-info-fixed-rv 60872bed | rv session | FAIL (! under dialog close on Fold) | 21/11
-| REVIEW hao-huu (BIG opus) f654456a (#2) | review/hao-huu-rv; briefs/main89-rv-hao-huu.md | MAIN CHÍNH 89 | session_01Rc5AsL294sG5kphwVE5b5S | RUNNING | 21/11 05:54Z |
+| REVIEW hao-huu (BIG opus) f654456a (#2) | review/hao-huu-rv; briefs/main89-rv-hao-huu.md | MAIN CHÍNH 89 | session_01Rc5AsL294sG5kphwVE5b5S | FAIL 6 items (reports/rv-hao-huu.md; merged base 6c38f01b) → worker | 21/11 05:54Z |
 | REVIEW hoangthuong-gold r2 PASS → LAND READY 1e826e29 (Emperor only; Thái hậu = LIVE) | review/hoangthuong-gold-rv2 | MAIN CHÍNH 89 | session_01Rc5AsLhrWA3f1aH4eph3dD | PASS | 21/11 05:57Z |
 | huong-cue-2-r2 review | sonnet reviewer (Foreman B ROOT-5) | PASS 3be6edad review/huong-cue-2-r2-rv | 21/11 |
 | REVIEW bang-words E40r (BIG opus) 927ac123 | review/bang-words-r; briefs/E40r-review-bang-words.md | FOREMAN E #25 | session_01DgYSWqAzt8MGwYMUsFUXN5 | RUNNING | 21/11 05:59Z |
