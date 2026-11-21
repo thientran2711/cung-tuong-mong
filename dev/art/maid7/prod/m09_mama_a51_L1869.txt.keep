@@ -29,3 +29,5 @@ allow: never over her body   # ports/gate form from L1836 (crepe, clean edge, bo
 allow: write exactly this Vietnamese text WITH accents   # ports/gate form from L1836 (crepe, clean edge, bow, ChatGPT-only parts removed, E1/C5/S36/S19)
 allow: spelling every Vietnamese letter and accent mark exactly   # ports/gate form from L1836 (crepe, clean edge, bow, ChatGPT-only parts removed, E1/C5/S36/S19)
 allow: with no extra or wrong marks   # ports/gate form from L1836 (crepe, clean edge, bow, ChatGPT-only parts removed, E1/C5/S36/S19)
+allow: a small embroidered silk fragrant sachet   # G59 (owner L1874/L1876): NO túi thơm / sachet in any maid prompt, clause deleted only
+allow: on a silk cord with a tassel hanging at the centre between the two panels   # G59 (owner L1874/L1876): NO túi thơm / sachet in any maid prompt, clause deleted only

@@ -16,3 +16,5 @@ allow: never a stretched grin   # K19/K26: person swap, face + SECONDARY = her o
 allow: a long robe of fine embroidered silk brocade with a subtle woven pattern   # ports/gate form from L1836 (crepe, clean edge, bow, ChatGPT-only parts removed, E1/C5/S36/S19)
 allow: a wide silk sash tied in a bow at the waist   # ports/gate form from L1836 (crepe, clean edge, bow, ChatGPT-only parts removed, E1/C5/S36/S19)
 allow: the MAIN colour eggplant purple and the SECONDARY colour deep rose like   # K19/K26: person swap, face + SECONDARY = her own main m09 (MAIN stays uniform blue); owner L1869
+allow: a small embroidered silk fragrant sachet   # G59 (owner L1874/L1876): NO túi thơm / sachet in any maid prompt, clause deleted only
+allow: on a silk cord with a tassel hanging at the centre between the two panels   # G59 (owner L1874/L1876): NO túi thơm / sachet in any maid prompt, clause deleted only

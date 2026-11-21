@@ -6,3 +6,5 @@ allow: Make ONE tall portrait image   # port: Foreman C decision (a) — owner-a
 allow: flowing silk and gauze with a soft sheen and fine delicate embroidery   # port: Foreman C decision (a) — owner-approved crepe L1775 / clean-edge / K30 front bow L1725+L1734 ported to this rank
 allow: a long robe of fine embroidered silk brocade with a subtle woven pattern   # port: Foreman C decision (a) — owner-approved crepe L1775 / clean-edge / K30 front bow L1725+L1734 ported to this rank
 allow: a wide silk sash tied in a bow at the waist   # port: Foreman C decision (a) — owner-approved crepe L1775 / clean-edge / K30 front bow L1725+L1734 ported to this rank
+allow: a small embroidered silk fragrant sachet   # G59 (owner L1874/L1876): NO túi thơm / sachet in any maid prompt, clause deleted only
+allow: on a silk cord with a tassel hanging at the centre between the two panels   # G59 (owner L1874/L1876): NO túi thơm / sachet in any maid prompt, clause deleted only

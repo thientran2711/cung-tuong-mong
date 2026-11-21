@@ -1,1 +1,3 @@
 base: dev/art/maid7/test17_tam_L1785.txt
+allow: a decorative sash with a small embroidered silk fragrant sachet   # G59 (owner L1874/L1876): NO túi thơm / sachet in any maid prompt, clause deleted only
+allow: hanging from it   # G59 (owner L1874/L1876): NO túi thơm / sachet in any maid prompt, clause deleted only

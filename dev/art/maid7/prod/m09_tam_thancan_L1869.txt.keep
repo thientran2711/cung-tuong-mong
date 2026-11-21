@@ -11,3 +11,5 @@ allow: never a stretched grin   # K19/K26: person swap, face + SECONDARY = her o
 allow: the long inner robe and skirt in deep rose like   # K19/K26: person swap, face + SECONDARY = her own main m09 (MAIN stays uniform blue); owner L1869
 allow: the sash band in deep rose and the front BOW in the opposite colour powder blue so the bow stands out   # K19/K26: person swap, face + SECONDARY = her own main m09 (MAIN stays uniform blue); owner L1869
 allow: her main colour deep rose on the inner robe and skirt   # K19/K26: person swap, face + SECONDARY = her own main m09 (MAIN stays uniform blue); owner L1869
+allow: a decorative sash with a small embroidered silk fragrant sachet   # G59 (owner L1874/L1876): NO túi thơm / sachet in any maid prompt, clause deleted only
+allow: hanging from it   # G59 (owner L1874/L1876): NO túi thơm / sachet in any maid prompt, clause deleted only

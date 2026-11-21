@@ -14,3 +14,5 @@ allow: the sash band in powder blue and the front BOW in the opposite colour dee
 allow: the bow and both long hanging tails are one single colour deep rose   # person swap: face + main/secondary colour tokens for m09 (owner L1836 two persons)
 allow: her main colour powder blue on the inner robe and skirt   # person swap: face + main/secondary colour tokens for m09 (owner L1836 two persons)
 allow: her secondary colour deep rose clearly visible on the short outer top   # person swap: face + main/secondary colour tokens for m09 (owner L1836 two persons)
+allow: a decorative sash with a small embroidered silk fragrant sachet   # G59 (owner L1874/L1876): NO túi thơm / sachet in any maid prompt, clause deleted only
+allow: hanging from it   # G59 (owner L1874/L1876): NO túi thơm / sachet in any maid prompt, clause deleted only
