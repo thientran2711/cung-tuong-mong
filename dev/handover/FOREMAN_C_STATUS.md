@@ -1266,3 +1266,4 @@ CURRENT FOREMAN C = #25 session_01D3E3NYNncNzWuep6yvbxRe (child of #24; depth 6,
 #26 ~08:38Z: OWNER L1901 (in #25 chat): HQP/HH thu collar must = QP eIPc7xcdqL whole vân kiên, longer+stiffer, flare past shoulders → HHCOL1 L1901 → VE8 @55×2. SENT L1902 Hán Phi L1893 aFGoe7afSh (VE9 55; pale-purple 3rd band not readable). VE9 → m12 ×9. Next Lượt 1903.
 #26 ~08:38Z: #25 sent owner L1902 m09 ×9 (VE7 1215) too (Lượt clash). NGOCBOI1 strip_bow on 59 files 06ea54c88. HAN5 waits owner OK on L1893 collar (3rd band unreadable; offer pale lilac tweak). Next Lượt 1903.
 #26 ~08:38Z: VE9 rolled (29 %, 990 cr). Opened VE10 session_01D3E3NaakFbargWadMNeWzZ (Sonnet, depth 8) → m12 ×9 @135 (1215).
+#26 ~08:39Z: OWNER L1903 (in #25 chat): HQP/HH drop pearl net; embroider phoenix/dragon on vân kiên + tiny drops on edge; ONE collar design QP→HQP→HH → HHCOL1 L1903 → VE8. Next Lượt 1904.
