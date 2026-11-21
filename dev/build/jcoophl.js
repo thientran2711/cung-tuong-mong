@@ -88,7 +88,11 @@ function pFids(o,out,d){if(!o||typeof o!=="object"||d>6)return out;if(Array.isAr
 function reserveFriend(){try{if(!CW.on||!host()||!S||typeof figUsed!=="function")return;const P=CW.base&&CW.base.P&&CW.base.P.b;if(!P||!P.S)return;
   const U=figUsed();const F=pFids({pid:P.S.pid,maid:P.S.maid,staff:P.S.staff,kids:P.S.kids},new Set(),0);for(const f of F)if(!U.includes(f)){U.push(f);HL.stat.resv=(HL.stat.resv||0)+1}}catch(e){}}
 function check(why){if(!live()||!host())return;HL.stat.checks++;const t0=performance.now();let ops=[];reserveFriend();
- if(why!=="pick"&&why!=="nm")try{figFill()}catch(e){}/* a world person still without a face gets the host's now (not at its next render) */
+ if(why!=="pick"&&why!=="nm")try{figFill()}catch(e){}
+ /* r2 (same family, another lazy write; e2e 1/5: R#10.mk A=undefined B=[]): a person's mood memory (jmoodknow mkMigrate) is made lazily when
+   a seat first reads her mood; the guest's read made it on her seat only. The host makes it for every world person with a mood now, so both
+   seats hold the same (the host's is sent) */
+ if(why!=="pick"&&why!=="nm")try{if(typeof mkOn==="function"&&mkOn()&&typeof mkMigrate==="function")for(const p of worldPeople())if(p&&!Array.isArray(p.mk)&&(p.emo||(p.emoH&&p.emoH.length))){mkMigrate(p);HL.stat.mkMig=(HL.stat.mkMig||0)+1}}catch(e){}/* a world person still without a face gets the host's now (not at its next render) */
  try{const now=canon();/* r2: no shared world yet (between a room start / stop and its base): diff against the room's own base C, never swallow the host's writes made meanwhile (a face given in that gap reached no one) */if(!shared&&CW.base&&CW.base.W)try{shared=fromC(J(CW.base.W));HL.stat.baseFb=(HL.stat.baseFb||0)+1}catch(e){shared=null}if(shared)ops=diff(shared,now);shared=now;if(FACEW.has(why)||faceDue){faceDue=false;ops=ops.concat(faceOps(ops))}}catch(e){console.error("hl check",e);return}
  HL.stat.ms=Math.round(performance.now()-t0);const nm=nmQ.splice(0);
  if(!ops.length&&!nm.length)return;
@@ -136,6 +140,11 @@ HL.fidScan=fidScan;
 let readyT=0,readyN=0;
 function whenReady(){if(readyT||!CW.on||!host()||lvl3())return;if(typeof figxReady!=="function"||figxReady())return;
  readyT=setTimeout(function w(){readyT=0;if(!CW.on||!host())return;if(figxReady()){readyN=0;check("ready");return}if(++readyN<120)readyT=setTimeout(w,500)},500)}
+/* r2 guest (e2e 1/5 after the render guard: R#7 consort:c22 on the host, maid:m42 then maid:m40 stored on her seat, S.fidUsed grown): the j88
+   pool hands a face out through f88Take (f88Draw / f88Carry, outside any render). On HER seat a world person never takes a pool face: the face
+   is returned (shown) but not stored and not reserved; the host gives the face (figFill) and sends it. Her own people keep theirs. */
+if(typeof f88Take==="function"){const t0=f88Take;f88Take=function(who,k){try{if(live()&&!host()&&who&&typeof who==="object"&&who!==S&&!who.coop&&!mine(who)){
+   HL.stat.gTake=(HL.stat.gTake||0)+1;if(!HL.gTakeAt)try{HL.gTakeAt=String(new Error().stack||"").split("\n").slice(2,6).join(" | ").slice(0,400)}catch(e){}return k}}catch(e){}return t0.apply(this,arguments)};window.f88Take=f88Take}
 /* r2 guest: no path of HER render stores a world person's face (probe 2/16 rooms: Hạ Chiêu Nghi consort:c16 on the host, maid:m34 stored on
    her seat by an unwrapped lazy pick, kept by both merges). Each world person's face before her render is put back after it (shown faces come
    from the seeded guest pick, never stored); the host's faces reach her only through the merge / the host's ops. */

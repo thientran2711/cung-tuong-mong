@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"081797c8+","t":"2026-11-21T03:47Z","c":"rv coop-host-lag r1: jcoophl fixes (same family): guest servant-name dedupe (j95cDedupe) no longer renames a WORLD servant on her seat only…","b":"ef9c8ed0fd8f","h":[{"s":"1674d407+","t":"2026-11-21T03:15Z","c":"Túi đồ: bấm đồ hiện ngay dưới lưới, Việc có hình"},{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"}]};
+window.CTM_BI={"s":"d465254c+","t":"2026-11-21T05:59Z","c":"coop-host-lag-r2: close the lazy-face family for every figure (law 11)","b":"ade74fcc752d","h":[{"s":"1674d407+","t":"2026-11-21T03:15Z","c":"Túi đồ: bấm đồ hiện ngay dưới lưới, Việc có hình"},{"s":"6227bcdf+","t":"2026-11-21T02:57Z","c":"kit-pcrow-square: KIT 6.3c/d/e text"},{"s":"458640ae+","t":"2026-11-21T02:38Z","c":"rel-picker-r3 review: j6 rvButtons «Cùng cung với ngươi» -> houseLine (leftover on chủ vị); site rebuilt"},{"s":"edc41ba1+","t":"2026-11-21T02:25Z","c":"kit-ton-row-2: Tốn keep-rule = economic stats only (relation prices stay words, MAIN decision); kit-ton-row.js number-agnostic (Sủng scales…"},{"s":"57df3782+","t":"2026-11-21T01:50Z","c":"rv coop-name-clash r1: role-parity scan asks the Hoang hau directly for a player maid (a names change re-draws the seeded world; no visited…"},{"s":"7346eab7+","t":"2026-11-21T02:00Z","c":"Điều hương rõ chữ dẫn; Đầu hồ + Bắn cung trúng đúng hình (chơi thử lại); Thân cận"},{"s":"961999b6+","t":"2026-11-21T01:13Z","c":"den-look: Hoa dang plain lotus (no avoid ring/X), lit lanes/zones/strokes with soft glow edges (no white edge lines)"},{"s":"fc854210+","t":"2026-11-21T00:52Z","c":"kit-ton-row: coop-ton-row.js — both co-op seats see the Tốn price"},{"s":"28cf7c6d+","t":"2026-11-21T00:44Z","c":"mgcal batch 4: drop stray quickcheck file _aa.html"},{"s":"f15146ea+","t":"2026-11-21T00:23Z","c":"mgcal-redo: fix jbal2.js (conflict markers in 6d760d46 removed) + her Đầu hồ re-test dauho 9.7/5 @11/20 (other 7 re-test kinds in her code …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -86255,7 +86255,11 @@ function pFids(o,out,d){if(!o||typeof o!=="object"||d>6)return out;if(Array.isAr
 function reserveFriend(){try{if(!CW.on||!host()||!S||typeof figUsed!=="function")return;const P=CW.base&&CW.base.P&&CW.base.P.b;if(!P||!P.S)return;
   const U=figUsed();const F=pFids({pid:P.S.pid,maid:P.S.maid,staff:P.S.staff,kids:P.S.kids},new Set(),0);for(const f of F)if(!U.includes(f)){U.push(f);HL.stat.resv=(HL.stat.resv||0)+1}}catch(e){}}
 function check(why){if(!live()||!host())return;HL.stat.checks++;const t0=performance.now();let ops=[];reserveFriend();
- if(why!=="pick"&&why!=="nm")try{figFill()}catch(e){}/* a world person still without a face gets the host's now (not at its next render) */
+ if(why!=="pick"&&why!=="nm")try{figFill()}catch(e){}
+ /* r2 (same family, another lazy write; e2e 1/5: R#10.mk A=undefined B=[]): a person's mood memory (jmoodknow mkMigrate) is made lazily when
+   a seat first reads her mood; the guest's read made it on her seat only. The host makes it for every world person with a mood now, so both
+   seats hold the same (the host's is sent) */
+ if(why!=="pick"&&why!=="nm")try{if(typeof mkOn==="function"&&mkOn()&&typeof mkMigrate==="function")for(const p of worldPeople())if(p&&!Array.isArray(p.mk)&&(p.emo||(p.emoH&&p.emoH.length))){mkMigrate(p);HL.stat.mkMig=(HL.stat.mkMig||0)+1}}catch(e){}/* a world person still without a face gets the host's now (not at its next render) */
  try{const now=canon();/* r2: no shared world yet (between a room start / stop and its base): diff against the room's own base C, never swallow the host's writes made meanwhile (a face given in that gap reached no one) */if(!shared&&CW.base&&CW.base.W)try{shared=fromC(J(CW.base.W));HL.stat.baseFb=(HL.stat.baseFb||0)+1}catch(e){shared=null}if(shared)ops=diff(shared,now);shared=now;if(FACEW.has(why)||faceDue){faceDue=false;ops=ops.concat(faceOps(ops))}}catch(e){console.error("hl check",e);return}
  HL.stat.ms=Math.round(performance.now()-t0);const nm=nmQ.splice(0);
  if(!ops.length&&!nm.length)return;
@@ -86303,6 +86307,11 @@ HL.fidScan=fidScan;
 let readyT=0,readyN=0;
 function whenReady(){if(readyT||!CW.on||!host()||lvl3())return;if(typeof figxReady!=="function"||figxReady())return;
  readyT=setTimeout(function w(){readyT=0;if(!CW.on||!host())return;if(figxReady()){readyN=0;check("ready");return}if(++readyN<120)readyT=setTimeout(w,500)},500)}
+/* r2 guest (e2e 1/5 after the render guard: R#7 consort:c22 on the host, maid:m42 then maid:m40 stored on her seat, S.fidUsed grown): the j88
+   pool hands a face out through f88Take (f88Draw / f88Carry, outside any render). On HER seat a world person never takes a pool face: the face
+   is returned (shown) but not stored and not reserved; the host gives the face (figFill) and sends it. Her own people keep theirs. */
+if(typeof f88Take==="function"){const t0=f88Take;f88Take=function(who,k){try{if(live()&&!host()&&who&&typeof who==="object"&&who!==S&&!who.coop&&!mine(who)){
+   HL.stat.gTake=(HL.stat.gTake||0)+1;if(!HL.gTakeAt)try{HL.gTakeAt=String(new Error().stack||"").split("\n").slice(2,6).join(" | ").slice(0,400)}catch(e){}return k}}catch(e){}return t0.apply(this,arguments)};window.f88Take=f88Take}
 /* r2 guest: no path of HER render stores a world person's face (probe 2/16 rooms: Hạ Chiêu Nghi consort:c16 on the host, maid:m34 stored on
    her seat by an unwrapped lazy pick, kept by both merges). Each world person's face before her render is put back after it (shown faces come
    from the seeded guest pick, never stored); the host's faces reach her only through the merge / the host's ops. */
@@ -86451,7 +86460,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ef9c8ed0fd8f";window.CTM_BUILD=BUILD;
+const BUILD="ade74fcc752d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
