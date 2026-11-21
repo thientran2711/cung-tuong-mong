@@ -72,3 +72,9 @@ gpt-2-6 1k low 9:16 seed 7172 · ref nVsrRMPYQD (same as L1915 t1–t3) · files
 | Thường tại | MBJYdaFDCm | same: flat and secure, wide V, three bands readable; ivory inner band clear |
 | Quý nhân | gOmr7RDSXO | same: flat and secure, wide V, three bands readable; wrap across the chest reads clearly |
 Caveat: pale blush vs ivory is subtle at 1k; deep pink vs the robe pink is only a slight step. Captions legible. Looks only; no check_store run by VE7. VE7 total: 3735 + 165 = 3900 cr.
+
+## JOB 6 — Hán t3 Quý nhân + centre bow (L1953, HAN6 via #27, commit 0e6b273) — 1 × 55 = 55 cr
+gpt-2-6 1k low 9:16 seed 7172 · ref nVsrRMPYQD · file s62_t3_HAN_BOW_L1953.txt = L1928 t3 + "tied in a neat bow at the CENTRE front of the waist, the two bow loops and ends lying flat" (verified by diff; grep clean) · id WDg2oC9cXe · sheet dev/handover/review-sheets/han_t3_bow_L1953.png (CŨ L1928 gOmr7RDSXO | MỚI L1953 WDg2oC9cXe, label "Xuân · Quý nhân · cổ chéo 3 dải")
+Zoomed read: bow centred at the front of the waist, loops flat, two ends hanging straight down, pearl-edged ivory girdle kept; collar unchanged (wide V flat on the shoulders, three bands). Looks only.
+Note: HAN6 later (L1955) put the file on hold for a deeper outer collar band; the gen was already done from commit 0e6b273, so this picture does NOT have the deeper band; not redrawn.
+VE7 total: 3900 + 55 = 3955 cr.
