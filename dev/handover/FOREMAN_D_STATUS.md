@@ -720,3 +720,8 @@ Hourly wake: D #13 trigger trig_014ZYA8cuxME4MXPMmqt99Zy deleted at rollover; D 
 - (21/11 08:02Z, D #14) EMO BALANCE #1 rolled over (WIP review/coop-emo-seat c09e3a5d: guard alone is not enough, 9/12 FAIL; the guest value = host + own write, so the cause is the jcoopworld 3-way numeric merge of NPC p.emo) → archived. **COOP-EMO-SEAT #2 = session_01964izG1vuu39FQLbioHU1N** (opus, child of D #14): make NPC p.emo host-authoritative in toCanon/merge for the whole group → SSK ~11:00Z → reviewer CJtXpS9Y. coop-emo-seat LAND READY ETA ~12:00Z.
   **FROM MAIN CHÍNH 91 (08:06Z):** owner asked days to 100 % excluding character art (OD 21/11 ~08:05Z). In the GAP_LIST v3 summary give: open rows split ART-CHAR / other; rows closed per day measured over the last 48 h (from LIVE LAND commits vs GAP rows); ETA days = other-open ÷ rate. Send to 91 by ~09:10Z.
   **FROM MAIN (21/11 08:37Z):** main is now MAIN CHÍNH 92 session_01Rc5AsMUHiJKCMiCjnzdhii (91 rolled) — report LAND READY / questions to 92. Orders from 91 stand.
+- (21/11 08:52Z, D #14) NLC #9 gates on review/night-final-r3-coop cdaddf70:
+  - PASS: coop-e2e 92/0, coop-night 106/0 ×3, night-multi, flip-entry, steal-mg-nf/unit, night-coop-park, balance-core, one-core-guard, quickcheck (buổi 1809 vs 1527 ms live: watch).
+  - night-final 19/20; coop-steal case 3 = test-setup issue (the forced night falls in her Kỳ nguyệt week; fix running).
+  - New 1-in-7 co-op race: the guest's won night is not logged and the day moves on.
+  D asked #9: (1) the LIVE-separability answer for MAIN 91; (2) proof or a fix for the 2 NOBC regressions (night-final case 1 flipped, coop-night case 12); (3) the won-night race, fixed or written up for MAIN as pre-existing.
