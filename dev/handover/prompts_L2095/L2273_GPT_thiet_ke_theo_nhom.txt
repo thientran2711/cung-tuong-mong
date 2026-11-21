@@ -1,0 +1,15 @@
+Tôi đang làm một game cung đấu anime. Trong game có 90 phi tần, chia thành 6 nhóm tính cách. Tôi gửi kèm bộ trang phục hiện tại của game (8 bậc: Đáp ứng, Thường tại, Quý nhân, Tần, Phi, Quý phi, Hoàng quý phi, Hoàng hậu).
+
+Hãy thiết kế lại bộ trang phục này thành 6 phiên bản, mỗi nhóm tính cách một phiên bản, để nhìn trang phục là đoán được tính cách người mặc. Giữ nguyên thứ bậc: bậc càng cao càng sang, Hoàng hậu là cao nhất.
+
+6 nhóm tính cách:
+- Quyến rũ: cuốn hút, nồng nàn, biết mình đẹp, ánh mắt đưa tình.
+- Sắc sảo: thông minh, nhanh nhạy, tính toán, ăn nói sắc bén.
+- Kiêu kỳ: cao ngạo, tự tôn, thích được ngưỡng mộ, khó gần.
+- Lạnh lùng: ít nói, xa cách, bình thản, khó đoán.
+- Dịu dàng: hiền hậu, mềm mỏng, ân cần, dễ thương.
+- Đoan trang: đứng đắn, nề nếp, chừng mực, đáng tin.
+
+Bạn cho tôi:
+1. Với mỗi nhóm: ý tưởng thiết kế ngắn (vì sao trang phục này thể hiện tính cách đó).
+2. Với mỗi nhóm: prompt vẽ hình cho từng bậc trong 8 bậc, viết bằng tiếng Anh, dùng được ngay để tạo hình.
