@@ -1559,3 +1559,4 @@ ROOT-B4 ~18:45Z: THUROOT5 pushed M2170-01..08 @1f09b6a (items 1–6,8–11). Mis
 ROOT-B4 ~18:50Z: SENT L2174 M2174-01..08 (THUROOT5 @3310f31; all items L2163–L2173; chest only in angle/pose words). Next Lượt 2175.
 ROOT-B4 ~18:55Z: OWNER L2175 asked phoenix palette → yes in t7/t8 (G33 B: outer secondary lilac, inner olive, tips deeper; crown same). OWNER L2176: HH vân kiên ONE tier like HQP (2 tiers coarse) → THUROOT5 M2176-01. Next Lượt 2177.
 ROOT-B4 ~19:00Z: SENT L2177 M2176-01 (HH vân kiên 1 tier, THUROOT5 @d2852a7). THUROOT5 idle ctx ~11%. Next Lượt 2178.
+ROOT-B4 ~19:05Z: OWNER L2178: QP still heavy; QP/HQP colours too similar → QP LESS yellow (narrow borders, slim sash, narrow panel); lighter density (loosely scattered gold camellias), one headdress phrase, one slim belt → THUROOT5 M2178-01. HQP/HH ~OK. Next Lượt 2179.
