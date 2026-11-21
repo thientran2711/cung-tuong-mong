@@ -200,7 +200,7 @@ function addArt(k,g){const a=ARTS.find(x=>x.k===k);S.artp[k]+=g;
    log(`<span class="g">${a.n} lên bậc ${l}.</span> ${fmt(f)}${l===3?" Cả cung nghe danh.":l===5?" Tiếng tăm vang khắp kinh thành.":""}`)}
  if(S.arts[k]>=5)S.artp[k]=0}
 function lesson(k){const l=S.arts[k],cost=typeof tchFee==="function"?tchFee(k):5+l*5;if(!can(2)||l>=5||S.bac<cost||S.dead||Q.length||S.mg)return;const open=()=>{render();S.mg={k,l};save();resumeMG()};/* KIT §13.9: charge on «Sẵn sàng» */
- if(typeof kgDefer==="function")kgDefer({suc:-10,bac:-cost,khac:2},open);else{apply({suc:-10,bac:-cost});spend(2);open()}}
+ const pay={suc:-10,bac:-cost};/* one typed Sức cost for both paths (one-core: no second copy) */if(typeof kgDefer==="function")kgDefer({...pay,khac:2},open);else{apply(pay);spend(2);open()}}
 function resumeMG(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;log(`Học ${a.n}. Tiến bộ +${g}.`);addArt(m.k,g);render()})}
 function hireMaster(){if(S.bac<BAL.bacFee.master||S.master||S.dead)return;apply({bac:-BAL.bacFee.master});S.master=3;log("Mời danh sư vào cung dạy: 3 tháng tiến bộ gấp đôi.");render()}
 

@@ -124,3 +124,20 @@ Rule sentences stay on the rules screen only; the frame «Cách chơi» row is h
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
 | 20/11 | wk mg-craft-hoa (filed by the group-2 reviewer: the HOA report and jcraft_hoa.js named this request, but it was never written here) | **KG82_DEMO "cut" motion** (j82 KG82_DEMO + kgReady picture): the ghost hand SLASHES across a lying stem (a swipe that crosses a line), + the kgTut step sign for it on `.kgt-bar`. No existing demo group shows a slash; Cắm hoa «Chọn mùa · cắt cành · nghiêng thế» shows the generic "drag" demo until then (KG82_CRAFT.hoa.demo "drag" → "cut"). Optional, same table: "hold" for Vẽ «Thủy mặc» (press-hold-release on the inkstone). | Cắm hoa (hoa) rules screen + «Hướng dẫn»; Vẽ (ve) optional | kit keeper | open |
+
+## 20/11 kit-cost-rows-home (MAIN ROOT-80 order; E25 «KR home-stat rows», E22t «quý nhau»)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | E25b home-chapters | **KR home-stat rows** — Gia thanh (kgt), Áp lực hôn sự (kap), Hồi môn (khm), Lời đồn (kld) in the act/option card rows Tốn / Được / Thành / Bại and in word mode | every home card (jkc kcCard, jkc2, jkc3 kc3/kcE) | kit keeper | **KIT READY** review/kit-cost-rows-home (KIT §13.14) |
+| 20/11 | E22t | **«quý nhau» in the word/hint map** (jk2b) — the decline row of a receiver choice (jrcv rcvNoO «mất: hai bên quý nhau −F») showed «Tốn: không» | jrcv, every «quý nhau» line | kit keeper | **KIT READY** review/kit-cost-rows-home (KIT §13.14) |
+
+## 20/11 kit-e-rows (MAIN ROOT-80 order; E30 `kitColDot`, E25b «KR thế lực nhà»)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | E30 dresscode | **`kitColDot` / `kitColDots`** read-only colour dot + family name | item rows «Màu», jmcal popover, festival gate | kit keeper | **KIT READY** review/kit-e-rows (KIT §60.1) |
+| 20/11 | E25b home-chapters | **«thế lực nhà ±n» in the word/hint map** | jkc3 E28 (kcE hac) | kit keeper | **KIT READY** review/kit-e-rows (KIT §13.15; built on top of review/kit-cost-rows-home 3332c63b — same file / lines) |
+
+## 20/11 kit-dress-picker (owner OD ~21:45Z via MAIN ROOT-81)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 20/11 | owner via ROOT-81 | **dress picker** — her figure as a live preview on the left, choices on the right (KIT §60.2 kitDressPicker) | every dress picker (toilDressUI) | kit keeper | **KIT READY** review/kit-dress-picker |
