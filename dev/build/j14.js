@@ -31,7 +31,7 @@ function coldFacActs(p){const me=p===S,L=BAL.ag.par3.cold.lt,F=BAL.ag.par3.fac,o
  if(f){A.push(...card(`Gửi thư xin rời ${f.name}`,"Viết thư báo với phe rằng ngươi không muốn liên lụy ai nữa.",`rời phe, không dính bè phái: Danh ${balSg(BAL.rcv.prop.danh)} · đồng đảng quý ${me?"ngươi":p.name} ${balSg(-F.leave.rel)}`,F.gLeave,
    ()=>leaveFacSelf(p)));
   if(facRoll(f).some(x=>x!==p)){const q=queenP()&&queenP()!==p?queenP():null;
-   A.push(...card(`Gửi thư tố ${f.name}`,`Kể hết chuyện của phe trong thư, nhờ người dâng lên ${q?(q===S?"ngươi":"Hoàng hậu"):"Hoàng thượng"}.`,`Danh ${balSg(F.sell.danh)}, Sủng ${balSg(F.sell.sung)} · cả phe oán ${balSg(F.sell.oan)}`,F.gSell,()=>sellOut(p)))}}
+   A.push(...card(`Gửi thư tố ${f.name}`,`Kể hết chuyện của phe trong thư, nhờ người dâng lên ${q?(q===S?"ngươi":"Hoàng hậu"):"Hoàng thượng"}.`,`Danh ${balSg(F.sell.danh)}, ${sgOf(p,F.sell.sung)} · cả phe oán ${balSg(F.sell.oan)}`,F.gSell,()=>sellOut(p)))}}
  else{const G=(S.facs||[]).map(g=>({g,l:facLeader(g)})).filter(o=>o.l&&o.l!==p&&facIn(o.l)&&aff(o.l,p)>=F.clanAff).sort((a,b)=>aff(b.l,p)-aff(a.l,p));const o=G[0];
   if(o)A.push(...card(`Gửi thư xin vào ${o.g.name}`,`Xin ${o.l===S?"ngươi":o.l.name} cho đứng cùng phe, để có người bên ngoài nói giúp.`,`${o.l===S?"ngươi":o.l.name} tự quyết (${rcvWord(o.l,p)}) · vào phe thì nhờ phe vận động được`,F.gJoin,()=>rcvAsk("facJoin",p,o.l,o.g.id)))}
  return A}

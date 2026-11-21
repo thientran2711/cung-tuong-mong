@@ -156,7 +156,7 @@ function herStep(Wh){const seat=other();let st=null;try{st=TH.seatOf(seat)}catch
   E.stat.her+=n;lg(["her-step",target,S.buoi,n])})}
 /* in her step: no NPC acts again (his step rolled them, with her entry in the harem), her places = his, no host screen work */
 if(typeof rivalsBuoi==="function"){const f=rivalsBuoi;rivalsBuoi=function(){if(her&&CW.ctx)return "";return f.apply(this,arguments)}}
-if(typeof placeWhere==="function"){const f=placeWhere;placeWhere=function(){if(her&&CW.ctx){whereIn(her.W);try{CW.refreshHere()}catch(e){}return}return f.apply(this,arguments)}}
+if(typeof placeWhere==="function"){const f=placeWhere;placeWhere=function(){if(her&&CW.ctx){whereIn(her.W);try{if(CW.keepFriendPos)CW.keepFriendPos();CW.refreshHere()}catch(e){}return}/* coop-arrive-see: the host's place, not the copied one */return f.apply(this,arguments)}}
 if(typeof curtain==="function"){const f=curtain;curtain=function(){if(CW.ctx)return;return f.apply(this,arguments)}}
 /* her Kỳ nguyệt sự answer (jcoopworld cySend at eW(): the intent replaces the ctm-p2 "cyb" relay): into her stored person (runDo: S = hers),
    CW.fcy for the draw's wait; then the host's held draw runs (cyFree) */

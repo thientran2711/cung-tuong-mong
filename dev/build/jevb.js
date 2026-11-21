@@ -15,30 +15,36 @@
        consort really holds a gift from her, names it, and the gift really comes back to her chest; "borrowDress" asks only for a thing she
        really owns (a robe, a hairpin, an instrument when she plays Cầm, her maid). ============================================== */
 Object.assign(BAL,{ctxTaste:12,ctxRelDiv:10,ctxRelCap:8,ctxMoodBad:-9,ctxMoodGood:6,ctxEmp:[8,0,-5,-10],ctxCap:22,moodEvGood:28,moodEvBad:30,moodKeep:4});
+/* jemo-bal (law 4): the typed numbers of jevb's context odds and event moods. steps = a person's hidden taste steps (× ctxTaste); sureDiv = a sure option's
+   relation × (1 + taste ÷ sureDiv); arcK = an arc scene's taste share; scK = odds per scene point of an extra / chapter option; moodSo = a frightened person's odds
+   (the other bad feelings: −moodSo); heavyLv = grief at this level counts as anger; causeN = mood causes kept; rankLoss = loss points of a rank lost in an event;
+   g = a consort who now resents her (oán ≥ oan or liking ≤ aff): Giận base + k × change, at most cap; v = a consort who likes her more (liking ≥ aff): Vui;
+   me = her own mood after an event (net ≥ min): base (moodEvGood / moodEvBad) + k × net, at most cap */
+Object.assign(BAL,{evb:{steps:[-1,-.5,0,.5,1],sureDiv:2,arcK:.6,scK:7,moodSo:3,heavyLv:3,causeN:6,rankLoss:20,g:{oan:3,aff:-6,cap:70,base:25,k:2},v:{aff:6,cap:60,base:20,k:2},me:{min:2,cap:80,k:2}}});
 function ctxSeed(){if(!S)return 1;if(!S.ctxSeed)S.ctxSeed=1+Math.floor(Math.random()*2147483646);return S.ctxSeed}
 function ctxHash(s){let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
 function ctxKey(p){try{return typeof key==="function"?key(p):p&&p.id}catch(e){return""}}
 /* the person's taste for this kind of answer this life: −1, −½, 0, ½, 1 */
-function ctxTaste(p,ans){const n=String(ans||"").replace(/<[^>]+>/g,"").replace(/\{[^}]*\}|\d+/g,"").toLowerCase().split(/[,:(]/)[0].trim();const h=ctxHash(ctxSeed()+"|"+ctxKey(p)+"|"+n);return [-1,-.5,0,.5,1][h%5]}
-function ctxMood(p){try{const e=emoGet(p);if(!e||e.k==="binh")return 0;const g=typeof feelGrp==="function"?feelGrp(e.k):e.k;if(g==="binh")return 0;if(["gian","ghen"].includes(g)||(g==="buon"&&typeof feelLv==="function"&&feelLv(p,e.k)>=3))return BAL.ctxMoodBad;if(g==="vui")return BAL.ctxMoodGood;if(g==="so")return 3;return -3}catch(e){return 0}}
+function ctxTaste(p,ans){const n=String(ans||"").replace(/<[^>]+>/g,"").replace(/\{[^}]*\}|\d+/g,"").toLowerCase().split(/[,:(]/)[0].trim();const h=ctxHash(ctxSeed()+"|"+ctxKey(p)+"|"+n);const T=BAL.evb.steps;return T[h%T.length]}
+function ctxMood(p){try{const e=emoGet(p);if(!e||e.k==="binh")return 0;const g=typeof feelGrp==="function"?feelGrp(e.k):e.k;if(g==="binh")return 0;if(["gian","ghen"].includes(g)||(g==="buon"&&typeof feelLv==="function"&&feelLv(p,e.k)>=BAL.evb.heavyLv))return BAL.ctxMoodBad;if(g==="vui")return BAL.ctxMoodGood;if(g==="so")return BAL.evb.moodSo;return -BAL.evb.moodSo}catch(e){return 0}}
 function ctxRel(p){try{if(!p||p===S||!rivals.includes(p))return 0;return cl(Math.round(aff(p,S)/BAL.ctxRelDiv),-BAL.ctxRelCap,BAL.ctxRelCap)}catch(e){return 0}}
 function ctxOdds(p,ans){if(!p||!S)return 0;return cl(Math.round(ctxTaste(p,ans)*BAL.ctxTaste+ctxMood(p)+ctxRel(p)),-BAL.ctxCap,BAL.ctxCap)}
 window.ctxOdds=ctxOdds;
 /* j68 events: c6(name, spec) — the person in it = the first relation target */
 (function(){if(typeof c6!=="function")return;const c0=c6;c6=function(n,s){try{if(s&&!window.__ctxOff){const who=((s.r||[])[0]||(s.lr||[])[0]||[])[0];const p=who&&(who.o||who);
   if(p&&typeof p==="object"){s=Object.assign({},s);if(s.p!=null)s.p=s.p+ctxOdds(p,n);
-   else{const t=ctxTaste(p,n);if(t&&s.r)s.r=s.r.map(([a,v])=>[a,Math.round(v*(1+t/2))||v])}}}}catch(e){}return c0.call(this,n,s)}})();
+   else{const t=ctxTaste(p,n);if(t&&s.r)s.r=s.r.map(([a,v])=>[a,Math.round(v*(1+t/BAL.evb.sureDiv))||v])}}}}catch(e){}return c0.call(this,n,s)}})();
 /* j67 chapters: the beat's person (v / v2 / foe / hh), the Emperor's mood on his beats */
 (function(){if(typeof oOf67!=="function")return;const o0=oOf67;oOf67=function(A,o,b){const r=o0.apply(this,arguments);try{if(o.o==null||window.__ctxOff)return r;
   let p=null;const w=b&&b.w;if(w==="v"||w==="v2")p=rv67(A,w);else if(w==="foe")p=typeof foe67==="function"?foe67():null;else if(w==="hh")p=qOn()?rivals[0]:null;
-  let d=p?ctxOdds(p,o.n):0;if(w==="emp"&&S.emp)d+=BAL.ctxEmp[S.emp.mood|0]||0;if(!p&&w!=="emp")d+=Math.round(ctxTaste({id:"arc:"+A.a+":"+(b.h||"")},o.n)*BAL.ctxTaste*.6);
-  return od((typeof o.o==="function"?o.o(A):o.o)+((o.e||b.x)?(A.sc||0)*7:0)+d)}catch(e){return r}}})();
+  let d=p?ctxOdds(p,o.n):0;if(w==="emp"&&S.emp)d+=BAL.ctxEmp[S.emp.mood|0]||0;if(!p&&w!=="emp")d+=Math.round(ctxTaste({id:"arc:"+A.a+":"+(b.h||"")},o.n)*BAL.ctxTaste*BAL.evb.arcK);
+  return od((typeof o.o==="function"?o.o(A):o.o)+((o.e||b.x)?(A.sc||0)*BAL.evb.scK:0)+d)}catch(e){return r}}})();
 /* ---------- (3) mood causes ---------- */
 let EVB_ART="";  /* the picture of the event whose choice is resolving now (evbMood): stored on each cause it sets (x.a) */
 (function(){if(typeof emoSet!=="function")return;const s0=emoSet;emoSet=function(p,k,v,why,t){const r=s0.apply(this,arguments);try{const q=emoRes(p);if(q&&EMO[k]&&v>0&&why){const W=emoW();
-  const H=(q.emoH||[]).filter(x=>W-x.w<=BAL.moodKeep&&x.why!==why);const x={k,v:Math.round(v),why:String(why).slice(0,90),w:W};if(EVB_ART)x.a=EVB_ART;H.unshift(x);q.emoH=H.slice(0,6)}}catch(e){}return r}})();
+  const H=(q.emoH||[]).filter(x=>W-x.w<=BAL.moodKeep&&x.why!==why);const x={k,v:Math.round(v),why:String(why).slice(0,90),w:W};if(EVB_ART)x.a=EVB_ART;H.unshift(x);q.emoH=H.slice(0,BAL.evb.causeN)}}catch(e){}return r}})();
 function emoCauses(p){const q=emoRes(p);if(!q)return[];const W=emoW();const L=(q.emoH||[]).filter(x=>W-x.w<=BAL.moodKeep);const e=q.emo;
- if(e&&e.why&&e.v>=15&&!L.some(x=>x.why===e.why))L.unshift({k:e.k,v:e.v,why:e.why,w:e.w||W});return L.sort((a,b)=>b.w-a.w||b.v-a.v)}
+ if(e&&e.why&&e.v>=BAL.eff.jemo.floor&&!L.some(x=>x.why===e.why))L.unshift({k:e.k,v:e.v,why:e.why,w:e.w||W});return L.sort((a,b)=>b.w-a.w||b.v-a.v)}
 window.emoCauses=emoCauses;
 (function(){if(typeof emoBadge!=="function")return;const b0=emoBadge;emoBadge=function(p){const h=b0.apply(this,arguments);try{const q=emoRes(p);if(h&&q)return h.replace("<img ",`<img data-emo="${emoKey(q)}" role="button" tabindex="0" `)}catch(e){}return h}})();
 /* MOOD BOX PICTURE (owner 15/11 "ảnh khung tâm trạng là hiện sự việc liên quan", review/mood-dialog): the picture shows the EVENT that
@@ -92,26 +98,36 @@ function evbMood(m,c,b){try{const a=typeof kitEvArt==="function"?kitEvArt(m):nul
  try{return evbMood0(m,c,b)}finally{EVB_ART=""}}
 function evbMood0(m,c,b){const nm=String(c.n||"").replace(/<[^>]+>/g,"").split(":")[0].slice(0,40);const tt=String(m.t||"").replace(/^(Chính tuyến|Phụ tuyến) · /,"").split(" · ")[0];
  const D={};let g=0,l=0;for(const [k] of (typeof RKEYS!=="undefined"?RKEYS:[])){const d=(S[k]||0)-(b[k]||0);if(!d||k==="bac"||k==="suc")continue;D[k]=d;const bad=(k==="ghen"||k==="oan")?d>0:d<0;if(bad)l+=Math.abs(d);else g+=Math.abs(d)}
- if(S.rank<b.rank)l+=20;let resent=0;
+ if(S.rank<b.rank)l+=BAL.evb.rankLoss;let resent=0;
  for(const v of rivals||[]){const o=b.rel[v.id];if(!o||!v.alive)continue;const da=aff(v,S)-o.a,dO=Math.round(oan(v,S))-o.o;
-  if(dO>=3||da<=-6){resent++;emoSet(v,"gian",Math.min(70,25+Math.abs(Math.min(da,-dO))*2),`vì ${S.name} «${nm}»`,"me")}
-  else if(da>=6)emoSet(v,"vui",Math.min(60,20+da*2),`được ${S.name} đối đãi tử tế («${nm}»)`)}
+  if(dO>=BAL.evb.g.oan||da<=BAL.evb.g.aff){resent++;const G=BAL.evb.g;emoSet(v,"gian",Math.min(G.cap,G.base+Math.abs(Math.min(da,-dO))*G.k),`vì ${S.name} «${nm}»`,"me")}
+  else if(da>=BAL.evb.v.aff)emoSet(v,"vui",Math.min(BAL.evb.v.cap,BAL.evb.v.base+da*BAL.evb.v.k),`được ${S.name} đối đãi tử tế («${nm}»)`)}
  const why=`${tt}: ${nm}`;
- if(g>l&&g>=2)emoSet(S,"vui",Math.min(80,BAL.moodEvGood+g*2),`${why}, được việc`);
- else if(l>g&&l>=2)emoSet(S,resent?"lo":"buon",Math.min(80,BAL.moodEvBad+l*2),`${why}, ${resent?"có người để bụng":"chịu thiệt"}`)}
+ const M=BAL.evb.me;if(g>l&&g>=M.min)emoSet(S,"vui",Math.min(M.cap,BAL.moodEvGood+g*M.k),`${why}, được việc`);
+ else if(l>g&&l>=M.min)emoSet(S,resent?"lo":"buon",Math.min(M.cap,BAL.moodEvBad+l*M.k),`${why}, ${resent?"có người để bụng":"chịu thiệt"}`)}
 /* ---------- (4) real preconditions ---------- */
 (function(){try{const s=E68I&&E68I.doubtVisit;if(!s)return;const vf0=s.vf;
  s.vf=function(p){let ok=null;try{ok=vf0?vf0(p):null}catch(e){}const all=ok&&ok.length?ok:[...(s.v||[]).keys()];const v=RV(p.a0);const gave=!!(v&&(v.inv||[]).some(e=>e.from==="me"));return all.filter(i=>i!==2||gave)};
  const P0=PEND.e68doubtVisit;PEND.e68doubtVisit=function(p){const d=P0.apply(this,arguments);try{if(!d||p.vi!==2)return d;const v=RV(p.a0);const i=v?(v.inv||[]).findIndex(e=>e.from==="me"):-1;
   if(i<0&&!p.gk)return null;const k=p.gk||v.inv[i].k;p.gk=k;d.t=String(d.t).replace("trả lại quà ngươi tặng",`trả lại ${IT[k]?itm(k).n:"món quà"} ngươi tặng`);
   d.o=d.o.map(o=>Object.assign({},o,{go:()=>{try{if(!p.back){const j=(v.inv||[]).findIndex(e=>e.from==="me"&&e.k===k);if(j>=0){const x=v.inv.splice(j,1)[0];x.from="back";S.inv.push(x);p.back=1;log(`${itm(k).n} trở về rương của ngươi.`)}}}catch(e){}if(o.go)return o.go()}}))}catch(e){console.error(e)}return d}}catch(e){}})();
+/* r4b (F1 whole group, law 6c): «Cho mượn» names a REAL piece of hers — and now it really goes: through THE ONE LOAN RULE (jdc dcBorrow: the NPC
+   holds it, the loan book, back the next tuần; co-op guest → the host's «dcin»). Before, the dialog named her piece and nothing moved (a loan
+   with no object). Only a piece she may lend (dcFree, not worn); the đàn only when she owns one (before: «cây đàn tỳ bà» with no đàn at all). */
 (function(){try{const s=E68I&&E68I.borrowDress;if(!s)return;const vf0=s.vf;
- const own=()=>{const L=(S.inv||[]).filter(e=>!e.h&&IT[e.k]);return{robe:L.find(e=>itm(e.k).kd==="Y phục"),pin:L.find(e=>itm(e.k).kd==="Trâm cài"||itm(e.k).sl==="hair"),inst:L.find(e=>e.k==="dancoc")||((S.arts&&S.arts.cam)>=1?{k:null}:null)}};
- s.vf=function(p){let ok=null;try{ok=vf0?vf0(p):null}catch(e){}const all=ok&&ok.length?ok:[0,1,2,3];const o=own();return all.filter(i=>i===0?!!o.robe:i===1?!!o.inst:i===2?!!o.pin:!!S.maid)};
+ const lend=()=>typeof dcBorrow==="function"&&(typeof dcLend!=="function"||dcLend());
+ const own=()=>{const L=(S.inv||[]).filter(e=>e&&!e.w&&IT[e.k]&&(typeof dcFree==="function"?dcFree(e):!e.h));return{robe:L.find(e=>itm(e.k).kd==="Y phục"),pin:L.find(e=>itm(e.k).kd==="Trâm cài"||itm(e.k).sl==="hair"),inst:L.find(e=>e.k==="dancoc")}};
+ const pc=(o,vi)=>vi===0?o.robe:vi===1?o.inst:vi===2?o.pin:null;
+ s.vf=function(p){let ok=null;try{ok=vf0?vf0(p):null}catch(e){}const all=ok&&ok.length?ok:[0,1,2,3];const o=own();const L=lend();return all.filter(i=>i===3?!!S.maid:L&&!!pc(o,i))};
  const P0=PEND.e68borrowDress;PEND.e68borrowDress=function(p){const d=P0.apply(this,arguments);try{if(!d)return d;const o=own();
-  if(p.vi===0&&o.robe)d.t=String(d.t).replace("bộ y phục thêu phượng của ngươi",`bộ ${itm(o.robe.k).n.replace(/^Áo /,"áo ")} của ngươi`);
-  if(p.vi===2&&o.pin)d.t=String(d.t).replace("chiếc trâm ngọc",`chiếc ${itm(o.pin.k).n.replace(/^Trâm/,"trâm")}`);
-  if(p.vi===1&&o.inst&&o.inst.k)d.t=String(d.t).replace("cây đàn tỳ bà của ngươi",`cây ${itm(o.inst.k).n.replace(/^Đàn/,"đàn")} của ngươi`)}catch(e){}return d}}catch(e){}})();
+  if(p.vi<=2){const e0=pc(o,p.vi);if(!e0&&!p.bk)return null;p.bk=p.bk||e0.k;const v=RV(p.a0);
+   /* the two «Cho mượn» options move the piece (their own thiện cảm / bạc numbers stay as shown: aff:false); «Từ chối» moves nothing */
+   d.o=d.o.map((x,i)=>i>1?x:Object.assign({},x,{go:()=>{const e=(S.inv||[]).find(y=>y&&y.k===p.bk&&!y.w&&dcFree(y));
+    if(!v||!v.alive||!e||!dcBorrow(v,S,e,{why:"ev",aff:false})){log(`${itm(p.bk).n} đã không còn trong rương ngươi; ${v?v.name:"nàng"} về tay không.`);return}
+    log(`${v.name} mượn ${itm(p.bk).n} của ngươi, qua tuần sau trả.`);if(x.go)return x.go()}}))}
+  if(p.vi===0&&p.bk)d.t=String(d.t).replace("bộ y phục thêu phượng của ngươi",`bộ ${itm(p.bk).n.replace(/^Áo /,"áo ")} của ngươi`);
+  if(p.vi===2&&p.bk)d.t=String(d.t).replace("chiếc trâm ngọc",`chiếc ${itm(p.bk).n.replace(/^Trâm/,"trâm")}`);
+  if(p.vi===1&&p.bk)d.t=String(d.t).replace("cây đàn tỳ bà của ngươi",`cây ${itm(p.bk).n.replace(/^Đàn/,"đàn")} của ngươi`)}catch(e){}return d}}catch(e){}})();
 /* ---------- (5) HINTS THAT TELL OPTIONS APART (coordinator 15/11 after opt-render r7; owner 15:10Z "reading hints must clearly beat random") ----------
    kitHint (jk2b, pure) at the VAGUE level (Tâm cơ < BAL.hintMid, most new lives) often gives two or more options of one dialog the same words
    (night1 talk, giu "có phúc con cái" ×2, prep, festival invitations…). Before a dialog shows, options whose hints collide get a per-option
