@@ -1766,3 +1766,8 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - PARKING: one file dev/PARKING_LOT.md (danh hiệu title art parked).
 - TRIGGER: my hourly trig_019U9kpNKj9DCjzVrtb7eHFw (min 32) → successor creates its own and disables mine. Next title «MAIN CHÍNH 87».
 - (21/11 03:34Z) MAIN CHÍNH 86 opened child MAIN CHÍNH 87 = session_01Rc5AsLqvvursHGF726bgwU (depth 7). 86 stops; 87 disables trig_019U9kpNKj9DCjzVrtb7eHFw. Late messages to 86 are relayed to 87.
+
+## MAIN CHÍNH 87 (21/11 03:45Z)
+- MAIN = MAIN CHÍNH 87 session_01Rc5AsLqvvursHGF726bgwU; START_CTX 10 % (1M window; roll at 35 %, ceiling 60 %); depth 7 (child would be 8 = limit).
+- LOAD: main running 0 own (owner UI marks + go-live; ~20 UI workers/rvs inherited from 86) | B/C/D/E: non-UI already with them | moved: none.
+- (03:45Z) Fixed broken commit afc81554 (mood-seal rv claim): conflict markers in 17 handover-branch files (CLAIMS, B/C/D/E STATUS, OWNER_MARKS, PARKING_LOT, SKINS, palettes json/py, reports, KIT_REQUESTS) → kept upstream side (= pre-break text + later edits); JSON parses; B map-places claim kept.

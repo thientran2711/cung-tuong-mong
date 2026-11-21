@@ -95,11 +95,8 @@ cell, same family as `kitResultSeal`. When it lands, jmgid `mgIdRow` swaps the l
 - Proposed part: `kitColDot(fam, {role:"main"|"sec", size:"sm"|"md"})` → `<span class="kcdot">` = round dot (12 px sm / 16 px md, 1 px `--line` ring, soft sheen like §60 swatches) in the family hex + the family name after it (`.75rem`, ink); `kitColDots([[fam,role],…])` = a row of them separated by `.ksep ·`. Read-only, not tappable. Colours = ONE table `BAL.dc.fam` (jbal2, review/dresscode: hong cam do vang luc lam tim trang den nau with hex + name). Also used inside kitRows values (item rows "Màu"), the festival calendar popover (jmcal) and the festival gate panel.
 - Until KIT READY: review/dresscode prints the family NAMES only (plain kitRows values, "Đỏ (chính) · Vàng (phụ)"); `dcDots()` already calls `kitColDot` when it exists, so the dots appear with no code change in the feature.
 - Status: open → MAIN (kit keeper).
-<<<<<<< HEAD
 
 ## 21/11 econ-tamco (ECON TAMCO #3 session_01964izCiU7bSoQZwWZBzj4B for FOREMAN D #13) KIT REQUEST — a visible «paid only on success» price on the option card
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
 | 21/11 | D econ-tamco (review F1) | **§6.2b option card × §88 THÀNH Mất**: a price paid ONLY when a rolled act works (ECON_WIN: bribe / block / xinhh / thathu) is written «thành: …, Bạc -N» (§88 → THÀNH Mất). On the §6.2b card (Tốn + Được only) it shows as a red «Bạc -N» item inside the «Được» row, with no word that it is paid only on success; the BẠI line «không mất bạc» is folded behind «!». Ask: one kit form that says it in the visible row, e.g. the item reads «Bạc -N khi thành» / a small «trả khi thành» tag (wording per VANPHONG), for every option and act card with a THÀNH Mất price. | PEND.roadpick (jtamco), j17 actLine (ECON_WIN acts) and any «thành: …, Bạc -N» card (j10/j15/j77/jeitem) | MAIN kit keeper | open; NOT blocking: shown = charged already holds on review/econ-tamco d07e20bbab87eb892b8ac5b6b24e0984f17e3a01 (Tốn = paid either way; the success price is the red item; the failure line is in «!»). Once the kit form exists, no change is needed in jtamco (it writes the §88 source string). |
-=======
->>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)

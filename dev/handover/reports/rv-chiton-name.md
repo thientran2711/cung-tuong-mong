@@ -19,7 +19,6 @@ quickcheck PASS 239 s (old save ok, render 298/293, tab 582/582, buổi 1676/134
 - Chí tôn left column (Fold): the «Niên hiệu» row sits at the bottom of .pcl next to «Đã quen»; the column scrolls (existing). Fine, but keeper may want it nearer the portrait.
 - Duplicate content on Chí tôn: trait box («Lạnh lùng: Sủng lên chậm…») repeats the «Hay» row — the «!» box replacement is the keeper's.
 - Reviewer edits: KIT.md only (+ rebuild). 
-<<<<<<< HEAD
 
 ## rv2 (MAIN CHÍNH 86, sonnet, 21/11) — PASS 0b2bbd82
 PRIORITY #1 CHECK: OD 21/11 #3,#4,#19,#25,#40,#41 · main 9c1dd605 · review/chiton-name 6c024ff0 delta (j28 «Đa nghi», jpcf trait rows) · keeper review/kit-pcrow-square already landed on main.
@@ -27,5 +26,3 @@ PRIORITY #1 CHECK: OD 21/11 #3,#4,#19,#25,#40,#41 · main 9c1dd605 · review/chi
 - Delta 6c024ff0: rows «Tính cách | …» + «Trọng | …» with kit tap-words (kitFactTap: dotted underline confirmed by computed style; tap pops only that word + its ETRAITS sentence); «Đa nghi» (no «dễ nghi» left in dev/build); no «Hay» row on Emperor/consort/maid dialogs; earlier content intact (Hoàng thượng + Niên hiệu row, one-column rows, no duplicate chips).
 - Gates: quickcheck PASS (9d798e41, pre-pcrow merge; open 1691ms, old save ok, perf ≈ live); coop-e2e 92/92; pcard-fill + pcard-facts 0 errors; chiton-name-scan 0; trait-rename-oldsave 9/9. Shots Fold 755x1000 + iPad 1180x820: Hoàng thượng, consort, maid looked at.
 - Notes (not blockers): unknown consort shows «Tính nết | chưa rõ» (existing wording); maid card has no trait rows (none to show).
-=======
->>>>>>> 60c0578d (B ROOT-4 claim map-places mem fix)
