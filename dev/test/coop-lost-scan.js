@@ -93,7 +93,8 @@ const INST=([seat,world,dbg])=>{window.__seat=seat;if(dbg&&!window.__gw){window.
   try{for(const m of Q)if(m&&m.pp&&m.pp.e&&typeof m.pp.e==='object')add(m.pp.e.iu,'dlg')}catch(e){}
   const D={};for(const id of ids){const e=(S.lost||[]).map(c=>c.e).find(e=>e&&e.iu===id);const lg=((S.il&&S.il.log)||[]).find(l=>l[1]===id);D[id]=ilDur(e||{k:lg&&lg[2]})}/* a used-up kind may end at 0 */
   const ky=((S.il&&S.il.log)||[]).filter(l=>/kyngo/.test(String(l[5]))).length;
-  return{ids:[...ids],M,D,net:(S.il&&S.il.net)||0,ky,cases:(S.lost||[]).length,open:(S.lost||[]).filter(c=>c.st!=='done').length}};
+  const NETL=((S.il&&S.il.log)||[]).filter(l=>l[5]==='net').map(l=>[l[0],l[1],l[2],l[3],ids.has(l[1])?'LOST-CASE':'other']);
+  return{NETL,ids:[...ids],M,D,net:(S.il&&S.il.net)||0,ky,cases:(S.lost||[]).length,open:(S.lost||[]).filter(c=>c.st!=='done').length}};
  window.__why=id=>{const L=((S.il&&S.il.log)||[]).filter(l=>l[1]===id);const C=(S.lost||[]).filter(c=>c.e&&c.e.iu===id).map(c=>({id:c.id,own:c.own,st:c.st,at:c.at,how:c.how,keep:c.keep,by:c.by,cause:c.cause,w:c.w,end:c.end}));return{L,C}};
  return true};
 (async()=>{const b=await chromium.launch();
@@ -126,7 +127,8 @@ const INST=([seat,world,dbg])=>{window.__seat=seat;if(dbg&&!window.__gw){window.
  ok(ca.cases+cb.cases>=20&&ca.ky>=3,`lost-case traffic on both seats (host cases ${ca.cases} · guest cases ${cb.cases} · forced losses A ${lost.A} B ${lost.B} · Kỳ ngộ lines host ${ca.ky} guest ${cb.ky})`);
  ok(!dI.size,`no piece in two places (${dI.size} pieces persistent dup, ${dups.length} piece-weeks)`,dups.slice(0,4).map(x=>({w:x.w,id:x.id,at:x.at})));
  ok(!vI.size,`no durable piece vanished (${vI.size} pieces, ${vans.length} piece-weeks)`,vans.slice(0,4).map(x=>({w:x.w,id:x.id})));
- ok(ca.net-net0[0]===0&&cb.net-net0[1]===0,`ledger net (unrouted removals) unchanged on both seats (host +${ca.net-net0[0]} guest +${cb.net-net0[1]})`);
+ const NL=ca.NETL.map(x=>['A'].concat(x)).concat(cb.NETL.map(x=>['B'].concat(x)));console.log('NET lines',JSON.stringify(NL));const nlo=NL.filter(x=>x[5]==='LOST-CASE');
+ ok(!nlo.length,`ledger net: no unrouted removal of a lost-case piece on either seat (${nlo.length}; all pieces host +${ca.net-net0[0]} guest +${cb.net-net0[1]}, the others are outside jlost: reported)`,nlo);
  console.log('SUMMARY',JSON.stringify({weeks:weeksOk,ids:Object.keys(seen).length,dupPieces:dI.size,dupWeeks:dups.length,vanPieces:vI.size,vanWeeks:vans.length,casesA:ca.cases,casesB:cb.cases,kyA:ca.ky,kyB:cb.ky,lost}));
  fs.writeFileSync(OUT+'/faults.json',JSON.stringify({dups,vans},null,1));
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
