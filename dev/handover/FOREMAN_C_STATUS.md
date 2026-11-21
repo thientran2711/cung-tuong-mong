@@ -1626,3 +1626,4 @@ ROOT-B7 ~20:25Z: OWNER L2233 (ROOT-B6 chat, relayed; pics M2217-06/07/08): QP co
 ROOT-B7 ~20:28Z: OWNER L2234: Hán collar chốt, không sửa gì → G62 LOCKED, Hán excluded from L2228 low neckline. → NECK1 told. Next Lượt 2235.
 ROOT-B7 ~20:32Z: OWNER L2235: phoenix plumage palette L2227 DUYỆT → G33 ext set + common_blocks/phoenix_plumage.txt. Builder wiring pending. Note: she judges by pictures, not tables. Next Lượt 2236.
 ROOT-B7 ~20:35Z: OWNER L2236: HQP M2217-07 blotch = AI glitch, re-run OK → no layer/colour change; keep her vân kiên + tassel-length orders. → THUROOT9 told. Next Lượt 2237.
+ROOT-B7 ~20:40Z: OWNER L2238 asked if M2217 sleeves reach ankles; answered ladder (t1–t3 knees / t4–t6 mid-calf / t7–t8 ankles); owner: 'Ok giữ vậy' → sleeve ladder L2215 confirmed again (G5 update allowed). Next Lượt 2239.
