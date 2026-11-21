@@ -22,6 +22,9 @@ function srvM(){return S&&S.srv?RV(S.srv.mid):null}
 function bid(){return wk()*B4N+(S.buoi||0)}
 function srvTitle(){if(!S||!S.srv)return"";if(S.srv.lau>0)return"Cung nữ Tân Giả khố";const m=srvM();const n=S.srv.mama?"Ma ma":SRK.maid[S.srv.rk]||"Cung nữ";return m?`${n} của ${m.name}`:n}
 function srvRkN(){return S.srv.lau>0?"Cung nữ Tân Giả khố":S.srv.mama?"Ma ma":SRK.maid[S.srv.rk]||"Cung nữ"}
+/* maid-8tabs: the consort panels open on her road too (Ân oán, Chí tôn …): her own title there is her servant rung, never «Đáp ứng» (as jkc says «Tiểu thư») */
+(function(){const r0=rkName;rkName=function(p){if(p===S&&isSrv())return srvRkN();return r0.apply(this,arguments)}})();
+(function(){const r0=rkOfFace;rkOfFace=function(kind,o){const g=r0.apply(this,arguments);if(o===S&&kind==="consort"&&isSrv()&&g)return[g[0],srvRkN()];return g}})();
 function srvW(f){if(!isSrv())return f();const o=S.out;S.out=1;try{return f()}catch(e){console.error(e);return""}finally{S.out=o}}
 function srvMerit(n){S.srv.mp=(S.srv.mp||0)+n}
 /* công lao of an order done for the master (srvDoOrder; shown on every order card: ordRow, jptime receiver row) — ONE reader of the BAL key */
@@ -107,7 +110,7 @@ function srvInit(){const L=liveRivals(true);if(!L.length)return;const m=pick(L.f
  /* review/newgame-ui: event frame — palace-maid entering picture + her figure (KIT 32.2) */Q=[{t:"Nhập cung làm cung nữ",stage:[S],headArt:{src:"img/ev-nhap-cung-cn.webp",label:"Nhập cung"},h:`<p>${S.name}, ${S.age} tuổi, con nhà thường dân. Qua kỳ tuyển cung nữ, Nội vụ phủ chia ngươi về hầu <b>${rkName(m)} ${m.name}</b> ở ${palName(palaceOf(m))}.</p>
   ${kitRows([["Tính chủ",`${netTxt(m)}`,"t"],["Chủ tin ngươi",S.tin,"t"],["Lương tháng",`${CNV_WAGE[1]} bạc`,"t"],
    ["Đường lên","được Hoàng thượng để mắt mà phong Đáp ứng; lên Chưởng sự cô cô; được ban gả","t"],["Đường xuống","bị phạt, đày Tân Giả khố, chết trong mưu của người khác","t"]])}
-  <p class="past">Mỗi buổi ${BAL.time.khac} khắc. Mục Việc: việc nặng và việc chủ sai. Bản đồ: chỉ nơi cung nữ được đến. Đồng liêu: kết bạn, đề phòng kẻ vu cáo.</p>`}];
+  <p class="past">Mỗi buổi ${BAL.time.khac} khắc. Mục Hành sự: việc nặng và việc chủ sai. Dư đồ: chỉ nơi cung nữ được đến. Hậu cung › Đồng liêu: kết bạn, đề phòng kẻ vu cáo.</p>`}];
  log(`Ngươi vào cung làm cung nữ, hầu ${rkName(m)} ${m.name}.`)}
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&S.origin&&S.origin.k==="cnv"&&!S.srv){quiet=true;srvInit();quiet=false;deal();showModal();render()}}catch(e){console.error(e)}return r}})();
 
@@ -282,8 +285,8 @@ function srvMonth(){let ev="";S.turn++;const rk=S.srv.rk;apply({bac:CNV_WAGE[rk]
  ev+=srvW(()=>{let e="";for(const v of liveRivals(true))stipend(v);e+=rivalsMonth()||"";e+=servRanks()||"";e+=servMonth()||"";oanMonth();restock();e+=heirMonth()||"";e+=moodMonth()||"";e+=srvIllWorld();return e})||"";
  if(S.dead)return ev;srvMisCheck();const m=srvM();
  if(isSrv()&&S.srv.lau<=0&&m){S.srv.mp+=1+Math.floor(rkOf(m)/3);const need=srvMpNeed(S.srv.rk),mx=srvMax();
-  if(S.srv.mp>=need&&S.srv.rk<mx&&S.tin>=35&&typeof exSrvGate==="function"&&exSrvGate(S.srv.rk+1)){S.srv.mp=need}
-  else if(S.srv.mp>=need&&S.srv.rk<mx&&S.tin>=35){S.srv.rk++;S.srv.mp=0;S.tin=cl(S.tin+BAL.eff.j42.tinSrvMonth,0,100);log(`<b class="g">Được thăng ${SRK.maid[S.srv.rk]}.</b>`);Q.push({t:"Thăng bậc",who:pMe(),h:`<p>Nội vụ phủ ghi công: ngươi được thăng <b>${SRK.maid[S.srv.rk]}</b> trong cung ${m.name}.</p><p class="past">Lương tháng ${CNV_WAGE[S.srv.rk]} bạc.</p>`})}
+  if(S.srv.mp>=need&&S.srv.rk<mx&&S.tin>=BAL.srvx.tinUp&&typeof exSrvGate==="function"&&exSrvGate(S.srv.rk+1)){S.srv.mp=need}
+  else if(S.srv.mp>=need&&S.srv.rk<mx&&S.tin>=BAL.srvx.tinUp){S.srv.rk++;S.srv.mp=0;S.tin=cl(S.tin+BAL.eff.j42.tinSrvMonth,0,100);log(`<b class="g">Được thăng ${SRK.maid[S.srv.rk]}.</b>`);Q.push({t:"Thăng bậc",who:pMe(),h:`<p>Nội vụ phủ ghi công: ngươi được thăng <b>${SRK.maid[S.srv.rk]}</b> trong cung ${m.name}.</p><p class="past">Lương tháng ${CNV_WAGE[S.srv.rk]} bạc.</p>`})}
   else if(S.srv.mp>need)S.srv.mp=need;
   if(!amOn()&&S.srv.rk>=BAL.srvRk.dai&&S.age>=18&&roll(BAL.odb.j42.rbSrvMonth+S.nt/25))/* AG3: no monthly dice while the loop is on (jagmaid) */pushDil(mkP("cnvName",{src:"month"}),"Hoàng thượng để mắt");
   else if(S.srv.rk>=BAL.srvRk.dai){const ob=npcWhy("srvBuy",{m},()=>roll(BAL.odb.j42.rlSrvBuy));const big=ob?ob.who:null;/* npc-purpose G2a: a higher consort who wants a skilled maid (or hates her mistress) buys her */if(big){ap(big,{bac:-40});srvReassign(`${big.name} ${ob.why}, bỏ bạc mua ngươi về cung mình.`,big)}}
@@ -455,12 +458,9 @@ function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin
   if(Q[0]&&Q[0].h){Q[0].h=Q[0].h.replace(/<span>Phẩm cao nhất<\/span><b>[^<]*<\/b>/,`<span>Thân phận</span><b>${nm}</b>`).replace(/<span>Con cái<\/span><b>[^<]*<\/b>/,"<span>Con cái</span><b>không</b>");showModal()}}catch(e){}}return r}})();
 
 /* ---------- UI: HUD, tabs, panels, self card, map ---------- */
-const SRVTABS={act:"Việc",go:null,staff:"Đồng liêu",story:"Thân phận",log:null};
-function srvTabs(){const on=isSrv();document.querySelectorAll("#tabs button").forEach(b=>{const t=b.dataset.tab;if(b.dataset.l0==null){b.dataset.l0=b.textContent;b.dataset.s0=b.dataset.s||""}
- /* oi-render: write only what differs, and a tab-group head (j79 kgBar, data-kg) keeps the group's label: this reset it to its own label on
-    every render and kgBar put the group label back right after — two text changes per render, so the tab bar was re-measured (tabsFit) twice */
- const set=(d,l,s)=>{if(b.style.display!==d)b.style.display=d;if(b.dataset.kg&&!on)return;if(b.textContent!==l)b.textContent=l;if(b.dataset.s!==s)b.dataset.s=s};
- if(on){const L=SRVTABS[t];set(t in SRVTABS?"":"none",L||b.dataset.l0,L||b.dataset.s0)}else set("",b.dataset.l0,b.dataset.s0)})}
+/* maid-8tabs (owner 21/11 ~03:15Z mark #32, ~03:22Z mark #35 ONE SHELL): the cung nữ road shows the consort's 8 bottom tabs (Hành sự · Dư đồ · Hậu cung · Giao tình ·
+   Hoàng tự · Tư trang · Tài nghệ · Mệnh truyện) with the same groups and sub-tabs; what each tab shows on her road = ONE table, ROAD8 in jroad8.js
+   (Đồng liêu = Hậu cung › sub-tab, Thân phận = Mệnh truyện › sub-tab). No servant tab bar, no servant tab names left here. */
 function srvHud(){const e=$("hud-sung");if(!e)return;const sm=e.querySelector("small");if(sm&&sm.dataset.o0==null)sm.dataset.o0=sm.innerHTML;
  if(isSrv()){$("me-r").textContent=srvTitle();if(sm)sm.innerHTML=sm.dataset.o0.replace("Sủng","Chủ tin");e.querySelector("span").textContent=S.tin;const u=e.querySelector("u");if(u)u.style.width=S.tin+"%";e.title=HX.tin}
  else if(sm&&sm.innerHTML!==sm.dataset.o0){sm.innerHTML=sm.dataset.o0;e.title=""}}
@@ -472,16 +472,13 @@ function srvHud2(){const el=$("hud2");if(!el)return;const col=el.classList.conta
   +c("tin","Chủ tin",S.tin,S.tin<BAL.tinLv.lo?"hot":S.tin>=BAL.tinLv.hi?"ok":"")+c("nt","Hoàng thượng để ý",S.nt,S.nt>=BAL.ntRise.at?"ok":"")+c("sac","Sắc",S.sac)+c("tai","Tài",S.tai)+c("tamco","Tâm cơ",S.tamco)+c("duc","Đức",S.duc)
   +c("merit","Công lao",`${Math.floor(S.srv.mp)}/${srvMpNeed(S.srv.rk)}`)+c("wage","Lương tháng",`${CNV_WAGE[S.srv.rk]} bạc`)+c("age","Tuổi",`${S.age} · xuất cung ${S.srv.mama?BAL.srvAge.mama:BAL.srvAge.ask}`)
   +(S.srv.lau>0?c("lau","Tân Giả khố",`${S.srv.lau} tuần`,"hot"):"")+(S.srv.sec?c("sec","Biết chuyện của chủ",S.srv.sec,"hot"):"")+(S.srv.spyFor!=null?c("spy","Tai mắt cho người khác","","hot"):"")+(m?c("mis",`Chủ: ${m.name}`,netTxt(m)):"")}
-(function(){const r0=render;render=function(){if(isSrv()&&!(tab in SRVTABS))tab="act";const r=r0.apply(this,arguments);try{srvTabs();if(isSrv()&&tab==="go")srvMapFix()}catch(e){console.error(e)}return r}})();
+(function(){const r0=render;render=function(){/* maid-8tabs: every consort tab is hers too (jroad8 guards unknown keys) */const r=r0.apply(this,arguments);try{if(isSrv()&&tab==="go")srvMapFix()}catch(e){console.error(e)}return r}})();
 function srvMapFix(){const m=srvM(),mk=m&&palaceOf(m);document.querySelectorAll('#panel .mspot[data-go="home"]').forEach(b=>b.remove());
  document.querySelectorAll("#panel button.mspot[data-go]").forEach(b=>{const k=b.dataset.go;if(k===mk){b.classList.add("srvmine");if(S.place==="home")b.classList.add("here");const l=b.querySelector(".mlab");if(l&&!l.querySelector(".srvtag"))l.insertAdjacentHTML("beforeend",' <i class="srvtag">cung chủ</i>');b.disabled=false;return}
   const h=window.placeEnterHook(S,k);if(h&&!h.ok&&!b.disabled){b.disabled=true;b.classList.add("off","srvno");b.title=`${b.title.split(":")[0]}: ${h.why}`;let mt=b.querySelector(".mmeta");if(!mt){mt=document.createElement("span");mt.className="mmeta";b.appendChild(mt)}mt.innerHTML=`<em>${h.why}</em>`}})}
 (function(){const p0=renderPanel0;renderPanel0=function(){if(!isSrv()||!["staff","story","act"].includes(tab))return p0.apply(this,arguments);
- const el=$("panel");if(tab==="act"){const r=p0.apply(this,arguments);try{el.insertAdjacentHTML("afterbegin",srvHead())}catch(e){}return r}
- const gm=document.querySelector(".game");if(gm)gm.classList.remove("cardtab","maptab");const keep=el.dataset.tab===tab?el.scrollTop:0;el.innerHTML=tab==="staff"?srvStaffHTML():srvRoadHTML();el.dataset.tab=tab;el.dataset.pg="";kitFix(el);panelScrollKeep(el,keep)}})();
-function srvHead(){const m=srvM();if(!m)return"";const w=srvWhere(m),mk=palaceOf(m);const sn=S.srv.sent&&!S.srv.sent.done&&S.srv.sent.until>=bid()?S.srv.sent:null;
- if(S.srv.lau>0)return `<div class="srvhead">${mdH(pMe(),"sm")}<span><b>Cung nữ Tân Giả khố</b> · <b class="r">còn ${S.srv.lau} tuần</b> · giặt đủ thì được về sớm; hết hạn, Nội vụ phủ chia về hầu chủ mới.</span></div>`;
- return `<div class="srvhead">${mdH(pv(m),"sm")}<span><b>${srvTitle()}</b> · chủ ${netTxt(m)} · ${w===mk?"đang ở cung":"đang ở "+placeOf(w).n} · Chủ tin <b class="${S.tin<BAL.tinLv.lo?"r":S.tin>=BAL.tinLv.hi?"g":""}">${S.tin}</b>${sn?` · <b class="g">Việc chủ sai: ${sn.n} (đến ${placeOf(sn.k).n})</b>`:""}${S.srv.lau>0?` · <b class="r">Tân Giả khố còn ${S.srv.lau} tuần</b>`:""}</span></div>`}
+ const el=$("panel");if(tab==="act")return p0.apply(this,arguments);/* owner 21/11 ~03:18Z mark #33: no «Cung nữ … của … · Chủ tin» strip under the tabs (the header already says it; Chủ tin = stage right column, jk3) */
+ const gm=document.querySelector(".game");if(gm)gm.classList.remove("cardtab","maptab");const keep=el.dataset.tab===tab?el.scrollTop:0;el.innerHTML=tab==="staff"?srvStaffTabHTML():srvRoadHTML();el.dataset.tab=tab;el.dataset.pg="";kitFix(el);panelScrollKeep(el,keep)}})();
 function srvRows(){const m=srvM();const need=srvMpNeed(S.srv.rk),mx=srvMax();const row=(a,b)=>[a,b,"t"];/* KIT §51: kit table rows (pcard group → kitRows) */
  return [row("Thân phận",srvTitle()),row("Công lao",`${Math.floor(S.srv.mp)}/${need}${S.srv.rk>=mx?` · bậc cao nhất cung ${m?m.name:""} cho phép`:` · đủ thì lên ${SRK.maid[S.srv.rk+1]||""}`}`),row("Lương tháng",`${CNV_WAGE[S.srv.rk]} bạc · đang có ${S.bac}`),
   row("Hoàng thượng để ý",amOn()?`${S.nt}/100 · ngài nhớ việc ngươi làm gần ngài trong ${BAL.ag.emp.met.keep} tuần; càng để ý, càng dễ được ngài cho gọi đến hầu`:`${S.nt}/100 · từ ${BAL.ntRise.at}, mỗi lần để ý ngươi ngài hỏi tên, phong ${RANKS[0].n}: ${chanceW(ntRiseOdds())}`),row("Ban gả",S.srv.rk>=BAL.srvRk.dai?`Danh ${S.danh}/20 · đủ thì có người xin cưới`:`cần ${SRK.maid[BAL.srvRk.dai]}, Danh 20`),
@@ -496,14 +493,33 @@ function srvLadderHTML(){const K=BAL.srvRk,r=S.srv.lau>0?-1:S.srv.mama?K.mama:(S
  T.push({k:"Ở lại",n:"Ma ma",c:S.srv.mama?"g":"",on:!!S.srv.mama,d:`Đến ${BAL.srvAge.ask} tuổi, từ ${SRK.maid[K.cs]} trở lên, đỗ khảo hạch Nội vụ phủ thì ở lại làm ma ma đến ${BAL.srvAge.mama} tuổi; không thì xuất cung`});
  return `<div class="kpsec"><h4 class="kpst">Thang bậc cung nữ</h4>${kitTiers(T)}</div>`}
 function srvRoadHTML(){const m=srvM();return `<div class="story"><h3>Thân phận cung nữ</h3><p style="margin:0 0 4px">Ngươi là ${srvTitle()}${m?` (${rkName(m)}, tính ${netTxt(m)})`:""}. Leo lên bằng công lao và lòng tin của chủ; được Hoàng thượng để mắt thì thành phi tần.</p></div>${kitRows(srvRows())}${srvLadderHTML()}`}/* tut-followups: srvRows returns kit rows (§51) since the kit table switch; the road tab printed the raw array */
-function srvStaffHTML(){const L=srvColleagues();const m=srvM();const oc=od(SRVA.chat.o(S)),of=od(SRVA.frame.o(S));
- return `<h3>Đồng liêu</h3><p class="past">Kẻ hầu cùng cung và người ngươi đã quen. Bạn (quý ngươi từ ${BAL.srvx.friendAf}) làm chứng khi ngươi bị vu, mách tin; kẻ ghét ngươi (dưới 0) tìm dịp vu cáo.</p>`+(L.map(s=>{const a=S.srv.af[s.sid]||0;const o=ownerOf(s);const kn=S.srv.know[s.sid];const t1=!can(1)?"Hết khắc buổi này":"";
-  return `<div class="srvrow">${mdH(pServ(s),"sm")}<div class="srvi"><b>${s.name}</b><span class="past">${srkName(s)} · ${o?(o===m?"cùng cung":"người của "+o.name):"Nội vụ phủ"} · ${kn?"tính "+netTxt(s):"chưa rõ tính"}</span><span>Thiện cảm <b class="${a>=30?"g":a<0?"r":""}">${a}</b></span></div><div class="srvb">`
-   +pbtn(`class="opt" data-cnv="chat" data-sid="${s.sid}"`,"Trò chuyện",`${word(oc)} · tốn: 1 khắc · thành: người ấy quý ngươi +10 · hỏng: người ấy quý ngươi -3`,t1)
-   +pbtn(`class="opt" data-cnv="gift" data-sid="${s.sid}"${capAt(BAL.btn.cnv,BAL.bacFee.cnvGift)}`,"Biếu quà",`${capW()} · tốn: Bạc -${BAL.bacFee.cnvGift}, ${BAL.btn.cnv.k} khắc · thành: người ấy quý ngươi +12`,S.bac<BAL.bacFee.cnvGift?"Thiếu bạc (cần "+BAL.bacFee.cnvGift+")":t1)
-   +pbtn(`class="opt" data-cnv="ask" data-sid="${s.sid}"${capAt(BAL.btn.cnv)}`,"Nhờ dò tin",`${capW()} · tốn: ${BAL.btn.cnv.k} khắc · thành: có tin để bẩm chủ`,a<BAL.srvx.friendAf?`Cần người ấy quý ngươi từ ${BAL.srvx.friendAf}`:t1)
-   +pbtn(`class="opt" data-cnv="frame" data-sid="${s.sid}"`,"Tố lỗi với chủ",`${word(of)} · tốn: 1 khắc · thành: ${s.name} bị phạt, Chủ tin ${balSg(SRVA.frame.w.tin)} · hỏng: người ấy quý ngươi ${balSg(SRVA.frame.afL)}, Chủ tin ${balSg(SRVA.frame.l.tin)}`,o!==m?"Chỉ tố người cùng cung":S.srv.lau>0?"Đang ở Tân Giả khố":t1)
-   +(o&&o!==m&&s.role==="maid"?pbtn(`class="opt" data-cnv="poison" data-sid="${s.sid}"`,"Bỏ độc vào bát cơm",`${word(od(SRVA.poison.o(S,m)))} · tốn: Bạc ${srvCa("poison",S,m).bac}, ${SRVA.poison.k} khắc · thành: không ai tra ra · hỏng: Thái y tra ra, ngươi bị giải sang Thận hình ti · kèm: ${s.name} trúng độc; không qua khỏi: ${chanceW(BAL.mline.poisonDie)}`,!stfPoisonOk(S,m,s)?(S.bac<-srvCa("poison",S,m).bac?"Thiếu bạc":"Cung ấy không thù cung chủ"):!can(SRVA.poison.k)?"Hết khắc buổi này":""):"")+`</div></div>`}).join("")||`<p class="past">Chưa quen ai.</p>`)}
+/* owner 21/11 ~03:22Z mark #35 (verbatim in OD): «cái đồng liêu này mình đưa qua bên hậu cung … cung nhân thì mình sẽ đổi thành là đồng liêu … cái khung của nhân vật
+   … phải để hiển thị những cái thông tin, những cái khung đó cho giống chứ». Hậu cung › Đồng liêu = the SAME person-tab layout as Cung nhân (j15 staffTabHTML):
+   kit pager strip (faces, ‹ ›, n/N) + ONE kit person card (pcard) for the chosen colleague, with her act buttons (data-cnv, srvStaffAct) in card groups.
+   Order and rows = srvColleagues (her palace first, then the people she knows). Nothing yet = the kit empty card. */
+function srvStaffTabHTML(){const L0=srvColleagues();const m=srvM();if(!L0.length)return kitEmpty("Đồng liêu","Chưa quen ai.");
+ const oc=od(SRVA.chat.o(S)),of=od(SRVA.frame.o(S));let s0=false,s1=false;
+ const L=L0.map(s=>{const own=ownerOf(s)===m&&!!m;const sep=own&&!s0?(s0=true,"Cùng cung"):!own&&!s1?(s1=true,"Người quen"):"";return{s,f:pServ(s),name:shortN(s.name),sep}});
+ const mk=i=>{const s=L[i].s;const a=S.srv.af[s.sid]||0;const o=ownerOf(s);const kn=S.srv.know[s.sid];const t1=!can(1)?"Hết khắc buổi này":"";
+  const B=[pbtn(`data-cnv="chat" data-sid="${s.sid}"`,"Trò chuyện",`${word(oc)} · tốn: ${SRVA.chat.k} khắc · thành: người ấy quý ngươi ${balSg(SRVA.chat.af)} · hỏng: người ấy quý ngươi ${balSg(SRVA.chat.afL)}`,t1),
+   pbtn(`data-cnv="gift" data-sid="${s.sid}"${capAt(BAL.btn.cnv,BAL.bacFee.cnvGift)}`,"Biếu quà",`${capW()} · tốn: Bạc -${BAL.bacFee.cnvGift}, ${BAL.btn.cnv.k} khắc · thành: người ấy quý ngươi ${balSg(SRVA.gift.af)}`,S.bac<BAL.bacFee.cnvGift?"Thiếu bạc (cần "+BAL.bacFee.cnvGift+")":t1),
+   pbtn(`data-cnv="ask" data-sid="${s.sid}"${capAt(BAL.btn.cnv)}`,"Nhờ dò tin",`${capW()} · tốn: ${BAL.btn.cnv.k} khắc · thành: có tin để bẩm chủ`,a<BAL.srvx.friendAf?`Cần người ấy quý ngươi từ ${BAL.srvx.friendAf}`:t1)];
+  const H=[pbtn(`data-cnv="frame" data-sid="${s.sid}"`,"Tố lỗi với chủ",`${word(of)} · tốn: ${SRVA.frame.k} khắc · thành: ${s.name} bị phạt, Chủ tin ${balSg(SRVA.frame.w.tin)} · hỏng: người ấy quý ngươi ${balSg(SRVA.frame.afL)}, Chủ tin ${balSg(SRVA.frame.l.tin)}`,o!==m?"Chỉ tố người cùng cung":S.srv.lau>0?"Đang ở Tân Giả khố":t1),
+   (o&&o!==m&&s.role==="maid"?pbtn(`data-cnv="poison" data-sid="${s.sid}"`,"Bỏ độc vào bát cơm",`${word(od(SRVA.poison.o(S,m)))} · tốn: Bạc ${srvCa("poison",S,m).bac}, ${SRVA.poison.k} khắc · thành: không ai tra ra · hỏng: Thái y tra ra, ngươi bị giải sang Thận hình ti · kèm: ${s.name} trúng độc; không qua khỏi: ${chanceW(BAL.mline.poisonDie)}`,!stfPoisonOk(S,m,s)?(S.bac<-srvCa("poison",S,m).bac?"Thiếu bạc":"Cung ấy không thù cung chủ"):!can(SRVA.poison.k)?"Hết khắc buổi này":""):"")].filter(Boolean);
+  return pcard({f:L[i].f,name:s.name,rank:srkName(s),lines:[tuoi(s.age),`${o?(o===m?"Cùng cung":"Người của "+o.name):"Nội vụ phủ"} · ${kn?"tính "+netTxt(s):"chưa rõ tính"}`,`Thiện cảm <b class="${a>=BAL.srvx.friendAf?"g":a<0?"r":""}">${a}</b>`],
+   chips:[a>=BAL.srvx.friendAf?chip("bạn của ngươi","ok"):"",a<0?chip("ghét ngươi","hot"):""],
+   note:`Bạn (quý ngươi từ ${BAL.srvx.friendAf}) làm chứng khi ngươi bị vu, mách tin; kẻ ghét ngươi (dưới 0) tìm dịp vu cáo.`,groups:[["Giao thiệp",B],["Mưu kế",H]]})};
+ return `<div class="pgwrap">`+pager("staff",L,mk)+`</div>`}
+/* owner 21/11 ~03:20Z mark #34 (verbatim in OD): «khi mà tôi bấm vào cái thông tin của thường tại … ở cái cột bên phải … thì thường nó sẽ để là chủ tin 50.
+   Tôi bấm vào thì nó hiện những cái thông tin của người chủ đó». Her chủ is the FIRST row of the stage right column's court box (kit .kcrow, jk3 k3court; the
+   portrait status sheet's «Trong cung» too): face · «<phẩm> <tên>» · «Chủ tin N»; tap = her chủ's kit person card (Hậu cung › Chủ tử pager), like Hoàng hậu's row. */
+/* rv maid-8tabs (owner 21/11 ~03:20Z mark #34 verbatim: «chủ kín đáo, thật thà, ham vui … Tôi bấm vào thì nó hiện những cái thông tin của người chủ đó»): the removed strip
+   printed her chủ's nature (netTxt); her chủ's card keeps it — a cung nữ knows the nature of the one she serves (same as k61Own: her chủ is known) */
+(function(){const t0=trKnown;trKnown=function(v){try{if(typeof isSrv==="function"&&isSrv()&&v&&v===srvM())return traitsOf(v).slice()}catch(e){}return t0.apply(this,arguments)}})();
+function srvCourtRow(){const m=srvM();if(!m)return null;const t=S.tin|0;return{k:"mis",who:`${rkName(m)} ${shortN(m.name)}`,f:pv(m),mood:[`Chủ tin ${t}`,t<BAL.tinLv.lo?"r":t>=BAL.tinLv.hi?"g":"n"],att:null,ref:m}}
+(function(){const k0=kitCourtRows;kitCourtRows=function(){const R=k0.apply(this,arguments);try{if(isSrv()&&!S.dead){const r=srvCourtRow();if(r)R.unshift(r)}}catch(e){console.error("srvCourtRow",e)}return R}})();
+(function(){const o0=kitCourtOpen;kitCourtOpen=function(k){if(k!=="mis")return o0.apply(this,arguments);try{if(Q.length&&!/pcm/.test(Q[0].cls||""))return;const m=srvM();const i=typeof rvPgOf==="function"?rvPgOf(m):rivals.indexOf(m);/* strip position (j27) */if(i>=0)PG.rv=i;
+ const b=document.querySelector('[data-tab="rv"]');if(b)b.click();else{tab="rv";render()}}catch(e){console.error("kitCourtOpen mis",e)}}})();
 function srvStaffAct(k,s){if(!can(1))return null;const m=srvM();
  if(k==="chat"){const o=od(SRVA.chat.o(S));/* odds read before the spend (shown-odds r2) */spend(1);const ok=roll(o);srvAf(s,ok?SRVA.chat.af:SRVA.chat.afL);if(roll(SRVA.chat.know))S.srv.know[s.sid]=1;log(`Trò chuyện với ${s.name}: ${ok?"thân hơn":"bị lạnh nhạt"}.`);return ok}
  if(k==="gift"){if(S.bac<-SRVA.gift.c.bac)return null;spend(BAL.btn.cnv.k);apply(SRVA.gift.c);srvAf(s,SRVA.gift.af);log(`Biếu ${s.name} chút quà.`);return true}
@@ -522,10 +538,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 (function(){const s0=selfCardHTML;selfCardHTML=function(){if(!isSrv())return s0.apply(this,arguments);const m=srvM();
  return pcard({f:pMe(),col:"#b9a48a",name:S.name,rank:srvTitle(),lines:[`${S.age} tuổi · ${S.origin.n}`,`Sắc ${S.sac} · Tài ${S.tai} · Tâm cơ ${S.tamco} · Đức ${S.duc}`,`Sức ${S.suc} · Bạc ${S.bac} · Danh ${S.danh}`,`Chủ tin ${S.tin} · Hoàng thượng để ý ${S.nt}`],note:m?`Chủ: <b>${rkName(m)} ${m.name}</b>, tính ${netTxt(m)}.`:"",groups:[["Đường đi",srvRows()]].concat(typeof kcuHonorRows==="function"&&kcuHonorRows(1).length?[["Danh hiệu thi tài",kcuHonorRows(5)]]:[]),empty:""})}})();
 /* the Chọn sổ rows say who the sổ is through j74 slotWho (one place, srv lives included); the old #slots .slot text patch is gone with the old rows */
-(function(){const st=document.createElement("style");st.textContent=`.srvhead{display:flex;gap:8px;align-items:center;padding:6px 8px;margin:0 0 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);font-size:.82rem;line-height:1.4}
-.srvrow{display:flex;gap:8px;align-items:flex-start;padding:8px 2px;border-bottom:1px solid var(--line);flex-wrap:wrap}.srvrow .srvi{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1 1 160px;font-size:.85rem}
-.srvrow .srvb{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;flex:1 1 100%}.srvrow .srvb .opt{min-width:0}
-.mspot .srvtag{font-style:normal}`;document.head.appendChild(st)})();
+(function(){const st=document.createElement("style");st.textContent=`.mspot .srvtag{font-style:normal}`;document.head.appendChild(st)})();
 (function(){const h0=hudTween;hudTween=function(){if(!isSrv())return h0.apply(this,arguments);const s=S.sung;S.sung=S.tin;try{return h0.apply(this,arguments)}finally{S.sung=s}}})();
 
 /* ================= CUNG NỮ II: the palace men (j22), forbidden love and marriage roads for a maid =================

@@ -1179,6 +1179,23 @@ window.kitPcIntroBang=kitPcIntroBang;
 document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.target.closest("#panel > .pgwrap > .kppbang");if(!t)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
  const g=t.parentElement,on=document.querySelector("#panel .ksub .on, #panel .ksub [aria-selected=true], .tabs .on");const ttl=((on&&on.textContent)||"Thông tin").trim().replace(/\s+\d+$/,"");
  if(typeof kitModal==="function")kitModal({kind:"info",title:ttl,sub:"",sections:[{h:"",html:`<div class="kpnote">${g.__kpintro||""}</div>`}]})}catch(x){console.error(x)}},true);
+/* KIT §6.3h PERSON INFO BLOCK = FIXED HEIGHT, ONE LINE PER ROW (owner 21/11 ~05:15Z #86 option A, her words: the info block must not grow with text and push the action buttons down; «Dạo này» = a headline + a «!»):
+   every row of the person info block (.pc .pcf .kr: Sở trường · Tính nết · Đã biết · Dạo này …) is ONE line; a value longer than its line is cut with «…» and a kit «!» (kitNoteBang, .kgnb) at the end of the row opens the FULL text in the kit popup.
+   kitInfoOneLine(root) measures after layout and is re-run by the observer / on resize, so no host calls it. The block therefore never grows with text: the action list is always right under it, only the action list scrolls. */
+function kitInfoOneLine(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc .pcf .kr > .krv").forEach(v=>{
+  if(v.dataset.k1full==null){if(v.querySelector(".kgnb"))return;v.dataset.k1full=v.innerHTML}
+  const full=v.dataset.k1full;v.classList.remove("kone");const old=v.querySelector(":scope > .kgnb");if(old)old.remove();
+  if(v.scrollWidth>v.clientWidth+1){const lab=(v.parentElement.querySelector(".krl")||{}).textContent||"";v.classList.add("kone");const plain=document.createElement("div");plain.innerHTML=full;v.insertAdjacentHTML("beforeend",kitNoteBang(plain.textContent.replace(/\s+/g," ").trim(),lab.trim()||"Chi tiết"))}})}catch(e){console.error("kitInfoOneLine",e)}}
+window.kitInfoOneLine=kitInfoOneLine;
+(function(){const st=document.createElement("style");st.id="kit-info-one";st.textContent=`
+.pc .pcf .kr>.krv{position:relative;display:block!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.pc .pcf .kr>.krv>*{white-space:nowrap!important}
+.pc .pcf .kr>.krv.kone{padding-right:26px}
+.pc .pcf .kr>.krv>.kgnb{position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0}
+/* dialog hosts (pop-up card with the ✕ .pcx in the corner, which follows the scroll): the «!» of a long row stands LEFT of the ✕ lane, never under it (a tap on it would close the dialog) */
+.pcpop .pc .pcf .kr>.krv.kone{padding-right:72px}
+.pcpop .pc .pcf .kr>.krv>.kgnb{right:46px}
+`;document.head.appendChild(st);try{addEventListener("resize",()=>{clearTimeout(window.__k1S);window.__k1S=setTimeout(kitInfoOneLine,100)})}catch(e){}})();
 /* ONE observer for the person-card kit scans (act split, note «!», intro «!»): only mutations inside the panel / pop-up / dialog count, one pass per frame burst (perf: quickcheck tab time) */
 /* KIT §6.3e (owner 21/11 ~02:12Z / ~02:30Z, her Cung nhân + Hoàng tự shots): the figure in the left column ALWAYS fills the column width — kitPcKeyFit no longer shrinks it to fit the key lines under it (that left a 100 px portrait with empty bands);
    the left column is part of the card and scrolls WITH it inside the one person-tab frame (no sticky / max-height box of its own). The mother block (.kpl) always stands ABOVE the facts table in the info group, Fold and iPad alike. */
@@ -1196,7 +1213,7 @@ window.kitPcFrameMark=kitPcFrameMark;
 function kitActPicSize(){try{const P=document.getElementById("panel");if(!P||!P.clientWidth)return;const n=!document.documentElement.classList.contains("kv2")&&P.clientWidth<480;if(document.documentElement.classList.contains("kpnarrow")!==n)document.documentElement.classList.toggle("kpnarrow",n)}catch(e){}}
 window.kitActPicSize=kitActPicSize;try{addEventListener("resize",()=>{clearTimeout(window.__kpaS);window.__kpaS=setTimeout(kitActPicSize,80)})}catch(e){}
 (function(){let t=0;const hit=r=>{for(let i=0;i<r.length;i++){const e=r[i].target;if(e&&e.nodeType===1&&e.closest&&e.closest("#panel,#popw,#modal"))return true}return false};
- try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitActPicSize();kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
+ try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitActPicSize();kitInfoOneLine(document);kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
  try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
 /* KIT §6.2b: every dialog shown → its option cards pick their picture form (tall / square) once laid out; the ResizeObserver keeps them right after */
