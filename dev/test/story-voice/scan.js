@@ -22,7 +22,7 @@ for(const f of FILES){const src=fs.readFileSync(D+f,"utf8");const S=strs(src);co
   for(const q of quotes(v)){if(oldFix(q)!==q){c.Q3Pb++;R.list.Q3P.push(f+": "+q.slice(0,90))}}
   if(quotes(v).some(q=>/[Nn]àng ta/.test(newFix(q))&&!/[Nn]àng ta/.test(q)))c.Q3Pa++;
   const lit=x.v.replace(/\$\{[^}]*\}/g,"").replace(/<[^>]*>/g,"").replace(/\{\w+\}/g,"");
-  if(/\d/.test(lit)){c.DIG++;R.list.DIG.push(f+": "+x.v.slice(0,100))}
+  if(!/\$\{/.test(x.v)&&/\d/.test(lit)&&!/[+\-−]\s?\d|\d\s?\/\s?\d|\((?:[^)]*\d)[^)]*\)|tốn:|thành:|hỏng:|lòng \d|\d khắc|\d tháng|Nhận lời: ngay/.test(lit)){c.DIG++;R.list.DIG.push(f+": "+x.v.slice(0,100))}
   if(OBS.some(r=>r.test(x.v))){c.OBS++;R.list.OBS.push(f+": "+x.v.slice(0,100))}
   if(x.k==="t"&&x.v.length>=60){c.beats++;if(!framed(x.v)){c.NOFR++;R.list.NOFR.push(f+": …"+x.v.slice(-80))}}}
  R.files[f]=c;for(const k in c)tot[k]+=c[k]}
