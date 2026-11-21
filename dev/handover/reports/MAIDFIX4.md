@@ -112,3 +112,16 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
 NO HOURLY SCHEDULED TASKS (owner 20/11): never create one.
+
+## OWNER L1994 (via #27) — after the handover (#27 cannot open a successor at depth 8; small job, context ≈ 32 % < 60 % ceiling)
+(1) Thu Tần t4: NGOCBOI1 made the same file in parallel (285050b8) — THEIR version kept, mine dropped. My draft was (base L1847 = gOmrVOLSXO):
+- ADDED after the border sentence: "plus a FEW MEDIUM lotus sprays in gold and lilac thread scattered on the skirt panels, fewer and smaller than a Phi's". Before, Tần had only border embroidery, while Phi has "richly embroidered … large double hollyhock medallions".
+- L1980 re-check: G60 → "an embroidered silk sash tied at the centre front with long ties and silk tassels"; G61 → "lotus lamp held upright in one hand at her side".
+- keep PASS; store FAIL = B26/M06/S13, the same as the approved base L1847 (known waiver; VE10 drew L1847 with them).
+(2) Flower colour tables that exist:
+- F3 (one line: "flower colour suits her outfit, never her main robe colour", no table);
+- F19 hair-flower colour table (REVERT1.md, hair flowers only);
+- G33 phoenix plumage per person (phoenix_L1536.json; outer feathers = her secondary);
+- a t7/t8-only embroidery sentence "every flower in ONE colour family only: tone-on-tone lighter and deeper shades of <secondary> with gold".
+There is NO per-person/per-season EMBROIDERY flower palette for t1–t6, so the Phi's flower colour is left to the model (it picked pink).
+PROPOSAL: one shared rule for every rank = the t7/t8 sentence: embroidered flowers in her SECONDARY colour family (tone-on-tone lighter/deeper) + gold thread, never her main robe colour (F3), never a third colour. This gives one source like G33, and needs no new table. The hair flower keeps F19.
