@@ -17,6 +17,8 @@ Chars: t2 10144→10310 · t3 10928→11132 · t4 11469→11740 · t5 11471→11
 - **t8 HH LOCKED:** only neck (L2228), TIE length (dropped 'a little longer than the others'), new lilac centre panel (tree peonies + clouds, gold couching, pearls, jade, gold studs). HH had no centre panel → added because the owner's #4 says ALL ranks t3–t8 (tell me if ROOT-B7 meant "skip").
 - **TIE (L2233 D, t6/t7/t8):** 'to well past the knees' → 'to well below the knees (ties and tassels together exactly the SAME fixed length as at every other rank, the tassels hanging below the knees, never ending at mid-thigh)'. t2–t5 kept 'well past the knees' (owner happy with those).
 
+- **Item E (L2239, t6/t7/t8 incl. locked HH):** after 'drifting softly as in a gentle breeze.' added ROOT-B7's line verbatim: 'Even with the richer embroidery, the vân kiên and the jewels, her robe moves just as freely as a lower consort's: the sleeve ends, the skirt hem and the sash ties visibly lift and ripple in the breeze, never stiff or hanging still.' (t6 13428 · t7 13331 · t8 13359 chars). Item F (L2240) CANCELLED by L2241 → not done.
+
 ### Gate / checks
 - `keep_check --sidecar` PASS ×7.
 - `keep_check --all`: all M2231 PASS, **FAIL ×4 PRE-EXISTING, not mine**: M2213-04/05/07/08 (THUROOT8) vs their bases M2211-0x, which were re-written later (now 24–28 k chars, apparently doubled; last touched by 6465608 E46r). Foreman: fix those bases or the M2213 .keep files.
@@ -34,5 +36,6 @@ Chars: t2 10144→10310 · t3 10928→11132 · t4 11469→11740 · t5 11471→11
 - QP: vàng trả về ít như cũ; dải dọc màu tím viền vàng nhỏ.
 - HQP: phượng thêu to trên vân kiên, chìm dưới lưới ngọc như HH. Màu áo không đổi.
 - HH: khóa, chỉ thêm cổ thấp, dải dọc, và tua dài bằng các bậc.
+- QP/HQP/HH: thêm một câu cho vải bay nhẹ như các bậc dưới (tay áo, gấu váy, dây đai lay trong gió).
 - **Đai Phi (khuyến nghị):** thêu chỉ vàng dày suốt đai, khoá vàng nhỏ dạng tấm nạm ngọc trai, dây viền vàng, mỗi tua có một hạt ngọc bích phía trên — vẫn mảnh, không cộm. Tần giữ đai tím + khoá tròn như cũ. QP/HQP/HH đi lên từ đó: thêm vàng, ngọc trai, ngọc bích, không to hơn.
 - **"Đã nói độ dài tua rua chưa?"** Đã nói rồi (L2206), chữ trong prompt cũng ghi như nhau, nhưng máy vẽ HQP/HH ngắn hơn — nay ghi rõ "dây + tua dài bằng mọi bậc, tua xuống dưới gối, không bao giờ dừng ở giữa đùi".

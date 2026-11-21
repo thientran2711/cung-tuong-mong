@@ -12,6 +12,8 @@ def panel(colour, emb): return (f"from the sash a narrow CENTRE-FRONT PANEL (d�
                                  f"{SOFT}, embroidered down its whole length with {emb} {LADDER}; ")
 TIE = "to well below the knees (ties and tassels together exactly the SAME fixed length as at every other rank, the tassels hanging below the knees, never ending at mid-thigh)"
 
+MOVE_OLD = "the long sleeves, skirt and sash are supple and airy, drifting softly as in a gentle breeze. "
+MOVE = MOVE_OLD + "Even with the richer embroidery, the vân kiên and the jewels, her robe moves just as freely as a lower consort's: the sleeve ends, the skirt hem and the sash ties visibly lift and ripple in the breeze, never stiff or hanging still. "   # owner L2239 item E (t6-t8)
 E = {
  2: ("M2213-02", [
    ("delicate embroidered tiger lilies at the collar, sleeves and hem, never over the bands,",
@@ -43,6 +45,7 @@ E = {
     + panel("lilac", "her double hollyhocks, a little larger than the Tần's flowers, in shaded silk floss and fine silver thread with a few small pearls") + "SLIM;"),
  ]),
  6: ("M2217-06", [
+   (MOVE_OLD, MOVE),
    ("plus a moderate amount of royal yellow (about HALF of the Hoàng quý phi's): a WIDE panel of royal-yellow silk cloth at the SKIRT FRONT from the waist to the hem, clearly visible (never at the neckline),",
     "plus a modest amount of royal yellow: a NARROW CENTRE-FRONT PANEL (dải dọc) of lilac silk with narrow royal-yellow edges at the SKIRT FRONT, hanging from the sash to the hem (never at the neckline), "
     f"{SOFT}, embroidered down its whole length with her double camellias in gleaming gold thread with tiny seed pearls {LADDER},"),
@@ -59,6 +62,7 @@ E = {
     "yellow only in a modest amount (yellow silk CLOTH, not thread: narrow yellow borders at the sleeve ends and the hem, a slim yellow sash, narrow yellow edges on the centre-front panel), clearly much less than the Hoàng quý phi's,"),
  ]),
  7: ("M2227-07", [
+   (MOVE_OLD, MOVE),
    ("a gold-thread phoenix and clouds are finely embroidered on the vân kiên's silk first,",
     "a gold-thread phoenix with spreading wings and clouds are finely embroidered over the WHOLE vân kiên's silk first, clearly visible, the phoenix sunk UNDER the pearl net and showing through it,"),
    ("gold flower studs and small smooth gemstones set at the crossings", "gold-filigree flower studs and small smooth gemstones set at every crossing"),
@@ -69,7 +73,8 @@ E = {
    ("a wide yellow panel at the SKIRT FRONT below the waist (clearly more yellow than the Quý phi, clearly less than the Empress);",
     f"a wide yellow panel at the SKIRT FRONT below the waist (clearly more yellow than the Quý phi, clearly less than the Empress), this CENTRE-FRONT PANEL (dải dọc) hanging from the sash to the hem, {SOFT}, embroidered down its whole length with her peonies in gleaming gold thread, small pearls and jade beads {LADDER};"),
  ]),
- 8: ("M2227-08", [   # HH LOCKED: only L2228 neck + tie length (L2233 D) + centre panel (L2232 item 4)
+ 8: ("M2227-08", [   # HH LOCKED: only L2239 motion line + L2228 neck + tie length (L2233 D) + centre panel (L2232 item 4)
+   (MOVE_OLD, MOVE),
    ("falling straight down either side of it to well past the knees, each ending in the richest silk tassel of all ranks, a little longer than the others, with",
     f"falling straight down either side of it {TIE}, each ending in the richest silk tassel of all ranks, with"),
    ("soft and flowing (thướt tha); soft, flat and natural, nothing tight, never bulky; SLIM, never covered",
@@ -79,9 +84,9 @@ E = {
 }
 WHY = {2: "L2232 #2 density swap t2<-t3 + size ladder; L2228 neck", 3: "L2232 #2/#3/#4 density all over, ties embroidered, soft centre panel; L2228 neck",
        4: "L2232 #4 centre panel; L2228 neck", 5: "L2232 #5 neck (L2228) + #6 Phi sash richer/golder + #4 panel",
-       6: "L2233 A QP yellow reverted to M2187 (modest) + #4 panel own colours + sash ladder + L2233 D tie length; L2228 neck",
-       7: "L2233 B vân kiên phoenix under net (like HH) + #4 panel + sash ladder + L2233 D tie length; L2228 neck",
-       8: "HH LOCKED: L2228 neck + L2233 D tie length + L2232 #4 panel only"}
+       6: "L2239 E motion line; L2233 A QP yellow reverted to M2187 (modest) + #4 panel own colours + sash ladder + L2233 D tie length; L2228 neck",
+       7: "L2239 E motion line; L2233 B vân kiên phoenix under net (like HH) + #4 panel + sash ladder + L2233 D tie length; L2228 neck",
+       8: "HH LOCKED: L2239 E motion line + L2228 neck + L2233 D tie length + L2232 #4 panel only"}
 def blocks(s): return [s[s.index(x):s.index(". ", s.index(x)) + 1] for x in ("ANGLE:", "Pose:", "GRACE")]
 mh = {}
 for n, (bc, ed) in E.items():
