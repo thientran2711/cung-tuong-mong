@@ -24,3 +24,9 @@ L1925: m11 đổi nhãn «đang dùng» → «đã bỏ» (v4).
 ## L2022 — hỏi chuyên gia: hoa theo màu chính / phụ / tông / tính cách
 PNG so sánh (0 gen): dev/handover/review-sheets/flower_options_L2022/flower_options_L2022.png (make.py cùng thư mục). json/prompt chưa đổi.
 Khuyến nghị: tông (đậm/nhạt của áo) quyết định độ sáng; sắc độ lấy theo màu phụ nếu có sắc, không thì cùng họ màu chính nhưng nhạt; tính cách chỉ chỉnh độ rực. Áo đậm → hoa sáng hơn rõ; hoa thêu tông-xuyệt-tông, hoa tóc là điểm nhấn nhạt hơn. Bản JSON c05 thu (cam đào) và c14 thu (xanh lơ) hơi lệch → nên chỉnh theo khuyến nghị nếu owner đồng ý.
+
+## L2025 — dựng lại thuật toán theo quy tắc đã duyệt (0 gen, không sửa prompt)
+- flower_colours_L2013.json dựng lại (90 × 4 mùa; tone dịu 114 / vừa 167 / tươi 79). Quy tắc: tông áo quyết định sáng/đậm (áo đậm → hoa sáng hơn rõ; áo nhạt → đậm hơn một nấc nhưng dịu, không xám), màu phụ có sắc → sắc hoa (trắng/kem → họ màu chính nhạt hoặc kem ngà), tính cách chỉ chỉnh độ rực (hệ số nhóm), hoa tóc sáng/tươi hơn hoa thêu và chỉ họ hồng/kem/hoa cà, không vàng/xanh lá, dE≥14 với áo chính.
+- Rule F20 đã add (rule.py, L2025). Nháp: flower_rule_draft_L2013.md.
+- PNG 12 người mùa thu: dev/handover/review-sheets/flower_sheet_L2025/flower_sheet_thu_L2025.png. Trang màu republish v2: https://claude.ai/artifact/9CPDiiiEqgAwaq2tZESbjx
+- Còn: 3 bộ (m02 xuân, s32 hạ, s52 hạ) hoa còn gần màu áo (dE<10) — cần mắt owner; ~74/360 hoa tóc rơi về kem ngà (áo xanh lá/vàng + phụ trắng).

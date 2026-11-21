@@ -25,7 +25,7 @@ h1{font-family:"Noto Serif",Georgia,serif;font-size:1.5rem;margin:0 0 4px}.sub{c
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Serif:wght@600&display=swap">
 <h1>Bảng màu hoa theo bộ đồ</h1>
-<p class="sub">Mỗi ô mùa: <b>ô vuông</b> = màu áo (chính, phụ); <b>tròn</b> = màu hoa thêu rồi hoa cài tóc; dãy chấm nhỏ = hoa cài tóc từ cấp 1 đến cấp 6 (nhạt → đậm dần). Bộ đồ dịu thì hoa dịu, không bao giờ chói; hoa không trùng màu áo chính, không vàng, không xanh lá; vẫn giữ chỉ vàng. Đây là BẢN NHÁP chờ chủ nhân duyệt.</p>
+<p class="sub">Mỗi ô mùa: <b>ô vuông</b> = màu áo (chính, phụ); <b>tròn</b> = màu hoa thêu rồi hoa cài tóc; dãy chấm nhỏ = hoa cài tóc từ cấp 1 đến cấp 6 (nhạt → đậm dần). Quy tắc đã duyệt (L2025): áo đậm → hoa sáng hơn rõ; áo nhạt → hoa đậm hơn một nấc nhưng dịu; màu phụ có sắc thì lấy sắc phụ, phụ trắng/kem thì lấy họ màu chính nhạt đi hoặc kem ngà; hoa cài tóc luôn sáng hơn hoa thêu; không vàng, không xanh lá, vẫn giữ chỉ vàng.</p>
 <div class="bar" id="g"></div><div class="bar" id="t"></div><div id="o"></div>
 <script>
 const D=%%DATA%%;const SN={xuan:"Xuân",ha:"Hạ",thu:"Thu",dong:"Đông"};const TN={soft:"dịu",medium:"vừa",vivid:"tươi"};

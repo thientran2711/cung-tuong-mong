@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """L2013 flower colour table. person x season -> embroidery-flower colour + hair-flower colour matched to the outfit tone.
 Input palettes_season_L1726.json (main_hex/sec_hex). Output flower_colours_L2013.json. 0 gens, no prompt edits (owner OK pending).
-Method (OKLCH): tone class from the outfit's main colour (+ person band): soft (pale/low chroma) / medium / vivid.
+[REBUILT L2025 per owner-approved L2022 rule] Method (OKLCH): tone class from the outfit's main colour (+ person band): soft (pale/low chroma) / medium / vivid.
 Flower chroma is CAPPED by the tone class (never glaring on a soft outfit), lightness set per class, hue = secondary-colour hue
 (or main hue +/- shift when sec is near-white/neutral or too close to main); never within dE 14 of main or sec; never yellow in the hair (F19)."""
 import json,math,os
@@ -49,29 +49,36 @@ def tone(main,sec,group):
     if C>0.115 and L<0.82: s+=1
     s+=BAND.get(group,0)*0.5
     return "soft" if s<=-0.5 else ("vivid" if s>=1 else "medium")
-def pick_hue(main,sec):
-    Lm,Cm,Hm=h2o(main); Ls,Cs,Hs=h2o(sec)
-    cand=[]
-    if Cs>=0.03: cand.append(Hs)          # 1) her secondary colour hue (the outfit's own accent)
-    cand+= [(Hm+25)%360,(Hm-25)%360,(Hm+45)%360,(Hm-45)%360]   # 2) analogous to the main robe
-    cand+= [350,10,25,330,310]                                   # 3) flower-safe rose / peach / mauve family
-    cand+= [(Hm+150)%360,(Hm+180)%360]                           # 4) soft complement, last resort
-    return cand
-def make(main,sec,group,kind):
-    cl=tone(main,sec,group); P=CLS[cl]; Lm,Cm,Hm=h2o(main)
-    best=None
-    for H in pick_hue(main,sec):
-        if 78<=H<=180: continue   # never yellow (F19) and never green (flowers must not read as leaves)
-        for dl in (0,-0.04,0.04,-0.08,0.08,-0.13,0.1):
-            L=min(0.96,max(0.55,(P["Lh"] if kind=="hair" else P["Le"])+dl))
-            C=min(P["cap"],max(0.03,Cm*0.9 if cl!="vivid" else Cm*0.95)) if kind=="hair" else min(P["cap"]*0.85,max(0.025,Cm*0.8))
-            hx=gamut(L,C,H)
-            if dE(hx,main)>=14 and dE(hx,sec)>=6:
-                return hx,cl
-            if best is None: best=hx
-    for hx in ("#FFF6EA","#FDEFF3","#F4E8FA","#3B2A30"):   # fallback: ivory / blush / pale lilac / deep wine
-        if dE(hx,main)>=14: return hx,cl
-    return best,cl
+GF={"Dịu dàng":0.8,"Đoan trang":0.85,"Quyến rũ":1.0,"Sắc sảo":0.9,"Kiêu kỳ":1.05,"Lạnh lùng":0.7}   # personality only adjusts INTENSITY (owner L2025)
+IVORY="#FFF4E6"
+def base_hue(main,sec):
+    """secondary colour sets the hue; white/cream secondary -> main-colour family; green/yellow -> none (ivory)."""
+    Ls,Cs,Hs=h2o(sec); Lm,Cm,Hm=h2o(main)
+    for H,C,th in ((Hs,Cs,0.015),(Hm,Cm,0.03)):
+        if C>=th and not (78<=H<=180): return H
+    return None
+def flower(main,sec,group,kind,emb_L=None):
+    cl=tone(main,sec,group); Lm,Cm,Hm=h2o(main)
+    H=base_hue(main,sec)
+    if kind=="hair" and H is not None and not (H>=295 or H<=60):   # hair flower: pink / cream / lilac family only
+        H=310 if 200<=H<295 else None
+    # lightness: dark robe -> clearly lighter; light robe -> one step deeper but soft; hair always lighter than embroidery
+    if kind=="emb":
+        L=max(0.74,min(0.88,Lm+0.30)) if Lm<0.55 else (Lm-0.09 if Lm>0.80 else min(0.86,Lm+0.20))
+        if Lm<=0.80 and L<Lm+0.14: L=min(0.88,Lm+0.14)
+    else: L=min(0.92,(emb_L if emb_L is not None else 0.8)+0.06)
+    cap=CLS[cl]["cap"]*GF.get(group,0.9)
+    if H is None: return IVORY if kind=="hair" or dE(IVORY,main)>=14 else "#EFE6D8"
+    C=min(max(cap,0.07 if Lm>0.80 else cap),max(0.05,Cm*0.7)) if kind=="emb" else min(cap*1.25,max(0.06,Cm*0.9))
+    L0=L
+    for step in range(10):                       # first try LIGHTER (never muddy grey on a soft robe)
+        hx=gamut(min(0.95,L0+0.03*step),C,H)
+        if dE(hx,main)>=14: return hx
+    if Lm>0.80:                                  # very light robe: one step deeper, keep chroma (no grey)
+        for step in range(10):
+            hx=gamut(max(0.5,L0-0.03*step),max(C,0.07),H)
+            if dE(hx,main)>=14: return hx
+    return IVORY
 def main():
     p=json.load(open(f"{D}/palettes_season_L1726.json",encoding="utf-8"))
     out={"_note":"L2013 FLOWER COLOUR TABLE (draft, owner OK pending; no prompt edits, no gens). person x season -> embroidery flower + hair flower colour matched to the outfit tone. Gold thread stays on every outfit. Hair flower = bloom only, no leaves, never yellow (F19). Flower never equals the main robe colour (dE>=14 vs main+secondary). Method: make_flower_colours_L2013.py.",
@@ -80,11 +87,11 @@ def main():
         d=p[pid]; rec={"group":d["group"]}
         for s in ("xuan","ha","thu","dong"):
             m,sc=d[s]["main_hex"],d[s]["sec_hex"]
-            hh,cl=make(m,sc,d["group"],"hair"); ee,_=make(m,sc,d["group"],"emb")
+            cl=tone(m,sc,d["group"]); ee=flower(m,sc,d["group"],"emb"); hh=flower(m,sc,d["group"],"hair",h2o(ee)[0])
             # hair flower ramp t1..t6: palest -> deepest within the tone class (same hue)
             Lh,Ch,Hh=h2o(hh); ramp={}
             for t in range(1,7):
-                f=(t-1)/5; ramp[f"t{t}"]=gamut(min(0.97,Lh+0.05-0.07*f),min(CLS[cl]["cap"],Ch*(0.75+0.5*f)),Hh)
+                f=(t-1)/5; ramp[f"t{t}"]=gamut(min(0.97,Lh+0.03-0.06*f),min(CLS[cl]["cap"]*GF.get(d["group"],0.9),Ch*(0.8+0.4*f)),Hh) if Ch>0.01 else hh
             rec[s]={"tone":cl,"main_hex":m,"main_vi":d[s]["main_vi"],"sec_hex":sc,"sec_vi":d[s]["sec_vi"],
                     "embroidery_hex":ee,"embroidery_vi":name_vi(ee),"hair_hex":hh,"hair_vi":name_vi(hh),"hair_by_tier":ramp}
         out[pid]=rec
