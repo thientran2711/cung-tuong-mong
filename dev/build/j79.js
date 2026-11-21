@@ -61,7 +61,7 @@ function kitChips(list){return `<span class="kchips">${(list||[]).map(x=>Array.i
 /* kitRows([[label, value(html|array of chips/values), cls]]) cls: g|r|n|t (value colour), "need" for a Cần row of chips */
 /* KIT §62.1 NO VISIBLE «Ghi chú» ROW (owner 21/11 ~04:30Z, repeat of OD L1867): a row labelled «Ghi chú» is not drawn; its text goes behind a kit round «!» (.khap.kgnb) at the end of the row it explains (the row just above it),
    tap → the kit pop-up titled «Ghi chú». A Ghi chú with no row above it (first row) stays as a row. Every kitRows caller (dialog info frames, item cards, results, books) gets it from here — no caller changes. */
-function kitNoteBang(text){return `<span class="khap kgl kfx kgnb" role="button" tabindex="0" aria-label="Ghi chú" data-kfxt="Ghi chú" data-kfx="${kpEsc(String(text))}">!</span>`}
+function kitNoteBang(text,title){const t=title||"Ghi chú";return `<span class="khap kgl kfx kgnb" role="button" tabindex="0" aria-label="${kpEsc(t)}" data-kfxt="${kpEsc(t)}" data-kfx="${kpEsc(String(text))}">!</span>`}/* title optional (mini-game intro «Phần của ngươi» …): the ONE «!» part */
 function kitRows(rows){const R=[];(rows||[]).filter(r=>r&&r[1]!=null&&r[1]!==""&&!(Array.isArray(r[1])&&!r[1].length)).forEach(r=>{
   if(/^\s*ghi chú\s*$/i.test(String(r[0]))&&R.length){const v=Array.isArray(r[1])?r[1]:[r[1]];const prev=R[R.length-1];prev.bang=(prev.bang?prev.bang+" · ":"")+v.join(" · ");return}
   R.push({l:r[0],v:r[1],c:r[2]})});
@@ -372,7 +372,11 @@ function kpBuild(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb"),mt=$("mt");if
  let src=mb.querySelector(":scope > .spk > .spkt")||mb;const spec=m.kit||null;
  let sub=spec&&spec.sub||"",blocks=[];
  if(spec){window.__kpSkip=m.who&&m.who.__kp||null;if(spec.facts)blocks.push(kitFacts(spec.facts,{group:spec.group}));if(spec.rows)blocks.push(kitRows(spec.rows));
-  (spec.sections||[]).forEach(s=>{if(!s)return;blocks.push(`<div class="kpsec">${s.h?`<h4 class="kpst">${s.h}</h4>`:""}${s.facts?kitFacts(s.facts,{group:false}):""}${s.rows?kitRows(s.rows):""}${s.tiers?kitTiers(s.tiers,s):""}${s.chips?kitChips(s.chips):""}${s.html||""}</div>`)});
+  (spec.sections||[]).forEach(s=>{if(!s)return;
+   /* KIT §62.1: a SECTION headed «Ghi chú» is not drawn either — its rows go behind a «!» on the heading of the section above it (owner 21/11 ~04:30Z) */
+   if(s.h&&/^\s*ghi chú\s*$/i.test(String(s.h))&&blocks.length&&(s.rows||s.html||s.facts)){const nt=(s.facts?kitFacts(s.facts,{group:false}):"")+(s.rows?kitRows(s.rows):"")+(s.html||"");const last=blocks.length-1,bg=kitNoteBang(nt);
+    blocks[last]=/<\/h4>/.test(blocks[last])?blocks[last].replace(/<\/h4>/,bg+"</h4>"):blocks[last].replace(/<\/div>\s*$/,bg+"</div>");return}
+   blocks.push(`<div class="kpsec">${s.h?`<h4 class="kpst">${s.h}</h4>`:""}${s.facts?kitFacts(s.facts,{group:false}):""}${s.rows?kitRows(s.rows):""}${s.tiers?kitTiers(s.tiers,s):""}${s.chips?kitChips(s.chips):""}${s.html||""}</div>`)});
   if(spec.html)blocks.push(spec.html);window.__kpSkip=null}
  else{window.__kpSkip=m.who&&m.who.__kp||null;try{const c=kpConvert(src,m);sub=c.sub;blocks=c.blocks}finally{window.__kpSkip=null}}
  const showSubj=!!m.who&&!faces;
