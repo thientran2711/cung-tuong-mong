@@ -7,3 +7,12 @@ Branch: review/kit-ef-unit-rv = keeper#2 9fd26c14 + LIVE 0046a920 (index/sw rebu
 FAIL — on the REAL cards the nowrap does not apply. Real option dialog on Fold (755x1000), «Mua chuộc người Nội vụ phủ»: kaUnit marks every item .kef1 (computed class «ef g kef1») but getComputedStyle(white-space) = normal, and the card still shows «Sức 80→98 (+18) · Sủng / +2 · Danh +1» — «Sủng» at the end of one line, «+2» on the next (shot branch-fold; identical to LIVE). Cause (CSS cascade dump on that element): the new rule «button.ka .krv .ef.kef1, .kr .krv .ef.kef1 { white-space: nowrap }» loses to the existing «button.ka.kart small.kb > .kr > .krv > * { white-space: normal !important }» and «button.ka.kart.kopt small.kb > .kr > .krv > * { white-space: normal !important }» (the §6.3 square-card CSS). So the unit never holds on the option cards (.kopt) or the act cards (.kart), which are the cards the econ-tamco request is about.
 Fix: raise the rule above those two: «button.ka.kart small.kb > .kr > .krv > .ef.kef1, button.ka.kart.kopt small.kb > .kr > .krv > .ef.kef1 { white-space: nowrap !important }» (keep the general one for other hosts); then make kit-ef-unit.js render in a real .kart / .kopt card (an option dialog: Q with the sample x lines, and the Hành sự act tab) and assert for every .kef1 that getComputedStyle(white-space)==nowrap and getClientRects().length==1 on Fold + iPad (widths 150..320 px too).
 Not run after the FAIL: quickcheck/coop-e2e (stopped). Merge was clean (index/sw only).
+
+## Round 2 — review/kit-ef-unit-r2 bb00fc02 (keeper #3)
+PRIORITY #1 CHECK: re-read my r1 FAIL (nowrap overridden by .krv>*{white-space:normal!important}); OD on kit rows/units; KIT.md §6.2.
+- Fix: j63 .kr>.krv>.ef.kef1:is(#kef1-unit,.kef1){white-space:nowrap!important…} beats every host override; family: unsigned stats («Sủng 26»), kitRows info rows tagged (kaEfTag).
+- Merged LIVE 6f4e8d70 into review/kit-ef-unit-rv2 (d46ad6deb005ab024b9e23a8e8fbcfa280ca81f7).
+- kit-ef-unit.js (real cards, widths auto..280, act/pop-maid/staff/rv tabs): Fold PASS, iPad PASS, bad=0 everywhere.
+- Own probe on real option card (card.js, getClientRects().length==1 per .ef): all 1 (Bạc -94, Tâm cơ -3, Sức 80→98 (+18), Sủng +2, Danh +1, 2 khắc, Đức +2) on Fold and iPad. Fold shot looked at: units whole, wrap only between units.
+- quickcheck PASS, coop-e2e 94/94.
+- VERDICT: PASS.
