@@ -1115,7 +1115,6 @@ function kitPcActSplit(b){try{if(!b||!b.isConnected||!b.classList.contains("kart
 window.kitPcActSplit=kitPcActSplit;
 function kitPcActScan(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc>.pcr button.ka.kart").forEach(kitPcActSplit)}catch(e){}}
 window.kitPcActScan=kitPcActScan;
-(function(){let t=0;try{new MutationObserver(()=>{if(!t)t=setTimeout(()=>{t=0;kitPcActScan(document)},25)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
 /* KIT §6.3b-1 (owner 21/11 ~02:10Z, review/kit-pcrow-square): NO bullet info box on a person card. The descriptive note (.pcn.kpres: «Người chạy việc của cung… / Gặp nàng ta ở tẩm cung…», Chí tôn «Trọng tài… / Mê sắc…»)
    is hidden and the kit yellow «!» (.khap, §78) sits on the TOP-RIGHT corner of the left avatar/figure (.pcp); tap → the same text in the kit info popup. An act RESULT («…: thành / hỏng», popMsg) stays on the card
    (feedback to a tap is not a description). Every left-avatar host, one rule. */
@@ -1162,7 +1161,9 @@ window.kitPcIntroBang=kitPcIntroBang;
 document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.target.closest("#panel > .pgwrap > .kppbang");if(!t)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
  const g=t.parentElement,on=document.querySelector("#panel .ksub .on, #panel .ksub [aria-selected=true], .tabs .on");const ttl=((on&&on.textContent)||"Thông tin").trim().replace(/\s+\d+$/,"");
  if(typeof kitModal==="function")kitModal({kind:"info",title:ttl,sub:"",sections:[{h:"",html:`<div class="kpnote">${g.__kpintro||""}</div>`}]})}catch(x){console.error(x)}},true);
-(function(){let t=0;try{new MutationObserver(()=>{if(!t)t=setTimeout(()=>{t=0;kitPcNoteScan(document);kitPcIntroBang(document)},25)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
+/* ONE observer for the person-card kit scans (act split, note «!», intro «!»): only mutations inside the panel / pop-up / dialog count, one pass per frame burst (perf: quickcheck tab time) */
+(function(){let t=0;const hit=r=>{for(let i=0;i<r.length;i++){const e=r[i].target;if(e&&e.nodeType===1&&e.closest&&e.closest("#panel,#popw,#modal"))return true}return false};
+ try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
  try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
 /* KIT §6.2b: every dialog shown → its option cards pick their picture form (tall / square) once laid out; the ResizeObserver keeps them right after */
