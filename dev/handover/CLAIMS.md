@@ -872,3 +872,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | rv-kit-ef-unit r2 | PASS | review/kit-ef-unit-rv2 d46ad6deb005ab024b9e23a8e8fbcfa280ca81f7 | kit-ef-unit.js + quickcheck + coop-e2e 94/94 |
 | pet-bath-test (sonnet SMALL; MAIN 94 ORDER 13:08Z: mg-ui-rest.js:45 pet bath in-play text assert stale after no-word) | review/pet-bath-test; briefs/b6-pet-bath-test.md | B | session_01N1tNP63eqDeeAMZM44f9Ra | RUNNING | 21/11 13:21Z |
 | REVIEW od03-favart (opus BIG) | review/od03-favart-rv; reports/review-od03-favart.md | FOREMAN D #16 | session_01964izCZEjJkV3NTqKebwmD | RUNNING | 21/11 13:25Z |
+| rv-kit-win-pay | PASS | review/kit-win-pay-rv 203cd559a4a1066a2be0ed64788bee8dece5861f | kit-win-pay.js + quickcheck + coop-e2e 94/94 |
