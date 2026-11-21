@@ -864,6 +864,24 @@ document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;setTimeout(()
  if(L.length){e.preventDefault();L[0].__kxl.close();return}
  if(kitModalClose()){e.preventDefault();return}
  const px=document.getElementById("popx");if(px&&px.offsetParent){e.preventDefault();px.click()}},0)});
+/* KIT 8.9 ONE DIALOG STACK (owner 21/11, mark #46: the «Kiếp này» death card opened with a person pop-up still open ON TOP of its bottom part).
+   ONE rule for the kit modal layer (#modal / Q), applied from showModal, for every dialog opener (kitModal, kitConfirm, kitPanel, resultShow, over(), events, PEND cards):
+   (1) a newer dialog is always the TOP layer: #modal sits above the room pop-up card (#popw) and every second-layer pop-up (kitCloseLayer layers, .kpop) — never under them (CSS below);
+   (2) a WINNING dialog (death / era end «Kiếp này», night, life card, any dialog while S.dead) closes every other open second-layer pop-up first: the room person card (popIdx),
+       the kit layers (game result #ov and other kitCloseLayer layers), the word pop-up #kpop, the podium #kpodov, an open kit book (.kbk). Nothing is left floating over or behind it.
+   Never two dialogs overlapping: a new dialog never opens on top of an older dialog of its own layer (Q is one queue: the older one waits its turn, shown one at a time). */
+function kitDialogWins(m){try{if(!m)return false;if(typeof S!=="undefined"&&S&&S.dead)return true;const c=String(m.cls||""),k=m.kit&&m.kit.kind;return /\b(end|night|klife)\b/.test(c)||k==="end"||k==="night"}catch(e){return false}}
+function kitCloseOthers(){let n=0;
+ try{if(typeof popIdx!=="undefined"&&popIdx!=null){popIdx=null;popMsg="";n++;if(typeof renderStage==="function")renderStage()}}catch(e){}
+ try{KIT_LAYERS.slice().forEach(r=>{if(r.isConnected&&!r.hidden&&getComputedStyle(r).display!=="none"&&r.__kxl&&r.__kxl.box()){try{r.__kxl.close()}catch(e){}n++}})}catch(e){}
+ try{document.querySelectorAll(".kpop").forEach(x=>{if(!x.hidden){x.hidden=true;n++}})}catch(e){}
+ try{if(document.getElementById("kpodov")){typeof kitPodiumClose==="function"?kitPodiumClose(true):document.getElementById("kpodov").remove();n++}}catch(e){}
+ try{if(document.body.classList.contains("kbk-open")){const x=document.querySelector(".kbk>.kbk-x");if(x){x.click();n++}}}catch(e){}
+ return n}
+function kitDialogStack(){try{const m=typeof Q!=="undefined"?Q[0]:null;if(!m)return 0;return kitDialogWins(m)?kitCloseOthers():0}catch(e){console.error("kitDialogStack",e);return 0}}
+window.kitDialogStack=kitDialogStack;window.kitCloseOthers=kitCloseOthers;window.kitDialogWins=kitDialogWins;
+(function(){const st=document.createElement("style");st.id="kit-dialog-stack";st.textContent=`html body:not(.kg82cf) #modal:not(.kptitle){z-index:42}`;document.head.appendChild(st);
+ setTimeout(()=>{const s1=showModal;showModal=function(){const r=s1.apply(this,arguments);kitDialogStack();return r}},0)})();
 /* game / lesson results in #ov (kg82 "Đã hiểu", j92 Chải chuốt, the old j5 "Xong"): the result card closes with ✕ / tap outside / Esc,
    which press that button (its own handler applies the result as before); while the game runs there is no ✕ */
 /* (review kit-fig2 11/15, LUẬT SỬA CẢ NHÓM "overlay never closes"): only the result button of the panel ON SCREEN counts — a button left in a
@@ -1045,7 +1063,7 @@ function kitOptFill(E,done){const pad=x=>{const cs=getComputedStyle(x);return (p
 /* KIT §6.2 FINAL (owner 18/11 07:25Z): every DIALOG option card (button.ka.kopt outside a person card) has the ONE picture box 66x88 (3:4, css in jopic) and the cards of one dialog are ONE height
    = the tallest card of that dialog (Tốn + Được rows only, so the tallest is rarely above the 106 px floor). No per-card picture size, no text-driven strip any more. */
 function kitOptEqual(b){/* KIT §6.2d: the cards of one option list = ONE tier size (kitOptTier, jopic); no tallest-card height any more */const r=b.closest("#modal .dlg")||b.parentElement||document;const gs=new Set();r.querySelectorAll("button.ka.kopt").forEach(x=>{if(x.isConnected&&!x.closest(".pc")&&x.offsetParent&&x.parentElement)gs.add(x.parentElement)});gs.forEach(g=>kitOptTier(g))}
-function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches("button.ka.kopt")&&!b.closest(".pc")){kitOptEqual(b);return}const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
+function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches(".pc>.pcr button.ka")){kitOptSet(b,0);b.style.removeProperty("min-height");b.dataset.kapic="sq";return}/* §6.3: person-card act rows keep the ONE square picture, never fitted to the text */if(b.matches("button.ka.kopt")&&!b.closest(".pc")){kitOptEqual(b);return}const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
  const E=[];let w=0,h=0;G.forEach(x=>{const art=x.querySelector(":scope > .kaart");x.dataset.kapic="";if(!x.isConnected||getComputedStyle(art).display==="none"||getComputedStyle(x).flexDirection!=="row")return;
   const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15)return;E.push(x);w=Math.max(w,a.width);h=Math.max(h,a.height)});
  if(!E.length)return;E.forEach(x=>x.style.removeProperty("min-height"));const lo=Math.round(w*KIT_OPT_SQ.min),bhs=()=>E.map(x=>x.querySelector(":scope > .kabody").getBoundingClientRect().height);
@@ -1086,12 +1104,92 @@ ${kitCompactCSS("button.ka.kart",84,112)}
 .pc>.pcr .pcb:has(> button.ka),.pc>.pcr .rbtn:has(> button.ka){display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:8px!important;grid-template-columns:none!important;align-items:stretch!important}
 .pc>.pcr .pcb>button.ka,.pc>.pcr .rbtn>button.ka{width:100%!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;flex:0 0 auto!important;box-sizing:border-box}
 .pc>.pcr button.ka.kanoart>.kaart{display:none!important}
-${kitCompactCSS(".pc>.pcr button.ka.kart",84,112)}
-@container kpane (max-width:420px){
- .pc>.pcr button.ka.kart{--kaw:72px!important;--kah:96px!important}
- .pc>.pcr button.ka.kart>.kaart{flex-basis:72px!important;width:72px!important;height:96px!important}
-}
+${kitCompactCSS(".pc>.pcr button.ka.kart",84,84)}
+/* KIT §6.3 (owner 21/11 ~02:08Z, review/kit-pcrow-square): the act picture is ONE fixed SQUARE (per-device size: 68 on a narrow pane, 84 normal, 96 on a wide pane — the sizing of the approved «Dò hỏi gia thế» card; one size per device, never stretched by the text); to its right the title + odds and ONLY the Tốn / Được rows;
+   UNDER both, ONE full-width info box (.kpabox: the lead sentence, Cần, Bại, Mất, Kèm, Ghi chú, Vì sao, every other row). kitPcActSplit builds the box. */
+html body .pc>.pcr button.ka.kart{--kpa:84px;display:grid!important;grid-template-columns:var(--kpa) minmax(0,1fr)!important;column-gap:10px!important;row-gap:6px!important;align-items:start!important;--kaw:var(--kpa)!important;--kah:var(--kpa)!important;min-height:0!important}
+html body .pc>.pcr button.ka.kart>.kaart{grid-column:1!important;grid-row:1!important;width:var(--kpa)!important;height:var(--kpa)!important;flex-basis:var(--kpa)!important;flex:none!important;align-self:start!important}
+html body .pc>.pcr button.ka.kart>.kabody{grid-column:2!important;grid-row:1!important;min-width:0!important}
+html body .pc>.pcr button.ka.kart>.kpabox{grid-column:1/-1!important;grid-row:2!important;display:flex!important;flex-direction:column!important;gap:3px!important;min-width:0!important;padding:6px 8px!important;border:1px solid var(--k-hair,#e6d3ac)!important;border-radius:6px!important;background:var(--k-card2,rgba(255,250,235,.7))!important;font-size:.78rem!important}
+html body .pc>.pcr button.ka.kart>.kpabox .klead{display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important}
+html body .pc>.pcr button.ka.kart>.kpabox small.kb{display:grid!important;grid-template-columns:fit-content(4.3rem) minmax(0,1fr)!important;column-gap:6px!important;row-gap:2px!important}
+html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
+html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
+html body .pc>.pcr button.ka.kart>.kpabox small.kb>.kr>.krv>*{white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
+html body .pc>.pcr button.ka.kart>.kpabox:empty{display:none!important}
+@container kpane (max-width:420px){html body .pc>.pcr button.ka.kart{--kpa:68px}}
+html.kv2 body .pc>.pcr button.ka.kart,html.kv2 body .pc>.pcr button.ka.kart.kart{--kpa:96px}/* iPad (two pages): the bigger card, as the approved «Dò hỏi gia thế» */
 `;document.head.appendChild(st)})();
+/* KIT §6.3 — kitPcActSplit(b): the row that is NOT Tốn / Được (Cần, Bại, Mất, Kèm, Ghi chú, Vì sao, hint) and the lead sentence move into ONE full-width box (.kpabox) under the picture + title block.
+   Idempotent; runs after every normalisation / render (scan below), so no host calls it by hand. */
+function kitPcActSplit(b){try{if(!b||!b.isConnected||!b.classList.contains("kart"))return;const body=b.querySelector(":scope > .kabody");if(!body)return;
+ const kb=body.querySelector(":scope > small.kb"),lead=body.querySelector(":scope > .klead");
+ const keep=r=>/\bkr-(ton|duoc|thanh)\b/.test(r.className)&&!r.classList.contains("kofold");const mv=kb?[...kb.children].filter(r=>r.classList.contains("kr")&&!keep(r)):[];
+ if(!lead&&!mv.length)return;/* nothing to move: no box is made (no DOM churn for the observer) */
+ let box=b.querySelector(":scope > .kpabox");if(!box){box=document.createElement("span");box.className="kpabox";b.appendChild(box)}
+ if(lead)box.prepend(lead);
+ if(mv.length){let bk=box.querySelector(":scope > small.kb");if(!bk){bk=document.createElement("small");bk.className="kb";box.appendChild(bk)}mv.forEach(r=>bk.appendChild(r))}
+ if(kb&&!kb.children.length)kb.remove()}catch(e){console.error("kitPcActSplit",e)}}
+window.kitPcActSplit=kitPcActSplit;
+function kitPcActScan(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc>.pcr button.ka.kart").forEach(kitPcActSplit)}catch(e){}}
+window.kitPcActScan=kitPcActScan;
+/* KIT §6.3b-1 (owner 21/11 ~02:10Z, review/kit-pcrow-square): NO bullet info box on a person card. The descriptive note (.pcn.kpres: «Người chạy việc của cung… / Gặp nàng ta ở tẩm cung…», Chí tôn «Trọng tài… / Mê sắc…»)
+   is hidden and the kit yellow «!» (.khap, §78) sits on the TOP-RIGHT corner of the left avatar/figure (.pcp); tap → the same text in the kit info popup. An act RESULT («…: thành / hỏng», popMsg) stays on the card
+   (feedback to a tap is not a description). Every left-avatar host, one rule. */
+function kitPcNoteBang(pc){try{const pcp=pc.querySelector(":scope > .pcl > .pcp");const nt=pc.querySelector(":scope > .pcr > .pcn.kpres");
+ if(!pcp){return}const have=pcp.querySelector(":scope > .kpcbang");
+ if(!nt||/:\s*(thành|hỏng)/i.test(nt.textContent)){if(have&&!nt)have.remove();return}
+ nt.hidden=true;nt.classList.add("kpcnote");pc.__kpnote=nt.innerHTML;
+ if(!have){const i=document.createElement("i");i.className="khap kpcbang";i.setAttribute("role","button");i.setAttribute("aria-label","Xem thêm");i.title="Xem thêm";i.textContent="!";pcp.appendChild(i)}}catch(e){console.error("kitPcNoteBang",e)}}
+window.kitPcNoteBang=kitPcNoteBang;
+function kitPcNoteScan(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc").forEach(kitPcNoteBang)}catch(e){}}
+document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.target.closest(".pc > .pcl > .pcp > .kpcbang");if(!t)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+ const pc=t.closest(".pc"),nm=((pc.querySelector(".pcname")||{}).textContent||"").trim();let who=null;try{who=typeof kitPersonByName==="function"?kitPersonByName(nm):null}catch(e){}if(typeof kitModal==="function")kitModal({kind:"info",title:nm,sub:"",subject:who||undefined,sections:[{h:"",html:`<div class="kpnote kbl-pop">${pc.__kpnote||""}</div>`}]})}catch(x){console.error(x)}},true);
+(function(){const st=document.createElement("style");st.id="kit-pc-bang";st.textContent=`
+.pc>.pcl>.pcp.kit{position:relative}
+.pc>.pcl>.pcp>.kpcbang{position:absolute;top:5.5%;right:6%;margin:0;z-index:6;cursor:pointer}/* on the visible top-right corner of the framed figure (proportional, never clipped by the name tag) */
+.pc>.pcr>.pcn.kpcnote{display:none!important}
+/* KIT §6.3b-2 (owner 21/11 ~02:14Z): the rank + name tag at the top of the left column is CENTRED over the figure, in every left-avatar tab */
+html body .pc[data-k2].kpwide>.pcl>:is(.pcname,.pcrk,b:first-of-type){text-align:center!important;justify-content:center!important;align-self:stretch!important}
+html body .pc[data-k2].kpwide>.pcl>.pcrk{display:block!important;width:100%!important;text-align:center!important;margin-left:0!important;margin-right:0!important}
+`;document.head.appendChild(st)})();
+/* KIT §6.3c — ONE PERSON-TAB FRAME (owner 21/11 ~02:36Z): in every person tab (Hậu cung ×4, Giao tình, Hoàng tự ×5, Nhân sự …) the TOP BLOCK (pane bar, sub-tabs, the headline, the face/mother strip) is FIXED and only the person card
+   below it scrolls (inside itself), never the whole panel — the strip is never cut off. Pure CSS on the shared wrappers (.pgwrap > .pc), no host calls it. */
+(function(){const st=document.createElement("style");st.id="kit-pc-frame";st.textContent=`
+#panel.kpfr{display:flex!important;flex-direction:column!important;overflow:hidden!important}
+#panel.kpfr > *{flex:0 0 auto}
+#panel.kpfr > .pgwrap{flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;display:flex!important;flex-direction:column!important}
+#panel.kpfr > .pgwrap > *{flex:0 0 auto}
+#panel.kpfr > .pgwrap > .pc{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain}
+#panel.kpfr > .pgwrap.krelpg > :last-child{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain}
+/* KIT §6.3d (owner 21/11 ~02:38Z): the intro / explanation line(s) above a person strip (Hoàng tự tabs: «Con các nhà quyền thần chưa hứa hôn…», «Con của các phi tần khác…», counts) are NOT drawn: a kit round «!» sits at the TOP-RIGHT corner of
+   the top block and opens them in the kit info popup, so the top block has ONE fixed size whatever the text length. */
+#panel > .pgwrap{position:relative}
+#panel > .pgwrap > .ph.kpintro{display:none!important}
+#panel > .pgwrap > .kppbang{position:absolute;top:4px;right:6px;margin:0;z-index:7;cursor:pointer}
+`;document.head.appendChild(st)})();
+function kitPcIntroBang(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll("#panel > .pgwrap").forEach(g=>{const ph=g.querySelector(":scope > .ph");const have=g.querySelector(":scope > .kppbang");
+ if(!ph){if(have)have.remove();return}ph.classList.add("kpintro");g.__kpintro=[...ph.children].map(x=>`<p>${x.innerHTML}</p>`).join("");
+ if(!have){const i=document.createElement("i");i.className="khap kppbang";i.setAttribute("role","button");i.setAttribute("aria-label","Xem thêm");i.title="Xem thêm";i.textContent="!";g.prepend(i)}})}catch(e){console.error("kitPcIntroBang",e)}}
+window.kitPcIntroBang=kitPcIntroBang;
+document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.target.closest("#panel > .pgwrap > .kppbang");if(!t)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+ const g=t.parentElement,on=document.querySelector("#panel .ksub .on, #panel .ksub [aria-selected=true], .tabs .on");const ttl=((on&&on.textContent)||"Thông tin").trim().replace(/\s+\d+$/,"");
+ if(typeof kitModal==="function")kitModal({kind:"info",title:ttl,sub:"",sections:[{h:"",html:`<div class="kpnote">${g.__kpintro||""}</div>`}]})}catch(x){console.error(x)}},true);
+/* ONE observer for the person-card kit scans (act split, note «!», intro «!»): only mutations inside the panel / pop-up / dialog count, one pass per frame burst (perf: quickcheck tab time) */
+/* KIT §6.3e (owner 21/11 ~02:12Z / ~02:30Z, her Cung nhân + Hoàng tự shots): the figure in the left column ALWAYS fills the column width — kitPcKeyFit no longer shrinks it to fit the key lines under it (that left a 100 px portrait with empty bands);
+   the left column is part of the card and scrolls WITH it inside the one person-tab frame (no sticky / max-height box of its own). The mother block (.kpl) always stands ABOVE the facts table in the info group, Fold and iPad alike. */
+(function(){if(typeof kitPcKeyFit==="function")kitPcKeyFit=function(pc){try{const nat=+pc.dataset.kpcw0||0;if(nat&&pc.classList.contains("kpwide"))pc.style.setProperty("--kpcw",nat+"px")}catch(e){}};window.kitPcKeyFit=kitPcKeyFit;
+ const st=document.createElement("style");st.id="kit-pc-fill";st.textContent=`
+html body .pc.kpwide[data-k2]>.pcl{position:static!important;max-height:none!important;overflow:visible!important}
+html body .pc>.pcr .pcg.on{display:block!important}
+html body .pc>.pcr .pcg.on>.kpl{width:100%!important;margin:0 0 8px!important}
+`;document.head.appendChild(st)})();
+/* the frame class is set by JS (no :has() on #panel: it cost +30 % tab time in quickcheck): after every render and every panel mutation */
+function kitPcFrameMark(){try{const P=document.getElementById("panel");if(!P)return;const on=!!P.querySelector(":scope > .pgwrap > .pc, :scope > .pgwrap.krelpg");if(P.classList.contains("kpfr")!==on)P.classList.toggle("kpfr",on)}catch(e){}}
+window.kitPcFrameMark=kitPcFrameMark;
+(function(){if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);kitPcFrameMark();try{kitPcActScan(document.getElementById("panel"))}catch(e){}return r};window.render=render}})();
+(function(){let t=0;const hit=r=>{for(let i=0;i<r.length;i++){const e=r[i].target;if(e&&e.nodeType===1&&e.closest&&e.closest("#panel,#popw,#modal"))return true}return false};
+ try{new MutationObserver(r=>{if(t||!hit(r))return;t=setTimeout(()=>{t=0;kitPcFrameMark();kitPcActScan(document);kitPcNoteScan(document);kitPcIntroBang(document)},40)}).observe(document.body,{childList:true,subtree:true})}catch(e){}})();
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);try{kitActCompactOn(root&&root.querySelectorAll?root:document)}catch(e){}
  try{const R=root&&root.querySelectorAll?root:document;requestAnimationFrame(()=>kitOptFitAll(R))}catch(e){}return r};window.kaNorm=kaNorm})();/* §6.2b: picture form by content after every normalisation */
 /* KIT §6.2b: every dialog shown → its option cards pick their picture form (tall / square) once laid out; the ResizeObserver keeps them right after */
