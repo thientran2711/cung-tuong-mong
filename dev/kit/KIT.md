@@ -151,7 +151,7 @@ Frame / gem / brocade art (`img/kit/frame-consort-N`, `gem-N`, `bg-consort-N`) a
 | plain button | `.btn` | `#fffaf0`, `1px --line`, radius 6, min-height 40 |
 | tabs inside a person card | `pcard({groups})` → `.pctabs .pct` (+ count `<i>`), active `.pct.on` = gold fill | groups for rivals come from `RVGRP` (Giao thiệp / Hại nhỏ / Hại nặng / Sát hại) |
 | main tabs | `#tabs [data-tab]` (Hành động, Bản đồ, Phi tần, Quan hệ, Phe phái, Kẻ hầu, Con cái, Rương đồ, Tài nghệ, Tuyến truyện, Nhật ký) | servant-start uses `SRVTABS` |
-| person card | `pcard({f,name,rank,status,ghen,lines,chips,note,groups,empty,close})` → `.pc` | portrait (kit frame) left, info under it, actions right; one card at a time with `pager(key,items,mk)` face strip |
+| person card | `pcard({f,name,rank,status,ghen,lines,chips,rows,note,groups,empty,close})` → `.pc` | portrait (kit frame) left, info under it (optional `rows:[[label,value,cls]]` → `kitRows` in `.pcrows` under the chips, e.g. Chí tôn «Niên hiệu | Vĩnh An»; the name slot of the Emperor is always «Hoàng thượng», owner 21/11), actions right; one card at a time with `pager(key,items,mk)` face strip |
 | labelled bar | `ghenBar(n)`, `fbar(v,lo,hi,good)`, `sbar(label,v,cls)` | always label + number beside the bar |
 | chip | `chip(text,cls)` → `.chip` (`.hot` red, `.ok` green) | |
 | modal / dialog / panel | `kitPanel(spec)` / `kitModal(spec)` (j79) → `.dlg.kpanel` | section 8. Legacy `Q.push({t,h,opts,who})` is converted automatically; `pframeArt(placeArt)` / random room art is never shown |
@@ -656,6 +656,13 @@ ONE look for every in-play cue on any mini-game canvas (every engine family call
 - `kg82FxBad(g,x,y,r,now,hitAt)` (mg-play2): THE «avoid this» look — kit `--bad` danger ring + small ✕ badge round any thing she must NOT touch; `hitAt` → red burst over `badMs`, returns a shake offset (`badShake`) for the hit thing / her piece. Never on a pickup. Today: den lotus pads.
 - Test: `node dev/test/mg-play2.js` (lane contrast ≥ laneMin, danger ring red rim, hit = penalty, dodge demo, guided hand).
 
+#### 13.7.2 MINI-GAME GUIDING LINE + «Vì sao» ROW (owner OD 21/11 ~00:50Z «guiding words stay», review/mg-5s-clear) — `dev/build/j82.js`
+- `kg82Guide(g, text, cx, cy, tone, sz, maxW)`: ONE pill (kit card ground, coloured rim) on any mini-game canvas = the single short, state-driven guiding line. `tone` is a WORD — `"wait"` (neutral, `--k-lab`) · `"go"` (tap now, `--good`) · `"bad"` (danger, `--bad`); colours are tokens, never typed in an engine (a ready colour string still works). Kit page sample §13.7.2. Type shrinks to fit `maxW` (not below 10 px); a longer line is cut with «…» — a guiding line is ONE SHORT line (≤ ~34 characters). No engine draws its own pill (td_dung's local pill() still has to be switched to it: rv branch review/td-dung-clear-rv).
+- `KG82.why = "…"`: an engine sets it when it ends; `kg82ShowRes` shows it as the kit row «Vì sao» above the button, then clears it (also cleared at `kg82Play`).
+- A DOM button in play may keep a short word: set `data-kgkeep="1"` (kit pass in j82 «NO TEXT IN PLAY» skips it). Used: «Quạt lửa», «Thưa», «✓ Dán».
+- Rules-screen demos `NWB_DEMO.aim / slapbar(kind) / cook / tspluck / doiline / hoadien` (jnwb): the object, a hand doing the move, the ✓ (still under Cảnh động off).
+- Used by: ban, tat, ne, banh, duho, doi, hoadien, td_ngon. Tests: `mg-noword-a/b` whitelist exactly these strings (GUIDE table).
+
 ### 13.8 HEAD-TO-HEAD SPLIT BOARD «Thách đấu» · kitGameVs (owner OD 20/11 ~01:00Z item 1, K-PM-1, review/kit-gamevs) — `dev/build/jgamevs.js`, knobs `BAL.gameVs` (jbal2)
 ONE shared live board for EVERY person-minigame art (đàn, cờ, hát, múa, thư pháp, họa, thêu, hương … any KG82 / person game that plays against a living NPC or friend): her board + the opponent's live score and clock side by side. Display only: no game logic, no rule numbers (the game owns them; the part only has `BAL.gameVs` = pop / warn / end knobs).
 - `kitGameVs({box, me:{p|face,name}, opp:{p|face,name}, unit:"phần", round, total, oppBoard})` → controller; mounts at the top of `box` (default `kg82Box()`), after `kgReady` (§13.7). Portrait = `kitFaceH` (kit portrait), score and clock = kit chips (`.kchip`), panes use `--k-hair / --k-card / --gold`.
@@ -938,7 +945,7 @@ ladder words from the real formulas; "có thể gặp người" → real words.
 ## 21. SKILL CARD = THE ONE HEAD CARD (kit 2; one form since review/tabs-kit r7, owner 11/15) — `dev/build/j79.js`
 `kitSkillCard({kind, k, name, kicker, level, max, word:"Bậc", prog:[cur,need] | prog:cur+need:n, bar:false, desc, next, levels:[text per level], acts:[pbtn…], img, stepsAttr, can})` → `.kskill`
 - ONE card for every art and Tứ đức course (Tài nghệ), every Tác phẩm line, the Mệnh truyện chapter head and the Sắc phong head, and every
-  empty state (`kitEmpty(title,line)` = this card with `max:0`, the topic's kitInfoArt picture and one short line). No other head / empty frame.
+  empty state (`kitEmpty(title,lines,o)` = the big empty card of §37.2). No other head / empty frame.
 - LEFT: the painted picture as `kitSceneArt(src,name,{size:"thumb"})` (§28.19: 64 px square, 56 px on phones). `img` default = `kitSkillArt(kind,k)`
   (`img/art-<k>.webp` / `img/vir-<k>.webp` when in INFO.json have; else act-category art).
 - RIGHT: kicker (small, e.g. "Chương 2", "Điều kiện sắc phong"), name + **kitSteps** (`max` segments + "<word> l/max"; with `stepsAttr` the steps are a
@@ -2844,9 +2851,12 @@ for a living player; nothing is lost: each fact now sits on a person card.
 - **Quý tộc kén rể · kén dâu** (`qt`): unpromised công tử (`S.hPool`) then quý nữ (`S.qPool`); card = Nhà (con trai/gái <chức>), Phe, Tuổi,
   Sắc · Tài (or "chưa rõ"), "Hỏi được cho: <con>" when a match fits her child; act "Dò hỏi gia thế" (1 khắc, Bạc -5, sure) for a stranger.
 
-### 37.2 Empty sub-tab = ONE kit card (`htEmpty(art, title, lines)` → `.khtempty`)
-`kitArtFrame` picture (act-cat-cham-con / act-phong-tuoc / act-hon-su / act-cat-trieu-chinh) + title (seal colour) + 2–3 bullet lines
-saying how the tab fills. Never a blank panel, never a run-on paragraph. Narrow container (≤ 420 px): picture over text.
+### 37.2 Empty tab / sub-tab / panel = ONE kit card (`kitEmpty(title, lines, {art|topic, acts})` → `.kempty`, j79 §21; `htEmpty` = thin alias)
+Owner 21/11: "khi không có thông tin thì hiện như «Ta chưa có con»: nhìn cái trang cho nó đỡ trống". Picture LEFT (`o.art` path, else
+`kitInfoArt(o.topic||title)`, else neutral tile; narrow container ≤ 420 px: picture over text) + title «Ta chưa có …» / «Chưa có …» (seal colour) +
+2–3 hint bullets saying how it fills. Never a blank panel, a lone `<p class="past">` or a run-on paragraph. Used by every empty state: Phe phái hậu cung,
+Nam nhân, Hoàng tự (Con của ta / Kế vị / Hoàng tự trong cung / Hôn sự / Kén rể), Thư từ, Mệnh truyện (Chương / Sắc phong / Đã qua), Việc nhờ (3 tabs), Gia tộc,
+Phụ tuyến, Triều cục, bảng xếp hạng. Scan: `node dev/test/empty-scan.js`; forced-empty shots: `node dev/test/empty-shots.js`.
 
 ### 37.3 Strangers (owner "mọi tên có mặt", "Người lạ")
 Công tử / quý nữ are strangers until seen in a marriage talk, met by a daughter, promised / married, or asked about: grey kit silhouette
@@ -4027,7 +4037,7 @@ OWNER 18/11 ~06:35Z (approved the approach): the WHOLE group (sky / mountain ban
 Composition only: NO new component. **17/11 (owner ~04:26Z + ~04:40Z, option 1 compact) the card is split in two; the mood card and the "Lòng người" block/tab are gone (mood already sits on the portrait frame, the relation block IS the left block):**
 - **LEFT, under the portrait, always in view (`.kpkey`, built by `pcfKey`, completed by `kitPcKey`)**: the acquaintance chip (`k61StChip`, moved from the chips), ONE compact two-way relation block `kitRelTable(rows,{compact:true})` (§52.2: one line per direction, no box), and the Thích / Ghét lines once known (moved from the right panel; unknown ones are dropped, not shown as "chưa rõ"). It sits before the wear slots and the stat chips; the relation chips of `.kpgrid` (rowA) are not drawn when the key block exists (one fact, one place). Numbers glow green / red when an action changes them (`pcfStatWatch`, key = direction + word).
 - **Fit (`kitPcKeyFit`, kit only)**: the key block must be visible without scrolling the left column. When the card is too short for portrait + key, the figure (`--kpcw`, min 112 px) gets smaller by exactly the missing height, never per screen; the left column is at least 172 px wide (`--kpcl`) so the key text does not wrap to one word a line. iPad 1180x820 card 429 px: figure 150-180 px wide; Fold 755x1000: full 240 px.
-- **RIGHT**: the info panel `.pcf` (Sở trọng = Sở trường / Tính nết / Hay, Đã biết ≤ 2 rows (1 line each), Dạo này 1 row) stays FIXED: `kitPcFix` moves it into the sticky `.kpstick` above the act tabs; heading and rows share one line; the act cards below are the only scrolling area. Extra blocks of other modules (`PCF_X`: Kỷ niệm, Ân oán chưa dứt) + Việc nhanh go in the tab "Chuyện cũ" (2+ act groups) or under the acts (one group / none).
+- **RIGHT**: the info panel `.pcf` (ONE label column, no block headings since owner 21/11 ~02:00Z: rows Sở trường / Tính nết / Trọng / Hay, Đã biết ≤ 2 rows (1 line each), Dạo này 1 row) stays FIXED: `kitPcFix` moves it into the sticky `.kpstick` above the act tabs; heading and rows share one line; the act cards below are the only scrolling area. Extra blocks of other modules (`PCF_X`: Kỷ niệm, Ân oán chưa dứt) + Việc nhanh go in the tab "Chuyện cũ" (2+ act groups) or under the acts (one group / none).
 Narrow cards (< 440 px container: unsupported phone portrait): the key block is a full-width row under the portrait row (`grid-area:key`, jk4 narrow template).
 Old list (kept for the right panel): 3. **Sở trọng** `kitRows`: known tính nết + "Hay: …" (PERS tend); the Emperor: known likes + habits (+ jmind Sở trường). 4. **Đã biết** `kitRows` of the newest intel + the `.kchipb` chips opening "Đã biết về X" / "Chứng cứ về X". 5. **Dạo này** `kitRows` (week | line). 6. **Việc nhanh** act cards (`pbtn` in `.kskacts`), only when the card has no live act of its own.
 Not filled: her own card, children, "Người lạ". Dislikes/likes (review/pcard-dislikes, `jdis.js`) are rows of the Sở trọng block; `kitPcKey` lifts the known ones to the left.
