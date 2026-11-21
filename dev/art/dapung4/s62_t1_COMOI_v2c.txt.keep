@@ -1,13 +1,19 @@
 base: dev/art/dapung4/s62_t1_COMOI_v2.txt
-allow: a fitted mint mist INNER top   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: that square neckline edged by a narrow plain mint mist silk band with no embroidery on it   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: OVER it the ice blue upper garment worn OPEN at the front   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: a simple narrow plain mint mist edge   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: her signature colour family ice blue and mint mist stays the MAIN robe colour   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: the robe itself is clearly ice blue silk   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: ice blue silk like #71B5D7 is the main colour of the robe   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: with mint mist in the inner robe and linings   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: the MAIN colour ice blue and the SECONDARY colour mint mist   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: highly translucent gauze shawl in mint mist   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
-allow: clearly different from her main robe colour ice blue   # owner L1560 'Ok sửa' (COLORFIX1): season colour words -> own season palette (palettes_season_deep.json)
+allow: flowing silk and gauze with a soft sheen and fine delicate embroidery   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: a fitted mint mist INNER top   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: that square neckline edged by a narrow plain mint mist silk band with no embroidery on it   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: OVER it the ice blue upper garment worn OPEN at the front   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: a simple narrow plain mint mist edge   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: the skirt in a lighter tone of the same colour with a wide embroidered plum blossoms hem band   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: small sprays of embroidered plum blossoms on the upper garment   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: a plum blossom   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: her signature colour family ice blue and mint mist stays the MAIN robe colour   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: the robe itself is clearly ice blue silk   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: her ORIGINAL robe colour is kept exactly as in image 1   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: her first reference   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: ice blue silk like #71B5D7 is the main colour of the robe   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: with mint mist in the inner robe and linings   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: the MAIN colour ice blue and the SECONDARY colour mint mist   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: highly translucent gauze shawl in mint mist   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md
+allow: clearly different from her main robe colour ice blue   # COLORFIX1 (owner L1560 colours / L1561 item-flower-hairpin / L1562 rules, via C #13): see dev/handover/reports/COLORFIX1.md

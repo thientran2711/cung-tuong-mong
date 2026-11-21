@@ -33,4 +33,28 @@ Royal yellow #EFBD69 (G12 HH t8 yellow set / t7 three-colour rule) untouched eve
 6. s62 t1–t3 thu `_c` files: their base dapung4 COMOI_v2 also serves as the ice-blue (đông/root) look — the originals are kept.
 
 ## Handover
-Done; nothing pending. No successor needed.
+Pass 1 (colours) done; pass 2 (L1561/L1562 items, flowers, hairpins, fabric, all rules) in progress — see below.
+
+## L1561/L1562/L1563 pass 1 — THU s62 t1–t6 (production first)
+
+Columns: colours / held item / hair flower (F2) / hairpins / fabric (B29) / rules (gate = check_store `--scope tpN --age a22` approved+master, and `s62 v0 --low N` store).
+
+| file | colours | held item (F18) | flower (F2) | hairpins | fabric (B29) | rules |
+|---|---|---|---|---|---|---|
+| dapung4/s62_t1_COMOI_v2c | fixed: light plum #DF9ED9 + blush | OK thread-bound book | fixed: plum blossom → lilac spray (hair + embroidery) | OK silver, little gold, S24 | fixed: A_LIGHT sa hoa | approved+master PASS; store: Outfit sentence 0.83 (COMOI collar, pre-existing) |
+| dapung4/s62_t2_COMOI_v2c | fixed | OK pellet drum, deep drum two pellets (F18) | fixed: → tiger lily | OK silver + pearl | fixed: A_LIGHT | approved+master PASS; store: Outfit 0.73 (COMOI, pre-existing; tiger-lily sentence now passes) |
+| dapung4/s62_t3_COMOI_v2c | fixed | OK bamboo flute (other hand touches hairpin in hair) | fixed: → semi-double China rose | OK silver, pearl-tipped | fixed: A_LIGHT | approved+master PASS; store: G15 option-B words missing (pre-existing) |
+| thu_comoi/s62_t4_THU_COMOIc | fixed | OK white-jade vase | OK lotus | OK gold trâm + bu yao | fixed: B_LIGHT đoạn mỏng | added S21+S23, S16 restored → only **S13 FAIL** (pre-existing: approved S13 'closes only at the throat clasp' vs DESIGN7 open neckline 'closes only at the sash, never at the throat') = gate/rule conflict, needs rule owner — NOT GEN-READY |
+| thu_comoi/s62_t5_THU_COMOIc | fixed | OK folded letter | OK double hollyhock | OK | fixed: B_LIGHT | added S21+S23 → approved+master PASS; store: Outfit 0.83 (COMOI, pre-existing) |
+| thu_comoi/s62_t6_THU_COMOIc | fixed + 'SATURATED' dropped (A32) | OK tú cầu round stuffed ball (F18) | OK incurved chrysanthemum | OK | fixed: C_GAM light gấm (+ outfit 'HEAVY'→'LIGHT') | added S21+S23, S16 restored → approved+master PASS; store: Outfit 0.69 (pre-existing) + 2 COLOUR RULE sentences (store gate checks ROOT ice-blue words, no season mode — gate limit) |
+
+All 6: phi bạch kept (G36 thu OK); G37 one-tier vân kiên OK (t6); empty duplicate CAPTION line removed (t4–t6 bases carried one); colour fix: 'her ORIGINAL robe colour is kept exactly as in image 1 (her first reference):' dropped (image 1 is her ice-blue root picture — it would pull the robe back to đông colours). LEN ≤ 10 000 (max 9 996). keep --all PASS.
+
+Exact edits per file (also in each .keep):
+
+- dapung4/s62_t1_COMOI_v2c.txt: fabric B29 A_LIGHT (sa hoa); F2 flower: plum blossom → lilac spray x3 (hair + embroidery); colour: drop "ORIGINAL robe colour kept exactly as in image 1" (image 1 = root ice-blue picture, not the thu colours)
+- dapung4/s62_t2_COMOI_v2c.txt: fabric B29 A_LIGHT (sa hoa); F2 flower: plum blossom → tiger lily x3 (hair + embroidery); colour: drop "ORIGINAL robe colour kept exactly as in image 1" (image 1 = root ice-blue picture, not the thu colours)
+- dapung4/s62_t3_COMOI_v2c.txt: fabric B29 A_LIGHT (sa hoa); F2 flower: plum blossom → semi-double China rose x4 (hair + embroidery); colour: drop "ORIGINAL robe colour kept exactly as in image 1" (image 1 = root ice-blue picture, not the thu colours)
+- thu_comoi/s62_t4_THU_COMOIc.txt: fabric B29 B_LIGHT (đoạn mỏng); cut duplicate EMPTY CAPTION line; Hair sentence: bun words moved to S21; add S21 + S23 (approved); trim head-turn words (now S23); S16 restored (approved); colour: drop "ORIGINAL robe colour kept exactly as in image 1" (image 1 = root ice-blue picture, not the thu colours)
+- thu_comoi/s62_t5_THU_COMOIc.txt: fabric B29 B_LIGHT (đoạn mỏng); cut duplicate EMPTY CAPTION line; Hair sentence: bun words moved to S21; add S21 + S23 (approved); trim head-turn words (now S23); colour: drop "ORIGINAL robe colour kept exactly as in image 1" (image 1 = root ice-blue picture, not the thu colours)
+- thu_comoi/s62_t6_THU_COMOIc.txt: fabric B29 C_GAM; outfit word HEAVY→LIGHT gấm (B28/B29); cut duplicate EMPTY CAPTION line; Hair sentence: bun words moved to S21; add S21 + S23 (approved); trim head-turn words (now S23); S16 restored (approved); cut repeat of the image-2 royal-yellow sentence; cut repeat "gold only as thin accents."; colour: drop "ORIGINAL robe colour kept exactly as in image 1" (image 1 = root ice-blue picture, not the thu colours); drop SATURATED (A32 Dịu dàng never deep; B29 light); LEN: cut repeat (= "the LARGEST single bloom of all ranks"); LEN: cut repeat "never covering the neckline" (said before in the same clause); LEN: cut repeat (TWO-COLOUR RULE says main ≠ secondary)
