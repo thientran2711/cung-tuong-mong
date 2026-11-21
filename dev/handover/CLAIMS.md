@@ -713,3 +713,4 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | MAIN CHÍNH 87 coordinator (owner UI marks + go-live) | handover branch | MAIN CHÍNH 87 | session_01Rc5AsLqvvursHGF726bgwU | RUNNING | 21/11 03:45Z |
 | E39 story-voice LITERATURE EXPERT (opus; ORDER MAIN CHÍNH 86 04:20Z, owner mark #61 parts 2+3; briefs/E39-story-voice.md) | review/story-voice; reports/story-voice.md | FOREMAN E #25 | session_PENDING_E39 | RUNNING | 21/11 03:50Z |
 | fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | (opening) | RUNNING | 21/11 05:52Z |
+| MAIN CHÍNH 88 (coordinator; land queue + owner marks) | handover branch | MAIN CHÍNH 88 | session_01Rc5AsL9RckY86bdwv8NheC | RUNNING | 21/11 04:25Z |
