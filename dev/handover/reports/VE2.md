@@ -13,3 +13,8 @@ Necks all LOW open SQUARE, collarbones bare ✓ (G53). Refs: t1–t3 image 1 onl
 t1 w4ajNaE7EI · t2 5jDEsp0Kxe · t3 vQABHIKa47 · t4 tCReuogmZJ · t5 CqnIKlAEEy · t6 TdwGoCfVNR · t7 p8yWmJnehw · t8 If3pui4tvE
 Necks all wide crossed V, collarbones bare ✓; two stacked bands visible t1–t3, 3 bands t4–t6, 4 bands t7/t8 ✓; yellow only t6–t8 ✓; loose hair t1–t3, up-do t4–t8 ✓. Minor ✗: t2 drum reads as a round fan; t6 pose has hand on ball but yellow sash small.
 Session total: 440 (H+fix6+I) + 810 (THU×6) + 440 (Hán) = 1690 cr. Open: THU t4/t5 @135 need #22 gate waiver (B26/M06).
+## THU t4+t5 @135 (L1781, gate waived by #22) + JOB K maid test17 ×6 @135 (L1785) — gpt-2-6 2k medium 9:16 seed 7172
+THU t4 Lw85yeYswO · t5 DoOYmUHpcl (refs image 1) = 270 cr → full sheet dev/handover/review-sheets/thu_8bac_135_full_L1781.png (8 filled).
+JOB K (ref s7IPw0Ll8e, check_store maid a18 PASS ×6) = 810 cr, sheet dev/handover/review-sheets/maid_crepe6_135_L1785.png: tam KLpuSFKkqp · nhị p8yWhVaehw · nhất p8yWhMfehw · tam tc cpS2ouY0eP · nhị tc BhNVExMoQR · nhất tc hu2XbwEvqL.
+Checks: no teeth (face close-up strip), bow + both tails one colour ✓ all six, clean flat edges at collar/waist ✓, nhất tc same soft rose/blue tone ✓.
+Session total 1690 + 270 + 810 = 2770 cr.
