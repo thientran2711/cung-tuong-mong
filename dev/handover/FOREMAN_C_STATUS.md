@@ -1045,3 +1045,4 @@ NEWACCT#16 ~02:02Z: GEN1 996e909 t5 v9 kseEMNa16B 55 cr LOOKED + sent L1644: 1 h
 NEWACCT#16 ~02:02Z: PR21 89b2587 room 33 bright V3-B test (135 cr) LOOKED + sent L1645 (brown 47.5→8.4 %, ivory lacquer, pink-heavy, floor mauve). Batch (~3 500 cr) waits owner OK. Next Lượt 1646.
 NEWACCT#16 ~02:03Z: DESIGN20 702cdfe t4 COMOIi lotus-embroidered PASS (text). LADDER2 1c66296 EAR_FREE ×9 → CHECK1 → GEN1 t6 COMOIi + t7 v8h 110 cr if PASS. DESIGN20 adds EAR_FREE to t4/t5 in JOB 7. LADDER2 ~30 % idle (roll when next job).
 NEWACCT#16 ~02:05Z: LADDER2 81644d3 DESIGN20-wording ear/flower fix → current thu t1 v7, t2 v9, t3 v9, xuân v10, t6 COMOIj, t7 v8i, t8 v10h → CHECK1. GEN1 redrafts t6 COMOIi/t7 v8h (EAR_FREE) already running = OK as ear test. LADDER2 ~33 % → no new jobs; successor when needed.
+NEWACCT#16 ~02:06Z: DESIGN20 9214db6 JOB 7 NO VASE: 75 figure files fixed (L1438 lotus-lamp list), check_store F19 NOVASE gate, scan 0 left → CHECK1. Told owner L1646.
