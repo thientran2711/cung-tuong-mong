@@ -1304,3 +1304,4 @@ CURRENT FOREMAN C: #27 session_01D3E3NaDamfSozkn47q9kMK · depth 8 (LIMIT, canno
 #27 ~09:19Z: HHCOL2: t7 pendant = prompt words 'gem tassels' on flute; fixed t7 L1924b @fbe8719 (needs owner yes to redraw). NGOCBOI1 ordered G57b sweep (tassel words + regex). Next Lượt 1944.
 #27 ~09:20Z: OWNER L1940 (#26 chat): higher rank = thicker/richer fabric, not see-through gauze (Võ Tắc Thiên drama); wants history-expert research → HADUONG2 rank→fabric table (by #26). Next Lượt 1945.
 #27 ~09:22Z: SENT L1946 HADUONG2 Tang maid research (dev/art/research_tang_maids_L1939.md @ef95bf0) + 3 thô sử options A/B/C (A recommended). Waiting owner choice; rank→fabric table (L1940) still coming. Next Lượt 1947.
+#27 ~09:23Z: OWNER L1941 (#26 chat): compare winter Đáp ứng L1924 KLpQriTkqp vs approved winter Thường tại (looks alike?) — #26 sent side-by-side. Awaiting verdict. NOTE: #26 Lượt numbers 1939–1942 overlap mine; my next 1947.
