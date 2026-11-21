@@ -862,6 +862,12 @@ def negated(text, a, b):
 
 
 S14_L1794 = 'HOÀNG QUÝ PHI LUXURY: richer than every lower rank: more jade, pearls, gold and a few smooth red gems on the phoenix crown, pearl and jade trims along the cape edges, and long jade-and-gold belt pendants with pearl tassels; still clearly simpler and less golden than the Empress.'   # owner L1794 + L1799: jade/pearl/gold; red gems only on the crown, never on clothing; S14 override OK'd by Foreman C #22
+# owner L1803 (winter1 sheet s62_dong_coLong): fur t1-t3 DOUBLE, t4-t6 DOUBLE AGAIN, t7 a little thicker, t8 keep the sheet sentence; accepted forms in the W01/W02/W03 slots, OK'd by Foreman C #23 (REVERT2)
+W01_L1803 = "WINTER: a THICK band of soft plain ivory-white fur trim, DOUBLE the width and thickness of a slim trim, about four fingers wide, along her collar, the front edges and hem of her outer garment, and her cuffs, visibly warm and cosy, yet lying smooth and close, never puffy or bulky; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape."
+W02_L1803 = "WINTER: a VERY THICK, luxurious band of soft plain ivory-white fur trim, twice as wide and twice as thick as at the three lower ranks, about two hands wide, along her collar, the front edges and hem of her outer garment, and her cuffs, rich, warm and cosy, yet lying smooth and close, never puffy or bulky; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape."
+W03_L1803_T7 = "WINTER: a WIDE, THICK and luxurious band of dense, plush soft plain ivory-white fur trim, a little wider and fuller than at the ranks below, about two and a half hands wide, along her collar, the front edges and hem of her outer garment, and her cuffs, rich, warm and sumptuous, yet neat and elegant; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape."
+W03_L1803_T8 = "WINTER: soft plain ivory-white fur trim along her collar, the front edges and hem of her outer garment, and her cuffs; the same ivory fur at every rank, no coloured fur, never covering her face or neck."
+W_L1803 = {"W01": (W01_L1803,), "W02": (W02_L1803,), "W03": (W03_L1803_T7, W03_L1803_T8)}
 S13_COMOI = 'CAPELET CUT (flowing): its lower edge and collar lines are soft CURVES, never flat; the lower edge is {shape}; the outer robe closes only at the sash, never at the throat, never buttoned down the front, opening gradually in a long soft V toward the hem, graceful (uyển chuyển), never boxy.'
 
 def best_overlap(sentence, text):
@@ -1110,6 +1116,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
             if _k in _made: continue
         if e["id"] == "S07" and master_common.high_scope(scope) and master_common.b29_alt_in(text, scope, high=True): continue   # B29 (owner L1556/L1558, B28): the one light gấm sentence stands in the S07 brocade slot
         if e["id"] == "S14" and slot_rx(S14_L1794).search(text): continue   # owner L1794: jade/pearl/gold-only HQP luxury form stands in the S14 slot (A46)
+        if e["id"] in W_L1803 and any(slot_rx(f).search(text) for f in W_L1803[e["id"]]): continue   # owner L1803: thicker-fur ladder forms (t1-t3 x2, t4-t6 x4, t7 a little thicker, t8 sheet sentence) stand in the W01/W02/W03 slots
         if e["id"] == "S13" and slot_rx(S13_COMOI).search(text): continue   # owner L1377 (thu COMOI new collar OK, newer than G25/S13): the COMOI open-collar form "closes only at the sash, never at the throat" stands in the S13 slot (Foreman C #13, L1572)
         if skip_store and e.get("store") and not e.get("season"): continue   # already enforced by the STORE part (same prompt, store args)
         ages = (e.get("ages") or "all").split()

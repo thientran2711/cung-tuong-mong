@@ -1,0 +1,6 @@
+base: dev/art/winter1/s62_t7_dong.txt
+allow: more jewels on the phoenix crown   # S14_L1794 (owner L1794/L1799 jade/pearl/gold, no necklace) = current gate form
+allow: pearls and jade   # S14_L1794 (owner L1794/L1799 jade/pearl/gold, no necklace) = current gate form
+allow: a layered pearl-and-gold necklace   # S14_L1794 (owner L1794/L1799 jade/pearl/gold, no necklace) = current gate form
+allow: soft plain ivory-white fur trim along her collar   # owner L1803 pt5: thicker fur ladder (W0x_L1803 forms in check_store)
+allow: the same ivory fur at every rank   # owner L1803 pt5: thicker fur ladder (W0x_L1803 forms in check_store)

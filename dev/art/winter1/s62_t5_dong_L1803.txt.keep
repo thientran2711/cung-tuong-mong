@@ -1,0 +1,13 @@
+base: dev/art/winter1/s62_t5_dong.txt
+allow: The FABRIC is thin   # B26 satin đoạn t4/t5 = gate M06 (sheet text failed the gate)
+allow: flowing silk and gauze with a soft sheen and fine delicate embroidery   # B26 satin đoạn t4/t5 = gate M06 (sheet text failed the gate)
+allow: long soft graceful drapery that sways and trails elegantly   # B26 satin đoạn t4/t5 = gate M06 (sheet text failed the gate)
+allow: the sheer shawl draped behind her back and over her arms is a very sheer   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
+allow: highly translucent gauze shawl in mint mist   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
+allow: clearly different from her main robe colour ice blue   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
+allow: sleeves and arms are clearly visible through it   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
+allow: so it reads as a light airy veil of that hue   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
+allow: never an opaque solid band of colour   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
+allow: it keeps its soft graceful drape   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
+allow: soft plain ivory-white fur trim along her collar   # owner L1803 pt5: thicker fur ladder (W0x_L1803 forms in check_store)
+allow: the same ivory fur at every rank   # owner L1803 pt5: thicker fur ladder (W0x_L1803 forms in check_store)

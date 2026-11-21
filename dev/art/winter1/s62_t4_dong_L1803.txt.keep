@@ -1,0 +1,23 @@
+base: dev/art/winter1/s62_t4_dong_noangle.txt
+allow: The FABRIC is thin   # B26 satin đoạn t4/t5 = gate M06 (sheet text failed the gate)
+allow: flowing silk and gauze with a soft sheen and fine delicate embroidery   # B26 satin đoạn t4/t5 = gate M06 (sheet text failed the gate)
+allow: long soft graceful drapery that sways and trails elegantly   # B26 satin đoạn t4/t5 = gate M06 (sheet text failed the gate)
+allow: the low square neckline of rank 1   # owner L1803 pt3: Tần back to the CROSSED collar with the capelet edge over it
+allow: NO crossed collar   # owner L1803 pt3: Tần back to the CROSSED collar with the capelet edge over it
+allow: the sheer shawl draped behind her back and over her arms is a very sheer   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
+allow: highly translucent gauze shawl in mint mist   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
+allow: clearly different from her main robe colour ice blue   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
+allow: sleeves and arms are clearly visible through it   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
+allow: so it reads as a light airy veil of that hue   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
+allow: never an opaque solid band of colour   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
+allow: it keeps its soft graceful drape   # owner L1803 pt1 + G34/G36: NO phi bạch in winter
+allow: the capelet stays the same short round shoulder capelet   # owner L1803 pt3: Tần back to the CROSSED collar with the capelet edge over it
+allow: but its lower edge and the collar lines are soft CURVES   # owner L1803 pt3: Tần back to the CROSSED collar with the capelet edge over it
+allow: never flat horizontal edges   # owner L1803 pt3: Tần back to the CROSSED collar with the capelet edge over it
+allow: the front is NOT closed or buttoned from top to bottom   # owner L1803 pt3: Tần back to the CROSSED collar with the capelet edge over it
+allow: the robe is closed only at the throat clasp and its front opens gradually from the collar downward in a long soft V   # owner L1803 pt3: Tần back to the CROSSED collar with the capelet edge over it
+allow: the two front panels parting more and more toward the hem   # owner L1803 pt3: Tần back to the CROSSED collar with the capelet edge over it
+allow: flowing and graceful   # owner L1803 pt3: Tần back to the CROSSED collar with the capelet edge over it
+allow: never cramped or boxy   # owner L1803 pt3: Tần back to the CROSSED collar with the capelet edge over it
+allow: soft plain ivory-white fur trim along her collar   # owner L1803 pt5: thicker fur ladder (W0x_L1803 forms in check_store)
+allow: the same ivory fur at every rank   # owner L1803 pt5: thicker fur ladder (W0x_L1803 forms in check_store)
