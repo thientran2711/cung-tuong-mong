@@ -611,3 +611,4 @@ econ-tamco F1 fix | review/econ-tamco | session_01964izCiU7bSoQZwWZBzj4B | RUNNI
 | REVIEW chiton-name (SMALL sonnet) of a41b3891 + merge LIVE | review/chiton-name-rv; briefs/main85-rv-chiton-name.md | MAIN CHÍNH 85 | session_01Rc5AsJd4iSwgSQHpoPQtqh | RUNNING | 21/11 02:36Z |
 | chapter-card (sonnet; OWNER marks #26/#27 21/11 ~02:58Z–03:02Z: every Mệnh truyện sub-tab big picture card) | review/chapter-card; briefs/main85-chapter-card.md | MAIN CHÍNH 85 | session_01Rc5AsMDAsVpNsL2CKbpUuC | RUNNING | 21/11 02:41Z |
 | REVIEW empty-states (SMALL sonnet) of 4fe91dcc + merge LIVE | review/empty-states-rv; briefs/main85-rv-empty-states.md | MAIN CHÍNH 85 | session_01Rc5AsKYVABSkdoN1RAuKBR | RUNNING | 21/11 02:48Z |
+| maid-8tabs (OPUS; OWNER mark #32 21/11 ~03:15Z: maid road = same 8 bottom tabs, no locks, mapping table) | review/maid-8tabs; briefs/main85-maid-8tabs.md | MAIN CHÍNH 85 | (opening) | RUNNING | 21/11 02:49Z |
