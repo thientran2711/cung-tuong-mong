@@ -143,3 +143,17 @@ Gates on ee44f91e:
 | quickcheck (alone) | PASS 419 s · old save ok · perf new/live render 222/266, tab 399/449, buổi 1109/1178 ms |
 
 SẴN SÀNG KIỂM dresscode-fix ee44f91e8d38852b5fff9f13755e6dd42cc3d46b
+
+## HANDOVER (E30b → successor, 21/11 ~07:05Z) — context 38 % of 1M (start ~3 %, roll point 28 % passed). FOREMAN E #25 session_01DgYSWmm3tPLnLMUtPofz2g opens the successor (depth 5/8).
+JOB (E #25 07:00Z, BIG): E30r3 FAIL aa3c6854 (review/dresscode-fix-r3; reports/dresscode-review.md «ROUND 3»). F1: jts Hội phối đồ «Mượn … để dự hội phối đồ» is a SECOND loan rule (e.tsB) — no loan book, no co-op path (the guest splices her copy of the NPC). Build on aa3c6854 → branch review/dresscode-fix-r4.
+Where (read on aa3c6854): dev/build/jts.js:381-383 — the borrow option (`v.inv.indexOf(e)` splice, piece into S.inv with e.tsB = lender id) and tsDressReturn() (S.inv scan of e.tsB → back to RV(e.tsB).inv). jdc.js:85 dcOwnFit already skips e.tsB.
+Plan I would take (the ONE loan path, jdc.js r4 loan book):
+1. jts borrow → dcBorrow(S, v, e) (loan mark e.bor + lender's book dcLent + guest «dcout» to the host + ilUid). dcBorrow wears a trâm (sl "tram") but puts other slots into her chest; the Hội phối đồ pieces may be robes / other WD slots — check dcBorrow's `sl` branch fits (y robe → chest, she wears it via the outfit picker); keep a tag (e.g. bor.why="ts") if jts needs to know it was for the hội.
+2. tsDressReturn → let dcReturn / dcLedger give it back (due = dcWk() → next tuần), or call dcGiveBack(S,e,"inv") at the hội end if jts needs it back the same day; delete the e.tsB path (one rule). Old saves holding e.tsB pieces: migrate once to e.bor {from:"id:"+tsB, to:"me", due:dcWk()-1, id:…} so the next dcTurn returns them.
+3. Whole group scan (law 11): `git grep -n "inv.splice\|inv.push" dev/build/*.js` for any other place that moves a piece between persons temporarily ("mượn", "cho mượn", "trả lại", lend/borrow words in jts, jgift, j92 wd acts, jevb from:"me" returns, jlost, jky…) — each temporary move must go through dcBorrow/dcGiveBack; table before/after in the report.
+Tests named by E #25: dresscode.test, dresscode-loans, dresscode-loan-scan (108 tuần), coop-dresscode-scan (76 weeks, 2 seats) — these two scans are E30r3's (on review/dresscode-fix-r3, look under dev/test) — + coop-dresscode ×3 with a Hội phối đồ loan in co-op, BOTH seat orders (COOP_SWAP=1 style as coop-e2e), coop-e2e, role-parity ×2, quickcheck (bash, alone) + old save, one-core.
+Notes from r4: S.turn counts MONTHS (dcWk = turn*10+tuan for loans); guest must never write her copy of an NPC for a loan (merge keeps her act) — use dcAsk dcout/dcin; coop tests take ~5 min each vs the LIVE Worker, run them sequentially (box OOMs parallel browsers); dresscode.test is order-sensitive — keep new checks in their own test file.
+Then «SẴN SÀNG KIỂM dresscode-fix-r4 <sha>» + STATUS to E #25. Target ~09:00Z, deadline 20:00Z. MAIN = MAIN CHÍNH 90 session_01Rc5AsNEH8KAYFNdKY97PeC.
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- Trigger = context: at START_CTX % + 25 % of the window, NEVER above 60 % (hard ceiling): write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too; the COORDINATOR opens the successor.
