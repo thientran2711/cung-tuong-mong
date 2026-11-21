@@ -98,6 +98,10 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
    if(z.w>=1100)chk(`${tag} (#82) iPad: a list of short rows is in 2 columns (${big&&big.rows} rows, ${big&&big.cols} columns)`,big&&big.cols===2&&big.attr==='2'&&r.short.ksz==='XL',r.short);
    else chk(`${tag} (#82) phone: the same list stays in 1 column`,big&&big.cols===1&&!big.attr,r.short);
    chk(`${tag} (#82) long rows stay in 1 column`,r.long.L.every(x=>x.cols===1),r.long)}
+  /* (l) MAIN 88 (a) no empty «Được» cell: a card with no gain says «không» on every device (j65 dedupe used to delete the second «không»); (b) ONE title alignment on every card */
+  {const r=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));Q.length=0;Q.push({t:'Thử',h:'<p>Thử.</p>',opts:[{n:'Đeo ngay',fx:{},x:'Danh +2',go:()=>{}},{n:'Để sau',fx:{},x:'',go:()=>{}},{n:'Vô ích',fx:{},x:'tốn: 1 khắc',go:()=>{}}]});showModal();await sleep(2200);
+    const o=[...document.querySelectorAll('#modal .opts>button.kopt')].map(b=>({ta:getComputedStyle(b.querySelector('.kan')).textAlign,duoc:b.querySelector('.kr-duoc').innerText.replace(/\s+/g,' ').replace(/^Được\s*/i,'').trim(),ton:b.querySelector('.kr-ton').innerText.replace(/\s+/g,' ').replace(/^Tốn\s*/i,'').trim()}));Q.length=0;document.getElementById('modal').hidden=true;return o});
+   chk(`${tag} (kit-dialog-2 a) no empty Tốn / Được cell`,r.every(c=>c.duoc&&c.ton),r);chk(`${tag} (kit-dialog-2 b) one title alignment on every card`,new Set(r.map(c=>c.ta)).size===1,r)}
   chk(`${tag} (#56) ${evs.length} dialogs with unlisted option titles, ${nCards} option cards: none without a picture`,!noPic.length,noPic.slice(0,6));
   console.log(tag,'summary',JSON.stringify(R.map(m=>[m.name,m.ksz,m.D.w+'x'+m.D.h,m.kol,m.fig&&m.fig.w+'x'+m.fig.h+'@'+(m.fig.y-m.D.y)])));
   chk(`${tag}: no page errors`,!errs.length,errs.slice(0,3));await ctx.close()}
