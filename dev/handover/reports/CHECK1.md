@@ -412,3 +412,23 @@ The A38 trims are harmless:
 - t7: "never a single flat colour all over" dropped (gate PASS).
 - t8: ", no other colour" dropped.
 Verdict: **PASS ×9**, text only, report to Foreman C #16 (no gen without his release).
+
+## JOB 17 (LADDER2 81644d32b, supersedes EAR_FREE) — no-ears2 ×9, diff-only · checked at 7341823 · 0 gens
+Files:
+- thu t2/t3 COMOI_v9 (9943 / 9987)
+- xuân t1–t3 HAN_BAC_v10 (9594 / 9864 / 9993)
+- thu t6 COMOIj (9998), t7 v8i (9965), t8 v10h (10000)
+
+The bases are the OUTER_WRAP versions I passed (job 13). The EAR_FREE line is gone (superseded).
+
+All 9 pass these checks:
+- gates + keep PASS; OUTER_WRAP intact; no vase; all ≤ 10 000 (t8 exactly 10 000).
+
+The diff is only:
+- flower "(never two, never a pair, no cluster)" ×9;
+- "none at the ears" / "nothing at the ears" on the dangling ornaments: t3s pearl hairpins, t6 trâm, t7 gold tassels, t8 pearl tassels;
+- A38 trims: "ceremonial" before the jade pendant sets (t3s), "the yellow sash" repeat (t6), "never a single flat colour all over" (t7), "many small China roses over robe and skirt" (thu t3).
+Verdict: **PASS ×9.**
+Notes:
+- t1/t2 (both seasons) get only the flower words; their small silver/pearl pins carry no ear clause (low risk, and the master "Bare earlobes, no earrings" stays).
+- GEN1 was already sent the EAR_FREE t6 COMOIi + t7 v8h redrafts (Foreman C #16 release, 02:04Z); the Foreman decides whether to swap them to COMOIj / v8i.
