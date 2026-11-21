@@ -42,3 +42,6 @@ Nothing in progress. Next (only after her face picks + GO): age maker for the 15
 - Gates: check_store --scope maid --age a18/a26/a36 70/70 PASS · keep_check --sidecar 70/70 PASS · max 9 968 chars.
 - NOT built: ma ma a36 (only ma ma prompt is a51 with another outfit + elder colour rule; a36 look vs gate S32 = her open question). So drawable 18→36 now = 21/22 per person (105 pics × 55 = 5 775 for 5 persons) once faces are picked; face words + refs will change after her picks (rerun the makers on the new face files).
 - check_store --batch maid-name gap sent to BUILDFIX2.
+
+## 5. A53 (owner L2110): NO Magnific gens by anyone. The 105×55 plan is cancelled as Magnific work; the prompts stay ready for her to paste into ChatGPT.
+Ref images she must attach per person (current faces, Magnific ids — these change after her face re-pick): m09 gOm4HrsSXO · m10 O6ERgEUynm · m12 xSB7FTWjfW · m13 VX7IB7sMMU · m18 s7IPw0Ll8e (identity, first reference). Prompts: dev/art/maid7/prod/ (newest per rank) + prod_ages/ (a18/a26/a36). Batch gate: BUILDFIX3 2817bf93 PASS.
