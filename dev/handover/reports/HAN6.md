@@ -21,3 +21,13 @@ From the sheet: t1 book held at the side, t2 drum at chest height, t3 flute held
 
 ## Gens
 Sent to VE7 (session_01D3E3NahACvw1Z1FUUXG1eB): t1|t2|t3 @55 = 165 cr, sheet t1|t2|t3|ref t5 eIPcM8vdqL with Vietnamese labels. Results: pending (VE7 reports to #26/HAN6).
+
+## Results (VE7, 165 cr, commit c154427d4) — sheet dev/handover/review-sheets/han_collar_L1928_t1_t3.png
+ids: t1 nVsR0B0YQD · t2 MBJYdaFDCm · t3 gOmr7RDSXO (ref t5 eIPcM8vdqL).
+HAN6 read (own look at the sheet):
+- All 3 collars are now wide and lie flat on the shoulders, clearly closer to t5 than L1915: about 2/3 along the collarbones, V a little above the bust.
+- The ivory innermost band reads clearly. The pale blush middle band is visible but subtle, and the outer deep pink is only slightly deeper than the robe (VE7 says the same).
+- Loose hair stays behind the shoulders this time.
+- G61 OK: t1 book at the side, t2 drum at chest, t3 flute out to the side.
+- If the owner wants stronger band separation, the next lever is a stronger outer tone (e.g. "deep rose pink"), band words only, and only with the owner's yes.
+STATUS: waiting for the owner's verdict via Foreman C #27 (session_01D3E3NaDamfSozkn47q9kMK; #26 rolled over).
