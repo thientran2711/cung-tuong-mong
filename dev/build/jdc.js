@@ -118,7 +118,7 @@ function dcBorrow(to,from,e){const D=BAL.dc;const inv=dcInv(from);const i=inv.in
 function dcGiveBack(holder,e,where){const e0from=e.bor&&e.bor.from;const own=dcByKey(e0from);const w=wdOf(holder);const bid=dcBid(e);
  if(where==="slot"){const pi=dcInv(holder).findIndex(x=>x&&x.dcPrev);if(pi>=0){const prev=dcInv(holder).splice(pi,1)[0];delete prev.dcPrev;w.tram=prev}else w.tram=null}
  else{const i=dcInv(holder).indexOf(e);if(i>=0)dcInv(holder).splice(i,1)}
- delete e.bor;dcUnrec(own,bid);
+ delete e.bor;delete e.dcPrev;dcUnrec(own,bid);
  if((own&&own.coop)||dcOther(e0from))return own;/* lent by the other seat's player (found or not in the list this moment): she takes it back on her own seat */
  if(own===S&&bid&&dcCoop()){S.dcGot=Array.isArray(S.dcGot)?S.dcGot:[];if(S.dcGot.includes(bid))return own;S.dcGot=S.dcGot.slice(-19).concat([bid])}/* once, whatever the merge timing */
  if(dcGuest()&&own&&own!==S&&holder===S)dcAsk("dcin",{bid:"b"+bid,rb:bid,to:own.id,e,wear:0});
@@ -161,6 +161,11 @@ function dcReturn(){if(!S)return;const me=dcOwnKey(S);const back=[];
  const sc=(p,m)=>{try{scan(p,m)}catch(x){console.error("dcReturn",x)}};/* one odd chest never stops the others' returns */
  sc(S,true);for(const v of (typeof rivals!=="undefined"?rivals:[]))if(v&&!v.coop)sc(v,false);
  try{dcLedger(back)}catch(x){console.error("dcLedger",x)}
+ /* r3 review: a trâm put aside for a loan (dcPrev) whose loan is no longer on the hair (the borrowed piece was taken off / swapped for her own
+    before it went back) keeps no mark: the mark hid it from every road (dcOwnFit: «Cài … của mình», lending) for good. Her seat for her; NPCs only where the
+    world is kept (the guest never writes her copy of an NPC: r4 lesson). Only the mark goes: what she wears is her own choice. */
+ const heal=p=>{try{const w=wdOf(p);if(!w||(w.tram&&w.tram.bor))return;const inv=dcInv(p);for(const e of inv)if(e&&e.dcPrev&&!e.bor)delete e.dcPrev}catch(x){}};
+ heal(S);if(dcWorld())for(const v of (typeof rivals!=="undefined"?rivals:[]))if(v&&!v.coop)heal(v);
  for(const [e,p,o] of back){try{log(`${(WD_ITEMS[e.k]||{}).n||"Món đồ"} đã trả về cho ${dcName(o||p)}.`)}catch(x){}}}
 /* ---------- the gate frame (her) ---------- */
 function dcFacts(st,f){const F=[];F.push(`${f.name} cần y phục có màu: ${dcFamList(st.code.need)}.`);
@@ -183,7 +188,11 @@ function dcGateItem(f,st){const D=BAL.dc;const opts=[];const need=st.missing.len
   go:()=>{const w=wdOf(S);const i=S.inv.indexOf(c.e);if(i>=0){S.inv.splice(i,1);if(w.tram)S.inv.push(w.tram);delete c.e.w;w.tram=c.e;spend(D.chg.khac);dcHer().ch="chg"}dcEnter(f)}});
  const lack=need.filter(x=>!ownF.has(x));
  if(lack.length)for(const L of dcLenders(S,lack))opts.push({n:`Mượn ${L.w.n} (${dcFamN(L.f)}) của ${dcName(L.v)}`,fx:{},x:`tốn: ${D.bor.khac} khắc · thành: có màu ${dcFamN(L.f)} cho lễ, qua tuần sau trả · kèm: ${dcRelW(L.v,-D.bor.use)}`,
-  go:()=>{if(dcBorrow(S,L.v,L.e)){spend(D.bor.khac);dcHer().ch="bor";try{log(`Mượn ${L.w.n} của ${dcName(L.v)} để dự ${f.name}; qua tuần sau phải trả.`)}catch(e){}}dcEnter(f)}});
+  go:()=>{if(dcBorrow(S,L.v,L.e)){spend(D.bor.khac);dcHer().ch="bor";try{log(`Mượn ${L.w.n} của ${dcName(L.v)} để dự ${f.name}; qua tuần sau phải trả.`)}catch(e){}dcEnter(f);return}
+   /* r3 review (fix-the-group of r2 item 3 on her side): the gate is built in endTurn, the NPCs' own festival loans run right after it (dcWeek) — when
+      one of them took this very piece, the road is gone: say so and open the gate again with the roads still there (before: nothing happened, she
+      went in lacking the colour, no word) */
+   try{log(`${L.w.n} của ${dcName(L.v)} đã có người mượn trước.`)}catch(e){}const st2=dcStat(S,f.k);if(st2&&(st2.miss||st2.refused))Q.unshift(dcGateItem(f,st2));else dcEnter(f)}});
  const buy=lack.length?dcBuyFit(S,lack):null;/* offered only when she has the silver (a road she can take) */
  if(buy&&S.bac>=buy.pr)opts.push({n:`Sai người mua ${buy.w.n} (${dcFamN(buy.f)}) ở Nội vụ phủ`,fx:{},x:`tốn: ${D.buy.khac} khắc, Bạc -${buy.pr} · thành: có màu ${dcFamN(buy.f)} cho lễ, trâm giữ lại trong rương`,
   go:()=>{if(dcBuy(S,buy)){spend(D.buy.khac);dcHer().ch="chg";try{log(`Mua ${buy.w.n} ở Nội vụ phủ để dự ${f.name}.`)}catch(e){}}dcEnter(f)}});
@@ -218,7 +227,9 @@ function dcWeek(){if(!dcOn()||!S||S.dead)return;const R=typeof rivals!=="undefin
   const f=dcFestNow();if(f&&S.dcNk!==dcKey(f)){S.dcNk=dcKey(f);S.dcNp={k:f.k,n:f.name};const out=[];
    for(const v of R){if(!v||!v.alive||v.out||v.confined||v.coop)continue;dcNpcFest(v,f.k);const st=dcStat(v,f.k);if(st&&st.refused)out.push(v)}
    if(out.length)try{log(`${f.name}: ${out.map(dcName).join(", ")} bị chặn ngoài cửa vì y phục không hợp lễ.`)}catch(e){}}}
- if(dcHerOn()&&dcOffSeason(S)&&dcSeasonRoad(S)&&S.dcSw!==S.turn){S.dcSw=S.turn;const c=dcSeasonCost(S);const y=wdItem(wdOf(S).y);const first=dcSeasonFirst();
+ /* r3 review: her season check runs once per TUẦN (dcWk), as every NPC's dcSeasonDue above (law 1) and as the frame says («từ tuần sau … bị chê ở buổi thỉnh an»);
+    before it was keyed by S.turn = MONTHS: she paid once a month (nothing at all in a season's first month after the warning) while NPCs paid each tuần */
+ if(dcHerOn()&&dcOffSeason(S)&&dcSeasonRoad(S)&&S.dcSw!==dcWk()){S.dcSw=dcWk();const c=dcSeasonCost(S);const y=wdItem(wdOf(S).y);const first=dcSeasonFirst();
   const fx={};if(!first){if(c.danh)fx.danh=-c.danh;if(c.th)fx.th=-c.th}
   if(first&&(c.danh||c.th)){const sn=BAL.dc.season.n;Q.push({t:"Sang mùa mới",ev:"dc",evId:"dc:season0",who:typeof pTH==="function"?pTH():null,
     h:`<p>Đã sang mùa ${sn[dcSeason()]}; y phục đang mặc là ${y?y.n:"áo"} (${BAL.dc.season.fabN[dcYFab(y&&y.k)]||"vải"}, hợp mùa ${dcYSeasons(y&&y.k).map(i=>sn[i]).join(", ")}).</p><p>Tuần này còn kịp đổi; từ tuần sau mặc áo trái mùa thì bị chê ở buổi thỉnh an.</p><p>Vào Tư trang, chạm ô Y phục, chọn bộ hợp mùa.</p>`})}
@@ -246,19 +257,30 @@ function dcIsBor(p,ix){try{const e=p&&p.inv&&p.inv[ix];return!!(e&&e.bor)}catch(
 try{if(typeof wdSell==="function"&&window.wdSell!==wdSell){wdSell=window.wdSell;wdPawn=window.wdPawn;sellItem=window.sellItem}}catch(e){}
 ["giveTo","plantItem"].forEach(n=>{try{const f0=window[n];if(typeof f0!=="function")return;window[n]=function(a,t,ix){if(dcIsBor(a,ix))return"";return f0.apply(this,arguments)}}catch(e){}});
 try{if(typeof giveTo==="function"&&window.giveTo!==giveTo){giveTo=window.giveTo;plantItem=window.plantItem}}catch(e){}
+/* r3 review (law 6c, same family): nor lost through jlost «thất lạc» — loLose picks by loOk, loLoseE is the targeted road (ilGone "lost": the piece then
+   goes to the ledger box, where the loan book finds it). Before, the case held the piece while the book gave the lender her copy: when the case was
+   solved the piece came back too — two of one (dresscode-loan-scan, coop-dresscode-scan). A loan lasts one tuần; the lender's piece is safe meanwhile. */
+(function(){try{if(typeof loOk==="function"){const o0=loOk;loOk=function(e){if(e&&e.bor)return false;return o0.apply(this,arguments)}}
+ if(typeof loLoseE==="function"){const l0=loLoseE;loLoseE=function(p,e){if(e&&e.bor)return null;return l0.apply(this,arguments)}}}catch(e){}})();
 (function(){if(typeof wdActBtns!=="function")return;const b0=wdActBtns;wdActBtns=function(e){try{if(e&&e.bor)return[]}catch(x){}return b0.apply(this,arguments)};window.wdActBtns=wdActBtns})();
 function dcLoanRow(e){if(!e||!e.bor)return null;const o=dcByKey(e.bor.from);return["Mượn",`của ${o?dcName(o):"người khác"} · qua tuần sau trả`,"n"]}
 /* ---------- co-op host: the guest's requests (jcoopask H, PROTOCOL §4.1); 1 = done, 0 = refused ---------- */
 (function(){const CW=window.COOPW;if(!CW||!CW.askH)return;
  const npc=id=>(typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.id===id&&!v.coop)||null;
  /* dcout: the piece she borrowed leaves the NPC's chest (or the NPC's hair, if the NPC put it on this week) */
- CW.askH.dcout=function(a){const v=npc(a.from);if(!v)return 0;const inv=dcInv(v);const i=inv.findIndex(e=>e&&e.k===a.pk&&!e.bor&&!e.dcPrev&&!e.h);
-  let ok=0;if(i>=0){inv.splice(i,1);ok=1}else{const w=wdOf(v);if(w&&w.tram&&w.tram.k===a.pk&&!w.tram.bor){w.tram=null;ok=1}}
+ CW.askH.dcout=function(a){const v=npc(a.from);if(!v)return 0;const inv=dcInv(v);const w=wdOf(v);
+  /* r3 review: ONLY the same piece she took — its ledger id (a.b.iu), or, when her copy numbered it, the one still un-numbered here. Before: the first
+     of that kind. A race (another consort borrowed / took that very piece on this seat the same week) then gave her a stand-in or nothing, and her
+     «dcin» brought the piece back a second time (one id twice, coop-dresscode-scan). Now refused; the loan id is kept (dcNo) so her return is a no-op. */
+  const m=e=>e&&e.k===a.pk&&!e.bor&&!e.dcPrev&&!e.h;const iu=a.b&&a.b.iu;let ok=0;
+  for(const t of (a.b?[e=>!!iu&&e.iu===iu,e=>!e.iu]:[()=>true])/* a request without the piece (old client): any of that kind, as before */){const i=inv.findIndex(e=>m(e)&&t(e));if(i>=0){inv.splice(i,1);ok=1;break}if(w&&m(w.tram)&&t(w.tram)){w.tram=null;ok=1;break}}
+  if(!ok&&a.bid)v.dcNo=(Array.isArray(v.dcNo)?v.dcNo:[]).slice(-19).concat([a.bid]);
   if(ok&&a.b&&a.bid){/* the NPC's loan book (the guest's copy of the NPC is not the world): the piece comes back through her «dcin» */const L=v.dcLent=Array.isArray(v.dcLent)?v.dcLent:[];
    if(!L.some(r=>r&&r.bid===a.bid))L.push({bid:a.bid,k:a.pk,iu:a.b.iu||0,to:"id:"+(window.COOPW.seat==="a"?902:901),due:a.due!=null?a.due:dcWk(),e:a.b})}return ok};
  /* dcin: a piece goes into the NPC's chest; a loan TO the NPC is worn (her own trâm kept aside, dcPrev, as dcBorrow does) */
  CW.askH.dcin=function(a){const v=npc(a.to);if(!v||!a.e||!a.e.k)return 0;const e=JSON.parse(JSON.stringify(a.e));const w=wdOf(v);const bid=dcBid(e);
   if(a.rb)dcUnrec(v,a.rb);/* the guest gave back what she borrowed: off the NPC's book */
+  if(a.rb&&Array.isArray(v.dcNo)&&v.dcNo.includes(a.rb))return 1;/* r3: that loan was refused here (dcout above): the piece never left this NPC, nothing comes back */
   if(bid&&((w.tram&&dcBid(w.tram)===bid)||dcInv(v).some(x=>dcBid(x)===bid)))return 1;
   if(a.wear){const prev=w.tram;if(prev)dcInv(v).push(Object.assign(prev,{dcPrev:1}));w.tram=e}else dcInv(v).push(e);return 1};
  /* guest: a refused dcout (the NPC no longer had it) → the piece never came; her own trâm goes back on */

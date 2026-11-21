@@ -135,7 +135,7 @@ async function weeks(A,B,n,tag){for(let i=0;i<n;i++)await weekAll(A,B,tag+'.'+i)
  const ak=await B.p.evaluate(([K,TG])=>{const v=rivals.find(x=>x.id===K);const fk=Object.keys(BAL.dc.fest).find(fk=>{const st=dcStat(v,fk);return st&&st.missing.length&&Object.keys(BAL.dc.piece).some(k=>WD_ITEMS[k]&&WD_ITEMS[k].sl==='tram'&&!WD_ITEMS[k].nt&&BAL.dc.piece[k][0]===st.missing[0])&&FEST[fk]});
    if(!fk)return{nofest:1};const st=dcStat(v,fk);const k=Object.keys(BAL.dc.piece).find(k=>WD_ITEMS[k]&&WD_ITEMS[k].sl==='tram'&&!WD_ITEMS[k].nt&&BAL.dc.piece[k][0]===st.missing[0]);
    S.inv=(S.inv||[]).filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='tram'||e.dcPrev);S.inv.push({k,from:'emp',tg:TG});
-   const f0=festToday,a0=aff;festToday=()=>Object.assign({k:fk},FEST[fk]);aff=(x,y)=>y===S?(x===v?60:-50):a0(x,y);const n0=Q.length;try{S.dcAk=null;S.dcSw=S.turn;dcWeek()}finally{festToday=f0;aff=a0}
+   const f0=festToday,a0=aff;festToday=()=>Object.assign({k:fk},FEST[fk]);aff=(x,y)=>y===S?(x===v?60:-50):a0(x,y);const n0=Q.length;try{S.dcAk=null;S.dcSw=dcWk();dcWeek()}finally{festToday=f0;aff=a0}
    const q=Q.slice(n0).find(q=>q.evId==='dc:ask');if(!q)return{noask:1,fk,k};Q.splice(Q.indexOf(q),1);q.opts[0].go();
    const w=wdOf(v);return{fk,k,t:q.t,opt:q.opts[0].n,mine:(S.inv||[]).filter(e=>e.k===k&&e.tg).length,npcLocal:!!(w.tram&&w.tram.k===k),ask:(S.coopAsk||[]).filter(a=>a.k==='dcin').map(a=>a.id)}},[P.K,TG]);
  ok(ak.t&&/xin mượn trâm/.test(ak.t)&&/^Cho mượn/.test(ak.opt),T+' guest: the NPC asks her (dc:ask frame) and she lends',ak);

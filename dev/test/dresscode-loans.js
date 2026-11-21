@@ -25,7 +25,7 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ck=(n,c,x)=>{conso
    S.out=0;S.confined=0;S.dead=false;/* each case starts with her in the harem (a long run of real endTurns may have sent her away) */
    const v=R().find(v=>{const st=dcStat(v,fk);return st&&st.missing.length&&tram(st.missing[0])});if(!v){out.push({fk,how,skip:1});continue}
    const st=dcStat(v,fk);const k=tram(st.missing[0]);const tg='lb'+n;
-   S.inv=(S.inv||[]).filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='tram'||e.dcPrev);S.inv.push({k,from:'emp',tg});S.dcAk=null;S.dcSw=S.turn;S.dcNk=`${S.year}-${fk}`;/* the NPCs' own festival roads (buy / borrow) are tested above; here the NPC must still lack the colour */Q.length=0;
+   S.inv=(S.inv||[]).filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='tram'||e.dcPrev);S.inv.push({k,from:'emp',tg});S.dcAk=null;S.dcSw=dcWk();S.dcNk=`${S.year}-${fk}`;/* the NPCs' own festival roads (buy / borrow) are tested above; here the NPC must still lack the colour */Q.length=0;
    const nd0=dcNpcDress;dcNpcDress=()=>{};/* the NPCs' season change is tested in dresscode.test; here v must keep the robe that lacks the colour */
    festToday=()=>Object.assign({k:fk},FEST[fk]);aff=(x,y)=>y===S?(x===v?60:-50):a0(x,y);try{dcWeek()}finally{festToday=f0;aff=a0;dcNpcDress=nd0}
    const q=Q.find(q=>q.evId==='dc:ask');if(!q){out.push({fk,how,noask:1,dbg:[dcHerOn(),!!S.dead,S.out,S.confined,isSrv(),dcLend(),dcOwnFit(S,st.missing,'tram').length,aff(v,S),v.alive,Q.map(q=>q.evId||q.t).slice(0,3)]});continue}Q.length=0;q.opts[0].go();
