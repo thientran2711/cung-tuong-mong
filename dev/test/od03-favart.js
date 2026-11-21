@@ -21,6 +21,14 @@ const {chromium}=require('playwright');const path=require('path');
   for(const k of ARTS.map(a=>a.k)){v.arts[k]=0;v.artp[k]=0}v.arts[ea.f]=4;v.suc=100;v.duc=100;
   v.eaK=-1;const tr=oSteal(v,"road"),sh=stealShown(v,"road");v.eaK=S.turn;const sh2=stealShown(v,"road");
   ok("4 unknown → she sees less than the truth; known → the truth",sh<tr&&sh2===tr,[tr,sh,sh2]);
+  /* 6 (review) one ask rule for her and an NPC: a won ask names the month art at BAL.steal.ea.disc, else a like (never both); sure when nothing else is left (shown odds = true chance) */
+  {const du=window.disUnk;window.disUnk=()=>false;for(const k in LIKES)S.emp.known[k]=true;let g=0;for(let i=0;i<60;i++){S.eaK=-1;if(discover()&&S.eaK===S.turn)g++}
+   let hb=0;for(let i=0;i<200;i++){S.eaK=-1;for(const k in LIKES)S.emp.known[k]=false;discover();if(S.eaK===S.turn&&Object.keys(LIKES).some(k=>S.emp.known[k]))hb++}window.disUnk=du;
+   const w=liveRivals(true)[0],T0=window.agTry;window.agTry=()=>true;let nb=0,ne=0,nl=0,ns=0;
+   for(let i=0;i<200;i++){w.eK={};w.eaK=-1;w.bac=9999;AGRUN["cx2:likes"](w);const l=Object.keys(w.eK).length>0,e=w.eaK===S.turn;if(l&&e)nb++;if(e)ne++;if(l)nl++}
+   for(let i=0;i<60;i++){w.eK={};for(const k in LIKES)w.eK[k]=1;w.eaK=-1;w.bac=9999;AGRUN["cx2:likes"](w);if(w.eaK===S.turn)ns++}window.agTry=T0;
+   ok("6 her ask, only the month art left: a won ask always names it",g===60,g);ok("6 her ask with likes left: month art OR a like, never both",hb===0,hb);
+   ok("6 NPC ask with likes left: month art OR a like, never both (her rule)",nb===0&&ne>0&&nl>0&&ne+nl===200,[nb,ne,nl]);ok("6 NPC ask, only the month art left: always names it",ns===60,ns)}
   /* 5 old save */
   const d=ser();delete d.S.emp.ea;delete d.S.eaK;(d.R||[]).forEach(r=>{delete r.eaK});let lo=true;try{deser(d);ok("5a old save draws the month art on load",!!empArt(),S.emp.ea);for(let i=0;i<3;i++){Q.length=0;endTurn()}}catch(e){lo=String(e)}
   ok("5 old save (no month art) loads, plays, draws one",lo===true&&!!empArt(),[lo,S.emp&&S.emp.ea,S.turn,S.dead,Q.length,typeof endTurn]);

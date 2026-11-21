@@ -67,11 +67,12 @@ function eaLearn(start){if(!S||S.dead||!empArt())return"";const E=BAL.steal.ea;c
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead){if(!empArt())empArtMonth();eaLearn(false)}}catch(e){}return r}})();
 /* OD03: asking Kính sự phòng (her discover, an NPC's cx2:likes) names the month art at BAL.steal.ea.disc — one rule for everyone (two-way) */
 function eaOpen(p){return !!(p&&empArt()&&!eaKnows(p))}
-function eaAsk(p){return eaOpen(p)&&roll(BAL.steal.ea.disc)&&eaTell(p,"dò được")}
+/* sure = nothing else is left to learn at the ask (her: every like + dislike known; an NPC: every like) → a won ask names it (the shown odds are the true chance) */
+function eaAsk(p,sure){return eaOpen(p)&&(sure||roll(BAL.steal.ea.disc))&&eaTell(p,"dò được")}
 /* the Emperor card rows (kit pcard group rows [label, value, tone]): his month art as she knows it */
 function eaRows(p){const ea=empArt();if(!ea)return[];const k=eaKnows(p),n=x=>(ARTS.find(a=>a.k===x)||{}).n||x;
  return [["Tháng này chuộng",k?n(ea.f):"chưa rõ",k?"t":"n"],["Tháng này không ưa",k?n(ea.d):"chưa rõ",k?"t":"n"]]}
-(function(){if(typeof discover!=="function")return;const d0=discover;discover=function(){try{if(eaAsk(S))return true}catch(e){}return d0.apply(this,arguments)}})();
+(function(){if(typeof discover!=="function")return;const d0=discover;discover=function(){try{const left=Object.keys(LIKES).some(k=>!S.emp.known[k])||(typeof disUnk==="function"&&disUnk("emp"));if(eaAsk(S,!left))return true}catch(e){}return d0.apply(this,arguments)}})();
 /* ---- night choices ---- */
 /* her best art (most points; a tie prefers his favoured art, never his disfavoured one first) */
 function stBestArt(p){const ea=empArt();let b=null;for(const a of ARTS){const v=artPts(p,a.k);const pr=ea?(a.k===ea.f?1:a.k===ea.d?-1:0):0;
