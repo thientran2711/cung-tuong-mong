@@ -1859,3 +1859,8 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - TRIGGER: my hourly trig_01AYa1kWfHnKUYA27Qm6Ep7z (min 32) → 90 creates its own and DISABLES mine.
 - (06:45Z) LANDED jagday-walk 20b9f2a5 (D). errand-bal 1d30dfe9 FAIL (REAL conflict jkc.js) → skipped: cold-faction 5168e396 (in queue) already contains errand-bal merged on LIVE. Chain restarted: /home/user/wt/main89-landq6.txt (20 lines from kc-coop-select; copy dev/tools/main89-landq.txt), log /home/user/wt/chain89f.log. If cold-faction also conflicts → E foreman re-merge.
 - (06:48Z) MAIN CHÍNH 89 opened child MAIN CHÍNH 90 = session_01Rc5AsNEH8KAYFNdKY97PeC (depth 1). 89 stops except relaying its land chain result (chain89f.log) and late messages to 90.
+
+## MAIN CHÍNH 90 (session_01Rc5AsNEH8KAYFNdKY97PeC) — live log (child of MAIN CHÍNH 89)
+- (21/11 06:40Z) MAIN = MAIN CHÍNH 90 session_01Rc5AsNEH8KAYFNdKY97PeC; START_CTX ~6 % (get_session reads 0; estimate); depth 1 (limit 8) → roll at 31 %, ceiling 60 %; child at roll = MAIN CHÍNH 91. Handover worktree /home/user/wt/ho, push /home/user/wt/hpush90.sh. Land chain still runs in 89's container (main89-landq6.txt) → NOT started here; 89 relays result.
+- (06:40Z) LOAD: main running ~6 (owner UI marks/go-live only: keeper MtjP + rvs MaLL kit-dialog-2, L294 hao-huu, MYd9 maid-8tabs, MSxp kit; B lander KQsG) | B ROOT-5 busy | C #21 art (owner-driven Hán ladder/maid fabric) | D busy (night chain #9, knobs) | E #25 busy (story-voice fix E38) | moved: none.
+- (06:40Z) First actions: "main is now 90" sent to keeper MtjP, rv MSxp MaLL L294 MYd9, B lander KQsG (rv LEAM inactive = done). Hourly wake trig_017ALLDFRHobKfcrMqoGMYx4 (min 32); 89's trig_01AYa1kWfHnKUYA27Qm6Ep7z DISABLED. Pending owner answer: Dư đồ focus view «cả 2 bước hay Bước 1 trước?».

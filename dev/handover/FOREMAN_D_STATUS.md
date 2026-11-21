@@ -667,3 +667,4 @@ Hourly wake: D #13 trigger trig_014ZYA8cuxME4MXPMmqt99Zy deleted at rollover; D 
   - her start values = LIVE; NPC stats on LIVE rstats;
   - stUp 2 (LIVE).
   Kept: §4 night model, §7 ladder. Knob sampler measures HH on e5029d1b; gates running. NLC #9 EeSaDYxd is on the jnf/jflip stall fix.
+- (21/11 06:40Z) FROM MAIN: main is now MAIN CHÍNH 90 session_01Rc5AsNEH8KAYFNdKY97PeC (89 rolled). Send LAND READY / reports to 90.
