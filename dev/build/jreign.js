@@ -391,7 +391,7 @@ function rgLNext(){if(!rgOn()||typeof q72CanOffer!=="function"||!q72CanOffer())r
 
 /* ---------- Mệnh truyện › Triều cục / Tâm nguyện (kit: kitSubTabs, kitSkillCard, rows67/kitRows, kitChecks, kchip, pbtn) ---------- */
 function rgPWord(p){const Bg=BAL.rg;return p>=Bg.B?"bệ hạ nắm được triều chính":p>=Bg.B-6?"thế bệ hạ đang lên":p<Bg.A?"nhà Tể tướng nắm triều chính":p<Bg.A+6?"nhà Tể tướng đang mạnh":"ba phe giằng co"}
-function rgPaneHTML(){const W=rgW(),r=rgMe();if(!W)return kitEmpty("Triều cục","Kiếp này không có tuyến Tân quân lập uy.",1);
+function rgPaneHTML(){const W=rgW(),r=rgMe();if(!W)return kitEmpty("Kiếp này không có tuyến Tân quân lập uy",["Triều cục chỉ mở khi Tân quân lên ngôi lập uy."],{topic:"Triều cục"});
  const done=RGC.reduce((a,c)=>a+c.b.filter(id=>r.done[id]).length,0),tot=RGC.reduce((a,c)=>a+c.b.length,0);const c=Math.min(W.ch,RGC.length);
  const s=rgSideNow();
  /* only people she knows by name (kitKnownName); the rest are counted (same family as the 'Phi ???' fix, owner 16/11) */
