@@ -668,3 +668,4 @@ Hourly wake: D #13 trigger trig_014ZYA8cuxME4MXPMmqt99Zy deleted at rollover; D 
   - stUp 2 (LIVE).
   Kept: §4 night model, §7 ladder. Knob sampler measures HH on e5029d1b; gates running. NLC #9 EeSaDYxd is on the jnf/jflip stall fix.
 - (21/11 06:40Z) FROM MAIN: main is now MAIN CHÍNH 90 session_01Rc5AsNEH8KAYFNdKY97PeC (89 rolled). Send LAND READY / reports to 90.
+- (21/11 06:51Z, D #14) Knob probe «tp» (ed977bf4 + LIVE start Tài + stUp 2): HH 0/11, Danh m36 10. Tài now matches LIVE, but HH and Danh do not move, so start Tài/stUp is NOT the lever. The decisive test is the nobc sample on e5029d1b (10 lives, ETA ~07:45Z). If nobc HH is also low, the cause is in the night model or the §7 ladder, not in the balance leaves; D then reports to MAIN with numbers before any land. NLC #9: AFK/scene-queue root cause fixed locally (coop-night case 4 PASS 81.5 s ≤ clock+waitMs); cyHold (Kỳ nguyệt wait, no timeout) to be bounded too; gates next.
