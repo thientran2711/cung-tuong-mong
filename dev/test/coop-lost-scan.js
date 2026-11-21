@@ -91,7 +91,7 @@ const INST=([seat,world,dbg])=>{window.__seat=seat;if(dbg&&!window.__gw){window.
   for(const x of ilS().box)if(x.e)add(x.e.iu,'box:'+x.at+':'+x.why);
   for(const c of ilCases())add(c.e.iu,'case:lo'+c.id);
   try{for(const m of Q)if(m&&m.pp&&m.pp.e&&typeof m.pp.e==='object')add(m.pp.e.iu,'dlg')}catch(e){}
-  const D={};for(const id of ids){const e=(S.lost||[]).map(c=>c.e).find(e=>e&&e.iu===id);D[id]=e?ilDur(e):1}
+  const D={};for(const id of ids){const e=(S.lost||[]).map(c=>c.e).find(e=>e&&e.iu===id);const lg=((S.il&&S.il.log)||[]).find(l=>l[1]===id);D[id]=ilDur(e||{k:lg&&lg[2]})}/* a used-up kind may end at 0 */
   const ky=((S.il&&S.il.log)||[]).filter(l=>/kyngo/.test(String(l[5]))).length;
   return{ids:[...ids],M,D,net:(S.il&&S.il.net)||0,ky,cases:(S.lost||[]).length,open:(S.lost||[]).filter(c=>c.st!=='done').length}};
  window.__why=id=>{const L=((S.il&&S.il.log)||[]).filter(l=>l[1]===id);const C=(S.lost||[]).filter(c=>c.e&&c.e.iu===id).map(c=>({id:c.id,own:c.own,st:c.st,at:c.at,how:c.how,keep:c.keep,by:c.by,cause:c.cause,w:c.w,end:c.end}));return{L,C}};
