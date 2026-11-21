@@ -12,3 +12,6 @@ Settings: gpt-2-6, 9:16, seed 7172, **resolution 2k + quality medium = exactly 1
 - Quý phi ← dev/art/seasons4/s62_t6_HAN_LADDER.txt (none of the s62_t6_HAN_BAC*.txt candidates match: all say "Mùa Xuân", none has the peony/chrysanthemum + WIDE belt text; HAN_LADDER has every phrase) · refs nVsrRMPYQD + TdwDfOyVNR → bxMfaRi5Y2 · 135 cr
 - Hoàng quý phi ← dev/art/seasons4/s62_t7_HAN_LADDER.txt · refs nVsrRMPYQD + TdwDfOyVNR → kseuEem16B · 135 cr
 TOTAL 405 cr · sheet dev/handover/review-sheets/han_liked_L1738/han_liked_L1738.jpg
+
+### Order 2 — from Foreman C #21 (report to #21 from now on)
+JOB B L1739 · dev/art/thu_comoi/s62_t8_THU_fix5_L1737.txt · check_store --scope tp8 --age a22 PASS · refs nVsrRMPYQD+TdwDfOyVNR · 1k low → eIPWWUNdqL · 55 cr · sheet review-sheets/thu_hh_fix5_L1739.png (old jUoqvBPLD0 | fix4 gOmkqTkSXO | fix5)
