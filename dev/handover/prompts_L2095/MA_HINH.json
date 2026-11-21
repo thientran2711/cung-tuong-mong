@@ -193,10 +193,11 @@
  "M2206-06": "M2206-06_s62_t6_thu.txt (bộ thu s62 t6 = M2203-06 + dây dài bằng Tần/HQP, thêm vải vàng (~½ HQP); L2206)",
  "M2206-07": "M2206-07_s62_t7_thu.txt (bộ thu s62 t7 = M2203-07 + cổ/vân kiên-cổ/khuy = chữ QP (bỏ viền vàng rộng ở cổ); L2206)",
  "M2206-08": "M2206-08_s62_t8_thu.txt (bộ thu s62 t8 = M2203-08 (KHÓA); L2206)",
- "M2211-04": "M2211-04_s62_t4_thu.txt (bộ thu s62 t4 = M2206-04 + câu lưới ngọc vân kiên theo thang (bậc gốc, giữ nguyên độ giàu); L2207/L2208/L2210)",
- "M2211-05": "M2211-05_s62_t5_thu.txt (bộ thu s62 t5 = M2206-05 + lưới dày hơn Tần, đá màu nhỏ ở mắt lưới; L2207/L2208/L2210)",
- "M2211-06": "M2211-06_s62_t6_thu.txt (bộ thu s62 t6 = M2206-06 + lưới dày quý, đá nhỏ, tua ngọc trai + hạt vàng + đầu ngọc bích; L2207/L2208/L2210)",
- "M2211-07": "M2211-07_s62_t7_thu.txt (bộ thu s62 t7 = M2206-07 + lưới giàu hơn QP, tua ngọc trai-ngọc bích chụp vàng; vải bay (chữ QP); L2207/L2208/L2210)",
- "M2211-08": "M2211-08_s62_t8_thu.txt (bộ thu s62 t8 = M2206-08 + lưới giàu nhất, tua ngọc trai-ngọc bích-đá chụp vàng chạm; vải bay; L2207/L2208/L2210)",
- "M2209-01": "M2209-01_s62_t7_thu.txt (THỬ: HQP = M2211-07, mọi chữ cổ áo thay bằng 'a low neckline'; L2209)"
+ "M2211-04": "M2211-04_s62_t4_thu.txt (bộ thu s62 t4 = M2206-04 + câu lưới ngọc vân kiên theo thang (bậc gốc, giữ nguyên độ giàu); lưới/tua chỉ trong 1 câu vân kiên, bỏ câu lặp; L2207/L2208/L2210/L2212)",
+ "M2211-05": "M2211-05_s62_t5_thu.txt (bộ thu s62 t5 = M2206-05 + lưới dày hơn Tần, đá màu nhỏ ở mắt lưới; lưới/tua chỉ trong 1 câu vân kiên, bỏ câu lặp; L2207/L2208/L2210/L2212)",
+ "M2211-06": "M2211-06_s62_t6_thu.txt (bộ thu s62 t6 = M2206-06 + lưới dày quý, đá nhỏ, tua ngọc trai + hạt vàng + đầu ngọc bích; lưới/tua chỉ trong 1 câu vân kiên, bỏ câu lặp; L2207/L2208/L2210/L2212)",
+ "M2211-07": "M2211-07_s62_t7_thu.txt (bộ thu s62 t7 = M2206-07 + lưới giàu hơn QP, tua ngọc trai-ngọc bích chụp vàng; vải bay (chữ QP); lưới/tua chỉ trong 1 câu vân kiên, bỏ câu lặp; L2207/L2208/L2210/L2212)",
+ "M2211-08": "M2211-08_s62_t8_thu.txt (bộ thu s62 t8 = M2206-08 + lưới giàu nhất, tua ngọc trai-ngọc bích-đá chụp vàng chạm; vải bay; lưới/tua chỉ trong 1 câu vân kiên, bỏ câu lặp; L2207/L2208/L2210/L2212)",
+ "M2209-01": "M2209-01_s62_t7_thu.txt (THỬ: HQP = M2211-07, mọi chữ cổ áo thay bằng 'a low neckline'; L2209)",
+ "M2211-03": "M2211-03_s62_t3_thu.txt (bộ thu s62 t3 = M2206-03 + viền 1 hàng ngọc trai nhỏ ở mép vân kiên + khuy 1 ngọc trai nhỏ; L2212)"
 }
