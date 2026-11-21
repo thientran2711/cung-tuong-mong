@@ -3,3 +3,4 @@ allow: soft snow-violet silk   # owner L1847: 3rd hue must differ from main AND 
 allow: phi bạch tím tuyết L1834   # owner L1847 caption
 allow: an embroidered silk sash with hanging jade belt pendants and tassels   # owner L1851 G57: no jade pendant in any prompt
 allow: never covered by sleeve or shawl   # owner L1851 G57
+allow: an embroidered silk sash tied flat at the waist   # G57 owner L1851: no jade pendant anywhere (pendant removal only)

@@ -18,3 +18,4 @@ allow: painting or tassel on it are in a colour family clearly different from BO
 allow: weight on one leg  # owner L1714 row 22/23 pose
 allow: held in the hand raised and admired  # owner L1714 row 23 new pose/held item
 allow: the robe falling still and straight  # owner L1714 row 22/23 pose
+allow: a jade-and-gold belt with long tassels and jade pendants   # G57 owner L1851: no jade pendant anywhere (pendant removal only)

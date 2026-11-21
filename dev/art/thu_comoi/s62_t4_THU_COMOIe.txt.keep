@@ -8,3 +8,4 @@ allow: NOT a cream  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same lis
 allow: beige or all-gold robe  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1/KHO2): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
 allow: never a pair  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1/KHO2): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
 allow: never in profile  # A38 boilerplate trim (dapung4/make_thu_L1574.fit, same list as LADDER1/KHO2): repeat of COLOUR RULE / view words, needed for <= 9990 after G40 OUTER_IN (L1592) + G42
+allow: an embroidered silk sash tied flat at the waist   # G57 owner L1851: no jade pendant anywhere (pendant removal only)

@@ -1,2 +1,4 @@
 base: dev/art/rank8-s62/s62_t7.txt
 allow: peonies and auspicious clouds in gold thread on the chest and along the borders  # F2 Lượt 1342: t7 embroidery = her t6 species (incurved chrysanthemums)
+allow: a jade-and-gold belt with long tassels   # G57 owner L1851: no jade pendant anywhere (pendant removal only)
+allow: and long jade-and-gold belt pendants with pearl tassels   # G57 owner L1851: no jade pendant anywhere (pendant removal only)

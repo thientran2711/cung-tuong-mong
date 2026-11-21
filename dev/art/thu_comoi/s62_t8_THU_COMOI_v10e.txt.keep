@@ -11,3 +11,4 @@ allow: a jade-and-gold belt with long tassels  # owner L1627 G40 all 8 tiers (ma
 allow: rubies and pearls  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); A38 trim: repeat of 'More jewels on the crown (rubies, sapphires, pearls and jade)'
 allow: a broad yellow collar and a wide inner panel  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); A38 trim: ', a broad yellow collar' = repeat of '(the … edge, her broad yellow collar)'
 allow: the robe falling still and straight  # owner L1627 G40 all 8 tiers (master_common.OUTER_TIED, LADDER2); A38 trim: pose tail repeat of 'floor-length robe, slim, hanging close'
+allow: a plain gold belt   # G57 owner L1851: no jade pendant anywhere (pendant removal only)

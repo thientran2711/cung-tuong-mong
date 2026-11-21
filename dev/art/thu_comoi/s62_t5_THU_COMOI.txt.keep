@@ -12,3 +12,4 @@ allow: nothing loose hanging down her back  # same repeat
 allow: her head turns together with her shoulders and body in the same direction with natural anatomy  # HEAD AND BODY line repeats the ANGLE clause "her head turns together with her shoulders and body" (<=10 000)
 allow: never a frontal head on a turned body  # same repeat
 allow: HEAD AND BODY  # label of the same repeated line
+allow: a broad gold brocade girdle with two long jade pendants hanging on silk cords   # G57 owner L1851: no jade pendant anywhere (pendant removal only)

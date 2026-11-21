@@ -15,3 +15,4 @@ allow: and the hand really grips it   # boilerplate duplicate trimmed to fit 10 
 allow: the whole face fully visible with the head up toward the viewer   # boilerplate duplicate trimmed to fit 10 000 (L1529, DESIGN14)
 allow: nothing covering the face   # boilerplate duplicate trimmed to fit 10 000 (L1529, DESIGN14)
 allow: the royal yellow in the robe is exactly that colour   # boilerplate duplicate trimmed to fit 10 000 (L1529, DESIGN14)
+allow: a gold belt with a long royal golden yellow rank ribbon   # G57 owner L1851: no jade pendant anywhere (pendant removal only)

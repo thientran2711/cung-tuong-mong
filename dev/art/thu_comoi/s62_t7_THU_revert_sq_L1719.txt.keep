@@ -17,3 +17,5 @@ allow: the MAIN colour ice blue and the SECONDARY colour mint mist  # owner L171
 allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour ice blue and her secondary colour mint mist  # owner L1714 row 21 thu palette olive #9FB577 + lilac (COLOUR SLOT)
 allow: a layered pearl-and-gold necklace  # owner L1714 row 12 no necklaces
 allow: the robe falling still and straight  # owner L1714 row 22/23 pose
+allow: a jade-and-gold belt with long tassels   # G57 owner L1851: no jade pendant anywhere (pendant removal only)
+allow: and long jade-and-gold belt pendants with pearl tassels   # G57 owner L1851: no jade pendant anywhere (pendant removal only)
