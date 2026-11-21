@@ -713,3 +713,4 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 | fixback-pdf (opus; owner 05:50Z before/after PDF of 85 marks) | review/fixback-2111; briefs/main84-fixback-pdf.md | MAIN CHÍNH 84 → reports to 87 | (opening) | RUNNING | 21/11 05:52Z |
 | MAIN CHÍNH 88 (coordinator; land queue + owner marks) | handover branch | MAIN CHÍNH 88 | session_01Rc5AsL9RckY86bdwv8NheC | RUNNING | 21/11 04:25Z |
 kit-rankunit rv2 | review/kit-rankunit-rv2 d3f5ea28 | rv session | PASS | 21/11
+| REVIEW map-places-r2 r1 (opus BIG) of d4c723d4 | review/map-places-r2-r1 | B | session_01N1tNP6yVqCugi1vTEyrEka | RUNNING | 21/11 04:43Z |
