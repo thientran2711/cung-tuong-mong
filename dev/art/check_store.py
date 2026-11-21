@@ -756,15 +756,15 @@ def g15_t3(text,main,sec,age=None):
 # ONE copy here, used by store-all/build_all.hqp_collar. Store gate: a t7 prompt holding the block (long or SHORT form, her own colour words) is compared with the
 # store text carrying the same block; prompts without it are checked as before.
 HQP_NO="never a round collar, never a V, NO crossed wrap collar"
-HQP_OPEN="OPEN at the front (its lobes resting on the shoulders and back, never covering the neck or the square inner neckline)"
+HQP_OPEN="its front CUT AWAY (its lobes resting on the shoulders and back, never covering the neck or the square neckline)"
 HQP_CAPE="a jewelled cloud-collar cape edged with pearls and gold over the shoulders, "
 def hqp_layer(main,sec,short=False):
-    edge="a broad royal-yellow brocade band studded with pearls (the Hoàng quý phi edge, her broad yellow collar)"; oe="a slim gold-and-pearl band"; outer=f"the {main} outer robe"
-    if short: return (f"a LAYERED NECKLINE: a {sec} inner top with a low straight SQUARE neckline edged by {edge}, under {outer} worn OPEN at the front, "
-                      f"its two front edges ({oe}) falling from both shoulders, neck and collarbones visible; NO crossed wrap collar")
-    return (f"a LAYERED NECKLINE (two-garment look): a fitted {sec} INNER top (like a tube-top bodice) with a low straight SQUARE neckline across the upper chest, "
-            f"showing her neck and collarbones, that square neckline edged by {edge}; OVER it {outer} worn OPEN at the front, its two straight front edges ({oe}) "
-            f"running from behind the neck over BOTH shoulders and straight down each side of the chest, framing the bordered square neckline; {HQP_NO}")
+    # BUILDFIX1 (owner L1996/L1982/L1990 + THUROOT1 L2023 approved thu t7 words): ONE robe over the inner dress (no layered neckline, no inner top, no open outer robe),
+    # the square neckline framed on all sides by the pearl-edged gold band; main is kept in the signature (store gate regex), not written.
+    if short: return (f"a SQUARE neckline at a modest height (no crossed collar), framed (across the upper chest AND up both sides to the shoulders) by a wide flat pearl-edged gold-embroidered band, "
+                      f"this one robe worn over a {sec} inner dress; NO crossed wrap collar")
+    return (f"a SQUARE neckline at a modest height (no crossed collar), framed (across the upper chest AND up both sides to the shoulders) by a wide flat pearl-edged gold-embroidered band, "
+            f"always fully visible, this one robe worn over a {sec} inner dress; {HQP_NO}")
 HQP_SLOT=re.compile(r"a near-empress ceremonial robe of ([^,]+?) silk, ")
 def hqp_store(store,prompt):
     """-> store with the prompt's HQP block when the prompt holds a valid one (template, any colour words), else store unchanged."""
@@ -925,6 +925,7 @@ def fruit_fails(text, scope=None, pid=None):
     for sent in re.split(r"(?<=[.;])\s+", text):
         if not HOLD_RX.search(sent): continue
         for m in FRUIT_RX.finditer(sent):
+            if re.search(r"colou?r(?: family)?(?: is)? $", sent[max(0, m.start() - 20):m.start()], re.I): continue   # BUILDFIX1: a colour NAME (her robe colour persimmon) is not a held fruit
             if NEG.search(sent[max(0, m.start() - 30):m.start()]): continue   # 'no fruit', 'never a peach' (a later 'never …' in the clause does not excuse it)
             out.append(("F16", "NOFRUIT", f"fruit in a held item (owner Lượt 1052/1054/1058: nobody holds fruit, any rank, any age): …{sent[max(0, m.start()-60):m.end()+30]}…")); break
         if out: break
@@ -1093,6 +1094,8 @@ def g57_fails(text):
         bs = [x for x in (t.find(",", m.end()), t.find(";", m.end()), t.find(".", m.end())) if x >= 0]
         clause = t[a + 1:(min(bs) if bs else len(t))]
         if G57_HELD.search(clause): continue   # held item: free (owner L1979)
+        _ps = t.rfind(" Pose: ", 0, m.start()); _pe = t.find(". ", _ps + 7) if _ps >= 0 else -1
+        if _ps >= 0 and (_pe < 0 or m.start() < _pe) and not re.search(r"\b(?:waist|sash|belt|girdle|hip)\b", clause, re.I): continue   # BUILDFIX1: inside the Pose sentence = her held item (L1979)
         return [("G57", "JADE PENDANT", f"no jade pendant / ngọc bội worn on the body (owner L1851/L1979: the game attaches pendants later; held items are free): …{t[max(0, m.start()-50):m.end()+30]}…")]
     return []
 
@@ -1252,6 +1255,7 @@ def g60b_fails(text):
     for m in BOW_RX.finditer(text):
         if negated(text, m.start(), m.end()): continue
         if re.search(r"\b(?:archery|arrows?|bowstring|bowman)\b", _clause(text, m.start(), m.end()), re.I): continue
+        if re.search(r"\b(?:lips?|mouth)\b", _clause(text, m.start(), m.end()), re.I) or text[m.end():m.end()+7]=="-shaped": continue   # BUILDFIX1: face words (lips 'with a soft curved bow', 'bow-shaped mouth') are not a bow
         if LONGTIE_RX.search(text): return []
         return [("G60", "BOW TIES NOT LONG", f"every bow has LONG trailing silk ties, thướt tha (owner L1971): …{_ctx(text, m, 60, 60)}…")]
     return []

@@ -109,7 +109,7 @@ def _fl():
     s=open(os.path.join(ART,"owner-copy","mk_ranks_v3.py"),encoding="utf-8").read(); g={}; exec(s[s.index("FL="):s.index("FLCOL=")],g); return g["SZ"]
 SZ=_fl()
 # F13 (owner Lượt 639, ROOT-53 -> BW5): exactly ONE hair flower at t1-t6 (never two or a pair), its SIZE grows with rank (t1 small ... t6 large); replaces the Lượt 323 size ladder (t3 'flowers', t4 'plus smaller blooms', t5 'two or three', t6 'cluster').
-_F13="HAIR FLOWER SIZE: exactly ONE fresh flower in her hair (never two, never a pair, no cluster), "
+_F13="HAIR FLOWER SIZE: exactly ONE fresh flower in her hair (the bloom ONLY, NO leaves; never two, never a pair, no cluster), "   # BUILDFIX1: F19 bloom-only words (owner L1723/L2011; approved thu s62/s63 wording)
 SZ={1:_F13+"SMALL but clearly visible at game size.",2:_F13+"small-to-medium, a little bigger than at the lowest rank, clearly visible at game size.",
     3:_F13+"MEDIUM, a full bloom about the size of her palm.",4:_F13+"LARGE, a full bloom larger than her palm, clearly bigger than the lower ranks.",
     5:_F13+"BIG, a full bloom clearly bigger than at the Tần rank.",6:_F13+"the LARGEST single bloom of all ranks, the grandest hair flower in the palace."}
@@ -599,7 +599,7 @@ G45_JADE_RX=re.compile(r"\bjade pendants?\b",re.I)
 G45_OVER=[]; G45_HAD=False
 def g45_post(S,tag=""):
     sys.path.insert(0,ART); import master_common as _MC
-    jade=bool(G45_JADE_RX.search(S)); had=G45_HAD
+    jade=bool(G45_JADE_RX.search(S.split(" Pose: ")[0])); had=G45_HAD   # BUILDFIX1: a HELD jade pendant (Pose sentence, free under G57/L1979) is not a body pendant -> no 'at her waist' clause
     if not (jade or had) or _MC.JADE_CLEAR in S or " Pose: " not in S: return S
     i=S.index(" Pose: "); j=S.find(". The item is in a contrasting colour",i)
     if j<0: j=S.index(". ",i)   # Nữ đế / other paths: end of the pose sentence
@@ -659,7 +659,11 @@ def _build_season2(person,rank,age,season):
     a36=build(person,rank,"a36")[1] if rank<=3 else None
     S0,S,add=build(person,rank,age,_season=season); S,notes=winter_g28.season(S,rank,a36,season)
     _m=b26_fit_ok(person,rank,age,season)
-    if _m and len(S)>10000: S,notes=b26_fit(S,notes,angle=False,whole=_m=='whole',rank=_c2rank(rank))   # B26 length: winter_g28.season already dropped ANGLE
+    if _m and len(S)>10000:
+        _T,_n=b26_fit(S,notes,angle=False,whole=_m=='whole',rank=_c2rank(rank))   # B26 length: winter_g28.season already dropped ANGLE
+        if len(_T)>10000: _S2,_n2=f20_fit(S,notes); _T,_n=b26_fit(_S2,_n2,angle=False,whole=_m=='whole',rank=_c2rank(rank)) if len(_S2)>10000 else (_S2,_n2)   # BUILDFIX1: F20 first
+        S,notes=_T,_n
+    S,notes=f20_fit(S,notes)
     S=g45_post(S,f"{person} t{rank} {age} {season}")   # G45 jade clause after the fit
     return S0,S,add+notes
 
@@ -679,7 +683,11 @@ def build(person,rank,age="a18",_season=None):
     global G45_HAD; G45_HAD=False   # G45: set again by apply_dedupe inside _build
     S0,S,add=_build(person,rank,age); S=g36(eyes(S))   # G36 no phi bạch (xuân/đông)
     _m=b26_fit_ok(person,rank,age,_season)
-    if _m and len(S)>10000: S,add=b26_fit(S,add,angle=True,whole=_m=='whole',rank=_c2rank(rank))
+    if _m and len(S)>10000:
+        _T,_a=b26_fit(S,add,angle=True,whole=_m=='whole',rank=_c2rank(rank))
+        if len(_T)>10000: _S2,_a2=f20_fit(S,add); _T,_a=b26_fit(_S2,_a2,angle=True,whole=_m=='whole',rank=_c2rank(rank)) if len(_S2)>10000 else (_S2,_a2)   # BUILDFIX1: the F20 sentence goes first, so a cell the B26 cut fitted stays fitted
+        S,add=_T,_a
+    if not _season: S,add=f20_fit(S,add)
     if not _season: S=g45_post(S,f"{person} t{rank} {age}")   # G45 jade clause after the fit (season cells: after winter_g28.season, below)
     return S0,S,add
 # B26FAB2 (Foreman C #5 decision 1, 20/11): length step t1-t6, CUT WHILE > 10 000 (no longer all-or-nothing), only for cells that were <= 10 000 at HEAD 7007acc
@@ -735,11 +743,39 @@ def _build(person,rank,age="a18"):
     if rank==7: S=hqp_collar(person,S)   # L1384 HQP current-outfit layered neckline
     anchor=" Pose:"; assert S.count(anchor)==1,("pose anchor",person,rank)
     add=(laws(rank,age,person in PR) if isinstance(rank,int) else laws(rank))+[angle_sentence(person,rank,age),grace_sentence(person,rank,age)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
-    if rank in (4,5,6): add=[hairflower_named(a,person,rank) for a in add]
+    if rank in (4,5,6): add=[hairflower_named(a,person,rank) for a in add]   # (t1-t3 name the species in the outfit's hair clause already)
+    _f20=f20_sentence(person,rank)
+    if _f20: add.append(_f20)   # BUILDFIX1: F20 flower colours (owner L2025)
     if not g_pets_allowed(rank,age): S=LAST_G["_PETS"].depet(S)   # F17 PETS: no animal pose where pets are not allowed (only the animal words change)
     return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
 # HAIR FLOWER SPECIES t4-t6 (Foreman C #5 decision 2, 20/11; species = F2 NEW TABLE owner DUYỆT Lượt 1352, build.py F2_FL via hairflower_species(person, rank)):
 # the F13 HAIR FLOWER SIZE sentence names the F2 species of this rank ('ONE fresh <species> in her hair'); size words unchanged.
+# F20 FLOWER COLOUR (owner L2025, rule F20) — BUILDFIX1: embroidery-flower colour + hair-flower colour (hair_by_tier t1..t6) of her season
+# from dev/art/face-common/flower_colours_L2013.json; English colour words made from the hex with the table maker's own OKLCH classes (name_vi).
+import importlib.util as _iu2
+F20=json.load(open(os.path.join(ART,"face-common","flower_colours_L2013.json"),encoding="utf-8"))
+_sp2=_iu2.spec_from_file_location("mk_flower_colours",os.path.join(ART,"face-common","make_flower_colours_L2013.py")); _MFC=_iu2.module_from_spec(_sp2); _sp2.loader.exec_module(_MFC)
+F20_HUE=[(10,"rose-pink"),(30,"coral"),(55,"peach"),(80,"apricot"),(105,"cream"),(135,"cream"),(160,"green"),(190,"aqua green"),(215,"sky blue"),(250,"soft blue"),(285,"periwinkle"),(315,"lilac"),(345,"orchid pink"),(361,"pink")]
+def f20_name(hx):
+    L,C,H=_MFC.h2o(hx)
+    if C<0.025: return "cream-white" if L>0.88 else "pale pearl grey"
+    hue=next(n for t,n in F20_HUE if H<t)
+    if C<0.05: lv={True:"very pale"}.get(L>0.86) or ("pale" if L>0.76 else "powder")
+    else: lv=("soft " if C<0.09 else "fresh " if C<0.13 else "vivid ")+("pale" if L>0.86 else "light" if L>0.76 else "" if L>0.62 else "deep")
+    return re.sub(r"\s+"," ",f"{lv} {hue}").strip()
+def f20_sentence(person,rank):
+    if not isinstance(rank,int): return None
+    p=ALIAS.get(person,person); se=B20_SEASON(person); d=F20.get(p,{}).get(se) if se else None
+    if not isinstance(d,dict): return None
+    s=f"FLOWER COLOUR: embroidered flowers {f20_name(d['embroidery_hex'])} (like {d['embroidery_hex']}) with gold thread"
+    hx=d.get("hair_by_tier",{}).get(f"t{rank}") if rank<=6 else None
+    if hx: s+=f"; hair flower {f20_name(hx)} (like {hx}), brighter than the embroidery"
+    return s+"."
+def f20_fit(S,add):
+    """BUILDFIX1 length: the F20 sentence is added only where it fits the 10 000 gen limit (a cell that fitted never goes over because of it)."""
+    m=re.search(r" FLOWER COLOUR: [^.]*\.(?= )",S)
+    if m and len(S)>10000: return S.replace(m.group(0),"",1),add+["F20 sentence dropped (length)"]
+    return S,add
 def hairflower_named(a,person,rank):
     if not a.startswith(_F13): return a
     sp=LAST_G["hairflower_species"](ALIAS.get(person,person),rank)   # F2 (owner Lượt 1352): the F2 species of THIS rank

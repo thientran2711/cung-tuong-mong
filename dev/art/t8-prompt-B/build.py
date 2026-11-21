@@ -370,7 +370,7 @@ ITEMS=[("a gold ruyi set with gems","one"),("an imperial phoenix-embroidered rou
 ("a folded letter on gold-flecked imperial paper tied with a pearl cord","two"),
 ("a gold phoenix pellet drum (trống lắc) with pearl strings, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole","one"),
 ("an embroidery hoop in a gold phoenix frame with an imperial-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle","two"),
-("a phoenix-embroidered imperial-silk sachet with pearl tassels","one"),
+("a phoenix-embroidered imperial-silk round fan with pearl tassels","one"),
 ("a gold phoenix pendant set with pearls on a silk cord","one"),
 ("a gold phoenix hand bell with pearl tassels","one"),
 ("a gold phoenix basket of pearl-and-jade flowers","box"),
@@ -466,17 +466,17 @@ def item_for(c):
     return (n*3+(n//10))%10 if (n*3)%10 not in GOLDEN_ITEM.values() else (n*3+1)%10
 def colour(c,v,golden):
     pal,_=DATA[c]; main=pal.split(" and ")[0]; fam=pal
-    if golden: return (f"her own signature colour {main} (colour family {fam}, as in her first reference) stays clearly visible as a main colour of the robe, sleeves and mantle, mixed with a golden yellow in the inner robe, borders, sash and large areas of the sleeves and skirt; the yellow is {YEL_GOLDEN}; the crown, hairpin and jewellery gold in the same 18K tone; gold only as thin accents on the borders; NOT an all-yellow robe.",main)
+    if golden: return (f"her own signature colour {main} (colour family {fam}, as in her first reference) stays clearly visible as a main colour of the robe and sleeves, mixed with a golden yellow in the inner robe, borders, sash and large areas of the sleeves and skirt; the yellow is {YEL_GOLDEN}; the crown, hairpin and jewellery gold in the same 18K tone; gold only as thin accents on the borders; NOT an all-yellow robe.",main)
     fresh="all colours fresh, clear and luminous, never dusty or greyed; "
-    if v=="v0" and c in ORIG1: return (f"{fresh}her ORIGINAL robe colour is kept exactly as in image 1 (her first reference): {ORIG1[c][0]}, with {ORIG1[c][1]} in the linings; the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), her colour is the second colour (collar, inner robe, wide borders and a few panels); the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; gold only as thin accents on the borders; NOT an all-yellow robe.",ORIG1[c][0].split(" silk")[0])
-    if v=="v0": return (f"{fresh}her own signature colour {main} (colour family {fam}, as in her first reference) is the second colour (collar, inner robe, wide borders and a few panels); the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible); the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; gold only as thin accents on the borders; NOT an all-yellow robe.",main)
-    if v=="v1": return (f"{fresh}the royal golden yellow is the MAIN colour of the robe, mantle and sleeves, with one fresh accent of her colour {main} (inner robe, collar and a few borders); the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; NOT dusty, NOT pale.",main)
-    f=V2[c]; return (f"{fresh}a fresh {f} (a different colour family from her first reference) is the second colour (collar, inner robe, wide borders and a few panels); the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible); the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; gold only as thin accents on the borders; NOT an all-yellow robe.",f)
+    if v=="v0" and c in ORIG1: return (f"{fresh}her ORIGINAL robe colour is kept exactly as in image 1 (her first reference): {ORIG1[c][0]}, with {ORIG1[c][1]} in the linings; the royal golden yellow is the DOMINANT colour of the robe, sleeves and skirt (more than half of everything visible), her colour is the second colour (collar, inner robe, wide borders and a few panels); the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; gold only as thin accents on the borders; NOT an all-yellow robe.",ORIG1[c][0].split(" silk")[0])
+    if v=="v0": return (f"{fresh}her own signature colour {main} (colour family {fam}, as in her first reference) is the second colour (collar, inner robe, wide borders and a few panels); the royal golden yellow is the DOMINANT colour of the robe, sleeves and skirt (more than half of everything visible); the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; gold only as thin accents on the borders; NOT an all-yellow robe.",main)
+    if v=="v1": return (f"{fresh}the royal golden yellow is the MAIN colour of the robe and sleeves, with one fresh accent of her colour {main} (inner robe, collar and a few borders); the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; NOT dusty, NOT pale.",main)
+    f=V2[c]; return (f"{fresh}a fresh {f} (a different colour family from her first reference) is the second colour (collar, inner robe, wide borders and a few panels); the royal golden yellow is the DOMINANT colour of the robe, sleeves and skirt (more than half of everything visible); the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; gold only as thin accents on the borders; NOT an all-yellow robe.",f)
 def build(c,v="v0",golden=False):
     pal,face=DATA[c]; rule,main=colour(c,v,golden); item,hk=age_item(c,"t8",*ITEMS[item_for(c)]); right=(int(c[1:])%2==1) if c not in GOLDEN_ITEM else {"c06":True,"c25":True,"c16":True,"c20":False}[c]
     robe=main if golden else "golden yellow"
     s=PRE+f" An imperial consort, the Empress. Her face: {face}. From the identity reference keep ONLY her face, facial features, hairstyle colour and signature colour family; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose. {AGE_TXT[AGE]}"
-    s+=f" Outfit (the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks): the Empress's imperial phoenix ceremonial robe of {robe} silk{(" mixed with "+main) if (not golden and v!="v1") else " mixed with golden yellow" if golden else ""}, richly embroidered on the chest, shoulders and wide sleeves with large phoenixes, peonies and clouds in gold and kingfisher-blue silk thread (far denser than any other rank), over it a long silk mantle from the shoulders to the floor, edged with a broad band of gold brocade and pearls, a wide jewelled gold-and-pearl cloud collar with layered pearl fringes over the shoulders, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, slim tall silhouette; the GRANDEST headdress of all: a FULL tall imperial nine-phoenix crown, clearly taller and wider than a noble consort's crown, with a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading wide on both sides, kingfisher-blue inlay, rubies and pearls, and a few clean pearl tassels at the sides."
+    s+=f" Outfit (the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks): the Empress's imperial phoenix ceremonial robe of {robe} silk{(" mixed with "+main) if (not golden and v!="v1") else " mixed with golden yellow" if golden else ""}, richly embroidered on the chest, shoulders and wide sleeves with large phoenixes, peonies and clouds in gold and kingfisher-blue silk thread (far denser than any other rank), this one robe worn over an inner dress of the lining colour; a SQUARE neckline at a modest height (no crossed collar), framed (across the upper chest AND up both sides to the shoulders) by a wide flat pearl-edged gold-embroidered band, always fully visible; a wide jewelled gold-and-pearl cloud collar with layered pearl fringes over the shoulders, its front cut away so the square neckline stays fully visible, many pearl strands lying flat on the cloud collar, a jade-and-gold belt with long tassels, slim tall silhouette; the GRANDEST headdress of all: a FULL tall imperial nine-phoenix crown, clearly taller and wider than a noble consort's crown, with a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading wide on both sides, kingfisher-blue inlay, rubies and pearls, and a few clean pearl tassels at the sides."
     s+=" COLOUR RULE: "+rule
     s+=" The phoenix is the main embroidered motif, larger and more prominent than the flowers."
     s+=" All flowers, birds and the phoenix are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+FAB
@@ -507,7 +507,7 @@ ITEMS7=[("a gilded hand censer","c"),("an imperial round fan with a gold filigre
 ("a folded letter on gold-flecked kingfisher-blue paper tied with a silk cord","two"),
 ("a gold-filigree pellet drum (trống lắc) with gem tassels, a short deep drum seen side-on so its round body shows, two knotted pellets on cords at its sides, a short stick handle, never a flat disc, never on a long pole","one"),
 ("an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene, two thin rings clamping the cloth stretched tight and flat, a needle and thread in the half-done stitching, never on a handle","two"),
-("a gold-filigree sachet set with gems","one"),
+("a gold-filigree round fan set with gems","one"),
 ("a name seal of imperial jade with a gold-filigree knob","one"),
 ("a kingfisher-silk handkerchief embroidered with gold","two"),
 ("a gold-filigree pendant set with gems on a silk cord","one"),
@@ -537,7 +537,7 @@ def build_t7(c,v="v0"):
     nf=V2[c] if v=="v1" else T7V2[c] if v=="v2" else None
     if nf: main=nf
     s=PRE+f" An imperial consort. Her face: {face}. From the identity reference keep ONLY her face, facial features, hairstyle colour and signature colour family; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose. {AGE_TXT[AGE]}"
-    s+=f" Outfit (rank-7 imperial noble consort (Hoàng quý phi), clearly much richer and more splendid than the lower ranks): a near-empress ceremonial robe of {main} silk, embroidered with phoenixes, peonies and auspicious clouds in gold thread on the chest and along the borders, a jewelled cloud-collar cape edged with pearls and gold over the shoulders, strands of pearls across the chest, a jade-and-gold belt with long tassels, floor-length robe, only slipper toe tips peeking under the hem; tall grand chignon crowned by a LARGE ornate gold phoenix crown (one large gold phoenix with spreading wings, grander and taller than a noble consort's headdress, but clearly simpler than the Empress's nine-phoenix crown) with pearl strands, kingfisher-blue inlay and a few gold tassels."
+    s+=f" Outfit (rank-7 imperial noble consort (Hoàng quý phi), clearly much richer and more splendid than the lower ranks): a near-empress ceremonial robe of {main} silk, embroidered with phoenixes, peonies and auspicious clouds in gold thread on the chest and along the borders, a jewelled cloud-collar cape edged with pearls and gold over the shoulders, pearl strands lying flat on the cloud-collar cape, a jade-and-gold belt with long tassels, floor-length robe, only slipper toe tips peeking under the hem; tall grand chignon crowned by a LARGE ornate gold phoenix crown (one large gold phoenix with spreading wings, grander and taller than a noble consort's headdress, but clearly simpler than the Empress's nine-phoenix crown) with pearl strands, kingfisher-blue inlay and a few gold tassels."
     s+=f" COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed; "+(f"her ORIGINAL robe colour is kept exactly as in image 1 (her first reference): {m} is the MAIN colour of the robe, cape and sleeves, with {m2} in the linings" if not nf else f"a fresh {nf} (a different colour family from her first reference) is the MAIN colour of the robe, cape and sleeves, with a paler tint of the same {nf} in the linings")+f"; yellow as clearly larger visible parts (wide yellow borders along the front opening, sleeves and hem, a wide yellow sash, a broad yellow collar and a wide inner panel of the robe, well visible at game size) in {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; NOT an all-yellow robe."
     s+=" All flowers, birds and the phoenix are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+FAB
     s+=f" Pose: calm standing pose; she holds {item} in a contrasting colour, not the robe colour, the item held below the chin, the hand really gripping it, the whole face fully visible. Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down. Her hands and body: {_hh(hand7,hk,right)}."
@@ -684,8 +684,7 @@ OUTFIT_JOBS={
 TIER_LOW={   # G17 (owner 20/11, RANK8-A test s62 xSBeugTjfW 'kiểu một ok'): t1 Đáp ứng AND t2 Thường tại = OPEN SQUARE NECKLINE style 1 (same words); t2 = same cut, 2-layer embroidered edge (owner clarification 'thêm một bậc'); t2 keeps its own robe below the neckline; t3 unchanged
 
 1:("rank-1 consort (Đáp ứng), the lowest consort rank, elegant, never poor","a Tang-style TWO-PIECE ruqun: a snug upper garment with an OPEN SQUARE NECKLINE (style 1, simple): a low, simple straight-edged square opening that shows her neck and collarbones, edged only by a narrow plain {sec} silk band with no embroidery on it; never a round collar, never a V, NO crossed wrap collar; with long wide flowing sleeves and wide embroidered cuffs showing a sheer thin undersleeve, over a long softly pleated skirt tied high above the waist at the chest with a broad ribbon band whose two long ribbons fall down the front, the skirt in a lighter tone of the same colour with a wide embroidered {motif} hem band, small sprays of embroidered {motif} on the upper garment and a sparse small cluster of embroidered {motif} at the CENTRE of the chest (fewer than at Thường tại and Quý nhân, small motifs only)","pretty silver hairpins and a fresh flower ({flower})","little gold"),
-1:("rank-1 consort (Đáp ứng), the lowest consort rank, elegant, never poor","a Tang-style TWO-PIECE ruqun: a snug upper garment with an OPEN SQUARE NECKLINE (style 1, simple): a low, simple straight-edged square opening that shows her neck and collarbones, edged only by a narrow plain {sec} silk band with no embroidery on it; never a round collar, never a V, NO crossed wrap collar; with long wide flowing sleeves and wide embroidered cuffs showing a sheer thin undersleeve, over a long softly pleated skirt tied high above the waist at the chest with a broad ribbon band whose two long ribbons fall down the front, the skirt in a lighter tone of the same colour with a wide embroidered {motif} hem band, small sprays of embroidered {motif} on the upper garment","pretty silver hairpins and a fresh flower ({flower})","little gold"),
-2:("rank-2 consort (Thường tại), a little more ornate than the lowest rank","a fine silk robe with an OPEN SQUARE NECKLINE (style 1 cut, Thường tại edge): the SAME low, simple, narrow straight-edged square opening as the lowest rank (NOT wide, NOT stretched toward the shoulders), showing her neck and collarbones, its edge a LAYERED border of two stacked narrow bands, a thin {sec} piping inside and a narrow band of small embroidered {motif} outside; never a round collar, never a V, NO crossed wrap collar; delicate embroidered {motif} at the sleeves and hem and a soft silk sash","silver and pearl hairpins and a fresh flower ({flower})","little gold"),
+2:("rank-2 consort (Thường tại), a little more ornate than the lowest rank","a fine silk robe with an OPEN SQUARE NECKLINE (style 1 cut, Thường tại edge): the SAME low, simple, narrow straight-edged square opening as the lowest rank (NOT wide, NOT stretched toward the shoulders), showing her neck and collarbones, framed by a LAYERED border of two stacked narrow bands, a thin {sec} piping inside and a narrow band of small embroidered {motif} outside; never a round collar, never a V, NO crossed wrap collar; delicate embroidered {motif} at the sleeves and hem and a soft silk sash","silver and pearl hairpins and a fresh flower ({flower})","little gold"),
 3:("rank-3 consort (Quý nhân), richer than the ranks below","a fine silk robe with wide embroidered {motif} bands at the collar, sleeves and hem, long trailing wide sleeves, a silk waistband with hanging jade belt pendants and tassels, a sheer silk shawl","two or three slim pearl hairpins set INTO her gathered hair at natural angles, mostly hidden in the hair, each with a small dangling pearl ornament, never a radiating crown of straight pins or spikes, small silk flowers and a fresh flower ({flower})","a little gold thread only at the borders")}
 FAB_LOW="Light, soft, thin flowing silk: the long sleeves, skirt and sash are supple and airy, drifting softly as in a gentle breeze, with soft natural folds, never stiff, flat or board-like."
 # G21 (owner 20/11, ROOT-67 chat Lượt 1128, verbatim: 'Nếu như vậy á, thì là cái bậc thường tại đáp ứng và cả quý nhân luôn. Cái cổ áo từ 36, 51 và 65 tuổi á, là phải là cái cổ xéo kín đáo. ...'):
@@ -700,7 +699,7 @@ def outfit_low123(c,t,pal,main):
     _sp=hairflower_species(c,t); fl=_art(_sp[0]) if _sp else fl   # F2 (owner Lượt 1352): hair flower t1–t3 = the F2 species of this rank
     if AGE in CROSSED_AGES and t in TIER_LOW_CROSSED: robe=TIER_LOW_CROSSED[t]   # G21: crossed collar at a36/a51/a65
     return f"Outfit ({rk}): a NEW outfit, {robe.format(motif=mo,sec=pal.split(" and ")[-1])}; {hair.format(flower=fl)}; her signature colour family {pal} stays the MAIN robe colour ({main}, NOT green); the robe itself is clearly {main} silk, {gold}, NOT a cream, beige or all-gold robe"
-ITEMS_LOW={"c06":{1:("a plain silk round fan with a bamboo handle","two"),2:("an embroidered silk sachet with a tassel","one"),3:("an embroidered silk round fan with a silk tassel","two"),
+ITEMS_LOW={"c06":{1:("a plain silk round fan with a bamboo handle","two"),2:("a small round embroidered silk fan with a silk tassel","one"),3:("an embroidered silk round fan with a silk tassel","two"),
  4:("a round fan with a carved jade handle and jade tassel","two"),5:("a round fan with a gold-inlaid handle and gem tassel","two"),6:("a white-jade ruyi","one")},
  "c25":{1:("a sprig of fresh plum blossoms","one"),2:("a painted paper folding fan","one"),3:("a painted scroll with wooden rollers","scroll"),
  4:("a lacquered jewel box","box"),5:("a painted scroll with gold fittings","scroll"),6:("a jewelled box","box")}}
@@ -708,7 +707,7 @@ ITEMS_LOW={"c06":{1:("a plain silk round fan with a bamboo handle","two"),2:("an
 # (B, hand key, style); styles: trim (default) | jade | pearls | flower
 LOW_SIG={"c01":("round silk fan painted with peonies","two","trim"),"c02":("round silk fan","two","trim"),"c03":("white feather fan","two","trim"),
 "c04":("round gauze fan with a red tassel","two","trim"),"c05":("round fan painted with peonies","two","trim"),"c07":("silk handkerchief","one","trim"),
-"c08":("embroidered sachet","one","trim"),"c09":("small white flower","one","flower"),"c10":("sprig of white jasmine","one","flower"),
+"c08":("small embroidered silk fan","one","trim"),"c09":("small white flower","one","flower"),"c10":("sprig of white jasmine","one","flower"),
 "c11":("folded letter","one","trim"),"c12":("string of pearls","one","pearls"),"c13":("embroidery hoop","two","trim"),"c14":("basket of flowers","two","trim"),
 "c15":("sprig of plum blossom","one","flower"),"c16":("pink lotus flower","one","flower"),"c17":("spool of silk thread and a needle case","one","trim"),
 "c18":("sandalwood folding fan","two","trim"),"c19":("painted silk folding fan","two","trim"),"c20":("embroidered silk folding fan","two","trim"),
@@ -729,7 +728,7 @@ for _c in LOW_SIG: ITEMS_LOW[_c]=low_items(_c)
 
 # ITEMS t1-t6 = FIGURE_GATE 3f FIXED LISTS (Foreman C ROOT-30, 18/11 ~21:22Z real). OWNER (verbatim): "Ủa sao mày vẽ? Tao đang coi C05 nè, mày vẽ ai cũng cầm quạt vậy? Bậc nào cũng cầm quạt vậy, đâu phải. Ủa? Cái luật cầm đồ của tao đâu? Mày bỏ sót cái luật món cầm trên tay rồi. Và thêm một cái nữa là ai cũng có một Bậc nào cũng sẽ có một cái món đồ riêng cầm trên tay. Đã có một người làm cái danh sách đó rồi mà tại sao mày không làm theo? Rồi họ còn phải tương tác với cái món đồ đó nữa. ..."
 # The old LOW_SIG ladder (her signature item stepped up) is REPLACED: every rank takes ONE item from ITS OWN 3f list, spread so neighbouring people differ and one person never holds the same KIND of item at two ranks; each item kind has its own hand interaction (HAND_LOW).
-L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered silk handkerchief","kerchief"),("a small woven bamboo flower basket","basket"),("a sprig of fresh plum blossoms","sprig"),("a plain paper folding fan","ffan"),("a thread-bound book","book"),("a small embroidery hoop with silk","hoop"),("a small bamboo flute","flute"),("a small silk lantern on a short bamboo stick","lantern"),("a simple embroidered cloth sachet","dangle"),
+L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered silk handkerchief","kerchief"),("a small woven bamboo flower basket","basket"),("a sprig of fresh plum blossoms","sprig"),("a plain paper folding fan","ffan"),("a thread-bound book","book"),("a small embroidery hoop with silk","hoop"),("a small bamboo flute","flute"),("a small silk lantern on a short bamboo stick","lantern"),("a small round embroidered silk fan","dangle"),
 ("a small paper kite painted like a swallow, its string on a bamboo reel","two"),
 ("an embroidered silk ball (tú cầu) with a small tassel, a round stuffed ball, no handle, no stick","dangle"),
 ("a folded letter on flower-patterned paper tied with a silk cord","two"),
@@ -742,7 +741,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a small hand warmer in a plain silk cover","two"),
 ("a calligraphy brush with a bamboo shaft","one"),
 ("a bamboo walking staff with a silk cord","one"),
-("a bundle of white chrysanthemums tied with a silk ribbon","sprig"),
+("a bundle of white lilies tied with a silk ribbon","sprig"),
 ("a small wooden fish (mõ) with its striker","one"),
 ("a pair of walnut health balls","two"),
 ("a small woven-grass cricket cage with a cotton tassel","dangle"),
@@ -760,7 +759,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a fly-whisk of horsehair with a plain bamboo handle","one"),
 ("a small plain bamboo birdcage with its cloth cover drawn back","lantern"),
 ("a thread-bound almanac in a plain cloth cover","book")],
-2:[("a silk round fan with a lacquered handle and a small tassel","rfan"),("an embroidered silk sachet with a tassel","dangle"),("a painted paper folding fan","ffan"),("a poetry book with a silk cover","book"),("a small porcelain lotus lamp","lamp"),("an embroidery hoop with a fine silk scene","hoop"),("a jade-bead tassel ornament","dangle"),("a silk-covered lantern with a tassel","lantern"),("a small lacquered comb box","box"),("a bamboo flute with a silk tassel","flute"),
+2:[("a silk round fan with a lacquered handle and a small tassel","rfan"),("a small round embroidered silk fan with a silk tassel","dangle"),("a painted paper folding fan","ffan"),("a poetry book with a silk cover","book"),("a small porcelain lotus lamp","lamp"),("an embroidery hoop with a fine silk scene","hoop"),("a jade-bead tassel ornament","dangle"),("a silk-covered lantern with a tassel","lantern"),("a small lacquered comb box","box"),("a bamboo flute with a silk tassel","flute"),
 ("a small pellet drum (trống lắc) with a lacquered handle, a deep drum with two pellets, not flat","one"),
 ("a small cricket cage of lacquered bamboo with a silk tassel","dangle"),
 ("a lacquered butterfly hairpin, held in the hand","dangle"),
@@ -794,7 +793,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 3:[("an embroidered silk round fan with a silk tassel","rfan"),("a small red-lacquered box","box"),("a painted scroll with wooden rollers","scroll"),("a painted silk folding fan with bone ribs","ffan"),("a small celadon lotus lamp","lamp"),("a silver hand mirror","mirror"),("an embroidered silk palace lantern","lantern"),("a silver-mounted thread-bound book","book"),("a carved peach-wood comb in a silk case","box"),("a small silver-wire flower basket","basket"),
 ("an embroidered silk ball (tú cầu) with small silver bells, a round stuffed ball, no handle, no stick","dangle"),
 ("a silver butterfly hairpin, held in the hand","dangle"),
-("a small embroidered silk sachet with a silver bead","dangle"),
+("a small round embroidered silk fan with a silver bead","dangle"),
 ("a bamboo flute with silver bands","flute"),
 ("a small pipa lute inlaid with silver","two"),
 ("a folded letter on silver-flecked flower paper","two"),
@@ -822,7 +821,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a string of red-agate prayer beads with a silver tassel","dangle"),
 ("a round red-agate longevity plaque carved with a round shou symbol","two"),
 ("a thread-bound almanac in a silver-thread cover","book")],
-4:[("a round fan with a carved jade handle and jade tassel","rfan"),("a sandalwood folding fan with carved ribs","ffan"),("a lacquered jewel box","box"),("a scroll with jade rollers","scroll"),("a jade disc pendant on a silk cord","dangle"),("a silver-and-enamel hand mirror","mirror"),("a small cloisonné lotus lamp","lamp"),("a gauze palace lantern with a jade pendant","lantern"),("a silver-mounted book box","box"),("a small white-jade lotus lamp","lamp"),
+4:[("a round fan with a carved jade handle and jade tassel","rfan"),("a sandalwood folding fan with carved ribs","ffan"),("a lacquered jewel box","box"),("a scroll with jade rollers","scroll"),("a jade disc pendant on a silk cord","dangle"),("a silver-and-enamel hand mirror","mirror"),("a small cloisonné lotus lamp","lamp"),("a silk palace lantern with a jade tassel","lantern"),("a silver-mounted book box","box"),("a small white-jade lotus lamp","lamp"),
 ("a jade butterfly hairpin, held in the hand","dangle"),
 ("a small cricket cage of jade-trimmed bamboo","dangle"),
 ("a jade flute with a jade tassel","flute"),
@@ -842,7 +841,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a folded letter on jade-green flower paper tied with a silk cord","two"),
 ("a sprig of white magnolia blossoms tied with a silk cord","sprig"),
 ("an embroidered silk handkerchief with small jade corner weights","kerchief"),
-("a jade-mounted embroidered silk sachet with a tassel","dangle"),
+("a jade-handled small round embroidered silk fan with a silk tassel","dangle"),
 ("an embroidery hoop in a jade-banded frame with a silk scene, cloth stretched flat in two thin rings, a needle in it, never on a handle","hoop"),
 ("a jade-handled flower basket of woven bamboo","basket"),
 ("a calligraphy brush with a carved jade shaft","one"),
@@ -872,7 +871,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a folded letter on gold-flecked paper tied with a silk cord","two"),
 ("a small gilded pellet drum (trống lắc) with gem tassels, a deep drum with two pellets, not flat","one"),
 ("a silk kite painted like a crane, its string on a gilded reel","two"),
-("a gold-thread embroidered sachet with a gem tassel","dangle"),
+("a gold-thread embroidered small round silk fan with a gem tassel","dangle"),
 ("a gilded perfume flask set with small gems","one"),
 ("a small cloisonné hand bell with a gem tassel","dangle"),
 ("an embroidery hoop in a gold-banded frame with a fine silk scene, cloth stretched flat in two thin rings, a needle in it, never on a handle","hoop"),
@@ -905,7 +904,7 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a small white-jade pellet drum (trống lắc) with pearl strings, a deep drum with two pellets, not flat","one"),
 ("an embroidery hoop in a gold-and-pearl frame with a fine silk scene, cloth stretched flat in two thin rings, a needle in it, never on a handle","hoop"),
 ("a white-jade name seal with a pearl tassel","one"),
-("a pearl-embroidered silk sachet with a jade tassel","dangle"),
+("a pearl-embroidered small round silk fan with a jade tassel","dangle"),
 ("a white-jade flower basket with gold handles","basket"),
 ("a calligraphy brush with a white-jade shaft and a gold cap","one"),
 ("a string of pearls and white-jade beads held as a hand ornament","dangle"),
@@ -1024,7 +1023,7 @@ ACC={}
 LAD={4:"a layered silk robe of two or three visible layers with WIDE gold-thread embroidered borders of {mot} at collar, sleeves and hem, an embroidered cloud collar (yunjian) over the shoulders and an embroidered silk sash; elegant high chignon with gold and jade hairpins and small dangling gold bu yao tassel hairpins",
 5:"a silk brocade robe richly embroidered in gold with phoenixes and peonies, long trailing wide sleeves, a gold-embroidered waistband with hanging jade belt pendants and tassels, a sheer silk shawl; high ornate chignon with a LARGER gold headdress with dangling gold tassels and jade pins",
 6:"a HEAVY silk brocade robe in SATURATED {main} silk, embroidered with phoenixes and {mot} in {main} and gold thread along the borders, an embroidered {main} pearl-edged cape/stole over the shoulders, gold-and-jade bracelets; tall chignon crowned by a BIG ornate gold headdress with pearls, gold flowers and many gold tassels",
-7:"a near-empress ceremonial robe of SATURATED {main} silk, embroidered with phoenixes and auspicious clouds in gold thread on the chest and along the borders, a jewelled cloud-collar cape edged with pearls and gold over the shoulders, strands of pearls across the chest, a jade-and-gold belt with long tassels, a long flowing {main} train behind her; tall grand chignon crowned by a LARGE ornate gold phoenix crown (grander and taller than a noble consort's headdress, only a little smaller than the Empress's) with spreading gold phoenix wings, pearl strands, kingfisher-blue inlay and many dangling gold tassels",
+7:"a near-empress ceremonial robe of SATURATED {main} silk, embroidered with phoenixes and auspicious clouds in gold thread on the chest and along the borders, a jewelled cloud-collar cape edged with pearls and gold over the shoulders, pearl strands lying flat on the cloud-collar cape, a jade-and-gold belt with long tassels, a long flowing {main} train behind her; tall grand chignon crowned by a LARGE ornate gold phoenix crown (grander and taller than a noble consort's headdress, only a little smaller than the Empress's) with spreading gold phoenix wings, pearl strands, kingfisher-blue inlay and many dangling gold tassels",
 8:"the Empress's imperial phoenix ceremonial robe of SATURATED {main} silk with large phoenixes and clouds embroidered in gold thread, a jewelled layered gold-and-pearl cloud-collar cape over the shoulders, many pearl strands, a jade-and-gold belt with long tassels, a VERY long {main} trailing train; the GRANDEST headdress of all: a FULL tall gold phoenix crown with nine gold phoenixes, pearls, kingfisher-blue inlay, and long pearl strands hanging at the sides; the most splendid outfit of all, clearly grander than every other rank"}
 ACC={"cherry-blossom pink and pale green":"pale green","lotus pink and celadon":"celadon"}
 WHITE=("ivory","white","moonlight")
@@ -1227,10 +1226,8 @@ def build_low(c,t,v="v0"):
         # F1 (owner verdict 19/11 ~03:05Z item 1: "mày không có hề copy cái request ... của bên tầng qua ... tầng cũ ... theo hoa theo chim ngay trên cái áo"): the OLD Tần robe+embroidery clause is copied WHOLE (W72 golden_low @d18fae6 = the prompt of the old t1t6 Tần images): "a layered silk robe of two or three visible layers with WIDE gold-thread embroidered borders of <motif> at collar, sleeves and hem" ... "an embroidered silk sash"; only its cloud collar is replaced by the approved capelet (swap design).
         _G20=AGE in ("a18","a26")   # G22 (owner 20/11 via ROOT-69) + DENSITY LOCK (owner L2006: 'rất đẹp, giữ mật độ thêu của Tần như thế này', thu Tần L1994 VX7nsw2MMU): t4 Tần a18/a26 = G17 square cut (richer) + a few MEDIUM flowers on robe body+sleeves and flower sprays on the skirt front (more than Thường tại, fewer than Phi; was: a few LARGE flowers); collar embroidery NOT mentioned at all (owner correction 20/11 via ROOT-70: 'cổ áo bậc tầng đừng có đề cập gì tới hết'); a36+ = COLLAR1 crossed collar, unchanged
         _G20B=(f"WIDE gold-thread embroidered borders of {_m.group(1)} at sleeves and hem, a few MEDIUM embroidered {_m.group(1)} scattered on the robe body and the sleeves (clearly more than at Thường tại, still fewer than the Phi) and sprays of {_m.group(1)} on the skirt front" if _G20 else f"WIDE gold-thread embroidered borders of {_m.group(1)} at collar, sleeves and hem")
-        _G20=AGE in ("a18","a26")   # G22 (owner 20/11 via ROOT-69): t4 Tần a18/a26 = G17 square cut (richer) + a few LARGE flowers (fewer than Phi); collar embroidery NOT mentioned at all (owner correction 20/11 via ROOT-70: 'cổ áo bậc tầng đừng có đề cập gì tới hết'); a36+ = COLLAR1 crossed collar, unchanged
-        _G20B=(f"WIDE gold-thread embroidered borders of {_m.group(1)} at sleeves and hem, a few LARGE embroidered {_m.group(1)} on the robe (fewer than Phi)" if _G20 else f"WIDE gold-thread embroidered borders of {_m.group(1)} at collar, sleeves and hem")
         _G20N="a crossed collar"   # TAN-REVERT (owner 20/11 ~18:45Z, verbatim: "Không, bậc tần tao đã trả về cổ áo trước đó, không còn vuông như 3 bậc dưới nữa"): G22's square neckline ("the low square neckline of rank 1, richer gold-brocade edge, NO crossed collar") removed at a18/a26 -> the pre-G22 collar words (same as a36+); G22's big flowers + no collar-embroidery words (_G20B) kept
-        o=o.replace(_m.group(0),f"a layered silk robe of two or three visible layers with {_G20B}, {_G20N}, long trailing wide sleeves, an embroidered silk sash with jade belt pendants and tassels, and her ONE signature piece: a short round embroidered silk capelet (not cloud-shaped, scalloped or pointed) over only the shoulders and upper chest, a jade clasp at the throat{TAN_CAPE_PEARLS}; no cloud collar, vest or stiff shoulder pieces; gold and jade hairpins")
+        o=o.replace(_m.group(0),f"a layered silk robe of two or three visible layers with {_G20B}, {_G20N}, long trailing wide sleeves, an embroidered silk sash with silk tassels, and her ONE signature piece: a short round embroidered silk capelet (not cloud-shaped, scalloped or pointed) over only the shoulders and upper chest, a jade clasp at the throat{TAN_CAPE_PEARLS}; no cloud collar, vest or stiff shoulder pieces; gold and jade hairpins")
         o=o.replace("gold and jade hairpins and small dangling gold bu yao tassel hairpins","gold and jade hairpins with small dangling gold bu yao tassels",1).replace(", gold only as embroidery accents, NOT a cream",", NOT a cream",1)   # ITEMFIX2: gold-accent words said twice more below (COLOUR RULE, TWO-COLOUR RULE)
     if t==5:   # owner 18/11 ~22:05Z: Phi redesigned (not the t3 cut, not the rejected collar): next step of the Tan -> Quy phi neck piece (t4 cloud collar, t6 pearl-edged collar + cape, t7 jewelled cloud-collar cape)
         _a="a silk brocade robe richly embroidered in gold with peonies and small birds, long trailing wide sleeves, a gold-embroidered waistband with hanging jade belt pendants and tassels, a sheer silk shawl; high ornate chignon with a LARGER gold headdress"
@@ -1239,7 +1236,7 @@ def build_low(c,t,v="v0"):
         if _pv: o=o.replace(_a,PHI_VAR[_pv[0]]+"; a LARGER gold headdress")
         else:
             # TAN <-> PHI SWAP (owner 19/11 ~01:20Z, FIGURE_GATE last line): t5 Phi = the OLD t4 Tan DESIGN (layered robe of two or three visible layers, embroidered cloud collar (yunjian) over the shoulders, waist tie) at the t5 Phi LUXURY level (old t5 default words: silk brocade court robe richly embroidered in gold, scalloped gold-thread edge + gold tassel fringe, deep brocade cuffs, broad gold brocade girdle with jade pendants, peony medallions, LARGER gold headdress). "larger than the rank below" dropped (t4 no longer has a cloud collar).
-            o=o.replace(_a,"a layered silk brocade court robe of two or three visible layers, richly embroidered in gold with peonies and small birds, "+CAPE5_VK+", long trailing wide sleeves with deep brocade cuffs, a broad gold brocade girdle with two long jade pendants hanging on silk cords, the front of the skirt embroidered with large peony medallions, a sheer silk shawl; a LARGER gold headdress")   # F1 (owner verdict 19/11 ~03:05Z item 2): OLD Phi light sheer silk outer layer, words copied verbatim from the old t5 text ("a sheer silk shawl")
+            o=o.replace(_a,"a layered silk brocade court robe of two or three visible layers, richly embroidered in gold with peonies and small birds, "+CAPE5_VK+", long trailing wide sleeves with deep brocade cuffs, a broad gold brocade girdle, the front of the skirt embroidered with large peony medallions, a sheer silk shawl; a LARGER gold headdress")   # F1 (owner verdict 19/11 ~03:05Z item 2): OLD Phi light sheer silk outer layer, words copied verbatim from the old t5 text ("a sheer silk shawl")
     if LV is not None: o=o.replace("NOT yellow, ","")   # v1/v2: no yellow words outside the t6 small-touch clause
     assert "phoenix" not in o,(c,t)
     s=PRE+f" An imperial consort. Her face: {face}. From the identity reference keep ONLY her face, facial features, hairstyle colour and signature colour family; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose. {AGE_TXT[AGE]} "+o+"."
@@ -1300,7 +1297,7 @@ TH_ITEMS=[("a string of sandalwood prayer beads","one"),("a jade-headed dragon-h
 ("a thread-bound almanac in a brocade cover","two"),
 ("a calligraphy brush with a sandalwood shaft","one"),
 ("an old-jade name seal with a silk tassel","one"),
-("a small sachet of longevity-pattern brocade","one"),
+("a small round fan of longevity-pattern brocade","one"),
 ("a carved sandalwood comb, held in the hand","one"),
 ("an embroidered silk handkerchief with longevity characters","one"),
 ("a small sandalwood birdcage with its brocade cover drawn back","two"),
@@ -1478,7 +1475,7 @@ def build_mama(c):
     fw=(f" Her face: {face}." if face else " Her face and facial features exactly as in the identity reference image.")
     s=PRE+" A palace ma ma (ma ma, a senior woman of the palace staff), dignified, gracious and still beautiful."+fw+MAID_IDENT+" "+AGE_TXT[AGE]
     fk,fc=MAMA_FLOWERS[(n-1)%len(MAMA_FLOWERS)]
-    s+=(" Outfit (the ma ma costume, exactly the cut of image 3, never poor): a long robe of fine embroidered silk brocade with a subtle woven pattern; a sleeveless embroidered over-vest with a stand collar closed by a small knot button, with a band of gold-edged trim down the front, worn over a crossed-collar inner robe; wide layered sleeves hanging softly, each with a broad embroidered cuff band; a short front layer made of TWO separate long embroidered front panels (hai tà, never one single panel), one hanging down each side of the front from the waist, each with a gold-edged border, the centre front of the skirt showing between them, over a layered, softly pleated skirt with a band of flower embroidery along the hem; a wide silk sash tied in a bow at the waist, a small embroidered silk fragrant sachet (túi thơm) on a silk cord with a tassel hanging at the centre between the two panels; delicate cream-and-blush peony and plum-blossom embroidery over the vest, sleeves, panel and hem; hair exactly as in the identity reference image (her own bun and hairpins kept), and one small fresh "+fk+" in "+fc+" tucked beside the bun; soft slippers; the sleeves are wide, a palace ma ma's sleeves (never a consort's long trailing sleeves).")
+    s+=(" Outfit (the ma ma costume, exactly the cut of image 3, never poor): a long robe of fine embroidered silk brocade with a subtle woven pattern; a sleeveless embroidered over-vest with a stand collar closed by a small knot button, with a band of gold-edged trim down the front, worn over a crossed-collar inner robe; wide layered sleeves hanging softly, each with a broad embroidered cuff band; a short front layer made of TWO separate long embroidered front panels (hai tà, never one single panel), one hanging down each side of the front from the waist, each with a gold-edged border, the centre front of the skirt showing between them, over a layered, softly pleated skirt with a band of flower embroidery along the hem; a wide silk sash tied in a bow at the waist; delicate cream-and-blush peony and plum-blossom embroidery over the vest, sleeves, panel and hem; hair exactly as in the identity reference image (her own bun and hairpins kept), and one small fresh "+fk+" in "+fc+" tucked beside the bun; soft slippers; the sleeves are wide, a palace ma ma's sleeves (never a consort's long trailing sleeves).")
     if elder:
         # owner Lượt 397 item 3 (FIGURE_GATE LAW #1): a51/a65 keep the person's OWN a36 colour, each age a deeper step of the same family ("darker does not mean the same shade"); the old brown a51/a65 stay as skins
         if AGE=="a51": step=f"a DEEPER, more muted, mature shade of her {main}: a deeper muted {main}, clearly darker and less fresh than at 36 but still clearly {main}"
@@ -1535,10 +1532,10 @@ def build_maid(c,state):
         colr=f"the whole uniform is one plain faded {col}"
         tone=""
     elif k==1:
-        s+=f" Outfit (a palace maid's uniform): a fine fresh {main} silk palace maid's uniform with visible delicate embroidery (floral borders on the layered collar, sleeves and hem, small embroidered flower motifs), crisp fabric folds, a decorative sash with a small embroidered silk fragrant sachet (túi thơm) hanging from it; hair in neat double buns with one or two elegant silver hairpins with small pearls; light makeup. Sleeves about one hand-span wide, a palace maid's sleeves (never a consort's long trailing wide sleeves)."
+        s+=f" Outfit (a palace maid's uniform): a fine fresh {main} silk palace maid's uniform with visible delicate embroidery (floral borders on the layered collar, sleeves and hem, small embroidered flower motifs), crisp fabric folds, a decorative sash; hair in neat double buns with one or two elegant silver hairpins with small pearls; light makeup. Sleeves about one hand-span wide, a palace maid's sleeves (never a consort's long trailing wide sleeves)."
         colr=f"her main colour {main}"; tone=TM_TONE
     elif k==2:
-        s+=f" Outfit (a senior palace maid, nhị đẳng): a fine silk ruqun in {main}, with woven brocade trim at collar, cuffs and hem, a layered half-sleeve brocade jacket (bijia) on top, an embroidered silk sash with a small embroidered silk fragrant sachet (túi thơm) hanging from it on a silk cord; neat double-loop buns with several silver and pearl hairpins; clearly finer than an ordinary maid. Sleeves about two hand-spans wide, a palace maid's sleeves (never a consort's long trailing wide sleeves)."
+        s+=f" Outfit (a senior palace maid, nhị đẳng): a fine silk ruqun in {main}, with woven brocade trim at collar, cuffs and hem, a layered half-sleeve brocade jacket (bijia) on top, an embroidered silk sash; neat double-loop buns with several silver and pearl hairpins; clearly finer than an ordinary maid. Sleeves about two hand-spans wide, a palace maid's sleeves (never a consort's long trailing wide sleeves)."
         colr=f"her main colour {main}"; tone=TM_TONE
     elif k==3:
         s+=" Outfit (the palace mistress of servants): a dignified long robe of rich silk in a LIGHTER, softer plum purple (still clearly the purple family, not dark, not deep), with subtle tone-on-tone woven pattern and neat embroidered borders, a brocade waist sash with a ring of brass keys and a small ledger pouch hanging at her waist; one gold hairpin and a small gold comb in her hair; an air of calm authority, mature and respected, still beautiful. Sleeves about three hand-spans wide."
@@ -2020,22 +2017,24 @@ HAIRFL_NONE=("a pink silk flower",)
 # n = the number in her id (c07 -> 7, as owner-copy/pr-night-1119/mk.py); embroidery flower t1–t6 = the same species; t7 HQP / t8 HH embroidery = her t6 species
 # (owner Lượt 1342; still NO hair flower at t7/t8). Entries = (singular, plural, VN label); short builder names of FLORA1's prompt words (petal form kept, colour left
 # to F3 'flower colour suits her outfit'). Replaces JOB 2's MOTIF_LOW species (one per person) — every person now has a species (the 17 'pink silk flower' included).
-F2_FL={1:[("osmanthus cluster","osmanthus clusters","quế"),("lilac spray","lilac sprays","tử đinh hương"),("pear blossom","pear blossoms","lê"),
+F2_FL={1:[("osmanthus cluster","osmanthus clusters","quế"),("lilac flower","lilac flowers","tử đinh hương"),("pear blossom","pear blossoms","lê"),
           ("single peach blossom","single peach blossoms","đào đơn"),("plum blossom","plum blossoms","mai đỏ")],
        2:[("cymbidium orchid","cymbidium orchids","lan"),("tiger lily","tiger lilies","ly hổ"),("narcissus flower","narcissus flowers","thủy tiên"),
           ("lily magnolia","lily magnolias","mộc lan tím"),("pomegranate flower","pomegranate flowers","lựu")],
        3:[("michelia blossom","michelia blossoms","ngọc lan"),("semi-double China rose","semi-double China roses","hồng nguyệt quý"),
           ("double azalea","double azaleas","đỗ quyên kép"),("semi-double rose of Sharon","semi-double rose-of-Sharon flowers","mộc cận kép"),
-          ("wintersweet sprig","wintersweet blossoms","lạp mai")],
+          ("wintersweet blossom","wintersweet blossoms","lạp mai")],
        4:[("epiphyllum (queen of the night) flower","epiphyllum flowers","quỳnh"),("lotus flower","lotus flowers","sen hồng"),
           ("double peach blossom","double peach blossoms","bích đào"),("double kerria pompon","double kerria pompons","đệ đường kép"),
           ("double daylily","double daylilies","huyên thảo kép")],
        5:[("formal double camellia","formal double camellias","trà kép trắng"),("double hollyhock","double hollyhocks","thục quỳ kép"),
           ("tea-scented China rose","tea-scented China roses","hồng trà vàng"),("double cotton-rose hibiscus","double cotton-rose hibiscus flowers","phù dung kép"),
           ("peony-flowered Chinese aster","peony-flowered Chinese asters","thúy cúc")],
-       6:[("tree peony","tree peonies","mẫu đơn"),("incurved chrysanthemum","incurved chrysanthemums","cúc đại đóa"),
+       6:[("centifolia hundred-petal rose","centifolia hundred-petal roses","hồng bách diệp"),("formal double thousand-petal camellia","formal double thousand-petal camellias","trà ngàn cánh"),
           ("thousand-petal lotus","thousand-petal lotuses","sen ngàn cánh"),("mophead hydrangea","mophead hydrangeas","cẩm tú cầu"),
-          ("bomb-form herbaceous peony","bomb-form herbaceous peonies","thược dược cầu")]}
+          ("double crabapple blossom","double crabapple blossoms","hải đường kép")],   # BUILDFIX1: F19 (4) (owner L1723/L1726): no chrysanthemum, no peony at t6
+       7:[("bomb-form herbaceous peony","bomb-form herbaceous peonies","thược dược cầu")]*5,   # F19 (3): t7 HQP embroidery = bomb-form herbaceous peony
+       8:[("tree peony","tree peonies","mẫu đơn")]*5}   # F19 (3): t8 HH embroidery = tree peony
 def f2_n(c):
     m=re.fullmatch(r"[a-z]+(\d+)",c or ""); return int(m.group(1)) if m else None
 # flower species words as they occur in the t1–t6 outfits (plural forms first, then the adjective/singular form used in 'peony medallions', 'lotus scrolls' …)
@@ -2047,7 +2046,7 @@ def hairflower_species(c,t):
     """F2 (Lượt 1352): her species at rank t (t7/t8 -> her t6 species, embroidery only)."""
     n=f2_n(c)
     if not n or not isinstance(t,int) or not 1<=t<=8: return None
-    return F2_FL[min(t,6)][(n-1)%5]
+    return F2_FL[t][(n-1)%5]   # BUILDFIX1: t7/t8 = their own F19 (3) peony (was the t6 species)
 def flower_outfit(o,c,t):
     sp=hairflower_species(c,t)
     if not sp or "Outfit (" not in o: return o
