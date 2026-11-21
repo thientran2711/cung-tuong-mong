@@ -32,7 +32,7 @@ No new number (law 4: one-core PASS). New player words: «… đã có người 
 | 7 | found: home / holder / Nội vụ phủ | jlost loFind | guest: into her NPC copy (vanished) | guest: Nội vụ phủ; host/solo unchanged |
 | 8 | hearings, askback, giveback, handin, sneak, holder hands in, owner asks, plant on owner, j92 wdFrameTake, Soát rương | jlost / j92 | holder copy taken out then lostReturn(e.lo) | unchanged (already one home) |
 | 9 | stale case closed (piece already in a chest) | jil ilStaleCases | — | unchanged |
-| 10 | co-op NPC thief on her (famApply rm lost / ret) | jcoopworld | piece in the friend's real chest | unchanged |
+| 10 | co-op NPC thief on her (famApply rm lost / ret) | jcoopworld | «ret» pushes a copy of c.e without checking the piece is home (dup); «rm» itemAt falls back to any piece of that kind (vanish) — found by E30d coop-dresscode-scan | **OPEN → E44** (review/coop-famops, stacked on 2fa2e667); my table had it wrong as «unchanged» |
 | 11 | dresscode loans (dcOwnFit / loOk e.bor) | not on main | guarded on review/dresscode-fix-r3 | n/a |
 
 ## Scans (NEW dev/test/lost-one-home-scan.js solo · NEW dev/test/coop-lost-scan.js 2 seats, LIVE Worker)
