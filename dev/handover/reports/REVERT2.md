@@ -48,3 +48,38 @@ Owner L1814: t1–t3 fabric = G28 opaque → the _g28 twins became s62_t{1,2,3}_
 
 ## JOB 4 — winter fur = approved G26 ladder (owner L1825) — DONE (0 gens)
 dev/art/winter1/s62_tN_dong_L1825.txt = the _L1803 files with ONLY the fur sentence replaced by the gate text VERBATIM: t1–t3 W01 (Lông 1, about a hand's width), t4–t6 W02 (Lông 2, VERY WIDE, about two and a half hands), t7 + t8 W03 (Lông 3, WIDEST, THICKEST, about three and a half hands = seasons4/s62_t8_dong_LONG3moi.txt, checked identical). Chars t1–t8: 8998 8510 9399 9695 8762 9552 9592 9795. Gate PASS ×8, keep PASS ×8. G55 + W_L1803 gate forms marked SUPERSEDED.
+
+## JOB 5 — AUDIT swap round-trip Phi t5 / Quý phi t6 (owner L1829, 0 gens, nothing fixed)
+Baselines (pre-swap): thu = rank8-s62/s62_t5.txt + s62_t6.txt (Set A; t6 there is still the ONE-layer cape/stole, pre-G1); winter = winter1/s62_t{5,6}_dong.txt (sheet); xuân = swap56/base/s62_t{5,6}_XUAN_COMOI.txt; builder = swap56/base/s62_t{5,6}.txt. Current: thu *_L1803s, winter *_L1825, xuân *_XUAN_COMOI_L1803s, build_all s62 5/6. Full raw word diff: dev/handover/reports/REVERT2_audit_swap.txt (script REVERT2_audit_swap.py; WHY taken from each file's .keep chain).
+| file | sentence | lost / added / changed | WHY |
+|---|---|---|---|
+| thu t5+t6 | opening | "Full-body standing figure … fair porcelain skin" lost | L1714 row 24 (repeat) |
+| thu t5+t6 | looks | "face clearly visible, 3/4 or frontal view" lost | L1714 row 23/24 (allowed in rank8→revert_sq keep) |
+| thu t5+t6 | colours (outfit, COLOUR, TWO-COLOUR, HELD ITEM) | ice blue/mint mist → light olive/lilac | L1714 row 21 thu palette |
+| thu t5 | outfit | peonies → double hollyhocks; hair flower → deep rose-pink double hollyhock, bloom only | L1714 row 20 species + L1723 |
+| thu t5+t6 | outfit | + SQUARE collar block (low square neckline, flat band in 2nd colour) | G53 L1747/L1776 |
+| thu t5+t6 | outfit | + "the body motifs never over the borders or bands" | L1776 fix chain |
+| thu t5 | outfit | cloud collar + "light olive", "open at the front, never hiding the square collar" | L1803 swap cancel + G53 |
+| thu t5 | outfit | + "a SHORT strand of small round pearls swags ACROSS her chest" | L1797 |
+| thu t5 | outfit | pearl NET / beaded yoke + small-pearl fringe (L1797 sizes) — LOST in JOB3 (not in pre-swap, it came with the swapped cape) | **DRIFT vs owner L1329/L1598/L1797 (net ordered for Phi)** |
+| thu t5+t6 | outfit / hair | + "never covered by sleeve or shawl" (jade pendants), "none/nothing at the ears" | L1627/L1714 ear + pendant rules (fix chain) |
+| thu t5+t6 | angle / grace / pose / item / slippers | changed | L1714 rows 22, 23 (new angle, pose, item, toe tips) |
+| thu t6 | outfit | ice blue pearl-edged ONE-layer cape/stole → TWO layered SOFT draping short capes, pearl-edged | G1 (two capes) + L1803 + L1797 drape feel (Foreman JOB3) |
+| thu t6 | outfit | pre-swap two-cape words "both resting on the shoulders", "never covering the neckline" not used | **DRIFT (my JOB3 wording)** |
+| thu t6 | outfit | "necklace and" lost | L1714 row 12 no necklaces |
+| thu t6 | luxury | + "with a little jade: small green jade beads set among the pearls" | L1794/L1797 fix chain |
+| thu t6 | yellow | "image 2 is only a colour reference…" lost; + pendants never covered | A38 trim (repeat) + L1627 |
+| thu t6 | + JEWELLERY: no red stones… | added | L1799 no red |
+| thu t5+t6 | PHI BẠCH | mint mist → ivory-cream + thin gold edge; t6 thicker | L1801 + L1804 |
+| winter t5 | FABRIC | gauze → satin đoạn | B26 (gate) |
+| winter t5+t6 | PHI BẠCH | removed | G34/G36, L1803 pt1 |
+| winter t5+t6 | WINTER fur | → W02 Lông 2 | L1825 |
+| winter t5+t6 | collar / capes | IDENTICAL to sheet | — |
+| xuân t5 _L1803s | outfit | "OPEN at the front (its lobes rest on the shoulders and back, never covering the neck or the square inner neckline)" → "open at the front, never hiding the neck" | **DRIFT (my make_comoi wording)** |
+| xuân t6 _L1803s | outfit | "(the upper cape shorter, the lower cape a little longer, both resting on the shoulders, open … pearl-edged)" shortened; "pearl-edged collar and cape trim" → "collar trim" | **DRIFT (length cut to 9 985 + ladder_base still post-swap)** |
+| builder t5 | fabric / flowers / shawl | gauze → satin; peonies → double hollyhocks; "a sheer silk shawl" + PHI BẠCH gone | B26 L1283/L1334; flower_outfit L1303; G36 (builder = xuân/đông, no phi bạch) |
+| builder t5 | pose | + jade pendant stays visible | L1627 pendant rule |
+| builder t6 | outfit | peonies and plum blossoms → incurved chrysanthemums; "necklace and" lost | flower_outfit L1303; L1714 no necklace |
+| builder t6 | luxury | "a pearl-edged collar and cape trim" → "pearl-edged collar trim" | **DRIFT (lost during SWAP56 + length trim; QP has capes again)** |
+| builder t6 | luxury | "rich", "covering", "with more gold ornaments", "clearly", "image 2 is only a colour reference" trimmed; + "her own colour stays clearly the main robe colour…" | Foreman length trims (A38/B26FAB2), no owner order — not swap-related |
+| builder t6 | pose | + sleeves clear of the waist | pendant rule (L1627) |
