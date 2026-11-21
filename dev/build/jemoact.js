@@ -398,9 +398,9 @@ function eaHitMe(p,k,o){try{o=o||{};cnt(EA_N.hitMe,k);const F=BAL.ea.fx[k]||{};c
  const quoH={hot:"Thái hậu đang giận, lúc thỉnh an đập tay xuống án, quở mắng ngươi nặng lời trước mặt mọi người.",even:"Thái hậu đang không vui, lúc thỉnh an nghiêm giọng quở trách ngươi mấy câu trước mặt mọi người.",timid:"Thái hậu đang không vui, lúc thỉnh an thở dài, khẽ trách ngươi mấy câu."}[tk];
  const T={cham:["Bị châm chọc",`<p>${Nm(p)} gặp ngươi ở ngự hoa viên, buông mấy câu châm chọc chua cay. Người xung quanh nghe rõ cả.</p>`,`${Nm(p)} mất mặt (Danh −${F.danh}); ngươi để bụng`,"img/act-dap-tra-mia-h.webp"],
   ban:[p===S.thO?"Thái hậu ban thưởng":"Hoàng thượng ban thưởng",`<p>${p===S.thO?"Thái hậu":"Hoàng thượng"} đang vui, ban thưởng khắp hậu cung. Thái giám mang bạc đến cung ngươi.</p>`,`Bạc +${F.bac}`,"img/act-thuong.webp"],
-  noi:["Long nhan đại nộ",`<p>Hoàng thượng đang giận, một lời của ngươi chạm đúng chỗ phật ý. Ngài phất tay áo bỏ đi.</p>`,`Sủng −${F.sung}`,"img/act-xu-toi-h.webp"],
+  noi:["Long nhan đại nộ",`<p>Hoàng thượng đang giận, một lời của ngươi chạm đúng chỗ phật ý. Ngài phất tay áo bỏ đi.</p>`,sgStat(-F.sung),"img/act-xu-toi-h.webp"],
   quo:["Thái hậu quở trách",`<p>${quoH}</p>`,`Thái hậu thiện cảm −${o.n||F.th}`,"img/act-xu-toi-h.webp"],
-  nghi:["Hoàng thượng nghi kỵ",`<p>Hoàng thượng mấy hôm nay nhìn ngươi khác hẳn, hỏi han mấy câu bóng gió rồi lạnh nhạt bỏ đi.</p>`,`Sủng −${o.n||0}`,"img/act-xu-toi-h.webp"],
+  nghi:["Hoàng thượng nghi kỵ",`<p>Hoàng thượng mấy hôm nay nhìn ngươi khác hẳn, hỏi han mấy câu bóng gió rồi lạnh nhạt bỏ đi.</p>`,sgStat(-(o.n||0)),"img/act-xu-toi-h.webp"],
   egian:["Long nhan đại nộ",`<p>Hoàng thượng giận dữ đã mấy tuần, giận lây cả hậu cung: chẳng ai được ngài cho sắc mặt tốt.</p>`,o.past||"","img/act-xu-toi-h.webp"],
   evui:["Hoàng thượng sủng ái ra mặt",`<p>Hoàng thượng vui vẻ mấy tuần liền, ngày nào cũng gọi ngươi bầu bạn, ban thưởng không ngớt. Các cung nhìn ngươi bằng ánh mắt khác.</p>`,o.past||"","img/act-thuong.webp"],
   tgian:["Thái hậu quở cả hậu cung",`<p>Thái hậu giận đã mấy tuần; buổi thỉnh an hôm nay, người ${QUO_W[tk]} cả hậu cung, chẳng ai dám ngẩng đầu.</p>`,o.past||"","img/act-xu-toi-h.webp"],
@@ -464,8 +464,8 @@ function eaExtNpc(p,g){const X=E().ext,w=W(),e=p.emo;const ext=e&&g&&eaBarOk(p,g
   else{p.fond=clp((p.fond||0)-N.k.fond,0,100);line=`${p.name} được chiều sinh kiêu, bị phụ hoàng răn (được thương −${N.k.fond}).`}}
  else if(kd==="e"){
   if(sad||ext==="so"){if(typeof catchIll==="function")catchIll(p,sad?"tambenh":"matngu");line=`Hoàng thượng ${sad?"ưu uất":"lo âu"} mấy tuần, long thể bất an.`}
-  else if(ext==="gian"){const n=2*N.e.sung;for(const x of liveC())ap(x,{sung:-n});if(!S.out){apply({sung:-n});eaHitMe(p,"egian",{past:`Sủng −${n}`})}line=S.out?`Hoàng thượng giận lây cả hậu cung, các phi tần đều bị lạnh nhạt (Sủng của mỗi người −${n}).`:eaL("Hoàng thượng giận lây cả hậu cung, ngươi và các phi tần đều bị lạnh nhạt",[`Sủng −${n}`])}
-  else{const f=eaTopSung(),n=2*N.e.sung;if(f){ap(f,{sung:n});if(f===S){try{ghenAll(X.ghen,"ngươi được Hoàng thượng ban thêm sủng ái")}catch(x){}eaHitMe(p,"evui",{past:`Sủng +${n}; kẻ ganh ghen +${X.ghen}`})}else for(const x of liveC())if(x!==f)oanAdd(x,f,Math.round(X.oan/2))}
+  else if(ext==="gian"){const n=2*N.e.sung;for(const x of liveC())ap(x,{sung:-n});if(!S.out){apply({sung:-n});eaHitMe(p,"egian",{past:sgStat(-n)})}line=S.out?`Hoàng thượng giận lây cả hậu cung, các phi tần đều bị lạnh nhạt (Sủng của mỗi người −${n}).`:eaL("Hoàng thượng giận lây cả hậu cung, ngươi và các phi tần đều bị lạnh nhạt",[sgStat(-n)])}
+  else{const f=eaTopSung(),n=2*N.e.sung;if(f){ap(f,{sung:n});if(f===S){try{ghenAll(X.ghen,"ngươi được Hoàng thượng ban thêm sủng ái")}catch(x){}eaHitMe(p,"evui",{past:`${sgStat(n)}; kẻ ganh ghen +${X.ghen}`})}else for(const x of liveC())if(x!==f)oanAdd(x,f,Math.round(X.oan/2))}
    line=eaL(`Hoàng thượng vui, sủng ái ${f?(f===S?"ngươi":f.name):"người bên cạnh"} ra mặt; các cung ganh ghét`,[f?eaN(f,"Sủng",n):""])}}
  else if(kd==="t"){
   if(sad||ext==="so"){eaIll(p,sad?"tambenh":"matngu");line=`Thái hậu ${sad?"ưu uất":"lo âu"} mấy tuần, phượng thể bất an.`}
