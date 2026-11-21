@@ -82,7 +82,7 @@ function kgTdWalk(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const lv=tdEa
  const FEET=H*.74,LAND=H*.84,FIGH=H*.45,figSrc=(()=>{try{return kitFigOf(S)}catch(e){return ""}})(),fig=new Image();if(figSrc){fig.crossOrigin="anonymous";fig.src=figSrc}
  let fb=null;try{if(figSrc)fb=kitFigBody(figSrc,()=>{try{fb=kitFigBody(figSrc)}catch(e){}})}catch(e){}
  const BAD="#c23b22",FONT=kg82Col("--body","sans-serif");
- function pill(t,cx,cy,col,sz){/* kit canvas label (kg82Lbl: outlined text), no private chip */g.save();g.font=`700 ${sz||15}px ${FONT}`;g.fillStyle=col;g.textAlign="center";g.textBaseline="middle";kg82Lbl(g,t,cx,cy,W*.94);g.restore()}
+ function pill(t,cx,cy,tone,sz){kg82Guide(g,t,cx,cy,tone,sz,W-16)}/* the ONE kit guiding line (KIT §13.7.2) */
  function bowlAt(cx,cy,w,ang,hot){/* a porcelain bowl of water, drawn about its foot (cx,cy) */g.save();g.translate(cx,cy);g.rotate(ang);const h=w*.42;
   g.beginPath();g.moveTo(-w/2,-h);g.bezierCurveTo(-w/2,-h*.1,-w*.28,0,0,0);g.bezierCurveTo(w*.28,0,w/2,-h*.1,w/2,-h);g.closePath();const gr=g.createLinearGradient(-w/2,0,w/2,0);gr.addColorStop(0,"#d9cfb8");gr.addColorStop(.35,"#fbf6e8");gr.addColorStop(1,"#cfc3a8");g.fillStyle=gr;g.fill();g.strokeStyle="#3b62a0";g.lineWidth=2;g.stroke();
   g.fillStyle="#3b62a0";g.fillRect(-w*.42,-h*.62,w*.84,3);g.beginPath();g.ellipse(0,-h,w/2,w*.1,0,0,Math.PI*2);g.fillStyle="#7fb6d8";g.fill();g.strokeStyle="#3b62a0";g.stroke();
@@ -95,9 +95,9 @@ function kgTdWalk(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const lv=tdEa
   const nx=mx+mw/2+Math.max(-1,Math.min(1,x))*mw/2;g.fillStyle=col;g.strokeStyle="#fff6dc";g.lineWidth=1.5;g.beginPath();g.moveTo(nx,my+bh/2+1);g.lineTo(nx-8,my+bh/2+14);g.lineTo(nx+8,my+bh/2+14);g.closePath();g.fill();g.stroke();
   /* the guiding word: which way the bowl leans (or is about to) and which half to hold */
   const lean=Math.abs(x)>BAND*.5?Math.sign(x):soon;
-  if(t<2.3)pill("Mỗi bước chân làm bát nghiêng. Giữ nửa khung bên kia để đỡ.",W/2,H*.165,"#6b4a1c",Math.max(11,Math.min(14,W/38)));
-  else if(lean)pill(lean<0?"Bát nghiêng trái · giữ bên phải ▶":"◀ Bát nghiêng phải · giữ bên trái",W/2,H*.165,BAD,Math.max(12,Math.min(15,W/34)));
-  else pill("Bát đang thẳng · giữ vững",W/2,H*.165,good,Math.max(12,Math.min(15,W/34)));
+  if(t<2.3)pill("Mỗi bước chân làm bát nghiêng. Giữ nửa khung bên kia để đỡ.",W/2,H*.165,"wait",Math.max(11,Math.min(14,W/38)));
+  else if(lean)pill(lean<0?"Bát nghiêng trái · giữ bên phải ▶":"◀ Bát nghiêng phải · giữ bên trái",W/2,H*.165,"bad",Math.max(12,Math.min(15,W/34)));
+  else pill("Bát đang thẳng · giữ vững",W/2,H*.165,"go",Math.max(12,Math.min(15,W/34)));
   /* the path: step marks leave her feet and come down to the landing line; the arrow = the way that step leans the bowl */
   g.save();g.strokeStyle="rgba(143,95,12,.8)";g.lineWidth=3;g.beginPath();g.moveTo(W*.22,LAND);g.lineTo(W*.78,LAND);g.stroke();g.restore();
   for(let k=ki-1;k<KN;k++){if(k<0)continue;const kk=kicks[k],dtm=kk.t-t;if(dtm<-.4||dtm>2.4)continue;const u=1-dtm/2.4,y=FEET+H*.03+u*(LAND-FEET-H*.03),sc=.5+.5*u;kg82Spr(g,"mua-mat",W/2,y,W*.13*sc,null,{alpha:.92});
@@ -143,8 +143,8 @@ const TD_CLS={up:"bề trên",peer:"ngang hàng",down:"kẻ dưới"};
 const TD_VOICE={up:[.3,"nhỏ nhẹ"],down:[.48,"ôn tồn"],peer:[.64,"vui vẻ"]};const TD_MOOD={vui:0,lo:.6,"buồn":.9,"giận":1.3};
 function kgTdTalk(box,env){const C=kg82Canvas(box,.78,400),{g,W,H}=C;const BH=mgLev(env,"td_ngon","band"),WIN=mgLev(env,"td_ngon","win"),RATE=mgLev(env,"td_ngon","rate"),FADE=mgLev(env,"td_ngon","fade");
  const cls=kg82Shuf(["up","peer","down","up","peer"]),Q=cls.map(c=>{const L=TD_SPK.filter(s=>s[1]===c);const s=L[Math.floor(Math.random()*L.length)];const m=kg82Shuf(Object.keys(TD_MOOD))[0];return{who:s[0],c,m,talk:1200+Math.random()*1300}});
- const bt=document.createElement("div");bt.className="kg82act";bt.innerHTML=NWB.btn("tdsay","voice",{alt:false,label:"Thưa: giữ để nói, buông khi vào dải xanh"});box.appendChild(bt);const sb=bt.querySelector("#tdsay");
- let r=-1,pts=0,phase="",t0=0,lvl=0,held=false,cut=false,done=false,res=null;const pops=[];const good=K91C.good(),red=K91C.red(),gold=K91C.gold();
+ const bt=document.createElement("div");bt.className="kg82act";bt.innerHTML=NWB.btn("tdsay","voice",{alt:false,label:"Thưa: giữ để nói, buông khi vào dải xanh"});box.appendChild(bt);const sb=bt.querySelector("#tdsay");sb.innerHTML=NWB.ic("voice")+" Thưa";sb.dataset.kgkeep=1;/* labelled button (mg-5s-clear) */
+ let r=-1,okN=0,cutN=0,lateN=0,loudN=0,pts=0,phase="",t0=0,lvl=0,held=false,cut=false,done=false,res=null;const pops=[];const good=K91C.good(),red=K91C.red(),gold=K91C.gold();
  const dm=k91DemoCard(box,"td_ngon-demo",{title:"Nói đúng lúc, vừa tiếng",lines:["Chờ người nói dứt lời; người đang giận, buồn hay lo cần một lúc nguôi (vòng xám).","Vòng sáng xanh là tới lúc thưa: giữ nút Thưa, tiếng nói dâng lên trong thanh.","Buông tay khi tiếng nói nằm trong dải xanh: bề trên thì nhỏ nhẹ, kẻ dưới thì ôn tồn, ngang hàng thì vui vẻ."],art:(g,W,H,now)=>{/* a small moving example: dots → green ring → the voice rises into the band */const y0=44,h=Math.min(H*.36,150),cx=W*.38,k=(now%4200)/4200;
   g.save();k91RR(g,cx-70,y0+h*.2,140,h*.5,14);g.fillStyle="#fffdf6";g.fill();g.strokeStyle=K91C.hair;g.lineWidth=2;g.stroke();
   if(k<.35){for(let i=0;i<3;i++){g.globalAlpha=.35+.65*Math.max(0,Math.sin(now/170-i*.9));g.fillStyle=K91C.ink;g.beginPath();g.arc(cx-20+i*20,y0+h*.45,5,0,Math.PI*2);g.fill()}g.globalAlpha=1}
@@ -152,15 +152,15 @@ function kgTdTalk(box,env){const C=kg82Canvas(box,.78,400),{g,W,H}=C;const BH=mg
   const vx=W*.68,vw=24,lv=k<.45?0:Math.min(.4,(k-.45)*1.2);g.fillStyle="#fffdf6";g.fillRect(vx,y0,vw,h);g.strokeStyle=K91C.hair;g.strokeRect(vx,y0,vw,h);kg82FxLane.zone(g,vx,y0+h*(1-.38),vw,h*.16);
   g.fillStyle="#c23b22";g.fillRect(vx+3,y0+h*(1-lv),vw-6,h*lv);g.restore();return y0+h+22},done:()=>{bt.hidden=false;next()}});
  if(dm)bt.hidden=true;
- function next(){r++;if(r>=Q.length){done=true;return setTimeout(()=>env.end(pts),400)}const q=Q[r];lvl=0;held=false;cut=false;res=null;phase="talk";t0=performance.now();
+ function next(){r++;if(r>=Q.length){done=true;KG82.why=`Vừa tiếng ${okN}/${Q.length} lượt`+(cutN?` · cắt lời ${cutN} lần`:"")+(lateN?` · lỡ lượt ${lateN}`:"")+(loudN?` · nói quá to ${loudN}`:"");return setTimeout(()=>env.end(pts),400)}const q=Q[r];lvl=0;held=false;cut=false;res=null;phase="talk";t0=performance.now();
 }
  const band=()=>{const c=TD_VOICE[Q[r].c][0];return[c-BH,c+BH]};
  function judge(why){if(phase==="judge")return;const q=Q[r],[a,b]=band();let tm=why==="late"?0:cut?.4:1,vo=0;
   if(why==="say"){const d=lvl<a?a-lvl:lvl>b?lvl-b:0;vo=d<=0?1:Math.max(0,1-d/FADE)}else if(why==="loud")vo=0;
-  const got=2*(.3*tm+.7*vo);pts+=got;phase="judge";held=false;sb.classList.remove("on");
+  const got=2*(.3*tm+.7*vo);pts+=got;if(why==="late")lateN++;else if(why==="loud")loudN++;else if(vo>=1)okN++;phase="judge";held=false;sb.classList.remove("on");
   res=[NWB.POP.bad,red];if(why!=="late"&&why!=="loud"){if(vo>=1)res=[cut?NWB.POP.s2:NWB.POP.s3,cut?gold:good];else if(vo>0)res=[NWB.POP.s1,gold]}
   kg82Pluck(vo>=1?3:0,vo>=1);kg82Pop(pops,W/2,H*.5,res[0],res[1]);setTimeout(next,1300)}
- const down=e=>{e.preventDefault();if(done||(dm&&dm.on))return;if(phase==="talk"||phase==="calm"){if(!cut){cut=true;kg82Pop(pops,W/2,H*.5,NWB.POP.bad,red);kg82Pluck(0,false)}return}
+ const down=e=>{e.preventDefault();if(done||(dm&&dm.on))return;if(phase==="talk"||phase==="calm"){if(!cut){cut=true;cutN++;kg82Pop(pops,W/2,H*.5,NWB.POP.bad,red);kg82Pluck(0,false)}return}
   if(phase==="win"){phase="say";held=true;sb.classList.add("on")}};
  const up=()=>{if(phase==="say"&&held){held=false;judge("say")}};
  sb.addEventListener("pointerdown",down);["pointerup","pointercancel","pointerleave"].forEach(ev=>sb.addEventListener(ev,up));sb.addEventListener("contextmenu",e=>e.preventDefault());
@@ -177,6 +177,11 @@ function kgTdTalk(box,env){const C=kg82Canvas(box,.78,400),{g,W,H}=C;const BH=mg
   /* the speaker's bubble and the turn ring */
   const bx=W*.36,by=H*.46,bw=Math.min(W*.5,260),bh=H*.3;g.save();k91RR(g,bx-bw/2,by-bh/2,bw,bh,bh*.3);g.fillStyle="rgba(255,250,236,.95)";g.fill();g.strokeStyle=K91C.hair;g.lineWidth=2;g.stroke();
   g.beginPath();g.moveTo(bx-bw*.18,by+bh/2-2);g.lineTo(bx-bw*.3,by+bh/2+18);g.lineTo(bx-bw*.02,by+bh/2-2);g.fill();g.restore();
+  {/* owner 21/11 ~00:50Z (mg-5s-clear): WHO speaks is drawn (head + shoulders under the bubble tail, named) + one state-driven guiding line */
+   const sx=bx-bw*.28,sy=by+bh/2+Math.max(26,H*.1),hr=Math.max(10,H*.05);g.save();g.fillStyle="#e9d8b8";g.strokeStyle="#5a3a1a";g.lineWidth=2;g.beginPath();g.arc(sx,sy,hr,0,Math.PI*2);g.fill();g.stroke();
+   g.beginPath();g.moveTo(sx-hr*1.7,sy+hr*2.1);g.quadraticCurveTo(sx-hr*1.6,sy+hr*1.05,sx,sy+hr*1.05);g.quadraticCurveTo(sx+hr*1.6,sy+hr*1.05,sx+hr*1.7,sy+hr*2.1);g.closePath();g.fillStyle=q.m==="giận"?"#c9806a":"#b79a62";g.fill();g.stroke();g.restore();
+   g.font=`700 ${Math.max(11,Math.min(14,W/28))}px ${kg82Col("--body","sans-serif")}`;g.textAlign="left";g.textBaseline="alphabetic";g.fillStyle=K91C.ink;kg82Lbl(g,`${q.who} · ${TD_CLS[q.c]}`,sx+hr*1.9,sy+4,W*.78-(sx+hr*1.9));
+   if(phase!=="judge"){const bd=band(),inb=phase==="say"&&lvl>=bd[0]&&lvl<=bd[1];kg82Guide(g,phase==="talk"?`${q.who} đang nói · chờ nói xong`:phase==="calm"?`Người còn ${q.m} · chờ nguôi`:phase==="win"?"Tới lượt ngươi · giữ nút Thưa":`Buông khi tiếng vào dải xanh (${TD_VOICE[q.c][1]})`,W*.4,H*.945,phase==="win"||inb?good:"wait",13,W*.76)}}
   if(phase==="talk"){for(let i=0;i<3;i++){const a=.35+.65*Math.max(0,Math.sin(now/170-i*.9));g.globalAlpha=a;g.fillStyle=K91C.ink;g.beginPath();g.arc(bx-24+i*24,by,6,0,Math.PI*2);g.fill()}g.globalAlpha=1}
   const rg=Math.min(bw,bh)*.62,rx=bx+bw/2+rg*.2,ry=by-bh/2+4;
   const ring=(col,f)=>{g.save();g.lineWidth=7;g.strokeStyle="rgba(58,26,12,.15)";g.beginPath();g.arc(rx,ry,rg*.45,0,Math.PI*2);g.stroke();g.strokeStyle=col;g.beginPath();g.arc(rx,ry,rg*.45,-Math.PI/2,-Math.PI/2+Math.PI*2*f);g.stroke();g.restore()};
