@@ -21,7 +21,7 @@ const KEY="ctm-mgcal",FLAG="ctm-owner-cal";
 function mgCalOwner(){return LS.get(FLAG)==="1"}
 function C(){return (BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.cal)||{on:0,d:[0],k:{}}}
 /* her base on a matching board from the rounds she played (raws[i] at gap ds[i]) */
-function mgCalBase(raws,ds){const n=Math.min(raws.length,ds.length);if(!n)return null;let s=0;for(let i=0;i<n;i++)s+=(+raws[i]||0)-(mgMedD(ds[i])-mgMedD(0));
+function mgCalBase(raws,ds,kind){const n=Math.min(raws.length,ds.length);if(!n)return null;let s=0;for(let i=0;i<n;i++)s+=(+raws[i]||0)-(mgMedD(ds[i],kind)-mgMedD(0,kind));/* kind: its own board shift when BAL.ag.mg2.medK has it (dauho-lv5) */
  return Math.round(cl(s/n,0,10)*10)/10}
 /* the NPC hand band of a kind: {lo, hi, sig} (sig changes when the band changes, so a cached hand is re-rolled from the same hash) */
 /* the NPC hand curve of a kind (owner OD 20/11 ~06:40Z bell curve, OK ~07:15Z; BAL.ag.mg2.hand ctr / sd / grp): the average adult play m = ctr (per kind, "" default),
@@ -42,7 +42,7 @@ function mgCalKinds(){try{return Object.keys(KG82_KIND).filter(k=>{const K=KG82_
 function stale(L,k){const R=C().redo||{};return !!(L&&R[k]&&(+L.t||0)<Date.parse(R[k]))}
 function ok(r,k){return !!r[k]&&!stale(r[k],k)}
 function rec(){try{return JSON.parse(LS.get(KEY)||"{}")||{}}catch(e){return{}}}
-function recSet(kind,raws,ds){const r=rec();r[kind]={raws,ds,b:mgCalBase(raws,ds),t:Date.now()};LS.set(KEY,JSON.stringify(r));return r[kind]}
+function recSet(kind,raws,ds){const r=rec();r[kind]={raws,ds,b:mgCalBase(raws,ds,kind),t:Date.now()};LS.set(KEY,JSON.stringify(r));return r[kind]}
 function mmdd(t){const d=new Date(t||Date.now()),p=n=>String(n).padStart(2,"0");return `${p(d.getMonth()+1)}/${p(d.getDate())}/${d.getFullYear()}`}
 /* the code line for the coordinator: CTM-CAL kind:b/rounds@mm/dd/yyyy … */
 function mgCalCode(r){r=r||rec();/* rv mgcal-redo: a try taken before its game was fixed never goes into the code (broken-board tries are dropped) */return "CTM-CAL "+Object.keys(r).filter(k=>ok(r,k)&&r[k].b!=null).map(k=>`${k}:${r[k].b}/${(r[k].raws||[]).length}@${mmdd(r[k].t)}`).join(" ")}

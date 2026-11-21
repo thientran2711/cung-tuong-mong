@@ -26,15 +26,8 @@ window.MINP=null;
 function minOn(){try{return !!(typeof agOn==="function"&&agOn()&&BAL.ag.min&&BAL.ag.min.on&&tdOn())}catch(e){return false}}
 /* the censor: one living official, drawn once */
 function minNs(){const T=trS();if(!T)return null;if(T.ns&&T.ns.name)return T.ns;const N=BAL.ag.min.ns;
- /* a name no person shares in any form the name mask (j61 k61Vars) reads: full name, given name (last two words), first + last word.
-    MALEN holds only 10 given names and every other man of the world draws from it, so the censor's given name joins two MALEN
-    syllables into a name that is NOT in MALEN (review r1: the old filter fell back to MALEN in 28 of 30 lives) */
- let P=[S].concat(rivals||[]).concat(CLANS.map(c=>T.H[c]).filter(Boolean));try{if(typeof k61All==="function")P=P.concat(k61All())}catch(e){}P=P.filter(p=>p&&p.name);
- const V=new Set(),us=new Set();for(const p of P){const w=String(p.name).split(" ").filter(Boolean);V.add(w.join(" "));if(w.length>=2){V.add(w.slice(-2).join(" "));V.add(w[0]+" "+w[w.length-1])}us.add(tdSur(p.name))}
- const A=[...new Set(MALEN.map(x=>x.split(" ")[0]))],B=[...new Set(MALEN.map(x=>x.split(" ").pop()))];
- const sur=SURN.filter(x=>!us.has(x));const s0=pick(sur.length?sur:SURN);const f0=s0.split(" ")[0];
- const giv=[];for(const a of A)for(const z of B){const g=a+" "+z;if(a!==z&&!MALEN.includes(g)&&!V.has(g)&&!V.has(f0+" "+z)&&!V.has(s0+" "+g))giv.push(g)}
- const h={c:MINC,ns:1,isMin:1,name:s0+" "+(giv.length?pick(giv):pick(MALEN)),age:N.age[0]+R(N.age[1]),sex:"m",pow:N.pow[0]+R(N.pow[1]),sk:N.sk[0]+R(N.sk[1]),af:{}};
+ const us=new Set([S].concat(rivals||[]).concat(CLANS.map(c=>T.H[c]).filter(Boolean)).filter(p=>p&&p.name).map(p=>tdSur(p.name)));/* one name core (jname.js): a name no person shares in any form; the censor's surname is not a house head's */
+ const h={c:MINC,ns:1,isMin:1,name:nmNew("m",{avoidSur:us}),age:N.age[0]+R(N.age[1]),sex:"m",pow:N.pow[0]+R(N.pow[1]),sk:N.sk[0]+R(N.sk[1]),af:{}};
  T.ns=h;return h}
 /* every official of the court (the five heads + the censor) */
 function minAll(){const T=trS();if(!T)return[];return CLANS.map(c=>T.H[c]).filter(Boolean).concat([minNs()])}
