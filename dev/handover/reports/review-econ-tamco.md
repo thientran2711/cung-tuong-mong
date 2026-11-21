@@ -43,3 +43,42 @@ Noise, not a balance shift. HH 12/33 vs 18/40: difference 9 points, SE of the di
 
 Shots: scratch only (/home/user/wt/rv-tamco-shots), deleted with this verdict; none in git or CDN.
 Re-check: reviewer stays idle. On KIT READY + the swap: final-merge origin/main, re-run quickcheck + econ-tamco + roadhp, look at both devices, then LAND READY review/econ-tamco-rv <sha>.
+
+## RE-CHECK 21/11 — review/econ-tamco @ 60703f26d71bf8f9f1d11a75e0ca9d4af843944c (on LIVE 8c8b8b6b) — FOREMAN D #13
+PRIORITY #1 CHECK ('econ-tamco|ton:|ECON_WIN'): KIT_REQUESTS kit-ton-row DONE (KIT §13.16, LIVE e4fd4dcf) | main: j17 actLine ECON_WIN «hỏng: … không mất bạc» | review/econ-tamco only | claims ECON TAMCO #2 CzXkfovc.
+Context: 17 % (start ~12 %). NOTE: LIVE has since moved to 64d2e094 (MAIN CHÍNH 84). The fix round must final-merge it.
+
+### VERDICT: FAIL (1 item). Everything else PASS.
+**F1 — on the ECON_WIN schemes (bribe, block, xinhh: price paid ONLY on success) the road card breaks «shown = charged».** KIT §13.16 / j63 treat «Tốn» as paid either way. The road card puts the scheme price in «Tốn» on all 3 roads and has no «hỏng» line. On a failed bribe, nothing of the price is charged. Seen in econ-tamco.test.js itself (bribe vs Hoàng hậu): the card shows «Tâm cơ -4 · Bạc -82», and a failed roll charges dBac 0, dTc −4. On the hire road the card shows «Bạc −122», and a failure charges −40.
+The same acts' normal act card already says this (j17 actLine: `ECON_WIN.includes(k)` → «hỏng: …, không mất bạc»). Law 11 (whole group) + one source: the road card must follow the same rule.
+Fix: for `ECON_WIN.includes(k)`, every road says what a failure keeps, with the j17 actLine wording and rule (one source, no new text table):
+- plain road: «hỏng: không mất bạc»;
+- Tâm cơ road: Tâm cơ is still spent, the bạc price is not;
+- hire road: the hire is paid, the price is not. Show the hire and the price so the failure cost can be read off the card (e.g. split the Tốn figure, or say it in hỏng).
+Extend econ-tamco.test.js: for an ECON_WIN scheme, force a fail and a success on each road, and check the charged bạc/Tâm cơ against the card's Tốn + hỏng lines (today the test records dBac 0 on a fail and still passes).
+Non-ECON_WIN schemes (spy, poison, musk…) are fine: the price is paid either way, matching «Tốn».
+
+### Gates re-run by the reviewer, one at a time, on 60703f26
+| gate | result |
+|---|---|
+| revert audit `git diff 8c8b8b6b..60703f26` (depth-60 fetch; 8c8b8b6b is an ancestor; no merge resolved by me) | clean: 10 files, all econ-tamco (assemble.py +jtamco, jcoopthinf +ctx «econ», jecon econVeto refund, jtamco, jwhy, KIT_REQUESTS, 2 tests, index/sw). No LIVE hunk reverted. |
+| assemble.py rebuild | index.html unchanged |
+| econ-tamco.test.js Fold 755x1000@2 + iPad 1180x820@2 | PASS (rendered Tốn: «Bạc -82» / «Tâm cơ -4·Bạc -82» / «Bạc -122»; ptime deed path; price scan 0; NPC roads 150/135, bad 0) — but see F1 |
+| econ-tamco-coop.js (live worker) | PASS 17 (both seats see the kit card; guest tc/hire paid ONCE by the host in her context with the odds she saw, nothing paid on her phone; two-way on the friend; host's own road) |
+| coop-e2e.js | 68/68 |
+| kit-ton-row.js | PASS 12 |
+| roadhp-unit | PASS |
+| roadhp-scan | FAIL 10 (untagged «Nhờ» in bd_* Bạc Đồ arcs). The same FAIL 10 on plain LIVE 8c8b8b6b: **pre-existing, not this branch** (for the bd road owner) |
+| quickcheck | PASS 188 s, core gates PASS, old save ok, perf new/live render 234/197, tab 426/414 |
+| shots Fold + iPad (looked at) | card in view, Tốn in kit red, no overflow, no %, odds words |
+
+### Laws on the new code
+- Law 1 two-way / co-op: OK. Her road rides with the act (ECON_HER → runAct ctx «econ»; ptSend/ptLand for sent deeds), the host pays it in her context, and NPCs use the same roads.
+- Law 2: OK.
+- Law 3: OK. The price and the NPC road are refunded when the j95c giá họa gate stops an act. That gate only fires for NPCs (`a===S` passes), so her road needs no refund.
+- Law 4: OK.
+- Law 7: OK.
+- Law 9: OK (kit `ton` field, no CSS).
+- «shown = charged»: OK except **F1** (ECON_WIN).
+N1 (low odds: every road «Liều») and N3 (spy `:15` dead fallback) still stand, non-blocking.
+Fixer: ECON TAMCO #2 session_01964izCzXkfovcY4kd6X4Mk. After the fix: final-merge the newest LIVE, then SẴN SÀNG KIỂM. The reviewer re-runs econ-tamco (+ the F1 fail/success check), econ-tamco-coop, coop-e2e and quickcheck.
