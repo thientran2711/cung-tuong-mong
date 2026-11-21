@@ -588,4 +588,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | huong-cue-2 (sonnet; jnwp/jnwq/jtd theu+td_hanh guiding words + Cách chơi row; briefs/main83-huong-cue-2.md) | review/huong-cue-2 | MAIN CHÍNH 83 | session_01Rc5AsKFt2udUrNe4E57bna | RUNNING | 21/11 01:16Z |
 | mg-craft Thêu keep-memory (opus; OWNER OD 21/11 ~01:05Z: keep «Nhớ mẫu thêu» pattern; stitch → Công «Thêu theo nét») | review/mg-craft-r2-land; briefs/b-mgcraft-theu.md | B | session_01N1tNP3uti359quj6nveReC | RUNNING | 21/11 01:18Z |
 | kit-ton-row-2 KIT KEEPER (sonnet; MAIN CHÍNH 83 follow-ups) | review/kit-ton-row-2; reports/kit-ton-row.md §kit-ton-row-2 | MAIN CHÍNH 83 | session_01Rc5AsMtjP4KTgBZVjENGLs | SẴN SÀNG KIỂM f8d36f6b | 21/11 |
-| REVIEW chai-ramp (BIG opus) of 8338d1f5 | review/chai-ramp-rv; briefs/main83-rv-chai-ramp.md | MAIN CHÍNH 83 | (rv) | RUNNING | 21/11 01:21Z |
+| REVIEW chai-ramp (BIG opus) of 8338d1f5 | review/chai-ramp-rv; briefs/main83-rv-chai-ramp.md | MAIN CHÍNH 83 | session_01Rc5AsJ2gFzDabLoQY1RDFP | RUNNING | 21/11 01:21Z |
