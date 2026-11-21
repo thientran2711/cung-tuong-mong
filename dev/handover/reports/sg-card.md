@@ -127,3 +127,20 @@ sgTxt here because some logs print measured deltas (S.sung − before) and would
 - No visual change (text numbers only; the marker is an invisible no-break space); no new kit part.
 
 SẴN SÀNG KIỂM 03efb82887e44fc7c5d9884beeca834b41914dac (review/sg-card)
+
+## ROLLOVER HANDOVER (SG-CARD r1 → successor) — 21/11 ~10:35Z
+Review r1 = FAIL (dev/handover/reports/review-sg-card.md, 94c57f82). Worker context near the rollover line (START + 25 %), item 2 is a wide
+scan → handing over; the foreman opens the successor. Build on review/sg-card-rv 7786935c (= 03efb828 + LIVE e391b85f, rebuilt).
+State: sgTxt / sgStat in j1 (NBSP marker = already drawn), readers kitParse (j63), kitOptModel (jk2b), jaudit §15; scan dev/test/sg-card-scan.js
+(walk PEND × option × 4 traits × thành/bại + unit cases). Serve the worktree (python3 -m http.server) and run node dev/test/sg-card-scan.js <url> --table;
+baseline for before/after = git show e09fd19a:index.html served beside it.
+TODO (reviewer's list, same family law 4 + 11):
+1. Ranges: jgift.js:206 kmEmpLine «Sủng +2 đến +4» and jts.js:309 tsSummonMe «Sủng +g3..+g7» — only the first number is scaled. Draw both ends
+   with sgStat; move kmEmpAct's typed 2/4 into BAL; extend sgTxt (or the sites) so «Sủng ±N đến|..|– ±M» scales both ends; add range unit
+   cases + a static check for range forms reaching kitParse.
+2. Result / log lines print the raw literal after apply() scaled it (empTeaCard: card +3, log +2, applied +3). Sites (reviewer): j8:343/91/167/262/361/386/489,
+   j24:104, j25:55, j71:370/397, j92:340/389/414, j97:281, jact:168, jgift:213/214/223/224, jpet:95, jroute:125/358, jdh2:94, jexam:148, jts onDone,
+   j4 month events. Rule: print sgStat(v) of the applied literal, or the measured S.sung after − before; NEVER sg a measured delta. Add a result/log
+   pass to the scan (capture log()/Q result text after go(), compare her Sủng with the measured delta) + before/after table.
+3. j7.js:32 guardrumour: typed sung:2 (thành) / danh:-6 (hỏng) applied but not on the card → BAL.eff.j7 keys + shown on the card.
+Re-review gate: scan + quickcheck + coop-e2e + Fold 755x1000 / iPad 1180x820 shots (scratch / CDN img/_review/sg-card, never git) of 2–3 fixed cards.
