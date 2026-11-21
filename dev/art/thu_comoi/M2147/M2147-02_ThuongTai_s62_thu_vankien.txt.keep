@@ -1,0 +1,8 @@
+allow: Mùa Thu · Thường tại · cổ vuông L1776 · phi bạch xanh trăng L1847   # A56 old caption replaced by code
+base: dev/art/thu_comoi/M2147/base_t2_3zKPvAYREY.txt
+allow: sleeves and any cape   # G75 owner L2146: never write cape -> 'vân kiên'
+allow: in LARGE bold letters   # A56 caption = code only
+allow: top-left corner
+allow: on the plain background
+allow: never over her body
+allow: write exactly this Vietnamese text WITH accents
