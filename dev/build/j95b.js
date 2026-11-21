@@ -220,7 +220,7 @@ function j95bHear(r){const y=RV(r.y);if(!y||!y.alive)return;r.known=1;J95B.stat.
 function j95bRumOpts(r,y,x){const oc=j95bClearOdds(r),ot=oddsCl(Math.min(35+eyes(S)*8+(S.tamco||0)/4,90));
  return[{n:`Sang gặp ${y.name} giải bày`,fx:{},x:`${word(oc)} · tốn: ${BAL.m95b.k} khắc · thành: hết hiểu lầm, ${y.name} bớt oán ngươi · hỏng: ${y.name} chưa tin, oán ngươi ${balSg(BAL.eff.j95b.j95bClear_3)} · (chuyện có thật thì khó giải, chỉ nguôi một nửa)`,go:()=>j95bClear(r.u,"card")},
   {n:"Cho người tra xem ai tung tin",fx:{...BAL.m95b.trace},x:`${word(ot)} · tốn: ${BAL.m95b.k} khắc · Bạc ${BAL.m95b.trace.bac} · thành: biết kẻ tung tin, chứng cứ về kẻ ấy ${balSg(BAL.eff.j95b.evJ95bTrace)} · giải bày về sau dễ hơn · hỏng: không lần ra ai`,go:()=>j95bTrace(r.u)},
-  {n:"Mặc kệ",fx:{},x:`kèm: ${y.name} vẫn tin lời đồn, sẽ tìm dịp ra tay với ngươi`,go:()=>log(`Ngươi bỏ ngoài tai lời đồn về ${y.name}.`)}]}
+  {n:"Mặc kệ",fx:{suc:BAL.cv.rest},x:`giữ sức · kèm: ${y.name} vẫn tin lời đồn, sẽ tìm dịp ra tay với ngươi`,go:()=>log(`Ngươi bỏ ngoài tai lời đồn về ${y.name}.`)}]}
 function j95bRumOf(y){const z=j95bZ();for(let i=z.rum.length-1;i>=0;i--){const r=z.rum[i];if(r.y===y.id&&!r.cleared&&wk()-r.w<=J95B.RUMW+4)return r}return null}
 function j95bClearOdds(r){const y=RV(r.y),x=r.x!=null?RV(r.x):null;if(!y)return 5;if(r.truth)return oddsCl(Math.min(Math.round(12+(S.duc||0)/8),30));
  return oddsCl(Math.min(Math.round(40+(S.tai||0)/5+(S.duc||0)/6+(r.traced?20:0)+(x&&evG(S,x)>=1?15:0)-(nv(y,"traceHide"))),90))}
@@ -247,7 +247,7 @@ function j95bWeek(){if(!j95bOn()||S.dead||(typeof isSrv==="function"&&isSrv()))r
   /* a lie from someone with a motive */const g=motiveOK(x,S,"rumor");if(!g.ok)continue;
   if(npcWhy("lieMe",{x})){const y=j95bListener(x);if(y){j95bAct("v"+x.id,"rumor","me",g,"rumor:tick");j95bSeed(x,y,"tick")}}}
  /* those who believe retaliate (the gate sees the rumour as their reason) */
- for(const r of z.rum){if(r.cleared||wk()-r.w>J95B.RUMW)continue;const y=RV(r.y);if(!y||!y.alive||y.out||y.confined)continue;if(!j95dice(30))continue;let t="";try{t=npcAct(y,S)}catch(e){}
+ for(const r of z.rum){if(r.cleared||wk()-r.w>J95B.RUMW)continue;const y=RV(r.y);if(!y||!y.alive||y.out||y.confined)continue;if(!j95dice(BAL.odb.j95b.dcJ95bWeek))continue;let t="";try{t=npcAct(y,S)}catch(e){}
   if(t){J95B.stat.revenge++;log(t);Q.push({t:"Có người ra tay",who:pv(y),opt:1,h:`<p>${t}</p>${r.known?`<p><i>Nghe đồn ${y.name} làm vậy vì tin lời đồn kia.</i></p>`:""}`})}}}
 
 /* ---------------- 5. WIRING ---------------- */

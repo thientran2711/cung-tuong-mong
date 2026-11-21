@@ -94,7 +94,7 @@ function petcGameBox(title,how){const w=document.getElementById("kpcgw");if(!w)r
    NO khắc are spent and nothing runs until «Sẵn sàng»; then the khắc go and run(box) starts the real game. tutor(box, env) = the unscored guided round. */
 function petcRules(kind,title,how,e,tutor,run){const box=petcGameBox(title,how);if(!box)return;PETC.game=kind;PETC.kind=kind;PETC.rdy=0;
  box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="kpcgo">Bắt đầu</button></div>`;
- kgReady(box,{n:"Chăm",t:title,how,e,go:"#kpcgo",pic:"",timed:false,tutor});
+ kgReady(box,{n:"Chăm",t:title,how,e,go:"#kpcgo",pic:"",ev:false,timed:false,tutor});
  try{const t=box.querySelector("#kgrtut")||box.querySelector("#kpcgo");if(t)t.scrollIntoView({block:"nearest"})}catch(e){}
  box.querySelector("#kpcgo").addEventListener("click",()=>{if(PETC.game!==kind||PETC.rdy)return;if(!can(BAL.pet.khac))return;spend(BAL.pet.khac);PETC.rdy=1;box.classList.remove("kgintro");box.innerHTML="";run(box)})}
 /* guided rounds (unscored, nothing saved): the hand shows the move through KG82.peek; ends on the first success or two */
@@ -105,8 +105,8 @@ function petcTutFeed(b,env){const P=tsbPets(S)[PETC.i];const ok=PETC_FOOD[petcKi
  b.querySelectorAll("[data-food]").forEach(x=>x.addEventListener("click",pickEl));if(fig)fig.addEventListener("click",eat);
  KG82.peek=()=>{if(dead)return null;if(!sel)return{sel:`[data-food="${ok}"]`};const f=petcFig();if(!f)return null;const r=f.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height*.55}};
  return()=>{dead=true;KG82.peek=()=>null;if(fig)fig.removeEventListener("click",eat)}}
-function petcTutBath(b,env){const st=petcFig();if(!st)return()=>{};let n=0,a=null,dead=false;b.innerHTML=kitFacts(["Đã vuốt 0/2"]);st.style.touchAction="none";
- const dn=e=>{e.preventDefault();try{st.setPointerCapture(e.pointerId)}catch(x){}a={x:e.clientX,y:e.clientY}},up=e=>{if(!a||dead)return;const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);a=null;if(d<20)return;n++;b.innerHTML=kitFacts([`Đã vuốt ${n}/2`]);if(n>=2){dead=true;KG82.peek=()=>null;setTimeout(()=>env.end(),500)}};
+function petcTutBath(b,env){const st=petcFig();if(!st)return()=>{};let n=0,a=null,dead=false;b.innerHTML=NWB.cnt(2,0);st.style.touchAction="none";
+ const dn=e=>{e.preventDefault();try{st.setPointerCapture(e.pointerId)}catch(x){}a={x:e.clientX,y:e.clientY}},up=e=>{if(!a||dead)return;const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);a=null;if(d<20)return;n++;b.innerHTML=NWB.cnt(2,n);if(n>=2){dead=true;KG82.peek=()=>null;setTimeout(()=>env.end(),500)}};
  st.addEventListener("pointerdown",dn);st.addEventListener("pointerup",up);
  KG82.peek=()=>{if(dead)return null;const r=st.getBoundingClientRect();return{drag:[[r.left+r.width*.5,r.top+r.height*.3],[r.left+r.width*.5,r.top+r.height*.75]]}};
  return()=>{dead=true;KG82.peek=()=>null;st.style.touchAction="";st.removeEventListener("pointerdown",dn);st.removeEventListener("pointerup",up)}}
@@ -136,27 +136,49 @@ function petcFeed(){const P=tsbPets(S)[PETC.i];const ok=PETC_FOOD[petcKind(P.t)]
    const mv=ev=>{g.style.left=ev.clientX+"px";g.style.top=ev.clientY+"px"};mv(e);const up=ev=>{removeEventListener("pointermove",mv);removeEventListener("pointerup",up);g.remove();if(onFig(ev.clientX,ev.clientY))done(sel)};
    addEventListener("pointermove",mv);addEventListener("pointerup",up)})});
  const col=petcFig();if(col)col.onclick=()=>{if(sel&&PETC.game==="feed")done(sel)}})}
-/* game 2: five even strokes along the pet's coat (on its picture) */
-function petcBath(){petcRules("bath","Tắm, chải lông","Vuốt dọc lông nó 5 lần, đều tay (vuốt trên hình nó).","drag",petcTutBath,box=>{const st=petcFig();if(!st)return;PETC.game="bath";
- box.innerHTML=kitFacts(["Đã vuốt 0/5"]);const lens=[];let a=null;st.style.touchAction="none";
- const dn=e=>{e.preventDefault();try{st.setPointerCapture(e.pointerId)}catch(x){}a={x:e.clientX,y:e.clientY}},up=e=>{if(!a||PETC.game!=="bath")return;const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);a=null;if(d<20)return;lens.push(d);
-  box.innerHTML=kitFacts([`Đã vuốt ${lens.length}/5`]);
-  if(lens.length>=5){st.removeEventListener("pointerdown",dn);st.removeEventListener("pointerup",up);st.style.touchAction="";const m=lens.reduce((x,y)=>x+y)/5,sd=Math.sqrt(lens.reduce((x,y)=>x+(y-m)*(y-m),0)/5);petcGain("bath",cl(1-sd/m*1.6,0,1))}};
- st.addEventListener("pointerdown",dn);st.addEventListener("pointerup",up);PETC.bath={dn,up}})}
-/* game 3: the ball lights up under one of three kit buttons in turn; tap the lit one before it moves (3 rounds) */
-function petcPlay(){petcRules("play","Chơi","Quả cầu sáng lên ở một ô rồi lăn sang ô khác: chạm đúng ô đang sáng (3 lần).","tap",petcTutPlay,box=>{PETC.game="play";
- const N=["Trái","Giữa","Phải"];box.innerHTML=`<div class="rbtn">${N.map((x,i)=>`<button type="button" class="kgbtn" data-ball="${i}">${x}</button>`).join("")}</div>`+kitFacts(["Lượt 0/3 · trúng 0"]);
- let lit=-1,n=0,hits=0,tm=0;const B=[...box.querySelectorAll("[data-ball]")];const step=()=>{if(PETC.game!=="play"||!document.body.contains(box)){clearTimeout(tm);return}
-  let j;do{j=Math.floor(Math.random()*3)}while(j===lit);lit=j;B.forEach((b,i)=>b.classList.toggle("on",i===lit));tm=setTimeout(step,Math.max(420,820-n*140))};step();
- PETC.peek=()=>lit;B.forEach((b,i)=>b.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();if(PETC.game!=="play")return;if(i===lit)hits++;n++;
-  const f=box.querySelector(".kfacts");if(f)f.outerHTML=kitFacts([`Lượt ${n}/3 · trúng ${hits}`]);if(n>=3){clearTimeout(tm);PETC.game=null;petcGain("play",hits/3)}else{clearTimeout(tm);step()}}))})}
+/* MG11 (owner OD 20/11 ~08:40Z scan + MAIN ROOT-79 16:25Z: the care games join «Thử tay» and feed her rolling hand b like every kind):
+   the two SKILL care games are ONE engine each (KG82_KIND thu_tam / thu_choi, registered in jmgx.js), played here on her pet AND in Thử tay on the same board.
+   Board ease env.lv (mgPlayLv: the hoc tier, harder as she climbs, law 5) → BAL.mgTier.lev.thu_tam / thu_choi; at the middle ease the board is the old one.
+   The result goes through the ONE result path (mgPlayRes: graded, her hand b learns it, identity offset) and the gain reads it (petcGain score = result / 10).
+   Cho ăn stays outside: picking the food a species eats is knowledge, not a hand (dev/handover/reports/mg11-thutay.md). */
+/* engine: N even strokes along the pet's coat; env.fig = the picture to stroke (her pet on the care screen); none (Thử tay) = her first pet, or a kitten, drawn in the board (kitItem) */
+function petcStrokeEng(box,env){const N=Math.round(mgLev(env,"thu_tam","n")),K=mgLev(env,"thu_tam","k");let st=env.fig||null;
+ const fx=c=>NWB.cnt(N,c);
+ if(!st){let src="";try{const P=(typeof S!=="undefined"&&S)?tsbPets(S)[0]:null;src=P?petcStageSrc(P,1).src:petSrc(Object.keys(PET)[0],1)}catch(e){}
+  box.innerHTML=kitItem({src,name:"",grade:null,size:"lg"}).replace('<span class="kitn"></span>','')+fx(0);st=box.firstElementChild}else box.innerHTML=fx(0);
+ const facts=()=>box.querySelector(".nwb-cnt");const lens=[];let a=null,dead=false;st.style.touchAction="none";
+ const dn=e=>{if(dead)return;e.preventDefault();try{st.setPointerCapture(e.pointerId)}catch(x){}a={x:e.clientX,y:e.clientY}},
+  up=e=>{if(!a||dead)return;const d=Math.hypot(e.clientX-a.x,e.clientY-a.y);a=null;if(d<20)return;lens.push(d);
+   const f=facts();if(f)f.outerHTML=fx(lens.length);env.hud({round:`${lens.length}/${N}`});
+   if(lens.length>=N){off();const m=lens.reduce((x,y)=>x+y)/N,sd=Math.sqrt(lens.reduce((x,y)=>x+(y-m)*(y-m),0)/N);env.end(10*cl(1-sd/m*K,0,1))}};
+ const off=()=>{dead=true;KG82.peek=()=>null;st.removeEventListener("pointerdown",dn);st.removeEventListener("pointerup",up);st.style.touchAction=""};
+ st.addEventListener("pointerdown",dn);st.addEventListener("pointerup",up);env.hud({round:`0/${N}`});
+ KG82.peek=()=>{if(dead)return null;const r=st.getBoundingClientRect();return{drag:[[r.left+r.width*.5,r.top+r.height*.3],[r.left+r.width*.5,r.top+r.height*.75]]}};
+ return off}
+/* engine: the ball lights up under one of three kit buttons in turn; tap the lit one before it moves (N rounds) */
+function petcBallEng(box,env){const L=n=>mgLev(env,"thu_choi",n),N=Math.round(L("n")),M0=L("ms"),DEC=L("dec"),MIN=L("min"),B0=["Trái","Giữa","Phải"];
+ box.innerHTML=`<div class="rbtn">${B0.map((x,i)=>`<button type="button" class="kgbtn" data-ball="${i}">${x}</button>`).join("")}</div>`+NWB.cnt(N,0);
+ let lit=-1,n=0,hits=0,tm=0,dead=false;const B=[...box.querySelectorAll("[data-ball]")];
+ const step=()=>{if(dead||!document.body.contains(box)){clearTimeout(tm);return}let j;do{j=Math.floor(Math.random()*3)}while(j===lit);lit=j;B.forEach((b,i)=>b.classList.toggle("on",i===lit));tm=setTimeout(step,Math.max(MIN,M0-n*DEC))};
+ const off=()=>{dead=true;clearTimeout(tm);KG82.peek=()=>null};env.hud({round:`0/${N}`});step();
+ KG82.peek=()=>dead?null:{sel:`[data-ball="${lit}"]`};
+ B.forEach((b,i)=>b.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();if(dead)return;if(i===lit)hits++;n++;
+  const f=box.querySelector(".nwb-cnt");if(f)f.outerHTML=NWB.cnt(N,n,hits);env.hud({round:`${n}/${N}`});if(n>=N){off();env.end(10*hits/N)}else{clearTimeout(tm);step()}}));
+ return off}
+function petcHow(k){const L=n=>Math.round(mgLev({lv:BAL.mgTier.mid},k,n));return k==="thu_tam"?`Vuốt dọc lông nó ${L("n")} lần, đều tay (vuốt trên hình nó).`:`Quả cầu sáng lên ở một ô rồi lăn sang ô khác: chạm đúng ô đang sáng (${L("n")} lần).`}
+/* game 2: even strokes along the pet's coat (on its picture) */
+function petcBath(){petcRules("bath","Tắm, chải lông",petcHow("thu_tam"),"drag",petcTutBath,box=>{const st=petcFig();if(!st)return;PETC.game="bath";
+ PETC.stop=petcStrokeEng(box,mgPlayEnv("thu_tam",raw=>{PETC.stop=null;petcGain("bath",mgPlayRes("thu_tam",raw)/10)},{fig:st}))})}
+/* game 3: the ball under the three kit buttons */
+function petcPlay(){petcRules("play","Chơi",petcHow("thu_choi"),"tap",petcTutPlay,box=>{PETC.game="play";
+ PETC.stop=petcBallEng(box,mgPlayEnv("thu_choi",raw=>{PETC.game=null;PETC.stop=null;petcGain("play",mgPlayRes("thu_choi",raw)/10)}))})}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-petc]");if(!b||b.disabled)return;e.stopPropagation();const k=b.dataset.petc;
  if(k==="close"){petcClose();return}const P=tsbPets(S)[PETC.i];if(!P)return;if(PETC.game)return;
  if(k==="maid"){petcMaid(PETC.i);return}
  if(!can(BAL.pet.khac))return;/* KIT §13.7 (mg-ui-rest): the tap opens the RULES screen; the khắc are spent only on «Sẵn sàng» (petcRules) */if(k==="feed")petcFeed();else if(k==="bath")petcBath();else if(k==="play")petcPlay()},true);
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kpcquick");if(!b)return;e.stopPropagation();e.preventDefault();const kind=PETC.kind;if(!kind||!PETC.game)return;
  if(!PETC.rdy){if(!can(BAL.pet.khac))return;spend(BAL.pet.khac)}/* «Để trời định» from the rules screen is a play-through too: same khắc */
- kgTutDrop();PETC.game=null;PETC.rdy=0;try{const st=petcFig();if(st&&PETC.bath){st.removeEventListener("pointerdown",PETC.bath.dn);st.removeEventListener("pointerup",PETC.bath.up);st.style.touchAction=""}}catch(x){}
+ kgTutDrop();PETC.game=null;PETC.rdy=0;try{if(PETC.stop)PETC.stop()}catch(x){}PETC.stop=null;/* MG11: the shared engines return their own stop */
  petcQuick(kind)},true);
 /* the engines behind the care buttons (one function each: the tap ends here; co-op thin F4 registers them) */
 function petcMaid(i){const P=tsbPets(S)[i];const m=tsbMaid(S);if(!P||!m)return;P.maidW=tsbWk()+BAL.pet.maidW;petcDraw(`${m.name} nhận chăm ${petT(P).n.toLowerCase()} ${BAL.pet.maidW} tuần.`)}

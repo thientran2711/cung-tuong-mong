@@ -92,10 +92,10 @@ const AOUT={spy:aoLz(()=>`chứng cứ ${balSg(BAL.eff.jtruth.evN)}, Tâm cơ +2
  vp:aoLz("đồ của nàng bị tịch thu, Danh nàng -8, nàng bị phạt",()=>`Danh -3, nàng thù ${balSg(BAL.eff.j8.vpAccuse_2)}`),plant:aoLz("món đồ nằm trong rương nàng",()=>`kẻ cài bị bắt: nàng nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ, thù ${balSg(BAL.eff.j8.plantItem)}`),steal:aoLz(()=>`đoạt đêm nay · kèm: nàng ghen ${balSg(BAL.steal.ghen)}, quý ngươi ${balSg(-BAL.steal.rel)}, oán ngươi +${balOan(-BAL.steal.rel,"hurt")}`,()=>`Sủng ${balSg(-BAL.steal.failSung)}`),road:aoLz(()=>`đoạt đêm nay · kèm: nàng ghen ${balSg(BAL.steal.ghen)}, quý ngươi ${balSg(-BAL.steal.rel)}, oán ngươi +${balOan(-BAL.steal.rel,"hurt")}`,()=>`Sủng ${balSg(-BAL.steal.failSung)}`),gift:["thiện cảm thêm theo món quà",""]};
 const ACAUGHT=["rumor","frame","poison","block","musk","ksab","kpoison","pond","kframe"];
 /* the small line of a scheme button */
-function actLine(k,oddsWord,costHtml){const w=AOUT[k]||["",""];const rolled=!!oddsWord;const L=[oddsWord,costHtml?"tốn: "+costHtml:"",w[0]?"thành: "+w[0]:"",rolled?"hỏng: "+(typeof ECON_WIN!=="undefined"&&ECON_WIN.includes(k)?[w[1]&&w[1]!=="—"?w[1]:"","không mất bạc"].filter(Boolean).join(", "):w[1]&&w[1]!=="—"?w[1]:"không mất gì"):""/* bạc paid only on success (econPayWin) */,ACAUGHT.includes(k)?caughtW():""];return L.filter(Boolean).join(" · ")}
+function actLine(k,oddsWord,costHtml){const w=AOUT[k]||["",""];const rolled=!!oddsWord;const L=[oddsWord,costHtml?"tốn: "+costHtml:"",w[0]?"thành: "+w[0]:"",rolled?"hỏng: "+(typeof ECON_WIN!=="undefined"&&ECON_WIN.includes(k)?[w[1]&&w[1]!=="—"?w[1]:"",ECON_WIN_FAIL].filter(Boolean).join(", "):w[1]&&w[1]!=="—"?w[1]:"không mất gì"):""/* bạc paid only on success (econPayWin) */,ACAUGHT.includes(k)?caughtW():""];return L.filter(Boolean).join(" · ")}
 /* the small line of any option object {o, c, w, l, x, lock} */
 function optLine(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const gain=[fmt(a.w||{}),a.x].filter(Boolean).join(" · ");
- return [rolled?word(o):"",a.c&&fmt(a.c)?"tốn: "+fmt(a.c):"",gain?"thành: "+gain:"",rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,fmt(a.l||{}))||"không mất gì"):""].filter(Boolean).join(" · ")}
+ return [rolled?word(o):"",a.c&&fmt(a.c)?"tốn: "+fmt(a.c):"",gain?"thành: "+gain:"",rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,failTxt(a))||"không mất gì"):""].filter(Boolean).join(" · ")}
 /* a dilemma option {n, fx, x, go}: x usually already holds 'word · thành · hỏng'; fill what is missing */
 /* the option's OWN code (review/odds-meter-back): a go that is a reference to a global scene / step function (go:nightScene) opens the next
    step — the rolls inside that function belong to the next step's own options, not to this option */
@@ -104,7 +104,10 @@ function dilSrc(c){const own=f=>typeof f==="function"&&!(f.name&&typeof window!=
    a card line with no ladder word gets word(p) first, so the meter shows the real odds. No "unknown" odds word exists any more. */
 function oddsLead(c,s){s=String(s||"");if(!c||typeof c.p!=="number"||!isFinite(c.p)||ODDW.test(s))return s;
  const body=s?(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|kèm|được|mất)\s*:/i.test(s)?s:"thành: "+s):"";return [word(oddsCl(Math.round(c.p))),body].filter(Boolean).join(" · ")}
-function dilLine(c){const fx=fmt(c.fx||{}),x=oddsLead(c,c.x);const src=dilSrc(c);let s=x;
+/* kit-ton-row (econ-tamco, FOREMAN_D): an option may carry `ton:{tamco:-n}` / `ton:{bac:-pr}` = a PRICE the fx does not pay itself (the act pays it elsewhere); the card shows it in the «Tốn» row.
+   It is inserted as «tốn: …» right after the odds word unless the line already has a «tốn:» part. Display only: nothing is charged here. */
+function dilTon(c,x){const t=c&&c.ton?fmt(c.ton):"";if(!t||/(^|\s·\s)\s*(?:<[^>]+>)*\s*tốn\s*:/i.test(x))return x;const P=String(x||"").split(" · ");const i=P.length&&ODDW.test(P[0])?1:0;P.splice(i,0,"tốn: "+t);return P.join(" · ")}
+function dilLine(c){const fx=fmt(c.fx||{}),x=dilTon(c,oddsLead(c,c.x));const src=dilSrc(c);let s=x;
  if(!ODDW.test(x)&&!CHW.test(x)){if(/roll\(/.test(src))s=x;/* a roll with no p and no word: j79 reads a literal / global roll(expr); the scan dev/test/odds-unknown-scan.js keeps this at zero */else{if(!fx&&!x)return /^Thôi|^Im lặng|^Để /.test(c.n||"")?"không được mất gì":c.go||c.open?"chọn rồi xem kết quả ở bước sau":"không được mất gì";return [fx?"ngay: "+fx:"",x?(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|kèm|được|mất)\s*:/i.test(x)?x:"thành: "+x):""].filter(Boolean)/* kit-option-rows s34: a sure option whose x already leads with a label keeps it (was "thành: thành: …" -> literal "thành:" under ĐƯỢC) */.join(" · ")}}
  if(!/hỏng/.test(s))s+=" · hỏng: không mất gì";return [fx?"ngay: "+fx:"",s].filter(Boolean).join(" · ")}
 const dilLineRaw=dilLine;/* the raw kit line of a dialog option (before kitParse), read by the kit hint (jk2b kitHint) */

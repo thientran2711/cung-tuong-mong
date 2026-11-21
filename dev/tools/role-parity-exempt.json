@@ -49,7 +49,7 @@
 },
 {
 "reason": "movement (Dư đồ / day-plan place): NPCs move by their day plan (agDrawB + travel(), same khắc) — not an act key",
-"re": "^label:(Đến gặp|Đến cung nàng thăm)"
+"re": "^label:(Đến gặp|Đến cung nàng thăm|Đến cung nàng( ta)? thỉnh an)"
 },
 {
 "reason": "information only — an NPC already holds that knowledge from the record (ag-all-parity.md exemption lists, parts 2e/3)",
@@ -133,5 +133,25 @@
 "maid"
 ],
 "reason": "the decline of srvTalk emp (keep her place, Đức +1): an NPC maid's same choice is keeping her routine instead of «Quỳ dâng trà» (jagstaff mindPick vs BAL.ag.routine) — not an act (B4 role-parity-4b, applied by B3)"
+},
+{
+"reason": "cung nữ thân cận (jtc, owner OD 20/11 ~15:55Z, review/thancan): her person-card button and every NPC master (consort, Hoàng hậu, Thái hậu) run the SAME thcSet with the same BAL.thc gain/loss; the NPC side is the monthly world pass thcNpcAll (monthTick: picks her most loyal trusted maid at BAL.thc.npc.p, lets one go under BAL.thc.npc.drop), not a day-plan provider",
+"label": "Chọn làm cung nữ thân cận"
+},
+{
+"reason": "cung nữ thân cận (jtc, owner OD 20/11 ~15:55Z, review/thancan): her person-card button and every NPC master (consort, Hoàng hậu, Thái hậu) run the SAME thcSet with the same BAL.thc gain/loss; the NPC side is the monthly world pass thcNpcAll (monthTick: picks her most loyal trusted maid at BAL.thc.npc.p, lets one go under BAL.thc.npc.drop), not a day-plan provider",
+"label": "Thôi làm cung nữ thân cận"
+},
+{
+"reason": "Cùng chơi (jpma): ACT.pmplay is only the co-op ask carrier of the ONE act whose NPC side is cx3:pmPlay (agReg consort pm, the same RCVK receiver answers and pmRun); the probe reads the label through ACT.n as a harm key. Both sides hold it (person-minigame-acts, dev/test/person-minigame-acts.test.js)",
+"key": "harm:pmplay"
+},
+{
+"reason": "Thách đấu (jpma): ACT.pmduel is only the co-op ask carrier of the ONE act whose NPC side is cx3:pmDuel (agReg consort pm, the same RCVK receiver answers and pmRun); the probe reads the label through ACT.n as a harm key. Both sides hold it (person-minigame-acts, dev/test/person-minigame-acts.test.js)",
+"key": "harm:pmduel"
+},
+{
+"reason": "UI only (a VIEW: the per-art palace ladder standings «Bảng tài nghệ hậu cung», jpma round C; opens a notice, changes nothing in the world, not an act toward anyone)",
+"re": "^label:Bảng tài nghệ hậu cung$"
 }
 ]

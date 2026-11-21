@@ -123,21 +123,23 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
   return src&&kitOptOnCdn(src)?{src,key:k,how}:null};
  let r=null;
  /* an option that NAMES its person target (Q option field `kgt` = a rival object / "emp" / "th" / "maid") shows that person's kit portrait, whatever its title says (masked "Phi ???" too) */
- try{const m=typeof Q!=="undefined"&&Q[0],o=b&&b.dataset&&b.dataset.m!=null&&m&&m.opts&&m.opts[+b.dataset.m];if(o&&o.kgt){const g=o.kgt;const f=g==="emp"?pEmp():g==="th"?pTH():g==="maid"?kitFace(S.maid):pv(g);if(f&&f.src)return{src:f.src,key:"",how:"face",face:true}}}catch(e){}
+ try{const m=typeof Q!=="undefined"&&Q[0],o=b&&b.dataset&&b.dataset.m!=null&&m&&m.opts&&m.opts[+b.dataset.m];
+  if(o&&o.kgp&&typeof kitFace==="function"){const f=kitFace(o.kgp);if(f&&f.src)return{src:f.src,key:"",how:"face",face:true,f,who:o.kgp}}/* dialog-person (owner 21/11): an option that IS a person (entourage, any servant / NPC target) names her in kgp */
+  if(o&&o.kgt){const g=o.kgt;const f=g==="emp"?pEmp():g==="th"?pTH():g==="maid"?kitFace(S.maid):pv(g);if(f&&f.src)return{src:f.src,key:"",how:"face",face:true,f,who:g==="emp"?S.emp:g==="th"?S.thO:g==="maid"?S.maid:g}}}catch(e){}
  /* kit-size #8 (kit-conform "generic picture on a person option", SRV:night2): an option whose title NAMES a live person shows THAT person's kit portrait (pv: a stranger gives the kit
     silhouette), whatever act / meaning group its words hit. Not inside a person-event frame (the figure column on the left already is that person). Same name test as kit-conform (b). */
- if(t&&b&&b.closest){try{const dl=b.closest(".dlg");if(dl&&!dl.querySelector(".kpsubj.kes,.kszfig")&&typeof liveRivals==="function"&&typeof pv==="function"){const who=liveRivals(true).find(v=>v&&v.name&&v.name.length>3&&t.includes(v.name));const f=who&&pv(who);if(f&&f.src)return{src:f.src,key:"",how:"face",face:true}}}catch(e){}}
+ if(t&&b&&b.closest){try{const dl=b.closest(".dlg");if(dl&&!dl.querySelector(".kpsubj.kes,.kszfig")&&typeof liveRivals==="function"&&typeof pv==="function"){const who=liveRivals(true).find(v=>v&&v.name&&v.name.length>3&&t.includes(v.name));const f=who&&pv(who);if(f&&f.src)return{src:f.src,key:"",how:"face",face:true,f,who}}}catch(e){}}
  if(t){try{r=tryKey(typeof kitActKey==="function"?kitActKey(t):"","act");if(r)return r}catch(e){}
   /* review/pcard-actrow (owner 16/11 "Hình nhân vật đâu?"): an option that is a PERSON (spy target, gift recipient, invite, accuse, visit … any "chọn người"
      — it carries that person's kit portrait chip in its title) shows THAT person's portrait (a stranger: the kit silhouette pv gives), never a meaning-group
      scene picture. Beats the `log` / `rule` groups; a specific act picture (above) still wins. */
-  try{const kn=b&&b.querySelector(".kan");const chip=(kn&&kn.querySelector(":scope > .md"))||(b&&b.querySelector(":scope > .md"));const im=chip&&chip.querySelector("img");const fs=im&&im.getAttribute("src");if(fs&&!/\/ph-(?:act-|event-|[plws]-)/.test(fs))return{src:fs,key:"",how:"face",face:true}}catch(e){}
+  try{const kn=b&&b.querySelector(".kan");const chip=(kn&&kn.querySelector(":scope > .md"))||(b&&b.querySelector(":scope > .md"));const im=chip&&chip.querySelector("img");const fs=im&&im.getAttribute("src");if(fs&&!/\/ph-(?:act-|event-|[plws]-)/.test(fs))return{src:fs,key:"",how:"face",face:true,chip}}catch(e){}
   try{if(typeof kbkRules==="function")for(const [re,k] of kbkRules())if(re.test(t)||re.test(t+".")){r=tryKey(k,"log");if(r)return r;break}}catch(e){}
   for(const [re,k] of KIT_OPT_RULES)if(kitOptHit(re,t)){r=tryKey(k,"rule");if(r)return r;break}}
  /* pickers of people / items: the person's own portrait (as j25 put beside the title) or the item's own picture */
  if(t){try{const v=typeof rivals!=="undefined"?rivals.find(r=>r&&r.name&&t.startsWith(r.name)):null;
    const f=v&&typeof pv==="function"?pv(v):/^Hoàng thượng$/.test(t)&&typeof pEmp==="function"?pEmp():/^Thái hậu$/.test(t)&&typeof pTH==="function"?pTH():null;
-   if(f&&f.src)return{src:f.src,key:"",how:"face",face:true}}catch(e){}
+   if(f&&f.src)return{src:f.src,key:"",how:"face",face:true,f,who:v||null}}catch(e){}
   try{if(typeof IT!=="undefined"&&typeof kitItemSrc==="function"){if(!kitOptPic.items){kitOptPic.items={};for(const k in IT){const n=IT[k]&&itm(k).n;if(n&&!kitOptPic.items[n])kitOptPic.items[n]=k}}
    const k=kitOptPic.items[t]||kitOptPic.items[t.split(" · ")[0]];const s=k?kitItemSrc(k,""):"";if(s)return{src:s,key:"",how:"item"}}}catch(e){}}
  /* a picture the option already carries: that picture, in the slot */
@@ -157,16 +159,41 @@ function kitOptStackTitle(kan){if(!kan||kan.querySelector(".knr")||typeof RANKS=
  const rv=typeof rivals!=="undefined"?rivals.find(r=>r&&r.name===name):null;
  kan.innerHTML=kitRankName(rv||null,{form:"stack",parts:{rank:rk,name}})+(tail?`<span class="kanx">${tail}</span>`:"")}
 window.kitOptStackTitle=kitOptStackTitle;
+/* PERSON OPTION CARD (owner 21/11 ~04:27Z, OD "Bạn đã thật sự làm mấy cái khung theo một cái kit chưa? Mà tại sao cái avatar này không có"): an option that
+   targets / chooses a PERSON (entourage, spy / gift / invite / visit target …) wears the KIT AVATAR part (mdH: the rank frame, ground and badge of her rank,
+   KIT §4.2) in its picture slot — never an event picture, never a loose portrait crop (kitArtFrame) — and its title is the kit STACK rank / name (kitRankName).
+   ONE builder: kpOptArt (every option), jgift (gift rows) both call it. */
+function kitOptAvatar(b,f,who,src){try{if(!b||!f||typeof mdH!=="function")return false;const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");
+ let art=b.querySelector(":scope > .kaart");if(!art){let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
+  art=document.createElement("span");art.className="kaart";b.prepend(art)}
+ art.innerHTML=mdH(f,"big");art.classList.add("kaav");art.dataset.kzoom=src||f.src||"";art.title="Chạm để xem tranh";
+ b.querySelectorAll(":scope > .md").forEach(x=>x.remove());if(kan)kan.querySelectorAll(":scope > .md, :scope > img").forEach(x=>x.remove());
+ if(kan&&who&&typeof who==="object"&&typeof kitRankName==="function"&&!kan.querySelector(".knr")){const tx=String(kan.textContent||"").replace(/\s+/g," ").trim();const ix=tx.indexOf(" · ");const head=(ix>=0?tx.slice(0,ix):tx).replace(/\s*\([^)]*\)\s*$/,"").trim();
+  let rn=["",who.name||""];try{if(typeof kszRankName==="function")rn=kszRankName(who)}catch(e){}
+  /* the title is JUST the person (name, or rank + name, + a "· đang nhắm" marker): the kit stack rank / name. A SENTENCE about her ("Tố Quý phi …") keeps its verb: only the rank-led form is stacked (kitOptStackTitle) */
+  const tl=()=>{const t=kan.querySelector(":scope > .kanx");return t?t.outerHTML:ix>=0?`<span class="kanx">${tx.slice(ix+3).replace(/[<>&]/g,"")}</span>`:""};
+  const nm0=who.name||"";/* the title may carry her REAL name while the kit shows "???" for a stranger (kszRankName masks): both count as "just the person" */
+  if(rn[1]&&(head===rn[1]||head===(rn[0]+" "+rn[1]).trim()||nm0&&(head===nm0||head===(rn[0]+" "+nm0).trim()))||!rn[1]&&head===rn[0])kan.innerHTML=kitRankName(who,{form:"stack"})+tl();
+  else if(rn[0]&&head===rn[0]+" ???"){let col="";try{col=kitPersonCol(who)}catch(e){}/* a stranger: the rank is known, the name is not (kit: "???") */kan.innerHTML=kitRankName(null,{form:"stack",parts:{rank:rn[0],name:"???",col}})+tl()}
+  else try{kitOptStackTitle(kan)}catch(e){}}
+ b.dataset.kopt="1";b.dataset.kopic="face:avatar";b.classList.add("kart","kopt","kopav");return true}catch(e){return false}}
+window.kitOptAvatar=kitOptAvatar;
 function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.kopt==="1"&&b.querySelector(":scope > .kaart"))return;
  const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");if(!kan)return;
  const name=typeof kpActName==="function"?kpActName(kan):kitOptPlain(kan.textContent);
- let p=kitOptPic(name,b);if(!p.src&&b.__koph&&typeof KIT_PH!=="undefined"&&KIT_PH.act){let tn="light";try{if(typeof kitPhTone==="function")tn=kitPhTone(name)}catch(e){}p={src:KIT_PH.act[tn]||KIT_PH.act.light,key:"",how:"ph",tone:tn}}
+ let p=kitOptPic(name,b);if(!p.src&&typeof KIT_PH!=="undefined"&&KIT_PH.act)/* OD 21/11 ~04:20Z (#56): EVERY option card shows a picture — no art of its own → the §59 stand-in, even when no sibling has one */{let tn="light";try{if(typeof kitPhTone==="function")tn=kitPhTone(name)}catch(e){}p={src:KIT_PH.act[tn]||KIT_PH.act.light,key:"",how:"ph",tone:tn}}
  /* the tiny portrait / icon beside the title goes: the picture on the left replaces it (owner) */
  kan.querySelectorAll(":scope > .md, :scope > img").forEach(e=>e.remove());b.querySelectorAll(":scope > .md").forEach(e=>e.remove());
  if(!p.src){b.classList.add("kopt");b.dataset.kopt="1";return}
  let cat="";try{cat=typeof kitActCat==="function"?kitActCat(name):""}catch(e){}const col=(typeof KIT_CAT!=="undefined"&&KIT_CAT[cat]||[])[1]||"";
  let body=b.querySelector(":scope > .kabody");if(!body){body=document.createElement("span");body.className="kabody";[...b.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kaart")))body.appendChild(n)});b.appendChild(body)}
  let art=b.querySelector(":scope > .kaart");if(!art){art=document.createElement("span");art.className="kaart";b.prepend(art)}
+ if(p.face&&p.f&&kitOptAvatar(b,p.f,p.who,p.src))return;
+ /* the name chip beside the title IS already a kit avatar (mdH): it moves into the picture slot, grown to the kit "big" size — never re-cut into a loose crop */
+ if(p.face&&p.chip&&p.chip.classList.contains("md")){const c=p.chip.cloneNode(true);c.classList.remove("xs","sm");c.classList.add("big");
+  let ar=b.querySelector(":scope > .kaart");if(!ar){ar=document.createElement("span");ar.className="kaart";b.prepend(ar)}
+  ar.innerHTML="";ar.appendChild(c);ar.classList.add("kaav");ar.dataset.kzoom=p.src;ar.title="Chạm để xem tranh";try{kitOptStackTitle(kan)}catch(e){}
+  b.dataset.kopt="1";b.dataset.kopic="face:chip";b.classList.add("kart","kopt","kopav");return}
  if(p.face)try{kitOptStackTitle(kan)}catch(e){}
  art.innerHTML=kitArtFrame(p.src,"","kopic"+(p.face?" kopface":""),"");art.dataset.kzoom=p.src;art.title="Chạm để xem tranh";
  if(col)b.style.setProperty("--kcc0",col);b.dataset.kopt="1";b.dataset.kopic=p.how+(p.key?":"+p.key:"");b.classList.add("kart","kopt")}
@@ -187,6 +214,8 @@ document.addEventListener("click",e=>{try{const a=e.target&&e.target.closest&&e.
 #kpzoom[hidden]{display:none!important}
 #kpzoom .kpzf{width:min(78vw,calc(calc(82*var(--kvh,1vh)) * 3 / 4),506px)}
 button.ka.kopt>.kaart[data-kzoom]{cursor:zoom-in}
+html body #modal button.ka.kopt.kopav>.kaart.kaav,html body button.ka.kopt.kopav>.kaart.kaav{overflow:visible!important;background:none!important;box-shadow:none!important;border-radius:0!important;display:flex!important;align-items:center;justify-content:center}
+html body button.ka.kopt.kopav>.kaart.kaav>span.md.kmini.kmini{width:100%!important;max-width:100%}
 button.ka.kopt>.kaart .ksart.kopface>img{object-position:50% 12%}
 button.ka .kan .kanx{display:block;font-size:.82em;font-weight:600;opacity:.85;line-height:1.25}
 button.ka .kan .knr{display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:0;margin:0;line-height:1.2}
@@ -228,20 +257,20 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  /* LAW 3 (review/odds-meter-back): a card with NO roll (no odds of its own; the «Nắm chắc» meter kitOptOdds adds is data-ksure) cannot fail — its
     «mất: …» (parsed as a Bại row beside Thành) is a CERTAIN loss and stands in Tốn like a Mất row, never folded behind «!» */
  const sure=!b.querySelector(".kat .kodds:not([data-ksure])");if(sure)mats=mats.concat(R("bai"));
- if(!ton){if(mats.length){ton=row("kr-ton kdup0","Tốn",[]);ton.querySelector(".krv").append(...chipsOf(mats[0]).map(dupOf));mats=[];/* the Mất row folds below; its chips already stand in Tốn */ kb.dataset.komat="1"}
-  else{ton=row("kr-ton kfill","Tốn",[]);const e=document.createElement("span");e.className="ef n";e.textContent="không";ton.querySelector(".krv").appendChild(e)}}
- else if(mats.length){const v=ton.querySelector(".krv");mats.forEach(m=>chipsOf(m).forEach(c=>{if(v.querySelector(".ef,.kwhy")){const sp=document.createElement("span");sp.className="ksep kdup";sp.textContent="·";v.append(sp)}v.append(dupOf(c))}))}
+ /* OD 21/11 ~05:0xZ (#72): the LOSS has its own «Mất» row (Tốn = the price, Được = the gain, Mất = what can be lost), never folded into Tốn */
+ const loss=[];if(!ton){ton=row("kr-ton kfill","Tốn",[]);const e=document.createElement("span");e.className="ef n kdup";e.textContent="không";ton.querySelector(".krv").appendChild(e)}
+ mats.forEach(m=>chipsOf(m).forEach(c=>loss.push(dupOf(c))));
  if(gain){const v=gain.querySelector(".krv");gains.slice(1).forEach(g=>chipsOf(g).forEach(c=>{const sp=document.createElement("span");sp.className="ksep kdup";sp.textContent="·";v.append(sp,dupOf(c))}))}
  else{gain=row("kr-duoc kfill","Được",[]);
   /* LAW 3 (no hidden gain / loss): an option whose value is worded only as a GỢI Ý («được lòng bề trên», «giữ trọn khắc và Sức buổi này; nhưng mất lòng bề trên») shows that wording in Được (the part before «nhưng») and Tốn (the part after it) instead of «không» */
   const hr=R("hint")[0],ht=hr?(hr.querySelector(".krv")||hr).textContent.trim():"";const cp=(t,c)=>{const e=document.createElement("span");e.className="ef "+c+" kdup";e.textContent=t;return e};
   if(ht&&!/^(không|chưa rõ|không được mất gì)\.?$/i.test(ht)){/* only the EMPTY hints; «không dính vào thù oán …; nhưng …» is a real gain + loss (review/odds-meter-back) */const parts=ht.split(/\s*;\s*nhưng\s+|\s+nhưng\s+/),g0=parts[0].trim(),l0=parts.slice(1).join("; ").trim();gain.querySelector(".krv").appendChild(cp(g0,"g"));
-   if(l0){const tv=ton.querySelector(".krv");if(ton.classList.contains("kfill"))tv.innerHTML="";else{const sp=document.createElement("span");sp.className="ksep kdup";sp.textContent="·";tv.appendChild(sp)}tv.appendChild(cp(l0,"r"));ton.classList.remove("kfill");ton.classList.add("kdup0")}}
-  else{const e=document.createElement("span");e.className="ef n";e.textContent="không";gain.querySelector(".krv").appendChild(e)}}
- const keep=new Set([ton,gain]);const dis=b.classList.contains("kdis");
+   if(l0)loss.push(cp(l0,"r"))}
+  else{const e=document.createElement("span");e.className="ef n kdup";e.textContent="không";gain.querySelector(".krv").appendChild(e)}}
+ const matRow=loss.length?row("kr-mat2 kdup","Mất",loss):null;if(matRow)kb.appendChild(matRow);const keep=new Set([ton,gain,matRow]);const dis=b.classList.contains("kdis");
  let extra=false;[...kb.children].forEach(r=>{if(keep.has(r)||r.classList.contains("kdup0"))return;r.classList.add("kofold");if(!(r.classList.contains("kr-mat")||(sure&&r.classList.contains("kr-bai"))||gains.includes(r)))extra=true});
  /* order: Tốn · Được · the folded rest; the Được slot is ALWAYS labelled Được (a rolled card's Thành row, Được ngay …) */
- {const l=gain.querySelector(":scope > .krl");if(l)l.textContent="Được"}kb.insertBefore(ton,kb.firstChild);ton.after(gain);
+ {const l=gain.querySelector(":scope > .krl");if(l)l.textContent="Được"}kb.insertBefore(ton,kb.firstChild);ton.after(gain);if(matRow)gain.after(matRow);
  const lead=b.querySelector(".klead");if(lead){lead.classList.add("kofold");extra=true}
  if(extra){const m=document.createElement("span");m.className="kobang";m.setAttribute("role","button");m.setAttribute("aria-label","Xem thêm");m.title="Xem thêm";m.textContent="!";b.appendChild(m)}
  b.dataset.kofin="1";b.__kofSig=kitOptSig(b,kb)}catch(e){console.error("kitOptFinal",e)}}
@@ -256,12 +285,12 @@ window.kitOptFinal=kitOptFinal;
    Order of work: frame class (KIT_SIZE S/M/L/XL) -> layout -> button tier. Tier S / M / L = ONE card size each (picture box + card height; the width is the cell). Never a variant inside a tier.
    Each tier size = the LARGEST card that tier needs over every layout phone -> iPad (table in KIT.md §6.2d, scan dev/test/opt-card-scan.js). kitOptTier(g) picks, per dialog, the first of
    [2 columns S] [1 column M] [1 column L] whose cards ALL fit their tier (no card taller than the tier, nothing cut sideways). */
-const KIT_OPT={tiers:{S:{pw:54,ph:72,h:88},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:140}},gap:8};window.KIT_OPT=KIT_OPT;
+const KIT_OPT={tiers:{S:{pw:60,ph:80,h:132},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:140}},gap:8,stackW:430};window.KIT_OPT=KIT_OPT;
 const KIT_OPT_CSS=(()=>{const T=KIT_OPT.tiers;let c="html body #modal,html body .kitpg-opts{--ko-pw:"+T.M.pw+"px;--ko-ph:"+T.M.ph+"px;--ko-h:"+T.M.h+"px}\n";
  for(const k in T)c+=`html body #modal .opts[data-kot="${k}"],html body .kitpg-opts[data-kot="${k}"]{--ko-pw:${T[k].pw}px;--ko-ph:${T[k].ph}px;--ko-h:${T[k].h}px}\n`;
  c+=`html body #modal#modal button.ka.kopt.kopt:not(.kart) :is(.kofold,small.kb>.kr-hint,small.kb>.kr-why){display:none!important}
 html body #modal#modal button.ka.kopt.kopt:not(.kart){min-height:var(--ko-h,104px)!important;position:relative;box-sizing:border-box;align-items:center}
-html body #modal#modal button.ka.kopt:not(.kart) .kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c)!important;background:#fffaf0!important;border:1px solid var(--gold,#8f5f0c)!important;cursor:help;z-index:2}
+html body #modal#modal button.ka.kopt:not(.kart) .kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c)!important;background:var(--k-card,#fffaf0)!important;border:1px solid var(--gold,#8f5f0c)!important;cursor:help;z-index:2}
 html body #modal#modal .opts[data-kol],html body .kitpg-opts[data-kol]{display:grid!important;grid-template-columns:repeat(var(--k3c,1),minmax(0,1fr))!important;gap:${KIT_OPT.gap}px;align-content:start}
 html body #modal#modal .opts[data-kol]>button.kopt:not(.kart){align-items:flex-start}
 html body #modal#modal .opts[data-kol]>button.kopt>.kaart{align-self:center}
@@ -275,11 +304,11 @@ function kitOptCut(b){const R=b.getBoundingClientRect();const bd=b.querySelector
    (1) Nothing changed since the last pick (list width, the cards, their classes, text and heights under the picked tier) → keep the pick, touch nothing.
    (2) A real re-pick keeps the scroll position of the list and its scrolling ancestors. */
 function kitOptTierSig(g,bs){return Math.round(g.clientWidth)+"|"+(g.dataset.kol||"")+(g.dataset.kot||"")+"|"+bs.map(b=>b.className+":"+b.textContent.length+":"+Math.round(b.getBoundingClientRect().height)).join(",")}
-function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)return;if(g.__kotSig&&g.dataset.kot&&g.__kotSig===kitOptTierSig(g,bs))return g.dataset.kol+g.dataset.kot;
+function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)return;if(g.__kotSig&&g.dataset.kot&&g.__kotSig===kitOptTierSig(g,bs)){g.style.setProperty("--k3c",g.dataset.kol);/* kszBtnGridLive3 rewrote --k3c from its own width rule: the picked layout wins (OD 21/11 ~04:00Z #49b, iPad 2 columns) */return g.dataset.kol+g.dataset.kot}
  const SC=[];for(let e=g;e&&e.nodeType===1;e=e.parentElement)if(e.scrollTop>0)SC.push([e,e.scrollTop]);
  g.__kotBusy=1;const T=KIT_OPT.tiers;
  bs.forEach(b=>{const m=b.querySelector(".kobang");if(m&&m.parentElement!==b)b.appendChild(m)});/* the "!" is always the card's own corner child (a picture-less hide-out card had it inside the title) */
- const set=(lay,t)=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>b.style.removeProperty("min-height"));void g.offsetHeight};
+ const set=(lay,t)=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>{b.style.removeProperty("min-height");const a=b.querySelector(":scope > .kaart");if(a)a.style.removeProperty("height")});void g.offsetHeight;bs.forEach(b=>b.classList.toggle("kodstk",b.clientWidth<KIT_OPT.stackW));void g.offsetHeight};
  const band=t=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");void g.offsetHeight;const kh=Math.max(0,...bs.map(b=>{const k=b.querySelector(".kat");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kat-h",kh+"px");void g.offsetHeight;
   const mb=Math.max(0,...bs.map(b=>{const k=b.querySelector(":scope > .kabody");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kbtop",Math.max(0,Math.floor((KIT_OPT.tiers[t].h-mb-14)/2))+"px");void g.offsetHeight};
  const fit=(lay,t)=>{set(lay,t);band(t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]);(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
@@ -287,6 +316,7 @@ function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)re
  set(pick[0],pick[1]);bs.forEach(b=>{b.dataset.kapic="eq"});
  /* OWNER 18/11 ~21:20Z: the title sits in the card's TOP BAND, vertically centred there, the SAME in every card of the frame: one band height (the tallest title band), the card's text block starts at ONE top offset (the tallest block centred in the tier height) */
  band(pick[1]);
+ bs.forEach(b=>{const a=b.querySelector(":scope > .kaart");if(a&&b.clientHeight>0)a.style.setProperty("height",b.clientHeight+"px","important")});/* #49c: the picture is as tall as its card (top to bottom) */
  g.__kotBusy=0;try{const dl=g.closest(".dlg");if(dl&&typeof kszEvLaw10==="function")kszEvLaw10(dl)}catch(e){}
  SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});
  /* late changes (fonts, pictures, a frame re-pick, a resize) re-run the choice: the grid or a card changed size under the picked tier */
@@ -312,15 +342,17 @@ document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.
 #modal .knum{display:none!important}
 #modal .kpmain:has(>.knbang),#modal .kpmain:has(.knbang){position:relative}
 #modal .kpmain:has(.knbang)>:is(p,.kfacts,.kfact,div):first-of-type{padding-right:30px}
-#modal .knbang{position:absolute;top:0;right:7px;z-index:2;margin:0;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:#fffaf0;border:1px solid var(--gold,#8f5f0c);cursor:help}
+#modal .knbang{position:absolute;top:0;right:7px;z-index:2;margin:0;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:var(--k-card,#fffaf0);border:1px solid var(--gold,#8f5f0c);cursor:help}
 #modal .knbang::after{content:"";position:absolute;inset:-9px}
-#kpinfo>.knumpop{width:min(560px,92vw);box-sizing:border-box;padding:12px 14px;background:#fffaf0;border:1px solid var(--gold,#8f5f0c);border-radius:10px;color:var(--ink,#2a1a12);cursor:zoom-out;font-size:.9rem}
+#kpinfo>.knumpop{width:min(560px,92vw);box-sizing:border-box;padding:12px 14px;background:var(--k-card,#fffaf0);border:1px solid var(--gold,#8f5f0c);border-radius:10px;color:var(--ink,#2a1a12);cursor:zoom-out;font-size:.9rem}
 #kpinfo>.knumpop p{margin:0 0 6px}`;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.id="kit-opt-final";const mk=O=>`${O}{--kaw:var(--ko-pw,66px)!important;--kah:var(--ko-ph,88px)!important;min-height:var(--ko-h,104px)!important;height:auto!important;align-items:center!important;box-sizing:border-box;position:relative;padding-top:6px!important;padding-bottom:6px!important}
-${O}>.kaart{flex:0 0 var(--ko-pw,66px)!important;width:var(--ko-pw,66px)!important;height:var(--ko-ph,88px)!important;align-self:center!important}
-${O} .kat{flex-wrap:wrap!important;padding-right:24px}
-${O} .kat>.kan{line-height:1.15}
-${O} .kat>.kan{flex:1 1 100%!important;min-width:0!important}
+${O}>.kaart{flex:0 0 var(--ko-pw,66px)!important;width:var(--ko-pw,66px)!important;height:auto!important;min-height:var(--ko-ph,88px)!important;align-self:stretch!important;margin-block:-6px!important}/* OD 21/11 ~04:00Z (#49c): the picture FILLS the card height (top to bottom), never a small box with a gap */
+${O} .kat{flex-wrap:nowrap!important;align-items:center!important;padding-right:24px}/* OD 21/11 ~04:00Z (#49a): the odds word sits ON THE TITLE ROW, never its own row */
+${O} .kat>.kan{line-height:1.15;text-align:left}/* one alignment for every card title (owner via MAIN 88: «Đeo ngay» left vs «Để sau» centred) */
+${O} .kat>.kan{flex:1 1 0!important;min-width:0!important}
+${O} .kat>.kodds{flex:0 0 auto!important;margin-left:auto}
+${O}.kodstk .kat>.kodds .kodm{flex-direction:column;align-items:flex-end;gap:1px}/* narrow card: the meter stacks (bar over word) so the title keeps its width and the odds stay on the title row */
 ${O} small.kb{row-gap:1px!important}
 ${O} small.kb>.kr>.krv{display:block!important}
 ${O} small.kb>.kr>.krv>*{display:inline!important}
@@ -328,14 +360,14 @@ ${O} small.kb>.kr>.krv>.ksep{display:inline!important;margin:0 4px!important;opa
 ${O} .kofold,${O} small.kb>.kr-hint,${O} small.kb>.kr-why{display:none!important}/* Gợi ý / Vì sao rows (a hide-out card adds them after the first fold pass) stay behind "!" */
 ${O} .kfill .ef{color:var(--dim,#9a8a78)!important;font-weight:400!important}
 ${O} .kfill .krl{opacity:.6}
-${O}>.kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:#fffaf0;border:1px solid var(--gold,#8f5f0c);cursor:help;z-index:2}
+${O}>.kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:var(--k-card,#fffaf0);border:1px solid var(--gold,#8f5f0c);cursor:help;z-index:2}
 ${O}>.kobang::after{content:"";position:absolute;inset:-9px}`;
  st.textContent=mk("html body #modal#modal button.ka.kart.kopt.kopt")+"\n"+mk("html body .kitpg-opts>button.ka.kart.kopt.kopt")+`
 /* KIT §6.2d TWO OPTION LAYOUTS + ONE SIZE PER BUTTON TIER (owner 18/11 ~16:05Z + 16:15Z): layout "1" = one long button per row, "2" = two-column grid, on phone AND iPad; tier S / M / L = ONE card size each (KIT_OPT.tiers) */
 ${KIT_OPT_CSS}
 #kpinfo{position:fixed;inset:0;z-index:100001;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
 #kpinfo[hidden]{display:none!important}
-#kpinfo>button.kopinfo{width:min(560px,92vw);max-height:calc(86*var(--kvh,1vh));overflow:auto;text-align:left;cursor:zoom-out;opacity:1!important;pointer-events:none;background:#fffaf0!important;color:var(--ink,#2a1a12)!important;filter:none!important}`;document.head.appendChild(st)})();
+#kpinfo>button.kopinfo{width:min(560px,92vw);max-height:calc(86*var(--kvh,1vh));overflow:auto;text-align:left;cursor:zoom-out;opacity:1!important;pointer-events:none;background:var(--k-card,#fffaf0)!important;color:var(--ink,#2a1a12)!important;filter:none!important}`;document.head.appendChild(st)})();
 /* kit sample page (§6.2): three options of "Hoàng hậu triệu kiến" through the real modal markup → kaNorm → kpOptArt */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Thẻ lựa chọn: tranh bên trái, thông tin bên phải (thẻ gọn)",html:()=>
  `<div class="opts kitpg-opts">`+
@@ -357,11 +389,17 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2d",title:"Th�
   +set("Một hàng dài, bậc M","1","M",[["Cúi đầu nhận lỗi","tốn: "+BAL.kitpage.demo.k+" khắc"],["Dâng lễ vật xin bỏ qua","tốn: Bạc -"+BAL.kitpage.demo.gift.bac+", "+BAL.kitpage.demo.k+" khắc"]])
   +set("Một hàng dài, bậc L (chữ dài nhất)","1","L",[["Xin về tảo mộ tổ tiên cho trọn đạo hiếu","tốn: Sức -"+BAL.kitpage.demo.tomb.suc+" · được: Đức +"+BAL.kitpage.demo.tomb.duc+", cha mẹ vui lòng"]])}})}catch(e){}
 /* kit sample page (§6.3, review/pcard-actrow): the acts of a person card = the same long row, one per line (pop-up / tab / any width) */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: hàng dài, mỗi việc một dòng",html:()=>
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: ảnh vuông + Tốn/Được, ô thông tin full-width dưới",html:()=>
  `<div class="pc"><div class="pcr"><div class="pcb">`+
- [["Tâm sự","tốn: 1 khắc · được: thiện cảm +6"],["Sai đi dò la","Năm ăn năm thua · tốn: 2 khắc · được: biết 2 điều thật về nàng ta, "+evSg(BAL.ag.ev.one)+" · mất: thiện cảm -5"],["Nghe ngóng chung","tốn: 1 khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
+ [["Tâm sự","tốn: 1 khắc · được: thiện cảm +6 · ghi chú: chỉ làm được khi nàng ta ở nhà"],["Sai đi dò la","Năm ăn năm thua · tốn: 2 khắc · được: biết 2 điều thật về nàng ta, "+evSg(BAL.ag.ev.one)+" · mất: thiện cảm -5 · cần: đã gặp mặt"],["Nghe ngóng chung","tốn: 1 khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
   .map(([n,x],i)=>pbtn(`data-kitsample="pc${i}"`,n,typeof kitParse==="function"?kitParse(x):x,"")).join("")+`</div></div></div>`})}catch(e){}
 /* GOAL / TASK cards (owner 16/11 21:10Z, chapter goal list "Đi làm: Học một môn tài nghệ" had no picture): an "Đi làm: <việc>" option is matched on the
    task itself (prefix dropped), and when nothing names a picture it shows the task's act / act-category picture (kitActArt) — every goal card has one. */
 (function(){const p0=kitOptPic;kitOptPic=function(title,b){const t=kitOptPlain(title),m=/^Đi làm:\s*(.+)$/i.exec(t);if(!m)return p0.apply(this,arguments);
  const r0=p0.apply(this,arguments);if(r0&&r0.src&&r0.how!=="ph")return r0;const r=p0.call(this,m[1],b);if(r&&r.src&&r.how!=="ph")return r;try{const a=kitActArt(m[1]);if(a&&a.src&&!/\/ph-(?:act-|event-|[plws]-)/.test(a.src)&&kitOptOnCdn(a.src))return{src:a.src,key:"",how:"cat"}}catch(e){}return r0&&r0.how==="ph"?r0:r};/* nothing yet (e.g. the person chip is painted later): "none" lets kpOptArt run again */window.kitOptPic=kitOptPic})();
+/* bag-inline (owner mark #23, 21/11 ~02:50Z "Tư trang › Việc: act cards have no picture"): the six Việc acts had no ACTS.json entry, so they showed the placeholder.
+   Code-side alias (no CDN manifest push; ACTS.json wins when it gains the same title): each reuses the picture of its meaning group
+   (owner 15/11: one picture per meaning group). Chợ đen has no picture of its own yet (ART REQUEST in FOREMAN_C_STATUS) and uses "buôn bán lén". */
+const KIT_ACT_ALIAS={"Nhờ thái giám mua đồ":"mua-hang","Soát đồ":"kiem-tra-ruong-h","Sai cung nữ thân tín mua lén ngoài cung":"len-mua-ngoai-cung-h","Hối lộ người ở Thái y viện":"mua-chuoc","Chợ đen ở cửa Thần Vũ":"buon-ban-len","Xin đồng minh":"ket-minh"};
+try{const kak0=kitActKey;kitActKey=function(name){try{const a=KIT_ACT_ALIAS[kpPlain(name)];if(a&&!((KIT_ACTS.acts||{})[kpPlain(name)]))return a}catch(e){}return kak0.apply(this,arguments)}}catch(e){}
+try{const ka0=kitActArt;kitActArt=function(name){const r=ka0.apply(this,arguments);try{const n=kpPlain(name),a=KIT_ACT_ALIAS[n];if(a&&r&&!((KIT_ACTS.acts||{})[n]))r.src=`img/act-${a}.webp`}catch(e){}return r};window.kitActArt=kitActArt}catch(e){}

@@ -69,9 +69,11 @@ function j95sOid(o){return o===S?"me":o==="th"?"th":"v"+o.id}
 /* perf (outcome-identical): j95sv(id) scans every household's staff per call; one sid → servant table per call, built in j95sv's own order (first match wins) */
 function j95sSvTab(){const M=new Map();try{for(const p of [S].concat(rivals,(S.thO?[S.thO]:[])))for(const s of (p&&p.staff)||[])if(s&&!M.has(s.sid))M.set(s.sid,s)}catch(e){}return M}
 function j95sHouses(ppl){const H=new Map();const add=(o,q)=>{let h=H.get(o);if(!h){h=[];H.set(o,h)}h.push(q)};let SV=null;const sv=id=>{if(!SV)SV=j95sSvTab();const s=SV.get(+String(id).slice(1));return s===undefined?null:s};
- for(const p of ppl){if(p.kind==="mm"||p.kind==="st"){const o=p.ref;if(!o)continue;if(o!==S&&(!o.alive))continue;add(o,{id:p.id,kind:p.kind,close:p.kind==="mm",sv:p.kind==="st"?sv(p.id):null,name:p.name,home:p.home})}
-  else if(p.kind==="el"&&p.ref&&!p.ref.eid&&p.home==="tn"&&!S.thDead)add("th",{id:p.id,kind:"el",close:false,sv:p.ref,name:p.name,home:"tn"})}
+ for(const p of ppl){if(p.kind==="mm"||p.kind==="st"){const o=p.ref;if(!o)continue;if(o!==S&&(!o.alive))continue;add(o,{id:p.id,kind:p.kind,close:j95sClose(o,p,sv),sv:p.kind==="st"?sv(p.id):null,name:p.name,home:p.home})}
+  else if(p.kind==="el"&&p.ref&&!p.ref.eid&&p.home==="tn"&&!S.thDead)add("th",{id:p.id,kind:"el",close:!!(S.thO&&typeof thcOf==="function"&&thcOf(S.thO)===p.ref),sv:p.ref,name:p.name,home:"tn"})}
  return H}
+/* q.close = her cung nữ thân cận (jtc, owner OD 20/11 ~15:55Z): the maid her master CHOSE (master.tc), no longer simply the personal maid (kind mm) */
+function j95sClose(o,p,sv){try{if(typeof thcOf!=="function")return p.kind==="mm";const c=thcOf(o);if(!c)return false;return p.kind==="mm"?c===o.maid:c===sv(p.id)}catch(e){return false}}
 /* ---------- her own day (per khắc, deterministic per buổi) ---------- */
 function j95sErrand(o,r){const B=BAL.slv.err;const L=[];let ill=false;try{ill=o!=="th"&&o!==S?!!(illOf(o)||o.preg):!!(o===S&&(illOf(S)||S.preg))}catch(e){}
  for(const k in B){if(k==="nvp"&&!j95nvp())continue;L.push([k,B[k]*(k==="tyv"&&ill?BAL.slv.illTyv:1)])}const k=j95sPw(r,L);const ow=j95sOw(o);
@@ -175,10 +177,10 @@ function j95sPass(R,kh,ppl){if(!j95sOn())return 0;const t0=performance.now();let
   const away=i=>{const k=op[i]&&op[i][0];return !!k&&k!==hk0&&k!=="lc"&&k!==J95OUT_&&hk0!=="lc"};
   const ret={};/* id → [i...] */const why={};
   for(let i=kh;i<4;){if(!away(i)){i++;continue}const k=op[i][0];let s0=i;while(s0>0&&op[s0-1]&&op[s0-1][0]===k)s0--;let e0=i;while(e0+1<4&&op[e0+1]&&op[e0+1][0]===k)e0++;
-   let prev=null;if(s0<kh){prev=hh.filter(q=>{const x=R.P[q.id]&&R.P[q.id][kh-1];return x&&x[1]==="follow"&&x[2]===oid}).map(q=>q.id)}
+   let prev=null;if(s0<kh){prev=hh.filter(q=>{const x=R.P[q.id]&&R.P[q.id][kh-1];return x&&(x[1]==="follow"||x[1]==="go"&&x[0]===k)&&x[2]===oid}).map(q=>q.id)/* on her way to her (jwalk, review/jagday-walk) = in the retinue */}
    const P=j95sPick(R,o,oid,hh,k,s0,base,kh,prev);const ow=j95sOw(o);
    for(const q of P.mem){const w=prev&&prev.length?`theo hầu ${ow} ở ${j95sPn(k)} (đi cùng từ đầu)`:`${ow} sang ${j95sPn(k)}: ${P.why}`;
-    for(let j=Math.max(i,kh);j<=e0;j++){if(j95sKeep(base[q.id][j]))break;/* only a deed / meeting takes her away mid-outing; her own day waits */(ret[q.id]=ret[q.id]||{})[j]=[k,"follow",oid,w]}
+    for(let j=Math.max(i,kh);j<=e0;j++){const bj=base[q.id][j];if(bj&&bj[1]==="go"&&bj[0]===k&&bj[2]===oid){(ret[q.id]=ret[q.id]||{})[j]=bj;continue}/* still on her way to her (jwalk) */if(j95sKeep(bj))break;/* only a deed / meeting takes her away mid-outing; her own day waits */(ret[q.id]=ret[q.id]||{})[j]=[k,"follow",oid,w]}
     st.ret++;if(q.close)st.close++}
    i=e0+1}
   /* write: retinue rows, else her day (while her mistress is out, serving = staying behind to keep the palace) */
@@ -229,12 +231,13 @@ Object.assign(window,{j95here,j95whereId});
    j95sNpcPick. Off in co-op (j95on false: the record is off there) and for a servant start (isSrv) / a home life (isKc). */
 function j95sMine(){const R=S.roster;if(!R||R.key!==j95key())return[];const kh=j95kh();const L=[];
  const add=(id,s,role,close)=>{const e=R.P[id];if(!e)return;const x=e[kh];L.push({id,s,name:s.name,role,close,x,free:j95sFree(x,"home")})};
- if(S.maid&&S.maid.name)add("mm:me",S.maid,kitMaidTitle(),true);
- for(const s of S.staff||[])if(s&&!s.out&&s.sid!=null)add("s"+s.sid,s,s.role==="eunuch"?"Thái giám":"Cung nữ",false);
+ const tcI=s=>typeof thcIs==="function"?thcIs(S,s):s===S.maid;/* jtc: the close one = her chosen thân cận */
+ if(S.maid&&S.maid.name)add("mm:me",S.maid,kitMaidTitle(),tcI(S.maid));
+ for(const s of S.staff||[])if(s&&!s.out&&s.sid!=null)add("s"+s.sid,s,s.role==="eunuch"?"Thái giám":tcI(s)?"Cung nữ thân cận":"Cung nữ",tcI(s));
  return L}
 const J95S_ENT_T=["Hôm nay ra khỏi cung, ngươi dẫn ai theo? Chọn bao nhiêu người cũng được, trong những người đang ở cung và rảnh. Đã đi rồi thì hôm nay không gọi thêm người được nữa.","Người theo hầu thấy những gì ngươi thấy, có thêm tai mắt cho ngươi; nhưng họ cũng biết việc ngươi làm và có thể kể lại với người khác. Người ở lại trông cung."];
 function j95sEntAsk(k){const L=j95sMine();if(!L.some(p=>p.free))return false;/* nobody free: no card, she goes alone; the card comes at her next departure */
- const opts=L.map(p=>{const c={n:p.name,fx:{},entId:p.id,sel:p.free&&p.close,x:`(${p.role.toLowerCase()}, lòng ${Math.round(p.s.loyal||0)}${p.free?", đang ở cung và rảnh":""})`};/* not free: her reason is the Cần row (kitOff), never repeated here *//* a person's status = neutral info: the kit Ghi chú row (a whole "(…)" value), the same for every person row (review FAIL 3) */
+ const opts=L.map(p=>{const c={n:p.name,fx:{},kgp:p.s,entId:p.id,sel:p.free&&p.close,x:`(${p.role.toLowerCase()}, lòng ${Math.round(p.s.loyal||0)}${p.free?", đang ở cung và rảnh":""})`};/* not free: her reason is the Cần row (kitOff), never repeated here *//* a person's status = neutral info: the kit Ghi chú row (a whole "(…)" value), the same for every person row (review FAIL 3) */
   if(!p.free)kitOff(c,j95sNotFree(p.x),"không theo được hôm nay");return c});
  const go=ids=>{S.ent={d:j95sDay(),ids,at:k};let ok=false;try{goTo(k);ok=S.place!=="home"||Q.length>0}catch(e){j95sErr("ent",e)}if(!ok)delete S.ent;/* she did not leave (a gate, no khắc): the card comes again */};
  const goOpt={n:"Lên đường",fx:{},entGo:1,x:"",go:()=>go(opts.filter(c=>c.entId&&c.sel&&!c.off).map(c=>c.entId))};
