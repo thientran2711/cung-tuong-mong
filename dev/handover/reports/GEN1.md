@@ -197,3 +197,14 @@ Settings as L1608: gpt-2-6, 9:16, 1k, seed 7172, quality low, ref nVsrRMPYQD, 55
 
 Sheets: dev/handover/review-sheets/thu_t4_t5_v6_DESIGN20/sheet_t4.png, sheet_t5.png
 Look: t4 – 3/4 left, hair fully up, one big lotus, vase held upright, square neckline with lotus band, flat sash + one jade set, round net capelet with petal lobes, sheer blush shawl; no bow. t5 – frontal, letter held in both hands, square neckline with hollyhock band, two jade pendants, capelet + small shoulder layers, big hollyhock + larger headdress; a few thin loose wisps at the ears (hair-up rule slightly broken).
+
+## DESIGN20 v8 — thu t4 THU_COMOIh + t5 THU_COMOIg (drafts)
+Settings as L1608: gpt-2-6, 9:16, 1k, seed 7172, quality low, ref nVsrRMPYQD (face ref only), 55 cr each (110 total). Both files CHECK1 PASS at 5d4d596 (ancestor of HEAD, files unchanged), check_store PASS tp4/tp5. v7 (COMOIg/COMOIf) on hold, not drawn.
+
+| pic | creation | link |
+|---|---|---|
+| t4 THU_COMOIh | SyhkoXCUb8 | https://www.magnific.com/app/creation/SyhkoXCUb8 |
+| t5 THU_COMOIg | JNCjmtZOq4 | https://www.magnific.com/app/creation/JNCjmtZOq4 |
+
+Sheets: dev/handover/review-sheets/thu_t4_t5_v8_DESIGN20/sheet_t4.png, sheet_t5.png
+Look: t4 – 3/4 left, hair up, one lotus, white-jade lotus lamp held, square inner neckline under open plum edges, sash on top with plum fabric above and below (reads as wrap), two blush apron panels, jade plaques on pearl strings at both sides, round capelet w/ net + cord clasp, sheer shawl. t5 – frontal, letter in both hands, sash on top with plum above/below, two apron panels, jade plaques both sides, shoulder layers; FAULTS: TWO hollyhocks in the hair (rule: exactly one), jade drop earrings (rule: bare earlobes).
