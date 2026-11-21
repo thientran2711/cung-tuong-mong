@@ -19,3 +19,6 @@ JOB C L1740 · dev/art/maid7/test13_*_L1736.txt · check_store --scope maid --ag
   tam yiulgnLPW9 · tam_thancan eIPWcQ1dqL · nhi Cqn8IOhEEy · nhi_thancan lJtKkdAgv9 · nhat N2qw7kt6D9 · nhat_thancan s7I5K5Al8e · 6×55 = 330 cr
   sheet review-sheets/maid_test13_L1740.png (2 rows thường/thân cận × 3 cols tam/nhị/nhất)
 Order 2 total 385 cr; session total 790 cr.
+
+### Order 3 — JOB D L1745 (0 gens) · han_refs sheet
+ref1 nVsrRMPYQD (remove-bg 1024×2304, flattened on white) | ref2 TdwDfOyVNR (royal_yellow_C2 swatch) | old 55 cr u5Wte79QLD (SAME Phi prompt, caption "Hoàng hậu", 1k low 752×1344, 21/11 05:58Z) | new 135 cr EbYI8xvuuO (2k medium). No s62_t5_HAN_BAC entry in gen_ledger.jsonl; found u5Wte79QLD via creations_search. Sheet review-sheets/han_refs_L1745.png
