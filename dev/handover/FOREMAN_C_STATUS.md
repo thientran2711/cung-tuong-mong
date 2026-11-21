@@ -1294,3 +1294,4 @@ CURRENT FOREMAN C = #25 session_01D3E3NYNncNzWuep6yvbxRe (child of #24; depth 6,
 #26 ~09:03Z: SENT L1932 old winter ref sheet winter1/s62_dong_coLong_t1-t8 (t1 1ldmoUCr4r). HHCOL2 L1924: thu clasp t6–t8 → VE11 @55×3; winter t1 L1924 consort bearing → VE6 @55. Next Lượt 1933.
 #26 ~09:04Z: OWNER L1933: THU QP LOCKED = L1893 eIPcGThdqL (t6 L1924 cancelled at VE11; HHCOL2 freeze rule). Sheets must NAME collar type. Tang maids NO phi bạch (HADUONG2). SENT L1933 clean winter 8-rank approved sheet winter1/dong8_duyet_L1803_clean.png. Next Lượt 1934.
 #26 HANDOVER ~09:05Z: depth 7, ctx 32.5 % (START ~5 % + 25 % = 30 %). Opening #27 as my child (TAKEOVER_FOREMAN_C_26.md). No schedules owned. Next Lượt 1935.
+#26 ~09:05Z: #27 = session_01D3E3NaDamfSozkn47q9kMK opened. #26 stops.
