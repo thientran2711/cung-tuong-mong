@@ -1,0 +1,50 @@
+base: dev/art/thu_comoi/s62_t4_THU_L2041.txt
+allow: The FABRIC is thin   # B26/B29 Tần–Phi satin đoạn master sentence (builder rule; approved thu file had thin silk — open question to ROOT); BUILDFIX2 builder --season thu, owner L2060
+allow: flowing silk and gauze with a soft sheen and fine delicate embroidery   # B26/B29 Tần–Phi satin đoạn master sentence (builder rule; approved thu file had thin silk — open question to ROOT); BUILDFIX2 builder --season thu, owner L2060
+allow: long soft graceful drapery that sways and trails elegantly   # B26/B29 Tần–Phi satin đoạn master sentence (builder rule; approved thu file had thin silk — open question to ROOT); BUILDFIX2 builder --season thu, owner L2060
+allow: mouth never open   # length: A38 boilerplate / B26 master-repeat cut (repeats a master sentence); BUILDFIX2 builder --season thu, owner L2060
+allow: An imperial consort   # length: A38 boilerplate / B26 master-repeat cut (repeats a master sentence); BUILDFIX2 builder --season thu, owner L2060
+allow: a SOFT gentle oval face   # person slot = HER face words (B8/P3) or HER own GRACE/pose sentence (G72, build_all.group_grace); BUILDFIX2 builder --season thu, owner L2060
+allow: a smooth wide forehead   # person slot = HER face words (B8/P3) or HER own GRACE/pose sentence (G72, build_all.group_grace); BUILDFIX2 builder --season thu, owner L2060
+allow: smooth rounded cheeks and a small soft chin   # person slot = HER face words (B8/P3) or HER own GRACE/pose sentence (G72, build_all.group_grace); BUILDFIX2 builder --season thu, owner L2060
+allow: no sharp angles anywhere   # HER OWN ANGLE/pose (G72, owner L2039; build_all.plan ANG14); BUILDFIX2 builder --season thu, owner L2060
+allow: large TENDER almond eyes with gently LOWERED outer corners and a soft warm look   # person slot = HER face words (B8/P3) or HER own GRACE/pose sentence (G72, build_all.group_grace); BUILDFIX2 builder --season thu, owner L2060
+allow: the gaze soft and kind   # person slot = HER face words (B8/P3) or HER own GRACE/pose sentence (G72, build_all.group_grace); BUILDFIX2 builder --season thu, owner L2060
+allow: gently curved brows that slope gently DOWN at the tails   # person slot = HER face words (B8/P3) or HER own GRACE/pose sentence (G72, build_all.group_grace); BUILDFIX2 builder --season thu, owner L2060
+allow: a small delicate nose   # person slot = HER face words (B8/P3) or HER own GRACE/pose sentence (G72, build_all.group_grace); BUILDFIX2 builder --season thu, owner L2060
+allow: a small soft mouth with gently rounded lips   # person slot = HER face words (B8/P3) or HER own GRACE/pose sentence (G72, build_all.group_grace); BUILDFIX2 builder --season thu, owner L2060
+allow: the head inclined slightly to one side   # HER OWN ANGLE/pose (G72, owner L2039; build_all.plan ANG14); BUILDFIX2 builder --season thu, owner L2060
+allow: the soft eyes warm and full of gentle affection   # person slot = HER face words (B8/P3) or HER own GRACE/pose sentence (G72, build_all.group_grace); BUILDFIX2 builder --season thu, owner L2060
+allow: a small sweet closed-lip smile   # person slot = HER face words (B8/P3) or HER own GRACE/pose sentence (G72, build_all.group_grace); BUILDFIX2 builder --season thu, owner L2060
+allow: a layered silk robe of two or three visible layers with WIDE gold-thread embroidered borders of lotus flowers at the sleeves and hem   # flower slot = HER F2 species of the rank + F20 thu colour + her capelet shape; BUILDFIX2 builder --season thu, owner L2060
+allow: framed by one wide flat lilac band embroidered with lotus flowers   # colour slot = HER palettes_season.json thu main/sec EXACT (B20, AUDIT1 row 1) + phi bạch 3rd colour (L1834); BUILDFIX2 builder --season thu, owner L2060
+allow: a few MEDIUM embroidered lotus flowers scattered on the robe body and the sleeves   # flower slot = HER F2 species of the rank + F20 thu colour + her capelet shape; BUILDFIX2 builder --season thu, owner L2060
+allow: and lotus sprays on the skirt front   # flower slot = HER F2 species of the rank + F20 thu colour + her capelet shape; BUILDFIX2 builder --season thu, owner L2060
+allow: her signature colour family light olive and lilac stays the MAIN robe colour   # colour slot = HER palettes_season.json thu main/sec EXACT (B20, AUDIT1 row 1) + phi bạch 3rd colour (L1834); BUILDFIX2 builder --season thu, owner L2060
+allow: the robe itself is clearly light olive silk   # colour slot = HER palettes_season.json thu main/sec EXACT (B20, AUDIT1 row 1) + phi bạch 3rd colour (L1834); BUILDFIX2 builder --season thu, owner L2060
+allow: light olive silk like #9FB577 is the main colour of the robe   # colour slot = HER palettes_season.json thu main/sec EXACT (B20, AUDIT1 row 1) + phi bạch 3rd colour (L1834); BUILDFIX2 builder --season thu, owner L2060
+allow: with lilac in the inner robe and linings   # colour slot = HER palettes_season.json thu main/sec EXACT (B20, AUDIT1 row 1) + phi bạch 3rd colour (L1834); BUILDFIX2 builder --season thu, owner L2060
+allow: decorated with ONE fresh lotus flower   # flower slot = HER F2 species of the rank + F20 thu colour + her capelet shape; BUILDFIX2 builder --season thu, owner L2060
+allow: exactly ONE fresh lotus flower in her hair   # flower slot = HER F2 species of the rank + F20 thu colour + her capelet shape; BUILDFIX2 builder --season thu, owner L2060
+allow: a clear THREE-QUARTER view toward the LEFT side of the picture   # HER OWN ANGLE/pose (G72, owner L2039; build_all.plan ANG14); BUILDFIX2 builder --season thu, owner L2060
+allow: her whole body   # HER OWN ANGLE/pose (G72, owner L2039; build_all.plan ANG14); BUILDFIX2 builder --season thu, owner L2060
+allow: hips and face turned about 45 degrees so that her chest and face point toward the left edge of the picture   # HER OWN ANGLE/pose (G72, owner L2039; build_all.plan ANG14); BUILDFIX2 builder --season thu, owner L2060
+allow: the shoulder on the picture's right side nearer the viewer   # HER OWN ANGLE/pose (G72, owner L2039; build_all.plan ANG14); BUILDFIX2 builder --season thu, owner L2060
+allow: never side view   # HER OWN ANGLE/pose (G72, owner L2039; build_all.plan ANG14); BUILDFIX2 builder --season thu, owner L2060
+allow: her head never back-turned   # HER OWN ANGLE/pose (G72, owner L2039; build_all.plan ANG14); BUILDFIX2 builder --season thu, owner L2060
+allow: her head inclined gently toward the hand that holds the item   # HER OWN ANGLE/pose (G72, owner L2039; build_all.plan ANG14); BUILDFIX2 builder --season thu, owner L2060
+allow: her face still toward the viewer   # HER OWN ANGLE/pose (G72, owner L2039; build_all.plan ANG14); BUILDFIX2 builder --season thu, owner L2060
+allow: the MAIN colour light olive and the SECONDARY colour lilac   # colour slot = HER palettes_season.json thu main/sec EXACT (B20, AUDIT1 row 1) + phi bạch 3rd colour (L1834); BUILDFIX2 builder --season thu, owner L2060
+allow: painting or tassel on it are in a colour family clearly different from BOTH her robe colour light olive and her secondary colour lilac   # colour slot = HER palettes_season.json thu main/sec EXACT (B20, AUDIT1 row 1) + phi bạch 3rd colour (L1834); BUILDFIX2 builder --season thu, owner L2060
+allow: highly translucent gauze shawl in soft autumn moon-white silk   # B26/B29 Tần–Phi satin đoạn master sentence (builder rule; approved thu file had thin silk — open question to ROOT); BUILDFIX2 builder --season thu, owner L2060
+allow: the lower edge is rounded petal-like lobes along the lower edge   # flower slot = HER F2 species of the rank + F20 thu colour + her capelet shape; BUILDFIX2 builder --season thu, owner L2060
+allow: like the soft petals of a flower   # flower slot = HER F2 species of the rank + F20 thu colour + her capelet shape; BUILDFIX2 builder --season thu, owner L2060
+allow: walking with a small white-jade lotus lamp held upright in one hand   # HER OWN pose + held item (G72/P1, builder _e6_picks); BUILDFIX2 builder --season thu, owner L2060
+allow: Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down   # HER OWN ANGLE/pose (G72, owner L2039; build_all.plan ANG14); BUILDFIX2 builder --season thu, owner L2060
+allow: no hairpin horizontal or sticking out to the side   # length: A38 boilerplate / B26 master-repeat cut (repeats a master sentence); BUILDFIX2 builder --season thu, owner L2060
+allow: Everyone beautiful at every age   # length: A38 boilerplate / B26 master-repeat cut (repeats a master sentence); BUILDFIX2 builder --season thu, owner L2060
+allow: in LARGE bold letters   # s62 test caption (sheet label), not a prompt word; BUILDFIX2 builder --season thu, owner L2060
+allow: on the plain background   # s62 test caption (sheet label), not a prompt word; BUILDFIX2 builder --season thu, owner L2060
+allow: never over her body   # s62 test caption (sheet label), not a prompt word; BUILDFIX2 builder --season thu, owner L2060
+allow: write exactly this Vietnamese text WITH accents   # s62 test caption (sheet label), not a prompt word; BUILDFIX2 builder --season thu, owner L2060
+allow: "Mùa Thu · Tần · thử cổ vuông · phi bạch xanh trăng L1847 · thêu nhiều hơn L2041"   # s62 test caption (sheet label), not a prompt word; BUILDFIX2 builder --season thu, owner L2060

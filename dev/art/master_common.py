@@ -112,6 +112,7 @@ def doan_cuts_made(text, scope=None):
         made.append((old, new))
     if not made: return []
     for old, new, _ in L[len(made):]:
+        if _norm1(old) not in t and new and _norm1(new) not in t: continue   # BUILDFIX2: this clause is not in this prompt at all (e.g. ITEM tail not in her Pose) = no evidence either way
         if _norm1(old) not in t: return []   # a later clause missing too = not a prefix
     if len(t) + len(_norm1(made[-1][0])) - len(_norm1(made[-1][1])) <= LIMIT: return []   # the last cut was not needed
     return made

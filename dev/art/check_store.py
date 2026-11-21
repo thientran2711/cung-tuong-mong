@@ -790,6 +790,11 @@ def store_check(pf, prompt, args):
         sys.path.insert(0,os.path.join(ART,"store-all")); import build_all as _ba
         _wp=_ba.winter_pairs(args[0])
         if _wp: store=_ba.b20_winter_words(store,_wp)
+    sys.path.insert(0,os.path.join(ART,"store-all")); import build_all as _ba
+    if not winter_g28.is_winter(prompt) and _ba.is_thu(prompt) and args and not args[0].startswith("-") and '--low' in args and int(args[args.index('--low')+1])<=5:   # BUILDFIX2 THU: palette + thu ladder words (G53) on the store text, as the builder
+        store=_ba.season_store(store,args[0],int(args[args.index('--low')+1]),"thu")
+        for _bp in _ba.THU_TRIMS:   # BUILDFIX2: thu length trims (boilerplate the approved thu files go without) are optional
+            if _bp.strip() not in prompt: store=store.replace(_bp,"",1)
     m=G15_T3_OLD.search(store)
     if m:   # G15: the t3 design words must be option B (main/secondary = any words, motif = the store's motif), never the old t3 design
         _age='a36' if _w25 else (args[args.index('--age')+1] if '--age' in args else None)   # SEASON đông: t3 winter = G15 option B with the a36 crossed collar (G21/G25)
@@ -872,6 +877,7 @@ W02_L1803 = "WINTER: a VERY THICK, luxurious band of soft plain ivory-white fur 
 W03_L1803_T7 = "WINTER: a WIDE, THICK and luxurious band of dense, plush soft plain ivory-white fur trim, a little wider and fuller than at the ranks below, about two and a half hands wide, along her collar, the front edges and hem of her outer garment, and her cuffs, rich, warm and sumptuous, yet neat and elegant; the same plain ivory at every rank, no coloured fur, never covering her face or neck, the neckline keeps its shape."
 W03_L1803_T8 = "WINTER: soft plain ivory-white fur trim along her collar, the front edges and hem of her outer garment, and her cuffs; the same ivory fur at every rank, no coloured fur, never covering her face or neck."
 W_L1803 = {"W01": (W01_L1803,), "W02": (W02_L1803,), "W03": (W03_L1803_T7, W03_L1803_T8)}
+S13_THU_L2041 = 'CAPELET CUT (flowing): its lower edge and collar lines are soft CURVES, never flat; the lower edge is {shape}; graceful (uyển chuyển), never boxy.'   # owner L2041 (thu Tần t4, one SQUARE collar, capelet OPEN at the front): approved s62_t4_THU_L2041 drops the throat-clasp / long-V clause (BUILDFIX2)
 S13_COMOI = 'CAPELET CUT (flowing): its lower edge and collar lines are soft CURVES, never flat; the lower edge is {shape}; the outer robe closes only at the sash, never at the throat, never buttoned down the front, opening gradually in a long soft V toward the hem, graceful (uyển chuyển), never boxy.'
 
 def best_overlap(sentence, text):
@@ -1319,12 +1325,14 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False, pid=None
         if not (req or conf): continue
         if e.get("season") and not _winter: continue   # SEASON: winter-only sentence (W01-W05)
         if e.get("not_season") and _winter: continue   # SEASON: replaced in winter by its W twin
+        if e["id"] == "S18" and master_common.DOAN_LEN_CUTS[2][0] in [x[0] for x in master_common.doan_cuts_made(text,scope)]: continue   # BUILDFIX2: B26 length cut M10 ('closed-lip smile;' repeats master M10) shortens S18 the same way
         if e["id"] in ("S24", "S16", "S19"):   # B26 length exception: S24 repeats master M13 (cut 5); B26FAB4: S16 / S19 tails cut by LEN_CUTS2 N1 / N2 (same-prompt repeats), only when needed
             _made = [x[0] for x in master_common.doan_cuts_made(text,scope)]; _k = {"S24": master_common.DOAN_LEN_CUTS[4][0], "S16": master_common.LEN_CUTS2[0][0], "S19": master_common.LEN_CUTS2[2][0]}[e["id"]]
             if _k in _made: continue
         if e["id"] == "S07" and master_common.high_scope(scope) and master_common.b29_alt_in(text, scope, high=True): continue   # B29 (owner L1556/L1558, B28): the one light gấm sentence stands in the S07 brocade slot
         if e["id"] == "S14" and (slot_rx(S14_L1794).search(text) or slot_rx(S14_VK).search(text)): continue   # owner L1794: jade/pearl/gold-only HQP luxury form stands in the S14 slot (A46)
         if e["id"] in W_L1803 and any(slot_rx(f).search(text) for f in W_L1803[e["id"]]): continue   # owner L1803: thicker-fur ladder forms (t1-t3 x2, t4-t6 x4, t7 a little thicker, t8 sheet sentence) stand in the W01/W02/W03 slots
+        if e["id"] == "S13" and (slot_rx(S13_COMOI).search(text) or ("ONE straight SQUARE collar only" in text and slot_rx(S13_THU_L2041).search(text))): continue   # + owner L2041 thu Tần square-collar form (BUILDFIX2)
         if e["id"] == "S13" and slot_rx(S13_COMOI).search(text): continue   # owner L1377 (thu COMOI new collar OK, newer than G25/S13): the COMOI open-collar form "closes only at the sash, never at the throat" stands in the S13 slot (Foreman C #13, L1572)
         if skip_store and e.get("store") and not e.get("season"): continue   # already enforced by the STORE part (same prompt, store args)
         ages = (e.get("ages") or "all").split()

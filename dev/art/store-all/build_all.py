@@ -164,7 +164,13 @@ def _hexhs(h):
 # PALFIX a2 + c3 (owner L1419 via Foreman C #9, PALAUDIT1): B20 = dev/art/face-common/palettes_season.json (86 consorts). a2: a B20 person's secondary is her B20 secondary
 # as written (no FAMILY_CONTRAST swap). c3: --season dong uses her B20 ĐÔNG palette (main + secondary + hexes) instead of her root colours (G26 'only add fur' stays for the rest).
 B20=json.load(open(os.path.join(ART,"face-common","palettes_season.json"),encoding="utf-8"))
-SEASON_PAL=None   # "dong" while a winter cell is built (_build_season)
+SEASON_PAL=None   # "xuan"|"ha"|"thu"|"dong" while a season cell is built (_build_season)
+# BUILDFIX2 (AUDIT1 row 1, owner L2060 "máy phải ra đúng prompt cho mọi người × bậc × 4 mùa"): every season uses her palettes_season.json
+# main + secondary (names + hexes EXACT), also when the season is her root season (DATA rows were stale for 50/74 persons).
+SEASONS=("xuan","ha","thu","dong")
+def _season_pal(person):
+    """her B20 palette of the season being built (any season, root included), else None."""
+    return b20(person) if SEASON_PAL in SEASONS else None
 def B20_SEASON(person):
     d=B20.get(ALIAS.get(person,person)); return None if not isinstance(d,dict) or "root_season" not in d else (SEASON_PAL or d["root_season"])
 def b20(person):
@@ -173,20 +179,20 @@ def b20_winter(g,person):
     """c3: record her root -> B20 đông colour words for this store run (the store tables stay untouched, so the F2 flower swap never sees a đông colour name
     such as 'pale orchid'); store() applies them to the printed text (b20_winter_words)."""
     d=B20.get(person)
-    if not (SEASON_PAL=="dong" and isinstance(d,dict) and d.get("root_season")!="dong" and isinstance(d.get("dong"),dict) and person in g["DATA"]): return
-    w=d["dong"]; m,mh,s,sh=w["main"],w["main_hex"],w["sec"],w["sec_hex"]; pal=g["DATA"][person][0]
+    if not (SEASON_PAL in SEASONS and isinstance(d,dict) and isinstance(d.get(SEASON_PAL),dict) and person in g["DATA"]): return   # BUILDFIX2: every season, root included
+    w=d[SEASON_PAL]; m,mh,s,sh=w["main"],w["main_hex"],w["sec"],w["sec_hex"]; pal=g["DATA"][person][0]
     old=pal.split(" and ")[0]; _s0=pal.split(" and ")[-1] if " and " in pal else ""; low=g["LOWNAME"].get(person,(old,old))
     ex=[(pal,f"{m} and {s}")]   # exact phrases, whole prompt
     if person in g["ORIG1"]: o1=g["ORIG1"][person]; ex+=[(o1[0],f"{m} silk like {mh}"),(o1[1],f"{s} like {sh}")]
     if person in g["M_COLS"]: mc=g["M_COLS"][person]; ex+=[(f"{mc[0]} like {mc[1]}",f"{m} like {mh}"),(f"{mc[2]} like {mc[3]}",f"{s} like {sh}")]
     rs=d[d["root_season"]].get("sec","")
     g["_B20W"]=(ex,[(low[0],m),(low[1],m),(old,m),(rs,s),(_s0,s)])
-def winter_pairs(person):
-    """check_store (STORE gate, winter prompt): the same root -> đông pairs the builder used, from the store tables (None = no swap for her)."""
+def winter_pairs(person,season="dong"):
+    """check_store (STORE gate, season prompt): the same root -> season pairs the builder used, from the store tables (None = no swap for her)."""
     global SEASON_PAL
     person=ALIAS.get(person,person); g={"__name__":"build_store","__file__":STORE}; old=sys.argv; sys.argv=["build.py",person]
     try:
-        exec(_PART1,g); _inject(g); SEASON_PAL,_o="dong",SEASON_PAL; b20_winter(g,person)
+        exec(_PART1,g); _inject(g); SEASON_PAL,_o=season,SEASON_PAL; b20_winter(g,person)
     finally: sys.argv=old; SEASON_PAL=_o
     return g.get("_B20W")
 def b20_winter_words(out,pairs):
@@ -205,8 +211,8 @@ def b20_winter_words(out,pairs):
 def secondary(person):
     """(colour words, source) of her outfit SECONDARY colour."""
     g=LAST_G
-    _w=b20(person) if SEASON_PAL=="dong" else None
-    if _w and B20[ALIAS.get(person,person)]["root_season"]!="dong": return (f"{_w['sec']} like {_w['sec_hex']}" if person in g.get("M_COLS",{}) else _w["sec"]),"B20 đông palette (PALFIX c3)"
+    _w=_season_pal(person)
+    if _w: return (f"{_w['sec']} like {_w['sec_hex']}" if person in g.get("M_COLS",{}) else _w["sec"]),f"B20 {SEASON_PAL} palette (PALFIX c3, BUILDFIX2)"
     if person in g.get("M_COLS",{}): _m=g["M_COLS"][person]; return f"{_m[2]} like {_m[3]}","owner table (m_colours_proposed.json / nc princess colours, Lượt 603/592)"   # BW4
     pal=g["DATA"][person][0]; main=pal.split(" and ")[0]; sec=pal.split(" and ")[-1] if " and " in pal else ""
     fm=family(main); fs=family(sec) if sec else "neutral"
@@ -223,13 +229,13 @@ def secondary(person):
     c=FAMILY_CONTRAST[fm]; return c[_pn(person)%len(c)],"contrast (listed %s is neutral/metal/same family)"%(sec or "none")
 def main_name(person):
     """DATA main name (no hex); PALFIX c3: winter = her B20 đông main."""
-    _w=b20(person) if SEASON_PAL=="dong" else None
-    if _w and B20[ALIAS.get(person,person)]["root_season"]!="dong": return _w["main"]
+    _w=_season_pal(person)
+    if _w: return _w["main"]
     return LAST_G["DATA"][person][0].split(" and ")[0]
 def main_words(person):
     """MAIN colour words of the TWO/THREE-COLOUR sentence: owner-table people = name like #HEX (BW4, Lượt 603), others = DATA name."""
-    _w=b20(person) if SEASON_PAL=="dong" else None
-    if _w and B20[ALIAS.get(person,person)]["root_season"]!="dong": return f"{_w['main']} like {_w['main_hex']}" if person in LAST_G.get("M_COLS",{}) else _w["main"]   # PALFIX c3
+    _w=_season_pal(person)
+    if _w: return f"{_w['main']} like {_w['main_hex']}" if person in LAST_G.get("M_COLS",{}) else _w["main"]   # PALFIX c3
     m=LAST_G.get("M_COLS",{}).get(person)
     return f"{m[0]} like {m[1]}" if m else LAST_G["DATA"][person][0].split(" and ")[0]
 def outfit_colours(person):
@@ -648,20 +654,81 @@ def build_season(person,rank,age="a18",season=None):
         finally: HQP_SHORT=False
     return r
 def _build_season(person,rank,age="a18",season=None):
-    global SEASON_PAL
+    global SEASON_PAL,G36_PHIBACH,PHIBACH_SEASON
     if not season: return build(person,rank,age)
-    SEASON_PAL=season   # PALFIX c3: every store run of this winter cell (incl. the G25 a36 build) uses her B20 đông palette
+    assert season in SEASONS,("--season must be one of",SEASONS)
+    SEASON_PAL=season   # PALFIX c3: every store run of this season cell (incl. the G25 a36 build) uses her B20 palette of that season
+    G36_PHIBACH,PHIBACH_SEASON=(season in ("ha","thu")),season   # G36 (owner L1446): phi bạch only in hạ + thu; colour = phibach_3rd_L1821.json (L1834)
     try: return _build_season2(person,rank,age,season)
-    finally: SEASON_PAL=None
+    finally: SEASON_PAL=None; G36_PHIBACH,PHIBACH_SEASON=False,None
+# BUILDFIX2: season words after the store text. (1) a season that is not her root season no longer keeps the colour of image 1 (her reference) ->
+# the 'ORIGINAL robe colour is kept exactly as in image 1 (her first reference): ' clause is dropped, the colour words after it stay (approved thu files
+# s62_t1_THU_fix_L2008 … read the same). (2) the store's fixed ', NOT green' after a main colour that is itself green (palette 'light olive green') is
+# dropped, as the store's own outfit() already does for green palettes.
+_ORIG_RX=re.compile(r"her ORIGINAL robe colour is kept exactly as in image 1 \(her first reference\): ")
+def season_post(S,person,season,strict=True):
+    d=B20.get(ALIAS.get(person,person),{}); notes=[]
+    if season!=d.get("root_season"):
+        S,k=_ORIG_RX.subn("",S)
+        if k: notes.append("season: image-1 colour clause dropped")
+    w=d.get(season) or {}
+    m=w.get("main","")
+    if m and any(g in m for g in ("green","celadon","jade","teal","mint","sage","aqua")):
+        S,k=re.subn(r"\("+re.escape(m)+r", NOT green\)","("+m+")",S)
+        if k: notes.append("season: NOT green dropped (green main)")
+    if season=="thu" and isinstance(_SP_RANK[0],int) and 1<=_SP_RANK[0]<=5: S,_n=thu_sentences(S,person,_SP_RANK[0],strict); notes+=_n
+    if season=="thu" and strict:
+        for bp in THU_TRIMS:   # length: the boilerplate the owner-approved thu files already go without (A38 trims listed in their .keep)
+            if len(S)>10000 and bp in S: S=S.replace(bp,"",1); notes.append("thu trim "+bp[:30])
+    return S,notes
+THU_TRIMS=("An imperial consort. ","Everyone beautiful at every age. ","Everyone beautiful at every age.")
+_SP_RANK=[None]   # rank of the season cell being built (set by _build_season2)
+CAPTION='CAPTION: in LARGE bold letters, top-left corner, on the plain background, never over her body, write exactly this Vietnamese text WITH accents: "{}"'   # approved thu-file sheet label form
+THU_MARK=("straight SQUARE collar","straight SQUARE NECKLINE")   # G53 thu ladder words (t1-t5)
+def is_thu(text): return any(m in text for m in THU_MARK) and "WINTER:" not in text
+def season_store(store,person,rank,season):
+    """check_store STORE part: the same season words on the store text (palette swap + season_post) as the builder used."""
+    global SEASON_PAL
+    person=ALIAS.get(person,person); wp=winter_pairs(person,season)
+    if wp: store=b20_winter_words(store,wp)
+    if "hairflower_species" not in (globals().get("LAST_G") or {}): globals()["store"](person,1)   # loads LAST_G (store tables)
+    _o=SEASON_PAL; SEASON_PAL=season; _SP_RANK[0]=rank
+    try: store,_=season_post(store,person,season,strict=False)
+    finally: SEASON_PAL=_o
+    return store
+# BUILDFIX2: THU t1-t5 = the owner-approved thu ladder words (G53 square collar all tiers, owner L1747; s62 approved files, store-all/thu_ladder.py),
+# filled with HER slots: palette thu main/sec (names exact), F2 species of the rank, F20 thu hair colour of the rank.
+import importlib.util as _iu3
+_sp3=_iu3.spec_from_file_location("thu_ladder",os.path.join(HERE,"thu_ladder.py")); THU=_iu3.module_from_spec(_sp3); _sp3.loader.exec_module(THU)
+def thu_slots(person,rank):
+    p=ALIAS.get(person,person); w=B20[p]["thu"]; sp=LAST_G["hairflower_species"](p,rank)
+    hx=F20.get(p,{}).get("thu",{}).get("hair_by_tier",{}).get(f"t{rank}")
+    assert sp and hx,("thu slots",person,rank)
+    g=any(x in w["main"] for x in ("green","celadon","jade","teal","mint","sage","aqua"))
+    return dict(main=w["main"],sec=w["sec"],notgreen="" if g else ", NOT green",sp=sp[0],hsp=sp[0],spl=sp[1],hc=f20_name(hx))
+def _sent_rx(kind): return re.compile(r"(?:(?<=^)|(?<=\. ))"+re.escape(kind)+r"[^\n]*?\.(?= [A-Z]|$)")
+def thu_sentences(S,person,rank,strict=True):
+    notes=[]; new=THU.fill(rank,thu_slots(person,rank))
+    for kind,sent in new.items():
+        m=_sent_rx(kind).search(S)
+        if m: S=S[:m.start()]+sent+S[m.end():]; notes.append("thu ladder "+kind.strip(" (:"))
+        elif kind=="NO BIG FLOWERS: ":
+            h=_sent_rx("Hair: ").search(S); assert h or not strict,("thu: no Hair sentence",person,rank)
+            if h: S=S[:h.end()]+" "+sent+S[h.end():]; notes.append("thu ladder NO BIG FLOWERS (added)")
+        elif strict: raise AssertionError(("thu: builder sentence not found",kind,person,rank))
+    if rank==4: S=THU.capelet_thu(S); notes.append("thu L2041 CAPELET CUT (open front)")
+    return S,notes
 def _build_season2(person,rank,age,season):
     assert isinstance(rank,int), "season: ranks 1-8 only"
     sys.path.insert(0,ART); import winter_g28
     a36=build(person,rank,"a36")[1] if rank<=3 else None
-    S0,S,add=build(person,rank,age,_season=season); S,notes=winter_g28.season(S,rank,a36,season)
+    S0,S,add=build(person,rank,age,_season=season); S,notes=winter_g28.season(S,rank,a36,season); _SP_RANK[0]=rank; S,_sn=season_post(S,person,season); notes+=_sn
     _m=b26_fit_ok(person,rank,age,season)
     if _m and len(S)>10000:
-        _T,_n=b26_fit(S,notes,angle=False,whole=_m=='whole',rank=_c2rank(rank))   # B26 length: winter_g28.season already dropped ANGLE
-        if len(_T)>10000: _S2,_n2=f20_fit(S,notes); _T,_n=b26_fit(_S2,_n2,angle=False,whole=_m=='whole',rank=_c2rank(rank)) if len(_S2)>10000 else (_S2,_n2)   # BUILDFIX1: F20 first
+        _ang=False   # đông: winter_g28.season already dropped ANGLE; xuân/hạ/thu: keep HER OWN ANGLE (G72, owner L2039) unless the B26 cuts alone do not fit
+        _T,_n=b26_fit(S,notes,angle=_ang,whole=_m=='whole',rank=_c2rank(rank))   # B26 length
+        if len(_T)>10000 and season!="dong": _ang=True; _T,_n=b26_fit(S,notes,angle=True,whole=_m=='whole',rank=_c2rank(rank))
+        if len(_T)>10000: _S2,_n2=f20_fit(S,notes); _T,_n=b26_fit(_S2,_n2,angle=_ang,whole=_m=='whole',rank=_c2rank(rank)) if len(_S2)>10000 else (_S2,_n2)   # BUILDFIX1: F20 first
         S,notes=_T,_n
     S,notes=f20_fit(S,notes)
     S=g45_post(S,f"{person} t{rank} {age} {season}")   # G45 jade clause after the fit
@@ -683,7 +750,7 @@ def build(person,rank,age="a18",_season=None):
     global G45_HAD; G45_HAD=False   # G45: set again by apply_dedupe inside _build
     S0,S,add=_build(person,rank,age); S=g36(eyes(S))   # G36 no phi bạch (xuân/đông)
     _m=b26_fit_ok(person,rank,age,_season)
-    if _m and len(S)>10000:
+    if _m and len(S)>10000 and _season in (None,"dong"):   # BUILDFIX2: xuân/hạ/thu fit once, after their season words (_build_season2)
         _T,_a=b26_fit(S,add,angle=True,whole=_m=='whole',rank=_c2rank(rank))
         if len(_T)>10000: _S2,_a2=f20_fit(S,add); _T,_a=b26_fit(_S2,_a2,angle=True,whole=_m=='whole',rank=_c2rank(rank)) if len(_S2)>10000 else (_S2,_a2)   # BUILDFIX1: the F20 sentence goes first, so a cell the B26 cut fitted stays fitted
         S,add=_T,_a
@@ -945,9 +1012,9 @@ if __name__=="__main__":
         for p,t in (("m19",1),("m19",3),("c06",7),("p01",2),("p03",8)):
             print(f"\n===== {p} t{t} {age} =====\n"+build(p,t,age)[1])
         sys.exit(0)
-    pos=[x for x in a if not x.startswith("--") and x!=age and not ("--season" in a and x==a[a.index("--season")+1])]
+    pos=[x for x in a if not x.startswith("--") and x!=age and not ("--season" in a and x==a[a.index("--season")+1]) and not ("--caption" in a and x==a[a.index("--caption")+1])]
     if len(pos)==3 and "--age" not in a and re.fullmatch(r"a(18|26|36|51|65)",pos[2]): age=pos.pop()   # ROOT-51: positional age (build_all.py m13 3 a26) used to build a18 silently
-    if len(pos)!=2: print("usage: build_all.py <person> <rank 1-8|nude|thaihau> [aNN | --age aNN] [--season dong]",file=sys.stderr); sys.exit(2)
+    if len(pos)!=2: print("usage: build_all.py <person> <rank 1-8|nude|thaihau> [aNN | --age aNN] [--season xuan|ha|thu|dong]",file=sys.stderr); sys.exit(2)
     if not _kc_drawn(ALIAS.get(pos[0],pos[0])): print(f"REFUSED {pos[0]}: NOT drawn (ART_RULES B8, dev/art/KC_REFS.json)",file=sys.stderr); sys.exit(2)
     if pos[1]=="thaihau":   # Lượt 618 I4: Thái hậu = HH t8 + 3 Thái hậu slots (see thaihau())
         out=thaihau(pos[0],age)[1]; ok,msg=gate_th(pos[0],age,out)
@@ -956,6 +1023,10 @@ if __name__=="__main__":
         print(out,end=""); sys.exit(0)
     season=a[a.index("--season")+1] if "--season" in a else None   # SEASON: --season dong (winter, G25/G26/G28)
     out=(build_season(pos[0],int(pos[1]),age,season) if season else build(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age))[1]
+    if "--caption" in a:   # BUILDFIX2: sheet label for a test picture (approved thu-file CAPTION form); only when it fits the 10 000 gen limit
+        _c=CAPTION.format(a[a.index("--caption")+1])
+        if len(out)+1+len(_c)>10000: print("CAPTION dropped (length)",file=sys.stderr)
+        else: out=out.rstrip()+" "+_c
     ok,msg=gate(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age,out)
     if not ok: print(msg,file=sys.stderr); sys.exit(1)
     print(out,end="")

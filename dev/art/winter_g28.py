@@ -87,7 +87,8 @@ LIMIT = 10000
 def season(text, rank, a36_text=None, season="dong"):
     """MAIN builder season switch. text = build() output (a18/a26 …) for an int rank 1-8; a36_text = the same person/rank built at a36
     (needed for t1-t3: G25 old crossed collar = the builder's own a36 Outfit sentence). -> (text, notes)."""
-    assert season == "dong", "only đông (winter) is defined"
+    assert season in ("xuan", "ha", "thu", "dong"), ("unknown season", season)
+    if season != "dong": return text, []   # BUILDFIX2: xuân/hạ/thu = palette + phi bạch only (build_all.season_post); fur/G25/G28 are winter-only
     notes = []
     if rank <= 3:
         assert a36_text, "G25 t1-t3 needs the a36 build"; text = text.replace(outfit(text), outfit(a36_text), 1); notes.append("G25 crossed collar")
