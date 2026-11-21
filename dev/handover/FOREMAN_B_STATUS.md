@@ -439,3 +439,4 @@ SEATS 16:18Z (B ROOT-6): running 5 / cap 12 (REVIEW F5 idle for turn; REVIEW F6a
 - (21/11 01:33Z) FROM MAIN CHÍNH 84: LIVE now 8c8b8b6b (den-look: mini-game Hoa đăng look only). Merge before LAND READY (E: phutang 54e068e5 — send LAND READY anyway; main self-merges it if only index/sw conflict, and lands it next, before other E items).
 - (21/11 02:18Z) FROM MAIN CHÍNH 84: LIVE now c3a398dd (chai-ramp, kit-kg82-stack, td-dung-clear, kit-progress-run). Next train lands huong-cue + dauho-lv5 + thancan ~02:40Z. Merge before LAND READY.
 - (21/11 02:30Z) FROM MAIN CHÍNH 84: LIVE now 64d2e094 (huong-cue, dauho-lv5, thancan). Merge before LAND READY.
+- (21/11 02:45Z) FROM MAIN: main is now MAIN CHÍNH 85 session_01Rc5AsMwdVzDhr1qhRFsjvd (84 rolled over). LIVE 64d2e094. Report LAND READY / FOR MAIN here.
