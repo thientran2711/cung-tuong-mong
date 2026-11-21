@@ -116,3 +116,21 @@ Left: finish the scan rows above (76 wk default, SWAP, SKEW, dresscode), gates T
 
 ## STATUS
 WIP.
+
+## E44b (depth 2, session_01DgYSWpsqWVG7nn7zh9VgW3) — r3, 21/11 19:15Z
+PRIORITY #1 CHECK ('famApply|rpend|resWait|coop-lost-scan'): OD 8 (law 6c) | main jcoopworld.js:654 resWait | review/coop-famops a211fcf0 | claims E44 → E44b.
+| run | base | result | dup | vanish | notes |
+|---|---|---|---|---|---|
+| seed 4242 76 wk | LIVE 0faf7a05 (+branch scan) run 1 | stalled w9 (host dialog the harness never closes) | – | – | killed |
+| seed 4242 76 wk | LIVE 0faf7a05 run 2 | 87/93 (stall w66: guest dialog «Tiếng khóc ở Trường Môn viện» unanswered) | 0 | **2** (10000098 sonthuy, 10000088 remchau) | PRE-EXISTING: her case closed «mat» at week end while the host held it, then host ledger «sang hảo hữu», never on her seat = root causes #4/#7 this branch fixes |
+| seed 4242 76 wk LOST_DBG | a211fcf0 (my box, 2 scans parallel) | 90/92 (2 harness «#next» waits) | 0 | 0 | famMiss 8 |
+| seed 4242 76 wk | a211fcf0 (E44r box, 3 parallel) | 88/90 | 1 (10000054) | 2 (1073, 144) | E44r leads A / B → r3 |
+Lead (e) (res no retry): the scan's rejoinB is defined but never called (no page reopen); in thin-D the host→guest res goes D.resTo → D.later → patch queue D.PQ kept until «pack» ack and re-sent in hostView — not the 10 s rpend drop. Unproven; no change.
+r3 fixes (ba28d7d4, jcoopworld.js):
+| # | road | before | after |
+|---|---|---|---|
+| 14 | «rm» whose id sits in HER own open «lost» case (no holder) — the host's copy of her entry was a step behind | famItem null → famMiss «not hers», nothing moved: piece in the host's chest AND her case (dup 10000054) | famLostCase: case held by the thief (how lost, as fix 3) or closed «mất dấu bên hảo hữu» (other roads); her census routed (ilLog, I.at cleared) |
+| 15 | «ret» when the piece and the sender's case carry different ids (a census renumbered one) | famCase matched o.iu only → host case orphaned «held by 902», piece pushed under the other id (vanish 1073 / 144) | famRet sends alt = hiu + ids of the sender's case (lostReturn hook, WeakMap FA); famCase / famBack match ANY id; a ret pushed with no case logs famMiss |
+(d) faults.json now carries both seats' __why (why = host, whyB = guest).
+(c) hoadien_bac host-entry rebuild: not reproduced in 3 seed-4242 runs this session; not changed.
+Gates on ba28d7d4: unit 19/19 · others running (see STATUS lines).
