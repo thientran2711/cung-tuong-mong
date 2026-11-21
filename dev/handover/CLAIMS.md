@@ -859,7 +859,7 @@ kit-info-tap rv | review/kit-info-tap-rv c5bbde7e | rv session | PASS | 21/11
 | REVIEW coop-host-lag-r2 (opus BIG) of 70309b27 | review/coop-host-lag-r2-r1 | B | session_01N1tNP2pAt8zEYzvzn4yUxb | RUNNING | 21/11 11:36Z |
 | FOREMAN E #27 (opus; child of E #26, depth 8 LAST) | handover FOREMAN_E_STATUS | FOREMAN E #26 | session_01DgYSWm9AdaKw5vcJA3B9eS | DONE → handed to standby E #28 session_01DgYSWmZdYn5y3yDw6o778C 11:50Z | 21/11 11:44Z |
 kit-mark-fix rv4 | review/kit-mark-fix-rv4 123c4572 | rv session | PASS (re-merge) | 21/11
-| FOREMAN E #28 (opus; ex-standby, depth 0) | handover FOREMAN_E_STATUS | FOREMAN E #27 | session_01DgYSWmZdYn5y3yDw6o778C | RUNNING | 21/11 11:50Z |
+| FOREMAN E #28 (opus; ex-standby, depth 0) | handover FOREMAN_E_STATUS | FOREMAN E #27 | session_01DgYSWmZdYn5y3yDw6o778C | DONE → E #29 17:52Z | 21/11 11:50Z |
 kit-g4-plate rv | review/kit-g4-plate-rv 42d5985e | rv session | PASS (flaky G4 reproduced under load, fixed) | 21/11
 kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap overridden by !important .kart/.kopt rule) | 21/11
 | KIT KEEPER #3 (OPUS; successor of keeper #2) | review/kit-*; reports/kit-keeper-3.md | MAIN CHÍNH 93 | session_01Rc5AsKoUpGuLNJz1quYU61 | RUNNING | 21/11 12:19Z |
@@ -906,3 +906,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | RELAND ui-leftover-fold r2 (opus; MAIN 97 ORDER 17:01Z buổi perf 2984 vs 1426) | review/ui-leftover-fold-r2 | B | session_01N1tNP51qRC8xGqzqkrCEq7 | RUNNING | 21/11 17:19Z |
 | REVIEW dresscode r4 E30r4 (opus BIG; briefs/E30r4-review-dresscode-fix-r4.md) of cabfcad8 | review/dresscode-r4-land 0620c318; reports/dresscode-review.md «ROUND 4» | FOREMAN E #28 | session_01DgYSWo5nZ3yPQ2hdAEtXFQ | PASS 0620c318 → LAND READY (MAIN CHÍNH 97) | 21/11 17:40Z |
 | rv-kit-ef-unit r3 | PASS | review/kit-ef-unit-rv3 fd8280fa3fd7eddef4245084fb86a557d3dd3326 | cache only; tests + quickcheck + coop-e2e 124/124 |
+| FOREMAN E #29 (opus; child of E #28, depth 1) | handover FOREMAN_E_STATUS | FOREMAN E #28 | session_PENDING_E29 | RUNNING | 21/11 17:52Z |
