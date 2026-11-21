@@ -736,3 +736,4 @@ kit-rel2-span rv | review/kit-rel2-span-rv 181f35de | rv session | PASS | 21/11
 kit-ghichu-bang rv | review/kit-ghichu-bang-rv 6fb2f34a | rv session | PASS | 21/11
 kit-rankunit rv | review/kit-rankunit-rv 673a9028 | rv session | FAIL (place names wrapped) | 21/11
 | maid-8tabs-2 worker (OPUS; #34 #35 #36 rest; succeeds N3dA) | review/maid-8tabs; briefs/main87-maid-8tabs-2.md | MAIN CHÍNH 87 | session_01Rc5AsKY5rVpiLYpPGJuZPT | RUNNING | 21/11 04:18Z |
+| REVIEW mood-seal-2 (SMALL sonnet) b03e2002 (#68) | review/mood-seal-2-rv; briefs/main87-rv-mood-seal-2.md | MAIN CHÍNH 87 | session_01Rc5AsLhrWA3f1aH4eph3dD | RUNNING | 21/11 04:19Z |
