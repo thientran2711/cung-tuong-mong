@@ -1,0 +1,2 @@
+base: dev/handover/prompts_L2095/M2147-08_HoangHau_s62_thu_phuong_khuy.txt
+allow: always fully visible   # M2150 spec (ROOT-B3 L2150/L2152)

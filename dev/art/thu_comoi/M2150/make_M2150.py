@@ -30,6 +30,7 @@ J[3] = ("M2147-03_QuyNhan_s62_thu_vankien.txt", "M2150-03_s62_t3_thu.txt", [
   ("a wide stiff lilac brocade girdle at the natural waist, tied at the centre front with a soft lilac silk RIBBON BOW on her body's middle line, its long tails falling gracefully (duyên dáng),",
    "a slim lilac silk girdle edged with thin gold braid at the natural waist, tied OVER the outer robe in a neat bow at the CENTRE front of the waist, two LONG silk ties trailing down the skirt (thướt tha), each ending in a small silk tassel,"),
 ])
+sys.path.insert(0, str(D))
 try:
     from M2150_t48 import J48; J.update(J48)
 except ImportError:
