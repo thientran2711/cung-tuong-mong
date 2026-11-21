@@ -31,7 +31,7 @@ function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="obje
    new servants were "Thái giám ???" in her own guard-order and spy dialogs) */
 /* kc-roads fix: her own family while she still lives at home (S.kc.fam, !S.kc.inPal) are her own people — known, mood and nature seen (all nine home roads) */
 function k61Kin(e){try{return !!(e&&S&&S.kc&&!S.kc.inPal&&(S.kc.fam||[]).includes(e))}catch(x){return false}}
-function k61Own(e){try{return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)||k61Kin(e)||(typeof isSrv==="function"&&isSrv()&&e===srvM())/* maid-8tabs #34 (law 6b): a cung nữ knows her own chủ — never a grey «Người lạ» on the stage, the chủ row or her card */}catch(x){return false}}
+function k61Own(e){try{return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)||k61Kin(e)||(typeof isSrv==="function"&&isSrv()&&(e===srvM()||(e&&e.sid!=null&&((S.srv.met||[]).includes(e.sid)||ownerOf(e)===srvM()))))/* maid-8tabs #34/#35 (law 6b): a cung nữ knows her own chủ and the colleagues she serves with or has met (S.srv.met = her Đồng liêu) — never a grey «Người lạ» on the stage, the chủ row, the Đồng liêu pager, nor a card whose buttons the stranger rule greys out */}catch(x){return false}}
 function k61St(e){if(!e||!S||e===S)return 3;{const d=k61StageDesc(e);if(d===null)return 3;if(d)e=d;if(e===S)return 3}const K=k61S();if(!K)return 3;if(k61Own(e))return 3;return +K[kOf61(e)]||0}
 /* owner 11/15 (stranger rule, KIT §49.3): a consort Ta has NOT MET is a grey silhouette everywhere (portraits, strips, news rows, figures,
    the week book) — her name may be known, her face is not. Met = she talked / acted with her (S.met), or lives in the same palace
