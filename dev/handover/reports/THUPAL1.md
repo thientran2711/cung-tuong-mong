@@ -32,3 +32,26 @@ Why Xuân/Hạ move in 2–3: her Xuân coral-pink (hue 17) and Hạ peach (hue 
 - Pick s62 option 1 / 2 / 3 (or "đổi kiểu khác").
 - Deep wine / maple red as Thu for deep groups: OK as autumn, or also change?
 - Note: local branch in my container had diverged from origin (148 vs 56); I worked on a fresh branch from origin and push to the handover branch.
+
+---
+## PART 2 — L1583 full redo (Foreman msg 00:26Z: redo all 86 × 4, separate file, rule add)
+- Rule **B30** added (rule.py add, owner L1583 verbatim): MAIN carries the season feeling, SECONDARY free but suits; pink only as phụ in Thu.
+- Solver `dev/art/palettes3/four_season_L1583.py` → **dev/art/face-common/palettes_season_L1583.json** (NEW file; palettes_season_deep.json untouched) + diff `review-sheets/thu_palette_L1582/diff_L1583.json`.
+  Least change: keeps a pair when its main already reads right; else picks inside the group band (A32) + season notch; Hạ may go light (lemon/mango exist only light); Thu deep groups may lighten to .74; no grey phụ (B19); no pink/dusty-rose/light-salmon as a NEW Thu main (L1583); A31 ΔE ≥ 20 / neutral ≥ 12; check_unique **0 FAIL** (WARNs only).
+- Result (90 people): mains reading as their season Xuân 78 · Hạ 83 · Thu 84 (was 9) · Đông 86. **Every miss is a ★GỐC drawn root (29)** — kept per L27, listed in `_clashes` (owner may decide to let roots move). A31 had to relax to ΔE 16 (or 12 for c08/s63) for 11 people whose ★GỐC roots leave no room (`_fails`); 16 people carry A31 notes in `a31`.
+- CLASHES to report: (1) L27 ★GỐC fixed vs B30 — 29 drawn roots read another season (e.g. c08 Xuân root #DF9FA2 reads Thu, m02 Thu root #A5C56A reads Xuân, c32/m14/c14 Đông roots are cream = Thu). (2) B20/L769 "Thu/Đông only differ by hue, same light feel" vs B30 — autumn needs muted earthy colours; kept light within band, only hue/mutedness changed. (3) the solver's old "one colour family once" (not an owner rule) dropped; owner A31 ΔE kept.
+- s62 in the full solve: Xuân/Hạ/Đông unchanged, Thu = **rêu sáng #AEBF8E + hồng phấn nhạt #EBC5D0** (= option 1 type on sheet1).
+- Sheets: `review-sheets/thu_palette_L1582/L1583/00_s62_sample.png`, `01_Dịu_dàng … 06_Đoan_trang.png` (script sheet_L1583.py). **I looked at 01_Dịu_dàng only** (after the pink-Thu fix). 02–06 NOT yet looked at.
+
+## HANDOVER (worker rollover at context limit — coordinator opens successor)
+depth 5 · START_CTX ≈ 3 % · now ≈ 28 % (own estimate; get_session reads 0).
+Next steps for the successor:
+1. `git pull`; run `python3 dev/art/palettes3/four_season_L1583.py` (~2 min) then `python3 dev/art/palettes3/sheet_L1583.py`; LOOK at 00 and 02–06 full size. Watch for: Hạ "vàng chanh" that looks olive/greenish (e.g. c20 #DDD685), Thu persimmon that looks brown, deep groups' Thu (Sắc sảo / Kiêu kỳ / Quyến rũ) — maple/wine deep OK as Thu?, phụ that is greyish.
+2. Tune only in four_season_L1583.py (pink_thu, BAND, NOTCH, SECS); gate must stay 0 FAIL.
+3. Send s62 sample first (owner order), then group sheets, via the foreman; captions "Lượt N". Do NOT overwrite palettes_season_deep.json until the owner approves.
+4. Open owner questions: pick s62 (sheet1 option 1/2/3 or the full-solve row); may ★GỐC roots that read the wrong season move (29)?; are deep wine/maple reds OK as Thu for deep groups?
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.

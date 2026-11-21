@@ -1,0 +1,1994 @@
+[
+ {
+  "id": "c02",
+  "season": "xuan",
+  "main": [
+   "#98CB8D",
+   "#DB90B6"
+  ],
+  "sec": [
+   "#AFEBEE",
+   "#DCFFEE"
+  ]
+ },
+ {
+  "id": "c02",
+  "season": "ha",
+  "main": [
+   "#DA9071",
+   "#E78F68"
+  ],
+  "sec": [
+   "#B9C9F9",
+   "#CDDAFF"
+  ]
+ },
+ {
+  "id": "c02",
+  "season": "thu",
+  "main": [
+   "#CB92BE",
+   "#A5BB7D"
+  ],
+  "sec": [
+   "#E0F1FF",
+   "#C6ECFB"
+  ]
+ },
+ {
+  "id": "c04",
+  "season": "xuan",
+  "main": [
+   "#CD757A",
+   "#799C47"
+  ],
+  "sec": [
+   "#FFDEE7",
+   "#FFDEE7"
+  ]
+ },
+ {
+  "id": "c04",
+  "season": "thu",
+  "main": [
+   "#5F8F54",
+   "#64855D"
+  ],
+  "sec": [
+   "#E5E1D7",
+   "#E5E1D7"
+  ]
+ },
+ {
+  "id": "c05",
+  "season": "ha",
+  "main": [
+   "#E6A375",
+   "#FAA067"
+  ],
+  "sec": [
+   "#49457C",
+   "#49457C"
+  ]
+ },
+ {
+  "id": "c05",
+  "season": "thu",
+  "main": [
+   "#4E7D43",
+   "#516325"
+  ],
+  "sec": [
+   "#E3F3FF",
+   "#E3F3FF"
+  ]
+ },
+ {
+  "id": "c06",
+  "season": "ha",
+  "main": [
+   "#EAE697",
+   "#8D1D0A"
+  ],
+  "sec": [
+   "#ECF7FF",
+   "#ECF7FF"
+  ]
+ },
+ {
+  "id": "c06",
+  "season": "thu",
+  "main": [
+   "#903C61",
+   "#7C0439"
+  ],
+  "sec": [
+   "#FFEAEF",
+   "#FFE8E9"
+  ]
+ },
+ {
+  "id": "c08",
+  "season": "thu",
+  "main": [
+   "#E499A4",
+   "#D09E85"
+  ],
+  "sec": [
+   "#F3ECFF",
+   "#F3ECFF"
+  ]
+ },
+ {
+  "id": "c10",
+  "season": "xuan",
+  "main": [
+   "#7BB76E",
+   "#C16B7A"
+  ],
+  "sec": [
+   "#ECE2FE",
+   "#ECE2FE"
+  ]
+ },
+ {
+  "id": "c10",
+  "season": "thu",
+  "main": [
+   "#C16B7A",
+   "#90A468"
+  ],
+  "sec": [
+   "#C7EBDA",
+   "#C7EBDA"
+  ]
+ },
+ {
+  "id": "c11",
+  "season": "ha",
+  "main": [
+   "#FFAC97",
+   "#FF9C67"
+  ],
+  "sec": [
+   "#FFF0FB",
+   "#FFF0FB"
+  ]
+ },
+ {
+  "id": "c11",
+  "season": "thu",
+  "main": [
+   "#8B4A86",
+   "#76183A"
+  ],
+  "sec": [
+   "#F0F5CA",
+   "#F0F5CA"
+  ]
+ },
+ {
+  "id": "c14",
+  "season": "thu",
+  "main": [
+   "#903C61",
+   "#76183A"
+  ],
+  "sec": [
+   "#D5FAE9",
+   "#D5FAE9"
+  ]
+ },
+ {
+  "id": "c16",
+  "season": "ha",
+  "main": [
+   "#D58679",
+   "#DC8067"
+  ],
+  "sec": [
+   "#B9E4E6",
+   "#B9E4E6"
+  ]
+ },
+ {
+  "id": "c19",
+  "season": "xuan",
+  "main": [
+   "#852533",
+   "#852533"
+  ],
+  "sec": [
+   "#FFE0E8",
+   "#FFE7F3"
+  ]
+ },
+ {
+  "id": "c19",
+  "season": "ha",
+  "main": [
+   "#E4E89A",
+   "#E4E89A"
+  ],
+  "sec": [
+   "#FFF3E9",
+   "#F6C3BA"
+  ]
+ },
+ {
+  "id": "c19",
+  "season": "thu",
+  "main": [
+   "#7F447B",
+   "#6A7E40"
+  ],
+  "sec": [
+   "#E3F3FF",
+   "#E3F3FF"
+  ]
+ },
+ {
+  "id": "c20",
+  "season": "xuan",
+  "main": [
+   "#DA9098",
+   "#D58AB0"
+  ],
+  "sec": [
+   "#D2ECFF",
+   "#D2ECFF"
+  ]
+ },
+ {
+  "id": "c20",
+  "season": "ha",
+  "main": [
+   "#F6A496",
+   "#DDD685"
+  ],
+  "sec": [
+   "#CFB8EC",
+   "#CFB8EC"
+  ]
+ },
+ {
+  "id": "c22",
+  "season": "thu",
+  "main": [
+   "#68985D",
+   "#779970"
+  ],
+  "sec": [
+   "#FCD6E0",
+   "#FCD6E0"
+  ]
+ },
+ {
+  "id": "c26",
+  "season": "ha",
+  "main": [
+   "#FEAD94",
+   "#EFDF7E"
+  ],
+  "sec": [
+   "#E0F1FF",
+   "#E0F1FF"
+  ]
+ },
+ {
+  "id": "c26",
+  "season": "thu",
+  "main": [
+   "#E6AFE0",
+   "#E5A884"
+  ],
+  "sec": [
+   "#D4F9E7",
+   "#D4F9E7"
+  ]
+ },
+ {
+  "id": "c26",
+  "season": "dong",
+  "main": [
+   "#4FCCD9",
+   "#4FCCD9"
+  ],
+  "sec": [
+   "#EFF3C9",
+   "#F1F0D9"
+  ]
+ },
+ {
+  "id": "c28",
+  "season": "ha",
+  "main": [
+   "#EBE68E",
+   "#EBE68E"
+  ],
+  "sec": [
+   "#ECE2FE",
+   "#F7DDE4"
+  ]
+ },
+ {
+  "id": "c31",
+  "season": "ha",
+  "main": [
+   "#FCB17E",
+   "#F4EC94"
+  ],
+  "sec": [
+   "#FFF3E9",
+   "#C1D0F9"
+  ]
+ },
+ {
+  "id": "c31",
+  "season": "thu",
+  "main": [
+   "#993842",
+   "#78172F"
+  ],
+  "sec": [
+   "#E3F3FF",
+   "#E3F3FF"
+  ]
+ },
+ {
+  "id": "c32",
+  "season": "ha",
+  "main": [
+   "#FBA192",
+   "#FBA192"
+  ],
+  "sec": [
+   "#EFF3C9",
+   "#F1FAD9"
+  ]
+ },
+ {
+  "id": "c32",
+  "season": "thu",
+  "main": [
+   "#82B976",
+   "#95AF74"
+  ],
+  "sec": [
+   "#FFE7EE",
+   "#FFE8E9"
+  ]
+ },
+ {
+  "id": "m02",
+  "season": "ha",
+  "main": [
+   "#FC9382",
+   "#FBA773"
+  ],
+  "sec": [
+   "#A4D8FE",
+   "#AED7F5"
+  ]
+ },
+ {
+  "id": "m04",
+  "season": "xuan",
+  "main": [
+   "#68985D",
+   "#C16B7A"
+  ],
+  "sec": [
+   "#E2E6BC",
+   "#E2E6BC"
+  ]
+ },
+ {
+  "id": "m04",
+  "season": "thu",
+  "main": [
+   "#C16B7A",
+   "#779970"
+  ],
+  "sec": [
+   "#FCD6E0",
+   "#E8C3E4"
+  ]
+ },
+ {
+  "id": "m05",
+  "season": "ha",
+  "main": [
+   "#EAE697",
+   "#EAE697"
+  ],
+  "sec": [
+   "#CFB8EC",
+   "#E6D2F0"
+  ]
+ },
+ {
+  "id": "m08",
+  "season": "xuan",
+  "main": [
+   "#D390B0",
+   "#D390B0"
+  ],
+  "sec": [
+   "#E0F1FF",
+   "#F1F5FF"
+  ]
+ },
+ {
+  "id": "m08",
+  "season": "ha",
+  "main": [
+   "#E4E89A",
+   "#DFE585"
+  ],
+  "sec": [
+   "#FFE7EE",
+   "#FCDEC7"
+  ]
+ },
+ {
+  "id": "m09",
+  "season": "ha",
+  "main": [
+   "#FCB17E",
+   "#FCB17E"
+  ],
+  "sec": [
+   "#F7F3FF",
+   "#E8EEFF"
+  ]
+ },
+ {
+  "id": "m09",
+  "season": "thu",
+  "main": [
+   "#793B6D",
+   "#76183A"
+  ],
+  "sec": [
+   "#FBEFD6",
+   "#FBEFD6"
+  ]
+ },
+ {
+  "id": "m10",
+  "season": "ha",
+  "main": [
+   "#FFBB92",
+   "#E8DB89"
+  ],
+  "sec": [
+   "#C6F2F4",
+   "#C6F2F4"
+  ]
+ },
+ {
+  "id": "m10",
+  "season": "thu",
+  "main": [
+   "#955290",
+   "#D09075"
+  ],
+  "sec": [
+   "#E5E1D7",
+   "#E5E1D7"
+  ]
+ },
+ {
+  "id": "m14",
+  "season": "ha",
+  "main": [
+   "#EAA16D",
+   "#EFDF7E"
+  ],
+  "sec": [
+   "#CDF2E0",
+   "#CDF2E0"
+  ]
+ },
+ {
+  "id": "m14",
+  "season": "thu",
+  "main": [
+   "#D28BCC",
+   "#DCA37B"
+  ],
+  "sec": [
+   "#A4D8FE",
+   "#A4D8FE"
+  ]
+ },
+ {
+  "id": "m16",
+  "season": "ha",
+  "main": [
+   "#E09974",
+   "#F7A470"
+  ],
+  "sec": [
+   "#C6F2F4",
+   "#C3EFEE"
+  ]
+ },
+ {
+  "id": "m16",
+  "season": "thu",
+  "main": [
+   "#925786",
+   "#CA8972"
+  ],
+  "sec": [
+   "#FCD6E0",
+   "#FCD6E0"
+  ]
+ },
+ {
+  "id": "m18",
+  "season": "xuan",
+  "main": [
+   "#7FB980",
+   "#F79DCB"
+  ],
+  "sec": [
+   "#F3E8BD",
+   "#EAE8BA"
+  ]
+ },
+ {
+  "id": "m18",
+  "season": "ha",
+  "main": [
+   "#E09974",
+   "#E69063"
+  ],
+  "sec": [
+   "#88D4D3",
+   "#88D4D3"
+  ]
+ },
+ {
+  "id": "m18",
+  "season": "thu",
+  "main": [
+   "#E69EDF",
+   "#90B78F"
+  ],
+  "sec": [
+   "#F2EAFF",
+   "#F2EAFF"
+  ]
+ },
+ {
+  "id": "m19",
+  "season": "thu",
+  "main": [
+   "#82B976",
+   "#94B68C"
+  ],
+  "sec": [
+   "#CDF2E0",
+   "#D8FFF6"
+  ]
+ },
+ {
+  "id": "m20",
+  "season": "xuan",
+  "main": [
+   "#7FB980",
+   "#EB8A9C"
+  ],
+  "sec": [
+   "#E0F1FF",
+   "#E0F1FF"
+  ]
+ },
+ {
+  "id": "m20",
+  "season": "ha",
+  "main": [
+   "#EFE495",
+   "#EA8B78"
+  ],
+  "sec": [
+   "#D4F9E7",
+   "#C5D8BB"
+  ]
+ },
+ {
+  "id": "m20",
+  "season": "thu",
+  "main": [
+   "#E88696",
+   "#8AB189"
+  ],
+  "sec": [
+   "#FFDEE7",
+   "#F6C3BA"
+  ]
+ },
+ {
+  "id": "m22",
+  "season": "ha",
+  "main": [
+   "#E7E798",
+   "#E3DC8B"
+  ],
+  "sec": [
+   "#C7E6FD",
+   "#EBF9F5"
+  ]
+ },
+ {
+  "id": "m22",
+  "season": "thu",
+  "main": [
+   "#925786",
+   "#C19974"
+  ],
+  "sec": [
+   "#FED4B9",
+   "#F8ECE6"
+  ]
+ },
+ {
+  "id": "m28",
+  "season": "ha",
+  "main": [
+   "#EAE697",
+   "#EAE697"
+  ],
+  "sec": [
+   "#9AD4B4",
+   "#FFF2ED"
+  ]
+ },
+ {
+  "id": "m28",
+  "season": "thu",
+  "main": [
+   "#AF71A1",
+   "#899E61"
+  ],
+  "sec": [
+   "#E7DAFF",
+   "#E7DAFF"
+  ]
+ },
+ {
+  "id": "m28",
+  "season": "dong",
+  "main": [
+   "#63A8E2",
+   "#63A8E2"
+  ],
+  "sec": [
+   "#D2ECFF",
+   "#DFF1FF"
+  ]
+ },
+ {
+  "id": "m29",
+  "season": "ha",
+  "main": [
+   "#D58679",
+   "#E8DB89"
+  ],
+  "sec": [
+   "#E5BBE1",
+   "#F4C1CF"
+  ]
+ },
+ {
+  "id": "m29",
+  "season": "thu",
+  "main": [
+   "#AF71A1",
+   "#CD926F"
+  ],
+  "sec": [
+   "#FFECDE",
+   "#EFF6FF"
+  ]
+ },
+ {
+  "id": "m29",
+  "season": "dong",
+  "main": [
+   "#11B7BF",
+   "#11B7BF"
+  ],
+  "sec": [
+   "#C7E6FD",
+   "#B7D4F9"
+  ]
+ },
+ {
+  "id": "s07",
+  "season": "ha",
+  "main": [
+   "#EFE495",
+   "#F4EC94"
+  ],
+  "sec": [
+   "#F6A78F",
+   "#F6A78F"
+  ]
+ },
+ {
+  "id": "s07",
+  "season": "thu",
+  "main": [
+   "#642B61",
+   "#516325"
+  ],
+  "sec": [
+   "#D5FAE9",
+   "#D5FAE9"
+  ]
+ },
+ {
+  "id": "s08",
+  "season": "xuan",
+  "main": [
+   "#9D6184",
+   "#9D5E7A"
+  ],
+  "sec": [
+   "#D6EDFF",
+   "#D6EDFF"
+  ]
+ },
+ {
+  "id": "s08",
+  "season": "thu",
+  "main": [
+   "#7B1542",
+   "#7C0439"
+  ],
+  "sec": [
+   "#F3ECFF",
+   "#F3ECFF"
+  ]
+ },
+ {
+  "id": "s09",
+  "season": "ha",
+  "main": [
+   "#E5976E",
+   "#E38755"
+  ],
+  "sec": [
+   "#FFF6D0",
+   "#FFF6D0"
+  ]
+ },
+ {
+  "id": "s09",
+  "season": "thu",
+  "main": [
+   "#4E7D43",
+   "#5D7133"
+  ],
+  "sec": [
+   "#D5FAE9",
+   "#B6F2F1"
+  ]
+ },
+ {
+  "id": "s10",
+  "season": "ha",
+  "main": [
+   "#EAE697",
+   "#EAE697"
+  ],
+  "sec": [
+   "#C9F5F7",
+   "#F7F3FF"
+  ]
+ },
+ {
+  "id": "s10",
+  "season": "thu",
+  "main": [
+   "#733567",
+   "#6A0235"
+  ],
+  "sec": [
+   "#E4D6FD",
+   "#E0D2FD"
+  ]
+ },
+ {
+  "id": "s11",
+  "season": "ha",
+  "main": [
+   "#E09974",
+   "#D88457"
+  ],
+  "sec": [
+   "#D8DCB2",
+   "#D8DCB2"
+  ]
+ },
+ {
+  "id": "s11",
+  "season": "thu",
+  "main": [
+   "#852D37",
+   "#782134"
+  ],
+  "sec": [
+   "#FFD9E3",
+   "#FED8EC"
+  ]
+ },
+ {
+  "id": "s12",
+  "season": "thu",
+  "main": [
+   "#4E7D43",
+   "#5B7B4C"
+  ],
+  "sec": [
+   "#FFEAEF",
+   "#FFEAEF"
+  ]
+ },
+ {
+  "id": "s13",
+  "season": "xuan",
+  "main": [
+   "#6AA36C",
+   "#CC84A8"
+  ],
+  "sec": [
+   "#E8E4DA",
+   "#E8E4DA"
+  ]
+ },
+ {
+  "id": "s13",
+  "season": "thu",
+  "main": [
+   "#C592B9",
+   "#80A07E"
+  ],
+  "sec": [
+   "#EFE6FF",
+   "#D6D6FE"
+  ]
+ },
+ {
+  "id": "s14",
+  "season": "xuan",
+  "main": [
+   "#8CBE81",
+   "#D48BB1"
+  ],
+  "sec": [
+   "#FEDEC4",
+   "#FEDEC4"
+  ]
+ },
+ {
+  "id": "s14",
+  "season": "ha",
+  "main": [
+   "#D58679",
+   "#EB8C79"
+  ],
+  "sec": [
+   "#88D4D3",
+   "#DCFFEE"
+  ]
+ },
+ {
+  "id": "s14",
+  "season": "thu",
+  "main": [
+   "#C592B9",
+   "#9BB984"
+  ],
+  "sec": [
+   "#F6ECC0",
+   "#F0EFE4"
+  ]
+ },
+ {
+  "id": "s15",
+  "season": "xuan",
+  "main": [
+   "#D48DA0",
+   "#D48DA0"
+  ],
+  "sec": [
+   "#E8E4DA",
+   "#FFF1F2"
+  ]
+ },
+ {
+  "id": "s15",
+  "season": "ha",
+  "main": [
+   "#E9A17C",
+   "#F49E70"
+  ],
+  "sec": [
+   "#EADEFF",
+   "#EADEFF"
+  ]
+ },
+ {
+  "id": "s15",
+  "season": "thu",
+  "main": [
+   "#68985D",
+   "#74915E"
+  ],
+  "sec": [
+   "#CCE9FF",
+   "#CEF7FF"
+  ]
+ },
+ {
+  "id": "s16",
+  "season": "ha",
+  "main": [
+   "#F3A976",
+   "#F3A976"
+  ],
+  "sec": [
+   "#9AD4B4",
+   "#B6E8D1"
+  ]
+ },
+ {
+  "id": "s16",
+  "season": "thu",
+  "main": [
+   "#672863",
+   "#93A869"
+  ],
+  "sec": [
+   "#E0F1FF",
+   "#ECF7FF"
+  ]
+ },
+ {
+  "id": "s17",
+  "season": "ha",
+  "main": [
+   "#E58870",
+   "#E0D880"
+  ],
+  "sec": [
+   "#004F38",
+   "#004F38"
+  ]
+ },
+ {
+  "id": "s17",
+  "season": "thu",
+  "main": [
+   "#98518A",
+   "#9C3B53"
+  ],
+  "sec": [
+   "#BCE8EA",
+   "#BCE8EA"
+  ]
+ },
+ {
+  "id": "s18",
+  "season": "thu",
+  "main": [
+   "#D88669",
+   "#D0897B"
+  ],
+  "sec": [
+   "#FBD9F2",
+   "#F3DAFE"
+  ]
+ },
+ {
+  "id": "s19",
+  "season": "ha",
+  "main": [
+   "#DA8375",
+   "#DA8375"
+  ],
+  "sec": [
+   "#E4D6FD",
+   "#CFDAFA"
+  ]
+ },
+ {
+  "id": "s19",
+  "season": "thu",
+  "main": [
+   "#70366C",
+   "#5B7B4C"
+  ],
+  "sec": [
+   "#FEDEC4",
+   "#FEDEC4"
+  ]
+ },
+ {
+  "id": "s19",
+  "season": "dong",
+  "main": [
+   "#1C7855",
+   "#70366C"
+  ],
+  "sec": [
+   "#FFD9E3",
+   "#FFD9E3"
+  ]
+ },
+ {
+  "id": "s20",
+  "season": "ha",
+  "main": [
+   "#E1897B",
+   "#D88457"
+  ],
+  "sec": [
+   "#D0F5E4",
+   "#D0F5E4"
+  ]
+ },
+ {
+  "id": "s20",
+  "season": "thu",
+  "main": [
+   "#852D37",
+   "#782134"
+  ],
+  "sec": [
+   "#EADEFF",
+   "#CFDAFA"
+  ]
+ },
+ {
+  "id": "s21",
+  "season": "thu",
+  "main": [
+   "#832D47",
+   "#76213E"
+  ],
+  "sec": [
+   "#F0E5BA",
+   "#E0D0A5"
+  ]
+ },
+ {
+  "id": "s22",
+  "season": "ha",
+  "main": [
+   "#E1EA93",
+   "#E3F482"
+  ],
+  "sec": [
+   "#FEDEC4",
+   "#F4C1CF"
+  ]
+ },
+ {
+  "id": "s22",
+  "season": "thu",
+  "main": [
+   "#763463",
+   "#76213E"
+  ],
+  "sec": [
+   "#C3EEF0",
+   "#C3EEF0"
+  ]
+ },
+ {
+  "id": "s23",
+  "season": "ha",
+  "main": [
+   "#DA8375",
+   "#DA8375"
+  ],
+  "sec": [
+   "#FEDEC4",
+   "#FAEECD"
+  ]
+ },
+ {
+  "id": "s23",
+  "season": "thu",
+  "main": [
+   "#832D47",
+   "#76213E"
+  ],
+  "sec": [
+   "#CCE9FF",
+   "#B8E1FF"
+  ]
+ },
+ {
+  "id": "s24",
+  "season": "ha",
+  "main": [
+   "#DF8071",
+   "#DF8071"
+  ],
+  "sec": [
+   "#F0E5BA",
+   "#D6D4A7"
+  ]
+ },
+ {
+  "id": "s25",
+  "season": "thu",
+  "main": [
+   "#852D37",
+   "#782134"
+  ],
+  "sec": [
+   "#CAEFDD",
+   "#B6DDBD"
+  ]
+ },
+ {
+  "id": "s26",
+  "season": "thu",
+  "main": [
+   "#7FB673",
+   "#8FA771"
+  ],
+  "sec": [
+   "#EBF0C6",
+   "#EBF0C6"
+  ]
+ },
+ {
+  "id": "s27",
+  "season": "ha",
+  "main": [
+   "#D3896B",
+   "#DD8363"
+  ],
+  "sec": [
+   "#9AD4B4",
+   "#9AD4B4"
+  ]
+ },
+ {
+  "id": "s27",
+  "season": "thu",
+  "main": [
+   "#F7ACBC",
+   "#7E8D65"
+  ],
+  "sec": [
+   "#ECF7FF",
+   "#ECF7FF"
+  ]
+ },
+ {
+  "id": "s28",
+  "season": "xuan",
+  "main": [
+   "#DE879F",
+   "#DE879F"
+  ],
+  "sec": [
+   "#BCEBD1",
+   "#B6DDBD"
+  ]
+ },
+ {
+  "id": "s28",
+  "season": "ha",
+  "main": [
+   "#E09974",
+   "#E79265"
+  ],
+  "sec": [
+   "#CFB8EC",
+   "#CFB8EC"
+  ]
+ },
+ {
+  "id": "s28",
+  "season": "thu",
+  "main": [
+   "#76AC6A",
+   "#809862"
+  ],
+  "sec": [
+   "#EFEBE1",
+   "#EFEBE1"
+  ]
+ },
+ {
+  "id": "s29",
+  "season": "xuan",
+  "main": [
+   "#C485A8",
+   "#CC84A8"
+  ],
+  "sec": [
+   "#E5E9BF",
+   "#E5E9BF"
+  ]
+ },
+ {
+  "id": "s29",
+  "season": "ha",
+  "main": [
+   "#F6A496",
+   "#F99885"
+  ],
+  "sec": [
+   "#EADEFF",
+   "#EADEFF"
+  ]
+ },
+ {
+  "id": "s29",
+  "season": "thu",
+  "main": [
+   "#7BB76E",
+   "#83A06D"
+  ],
+  "sec": [
+   "#C4E3F9",
+   "#C4E3F9"
+  ]
+ },
+ {
+  "id": "s30",
+  "season": "xuan",
+  "main": [
+   "#7AAB6F",
+   "#D57577"
+  ],
+  "sec": [
+   "#AFEBEE",
+   "#AFEBEE"
+  ]
+ },
+ {
+  "id": "s30",
+  "season": "ha",
+  "main": [
+   "#E1EA93",
+   "#F39F6C"
+  ],
+  "sec": [
+   "#EEB0C2",
+   "#F4C1CF"
+  ]
+ },
+ {
+  "id": "s30",
+  "season": "thu",
+  "main": [
+   "#DF8C6F",
+   "#9BB984"
+  ],
+  "sec": [
+   "#FEDEC4",
+   "#F4E0D1"
+  ]
+ },
+ {
+  "id": "s31",
+  "season": "xuan",
+  "main": [
+   "#8CBE81",
+   "#BA6C76"
+  ],
+  "sec": [
+   "#E8E4DA",
+   "#EDF0E5"
+  ]
+ },
+ {
+  "id": "s31",
+  "season": "ha",
+  "main": [
+   "#E7A277",
+   "#F39F6C"
+  ],
+  "sec": [
+   "#FBBDCF",
+   "#EED3D4"
+  ]
+ },
+ {
+  "id": "s31",
+  "season": "thu",
+  "main": [
+   "#B97275",
+   "#9BB984"
+  ],
+  "sec": [
+   "#AFEBEE",
+   "#A3DEDD"
+  ]
+ },
+ {
+  "id": "s32",
+  "season": "xuan",
+  "main": [
+   "#73AC74",
+   "#DA86B8"
+  ],
+  "sec": [
+   "#FFE3EA",
+   "#FFE3EA"
+  ]
+ },
+ {
+  "id": "s32",
+  "season": "thu",
+  "main": [
+   "#C592B9",
+   "#80A07E"
+  ],
+  "sec": [
+   "#CAEFDD",
+   "#A3DEDD"
+  ]
+ },
+ {
+  "id": "s33",
+  "season": "thu",
+  "main": [
+   "#4A7E3E",
+   "#4E6022"
+  ],
+  "sec": [
+   "#FEDEC4",
+   "#FEDEC4"
+  ]
+ },
+ {
+  "id": "s35",
+  "season": "thu",
+  "main": [
+   "#993842",
+   "#7E9354"
+  ],
+  "sec": [
+   "#E9DDC4",
+   "#DCD0B0"
+  ]
+ },
+ {
+  "id": "s36",
+  "season": "thu",
+  "main": [
+   "#9E5B99",
+   "#6A7E40"
+  ],
+  "sec": [
+   "#BCEBD1",
+   "#BCEBD1"
+  ]
+ },
+ {
+  "id": "s37",
+  "season": "thu",
+  "main": [
+   "#A9496B",
+   "#9C3B53"
+  ],
+  "sec": [
+   "#E9DDC4",
+   "#E9DDC4"
+  ]
+ },
+ {
+  "id": "s38",
+  "season": "thu",
+  "main": [
+   "#4A7E3E",
+   "#6A7E40"
+  ],
+  "sec": [
+   "#F4D2EB",
+   "#F4D2EB"
+  ]
+ },
+ {
+  "id": "s39",
+  "season": "thu",
+  "main": [
+   "#993842",
+   "#78172F"
+  ],
+  "sec": [
+   "#FFF1F5",
+   "#F6C2C4"
+  ]
+ },
+ {
+  "id": "s40",
+  "season": "xuan",
+  "main": [
+   "#3D6B32",
+   "#3D6B32"
+  ],
+  "sec": [
+   "#FBEFD6",
+   "#DCD0B0"
+  ]
+ },
+ {
+  "id": "s40",
+  "season": "ha",
+  "main": [
+   "#DF8071",
+   "#DF8071"
+  ],
+  "sec": [
+   "#F3ECFF",
+   "#F2ECF6"
+  ]
+ },
+ {
+  "id": "s40",
+  "season": "thu",
+  "main": [
+   "#7F447B",
+   "#76183A"
+  ],
+  "sec": [
+   "#D5FAE9",
+   "#ECF9F3"
+  ]
+ },
+ {
+  "id": "s41",
+  "season": "xuan",
+  "main": [
+   "#2C5A21",
+   "#2C5A21"
+  ],
+  "sec": [
+   "#E3F3FF",
+   "#ECF7FF"
+  ]
+ },
+ {
+  "id": "s41",
+  "season": "ha",
+  "main": [
+   "#E6A375",
+   "#F9ED6B"
+  ],
+  "sec": [
+   "#79466F",
+   "#AED7F5"
+  ]
+ },
+ {
+  "id": "s41",
+  "season": "dong",
+  "main": [
+   "#5073B5",
+   "#5B6EC1"
+  ],
+  "sec": [
+   "#FBEFD6",
+   "#FFF3E4"
+  ]
+ },
+ {
+  "id": "s42",
+  "season": "ha",
+  "main": [
+   "#E69671",
+   "#E18950"
+  ],
+  "sec": [
+   "#F7F3FF",
+   "#AED7F5"
+  ]
+ },
+ {
+  "id": "s42",
+  "season": "thu",
+  "main": [
+   "#4E7D43",
+   "#6A7E40"
+  ],
+  "sec": [
+   "#F0F5CA",
+   "#F0F5CA"
+  ]
+ },
+ {
+  "id": "s42",
+  "season": "dong",
+  "main": [
+   "#6B6CAE",
+   "#6B6CAE"
+  ],
+  "sec": [
+   "#FFECDE",
+   "#EDD5CB"
+  ]
+ },
+ {
+  "id": "s43",
+  "season": "xuan",
+  "main": [
+   "#CB656C",
+   "#9E497E"
+  ],
+  "sec": [
+   "#AFEBEE",
+   "#AFEBEE"
+  ]
+ },
+ {
+  "id": "s43",
+  "season": "ha",
+  "main": [
+   "#E6A375",
+   "#E9937C"
+  ],
+  "sec": [
+   "#FFE0E8",
+   "#FFE0E8"
+  ]
+ },
+ {
+  "id": "s43",
+  "season": "thu",
+  "main": [
+   "#98518A",
+   "#6A7E40"
+  ],
+  "sec": [
+   "#E3D6FF",
+   "#E3D6FF"
+  ]
+ },
+ {
+  "id": "s44",
+  "season": "ha",
+  "main": [
+   "#FFAF79",
+   "#E89751"
+  ],
+  "sec": [
+   "#E69498",
+   "#E69498"
+  ]
+ },
+ {
+  "id": "s45",
+  "season": "thu",
+  "main": [
+   "#649958",
+   "#7E9354"
+  ],
+  "sec": [
+   "#E4D6FD",
+   "#CFDAFA"
+  ]
+ },
+ {
+  "id": "s46",
+  "season": "ha",
+  "main": [
+   "#D48871",
+   "#DE8269"
+  ],
+  "sec": [
+   "#98CBF0",
+   "#98CBF0"
+  ]
+ },
+ {
+  "id": "s46",
+  "season": "thu",
+  "main": [
+   "#68985D",
+   "#74915E"
+  ],
+  "sec": [
+   "#FEDEC4",
+   "#FEDEC4"
+  ]
+ },
+ {
+  "id": "s47",
+  "season": "xuan",
+  "main": [
+   "#649958",
+   "#B86798"
+  ],
+  "sec": [
+   "#FEDEC4",
+   "#FBF8CA"
+  ]
+ },
+ {
+  "id": "s47",
+  "season": "ha",
+  "main": [
+   "#D3896B",
+   "#DD8363"
+  ],
+  "sec": [
+   "#EEB0C2",
+   "#F4C1CF"
+  ]
+ },
+ {
+  "id": "s47",
+  "season": "thu",
+  "main": [
+   "#AF71A1",
+   "#74915E"
+  ],
+  "sec": [
+   "#CCE9FF",
+   "#F2ECF6"
+  ]
+ },
+ {
+  "id": "s48",
+  "season": "ha",
+  "main": [
+   "#EEAB7D",
+   "#F1A167"
+  ],
+  "sec": [
+   "#CCE9FF",
+   "#DAF3FE"
+  ]
+ },
+ {
+  "id": "s48",
+  "season": "thu",
+  "main": [
+   "#68985D",
+   "#7C8D66"
+  ],
+  "sec": [
+   "#E5E9BF",
+   "#E5E9BF"
+  ]
+ },
+ {
+  "id": "s49",
+  "season": "thu",
+  "main": [
+   "#8CBE81",
+   "#9BB984"
+  ],
+  "sec": [
+   "#EADEFF",
+   "#DCC9E6"
+  ]
+ },
+ {
+  "id": "s50",
+  "season": "xuan",
+  "main": [
+   "#7AAB6F",
+   "#EB96C8"
+  ],
+  "sec": [
+   "#CAEFDD",
+   "#ADDEC7"
+  ]
+ },
+ {
+  "id": "s50",
+  "season": "ha",
+  "main": [
+   "#FF9F87",
+   "#FF9F87"
+  ],
+  "sec": [
+   "#FFD9E3",
+   "#FBF2FA"
+  ]
+ },
+ {
+  "id": "s50",
+  "season": "thu",
+  "main": [
+   "#DD90CC",
+   "#C3B58A"
+  ],
+  "sec": [
+   "#EFEBE1",
+   "#F1F8EE"
+  ]
+ },
+ {
+  "id": "s51",
+  "season": "ha",
+  "main": [
+   "#DA8F74",
+   "#DB8162"
+  ],
+  "sec": [
+   "#555095",
+   "#555095"
+  ]
+ },
+ {
+  "id": "s51",
+  "season": "thu",
+  "main": [
+   "#832D47",
+   "#76213E"
+  ],
+  "sec": [
+   "#E8E4DA",
+   "#D2E0CC"
+  ]
+ },
+ {
+  "id": "s52",
+  "season": "thu",
+  "main": [
+   "#733567",
+   "#677843"
+  ],
+  "sec": [
+   "#FFD9E3",
+   "#FFCCCE"
+  ]
+ },
+ {
+  "id": "s53",
+  "season": "ha",
+  "main": [
+   "#FD9F90",
+   "#FD9F90"
+  ],
+  "sec": [
+   "#FFE4CF",
+   "#DBE4FF"
+  ]
+ },
+ {
+  "id": "s53",
+  "season": "thu",
+  "main": [
+   "#733567",
+   "#546A37"
+  ],
+  "sec": [
+   "#E5E9BF",
+   "#E5E9BF"
+  ]
+ },
+ {
+  "id": "s54",
+  "season": "thu",
+  "main": [
+   "#447838",
+   "#546A37"
+  ],
+  "sec": [
+   "#EFE3CB",
+   "#EFE3CB"
+  ]
+ },
+ {
+  "id": "s55",
+  "season": "ha",
+  "main": [
+   "#EB936B",
+   "#EB936B"
+  ],
+  "sec": [
+   "#F9F5EB",
+   "#F6F6EB"
+  ]
+ },
+ {
+  "id": "s55",
+  "season": "thu",
+  "main": [
+   "#832D47",
+   "#782134"
+  ],
+  "sec": [
+   "#C3EEF0",
+   "#FCDEC7"
+  ]
+ },
+ {
+  "id": "s56",
+  "season": "xuan",
+  "main": [
+   "#4A7E3E",
+   "#4A7E3E"
+  ],
+  "sec": [
+   "#DEE2B9",
+   "#D5E1B5"
+  ]
+ },
+ {
+  "id": "s56",
+  "season": "thu",
+  "main": [
+   "#B35274",
+   "#9C3B53"
+  ],
+  "sec": [
+   "#F9D2DD",
+   "#F9D2DD"
+  ]
+ },
+ {
+  "id": "s57",
+  "season": "ha",
+  "main": [
+   "#DE826A",
+   "#DD7A5F"
+  ],
+  "sec": [
+   "#F9D2DD",
+   "#F0DCFA"
+  ]
+ },
+ {
+  "id": "s57",
+  "season": "thu",
+  "main": [
+   "#A9496B",
+   "#9C3B53"
+  ],
+  "sec": [
+   "#BCE8EA",
+   "#C0E5D3"
+  ]
+ },
+ {
+  "id": "s59",
+  "season": "thu",
+  "main": [
+   "#649958",
+   "#7E9354"
+  ],
+  "sec": [
+   "#AFEBEE",
+   "#A3DEDD"
+  ]
+ },
+ {
+  "id": "s60",
+  "season": "ha",
+  "main": [
+   "#EAE697",
+   "#BB4F25"
+  ],
+  "sec": [
+   "#EDCCE5",
+   "#EDCCE5"
+  ]
+ },
+ {
+  "id": "s60",
+  "season": "thu",
+  "main": [
+   "#AA4964",
+   "#9C3B53"
+  ],
+  "sec": [
+   "#CCE9FF",
+   "#CCE9FF"
+  ]
+ },
+ {
+  "id": "s61",
+  "season": "thu",
+  "main": [
+   "#4A7E3E",
+   "#4E6022"
+  ],
+  "sec": [
+   "#E3D6FF",
+   "#E3D6FF"
+  ]
+ },
+ {
+  "id": "s62",
+  "season": "thu",
+  "main": [
+   "#DF9ED9",
+   "#AEBF8E"
+  ],
+  "sec": [
+   "#FFE3EA",
+   "#EBC5D0"
+  ]
+ },
+ {
+  "id": "s64",
+  "season": "ha",
+  "main": [
+   "#FEAD94",
+   "#FEAD94"
+  ],
+  "sec": [
+   "#EDB9D5",
+   "#D9F4FF"
+  ]
+ },
+ {
+  "id": "s64",
+  "season": "thu",
+  "main": [
+   "#98CB8D",
+   "#9DC49B"
+  ],
+  "sec": [
+   "#F3E7CE",
+   "#FEEEC1"
+  ]
+ },
+ {
+  "id": "s64",
+  "season": "dong",
+  "main": [
+   "#67B9E2",
+   "#65B5E3"
+  ],
+  "sec": [
+   "#CCF8FA",
+   "#F4F7EC"
+  ]
+ },
+ {
+  "id": "s65",
+  "season": "xuan",
+  "main": [
+   "#A45B86",
+   "#FF95B7"
+  ],
+  "sec": [
+   "#C9F5F7",
+   "#CDF7FF"
+  ]
+ },
+ {
+  "id": "s65",
+  "season": "ha",
+  "main": [
+   "#DE826A",
+   "#ED8D7B"
+  ],
+  "sec": [
+   "#C4B4E5",
+   "#C4B4E5"
+  ]
+ },
+ {
+  "id": "s65",
+  "season": "thu",
+  "main": [
+   "#FF95B7",
+   "#788859"
+  ],
+  "sec": [
+   "#F9F5EB",
+   "#E8FBEB"
+  ]
+ }
+]
