@@ -90,3 +90,4 @@ Baselines (pre-swap): thu = rank8-s62/s62_t5.txt + s62_t6.txt (Set A; t6 there i
 3. Xuân t5: pre-swap words VERBATIM "OPEN at the front (its lobes rest on the shoulders and back, never covering the neck or the square inner neckline)" + net.
 4. Xuân t6 s62_t6_XUAN_COMOI_L1833 (9 989, PASS): pre-swap cape words VERBATIM + "a pearl-edged collar and cape trim". No cuts needed.
 5. Builder YEL_T6/LUX_T6: "rich gold-thread embroidery covering much of the robe, a pearl-edged collar and cape trim, … a grander gold headdress with more gold ornaments, … still clearly less grand" (ITEMFIX2 words restored). s62 t5 8 667 / t6 9 077, store + dong build OK.
+6b. owner L1834 (via #23): thu t5/t6 _L1833 phi bạch colour = "soft snow-violet silk (like #C6BAE0) … (a soft pastel, …)" (PALBACH1 words), colour words only; t6 keeps the thick form; t6 caption shortened ("on the background," dropped) to stay at 9 996. t5 9 181.
