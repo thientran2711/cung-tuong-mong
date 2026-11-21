@@ -67,24 +67,40 @@ function k91Hold(box,env){const C=kg82Canvas(box,.9,430),{g,W,H}=C;const lv=env.
  KG82.peek=()=>{const t=performance.now()-t0;if(t<0||done)return null;const p=C.client(W/2,H/2);return{hold:y>cy(t+120)+2,x:p.x,y:p.y}};
  return()=>{done=true;stop();document.removeEventListener("keydown",kd);document.removeEventListener("keyup",ku)}}
 
-/* =============== 2. FLING (Đầu hồ): drag back and release to throw the arrow; wind changes every throw =============== */
-function k91Fling(box,env){const C=kg82Canvas(box,.85,430),{g,W,H}=C;const lv=env.lv||0;const N=6,U=Math.min(W,H);
- const AIDT=mgLev(env,"dauho","aid");/* seconds of flight shown by the aim dots */const PULL=mgLev(env,"dauho","pull")||1;/* cal-p2: drag gain by ease (BAL.mgTier.lev.dauho.pull); the cap grows by the same factor so the strongest throw stays K·MAXD */const X0=W*.13,Y0=H*.8,GR=H*1.9,K=5.4*PULL,MAXD=U*.45/PULL,MY=H*.5,EAR=1.6;let px=0,mh=0,wd=0,k=0,pts=0,phase="aim",aim=null,fly=null,sol=null,landed=[],done=false;const pops=[];
- const setThrow=()=>{px=W*(.6+Math.random()*.22);mh=U*.05*mgLev(env,"dauho","mouth");/* mg-balance-2: mouth size by ease (BAL.mgTier.lev.dauho) */wd=(Math.random()*2-1)*H*.55*(k/N);aim=null;fly=null;sol=null;phase="aim"};setThrow();
+/* =============== 2. FLING (Đầu hồ): drag back and release to throw the arrow; wind changes every throw ===============
+   dauho-lv5 (owner 21/11, «thu lại cho ngay đúng cái bình»): the scoring holes ARE the holes painted in mg-dauho-pot.webp, measured on the art
+   (BAL.mgArt.dauho, shares of the picture width): the mouth opening (centre on the throw line MY, half-width R = the ease lever mouth) and the two
+   ear tubes at THEIR painted place (lower than the mouth). An arrow crossing the mouth plane inside the opening counts; on the outer lip it bounces
+   (miss); into the painted neck below the lip = miss; beside the vase it flies on and may still drop into an ear tube. A counted arrow is drawn standing IN its hole (the part below the near lip
+   is hidden by a clip), never beside the vase. */
+function k91Fling(box,env){const C=kg82Canvas(box,.85,430),{g,W,H}=C;const N=6,U=Math.min(W,H);const A=BAL.mgArt.dauho,M=A.mouth,E=A.ear;
+ const AIDT=mgLev(env,"dauho","aid");/* seconds of flight shown by the aim dots */const PULL=mgLev(env,"dauho","pull")||1;/* cal-p2: drag gain by ease (BAL.mgTier.lev.dauho.pull); the cap grows by the same factor so the strongest throw stays K·MAXD */const X0=W*.13,Y0=H*.8,GR=H*1.9,K=5.4*PULL,MAXD=U*.45/PULL,MY=H*.5;let px=0,R=0,Ws=0,wd=0,k=0,pts=0,phase="aim",aim=null,fly=null,sol=null,landed=[],done=false;const pops=[];
+ /* the painted holes at this throw's vase size: R = mouth half-width (BAL.mgTier.lev.dauho.mouth by ease), Ws = picture width, ears below the mouth */
+ const G=()=>({ry:M.ry*Ws,rim:A.rim*Ws,ey:MY+(E.cy-M.cy)*Ws,ex:E.dx*Ws,er:E.rx*Ws,ery:E.ry*Ws});
+ const setThrow=()=>{px=W*(.6+Math.random()*.22);R=U*.05*mgLev(env,"dauho","mouth");/* mg-balance-2: mouth size by ease (BAL.mgTier.lev.dauho) */Ws=R/M.rx;wd=(Math.random()*2-1)*H*.55*(k/N);aim=null;fly=null;sol=null;phase="aim"};setThrow();
  const vOf=(ax,ay,cx,cy)=>{let dx=cx-ax,dy=cy-ay;const L=Math.hypot(dx,dy);if(L>MAXD){dx*=MAXD/L;dy*=MAXD/L}return[-dx*K,-dy*K]};
+ /* ONE judge for the aim sim, the solver and the real flight: a step from (·,py) to (x,y) going down through a hole plane */
+ function judge(py,y,x){const g0=G();if(py<MY&&y>=MY){const d=Math.abs(x-px);if(d<=R)return{q:d<R*A.q.c?A.q.m[0]:A.q.m[1],at:0,x};if(d<=g0.rim)return{q:0,at:-9,x}}
+  if(py<g0.ey&&y>=g0.ey){for(const s of[-1,1])if(Math.abs(x-(px+s*g0.ex))<=g0.er)return{q:A.q.ear,at:s,x}}
+  if(y>MY&&y<g0.ey&&Math.abs(x-px)<=neck(y))return{q:0,at:-9,x};/* into the painted neck between the lip and the ears: it strikes the vase = miss */return null}
+ function neck(y){const N=A.neck,u=(y-MY)/Ws+M.cy;let i=0;while(i<N.length-2&&u>N[i+1][0])i++;const [a,ha]=N[i],[b,hb]=N[i+1];return Ws*(ha+(hb-ha)*cl((u-a)/(b-a),0,1))}
  function sim(vx,vy,cb){let x=X0,y=Y0,t=0;const dt=1/120;for(let i=0;i<600;i++){const py=y;vx+=wd*dt;vy+=GR*dt;x+=vx*dt;y+=vy*dt;t+=dt;if(cb&&cb(x,y,t)===false)return null;
-   if(py<MY&&y>=MY&&vy>0){const d=Math.abs(x-px);if(d<mh*.5)return{q:1,x,t};if(d<mh)return{q:.7,x,t};if(Math.abs(d-mh*EAR)<mh*.45)return{q:.5,x,t}}if(y>H+40||x>W+40||x<-40)return{q:0,x,t}}return{q:0,x,t}}
- function solve(){if(sol)return sol;let best=null;for(let a=30;a<=78;a+=1)for(let v=200;v<=MAXD*K;v+=4){const r=Math.PI*a/180,vx=v*Math.cos(r),vy=-v*Math.sin(r);const s=sim(vx,vy);if(s&&s.q===1){const d=Math.abs(s.x-px);if(!best||d<best.d)best={d,vx,vy}}}
+   const j=judge(py,y,x);if(j)return{q:j.q,x,t};if(y>H+40||x>W+40||x<-40)return{q:0,x,t}}return{q:0,x,t}}
+ function solve(){if(sol)return sol;let best=null;for(let a=30;a<=78;a+=1)for(let v=200;v<=MAXD*K;v+=4){const r=Math.PI*a/180,vx=v*Math.cos(r),vy=-v*Math.sin(r);const s=sim(vx,vy);if(s&&s.q===A.q.m[0]){const d=Math.abs(s.x-px);if(!best||d<best.d)best={d,vx,vy}}}
   sol=best||{vx:300,vy:-400};return sol}
- function pot(g){const x=px,y=MY;/* the bronze pitch-pot painting: mouth = 42 % of its width */
-  if(kg82Spr(g,"dauho-pot",x,y-mh*.35,mh*2/.42,null,{ay:0}))return;g.save();const gr=g.createLinearGradient(x-mh*3,0,x+mh*3,0);gr.addColorStop(0,"#6e4d0e");gr.addColorStop(.5,"#c9a03a");gr.addColorStop(1,"#6e4d0e");g.fillStyle=gr;
-  g.beginPath();g.moveTo(x-mh,y);g.lineTo(x+mh,y);g.bezierCurveTo(x+mh*.9,y+mh*1.6,x+mh*3.2,y+mh*2.4,x+mh*2.6,y+mh*5.4);g.lineTo(x-mh*2.6,y+mh*5.4);g.bezierCurveTo(x-mh*3.2,y+mh*2.4,x-mh*.9,y+mh*1.6,x-mh,y);g.fill();
-  [-1,1].forEach(s=>{g.fillRect(x+s*mh*2.2-mh*.5,y,mh,mh*1.6);g.fillStyle="#2a1a12";g.beginPath();g.ellipse(x+s*mh*2.2,y,mh*.5,mh*.18,0,0,Math.PI*2);g.fill();g.fillStyle=gr});
-  g.fillStyle="#2a1a12";g.beginPath();g.ellipse(x,y,mh,mh*.3,0,0,Math.PI*2);g.fill();g.restore()}
+ function pot(g){const x=px,y=MY,g0=G();/* the bronze pitch-pot painting, placed so its painted mouth opening sits on (px, MY) with half-width R */
+  if(kg82Spr(g,"dauho-pot",x,y-M.cy*Ws,Ws,null,{ay:0}))return;g.save();const r=g0.rim,gr=g.createLinearGradient(x-r*2.4,0,x+r*2.4,0);gr.addColorStop(0,"#6e4d0e");gr.addColorStop(.5,"#c9a03a");gr.addColorStop(1,"#6e4d0e");g.fillStyle=gr;
+  g.beginPath();g.moveTo(x-r,y);g.lineTo(x+r,y);g.bezierCurveTo(x+r*.7,y+r*1.3,x+r*2.5,y+r*1.9,x+r*2,y+r*4.3);g.lineTo(x-r*2,y+r*4.3);g.bezierCurveTo(x-r*2.5,y+r*1.9,x-r*.7,y+r*1.3,x-r,y);g.fill();
+  [-1,1].forEach(s=>{g.fillRect(x+s*g0.ex-g0.er*1.4,g0.ey,g0.er*2.8,g0.er*3);g.fillStyle="#2a1a12";g.beginPath();g.ellipse(x+s*g0.ex,g0.ey,g0.er,g0.ery,0,0,Math.PI*2);g.fill();g.fillStyle=gr});
+  g.fillStyle="#2a1a12";g.beginPath();g.ellipse(x,y,R,g0.ry,0,0,Math.PI*2);g.fill();g.restore()}
  function arrow(g,x,y,ang,len){if(kg82Spr(g,"dauho-arrow",x,y,len*1.25,null,{rot:ang,ax:.98,ay:.5}))return;g.save();g.translate(x,y);g.rotate(ang);g.strokeStyle="#4a3010";g.lineWidth=2.2;g.beginPath();g.moveTo(-len,0);g.lineTo(0,0);g.stroke();g.fillStyle=K91C.red();g.beginPath();g.moveTo(4,0);g.lineTo(-6,-4);g.lineTo(-6,4);g.fill();
   g.fillStyle="#f6ead6";g.strokeStyle="#8a7350";g.lineWidth=1;g.beginPath();g.moveTo(-len,0);g.lineTo(-len-8,-5);g.lineTo(-len+6,0);g.lineTo(-len-8,5);g.closePath();g.fill();g.stroke();g.restore()}
+ /* a counted arrow standing in its hole: it passes through its landing point on the hole plane, tip sunk below, tail leaning out by at most BAL.mgArt.dauho.lean;
+    the clip (all above the plane + the hole's ellipse) hides the part behind the near lip */
+ function stuck(g,a){const g0=G(),hx=a.at===0?px:px+a.at*g0.ex,hy=a.at===0?MY:g0.ey,rx=a.at===0?R:g0.er,ry=a.at===0?g0.ry:g0.ery,x=px+a.dx,len=U*.11;
+  const ang=Math.PI/2+A.lean*cl((x-hx)/rx,-1,1),s=A.sink*len;g.save();g.beginPath();g.rect(0,0,W,hy);g.ellipse(hx,hy,rx,ry,0,0,Math.PI*2);g.clip();arrow(g,x+Math.cos(ang)*s,hy+Math.sin(ang)*s,ang,len);g.restore()}
  const stop=k91Loop(now=>{kg82Bg(g,W,H,"dauho",0,.75);pot(g);
-  landed.forEach(a=>arrow(g,px+a.dx,MY+mh*.4,a.ang,U*.11));
+  landed.forEach(a=>stuck(g,a));
   /* wind */const wl=Math.abs(wd)/(H*.55);g.fillStyle="#3a2a1e";g.font=k91F(700,13,1);g.textAlign="left";g.textBaseline="top";kg82Lbl(g,wl<.05?"·":"~",10,10);
   if(wl>=.05){const ax=10,ay=34,L=20+40*wl;g.strokeStyle="#6b5643";g.lineWidth=2;g.beginPath();g.moveTo(ax+(wd<0?L:0),ay);g.lineTo(ax+(wd<0?0:L),ay);g.stroke();const hx=ax+(wd<0?0:L),s=wd<0?1:-1;g.beginPath();g.moveTo(hx,ay);g.lineTo(hx+6*s,ay-4);g.lineTo(hx+6*s,ay+4);g.fill()}
   if(phase==="aim"){let vx=0,vy=0;if(aim){[vx,vy]=vOf(aim.ax,aim.ay,aim.cx,aim.cy)}const ang=aim?Math.atan2(vy,vx):-Math.PI/4;arrow(g,X0,Y0,ang,U*.12);
@@ -92,16 +108,18 @@ function k91Fling(box,env){const C=kg82Canvas(box,.85,430),{g,W,H}=C;const lv=en
     g.strokeStyle="#8a735088";g.setLineDash([3,4]);g.beginPath();g.moveTo(aim.ax,aim.ay);g.lineTo(aim.cx,aim.cy);g.stroke();g.setLineDash([])}
    else{g.fillStyle="#3a2a1e";g.textAlign="center";g.font=k91F(700,13,1);kg82Lbl(g,"↙",W/2,H*.95,W-16)}}
   if(phase==="fly"&&fly){const dt=1/60;for(let i=0;i<2;i++){fly.vx+=wd*dt/2;fly.vy+=GR*dt/2;const py=fly.y;fly.x+=fly.vx*dt/2;fly.y+=fly.vy*dt/2;
-    if(py<MY&&fly.y>=MY&&fly.vy>0){const d=Math.abs(fly.x-px);const q=d<mh*.5?1:d<mh?.7:Math.abs(d-mh*EAR)<mh*.45?.5:0;if(q>0){land(q,fly.x,Math.atan2(fly.vy,fly.vx));break}}
-    if(fly.y>H*.9||fly.x>W+20||fly.x<-20){land(0,fly.x,0);break}}
+    const j=judge(py,fly.y,fly.x);if(j){land(j.q,fly.x,j.at);break}
+    if(fly.y>H*.9||fly.x>W+20||fly.x<-20){land(0,fly.x,-9);break}}
    if(fly)arrow(g,fly.x,fly.y,Math.atan2(fly.vy,fly.vx),U*.12)}
   kg82DrawPops(g,pops,now);env.hud({score:mgLive(env,10*(pts+N-k)/N),round:`Hồi ${Math.min(k+1,N)}/${N}`,time:`${N-k} tên`})});
- function land(q,x,ang){fly=null;phase="wait";pts+=q;if(q>0)landed.push({dx:x-px,ang});kg82Pop(pops,px,MY-mh*2,q===1?"Trúng giữa bình!":q>=.7?"Vào bình":q>0?"Vào tai bình":"Trượt",q>=.7?K91C.good():q>0?K91C.gold():K91C.red());kg82Pluck(k,q>0);k++;
+ function land(q,x,at){fly=null;phase="wait";pts+=q;if(q>0)landed.push({dx:x-px,at});KG82.flingLast={q,at,dx:x-px,R,ear:G()};kg82Pop(pops,px,MY-R*2,q===A.q.m[0]?"Trúng giữa bình!":q>=A.q.m[1]?"Vào bình":q>0?"Vào tai bình":"Trượt",q>=A.q.m[1]?K91C.good():q>0?K91C.gold():K91C.red());kg82Pluck(k,q>0);k++;
   if(k>=N){done=true;setTimeout(()=>env.end((10*pts/N)),700)}else setTimeout(setThrow,700)}
  k91Pointer(C,{down:(x,y)=>{if(phase==="aim")aim={ax:x,ay:y,cx:x,cy:y}},move:(x,y)=>{if(aim&&phase==="aim"){aim.cx=x;aim.cy=y}},
   up:(x,y)=>{if(!aim||phase!=="aim")return;aim.cx=x;aim.cy=y;const [vx,vy]=vOf(aim.ax,aim.ay,x,y);aim=null;if(Math.hypot(vx,vy)<60)return;fly={x:X0,y:Y0,vx,vy};phase="fly"}});
  KG82.peek=()=>{if(phase!=="aim"||done||aim)return null;const s=solve();const a=C.client(W/2,H*.35),b=C.client(W/2-s.vx/K,H*.35-s.vy/K);/* aim: a player watches the aim dots while pulling, so the longer the dots the finer the release (dev/measure/mg-bots.js scales its drag scatter by it) */
   return{drag:[[a.x,a.y],[(a.x+b.x)/2,(a.y+b.y)/2],[b.x,b.y]],aim:Math.min(1,.1/Math.max(.05,AIDT))}};
+ /* test hook (dev/test/dauho-hole.js): the painted holes of the current throw in canvas px + a throw from a given velocity */
+ KG82.flingGeo=()=>({W,H,px,MY,R,Ws,...G(),shoot:(vx,vy)=>{if(phase!=="aim")return false;fly={x:X0,y:Y0,vx,vy};phase="fly";return true},X0,Y0,GR,wd,setWind:v=>{wd=v;sol=null},setPx:v=>{px=v;sol=null},sim,judge,pot,stuck,phase:()=>phase,landed:()=>landed.slice()});
  return()=>{done=true;stop()}}
 
 /* ---------- mg-easy: shared bits of the three "verse/pair/riddle" games ---------- */
