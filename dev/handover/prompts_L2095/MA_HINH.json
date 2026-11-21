@@ -184,5 +184,13 @@
  "M2203-05": "M2203-05_s62_t5_thu.txt (bộ thu s62 t5 gốc M2187-05 + L2191/L2194/L2195/L2196 + đai/dây thêu giàu hơn Tần (L2197); lô cuối L2191–L2200)",
  "M2203-06": "M2203-06_s62_t6_thu.txt (bộ thu s62 t6 = M2196-06 + đai thêu chỉ vàng, ngọc trai, khóa vàng chạm; dây thêu (L2197); lô cuối L2191–L2200)",
  "M2203-07": "M2203-07_s62_t7_thu.txt (bộ thu s62 t7 gốc M2187-07 + L2191/L2194/L2195/L2196 + đai/dây thêu + ngọc bích, khóa vàng chạm ngọc trai (L2197); giữ 'robe'; lô cuối L2191–L2200)",
- "M2203-08": "M2203-08_s62_t8_thu.txt (bộ thu s62 t8 gốc M2187-08 + L2191/L2194/L2195/L2196 (vân kiên HH M2187 giữ nguyên) + đai/dây thêu phượng mây, khóa vàng chạm ngọc trai ngọc bích (L2197); lô cuối L2191–L2200)"
+ "M2203-08": "M2203-08_s62_t8_thu.txt (bộ thu s62 t8 gốc M2187-08 + L2191/L2194/L2195/L2196 (vân kiên HH M2187 giữ nguyên) + đai/dây thêu phượng mây, khóa vàng chạm ngọc trai ngọc bích (L2197); lô cuối L2191–L2200)",
+ "M2206-01": "M2206-01_s62_t1_thu.txt (bộ thu s62 t1 = M2203-01; L2206)",
+ "M2206-02": "M2206-02_s62_t2_thu.txt (bộ thu s62 t2 = M2203-02; L2206)",
+ "M2206-03": "M2206-03_s62_t3_thu.txt (bộ thu s62 t3 = M2203-03; L2206)",
+ "M2206-04": "M2206-04_s62_t4_thu.txt (bộ thu s62 t4 = M2203-04 (KHÓA); L2206)",
+ "M2206-05": "M2206-05_s62_t5_thu.txt (bộ thu s62 t5 = M2203-05 + vân kiên dài tới 1/3 trên bắp tay (chữ QP), cổ = chữ Tần, đai/dây/khóa giàu hơn Tần; L2206)",
+ "M2206-06": "M2206-06_s62_t6_thu.txt (bộ thu s62 t6 = M2203-06 + dây dài bằng Tần/HQP, thêm vải vàng (~½ HQP); L2206)",
+ "M2206-07": "M2206-07_s62_t7_thu.txt (bộ thu s62 t7 = M2203-07 + cổ/vân kiên-cổ/khuy = chữ QP (bỏ viền vàng rộng ở cổ); L2206)",
+ "M2206-08": "M2206-08_s62_t8_thu.txt (bộ thu s62 t8 = M2203-08 (KHÓA); L2206)"
 }
