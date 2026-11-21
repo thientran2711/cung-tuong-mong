@@ -20,3 +20,17 @@ Reviewer ask: short check of the 3 hunks above (`git diff 5168e396 ef0a89f2 -- d
 
 ## HANDOVER
 If LIVE moves: merge origin/main, `git checkout --theirs index.html sw.js`, any real j*.js hunk = LIVE line + branch BAL key, `bash dev/site/build_site.sh`, commit, gates script /home/user/wt/e43-out/gates.sh. Worktrees to delete: /home/user/wt/e43 /home/user/wt/e43h, scratch /home/user/wt/e43-out.
+
+## REVIEW E43r (opus reviewer session_01DgYSWq56vk37YGWWa6aGdM, 21/11) — PASS ceb5213a5cfd4d39d95b016ffe1ead3041bcdc09
+PRIORITY #1 CHECK ('cold-faction|errand-bal|maidLoveMonth|kcGo'): OD 0 | claims E43 session_01DgYSWm9MJSmYC8cYxWWRUE | review/* cold-faction-land2 ef0a89f2, main85-land-cold-faction 5168e396 | main LIVE — reviewed what exists, nothing rebuilt.
+Hunk check (by script): `git merge-tree 5168e396 e391b85f` (base 068662ad) → conflicts only j42.js, jkc.js, index.html, sw.js. Auto-merge tree 6f636da7 vs ef0a89f2 differs ONLY in the 3 conflict hunks (every other file incl. j10/j14/j95/jagacts3/jagstaff/jbal2/jkc2 = clean auto-merge, byte-equal).
+| hunk | LIVE side kept | branch side kept | BAL value = literal |
+|---|---|---|---|
+| j42 maidLoveMonth | `L` filter `&&!(asSelfOn(ownerOf(s)))` + co-op comment | `roll(BAL.odb.j42.rlMaidLoveMonth)` | 25 = 25 |
+| jkc kcGoWhy/kcGo | `can/spend(BAL.walk.near)` | `roll(BAL.odb.jkc.rlKcGo)` | 4 = 4 |
+| jkc soc cards | Giả bệnh / Gửi thư / Viết thư `lf:[…]` loss fields (branch never touched these 3 lines; base→5168e396 diff confirms) | tw «Thăm» card `roll(BAL.odb.jkc.rlGo_3)` | 40 = 40 |
+Nothing of either side lost; no literal back (law 4 ONE CORE); LIVE co-op guest filter kept (law 1 TWO-WAY).
+LIVE moved 3× during review; merged each (31fcfe30 → ba9b6243 → b88f3d63), conflicts index.html/sw.js only, `--theirs` + build_site.sh. Branch review/cold-faction-land2-r ceb5213a = ef0a89f2 + LIVE b88f3d63.
+Gates on ceb5213a: quickcheck PASS (old save ok, core gates PASS; perf 267/261 render) · one-core PASS · errand-bal PASS · cold-faction 20/20 · coop-e2e 94/94 · coop-cold-faction 22/22 (both seats) · coop-errand 16/16 (both seats). Same set green on 25276c1c (+ba9b6243) and 37ce5006 (+31fcfe30; first quickcheck run there hit a one-off perf longTaskMax 4466 vs 2484 on a busy box, rerun alone PASS).
+vs LIVE 23bb3862 (moved after the last gate): index.html/sw.js only → MAIN self-merge.
+Cleanup: worktrees /home/user/wt/e43r /home/user/wt/e43rh, scratch /home/user/wt/e43r-out (no shots made).
