@@ -1015,7 +1015,9 @@ function cySend(){if(eW())return;/* E-fix: at level >= 5 her cycle flags are the
 function cyWait(fe){if(!fe||fe.out||fe.alive===false||typeof window.cycOn!=="function"||typeof window.cyWk!=="function"||!window.cycOn(fe))return false;
  /* E-fix (cyAsk on host, level >= 5): her maid's card is asked BY THE HOST in her context (CW.herCy: jcycle cyAsk → part-D card) and
     answered there; the draw waits until her stored person holds this week's answer (or her maid had nothing to ask: CW.cyNo) */
- if(eW()&&host()){const g=window.cyWk(),c=CW.fcyb();if(c.rk===g||CW.cyNo===g)return false;if(c.df!==g&&CW.herCy)CW.herCy(g);return true}
+ if(eW()&&host()){const g=window.cyWk(),c=CW.fcyb();if(c.rk===g||CW.cyNo===g)return false;
+  /* coop-thin-g-f1: her card gone without an answer (✕ / stale / lost) → asked again, never a wait on a card that is not there */
+  if(c.df===g&&CW.cyLost&&CW.cyLost(g))CW.cyReask(g);if(c.df!==g&&CW.herCy)CW.herCy(g);return true}
  const r=CW.fcy,g=window.cyWk();if(r&&r.w===g&&!r.pend)return false;const e=COOP.state.ended||{};return !e[fs()]}
 /* E-fix: her entry as the draw sees it: while the week end holds her out of the deck (CW.pulled) friendEntry() is null, and a
    presence / patch event then freed the hold before she answered (cyWait(null) = false) */
@@ -1040,6 +1042,8 @@ CW.cyHer=()=>cyHer();
 CW.cyFree=()=>cyFree();/* thin E: jcoopthine's `do cyb` (her answer, written into her stored person) frees the draw */
 P2H.cyb=m=>{if(typeof m.w!=="number")return;CW.fcy={w:m.w,c:m.c&&typeof m.c==="object"?m.c:{},pend:!!m.pend,life:m.life||0};cyFree()};
 COOP.on("presence",()=>{if(CW.on&&CW.cyHold!=null)cyFree()});
+/* coop-thin-g-f1: at eW her answer / a lost card makes no presence: the held draw looks again every second (host only, only while held) */
+setInterval(()=>{try{if(CW.on&&CW.cyHold!=null&&host()&&eW()&&!CW.ctx)cyFree()}catch(e){console.error(e)}},1000);
 COOP.on("stop",()=>{CW.cyHold=null;CW.fcy=null;CW.cyK=""});
 COOP.on("room",()=>{CW.cyK="";CW.posKey="";CW.famSentH=""});COOP.on("peer",on=>{if(on){CW.posKey="";CW.famSentH=""}});/* a reconnect: a relay sent while the socket was down is lost; say it again on the next render */
 /* her monthly servant life (j42 srvMonth: wage, the spy's pay and the mistress catching her) runs inside the week while the friend's
