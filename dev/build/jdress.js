@@ -140,6 +140,7 @@ window.dressView=dressView;
 /* tap a cell of someone else's row (the j92 handler covers Trâm cài / Y phục): the item, and what she knows */
 document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("[data-kwear]");if(!t)return;const sl=t.dataset.kwear,who=t.dataset.kwho;if(who==="me"||sl==="tram"||sl==="y")return;
  const v=(typeof rivals!=="undefined"&&rivals.find(r=>String(r.id)===who))||null;if(!v)return;const c=dressSlots(v).find(x=>x.slot===sl);if(!c)return;const r=dressNow(S,v);
+ if(typeof kinlWear==="function"&&kinlWear(t,v,sl))return;/* bag-inline-3 F2: inline strip under the card, no pop-up */
  kitModal({kind:"info",title:`${c.label} của ${v.name}`,facts:[{who:v,text:c.empty?"Không mang gì.":`${c.name}${c.lux&&r?" · Xa xỉ "+c.lux:""}`},
   r?(c.over?"Món này vượt phẩm của nàng (Tố vượt phẩm).":"Ngươi đã thấy nàng mang món này."):"Ngươi chưa thấy tận mắt: gặp nàng cùng chỗ, hoặc dò la.",
   "Tố vượt phẩm · Tố xa xỉ: thẻ người của nàng, nhóm Hại nặng."],btn:"Đã hiểu"})},true);
