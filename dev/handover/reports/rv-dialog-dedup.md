@@ -1,0 +1,6 @@
+# rv dialog-dedup (reviewer, OD 21/11 #85) — PASS
+PRIORITY #1 CHECK: OD 21/11 ~05:45Z #85 | main LIVE 6e07f837 | review/dialog-dedup 2a5997df (+ rv fix) | claims worker session_01Rc5AsMKqxj4qxqFG31WLXb
+Merged newest main (6e07f837); index/sw taken from main and rebuilt (assemble + build_site), no conflict markers.
+Found by reading (script cannot see it): (1) j70 «warn»: messenger already says "người của … vào Thái y viện hỏi mua thạch tín", the fact line said it again -> now who + plan + stage only. (2) j70 seen: «… vào Thái y viện … (ở Thái y viện)» place twice -> place added only if the sighting does not name it. (3) «Tần Uyển Âm Hạ độc vào…» read as a name -> «mưu hạ độc vào điểm tâm». KIT.md WARNING / REPORT ORDER updated.
+Gates: dialog-dup-scan Fold 53/0 bad, iPad 54/0 bad, 0 page errors · quickcheck PASS (core gates, open, old save loads + plays a buổi, perf) · coop-e2e 92/92 · ~50 other dialogs read by eye: no more same-meaning repeats (non-blocking notes: «ge1» title «Đi hay ở» + «ở lại hay ra đi»; «Phi ???» = unmet rival name, pre-existing).
+Shots (Fold 755x1000 + iPad 1180x820, looked 3x): j70thr, thr via maid, j70 seen, j70 warn, j70 npc — messenger → one plain line → evidence → options, no boxed card, no overflow. Pictures blank only because the CDN is blocked in the test.
