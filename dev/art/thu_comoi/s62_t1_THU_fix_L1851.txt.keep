@@ -1,0 +1,6 @@
+base: dev/art/thu_comoi/s62_t1_THU_fix_L1834.txt
+allow: a snug upper garment with a straight SQUARE collar   # owner L1851: COPY Thường tại collar to Đáp ứng (t2 6AbJANKiJO s62_t2_THU_fix_L1776 'a fine silk robe with a straight SQUARE collar'), only the lower skirt differs
+allow: edged by a wide flat lilac band embroidered with lilac flowers   # owner L1851: t2 verbatim 'framed by a wide flat lilac band, delicate embroidered <motif> at the collar, sleeves and hem, never over the bands'
+allow: the lilac inner layer at the square neckline clearly visible above it   # owner L1851: t2 has none (this drew the bib)
+allow: small sprays of embroidered lilac flowers on the upper garment, never over the cuff or hem bands   # owner L1851: chest embroidery identical to t2 (t2 has motif only at collar/sleeves/hem)
+allow: phi bạch tím tuyết L1834   # owner L1851 caption

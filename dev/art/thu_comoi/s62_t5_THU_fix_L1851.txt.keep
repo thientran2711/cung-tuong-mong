@@ -1,0 +1,3 @@
+base: dev/art/thu_comoi/s62_t5_THU_fix_L1847.txt
+allow: a broad gold brocade girdle with two long jade pendants hanging on silk cords   # owner L1851 (via #24) NEW RULE G57: NO jade pendant (ngọc bội) in any prompt
+allow: never covered by sleeve or shawl   # owner L1851 G57 (pendant clause)
