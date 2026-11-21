@@ -140,5 +140,5 @@ Rule sentences stay on the rules screen only; the frame «Cách chơi» row is h
 ## 21/11 kit-ton-row (MAIN ROOT-82 deadline order; D econ-tamco L85, road-b2 L80 family)
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
-| 20/11 | D econ-tamco (c45265d6 KIT-BLOCKED) | **«Tốn» row accepts a cost the fx does not pay itself** — `ton:{tamco:-n}` / `ton:{bac:-pr}` on an option; hidden-outcome cards keep the option's own prices | PEND.roadpick (jtamco) «Hao tâm cơ» / «Thuê người» / «Làm như thường»; any option with a price paid elsewhere | kit keeper | **KIT READY** review/kit-ton-row (KIT §13.16) |
+| 20/11 | D econ-tamco (c45265d6 KIT-BLOCKED) | **«Tốn» row accepts a cost the fx does not pay itself** — `ton:{tamco:-n}` / `ton:{bac:-pr}` on an option; hidden-outcome cards keep the option's own prices | PEND.roadpick (jtamco) «Hao tâm cơ» / «Thuê người» / «Làm như thường»; any option with a price paid elsewhere | kit keeper | **DONE** — kit LIVE e4fd4dcf (KIT §13.16); used by review/econ-tamco jtamco PEND.roadpick (ton on all 3 roads), test econ-tamco.test.js reads the rendered Tốn rows |
 | 20/11 | road-b2 / E22t | **«quý nhau»** in the word/hint map | jrcv decline row | kit keeper | already KIT READY since review/kit-cost-rows-home (KIT §13.14, LIVE 27a7dcf5); re-checked in kit-ton-row.js |
