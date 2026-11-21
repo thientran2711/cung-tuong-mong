@@ -49,3 +49,6 @@ function kinlPickSlot(q,i){const o=KINV.reg[q.key];if(!o||!o.inline||!document.q
 .kinldet:has(.kinlempty){grid-template-columns:minmax(0,1fr) auto}
 .kinldet:has(.kinlempty) .kinlchips{grid-column:2}
 `;document.head.appendChild(st)})();
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§70.6",title:"kinlStrip (Chạm món trong lưới: thông tin hiện ngay dưới lưới, không pop-up)",
+ html:()=>{const o={key:"kitpg",items:[],sum:'<span class="chip g">Sắc +6</span><span class="chip">Xa xỉ 42</span><span class="chip g">✓ Đã biết: Đúng phẩm</span>'};
+  return kitItemDetail("tramngoc",{cls:"kidet-strip"}).replace(/^<div class="kidet /,'<div class="kidet kinldet-sample ')+kinlStrip(o)}})}catch(e){}
