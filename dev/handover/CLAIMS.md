@@ -874,3 +874,4 @@ kit-ef-unit rv | review/kit-ef-unit-rv 0620a05d | rv session | FAIL (nowrap over
 | REVIEW od03-favart (opus BIG) | review/od03-favart-rv; reports/review-od03-favart.md | FOREMAN D #16 | session_01964izCZEjJkV3NTqKebwmD | RUNNING | 21/11 13:25Z |
 | rv-kit-win-pay | PASS | review/kit-win-pay-rv 203cd559a4a1066a2be0ed64788bee8dece5861f | kit-win-pay.js + quickcheck + coop-e2e 94/94 |
 | rv mg-craft-r3 (OPUS BIG reviewer-lander, b6-relander-mg-craft) | PASS | review/mg-craft-r3 973b5ba712e2ff777f8da54cce597cd95c8e49d2 | jtd.js both sides (Thêu engine + LIVE guiding words on the stitch board); quickcheck + coop-e2e 94/94 + coop-craft-hand both seats | session_01N1tNP3ZWMeRDarhzz276Yb | 21/11 |
+| rv-kit-relrows-ms | PASS | review/kit-relrows-ms-rv 1641927e314979c8119bf2402ffb5067b613deb0 | no-op on LIVE; works on rel-men-servants+patch; quickcheck+coop-e2e 94/94 |
