@@ -2121,3 +2121,13 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (16:15Z) LAND CHAIN 2: LANDED coop-arrive-see a201d968 (GAP OD-CO1: second arriver sees friend already in room). LIVE a201d968. Next sg-card.
 - (16:26Z) LAND CHAIN 2: LANDED sg-card e193228f.
 - (16:26Z) LAND CHAIN 2: LANDED sg-card e193228f (D). LIVE e193228f. Next pet-bath-test.
+
+## MAIN CHÍNH 96 → NEXT MAIN (MAIN CHÍNH 97) HANDOVER (21/11 16:30Z) (ctx 32.5 % real; depth 7 → child depth 8 = LAST allowed)
+- LIVE = e193228f sg-card. Landed this session: coop-guest-names d3f44022, cold-faction 1bf7e14d, jlost-kyngo 468835a7, ban-cung e236bda5, coop-pool-face 270c6251, dialog-person-3 d541add9 (ma ma no longer speaks for player), kit-relrows-ms 08e1e934, coop-arrive-see a201d968, sg-card e193228f.
+- LAND CHAIN = LAND CHAIN 2 session_01Rc5AsLRRYSeTySKmsRyu3W. Queue: pet-bath-test → palace-life-gaps-r3 8599d166 → ui-leftover-fold a6b5fd3c → mg-craft-r3 973b5ba7. HOLD: coop-cyhold-rv 3e65dbe7 (until D #17 bisect clears; tell LRRY). od03-favart after D bundle k4. kit-win-pay 203cd559 HELD behind kit-ef-unit. NEVER two chains.
+- KIT KEEPER #4 session_01Rc5AsJkj5hx1zShFY8KnYZ owes, in order: (1) kit-ef-unit r3 (QUICKCHECK perf FAIL: longTask 5349>5000, buổi 2182 vs 1701 ms) → unblocks kit-win-pay; (2) kit-mark-fix r6 (iPad first-render re-fit missing, 3/5 flaky); (3) kit-opt-title-wrap r2 (flaky own-row meter at w320). All → rv MSxp session_01Rc5AsMSxpxbsAMRSE5oWrq → PASS → LRRY.
+- ORDERS OUT: B kszLiveRepick3 lost-tap family (15:36Z, SMALL kit fix); B rel-men-servants r2 may re-merge on LIVE now (kit-relrows-ms landed). D #17 session_01964izBrTYM1xdxezCgqLER has NO self-wake (depth 8): if no D line in FOREMAN_D_STATUS >90 min, send_message to wake it.
+- PERF WATCH: LRRY reported buổi new/live 3662/2356 ms on coop-pool-face (PASS, headroom shrinking). If next 2 lands trend same → ORDER perf-audit job to B on LIVE buổi render.
+- NUMBERS for owner: «~80% xong (ước lượng) · còn 86 việc không tính hình nhân vật · ~2–4 ngày tới 100 %» until D refreshes GAP_LIST_v3 SUMMARY. No owner question pending; owner silent all session.
+- TRIGGER: mine trig_01Xcas2RnJwU5JeiDV5M13uy (min 32) → 97 creates its own and DISABLES mine. Push tool: copy dev/tools/main-hpush.sh with your id (mine /home/user/wt/hpush96.sh).
+- 97 is at depth 8 (limit): it CANNOT open a child. At its roll point it writes the handover + a FOR MAIN line so the owner opens a ROOT (MAIN CHÍNH 98) from claude.ai (dev/handover/TAKEOVER_MAIN_ROOT.md).
