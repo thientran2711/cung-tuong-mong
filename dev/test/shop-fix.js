@@ -20,7 +20,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   const box=()=>p.evaluate(()=>{const d=document.querySelector('#modal .dlg');const q=d.getBoundingClientRect();return [Math.round(q.left),Math.round(q.top),Math.round(q.width),Math.round(q.height)]});
   const closeAll=()=>p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');m.hidden=true});
   /* reference 2: a one-woman visitor (the usual 32.7 card) */
-  await p.evaluate(()=>{const v=liveRivals(true)[0];Q.push({t:"Có người đến",who:pv(v),h:`<p>${v.name} sang chơi.</p>`,opts:[{n:"Tiếp",fx:{},x:"thân +3",go:()=>{}},{n:"Từ chối",fx:{},x:"thân -3",go:()=>{}}]});showModal()});
+  await p.evaluate(()=>{const v=liveRivals(true)[0];Q.push({t:"Có người đến",who:pv(v),h:`<p>${v.name} sang chơi.</p>`,opts:[{n:"Tiếp",fx:{suc:-3},x:"thân +3",go:()=>{}},{n:"Từ chối",fx:{suc:3},x:"thân -3",go:()=>{}}]});showModal()});
   await imgs();await sleep(1500);const refWoman=await box();await closeAll();
   /* the shop */
   await p.evaluate(()=>{S.shop=Object.keys(IT).filter(k=>IT[k].pr>0&&IT[k].pr<200).slice(0,8);S.bac=70;S.inv=S.inv.filter(e=>e.h||e.w);tab="inv";render();invAct("shop")});

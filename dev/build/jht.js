@@ -45,12 +45,12 @@ function qnPool(){S.qPool=S.qPool||[];return S.qPool}
 function qnById(id){return qnPool().find(q=>q.id===id)||null}
 function qnQ(q){return (3-q.tier)*20+q.sac/5+q.tai/5}
 /* names never share a "given name" / "surname + last word" with anyone in the game (j61 masks a stranger's name everywhere it appears) */
-const QNG=["Uyển Ninh","Tư Dao","Thanh Hoan","Cẩm Sắt","Nhã Như","Vân Tịch","Ngọc Khê","Lạc Y","Tri Ý","Hoán Khê","Ninh Hương","Thục Hoa","Diệu Âm","Cầm Thư","Như Yên","Uyển Thanh","Tố Vân","Linh Tê","Tịnh Dung","Mạn Ca","Kiều Ân","Hân Duyệt"];
-const CTG=["Tử Hiên","Cẩn Ngôn","Thừa Ân","Hạo Nhiên","Vân Khởi","Kỳ Dương","Duệ Trạch","Tư Viễn","Bách Xuyên","Thanh Hành","Dịch Chi","Trác Nhiên","Ngọc Đường","Hoài Cẩn","Mộ Bạch","Văn Cảnh","Quân Diệc","Tuấn Dật","Khải Trạch","Thận Hành","Minh Triết","Gia Huy"];
+const QNG=NM_F;/* one name core: jname.js */
+const CTG=NM_M;
 function nVars(n){const w=String(n||"").split(" ").filter(Boolean);const V=[n];if(w.length>=3){V.push(w.slice(-2).join(" "));V.push(w[0]+" "+w[w.length-1])}return V}
 function nUsed(skip){const S0=new Set();const all=[];try{all.push(...namesInUse())}catch(e){}(S.men||[]).forEach(m=>all.push(m.name));(S.staff||[]).forEach(x=>all.push(x.name));(rivals||[]).forEach(v=>all.push(v.name));
  h54Pool().forEach(x=>x!==skip&&all.push(x.name));qnPool().forEach(x=>x!==skip&&all.push(x.name));all.filter(Boolean).forEach(n=>nVars(n).forEach(v=>S0.add(v)));return S0}
-function nPick(G,skip){const U=nUsed(skip);for(let t=0;t<120;t++){const su=pick(SURN),g=pick(G);const n=su+" "+g;if(su.split(" ").some(w=>g.split(" ").includes(w)))continue;if(!nVars(n).some(v=>U.has(v)))return n}return pick(SURN)+" "+pick(G)}
+function nPick(G){return nmNew(G===CTG?"m":"f")}/* one name core (jname.js): unique across the save */
 function qnNew(){const P=qnPool();
  const house=pick(CLANS);const head=P.some(q=>!q.taken&&q.house===house&&q.tier===0);const tier=R(100)<20&&!head?0:R(100)<45?1:2;
  const name=nPick(QNG);
@@ -174,8 +174,8 @@ addEventListener("resize",()=>requestAnimationFrame(htFitSub));
 (function(){const r0=render;render=function(){const x=r0.apply(this,arguments);try{const off=(typeof isSrv==="function"&&isSrv())||!kgOn();HTK.slice(1).forEach(k=>{const b=document.querySelector(`#tabs [data-tab="${k}"]`);if(b)b.style.display=off?"none":""});
   if(off&&HTK.slice(1).includes(tab))tab="kid"}catch(e){}return x}})();
 
-/* the kit empty card: picture + title + lines (never a blank page) */
-function htEmpty(art,title,lines,acts){return `<div class="khtempty"><div class="khte-art">${kitArtFrame(art,"")}</div><div class="khte-b"><b class="khte-t">${title}</b><ul class="kr3l">${lines.map(x=>`<li>${x}</li>`).join("")}</ul>${acts?`<div class="pcb">${acts}</div>`:""}</div></div>`}
+/* the empty card = the kit's kitEmpty (j79): picture + title + hint lines (never a blank page) */
+function htEmpty(art,title,lines,acts){return kitEmpty(title,lines,{art,acts})}
 const momLab=p=>p===S?"Ngươi":`${rkName(p)} ${p.name}`;
 const momNote=p=>p===S?"":!p.alive?" (đã mất)":p.out?" (lãnh cung)":"";
 /* owner 11/15 (TƯ CHẤT vs HIỀN TÀI): Văn · Võ · Đức only for her own child from 3; Hiền tài only from 6 (her own: the number, others: the
@@ -280,10 +280,6 @@ if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function
   const same=el.dataset.tab===tab,keep=same?el.scrollTop:0;el.innerHTML=h;el.dataset.tab=tab;el.dataset.pg=String(PG[tab]);kitFix(el);panelScrollKeep(el,keep)}}
 /* ---------- CSS ---------- */
 const st=document.createElement("style");st.id="kit-ht";st.textContent=`
-.khtempty{display:grid;grid-template-columns:minmax(110px,170px) minmax(0,1fr);gap:12px 16px;align-items:center;padding:12px;margin:4px 0 8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0)}
-.khte-art{min-width:0}.khte-b{min-width:0;display:flex;flex-direction:column;gap:6px}.khte-t{font-size:1rem;color:var(--k-seal,#9a2c1c)}
-.khtempty .kr3l{font-size:.86rem}
-@container (max-width:420px){.khtempty{grid-template-columns:1fr;justify-items:center}.khte-art{width:min(170px,60%)}}
 .khtrule .kgl{font-weight:600}.khtrule small{font-size:.72rem}
 .kht .khtwhy{margin:0 0 4px;font-size:.82rem;color:inherit}
 .kht .pcn .khtsp,.kht .khtsp{display:flex;align-items:center;gap:8px;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.06)}.kht .khtsp span{min-width:0;overflow-wrap:anywhere;font-size:.82rem}

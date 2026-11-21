@@ -48,7 +48,7 @@ const NWB={
  const wrap=(c,inner)=>`<div class="kgr-demo nwb-demo" aria-hidden="true"><div class="kgr-st nwb-st ${c}">${inner}</div></div>`;
  const bowl='<svg viewBox="0 0 60 40"><path d="M4 12h52c0 16-12 26-26 26S4 28 4 12z" fill="#b07a3a" stroke="#5a3a0c" stroke-width="2"/><ellipse cx="30" cy="12" rx="26" ry="5" fill="#d9a85a" stroke="#5a3a0c" stroke-width="2"/></svg>';
  window.NWB_DEMO={
-  tdwalk:()=>wrap("nd-dung",`<i class="nd-half l"></i><i class="nd-half r"></i><b class="nd-mark m1">◀</b><b class="nd-mark m2">▶</b><span class="nd-bowl">${bowl}</span>${hand("h1")}${hand("h2")}`),
+  tdwalk:()=>{let f="";try{f=kitFigOf(S)}catch(e){}return wrap("nd-dung",`<i class="nd-half l"></i><i class="nd-half r"></i>${f?`<img class="nd-fig" src="${f}" alt="">`:""}<b class="nd-mark m1">◀</b><b class="nd-mark m2">▶</b><span class="nd-bowl">${bowl}</span><span class="nd-gauge"><i class="nd-gz"></i><i class="nd-needle"></i></span><b class="nd-ok">✓</b>${hand("h1")}${hand("h2")}`)},/* td-dung-clear: HER with the bowl on her head, the floor arrow, the held half, the bowl stands again (✓) */
   tdalms:()=>wrap("nd-hanh",`<span class="nd-pool">${NWB.ic("bowl")}</span><span class="nd-btn">−</span><span class="nd-who">${NWB.ic("elder")}</span><span class="nd-need"><i class="nwb-pip"></i><i class="nwb-pip"></i><i class="nwb-pip on nd-f1"></i><i class="nwb-pip on nd-f2"></i></span><span class="nd-btn nd-plus">+</span>${hand("h1")}<b class="nd-ok">✓</b>`),
   tdtalk:()=>wrap("nd-ngon",`<span class="nd-bub"><i></i><i></i><i></i></span><span class="nd-ring"></span><span class="nd-say">${NWB.ic("voice")}</span><span class="nd-bar"><i class="nd-band"></i><i class="nd-fill"></i></span>${hand("h1")}<b class="nd-ok">✓</b>`),
   groom:()=>wrap("nd-groom",`<span class="nd-zb"><i class="z1"></i><i class="z2"></i><i class="z3"></i><b class="nd-nd">▼</b></span>${hand("h1")}<b class="nd-ok">✓</b>`),
@@ -59,13 +59,23 @@ const NWB={
 .nwb-st>*{position:absolute;display:block}
 .nwb-st .nd-hand{width:38px;height:44px;opacity:0;filter:drop-shadow(0 2px 3px rgba(60,30,10,.35))}.nwb-st .nd-hand svg{width:100%;height:100%;display:block}.nwb-st .nd-hand .kgr-ring{left:36%;top:6%}
 .nwb-st .nd-ok{right:7%;top:8%;font-size:30px;color:var(--good,#2d7a52);opacity:0}
-/* td_dung */
-.nd-dung .nd-half{top:8%;bottom:8%;width:46%;border:2px dashed #b8935588;border-radius:10px;opacity:0}.nd-dung .nd-half.l{left:2%}.nd-dung .nd-half.r{right:2%}
-.nd-dung .nd-mark{left:50%;top:6%;transform:translateX(-50%);font-size:26px;color:var(--red,#c23b22);opacity:0}
-.nd-dung .nd-bowl{left:50%;bottom:10px;width:58px;margin-left:-29px;transform-origin:50% 100%;animation:ndBowl 8s infinite}
-.nd-dung .nd-hand.h1{right:18%;top:40%;animation:ndH1 8s infinite}.nd-dung .nd-hand.h2{left:18%;top:40%;animation:ndH2 8s infinite}
+/* td_dung (td-dung-clear): she stands, the bowl sits on her head; mark ◀ = it leans left; the hand holds the OTHER half; the bowl stands again */
+.nwb-st.nd-dung{height:168px}
+.nd-dung .nd-half{top:34px;bottom:4px;width:30%;border:2px dashed #b8935588;border-radius:10px;opacity:0}.nd-dung .nd-half.l{left:2%}.nd-dung .nd-half.r{right:2%}
+.nd-dung .nd-fig{left:50%;bottom:2px;height:112px;width:auto;margin-left:-26px;transform-origin:50% 100%;animation:ndFig 8s infinite}
+.nd-dung .nd-bowl{left:50%;bottom:112px;width:44px;margin-left:-22px;margin-bottom:-2px;transform-origin:50% 100%;animation:ndBowl 8s infinite}
+.nd-dung .nd-mark{left:50%;bottom:4px;margin-left:-60px;font-size:22px;color:#fff3d6;background:var(--red,#c23b22);border-radius:12px;padding:0 10px;opacity:0}
+.nd-dung .nd-mark.m2{margin-left:36px}
+.nd-dung .nd-gauge{left:10%;right:10%;top:6px;height:12px;border:2px solid #5a3a1a;border-radius:3px;background:rgba(194,59,34,.3);overflow:visible}
+.nd-dung .nd-gz{position:absolute;left:35%;right:35%;top:0;bottom:0;background:rgba(76,160,110,.85)}
+.nd-dung .nd-needle{position:absolute;top:10px;left:50%;margin-left:-6px;border:6px solid transparent;border-bottom:9px solid var(--good,#2d7a52);border-top:0;animation:ndNeedle 8s infinite}
+.nd-dung .nd-ok{right:6%;top:30px;animation:ndOk2 8s infinite}
+.nd-dung .nd-hand.h1{right:12%;top:90px;animation:ndH1 8s infinite}.nd-dung .nd-hand.h2{left:12%;top:90px;animation:ndH2 8s infinite}
 .nd-dung .m1{animation:ndM1 8s infinite}.nd-dung .m2{animation:ndM2 8s infinite}.nd-dung .nd-half.r{animation:ndH1 8s infinite}.nd-dung .nd-half.l{animation:ndH2 8s infinite}
-@keyframes ndBowl{0%,8%{transform:rotate(0)}20%,30%{transform:rotate(-24deg)}45%,55%{transform:rotate(0)}62%,72%{transform:rotate(24deg)}90%,100%{transform:rotate(0)}}
+@keyframes ndBowl{0%,8%{transform:rotate(0)}20%,30%{transform:translateX(-5px) rotate(-26deg)}45%,55%{transform:rotate(0)}62%,72%{transform:translateX(5px) rotate(26deg)}90%,100%{transform:rotate(0)}}
+@keyframes ndFig{0%,8%{transform:rotate(0)}20%,30%{transform:rotate(-3deg)}45%,55%{transform:rotate(0)}62%,72%{transform:rotate(3deg)}90%,100%{transform:rotate(0)}}
+@keyframes ndNeedle{0%,8%{margin-left:-6px;border-bottom-color:var(--good,#2d7a52)}20%,30%{margin-left:-62px;border-bottom-color:var(--red,#c23b22)}45%,55%{margin-left:-6px;border-bottom-color:var(--good,#2d7a52)}62%,72%{margin-left:50px;border-bottom-color:var(--red,#c23b22)}90%,100%{margin-left:-6px;border-bottom-color:var(--good,#2d7a52)}}
+@keyframes ndOk2{0%,40%{opacity:0}46%,56%{opacity:1}60%,90%{opacity:0}92%,100%{opacity:0}}
 @keyframes ndM1{0%,4%{opacity:0}8%,30%{opacity:1}36%,100%{opacity:0}}@keyframes ndM2{0%,54%{opacity:0}58%,80%{opacity:1}86%,100%{opacity:0}}
 @keyframes ndH1{0%,24%{opacity:0}28%,46%{opacity:1}52%,100%{opacity:0}}@keyframes ndH2{0%,72%{opacity:0}76%,94%{opacity:1}98%,100%{opacity:0}}
 /* td_hanh */
@@ -108,4 +118,66 @@ const NWB={
 @keyframes ndCong{0%,10%{opacity:0;transform:translate(0,0)}16%,28%{opacity:1;transform:translate(0,0)}36%{opacity:1;transform:translate(-4%,50%)}46%{opacity:1;transform:translate(-4%,50%)}84%{opacity:1;transform:translate(220px,40%)}92%,100%{opacity:0;transform:translate(220px,40%)}}
 .kgr-still~*,.kgr-still *{animation:none!important}
 @media (prefers-reduced-motion:reduce){.nwb-st *{animation:none!important}.nwb-st .nd-hand,.nwb-st .nd-ok,.nwb-st .nd-mark.m1{opacity:1!important}}
+`;document.head.appendChild(st)})();
+/* ================= rules-screen demos of mg-5s-clear (owner OD 21/11 ~00:50Z «tôi không hiểu đang chơi cái gì»): ban, tat/ne, banh, duho, doi, hoadien =================
+   Same pattern as the td demos above: wordless-ish looping CSS pictures (a short label only), still under Cảnh động off. Every one shows: the object, the move (a hand), the ✓. */
+(function(){
+ const H=()=>typeof KG82_HAND==="string"?KG82_HAND:"";
+ const hand=()=>`<span class="nd-hand">${H()}<b class="kgr-ring"></b></span>`;
+ const wrap=(c,inner)=>`<div class="kgr-demo nwb-demo" aria-hidden="true"><div class="kgr-st nwb-st nd5 ${c}">${inner}</div></div>`;
+ const cap=t=>`<b class="nd-cap">${t}</b>`;
+ Object.assign(window.NWB_DEMO,{
+  aim:()=>wrap("nd-ban",`<i class="nd-rail"><i class="nd-zn"></i></i><b class="nd-mk">▼<i></i></b><span class="nd-tg"></span>${cap("Chạm khi mũi ngắm ở giữa")}${hand()}<b class="nd-ok">✓</b>`),
+  slapbar:(s)=>{const ne=s&&s.kind==="ne";return wrap(ne?"nd-ne":"nd-tat",`<i class="nd-rail"><i class="nd-zn z1"></i><i class="nd-zn z2"></i></i><b class="nd-mk">▼</b>${cap(ne?"Chạm khi kim vào vùng xanh":"Chạm khi kim qua giữa vùng đỏ")}${hand()}<b class="nd-ok">✓</b>`)},
+  cook:()=>wrap("nd-banh",`<span class="nd-gg"><i class="nd-zn"></i><i class="nd-fl"></i></span><span class="nd-pot"></span><span class="nd-slip">gạo</span><span class="nd-fan">quạt</span>${cap("Giữ quạt cho lửa vừa, kéo nguyên liệu vào nồi")}${hand()}<b class="nd-ok">✓</b>`),
+  tspluck:()=>wrap("nd-duho",`<i class="nd-lane"><u>vùng hái</u></i><span class="nd-lotus"></span>${cap("Chạm sen khi nó vào vùng sáng")}${hand()}<b class="nd-ok">✓</b>`),
+  doiline:()=>wrap("nd-doi",`<span class="nd-sc l"><svg viewBox="0 0 40 40"><path d="M10 8 L28 32" stroke="#2a1a12" stroke-width="4" stroke-linecap="round"/></svg></span><i class="nd-axis"></i><span class="nd-sc r"></span><span class="nd-tl"><svg viewBox="0 0 40 40"><path d="M30 8 L12 32" stroke="#2a1a12" stroke-width="4" stroke-linecap="round"/></svg></span>${cap("Nét bên phải là hình lật gương của nét bên trái")}${hand()}<b class="nd-ok">✓</b>`),
+  hoadien:()=>wrap("nd-hd",`<span class="nd-face"><i class="nd-br l"></i><i class="nd-br r"></i><i class="nd-spot"></i></span><span class="nd-fl2">❀</span>${cap("Đặt hoa điền vào giữa hai đầu mày")}${hand()}<b class="nd-ok">✓</b>`)});
+ const st=document.createElement("style");st.id="nwb-demo5-css";st.textContent=`
+.nd5{height:128px}.nd5 .nd-cap{left:4%;right:4%;bottom:4px;text-align:center;font:700 12.5px var(--body,sans-serif);color:#5a3a1a}
+.nd5 .nd-hand{animation:ndx5H 8s infinite}.nd5 .nd-ok{right:6%;top:6px;animation:ndOk 8s infinite}
+@keyframes ndx5H{0%,46%{opacity:0;transform:scale(1.15)}50%{opacity:1;transform:scale(1)}58%{opacity:1;transform:scale(.92)}66%,100%{opacity:0}}
+.nd5 .nd-rail{left:10%;right:10%;top:36px;height:14px;border-radius:3px;background:rgba(120,86,40,.2);border:2px solid #8a6a30}
+.nd5 .nd-zn{position:absolute;top:0;bottom:0}
+.nd5 .nd-mk{top:22px;left:50%;margin-left:-8px;color:#8a2a1e;font-size:18px;line-height:14px;animation:ndx5M 8s infinite}
+@keyframes ndx5M{0%{left:12%}22%{left:88%}46%,92%{left:50%}100%{left:12%}}
+.nd5 .nd-hand{left:52%;top:40px}
+/* ban */
+.nd-ban .nd-rail{top:12px}.nd-ban .nd-mk{top:0}.nd-ban .nd-zn{left:44%;width:12%;background:var(--good,#2d7a52)}
+.nd-ban .nd-mk i{position:absolute;left:7px;top:18px;height:50px;border-left:2px dashed #8a2a1e99}
+.nd-ban .nd-tg{left:50%;top:50px;width:52px;height:52px;margin-left:-26px;border-radius:50%;border:2px solid #6e4d0e;background:radial-gradient(circle,#f0d070 0 14%,#c23b22 14% 34%,#6a8aa0 34% 56%,#2a1a12 56% 78%,#fffaf0 78%)}
+.nd-ban .nd-hand{left:56%;top:12px}
+/* tat / ne */
+.nd-tat .nd-zn.z1{left:30%;width:40%;background:rgba(184,135,42,.6)}.nd-tat .nd-zn.z2{left:44%;width:12%;background:var(--red,#c23b22)}
+.nd-ne .nd-zn.z1{left:62%;width:14%;background:var(--good,#2d7a52)}.nd-ne .nd-zn.z2{display:none}
+.nd-ne .nd-mk{animation:ndx5N 8s infinite}@keyframes ndx5N{0%{left:12%}22%{left:88%}46%,92%{left:69%}100%{left:12%}}.nd-ne .nd-hand{left:71%}
+/* banh */
+.nd-banh .nd-gg{left:8%;top:8px;width:22px;height:84px;border:2px solid #8a6a30;border-radius:3px;background:#fffdf6;overflow:hidden}
+.nd-banh .nd-zn{left:0;right:0;top:28%;height:26%;background:rgba(76,160,110,.75)}
+.nd-banh .nd-fl{position:absolute;left:3px;right:3px;bottom:0;height:12%;background:linear-gradient(#c23b22,#f0b040);animation:ndx5F 8s infinite}
+@keyframes ndx5F{0%,10%{height:12%}34%,92%{height:48%}100%{height:12%}}
+.nd-banh .nd-pot{left:50%;top:26px;width:62px;height:46px;margin-left:-31px;border-radius:8px 8px 26px 26px;background:#4a3326;border:2px solid #2a1a12}
+.nd-banh .nd-slip{left:62%;top:10px;padding:2px 10px;background:#fffdf6;border:1.5px solid #b59a6a;border-radius:6px;font:700 13px var(--body,sans-serif);animation:ndx5S 8s infinite}
+@keyframes ndx5S{0%,40%{left:70%;top:14px;opacity:1}58%,64%{left:50%;margin-left:-16px;top:34px;opacity:1}70%,100%{left:50%;margin-left:-16px;top:34px;opacity:0}}
+.nd5.nd-banh{height:140px}.nd-banh .nd-fan{left:22%;top:64px;padding:2px 8px;background:#f2d3a4;border:1.5px solid #8a5a2a;border-radius:8px;font:700 12px var(--body,sans-serif)}
+.nd-banh .nd-hand{left:30%;top:72px;animation:ndx5F2 8s infinite}@keyframes ndx5F2{0%,8%{opacity:0}12%,34%{opacity:1;transform:scale(.92)}40%,100%{opacity:0}}
+/* duho */
+.nd-duho{background:linear-gradient(#bfe3d8,#8fc7b3)}.nd-duho .nd-lane{left:30%;right:30%;top:6px;height:74px;border:2px dashed rgba(184,135,42,.9);border-radius:10px;background:rgba(255,226,140,.38)}
+.nd-duho .nd-lane u{position:absolute;left:0;right:0;top:-1px;text-align:center;text-decoration:none;font:700 11px var(--body,sans-serif);color:#6b4a1c}
+.nd-duho .nd-lotus{top:40px;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle,#fff0f4 0 20%,#e48aa4 22% 70%,#c9617f 72%);border:2px solid #fff;animation:ndx5L 8s infinite}
+@keyframes ndx5L{0%{left:94%}46%,56%{left:48%}100%{left:-8%}}.nd-duho .nd-hand{left:50%;top:44px}
+/* doi */
+.nd-doi .nd-sc{top:8px;width:56px;height:70px;border:1.5px solid #b59a6a;border-radius:8px;background:rgba(255,252,242,.7)}.nd-doi .nd-sc.l{left:22%}.nd-doi .nd-sc.r{right:22%;border-style:dashed}
+.nd-doi .nd-sc svg{width:100%;height:100%}.nd-doi .nd-axis{left:50%;top:6px;height:74px;border-left:2px dashed rgba(194,59,34,.6)}
+.nd5.nd-doi{height:146px}.nd-doi .nd-tl{width:44px;height:44px;border:1.5px solid #b59a6a;border-radius:8px;background:#fffdf6;animation:ndx5T 8s infinite}.nd-doi .nd-tl svg{width:100%;height:100%}
+@keyframes ndx5T{0%,40%{left:calc(50% - 22px);top:78px}58%,92%{right:auto;left:calc(78% - 56px);top:14px}100%{left:calc(50% - 22px);top:78px}}
+.nd-doi .nd-hand{left:calc(50% - 6px);top:86px;animation:ndx5D 8s infinite}@keyframes ndx5D{0%,38%{opacity:0;left:calc(50% - 6px);top:92px}42%{opacity:1}58%,64%{opacity:1;left:calc(78% - 34px);top:28px}70%,100%{opacity:0}}
+/* hoadien */
+.nd-hd .nd-face{left:50%;top:4px;width:78px;height:84px;margin-left:-39px;border-radius:50% 50% 46% 46%;background:#f1dfc3;border:2px solid #8a6a30}
+.nd-hd .nd-br{position:absolute;top:34px;width:26px;height:5px;border-radius:5px;background:#3a2412}.nd-hd .nd-br.l{left:8px;transform:rotate(-8deg)}.nd-hd .nd-br.r{right:8px;transform:rotate(8deg)}
+.nd-hd .nd-spot{position:absolute;left:50%;top:26px;width:16px;height:16px;margin-left:-8px;border-radius:50%;border:2px dashed #c23b22}
+.nd-hd .nd-fl2{left:70%;top:68px;font-size:22px;color:#c23b22;animation:ndx5H2 8s infinite}
+@keyframes ndx5H2{0%,40%{left:72%;top:64px}58%,92%{left:calc(50% - 11px);top:26px}100%{left:72%;top:64px}}
+.nd-hd .nd-hand{left:calc(72% + 4px);top:70px;animation:ndx5D2 8s infinite}@keyframes ndx5D2{0%,38%{opacity:0;left:calc(72% + 4px);top:70px}42%{opacity:1}58%,64%{opacity:1;left:calc(50% - 6px);top:32px}70%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.nd5 .nd-hand,.nd5 .nd-ok{opacity:1!important}}
 `;document.head.appendChild(st)})();

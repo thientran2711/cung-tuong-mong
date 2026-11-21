@@ -21,7 +21,7 @@ window.__cmN=window.__cmN||{};
 function cmC(k,n){const N=window.__cmN;N[k]=(N[k]||0)+(n==null?1:n)}
 function cmB(){return BAL.cmaid}
 function cmOff(){try{return !S||window.__cmoff||!BAL.cmaid||(typeof isSrv==="function"&&isSrv())||(typeof isKc==="function"&&isKc())}catch(e){return true}}
-const CM_SRC={tt:"home",dtq:"home",muoi:"home",nc:"land",bd:"land",ch:"th",thd:"pick",cnv:"pick",td:"palace",cn:"room"};
+const CM_SRC={tt:"home",dtq:"home",muoi:"home",nc:"land",bd:"land",pf:"land",ch:"th",thd:"pick",cnv:"pick",td:"palace",cn:"room"};
 const CM_LBL={home:"từ nhà",land:"từ cố quốc",th:"người Thái hậu ban",pick:"tự tay chọn",palace:"Nội vụ phủ cắt cử",old:"gia nhân cũ",room:"bạn cùng phòng thuở làm cung nữ",noi:"Nội vụ phủ cắt cử"};
 const CM_TAL={theu:"khéo thêu thùa",nghe:"thính tai",thuoc:"biết thuốc",kin:"kín miệng"};
 const CM_SEC={lover:"đối thực với một thái giám",debt:"nợ cờ bạc ngoài cung",family:"mẹ già bệnh ở quê",spy:"từng nhận bạc của người cung khác"};
@@ -42,7 +42,7 @@ function cmInfo(m){m=m||S.maid;if(!m||!m.src)return"";return ` · ${CM_LBL[m.src
 function cmTalOn(m){return m&&m.tal&&(m.src!=="pick"||(S.turn||0)-(m.at||0)>=cmB().pickAlone)}
 
 /* ---------- she picks one of several (thd at the start; cnv when she rises) ---------- */
-function cmCands(){const B=cmB();const L=[];for(let i=0;i<B.pickN;i++){let nm="";try{nm=mkServ("maid").name}catch(e){}if(!nm||L.some(c=>c.name===nm)||nm===(S.maid&&S.maid.name))nm=pick(MAIDS.filter(x=>!L.some(c=>c.name===x)))||pick(MAIDS);
+function cmCands(){const B=cmB();const L=[];for(let i=0;i<B.pickN;i++){const nm=nmNew("maid");
  L.push({name:nm,loy:cmRange(B.loy.pick),age:BAL.cmaidx.age+R(BAL.cmaidx.ageR)})}const tals=cmTals("pick").sort(()=>Math.random()-.5);L.forEach((c,i)=>c.tal=tals[i%tals.length]);/* distinct talents to choose between */return L}
 PEND.cmPick=pp=>{const L=pp.c||[];if(!L.length)return null;return{who:pMaid(),t:`Nội vụ phủ đưa ${L.length} cung nữ đến để ngươi chọn một người làm thân tín. Không ai theo ngươi từ nhà: người ngươi chọn sẽ gắn bó lâu, nhưng những tháng đầu còn lạ.`,
  o:L.map(c=>({n:`Chọn ${c.name}`,fx:{},x:`${CM_TAL[c.tal]} · thiện cảm ban đầu ${c.loy}`,go:()=>{const m=newMaid(c.name,c.loy,c.age);m.src="pick";m.tal=c.tal;m.sec=cmSecFor();m.secKn=0;m.at=S.turn||0;
@@ -55,7 +55,7 @@ function cmAskPick(){if(cmOff()||!S.maid)return;const k=S.origin&&S.origin.k;if(
 function cmFoe(){const L=liveRivals(true).filter(v=>v!==S&&!v.coop);if(!L.length)return null;return npwPick(L,v=>hostility(v,S))}/* npc-purpose G2a: the house that bears her a grudge (none → nobody picks a fight) */
 PEND.cmTt=()=>{const B=cmB(),m=S.maid;return{who:pMaid(),t:`Thư phủ Tể tướng gửi vào qua tay ${m.name}: cha muốn ngươi dò ý Hoàng thượng về việc triều chính, viết lại cho người.`,o:[
  {n:"Làm theo lời cha",fx:{danh:B.ttDanh,sung:-B.ttSung},x:"phe cha mạnh thêm; Hoàng thượng thấy ngươi dò ý"},
- {n:`Dặn ${m.name} chỉ viết chuyện vặt`,fx:{maid:-B.ttLoy,bac:-B.ttBac},x:"cha giận, tháng này không gửi bạc vào cung"}]}};
+ {n:`Dặn ${m.name} chỉ viết chuyện vặt`,fx:{maid:-B.ttLoy,bac:-B.ttBac,duc:BAL.cv.decl.duc},x:"thành: không dò ý Hoàng thượng, giữ đạo bề tôi, Sủng không suy · kèm: cha giận, tháng này không gửi bạc vào cung"}]}};
 PEND.cmBrawl=pp=>{const B=cmB(),m=S.maid,v=RV(pp.v);if(!v)return null;return{who:pMaid(),t:`${m.name} nóng tính, cãi rồi xô ngã cung nữ của ${v.name} ở Nội vụ phủ. Người bên ấy đòi ngươi xử.`,o:[
  {n:`Phạt ${m.name} trước mặt người ta`,fx:{maid:-B.brLoy,danh:B.brDanh},x:`${v.name} bớt oán`,go:()=>{oanAdd(v,S,-B.brOan)}},
  {n:"Bênh người của mình",fx:{maid:B.brLoy,danh:-B.brDanh},x:`${v.name} oán ngươi thêm`,go:()=>{oanAdd(v,S,B.brOan)}}]}};
@@ -75,9 +75,9 @@ PEND.cmSec=pp=>{const B=cmB(),m=S.maid;if(!m||!m.sec)return null;const k=m.sec.k
  const t=k==="debt"?`${m.name} quỳ xuống thú thật: nàng ta nợ cờ bạc ngoài cung, chủ nợ dọa báo lên Nội vụ phủ.`:k==="family"?`${m.name} khóc, kể mẹ già ở quê bệnh nặng, không có tiền thuốc.`:
   `${m.name} thú thật: trước kia nàng ta từng nhận bạc của ${v?v.name:"người cung khác"} để kể chuyện cung ngươi.`;
  const o=k==="spy"?[{n:"Giữ lại, dặn nàng ta chỉ báo chuyện vô hại",fx:{maid:B.secLoy},x:"từ nay không còn lộ chuyện"},{n:"Trả nàng ta về Nội vụ phủ",fx:{danh:-B.spyDanh},x:"Nội vụ phủ đưa người khác đến",go:()=>cmReplace("noi")}]:
-  [{n:k==="debt"?`Trả nợ thay (${B.secPay} lượng)`:`Gửi tiền thuốc (${B.secPay} lượng)`,fx:{bac:-B.secPay,maid:B.secLoy*2},x:"nàng ta mang ơn"},{n:"Mặc kệ",fx:{maid:-B.secLoy},x:k==="debt"?"nợ vẫn còn đó":"nàng ta tủi thân"}];
+  [{n:k==="debt"?`Trả nợ thay (${B.secPay} lượng)`:`Gửi tiền thuốc (${B.secPay} lượng)`,fx:{bac:-B.secPay,maid:B.secLoy*BAL.cv.secPayMul},x:"nàng ta mang ơn"},{n:"Mặc kệ",fx:{maid:-B.secLoy},x:`thành: giữ lại ${B.secPay} lượng bạc · kèm: ${k==="debt"?"nợ vẫn còn đó":"nàng ta tủi thân"}`}];
  return{who:pMaid(),t,o:o.map(x=>Object.assign(x,{go:(g=>()=>{if(g)g();if(S.maid===m)m.sec.done=1})(x.go)}))}};
-function cmReplace(src){const B=cmB();const m=newMaid(pick(MAIDS.filter(x=>x!==(S.maid&&S.maid.name))),B.newLoy);S.maid=m;cmInit(m,src||"noi");m.loyal=B.newLoy;cmC("replace")}
+function cmReplace(src){const B=cmB();const m=newMaid(nmNew("maid"),B.newLoy);S.maid=m;cmInit(m,src||"noi");m.loyal=B.newLoy;cmC("replace")}
 
 /* ---------- dtq: the martial maid stands in the way (called by jmline when an NPC's harm is aimed at her household) ---------- */
 function cmGuard(t,p){try{if(t!==S||cmOff()||!S.maid||S.maid.src!=="home"||!S.origin||S.origin.k!=="dtq"||!roll(cmB().dtqGuard))return"";cmC("guard");

@@ -172,7 +172,7 @@ BAL.mort={on:1,playerFloorYears:0,
  birth:{misX:.62,hardX:2,choiceP:35,hardDie:45,hardSuc:35,barrenP:8,stillP:3,stillSuc:20,stillAge:.5,newbornP:3,
   emp:{base:50,sung:.5,th:.2,heirNeed:15,boyGuess:50,boy:10,nhantu:10,datinh:5,mesac:5,lanhlung:-10,chamchinh:-5,hieuthao:2}},
  fate:{phiRank:4,homeRank:1,homeAge:30,homeP:50,tuanSung:60,tuanP:25,tuanDuc:50,tuanTh:40},
- /* D4 review/npc-death (owner OD:L641–643): ly = Phế phi họ Lý in Trường Môn viện: age when the game starts, floor = minimum years she lives
+ /* D4 review/npc-death (owner OD:L641–643): ly = Phế phi họ Tần in Trường Môn viện: age when the game starts, floor = minimum years she lives
     (her rửa oan story needs time), lcShow = fallen consorts shown with her in a visit; dead = faces / figures / names of the dead kept (newest) so
     no new person ever gets them (owner: a NEW person, never the dead person's picture) */
  ly:{age:34,floor:3,lcShow:3},dead:{keep:400}};
@@ -194,7 +194,7 @@ Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2
 Object.assign(BAL,{coopEmpY:12});
 /* co-op part 2 (review/coop-b1b5-p2): a player buys the friend who serves as a cung nữ (the same pay as an NPC's bribe card, j42 cnvBribe);
    tin = her Chủ tin gain when she refuses and tells her mistress */
-Object.assign(BAL,{coopBribe:{pay:20,tin:5}});
+Object.assign(BAL,{coopBribe:{pay:20,tin:5,grudge:5}});/* grudge: the briber's thiện cảm for the servant, −grudge when she tells her mistress, +grudge when she refuses quietly (law 2 «Bạc lạ», j42 + jcoopworld twins) */
 /* review/emperor-visit (owner OD:L603): the Emperor comes to HER palace and stays the night (event "empnight", j7 + jvisit).
    visit: a daily roll after the tablet flip, % = base + slope × (Sủng − minSung) + anK × Ân tình, × the Emperor's nature (datinh / lanhlung),
    capped; none within gap days of the last visit, none while she is pregnant, in lãnh cung, or he is gravely ill. On top of the night
@@ -251,7 +251,7 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
   tc:{fast:[.3,.45],keep:[.3,.3]},xa:{fast:[.25,.4],keep:[.4,.4]},thq:{fast:[.5,.65],keep:[.5,.5]},
   kim:{fast:[.25,.4],keep:[.6,.6]},/* review/mg-tune-r1: Khéo tay (untangle) moved onto mgPace, same curve as its old typed .6+.4·left/LIM */
   banh:{lag:[.6,.08],gust:[.6,.05],gap:[1.4,4],reach:[1,1]},co:{lim:[8000,20000],fast:[.4,.8],keep:[.6,.6],extra:[5,0]},mua:{beat:[1000,2600],sp:[520,770],retry:[0,1.99],dark:[220,220],darkCap:[.6,.6]},
-  td_hanh:{lim:[8000,20000],short:[2,0]},td_cong:{tol:[.0075,.028]},den:{swing:[.36,.36],band:[.16,.208]},/* review/mg-snap: Thêu theo nét trace tolerance, share of the board width (was typed W·(.055+.006·lv)·mgTol) *//* cal-p2 Đầu hồ owner-bug fix (OD 20/11 ~08:30Z, her first try 1.1/10 on a board no hand could read): aim dots long enough to reach the pot from the middle boards, wider mouth, softer pull (pull = drag gain × K, the drag cap ÷ pull, so the strongest throw is unchanged); human-model sim (cal-p2 report §D) her matching board ≈7.5; Bắn cung (kg82Aim) never reads these */dauho:{aid:[.6,2],mouth:[1.3,2.1],pull:[.8,.6]},td_dung:{band:[.2,.6],kick:[2.4,1],spill:[2,1.5]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
+  td_hanh:{lim:[8000,20000],short:[2,0]},td_cong:{tol:[.0075,.028]},den:{swing:[.36,.36],band:[.16,.208]},chai:{zone:[.6,1.6]},ban:{size:[.7,1]},/* dauho-lv5: Bắn cung target picture size by ease (share of BAL.mgArt.ban.fit·H); the scoring rings are the painted rings *//* chai-ramp (owner 21/11 ~00:55Z): Chải chuốt green «đúng phẩm» band = wdGroomW × zone at the board ease (1.0 at ease 2 = the width she was measured on); Thử tay hồi 1→5 (ease 3.6→0.4) ≈ ×1.32 → ×0.68 *//* review/mg-snap: Thêu theo nét trace tolerance, share of the board width (was typed W·(.055+.006·lv)·mgTol) *//* cal-p2 Đầu hồ owner-bug fix (OD 20/11 ~08:30Z, her first try 1.1/10 on a board no hand could read): aim dots long enough to reach the pot from the middle boards, wider mouth, softer pull (pull = drag gain × K, the drag cap ÷ pull, so the strongest throw is unchanged); human-model sim (cal-p2 report §D) her matching board ≈7.5; Bắn cung (kg82Aim) never reads these */dauho:{aid:[.6,2],mouth:[1.3,2.1],pull:[.8,.6]},td_dung:{band:[.2,.6],kick:[2.4,1],spill:[2,1.5]},td_ngon:{band:[.05,.13],win:[1000,2600],rate:[2,.6],fade:[.07,.14]}},
  kG:{td_cong:1.3,td_ngon:2,ban:.8,dan:2.8,den:.8,hat:.85,duho:1.5,hoa:2.3,huong:1,kim:1.8,kinh:.9,may:.82,ve:.9,mua:1.25,theu:5.5,co:3},/* review/mg-balance-2-r1 re-trim on pooled raws (co n=120, td_ngon n=60 float): co 4→3, td_ngon 1.6→2; review/mg-snap re-trim after the trace fix (her line scored, BAL.mgTier.trace.acc 1) and the wider Hoa đăng channel: td_cong 1.6→1.3, ve 1.7→.9, kinh 1.5→.9, may 1.5→.82, den 1.05→.8 */
  trace:{acc:1},/* review/mg-snap: weight of her line lying on the guide in the ONE trace score mgTraceScore (was a typed .5) */
  /* review/cal-p2b (owner OD 20/11 ~07:35Z: fix the broken games only) — three board faults, BAL only:
@@ -275,13 +275,31 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
    pop = scale of the lit / pressed target (was 1.08 / 1.14: hard to see) · ms = how long the pop + lit ring stay · glow/ring = colours · blur = glow size px ·
    pass = glow passes (shadow stacks) · ringW = ring width as a share of the target's width · dim = darkening of the UNLIT painting under a lit cue (contrast) */
 BAL.mgFx={pop:1.24,ms:300,glow:"#fff0a0",ring:"#ffffff",blur:44,pass:3,ringW:.07,dim:.18};
+/* dauho-lv5 (owner 21/11, Fold, «Thử tay: Đầu hồ · hồi 5/5», verbatim: "để cái mức độ mà cho mọi người chơi á, là ở cái level 5, cái hồi 5 mà bạn đang test tôi á,
+   thấy nó hợp lý hơn á. Với lại là cái vòng ... của cái mũi tên này nó vô cái bình nó to quá, cho nên có một cái mũi tên nó nằm ở ngoài nhìn nó bị giả đó. Mình thu
+   lại cho ngay đúng cái bình đi.").
+   mgTier.base[kind] = the REAL-PLAY board of a kind starts at a Thử tay round (jmgt mgTier, only when no fixed gap o.d is given, i.e. contests, exams, lessons,
+     NPC hands, co-op; Thử tay rounds and «Hướng dẫn» pass their own gap): r = the round (1..BAL.ag.mg2.cal.d.length; 5 = the hardest round), the gap is that
+     round's gap at rank 0 for everyone (no art-level or occasion discount: one board for all), then climbs with rank (+ big contest = B.big more) to the gap
+     of board ease lo at rank-steps n (law 5: harder as she climbs, every rank a little harder, the ease levers never flat before the top rank).
+   mgArt = the painted target art measured ON THE PICTURE (shares of its width; dev/handover/reports/dauho-lv5.md §2):
+     dauho (mg-dauho-pot.webp 290x560): mouth opening centre cy below the picture top, half-width rx / half-height ry; rim = outer lip half-width (an arrow
+       there bounces = miss); neck = [y below the top, half-width] points of the painted neck (lip → ears; an arrow striking it = miss); ear tubes: centre ±dx from the picture centre, cy below the top, opening half-width rx / ry; q = {c: share of R that is
+       «Trúng giữa bình», m: [centre, rest of the mouth], ear}; lean = the most a stuck arrow tilts (rad), sink = share of the arrow sunk below the hole plane;
+       wind = share of the strongest gust where the wind word line turns «nhẹ» / «vừa» / «mạnh» (below wind[0] = «Gió lặng»; owner 21/11 wants the wind words back).
+     ban (mg-ban-target.webp 470x560): face centre at cy of the picture height; ring = outer radius of gold / red / blue / black / paper (share of the
+       picture width); q = the score of an arrow inside each ring (outside the paper = Trượt); fit = picture width at size 1 as a share of the board height
+       (the largest the 0.58·H stand line lets it be). Board size by ease = BAL.mgTier.lev.ban.size. */
+BAL.mgTier.base={dauho:{r:5,lo:0,n:8}};
+BAL.mgArt={dauho:{mouth:{cy:.0414,rx:.2207,ry:.0224},rim:.2776,neck:[[.069,.276],[.152,.2],[.345,.165],[.455,.162]],ear:{dx:.329,cy:.431,rx:.0655,ry:.019},q:{c:.5,m:[1,.7],ear:.5},lean:.15,sink:.3,wind:[.05,.35,.7]},
+ ban:{cy:.4275,ring:[.072,.159,.247,.336,.438],q:[1,.75,.5,.25,.25],fit:.6}};
 /* mg-play2 (owner OD 20/11 ~08:05Z Hoa đăng «luồng ánh sáng màu vàng này quá nhạt … không có thấy đường» + «cứ tưởng là phải hứng mấy cái hoa sen»): two more
    parts of the SAME cue kit (j82 kg82FxLane / kg82FxBad), for every board that has a path to follow or a thing to AVOID:
    lane = opacity of the lit path's core (was a .32 gradient: hard to see) · laneEdge = width px of its two bright edges · laneDim = darkening of the board OUTSIDE
    the path (the path reads by contrast) · laneMin = the least luminance gap (0..255) the lit path must keep over the board beside it (test mg-play2) ·
    bad = width share of the danger ring round a thing to avoid (colour = kit --bad) · badMs = how long the hit burst stays · badShake = px the hit thing / the player's
    piece shakes on a hit */
-Object.assign(BAL.mgFx,{lane:.62,laneEdge:3,laneDim:.34,laneMin:40,bad:.09,badMs:520,badShake:5,zone:.62});/* zone: gauge «keep it here» band alpha (kg82FxLane.zone) */
+Object.assign(BAL.mgFx,{popMax:30,/* huong-cue: longest pop / verdict kept as words */lane:.62,laneEdge:3,laneDim:.34,laneMin:40,bad:.09,badMs:520,badShake:5,zone:.62,laneFade:.25});/* laneFade (den-look): share of the lane width over which the dim board fades in beside the path (no hard edge) *//* zone: gauge «keep it here» band alpha (kg82FxLane.zone) */
 BAL.mgTier.tut={part:.2,ms:60000,back:1100,lead:260};/* lead = ms before a timing game's right moment that the hand says «chạm» (KG82.hint: rhythm, aim), a reaction time */
 /* danh-balance (ONE CORE, owner 16/11 07:25Z): every Danh gate that was a typed number now reads BAL.danhG, and the succession
    condition rows read BAL.succN; values unchanged. forget: j3 "Bị bỏ quên" (Sủng ≤0 and Danh ≤ forget at the two lowest ranks →
@@ -434,7 +452,12 @@ Object.assign(BAL,{nroad:{
     the bond a man / court man / allied house needs to ask the player */
  men:{st:40,kidAge:15,men:{fx:{win:{loyal:3},mid:{loyal:-1},lose:{loyal:-4}},rv:{win:-2,lose:1}},court:{af:4,danh:1},
   off:{pow:{win:2,lose:-2},rv:{win:-1,lose:1},rel:3,ally:5},hz:{fx:{win:{fond:3,tal:2,hp:-2},mid:{tal:1,hp:-1},lose:{fond:-3,hp:-1}},rv:{win:-1,lose:1}},
-  askTinh:30,askAf:10,askRel:25}}});
+  askTinh:30,askAf:10,askRel:25,
+  /* GAP OR18 the Emperor's road (jnroade.js): st = his test stat with no reign line (else the throne's grip rg.p); hist = lives of template
+     history avoided; askSung = her Sủng for him to ask her help; biên ải: bien = Biên cương, gen = the Đại tướng quân house thế lực; cải cách:
+     kho = Kho lúa, old = thế lực the strongest other house loses (win) / gains (lose, as −); kế vị: age = a prince counts from this age,
+     fond = his regard for the prince closest to the succession and the next one [first, second] */
+  emp:{st:40,hist:1,askSung:60,age:6,bien:{win:6,mid:0,lose:-6},gen:{win:2,mid:0,lose:-2},kho:{win:6,mid:0,lose:-6},old:{win:2,mid:0,lose:-1},fond:{win:[3,-1],mid:[0,0],lose:[-2,-2]}}}}});
 /* QUESTLINE Q3 — HELPERS IN HER ROAD (owner D-Q1 = "1", OD 18/11 07:56Z; QUESTLINES_AUDIT §4 Q3; engine jroad.js rdHp*, tags + lines jrdhp.js).
    A «Nhờ …» option of her road tagged in RDHP asks a helper; the helper answers ONE of 4 ways, drawn by weight [full, half, no, sab]:
      full = giúp hết lòng (the option's own odds) · half = giúp qua loa (odds − half, never below min; a sure option then rolls at 100 − half)
@@ -1107,7 +1130,11 @@ Object.assign(BAL.ag.kh2.rd,{see:1,go:1,cap:6,qMax:40});Object.assign(BAL.ag.kh2
    tat  her slap game (jslap) measured by ease (dev/PROGRESS_review-slap-mg-r2.md, skilled bot): e = board ease points, w = [nhẹ, vừa, nặng] % at each;
         an NPC's slap tier = one draw from it at the NPC's own board (mgTier "tat", her/his rank and Vũ); an NPC dodges a slap at BAL.slap.dodgeOdds[tier]
    study  1 = an NPC's lesson gains the player's points from one draw (lessonPts / tdPoints, j85 npcStudyDo); 0 = the old flat 1 / 2–3 */
-Object.assign(BAL.ag,{mg2:{on:1,med:[[-2,8.9],[0,7.5],[2,5.8]],w:8,tat:{e:[0,2,5],w:[[32,54,15],[18,58,24],[2,50,49]]},study:1}});
+/* dauho-lv5 medK[kind] = [gap, skilled-bot mean graded play] measured on that kind's OWN board (dev/measure/mg-bots.js, skilled, n = 300 per ease,
+   report dev/handover/reports/dauho-lv5.md §3): jmgt mgMedD(d, kind) keeps med's level at gap 0 and moves by this row's shift, so NPC hands, her Thử tay base
+   (mgCalBase) and her rolling hand (jmgid) shift with the board as it truly plays. dauho: e 4.8/3.2/1.6/0.8/0 = 9.70/9.64/9.61/9.56/9.08 (the shared rows would
+   have cut every NPC 1.7–3.4 below a board that plays almost flat); ban (painted rings): ease 5 (gap ≤ 0) 6.60, e3.4 ≈ 6.10, e1.8 ≈ 5.93, e0.2 ≈ 5.42. */
+Object.assign(BAL.ag,{mg2:{on:1,med:[[-2,8.9],[0,7.5],[2,5.8]],medK:{dauho:[[-2,9.7],[0,9.64],[2,9.61],[3,9.56],[4,9.08]],ban:[[-2,6.6],[0,6.6],[2,6.1],[4,5.93],[6,5.42]]},w:8,tat:{e:[0,2,5],w:[[32,54,15],[18,58,24],[2,50,49]]},study:1}});
 /* AG-ALL-2d hand ceiling (owner OD 17/11 ~16:00Z L1640; jmgt mgHand) — FAIR SPREAD (owner OD 20/11 ~01:10Z: "đa số npc chơi dở hơn tôi, tôi thấy không
    fair" → "Duyệt cả 3 ý, làm luôn đi"): w = how far under her ceiling a play falls (mean of 3 draws; average play = hand − w/2);
    BELL CURVE (owner OD 20/11 ~06:40Z, verbatim: "ở ngoài đời mình có thật sự là mình sẽ gặp 1/3 những người mình gặp là sẽ là những người giỏi, hoặc là 1/3
@@ -1135,8 +1162,10 @@ BAL.ag.mg2.hand={on:1,w:4,art:.2,ctr:{"":7},sd:{c:1.4,a:1.5,r:1.7,"":1.5},eqZ:.4
    k  = her calibrated base per mini-game kind {b: her graded play on a matching board, n: rounds, at: mm/dd/yyyy}, written from her «CTM-CAL …» code by
         dev/tools/mgcal_apply.py — ONE base for every player; it places HER on that kind's adult bell curve (BAL.ag.mg2.hand ctr / sd / eqZ above)
    A first try taken on a BROKEN board is dropped when that board is fixed, so her re-test is the first counted try (dauho cal-p2 b218d1d2; huong 4.5,
-   mua 6.3, banh 6.1 dropped by review/cal-p2b-rv with the Điều hương / Múa / Nấu ăn fixes, owner OD 20/11 ~07:35Z «chỉnh mấy cái game bị lỗi lại thôi, rồi tôi test lại») */
-BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],k:{dan:{b:8.3,n:5,at:"11/19/2026"},co:{b:9.7,n:5,at:"11/19/2026"},ve:{b:9.5,n:5,at:"11/19/2026"},doi:{b:9.1,n:5,at:"11/19/2026"},hoa:{b:7.9,n:5,at:"11/19/2026"},hat:{b:8.1,n:5,at:"11/19/2026"},tho:{b:8.7,n:5,at:"11/19/2026"},theu:{b:9.7,n:5,at:"11/19/2026"},ban:{b:9.1,n:5,at:"11/19/2026"},kim:{b:7.7,n:5,at:"11/19/2026"},doden:{b:9.9,n:5,at:"11/19/2026"},tat:{b:4.9,n:5,at:"11/19/2026"},ne:{b:4.1,n:5,at:"11/19/2026"},td_cong:{b:10.0,n:5,at:"11/20/2026"},td_ngon:{b:6.7,n:5,at:"11/20/2026"},td_hanh:{b:9.3,n:5,at:"11/20/2026"},le:{b:9.9,n:5,at:"11/20/2026"},tc:{b:9.5,n:5,at:"11/20/2026"},xa:{b:9.5,n:5,at:"11/20/2026"},thq:{b:8.5,n:5,at:"11/20/2026"},duho:{b:7.9,n:5,at:"11/20/2026"},kinh:{b:9.9,n:5,at:"11/20/2026"},may:{b:10.0,n:5,at:"11/20/2026"}}};
+   mua 6.3, banh 6.1 dropped by review/cal-p2b-rv with the Điều hương / Múa / Nấu ăn fixes, owner OD 20/11 ~07:35Z «chỉnh mấy cái game bị lỗi lại thôi, rồi tôi test lại»; dauho-lv5 21/11: Bắn cung ban 9.1
+   (11/19/2026, scored rings ~2× the painted target) dropped with the painted-ring fix; Đầu hồ dauho 9.7 (her 11/20 re-test) kept as base (its mouth zone ≈ the painted one) until
+   her re-test on the painted-hole board; redo.dauho / redo.ban = that fix's go-live time) */
+BAL.ag.mg2.cal={on:1,/* redo: games fixed after her Thử tay (owner 21/11, jmgcal stale()): her older record counts as not tried */redo:{dauho:"2026-11-21T02:30:00Z",ban:"2026-11-21T02:30:00Z",hoadien:"2026-11-20T15:00:00Z",den:"2026-11-20T15:00:00Z",chai:"2026-11-20T15:00:00Z",td_dung:"2026-11-20T15:00:00Z",huong:"2026-11-20T15:00:00Z",mua:"2026-11-20T15:00:00Z",banh:"2026-11-20T15:00:00Z"},d:[-2,-1,0,1,2],k:{dan:{b:8.3,n:5,at:"11/19/2026"},co:{b:9.7,n:5,at:"11/19/2026"},ve:{b:9.5,n:5,at:"11/19/2026"},doi:{b:9.1,n:5,at:"11/19/2026"},hoa:{b:7.9,n:5,at:"11/19/2026"},hat:{b:8.1,n:5,at:"11/19/2026"},tho:{b:8.7,n:5,at:"11/19/2026"},theu:{b:9.7,n:5,at:"11/19/2026"},kim:{b:7.7,n:5,at:"11/19/2026"},doden:{b:9.9,n:5,at:"11/19/2026"},tat:{b:4.9,n:5,at:"11/19/2026"},ne:{b:4.1,n:5,at:"11/19/2026"},td_cong:{b:10.0,n:5,at:"11/20/2026"},td_ngon:{b:6.7,n:5,at:"11/20/2026"},td_hanh:{b:9.3,n:5,at:"11/20/2026"},le:{b:9.9,n:5,at:"11/20/2026"},tc:{b:9.5,n:5,at:"11/20/2026"},xa:{b:9.5,n:5,at:"11/20/2026"},thq:{b:8.5,n:5,at:"11/20/2026"},duho:{b:7.9,n:5,at:"11/20/2026"},kinh:{b:9.9,n:5,at:"11/20/2026"},may:{b:10.0,n:5,at:"11/20/2026"},dauho:{b:9.7,n:5,at:"11/20/2026"},mua:{b:8.3,n:5,at:"11/20/2026"},hoadien:{b:8.9,n:5,at:"11/20/2026"},banh:{b:7.3,n:5,at:"11/20/2026"},chai:{b:8.7,n:5,at:"11/20/2026"},den:{b:9.3,n:5,at:"11/20/2026"}}};
 /* CAL-P2C · IDENTITY OFFSET + ROLLING HAND b (owner OD 20/11 ~07:35Z + ~07:55Z + ~08:00Z, ROOT-74 chat; jmgid.js). Verbatim key words:
    ~07:35Z "Những cái môn sở trường của tôi á, khi vào game á, nếu như cái môn đó là cái môn bình thường là phải là ở mức 8, tức là phải automatic trừ 2. Còn nếu mà
    sở đoản là phải trừ thêm nữa ... sở đoản là phải đâu đó 6 điểm ... sở trường là chẳng hạn như là 9 điểm hoặc 10 điểm ... mình không có cần phải điều chỉnh cái điểm gì hết trơn á."
@@ -1381,7 +1410,7 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
    cd    tuần before the same person acts again in the same kind (_ = default; per kind: cd.<kind>)
    wit   witness rank: eye × eyes(p) + host × hostility toward the one watched
    tell  a witness carries a fact when her grudge against its subject ≥ host, or her liking for the one told ≥ friend */
-BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4},wit:{eye:10,host:1},tell:{host:40,friend:30}};
+BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4,hoi67:6/* jrtrig OR16: one person moves a hồi at most once every 6 tuần */},wit:{eye:10,host:1},tell:{host:40,friend:30}};
 /* npc-purpose G1 kinds (jagwhy1; the stray man; an NPC affair itself begins / is exposed through her day plan + proof: role-parity part 2).
    tryst: base + rove (roving man) − fear (Kín đáo), cd [roving, other] = the old 2 / 3 tuần cadence; letter: w per reason (old order of reasons; jealous = Sủng under jSung and ghen ≥ jGhen), cd 12 = once a season;
    seek: base (his fancy, ≥ ag.why.min) + her looks above sac, his gap = BAL.net menGap; tryst base 35 − fear 12 ≥ min (rates review: a careful pair still meets); menGrudge: s while his grudge lasts, cd 9 tuần = the old once every 3 months (monthly caller) */
@@ -1679,6 +1708,39 @@ BAL.ag.min={on:1,gT:[["Tham vọng","quyen"],["Vì gia tộc","nha"],["Vì mình
 /* TRIỀU ĐÌNH gift deed (j55 tdGift, her and every NPC consort, house heads and the censor alike): giftAf = regard a received gift adds;
    backs = regard from which an official stands behind / spares that consort (tdBacks). Were typed in j55 (+20, 40) — ONE CORE (review minister-agents r1). */
 BAL.tdCourt={giftAf:20,backs:40};
+/* PERSON MINIGAME ACTS (jpma, owner OD 19/11 ~23:55Z, PARKING_LOT #8; plan dev/handover/reports/person-minigame-acts.md) — «Cùng chơi» + «Thách đấu»
+   with any real person (her ↔ NPC ↔ NPC, co-op friend). ONE CORE: every number of jpma lives here.
+   occ pm = the board of a person duel / pastime (jmgt mgTier): base + perRank · R, R = the HIGHER rank of the two (one board for both; harder as she climbs, law 5).
+   kc: khắc the asker spends when she sends it (her talk card shows it; an NPC's day plan charges the same kc). luck: the skill range of the 1-vs-1 score (= j82 default).
+   play: «Cùng chơi» gain-only (law 3) — liking both ways by the game's mean raw: raw ≥ cut[i] → aff[i+1] (else aff[0]); suc = the receiver's Sức (her time);
+         xp = art practice points for both (addArt for her, the same on an NPC's artp); fade = the same pair again this month gives 1/(1+n) (the P3T idiom).
+   stake.bac[R] = V, the value of a duel stake by the higher rank (law 5: rises with rank); band = an item stake's price within V·(1 ± band);
+   val = the exchange rates the equal-value measure (dev/measure/pm-equal.js) uses: Danh in bạc (charity BAL.charity 35 bạc → Danh 5 + Đức 3),
+         one point of someone's liking in bạc («Giúp đỡ nàng» 20 bạc → thiện cảm 10 both ways), oán, khắc, Sức. eqTol = the most two answers / stakes may differ (bạc).
+   duel: pubDanh = Danh ± for winner / loser at a public place (pub); shame = extra Danh a HIGHER-rank loser loses per rank of gap (max shameMax); oan = her oán of the winner.
+   yield («Nhường», the challenged side when the challenger outranks her): no game, she pays the stake; the challenger's liking + round(V·yieldK/affBac), oán − yieldOan.
+   refuse: the challenger outranks the receiver → his/her liking of the refuser − up more (rank etiquette; the rcvNoO cost applies to every refusal).
+   npc: gapW = weeks between two pm acts of one NPC; me = at most per week aimed at her; g = the need weights of the day plan; minAff / spite = who they pick;
+        meShare = when she is among the people an NPC may pick, the share of picks that land on HER (hashed, no global dice; law 1 two-way + 6b: the court
+        watches the rising one, so NPCs really invite / challenge HER; the rest go to the other NPCs by liking / spite; meGap = weeks with no NPC asking her
+        after which an NPC who may pick her (likes or resents her, as for anyone) picks HER (S.pmMeL = the last week one did; old saves: none yet);
+        g ×2.5 (20/11) so the court plays / duels a few times a year each. Measured over 200 buổi (dev/test/person-minigame-acts.test.js (6), 4 runs):
+        NPC → her 6–18, NPC → NPC 13–38 (was her 0–3 with no meShare / meGap and g 4); foreman E #14 ruling 20/11: NPC → her ≥ 4).
+   oddsN = draws behind her ladder word (no %, law 7). */
+Object.assign(BAL.mgTier.occ,{pm:[1,.5]});
+BAL.pm={kc:1,luck:30,minLv:1,
+ play:{cut:[4,7],aff:[2,3,5],suc:6,xp:1,fade:1},
+ stake:{bac:[6,8,10,12,15,18,22,26],band:.3},
+ val:{danhBac:5,affBac:2,oanBac:1,khacBac:6,sucBac:1},eqTol:8,
+ duel:{pubDanh:2,shame:1,shameMax:3,oan:4,yieldK:.7,yieldOan:2},
+ refuse:{up:1},
+ pub:["vuon","kn","tn"],
+ mem:{pmplay:6,pmwin:10,pmyield:10},
+ npc:{gapW:2,me:1,meShare:.4,meGap:6,g:{play:{ally:10},duel:{spite:10,danh:3.75}},minAff:0,spite:3},
+ oddsN:120};
+/* receiver weights for a pastime / duel ask (jrcv rcvPick): no «mách lẻo» slot */
+BAL.pm.rcvOff=[3];/* receiver answer slots a pm ask does NOT have: slot 3 («mách lẻo»); Nhận · Nhường · Từ chối keep the help weights */
+BAL.rcv.k.pm=BAL.rcv.k.help.map((w,i)=>BAL.pm.rcvOff.includes(i)?0:w);
 /* PALACE CHATTER (PL#6 bubble talk, jchat.js; owner OD:L1627 (5) "every 1–2 min NPCs chat"): gap = seconds between two chatter ticks (real time),
    retry = seconds to look again when the stage is busy (dialog / hidden page), maxBub = bubbles on one stage at once, turnGap = ms between two lines of
    one exchange, say = how long a line stays (ms: base + ch per letter, clamped min..max), noRepeat = exchanges / greetings said before one may come back,
@@ -1705,3 +1767,19 @@ Object.assign(BAL,{kc3:{cal:{o0:2,gap:[1,2],tP:65,min:3,fin:1,nc:[1,2]},win:3,mi
   hac:{t0:8,p:8,lo:{khm:40,od:60,pow:4,powF:-6,af:10},ha:{pow:-8,kgt:-4,af:-4,duc:3},tra:{suc:-15,od:30,tcD:3,pow:3,af:6,kgtF:-5,afF:-4}},
   vh:{duc:3},th:{go:10,wait:6,duc:2},qMax:2},
  entry:{th:1,vh:1},tier:{win:1,mid:0,lose:-1},seedP:50,thdTro:40,rare:{dtqSuc:90,muoiTc:60,dtqOc:1,r4:.6,r6:.8,r1:{h:80,loyal:60,kld:55,p:.6}},gtuMin:10,know:{foe:2},intel:{n:1,st:2},fx:{}}});
+/* GAP IT03 wear slots «Hoa tai» + «Giày» (owner OD L175 "more wear slots with real rules … using existing item art; rank + luxury rules per slot";
+   owner 20/11 ~06:55Z «Đeo» from Tư trang; 20/11 Lượt 1054: consorts enter the palace WITHOUT earrings and get them later as rewards; girls on the home road need none).
+   Same model as Đeo tay / Đeo eo / Túi thơm (jinv): one item per slot; w = stat while worn (×1.5 above her rank, as every worn piece); rk = lowest rank
+   that may wear it (above = vượt phẩm, the one j8/jwdinv rule); pr = price (luxury = the one luxVal: grade of the painting + pr/10); tg = gift likes.
+   best = the j8 BEST reward lists (the Emperor's rewards, player and NPC alike) that may hand it out; shop = sold by Nội vụ phủ (SHOP_ALL).
+   Earrings are REWARDS only (shop 0, owner Lượt 1054 'được thưởng những cái hoa tai'); shoes are sold too. */
+BAL.wearSlots={
+ ear:{hoatai:{n:"Hoa tai ngọc trắng",pr:40,rk:0,w:{sac:2},tg:["hh","rv"],best:["night","birthday"],shop:0},
+      hoataivang:{n:"Hoa tai vàng khảm trân châu",pr:130,rk:3,w:{sac:3,danh:2},tg:["rv"],best:["contest","promo"],shop:0}},
+ shoe:{giayhoa:{n:"Giày thêu hoa mai",pr:15,rk:0,w:{sac:1},tg:["rv"],best:["night"],shop:1},
+       giaygam:{n:"Giày gấm mẫu đơn đính trân châu",pr:70,rk:2,w:{sac:2,danh:1},tg:["hh","rv"],best:["birthday","promo"],shop:1}}};
+/* CUNG NỮ THÂN CẬN (jtc, owner OD 20/11 ~15:55Z, review/thancan): rk = the maid rungs that may be raised (SRK.maid 1 tam đẳng … 3 nhất đẳng); the trust
+   bar is BAL.loy.trust. pick: her lòng +loy, Bạc -bac (her master's thân cận uniform is sewn), every other maid of the house lòng -envy (law 3: gain and loss);
+   drop: the dismissed maid lòng +loy (negative), the others lòng +calm. npc: an NPC master with none picks her most loyal trusted maid at p (in 100)
+   a month; lets her go when her lòng falls under drop. */
+BAL.thc={rk:[1,3],pick:{loy:10,bac:30,envy:3},drop:{loy:-15,calm:2},npc:{p:25,drop:45}};
