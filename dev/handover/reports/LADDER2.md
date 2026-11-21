@@ -58,3 +58,9 @@ t7/t8: no G47 copy (owner L1627 + Foreman); both already wear jade (t7 "long jad
 GEN-READY set (after CHECK1 + Foreman's look at the t4/t5 v8 drafts): t6 COMOIh, t7 v8g, t8 v10f. Gens still HELD.
 
 ## Step 8 — CHECK1 01:58Z: OUTER_WRAP swap ×9 PASS; Foreman released t6–t8 (~01:56Z, v8 drafts proved OUTER_WRAP) → CHECK1 sent GEN1 3 drafts (t6 COMOIh, t7 v8g, t8 v10f, 165 cr). t1–t3 thu + xuân = prompt files only. LADDER2 0 gens. Remaining: GEN1 sheet → Foreman/owner.
+
+## Step 9 — Foreman C #16 02:01Z: jade drop EARRINGS on t6/t7 (+t5 v8) drafts → shared source fix, all tiers. 0 gens.
+- New shared constant `master_common.EAR_FREE` = "Nothing hangs from her ears." put right after master EAR_SENT ("Bare earlobes, no earrings.") — builder thu_comoi/make_ears_free.py. (Short on purpose: every prompt sits at the 10 000 limit; passes NOEAR EAR_RX.)
+- New files (gates check_store tpN a22 PASS ×9, keep_check --all 312 PASS): thu dapung4/s62_t{1,2,3}_COMOI_v8 (9849/9946/9999), xuân seasons4/s62_t{1,2,3}_HAN_BAC_v9 (9597/9867/9997), thu_comoi/s62_t6_THU_COMOIi (9999), s62_t7_THU_COMOI_v8h (9976), s62_t8_THU_COMOI_v10g (9994).
+- A38 (our words / repeats): t3 + xuân t3 inner-hem words shortened; t6 "long vertical" → "long", "NO bow, with TWO" → "NO bow, TWO", yellow list ", a yellow sash" (repeat of the centre-sash clause); t7 "never a single flat colour all over" (as t8); t8 ", no other colour" (repeat of EXACTLY THREE).
+- t4/t5 = DESIGN20's files: it used "jade pins on the bun, none at the ears" (13337e0); EAR_FREE is there for it to add too. t7 bow centred (G44 OK, kept).
