@@ -44,3 +44,7 @@ New dev/art/thu_comoi/s62_t7_THU_vankien2_L1955.txt (9996; base L1924b = clasp +
 - trims: "Everyone beautiful at every age." + caption → "Thu · Hoàng quý phi · cổ vuông + vân kiên + khuy cài L1955".
 - store PASS, keep PASS. Sent VE11 1 sample @55 + sheet CŨ hu2BC0ivqL | MỚI. t8 waits for owner OK.
 - Other bulk words NOT touched (rank/owner law, flag only): SLEEVE LENGTH "very long, very wide sleeves … touch the floor"; FABRIC "thick gold-embroidered brocade"; collar "standing slightly OUT past the shoulders" (collar kept per order).
+
+## OWNER L1965 (via #27 09:30Z)
+(1) Winter t2 Thường tại: approved dong8_duyet_L1803 t2 = gen jUoattyLD0, prompt winter1/s62_t2_dong.txt (HAS phi bạch). New dev/art/winter1/s62_t2_dong_L1965.txt (8321): ONLY the PHI BẠCH sentence cut. keep PASS; store fails M06/W01/W04 = same as approved base (waiver). Sent VE6 1 @55 + sheet CŨ jUoattyLD0 | MỚI.
+(2) Thu t7 L1955 rgXqyJlxtc sent to owner (outer robe still open below sash, sleeves wide to floor) — no action until she answers.
