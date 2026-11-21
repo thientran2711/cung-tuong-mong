@@ -135,3 +135,23 @@ Final diff vs LIVE in jbal.js 0 lines, jbal2.js only BAL.kid (7 lines), jbaleff.
 - Shots looked (Fold + iPad: kid card «Thăm con» group, ward, Đồ thất lạc case): clean, kit cards, odds in words. Observation (not this branch): Fold kid card stat chips (Văn/Võ/Đức/Mẫu tử) sit at the scroll edge of the panel in the test shot. Scratch only; nothing uploaded, nothing to wipe.
 ### 18 laws (touched by the merge)
 - Law 4: table above, no value moved, no typed number added. Law 1/2/3/6: unchanged from r2 PASS (no code of the branch changed in the merge besides the two kept lines). Law 9/10: no kit/CSS change.
+
+## RELAND r4 (BIG reviewer-lander, opus, session_01N1tNP5jMFLMtiToAbVEacW; ORDER Foreman B ROOT-7 ← MAIN 97 16:39Z: r3 8599d166 failed to land, real conflict jbaleff.js vs LIVE c9ae030e) — LAND READY fd4af05b (branch review/palace-life-gaps-r4)
+PRIORITY #1 CHECK: same branch as r3 (review/palace-life-gaps-r3 8599d166) reused; no rebuild.
+- r4 = r3 8599d166 + LIVE 6d31d6d2 → 0faf7a05 → b7041e67. fd4af05b contains origin/main b7041e67. Newest LIVE at report f44060d4: git merge-tree = code clean (jkrel etc. auto), only index.html/sw.js to rebuild.
+### Conflicts and how they were kept (law 4: no value moved on either side)
+| file | LIVE side | branch side | kept |
+|---|---|---|---|
+| jbaleff.js BAL.eff.j8 | LIVE line (sg-card r3: rumorDanh, accuseDanh, accuseFailDanh, vpFailDanh, frameDanh, frameTam, frameFailDanh, frameFailSung, … — every key/value as LIVE) | + maidStealBac:30 | LIVE line whole + maidStealBac:30 in front; diffed: rest of j8 == LIVE |
+| jbal2.js | BAL.dc (dresscode) | BAL.kid | both blocks as is |
+| jlost.js keep road | loKeepBy(c,loP(c.by)) (LIVE jlost-kyngo: one owner change for every keep road) | inline keep copy | LIVE loKeepBy (does the same + ilLog); branch maidTheft (keep:1 → c.at = buyer) works through it |
+| jlost.js owner notice | if(p===S){Q.push…} | if(p===S&&!c.quiet) (IT05 maid theft: j8 tells it with the buyer's name) | LIVE line + branch !c.quiet, rest identical (diffed) |
+| jlost.js exports | LIVE window list (+ loKeepBy, loCaseOf, loHolds) | IT05 LO_EV block after it | LIVE list + branch block |
+| assemble.py | LIVE list | jkidlife.js | LIVE list + jkidlife.js after jagwhy1.js |
+Diff vs LIVE: jbal.js 0 lines, jbal2.js 7 (BAL.kid), jbaleff.js only maidStealBac, jlost.js only the IT05 additions.
+### Gates
+- fd4af05b (+ LIVE b7041e67: kit/ge files only): quickcheck PASS (core gates incl. one-core 0 fails, old save ok, perf render 255/252 ms); undef PASS (283); palace-life 23/23 Fold 755x1000@2 + iPad 1180x820@2; coop-e2e 124/124.
+- d3404787 (+ LIVE 0faf7a05): quickcheck PASS; undef PASS (281); scan-heir 28 / 0 miss; theft-object-scan UNROUTED 0; palace-life 23/23 both devices; kyngo-unit PASS; coop-lost-scan (30 weeks) 43/43 ok, dups 0 vanish 0; coop-e2e 124/124; coop-palace-life host-first 18/18 + SWAP 18/18; role-parity ALL PASS (alone).
+- 89d184b6 (+ LIVE 6d31d6d2): the same set all green (coop-lost-scan 76-week run cut by my 900 s timeout at week 47, dups 0 vanish 0 to there).
+- CO-OP GATE: coop-e2e 124/124 + coop-palace-life both seat orders 18/18 + coop-lost-scan 43/43 + quickcheck coop-one-world PASS. P3 SWAP flake (thin-E, pre-existing) did not show in r4 runs.
+- 18 laws: as r3 (law 4 table above; law 6c real objects: maid theft now goes through LIVE's one owner-change road loKeepBy, so the stolen piece is in the buyer's chest and traceable).
