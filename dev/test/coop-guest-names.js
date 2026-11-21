@@ -77,6 +77,12 @@ async function domRead(o){await sleep(400);return o.p.evaluate(()=>{const d=docu
    const L=COOPW.seat==='a'?((rivals.find(v=>v.coop)||{}).staff||null):(S.staff=S.staff||[]);if(!L)return{err:'no list'};
    const x={name:'Lục Thanh Viễn',role:'eunuch',age:40};x.kk=k;L.push(x);const k2=kOf61(x);const k3=kOf61(m);L.splice(L.indexOf(x),1);return{seat:COOPW.seat,k,k2,k3,same:k2===k3}});
   ok(!r.err&&!r.same,`${o.name}: a local record that carries a world person's j61 key gets its own key (two people, two keys)`,r)}
+ /* reviewer r1 (law 1 two-way): the mirror on EACH seat — a copy of the OTHER player's person on her entry (her child) and a world record of this
+    seat carrying the same kk (both seats run the key counter from the same shared S.kseq, so this seat's next key = the other seat's next key) */
+ for(const o of [A,B]){const r=await o.p.evaluate(()=>{const f=rivals.find(v=>v.coop);if(!f)return{err:'no friend entry'};let c=(f.kids||[])[0],made=false;
+   if(!c){c={name:'Tiểu Thư Thử',age:3,alive:true};(f.kids=f.kids||[]).push(c);made=true}const kc=kOf61(c);const m={name:'Đỗ Văn Thử',role:'Hàn lâm học sĩ',alive:true,kk:c.kk};
+   (S.men=S.men||[]).push(m);const km=kOf61(m);S.men.splice(S.men.indexOf(m),1);if(made)f.kids.splice(f.kids.indexOf(c),1);return{seat:COOPW.seat,kseq:S.kseq,kc,km,same:kc===km}});
+  ok(!r.err&&!r.same,`${o.name} (seat ${r.seat}): the other player's person copy and a world record with the same kk get two keys (two-way)`,r)}
  /* one merged week: the world is rebuilt from the room; the probe must stay clean */
  const press=async o=>{for(let t=0;t<120;t++){await clear(o);const r=await o.p.evaluate(()=>{if(COOPW.pend||COOPW.bend)return true;const b=document.getElementById('next');if(!b||b.disabled)return false;b.click();return true});if(r)return true;await sleep(250)}return false};
  for(let w=0;w<(+process.env.GN_WEEKS||1);w++){const wk=await A.p.evaluate(()=>(COOP.week!=null?COOP.week:(COOP.state||{}).week||0));const t0=Date.now();

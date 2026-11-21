@@ -22,7 +22,7 @@ function k61S(){if(!S)return null;if(!S.known){if(K61NEW)return null;S.known={};
 function k61StageDesc(e){return e&&typeof e==="object"&&e.kind&&e.ini!=null&&e.info!=null&&e.id==null?(e.ref||(e.kind==="maid"&&S&&S.maid)||null):undefined}
 function kOf61(e){if(!e||!S)return"";{const d=k61StageDesc(e);if(d===null)return"";if(d)e=d}if(e===S)return"me";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";let k;
  if((rivals||[]).includes(e))k="r"+e.id;else if(e.coop&&e.id!=null)k="r"+e.id/* coop-guest-names: the friend's stand-in while her entry is out of rivals (k61CoopFr) = her rivals key */;else if(e.sid!=null)k="s"+e.sid;else{if(!e.kk)e.kk="x"+(S.kseq=(S.kseq||0)+1);k=e.kk}
- if(k61GuestOwn(e))k="g"+k;KREG[k]=e;return k}
+ if(k61GuestOwn(e))k="g"+k;else if(k61HostCopy(e))k="h"+k;KREG[k]=e;return k}
 /* coop-guest-names (law 6b, OD:L165 per PERSON): the two seats issue their own "x<n>" keys (S.kseq) and servant ids (sidN), so a person of the
    GUEST player (her maid, servants, children, home family — on her seat, and their copies on the friend entry of the host's seat) could share a
    key with a world / host person ("x1" = both players' maids): one S.known slot, one KREG slot → the mask read the other person's title over a
@@ -30,6 +30,11 @@ function kOf61(e){if(!e||!S)return"";{const d=k61StageDesc(e);if(d===null)return
    the solo keys (old saves, solo and the host change nothing; her own people are always known on her seat, k61Own). */
 function k61GuestOwn(e){try{const W=window.COOPW;if(!W||!W.on||!S||e.coop)return false;
   if(W.seat!=="a")return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)||!!(S.kc&&(S.kc.fam||[]).includes(e));
+  for(const v of rivals||[])if(v&&v.coop&&(e===v.maid||(v.staff||[]).includes(e)||(v.kids||[]).includes(e)))return true}catch(x){}return false}
+/* coop-guest-names r1 (law 1 two-way): the mirror on the GUEST seat — the copies of the HOST player's people on her entry (her children, maid,
+   servants) carry keys issued by the host's counter, while this seat's own counter runs from the same shared value (S.kseq) and issues the
+   same "x<n>" to its own new records: one key, two people. They get their own namespace "h…" on the guest seat, as hers get "g…" on the host. */
+function k61HostCopy(e){try{const W=window.COOPW;if(!W||!W.on||!S||e.coop||W.seat==="a")return false;
   for(const v of rivals||[])if(v&&v.coop&&(e===v.maid||(v.staff||[]).includes(e)||(v.kids||[]).includes(e)))return true}catch(x){}return false}
 function k61Ent(k){if(!k||!S)return null;if(k==="me")return S;if(k==="emp")return S.emp;if(k==="th")return S.thO||null;return KREG[k]||null}
 function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="object"&&!L.includes(e))L.push(e)};
