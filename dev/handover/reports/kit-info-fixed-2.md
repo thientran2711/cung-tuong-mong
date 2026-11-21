@@ -1,0 +1,7 @@
+# kit-info-fixed round 2 (rv FAIL d7adcc1b: «!» under the dialog ✕ on Fold)
+
+Branch `review/kit-info-fixed` a843ea4ad (rv merge base 60872bed + this fix). Cause reproduced: pop-up card (`.pcpop`) has the ✕ `.pcx` (36x36, follows scroll) in the top-right corner; the info row «!» (`.kgnb`, absolute right:0 of `.krv.kone`) sat exactly under it (bang 1139,197 vs ✕ 1123,176 on iPad; rv's Fold 718,197 vs 702,176); a real tap hit the ✕ and closed the dialog.
+Fix (KIT §6.3h, jk4.js): in `.pcpop .pc .pcf` the row gets padding-right 72 px and the «!» `right:46px` → it stands LEFT of the ✕ lane. Panel hosts (no ✕) unchanged.
+Test `node dev/test/kit-info-tap.js <url> <out> [WxH] [scene]` — REAL mouse tap at the «!» centre on every host that has `.pcf` info rows: pop-maid, pop-elder, rv, court, staff, on Fold 755x1000 + iPad 1180x820: elementFromPoint at the centre is the «!», the popup opens with the whole text, the card/dialog stays. 20/20 PASS twice (before the fix it failed exactly pop-maid/pop-elder with hit = `.kit-x.pcx`). Hoàng tự / Kế vị / Hôn sự / Quý tộc cards have NO `.pcf` info block (their rows are plain kitRows) → test prints SKIP; no «!» there to tap.
+Harness note: popKind() opens the dialog without the real token tap, so the outside-tap catcher `#kxcatch` may sit over the card; the test sets its pointer-events none (not what is tested).
+quickcheck a843ea4ad PASS (render 267/238, tab 416/486, buổi 1207/1025); coop-e2e 92/92; kit-info-fixed.js PASS.
