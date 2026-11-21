@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"b1033eb0+","t":"2026-11-20T23:13Z","c":"Merge review/jtq14-addr-land 672e9841 (= LIVE 24dd2c62 + jtq14-addr) into ge-rank c5ebab9a (assemble = main's list; index.html/sw.js rebuil…","b":"d3f3f735f869","h":[{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"}]};
+window.CTM_BI={"s":"db5a6bfa+","t":"2026-11-21T03:03Z","c":"menu-panel: one kit menu frame for every ☰/title panel (clear stale --kpw, lock width, menu never an event frame)","b":"1cb6e4bc1aeb","h":[{"s":"c5ebab9a+","t":"2026-11-20T21:55Z","c":"ge-engine rank check: a servant life (cnv) steps on the maid ladder"},{"s":"17c9ac7e+","t":"2026-11-20T22:21Z","c":"kit-dress-picker: phone case by the MEASURED frame width (\u003c480 px), no viewport breakpoint in CSS or JS (media-check)"},{"s":"f38b248d+","t":"2026-11-20T20:46Z","c":"r4: role-parity probe worlds explicit (drift-2 method, no exempt, open list unchanged) — closes t1 P-ONLY harm:phonghoa, hh N-ONLY ml:beat,…"},{"s":"255795ca+","t":"2026-11-20T16:21Z","c":"road-triggers r2: rebuild on the merge"},{"s":"7d0cc7a8+","t":"2026-11-20T20:05Z","c":"Kit: chấm màu áo và câu thế lực nhà"},{"s":"fe6432c0+","t":"2026-11-20T18:50Z","c":"Nền giao diện đổi sang màu Đào phấn"},{"s":"3332c63b+","t":"2026-11-20T18:49Z","c":"Kit: dòng giá ở nhà theo một kiểu chung"},{"s":"95df70b8+","t":"2026-11-20T15:56Z","c":"choice-value law 3: gain words read whole on the kit card — no part after a comma starts with «không» (the kit greys it as a no-word): jfac…"},{"s":"4e3c8553+","t":"2026-11-20T14:37Z","c":"Cân lại số đường ngoài cung, sửa kẹt khi về nhà"},{"s":"1ca835da+","t":"2026-11-20T14:15Z","c":"ge-batu r2: fixes 1-6, 8, 9 (law 6a/6b/6c): ring-free bd_hen_1/2, song written by bd_tuyet_4 itself, bd_soi_3 evidence made by the ending, …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -68111,8 +68111,12 @@ html body #modal:not(.pcm) .dlg.kpanel.kpcompact .kpb.kpshort{margin:0}
 .modal.kpthome.kpscene{align-items:flex-end!important;justify-content:center!important;padding:8px 8px 14px!important}
 .modal.kpthome .dlg.kpsc .kpmenu{margin:6px 0 4px}
 /* KIT MENU PANEL (owner 21/11 mark #37): every panel of the ☰ / title menu (home, Chọn sổ Một mình + Cùng hảo hữu, Sổ luân hồi, Bảng vàng, Thiết lập) is ONE frame: the wide §8.1 width, at the bottom. Locked here (!important beats any stale inline --kpw left by the identity card), so no phone / Fold / iPad can show a narrow tall frame */
-html body .modal.kptitle.kpscene{--kpw:min(560px,calc(100vw - 28px))!important;align-items:flex-end!important;justify-content:center!important;padding:8px 8px 14px!important}
+html body .modal.kptitle.kpscene{--kpw:min(560px,calc(100vw - 28px))!important;--kph:min(calc(100dvh - 32px),calc(94*var(--kvh,1dvh)),780px)!important;align-items:flex-end!important;justify-content:center!important;padding:8px 8px 14px!important}
 html body .modal.kptitle.kpscene .dlg.kpsc{width:var(--kpw)!important;max-width:var(--kpw)!important}
+/* a kit button's second line is always its own line (Xem lại lời dặn / Game này chơi gì ran together in Thiết lập) */
+.kbtn>small{display:block}
+/* the menu root fills the frame width (a centred flex column shrank it to half, buttons cramped) */
+html body .modal.kptitle .kpmenu{align-self:stretch;width:100%;box-sizing:border-box}
 `;document.head.appendChild(st)})();
 /* ================= jcycle: KỲ NGUYỆT SỰ · the monthly cycle + the Kính sự phòng cycle book (owner 15/11 ~20:25Z, review/cycle) =================
    1. EVERY WOMAN has her own cycle (her, every consort, the co-op friend entry): a pure function of her name (cyBase) + the month index
@@ -85618,7 +85622,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d3f3f735f869";window.CTM_BUILD=BUILD;
+const BUILD="1cb6e4bc1aeb";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
