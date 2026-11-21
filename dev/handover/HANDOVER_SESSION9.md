@@ -1990,3 +1990,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - NUMBERS for owner: GAP_LIST_v3.md (D, vs LIVE f3353128): 174 rows, DONE 77, VOID 4, OPEN 93 (ART-CHAR 7 / OTHER 86: 59 in branch, 27 no branch); close rate 41/day; ETA excl. character art 2–4 days (2.1 at 48 h rate). End replies «~80% xong (ước lượng) · còn N việc không tính hình nhân vật · ~2–4 ngày tới 100 %» until D refreshes the SUMMARY line.
 - TRIGGER: mine trig_01HMzZu6Y1DgamakCWWrato4 (min 32) → 93 creates its own and DISABLES mine. Worktree tip: if `git rebase` in /home/user/wt/ho breaks on shallow history (add/add art files), `git rebase --abort && git reset --hard origin/<handover>` (hpush pushes fine).
 - No owner question pending.
+- (11:15Z) MAIN CHÍNH 92 opened child MAIN CHÍNH 93 = session_01Rc5AsKcbi9rTmDK4pY2SeT (depth 4). 92 stops except relaying late messages to 93.
