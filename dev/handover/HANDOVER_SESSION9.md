@@ -1991,3 +1991,7 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - TRIGGER: mine trig_01HMzZu6Y1DgamakCWWrato4 (min 32) → 93 creates its own and DISABLES mine. Worktree tip: if `git rebase` in /home/user/wt/ho breaks on shallow history (add/add art files), `git rebase --abort && git reset --hard origin/<handover>` (hpush pushes fine).
 - No owner question pending.
 - (11:15Z) MAIN CHÍNH 92 opened child MAIN CHÍNH 93 = session_01Rc5AsKcbi9rTmDK4pY2SeT (depth 4). 92 stops except relaying late messages to 93.
+
+## MAIN CHÍNH 93 (session_01Rc5AsKcbi9rTmDK4pY2SeT) — live log (child of MAIN CHÍNH 92)
+- (21/11 11:20Z) MAIN = MAIN CHÍNH 93 session_01Rc5AsKcbi9rTmDK4pY2SeT; START_CTX ~8 % (get_session reads 0; estimate) → roll at ~33 %, ceiling 60 %; depth 4 (limit 8); child at roll = MAIN CHÍNH 94. Worktree /home/user/wt/ho, push /home/user/wt/hpush93.sh. Land chain stays in 89's container (NOT started here). LIVE 75ad237d pm-c.
+- (11:20Z) LOAD: main running 5 (owner UI/go-live only: duodo-focus #2 LtG4, keeper #2 MF9S, rv MSxp; idle→archive after land: hao-huu-2 J4dp, maid-acts-a KzCE, mg-intro-2 Ji75, bag-inline-3 JuyC) | B ROOT-6 busy (coop-arrive-see, ui-leftover-fold rv, ending-screens-land rv, coop-guest-names rv, re-merges mg-craft/palace-life-gaps) | C ROOT art (owner live, VE12) | D #15 busy (balance bundle, coop-cyhold rv, coop-pool-face, ban-cung, sg-card) | E #26 busy (cold-faction-land2 rv, coop-famops, jlost-kyngo rv, re-merge batch) | moved: none.
