@@ -28,7 +28,7 @@ const R={};
   const labels=()=>p.evaluate(()=>[...document.querySelectorAll('.kidrows .krl')].map(e=>e.textContent));
   const card=async()=>p.evaluate(()=>{const c=document.querySelector('#kidfl .kidc');if(!c)return null;const r=c.getBoundingClientRect();return{name:(c.querySelector('.kidn')||{}).textContent,in:r.top>=0&&r.left>=0&&r.bottom<=innerHeight+1&&r.right<=innerWidth+1,rows:[...c.querySelectorAll('.krl')].map(e=>e.textContent),acts:[...c.querySelectorAll('.kidacts button')].map(e=>e.firstChild.textContent)}});
   step(1);/* 1. dress pick */
-  out.toilErr=await p.evaluate(()=>{try{TOIL.st=null;toilOpen();return [!!document.querySelector('#kg82'),document.querySelector('#kg82')&&document.querySelector('#kg82').hidden,!!window.__bot].join()}catch(e){return e.stack.slice(0,400)}});if(process.env.DBG)console.error(out.toilErr,out.errs);await p.waitForSelector('#kg82 .toilw');await p.waitForTimeout(500);
+  out.toilErr=await p.evaluate(()=>{try{TOIL.st=null;toilOpen();{const r=document.getElementById('toilrdy');if(r)r.click()}return [!!document.querySelector('#kg82'),document.querySelector('#kg82')&&document.querySelector('#kg82').hidden,!!window.__bot].join()}catch(e){return e.stack.slice(0,400)}});if(process.env.DBG)console.error(out.toilErr,out.errs);await p.waitForSelector('#kg82 .toilw');await p.waitForTimeout(500);
   const before=await p.evaluate(()=>JSON.stringify(wdOf(S))+JSON.stringify(S.inv.map(e=>e.w|0)));
   out.dressHint=await p.evaluate(()=>(document.querySelector('#kg82 .toildet')||{}).textContent||'');
   await p.evaluate(()=>{const t=[...document.querySelectorAll('#kg82 [data-kinvkey="toil"][data-kinvi]')].find(e=>/Váy sa xanh/.test(e.title));t&&t.scrollIntoView({block:'center'})});
@@ -44,7 +44,7 @@ const R={};
   /* slot tap → detail with Tháo */
   await p.evaluate(()=>{const s=document.querySelector('#kg82 [data-keqk="toil"][data-keqi="0"]');s&&s.click()});await p.waitForTimeout(250);
   out.slotStrip=await p.evaluate(()=>{const d=document.querySelector('#kg82 .toildet .kidet');return d?{name:d.querySelector('.kidn').textContent,acts:[...d.querySelectorAll('[data-toilact]')].map(b=>b.firstChild.textContent)}:null});
-  await p.evaluate(()=>document.getElementById('toilok').click());await p.waitForTimeout(300);out.dressDone=await p.evaluate(()=>TOIL.st&&TOIL.st.dv);
+  await p.evaluate(()=>{const r=document.getElementById('toilrdy');if(r)r.click()});await p.waitForTimeout(300);await p.evaluate(()=>document.getElementById('toilok').click());await p.waitForTimeout(300);out.dressDone=await p.evaluate(()=>TOIL.st&&TOIL.st.dv);
   await p.evaluate(()=>{try{kg82Close()}catch(e){}TOIL.st=null});await p.waitForTimeout(300);
   step(2);/* 2. Tư trang bag panel: tap a tile = INLINE strip under the grid (KIT §70.6, no pop-up); the old modal path is gone */
   await p.evaluate(()=>{try{localStorage.setItem('hclh-inv-sub','tui')}catch(e){}KINV_SUB='tui';tab='inv';render()});await p.waitForTimeout(500);
